@@ -17,32 +17,32 @@ class SettingsSchemaSource : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_settings_schema_source_get_type != &gidSymbolNotFound ? g_settings_schema_source_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SettingsSchemaSource self()
+  override SettingsSchemaSource self() nothrow
   {
     return this;
   }
@@ -120,7 +120,7 @@ class SettingsSchemaSource : gobject.boxed.Boxed
         relocatable = the list
             of relocatable schemas, in no defined order
   */
-  void listSchemas(bool recursive, out string[] nonRelocatable, out string[] relocatable)
+  void listSchemas(bool recursive, out string[] nonRelocatable, out string[] relocatable) nothrow
   {
     char** _nonRelocatable;
     char** _relocatable;
@@ -168,7 +168,7 @@ class SettingsSchemaSource : gobject.boxed.Boxed
         recursive = true if the lookup should be recursive
       Returns: a new #GSettingsSchema
   */
-  gio.settings_schema.SettingsSchema lookup(string schemaId, bool recursive)
+  gio.settings_schema.SettingsSchema lookup(string schemaId, bool recursive) nothrow
   {
     GSettingsSchema* _cretval;
     const(char)* _schemaId = schemaId.toCString(No.Alloc);
@@ -193,7 +193,7 @@ class SettingsSchemaSource : gobject.boxed.Boxed
       recursively.
       Returns: the default schema source
   */
-  static gio.settings_schema_source.SettingsSchemaSource getDefault()
+  static gio.settings_schema_source.SettingsSchemaSource getDefault() nothrow
   {
     GSettingsSchemaSource* _cretval;
     _cretval = g_settings_schema_source_get_default();

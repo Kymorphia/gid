@@ -20,7 +20,7 @@ import gtksource.types;
     Returns: true if the version of the GtkSourceView currently loaded
       is the same as or newer than the passed-in version.
 */
-bool checkVersion(uint major, uint minor, uint micro)
+bool checkVersion(uint major, uint minor, uint micro) nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_source_check_version(major, minor, micro);
@@ -35,7 +35,7 @@ bool checkVersion(uint major, uint minor, uint micro)
     memory debugging tools. This function is meant to be called at the end of
     main(). It can be called several times.
 */
-void finalize()
+void finalize() nothrow
 {
   gtk_source_finalize();
 }
@@ -50,7 +50,7 @@ void finalize()
     have included when compiling your code.
     Returns: the major version number of the GtkSourceView library
 */
-uint getMajorVersion()
+uint getMajorVersion() nothrow
 {
   uint _retval;
   _retval = gtk_source_get_major_version();
@@ -67,7 +67,7 @@ uint getMajorVersion()
     have included when compiling your code.
     Returns: the micro version number of the GtkSourceView library
 */
-uint getMicroVersion()
+uint getMicroVersion() nothrow
 {
   uint _retval;
   _retval = gtk_source_get_micro_version();
@@ -84,7 +84,7 @@ uint getMicroVersion()
     have included when compiling your code.
     Returns: the minor version number of the GtkSourceView library
 */
-uint getMinorVersion()
+uint getMinorVersion() nothrow
 {
   uint _retval;
   _retval = gtk_source_get_minor_version();
@@ -97,7 +97,7 @@ uint getMinorVersion()
     This function can be called several times, but is meant to be called at the
     beginning of main(), before any other GtkSourceView function call.
 */
-void init_()
+void init_() nothrow
 {
   gtk_source_init();
 }
@@ -109,15 +109,22 @@ void init_()
       callback = the callback to execute
     Returns: 
 */
-size_t schedulerAdd(gtksource.types.SchedulerCallback callback)
+size_t schedulerAdd(gtksource.types.SchedulerCallback callback) nothrow
 {
-  extern(C) gboolean _callbackCallback(long deadline, void* userData)
+  extern(C) gboolean _callbackCallback(long deadline, void* userData) nothrow
   {
     ptrThawGC(userData);
     bool _dretval;
     auto _dlg = cast(gtksource.types.SchedulerCallback*)userData;
 
-    _dretval = (*_dlg)(deadline);
+    try
+    {
+      _dretval = (*_dlg)(deadline);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gtksource.types.SchedulerCallback");
+    }
     auto _retval = cast(gboolean)_dretval;
 
     return _retval;
@@ -144,14 +151,21 @@ size_t schedulerAdd(gtksource.types.SchedulerCallback callback)
       callback = the callback to execute
     Returns: 
 */
-size_t schedulerAddFull(gtksource.types.SchedulerCallback callback)
+size_t schedulerAddFull(gtksource.types.SchedulerCallback callback) nothrow
 {
-  extern(C) gboolean _callbackCallback(long deadline, void* userData)
+  extern(C) gboolean _callbackCallback(long deadline, void* userData) nothrow
   {
     bool _dretval;
     auto _dlg = cast(gtksource.types.SchedulerCallback*)userData;
 
-    _dretval = (*_dlg)(deadline);
+    try
+    {
+      _dretval = (*_dlg)(deadline);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gtksource.types.SchedulerCallback");
+    }
     auto _retval = cast(gboolean)_dretval;
 
     return _retval;
@@ -171,7 +185,7 @@ size_t schedulerAddFull(gtksource.types.SchedulerCallback callback)
     Params:
       handlerId = the handler id
 */
-void schedulerRemove(size_t handlerId)
+void schedulerRemove(size_t handlerId) nothrow
 {
   gtk_source_scheduler_remove(handlerId);
 }
@@ -198,7 +212,7 @@ void schedulerRemove(size_t handlerId)
       text = the text to escape.
     Returns: the escaped text.
 */
-string utilsEscapeSearchText(string text)
+string utilsEscapeSearchText(string text) nothrow
 {
   char* _cretval;
   const(char)* _text = text.toCString(No.Alloc);
@@ -221,7 +235,7 @@ string utilsEscapeSearchText(string text)
       text = the text to unescape.
     Returns: the unescaped text.
 */
-string utilsUnescapeSearchText(string text)
+string utilsUnescapeSearchText(string text) nothrow
 {
   char* _cretval;
   const(char)* _text = text.toCString(No.Alloc);

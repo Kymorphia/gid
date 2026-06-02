@@ -16,26 +16,26 @@ class FixedSizeBinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_fixed_size_binary_scalar_get_type != &gidSymbolNotFound ? garrow_fixed_size_binary_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FixedSizeBinaryScalar self()
+  override FixedSizeBinaryScalar self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class FixedSizeBinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
       Get builder for [arrow.fixed_size_binary_scalar.FixedSizeBinaryScalar]
       Returns: New builder object
   */
-  static FixedSizeBinaryScalarGidBuilder builder()
+  static FixedSizeBinaryScalarGidBuilder builder() nothrow
   {
     return new FixedSizeBinaryScalarGidBuilder;
   }
 
   /** */
-  this(arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType dataType, arrow.buffer.Buffer value)
+  this(arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType dataType, arrow.buffer.Buffer value) nothrow
   {
     GArrowFixedSizeBinaryScalar* _cretval;
     _cretval = garrow_fixed_size_binary_scalar_new(dataType ? cast(GArrowFixedSizeBinaryDataType*)dataType._cPtr(No.Dup) : null, value ? cast(GArrowBuffer*)value._cPtr(No.Dup) : null);
@@ -70,7 +70,7 @@ final class FixedSizeBinaryScalarGidBuilder : FixedSizeBinaryScalarGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  FixedSizeBinaryScalar build()
+  FixedSizeBinaryScalar build() nothrow
   {
     return new FixedSizeBinaryScalar(cast(void*)createGObject(FixedSizeBinaryScalar._getGType), Yes.Take);
   }

@@ -211,26 +211,26 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_label_get_type != &gidSymbolNotFound ? gtk_label_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Label self()
+  override Label self() nothrow
   {
     return this;
   }
@@ -239,7 +239,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Get builder for [gtk.label.Label]
       Returns: New builder object
   */
-  static LabelGidBuilder builder()
+  static LabelGidBuilder builder() nothrow
   {
     return new LabelGidBuilder;
   }
@@ -248,7 +248,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Get `attributes` property.
       Returns: A list of style attributes to apply to the text of the label.
   */
-  @property pango.attr_list.AttrList attributes()
+  @property pango.attr_list.AttrList attributes() nothrow
   {
     return getAttributes();
   }
@@ -258,7 +258,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         propval = A list of style attributes to apply to the text of the label.
   */
-  @property void attributes(pango.attr_list.AttrList propval)
+  @property void attributes(pango.attr_list.AttrList propval) nothrow
   {
     setAttributes(propval);
   }
@@ -276,7 +276,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         Other ways to set a label's width are [gtk.widget.Widget.setSizeRequest]
         and [gtk.label.Label.setWidthChars].
   */
-  @property pango.types.EllipsizeMode ellipsize()
+  @property pango.types.EllipsizeMode ellipsize() nothrow
   {
     return getEllipsize();
   }
@@ -295,7 +295,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           Other ways to set a label's width are [gtk.widget.Widget.setSizeRequest]
           and [gtk.label.Label.setWidthChars].
   */
-  @property void ellipsize(pango.types.EllipsizeMode propval)
+  @property void ellipsize(pango.types.EllipsizeMode propval) nothrow
   {
     setEllipsize(propval);
   }
@@ -304,7 +304,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Get `extraMenu` property.
       Returns: A menu model whose contents will be appended to the context menu.
   */
-  @property gio.menu_model.MenuModel extraMenu()
+  @property gio.menu_model.MenuModel extraMenu() nothrow
   {
     return getExtraMenu();
   }
@@ -314,7 +314,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         propval = A menu model whose contents will be appended to the context menu.
   */
-  @property void extraMenu(gio.menu_model.MenuModel propval)
+  @property void extraMenu(gio.menu_model.MenuModel propval) nothrow
   {
     setExtraMenu(propval);
   }
@@ -326,7 +326,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         This does *not* affect the alignment of the label within its allocation.
         See [gtk.label.Label.xalign] for that.
   */
-  @property gtk.types.Justification justify()
+  @property gtk.types.Justification justify() nothrow
   {
     return getJustify();
   }
@@ -339,7 +339,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           This does *not* affect the alignment of the label within its allocation.
           See [gtk.label.Label.xalign] for that.
   */
-  @property void justify(gtk.types.Justification propval)
+  @property void justify(gtk.types.Justification propval) nothrow
   {
     setJustify(propval);
   }
@@ -359,7 +359,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         set the [gtk.label.Label.useUnderline] property to true in order
         for the label to display them.
   */
-  @property string label()
+  @property string label() nothrow
   {
     return getLabel();
   }
@@ -380,7 +380,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           set the [gtk.label.Label.useUnderline] property to true in order
           for the label to display them.
   */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     setLabel(propval);
   }
@@ -393,7 +393,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         This property has no effect if the label is not wrapping or ellipsized.
         Set this property to -1 if you don't want to limit the number of lines.
   */
-  @property int lines()
+  @property int lines() nothrow
   {
     return getLines();
   }
@@ -407,7 +407,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           This property has no effect if the label is not wrapping or ellipsized.
           Set this property to -1 if you don't want to limit the number of lines.
   */
-  @property void lines(int propval)
+  @property void lines(int propval) nothrow
   {
     setLines(propval);
   }
@@ -422,7 +422,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         [gtk.label.Label.widthChars] and [gtk.label.Label.maxWidthChars]
         determine the width of ellipsized and wrapped labels.
   */
-  @property int maxWidthChars()
+  @property int maxWidthChars() nothrow
   {
     return getMaxWidthChars();
   }
@@ -438,7 +438,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           [gtk.label.Label.widthChars] and [gtk.label.Label.maxWidthChars]
           determine the width of ellipsized and wrapped labels.
   */
-  @property void maxWidthChars(int propval)
+  @property void maxWidthChars(int propval) nothrow
   {
     setMaxWidthChars(propval);
   }
@@ -447,7 +447,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Get `mnemonicKeyval` property.
       Returns: The mnemonic accelerator key for the label.
   */
-  @property uint mnemonicKeyval()
+  @property uint mnemonicKeyval() nothrow
   {
     return getMnemonicKeyval();
   }
@@ -456,7 +456,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Get `mnemonicWidget` property.
       Returns: The widget to be activated when the labels mnemonic key is pressed.
   */
-  @property gtk.widget.Widget mnemonicWidget()
+  @property gtk.widget.Widget mnemonicWidget() nothrow
   {
     return getMnemonicWidget();
   }
@@ -466,7 +466,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         propval = The widget to be activated when the labels mnemonic key is pressed.
   */
-  @property void mnemonicWidget(gtk.widget.Widget propval)
+  @property void mnemonicWidget(gtk.widget.Widget propval) nothrow
   {
     setMnemonicWidget(propval);
   }
@@ -481,7 +481,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         The default is [gtk.types.NaturalWrapMode.Inherit], which inherits the behavior of the
         [gtk.label.Label.wrapMode] property.
   */
-  @property gtk.types.NaturalWrapMode naturalWrapMode()
+  @property gtk.types.NaturalWrapMode naturalWrapMode() nothrow
   {
     return getNaturalWrapMode();
   }
@@ -497,7 +497,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           The default is [gtk.types.NaturalWrapMode.Inherit], which inherits the behavior of the
           [gtk.label.Label.wrapMode] property.
   */
-  @property void naturalWrapMode(gtk.types.NaturalWrapMode propval)
+  @property void naturalWrapMode(gtk.types.NaturalWrapMode propval) nothrow
   {
     setNaturalWrapMode(propval);
   }
@@ -506,7 +506,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Get `selectable` property.
       Returns: Whether the label text can be selected with the mouse.
   */
-  @property bool selectable()
+  @property bool selectable() nothrow
   {
     return getSelectable();
   }
@@ -516,7 +516,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         propval = Whether the label text can be selected with the mouse.
   */
-  @property void selectable(bool propval)
+  @property void selectable(bool propval) nothrow
   {
     setSelectable(propval);
   }
@@ -530,7 +530,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         can be an advantage in situations where resizing the label because
         of text changes would be distracting, e.g. in a statusbar.
   */
-  @property bool singleLineMode()
+  @property bool singleLineMode() nothrow
   {
     return getSingleLineMode();
   }
@@ -545,7 +545,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           can be an advantage in situations where resizing the label because
           of text changes would be distracting, e.g. in a statusbar.
   */
-  @property void singleLineMode(bool propval)
+  @property void singleLineMode(bool propval) nothrow
   {
     setSingleLineMode(propval);
   }
@@ -554,7 +554,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Get `tabs` property.
       Returns: Custom tabs for this label.
   */
-  @property pango.tab_array.TabArray tabs()
+  @property pango.tab_array.TabArray tabs() nothrow
   {
     return getTabs();
   }
@@ -564,7 +564,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         propval = Custom tabs for this label.
   */
-  @property void tabs(pango.tab_array.TabArray propval)
+  @property void tabs(pango.tab_array.TabArray propval) nothrow
   {
     setTabs(propval);
   }
@@ -575,7 +575,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         
         See `func@Pango.parse_markup`.
   */
-  @property bool useMarkup()
+  @property bool useMarkup() nothrow
   {
     return getUseMarkup();
   }
@@ -587,7 +587,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           
           See `func@Pango.parse_markup`.
   */
-  @property void useMarkup(bool propval)
+  @property void useMarkup(bool propval) nothrow
   {
     setUseMarkup(propval);
   }
@@ -597,7 +597,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Returns: true if the text of the label indicates a mnemonic with an _
         before the mnemonic character.
   */
-  @property bool useUnderline()
+  @property bool useUnderline() nothrow
   {
     return getUseUnderline();
   }
@@ -608,7 +608,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         propval = true if the text of the label indicates a mnemonic with an _
           before the mnemonic character.
   */
-  @property void useUnderline(bool propval)
+  @property void useUnderline(bool propval) nothrow
   {
     setUseUnderline(propval);
   }
@@ -623,7 +623,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         [gtk.label.Label.widthChars] and [gtk.label.Label.maxWidthChars]
         determine the width of ellipsized and wrapped labels.
   */
-  @property int widthChars()
+  @property int widthChars() nothrow
   {
     return getWidthChars();
   }
@@ -639,7 +639,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           [gtk.label.Label.widthChars] and [gtk.label.Label.maxWidthChars]
           determine the width of ellipsized and wrapped labels.
   */
-  @property void widthChars(int propval)
+  @property void widthChars(int propval) nothrow
   {
     setWidthChars(propval);
   }
@@ -648,7 +648,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Get `wrap` property.
       Returns: true if the label text will wrap if it gets too wide.
   */
-  @property bool wrap()
+  @property bool wrap() nothrow
   {
     return getWrap();
   }
@@ -658,7 +658,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         propval = true if the label text will wrap if it gets too wide.
   */
-  @property void wrap(bool propval)
+  @property void wrap(bool propval) nothrow
   {
     setWrap(propval);
   }
@@ -674,7 +674,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         For sizing behavior, also consider the [gtk.label.Label.naturalWrapMode]
         property.
   */
-  @property pango.types.WrapMode wrapMode()
+  @property pango.types.WrapMode wrapMode() nothrow
   {
     return getWrapMode();
   }
@@ -691,7 +691,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           For sizing behavior, also consider the [gtk.label.Label.naturalWrapMode]
           property.
   */
-  @property void wrapMode(pango.types.WrapMode propval)
+  @property void wrapMode(pango.types.WrapMode propval) nothrow
   {
     setWrapMode(propval);
   }
@@ -703,7 +703,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         Compare this to [gtk.widget.Widget.halign], which determines how the
         labels size allocation is positioned in the space available for the label.
   */
-  @property float xalign()
+  @property float xalign() nothrow
   {
     return getXalign();
   }
@@ -716,7 +716,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           Compare this to [gtk.widget.Widget.halign], which determines how the
           labels size allocation is positioned in the space available for the label.
   */
-  @property void xalign(float propval)
+  @property void xalign(float propval) nothrow
   {
     setXalign(propval);
   }
@@ -728,7 +728,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         Compare this to [gtk.widget.Widget.valign], which determines how the
         labels size allocation is positioned in the space available for the label.
   */
-  @property float yalign()
+  @property float yalign() nothrow
   {
     return getYalign();
   }
@@ -741,7 +741,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           Compare this to [gtk.widget.Widget.valign], which determines how the
           labels size allocation is positioned in the space available for the label.
   */
-  @property void yalign(float propval)
+  @property void yalign(float propval) nothrow
   {
     setYalign(propval);
   }
@@ -757,7 +757,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         str = The text of the label
       Returns: the new [gtk.label.Label]
   */
-  this(string str = null)
+  this(string str = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -786,7 +786,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
             mnemonic character
       Returns: the new [gtk.label.Label]
   */
-  static gtk.label.Label newWithMnemonic(string str = null)
+  static gtk.label.Label newWithMnemonic(string str = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -806,7 +806,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       `pango_layout_get_attributes (gtk_label_get_layout (self))`.
       Returns: the attribute list
   */
-  pango.attr_list.AttrList getAttributes()
+  pango.attr_list.AttrList getAttributes() nothrow
   {
     PangoAttrList* _cretval;
     _cretval = gtk_label_get_attributes(cast(GtkLabel*)this._cPtr);
@@ -825,7 +825,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       handler or for use in a [gtk.widget.Widget.queryTooltip] handler.
       Returns: the currently active URI
   */
-  string getCurrentUri()
+  string getCurrentUri() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_label_get_current_uri(cast(GtkLabel*)this._cPtr);
@@ -839,7 +839,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       See [gtk.label.Label.setEllipsize].
       Returns: [pango.types.EllipsizeMode]
   */
-  pango.types.EllipsizeMode getEllipsize()
+  pango.types.EllipsizeMode getEllipsize() nothrow
   {
     PangoEllipsizeMode _cretval;
     _cretval = gtk_label_get_ellipsize(cast(GtkLabel*)this._cPtr);
@@ -853,7 +853,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       See [gtk.label.Label.setExtraMenu].
       Returns: the menu model
   */
-  gio.menu_model.MenuModel getExtraMenu()
+  gio.menu_model.MenuModel getExtraMenu() nothrow
   {
     GMenuModel* _cretval;
     _cretval = gtk_label_get_extra_menu(cast(GtkLabel*)this._cPtr);
@@ -867,7 +867,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       See [gtk.label.Label.setJustify].
       Returns: [gtk.types.Justification]
   */
-  gtk.types.Justification getJustify()
+  gtk.types.Justification getJustify() nothrow
   {
     GtkJustification _cretval;
     _cretval = gtk_label_get_justify(cast(GtkLabel*)this._cPtr);
@@ -883,7 +883,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Returns: the text of the label widget. This string is
           owned by the widget and must not be modified or freed.
   */
-  string getLabel()
+  string getLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_label_get_label(cast(GtkLabel*)this._cPtr);
@@ -901,7 +901,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       at any time, so it should be considered read-only.
       Returns: the [pango.layout.Layout] for this label
   */
-  pango.layout.Layout getLayout()
+  pango.layout.Layout getLayout() nothrow
   {
     PangoLayout* _cretval;
     _cretval = gtk_label_get_layout(cast(GtkLabel*)this._cPtr);
@@ -922,7 +922,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         x = location to store X offset of layout
         y = location to store Y offset of layout
   */
-  void getLayoutOffsets(out int x, out int y)
+  void getLayoutOffsets(out int x, out int y) nothrow
   {
     gtk_label_get_layout_offsets(cast(GtkLabel*)this._cPtr, cast(int*)&x, cast(int*)&y);
   }
@@ -934,7 +934,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       See [gtk.label.Label.setLines].
       Returns: The number of lines
   */
-  int getLines()
+  int getLines() nothrow
   {
     int _retval;
     _retval = gtk_label_get_lines(cast(GtkLabel*)this._cPtr);
@@ -947,7 +947,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       See [gtk.label.Label.setWidthChars].
       Returns: the maximum width of the label in characters.
   */
-  int getMaxWidthChars()
+  int getMaxWidthChars() nothrow
   {
     int _retval;
     _retval = gtk_label_get_max_width_chars(cast(GtkLabel*)this._cPtr);
@@ -962,7 +962,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       mnemonic set up it returns [gdk.types.KEY_VoidSymbol].
       Returns: GDK keyval usable for accelerators, or [gdk.types.KEY_VoidSymbol]
   */
-  uint getMnemonicKeyval()
+  uint getMnemonicKeyval() nothrow
   {
     uint _retval;
     _retval = gtk_label_get_mnemonic_keyval(cast(GtkLabel*)this._cPtr);
@@ -977,7 +977,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Returns: the target of the label’s mnemonic,
           or null if none has been set and the default algorithm will be used.
   */
-  gtk.widget.Widget getMnemonicWidget()
+  gtk.widget.Widget getMnemonicWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_label_get_mnemonic_widget(cast(GtkLabel*)this._cPtr);
@@ -991,7 +991,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       See [gtk.label.Label.setNaturalWrapMode].
       Returns: the natural line wrap mode
   */
-  gtk.types.NaturalWrapMode getNaturalWrapMode()
+  gtk.types.NaturalWrapMode getNaturalWrapMode() nothrow
   {
     GtkNaturalWrapMode _cretval;
     _cretval = gtk_label_get_natural_wrap_mode(cast(GtkLabel*)this._cPtr);
@@ -1003,7 +1003,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Returns whether the label is selectable.
       Returns: true if the user can copy text from the label
   */
-  bool getSelectable()
+  bool getSelectable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_label_get_selectable(cast(GtkLabel*)this._cPtr);
@@ -1018,7 +1018,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         end = return location for end of selection, as a character offset
       Returns: true if selection is non-empty
   */
-  bool getSelectionBounds(out int start, out int end)
+  bool getSelectionBounds(out int start, out int end) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_label_get_selection_bounds(cast(GtkLabel*)this._cPtr, cast(int*)&start, cast(int*)&end);
@@ -1029,7 +1029,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Returns whether the label is in single line mode.
       Returns: true when the label is in single line mode.
   */
-  bool getSingleLineMode()
+  bool getSingleLineMode() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_label_get_single_line_mode(cast(GtkLabel*)this._cPtr);
@@ -1045,7 +1045,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           or null if standard tabs are used; must be freed with
           [pango.tab_array.TabArray.free].
   */
-  pango.tab_array.TabArray getTabs()
+  pango.tab_array.TabArray getTabs() nothrow
   {
     PangoTabArray* _cretval;
     _cretval = gtk_label_get_tabs(cast(GtkLabel*)this._cPtr);
@@ -1062,7 +1062,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Returns: the text in the label widget. This is the internal
           string used by the label, and must not be modified.
   */
-  string getText()
+  string getText() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_label_get_text(cast(GtkLabel*)this._cPtr);
@@ -1076,7 +1076,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       See [gtk.label.Label.setUseMarkup].
       Returns: true if the label’s text will be parsed for markup.
   */
-  bool getUseMarkup()
+  bool getUseMarkup() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_label_get_use_markup(cast(GtkLabel*)this._cPtr);
@@ -1090,7 +1090,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Returns: true whether an embedded underline in the label indicates
           the mnemonic accelerator keys.
   */
-  bool getUseUnderline()
+  bool getUseUnderline() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_label_get_use_underline(cast(GtkLabel*)this._cPtr);
@@ -1103,7 +1103,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       See [gtk.label.Label.setWidthChars].
       Returns: the width of the label in characters.
   */
-  int getWidthChars()
+  int getWidthChars() nothrow
   {
     int _retval;
     _retval = gtk_label_get_width_chars(cast(GtkLabel*)this._cPtr);
@@ -1116,7 +1116,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       See [gtk.label.Label.setWrap].
       Returns: true if the lines of the label are automatically wrapped.
   */
-  bool getWrap()
+  bool getWrap() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_label_get_wrap(cast(GtkLabel*)this._cPtr);
@@ -1129,7 +1129,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       See [gtk.label.Label.setWrapMode].
       Returns: the line wrap mode
   */
-  pango.types.WrapMode getWrapMode()
+  pango.types.WrapMode getWrapMode() nothrow
   {
     PangoWrapMode _cretval;
     _cretval = gtk_label_get_wrap_mode(cast(GtkLabel*)this._cPtr);
@@ -1143,7 +1143,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       See the [gtk.label.Label.xalign] property.
       Returns: the xalign property
   */
-  float getXalign()
+  float getXalign() nothrow
   {
     float _retval;
     _retval = gtk_label_get_xalign(cast(GtkLabel*)this._cPtr);
@@ -1156,7 +1156,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       See the [gtk.label.Label.yalign] property.
       Returns: the yalign property
   */
-  float getYalign()
+  float getYalign() nothrow
   {
     float _retval;
     _retval = gtk_label_get_yalign(cast(GtkLabel*)this._cPtr);
@@ -1174,7 +1174,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         startOffset = start offset (in characters not bytes)
         endOffset = end offset (in characters not bytes)
   */
-  void selectRegion(int startOffset, int endOffset)
+  void selectRegion(int startOffset, int endOffset) nothrow
   {
     gtk_label_select_region(cast(GtkLabel*)this._cPtr, startOffset, endOffset);
   }
@@ -1192,7 +1192,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         attrs = a [pango.attr_list.AttrList]
   */
-  void setAttributes(pango.attr_list.AttrList attrs = null)
+  void setAttributes(pango.attr_list.AttrList attrs = null) nothrow
   {
     gtk_label_set_attributes(cast(GtkLabel*)this._cPtr, attrs ? cast(PangoAttrList*)attrs._cPtr(No.Dup) : null);
   }
@@ -1206,7 +1206,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         mode = a [pango.types.EllipsizeMode]
   */
-  void setEllipsize(pango.types.EllipsizeMode mode)
+  void setEllipsize(pango.types.EllipsizeMode mode) nothrow
   {
     gtk_label_set_ellipsize(cast(GtkLabel*)this._cPtr, mode);
   }
@@ -1218,7 +1218,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         model = a [gio.menu_model.MenuModel]
   */
-  void setExtraMenu(gio.menu_model.MenuModel model = null)
+  void setExtraMenu(gio.menu_model.MenuModel model = null) nothrow
   {
     gtk_label_set_extra_menu(cast(GtkLabel*)this._cPtr, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
   }
@@ -1236,7 +1236,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         jtype = a [gtk.types.Justification]
   */
-  void setJustify(gtk.types.Justification jtype)
+  void setJustify(gtk.types.Justification jtype) nothrow
   {
     gtk_label_set_justify(cast(GtkLabel*)this._cPtr, jtype);
   }
@@ -1251,7 +1251,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         str = the new text to set for the label
   */
-  void setLabel(string str)
+  void setLabel(string str) nothrow
   {
     const(char)* _str = str.toCString(No.Alloc);
     gtk_label_set_label(cast(GtkLabel*)this._cPtr, _str);
@@ -1267,7 +1267,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         lines = the desired number of lines, or -1
   */
-  void setLines(int lines)
+  void setLines(int lines) nothrow
   {
     gtk_label_set_lines(cast(GtkLabel*)this._cPtr, lines);
   }
@@ -1304,7 +1304,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         str = a markup string
   */
-  void setMarkup(string str)
+  void setMarkup(string str) nothrow
   {
     const(char)* _str = str.toCString(No.Alloc);
     gtk_label_set_markup(cast(GtkLabel*)this._cPtr, _str);
@@ -1324,7 +1324,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         str = a markup string
   */
-  void setMarkupWithMnemonic(string str)
+  void setMarkupWithMnemonic(string str) nothrow
   {
     const(char)* _str = str.toCString(No.Alloc);
     gtk_label_set_markup_with_mnemonic(cast(GtkLabel*)this._cPtr, _str);
@@ -1336,7 +1336,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         nChars = the new desired maximum width, in characters.
   */
-  void setMaxWidthChars(int nChars)
+  void setMaxWidthChars(int nChars) nothrow
   {
     gtk_label_set_max_width_chars(cast(GtkLabel*)this._cPtr, nChars);
   }
@@ -1363,7 +1363,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         widget = the target [gtk.widget.Widget], or null to unset
   */
-  void setMnemonicWidget(gtk.widget.Widget widget = null)
+  void setMnemonicWidget(gtk.widget.Widget widget = null) nothrow
   {
     gtk_label_set_mnemonic_widget(cast(GtkLabel*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -1377,7 +1377,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         wrapMode = the line wrapping mode
   */
-  void setNaturalWrapMode(gtk.types.NaturalWrapMode wrapMode)
+  void setNaturalWrapMode(gtk.types.NaturalWrapMode wrapMode) nothrow
   {
     gtk_label_set_natural_wrap_mode(cast(GtkLabel*)this._cPtr, wrapMode);
   }
@@ -1391,7 +1391,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         setting = true to allow selecting text in the label
   */
-  void setSelectable(bool setting)
+  void setSelectable(bool setting) nothrow
   {
     gtk_label_set_selectable(cast(GtkLabel*)this._cPtr, setting);
   }
@@ -1402,7 +1402,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         singleLineMode = true if the label should be in single line mode
   */
-  void setSingleLineMode(bool singleLineMode)
+  void setSingleLineMode(bool singleLineMode) nothrow
   {
     gtk_label_set_single_line_mode(cast(GtkLabel*)this._cPtr, singleLineMode);
   }
@@ -1413,7 +1413,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         tabs = tabs as a [pango.tab_array.TabArray]
   */
-  void setTabs(pango.tab_array.TabArray tabs = null)
+  void setTabs(pango.tab_array.TabArray tabs = null) nothrow
   {
     gtk_label_set_tabs(cast(GtkLabel*)this._cPtr, tabs ? cast(PangoTabArray*)tabs._cPtr(No.Dup) : null);
   }
@@ -1435,7 +1435,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         str = The text you want to set
   */
-  void setText(string str)
+  void setText(string str) nothrow
   {
     const(char)* _str = str.toCString(No.Alloc);
     gtk_label_set_text(cast(GtkLabel*)this._cPtr, _str);
@@ -1452,7 +1452,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         str = a string
   */
-  void setTextWithMnemonic(string str)
+  void setTextWithMnemonic(string str) nothrow
   {
     const(char)* _str = str.toCString(No.Alloc);
     gtk_label_set_text_with_mnemonic(cast(GtkLabel*)this._cPtr, _str);
@@ -1466,7 +1466,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         setting = true if the label’s text should be parsed for markup.
   */
-  void setUseMarkup(bool setting)
+  void setUseMarkup(bool setting) nothrow
   {
     gtk_label_set_use_markup(cast(GtkLabel*)this._cPtr, setting);
   }
@@ -1477,7 +1477,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         setting = true if underlines in the text indicate mnemonics
   */
-  void setUseUnderline(bool setting)
+  void setUseUnderline(bool setting) nothrow
   {
     gtk_label_set_use_underline(cast(GtkLabel*)this._cPtr, setting);
   }
@@ -1488,7 +1488,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         nChars = the new desired width, in characters.
   */
-  void setWidthChars(int nChars)
+  void setWidthChars(int nChars) nothrow
   {
     gtk_label_set_width_chars(cast(GtkLabel*)this._cPtr, nChars);
   }
@@ -1509,7 +1509,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         wrap = the setting
   */
-  void setWrap(bool wrap)
+  void setWrap(bool wrap) nothrow
   {
     gtk_label_set_wrap(cast(GtkLabel*)this._cPtr, wrap);
   }
@@ -1527,7 +1527,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         wrapMode = the line wrapping mode
   */
-  void setWrapMode(pango.types.WrapMode wrapMode)
+  void setWrapMode(pango.types.WrapMode wrapMode) nothrow
   {
     gtk_label_set_wrap_mode(cast(GtkLabel*)this._cPtr, wrapMode);
   }
@@ -1540,7 +1540,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         xalign = the new xalign value, between 0 and 1
   */
-  void setXalign(float xalign)
+  void setXalign(float xalign) nothrow
   {
     gtk_label_set_xalign(cast(GtkLabel*)this._cPtr, xalign);
   }
@@ -1553,7 +1553,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         yalign = the new yalign value, between 0 and 1
   */
-  void setYalign(float yalign)
+  void setYalign(float yalign) nothrow
   {
     gtk_label_set_yalign(cast(GtkLabel*)this._cPtr, yalign);
   }
@@ -1580,13 +1580,13 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivateCurrentLink(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivateCurrentLink(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.label.Label)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1595,7 +1595,14 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.label.Label.activateCurrentLink");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1623,18 +1630,19 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivateLink(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivateLink(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.label.Label)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1642,7 +1650,14 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.label.Label.activateLink");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1670,13 +1685,13 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.label.Label)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1685,7 +1700,14 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.label.Label.copyClipboard");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1731,7 +1753,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.MovementStep)))
@@ -1740,7 +1762,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.label.Label)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1758,7 +1780,14 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.label.Label.moveCursor");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1778,7 +1807,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
         propval = A list of style attributes to apply to the text of the label.
       Returns: Builder instance for fluent chaining
   */
-  T attributes(pango.attr_list.AttrList propval)
+  T attributes(pango.attr_list.AttrList propval) nothrow
   {
     return setProperty("attributes", propval);
   }
@@ -1798,7 +1827,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
           and [gtk.label.Label.setWidthChars].
       Returns: Builder instance for fluent chaining
   */
-  T ellipsize(pango.types.EllipsizeMode propval)
+  T ellipsize(pango.types.EllipsizeMode propval) nothrow
   {
     return setProperty("ellipsize", propval);
   }
@@ -1809,7 +1838,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
         propval = A menu model whose contents will be appended to the context menu.
       Returns: Builder instance for fluent chaining
   */
-  T extraMenu(gio.menu_model.MenuModel propval)
+  T extraMenu(gio.menu_model.MenuModel propval) nothrow
   {
     return setProperty("extra-menu", propval);
   }
@@ -1823,7 +1852,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
           See [gtk.label.Label.xalign] for that.
       Returns: Builder instance for fluent chaining
   */
-  T justify(gtk.types.Justification propval)
+  T justify(gtk.types.Justification propval) nothrow
   {
     return setProperty("justify", propval);
   }
@@ -1845,7 +1874,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
           for the label to display them.
       Returns: Builder instance for fluent chaining
   */
-  T label(string propval)
+  T label(string propval) nothrow
   {
     return setProperty("label", propval);
   }
@@ -1860,7 +1889,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
           Set this property to -1 if you don't want to limit the number of lines.
       Returns: Builder instance for fluent chaining
   */
-  T lines(int propval)
+  T lines(int propval) nothrow
   {
     return setProperty("lines", propval);
   }
@@ -1877,7 +1906,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
           determine the width of ellipsized and wrapped labels.
       Returns: Builder instance for fluent chaining
   */
-  T maxWidthChars(int propval)
+  T maxWidthChars(int propval) nothrow
   {
     return setProperty("max-width-chars", propval);
   }
@@ -1888,7 +1917,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
         propval = The widget to be activated when the labels mnemonic key is pressed.
       Returns: Builder instance for fluent chaining
   */
-  T mnemonicWidget(gtk.widget.Widget propval)
+  T mnemonicWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("mnemonic-widget", propval);
   }
@@ -1905,7 +1934,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
           [gtk.label.Label.wrapMode] property.
       Returns: Builder instance for fluent chaining
   */
-  T naturalWrapMode(gtk.types.NaturalWrapMode propval)
+  T naturalWrapMode(gtk.types.NaturalWrapMode propval) nothrow
   {
     return setProperty("natural-wrap-mode", propval);
   }
@@ -1916,7 +1945,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
         propval = Whether the label text can be selected with the mouse.
       Returns: Builder instance for fluent chaining
   */
-  T selectable(bool propval)
+  T selectable(bool propval) nothrow
   {
     return setProperty("selectable", propval);
   }
@@ -1932,7 +1961,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
           of text changes would be distracting, e.g. in a statusbar.
       Returns: Builder instance for fluent chaining
   */
-  T singleLineMode(bool propval)
+  T singleLineMode(bool propval) nothrow
   {
     return setProperty("single-line-mode", propval);
   }
@@ -1943,7 +1972,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
         propval = Custom tabs for this label.
       Returns: Builder instance for fluent chaining
   */
-  T tabs(pango.tab_array.TabArray propval)
+  T tabs(pango.tab_array.TabArray propval) nothrow
   {
     return setProperty("tabs", propval);
   }
@@ -1956,7 +1985,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
           See `func@Pango.parse_markup`.
       Returns: Builder instance for fluent chaining
   */
-  T useMarkup(bool propval)
+  T useMarkup(bool propval) nothrow
   {
     return setProperty("use-markup", propval);
   }
@@ -1968,7 +1997,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
           before the mnemonic character.
       Returns: Builder instance for fluent chaining
   */
-  T useUnderline(bool propval)
+  T useUnderline(bool propval) nothrow
   {
     return setProperty("use-underline", propval);
   }
@@ -1985,7 +2014,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
           determine the width of ellipsized and wrapped labels.
       Returns: Builder instance for fluent chaining
   */
-  T widthChars(int propval)
+  T widthChars(int propval) nothrow
   {
     return setProperty("width-chars", propval);
   }
@@ -1996,7 +2025,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
         propval = true if the label text will wrap if it gets too wide.
       Returns: Builder instance for fluent chaining
   */
-  T wrap(bool propval)
+  T wrap(bool propval) nothrow
   {
     return setProperty("wrap", propval);
   }
@@ -2014,7 +2043,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
           property.
       Returns: Builder instance for fluent chaining
   */
-  T wrapMode(pango.types.WrapMode propval)
+  T wrapMode(pango.types.WrapMode propval) nothrow
   {
     return setProperty("wrap-mode", propval);
   }
@@ -2028,7 +2057,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
           labels size allocation is positioned in the space available for the label.
       Returns: Builder instance for fluent chaining
   */
-  T xalign(float propval)
+  T xalign(float propval) nothrow
   {
     return setProperty("xalign", propval);
   }
@@ -2042,7 +2071,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
           labels size allocation is positioned in the space available for the label.
       Returns: Builder instance for fluent chaining
   */
-  T yalign(float propval)
+  T yalign(float propval) nothrow
   {
     return setProperty("yalign", propval);
   }
@@ -2055,7 +2084,7 @@ final class LabelGidBuilder : LabelGidBuilderImpl!LabelGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Label build()
+  Label build() nothrow
   {
     return new Label(cast(void*)createGObject(Label._getGType), No.Take);
   }

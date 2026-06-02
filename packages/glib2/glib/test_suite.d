@@ -16,24 +16,21 @@ class TestSuite
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.test_suite.TestSuite");
-
     _cInstancePtr = cast(GTestSuite*)ptr;
 
     owned = take;
   }
 
-  ~this()
+  ~this() nothrow
   {
-    if (owned)
+    if (owned && _cInstancePtr)
       g_test_suite_free(_cInstancePtr);
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -44,7 +41,7 @@ class TestSuite
       Params:
         testCase = a #GTestCase
   */
-  void add(glib.types.TestCase testCase)
+  void add(glib.types.TestCase testCase) nothrow
   {
     g_test_suite_add(cast(GTestSuite*)this._cPtr, testCase);
   }
@@ -55,7 +52,7 @@ class TestSuite
       Params:
         nestedsuite = another #GTestSuite
   */
-  void addSuite(glib.test_suite.TestSuite nestedsuite)
+  void addSuite(glib.test_suite.TestSuite nestedsuite) nothrow
   {
     g_test_suite_add_suite(cast(GTestSuite*)this._cPtr, nestedsuite ? cast(GTestSuite*)nestedsuite._cPtr : null);
   }

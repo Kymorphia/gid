@@ -24,26 +24,26 @@ class StringSorter : gtk.sorter.Sorter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_string_sorter_get_type != &gidSymbolNotFound ? gtk_string_sorter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StringSorter self()
+  override StringSorter self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class StringSorter : gtk.sorter.Sorter
       Get builder for [gtk.string_sorter.StringSorter]
       Returns: New builder object
   */
-  static StringSorterGidBuilder builder()
+  static StringSorterGidBuilder builder() nothrow
   {
     return new StringSorterGidBuilder;
   }
@@ -67,7 +67,7 @@ class StringSorter : gtk.sorter.Sorter
         The default value, [gtk.types.Collation.Unicode], compares strings according
         to the [Unicode collation algorithm](https://www.unicode.org/reports/tr10/).
   */
-  @property gtk.types.Collation collation()
+  @property gtk.types.Collation collation() nothrow
   {
     return getCollation();
   }
@@ -83,7 +83,7 @@ class StringSorter : gtk.sorter.Sorter
           The default value, [gtk.types.Collation.Unicode], compares strings according
           to the [Unicode collation algorithm](https://www.unicode.org/reports/tr10/).
   */
-  @property void collation(gtk.types.Collation propval)
+  @property void collation(gtk.types.Collation propval) nothrow
   {
     setCollation(propval);
   }
@@ -92,7 +92,7 @@ class StringSorter : gtk.sorter.Sorter
       Get `expression` property.
       Returns: The expression to evaluate on item to get a string to compare with.
   */
-  @property gtk.expression.Expression expression()
+  @property gtk.expression.Expression expression() nothrow
   {
     return getExpression();
   }
@@ -102,7 +102,7 @@ class StringSorter : gtk.sorter.Sorter
       Params:
         propval = The expression to evaluate on item to get a string to compare with.
   */
-  @property void expression(gtk.expression.Expression propval)
+  @property void expression(gtk.expression.Expression propval) nothrow
   {
     setExpression(propval);
   }
@@ -111,7 +111,7 @@ class StringSorter : gtk.sorter.Sorter
       Get `ignoreCase` property.
       Returns: If sorting is case sensitive.
   */
-  @property bool ignoreCase()
+  @property bool ignoreCase() nothrow
   {
     return getIgnoreCase();
   }
@@ -121,7 +121,7 @@ class StringSorter : gtk.sorter.Sorter
       Params:
         propval = If sorting is case sensitive.
   */
-  @property void ignoreCase(bool propval)
+  @property void ignoreCase(bool propval) nothrow
   {
     setIgnoreCase(propval);
   }
@@ -137,7 +137,7 @@ class StringSorter : gtk.sorter.Sorter
         expression = The expression to evaluate
       Returns: a new [gtk.string_sorter.StringSorter]
   */
-  this(gtk.expression.Expression expression = null)
+  this(gtk.expression.Expression expression = null) nothrow
   {
     GtkStringSorter* _cretval;
     _cretval = gtk_string_sorter_new(expression ? cast(GtkExpression*)expression._cPtr(Yes.Dup) : null);
@@ -148,7 +148,7 @@ class StringSorter : gtk.sorter.Sorter
       Gets which collation method the sorter uses.
       Returns: The collation method
   */
-  gtk.types.Collation getCollation()
+  gtk.types.Collation getCollation() nothrow
   {
     GtkCollation _cretval;
     _cretval = gtk_string_sorter_get_collation(cast(GtkStringSorter*)this._cPtr);
@@ -160,7 +160,7 @@ class StringSorter : gtk.sorter.Sorter
       Gets the expression that is evaluated to obtain strings from items.
       Returns: a [gtk.expression.Expression]
   */
-  gtk.expression.Expression getExpression()
+  gtk.expression.Expression getExpression() nothrow
   {
     GtkExpression* _cretval;
     _cretval = gtk_string_sorter_get_expression(cast(GtkStringSorter*)this._cPtr);
@@ -172,7 +172,7 @@ class StringSorter : gtk.sorter.Sorter
       Gets whether the sorter ignores case differences.
       Returns: true if self is ignoring case differences
   */
-  bool getIgnoreCase()
+  bool getIgnoreCase() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_string_sorter_get_ignore_case(cast(GtkStringSorter*)this._cPtr);
@@ -185,7 +185,7 @@ class StringSorter : gtk.sorter.Sorter
       Params:
         collation = the collation method
   */
-  void setCollation(gtk.types.Collation collation)
+  void setCollation(gtk.types.Collation collation) nothrow
   {
     gtk_string_sorter_set_collation(cast(GtkStringSorter*)this._cPtr, collation);
   }
@@ -198,7 +198,7 @@ class StringSorter : gtk.sorter.Sorter
       Params:
         expression = a [gtk.expression.Expression]
   */
-  void setExpression(gtk.expression.Expression expression = null)
+  void setExpression(gtk.expression.Expression expression = null) nothrow
   {
     gtk_string_sorter_set_expression(cast(GtkStringSorter*)this._cPtr, expression ? cast(GtkExpression*)expression._cPtr(No.Dup) : null);
   }
@@ -209,7 +209,7 @@ class StringSorter : gtk.sorter.Sorter
       Params:
         ignoreCase = true to ignore case differences
   */
-  void setIgnoreCase(bool ignoreCase)
+  void setIgnoreCase(bool ignoreCase) nothrow
   {
     gtk_string_sorter_set_ignore_case(cast(GtkStringSorter*)this._cPtr, ignoreCase);
   }
@@ -231,7 +231,7 @@ class StringSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T
           to the [Unicode collation algorithm](https://www.unicode.org/reports/tr10/).
       Returns: Builder instance for fluent chaining
   */
-  T collation(gtk.types.Collation propval)
+  T collation(gtk.types.Collation propval) nothrow
   {
     return setProperty("collation", propval);
   }
@@ -242,7 +242,7 @@ class StringSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T
         propval = The expression to evaluate on item to get a string to compare with.
       Returns: Builder instance for fluent chaining
   */
-  T expression(gtk.expression.Expression propval)
+  T expression(gtk.expression.Expression propval) nothrow
   {
     return setProperty("expression", propval);
   }
@@ -253,7 +253,7 @@ class StringSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T
         propval = If sorting is case sensitive.
       Returns: Builder instance for fluent chaining
   */
-  T ignoreCase(bool propval)
+  T ignoreCase(bool propval) nothrow
   {
     return setProperty("ignore-case", propval);
   }
@@ -266,7 +266,7 @@ final class StringSorterGidBuilder : StringSorterGidBuilderImpl!StringSorterGidB
       Create object from builder.
       Returns: New object
   */
-  StringSorter build()
+  StringSorter build() nothrow
   {
     return new StringSorter(cast(void*)createGObject(StringSorter._getGType), Yes.Take);
   }

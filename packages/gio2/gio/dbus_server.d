@@ -42,26 +42,26 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_server_get_type != &gidSymbolNotFound ? g_dbus_server_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DBusServer self()
+  override DBusServer self() nothrow
   {
     return this;
   }
@@ -70,7 +70,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
       Get builder for [gio.dbus_server.DBusServer]
       Returns: New builder object
   */
-  static DBusServerGidBuilder builder()
+  static DBusServerGidBuilder builder() nothrow
   {
     return new DBusServerGidBuilder;
   }
@@ -79,7 +79,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
       Get `active` property.
       Returns: Whether the server is currently active.
   */
-  @property bool active()
+  @property bool active() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("active");
   }
@@ -88,7 +88,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
       Get `address` property.
       Returns: The D-Bus address to listen on.
   */
-  @property string address()
+  @property string address() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("address");
   }
@@ -97,7 +97,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
       Get `authenticationObserver` property.
       Returns: A #GDBusAuthObserver object to assist in the authentication process or null.
   */
-  @property gio.dbus_auth_observer.DBusAuthObserver authenticationObserver()
+  @property gio.dbus_auth_observer.DBusAuthObserver authenticationObserver() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.dbus_auth_observer.DBusAuthObserver)("authentication-observer");
   }
@@ -106,7 +106,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
       Get `clientAddress` property.
       Returns: The D-Bus address that clients can use.
   */
-  @property string clientAddress()
+  @property string clientAddress() nothrow
   {
     return getClientAddress();
   }
@@ -115,7 +115,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
       Get `flags` property.
       Returns: Flags from the #GDBusServerFlags enumeration.
   */
-  @property gio.types.DBusServerFlags flags()
+  @property gio.types.DBusServerFlags flags() nothrow
   {
     return getFlags();
   }
@@ -126,7 +126,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
         
         See #GDBusConnection:guid for more details.
   */
-  @property string guid()
+  @property string guid() nothrow
   {
     return getGuid();
   }
@@ -187,7 +187,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
       Returns: A D-Bus address string. Do not free, the string is owned
         by server.
   */
-  string getClientAddress()
+  string getClientAddress() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_server_get_client_address(cast(GDBusServer*)this._cPtr);
@@ -199,7 +199,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
       Gets the flags for server.
       Returns: A set of flags from the #GDBusServerFlags enumeration.
   */
-  gio.types.DBusServerFlags getFlags()
+  gio.types.DBusServerFlags getFlags() nothrow
   {
     GDBusServerFlags _cretval;
     _cretval = g_dbus_server_get_flags(cast(GDBusServer*)this._cPtr);
@@ -211,7 +211,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
       Gets the GUID for server, as provided to [gio.dbus_server.DBusServer.newSync].
       Returns: A D-Bus GUID. Do not free this string, it is owned by server.
   */
-  string getGuid()
+  string getGuid() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_server_get_guid(cast(GDBusServer*)this._cPtr);
@@ -223,7 +223,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
       Gets whether server is active.
       Returns: true if server is active, false otherwise.
   */
-  bool isActive()
+  bool isActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_dbus_server_is_active(cast(GDBusServer*)this._cPtr);
@@ -233,7 +233,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
   /**
       Starts server.
   */
-  void start()
+  void start() nothrow
   {
     g_dbus_server_start(cast(GDBusServer*)this._cPtr);
   }
@@ -241,7 +241,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
   /**
       Stops server.
   */
-  void stop()
+  void stop() nothrow
   {
     g_dbus_server_stop(cast(GDBusServer*)this._cPtr);
   }
@@ -285,18 +285,19 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNewConnection(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNewConnection(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.dbus_connection.DBusConnection)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.dbus_server.DBusServer)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -304,7 +305,14 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.dbus_server.DBusServer.newConnection");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -326,7 +334,7 @@ class DBusServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
         propval = The D-Bus address to listen on.
       Returns: Builder instance for fluent chaining
   */
-  T address(string propval)
+  T address(string propval) nothrow
   {
     return setProperty("address", propval);
   }
@@ -337,7 +345,7 @@ class DBusServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
         propval = A #GDBusAuthObserver object to assist in the authentication process or null.
       Returns: Builder instance for fluent chaining
   */
-  T authenticationObserver(gio.dbus_auth_observer.DBusAuthObserver propval)
+  T authenticationObserver(gio.dbus_auth_observer.DBusAuthObserver propval) nothrow
   {
     return setProperty("authentication-observer", propval);
   }
@@ -348,7 +356,7 @@ class DBusServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
         propval = Flags from the #GDBusServerFlags enumeration.
       Returns: Builder instance for fluent chaining
   */
-  T flags(gio.types.DBusServerFlags propval)
+  T flags(gio.types.DBusServerFlags propval) nothrow
   {
     return setProperty("flags", propval);
   }
@@ -361,7 +369,7 @@ class DBusServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
           See #GDBusConnection:guid for more details.
       Returns: Builder instance for fluent chaining
   */
-  T guid(string propval)
+  T guid(string propval) nothrow
   {
     return setProperty("guid", propval);
   }
@@ -374,7 +382,7 @@ final class DBusServerGidBuilder : DBusServerGidBuilderImpl!DBusServerGidBuilder
       Create object from builder.
       Returns: New object
   */
-  DBusServer build()
+  DBusServer build() nothrow
   {
     return new DBusServer(cast(void*)createGObject(DBusServer._getGType), No.Take);
   }

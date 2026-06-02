@@ -145,24 +145,24 @@ interface FileChooser
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_file_chooser_get_type != &gidSymbolNotFound ? gtk_file_chooser_get_type() : cast(GType)0;
   }
 
   /** */
-  @property gtk.types.FileChooserAction action();
+  @property gtk.types.FileChooserAction action() nothrow;
 
   /** */
-  @property void action(gtk.types.FileChooserAction propval);
+  @property void action(gtk.types.FileChooserAction propval) nothrow;
 
   /**
       Get `createFolders` property.
       Returns: Whether a file chooser not in [gtk.types.FileChooserAction.Open] mode
         will offer the user to create new folders.
   */
-  @property bool createFolders();
+  @property bool createFolders() nothrow;
 
   /**
       Set `createFolders` property.
@@ -170,7 +170,7 @@ interface FileChooser
         propval = Whether a file chooser not in [gtk.types.FileChooserAction.Open] mode
           will offer the user to create new folders.
   */
-  @property void createFolders(bool propval);
+  @property void createFolders(bool propval) nothrow;
 
   /**
       Get `doOverwriteConfirmation` property.
@@ -178,7 +178,7 @@ interface FileChooser
         will present an overwrite confirmation dialog if the user
         selects a file name that already exists.
   */
-  @property bool doOverwriteConfirmation();
+  @property bool doOverwriteConfirmation() nothrow;
 
   /**
       Set `doOverwriteConfirmation` property.
@@ -187,55 +187,55 @@ interface FileChooser
           will present an overwrite confirmation dialog if the user
           selects a file name that already exists.
   */
-  @property void doOverwriteConfirmation(bool propval);
+  @property void doOverwriteConfirmation(bool propval) nothrow;
 
   /** */
-  @property gtk.widget.Widget extraWidget();
+  @property gtk.widget.Widget extraWidget() nothrow;
 
   /** */
-  @property void extraWidget(gtk.widget.Widget propval);
+  @property void extraWidget(gtk.widget.Widget propval) nothrow;
 
   /** */
-  @property gtk.file_filter.FileFilter filter();
+  @property gtk.file_filter.FileFilter filter() nothrow;
 
   /** */
-  @property void filter(gtk.file_filter.FileFilter propval);
+  @property void filter(gtk.file_filter.FileFilter propval) nothrow;
 
   /** */
-  @property bool localOnly();
+  @property bool localOnly() nothrow;
 
   /** */
-  @property void localOnly(bool propval);
+  @property void localOnly(bool propval) nothrow;
 
   /** */
-  @property gtk.widget.Widget previewWidget();
+  @property gtk.widget.Widget previewWidget() nothrow;
 
   /** */
-  @property void previewWidget(gtk.widget.Widget propval);
+  @property void previewWidget(gtk.widget.Widget propval) nothrow;
 
   /** */
-  @property bool previewWidgetActive();
+  @property bool previewWidgetActive() nothrow;
 
   /** */
-  @property void previewWidgetActive(bool propval);
+  @property void previewWidgetActive(bool propval) nothrow;
 
   /** */
-  @property bool selectMultiple();
+  @property bool selectMultiple() nothrow;
 
   /** */
-  @property void selectMultiple(bool propval);
+  @property void selectMultiple(bool propval) nothrow;
 
   /** */
-  @property bool showHidden();
+  @property bool showHidden() nothrow;
 
   /** */
-  @property void showHidden(bool propval);
+  @property void showHidden(bool propval) nothrow;
 
   /** */
-  @property bool usePreviewLabel();
+  @property bool usePreviewLabel() nothrow;
 
   /** */
-  @property void usePreviewLabel(bool propval);
+  @property void usePreviewLabel(bool propval) nothrow;
 
   /**
       Adds a 'choice' to the file chooser. This is typically implemented
@@ -1097,7 +1097,7 @@ interface FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectConfirmOverwrite(T)(T callback, Flag!"After" after = No.After);
+  gulong connectConfirmOverwrite(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `CurrentFolderChanged` signal.
@@ -1126,7 +1126,7 @@ interface FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCurrentFolderChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectCurrentFolderChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `FileActivated` signal.
@@ -1153,7 +1153,7 @@ interface FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFileActivated(T)(T callback, Flag!"After" after = No.After);
+  gulong connectFileActivated(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `SelectionChanged` signal.
@@ -1183,7 +1183,7 @@ interface FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `UpdatePreview` signal.
@@ -1221,7 +1221,7 @@ interface FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUpdatePreview(T)(T callback, Flag!"After" after = No.After);
+  gulong connectUpdatePreview(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gtk.file_chooser.FileChooser]
@@ -1229,7 +1229,7 @@ interface FileChooserGidBuilderImpl(T)
 {
 
   /** */
-  T action(gtk.types.FileChooserAction propval);
+  T action(gtk.types.FileChooserAction propval) nothrow;
 
   /**
       Set `createFolders` property.
@@ -1238,7 +1238,7 @@ interface FileChooserGidBuilderImpl(T)
           will offer the user to create new folders.
       Returns: Builder instance for fluent chaining
   */
-  T createFolders(bool propval);
+  T createFolders(bool propval) nothrow;
 
   /**
       Set `doOverwriteConfirmation` property.
@@ -1248,29 +1248,29 @@ interface FileChooserGidBuilderImpl(T)
           selects a file name that already exists.
       Returns: Builder instance for fluent chaining
   */
-  T doOverwriteConfirmation(bool propval);
+  T doOverwriteConfirmation(bool propval) nothrow;
 
   /** */
-  T extraWidget(gtk.widget.Widget propval);
+  T extraWidget(gtk.widget.Widget propval) nothrow;
 
   /** */
-  T filter(gtk.file_filter.FileFilter propval);
+  T filter(gtk.file_filter.FileFilter propval) nothrow;
 
   /** */
-  T localOnly(bool propval);
+  T localOnly(bool propval) nothrow;
 
   /** */
-  T previewWidget(gtk.widget.Widget propval);
+  T previewWidget(gtk.widget.Widget propval) nothrow;
 
   /** */
-  T previewWidgetActive(bool propval);
+  T previewWidgetActive(bool propval) nothrow;
 
   /** */
-  T selectMultiple(bool propval);
+  T selectMultiple(bool propval) nothrow;
 
   /** */
-  T showHidden(bool propval);
+  T showHidden(bool propval) nothrow;
 
   /** */
-  T usePreviewLabel(bool propval);
+  T usePreviewLabel(bool propval) nothrow;
 }

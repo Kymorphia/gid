@@ -17,26 +17,26 @@ class GSettingsActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionG
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_gsettings_action_group_get_type != &gidSymbolNotFound ? panel_gsettings_action_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GSettingsActionGroup self()
+  override GSettingsActionGroup self() nothrow
   {
     return this;
   }
@@ -45,13 +45,13 @@ class GSettingsActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionG
       Get builder for [panel.gsettings_action_group.GSettingsActionGroup]
       Returns: New builder object
   */
-  static GSettingsActionGroupGidBuilder builder()
+  static GSettingsActionGroupGidBuilder builder() nothrow
   {
     return new GSettingsActionGroupGidBuilder;
   }
 
   /** */
-  @property gio.settings.Settings settings()
+  @property gio.settings.Settings settings() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.settings.Settings)("settings");
   }
@@ -65,7 +65,7 @@ class GSettingsActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionG
         settings = a #GSettings
       Returns: an #PanelGSettingsActionGroup
   */
-  static gio.action_group.ActionGroup new_(gio.settings.Settings settings)
+  static gio.action_group.ActionGroup new_(gio.settings.Settings settings) nothrow
   {
     GActionGroup* _cretval;
     _cretval = panel_gsettings_action_group_new(settings ? cast(GSettings*)settings._cPtr(No.Dup) : null);
@@ -81,7 +81,7 @@ class GSettingsActionGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilde
   mixin ActionGroupGidBuilderT!();
 
   /** */
-  T settings(gio.settings.Settings propval)
+  T settings(gio.settings.Settings propval) nothrow
   {
     return setProperty("settings", propval);
   }
@@ -94,7 +94,7 @@ final class GSettingsActionGroupGidBuilder : GSettingsActionGroupGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  GSettingsActionGroup build()
+  GSettingsActionGroup build() nothrow
   {
     return new GSettingsActionGroup(cast(void*)createGObject(GSettingsActionGroup._getGType), No.Take);
   }

@@ -17,26 +17,26 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_aggregator_pad_get_type != &gidSymbolNotFound ? gst_video_aggregator_pad_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VideoAggregatorPad self()
+  override VideoAggregatorPad self() nothrow
   {
     return this;
   }
@@ -45,43 +45,43 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
       Get builder for [gstvideo.video_aggregator_pad.VideoAggregatorPad]
       Returns: New builder object
   */
-  static VideoAggregatorPadGidBuilder builder()
+  static VideoAggregatorPadGidBuilder builder() nothrow
   {
     return new VideoAggregatorPadGidBuilder;
   }
 
   /** */
-  @property ulong maxLastBufferRepeat()
+  @property ulong maxLastBufferRepeat() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("max-last-buffer-repeat");
   }
 
   /** */
-  @property void maxLastBufferRepeat(ulong propval)
+  @property void maxLastBufferRepeat(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("max-last-buffer-repeat", propval);
   }
 
   /** */
-  @property bool repeatAfterEos()
+  @property bool repeatAfterEos() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("repeat-after-eos");
   }
 
   /** */
-  @property void repeatAfterEos(bool propval)
+  @property void repeatAfterEos(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("repeat-after-eos", propval);
   }
 
   /** */
-  @property uint zorder()
+  @property uint zorder() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("zorder");
   }
 
   /** */
-  @property void zorder(uint propval)
+  @property void zorder(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("zorder", propval);
   }
@@ -97,7 +97,7 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
       returns.
       Returns: The currently queued buffer
   */
-  gst.buffer.Buffer getCurrentBuffer()
+  gst.buffer.Buffer getCurrentBuffer() nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_video_aggregator_pad_get_current_buffer(cast(GstVideoAggregatorPad*)this._cPtr);
@@ -116,7 +116,7 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
       returns.
       Returns: The currently prepared video frame
   */
-  gstvideo.video_frame.VideoFrame getPreparedFrame()
+  gstvideo.video_frame.VideoFrame getPreparedFrame() nothrow
   {
     GstVideoFrame* _cretval;
     _cretval = gst_video_aggregator_pad_get_prepared_frame(cast(GstVideoAggregatorPad*)this._cPtr);
@@ -132,7 +132,7 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
       or from the #GstVideoAggregatorPadClass::prepare_frame virtual method of the aggregator pads.
       Returns: true if the pad has currently a buffer queued
   */
-  bool hasCurrentBuffer()
+  bool hasCurrentBuffer() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_aggregator_pad_has_current_buffer(cast(GstVideoAggregatorPad*)this._cPtr);
@@ -145,7 +145,7 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
       Params:
         needsAlpha = true if this pad requires alpha output
   */
-  void setNeedsAlpha(bool needsAlpha)
+  void setNeedsAlpha(bool needsAlpha) nothrow
   {
     gst_video_aggregator_pad_set_needs_alpha(cast(GstVideoAggregatorPad*)this._cPtr, needsAlpha);
   }
@@ -156,19 +156,19 @@ class VideoAggregatorPadGidBuilderImpl(T) : gstbase.aggregator_pad.AggregatorPad
 {
 
   /** */
-  T maxLastBufferRepeat(ulong propval)
+  T maxLastBufferRepeat(ulong propval) nothrow
   {
     return setProperty("max-last-buffer-repeat", propval);
   }
 
   /** */
-  T repeatAfterEos(bool propval)
+  T repeatAfterEos(bool propval) nothrow
   {
     return setProperty("repeat-after-eos", propval);
   }
 
   /** */
-  T zorder(uint propval)
+  T zorder(uint propval) nothrow
   {
     return setProperty("zorder", propval);
   }
@@ -181,7 +181,7 @@ final class VideoAggregatorPadGidBuilder : VideoAggregatorPadGidBuilderImpl!Vide
       Create object from builder.
       Returns: New object
   */
-  VideoAggregatorPad build()
+  VideoAggregatorPad build() nothrow
   {
     return new VideoAggregatorPad(cast(void*)createGObject(VideoAggregatorPad._getGType), No.Take);
   }

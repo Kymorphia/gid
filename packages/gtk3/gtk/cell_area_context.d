@@ -26,26 +26,26 @@ class CellAreaContext : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_area_context_get_type != &gidSymbolNotFound ? gtk_cell_area_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CellAreaContext self()
+  override CellAreaContext self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class CellAreaContext : gobject.object.ObjectWrap
       Get builder for [gtk.cell_area_context.CellAreaContext]
       Returns: New builder object
   */
-  static CellAreaContextGidBuilder builder()
+  static CellAreaContextGidBuilder builder() nothrow
   {
     return new CellAreaContextGidBuilder;
   }
@@ -63,7 +63,7 @@ class CellAreaContext : gobject.object.ObjectWrap
       Get `area` property.
       Returns: The #GtkCellArea this context was created by
   */
-  @property gtk.cell_area.CellArea area()
+  @property gtk.cell_area.CellArea area() nothrow
   {
     return getArea();
   }
@@ -74,7 +74,7 @@ class CellAreaContext : gobject.object.ObjectWrap
         for all #GtkTreeModel rows that this context was requested
         for using [gtk.cell_area.CellArea.getPreferredHeight].
   */
-  @property int minimumHeight()
+  @property int minimumHeight() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("minimum-height");
   }
@@ -85,7 +85,7 @@ class CellAreaContext : gobject.object.ObjectWrap
         for all #GtkTreeModel rows that this context was requested
         for using [gtk.cell_area.CellArea.getPreferredWidth].
   */
-  @property int minimumWidth()
+  @property int minimumWidth() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("minimum-width");
   }
@@ -96,7 +96,7 @@ class CellAreaContext : gobject.object.ObjectWrap
         for all #GtkTreeModel rows that this context was requested
         for using [gtk.cell_area.CellArea.getPreferredHeight].
   */
-  @property int naturalHeight()
+  @property int naturalHeight() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("natural-height");
   }
@@ -107,7 +107,7 @@ class CellAreaContext : gobject.object.ObjectWrap
         for all #GtkTreeModel rows that this context was requested
         for using [gtk.cell_area.CellArea.getPreferredWidth].
   */
-  @property int naturalWidth()
+  @property int naturalWidth() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("natural-width");
   }
@@ -132,7 +132,7 @@ class CellAreaContext : gobject.object.ObjectWrap
         height = the allocated height for all #GtkTreeModel rows rendered
               with context, or -1.
   */
-  void allocate(int width, int height)
+  void allocate(int width, int height) nothrow
   {
     gtk_cell_area_context_allocate(cast(GtkCellAreaContext*)this._cPtr, width, height);
   }
@@ -148,7 +148,7 @@ class CellAreaContext : gobject.object.ObjectWrap
         width = location to store the allocated width, or null
         height = location to store the allocated height, or null
   */
-  void getAllocation(out int width, out int height)
+  void getAllocation(out int width, out int height) nothrow
   {
     gtk_cell_area_context_get_allocation(cast(GtkCellAreaContext*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
@@ -166,7 +166,7 @@ class CellAreaContext : gobject.object.ObjectWrap
       compute a proper allocation.
       Returns: the #GtkCellArea this context was created by.
   */
-  gtk.cell_area.CellArea getArea()
+  gtk.cell_area.CellArea getArea() nothrow
   {
     GtkCellArea* _cretval;
     _cretval = gtk_cell_area_context_get_area(cast(GtkCellAreaContext*)this._cPtr);
@@ -187,7 +187,7 @@ class CellAreaContext : gobject.object.ObjectWrap
         naturalHeight = location to store the natural height,
               or null
   */
-  void getPreferredHeight(out int minimumHeight, out int naturalHeight)
+  void getPreferredHeight(out int minimumHeight, out int naturalHeight) nothrow
   {
     gtk_cell_area_context_get_preferred_height(cast(GtkCellAreaContext*)this._cPtr, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
   }
@@ -206,7 +206,7 @@ class CellAreaContext : gobject.object.ObjectWrap
         naturalHeight = location to store the natural height,
               or null
   */
-  void getPreferredHeightForWidth(int width, out int minimumHeight, out int naturalHeight)
+  void getPreferredHeightForWidth(int width, out int minimumHeight, out int naturalHeight) nothrow
   {
     gtk_cell_area_context_get_preferred_height_for_width(cast(GtkCellAreaContext*)this._cPtr, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
   }
@@ -224,7 +224,7 @@ class CellAreaContext : gobject.object.ObjectWrap
         naturalWidth = location to store the natural width,
               or null
   */
-  void getPreferredWidth(out int minimumWidth, out int naturalWidth)
+  void getPreferredWidth(out int minimumWidth, out int naturalWidth) nothrow
   {
     gtk_cell_area_context_get_preferred_width(cast(GtkCellAreaContext*)this._cPtr, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
   }
@@ -243,7 +243,7 @@ class CellAreaContext : gobject.object.ObjectWrap
         naturalWidth = location to store the natural width,
               or null
   */
-  void getPreferredWidthForHeight(int height, out int minimumWidth, out int naturalWidth)
+  void getPreferredWidthForHeight(int height, out int minimumWidth, out int naturalWidth) nothrow
   {
     gtk_cell_area_context_get_preferred_width_for_height(cast(GtkCellAreaContext*)this._cPtr, height, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
   }
@@ -261,7 +261,7 @@ class CellAreaContext : gobject.object.ObjectWrap
         minimumHeight = the proposed new minimum height for context
         naturalHeight = the proposed new natural height for context
   */
-  void pushPreferredHeight(int minimumHeight, int naturalHeight)
+  void pushPreferredHeight(int minimumHeight, int naturalHeight) nothrow
   {
     gtk_cell_area_context_push_preferred_height(cast(GtkCellAreaContext*)this._cPtr, minimumHeight, naturalHeight);
   }
@@ -279,7 +279,7 @@ class CellAreaContext : gobject.object.ObjectWrap
         minimumWidth = the proposed new minimum width for context
         naturalWidth = the proposed new natural width for context
   */
-  void pushPreferredWidth(int minimumWidth, int naturalWidth)
+  void pushPreferredWidth(int minimumWidth, int naturalWidth) nothrow
   {
     gtk_cell_area_context_push_preferred_width(cast(GtkCellAreaContext*)this._cPtr, minimumWidth, naturalWidth);
   }
@@ -310,7 +310,7 @@ class CellAreaContext : gobject.object.ObjectWrap
       
       Since 3.0
   */
-  void reset()
+  void reset() nothrow
   {
     gtk_cell_area_context_reset(cast(GtkCellAreaContext*)this._cPtr);
   }
@@ -326,7 +326,7 @@ class CellAreaContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The #GtkCellArea this context was created by
       Returns: Builder instance for fluent chaining
   */
-  T area(gtk.cell_area.CellArea propval)
+  T area(gtk.cell_area.CellArea propval) nothrow
   {
     return setProperty("area", propval);
   }
@@ -339,7 +339,7 @@ final class CellAreaContextGidBuilder : CellAreaContextGidBuilderImpl!CellAreaCo
       Create object from builder.
       Returns: New object
   */
-  CellAreaContext build()
+  CellAreaContext build() nothrow
   {
     return new CellAreaContext(cast(void*)createGObject(CellAreaContext._getGType), No.Take);
   }

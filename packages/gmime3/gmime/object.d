@@ -26,26 +26,26 @@ class ObjectWrap : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_object_get_type != &gidSymbolNotFound ? g_mime_object_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ObjectWrap self()
+  override ObjectWrap self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Get builder for [gmime.object.ObjectWrap]
       Returns: New builder object
   */
-  static ObjectWrapGidBuilder builder()
+  static ObjectWrapGidBuilder builder() nothrow
   {
     return new ObjectWrapGidBuilder;
   }
@@ -74,7 +74,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: an appropriate #GMimeObject registered to handle MIME
         parts appropriate for content_type.
   */
-  this(gmime.parser_options.ParserOptions options, gmime.content_type.ContentType contentType)
+  this(gmime.parser_options.ParserOptions options, gmime.content_type.ContentType contentType) nothrow
   {
     GMimeObject* _cretval;
     _cretval = g_mime_object_new(options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null, contentType ? cast(GMimeContentType*)contentType._cPtr(No.Dup) : null);
@@ -96,7 +96,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: an appropriate #GMimeObject registered to handle mime-types
         of type/subtype.
   */
-  static gmime.object.ObjectWrap newType(gmime.parser_options.ParserOptions options, string type, string subtype)
+  static gmime.object.ObjectWrap newType(gmime.parser_options.ParserOptions options, string type, string subtype) nothrow
   {
     GMimeObject* _cretval;
     const(char)* _type = type.toCString(No.Alloc);
@@ -118,7 +118,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         subtype = mime subtype
         objectType = object type
   */
-  static void registerType(string type, string subtype, gobject.types.GType objectType)
+  static void registerType(string type, string subtype, gobject.types.GType objectType) nothrow
   {
     const(char)* _type = type.toCString(No.Alloc);
     const(char)* _subtype = subtype.toCString(No.Alloc);
@@ -126,13 +126,13 @@ class ObjectWrap : gobject.object.ObjectWrap
   }
 
   /** */
-  static void typeRegistryInit()
+  static void typeRegistryInit() nothrow
   {
     g_mime_object_type_registry_init();
   }
 
   /** */
-  static void typeRegistryShutdown()
+  static void typeRegistryShutdown() nothrow
   {
     g_mime_object_type_registry_shutdown();
   }
@@ -145,7 +145,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         value = header value
         charset = a charset
   */
-  void appendHeader(string header, string value, string charset = null)
+  void appendHeader(string header, string value, string charset = null) nothrow
   {
     const(char)* _header = header.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -161,7 +161,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Params:
         constraint = a #GMimeEncodingConstraint
   */
-  void encode(gmime.types.EncodingConstraint constraint)
+  void encode(gmime.types.EncodingConstraint constraint) nothrow
   {
     g_mime_object_encode(cast(GMimeObject*)this._cPtr, constraint);
   }
@@ -205,7 +205,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: a new #GMimeAutocryptHeaderList object,
         or null on error.
   */
-  gmime.autocrypt_header_list.AutocryptHeaderList getAutocryptHeaders(glib.date_time.DateTime effectiveDate, string matchheader, gmime.internet_address_list.InternetAddressList addresses, bool keepIncomplete)
+  gmime.autocrypt_header_list.AutocryptHeaderList getAutocryptHeaders(glib.date_time.DateTime effectiveDate, string matchheader, gmime.internet_address_list.InternetAddressList addresses, bool keepIncomplete) nothrow
   {
     GMimeAutocryptHeaderList* _cretval;
     const(char)* _matchheader = matchheader.toCString(No.Alloc);
@@ -219,7 +219,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: the #GMimeContentDisposition set on the
         MIME object.
   */
-  gmime.content_disposition.ContentDisposition getContentDisposition()
+  gmime.content_disposition.ContentDisposition getContentDisposition() nothrow
   {
     GMimeContentDisposition* _cretval;
     _cretval = g_mime_object_get_content_disposition(cast(GMimeObject*)this._cPtr);
@@ -237,7 +237,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         null if the param doesn't exist. If the param is set, the returned
         string will be in UTF-8.
   */
-  string getContentDispositionParameter(string name)
+  string getContentDispositionParameter(string name) nothrow
   {
     const(char)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -250,7 +250,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Gets the Content-Id of the MIME object or NULL if one is not set.
       Returns: a const pointer to the Content-Id header.
   */
-  string getContentId()
+  string getContentId() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_object_get_content_id(cast(GMimeObject*)this._cPtr);
@@ -264,7 +264,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: the content-type object for the specified
         MIME object.
   */
-  gmime.content_type.ContentType getContentType()
+  gmime.content_type.ContentType getContentType() nothrow
   {
     GMimeContentType* _cretval;
     _cretval = g_mime_object_get_content_type(cast(GMimeObject*)this._cPtr);
@@ -282,7 +282,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         the param doesn't exist. If the param is set, the returned string
         will be in UTF-8.
   */
-  string getContentTypeParameter(string name)
+  string getContentTypeParameter(string name) nothrow
   {
     const(char)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -296,7 +296,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: the disposition string which is probably one of
         #GMIME_DISPOSITION_ATTACHMENT or #GMIME_DISPOSITION_INLINE.
   */
-  string getDisposition()
+  string getDisposition() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_object_get_disposition(cast(GMimeObject*)this._cPtr);
@@ -312,7 +312,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: the value of the requested header if it
         exists or null otherwise.
   */
-  string getHeader(string header)
+  string getHeader(string header) nothrow
   {
     const(char)* _cretval;
     const(char)* _header = header.toCString(No.Alloc);
@@ -326,7 +326,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: the #GMimeHeaderList for object. Do not
         free this pointer when you are done with it.
   */
-  gmime.header_list.HeaderList getHeaderList()
+  gmime.header_list.HeaderList getHeaderList() nothrow
   {
     GMimeHeaderList* _cretval;
     _cretval = g_mime_object_get_header_list(cast(GMimeObject*)this._cPtr);
@@ -344,7 +344,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         
         Note: The returned string will not be suitable for display.
   */
-  string getHeaders(gmime.format_options.FormatOptions options = null)
+  string getHeaders(gmime.format_options.FormatOptions options = null) nothrow
   {
     char* _cretval;
     _cretval = g_mime_object_get_headers(cast(GMimeObject*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null);
@@ -360,7 +360,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         value = header value
         charset = a charset
   */
-  void prependHeader(string header, string value, string charset = null)
+  void prependHeader(string header, string value, string charset = null) nothrow
   {
     const(char)* _header = header.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -376,7 +376,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: true if the header was removed or false if it could not
         be found.
   */
-  bool removeHeader(string header)
+  bool removeHeader(string header) nothrow
   {
     bool _retval;
     const(char)* _header = header.toCString(No.Alloc);
@@ -391,7 +391,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Params:
         disposition = a #GMimeContentDisposition object
   */
-  void setContentDisposition(gmime.content_disposition.ContentDisposition disposition)
+  void setContentDisposition(gmime.content_disposition.ContentDisposition disposition) nothrow
   {
     g_mime_object_set_content_disposition(cast(GMimeObject*)this._cPtr, disposition ? cast(GMimeContentDisposition*)disposition._cPtr(No.Dup) : null);
   }
@@ -406,7 +406,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         name = parameter name
         value = parameter value
   */
-  void setContentDispositionParameter(string name, string value)
+  void setContentDispositionParameter(string name, string value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -419,7 +419,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Params:
         contentId = content-id (addr-spec portion)
   */
-  void setContentId(string contentId)
+  void setContentId(string contentId) nothrow
   {
     const(char)* _contentId = contentId.toCString(No.Alloc);
     g_mime_object_set_content_id(cast(GMimeObject*)this._cPtr, _contentId);
@@ -432,7 +432,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Params:
         contentType = a #GMimeContentType object
   */
-  void setContentType(gmime.content_type.ContentType contentType)
+  void setContentType(gmime.content_type.ContentType contentType) nothrow
   {
     g_mime_object_set_content_type(cast(GMimeObject*)this._cPtr, contentType ? cast(GMimeContentType*)contentType._cPtr(No.Dup) : null);
   }
@@ -447,7 +447,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         name = param name
         value = param value
   */
-  void setContentTypeParameter(string name, string value)
+  void setContentTypeParameter(string name, string value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -463,7 +463,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Params:
         disposition = disposition ("attachment" or "inline")
   */
-  void setDisposition(string disposition)
+  void setDisposition(string disposition) nothrow
   {
     const(char)* _disposition = disposition.toCString(No.Alloc);
     g_mime_object_set_disposition(cast(GMimeObject*)this._cPtr, _disposition);
@@ -477,7 +477,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         value = header value
         charset = a charset
   */
-  void setHeader(string header, string value, string charset = null)
+  void setHeader(string header, string value, string charset = null) nothrow
   {
     const(char)* _header = header.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -493,7 +493,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: an allocated string containing the contents of the mime
         object.
   */
-  string toString_(gmime.format_options.FormatOptions options = null)
+  string toString_(gmime.format_options.FormatOptions options = null) nothrow
   {
     char* _cretval;
     _cretval = g_mime_object_to_string(cast(GMimeObject*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null);
@@ -509,7 +509,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         stream = stream
       Returns: the number of bytes written or %-1 on fail.
   */
-  ptrdiff_t writeContentToStream(gmime.format_options.FormatOptions options, gmime.stream.Stream stream)
+  ptrdiff_t writeContentToStream(gmime.format_options.FormatOptions options, gmime.stream.Stream stream) nothrow
   {
     ptrdiff_t _retval;
     _retval = g_mime_object_write_content_to_stream(cast(GMimeObject*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, stream ? cast(GMimeStream*)stream._cPtr(No.Dup) : null);
@@ -524,7 +524,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         stream = stream
       Returns: the number of bytes written or %-1 on fail.
   */
-  ptrdiff_t writeToStream(gmime.format_options.FormatOptions options, gmime.stream.Stream stream)
+  ptrdiff_t writeToStream(gmime.format_options.FormatOptions options, gmime.stream.Stream stream) nothrow
   {
     ptrdiff_t _retval;
     _retval = g_mime_object_write_to_stream(cast(GMimeObject*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, stream ? cast(GMimeStream*)stream._cPtr(No.Dup) : null);
@@ -544,7 +544,7 @@ final class ObjectWrapGidBuilder : ObjectWrapGidBuilderImpl!ObjectWrapGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ObjectWrap build()
+  ObjectWrap build() nothrow
   {
     return new ObjectWrap(cast(void*)createGObject(ObjectWrap._getGType), Yes.Take);
   }

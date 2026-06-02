@@ -18,26 +18,26 @@ class RangeAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.Value
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_range_accessible_get_type != &gidSymbolNotFound ? gtk_range_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RangeAccessible self()
+  override RangeAccessible self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class RangeAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.Value
       Get builder for [gtk.range_accessible.RangeAccessible]
       Returns: New builder object
   */
-  static RangeAccessibleGidBuilder builder()
+  static RangeAccessibleGidBuilder builder() nothrow
   {
     return new RangeAccessibleGidBuilder;
   }
@@ -68,7 +68,7 @@ final class RangeAccessibleGidBuilder : RangeAccessibleGidBuilderImpl!RangeAcces
       Create object from builder.
       Returns: New object
   */
-  RangeAccessible build()
+  RangeAccessible build() nothrow
   {
     return new RangeAccessible(cast(void*)createGObject(RangeAccessible._getGType), No.Take);
   }

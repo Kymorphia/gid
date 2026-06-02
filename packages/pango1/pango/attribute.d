@@ -37,7 +37,7 @@ class Attribute : gobject.boxed.Boxed
         endIndex = end index of the range (in bytes). The character at this index
             is not included in the range.
   */
-  this(uint startIndex = uint.init, uint endIndex = uint.init)
+  this(uint startIndex = uint.init, uint endIndex = uint.init) nothrow
   {
     super(gMalloc(PangoAttribute.sizeof), Yes.Take);
     this.startIndex = startIndex;
@@ -45,32 +45,32 @@ class Attribute : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_attribute_get_type != &gidSymbolNotFound ? pango_attribute_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Attribute self()
+  override Attribute self() nothrow
   {
     return this;
   }
@@ -79,7 +79,7 @@ class Attribute : gobject.boxed.Boxed
       Get `startIndex` field.
       Returns: the start index of the range (in bytes).
   */
-  @property uint startIndex()
+  @property uint startIndex() nothrow
   {
     return (cast(PangoAttribute*)this._cPtr).startIndex;
   }
@@ -89,7 +89,7 @@ class Attribute : gobject.boxed.Boxed
       Params:
         propval = the start index of the range (in bytes).
   */
-  @property void startIndex(uint propval)
+  @property void startIndex(uint propval) nothrow
   {
     (cast(PangoAttribute*)this._cPtr).startIndex = propval;
   }
@@ -99,7 +99,7 @@ class Attribute : gobject.boxed.Boxed
       Returns: end index of the range (in bytes). The character at this index
           is not included in the range.
   */
-  @property uint endIndex()
+  @property uint endIndex() nothrow
   {
     return (cast(PangoAttribute*)this._cPtr).endIndex;
   }
@@ -110,7 +110,7 @@ class Attribute : gobject.boxed.Boxed
         propval = end index of the range (in bytes). The character at this index
             is not included in the range.
   */
-  @property void endIndex(uint propval)
+  @property void endIndex(uint propval) nothrow
   {
     (cast(PangoAttribute*)this._cPtr).endIndex = propval;
   }
@@ -122,7 +122,7 @@ class Attribute : gobject.boxed.Boxed
       Returns: The attribute as [pango.attr_color.AttrColor],
           or null if it's not a color attribute
   */
-  pango.attr_color.AttrColor asColor()
+  pango.attr_color.AttrColor asColor() nothrow
   {
     PangoAttrColor* _cretval;
     _cretval = pango_attribute_as_color(cast(PangoAttribute*)this._cPtr);
@@ -137,7 +137,7 @@ class Attribute : gobject.boxed.Boxed
       Returns: The attribute as [pango.attr_float.AttrFloat],
           or null if it's not a floating point attribute
   */
-  pango.attr_float.AttrFloat asFloat()
+  pango.attr_float.AttrFloat asFloat() nothrow
   {
     PangoAttrFloat* _cretval;
     _cretval = pango_attribute_as_float(cast(PangoAttribute*)this._cPtr);
@@ -152,7 +152,7 @@ class Attribute : gobject.boxed.Boxed
       Returns: The attribute as [pango.attr_font_desc.AttrFontDesc],
           or null if it's not a font description attribute
   */
-  pango.attr_font_desc.AttrFontDesc asFontDesc()
+  pango.attr_font_desc.AttrFontDesc asFontDesc() nothrow
   {
     PangoAttrFontDesc* _cretval;
     _cretval = pango_attribute_as_font_desc(cast(PangoAttribute*)this._cPtr);
@@ -167,7 +167,7 @@ class Attribute : gobject.boxed.Boxed
       Returns: The attribute as [pango.attr_font_features.AttrFontFeatures],
           or null if it's not a font features attribute
   */
-  pango.attr_font_features.AttrFontFeatures asFontFeatures()
+  pango.attr_font_features.AttrFontFeatures asFontFeatures() nothrow
   {
     PangoAttrFontFeatures* _cretval;
     _cretval = pango_attribute_as_font_features(cast(PangoAttribute*)this._cPtr);
@@ -182,7 +182,7 @@ class Attribute : gobject.boxed.Boxed
       Returns: The attribute as [pango.attr_int.AttrInt],
           or null if it's not an integer attribute
   */
-  pango.attr_int.AttrInt asInt()
+  pango.attr_int.AttrInt asInt() nothrow
   {
     PangoAttrInt* _cretval;
     _cretval = pango_attribute_as_int(cast(PangoAttribute*)this._cPtr);
@@ -197,7 +197,7 @@ class Attribute : gobject.boxed.Boxed
       Returns: The attribute as [pango.attr_language.AttrLanguage],
           or null if it's not a language attribute
   */
-  pango.attr_language.AttrLanguage asLanguage()
+  pango.attr_language.AttrLanguage asLanguage() nothrow
   {
     PangoAttrLanguage* _cretval;
     _cretval = pango_attribute_as_language(cast(PangoAttribute*)this._cPtr);
@@ -212,7 +212,7 @@ class Attribute : gobject.boxed.Boxed
       Returns: The attribute as [pango.attr_shape.AttrShape],
           or null if it's not a shape attribute
   */
-  pango.attr_shape.AttrShape asShape()
+  pango.attr_shape.AttrShape asShape() nothrow
   {
     PangoAttrShape* _cretval;
     _cretval = pango_attribute_as_shape(cast(PangoAttribute*)this._cPtr);
@@ -227,7 +227,7 @@ class Attribute : gobject.boxed.Boxed
       Returns: The attribute as [pango.attr_size.AttrSize],
           or NULL if it's not a size attribute
   */
-  pango.attr_size.AttrSize asSize()
+  pango.attr_size.AttrSize asSize() nothrow
   {
     PangoAttrSize* _cretval;
     _cretval = pango_attribute_as_size(cast(PangoAttribute*)this._cPtr);
@@ -242,7 +242,7 @@ class Attribute : gobject.boxed.Boxed
       Returns: The attribute as [pango.attr_string.AttrString],
           or null if it's not a string attribute
   */
-  pango.attr_string.AttrString asString()
+  pango.attr_string.AttrString asString() nothrow
   {
     PangoAttrString* _cretval;
     _cretval = pango_attribute_as_string(cast(PangoAttribute*)this._cPtr);
@@ -256,7 +256,7 @@ class Attribute : gobject.boxed.Boxed
           [pango.attribute.Attribute], which should be freed with
           [pango.attribute.Attribute.destroy].
   */
-  pango.attribute.Attribute copy()
+  pango.attribute.Attribute copy() nothrow
   {
     PangoAttribute* _cretval;
     _cretval = pango_attribute_copy(cast(const(PangoAttribute)*)this._cPtr);
@@ -267,7 +267,7 @@ class Attribute : gobject.boxed.Boxed
   /**
       Destroy a [pango.attribute.Attribute] and free all associated memory.
   */
-  void destroy()
+  void destroy() nothrow
   {
     pango_attribute_destroy(cast(PangoAttribute*)this._cPtr);
   }
@@ -283,7 +283,7 @@ class Attribute : gobject.boxed.Boxed
         attr2 = another [pango.attribute.Attribute]
       Returns: true if the two attributes have the same value
   */
-  bool equal(pango.attribute.Attribute attr2)
+  bool equal(pango.attribute.Attribute attr2) nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_attribute_equal(cast(const(PangoAttribute)*)this._cPtr, attr2 ? cast(const(PangoAttribute)*)attr2._cPtr(No.Dup) : null);

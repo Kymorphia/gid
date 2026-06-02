@@ -19,11 +19,8 @@ class PluginDesc
   GstPluginDesc _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gst.plugin_desc.PluginDesc");
-
     _cInstance = *cast(GstPluginDesc*)ptr;
 
     if (take)
@@ -31,7 +28,7 @@ class PluginDesc
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -40,7 +37,7 @@ class PluginDesc
       Get `majorVersion` field.
       Returns: the major version number of core that plugin was compiled for
   */
-  @property int majorVersion()
+  @property int majorVersion() nothrow
   {
     return (cast(GstPluginDesc*)this._cPtr).majorVersion;
   }
@@ -50,7 +47,7 @@ class PluginDesc
       Params:
         propval = the major version number of core that plugin was compiled for
   */
-  @property void majorVersion(int propval)
+  @property void majorVersion(int propval) nothrow
   {
     (cast(GstPluginDesc*)this._cPtr).majorVersion = propval;
   }
@@ -59,7 +56,7 @@ class PluginDesc
       Get `minorVersion` field.
       Returns: the minor version number of core that plugin was compiled for
   */
-  @property int minorVersion()
+  @property int minorVersion() nothrow
   {
     return (cast(GstPluginDesc*)this._cPtr).minorVersion;
   }
@@ -69,7 +66,7 @@ class PluginDesc
       Params:
         propval = the minor version number of core that plugin was compiled for
   */
-  @property void minorVersion(int propval)
+  @property void minorVersion(int propval) nothrow
   {
     (cast(GstPluginDesc*)this._cPtr).minorVersion = propval;
   }
@@ -78,7 +75,7 @@ class PluginDesc
       Get `name` field.
       Returns: a unique name of the plugin
   */
-  @property string name()
+  @property string name() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).name);
   }
@@ -88,7 +85,7 @@ class PluginDesc
       Params:
         propval = a unique name of the plugin
   */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).name);
     dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).name);
@@ -98,7 +95,7 @@ class PluginDesc
       Get `description` field.
       Returns: description of plugin
   */
-  @property string description()
+  @property string description() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).description);
   }
@@ -108,7 +105,7 @@ class PluginDesc
       Params:
         propval = description of plugin
   */
-  @property void description(string propval)
+  @property void description(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).description);
     dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).description);
@@ -118,7 +115,7 @@ class PluginDesc
       Get `pluginInit` field.
       Returns: pointer to the init function of this plugin.
   */
-  @property GstPluginInitFunc pluginInit()
+  @property GstPluginInitFunc pluginInit() nothrow
   {
     return (cast(GstPluginDesc*)this._cPtr).pluginInit;
   }
@@ -129,7 +126,7 @@ class PluginDesc
         propval = pointer to the init function of this plugin.
   */
 
-  @property void pluginInit(GstPluginInitFunc propval)
+  @property void pluginInit(GstPluginInitFunc propval) nothrow
   {
     (cast(GstPluginDesc*)this._cPtr).pluginInit = propval;
   }
@@ -138,7 +135,7 @@ class PluginDesc
       Get `version_` field.
       Returns: version of the plugin
   */
-  @property string version_()
+  @property string version_() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).version_);
   }
@@ -148,7 +145,7 @@ class PluginDesc
       Params:
         propval = version of the plugin
   */
-  @property void version_(string propval)
+  @property void version_(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).version_);
     dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).version_);
@@ -158,7 +155,7 @@ class PluginDesc
       Get `license` field.
       Returns: effective license of plugin
   */
-  @property string license()
+  @property string license() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).license);
   }
@@ -168,7 +165,7 @@ class PluginDesc
       Params:
         propval = effective license of plugin
   */
-  @property void license(string propval)
+  @property void license(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).license);
     dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).license);
@@ -178,7 +175,7 @@ class PluginDesc
       Get `source` field.
       Returns: source module plugin belongs to
   */
-  @property string source()
+  @property string source() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).source);
   }
@@ -188,7 +185,7 @@ class PluginDesc
       Params:
         propval = source module plugin belongs to
   */
-  @property void source(string propval)
+  @property void source(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).source);
     dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).source);
@@ -198,7 +195,7 @@ class PluginDesc
       Get `package_` field.
       Returns: shipped package plugin belongs to
   */
-  @property string package_()
+  @property string package_() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).package_);
   }
@@ -208,7 +205,7 @@ class PluginDesc
       Params:
         propval = shipped package plugin belongs to
   */
-  @property void package_(string propval)
+  @property void package_(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).package_);
     dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).package_);
@@ -218,7 +215,7 @@ class PluginDesc
       Get `origin` field.
       Returns: URL to provider of plugin
   */
-  @property string origin()
+  @property string origin() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).origin);
   }
@@ -228,7 +225,7 @@ class PluginDesc
       Params:
         propval = URL to provider of plugin
   */
-  @property void origin(string propval)
+  @property void origin(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).origin);
     dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).origin);
@@ -243,7 +240,7 @@ class PluginDesc
             should be set via the GST_PACKAGE_RELEASE_DATETIME
             preprocessor macro.
   */
-  @property string releaseDatetime()
+  @property string releaseDatetime() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).releaseDatetime);
   }
@@ -258,7 +255,7 @@ class PluginDesc
               should be set via the GST_PACKAGE_RELEASE_DATETIME
               preprocessor macro.
   */
-  @property void releaseDatetime(string propval)
+  @property void releaseDatetime(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).releaseDatetime);
     dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).releaseDatetime);

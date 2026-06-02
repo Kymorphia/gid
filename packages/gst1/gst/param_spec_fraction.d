@@ -17,11 +17,8 @@ class ParamSpecFraction
   GstParamSpecFraction _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gst.param_spec_fraction.ParamSpecFraction");
-
     _cInstance = *cast(GstParamSpecFraction*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class ParamSpecFraction
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class ParamSpecFraction
       Get `parentInstance` field.
       Returns: super class
   */
-  @property gobject.param_spec.ParamSpec parentInstance()
+  @property gobject.param_spec.ParamSpec parentInstance() nothrow
   {
     return cToD!(gobject.param_spec.ParamSpec)(cast(void*)&(cast(GstParamSpecFraction*)this._cPtr).parentInstance);
   }
@@ -48,7 +45,7 @@ class ParamSpecFraction
       Params:
         propval = super class
   */
-  @property void parentInstance(gobject.param_spec.ParamSpec propval)
+  @property void parentInstance(gobject.param_spec.ParamSpec propval) nothrow
   {
     cValueFree!(gobject.param_spec.ParamSpec)(cast(void*)&(cast(GstParamSpecFraction*)this._cPtr).parentInstance);
     dToC(propval, cast(void*)&(cast(GstParamSpecFraction*)this._cPtr).parentInstance);
@@ -58,7 +55,7 @@ class ParamSpecFraction
       Get `minNum` field.
       Returns: minimal numerator
   */
-  @property int minNum()
+  @property int minNum() nothrow
   {
     return (cast(GstParamSpecFraction*)this._cPtr).minNum;
   }
@@ -68,7 +65,7 @@ class ParamSpecFraction
       Params:
         propval = minimal numerator
   */
-  @property void minNum(int propval)
+  @property void minNum(int propval) nothrow
   {
     (cast(GstParamSpecFraction*)this._cPtr).minNum = propval;
   }
@@ -77,7 +74,7 @@ class ParamSpecFraction
       Get `minDen` field.
       Returns: minimal denominator
   */
-  @property int minDen()
+  @property int minDen() nothrow
   {
     return (cast(GstParamSpecFraction*)this._cPtr).minDen;
   }
@@ -87,7 +84,7 @@ class ParamSpecFraction
       Params:
         propval = minimal denominator
   */
-  @property void minDen(int propval)
+  @property void minDen(int propval) nothrow
   {
     (cast(GstParamSpecFraction*)this._cPtr).minDen = propval;
   }
@@ -96,7 +93,7 @@ class ParamSpecFraction
       Get `maxNum` field.
       Returns: maximal numerator
   */
-  @property int maxNum()
+  @property int maxNum() nothrow
   {
     return (cast(GstParamSpecFraction*)this._cPtr).maxNum;
   }
@@ -106,7 +103,7 @@ class ParamSpecFraction
       Params:
         propval = maximal numerator
   */
-  @property void maxNum(int propval)
+  @property void maxNum(int propval) nothrow
   {
     (cast(GstParamSpecFraction*)this._cPtr).maxNum = propval;
   }
@@ -115,7 +112,7 @@ class ParamSpecFraction
       Get `maxDen` field.
       Returns: maximal denominator
   */
-  @property int maxDen()
+  @property int maxDen() nothrow
   {
     return (cast(GstParamSpecFraction*)this._cPtr).maxDen;
   }
@@ -125,7 +122,7 @@ class ParamSpecFraction
       Params:
         propval = maximal denominator
   */
-  @property void maxDen(int propval)
+  @property void maxDen(int propval) nothrow
   {
     (cast(GstParamSpecFraction*)this._cPtr).maxDen = propval;
   }
@@ -134,7 +131,7 @@ class ParamSpecFraction
       Get `defNum` field.
       Returns: default numerator
   */
-  @property int defNum()
+  @property int defNum() nothrow
   {
     return (cast(GstParamSpecFraction*)this._cPtr).defNum;
   }
@@ -144,7 +141,7 @@ class ParamSpecFraction
       Params:
         propval = default numerator
   */
-  @property void defNum(int propval)
+  @property void defNum(int propval) nothrow
   {
     (cast(GstParamSpecFraction*)this._cPtr).defNum = propval;
   }
@@ -153,7 +150,7 @@ class ParamSpecFraction
       Get `defDen` field.
       Returns: default denominator
   */
-  @property int defDen()
+  @property int defDen() nothrow
   {
     return (cast(GstParamSpecFraction*)this._cPtr).defDen;
   }
@@ -163,7 +160,7 @@ class ParamSpecFraction
       Params:
         propval = default denominator
   */
-  @property void defDen(int propval)
+  @property void defDen(int propval) nothrow
   {
     (cast(GstParamSpecFraction*)this._cPtr).defDen = propval;
   }

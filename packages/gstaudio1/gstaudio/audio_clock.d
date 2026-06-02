@@ -22,26 +22,26 @@ class AudioClock : gst.system_clock.SystemClock
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_clock_get_type != &gidSymbolNotFound ? gst_audio_clock_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AudioClock self()
+  override AudioClock self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class AudioClock : gst.system_clock.SystemClock
       Get builder for [gstaudio.audio_clock.AudioClock]
       Returns: New builder object
   */
-  static AudioClockGidBuilder builder()
+  static AudioClockGidBuilder builder() nothrow
   {
     return new AudioClockGidBuilder;
   }
@@ -65,14 +65,21 @@ class AudioClock : gst.system_clock.SystemClock
         func = a function
       Returns: a new #GstAudioClock casted to a #GstClock.
   */
-  this(string name, gstaudio.types.AudioClockGetTimeFunc func)
+  this(string name, gstaudio.types.AudioClockGetTimeFunc func) nothrow
   {
-    extern(C) GstClockTime _funcCallback(GstClock* clock, void* userData)
+    extern(C) GstClockTime _funcCallback(GstClock* clock, void* userData) nothrow
     {
       gst.types.ClockTime _dretval;
       auto _dlg = cast(gstaudio.types.AudioClockGetTimeFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.clock.Clock)(cast(void*)clock, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.clock.Clock)(cast(void*)clock, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstaudio.types.AudioClockGetTimeFunc");
+      }
       auto _retval = cast(GstClockTime)_dretval;
 
       return _retval;
@@ -93,7 +100,7 @@ class AudioClock : gst.system_clock.SystemClock
         time = a #GstClockTime
       Returns: time adjusted with the internal offset.
   */
-  gst.types.ClockTime adjust(gst.types.ClockTime time)
+  gst.types.ClockTime adjust(gst.types.ClockTime time) nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_audio_clock_adjust(cast(GstAudioClock*)this._cPtr, time);
@@ -105,7 +112,7 @@ class AudioClock : gst.system_clock.SystemClock
       any offsets.
       Returns: the time as reported by the time function of the audio clock
   */
-  override gst.types.ClockTime getTime()
+  override gst.types.ClockTime getTime() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_audio_clock_get_time(cast(GstAudioClock*)this._cPtr);
@@ -120,7 +127,7 @@ class AudioClock : gst.system_clock.SystemClock
       After calling this function, clock will return the last returned time for
       the rest of its lifetime.
   */
-  void invalidate()
+  void invalidate() nothrow
   {
     gst_audio_clock_invalidate(cast(GstAudioClock*)this._cPtr);
   }
@@ -134,7 +141,7 @@ class AudioClock : gst.system_clock.SystemClock
       Params:
         time = a #GstClockTime
   */
-  void reset(gst.types.ClockTime time)
+  void reset(gst.types.ClockTime time) nothrow
   {
     gst_audio_clock_reset(cast(GstAudioClock*)this._cPtr, time);
   }
@@ -152,7 +159,7 @@ final class AudioClockGidBuilder : AudioClockGidBuilderImpl!AudioClockGidBuilder
       Create object from builder.
       Returns: New object
   */
-  AudioClock build()
+  AudioClock build() nothrow
   {
     return new AudioClock(cast(void*)createGObject(AudioClock._getGType), Yes.Take);
   }

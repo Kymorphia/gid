@@ -37,7 +37,7 @@ template DtlsClientConnectionT()
         certificate we expect, which is useful for servers that serve
         virtual hosts.
   */
-  @property gio.socket_connectable.SocketConnectable serverIdentity()
+  @property gio.socket_connectable.SocketConnectable serverIdentity() nothrow
   {
     return getServerIdentity();
   }
@@ -60,7 +60,7 @@ template DtlsClientConnectionT()
           certificate we expect, which is useful for servers that serve
           virtual hosts.
   */
-  @property void serverIdentity(gio.socket_connectable.SocketConnectable propval)
+  @property void serverIdentity(gio.socket_connectable.SocketConnectable propval) nothrow
   {
     setServerIdentity(propval);
   }
@@ -86,7 +86,7 @@ template DtlsClientConnectionT()
   
       Deprecated: Do not attempt to ignore validation errors.
   */
-  @property gio.types.TlsCertificateFlags validationFlags()
+  @property gio.types.TlsCertificateFlags validationFlags() nothrow
   {
     return getValidationFlags();
   }
@@ -113,7 +113,7 @@ template DtlsClientConnectionT()
   
       Deprecated: Do not attempt to ignore validation errors.
   */
-  @property void validationFlags(gio.types.TlsCertificateFlags propval)
+  @property void validationFlags(gio.types.TlsCertificateFlags propval) nothrow
   {
     setValidationFlags(propval);
   }
@@ -125,7 +125,7 @@ template DtlsClientConnectionT()
         expected server identity, or null if the expected identity is not
         known.
   */
-  override gio.socket_connectable.SocketConnectable getServerIdentity()
+  override gio.socket_connectable.SocketConnectable getServerIdentity() nothrow
   {
     GSocketConnectable* _cretval;
     _cretval = g_dtls_client_connection_get_server_identity(cast(GDtlsClientConnection*)this._cPtr);
@@ -143,7 +143,7 @@ template DtlsClientConnectionT()
   
       Deprecated: Do not attempt to ignore validation errors.
   */
-  override gio.types.TlsCertificateFlags getValidationFlags()
+  override gio.types.TlsCertificateFlags getValidationFlags() nothrow
   {
     GTlsCertificateFlags _cretval;
     _cretval = g_dtls_client_connection_get_validation_flags(cast(GDtlsClientConnection*)this._cPtr);
@@ -160,7 +160,7 @@ template DtlsClientConnectionT()
       Params:
         identity = a #GSocketConnectable describing the expected server identity
   */
-  override void setServerIdentity(gio.socket_connectable.SocketConnectable identity)
+  override void setServerIdentity(gio.socket_connectable.SocketConnectable identity) nothrow
   {
     g_dtls_client_connection_set_server_identity(cast(GDtlsClientConnection*)this._cPtr, identity ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)identity)._cPtr(No.Dup) : null);
   }
@@ -179,7 +179,7 @@ template DtlsClientConnectionT()
   
       Deprecated: Do not attempt to ignore validation errors.
   */
-  override void setValidationFlags(gio.types.TlsCertificateFlags flags)
+  override void setValidationFlags(gio.types.TlsCertificateFlags flags) nothrow
   {
     g_dtls_client_connection_set_validation_flags(cast(GDtlsClientConnection*)this._cPtr, flags);
   }
@@ -208,7 +208,7 @@ template DtlsClientConnectionGidBuilderT()
           virtual hosts.
       Returns: Builder instance for fluent chaining
   */
-  T serverIdentity(gio.socket_connectable.SocketConnectable propval)
+  T serverIdentity(gio.socket_connectable.SocketConnectable propval) nothrow
   {
     return setProperty("server-identity", propval);
   }
@@ -236,7 +236,7 @@ template DtlsClientConnectionGidBuilderT()
   
       Deprecated: Do not attempt to ignore validation errors.
   */
-  T validationFlags(gio.types.TlsCertificateFlags propval)
+  T validationFlags(gio.types.TlsCertificateFlags propval) nothrow
   {
     return setProperty("validation-flags", propval);
   }

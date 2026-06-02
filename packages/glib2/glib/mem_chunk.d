@@ -14,62 +14,59 @@ class MemChunk
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.mem_chunk.MemChunk");
-
     _cInstancePtr = cast(GMemChunk*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
 
   /** */
-  void* alloc()
+  void* alloc() nothrow
   {
     auto _retval = g_mem_chunk_alloc(cast(GMemChunk*)this._cPtr);
     return _retval;
   }
 
   /** */
-  void* alloc0()
+  void* alloc0() nothrow
   {
     auto _retval = g_mem_chunk_alloc0(cast(GMemChunk*)this._cPtr);
     return _retval;
   }
 
   /** */
-  void clean()
+  void clean() nothrow
   {
     g_mem_chunk_clean(cast(GMemChunk*)this._cPtr);
   }
 
   /** */
-  void destroy()
+  void destroy() nothrow
   {
     g_mem_chunk_destroy(cast(GMemChunk*)this._cPtr);
   }
 
   /** */
-  void print()
+  void print() nothrow
   {
     g_mem_chunk_print(cast(GMemChunk*)this._cPtr);
   }
 
   /** */
-  void reset()
+  void reset() nothrow
   {
     g_mem_chunk_reset(cast(GMemChunk*)this._cPtr);
   }
 
   /** */
-  static void info()
+  static void info() nothrow
   {
     g_mem_chunk_info();
   }

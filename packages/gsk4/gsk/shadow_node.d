@@ -16,11 +16,8 @@ class ShadowNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.shadow_node.ShadowNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -28,7 +25,7 @@ class ShadowNode : gsk.render_node.RenderNode
       Retrieves the child [gsk.render_node.RenderNode] of the shadow node.
       Returns: the child render node
   */
-  gsk.render_node.RenderNode getChild()
+  gsk.render_node.RenderNode getChild() nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_shadow_node_get_child(cast(const(GskRenderNode)*)this._cPtr);
@@ -40,7 +37,7 @@ class ShadowNode : gsk.render_node.RenderNode
       Retrieves the number of shadows in the node.
       Returns: the number of shadows.
   */
-  size_t getNShadows()
+  size_t getNShadows() nothrow
   {
     size_t _retval;
     _retval = gsk_shadow_node_get_n_shadows(cast(const(GskRenderNode)*)this._cPtr);
@@ -54,7 +51,7 @@ class ShadowNode : gsk.render_node.RenderNode
         i = the given index
       Returns: the shadow data
   */
-  gsk.shadow.Shadow getShadow(size_t i)
+  gsk.shadow.Shadow getShadow(size_t i) nothrow
   {
     const(GskShadow)* _cretval;
     _cretval = gsk_shadow_node_get_shadow(cast(const(GskRenderNode)*)this._cPtr, i);

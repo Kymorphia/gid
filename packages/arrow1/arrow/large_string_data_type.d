@@ -14,26 +14,26 @@ class LargeStringDataType : arrow.data_type.DataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_large_string_data_type_get_type != &gidSymbolNotFound ? garrow_large_string_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LargeStringDataType self()
+  override LargeStringDataType self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class LargeStringDataType : arrow.data_type.DataType
       Get builder for [arrow.large_string_data_type.LargeStringDataType]
       Returns: New builder object
   */
-  static LargeStringDataTypeGidBuilder builder()
+  static LargeStringDataTypeGidBuilder builder() nothrow
   {
     return new LargeStringDataTypeGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowLargeStringDataType* _cretval;
     _cretval = garrow_large_string_data_type_new();
@@ -68,7 +68,7 @@ final class LargeStringDataTypeGidBuilder : LargeStringDataTypeGidBuilderImpl!La
       Create object from builder.
       Returns: New object
   */
-  LargeStringDataType build()
+  LargeStringDataType build() nothrow
   {
     return new LargeStringDataType(cast(void*)createGObject(LargeStringDataType._getGType), Yes.Take);
   }

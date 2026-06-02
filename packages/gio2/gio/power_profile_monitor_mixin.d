@@ -42,7 +42,7 @@ template PowerProfileMonitorT()
       Get `powerSaverEnabled` property.
       Returns: Whether “Power Saver” mode is enabled on the system.
   */
-  @property bool powerSaverEnabled()
+  @property bool powerSaverEnabled() nothrow
   {
     return getPowerSaverEnabled();
   }
@@ -56,7 +56,7 @@ template PowerProfileMonitorT()
       changed.
       Returns: Whether the system is in “Power Saver” mode.
   */
-  override bool getPowerSaverEnabled()
+  override bool getPowerSaverEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_power_profile_monitor_get_power_saver_enabled(cast(GPowerProfileMonitor*)this._cPtr);

@@ -297,7 +297,7 @@
 //!class MarkupParseContext
 
   /** */
-  this(ref MarkupParser parser, MarkupParseFlags flags)
+  this(ref MarkupParser parser, MarkupParseFlags flags) nothrow
   {
     GMarkupParseContext* _cretval;
     GMarkupParseFlags _flags = cast(GMarkupParseFlags)cast(uint)flags;
@@ -310,7 +310,7 @@
 //!class OptionGroup
 
   /** */
-  this(string name, string description, string helpDescription)
+  this(string name, string description, string helpDescription) nothrow
   {
     GOptionGroup* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -324,7 +324,7 @@
 //!set record[ThreadPool][free-function] freePool
 //!class ThreadPool
 
-  private static void freePool(GThreadPool* pool)
+  private static void freePool(GThreadPool* pool) nothrow
   {
     g_thread_pool_free(pool, true, false); // immediate, wait
   }
@@ -333,7 +333,7 @@
 //!set record[Timer].function[new][introspectable] 1
 //!rename record[Timer].function[new] constructor
 
-//# Add Timer.elapsed() without uselss microseconds parameter
+//# Add Timer.elapsed() without useless microseconds parameter
 //!class Timer
 
   /**
@@ -345,7 +345,7 @@
    * Returns: seconds elapsed as a floating point value, including any
    *   fractional part.
    */
-  double elapsed()
+  double elapsed() nothrow
   {
     double _retval;
     _retval = g_timer_elapsed(cast(GTimer*)_cPtr, null);
@@ -374,7 +374,7 @@
         format = format string
       Returns: The formatted date string, will be empty if result exceeds 1024 bytes
    */
-  string strftime(string format)
+  string strftime(string format) nothrow
   {
     char[] buf;
     const(char)* _format = format.toCString(No.Alloc);

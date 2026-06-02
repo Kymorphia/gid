@@ -82,26 +82,26 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_size_group_get_type != &gidSymbolNotFound ? gtk_size_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SizeGroup self()
+  override SizeGroup self() nothrow
   {
     return this;
   }
@@ -110,7 +110,7 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Get builder for [gtk.size_group.SizeGroup]
       Returns: New builder object
   */
-  static SizeGroupGidBuilder builder()
+  static SizeGroupGidBuilder builder() nothrow
   {
     return new SizeGroupGidBuilder;
   }
@@ -119,7 +119,7 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Get `mode` property.
       Returns: The direction in which the size group affects requested sizes.
   */
-  @property gtk.types.SizeGroupMode mode()
+  @property gtk.types.SizeGroupMode mode() nothrow
   {
     return getMode();
   }
@@ -129,7 +129,7 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         propval = The direction in which the size group affects requested sizes.
   */
-  @property void mode(gtk.types.SizeGroupMode propval)
+  @property void mode(gtk.types.SizeGroupMode propval) nothrow
   {
     setMode(propval);
   }
@@ -143,7 +143,7 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
         mode = the mode for the new size group.
       Returns: a newly created [gtk.size_group.SizeGroup]
   */
-  this(gtk.types.SizeGroupMode mode)
+  this(gtk.types.SizeGroupMode mode) nothrow
   {
     GtkSizeGroup* _cretval;
     _cretval = gtk_size_group_new(mode);
@@ -166,7 +166,7 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         widget = the [gtk.widget.Widget] to add
   */
-  void addWidget(gtk.widget.Widget widget)
+  void addWidget(gtk.widget.Widget widget) nothrow
   {
     gtk_size_group_add_widget(cast(GtkSizeGroup*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -175,7 +175,7 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Gets the current mode of the size group.
       Returns: the current mode of the size group.
   */
-  gtk.types.SizeGroupMode getMode()
+  gtk.types.SizeGroupMode getMode() nothrow
   {
     GtkSizeGroupMode _cretval;
     _cretval = gtk_size_group_get_mode(cast(GtkSizeGroup*)this._cPtr);
@@ -188,7 +188,7 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Returns: a [glib.slist.SList] of
           widgets. The list is owned by GTK and should not be modified.
   */
-  gtk.widget.Widget[] getWidgets()
+  gtk.widget.Widget[] getWidgets() nothrow
   {
     GSList* _cretval;
     _cretval = gtk_size_group_get_widgets(cast(GtkSizeGroup*)this._cPtr);
@@ -202,7 +202,7 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         widget = the [gtk.widget.Widget] to remove
   */
-  void removeWidget(gtk.widget.Widget widget)
+  void removeWidget(gtk.widget.Widget widget) nothrow
   {
     gtk_size_group_remove_widget(cast(GtkSizeGroup*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -219,7 +219,7 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         mode = the mode to set for the size group.
   */
-  void setMode(gtk.types.SizeGroupMode mode)
+  void setMode(gtk.types.SizeGroupMode mode) nothrow
   {
     gtk_size_group_set_mode(cast(GtkSizeGroup*)this._cPtr, mode);
   }
@@ -237,7 +237,7 @@ class SizeGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gt
         propval = The direction in which the size group affects requested sizes.
       Returns: Builder instance for fluent chaining
   */
-  T mode(gtk.types.SizeGroupMode propval)
+  T mode(gtk.types.SizeGroupMode propval) nothrow
   {
     return setProperty("mode", propval);
   }
@@ -250,7 +250,7 @@ final class SizeGroupGidBuilder : SizeGroupGidBuilderImpl!SizeGroupGidBuilder
       Create object from builder.
       Returns: New object
   */
-  SizeGroup build()
+  SizeGroup build() nothrow
   {
     return new SizeGroup(cast(void*)createGObject(SizeGroup._getGType), Yes.Take);
   }

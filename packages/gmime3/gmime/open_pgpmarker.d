@@ -15,11 +15,8 @@ class OpenPGPMarker
   GMimeOpenPGPMarker _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gmime.open_pgpmarker.OpenPGPMarker");
-
     _cInstance = *cast(GMimeOpenPGPMarker*)ptr;
 
     if (take)
@@ -27,7 +24,7 @@ class OpenPGPMarker
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -36,7 +33,7 @@ class OpenPGPMarker
       Get `marker` field.
       Returns: The OpenPGP marker.
   */
-  @property string marker()
+  @property string marker() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GMimeOpenPGPMarker*)this._cPtr).marker);
   }
@@ -46,7 +43,7 @@ class OpenPGPMarker
       Params:
         propval = The OpenPGP marker.
   */
-  @property void marker(string propval)
+  @property void marker(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GMimeOpenPGPMarker*)this._cPtr).marker);
     dToC(propval, cast(void*)&(cast(GMimeOpenPGPMarker*)this._cPtr).marker);
@@ -56,7 +53,7 @@ class OpenPGPMarker
       Get `len` field.
       Returns: The length of the OpenPGP marker.
   */
-  @property size_t len()
+  @property size_t len() nothrow
   {
     return (cast(GMimeOpenPGPMarker*)this._cPtr).len;
   }
@@ -66,7 +63,7 @@ class OpenPGPMarker
       Params:
         propval = The length of the OpenPGP marker.
   */
-  @property void len(size_t propval)
+  @property void len(size_t propval) nothrow
   {
     (cast(GMimeOpenPGPMarker*)this._cPtr).len = propval;
   }
@@ -75,7 +72,7 @@ class OpenPGPMarker
       Get `before` field.
       Returns: The #GMimeOpenPGPState that the state machine must be in before encountering this marker.
   */
-  @property gmime.types.OpenPGPState before()
+  @property gmime.types.OpenPGPState before() nothrow
   {
     return cast(gmime.types.OpenPGPState)(cast(GMimeOpenPGPMarker*)this._cPtr).before;
   }
@@ -85,7 +82,7 @@ class OpenPGPMarker
       Params:
         propval = The #GMimeOpenPGPState that the state machine must be in before encountering this marker.
   */
-  @property void before(gmime.types.OpenPGPState propval)
+  @property void before(gmime.types.OpenPGPState propval) nothrow
   {
     (cast(GMimeOpenPGPMarker*)this._cPtr).before = cast(GMimeOpenPGPState)propval;
   }
@@ -94,7 +91,7 @@ class OpenPGPMarker
       Get `after` field.
       Returns: The #GMimeOpenPGPState that the state machine will transition into once this marker is found.
   */
-  @property gmime.types.OpenPGPState after()
+  @property gmime.types.OpenPGPState after() nothrow
   {
     return cast(gmime.types.OpenPGPState)(cast(GMimeOpenPGPMarker*)this._cPtr).after;
   }
@@ -104,7 +101,7 @@ class OpenPGPMarker
       Params:
         propval = The #GMimeOpenPGPState that the state machine will transition into once this marker is found.
   */
-  @property void after(gmime.types.OpenPGPState propval)
+  @property void after(gmime.types.OpenPGPState propval) nothrow
   {
     (cast(GMimeOpenPGPMarker*)this._cPtr).after = cast(GMimeOpenPGPState)propval;
   }
@@ -113,7 +110,7 @@ class OpenPGPMarker
       Get `isEndMarker` field.
       Returns: true if the marker is an end marker; otherwise, false.
   */
-  @property bool isEndMarker()
+  @property bool isEndMarker() nothrow
   {
     return cast(bool)(cast(GMimeOpenPGPMarker*)this._cPtr).isEndMarker;
   }
@@ -123,7 +120,7 @@ class OpenPGPMarker
       Params:
         propval = true if the marker is an end marker; otherwise, false.
   */
-  @property void isEndMarker(bool propval)
+  @property void isEndMarker(bool propval) nothrow
   {
     (cast(GMimeOpenPGPMarker*)this._cPtr).isEndMarker = propval;
   }

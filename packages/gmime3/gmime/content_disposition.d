@@ -19,26 +19,26 @@ class ContentDisposition : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_content_disposition_get_type != &gidSymbolNotFound ? g_mime_content_disposition_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ContentDisposition self()
+  override ContentDisposition self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class ContentDisposition : gobject.object.ObjectWrap
       Get builder for [gmime.content_disposition.ContentDisposition]
       Returns: New builder object
   */
-  static ContentDispositionGidBuilder builder()
+  static ContentDispositionGidBuilder builder() nothrow
   {
     return new ContentDispositionGidBuilder;
   }
@@ -56,7 +56,7 @@ class ContentDisposition : gobject.object.ObjectWrap
       Creates a new #GMimeContentDisposition object.
       Returns: a new #GMimeContentDisposition object.
   */
-  this()
+  this() nothrow
   {
     GMimeContentDisposition* _cretval;
     _cretval = g_mime_content_disposition_new();
@@ -71,7 +71,7 @@ class ContentDisposition : gobject.object.ObjectWrap
         str = Content-Disposition field value
       Returns: a new #GMimeContentDisposition object.
   */
-  static gmime.content_disposition.ContentDisposition parse(gmime.parser_options.ParserOptions options, string str)
+  static gmime.content_disposition.ContentDisposition parse(gmime.parser_options.ParserOptions options, string str) nothrow
   {
     GMimeContentDisposition* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -87,7 +87,7 @@ class ContentDisposition : gobject.object.ObjectWrap
         options = a #GMimeFormatOptions or null
       Returns: a new string containing the encoded header value.
   */
-  string encode(gmime.format_options.FormatOptions options = null)
+  string encode(gmime.format_options.FormatOptions options = null) nothrow
   {
     char* _cretval;
     _cretval = g_mime_content_disposition_encode(cast(GMimeContentDisposition*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null);
@@ -100,7 +100,7 @@ class ContentDisposition : gobject.object.ObjectWrap
       Returns: the disposition string which is probably one of
         #GMIME_DISPOSITION_ATTACHMENT or #GMIME_DISPOSITION_INLINE.
   */
-  string getDisposition()
+  string getDisposition() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_content_disposition_get_disposition(cast(GMimeContentDisposition*)this._cPtr);
@@ -117,7 +117,7 @@ class ContentDisposition : gobject.object.ObjectWrap
         parameter is not set. If the parameter is set, the returned string
         will be in UTF-8.
   */
-  string getParameter(string name)
+  string getParameter(string name) nothrow
   {
     const(char)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -130,7 +130,7 @@ class ContentDisposition : gobject.object.ObjectWrap
       Gets the Content-Disposition parameter list.
       Returns: the Content-Disposition's parameter list.
   */
-  gmime.param_list.ParamList getParameters()
+  gmime.param_list.ParamList getParameters() nothrow
   {
     GMimeParamList* _cretval;
     _cretval = g_mime_content_disposition_get_parameters(cast(GMimeContentDisposition*)this._cPtr);
@@ -142,7 +142,7 @@ class ContentDisposition : gobject.object.ObjectWrap
       Determines if a Content-Disposition has a value of "attachment".
       Returns: true if the value matches "attachment", otherwise false.
   */
-  bool isAttachment()
+  bool isAttachment() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_content_disposition_is_attachment(cast(GMimeContentDisposition*)this._cPtr);
@@ -158,7 +158,7 @@ class ContentDisposition : gobject.object.ObjectWrap
       Params:
         value = disposition value
   */
-  void setDisposition(string value)
+  void setDisposition(string value) nothrow
   {
     const(char)* _value = value.toCString(No.Alloc);
     g_mime_content_disposition_set_disposition(cast(GMimeContentDisposition*)this._cPtr, _value);
@@ -174,7 +174,7 @@ class ContentDisposition : gobject.object.ObjectWrap
         name = parameter name
         value = parameter value
   */
-  void setParameter(string name, string value)
+  void setParameter(string name, string value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -194,7 +194,7 @@ final class ContentDispositionGidBuilder : ContentDispositionGidBuilderImpl!Cont
       Create object from builder.
       Returns: New object
   */
-  ContentDisposition build()
+  ContentDisposition build() nothrow
   {
     return new ContentDisposition(cast(void*)createGObject(ContentDisposition._getGType), Yes.Take);
   }

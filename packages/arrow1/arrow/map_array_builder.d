@@ -17,26 +17,26 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_map_array_builder_get_type != &gidSymbolNotFound ? garrow_map_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MapArrayBuilder self()
+  override MapArrayBuilder self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.map_array_builder.MapArrayBuilder]
       Returns: New builder object
   */
-  static MapArrayBuilderGidBuilder builder()
+  static MapArrayBuilderGidBuilder builder() nothrow
   {
     return new MapArrayBuilderGidBuilder;
   }
@@ -106,7 +106,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /** */
-  arrow.array_builder.ArrayBuilder getItemBuilder()
+  arrow.array_builder.ArrayBuilder getItemBuilder() nothrow
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_map_array_builder_get_item_builder(cast(GArrowMapArrayBuilder*)this._cPtr);
@@ -115,7 +115,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /** */
-  arrow.array_builder.ArrayBuilder getKeyBuilder()
+  arrow.array_builder.ArrayBuilder getKeyBuilder() nothrow
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_map_array_builder_get_key_builder(cast(GArrowMapArrayBuilder*)this._cPtr);
@@ -124,7 +124,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /** */
-  arrow.array_builder.ArrayBuilder getValueBuilder()
+  arrow.array_builder.ArrayBuilder getValueBuilder() nothrow
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_map_array_builder_get_value_builder(cast(GArrowMapArrayBuilder*)this._cPtr);
@@ -145,7 +145,7 @@ final class MapArrayBuilderGidBuilder : MapArrayBuilderGidBuilderImpl!MapArrayBu
       Create object from builder.
       Returns: New object
   */
-  MapArrayBuilder build()
+  MapArrayBuilder build() nothrow
   {
     return new MapArrayBuilder(cast(void*)createGObject(MapArrayBuilder._getGType), Yes.Take);
   }

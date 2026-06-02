@@ -29,26 +29,26 @@ class Device : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_device_get_type != &gidSymbolNotFound ? gdk_device_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Device self()
+  override Device self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class Device : gobject.object.ObjectWrap
       Get builder for [gdk.device.Device]
       Returns: New builder object
   */
-  static DeviceGidBuilder builder()
+  static DeviceGidBuilder builder() nothrow
   {
     return new DeviceGidBuilder;
   }
@@ -67,7 +67,7 @@ class Device : gobject.object.ObjectWrap
       Returns: Associated pointer or keyboard with this device, if any. Devices of type #GDK_DEVICE_TYPE_MASTER
         always come in keyboard/pointer pairs. Other device types will have a null associated device.
   */
-  @property gdk.device.Device associatedDevice()
+  @property gdk.device.Device associatedDevice() nothrow
   {
     return getAssociatedDevice();
   }
@@ -76,7 +76,7 @@ class Device : gobject.object.ObjectWrap
       Get `axes` property.
       Returns: The axes currently available for this device.
   */
-  @property gdk.types.AxisFlags axes()
+  @property gdk.types.AxisFlags axes() nothrow
   {
     return getAxes();
   }
@@ -85,7 +85,7 @@ class Device : gobject.object.ObjectWrap
       Get `deviceManager` property.
       Returns: The #GdkDeviceManager the #GdkDevice pertains to.
   */
-  @property gdk.device_manager.DeviceManager deviceManager()
+  @property gdk.device_manager.DeviceManager deviceManager() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.device_manager.DeviceManager)("device-manager");
   }
@@ -94,7 +94,7 @@ class Device : gobject.object.ObjectWrap
       Get `display` property.
       Returns: The #GdkDisplay the #GdkDevice pertains to.
   */
-  @property gdk.display.Display display()
+  @property gdk.display.Display display() nothrow
   {
     return getDisplay();
   }
@@ -104,19 +104,19 @@ class Device : gobject.object.ObjectWrap
       Returns: Whether the device is represented by a cursor on the screen. Devices of type
         [gdk.types.DeviceType.Master] will have true here.
   */
-  @property bool hasCursor()
+  @property bool hasCursor() nothrow
   {
     return getHasCursor();
   }
 
   /** */
-  @property gdk.types.InputMode inputMode()
+  @property gdk.types.InputMode inputMode() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.types.InputMode)("input-mode");
   }
 
   /** */
-  @property void inputMode(gdk.types.InputMode propval)
+  @property void inputMode(gdk.types.InputMode propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.types.InputMode)("input-mode", propval);
   }
@@ -125,7 +125,7 @@ class Device : gobject.object.ObjectWrap
       Get `inputSource` property.
       Returns: Source type for the device.
   */
-  @property gdk.types.InputSource inputSource()
+  @property gdk.types.InputSource inputSource() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.types.InputSource)("input-source");
   }
@@ -134,7 +134,7 @@ class Device : gobject.object.ObjectWrap
       Get `nAxes` property.
       Returns: Number of axes in the device.
   */
-  @property uint nAxes()
+  @property uint nAxes() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-axes");
   }
@@ -143,7 +143,7 @@ class Device : gobject.object.ObjectWrap
       Get `name` property.
       Returns: The device name.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return getName();
   }
@@ -154,7 +154,7 @@ class Device : gobject.object.ObjectWrap
         Will be 0 if the device is not a touch device or if the number
         of touches is unknown.
   */
-  @property uint numTouches()
+  @property uint numTouches() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("num-touches");
   }
@@ -163,7 +163,7 @@ class Device : gobject.object.ObjectWrap
       Get `productId` property.
       Returns: Product ID of this device, see [gdk.device.Device.getProductId].
   */
-  @property string productId()
+  @property string productId() nothrow
   {
     return getProductId();
   }
@@ -172,7 +172,7 @@ class Device : gobject.object.ObjectWrap
       Get `seat` property.
       Returns: #GdkSeat of this device.
   */
-  @property gdk.seat.Seat seat()
+  @property gdk.seat.Seat seat() nothrow
   {
     return getSeat();
   }
@@ -182,13 +182,13 @@ class Device : gobject.object.ObjectWrap
       Params:
         propval = #GdkSeat of this device.
   */
-  @property void seat(gdk.seat.Seat propval)
+  @property void seat(gdk.seat.Seat propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.seat.Seat)("seat", propval);
   }
 
   /** */
-  @property gdk.device_tool.DeviceTool tool()
+  @property gdk.device_tool.DeviceTool tool() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.device_tool.DeviceTool)("tool");
   }
@@ -197,7 +197,7 @@ class Device : gobject.object.ObjectWrap
       Get `type` property.
       Returns: Device role in the device manager.
   */
-  @property gdk.types.DeviceType type()
+  @property gdk.types.DeviceType type() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.types.DeviceType)("type");
   }
@@ -206,7 +206,7 @@ class Device : gobject.object.ObjectWrap
       Get `vendorId` property.
       Returns: Vendor ID of this device, see [gdk.device.Device.getVendorId].
   */
-  @property string vendorId()
+  @property string vendorId() nothrow
   {
     return getVendorId();
   }
@@ -228,7 +228,7 @@ class Device : gobject.object.ObjectWrap
       Deprecated: The symbol was never meant to be used outside
           of GTK+
   */
-  static bool grabInfoLibgtkOnly(gdk.display.Display display, gdk.device.Device device, out gdk.window.Window grabWindow, out bool ownerEvents)
+  static bool grabInfoLibgtkOnly(gdk.display.Display display, gdk.device.Device device, out gdk.window.Window grabWindow, out bool ownerEvents) nothrow
   {
     bool _retval;
     GdkWindow* _grabWindow;
@@ -252,7 +252,7 @@ class Device : gobject.object.ObjectWrap
       Returns: The associated device, or
           null
   */
-  gdk.device.Device getAssociatedDevice()
+  gdk.device.Device getAssociatedDevice() nothrow
   {
     GdkDevice* _cretval;
     _cretval = gdk_device_get_associated_device(cast(GdkDevice*)this._cPtr);
@@ -264,7 +264,7 @@ class Device : gobject.object.ObjectWrap
       Returns the axes currently available on the device.
       Returns: 
   */
-  gdk.types.AxisFlags getAxes()
+  gdk.types.AxisFlags getAxes() nothrow
   {
     GdkAxisFlags _cretval;
     _cretval = gdk_device_get_axes(cast(GdkDevice*)this._cPtr);
@@ -279,7 +279,7 @@ class Device : gobject.object.ObjectWrap
         index = the index of the axis.
       Returns: a #GdkAxisUse specifying how the axis is used.
   */
-  gdk.types.AxisUse getAxisUse(uint index)
+  gdk.types.AxisUse getAxisUse(uint index) nothrow
   {
     GdkAxisUse _cretval;
     _cretval = gdk_device_get_axis_use(cast(GdkDevice*)this._cPtr, index);
@@ -291,7 +291,7 @@ class Device : gobject.object.ObjectWrap
       Returns the device type for device.
       Returns: the #GdkDeviceType for device.
   */
-  gdk.types.DeviceType getDeviceType()
+  gdk.types.DeviceType getDeviceType() nothrow
   {
     GdkDeviceType _cretval;
     _cretval = gdk_device_get_device_type(cast(GdkDevice*)this._cPtr);
@@ -304,7 +304,7 @@ class Device : gobject.object.ObjectWrap
       Returns: a #GdkDisplay. This memory is owned
                  by GTK+, and must not be freed or unreffed.
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gdk_device_get_display(cast(GdkDevice*)this._cPtr);
@@ -317,7 +317,7 @@ class Device : gobject.object.ObjectWrap
       This is not meaningful for keyboard devices, which don't have a pointer.
       Returns: true if the pointer follows device motion
   */
-  bool getHasCursor()
+  bool getHasCursor() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_device_get_has_cursor(cast(GdkDevice*)this._cPtr);
@@ -334,7 +334,7 @@ class Device : gobject.object.ObjectWrap
         modifiers = return value for modifiers.
       Returns: true if keyval is set for index.
   */
-  bool getKey(uint index, out uint keyval, out gdk.types.ModifierType modifiers)
+  bool getKey(uint index, out uint keyval, out gdk.types.ModifierType modifiers) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_device_get_key(cast(GdkDevice*)this._cPtr, index, cast(uint*)&keyval, &modifiers);
@@ -349,7 +349,7 @@ class Device : gobject.object.ObjectWrap
       application's windows.
       Returns: the last window the device
   */
-  gdk.window.Window getLastEventWindow()
+  gdk.window.Window getLastEventWindow() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gdk_device_get_last_event_window(cast(GdkDevice*)this._cPtr);
@@ -361,7 +361,7 @@ class Device : gobject.object.ObjectWrap
       Determines the mode of the device.
       Returns: a #GdkInputSource
   */
-  gdk.types.InputMode getMode()
+  gdk.types.InputMode getMode() nothrow
   {
     GdkInputMode _cretval;
     _cretval = gdk_device_get_mode(cast(GdkDevice*)this._cPtr);
@@ -373,7 +373,7 @@ class Device : gobject.object.ObjectWrap
       Returns the number of axes the device currently has.
       Returns: the number of axes.
   */
-  int getNAxes()
+  int getNAxes() nothrow
   {
     int _retval;
     _retval = gdk_device_get_n_axes(cast(GdkDevice*)this._cPtr);
@@ -384,7 +384,7 @@ class Device : gobject.object.ObjectWrap
       Returns the number of keys the device currently has.
       Returns: the number of keys.
   */
-  int getNKeys()
+  int getNKeys() nothrow
   {
     int _retval;
     _retval = gdk_device_get_n_keys(cast(GdkDevice*)this._cPtr);
@@ -395,7 +395,7 @@ class Device : gobject.object.ObjectWrap
       Determines the name of the device.
       Returns: a name
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gdk_device_get_name(cast(GdkDevice*)this._cPtr);
@@ -415,7 +415,7 @@ class Device : gobject.object.ObjectWrap
         x = location to store root window X coordinate of device, or null.
         y = location to store root window Y coordinate of device, or null.
   */
-  void getPosition(out gdk.screen.Screen screen, out int x, out int y)
+  void getPosition(out gdk.screen.Screen screen, out int x, out int y) nothrow
   {
     GdkScreen* _screen;
     gdk_device_get_position(cast(GdkDevice*)this._cPtr, &_screen, cast(int*)&x, cast(int*)&y);
@@ -434,7 +434,7 @@ class Device : gobject.object.ObjectWrap
         x = location to store root window X coordinate of device, or null.
         y = location to store root window Y coordinate of device, or null.
   */
-  void getPositionDouble(out gdk.screen.Screen screen, out double x, out double y)
+  void getPositionDouble(out gdk.screen.Screen screen, out double x, out double y) nothrow
   {
     GdkScreen* _screen;
     gdk_device_get_position_double(cast(GdkDevice*)this._cPtr, &_screen, cast(double*)&x, cast(double*)&y);
@@ -447,7 +447,7 @@ class Device : gobject.object.ObjectWrap
       it. See [gdk.device.Device.getVendorId] for more information.
       Returns: the product ID, or null
   */
-  string getProductId()
+  string getProductId() nothrow
   {
     const(char)* _cretval;
     _cretval = gdk_device_get_product_id(cast(GdkDevice*)this._cPtr);
@@ -460,7 +460,7 @@ class Device : gobject.object.ObjectWrap
       Returns: A #GdkSeat. This memory is owned by GTK+ and
                  must not be freed.
   */
-  gdk.seat.Seat getSeat()
+  gdk.seat.Seat getSeat() nothrow
   {
     GdkSeat* _cretval;
     _cretval = gdk_device_get_seat(cast(GdkDevice*)this._cPtr);
@@ -472,7 +472,7 @@ class Device : gobject.object.ObjectWrap
       Determines the type of the device.
       Returns: a #GdkInputSource
   */
-  gdk.types.InputSource getSource()
+  gdk.types.InputSource getSource() nothrow
   {
     GdkInputSource _cretval;
     _cretval = gdk_device_get_source(cast(GdkDevice*)this._cPtr);
@@ -509,7 +509,7 @@ class Device : gobject.object.ObjectWrap
       ```
       Returns: the vendor ID, or null
   */
-  string getVendorId()
+  string getVendorId() nothrow
   {
     const(char)* _cretval;
     _cretval = gdk_device_get_vendor_id(cast(GdkDevice*)this._cPtr);
@@ -533,7 +533,7 @@ class Device : gobject.object.ObjectWrap
       Returns: the #GdkWindow under the
         device position, or null.
   */
-  gdk.window.Window getWindowAtPosition(out int winX, out int winY)
+  gdk.window.Window getWindowAtPosition(out int winX, out int winY) nothrow
   {
     GdkWindow* _cretval;
     _cretval = gdk_device_get_window_at_position(cast(GdkDevice*)this._cPtr, cast(int*)&winX, cast(int*)&winY);
@@ -558,7 +558,7 @@ class Device : gobject.object.ObjectWrap
       Returns: the #GdkWindow under the
           device position, or null.
   */
-  gdk.window.Window getWindowAtPositionDouble(out double winX, out double winY)
+  gdk.window.Window getWindowAtPositionDouble(out double winX, out double winY) nothrow
   {
     GdkWindow* _cretval;
     _cretval = gdk_device_get_window_at_position_double(cast(GdkDevice*)this._cPtr, cast(double*)&winX, cast(double*)&winY);
@@ -611,7 +611,7 @@ class Device : gobject.object.ObjectWrap
   
       Deprecated: Use [gdk.seat.Seat.grab] instead.
   */
-  gdk.types.GrabStatus grab(gdk.window.Window window, gdk.types.GrabOwnership grabOwnership, bool ownerEvents, gdk.types.EventMask eventMask, gdk.cursor.Cursor cursor, uint time)
+  gdk.types.GrabStatus grab(gdk.window.Window window, gdk.types.GrabOwnership grabOwnership, bool ownerEvents, gdk.types.EventMask eventMask, gdk.cursor.Cursor cursor, uint time) nothrow
   {
     GdkGrabStatus _cretval;
     _cretval = gdk_device_grab(cast(GdkDevice*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, grabOwnership, ownerEvents, eventMask, cursor ? cast(GdkCursor*)cursor._cPtr(No.Dup) : null, time);
@@ -627,7 +627,7 @@ class Device : gobject.object.ObjectWrap
                  freed with [glib.list.List.free], the contents of the list are
                  owned by GTK+ and should not be freed.
   */
-  gdk.device.Device[] listSlaveDevices()
+  gdk.device.Device[] listSlaveDevices() nothrow
   {
     GList* _cretval;
     _cretval = gdk_device_list_slave_devices(cast(GdkDevice*)this._cPtr);
@@ -642,7 +642,7 @@ class Device : gobject.object.ObjectWrap
         index = the index of the axis
         use = specifies how the axis is used
   */
-  void setAxisUse(uint index, gdk.types.AxisUse use)
+  void setAxisUse(uint index, gdk.types.AxisUse use) nothrow
   {
     gdk_device_set_axis_use(cast(GdkDevice*)this._cPtr, index, use);
   }
@@ -656,7 +656,7 @@ class Device : gobject.object.ObjectWrap
         keyval = the keyval to generate
         modifiers = the modifiers to set
   */
-  void setKey(uint index, uint keyval, gdk.types.ModifierType modifiers)
+  void setKey(uint index, uint keyval, gdk.types.ModifierType modifiers) nothrow
   {
     gdk_device_set_key(cast(GdkDevice*)this._cPtr, index, keyval, modifiers);
   }
@@ -674,7 +674,7 @@ class Device : gobject.object.ObjectWrap
         mode = the input mode.
       Returns: true if the mode was successfully changed.
   */
-  bool setMode(gdk.types.InputMode mode)
+  bool setMode(gdk.types.InputMode mode) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_device_set_mode(cast(GdkDevice*)this._cPtr, mode);
@@ -689,7 +689,7 @@ class Device : gobject.object.ObjectWrap
   
       Deprecated: Use [gdk.seat.Seat.ungrab] instead.
   */
-  void ungrab(uint time)
+  void ungrab(uint time) nothrow
   {
     gdk_device_ungrab(cast(GdkDevice*)this._cPtr, time);
   }
@@ -712,7 +712,7 @@ class Device : gobject.object.ObjectWrap
         x = the X coordinate of the destination.
         y = the Y coordinate of the destination.
   */
-  void warp(gdk.screen.Screen screen, int x, int y)
+  void warp(gdk.screen.Screen screen, int x, int y) nothrow
   {
     gdk_device_warp(cast(GdkDevice*)this._cPtr, screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null, x, y);
   }
@@ -738,13 +738,13 @@ class Device : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.device.Device)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -753,7 +753,14 @@ class Device : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.device.Device.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -778,14 +785,14 @@ class Device : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectToolChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToolChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.device_tool.DeviceTool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.device.Device)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -797,7 +804,14 @@ class Device : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.device.Device.toolChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -815,7 +829,7 @@ class DeviceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The #GdkDeviceManager the #GdkDevice pertains to.
       Returns: Builder instance for fluent chaining
   */
-  T deviceManager(gdk.device_manager.DeviceManager propval)
+  T deviceManager(gdk.device_manager.DeviceManager propval) nothrow
   {
     return setProperty("device-manager", propval);
   }
@@ -826,7 +840,7 @@ class DeviceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The #GdkDisplay the #GdkDevice pertains to.
       Returns: Builder instance for fluent chaining
   */
-  T display(gdk.display.Display propval)
+  T display(gdk.display.Display propval) nothrow
   {
     return setProperty("display", propval);
   }
@@ -838,13 +852,13 @@ class DeviceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           [gdk.types.DeviceType.Master] will have true here.
       Returns: Builder instance for fluent chaining
   */
-  T hasCursor(bool propval)
+  T hasCursor(bool propval) nothrow
   {
     return setProperty("has-cursor", propval);
   }
 
   /** */
-  T inputMode(gdk.types.InputMode propval)
+  T inputMode(gdk.types.InputMode propval) nothrow
   {
     return setProperty("input-mode", propval);
   }
@@ -855,7 +869,7 @@ class DeviceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Source type for the device.
       Returns: Builder instance for fluent chaining
   */
-  T inputSource(gdk.types.InputSource propval)
+  T inputSource(gdk.types.InputSource propval) nothrow
   {
     return setProperty("input-source", propval);
   }
@@ -866,7 +880,7 @@ class DeviceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The device name.
       Returns: Builder instance for fluent chaining
   */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -879,7 +893,7 @@ class DeviceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           of touches is unknown.
       Returns: Builder instance for fluent chaining
   */
-  T numTouches(uint propval)
+  T numTouches(uint propval) nothrow
   {
     return setProperty("num-touches", propval);
   }
@@ -890,7 +904,7 @@ class DeviceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Product ID of this device, see [gdk.device.Device.getProductId].
       Returns: Builder instance for fluent chaining
   */
-  T productId(string propval)
+  T productId(string propval) nothrow
   {
     return setProperty("product-id", propval);
   }
@@ -901,7 +915,7 @@ class DeviceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = #GdkSeat of this device.
       Returns: Builder instance for fluent chaining
   */
-  T seat(gdk.seat.Seat propval)
+  T seat(gdk.seat.Seat propval) nothrow
   {
     return setProperty("seat", propval);
   }
@@ -912,7 +926,7 @@ class DeviceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Device role in the device manager.
       Returns: Builder instance for fluent chaining
   */
-  T type(gdk.types.DeviceType propval)
+  T type(gdk.types.DeviceType propval) nothrow
   {
     return setProperty("type", propval);
   }
@@ -923,7 +937,7 @@ class DeviceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Vendor ID of this device, see [gdk.device.Device.getVendorId].
       Returns: Builder instance for fluent chaining
   */
-  T vendorId(string propval)
+  T vendorId(string propval) nothrow
   {
     return setProperty("vendor-id", propval);
   }
@@ -936,7 +950,7 @@ final class DeviceGidBuilder : DeviceGidBuilderImpl!DeviceGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Device build()
+  Device build() nothrow
   {
     return new Device(cast(void*)createGObject(Device._getGType), No.Take);
   }

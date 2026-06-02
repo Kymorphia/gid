@@ -42,7 +42,7 @@ struct VideoAlignment
   /**
       Set align to its default values with no padding and no alignment.
   */
-  void reset()
+  void reset() nothrow
   {
     gst_video_alignment_reset(cast(GstVideoAlignment*)&this);
   }

@@ -15,32 +15,32 @@ class IconSource : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_icon_source_get_type != &gidSymbolNotFound ? gtk_icon_source_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override IconSource self()
+  override IconSource self() nothrow
   {
     return this;
   }
@@ -78,7 +78,7 @@ class IconSource : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  this()
+  this() nothrow
   {
     GtkIconSource* _cretval;
     _cretval = gtk_icon_source_new();
@@ -91,7 +91,7 @@ class IconSource : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  gtk.icon_source.IconSource copy()
+  gtk.icon_source.IconSource copy() nothrow
   {
     GtkIconSource* _cretval;
     _cretval = gtk_icon_source_copy(cast(const(GtkIconSource)*)this._cPtr);
@@ -107,7 +107,7 @@ class IconSource : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  gtk.types.TextDirection getDirection()
+  gtk.types.TextDirection getDirection() nothrow
   {
     GtkTextDirection _cretval;
     _cretval = gtk_icon_source_get_direction(cast(const(GtkIconSource)*)this._cPtr);
@@ -121,7 +121,7 @@ class IconSource : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  bool getDirectionWildcarded()
+  bool getDirectionWildcarded() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_icon_source_get_direction_wildcarded(cast(const(GtkIconSource)*)this._cPtr);
@@ -137,7 +137,7 @@ class IconSource : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  string getFilename()
+  string getFilename() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_icon_source_get_filename(cast(const(GtkIconSource)*)this._cPtr);
@@ -153,7 +153,7 @@ class IconSource : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  string getIconName()
+  string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_icon_source_get_icon_name(cast(const(GtkIconSource)*)this._cPtr);
@@ -173,7 +173,7 @@ class IconSource : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  gdkpixbuf.pixbuf.Pixbuf getPixbuf()
+  gdkpixbuf.pixbuf.Pixbuf getPixbuf() nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gtk_icon_source_get_pixbuf(cast(const(GtkIconSource)*)this._cPtr);
@@ -188,7 +188,7 @@ class IconSource : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  gtk.types.IconSize getSize()
+  gtk.types.IconSize getSize() nothrow
   {
     GtkIconSize _cretval;
     _cretval = gtk_icon_source_get_size(cast(const(GtkIconSource)*)this._cPtr);
@@ -202,7 +202,7 @@ class IconSource : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  bool getSizeWildcarded()
+  bool getSizeWildcarded() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_icon_source_get_size_wildcarded(cast(const(GtkIconSource)*)this._cPtr);
@@ -217,7 +217,7 @@ class IconSource : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  gtk.types.StateType getState()
+  gtk.types.StateType getState() nothrow
   {
     GtkStateType _cretval;
     _cretval = gtk_icon_source_get_state(cast(const(GtkIconSource)*)this._cPtr);
@@ -231,7 +231,7 @@ class IconSource : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  bool getStateWildcarded()
+  bool getStateWildcarded() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_icon_source_get_state_wildcarded(cast(const(GtkIconSource)*)this._cPtr);
@@ -252,7 +252,7 @@ class IconSource : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  void setDirection(gtk.types.TextDirection direction)
+  void setDirection(gtk.types.TextDirection direction) nothrow
   {
     gtk_icon_source_set_direction(cast(GtkIconSource*)this._cPtr, direction);
   }
@@ -273,7 +273,7 @@ class IconSource : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  void setDirectionWildcarded(bool setting)
+  void setDirectionWildcarded(bool setting) nothrow
   {
     gtk_icon_source_set_direction_wildcarded(cast(GtkIconSource*)this._cPtr, setting);
   }
@@ -287,7 +287,7 @@ class IconSource : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  void setFilename(string filename)
+  void setFilename(string filename) nothrow
   {
     const(char)* _filename = filename.toCString(No.Alloc);
     gtk_icon_source_set_filename(cast(GtkIconSource*)this._cPtr, _filename);
@@ -302,7 +302,7 @@ class IconSource : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  void setIconName(string iconName = null)
+  void setIconName(string iconName = null) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_icon_source_set_icon_name(cast(GtkIconSource*)this._cPtr, _iconName);
@@ -317,7 +317,7 @@ class IconSource : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf) nothrow
   {
     gtk_icon_source_set_pixbuf(cast(GtkIconSource*)this._cPtr, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
@@ -336,7 +336,7 @@ class IconSource : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  void setSize(gtk.types.IconSize size)
+  void setSize(gtk.types.IconSize size) nothrow
   {
     gtk_icon_source_set_size(cast(GtkIconSource*)this._cPtr, size);
   }
@@ -360,7 +360,7 @@ class IconSource : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  void setSizeWildcarded(bool setting)
+  void setSizeWildcarded(bool setting) nothrow
   {
     gtk_icon_source_set_size_wildcarded(cast(GtkIconSource*)this._cPtr, setting);
   }
@@ -379,7 +379,7 @@ class IconSource : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  void setState(gtk.types.StateType state)
+  void setState(gtk.types.StateType state) nothrow
   {
     gtk_icon_source_set_state(cast(GtkIconSource*)this._cPtr, state);
   }
@@ -404,7 +404,7 @@ class IconSource : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  void setStateWildcarded(bool setting)
+  void setStateWildcarded(bool setting) nothrow
   {
     gtk_icon_source_set_state_wildcarded(cast(GtkIconSource*)this._cPtr, setting);
   }

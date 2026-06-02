@@ -33,26 +33,26 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_connection_get_type != &gidSymbolNotFound ? gda_connection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Connection self()
+  override Connection self() nothrow
   {
     return this;
   }
@@ -61,43 +61,43 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Get builder for [gda.connection.Connection]
       Returns: New builder object
   */
-  static ConnectionGidBuilder builder()
+  static ConnectionGidBuilder builder() nothrow
   {
     return new ConnectionGidBuilder;
   }
 
   /** */
-  @property string authString()
+  @property string authString() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("auth-string");
   }
 
   /** */
-  @property void authString(string propval)
+  @property void authString(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("auth-string", propval);
   }
 
   /** */
-  @property string cncString()
+  @property string cncString() nothrow
   {
     return getCncString();
   }
 
   /** */
-  @property void cncString(string propval)
+  @property void cncString(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("cnc-string", propval);
   }
 
   /** */
-  @property string dsn()
+  @property string dsn() nothrow
   {
     return getDsn();
   }
 
   /** */
-  @property void dsn(string propval)
+  @property void dsn(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("dsn", propval);
   }
@@ -107,7 +107,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Returns: Defines the number of #GdaConnectionEvent objects kept in memory which can
         be fetched using [gda.connection.Connection.getEvents].
   */
-  @property int eventsHistorySize()
+  @property int eventsHistorySize() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("events-history-size");
   }
@@ -118,7 +118,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         propval = Defines the number of #GdaConnectionEvent objects kept in memory which can
           be fetched using [gda.connection.Connection.getEvents].
   */
-  @property void eventsHistorySize(int propval)
+  @property void eventsHistorySize(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("events-history-size", propval);
   }
@@ -129,7 +129,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         debug some problems. If non zero, this value is the number of microseconds waited before actually
         executing each query.
   */
-  @property uint executionSlowdown()
+  @property uint executionSlowdown() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("execution-slowdown");
   }
@@ -141,7 +141,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
           debug some problems. If non zero, this value is the number of microseconds waited before actually
           executing each query.
   */
-  @property void executionSlowdown(uint propval)
+  @property void executionSlowdown(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("execution-slowdown", propval);
   }
@@ -150,7 +150,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Get `executionTimer` property.
       Returns: Computes execution times for each statement executed.
   */
-  @property bool executionTimer()
+  @property bool executionTimer() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("execution-timer");
   }
@@ -160,7 +160,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Params:
         propval = Computes execution times for each statement executed.
   */
-  @property void executionTimer(bool propval)
+  @property void executionTimer(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("execution-timer", propval);
   }
@@ -174,7 +174,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         Note: this property is used internally by Libgda and should not be directly used by any programs. Setting
         this property has no effect, reading it is supported, though.
   */
-  @property bool isWrapper()
+  @property bool isWrapper() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("is-wrapper");
   }
@@ -189,19 +189,19 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
           Note: this property is used internally by Libgda and should not be directly used by any programs. Setting
           this property has no effect, reading it is supported, though.
   */
-  @property void isWrapper(bool propval)
+  @property void isWrapper(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("is-wrapper", propval);
   }
 
   /** */
-  @property gda.meta_store.MetaStore metaStore()
+  @property gda.meta_store.MetaStore metaStore() nothrow
   {
     return getMetaStore();
   }
 
   /** */
-  @property void metaStore(gda.meta_store.MetaStore propval)
+  @property void metaStore(gda.meta_store.MetaStore propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gda.meta_store.MetaStore)("meta-store", propval);
   }
@@ -213,7 +213,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         
         If the connection is not a thread wrapper, then this property has no effect.
   */
-  @property bool monitorWrappedInMainloop()
+  @property bool monitorWrappedInMainloop() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("monitor-wrapped-in-mainloop");
   }
@@ -226,31 +226,31 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
           
           If the connection is not a thread wrapper, then this property has no effect.
   */
-  @property void monitorWrappedInMainloop(bool propval)
+  @property void monitorWrappedInMainloop(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("monitor-wrapped-in-mainloop", propval);
   }
 
   /** */
-  @property gda.server_provider.ServerProvider provider()
+  @property gda.server_provider.ServerProvider provider() nothrow
   {
     return getProvider();
   }
 
   /** */
-  @property void provider(gda.server_provider.ServerProvider propval)
+  @property void provider(gda.server_provider.ServerProvider propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gda.server_provider.ServerProvider)("provider", propval);
   }
 
   /** */
-  @property void* threadOwner()
+  @property void* threadOwner() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(void*)("thread-owner");
   }
 
   /** */
-  @property void threadOwner(void* propval)
+  @property void threadOwner(void* propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(void*)("thread-owner", propval);
   }
@@ -308,7 +308,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_connection_error_quark();
@@ -430,7 +430,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         autoUnlink = if true, then the database file will be removed afterwards
       Returns: a new #GdaConnection, or null if an error occurred
   */
-  static gda.connection.Connection openSqlite(string directory, string filename, bool autoUnlink)
+  static gda.connection.Connection openSqlite(string directory, string filename, bool autoUnlink) nothrow
   {
     GdaConnection* _cretval;
     const(char)* _directory = directory.toCString(No.Alloc);
@@ -473,7 +473,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         outUsername = a place to store the new string containing the &lt;username&gt; part
         outPassword = a place to store the new string containing the &lt;password&gt; part, or null
   */
-  static void stringSplit(string string_, out string outCncParams, out string outProvider, out string outUsername, out string outPassword)
+  static void stringSplit(string string_, out string outCncParams, out string outProvider, out string outUsername, out string outPassword) nothrow
   {
     const(char)* _string_ = string_.toCString(No.Alloc);
     char* _outCncParams;
@@ -502,7 +502,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Params:
         event = is stored internally, so you don't need to unref it.
   */
-  void addEvent(gda.connection_event.ConnectionEvent event)
+  void addEvent(gda.connection_event.ConnectionEvent event) nothrow
   {
     gda_connection_add_event(cast(GdaConnection*)this._cPtr, event ? cast(GdaConnectionEvent*)event._cPtr(Yes.Dup) : null);
   }
@@ -518,7 +518,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         gdaStmt = a #GdaStatement object
         preparedStmt = a prepared statement object (as a #GdaPStmt object, or more likely a descendant)
   */
-  void addPreparedStatement(gda.statement.Statement gdaStmt, gda.pstmt.PStmt preparedStmt)
+  void addPreparedStatement(gda.statement.Statement gdaStmt, gda.pstmt.PStmt preparedStmt) nothrow
   {
     gda_connection_add_prepared_statement(cast(GdaConnection*)this._cPtr, gdaStmt ? cast(GdaStatement*)gdaStmt._cPtr(No.Dup) : null, preparedStmt ? cast(GdaPStmt*)preparedStmt._cPtr(No.Dup) : null);
   }
@@ -647,7 +647,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       This function lets you clear the list of #GdaConnectionEvent's of the
       given connection.
   */
-  void clearEventsList()
+  void clearEventsList() nothrow
   {
     gda_connection_clear_events_list(cast(GdaConnection*)this._cPtr);
   }
@@ -656,7 +656,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Closes the connection to the underlying data source, but first emits the
       "conn-to-close" signal.
   */
-  void close()
+  void close() nothrow
   {
     gda_connection_close(cast(GdaConnection*)this._cPtr);
   }
@@ -664,7 +664,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   /**
       Closes the connection to the underlying data source, without emiting any warning signal.
   */
-  void closeNoWarning()
+  void closeNoWarning() nothrow
   {
     gda_connection_close_no_warning(cast(GdaConnection*)this._cPtr);
   }
@@ -720,7 +720,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       using [gda.sql_parser.SqlParser.new_].
       Returns: a new #GdaSqlParser object, or null
   */
-  gda.sql_parser.SqlParser createParser()
+  gda.sql_parser.SqlParser createParser() nothrow
   {
     GdaSqlParser* _cretval;
     _cretval = gda_connection_create_parser(cast(GdaConnection*)this._cPtr);
@@ -735,7 +735,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Params:
         gdaStmt = a #GdaStatement object
   */
-  void delPreparedStatement(gda.statement.Statement gdaStmt)
+  void delPreparedStatement(gda.statement.Statement gdaStmt) nothrow
   {
     gda_connection_del_prepared_statement(cast(GdaConnection*)this._cPtr, gdaStmt ? cast(GdaStatement*)gdaStmt._cPtr(No.Dup) : null);
   }
@@ -828,7 +828,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Gets the user name used to open this connection.
       Returns: the user name.
   */
-  string getAuthentication()
+  string getAuthentication() nothrow
   {
     const(char)* _cretval;
     _cretval = gda_connection_get_authentication(cast(GdaConnection*)this._cPtr);
@@ -844,7 +844,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       to open a connection on the underlying data source.
       Returns: the connection string used when opening the connection.
   */
-  string getCncString()
+  string getCncString() nothrow
   {
     const(char)* _cretval;
     _cretval = gda_connection_get_cnc_string(cast(GdaConnection*)this._cPtr);
@@ -874,7 +874,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   }
 
   /** */
-  string getDsn()
+  string getDsn() nothrow
   {
     const(char)* _cretval;
     _cretval = gda_connection_get_dsn(cast(GdaConnection*)this._cPtr);
@@ -889,7 +889,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Warning: the cnc object may change the list if connection events occur
       Returns: a #GList of #GdaConnectionEvent objects (the list should not be modified)
   */
-  gda.connection_event.ConnectionEvent[] getEvents()
+  gda.connection_event.ConnectionEvent[] getEvents() nothrow
   {
     const(GList)* _cretval;
     _cretval = gda_connection_get_events(cast(GdaConnection*)this._cPtr);
@@ -901,7 +901,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Get or initializes the #GdaMetaStore associated to cnc
       Returns: a #GdaMetaStore object
   */
-  gda.meta_store.MetaStore getMetaStore()
+  gda.meta_store.MetaStore getMetaStore() nothrow
   {
     GdaMetaStore* _cretval;
     _cretval = gda_connection_get_meta_store(cast(GdaConnection*)this._cPtr);
@@ -936,7 +936,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Gets the #GdaConnectionOptions used to open this connection.
       Returns: the connection options.
   */
-  gda.types.ConnectionOptions getOptions()
+  gda.types.ConnectionOptions getOptions() nothrow
   {
     GdaConnectionOptions _cretval;
     _cretval = gda_connection_get_options(cast(GdaConnection*)this._cPtr);
@@ -952,7 +952,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         gdaStmt = a #GdaStatement object
       Returns: the prepared statement, or null if no association exists
   */
-  gda.pstmt.PStmt getPreparedStatement(gda.statement.Statement gdaStmt)
+  gda.pstmt.PStmt getPreparedStatement(gda.statement.Statement gdaStmt) nothrow
   {
     GdaPStmt* _cretval;
     _cretval = gda_connection_get_prepared_statement(cast(GdaConnection*)this._cPtr, gdaStmt ? cast(GdaStatement*)gdaStmt._cPtr(No.Dup) : null);
@@ -964,7 +964,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Gets a pointer to the #GdaServerProvider object used to access the database
       Returns: the #GdaServerProvider (NEVER NULL)
   */
-  gda.server_provider.ServerProvider getProvider()
+  gda.server_provider.ServerProvider getProvider() nothrow
   {
     GdaServerProvider* _cretval;
     _cretval = gda_connection_get_provider(cast(GdaConnection*)this._cPtr);
@@ -976,7 +976,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Gets the name (identifier) of the database provider used by cnc
       Returns: a non modifiable string
   */
-  string getProviderName()
+  string getProviderName() nothrow
   {
     const(char)* _cretval;
     _cretval = gda_connection_get_provider_name(cast(GdaConnection*)this._cPtr);
@@ -991,7 +991,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       If null is returned, then no transaction has been associated with cnc
       Returns: a #GdaTransactionStatus object, or null
   */
-  gda.transaction_status.TransactionStatus getTransactionStatus()
+  gda.transaction_status.TransactionStatus getTransactionStatus() nothrow
   {
     GdaTransactionStatus* _cretval;
     _cretval = gda_connection_get_transaction_status(cast(GdaConnection*)this._cPtr);
@@ -1033,7 +1033,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Checks whether a connection is open or not.
       Returns: true if the connection is open, false if it's not.
   */
-  bool isOpened()
+  bool isOpened() nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_connection_is_opened(cast(GdaConnection*)this._cPtr);
@@ -1107,7 +1107,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Returns: a pointer to the next available connection event, or null if event should
         be ignored
   */
-  gda.connection_event.ConnectionEvent pointAvailableEvent(gda.types.ConnectionEventType type)
+  gda.connection_event.ConnectionEvent pointAvailableEvent(gda.types.ConnectionEventType type) nothrow
   {
     GdaConnectionEvent* _cretval;
     _cretval = gda_connection_point_available_event(cast(GdaConnection*)this._cPtr, type);
@@ -1136,7 +1136,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         id = an SQL identifier
       Returns: a new string, to free with [glib.global.gfree] once not needed anymore
   */
-  string quoteSqlIdentifier(string id)
+  string quoteSqlIdentifier(string id) nothrow
   {
     char* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -1383,7 +1383,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         feature = feature to ask for.
       Returns: true if the provider supports it, false if not.
   */
-  bool supportsFeature(gda.types.ConnectionFeature feature)
+  bool supportsFeature(gda.types.ConnectionFeature feature) nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_connection_supports_feature(cast(GdaConnection*)this._cPtr, feature);
@@ -1486,7 +1486,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         from = #GValue to convert from
       Returns: escaped and quoted value or NULL if not supported.
   */
-  string valueToSqlString(gobject.value.Value from)
+  string valueToSqlString(gobject.value.Value from) nothrow
   {
     char* _cretval;
     _cretval = gda_connection_value_to_sql_string(cast(GdaConnection*)this._cPtr, from ? cast(GValue*)from._cPtr(No.Dup) : null);
@@ -1509,13 +1509,13 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectConnClosed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectConnClosed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.connection.Connection)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1524,7 +1524,14 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.connection.Connection.connClosed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1546,13 +1553,13 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectConnOpened(T)(T callback, Flag!"After" after = No.After)
+  gulong connectConnOpened(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.connection.Connection)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1561,7 +1568,14 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.connection.Connection.connOpened");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1583,13 +1597,13 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectConnToClose(T)(T callback, Flag!"After" after = No.After)
+  gulong connectConnToClose(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.connection.Connection)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1598,7 +1612,14 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.connection.Connection.connToClose");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1620,13 +1641,13 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDsnChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDsnChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.connection.Connection)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1635,7 +1656,14 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.connection.Connection.dsnChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1660,14 +1688,14 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectError(T)(T callback, Flag!"After" after = No.After)
+  gulong connectError(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.connection_event.ConnectionEvent)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.connection.Connection)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1679,7 +1707,14 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.connection.Connection.error");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1702,13 +1737,13 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTransactionStatusChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTransactionStatusChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.connection.Connection)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1717,7 +1752,14 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.connection.Connection.transactionStatusChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1732,19 +1774,19 @@ class ConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
   mixin LockableGidBuilderT!();
 
   /** */
-  T authString(string propval)
+  T authString(string propval) nothrow
   {
     return setProperty("auth-string", propval);
   }
 
   /** */
-  T cncString(string propval)
+  T cncString(string propval) nothrow
   {
     return setProperty("cnc-string", propval);
   }
 
   /** */
-  T dsn(string propval)
+  T dsn(string propval) nothrow
   {
     return setProperty("dsn", propval);
   }
@@ -1756,7 +1798,7 @@ class ConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
           be fetched using [gda.connection.Connection.getEvents].
       Returns: Builder instance for fluent chaining
   */
-  T eventsHistorySize(int propval)
+  T eventsHistorySize(int propval) nothrow
   {
     return setProperty("events-history-size", propval);
   }
@@ -1769,7 +1811,7 @@ class ConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
           executing each query.
       Returns: Builder instance for fluent chaining
   */
-  T executionSlowdown(uint propval)
+  T executionSlowdown(uint propval) nothrow
   {
     return setProperty("execution-slowdown", propval);
   }
@@ -1780,7 +1822,7 @@ class ConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
         propval = Computes execution times for each statement executed.
       Returns: Builder instance for fluent chaining
   */
-  T executionTimer(bool propval)
+  T executionTimer(bool propval) nothrow
   {
     return setProperty("execution-timer", propval);
   }
@@ -1796,13 +1838,13 @@ class ConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
           this property has no effect, reading it is supported, though.
       Returns: Builder instance for fluent chaining
   */
-  T isWrapper(bool propval)
+  T isWrapper(bool propval) nothrow
   {
     return setProperty("is-wrapper", propval);
   }
 
   /** */
-  T metaStore(gda.meta_store.MetaStore propval)
+  T metaStore(gda.meta_store.MetaStore propval) nothrow
   {
     return setProperty("meta-store", propval);
   }
@@ -1816,19 +1858,19 @@ class ConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
           If the connection is not a thread wrapper, then this property has no effect.
       Returns: Builder instance for fluent chaining
   */
-  T monitorWrappedInMainloop(bool propval)
+  T monitorWrappedInMainloop(bool propval) nothrow
   {
     return setProperty("monitor-wrapped-in-mainloop", propval);
   }
 
   /** */
-  T provider(gda.server_provider.ServerProvider propval)
+  T provider(gda.server_provider.ServerProvider propval) nothrow
   {
     return setProperty("provider", propval);
   }
 
   /** */
-  T threadOwner(void* propval)
+  T threadOwner(void* propval) nothrow
   {
     return setProperty("thread-owner", propval);
   }
@@ -1841,7 +1883,7 @@ final class ConnectionGidBuilder : ConnectionGidBuilderImpl!ConnectionGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Connection build()
+  Connection build() nothrow
   {
     return new Connection(cast(void*)createGObject(Connection._getGType), No.Take);
   }
@@ -1849,12 +1891,12 @@ final class ConnectionGidBuilder : ConnectionGidBuilderImpl!ConnectionGidBuilder
 
 class ConnectionException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.connection.Connection.errorQuark, cast(int)code, msg);
   }

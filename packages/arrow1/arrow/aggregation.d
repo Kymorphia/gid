@@ -15,26 +15,26 @@ class Aggregation : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_aggregation_get_type != &gidSymbolNotFound ? garrow_aggregation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Aggregation self()
+  override Aggregation self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class Aggregation : gobject.object.ObjectWrap
       Get builder for [arrow.aggregation.Aggregation]
       Returns: New builder object
   */
-  static AggregationGidBuilder builder()
+  static AggregationGidBuilder builder() nothrow
   {
     return new AggregationGidBuilder;
   }
@@ -52,7 +52,7 @@ class Aggregation : gobject.object.ObjectWrap
       Get `function_` property.
       Returns: The function name to aggregate.
   */
-  @property string function_()
+  @property string function_() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("function");
   }
@@ -61,7 +61,7 @@ class Aggregation : gobject.object.ObjectWrap
       Get `input` property.
       Returns: The input field name of aggregate function.
   */
-  @property string input()
+  @property string input() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("input");
   }
@@ -70,7 +70,7 @@ class Aggregation : gobject.object.ObjectWrap
       Get `options` property.
       Returns: The options of aggregate function.
   */
-  @property arrow.function_options.FunctionOptions options()
+  @property arrow.function_options.FunctionOptions options() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.function_options.FunctionOptions)("options");
   }
@@ -79,13 +79,13 @@ class Aggregation : gobject.object.ObjectWrap
       Get `output` property.
       Returns: The output field name of aggregate function.
   */
-  @property string output()
+  @property string output() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("output");
   }
 
   /** */
-  this(string function_, arrow.function_options.FunctionOptions options, string input, string output)
+  this(string function_, arrow.function_options.FunctionOptions options, string input, string output) nothrow
   {
     GArrowAggregation* _cretval;
     const(char)* _function_ = function_.toCString(No.Alloc);
@@ -106,7 +106,7 @@ class AggregationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The function name to aggregate.
       Returns: Builder instance for fluent chaining
   */
-  T function_(string propval)
+  T function_(string propval) nothrow
   {
     return setProperty("function", propval);
   }
@@ -117,7 +117,7 @@ class AggregationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The input field name of aggregate function.
       Returns: Builder instance for fluent chaining
   */
-  T input(string propval)
+  T input(string propval) nothrow
   {
     return setProperty("input", propval);
   }
@@ -128,7 +128,7 @@ class AggregationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The options of aggregate function.
       Returns: Builder instance for fluent chaining
   */
-  T options(arrow.function_options.FunctionOptions propval)
+  T options(arrow.function_options.FunctionOptions propval) nothrow
   {
     return setProperty("options", propval);
   }
@@ -139,7 +139,7 @@ class AggregationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The output field name of aggregate function.
       Returns: Builder instance for fluent chaining
   */
-  T output(string propval)
+  T output(string propval) nothrow
   {
     return setProperty("output", propval);
   }
@@ -152,7 +152,7 @@ final class AggregationGidBuilder : AggregationGidBuilderImpl!AggregationGidBuil
       Create object from builder.
       Returns: New object
   */
-  Aggregation build()
+  Aggregation build() nothrow
   {
     return new Aggregation(cast(void*)createGObject(Aggregation._getGType), Yes.Take);
   }

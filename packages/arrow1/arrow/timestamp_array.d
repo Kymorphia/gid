@@ -16,26 +16,26 @@ class TimestampArray : arrow.numeric_array.NumericArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_timestamp_array_get_type != &gidSymbolNotFound ? garrow_timestamp_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TimestampArray self()
+  override TimestampArray self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class TimestampArray : arrow.numeric_array.NumericArray
       Get builder for [arrow.timestamp_array.TimestampArray]
       Returns: New builder object
   */
-  static TimestampArrayGidBuilder builder()
+  static TimestampArrayGidBuilder builder() nothrow
   {
     return new TimestampArrayGidBuilder;
   }
 
   /** */
-  this(arrow.timestamp_data_type.TimestampDataType dataType, long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
+  this(arrow.timestamp_data_type.TimestampDataType dataType, long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls) nothrow
   {
     GArrowTimestampArray* _cretval;
     _cretval = garrow_timestamp_array_new(dataType ? cast(GArrowTimestampDataType*)dataType._cPtr(No.Dup) : null, length, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
@@ -58,7 +58,7 @@ class TimestampArray : arrow.numeric_array.NumericArray
   }
 
   /** */
-  long getValue(long i)
+  long getValue(long i) nothrow
   {
     long _retval;
     _retval = garrow_timestamp_array_get_value(cast(GArrowTimestampArray*)this._cPtr, i);
@@ -66,7 +66,7 @@ class TimestampArray : arrow.numeric_array.NumericArray
   }
 
   /** */
-  long[] getValues()
+  long[] getValues() nothrow
   {
     const(long)* _cretval;
     long _cretlength;
@@ -93,7 +93,7 @@ final class TimestampArrayGidBuilder : TimestampArrayGidBuilderImpl!TimestampArr
       Create object from builder.
       Returns: New object
   */
-  TimestampArray build()
+  TimestampArray build() nothrow
   {
     return new TimestampArray(cast(void*)createGObject(TimestampArray._getGType), Yes.Take);
   }

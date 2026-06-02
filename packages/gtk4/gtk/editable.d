@@ -147,7 +147,7 @@ interface Editable
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_editable_get_type != &gidSymbolNotFound ? gtk_editable_get_type() : cast(GType)0;
@@ -157,78 +157,78 @@ interface Editable
       Get `cursorPosition` property.
       Returns: The current position of the insertion cursor in chars.
   */
-  @property int cursorPosition();
+  @property int cursorPosition() nothrow;
 
   /**
       Get `editable` property.
       Returns: Whether the entry contents can be edited.
   */
-  @property bool editable();
+  @property bool editable() nothrow;
 
   /**
       Set `editable` property.
       Params:
         propval = Whether the entry contents can be edited.
   */
-  @property void editable(bool propval);
+  @property void editable(bool propval) nothrow;
 
   /**
       Get `enableUndo` property.
       Returns: If undo/redo should be enabled for the editable.
   */
-  @property bool enableUndo();
+  @property bool enableUndo() nothrow;
 
   /**
       Set `enableUndo` property.
       Params:
         propval = If undo/redo should be enabled for the editable.
   */
-  @property void enableUndo(bool propval);
+  @property void enableUndo(bool propval) nothrow;
 
   /**
       Get `maxWidthChars` property.
       Returns: The desired maximum width of the entry, in characters.
   */
-  @property int maxWidthChars();
+  @property int maxWidthChars() nothrow;
 
   /**
       Set `maxWidthChars` property.
       Params:
         propval = The desired maximum width of the entry, in characters.
   */
-  @property void maxWidthChars(int propval);
+  @property void maxWidthChars(int propval) nothrow;
 
   /**
       Get `selectionBound` property.
       Returns: The position of the opposite end of the selection from the cursor in chars.
   */
-  @property int selectionBound();
+  @property int selectionBound() nothrow;
 
   /**
       Get `text` property.
       Returns: The contents of the entry.
   */
-  @property string text();
+  @property string text() nothrow;
 
   /**
       Set `text` property.
       Params:
         propval = The contents of the entry.
   */
-  @property void text(string propval);
+  @property void text(string propval) nothrow;
 
   /**
       Get `widthChars` property.
       Returns: Number of characters to leave space for in the entry.
   */
-  @property int widthChars();
+  @property int widthChars() nothrow;
 
   /**
       Set `widthChars` property.
       Params:
         propval = Number of characters to leave space for in the entry.
   */
-  @property void widthChars(int propval);
+  @property void widthChars(int propval) nothrow;
 
   /**
       Get `xalign` property.
@@ -236,7 +236,7 @@ interface Editable
         
         Reversed for RTL layouts.
   */
-  @property float xalign();
+  @property float xalign() nothrow;
 
   /**
       Set `xalign` property.
@@ -245,7 +245,7 @@ interface Editable
           
           Reversed for RTL layouts.
   */
-  @property void xalign(float propval);
+  @property void xalign(float propval) nothrow;
 
   /**
       Gets a property of the [gtk.editable.Editable] delegate for object.
@@ -261,7 +261,7 @@ interface Editable
         pspec = the [gobject.param_spec.ParamSpec] for the property
       Returns: true if the property was found
   */
-  static bool delegateGetProperty(gobject.object.ObjectWrap object, uint propId, gobject.value.Value value, gobject.param_spec.ParamSpec pspec)
+  static bool delegateGetProperty(gobject.object.ObjectWrap object, uint propId, gobject.value.Value value, gobject.param_spec.ParamSpec pspec) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_editable_delegate_get_property(object ? cast(GObject*)object._cPtr(No.Dup) : null, propId, value ? cast(GValue*)value._cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
@@ -282,7 +282,7 @@ interface Editable
         pspec = the [gobject.param_spec.ParamSpec] for the property
       Returns: true if the property was found
   */
-  static bool delegateSetProperty(gobject.object.ObjectWrap object, uint propId, gobject.value.Value value, gobject.param_spec.ParamSpec pspec)
+  static bool delegateSetProperty(gobject.object.ObjectWrap object, uint propId, gobject.value.Value value, gobject.param_spec.ParamSpec pspec) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_editable_delegate_set_property(object ? cast(GObject*)object._cPtr(No.Dup) : null, propId, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
@@ -585,7 +585,7 @@ interface Editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `DeleteText` signal.
@@ -614,7 +614,7 @@ interface Editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeleteText(T)(T callback, Flag!"After" after = No.After);
+  gulong connectDeleteText(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `InsertText` signal.
@@ -643,7 +643,7 @@ interface Editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInsertText(T)(T callback, Flag!"After" after = No.After);
+  gulong connectInsertText(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gtk.editable.Editable]
@@ -656,7 +656,7 @@ interface EditableGidBuilderImpl(T)
         propval = Whether the entry contents can be edited.
       Returns: Builder instance for fluent chaining
   */
-  T editable(bool propval);
+  T editable(bool propval) nothrow;
 
   /**
       Set `enableUndo` property.
@@ -664,7 +664,7 @@ interface EditableGidBuilderImpl(T)
         propval = If undo/redo should be enabled for the editable.
       Returns: Builder instance for fluent chaining
   */
-  T enableUndo(bool propval);
+  T enableUndo(bool propval) nothrow;
 
   /**
       Set `maxWidthChars` property.
@@ -672,7 +672,7 @@ interface EditableGidBuilderImpl(T)
         propval = The desired maximum width of the entry, in characters.
       Returns: Builder instance for fluent chaining
   */
-  T maxWidthChars(int propval);
+  T maxWidthChars(int propval) nothrow;
 
   /**
       Set `text` property.
@@ -680,7 +680,7 @@ interface EditableGidBuilderImpl(T)
         propval = The contents of the entry.
       Returns: Builder instance for fluent chaining
   */
-  T text(string propval);
+  T text(string propval) nothrow;
 
   /**
       Set `widthChars` property.
@@ -688,7 +688,7 @@ interface EditableGidBuilderImpl(T)
         propval = Number of characters to leave space for in the entry.
       Returns: Builder instance for fluent chaining
   */
-  T widthChars(int propval);
+  T widthChars(int propval) nothrow;
 
   /**
       Set `xalign` property.
@@ -698,5 +698,5 @@ interface EditableGidBuilderImpl(T)
           Reversed for RTL layouts.
       Returns: Builder instance for fluent chaining
   */
-  T xalign(float propval);
+  T xalign(float propval) nothrow;
 }

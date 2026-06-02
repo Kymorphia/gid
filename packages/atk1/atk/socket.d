@@ -43,26 +43,26 @@ class Socket : atk.object.ObjectWrap, atk.component.Component
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_socket_get_type != &gidSymbolNotFound ? atk_socket_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Socket self()
+  override Socket self() nothrow
   {
     return this;
   }
@@ -71,7 +71,7 @@ class Socket : atk.object.ObjectWrap, atk.component.Component
       Get builder for [atk.socket.Socket]
       Returns: New builder object
   */
-  static SocketGidBuilder builder()
+  static SocketGidBuilder builder() nothrow
   {
     return new SocketGidBuilder;
   }
@@ -82,7 +82,7 @@ class Socket : atk.object.ObjectWrap, atk.component.Component
       Creates a new #AtkSocket.
       Returns: the newly created #AtkSocket instance
   */
-  this()
+  this() nothrow
   {
     AtkObject* _cretval;
     _cretval = atk_socket_new();
@@ -104,7 +104,7 @@ class Socket : atk.object.ObjectWrap, atk.component.Component
       Params:
         plugId = the ID of an #AtkPlug
   */
-  void embed(string plugId)
+  void embed(string plugId) nothrow
   {
     const(char)* _plugId = plugId.toCString(No.Alloc);
     atk_socket_embed(cast(AtkSocket*)this._cPtr, _plugId);
@@ -114,7 +114,7 @@ class Socket : atk.object.ObjectWrap, atk.component.Component
       Determines whether or not the socket has an embedded plug.
       Returns: TRUE if a plug is embedded in the socket
   */
-  bool isOccupied()
+  bool isOccupied() nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_socket_is_occupied(cast(AtkSocket*)this._cPtr);
@@ -136,7 +136,7 @@ final class SocketGidBuilder : SocketGidBuilderImpl!SocketGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Socket build()
+  Socket build() nothrow
   {
     return new Socket(cast(void*)createGObject(Socket._getGType), Yes.Take);
   }

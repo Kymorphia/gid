@@ -16,11 +16,8 @@ class ConstantExpression : gtk.expression.Expression
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.constant_expression.ConstantExpression");
-
     super(cast(GtkExpression*)ptr, take);
   }
 
@@ -31,7 +28,7 @@ class ConstantExpression : gtk.expression.Expression
         value = a [gobject.value.Value]
       Returns: a new [gtk.expression.Expression]
   */
-  static gtk.constant_expression.ConstantExpression newForValue(gobject.value.Value value)
+  static gtk.constant_expression.ConstantExpression newForValue(gobject.value.Value value) nothrow
   {
     GtkExpression* _cretval;
     _cretval = gtk_constant_expression_new_for_value(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -43,7 +40,7 @@ class ConstantExpression : gtk.expression.Expression
       Gets the value that a constant expression evaluates to.
       Returns: the value
   */
-  gobject.value.Value getValue()
+  gobject.value.Value getValue() nothrow
   {
     const(GValue)* _cretval;
     _cretval = gtk_constant_expression_get_value(cast(GtkExpression*)this._cPtr);

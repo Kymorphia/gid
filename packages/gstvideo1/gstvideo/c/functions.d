@@ -14,7 +14,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgstvideo-1.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // AncillaryMeta
   const(GstMetaInfo)* function() c_gst_ancillary_meta_get_info; ///

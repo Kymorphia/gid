@@ -17,26 +17,26 @@ class DatasetFactory : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_dataset_factory_get_type != &gidSymbolNotFound ? gadataset_dataset_factory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DatasetFactory self()
+  override DatasetFactory self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class DatasetFactory : gobject.object.ObjectWrap
       Get builder for [arrowdataset.dataset_factory.DatasetFactory]
       Returns: New builder object
   */
-  static DatasetFactoryGidBuilder builder()
+  static DatasetFactoryGidBuilder builder() nothrow
   {
     return new DatasetFactoryGidBuilder;
   }
@@ -68,7 +68,7 @@ class DatasetFactoryGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 {
 
   /** */
-  T datasetFactory(void* propval)
+  T datasetFactory(void* propval) nothrow
   {
     return setProperty("dataset-factory", propval);
   }
@@ -81,7 +81,7 @@ final class DatasetFactoryGidBuilder : DatasetFactoryGidBuilderImpl!DatasetFacto
       Create object from builder.
       Returns: New object
   */
-  DatasetFactory build()
+  DatasetFactory build() nothrow
   {
     return new DatasetFactory(cast(void*)createGObject(DatasetFactory._getGType), No.Take);
   }

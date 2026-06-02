@@ -34,26 +34,26 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_discoverer_stream_info_get_type != &gidSymbolNotFound ? gst_discoverer_stream_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DiscovererStreamInfo self()
+  override DiscovererStreamInfo self() nothrow
   {
     return this;
   }
@@ -62,7 +62,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
       Get builder for [gstpbutils.discoverer_stream_info.DiscovererStreamInfo]
       Returns: New builder object
   */
-  static DiscovererStreamInfoGidBuilder builder()
+  static DiscovererStreamInfoGidBuilder builder() nothrow
   {
     return new DiscovererStreamInfoGidBuilder;
   }
@@ -74,7 +74,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
       Params:
         infos = a #GList of #GstDiscovererStreamInfo
   */
-  static void listFree(gstpbutils.discoverer_stream_info.DiscovererStreamInfo[] infos)
+  static void listFree(gstpbutils.discoverer_stream_info.DiscovererStreamInfo[] infos) nothrow
   {
     auto _infos = gListFromD!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo)(infos);
     scope(exit) containerFree!(GList*, gstpbutils.discoverer_stream_info.DiscovererStreamInfo, GidOwnership.None)(_infos);
@@ -82,7 +82,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  gst.caps.Caps getCaps()
+  gst.caps.Caps getCaps() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_discoverer_stream_info_get_caps(cast(GstDiscovererStreamInfo*)this._cPtr);
@@ -91,7 +91,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  gst.structure.Structure getMisc()
+  gst.structure.Structure getMisc() nothrow
   {
     const(GstStructure)* _cretval;
     _cretval = gst_discoverer_stream_info_get_misc(cast(GstDiscovererStreamInfo*)this._cPtr);
@@ -100,7 +100,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  gstpbutils.discoverer_stream_info.DiscovererStreamInfo getNext()
+  gstpbutils.discoverer_stream_info.DiscovererStreamInfo getNext() nothrow
   {
     GstDiscovererStreamInfo* _cretval;
     _cretval = gst_discoverer_stream_info_get_next(cast(GstDiscovererStreamInfo*)this._cPtr);
@@ -109,7 +109,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  gstpbutils.discoverer_stream_info.DiscovererStreamInfo getPrevious()
+  gstpbutils.discoverer_stream_info.DiscovererStreamInfo getPrevious() nothrow
   {
     GstDiscovererStreamInfo* _cretval;
     _cretval = gst_discoverer_stream_info_get_previous(cast(GstDiscovererStreamInfo*)this._cPtr);
@@ -118,7 +118,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  string getStreamId()
+  string getStreamId() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_discoverer_stream_info_get_stream_id(cast(GstDiscovererStreamInfo*)this._cPtr);
@@ -127,7 +127,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  int getStreamNumber()
+  int getStreamNumber() nothrow
   {
     int _retval;
     _retval = gst_discoverer_stream_info_get_stream_number(cast(GstDiscovererStreamInfo*)this._cPtr);
@@ -135,7 +135,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  string getStreamTypeNick()
+  string getStreamTypeNick() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_discoverer_stream_info_get_stream_type_nick(cast(GstDiscovererStreamInfo*)this._cPtr);
@@ -144,7 +144,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  gst.tag_list.TagList getTags()
+  gst.tag_list.TagList getTags() nothrow
   {
     const(GstTagList)* _cretval;
     _cretval = gst_discoverer_stream_info_get_tags(cast(GstDiscovererStreamInfo*)this._cPtr);
@@ -153,7 +153,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  gst.toc.Toc getToc()
+  gst.toc.Toc getToc() nothrow
   {
     const(GstToc)* _cretval;
     _cretval = gst_discoverer_stream_info_get_toc(cast(GstDiscovererStreamInfo*)this._cPtr);
@@ -174,7 +174,7 @@ final class DiscovererStreamInfoGidBuilder : DiscovererStreamInfoGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  DiscovererStreamInfo build()
+  DiscovererStreamInfo build() nothrow
   {
     return new DiscovererStreamInfo(cast(void*)createGObject(DiscovererStreamInfo._getGType), No.Take);
   }

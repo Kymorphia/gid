@@ -29,32 +29,32 @@ class Hmac : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_hmac_get_type != &gidSymbolNotFound ? g_hmac_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Hmac self()
+  override Hmac self() nothrow
   {
     return this;
   }
@@ -83,7 +83,7 @@ class Hmac : gobject.boxed.Boxed
       Returns: the newly created #GHmac, or null.
           Use [glib.hmac.Hmac.unref] to free the memory allocated by it.
   */
-  this(glib.types.ChecksumType digestType, ubyte[] key)
+  this(glib.types.ChecksumType digestType, ubyte[] key) nothrow
   {
     GHmac* _cretval;
     size_t _keyLen;
@@ -102,7 +102,7 @@ class Hmac : gobject.boxed.Boxed
       Returns: the copy of the passed #GHmac. Use [glib.hmac.Hmac.unref]
           when finished using it.
   */
-  glib.hmac.Hmac copy()
+  glib.hmac.Hmac copy() nothrow
   {
     GHmac* _cretval;
     _cretval = g_hmac_copy(cast(const(GHmac)*)this._cPtr);
@@ -120,7 +120,7 @@ class Hmac : gobject.boxed.Boxed
       Params:
         buffer = output buffer
   */
-  void getDigest(ref ubyte[] buffer)
+  void getDigest(ref ubyte[] buffer) nothrow
   {
     size_t _digestLen;
     _digestLen = cast(size_t)buffer.length;
@@ -138,7 +138,7 @@ class Hmac : gobject.boxed.Boxed
           returned string is owned by the HMAC and should not be modified
           or freed.
   */
-  string getString()
+  string getString() nothrow
   {
     const(char)* _cretval;
     _cretval = g_hmac_get_string(cast(GHmac*)this._cPtr);
@@ -155,7 +155,7 @@ class Hmac : gobject.boxed.Boxed
       Params:
         data = buffer used to compute the checksum
   */
-  void update(ubyte[] data)
+  void update(ubyte[] data) nothrow
   {
     ptrdiff_t _length;
     if (data)

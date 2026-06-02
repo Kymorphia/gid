@@ -25,7 +25,7 @@ interface StyleProvider
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_style_provider_get_type != &gidSymbolNotFound ? gtk_style_provider_get_type() : cast(GType)0;
@@ -46,7 +46,7 @@ interface StyleProvider
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGtkPrivateChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectGtkPrivateChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gtk.style_provider.StyleProvider]

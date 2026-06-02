@@ -26,7 +26,7 @@ template TreeDragSourceT()
         path = row that was being dragged
       Returns: true if the row was successfully deleted
   */
-  override bool dragDataDelete(gtk.tree_path.TreePath path)
+  override bool dragDataDelete(gtk.tree_path.TreePath path) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_drag_source_drag_data_delete(cast(GtkTreeDragSource*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
@@ -45,7 +45,7 @@ template TreeDragSourceT()
                            from the dragged row
       Returns: true if data of the required type was provided
   */
-  override bool dragDataGet(gtk.tree_path.TreePath path, gtk.selection_data.SelectionData selectionData)
+  override bool dragDataGet(gtk.tree_path.TreePath path, gtk.selection_data.SelectionData selectionData) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_drag_source_drag_data_get(cast(GtkTreeDragSource*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, selectionData ? cast(GtkSelectionData*)selectionData._cPtr(No.Dup) : null);
@@ -61,7 +61,7 @@ template TreeDragSourceT()
         path = row on which user is initiating a drag
       Returns: true if the row can be dragged
   */
-  override bool rowDraggable(gtk.tree_path.TreePath path)
+  override bool rowDraggable(gtk.tree_path.TreePath path) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_drag_source_row_draggable(cast(GtkTreeDragSource*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);

@@ -32,7 +32,7 @@ template StyleProviderT()
   
       Deprecated: Will always return null for all GTK-provided style providers.
   */
-  override gtk.icon_factory.IconFactory getIconFactory(gtk.widget_path.WidgetPath path)
+  override gtk.icon_factory.IconFactory getIconFactory(gtk.widget_path.WidgetPath path) nothrow
   {
     GtkIconFactory* _cretval;
     _cretval = gtk_style_provider_get_icon_factory(cast(GtkStyleProvider*)this._cPtr, path ? cast(GtkWidgetPath*)path._cPtr(No.Dup) : null);
@@ -52,7 +52,7 @@ template StyleProviderT()
       Deprecated: Will always return null for all GTK-provided style providers
             as the interface cannot correctly work the way CSS is specified.
   */
-  override gtk.style_properties.StyleProperties getStyle(gtk.widget_path.WidgetPath path)
+  override gtk.style_properties.StyleProperties getStyle(gtk.widget_path.WidgetPath path) nothrow
   {
     GtkStyleProperties* _cretval;
     _cretval = gtk_style_provider_get_style(cast(GtkStyleProvider*)this._cPtr, path ? cast(GtkWidgetPath*)path._cPtr(No.Dup) : null);
@@ -71,7 +71,7 @@ template StyleProviderT()
         value = return location for the property value
       Returns: true if the property was found and has a value, false otherwise
   */
-  override bool getStyleProperty(gtk.widget_path.WidgetPath path, gtk.types.StateFlags state, gobject.param_spec.ParamSpec pspec, out gobject.value.Value value)
+  override bool getStyleProperty(gtk.widget_path.WidgetPath path, gtk.types.StateFlags state, gobject.param_spec.ParamSpec pspec, out gobject.value.Value value) nothrow
   {
     bool _retval;
     GValue _value;

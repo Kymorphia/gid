@@ -18,26 +18,26 @@ class TreeNode : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_tree_node_get_type != &gidSymbolNotFound ? gda_tree_node_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TreeNode self()
+  override TreeNode self() nothrow
   {
     return this;
   }
@@ -46,19 +46,19 @@ class TreeNode : gobject.object.ObjectWrap
       Get builder for [gda.tree_node.TreeNode]
       Returns: New builder object
   */
-  static TreeNodeGidBuilder builder()
+  static TreeNodeGidBuilder builder() nothrow
   {
     return new TreeNodeGidBuilder;
   }
 
   /** */
-  @property string name()
+  @property string name() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("name");
   }
 
   /** */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("name", propval);
   }
@@ -70,7 +70,7 @@ class TreeNode : gobject.object.ObjectWrap
         name = a name, or null
       Returns: a new #GdaTreeNode
   */
-  this(string name = null)
+  this(string name = null) nothrow
   {
     GdaTreeNode* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -79,7 +79,7 @@ class TreeNode : gobject.object.ObjectWrap
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_tree_node_error_quark();
@@ -97,7 +97,7 @@ class TreeNode : gobject.object.ObjectWrap
         attribute = attribute name as a string
       Returns: a read-only #GValue, or null if not attribute named attribute has been set for node
   */
-  gobject.value.Value fetchAttribute(string attribute)
+  gobject.value.Value fetchAttribute(string attribute) nothrow
   {
     const(GValue)* _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -113,7 +113,7 @@ class TreeNode : gobject.object.ObjectWrap
         index = a index
       Returns: the #GdaTreeNode, or null if not found
   */
-  gda.tree_node.TreeNode getChildIndex(int index)
+  gda.tree_node.TreeNode getChildIndex(int index) nothrow
   {
     GdaTreeNode* _cretval;
     _cretval = gda_tree_node_get_child_index(cast(GdaTreeNode*)this._cPtr, index);
@@ -128,7 +128,7 @@ class TreeNode : gobject.object.ObjectWrap
         name = requested node's name
       Returns: the #GdaTreeNode, or null if not found
   */
-  gda.tree_node.TreeNode getChildName(string name)
+  gda.tree_node.TreeNode getChildName(string name) nothrow
   {
     GdaTreeNode* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -141,7 +141,7 @@ class TreeNode : gobject.object.ObjectWrap
       Get a list of all node's children, free it with [glib.slist.SList.free] after usage
       Returns: a new #GSList of #GdaTreeNode objects, or null if node does not have any child
   */
-  gda.tree_node.TreeNode[] getChildren()
+  gda.tree_node.TreeNode[] getChildren() nothrow
   {
     GSList* _cretval;
     _cretval = gda_tree_node_get_children(cast(GdaTreeNode*)this._cPtr);
@@ -161,7 +161,7 @@ class TreeNode : gobject.object.ObjectWrap
         attribute = attribute name as a string
       Returns: a read-only #GValue, or null if not attribute named attribute has been set for node
   */
-  gobject.value.Value getNodeAttribute(string attribute)
+  gobject.value.Value getNodeAttribute(string attribute) nothrow
   {
     const(GValue)* _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -175,7 +175,7 @@ class TreeNode : gobject.object.ObjectWrap
       then this method return null.
       Returns: the parent #GdaTreeNode
   */
-  gda.tree_node.TreeNode getParent()
+  gda.tree_node.TreeNode getParent() nothrow
   {
     GdaTreeNode* _cretval;
     _cretval = gda_tree_node_get_parent(cast(GdaTreeNode*)this._cPtr);
@@ -207,14 +207,21 @@ class TreeNode : gobject.object.ObjectWrap
         value = a #GValue, or null
         destroy = a function to be called when attribute is not needed anymore, or null
   */
-  void setNodeAttribute(string attribute, gobject.value.Value value, glib.types.DestroyNotify destroy)
+  void setNodeAttribute(string attribute, gobject.value.Value value, glib.types.DestroyNotify destroy) nothrow
   {
-    extern(C) void _destroyCallback(void* data)
+    extern(C) void _destroyCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -238,14 +245,14 @@ class TreeNode : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNodeChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNodeChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.tree_node.TreeNode)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.tree_node.TreeNode)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -257,7 +264,14 @@ class TreeNode : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.tree_node.TreeNode.nodeChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -281,14 +295,14 @@ class TreeNode : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNodeDeleted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNodeDeleted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.tree_node.TreeNode)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -300,7 +314,14 @@ class TreeNode : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.tree_node.TreeNode.nodeDeleted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -326,14 +347,14 @@ class TreeNode : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNodeHasChildToggled(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNodeHasChildToggled(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.tree_node.TreeNode)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.tree_node.TreeNode)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -345,7 +366,14 @@ class TreeNode : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.tree_node.TreeNode.nodeHasChildToggled");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -369,14 +397,14 @@ class TreeNode : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNodeInserted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNodeInserted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.tree_node.TreeNode)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.tree_node.TreeNode)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -388,7 +416,14 @@ class TreeNode : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.tree_node.TreeNode.nodeInserted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -401,7 +436,7 @@ class TreeNodeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -414,7 +449,7 @@ final class TreeNodeGidBuilder : TreeNodeGidBuilderImpl!TreeNodeGidBuilder
       Create object from builder.
       Returns: New object
   */
-  TreeNode build()
+  TreeNode build() nothrow
   {
     return new TreeNode(cast(void*)createGObject(TreeNode._getGType), Yes.Take);
   }
@@ -422,12 +457,12 @@ final class TreeNodeGidBuilder : TreeNodeGidBuilderImpl!TreeNodeGidBuilder
 
 class TreeNodeException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.tree_node.TreeNode.errorQuark, cast(int)code, msg);
   }

@@ -62,26 +62,26 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_entry_completion_get_type != &gidSymbolNotFound ? gtk_entry_completion_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EntryCompletion self()
+  override EntryCompletion self() nothrow
   {
     return this;
   }
@@ -90,7 +90,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       Get builder for [gtk.entry_completion.EntryCompletion]
       Returns: New builder object
   */
-  static EntryCompletionGidBuilder builder()
+  static EntryCompletionGidBuilder builder() nothrow
   {
     return new EntryCompletionGidBuilder;
   }
@@ -103,7 +103,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
         [gtk.entry_completion.EntryCompletion.newWithArea], a horizontally oriented
         [gtk.cell_area_box.CellAreaBox] will be used.
   */
-  @property gtk.cell_area.CellArea cellArea()
+  @property gtk.cell_area.CellArea cellArea() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.cell_area.CellArea)("cell-area");
   }
@@ -116,7 +116,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
         Note that this requires text-column to be set, even if you are
         using a custom match function.
   */
-  @property bool inlineCompletion()
+  @property bool inlineCompletion() nothrow
   {
     return getInlineCompletion();
   }
@@ -130,7 +130,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
           Note that this requires text-column to be set, even if you are
           using a custom match function.
   */
-  @property void inlineCompletion(bool propval)
+  @property void inlineCompletion(bool propval) nothrow
   {
     setInlineCompletion(propval);
   }
@@ -140,7 +140,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       Returns: Determines whether the possible completions on the popup
         will appear in the entry as you navigate through them.
   */
-  @property bool inlineSelection()
+  @property bool inlineSelection() nothrow
   {
     return getInlineSelection();
   }
@@ -151,31 +151,31 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
         propval = Determines whether the possible completions on the popup
           will appear in the entry as you navigate through them.
   */
-  @property void inlineSelection(bool propval)
+  @property void inlineSelection(bool propval) nothrow
   {
     setInlineSelection(propval);
   }
 
   /** */
-  @property int minimumKeyLength()
+  @property int minimumKeyLength() nothrow
   {
     return getMinimumKeyLength();
   }
 
   /** */
-  @property void minimumKeyLength(int propval)
+  @property void minimumKeyLength(int propval) nothrow
   {
     setMinimumKeyLength(propval);
   }
 
   /** */
-  @property gtk.tree_model.TreeModel model()
+  @property gtk.tree_model.TreeModel model() nothrow
   {
     return getModel();
   }
 
   /** */
-  @property void model(gtk.tree_model.TreeModel propval)
+  @property void model(gtk.tree_model.TreeModel propval) nothrow
   {
     setModel(propval);
   }
@@ -185,7 +185,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       Returns: Determines whether the possible completions should be
         shown in a popup window.
   */
-  @property bool popupCompletion()
+  @property bool popupCompletion() nothrow
   {
     return getPopupCompletion();
   }
@@ -196,7 +196,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
         propval = Determines whether the possible completions should be
           shown in a popup window.
   */
-  @property void popupCompletion(bool propval)
+  @property void popupCompletion(bool propval) nothrow
   {
     setPopupCompletion(propval);
   }
@@ -206,7 +206,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       Returns: Determines whether the completions popup window will be
         resized to the width of the entry.
   */
-  @property bool popupSetWidth()
+  @property bool popupSetWidth() nothrow
   {
     return getPopupSetWidth();
   }
@@ -217,7 +217,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
         propval = Determines whether the completions popup window will be
           resized to the width of the entry.
   */
-  @property void popupSetWidth(bool propval)
+  @property void popupSetWidth(bool propval) nothrow
   {
     setPopupSetWidth(propval);
   }
@@ -230,7 +230,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
         You probably want to set this to false if you are using
         [gtk.entry_completion.EntryCompletion.inlineCompletion].
   */
-  @property bool popupSingleMatch()
+  @property bool popupSingleMatch() nothrow
   {
     return getPopupSingleMatch();
   }
@@ -244,7 +244,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
           You probably want to set this to false if you are using
           [gtk.entry_completion.EntryCompletion.inlineCompletion].
   */
-  @property void popupSingleMatch(bool propval)
+  @property void popupSingleMatch(bool propval) nothrow
   {
     setPopupSingleMatch(propval);
   }
@@ -255,7 +255,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
         
         Note that the strings must be UTF-8.
   */
-  @property int textColumn()
+  @property int textColumn() nothrow
   {
     return getTextColumn();
   }
@@ -267,7 +267,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
           
           Note that the strings must be UTF-8.
   */
-  @property void textColumn(int propval)
+  @property void textColumn(int propval) nothrow
   {
     setTextColumn(propval);
   }
@@ -281,7 +281,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  this()
+  this() nothrow
   {
     GtkEntryCompletion* _cretval;
     _cretval = gtk_entry_completion_new();
@@ -301,7 +301,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  static gtk.entry_completion.EntryCompletion newWithArea(gtk.cell_area.CellArea area)
+  static gtk.entry_completion.EntryCompletion newWithArea(gtk.cell_area.CellArea area) nothrow
   {
     GtkEntryCompletion* _cretval;
     _cretval = gtk_entry_completion_new_with_area(area ? cast(GtkCellArea*)area._cPtr(No.Dup) : null);
@@ -317,7 +317,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  void complete()
+  void complete() nothrow
   {
     gtk_entry_completion_complete(cast(GtkEntryCompletion*)this._cPtr);
   }
@@ -337,7 +337,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  string computePrefix(string key)
+  string computePrefix(string key) nothrow
   {
     char* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -353,7 +353,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  string getCompletionPrefix()
+  string getCompletionPrefix() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_entry_completion_get_completion_prefix(cast(GtkEntryCompletion*)this._cPtr);
@@ -367,7 +367,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  gtk.widget.Widget getEntry()
+  gtk.widget.Widget getEntry() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_entry_completion_get_entry(cast(GtkEntryCompletion*)this._cPtr);
@@ -382,7 +382,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  bool getInlineCompletion()
+  bool getInlineCompletion() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_entry_completion_get_inline_completion(cast(GtkEntryCompletion*)this._cPtr);
@@ -395,7 +395,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  bool getInlineSelection()
+  bool getInlineSelection() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_entry_completion_get_inline_selection(cast(GtkEntryCompletion*)this._cPtr);
@@ -408,7 +408,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  int getMinimumKeyLength()
+  int getMinimumKeyLength() nothrow
   {
     int _retval;
     _retval = gtk_entry_completion_get_minimum_key_length(cast(GtkEntryCompletion*)this._cPtr);
@@ -423,7 +423,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  gtk.tree_model.TreeModel getModel()
+  gtk.tree_model.TreeModel getModel() nothrow
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_entry_completion_get_model(cast(GtkEntryCompletion*)this._cPtr);
@@ -437,7 +437,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  bool getPopupCompletion()
+  bool getPopupCompletion() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_entry_completion_get_popup_completion(cast(GtkEntryCompletion*)this._cPtr);
@@ -452,7 +452,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  bool getPopupSetWidth()
+  bool getPopupSetWidth() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_entry_completion_get_popup_set_width(cast(GtkEntryCompletion*)this._cPtr);
@@ -467,7 +467,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  bool getPopupSingleMatch()
+  bool getPopupSingleMatch() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_entry_completion_get_popup_single_match(cast(GtkEntryCompletion*)this._cPtr);
@@ -480,7 +480,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  int getTextColumn()
+  int getTextColumn() nothrow
   {
     int _retval;
     _retval = gtk_entry_completion_get_text_column(cast(GtkEntryCompletion*)this._cPtr);
@@ -492,7 +492,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  void insertPrefix()
+  void insertPrefix() nothrow
   {
     gtk_entry_completion_insert_prefix(cast(GtkEntryCompletion*)this._cPtr);
   }
@@ -506,7 +506,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  void setInlineCompletion(bool inlineCompletion)
+  void setInlineCompletion(bool inlineCompletion) nothrow
   {
     gtk_entry_completion_set_inline_completion(cast(GtkEntryCompletion*)this._cPtr, inlineCompletion);
   }
@@ -520,7 +520,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  void setInlineSelection(bool inlineSelection)
+  void setInlineSelection(bool inlineSelection) nothrow
   {
     gtk_entry_completion_set_inline_selection(cast(GtkEntryCompletion*)this._cPtr, inlineSelection);
   }
@@ -536,15 +536,22 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  void setMatchFunc(gtk.types.EntryCompletionMatchFunc func)
+  void setMatchFunc(gtk.types.EntryCompletionMatchFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(GtkEntryCompletion* completion, const(char)* key, GtkTreeIter* iter, void* userData)
+    extern(C) gboolean _funcCallback(GtkEntryCompletion* completion, const(char)* key, GtkTreeIter* iter, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.EntryCompletionMatchFunc*)userData;
       string _key = key.fromCString(No.Free);
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.entry_completion.EntryCompletion)(cast(void*)completion, No.Take), _key, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.entry_completion.EntryCompletion)(cast(void*)completion, No.Take), _key, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.EntryCompletionMatchFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -568,7 +575,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  void setMinimumKeyLength(int length)
+  void setMinimumKeyLength(int length) nothrow
   {
     gtk_entry_completion_set_minimum_key_length(cast(GtkEntryCompletion*)this._cPtr, length);
   }
@@ -585,7 +592,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  void setModel(gtk.tree_model.TreeModel model = null)
+  void setModel(gtk.tree_model.TreeModel model = null) nothrow
   {
     gtk_entry_completion_set_model(cast(GtkEntryCompletion*)this._cPtr, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
@@ -598,7 +605,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  void setPopupCompletion(bool popupCompletion)
+  void setPopupCompletion(bool popupCompletion) nothrow
   {
     gtk_entry_completion_set_popup_completion(cast(GtkEntryCompletion*)this._cPtr, popupCompletion);
   }
@@ -612,7 +619,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  void setPopupSetWidth(bool popupSetWidth)
+  void setPopupSetWidth(bool popupSetWidth) nothrow
   {
     gtk_entry_completion_set_popup_set_width(cast(GtkEntryCompletion*)this._cPtr, popupSetWidth);
   }
@@ -629,7 +636,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  void setPopupSingleMatch(bool popupSingleMatch)
+  void setPopupSingleMatch(bool popupSingleMatch) nothrow
   {
     gtk_entry_completion_set_popup_single_match(cast(GtkEntryCompletion*)this._cPtr, popupSingleMatch);
   }
@@ -652,7 +659,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  void setTextColumn(int column)
+  void setTextColumn(int column) nothrow
   {
     gtk_entry_completion_set_text_column(cast(GtkEntryCompletion*)this._cPtr, column);
   }
@@ -684,7 +691,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCursorOnMatch(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCursorOnMatch(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tree_model.TreeModel)))
@@ -692,11 +699,12 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.entry_completion.EntryCompletion)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -707,7 +715,14 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.entry_completion.EntryCompletion.cursorOnMatch");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -742,18 +757,19 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInsertPrefix(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInsertPrefix(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.entry_completion.EntryCompletion)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -761,7 +777,14 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.entry_completion.EntryCompletion.insertPrefix");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -797,7 +820,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMatchSelected(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMatchSelected(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tree_model.TreeModel)))
@@ -805,11 +828,12 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.entry_completion.EntryCompletion)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -820,7 +844,14 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.entry_completion.EntryCompletion.matchSelected");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -847,13 +878,13 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNoMatches(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNoMatches(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.entry_completion.EntryCompletion)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -862,7 +893,14 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.entry_completion.EntryCompletion.noMatches");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -887,7 +925,7 @@ class EntryCompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           [gtk.cell_area_box.CellAreaBox] will be used.
       Returns: Builder instance for fluent chaining
   */
-  T cellArea(gtk.cell_area.CellArea propval)
+  T cellArea(gtk.cell_area.CellArea propval) nothrow
   {
     return setProperty("cell-area", propval);
   }
@@ -902,7 +940,7 @@ class EntryCompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           using a custom match function.
       Returns: Builder instance for fluent chaining
   */
-  T inlineCompletion(bool propval)
+  T inlineCompletion(bool propval) nothrow
   {
     return setProperty("inline-completion", propval);
   }
@@ -914,19 +952,19 @@ class EntryCompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           will appear in the entry as you navigate through them.
       Returns: Builder instance for fluent chaining
   */
-  T inlineSelection(bool propval)
+  T inlineSelection(bool propval) nothrow
   {
     return setProperty("inline-selection", propval);
   }
 
   /** */
-  T minimumKeyLength(int propval)
+  T minimumKeyLength(int propval) nothrow
   {
     return setProperty("minimum-key-length", propval);
   }
 
   /** */
-  T model(gtk.tree_model.TreeModel propval)
+  T model(gtk.tree_model.TreeModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -938,7 +976,7 @@ class EntryCompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           shown in a popup window.
       Returns: Builder instance for fluent chaining
   */
-  T popupCompletion(bool propval)
+  T popupCompletion(bool propval) nothrow
   {
     return setProperty("popup-completion", propval);
   }
@@ -950,7 +988,7 @@ class EntryCompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           resized to the width of the entry.
       Returns: Builder instance for fluent chaining
   */
-  T popupSetWidth(bool propval)
+  T popupSetWidth(bool propval) nothrow
   {
     return setProperty("popup-set-width", propval);
   }
@@ -965,7 +1003,7 @@ class EntryCompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           [gtk.entry_completion.EntryCompletion.inlineCompletion].
       Returns: Builder instance for fluent chaining
   */
-  T popupSingleMatch(bool propval)
+  T popupSingleMatch(bool propval) nothrow
   {
     return setProperty("popup-single-match", propval);
   }
@@ -978,7 +1016,7 @@ class EntryCompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           Note that the strings must be UTF-8.
       Returns: Builder instance for fluent chaining
   */
-  T textColumn(int propval)
+  T textColumn(int propval) nothrow
   {
     return setProperty("text-column", propval);
   }
@@ -991,7 +1029,7 @@ final class EntryCompletionGidBuilder : EntryCompletionGidBuilderImpl!EntryCompl
       Create object from builder.
       Returns: New object
   */
-  EntryCompletion build()
+  EntryCompletion build() nothrow
   {
     return new EntryCompletion(cast(void*)createGObject(EntryCompletion._getGType), Yes.Take);
   }

@@ -19,26 +19,26 @@ class MountOperation : gio.mount_operation.MountOperation
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_mount_operation_get_type != &gidSymbolNotFound ? gtk_mount_operation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MountOperation self()
+  override MountOperation self() nothrow
   {
     return this;
   }
@@ -47,31 +47,31 @@ class MountOperation : gio.mount_operation.MountOperation
       Get builder for [gtk.mount_operation.MountOperation]
       Returns: New builder object
   */
-  static MountOperationGidBuilder builder()
+  static MountOperationGidBuilder builder() nothrow
   {
     return new MountOperationGidBuilder;
   }
 
   /** */
-  @property gtk.window.Window parent()
+  @property gtk.window.Window parent() nothrow
   {
     return getParent();
   }
 
   /** */
-  @property void parent(gtk.window.Window propval)
+  @property void parent(gtk.window.Window propval) nothrow
   {
     setParent(propval);
   }
 
   /** */
-  @property gdk.screen.Screen screen()
+  @property gdk.screen.Screen screen() nothrow
   {
     return getScreen();
   }
 
   /** */
-  @property void screen(gdk.screen.Screen propval)
+  @property void screen(gdk.screen.Screen propval) nothrow
   {
     setScreen(propval);
   }
@@ -83,7 +83,7 @@ class MountOperation : gio.mount_operation.MountOperation
         parent = transient parent of the window, or null
       Returns: a new #GtkMountOperation
   */
-  this(gtk.window.Window parent = null)
+  this(gtk.window.Window parent = null) nothrow
   {
     GMountOperation* _cretval;
     _cretval = gtk_mount_operation_new(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
@@ -94,7 +94,7 @@ class MountOperation : gio.mount_operation.MountOperation
       Gets the transient parent used by the #GtkMountOperation
       Returns: the transient parent for windows shown by op
   */
-  gtk.window.Window getParent()
+  gtk.window.Window getParent() nothrow
   {
     GtkWindow* _cretval;
     _cretval = gtk_mount_operation_get_parent(cast(GtkMountOperation*)this._cPtr);
@@ -107,7 +107,7 @@ class MountOperation : gio.mount_operation.MountOperation
       will be shown.
       Returns: the screen on which windows of op are shown
   */
-  gdk.screen.Screen getScreen()
+  gdk.screen.Screen getScreen() nothrow
   {
     GdkScreen* _cretval;
     _cretval = gtk_mount_operation_get_screen(cast(GtkMountOperation*)this._cPtr);
@@ -120,7 +120,7 @@ class MountOperation : gio.mount_operation.MountOperation
       a window.
       Returns: true if op is currently displaying a window
   */
-  bool isShowing()
+  bool isShowing() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_mount_operation_is_showing(cast(GtkMountOperation*)this._cPtr);
@@ -134,7 +134,7 @@ class MountOperation : gio.mount_operation.MountOperation
       Params:
         parent = transient parent of the window, or null
   */
-  void setParent(gtk.window.Window parent = null)
+  void setParent(gtk.window.Window parent = null) nothrow
   {
     gtk_mount_operation_set_parent(cast(GtkMountOperation*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
   }
@@ -145,7 +145,7 @@ class MountOperation : gio.mount_operation.MountOperation
       Params:
         screen = a #GdkScreen
   */
-  void setScreen(gdk.screen.Screen screen)
+  void setScreen(gdk.screen.Screen screen) nothrow
   {
     gtk_mount_operation_set_screen(cast(GtkMountOperation*)this._cPtr, screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
   }
@@ -156,13 +156,13 @@ class MountOperationGidBuilderImpl(T) : gio.mount_operation.MountOperationGidBui
 {
 
   /** */
-  T parent(gtk.window.Window propval)
+  T parent(gtk.window.Window propval) nothrow
   {
     return setProperty("parent", propval);
   }
 
   /** */
-  T screen(gdk.screen.Screen propval)
+  T screen(gdk.screen.Screen propval) nothrow
   {
     return setProperty("screen", propval);
   }
@@ -175,7 +175,7 @@ final class MountOperationGidBuilder : MountOperationGidBuilderImpl!MountOperati
       Create object from builder.
       Returns: New object
   */
-  MountOperation build()
+  MountOperation build() nothrow
   {
     return new MountOperation(cast(void*)createGObject(MountOperation._getGType), Yes.Take);
   }

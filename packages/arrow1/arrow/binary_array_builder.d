@@ -16,26 +16,26 @@ class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_binary_array_builder_get_type != &gidSymbolNotFound ? garrow_binary_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BinaryArrayBuilder self()
+  override BinaryArrayBuilder self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.binary_array_builder.BinaryArrayBuilder]
       Returns: New builder object
   */
-  static BinaryArrayBuilderGidBuilder builder()
+  static BinaryArrayBuilderGidBuilder builder() nothrow
   {
     return new BinaryArrayBuilderGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowBinaryArrayBuilder* _cretval;
     _cretval = garrow_binary_array_builder_new();
@@ -150,7 +150,7 @@ final class BinaryArrayBuilderGidBuilder : BinaryArrayBuilderGidBuilderImpl!Bina
       Create object from builder.
       Returns: New object
   */
-  BinaryArrayBuilder build()
+  BinaryArrayBuilder build() nothrow
   {
     return new BinaryArrayBuilder(cast(void*)createGObject(BinaryArrayBuilder._getGType), Yes.Take);
   }

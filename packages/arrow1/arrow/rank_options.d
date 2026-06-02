@@ -16,26 +16,26 @@ class RankOptions : arrow.function_options.FunctionOptions
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_rank_options_get_type != &gidSymbolNotFound ? garrow_rank_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RankOptions self()
+  override RankOptions self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class RankOptions : arrow.function_options.FunctionOptions
       Get builder for [arrow.rank_options.RankOptions]
       Returns: New builder object
   */
-  static RankOptionsGidBuilder builder()
+  static RankOptionsGidBuilder builder() nothrow
   {
     return new RankOptionsGidBuilder;
   }
@@ -53,7 +53,7 @@ class RankOptions : arrow.function_options.FunctionOptions
       Get `nullPlacement` property.
       Returns: Whether nulls and NaNs are placed at the start or at the end.
   */
-  @property arrow.types.NullPlacement nullPlacement()
+  @property arrow.types.NullPlacement nullPlacement() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.types.NullPlacement)("null-placement");
   }
@@ -63,7 +63,7 @@ class RankOptions : arrow.function_options.FunctionOptions
       Params:
         propval = Whether nulls and NaNs are placed at the start or at the end.
   */
-  @property void nullPlacement(arrow.types.NullPlacement propval)
+  @property void nullPlacement(arrow.types.NullPlacement propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(arrow.types.NullPlacement)("null-placement", propval);
   }
@@ -72,7 +72,7 @@ class RankOptions : arrow.function_options.FunctionOptions
       Get `tiebreaker` property.
       Returns: Tiebreaker for dealing with equal values in ranks.
   */
-  @property arrow.types.RankTiebreaker tiebreaker()
+  @property arrow.types.RankTiebreaker tiebreaker() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.types.RankTiebreaker)("tiebreaker");
   }
@@ -82,13 +82,13 @@ class RankOptions : arrow.function_options.FunctionOptions
       Params:
         propval = Tiebreaker for dealing with equal values in ranks.
   */
-  @property void tiebreaker(arrow.types.RankTiebreaker propval)
+  @property void tiebreaker(arrow.types.RankTiebreaker propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(arrow.types.RankTiebreaker)("tiebreaker", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowRankOptions* _cretval;
     _cretval = garrow_rank_options_new();
@@ -101,7 +101,7 @@ class RankOptions : arrow.function_options.FunctionOptions
       Params:
         sortKey = The sort key to be added.
   */
-  void addSortKey(arrow.sort_key.SortKey sortKey)
+  void addSortKey(arrow.sort_key.SortKey sortKey) nothrow
   {
     garrow_rank_options_add_sort_key(cast(GArrowRankOptions*)this._cPtr, sortKey ? cast(GArrowSortKey*)sortKey._cPtr(No.Dup) : null);
   }
@@ -109,7 +109,7 @@ class RankOptions : arrow.function_options.FunctionOptions
   alias equal = arrow.function_options.FunctionOptions.equal;
 
   /** */
-  bool equal(arrow.rank_options.RankOptions otherOptions)
+  bool equal(arrow.rank_options.RankOptions otherOptions) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_rank_options_equal(cast(GArrowRankOptions*)this._cPtr, otherOptions ? cast(GArrowRankOptions*)otherOptions._cPtr(No.Dup) : null);
@@ -117,7 +117,7 @@ class RankOptions : arrow.function_options.FunctionOptions
   }
 
   /** */
-  arrow.sort_key.SortKey[] getSortKeys()
+  arrow.sort_key.SortKey[] getSortKeys() nothrow
   {
     GList* _cretval;
     _cretval = garrow_rank_options_get_sort_keys(cast(GArrowRankOptions*)this._cPtr);
@@ -131,7 +131,7 @@ class RankOptions : arrow.function_options.FunctionOptions
       Params:
         sortKeys = The sort keys to be used.
   */
-  void setSortKeys(arrow.sort_key.SortKey[] sortKeys)
+  void setSortKeys(arrow.sort_key.SortKey[] sortKeys) nothrow
   {
     auto _sortKeys = gListFromD!(arrow.sort_key.SortKey)(sortKeys);
     scope(exit) containerFree!(GList*, arrow.sort_key.SortKey, GidOwnership.None)(_sortKeys);
@@ -149,7 +149,7 @@ class RankOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBu
         propval = Whether nulls and NaNs are placed at the start or at the end.
       Returns: Builder instance for fluent chaining
   */
-  T nullPlacement(arrow.types.NullPlacement propval)
+  T nullPlacement(arrow.types.NullPlacement propval) nothrow
   {
     return setProperty("null-placement", propval);
   }
@@ -160,7 +160,7 @@ class RankOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBu
         propval = Tiebreaker for dealing with equal values in ranks.
       Returns: Builder instance for fluent chaining
   */
-  T tiebreaker(arrow.types.RankTiebreaker propval)
+  T tiebreaker(arrow.types.RankTiebreaker propval) nothrow
   {
     return setProperty("tiebreaker", propval);
   }
@@ -173,7 +173,7 @@ final class RankOptionsGidBuilder : RankOptionsGidBuilderImpl!RankOptionsGidBuil
       Create object from builder.
       Returns: New object
   */
-  RankOptions build()
+  RankOptions build() nothrow
   {
     return new RankOptions(cast(void*)createGObject(RankOptions._getGType), Yes.Take);
   }

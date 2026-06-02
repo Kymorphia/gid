@@ -41,26 +41,26 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_builder_list_item_factory_get_type != &gidSymbolNotFound ? gtk_builder_list_item_factory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BuilderListItemFactory self()
+  override BuilderListItemFactory self() nothrow
   {
     return this;
   }
@@ -69,7 +69,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
       Get builder for [gtk.builder_list_item_factory.BuilderListItemFactory]
       Returns: New builder object
   */
-  static BuilderListItemFactoryGidBuilder builder()
+  static BuilderListItemFactoryGidBuilder builder() nothrow
   {
     return new BuilderListItemFactoryGidBuilder;
   }
@@ -78,7 +78,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
       Get `bytes` property.
       Returns: [glib.bytes.Bytes] containing the UI definition.
   */
-  @property glib.bytes.Bytes bytes()
+  @property glib.bytes.Bytes bytes() nothrow
   {
     return getBytes();
   }
@@ -87,7 +87,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
       Get `resource` property.
       Returns: Path of the resource containing the UI definition.
   */
-  @property string resource()
+  @property string resource() nothrow
   {
     return getResource();
   }
@@ -96,7 +96,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
       Get `scope_` property.
       Returns: [gtk.builder_scope.BuilderScope] to use when instantiating listitems
   */
-  @property gtk.builder_scope.BuilderScope scope_()
+  @property gtk.builder_scope.BuilderScope scope_() nothrow
   {
     return getScope();
   }
@@ -110,7 +110,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
         bytes = the [glib.bytes.Bytes] containing the ui file to instantiate
       Returns: a new [gtk.builder_list_item_factory.BuilderListItemFactory]
   */
-  static gtk.builder_list_item_factory.BuilderListItemFactory newFromBytes(gtk.builder_scope.BuilderScope scope_, glib.bytes.Bytes bytes)
+  static gtk.builder_list_item_factory.BuilderListItemFactory newFromBytes(gtk.builder_scope.BuilderScope scope_, glib.bytes.Bytes bytes) nothrow
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_builder_list_item_factory_new_from_bytes(scope_ ? cast(GtkBuilderScope*)(cast(gobject.object.ObjectWrap)scope_)._cPtr(No.Dup) : null, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null);
@@ -127,7 +127,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
         resourcePath = valid path to a resource that contains the data
       Returns: a new [gtk.builder_list_item_factory.BuilderListItemFactory]
   */
-  static gtk.builder_list_item_factory.BuilderListItemFactory newFromResource(gtk.builder_scope.BuilderScope scope_, string resourcePath)
+  static gtk.builder_list_item_factory.BuilderListItemFactory newFromResource(gtk.builder_scope.BuilderScope scope_, string resourcePath) nothrow
   {
     GtkListItemFactory* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
@@ -141,7 +141,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
       listitems.
       Returns: The [gtk.builder.Builder] data
   */
-  glib.bytes.Bytes getBytes()
+  glib.bytes.Bytes getBytes() nothrow
   {
     GBytes* _cretval;
     _cretval = gtk_builder_list_item_factory_get_bytes(cast(GtkBuilderListItemFactory*)this._cPtr);
@@ -153,7 +153,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
       If the data references a resource, gets the path of that resource.
       Returns: The path to the resource
   */
-  string getResource()
+  string getResource() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_builder_list_item_factory_get_resource(cast(GtkBuilderListItemFactory*)this._cPtr);
@@ -165,7 +165,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
       Gets the scope used when constructing listitems.
       Returns: The scope used when constructing listitems
   */
-  gtk.builder_scope.BuilderScope getScope()
+  gtk.builder_scope.BuilderScope getScope() nothrow
   {
     GtkBuilderScope* _cretval;
     _cretval = gtk_builder_list_item_factory_get_scope(cast(GtkBuilderListItemFactory*)this._cPtr);
@@ -184,7 +184,7 @@ class BuilderListItemFactoryGidBuilderImpl(T) : gtk.list_item_factory.ListItemFa
         propval = [glib.bytes.Bytes] containing the UI definition.
       Returns: Builder instance for fluent chaining
   */
-  T bytes(glib.bytes.Bytes propval)
+  T bytes(glib.bytes.Bytes propval) nothrow
   {
     return setProperty("bytes", propval);
   }
@@ -195,7 +195,7 @@ class BuilderListItemFactoryGidBuilderImpl(T) : gtk.list_item_factory.ListItemFa
         propval = Path of the resource containing the UI definition.
       Returns: Builder instance for fluent chaining
   */
-  T resource(string propval)
+  T resource(string propval) nothrow
   {
     return setProperty("resource", propval);
   }
@@ -206,7 +206,7 @@ class BuilderListItemFactoryGidBuilderImpl(T) : gtk.list_item_factory.ListItemFa
         propval = [gtk.builder_scope.BuilderScope] to use when instantiating listitems
       Returns: Builder instance for fluent chaining
   */
-  T scope_(gtk.builder_scope.BuilderScope propval)
+  T scope_(gtk.builder_scope.BuilderScope propval) nothrow
   {
     return setProperty("scope", propval);
   }
@@ -219,7 +219,7 @@ final class BuilderListItemFactoryGidBuilder : BuilderListItemFactoryGidBuilderI
       Create object from builder.
       Returns: New object
   */
-  BuilderListItemFactory build()
+  BuilderListItemFactory build() nothrow
   {
     return new BuilderListItemFactory(cast(void*)createGObject(BuilderListItemFactory._getGType), No.Take);
   }

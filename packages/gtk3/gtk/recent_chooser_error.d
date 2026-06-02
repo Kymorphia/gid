@@ -14,7 +14,7 @@ struct RecentChooserError
   alias Enum = gtk.types.RecentChooserError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gtk_recent_chooser_error_quark();
@@ -24,12 +24,12 @@ struct RecentChooserError
 
 class RecentChooseException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gtk.recent_chooser_error.RecentChooserError.quark, cast(int)code, msg);
   }

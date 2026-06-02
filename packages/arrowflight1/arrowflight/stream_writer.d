@@ -15,26 +15,26 @@ class StreamWriter : arrowflight.record_batch_writer.RecordBatchWriter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_stream_writer_get_type != &gidSymbolNotFound ? gaflight_stream_writer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StreamWriter self()
+  override StreamWriter self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class StreamWriter : arrowflight.record_batch_writer.RecordBatchWriter
       Get builder for [arrowflight.stream_writer.StreamWriter]
       Returns: New builder object
   */
-  static StreamWriterGidBuilder builder()
+  static StreamWriterGidBuilder builder() nothrow
   {
     return new StreamWriterGidBuilder;
   }
@@ -72,7 +72,7 @@ final class StreamWriterGidBuilder : StreamWriterGidBuilderImpl!StreamWriterGidB
       Create object from builder.
       Returns: New object
   */
-  StreamWriter build()
+  StreamWriter build() nothrow
   {
     return new StreamWriter(cast(void*)createGObject(StreamWriter._getGType), No.Take);
   }

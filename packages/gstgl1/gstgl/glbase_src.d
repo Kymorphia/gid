@@ -20,26 +20,26 @@ class GLBaseSrc : gstbase.push_src.PushSrc
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_base_src_get_type != &gidSymbolNotFound ? gst_gl_base_src_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLBaseSrc self()
+  override GLBaseSrc self() nothrow
   {
     return this;
   }
@@ -48,19 +48,19 @@ class GLBaseSrc : gstbase.push_src.PushSrc
       Get builder for [gstgl.glbase_src.GLBaseSrc]
       Returns: New builder object
   */
-  static GLBaseSrcGidBuilder builder()
+  static GLBaseSrcGidBuilder builder() nothrow
   {
     return new GLBaseSrcGidBuilder;
   }
 
   /** */
-  @property long timestampOffset()
+  @property long timestampOffset() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("timestamp-offset");
   }
 
   /** */
-  @property void timestampOffset(long propval)
+  @property void timestampOffset(long propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(long)("timestamp-offset", propval);
   }
@@ -71,7 +71,7 @@ class GLBaseSrcGidBuilderImpl(T) : gstbase.push_src.PushSrcGidBuilderImpl!T
 {
 
   /** */
-  T timestampOffset(long propval)
+  T timestampOffset(long propval) nothrow
   {
     return setProperty("timestamp-offset", propval);
   }
@@ -84,7 +84,7 @@ final class GLBaseSrcGidBuilder : GLBaseSrcGidBuilderImpl!GLBaseSrcGidBuilder
       Create object from builder.
       Returns: New object
   */
-  GLBaseSrc build()
+  GLBaseSrc build() nothrow
   {
     return new GLBaseSrc(cast(void*)createGObject(GLBaseSrc._getGType), No.Take);
   }

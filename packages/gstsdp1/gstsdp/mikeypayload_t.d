@@ -16,11 +16,8 @@ class MIKEYPayloadT
   GstMIKEYPayloadT _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstsdp.mikeypayload_t.MIKEYPayloadT");
-
     _cInstance = *cast(GstMIKEYPayloadT*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class MIKEYPayloadT
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class MIKEYPayloadT
       Get `pt` field.
       Returns: the payload header
   */
-  @property gstsdp.mikeypayload.MIKEYPayload pt()
+  @property gstsdp.mikeypayload.MIKEYPayload pt() nothrow
   {
     return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadT*)this._cPtr).pt);
   }
@@ -46,7 +43,7 @@ class MIKEYPayloadT
       Get `type` field.
       Returns: a #GstMIKEYTSType
   */
-  @property gstsdp.types.MIKEYTSType type()
+  @property gstsdp.types.MIKEYTSType type() nothrow
   {
     return cast(gstsdp.types.MIKEYTSType)(cast(GstMIKEYPayloadT*)this._cPtr).type;
   }
@@ -56,7 +53,7 @@ class MIKEYPayloadT
       Params:
         propval = a #GstMIKEYTSType
   */
-  @property void type(gstsdp.types.MIKEYTSType propval)
+  @property void type(gstsdp.types.MIKEYTSType propval) nothrow
   {
     (cast(GstMIKEYPayloadT*)this._cPtr).type = cast(GstMIKEYTSType)propval;
   }

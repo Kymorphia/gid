@@ -16,26 +16,26 @@ class File : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_file_get_type != &gidSymbolNotFound ? gtk_source_file_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override File self()
+  override File self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class File : gobject.object.ObjectWrap
       Get builder for [gtksource.file.File]
       Returns: New builder object
   */
-  static FileGidBuilder builder()
+  static FileGidBuilder builder() nothrow
   {
     return new FileGidBuilder;
   }
@@ -53,7 +53,7 @@ class File : gobject.object.ObjectWrap
       Get `compressionType` property.
       Returns: The compression type.
   */
-  @property gtksource.types.CompressionType compressionType()
+  @property gtksource.types.CompressionType compressionType() nothrow
   {
     return getCompressionType();
   }
@@ -63,7 +63,7 @@ class File : gobject.object.ObjectWrap
       Returns: The character encoding, initially null. After a successful file
         loading or saving operation, the encoding is non-null.
   */
-  @property gtksource.encoding.Encoding encoding()
+  @property gtksource.encoding.Encoding encoding() nothrow
   {
     return getEncoding();
   }
@@ -72,7 +72,7 @@ class File : gobject.object.ObjectWrap
       Get `location` property.
       Returns: The location.
   */
-  @property gio.file.File location()
+  @property gio.file.File location() nothrow
   {
     return getLocation();
   }
@@ -82,7 +82,7 @@ class File : gobject.object.ObjectWrap
       Params:
         propval = The location.
   */
-  @property void location(gio.file.File propval)
+  @property void location(gio.file.File propval) nothrow
   {
     setLocation(propval);
   }
@@ -91,7 +91,7 @@ class File : gobject.object.ObjectWrap
       Get `newlineType` property.
       Returns: The line ending type.
   */
-  @property gtksource.types.NewlineType newlineType()
+  @property gtksource.types.NewlineType newlineType() nothrow
   {
     return getNewlineType();
   }
@@ -101,13 +101,13 @@ class File : gobject.object.ObjectWrap
       Returns: Whether the file is read-only or not. The value of this property is
         not updated automatically (there is no file monitors).
   */
-  @property bool readOnly()
+  @property bool readOnly() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("read-only");
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GtkSourceFile* _cretval;
     _cretval = gtk_source_file_new();
@@ -125,13 +125,13 @@ class File : gobject.object.ObjectWrap
       Since this function is synchronous, it is advised to call it only on local
       files. See [gtksource.file.File.isLocal].
   */
-  void checkFileOnDisk()
+  void checkFileOnDisk() nothrow
   {
     gtk_source_file_check_file_on_disk(cast(GtkSourceFile*)this._cPtr);
   }
 
   /** */
-  gtksource.types.CompressionType getCompressionType()
+  gtksource.types.CompressionType getCompressionType() nothrow
   {
     GtkSourceCompressionType _cretval;
     _cretval = gtk_source_file_get_compression_type(cast(GtkSourceFile*)this._cPtr);
@@ -144,7 +144,7 @@ class File : gobject.object.ObjectWrap
       operation, the encoding is non-null.
       Returns: the character encoding.
   */
-  gtksource.encoding.Encoding getEncoding()
+  gtksource.encoding.Encoding getEncoding() nothrow
   {
     const(GtkSourceEncoding)* _cretval;
     _cretval = gtk_source_file_get_encoding(cast(GtkSourceFile*)this._cPtr);
@@ -153,7 +153,7 @@ class File : gobject.object.ObjectWrap
   }
 
   /** */
-  gio.file.File getLocation()
+  gio.file.File getLocation() nothrow
   {
     GFile* _cretval;
     _cretval = gtk_source_file_get_location(cast(GtkSourceFile*)this._cPtr);
@@ -162,7 +162,7 @@ class File : gobject.object.ObjectWrap
   }
 
   /** */
-  gtksource.types.NewlineType getNewlineType()
+  gtksource.types.NewlineType getNewlineType() nothrow
   {
     GtkSourceNewlineType _cretval;
     _cretval = gtk_source_file_get_newline_type(cast(GtkSourceFile*)this._cPtr);
@@ -178,7 +178,7 @@ class File : gobject.object.ObjectWrap
       [gtksource.file.File.checkFileOnDisk].
       Returns: whether the file has been deleted.
   */
-  bool isDeleted()
+  bool isDeleted() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_file_is_deleted(cast(GtkSourceFile*)this._cPtr);
@@ -193,7 +193,7 @@ class File : gobject.object.ObjectWrap
       [gtksource.file.File.checkFileOnDisk].
       Returns: whether the file is externally modified.
   */
-  bool isExternallyModified()
+  bool isExternallyModified() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_file_is_externally_modified(cast(GtkSourceFile*)this._cPtr);
@@ -205,7 +205,7 @@ class File : gobject.object.ObjectWrap
       returns false.
       Returns: whether the file is local.
   */
-  bool isLocal()
+  bool isLocal() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_file_is_local(cast(GtkSourceFile*)this._cPtr);
@@ -220,7 +220,7 @@ class File : gobject.object.ObjectWrap
       [gtksource.file.File.checkFileOnDisk].
       Returns: whether the file is read-only.
   */
-  bool isReadonly()
+  bool isReadonly() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_file_is_readonly(cast(GtkSourceFile*)this._cPtr);
@@ -233,7 +233,7 @@ class File : gobject.object.ObjectWrap
       Params:
         location = the new #GFile, or null.
   */
-  void setLocation(gio.file.File location = null)
+  void setLocation(gio.file.File location = null) nothrow
   {
     gtk_source_file_set_location(cast(GtkSourceFile*)this._cPtr, location ? cast(GFile*)(cast(gobject.object.ObjectWrap)location)._cPtr(No.Dup) : null);
   }
@@ -249,7 +249,7 @@ class FileGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The location.
       Returns: Builder instance for fluent chaining
   */
-  T location(gio.file.File propval)
+  T location(gio.file.File propval) nothrow
   {
     return setProperty("location", propval);
   }
@@ -262,7 +262,7 @@ final class FileGidBuilder : FileGidBuilderImpl!FileGidBuilder
       Create object from builder.
       Returns: New object
   */
-  File build()
+  File build() nothrow
   {
     return new File(cast(void*)createGObject(File._getGType), Yes.Take);
   }

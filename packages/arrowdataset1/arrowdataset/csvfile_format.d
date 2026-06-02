@@ -14,26 +14,26 @@ class CSVFileFormat : arrowdataset.file_format.FileFormat
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_csv_file_format_get_type != &gidSymbolNotFound ? gadataset_csv_file_format_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CSVFileFormat self()
+  override CSVFileFormat self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class CSVFileFormat : arrowdataset.file_format.FileFormat
       Get builder for [arrowdataset.csvfile_format.CSVFileFormat]
       Returns: New builder object
   */
-  static CSVFileFormatGidBuilder builder()
+  static CSVFileFormatGidBuilder builder() nothrow
   {
     return new CSVFileFormatGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GADatasetCSVFileFormat* _cretval;
     _cretval = gadataset_csv_file_format_new();
@@ -68,7 +68,7 @@ final class CSVFileFormatGidBuilder : CSVFileFormatGidBuilderImpl!CSVFileFormatG
       Create object from builder.
       Returns: New object
   */
-  CSVFileFormat build()
+  CSVFileFormat build() nothrow
   {
     return new CSVFileFormat(cast(void*)createGObject(CSVFileFormat._getGType), Yes.Take);
   }

@@ -24,23 +24,22 @@ struct Point
   float y;
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())graphene_point_get_type != &gidSymbolNotFound ? graphene_point_get_type() : cast(GType)0;
   }
 
   /** */
-  @property GType _gType()
+  @property GType _gType() nothrow
   {
     return _getGType();
   }
 
-  void* boxCopy()
+  void* boxCopy() nothrow
   {
     import gobject.c.functions : g_boxed_copy;
-    return g_boxed_copy(_gType,
-        cast(void*)&this);
+    return g_boxed_copy(_gType, cast(void*)&this);
   }
 
   /**
@@ -52,7 +51,7 @@ struct Point
         dY = distance component on the Y axis
       Returns: the distance between the two points
   */
-  float distance(graphene.point.Point b, out float dX, out float dY)
+  float distance(graphene.point.Point b, out float dX, out float dY) nothrow
   {
     float _retval;
     _retval = graphene_point_distance(cast(const(graphene_point_t)*)&this, cast(const(graphene_point_t)*)&b, cast(float*)&dX, cast(float*)&dY);
@@ -71,7 +70,7 @@ struct Point
         b = a #graphene_point_t
       Returns: `true` if the points have the same coordinates
   */
-  bool equal(graphene.point.Point b)
+  bool equal(graphene.point.Point b) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_point_equal(cast(const(graphene_point_t)*)&this, cast(const(graphene_point_t)*)&b);
@@ -88,7 +87,7 @@ struct Point
         y = the Y coordinate
       Returns: the initialized point
   */
-  graphene.point.Point init_(float x, float y)
+  graphene.point.Point init_(float x, float y) nothrow
   {
     graphene_point_t* _cretval;
     _cretval = graphene_point_init(cast(graphene_point_t*)&this, x, y);
@@ -105,7 +104,7 @@ struct Point
         src = the #graphene_point_t to use
       Returns: the initialized point
   */
-  graphene.point.Point initFromPoint(graphene.point.Point src)
+  graphene.point.Point initFromPoint(graphene.point.Point src) nothrow
   {
     graphene_point_t* _cretval;
     _cretval = graphene_point_init_from_point(cast(graphene_point_t*)&this, cast(const(graphene_point_t)*)&src);
@@ -122,7 +121,7 @@ struct Point
         src = a #graphene_vec2_t
       Returns: the initialized point
   */
-  graphene.point.Point initFromVec2(graphene.vec2.Vec2 src)
+  graphene.point.Point initFromVec2(graphene.vec2.Vec2 src) nothrow
   {
     graphene_point_t* _cretval;
     _cretval = graphene_point_init_from_vec2(cast(graphene_point_t*)&this, src ? cast(const(graphene_vec2_t)*)src._cPtr(No.Dup) : null);
@@ -142,7 +141,7 @@ struct Point
         res = return location for the interpolated
             point
   */
-  void interpolate(graphene.point.Point b, double factor, out graphene.point.Point res)
+  void interpolate(graphene.point.Point b, double factor, out graphene.point.Point res) nothrow
   {
     graphene_point_interpolate(cast(const(graphene_point_t)*)&this, cast(const(graphene_point_t)*)&b, factor, cast(graphene_point_t*)&res);
   }
@@ -156,7 +155,7 @@ struct Point
         epsilon = threshold between the two points
       Returns: `true` if the distance is within epsilon
   */
-  bool near(graphene.point.Point b, float epsilon)
+  bool near(graphene.point.Point b, float epsilon) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_point_near(cast(const(graphene_point_t)*)&this, cast(const(graphene_point_t)*)&b, epsilon);
@@ -170,7 +169,7 @@ struct Point
       Params:
         v = return location for the vertex
   */
-  void toVec2(out graphene.vec2.Vec2 v)
+  void toVec2(out graphene.vec2.Vec2 v) nothrow
   {
     graphene_vec2_t _v;
     graphene_point_to_vec2(cast(const(graphene_point_t)*)&this, &_v);
@@ -181,7 +180,7 @@ struct Point
       Returns a point fixed at (0, 0).
       Returns: a fixed point
   */
-  static graphene.point.Point zero()
+  static graphene.point.Point zero() nothrow
   {
     const(graphene_point_t)* _cretval;
     _cretval = graphene_point_zero();

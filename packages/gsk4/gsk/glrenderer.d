@@ -14,26 +14,26 @@ class GLRenderer : gsk.renderer.Renderer
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_gl_renderer_get_type != &gidSymbolNotFound ? gsk_gl_renderer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLRenderer self()
+  override GLRenderer self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class GLRenderer : gsk.renderer.Renderer
       Get builder for [gsk.glrenderer.GLRenderer]
       Returns: New builder object
   */
-  static GLRendererGidBuilder builder()
+  static GLRendererGidBuilder builder() nothrow
   {
     return new GLRendererGidBuilder;
   }
@@ -51,7 +51,7 @@ class GLRenderer : gsk.renderer.Renderer
       Creates a new [gsk.renderer.Renderer] using the new OpenGL renderer.
       Returns: a new GL renderer
   */
-  this()
+  this() nothrow
   {
     GskRenderer* _cretval;
     _cretval = gsk_gl_renderer_new();
@@ -71,7 +71,7 @@ final class GLRendererGidBuilder : GLRendererGidBuilderImpl!GLRendererGidBuilder
       Create object from builder.
       Returns: New object
   */
-  GLRenderer build()
+  GLRenderer build() nothrow
   {
     return new GLRenderer(cast(void*)createGObject(GLRenderer._getGType), Yes.Take);
   }

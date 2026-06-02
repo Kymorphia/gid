@@ -15,26 +15,26 @@ class Date32Array : arrow.numeric_array.NumericArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_date32_array_get_type != &gidSymbolNotFound ? garrow_date32_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Date32Array self()
+  override Date32Array self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class Date32Array : arrow.numeric_array.NumericArray
       Get builder for [arrow.date32_array.Date32Array]
       Returns: New builder object
   */
-  static Date32ArrayGidBuilder builder()
+  static Date32ArrayGidBuilder builder() nothrow
   {
     return new Date32ArrayGidBuilder;
   }
 
   /** */
-  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
+  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls) nothrow
   {
     GArrowDate32Array* _cretval;
     _cretval = garrow_date32_array_new(length, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
@@ -57,7 +57,7 @@ class Date32Array : arrow.numeric_array.NumericArray
   }
 
   /** */
-  int getValue(long i)
+  int getValue(long i) nothrow
   {
     int _retval;
     _retval = garrow_date32_array_get_value(cast(GArrowDate32Array*)this._cPtr, i);
@@ -65,7 +65,7 @@ class Date32Array : arrow.numeric_array.NumericArray
   }
 
   /** */
-  int[] getValues()
+  int[] getValues() nothrow
   {
     const(int)* _cretval;
     long _cretlength;
@@ -92,7 +92,7 @@ final class Date32ArrayGidBuilder : Date32ArrayGidBuilderImpl!Date32ArrayGidBuil
       Create object from builder.
       Returns: New object
   */
-  Date32Array build()
+  Date32Array build() nothrow
   {
     return new Date32Array(cast(void*)createGObject(Date32Array._getGType), Yes.Take);
   }

@@ -16,26 +16,26 @@ class FilterCharset : gmime.filter.Filter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_filter_charset_get_type != &gidSymbolNotFound ? g_mime_filter_charset_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FilterCharset self()
+  override FilterCharset self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class FilterCharset : gmime.filter.Filter
       Get builder for [gmime.filter_charset.FilterCharset]
       Returns: New builder object
   */
-  static FilterCharsetGidBuilder builder()
+  static FilterCharsetGidBuilder builder() nothrow
   {
     return new FilterCharsetGidBuilder;
   }
@@ -58,7 +58,7 @@ class FilterCharset : gmime.filter.Filter
       Returns: a new charset filter or null if the charset conversion is
         not possible.
   */
-  this(string fromCharset, string toCharset)
+  this(string fromCharset, string toCharset) nothrow
   {
     GMimeFilter* _cretval;
     const(char)* _fromCharset = fromCharset.toCString(No.Alloc);
@@ -80,7 +80,7 @@ final class FilterCharsetGidBuilder : FilterCharsetGidBuilderImpl!FilterCharsetG
       Create object from builder.
       Returns: New object
   */
-  FilterCharset build()
+  FilterCharset build() nothrow
   {
     return new FilterCharset(cast(void*)createGObject(FilterCharset._getGType), Yes.Take);
   }

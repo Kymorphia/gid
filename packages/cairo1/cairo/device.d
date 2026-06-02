@@ -22,32 +22,32 @@ class Device : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_device_get_type != &gidSymbolNotFound ? cairo_gobject_device_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Device self()
+  override Device self() nothrow
   {
     return this;
   }
@@ -76,7 +76,7 @@ class Device : gobject.boxed.Boxed
                       acquired. After a successful call to [cairo.device.Device.acquire],
                       a matching call to [cairo.device.Device.release] is required.
   */
-  cairo.types.Status acquire()
+  cairo.types.Status acquire() nothrow
   {
     cairo_status_t _cretval;
     _cretval = cairo_device_acquire(cast(cairo_device_t*)this._cPtr);
@@ -98,7 +98,7 @@ class Device : gobject.boxed.Boxed
       
       This function may acquire devices.
   */
-  void finish()
+  void finish() nothrow
   {
     cairo_device_finish(cast(cairo_device_t*)this._cPtr);
   }
@@ -113,7 +113,7 @@ class Device : gobject.boxed.Boxed
       
       This function may acquire devices.
   */
-  void flush()
+  void flush() nothrow
   {
     cairo_device_flush(cast(cairo_device_t*)this._cPtr);
   }
@@ -123,7 +123,7 @@ class Device : gobject.boxed.Boxed
       for available types.
       Returns: The type of device.
   */
-  cairo.types.DeviceType getDeviceType()
+  cairo.types.DeviceType getDeviceType() nothrow
   {
     cairo_device_type_t _cretval;
     _cretval = cairo_device_get_type(cast(cairo_device_t*)this._cPtr);
@@ -141,7 +141,7 @@ class Device : gobject.boxed.Boxed
           attached to
       Returns: the user data previously attached or null.
   */
-  void* getUserData(cairo.types.UserDataKey key)
+  void* getUserData(cairo.types.UserDataKey key) nothrow
   {
     auto _retval = cairo_device_get_user_data(cast(cairo_device_t*)this._cPtr, &key);
     return _retval;
@@ -151,7 +151,7 @@ class Device : gobject.boxed.Boxed
       Returns the total elapsed time of the observation.
       Returns: the elapsed time, in nanoseconds.
   */
-  double observerElapsed()
+  double observerElapsed() nothrow
   {
     double _retval;
     _retval = cairo_device_observer_elapsed(cast(cairo_device_t*)this._cPtr);
@@ -162,7 +162,7 @@ class Device : gobject.boxed.Boxed
       Returns the elapsed time of the fill operations.
       Returns: the elapsed time, in nanoseconds.
   */
-  double observerFillElapsed()
+  double observerFillElapsed() nothrow
   {
     double _retval;
     _retval = cairo_device_observer_fill_elapsed(cast(cairo_device_t*)this._cPtr);
@@ -173,7 +173,7 @@ class Device : gobject.boxed.Boxed
       Returns the elapsed time of the glyph operations.
       Returns: the elapsed time, in nanoseconds.
   */
-  double observerGlyphsElapsed()
+  double observerGlyphsElapsed() nothrow
   {
     double _retval;
     _retval = cairo_device_observer_glyphs_elapsed(cast(cairo_device_t*)this._cPtr);
@@ -184,7 +184,7 @@ class Device : gobject.boxed.Boxed
       Returns the elapsed time of the mask operations.
       Returns: the elapsed time, in nanoseconds
   */
-  double observerMaskElapsed()
+  double observerMaskElapsed() nothrow
   {
     double _retval;
     _retval = cairo_device_observer_mask_elapsed(cast(cairo_device_t*)this._cPtr);
@@ -195,7 +195,7 @@ class Device : gobject.boxed.Boxed
       Returns the elapsed time of the paint operations.
       Returns: the elapsed time, in nanoseconds.
   */
-  double observerPaintElapsed()
+  double observerPaintElapsed() nothrow
   {
     double _retval;
     _retval = cairo_device_observer_paint_elapsed(cast(cairo_device_t*)this._cPtr);
@@ -209,9 +209,9 @@ class Device : gobject.boxed.Boxed
         writeFunc = the write function
       Returns: the status after the operation
   */
-  cairo.types.Status observerPrint(cairo.types.WriteFunc writeFunc)
+  cairo.types.Status observerPrint(cairo.types.WriteFunc writeFunc) nothrow
   {
-    extern(C) cairo_status_t _writeFuncCallback(void* closure, const(ubyte)* data, uint length)
+    extern(C) cairo_status_t _writeFuncCallback(void* closure, const(ubyte)* data, uint length) nothrow
     {
       cairo.types.Status _dretval;
       auto _dlg = cast(cairo.types.WriteFunc*)closure;
@@ -219,7 +219,14 @@ class Device : gobject.boxed.Boxed
       _data.length = length;
       _data[0 .. length] = data[0 .. length];
 
-      _dretval = (*_dlg)(_data);
+      try
+      {
+        _dretval = (*_dlg)(_data);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "cairo.types.WriteFunc");
+      }
       auto _retval = cast(cairo_status_t)_dretval;
 
       return _retval;
@@ -236,7 +243,7 @@ class Device : gobject.boxed.Boxed
       Returns the elapsed time of the stroke operations.
       Returns: the elapsed time, in nanoseconds.
   */
-  double observerStrokeElapsed()
+  double observerStrokeElapsed() nothrow
   {
     double _retval;
     _retval = cairo_device_observer_stroke_elapsed(cast(cairo_device_t*)this._cPtr);
@@ -247,7 +254,7 @@ class Device : gobject.boxed.Boxed
       Releases a device previously acquired using [cairo.device.Device.acquire]. See
       that function for details.
   */
-  void release()
+  void release() nothrow
   {
     cairo_device_release(cast(cairo_device_t*)this._cPtr);
   }
@@ -258,7 +265,7 @@ class Device : gobject.boxed.Boxed
       Returns: [cairo.types.Status.Success] on success or an error code if
                       the device is in an error state.
   */
-  cairo.types.Status status()
+  cairo.types.Status status() nothrow
   {
     cairo_status_t _cretval;
     _cretval = cairo_device_status(cast(cairo_device_t*)this._cPtr);

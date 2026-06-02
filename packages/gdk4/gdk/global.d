@@ -62,7 +62,7 @@ import gobject.value;
         Cairo, use [gdk.texture.Texture.download] to download the data into a Cairo
         image surface.
 */
-void cairoDrawFromGl(cairo.context.Context cr, gdk.surface.Surface surface, int source, int sourceType, int bufferScale, int x, int y, int width, int height)
+void cairoDrawFromGl(cairo.context.Context cr, gdk.surface.Surface surface, int source, int sourceType, int bufferScale, int x, int y, int width, int height) nothrow
 {
   gdk_cairo_draw_from_gl(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, surface ? cast(GdkSurface*)surface._cPtr(No.Dup) : null, source, sourceType, bufferScale, x, y, width, height);
 }
@@ -74,7 +74,7 @@ void cairoDrawFromGl(cairo.context.Context cr, gdk.surface.Surface surface, int 
       cr = a cairo context
       rectangle = a [gtk.types.Rectangle]
 */
-void cairoRectangle(cairo.context.Context cr, gdk.rectangle.Rectangle rectangle)
+void cairoRectangle(cairo.context.Context cr, gdk.rectangle.Rectangle rectangle) nothrow
 {
   gdk_cairo_rectangle(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&rectangle);
 }
@@ -86,7 +86,7 @@ void cairoRectangle(cairo.context.Context cr, gdk.rectangle.Rectangle rectangle)
       cr = a cairo context
       region = a [cairo.region.Region]
 */
-void cairoRegion(cairo.context.Context cr, cairo.region.Region region)
+void cairoRegion(cairo.context.Context cr, cairo.region.Region region) nothrow
 {
   gdk_cairo_region(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, region ? cast(const(cairo_region_t)*)region._cPtr(No.Dup) : null);
 }
@@ -102,7 +102,7 @@ void cairoRegion(cairo.context.Context cr, cairo.region.Region region)
       surface = a cairo surface
     Returns: A [cairo.region.Region]
 */
-cairo.region.Region cairoRegionCreateFromSurface(cairo.surface.Surface surface)
+cairo.region.Region cairoRegionCreateFromSurface(cairo.surface.Surface surface) nothrow
 {
   cairo_region_t* _cretval;
   _cretval = gdk_cairo_region_create_from_surface(surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null);
@@ -122,7 +122,7 @@ cairo.region.Region cairoRegionCreateFromSurface(cairo.surface.Surface surface)
       pixbufX = X coordinate of location to place upper left corner of pixbuf
       pixbufY = Y coordinate of location to place upper left corner of pixbuf
 */
-void cairoSetSourcePixbuf(cairo.context.Context cr, gdkpixbuf.pixbuf.Pixbuf pixbuf, double pixbufX, double pixbufY)
+void cairoSetSourcePixbuf(cairo.context.Context cr, gdkpixbuf.pixbuf.Pixbuf pixbuf, double pixbufX, double pixbufY) nothrow
 {
   gdk_cairo_set_source_pixbuf(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, pixbuf ? cast(const(GdkPixbuf)*)pixbuf._cPtr(No.Dup) : null, pixbufX, pixbufY);
 }
@@ -134,7 +134,7 @@ void cairoSetSourcePixbuf(cairo.context.Context cr, gdkpixbuf.pixbuf.Pixbuf pixb
       cr = a cairo context
       rgba = a [gdk.rgba.RGBA]
 */
-void cairoSetSourceRgba(cairo.context.Context cr, gdk.rgba.RGBA rgba)
+void cairoSetSourceRgba(cairo.context.Context cr, gdk.rgba.RGBA rgba) nothrow
 {
   gdk_cairo_set_source_rgba(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(const(GdkRGBA)*)&rgba);
 }
@@ -156,14 +156,21 @@ void cairoSetSourceRgba(cairo.context.Context cr, gdk.rgba.RGBA rgba)
       cancellable = optional [gio.cancellable.Cancellable] object
       callback = callback to call when the operation is done
 */
-void contentDeserializeAsync(gio.input_stream.InputStream stream, string mimeType, gobject.types.GType type, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+void contentDeserializeAsync(gio.input_stream.InputStream stream, string mimeType, gobject.types.GType type, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
 {
-  extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+  extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
   {
     ptrThawGC(data);
     auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-    (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+    try
+    {
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+    }
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
   const(char)* _mimeType = mimeType.toCString(No.Alloc);
@@ -211,14 +218,21 @@ bool contentDeserializeFinish(gio.async_result.AsyncResult result, out gobject.v
       cancellable = optional [gio.cancellable.Cancellable] object
       callback = callback to call when the operation is done
 */
-void contentSerializeAsync(gio.output_stream.OutputStream stream, string mimeType, gobject.value.Value value, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+void contentSerializeAsync(gio.output_stream.OutputStream stream, string mimeType, gobject.value.Value value, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
 {
-  extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+  extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
   {
     ptrThawGC(data);
     auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-    (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+    try
+    {
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+    }
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
   const(char)* _mimeType = mimeType.toCString(No.Alloc);
@@ -246,7 +260,7 @@ bool contentSerializeFinish(gio.async_result.AsyncResult result)
 }
 
 /** */
-gobject.types.GType dragSurfaceSizeGetType()
+gobject.types.GType dragSurfaceSizeGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gdk_drag_surface_size_get_type();
@@ -269,7 +283,7 @@ gobject.types.GType dragSurfaceSizeGetType()
       angle = return location for the relative angle between both events
     Returns: true if the angle could be calculated.
 */
-bool eventsGetAngle(gdk.event.Event event1, gdk.event.Event event2, out double angle)
+bool eventsGetAngle(gdk.event.Event event1, gdk.event.Event event2, out double angle) nothrow
 {
   bool _retval;
   _retval = cast(bool)gdk_events_get_angle(event1 ? cast(GdkEvent*)event1._cPtr(No.Dup) : null, event2 ? cast(GdkEvent*)event2._cPtr(No.Dup) : null, cast(double*)&angle);
@@ -289,7 +303,7 @@ bool eventsGetAngle(gdk.event.Event event1, gdk.event.Event event2, out double a
       y = return location for the Y coordinate of the center
     Returns: true if the center could be calculated.
 */
-bool eventsGetCenter(gdk.event.Event event1, gdk.event.Event event2, out double x, out double y)
+bool eventsGetCenter(gdk.event.Event event1, gdk.event.Event event2, out double x, out double y) nothrow
 {
   bool _retval;
   _retval = cast(bool)gdk_events_get_center(event1 ? cast(GdkEvent*)event1._cPtr(No.Dup) : null, event2 ? cast(GdkEvent*)event2._cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
@@ -308,7 +322,7 @@ bool eventsGetCenter(gdk.event.Event event1, gdk.event.Event event2, out double 
       distance = return location for the distance
     Returns: true if the distance could be calculated.
 */
-bool eventsGetDistance(gdk.event.Event event1, gdk.event.Event event2, out double distance)
+bool eventsGetDistance(gdk.event.Event event1, gdk.event.Event event2, out double distance) nothrow
 {
   bool _retval;
   _retval = cast(bool)gdk_events_get_distance(event1 ? cast(GdkEvent*)event1._cPtr(No.Dup) : null, event2 ? cast(GdkEvent*)event2._cPtr(No.Dup) : null, cast(double*)&distance);
@@ -326,7 +340,7 @@ bool eventsGetDistance(gdk.event.Event event1, gdk.event.Event event2, out doubl
     Returns: An interned string for the canonicalized
         mime type or null if the string wasn't a valid mime type
 */
-string internMimeType(string string_)
+string internMimeType(string string_) nothrow
 {
   const(char)* _cretval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -345,7 +359,7 @@ string internMimeType(string string_)
       lower = return location for lowercase version of symbol
       upper = return location for uppercase version of symbol
 */
-void keyvalConvertCase(uint symbol, out uint lower, out uint upper)
+void keyvalConvertCase(uint symbol, out uint lower, out uint upper) nothrow
 {
   gdk_keyval_convert_case(symbol, cast(uint*)&lower, cast(uint*)&upper);
 }
@@ -362,7 +376,7 @@ void keyvalConvertCase(uint symbol, out uint lower, out uint upper)
     Returns: the corresponding key value, or [gdk.types.KEY_VoidSymbol]
         if the key name is not a valid key
 */
-uint keyvalFromName(string keyvalName)
+uint keyvalFromName(string keyvalName) nothrow
 {
   uint _retval;
   const(char)* _keyvalName = keyvalName.toCString(No.Alloc);
@@ -378,7 +392,7 @@ uint keyvalFromName(string keyvalName)
     Returns: true if keyval is in lower case, or if keyval is not
         subject to case conversion.
 */
-bool keyvalIsLower(uint keyval)
+bool keyvalIsLower(uint keyval) nothrow
 {
   bool _retval;
   _retval = cast(bool)gdk_keyval_is_lower(keyval);
@@ -393,7 +407,7 @@ bool keyvalIsLower(uint keyval)
     Returns: true if keyval is in upper case, or if keyval is not subject to
        case conversion.
 */
-bool keyvalIsUpper(uint keyval)
+bool keyvalIsUpper(uint keyval) nothrow
 {
   bool _retval;
   _retval = cast(bool)gdk_keyval_is_upper(keyval);
@@ -412,7 +426,7 @@ bool keyvalIsUpper(uint keyval)
     Returns: a string containing the name
         of the key
 */
-string keyvalName(uint keyval)
+string keyvalName(uint keyval) nothrow
 {
   const(char)* _cretval;
   _cretval = gdk_keyval_name(keyval);
@@ -428,7 +442,7 @@ string keyvalName(uint keyval)
     Returns: the lower case form of keyval, or keyval itself if it is already
        in lower case or it is not subject to case conversion.
 */
-uint keyvalToLower(uint keyval)
+uint keyvalToLower(uint keyval) nothrow
 {
   uint _retval;
   _retval = gdk_keyval_to_lower(keyval);
@@ -448,7 +462,7 @@ uint keyvalToLower(uint keyval)
     Returns: the corresponding unicode character, or 0 if there
         is no corresponding character.
 */
-uint keyvalToUnicode(uint keyval)
+uint keyvalToUnicode(uint keyval) nothrow
 {
   uint _retval;
   _retval = gdk_keyval_to_unicode(keyval);
@@ -463,7 +477,7 @@ uint keyvalToUnicode(uint keyval)
     Returns: the upper case form of keyval, or keyval itself if it is already
         in upper case or it is not subject to case conversion.
 */
-uint keyvalToUpper(uint keyval)
+uint keyvalToUpper(uint keyval) nothrow
 {
   uint _retval;
   _retval = gdk_keyval_to_upper(keyval);
@@ -491,7 +505,7 @@ uint keyvalToUpper(uint keyval)
     Deprecated: Use [gdk.texture.Texture] and subclasses instead
         cairo surfaces and pixbufs
 */
-gdkpixbuf.pixbuf.Pixbuf pixbufGetFromSurface(cairo.surface.Surface surface, int srcX, int srcY, int width, int height)
+gdkpixbuf.pixbuf.Pixbuf pixbufGetFromSurface(cairo.surface.Surface surface, int srcX, int srcY, int width, int height) nothrow
 {
   GdkPixbuf* _cretval;
   _cretval = gdk_pixbuf_get_from_surface(surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null, srcX, srcY, width, height);
@@ -513,7 +527,7 @@ gdkpixbuf.pixbuf.Pixbuf pixbufGetFromSurface(cairo.surface.Surface surface, int 
     Deprecated: Use [gdk.texture.Texture] and subclasses instead
         cairo surfaces and pixbufs
 */
-gdkpixbuf.pixbuf.Pixbuf pixbufGetFromTexture(gdk.texture.Texture texture)
+gdkpixbuf.pixbuf.Pixbuf pixbufGetFromTexture(gdk.texture.Texture texture) nothrow
 {
   GdkPixbuf* _cretval;
   _cretval = gdk_pixbuf_get_from_texture(texture ? cast(GdkTexture*)texture._cPtr(No.Dup) : null);
@@ -559,14 +573,14 @@ gdkpixbuf.pixbuf.Pixbuf pixbufGetFromTexture(gdk.texture.Texture texture)
     Params:
       backends = a comma-separated list of backends
 */
-void setAllowedBackends(string backends)
+void setAllowedBackends(string backends) nothrow
 {
   const(char)* _backends = backends.toCString(No.Alloc);
   gdk_set_allowed_backends(_backends);
 }
 
 /** */
-gobject.types.GType toplevelSizeGetType()
+gobject.types.GType toplevelSizeGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gdk_toplevel_size_get_type();
@@ -581,7 +595,7 @@ gobject.types.GType toplevelSizeGetType()
     Returns: the corresponding GDK key symbol, if one exists.
         or, if there is no corresponding symbol, wc | 0x01000000
 */
-uint unicodeToKeyval(uint wc)
+uint unicodeToKeyval(uint wc) nothrow
 {
   uint _retval;
   _retval = gdk_unicode_to_keyval(wc);

@@ -20,26 +20,26 @@ class StringObject : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_string_object_get_type != &gidSymbolNotFound ? gtk_string_object_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StringObject self()
+  override StringObject self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class StringObject : gobject.object.ObjectWrap
       Get builder for [gtk.string_object.StringObject]
       Returns: New builder object
   */
-  static StringObjectGidBuilder builder()
+  static StringObjectGidBuilder builder() nothrow
   {
     return new StringObjectGidBuilder;
   }
@@ -57,7 +57,7 @@ class StringObject : gobject.object.ObjectWrap
       Get `string_` property.
       Returns: The string.
   */
-  @property string string_()
+  @property string string_() nothrow
   {
     return getString();
   }
@@ -69,7 +69,7 @@ class StringObject : gobject.object.ObjectWrap
         string_ = The string to wrap
       Returns: a new [gtk.string_object.StringObject]
   */
-  this(string string_)
+  this(string string_) nothrow
   {
     GtkStringObject* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
@@ -81,7 +81,7 @@ class StringObject : gobject.object.ObjectWrap
       Returns the string contained in a [gtk.string_object.StringObject].
       Returns: the string of self
   */
-  string getString()
+  string getString() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_string_object_get_string(cast(GtkStringObject*)this._cPtr);
@@ -102,7 +102,7 @@ final class StringObjectGidBuilder : StringObjectGidBuilderImpl!StringObjectGidB
       Create object from builder.
       Returns: New object
   */
-  StringObject build()
+  StringObject build() nothrow
   {
     return new StringObject(cast(void*)createGObject(StringObject._getGType), Yes.Take);
   }

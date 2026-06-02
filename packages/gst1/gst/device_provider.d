@@ -31,26 +31,26 @@ class DeviceProvider : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_device_provider_get_type != &gidSymbolNotFound ? gst_device_provider_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DeviceProvider self()
+  override DeviceProvider self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class DeviceProvider : gst.object.ObjectWrap
       Get builder for [gst.device_provider.DeviceProvider]
       Returns: New builder object
   */
-  static DeviceProviderGidBuilder builder()
+  static DeviceProviderGidBuilder builder() nothrow
   {
     return new DeviceProviderGidBuilder;
   }
@@ -76,7 +76,7 @@ class DeviceProvider : gst.object.ObjectWrap
         type = GType of device provider to register
       Returns: true, if the registering succeeded, false on error
   */
-  static bool register(gst.plugin.Plugin plugin, string name, uint rank, gobject.types.GType type)
+  static bool register(gst.plugin.Plugin plugin, string name, uint rank, gobject.types.GType type) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -85,7 +85,7 @@ class DeviceProvider : gst.object.ObjectWrap
   }
 
   /** */
-  bool canMonitor()
+  bool canMonitor() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_device_provider_can_monitor(cast(GstDeviceProvider*)this._cPtr);
@@ -104,7 +104,7 @@ class DeviceProvider : gst.object.ObjectWrap
       Params:
         device = a #GstDevice that has been added
   */
-  void deviceAdd(gst.device.Device device)
+  void deviceAdd(gst.device.Device device) nothrow
   {
     gst_device_provider_device_add(cast(GstDeviceProvider*)this._cPtr, device ? cast(GstDevice*)device._cPtr(No.Dup) : null);
   }
@@ -120,7 +120,7 @@ class DeviceProvider : gst.object.ObjectWrap
         device = the new version of changed_device
         changedDevice = the old version of the device that has been updated
   */
-  void deviceChanged(gst.device.Device device, gst.device.Device changedDevice)
+  void deviceChanged(gst.device.Device device, gst.device.Device changedDevice) nothrow
   {
     gst_device_provider_device_changed(cast(GstDeviceProvider*)this._cPtr, device ? cast(GstDevice*)device._cPtr(No.Dup) : null, changedDevice ? cast(GstDevice*)changedDevice._cPtr(No.Dup) : null);
   }
@@ -134,7 +134,7 @@ class DeviceProvider : gst.object.ObjectWrap
       Params:
         device = a #GstDevice that has been removed
   */
-  void deviceRemove(gst.device.Device device)
+  void deviceRemove(gst.device.Device device) nothrow
   {
     gst_device_provider_device_remove(cast(GstDeviceProvider*)this._cPtr, device ? cast(GstDevice*)device._cPtr(No.Dup) : null);
   }
@@ -143,7 +143,7 @@ class DeviceProvider : gst.object.ObjectWrap
       Gets the #GstBus of this #GstDeviceProvider
       Returns: a #GstBus
   */
-  gst.bus.Bus getBus()
+  gst.bus.Bus getBus() nothrow
   {
     GstBus* _cretval;
     _cretval = gst_device_provider_get_bus(cast(GstDeviceProvider*)this._cPtr);
@@ -160,7 +160,7 @@ class DeviceProvider : gst.object.ObjectWrap
       Returns: a #GList of
           #GstDevice
   */
-  gst.device.Device[] getDevices()
+  gst.device.Device[] getDevices() nothrow
   {
     GList* _cretval;
     _cretval = gst_device_provider_get_devices(cast(GstDeviceProvider*)this._cPtr);
@@ -173,7 +173,7 @@ class DeviceProvider : gst.object.ObjectWrap
       Returns: the #GstDeviceProviderFactory used for
             creating this device provider. no refcounting is needed.
   */
-  gst.device_provider_factory.DeviceProviderFactory getFactory()
+  gst.device_provider_factory.DeviceProviderFactory getFactory() nothrow
   {
     GstDeviceProviderFactory* _cretval;
     _cretval = gst_device_provider_get_factory(cast(GstDeviceProvider*)this._cPtr);
@@ -187,7 +187,7 @@ class DeviceProvider : gst.object.ObjectWrap
       Returns: a list of hidden providers factory names or null when
           nothing is hidden by provider. Free with g_strfreev.
   */
-  string[] getHiddenProviders()
+  string[] getHiddenProviders() nothrow
   {
     char** _cretval;
     _cretval = gst_device_provider_get_hidden_providers(cast(GstDeviceProvider*)this._cPtr);
@@ -213,7 +213,7 @@ class DeviceProvider : gst.object.ObjectWrap
         key = the key to get
       Returns: the metadata for key.
   */
-  string getMetadata(string key)
+  string getMetadata(string key) nothrow
   {
     const(char)* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -232,7 +232,7 @@ class DeviceProvider : gst.object.ObjectWrap
       Params:
         name = a provider factory name
   */
-  void hideProvider(string name)
+  void hideProvider(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gst_device_provider_hide_provider(cast(GstDeviceProvider*)this._cPtr, _name);
@@ -242,7 +242,7 @@ class DeviceProvider : gst.object.ObjectWrap
       This function can be used to know if the provider was successfully started.
       Returns: 
   */
-  bool isStarted()
+  bool isStarted() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_device_provider_is_started(cast(GstDeviceProvider*)this._cPtr);
@@ -264,7 +264,7 @@ class DeviceProvider : gst.object.ObjectWrap
       #GST_MESSAGE_DEVICE_ADDED messages and will no longer probe.
       Returns: true if the device providering could be started
   */
-  bool start()
+  bool start() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_device_provider_start(cast(GstDeviceProvider*)this._cPtr);
@@ -276,7 +276,7 @@ class DeviceProvider : gst.object.ObjectWrap
       #GstDeviceProvider will stop providering the devices. This needs to be
       called the same number of times that [gst.device_provider.DeviceProvider.start] was called.
   */
-  void stop()
+  void stop() nothrow
   {
     gst_device_provider_stop(cast(GstDeviceProvider*)this._cPtr);
   }
@@ -292,7 +292,7 @@ class DeviceProvider : gst.object.ObjectWrap
       Params:
         name = a provider factory name
   */
-  void unhideProvider(string name)
+  void unhideProvider(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gst_device_provider_unhide_provider(cast(GstDeviceProvider*)this._cPtr, _name);
@@ -315,14 +315,14 @@ class DeviceProvider : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectProviderHidden(T)(T callback, Flag!"After" after = No.After)
+  gulong connectProviderHidden(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gst.device_provider.DeviceProvider)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -334,7 +334,14 @@ class DeviceProvider : gst.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.device_provider.DeviceProvider.providerHidden");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -358,14 +365,14 @@ class DeviceProvider : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectProviderUnhidden(T)(T callback, Flag!"After" after = No.After)
+  gulong connectProviderUnhidden(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gst.device_provider.DeviceProvider)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -377,7 +384,14 @@ class DeviceProvider : gst.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.device_provider.DeviceProvider.providerUnhidden");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -397,7 +411,7 @@ final class DeviceProviderGidBuilder : DeviceProviderGidBuilderImpl!DeviceProvid
       Create object from builder.
       Returns: New object
   */
-  DeviceProvider build()
+  DeviceProvider build() nothrow
   {
     return new DeviceProvider(cast(void*)createGObject(DeviceProvider._getGType), No.Take);
   }

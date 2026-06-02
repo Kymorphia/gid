@@ -31,7 +31,7 @@ template ToplevelT()
       Get `decorated` property.
       Returns: Whether the window manager should add decorations.
   */
-  @property bool decorated()
+  @property bool decorated() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("decorated");
   }
@@ -41,7 +41,7 @@ template ToplevelT()
       Params:
         propval = Whether the window manager should add decorations.
   */
-  @property void decorated(bool propval)
+  @property void decorated(bool propval) nothrow
   {
     setDecorated(propval);
   }
@@ -50,7 +50,7 @@ template ToplevelT()
       Get `deletable` property.
       Returns: Whether the window manager should allow to close the surface.
   */
-  @property bool deletable()
+  @property bool deletable() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("deletable");
   }
@@ -60,7 +60,7 @@ template ToplevelT()
       Params:
         propval = Whether the window manager should allow to close the surface.
   */
-  @property void deletable(bool propval)
+  @property void deletable(bool propval) nothrow
   {
     setDeletable(propval);
   }
@@ -69,7 +69,7 @@ template ToplevelT()
       Get `fullscreenMode` property.
       Returns: The fullscreen mode of the surface.
   */
-  @property gdk.types.FullscreenMode fullscreenMode()
+  @property gdk.types.FullscreenMode fullscreenMode() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.types.FullscreenMode)("fullscreen-mode");
   }
@@ -79,7 +79,7 @@ template ToplevelT()
       Params:
         propval = The fullscreen mode of the surface.
   */
-  @property void fullscreenMode(gdk.types.FullscreenMode propval)
+  @property void fullscreenMode(gdk.types.FullscreenMode propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.types.FullscreenMode)("fullscreen-mode", propval);
   }
@@ -88,7 +88,7 @@ template ToplevelT()
       Get `iconList` property.
       Returns: A list of textures to use as icon.
   */
-  @property void* iconList()
+  @property void* iconList() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(void*)("icon-list");
   }
@@ -98,7 +98,7 @@ template ToplevelT()
       Params:
         propval = A list of textures to use as icon.
   */
-  @property void iconList(void* propval)
+  @property void iconList(void* propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(void*)("icon-list", propval);
   }
@@ -107,7 +107,7 @@ template ToplevelT()
       Get `modal` property.
       Returns: Whether the surface is modal.
   */
-  @property bool modal()
+  @property bool modal() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("modal");
   }
@@ -117,7 +117,7 @@ template ToplevelT()
       Params:
         propval = Whether the surface is modal.
   */
-  @property void modal(bool propval)
+  @property void modal(bool propval) nothrow
   {
     setModal(propval);
   }
@@ -126,7 +126,7 @@ template ToplevelT()
       Get `shortcutsInhibited` property.
       Returns: Whether the surface should inhibit keyboard shortcuts.
   */
-  @property bool shortcutsInhibited()
+  @property bool shortcutsInhibited() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("shortcuts-inhibited");
   }
@@ -138,7 +138,7 @@ template ToplevelT()
         See [gdk.app_launch_context.AppLaunchContext] for more information about
         startup feedback.
   */
-  @property string startupId()
+  @property string startupId() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("startup-id");
   }
@@ -151,7 +151,7 @@ template ToplevelT()
           See [gdk.app_launch_context.AppLaunchContext] for more information about
           startup feedback.
   */
-  @property void startupId(string propval)
+  @property void startupId(string propval) nothrow
   {
     setStartupId(propval);
   }
@@ -160,7 +160,7 @@ template ToplevelT()
       Get `state` property.
       Returns: The state of the toplevel.
   */
-  @property gdk.types.ToplevelState state()
+  @property gdk.types.ToplevelState state() nothrow
   {
     return getState();
   }
@@ -169,7 +169,7 @@ template ToplevelT()
       Get `title` property.
       Returns: The title of the surface.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("title");
   }
@@ -179,7 +179,7 @@ template ToplevelT()
       Params:
         propval = The title of the surface.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -188,7 +188,7 @@ template ToplevelT()
       Get `transientFor` property.
       Returns: The transient parent of the surface.
   */
-  @property gdk.surface.Surface transientFor()
+  @property gdk.surface.Surface transientFor() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.surface.Surface)("transient-for");
   }
@@ -198,7 +198,7 @@ template ToplevelT()
       Params:
         propval = The transient parent of the surface.
   */
-  @property void transientFor(gdk.surface.Surface propval)
+  @property void transientFor(gdk.surface.Surface propval) nothrow
   {
     setTransientFor(propval);
   }
@@ -216,7 +216,7 @@ template ToplevelT()
         timestamp = timestamp of mouse click that began the drag (use
             [gdk.event.Event.getTime])
   */
-  override void beginMove(gdk.device.Device device, int button, double x, double y, uint timestamp)
+  override void beginMove(gdk.device.Device device, int button, double x, double y, uint timestamp) nothrow
   {
     gdk_toplevel_begin_move(cast(GdkToplevel*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, button, x, y, timestamp);
   }
@@ -235,7 +235,7 @@ template ToplevelT()
         timestamp = timestamp of mouse click that began the drag (use
             [gdk.event.Event.getTime])
   */
-  override void beginResize(gdk.types.SurfaceEdge edge, gdk.device.Device device, int button, double x, double y, uint timestamp)
+  override void beginResize(gdk.types.SurfaceEdge edge, gdk.device.Device device, int button, double x, double y, uint timestamp) nothrow
   {
     gdk_toplevel_begin_resize(cast(GdkToplevel*)this._cPtr, edge, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, button, x, y, timestamp);
   }
@@ -250,7 +250,7 @@ template ToplevelT()
       Params:
         timestamp = timestamp of the event triggering the surface focus
   */
-  override void focus(uint timestamp)
+  override void focus(uint timestamp) nothrow
   {
     gdk_toplevel_focus(cast(GdkToplevel*)this._cPtr, timestamp);
   }
@@ -260,7 +260,7 @@ template ToplevelT()
       from the [gdk.types.ToplevelState] enumeration.
       Returns: surface state bitfield
   */
-  override gdk.types.ToplevelState getState()
+  override gdk.types.ToplevelState getState() nothrow
   {
     GdkToplevelState _cretval;
     _cretval = gdk_toplevel_get_state(cast(GdkToplevel*)this._cPtr);
@@ -295,7 +295,7 @@ template ToplevelT()
         event = the [gdk.event.Event] that is triggering the inhibit
             request, or null if none is available
   */
-  override void inhibitSystemShortcuts(gdk.event.Event event = null)
+  override void inhibitSystemShortcuts(gdk.event.Event event = null) nothrow
   {
     gdk_toplevel_inhibit_system_shortcuts(cast(GdkToplevel*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
   }
@@ -306,7 +306,7 @@ template ToplevelT()
       The windowing system may choose to ignore the request.
       Returns: true if the surface was lowered
   */
-  override bool lower()
+  override bool lower() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_toplevel_lower(cast(GdkToplevel*)this._cPtr);
@@ -319,7 +319,7 @@ template ToplevelT()
       The windowing system may choose to ignore the request.
       Returns: true if the surface was minimized
   */
-  override bool minimize()
+  override bool minimize() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_toplevel_minimize(cast(GdkToplevel*)this._cPtr);
@@ -342,7 +342,7 @@ template ToplevelT()
       Params:
         layout = the [gdk.toplevel_layout.ToplevelLayout] object used to layout
   */
-  override void present(gdk.toplevel_layout.ToplevelLayout layout)
+  override void present(gdk.toplevel_layout.ToplevelLayout layout) nothrow
   {
     gdk_toplevel_present(cast(GdkToplevel*)this._cPtr, layout ? cast(GdkToplevelLayout*)layout._cPtr(No.Dup) : null);
   }
@@ -353,7 +353,7 @@ template ToplevelT()
       
       This undoes the effect of [gdk.toplevel.Toplevel.inhibitSystemShortcuts].
   */
-  override void restoreSystemShortcuts()
+  override void restoreSystemShortcuts() nothrow
   {
     gdk_toplevel_restore_system_shortcuts(cast(GdkToplevel*)this._cPtr);
   }
@@ -368,7 +368,7 @@ template ToplevelT()
       Params:
         decorated = true to request decorations
   */
-  override void setDecorated(bool decorated)
+  override void setDecorated(bool decorated) nothrow
   {
     gdk_toplevel_set_decorated(cast(GdkToplevel*)this._cPtr, decorated);
   }
@@ -382,7 +382,7 @@ template ToplevelT()
       Params:
         deletable = true to request a delete button
   */
-  override void setDeletable(bool deletable)
+  override void setDeletable(bool deletable) nothrow
   {
     gdk_toplevel_set_deletable(cast(GdkToplevel*)this._cPtr, deletable);
   }
@@ -401,7 +401,7 @@ template ToplevelT()
       Params:
         surfaces = A list of textures to use as icon, of different sizes
   */
-  override void setIconList(gdk.texture.Texture[] surfaces)
+  override void setIconList(gdk.texture.Texture[] surfaces) nothrow
   {
     auto _surfaces = gListFromD!(gdk.texture.Texture)(surfaces);
     scope(exit) containerFree!(GList*, gdk.texture.Texture, GidOwnership.None)(_surfaces);
@@ -422,7 +422,7 @@ template ToplevelT()
       Params:
         modal = true if the surface is modal, false otherwise.
   */
-  override void setModal(bool modal)
+  override void setModal(bool modal) nothrow
   {
     gdk_toplevel_set_modal(cast(GdkToplevel*)this._cPtr, modal);
   }
@@ -437,7 +437,7 @@ template ToplevelT()
       Params:
         startupId = a string with startup-notification identifier
   */
-  override void setStartupId(string startupId)
+  override void setStartupId(string startupId) nothrow
   {
     const(char)* _startupId = startupId.toCString(No.Alloc);
     gdk_toplevel_set_startup_id(cast(GdkToplevel*)this._cPtr, _startupId);
@@ -452,7 +452,7 @@ template ToplevelT()
       Params:
         title = title of surface
   */
-  override void setTitle(string title)
+  override void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     gdk_toplevel_set_title(cast(GdkToplevel*)this._cPtr, _title);
@@ -472,7 +472,7 @@ template ToplevelT()
       Params:
         parent = another toplevel [gdk.surface.Surface]
   */
-  override void setTransientFor(gdk.surface.Surface parent)
+  override void setTransientFor(gdk.surface.Surface parent) nothrow
   {
     gdk_toplevel_set_transient_for(cast(GdkToplevel*)this._cPtr, parent ? cast(GdkSurface*)parent._cPtr(No.Dup) : null);
   }
@@ -489,7 +489,7 @@ template ToplevelT()
         event = a [gdk.event.Event] to show the menu for
       Returns: true if the window menu was shown and false otherwise.
   */
-  override bool showWindowMenu(gdk.event.Event event)
+  override bool showWindowMenu(gdk.event.Event event) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_toplevel_show_window_menu(cast(GdkToplevel*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
@@ -501,7 +501,7 @@ template ToplevelT()
       tiled window states.
       Returns: true if the desktop environment supports tiled window states
   */
-  override bool supportsEdgeConstraints()
+  override bool supportsEdgeConstraints() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_toplevel_supports_edge_constraints(cast(GdkToplevel*)this._cPtr);
@@ -509,7 +509,7 @@ template ToplevelT()
   }
 
   /** */
-  override bool titlebarGesture(gdk.types.TitlebarGesture gesture)
+  override bool titlebarGesture(gdk.types.TitlebarGesture gesture) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_toplevel_titlebar_gesture(cast(GdkToplevel*)this._cPtr, gesture);
@@ -545,14 +545,14 @@ template ToplevelT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectComputeSize(T)(T callback, Flag!"After" after = No.After)
+  gulong connectComputeSize(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.toplevel_size.ToplevelSize)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.toplevel.Toplevel)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -564,7 +564,14 @@ template ToplevelT()
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.toplevel.Toplevel.computeSize");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -582,7 +589,7 @@ template ToplevelGidBuilderT()
         propval = Whether the window manager should add decorations.
       Returns: Builder instance for fluent chaining
   */
-  T decorated(bool propval)
+  T decorated(bool propval) nothrow
   {
     return setProperty("decorated", propval);
   }
@@ -593,7 +600,7 @@ template ToplevelGidBuilderT()
         propval = Whether the window manager should allow to close the surface.
       Returns: Builder instance for fluent chaining
   */
-  T deletable(bool propval)
+  T deletable(bool propval) nothrow
   {
     return setProperty("deletable", propval);
   }
@@ -604,7 +611,7 @@ template ToplevelGidBuilderT()
         propval = The fullscreen mode of the surface.
       Returns: Builder instance for fluent chaining
   */
-  T fullscreenMode(gdk.types.FullscreenMode propval)
+  T fullscreenMode(gdk.types.FullscreenMode propval) nothrow
   {
     return setProperty("fullscreen-mode", propval);
   }
@@ -615,7 +622,7 @@ template ToplevelGidBuilderT()
         propval = A list of textures to use as icon.
       Returns: Builder instance for fluent chaining
   */
-  T iconList(void* propval)
+  T iconList(void* propval) nothrow
   {
     return setProperty("icon-list", propval);
   }
@@ -626,7 +633,7 @@ template ToplevelGidBuilderT()
         propval = Whether the surface is modal.
       Returns: Builder instance for fluent chaining
   */
-  T modal(bool propval)
+  T modal(bool propval) nothrow
   {
     return setProperty("modal", propval);
   }
@@ -640,7 +647,7 @@ template ToplevelGidBuilderT()
           startup feedback.
       Returns: Builder instance for fluent chaining
   */
-  T startupId(string propval)
+  T startupId(string propval) nothrow
   {
     return setProperty("startup-id", propval);
   }
@@ -651,7 +658,7 @@ template ToplevelGidBuilderT()
         propval = The title of the surface.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -662,7 +669,7 @@ template ToplevelGidBuilderT()
         propval = The transient parent of the surface.
       Returns: Builder instance for fluent chaining
   */
-  T transientFor(gdk.surface.Surface propval)
+  T transientFor(gdk.surface.Surface propval) nothrow
   {
     return setProperty("transient-for", propval);
   }

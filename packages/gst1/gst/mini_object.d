@@ -52,7 +52,7 @@ class MiniObject : gobject.boxed.Boxed
         dispose = a dispose function
         free = the free function
   */
-  this(gobject.types.GType type = gobject.types.GType.init, int refcount = int.init, int lockstate = int.init, uint flags = uint.init, GstMiniObjectCopyFunction copy = GstMiniObjectCopyFunction.init, GstMiniObjectDisposeFunction dispose = GstMiniObjectDisposeFunction.init, GstMiniObjectFreeFunction free = GstMiniObjectFreeFunction.init)
+  this(gobject.types.GType type = gobject.types.GType.init, int refcount = int.init, int lockstate = int.init, uint flags = uint.init, GstMiniObjectCopyFunction copy = GstMiniObjectCopyFunction.init, GstMiniObjectDisposeFunction dispose = GstMiniObjectDisposeFunction.init, GstMiniObjectFreeFunction free = GstMiniObjectFreeFunction.init) nothrow
   {
     super(gMalloc(GstMiniObject.sizeof), Yes.Take);
     this.type = type;
@@ -65,32 +65,32 @@ class MiniObject : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_mini_object_get_type != &gidSymbolNotFound ? gst_mini_object_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MiniObject self()
+  override MiniObject self() nothrow
   {
     return this;
   }
@@ -99,7 +99,7 @@ class MiniObject : gobject.boxed.Boxed
       Get `type` field.
       Returns: the GType of the object
   */
-  @property gobject.types.GType type()
+  @property gobject.types.GType type() nothrow
   {
     return (cast(GstMiniObject*)this._cPtr).type;
   }
@@ -109,7 +109,7 @@ class MiniObject : gobject.boxed.Boxed
       Params:
         propval = the GType of the object
   */
-  @property void type(gobject.types.GType propval)
+  @property void type(gobject.types.GType propval) nothrow
   {
     (cast(GstMiniObject*)this._cPtr).type = propval;
   }
@@ -118,7 +118,7 @@ class MiniObject : gobject.boxed.Boxed
       Get `refcount` field.
       Returns: atomic refcount
   */
-  @property int refcount()
+  @property int refcount() nothrow
   {
     return (cast(GstMiniObject*)this._cPtr).refcount;
   }
@@ -128,7 +128,7 @@ class MiniObject : gobject.boxed.Boxed
       Params:
         propval = atomic refcount
   */
-  @property void refcount(int propval)
+  @property void refcount(int propval) nothrow
   {
     (cast(GstMiniObject*)this._cPtr).refcount = propval;
   }
@@ -137,7 +137,7 @@ class MiniObject : gobject.boxed.Boxed
       Get `lockstate` field.
       Returns: atomic state of the locks
   */
-  @property int lockstate()
+  @property int lockstate() nothrow
   {
     return (cast(GstMiniObject*)this._cPtr).lockstate;
   }
@@ -147,7 +147,7 @@ class MiniObject : gobject.boxed.Boxed
       Params:
         propval = atomic state of the locks
   */
-  @property void lockstate(int propval)
+  @property void lockstate(int propval) nothrow
   {
     (cast(GstMiniObject*)this._cPtr).lockstate = propval;
   }
@@ -156,7 +156,7 @@ class MiniObject : gobject.boxed.Boxed
       Get `flags` field.
       Returns: extra flags.
   */
-  @property uint flags()
+  @property uint flags() nothrow
   {
     return (cast(GstMiniObject*)this._cPtr).flags;
   }
@@ -166,7 +166,7 @@ class MiniObject : gobject.boxed.Boxed
       Params:
         propval = extra flags.
   */
-  @property void flags(uint propval)
+  @property void flags(uint propval) nothrow
   {
     (cast(GstMiniObject*)this._cPtr).flags = propval;
   }
@@ -175,7 +175,7 @@ class MiniObject : gobject.boxed.Boxed
       Get `copy` field.
       Returns: a copy function
   */
-  @property GstMiniObjectCopyFunction copy()
+  @property GstMiniObjectCopyFunction copy() nothrow
   {
     return (cast(GstMiniObject*)this._cPtr).copy;
   }
@@ -186,7 +186,7 @@ class MiniObject : gobject.boxed.Boxed
         propval = a copy function
   */
 
-  @property void copy(GstMiniObjectCopyFunction propval)
+  @property void copy(GstMiniObjectCopyFunction propval) nothrow
   {
     (cast(GstMiniObject*)this._cPtr).copy = propval;
   }
@@ -195,7 +195,7 @@ class MiniObject : gobject.boxed.Boxed
       Get `dispose` field.
       Returns: a dispose function
   */
-  @property GstMiniObjectDisposeFunction dispose()
+  @property GstMiniObjectDisposeFunction dispose() nothrow
   {
     return (cast(GstMiniObject*)this._cPtr).dispose;
   }
@@ -206,7 +206,7 @@ class MiniObject : gobject.boxed.Boxed
         propval = a dispose function
   */
 
-  @property void dispose(GstMiniObjectDisposeFunction propval)
+  @property void dispose(GstMiniObjectDisposeFunction propval) nothrow
   {
     (cast(GstMiniObject*)this._cPtr).dispose = propval;
   }
@@ -215,7 +215,7 @@ class MiniObject : gobject.boxed.Boxed
       Get `free` field.
       Returns: the free function
   */
-  @property GstMiniObjectFreeFunction free()
+  @property GstMiniObjectFreeFunction free() nothrow
   {
     return (cast(GstMiniObject*)this._cPtr).free;
   }
@@ -226,7 +226,7 @@ class MiniObject : gobject.boxed.Boxed
         propval = the free function
   */
 
-  @property void free(GstMiniObjectFreeFunction propval)
+  @property void free(GstMiniObjectFreeFunction propval) nothrow
   {
     (cast(GstMiniObject*)this._cPtr).free = propval;
   }
@@ -244,7 +244,7 @@ class MiniObject : gobject.boxed.Boxed
       Params:
         parent = a parent #GstMiniObject
   */
-  void addParent(gst.mini_object.MiniObject parent)
+  void addParent(gst.mini_object.MiniObject parent) nothrow
   {
     gst_mini_object_add_parent(cast(GstMiniObject*)this._cPtr, parent ? cast(GstMiniObject*)parent._cPtr(No.Dup) : null);
   }
@@ -258,7 +258,7 @@ class MiniObject : gobject.boxed.Boxed
       Returns: The user data pointer set, or
         null
   */
-  void* getQdata(glib.types.Quark quark)
+  void* getQdata(glib.types.Quark quark) nothrow
   {
     auto _retval = gst_mini_object_get_qdata(cast(GstMiniObject*)this._cPtr, quark);
     return _retval;
@@ -277,7 +277,7 @@ class MiniObject : gobject.boxed.Boxed
       is writable.
       Returns: true if the object is writable.
   */
-  bool isWritable()
+  bool isWritable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_mini_object_is_writable(cast(const(GstMiniObject)*)this._cPtr);
@@ -291,7 +291,7 @@ class MiniObject : gobject.boxed.Boxed
         flags = #GstLockFlags
       Returns: true if object could be locked.
   */
-  bool lock(gst.types.LockFlags flags)
+  bool lock(gst.types.LockFlags flags) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_mini_object_lock(cast(GstMiniObject*)this._cPtr, flags);
@@ -305,7 +305,7 @@ class MiniObject : gobject.boxed.Boxed
       Params:
         parent = a parent #GstMiniObject
   */
-  void removeParent(gst.mini_object.MiniObject parent)
+  void removeParent(gst.mini_object.MiniObject parent) nothrow
   {
     gst_mini_object_remove_parent(cast(GstMiniObject*)this._cPtr, parent ? cast(GstMiniObject*)parent._cPtr(No.Dup) : null);
   }
@@ -330,14 +330,21 @@ class MiniObject : gobject.boxed.Boxed
         destroy = Function to invoke with data as argument, when data
                     needs to be freed
   */
-  void setQdata(glib.types.Quark quark, void* data, glib.types.DestroyNotify destroy)
+  void setQdata(glib.types.Quark quark, void* data, glib.types.DestroyNotify destroy) nothrow
   {
-    extern(C) void _destroyCallback(void* data)
+    extern(C) void _destroyCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
     gst_mini_object_set_qdata(cast(GstMiniObject*)this._cPtr, quark, data, _destroyCB);
@@ -353,7 +360,7 @@ class MiniObject : gobject.boxed.Boxed
       Returns: The user data pointer set, or
         null
   */
-  void* stealQdata(glib.types.Quark quark)
+  void* stealQdata(glib.types.Quark quark) nothrow
   {
     auto _retval = gst_mini_object_steal_qdata(cast(GstMiniObject*)this._cPtr, quark);
     return _retval;
@@ -365,7 +372,7 @@ class MiniObject : gobject.boxed.Boxed
       Params:
         flags = #GstLockFlags
   */
-  void unlock(gst.types.LockFlags flags)
+  void unlock(gst.types.LockFlags flags) nothrow
   {
     gst_mini_object_unlock(cast(GstMiniObject*)this._cPtr, flags);
   }
@@ -383,7 +390,7 @@ class MiniObject : gobject.boxed.Boxed
         newdata = pointer to new mini-object
       Returns: true if newdata was different from olddata
   */
-  static bool replace(gst.mini_object.MiniObject olddata = null, gst.mini_object.MiniObject newdata = null)
+  static bool replace(gst.mini_object.MiniObject olddata = null, gst.mini_object.MiniObject newdata = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_mini_object_replace(olddata ? cast(GstMiniObject**)olddata._cPtr(No.Dup) : null, newdata ? cast(GstMiniObject*)newdata._cPtr(No.Dup) : null);
@@ -404,7 +411,7 @@ class MiniObject : gobject.boxed.Boxed
         newdata = pointer to new mini-object
       Returns: true if newdata was different from olddata
   */
-  static bool take(gst.mini_object.MiniObject olddata, gst.mini_object.MiniObject newdata)
+  static bool take(gst.mini_object.MiniObject olddata, gst.mini_object.MiniObject newdata) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_mini_object_take(olddata ? cast(GstMiniObject**)olddata._cPtr(No.Dup) : null, newdata ? cast(GstMiniObject*)newdata._cPtr(No.Dup) : null);

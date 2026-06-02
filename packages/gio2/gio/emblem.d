@@ -23,26 +23,26 @@ class Emblem : gobject.object.ObjectWrap, gio.icon.Icon
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_emblem_get_type != &gidSymbolNotFound ? g_emblem_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Emblem self()
+  override Emblem self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class Emblem : gobject.object.ObjectWrap, gio.icon.Icon
       Get builder for [gio.emblem.Emblem]
       Returns: New builder object
   */
-  static EmblemGidBuilder builder()
+  static EmblemGidBuilder builder() nothrow
   {
     return new EmblemGidBuilder;
   }
@@ -60,7 +60,7 @@ class Emblem : gobject.object.ObjectWrap, gio.icon.Icon
       Get `icon` property.
       Returns: The actual icon of the emblem.
   */
-  @property gobject.object.ObjectWrap icon()
+  @property gobject.object.ObjectWrap icon() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.object.ObjectWrap)("icon");
   }
@@ -69,7 +69,7 @@ class Emblem : gobject.object.ObjectWrap, gio.icon.Icon
       Get `origin` property.
       Returns: The origin the emblem is derived from.
   */
-  @property gio.types.EmblemOrigin origin()
+  @property gio.types.EmblemOrigin origin() nothrow
   {
     return getOrigin();
   }
@@ -83,7 +83,7 @@ class Emblem : gobject.object.ObjectWrap, gio.icon.Icon
         icon = a GIcon containing the icon.
       Returns: a new #GEmblem.
   */
-  this(gio.icon.Icon icon)
+  this(gio.icon.Icon icon) nothrow
   {
     GEmblem* _cretval;
     _cretval = g_emblem_new(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
@@ -98,7 +98,7 @@ class Emblem : gobject.object.ObjectWrap, gio.icon.Icon
         origin = a GEmblemOrigin enum defining the emblem's origin
       Returns: a new #GEmblem.
   */
-  static gio.emblem.Emblem newWithOrigin(gio.icon.Icon icon, gio.types.EmblemOrigin origin)
+  static gio.emblem.Emblem newWithOrigin(gio.icon.Icon icon, gio.types.EmblemOrigin origin) nothrow
   {
     GEmblem* _cretval;
     _cretval = g_emblem_new_with_origin(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null, origin);
@@ -111,7 +111,7 @@ class Emblem : gobject.object.ObjectWrap, gio.icon.Icon
       Returns: a #GIcon. The returned object belongs to
                  the emblem and should not be modified or freed.
   */
-  gio.icon.Icon getIcon()
+  gio.icon.Icon getIcon() nothrow
   {
     GIcon* _cretval;
     _cretval = g_emblem_get_icon(cast(GEmblem*)this._cPtr);
@@ -123,7 +123,7 @@ class Emblem : gobject.object.ObjectWrap, gio.icon.Icon
       Gets the origin of the emblem.
       Returns: the origin of the emblem
   */
-  gio.types.EmblemOrigin getOrigin()
+  gio.types.EmblemOrigin getOrigin() nothrow
   {
     GEmblemOrigin _cretval;
     _cretval = g_emblem_get_origin(cast(GEmblem*)this._cPtr);
@@ -144,7 +144,7 @@ class EmblemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.i
         propval = The actual icon of the emblem.
       Returns: Builder instance for fluent chaining
   */
-  T icon(gobject.object.ObjectWrap propval)
+  T icon(gobject.object.ObjectWrap propval) nothrow
   {
     return setProperty("icon", propval);
   }
@@ -155,7 +155,7 @@ class EmblemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.i
         propval = The origin the emblem is derived from.
       Returns: Builder instance for fluent chaining
   */
-  T origin(gio.types.EmblemOrigin propval)
+  T origin(gio.types.EmblemOrigin propval) nothrow
   {
     return setProperty("origin", propval);
   }
@@ -168,7 +168,7 @@ final class EmblemGidBuilder : EmblemGidBuilderImpl!EmblemGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Emblem build()
+  Emblem build() nothrow
   {
     return new Emblem(cast(void*)createGObject(Emblem._getGType), Yes.Take);
   }

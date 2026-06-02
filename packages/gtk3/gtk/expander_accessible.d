@@ -19,26 +19,26 @@ class ExpanderAccessible : gtk.container_accessible.ContainerAccessible, atk.act
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_expander_accessible_get_type != &gidSymbolNotFound ? gtk_expander_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ExpanderAccessible self()
+  override ExpanderAccessible self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class ExpanderAccessible : gtk.container_accessible.ContainerAccessible, atk.act
       Get builder for [gtk.expander_accessible.ExpanderAccessible]
       Returns: New builder object
   */
-  static ExpanderAccessibleGidBuilder builder()
+  static ExpanderAccessibleGidBuilder builder() nothrow
   {
     return new ExpanderAccessibleGidBuilder;
   }
@@ -72,7 +72,7 @@ final class ExpanderAccessibleGidBuilder : ExpanderAccessibleGidBuilderImpl!Expa
       Create object from builder.
       Returns: New object
   */
-  ExpanderAccessible build()
+  ExpanderAccessible build() nothrow
   {
     return new ExpanderAccessible(cast(void*)createGObject(ExpanderAccessible._getGType), No.Take);
   }

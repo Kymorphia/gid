@@ -117,26 +117,26 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_encoder_get_type != &gidSymbolNotFound ? gst_audio_encoder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AudioEncoder self()
+  override AudioEncoder self() nothrow
   {
     return this;
   }
@@ -145,49 +145,49 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
       Get builder for [gstaudio.audio_encoder.AudioEncoder]
       Returns: New builder object
   */
-  static AudioEncoderGidBuilder builder()
+  static AudioEncoderGidBuilder builder() nothrow
   {
     return new AudioEncoderGidBuilder;
   }
 
   /** */
-  @property bool hardResync()
+  @property bool hardResync() nothrow
   {
     return getHardResync();
   }
 
   /** */
-  @property void hardResync(bool propval)
+  @property void hardResync(bool propval) nothrow
   {
     setHardResync(propval);
   }
 
   /** */
-  @property bool markGranule()
+  @property bool markGranule() nothrow
   {
     return getMarkGranule();
   }
 
   /** */
-  @property bool perfectTimestamp()
+  @property bool perfectTimestamp() nothrow
   {
     return getPerfectTimestamp();
   }
 
   /** */
-  @property void perfectTimestamp(bool propval)
+  @property void perfectTimestamp(bool propval) nothrow
   {
     setPerfectTimestamp(propval);
   }
 
   /** */
-  @property long tolerance()
+  @property long tolerance() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("tolerance");
   }
 
   /** */
-  @property void tolerance(long propval)
+  @property void tolerance(long propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(long)("tolerance", propval);
   }
@@ -202,7 +202,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
         size = size of the buffer
       Returns: allocated buffer
   */
-  gst.buffer.Buffer allocateOutputBuffer(size_t size)
+  gst.buffer.Buffer allocateOutputBuffer(size_t size) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_audio_encoder_allocate_output_buffer(cast(GstAudioEncoder*)this._cPtr, size);
@@ -227,7 +227,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
         samples = number of samples (per channel) represented by encoded data
       Returns: a #GstFlowReturn that should be escalated to caller (of caller)
   */
-  gst.types.FlowReturn finishFrame(gst.buffer.Buffer buffer, int samples)
+  gst.types.FlowReturn finishFrame(gst.buffer.Buffer buffer, int samples) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_audio_encoder_finish_frame(cast(GstAudioEncoder*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null, samples);
@@ -247,7 +247,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
         params = the
           #GstAllocationParams of allocator
   */
-  void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
+  void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params) nothrow
   {
     GstAllocator* _allocator;
     gst_audio_encoder_get_allocator(cast(GstAudioEncoder*)this._cPtr, &_allocator, cast(GstAllocationParams*)&params);
@@ -255,7 +255,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   }
 
   /** */
-  gstaudio.audio_info.AudioInfo getAudioInfo()
+  gstaudio.audio_info.AudioInfo getAudioInfo() nothrow
   {
     GstAudioInfo* _cretval;
     _cretval = gst_audio_encoder_get_audio_info(cast(GstAudioEncoder*)this._cPtr);
@@ -269,7 +269,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
         
         MT safe.
   */
-  bool getDrainable()
+  bool getDrainable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_encoder_get_drainable(cast(GstAudioEncoder*)this._cPtr);
@@ -277,7 +277,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   }
 
   /** */
-  int getFrameMax()
+  int getFrameMax() nothrow
   {
     int _retval;
     _retval = gst_audio_encoder_get_frame_max(cast(GstAudioEncoder*)this._cPtr);
@@ -285,7 +285,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   }
 
   /** */
-  int getFrameSamplesMax()
+  int getFrameSamplesMax() nothrow
   {
     int _retval;
     _retval = gst_audio_encoder_get_frame_samples_max(cast(GstAudioEncoder*)this._cPtr);
@@ -293,7 +293,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   }
 
   /** */
-  int getFrameSamplesMin()
+  int getFrameSamplesMin() nothrow
   {
     int _retval;
     _retval = gst_audio_encoder_get_frame_samples_min(cast(GstAudioEncoder*)this._cPtr);
@@ -306,7 +306,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
         
         MT safe.
   */
-  bool getHardMin()
+  bool getHardMin() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_encoder_get_hard_min(cast(GstAudioEncoder*)this._cPtr);
@@ -314,7 +314,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   }
 
   /** */
-  bool getHardResync()
+  bool getHardResync() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_encoder_get_hard_resync(cast(GstAudioEncoder*)this._cPtr);
@@ -329,13 +329,13 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
         min = a pointer to storage to hold minimum latency
         max = a pointer to storage to hold maximum latency
   */
-  void getLatency(out gst.types.ClockTime min, out gst.types.ClockTime max)
+  void getLatency(out gst.types.ClockTime min, out gst.types.ClockTime max) nothrow
   {
     gst_audio_encoder_get_latency(cast(GstAudioEncoder*)this._cPtr, cast(GstClockTime*)&min, cast(GstClockTime*)&max);
   }
 
   /** */
-  int getLookahead()
+  int getLookahead() nothrow
   {
     int _retval;
     _retval = gst_audio_encoder_get_lookahead(cast(GstAudioEncoder*)this._cPtr);
@@ -348,7 +348,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
         
         MT safe.
   */
-  bool getMarkGranule()
+  bool getMarkGranule() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_encoder_get_mark_granule(cast(GstAudioEncoder*)this._cPtr);
@@ -361,7 +361,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
         
         MT safe.
   */
-  bool getPerfectTimestamp()
+  bool getPerfectTimestamp() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_encoder_get_perfect_timestamp(cast(GstAudioEncoder*)this._cPtr);
@@ -374,7 +374,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
         
         MT safe.
   */
-  gst.types.ClockTime getTolerance()
+  gst.types.ClockTime getTolerance() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_audio_encoder_get_tolerance(cast(GstAudioEncoder*)this._cPtr);
@@ -396,7 +396,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
               previously-set tags
         mode = the #GstTagMergeMode to use, usually #GST_TAG_MERGE_REPLACE
   */
-  void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode)
+  void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode) nothrow
   {
     gst_audio_encoder_merge_tags(cast(GstAudioEncoder*)this._cPtr, tags ? cast(const(GstTagList)*)tags._cPtr(No.Dup) : null, mode);
   }
@@ -407,7 +407,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
       negotiate fails.
       Returns: true if the negotiation succeeded, else false.
   */
-  bool negotiate()
+  bool negotiate() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_encoder_negotiate(cast(GstAudioEncoder*)this._cPtr);
@@ -424,7 +424,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
         filter = filter caps
       Returns: a #GstCaps owned by caller
   */
-  gst.caps.Caps proxyGetcaps(gst.caps.Caps caps = null, gst.caps.Caps filter = null)
+  gst.caps.Caps proxyGetcaps(gst.caps.Caps caps = null, gst.caps.Caps filter = null) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_audio_encoder_proxy_getcaps(cast(GstAudioEncoder*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
@@ -441,7 +441,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
       Params:
         allocationCaps = a #GstCaps or null
   */
-  void setAllocationCaps(gst.caps.Caps allocationCaps = null)
+  void setAllocationCaps(gst.caps.Caps allocationCaps = null) nothrow
   {
     gst_audio_encoder_set_allocation_caps(cast(GstAudioEncoder*)this._cPtr, allocationCaps ? cast(GstCaps*)allocationCaps._cPtr(No.Dup) : null);
   }
@@ -457,7 +457,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
       Params:
         enabled = new state
   */
-  void setDrainable(bool enabled)
+  void setDrainable(bool enabled) nothrow
   {
     gst_audio_encoder_set_drainable(cast(GstAudioEncoder*)this._cPtr, enabled);
   }
@@ -472,7 +472,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
       Params:
         num = number of frames
   */
-  void setFrameMax(int num)
+  void setFrameMax(int num) nothrow
   {
     gst_audio_encoder_set_frame_max(cast(GstAudioEncoder*)this._cPtr, num);
   }
@@ -490,7 +490,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
       Params:
         num = number of samples per frame
   */
-  void setFrameSamplesMax(int num)
+  void setFrameSamplesMax(int num) nothrow
   {
     gst_audio_encoder_set_frame_samples_max(cast(GstAudioEncoder*)this._cPtr, num);
   }
@@ -508,7 +508,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
       Params:
         num = number of samples per frame
   */
-  void setFrameSamplesMin(int num)
+  void setFrameSamplesMin(int num) nothrow
   {
     gst_audio_encoder_set_frame_samples_min(cast(GstAudioEncoder*)this._cPtr, num);
   }
@@ -524,13 +524,13 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
       Params:
         enabled = new state
   */
-  void setHardMin(bool enabled)
+  void setHardMin(bool enabled) nothrow
   {
     gst_audio_encoder_set_hard_min(cast(GstAudioEncoder*)this._cPtr, enabled);
   }
 
   /** */
-  void setHardResync(bool enabled)
+  void setHardResync(bool enabled) nothrow
   {
     gst_audio_encoder_set_hard_resync(cast(GstAudioEncoder*)this._cPtr, enabled);
   }
@@ -544,7 +544,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
         min = minimum latency
         max = maximum latency
   */
-  void setLatency(gst.types.ClockTime min, gst.types.ClockTime max)
+  void setLatency(gst.types.ClockTime min, gst.types.ClockTime max) nothrow
   {
     gst_audio_encoder_set_latency(cast(GstAudioEncoder*)this._cPtr, min, max);
   }
@@ -558,7 +558,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
       Params:
         num = lookahead
   */
-  void setLookahead(int num)
+  void setLookahead(int num) nothrow
   {
     gst_audio_encoder_set_lookahead(cast(GstAudioEncoder*)this._cPtr, num);
   }
@@ -571,7 +571,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
       Params:
         enabled = new state
   */
-  void setMarkGranule(bool enabled)
+  void setMarkGranule(bool enabled) nothrow
   {
     gst_audio_encoder_set_mark_granule(cast(GstAudioEncoder*)this._cPtr, enabled);
   }
@@ -583,7 +583,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
         caps = #GstCaps
       Returns: true on success.
   */
-  bool setOutputFormat(gst.caps.Caps caps)
+  bool setOutputFormat(gst.caps.Caps caps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_encoder_set_output_format(cast(GstAudioEncoder*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
@@ -598,7 +598,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
       Params:
         enabled = new state
   */
-  void setPerfectTimestamp(bool enabled)
+  void setPerfectTimestamp(bool enabled) nothrow
   {
     gst_audio_encoder_set_perfect_timestamp(cast(GstAudioEncoder*)this._cPtr, enabled);
   }
@@ -611,7 +611,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
       Params:
         tolerance = new tolerance
   */
-  void setTolerance(gst.types.ClockTime tolerance)
+  void setTolerance(gst.types.ClockTime tolerance) nothrow
   {
     gst_audio_encoder_set_tolerance(cast(GstAudioEncoder*)this._cPtr, tolerance);
   }
@@ -624,19 +624,19 @@ class AudioEncoderGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T, gst.p
   mixin PresetGidBuilderT!();
 
   /** */
-  T hardResync(bool propval)
+  T hardResync(bool propval) nothrow
   {
     return setProperty("hard-resync", propval);
   }
 
   /** */
-  T perfectTimestamp(bool propval)
+  T perfectTimestamp(bool propval) nothrow
   {
     return setProperty("perfect-timestamp", propval);
   }
 
   /** */
-  T tolerance(long propval)
+  T tolerance(long propval) nothrow
   {
     return setProperty("tolerance", propval);
   }
@@ -649,7 +649,7 @@ final class AudioEncoderGidBuilder : AudioEncoderGidBuilderImpl!AudioEncoderGidB
       Create object from builder.
       Returns: New object
   */
-  AudioEncoder build()
+  AudioEncoder build() nothrow
   {
     return new AudioEncoder(cast(void*)createGObject(AudioEncoder._getGType), No.Take);
   }

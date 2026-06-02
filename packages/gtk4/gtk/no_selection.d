@@ -29,26 +29,26 @@ class NoSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.sec
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_no_selection_get_type != &gidSymbolNotFound ? gtk_no_selection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NoSelection self()
+  override NoSelection self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class NoSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.sec
       Get builder for [gtk.no_selection.NoSelection]
       Returns: New builder object
   */
-  static NoSelectionGidBuilder builder()
+  static NoSelectionGidBuilder builder() nothrow
   {
     return new NoSelectionGidBuilder;
   }
@@ -66,7 +66,7 @@ class NoSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.sec
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
-  @property gobject.types.GType itemType()
+  @property gobject.types.GType itemType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
   }
@@ -75,7 +75,7 @@ class NoSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.sec
       Get `model` property.
       Returns: The model being managed.
   */
-  @property gio.list_model.ListModel model()
+  @property gio.list_model.ListModel model() nothrow
   {
     return getModel();
   }
@@ -85,7 +85,7 @@ class NoSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.sec
       Params:
         propval = The model being managed.
   */
-  @property void model(gio.list_model.ListModel propval)
+  @property void model(gio.list_model.ListModel propval) nothrow
   {
     setModel(propval);
   }
@@ -94,7 +94,7 @@ class NoSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.sec
       Get `nItems` property.
       Returns: The number of items. See [gio.list_model.ListModel.getNItems].
   */
-  @property uint nItems()
+  @property uint nItems() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
@@ -110,7 +110,7 @@ class NoSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.sec
         model = the [gio.list_model.ListModel] to manage
       Returns: a new [gtk.no_selection.NoSelection]
   */
-  this(gio.list_model.ListModel model = null)
+  this(gio.list_model.ListModel model = null) nothrow
   {
     GtkNoSelection* _cretval;
     _cretval = gtk_no_selection_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(Yes.Dup) : null);
@@ -121,7 +121,7 @@ class NoSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.sec
       Gets the model that self is wrapping.
       Returns: The model being wrapped
   */
-  gio.list_model.ListModel getModel()
+  gio.list_model.ListModel getModel() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_no_selection_get_model(cast(GtkNoSelection*)this._cPtr);
@@ -137,7 +137,7 @@ class NoSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.sec
       Params:
         model = A [gio.list_model.ListModel] to wrap
   */
-  void setModel(gio.list_model.ListModel model = null)
+  void setModel(gio.list_model.ListModel model = null) nothrow
   {
     gtk_no_selection_set_model(cast(GtkNoSelection*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
@@ -157,7 +157,7 @@ class NoSelectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
         propval = The model being managed.
       Returns: Builder instance for fluent chaining
   */
-  T model(gio.list_model.ListModel propval)
+  T model(gio.list_model.ListModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -170,7 +170,7 @@ final class NoSelectionGidBuilder : NoSelectionGidBuilderImpl!NoSelectionGidBuil
       Create object from builder.
       Returns: New object
   */
-  NoSelection build()
+  NoSelection build() nothrow
   {
     return new NoSelection(cast(void*)createGObject(NoSelection._getGType), Yes.Take);
   }

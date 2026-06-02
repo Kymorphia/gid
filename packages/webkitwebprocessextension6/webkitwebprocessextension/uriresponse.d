@@ -21,26 +21,26 @@ class URIResponse : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_uri_response_get_type != &gidSymbolNotFound ? webkit_uri_response_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override URIResponse self()
+  override URIResponse self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class URIResponse : gobject.object.ObjectWrap
       Get builder for [webkitwebprocessextension.uriresponse.URIResponse]
       Returns: New builder object
   */
-  static URIResponseGidBuilder builder()
+  static URIResponseGidBuilder builder() nothrow
   {
     return new URIResponseGidBuilder;
   }
@@ -58,7 +58,7 @@ class URIResponse : gobject.object.ObjectWrap
       Get `contentLength` property.
       Returns: The expected content length of the response.
   */
-  @property ulong contentLength()
+  @property ulong contentLength() nothrow
   {
     return getContentLength();
   }
@@ -67,7 +67,7 @@ class URIResponse : gobject.object.ObjectWrap
       Get `httpHeaders` property.
       Returns: The HTTP headers of the response, or null if the response is not an HTTP response.
   */
-  @property soup.message_headers.MessageHeaders httpHeaders()
+  @property soup.message_headers.MessageHeaders httpHeaders() nothrow
   {
     return getHttpHeaders();
   }
@@ -76,7 +76,7 @@ class URIResponse : gobject.object.ObjectWrap
       Get `mimeType` property.
       Returns: The MIME type of the response.
   */
-  @property string mimeType()
+  @property string mimeType() nothrow
   {
     return getMimeType();
   }
@@ -85,7 +85,7 @@ class URIResponse : gobject.object.ObjectWrap
       Get `statusCode` property.
       Returns: The status code of the response as returned by the server.
   */
-  @property uint statusCode()
+  @property uint statusCode() nothrow
   {
     return getStatusCode();
   }
@@ -94,7 +94,7 @@ class URIResponse : gobject.object.ObjectWrap
       Get `suggestedFilename` property.
       Returns: The suggested filename for the URI response.
   */
-  @property string suggestedFilename()
+  @property string suggestedFilename() nothrow
   {
     return getSuggestedFilename();
   }
@@ -103,7 +103,7 @@ class URIResponse : gobject.object.ObjectWrap
       Get `uri` property.
       Returns: The URI for which the response was made.
   */
-  @property string uri()
+  @property string uri() nothrow
   {
     return getUri();
   }
@@ -114,7 +114,7 @@ class URIResponse : gobject.object.ObjectWrap
       It can be 0 if the server provided an incorrect or missing Content-Length.
       Returns: the expected content length of response.
   */
-  ulong getContentLength()
+  ulong getContentLength() nothrow
   {
     ulong _retval;
     _retval = webkit_uri_response_get_content_length(cast(WebKitURIResponse*)this._cPtr);
@@ -126,7 +126,7 @@ class URIResponse : gobject.object.ObjectWrap
       Returns: a #SoupMessageHeaders with the HTTP headers of response
            or null if response is not an HTTP response.
   */
-  soup.message_headers.MessageHeaders getHttpHeaders()
+  soup.message_headers.MessageHeaders getHttpHeaders() nothrow
   {
     SoupMessageHeaders* _cretval;
     _cretval = webkit_uri_response_get_http_headers(cast(WebKitURIResponse*)this._cPtr);
@@ -138,7 +138,7 @@ class URIResponse : gobject.object.ObjectWrap
       Gets the MIME type of the response.
       Returns: MIME type, as a string.
   */
-  string getMimeType()
+  string getMimeType() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_uri_response_get_mime_type(cast(WebKitURIResponse*)this._cPtr);
@@ -155,7 +155,7 @@ class URIResponse : gobject.object.ObjectWrap
       unsigned integer.
       Returns: the status code of response
   */
-  uint getStatusCode()
+  uint getStatusCode() nothrow
   {
     uint _retval;
     _retval = webkit_uri_response_get_status_code(cast(WebKitURIResponse*)this._cPtr);
@@ -171,7 +171,7 @@ class URIResponse : gobject.object.ObjectWrap
       Returns: the suggested filename or null if
            the 'Content-Disposition' HTTP header is not present.
   */
-  string getSuggestedFilename()
+  string getSuggestedFilename() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_uri_response_get_suggested_filename(cast(WebKitURIResponse*)this._cPtr);
@@ -183,7 +183,7 @@ class URIResponse : gobject.object.ObjectWrap
       Gets the URI which resulted in the response.
       Returns: response URI, as a string.
   */
-  string getUri()
+  string getUri() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_uri_response_get_uri(cast(WebKitURIResponse*)this._cPtr);
@@ -204,7 +204,7 @@ final class URIResponseGidBuilder : URIResponseGidBuilderImpl!URIResponseGidBuil
       Create object from builder.
       Returns: New object
   */
-  URIResponse build()
+  URIResponse build() nothrow
   {
     return new URIResponse(cast(void*)createGObject(URIResponse._getGType), No.Take);
   }

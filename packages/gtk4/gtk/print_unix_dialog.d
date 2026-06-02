@@ -89,26 +89,26 @@ class PrintUnixDialog : gtk.dialog.Dialog
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_print_unix_dialog_get_type != &gidSymbolNotFound ? gtk_print_unix_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PrintUnixDialog self()
+  override PrintUnixDialog self() nothrow
   {
     return this;
   }
@@ -117,7 +117,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Get builder for [gtk.print_unix_dialog.PrintUnixDialog]
       Returns: New builder object
   */
-  static PrintUnixDialogGidBuilder builder()
+  static PrintUnixDialogGidBuilder builder() nothrow
   {
     return new PrintUnixDialogGidBuilder;
   }
@@ -126,7 +126,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Get `currentPage` property.
       Returns: The current page in the document.
   */
-  @property int currentPage()
+  @property int currentPage() nothrow
   {
     return getCurrentPage();
   }
@@ -136,7 +136,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Params:
         propval = The current page in the document.
   */
-  @property void currentPage(int propval)
+  @property void currentPage(int propval) nothrow
   {
     setCurrentPage(propval);
   }
@@ -145,7 +145,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Get `embedPageSetup` property.
       Returns: true if the page setup controls are embedded.
   */
-  @property bool embedPageSetup()
+  @property bool embedPageSetup() nothrow
   {
     return getEmbedPageSetup();
   }
@@ -155,7 +155,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Params:
         propval = true if the page setup controls are embedded.
   */
-  @property void embedPageSetup(bool propval)
+  @property void embedPageSetup(bool propval) nothrow
   {
     setEmbedPageSetup(propval);
   }
@@ -164,7 +164,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Get `hasSelection` property.
       Returns: Whether the application has a selection.
   */
-  @property bool hasSelection()
+  @property bool hasSelection() nothrow
   {
     return getHasSelection();
   }
@@ -174,7 +174,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Params:
         propval = Whether the application has a selection.
   */
-  @property void hasSelection(bool propval)
+  @property void hasSelection(bool propval) nothrow
   {
     setHasSelection(propval);
   }
@@ -183,7 +183,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Get `manualCapabilities` property.
       Returns: Capabilities the application can handle.
   */
-  @property gtk.types.PrintCapabilities manualCapabilities()
+  @property gtk.types.PrintCapabilities manualCapabilities() nothrow
   {
     return getManualCapabilities();
   }
@@ -193,7 +193,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Params:
         propval = Capabilities the application can handle.
   */
-  @property void manualCapabilities(gtk.types.PrintCapabilities propval)
+  @property void manualCapabilities(gtk.types.PrintCapabilities propval) nothrow
   {
     setManualCapabilities(propval);
   }
@@ -202,7 +202,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Get `pageSetup` property.
       Returns: The [gtk.page_setup.PageSetup] object to use.
   */
-  @property gtk.page_setup.PageSetup pageSetup()
+  @property gtk.page_setup.PageSetup pageSetup() nothrow
   {
     return getPageSetup();
   }
@@ -212,7 +212,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Params:
         propval = The [gtk.page_setup.PageSetup] object to use.
   */
-  @property void pageSetup(gtk.page_setup.PageSetup propval)
+  @property void pageSetup(gtk.page_setup.PageSetup propval) nothrow
   {
     setPageSetup(propval);
   }
@@ -221,7 +221,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Get `printSettings` property.
       Returns: The [gtk.print_settings.PrintSettings] object used for this dialog.
   */
-  @property gtk.print_settings.PrintSettings printSettings()
+  @property gtk.print_settings.PrintSettings printSettings() nothrow
   {
     return getSettings();
   }
@@ -231,7 +231,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Params:
         propval = The [gtk.print_settings.PrintSettings] object used for this dialog.
   */
-  @property void printSettings(gtk.print_settings.PrintSettings propval)
+  @property void printSettings(gtk.print_settings.PrintSettings propval) nothrow
   {
     setSettings(propval);
   }
@@ -240,7 +240,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Get `selectedPrinter` property.
       Returns: The [gtk.printer.Printer] which is selected.
   */
-  @property gtk.printer.Printer selectedPrinter()
+  @property gtk.printer.Printer selectedPrinter() nothrow
   {
     return getSelectedPrinter();
   }
@@ -249,7 +249,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Get `supportSelection` property.
       Returns: Whether the dialog supports selection.
   */
-  @property bool supportSelection()
+  @property bool supportSelection() nothrow
   {
     return getSupportSelection();
   }
@@ -259,7 +259,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Params:
         propval = Whether the dialog supports selection.
   */
-  @property void supportSelection(bool propval)
+  @property void supportSelection(bool propval) nothrow
   {
     setSupportSelection(propval);
   }
@@ -272,7 +272,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
         parent = Transient parent of the dialog
       Returns: a new [gtk.print_unix_dialog.PrintUnixDialog]
   */
-  this(string title = null, gtk.window.Window parent = null)
+  this(string title = null, gtk.window.Window parent = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -287,7 +287,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
         child = the widget to put in the custom tab
         tabLabel = the widget to use as tab label
   */
-  void addCustomTab(gtk.widget.Widget child, gtk.widget.Widget tabLabel)
+  void addCustomTab(gtk.widget.Widget child, gtk.widget.Widget tabLabel) nothrow
   {
     gtk_print_unix_dialog_add_custom_tab(cast(GtkPrintUnixDialog*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel._cPtr(No.Dup) : null);
   }
@@ -296,7 +296,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Gets the current page of the [gtk.print_unix_dialog.PrintUnixDialog].
       Returns: the current page of dialog
   */
-  int getCurrentPage()
+  int getCurrentPage() nothrow
   {
     int _retval;
     _retval = gtk_print_unix_dialog_get_current_page(cast(GtkPrintUnixDialog*)this._cPtr);
@@ -307,7 +307,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Gets whether to embed the page setup.
       Returns: whether to embed the page setup
   */
-  bool getEmbedPageSetup()
+  bool getEmbedPageSetup() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_print_unix_dialog_get_embed_page_setup(cast(GtkPrintUnixDialog*)this._cPtr);
@@ -318,7 +318,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Gets whether there is a selection.
       Returns: whether there is a selection
   */
-  bool getHasSelection()
+  bool getHasSelection() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_print_unix_dialog_get_has_selection(cast(GtkPrintUnixDialog*)this._cPtr);
@@ -329,7 +329,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Gets the capabilities that have been set on this [gtk.print_unix_dialog.PrintUnixDialog].
       Returns: the printing capabilities
   */
-  gtk.types.PrintCapabilities getManualCapabilities()
+  gtk.types.PrintCapabilities getManualCapabilities() nothrow
   {
     GtkPrintCapabilities _cretval;
     _cretval = gtk_print_unix_dialog_get_manual_capabilities(cast(GtkPrintUnixDialog*)this._cPtr);
@@ -341,7 +341,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Gets the page setup that is used by the [gtk.print_unix_dialog.PrintUnixDialog].
       Returns: the page setup of dialog.
   */
-  gtk.page_setup.PageSetup getPageSetup()
+  gtk.page_setup.PageSetup getPageSetup() nothrow
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_unix_dialog_get_page_setup(cast(GtkPrintUnixDialog*)this._cPtr);
@@ -353,7 +353,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Gets whether a page setup was set by the user.
       Returns: whether a page setup was set by user.
   */
-  bool getPageSetupSet()
+  bool getPageSetupSet() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_print_unix_dialog_get_page_setup_set(cast(GtkPrintUnixDialog*)this._cPtr);
@@ -364,7 +364,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Gets the currently selected printer.
       Returns: the currently selected printer
   */
-  gtk.printer.Printer getSelectedPrinter()
+  gtk.printer.Printer getSelectedPrinter() nothrow
   {
     GtkPrinter* _cretval;
     _cretval = gtk_print_unix_dialog_get_selected_printer(cast(GtkPrintUnixDialog*)this._cPtr);
@@ -382,7 +382,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       it if don’t want to keep it.
       Returns: a new [gtk.print_settings.PrintSettings] object with the values from dialog
   */
-  gtk.print_settings.PrintSettings getSettings()
+  gtk.print_settings.PrintSettings getSettings() nothrow
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_unix_dialog_get_settings(cast(GtkPrintUnixDialog*)this._cPtr);
@@ -394,7 +394,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Gets whether the print dialog allows user to print a selection.
       Returns: whether the application supports print of selection
   */
-  bool getSupportSelection()
+  bool getSupportSelection() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_print_unix_dialog_get_support_selection(cast(GtkPrintUnixDialog*)this._cPtr);
@@ -410,7 +410,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Params:
         currentPage = the current page number.
   */
-  void setCurrentPage(int currentPage)
+  void setCurrentPage(int currentPage) nothrow
   {
     gtk_print_unix_dialog_set_current_page(cast(GtkPrintUnixDialog*)this._cPtr, currentPage);
   }
@@ -421,7 +421,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Params:
         embed = embed page setup selection
   */
-  void setEmbedPageSetup(bool embed)
+  void setEmbedPageSetup(bool embed) nothrow
   {
     gtk_print_unix_dialog_set_embed_page_setup(cast(GtkPrintUnixDialog*)this._cPtr, embed);
   }
@@ -432,7 +432,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Params:
         hasSelection = true indicates that a selection exists
   */
-  void setHasSelection(bool hasSelection)
+  void setHasSelection(bool hasSelection) nothrow
   {
     gtk_print_unix_dialog_set_has_selection(cast(GtkPrintUnixDialog*)this._cPtr, hasSelection);
   }
@@ -449,7 +449,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Params:
         capabilities = the printing capabilities of your application
   */
-  void setManualCapabilities(gtk.types.PrintCapabilities capabilities)
+  void setManualCapabilities(gtk.types.PrintCapabilities capabilities) nothrow
   {
     gtk_print_unix_dialog_set_manual_capabilities(cast(GtkPrintUnixDialog*)this._cPtr, capabilities);
   }
@@ -460,7 +460,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Params:
         pageSetup = a [gtk.page_setup.PageSetup]
   */
-  void setPageSetup(gtk.page_setup.PageSetup pageSetup)
+  void setPageSetup(gtk.page_setup.PageSetup pageSetup) nothrow
   {
     gtk_print_unix_dialog_set_page_setup(cast(GtkPrintUnixDialog*)this._cPtr, pageSetup ? cast(GtkPageSetup*)pageSetup._cPtr(No.Dup) : null);
   }
@@ -475,7 +475,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Params:
         settings = a [gtk.print_settings.PrintSettings]
   */
-  void setSettings(gtk.print_settings.PrintSettings settings = null)
+  void setSettings(gtk.print_settings.PrintSettings settings = null) nothrow
   {
     gtk_print_unix_dialog_set_settings(cast(GtkPrintUnixDialog*)this._cPtr, settings ? cast(GtkPrintSettings*)settings._cPtr(No.Dup) : null);
   }
@@ -486,7 +486,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
       Params:
         supportSelection = true to allow print selection
   */
-  void setSupportSelection(bool supportSelection)
+  void setSupportSelection(bool supportSelection) nothrow
   {
     gtk_print_unix_dialog_set_support_selection(cast(GtkPrintUnixDialog*)this._cPtr, supportSelection);
   }
@@ -503,7 +503,7 @@ class PrintUnixDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
         propval = The current page in the document.
       Returns: Builder instance for fluent chaining
   */
-  T currentPage(int propval)
+  T currentPage(int propval) nothrow
   {
     return setProperty("current-page", propval);
   }
@@ -514,7 +514,7 @@ class PrintUnixDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
         propval = true if the page setup controls are embedded.
       Returns: Builder instance for fluent chaining
   */
-  T embedPageSetup(bool propval)
+  T embedPageSetup(bool propval) nothrow
   {
     return setProperty("embed-page-setup", propval);
   }
@@ -525,7 +525,7 @@ class PrintUnixDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
         propval = Whether the application has a selection.
       Returns: Builder instance for fluent chaining
   */
-  T hasSelection(bool propval)
+  T hasSelection(bool propval) nothrow
   {
     return setProperty("has-selection", propval);
   }
@@ -536,7 +536,7 @@ class PrintUnixDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
         propval = Capabilities the application can handle.
       Returns: Builder instance for fluent chaining
   */
-  T manualCapabilities(gtk.types.PrintCapabilities propval)
+  T manualCapabilities(gtk.types.PrintCapabilities propval) nothrow
   {
     return setProperty("manual-capabilities", propval);
   }
@@ -547,7 +547,7 @@ class PrintUnixDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
         propval = The [gtk.page_setup.PageSetup] object to use.
       Returns: Builder instance for fluent chaining
   */
-  T pageSetup(gtk.page_setup.PageSetup propval)
+  T pageSetup(gtk.page_setup.PageSetup propval) nothrow
   {
     return setProperty("page-setup", propval);
   }
@@ -558,7 +558,7 @@ class PrintUnixDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
         propval = The [gtk.print_settings.PrintSettings] object used for this dialog.
       Returns: Builder instance for fluent chaining
   */
-  T printSettings(gtk.print_settings.PrintSettings propval)
+  T printSettings(gtk.print_settings.PrintSettings propval) nothrow
   {
     return setProperty("print-settings", propval);
   }
@@ -569,7 +569,7 @@ class PrintUnixDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
         propval = Whether the dialog supports selection.
       Returns: Builder instance for fluent chaining
   */
-  T supportSelection(bool propval)
+  T supportSelection(bool propval) nothrow
   {
     return setProperty("support-selection", propval);
   }
@@ -582,7 +582,7 @@ final class PrintUnixDialogGidBuilder : PrintUnixDialogGidBuilderImpl!PrintUnixD
       Create object from builder.
       Returns: New object
   */
-  PrintUnixDialog build()
+  PrintUnixDialog build() nothrow
   {
     return new PrintUnixDialog(cast(void*)createGObject(PrintUnixDialog._getGType), No.Take);
   }

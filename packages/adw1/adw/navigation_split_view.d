@@ -157,26 +157,26 @@ class NavigationSplitView : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_navigation_split_view_get_type != &gidSymbolNotFound ? adw_navigation_split_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NavigationSplitView self()
+  override NavigationSplitView self() nothrow
   {
     return this;
   }
@@ -185,7 +185,7 @@ class NavigationSplitView : gtk.widget.Widget
       Get builder for [adw.navigation_split_view.NavigationSplitView]
       Returns: New builder object
   */
-  static NavigationSplitViewGidBuilder builder()
+  static NavigationSplitViewGidBuilder builder() nothrow
   {
     return new NavigationSplitViewGidBuilder;
   }
@@ -200,7 +200,7 @@ class NavigationSplitView : gtk.widget.Widget
         The [adw.navigation_split_view.NavigationSplitView.showContent] controls which child is
         visible while collapsed.
   */
-  @property bool collapsed()
+  @property bool collapsed() nothrow
   {
     return getCollapsed();
   }
@@ -216,7 +216,7 @@ class NavigationSplitView : gtk.widget.Widget
           The [adw.navigation_split_view.NavigationSplitView.showContent] controls which child is
           visible while collapsed.
   */
-  @property void collapsed(bool propval)
+  @property void collapsed(bool propval) nothrow
   {
     setCollapsed(propval);
   }
@@ -225,7 +225,7 @@ class NavigationSplitView : gtk.widget.Widget
       Get `content` property.
       Returns: The content widget.
   */
-  @property adw.navigation_page.NavigationPage content()
+  @property adw.navigation_page.NavigationPage content() nothrow
   {
     return getContent();
   }
@@ -235,7 +235,7 @@ class NavigationSplitView : gtk.widget.Widget
       Params:
         propval = The content widget.
   */
-  @property void content(adw.navigation_page.NavigationPage propval)
+  @property void content(adw.navigation_page.NavigationPage propval) nothrow
   {
     setContent(propval);
   }
@@ -250,7 +250,7 @@ class NavigationSplitView : gtk.widget.Widget
         The sidebar widget can still be allocated with larger width if its own
         minimum width exceeds it.
   */
-  @property double maxSidebarWidth()
+  @property double maxSidebarWidth() nothrow
   {
     return getMaxSidebarWidth();
   }
@@ -266,7 +266,7 @@ class NavigationSplitView : gtk.widget.Widget
           The sidebar widget can still be allocated with larger width if its own
           minimum width exceeds it.
   */
-  @property void maxSidebarWidth(double propval)
+  @property void maxSidebarWidth(double propval) nothrow
   {
     setMaxSidebarWidth(propval);
   }
@@ -281,7 +281,7 @@ class NavigationSplitView : gtk.widget.Widget
         The sidebar widget can still be allocated with larger width if its own
         minimum width exceeds it.
   */
-  @property double minSidebarWidth()
+  @property double minSidebarWidth() nothrow
   {
     return getMinSidebarWidth();
   }
@@ -297,7 +297,7 @@ class NavigationSplitView : gtk.widget.Widget
           The sidebar widget can still be allocated with larger width if its own
           minimum width exceeds it.
   */
-  @property void minSidebarWidth(double propval)
+  @property void minSidebarWidth(double propval) nothrow
   {
     setMinSidebarWidth(propval);
   }
@@ -313,7 +313,7 @@ class NavigationSplitView : gtk.widget.Widget
         If the split view is already collapsed, the visible page changes
         immediately.
   */
-  @property bool showContent()
+  @property bool showContent() nothrow
   {
     return getShowContent();
   }
@@ -330,7 +330,7 @@ class NavigationSplitView : gtk.widget.Widget
           If the split view is already collapsed, the visible page changes
           immediately.
   */
-  @property void showContent(bool propval)
+  @property void showContent(bool propval) nothrow
   {
     setShowContent(propval);
   }
@@ -339,7 +339,7 @@ class NavigationSplitView : gtk.widget.Widget
       Get `sidebar` property.
       Returns: The sidebar widget.
   */
-  @property adw.navigation_page.NavigationPage sidebar()
+  @property adw.navigation_page.NavigationPage sidebar() nothrow
   {
     return getSidebar();
   }
@@ -349,7 +349,7 @@ class NavigationSplitView : gtk.widget.Widget
       Params:
         propval = The sidebar widget.
   */
-  @property void sidebar(adw.navigation_page.NavigationPage propval)
+  @property void sidebar(adw.navigation_page.NavigationPage propval) nothrow
   {
     setSidebar(propval);
   }
@@ -365,7 +365,7 @@ class NavigationSplitView : gtk.widget.Widget
         The sidebar widget can be allocated with larger width if its own minimum
         width exceeds the preferred width.
   */
-  @property double sidebarWidthFraction()
+  @property double sidebarWidthFraction() nothrow
   {
     return getSidebarWidthFraction();
   }
@@ -382,7 +382,7 @@ class NavigationSplitView : gtk.widget.Widget
           The sidebar widget can be allocated with larger width if its own minimum
           width exceeds the preferred width.
   */
-  @property void sidebarWidthFraction(double propval)
+  @property void sidebarWidthFraction(double propval) nothrow
   {
     setSidebarWidthFraction(propval);
   }
@@ -394,7 +394,7 @@ class NavigationSplitView : gtk.widget.Widget
         See [adw.navigation_split_view.NavigationSplitView.minSidebarWidth] and
         [adw.navigation_split_view.NavigationSplitView.maxSidebarWidth].
   */
-  @property adw.types.LengthUnit sidebarWidthUnit()
+  @property adw.types.LengthUnit sidebarWidthUnit() nothrow
   {
     return getSidebarWidthUnit();
   }
@@ -407,7 +407,7 @@ class NavigationSplitView : gtk.widget.Widget
           See [adw.navigation_split_view.NavigationSplitView.minSidebarWidth] and
           [adw.navigation_split_view.NavigationSplitView.maxSidebarWidth].
   */
-  @property void sidebarWidthUnit(adw.types.LengthUnit propval)
+  @property void sidebarWidthUnit(adw.types.LengthUnit propval) nothrow
   {
     setSidebarWidthUnit(propval);
   }
@@ -416,7 +416,7 @@ class NavigationSplitView : gtk.widget.Widget
       Creates a new [adw.navigation_split_view.NavigationSplitView].
       Returns: the newly created [adw.navigation_split_view.NavigationSplitView]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_navigation_split_view_new();
@@ -427,7 +427,7 @@ class NavigationSplitView : gtk.widget.Widget
       Gets whether self is collapsed.
       Returns: whether self is collapsed
   */
-  bool getCollapsed()
+  bool getCollapsed() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_navigation_split_view_get_collapsed(cast(AdwNavigationSplitView*)this._cPtr);
@@ -438,7 +438,7 @@ class NavigationSplitView : gtk.widget.Widget
       Sets the content widget for self.
       Returns: the content widget
   */
-  adw.navigation_page.NavigationPage getContent()
+  adw.navigation_page.NavigationPage getContent() nothrow
   {
     AdwNavigationPage* _cretval;
     _cretval = adw_navigation_split_view_get_content(cast(AdwNavigationSplitView*)this._cPtr);
@@ -450,7 +450,7 @@ class NavigationSplitView : gtk.widget.Widget
       Gets the maximum sidebar width for self.
       Returns: the maximum width
   */
-  double getMaxSidebarWidth()
+  double getMaxSidebarWidth() nothrow
   {
     double _retval;
     _retval = adw_navigation_split_view_get_max_sidebar_width(cast(AdwNavigationSplitView*)this._cPtr);
@@ -461,7 +461,7 @@ class NavigationSplitView : gtk.widget.Widget
       Gets the minimum sidebar width for self.
       Returns: the minimum width
   */
-  double getMinSidebarWidth()
+  double getMinSidebarWidth() nothrow
   {
     double _retval;
     _retval = adw_navigation_split_view_get_min_sidebar_width(cast(AdwNavigationSplitView*)this._cPtr);
@@ -472,7 +472,7 @@ class NavigationSplitView : gtk.widget.Widget
       Gets which page is visible when self is collapsed.
       Returns: whether to show content when collapsed
   */
-  bool getShowContent()
+  bool getShowContent() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_navigation_split_view_get_show_content(cast(AdwNavigationSplitView*)this._cPtr);
@@ -483,7 +483,7 @@ class NavigationSplitView : gtk.widget.Widget
       Gets the sidebar widget for self.
       Returns: the sidebar widget
   */
-  adw.navigation_page.NavigationPage getSidebar()
+  adw.navigation_page.NavigationPage getSidebar() nothrow
   {
     AdwNavigationPage* _cretval;
     _cretval = adw_navigation_split_view_get_sidebar(cast(AdwNavigationSplitView*)this._cPtr);
@@ -495,7 +495,7 @@ class NavigationSplitView : gtk.widget.Widget
       Gets the preferred sidebar width fraction for self.
       Returns: the preferred width fraction
   */
-  double getSidebarWidthFraction()
+  double getSidebarWidthFraction() nothrow
   {
     double _retval;
     _retval = adw_navigation_split_view_get_sidebar_width_fraction(cast(AdwNavigationSplitView*)this._cPtr);
@@ -506,7 +506,7 @@ class NavigationSplitView : gtk.widget.Widget
       Gets the length unit for minimum and maximum sidebar widths.
       Returns: the length unit
   */
-  adw.types.LengthUnit getSidebarWidthUnit()
+  adw.types.LengthUnit getSidebarWidthUnit() nothrow
   {
     AdwLengthUnit _cretval;
     _cretval = adw_navigation_split_view_get_sidebar_width_unit(cast(AdwNavigationSplitView*)this._cPtr);
@@ -526,7 +526,7 @@ class NavigationSplitView : gtk.widget.Widget
       Params:
         collapsed = whether self is collapsed
   */
-  void setCollapsed(bool collapsed)
+  void setCollapsed(bool collapsed) nothrow
   {
     adw_navigation_split_view_set_collapsed(cast(AdwNavigationSplitView*)this._cPtr, collapsed);
   }
@@ -537,7 +537,7 @@ class NavigationSplitView : gtk.widget.Widget
       Params:
         content = the content widget
   */
-  void setContent(adw.navigation_page.NavigationPage content = null)
+  void setContent(adw.navigation_page.NavigationPage content = null) nothrow
   {
     adw_navigation_split_view_set_content(cast(AdwNavigationSplitView*)this._cPtr, content ? cast(AdwNavigationPage*)content._cPtr(No.Dup) : null);
   }
@@ -554,7 +554,7 @@ class NavigationSplitView : gtk.widget.Widget
       Params:
         width = the maximum width
   */
-  void setMaxSidebarWidth(double width)
+  void setMaxSidebarWidth(double width) nothrow
   {
     adw_navigation_split_view_set_max_sidebar_width(cast(AdwNavigationSplitView*)this._cPtr, width);
   }
@@ -571,7 +571,7 @@ class NavigationSplitView : gtk.widget.Widget
       Params:
         width = the minimum width
   */
-  void setMinSidebarWidth(double width)
+  void setMinSidebarWidth(double width) nothrow
   {
     adw_navigation_split_view_set_min_sidebar_width(cast(AdwNavigationSplitView*)this._cPtr, width);
   }
@@ -588,7 +588,7 @@ class NavigationSplitView : gtk.widget.Widget
       Params:
         showContent = whether to show content when collapsed
   */
-  void setShowContent(bool showContent)
+  void setShowContent(bool showContent) nothrow
   {
     adw_navigation_split_view_set_show_content(cast(AdwNavigationSplitView*)this._cPtr, showContent);
   }
@@ -599,7 +599,7 @@ class NavigationSplitView : gtk.widget.Widget
       Params:
         sidebar = the sidebar widget
   */
-  void setSidebar(adw.navigation_page.NavigationPage sidebar = null)
+  void setSidebar(adw.navigation_page.NavigationPage sidebar = null) nothrow
   {
     adw_navigation_split_view_set_sidebar(cast(AdwNavigationSplitView*)this._cPtr, sidebar ? cast(AdwNavigationPage*)sidebar._cPtr(No.Dup) : null);
   }
@@ -617,7 +617,7 @@ class NavigationSplitView : gtk.widget.Widget
       Params:
         fraction = the preferred width fraction
   */
-  void setSidebarWidthFraction(double fraction)
+  void setSidebarWidthFraction(double fraction) nothrow
   {
     adw_navigation_split_view_set_sidebar_width_fraction(cast(AdwNavigationSplitView*)this._cPtr, fraction);
   }
@@ -631,7 +631,7 @@ class NavigationSplitView : gtk.widget.Widget
       Params:
         unit = the length unit
   */
-  void setSidebarWidthUnit(adw.types.LengthUnit unit)
+  void setSidebarWidthUnit(adw.types.LengthUnit unit) nothrow
   {
     adw_navigation_split_view_set_sidebar_width_unit(cast(AdwNavigationSplitView*)this._cPtr, unit);
   }
@@ -654,7 +654,7 @@ class NavigationSplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           visible while collapsed.
       Returns: Builder instance for fluent chaining
   */
-  T collapsed(bool propval)
+  T collapsed(bool propval) nothrow
   {
     return setProperty("collapsed", propval);
   }
@@ -665,7 +665,7 @@ class NavigationSplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The content widget.
       Returns: Builder instance for fluent chaining
   */
-  T content(adw.navigation_page.NavigationPage propval)
+  T content(adw.navigation_page.NavigationPage propval) nothrow
   {
     return setProperty("content", propval);
   }
@@ -682,7 +682,7 @@ class NavigationSplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           minimum width exceeds it.
       Returns: Builder instance for fluent chaining
   */
-  T maxSidebarWidth(double propval)
+  T maxSidebarWidth(double propval) nothrow
   {
     return setProperty("max-sidebar-width", propval);
   }
@@ -699,7 +699,7 @@ class NavigationSplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           minimum width exceeds it.
       Returns: Builder instance for fluent chaining
   */
-  T minSidebarWidth(double propval)
+  T minSidebarWidth(double propval) nothrow
   {
     return setProperty("min-sidebar-width", propval);
   }
@@ -717,7 +717,7 @@ class NavigationSplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           immediately.
       Returns: Builder instance for fluent chaining
   */
-  T showContent(bool propval)
+  T showContent(bool propval) nothrow
   {
     return setProperty("show-content", propval);
   }
@@ -728,7 +728,7 @@ class NavigationSplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The sidebar widget.
       Returns: Builder instance for fluent chaining
   */
-  T sidebar(adw.navigation_page.NavigationPage propval)
+  T sidebar(adw.navigation_page.NavigationPage propval) nothrow
   {
     return setProperty("sidebar", propval);
   }
@@ -746,7 +746,7 @@ class NavigationSplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           width exceeds the preferred width.
       Returns: Builder instance for fluent chaining
   */
-  T sidebarWidthFraction(double propval)
+  T sidebarWidthFraction(double propval) nothrow
   {
     return setProperty("sidebar-width-fraction", propval);
   }
@@ -760,7 +760,7 @@ class NavigationSplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           [adw.navigation_split_view.NavigationSplitView.maxSidebarWidth].
       Returns: Builder instance for fluent chaining
   */
-  T sidebarWidthUnit(adw.types.LengthUnit propval)
+  T sidebarWidthUnit(adw.types.LengthUnit propval) nothrow
   {
     return setProperty("sidebar-width-unit", propval);
   }
@@ -773,7 +773,7 @@ final class NavigationSplitViewGidBuilder : NavigationSplitViewGidBuilderImpl!Na
       Create object from builder.
       Returns: New object
   */
-  NavigationSplitView build()
+  NavigationSplitView build() nothrow
   {
     return new NavigationSplitView(cast(void*)createGObject(NavigationSplitView._getGType), No.Take);
   }

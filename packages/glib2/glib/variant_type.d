@@ -170,32 +170,32 @@ class VariantType : Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_variant_type_get_gtype != &gidSymbolNotFound ? g_variant_type_get_gtype() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VariantType self()
+  override VariantType self() nothrow
   {
     return this;
   }
@@ -206,7 +206,7 @@ class VariantType : Boxed
   *   T = One or more D types to create a VariantType for
   * Returns: New variant type
   */
-  static VariantType create(T...)()
+  static VariantType create(T...)() nothrow
   {
     return new VariantType(getStr!T);
   }
@@ -217,7 +217,7 @@ class VariantType : Boxed
   *   T = One or more D types to create a VariantType for
   * Returns: Variant type string which can be used with VariantType
   */
-  static string getStr(T...)()
+  static string getStr(T...)() nothrow
   {
     char[] typeStr;
 
@@ -270,7 +270,7 @@ class VariantType : Boxed
         typeString = a valid GVariant type string
       Returns: a new #GVariantType
   */
-  this(string typeString)
+  this(string typeString) nothrow
   {
     GVariantType* _cretval;
     const(char)* _typeString = typeString.toCString(No.Alloc);
@@ -290,7 +290,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  static glib.variant_type.VariantType newArray(glib.variant_type.VariantType element)
+  static glib.variant_type.VariantType newArray(glib.variant_type.VariantType element) nothrow
   {
     GVariantType* _cretval;
     _cretval = g_variant_type_new_array(element ? cast(const(GVariantType)*)element._cPtr(No.Dup) : null);
@@ -311,7 +311,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  static glib.variant_type.VariantType newDictEntry(glib.variant_type.VariantType key, glib.variant_type.VariantType value)
+  static glib.variant_type.VariantType newDictEntry(glib.variant_type.VariantType key, glib.variant_type.VariantType value) nothrow
   {
     GVariantType* _cretval;
     _cretval = g_variant_type_new_dict_entry(key ? cast(const(GVariantType)*)key._cPtr(No.Dup) : null, value ? cast(const(GVariantType)*)value._cPtr(No.Dup) : null);
@@ -331,7 +331,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  static glib.variant_type.VariantType newMaybe(glib.variant_type.VariantType element)
+  static glib.variant_type.VariantType newMaybe(glib.variant_type.VariantType element) nothrow
   {
     GVariantType* _cretval;
     _cretval = g_variant_type_new_maybe(element ? cast(const(GVariantType)*)element._cPtr(No.Dup) : null);
@@ -353,7 +353,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  static glib.variant_type.VariantType newTuple(glib.variant_type.VariantType[] items)
+  static glib.variant_type.VariantType newTuple(glib.variant_type.VariantType[] items) nothrow
   {
     GVariantType* _cretval;
     int _length;
@@ -377,7 +377,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  glib.variant_type.VariantType copy()
+  glib.variant_type.VariantType copy() nothrow
   {
     GVariantType* _cretval;
     _cretval = g_variant_type_copy(cast(const(GVariantType)*)this._cPtr);
@@ -393,7 +393,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  string dupString()
+  string dupString() nothrow
   {
     char* _cretval;
     _cretval = g_variant_type_dup_string(cast(const(GVariantType)*)this._cPtr);
@@ -409,7 +409,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  glib.variant_type.VariantType element()
+  glib.variant_type.VariantType element() nothrow
   {
     const(GVariantType)* _cretval;
     _cretval = g_variant_type_element(cast(const(GVariantType)*)this._cPtr);
@@ -435,7 +435,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  bool equal(glib.variant_type.VariantType type2)
+  bool equal(glib.variant_type.VariantType type2) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_variant_type_equal(cast(GVariantType*)this._cPtr, type2 ? cast(GVariantType*)type2._cPtr(No.Dup) : null);
@@ -461,7 +461,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  glib.variant_type.VariantType first()
+  glib.variant_type.VariantType first() nothrow
   {
     const(GVariantType)* _cretval;
     _cretval = g_variant_type_first(cast(const(GVariantType)*)this._cPtr);
@@ -477,7 +477,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  size_t getStringLength()
+  size_t getStringLength() nothrow
   {
     size_t _retval;
     _retval = g_variant_type_get_string_length(cast(const(GVariantType)*)this._cPtr);
@@ -494,7 +494,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  uint hash()
+  uint hash() nothrow
   {
     uint _retval;
     _retval = g_variant_type_hash(cast(GVariantType*)this._cPtr);
@@ -512,7 +512,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  bool isArray()
+  bool isArray() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_variant_type_is_array(cast(const(GVariantType)*)this._cPtr);
@@ -533,7 +533,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  bool isBasic()
+  bool isBasic() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_variant_type_is_basic(cast(const(GVariantType)*)this._cPtr);
@@ -553,7 +553,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  bool isContainer()
+  bool isContainer() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_variant_type_is_container(cast(const(GVariantType)*)this._cPtr);
@@ -575,7 +575,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  bool isDefinite()
+  bool isDefinite() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_variant_type_is_definite(cast(const(GVariantType)*)this._cPtr);
@@ -593,7 +593,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  bool isDictEntry()
+  bool isDictEntry() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_variant_type_is_dict_entry(cast(const(GVariantType)*)this._cPtr);
@@ -611,7 +611,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  bool isMaybe()
+  bool isMaybe() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_variant_type_is_maybe(cast(const(GVariantType)*)this._cPtr);
@@ -631,7 +631,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  bool isSubtypeOf(glib.variant_type.VariantType supertype)
+  bool isSubtypeOf(glib.variant_type.VariantType supertype) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_variant_type_is_subtype_of(cast(const(GVariantType)*)this._cPtr, supertype ? cast(const(GVariantType)*)supertype._cPtr(No.Dup) : null);
@@ -650,7 +650,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  bool isTuple()
+  bool isTuple() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_variant_type_is_tuple(cast(const(GVariantType)*)this._cPtr);
@@ -663,7 +663,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  bool isVariant()
+  bool isVariant() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_variant_type_is_variant(cast(const(GVariantType)*)this._cPtr);
@@ -680,7 +680,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  glib.variant_type.VariantType key()
+  glib.variant_type.VariantType key() nothrow
   {
     const(GVariantType)* _cretval;
     _cretval = g_variant_type_key(cast(const(GVariantType)*)this._cPtr);
@@ -702,7 +702,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  size_t nItems()
+  size_t nItems() nothrow
   {
     size_t _retval;
     _retval = g_variant_type_n_items(cast(const(GVariantType)*)this._cPtr);
@@ -725,7 +725,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  glib.variant_type.VariantType next()
+  glib.variant_type.VariantType next() nothrow
   {
     const(GVariantType)* _cretval;
     _cretval = g_variant_type_next(cast(const(GVariantType)*)this._cPtr);
@@ -741,7 +741,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  glib.variant_type.VariantType value()
+  glib.variant_type.VariantType value() nothrow
   {
     const(GVariantType)* _cretval;
     _cretval = g_variant_type_value(cast(const(GVariantType)*)this._cPtr);
@@ -750,7 +750,7 @@ class VariantType : Boxed
   }
 
   /** */
-  static glib.variant_type.VariantType checked(string typeString)
+  static glib.variant_type.VariantType checked(string typeString) nothrow
   {
     const(GVariantType)* _cretval;
     const(char)* _typeString = typeString.toCString(No.Alloc);
@@ -760,7 +760,7 @@ class VariantType : Boxed
   }
 
   /** */
-  static size_t stringGetDepth(string typeString)
+  static size_t stringGetDepth(string typeString) nothrow
   {
     size_t _retval;
     const(char)* _typeString = typeString.toCString(No.Alloc);
@@ -779,7 +779,7 @@ class VariantType : Boxed
         
         Since 2.24
   */
-  static bool stringIsValid(string typeString)
+  static bool stringIsValid(string typeString) nothrow
   {
     bool _retval;
     const(char)* _typeString = typeString.toCString(No.Alloc);
@@ -808,7 +808,7 @@ class VariantType : Boxed
         endptr = location to store the end pointer, or null
       Returns: true if a valid type string was found
   */
-  static bool stringScan(string string_, string limit, out string endptr)
+  static bool stringScan(string string_, string limit, out string endptr) nothrow
   {
     bool _retval;
     const(char)* _string_ = string_.toCString(No.Alloc);

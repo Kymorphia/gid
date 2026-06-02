@@ -12,7 +12,7 @@ struct GLConfigCaveat
   alias Enum = gstgl.types.GLConfigCaveat; ///
 
   /** */
-  static string toString_(gstgl.types.GLConfigCaveat caveat)
+  static string toString_(gstgl.types.GLConfigCaveat caveat) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_gl_config_caveat_to_string(caveat);

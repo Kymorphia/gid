@@ -14,26 +14,26 @@ class FeatherWriteProperties : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_feather_write_properties_get_type != &gidSymbolNotFound ? garrow_feather_write_properties_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FeatherWriteProperties self()
+  override FeatherWriteProperties self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class FeatherWriteProperties : gobject.object.ObjectWrap
       Get builder for [arrow.feather_write_properties.FeatherWriteProperties]
       Returns: New builder object
   */
-  static FeatherWritePropertiesGidBuilder builder()
+  static FeatherWritePropertiesGidBuilder builder() nothrow
   {
     return new FeatherWritePropertiesGidBuilder;
   }
@@ -58,7 +58,7 @@ class FeatherWriteProperties : gobject.object.ObjectWrap
         [arrow.types.CompressionType.Uncompressed] is set as the object
         default here.
   */
-  @property arrow.types.CompressionType compression()
+  @property arrow.types.CompressionType compression() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.types.CompressionType)("compression");
   }
@@ -75,13 +75,13 @@ class FeatherWriteProperties : gobject.object.ObjectWrap
           [arrow.types.CompressionType.Uncompressed] is set as the object
           default here.
   */
-  @property void compression(arrow.types.CompressionType propval)
+  @property void compression(arrow.types.CompressionType propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(arrow.types.CompressionType)("compression", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowFeatherWriteProperties* _cretval;
     _cretval = garrow_feather_write_properties_new();
@@ -106,7 +106,7 @@ class FeatherWritePropertiesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuil
           default here.
       Returns: Builder instance for fluent chaining
   */
-  T compression(arrow.types.CompressionType propval)
+  T compression(arrow.types.CompressionType propval) nothrow
   {
     return setProperty("compression", propval);
   }
@@ -119,7 +119,7 @@ final class FeatherWritePropertiesGidBuilder : FeatherWritePropertiesGidBuilderI
       Create object from builder.
       Returns: New object
   */
-  FeatherWriteProperties build()
+  FeatherWriteProperties build() nothrow
   {
     return new FeatherWriteProperties(cast(void*)createGObject(FeatherWriteProperties._getGType), Yes.Take);
   }

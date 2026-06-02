@@ -21,26 +21,26 @@ class FileSystemDataset : arrowdataset.dataset.Dataset
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_file_system_dataset_get_type != &gidSymbolNotFound ? gadataset_file_system_dataset_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileSystemDataset self()
+  override FileSystemDataset self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class FileSystemDataset : arrowdataset.dataset.Dataset
       Get builder for [arrowdataset.file_system_dataset.FileSystemDataset]
       Returns: New builder object
   */
-  static FileSystemDatasetGidBuilder builder()
+  static FileSystemDatasetGidBuilder builder() nothrow
   {
     return new FileSystemDatasetGidBuilder;
   }
@@ -58,7 +58,7 @@ class FileSystemDataset : arrowdataset.dataset.Dataset
       Get `fileSystem` property.
       Returns: File system of the dataset.
   */
-  @property arrow.file_system.FileSystem fileSystem()
+  @property arrow.file_system.FileSystem fileSystem() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.file_system.FileSystem)("file-system");
   }
@@ -67,7 +67,7 @@ class FileSystemDataset : arrowdataset.dataset.Dataset
       Get `format` property.
       Returns: Format of the dataset.
   */
-  @property arrowdataset.file_format.FileFormat format()
+  @property arrowdataset.file_format.FileFormat format() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrowdataset.file_format.FileFormat)("format");
   }
@@ -76,7 +76,7 @@ class FileSystemDataset : arrowdataset.dataset.Dataset
       Get `partitioning` property.
       Returns: Partitioning of the dataset.
   */
-  @property arrowdataset.partitioning.Partitioning partitioning()
+  @property arrowdataset.partitioning.Partitioning partitioning() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrowdataset.partitioning.Partitioning)("partitioning");
   }
@@ -103,7 +103,7 @@ class FileSystemDatasetGidBuilderImpl(T) : arrowdataset.dataset.DatasetGidBuilde
         propval = File system of the dataset.
       Returns: Builder instance for fluent chaining
   */
-  T fileSystem(arrow.file_system.FileSystem propval)
+  T fileSystem(arrow.file_system.FileSystem propval) nothrow
   {
     return setProperty("file-system", propval);
   }
@@ -114,7 +114,7 @@ class FileSystemDatasetGidBuilderImpl(T) : arrowdataset.dataset.DatasetGidBuilde
         propval = Format of the dataset.
       Returns: Builder instance for fluent chaining
   */
-  T format(arrowdataset.file_format.FileFormat propval)
+  T format(arrowdataset.file_format.FileFormat propval) nothrow
   {
     return setProperty("format", propval);
   }
@@ -125,7 +125,7 @@ class FileSystemDatasetGidBuilderImpl(T) : arrowdataset.dataset.DatasetGidBuilde
         propval = Partitioning of the dataset.
       Returns: Builder instance for fluent chaining
   */
-  T partitioning(arrowdataset.partitioning.Partitioning propval)
+  T partitioning(arrowdataset.partitioning.Partitioning propval) nothrow
   {
     return setProperty("partitioning", propval);
   }
@@ -138,7 +138,7 @@ final class FileSystemDatasetGidBuilder : FileSystemDatasetGidBuilderImpl!FileSy
       Create object from builder.
       Returns: New object
   */
-  FileSystemDataset build()
+  FileSystemDataset build() nothrow
   {
     return new FileSystemDataset(cast(void*)createGObject(FileSystemDataset._getGType), No.Take);
   }

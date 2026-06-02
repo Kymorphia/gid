@@ -29,26 +29,26 @@ class Hover : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_hover_get_type != &gidSymbolNotFound ? gtk_source_hover_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Hover self()
+  override Hover self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class Hover : gobject.object.ObjectWrap
       Get builder for [gtksource.hover.Hover]
       Returns: New builder object
   */
-  static HoverGidBuilder builder()
+  static HoverGidBuilder builder() nothrow
   {
     return new HoverGidBuilder;
   }
@@ -66,7 +66,7 @@ class Hover : gobject.object.ObjectWrap
       Get `hoverDelay` property.
       Returns: Contains the number of milliseconds to delay before showing the hover assistant.
   */
-  @property uint hoverDelay()
+  @property uint hoverDelay() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("hover-delay");
   }
@@ -76,19 +76,19 @@ class Hover : gobject.object.ObjectWrap
       Params:
         propval = Contains the number of milliseconds to delay before showing the hover assistant.
   */
-  @property void hoverDelay(uint propval)
+  @property void hoverDelay(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("hover-delay", propval);
   }
 
   /** */
-  void addProvider(gtksource.hover_provider.HoverProvider provider)
+  void addProvider(gtksource.hover_provider.HoverProvider provider) nothrow
   {
     gtk_source_hover_add_provider(cast(GtkSourceHover*)this._cPtr, provider ? cast(GtkSourceHoverProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null);
   }
 
   /** */
-  void removeProvider(gtksource.hover_provider.HoverProvider provider)
+  void removeProvider(gtksource.hover_provider.HoverProvider provider) nothrow
   {
     gtk_source_hover_remove_provider(cast(GtkSourceHover*)this._cPtr, provider ? cast(GtkSourceHoverProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null);
   }
@@ -104,7 +104,7 @@ class HoverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Contains the number of milliseconds to delay before showing the hover assistant.
       Returns: Builder instance for fluent chaining
   */
-  T hoverDelay(uint propval)
+  T hoverDelay(uint propval) nothrow
   {
     return setProperty("hover-delay", propval);
   }
@@ -117,7 +117,7 @@ final class HoverGidBuilder : HoverGidBuilderImpl!HoverGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Hover build()
+  Hover build() nothrow
   {
     return new Hover(cast(void*)createGObject(Hover._getGType), No.Take);
   }

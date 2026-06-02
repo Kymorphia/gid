@@ -65,26 +65,26 @@ class PadController : gtk.event_controller.EventController
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_pad_controller_get_type != &gidSymbolNotFound ? gtk_pad_controller_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PadController self()
+  override PadController self() nothrow
   {
     return this;
   }
@@ -93,19 +93,19 @@ class PadController : gtk.event_controller.EventController
       Get builder for [gtk.pad_controller.PadController]
       Returns: New builder object
   */
-  static PadControllerGidBuilder builder()
+  static PadControllerGidBuilder builder() nothrow
   {
     return new PadControllerGidBuilder;
   }
 
   /** */
-  @property gio.action_group.ActionGroup actionGroup()
+  @property gio.action_group.ActionGroup actionGroup() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.action_group.ActionGroup)("action-group");
   }
 
   /** */
-  @property gdk.device.Device pad()
+  @property gdk.device.Device pad() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.device.Device)("pad");
   }
@@ -131,7 +131,7 @@ class PadController : gtk.event_controller.EventController
         pad = A [gdk.types.InputSource.TabletPad] device, or null to handle all pads
       Returns: A newly created [gtk.pad_controller.PadController]
   */
-  this(gio.action_group.ActionGroup group, gdk.device.Device pad = null)
+  this(gio.action_group.ActionGroup group, gdk.device.Device pad = null) nothrow
   {
     GtkPadController* _cretval;
     _cretval = gtk_pad_controller_new(group ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)group)._cPtr(No.Dup) : null, pad ? cast(GdkDevice*)pad._cPtr(No.Dup) : null);
@@ -157,7 +157,7 @@ class PadController : gtk.event_controller.EventController
             be deemed user-visible.
         actionName = action name that will be activated in the [gio.action_group.ActionGroup]
   */
-  void setAction(gtk.types.PadActionType type, int index, int mode, string label, string actionName)
+  void setAction(gtk.types.PadActionType type, int index, int mode, string label, string actionName) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     const(char)* _actionName = actionName.toCString(No.Alloc);
@@ -170,13 +170,13 @@ class PadControllerGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBu
 {
 
   /** */
-  T actionGroup(gio.action_group.ActionGroup propval)
+  T actionGroup(gio.action_group.ActionGroup propval) nothrow
   {
     return setProperty("action-group", propval);
   }
 
   /** */
-  T pad(gdk.device.Device propval)
+  T pad(gdk.device.Device propval) nothrow
   {
     return setProperty("pad", propval);
   }
@@ -189,7 +189,7 @@ final class PadControllerGidBuilder : PadControllerGidBuilderImpl!PadControllerG
       Create object from builder.
       Returns: New object
   */
-  PadController build()
+  PadController build() nothrow
   {
     return new PadController(cast(void*)createGObject(PadController._getGType), Yes.Take);
   }

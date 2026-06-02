@@ -18,11 +18,8 @@ class TextureScaleNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.texture_scale_node.TextureScaleNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -46,7 +43,7 @@ class TextureScaleNode : gsk.render_node.RenderNode
         filter = how to scale the texture
       Returns: A new [gsk.render_node.RenderNode]
   */
-  this(gdk.texture.Texture texture, graphene.rect.Rect bounds, gsk.types.ScalingFilter filter)
+  this(gdk.texture.Texture texture, graphene.rect.Rect bounds, gsk.types.ScalingFilter filter) nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_texture_scale_node_new(texture ? cast(GdkTexture*)texture._cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, filter);
@@ -57,7 +54,7 @@ class TextureScaleNode : gsk.render_node.RenderNode
       Retrieves the [gsk.types.ScalingFilter] used when creating this [gsk.render_node.RenderNode].
       Returns: the [gsk.types.ScalingFilter]
   */
-  gsk.types.ScalingFilter getFilter()
+  gsk.types.ScalingFilter getFilter() nothrow
   {
     GskScalingFilter _cretval;
     _cretval = gsk_texture_scale_node_get_filter(cast(const(GskRenderNode)*)this._cPtr);
@@ -69,7 +66,7 @@ class TextureScaleNode : gsk.render_node.RenderNode
       Retrieves the [gdk.texture.Texture] used when creating this [gsk.render_node.RenderNode].
       Returns: the [gdk.texture.Texture]
   */
-  gdk.texture.Texture getTexture()
+  gdk.texture.Texture getTexture() nothrow
   {
     GdkTexture* _cretval;
     _cretval = gsk_texture_scale_node_get_texture(cast(const(GskRenderNode)*)this._cPtr);

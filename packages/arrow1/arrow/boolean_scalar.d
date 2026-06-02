@@ -14,26 +14,26 @@ class BooleanScalar : arrow.scalar.Scalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_boolean_scalar_get_type != &gidSymbolNotFound ? garrow_boolean_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BooleanScalar self()
+  override BooleanScalar self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class BooleanScalar : arrow.scalar.Scalar
       Get builder for [arrow.boolean_scalar.BooleanScalar]
       Returns: New builder object
   */
-  static BooleanScalarGidBuilder builder()
+  static BooleanScalarGidBuilder builder() nothrow
   {
     return new BooleanScalarGidBuilder;
   }
 
   /** */
-  this(bool value)
+  this(bool value) nothrow
   {
     GArrowBooleanScalar* _cretval;
     _cretval = garrow_boolean_scalar_new(value);
@@ -56,7 +56,7 @@ class BooleanScalar : arrow.scalar.Scalar
   }
 
   /** */
-  bool getValue()
+  bool getValue() nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_boolean_scalar_get_value(cast(GArrowBooleanScalar*)this._cPtr);
@@ -76,7 +76,7 @@ final class BooleanScalarGidBuilder : BooleanScalarGidBuilderImpl!BooleanScalarG
       Create object from builder.
       Returns: New object
   */
-  BooleanScalar build()
+  BooleanScalar build() nothrow
   {
     return new BooleanScalar(cast(void*)createGObject(BooleanScalar._getGType), Yes.Take);
   }

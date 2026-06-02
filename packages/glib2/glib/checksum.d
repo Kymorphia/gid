@@ -30,32 +30,32 @@ class Checksum : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_checksum_get_type != &gidSymbolNotFound ? g_checksum_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Checksum self()
+  override Checksum self() nothrow
   {
     return this;
   }
@@ -80,7 +80,7 @@ class Checksum : gobject.boxed.Boxed
       Returns: the newly created #GChecksum, or null.
           Use [glib.checksum.Checksum.free] to free the memory allocated by it.
   */
-  this(glib.types.ChecksumType checksumType)
+  this(glib.types.ChecksumType checksumType) nothrow
   {
     GChecksum* _cretval;
     _cretval = g_checksum_new(checksumType);
@@ -94,7 +94,7 @@ class Checksum : gobject.boxed.Boxed
       Returns: the copy of the passed #GChecksum. Use
           [glib.checksum.Checksum.free] when finished using it.
   */
-  glib.checksum.Checksum copy()
+  glib.checksum.Checksum copy() nothrow
   {
     GChecksum* _cretval;
     _cretval = g_checksum_copy(cast(const(GChecksum)*)this._cPtr);
@@ -113,7 +113,7 @@ class Checksum : gobject.boxed.Boxed
           returned string is owned by the checksum and should not be modified
           or freed.
   */
-  string getString()
+  string getString() nothrow
   {
     const(char)* _cretval;
     _cretval = g_checksum_get_string(cast(GChecksum*)this._cPtr);
@@ -124,7 +124,7 @@ class Checksum : gobject.boxed.Boxed
   /**
       Resets the state of the checksum back to its initial state.
   */
-  void reset()
+  void reset() nothrow
   {
     g_checksum_reset(cast(GChecksum*)this._cPtr);
   }
@@ -137,7 +137,7 @@ class Checksum : gobject.boxed.Boxed
       Params:
         data = buffer used to compute the checksum
   */
-  void update(ubyte[] data)
+  void update(ubyte[] data) nothrow
   {
     ptrdiff_t _length;
     if (data)
@@ -155,7 +155,7 @@ class Checksum : gobject.boxed.Boxed
       Returns: the checksum length, or -1 if checksum_type is
         not supported.
   */
-  static ptrdiff_t typeGetLength(glib.types.ChecksumType checksumType)
+  static ptrdiff_t typeGetLength(glib.types.ChecksumType checksumType) nothrow
   {
     ptrdiff_t _retval;
     _retval = g_checksum_type_get_length(checksumType);

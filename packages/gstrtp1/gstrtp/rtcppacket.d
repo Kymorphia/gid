@@ -17,11 +17,8 @@ class RTCPPacket
   GstRTCPPacket _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstrtp.rtcppacket.RTCPPacket");
-
     _cInstance = *cast(GstRTCPPacket*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class RTCPPacket
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class RTCPPacket
       Get `rtcp` field.
       Returns: pointer to RTCP buffer
   */
-  @property gstrtp.rtcpbuffer.RTCPBuffer rtcp()
+  @property gstrtp.rtcpbuffer.RTCPBuffer rtcp() nothrow
   {
     return new gstrtp.rtcpbuffer.RTCPBuffer(cast(GstRTCPBuffer*)(cast(GstRTCPPacket*)this._cPtr).rtcp, No.Take);
   }
@@ -47,7 +44,7 @@ class RTCPPacket
       Get `offset` field.
       Returns: offset of packet in buffer data
   */
-  @property uint offset()
+  @property uint offset() nothrow
   {
     return (cast(GstRTCPPacket*)this._cPtr).offset;
   }
@@ -57,7 +54,7 @@ class RTCPPacket
       Params:
         propval = offset of packet in buffer data
   */
-  @property void offset(uint propval)
+  @property void offset(uint propval) nothrow
   {
     (cast(GstRTCPPacket*)this._cPtr).offset = propval;
   }
@@ -71,7 +68,7 @@ class RTCPPacket
         data = profile-specific data
       Returns: true if the profile specific extension data was added.
   */
-  bool addProfileSpecificExt(ubyte[] data)
+  bool addProfileSpecificExt(ubyte[] data) nothrow
   {
     bool _retval;
     uint _len;
@@ -98,7 +95,7 @@ class RTCPPacket
         the max MTU is exceeded or the number of report blocks is greater than
         #GST_RTCP_MAX_RB_COUNT.
   */
-  bool addRb(uint ssrc, ubyte fractionlost, int packetslost, uint exthighestseq, uint jitter, uint lsr, uint dlsr)
+  bool addRb(uint ssrc, ubyte fractionlost, int packetslost, uint exthighestseq, uint jitter, uint lsr, uint dlsr) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_add_rb(cast(GstRTCPPacket*)this._cPtr, ssrc, fractionlost, packetslost, exthighestseq, jitter, lsr, dlsr);
@@ -109,7 +106,7 @@ class RTCPPacket
       Get the application-dependent data attached to a RTPFB or PSFB packet.
       Returns: A pointer to the data
   */
-  ubyte* appGetData()
+  ubyte* appGetData() nothrow
   {
     auto _retval = gst_rtcp_packet_app_get_data(cast(GstRTCPPacket*)this._cPtr);
     return _retval;
@@ -120,7 +117,7 @@ class RTCPPacket
       packet.
       Returns: The length of data in 32-bit words.
   */
-  ushort appGetDataLength()
+  ushort appGetDataLength() nothrow
   {
     ushort _retval;
     _retval = gst_rtcp_packet_app_get_data_length(cast(GstRTCPPacket*)this._cPtr);
@@ -131,7 +128,7 @@ class RTCPPacket
       Get the name field of the APP packet.
       Returns: The 4-byte name field, not zero-terminated.
   */
-  string appGetName()
+  string appGetName() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_rtcp_packet_app_get_name(cast(GstRTCPPacket*)this._cPtr);
@@ -143,7 +140,7 @@ class RTCPPacket
       Get the SSRC/CSRC field of the APP packet.
       Returns: The SSRC/CSRC.
   */
-  uint appGetSsrc()
+  uint appGetSsrc() nothrow
   {
     uint _retval;
     _retval = gst_rtcp_packet_app_get_ssrc(cast(GstRTCPPacket*)this._cPtr);
@@ -154,7 +151,7 @@ class RTCPPacket
       Get the subtype field of the APP packet.
       Returns: The subtype.
   */
-  ubyte appGetSubtype()
+  ubyte appGetSubtype() nothrow
   {
     ubyte _retval;
     _retval = gst_rtcp_packet_app_get_subtype(cast(GstRTCPPacket*)this._cPtr);
@@ -170,7 +167,7 @@ class RTCPPacket
       Returns: true if there was enough space in the packet to add this much
         data.
   */
-  bool appSetDataLength(ushort wordlen)
+  bool appSetDataLength(ushort wordlen) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_app_set_data_length(cast(GstRTCPPacket*)this._cPtr, wordlen);
@@ -183,7 +180,7 @@ class RTCPPacket
       Params:
         name = 4-byte ASCII name
   */
-  void appSetName(string name)
+  void appSetName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gst_rtcp_packet_app_set_name(cast(GstRTCPPacket*)this._cPtr, _name);
@@ -195,7 +192,7 @@ class RTCPPacket
       Params:
         ssrc = SSRC/CSRC of the packet
   */
-  void appSetSsrc(uint ssrc)
+  void appSetSsrc(uint ssrc) nothrow
   {
     gst_rtcp_packet_app_set_ssrc(cast(GstRTCPPacket*)this._cPtr, ssrc);
   }
@@ -206,7 +203,7 @@ class RTCPPacket
       Params:
         subtype = subtype of the packet
   */
-  void appSetSubtype(ubyte subtype)
+  void appSetSubtype(ubyte subtype) nothrow
   {
     gst_rtcp_packet_app_set_subtype(cast(GstRTCPPacket*)this._cPtr, subtype);
   }
@@ -220,7 +217,7 @@ class RTCPPacket
         the max MTU is exceeded or the number of sources blocks is greater than
         #GST_RTCP_MAX_BYE_SSRC_COUNT.
   */
-  bool byeAddSsrc(uint ssrc)
+  bool byeAddSsrc(uint ssrc) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_bye_add_ssrc(cast(GstRTCPPacket*)this._cPtr, ssrc);
@@ -236,7 +233,7 @@ class RTCPPacket
         the max MTU is exceeded or the number of sources blocks is greater than
         #GST_RTCP_MAX_BYE_SSRC_COUNT.
   */
-  bool byeAddSsrcs(uint[] ssrc)
+  bool byeAddSsrcs(uint[] ssrc) nothrow
   {
     bool _retval;
     uint _len;
@@ -255,7 +252,7 @@ class RTCPPacket
         nth = the nth SSRC to get
       Returns: The nth SSRC of packet.
   */
-  uint byeGetNthSsrc(uint nth)
+  uint byeGetNthSsrc(uint nth) nothrow
   {
     uint _retval;
     _retval = gst_rtcp_packet_bye_get_nth_ssrc(cast(GstRTCPPacket*)this._cPtr, nth);
@@ -267,7 +264,7 @@ class RTCPPacket
       Returns: The reason for the BYE packet or NULL if the packet did not contain
         a reason string. The string must be freed with [glib.global.gfree] after usage.
   */
-  string byeGetReason()
+  string byeGetReason() nothrow
   {
     char* _cretval;
     _cretval = gst_rtcp_packet_bye_get_reason(cast(GstRTCPPacket*)this._cPtr);
@@ -280,7 +277,7 @@ class RTCPPacket
       Returns: The length of the reason string or 0 when there is no reason string
         present.
   */
-  ubyte byeGetReasonLen()
+  ubyte byeGetReasonLen() nothrow
   {
     ubyte _retval;
     _retval = gst_rtcp_packet_bye_get_reason_len(cast(GstRTCPPacket*)this._cPtr);
@@ -291,7 +288,7 @@ class RTCPPacket
       Get the number of SSRC fields in packet.
       Returns: The number of SSRC fields in packet.
   */
-  uint byeGetSsrcCount()
+  uint byeGetSsrcCount() nothrow
   {
     uint _retval;
     _retval = gst_rtcp_packet_bye_get_ssrc_count(cast(GstRTCPPacket*)this._cPtr);
@@ -305,7 +302,7 @@ class RTCPPacket
         reason = a reason string
       Returns: TRUE if the string could be set.
   */
-  bool byeSetReason(string reason)
+  bool byeSetReason(string reason) nothrow
   {
     bool _retval;
     const(char)* _reason = reason.toCString(No.Alloc);
@@ -321,7 +318,7 @@ class RTCPPacket
         data = result profile-specific data
       Returns: true if there was valid data.
   */
-  bool copyProfileSpecificExt(out ubyte[] data)
+  bool copyProfileSpecificExt(out ubyte[] data) nothrow
   {
     bool _retval;
     uint _len;
@@ -337,7 +334,7 @@ class RTCPPacket
       Get the Feedback Control Information attached to a RTPFB or PSFB packet.
       Returns: a pointer to the FCI
   */
-  ubyte* fbGetFci()
+  ubyte* fbGetFci() nothrow
   {
     auto _retval = gst_rtcp_packet_fb_get_fci(cast(GstRTCPPacket*)this._cPtr);
     return _retval;
@@ -348,7 +345,7 @@ class RTCPPacket
       RTPFB or PSFB packet.
       Returns: The length of the FCI in 32-bit words.
   */
-  ushort fbGetFciLength()
+  ushort fbGetFciLength() nothrow
   {
     ushort _retval;
     _retval = gst_rtcp_packet_fb_get_fci_length(cast(GstRTCPPacket*)this._cPtr);
@@ -359,7 +356,7 @@ class RTCPPacket
       Get the media SSRC field of the RTPFB or PSFB packet.
       Returns: the media SSRC.
   */
-  uint fbGetMediaSsrc()
+  uint fbGetMediaSsrc() nothrow
   {
     uint _retval;
     _retval = gst_rtcp_packet_fb_get_media_ssrc(cast(GstRTCPPacket*)this._cPtr);
@@ -370,7 +367,7 @@ class RTCPPacket
       Get the sender SSRC field of the RTPFB or PSFB packet.
       Returns: the sender SSRC.
   */
-  uint fbGetSenderSsrc()
+  uint fbGetSenderSsrc() nothrow
   {
     uint _retval;
     _retval = gst_rtcp_packet_fb_get_sender_ssrc(cast(GstRTCPPacket*)this._cPtr);
@@ -381,7 +378,7 @@ class RTCPPacket
       Get the feedback message type of the FB packet.
       Returns: The feedback message type.
   */
-  gstrtp.types.RTCPFBType fbGetType()
+  gstrtp.types.RTCPFBType fbGetType() nothrow
   {
     GstRTCPFBType _cretval;
     _cretval = gst_rtcp_packet_fb_get_type(cast(GstRTCPPacket*)this._cPtr);
@@ -397,7 +394,7 @@ class RTCPPacket
         wordlen = Length of the FCI in 32-bit words
       Returns: true if there was enough space in the packet to add this much FCI
   */
-  bool fbSetFciLength(ushort wordlen)
+  bool fbSetFciLength(ushort wordlen) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_fb_set_fci_length(cast(GstRTCPPacket*)this._cPtr, wordlen);
@@ -410,7 +407,7 @@ class RTCPPacket
       Params:
         ssrc = a media SSRC
   */
-  void fbSetMediaSsrc(uint ssrc)
+  void fbSetMediaSsrc(uint ssrc) nothrow
   {
     gst_rtcp_packet_fb_set_media_ssrc(cast(GstRTCPPacket*)this._cPtr, ssrc);
   }
@@ -421,7 +418,7 @@ class RTCPPacket
       Params:
         ssrc = a sender SSRC
   */
-  void fbSetSenderSsrc(uint ssrc)
+  void fbSetSenderSsrc(uint ssrc) nothrow
   {
     gst_rtcp_packet_fb_set_sender_ssrc(cast(GstRTCPPacket*)this._cPtr, ssrc);
   }
@@ -432,7 +429,7 @@ class RTCPPacket
       Params:
         type = the #GstRTCPFBType to set
   */
-  void fbSetType(gstrtp.types.RTCPFBType type)
+  void fbSetType(gstrtp.types.RTCPFBType type) nothrow
   {
     gst_rtcp_packet_fb_set_type(cast(GstRTCPPacket*)this._cPtr, type);
   }
@@ -442,7 +439,7 @@ class RTCPPacket
       Returns: The count field in packet or -1 if packet does not point to a
         valid packet.
   */
-  ubyte getCount()
+  ubyte getCount() nothrow
   {
     ubyte _retval;
     _retval = gst_rtcp_packet_get_count(cast(GstRTCPPacket*)this._cPtr);
@@ -454,7 +451,7 @@ class RTCPPacket
       32-bit words minus one.
       Returns: The length field of packet.
   */
-  ushort getLength()
+  ushort getLength() nothrow
   {
     ushort _retval;
     _retval = gst_rtcp_packet_get_length(cast(GstRTCPPacket*)this._cPtr);
@@ -465,7 +462,7 @@ class RTCPPacket
       Get the packet padding of the packet pointed to by packet.
       Returns: If the packet has the padding bit set.
   */
-  bool getPadding()
+  bool getPadding() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_get_padding(cast(GstRTCPPacket*)this._cPtr);
@@ -473,7 +470,7 @@ class RTCPPacket
   }
 
   /** */
-  bool getProfileSpecificExt(out ubyte[] data)
+  bool getProfileSpecificExt(out ubyte[] data) nothrow
   {
     bool _retval;
     uint _len;
@@ -485,7 +482,7 @@ class RTCPPacket
   }
 
   /** */
-  ushort getProfileSpecificExtLength()
+  ushort getProfileSpecificExtLength() nothrow
   {
     ushort _retval;
     _retval = gst_rtcp_packet_get_profile_specific_ext_length(cast(GstRTCPPacket*)this._cPtr);
@@ -506,7 +503,7 @@ class RTCPPacket
         lsr = result for the last SR packet from this source
         dlsr = result for the delay since last SR packet
   */
-  void getRb(uint nth, out uint ssrc, out ubyte fractionlost, out int packetslost, out uint exthighestseq, out uint jitter, out uint lsr, out uint dlsr)
+  void getRb(uint nth, out uint ssrc, out ubyte fractionlost, out int packetslost, out uint exthighestseq, out uint jitter, out uint lsr, out uint dlsr) nothrow
   {
     gst_rtcp_packet_get_rb(cast(GstRTCPPacket*)this._cPtr, nth, cast(uint*)&ssrc, cast(ubyte*)&fractionlost, cast(int*)&packetslost, cast(uint*)&exthighestseq, cast(uint*)&jitter, cast(uint*)&lsr, cast(uint*)&dlsr);
   }
@@ -515,7 +512,7 @@ class RTCPPacket
       Get the number of report blocks in packet.
       Returns: The number of report blocks in packet.
   */
-  uint getRbCount()
+  uint getRbCount() nothrow
   {
     uint _retval;
     _retval = gst_rtcp_packet_get_rb_count(cast(GstRTCPPacket*)this._cPtr);
@@ -527,7 +524,7 @@ class RTCPPacket
       Returns: The packet type or GST_RTCP_TYPE_INVALID when packet is not
         pointing to a valid packet.
   */
-  gstrtp.types.RTCPType getType()
+  gstrtp.types.RTCPType getType() nothrow
   {
     GstRTCPType _cretval;
     _cretval = gst_rtcp_packet_get_type(cast(GstRTCPPacket*)this._cPtr);
@@ -541,7 +538,7 @@ class RTCPPacket
       Returns: TRUE if packet is pointing to a valid packet after calling this
         function.
   */
-  bool moveToNext()
+  bool moveToNext() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_move_to_next(cast(GstRTCPPacket*)this._cPtr);
@@ -553,7 +550,7 @@ class RTCPPacket
       Returns: TRUE if packet is pointing to a valid packet after calling this
         function.
   */
-  bool remove()
+  bool remove() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_remove(cast(GstRTCPPacket*)this._cPtr);
@@ -564,7 +561,7 @@ class RTCPPacket
       Get the ssrc field of the RR packet.
       Returns: the ssrc.
   */
-  uint rrGetSsrc()
+  uint rrGetSsrc() nothrow
   {
     uint _retval;
     _retval = gst_rtcp_packet_rr_get_ssrc(cast(GstRTCPPacket*)this._cPtr);
@@ -577,7 +574,7 @@ class RTCPPacket
       Params:
         ssrc = the SSRC to set
   */
-  void rrSetSsrc(uint ssrc)
+  void rrSetSsrc(uint ssrc) nothrow
   {
     gst_rtcp_packet_rr_set_ssrc(cast(GstRTCPPacket*)this._cPtr, ssrc);
   }
@@ -591,7 +588,7 @@ class RTCPPacket
       Returns: true if the item could be added, false if the MTU has been
         reached.
   */
-  bool sdesAddEntry(gstrtp.types.RTCPSDESType type, ubyte[] data)
+  bool sdesAddEntry(gstrtp.types.RTCPSDESType type, ubyte[] data) nothrow
   {
     bool _retval;
     ubyte _len;
@@ -611,7 +608,7 @@ class RTCPPacket
       Returns: true if the item could be added, false if the maximum amount of
         items has been exceeded for the SDES packet or the MTU has been reached.
   */
-  bool sdesAddItem(uint ssrc)
+  bool sdesAddItem(uint ssrc) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_sdes_add_item(cast(GstRTCPPacket*)this._cPtr, ssrc);
@@ -627,7 +624,7 @@ class RTCPPacket
         data = result entry data
       Returns: true if there was valid data.
   */
-  bool sdesCopyEntry(out gstrtp.types.RTCPSDESType type, out ubyte[] data)
+  bool sdesCopyEntry(out gstrtp.types.RTCPSDESType type, out ubyte[] data) nothrow
   {
     bool _retval;
     ubyte _len;
@@ -643,7 +640,7 @@ class RTCPPacket
       Move to the first SDES entry in the current item.
       Returns: true if there was a first entry.
   */
-  bool sdesFirstEntry()
+  bool sdesFirstEntry() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_sdes_first_entry(cast(GstRTCPPacket*)this._cPtr);
@@ -654,7 +651,7 @@ class RTCPPacket
       Move to the first SDES item in packet.
       Returns: TRUE if there was a first item.
   */
-  bool sdesFirstItem()
+  bool sdesFirstItem() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_sdes_first_item(cast(GstRTCPPacket*)this._cPtr);
@@ -675,7 +672,7 @@ class RTCPPacket
         data = result entry data
       Returns: true if there was valid data.
   */
-  bool sdesGetEntry(out gstrtp.types.RTCPSDESType type, out ubyte[] data)
+  bool sdesGetEntry(out gstrtp.types.RTCPSDESType type, out ubyte[] data) nothrow
   {
     bool _retval;
     ubyte _len;
@@ -690,7 +687,7 @@ class RTCPPacket
       Get the number of items in the SDES packet packet.
       Returns: The number of items in packet.
   */
-  uint sdesGetItemCount()
+  uint sdesGetItemCount() nothrow
   {
     uint _retval;
     _retval = gst_rtcp_packet_sdes_get_item_count(cast(GstRTCPPacket*)this._cPtr);
@@ -701,7 +698,7 @@ class RTCPPacket
       Get the SSRC of the current SDES item.
       Returns: the SSRC of the current item.
   */
-  uint sdesGetSsrc()
+  uint sdesGetSsrc() nothrow
   {
     uint _retval;
     _retval = gst_rtcp_packet_sdes_get_ssrc(cast(GstRTCPPacket*)this._cPtr);
@@ -712,7 +709,7 @@ class RTCPPacket
       Move to the next SDES entry in the current item.
       Returns: true if there was a next entry.
   */
-  bool sdesNextEntry()
+  bool sdesNextEntry() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_sdes_next_entry(cast(GstRTCPPacket*)this._cPtr);
@@ -723,7 +720,7 @@ class RTCPPacket
       Move to the next SDES item in packet.
       Returns: TRUE if there was a next item.
   */
-  bool sdesNextItem()
+  bool sdesNextItem() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_sdes_next_item(cast(GstRTCPPacket*)this._cPtr);
@@ -745,7 +742,7 @@ class RTCPPacket
         lsr = the last SR packet from this source
         dlsr = the delay since last SR packet
   */
-  void setRb(uint nth, uint ssrc, ubyte fractionlost, int packetslost, uint exthighestseq, uint jitter, uint lsr, uint dlsr)
+  void setRb(uint nth, uint ssrc, ubyte fractionlost, int packetslost, uint exthighestseq, uint jitter, uint lsr, uint dlsr) nothrow
   {
     gst_rtcp_packet_set_rb(cast(GstRTCPPacket*)this._cPtr, nth, ssrc, fractionlost, packetslost, exthighestseq, jitter, lsr, dlsr);
   }
@@ -760,7 +757,7 @@ class RTCPPacket
         packetCount = result packet count
         octetCount = result octet count
   */
-  void srGetSenderInfo(out uint ssrc, out ulong ntptime, out uint rtptime, out uint packetCount, out uint octetCount)
+  void srGetSenderInfo(out uint ssrc, out ulong ntptime, out uint rtptime, out uint packetCount, out uint octetCount) nothrow
   {
     gst_rtcp_packet_sr_get_sender_info(cast(GstRTCPPacket*)this._cPtr, cast(uint*)&ssrc, cast(ulong*)&ntptime, cast(uint*)&rtptime, cast(uint*)&packetCount, cast(uint*)&octetCount);
   }
@@ -775,7 +772,7 @@ class RTCPPacket
         packetCount = the packet count
         octetCount = the octet count
   */
-  void srSetSenderInfo(uint ssrc, ulong ntptime, uint rtptime, uint packetCount, uint octetCount)
+  void srSetSenderInfo(uint ssrc, ulong ntptime, uint rtptime, uint packetCount, uint octetCount) nothrow
   {
     gst_rtcp_packet_sr_set_sender_info(cast(GstRTCPPacket*)this._cPtr, ssrc, ntptime, rtptime, packetCount, octetCount);
   }
@@ -784,7 +781,7 @@ class RTCPPacket
       Move to the first extended report block in XR packet.
       Returns: TRUE if there was a first extended report block.
   */
-  bool xrFirstRb()
+  bool xrFirstRb() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_xr_first_rb(cast(GstRTCPPacket*)this._cPtr);
@@ -792,7 +789,7 @@ class RTCPPacket
   }
 
   /** */
-  ushort xrGetBlockLength()
+  ushort xrGetBlockLength() nothrow
   {
     ushort _retval;
     _retval = gst_rtcp_packet_xr_get_block_length(cast(GstRTCPPacket*)this._cPtr);
@@ -803,7 +800,7 @@ class RTCPPacket
       Get the extended report block type of the XR packet.
       Returns: The extended report block type.
   */
-  gstrtp.types.RTCPXRType xrGetBlockType()
+  gstrtp.types.RTCPXRType xrGetBlockType() nothrow
   {
     GstRTCPXRType _cretval;
     _cretval = gst_rtcp_packet_xr_get_block_type(cast(GstRTCPPacket*)this._cPtr);
@@ -821,7 +818,7 @@ class RTCPPacket
         delay = the delay since last_rr.
       Returns: true if the report block is correctly parsed.
   */
-  bool xrGetDlrrBlock(uint nth, out uint ssrc, out uint lastRr, out uint delay)
+  bool xrGetDlrrBlock(uint nth, out uint ssrc, out uint lastRr, out uint delay) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_xr_get_dlrr_block(cast(GstRTCPPacket*)this._cPtr, nth, cast(uint*)&ssrc, cast(uint*)&lastRr, cast(uint*)&delay);
@@ -836,7 +833,7 @@ class RTCPPacket
         receiptTime = the packet receipt time of seq.
       Returns: true if the report block returns the receipt time correctly.
   */
-  bool xrGetPrtBySeq(ushort seq, out uint receiptTime)
+  bool xrGetPrtBySeq(ushort seq, out uint receiptTime) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_xr_get_prt_by_seq(cast(GstRTCPPacket*)this._cPtr, seq, cast(uint*)&receiptTime);
@@ -853,7 +850,7 @@ class RTCPPacket
         endSeq = the last sequence number that this block reports on plus one.
       Returns: true if the report block is correctly parsed.
   */
-  bool xrGetPrtInfo(out uint ssrc, out ubyte thinning, out ushort beginSeq, out ushort endSeq)
+  bool xrGetPrtInfo(out uint ssrc, out ubyte thinning, out ushort beginSeq, out ushort endSeq) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_xr_get_prt_info(cast(GstRTCPPacket*)this._cPtr, cast(uint*)&ssrc, cast(ubyte*)&thinning, cast(ushort*)&beginSeq, cast(ushort*)&endSeq);
@@ -871,7 +868,7 @@ class RTCPPacket
         chunkCount = the number of chunks calculated by block length.
       Returns: true if the report block is correctly parsed.
   */
-  bool xrGetRleInfo(out uint ssrc, out ubyte thinning, out ushort beginSeq, out ushort endSeq, out uint chunkCount)
+  bool xrGetRleInfo(out uint ssrc, out ubyte thinning, out ushort beginSeq, out ushort endSeq, out uint chunkCount) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_xr_get_rle_info(cast(GstRTCPPacket*)this._cPtr, cast(uint*)&ssrc, cast(ubyte*)&thinning, cast(ushort*)&beginSeq, cast(ushort*)&endSeq, cast(uint*)&chunkCount);
@@ -886,7 +883,7 @@ class RTCPPacket
         chunk = the nth chunk.
       Returns: true if the report block returns chunk correctly.
   */
-  bool xrGetRleNthChunk(uint nth, out ushort chunk)
+  bool xrGetRleNthChunk(uint nth, out ushort chunk) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_xr_get_rle_nth_chunk(cast(GstRTCPPacket*)this._cPtr, nth, cast(ushort*)&chunk);
@@ -894,7 +891,7 @@ class RTCPPacket
   }
 
   /** */
-  bool xrGetRrt(out ulong timestamp)
+  bool xrGetRrt(out ulong timestamp) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_xr_get_rrt(cast(GstRTCPPacket*)this._cPtr, cast(ulong*)&timestamp);
@@ -905,7 +902,7 @@ class RTCPPacket
       Get the ssrc field of the XR packet.
       Returns: the ssrc.
   */
-  uint xrGetSsrc()
+  uint xrGetSsrc() nothrow
   {
     uint _retval;
     _retval = gst_rtcp_packet_xr_get_ssrc(cast(GstRTCPPacket*)this._cPtr);
@@ -921,7 +918,7 @@ class RTCPPacket
         endSeq = the last sequence number that this block reports on plus one.
       Returns: true if the report block is correctly parsed.
   */
-  bool xrGetSummaryInfo(out uint ssrc, out ushort beginSeq, out ushort endSeq)
+  bool xrGetSummaryInfo(out uint ssrc, out ushort beginSeq, out ushort endSeq) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_xr_get_summary_info(cast(GstRTCPPacket*)this._cPtr, cast(uint*)&ssrc, cast(ushort*)&beginSeq, cast(ushort*)&endSeq);
@@ -939,7 +936,7 @@ class RTCPPacket
         devJitter = the standard deviation of the relative transit time between two sequences.
       Returns: true if the report block is correctly parsed.
   */
-  bool xrGetSummaryJitter(out uint minJitter, out uint maxJitter, out uint meanJitter, out uint devJitter)
+  bool xrGetSummaryJitter(out uint minJitter, out uint maxJitter, out uint meanJitter, out uint devJitter) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_xr_get_summary_jitter(cast(GstRTCPPacket*)this._cPtr, cast(uint*)&minJitter, cast(uint*)&maxJitter, cast(uint*)&meanJitter, cast(uint*)&devJitter);
@@ -955,7 +952,7 @@ class RTCPPacket
         dupPackets = the number of duplicate packets between begin_seq and end_seq.
       Returns: true if the report block is correctly parsed.
   */
-  bool xrGetSummaryPkt(out uint lostPackets, out uint dupPackets)
+  bool xrGetSummaryPkt(out uint lostPackets, out uint dupPackets) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_xr_get_summary_pkt(cast(GstRTCPPacket*)this._cPtr, cast(uint*)&lostPackets, cast(uint*)&dupPackets);
@@ -973,7 +970,7 @@ class RTCPPacket
         devTtl = the standard deviation of the TTL or Hop Limit value of data packets between two sequences.
       Returns: true if the report block is correctly parsed.
   */
-  bool xrGetSummaryTtl(out bool isIpv4, out ubyte minTtl, out ubyte maxTtl, out ubyte meanTtl, out ubyte devTtl)
+  bool xrGetSummaryTtl(out bool isIpv4, out ubyte minTtl, out ubyte maxTtl, out ubyte meanTtl, out ubyte devTtl) nothrow
   {
     bool _retval;
     gboolean _isIpv4;
@@ -983,7 +980,7 @@ class RTCPPacket
   }
 
   /** */
-  bool xrGetVoipBurstMetrics(out ubyte burstDensity, out ubyte gapDensity, out ushort burstDuration, out ushort gapDuration)
+  bool xrGetVoipBurstMetrics(out ubyte burstDensity, out ubyte gapDensity, out ushort burstDuration, out ushort gapDuration) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_xr_get_voip_burst_metrics(cast(GstRTCPPacket*)this._cPtr, cast(ubyte*)&burstDensity, cast(ubyte*)&gapDensity, cast(ushort*)&burstDuration, cast(ushort*)&gapDuration);
@@ -991,7 +988,7 @@ class RTCPPacket
   }
 
   /** */
-  bool xrGetVoipConfigurationParams(out ubyte gmin, out ubyte rxConfig)
+  bool xrGetVoipConfigurationParams(out ubyte gmin, out ubyte rxConfig) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_xr_get_voip_configuration_params(cast(GstRTCPPacket*)this._cPtr, cast(ubyte*)&gmin, cast(ubyte*)&rxConfig);
@@ -999,7 +996,7 @@ class RTCPPacket
   }
 
   /** */
-  bool xrGetVoipDelayMetrics(out ushort roundtripDelay, out ushort endSystemDelay)
+  bool xrGetVoipDelayMetrics(out ushort roundtripDelay, out ushort endSystemDelay) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_xr_get_voip_delay_metrics(cast(GstRTCPPacket*)this._cPtr, cast(ushort*)&roundtripDelay, cast(ushort*)&endSystemDelay);
@@ -1007,7 +1004,7 @@ class RTCPPacket
   }
 
   /** */
-  bool xrGetVoipJitterBufferParams(out ushort jbNominal, out ushort jbMaximum, out ushort jbAbsMax)
+  bool xrGetVoipJitterBufferParams(out ushort jbNominal, out ushort jbMaximum, out ushort jbAbsMax) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_xr_get_voip_jitter_buffer_params(cast(GstRTCPPacket*)this._cPtr, cast(ushort*)&jbNominal, cast(ushort*)&jbMaximum, cast(ushort*)&jbAbsMax);
@@ -1015,7 +1012,7 @@ class RTCPPacket
   }
 
   /** */
-  bool xrGetVoipMetricsSsrc(out uint ssrc)
+  bool xrGetVoipMetricsSsrc(out uint ssrc) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_xr_get_voip_metrics_ssrc(cast(GstRTCPPacket*)this._cPtr, cast(uint*)&ssrc);
@@ -1023,7 +1020,7 @@ class RTCPPacket
   }
 
   /** */
-  bool xrGetVoipPacketMetrics(out ubyte lossRate, out ubyte discardRate)
+  bool xrGetVoipPacketMetrics(out ubyte lossRate, out ubyte discardRate) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_xr_get_voip_packet_metrics(cast(GstRTCPPacket*)this._cPtr, cast(ubyte*)&lossRate, cast(ubyte*)&discardRate);
@@ -1031,7 +1028,7 @@ class RTCPPacket
   }
 
   /** */
-  bool xrGetVoipQualityMetrics(out ubyte rFactor, out ubyte extRFactor, out ubyte mosLq, out ubyte mosCq)
+  bool xrGetVoipQualityMetrics(out ubyte rFactor, out ubyte extRFactor, out ubyte mosLq, out ubyte mosCq) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_xr_get_voip_quality_metrics(cast(GstRTCPPacket*)this._cPtr, cast(ubyte*)&rFactor, cast(ubyte*)&extRFactor, cast(ubyte*)&mosLq, cast(ubyte*)&mosCq);
@@ -1039,7 +1036,7 @@ class RTCPPacket
   }
 
   /** */
-  bool xrGetVoipSignalMetrics(out ubyte signalLevel, out ubyte noiseLevel, out ubyte rerl, out ubyte gmin)
+  bool xrGetVoipSignalMetrics(out ubyte signalLevel, out ubyte noiseLevel, out ubyte rerl, out ubyte gmin) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_xr_get_voip_signal_metrics(cast(GstRTCPPacket*)this._cPtr, cast(ubyte*)&signalLevel, cast(ubyte*)&noiseLevel, cast(ubyte*)&rerl, cast(ubyte*)&gmin);
@@ -1050,7 +1047,7 @@ class RTCPPacket
       Move to the next extended report block in XR packet.
       Returns: TRUE if there was a next extended report block.
   */
-  bool xrNextRb()
+  bool xrNextRb() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_packet_xr_next_rb(cast(GstRTCPPacket*)this._cPtr);

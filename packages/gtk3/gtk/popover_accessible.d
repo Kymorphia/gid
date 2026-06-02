@@ -16,26 +16,26 @@ class PopoverAccessible : gtk.container_accessible.ContainerAccessible
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_popover_accessible_get_type != &gidSymbolNotFound ? gtk_popover_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PopoverAccessible self()
+  override PopoverAccessible self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class PopoverAccessible : gtk.container_accessible.ContainerAccessible
       Get builder for [gtk.popover_accessible.PopoverAccessible]
       Returns: New builder object
   */
-  static PopoverAccessibleGidBuilder builder()
+  static PopoverAccessibleGidBuilder builder() nothrow
   {
     return new PopoverAccessibleGidBuilder;
   }
@@ -63,7 +63,7 @@ final class PopoverAccessibleGidBuilder : PopoverAccessibleGidBuilderImpl!Popove
       Create object from builder.
       Returns: New object
   */
-  PopoverAccessible build()
+  PopoverAccessible build() nothrow
   {
     return new PopoverAccessible(cast(void*)createGObject(PopoverAccessible._getGType), No.Take);
   }

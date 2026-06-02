@@ -69,32 +69,32 @@ class Promise : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_promise_get_type != &gidSymbolNotFound ? gst_promise_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Promise self()
+  override Promise self() nothrow
   {
     return this;
   }
@@ -103,13 +103,13 @@ class Promise : gobject.boxed.Boxed
       Get `parent` field.
       Returns: parent #GstMiniObject
   */
-  @property gst.mini_object.MiniObject parent()
+  @property gst.mini_object.MiniObject parent() nothrow
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstPromise*)this._cPtr).parent);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GstPromise* _cretval;
     _cretval = gst_promise_new();
@@ -125,13 +125,20 @@ class Promise : gobject.boxed.Boxed
         func = a #GstPromiseChangeFunc to call
       Returns: a new #GstPromise
   */
-  static gst.promise.Promise newWithChangeFunc(gst.types.PromiseChangeFunc func)
+  static gst.promise.Promise newWithChangeFunc(gst.types.PromiseChangeFunc func) nothrow
   {
-    extern(C) void _funcCallback(GstPromise* promise, void* userData)
+    extern(C) void _funcCallback(GstPromise* promise, void* userData) nothrow
     {
       auto _dlg = cast(gst.types.PromiseChangeFunc*)userData;
 
-      (*_dlg)(promise ? new gst.promise.Promise(cast(void*)promise, No.Take) : null);
+      try
+      {
+        (*_dlg)(promise ? new gst.promise.Promise(cast(void*)promise, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PromiseChangeFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     GstPromise* _cretval;
@@ -147,7 +154,7 @@ class Promise : gobject.boxed.Boxed
       [gst.types.PromiseResult.Expired].  Called by a message loop when the parent
       message is handled and/or destroyed (possibly unanswered).
   */
-  void expire()
+  void expire() nothrow
   {
     gst_promise_expire(cast(GstPromise*)this._cPtr);
   }
@@ -157,7 +164,7 @@ class Promise : gobject.boxed.Boxed
       [gst.types.PromiseResult.Replied] and the returned structure is owned by promise
       Returns: The reply set on promise
   */
-  gst.structure.Structure getReply()
+  gst.structure.Structure getReply() nothrow
   {
     const(GstStructure)* _cretval;
     _cretval = gst_promise_get_reply(cast(GstPromise*)this._cPtr);
@@ -170,7 +177,7 @@ class Promise : gobject.boxed.Boxed
       [gst.types.PromiseResult.Interrupted].  Called when the consumer does not want
       the value produced anymore.
   */
-  void interrupt()
+  void interrupt() nothrow
   {
     gst_promise_interrupt(cast(GstPromise*)this._cPtr);
   }
@@ -186,7 +193,7 @@ class Promise : gobject.boxed.Boxed
       Params:
         s = a #GstStructure with the the reply contents
   */
-  void reply(gst.structure.Structure s = null)
+  void reply(gst.structure.Structure s = null) nothrow
   {
     gst_promise_reply(cast(GstPromise*)this._cPtr, s ? cast(GstStructure*)s._cPtr(Yes.Dup) : null);
   }
@@ -197,7 +204,7 @@ class Promise : gobject.boxed.Boxed
       immediately with the current result.
       Returns: the result of the promise
   */
-  gst.types.PromiseResult wait()
+  gst.types.PromiseResult wait() nothrow
   {
     GstPromiseResult _cretval;
     _cretval = gst_promise_wait(cast(GstPromise*)this._cPtr);

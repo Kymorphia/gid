@@ -23,7 +23,7 @@ interface ColorChooser
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_color_chooser_get_type != &gidSymbolNotFound ? gtk_color_chooser_get_type() : cast(GType)0;
@@ -35,7 +35,7 @@ interface ColorChooser
         as a #GdkRGBA struct. The property can be set to change
         the current selection programmatically.
   */
-  @property gdk.rgba.RGBA rgba();
+  @property gdk.rgba.RGBA rgba() nothrow;
 
   /**
       Set `rgba` property.
@@ -44,7 +44,7 @@ interface ColorChooser
           as a #GdkRGBA struct. The property can be set to change
           the current selection programmatically.
   */
-  @property void rgba(gdk.rgba.RGBA propval);
+  @property void rgba(gdk.rgba.RGBA propval) nothrow;
 
   /**
       Get `useAlpha` property.
@@ -56,7 +56,7 @@ interface ColorChooser
         Implementations are expected to show alpha by rendering the color
         over a non-uniform background (like a checkerboard pattern).
   */
-  @property bool useAlpha();
+  @property bool useAlpha() nothrow;
 
   /**
       Set `useAlpha` property.
@@ -69,7 +69,7 @@ interface ColorChooser
           Implementations are expected to show alpha by rendering the color
           over a non-uniform background (like a checkerboard pattern).
   */
-  @property void useAlpha(bool propval);
+  @property void useAlpha(bool propval) nothrow;
 
   /**
       Adds a palette to the color chooser. If orientation is horizontal,
@@ -149,7 +149,7 @@ interface ColorChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectColorActivated(T)(T callback, Flag!"After" after = No.After);
+  gulong connectColorActivated(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gtk.color_chooser.ColorChooser]
@@ -164,7 +164,7 @@ interface ColorChooserGidBuilderImpl(T)
           the current selection programmatically.
       Returns: Builder instance for fluent chaining
   */
-  T rgba(gdk.rgba.RGBA propval);
+  T rgba(gdk.rgba.RGBA propval) nothrow;
 
   /**
       Set `useAlpha` property.
@@ -178,5 +178,5 @@ interface ColorChooserGidBuilderImpl(T)
           over a non-uniform background (like a checkerboard pattern).
       Returns: Builder instance for fluent chaining
   */
-  T useAlpha(bool propval);
+  T useAlpha(bool propval) nothrow;
 }

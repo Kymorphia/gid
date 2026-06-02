@@ -30,26 +30,26 @@ class ThemingEngine : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_theming_engine_get_type != &gidSymbolNotFound ? gtk_theming_engine_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ThemingEngine self()
+  override ThemingEngine self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class ThemingEngine : gobject.object.ObjectWrap
       Get builder for [gtk.theming_engine.ThemingEngine]
       Returns: New builder object
   */
-  static ThemingEngineGidBuilder builder()
+  static ThemingEngineGidBuilder builder() nothrow
   {
     return new ThemingEngineGidBuilder;
   }
@@ -73,7 +73,7 @@ class ThemingEngine : gobject.object.ObjectWrap
         -Clearlooks-glossy: true;
         ```
   */
-  @property string name()
+  @property string name() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("name");
   }
@@ -87,7 +87,7 @@ class ThemingEngine : gobject.object.ObjectWrap
       Returns: A theming engine, or null if
         the engine name doesn’t exist.
   */
-  static gtk.theming_engine.ThemingEngine load(string name)
+  static gtk.theming_engine.ThemingEngine load(string name) nothrow
   {
     GtkThemingEngine* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -103,7 +103,7 @@ class ThemingEngine : gobject.object.ObjectWrap
         state = state to retrieve the color for
         color = return value for the background color
   */
-  void getBackgroundColor(gtk.types.StateFlags state, out gdk.rgba.RGBA color)
+  void getBackgroundColor(gtk.types.StateFlags state, out gdk.rgba.RGBA color) nothrow
   {
     gtk_theming_engine_get_background_color(cast(GtkThemingEngine*)this._cPtr, state, cast(GdkRGBA*)&color);
   }
@@ -115,7 +115,7 @@ class ThemingEngine : gobject.object.ObjectWrap
         state = state to retrieve the border for
         border = return value for the border settings
   */
-  void getBorder(gtk.types.StateFlags state, out gtk.border.Border border)
+  void getBorder(gtk.types.StateFlags state, out gtk.border.Border border) nothrow
   {
     gtk_theming_engine_get_border(cast(GtkThemingEngine*)this._cPtr, state, cast(GtkBorder*)&border);
   }
@@ -127,7 +127,7 @@ class ThemingEngine : gobject.object.ObjectWrap
         state = state to retrieve the color for
         color = return value for the border color
   */
-  void getBorderColor(gtk.types.StateFlags state, out gdk.rgba.RGBA color)
+  void getBorderColor(gtk.types.StateFlags state, out gdk.rgba.RGBA color) nothrow
   {
     gtk_theming_engine_get_border_color(cast(GtkThemingEngine*)this._cPtr, state, cast(GdkRGBA*)&color);
   }
@@ -139,7 +139,7 @@ class ThemingEngine : gobject.object.ObjectWrap
         state = state to retrieve the color for
         color = return value for the foreground color
   */
-  void getColor(gtk.types.StateFlags state, out gdk.rgba.RGBA color)
+  void getColor(gtk.types.StateFlags state, out gdk.rgba.RGBA color) nothrow
   {
     gtk_theming_engine_get_color(cast(GtkThemingEngine*)this._cPtr, state, cast(GdkRGBA*)&color);
   }
@@ -152,7 +152,7 @@ class ThemingEngine : gobject.object.ObjectWrap
           check for #GTK_STATE_FLAG_DIR_LTR and
           #GTK_STATE_FLAG_DIR_RTL instead.
   */
-  gtk.types.TextDirection getDirection()
+  gtk.types.TextDirection getDirection() nothrow
   {
     GtkTextDirection _cretval;
     _cretval = gtk_theming_engine_get_direction(cast(GtkThemingEngine*)this._cPtr);
@@ -171,7 +171,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   
       Deprecated: Use [gtk.theming_engine.ThemingEngine.get]
   */
-  pango.font_description.FontDescription getFont(gtk.types.StateFlags state)
+  pango.font_description.FontDescription getFont(gtk.types.StateFlags state) nothrow
   {
     const(PangoFontDescription)* _cretval;
     _cretval = gtk_theming_engine_get_font(cast(GtkThemingEngine*)this._cPtr, state);
@@ -183,7 +183,7 @@ class ThemingEngine : gobject.object.ObjectWrap
       Returns the widget direction used for rendering.
       Returns: the widget direction
   */
-  gtk.types.JunctionSides getJunctionSides()
+  gtk.types.JunctionSides getJunctionSides() nothrow
   {
     GtkJunctionSides _cretval;
     _cretval = gtk_theming_engine_get_junction_sides(cast(GtkThemingEngine*)this._cPtr);
@@ -198,7 +198,7 @@ class ThemingEngine : gobject.object.ObjectWrap
         state = state to retrieve the border for
         margin = return value for the margin settings
   */
-  void getMargin(gtk.types.StateFlags state, out gtk.border.Border margin)
+  void getMargin(gtk.types.StateFlags state, out gtk.border.Border margin) nothrow
   {
     gtk_theming_engine_get_margin(cast(GtkThemingEngine*)this._cPtr, state, cast(GtkBorder*)&margin);
   }
@@ -210,7 +210,7 @@ class ThemingEngine : gobject.object.ObjectWrap
         state = state to retrieve the padding for
         padding = return value for the padding settings
   */
-  void getPadding(gtk.types.StateFlags state, out gtk.border.Border padding)
+  void getPadding(gtk.types.StateFlags state, out gtk.border.Border padding) nothrow
   {
     gtk_theming_engine_get_padding(cast(GtkThemingEngine*)this._cPtr, state, cast(GtkBorder*)&padding);
   }
@@ -219,7 +219,7 @@ class ThemingEngine : gobject.object.ObjectWrap
       Returns the widget path used for style matching.
       Returns: A #GtkWidgetPath
   */
-  gtk.widget_path.WidgetPath getPath()
+  gtk.widget_path.WidgetPath getPath() nothrow
   {
     const(GtkWidgetPath)* _cretval;
     _cretval = gtk_theming_engine_get_path(cast(GtkThemingEngine*)this._cPtr);
@@ -240,7 +240,7 @@ class ThemingEngine : gobject.object.ObjectWrap
                   you must free this memory using [gobject.value.Value.unset] once you are
                   done with it.
   */
-  void getProperty(string property, gtk.types.StateFlags state, out gobject.value.Value value)
+  void getProperty(string property, gtk.types.StateFlags state, out gobject.value.Value value) nothrow
   {
     const(char)* _property = property.toCString(No.Alloc);
     GValue _value;
@@ -252,7 +252,7 @@ class ThemingEngine : gobject.object.ObjectWrap
       Returns the #GdkScreen to which engine currently rendering to.
       Returns: a #GdkScreen, or null.
   */
-  gdk.screen.Screen getScreen()
+  gdk.screen.Screen getScreen() nothrow
   {
     GdkScreen* _cretval;
     _cretval = gtk_theming_engine_get_screen(cast(GtkThemingEngine*)this._cPtr);
@@ -264,7 +264,7 @@ class ThemingEngine : gobject.object.ObjectWrap
       returns the state used when rendering.
       Returns: the state flags
   */
-  gtk.types.StateFlags getState()
+  gtk.types.StateFlags getState() nothrow
   {
     GtkStateFlags _cretval;
     _cretval = gtk_theming_engine_get_state(cast(GtkThemingEngine*)this._cPtr);
@@ -280,7 +280,7 @@ class ThemingEngine : gobject.object.ObjectWrap
         value = Return location for the property value, free with
                   [gobject.value.Value.unset] after use.
   */
-  void getStyleProperty(string propertyName, out gobject.value.Value value)
+  void getStyleProperty(string propertyName, out gobject.value.Value value) nothrow
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
     GValue _value;
@@ -296,7 +296,7 @@ class ThemingEngine : gobject.object.ObjectWrap
         styleClass = class name to look up
       Returns: true if engine has class_name defined
   */
-  bool hasClass(string styleClass)
+  bool hasClass(string styleClass) nothrow
   {
     bool _retval;
     const(char)* _styleClass = styleClass.toCString(No.Alloc);
@@ -314,7 +314,7 @@ class ThemingEngine : gobject.object.ObjectWrap
         flags = return location for region flags
       Returns: true if region is defined
   */
-  bool hasRegion(string styleRegion, out gtk.types.RegionFlags flags)
+  bool hasRegion(string styleRegion, out gtk.types.RegionFlags flags) nothrow
   {
     bool _retval;
     const(char)* _styleRegion = styleRegion.toCString(No.Alloc);
@@ -330,7 +330,7 @@ class ThemingEngine : gobject.object.ObjectWrap
         color = Return location for the looked up color
       Returns: true if color_name was found and resolved, false otherwise
   */
-  bool lookupColor(string colorName, out gdk.rgba.RGBA color)
+  bool lookupColor(string colorName, out gdk.rgba.RGBA color) nothrow
   {
     bool _retval;
     const(char)* _colorName = colorName.toCString(No.Alloc);
@@ -355,7 +355,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   
       Deprecated: Always returns false
   */
-  bool stateIsRunning(gtk.types.StateType state, out double progress)
+  bool stateIsRunning(gtk.types.StateType state, out double progress) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_theming_engine_state_is_running(cast(GtkThemingEngine*)this._cPtr, state, cast(double*)&progress);
@@ -379,7 +379,7 @@ class ThemingEngineGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           ```
       Returns: Builder instance for fluent chaining
   */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -392,7 +392,7 @@ final class ThemingEngineGidBuilder : ThemingEngineGidBuilderImpl!ThemingEngineG
       Create object from builder.
       Returns: New object
   */
-  ThemingEngine build()
+  ThemingEngine build() nothrow
   {
     return new ThemingEngine(cast(void*)createGObject(ThemingEngine._getGType), No.Take);
   }

@@ -41,26 +41,26 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_hsts_enforcer_get_type != &gidSymbolNotFound ? soup_hsts_enforcer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HSTSEnforcer self()
+  override HSTSEnforcer self() nothrow
   {
     return this;
   }
@@ -69,7 +69,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
       Get builder for [soup.hstsenforcer.HSTSEnforcer]
       Returns: New builder object
   */
-  static HSTSEnforcerGidBuilder builder()
+  static HSTSEnforcerGidBuilder builder() nothrow
   {
     return new HSTSEnforcerGidBuilder;
   }
@@ -83,7 +83,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
       policies, see [soup.hstsenforcer_db.HSTSEnforcerDB] for that.
       Returns: a new #SoupHSTSEnforcer
   */
-  this()
+  this() nothrow
   {
     SoupHSTSEnforcer* _cretval;
     _cretval = soup_hsts_enforcer_new();
@@ -99,7 +99,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
           list of domains. Use [glib.list.List.freeFull] and `funcGLib.free` to free the
           list.
   */
-  string[] getDomains(bool sessionPolicies)
+  string[] getDomains(bool sessionPolicies) nothrow
   {
     GList* _cretval;
     _cretval = soup_hsts_enforcer_get_domains(cast(SoupHSTSEnforcer*)this._cPtr, sessionPolicies);
@@ -116,7 +116,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
           allocated list of policies. Use [glib.list.List.freeFull] and
           [soup.hstspolicy.HSTSPolicy.free] to free the list.
   */
-  soup.hstspolicy.HSTSPolicy[] getPolicies(bool sessionPolicies)
+  soup.hstspolicy.HSTSPolicy[] getPolicies(bool sessionPolicies) nothrow
   {
     GList* _cretval;
     _cretval = soup_hsts_enforcer_get_policies(cast(SoupHSTSEnforcer*)this._cPtr, sessionPolicies);
@@ -132,7 +132,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
       Returns: true if access to domain should happen over HTTPS, false
           otherwise.
   */
-  bool hasValidPolicy(string domain)
+  bool hasValidPolicy(string domain) nothrow
   {
     bool _retval;
     const(char)* _domain = domain.toCString(No.Alloc);
@@ -144,7 +144,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
       Gets whether hsts_enforcer stores policies persistenly.
       Returns: true if hsts_enforcer storage is persistent or false otherwise.
   */
-  bool isPersistent()
+  bool isPersistent() nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_hsts_enforcer_is_persistent(cast(SoupHSTSEnforcer*)this._cPtr);
@@ -164,7 +164,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
       Params:
         policy = the policy of the HSTS host
   */
-  void setPolicy(soup.hstspolicy.HSTSPolicy policy)
+  void setPolicy(soup.hstspolicy.HSTSPolicy policy) nothrow
   {
     soup_hsts_enforcer_set_policy(cast(SoupHSTSEnforcer*)this._cPtr, policy ? cast(SoupHSTSPolicy*)policy._cPtr(No.Dup) : null);
   }
@@ -179,7 +179,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
         domain = policy domain or hostname
         includeSubdomains = true if the policy applies on sub domains
   */
-  void setSessionPolicy(string domain, bool includeSubdomains)
+  void setSessionPolicy(string domain, bool includeSubdomains) nothrow
   {
     const(char)* _domain = domain.toCString(No.Alloc);
     soup_hsts_enforcer_set_session_policy(cast(SoupHSTSEnforcer*)this._cPtr, _domain, includeSubdomains);
@@ -215,7 +215,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == soup.hstspolicy.HSTSPolicy)))
@@ -223,7 +223,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : soup.hstsenforcer.HSTSEnforcer)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -238,7 +238,14 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.hstsenforcer.HSTSEnforcer.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -260,7 +267,7 @@ final class HSTSEnforcerGidBuilder : HSTSEnforcerGidBuilderImpl!HSTSEnforcerGidB
       Create object from builder.
       Returns: New object
   */
-  HSTSEnforcer build()
+  HSTSEnforcer build() nothrow
   {
     return new HSTSEnforcer(cast(void*)createGObject(HSTSEnforcer._getGType), Yes.Take);
   }

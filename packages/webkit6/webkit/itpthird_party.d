@@ -16,32 +16,32 @@ class ITPThirdParty : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_itp_third_party_get_type != &gidSymbolNotFound ? webkit_itp_third_party_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ITPThirdParty self()
+  override ITPThirdParty self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class ITPThirdParty : gobject.boxed.Boxed
       Get the domain name of itp_third_party.
       Returns: the domain name
   */
-  string getDomain()
+  string getDomain() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_itp_third_party_get_domain(cast(WebKitITPThirdParty*)this._cPtr);
@@ -62,7 +62,7 @@ class ITPThirdParty : gobject.boxed.Boxed
       Get the list of #WebKitITPFirstParty under which itp_third_party has been seen.
       Returns: a #GList of #WebKitITPFirstParty
   */
-  webkit.itpfirst_party.ITPFirstParty[] getFirstParties()
+  webkit.itpfirst_party.ITPFirstParty[] getFirstParties() nothrow
   {
     GList* _cretval;
     _cretval = webkit_itp_third_party_get_first_parties(cast(WebKitITPThirdParty*)this._cPtr);

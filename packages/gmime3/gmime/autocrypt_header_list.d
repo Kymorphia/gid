@@ -19,26 +19,26 @@ class AutocryptHeaderList : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_autocrypt_header_list_get_type != &gidSymbolNotFound ? g_mime_autocrypt_header_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AutocryptHeaderList self()
+  override AutocryptHeaderList self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class AutocryptHeaderList : gobject.object.ObjectWrap
       Get builder for [gmime.autocrypt_header_list.AutocryptHeaderList]
       Returns: New builder object
   */
-  static AutocryptHeaderListGidBuilder builder()
+  static AutocryptHeaderListGidBuilder builder() nothrow
   {
     return new AutocryptHeaderListGidBuilder;
   }
@@ -56,7 +56,7 @@ class AutocryptHeaderList : gobject.object.ObjectWrap
       Creates a new #GMimeAutocryptHeaderList object.
       Returns: a new #GMimeAutocryptHeaderList object.
   */
-  this()
+  this() nothrow
   {
     GMimeAutocryptHeaderList* _cretval;
     _cretval = g_mime_autocrypt_header_list_new();
@@ -69,7 +69,7 @@ class AutocryptHeaderList : gobject.object.ObjectWrap
       Params:
         header = a #GMimeAutocryptHeader object
   */
-  void add(gmime.autocrypt_header.AutocryptHeader header)
+  void add(gmime.autocrypt_header.AutocryptHeader header) nothrow
   {
     g_mime_autocrypt_header_list_add(cast(GMimeAutocryptHeaderList*)this._cPtr, header ? cast(GMimeAutocryptHeader*)header._cPtr(No.Dup) : null);
   }
@@ -82,7 +82,7 @@ class AutocryptHeaderList : gobject.object.ObjectWrap
         addresses = an #InternetAddressList object
       Returns: the number of addresses added
   */
-  uint addMissingAddresses(gmime.internet_address_list.InternetAddressList addresses)
+  uint addMissingAddresses(gmime.internet_address_list.InternetAddressList addresses) nothrow
   {
     uint _retval;
     _retval = g_mime_autocrypt_header_list_add_missing_addresses(cast(GMimeAutocryptHeaderList*)this._cPtr, addresses ? cast(GMimeInternetAddressList*)addresses._cPtr(No.Dup) : null);
@@ -93,7 +93,7 @@ class AutocryptHeaderList : gobject.object.ObjectWrap
       See how many Autocrypt headers are in the list.
       Returns: the number of available Autocrypt headers
   */
-  uint getCount()
+  uint getCount() nothrow
   {
     uint _retval;
     _retval = g_mime_autocrypt_header_list_get_count(cast(GMimeAutocryptHeaderList*)this._cPtr);
@@ -107,7 +107,7 @@ class AutocryptHeaderList : gobject.object.ObjectWrap
         index = an index into the list
       Returns: a pointer to the Nth header in the list.
   */
-  gmime.autocrypt_header.AutocryptHeader getHeaderAt(uint index)
+  gmime.autocrypt_header.AutocryptHeader getHeaderAt(uint index) nothrow
   {
     GMimeAutocryptHeader* _cretval;
     _cretval = g_mime_autocrypt_header_list_get_header_at(cast(GMimeAutocryptHeaderList*)this._cPtr, index);
@@ -124,7 +124,7 @@ class AutocryptHeaderList : gobject.object.ObjectWrap
         matches the requested address, or null if no such header exists in
         the list.
   */
-  gmime.autocrypt_header.AutocryptHeader getHeaderForAddress(gmime.internet_address_mailbox.InternetAddressMailbox mailbox)
+  gmime.autocrypt_header.AutocryptHeader getHeaderForAddress(gmime.internet_address_mailbox.InternetAddressMailbox mailbox) nothrow
   {
     GMimeAutocryptHeader* _cretval;
     _cretval = g_mime_autocrypt_header_list_get_header_for_address(cast(GMimeAutocryptHeaderList*)this._cPtr, mailbox ? cast(GMimeInternetAddressMailbox*)mailbox._cPtr(No.Dup) : null);
@@ -135,7 +135,7 @@ class AutocryptHeaderList : gobject.object.ObjectWrap
   /**
       Remove all incomplete Autocrypt headers from the list.
   */
-  void removeIncomplete()
+  void removeIncomplete() nothrow
   {
     g_mime_autocrypt_header_list_remove_incomplete(cast(GMimeAutocryptHeaderList*)this._cPtr);
   }
@@ -153,7 +153,7 @@ final class AutocryptHeaderListGidBuilder : AutocryptHeaderListGidBuilderImpl!Au
       Create object from builder.
       Returns: New object
   */
-  AutocryptHeaderList build()
+  AutocryptHeaderList build() nothrow
   {
     return new AutocryptHeaderList(cast(void*)createGObject(AutocryptHeaderList._getGType), Yes.Take);
   }

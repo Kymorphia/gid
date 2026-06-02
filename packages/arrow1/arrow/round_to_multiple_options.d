@@ -16,26 +16,26 @@ class RoundToMultipleOptions : arrow.function_options.FunctionOptions
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_round_to_multiple_options_get_type != &gidSymbolNotFound ? garrow_round_to_multiple_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RoundToMultipleOptions self()
+  override RoundToMultipleOptions self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class RoundToMultipleOptions : arrow.function_options.FunctionOptions
       Get builder for [arrow.round_to_multiple_options.RoundToMultipleOptions]
       Returns: New builder object
   */
-  static RoundToMultipleOptionsGidBuilder builder()
+  static RoundToMultipleOptionsGidBuilder builder() nothrow
   {
     return new RoundToMultipleOptionsGidBuilder;
   }
@@ -53,7 +53,7 @@ class RoundToMultipleOptions : arrow.function_options.FunctionOptions
       Get `mode` property.
       Returns: The rounding and tie-breaking mode.
   */
-  @property arrow.types.RoundMode mode()
+  @property arrow.types.RoundMode mode() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.types.RoundMode)("mode");
   }
@@ -63,7 +63,7 @@ class RoundToMultipleOptions : arrow.function_options.FunctionOptions
       Params:
         propval = The rounding and tie-breaking mode.
   */
-  @property void mode(arrow.types.RoundMode propval)
+  @property void mode(arrow.types.RoundMode propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(arrow.types.RoundMode)("mode", propval);
   }
@@ -77,7 +77,7 @@ class RoundToMultipleOptions : arrow.function_options.FunctionOptions
         required. Rounding a floating point or integer value means a floating
         point scalar is required.
   */
-  @property arrow.scalar.Scalar multiple()
+  @property arrow.scalar.Scalar multiple() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.scalar.Scalar)("multiple");
   }
@@ -92,13 +92,13 @@ class RoundToMultipleOptions : arrow.function_options.FunctionOptions
           required. Rounding a floating point or integer value means a floating
           point scalar is required.
   */
-  @property void multiple(arrow.scalar.Scalar propval)
+  @property void multiple(arrow.scalar.Scalar propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(arrow.scalar.Scalar)("multiple", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowRoundToMultipleOptions* _cretval;
     _cretval = garrow_round_to_multiple_options_new();
@@ -116,7 +116,7 @@ class RoundToMultipleOptionsGidBuilderImpl(T) : arrow.function_options.FunctionO
         propval = The rounding and tie-breaking mode.
       Returns: Builder instance for fluent chaining
   */
-  T mode(arrow.types.RoundMode propval)
+  T mode(arrow.types.RoundMode propval) nothrow
   {
     return setProperty("mode", propval);
   }
@@ -132,7 +132,7 @@ class RoundToMultipleOptionsGidBuilderImpl(T) : arrow.function_options.FunctionO
           point scalar is required.
       Returns: Builder instance for fluent chaining
   */
-  T multiple(arrow.scalar.Scalar propval)
+  T multiple(arrow.scalar.Scalar propval) nothrow
   {
     return setProperty("multiple", propval);
   }
@@ -145,7 +145,7 @@ final class RoundToMultipleOptionsGidBuilder : RoundToMultipleOptionsGidBuilderI
       Create object from builder.
       Returns: New object
   */
-  RoundToMultipleOptions build()
+  RoundToMultipleOptions build() nothrow
   {
     return new RoundToMultipleOptions(cast(void*)createGObject(RoundToMultipleOptions._getGType), Yes.Take);
   }

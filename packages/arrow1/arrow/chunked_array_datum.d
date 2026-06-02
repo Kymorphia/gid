@@ -16,26 +16,26 @@ class ChunkedArrayDatum : arrow.datum.Datum
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_chunked_array_datum_get_type != &gidSymbolNotFound ? garrow_chunked_array_datum_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ChunkedArrayDatum self()
+  override ChunkedArrayDatum self() nothrow
   {
     return this;
   }
@@ -44,19 +44,19 @@ class ChunkedArrayDatum : arrow.datum.Datum
       Get builder for [arrow.chunked_array_datum.ChunkedArrayDatum]
       Returns: New builder object
   */
-  static ChunkedArrayDatumGidBuilder builder()
+  static ChunkedArrayDatumGidBuilder builder() nothrow
   {
     return new ChunkedArrayDatumGidBuilder;
   }
 
   /** */
-  @property arrow.chunked_array.ChunkedArray value()
+  @property arrow.chunked_array.ChunkedArray value() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.chunked_array.ChunkedArray)("value");
   }
 
   /** */
-  this(arrow.chunked_array.ChunkedArray value)
+  this(arrow.chunked_array.ChunkedArray value) nothrow
   {
     GArrowChunkedArrayDatum* _cretval;
     _cretval = garrow_chunked_array_datum_new(value ? cast(GArrowChunkedArray*)value._cPtr(No.Dup) : null);
@@ -69,7 +69,7 @@ class ChunkedArrayDatumGidBuilderImpl(T) : arrow.datum.DatumGidBuilderImpl!T
 {
 
   /** */
-  T value(arrow.chunked_array.ChunkedArray propval)
+  T value(arrow.chunked_array.ChunkedArray propval) nothrow
   {
     return setProperty("value", propval);
   }
@@ -82,7 +82,7 @@ final class ChunkedArrayDatumGidBuilder : ChunkedArrayDatumGidBuilderImpl!Chunke
       Create object from builder.
       Returns: New object
   */
-  ChunkedArrayDatum build()
+  ChunkedArrayDatum build() nothrow
   {
     return new ChunkedArrayDatum(cast(void*)createGObject(ChunkedArrayDatum._getGType), Yes.Take);
   }

@@ -36,26 +36,26 @@ class Discoverer : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_discoverer_get_type != &gidSymbolNotFound ? gst_discoverer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Discoverer self()
+  override Discoverer self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class Discoverer : gobject.object.ObjectWrap
       Get builder for [gstpbutils.discoverer.Discoverer]
       Returns: New builder object
   */
-  static DiscovererGidBuilder builder()
+  static DiscovererGidBuilder builder() nothrow
   {
     return new DiscovererGidBuilder;
   }
@@ -77,7 +77,7 @@ class Discoverer : gobject.object.ObjectWrap
         If the discovery of a URI times out, the [gstpbutils.types.DiscovererResult.Timeout] will be
         set on the result flags.
   */
-  @property ulong timeout()
+  @property ulong timeout() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("timeout");
   }
@@ -91,19 +91,19 @@ class Discoverer : gobject.object.ObjectWrap
           If the discovery of a URI times out, the [gstpbutils.types.DiscovererResult.Timeout] will be
           set on the result flags.
   */
-  @property void timeout(ulong propval)
+  @property void timeout(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("timeout", propval);
   }
 
   /** */
-  @property bool useCache()
+  @property bool useCache() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("use-cache");
   }
 
   /** */
-  @property void useCache(bool propval)
+  @property void useCache(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("use-cache", propval);
   }
@@ -167,7 +167,7 @@ class Discoverer : gobject.object.ObjectWrap
       Returns: true if the uri was successfully appended to the list of pending
         uris, else false
   */
-  bool discoverUriAsync(string uri)
+  bool discoverUriAsync(string uri) nothrow
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -180,7 +180,7 @@ class Discoverer : gobject.object.ObjectWrap
       A #GMainLoop must be available for #GstDiscoverer to properly work in
       asynchronous mode.
   */
-  void start()
+  void start() nothrow
   {
     gst_discoverer_start(cast(GstDiscoverer*)this._cPtr);
   }
@@ -189,7 +189,7 @@ class Discoverer : gobject.object.ObjectWrap
       Stop the discovery of any pending URIs and clears the list of
       pending URIS (if any).
   */
-  void stop()
+  void stop() nothrow
   {
     gst_discoverer_stop(cast(GstDiscoverer*)this._cPtr);
   }
@@ -221,7 +221,7 @@ class Discoverer : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDiscovered(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDiscovered(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstpbutils.discoverer_info.DiscovererInfo)))
@@ -229,7 +229,7 @@ class Discoverer : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gstpbutils.discoverer.Discoverer)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -244,7 +244,14 @@ class Discoverer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstpbutils.discoverer.Discoverer.discovered");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -266,13 +273,13 @@ class Discoverer : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFinished(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFinished(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstpbutils.discoverer.Discoverer)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -281,7 +288,14 @@ class Discoverer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstpbutils.discoverer.Discoverer.finished");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -309,18 +323,19 @@ class Discoverer : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLoadSerializedInfo(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLoadSerializedInfo(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T : gstpbutils.discoverer_info.DiscovererInfo)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstpbutils.discoverer.Discoverer)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gstpbutils.discoverer_info.DiscovererInfo _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -328,7 +343,14 @@ class Discoverer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstpbutils.discoverer.Discoverer.loadSerializedInfo");
+      }
 
       setVal!(gstpbutils.discoverer_info.DiscovererInfo)(_returnValue, _retval);
     }
@@ -360,14 +382,14 @@ class Discoverer : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSourceSetup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSourceSetup(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.element.Element)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstpbutils.discoverer.Discoverer)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -379,7 +401,14 @@ class Discoverer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstpbutils.discoverer.Discoverer.sourceSetup");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -401,13 +430,13 @@ class Discoverer : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectStarting(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStarting(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstpbutils.discoverer.Discoverer)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -416,7 +445,14 @@ class Discoverer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstpbutils.discoverer.Discoverer.starting");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -438,13 +474,13 @@ class DiscovererGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           set on the result flags.
       Returns: Builder instance for fluent chaining
   */
-  T timeout(ulong propval)
+  T timeout(ulong propval) nothrow
   {
     return setProperty("timeout", propval);
   }
 
   /** */
-  T useCache(bool propval)
+  T useCache(bool propval) nothrow
   {
     return setProperty("use-cache", propval);
   }
@@ -457,7 +493,7 @@ final class DiscovererGidBuilder : DiscovererGidBuilderImpl!DiscovererGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Discoverer build()
+  Discoverer build() nothrow
   {
     return new Discoverer(cast(void*)createGObject(Discoverer._getGType), Yes.Take);
   }

@@ -15,11 +15,8 @@ class SubsurfaceNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.subsurface_node.SubsurfaceNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -27,7 +24,7 @@ class SubsurfaceNode : gsk.render_node.RenderNode
       Gets the child node that is getting drawn by the given node.
       Returns: the child [gsk.render_node.RenderNode]
   */
-  gsk.render_node.RenderNode getChild()
+  gsk.render_node.RenderNode getChild() nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_subsurface_node_get_child(cast(const(GskRenderNode)*)this._cPtr);

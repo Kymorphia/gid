@@ -28,26 +28,26 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gesture_swipe_get_type != &gidSymbolNotFound ? gtk_gesture_swipe_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GestureSwipe self()
+  override GestureSwipe self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
       Get builder for [gtk.gesture_swipe.GestureSwipe]
       Returns: New builder object
   */
-  static GestureSwipeGidBuilder builder()
+  static GestureSwipeGidBuilder builder() nothrow
   {
     return new GestureSwipeGidBuilder;
   }
@@ -65,7 +65,7 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
       Returns a newly created [gtk.gesture.Gesture] that recognizes swipes.
       Returns: a newly created [gtk.gesture_swipe.GestureSwipe]
   */
-  this()
+  this() nothrow
   {
     GtkGesture* _cretval;
     _cretval = gtk_gesture_swipe_new();
@@ -84,7 +84,7 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
         velocityY = return value for the velocity in the Y axis, in pixels/sec
       Returns: whether velocity could be calculated
   */
-  bool getVelocity(out double velocityX, out double velocityY)
+  bool getVelocity(out double velocityX, out double velocityY) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_gesture_swipe_get_velocity(cast(GtkGestureSwipe*)this._cPtr, cast(double*)&velocityX, cast(double*)&velocityY);
@@ -112,7 +112,7 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSwipe(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSwipe(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -120,7 +120,7 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.gesture_swipe.GestureSwipe)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -135,7 +135,14 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.gesture_swipe.GestureSwipe.swipe");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -155,7 +162,7 @@ final class GestureSwipeGidBuilder : GestureSwipeGidBuilderImpl!GestureSwipeGidB
       Create object from builder.
       Returns: New object
   */
-  GestureSwipe build()
+  GestureSwipe build() nothrow
   {
     return new GestureSwipe(cast(void*)createGObject(GestureSwipe._getGType), Yes.Take);
   }

@@ -19,32 +19,32 @@ class ExpressionWatch : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_expression_watch_get_type != &gidSymbolNotFound ? gtk_expression_watch_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ExpressionWatch self()
+  override ExpressionWatch self() nothrow
   {
     return this;
   }
@@ -60,7 +60,7 @@ class ExpressionWatch : gobject.boxed.Boxed
         value = an empty [gobject.value.Value] to be set
       Returns: `TRUE` if the expression could be evaluated and `value` was set
   */
-  bool evaluate(gobject.value.Value value)
+  bool evaluate(gobject.value.Value value) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_expression_watch_evaluate(cast(GtkExpressionWatch*)this._cPtr, value ? cast(GValue*)value._cPtr(No.Dup) : null);
@@ -73,7 +73,7 @@ class ExpressionWatch : gobject.boxed.Boxed
       See [gtk.expression.Expression.watch] for how the watch
       was established.
   */
-  void unwatch()
+  void unwatch() nothrow
   {
     gtk_expression_watch_unwatch(cast(GtkExpressionWatch*)this._cPtr);
   }

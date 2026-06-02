@@ -49,7 +49,7 @@ template MountT()
       Checks if mount can be ejected.
       Returns: true if the mount can be ejected.
   */
-  override bool canEject()
+  override bool canEject() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mount_can_eject(cast(GMount*)this._cPtr);
@@ -60,7 +60,7 @@ template MountT()
       Checks if mount can be unmounted.
       Returns: true if the mount can be unmounted.
   */
-  override bool canUnmount()
+  override bool canUnmount() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mount_can_unmount(cast(GMount*)this._cPtr);
@@ -79,14 +79,21 @@ template MountT()
   
       Deprecated: Use [gio.mount.Mount.ejectWithOperation] instead.
   */
-  override void eject(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  override void eject(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -126,14 +133,21 @@ template MountT()
         cancellable = optional #GCancellable object, null to ignore.
         callback = a #GAsyncReadyCallback, or null.
   */
-  override void ejectWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  override void ejectWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -167,7 +181,7 @@ template MountT()
              The returned object should be unreffed with
              [gobject.object.ObjectWrap.unref] when no longer needed.
   */
-  override gio.file.File getDefaultLocation()
+  override gio.file.File getDefaultLocation() nothrow
   {
     GFile* _cretval;
     _cretval = g_mount_get_default_location(cast(GMount*)this._cPtr);
@@ -185,7 +199,7 @@ template MountT()
              The returned object should be unreffed with
              [gobject.object.ObjectWrap.unref] when no longer needed.
   */
-  override gio.drive.Drive getDrive()
+  override gio.drive.Drive getDrive() nothrow
   {
     GDrive* _cretval;
     _cretval = g_mount_get_drive(cast(GMount*)this._cPtr);
@@ -199,7 +213,7 @@ template MountT()
              The returned object should be unreffed with
              [gobject.object.ObjectWrap.unref] when no longer needed.
   */
-  override gio.icon.Icon getIcon()
+  override gio.icon.Icon getIcon() nothrow
   {
     GIcon* _cretval;
     _cretval = g_mount_get_icon(cast(GMount*)this._cPtr);
@@ -213,7 +227,7 @@ template MountT()
             The returned string should be freed with [glib.global.gfree]
             when no longer needed.
   */
-  override string getName()
+  override string getName() nothrow
   {
     char* _cretval;
     _cretval = g_mount_get_name(cast(GMount*)this._cPtr);
@@ -227,7 +241,7 @@ template MountT()
              The returned object should be unreffed with
              [gobject.object.ObjectWrap.unref] when no longer needed.
   */
-  override gio.file.File getRoot()
+  override gio.file.File getRoot() nothrow
   {
     GFile* _cretval;
     _cretval = g_mount_get_root(cast(GMount*)this._cPtr);
@@ -239,7 +253,7 @@ template MountT()
       Gets the sort key for mount, if any.
       Returns: Sorting key for mount or null if no such key is available.
   */
-  override string getSortKey()
+  override string getSortKey() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mount_get_sort_key(cast(GMount*)this._cPtr);
@@ -253,7 +267,7 @@ template MountT()
              The returned object should be unreffed with
              [gobject.object.ObjectWrap.unref] when no longer needed.
   */
-  override gio.icon.Icon getSymbolicIcon()
+  override gio.icon.Icon getSymbolicIcon() nothrow
   {
     GIcon* _cretval;
     _cretval = g_mount_get_symbolic_icon(cast(GMount*)this._cPtr);
@@ -271,7 +285,7 @@ template MountT()
             The returned string should be freed with [glib.global.gfree]
             when no longer needed.
   */
-  override string getUuid()
+  override string getUuid() nothrow
   {
     char* _cretval;
     _cretval = g_mount_get_uuid(cast(GMount*)this._cPtr);
@@ -286,7 +300,7 @@ template MountT()
              The returned object should be unreffed with
              [gobject.object.ObjectWrap.unref] when no longer needed.
   */
-  override gio.volume.Volume getVolume()
+  override gio.volume.Volume getVolume() nothrow
   {
     GVolume* _cretval;
     _cretval = g_mount_get_volume(cast(GMount*)this._cPtr);
@@ -313,14 +327,21 @@ template MountT()
         cancellable = optional #GCancellable object, null to ignore
         callback = a #GAsyncReadyCallback
   */
-  override void guessContentType(bool forceRescan, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  override void guessContentType(bool forceRescan, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -429,7 +450,7 @@ template MountT()
       activation root on a #GVolume is set.
       Returns: true if mount is shadowed.
   */
-  override bool isShadowed()
+  override bool isShadowed() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mount_is_shadowed(cast(GMount*)this._cPtr);
@@ -454,14 +475,21 @@ template MountT()
         cancellable = optional #GCancellable object, null to ignore.
         callback = a #GAsyncReadyCallback, or null.
   */
-  override void remount(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  override void remount(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -493,7 +521,7 @@ template MountT()
       mount, see [gio.mount.Mount.isShadowed] for more information. The caller
       will need to emit the #GMount::changed signal on mount manually.
   */
-  override void shadow()
+  override void shadow() nothrow
   {
     g_mount_shadow(cast(GMount*)this._cPtr);
   }
@@ -510,14 +538,21 @@ template MountT()
   
       Deprecated: Use [gio.mount.Mount.unmountWithOperation] instead.
   */
-  override void unmount(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  override void unmount(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -557,14 +592,21 @@ template MountT()
         cancellable = optional #GCancellable object, null to ignore.
         callback = a #GAsyncReadyCallback, or null.
   */
-  override void unmountWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  override void unmountWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -596,7 +638,7 @@ template MountT()
       mount, see [gio.mount.Mount.isShadowed] for more information. The caller
       will need to emit the #GMount::changed signal on mount manually.
   */
-  override void unshadow()
+  override void unshadow() nothrow
   {
     g_mount_unshadow(cast(GMount*)this._cPtr);
   }
@@ -616,13 +658,13 @@ template MountT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.mount.Mount)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -631,7 +673,14 @@ template MountT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.mount.Mount.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -657,13 +706,13 @@ template MountT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPreUnmount(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPreUnmount(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.mount.Mount)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -672,7 +721,14 @@ template MountT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.mount.Mount.preUnmount");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -697,13 +753,13 @@ template MountT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUnmounted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUnmounted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.mount.Mount)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -712,7 +768,14 @@ template MountT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.mount.Mount.unmounted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

@@ -16,26 +16,26 @@ class TableDatum : arrow.datum.Datum
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_table_datum_get_type != &gidSymbolNotFound ? garrow_table_datum_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TableDatum self()
+  override TableDatum self() nothrow
   {
     return this;
   }
@@ -44,19 +44,19 @@ class TableDatum : arrow.datum.Datum
       Get builder for [arrow.table_datum.TableDatum]
       Returns: New builder object
   */
-  static TableDatumGidBuilder builder()
+  static TableDatumGidBuilder builder() nothrow
   {
     return new TableDatumGidBuilder;
   }
 
   /** */
-  @property arrow.table.Table value()
+  @property arrow.table.Table value() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.table.Table)("value");
   }
 
   /** */
-  this(arrow.table.Table value)
+  this(arrow.table.Table value) nothrow
   {
     GArrowTableDatum* _cretval;
     _cretval = garrow_table_datum_new(value ? cast(GArrowTable*)value._cPtr(No.Dup) : null);
@@ -69,7 +69,7 @@ class TableDatumGidBuilderImpl(T) : arrow.datum.DatumGidBuilderImpl!T
 {
 
   /** */
-  T value(arrow.table.Table propval)
+  T value(arrow.table.Table propval) nothrow
   {
     return setProperty("value", propval);
   }
@@ -82,7 +82,7 @@ final class TableDatumGidBuilder : TableDatumGidBuilderImpl!TableDatumGidBuilder
       Create object from builder.
       Returns: New object
   */
-  TableDatum build()
+  TableDatum build() nothrow
   {
     return new TableDatum(cast(void*)createGObject(TableDatum._getGType), Yes.Take);
   }

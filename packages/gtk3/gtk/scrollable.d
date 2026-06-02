@@ -45,7 +45,7 @@ interface Scrollable
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scrollable_get_type != &gidSymbolNotFound ? gtk_scrollable_get_type() : cast(GType)0;
@@ -56,7 +56,7 @@ interface Scrollable
       Returns: Horizontal #GtkAdjustment of the scrollable widget. This adjustment is
         shared between the scrollable widget and its parent.
   */
-  @property gtk.adjustment.Adjustment hadjustment();
+  @property gtk.adjustment.Adjustment hadjustment() nothrow;
 
   /**
       Set `hadjustment` property.
@@ -64,14 +64,14 @@ interface Scrollable
         propval = Horizontal #GtkAdjustment of the scrollable widget. This adjustment is
           shared between the scrollable widget and its parent.
   */
-  @property void hadjustment(gtk.adjustment.Adjustment propval);
+  @property void hadjustment(gtk.adjustment.Adjustment propval) nothrow;
 
   /**
       Get `hscrollPolicy` property.
       Returns: Determines whether horizontal scrolling should start once the scrollable
         widget is allocated less than its minimum width or less than its natural width.
   */
-  @property gtk.types.ScrollablePolicy hscrollPolicy();
+  @property gtk.types.ScrollablePolicy hscrollPolicy() nothrow;
 
   /**
       Set `hscrollPolicy` property.
@@ -79,14 +79,14 @@ interface Scrollable
         propval = Determines whether horizontal scrolling should start once the scrollable
           widget is allocated less than its minimum width or less than its natural width.
   */
-  @property void hscrollPolicy(gtk.types.ScrollablePolicy propval);
+  @property void hscrollPolicy(gtk.types.ScrollablePolicy propval) nothrow;
 
   /**
       Get `vadjustment` property.
       Returns: Verical #GtkAdjustment of the scrollable widget. This adjustment is shared
         between the scrollable widget and its parent.
   */
-  @property gtk.adjustment.Adjustment vadjustment();
+  @property gtk.adjustment.Adjustment vadjustment() nothrow;
 
   /**
       Set `vadjustment` property.
@@ -94,14 +94,14 @@ interface Scrollable
         propval = Verical #GtkAdjustment of the scrollable widget. This adjustment is shared
           between the scrollable widget and its parent.
   */
-  @property void vadjustment(gtk.adjustment.Adjustment propval);
+  @property void vadjustment(gtk.adjustment.Adjustment propval) nothrow;
 
   /**
       Get `vscrollPolicy` property.
       Returns: Determines whether vertical scrolling should start once the scrollable
         widget is allocated less than its minimum height or less than its natural height.
   */
-  @property gtk.types.ScrollablePolicy vscrollPolicy();
+  @property gtk.types.ScrollablePolicy vscrollPolicy() nothrow;
 
   /**
       Set `vscrollPolicy` property.
@@ -109,7 +109,7 @@ interface Scrollable
         propval = Determines whether vertical scrolling should start once the scrollable
           widget is allocated less than its minimum height or less than its natural height.
   */
-  @property void vscrollPolicy(gtk.types.ScrollablePolicy propval);
+  @property void vscrollPolicy(gtk.types.ScrollablePolicy propval) nothrow;
 
   /**
       Returns the size of a non-scrolling border around the
@@ -196,7 +196,7 @@ interface ScrollableGidBuilderImpl(T)
           shared between the scrollable widget and its parent.
       Returns: Builder instance for fluent chaining
   */
-  T hadjustment(gtk.adjustment.Adjustment propval);
+  T hadjustment(gtk.adjustment.Adjustment propval) nothrow;
 
   /**
       Set `hscrollPolicy` property.
@@ -205,7 +205,7 @@ interface ScrollableGidBuilderImpl(T)
           widget is allocated less than its minimum width or less than its natural width.
       Returns: Builder instance for fluent chaining
   */
-  T hscrollPolicy(gtk.types.ScrollablePolicy propval);
+  T hscrollPolicy(gtk.types.ScrollablePolicy propval) nothrow;
 
   /**
       Set `vadjustment` property.
@@ -214,7 +214,7 @@ interface ScrollableGidBuilderImpl(T)
           between the scrollable widget and its parent.
       Returns: Builder instance for fluent chaining
   */
-  T vadjustment(gtk.adjustment.Adjustment propval);
+  T vadjustment(gtk.adjustment.Adjustment propval) nothrow;
 
   /**
       Set `vscrollPolicy` property.
@@ -223,5 +223,5 @@ interface ScrollableGidBuilderImpl(T)
           widget is allocated less than its minimum height or less than its natural height.
       Returns: Builder instance for fluent chaining
   */
-  T vscrollPolicy(gtk.types.ScrollablePolicy propval);
+  T vscrollPolicy(gtk.types.ScrollablePolicy propval) nothrow;
 }

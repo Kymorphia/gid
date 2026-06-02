@@ -17,32 +17,32 @@ class MainLoop : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_main_loop_get_type != &gidSymbolNotFound ? g_main_loop_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MainLoop self()
+  override MainLoop self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class MainLoop : gobject.boxed.Boxed
           true anyway.
       Returns: a new #GMainLoop.
   */
-  this(glib.main_context.MainContext context, bool isRunning)
+  this(glib.main_context.MainContext context, bool isRunning) nothrow
   {
     GMainLoop* _cretval;
     _cretval = g_main_loop_new(context ? cast(GMainContext*)context._cPtr(No.Dup) : null, isRunning);
@@ -69,7 +69,7 @@ class MainLoop : gobject.boxed.Boxed
       Returns the #GMainContext of loop.
       Returns: the #GMainContext of loop
   */
-  glib.main_context.MainContext getContext()
+  glib.main_context.MainContext getContext() nothrow
   {
     GMainContext* _cretval;
     _cretval = g_main_loop_get_context(cast(GMainLoop*)this._cPtr);
@@ -81,7 +81,7 @@ class MainLoop : gobject.boxed.Boxed
       Checks to see if the main loop is currently being run via [glib.main_loop.MainLoop.run].
       Returns: true if the mainloop is currently being run.
   */
-  bool isRunning()
+  bool isRunning() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_main_loop_is_running(cast(GMainLoop*)this._cPtr);
@@ -95,7 +95,7 @@ class MainLoop : gobject.boxed.Boxed
       Note that sources that have already been dispatched when
       [glib.main_loop.MainLoop.quit] is called will still be executed.
   */
-  void quit()
+  void quit() nothrow
   {
     g_main_loop_quit(cast(GMainLoop*)this._cPtr);
   }
@@ -106,7 +106,7 @@ class MainLoop : gobject.boxed.Boxed
       it will process events from the loop, otherwise it will
       simply wait.
   */
-  void run()
+  void run() nothrow
   {
     g_main_loop_run(cast(GMainLoop*)this._cPtr);
   }

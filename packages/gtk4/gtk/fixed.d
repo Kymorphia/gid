@@ -59,26 +59,26 @@ class Fixed : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_fixed_get_type != &gidSymbolNotFound ? gtk_fixed_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Fixed self()
+  override Fixed self() nothrow
   {
     return this;
   }
@@ -87,7 +87,7 @@ class Fixed : gtk.widget.Widget
       Get builder for [gtk.fixed.Fixed]
       Returns: New builder object
   */
-  static FixedGidBuilder builder()
+  static FixedGidBuilder builder() nothrow
   {
     return new FixedGidBuilder;
   }
@@ -96,7 +96,7 @@ class Fixed : gtk.widget.Widget
       Creates a new [gtk.fixed.Fixed].
       Returns: a new [gtk.fixed.Fixed].
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_fixed_new();
@@ -114,7 +114,7 @@ class Fixed : gtk.widget.Widget
         x = the horizontal position of the widget
         y = the vertical position of the widget
   */
-  void getChildPosition(gtk.widget.Widget widget, out double x, out double y)
+  void getChildPosition(gtk.widget.Widget widget, out double x, out double y) nothrow
   {
     gtk_fixed_get_child_position(cast(GtkFixed*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
   }
@@ -127,7 +127,7 @@ class Fixed : gtk.widget.Widget
         widget = a [gtk.widget.Widget], child of fixed
       Returns: a [gsk.transform.Transform]
   */
-  gsk.transform.Transform getChildTransform(gtk.widget.Widget widget)
+  gsk.transform.Transform getChildTransform(gtk.widget.Widget widget) nothrow
   {
     GskTransform* _cretval;
     _cretval = gtk_fixed_get_child_transform(cast(GtkFixed*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
@@ -144,7 +144,7 @@ class Fixed : gtk.widget.Widget
         x = the horizontal position to move the widget to
         y = the vertical position to move the widget to
   */
-  void move(gtk.widget.Widget widget, double x, double y)
+  void move(gtk.widget.Widget widget, double x, double y) nothrow
   {
     gtk_fixed_move(cast(GtkFixed*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, x, y);
   }
@@ -157,7 +157,7 @@ class Fixed : gtk.widget.Widget
         x = the horizontal position to place the widget at
         y = the vertical position to place the widget at
   */
-  void put(gtk.widget.Widget widget, double x, double y)
+  void put(gtk.widget.Widget widget, double x, double y) nothrow
   {
     gtk_fixed_put(cast(GtkFixed*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, x, y);
   }
@@ -168,7 +168,7 @@ class Fixed : gtk.widget.Widget
       Params:
         widget = the child widget to remove
   */
-  void remove(gtk.widget.Widget widget)
+  void remove(gtk.widget.Widget widget) nothrow
   {
     gtk_fixed_remove(cast(GtkFixed*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -185,7 +185,7 @@ class Fixed : gtk.widget.Widget
         transform = the transformation assigned to widget
             to reset widget's transform
   */
-  void setChildTransform(gtk.widget.Widget widget, gsk.transform.Transform transform = null)
+  void setChildTransform(gtk.widget.Widget widget, gsk.transform.Transform transform = null) nothrow
   {
     gtk_fixed_set_child_transform(cast(GtkFixed*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, transform ? cast(GskTransform*)transform._cPtr(No.Dup) : null);
   }
@@ -204,7 +204,7 @@ final class FixedGidBuilder : FixedGidBuilderImpl!FixedGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Fixed build()
+  Fixed build() nothrow
   {
     return new Fixed(cast(void*)createGObject(Fixed._getGType), No.Take);
   }

@@ -27,26 +27,26 @@ class ContentSniffer : gobject.object.ObjectWrap, soup.session_feature.SessionFe
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_content_sniffer_get_type != &gidSymbolNotFound ? soup_content_sniffer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ContentSniffer self()
+  override ContentSniffer self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class ContentSniffer : gobject.object.ObjectWrap, soup.session_feature.SessionFe
       Get builder for [soup.content_sniffer.ContentSniffer]
       Returns: New builder object
   */
-  static ContentSnifferGidBuilder builder()
+  static ContentSnifferGidBuilder builder() nothrow
   {
     return new ContentSnifferGidBuilder;
   }
@@ -66,7 +66,7 @@ class ContentSniffer : gobject.object.ObjectWrap, soup.session_feature.SessionFe
       Creates a new #SoupContentSniffer.
       Returns: a new #SoupContentSniffer
   */
-  this()
+  this() nothrow
   {
     SoupContentSniffer* _cretval;
     _cretval = soup_content_sniffer_new();
@@ -87,7 +87,7 @@ class ContentSniffer : gobject.object.ObjectWrap, soup.session_feature.SessionFe
       Returns: the sniffed Content-Type of buffer; this will never be null,
           but may be `application/octet-stream`.
   */
-  string sniff(soup.message.Message msg, glib.bytes.Bytes buffer, out string[string] params)
+  string sniff(soup.message.Message msg, glib.bytes.Bytes buffer, out string[string] params) nothrow
   {
     char* _cretval;
     GHashTable* _params;
@@ -112,7 +112,7 @@ final class ContentSnifferGidBuilder : ContentSnifferGidBuilderImpl!ContentSniff
       Create object from builder.
       Returns: New object
   */
-  ContentSniffer build()
+  ContentSniffer build() nothrow
   {
     return new ContentSniffer(cast(void*)createGObject(ContentSniffer._getGType), Yes.Take);
   }

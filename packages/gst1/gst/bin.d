@@ -126,26 +126,26 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_bin_get_type != &gidSymbolNotFound ? gst_bin_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Bin self()
+  override Bin self() nothrow
   {
     return this;
   }
@@ -154,7 +154,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       Get builder for [gst.bin.Bin]
       Returns: New builder object
   */
-  static BinGidBuilder builder()
+  static BinGidBuilder builder() nothrow
   {
     return new BinGidBuilder;
   }
@@ -165,7 +165,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
         This should be used only if the bin subclass is modifying the state
         of its children on its own.
   */
-  @property bool asyncHandling()
+  @property bool asyncHandling() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("async-handling");
   }
@@ -177,7 +177,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
           This should be used only if the bin subclass is modifying the state
           of its children on its own.
   */
-  @property void asyncHandling(bool propval)
+  @property void asyncHandling(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("async-handling", propval);
   }
@@ -192,7 +192,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
         source. The structure of the message is named `GstBinForwarded` and contains
         a field named `message` that contains the original forwarded #GstMessage.
   */
-  @property bool messageForward()
+  @property bool messageForward() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("message-forward");
   }
@@ -208,7 +208,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
           source. The structure of the message is named `GstBinForwarded` and contains
           a field named `message` that contains the original forwarded #GstMessage.
   */
-  @property void messageForward(bool propval)
+  @property void messageForward(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("message-forward", propval);
   }
@@ -222,7 +222,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
         name = the name of the new bin
       Returns: a new #GstBin
   */
-  this(string name = null)
+  this(string name = null) nothrow
   {
     GstElement* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -248,7 +248,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       Returns: true if the element could be added, false if
         the bin does not want to accept the element.
   */
-  bool add(gst.element.Element element)
+  bool add(gst.element.Element element) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bin_add(cast(GstBin*)this._cPtr, element ? cast(GstElement*)element._cPtr(No.Dup) : null);
@@ -267,7 +267,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       Returns: unlinked pad of the given
         direction.
   */
-  gst.pad.Pad findUnlinkedPad(gst.types.PadDirection direction)
+  gst.pad.Pad findUnlinkedPad(gst.types.PadDirection direction) nothrow
   {
     GstPad* _cretval;
     _cretval = gst_bin_find_unlinked_pad(cast(GstBin*)this._cPtr, direction);
@@ -287,7 +287,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       Returns: A #GstElement inside the bin
         implementing the interface
   */
-  gst.element.Element getByInterface(gobject.types.GType iface)
+  gst.element.Element getByInterface(gobject.types.GType iface) nothrow
   {
     GstElement* _cretval;
     _cretval = gst_bin_get_by_interface(cast(GstBin*)this._cPtr, iface);
@@ -304,7 +304,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       Returns: the #GstElement with the given
         name
   */
-  gst.element.Element getByName(string name)
+  gst.element.Element getByName(string name) nothrow
   {
     GstElement* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -322,7 +322,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       Returns: the #GstElement with the given
         name
   */
-  gst.element.Element getByNameRecurseUp(string name)
+  gst.element.Element getByNameRecurseUp(string name) nothrow
   {
     GstElement* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -332,7 +332,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   }
 
   /** */
-  gst.types.ElementFlags getSuppressedFlags()
+  gst.types.ElementFlags getSuppressedFlags() nothrow
   {
     GstElementFlags _cretval;
     _cretval = gst_bin_get_suppressed_flags(cast(GstBin*)this._cPtr);
@@ -350,7 +350,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       Returns: a #GstIterator of #GstElement
             for all elements in the bin with the given element factory name
   */
-  gst.iterator.Iterator iterateAllByElementFactoryName(string factoryName)
+  gst.iterator.Iterator iterateAllByElementFactoryName(string factoryName) nothrow
   {
     GstIterator* _cretval;
     const(char)* _factoryName = factoryName.toCString(No.Alloc);
@@ -370,7 +370,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       Returns: a #GstIterator of #GstElement
             for all elements in the bin implementing the given interface
   */
-  gst.iterator.Iterator iterateAllByInterface(gobject.types.GType iface)
+  gst.iterator.Iterator iterateAllByInterface(gobject.types.GType iface) nothrow
   {
     GstIterator* _cretval;
     _cretval = gst_bin_iterate_all_by_interface(cast(GstBin*)this._cPtr, iface);
@@ -382,7 +382,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       Gets an iterator for the elements in this bin.
       Returns: a #GstIterator of #GstElement
   */
-  gst.iterator.Iterator iterateElements()
+  gst.iterator.Iterator iterateElements() nothrow
   {
     GstIterator* _cretval;
     _cretval = gst_bin_iterate_elements(cast(GstBin*)this._cPtr);
@@ -395,7 +395,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       This iterator recurses into GstBin children.
       Returns: a #GstIterator of #GstElement
   */
-  gst.iterator.Iterator iterateRecurse()
+  gst.iterator.Iterator iterateRecurse() nothrow
   {
     GstIterator* _cretval;
     _cretval = gst_bin_iterate_recurse(cast(GstBin*)this._cPtr);
@@ -408,7 +408,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       #GST_ELEMENT_FLAG_SINK flag set.
       Returns: a #GstIterator of #GstElement
   */
-  gst.iterator.Iterator iterateSinks()
+  gst.iterator.Iterator iterateSinks() nothrow
   {
     GstIterator* _cretval;
     _cretval = gst_bin_iterate_sinks(cast(GstBin*)this._cPtr);
@@ -425,7 +425,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       of the bin elements and for clock selection.
       Returns: a #GstIterator of #GstElement
   */
-  gst.iterator.Iterator iterateSorted()
+  gst.iterator.Iterator iterateSorted() nothrow
   {
     GstIterator* _cretval;
     _cretval = gst_bin_iterate_sorted(cast(GstBin*)this._cPtr);
@@ -438,7 +438,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       #GST_ELEMENT_FLAG_SOURCE flag set.
       Returns: a #GstIterator of #GstElement
   */
-  gst.iterator.Iterator iterateSources()
+  gst.iterator.Iterator iterateSources() nothrow
   {
     GstIterator* _cretval;
     _cretval = gst_bin_iterate_sources(cast(GstBin*)this._cPtr);
@@ -457,7 +457,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       calculations will be performed.
       Returns: true if the latency could be queried and reconfigured.
   */
-  bool recalculateLatency()
+  bool recalculateLatency() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bin_recalculate_latency(cast(GstBin*)this._cPtr);
@@ -480,7 +480,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       Returns: true if the element could be removed, false if
         the bin does not want to remove the element.
   */
-  bool remove(gst.element.Element element)
+  bool remove(gst.element.Element element) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bin_remove(cast(GstBin*)this._cPtr, element ? cast(GstElement*)element._cPtr(No.Dup) : null);
@@ -496,7 +496,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       Params:
         flags = the #GstElementFlags to suppress
   */
-  void setSuppressedFlags(gst.types.ElementFlags flags)
+  void setSuppressedFlags(gst.types.ElementFlags flags) nothrow
   {
     gst_bin_set_suppressed_flags(cast(GstBin*)this._cPtr, flags);
   }
@@ -507,7 +507,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       Returns: true if syncing the state was successful for all children,
          otherwise false.
   */
-  bool syncChildrenStates()
+  bool syncChildrenStates() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bin_sync_children_states(cast(GstBin*)this._cPtr);
@@ -533,7 +533,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeepElementAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeepElementAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.bin.Bin)))
@@ -541,7 +541,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gst.bin.Bin)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -556,7 +556,14 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.bin.Bin.deepElementAdded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -582,7 +589,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeepElementRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeepElementRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.bin.Bin)))
@@ -590,7 +597,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gst.bin.Bin)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -605,7 +612,14 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.bin.Bin.deepElementRemoved");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -638,22 +652,30 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDoLatency(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDoLatency(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.bin.Bin)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.bin.Bin.doLatency");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -679,14 +701,14 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectElementAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectElementAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.element.Element)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gst.bin.Bin)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -698,7 +720,14 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.bin.Bin.elementAdded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -722,14 +751,14 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectElementRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectElementRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.element.Element)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gst.bin.Bin)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -741,7 +770,14 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.bin.Bin.elementRemoved");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -763,7 +799,7 @@ class BinGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T, gst.child_prox
           of its children on its own.
       Returns: Builder instance for fluent chaining
   */
-  T asyncHandling(bool propval)
+  T asyncHandling(bool propval) nothrow
   {
     return setProperty("async-handling", propval);
   }
@@ -780,7 +816,7 @@ class BinGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T, gst.child_prox
           a field named `message` that contains the original forwarded #GstMessage.
       Returns: Builder instance for fluent chaining
   */
-  T messageForward(bool propval)
+  T messageForward(bool propval) nothrow
   {
     return setProperty("message-forward", propval);
   }
@@ -793,7 +829,7 @@ final class BinGidBuilder : BinGidBuilderImpl!BinGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Bin build()
+  Bin build() nothrow
   {
     return new Bin(cast(void*)createGObject(Bin._getGType), No.Take);
   }

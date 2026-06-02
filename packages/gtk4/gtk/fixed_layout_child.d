@@ -17,26 +17,26 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_fixed_layout_child_get_type != &gidSymbolNotFound ? gtk_fixed_layout_child_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FixedLayoutChild self()
+  override FixedLayoutChild self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
       Get builder for [gtk.fixed_layout_child.FixedLayoutChild]
       Returns: New builder object
   */
-  static FixedLayoutChildGidBuilder builder()
+  static FixedLayoutChildGidBuilder builder() nothrow
   {
     return new FixedLayoutChildGidBuilder;
   }
@@ -54,7 +54,7 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
       Get `transform` property.
       Returns: The transform of the child.
   */
-  @property gsk.transform.Transform transform()
+  @property gsk.transform.Transform transform() nothrow
   {
     return getTransform();
   }
@@ -64,7 +64,7 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
       Params:
         propval = The transform of the child.
   */
-  @property void transform(gsk.transform.Transform propval)
+  @property void transform(gsk.transform.Transform propval) nothrow
   {
     setTransform(propval);
   }
@@ -73,7 +73,7 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
       Retrieves the transformation of the child.
       Returns: a [gsk.transform.Transform]
   */
-  gsk.transform.Transform getTransform()
+  gsk.transform.Transform getTransform() nothrow
   {
     GskTransform* _cretval;
     _cretval = gtk_fixed_layout_child_get_transform(cast(GtkFixedLayoutChild*)this._cPtr);
@@ -87,7 +87,7 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
       Params:
         transform = a [gsk.transform.Transform]
   */
-  void setTransform(gsk.transform.Transform transform)
+  void setTransform(gsk.transform.Transform transform) nothrow
   {
     gtk_fixed_layout_child_set_transform(cast(GtkFixedLayoutChild*)this._cPtr, transform ? cast(GskTransform*)transform._cPtr(No.Dup) : null);
   }
@@ -103,7 +103,7 @@ class FixedLayoutChildGidBuilderImpl(T) : gtk.layout_child.LayoutChildGidBuilder
         propval = The transform of the child.
       Returns: Builder instance for fluent chaining
   */
-  T transform(gsk.transform.Transform propval)
+  T transform(gsk.transform.Transform propval) nothrow
   {
     return setProperty("transform", propval);
   }
@@ -116,7 +116,7 @@ final class FixedLayoutChildGidBuilder : FixedLayoutChildGidBuilderImpl!FixedLay
       Create object from builder.
       Returns: New object
   */
-  FixedLayoutChild build()
+  FixedLayoutChild build() nothrow
   {
     return new FixedLayoutChild(cast(void*)createGObject(FixedLayoutChild._getGType), No.Take);
   }

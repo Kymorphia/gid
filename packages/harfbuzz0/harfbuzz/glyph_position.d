@@ -28,7 +28,7 @@ class GlyphPosition : gobject.boxed.Boxed
         yOffset = how much the glyph moves on the Y-axis before drawing it, this
                      should not affect how much the line advances.
   */
-  this(harfbuzz.types.Position xAdvance = harfbuzz.types.Position.init, harfbuzz.types.Position yAdvance = harfbuzz.types.Position.init, harfbuzz.types.Position xOffset = harfbuzz.types.Position.init, harfbuzz.types.Position yOffset = harfbuzz.types.Position.init)
+  this(harfbuzz.types.Position xAdvance = harfbuzz.types.Position.init, harfbuzz.types.Position yAdvance = harfbuzz.types.Position.init, harfbuzz.types.Position xOffset = harfbuzz.types.Position.init, harfbuzz.types.Position yOffset = harfbuzz.types.Position.init) nothrow
   {
     super(gMalloc(hb_glyph_position_t.sizeof), Yes.Take);
     this.xAdvance = xAdvance;
@@ -38,32 +38,32 @@ class GlyphPosition : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())hb_gobject_glyph_position_get_type != &gidSymbolNotFound ? hb_gobject_glyph_position_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GlyphPosition self()
+  override GlyphPosition self() nothrow
   {
     return this;
   }
@@ -73,7 +73,7 @@ class GlyphPosition : gobject.boxed.Boxed
       Returns: how much the line advances after drawing this glyph when setting
                     text in horizontal direction.
   */
-  @property harfbuzz.types.Position xAdvance()
+  @property harfbuzz.types.Position xAdvance() nothrow
   {
     return (cast(hb_glyph_position_t*)this._cPtr).xAdvance;
   }
@@ -84,7 +84,7 @@ class GlyphPosition : gobject.boxed.Boxed
         propval = how much the line advances after drawing this glyph when setting
                       text in horizontal direction.
   */
-  @property void xAdvance(harfbuzz.types.Position propval)
+  @property void xAdvance(harfbuzz.types.Position propval) nothrow
   {
     (cast(hb_glyph_position_t*)this._cPtr).xAdvance = propval;
   }
@@ -94,7 +94,7 @@ class GlyphPosition : gobject.boxed.Boxed
       Returns: how much the line advances after drawing this glyph when setting
                     text in vertical direction.
   */
-  @property harfbuzz.types.Position yAdvance()
+  @property harfbuzz.types.Position yAdvance() nothrow
   {
     return (cast(hb_glyph_position_t*)this._cPtr).yAdvance;
   }
@@ -105,7 +105,7 @@ class GlyphPosition : gobject.boxed.Boxed
         propval = how much the line advances after drawing this glyph when setting
                       text in vertical direction.
   */
-  @property void yAdvance(harfbuzz.types.Position propval)
+  @property void yAdvance(harfbuzz.types.Position propval) nothrow
   {
     (cast(hb_glyph_position_t*)this._cPtr).yAdvance = propval;
   }
@@ -115,7 +115,7 @@ class GlyphPosition : gobject.boxed.Boxed
       Returns: how much the glyph moves on the X-axis before drawing it, this
                    should not affect how much the line advances.
   */
-  @property harfbuzz.types.Position xOffset()
+  @property harfbuzz.types.Position xOffset() nothrow
   {
     return (cast(hb_glyph_position_t*)this._cPtr).xOffset;
   }
@@ -126,7 +126,7 @@ class GlyphPosition : gobject.boxed.Boxed
         propval = how much the glyph moves on the X-axis before drawing it, this
                      should not affect how much the line advances.
   */
-  @property void xOffset(harfbuzz.types.Position propval)
+  @property void xOffset(harfbuzz.types.Position propval) nothrow
   {
     (cast(hb_glyph_position_t*)this._cPtr).xOffset = propval;
   }
@@ -136,7 +136,7 @@ class GlyphPosition : gobject.boxed.Boxed
       Returns: how much the glyph moves on the Y-axis before drawing it, this
                    should not affect how much the line advances.
   */
-  @property harfbuzz.types.Position yOffset()
+  @property harfbuzz.types.Position yOffset() nothrow
   {
     return (cast(hb_glyph_position_t*)this._cPtr).yOffset;
   }
@@ -147,7 +147,7 @@ class GlyphPosition : gobject.boxed.Boxed
         propval = how much the glyph moves on the Y-axis before drawing it, this
                      should not affect how much the line advances.
   */
-  @property void yOffset(harfbuzz.types.Position propval)
+  @property void yOffset(harfbuzz.types.Position propval) nothrow
   {
     (cast(hb_glyph_position_t*)this._cPtr).yOffset = propval;
   }

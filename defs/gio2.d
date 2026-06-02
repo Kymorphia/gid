@@ -85,7 +85,7 @@
    *   position = the position of the item to fetch
    * Returns: the object at position.
    */
-  T getItem(T)(uint position)
+  T getItem(T)(uint position) nothrow
   {
     auto gobj = cast(GObject*)g_list_model_get_object(cast(GListModel*)(cast(gobject.object.ObjectWrap)this)._cPtr, position);
     return gobject.object.ObjectWrap._getDObject!T(gobj, Yes.Take);
@@ -115,14 +115,22 @@
    * Returns: Whether store contains item. If it was found, position will be
    *   set to the position where item occurred for the first time.
    */
-  bool findWithEqualFunc(gobject.object.ObjectWrap item, bool delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) equalFunc, out uint position)
+  bool findWithEqualFunc(gobject.object.ObjectWrap item, bool delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) equalFunc, out uint position) nothrow
   {
     static bool delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) _static_equalFunc;
 
-    extern(C) gboolean _equalFuncCallback(const(void)* a, const(void)* b)
+    extern(C) gboolean _equalFuncCallback(const(void)* a, const(void)* b) nothrow
     {
-      gboolean _retval = _static_equalFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a, No.Take),
-        gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b, No.Take));
+      gboolean _retval;
+
+      try
+      {
+        _retval = _static_equalFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a, No.Take),
+          gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b, No.Take));
+      }
+      catch (Exception e)
+        gidInvokeCallbackExceptionHandler(e, "gio.list_store.ListStore.findWithEqualFunc");
+
       return _retval;
     }
 
@@ -145,14 +153,22 @@
    *   compareFunc = pairwise comparison function for sorting
    * Returns: the position at which item was inserted
    */
-  uint insertSorted(gobject.object.ObjectWrap item, int delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) compareFunc)
+  uint insertSorted(gobject.object.ObjectWrap item, int delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) compareFunc) nothrow
   {
     static int delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) _static_compareFunc;
 
-    extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
+    extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
-      int _retval = _static_compareFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a, No.Take),
-        gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b, No.Take));
+      int _retval;
+
+      try
+      {
+        _retval = _static_compareFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a, No.Take),
+          gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b, No.Take));
+      }
+      catch (Exception e)
+        gidInvokeCallbackExceptionHandler(e, "gio.list_store.ListStore.insertSorted");
+
       return _retval;
     }
 
@@ -168,14 +184,22 @@
    * Params:
    *   compareFunc = pairwise comparison function for sorting
    */
-  void sort(int delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) compareFunc)
+  void sort(int delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) compareFunc) nothrow
   {
     static int delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) _static_compareFunc;
 
-    extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
+    extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
-      int _retval = _static_compareFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a, No.Take),
-        gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b, No.Take));
+      int _retval;
+
+      try
+      {
+        _retval = _static_compareFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a, No.Take),
+          gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b, No.Take));
+      }
+      catch (Exception e)
+        gidInvokeCallbackExceptionHandler(e, "gio.list_store.ListStore.sort");
+
       return _retval;
     }
 

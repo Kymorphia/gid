@@ -14,7 +14,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libcairo-gobject.so.2", "libcairo.so.2"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // Context
   GType function() c_cairo_gobject_context_get_type; ///

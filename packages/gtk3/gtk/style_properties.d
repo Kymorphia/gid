@@ -35,26 +35,26 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_style_properties_get_type != &gidSymbolNotFound ? gtk_style_properties_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StyleProperties self()
+  override StyleProperties self() nothrow
   {
     return this;
   }
@@ -63,7 +63,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
       Get builder for [gtk.style_properties.StyleProperties]
       Returns: New builder object
   */
-  static StylePropertiesGidBuilder builder()
+  static StylePropertiesGidBuilder builder() nothrow
   {
     return new StylePropertiesGidBuilder;
   }
@@ -76,7 +76,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   
       Deprecated: #GtkStyleProperties are deprecated.
   */
-  this()
+  this() nothrow
   {
     GtkStyleProperties* _cretval;
     _cretval = gtk_style_properties_new();
@@ -88,7 +88,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   
       Deprecated: #GtkStyleProperties are deprecated.
   */
-  void clear()
+  void clear() nothrow
   {
     gtk_style_properties_clear(cast(GtkStyleProperties*)this._cPtr);
   }
@@ -107,7 +107,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   
       Deprecated: #GtkStyleProperties are deprecated.
   */
-  bool getProperty(string property, gtk.types.StateFlags state, out gobject.value.Value value)
+  bool getProperty(string property, gtk.types.StateFlags state, out gobject.value.Value value) nothrow
   {
     bool _retval;
     const(char)* _property = property.toCString(No.Alloc);
@@ -127,7 +127,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   
       Deprecated: #GtkSymbolicColor is deprecated.
   */
-  gtk.symbolic_color.SymbolicColor lookupColor(string name)
+  gtk.symbolic_color.SymbolicColor lookupColor(string name) nothrow
   {
     GtkSymbolicColor* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -146,7 +146,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   
       Deprecated: #GtkSymbolicColor is deprecated.
   */
-  void mapColor(string name, gtk.symbolic_color.SymbolicColor color)
+  void mapColor(string name, gtk.symbolic_color.SymbolicColor color) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_style_properties_map_color(cast(GtkStyleProperties*)this._cPtr, _name, color ? cast(GtkSymbolicColor*)color._cPtr(No.Dup) : null);
@@ -164,7 +164,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   
       Deprecated: #GtkStyleProperties are deprecated.
   */
-  void merge(gtk.style_properties.StyleProperties propsToMerge, bool replace)
+  void merge(gtk.style_properties.StyleProperties propsToMerge, bool replace) nothrow
   {
     gtk_style_properties_merge(cast(GtkStyleProperties*)this._cPtr, propsToMerge ? cast(const(GtkStyleProperties)*)propsToMerge._cPtr(No.Dup) : null, replace);
   }
@@ -181,7 +181,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   
       Deprecated: #GtkStyleProperties are deprecated.
   */
-  void setProperty(string property, gtk.types.StateFlags state, gobject.value.Value value)
+  void setProperty(string property, gtk.types.StateFlags state, gobject.value.Value value) nothrow
   {
     const(char)* _property = property.toCString(No.Alloc);
     gtk_style_properties_set_property(cast(GtkStyleProperties*)this._cPtr, _property, state, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -196,7 +196,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   
       Deprecated: #GtkStyleProperties are deprecated.
   */
-  void unsetProperty(string property, gtk.types.StateFlags state)
+  void unsetProperty(string property, gtk.types.StateFlags state) nothrow
   {
     const(char)* _property = property.toCString(No.Alloc);
     gtk_style_properties_unset_property(cast(GtkStyleProperties*)this._cPtr, _property, state);
@@ -217,7 +217,7 @@ final class StylePropertiesGidBuilder : StylePropertiesGidBuilderImpl!StylePrope
       Create object from builder.
       Returns: New object
   */
-  StyleProperties build()
+  StyleProperties build() nothrow
   {
     return new StyleProperties(cast(void*)createGObject(StyleProperties._getGType), Yes.Take);
   }

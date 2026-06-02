@@ -14,11 +14,8 @@ class StockItem
   GtkStockItem _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.stock_item.StockItem");
-
     _cInstance = *cast(GtkStockItem*)ptr;
 
     if (take)
@@ -26,7 +23,7 @@ class StockItem
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -35,7 +32,7 @@ class StockItem
       Get `stockId` field.
       Returns: Identifier.
   */
-  @property string stockId()
+  @property string stockId() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkStockItem*)this._cPtr).stockId);
   }
@@ -45,7 +42,7 @@ class StockItem
       Params:
         propval = Identifier.
   */
-  @property void stockId(string propval)
+  @property void stockId(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkStockItem*)this._cPtr).stockId);
     dToC(propval, cast(void*)&(cast(GtkStockItem*)this._cPtr).stockId);
@@ -55,7 +52,7 @@ class StockItem
       Get `label` field.
       Returns: User visible label.
   */
-  @property string label()
+  @property string label() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkStockItem*)this._cPtr).label);
   }
@@ -65,7 +62,7 @@ class StockItem
       Params:
         propval = User visible label.
   */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkStockItem*)this._cPtr).label);
     dToC(propval, cast(void*)&(cast(GtkStockItem*)this._cPtr).label);
@@ -75,7 +72,7 @@ class StockItem
       Get `modifier` field.
       Returns: Modifier type for keyboard accelerator
   */
-  @property gdk.types.ModifierType modifier()
+  @property gdk.types.ModifierType modifier() nothrow
   {
     return cast(gdk.types.ModifierType)(cast(GtkStockItem*)this._cPtr).modifier;
   }
@@ -85,7 +82,7 @@ class StockItem
       Params:
         propval = Modifier type for keyboard accelerator
   */
-  @property void modifier(gdk.types.ModifierType propval)
+  @property void modifier(gdk.types.ModifierType propval) nothrow
   {
     (cast(GtkStockItem*)this._cPtr).modifier = cast(GdkModifierType)propval;
   }
@@ -94,7 +91,7 @@ class StockItem
       Get `keyval` field.
       Returns: Keyboard accelerator
   */
-  @property uint keyval()
+  @property uint keyval() nothrow
   {
     return (cast(GtkStockItem*)this._cPtr).keyval;
   }
@@ -104,7 +101,7 @@ class StockItem
       Params:
         propval = Keyboard accelerator
   */
-  @property void keyval(uint propval)
+  @property void keyval(uint propval) nothrow
   {
     (cast(GtkStockItem*)this._cPtr).keyval = propval;
   }
@@ -113,7 +110,7 @@ class StockItem
       Get `translationDomain` field.
       Returns: Translation domain of the menu or toolbar item
   */
-  @property string translationDomain()
+  @property string translationDomain() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkStockItem*)this._cPtr).translationDomain);
   }
@@ -123,7 +120,7 @@ class StockItem
       Params:
         propval = Translation domain of the menu or toolbar item
   */
-  @property void translationDomain(string propval)
+  @property void translationDomain(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkStockItem*)this._cPtr).translationDomain);
     dToC(propval, cast(void*)&(cast(GtkStockItem*)this._cPtr).translationDomain);

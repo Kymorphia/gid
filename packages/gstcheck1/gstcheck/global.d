@@ -33,7 +33,7 @@ import gstcheck.types;
       pad = the pad previously passed to [gstcheck.global.bufferStrawStartPipeline]
     Returns: the captured #GstBuffer.
 */
-gst.buffer.Buffer bufferStrawGetBuffer(gst.element.Element bin, gst.pad.Pad pad)
+gst.buffer.Buffer bufferStrawGetBuffer(gst.element.Element bin, gst.pad.Pad pad) nothrow
 {
   GstBuffer* _cretval;
   _cretval = gst_buffer_straw_get_buffer(bin ? cast(GstElement*)bin._cPtr(No.Dup) : null, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
@@ -62,7 +62,7 @@ gst.buffer.Buffer bufferStrawGetBuffer(gst.element.Element bin, gst.pad.Pad pad)
       bin = the pipeline to run
       pad = a pad on an element in bin
 */
-void bufferStrawStartPipeline(gst.element.Element bin, gst.pad.Pad pad)
+void bufferStrawStartPipeline(gst.element.Element bin, gst.pad.Pad pad) nothrow
 {
   gst_buffer_straw_start_pipeline(bin ? cast(GstElement*)bin._cPtr(No.Dup) : null, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
 }
@@ -78,7 +78,7 @@ void bufferStrawStartPipeline(gst.element.Element bin, gst.pad.Pad pad)
       bin = the pipeline previously started via [gstcheck.global.bufferStrawStartPipeline]
       pad = the pad previously passed to [gstcheck.global.bufferStrawStartPipeline]
 */
-void bufferStrawStopPipeline(gst.element.Element bin, gst.pad.Pad pad)
+void bufferStrawStopPipeline(gst.element.Element bin, gst.pad.Pad pad) nothrow
 {
   gst_buffer_straw_stop_pipeline(bin ? cast(GstElement*)bin._cPtr(No.Dup) : null, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
 }
@@ -92,7 +92,7 @@ void bufferStrawStopPipeline(gst.element.Element bin, gst.pad.Pad pad)
         if it is false and the `GST_ABI` environment variable is set, usable code
         for list will be printed.
 */
-void checkAbiList(gstcheck.check_abistruct.CheckABIStruct list, bool haveAbiSizes)
+void checkAbiList(gstcheck.check_abistruct.CheckABIStruct list, bool haveAbiSizes) nothrow
 {
   gst_check_abi_list(list ? cast(GstCheckABIStruct*)list._cPtr : null, haveAbiSizes);
 }
@@ -105,7 +105,7 @@ void checkAbiList(gstcheck.check_abistruct.CheckABIStruct list, bool haveAbiSize
       data = data to compare to
       size = size of data to compare
 */
-void checkBufferData(gst.buffer.Buffer buffer, const(void)* data, size_t size)
+void checkBufferData(gst.buffer.Buffer buffer, const(void)* data, size_t size) nothrow
 {
   gst_check_buffer_data(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, data, size);
 }
@@ -118,7 +118,7 @@ void checkBufferData(gst.buffer.Buffer buffer, const(void)* data, size_t size)
       caps1 = first caps to compare
       caps2 = second caps to compare
 */
-void checkCapsEqual(gst.caps.Caps caps1, gst.caps.Caps caps2)
+void checkCapsEqual(gst.caps.Caps caps1, gst.caps.Caps caps2) nothrow
 {
   gst_check_caps_equal(caps1 ? cast(GstCaps*)caps1._cPtr(No.Dup) : null, caps2 ? cast(GstCaps*)caps2._cPtr(No.Dup) : null);
 }
@@ -133,7 +133,7 @@ void checkCapsEqual(gst.caps.Caps caps1, gst.caps.Caps caps2)
       buffer = 
     Returns: 
 */
-gst.types.FlowReturn checkChainFunc(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.buffer.Buffer buffer)
+gst.types.FlowReturn checkChainFunc(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.buffer.Buffer buffer) nothrow
 {
   GstFlowReturn _cretval;
   _cretval = gst_check_chain_func(pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
@@ -146,7 +146,7 @@ gst.types.FlowReturn checkChainFunc(gst.pad.Pad pad, gst.object.ObjectWrap paren
     
     MT safe.
 */
-void checkClearLogFilter()
+void checkClearLogFilter() nothrow
 {
   gst_check_clear_log_filter();
 }
@@ -155,7 +155,7 @@ void checkClearLogFilter()
     Unref and remove all buffers that are in the global buffers GList,
     emptying the list.
 */
-void checkDropBuffers()
+void checkDropBuffers() nothrow
 {
   gst_check_drop_buffers();
 }
@@ -173,14 +173,14 @@ void checkDropBuffers()
       bufferOut = compare the result with this buffer
       capsOut = the #GstCaps expected of the srcpad of the element
 */
-void checkElementPushBuffer(string elementName, gst.buffer.Buffer bufferIn, gst.caps.Caps capsIn, gst.buffer.Buffer bufferOut, gst.caps.Caps capsOut)
+void checkElementPushBuffer(string elementName, gst.buffer.Buffer bufferIn, gst.caps.Caps capsIn, gst.buffer.Buffer bufferOut, gst.caps.Caps capsOut) nothrow
 {
   const(char)* _elementName = elementName.toCString(No.Alloc);
   gst_check_element_push_buffer(_elementName, bufferIn ? cast(GstBuffer*)bufferIn._cPtr(No.Dup) : null, capsIn ? cast(GstCaps*)capsIn._cPtr(No.Dup) : null, bufferOut ? cast(GstBuffer*)bufferOut._cPtr(No.Dup) : null, capsOut ? cast(GstCaps*)capsOut._cPtr(No.Dup) : null);
 }
 
 /** */
-void checkMessageError(gst.message.Message message, gst.types.MessageType type, glib.types.Quark domain, int code)
+void checkMessageError(gst.message.Message message, gst.types.MessageType type, glib.types.Quark domain, int code) nothrow
 {
   gst_check_message_error(message ? cast(GstMessage*)message._cPtr(No.Dup) : null, type, domain, code);
 }
@@ -192,7 +192,7 @@ void checkMessageError(gst.message.Message message, gst.types.MessageType type, 
     Params:
       objectToUnref = The #GObject to unref
 */
-void checkObjectDestroyedOnUnref(void* objectToUnref = null)
+void checkObjectDestroyedOnUnref(void* objectToUnref = null) nothrow
 {
   gst_check_object_destroyed_on_unref(objectToUnref);
 }
@@ -205,7 +205,7 @@ void checkObjectDestroyedOnUnref(void* objectToUnref = null)
     Params:
       filter = Filter returned by gst_check_add_log_filter
 */
-void checkRemoveLogFilter(gstcheck.types.CheckLogFilter filter)
+void checkRemoveLogFilter(gstcheck.types.CheckLogFilter filter) nothrow
 {
   gst_check_remove_log_filter(filter);
 }
@@ -217,7 +217,7 @@ void checkRemoveLogFilter(gstcheck.types.CheckLogFilter filter)
       factory = factory
     Returns: a new element
 */
-gst.element.Element checkSetupElement(string factory)
+gst.element.Element checkSetupElement(string factory) nothrow
 {
   GstElement* _cretval;
   const(char)* _factory = factory.toCString(No.Alloc);
@@ -238,7 +238,7 @@ gst.element.Element checkSetupElement(string factory)
       caps = #GstCaps in case caps event must be sent
       format = The #GstFormat of the default segment to send
 */
-void checkSetupEvents(gst.pad.Pad srcpad, gst.element.Element element, gst.caps.Caps caps, gst.types.Format format)
+void checkSetupEvents(gst.pad.Pad srcpad, gst.element.Element element, gst.caps.Caps caps, gst.types.Format format) nothrow
 {
   gst_check_setup_events(srcpad ? cast(GstPad*)srcpad._cPtr(No.Dup) : null, element ? cast(GstElement*)element._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, format);
 }
@@ -255,7 +255,7 @@ void checkSetupEvents(gst.pad.Pad srcpad, gst.element.Element element, gst.caps.
       format = The #GstFormat of the default segment to send
       streamId = A unique identifier for the stream
 */
-void checkSetupEventsWithStreamId(gst.pad.Pad srcpad, gst.element.Element element, gst.caps.Caps caps, gst.types.Format format, string streamId)
+void checkSetupEventsWithStreamId(gst.pad.Pad srcpad, gst.element.Element element, gst.caps.Caps caps, gst.types.Format format, string streamId) nothrow
 {
   const(char)* _streamId = streamId.toCString(No.Alloc);
   gst_check_setup_events_with_stream_id(srcpad ? cast(GstPad*)srcpad._cPtr(No.Dup) : null, element ? cast(GstElement*)element._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, format, _streamId);
@@ -269,7 +269,7 @@ void checkSetupEventsWithStreamId(gst.pad.Pad srcpad, gst.element.Element elemen
       tmpl = pad template
     Returns: a new pad that can be used to check the output of element
 */
-gst.pad.Pad checkSetupSinkPad(gst.element.Element element, gst.static_pad_template.StaticPadTemplate tmpl)
+gst.pad.Pad checkSetupSinkPad(gst.element.Element element, gst.static_pad_template.StaticPadTemplate tmpl) nothrow
 {
   GstPad* _cretval;
   _cretval = gst_check_setup_sink_pad(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstStaticPadTemplate*)tmpl._cPtr : null);
@@ -288,7 +288,7 @@ gst.pad.Pad checkSetupSinkPad(gst.element.Element element, gst.static_pad_templa
       name = Name of the element src pad that will be linked to the sink pad that will be setup
     Returns: a new pad that can be used to check the output of element
 */
-gst.pad.Pad checkSetupSinkPadByName(gst.element.Element element, gst.static_pad_template.StaticPadTemplate tmpl, string name)
+gst.pad.Pad checkSetupSinkPadByName(gst.element.Element element, gst.static_pad_template.StaticPadTemplate tmpl, string name) nothrow
 {
   GstPad* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -298,7 +298,7 @@ gst.pad.Pad checkSetupSinkPadByName(gst.element.Element element, gst.static_pad_
 }
 
 /** */
-gst.pad.Pad checkSetupSinkPadByNameFromTemplate(gst.element.Element element, gst.pad_template.PadTemplate tmpl, string name)
+gst.pad.Pad checkSetupSinkPadByNameFromTemplate(gst.element.Element element, gst.pad_template.PadTemplate tmpl, string name) nothrow
 {
   GstPad* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -308,7 +308,7 @@ gst.pad.Pad checkSetupSinkPadByNameFromTemplate(gst.element.Element element, gst
 }
 
 /** */
-gst.pad.Pad checkSetupSinkPadFromTemplate(gst.element.Element element, gst.pad_template.PadTemplate tmpl)
+gst.pad.Pad checkSetupSinkPadFromTemplate(gst.element.Element element, gst.pad_template.PadTemplate tmpl) nothrow
 {
   GstPad* _cretval;
   _cretval = gst_check_setup_sink_pad_from_template(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstPadTemplate*)tmpl._cPtr(No.Dup) : null);
@@ -324,7 +324,7 @@ gst.pad.Pad checkSetupSinkPadFromTemplate(gst.element.Element element, gst.pad_t
       tmpl = pad template
     Returns: A new pad that can be used to inject data on element
 */
-gst.pad.Pad checkSetupSrcPad(gst.element.Element element, gst.static_pad_template.StaticPadTemplate tmpl)
+gst.pad.Pad checkSetupSrcPad(gst.element.Element element, gst.static_pad_template.StaticPadTemplate tmpl) nothrow
 {
   GstPad* _cretval;
   _cretval = gst_check_setup_src_pad(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstStaticPadTemplate*)tmpl._cPtr : null);
@@ -373,7 +373,7 @@ gst.pad.Pad checkSetupSrcPad(gst.element.Element element, gst.static_pad_templat
       name = Name of the element sink pad that will be linked to the src pad that will be setup
     Returns: A new pad that can be used to inject data on element
 */
-gst.pad.Pad checkSetupSrcPadByName(gst.element.Element element, gst.static_pad_template.StaticPadTemplate tmpl, string name)
+gst.pad.Pad checkSetupSrcPadByName(gst.element.Element element, gst.static_pad_template.StaticPadTemplate tmpl, string name) nothrow
 {
   GstPad* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -383,7 +383,7 @@ gst.pad.Pad checkSetupSrcPadByName(gst.element.Element element, gst.static_pad_t
 }
 
 /** */
-gst.pad.Pad checkSetupSrcPadByNameFromTemplate(gst.element.Element element, gst.pad_template.PadTemplate tmpl, string name)
+gst.pad.Pad checkSetupSrcPadByNameFromTemplate(gst.element.Element element, gst.pad_template.PadTemplate tmpl, string name) nothrow
 {
   GstPad* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -393,7 +393,7 @@ gst.pad.Pad checkSetupSrcPadByNameFromTemplate(gst.element.Element element, gst.
 }
 
 /** */
-gst.pad.Pad checkSetupSrcPadFromTemplate(gst.element.Element element, gst.pad_template.PadTemplate tmpl)
+gst.pad.Pad checkSetupSrcPadFromTemplate(gst.element.Element element, gst.pad_template.PadTemplate tmpl) nothrow
 {
   GstPad* _cretval;
   _cretval = gst_check_setup_src_pad_from_template(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstPadTemplate*)tmpl._cPtr(No.Dup) : null);
@@ -402,26 +402,26 @@ gst.pad.Pad checkSetupSrcPadFromTemplate(gst.element.Element element, gst.pad_te
 }
 
 /** */
-void checkTeardownElement(gst.element.Element element)
+void checkTeardownElement(gst.element.Element element) nothrow
 {
   gst_check_teardown_element(element ? cast(GstElement*)element._cPtr(No.Dup) : null);
 }
 
 /** */
-void checkTeardownPadByName(gst.element.Element element, string name)
+void checkTeardownPadByName(gst.element.Element element, string name) nothrow
 {
   const(char)* _name = name.toCString(No.Alloc);
   gst_check_teardown_pad_by_name(element ? cast(GstElement*)element._cPtr(No.Dup) : null, _name);
 }
 
 /** */
-void checkTeardownSinkPad(gst.element.Element element)
+void checkTeardownSinkPad(gst.element.Element element) nothrow
 {
   gst_check_teardown_sink_pad(element ? cast(GstElement*)element._cPtr(No.Dup) : null);
 }
 
 /** */
-void checkTeardownSrcPad(gst.element.Element element)
+void checkTeardownSrcPad(gst.element.Element element) nothrow
 {
   gst_check_teardown_src_pad(element ? cast(GstElement*)element._cPtr(No.Dup) : null);
 }
@@ -435,7 +435,7 @@ void checkTeardownSrcPad(gst.element.Element element)
       pad = The #GstPad on which the dataflow will be checked.
     Returns: true if the pad was added
 */
-bool consistencyCheckerAddPad(gstcheck.types.StreamConsistency consist, gst.pad.Pad pad)
+bool consistencyCheckerAddPad(gstcheck.types.StreamConsistency consist, gst.pad.Pad pad) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_consistency_checker_add_pad(consist, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
@@ -448,7 +448,7 @@ bool consistencyCheckerAddPad(gstcheck.types.StreamConsistency consist, gst.pad.
     Params:
       consist = The #GstStreamConsistency to free.
 */
-void consistencyCheckerFree(gstcheck.types.StreamConsistency consist)
+void consistencyCheckerFree(gstcheck.types.StreamConsistency consist) nothrow
 {
   gst_consistency_checker_free(consist);
 }
@@ -459,7 +459,7 @@ void consistencyCheckerFree(gstcheck.types.StreamConsistency consist)
     Params:
       consist = The #GstStreamConsistency to reset.
 */
-void consistencyCheckerReset(gstcheck.types.StreamConsistency consist)
+void consistencyCheckerReset(gstcheck.types.StreamConsistency consist) nothrow
 {
   gst_consistency_checker_reset(consist);
 }

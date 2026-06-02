@@ -17,26 +17,26 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_list_array_builder_get_type != &gidSymbolNotFound ? garrow_list_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ListArrayBuilder self()
+  override ListArrayBuilder self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.list_array_builder.ListArrayBuilder]
       Returns: New builder object
   */
-  static ListArrayBuilderGidBuilder builder()
+  static ListArrayBuilderGidBuilder builder() nothrow
   {
     return new ListArrayBuilderGidBuilder;
   }
@@ -84,7 +84,7 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /** */
-  arrow.array_builder.ArrayBuilder getValueBuilder()
+  arrow.array_builder.ArrayBuilder getValueBuilder() nothrow
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_list_array_builder_get_value_builder(cast(GArrowListArrayBuilder*)this._cPtr);
@@ -105,7 +105,7 @@ final class ListArrayBuilderGidBuilder : ListArrayBuilderGidBuilderImpl!ListArra
       Create object from builder.
       Returns: New object
   */
-  ListArrayBuilder build()
+  ListArrayBuilder build() nothrow
   {
     return new ListArrayBuilder(cast(void*)createGObject(ListArrayBuilder._getGType), Yes.Take);
   }

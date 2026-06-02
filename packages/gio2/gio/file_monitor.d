@@ -30,26 +30,26 @@ class FileMonitor : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_file_monitor_get_type != &gidSymbolNotFound ? g_file_monitor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileMonitor self()
+  override FileMonitor self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class FileMonitor : gobject.object.ObjectWrap
       Get builder for [gio.file_monitor.FileMonitor]
       Returns: New builder object
   */
-  static FileMonitorGidBuilder builder()
+  static FileMonitorGidBuilder builder() nothrow
   {
     return new FileMonitorGidBuilder;
   }
@@ -67,7 +67,7 @@ class FileMonitor : gobject.object.ObjectWrap
       Get `cancelled` property.
       Returns: Whether the monitor has been cancelled.
   */
-  @property bool cancelled()
+  @property bool cancelled() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("cancelled");
   }
@@ -76,7 +76,7 @@ class FileMonitor : gobject.object.ObjectWrap
       Get `rateLimit` property.
       Returns: The limit of the monitor to watch for changes, in milliseconds.
   */
-  @property int rateLimit()
+  @property int rateLimit() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("rate-limit");
   }
@@ -86,7 +86,7 @@ class FileMonitor : gobject.object.ObjectWrap
       Params:
         propval = The limit of the monitor to watch for changes, in milliseconds.
   */
-  @property void rateLimit(int propval)
+  @property void rateLimit(int propval) nothrow
   {
     setRateLimit(propval);
   }
@@ -95,7 +95,7 @@ class FileMonitor : gobject.object.ObjectWrap
       Cancels a file monitor.
       Returns: always true
   */
-  bool cancel()
+  bool cancel() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_file_monitor_cancel(cast(GFileMonitor*)this._cPtr);
@@ -116,7 +116,7 @@ class FileMonitor : gobject.object.ObjectWrap
         otherFile = a #GFile.
         eventType = a set of #GFileMonitorEvent flags.
   */
-  void emitEvent(gio.file.File child, gio.file.File otherFile, gio.types.FileMonitorEvent eventType)
+  void emitEvent(gio.file.File child, gio.file.File otherFile, gio.types.FileMonitorEvent eventType) nothrow
   {
     g_file_monitor_emit_event(cast(GFileMonitor*)this._cPtr, child ? cast(GFile*)(cast(gobject.object.ObjectWrap)child)._cPtr(No.Dup) : null, otherFile ? cast(GFile*)(cast(gobject.object.ObjectWrap)otherFile)._cPtr(No.Dup) : null, eventType);
   }
@@ -125,7 +125,7 @@ class FileMonitor : gobject.object.ObjectWrap
       Returns whether the monitor is canceled.
       Returns: true if monitor is canceled. false otherwise.
   */
-  bool isCancelled()
+  bool isCancelled() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_file_monitor_is_cancelled(cast(GFileMonitor*)this._cPtr);
@@ -140,7 +140,7 @@ class FileMonitor : gobject.object.ObjectWrap
         limitMsecs = a non-negative integer with the limit in milliseconds
               to poll for changes
   */
-  void setRateLimit(int limitMsecs)
+  void setRateLimit(int limitMsecs) nothrow
   {
     g_file_monitor_set_rate_limit(cast(GFileMonitor*)this._cPtr, limitMsecs);
   }
@@ -193,7 +193,7 @@ class FileMonitor : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.file.File)))
@@ -202,7 +202,7 @@ class FileMonitor : gobject.object.ObjectWrap
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gio.file_monitor.FileMonitor)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -220,7 +220,14 @@ class FileMonitor : gobject.object.ObjectWrap
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.file_monitor.FileMonitor.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -238,7 +245,7 @@ class FileMonitorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The limit of the monitor to watch for changes, in milliseconds.
       Returns: Builder instance for fluent chaining
   */
-  T rateLimit(int propval)
+  T rateLimit(int propval) nothrow
   {
     return setProperty("rate-limit", propval);
   }
@@ -251,7 +258,7 @@ final class FileMonitorGidBuilder : FileMonitorGidBuilderImpl!FileMonitorGidBuil
       Create object from builder.
       Returns: New object
   */
-  FileMonitor build()
+  FileMonitor build() nothrow
   {
     return new FileMonitor(cast(void*)createGObject(FileMonitor._getGType), No.Take);
   }

@@ -16,11 +16,8 @@ class MIKEYPayloadRAND
   GstMIKEYPayloadRAND _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstsdp.mikeypayload_rand.MIKEYPayloadRAND");
-
     _cInstance = *cast(GstMIKEYPayloadRAND*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class MIKEYPayloadRAND
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class MIKEYPayloadRAND
       Get `pt` field.
       Returns: the payload header
   */
-  @property gstsdp.mikeypayload.MIKEYPayload pt()
+  @property gstsdp.mikeypayload.MIKEYPayload pt() nothrow
   {
     return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadRAND*)this._cPtr).pt);
   }
@@ -46,7 +43,7 @@ class MIKEYPayloadRAND
       Get `len` field.
       Returns: the length of @rand
   */
-  @property ubyte len()
+  @property ubyte len() nothrow
   {
     return (cast(GstMIKEYPayloadRAND*)this._cPtr).len;
   }
@@ -56,7 +53,7 @@ class MIKEYPayloadRAND
       Params:
         propval = the length of @rand
   */
-  @property void len(ubyte propval)
+  @property void len(ubyte propval) nothrow
   {
     (cast(GstMIKEYPayloadRAND*)this._cPtr).len = propval;
   }

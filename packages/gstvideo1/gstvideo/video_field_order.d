@@ -20,7 +20,7 @@ struct VideoFieldOrder
            #GST_VIDEO_FIELD_ORDER_UNKNOWN when order is not a valid
            string representation for a #GstVideoFieldOrder.
   */
-  static gstvideo.types.VideoFieldOrder fromString(string order)
+  static gstvideo.types.VideoFieldOrder fromString(string order) nothrow
   {
     GstVideoFieldOrder _cretval;
     const(char)* _order = order.toCString(No.Alloc);
@@ -36,7 +36,7 @@ struct VideoFieldOrder
         order = a #GstVideoFieldOrder
       Returns: order as a string.
   */
-  static string toString_(gstvideo.types.VideoFieldOrder order)
+  static string toString_(gstvideo.types.VideoFieldOrder order) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_video_field_order_to_string(order);

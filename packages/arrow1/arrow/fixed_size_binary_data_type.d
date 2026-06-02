@@ -14,26 +14,26 @@ class FixedSizeBinaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_fixed_size_binary_data_type_get_type != &gidSymbolNotFound ? garrow_fixed_size_binary_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FixedSizeBinaryDataType self()
+  override FixedSizeBinaryDataType self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class FixedSizeBinaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
       Get builder for [arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType]
       Returns: New builder object
   */
-  static FixedSizeBinaryDataTypeGidBuilder builder()
+  static FixedSizeBinaryDataTypeGidBuilder builder() nothrow
   {
     return new FixedSizeBinaryDataTypeGidBuilder;
   }
 
   /** */
-  this(int byteWidth)
+  this(int byteWidth) nothrow
   {
     GArrowFixedSizeBinaryDataType* _cretval;
     _cretval = garrow_fixed_size_binary_data_type_new(byteWidth);
@@ -56,7 +56,7 @@ class FixedSizeBinaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
   }
 
   /** */
-  int getByteWidth()
+  int getByteWidth() nothrow
   {
     int _retval;
     _retval = garrow_fixed_size_binary_data_type_get_byte_width(cast(GArrowFixedSizeBinaryDataType*)this._cPtr);
@@ -76,7 +76,7 @@ final class FixedSizeBinaryDataTypeGidBuilder : FixedSizeBinaryDataTypeGidBuilde
       Create object from builder.
       Returns: New object
   */
-  FixedSizeBinaryDataType build()
+  FixedSizeBinaryDataType build() nothrow
   {
     return new FixedSizeBinaryDataType(cast(void*)createGObject(FixedSizeBinaryDataType._getGType), Yes.Take);
   }

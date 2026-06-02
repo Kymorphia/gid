@@ -21,26 +21,26 @@ class MenuItem : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_menu_item_get_type != &gidSymbolNotFound ? g_menu_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MenuItem self()
+  override MenuItem self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class MenuItem : gobject.object.ObjectWrap
       Get builder for [gio.menu_item.MenuItem]
       Returns: New builder object
   */
-  static MenuItemGidBuilder builder()
+  static MenuItemGidBuilder builder() nothrow
   {
     return new MenuItemGidBuilder;
   }
@@ -69,7 +69,7 @@ class MenuItem : gobject.object.ObjectWrap
         detailedAction = the detailed action string, or null
       Returns: a new #GMenuItem
   */
-  this(string label = null, string detailedAction = null)
+  this(string label = null, string detailedAction = null) nothrow
   {
     GMenuItem* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -90,7 +90,7 @@ class MenuItem : gobject.object.ObjectWrap
         itemIndex = the index of an item in model
       Returns: a new #GMenuItem.
   */
-  static gio.menu_item.MenuItem newFromModel(gio.menu_model.MenuModel model, int itemIndex)
+  static gio.menu_item.MenuItem newFromModel(gio.menu_model.MenuModel model, int itemIndex) nothrow
   {
     GMenuItem* _cretval;
     _cretval = g_menu_item_new_from_model(model ? cast(GMenuModel*)model._cPtr(No.Dup) : null, itemIndex);
@@ -165,7 +165,7 @@ class MenuItem : gobject.object.ObjectWrap
         section = a #GMenuModel with the items of the section
       Returns: a new #GMenuItem
   */
-  static gio.menu_item.MenuItem newSection(string label, gio.menu_model.MenuModel section)
+  static gio.menu_item.MenuItem newSection(string label, gio.menu_model.MenuModel section) nothrow
   {
     GMenuItem* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -185,7 +185,7 @@ class MenuItem : gobject.object.ObjectWrap
         submenu = a #GMenuModel with the items of the submenu
       Returns: a new #GMenuItem
   */
-  static gio.menu_item.MenuItem newSubmenu(string label, gio.menu_model.MenuModel submenu)
+  static gio.menu_item.MenuItem newSubmenu(string label, gio.menu_model.MenuModel submenu) nothrow
   {
     GMenuItem* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -206,7 +206,7 @@ class MenuItem : gobject.object.ObjectWrap
         expectedType = the expected type of the attribute
       Returns: the attribute value, or null
   */
-  glib.variant.Variant getAttributeValue(string attribute, glib.variant_type.VariantType expectedType = null)
+  glib.variant.Variant getAttributeValue(string attribute, glib.variant_type.VariantType expectedType = null) nothrow
   {
     GVariant* _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -222,7 +222,7 @@ class MenuItem : gobject.object.ObjectWrap
         link = the link name to query
       Returns: the link, or null
   */
-  gio.menu_model.MenuModel getLink(string link)
+  gio.menu_model.MenuModel getLink(string link) nothrow
   {
     GMenuModel* _cretval;
     const(char)* _link = link.toCString(No.Alloc);
@@ -273,7 +273,7 @@ class MenuItem : gobject.object.ObjectWrap
         action = the name of the action for this item
         targetValue = a #GVariant to use as the action target
   */
-  void setActionAndTargetValue(string action = null, glib.variant.Variant targetValue = null)
+  void setActionAndTargetValue(string action = null, glib.variant.Variant targetValue = null) nothrow
   {
     const(char)* _action = action.toCString(No.Alloc);
     g_menu_item_set_action_and_target_value(cast(GMenuItem*)this._cPtr, _action, targetValue ? cast(GVariant*)targetValue._cPtr(No.Dup) : null);
@@ -304,7 +304,7 @@ class MenuItem : gobject.object.ObjectWrap
         attribute = the attribute to set
         value = a #GVariant to use as the value, or null
   */
-  void setAttributeValue(string attribute, glib.variant.Variant value = null)
+  void setAttributeValue(string attribute, glib.variant.Variant value = null) nothrow
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
     g_menu_item_set_attribute_value(cast(GMenuItem*)this._cPtr, _attribute, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
@@ -326,7 +326,7 @@ class MenuItem : gobject.object.ObjectWrap
       Params:
         detailedAction = the "detailed" action string
   */
-  void setDetailedAction(string detailedAction)
+  void setDetailedAction(string detailedAction) nothrow
   {
     const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
     g_menu_item_set_detailed_action(cast(GMenuItem*)this._cPtr, _detailedAction);
@@ -349,7 +349,7 @@ class MenuItem : gobject.object.ObjectWrap
       Params:
         icon = a #GIcon, or null
   */
-  void setIcon(gio.icon.Icon icon)
+  void setIcon(gio.icon.Icon icon) nothrow
   {
     g_menu_item_set_icon(cast(GMenuItem*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
@@ -363,7 +363,7 @@ class MenuItem : gobject.object.ObjectWrap
       Params:
         label = the label to set, or null to unset
   */
-  void setLabel(string label = null)
+  void setLabel(string label = null) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     g_menu_item_set_label(cast(GMenuItem*)this._cPtr, _label);
@@ -385,7 +385,7 @@ class MenuItem : gobject.object.ObjectWrap
         link = type of link to establish or unset
         model = the #GMenuModel to link to (or null to unset)
   */
-  void setLink(string link, gio.menu_model.MenuModel model = null)
+  void setLink(string link, gio.menu_model.MenuModel model = null) nothrow
   {
     const(char)* _link = link.toCString(No.Alloc);
     g_menu_item_set_link(cast(GMenuItem*)this._cPtr, _link, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
@@ -403,7 +403,7 @@ class MenuItem : gobject.object.ObjectWrap
       Params:
         section = a #GMenuModel, or null
   */
-  void setSection(gio.menu_model.MenuModel section = null)
+  void setSection(gio.menu_model.MenuModel section = null) nothrow
   {
     g_menu_item_set_section(cast(GMenuItem*)this._cPtr, section ? cast(GMenuModel*)section._cPtr(No.Dup) : null);
   }
@@ -420,7 +420,7 @@ class MenuItem : gobject.object.ObjectWrap
       Params:
         submenu = a #GMenuModel, or null
   */
-  void setSubmenu(gio.menu_model.MenuModel submenu = null)
+  void setSubmenu(gio.menu_model.MenuModel submenu = null) nothrow
   {
     g_menu_item_set_submenu(cast(GMenuItem*)this._cPtr, submenu ? cast(GMenuModel*)submenu._cPtr(No.Dup) : null);
   }
@@ -438,7 +438,7 @@ final class MenuItemGidBuilder : MenuItemGidBuilderImpl!MenuItemGidBuilder
       Create object from builder.
       Returns: New object
   */
-  MenuItem build()
+  MenuItem build() nothrow
   {
     return new MenuItem(cast(void*)createGObject(MenuItem._getGType), Yes.Take);
   }

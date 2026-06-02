@@ -17,11 +17,8 @@ class VideoCaptionMeta
   GstVideoCaptionMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_caption_meta.VideoCaptionMeta");
-
     _cInstance = *cast(GstVideoCaptionMeta*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class VideoCaptionMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class VideoCaptionMeta
       Get `meta` field.
       Returns: parent #GstMeta
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoCaptionMeta*)this._cPtr).meta, No.Take);
   }
@@ -47,7 +44,7 @@ class VideoCaptionMeta
       Get `captionType` field.
       Returns: The type of Closed Caption contained in the meta.
   */
-  @property gstvideo.types.VideoCaptionType captionType()
+  @property gstvideo.types.VideoCaptionType captionType() nothrow
   {
     return cast(gstvideo.types.VideoCaptionType)(cast(GstVideoCaptionMeta*)this._cPtr).captionType;
   }
@@ -57,7 +54,7 @@ class VideoCaptionMeta
       Params:
         propval = The type of Closed Caption contained in the meta.
   */
-  @property void captionType(gstvideo.types.VideoCaptionType propval)
+  @property void captionType(gstvideo.types.VideoCaptionType propval) nothrow
   {
     (cast(GstVideoCaptionMeta*)this._cPtr).captionType = cast(GstVideoCaptionType)propval;
   }
@@ -66,7 +63,7 @@ class VideoCaptionMeta
       Get `size` field.
       Returns: The size in bytes of @data
   */
-  @property size_t size()
+  @property size_t size() nothrow
   {
     return (cast(GstVideoCaptionMeta*)this._cPtr).size;
   }
@@ -76,13 +73,13 @@ class VideoCaptionMeta
       Params:
         propval = The size in bytes of @data
   */
-  @property void size(size_t propval)
+  @property void size(size_t propval) nothrow
   {
     (cast(GstVideoCaptionMeta*)this._cPtr).size = propval;
   }
 
   /** */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_caption_meta_get_info();

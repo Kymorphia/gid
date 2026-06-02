@@ -30,32 +30,32 @@ class SrvTarget : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_srv_target_get_type != &gidSymbolNotFound ? g_srv_target_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SrvTarget self()
+  override SrvTarget self() nothrow
   {
     return this;
   }
@@ -73,7 +73,7 @@ class SrvTarget : gobject.boxed.Boxed
         weight = the target's weight
       Returns: a new #GSrvTarget.
   */
-  this(string hostname, ushort port, ushort priority, ushort weight)
+  this(string hostname, ushort port, ushort priority, ushort weight) nothrow
   {
     GSrvTarget* _cretval;
     const(char)* _hostname = hostname.toCString(No.Alloc);
@@ -85,7 +85,7 @@ class SrvTarget : gobject.boxed.Boxed
       Copies target
       Returns: a copy of target
   */
-  gio.srv_target.SrvTarget copy()
+  gio.srv_target.SrvTarget copy() nothrow
   {
     GSrvTarget* _cretval;
     _cretval = g_srv_target_copy(cast(GSrvTarget*)this._cPtr);
@@ -100,7 +100,7 @@ class SrvTarget : gobject.boxed.Boxed
       [glib.global.hostnameToUnicode] to convert it if it does.)
       Returns: target's hostname
   */
-  string getHostname()
+  string getHostname() nothrow
   {
     const(char)* _cretval;
     _cretval = g_srv_target_get_hostname(cast(GSrvTarget*)this._cPtr);
@@ -112,7 +112,7 @@ class SrvTarget : gobject.boxed.Boxed
       Gets target's port
       Returns: target's port
   */
-  ushort getPort()
+  ushort getPort() nothrow
   {
     ushort _retval;
     _retval = g_srv_target_get_port(cast(GSrvTarget*)this._cPtr);
@@ -125,7 +125,7 @@ class SrvTarget : gobject.boxed.Boxed
       RFC 2782.
       Returns: target's priority
   */
-  ushort getPriority()
+  ushort getPriority() nothrow
   {
     ushort _retval;
     _retval = g_srv_target_get_priority(cast(GSrvTarget*)this._cPtr);
@@ -138,7 +138,7 @@ class SrvTarget : gobject.boxed.Boxed
       RFC 2782.
       Returns: target's weight
   */
-  ushort getWeight()
+  ushort getWeight() nothrow
   {
     ushort _retval;
     _retval = g_srv_target_get_weight(cast(GSrvTarget*)this._cPtr);

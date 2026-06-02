@@ -35,26 +35,26 @@ class Window : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_window_get_type != &gidSymbolNotFound ? gdk_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Window self()
+  override Window self() nothrow
   {
     return this;
   }
@@ -63,7 +63,7 @@ class Window : gobject.object.ObjectWrap
       Get builder for [gdk.window.Window]
       Returns: New builder object
   */
-  static WindowGidBuilder builder()
+  static WindowGidBuilder builder() nothrow
   {
     return new WindowGidBuilder;
   }
@@ -73,7 +73,7 @@ class Window : gobject.object.ObjectWrap
       Returns: The mouse pointer for a #GdkWindow. See [gdk.window.Window.setCursor] and
         [gdk.window.Window.getCursor] for details.
   */
-  @property gdk.cursor.Cursor cursor()
+  @property gdk.cursor.Cursor cursor() nothrow
   {
     return getCursor();
   }
@@ -84,7 +84,7 @@ class Window : gobject.object.ObjectWrap
         propval = The mouse pointer for a #GdkWindow. See [gdk.window.Window.setCursor] and
           [gdk.window.Window.getCursor] for details.
   */
-  @property void cursor(gdk.cursor.Cursor propval)
+  @property void cursor(gdk.cursor.Cursor propval) nothrow
   {
     setCursor(propval);
   }
@@ -103,7 +103,7 @@ class Window : gobject.object.ObjectWrap
             fields in attributes are valid
       Returns: the new #GdkWindow
   */
-  this(gdk.window.Window parent, gdk.window_attr.WindowAttr attributes, gdk.types.WindowAttributesType attributesMask)
+  this(gdk.window.Window parent, gdk.window_attr.WindowAttr attributes, gdk.types.WindowAttributesType attributesMask) nothrow
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_new(parent ? cast(GdkWindow*)parent._cPtr(No.Dup) : null, attributes ? cast(GdkWindowAttr*)attributes._cPtr : null, attributesMask);
@@ -127,7 +127,7 @@ class Window : gobject.object.ObjectWrap
   
       Deprecated: Use [gdk.device.Device.getWindowAtPosition] instead.
   */
-  static gdk.window.Window atPointer(out int winX, out int winY)
+  static gdk.window.Window atPointer(out int winX, out int winY) nothrow
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_at_pointer(cast(int*)&winX, cast(int*)&winY);
@@ -147,7 +147,7 @@ class Window : gobject.object.ObjectWrap
         newWidth = location to store resulting width
         newHeight = location to store resulting height
   */
-  static void constrainSize(gdk.types.Geometry geometry, gdk.types.WindowHints flags, int width, int height, out int newWidth, out int newHeight)
+  static void constrainSize(gdk.types.Geometry geometry, gdk.types.WindowHints flags, int width, int height, out int newWidth, out int newHeight) nothrow
   {
     gdk_window_constrain_size(&geometry, flags, width, height, cast(int*)&newWidth, cast(int*)&newHeight);
   }
@@ -156,7 +156,7 @@ class Window : gobject.object.ObjectWrap
       Calls [gdk.window.Window.processUpdates] for all windows (see #GdkWindow)
       in the application.
   */
-  static void processAllUpdates()
+  static void processAllUpdates() nothrow
   {
     gdk_window_process_all_updates();
   }
@@ -185,7 +185,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         setting = true to turn on update debugging
   */
-  static void setDebugUpdates(bool setting)
+  static void setDebugUpdates(bool setting) nothrow
   {
     gdk_window_set_debug_updates(setting);
   }
@@ -195,7 +195,7 @@ class Window : gobject.object.ObjectWrap
       display, if supported. Otherwise, emits a short beep on
       the display just as [gdk.display.Display.beep].
   */
-  void beep()
+  void beep() nothrow
   {
     gdk_window_beep(cast(GdkWindow*)this._cPtr);
   }
@@ -235,7 +235,7 @@ class Window : gobject.object.ObjectWrap
           used to draw the contents of the window; the returned context is owned
           by GDK.
   */
-  gdk.drawing_context.DrawingContext beginDrawFrame(cairo.region.Region region)
+  gdk.drawing_context.DrawingContext beginDrawFrame(cairo.region.Region region) nothrow
   {
     GdkDrawingContext* _cretval;
     _cretval = gdk_window_begin_draw_frame(cast(GdkWindow*)this._cPtr, region ? cast(const(cairo_region_t)*)region._cPtr(No.Dup) : null);
@@ -256,7 +256,7 @@ class Window : gobject.object.ObjectWrap
         rootY = root window Y coordinate of mouse click that began the drag
         timestamp = timestamp of mouse click that began the drag
   */
-  void beginMoveDrag(int button, int rootX, int rootY, uint timestamp)
+  void beginMoveDrag(int button, int rootX, int rootY, uint timestamp) nothrow
   {
     gdk_window_begin_move_drag(cast(GdkWindow*)this._cPtr, button, rootX, rootY, timestamp);
   }
@@ -275,7 +275,7 @@ class Window : gobject.object.ObjectWrap
         rootY = root window Y coordinate of mouse click that began the drag
         timestamp = timestamp of mouse click that began the drag
   */
-  void beginMoveDragForDevice(gdk.device.Device device, int button, int rootX, int rootY, uint timestamp)
+  void beginMoveDragForDevice(gdk.device.Device device, int button, int rootX, int rootY, uint timestamp) nothrow
   {
     gdk_window_begin_move_drag_for_device(cast(GdkWindow*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, button, rootX, rootY, timestamp);
   }
@@ -290,7 +290,7 @@ class Window : gobject.object.ObjectWrap
   
       Deprecated: Use [gdk.window.Window.beginDrawFrame] instead
   */
-  void beginPaintRect(gdk.rectangle.Rectangle rectangle)
+  void beginPaintRect(gdk.rectangle.Rectangle rectangle) nothrow
   {
     gdk_window_begin_paint_rect(cast(GdkWindow*)this._cPtr, cast(const(GdkRectangle)*)&rectangle);
   }
@@ -340,7 +340,7 @@ class Window : gobject.object.ObjectWrap
   
       Deprecated: Use [gdk.window.Window.beginDrawFrame] instead
   */
-  void beginPaintRegion(cairo.region.Region region)
+  void beginPaintRegion(cairo.region.Region region) nothrow
   {
     gdk_window_begin_paint_region(cast(GdkWindow*)this._cPtr, region ? cast(const(cairo_region_t)*)region._cPtr(No.Dup) : null);
   }
@@ -359,7 +359,7 @@ class Window : gobject.object.ObjectWrap
         rootY = root window Y coordinate of mouse click that began the drag
         timestamp = timestamp of mouse click that began the drag (use [gdk.event.Event.getTime])
   */
-  void beginResizeDrag(gdk.types.WindowEdge edge, int button, int rootX, int rootY, uint timestamp)
+  void beginResizeDrag(gdk.types.WindowEdge edge, int button, int rootX, int rootY, uint timestamp) nothrow
   {
     gdk_window_begin_resize_drag(cast(GdkWindow*)this._cPtr, edge, button, rootX, rootY, timestamp);
   }
@@ -380,7 +380,7 @@ class Window : gobject.object.ObjectWrap
         rootY = root window Y coordinate of mouse click that began the drag
         timestamp = timestamp of mouse click that began the drag (use [gdk.event.Event.getTime])
   */
-  void beginResizeDragForDevice(gdk.types.WindowEdge edge, gdk.device.Device device, int button, int rootX, int rootY, uint timestamp)
+  void beginResizeDragForDevice(gdk.types.WindowEdge edge, gdk.device.Device device, int button, int rootX, int rootY, uint timestamp) nothrow
   {
     gdk_window_begin_resize_drag_for_device(cast(GdkWindow*)this._cPtr, edge, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, button, rootX, rootY, timestamp);
   }
@@ -390,7 +390,7 @@ class Window : gobject.object.ObjectWrap
   
       Deprecated: this function is no longer needed
   */
-  void configureFinished()
+  void configureFinished() nothrow
   {
     gdk_window_configure_finished(cast(GdkWindow*)this._cPtr);
   }
@@ -419,7 +419,7 @@ class Window : gobject.object.ObjectWrap
         x = return location for X coordinate in child’s coordinate system
         y = return location for Y coordinate in child’s coordinate system
   */
-  void coordsFromParent(double parentX, double parentY, out double x, out double y)
+  void coordsFromParent(double parentX, double parentY, out double x, out double y) nothrow
   {
     gdk_window_coords_from_parent(cast(GdkWindow*)this._cPtr, parentX, parentY, cast(double*)&x, cast(double*)&y);
   }
@@ -450,7 +450,7 @@ class Window : gobject.object.ObjectWrap
         parentY = return location for Y coordinate
           in parent’s coordinate system, or null
   */
-  void coordsToParent(double x, double y, out double parentX, out double parentY)
+  void coordsToParent(double x, double y, out double parentX, out double parentY) nothrow
   {
     gdk_window_coords_to_parent(cast(GdkWindow*)this._cPtr, x, y, cast(double*)&parentX, cast(double*)&parentY);
   }
@@ -522,7 +522,7 @@ class Window : gobject.object.ObjectWrap
         pointer to a “nil” surface if other is already in an error state
         or any other error occurs.
   */
-  cairo.surface.Surface createSimilarImageSurface(cairo.types.Format format, int width, int height, int scale)
+  cairo.surface.Surface createSimilarImageSurface(cairo.types.Format format, int width, int height, int scale) nothrow
   {
     cairo_surface_t* _cretval;
     _cretval = gdk_window_create_similar_image_surface(cast(GdkWindow*)this._cPtr, format, width, height, scale);
@@ -553,7 +553,7 @@ class Window : gobject.object.ObjectWrap
         pointer to a “nil” surface if other is already in an error state
         or any other error occurs.
   */
-  cairo.surface.Surface createSimilarSurface(cairo.types.Content content, int width, int height)
+  cairo.surface.Surface createSimilarSurface(cairo.types.Content content, int width, int height) nothrow
   {
     cairo_surface_t* _cretval;
     _cretval = gdk_window_create_similar_surface(cast(GdkWindow*)this._cPtr, content, width, height);
@@ -568,7 +568,7 @@ class Window : gobject.object.ObjectWrap
       you probably want to use [gtk.window.Window.presentWithTime], which raises the window, focuses it,
       unminimizes it, and puts it on the current desktop.
   */
-  void deiconify()
+  void deiconify() nothrow
   {
     gdk_window_deiconify(cast(GdkWindow*)this._cPtr);
   }
@@ -581,13 +581,13 @@ class Window : gobject.object.ObjectWrap
       Note that a window will not be destroyed automatically when its reference count
       reaches zero. You must call this function yourself before that happens.
   */
-  void destroy()
+  void destroy() nothrow
   {
     gdk_window_destroy(cast(GdkWindow*)this._cPtr);
   }
 
   /** */
-  void destroyNotify()
+  void destroyNotify() nothrow
   {
     gdk_window_destroy_notify(cast(GdkWindow*)this._cPtr);
   }
@@ -597,7 +597,7 @@ class Window : gobject.object.ObjectWrap
   
       Deprecated: this function is no longer needed
   */
-  void enableSynchronizedConfigure()
+  void enableSynchronizedConfigure() nothrow
   {
     gdk_window_enable_synchronized_configure(cast(GdkWindow*)this._cPtr);
   }
@@ -614,7 +614,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         context = the #GdkDrawingContext created by [gdk.window.Window.beginDrawFrame]
   */
-  void endDrawFrame(gdk.drawing_context.DrawingContext context)
+  void endDrawFrame(gdk.drawing_context.DrawingContext context) nothrow
   {
     gdk_window_end_draw_frame(cast(GdkWindow*)this._cPtr, context ? cast(GdkDrawingContext*)context._cPtr(No.Dup) : null);
   }
@@ -629,7 +629,7 @@ class Window : gobject.object.ObjectWrap
       It is an error to call this function without a matching
       [gdk.window.Window.beginPaintRegion] first.
   */
-  void endPaint()
+  void endPaint() nothrow
   {
     gdk_window_end_paint(cast(GdkWindow*)this._cPtr);
   }
@@ -643,7 +643,7 @@ class Window : gobject.object.ObjectWrap
       Some backends may not support native child windows.
       Returns: true if the window has a native window, false otherwise
   */
-  bool ensureNative()
+  bool ensureNative() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_window_ensure_native(cast(GdkWindow*)this._cPtr);
@@ -653,7 +653,7 @@ class Window : gobject.object.ObjectWrap
   /**
       This function does nothing.
   */
-  void flush()
+  void flush() nothrow
   {
     gdk_window_flush(cast(GdkWindow*)this._cPtr);
   }
@@ -665,7 +665,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         timestamp = timestamp of the event triggering the window focus
   */
-  void focus(uint timestamp)
+  void focus(uint timestamp) nothrow
   {
     gdk_window_focus(cast(GdkWindow*)this._cPtr, timestamp);
   }
@@ -684,7 +684,7 @@ class Window : gobject.object.ObjectWrap
   
       Deprecated: This symbol was never meant to be used outside of GTK+
   */
-  void freezeToplevelUpdatesLibgtkOnly()
+  void freezeToplevelUpdatesLibgtkOnly() nothrow
   {
     gdk_window_freeze_toplevel_updates_libgtk_only(cast(GdkWindow*)this._cPtr);
   }
@@ -696,7 +696,7 @@ class Window : gobject.object.ObjectWrap
       has been called more than once, [gdk.window.Window.thawUpdates] must be called
       an equal number of times to begin processing exposes.
   */
-  void freezeUpdates()
+  void freezeUpdates() nothrow
   {
     gdk_window_freeze_updates(cast(GdkWindow*)this._cPtr);
   }
@@ -716,7 +716,7 @@ class Window : gobject.object.ObjectWrap
       most standard window managers, and GDK makes a best effort to get
       it to happen.
   */
-  void fullscreen()
+  void fullscreen() nothrow
   {
     gdk_window_fullscreen(cast(GdkWindow*)this._cPtr);
   }
@@ -732,7 +732,7 @@ class Window : gobject.object.ObjectWrap
   
       Version: UNRELEASED
   */
-  void fullscreenOnMonitor(int monitor)
+  void fullscreenOnMonitor(int monitor) nothrow
   {
     gdk_window_fullscreen_on_monitor(cast(GdkWindow*)this._cPtr, monitor);
   }
@@ -742,7 +742,7 @@ class Window : gobject.object.ObjectWrap
       offscreen window has changed. This is necessary for GDK to keep
       track of which offscreen window the pointer is in.
   */
-  void geometryChanged()
+  void geometryChanged() nothrow
   {
     gdk_window_geometry_changed(cast(GdkWindow*)this._cPtr);
   }
@@ -752,7 +752,7 @@ class Window : gobject.object.ObjectWrap
       the window does not want to receive input focus.
       Returns: whether or not the window should receive input focus.
   */
-  bool getAcceptFocus()
+  bool getAcceptFocus() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_window_get_accept_focus(cast(GdkWindow*)this._cPtr);
@@ -766,7 +766,7 @@ class Window : gobject.object.ObjectWrap
   
       Deprecated: Don't use this function
   */
-  cairo.pattern.Pattern getBackgroundPattern()
+  cairo.pattern.Pattern getBackgroundPattern() nothrow
   {
     cairo_pattern_t* _cretval;
     _cretval = gdk_window_get_background_pattern(cast(GdkWindow*)this._cPtr);
@@ -784,7 +784,7 @@ class Window : gobject.object.ObjectWrap
       list need not be.
       Returns: list of child windows inside window
   */
-  gdk.window.Window[] getChildren()
+  gdk.window.Window[] getChildren() nothrow
   {
     GList* _cretval;
     _cretval = gdk_window_get_children(cast(GdkWindow*)this._cPtr);
@@ -806,7 +806,7 @@ class Window : gobject.object.ObjectWrap
         userData = user data to look for
       Returns: list of child windows inside window
   */
-  gdk.window.Window[] getChildrenWithUserData(void* userData = null)
+  gdk.window.Window[] getChildrenWithUserData(void* userData = null) nothrow
   {
     GList* _cretval;
     _cretval = gdk_window_get_children_with_user_data(cast(GdkWindow*)this._cPtr, userData);
@@ -823,7 +823,7 @@ class Window : gobject.object.ObjectWrap
       Returns: a #cairo_region_t. This must be freed with [cairo.region.Region.destroy]
                  when you are done.
   */
-  cairo.region.Region getClipRegion()
+  cairo.region.Region getClipRegion() nothrow
   {
     cairo_region_t* _cretval;
     _cretval = gdk_window_get_clip_region(cast(GdkWindow*)this._cPtr);
@@ -840,7 +840,7 @@ class Window : gobject.object.ObjectWrap
       Deprecated: Compositing is an outdated technology that
           only ever worked on X11.
   */
-  bool getComposited()
+  bool getComposited() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_window_get_composited(cast(GdkWindow*)this._cPtr);
@@ -857,7 +857,7 @@ class Window : gobject.object.ObjectWrap
           unreferenced directly. Use [gdk.window.Window.setCursor] to unset the
           cursor of the window
   */
-  gdk.cursor.Cursor getCursor()
+  gdk.cursor.Cursor getCursor() nothrow
   {
     GdkCursor* _cretval;
     _cretval = gdk_window_get_cursor(cast(GdkWindow*)this._cPtr);
@@ -873,7 +873,7 @@ class Window : gobject.object.ObjectWrap
         decorations = The window decorations will be written here
       Returns: true if the window has decorations set, false otherwise.
   */
-  bool getDecorations(out gdk.types.WMDecoration decorations)
+  bool getDecorations(out gdk.types.WMDecoration decorations) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_window_get_decorations(cast(GdkWindow*)this._cPtr, &decorations);
@@ -893,7 +893,7 @@ class Window : gobject.object.ObjectWrap
           unreferenced directly. Use [gdk.window.Window.setCursor] to unset the
           cursor of the window
   */
-  gdk.cursor.Cursor getDeviceCursor(gdk.device.Device device)
+  gdk.cursor.Cursor getDeviceCursor(gdk.device.Device device) nothrow
   {
     GdkCursor* _cretval;
     _cretval = gdk_window_get_device_cursor(cast(GdkWindow*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
@@ -908,7 +908,7 @@ class Window : gobject.object.ObjectWrap
         device = a #GdkDevice.
       Returns: device event mask for window
   */
-  gdk.types.EventMask getDeviceEvents(gdk.device.Device device)
+  gdk.types.EventMask getDeviceEvents(gdk.device.Device device) nothrow
   {
     GdkEventMask _cretval;
     _cretval = gdk_window_get_device_events(cast(GdkWindow*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
@@ -932,7 +932,7 @@ class Window : gobject.object.ObjectWrap
         (as with [gdk.device.Device.getWindowAtPosition]), or null if the
         window is not known to GDK.
   */
-  gdk.window.Window getDevicePosition(gdk.device.Device device, out int x, out int y, out gdk.types.ModifierType mask)
+  gdk.window.Window getDevicePosition(gdk.device.Device device, out int x, out int y, out gdk.types.ModifierType mask) nothrow
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_device_position(cast(GdkWindow*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, cast(int*)&x, cast(int*)&y, &mask);
@@ -954,7 +954,7 @@ class Window : gobject.object.ObjectWrap
         (as with [gdk.device.Device.getWindowAtPosition]), or null if the
         window is not known to GDK.
   */
-  gdk.window.Window getDevicePositionDouble(gdk.device.Device device, out double x, out double y, out gdk.types.ModifierType mask)
+  gdk.window.Window getDevicePositionDouble(gdk.device.Device device, out double x, out double y, out gdk.types.ModifierType mask) nothrow
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_device_position_double(cast(GdkWindow*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y, &mask);
@@ -966,7 +966,7 @@ class Window : gobject.object.ObjectWrap
       Gets the #GdkDisplay associated with a #GdkWindow.
       Returns: the #GdkDisplay associated with window
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gdk_window_get_display(cast(GdkWindow*)this._cPtr);
@@ -983,7 +983,7 @@ class Window : gobject.object.ObjectWrap
              or null if window does not support Drag and Drop.
       Returns: the supported DND protocol.
   */
-  gdk.types.DragProtocol getDragProtocol(out gdk.window.Window target)
+  gdk.types.DragProtocol getDragProtocol(out gdk.window.Window target) nothrow
   {
     GdkDragProtocol _cretval;
     GdkWindow* _target;
@@ -1001,7 +1001,7 @@ class Window : gobject.object.ObjectWrap
       See also: [gdk.global.offscreenWindowGetEmbedder]
       Returns: effective parent of window
   */
-  gdk.window.Window getEffectiveParent()
+  gdk.window.Window getEffectiveParent() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_effective_parent(cast(GdkWindow*)this._cPtr);
@@ -1018,7 +1018,7 @@ class Window : gobject.object.ObjectWrap
       See also: [gdk.global.offscreenWindowGetEmbedder]
       Returns: the effective toplevel window containing window
   */
-  gdk.window.Window getEffectiveToplevel()
+  gdk.window.Window getEffectiveToplevel() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_effective_toplevel(cast(GdkWindow*)this._cPtr);
@@ -1030,7 +1030,7 @@ class Window : gobject.object.ObjectWrap
       Get the current event compression setting for this window.
       Returns: true if motion events will be compressed
   */
-  bool getEventCompression()
+  bool getEventCompression() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_window_get_event_compression(cast(GdkWindow*)this._cPtr);
@@ -1042,7 +1042,7 @@ class Window : gobject.object.ObjectWrap
       [gdk.window.Window.setEvents].
       Returns: event mask for window
   */
-  gdk.types.EventMask getEvents()
+  gdk.types.EventMask getEvents() nothrow
   {
     GdkEventMask _cretval;
     _cretval = gdk_window_get_events(cast(GdkWindow*)this._cPtr);
@@ -1056,7 +1056,7 @@ class Window : gobject.object.ObjectWrap
       Returns: whether or not the window wants to receive input focus when
         it is mapped.
   */
-  bool getFocusOnMap()
+  bool getFocusOnMap() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_window_get_focus_on_map(cast(GdkWindow*)this._cPtr);
@@ -1069,7 +1069,7 @@ class Window : gobject.object.ObjectWrap
       window.
       Returns: the frame clock
   */
-  gdk.frame_clock.FrameClock getFrameClock()
+  gdk.frame_clock.FrameClock getFrameClock() nothrow
   {
     GdkFrameClock* _cretval;
     _cretval = gdk_window_get_frame_clock(cast(GdkWindow*)this._cPtr);
@@ -1086,7 +1086,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         rect = rectangle to fill with bounding box of the window frame
   */
-  void getFrameExtents(out gdk.rectangle.Rectangle rect)
+  void getFrameExtents(out gdk.rectangle.Rectangle rect) nothrow
   {
     gdk_window_get_frame_extents(cast(GdkWindow*)this._cPtr, cast(GdkRectangle*)&rect);
   }
@@ -1095,7 +1095,7 @@ class Window : gobject.object.ObjectWrap
       Obtains the #GdkFullscreenMode of the window.
       Returns: The #GdkFullscreenMode applied to the window when fullscreen.
   */
-  gdk.types.FullscreenMode getFullscreenMode()
+  gdk.types.FullscreenMode getFullscreenMode() nothrow
   {
     GdkFullscreenMode _cretval;
     _cretval = gdk_window_get_fullscreen_mode(cast(GdkWindow*)this._cPtr);
@@ -1131,7 +1131,7 @@ class Window : gobject.object.ObjectWrap
         width = return location for width of window
         height = return location for height of window
   */
-  void getGeometry(out int x, out int y, out int width, out int height)
+  void getGeometry(out int x, out int y, out int width, out int height) nothrow
   {
     gdk_window_get_geometry(cast(GdkWindow*)this._cPtr, cast(int*)&x, cast(int*)&y, cast(int*)&width, cast(int*)&height);
   }
@@ -1140,7 +1140,7 @@ class Window : gobject.object.ObjectWrap
       Returns the group leader window for window. See [gdk.window.Window.setGroup].
       Returns: the group leader window for window
   */
-  gdk.window.Window getGroup()
+  gdk.window.Window getGroup() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_group(cast(GdkWindow*)this._cPtr);
@@ -1156,7 +1156,7 @@ class Window : gobject.object.ObjectWrap
       size on the X server.
       Returns: The height of window
   */
-  int getHeight()
+  int getHeight() nothrow
   {
     int _retval;
     _retval = gdk_window_get_height(cast(GdkWindow*)this._cPtr);
@@ -1168,7 +1168,7 @@ class Window : gobject.object.ObjectWrap
       has modal behaviour.
       Returns: whether or not the window has the modal hint set.
   */
-  bool getModalHint()
+  bool getModalHint() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_window_get_modal_hint(cast(GdkWindow*)this._cPtr);
@@ -1186,7 +1186,7 @@ class Window : gobject.object.ObjectWrap
         y = return location for Y coordinate
       Returns: not meaningful, ignore
   */
-  int getOrigin(out int x, out int y)
+  int getOrigin(out int x, out int y) nothrow
   {
     int _retval;
     _retval = gdk_window_get_origin(cast(GdkWindow*)this._cPtr, cast(int*)&x, cast(int*)&y);
@@ -1207,7 +1207,7 @@ class Window : gobject.object.ObjectWrap
       there are offscreen windows in the hierarchy.
       Returns: parent of window
   */
-  gdk.window.Window getParent()
+  gdk.window.Window getParent() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_parent(cast(GdkWindow*)this._cPtr);
@@ -1222,7 +1222,7 @@ class Window : gobject.object.ObjectWrap
       See [gdk.window.Window.setPassThrough] for details
       Returns: 
   */
-  bool getPassThrough()
+  bool getPassThrough() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_window_get_pass_through(cast(GdkWindow*)this._cPtr);
@@ -1247,7 +1247,7 @@ class Window : gobject.object.ObjectWrap
   
       Deprecated: Use [gdk.window.Window.getDevicePosition] instead.
   */
-  gdk.window.Window getPointer(out int x, out int y, out gdk.types.ModifierType mask)
+  gdk.window.Window getPointer(out int x, out int y, out gdk.types.ModifierType mask) nothrow
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_pointer(cast(GdkWindow*)this._cPtr, cast(int*)&x, cast(int*)&y, &mask);
@@ -1268,7 +1268,7 @@ class Window : gobject.object.ObjectWrap
         x = X coordinate of window
         y = Y coordinate of window
   */
-  void getPosition(out int x, out int y)
+  void getPosition(out int x, out int y) nothrow
   {
     gdk_window_get_position(cast(GdkWindow*)this._cPtr, cast(int*)&x, cast(int*)&y);
   }
@@ -1285,7 +1285,7 @@ class Window : gobject.object.ObjectWrap
         rootX = return location for X coordinate
         rootY = return location for Y coordinate
   */
-  void getRootCoords(int x, int y, out int rootX, out int rootY)
+  void getRootCoords(int x, int y, out int rootX, out int rootY) nothrow
   {
     gdk_window_get_root_coords(cast(GdkWindow*)this._cPtr, x, y, cast(int*)&rootX, cast(int*)&rootY);
   }
@@ -1298,7 +1298,7 @@ class Window : gobject.object.ObjectWrap
         x = return location for X position of window frame
         y = return location for Y position of window frame
   */
-  void getRootOrigin(out int x, out int y)
+  void getRootOrigin(out int x, out int y) nothrow
   {
     gdk_window_get_root_origin(cast(GdkWindow*)this._cPtr, cast(int*)&x, cast(int*)&y);
   }
@@ -1318,7 +1318,7 @@ class Window : gobject.object.ObjectWrap
       a configure event will be sent to the toplevel window.
       Returns: the scale factor
   */
-  int getScaleFactor()
+  int getScaleFactor() nothrow
   {
     int _retval;
     _retval = gdk_window_get_scale_factor(cast(GdkWindow*)this._cPtr);
@@ -1329,7 +1329,7 @@ class Window : gobject.object.ObjectWrap
       Gets the #GdkScreen associated with a #GdkWindow.
       Returns: the #GdkScreen associated with window
   */
-  gdk.screen.Screen getScreen()
+  gdk.screen.Screen getScreen() nothrow
   {
     GdkScreen* _cretval;
     _cretval = gdk_window_get_screen(cast(GdkWindow*)this._cPtr);
@@ -1345,7 +1345,7 @@ class Window : gobject.object.ObjectWrap
         source = a #GdkInputSource to define the source class.
       Returns: source event mask for window
   */
-  gdk.types.EventMask getSourceEvents(gdk.types.InputSource source)
+  gdk.types.EventMask getSourceEvents(gdk.types.InputSource source) nothrow
   {
     GdkEventMask _cretval;
     _cretval = gdk_window_get_source_events(cast(GdkWindow*)this._cPtr, source);
@@ -1358,7 +1358,7 @@ class Window : gobject.object.ObjectWrap
       from the #GdkWindowState enumeration.
       Returns: window state bitfield
   */
-  gdk.types.WindowState getState()
+  gdk.types.WindowState getState() nothrow
   {
     GdkWindowState _cretval;
     _cretval = gdk_window_get_state(cast(GdkWindow*)this._cPtr);
@@ -1371,7 +1371,7 @@ class Window : gobject.object.ObjectWrap
       devices.
       Returns: true if the window handles multidevice features.
   */
-  bool getSupportMultidevice()
+  bool getSupportMultidevice() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_window_get_support_multidevice(cast(GdkWindow*)this._cPtr);
@@ -1391,7 +1391,7 @@ class Window : gobject.object.ObjectWrap
       if there are offscreen windows in the hierarchy.
       Returns: the toplevel window containing window
   */
-  gdk.window.Window getToplevel()
+  gdk.window.Window getToplevel() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_toplevel(cast(GdkWindow*)this._cPtr);
@@ -1403,7 +1403,7 @@ class Window : gobject.object.ObjectWrap
       This function returns the type hint set for a window.
       Returns: The type hint set for window
   */
-  gdk.types.WindowTypeHint getTypeHint()
+  gdk.types.WindowTypeHint getTypeHint() nothrow
   {
     GdkWindowTypeHint _cretval;
     _cretval = gdk_window_get_type_hint(cast(GdkWindow*)this._cPtr);
@@ -1420,7 +1420,7 @@ class Window : gobject.object.ObjectWrap
       calling [cairo.region.Region.destroy] on the returned region if it’s non-null.
       Returns: the update area for window
   */
-  cairo.region.Region getUpdateArea()
+  cairo.region.Region getUpdateArea() nothrow
   {
     cairo_region_t* _cretval;
     _cretval = gdk_window_get_update_area(cast(GdkWindow*)this._cPtr);
@@ -1435,7 +1435,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         data = return location for user data
   */
-  void getUserData(out void* data)
+  void getUserData(out void* data) nothrow
   {
     gdk_window_get_user_data(cast(GdkWindow*)this._cPtr, cast(void**)&data);
   }
@@ -1448,7 +1448,7 @@ class Window : gobject.object.ObjectWrap
       Returns: a #cairo_region_t. This must be freed with [cairo.region.Region.destroy]
                  when you are done.
   */
-  cairo.region.Region getVisibleRegion()
+  cairo.region.Region getVisibleRegion() nothrow
   {
     cairo_region_t* _cretval;
     _cretval = gdk_window_get_visible_region(cast(GdkWindow*)this._cPtr);
@@ -1460,7 +1460,7 @@ class Window : gobject.object.ObjectWrap
       Gets the #GdkVisual describing the pixel format of window.
       Returns: a #GdkVisual
   */
-  gdk.visual.Visual getVisual()
+  gdk.visual.Visual getVisual() nothrow
   {
     GdkVisual* _cretval;
     _cretval = gdk_window_get_visual(cast(GdkWindow*)this._cPtr);
@@ -1476,7 +1476,7 @@ class Window : gobject.object.ObjectWrap
       size on the X server.
       Returns: The width of window
   */
-  int getWidth()
+  int getWidth() nothrow
   {
     int _retval;
     _retval = gdk_window_get_width(cast(GdkWindow*)this._cPtr);
@@ -1487,7 +1487,7 @@ class Window : gobject.object.ObjectWrap
       Gets the type of the window. See #GdkWindowType.
       Returns: type of window
   */
-  gdk.types.WindowType getWindowType()
+  gdk.types.WindowType getWindowType() nothrow
   {
     GdkWindowType _cretval;
     _cretval = gdk_window_get_window_type(cast(GdkWindow*)this._cPtr);
@@ -1500,7 +1500,7 @@ class Window : gobject.object.ObjectWrap
       you can use [gdk.window.Window.ensureNative] if a native window is needed.
       Returns: true if the window has a native window, false otherwise.
   */
-  bool hasNative()
+  bool hasNative() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_window_has_native(cast(GdkWindow*)this._cPtr);
@@ -1513,7 +1513,7 @@ class Window : gobject.object.ObjectWrap
       they won’t be displayed. Normally done automatically as
       part of [gtk.widget.Widget.hide].
   */
-  void hide()
+  void hide() nothrow
   {
     gdk_window_hide(cast(GdkWindow*)this._cPtr);
   }
@@ -1525,7 +1525,7 @@ class Window : gobject.object.ObjectWrap
       
       This function only makes sense when window is a toplevel window.
   */
-  void iconify()
+  void iconify() nothrow
   {
     gdk_window_iconify(cast(GdkWindow*)this._cPtr);
   }
@@ -1553,7 +1553,7 @@ class Window : gobject.object.ObjectWrap
         offsetX = X position of shape_region in window coordinates
         offsetY = Y position of shape_region in window coordinates
   */
-  void inputShapeCombineRegion(cairo.region.Region shapeRegion, int offsetX, int offsetY)
+  void inputShapeCombineRegion(cairo.region.Region shapeRegion, int offsetX, int offsetY) nothrow
   {
     gdk_window_input_shape_combine_region(cast(GdkWindow*)this._cPtr, shapeRegion ? cast(const(cairo_region_t)*)shapeRegion._cPtr(No.Dup) : null, offsetX, offsetY);
   }
@@ -1581,14 +1581,21 @@ class Window : gobject.object.ObjectWrap
         childFunc = function to use to decide if to
               recurse to a child, null means never recurse.
   */
-  void invalidateMaybeRecurse(cairo.region.Region region, gdk.types.WindowChildFunc childFunc = null)
+  void invalidateMaybeRecurse(cairo.region.Region region, gdk.types.WindowChildFunc childFunc = null) nothrow
   {
-    extern(C) gboolean _childFuncCallback(GdkWindow* window, void* userData)
+    extern(C) gboolean _childFuncCallback(GdkWindow* window, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gdk.types.WindowChildFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(void*)window, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(void*)window, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.types.WindowChildFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -1608,7 +1615,7 @@ class Window : gobject.object.ObjectWrap
                window
         invalidateChildren = whether to also invalidate child windows
   */
-  void invalidateRect(gdk.rectangle.Rectangle rect, bool invalidateChildren)
+  void invalidateRect(gdk.rectangle.Rectangle rect, bool invalidateChildren) nothrow
   {
     gdk_window_invalidate_rect(cast(GdkWindow*)this._cPtr, cast(const(GdkRectangle)*)&rect, invalidateChildren);
   }
@@ -1636,7 +1643,7 @@ class Window : gobject.object.ObjectWrap
         region = a #cairo_region_t
         invalidateChildren = true to also invalidate child windows
   */
-  void invalidateRegion(cairo.region.Region region, bool invalidateChildren)
+  void invalidateRegion(cairo.region.Region region, bool invalidateChildren) nothrow
   {
     gdk_window_invalidate_region(cast(GdkWindow*)this._cPtr, region ? cast(const(cairo_region_t)*)region._cPtr(No.Dup) : null, invalidateChildren);
   }
@@ -1645,7 +1652,7 @@ class Window : gobject.object.ObjectWrap
       Check to see if a window is destroyed..
       Returns: true if the window is destroyed
   */
-  bool isDestroyed()
+  bool isDestroyed() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_window_is_destroyed(cast(GdkWindow*)this._cPtr);
@@ -1656,7 +1663,7 @@ class Window : gobject.object.ObjectWrap
       Determines whether or not the window is an input only window.
       Returns: true if window is input only
   */
-  bool isInputOnly()
+  bool isInputOnly() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_window_is_input_only(cast(GdkWindow*)this._cPtr);
@@ -1667,7 +1674,7 @@ class Window : gobject.object.ObjectWrap
       Determines whether or not the window is shaped.
       Returns: true if window is shaped
   */
-  bool isShaped()
+  bool isShaped() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_window_is_shaped(cast(GdkWindow*)this._cPtr);
@@ -1681,7 +1688,7 @@ class Window : gobject.object.ObjectWrap
       window.)
       Returns: true if the window is viewable
   */
-  bool isViewable()
+  bool isViewable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_window_is_viewable(cast(GdkWindow*)this._cPtr);
@@ -1693,7 +1700,7 @@ class Window : gobject.object.ObjectWrap
       [gdk.window.Window.showUnraised]).
       Returns: true if the window is mapped
   */
-  bool isVisible()
+  bool isVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_window_is_visible(cast(GdkWindow*)this._cPtr);
@@ -1712,7 +1719,7 @@ class Window : gobject.object.ObjectWrap
       Note that [gdk.window.Window.show] raises the window again, so don’t call this
       function before [gdk.window.Window.show]. (Try [gdk.window.Window.showUnraised].)
   */
-  void lower()
+  void lower() nothrow
   {
     gdk_window_lower(cast(GdkWindow*)this._cPtr);
   }
@@ -1730,7 +1737,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         cr = a #cairo_t
   */
-  void markPaintFromClip(cairo.context.Context cr)
+  void markPaintFromClip(cairo.context.Context cr) nothrow
   {
     gdk_window_mark_paint_from_clip(cast(GdkWindow*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null);
   }
@@ -1748,7 +1755,7 @@ class Window : gobject.object.ObjectWrap
       
       On Windows, reliably maximizes the window.
   */
-  void maximize()
+  void maximize() nothrow
   {
     gdk_window_maximize(cast(GdkWindow*)this._cPtr);
   }
@@ -1763,7 +1770,7 @@ class Window : gobject.object.ObjectWrap
       because it includes window’s input shape mask in the set of
       shapes to be merged.
   */
-  void mergeChildInputShapes()
+  void mergeChildInputShapes() nothrow
   {
     gdk_window_merge_child_input_shapes(cast(GdkWindow*)this._cPtr);
   }
@@ -1778,7 +1785,7 @@ class Window : gobject.object.ObjectWrap
       because it includes window’s shape mask in the set of shapes to
       be merged.
   */
-  void mergeChildShapes()
+  void mergeChildShapes() nothrow
   {
     gdk_window_merge_child_shapes(cast(GdkWindow*)this._cPtr);
   }
@@ -1797,7 +1804,7 @@ class Window : gobject.object.ObjectWrap
         x = X coordinate relative to window’s parent
         y = Y coordinate relative to window’s parent
   */
-  void move(int x, int y)
+  void move(int x, int y) nothrow
   {
     gdk_window_move(cast(GdkWindow*)this._cPtr, x, y);
   }
@@ -1814,7 +1821,7 @@ class Window : gobject.object.ObjectWrap
         dx = Amount to move in the X direction
         dy = Amount to move in the Y direction
   */
-  void moveRegion(cairo.region.Region region, int dx, int dy)
+  void moveRegion(cairo.region.Region region, int dx, int dy) nothrow
   {
     gdk_window_move_region(cast(GdkWindow*)this._cPtr, region ? cast(const(cairo_region_t)*)region._cPtr(No.Dup) : null, dx, dy);
   }
@@ -1831,7 +1838,7 @@ class Window : gobject.object.ObjectWrap
         width = new width
         height = new height
   */
-  void moveResize(int x, int y, int width, int height)
+  void moveResize(int x, int y, int width, int height) nothrow
   {
     gdk_window_move_resize(cast(GdkWindow*)this._cPtr, x, y, width, height);
   }
@@ -1862,7 +1869,7 @@ class Window : gobject.object.ObjectWrap
                            point
         rectAnchorDy = vertical offset to shift window, i.e. rect's anchor point
   */
-  void moveToRect(gdk.rectangle.Rectangle rect, gdk.types.Gravity rectAnchor, gdk.types.Gravity windowAnchor, gdk.types.AnchorHints anchorHints, int rectAnchorDx, int rectAnchorDy)
+  void moveToRect(gdk.rectangle.Rectangle rect, gdk.types.Gravity rectAnchor, gdk.types.Gravity windowAnchor, gdk.types.AnchorHints anchorHints, int rectAnchorDx, int rectAnchorDy) nothrow
   {
     gdk_window_move_to_rect(cast(GdkWindow*)this._cPtr, cast(const(GdkRectangle)*)&rect, rectAnchor, windowAnchor, anchorHints, rectAnchorDx, rectAnchorDy);
   }
@@ -1872,7 +1879,7 @@ class Window : gobject.object.ObjectWrap
       children, so the list does not need to be freed.
       Returns: a reference to the list of child windows in window
   */
-  gdk.window.Window[] peekChildren()
+  gdk.window.Window[] peekChildren() nothrow
   {
     GList* _cretval;
     _cretval = gdk_window_peek_children(cast(GdkWindow*)this._cPtr);
@@ -1893,7 +1900,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         updateChildren = whether to also process updates for child windows
   */
-  void processUpdates(bool updateChildren)
+  void processUpdates(bool updateChildren) nothrow
   {
     gdk_window_process_updates(cast(GdkWindow*)this._cPtr, updateChildren);
   }
@@ -1907,7 +1914,7 @@ class Window : gobject.object.ObjectWrap
       request to move the window in the Z-order, [gdk.window.Window.raise] only
       requests the restack, does not guarantee it.
   */
-  void raise()
+  void raise() nothrow
   {
     gdk_window_raise(cast(GdkWindow*)this._cPtr);
   }
@@ -1915,7 +1922,7 @@ class Window : gobject.object.ObjectWrap
   /**
       Registers a window as a potential drop destination.
   */
-  void registerDnd()
+  void registerDnd() nothrow
   {
     gdk_window_register_dnd(cast(GdkWindow*)this._cPtr);
   }
@@ -1929,7 +1936,7 @@ class Window : gobject.object.ObjectWrap
         x = X location inside the new parent
         y = Y location inside the new parent
   */
-  void reparent(gdk.window.Window newParent, int x, int y)
+  void reparent(gdk.window.Window newParent, int x, int y) nothrow
   {
     gdk_window_reparent(cast(GdkWindow*)this._cPtr, newParent ? cast(GdkWindow*)newParent._cPtr(No.Dup) : null, x, y);
   }
@@ -1948,7 +1955,7 @@ class Window : gobject.object.ObjectWrap
         width = new width of the window
         height = new height of the window
   */
-  void resize(int width, int height)
+  void resize(int width, int height) nothrow
   {
     gdk_window_resize(cast(GdkWindow*)this._cPtr, width, height);
   }
@@ -1969,7 +1976,7 @@ class Window : gobject.object.ObjectWrap
         sibling = a #GdkWindow that is a sibling of window, or null
         above = a boolean
   */
-  void restack(gdk.window.Window sibling, bool above)
+  void restack(gdk.window.Window sibling, bool above) nothrow
   {
     gdk_window_restack(cast(GdkWindow*)this._cPtr, sibling ? cast(GdkWindow*)sibling._cPtr(No.Dup) : null, above);
   }
@@ -1991,7 +1998,7 @@ class Window : gobject.object.ObjectWrap
         dx = Amount to scroll in the X direction
         dy = Amount to scroll in the Y direction
   */
-  void scroll(int dx, int dy)
+  void scroll(int dx, int dy) nothrow
   {
     gdk_window_scroll(cast(GdkWindow*)this._cPtr, dx, dy);
   }
@@ -2006,7 +2013,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         acceptFocus = true if the window should receive input focus
   */
-  void setAcceptFocus(bool acceptFocus)
+  void setAcceptFocus(bool acceptFocus) nothrow
   {
     gdk_window_set_accept_focus(cast(GdkWindow*)this._cPtr, acceptFocus);
   }
@@ -2024,7 +2031,7 @@ class Window : gobject.object.ObjectWrap
   
       Deprecated: Don't use this function
   */
-  void setBackground(gdk.color.Color color)
+  void setBackground(gdk.color.Color color) nothrow
   {
     gdk_window_set_background(cast(GdkWindow*)this._cPtr, cast(const(GdkColor)*)&color);
   }
@@ -2044,7 +2051,7 @@ class Window : gobject.object.ObjectWrap
   
       Deprecated: Don't use this function
   */
-  void setBackgroundPattern(cairo.pattern.Pattern pattern = null)
+  void setBackgroundPattern(cairo.pattern.Pattern pattern = null) nothrow
   {
     gdk_window_set_background_pattern(cast(GdkWindow*)this._cPtr, pattern ? cast(cairo_pattern_t*)pattern._cPtr(No.Dup) : null);
   }
@@ -2059,7 +2066,7 @@ class Window : gobject.object.ObjectWrap
   
       Deprecated: Don't use this function
   */
-  void setBackgroundRgba(gdk.rgba.RGBA rgba)
+  void setBackgroundRgba(gdk.rgba.RGBA rgba) nothrow
   {
     gdk_window_set_background_rgba(cast(GdkWindow*)this._cPtr, cast(const(GdkRGBA)*)&rgba);
   }
@@ -2070,7 +2077,7 @@ class Window : gobject.object.ObjectWrap
       itself. Contrast with [gdk.window.Window.mergeChildInputShapes] which includes
       the input shape mask of window in the masks to be merged.
   */
-  void setChildInputShapes()
+  void setChildInputShapes() nothrow
   {
     gdk_window_set_child_input_shapes(cast(GdkWindow*)this._cPtr);
   }
@@ -2081,7 +2088,7 @@ class Window : gobject.object.ObjectWrap
       itself. Contrast with [gdk.window.Window.mergeChildShapes] which includes
       the shape mask of window in the masks to be merged.
   */
-  void setChildShapes()
+  void setChildShapes() nothrow
   {
     gdk_window_set_child_shapes(cast(GdkWindow*)this._cPtr);
   }
@@ -2116,7 +2123,7 @@ class Window : gobject.object.ObjectWrap
       Deprecated: Compositing is an outdated technology that
           only ever worked on X11.
   */
-  void setComposited(bool composited)
+  void setComposited(bool composited) nothrow
   {
     gdk_window_set_composited(cast(GdkWindow*)this._cPtr, composited);
   }
@@ -2135,7 +2142,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         cursor = a cursor
   */
-  void setCursor(gdk.cursor.Cursor cursor = null)
+  void setCursor(gdk.cursor.Cursor cursor = null) nothrow
   {
     gdk_window_set_cursor(cast(GdkWindow*)this._cPtr, cursor ? cast(GdkCursor*)cursor._cPtr(No.Dup) : null);
   }
@@ -2159,7 +2166,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         decorations = decoration hint mask
   */
-  void setDecorations(gdk.types.WMDecoration decorations)
+  void setDecorations(gdk.types.WMDecoration decorations) nothrow
   {
     gdk_window_set_decorations(cast(GdkWindow*)this._cPtr, decorations);
   }
@@ -2176,7 +2183,7 @@ class Window : gobject.object.ObjectWrap
         device = a master, pointer #GdkDevice
         cursor = a #GdkCursor
   */
-  void setDeviceCursor(gdk.device.Device device, gdk.cursor.Cursor cursor)
+  void setDeviceCursor(gdk.device.Device device, gdk.cursor.Cursor cursor) nothrow
   {
     gdk_window_set_device_cursor(cast(GdkWindow*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, cursor ? cast(GdkCursor*)cursor._cPtr(No.Dup) : null);
   }
@@ -2194,7 +2201,7 @@ class Window : gobject.object.ObjectWrap
         device = #GdkDevice to enable events for.
         eventMask = event mask for window
   */
-  void setDeviceEvents(gdk.device.Device device, gdk.types.EventMask eventMask)
+  void setDeviceEvents(gdk.device.Device device, gdk.types.EventMask eventMask) nothrow
   {
     gdk_window_set_device_events(cast(GdkWindow*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, eventMask);
   }
@@ -2212,7 +2219,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         eventCompression = true if motion events should be compressed
   */
-  void setEventCompression(bool eventCompression)
+  void setEventCompression(bool eventCompression) nothrow
   {
     gdk_window_set_event_compression(cast(GdkWindow*)this._cPtr, eventCompression);
   }
@@ -2229,7 +2236,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         eventMask = event mask for window
   */
-  void setEvents(gdk.types.EventMask eventMask)
+  void setEvents(gdk.types.EventMask eventMask) nothrow
   {
     gdk_window_set_events(cast(GdkWindow*)this._cPtr, eventMask);
   }
@@ -2247,7 +2254,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         focusOnMap = true if the window should receive input focus when mapped
   */
-  void setFocusOnMap(bool focusOnMap)
+  void setFocusOnMap(bool focusOnMap) nothrow
   {
     gdk_window_set_focus_on_map(cast(GdkWindow*)this._cPtr, focusOnMap);
   }
@@ -2274,7 +2281,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         mode = fullscreen mode
   */
-  void setFullscreenMode(gdk.types.FullscreenMode mode)
+  void setFullscreenMode(gdk.types.FullscreenMode mode) nothrow
   {
     gdk_window_set_fullscreen_mode(cast(GdkWindow*)this._cPtr, mode);
   }
@@ -2297,7 +2304,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         functions = bitmask of operations to allow on window
   */
-  void setFunctions(gdk.types.WMFunction functions)
+  void setFunctions(gdk.types.WMFunction functions) nothrow
   {
     gdk_window_set_functions(cast(GdkWindow*)this._cPtr, functions);
   }
@@ -2329,7 +2336,7 @@ class Window : gobject.object.ObjectWrap
         geometry = geometry hints
         geomMask = bitmask indicating fields of geometry to pay attention to
   */
-  void setGeometryHints(gdk.types.Geometry geometry, gdk.types.WindowHints geomMask)
+  void setGeometryHints(gdk.types.Geometry geometry, gdk.types.WindowHints geomMask) nothrow
   {
     gdk_window_set_geometry_hints(cast(GdkWindow*)this._cPtr, &geometry, geomMask);
   }
@@ -2349,7 +2356,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         leader = group leader window, or null to restore the default group leader window
   */
-  void setGroup(gdk.window.Window leader = null)
+  void setGroup(gdk.window.Window leader = null) nothrow
   {
     gdk_window_set_group(cast(GdkWindow*)this._cPtr, leader ? cast(GdkWindow*)leader._cPtr(No.Dup) : null);
   }
@@ -2368,7 +2375,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         pixbufs = A list of pixbufs, of different sizes.
   */
-  void setIconList(gdkpixbuf.pixbuf.Pixbuf[] pixbufs)
+  void setIconList(gdkpixbuf.pixbuf.Pixbuf[] pixbufs) nothrow
   {
     auto _pixbufs = gListFromD!(gdkpixbuf.pixbuf.Pixbuf)(pixbufs);
     scope(exit) containerFree!(GList*, gdkpixbuf.pixbuf.Pixbuf, GidOwnership.None)(_pixbufs);
@@ -2392,7 +2399,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         name = name of window while iconified (minimized)
   */
-  void setIconName(string name = null)
+  void setIconName(string name = null) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gdk_window_set_icon_name(cast(GdkWindow*)this._cPtr, _name);
@@ -2412,7 +2419,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         setting = whether to keep window above other windows
   */
-  void setKeepAbove(bool setting)
+  void setKeepAbove(bool setting) nothrow
   {
     gdk_window_set_keep_above(cast(GdkWindow*)this._cPtr, setting);
   }
@@ -2431,7 +2438,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         setting = whether to keep window below other windows
   */
-  void setKeepBelow(bool setting)
+  void setKeepBelow(bool setting) nothrow
   {
     gdk_window_set_keep_below(cast(GdkWindow*)this._cPtr, setting);
   }
@@ -2448,7 +2455,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         modal = true if the window is modal, false otherwise.
   */
-  void setModalHint(bool modal)
+  void setModalHint(bool modal) nothrow
   {
     gdk_window_set_modal_hint(cast(GdkWindow*)this._cPtr, modal);
   }
@@ -2477,7 +2484,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         opacity = opacity
   */
-  void setOpacity(double opacity)
+  void setOpacity(double opacity) nothrow
   {
     gdk_window_set_opacity(cast(GdkWindow*)this._cPtr, opacity);
   }
@@ -2500,7 +2507,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         region = a region, or null
   */
-  void setOpaqueRegion(cairo.region.Region region = null)
+  void setOpaqueRegion(cairo.region.Region region = null) nothrow
   {
     gdk_window_set_opaque_region(cast(GdkWindow*)this._cPtr, region ? cast(cairo_region_t*)region._cPtr(No.Dup) : null);
   }
@@ -2518,7 +2525,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         overrideRedirect = true if window should be override redirect
   */
-  void setOverrideRedirect(bool overrideRedirect)
+  void setOverrideRedirect(bool overrideRedirect) nothrow
   {
     gdk_window_set_override_redirect(cast(GdkWindow*)this._cPtr, overrideRedirect);
   }
@@ -2546,7 +2553,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         passThrough = a boolean
   */
-  void setPassThrough(bool passThrough)
+  void setPassThrough(bool passThrough) nothrow
   {
     gdk_window_set_pass_through(cast(GdkWindow*)this._cPtr, passThrough);
   }
@@ -2568,7 +2575,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         role = a string indicating its role
   */
-  void setRole(string role)
+  void setRole(string role) nothrow
   {
     const(char)* _role = role.toCString(No.Alloc);
     gdk_window_set_role(cast(GdkWindow*)this._cPtr, _role);
@@ -2591,7 +2598,7 @@ class Window : gobject.object.ObjectWrap
         top = The top extent
         bottom = The bottom extent
   */
-  void setShadowWidth(int left, int right, int top, int bottom)
+  void setShadowWidth(int left, int right, int top, int bottom) nothrow
   {
     gdk_window_set_shadow_width(cast(GdkWindow*)this._cPtr, left, right, top, bottom);
   }
@@ -2609,7 +2616,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         skipsPager = true to skip the pager
   */
-  void setSkipPagerHint(bool skipsPager)
+  void setSkipPagerHint(bool skipsPager) nothrow
   {
     gdk_window_set_skip_pager_hint(cast(GdkWindow*)this._cPtr, skipsPager);
   }
@@ -2625,7 +2632,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         skipsTaskbar = true to skip the taskbar
   */
-  void setSkipTaskbarHint(bool skipsTaskbar)
+  void setSkipTaskbarHint(bool skipsTaskbar) nothrow
   {
     gdk_window_set_skip_taskbar_hint(cast(GdkWindow*)this._cPtr, skipsTaskbar);
   }
@@ -2640,7 +2647,7 @@ class Window : gobject.object.ObjectWrap
         source = a #GdkInputSource to define the source class.
         eventMask = event mask for window
   */
-  void setSourceEvents(gdk.types.InputSource source, gdk.types.EventMask eventMask)
+  void setSourceEvents(gdk.types.InputSource source, gdk.types.EventMask eventMask) nothrow
   {
     gdk_window_set_source_events(cast(GdkWindow*)this._cPtr, source, eventMask);
   }
@@ -2652,7 +2659,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         startupId = a string with startup-notification identifier
   */
-  void setStartupId(string startupId)
+  void setStartupId(string startupId) nothrow
   {
     const(char)* _startupId = startupId.toCString(No.Alloc);
     gdk_window_set_startup_id(cast(GdkWindow*)this._cPtr, _startupId);
@@ -2671,7 +2678,7 @@ class Window : gobject.object.ObjectWrap
       Deprecated: static gravities haven't worked on anything but X11
           for a long time.
   */
-  bool setStaticGravities(bool useStatic)
+  bool setStaticGravities(bool useStatic) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_window_set_static_gravities(cast(GdkWindow*)this._cPtr, useStatic);
@@ -2687,7 +2694,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         supportMultidevice = true to enable multidevice support in window.
   */
-  void setSupportMultidevice(bool supportMultidevice)
+  void setSupportMultidevice(bool supportMultidevice) nothrow
   {
     gdk_window_set_support_multidevice(cast(GdkWindow*)this._cPtr, supportMultidevice);
   }
@@ -2702,7 +2709,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         title = title of window
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     gdk_window_set_title(cast(GdkWindow*)this._cPtr, _title);
@@ -2720,7 +2727,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         parent = another toplevel #GdkWindow
   */
-  void setTransientFor(gdk.window.Window parent)
+  void setTransientFor(gdk.window.Window parent) nothrow
   {
     gdk_window_set_transient_for(cast(GdkWindow*)this._cPtr, parent ? cast(GdkWindow*)parent._cPtr(No.Dup) : null);
   }
@@ -2736,7 +2743,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         hint = A hint of the function this window will have
   */
-  void setTypeHint(gdk.types.WindowTypeHint hint)
+  void setTypeHint(gdk.types.WindowTypeHint hint) nothrow
   {
     gdk_window_set_type_hint(cast(GdkWindow*)this._cPtr, hint);
   }
@@ -2748,7 +2755,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         urgent = true if the window is urgent
   */
-  void setUrgencyHint(bool urgent)
+  void setUrgencyHint(bool urgent) nothrow
   {
     gdk_window_set_urgency_hint(cast(GdkWindow*)this._cPtr, urgent);
   }
@@ -2765,7 +2772,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         userData = user data
   */
-  void setUserData(gobject.object.ObjectWrap userData = null)
+  void setUserData(gobject.object.ObjectWrap userData = null) nothrow
   {
     gdk_window_set_user_data(cast(GdkWindow*)this._cPtr, userData ? cast(GObject*)userData._cPtr(No.Dup) : null);
   }
@@ -2791,7 +2798,7 @@ class Window : gobject.object.ObjectWrap
         offsetX = X position of shape_region in window coordinates
         offsetY = Y position of shape_region in window coordinates
   */
-  void shapeCombineRegion(cairo.region.Region shapeRegion, int offsetX, int offsetY)
+  void shapeCombineRegion(cairo.region.Region shapeRegion, int offsetX, int offsetY) nothrow
   {
     gdk_window_shape_combine_region(cast(GdkWindow*)this._cPtr, shapeRegion ? cast(const(cairo_region_t)*)shapeRegion._cPtr(No.Dup) : null, offsetX, offsetY);
   }
@@ -2807,7 +2814,7 @@ class Window : gobject.object.ObjectWrap
       When implementing a #GtkWidget, you should call this function on the widget's
       #GdkWindow as part of the “map” method.
   */
-  void show()
+  void show() nothrow
   {
     gdk_window_show(cast(GdkWindow*)this._cPtr);
   }
@@ -2821,7 +2828,7 @@ class Window : gobject.object.ObjectWrap
       XMapWindow() (it also updates some internal GDK state, which means
       that you can’t really use XMapWindow() directly on a GDK window).
   */
-  void showUnraised()
+  void showUnraised() nothrow
   {
     gdk_window_show_unraised(cast(GdkWindow*)this._cPtr);
   }
@@ -2837,7 +2844,7 @@ class Window : gobject.object.ObjectWrap
         event = a #GdkEvent to show the menu for
       Returns: true if the window menu was shown and false otherwise.
   */
-  bool showWindowMenu(gdk.event.Event event)
+  bool showWindowMenu(gdk.event.Event event) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_window_show_window_menu(cast(GdkWindow*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
@@ -2855,7 +2862,7 @@ class Window : gobject.object.ObjectWrap
       the window. For window managers that don’t support this operation,
       there’s nothing you can do to force it to happen.
   */
-  void stick()
+  void stick() nothrow
   {
     gdk_window_stick(cast(GdkWindow*)this._cPtr);
   }
@@ -2869,7 +2876,7 @@ class Window : gobject.object.ObjectWrap
   
       Deprecated: This symbol was never meant to be used outside of GTK+
   */
-  void thawToplevelUpdatesLibgtkOnly()
+  void thawToplevelUpdatesLibgtkOnly() nothrow
   {
     gdk_window_thaw_toplevel_updates_libgtk_only(cast(GdkWindow*)this._cPtr);
   }
@@ -2877,7 +2884,7 @@ class Window : gobject.object.ObjectWrap
   /**
       Thaws a window frozen with [gdk.window.Window.freezeUpdates].
   */
-  void thawUpdates()
+  void thawUpdates() nothrow
   {
     gdk_window_thaw_updates(cast(GdkWindow*)this._cPtr);
   }
@@ -2894,7 +2901,7 @@ class Window : gobject.object.ObjectWrap
       most standard window managers, and GDK makes a best effort to get
       it to happen.
   */
-  void unfullscreen()
+  void unfullscreen() nothrow
   {
     gdk_window_unfullscreen(cast(GdkWindow*)this._cPtr);
   }
@@ -2912,7 +2919,7 @@ class Window : gobject.object.ObjectWrap
       
       On Windows, reliably unmaximizes the window.
   */
-  void unmaximize()
+  void unmaximize() nothrow
   {
     gdk_window_unmaximize(cast(GdkWindow*)this._cPtr);
   }
@@ -2921,7 +2928,7 @@ class Window : gobject.object.ObjectWrap
       Reverse operation for [gdk.window.Window.stick]; see [gdk.window.Window.stick],
       and [gtk.window.Window.unstick].
   */
-  void unstick()
+  void unstick() nothrow
   {
     gdk_window_unstick(cast(GdkWindow*)this._cPtr);
   }
@@ -2931,7 +2938,7 @@ class Window : gobject.object.ObjectWrap
       This function is not really useful as [gdk.window.Window.hide] automatically
       withdraws toplevel windows before hiding them.
   */
-  void withdraw()
+  void withdraw() nothrow
   {
     gdk_window_withdraw(cast(GdkWindow*)this._cPtr);
   }
@@ -2965,7 +2972,7 @@ class Window : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCreateSurface(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCreateSurface(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == cairo.surface.Surface)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -2973,11 +2980,12 @@ class Window : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gdk.window.Window)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      cairo.surface.Surface _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -2988,7 +2996,14 @@ class Window : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.window.Window.createSurface");
+      }
 
       setVal!(cairo.surface.Surface)(_returnValue, _retval);
     }
@@ -3025,7 +3040,7 @@ class Window : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFromEmbedder(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFromEmbedder(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -3035,7 +3050,7 @@ class Window : gobject.object.ObjectWrap
   && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gdk.window.Window)))
   && Parameters!T.length < 6)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3060,7 +3075,14 @@ class Window : gobject.object.ObjectWrap
       static if (Parameters!T.length > 4)
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.window.Window.fromEmbedder");
+      }
 
       static if (Parameters!T.length > 2)
         *getVal!(Parameters!T[2]*)(&_paramVals[3]) = offscreenX;
@@ -3108,7 +3130,7 @@ class Window : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMovedToRect(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMovedToRect(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == void*)))
@@ -3118,7 +3140,7 @@ class Window : gobject.object.ObjectWrap
   && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gdk.window.Window)))
   && Parameters!T.length < 6)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3139,7 +3161,14 @@ class Window : gobject.object.ObjectWrap
       static if (Parameters!T.length > 4)
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.window.Window.movedToRect");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3168,7 +3197,7 @@ class Window : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPickEmbeddedChild(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPickEmbeddedChild(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T : gdk.window.Window)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -3176,11 +3205,12 @@ class Window : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gdk.window.Window)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gdk.window.Window _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -3191,7 +3221,14 @@ class Window : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.window.Window.pickEmbeddedChild");
+      }
 
       setVal!(gdk.window.Window)(_returnValue, _retval);
     }
@@ -3228,7 +3265,7 @@ class Window : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectToEmbedder(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToEmbedder(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -3238,7 +3275,7 @@ class Window : gobject.object.ObjectWrap
   && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gdk.window.Window)))
   && Parameters!T.length < 6)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3263,7 +3300,14 @@ class Window : gobject.object.ObjectWrap
       static if (Parameters!T.length > 4)
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.window.Window.toEmbedder");
+      }
 
       static if (Parameters!T.length > 2)
         *getVal!(Parameters!T[2]*)(&_paramVals[3]) = embedderX;
@@ -3288,7 +3332,7 @@ class WindowGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           [gdk.window.Window.getCursor] for details.
       Returns: Builder instance for fluent chaining
   */
-  T cursor(gdk.cursor.Cursor propval)
+  T cursor(gdk.cursor.Cursor propval) nothrow
   {
     return setProperty("cursor", propval);
   }
@@ -3301,7 +3345,7 @@ final class WindowGidBuilder : WindowGidBuilderImpl!WindowGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Window build()
+  Window build() nothrow
   {
     return new Window(cast(void*)createGObject(Window._getGType), Yes.Take);
   }

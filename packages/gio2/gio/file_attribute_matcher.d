@@ -15,32 +15,32 @@ class FileAttributeMatcher : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_file_attribute_matcher_get_type != &gidSymbolNotFound ? g_file_attribute_matcher_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileAttributeMatcher self()
+  override FileAttributeMatcher self() nothrow
   {
     return this;
   }
@@ -70,7 +70,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
         attributes = an attribute string to match.
       Returns: a #GFileAttributeMatcher
   */
-  this(string attributes)
+  this(string attributes) nothrow
   {
     GFileAttributeMatcher* _cretval;
     const(char)* _attributes = attributes.toCString(No.Alloc);
@@ -91,7 +91,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
       Returns: true if the matcher matches all of the entries
         in the given ns, false otherwise.
   */
-  bool enumerateNamespace(string ns)
+  bool enumerateNamespace(string ns) nothrow
   {
     bool _retval;
     const(char)* _ns = ns.toCString(No.Alloc);
@@ -104,7 +104,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
       Returns: a string containing the next attribute or, null if
         no more attribute exist.
   */
-  string enumerateNext()
+  string enumerateNext() nothrow
   {
     const(char)* _cretval;
     _cretval = g_file_attribute_matcher_enumerate_next(cast(GFileAttributeMatcher*)this._cPtr);
@@ -121,7 +121,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
         attribute = a file attribute key.
       Returns: true if attribute matches matcher. false otherwise.
   */
-  bool matches(string attribute)
+  bool matches(string attribute) nothrow
   {
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -137,7 +137,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
         attribute = a file attribute key.
       Returns: true if the matcher only matches attribute. false otherwise.
   */
-  bool matchesOnly(string attribute)
+  bool matchesOnly(string attribute) nothrow
   {
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -160,7 +160,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
       Returns: A file attribute matcher matching all attributes of
             matcher that are not matched by subtract
   */
-  gio.file_attribute_matcher.FileAttributeMatcher subtract(gio.file_attribute_matcher.FileAttributeMatcher subtract = null)
+  gio.file_attribute_matcher.FileAttributeMatcher subtract(gio.file_attribute_matcher.FileAttributeMatcher subtract = null) nothrow
   {
     GFileAttributeMatcher* _cretval;
     _cretval = g_file_attribute_matcher_subtract(cast(GFileAttributeMatcher*)this._cPtr, subtract ? cast(GFileAttributeMatcher*)subtract._cPtr(No.Dup) : null);
@@ -176,7 +176,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
       Returns: a string describing the attributes the matcher matches
           against or null if matcher was null.
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = g_file_attribute_matcher_to_string(cast(GFileAttributeMatcher*)this._cPtr);

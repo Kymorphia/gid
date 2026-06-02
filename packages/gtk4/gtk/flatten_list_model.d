@@ -24,26 +24,26 @@ class FlattenListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gt
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_flatten_list_model_get_type != &gidSymbolNotFound ? gtk_flatten_list_model_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FlattenListModel self()
+  override FlattenListModel self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class FlattenListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gt
       Get builder for [gtk.flatten_list_model.FlattenListModel]
       Returns: New builder object
   */
-  static FlattenListModelGidBuilder builder()
+  static FlattenListModelGidBuilder builder() nothrow
   {
     return new FlattenListModelGidBuilder;
   }
@@ -61,7 +61,7 @@ class FlattenListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gt
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
-  @property gobject.types.GType itemType()
+  @property gobject.types.GType itemType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
   }
@@ -70,7 +70,7 @@ class FlattenListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gt
       Get `model` property.
       Returns: The model being flattened.
   */
-  @property gio.list_model.ListModel model()
+  @property gio.list_model.ListModel model() nothrow
   {
     return getModel();
   }
@@ -80,7 +80,7 @@ class FlattenListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gt
       Params:
         propval = The model being flattened.
   */
-  @property void model(gio.list_model.ListModel propval)
+  @property void model(gio.list_model.ListModel propval) nothrow
   {
     setModel(propval);
   }
@@ -89,7 +89,7 @@ class FlattenListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gt
       Get `nItems` property.
       Returns: The number of items. See [gio.list_model.ListModel.getNItems].
   */
-  @property uint nItems()
+  @property uint nItems() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
@@ -104,7 +104,7 @@ class FlattenListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gt
         model = the model to be flattened
       Returns: a new [gtk.flatten_list_model.FlattenListModel]
   */
-  this(gio.list_model.ListModel model = null)
+  this(gio.list_model.ListModel model = null) nothrow
   {
     GtkFlattenListModel* _cretval;
     _cretval = gtk_flatten_list_model_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(Yes.Dup) : null);
@@ -115,7 +115,7 @@ class FlattenListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gt
       Gets the model set via [gtk.flatten_list_model.FlattenListModel.setModel].
       Returns: The model flattened by self
   */
-  gio.list_model.ListModel getModel()
+  gio.list_model.ListModel getModel() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_flatten_list_model_get_model(cast(GtkFlattenListModel*)this._cPtr);
@@ -130,7 +130,7 @@ class FlattenListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gt
         position = a position
       Returns: the model containing the item at position
   */
-  gio.list_model.ListModel getModelForItem(uint position)
+  gio.list_model.ListModel getModelForItem(uint position) nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_flatten_list_model_get_model_for_item(cast(GtkFlattenListModel*)this._cPtr, position);
@@ -144,7 +144,7 @@ class FlattenListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gt
       Params:
         model = the new model
   */
-  void setModel(gio.list_model.ListModel model = null)
+  void setModel(gio.list_model.ListModel model = null) nothrow
   {
     gtk_flatten_list_model_set_model(cast(GtkFlattenListModel*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
@@ -163,7 +163,7 @@ class FlattenListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = The model being flattened.
       Returns: Builder instance for fluent chaining
   */
-  T model(gio.list_model.ListModel propval)
+  T model(gio.list_model.ListModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -176,7 +176,7 @@ final class FlattenListModelGidBuilder : FlattenListModelGidBuilderImpl!FlattenL
       Create object from builder.
       Returns: New object
   */
-  FlattenListModel build()
+  FlattenListModel build() nothrow
   {
     return new FlattenListModel(cast(void*)createGObject(FlattenListModel._getGType), Yes.Take);
   }

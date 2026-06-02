@@ -14,26 +14,26 @@ class TakeOptions : arrow.function_options.FunctionOptions
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_take_options_get_type != &gidSymbolNotFound ? garrow_take_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TakeOptions self()
+  override TakeOptions self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class TakeOptions : arrow.function_options.FunctionOptions
       Get builder for [arrow.take_options.TakeOptions]
       Returns: New builder object
   */
-  static TakeOptionsGidBuilder builder()
+  static TakeOptionsGidBuilder builder() nothrow
   {
     return new TakeOptionsGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowTakeOptions* _cretval;
     _cretval = garrow_take_options_new();
@@ -68,7 +68,7 @@ final class TakeOptionsGidBuilder : TakeOptionsGidBuilderImpl!TakeOptionsGidBuil
       Create object from builder.
       Returns: New object
   */
-  TakeOptions build()
+  TakeOptions build() nothrow
   {
     return new TakeOptions(cast(void*)createGObject(TakeOptions._getGType), Yes.Take);
   }

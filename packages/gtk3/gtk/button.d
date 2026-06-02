@@ -49,26 +49,26 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_button_get_type != &gidSymbolNotFound ? gtk_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Button self()
+  override Button self() nothrow
   {
     return this;
   }
@@ -77,7 +77,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Get builder for [gtk.button.Button]
       Returns: New builder object
   */
-  static ButtonGidBuilder builder()
+  static ButtonGidBuilder builder() nothrow
   {
     return new ButtonGidBuilder;
   }
@@ -90,7 +90,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
         Use this property if the button would be useless or hard to use
         without the image.
   */
-  @property bool alwaysShowImage()
+  @property bool alwaysShowImage() nothrow
   {
     return getAlwaysShowImage();
   }
@@ -104,7 +104,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
           Use this property if the button would be useless or hard to use
           without the image.
   */
-  @property void alwaysShowImage(bool propval)
+  @property void alwaysShowImage(bool propval) nothrow
   {
     setAlwaysShowImage(propval);
   }
@@ -113,7 +113,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Get `image` property.
       Returns: The child widget to appear next to the button text.
   */
-  @property gtk.widget.Widget image()
+  @property gtk.widget.Widget image() nothrow
   {
     return getImage();
   }
@@ -123,7 +123,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Params:
         propval = The child widget to appear next to the button text.
   */
-  @property void image(gtk.widget.Widget propval)
+  @property void image(gtk.widget.Widget propval) nothrow
   {
     setImage(propval);
   }
@@ -132,7 +132,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Get `imagePosition` property.
       Returns: The position of the image relative to the text inside the button.
   */
-  @property gtk.types.PositionType imagePosition()
+  @property gtk.types.PositionType imagePosition() nothrow
   {
     return getImagePosition();
   }
@@ -142,55 +142,55 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Params:
         propval = The position of the image relative to the text inside the button.
   */
-  @property void imagePosition(gtk.types.PositionType propval)
+  @property void imagePosition(gtk.types.PositionType propval) nothrow
   {
     setImagePosition(propval);
   }
 
   /** */
-  @property string label()
+  @property string label() nothrow
   {
     return getLabel();
   }
 
   /** */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     setLabel(propval);
   }
 
   /** */
-  @property gtk.types.ReliefStyle relief()
+  @property gtk.types.ReliefStyle relief() nothrow
   {
     return getRelief();
   }
 
   /** */
-  @property void relief(gtk.types.ReliefStyle propval)
+  @property void relief(gtk.types.ReliefStyle propval) nothrow
   {
     setRelief(propval);
   }
 
   /** */
-  @property bool useStock()
+  @property bool useStock() nothrow
   {
     return getUseStock();
   }
 
   /** */
-  @property void useStock(bool propval)
+  @property void useStock(bool propval) nothrow
   {
     setUseStock(propval);
   }
 
   /** */
-  @property bool useUnderline()
+  @property bool useUnderline() nothrow
   {
     return getUseUnderline();
   }
 
   /** */
-  @property void useUnderline(bool propval)
+  @property void useUnderline(bool propval) nothrow
   {
     setUseUnderline(propval);
   }
@@ -204,7 +204,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Deprecated: Access the child widget directly if you need to control
         its alignment.
   */
-  @property float xalign()
+  @property float xalign() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(float)("xalign");
   }
@@ -219,7 +219,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Deprecated: Access the child widget directly if you need to control
         its alignment.
   */
-  @property void xalign(float propval)
+  @property void xalign(float propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(float)("xalign", propval);
   }
@@ -233,7 +233,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Deprecated: Access the child widget directly if you need to control
         its alignment.
   */
-  @property float yalign()
+  @property float yalign() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(float)("yalign");
   }
@@ -248,7 +248,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Deprecated: Access the child widget directly if you need to control
         its alignment.
   */
-  @property void yalign(float propval)
+  @property void yalign(float propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(float)("yalign", propval);
   }
@@ -261,7 +261,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       use [gtk.container.Container.add].
       Returns: The newly created #GtkButton widget.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_button_new();
@@ -283,7 +283,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
         size = an icon size (#GtkIconSize)
       Returns: a new #GtkButton displaying the themed icon
   */
-  static gtk.button.Button newFromIconName(string iconName, gtk.types.IconSize size)
+  static gtk.button.Button newFromIconName(string iconName, gtk.types.IconSize size) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
@@ -308,7 +308,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Deprecated: Stock items are deprecated. Use [gtk.button.Button.newWithLabel]
         instead.
   */
-  static gtk.button.Button newFromStock(string stockId)
+  static gtk.button.Button newFromStock(string stockId) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
@@ -325,7 +325,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
         label = The text you want the #GtkLabel to hold.
       Returns: The newly created #GtkButton widget.
   */
-  static gtk.button.Button newWithLabel(string label)
+  static gtk.button.Button newWithLabel(string label) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -347,7 +347,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
                   mnemonic character
       Returns: a new #GtkButton
   */
-  static gtk.button.Button newWithMnemonic(string label)
+  static gtk.button.Button newWithMnemonic(string label) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -359,7 +359,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   /**
       Emits a #GtkButton::clicked signal to the given #GtkButton.
   */
-  void clicked()
+  void clicked() nothrow
   {
     gtk_button_clicked(cast(GtkButton*)this._cPtr);
   }
@@ -369,7 +369,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   
       Deprecated: Use the #GtkWidget::enter-notify-event signal.
   */
-  void enter()
+  void enter() nothrow
   {
     gtk_button_enter(cast(GtkButton*)this._cPtr);
   }
@@ -384,7 +384,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Deprecated: Access the child widget directly if you need to control
         its alignment.
   */
-  void getAlignment(out float xalign, out float yalign)
+  void getAlignment(out float xalign, out float yalign) nothrow
   {
     gtk_button_get_alignment(cast(GtkButton*)this._cPtr, cast(float*)&xalign, cast(float*)&yalign);
   }
@@ -394,7 +394,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       setting and always show the image, if available.
       Returns: true if the button will always show the image
   */
-  bool getAlwaysShowImage()
+  bool getAlwaysShowImage() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_button_get_always_show_image(cast(GtkButton*)this._cPtr);
@@ -406,7 +406,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       This function should be rarely needed.
       Returns: button’s event window.
   */
-  gdk.window.Window getEventWindow()
+  gdk.window.Window getEventWindow() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gtk_button_get_event_window(cast(GtkButton*)this._cPtr);
@@ -422,7 +422,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   
       Deprecated: Use [gtk.widget.Widget.getFocusOnClick] instead
   */
-  override bool getFocusOnClick()
+  override bool getFocusOnClick() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_button_get_focus_on_click(cast(GtkButton*)this._cPtr);
@@ -436,7 +436,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Returns: a #GtkWidget or null in case
             there is no image
   */
-  gtk.widget.Widget getImage()
+  gtk.widget.Widget getImage() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_button_get_image(cast(GtkButton*)this._cPtr);
@@ -449,7 +449,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       inside the button.
       Returns: the position
   */
-  gtk.types.PositionType getImagePosition()
+  gtk.types.PositionType getImagePosition() nothrow
   {
     GtkPositionType _cretval;
     _cretval = gtk_button_get_image_position(cast(GtkButton*)this._cPtr);
@@ -466,7 +466,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Returns: The text of the label widget. This string is owned
         by the widget and must not be modified or freed.
   */
-  string getLabel()
+  string getLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_button_get_label(cast(GtkButton*)this._cPtr);
@@ -478,7 +478,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Returns the current relief style of the given #GtkButton.
       Returns: The current #GtkReliefStyle
   */
-  gtk.types.ReliefStyle getRelief()
+  gtk.types.ReliefStyle getRelief() nothrow
   {
     GtkReliefStyle _cretval;
     _cretval = gtk_button_get_relief(cast(GtkButton*)this._cPtr);
@@ -492,7 +492,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
                       select a stock item instead of being
                       used directly as the label text.
   */
-  bool getUseStock()
+  bool getUseStock() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_button_get_use_stock(cast(GtkButton*)this._cPtr);
@@ -505,7 +505,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Returns: true if an embedded underline in the button label
                       indicates the mnemonic accelerator keys.
   */
-  bool getUseUnderline()
+  bool getUseUnderline() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_button_get_use_underline(cast(GtkButton*)this._cPtr);
@@ -517,7 +517,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   
       Deprecated: Use the #GtkWidget::leave-notify-event signal.
   */
-  void leave()
+  void leave() nothrow
   {
     gtk_button_leave(cast(GtkButton*)this._cPtr);
   }
@@ -527,7 +527,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   
       Deprecated: Use the #GtkWidget::button-press-event signal.
   */
-  void pressed()
+  void pressed() nothrow
   {
     gtk_button_pressed(cast(GtkButton*)this._cPtr);
   }
@@ -537,7 +537,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   
       Deprecated: Use the #GtkWidget::button-release-event signal.
   */
-  void released()
+  void released() nothrow
   {
     gtk_button_released(cast(GtkButton*)this._cPtr);
   }
@@ -555,7 +555,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Deprecated: Access the child widget directly if you need to control
         its alignment.
   */
-  void setAlignment(float xalign, float yalign)
+  void setAlignment(float xalign, float yalign) nothrow
   {
     gtk_button_set_alignment(cast(GtkButton*)this._cPtr, xalign, yalign);
   }
@@ -570,7 +570,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Params:
         alwaysShow = true if the menuitem should always show the image
   */
-  void setAlwaysShowImage(bool alwaysShow)
+  void setAlwaysShowImage(bool alwaysShow) nothrow
   {
     gtk_button_set_always_show_image(cast(GtkButton*)this._cPtr, alwaysShow);
   }
@@ -586,7 +586,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   
       Deprecated: Use [gtk.widget.Widget.setFocusOnClick] instead
   */
-  override void setFocusOnClick(bool focusOnClick)
+  override void setFocusOnClick(bool focusOnClick) nothrow
   {
     gtk_button_set_focus_on_click(cast(GtkButton*)this._cPtr, focusOnClick);
   }
@@ -600,7 +600,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Params:
         image = a widget to set as the image for the button, or null to unset
   */
-  void setImage(gtk.widget.Widget image = null)
+  void setImage(gtk.widget.Widget image = null) nothrow
   {
     gtk_button_set_image(cast(GtkButton*)this._cPtr, image ? cast(GtkWidget*)image._cPtr(No.Dup) : null);
   }
@@ -612,7 +612,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Params:
         position = the position
   */
-  void setImagePosition(gtk.types.PositionType position)
+  void setImagePosition(gtk.types.PositionType position) nothrow
   {
     gtk_button_set_image_position(cast(GtkButton*)this._cPtr, position);
   }
@@ -627,7 +627,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Params:
         label = a string
   */
-  void setLabel(string label)
+  void setLabel(string label) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_button_set_label(cast(GtkButton*)this._cPtr, _label);
@@ -643,7 +643,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Params:
         relief = The GtkReliefStyle as described above
   */
-  void setRelief(gtk.types.ReliefStyle relief)
+  void setRelief(gtk.types.ReliefStyle relief) nothrow
   {
     gtk_button_set_relief(cast(GtkButton*)this._cPtr, relief);
   }
@@ -655,7 +655,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Params:
         useStock = true if the button should use a stock item
   */
-  void setUseStock(bool useStock)
+  void setUseStock(bool useStock) nothrow
   {
     gtk_button_set_use_stock(cast(GtkButton*)this._cPtr, useStock);
   }
@@ -667,7 +667,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Params:
         useUnderline = true if underlines in the text indicate mnemonics
   */
-  void setUseUnderline(bool useUnderline)
+  void setUseUnderline(bool useUnderline) nothrow
   {
     gtk_button_set_use_underline(cast(GtkButton*)this._cPtr, useUnderline);
   }
@@ -690,13 +690,13 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.button.Button)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -705,7 +705,14 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.button.Button.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -727,13 +734,13 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClicked(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClicked(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.button.Button)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -742,7 +749,14 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.button.Button.clicked");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -766,13 +780,13 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   
       Deprecated: Use the #GtkWidget::enter-notify-event signal.
   */
-  gulong connectEnter(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEnter(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.button.Button)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -781,7 +795,14 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.button.Button.enter");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -805,13 +826,13 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   
       Deprecated: Use the #GtkWidget::leave-notify-event signal.
   */
-  gulong connectLeave(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLeave(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.button.Button)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -820,7 +841,14 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.button.Button.leave");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -844,13 +872,13 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   
       Deprecated: Use the #GtkWidget::button-press-event signal.
   */
-  gulong connectPressed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPressed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.button.Button)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -859,7 +887,14 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.button.Button.pressed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -883,13 +918,13 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   
       Deprecated: Use the #GtkWidget::button-release-event signal.
   */
-  gulong connectReleased(T)(T callback, Flag!"After" after = No.After)
+  gulong connectReleased(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.button.Button)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -898,7 +933,14 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.button.Button.released");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -923,7 +965,7 @@ class ButtonGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.actionable.Acti
           without the image.
       Returns: Builder instance for fluent chaining
   */
-  T alwaysShowImage(bool propval)
+  T alwaysShowImage(bool propval) nothrow
   {
     return setProperty("always-show-image", propval);
   }
@@ -934,7 +976,7 @@ class ButtonGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.actionable.Acti
         propval = The child widget to appear next to the button text.
       Returns: Builder instance for fluent chaining
   */
-  T image(gtk.widget.Widget propval)
+  T image(gtk.widget.Widget propval) nothrow
   {
     return setProperty("image", propval);
   }
@@ -945,31 +987,31 @@ class ButtonGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.actionable.Acti
         propval = The position of the image relative to the text inside the button.
       Returns: Builder instance for fluent chaining
   */
-  T imagePosition(gtk.types.PositionType propval)
+  T imagePosition(gtk.types.PositionType propval) nothrow
   {
     return setProperty("image-position", propval);
   }
 
   /** */
-  T label(string propval)
+  T label(string propval) nothrow
   {
     return setProperty("label", propval);
   }
 
   /** */
-  T relief(gtk.types.ReliefStyle propval)
+  T relief(gtk.types.ReliefStyle propval) nothrow
   {
     return setProperty("relief", propval);
   }
 
   /** */
-  T useStock(bool propval)
+  T useStock(bool propval) nothrow
   {
     return setProperty("use-stock", propval);
   }
 
   /** */
-  T useUnderline(bool propval)
+  T useUnderline(bool propval) nothrow
   {
     return setProperty("use-underline", propval);
   }
@@ -985,7 +1027,7 @@ class ButtonGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.actionable.Acti
       Deprecated: Access the child widget directly if you need to control
         its alignment.
   */
-  T xalign(float propval)
+  T xalign(float propval) nothrow
   {
     return setProperty("xalign", propval);
   }
@@ -1001,7 +1043,7 @@ class ButtonGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.actionable.Acti
       Deprecated: Access the child widget directly if you need to control
         its alignment.
   */
-  T yalign(float propval)
+  T yalign(float propval) nothrow
   {
     return setProperty("yalign", propval);
   }
@@ -1014,7 +1056,7 @@ final class ButtonGidBuilder : ButtonGidBuilderImpl!ButtonGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Button build()
+  Button build() nothrow
   {
     return new Button(cast(void*)createGObject(Button._getGType), No.Take);
   }

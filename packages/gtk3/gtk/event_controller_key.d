@@ -24,26 +24,26 @@ class EventControllerKey : gtk.event_controller.EventController
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_event_controller_key_get_type != &gidSymbolNotFound ? gtk_event_controller_key_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EventControllerKey self()
+  override EventControllerKey self() nothrow
   {
     return this;
   }
@@ -52,13 +52,13 @@ class EventControllerKey : gtk.event_controller.EventController
       Get builder for [gtk.event_controller_key.EventControllerKey]
       Returns: New builder object
   */
-  static EventControllerKeyGidBuilder builder()
+  static EventControllerKeyGidBuilder builder() nothrow
   {
     return new EventControllerKeyGidBuilder;
   }
 
   /** */
-  this(gtk.widget.Widget widget)
+  this(gtk.widget.Widget widget) nothrow
   {
     GtkEventController* _cretval;
     _cretval = gtk_event_controller_key_new(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
@@ -66,7 +66,7 @@ class EventControllerKey : gtk.event_controller.EventController
   }
 
   /** */
-  bool forward(gtk.widget.Widget widget)
+  bool forward(gtk.widget.Widget widget) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_event_controller_key_forward(cast(GtkEventControllerKey*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
@@ -74,7 +74,7 @@ class EventControllerKey : gtk.event_controller.EventController
   }
 
   /** */
-  uint getGroup()
+  uint getGroup() nothrow
   {
     uint _retval;
     _retval = gtk_event_controller_key_get_group(cast(GtkEventControllerKey*)this._cPtr);
@@ -85,7 +85,7 @@ class EventControllerKey : gtk.event_controller.EventController
       Gets the IM context of a key controller.
       Returns: the IM context
   */
-  gtk.imcontext.IMContext getImContext()
+  gtk.imcontext.IMContext getImContext() nothrow
   {
     GtkIMContext* _cretval;
     _cretval = gtk_event_controller_key_get_im_context(cast(GtkEventControllerKey*)this._cPtr);
@@ -94,7 +94,7 @@ class EventControllerKey : gtk.event_controller.EventController
   }
 
   /** */
-  void setImContext(gtk.imcontext.IMContext imContext)
+  void setImContext(gtk.imcontext.IMContext imContext) nothrow
   {
     gtk_event_controller_key_set_im_context(cast(GtkEventControllerKey*)this._cPtr, imContext ? cast(GtkIMContext*)imContext._cPtr(No.Dup) : null);
   }
@@ -114,13 +114,13 @@ class EventControllerKey : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFocusIn(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFocusIn(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.event_controller_key.EventControllerKey)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -129,7 +129,14 @@ class EventControllerKey : gtk.event_controller.EventController
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.event_controller_key.EventControllerKey.focusIn");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -151,13 +158,13 @@ class EventControllerKey : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFocusOut(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFocusOut(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.event_controller_key.EventControllerKey)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -166,7 +173,14 @@ class EventControllerKey : gtk.event_controller.EventController
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.event_controller_key.EventControllerKey.focusOut");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -188,13 +202,13 @@ class EventControllerKey : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectImUpdate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectImUpdate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.event_controller_key.EventControllerKey)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -203,7 +217,14 @@ class EventControllerKey : gtk.event_controller.EventController
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.event_controller_key.EventControllerKey.imUpdate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -232,7 +253,7 @@ class EventControllerKey : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectKeyPressed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectKeyPressed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -241,11 +262,12 @@ class EventControllerKey : gtk.event_controller.EventController
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.event_controller_key.EventControllerKey)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -259,7 +281,14 @@ class EventControllerKey : gtk.event_controller.EventController
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.event_controller_key.EventControllerKey.keyPressed");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -289,7 +318,7 @@ class EventControllerKey : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectKeyReleased(T)(T callback, Flag!"After" after = No.After)
+  gulong connectKeyReleased(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -298,7 +327,7 @@ class EventControllerKey : gtk.event_controller.EventController
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.event_controller_key.EventControllerKey)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -316,7 +345,14 @@ class EventControllerKey : gtk.event_controller.EventController
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.event_controller_key.EventControllerKey.keyReleased");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -341,18 +377,19 @@ class EventControllerKey : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectModifiers(T)(T callback, Flag!"After" after = No.After)
+  gulong connectModifiers(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.types.ModifierType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.event_controller_key.EventControllerKey)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -360,7 +397,14 @@ class EventControllerKey : gtk.event_controller.EventController
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.event_controller_key.EventControllerKey.modifiers");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -382,7 +426,7 @@ final class EventControllerKeyGidBuilder : EventControllerKeyGidBuilderImpl!Even
       Create object from builder.
       Returns: New object
   */
-  EventControllerKey build()
+  EventControllerKey build() nothrow
   {
     return new EventControllerKey(cast(void*)createGObject(EventControllerKey._getGType), Yes.Take);
   }

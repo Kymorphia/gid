@@ -15,11 +15,8 @@ class IMContextInfo
   GtkIMContextInfo _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.imcontext_info.IMContextInfo");
-
     _cInstance = *cast(GtkIMContextInfo*)ptr;
 
     if (take)
@@ -27,7 +24,7 @@ class IMContextInfo
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -36,7 +33,7 @@ class IMContextInfo
       Get `contextId` field.
       Returns: The unique identification string of the input method.
   */
-  @property string contextId()
+  @property string contextId() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).contextId);
   }
@@ -46,7 +43,7 @@ class IMContextInfo
       Params:
         propval = The unique identification string of the input method.
   */
-  @property void contextId(string propval)
+  @property void contextId(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).contextId);
     dToC(propval, cast(void*)&(cast(GtkIMContextInfo*)this._cPtr).contextId);
@@ -56,7 +53,7 @@ class IMContextInfo
       Get `contextName` field.
       Returns: The human-readable name of the input method.
   */
-  @property string contextName()
+  @property string contextName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).contextName);
   }
@@ -66,7 +63,7 @@ class IMContextInfo
       Params:
         propval = The human-readable name of the input method.
   */
-  @property void contextName(string propval)
+  @property void contextName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).contextName);
     dToC(propval, cast(void*)&(cast(GtkIMContextInfo*)this._cPtr).contextName);
@@ -76,7 +73,7 @@ class IMContextInfo
       Get `domain` field.
       Returns: Translation domain to be used with dgettext()
   */
-  @property string domain()
+  @property string domain() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).domain);
   }
@@ -86,7 +83,7 @@ class IMContextInfo
       Params:
         propval = Translation domain to be used with dgettext()
   */
-  @property void domain(string propval)
+  @property void domain(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).domain);
     dToC(propval, cast(void*)&(cast(GtkIMContextInfo*)this._cPtr).domain);
@@ -96,7 +93,7 @@ class IMContextInfo
       Get `domainDirname` field.
       Returns: Name of locale directory for use with bindtextdomain()
   */
-  @property string domainDirname()
+  @property string domainDirname() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).domainDirname);
   }
@@ -106,7 +103,7 @@ class IMContextInfo
       Params:
         propval = Name of locale directory for use with bindtextdomain()
   */
-  @property void domainDirname(string propval)
+  @property void domainDirname(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).domainDirname);
     dToC(propval, cast(void*)&(cast(GtkIMContextInfo*)this._cPtr).domainDirname);
@@ -117,7 +114,7 @@ class IMContextInfo
       Returns: A colon-separated list of locales where this input method
           should be the default. The asterisk “*” sets the default for all locales.
   */
-  @property string defaultLocales()
+  @property string defaultLocales() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).defaultLocales);
   }
@@ -128,7 +125,7 @@ class IMContextInfo
         propval = A colon-separated list of locales where this input method
             should be the default. The asterisk “*” sets the default for all locales.
   */
-  @property void defaultLocales(string propval)
+  @property void defaultLocales(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).defaultLocales);
     dToC(propval, cast(void*)&(cast(GtkIMContextInfo*)this._cPtr).defaultLocales);

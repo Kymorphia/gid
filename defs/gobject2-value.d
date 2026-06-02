@@ -20,7 +20,7 @@ class Value : Boxed
    *   T = The D type to initialize the value to
    *   val = The value to assign
    */
-  this(T)(T val)
+  this(T)(T val) nothrow
     if (!is(T == void*))
   {
     this();
@@ -33,7 +33,7 @@ class Value : Boxed
    * Params:
    *   T = The D type to initialize the Value to
    */
-  void init_(T)()
+  void init_(T)() nothrow
   {
     initVal!T(cast(GValue*)_cPtr);
   }
@@ -42,7 +42,7 @@ class Value : Boxed
    * Get the GType of the data stored in the value.
    * Returns: The GType of the value
    */
-  @property GType valType()
+  @property GType valType() nothrow
   {
     return (cast(GValue*)_cPtr).gType;
   }
@@ -53,7 +53,7 @@ class Value : Boxed
    *   T = The D type of the value to get (must match the type of the Value)
    * Returns: The value
    */
-  T get(T)()
+  T get(T)() nothrow
   {
     return getVal!T(cast(GValue*)_cPtr);
   }
@@ -64,7 +64,7 @@ class Value : Boxed
    *   T = The D type of the value to set (must match the type of the Value)
    *   val = The value to assign
    */
-  void set(T)(T val)
+  void set(T)(T val) nothrow
   {
     setVal!T(cast(GValue*)_cPtr, val);
   }
@@ -76,7 +76,7 @@ class Value : Boxed
  *   T = The D type to initialize the GValue to
  *   gval = The C GValue structure pointer
  */
-void initVal(T)(GValue* gval)
+void initVal(T)(GValue* gval) nothrow
 {
   static if (is(T == bool))
     g_value_init(gval, GTypeEnum.Boolean);
@@ -124,7 +124,7 @@ void initVal(T)(GValue* gval)
  *   gval = C GValue structure pointer
  * Returns: The value of type `T`
  */
-T getVal(T)(const(GValue)* gval)
+T getVal(T)(const(GValue)* gval) nothrow
 {
   static if (is(T == bool))
     return cast(bool)g_value_get_boolean(gval);
@@ -203,7 +203,7 @@ T getVal(T)(const(GValue)* gval)
  *   length = Length of string (-1 to use strlen)
  * Returns: The D string
  */
-string getStringWithLength(const(GValue)* gval, int length)
+string getStringWithLength(const(GValue)* gval, int length) nothrow
 {
   auto cstr = g_value_get_string(gval);
   if (!cstr)
@@ -222,7 +222,7 @@ string getStringWithLength(const(GValue)* gval, int length)
  *   gval = C GValue structure pointer
  *   v = The value to set the GValue structure to
  */
-void setVal(T)(GValue* gval, T v)
+void setVal(T)(GValue* gval, T v) nothrow
 {
   static if (is(T == bool))
     g_value_set_boolean(gval, cast(gboolean)v);

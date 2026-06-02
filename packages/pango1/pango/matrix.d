@@ -51,23 +51,22 @@ struct Matrix
   double y0;
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_matrix_get_type != &gidSymbolNotFound ? pango_matrix_get_type() : cast(GType)0;
   }
 
   /** */
-  @property GType _gType()
+  @property GType _gType() nothrow
   {
     return _getGType();
   }
 
-  void* boxCopy()
+  void* boxCopy() nothrow
   {
     import gobject.c.functions : g_boxed_copy;
-    return g_boxed_copy(_gType,
-        cast(void*)&this);
+    return g_boxed_copy(_gType, cast(void*)&this);
   }
 
   /**
@@ -78,7 +77,7 @@ struct Matrix
       Params:
         newMatrix = a [pango.matrix.Matrix]
   */
-  void concat(pango.matrix.Matrix newMatrix)
+  void concat(pango.matrix.Matrix newMatrix) nothrow
   {
     pango_matrix_concat(cast(PangoMatrix*)&this, cast(const(PangoMatrix)*)&newMatrix);
   }
@@ -87,7 +86,7 @@ struct Matrix
       Copies a [pango.matrix.Matrix].
       Returns: the newly allocated [pango.matrix.Matrix]
   */
-  pango.matrix.Matrix copy()
+  pango.matrix.Matrix copy() nothrow
   {
     PangoMatrix* _cretval;
     _cretval = pango_matrix_copy(cast(const(PangoMatrix)*)&this);
@@ -106,7 +105,7 @@ struct Matrix
       Returns: the scale factor of matrix on the height of the font,
           or 1.0 if matrix is null.
   */
-  double getFontScaleFactor()
+  double getFontScaleFactor() nothrow
   {
     double _retval;
     _retval = pango_matrix_get_font_scale_factor(cast(const(PangoMatrix)*)&this);
@@ -126,7 +125,7 @@ struct Matrix
         xscale = output scale factor in the x direction
         yscale = output scale factor perpendicular to the x direction
   */
-  void getFontScaleFactors(out double xscale, out double yscale)
+  void getFontScaleFactors(out double xscale, out double yscale) nothrow
   {
     pango_matrix_get_font_scale_factors(cast(const(PangoMatrix)*)&this, cast(double*)&xscale, cast(double*)&yscale);
   }
@@ -142,7 +141,7 @@ struct Matrix
       this is simply λ.
       Returns: the slant ratio of matrix
   */
-  double getSlantRatio()
+  double getSlantRatio() nothrow
   {
     double _retval;
     _retval = pango_matrix_get_slant_ratio(cast(const(PangoMatrix)*)&this);
@@ -157,7 +156,7 @@ struct Matrix
       Params:
         degrees = degrees to rotate counter-clockwise
   */
-  void rotate(double degrees)
+  void rotate(double degrees) nothrow
   {
     pango_matrix_rotate(cast(PangoMatrix*)&this, degrees);
   }
@@ -172,7 +171,7 @@ struct Matrix
         scaleX = amount to scale by in X direction
         scaleY = amount to scale by in Y direction
   */
-  void scale(double scaleX, double scaleY)
+  void scale(double scaleX, double scaleY) nothrow
   {
     pango_matrix_scale(cast(PangoMatrix*)&this, scaleX, scaleY);
   }
@@ -198,7 +197,7 @@ struct Matrix
         dx = in/out X component of a distance vector
         dy = in/out Y component of a distance vector
   */
-  void transformDistance(ref double dx, ref double dy)
+  void transformDistance(ref double dx, ref double dy) nothrow
   {
     pango_matrix_transform_distance(cast(const(PangoMatrix)*)&this, cast(double*)&dx, cast(double*)&dy);
   }
@@ -218,7 +217,7 @@ struct Matrix
       Params:
         rect = in/out bounding box in device units
   */
-  void transformPixelRectangle(ref pango.types.Rectangle rect)
+  void transformPixelRectangle(ref pango.types.Rectangle rect) nothrow
   {
     pango_matrix_transform_pixel_rectangle(cast(const(PangoMatrix)*)&this, &rect);
   }
@@ -230,7 +229,7 @@ struct Matrix
         x = in/out X position
         y = in/out Y position
   */
-  void transformPoint(ref double x, ref double y)
+  void transformPoint(ref double x, ref double y) nothrow
   {
     pango_matrix_transform_point(cast(const(PangoMatrix)*)&this, cast(double*)&x, cast(double*)&y);
   }
@@ -258,7 +257,7 @@ struct Matrix
       Params:
         rect = in/out bounding box in Pango units
   */
-  void transformRectangle(ref pango.types.Rectangle rect)
+  void transformRectangle(ref pango.types.Rectangle rect) nothrow
   {
     pango_matrix_transform_rectangle(cast(const(PangoMatrix)*)&this, &rect);
   }
@@ -272,7 +271,7 @@ struct Matrix
         tx = amount to translate in the X direction
         ty = amount to translate in the Y direction
   */
-  void translate(double tx, double ty)
+  void translate(double tx, double ty) nothrow
   {
     pango_matrix_translate(cast(PangoMatrix*)&this, tx, ty);
   }

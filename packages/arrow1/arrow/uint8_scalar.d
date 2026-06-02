@@ -14,26 +14,26 @@ class UInt8Scalar : arrow.scalar.Scalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_uint8_scalar_get_type != &gidSymbolNotFound ? garrow_uint8_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UInt8Scalar self()
+  override UInt8Scalar self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class UInt8Scalar : arrow.scalar.Scalar
       Get builder for [arrow.uint8_scalar.UInt8Scalar]
       Returns: New builder object
   */
-  static UInt8ScalarGidBuilder builder()
+  static UInt8ScalarGidBuilder builder() nothrow
   {
     return new UInt8ScalarGidBuilder;
   }
 
   /** */
-  this(ubyte value)
+  this(ubyte value) nothrow
   {
     GArrowUInt8Scalar* _cretval;
     _cretval = garrow_uint8_scalar_new(value);
@@ -56,7 +56,7 @@ class UInt8Scalar : arrow.scalar.Scalar
   }
 
   /** */
-  ubyte getValue()
+  ubyte getValue() nothrow
   {
     ubyte _retval;
     _retval = garrow_uint8_scalar_get_value(cast(GArrowUInt8Scalar*)this._cPtr);
@@ -76,7 +76,7 @@ final class UInt8ScalarGidBuilder : UInt8ScalarGidBuilderImpl!UInt8ScalarGidBuil
       Create object from builder.
       Returns: New object
   */
-  UInt8Scalar build()
+  UInt8Scalar build() nothrow
   {
     return new UInt8Scalar(cast(void*)createGObject(UInt8Scalar._getGType), Yes.Take);
   }

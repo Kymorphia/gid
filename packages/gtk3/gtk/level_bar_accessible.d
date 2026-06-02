@@ -18,26 +18,26 @@ class LevelBarAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.Val
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_level_bar_accessible_get_type != &gidSymbolNotFound ? gtk_level_bar_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LevelBarAccessible self()
+  override LevelBarAccessible self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class LevelBarAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.Val
       Get builder for [gtk.level_bar_accessible.LevelBarAccessible]
       Returns: New builder object
   */
-  static LevelBarAccessibleGidBuilder builder()
+  static LevelBarAccessibleGidBuilder builder() nothrow
   {
     return new LevelBarAccessibleGidBuilder;
   }
@@ -68,7 +68,7 @@ final class LevelBarAccessibleGidBuilder : LevelBarAccessibleGidBuilderImpl!Leve
       Create object from builder.
       Returns: New object
   */
-  LevelBarAccessible build()
+  LevelBarAccessible build() nothrow
   {
     return new LevelBarAccessible(cast(void*)createGObject(LevelBarAccessible._getGType), No.Take);
   }

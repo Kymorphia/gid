@@ -15,11 +15,8 @@ class CClosureExpression : gtk.expression.Expression
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.cclosure_expression.CClosureExpression");
-
     super(cast(GtkExpression*)ptr, take);
   }
 }

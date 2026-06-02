@@ -16,11 +16,8 @@ class DebugKey
   GDebugKey _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.debug_key.DebugKey");
-
     _cInstance = *cast(GDebugKey*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class DebugKey
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class DebugKey
       Get `key` field.
       Returns: the string
   */
-  @property string key()
+  @property string key() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GDebugKey*)this._cPtr).key);
   }
@@ -47,7 +44,7 @@ class DebugKey
       Params:
         propval = the string
   */
-  @property void key(string propval)
+  @property void key(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GDebugKey*)this._cPtr).key);
     dToC(propval, cast(void*)&(cast(GDebugKey*)this._cPtr).key);
@@ -57,7 +54,7 @@ class DebugKey
       Get `value` field.
       Returns: the flag
   */
-  @property uint value()
+  @property uint value() nothrow
   {
     return (cast(GDebugKey*)this._cPtr).value;
   }
@@ -67,7 +64,7 @@ class DebugKey
       Params:
         propval = the flag
   */
-  @property void value(uint propval)
+  @property void value(uint propval) nothrow
   {
     (cast(GDebugKey*)this._cPtr).value = propval;
   }

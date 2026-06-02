@@ -18,7 +18,7 @@ struct StreamType
         stype = a #GstStreamType
       Returns: A string describing the stream type
   */
-  static string getName(gst.types.StreamType stype)
+  static string getName(gst.types.StreamType stype) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_stream_type_get_name(stype);

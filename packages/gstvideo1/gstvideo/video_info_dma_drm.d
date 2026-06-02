@@ -19,32 +19,32 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_info_dma_drm_get_type != &gidSymbolNotFound ? gst_video_info_dma_drm_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VideoInfoDmaDrm self()
+  override VideoInfoDmaDrm self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
       Get `vinfo` field.
       Returns: the associated #GstVideoInfo
   */
-  @property gstvideo.video_info.VideoInfo vinfo()
+  @property gstvideo.video_info.VideoInfo vinfo() nothrow
   {
     return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)&(cast(GstVideoInfoDmaDrm*)this._cPtr).vinfo);
   }
@@ -62,7 +62,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
       Get `drmFourcc` field.
       Returns: the fourcc defined by drm
   */
-  @property uint drmFourcc()
+  @property uint drmFourcc() nothrow
   {
     return (cast(GstVideoInfoDmaDrm*)this._cPtr).drmFourcc;
   }
@@ -72,7 +72,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
       Params:
         propval = the fourcc defined by drm
   */
-  @property void drmFourcc(uint propval)
+  @property void drmFourcc(uint propval) nothrow
   {
     (cast(GstVideoInfoDmaDrm*)this._cPtr).drmFourcc = propval;
   }
@@ -81,7 +81,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
       Get `drmModifier` field.
       Returns: the drm modifier
   */
-  @property ulong drmModifier()
+  @property ulong drmModifier() nothrow
   {
     return (cast(GstVideoInfoDmaDrm*)this._cPtr).drmModifier;
   }
@@ -91,7 +91,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
       Params:
         propval = the drm modifier
   */
-  @property void drmModifier(ulong propval)
+  @property void drmModifier(ulong propval) nothrow
   {
     (cast(GstVideoInfoDmaDrm*)this._cPtr).drmModifier = propval;
   }
@@ -102,7 +102,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
       Returns: a new #GstVideoInfoDmaDrm.
         Free it with [gstvideo.video_info_dma_drm.VideoInfoDmaDrm.free].
   */
-  this()
+  this() nothrow
   {
     GstVideoInfoDmaDrm* _cretval;
     _cretval = gst_video_info_dma_drm_new();
@@ -119,7 +119,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
       Returns: A #GstVideoInfoDmaDrm,
           or null if caps couldn't be parsed.
   */
-  static gstvideo.video_info_dma_drm.VideoInfoDmaDrm newFromCaps(gst.caps.Caps caps)
+  static gstvideo.video_info_dma_drm.VideoInfoDmaDrm newFromCaps(gst.caps.Caps caps) nothrow
   {
     GstVideoInfoDmaDrm* _cretval;
     _cretval = gst_video_info_dma_drm_new_from_caps(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
@@ -135,7 +135,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
       Returns: a new #GstCaps containing the
         info in drm_info.
   */
-  gst.caps.Caps toCaps()
+  gst.caps.Caps toCaps() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_video_info_dma_drm_to_caps(cast(const(GstVideoInfoDmaDrm)*)this._cPtr);
@@ -154,7 +154,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
         info = #GstVideoInfo
       Returns: true if info is converted correctly.
   */
-  bool toVideoInfo(out gstvideo.video_info.VideoInfo info)
+  bool toVideoInfo(out gstvideo.video_info.VideoInfo info) nothrow
   {
     bool _retval;
     GstVideoInfo _info;
@@ -173,7 +173,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
         caps = a #GstCaps
       Returns: TRUE if caps could be parsed
   */
-  static bool fromCaps(out gstvideo.video_info_dma_drm.VideoInfoDmaDrm drmInfo, gst.caps.Caps caps)
+  static bool fromCaps(out gstvideo.video_info_dma_drm.VideoInfoDmaDrm drmInfo, gst.caps.Caps caps) nothrow
   {
     bool _retval;
     GstVideoInfoDmaDrm _drmInfo;
@@ -192,7 +192,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
         modifier = the associated modifier value.
       Returns: true if drm_info is filled correctly.
   */
-  static bool fromVideoInfo(out gstvideo.video_info_dma_drm.VideoInfoDmaDrm drmInfo, gstvideo.video_info.VideoInfo info, ulong modifier)
+  static bool fromVideoInfo(out gstvideo.video_info_dma_drm.VideoInfoDmaDrm drmInfo, gstvideo.video_info.VideoInfo info, ulong modifier) nothrow
   {
     bool _retval;
     GstVideoInfoDmaDrm _drmInfo;
@@ -207,7 +207,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
       Params:
         drmInfo = a #GstVideoInfoDmaDrm
   */
-  static void init_(out gstvideo.video_info_dma_drm.VideoInfoDmaDrm drmInfo)
+  static void init_(out gstvideo.video_info_dma_drm.VideoInfoDmaDrm drmInfo) nothrow
   {
     GstVideoInfoDmaDrm _drmInfo;
     gst_video_info_dma_drm_init(&_drmInfo);

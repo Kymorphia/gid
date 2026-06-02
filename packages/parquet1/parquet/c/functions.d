@@ -13,7 +13,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libparquet-glib.so.1900"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // ArrowFileReader
   GType function() c_gparquet_arrow_file_reader_get_type; ///

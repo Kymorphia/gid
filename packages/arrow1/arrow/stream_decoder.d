@@ -20,26 +20,26 @@ class StreamDecoder : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_stream_decoder_get_type != &gidSymbolNotFound ? garrow_stream_decoder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StreamDecoder self()
+  override StreamDecoder self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class StreamDecoder : gobject.object.ObjectWrap
       Get builder for [arrow.stream_decoder.StreamDecoder]
       Returns: New builder object
   */
-  static StreamDecoderGidBuilder builder()
+  static StreamDecoderGidBuilder builder() nothrow
   {
     return new StreamDecoderGidBuilder;
   }
@@ -57,13 +57,13 @@ class StreamDecoder : gobject.object.ObjectWrap
       Get `listener` property.
       Returns: A listener that receives decoded events.
   */
-  @property arrow.stream_listener.StreamListener listener()
+  @property arrow.stream_listener.StreamListener listener() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.stream_listener.StreamListener)("listener");
   }
 
   /** */
-  this(arrow.stream_listener.StreamListener listener, arrow.read_options.ReadOptions options = null)
+  this(arrow.stream_listener.StreamListener listener, arrow.read_options.ReadOptions options = null) nothrow
   {
     GArrowStreamDecoder* _cretval;
     _cretval = garrow_stream_decoder_new(listener ? cast(GArrowStreamListener*)listener._cPtr(No.Dup) : null, options ? cast(GArrowReadOptions*)options._cPtr(No.Dup) : null);
@@ -173,7 +173,7 @@ class StreamDecoder : gobject.object.ObjectWrap
       Returns: The number of bytes needed to advance the state of
           the decoder.
   */
-  size_t getNextRequiredSize()
+  size_t getNextRequiredSize() nothrow
   {
     size_t _retval;
     _retval = garrow_stream_decoder_get_next_required_size(cast(GArrowStreamDecoder*)this._cPtr);
@@ -181,7 +181,7 @@ class StreamDecoder : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.schema.Schema getSchema()
+  arrow.schema.Schema getSchema() nothrow
   {
     GArrowSchema* _cretval;
     _cretval = garrow_stream_decoder_get_schema(cast(GArrowStreamDecoder*)this._cPtr);
@@ -212,7 +212,7 @@ class StreamDecoderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T decoder(void* propval)
+  T decoder(void* propval) nothrow
   {
     return setProperty("decoder", propval);
   }
@@ -223,7 +223,7 @@ class StreamDecoderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = A listener that receives decoded events.
       Returns: Builder instance for fluent chaining
   */
-  T listener(arrow.stream_listener.StreamListener propval)
+  T listener(arrow.stream_listener.StreamListener propval) nothrow
   {
     return setProperty("listener", propval);
   }
@@ -236,7 +236,7 @@ final class StreamDecoderGidBuilder : StreamDecoderGidBuilderImpl!StreamDecoderG
       Create object from builder.
       Returns: New object
   */
-  StreamDecoder build()
+  StreamDecoder build() nothrow
   {
     return new StreamDecoder(cast(void*)createGObject(StreamDecoder._getGType), Yes.Take);
   }

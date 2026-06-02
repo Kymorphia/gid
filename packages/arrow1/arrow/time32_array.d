@@ -16,26 +16,26 @@ class Time32Array : arrow.numeric_array.NumericArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_time32_array_get_type != &gidSymbolNotFound ? garrow_time32_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Time32Array self()
+  override Time32Array self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class Time32Array : arrow.numeric_array.NumericArray
       Get builder for [arrow.time32_array.Time32Array]
       Returns: New builder object
   */
-  static Time32ArrayGidBuilder builder()
+  static Time32ArrayGidBuilder builder() nothrow
   {
     return new Time32ArrayGidBuilder;
   }
 
   /** */
-  this(arrow.time32_data_type.Time32DataType dataType, long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
+  this(arrow.time32_data_type.Time32DataType dataType, long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls) nothrow
   {
     GArrowTime32Array* _cretval;
     _cretval = garrow_time32_array_new(dataType ? cast(GArrowTime32DataType*)dataType._cPtr(No.Dup) : null, length, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
@@ -58,7 +58,7 @@ class Time32Array : arrow.numeric_array.NumericArray
   }
 
   /** */
-  int getValue(long i)
+  int getValue(long i) nothrow
   {
     int _retval;
     _retval = garrow_time32_array_get_value(cast(GArrowTime32Array*)this._cPtr, i);
@@ -66,7 +66,7 @@ class Time32Array : arrow.numeric_array.NumericArray
   }
 
   /** */
-  int[] getValues()
+  int[] getValues() nothrow
   {
     const(int)* _cretval;
     long _cretlength;
@@ -93,7 +93,7 @@ final class Time32ArrayGidBuilder : Time32ArrayGidBuilderImpl!Time32ArrayGidBuil
       Create object from builder.
       Returns: New object
   */
-  Time32Array build()
+  Time32Array build() nothrow
   {
     return new Time32Array(cast(void*)createGObject(Time32Array._getGType), Yes.Take);
   }

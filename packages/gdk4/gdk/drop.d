@@ -41,26 +41,26 @@ class Drop : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_drop_get_type != &gidSymbolNotFound ? gdk_drop_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Drop self()
+  override Drop self() nothrow
   {
     return this;
   }
@@ -69,7 +69,7 @@ class Drop : gobject.object.ObjectWrap
       Get builder for [gdk.drop.Drop]
       Returns: New builder object
   */
-  static DropGidBuilder builder()
+  static DropGidBuilder builder() nothrow
   {
     return new DropGidBuilder;
   }
@@ -78,7 +78,7 @@ class Drop : gobject.object.ObjectWrap
       Get `actions` property.
       Returns: The possible actions for this drop
   */
-  @property gdk.types.DragAction actions()
+  @property gdk.types.DragAction actions() nothrow
   {
     return getActions();
   }
@@ -87,7 +87,7 @@ class Drop : gobject.object.ObjectWrap
       Get `device` property.
       Returns: The [gdk.device.Device] performing the drop
   */
-  @property gdk.device.Device device()
+  @property gdk.device.Device device() nothrow
   {
     return getDevice();
   }
@@ -96,7 +96,7 @@ class Drop : gobject.object.ObjectWrap
       Get `display` property.
       Returns: The [gdk.display.Display] that the drop belongs to.
   */
-  @property gdk.display.Display display()
+  @property gdk.display.Display display() nothrow
   {
     return getDisplay();
   }
@@ -105,7 +105,7 @@ class Drop : gobject.object.ObjectWrap
       Get `drag` property.
       Returns: The [gdk.drag.Drag] that initiated this drop
   */
-  @property gdk.drag.Drag drag()
+  @property gdk.drag.Drag drag() nothrow
   {
     return getDrag();
   }
@@ -114,7 +114,7 @@ class Drop : gobject.object.ObjectWrap
       Get `formats` property.
       Returns: The possible formats that the drop can provide its data in.
   */
-  @property gdk.content_formats.ContentFormats formats()
+  @property gdk.content_formats.ContentFormats formats() nothrow
   {
     return getFormats();
   }
@@ -123,7 +123,7 @@ class Drop : gobject.object.ObjectWrap
       Get `surface` property.
       Returns: The [gdk.surface.Surface] the drop happens on
   */
-  @property gdk.surface.Surface surface()
+  @property gdk.surface.Surface surface() nothrow
   {
     return getSurface();
   }
@@ -137,7 +137,7 @@ class Drop : gobject.object.ObjectWrap
       Params:
         action = the action performed by the destination or 0 if the drop failed
   */
-  void finish(gdk.types.DragAction action)
+  void finish(gdk.types.DragAction action) nothrow
   {
     gdk_drop_finish(cast(GdkDrop*)this._cPtr, action);
   }
@@ -159,7 +159,7 @@ class Drop : gobject.object.ObjectWrap
       side will not change this value anymore once a drop has started.
       Returns: The possible `GdkDragActions`
   */
-  gdk.types.DragAction getActions()
+  gdk.types.DragAction getActions() nothrow
   {
     GdkDragAction _cretval;
     _cretval = gdk_drop_get_actions(cast(GdkDrop*)this._cPtr);
@@ -171,7 +171,7 @@ class Drop : gobject.object.ObjectWrap
       Returns the [gdk.device.Device] performing the drop.
       Returns: The [gdk.device.Device] performing the drop.
   */
-  gdk.device.Device getDevice()
+  gdk.device.Device getDevice() nothrow
   {
     GdkDevice* _cretval;
     _cretval = gdk_drop_get_device(cast(GdkDrop*)this._cPtr);
@@ -183,7 +183,7 @@ class Drop : gobject.object.ObjectWrap
       Gets the [gdk.display.Display] that self was created for.
       Returns: a [gdk.display.Display]
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gdk_drop_get_display(cast(GdkDrop*)this._cPtr);
@@ -198,7 +198,7 @@ class Drop : gobject.object.ObjectWrap
       If it is not, null is returned.
       Returns: the corresponding [gdk.drag.Drag]
   */
-  gdk.drag.Drag getDrag()
+  gdk.drag.Drag getDrag() nothrow
   {
     GdkDrag* _cretval;
     _cretval = gdk_drop_get_drag(cast(GdkDrop*)this._cPtr);
@@ -211,7 +211,7 @@ class Drop : gobject.object.ObjectWrap
       to be read in.
       Returns: The possible [gdk.content_formats.ContentFormats]
   */
-  gdk.content_formats.ContentFormats getFormats()
+  gdk.content_formats.ContentFormats getFormats() nothrow
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_drop_get_formats(cast(GdkDrop*)this._cPtr);
@@ -223,7 +223,7 @@ class Drop : gobject.object.ObjectWrap
       Returns the [gdk.surface.Surface] performing the drop.
       Returns: The [gdk.surface.Surface] performing the drop.
   */
-  gdk.surface.Surface getSurface()
+  gdk.surface.Surface getSurface() nothrow
   {
     GdkSurface* _cretval;
     _cretval = gdk_drop_get_surface(cast(GdkDrop*)this._cPtr);
@@ -242,14 +242,21 @@ class Drop : gobject.object.ObjectWrap
         callback = a [gio.types.AsyncReadyCallback] to call when
             the request is satisfied
   */
-  void readAsync(string[] mimeTypes, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void readAsync(string[] mimeTypes, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)*[] _tmpmimeTypes;
@@ -309,14 +316,21 @@ class Drop : gobject.object.ObjectWrap
         cancellable = optional [gio.cancellable.Cancellable] object, null to ignore.
         callback = callback to call when the request is satisfied
   */
-  void readValueAsync(gobject.types.GType type, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void readValueAsync(gobject.types.GType type, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -365,7 +379,7 @@ class Drop : gobject.object.ObjectWrap
         preferred = A unique action that's a member of actions indicating the
              preferred action
   */
-  void status(gdk.types.DragAction actions, gdk.types.DragAction preferred)
+  void status(gdk.types.DragAction actions, gdk.types.DragAction preferred) nothrow
   {
     gdk_drop_status(cast(GdkDrop*)this._cPtr, actions, preferred);
   }
@@ -381,7 +395,7 @@ class DropGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The possible actions for this drop
       Returns: Builder instance for fluent chaining
   */
-  T actions(gdk.types.DragAction propval)
+  T actions(gdk.types.DragAction propval) nothrow
   {
     return setProperty("actions", propval);
   }
@@ -392,7 +406,7 @@ class DropGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The [gdk.device.Device] performing the drop
       Returns: Builder instance for fluent chaining
   */
-  T device(gdk.device.Device propval)
+  T device(gdk.device.Device propval) nothrow
   {
     return setProperty("device", propval);
   }
@@ -403,7 +417,7 @@ class DropGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The [gdk.drag.Drag] that initiated this drop
       Returns: Builder instance for fluent chaining
   */
-  T drag(gdk.drag.Drag propval)
+  T drag(gdk.drag.Drag propval) nothrow
   {
     return setProperty("drag", propval);
   }
@@ -414,7 +428,7 @@ class DropGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The possible formats that the drop can provide its data in.
       Returns: Builder instance for fluent chaining
   */
-  T formats(gdk.content_formats.ContentFormats propval)
+  T formats(gdk.content_formats.ContentFormats propval) nothrow
   {
     return setProperty("formats", propval);
   }
@@ -425,7 +439,7 @@ class DropGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The [gdk.surface.Surface] the drop happens on
       Returns: Builder instance for fluent chaining
   */
-  T surface(gdk.surface.Surface propval)
+  T surface(gdk.surface.Surface propval) nothrow
   {
     return setProperty("surface", propval);
   }
@@ -438,7 +452,7 @@ final class DropGidBuilder : DropGidBuilderImpl!DropGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Drop build()
+  Drop build() nothrow
   {
     return new Drop(cast(void*)createGObject(Drop._getGType), No.Take);
   }

@@ -15,26 +15,26 @@ class DenseUnionDataType : arrow.union_data_type.UnionDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_dense_union_data_type_get_type != &gidSymbolNotFound ? garrow_dense_union_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DenseUnionDataType self()
+  override DenseUnionDataType self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class DenseUnionDataType : arrow.union_data_type.UnionDataType
       Get builder for [arrow.dense_union_data_type.DenseUnionDataType]
       Returns: New builder object
   */
-  static DenseUnionDataTypeGidBuilder builder()
+  static DenseUnionDataTypeGidBuilder builder() nothrow
   {
     return new DenseUnionDataTypeGidBuilder;
   }
 
   /** */
-  this(arrow.field.Field[] fields, byte[] typeCodes)
+  this(arrow.field.Field[] fields, byte[] typeCodes) nothrow
   {
     GArrowDenseUnionDataType* _cretval;
     auto _fields = gListFromD!(arrow.field.Field)(fields);
@@ -76,7 +76,7 @@ final class DenseUnionDataTypeGidBuilder : DenseUnionDataTypeGidBuilderImpl!Dens
       Create object from builder.
       Returns: New object
   */
-  DenseUnionDataType build()
+  DenseUnionDataType build() nothrow
   {
     return new DenseUnionDataType(cast(void*)createGObject(DenseUnionDataType._getGType), Yes.Take);
   }

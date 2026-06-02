@@ -15,11 +15,8 @@ class CrossingEvent : gdk.event.Event
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.crossing_event.CrossingEvent");
-
     super(cast(GdkEvent*)ptr, take);
   }
 
@@ -27,7 +24,7 @@ class CrossingEvent : gdk.event.Event
       Extracts the notify detail from a crossing event.
       Returns: the notify detail of event
   */
-  gdk.types.NotifyType getDetail()
+  gdk.types.NotifyType getDetail() nothrow
   {
     GdkNotifyType _cretval;
     _cretval = gdk_crossing_event_get_detail(cast(GdkEvent*)this._cPtr);
@@ -39,7 +36,7 @@ class CrossingEvent : gdk.event.Event
       Checks if the event surface is the focus surface.
       Returns: true if the surface is the focus surface
   */
-  bool getFocus()
+  bool getFocus() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_crossing_event_get_focus(cast(GdkEvent*)this._cPtr);
@@ -50,7 +47,7 @@ class CrossingEvent : gdk.event.Event
       Extracts the crossing mode from a crossing event.
       Returns: the mode of event
   */
-  gdk.types.CrossingMode getMode()
+  gdk.types.CrossingMode getMode() nothrow
   {
     GdkCrossingMode _cretval;
     _cretval = gdk_crossing_event_get_mode(cast(GdkEvent*)this._cPtr);

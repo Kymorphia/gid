@@ -20,26 +20,26 @@ class ArrowFileReader : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_arrow_file_reader_get_type != &gidSymbolNotFound ? gparquet_arrow_file_reader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ArrowFileReader self()
+  override ArrowFileReader self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class ArrowFileReader : gobject.object.ObjectWrap
       Get builder for [parquet.arrow_file_reader.ArrowFileReader]
       Returns: New builder object
   */
-  static ArrowFileReaderGidBuilder builder()
+  static ArrowFileReaderGidBuilder builder() nothrow
   {
     return new ArrowFileReaderGidBuilder;
   }
@@ -79,7 +79,7 @@ class ArrowFileReader : gobject.object.ObjectWrap
   }
 
   /** */
-  parquet.file_metadata.FileMetadata getMetadata()
+  parquet.file_metadata.FileMetadata getMetadata() nothrow
   {
     GParquetFileMetadata* _cretval;
     _cretval = gparquet_arrow_file_reader_get_metadata(cast(GParquetArrowFileReader*)this._cPtr);
@@ -88,7 +88,7 @@ class ArrowFileReader : gobject.object.ObjectWrap
   }
 
   /** */
-  int getNRowGroups()
+  int getNRowGroups() nothrow
   {
     int _retval;
     _retval = gparquet_arrow_file_reader_get_n_row_groups(cast(GParquetArrowFileReader*)this._cPtr);
@@ -96,7 +96,7 @@ class ArrowFileReader : gobject.object.ObjectWrap
   }
 
   /** */
-  long getNRows()
+  long getNRows() nothrow
   {
     long _retval;
     _retval = gparquet_arrow_file_reader_get_n_rows(cast(GParquetArrowFileReader*)this._cPtr);
@@ -157,7 +157,7 @@ class ArrowFileReader : gobject.object.ObjectWrap
   }
 
   /** */
-  void setUseThreads(bool useThreads)
+  void setUseThreads(bool useThreads) nothrow
   {
     gparquet_arrow_file_reader_set_use_threads(cast(GParquetArrowFileReader*)this._cPtr, useThreads);
   }
@@ -168,7 +168,7 @@ class ArrowFileReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 {
 
   /** */
-  T arrowFileReader(void* propval)
+  T arrowFileReader(void* propval) nothrow
   {
     return setProperty("arrow-file-reader", propval);
   }
@@ -181,7 +181,7 @@ final class ArrowFileReaderGidBuilder : ArrowFileReaderGidBuilderImpl!ArrowFileR
       Create object from builder.
       Returns: New object
   */
-  ArrowFileReader build()
+  ArrowFileReader build() nothrow
   {
     return new ArrowFileReader(cast(void*)createGObject(ArrowFileReader._getGType), No.Take);
   }

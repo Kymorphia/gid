@@ -14,26 +14,26 @@ class NativeVolumeMonitor : gio.volume_monitor.VolumeMonitor
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_native_volume_monitor_get_type != &gidSymbolNotFound ? g_native_volume_monitor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NativeVolumeMonitor self()
+  override NativeVolumeMonitor self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class NativeVolumeMonitor : gio.volume_monitor.VolumeMonitor
       Get builder for [gio.native_volume_monitor.NativeVolumeMonitor]
       Returns: New builder object
   */
-  static NativeVolumeMonitorGidBuilder builder()
+  static NativeVolumeMonitorGidBuilder builder() nothrow
   {
     return new NativeVolumeMonitorGidBuilder;
   }
@@ -60,7 +60,7 @@ final class NativeVolumeMonitorGidBuilder : NativeVolumeMonitorGidBuilderImpl!Na
       Create object from builder.
       Returns: New object
   */
-  NativeVolumeMonitor build()
+  NativeVolumeMonitor build() nothrow
   {
     return new NativeVolumeMonitor(cast(void*)createGObject(NativeVolumeMonitor._getGType), No.Take);
   }

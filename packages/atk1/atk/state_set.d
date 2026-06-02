@@ -20,26 +20,26 @@ class StateSet : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_state_set_get_type != &gidSymbolNotFound ? atk_state_set_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StateSet self()
+  override StateSet self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class StateSet : gobject.object.ObjectWrap
       Get builder for [atk.state_set.StateSet]
       Returns: New builder object
   */
-  static StateSetGidBuilder builder()
+  static StateSetGidBuilder builder() nothrow
   {
     return new StateSetGidBuilder;
   }
@@ -57,7 +57,7 @@ class StateSet : gobject.object.ObjectWrap
       Creates a new empty state set.
       Returns: a new #AtkStateSet
   */
-  this()
+  this() nothrow
   {
     AtkStateSet* _cretval;
     _cretval = atk_state_set_new();
@@ -77,7 +77,7 @@ class StateSet : gobject.object.ObjectWrap
         type = an #AtkStateType
       Returns: true if  the state for type is not already in set.
   */
-  bool addState(atk.types.StateType type)
+  bool addState(atk.types.StateType type) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_state_set_add_state(cast(AtkStateSet*)this._cPtr, type);
@@ -95,7 +95,7 @@ class StateSet : gobject.object.ObjectWrap
       Params:
         types = an array of #AtkStateType
   */
-  void addStates(atk.types.StateType[] types)
+  void addStates(atk.types.StateType[] types) nothrow
   {
     int _nTypes;
     if (types)
@@ -114,7 +114,7 @@ class StateSet : gobject.object.ObjectWrap
       Returns: a new #AtkStateSet which is the intersection of
         the two sets.
   */
-  atk.state_set.StateSet andSets(atk.state_set.StateSet compareSet)
+  atk.state_set.StateSet andSets(atk.state_set.StateSet compareSet) nothrow
   {
     AtkStateSet* _cretval;
     _cretval = atk_state_set_and_sets(cast(AtkStateSet*)this._cPtr, compareSet ? cast(AtkStateSet*)compareSet._cPtr(No.Dup) : null);
@@ -125,7 +125,7 @@ class StateSet : gobject.object.ObjectWrap
   /**
       Removes all states from the state set.
   */
-  void clearStates()
+  void clearStates() nothrow
   {
     atk_state_set_clear_states(cast(AtkStateSet*)this._cPtr);
   }
@@ -137,7 +137,7 @@ class StateSet : gobject.object.ObjectWrap
         type = an #AtkStateType
       Returns: true if type is the state type is in set.
   */
-  bool containsState(atk.types.StateType type)
+  bool containsState(atk.types.StateType type) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_state_set_contains_state(cast(AtkStateSet*)this._cPtr, type);
@@ -152,7 +152,7 @@ class StateSet : gobject.object.ObjectWrap
         types = an array of #AtkStateType
       Returns: true if all the states for type are in set.
   */
-  bool containsStates(atk.types.StateType[] types)
+  bool containsStates(atk.types.StateType[] types) nothrow
   {
     bool _retval;
     int _nTypes;
@@ -168,7 +168,7 @@ class StateSet : gobject.object.ObjectWrap
       Checks whether the state set is empty, i.e. has no states set.
       Returns: true if set has no states set, otherwise false
   */
-  bool isEmpty()
+  bool isEmpty() nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_state_set_is_empty(cast(AtkStateSet*)this._cPtr);
@@ -183,7 +183,7 @@ class StateSet : gobject.object.ObjectWrap
       Returns: a new #AtkStateSet which is
         the union of the two sets, returning null is empty.
   */
-  atk.state_set.StateSet orSets(atk.state_set.StateSet compareSet)
+  atk.state_set.StateSet orSets(atk.state_set.StateSet compareSet) nothrow
   {
     AtkStateSet* _cretval;
     _cretval = atk_state_set_or_sets(cast(AtkStateSet*)this._cPtr, compareSet ? cast(AtkStateSet*)compareSet._cPtr(No.Dup) : null);
@@ -203,7 +203,7 @@ class StateSet : gobject.object.ObjectWrap
         type = an #AtkType
       Returns: true if type was the state type is in set.
   */
-  bool removeState(atk.types.StateType type)
+  bool removeState(atk.types.StateType type) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_state_set_remove_state(cast(AtkStateSet*)this._cPtr, type);
@@ -220,7 +220,7 @@ class StateSet : gobject.object.ObjectWrap
       Returns: a new #AtkStateSet which contains the states
         which are in exactly one of the two sets.
   */
-  atk.state_set.StateSet xorSets(atk.state_set.StateSet compareSet)
+  atk.state_set.StateSet xorSets(atk.state_set.StateSet compareSet) nothrow
   {
     AtkStateSet* _cretval;
     _cretval = atk_state_set_xor_sets(cast(AtkStateSet*)this._cPtr, compareSet ? cast(AtkStateSet*)compareSet._cPtr(No.Dup) : null);
@@ -241,7 +241,7 @@ final class StateSetGidBuilder : StateSetGidBuilderImpl!StateSetGidBuilder
       Create object from builder.
       Returns: New object
   */
-  StateSet build()
+  StateSet build() nothrow
   {
     return new StateSet(cast(void*)createGObject(StateSet._getGType), Yes.Take);
   }

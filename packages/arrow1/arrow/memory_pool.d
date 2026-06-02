@@ -14,26 +14,26 @@ class MemoryPool : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_memory_pool_get_type != &gidSymbolNotFound ? garrow_memory_pool_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MemoryPool self()
+  override MemoryPool self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class MemoryPool : gobject.object.ObjectWrap
       Get builder for [arrow.memory_pool.MemoryPool]
       Returns: New builder object
   */
-  static MemoryPoolGidBuilder builder()
+  static MemoryPoolGidBuilder builder() nothrow
   {
     return new MemoryPoolGidBuilder;
   }
 
   /** */
-  static arrow.memory_pool.MemoryPool default_()
+  static arrow.memory_pool.MemoryPool default_() nothrow
   {
     GArrowMemoryPool* _cretval;
     _cretval = garrow_memory_pool_default();
@@ -57,7 +57,7 @@ class MemoryPool : gobject.object.ObjectWrap
   }
 
   /** */
-  string getBackendName()
+  string getBackendName() nothrow
   {
     char* _cretval;
     _cretval = garrow_memory_pool_get_backend_name(cast(GArrowMemoryPool*)this._cPtr);
@@ -66,7 +66,7 @@ class MemoryPool : gobject.object.ObjectWrap
   }
 
   /** */
-  long getBytesAllocated()
+  long getBytesAllocated() nothrow
   {
     long _retval;
     _retval = garrow_memory_pool_get_bytes_allocated(cast(GArrowMemoryPool*)this._cPtr);
@@ -78,7 +78,7 @@ class MemoryPool : gobject.object.ObjectWrap
       Returns: Maximum bytes allocated. If not known (or not implemented),
           returns -1.
   */
-  long getMaxMemory()
+  long getMaxMemory() nothrow
   {
     long _retval;
     _retval = garrow_memory_pool_get_max_memory(cast(GArrowMemoryPool*)this._cPtr);
@@ -91,7 +91,7 @@ class MemoryPoolGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T memoryPool(void* propval)
+  T memoryPool(void* propval) nothrow
   {
     return setProperty("memory-pool", propval);
   }
@@ -104,7 +104,7 @@ final class MemoryPoolGidBuilder : MemoryPoolGidBuilderImpl!MemoryPoolGidBuilder
       Create object from builder.
       Returns: New object
   */
-  MemoryPool build()
+  MemoryPool build() nothrow
   {
     return new MemoryPool(cast(void*)createGObject(MemoryPool._getGType), No.Take);
   }

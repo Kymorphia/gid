@@ -24,26 +24,26 @@ class InetSocketAddress : gio.socket_address.SocketAddress
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_inet_socket_address_get_type != &gidSymbolNotFound ? g_inet_socket_address_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override InetSocketAddress self()
+  override InetSocketAddress self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class InetSocketAddress : gio.socket_address.SocketAddress
       Get builder for [gio.inet_socket_address.InetSocketAddress]
       Returns: New builder object
   */
-  static InetSocketAddressGidBuilder builder()
+  static InetSocketAddressGidBuilder builder() nothrow
   {
     return new InetSocketAddressGidBuilder;
   }
@@ -61,7 +61,7 @@ class InetSocketAddress : gio.socket_address.SocketAddress
       Get `address` property.
       Returns: The address.
   */
-  @property gio.inet_address.InetAddress address()
+  @property gio.inet_address.InetAddress address() nothrow
   {
     return getAddress();
   }
@@ -70,7 +70,7 @@ class InetSocketAddress : gio.socket_address.SocketAddress
       Get `flowinfo` property.
       Returns: The `sin6_flowinfo` field, for IPv6 addresses.
   */
-  @property uint flowinfo()
+  @property uint flowinfo() nothrow
   {
     return getFlowinfo();
   }
@@ -79,7 +79,7 @@ class InetSocketAddress : gio.socket_address.SocketAddress
       Get `port` property.
       Returns: The port.
   */
-  @property uint port()
+  @property uint port() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("port");
   }
@@ -88,7 +88,7 @@ class InetSocketAddress : gio.socket_address.SocketAddress
       Get `scopeId` property.
       Returns: The `sin6_scope_id` field, for IPv6 addresses.
   */
-  @property uint scopeId()
+  @property uint scopeId() nothrow
   {
     return getScopeId();
   }
@@ -101,7 +101,7 @@ class InetSocketAddress : gio.socket_address.SocketAddress
         port = a port number
       Returns: a new #GInetSocketAddress
   */
-  this(gio.inet_address.InetAddress address, ushort port)
+  this(gio.inet_address.InetAddress address, ushort port) nothrow
   {
     GSocketAddress* _cretval;
     _cretval = g_inet_socket_address_new(address ? cast(GInetAddress*)address._cPtr(No.Dup) : null, port);
@@ -120,7 +120,7 @@ class InetSocketAddress : gio.socket_address.SocketAddress
       Returns: a new #GInetSocketAddress,
         or null if address cannot be parsed.
   */
-  static gio.inet_socket_address.InetSocketAddress newFromString(string address, uint port)
+  static gio.inet_socket_address.InetSocketAddress newFromString(string address, uint port) nothrow
   {
     GSocketAddress* _cretval;
     const(char)* _address = address.toCString(No.Alloc);
@@ -134,7 +134,7 @@ class InetSocketAddress : gio.socket_address.SocketAddress
       Returns: the #GInetAddress for address, which must be
         [gobject.object.ObjectWrap.ref_]'d if it will be stored
   */
-  gio.inet_address.InetAddress getAddress()
+  gio.inet_address.InetAddress getAddress() nothrow
   {
     GInetAddress* _cretval;
     _cretval = g_inet_socket_address_get_address(cast(GInetSocketAddress*)this._cPtr);
@@ -147,7 +147,7 @@ class InetSocketAddress : gio.socket_address.SocketAddress
       which must be an IPv6 address.
       Returns: the flowinfo field
   */
-  uint getFlowinfo()
+  uint getFlowinfo() nothrow
   {
     uint _retval;
     _retval = g_inet_socket_address_get_flowinfo(cast(GInetSocketAddress*)this._cPtr);
@@ -158,7 +158,7 @@ class InetSocketAddress : gio.socket_address.SocketAddress
       Gets address's port.
       Returns: the port for address
   */
-  ushort getPort()
+  ushort getPort() nothrow
   {
     ushort _retval;
     _retval = g_inet_socket_address_get_port(cast(GInetSocketAddress*)this._cPtr);
@@ -170,7 +170,7 @@ class InetSocketAddress : gio.socket_address.SocketAddress
       which must be an IPv6 address.
       Returns: the scope id field
   */
-  uint getScopeId()
+  uint getScopeId() nothrow
   {
     uint _retval;
     _retval = g_inet_socket_address_get_scope_id(cast(GInetSocketAddress*)this._cPtr);
@@ -189,7 +189,7 @@ class InetSocketAddressGidBuilderImpl(T) : gio.socket_address.SocketAddressGidBu
         propval = The address.
       Returns: Builder instance for fluent chaining
   */
-  T address(gio.inet_address.InetAddress propval)
+  T address(gio.inet_address.InetAddress propval) nothrow
   {
     return setProperty("address", propval);
   }
@@ -200,7 +200,7 @@ class InetSocketAddressGidBuilderImpl(T) : gio.socket_address.SocketAddressGidBu
         propval = The `sin6_flowinfo` field, for IPv6 addresses.
       Returns: Builder instance for fluent chaining
   */
-  T flowinfo(uint propval)
+  T flowinfo(uint propval) nothrow
   {
     return setProperty("flowinfo", propval);
   }
@@ -211,7 +211,7 @@ class InetSocketAddressGidBuilderImpl(T) : gio.socket_address.SocketAddressGidBu
         propval = The port.
       Returns: Builder instance for fluent chaining
   */
-  T port(uint propval)
+  T port(uint propval) nothrow
   {
     return setProperty("port", propval);
   }
@@ -222,7 +222,7 @@ class InetSocketAddressGidBuilderImpl(T) : gio.socket_address.SocketAddressGidBu
         propval = The `sin6_scope_id` field, for IPv6 addresses.
       Returns: Builder instance for fluent chaining
   */
-  T scopeId(uint propval)
+  T scopeId(uint propval) nothrow
   {
     return setProperty("scope-id", propval);
   }
@@ -235,7 +235,7 @@ final class InetSocketAddressGidBuilder : InetSocketAddressGidBuilderImpl!InetSo
       Create object from builder.
       Returns: New object
   */
-  InetSocketAddress build()
+  InetSocketAddress build() nothrow
   {
     return new InetSocketAddress(cast(void*)createGObject(InetSocketAddress._getGType), Yes.Take);
   }

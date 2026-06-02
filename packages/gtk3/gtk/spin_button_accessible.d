@@ -24,26 +24,26 @@ class SpinButtonAccessible : gtk.entry_accessible.EntryAccessible, atk.value.Val
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_spin_button_accessible_get_type != &gidSymbolNotFound ? gtk_spin_button_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SpinButtonAccessible self()
+  override SpinButtonAccessible self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class SpinButtonAccessible : gtk.entry_accessible.EntryAccessible, atk.value.Val
       Get builder for [gtk.spin_button_accessible.SpinButtonAccessible]
       Returns: New builder object
   */
-  static SpinButtonAccessibleGidBuilder builder()
+  static SpinButtonAccessibleGidBuilder builder() nothrow
   {
     return new SpinButtonAccessibleGidBuilder;
   }
@@ -74,7 +74,7 @@ final class SpinButtonAccessibleGidBuilder : SpinButtonAccessibleGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  SpinButtonAccessible build()
+  SpinButtonAccessible build() nothrow
   {
     return new SpinButtonAccessible(cast(void*)createGObject(SpinButtonAccessible._getGType), No.Take);
   }

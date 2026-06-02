@@ -19,26 +19,26 @@ class MemoryMappedInputStream : arrow.seekable_input_stream.SeekableInputStream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_memory_mapped_input_stream_get_type != &gidSymbolNotFound ? garrow_memory_mapped_input_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MemoryMappedInputStream self()
+  override MemoryMappedInputStream self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class MemoryMappedInputStream : arrow.seekable_input_stream.SeekableInputStream
       Get builder for [arrow.memory_mapped_input_stream.MemoryMappedInputStream]
       Returns: New builder object
   */
-  static MemoryMappedInputStreamGidBuilder builder()
+  static MemoryMappedInputStreamGidBuilder builder() nothrow
   {
     return new MemoryMappedInputStreamGidBuilder;
   }
@@ -78,7 +78,7 @@ final class MemoryMappedInputStreamGidBuilder : MemoryMappedInputStreamGidBuilde
       Create object from builder.
       Returns: New object
   */
-  MemoryMappedInputStream build()
+  MemoryMappedInputStream build() nothrow
   {
     return new MemoryMappedInputStream(cast(void*)createGObject(MemoryMappedInputStream._getGType), Yes.Take);
   }

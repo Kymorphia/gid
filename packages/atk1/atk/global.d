@@ -23,7 +23,7 @@ import gobject.object;
       to notify a focus change on your implementation, you can use
       [atk.object.ObjectWrap.notifyStateChange] instead.
 */
-void focusTrackerNotify(atk.object.ObjectWrap object)
+void focusTrackerNotify(atk.object.ObjectWrap object) nothrow
 {
   atk_focus_tracker_notify(object ? cast(AtkObject*)object._cPtr(No.Dup) : null);
 }
@@ -33,7 +33,7 @@ void focusTrackerNotify(atk.object.ObjectWrap object)
     library the process is running against.
     Returns: the binary age of the ATK library
 */
-uint getBinaryAge()
+uint getBinaryAge() nothrow
 {
   uint _retval;
   _retval = atk_get_binary_age();
@@ -51,7 +51,7 @@ uint getBinaryAge()
     Returns: a default implementation of the
       #AtkObjectFactory/type registry
 */
-atk.registry.Registry getDefaultRegistry()
+atk.registry.Registry getDefaultRegistry() nothrow
 {
   AtkRegistry* _cretval;
   _cretval = atk_get_default_registry();
@@ -64,7 +64,7 @@ atk.registry.Registry getDefaultRegistry()
     Returns: the currently focused object for the current
       application
 */
-atk.object.ObjectWrap getFocusObject()
+atk.object.ObjectWrap getFocusObject() nothrow
 {
   AtkObject* _cretval;
   _cretval = atk_get_focus_object();
@@ -77,7 +77,7 @@ atk.object.ObjectWrap getFocusObject()
     ATK library the process is running against.
     Returns: the interface age of the ATK library
 */
-uint getInterfaceAge()
+uint getInterfaceAge() nothrow
 {
   uint _retval;
   _retval = atk_get_interface_age();
@@ -94,7 +94,7 @@ uint getInterfaceAge()
     included when compiling your code.
     Returns: the major version number of the ATK library
 */
-uint getMajorVersion()
+uint getMajorVersion() nothrow
 {
   uint _retval;
   _retval = atk_get_major_version();
@@ -111,7 +111,7 @@ uint getMajorVersion()
     headers you have included when compiling your code.
     Returns: the micro version number of the ATK library
 */
-uint getMicroVersion()
+uint getMicroVersion() nothrow
 {
   uint _retval;
   _retval = atk_get_micro_version();
@@ -128,7 +128,7 @@ uint getMicroVersion()
     headers you have included when compiling your code.
     Returns: the minor version number of the ATK library
 */
-uint getMinorVersion()
+uint getMinorVersion() nothrow
 {
   uint _retval;
   _retval = atk_get_minor_version();
@@ -140,7 +140,7 @@ uint getMinorVersion()
     Returns: the root accessible container for the current
       application
 */
-atk.object.ObjectWrap getRoot()
+atk.object.ObjectWrap getRoot() nothrow
 {
   AtkObject* _cretval;
   _cretval = atk_get_root();
@@ -152,7 +152,7 @@ atk.object.ObjectWrap getRoot()
     Gets name string for the GUI toolkit implementing ATK for this application.
     Returns: name string for the GUI toolkit implementing ATK for this application
 */
-string getToolkitName()
+string getToolkitName() nothrow
 {
   const(char)* _cretval;
   _cretval = atk_get_toolkit_name();
@@ -164,7 +164,7 @@ string getToolkitName()
     Gets version string for the GUI toolkit implementing ATK for this application.
     Returns: version string for the GUI toolkit implementing ATK for this application
 */
-string getToolkitVersion()
+string getToolkitVersion() nothrow
 {
   const(char)* _cretval;
   _cretval = atk_get_toolkit_version();
@@ -176,7 +176,7 @@ string getToolkitVersion()
     Gets the current version for ATK.
     Returns: version string for ATK
 */
-string getVersion()
+string getVersion() nothrow
 {
   const(char)* _cretval;
   _cretval = atk_get_version();
@@ -196,7 +196,7 @@ string getVersion()
         implementation, subscribe to the #AtkObject::state-change "focused"
         signal.
 */
-void removeFocusTracker(uint trackerId)
+void removeFocusTracker(uint trackerId) nothrow
 {
   atk_remove_focus_tracker(trackerId);
 }
@@ -217,7 +217,7 @@ void removeFocusTracker(uint trackerId)
     Params:
       listenerId = the id of the event listener to remove
 */
-void removeGlobalEventListener(uint listenerId)
+void removeGlobalEventListener(uint listenerId) nothrow
 {
   atk_remove_global_event_listener(listenerId);
 }
@@ -231,7 +231,7 @@ void removeGlobalEventListener(uint listenerId)
     Params:
       listenerId = the id of the event listener to remove
 */
-void removeKeyEventListener(uint listenerId)
+void removeKeyEventListener(uint listenerId) nothrow
 {
   atk_remove_key_event_listener(listenerId);
 }

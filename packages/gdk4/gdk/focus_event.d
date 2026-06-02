@@ -15,11 +15,8 @@ class FocusEvent : gdk.event.Event
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.focus_event.FocusEvent");
-
     super(cast(GdkEvent*)ptr, take);
   }
 
@@ -28,7 +25,7 @@ class FocusEvent : gdk.event.Event
       leaving the surface.
       Returns: true of the focus is entering
   */
-  bool getIn()
+  bool getIn() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_focus_event_get_in(cast(GdkEvent*)this._cPtr);

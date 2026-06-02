@@ -55,26 +55,26 @@ class FileInfo : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_file_info_get_type != &gidSymbolNotFound ? g_file_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileInfo self()
+  override FileInfo self() nothrow
   {
     return this;
   }
@@ -83,7 +83,7 @@ class FileInfo : gobject.object.ObjectWrap
       Get builder for [gio.file_info.FileInfo]
       Returns: New builder object
   */
-  static FileInfoGidBuilder builder()
+  static FileInfoGidBuilder builder() nothrow
   {
     return new FileInfoGidBuilder;
   }
@@ -92,7 +92,7 @@ class FileInfo : gobject.object.ObjectWrap
       Creates a new file info structure.
       Returns: a #GFileInfo.
   */
-  this()
+  this() nothrow
   {
     GFileInfo* _cretval;
     _cretval = g_file_info_new();
@@ -102,7 +102,7 @@ class FileInfo : gobject.object.ObjectWrap
   /**
       Clears the status information from info.
   */
-  void clearStatus()
+  void clearStatus() nothrow
   {
     g_file_info_clear_status(cast(GFileInfo*)this._cPtr);
   }
@@ -114,7 +114,7 @@ class FileInfo : gobject.object.ObjectWrap
       Params:
         destInfo = destination to copy attributes to.
   */
-  void copyInto(gio.file_info.FileInfo destInfo)
+  void copyInto(gio.file_info.FileInfo destInfo) nothrow
   {
     g_file_info_copy_into(cast(GFileInfo*)this._cPtr, destInfo ? cast(GFileInfo*)destInfo._cPtr(No.Dup) : null);
   }
@@ -123,7 +123,7 @@ class FileInfo : gobject.object.ObjectWrap
       Duplicates a file info structure.
       Returns: a duplicate #GFileInfo of other.
   */
-  gio.file_info.FileInfo dup()
+  gio.file_info.FileInfo dup() nothrow
   {
     GFileInfo* _cretval;
     _cretval = g_file_info_dup(cast(GFileInfo*)this._cPtr);
@@ -144,7 +144,7 @@ class FileInfo : gobject.object.ObjectWrap
       be queried separately using [gio.file_info.FileInfo.getAttributeUint32].
       Returns: access time, or null if unknown
   */
-  glib.date_time.DateTime getAccessDateTime()
+  glib.date_time.DateTime getAccessDateTime() nothrow
   {
     GDateTime* _cretval;
     _cretval = g_file_info_get_access_date_time(cast(GFileInfo*)this._cPtr);
@@ -163,7 +163,7 @@ class FileInfo : gobject.object.ObjectWrap
            null if the attribute wasn’t set.
            When you're done with the string it must be freed with [glib.global.gfree].
   */
-  string getAttributeAsString(string attribute)
+  string getAttributeAsString(string attribute) nothrow
   {
     char* _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -180,7 +180,7 @@ class FileInfo : gobject.object.ObjectWrap
         attribute = a file attribute key.
       Returns: the boolean value contained within the attribute.
   */
-  bool getAttributeBoolean(string attribute)
+  bool getAttributeBoolean(string attribute) nothrow
   {
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -197,7 +197,7 @@ class FileInfo : gobject.object.ObjectWrap
       Returns: the contents of the attribute value as a byte string, or
         null otherwise.
   */
-  string getAttributeByteString(string attribute)
+  string getAttributeByteString(string attribute) nothrow
   {
     const(char)* _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -218,7 +218,7 @@ class FileInfo : gobject.object.ObjectWrap
       Returns: true if info has an attribute named attribute,
              false otherwise.
   */
-  bool getAttributeData(string attribute, out gio.types.FileAttributeType type, out void* valuePp, out gio.types.FileAttributeStatus status)
+  bool getAttributeData(string attribute, out gio.types.FileAttributeType type, out void* valuePp, out gio.types.FileAttributeStatus status) nothrow
   {
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -239,7 +239,7 @@ class FileInfo : gobject.object.ObjectWrap
       Returns: the contents of the attribute value as
         a file path, or null otherwise.
   */
-  string getAttributeFilePath(string attribute)
+  string getAttributeFilePath(string attribute) nothrow
   {
     const(char)* _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -257,7 +257,7 @@ class FileInfo : gobject.object.ObjectWrap
         attribute = a file attribute key.
       Returns: a signed 32-bit integer from the attribute.
   */
-  int getAttributeInt32(string attribute)
+  int getAttributeInt32(string attribute) nothrow
   {
     int _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -274,7 +274,7 @@ class FileInfo : gobject.object.ObjectWrap
         attribute = a file attribute key.
       Returns: a signed 64-bit integer from the attribute.
   */
-  long getAttributeInt64(string attribute)
+  long getAttributeInt64(string attribute) nothrow
   {
     long _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -291,7 +291,7 @@ class FileInfo : gobject.object.ObjectWrap
       Returns: a #GObject associated with the given attribute,
         or null otherwise.
   */
-  gobject.object.ObjectWrap getAttributeObject(string attribute)
+  gobject.object.ObjectWrap getAttributeObject(string attribute) nothrow
   {
     GObject* _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -308,7 +308,7 @@ class FileInfo : gobject.object.ObjectWrap
       Returns: a #GFileAttributeStatus for the given attribute, or
            [gio.types.FileAttributeStatus.Unset] if the key is invalid.
   */
-  gio.types.FileAttributeStatus getAttributeStatus(string attribute)
+  gio.types.FileAttributeStatus getAttributeStatus(string attribute) nothrow
   {
     GFileAttributeStatus _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -326,7 +326,7 @@ class FileInfo : gobject.object.ObjectWrap
       Returns: the contents of the attribute value as a UTF-8 string,
         or null otherwise.
   */
-  string getAttributeString(string attribute)
+  string getAttributeString(string attribute) nothrow
   {
     const(char)* _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -344,7 +344,7 @@ class FileInfo : gobject.object.ObjectWrap
       Returns: the contents of the attribute value as a stringv,
         or null otherwise. Do not free. These returned strings are UTF-8.
   */
-  string[] getAttributeStringv(string attribute)
+  string[] getAttributeStringv(string attribute) nothrow
   {
     char** _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -371,7 +371,7 @@ class FileInfo : gobject.object.ObjectWrap
       Returns: a #GFileAttributeType for the given attribute, or
         [gio.types.FileAttributeType.Invalid] if the key is not set.
   */
-  gio.types.FileAttributeType getAttributeType(string attribute)
+  gio.types.FileAttributeType getAttributeType(string attribute) nothrow
   {
     GFileAttributeType _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -389,7 +389,7 @@ class FileInfo : gobject.object.ObjectWrap
         attribute = a file attribute key.
       Returns: an unsigned 32-bit integer from the attribute.
   */
-  uint getAttributeUint32(string attribute)
+  uint getAttributeUint32(string attribute) nothrow
   {
     uint _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -406,7 +406,7 @@ class FileInfo : gobject.object.ObjectWrap
         attribute = a file attribute key.
       Returns: a unsigned 64-bit integer from the attribute.
   */
-  ulong getAttributeUint64(string attribute)
+  ulong getAttributeUint64(string attribute) nothrow
   {
     ulong _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -422,7 +422,7 @@ class FileInfo : gobject.object.ObjectWrap
       Returns: a string containing the file's content type,
         or null if unknown.
   */
-  string getContentType()
+  string getContentType() nothrow
   {
     const(char)* _cretval;
     _cretval = g_file_info_get_content_type(cast(GFileInfo*)this._cPtr);
@@ -443,7 +443,7 @@ class FileInfo : gobject.object.ObjectWrap
       be queried separately using [gio.file_info.FileInfo.getAttributeUint32].
       Returns: creation time, or null if unknown
   */
-  glib.date_time.DateTime getCreationDateTime()
+  glib.date_time.DateTime getCreationDateTime() nothrow
   {
     GDateTime* _cretval;
     _cretval = g_file_info_get_creation_date_time(cast(GFileInfo*)this._cPtr);
@@ -457,7 +457,7 @@ class FileInfo : gobject.object.ObjectWrap
       [gio.types.FILE_ATTRIBUTE_TRASH_DELETION_DATE] attribute is unset, null is returned.
       Returns: a #GDateTime, or null.
   */
-  glib.date_time.DateTime getDeletionDate()
+  glib.date_time.DateTime getDeletionDate() nothrow
   {
     GDateTime* _cretval;
     _cretval = g_file_info_get_deletion_date(cast(GFileInfo*)this._cPtr);
@@ -472,7 +472,7 @@ class FileInfo : gobject.object.ObjectWrap
       [gio.types.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME].
       Returns: a string containing the display name.
   */
-  string getDisplayName()
+  string getDisplayName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_file_info_get_display_name(cast(GFileInfo*)this._cPtr);
@@ -487,7 +487,7 @@ class FileInfo : gobject.object.ObjectWrap
       [gio.types.FILE_ATTRIBUTE_STANDARD_EDIT_NAME].
       Returns: a string containing the edit name.
   */
-  string getEditName()
+  string getEditName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_file_info_get_edit_name(cast(GFileInfo*)this._cPtr);
@@ -503,7 +503,7 @@ class FileInfo : gobject.object.ObjectWrap
       [gio.types.FILE_ATTRIBUTE_ETAG_VALUE].
       Returns: a string containing the value of the "etag:value" attribute.
   */
-  string getEtag()
+  string getEtag() nothrow
   {
     const(char)* _cretval;
     _cretval = g_file_info_get_etag(cast(GFileInfo*)this._cPtr);
@@ -519,7 +519,7 @@ class FileInfo : gobject.object.ObjectWrap
       [gio.types.FILE_ATTRIBUTE_STANDARD_TYPE].
       Returns: a #GFileType for the given file.
   */
-  gio.types.FileType getFileType()
+  gio.types.FileType getFileType() nothrow
   {
     GFileType _cretval;
     _cretval = g_file_info_get_file_type(cast(GFileInfo*)this._cPtr);
@@ -534,7 +534,7 @@ class FileInfo : gobject.object.ObjectWrap
       [gio.types.FILE_ATTRIBUTE_STANDARD_ICON].
       Returns: #GIcon for the given info.
   */
-  gio.icon.Icon getIcon()
+  gio.icon.Icon getIcon() nothrow
   {
     GIcon* _cretval;
     _cretval = g_file_info_get_icon(cast(GFileInfo*)this._cPtr);
@@ -549,7 +549,7 @@ class FileInfo : gobject.object.ObjectWrap
       [gio.types.FILE_ATTRIBUTE_STANDARD_IS_BACKUP].
       Returns: true if file is a backup file, false otherwise.
   */
-  bool getIsBackup()
+  bool getIsBackup() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_file_info_get_is_backup(cast(GFileInfo*)this._cPtr);
@@ -563,7 +563,7 @@ class FileInfo : gobject.object.ObjectWrap
       [gio.types.FILE_ATTRIBUTE_STANDARD_IS_HIDDEN].
       Returns: true if the file is a hidden file, false otherwise.
   */
-  bool getIsHidden()
+  bool getIsHidden() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_file_info_get_is_hidden(cast(GFileInfo*)this._cPtr);
@@ -577,7 +577,7 @@ class FileInfo : gobject.object.ObjectWrap
       [gio.types.FILE_ATTRIBUTE_STANDARD_IS_SYMLINK].
       Returns: true if the given info is a symlink.
   */
-  bool getIsSymlink()
+  bool getIsSymlink() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_file_info_get_is_symlink(cast(GFileInfo*)this._cPtr);
@@ -597,7 +597,7 @@ class FileInfo : gobject.object.ObjectWrap
       be queried separately using [gio.file_info.FileInfo.getAttributeUint32].
       Returns: modification time, or null if unknown
   */
-  glib.date_time.DateTime getModificationDateTime()
+  glib.date_time.DateTime getModificationDateTime() nothrow
   {
     GDateTime* _cretval;
     _cretval = g_file_info_get_modification_date_time(cast(GFileInfo*)this._cPtr);
@@ -619,7 +619,7 @@ class FileInfo : gobject.object.ObjectWrap
       Deprecated: Use [gio.file_info.FileInfo.getModificationDateTime] instead, as
            #GTimeVal is deprecated due to the year 2038 problem.
   */
-  void getModificationTime(out glib.time_val.TimeVal result)
+  void getModificationTime(out glib.time_val.TimeVal result) nothrow
   {
     g_file_info_get_modification_time(cast(GFileInfo*)this._cPtr, cast(GTimeVal*)&result);
   }
@@ -631,7 +631,7 @@ class FileInfo : gobject.object.ObjectWrap
       [gio.types.FILE_ATTRIBUTE_STANDARD_NAME].
       Returns: a string containing the file name.
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_file_info_get_name(cast(GFileInfo*)this._cPtr);
@@ -648,7 +648,7 @@ class FileInfo : gobject.object.ObjectWrap
       [gio.types.FILE_ATTRIBUTE_STANDARD_SIZE].
       Returns: a #goffset containing the file's size (in bytes).
   */
-  long getSize()
+  long getSize() nothrow
   {
     long _retval;
     _retval = g_file_info_get_size(cast(GFileInfo*)this._cPtr);
@@ -663,7 +663,7 @@ class FileInfo : gobject.object.ObjectWrap
       [gio.types.FILE_ATTRIBUTE_STANDARD_SORT_ORDER].
       Returns: a #gint32 containing the value of the "standard::sort_order" attribute.
   */
-  int getSortOrder()
+  int getSortOrder() nothrow
   {
     int _retval;
     _retval = g_file_info_get_sort_order(cast(GFileInfo*)this._cPtr);
@@ -677,7 +677,7 @@ class FileInfo : gobject.object.ObjectWrap
       [gio.types.FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON].
       Returns: #GIcon for the given info.
   */
-  gio.icon.Icon getSymbolicIcon()
+  gio.icon.Icon getSymbolicIcon() nothrow
   {
     GIcon* _cretval;
     _cretval = g_file_info_get_symbolic_icon(cast(GFileInfo*)this._cPtr);
@@ -692,7 +692,7 @@ class FileInfo : gobject.object.ObjectWrap
       [gio.types.FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET].
       Returns: a string containing the symlink target.
   */
-  string getSymlinkTarget()
+  string getSymlinkTarget() nothrow
   {
     const(char)* _cretval;
     _cretval = g_file_info_get_symlink_target(cast(GFileInfo*)this._cPtr);
@@ -708,7 +708,7 @@ class FileInfo : gobject.object.ObjectWrap
       Returns: true if info has an attribute named attribute,
             false otherwise.
   */
-  bool hasAttribute(string attribute)
+  bool hasAttribute(string attribute) nothrow
   {
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -725,7 +725,7 @@ class FileInfo : gobject.object.ObjectWrap
       Returns: true if info has an attribute in name_space,
             false otherwise.
   */
-  bool hasNamespace(string nameSpace)
+  bool hasNamespace(string nameSpace) nothrow
   {
     bool _retval;
     const(char)* _nameSpace = nameSpace.toCString(No.Alloc);
@@ -743,7 +743,7 @@ class FileInfo : gobject.object.ObjectWrap
         null-terminated array of strings of all of the possible attribute
         types for the given name_space, or null on error.
   */
-  string[] listAttributes(string nameSpace = null)
+  string[] listAttributes(string nameSpace = null) nothrow
   {
     char** _cretval;
     const(char)* _nameSpace = nameSpace.toCString(No.Alloc);
@@ -769,7 +769,7 @@ class FileInfo : gobject.object.ObjectWrap
       Params:
         attribute = a file attribute key.
   */
-  void removeAttribute(string attribute)
+  void removeAttribute(string attribute) nothrow
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
     g_file_info_remove_attribute(cast(GFileInfo*)this._cPtr, _attribute);
@@ -785,7 +785,7 @@ class FileInfo : gobject.object.ObjectWrap
       Params:
         atime = a #GDateTime.
   */
-  void setAccessDateTime(glib.date_time.DateTime atime)
+  void setAccessDateTime(glib.date_time.DateTime atime) nothrow
   {
     g_file_info_set_access_date_time(cast(GFileInfo*)this._cPtr, atime ? cast(GDateTime*)atime._cPtr(No.Dup) : null);
   }
@@ -799,7 +799,7 @@ class FileInfo : gobject.object.ObjectWrap
         type = a #GFileAttributeType
         valueP = pointer to the value
   */
-  void setAttribute(string attribute, gio.types.FileAttributeType type, void* valueP)
+  void setAttribute(string attribute, gio.types.FileAttributeType type, void* valueP) nothrow
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
     g_file_info_set_attribute(cast(GFileInfo*)this._cPtr, _attribute, type, valueP);
@@ -813,7 +813,7 @@ class FileInfo : gobject.object.ObjectWrap
         attribute = a file attribute key.
         attrValue = a boolean value.
   */
-  void setAttributeBoolean(string attribute, bool attrValue)
+  void setAttributeBoolean(string attribute, bool attrValue) nothrow
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
     g_file_info_set_attribute_boolean(cast(GFileInfo*)this._cPtr, _attribute, attrValue);
@@ -827,7 +827,7 @@ class FileInfo : gobject.object.ObjectWrap
         attribute = a file attribute key.
         attrValue = a byte string.
   */
-  void setAttributeByteString(string attribute, string attrValue)
+  void setAttributeByteString(string attribute, string attrValue) nothrow
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
     const(char)* _attrValue = attrValue.toCString(No.Alloc);
@@ -845,7 +845,7 @@ class FileInfo : gobject.object.ObjectWrap
         attribute = a file attribute key.
         attrValue = a file path.
   */
-  void setAttributeFilePath(string attribute, string attrValue)
+  void setAttributeFilePath(string attribute, string attrValue) nothrow
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
     const(char)* _attrValue = attrValue.toCString(No.Alloc);
@@ -860,7 +860,7 @@ class FileInfo : gobject.object.ObjectWrap
         attribute = a file attribute key.
         attrValue = a signed 32-bit integer
   */
-  void setAttributeInt32(string attribute, int attrValue)
+  void setAttributeInt32(string attribute, int attrValue) nothrow
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
     g_file_info_set_attribute_int32(cast(GFileInfo*)this._cPtr, _attribute, attrValue);
@@ -874,7 +874,7 @@ class FileInfo : gobject.object.ObjectWrap
         attribute = attribute name to set.
         attrValue = int64 value to set attribute to.
   */
-  void setAttributeInt64(string attribute, long attrValue)
+  void setAttributeInt64(string attribute, long attrValue) nothrow
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
     g_file_info_set_attribute_int64(cast(GFileInfo*)this._cPtr, _attribute, attrValue);
@@ -886,7 +886,7 @@ class FileInfo : gobject.object.ObjectWrap
       Params:
         mask = a #GFileAttributeMatcher.
   */
-  void setAttributeMask(gio.file_attribute_matcher.FileAttributeMatcher mask)
+  void setAttributeMask(gio.file_attribute_matcher.FileAttributeMatcher mask) nothrow
   {
     g_file_info_set_attribute_mask(cast(GFileInfo*)this._cPtr, mask ? cast(GFileAttributeMatcher*)mask._cPtr(No.Dup) : null);
   }
@@ -899,7 +899,7 @@ class FileInfo : gobject.object.ObjectWrap
         attribute = a file attribute key.
         attrValue = a #GObject.
   */
-  void setAttributeObject(string attribute, gobject.object.ObjectWrap attrValue)
+  void setAttributeObject(string attribute, gobject.object.ObjectWrap attrValue) nothrow
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
     g_file_info_set_attribute_object(cast(GFileInfo*)this._cPtr, _attribute, attrValue ? cast(GObject*)attrValue._cPtr(No.Dup) : null);
@@ -918,7 +918,7 @@ class FileInfo : gobject.object.ObjectWrap
         status = a #GFileAttributeStatus
       Returns: true if the status was changed, false if the key was not set.
   */
-  bool setAttributeStatus(string attribute, gio.types.FileAttributeStatus status)
+  bool setAttributeStatus(string attribute, gio.types.FileAttributeStatus status) nothrow
   {
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -934,7 +934,7 @@ class FileInfo : gobject.object.ObjectWrap
         attribute = a file attribute key.
         attrValue = a UTF-8 string.
   */
-  void setAttributeString(string attribute, string attrValue)
+  void setAttributeString(string attribute, string attrValue) nothrow
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
     const(char)* _attrValue = attrValue.toCString(No.Alloc);
@@ -952,7 +952,7 @@ class FileInfo : gobject.object.ObjectWrap
         attrValue = a null
             terminated array of UTF-8 strings.
   */
-  void setAttributeStringv(string attribute, string[] attrValue)
+  void setAttributeStringv(string attribute, string[] attrValue) nothrow
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
     char*[] _tmpattrValue;
@@ -972,7 +972,7 @@ class FileInfo : gobject.object.ObjectWrap
         attribute = a file attribute key.
         attrValue = an unsigned 32-bit integer.
   */
-  void setAttributeUint32(string attribute, uint attrValue)
+  void setAttributeUint32(string attribute, uint attrValue) nothrow
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
     g_file_info_set_attribute_uint32(cast(GFileInfo*)this._cPtr, _attribute, attrValue);
@@ -986,7 +986,7 @@ class FileInfo : gobject.object.ObjectWrap
         attribute = a file attribute key.
         attrValue = an unsigned 64-bit integer.
   */
-  void setAttributeUint64(string attribute, ulong attrValue)
+  void setAttributeUint64(string attribute, ulong attrValue) nothrow
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
     g_file_info_set_attribute_uint64(cast(GFileInfo*)this._cPtr, _attribute, attrValue);
@@ -999,7 +999,7 @@ class FileInfo : gobject.object.ObjectWrap
       Params:
         contentType = a content type. See [GContentType][gio-GContentType]
   */
-  void setContentType(string contentType)
+  void setContentType(string contentType) nothrow
   {
     const(char)* _contentType = contentType.toCString(No.Alloc);
     g_file_info_set_content_type(cast(GFileInfo*)this._cPtr, _contentType);
@@ -1015,7 +1015,7 @@ class FileInfo : gobject.object.ObjectWrap
       Params:
         creationTime = a #GDateTime.
   */
-  void setCreationDateTime(glib.date_time.DateTime creationTime)
+  void setCreationDateTime(glib.date_time.DateTime creationTime) nothrow
   {
     g_file_info_set_creation_date_time(cast(GFileInfo*)this._cPtr, creationTime ? cast(GDateTime*)creationTime._cPtr(No.Dup) : null);
   }
@@ -1027,7 +1027,7 @@ class FileInfo : gobject.object.ObjectWrap
       Params:
         displayName = a string containing a display name.
   */
-  void setDisplayName(string displayName)
+  void setDisplayName(string displayName) nothrow
   {
     const(char)* _displayName = displayName.toCString(No.Alloc);
     g_file_info_set_display_name(cast(GFileInfo*)this._cPtr, _displayName);
@@ -1040,7 +1040,7 @@ class FileInfo : gobject.object.ObjectWrap
       Params:
         editName = a string containing an edit name.
   */
-  void setEditName(string editName)
+  void setEditName(string editName) nothrow
   {
     const(char)* _editName = editName.toCString(No.Alloc);
     g_file_info_set_edit_name(cast(GFileInfo*)this._cPtr, _editName);
@@ -1053,7 +1053,7 @@ class FileInfo : gobject.object.ObjectWrap
       Params:
         type = a #GFileType.
   */
-  void setFileType(gio.types.FileType type)
+  void setFileType(gio.types.FileType type) nothrow
   {
     g_file_info_set_file_type(cast(GFileInfo*)this._cPtr, type);
   }
@@ -1065,7 +1065,7 @@ class FileInfo : gobject.object.ObjectWrap
       Params:
         icon = a #GIcon.
   */
-  void setIcon(gio.icon.Icon icon)
+  void setIcon(gio.icon.Icon icon) nothrow
   {
     g_file_info_set_icon(cast(GFileInfo*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
@@ -1077,7 +1077,7 @@ class FileInfo : gobject.object.ObjectWrap
       Params:
         isHidden = a #gboolean.
   */
-  void setIsHidden(bool isHidden)
+  void setIsHidden(bool isHidden) nothrow
   {
     g_file_info_set_is_hidden(cast(GFileInfo*)this._cPtr, isHidden);
   }
@@ -1089,7 +1089,7 @@ class FileInfo : gobject.object.ObjectWrap
       Params:
         isSymlink = a #gboolean.
   */
-  void setIsSymlink(bool isSymlink)
+  void setIsSymlink(bool isSymlink) nothrow
   {
     g_file_info_set_is_symlink(cast(GFileInfo*)this._cPtr, isSymlink);
   }
@@ -1104,7 +1104,7 @@ class FileInfo : gobject.object.ObjectWrap
       Params:
         mtime = a #GDateTime.
   */
-  void setModificationDateTime(glib.date_time.DateTime mtime)
+  void setModificationDateTime(glib.date_time.DateTime mtime) nothrow
   {
     g_file_info_set_modification_date_time(cast(GFileInfo*)this._cPtr, mtime ? cast(GDateTime*)mtime._cPtr(No.Dup) : null);
   }
@@ -1122,7 +1122,7 @@ class FileInfo : gobject.object.ObjectWrap
       Deprecated: Use [gio.file_info.FileInfo.setModificationDateTime] instead, as
            #GTimeVal is deprecated due to the year 2038 problem.
   */
-  void setModificationTime(glib.time_val.TimeVal mtime)
+  void setModificationTime(glib.time_val.TimeVal mtime) nothrow
   {
     g_file_info_set_modification_time(cast(GFileInfo*)this._cPtr, cast(GTimeVal*)&mtime);
   }
@@ -1134,7 +1134,7 @@ class FileInfo : gobject.object.ObjectWrap
       Params:
         name = a string containing a name.
   */
-  void setName(string name)
+  void setName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     g_file_info_set_name(cast(GFileInfo*)this._cPtr, _name);
@@ -1147,7 +1147,7 @@ class FileInfo : gobject.object.ObjectWrap
       Params:
         size = a #goffset containing the file's size.
   */
-  void setSize(long size)
+  void setSize(long size) nothrow
   {
     g_file_info_set_size(cast(GFileInfo*)this._cPtr, size);
   }
@@ -1159,7 +1159,7 @@ class FileInfo : gobject.object.ObjectWrap
       Params:
         sortOrder = a sort order integer.
   */
-  void setSortOrder(int sortOrder)
+  void setSortOrder(int sortOrder) nothrow
   {
     g_file_info_set_sort_order(cast(GFileInfo*)this._cPtr, sortOrder);
   }
@@ -1171,7 +1171,7 @@ class FileInfo : gobject.object.ObjectWrap
       Params:
         icon = a #GIcon.
   */
-  void setSymbolicIcon(gio.icon.Icon icon)
+  void setSymbolicIcon(gio.icon.Icon icon) nothrow
   {
     g_file_info_set_symbolic_icon(cast(GFileInfo*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
@@ -1183,7 +1183,7 @@ class FileInfo : gobject.object.ObjectWrap
       Params:
         symlinkTarget = a static string containing a path to a symlink target.
   */
-  void setSymlinkTarget(string symlinkTarget)
+  void setSymlinkTarget(string symlinkTarget) nothrow
   {
     const(char)* _symlinkTarget = symlinkTarget.toCString(No.Alloc);
     g_file_info_set_symlink_target(cast(GFileInfo*)this._cPtr, _symlinkTarget);
@@ -1193,7 +1193,7 @@ class FileInfo : gobject.object.ObjectWrap
       Unsets a mask set by [gio.file_info.FileInfo.setAttributeMask], if one
       is set.
   */
-  void unsetAttributeMask()
+  void unsetAttributeMask() nothrow
   {
     g_file_info_unset_attribute_mask(cast(GFileInfo*)this._cPtr);
   }
@@ -1211,7 +1211,7 @@ final class FileInfoGidBuilder : FileInfoGidBuilderImpl!FileInfoGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FileInfo build()
+  FileInfo build() nothrow
   {
     return new FileInfo(cast(void*)createGObject(FileInfo._getGType), Yes.Take);
   }

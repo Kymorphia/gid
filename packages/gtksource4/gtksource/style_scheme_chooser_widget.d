@@ -20,26 +20,26 @@ class StyleSchemeChooserWidget : gtk.bin.Bin, gtksource.style_scheme_chooser.Sty
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_style_scheme_chooser_widget_get_type != &gidSymbolNotFound ? gtk_source_style_scheme_chooser_widget_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StyleSchemeChooserWidget self()
+  override StyleSchemeChooserWidget self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class StyleSchemeChooserWidget : gtk.bin.Bin, gtksource.style_scheme_chooser.Sty
       Get builder for [gtksource.style_scheme_chooser_widget.StyleSchemeChooserWidget]
       Returns: New builder object
   */
-  static StyleSchemeChooserWidgetGidBuilder builder()
+  static StyleSchemeChooserWidgetGidBuilder builder() nothrow
   {
     return new StyleSchemeChooserWidgetGidBuilder;
   }
@@ -59,7 +59,7 @@ class StyleSchemeChooserWidget : gtk.bin.Bin, gtksource.style_scheme_chooser.Sty
       Creates a new #GtkSourceStyleSchemeChooserWidget.
       Returns: a new  #GtkSourceStyleSchemeChooserWidget.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_source_style_scheme_chooser_widget_new();
@@ -81,7 +81,7 @@ final class StyleSchemeChooserWidgetGidBuilder : StyleSchemeChooserWidgetGidBuil
       Create object from builder.
       Returns: New object
   */
-  StyleSchemeChooserWidget build()
+  StyleSchemeChooserWidget build() nothrow
   {
     return new StyleSchemeChooserWidget(cast(void*)createGObject(StyleSchemeChooserWidget._getGType), No.Take);
   }

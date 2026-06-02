@@ -52,26 +52,26 @@ class Builder : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())json_builder_get_type != &gidSymbolNotFound ? json_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Builder self()
+  override Builder self() nothrow
   {
     return this;
   }
@@ -80,7 +80,7 @@ class Builder : gobject.object.ObjectWrap
       Get builder for [json.builder.Builder]
       Returns: New builder object
   */
-  static BuilderGidBuilder builder()
+  static BuilderGidBuilder builder() nothrow
   {
     return new BuilderGidBuilder;
   }
@@ -92,7 +92,7 @@ class Builder : gobject.object.ObjectWrap
         Making the output immutable on creation avoids the expense
         of traversing it to make it immutable later.
   */
-  @property bool immutable_()
+  @property bool immutable_() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("immutable");
   }
@@ -103,7 +103,7 @@ class Builder : gobject.object.ObjectWrap
       You can use this object to generate a JSON tree and obtain the root node.
       Returns: the newly created builder instance
   */
-  this()
+  this() nothrow
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_new();
@@ -117,7 +117,7 @@ class Builder : gobject.object.ObjectWrap
       set to `TRUE` at construction time.
       Returns: the newly create builder instance
   */
-  static json.builder.Builder newImmutable()
+  static json.builder.Builder newImmutable() nothrow
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_new_immutable();
@@ -138,7 +138,7 @@ class Builder : gobject.object.ObjectWrap
         value = the value of the member or element
       Returns: the builder instance
   */
-  json.builder.Builder addBooleanValue(bool value)
+  json.builder.Builder addBooleanValue(bool value) nothrow
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_add_boolean_value(cast(JsonBuilder*)this._cPtr, value);
@@ -159,7 +159,7 @@ class Builder : gobject.object.ObjectWrap
         value = the value of the member or element
       Returns: the builder instance
   */
-  json.builder.Builder addDoubleValue(double value)
+  json.builder.Builder addDoubleValue(double value) nothrow
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_add_double_value(cast(JsonBuilder*)this._cPtr, value);
@@ -180,7 +180,7 @@ class Builder : gobject.object.ObjectWrap
         value = the value of the member or element
       Returns: the builder instance
   */
-  json.builder.Builder addIntValue(long value)
+  json.builder.Builder addIntValue(long value) nothrow
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_add_int_value(cast(JsonBuilder*)this._cPtr, value);
@@ -198,7 +198,7 @@ class Builder : gobject.object.ObjectWrap
       See also: [json.builder.Builder.addValue]
       Returns: the builder instance
   */
-  json.builder.Builder addNullValue()
+  json.builder.Builder addNullValue() nothrow
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_add_null_value(cast(JsonBuilder*)this._cPtr);
@@ -219,7 +219,7 @@ class Builder : gobject.object.ObjectWrap
         value = the value of the member or element
       Returns: the builder instance
   */
-  json.builder.Builder addStringValue(string value)
+  json.builder.Builder addStringValue(string value) nothrow
   {
     JsonBuilder* _cretval;
     const(char)* _value = value.toCString(No.Alloc);
@@ -241,7 +241,7 @@ class Builder : gobject.object.ObjectWrap
         node = the value of the member or element
       Returns: the builder instance
   */
-  json.builder.Builder addValue(json.node.Node node)
+  json.builder.Builder addValue(json.node.Node node) nothrow
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_add_value(cast(JsonBuilder*)this._cPtr, node ? cast(JsonNode*)node._cPtr(Yes.Dup) : null);
@@ -258,7 +258,7 @@ class Builder : gobject.object.ObjectWrap
       [json.builder.Builder.endArray] to close the array.
       Returns: the builder instance
   */
-  json.builder.Builder beginArray()
+  json.builder.Builder beginArray() nothrow
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_begin_array(cast(JsonBuilder*)this._cPtr);
@@ -278,7 +278,7 @@ class Builder : gobject.object.ObjectWrap
       If the builder is in an inconsistent state, this function will return `NULL`.
       Returns: the builder instance
   */
-  json.builder.Builder beginObject()
+  json.builder.Builder beginObject() nothrow
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_begin_object(cast(JsonBuilder*)this._cPtr);
@@ -293,7 +293,7 @@ class Builder : gobject.object.ObjectWrap
       This function cannot be called after [json.builder.Builder.setMemberName].
       Returns: the builder instance
   */
-  json.builder.Builder endArray()
+  json.builder.Builder endArray() nothrow
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_end_array(cast(JsonBuilder*)this._cPtr);
@@ -308,7 +308,7 @@ class Builder : gobject.object.ObjectWrap
       This function cannot be called after [json.builder.Builder.setMemberName].
       Returns: the builder instance
   */
-  json.builder.Builder endObject()
+  json.builder.Builder endObject() nothrow
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_end_object(cast(JsonBuilder*)this._cPtr);
@@ -324,7 +324,7 @@ class Builder : gobject.object.ObjectWrap
       `NULL`.
       Returns: the root node
   */
-  json.node.Node getRoot()
+  json.node.Node getRoot() nothrow
   {
     JsonNode* _cretval;
     _cretval = json_builder_get_root(cast(JsonBuilder*)this._cPtr);
@@ -335,7 +335,7 @@ class Builder : gobject.object.ObjectWrap
   /**
       Resets the state of the builder back to its initial state.
   */
-  void reset()
+  void reset() nothrow
   {
     json_builder_reset(cast(JsonBuilder*)this._cPtr);
   }
@@ -355,7 +355,7 @@ class Builder : gobject.object.ObjectWrap
         memberName = the name of the member
       Returns: the builder instance
   */
-  json.builder.Builder setMemberName(string memberName)
+  json.builder.Builder setMemberName(string memberName) nothrow
   {
     JsonBuilder* _cretval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
@@ -378,7 +378,7 @@ class BuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           of traversing it to make it immutable later.
       Returns: Builder instance for fluent chaining
   */
-  T immutable_(bool propval)
+  T immutable_(bool propval) nothrow
   {
     return setProperty("immutable", propval);
   }
@@ -391,7 +391,7 @@ final class BuilderGidBuilder : BuilderGidBuilderImpl!BuilderGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Builder build()
+  Builder build() nothrow
   {
     return new Builder(cast(void*)createGObject(Builder._getGType), Yes.Take);
   }

@@ -19,26 +19,26 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_property_animation_target_get_type != &gidSymbolNotFound ? adw_property_animation_target_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PropertyAnimationTarget self()
+  override PropertyAnimationTarget self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
       Get builder for [adw.property_animation_target.PropertyAnimationTarget]
       Returns: New builder object
   */
-  static PropertyAnimationTargetGidBuilder builder()
+  static PropertyAnimationTargetGidBuilder builder() nothrow
   {
     return new PropertyAnimationTargetGidBuilder;
   }
@@ -60,7 +60,7 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
         on the object; make sure the object is kept alive throughout the target's
         lifetime.
   */
-  @property gobject.object.ObjectWrap object()
+  @property gobject.object.ObjectWrap object() nothrow
   {
     return getObject();
   }
@@ -69,7 +69,7 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
       Get `pspec` property.
       Returns: The [gobject.param_spec.ParamSpec] of the property to be animated.
   */
-  @property gobject.param_spec.ParamSpec pspec()
+  @property gobject.param_spec.ParamSpec pspec() nothrow
   {
     return getPspec();
   }
@@ -83,7 +83,7 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
         propertyName = the name of the property on object to animate
       Returns: the newly created [adw.property_animation_target.PropertyAnimationTarget]
   */
-  this(gobject.object.ObjectWrap object, string propertyName)
+  this(gobject.object.ObjectWrap object, string propertyName) nothrow
   {
     AdwAnimationTarget* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
@@ -100,7 +100,7 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
         pspec = the param spec of the property on object to animate
       Returns: new newly created [adw.property_animation_target.PropertyAnimationTarget]
   */
-  static adw.property_animation_target.PropertyAnimationTarget newForPspec(gobject.object.ObjectWrap object, gobject.param_spec.ParamSpec pspec)
+  static adw.property_animation_target.PropertyAnimationTarget newForPspec(gobject.object.ObjectWrap object, gobject.param_spec.ParamSpec pspec) nothrow
   {
     AdwAnimationTarget* _cretval;
     _cretval = adw_property_animation_target_new_for_pspec(object ? cast(GObject*)object._cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
@@ -116,7 +116,7 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
       lifetime.
       Returns: the animated object
   */
-  gobject.object.ObjectWrap getObject()
+  gobject.object.ObjectWrap getObject() nothrow
   {
     GObject* _cretval;
     _cretval = adw_property_animation_target_get_object(cast(AdwPropertyAnimationTarget*)this._cPtr);
@@ -128,7 +128,7 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
       Gets the [gobject.param_spec.ParamSpec] of the property animated by self.
       Returns: the animated property's [gobject.param_spec.ParamSpec]
   */
-  gobject.param_spec.ParamSpec getPspec()
+  gobject.param_spec.ParamSpec getPspec() nothrow
   {
     GParamSpec* _cretval;
     _cretval = adw_property_animation_target_get_pspec(cast(AdwPropertyAnimationTarget*)this._cPtr);
@@ -151,7 +151,7 @@ class PropertyAnimationTargetGidBuilderImpl(T) : adw.animation_target.AnimationT
           lifetime.
       Returns: Builder instance for fluent chaining
   */
-  T object(gobject.object.ObjectWrap propval)
+  T object(gobject.object.ObjectWrap propval) nothrow
   {
     return setProperty("object", propval);
   }
@@ -162,7 +162,7 @@ class PropertyAnimationTargetGidBuilderImpl(T) : adw.animation_target.AnimationT
         propval = The [gobject.param_spec.ParamSpec] of the property to be animated.
       Returns: Builder instance for fluent chaining
   */
-  T pspec(gobject.param_spec.ParamSpec propval)
+  T pspec(gobject.param_spec.ParamSpec propval) nothrow
   {
     return setProperty("pspec", propval);
   }
@@ -175,7 +175,7 @@ final class PropertyAnimationTargetGidBuilder : PropertyAnimationTargetGidBuilde
       Create object from builder.
       Returns: New object
   */
-  PropertyAnimationTarget build()
+  PropertyAnimationTarget build() nothrow
   {
     return new PropertyAnimationTarget(cast(void*)createGObject(PropertyAnimationTarget._getGType), Yes.Take);
   }

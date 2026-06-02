@@ -68,26 +68,26 @@ class TabView : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_tab_view_get_type != &gidSymbolNotFound ? adw_tab_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TabView self()
+  override TabView self() nothrow
   {
     return this;
   }
@@ -96,7 +96,7 @@ class TabView : gtk.widget.Widget
       Get builder for [adw.tab_view.TabView]
       Returns: New builder object
   */
-  static TabViewGidBuilder builder()
+  static TabViewGidBuilder builder() nothrow
   {
     return new TabViewGidBuilder;
   }
@@ -118,7 +118,7 @@ class TabView : gtk.widget.Widget
         
         By default, the `adw-tab-icon-missing-symbolic` icon is used.
   */
-  @property gio.icon.Icon defaultIcon()
+  @property gio.icon.Icon defaultIcon() nothrow
   {
     return getDefaultIcon();
   }
@@ -141,7 +141,7 @@ class TabView : gtk.widget.Widget
           
           By default, the `adw-tab-icon-missing-symbolic` icon is used.
   */
-  @property void defaultIcon(gio.icon.Icon propval)
+  @property void defaultIcon(gio.icon.Icon propval) nothrow
   {
     setDefaultIcon(propval);
   }
@@ -156,7 +156,7 @@ class TabView : gtk.widget.Widget
         During the transfer, children cannot receive pointer input and a tab can
         be safely dropped on the tab view.
   */
-  @property bool isTransferringPage()
+  @property bool isTransferringPage() nothrow
   {
     return getIsTransferringPage();
   }
@@ -169,7 +169,7 @@ class TabView : gtk.widget.Widget
         provided menu model. Use the [adw.tab_view.TabView.setupMenu] signal to set up
         the menu actions for the particular tab.
   */
-  @property gio.menu_model.MenuModel menuModel()
+  @property gio.menu_model.MenuModel menuModel() nothrow
   {
     return getMenuModel();
   }
@@ -183,7 +183,7 @@ class TabView : gtk.widget.Widget
           provided menu model. Use the [adw.tab_view.TabView.setupMenu] signal to set up
           the menu actions for the particular tab.
   */
-  @property void menuModel(gio.menu_model.MenuModel propval)
+  @property void menuModel(gio.menu_model.MenuModel propval) nothrow
   {
     setMenuModel(propval);
   }
@@ -192,7 +192,7 @@ class TabView : gtk.widget.Widget
       Get `nPages` property.
       Returns: The number of pages in the tab view.
   */
-  @property int nPages()
+  @property int nPages() nothrow
   {
     return getNPages();
   }
@@ -203,7 +203,7 @@ class TabView : gtk.widget.Widget
         
         See [adw.tab_view.TabView.setPagePinned].
   */
-  @property int nPinnedPages()
+  @property int nPinnedPages() nothrow
   {
     return getNPinnedPages();
   }
@@ -216,7 +216,7 @@ class TabView : gtk.widget.Widget
         [gtk.selection_model.SelectionModel] and can be used to track and change the selected
         page.
   */
-  @property gtk.selection_model.SelectionModel pages()
+  @property gtk.selection_model.SelectionModel pages() nothrow
   {
     return getPages();
   }
@@ -225,7 +225,7 @@ class TabView : gtk.widget.Widget
       Get `selectedPage` property.
       Returns: The currently selected page.
   */
-  @property adw.tab_page.TabPage selectedPage()
+  @property adw.tab_page.TabPage selectedPage() nothrow
   {
     return getSelectedPage();
   }
@@ -235,7 +235,7 @@ class TabView : gtk.widget.Widget
       Params:
         propval = The currently selected page.
   */
-  @property void selectedPage(adw.tab_page.TabPage propval)
+  @property void selectedPage(adw.tab_page.TabPage propval) nothrow
   {
     setSelectedPage(propval);
   }
@@ -250,7 +250,7 @@ class TabView : gtk.widget.Widget
         [adw.tab_view.TabView.addShortcuts] and [adw.tab_view.TabView.removeShortcuts]
         provide a convenient way to manage individual shortcuts.
   */
-  @property adw.types.TabViewShortcuts shortcuts()
+  @property adw.types.TabViewShortcuts shortcuts() nothrow
   {
     return getShortcuts();
   }
@@ -266,7 +266,7 @@ class TabView : gtk.widget.Widget
           [adw.tab_view.TabView.addShortcuts] and [adw.tab_view.TabView.removeShortcuts]
           provide a convenient way to manage individual shortcuts.
   */
-  @property void shortcuts(adw.types.TabViewShortcuts propval)
+  @property void shortcuts(adw.types.TabViewShortcuts propval) nothrow
   {
     setShortcuts(propval);
   }
@@ -275,7 +275,7 @@ class TabView : gtk.widget.Widget
       Creates a new [adw.tab_view.TabView].
       Returns: the newly created [adw.tab_view.TabView]
   */
-  this()
+  this() nothrow
   {
     AdwTabView* _cretval;
     _cretval = adw_tab_view_new();
@@ -296,7 +296,7 @@ class TabView : gtk.widget.Widget
         parent = a parent page for child
       Returns: the page object representing child
   */
-  adw.tab_page.TabPage addPage(gtk.widget.Widget child, adw.tab_page.TabPage parent = null)
+  adw.tab_page.TabPage addPage(gtk.widget.Widget child, adw.tab_page.TabPage parent = null) nothrow
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_view_add_page(cast(AdwTabView*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, parent ? cast(AdwTabPage*)parent._cPtr(No.Dup) : null);
@@ -312,7 +312,7 @@ class TabView : gtk.widget.Widget
       Params:
         shortcuts = the shortcuts to add
   */
-  void addShortcuts(adw.types.TabViewShortcuts shortcuts)
+  void addShortcuts(adw.types.TabViewShortcuts shortcuts) nothrow
   {
     adw_tab_view_add_shortcuts(cast(AdwTabView*)this._cPtr, shortcuts);
   }
@@ -324,7 +324,7 @@ class TabView : gtk.widget.Widget
         child = a widget to add
       Returns: the page object representing child
   */
-  adw.tab_page.TabPage append(gtk.widget.Widget child)
+  adw.tab_page.TabPage append(gtk.widget.Widget child) nothrow
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_view_append(cast(AdwTabView*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -339,7 +339,7 @@ class TabView : gtk.widget.Widget
         child = a widget to add
       Returns: the page object representing child
   */
-  adw.tab_page.TabPage appendPinned(gtk.widget.Widget child)
+  adw.tab_page.TabPage appendPinned(gtk.widget.Widget child) nothrow
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_view_append_pinned(cast(AdwTabView*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -353,7 +353,7 @@ class TabView : gtk.widget.Widget
       Params:
         page = a page of self
   */
-  void closeOtherPages(adw.tab_page.TabPage page)
+  void closeOtherPages(adw.tab_page.TabPage page) nothrow
   {
     adw_tab_view_close_other_pages(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
   }
@@ -385,7 +385,7 @@ class TabView : gtk.widget.Widget
       Params:
         page = a page of self
   */
-  void closePage(adw.tab_page.TabPage page)
+  void closePage(adw.tab_page.TabPage page) nothrow
   {
     adw_tab_view_close_page(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
   }
@@ -404,7 +404,7 @@ class TabView : gtk.widget.Widget
         page = a page of self
         confirm = whether to confirm or deny closing page
   */
-  void closePageFinish(adw.tab_page.TabPage page, bool confirm)
+  void closePageFinish(adw.tab_page.TabPage page, bool confirm) nothrow
   {
     adw_tab_view_close_page_finish(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null, confirm);
   }
@@ -415,7 +415,7 @@ class TabView : gtk.widget.Widget
       Params:
         page = a page of self
   */
-  void closePagesAfter(adw.tab_page.TabPage page)
+  void closePagesAfter(adw.tab_page.TabPage page) nothrow
   {
     adw_tab_view_close_pages_after(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
   }
@@ -426,7 +426,7 @@ class TabView : gtk.widget.Widget
       Params:
         page = a page of self
   */
-  void closePagesBefore(adw.tab_page.TabPage page)
+  void closePagesBefore(adw.tab_page.TabPage page) nothrow
   {
     adw_tab_view_close_pages_before(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
   }
@@ -435,7 +435,7 @@ class TabView : gtk.widget.Widget
       Gets the default icon of self.
       Returns: the default icon of self.
   */
-  gio.icon.Icon getDefaultIcon()
+  gio.icon.Icon getDefaultIcon() nothrow
   {
     GIcon* _cretval;
     _cretval = adw_tab_view_get_default_icon(cast(AdwTabView*)this._cPtr);
@@ -453,7 +453,7 @@ class TabView : gtk.widget.Widget
       be safely dropped on the tab view.
       Returns: whether a page is being transferred
   */
-  bool getIsTransferringPage()
+  bool getIsTransferringPage() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_view_get_is_transferring_page(cast(AdwTabView*)this._cPtr);
@@ -464,7 +464,7 @@ class TabView : gtk.widget.Widget
       Gets the tab context menu model for self.
       Returns: the tab context menu model for self
   */
-  gio.menu_model.MenuModel getMenuModel()
+  gio.menu_model.MenuModel getMenuModel() nothrow
   {
     GMenuModel* _cretval;
     _cretval = adw_tab_view_get_menu_model(cast(AdwTabView*)this._cPtr);
@@ -476,7 +476,7 @@ class TabView : gtk.widget.Widget
       Gets the number of pages in self.
       Returns: the number of pages in self
   */
-  int getNPages()
+  int getNPages() nothrow
   {
     int _retval;
     _retval = adw_tab_view_get_n_pages(cast(AdwTabView*)this._cPtr);
@@ -489,7 +489,7 @@ class TabView : gtk.widget.Widget
       See [adw.tab_view.TabView.setPagePinned].
       Returns: the number of pinned pages in self
   */
-  int getNPinnedPages()
+  int getNPinnedPages() nothrow
   {
     int _retval;
     _retval = adw_tab_view_get_n_pinned_pages(cast(AdwTabView*)this._cPtr);
@@ -503,7 +503,7 @@ class TabView : gtk.widget.Widget
         position = the index of the page in self, starting from 0
       Returns: the page object at position
   */
-  adw.tab_page.TabPage getNthPage(int position)
+  adw.tab_page.TabPage getNthPage(int position) nothrow
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_view_get_nth_page(cast(AdwTabView*)this._cPtr, position);
@@ -518,7 +518,7 @@ class TabView : gtk.widget.Widget
         child = a child in self
       Returns: the page object for child
   */
-  adw.tab_page.TabPage getPage(gtk.widget.Widget child)
+  adw.tab_page.TabPage getPage(gtk.widget.Widget child) nothrow
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_view_get_page(cast(AdwTabView*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -533,7 +533,7 @@ class TabView : gtk.widget.Widget
         page = a page of self
       Returns: the position of page in self
   */
-  int getPagePosition(adw.tab_page.TabPage page)
+  int getPagePosition(adw.tab_page.TabPage page) nothrow
   {
     int _retval;
     _retval = adw_tab_view_get_page_position(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
@@ -548,7 +548,7 @@ class TabView : gtk.widget.Widget
       page.
       Returns: a [gtk.selection_model.SelectionModel] for the pages of self
   */
-  gtk.selection_model.SelectionModel getPages()
+  gtk.selection_model.SelectionModel getPages() nothrow
   {
     GtkSelectionModel* _cretval;
     _cretval = adw_tab_view_get_pages(cast(AdwTabView*)this._cPtr);
@@ -560,7 +560,7 @@ class TabView : gtk.widget.Widget
       Gets the currently selected page in self.
       Returns: the selected page
   */
-  adw.tab_page.TabPage getSelectedPage()
+  adw.tab_page.TabPage getSelectedPage() nothrow
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_view_get_selected_page(cast(AdwTabView*)this._cPtr);
@@ -572,7 +572,7 @@ class TabView : gtk.widget.Widget
       Gets the enabled shortcuts for self.
       Returns: the shortcut mask
   */
-  adw.types.TabViewShortcuts getShortcuts()
+  adw.types.TabViewShortcuts getShortcuts() nothrow
   {
     AdwTabViewShortcuts _cretval;
     _cretval = adw_tab_view_get_shortcuts(cast(AdwTabView*)this._cPtr);
@@ -591,7 +591,7 @@ class TabView : gtk.widget.Widget
         position = the position to add child at, starting from 0
       Returns: the page object representing child
   */
-  adw.tab_page.TabPage insert(gtk.widget.Widget child, int position)
+  adw.tab_page.TabPage insert(gtk.widget.Widget child, int position) nothrow
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_view_insert(cast(AdwTabView*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, position);
@@ -610,7 +610,7 @@ class TabView : gtk.widget.Widget
         position = the position to add child at, starting from 0
       Returns: the page object representing child
   */
-  adw.tab_page.TabPage insertPinned(gtk.widget.Widget child, int position)
+  adw.tab_page.TabPage insertPinned(gtk.widget.Widget child, int position) nothrow
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_view_insert_pinned(cast(AdwTabView*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, position);
@@ -624,7 +624,7 @@ class TabView : gtk.widget.Widget
       This is a convenience method, equivalent to calling
       [adw.tab_page.TabPage.invalidateThumbnail] on each page.
   */
-  void invalidateThumbnails()
+  void invalidateThumbnails() nothrow
   {
     adw_tab_view_invalidate_thumbnails(cast(AdwTabView*)this._cPtr);
   }
@@ -636,7 +636,7 @@ class TabView : gtk.widget.Widget
         child = a widget to add
       Returns: the page object representing child
   */
-  adw.tab_page.TabPage prepend(gtk.widget.Widget child)
+  adw.tab_page.TabPage prepend(gtk.widget.Widget child) nothrow
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_view_prepend(cast(AdwTabView*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -651,7 +651,7 @@ class TabView : gtk.widget.Widget
         child = a widget to add
       Returns: the page object representing child
   */
-  adw.tab_page.TabPage prependPinned(gtk.widget.Widget child)
+  adw.tab_page.TabPage prependPinned(gtk.widget.Widget child) nothrow
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_view_prepend_pinned(cast(AdwTabView*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -667,7 +667,7 @@ class TabView : gtk.widget.Widget
       Params:
         shortcuts = the shortcuts to reomve
   */
-  void removeShortcuts(adw.types.TabViewShortcuts shortcuts)
+  void removeShortcuts(adw.types.TabViewShortcuts shortcuts) nothrow
   {
     adw_tab_view_remove_shortcuts(cast(AdwTabView*)this._cPtr, shortcuts);
   }
@@ -679,7 +679,7 @@ class TabView : gtk.widget.Widget
         page = a page of self
       Returns: whether page was moved
   */
-  bool reorderBackward(adw.tab_page.TabPage page)
+  bool reorderBackward(adw.tab_page.TabPage page) nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_view_reorder_backward(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
@@ -693,7 +693,7 @@ class TabView : gtk.widget.Widget
         page = a page of self
       Returns: whether page was moved
   */
-  bool reorderFirst(adw.tab_page.TabPage page)
+  bool reorderFirst(adw.tab_page.TabPage page) nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_view_reorder_first(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
@@ -707,7 +707,7 @@ class TabView : gtk.widget.Widget
         page = a page of self
       Returns: whether page was moved
   */
-  bool reorderForward(adw.tab_page.TabPage page)
+  bool reorderForward(adw.tab_page.TabPage page) nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_view_reorder_forward(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
@@ -721,7 +721,7 @@ class TabView : gtk.widget.Widget
         page = a page of self
       Returns: whether page was moved
   */
-  bool reorderLast(adw.tab_page.TabPage page)
+  bool reorderLast(adw.tab_page.TabPage page) nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_view_reorder_last(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
@@ -739,7 +739,7 @@ class TabView : gtk.widget.Widget
         position = the position to insert the page at, starting at 0
       Returns: whether page was moved
   */
-  bool reorderPage(adw.tab_page.TabPage page, int position)
+  bool reorderPage(adw.tab_page.TabPage page, int position) nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_view_reorder_page(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null, position);
@@ -752,7 +752,7 @@ class TabView : gtk.widget.Widget
       If the last page was already selected, this function does nothing.
       Returns: whether the selected page was changed
   */
-  bool selectNextPage()
+  bool selectNextPage() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_view_select_next_page(cast(AdwTabView*)this._cPtr);
@@ -765,7 +765,7 @@ class TabView : gtk.widget.Widget
       If the first page was already selected, this function does nothing.
       Returns: whether the selected page was changed
   */
-  bool selectPreviousPage()
+  bool selectPreviousPage() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_view_select_previous_page(cast(AdwTabView*)this._cPtr);
@@ -789,7 +789,7 @@ class TabView : gtk.widget.Widget
       Params:
         defaultIcon = the default icon
   */
-  void setDefaultIcon(gio.icon.Icon defaultIcon)
+  void setDefaultIcon(gio.icon.Icon defaultIcon) nothrow
   {
     adw_tab_view_set_default_icon(cast(AdwTabView*)this._cPtr, defaultIcon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)defaultIcon)._cPtr(No.Dup) : null);
   }
@@ -804,7 +804,7 @@ class TabView : gtk.widget.Widget
       Params:
         menuModel = a menu model
   */
-  void setMenuModel(gio.menu_model.MenuModel menuModel = null)
+  void setMenuModel(gio.menu_model.MenuModel menuModel = null) nothrow
   {
     adw_tab_view_set_menu_model(cast(AdwTabView*)this._cPtr, menuModel ? cast(GMenuModel*)menuModel._cPtr(No.Dup) : null);
   }
@@ -844,7 +844,7 @@ class TabView : gtk.widget.Widget
         page = a page of self
         pinned = whether page should be pinned
   */
-  void setPagePinned(adw.tab_page.TabPage page, bool pinned)
+  void setPagePinned(adw.tab_page.TabPage page, bool pinned) nothrow
   {
     adw_tab_view_set_page_pinned(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null, pinned);
   }
@@ -855,7 +855,7 @@ class TabView : gtk.widget.Widget
       Params:
         selectedPage = a page in self
   */
-  void setSelectedPage(adw.tab_page.TabPage selectedPage)
+  void setSelectedPage(adw.tab_page.TabPage selectedPage) nothrow
   {
     adw_tab_view_set_selected_page(cast(AdwTabView*)this._cPtr, selectedPage ? cast(AdwTabPage*)selectedPage._cPtr(No.Dup) : null);
   }
@@ -872,7 +872,7 @@ class TabView : gtk.widget.Widget
       Params:
         shortcuts = the new shortcuts
   */
-  void setShortcuts(adw.types.TabViewShortcuts shortcuts)
+  void setShortcuts(adw.types.TabViewShortcuts shortcuts) nothrow
   {
     adw_tab_view_set_shortcuts(cast(AdwTabView*)this._cPtr, shortcuts);
   }
@@ -890,7 +890,7 @@ class TabView : gtk.widget.Widget
         otherView = the tab view to transfer the page to
         position = the position to insert the page at, starting at 0
   */
-  void transferPage(adw.tab_page.TabPage page, adw.tab_view.TabView otherView, int position)
+  void transferPage(adw.tab_page.TabPage page, adw.tab_view.TabView otherView, int position) nothrow
   {
     adw_tab_view_transfer_page(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null, otherView ? cast(AdwTabView*)otherView._cPtr(No.Dup) : null, position);
   }
@@ -941,18 +941,19 @@ class TabView : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClosePage(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClosePage(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.tab_page.TabPage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : adw.tab_view.TabView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -960,7 +961,14 @@ class TabView : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.tab_view.TabView.closePage");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -990,22 +998,30 @@ class TabView : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCreateWindow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCreateWindow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T : adw.tab_view.TabView)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.tab_view.TabView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      adw.tab_view.TabView _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.tab_view.TabView.createWindow");
+      }
 
       setVal!(adw.tab_view.TabView)(_returnValue, _retval);
     }
@@ -1034,14 +1050,14 @@ class TabView : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectIndicatorActivated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectIndicatorActivated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.tab_page.TabPage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : adw.tab_view.TabView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1053,7 +1069,14 @@ class TabView : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.tab_view.TabView.indicatorActivated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1082,7 +1105,7 @@ class TabView : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPageAttached(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPageAttached(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.tab_page.TabPage)))
@@ -1090,7 +1113,7 @@ class TabView : gtk.widget.Widget
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : adw.tab_view.TabView)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1105,7 +1128,14 @@ class TabView : gtk.widget.Widget
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.tab_view.TabView.pageAttached");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1139,7 +1169,7 @@ class TabView : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPageDetached(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPageDetached(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.tab_page.TabPage)))
@@ -1147,7 +1177,7 @@ class TabView : gtk.widget.Widget
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : adw.tab_view.TabView)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1162,7 +1192,14 @@ class TabView : gtk.widget.Widget
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.tab_view.TabView.pageDetached");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1188,7 +1225,7 @@ class TabView : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPageReordered(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPageReordered(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.tab_page.TabPage)))
@@ -1196,7 +1233,7 @@ class TabView : gtk.widget.Widget
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : adw.tab_view.TabView)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1211,7 +1248,14 @@ class TabView : gtk.widget.Widget
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.tab_view.TabView.pageReordered");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1240,14 +1284,14 @@ class TabView : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSetupMenu(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSetupMenu(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.tab_page.TabPage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : adw.tab_view.TabView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1259,7 +1303,14 @@ class TabView : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.tab_view.TabView.setupMenu");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1291,7 +1342,7 @@ class TabViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           By default, the `adw-tab-icon-missing-symbolic` icon is used.
       Returns: Builder instance for fluent chaining
   */
-  T defaultIcon(gio.icon.Icon propval)
+  T defaultIcon(gio.icon.Icon propval) nothrow
   {
     return setProperty("default-icon", propval);
   }
@@ -1306,7 +1357,7 @@ class TabViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           the menu actions for the particular tab.
       Returns: Builder instance for fluent chaining
   */
-  T menuModel(gio.menu_model.MenuModel propval)
+  T menuModel(gio.menu_model.MenuModel propval) nothrow
   {
     return setProperty("menu-model", propval);
   }
@@ -1317,7 +1368,7 @@ class TabViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The currently selected page.
       Returns: Builder instance for fluent chaining
   */
-  T selectedPage(adw.tab_page.TabPage propval)
+  T selectedPage(adw.tab_page.TabPage propval) nothrow
   {
     return setProperty("selected-page", propval);
   }
@@ -1334,7 +1385,7 @@ class TabViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           provide a convenient way to manage individual shortcuts.
       Returns: Builder instance for fluent chaining
   */
-  T shortcuts(adw.types.TabViewShortcuts propval)
+  T shortcuts(adw.types.TabViewShortcuts propval) nothrow
   {
     return setProperty("shortcuts", propval);
   }
@@ -1347,7 +1398,7 @@ final class TabViewGidBuilder : TabViewGidBuilderImpl!TabViewGidBuilder
       Create object from builder.
       Returns: New object
   */
-  TabView build()
+  TabView build() nothrow
   {
     return new TabView(cast(void*)createGObject(TabView._getGType), No.Take);
   }

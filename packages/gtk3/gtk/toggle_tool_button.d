@@ -33,26 +33,26 @@ class ToggleToolButton : gtk.tool_button.ToolButton
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_toggle_tool_button_get_type != &gidSymbolNotFound ? gtk_toggle_tool_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ToggleToolButton self()
+  override ToggleToolButton self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class ToggleToolButton : gtk.tool_button.ToolButton
       Get builder for [gtk.toggle_tool_button.ToggleToolButton]
       Returns: New builder object
   */
-  static ToggleToolButtonGidBuilder builder()
+  static ToggleToolButtonGidBuilder builder() nothrow
   {
     return new ToggleToolButtonGidBuilder;
   }
@@ -70,7 +70,7 @@ class ToggleToolButton : gtk.tool_button.ToolButton
       Get `active` property.
       Returns: If the toggle tool button should be pressed in.
   */
-  @property bool active()
+  @property bool active() nothrow
   {
     return getActive();
   }
@@ -80,7 +80,7 @@ class ToggleToolButton : gtk.tool_button.ToolButton
       Params:
         propval = If the toggle tool button should be pressed in.
   */
-  @property void active(bool propval)
+  @property void active(bool propval) nothrow
   {
     setActive(propval);
   }
@@ -89,7 +89,7 @@ class ToggleToolButton : gtk.tool_button.ToolButton
       Returns a new #GtkToggleToolButton
       Returns: a newly created #GtkToggleToolButton
   */
-  this()
+  this() nothrow
   {
     GtkToolItem* _cretval;
     _cretval = gtk_toggle_tool_button_new();
@@ -109,7 +109,7 @@ class ToggleToolButton : gtk.tool_button.ToolButton
   
       Deprecated: Use [gtk.toggle_tool_button.ToggleToolButton.new_] instead.
   */
-  static gtk.toggle_tool_button.ToggleToolButton newFromStock(string stockId)
+  static gtk.toggle_tool_button.ToggleToolButton newFromStock(string stockId) nothrow
   {
     GtkToolItem* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
@@ -123,7 +123,7 @@ class ToggleToolButton : gtk.tool_button.ToolButton
       Returns true if the toggle button is pressed in and false if it is raised.
       Returns: true if the toggle tool button is pressed in, false if not
   */
-  bool getActive()
+  bool getActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_toggle_tool_button_get_active(cast(GtkToggleToolButton*)this._cPtr);
@@ -138,7 +138,7 @@ class ToggleToolButton : gtk.tool_button.ToolButton
       Params:
         isActive = whether button should be active
   */
-  void setActive(bool isActive)
+  void setActive(bool isActive) nothrow
   {
     gtk_toggle_tool_button_set_active(cast(GtkToggleToolButton*)this._cPtr, isActive);
   }
@@ -158,13 +158,13 @@ class ToggleToolButton : gtk.tool_button.ToolButton
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectToggled(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToggled(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.toggle_tool_button.ToggleToolButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -173,7 +173,14 @@ class ToggleToolButton : gtk.tool_button.ToolButton
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.toggle_tool_button.ToggleToolButton.toggled");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -192,7 +199,7 @@ class ToggleToolButtonGidBuilderImpl(T) : gtk.tool_button.ToolButtonGidBuilderIm
         propval = If the toggle tool button should be pressed in.
       Returns: Builder instance for fluent chaining
   */
-  T active(bool propval)
+  T active(bool propval) nothrow
   {
     return setProperty("active", propval);
   }
@@ -205,7 +212,7 @@ final class ToggleToolButtonGidBuilder : ToggleToolButtonGidBuilderImpl!ToggleTo
       Create object from builder.
       Returns: New object
   */
-  ToggleToolButton build()
+  ToggleToolButton build() nothrow
   {
     return new ToggleToolButton(cast(void*)createGObject(ToggleToolButton._getGType), No.Take);
   }

@@ -38,26 +38,26 @@ class TextTag : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_tag_get_type != &gidSymbolNotFound ? gtk_text_tag_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TextTag self()
+  override TextTag self() nothrow
   {
     return this;
   }
@@ -66,7 +66,7 @@ class TextTag : gobject.object.ObjectWrap
       Get builder for [gtk.text_tag.TextTag]
       Returns: New builder object
   */
-  static TextTagGidBuilder builder()
+  static TextTagGidBuilder builder() nothrow
   {
     return new TextTagGidBuilder;
   }
@@ -79,7 +79,7 @@ class TextTag : gobject.object.ObjectWrap
         of any other non-accumulative margins present. When set to false
         the margins override one another (the default).
   */
-  @property bool accumulativeMargin()
+  @property bool accumulativeMargin() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("accumulative-margin");
   }
@@ -93,37 +93,37 @@ class TextTag : gobject.object.ObjectWrap
           of any other non-accumulative margins present. When set to false
           the margins override one another (the default).
   */
-  @property void accumulativeMargin(bool propval)
+  @property void accumulativeMargin(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("accumulative-margin", propval);
   }
 
   /** */
-  @property void background(string propval)
+  @property void background(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("background", propval);
   }
 
   /** */
-  @property bool backgroundFullHeight()
+  @property bool backgroundFullHeight() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("background-full-height");
   }
 
   /** */
-  @property void backgroundFullHeight(bool propval)
+  @property void backgroundFullHeight(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("background-full-height", propval);
   }
 
   /** */
-  @property bool backgroundFullHeightSet()
+  @property bool backgroundFullHeightSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("background-full-height-set");
   }
 
   /** */
-  @property void backgroundFullHeightSet(bool propval)
+  @property void backgroundFullHeightSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("background-full-height-set", propval);
   }
@@ -134,7 +134,7 @@ class TextTag : gobject.object.ObjectWrap
   
       Deprecated: Use #GtkTextTag:background-rgba instead.
   */
-  @property gdk.color.Color backgroundGdk()
+  @property gdk.color.Color backgroundGdk() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.color.Color)("background-gdk");
   }
@@ -146,7 +146,7 @@ class TextTag : gobject.object.ObjectWrap
   
       Deprecated: Use #GtkTextTag:background-rgba instead.
   */
-  @property void backgroundGdk(gdk.color.Color propval)
+  @property void backgroundGdk(gdk.color.Color propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.color.Color)("background-gdk", propval);
   }
@@ -155,7 +155,7 @@ class TextTag : gobject.object.ObjectWrap
       Get `backgroundRgba` property.
       Returns: Background color as a #GdkRGBA.
   */
-  @property gdk.rgba.RGBA backgroundRgba()
+  @property gdk.rgba.RGBA backgroundRgba() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("background-rgba");
   }
@@ -165,55 +165,55 @@ class TextTag : gobject.object.ObjectWrap
       Params:
         propval = Background color as a #GdkRGBA.
   */
-  @property void backgroundRgba(gdk.rgba.RGBA propval)
+  @property void backgroundRgba(gdk.rgba.RGBA propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.rgba.RGBA)("background-rgba", propval);
   }
 
   /** */
-  @property bool backgroundSet()
+  @property bool backgroundSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("background-set");
   }
 
   /** */
-  @property void backgroundSet(bool propval)
+  @property void backgroundSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("background-set", propval);
   }
 
   /** */
-  @property gtk.types.TextDirection direction()
+  @property gtk.types.TextDirection direction() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.TextDirection)("direction");
   }
 
   /** */
-  @property void direction(gtk.types.TextDirection propval)
+  @property void direction(gtk.types.TextDirection propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.TextDirection)("direction", propval);
   }
 
   /** */
-  @property bool editable()
+  @property bool editable() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("editable");
   }
 
   /** */
-  @property void editable(bool propval)
+  @property void editable(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("editable", propval);
   }
 
   /** */
-  @property bool editableSet()
+  @property bool editableSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("editable-set");
   }
 
   /** */
-  @property void editableSet(bool propval)
+  @property void editableSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("editable-set", propval);
   }
@@ -225,7 +225,7 @@ class TextTag : gobject.object.ObjectWrap
         When set to true, other fonts will be substituted
         where the current font is missing glyphs.
   */
-  @property bool fallback()
+  @property bool fallback() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("fallback");
   }
@@ -238,43 +238,43 @@ class TextTag : gobject.object.ObjectWrap
           When set to true, other fonts will be substituted
           where the current font is missing glyphs.
   */
-  @property void fallback(bool propval)
+  @property void fallback(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("fallback", propval);
   }
 
   /** */
-  @property bool fallbackSet()
+  @property bool fallbackSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("fallback-set");
   }
 
   /** */
-  @property void fallbackSet(bool propval)
+  @property void fallbackSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("fallback-set", propval);
   }
 
   /** */
-  @property string family()
+  @property string family() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("family");
   }
 
   /** */
-  @property void family(string propval)
+  @property void family(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("family", propval);
   }
 
   /** */
-  @property bool familySet()
+  @property bool familySet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("family-set");
   }
 
   /** */
-  @property void familySet(bool propval)
+  @property void familySet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("family-set", propval);
   }
@@ -286,7 +286,7 @@ class TextTag : gobject.object.ObjectWrap
         Note that the initial value of this property depends on
         the internals of #PangoFontDescription.
   */
-  @property string font()
+  @property string font() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("font");
   }
@@ -299,19 +299,19 @@ class TextTag : gobject.object.ObjectWrap
           Note that the initial value of this property depends on
           the internals of #PangoFontDescription.
   */
-  @property void font(string propval)
+  @property void font(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("font", propval);
   }
 
   /** */
-  @property pango.font_description.FontDescription fontDesc()
+  @property pango.font_description.FontDescription fontDesc() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(pango.font_description.FontDescription)("font-desc");
   }
 
   /** */
-  @property void fontDesc(pango.font_description.FontDescription propval)
+  @property void fontDesc(pango.font_description.FontDescription propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(pango.font_description.FontDescription)("font-desc", propval);
   }
@@ -320,7 +320,7 @@ class TextTag : gobject.object.ObjectWrap
       Get `fontFeatures` property.
       Returns: OpenType font features, as a string.
   */
-  @property string fontFeatures()
+  @property string fontFeatures() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("font-features");
   }
@@ -330,25 +330,25 @@ class TextTag : gobject.object.ObjectWrap
       Params:
         propval = OpenType font features, as a string.
   */
-  @property void fontFeatures(string propval)
+  @property void fontFeatures(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("font-features", propval);
   }
 
   /** */
-  @property bool fontFeaturesSet()
+  @property bool fontFeaturesSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("font-features-set");
   }
 
   /** */
-  @property void fontFeaturesSet(bool propval)
+  @property void fontFeaturesSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("font-features-set", propval);
   }
 
   /** */
-  @property void foreground(string propval)
+  @property void foreground(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("foreground", propval);
   }
@@ -359,7 +359,7 @@ class TextTag : gobject.object.ObjectWrap
   
       Deprecated: Use #GtkTextTag:foreground-rgba instead.
   */
-  @property gdk.color.Color foregroundGdk()
+  @property gdk.color.Color foregroundGdk() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.color.Color)("foreground-gdk");
   }
@@ -371,7 +371,7 @@ class TextTag : gobject.object.ObjectWrap
   
       Deprecated: Use #GtkTextTag:foreground-rgba instead.
   */
-  @property void foregroundGdk(gdk.color.Color propval)
+  @property void foregroundGdk(gdk.color.Color propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.color.Color)("foreground-gdk", propval);
   }
@@ -380,7 +380,7 @@ class TextTag : gobject.object.ObjectWrap
       Get `foregroundRgba` property.
       Returns: Foreground color as a #GdkRGBA.
   */
-  @property gdk.rgba.RGBA foregroundRgba()
+  @property gdk.rgba.RGBA foregroundRgba() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("foreground-rgba");
   }
@@ -390,43 +390,43 @@ class TextTag : gobject.object.ObjectWrap
       Params:
         propval = Foreground color as a #GdkRGBA.
   */
-  @property void foregroundRgba(gdk.rgba.RGBA propval)
+  @property void foregroundRgba(gdk.rgba.RGBA propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.rgba.RGBA)("foreground-rgba", propval);
   }
 
   /** */
-  @property bool foregroundSet()
+  @property bool foregroundSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("foreground-set");
   }
 
   /** */
-  @property void foregroundSet(bool propval)
+  @property void foregroundSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("foreground-set", propval);
   }
 
   /** */
-  @property int indent()
+  @property int indent() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("indent");
   }
 
   /** */
-  @property void indent(int propval)
+  @property void indent(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("indent", propval);
   }
 
   /** */
-  @property bool indentSet()
+  @property bool indentSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("indent-set");
   }
 
   /** */
-  @property void indentSet(bool propval)
+  @property void indentSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("indent-set", propval);
   }
@@ -439,7 +439,7 @@ class TextTag : gobject.object.ObjectWrap
         text, in particular when navigating programmatically inside a buffer
         containing invisible segments.
   */
-  @property bool invisible()
+  @property bool invisible() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("invisible");
   }
@@ -453,43 +453,43 @@ class TextTag : gobject.object.ObjectWrap
           text, in particular when navigating programmatically inside a buffer
           containing invisible segments.
   */
-  @property void invisible(bool propval)
+  @property void invisible(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("invisible", propval);
   }
 
   /** */
-  @property bool invisibleSet()
+  @property bool invisibleSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("invisible-set");
   }
 
   /** */
-  @property void invisibleSet(bool propval)
+  @property void invisibleSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("invisible-set", propval);
   }
 
   /** */
-  @property gtk.types.Justification justification()
+  @property gtk.types.Justification justification() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.Justification)("justification");
   }
 
   /** */
-  @property void justification(gtk.types.Justification propval)
+  @property void justification(gtk.types.Justification propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.Justification)("justification", propval);
   }
 
   /** */
-  @property bool justificationSet()
+  @property bool justificationSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("justification-set");
   }
 
   /** */
-  @property void justificationSet(bool propval)
+  @property void justificationSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("justification-set", propval);
   }
@@ -503,7 +503,7 @@ class TextTag : gobject.object.ObjectWrap
         Note that the initial value of this property depends on the current
         locale, see also [gtk.global.getDefaultLanguage].
   */
-  @property string language()
+  @property string language() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("language");
   }
@@ -518,43 +518,43 @@ class TextTag : gobject.object.ObjectWrap
           Note that the initial value of this property depends on the current
           locale, see also [gtk.global.getDefaultLanguage].
   */
-  @property void language(string propval)
+  @property void language(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("language", propval);
   }
 
   /** */
-  @property bool languageSet()
+  @property bool languageSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("language-set");
   }
 
   /** */
-  @property void languageSet(bool propval)
+  @property void languageSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("language-set", propval);
   }
 
   /** */
-  @property int leftMargin()
+  @property int leftMargin() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("left-margin");
   }
 
   /** */
-  @property void leftMargin(int propval)
+  @property void leftMargin(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("left-margin", propval);
   }
 
   /** */
-  @property bool leftMarginSet()
+  @property bool leftMarginSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("left-margin-set");
   }
 
   /** */
-  @property void leftMarginSet(bool propval)
+  @property void leftMarginSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("left-margin-set", propval);
   }
@@ -563,7 +563,7 @@ class TextTag : gobject.object.ObjectWrap
       Get `letterSpacing` property.
       Returns: Extra spacing between graphemes, in Pango units.
   */
-  @property int letterSpacing()
+  @property int letterSpacing() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("letter-spacing");
   }
@@ -573,25 +573,25 @@ class TextTag : gobject.object.ObjectWrap
       Params:
         propval = Extra spacing between graphemes, in Pango units.
   */
-  @property void letterSpacing(int propval)
+  @property void letterSpacing(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("letter-spacing", propval);
   }
 
   /** */
-  @property bool letterSpacingSet()
+  @property bool letterSpacingSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("letter-spacing-set");
   }
 
   /** */
-  @property void letterSpacingSet(bool propval)
+  @property void letterSpacingSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("letter-spacing-set", propval);
   }
 
   /** */
-  @property string name()
+  @property string name() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("name");
   }
@@ -601,7 +601,7 @@ class TextTag : gobject.object.ObjectWrap
       Params:
         propval = The paragraph background color as a string.
   */
-  @property void paragraphBackground(string propval)
+  @property void paragraphBackground(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("paragraph-background", propval);
   }
@@ -612,7 +612,7 @@ class TextTag : gobject.object.ObjectWrap
   
       Deprecated: Use #GtkTextTag:paragraph-background-rgba instead.
   */
-  @property gdk.color.Color paragraphBackgroundGdk()
+  @property gdk.color.Color paragraphBackgroundGdk() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.color.Color)("paragraph-background-gdk");
   }
@@ -624,7 +624,7 @@ class TextTag : gobject.object.ObjectWrap
   
       Deprecated: Use #GtkTextTag:paragraph-background-rgba instead.
   */
-  @property void paragraphBackgroundGdk(gdk.color.Color propval)
+  @property void paragraphBackgroundGdk(gdk.color.Color propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.color.Color)("paragraph-background-gdk", propval);
   }
@@ -633,7 +633,7 @@ class TextTag : gobject.object.ObjectWrap
       Get `paragraphBackgroundRgba` property.
       Returns: The paragraph background color as a #GdkRGBA.
   */
-  @property gdk.rgba.RGBA paragraphBackgroundRgba()
+  @property gdk.rgba.RGBA paragraphBackgroundRgba() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("paragraph-background-rgba");
   }
@@ -643,235 +643,235 @@ class TextTag : gobject.object.ObjectWrap
       Params:
         propval = The paragraph background color as a #GdkRGBA.
   */
-  @property void paragraphBackgroundRgba(gdk.rgba.RGBA propval)
+  @property void paragraphBackgroundRgba(gdk.rgba.RGBA propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.rgba.RGBA)("paragraph-background-rgba", propval);
   }
 
   /** */
-  @property bool paragraphBackgroundSet()
+  @property bool paragraphBackgroundSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("paragraph-background-set");
   }
 
   /** */
-  @property void paragraphBackgroundSet(bool propval)
+  @property void paragraphBackgroundSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("paragraph-background-set", propval);
   }
 
   /** */
-  @property int pixelsAboveLines()
+  @property int pixelsAboveLines() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("pixels-above-lines");
   }
 
   /** */
-  @property void pixelsAboveLines(int propval)
+  @property void pixelsAboveLines(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("pixels-above-lines", propval);
   }
 
   /** */
-  @property bool pixelsAboveLinesSet()
+  @property bool pixelsAboveLinesSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("pixels-above-lines-set");
   }
 
   /** */
-  @property void pixelsAboveLinesSet(bool propval)
+  @property void pixelsAboveLinesSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("pixels-above-lines-set", propval);
   }
 
   /** */
-  @property int pixelsBelowLines()
+  @property int pixelsBelowLines() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("pixels-below-lines");
   }
 
   /** */
-  @property void pixelsBelowLines(int propval)
+  @property void pixelsBelowLines(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("pixels-below-lines", propval);
   }
 
   /** */
-  @property bool pixelsBelowLinesSet()
+  @property bool pixelsBelowLinesSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("pixels-below-lines-set");
   }
 
   /** */
-  @property void pixelsBelowLinesSet(bool propval)
+  @property void pixelsBelowLinesSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("pixels-below-lines-set", propval);
   }
 
   /** */
-  @property int pixelsInsideWrap()
+  @property int pixelsInsideWrap() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("pixels-inside-wrap");
   }
 
   /** */
-  @property void pixelsInsideWrap(int propval)
+  @property void pixelsInsideWrap(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("pixels-inside-wrap", propval);
   }
 
   /** */
-  @property bool pixelsInsideWrapSet()
+  @property bool pixelsInsideWrapSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("pixels-inside-wrap-set");
   }
 
   /** */
-  @property void pixelsInsideWrapSet(bool propval)
+  @property void pixelsInsideWrapSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("pixels-inside-wrap-set", propval);
   }
 
   /** */
-  @property int rightMargin()
+  @property int rightMargin() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("right-margin");
   }
 
   /** */
-  @property void rightMargin(int propval)
+  @property void rightMargin(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("right-margin", propval);
   }
 
   /** */
-  @property bool rightMarginSet()
+  @property bool rightMarginSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("right-margin-set");
   }
 
   /** */
-  @property void rightMarginSet(bool propval)
+  @property void rightMarginSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("right-margin-set", propval);
   }
 
   /** */
-  @property int rise()
+  @property int rise() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("rise");
   }
 
   /** */
-  @property void rise(int propval)
+  @property void rise(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("rise", propval);
   }
 
   /** */
-  @property bool riseSet()
+  @property bool riseSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("rise-set");
   }
 
   /** */
-  @property void riseSet(bool propval)
+  @property void riseSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("rise-set", propval);
   }
 
   /** */
-  @property double scale()
+  @property double scale() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(double)("scale");
   }
 
   /** */
-  @property void scale(double propval)
+  @property void scale(double propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(double)("scale", propval);
   }
 
   /** */
-  @property bool scaleSet()
+  @property bool scaleSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("scale-set");
   }
 
   /** */
-  @property void scaleSet(bool propval)
+  @property void scaleSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("scale-set", propval);
   }
 
   /** */
-  @property int size()
+  @property int size() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("size");
   }
 
   /** */
-  @property void size(int propval)
+  @property void size(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("size", propval);
   }
 
   /** */
-  @property double sizePoints()
+  @property double sizePoints() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(double)("size-points");
   }
 
   /** */
-  @property void sizePoints(double propval)
+  @property void sizePoints(double propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(double)("size-points", propval);
   }
 
   /** */
-  @property bool sizeSet()
+  @property bool sizeSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("size-set");
   }
 
   /** */
-  @property void sizeSet(bool propval)
+  @property void sizeSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("size-set", propval);
   }
 
   /** */
-  @property pango.types.Stretch stretch()
+  @property pango.types.Stretch stretch() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(pango.types.Stretch)("stretch");
   }
 
   /** */
-  @property void stretch(pango.types.Stretch propval)
+  @property void stretch(pango.types.Stretch propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(pango.types.Stretch)("stretch", propval);
   }
 
   /** */
-  @property bool stretchSet()
+  @property bool stretchSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("stretch-set");
   }
 
   /** */
-  @property void stretchSet(bool propval)
+  @property void stretchSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("stretch-set", propval);
   }
 
   /** */
-  @property bool strikethrough()
+  @property bool strikethrough() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("strikethrough");
   }
 
   /** */
-  @property void strikethrough(bool propval)
+  @property void strikethrough(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("strikethrough", propval);
   }
@@ -881,7 +881,7 @@ class TextTag : gobject.object.ObjectWrap
       Returns: This property modifies the color of strikeouts. If not set, strikeouts
         will use the forground color.
   */
-  @property gdk.rgba.RGBA strikethroughRgba()
+  @property gdk.rgba.RGBA strikethroughRgba() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("strikethrough-rgba");
   }
@@ -892,7 +892,7 @@ class TextTag : gobject.object.ObjectWrap
         propval = This property modifies the color of strikeouts. If not set, strikeouts
           will use the forground color.
   */
-  @property void strikethroughRgba(gdk.rgba.RGBA propval)
+  @property void strikethroughRgba(gdk.rgba.RGBA propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.rgba.RGBA)("strikethrough-rgba", propval);
   }
@@ -901,7 +901,7 @@ class TextTag : gobject.object.ObjectWrap
       Get `strikethroughRgbaSet` property.
       Returns: If the #GtkTextTag:strikethrough-rgba property has been set.
   */
-  @property bool strikethroughRgbaSet()
+  @property bool strikethroughRgbaSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("strikethrough-rgba-set");
   }
@@ -911,79 +911,79 @@ class TextTag : gobject.object.ObjectWrap
       Params:
         propval = If the #GtkTextTag:strikethrough-rgba property has been set.
   */
-  @property void strikethroughRgbaSet(bool propval)
+  @property void strikethroughRgbaSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("strikethrough-rgba-set", propval);
   }
 
   /** */
-  @property bool strikethroughSet()
+  @property bool strikethroughSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("strikethrough-set");
   }
 
   /** */
-  @property void strikethroughSet(bool propval)
+  @property void strikethroughSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("strikethrough-set", propval);
   }
 
   /** */
-  @property pango.types.Style style()
+  @property pango.types.Style style() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(pango.types.Style)("style");
   }
 
   /** */
-  @property void style(pango.types.Style propval)
+  @property void style(pango.types.Style propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(pango.types.Style)("style", propval);
   }
 
   /** */
-  @property bool styleSet()
+  @property bool styleSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("style-set");
   }
 
   /** */
-  @property void styleSet(bool propval)
+  @property void styleSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("style-set", propval);
   }
 
   /** */
-  @property pango.tab_array.TabArray tabs()
+  @property pango.tab_array.TabArray tabs() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(pango.tab_array.TabArray)("tabs");
   }
 
   /** */
-  @property void tabs(pango.tab_array.TabArray propval)
+  @property void tabs(pango.tab_array.TabArray propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(pango.tab_array.TabArray)("tabs", propval);
   }
 
   /** */
-  @property bool tabsSet()
+  @property bool tabsSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("tabs-set");
   }
 
   /** */
-  @property void tabsSet(bool propval)
+  @property void tabsSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("tabs-set", propval);
   }
 
   /** */
-  @property pango.types.Underline underline()
+  @property pango.types.Underline underline() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(pango.types.Underline)("underline");
   }
 
   /** */
-  @property void underline(pango.types.Underline propval)
+  @property void underline(pango.types.Underline propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(pango.types.Underline)("underline", propval);
   }
@@ -997,7 +997,7 @@ class TextTag : gobject.object.ObjectWrap
         color may be applied instead of the foreground. Setting this property
         will always override those defaults.
   */
-  @property gdk.rgba.RGBA underlineRgba()
+  @property gdk.rgba.RGBA underlineRgba() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("underline-rgba");
   }
@@ -1012,7 +1012,7 @@ class TextTag : gobject.object.ObjectWrap
           color may be applied instead of the foreground. Setting this property
           will always override those defaults.
   */
-  @property void underlineRgba(gdk.rgba.RGBA propval)
+  @property void underlineRgba(gdk.rgba.RGBA propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.rgba.RGBA)("underline-rgba", propval);
   }
@@ -1021,7 +1021,7 @@ class TextTag : gobject.object.ObjectWrap
       Get `underlineRgbaSet` property.
       Returns: If the #GtkTextTag:underline-rgba property has been set.
   */
-  @property bool underlineRgbaSet()
+  @property bool underlineRgbaSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("underline-rgba-set");
   }
@@ -1031,91 +1031,91 @@ class TextTag : gobject.object.ObjectWrap
       Params:
         propval = If the #GtkTextTag:underline-rgba property has been set.
   */
-  @property void underlineRgbaSet(bool propval)
+  @property void underlineRgbaSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("underline-rgba-set", propval);
   }
 
   /** */
-  @property bool underlineSet()
+  @property bool underlineSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("underline-set");
   }
 
   /** */
-  @property void underlineSet(bool propval)
+  @property void underlineSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("underline-set", propval);
   }
 
   /** */
-  @property pango.types.Variant variant()
+  @property pango.types.Variant variant() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(pango.types.Variant)("variant");
   }
 
   /** */
-  @property void variant(pango.types.Variant propval)
+  @property void variant(pango.types.Variant propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(pango.types.Variant)("variant", propval);
   }
 
   /** */
-  @property bool variantSet()
+  @property bool variantSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("variant-set");
   }
 
   /** */
-  @property void variantSet(bool propval)
+  @property void variantSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("variant-set", propval);
   }
 
   /** */
-  @property int weight()
+  @property int weight() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("weight");
   }
 
   /** */
-  @property void weight(int propval)
+  @property void weight(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("weight", propval);
   }
 
   /** */
-  @property bool weightSet()
+  @property bool weightSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("weight-set");
   }
 
   /** */
-  @property void weightSet(bool propval)
+  @property void weightSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("weight-set", propval);
   }
 
   /** */
-  @property gtk.types.WrapMode wrapMode()
+  @property gtk.types.WrapMode wrapMode() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.WrapMode)("wrap-mode");
   }
 
   /** */
-  @property void wrapMode(gtk.types.WrapMode propval)
+  @property void wrapMode(gtk.types.WrapMode propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.WrapMode)("wrap-mode", propval);
   }
 
   /** */
-  @property bool wrapModeSet()
+  @property bool wrapModeSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("wrap-mode-set");
   }
 
   /** */
-  @property void wrapModeSet(bool propval)
+  @property void wrapModeSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("wrap-mode-set", propval);
   }
@@ -1128,7 +1128,7 @@ class TextTag : gobject.object.ObjectWrap
         name = tag name, or null
       Returns: a new #GtkTextTag
   */
-  this(string name = null)
+  this(string name = null) nothrow
   {
     GtkTextTag* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -1146,7 +1146,7 @@ class TextTag : gobject.object.ObjectWrap
       Params:
         sizeChanged = whether the change affects the #GtkTextView layout.
   */
-  void changed(bool sizeChanged)
+  void changed(bool sizeChanged) nothrow
   {
     gtk_text_tag_changed(cast(GtkTextTag*)this._cPtr, sizeChanged);
   }
@@ -1160,7 +1160,7 @@ class TextTag : gobject.object.ObjectWrap
         iter = location where the event was received
       Returns: result of signal emission (whether the event was handled)
   */
-  bool event(gobject.object.ObjectWrap eventObject, gdk.event.Event event, gtk.text_iter.TextIter iter)
+  bool event(gobject.object.ObjectWrap eventObject, gdk.event.Event event, gtk.text_iter.TextIter iter) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_tag_event(cast(GtkTextTag*)this._cPtr, eventObject ? cast(GObject*)eventObject._cPtr(No.Dup) : null, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null);
@@ -1171,7 +1171,7 @@ class TextTag : gobject.object.ObjectWrap
       Get the tag priority.
       Returns: The tag’s priority.
   */
-  int getPriority()
+  int getPriority() nothrow
   {
     int _retval;
     _retval = gtk_text_tag_get_priority(cast(GtkTextTag*)this._cPtr);
@@ -1194,7 +1194,7 @@ class TextTag : gobject.object.ObjectWrap
       Params:
         priority = the new priority
   */
-  void setPriority(int priority)
+  void setPriority(int priority) nothrow
   {
     gtk_text_tag_set_priority(cast(GtkTextTag*)this._cPtr, priority);
   }
@@ -1223,7 +1223,7 @@ class TextTag : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
@@ -1232,11 +1232,12 @@ class TextTag : gobject.object.ObjectWrap
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.text_tag.TextTag)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1250,7 +1251,14 @@ class TextTag : gobject.object.ObjectWrap
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_tag.TextTag.event");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1274,25 +1282,25 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           the margins override one another (the default).
       Returns: Builder instance for fluent chaining
   */
-  T accumulativeMargin(bool propval)
+  T accumulativeMargin(bool propval) nothrow
   {
     return setProperty("accumulative-margin", propval);
   }
 
   /** */
-  T background(string propval)
+  T background(string propval) nothrow
   {
     return setProperty("background", propval);
   }
 
   /** */
-  T backgroundFullHeight(bool propval)
+  T backgroundFullHeight(bool propval) nothrow
   {
     return setProperty("background-full-height", propval);
   }
 
   /** */
-  T backgroundFullHeightSet(bool propval)
+  T backgroundFullHeightSet(bool propval) nothrow
   {
     return setProperty("background-full-height-set", propval);
   }
@@ -1305,7 +1313,7 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   
       Deprecated: Use #GtkTextTag:background-rgba instead.
   */
-  T backgroundGdk(gdk.color.Color propval)
+  T backgroundGdk(gdk.color.Color propval) nothrow
   {
     return setProperty("background-gdk", propval);
   }
@@ -1316,31 +1324,31 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Background color as a #GdkRGBA.
       Returns: Builder instance for fluent chaining
   */
-  T backgroundRgba(gdk.rgba.RGBA propval)
+  T backgroundRgba(gdk.rgba.RGBA propval) nothrow
   {
     return setProperty("background-rgba", propval);
   }
 
   /** */
-  T backgroundSet(bool propval)
+  T backgroundSet(bool propval) nothrow
   {
     return setProperty("background-set", propval);
   }
 
   /** */
-  T direction(gtk.types.TextDirection propval)
+  T direction(gtk.types.TextDirection propval) nothrow
   {
     return setProperty("direction", propval);
   }
 
   /** */
-  T editable(bool propval)
+  T editable(bool propval) nothrow
   {
     return setProperty("editable", propval);
   }
 
   /** */
-  T editableSet(bool propval)
+  T editableSet(bool propval) nothrow
   {
     return setProperty("editable-set", propval);
   }
@@ -1354,25 +1362,25 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           where the current font is missing glyphs.
       Returns: Builder instance for fluent chaining
   */
-  T fallback(bool propval)
+  T fallback(bool propval) nothrow
   {
     return setProperty("fallback", propval);
   }
 
   /** */
-  T fallbackSet(bool propval)
+  T fallbackSet(bool propval) nothrow
   {
     return setProperty("fallback-set", propval);
   }
 
   /** */
-  T family(string propval)
+  T family(string propval) nothrow
   {
     return setProperty("family", propval);
   }
 
   /** */
-  T familySet(bool propval)
+  T familySet(bool propval) nothrow
   {
     return setProperty("family-set", propval);
   }
@@ -1386,13 +1394,13 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           the internals of #PangoFontDescription.
       Returns: Builder instance for fluent chaining
   */
-  T font(string propval)
+  T font(string propval) nothrow
   {
     return setProperty("font", propval);
   }
 
   /** */
-  T fontDesc(pango.font_description.FontDescription propval)
+  T fontDesc(pango.font_description.FontDescription propval) nothrow
   {
     return setProperty("font-desc", propval);
   }
@@ -1403,19 +1411,19 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = OpenType font features, as a string.
       Returns: Builder instance for fluent chaining
   */
-  T fontFeatures(string propval)
+  T fontFeatures(string propval) nothrow
   {
     return setProperty("font-features", propval);
   }
 
   /** */
-  T fontFeaturesSet(bool propval)
+  T fontFeaturesSet(bool propval) nothrow
   {
     return setProperty("font-features-set", propval);
   }
 
   /** */
-  T foreground(string propval)
+  T foreground(string propval) nothrow
   {
     return setProperty("foreground", propval);
   }
@@ -1428,7 +1436,7 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   
       Deprecated: Use #GtkTextTag:foreground-rgba instead.
   */
-  T foregroundGdk(gdk.color.Color propval)
+  T foregroundGdk(gdk.color.Color propval) nothrow
   {
     return setProperty("foreground-gdk", propval);
   }
@@ -1439,25 +1447,25 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Foreground color as a #GdkRGBA.
       Returns: Builder instance for fluent chaining
   */
-  T foregroundRgba(gdk.rgba.RGBA propval)
+  T foregroundRgba(gdk.rgba.RGBA propval) nothrow
   {
     return setProperty("foreground-rgba", propval);
   }
 
   /** */
-  T foregroundSet(bool propval)
+  T foregroundSet(bool propval) nothrow
   {
     return setProperty("foreground-set", propval);
   }
 
   /** */
-  T indent(int propval)
+  T indent(int propval) nothrow
   {
     return setProperty("indent", propval);
   }
 
   /** */
-  T indentSet(bool propval)
+  T indentSet(bool propval) nothrow
   {
     return setProperty("indent-set", propval);
   }
@@ -1472,25 +1480,25 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           containing invisible segments.
       Returns: Builder instance for fluent chaining
   */
-  T invisible(bool propval)
+  T invisible(bool propval) nothrow
   {
     return setProperty("invisible", propval);
   }
 
   /** */
-  T invisibleSet(bool propval)
+  T invisibleSet(bool propval) nothrow
   {
     return setProperty("invisible-set", propval);
   }
 
   /** */
-  T justification(gtk.types.Justification propval)
+  T justification(gtk.types.Justification propval) nothrow
   {
     return setProperty("justification", propval);
   }
 
   /** */
-  T justificationSet(bool propval)
+  T justificationSet(bool propval) nothrow
   {
     return setProperty("justification-set", propval);
   }
@@ -1506,25 +1514,25 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           locale, see also [gtk.global.getDefaultLanguage].
       Returns: Builder instance for fluent chaining
   */
-  T language(string propval)
+  T language(string propval) nothrow
   {
     return setProperty("language", propval);
   }
 
   /** */
-  T languageSet(bool propval)
+  T languageSet(bool propval) nothrow
   {
     return setProperty("language-set", propval);
   }
 
   /** */
-  T leftMargin(int propval)
+  T leftMargin(int propval) nothrow
   {
     return setProperty("left-margin", propval);
   }
 
   /** */
-  T leftMarginSet(bool propval)
+  T leftMarginSet(bool propval) nothrow
   {
     return setProperty("left-margin-set", propval);
   }
@@ -1535,19 +1543,19 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Extra spacing between graphemes, in Pango units.
       Returns: Builder instance for fluent chaining
   */
-  T letterSpacing(int propval)
+  T letterSpacing(int propval) nothrow
   {
     return setProperty("letter-spacing", propval);
   }
 
   /** */
-  T letterSpacingSet(bool propval)
+  T letterSpacingSet(bool propval) nothrow
   {
     return setProperty("letter-spacing-set", propval);
   }
 
   /** */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -1558,7 +1566,7 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The paragraph background color as a string.
       Returns: Builder instance for fluent chaining
   */
-  T paragraphBackground(string propval)
+  T paragraphBackground(string propval) nothrow
   {
     return setProperty("paragraph-background", propval);
   }
@@ -1571,7 +1579,7 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   
       Deprecated: Use #GtkTextTag:paragraph-background-rgba instead.
   */
-  T paragraphBackgroundGdk(gdk.color.Color propval)
+  T paragraphBackgroundGdk(gdk.color.Color propval) nothrow
   {
     return setProperty("paragraph-background-gdk", propval);
   }
@@ -1582,121 +1590,121 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The paragraph background color as a #GdkRGBA.
       Returns: Builder instance for fluent chaining
   */
-  T paragraphBackgroundRgba(gdk.rgba.RGBA propval)
+  T paragraphBackgroundRgba(gdk.rgba.RGBA propval) nothrow
   {
     return setProperty("paragraph-background-rgba", propval);
   }
 
   /** */
-  T paragraphBackgroundSet(bool propval)
+  T paragraphBackgroundSet(bool propval) nothrow
   {
     return setProperty("paragraph-background-set", propval);
   }
 
   /** */
-  T pixelsAboveLines(int propval)
+  T pixelsAboveLines(int propval) nothrow
   {
     return setProperty("pixels-above-lines", propval);
   }
 
   /** */
-  T pixelsAboveLinesSet(bool propval)
+  T pixelsAboveLinesSet(bool propval) nothrow
   {
     return setProperty("pixels-above-lines-set", propval);
   }
 
   /** */
-  T pixelsBelowLines(int propval)
+  T pixelsBelowLines(int propval) nothrow
   {
     return setProperty("pixels-below-lines", propval);
   }
 
   /** */
-  T pixelsBelowLinesSet(bool propval)
+  T pixelsBelowLinesSet(bool propval) nothrow
   {
     return setProperty("pixels-below-lines-set", propval);
   }
 
   /** */
-  T pixelsInsideWrap(int propval)
+  T pixelsInsideWrap(int propval) nothrow
   {
     return setProperty("pixels-inside-wrap", propval);
   }
 
   /** */
-  T pixelsInsideWrapSet(bool propval)
+  T pixelsInsideWrapSet(bool propval) nothrow
   {
     return setProperty("pixels-inside-wrap-set", propval);
   }
 
   /** */
-  T rightMargin(int propval)
+  T rightMargin(int propval) nothrow
   {
     return setProperty("right-margin", propval);
   }
 
   /** */
-  T rightMarginSet(bool propval)
+  T rightMarginSet(bool propval) nothrow
   {
     return setProperty("right-margin-set", propval);
   }
 
   /** */
-  T rise(int propval)
+  T rise(int propval) nothrow
   {
     return setProperty("rise", propval);
   }
 
   /** */
-  T riseSet(bool propval)
+  T riseSet(bool propval) nothrow
   {
     return setProperty("rise-set", propval);
   }
 
   /** */
-  T scale(double propval)
+  T scale(double propval) nothrow
   {
     return setProperty("scale", propval);
   }
 
   /** */
-  T scaleSet(bool propval)
+  T scaleSet(bool propval) nothrow
   {
     return setProperty("scale-set", propval);
   }
 
   /** */
-  T size(int propval)
+  T size(int propval) nothrow
   {
     return setProperty("size", propval);
   }
 
   /** */
-  T sizePoints(double propval)
+  T sizePoints(double propval) nothrow
   {
     return setProperty("size-points", propval);
   }
 
   /** */
-  T sizeSet(bool propval)
+  T sizeSet(bool propval) nothrow
   {
     return setProperty("size-set", propval);
   }
 
   /** */
-  T stretch(pango.types.Stretch propval)
+  T stretch(pango.types.Stretch propval) nothrow
   {
     return setProperty("stretch", propval);
   }
 
   /** */
-  T stretchSet(bool propval)
+  T stretchSet(bool propval) nothrow
   {
     return setProperty("stretch-set", propval);
   }
 
   /** */
-  T strikethrough(bool propval)
+  T strikethrough(bool propval) nothrow
   {
     return setProperty("strikethrough", propval);
   }
@@ -1708,7 +1716,7 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           will use the forground color.
       Returns: Builder instance for fluent chaining
   */
-  T strikethroughRgba(gdk.rgba.RGBA propval)
+  T strikethroughRgba(gdk.rgba.RGBA propval) nothrow
   {
     return setProperty("strikethrough-rgba", propval);
   }
@@ -1719,43 +1727,43 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = If the #GtkTextTag:strikethrough-rgba property has been set.
       Returns: Builder instance for fluent chaining
   */
-  T strikethroughRgbaSet(bool propval)
+  T strikethroughRgbaSet(bool propval) nothrow
   {
     return setProperty("strikethrough-rgba-set", propval);
   }
 
   /** */
-  T strikethroughSet(bool propval)
+  T strikethroughSet(bool propval) nothrow
   {
     return setProperty("strikethrough-set", propval);
   }
 
   /** */
-  T style(pango.types.Style propval)
+  T style(pango.types.Style propval) nothrow
   {
     return setProperty("style", propval);
   }
 
   /** */
-  T styleSet(bool propval)
+  T styleSet(bool propval) nothrow
   {
     return setProperty("style-set", propval);
   }
 
   /** */
-  T tabs(pango.tab_array.TabArray propval)
+  T tabs(pango.tab_array.TabArray propval) nothrow
   {
     return setProperty("tabs", propval);
   }
 
   /** */
-  T tabsSet(bool propval)
+  T tabsSet(bool propval) nothrow
   {
     return setProperty("tabs-set", propval);
   }
 
   /** */
-  T underline(pango.types.Underline propval)
+  T underline(pango.types.Underline propval) nothrow
   {
     return setProperty("underline", propval);
   }
@@ -1771,7 +1779,7 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           will always override those defaults.
       Returns: Builder instance for fluent chaining
   */
-  T underlineRgba(gdk.rgba.RGBA propval)
+  T underlineRgba(gdk.rgba.RGBA propval) nothrow
   {
     return setProperty("underline-rgba", propval);
   }
@@ -1782,49 +1790,49 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = If the #GtkTextTag:underline-rgba property has been set.
       Returns: Builder instance for fluent chaining
   */
-  T underlineRgbaSet(bool propval)
+  T underlineRgbaSet(bool propval) nothrow
   {
     return setProperty("underline-rgba-set", propval);
   }
 
   /** */
-  T underlineSet(bool propval)
+  T underlineSet(bool propval) nothrow
   {
     return setProperty("underline-set", propval);
   }
 
   /** */
-  T variant(pango.types.Variant propval)
+  T variant(pango.types.Variant propval) nothrow
   {
     return setProperty("variant", propval);
   }
 
   /** */
-  T variantSet(bool propval)
+  T variantSet(bool propval) nothrow
   {
     return setProperty("variant-set", propval);
   }
 
   /** */
-  T weight(int propval)
+  T weight(int propval) nothrow
   {
     return setProperty("weight", propval);
   }
 
   /** */
-  T weightSet(bool propval)
+  T weightSet(bool propval) nothrow
   {
     return setProperty("weight-set", propval);
   }
 
   /** */
-  T wrapMode(gtk.types.WrapMode propval)
+  T wrapMode(gtk.types.WrapMode propval) nothrow
   {
     return setProperty("wrap-mode", propval);
   }
 
   /** */
-  T wrapModeSet(bool propval)
+  T wrapModeSet(bool propval) nothrow
   {
     return setProperty("wrap-mode-set", propval);
   }
@@ -1837,7 +1845,7 @@ final class TextTagGidBuilder : TextTagGidBuilderImpl!TextTagGidBuilder
       Create object from builder.
       Returns: New object
   */
-  TextTag build()
+  TextTag build() nothrow
   {
     return new TextTag(cast(void*)createGObject(TextTag._getGType), Yes.Take);
   }

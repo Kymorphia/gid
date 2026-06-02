@@ -21,26 +21,26 @@ class Seat : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_seat_get_type != &gidSymbolNotFound ? gdk_seat_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Seat self()
+  override Seat self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class Seat : gobject.object.ObjectWrap
       Get builder for [gdk.seat.Seat]
       Returns: New builder object
   */
-  static SeatGidBuilder builder()
+  static SeatGidBuilder builder() nothrow
   {
     return new SeatGidBuilder;
   }
@@ -58,7 +58,7 @@ class Seat : gobject.object.ObjectWrap
       Get `display` property.
       Returns: [gdk.display.Display] of this seat.
   */
-  @property gdk.display.Display display()
+  @property gdk.display.Display display() nothrow
   {
     return getDisplay();
   }
@@ -67,7 +67,7 @@ class Seat : gobject.object.ObjectWrap
       Returns the capabilities this [gdk.seat.Seat] currently has.
       Returns: the seat capabilities
   */
-  gdk.types.SeatCapabilities getCapabilities()
+  gdk.types.SeatCapabilities getCapabilities() nothrow
   {
     GdkSeatCapabilities _cretval;
     _cretval = gdk_seat_get_capabilities(cast(GdkSeat*)this._cPtr);
@@ -84,7 +84,7 @@ class Seat : gobject.object.ObjectWrap
           of `GdkDevices`. The list must be freed with [glib.list.List.free],
           the elements are owned by GTK and must not be freed.
   */
-  gdk.device.Device[] getDevices(gdk.types.SeatCapabilities capabilities)
+  gdk.device.Device[] getDevices(gdk.types.SeatCapabilities capabilities) nothrow
   {
     GList* _cretval;
     _cretval = gdk_seat_get_devices(cast(GdkSeat*)this._cPtr, capabilities);
@@ -97,7 +97,7 @@ class Seat : gobject.object.ObjectWrap
       Returns: a [gdk.display.Display]. This object
           is owned by GTK and must not be freed.
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gdk_seat_get_display(cast(GdkSeat*)this._cPtr);
@@ -110,7 +110,7 @@ class Seat : gobject.object.ObjectWrap
       Returns: a [gdk.device.Device] with keyboard
           capabilities. This object is owned by GTK and must not be freed.
   */
-  gdk.device.Device getKeyboard()
+  gdk.device.Device getKeyboard() nothrow
   {
     GdkDevice* _cretval;
     _cretval = gdk_seat_get_keyboard(cast(GdkSeat*)this._cPtr);
@@ -123,7 +123,7 @@ class Seat : gobject.object.ObjectWrap
       Returns: a [gdk.device.Device] with pointer
           capabilities. This object is owned by GTK and must not be freed.
   */
-  gdk.device.Device getPointer()
+  gdk.device.Device getPointer() nothrow
   {
     GdkDevice* _cretval;
     _cretval = gdk_seat_get_pointer(cast(GdkSeat*)this._cPtr);
@@ -135,7 +135,7 @@ class Seat : gobject.object.ObjectWrap
       Returns all `GdkDeviceTools` that are known to the application.
       Returns: A list of tools. Free with [glib.list.List.free].
   */
-  gdk.device_tool.DeviceTool[] getTools()
+  gdk.device_tool.DeviceTool[] getTools() nothrow
   {
     GList* _cretval;
     _cretval = gdk_seat_get_tools(cast(GdkSeat*)this._cPtr);
@@ -160,14 +160,14 @@ class Seat : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeviceAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeviceAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.device.Device)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.seat.Seat)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -179,7 +179,14 @@ class Seat : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.seat.Seat.deviceAdded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -203,14 +210,14 @@ class Seat : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeviceRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeviceRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.device.Device)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.seat.Seat)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -222,7 +229,14 @@ class Seat : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.seat.Seat.deviceRemoved");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -252,14 +266,14 @@ class Seat : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectToolAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToolAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.device_tool.DeviceTool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.seat.Seat)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -271,7 +285,14 @@ class Seat : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.seat.Seat.toolAdded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -295,14 +316,14 @@ class Seat : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectToolRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToolRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.device_tool.DeviceTool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.seat.Seat)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -314,7 +335,14 @@ class Seat : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.seat.Seat.toolRemoved");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -332,7 +360,7 @@ class SeatGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = [gdk.display.Display] of this seat.
       Returns: Builder instance for fluent chaining
   */
-  T display(gdk.display.Display propval)
+  T display(gdk.display.Display propval) nothrow
   {
     return setProperty("display", propval);
   }
@@ -345,7 +373,7 @@ final class SeatGidBuilder : SeatGidBuilderImpl!SeatGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Seat build()
+  Seat build() nothrow
   {
     return new Seat(cast(void*)createGObject(Seat._getGType), No.Take);
   }

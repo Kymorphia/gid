@@ -15,26 +15,26 @@ class FinishOptions : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_finish_options_get_type != &gidSymbolNotFound ? gadataset_finish_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FinishOptions self()
+  override FinishOptions self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class FinishOptions : gobject.object.ObjectWrap
       Get builder for [arrowdataset.finish_options.FinishOptions]
       Returns: New builder object
   */
-  static FinishOptionsGidBuilder builder()
+  static FinishOptionsGidBuilder builder() nothrow
   {
     return new FinishOptionsGidBuilder;
   }
@@ -52,7 +52,7 @@ class FinishOptions : gobject.object.ObjectWrap
       Get `inspectNFragments` property.
       Returns: The number of fragments to be used to inspect schema.
   */
-  @property int inspectNFragments()
+  @property int inspectNFragments() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("inspect-n-fragments");
   }
@@ -62,7 +62,7 @@ class FinishOptions : gobject.object.ObjectWrap
       Params:
         propval = The number of fragments to be used to inspect schema.
   */
-  @property void inspectNFragments(int propval)
+  @property void inspectNFragments(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("inspect-n-fragments", propval);
   }
@@ -71,7 +71,7 @@ class FinishOptions : gobject.object.ObjectWrap
       Get `schema` property.
       Returns: The schema to finalize the dataset's schema.
   */
-  @property arrow.schema.Schema schema()
+  @property arrow.schema.Schema schema() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.schema.Schema)("schema");
   }
@@ -81,7 +81,7 @@ class FinishOptions : gobject.object.ObjectWrap
       Params:
         propval = The schema to finalize the dataset's schema.
   */
-  @property void schema(arrow.schema.Schema propval)
+  @property void schema(arrow.schema.Schema propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(arrow.schema.Schema)("schema", propval);
   }
@@ -90,7 +90,7 @@ class FinishOptions : gobject.object.ObjectWrap
       Get `validateFragments` property.
       Returns: Whether validate fragments against the given schema or not.
   */
-  @property bool validateFragments()
+  @property bool validateFragments() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("validate-fragments");
   }
@@ -100,13 +100,13 @@ class FinishOptions : gobject.object.ObjectWrap
       Params:
         propval = Whether validate fragments against the given schema or not.
   */
-  @property void validateFragments(bool propval)
+  @property void validateFragments(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("validate-fragments", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GADatasetFinishOptions* _cretval;
     _cretval = gadataset_finish_options_new();
@@ -119,7 +119,7 @@ class FinishOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T finishOptions(void* propval)
+  T finishOptions(void* propval) nothrow
   {
     return setProperty("finish-options", propval);
   }
@@ -130,7 +130,7 @@ class FinishOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The number of fragments to be used to inspect schema.
       Returns: Builder instance for fluent chaining
   */
-  T inspectNFragments(int propval)
+  T inspectNFragments(int propval) nothrow
   {
     return setProperty("inspect-n-fragments", propval);
   }
@@ -141,7 +141,7 @@ class FinishOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The schema to finalize the dataset's schema.
       Returns: Builder instance for fluent chaining
   */
-  T schema(arrow.schema.Schema propval)
+  T schema(arrow.schema.Schema propval) nothrow
   {
     return setProperty("schema", propval);
   }
@@ -152,7 +152,7 @@ class FinishOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether validate fragments against the given schema or not.
       Returns: Builder instance for fluent chaining
   */
-  T validateFragments(bool propval)
+  T validateFragments(bool propval) nothrow
   {
     return setProperty("validate-fragments", propval);
   }
@@ -165,7 +165,7 @@ final class FinishOptionsGidBuilder : FinishOptionsGidBuilderImpl!FinishOptionsG
       Create object from builder.
       Returns: New object
   */
-  FinishOptions build()
+  FinishOptions build() nothrow
   {
     return new FinishOptions(cast(void*)createGObject(FinishOptions._getGType), Yes.Take);
   }

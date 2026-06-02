@@ -29,26 +29,26 @@ class ShortcutsGroup : gtk.box.Box
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_shortcuts_group_get_type != &gidSymbolNotFound ? gtk_shortcuts_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ShortcutsGroup self()
+  override ShortcutsGroup self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class ShortcutsGroup : gtk.box.Box
       Get builder for [gtk.shortcuts_group.ShortcutsGroup]
       Returns: New builder object
   */
-  static ShortcutsGroupGidBuilder builder()
+  static ShortcutsGroupGidBuilder builder() nothrow
   {
     return new ShortcutsGroupGidBuilder;
   }
@@ -69,7 +69,7 @@ class ShortcutsGroup : gtk.box.Box
           
           This is used internally by GTK+, and must not be modified by applications.
   */
-  @property void accelSizeGroup(gtk.size_group.SizeGroup propval)
+  @property void accelSizeGroup(gtk.size_group.SizeGroup propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.size_group.SizeGroup)("accel-size-group", propval);
   }
@@ -80,7 +80,7 @@ class ShortcutsGroup : gtk.box.Box
         
         This is used internally by GTK+, and is not useful for applications.
   */
-  @property uint height()
+  @property uint height() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("height");
   }
@@ -89,7 +89,7 @@ class ShortcutsGroup : gtk.box.Box
       Get `title` property.
       Returns: The title for this group of shortcuts.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("title");
   }
@@ -99,7 +99,7 @@ class ShortcutsGroup : gtk.box.Box
       Params:
         propval = The title for this group of shortcuts.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("title", propval);
   }
@@ -111,7 +111,7 @@ class ShortcutsGroup : gtk.box.Box
           
           This is used internally by GTK+, and must not be modified by applications.
   */
-  @property void titleSizeGroup(gtk.size_group.SizeGroup propval)
+  @property void titleSizeGroup(gtk.size_group.SizeGroup propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.size_group.SizeGroup)("title-size-group", propval);
   }
@@ -124,7 +124,7 @@ class ShortcutsGroup : gtk.box.Box
         
         Set this to null to make the group always visible.
   */
-  @property string view()
+  @property string view() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("view");
   }
@@ -138,7 +138,7 @@ class ShortcutsGroup : gtk.box.Box
           
           Set this to null to make the group always visible.
   */
-  @property void view(string propval)
+  @property void view(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("view", propval);
   }
@@ -157,7 +157,7 @@ class ShortcutsGroupGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
           This is used internally by GTK+, and must not be modified by applications.
       Returns: Builder instance for fluent chaining
   */
-  T accelSizeGroup(gtk.size_group.SizeGroup propval)
+  T accelSizeGroup(gtk.size_group.SizeGroup propval) nothrow
   {
     return setProperty("accel-size-group", propval);
   }
@@ -168,7 +168,7 @@ class ShortcutsGroupGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
         propval = The title for this group of shortcuts.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -181,7 +181,7 @@ class ShortcutsGroupGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
           This is used internally by GTK+, and must not be modified by applications.
       Returns: Builder instance for fluent chaining
   */
-  T titleSizeGroup(gtk.size_group.SizeGroup propval)
+  T titleSizeGroup(gtk.size_group.SizeGroup propval) nothrow
   {
     return setProperty("title-size-group", propval);
   }
@@ -196,7 +196,7 @@ class ShortcutsGroupGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
           Set this to null to make the group always visible.
       Returns: Builder instance for fluent chaining
   */
-  T view(string propval)
+  T view(string propval) nothrow
   {
     return setProperty("view", propval);
   }
@@ -209,7 +209,7 @@ final class ShortcutsGroupGidBuilder : ShortcutsGroupGidBuilderImpl!ShortcutsGro
       Create object from builder.
       Returns: New object
   */
-  ShortcutsGroup build()
+  ShortcutsGroup build() nothrow
   {
     return new ShortcutsGroup(cast(void*)createGObject(ShortcutsGroup._getGType), No.Take);
   }

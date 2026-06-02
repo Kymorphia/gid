@@ -55,32 +55,32 @@ class Iterator : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_iterator_get_type != &gidSymbolNotFound ? gst_iterator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Iterator self()
+  override Iterator self() nothrow
   {
     return this;
   }
@@ -96,7 +96,7 @@ class Iterator : gobject.boxed.Boxed
         object = object that this iterator should return
       Returns: the new #GstIterator for object.
   */
-  static gst.iterator.Iterator newSingle(gobject.types.GType type, gobject.value.Value object)
+  static gst.iterator.Iterator newSingle(gobject.types.GType type, gobject.value.Value object) nothrow
   {
     GstIterator* _cretval;
     _cretval = gst_iterator_new_single(type, object ? cast(const(GValue)*)object._cPtr(No.Dup) : null);
@@ -108,7 +108,7 @@ class Iterator : gobject.boxed.Boxed
       Copy the iterator and its state.
       Returns: a new copy of it.
   */
-  gst.iterator.Iterator copy()
+  gst.iterator.Iterator copy() nothrow
   {
     GstIterator* _cretval;
     _cretval = gst_iterator_copy(cast(const(GstIterator)*)this._cPtr);
@@ -132,13 +132,22 @@ class Iterator : gobject.boxed.Boxed
         
         MT safe.
   */
-  gst.iterator.Iterator filter(glib.types.CompareFunc func, gobject.value.Value userData)
+  gst.iterator.Iterator filter(glib.types.CompareFunc func, gobject.value.Value userData) nothrow
   {
     static glib.types.CompareFunc _static_func;
 
-    extern(C) int _funcCallback(const(void)* a, const(void)* b)
+    extern(C) int _funcCallback(const(void)* a, const(void)* b) nothrow
     {
-      int _retval = _static_func(a, b);
+      int _retval;
+
+      try
+      {
+        _retval = _static_func(a, b);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.CompareFunc");
+      }
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -174,14 +183,21 @@ class Iterator : gobject.boxed.Boxed
         
         MT safe.
   */
-  gst.types.IteratorResult fold(gst.types.IteratorFoldFunction func, gobject.value.Value ret)
+  gst.types.IteratorResult fold(gst.types.IteratorFoldFunction func, gobject.value.Value ret) nothrow
   {
-    extern(C) gboolean _funcCallback(const(GValue)* item, GValue* ret, void* userData)
+    extern(C) gboolean _funcCallback(const(GValue)* item, GValue* ret, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gst.types.IteratorFoldFunction*)userData;
 
-      _dretval = (*_dlg)(item ? new gobject.value.Value(cast(void*)item, No.Take) : null, ret ? new gobject.value.Value(cast(void*)ret, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(item ? new gobject.value.Value(cast(void*)item, No.Take) : null, ret ? new gobject.value.Value(cast(void*)ret, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.IteratorFoldFunction");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -205,13 +221,20 @@ class Iterator : gobject.boxed.Boxed
         
         MT safe.
   */
-  gst.types.IteratorResult foreach_(gst.types.IteratorForeachFunction func)
+  gst.types.IteratorResult foreach_(gst.types.IteratorForeachFunction func) nothrow
   {
-    extern(C) void _funcCallback(const(GValue)* item, void* userData)
+    extern(C) void _funcCallback(const(GValue)* item, void* userData) nothrow
     {
       auto _dlg = cast(gst.types.IteratorForeachFunction*)userData;
 
-      (*_dlg)(item ? new gobject.value.Value(cast(void*)item, No.Take) : null);
+      try
+      {
+        (*_dlg)(item ? new gobject.value.Value(cast(void*)item, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.IteratorForeachFunction");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     GstIteratorResult _cretval;
@@ -245,7 +268,7 @@ class Iterator : gobject.boxed.Boxed
         
         MT safe.
   */
-  gst.types.IteratorResult next(out gobject.value.Value elem)
+  gst.types.IteratorResult next(out gobject.value.Value elem) nothrow
   {
     GstIteratorResult _cretval;
     GValue _elem;
@@ -271,7 +294,7 @@ class Iterator : gobject.boxed.Boxed
       Params:
         other = The #GstIterator to push
   */
-  void push(gst.iterator.Iterator other)
+  void push(gst.iterator.Iterator other) nothrow
   {
     gst_iterator_push(cast(GstIterator*)this._cPtr, other ? cast(GstIterator*)other._cPtr(No.Dup) : null);
   }
@@ -285,7 +308,7 @@ class Iterator : gobject.boxed.Boxed
       
       MT safe.
   */
-  void resync()
+  void resync() nothrow
   {
     gst_iterator_resync(cast(GstIterator*)this._cPtr);
   }

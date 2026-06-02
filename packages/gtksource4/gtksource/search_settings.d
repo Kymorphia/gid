@@ -14,26 +14,26 @@ class SearchSettings : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_search_settings_get_type != &gidSymbolNotFound ? gtk_source_search_settings_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SearchSettings self()
+  override SearchSettings self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class SearchSettings : gobject.object.ObjectWrap
       Get builder for [gtksource.search_settings.SearchSettings]
       Returns: New builder object
   */
-  static SearchSettingsGidBuilder builder()
+  static SearchSettingsGidBuilder builder() nothrow
   {
     return new SearchSettingsGidBuilder;
   }
@@ -52,7 +52,7 @@ class SearchSettings : gobject.object.ObjectWrap
       Returns: If true, a search match must start and end a word. The match can
         span multiple words.
   */
-  @property bool atWordBoundaries()
+  @property bool atWordBoundaries() nothrow
   {
     return getAtWordBoundaries();
   }
@@ -63,7 +63,7 @@ class SearchSettings : gobject.object.ObjectWrap
         propval = If true, a search match must start and end a word. The match can
           span multiple words.
   */
-  @property void atWordBoundaries(bool propval)
+  @property void atWordBoundaries(bool propval) nothrow
   {
     setAtWordBoundaries(propval);
   }
@@ -72,7 +72,7 @@ class SearchSettings : gobject.object.ObjectWrap
       Get `caseSensitive` property.
       Returns: Whether the search is case sensitive.
   */
-  @property bool caseSensitive()
+  @property bool caseSensitive() nothrow
   {
     return getCaseSensitive();
   }
@@ -82,7 +82,7 @@ class SearchSettings : gobject.object.ObjectWrap
       Params:
         propval = Whether the search is case sensitive.
   */
-  @property void caseSensitive(bool propval)
+  @property void caseSensitive(bool propval) nothrow
   {
     setCaseSensitive(propval);
   }
@@ -92,7 +92,7 @@ class SearchSettings : gobject.object.ObjectWrap
       Returns: Search by regular expressions with
         #GtkSourceSearchSettings:search-text as the pattern.
   */
-  @property bool regexEnabled()
+  @property bool regexEnabled() nothrow
   {
     return getRegexEnabled();
   }
@@ -103,7 +103,7 @@ class SearchSettings : gobject.object.ObjectWrap
         propval = Search by regular expressions with
           #GtkSourceSearchSettings:search-text as the pattern.
   */
-  @property void regexEnabled(bool propval)
+  @property void regexEnabled(bool propval) nothrow
   {
     setRegexEnabled(propval);
   }
@@ -114,7 +114,7 @@ class SearchSettings : gobject.object.ObjectWrap
         expression search is enabled, #GtkSourceSearchSettings:search-text is
         the pattern.
   */
-  @property string searchText()
+  @property string searchText() nothrow
   {
     return getSearchText();
   }
@@ -126,7 +126,7 @@ class SearchSettings : gobject.object.ObjectWrap
           expression search is enabled, #GtkSourceSearchSettings:search-text is
           the pattern.
   */
-  @property void searchText(string propval)
+  @property void searchText(string propval) nothrow
   {
     setSearchText(propval);
   }
@@ -137,7 +137,7 @@ class SearchSettings : gobject.object.ObjectWrap
         search occurrence is found. For a backward search, continue at the
         end of the buffer.
   */
-  @property bool wrapAround()
+  @property bool wrapAround() nothrow
   {
     return getWrapAround();
   }
@@ -149,7 +149,7 @@ class SearchSettings : gobject.object.ObjectWrap
           search occurrence is found. For a backward search, continue at the
           end of the buffer.
   */
-  @property void wrapAround(bool propval)
+  @property void wrapAround(bool propval) nothrow
   {
     setWrapAround(propval);
   }
@@ -158,7 +158,7 @@ class SearchSettings : gobject.object.ObjectWrap
       Creates a new search settings object.
       Returns: a new search settings object.
   */
-  this()
+  this() nothrow
   {
     GtkSourceSearchSettings* _cretval;
     _cretval = gtk_source_search_settings_new();
@@ -166,7 +166,7 @@ class SearchSettings : gobject.object.ObjectWrap
   }
 
   /** */
-  bool getAtWordBoundaries()
+  bool getAtWordBoundaries() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_search_settings_get_at_word_boundaries(cast(GtkSourceSearchSettings*)this._cPtr);
@@ -174,7 +174,7 @@ class SearchSettings : gobject.object.ObjectWrap
   }
 
   /** */
-  bool getCaseSensitive()
+  bool getCaseSensitive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_search_settings_get_case_sensitive(cast(GtkSourceSearchSettings*)this._cPtr);
@@ -182,7 +182,7 @@ class SearchSettings : gobject.object.ObjectWrap
   }
 
   /** */
-  bool getRegexEnabled()
+  bool getRegexEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_search_settings_get_regex_enabled(cast(GtkSourceSearchSettings*)this._cPtr);
@@ -196,7 +196,7 @@ class SearchSettings : gobject.object.ObjectWrap
       this function.
       Returns: the text to search, or null if the search is disabled.
   */
-  string getSearchText()
+  string getSearchText() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_search_settings_get_search_text(cast(GtkSourceSearchSettings*)this._cPtr);
@@ -205,7 +205,7 @@ class SearchSettings : gobject.object.ObjectWrap
   }
 
   /** */
-  bool getWrapAround()
+  bool getWrapAround() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_search_settings_get_wrap_around(cast(GtkSourceSearchSettings*)this._cPtr);
@@ -221,7 +221,7 @@ class SearchSettings : gobject.object.ObjectWrap
       Params:
         atWordBoundaries = the setting.
   */
-  void setAtWordBoundaries(bool atWordBoundaries)
+  void setAtWordBoundaries(bool atWordBoundaries) nothrow
   {
     gtk_source_search_settings_set_at_word_boundaries(cast(GtkSourceSearchSettings*)this._cPtr, atWordBoundaries);
   }
@@ -232,7 +232,7 @@ class SearchSettings : gobject.object.ObjectWrap
       Params:
         caseSensitive = the setting.
   */
-  void setCaseSensitive(bool caseSensitive)
+  void setCaseSensitive(bool caseSensitive) nothrow
   {
     gtk_source_search_settings_set_case_sensitive(cast(GtkSourceSearchSettings*)this._cPtr, caseSensitive);
   }
@@ -249,7 +249,7 @@ class SearchSettings : gobject.object.ObjectWrap
       Params:
         regexEnabled = the setting.
   */
-  void setRegexEnabled(bool regexEnabled)
+  void setRegexEnabled(bool regexEnabled) nothrow
   {
     gtk_source_search_settings_set_regex_enabled(cast(GtkSourceSearchSettings*)this._cPtr, regexEnabled);
   }
@@ -265,7 +265,7 @@ class SearchSettings : gobject.object.ObjectWrap
       Params:
         searchText = the nul-terminated text to search, or null to disable the search.
   */
-  void setSearchText(string searchText = null)
+  void setSearchText(string searchText = null) nothrow
   {
     const(char)* _searchText = searchText.toCString(No.Alloc);
     gtk_source_search_settings_set_search_text(cast(GtkSourceSearchSettings*)this._cPtr, _searchText);
@@ -280,7 +280,7 @@ class SearchSettings : gobject.object.ObjectWrap
       Params:
         wrapAround = the setting.
   */
-  void setWrapAround(bool wrapAround)
+  void setWrapAround(bool wrapAround) nothrow
   {
     gtk_source_search_settings_set_wrap_around(cast(GtkSourceSearchSettings*)this._cPtr, wrapAround);
   }
@@ -297,7 +297,7 @@ class SearchSettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           span multiple words.
       Returns: Builder instance for fluent chaining
   */
-  T atWordBoundaries(bool propval)
+  T atWordBoundaries(bool propval) nothrow
   {
     return setProperty("at-word-boundaries", propval);
   }
@@ -308,7 +308,7 @@ class SearchSettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Whether the search is case sensitive.
       Returns: Builder instance for fluent chaining
   */
-  T caseSensitive(bool propval)
+  T caseSensitive(bool propval) nothrow
   {
     return setProperty("case-sensitive", propval);
   }
@@ -320,7 +320,7 @@ class SearchSettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           #GtkSourceSearchSettings:search-text as the pattern.
       Returns: Builder instance for fluent chaining
   */
-  T regexEnabled(bool propval)
+  T regexEnabled(bool propval) nothrow
   {
     return setProperty("regex-enabled", propval);
   }
@@ -333,7 +333,7 @@ class SearchSettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           the pattern.
       Returns: Builder instance for fluent chaining
   */
-  T searchText(string propval)
+  T searchText(string propval) nothrow
   {
     return setProperty("search-text", propval);
   }
@@ -346,7 +346,7 @@ class SearchSettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           end of the buffer.
       Returns: Builder instance for fluent chaining
   */
-  T wrapAround(bool propval)
+  T wrapAround(bool propval) nothrow
   {
     return setProperty("wrap-around", propval);
   }
@@ -359,7 +359,7 @@ final class SearchSettingsGidBuilder : SearchSettingsGidBuilderImpl!SearchSettin
       Create object from builder.
       Returns: New object
   */
-  SearchSettings build()
+  SearchSettings build() nothrow
   {
     return new SearchSettings(cast(void*)createGObject(SearchSettings._getGType), Yes.Take);
   }

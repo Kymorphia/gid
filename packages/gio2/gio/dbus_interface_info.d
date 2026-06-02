@@ -24,7 +24,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
         refCount = The reference count or -1 if statically allocated.
         name = The name of the D-Bus interface, e.g. "org.freedesktop.DBus.Properties".
   */
-  this(int refCount = int.init, string name = string.init)
+  this(int refCount = int.init, string name = string.init) nothrow
   {
     super(gMalloc(GDBusInterfaceInfo.sizeof), Yes.Take);
     this.refCount = refCount;
@@ -32,32 +32,32 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_interface_info_get_type != &gidSymbolNotFound ? g_dbus_interface_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DBusInterfaceInfo self()
+  override DBusInterfaceInfo self() nothrow
   {
     return this;
   }
@@ -66,7 +66,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
       Get `refCount` field.
       Returns: The reference count or -1 if statically allocated.
   */
-  @property int refCount()
+  @property int refCount() nothrow
   {
     return (cast(GDBusInterfaceInfo*)this._cPtr).refCount;
   }
@@ -76,7 +76,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
       Params:
         propval = The reference count or -1 if statically allocated.
   */
-  @property void refCount(int propval)
+  @property void refCount(int propval) nothrow
   {
     (cast(GDBusInterfaceInfo*)this._cPtr).refCount = propval;
   }
@@ -85,7 +85,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
       Get `name` field.
       Returns: The name of the D-Bus interface, e.g. "org.freedesktop.DBus.Properties".
   */
-  @property string name()
+  @property string name() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GDBusInterfaceInfo*)this._cPtr).name);
   }
@@ -95,7 +95,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
       Params:
         propval = The name of the D-Bus interface, e.g. "org.freedesktop.DBus.Properties".
   */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GDBusInterfaceInfo*)this._cPtr).name);
     dToC(propval, cast(void*)&(cast(GDBusInterfaceInfo*)this._cPtr).name);
@@ -113,7 +113,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
       Note that info cannot be modified until
       [gio.dbus_interface_info.DBusInterfaceInfo.cacheRelease] is called.
   */
-  void cacheBuild()
+  void cacheBuild() nothrow
   {
     g_dbus_interface_info_cache_build(cast(GDBusInterfaceInfo*)this._cPtr);
   }
@@ -123,7 +123,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
       [gio.dbus_interface_info.DBusInterfaceInfo.cacheBuild] (if any) and frees the
       resources used by the cache if the usage count drops to zero.
   */
-  void cacheRelease()
+  void cacheRelease() nothrow
   {
     g_dbus_interface_info_cache_release(cast(GDBusInterfaceInfo*)this._cPtr);
   }
@@ -140,7 +140,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
         indent = Indentation level.
         stringBuilder = A #GString to to append XML data to.
   */
-  void generateXml(uint indent, glib.string_.String stringBuilder)
+  void generateXml(uint indent, glib.string_.String stringBuilder) nothrow
   {
     g_dbus_interface_info_generate_xml(cast(GDBusInterfaceInfo*)this._cPtr, indent, stringBuilder ? cast(GString*)stringBuilder._cPtr(No.Dup) : null);
   }
@@ -155,7 +155,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
         name = A D-Bus method name (typically in CamelCase)
       Returns: A #GDBusMethodInfo or null if not found. Do not free, it is owned by info.
   */
-  gio.dbus_method_info.DBusMethodInfo lookupMethod(string name)
+  gio.dbus_method_info.DBusMethodInfo lookupMethod(string name) nothrow
   {
     GDBusMethodInfo* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -174,7 +174,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
         name = A D-Bus property name (typically in CamelCase).
       Returns: A #GDBusPropertyInfo or null if not found. Do not free, it is owned by info.
   */
-  gio.dbus_property_info.DBusPropertyInfo lookupProperty(string name)
+  gio.dbus_property_info.DBusPropertyInfo lookupProperty(string name) nothrow
   {
     GDBusPropertyInfo* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -193,7 +193,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
         name = A D-Bus signal name (typically in CamelCase)
       Returns: A #GDBusSignalInfo or null if not found. Do not free, it is owned by info.
   */
-  gio.dbus_signal_info.DBusSignalInfo lookupSignal(string name)
+  gio.dbus_signal_info.DBusSignalInfo lookupSignal(string name) nothrow
   {
     GDBusSignalInfo* _cretval;
     const(char)* _name = name.toCString(No.Alloc);

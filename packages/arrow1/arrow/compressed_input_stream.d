@@ -21,26 +21,26 @@ class CompressedInputStream : arrow.input_stream.InputStream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_compressed_input_stream_get_type != &gidSymbolNotFound ? garrow_compressed_input_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CompressedInputStream self()
+  override CompressedInputStream self() nothrow
   {
     return this;
   }
@@ -49,19 +49,19 @@ class CompressedInputStream : arrow.input_stream.InputStream
       Get builder for [arrow.compressed_input_stream.CompressedInputStream]
       Returns: New builder object
   */
-  static CompressedInputStreamGidBuilder builder()
+  static CompressedInputStreamGidBuilder builder() nothrow
   {
     return new CompressedInputStreamGidBuilder;
   }
 
   /** */
-  @property arrow.codec.Codec codec()
+  @property arrow.codec.Codec codec() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.codec.Codec)("codec");
   }
 
   /** */
-  @property arrow.input_stream.InputStream raw()
+  @property arrow.input_stream.InputStream raw() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.input_stream.InputStream)("raw");
   }
@@ -84,13 +84,13 @@ class CompressedInputStreamGidBuilderImpl(T) : arrow.input_stream.InputStreamGid
 
 
   /** */
-  T codec(arrow.codec.Codec propval)
+  T codec(arrow.codec.Codec propval) nothrow
   {
     return setProperty("codec", propval);
   }
 
   /** */
-  T raw(arrow.input_stream.InputStream propval)
+  T raw(arrow.input_stream.InputStream propval) nothrow
   {
     return setProperty("raw", propval);
   }
@@ -103,7 +103,7 @@ final class CompressedInputStreamGidBuilder : CompressedInputStreamGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  CompressedInputStream build()
+  CompressedInputStream build() nothrow
   {
     return new CompressedInputStream(cast(void*)createGObject(CompressedInputStream._getGType), Yes.Take);
   }

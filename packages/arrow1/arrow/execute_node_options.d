@@ -14,26 +14,26 @@ class ExecuteNodeOptions : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_execute_node_options_get_type != &gidSymbolNotFound ? garrow_execute_node_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ExecuteNodeOptions self()
+  override ExecuteNodeOptions self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class ExecuteNodeOptions : gobject.object.ObjectWrap
       Get builder for [arrow.execute_node_options.ExecuteNodeOptions]
       Returns: New builder object
   */
-  static ExecuteNodeOptionsGidBuilder builder()
+  static ExecuteNodeOptionsGidBuilder builder() nothrow
   {
     return new ExecuteNodeOptionsGidBuilder;
   }
@@ -53,7 +53,7 @@ class ExecuteNodeOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
 {
 
   /** */
-  T options(void* propval)
+  T options(void* propval) nothrow
   {
     return setProperty("options", propval);
   }
@@ -66,7 +66,7 @@ final class ExecuteNodeOptionsGidBuilder : ExecuteNodeOptionsGidBuilderImpl!Exec
       Create object from builder.
       Returns: New object
   */
-  ExecuteNodeOptions build()
+  ExecuteNodeOptions build() nothrow
   {
     return new ExecuteNodeOptions(cast(void*)createGObject(ExecuteNodeOptions._getGType), No.Take);
   }

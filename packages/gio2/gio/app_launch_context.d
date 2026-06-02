@@ -22,26 +22,26 @@ class AppLaunchContext : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_app_launch_context_get_type != &gidSymbolNotFound ? g_app_launch_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AppLaunchContext self()
+  override AppLaunchContext self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
       Get builder for [gio.app_launch_context.AppLaunchContext]
       Returns: New builder object
   */
-  static AppLaunchContextGidBuilder builder()
+  static AppLaunchContextGidBuilder builder() nothrow
   {
     return new AppLaunchContextGidBuilder;
   }
@@ -60,7 +60,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
       instead you instantiate a subclass of this, such as #GdkAppLaunchContext.
       Returns: a #GAppLaunchContext.
   */
-  this()
+  this() nothrow
   {
     GAppLaunchContext* _cretval;
     _cretval = g_app_launch_context_new();
@@ -77,7 +77,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
         files = a #GList of #GFile objects
       Returns: a display string for the display.
   */
-  string getDisplay(gio.app_info.AppInfo info, gio.file.File[] files)
+  string getDisplay(gio.app_info.AppInfo info, gio.file.File[] files) nothrow
   {
     char* _cretval;
     auto _files = gListFromD!(gio.file.File)(files);
@@ -94,7 +94,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
       the form `KEY=VALUE`.
       Returns: the child's environment
   */
-  string[] getEnvironment()
+  string[] getEnvironment() nothrow
   {
     char** _cretval;
     _cretval = g_app_launch_context_get_environment(cast(GAppLaunchContext*)this._cPtr);
@@ -134,7 +134,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
       Returns: a startup notification ID for the application, or null if
             not supported.
   */
-  string getStartupNotifyId(gio.app_info.AppInfo info, gio.file.File[] files)
+  string getStartupNotifyId(gio.app_info.AppInfo info, gio.file.File[] files) nothrow
   {
     char* _cretval;
     auto _files = gListFromD!(gio.file.File)(files);
@@ -151,7 +151,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
       Params:
         startupNotifyId = the startup notification id that was returned by [gio.app_launch_context.AppLaunchContext.getStartupNotifyId].
   */
-  void launchFailed(string startupNotifyId)
+  void launchFailed(string startupNotifyId) nothrow
   {
     const(char)* _startupNotifyId = startupNotifyId.toCString(No.Alloc);
     g_app_launch_context_launch_failed(cast(GAppLaunchContext*)this._cPtr, _startupNotifyId);
@@ -165,7 +165,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
         variable = the environment variable to set
         value = the value for to set the variable to.
   */
-  void setenv(string variable, string value)
+  void setenv(string variable, string value) nothrow
   {
     const(char)* _variable = variable.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -179,7 +179,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
       Params:
         variable = the environment variable to remove
   */
-  void unsetenv(string variable)
+  void unsetenv(string variable) nothrow
   {
     const(char)* _variable = variable.toCString(No.Alloc);
     g_app_launch_context_unsetenv(cast(GAppLaunchContext*)this._cPtr, _variable);
@@ -208,14 +208,14 @@ class AppLaunchContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLaunchFailed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLaunchFailed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.app_launch_context.AppLaunchContext)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -227,7 +227,14 @@ class AppLaunchContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.app_launch_context.AppLaunchContext.launchFailed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -270,7 +277,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLaunchStarted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLaunchStarted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.app_info.AppInfo)))
@@ -278,7 +285,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.app_launch_context.AppLaunchContext)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -293,7 +300,14 @@ class AppLaunchContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.app_launch_context.AppLaunchContext.launchStarted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -338,7 +352,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLaunched(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLaunched(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.app_info.AppInfo)))
@@ -346,7 +360,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.app_launch_context.AppLaunchContext)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -361,7 +375,14 @@ class AppLaunchContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.app_launch_context.AppLaunchContext.launched");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -381,7 +402,7 @@ final class AppLaunchContextGidBuilder : AppLaunchContextGidBuilderImpl!AppLaunc
       Create object from builder.
       Returns: New object
   */
-  AppLaunchContext build()
+  AppLaunchContext build() nothrow
   {
     return new AppLaunchContext(cast(void*)createGObject(AppLaunchContext._getGType), Yes.Take);
   }

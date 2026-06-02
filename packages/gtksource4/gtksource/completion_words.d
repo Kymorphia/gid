@@ -18,26 +18,26 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_words_get_type != &gidSymbolNotFound ? gtk_source_completion_words_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CompletionWords self()
+  override CompletionWords self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
       Get builder for [gtksource.completion_words.CompletionWords]
       Returns: New builder object
   */
-  static CompletionWordsGidBuilder builder()
+  static CompletionWordsGidBuilder builder() nothrow
   {
     return new CompletionWordsGidBuilder;
   }
@@ -55,7 +55,7 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
       Get `activation` property.
       Returns: The type of activation.
   */
-  @property gtksource.types.CompletionActivation activation()
+  @property gtksource.types.CompletionActivation activation() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtksource.types.CompletionActivation)("activation");
   }
@@ -65,91 +65,91 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
       Params:
         propval = The type of activation.
   */
-  @property void activation(gtksource.types.CompletionActivation propval)
+  @property void activation(gtksource.types.CompletionActivation propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtksource.types.CompletionActivation)("activation", propval);
   }
 
   /** */
-  @property gdkpixbuf.pixbuf.Pixbuf icon()
+  @property gdkpixbuf.pixbuf.Pixbuf icon() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdkpixbuf.pixbuf.Pixbuf)("icon");
   }
 
   /** */
-  @property void icon(gdkpixbuf.pixbuf.Pixbuf propval)
+  @property void icon(gdkpixbuf.pixbuf.Pixbuf propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdkpixbuf.pixbuf.Pixbuf)("icon", propval);
   }
 
   /** */
-  @property int interactiveDelay()
+  @property int interactiveDelay() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("interactive-delay");
   }
 
   /** */
-  @property void interactiveDelay(int propval)
+  @property void interactiveDelay(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("interactive-delay", propval);
   }
 
   /** */
-  @property uint minimumWordSize()
+  @property uint minimumWordSize() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("minimum-word-size");
   }
 
   /** */
-  @property void minimumWordSize(uint propval)
+  @property void minimumWordSize(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("minimum-word-size", propval);
   }
 
   /** */
-  @property string name()
+  @property string name() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("name");
   }
 
   /** */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("name", propval);
   }
 
   /** */
-  @property int priority()
+  @property int priority() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("priority");
   }
 
   /** */
-  @property void priority(int propval)
+  @property void priority(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("priority", propval);
   }
 
   /** */
-  @property uint proposalsBatchSize()
+  @property uint proposalsBatchSize() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("proposals-batch-size");
   }
 
   /** */
-  @property void proposalsBatchSize(uint propval)
+  @property void proposalsBatchSize(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("proposals-batch-size", propval);
   }
 
   /** */
-  @property uint scanBatchSize()
+  @property uint scanBatchSize() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("scan-batch-size");
   }
 
   /** */
-  @property void scanBatchSize(uint propval)
+  @property void scanBatchSize(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("scan-batch-size", propval);
   }
@@ -157,7 +157,7 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
   mixin CompletionProviderT!();
 
   /** */
-  this(string name = null, gdkpixbuf.pixbuf.Pixbuf icon = null)
+  this(string name = null, gdkpixbuf.pixbuf.Pixbuf icon = null) nothrow
   {
     GtkSourceCompletionWords* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -171,7 +171,7 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
       Params:
         buffer = a #GtkTextBuffer
   */
-  void register(gtk.text_buffer.TextBuffer buffer)
+  void register(gtk.text_buffer.TextBuffer buffer) nothrow
   {
     gtk_source_completion_words_register(cast(GtkSourceCompletionWords*)this._cPtr, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
   }
@@ -182,7 +182,7 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
       Params:
         buffer = a #GtkTextBuffer
   */
-  void unregister(gtk.text_buffer.TextBuffer buffer)
+  void unregister(gtk.text_buffer.TextBuffer buffer) nothrow
   {
     gtk_source_completion_words_unregister(cast(GtkSourceCompletionWords*)this._cPtr, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
   }
@@ -200,49 +200,49 @@ class CompletionWordsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The type of activation.
       Returns: Builder instance for fluent chaining
   */
-  T activation(gtksource.types.CompletionActivation propval)
+  T activation(gtksource.types.CompletionActivation propval) nothrow
   {
     return setProperty("activation", propval);
   }
 
   /** */
-  T icon(gdkpixbuf.pixbuf.Pixbuf propval)
+  T icon(gdkpixbuf.pixbuf.Pixbuf propval) nothrow
   {
     return setProperty("icon", propval);
   }
 
   /** */
-  T interactiveDelay(int propval)
+  T interactiveDelay(int propval) nothrow
   {
     return setProperty("interactive-delay", propval);
   }
 
   /** */
-  T minimumWordSize(uint propval)
+  T minimumWordSize(uint propval) nothrow
   {
     return setProperty("minimum-word-size", propval);
   }
 
   /** */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
 
   /** */
-  T priority(int propval)
+  T priority(int propval) nothrow
   {
     return setProperty("priority", propval);
   }
 
   /** */
-  T proposalsBatchSize(uint propval)
+  T proposalsBatchSize(uint propval) nothrow
   {
     return setProperty("proposals-batch-size", propval);
   }
 
   /** */
-  T scanBatchSize(uint propval)
+  T scanBatchSize(uint propval) nothrow
   {
     return setProperty("scan-batch-size", propval);
   }
@@ -255,7 +255,7 @@ final class CompletionWordsGidBuilder : CompletionWordsGidBuilderImpl!Completion
       Create object from builder.
       Returns: New object
   */
-  CompletionWords build()
+  CompletionWords build() nothrow
   {
     return new CompletionWords(cast(void*)createGObject(CompletionWords._getGType), Yes.Take);
   }

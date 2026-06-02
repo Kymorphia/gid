@@ -59,26 +59,26 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_places_sidebar_get_type != &gidSymbolNotFound ? gtk_places_sidebar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PlacesSidebar self()
+  override PlacesSidebar self() nothrow
   {
     return this;
   }
@@ -87,43 +87,43 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Get builder for [gtk.places_sidebar.PlacesSidebar]
       Returns: New builder object
   */
-  static PlacesSidebarGidBuilder builder()
+  static PlacesSidebarGidBuilder builder() nothrow
   {
     return new PlacesSidebarGidBuilder;
   }
 
   /** */
-  @property bool localOnly()
+  @property bool localOnly() nothrow
   {
     return getLocalOnly();
   }
 
   /** */
-  @property void localOnly(bool propval)
+  @property void localOnly(bool propval) nothrow
   {
     setLocalOnly(propval);
   }
 
   /** */
-  @property gio.file.File location()
+  @property gio.file.File location() nothrow
   {
     return getLocation();
   }
 
   /** */
-  @property void location(gio.file.File propval)
+  @property void location(gio.file.File propval) nothrow
   {
     setLocation(propval);
   }
 
   /** */
-  @property gtk.types.PlacesOpenFlags openFlags()
+  @property gtk.types.PlacesOpenFlags openFlags() nothrow
   {
     return getOpenFlags();
   }
 
   /** */
-  @property void openFlags(gtk.types.PlacesOpenFlags propval)
+  @property void openFlags(gtk.types.PlacesOpenFlags propval) nothrow
   {
     setOpenFlags(propval);
   }
@@ -133,7 +133,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Returns: If :populate-all is true, the #GtkPlacesSidebar::populate-popup signal
         is also emitted for popovers.
   */
-  @property bool populateAll()
+  @property bool populateAll() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("populate-all");
   }
@@ -144,91 +144,91 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         propval = If :populate-all is true, the #GtkPlacesSidebar::populate-popup signal
           is also emitted for popovers.
   */
-  @property void populateAll(bool propval)
+  @property void populateAll(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("populate-all", propval);
   }
 
   /** */
-  @property bool showConnectToServer()
+  @property bool showConnectToServer() nothrow
   {
     return getShowConnectToServer();
   }
 
   /** */
-  @property void showConnectToServer(bool propval)
+  @property void showConnectToServer(bool propval) nothrow
   {
     setShowConnectToServer(propval);
   }
 
   /** */
-  @property bool showDesktop()
+  @property bool showDesktop() nothrow
   {
     return getShowDesktop();
   }
 
   /** */
-  @property void showDesktop(bool propval)
+  @property void showDesktop(bool propval) nothrow
   {
     setShowDesktop(propval);
   }
 
   /** */
-  @property bool showEnterLocation()
+  @property bool showEnterLocation() nothrow
   {
     return getShowEnterLocation();
   }
 
   /** */
-  @property void showEnterLocation(bool propval)
+  @property void showEnterLocation(bool propval) nothrow
   {
     setShowEnterLocation(propval);
   }
 
   /** */
-  @property bool showOtherLocations()
+  @property bool showOtherLocations() nothrow
   {
     return getShowOtherLocations();
   }
 
   /** */
-  @property void showOtherLocations(bool propval)
+  @property void showOtherLocations(bool propval) nothrow
   {
     setShowOtherLocations(propval);
   }
 
   /** */
-  @property bool showRecent()
+  @property bool showRecent() nothrow
   {
     return getShowRecent();
   }
 
   /** */
-  @property void showRecent(bool propval)
+  @property void showRecent(bool propval) nothrow
   {
     setShowRecent(propval);
   }
 
   /** */
-  @property bool showStarredLocation()
+  @property bool showStarredLocation() nothrow
   {
     return getShowStarredLocation();
   }
 
   /** */
-  @property void showStarredLocation(bool propval)
+  @property void showStarredLocation(bool propval) nothrow
   {
     setShowStarredLocation(propval);
   }
 
   /** */
-  @property bool showTrash()
+  @property bool showTrash() nothrow
   {
     return getShowTrash();
   }
 
   /** */
-  @property void showTrash(bool propval)
+  @property void showTrash(bool propval) nothrow
   {
     setShowTrash(propval);
   }
@@ -241,7 +241,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       when the user makes a selection in the sidebar.
       Returns: a newly created #GtkPlacesSidebar
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_places_sidebar_new();
@@ -263,7 +263,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         location = location to add as an application-specific shortcut
   */
-  void addShortcut(gio.file.File location)
+  void addShortcut(gio.file.File location) nothrow
   {
     gtk_places_sidebar_add_shortcut(cast(GtkPlacesSidebar*)this._cPtr, location ? cast(GFile*)(cast(gobject.object.ObjectWrap)location)._cPtr(No.Dup) : null);
   }
@@ -272,7 +272,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Returns the value previously set with [gtk.places_sidebar.PlacesSidebar.setLocalOnly].
       Returns: true if the sidebar will only show local files.
   */
-  bool getLocalOnly()
+  bool getLocalOnly() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_places_sidebar_get_local_only(cast(GtkPlacesSidebar*)this._cPtr);
@@ -292,7 +292,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Returns: a #GFile with the selected location, or
         null if nothing is visually selected.
   */
-  gio.file.File getLocation()
+  gio.file.File getLocation() nothrow
   {
     GFile* _cretval;
     _cretval = gtk_places_sidebar_get_location(cast(GtkPlacesSidebar*)this._cPtr);
@@ -311,7 +311,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         null if no such index exist.  Note that the indices start at 0, even though
         the file chooser starts them with the keyboard shortcut "Alt-1".
   */
-  gio.file.File getNthBookmark(int n)
+  gio.file.File getNthBookmark(int n) nothrow
   {
     GFile* _cretval;
     _cretval = gtk_places_sidebar_get_nth_bookmark(cast(GtkPlacesSidebar*)this._cPtr, n);
@@ -323,7 +323,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Gets the open flags.
       Returns: the #GtkPlacesOpenFlags of sidebar
   */
-  gtk.types.PlacesOpenFlags getOpenFlags()
+  gtk.types.PlacesOpenFlags getOpenFlags() nothrow
   {
     GtkPlacesOpenFlags _cretval;
     _cretval = gtk_places_sidebar_get_open_flags(cast(GtkPlacesSidebar*)this._cPtr);
@@ -338,7 +338,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Deprecated: It is recommended to group this functionality with the drives
             and network location under the new 'Other Location' item
   */
-  bool getShowConnectToServer()
+  bool getShowConnectToServer() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_places_sidebar_get_show_connect_to_server(cast(GtkPlacesSidebar*)this._cPtr);
@@ -349,7 +349,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Returns the value previously set with [gtk.places_sidebar.PlacesSidebar.setShowDesktop]
       Returns: true if the sidebar will display a builtin shortcut to the desktop folder.
   */
-  bool getShowDesktop()
+  bool getShowDesktop() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_places_sidebar_get_show_desktop(cast(GtkPlacesSidebar*)this._cPtr);
@@ -360,7 +360,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Returns the value previously set with [gtk.places_sidebar.PlacesSidebar.setShowEnterLocation]
       Returns: true if the sidebar will display an “Enter Location” item.
   */
-  bool getShowEnterLocation()
+  bool getShowEnterLocation() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_places_sidebar_get_show_enter_location(cast(GtkPlacesSidebar*)this._cPtr);
@@ -371,7 +371,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Returns the value previously set with [gtk.places_sidebar.PlacesSidebar.setShowOtherLocations]
       Returns: true if the sidebar will display an “Other Locations” item.
   */
-  bool getShowOtherLocations()
+  bool getShowOtherLocations() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_places_sidebar_get_show_other_locations(cast(GtkPlacesSidebar*)this._cPtr);
@@ -382,7 +382,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Returns the value previously set with [gtk.places_sidebar.PlacesSidebar.setShowRecent]
       Returns: true if the sidebar will display a builtin shortcut for recent files
   */
-  bool getShowRecent()
+  bool getShowRecent() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_places_sidebar_get_show_recent(cast(GtkPlacesSidebar*)this._cPtr);
@@ -393,7 +393,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Returns the value previously set with [gtk.places_sidebar.PlacesSidebar.setShowStarredLocation]
       Returns: true if the sidebar will display a Starred item.
   */
-  bool getShowStarredLocation()
+  bool getShowStarredLocation() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_places_sidebar_get_show_starred_location(cast(GtkPlacesSidebar*)this._cPtr);
@@ -404,7 +404,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Returns the value previously set with [gtk.places_sidebar.PlacesSidebar.setShowTrash]
       Returns: true if the sidebar will display a “Trash” item.
   */
-  bool getShowTrash()
+  bool getShowTrash() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_places_sidebar_get_show_trash(cast(GtkPlacesSidebar*)this._cPtr);
@@ -420,7 +420,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         g_slist_free_full (list, (GDestroyNotify) g_object_unref);
         ```
   */
-  gio.file.File[] listShortcuts()
+  gio.file.File[] listShortcuts() nothrow
   {
     GSList* _cretval;
     _cretval = gtk_places_sidebar_list_shortcuts(cast(GtkPlacesSidebar*)this._cPtr);
@@ -436,7 +436,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         location = location to remove
   */
-  void removeShortcut(gio.file.File location)
+  void removeShortcut(gio.file.File location) nothrow
   {
     gtk_places_sidebar_remove_shortcut(cast(GtkPlacesSidebar*)this._cPtr, location ? cast(GFile*)(cast(gobject.object.ObjectWrap)location)._cPtr(No.Dup) : null);
   }
@@ -457,7 +457,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         context = drag context used to ask the source about the action that wants to
               perform, so hints are more accurate.
   */
-  void setDropTargetsVisible(bool visible, gdk.drag_context.DragContext context)
+  void setDropTargetsVisible(bool visible, gdk.drag_context.DragContext context) nothrow
   {
     gtk_places_sidebar_set_drop_targets_visible(cast(GtkPlacesSidebar*)this._cPtr, visible, context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null);
   }
@@ -468,7 +468,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         localOnly = whether to show only local files
   */
-  void setLocalOnly(bool localOnly)
+  void setLocalOnly(bool localOnly) nothrow
   {
     gtk_places_sidebar_set_local_only(cast(GtkPlacesSidebar*)this._cPtr, localOnly);
   }
@@ -483,7 +483,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         location = location to select, or null for no current path
   */
-  void setLocation(gio.file.File location = null)
+  void setLocation(gio.file.File location = null) nothrow
   {
     gtk_places_sidebar_set_location(cast(GtkPlacesSidebar*)this._cPtr, location ? cast(GFile*)(cast(gobject.object.ObjectWrap)location)._cPtr(No.Dup) : null);
   }
@@ -508,7 +508,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         flags = Bitmask of modes in which the calling application can open locations
   */
-  void setOpenFlags(gtk.types.PlacesOpenFlags flags)
+  void setOpenFlags(gtk.types.PlacesOpenFlags flags) nothrow
   {
     gtk_places_sidebar_set_open_flags(cast(GtkPlacesSidebar*)this._cPtr, flags);
   }
@@ -527,7 +527,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Deprecated: It is recommended to group this functionality with the drives
             and network location under the new 'Other Location' item
   */
-  void setShowConnectToServer(bool showConnectToServer)
+  void setShowConnectToServer(bool showConnectToServer) nothrow
   {
     gtk_places_sidebar_set_show_connect_to_server(cast(GtkPlacesSidebar*)this._cPtr, showConnectToServer);
   }
@@ -541,7 +541,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         showDesktop = whether to show an item for the Desktop folder
   */
-  void setShowDesktop(bool showDesktop)
+  void setShowDesktop(bool showDesktop) nothrow
   {
     gtk_places_sidebar_set_show_desktop(cast(GtkPlacesSidebar*)this._cPtr, showDesktop);
   }
@@ -557,7 +557,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         showEnterLocation = whether to show an item to enter a location
   */
-  void setShowEnterLocation(bool showEnterLocation)
+  void setShowEnterLocation(bool showEnterLocation) nothrow
   {
     gtk_places_sidebar_set_show_enter_location(cast(GtkPlacesSidebar*)this._cPtr, showEnterLocation);
   }
@@ -575,7 +575,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         showOtherLocations = whether to show an item for the Other Locations view
   */
-  void setShowOtherLocations(bool showOtherLocations)
+  void setShowOtherLocations(bool showOtherLocations) nothrow
   {
     gtk_places_sidebar_set_show_other_locations(cast(GtkPlacesSidebar*)this._cPtr, showOtherLocations);
   }
@@ -589,7 +589,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         showRecent = whether to show an item for recent files
   */
-  void setShowRecent(bool showRecent)
+  void setShowRecent(bool showRecent) nothrow
   {
     gtk_places_sidebar_set_show_recent(cast(GtkPlacesSidebar*)this._cPtr, showRecent);
   }
@@ -601,7 +601,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         showStarredLocation = whether to show an item for Starred files
   */
-  void setShowStarredLocation(bool showStarredLocation)
+  void setShowStarredLocation(bool showStarredLocation) nothrow
   {
     gtk_places_sidebar_set_show_starred_location(cast(GtkPlacesSidebar*)this._cPtr, showStarredLocation);
   }
@@ -612,7 +612,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         showTrash = whether to show an item for the Trash location
   */
-  void setShowTrash(bool showTrash)
+  void setShowTrash(bool showTrash) nothrow
   {
     gtk_places_sidebar_set_show_trash(cast(GtkPlacesSidebar*)this._cPtr, showTrash);
   }
@@ -637,18 +637,19 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDragActionAsk(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragActionAsk(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == int)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.places_sidebar.PlacesSidebar)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      int _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -656,7 +657,14 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.places_sidebar.PlacesSidebar.dragActionAsk");
+      }
 
       setVal!(int)(_returnValue, _retval);
     }
@@ -697,7 +705,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDragActionRequested(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragActionRequested(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == int)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
@@ -706,11 +714,12 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.places_sidebar.PlacesSidebar)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      int _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -724,7 +733,14 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.places_sidebar.PlacesSidebar.dragActionRequested");
+      }
 
       setVal!(int)(_returnValue, _retval);
     }
@@ -758,7 +774,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDragPerformDrop(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragPerformDrop(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.file.File)))
@@ -767,7 +783,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.places_sidebar.PlacesSidebar)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -785,7 +801,14 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.places_sidebar.PlacesSidebar.dragPerformDrop");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -812,14 +835,14 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMount(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMount(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.mount_operation.MountOperation)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.places_sidebar.PlacesSidebar)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -831,7 +854,14 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.places_sidebar.PlacesSidebar.mount");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -860,7 +890,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectOpenLocation(T)(T callback, Flag!"After" after = No.After)
+  gulong connectOpenLocation(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.file.File)))
@@ -868,7 +898,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.places_sidebar.PlacesSidebar)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -883,7 +913,14 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.places_sidebar.PlacesSidebar.openLocation");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -937,7 +974,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPopulatePopup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPopulatePopup(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -946,7 +983,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.places_sidebar.PlacesSidebar)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -964,7 +1001,14 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.places_sidebar.PlacesSidebar.populatePopup");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -993,13 +1037,13 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Deprecated: use the #GtkPlacesSidebar::show-other-locations signal
             to connect to network servers.
   */
-  gulong connectShowConnectToServer(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowConnectToServer(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.places_sidebar.PlacesSidebar)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1008,7 +1052,14 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.places_sidebar.PlacesSidebar.showConnectToServer");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1033,13 +1084,13 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectShowEnterLocation(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowEnterLocation(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.places_sidebar.PlacesSidebar)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1048,7 +1099,14 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.places_sidebar.PlacesSidebar.showEnterLocation");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1077,7 +1135,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectShowErrorMessage(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowErrorMessage(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -1085,7 +1143,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.places_sidebar.PlacesSidebar)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1100,7 +1158,14 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.places_sidebar.PlacesSidebar.showErrorMessage");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1130,13 +1195,13 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         which includes the open flags in order to allow the user to specify to open
         in a new tab or window, in a similar way than #GtkPlacesSidebar::open-location
   */
-  gulong connectShowOtherLocations(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowOtherLocations(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.places_sidebar.PlacesSidebar)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1145,7 +1210,14 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.places_sidebar.PlacesSidebar.showOtherLocations");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1173,14 +1245,14 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectShowOtherLocationsWithFlags(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowOtherLocationsWithFlags(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.PlacesOpenFlags)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.places_sidebar.PlacesSidebar)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1192,7 +1264,14 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.places_sidebar.PlacesSidebar.showOtherLocationsWithFlags");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1220,14 +1299,14 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectShowStarredLocation(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowStarredLocation(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.PlacesOpenFlags)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.places_sidebar.PlacesSidebar)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1239,7 +1318,14 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.places_sidebar.PlacesSidebar.showStarredLocation");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1266,14 +1352,14 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUnmount(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUnmount(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.mount_operation.MountOperation)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.places_sidebar.PlacesSidebar)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1285,7 +1371,14 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.places_sidebar.PlacesSidebar.unmount");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1299,19 +1392,19 @@ class PlacesSidebarGidBuilderImpl(T) : gtk.scrolled_window.ScrolledWindowGidBuil
 
 
   /** */
-  T localOnly(bool propval)
+  T localOnly(bool propval) nothrow
   {
     return setProperty("local-only", propval);
   }
 
   /** */
-  T location(gio.file.File propval)
+  T location(gio.file.File propval) nothrow
   {
     return setProperty("location", propval);
   }
 
   /** */
-  T openFlags(gtk.types.PlacesOpenFlags propval)
+  T openFlags(gtk.types.PlacesOpenFlags propval) nothrow
   {
     return setProperty("open-flags", propval);
   }
@@ -1323,49 +1416,49 @@ class PlacesSidebarGidBuilderImpl(T) : gtk.scrolled_window.ScrolledWindowGidBuil
           is also emitted for popovers.
       Returns: Builder instance for fluent chaining
   */
-  T populateAll(bool propval)
+  T populateAll(bool propval) nothrow
   {
     return setProperty("populate-all", propval);
   }
 
   /** */
-  T showConnectToServer(bool propval)
+  T showConnectToServer(bool propval) nothrow
   {
     return setProperty("show-connect-to-server", propval);
   }
 
   /** */
-  T showDesktop(bool propval)
+  T showDesktop(bool propval) nothrow
   {
     return setProperty("show-desktop", propval);
   }
 
   /** */
-  T showEnterLocation(bool propval)
+  T showEnterLocation(bool propval) nothrow
   {
     return setProperty("show-enter-location", propval);
   }
 
   /** */
-  T showOtherLocations(bool propval)
+  T showOtherLocations(bool propval) nothrow
   {
     return setProperty("show-other-locations", propval);
   }
 
   /** */
-  T showRecent(bool propval)
+  T showRecent(bool propval) nothrow
   {
     return setProperty("show-recent", propval);
   }
 
   /** */
-  T showStarredLocation(bool propval)
+  T showStarredLocation(bool propval) nothrow
   {
     return setProperty("show-starred-location", propval);
   }
 
   /** */
-  T showTrash(bool propval)
+  T showTrash(bool propval) nothrow
   {
     return setProperty("show-trash", propval);
   }
@@ -1378,7 +1471,7 @@ final class PlacesSidebarGidBuilder : PlacesSidebarGidBuilderImpl!PlacesSidebarG
       Create object from builder.
       Returns: New object
   */
-  PlacesSidebar build()
+  PlacesSidebar build() nothrow
   {
     return new PlacesSidebar(cast(void*)createGObject(PlacesSidebar._getGType), No.Take);
   }

@@ -21,26 +21,26 @@ class Style : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_style_get_type != &gidSymbolNotFound ? gtk_source_style_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Style self()
+  override Style self() nothrow
   {
     return this;
   }
@@ -49,127 +49,127 @@ class Style : gobject.object.ObjectWrap
       Get builder for [gtksource.style.Style]
       Returns: New builder object
   */
-  static StyleGidBuilder builder()
+  static StyleGidBuilder builder() nothrow
   {
     return new StyleGidBuilder;
   }
 
   /** */
-  @property string background()
+  @property string background() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("background");
   }
 
   /** */
-  @property bool backgroundSet()
+  @property bool backgroundSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("background-set");
   }
 
   /** */
-  @property bool bold()
+  @property bool bold() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("bold");
   }
 
   /** */
-  @property bool boldSet()
+  @property bool boldSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("bold-set");
   }
 
   /** */
-  @property string foreground()
+  @property string foreground() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("foreground");
   }
 
   /** */
-  @property bool foregroundSet()
+  @property bool foregroundSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("foreground-set");
   }
 
   /** */
-  @property bool italic()
+  @property bool italic() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("italic");
   }
 
   /** */
-  @property bool italicSet()
+  @property bool italicSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("italic-set");
   }
 
   /** */
-  @property string lineBackground()
+  @property string lineBackground() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("line-background");
   }
 
   /** */
-  @property bool lineBackgroundSet()
+  @property bool lineBackgroundSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("line-background-set");
   }
 
   /** */
-  @property pango.types.Underline pangoUnderline()
+  @property pango.types.Underline pangoUnderline() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(pango.types.Underline)("pango-underline");
   }
 
   /** */
-  @property string scale()
+  @property string scale() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("scale");
   }
 
   /** */
-  @property bool scaleSet()
+  @property bool scaleSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("scale-set");
   }
 
   /** */
-  @property bool strikethrough()
+  @property bool strikethrough() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("strikethrough");
   }
 
   /** */
-  @property bool strikethroughSet()
+  @property bool strikethroughSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("strikethrough-set");
   }
 
   /** */
-  @property string underlineColor()
+  @property string underlineColor() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("underline-color");
   }
 
   /** */
-  @property bool underlineColorSet()
+  @property bool underlineColorSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("underline-color-set");
   }
 
   /** */
-  @property bool underlineSet()
+  @property bool underlineSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("underline-set");
   }
 
   /** */
-  @property pango.types.Weight weight()
+  @property pango.types.Weight weight() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(pango.types.Weight)("weight");
   }
 
   /** */
-  @property bool weightSet()
+  @property bool weightSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("weight-set");
   }
@@ -186,7 +186,7 @@ class Style : gobject.object.ObjectWrap
       Params:
         tag = a #GtkTextTag to apply styles to.
   */
-  void apply(gtk.text_tag.TextTag tag)
+  void apply(gtk.text_tag.TextTag tag) nothrow
   {
     gtk_source_style_apply(cast(const(GtkSourceStyle)*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
   }
@@ -197,7 +197,7 @@ class Style : gobject.object.ObjectWrap
       Returns: copy of style, call [gobject.object.ObjectWrap.unref]
         when you are done with it.
   */
-  gtksource.style.Style copy()
+  gtksource.style.Style copy() nothrow
   {
     GtkSourceStyle* _cretval;
     _cretval = gtk_source_style_copy(cast(const(GtkSourceStyle)*)this._cPtr);
@@ -211,121 +211,121 @@ class StyleGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T background(string propval)
+  T background(string propval) nothrow
   {
     return setProperty("background", propval);
   }
 
   /** */
-  T backgroundSet(bool propval)
+  T backgroundSet(bool propval) nothrow
   {
     return setProperty("background-set", propval);
   }
 
   /** */
-  T bold(bool propval)
+  T bold(bool propval) nothrow
   {
     return setProperty("bold", propval);
   }
 
   /** */
-  T boldSet(bool propval)
+  T boldSet(bool propval) nothrow
   {
     return setProperty("bold-set", propval);
   }
 
   /** */
-  T foreground(string propval)
+  T foreground(string propval) nothrow
   {
     return setProperty("foreground", propval);
   }
 
   /** */
-  T foregroundSet(bool propval)
+  T foregroundSet(bool propval) nothrow
   {
     return setProperty("foreground-set", propval);
   }
 
   /** */
-  T italic(bool propval)
+  T italic(bool propval) nothrow
   {
     return setProperty("italic", propval);
   }
 
   /** */
-  T italicSet(bool propval)
+  T italicSet(bool propval) nothrow
   {
     return setProperty("italic-set", propval);
   }
 
   /** */
-  T lineBackground(string propval)
+  T lineBackground(string propval) nothrow
   {
     return setProperty("line-background", propval);
   }
 
   /** */
-  T lineBackgroundSet(bool propval)
+  T lineBackgroundSet(bool propval) nothrow
   {
     return setProperty("line-background-set", propval);
   }
 
   /** */
-  T pangoUnderline(pango.types.Underline propval)
+  T pangoUnderline(pango.types.Underline propval) nothrow
   {
     return setProperty("pango-underline", propval);
   }
 
   /** */
-  T scale(string propval)
+  T scale(string propval) nothrow
   {
     return setProperty("scale", propval);
   }
 
   /** */
-  T scaleSet(bool propval)
+  T scaleSet(bool propval) nothrow
   {
     return setProperty("scale-set", propval);
   }
 
   /** */
-  T strikethrough(bool propval)
+  T strikethrough(bool propval) nothrow
   {
     return setProperty("strikethrough", propval);
   }
 
   /** */
-  T strikethroughSet(bool propval)
+  T strikethroughSet(bool propval) nothrow
   {
     return setProperty("strikethrough-set", propval);
   }
 
   /** */
-  T underlineColor(string propval)
+  T underlineColor(string propval) nothrow
   {
     return setProperty("underline-color", propval);
   }
 
   /** */
-  T underlineColorSet(bool propval)
+  T underlineColorSet(bool propval) nothrow
   {
     return setProperty("underline-color-set", propval);
   }
 
   /** */
-  T underlineSet(bool propval)
+  T underlineSet(bool propval) nothrow
   {
     return setProperty("underline-set", propval);
   }
 
   /** */
-  T weight(pango.types.Weight propval)
+  T weight(pango.types.Weight propval) nothrow
   {
     return setProperty("weight", propval);
   }
 
   /** */
-  T weightSet(bool propval)
+  T weightSet(bool propval) nothrow
   {
     return setProperty("weight-set", propval);
   }
@@ -338,7 +338,7 @@ final class StyleGidBuilder : StyleGidBuilderImpl!StyleGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Style build()
+  Style build() nothrow
   {
     return new Style(cast(void*)createGObject(Style._getGType), No.Take);
   }

@@ -15,26 +15,26 @@ class Criteria : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_criteria_get_type != &gidSymbolNotFound ? gaflight_criteria_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Criteria self()
+  override Criteria self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class Criteria : gobject.object.ObjectWrap
       Get builder for [arrowflight.criteria.Criteria]
       Returns: New builder object
   */
-  static CriteriaGidBuilder builder()
+  static CriteriaGidBuilder builder() nothrow
   {
     return new CriteriaGidBuilder;
   }
@@ -52,7 +52,7 @@ class Criteria : gobject.object.ObjectWrap
       Get `expression` property.
       Returns: Opaque criteria expression, dependent on server implementation.
   */
-  @property glib.bytes.Bytes expression()
+  @property glib.bytes.Bytes expression() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(glib.bytes.Bytes)("expression");
   }
@@ -62,13 +62,13 @@ class Criteria : gobject.object.ObjectWrap
       Params:
         propval = Opaque criteria expression, dependent on server implementation.
   */
-  @property void expression(glib.bytes.Bytes propval)
+  @property void expression(glib.bytes.Bytes propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(glib.bytes.Bytes)("expression", propval);
   }
 
   /** */
-  this(glib.bytes.Bytes expression)
+  this(glib.bytes.Bytes expression) nothrow
   {
     GAFlightCriteria* _cretval;
     _cretval = gaflight_criteria_new(expression ? cast(GBytes*)expression._cPtr(No.Dup) : null);
@@ -86,7 +86,7 @@ class CriteriaGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Opaque criteria expression, dependent on server implementation.
       Returns: Builder instance for fluent chaining
   */
-  T expression(glib.bytes.Bytes propval)
+  T expression(glib.bytes.Bytes propval) nothrow
   {
     return setProperty("expression", propval);
   }
@@ -99,7 +99,7 @@ final class CriteriaGidBuilder : CriteriaGidBuilderImpl!CriteriaGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Criteria build()
+  Criteria build() nothrow
   {
     return new Criteria(cast(void*)createGObject(Criteria._getGType), Yes.Take);
   }

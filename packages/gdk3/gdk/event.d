@@ -75,32 +75,32 @@ class Event : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_event_get_type != &gidSymbolNotFound ? gdk_event_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Event self()
+  override Event self() nothrow
   {
     return this;
   }
@@ -109,7 +109,7 @@ class Event : gobject.boxed.Boxed
       Get `type` field.
       Returns: the #GdkEventType
   */
-  @property gdk.types.EventType type()
+  @property gdk.types.EventType type() nothrow
   {
     return cast(gdk.types.EventType)(cast(GdkEvent*)this._cPtr).type;
   }
@@ -119,7 +119,7 @@ class Event : gobject.boxed.Boxed
       Params:
         propval = the #GdkEventType
   */
-  @property void type(gdk.types.EventType propval)
+  @property void type(gdk.types.EventType propval) nothrow
   {
     (cast(GdkEvent*)this._cPtr).type = cast(GdkEventType)propval;
   }
@@ -128,7 +128,7 @@ class Event : gobject.boxed.Boxed
       Get `any` field.
       Returns: a #GdkEventAny
   */
-  @property gdk.event_any.EventAny any()
+  @property gdk.event_any.EventAny any() nothrow
   {
     return new gdk.event_any.EventAny(cast(GdkEventAny*)&(cast(GdkEvent*)this._cPtr).any, No.Take);
   }
@@ -137,7 +137,7 @@ class Event : gobject.boxed.Boxed
       Get `expose` field.
       Returns: a #GdkEventExpose
   */
-  @property gdk.event_expose.EventExpose expose()
+  @property gdk.event_expose.EventExpose expose() nothrow
   {
     return new gdk.event_expose.EventExpose(cast(GdkEventExpose*)&(cast(GdkEvent*)this._cPtr).expose, No.Take);
   }
@@ -146,7 +146,7 @@ class Event : gobject.boxed.Boxed
       Get `visibility` field.
       Returns: a #GdkEventVisibility
   */
-  @property gdk.event_visibility.EventVisibility visibility()
+  @property gdk.event_visibility.EventVisibility visibility() nothrow
   {
     return new gdk.event_visibility.EventVisibility(cast(GdkEventVisibility*)&(cast(GdkEvent*)this._cPtr).visibility, No.Take);
   }
@@ -155,7 +155,7 @@ class Event : gobject.boxed.Boxed
       Get `motion` field.
       Returns: a #GdkEventMotion
   */
-  @property gdk.event_motion.EventMotion motion()
+  @property gdk.event_motion.EventMotion motion() nothrow
   {
     return new gdk.event_motion.EventMotion(cast(GdkEventMotion*)&(cast(GdkEvent*)this._cPtr).motion, No.Take);
   }
@@ -164,7 +164,7 @@ class Event : gobject.boxed.Boxed
       Get `button` field.
       Returns: a #GdkEventButton
   */
-  @property gdk.event_button.EventButton button()
+  @property gdk.event_button.EventButton button() nothrow
   {
     return new gdk.event_button.EventButton(cast(GdkEventButton*)&(cast(GdkEvent*)this._cPtr).button, No.Take);
   }
@@ -173,7 +173,7 @@ class Event : gobject.boxed.Boxed
       Get `touch` field.
       Returns: a #GdkEventTouch
   */
-  @property gdk.event_touch.EventTouch touch()
+  @property gdk.event_touch.EventTouch touch() nothrow
   {
     return new gdk.event_touch.EventTouch(cast(GdkEventTouch*)&(cast(GdkEvent*)this._cPtr).touch, No.Take);
   }
@@ -182,7 +182,7 @@ class Event : gobject.boxed.Boxed
       Get `scroll` field.
       Returns: a #GdkEventScroll
   */
-  @property gdk.event_scroll.EventScroll scroll()
+  @property gdk.event_scroll.EventScroll scroll() nothrow
   {
     return new gdk.event_scroll.EventScroll(cast(GdkEventScroll*)&(cast(GdkEvent*)this._cPtr).scroll, No.Take);
   }
@@ -191,7 +191,7 @@ class Event : gobject.boxed.Boxed
       Get `key` field.
       Returns: a #GdkEventKey
   */
-  @property gdk.event_key.EventKey key()
+  @property gdk.event_key.EventKey key() nothrow
   {
     return new gdk.event_key.EventKey(cast(GdkEventKey*)&(cast(GdkEvent*)this._cPtr).key, No.Take);
   }
@@ -200,7 +200,7 @@ class Event : gobject.boxed.Boxed
       Get `crossing` field.
       Returns: a #GdkEventCrossing
   */
-  @property gdk.event_crossing.EventCrossing crossing()
+  @property gdk.event_crossing.EventCrossing crossing() nothrow
   {
     return new gdk.event_crossing.EventCrossing(cast(GdkEventCrossing*)&(cast(GdkEvent*)this._cPtr).crossing, No.Take);
   }
@@ -209,7 +209,7 @@ class Event : gobject.boxed.Boxed
       Get `focusChange` field.
       Returns: a #GdkEventFocus
   */
-  @property gdk.event_focus.EventFocus focusChange()
+  @property gdk.event_focus.EventFocus focusChange() nothrow
   {
     return new gdk.event_focus.EventFocus(cast(GdkEventFocus*)&(cast(GdkEvent*)this._cPtr).focusChange, No.Take);
   }
@@ -218,7 +218,7 @@ class Event : gobject.boxed.Boxed
       Get `configure` field.
       Returns: a #GdkEventConfigure
   */
-  @property gdk.event_configure.EventConfigure configure()
+  @property gdk.event_configure.EventConfigure configure() nothrow
   {
     return new gdk.event_configure.EventConfigure(cast(GdkEventConfigure*)&(cast(GdkEvent*)this._cPtr).configure, No.Take);
   }
@@ -227,7 +227,7 @@ class Event : gobject.boxed.Boxed
       Get `property` field.
       Returns: a #GdkEventProperty
   */
-  @property gdk.event_property.EventProperty property()
+  @property gdk.event_property.EventProperty property() nothrow
   {
     return new gdk.event_property.EventProperty(cast(GdkEventProperty*)&(cast(GdkEvent*)this._cPtr).property, No.Take);
   }
@@ -236,7 +236,7 @@ class Event : gobject.boxed.Boxed
       Get `selection` field.
       Returns: a #GdkEventSelection
   */
-  @property gdk.event_selection.EventSelection selection()
+  @property gdk.event_selection.EventSelection selection() nothrow
   {
     return new gdk.event_selection.EventSelection(cast(GdkEventSelection*)&(cast(GdkEvent*)this._cPtr).selection, No.Take);
   }
@@ -245,7 +245,7 @@ class Event : gobject.boxed.Boxed
       Get `ownerChange` field.
       Returns: a #GdkEventOwnerChange
   */
-  @property gdk.event_owner_change.EventOwnerChange ownerChange()
+  @property gdk.event_owner_change.EventOwnerChange ownerChange() nothrow
   {
     return new gdk.event_owner_change.EventOwnerChange(cast(GdkEventOwnerChange*)&(cast(GdkEvent*)this._cPtr).ownerChange, No.Take);
   }
@@ -254,7 +254,7 @@ class Event : gobject.boxed.Boxed
       Get `proximity` field.
       Returns: a #GdkEventProximity
   */
-  @property gdk.event_proximity.EventProximity proximity()
+  @property gdk.event_proximity.EventProximity proximity() nothrow
   {
     return new gdk.event_proximity.EventProximity(cast(GdkEventProximity*)&(cast(GdkEvent*)this._cPtr).proximity, No.Take);
   }
@@ -263,7 +263,7 @@ class Event : gobject.boxed.Boxed
       Get `dnd` field.
       Returns: a #GdkEventDND
   */
-  @property gdk.event_dnd.EventDND dnd()
+  @property gdk.event_dnd.EventDND dnd() nothrow
   {
     return new gdk.event_dnd.EventDND(cast(GdkEventDND*)&(cast(GdkEvent*)this._cPtr).dnd, No.Take);
   }
@@ -272,7 +272,7 @@ class Event : gobject.boxed.Boxed
       Get `windowState` field.
       Returns: a #GdkEventWindowState
   */
-  @property gdk.event_window_state.EventWindowState windowState()
+  @property gdk.event_window_state.EventWindowState windowState() nothrow
   {
     return new gdk.event_window_state.EventWindowState(cast(GdkEventWindowState*)&(cast(GdkEvent*)this._cPtr).windowState, No.Take);
   }
@@ -281,7 +281,7 @@ class Event : gobject.boxed.Boxed
       Get `setting` field.
       Returns: a #GdkEventSetting
   */
-  @property gdk.event_setting.EventSetting setting()
+  @property gdk.event_setting.EventSetting setting() nothrow
   {
     return new gdk.event_setting.EventSetting(cast(GdkEventSetting*)&(cast(GdkEvent*)this._cPtr).setting, No.Take);
   }
@@ -290,7 +290,7 @@ class Event : gobject.boxed.Boxed
       Get `grabBroken` field.
       Returns: a #GdkEventGrabBroken
   */
-  @property gdk.event_grab_broken.EventGrabBroken grabBroken()
+  @property gdk.event_grab_broken.EventGrabBroken grabBroken() nothrow
   {
     return new gdk.event_grab_broken.EventGrabBroken(cast(GdkEventGrabBroken*)&(cast(GdkEvent*)this._cPtr).grabBroken, No.Take);
   }
@@ -299,7 +299,7 @@ class Event : gobject.boxed.Boxed
       Get `touchpadSwipe` field.
       Returns: a #GdkEventTouchpadSwipe
   */
-  @property gdk.event_touchpad_swipe.EventTouchpadSwipe touchpadSwipe()
+  @property gdk.event_touchpad_swipe.EventTouchpadSwipe touchpadSwipe() nothrow
   {
     return new gdk.event_touchpad_swipe.EventTouchpadSwipe(cast(GdkEventTouchpadSwipe*)&(cast(GdkEvent*)this._cPtr).touchpadSwipe, No.Take);
   }
@@ -308,7 +308,7 @@ class Event : gobject.boxed.Boxed
       Get `touchpadPinch` field.
       Returns: a #GdkEventTouchpadPinch
   */
-  @property gdk.event_touchpad_pinch.EventTouchpadPinch touchpadPinch()
+  @property gdk.event_touchpad_pinch.EventTouchpadPinch touchpadPinch() nothrow
   {
     return new gdk.event_touchpad_pinch.EventTouchpadPinch(cast(GdkEventTouchpadPinch*)&(cast(GdkEvent*)this._cPtr).touchpadPinch, No.Take);
   }
@@ -317,7 +317,7 @@ class Event : gobject.boxed.Boxed
       Get `padButton` field.
       Returns: a #GdkEventPadButton
   */
-  @property gdk.event_pad_button.EventPadButton padButton()
+  @property gdk.event_pad_button.EventPadButton padButton() nothrow
   {
     return new gdk.event_pad_button.EventPadButton(cast(GdkEventPadButton*)&(cast(GdkEvent*)this._cPtr).padButton, No.Take);
   }
@@ -326,7 +326,7 @@ class Event : gobject.boxed.Boxed
       Get `padAxis` field.
       Returns: a #GdkEventPadAxis
   */
-  @property gdk.event_pad_axis.EventPadAxis padAxis()
+  @property gdk.event_pad_axis.EventPadAxis padAxis() nothrow
   {
     return new gdk.event_pad_axis.EventPadAxis(cast(GdkEventPadAxis*)&(cast(GdkEvent*)this._cPtr).padAxis, No.Take);
   }
@@ -335,7 +335,7 @@ class Event : gobject.boxed.Boxed
       Get `padGroupMode` field.
       Returns: a #GdkEventPadGroupMode
   */
-  @property gdk.event_pad_group_mode.EventPadGroupMode padGroupMode()
+  @property gdk.event_pad_group_mode.EventPadGroupMode padGroupMode() nothrow
   {
     return new gdk.event_pad_group_mode.EventPadGroupMode(cast(GdkEventPadGroupMode*)&(cast(GdkEvent*)this._cPtr).padGroupMode, No.Take);
   }
@@ -348,7 +348,7 @@ class Event : gobject.boxed.Boxed
       Returns: a newly-allocated #GdkEvent. The returned #GdkEvent
         should be freed with [gdk.event.Event.free].
   */
-  this(gdk.types.EventType type)
+  this(gdk.types.EventType type) nothrow
   {
     GdkEvent* _cretval;
     _cretval = gdk_event_new(type);
@@ -361,7 +361,7 @@ class Event : gobject.boxed.Boxed
       Returns: a copy of event. The returned #GdkEvent should be freed with
         [gdk.event.Event.free].
   */
-  gdk.event.Event copy()
+  gdk.event.Event copy() nothrow
   {
     GdkEvent* _cretval;
     _cretval = gdk_event_copy(cast(const(GdkEvent)*)this._cPtr);
@@ -378,7 +378,7 @@ class Event : gobject.boxed.Boxed
         value = location to store the value found
       Returns: true if the specified axis was found, otherwise false
   */
-  bool getAxis(gdk.types.AxisUse axisUse, out double value)
+  bool getAxis(gdk.types.AxisUse axisUse, out double value) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_event_get_axis(cast(const(GdkEvent)*)this._cPtr, axisUse, cast(double*)&value);
@@ -392,7 +392,7 @@ class Event : gobject.boxed.Boxed
         button = location to store mouse button number
       Returns: true if the event delivered a button number
   */
-  bool getButton(out uint button)
+  bool getButton(out uint button) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_event_get_button(cast(const(GdkEvent)*)this._cPtr, cast(uint*)&button);
@@ -406,7 +406,7 @@ class Event : gobject.boxed.Boxed
         clickCount = location to store click count
       Returns: true if the event delivered a click count
   */
-  bool getClickCount(out uint clickCount)
+  bool getClickCount(out uint clickCount) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_event_get_click_count(cast(const(GdkEvent)*)this._cPtr, cast(uint*)&clickCount);
@@ -421,7 +421,7 @@ class Event : gobject.boxed.Boxed
         yWin = location to put event window y coordinate
       Returns: true if the event delivered event window coordinates
   */
-  bool getCoords(out double xWin, out double yWin)
+  bool getCoords(out double xWin, out double yWin) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_event_get_coords(cast(const(GdkEvent)*)this._cPtr, cast(double*)&xWin, cast(double*)&yWin);
@@ -433,7 +433,7 @@ class Event : gobject.boxed.Boxed
       it, else it will return null.
       Returns: a #GdkDevice, or null.
   */
-  gdk.device.Device getDevice()
+  gdk.device.Device getDevice() nothrow
   {
     GdkDevice* _cretval;
     _cretval = gdk_event_get_device(cast(const(GdkEvent)*)this._cPtr);
@@ -452,7 +452,7 @@ class Event : gobject.boxed.Boxed
       persistently across runs, see [gdk.device_tool.DeviceTool.getSerial]
       Returns: The current device tool, or null
   */
-  gdk.device_tool.DeviceTool getDeviceTool()
+  gdk.device_tool.DeviceTool getDeviceTool() nothrow
   {
     GdkDeviceTool* _cretval;
     _cretval = gdk_event_get_device_tool(cast(const(GdkEvent)*)this._cPtr);
@@ -466,7 +466,7 @@ class Event : gobject.boxed.Boxed
       to which the event belongs. Otherwise, return null.
       Returns: the event sequence that the event belongs to
   */
-  gdk.event_sequence.EventSequence getEventSequence()
+  gdk.event_sequence.EventSequence getEventSequence() nothrow
   {
     GdkEventSequence* _cretval;
     _cretval = gdk_event_get_event_sequence(cast(const(GdkEvent)*)this._cPtr);
@@ -478,7 +478,7 @@ class Event : gobject.boxed.Boxed
       Retrieves the type of the event.
       Returns: a #GdkEventType
   */
-  gdk.types.EventType getEventType()
+  gdk.types.EventType getEventType() nothrow
   {
     GdkEventType _cretval;
     _cretval = gdk_event_get_event_type(cast(const(GdkEvent)*)this._cPtr);
@@ -495,7 +495,7 @@ class Event : gobject.boxed.Boxed
         keycode = location to store the keycode
       Returns: true if the event delivered a hardware keycode
   */
-  bool getKeycode(out ushort keycode)
+  bool getKeycode(out ushort keycode) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_event_get_keycode(cast(const(GdkEvent)*)this._cPtr, cast(ushort*)&keycode);
@@ -509,7 +509,7 @@ class Event : gobject.boxed.Boxed
         keyval = location to store the keyval
       Returns: true if the event delivered a key symbol
   */
-  bool getKeyval(out uint keyval)
+  bool getKeyval(out uint keyval) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_event_get_keyval(cast(const(GdkEvent)*)this._cPtr, cast(uint*)&keyval);
@@ -522,7 +522,7 @@ class Event : gobject.boxed.Boxed
       from a touch event), as opposed to a real one.
       Returns: true if this event is emulated
   */
-  bool getPointerEmulated()
+  bool getPointerEmulated() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_event_get_pointer_emulated(cast(GdkEvent*)this._cPtr);
@@ -537,7 +537,7 @@ class Event : gobject.boxed.Boxed
         yRoot = location to put root window y coordinate
       Returns: true if the event delivered root window coordinates
   */
-  bool getRootCoords(out double xRoot, out double yRoot)
+  bool getRootCoords(out double xRoot, out double yRoot) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_event_get_root_coords(cast(const(GdkEvent)*)this._cPtr, cast(double*)&xRoot, cast(double*)&yRoot);
@@ -552,7 +552,7 @@ class Event : gobject.boxed.Boxed
       some extended flags.
       Returns: The associated keyboard scancode or 0
   */
-  int getScancode()
+  int getScancode() nothrow
   {
     int _retval;
     _retval = gdk_event_get_scancode(cast(GdkEvent*)this._cPtr);
@@ -569,7 +569,7 @@ class Event : gobject.boxed.Boxed
       `event->motion.y_root` are relative.
       Returns: the screen for the event
   */
-  gdk.screen.Screen getScreen()
+  gdk.screen.Screen getScreen() nothrow
   {
     GdkScreen* _cretval;
     _cretval = gdk_event_get_screen(cast(const(GdkEvent)*)this._cPtr);
@@ -588,7 +588,7 @@ class Event : gobject.boxed.Boxed
       Returns: true if the event contains smooth scroll information
           and false otherwise
   */
-  bool getScrollDeltas(out double deltaX, out double deltaY)
+  bool getScrollDeltas(out double deltaX, out double deltaY) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_event_get_scroll_deltas(cast(const(GdkEvent)*)this._cPtr, cast(double*)&deltaX, cast(double*)&deltaY);
@@ -640,7 +640,7 @@ class Event : gobject.boxed.Boxed
       Returns: true if the event delivered a scroll direction
           and false otherwise
   */
-  bool getScrollDirection(out gdk.types.ScrollDirection direction)
+  bool getScrollDirection(out gdk.types.ScrollDirection direction) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_event_get_scroll_direction(cast(const(GdkEvent)*)this._cPtr, &direction);
@@ -651,7 +651,7 @@ class Event : gobject.boxed.Boxed
       Returns the #GdkSeat this event was generated for.
       Returns: The #GdkSeat of this event
   */
-  gdk.seat.Seat getSeat()
+  gdk.seat.Seat getSeat() nothrow
   {
     GdkSeat* _cretval;
     _cretval = gdk_event_get_seat(cast(const(GdkEvent)*)this._cPtr);
@@ -671,7 +671,7 @@ class Event : gobject.boxed.Boxed
       return null.
       Returns: a #GdkDevice, or null.
   */
-  gdk.device.Device getSourceDevice()
+  gdk.device.Device getSourceDevice() nothrow
   {
     GdkDevice* _cretval;
     _cretval = gdk_event_get_source_device(cast(const(GdkEvent)*)this._cPtr);
@@ -689,7 +689,7 @@ class Event : gobject.boxed.Boxed
         state = return location for state
       Returns: true if there was a state field in the event
   */
-  bool getState(out gdk.types.ModifierType state)
+  bool getState(out gdk.types.ModifierType state) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_event_get_state(cast(const(GdkEvent)*)this._cPtr, &state);
@@ -701,7 +701,7 @@ class Event : gobject.boxed.Boxed
       returns #GDK_CURRENT_TIME. If event is null, returns #GDK_CURRENT_TIME.
       Returns: time stamp field from event
   */
-  uint getTime()
+  uint getTime() nothrow
   {
     uint _retval;
     _retval = gdk_event_get_time(cast(const(GdkEvent)*)this._cPtr);
@@ -712,7 +712,7 @@ class Event : gobject.boxed.Boxed
       Extracts the #GdkWindow associated with an event.
       Returns: The #GdkWindow associated with the event
   */
-  gdk.window.Window getWindow()
+  gdk.window.Window getWindow() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gdk_event_get_window(cast(const(GdkEvent)*)this._cPtr);
@@ -730,7 +730,7 @@ class Event : gobject.boxed.Boxed
       Stop scroll events always have a a delta of 0/0.
       Returns: true if the event is a scroll stop event
   */
-  bool isScrollStopEvent()
+  bool isScrollStopEvent() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_event_is_scroll_stop_event(cast(const(GdkEvent)*)this._cPtr);
@@ -742,7 +742,7 @@ class Event : gobject.boxed.Boxed
       queue for event->any.window’s display, or the default event
       queue if event->any.window is null. See [gdk.display.Display.putEvent].
   */
-  void put()
+  void put() nothrow
   {
     gdk_event_put(cast(const(GdkEvent)*)this._cPtr);
   }
@@ -755,7 +755,7 @@ class Event : gobject.boxed.Boxed
       Params:
         device = a #GdkDevice
   */
-  void setDevice(gdk.device.Device device)
+  void setDevice(gdk.device.Device device) nothrow
   {
     gdk_event_set_device(cast(GdkEvent*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
   }
@@ -766,7 +766,7 @@ class Event : gobject.boxed.Boxed
       Params:
         tool = tool to set on the event, or null
   */
-  void setDeviceTool(gdk.device_tool.DeviceTool tool = null)
+  void setDeviceTool(gdk.device_tool.DeviceTool tool = null) nothrow
   {
     gdk_event_set_device_tool(cast(GdkEvent*)this._cPtr, tool ? cast(GdkDeviceTool*)tool._cPtr(No.Dup) : null);
   }
@@ -779,7 +779,7 @@ class Event : gobject.boxed.Boxed
       Params:
         screen = a #GdkScreen
   */
-  void setScreen(gdk.screen.Screen screen)
+  void setScreen(gdk.screen.Screen screen) nothrow
   {
     gdk_event_set_screen(cast(GdkEvent*)this._cPtr, screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
   }
@@ -793,7 +793,7 @@ class Event : gobject.boxed.Boxed
       Params:
         device = a #GdkDevice
   */
-  void setSourceDevice(gdk.device.Device device)
+  void setSourceDevice(gdk.device.Device device) nothrow
   {
     gdk_event_set_source_device(cast(GdkEvent*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
   }
@@ -810,7 +810,7 @@ class Event : gobject.boxed.Boxed
       event->button == [gdk.types.BUTTON_SECONDARY].
       Returns: true if the event should trigger a context menu.
   */
-  bool triggersContextMenu()
+  bool triggersContextMenu() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_event_triggers_context_menu(cast(const(GdkEvent)*)this._cPtr);
@@ -825,7 +825,7 @@ class Event : gobject.boxed.Boxed
         if no events are pending. The returned #GdkEvent should be freed
         with [gdk.event.Event.free].
   */
-  static gdk.event.Event get()
+  static gdk.event.Event get() nothrow
   {
     GdkEvent* _cretval;
     _cretval = gdk_event_get();
@@ -844,13 +844,20 @@ class Event : gobject.boxed.Boxed
       Params:
         func = the function to call to handle events from GDK.
   */
-  static void handlerSet(gdk.types.EventFunc func)
+  static void handlerSet(gdk.types.EventFunc func) nothrow
   {
-    extern(C) void _funcCallback(GdkEvent* event, void* data)
+    extern(C) void _funcCallback(GdkEvent* event, void* data) nothrow
     {
       auto _dlg = cast(gdk.types.EventFunc*)data;
 
-      (*_dlg)(event ? new gdk.event.Event(cast(void*)event, No.Take) : null);
+      try
+      {
+        (*_dlg)(event ? new gdk.event.Event(cast(void*)event, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.types.EventFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -865,7 +872,7 @@ class Event : gobject.boxed.Boxed
         queue, or null if no events are in any queues. The returned
         #GdkEvent should be freed with [gdk.event.Event.free].
   */
-  static gdk.event.Event peek()
+  static gdk.event.Event peek() nothrow
   {
     GdkEvent* _cretval;
     _cretval = gdk_event_peek();
@@ -895,7 +902,7 @@ class Event : gobject.boxed.Boxed
       Params:
         event = a valid #GdkEvent
   */
-  static void requestMotions(gdk.event_motion.EventMotion event)
+  static void requestMotions(gdk.event_motion.EventMotion event) nothrow
   {
     gdk_event_request_motions(event ? cast(const(GdkEventMotion)*)event._cPtr : null);
   }

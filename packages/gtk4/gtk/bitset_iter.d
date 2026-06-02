@@ -23,38 +23,38 @@ class BitsetIter : gobject.boxed.Boxed
   /**
       Create a `bitset_iter.BitsetIter` boxed type.
   */
-  this()
+  this() nothrow
   {
     super(gMalloc(GtkBitsetIter.sizeof), Yes.Take);
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_bitset_iter_get_type != &gidSymbolNotFound ? gtk_bitset_iter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BitsetIter self()
+  override BitsetIter self() nothrow
   {
     return this;
   }
@@ -66,7 +66,7 @@ class BitsetIter : gobject.boxed.Boxed
       returns false, this function returns 0.
       Returns: The current value pointer to by iter
   */
-  uint getValue()
+  uint getValue() nothrow
   {
     uint _retval;
     _retval = gtk_bitset_iter_get_value(cast(const(GtkBitsetIter)*)this._cPtr);
@@ -77,7 +77,7 @@ class BitsetIter : gobject.boxed.Boxed
       Checks if iter points to a valid value.
       Returns: true if iter points to a valid value
   */
-  bool isValid()
+  bool isValid() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_bitset_iter_is_valid(cast(const(GtkBitsetIter)*)this._cPtr);
@@ -94,7 +94,7 @@ class BitsetIter : gobject.boxed.Boxed
         value = Set to the next value
       Returns: true if a next value existed
   */
-  bool next(out uint value)
+  bool next(out uint value) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_bitset_iter_next(cast(GtkBitsetIter*)this._cPtr, cast(uint*)&value);
@@ -111,7 +111,7 @@ class BitsetIter : gobject.boxed.Boxed
         value = Set to the previous value
       Returns: true if a previous value existed
   */
-  bool previous(out uint value)
+  bool previous(out uint value) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_bitset_iter_previous(cast(GtkBitsetIter*)this._cPtr, cast(uint*)&value);
@@ -131,7 +131,7 @@ class BitsetIter : gobject.boxed.Boxed
         value = Set to the found value in set
       Returns: true if a value was found.
   */
-  static bool initAt(out gtk.bitset_iter.BitsetIter iter, gtk.bitset.Bitset set, uint target, out uint value)
+  static bool initAt(out gtk.bitset_iter.BitsetIter iter, gtk.bitset.Bitset set, uint target, out uint value) nothrow
   {
     bool _retval;
     GtkBitsetIter _iter;
@@ -152,7 +152,7 @@ class BitsetIter : gobject.boxed.Boxed
         value = Set to the first value in set
       Returns: true if set isn't empty.
   */
-  static bool initFirst(out gtk.bitset_iter.BitsetIter iter, gtk.bitset.Bitset set, out uint value)
+  static bool initFirst(out gtk.bitset_iter.BitsetIter iter, gtk.bitset.Bitset set, out uint value) nothrow
   {
     bool _retval;
     GtkBitsetIter _iter;
@@ -173,7 +173,7 @@ class BitsetIter : gobject.boxed.Boxed
         value = Set to the last value in set
       Returns: true if set isn't empty.
   */
-  static bool initLast(out gtk.bitset_iter.BitsetIter iter, gtk.bitset.Bitset set, out uint value)
+  static bool initLast(out gtk.bitset_iter.BitsetIter iter, gtk.bitset.Bitset set, out uint value) nothrow
   {
     bool _retval;
     GtkBitsetIter _iter;

@@ -56,26 +56,26 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_icon_view_get_type != &gidSymbolNotFound ? gtk_icon_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override IconView self()
+  override IconView self() nothrow
   {
     return this;
   }
@@ -84,7 +84,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Get builder for [gtk.icon_view.IconView]
       Returns: New builder object
   */
-  static IconViewGidBuilder builder()
+  static IconViewGidBuilder builder() nothrow
   {
     return new IconViewGidBuilder;
   }
@@ -94,7 +94,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Returns: The activate-on-single-click property specifies whether the "item-activated" signal
         will be emitted after a single click.
   */
-  @property bool activateOnSingleClick()
+  @property bool activateOnSingleClick() nothrow
   {
     return getActivateOnSingleClick();
   }
@@ -105,7 +105,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         propval = The activate-on-single-click property specifies whether the "item-activated" signal
           will be emitted after a single click.
   */
-  @property void activateOnSingleClick(bool propval)
+  @property void activateOnSingleClick(bool propval) nothrow
   {
     setActivateOnSingleClick(propval);
   }
@@ -117,7 +117,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         If no area is specified when creating the icon view with [gtk.icon_view.IconView.newWithArea]
         a #GtkCellAreaBox will be used.
   */
-  @property gtk.cell_area.CellArea cellArea()
+  @property gtk.cell_area.CellArea cellArea() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.cell_area.CellArea)("cell-area");
   }
@@ -127,7 +127,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Returns: The column-spacing property specifies the space which is inserted between
         the columns of the icon view.
   */
-  @property int columnSpacing()
+  @property int columnSpacing() nothrow
   {
     return getColumnSpacing();
   }
@@ -138,7 +138,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         propval = The column-spacing property specifies the space which is inserted between
           the columns of the icon view.
   */
-  @property void columnSpacing(int propval)
+  @property void columnSpacing(int propval) nothrow
   {
     setColumnSpacing(propval);
   }
@@ -149,7 +149,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         items should be displayed. If it is -1, the number of columns will
         be chosen automatically to fill the available area.
   */
-  @property int columns()
+  @property int columns() nothrow
   {
     return getColumns();
   }
@@ -161,7 +161,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
           items should be displayed. If it is -1, the number of columns will
           be chosen automatically to fill the available area.
   */
-  @property void columns(int propval)
+  @property void columns(int propval) nothrow
   {
     setColumns(propval);
   }
@@ -171,7 +171,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Returns: The item-orientation property specifies how the cells (i.e. the icon and
         the text) of the item are positioned relative to each other.
   */
-  @property gtk.types.Orientation itemOrientation()
+  @property gtk.types.Orientation itemOrientation() nothrow
   {
     return getItemOrientation();
   }
@@ -182,7 +182,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         propval = The item-orientation property specifies how the cells (i.e. the icon and
           the text) of the item are positioned relative to each other.
   */
-  @property void itemOrientation(gtk.types.Orientation propval)
+  @property void itemOrientation(gtk.types.Orientation propval) nothrow
   {
     setItemOrientation(propval);
   }
@@ -192,7 +192,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Returns: The item-padding property specifies the padding around each
         of the icon view's item.
   */
-  @property int itemPadding()
+  @property int itemPadding() nothrow
   {
     return getItemPadding();
   }
@@ -203,7 +203,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         propval = The item-padding property specifies the padding around each
           of the icon view's item.
   */
-  @property void itemPadding(int propval)
+  @property void itemPadding(int propval) nothrow
   {
     setItemPadding(propval);
   }
@@ -214,7 +214,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         If it is set to -1, the icon view will automatically determine a
         suitable item size.
   */
-  @property int itemWidth()
+  @property int itemWidth() nothrow
   {
     return getItemWidth();
   }
@@ -226,7 +226,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
           If it is set to -1, the icon view will automatically determine a
           suitable item size.
   */
-  @property void itemWidth(int propval)
+  @property void itemWidth(int propval) nothrow
   {
     setItemWidth(propval);
   }
@@ -236,7 +236,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Returns: The margin property specifies the space which is inserted
         at the edges of the icon view.
   */
-  override @property int margin()
+  override @property int margin() nothrow
   {
     return getMargin();
   }
@@ -247,7 +247,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         propval = The margin property specifies the space which is inserted
           at the edges of the icon view.
   */
-  override @property void margin(int propval)
+  override @property void margin(int propval) nothrow
   {
     setMargin(propval);
   }
@@ -260,7 +260,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         are both set to column numbers, it overrides the text column.
         If both are set to -1, no texts are displayed.
   */
-  @property int markupColumn()
+  @property int markupColumn() nothrow
   {
     return getMarkupColumn();
   }
@@ -274,19 +274,19 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
           are both set to column numbers, it overrides the text column.
           If both are set to -1, no texts are displayed.
   */
-  @property void markupColumn(int propval)
+  @property void markupColumn(int propval) nothrow
   {
     setMarkupColumn(propval);
   }
 
   /** */
-  @property gtk.tree_model.TreeModel model()
+  @property gtk.tree_model.TreeModel model() nothrow
   {
     return getModel();
   }
 
   /** */
-  @property void model(gtk.tree_model.TreeModel propval)
+  @property void model(gtk.tree_model.TreeModel propval) nothrow
   {
     setModel(propval);
   }
@@ -298,7 +298,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         of type #GDK_TYPE_PIXBUF. Setting this property to -1 turns off the
         display of pixbufs.
   */
-  @property int pixbufColumn()
+  @property int pixbufColumn() nothrow
   {
     return getPixbufColumn();
   }
@@ -311,7 +311,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
           of type #GDK_TYPE_PIXBUF. Setting this property to -1 turns off the
           display of pixbufs.
   */
-  @property void pixbufColumn(int propval)
+  @property void pixbufColumn(int propval) nothrow
   {
     setPixbufColumn(propval);
   }
@@ -321,7 +321,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Returns: The reorderable property specifies if the items can be reordered
         by DND.
   */
-  @property bool reorderable()
+  @property bool reorderable() nothrow
   {
     return getReorderable();
   }
@@ -332,7 +332,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         propval = The reorderable property specifies if the items can be reordered
           by DND.
   */
-  @property void reorderable(bool propval)
+  @property void reorderable(bool propval) nothrow
   {
     setReorderable(propval);
   }
@@ -342,7 +342,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Returns: The row-spacing property specifies the space which is inserted between
         the rows of the icon view.
   */
-  @property int rowSpacing()
+  @property int rowSpacing() nothrow
   {
     return getRowSpacing();
   }
@@ -353,7 +353,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         propval = The row-spacing property specifies the space which is inserted between
           the rows of the icon view.
   */
-  @property void rowSpacing(int propval)
+  @property void rowSpacing(int propval) nothrow
   {
     setRowSpacing(propval);
   }
@@ -364,7 +364,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         icon view. If the mode is #GTK_SELECTION_MULTIPLE, rubberband selection
         is enabled, for the other modes, only keyboard selection is possible.
   */
-  @property gtk.types.SelectionMode selectionMode()
+  @property gtk.types.SelectionMode selectionMode() nothrow
   {
     return getSelectionMode();
   }
@@ -376,7 +376,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
           icon view. If the mode is #GTK_SELECTION_MULTIPLE, rubberband selection
           is enabled, for the other modes, only keyboard selection is possible.
   */
-  @property void selectionMode(gtk.types.SelectionMode propval)
+  @property void selectionMode(gtk.types.SelectionMode propval) nothrow
   {
     setSelectionMode(propval);
   }
@@ -386,7 +386,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Returns: The spacing property specifies the space which is inserted between
         the cells (i.e. the icon and the text) of an item.
   */
-  @property int spacing()
+  @property int spacing() nothrow
   {
     return getSpacing();
   }
@@ -397,7 +397,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         propval = The spacing property specifies the space which is inserted between
           the cells (i.e. the icon and the text) of an item.
   */
-  @property void spacing(int propval)
+  @property void spacing(int propval) nothrow
   {
     setSpacing(propval);
   }
@@ -409,7 +409,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         of type #G_TYPE_STRING. If this property and the :markup-column
         property are both set to -1, no texts are displayed.
   */
-  @property int textColumn()
+  @property int textColumn() nothrow
   {
     return getTextColumn();
   }
@@ -422,19 +422,19 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
           of type #G_TYPE_STRING. If this property and the :markup-column
           property are both set to -1, no texts are displayed.
   */
-  @property void textColumn(int propval)
+  @property void textColumn(int propval) nothrow
   {
     setTextColumn(propval);
   }
 
   /** */
-  @property int tooltipColumn()
+  @property int tooltipColumn() nothrow
   {
     return getTooltipColumn();
   }
 
   /** */
-  @property void tooltipColumn(int propval)
+  @property void tooltipColumn(int propval) nothrow
   {
     setTooltipColumn(propval);
   }
@@ -446,7 +446,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Creates a new #GtkIconView widget
       Returns: A newly created #GtkIconView widget
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_icon_view_new();
@@ -461,7 +461,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         area = the #GtkCellArea to use to layout cells
       Returns: A newly created #GtkIconView widget
   */
-  static gtk.icon_view.IconView newWithArea(gtk.cell_area.CellArea area)
+  static gtk.icon_view.IconView newWithArea(gtk.cell_area.CellArea area) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_icon_view_new_with_area(area ? cast(GtkCellArea*)area._cPtr(No.Dup) : null);
@@ -476,7 +476,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         model = The model.
       Returns: A newly created #GtkIconView widget.
   */
-  static gtk.icon_view.IconView newWithModel(gtk.tree_model.TreeModel model)
+  static gtk.icon_view.IconView newWithModel(gtk.tree_model.TreeModel model) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_icon_view_new_with_model(model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
@@ -494,7 +494,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         bx = return location for bin_window X coordinate
         by = return location for bin_window Y coordinate
   */
-  void convertWidgetToBinWindowCoords(int wx, int wy, out int bx, out int by)
+  void convertWidgetToBinWindowCoords(int wx, int wy, out int bx, out int by) nothrow
   {
     gtk_icon_view_convert_widget_to_bin_window_coords(cast(GtkIconView*)this._cPtr, wx, wy, cast(int*)&bx, cast(int*)&by);
   }
@@ -507,7 +507,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         path = a #GtkTreePath in icon_view
       Returns: a newly-allocated surface of the drag icon.
   */
-  cairo.surface.Surface createDragIcon(gtk.tree_path.TreePath path)
+  cairo.surface.Surface createDragIcon(gtk.tree_path.TreePath path) nothrow
   {
     cairo_surface_t* _cretval;
     _cretval = gtk_icon_view_create_drag_icon(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
@@ -525,7 +525,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         actions = the bitmask of possible actions for a drag to this
              widget
   */
-  void enableModelDragDest(gtk.target_entry.TargetEntry[] targets, gdk.types.DragAction actions)
+  void enableModelDragDest(gtk.target_entry.TargetEntry[] targets, gdk.types.DragAction actions) nothrow
   {
     int _nTargets;
     if (targets)
@@ -550,7 +550,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         actions = the bitmask of possible actions for a drag from this
              widget
   */
-  void enableModelDragSource(gdk.types.ModifierType startButtonMask, gtk.target_entry.TargetEntry[] targets, gdk.types.DragAction actions)
+  void enableModelDragSource(gdk.types.ModifierType startButtonMask, gtk.target_entry.TargetEntry[] targets, gdk.types.DragAction actions) nothrow
   {
     int _nTargets;
     if (targets)
@@ -568,7 +568,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Gets the setting set by [gtk.icon_view.IconView.setActivateOnSingleClick].
       Returns: true if item-activated will be emitted on a single click
   */
-  bool getActivateOnSingleClick()
+  bool getActivateOnSingleClick() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_icon_view_get_activate_on_single_click(cast(GtkIconView*)this._cPtr);
@@ -587,7 +587,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         rect = rectangle to fill with cell rect
       Returns: false if there is no such item, true otherwise
   */
-  bool getCellRect(gtk.tree_path.TreePath path, gtk.cell_renderer.CellRenderer cell, out gdk.rectangle.Rectangle rect)
+  bool getCellRect(gtk.tree_path.TreePath path, gtk.cell_renderer.CellRenderer cell, out gdk.rectangle.Rectangle rect) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_icon_view_get_cell_rect(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, cast(GdkRectangle*)&rect);
@@ -598,7 +598,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Returns the value of the ::column-spacing property.
       Returns: the space between columns
   */
-  int getColumnSpacing()
+  int getColumnSpacing() nothrow
   {
     int _retval;
     _retval = gtk_icon_view_get_column_spacing(cast(GtkIconView*)this._cPtr);
@@ -609,7 +609,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Returns the value of the ::columns property.
       Returns: the number of columns, or -1
   */
-  int getColumns()
+  int getColumns() nothrow
   {
     int _retval;
     _retval = gtk_icon_view_get_columns(cast(GtkIconView*)this._cPtr);
@@ -630,7 +630,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
                  focus cell, or null
       Returns: true if the cursor is set.
   */
-  bool getCursor(out gtk.tree_path.TreePath path, out gtk.cell_renderer.CellRenderer cell)
+  bool getCursor(out gtk.tree_path.TreePath path, out gtk.cell_renderer.CellRenderer cell) nothrow
   {
     bool _retval;
     GtkTreePath* _path;
@@ -652,7 +652,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         pos = Return location for the drop position, or null
       Returns: whether there is an item at the given position.
   */
-  bool getDestItemAtPos(int dragX, int dragY, out gtk.tree_path.TreePath path, out gtk.types.IconViewDropPosition pos)
+  bool getDestItemAtPos(int dragX, int dragY, out gtk.tree_path.TreePath path, out gtk.types.IconViewDropPosition pos) nothrow
   {
     bool _retval;
     GtkTreePath* _path;
@@ -669,7 +669,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
                  the highlighted item, or null.
         pos = Return location for the drop position, or null
   */
-  void getDragDestItem(out gtk.tree_path.TreePath path, out gtk.types.IconViewDropPosition pos)
+  void getDragDestItem(out gtk.tree_path.TreePath path, out gtk.types.IconViewDropPosition pos) nothrow
   {
     GtkTreePath* _path;
     gtk_icon_view_get_drag_dest_item(cast(GtkIconView*)this._cPtr, &_path, &pos);
@@ -692,7 +692,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
             responsible for the cell at (`x`, `y`), or null
       Returns: true if an item exists at the specified position
   */
-  bool getItemAtPos(int x, int y, out gtk.tree_path.TreePath path, out gtk.cell_renderer.CellRenderer cell)
+  bool getItemAtPos(int x, int y, out gtk.tree_path.TreePath path, out gtk.cell_renderer.CellRenderer cell) nothrow
   {
     bool _retval;
     GtkTreePath* _path;
@@ -711,7 +711,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         path = the #GtkTreePath of the item
       Returns: The column in which the item is displayed
   */
-  int getItemColumn(gtk.tree_path.TreePath path)
+  int getItemColumn(gtk.tree_path.TreePath path) nothrow
   {
     int _retval;
     _retval = gtk_icon_view_get_item_column(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
@@ -723,7 +723,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       whether the labels are drawn beside the icons instead of below.
       Returns: the relative position of texts and icons
   */
-  gtk.types.Orientation getItemOrientation()
+  gtk.types.Orientation getItemOrientation() nothrow
   {
     GtkOrientation _cretval;
     _cretval = gtk_icon_view_get_item_orientation(cast(GtkIconView*)this._cPtr);
@@ -735,7 +735,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Returns the value of the ::item-padding property.
       Returns: the padding around items
   */
-  int getItemPadding()
+  int getItemPadding() nothrow
   {
     int _retval;
     _retval = gtk_icon_view_get_item_padding(cast(GtkIconView*)this._cPtr);
@@ -750,7 +750,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         path = the #GtkTreePath of the item
       Returns: The row in which the item is displayed
   */
-  int getItemRow(gtk.tree_path.TreePath path)
+  int getItemRow(gtk.tree_path.TreePath path) nothrow
   {
     int _retval;
     _retval = gtk_icon_view_get_item_row(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
@@ -761,7 +761,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Returns the value of the ::item-width property.
       Returns: the width of a single item, or -1
   */
-  int getItemWidth()
+  int getItemWidth() nothrow
   {
     int _retval;
     _retval = gtk_icon_view_get_item_width(cast(GtkIconView*)this._cPtr);
@@ -772,7 +772,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Returns the value of the ::margin property.
       Returns: the space at the borders
   */
-  int getMargin()
+  int getMargin() nothrow
   {
     int _retval;
     _retval = gtk_icon_view_get_margin(cast(GtkIconView*)this._cPtr);
@@ -783,7 +783,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Returns the column with markup text for icon_view.
       Returns: the markup column, or -1 if it’s unset.
   */
-  int getMarkupColumn()
+  int getMarkupColumn() nothrow
   {
     int _retval;
     _retval = gtk_icon_view_get_markup_column(cast(GtkIconView*)this._cPtr);
@@ -796,7 +796,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Returns: A #GtkTreeModel, or null if none is
             currently being used.
   */
-  gtk.tree_model.TreeModel getModel()
+  gtk.tree_model.TreeModel getModel() nothrow
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_icon_view_get_model(cast(GtkIconView*)this._cPtr);
@@ -817,7 +817,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Returns: The #GtkTreePath corresponding
         to the icon or null if no icon exists at that position.
   */
-  gtk.tree_path.TreePath getPathAtPos(int x, int y)
+  gtk.tree_path.TreePath getPathAtPos(int x, int y) nothrow
   {
     GtkTreePath* _cretval;
     _cretval = gtk_icon_view_get_path_at_pos(cast(GtkIconView*)this._cPtr, x, y);
@@ -829,7 +829,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Returns the column with pixbufs for icon_view.
       Returns: the pixbuf column, or -1 if it’s unset.
   */
-  int getPixbufColumn()
+  int getPixbufColumn() nothrow
   {
     int _retval;
     _retval = gtk_icon_view_get_pixbuf_column(cast(GtkIconView*)this._cPtr);
@@ -841,7 +841,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       See [gtk.icon_view.IconView.setReorderable].
       Returns: true if the list can be reordered.
   */
-  bool getReorderable()
+  bool getReorderable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_icon_view_get_reorderable(cast(GtkIconView*)this._cPtr);
@@ -852,7 +852,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Returns the value of the ::row-spacing property.
       Returns: the space between rows
   */
-  int getRowSpacing()
+  int getRowSpacing() nothrow
   {
     int _retval;
     _retval = gtk_icon_view_get_row_spacing(cast(GtkIconView*)this._cPtr);
@@ -871,7 +871,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       ```
       Returns: A #GList containing a #GtkTreePath for each selected row.
   */
-  gtk.tree_path.TreePath[] getSelectedItems()
+  gtk.tree_path.TreePath[] getSelectedItems() nothrow
   {
     GList* _cretval;
     _cretval = gtk_icon_view_get_selected_items(cast(GtkIconView*)this._cPtr);
@@ -883,7 +883,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Gets the selection mode of the icon_view.
       Returns: the current selection mode
   */
-  gtk.types.SelectionMode getSelectionMode()
+  gtk.types.SelectionMode getSelectionMode() nothrow
   {
     GtkSelectionMode _cretval;
     _cretval = gtk_icon_view_get_selection_mode(cast(GtkIconView*)this._cPtr);
@@ -895,7 +895,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Returns the value of the ::spacing property.
       Returns: the space between cells
   */
-  int getSpacing()
+  int getSpacing() nothrow
   {
     int _retval;
     _retval = gtk_icon_view_get_spacing(cast(GtkIconView*)this._cPtr);
@@ -906,7 +906,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Returns the column with text for icon_view.
       Returns: the text column, or -1 if it’s unset.
   */
-  int getTextColumn()
+  int getTextColumn() nothrow
   {
     int _retval;
     _retval = gtk_icon_view_get_text_column(cast(GtkIconView*)this._cPtr);
@@ -919,7 +919,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Returns: the index of the tooltip column that is currently being
         used, or -1 if this is disabled.
   */
-  int getTooltipColumn()
+  int getTooltipColumn() nothrow
   {
     int _retval;
     _retval = gtk_icon_view_get_tooltip_column(cast(GtkIconView*)this._cPtr);
@@ -949,7 +949,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         iter = a pointer to receive a #GtkTreeIter or null
       Returns: whether or not the given tooltip context points to a item
   */
-  bool getTooltipContext(ref int x, ref int y, bool keyboardTip, out gtk.tree_model.TreeModel model, out gtk.tree_path.TreePath path, out gtk.tree_iter.TreeIter iter)
+  bool getTooltipContext(ref int x, ref int y, bool keyboardTip, out gtk.tree_model.TreeModel model, out gtk.tree_path.TreePath path, out gtk.tree_iter.TreeIter iter) nothrow
   {
     bool _retval;
     GtkTreeModel* _model;
@@ -974,7 +974,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         endPath = Return location for end of region, or null
       Returns: true, if valid paths were placed in start_path and end_path
   */
-  bool getVisibleRange(out gtk.tree_path.TreePath startPath, out gtk.tree_path.TreePath endPath)
+  bool getVisibleRange(out gtk.tree_path.TreePath startPath, out gtk.tree_path.TreePath endPath) nothrow
   {
     bool _retval;
     GtkTreePath* _startPath;
@@ -991,7 +991,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         path = The #GtkTreePath to be activated
   */
-  void itemActivated(gtk.tree_path.TreePath path)
+  void itemActivated(gtk.tree_path.TreePath path) nothrow
   {
     gtk_icon_view_item_activated(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
   }
@@ -1004,7 +1004,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         path = A #GtkTreePath to check selection on.
       Returns: true if path is selected.
   */
-  bool pathIsSelected(gtk.tree_path.TreePath path)
+  bool pathIsSelected(gtk.tree_path.TreePath path) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_icon_view_path_is_selected(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
@@ -1033,7 +1033,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         rowAlign = The vertical alignment of the item specified by path.
         colAlign = The horizontal alignment of the item specified by path.
   */
-  void scrollToPath(gtk.tree_path.TreePath path, bool useAlign, float rowAlign, float colAlign)
+  void scrollToPath(gtk.tree_path.TreePath path, bool useAlign, float rowAlign, float colAlign) nothrow
   {
     gtk_icon_view_scroll_to_path(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, useAlign, rowAlign, colAlign);
   }
@@ -1042,7 +1042,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Selects all the icons. icon_view must has its selection mode set
       to #GTK_SELECTION_MULTIPLE.
   */
-  void selectAll()
+  void selectAll() nothrow
   {
     gtk_icon_view_select_all(cast(GtkIconView*)this._cPtr);
   }
@@ -1053,7 +1053,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         path = The #GtkTreePath to be selected.
   */
-  void selectPath(gtk.tree_path.TreePath path)
+  void selectPath(gtk.tree_path.TreePath path) nothrow
   {
     gtk_icon_view_select_path(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
   }
@@ -1065,13 +1065,20 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         func = The function to call for each selected icon.
   */
-  void selectedForeach(gtk.types.IconViewForeachFunc func)
+  void selectedForeach(gtk.types.IconViewForeachFunc func) nothrow
   {
-    extern(C) void _funcCallback(GtkIconView* iconView, GtkTreePath* path, void* data)
+    extern(C) void _funcCallback(GtkIconView* iconView, GtkTreePath* path, void* data) nothrow
     {
       auto _dlg = cast(gtk.types.IconViewForeachFunc*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.icon_view.IconView)(cast(void*)iconView, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.icon_view.IconView)(cast(void*)iconView, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.IconViewForeachFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -1085,7 +1092,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         single = true to emit item-activated on a single click
   */
-  void setActivateOnSingleClick(bool single)
+  void setActivateOnSingleClick(bool single) nothrow
   {
     gtk_icon_view_set_activate_on_single_click(cast(GtkIconView*)this._cPtr, single);
   }
@@ -1097,7 +1104,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         columnSpacing = the column spacing
   */
-  void setColumnSpacing(int columnSpacing)
+  void setColumnSpacing(int columnSpacing) nothrow
   {
     gtk_icon_view_set_column_spacing(cast(GtkIconView*)this._cPtr, columnSpacing);
   }
@@ -1111,7 +1118,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         columns = the number of columns
   */
-  void setColumns(int columns)
+  void setColumns(int columns) nothrow
   {
     gtk_icon_view_set_columns(cast(GtkIconView*)this._cPtr, columns);
   }
@@ -1132,7 +1139,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         cell = One of the cell renderers of icon_view, or null
         startEditing = true if the specified cell should start being edited.
   */
-  void setCursor(gtk.tree_path.TreePath path, gtk.cell_renderer.CellRenderer cell, bool startEditing)
+  void setCursor(gtk.tree_path.TreePath path, gtk.cell_renderer.CellRenderer cell, bool startEditing) nothrow
   {
     gtk_icon_view_set_cursor(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, startEditing);
   }
@@ -1144,7 +1151,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         path = The path of the item to highlight, or null.
         pos = Specifies where to drop, relative to the item
   */
-  void setDragDestItem(gtk.tree_path.TreePath path, gtk.types.IconViewDropPosition pos)
+  void setDragDestItem(gtk.tree_path.TreePath path, gtk.types.IconViewDropPosition pos) nothrow
   {
     gtk_icon_view_set_drag_dest_item(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, pos);
   }
@@ -1156,7 +1163,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         orientation = the relative position of texts and icons
   */
-  void setItemOrientation(gtk.types.Orientation orientation)
+  void setItemOrientation(gtk.types.Orientation orientation) nothrow
   {
     gtk_icon_view_set_item_orientation(cast(GtkIconView*)this._cPtr, orientation);
   }
@@ -1168,7 +1175,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         itemPadding = the item padding
   */
-  void setItemPadding(int itemPadding)
+  void setItemPadding(int itemPadding) nothrow
   {
     gtk_icon_view_set_item_padding(cast(GtkIconView*)this._cPtr, itemPadding);
   }
@@ -1181,7 +1188,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         itemWidth = the width for each item
   */
-  void setItemWidth(int itemWidth)
+  void setItemWidth(int itemWidth) nothrow
   {
     gtk_icon_view_set_item_width(cast(GtkIconView*)this._cPtr, itemWidth);
   }
@@ -1194,7 +1201,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         margin = the margin
   */
-  void setMargin(int margin)
+  void setMargin(int margin) nothrow
   {
     gtk_icon_view_set_margin(cast(GtkIconView*)this._cPtr, margin);
   }
@@ -1208,7 +1215,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         column = A column in the currently used model, or -1 to display no text
   */
-  void setMarkupColumn(int column)
+  void setMarkupColumn(int column) nothrow
   {
     gtk_icon_view_set_markup_column(cast(GtkIconView*)this._cPtr, column);
   }
@@ -1222,7 +1229,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         model = The model.
   */
-  void setModel(gtk.tree_model.TreeModel model = null)
+  void setModel(gtk.tree_model.TreeModel model = null) nothrow
   {
     gtk_icon_view_set_model(cast(GtkIconView*)this._cPtr, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
@@ -1234,7 +1241,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         column = A column in the currently used model, or -1 to disable
   */
-  void setPixbufColumn(int column)
+  void setPixbufColumn(int column) nothrow
   {
     gtk_icon_view_set_pixbuf_column(cast(GtkIconView*)this._cPtr, column);
   }
@@ -1256,7 +1263,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         reorderable = true, if the list of items can be reordered.
   */
-  void setReorderable(bool reorderable)
+  void setReorderable(bool reorderable) nothrow
   {
     gtk_icon_view_set_reorderable(cast(GtkIconView*)this._cPtr, reorderable);
   }
@@ -1268,7 +1275,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         rowSpacing = the row spacing
   */
-  void setRowSpacing(int rowSpacing)
+  void setRowSpacing(int rowSpacing) nothrow
   {
     gtk_icon_view_set_row_spacing(cast(GtkIconView*)this._cPtr, rowSpacing);
   }
@@ -1279,7 +1286,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         mode = The selection mode
   */
-  void setSelectionMode(gtk.types.SelectionMode mode)
+  void setSelectionMode(gtk.types.SelectionMode mode) nothrow
   {
     gtk_icon_view_set_selection_mode(cast(GtkIconView*)this._cPtr, mode);
   }
@@ -1292,7 +1299,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         spacing = the spacing
   */
-  void setSpacing(int spacing)
+  void setSpacing(int spacing) nothrow
   {
     gtk_icon_view_set_spacing(cast(GtkIconView*)this._cPtr, spacing);
   }
@@ -1304,7 +1311,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         column = A column in the currently used model, or -1 to display no text
   */
-  void setTextColumn(int column)
+  void setTextColumn(int column) nothrow
   {
     gtk_icon_view_set_text_column(cast(GtkIconView*)this._cPtr, column);
   }
@@ -1320,7 +1327,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         path = a #GtkTreePath
         cell = a #GtkCellRenderer or null
   */
-  void setTooltipCell(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path, gtk.cell_renderer.CellRenderer cell = null)
+  void setTooltipCell(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path, gtk.cell_renderer.CellRenderer cell = null) nothrow
   {
     gtk_icon_view_set_tooltip_cell(cast(GtkIconView*)this._cPtr, tooltip ? cast(GtkTooltip*)tooltip._cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null);
   }
@@ -1340,7 +1347,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         column = an integer, which is a valid column number for icon_view’s model
   */
-  void setTooltipColumn(int column)
+  void setTooltipColumn(int column) nothrow
   {
     gtk_icon_view_set_tooltip_column(cast(GtkIconView*)this._cPtr, column);
   }
@@ -1354,7 +1361,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         tooltip = a #GtkTooltip
         path = a #GtkTreePath
   */
-  void setTooltipItem(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path)
+  void setTooltipItem(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path) nothrow
   {
     gtk_icon_view_set_tooltip_item(cast(GtkIconView*)this._cPtr, tooltip ? cast(GtkTooltip*)tooltip._cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
   }
@@ -1362,7 +1369,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   /**
       Unselects all the icons.
   */
-  void unselectAll()
+  void unselectAll() nothrow
   {
     gtk_icon_view_unselect_all(cast(GtkIconView*)this._cPtr);
   }
@@ -1373,7 +1380,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         path = The #GtkTreePath to be unselected.
   */
-  void unselectPath(gtk.tree_path.TreePath path)
+  void unselectPath(gtk.tree_path.TreePath path) nothrow
   {
     gtk_icon_view_unselect_path(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
   }
@@ -1382,7 +1389,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Undoes the effect of [gtk.icon_view.IconView.enableModelDragDest]. Calling this
       method sets #GtkIconView:reorderable to false.
   */
-  void unsetModelDragDest()
+  void unsetModelDragDest() nothrow
   {
     gtk_icon_view_unset_model_drag_dest(cast(GtkIconView*)this._cPtr);
   }
@@ -1391,7 +1398,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Undoes the effect of [gtk.icon_view.IconView.enableModelDragSource]. Calling this
       method sets #GtkIconView:reorderable to false.
   */
-  void unsetModelDragSource()
+  void unsetModelDragSource() nothrow
   {
     gtk_icon_view_unset_model_drag_source(cast(GtkIconView*)this._cPtr);
   }
@@ -1420,22 +1427,30 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivateCursorItem(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivateCursorItem(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.icon_view.IconView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.icon_view.IconView.activateCursorItem");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1467,14 +1482,14 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectItemActivated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectItemActivated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.tree_path.TreePath)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.icon_view.IconView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1486,7 +1501,14 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.icon_view.IconView.itemActivated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1526,7 +1548,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.MovementStep)))
@@ -1534,11 +1556,12 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.icon_view.IconView)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1549,7 +1572,14 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.icon_view.IconView.moveCursor");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1580,13 +1610,13 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectAll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.icon_view.IconView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1595,7 +1625,14 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.icon_view.IconView.selectAll");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1625,13 +1662,13 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectCursorItem(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectCursorItem(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.icon_view.IconView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1640,7 +1677,14 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.icon_view.IconView.selectCursorItem");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1663,13 +1707,13 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.icon_view.IconView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1678,7 +1722,14 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.icon_view.IconView.selectionChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1709,13 +1760,13 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectToggleCursorItem(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToggleCursorItem(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.icon_view.IconView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1724,7 +1775,14 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.icon_view.IconView.toggleCursorItem");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1753,13 +1811,13 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.icon_view.IconView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1768,7 +1826,14 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.icon_view.IconView.unselectAll");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1790,7 +1855,7 @@ class IconViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.c
           will be emitted after a single click.
       Returns: Builder instance for fluent chaining
   */
-  T activateOnSingleClick(bool propval)
+  T activateOnSingleClick(bool propval) nothrow
   {
     return setProperty("activate-on-single-click", propval);
   }
@@ -1804,7 +1869,7 @@ class IconViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.c
           a #GtkCellAreaBox will be used.
       Returns: Builder instance for fluent chaining
   */
-  T cellArea(gtk.cell_area.CellArea propval)
+  T cellArea(gtk.cell_area.CellArea propval) nothrow
   {
     return setProperty("cell-area", propval);
   }
@@ -1816,7 +1881,7 @@ class IconViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.c
           the columns of the icon view.
       Returns: Builder instance for fluent chaining
   */
-  T columnSpacing(int propval)
+  T columnSpacing(int propval) nothrow
   {
     return setProperty("column-spacing", propval);
   }
@@ -1829,7 +1894,7 @@ class IconViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.c
           be chosen automatically to fill the available area.
       Returns: Builder instance for fluent chaining
   */
-  T columns(int propval)
+  T columns(int propval) nothrow
   {
     return setProperty("columns", propval);
   }
@@ -1841,7 +1906,7 @@ class IconViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.c
           the text) of the item are positioned relative to each other.
       Returns: Builder instance for fluent chaining
   */
-  T itemOrientation(gtk.types.Orientation propval)
+  T itemOrientation(gtk.types.Orientation propval) nothrow
   {
     return setProperty("item-orientation", propval);
   }
@@ -1853,7 +1918,7 @@ class IconViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.c
           of the icon view's item.
       Returns: Builder instance for fluent chaining
   */
-  T itemPadding(int propval)
+  T itemPadding(int propval) nothrow
   {
     return setProperty("item-padding", propval);
   }
@@ -1866,7 +1931,7 @@ class IconViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.c
           suitable item size.
       Returns: Builder instance for fluent chaining
   */
-  T itemWidth(int propval)
+  T itemWidth(int propval) nothrow
   {
     return setProperty("item-width", propval);
   }
@@ -1878,7 +1943,7 @@ class IconViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.c
           at the edges of the icon view.
       Returns: Builder instance for fluent chaining
   */
-  override T margin(int propval)
+  override T margin(int propval) nothrow
   {
     return setProperty("margin", propval);
   }
@@ -1893,13 +1958,13 @@ class IconViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.c
           If both are set to -1, no texts are displayed.
       Returns: Builder instance for fluent chaining
   */
-  T markupColumn(int propval)
+  T markupColumn(int propval) nothrow
   {
     return setProperty("markup-column", propval);
   }
 
   /** */
-  T model(gtk.tree_model.TreeModel propval)
+  T model(gtk.tree_model.TreeModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -1913,7 +1978,7 @@ class IconViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.c
           display of pixbufs.
       Returns: Builder instance for fluent chaining
   */
-  T pixbufColumn(int propval)
+  T pixbufColumn(int propval) nothrow
   {
     return setProperty("pixbuf-column", propval);
   }
@@ -1925,7 +1990,7 @@ class IconViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.c
           by DND.
       Returns: Builder instance for fluent chaining
   */
-  T reorderable(bool propval)
+  T reorderable(bool propval) nothrow
   {
     return setProperty("reorderable", propval);
   }
@@ -1937,7 +2002,7 @@ class IconViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.c
           the rows of the icon view.
       Returns: Builder instance for fluent chaining
   */
-  T rowSpacing(int propval)
+  T rowSpacing(int propval) nothrow
   {
     return setProperty("row-spacing", propval);
   }
@@ -1950,7 +2015,7 @@ class IconViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.c
           is enabled, for the other modes, only keyboard selection is possible.
       Returns: Builder instance for fluent chaining
   */
-  T selectionMode(gtk.types.SelectionMode propval)
+  T selectionMode(gtk.types.SelectionMode propval) nothrow
   {
     return setProperty("selection-mode", propval);
   }
@@ -1962,7 +2027,7 @@ class IconViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.c
           the cells (i.e. the icon and the text) of an item.
       Returns: Builder instance for fluent chaining
   */
-  T spacing(int propval)
+  T spacing(int propval) nothrow
   {
     return setProperty("spacing", propval);
   }
@@ -1976,13 +2041,13 @@ class IconViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.c
           property are both set to -1, no texts are displayed.
       Returns: Builder instance for fluent chaining
   */
-  T textColumn(int propval)
+  T textColumn(int propval) nothrow
   {
     return setProperty("text-column", propval);
   }
 
   /** */
-  T tooltipColumn(int propval)
+  T tooltipColumn(int propval) nothrow
   {
     return setProperty("tooltip-column", propval);
   }
@@ -1995,7 +2060,7 @@ final class IconViewGidBuilder : IconViewGidBuilderImpl!IconViewGidBuilder
       Create object from builder.
       Returns: New object
   */
-  IconView build()
+  IconView build() nothrow
   {
     return new IconView(cast(void*)createGObject(IconView._getGType), No.Take);
   }

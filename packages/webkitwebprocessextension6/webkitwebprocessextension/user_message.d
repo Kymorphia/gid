@@ -26,26 +26,26 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_user_message_get_type != &gidSymbolNotFound ? webkit_user_message_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UserMessage self()
+  override UserMessage self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
       Get builder for [webkitwebprocessextension.user_message.UserMessage]
       Returns: New builder object
   */
-  static UserMessageGidBuilder builder()
+  static UserMessageGidBuilder builder() nothrow
   {
     return new UserMessageGidBuilder;
   }
@@ -63,7 +63,7 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
       Get `fdList` property.
       Returns: The UNIX file descriptors of the user message.
   */
-  @property gio.unix_fdlist.UnixFDList fdList()
+  @property gio.unix_fdlist.UnixFDList fdList() nothrow
   {
     return getFdList();
   }
@@ -72,7 +72,7 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
       Get `name` property.
       Returns: The name of the user message.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return getName();
   }
@@ -83,7 +83,7 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
         if the message doesn't include parameters. Note that only complete types are
         allowed.
   */
-  @property glib.variant.Variant parameters()
+  @property glib.variant.Variant parameters() nothrow
   {
     return getParameters();
   }
@@ -96,7 +96,7 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
         parameters = the message parameters as a #GVariant, or null
       Returns: the newly created #WebKitUserMessage object.
   */
-  this(string name, glib.variant.Variant parameters = null)
+  this(string name, glib.variant.Variant parameters = null) nothrow
   {
     WebKitUserMessage* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -113,7 +113,7 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
         fdList = the message file descriptors
       Returns: the newly created #WebKitUserMessage object.
   */
-  static webkitwebprocessextension.user_message.UserMessage newWithFdList(string name, glib.variant.Variant parameters = null, gio.unix_fdlist.UnixFDList fdList = null)
+  static webkitwebprocessextension.user_message.UserMessage newWithFdList(string name, glib.variant.Variant parameters = null, gio.unix_fdlist.UnixFDList fdList = null) nothrow
   {
     WebKitUserMessage* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -126,7 +126,7 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
       Get the message list of file descritpor.
       Returns: the message list of file descriptors
   */
-  gio.unix_fdlist.UnixFDList getFdList()
+  gio.unix_fdlist.UnixFDList getFdList() nothrow
   {
     GUnixFDList* _cretval;
     _cretval = webkit_user_message_get_fd_list(cast(WebKitUserMessage*)this._cPtr);
@@ -138,7 +138,7 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
       Get the message name.
       Returns: the message name
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_user_message_get_name(cast(WebKitUserMessage*)this._cPtr);
@@ -150,7 +150,7 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
       Get the message parameters.
       Returns: the message parameters
   */
-  glib.variant.Variant getParameters()
+  glib.variant.Variant getParameters() nothrow
   {
     GVariant* _cretval;
     _cretval = webkit_user_message_get_parameters(cast(WebKitUserMessage*)this._cPtr);
@@ -168,7 +168,7 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
       Params:
         reply = a #WebKitUserMessage to send as reply
   */
-  void sendReply(webkitwebprocessextension.user_message.UserMessage reply)
+  void sendReply(webkitwebprocessextension.user_message.UserMessage reply) nothrow
   {
     webkit_user_message_send_reply(cast(WebKitUserMessage*)this._cPtr, reply ? cast(WebKitUserMessage*)reply._cPtr(No.Dup) : null);
   }
@@ -184,7 +184,7 @@ class UserMessageGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedG
         propval = The UNIX file descriptors of the user message.
       Returns: Builder instance for fluent chaining
   */
-  T fdList(gio.unix_fdlist.UnixFDList propval)
+  T fdList(gio.unix_fdlist.UnixFDList propval) nothrow
   {
     return setProperty("fd-list", propval);
   }
@@ -195,7 +195,7 @@ class UserMessageGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedG
         propval = The name of the user message.
       Returns: Builder instance for fluent chaining
   */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -208,7 +208,7 @@ class UserMessageGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedG
           allowed.
       Returns: Builder instance for fluent chaining
   */
-  T parameters(glib.variant.Variant propval)
+  T parameters(glib.variant.Variant propval) nothrow
   {
     return setProperty("parameters", propval);
   }
@@ -221,7 +221,7 @@ final class UserMessageGidBuilder : UserMessageGidBuilderImpl!UserMessageGidBuil
       Create object from builder.
       Returns: New object
   */
-  UserMessage build()
+  UserMessage build() nothrow
   {
     return new UserMessage(cast(void*)createGObject(UserMessage._getGType), No.Take);
   }

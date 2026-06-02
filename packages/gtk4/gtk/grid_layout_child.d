@@ -16,26 +16,26 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_grid_layout_child_get_type != &gidSymbolNotFound ? gtk_grid_layout_child_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GridLayoutChild self()
+  override GridLayoutChild self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
       Get builder for [gtk.grid_layout_child.GridLayoutChild]
       Returns: New builder object
   */
-  static GridLayoutChildGidBuilder builder()
+  static GridLayoutChildGidBuilder builder() nothrow
   {
     return new GridLayoutChildGidBuilder;
   }
@@ -53,7 +53,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
       Get `column` property.
       Returns: The column to place the child in.
   */
-  @property int column()
+  @property int column() nothrow
   {
     return getColumn();
   }
@@ -63,7 +63,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
       Params:
         propval = The column to place the child in.
   */
-  @property void column(int propval)
+  @property void column(int propval) nothrow
   {
     setColumn(propval);
   }
@@ -72,7 +72,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
       Get `columnSpan` property.
       Returns: The number of columns the child spans to.
   */
-  @property int columnSpan()
+  @property int columnSpan() nothrow
   {
     return getColumnSpan();
   }
@@ -82,7 +82,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
       Params:
         propval = The number of columns the child spans to.
   */
-  @property void columnSpan(int propval)
+  @property void columnSpan(int propval) nothrow
   {
     setColumnSpan(propval);
   }
@@ -91,7 +91,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
       Get `row` property.
       Returns: The row to place the child in.
   */
-  @property int row()
+  @property int row() nothrow
   {
     return getRow();
   }
@@ -101,7 +101,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
       Params:
         propval = The row to place the child in.
   */
-  @property void row(int propval)
+  @property void row(int propval) nothrow
   {
     setRow(propval);
   }
@@ -110,7 +110,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
       Get `rowSpan` property.
       Returns: The number of rows the child spans to.
   */
-  @property int rowSpan()
+  @property int rowSpan() nothrow
   {
     return getRowSpan();
   }
@@ -120,7 +120,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
       Params:
         propval = The number of rows the child spans to.
   */
-  @property void rowSpan(int propval)
+  @property void rowSpan(int propval) nothrow
   {
     setRowSpan(propval);
   }
@@ -129,7 +129,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
       Retrieves the column number to which child attaches its left side.
       Returns: the column number
   */
-  int getColumn()
+  int getColumn() nothrow
   {
     int _retval;
     _retval = gtk_grid_layout_child_get_column(cast(GtkGridLayoutChild*)this._cPtr);
@@ -140,7 +140,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
       Retrieves the number of columns that child spans to.
       Returns: the number of columns
   */
-  int getColumnSpan()
+  int getColumnSpan() nothrow
   {
     int _retval;
     _retval = gtk_grid_layout_child_get_column_span(cast(GtkGridLayoutChild*)this._cPtr);
@@ -151,7 +151,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
       Retrieves the row number to which child attaches its top side.
       Returns: the row number
   */
-  int getRow()
+  int getRow() nothrow
   {
     int _retval;
     _retval = gtk_grid_layout_child_get_row(cast(GtkGridLayoutChild*)this._cPtr);
@@ -162,7 +162,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
       Retrieves the number of rows that child spans to.
       Returns: the number of row
   */
-  int getRowSpan()
+  int getRowSpan() nothrow
   {
     int _retval;
     _retval = gtk_grid_layout_child_get_row_span(cast(GtkGridLayoutChild*)this._cPtr);
@@ -175,7 +175,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
       Params:
         column = the attach point for child
   */
-  void setColumn(int column)
+  void setColumn(int column) nothrow
   {
     gtk_grid_layout_child_set_column(cast(GtkGridLayoutChild*)this._cPtr, column);
   }
@@ -186,7 +186,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
       Params:
         span = the span of child
   */
-  void setColumnSpan(int span)
+  void setColumnSpan(int span) nothrow
   {
     gtk_grid_layout_child_set_column_span(cast(GtkGridLayoutChild*)this._cPtr, span);
   }
@@ -197,7 +197,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
       Params:
         row = the row for child
   */
-  void setRow(int row)
+  void setRow(int row) nothrow
   {
     gtk_grid_layout_child_set_row(cast(GtkGridLayoutChild*)this._cPtr, row);
   }
@@ -208,7 +208,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
       Params:
         span = the span of child
   */
-  void setRowSpan(int span)
+  void setRowSpan(int span) nothrow
   {
     gtk_grid_layout_child_set_row_span(cast(GtkGridLayoutChild*)this._cPtr, span);
   }
@@ -224,7 +224,7 @@ class GridLayoutChildGidBuilderImpl(T) : gtk.layout_child.LayoutChildGidBuilderI
         propval = The column to place the child in.
       Returns: Builder instance for fluent chaining
   */
-  T column(int propval)
+  T column(int propval) nothrow
   {
     return setProperty("column", propval);
   }
@@ -235,7 +235,7 @@ class GridLayoutChildGidBuilderImpl(T) : gtk.layout_child.LayoutChildGidBuilderI
         propval = The number of columns the child spans to.
       Returns: Builder instance for fluent chaining
   */
-  T columnSpan(int propval)
+  T columnSpan(int propval) nothrow
   {
     return setProperty("column-span", propval);
   }
@@ -246,7 +246,7 @@ class GridLayoutChildGidBuilderImpl(T) : gtk.layout_child.LayoutChildGidBuilderI
         propval = The row to place the child in.
       Returns: Builder instance for fluent chaining
   */
-  T row(int propval)
+  T row(int propval) nothrow
   {
     return setProperty("row", propval);
   }
@@ -257,7 +257,7 @@ class GridLayoutChildGidBuilderImpl(T) : gtk.layout_child.LayoutChildGidBuilderI
         propval = The number of rows the child spans to.
       Returns: Builder instance for fluent chaining
   */
-  T rowSpan(int propval)
+  T rowSpan(int propval) nothrow
   {
     return setProperty("row-span", propval);
   }
@@ -270,7 +270,7 @@ final class GridLayoutChildGidBuilder : GridLayoutChildGidBuilderImpl!GridLayout
       Create object from builder.
       Returns: New object
   */
-  GridLayoutChild build()
+  GridLayoutChild build() nothrow
   {
     return new GridLayoutChild(cast(void*)createGObject(GridLayoutChild._getGType), No.Take);
   }

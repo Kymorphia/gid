@@ -144,26 +144,26 @@ class Path : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())json_path_get_type != &gidSymbolNotFound ? json_path_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Path self()
+  override Path self() nothrow
   {
     return this;
   }
@@ -172,7 +172,7 @@ class Path : gobject.object.ObjectWrap
       Get builder for [json.path.Path]
       Returns: New builder object
   */
-  static PathGidBuilder builder()
+  static PathGidBuilder builder() nothrow
   {
     return new PathGidBuilder;
   }
@@ -184,7 +184,7 @@ class Path : gobject.object.ObjectWrap
       [json.path.Path.compile] and [json.path.Path.match].
       Returns: the newly created path
   */
-  this()
+  this() nothrow
   {
     JsonPath* _cretval;
     _cretval = json_path_new();
@@ -252,7 +252,7 @@ class Path : gobject.object.ObjectWrap
       Returns: a newly-created node of type
           [json.types.NodeType.Array] containing the array of matching nodes
   */
-  json.node.Node match(json.node.Node root)
+  json.node.Node match(json.node.Node root) nothrow
   {
     JsonNode* _cretval;
     _cretval = json_path_match(cast(JsonPath*)this._cPtr, root ? cast(JsonNode*)root._cPtr(No.Dup) : null);
@@ -273,7 +273,7 @@ final class PathGidBuilder : PathGidBuilderImpl!PathGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Path build()
+  Path build() nothrow
   {
     return new Path(cast(void*)createGObject(Path._getGType), Yes.Take);
   }

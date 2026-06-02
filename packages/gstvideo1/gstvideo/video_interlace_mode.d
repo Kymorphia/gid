@@ -20,7 +20,7 @@ struct VideoInterlaceMode
            #GST_VIDEO_INTERLACE_MODE_PROGRESSIVE when mode is not a valid
            string representation for a #GstVideoInterlaceMode.
   */
-  static gstvideo.types.VideoInterlaceMode fromString(string mode)
+  static gstvideo.types.VideoInterlaceMode fromString(string mode) nothrow
   {
     GstVideoInterlaceMode _cretval;
     const(char)* _mode = mode.toCString(No.Alloc);
@@ -36,7 +36,7 @@ struct VideoInterlaceMode
         mode = a #GstVideoInterlaceMode
       Returns: mode as a string.
   */
-  static string toString_(gstvideo.types.VideoInterlaceMode mode)
+  static string toString_(gstvideo.types.VideoInterlaceMode mode) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_video_interlace_mode_to_string(mode);

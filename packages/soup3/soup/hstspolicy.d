@@ -33,32 +33,32 @@ class HSTSPolicy : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_hsts_policy_get_type != &gidSymbolNotFound ? soup_hsts_policy_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HSTSPolicy self()
+  override HSTSPolicy self() nothrow
   {
     return this;
   }
@@ -82,7 +82,7 @@ class HSTSPolicy : gobject.boxed.Boxed
         includeSubdomains = true if the policy applies on subdomains
       Returns: a new #SoupHSTSPolicy.
   */
-  this(string domain, gulong maxAge, bool includeSubdomains)
+  this(string domain, gulong maxAge, bool includeSubdomains) nothrow
   {
     SoupHSTSPolicy* _cretval;
     const(char)* _domain = domain.toCString(No.Alloc);
@@ -99,7 +99,7 @@ class HSTSPolicy : gobject.boxed.Boxed
       Returns: a new #SoupHSTSPolicy, or null if no valid
           "Strict-Transport-Security" response header was found.
   */
-  static soup.hstspolicy.HSTSPolicy newFromResponse(soup.message.Message msg)
+  static soup.hstspolicy.HSTSPolicy newFromResponse(soup.message.Message msg) nothrow
   {
     SoupHSTSPolicy* _cretval;
     _cretval = soup_hsts_policy_new_from_response(msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null);
@@ -120,7 +120,7 @@ class HSTSPolicy : gobject.boxed.Boxed
         includeSubdomains = true if the policy applies on subdomains
       Returns: a new #SoupHSTSPolicy.
   */
-  static soup.hstspolicy.HSTSPolicy newFull(string domain, gulong maxAge, glib.date_time.DateTime expires, bool includeSubdomains)
+  static soup.hstspolicy.HSTSPolicy newFull(string domain, gulong maxAge, glib.date_time.DateTime expires, bool includeSubdomains) nothrow
   {
     SoupHSTSPolicy* _cretval;
     const(char)* _domain = domain.toCString(No.Alloc);
@@ -149,7 +149,7 @@ class HSTSPolicy : gobject.boxed.Boxed
         includeSubdomains = true if the policy applies on sub domains
       Returns: a new #SoupHSTSPolicy.
   */
-  static soup.hstspolicy.HSTSPolicy newSessionPolicy(string domain, bool includeSubdomains)
+  static soup.hstspolicy.HSTSPolicy newSessionPolicy(string domain, bool includeSubdomains) nothrow
   {
     SoupHSTSPolicy* _cretval;
     const(char)* _domain = domain.toCString(No.Alloc);
@@ -162,7 +162,7 @@ class HSTSPolicy : gobject.boxed.Boxed
       Copies policy.
       Returns: a copy of policy
   */
-  soup.hstspolicy.HSTSPolicy copy()
+  soup.hstspolicy.HSTSPolicy copy() nothrow
   {
     SoupHSTSPolicy* _cretval;
     _cretval = soup_hsts_policy_copy(cast(SoupHSTSPolicy*)this._cPtr);
@@ -177,7 +177,7 @@ class HSTSPolicy : gobject.boxed.Boxed
         policy2 = a #SoupHSTSPolicy
       Returns: whether the policies are equal.
   */
-  bool equal(soup.hstspolicy.HSTSPolicy policy2)
+  bool equal(soup.hstspolicy.HSTSPolicy policy2) nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_hsts_policy_equal(cast(SoupHSTSPolicy*)this._cPtr, policy2 ? cast(SoupHSTSPolicy*)policy2._cPtr(No.Dup) : null);
@@ -188,7 +188,7 @@ class HSTSPolicy : gobject.boxed.Boxed
       Gets policy's domain.
       Returns: policy's domain.
   */
-  string getDomain()
+  string getDomain() nothrow
   {
     const(char)* _cretval;
     _cretval = soup_hsts_policy_get_domain(cast(SoupHSTSPolicy*)this._cPtr);
@@ -200,7 +200,7 @@ class HSTSPolicy : gobject.boxed.Boxed
       Returns the expiration date for policy.
       Returns: A #GDateTime or null if unset
   */
-  glib.date_time.DateTime getExpires()
+  glib.date_time.DateTime getExpires() nothrow
   {
     GDateTime* _cretval;
     _cretval = soup_hsts_policy_get_expires(cast(SoupHSTSPolicy*)this._cPtr);
@@ -212,7 +212,7 @@ class HSTSPolicy : gobject.boxed.Boxed
       Returns the max age for policy.
       Returns: Max age in seconds
   */
-  gulong getMaxAge()
+  gulong getMaxAge() nothrow
   {
     gulong _retval;
     _retval = soup_hsts_policy_get_max_age(cast(SoupHSTSPolicy*)this._cPtr);
@@ -223,7 +223,7 @@ class HSTSPolicy : gobject.boxed.Boxed
       Gets whether policy include its subdomains.
       Returns: true if policy includes subdomains, false otherwise.
   */
-  bool includesSubdomains()
+  bool includesSubdomains() nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_hsts_policy_includes_subdomains(cast(SoupHSTSPolicy*)this._cPtr);
@@ -236,7 +236,7 @@ class HSTSPolicy : gobject.boxed.Boxed
       Permanent policies never expire.
       Returns: true if policy is expired, false otherwise.
   */
-  bool isExpired()
+  bool isExpired() nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_hsts_policy_is_expired(cast(SoupHSTSPolicy*)this._cPtr);
@@ -249,7 +249,7 @@ class HSTSPolicy : gobject.boxed.Boxed
       See [soup.hstspolicy.HSTSPolicy.newSessionPolicy] for details.
       Returns: true if policy is permanent, false otherwise
   */
-  bool isSessionPolicy()
+  bool isSessionPolicy() nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_hsts_policy_is_session_policy(cast(SoupHSTSPolicy*)this._cPtr);

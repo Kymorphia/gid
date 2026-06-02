@@ -40,26 +40,26 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_object_manager_server_get_type != &gidSymbolNotFound ? g_dbus_object_manager_server_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DBusObjectManagerServer self()
+  override DBusObjectManagerServer self() nothrow
   {
     return this;
   }
@@ -68,7 +68,7 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
       Get builder for [gio.dbus_object_manager_server.DBusObjectManagerServer]
       Returns: New builder object
   */
-  static DBusObjectManagerServerGidBuilder builder()
+  static DBusObjectManagerServerGidBuilder builder() nothrow
   {
     return new DBusObjectManagerServerGidBuilder;
   }
@@ -77,7 +77,7 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
       Get `connection` property.
       Returns: The #GDBusConnection to export objects on.
   */
-  @property gio.dbus_connection.DBusConnection connection()
+  @property gio.dbus_connection.DBusConnection connection() nothrow
   {
     return getConnection();
   }
@@ -87,7 +87,7 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
       Params:
         propval = The #GDBusConnection to export objects on.
   */
-  @property void connection(gio.dbus_connection.DBusConnection propval)
+  @property void connection(gio.dbus_connection.DBusConnection propval) nothrow
   {
     setConnection(propval);
   }
@@ -96,7 +96,7 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
       Get `objectPath` property.
       Returns: The object path to register the manager object at.
   */
-  @property string objectPath()
+  @property string objectPath() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("object-path");
   }
@@ -116,7 +116,7 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
         objectPath = The object path to export the manager object at.
       Returns: A #GDBusObjectManagerServer object. Free with [gobject.object.ObjectWrap.unref].
   */
-  this(string objectPath)
+  this(string objectPath) nothrow
   {
     GDBusObjectManagerServer* _cretval;
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
@@ -139,7 +139,7 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
       Params:
         object = A #GDBusObjectSkeleton.
   */
-  void export_(gio.dbus_object_skeleton.DBusObjectSkeleton object)
+  void export_(gio.dbus_object_skeleton.DBusObjectSkeleton object) nothrow
   {
     g_dbus_object_manager_server_export(cast(GDBusObjectManagerServer*)this._cPtr, object ? cast(GDBusObjectSkeleton*)object._cPtr(No.Dup) : null);
   }
@@ -153,7 +153,7 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
       Params:
         object = An object.
   */
-  void exportUniquely(gio.dbus_object_skeleton.DBusObjectSkeleton object)
+  void exportUniquely(gio.dbus_object_skeleton.DBusObjectSkeleton object) nothrow
   {
     g_dbus_object_manager_server_export_uniquely(cast(GDBusObjectManagerServer*)this._cPtr, object ? cast(GDBusObjectSkeleton*)object._cPtr(No.Dup) : null);
   }
@@ -164,7 +164,7 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
           manager isn't exported on a connection. The returned object should
           be freed with [gobject.object.ObjectWrap.unref].
   */
-  gio.dbus_connection.DBusConnection getConnection()
+  gio.dbus_connection.DBusConnection getConnection() nothrow
   {
     GDBusConnection* _cretval;
     _cretval = g_dbus_object_manager_server_get_connection(cast(GDBusObjectManagerServer*)this._cPtr);
@@ -179,7 +179,7 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
         object = An object.
       Returns: true if object is exported
   */
-  bool isExported(gio.dbus_object_skeleton.DBusObjectSkeleton object)
+  bool isExported(gio.dbus_object_skeleton.DBusObjectSkeleton object) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_dbus_object_manager_server_is_exported(cast(GDBusObjectManagerServer*)this._cPtr, object ? cast(GDBusObjectSkeleton*)object._cPtr(No.Dup) : null);
@@ -193,7 +193,7 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
       Params:
         connection = A #GDBusConnection or null.
   */
-  void setConnection(gio.dbus_connection.DBusConnection connection = null)
+  void setConnection(gio.dbus_connection.DBusConnection connection = null) nothrow
   {
     g_dbus_object_manager_server_set_connection(cast(GDBusObjectManagerServer*)this._cPtr, connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null);
   }
@@ -209,7 +209,7 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
         objectPath = An object path.
       Returns: true if object at object_path was removed, false otherwise.
   */
-  bool unexport(string objectPath)
+  bool unexport(string objectPath) nothrow
   {
     bool _retval;
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
@@ -230,7 +230,7 @@ class DBusObjectManagerServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBui
         propval = The #GDBusConnection to export objects on.
       Returns: Builder instance for fluent chaining
   */
-  T connection(gio.dbus_connection.DBusConnection propval)
+  T connection(gio.dbus_connection.DBusConnection propval) nothrow
   {
     return setProperty("connection", propval);
   }
@@ -241,7 +241,7 @@ class DBusObjectManagerServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBui
         propval = The object path to register the manager object at.
       Returns: Builder instance for fluent chaining
   */
-  T objectPath(string propval)
+  T objectPath(string propval) nothrow
   {
     return setProperty("object-path", propval);
   }
@@ -254,7 +254,7 @@ final class DBusObjectManagerServerGidBuilder : DBusObjectManagerServerGidBuilde
       Create object from builder.
       Returns: New object
   */
-  DBusObjectManagerServer build()
+  DBusObjectManagerServer build() nothrow
   {
     return new DBusObjectManagerServer(cast(void*)createGObject(DBusObjectManagerServer._getGType), Yes.Take);
   }

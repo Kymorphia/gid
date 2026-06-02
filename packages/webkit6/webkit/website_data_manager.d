@@ -37,26 +37,26 @@ class WebsiteDataManager : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_website_data_manager_get_type != &gidSymbolNotFound ? webkit_website_data_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WebsiteDataManager self()
+  override WebsiteDataManager self() nothrow
   {
     return this;
   }
@@ -65,7 +65,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
       Get builder for [webkit.website_data_manager.WebsiteDataManager]
       Returns: New builder object
   */
-  static WebsiteDataManagerGidBuilder builder()
+  static WebsiteDataManagerGidBuilder builder() nothrow
   {
     return new WebsiteDataManagerGidBuilder;
   }
@@ -74,7 +74,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
       Get `baseCacheDirectory` property.
       Returns: The base directory for caches. If null, a default location will be used.
   */
-  @property string baseCacheDirectory()
+  @property string baseCacheDirectory() nothrow
   {
     return getBaseCacheDirectory();
   }
@@ -83,7 +83,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
       Get `baseDataDirectory` property.
       Returns: The base directory for website data. If null, a default location will be used.
   */
-  @property string baseDataDirectory()
+  @property string baseDataDirectory() nothrow
   {
     return getBaseDataDirectory();
   }
@@ -106,14 +106,21 @@ class WebsiteDataManager : gobject.object.ObjectWrap
         cancellable = a #GCancellable or null to ignore
         callback = a #GAsyncReadyCallback to call when the request is satisfied
   */
-  void clear(webkit.types.WebsiteDataTypes types, glib.types.TimeSpan timespan, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void clear(webkit.types.WebsiteDataTypes types, glib.types.TimeSpan timespan, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -149,14 +156,21 @@ class WebsiteDataManager : gobject.object.ObjectWrap
         cancellable = a #GCancellable or null to ignore
         callback = a #GAsyncReadyCallback to call when the request is satisfied
   */
-  void fetch(webkit.types.WebsiteDataTypes types, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void fetch(webkit.types.WebsiteDataTypes types, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -188,7 +202,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
       Returns: the base directory for caches, or null if
            #WebKitWebsiteDataManager:base-cache-directory was not provided or manager is ephemeral.
   */
-  string getBaseCacheDirectory()
+  string getBaseCacheDirectory() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_website_data_manager_get_base_cache_directory(cast(WebKitWebsiteDataManager*)this._cPtr);
@@ -201,7 +215,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
       Returns: the base directory for website data, or null if
            #WebKitWebsiteDataManager:base-data-directory was not provided or manager is ephemeral.
   */
-  string getBaseDataDirectory()
+  string getBaseDataDirectory() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_website_data_manager_get_base_data_directory(cast(WebKitWebsiteDataManager*)this._cPtr);
@@ -213,7 +227,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
       Get the #WebKitFaviconDatabase of manager.
       Returns: a #WebKitFaviconDatabase, or null if website icons are disabled
   */
-  webkit.favicon_database.FaviconDatabase getFaviconDatabase()
+  webkit.favicon_database.FaviconDatabase getFaviconDatabase() nothrow
   {
     WebKitFaviconDatabase* _cretval;
     _cretval = webkit_website_data_manager_get_favicon_database(cast(WebKitWebsiteDataManager*)this._cPtr);
@@ -225,7 +239,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
       Get whether website icons are enabled.
       Returns: true if website icons are enabled, or false otherwise.
   */
-  bool getFaviconsEnabled()
+  bool getFaviconsEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_website_data_manager_get_favicons_enabled(cast(WebKitWebsiteDataManager*)this._cPtr);
@@ -245,14 +259,21 @@ class WebsiteDataManager : gobject.object.ObjectWrap
         cancellable = a #GCancellable or null to ignore
         callback = a #GAsyncReadyCallback to call when the request is satisfied
   */
-  void getItpSummary(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void getItpSummary(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -286,7 +307,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
       See #WebKitWebsiteDataManager:is-ephemeral for more details.
       Returns: true if manager is ephemeral or false otherwise.
   */
-  bool isEphemeral()
+  bool isEphemeral() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_website_data_manager_is_ephemeral(cast(WebKitWebsiteDataManager*)this._cPtr);
@@ -308,14 +329,21 @@ class WebsiteDataManager : gobject.object.ObjectWrap
         cancellable = a #GCancellable or null to ignore
         callback = a #GAsyncReadyCallback to call when the request is satisfied
   */
-  void remove(webkit.types.WebsiteDataTypes types, webkit.website_data.WebsiteData[] websiteData, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void remove(webkit.types.WebsiteDataTypes types, webkit.website_data.WebsiteData[] websiteData, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _websiteData = gListFromD!(webkit.website_data.WebsiteData)(websiteData);
@@ -352,7 +380,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
       Params:
         enabled = value to set
   */
-  void setFaviconsEnabled(bool enabled)
+  void setFaviconsEnabled(bool enabled) nothrow
   {
     webkit_website_data_manager_set_favicons_enabled(cast(WebKitWebsiteDataManager*)this._cPtr, enabled);
   }
@@ -368,7 +396,7 @@ class WebsiteDataManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
         propval = The base directory for caches. If null, a default location will be used.
       Returns: Builder instance for fluent chaining
   */
-  T baseCacheDirectory(string propval)
+  T baseCacheDirectory(string propval) nothrow
   {
     return setProperty("base-cache-directory", propval);
   }
@@ -379,7 +407,7 @@ class WebsiteDataManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
         propval = The base directory for website data. If null, a default location will be used.
       Returns: Builder instance for fluent chaining
   */
-  T baseDataDirectory(string propval)
+  T baseDataDirectory(string propval) nothrow
   {
     return setProperty("base-data-directory", propval);
   }
@@ -393,7 +421,7 @@ class WebsiteDataManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
           means WebKit will use the default quota (1 GiB).
       Returns: Builder instance for fluent chaining
   */
-  T originStorageRatio(double propval)
+  T originStorageRatio(double propval) nothrow
   {
     return setProperty("origin-storage-ratio", propval);
   }
@@ -407,7 +435,7 @@ class WebsiteDataManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
           means there's no limit for the total storage.
       Returns: Builder instance for fluent chaining
   */
-  T totalStorageRatio(double propval)
+  T totalStorageRatio(double propval) nothrow
   {
     return setProperty("total-storage-ratio", propval);
   }
@@ -420,7 +448,7 @@ final class WebsiteDataManagerGidBuilder : WebsiteDataManagerGidBuilderImpl!Webs
       Create object from builder.
       Returns: New object
   */
-  WebsiteDataManager build()
+  WebsiteDataManager build() nothrow
   {
     return new WebsiteDataManager(cast(void*)createGObject(WebsiteDataManager._getGType), No.Take);
   }

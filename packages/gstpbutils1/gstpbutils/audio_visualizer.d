@@ -23,26 +23,26 @@ class AudioVisualizer : gst.element.Element
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_visualizer_get_type != &gidSymbolNotFound ? gst_audio_visualizer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AudioVisualizer self()
+  override AudioVisualizer self() nothrow
   {
     return this;
   }
@@ -51,31 +51,31 @@ class AudioVisualizer : gst.element.Element
       Get builder for [gstpbutils.audio_visualizer.AudioVisualizer]
       Returns: New builder object
   */
-  static AudioVisualizerGidBuilder builder()
+  static AudioVisualizerGidBuilder builder() nothrow
   {
     return new AudioVisualizerGidBuilder;
   }
 
   /** */
-  @property uint shadeAmount()
+  @property uint shadeAmount() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("shade-amount");
   }
 
   /** */
-  @property void shadeAmount(uint propval)
+  @property void shadeAmount(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("shade-amount", propval);
   }
 
   /** */
-  @property gstpbutils.types.AudioVisualizerShader shader()
+  @property gstpbutils.types.AudioVisualizerShader shader() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gstpbutils.types.AudioVisualizerShader)("shader");
   }
 
   /** */
-  @property void shader(gstpbutils.types.AudioVisualizerShader propval)
+  @property void shader(gstpbutils.types.AudioVisualizerShader propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gstpbutils.types.AudioVisualizerShader)("shader", propval);
   }
@@ -86,13 +86,13 @@ class AudioVisualizerGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 {
 
   /** */
-  T shadeAmount(uint propval)
+  T shadeAmount(uint propval) nothrow
   {
     return setProperty("shade-amount", propval);
   }
 
   /** */
-  T shader(gstpbutils.types.AudioVisualizerShader propval)
+  T shader(gstpbutils.types.AudioVisualizerShader propval) nothrow
   {
     return setProperty("shader", propval);
   }
@@ -105,7 +105,7 @@ final class AudioVisualizerGidBuilder : AudioVisualizerGidBuilderImpl!AudioVisua
       Create object from builder.
       Returns: New object
   */
-  AudioVisualizer build()
+  AudioVisualizer build() nothrow
   {
     return new AudioVisualizer(cast(void*)createGObject(AudioVisualizer._getGType), No.Take);
   }

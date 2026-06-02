@@ -17,11 +17,8 @@ class AttrSize
   PangoAttrSize _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for pango.attr_size.AttrSize");
-
     _cInstance = *cast(PangoAttrSize*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class AttrSize
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class AttrSize
       Get `attr` field.
       Returns: the common portion of the attribute
   */
-  @property pango.attribute.Attribute attr()
+  @property pango.attribute.Attribute attr() nothrow
   {
     return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrSize*)this._cPtr).attr);
   }
@@ -48,7 +45,7 @@ class AttrSize
       Returns: size of font, in units of 1/[pango.types.SCALE] of a point (for
           [pango.types.AttrType.Size]) or of a device unit (for [pango.types.AttrType.AbsoluteSize])
   */
-  @property int size()
+  @property int size() nothrow
   {
     return (cast(PangoAttrSize*)this._cPtr).size;
   }
@@ -59,7 +56,7 @@ class AttrSize
         propval = size of font, in units of 1/[pango.types.SCALE] of a point (for
             [pango.types.AttrType.Size]) or of a device unit (for [pango.types.AttrType.AbsoluteSize])
   */
-  @property void size(int propval)
+  @property void size(int propval) nothrow
   {
     (cast(PangoAttrSize*)this._cPtr).size = propval;
   }
@@ -71,7 +68,7 @@ class AttrSize
           ([pango.types.AttrType.AbsoluteSize] was added in 1.8.1); and always will
           be false for [pango.types.AttrType.Size] and true for [pango.types.AttrType.AbsoluteSize].
   */
-  @property uint absolute()
+  @property uint absolute() nothrow
   {
     return (cast(PangoAttrSize*)this._cPtr).absolute;
   }
@@ -84,7 +81,7 @@ class AttrSize
             ([pango.types.AttrType.AbsoluteSize] was added in 1.8.1); and always will
             be false for [pango.types.AttrType.Size] and true for [pango.types.AttrType.AbsoluteSize].
   */
-  @property void absolute(uint propval)
+  @property void absolute(uint propval) nothrow
   {
     (cast(PangoAttrSize*)this._cPtr).absolute = propval;
   }
@@ -98,7 +95,7 @@ class AttrSize
           [pango.attribute.Attribute], which should be freed with
           [pango.attribute.Attribute.destroy]
   */
-  static pango.attribute.Attribute new_(int size)
+  static pango.attribute.Attribute new_(int size) nothrow
   {
     PangoAttribute* _cretval;
     _cretval = pango_attr_size_new(size);
@@ -115,7 +112,7 @@ class AttrSize
           [pango.attribute.Attribute], which should be freed with
           [pango.attribute.Attribute.destroy]
   */
-  static pango.attribute.Attribute newAbsolute(int size)
+  static pango.attribute.Attribute newAbsolute(int size) nothrow
   {
     PangoAttribute* _cretval;
     _cretval = pango_attr_size_new_absolute(size);

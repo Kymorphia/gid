@@ -28,11 +28,8 @@ class RTCPBuffer
   GstRTCPBuffer _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstrtp.rtcpbuffer.RTCPBuffer");
-
     _cInstance = *cast(GstRTCPBuffer*)ptr;
 
     if (take)
@@ -40,26 +37,26 @@ class RTCPBuffer
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
 
   /** */
-  @property gst.buffer.Buffer buffer()
+  @property gst.buffer.Buffer buffer() nothrow
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstRTCPBuffer*)this._cPtr).buffer);
   }
 
   /** */
-  @property void buffer(gst.buffer.Buffer propval)
+  @property void buffer(gst.buffer.Buffer propval) nothrow
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstRTCPBuffer*)this._cPtr).buffer);
     dToC(propval, cast(void*)&(cast(GstRTCPBuffer*)this._cPtr).buffer);
   }
 
   /** */
-  @property gst.map_info.MapInfo map()
+  @property gst.map_info.MapInfo map() nothrow
   {
     return new gst.map_info.MapInfo(cast(GstMapInfo*)&(cast(GstRTCPBuffer*)this._cPtr).map, No.Take);
   }
@@ -74,7 +71,7 @@ class RTCPBuffer
       Returns: true if the packet could be created. This function returns false
         if the max mtu is exceeded for the buffer.
   */
-  bool addPacket(gstrtp.types.RTCPType type, gstrtp.rtcppacket.RTCPPacket packet)
+  bool addPacket(gstrtp.types.RTCPType type, gstrtp.rtcppacket.RTCPPacket packet) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_buffer_add_packet(cast(GstRTCPBuffer*)this._cPtr, type, packet ? cast(GstRTCPPacket*)packet._cPtr : null);
@@ -89,7 +86,7 @@ class RTCPBuffer
         packet = a #GstRTCPPacket
       Returns: TRUE if the packet existed in rtcp.
   */
-  bool getFirstPacket(gstrtp.rtcppacket.RTCPPacket packet)
+  bool getFirstPacket(gstrtp.rtcppacket.RTCPPacket packet) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_buffer_get_first_packet(cast(GstRTCPBuffer*)this._cPtr, packet ? cast(GstRTCPPacket*)packet._cPtr : null);
@@ -100,7 +97,7 @@ class RTCPBuffer
       Get the number of RTCP packets in rtcp.
       Returns: the number of RTCP packets in rtcp.
   */
-  uint getPacketCount()
+  uint getPacketCount() nothrow
   {
     uint _retval;
     _retval = gst_rtcp_buffer_get_packet_count(cast(GstRTCPBuffer*)this._cPtr);
@@ -115,7 +112,7 @@ class RTCPBuffer
       added packets.
       Returns: 
   */
-  bool unmap()
+  bool unmap() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_buffer_unmap(cast(GstRTCPBuffer*)this._cPtr);
@@ -132,7 +129,7 @@ class RTCPBuffer
         rtcp = resulting #GstRTCPBuffer
       Returns: 
   */
-  static bool map(gst.buffer.Buffer buffer, gst.types.MapFlags flags, gstrtp.rtcpbuffer.RTCPBuffer rtcp)
+  static bool map(gst.buffer.Buffer buffer, gst.types.MapFlags flags, gstrtp.rtcpbuffer.RTCPBuffer rtcp) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_buffer_map(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags, rtcp ? cast(GstRTCPBuffer*)rtcp._cPtr : null);
@@ -147,7 +144,7 @@ class RTCPBuffer
         mtu = the maximum mtu size.
       Returns: A newly allocated buffer.
   */
-  static gst.buffer.Buffer new_(uint mtu)
+  static gst.buffer.Buffer new_(uint mtu) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_rtcp_buffer_new(mtu);
@@ -164,7 +161,7 @@ class RTCPBuffer
         data = data for the new buffer
       Returns: A newly allocated buffer with a copy of data and of size len.
   */
-  static gst.buffer.Buffer newCopyData(ubyte[] data)
+  static gst.buffer.Buffer newCopyData(ubyte[] data) nothrow
   {
     GstBuffer* _cretval;
     uint _len;
@@ -186,7 +183,7 @@ class RTCPBuffer
         data = data for the new buffer
       Returns: A newly allocated buffer with data and of size len.
   */
-  static gst.buffer.Buffer newTakeData(ubyte[] data)
+  static gst.buffer.Buffer newTakeData(ubyte[] data) nothrow
   {
     GstBuffer* _cretval;
     uint _len;
@@ -207,7 +204,7 @@ class RTCPBuffer
         buffer = the buffer to validate
       Returns: TRUE if buffer is a valid RTCP packet.
   */
-  static bool validate(gst.buffer.Buffer buffer)
+  static bool validate(gst.buffer.Buffer buffer) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_buffer_validate(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
@@ -224,7 +221,7 @@ class RTCPBuffer
         data = the data to validate
       Returns: TRUE if the data points to a valid RTCP packet.
   */
-  static bool validateData(ubyte[] data)
+  static bool validateData(ubyte[] data) nothrow
   {
     bool _retval;
     uint _len;
@@ -249,7 +246,7 @@ class RTCPBuffer
         data = the data to validate
       Returns: TRUE if the data points to a valid RTCP packet.
   */
-  static bool validateDataReduced(ubyte[] data)
+  static bool validateDataReduced(ubyte[] data) nothrow
   {
     bool _retval;
     uint _len;
@@ -269,7 +266,7 @@ class RTCPBuffer
         buffer = the buffer to validate
       Returns: TRUE if buffer is a valid RTCP packet.
   */
-  static bool validateReduced(gst.buffer.Buffer buffer)
+  static bool validateReduced(gst.buffer.Buffer buffer) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtcp_buffer_validate_reduced(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);

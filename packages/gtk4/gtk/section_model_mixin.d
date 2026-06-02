@@ -43,13 +43,13 @@ template SectionModelT()
         outEnd = the position of the first item not part of the section
             anymore.
   */
-  override void getSection(uint position, out uint outStart, out uint outEnd)
+  override void getSection(uint position, out uint outStart, out uint outEnd) nothrow
   {
     gtk_section_model_get_section(cast(GtkSectionModel*)this._cPtr, position, cast(uint*)&outStart, cast(uint*)&outEnd);
   }
 
   /** */
-  override void sectionsChanged(uint position, uint nItems)
+  override void sectionsChanged(uint position, uint nItems) nothrow
   {
     gtk_section_model_sections_changed(cast(GtkSectionModel*)this._cPtr, position, nItems);
   }
@@ -82,7 +82,7 @@ template SectionModelT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSectionsChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSectionsChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -90,7 +90,7 @@ template SectionModelT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.section_model.SectionModel)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -105,7 +105,14 @@ template SectionModelT()
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.section_model.SectionModel.sectionsChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

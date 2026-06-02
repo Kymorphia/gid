@@ -18,32 +18,32 @@ class Source : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_source_get_type != &gidSymbolNotFound ? g_source_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Source self()
+  override Source self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class Source : gobject.boxed.Boxed
         structSize = size of the #GSource structure to create.
       Returns: the newly-created #GSource.
   */
-  this(glib.types.SourceFuncs sourceFuncs, uint structSize)
+  this(glib.types.SourceFuncs sourceFuncs, uint structSize) nothrow
   {
     GSource* _cretval;
     _cretval = g_source_new(&sourceFuncs, structSize);
@@ -93,7 +93,7 @@ class Source : gobject.boxed.Boxed
       Params:
         childSource = a second #GSource that source should "poll"
   */
-  void addChildSource(glib.source.Source childSource)
+  void addChildSource(glib.source.Source childSource) nothrow
   {
     g_source_add_child_source(cast(GSource*)this._cPtr, childSource ? cast(GSource*)childSource._cPtr(No.Dup) : null);
   }
@@ -116,7 +116,7 @@ class Source : gobject.boxed.Boxed
         fd = a #GPollFD structure holding information about a file
                descriptor to watch.
   */
-  void addPoll(glib.types.PollFD fd)
+  void addPoll(glib.types.PollFD fd) nothrow
   {
     g_source_add_poll(cast(GSource*)this._cPtr, &fd);
   }
@@ -141,7 +141,7 @@ class Source : gobject.boxed.Boxed
         events = an event mask
       Returns: an opaque tag
   */
-  void* addUnixFd(int fd, glib.types.IOCondition events)
+  void* addUnixFd(int fd, glib.types.IOCondition events) nothrow
   {
     auto _retval = g_source_add_unix_fd(cast(GSource*)this._cPtr, fd, events);
     return _retval;
@@ -160,7 +160,7 @@ class Source : gobject.boxed.Boxed
       Returns: the ID (greater than 0) for the source within the
           #GMainContext.
   */
-  uint attach(glib.main_context.MainContext context = null)
+  uint attach(glib.main_context.MainContext context = null) nothrow
   {
     uint _retval;
     _retval = g_source_attach(cast(GSource*)this._cPtr, context ? cast(GMainContext*)context._cPtr(No.Dup) : null);
@@ -183,7 +183,7 @@ class Source : gobject.boxed.Boxed
       will effectively unset the callback similar to calling [glib.source.Source.setCallback].
       This can mean, that the data's #GDestroyNotify gets called right away.
   */
-  void destroy()
+  void destroy() nothrow
   {
     g_source_destroy(cast(GSource*)this._cPtr);
   }
@@ -193,7 +193,7 @@ class Source : gobject.boxed.Boxed
       see [glib.source.Source.setCanRecurse].
       Returns: whether recursion is allowed.
   */
-  bool getCanRecurse()
+  bool getCanRecurse() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_source_get_can_recurse(cast(GSource*)this._cPtr);
@@ -213,7 +213,7 @@ class Source : gobject.boxed.Boxed
                       source is associated, or null if the context has not
                       yet been added to a source.
   */
-  glib.main_context.MainContext getContext()
+  glib.main_context.MainContext getContext() nothrow
   {
     GMainContext* _cretval;
     _cretval = g_source_get_context(cast(GSource*)this._cPtr);
@@ -230,7 +230,7 @@ class Source : gobject.boxed.Boxed
   
       Deprecated: use [glib.source.Source.getTime] instead
   */
-  void getCurrentTime(glib.time_val.TimeVal timeval)
+  void getCurrentTime(glib.time_val.TimeVal timeval) nothrow
   {
     g_source_get_current_time(cast(GSource*)this._cPtr, cast(GTimeVal*)&timeval);
   }
@@ -247,7 +247,7 @@ class Source : gobject.boxed.Boxed
       is unique within the #GMainContext instance passed to [glib.source.Source.attach].
       Returns: the ID (greater than 0) for the source
   */
-  uint getId()
+  uint getId() nothrow
   {
     uint _retval;
     _retval = g_source_get_id(cast(GSource*)this._cPtr);
@@ -259,7 +259,7 @@ class Source : gobject.boxed.Boxed
       name may be #NULL if it has never been set with [glib.source.Source.setName].
       Returns: the name of the source
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_source_get_name(cast(GSource*)this._cPtr);
@@ -271,7 +271,7 @@ class Source : gobject.boxed.Boxed
       Gets the priority of a source.
       Returns: the priority of the source
   */
-  int getPriority()
+  int getPriority() nothrow
   {
     int _retval;
     _retval = g_source_get_priority(cast(GSource*)this._cPtr);
@@ -286,7 +286,7 @@ class Source : gobject.boxed.Boxed
       is an indication that the source will fire immediately.
       Returns: the monotonic ready time, -1 for "never"
   */
-  long getReadyTime()
+  long getReadyTime() nothrow
   {
     long _retval;
     _retval = g_source_get_ready_time(cast(GSource*)this._cPtr);
@@ -303,7 +303,7 @@ class Source : gobject.boxed.Boxed
       other reasonable alternative otherwise.  See [glib.global.getMonotonicTime].
       Returns: the monotonic time in microseconds
   */
-  long getTime()
+  long getTime() nothrow
   {
     long _retval;
     _retval = g_source_get_time(cast(GSource*)this._cPtr);
@@ -391,7 +391,7 @@ class Source : gobject.boxed.Boxed
       used for opportunistic checks from any thread.
       Returns: true if the source has been destroyed
   */
-  bool isDestroyed()
+  bool isDestroyed() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_source_is_destroyed(cast(GSource*)this._cPtr);
@@ -415,7 +415,7 @@ class Source : gobject.boxed.Boxed
         tag = the tag from [glib.source.Source.addUnixFd]
         newEvents = the new event mask to watch
   */
-  void modifyUnixFd(void* tag, glib.types.IOCondition newEvents)
+  void modifyUnixFd(void* tag, glib.types.IOCondition newEvents) nothrow
   {
     g_source_modify_unix_fd(cast(GSource*)this._cPtr, tag, newEvents);
   }
@@ -436,7 +436,7 @@ class Source : gobject.boxed.Boxed
         tag = the tag from [glib.source.Source.addUnixFd]
       Returns: the conditions reported on the fd
   */
-  glib.types.IOCondition queryUnixFd(void* tag)
+  glib.types.IOCondition queryUnixFd(void* tag) nothrow
   {
     GIOCondition _cretval;
     _cretval = g_source_query_unix_fd(cast(GSource*)this._cPtr, tag);
@@ -454,7 +454,7 @@ class Source : gobject.boxed.Boxed
         childSource = a #GSource previously passed to
               [glib.source.Source.addChildSource].
   */
-  void removeChildSource(glib.source.Source childSource)
+  void removeChildSource(glib.source.Source childSource) nothrow
   {
     g_source_remove_child_source(cast(GSource*)this._cPtr, childSource ? cast(GSource*)childSource._cPtr(No.Dup) : null);
   }
@@ -469,7 +469,7 @@ class Source : gobject.boxed.Boxed
       Params:
         fd = a #GPollFD structure previously passed to [glib.source.Source.addPoll].
   */
-  void removePoll(glib.types.PollFD fd)
+  void removePoll(glib.types.PollFD fd) nothrow
   {
     g_source_remove_poll(cast(GSource*)this._cPtr, &fd);
   }
@@ -489,7 +489,7 @@ class Source : gobject.boxed.Boxed
       Params:
         tag = the tag from [glib.source.Source.addUnixFd]
   */
-  void removeUnixFd(void* tag)
+  void removeUnixFd(void* tag) nothrow
   {
     g_source_remove_unix_fd(cast(GSource*)this._cPtr, tag);
   }
@@ -519,14 +519,21 @@ class Source : gobject.boxed.Boxed
       Params:
         func = a callback function
   */
-  void setCallback(glib.types.SourceFunc func)
+  void setCallback(glib.types.SourceFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(void* userData)
+    extern(C) gboolean _funcCallback(void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-      _dretval = (*_dlg)();
+      try
+      {
+        _dretval = (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.SourceFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -554,7 +561,7 @@ class Source : gobject.boxed.Boxed
         callbackFuncs = functions for reference counting callback_data
                            and getting the callback and data
   */
-  void setCallbackIndirect(void* callbackData, glib.types.SourceCallbackFuncs callbackFuncs)
+  void setCallbackIndirect(void* callbackData, glib.types.SourceCallbackFuncs callbackFuncs) nothrow
   {
     g_source_set_callback_indirect(cast(GSource*)this._cPtr, callbackData, &callbackFuncs);
   }
@@ -568,7 +575,7 @@ class Source : gobject.boxed.Boxed
       Params:
         canRecurse = whether recursion is allowed for this source
   */
-  void setCanRecurse(bool canRecurse)
+  void setCanRecurse(bool canRecurse) nothrow
   {
     g_source_set_can_recurse(cast(GSource*)this._cPtr, canRecurse);
   }
@@ -580,7 +587,7 @@ class Source : gobject.boxed.Boxed
       Params:
         funcs = the new #GSourceFuncs
   */
-  void setFuncs(glib.types.SourceFuncs funcs)
+  void setFuncs(glib.types.SourceFuncs funcs) nothrow
   {
     g_source_set_funcs(cast(GSource*)this._cPtr, &funcs);
   }
@@ -608,7 +615,7 @@ class Source : gobject.boxed.Boxed
       Params:
         name = debug name for the source
   */
-  void setName(string name)
+  void setName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     g_source_set_name(cast(GSource*)this._cPtr, _name);
@@ -627,7 +634,7 @@ class Source : gobject.boxed.Boxed
       Params:
         priority = the new priority.
   */
-  void setPriority(int priority)
+  void setPriority(int priority) nothrow
   {
     g_source_set_priority(cast(GSource*)this._cPtr, priority);
   }
@@ -660,7 +667,7 @@ class Source : gobject.boxed.Boxed
         readyTime = the monotonic time at which the source will be ready,
                        0 for "immediately", -1 for "never"
   */
-  void setReadyTime(long readyTime)
+  void setReadyTime(long readyTime) nothrow
   {
     g_source_set_ready_time(cast(GSource*)this._cPtr, readyTime);
   }
@@ -673,7 +680,7 @@ class Source : gobject.boxed.Boxed
       Params:
         name = debug name for the source
   */
-  void setStaticName(string name)
+  void setStaticName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     g_source_set_static_name(cast(GSource*)this._cPtr, _name);
@@ -704,7 +711,7 @@ class Source : gobject.boxed.Boxed
         tag = the ID of the source to remove.
       Returns: true if the source was found and removed.
   */
-  static bool remove(uint tag)
+  static bool remove(uint tag) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_source_remove(tag);
@@ -721,7 +728,7 @@ class Source : gobject.boxed.Boxed
         userData = the user data for the callback
       Returns: true if a source was found and removed.
   */
-  static bool removeByFuncsUserData(glib.types.SourceFuncs funcs, void* userData = null)
+  static bool removeByFuncsUserData(glib.types.SourceFuncs funcs, void* userData = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_source_remove_by_funcs_user_data(&funcs, userData);
@@ -737,7 +744,7 @@ class Source : gobject.boxed.Boxed
         userData = the user_data for the callback.
       Returns: true if a source was found and removed.
   */
-  static bool removeByUserData(void* userData = null)
+  static bool removeByUserData(void* userData = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_source_remove_by_user_data(userData);
@@ -766,7 +773,7 @@ class Source : gobject.boxed.Boxed
         tag = a #GSource ID
         name = debug name for the source
   */
-  static void setNameById(uint tag, string name)
+  static void setNameById(uint tag, string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     g_source_set_name_by_id(tag, _name);

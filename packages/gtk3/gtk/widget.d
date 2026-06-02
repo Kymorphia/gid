@@ -461,26 +461,26 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_widget_get_type != &gidSymbolNotFound ? gtk_widget_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Widget self()
+  override Widget self() nothrow
   {
     return this;
   }
@@ -489,49 +489,49 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Get builder for [gtk.widget.Widget]
       Returns: New builder object
   */
-  static WidgetGidBuilder builder()
+  static WidgetGidBuilder builder() nothrow
   {
     return new WidgetGidBuilder;
   }
 
   /** */
-  @property bool appPaintable()
+  @property bool appPaintable() nothrow
   {
     return getAppPaintable();
   }
 
   /** */
-  @property void appPaintable(bool propval)
+  @property void appPaintable(bool propval) nothrow
   {
     setAppPaintable(propval);
   }
 
   /** */
-  @property bool canDefault()
+  @property bool canDefault() nothrow
   {
     return getCanDefault();
   }
 
   /** */
-  @property void canDefault(bool propval)
+  @property void canDefault(bool propval) nothrow
   {
     setCanDefault(propval);
   }
 
   /** */
-  @property bool canFocus()
+  @property bool canFocus() nothrow
   {
     return getCanFocus();
   }
 
   /** */
-  @property void canFocus(bool propval)
+  @property void canFocus(bool propval) nothrow
   {
     setCanFocus(propval);
   }
 
   /** */
-  @property bool compositeChild()
+  @property bool compositeChild() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("composite-child");
   }
@@ -542,7 +542,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Widgets should not use this property.
   */
-  @property bool doubleBuffered()
+  @property bool doubleBuffered() nothrow
   {
     return getDoubleBuffered();
   }
@@ -554,19 +554,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Widgets should not use this property.
   */
-  @property void doubleBuffered(bool propval)
+  @property void doubleBuffered(bool propval) nothrow
   {
     setDoubleBuffered(propval);
   }
 
   /** */
-  @property gdk.types.EventMask events()
+  @property gdk.types.EventMask events() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.types.EventMask)("events");
   }
 
   /** */
-  @property void events(gdk.types.EventMask propval)
+  @property void events(gdk.types.EventMask propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.types.EventMask)("events", propval);
   }
@@ -575,7 +575,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Get `expand` property.
       Returns: Whether to expand in both directions. Setting this sets both #GtkWidget:hexpand and #GtkWidget:vexpand
   */
-  @property bool expand()
+  @property bool expand() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("expand");
   }
@@ -585,7 +585,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         propval = Whether to expand in both directions. Setting this sets both #GtkWidget:hexpand and #GtkWidget:vexpand
   */
-  @property void expand(bool propval)
+  @property void expand(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("expand", propval);
   }
@@ -599,7 +599,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         Before 3.20, several widgets (GtkButton, GtkFileChooserButton,
         GtkComboBox) implemented this property individually.
   */
-  @property bool focusOnClick()
+  @property bool focusOnClick() nothrow
   {
     return getFocusOnClick();
   }
@@ -614,7 +614,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           Before 3.20, several widgets (GtkButton, GtkFileChooserButton,
           GtkComboBox) implemented this property individually.
   */
-  @property void focusOnClick(bool propval)
+  @property void focusOnClick(bool propval) nothrow
   {
     setFocusOnClick(propval);
   }
@@ -623,7 +623,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Get `halign` property.
       Returns: How to distribute horizontal space if widget gets extra space, see #GtkAlign
   */
-  @property gtk.types.Align halign()
+  @property gtk.types.Align halign() nothrow
   {
     return getHalign();
   }
@@ -633,7 +633,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         propval = How to distribute horizontal space if widget gets extra space, see #GtkAlign
   */
-  @property void halign(gtk.types.Align propval)
+  @property void halign(gtk.types.Align propval) nothrow
   {
     setHalign(propval);
   }
@@ -650,7 +650,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         and motion-notify events.  This cannot and will not be undone when the
         property is set to false again.
   */
-  @property bool hasTooltip()
+  @property bool hasTooltip() nothrow
   {
     return getHasTooltip();
   }
@@ -668,19 +668,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           and motion-notify events.  This cannot and will not be undone when the
           property is set to false again.
   */
-  @property void hasTooltip(bool propval)
+  @property void hasTooltip(bool propval) nothrow
   {
     setHasTooltip(propval);
   }
 
   /** */
-  @property int heightRequest()
+  @property int heightRequest() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("height-request");
   }
 
   /** */
-  @property void heightRequest(int propval)
+  @property void heightRequest(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("height-request", propval);
   }
@@ -689,7 +689,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Get `hexpand` property.
       Returns: Whether to expand horizontally. See [gtk.widget.Widget.setHexpand].
   */
-  @property bool hexpand()
+  @property bool hexpand() nothrow
   {
     return getHexpand();
   }
@@ -699,7 +699,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         propval = Whether to expand horizontally. See [gtk.widget.Widget.setHexpand].
   */
-  @property void hexpand(bool propval)
+  @property void hexpand(bool propval) nothrow
   {
     setHexpand(propval);
   }
@@ -708,7 +708,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Get `hexpandSet` property.
       Returns: Whether to use the #GtkWidget:hexpand property. See [gtk.widget.Widget.getHexpandSet].
   */
-  @property bool hexpandSet()
+  @property bool hexpandSet() nothrow
   {
     return getHexpandSet();
   }
@@ -718,7 +718,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         propval = Whether to use the #GtkWidget:hexpand property. See [gtk.widget.Widget.getHexpandSet].
   */
-  @property void hexpandSet(bool propval)
+  @property void hexpandSet(bool propval) nothrow
   {
     setHexpandSet(propval);
   }
@@ -728,7 +728,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns: Sets all four sides' margin at once. If read, returns max
         margin on any side.
   */
-  @property int margin()
+  @property int margin() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("margin");
   }
@@ -739,7 +739,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         propval = Sets all four sides' margin at once. If read, returns max
           margin on any side.
   */
-  @property void margin(int propval)
+  @property void margin(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("margin", propval);
   }
@@ -752,7 +752,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         request, the margin will be added in addition to the size from
         [gtk.widget.Widget.setSizeRequest] for example.
   */
-  @property int marginBottom()
+  @property int marginBottom() nothrow
   {
     return getMarginBottom();
   }
@@ -766,7 +766,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           request, the margin will be added in addition to the size from
           [gtk.widget.Widget.setSizeRequest] for example.
   */
-  @property void marginBottom(int propval)
+  @property void marginBottom(int propval) nothrow
   {
     setMarginBottom(propval);
   }
@@ -780,7 +780,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         request, the margin will be added in addition to the size from
         [gtk.widget.Widget.setSizeRequest] for example.
   */
-  @property int marginEnd()
+  @property int marginEnd() nothrow
   {
     return getMarginEnd();
   }
@@ -795,7 +795,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           request, the margin will be added in addition to the size from
           [gtk.widget.Widget.setSizeRequest] for example.
   */
-  @property void marginEnd(int propval)
+  @property void marginEnd(int propval) nothrow
   {
     setMarginEnd(propval);
   }
@@ -810,7 +810,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use #GtkWidget:margin-start instead.
   */
-  @property int marginLeft()
+  @property int marginLeft() nothrow
   {
     return getMarginLeft();
   }
@@ -826,7 +826,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use #GtkWidget:margin-start instead.
   */
-  @property void marginLeft(int propval)
+  @property void marginLeft(int propval) nothrow
   {
     setMarginLeft(propval);
   }
@@ -841,7 +841,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use #GtkWidget:margin-end instead.
   */
-  @property int marginRight()
+  @property int marginRight() nothrow
   {
     return getMarginRight();
   }
@@ -857,7 +857,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use #GtkWidget:margin-end instead.
   */
-  @property void marginRight(int propval)
+  @property void marginRight(int propval) nothrow
   {
     setMarginRight(propval);
   }
@@ -871,7 +871,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         request, the margin will be added in addition to the size from
         [gtk.widget.Widget.setSizeRequest] for example.
   */
-  @property int marginStart()
+  @property int marginStart() nothrow
   {
     return getMarginStart();
   }
@@ -886,7 +886,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           request, the margin will be added in addition to the size from
           [gtk.widget.Widget.setSizeRequest] for example.
   */
-  @property void marginStart(int propval)
+  @property void marginStart(int propval) nothrow
   {
     setMarginStart(propval);
   }
@@ -899,7 +899,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         request, the margin will be added in addition to the size from
         [gtk.widget.Widget.setSizeRequest] for example.
   */
-  @property int marginTop()
+  @property int marginTop() nothrow
   {
     return getMarginTop();
   }
@@ -913,31 +913,31 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           request, the margin will be added in addition to the size from
           [gtk.widget.Widget.setSizeRequest] for example.
   */
-  @property void marginTop(int propval)
+  @property void marginTop(int propval) nothrow
   {
     setMarginTop(propval);
   }
 
   /** */
-  @property string name()
+  @property string name() nothrow
   {
     return getName();
   }
 
   /** */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     setName(propval);
   }
 
   /** */
-  @property bool noShowAll()
+  @property bool noShowAll() nothrow
   {
     return getNoShowAll();
   }
 
   /** */
-  @property void noShowAll(bool propval)
+  @property void noShowAll(bool propval) nothrow
   {
     setNoShowAll(propval);
   }
@@ -949,7 +949,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         
         Before 3.8 this was only available in GtkWindow
   */
-  @property double opacity()
+  @property double opacity() nothrow
   {
     return getOpacity();
   }
@@ -962,31 +962,31 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           
           Before 3.8 this was only available in GtkWindow
   */
-  @property void opacity(double propval)
+  @property void opacity(double propval) nothrow
   {
     setOpacity(propval);
   }
 
   /** */
-  @property gtk.container.Container parent()
+  @property gtk.container.Container parent() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.container.Container)("parent");
   }
 
   /** */
-  @property void parent(gtk.container.Container propval)
+  @property void parent(gtk.container.Container propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.container.Container)("parent", propval);
   }
 
   /** */
-  @property bool receivesDefault()
+  @property bool receivesDefault() nothrow
   {
     return getReceivesDefault();
   }
 
   /** */
-  @property void receivesDefault(bool propval)
+  @property void receivesDefault(bool propval) nothrow
   {
     setReceivesDefault(propval);
   }
@@ -996,19 +996,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns: The scale factor of the widget. See [gtk.widget.Widget.getScaleFactor] for
         more details about widget scaling.
   */
-  @property int scaleFactor()
+  @property int scaleFactor() nothrow
   {
     return getScaleFactor();
   }
 
   /** */
-  @property bool sensitive()
+  @property bool sensitive() nothrow
   {
     return getSensitive();
   }
 
   /** */
-  @property void sensitive(bool propval)
+  @property void sensitive(bool propval) nothrow
   {
     setSensitive(propval);
   }
@@ -1019,7 +1019,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use #GtkStyleContext instead
   */
-  @property gtk.style.Style style()
+  @property gtk.style.Style style() nothrow
   {
     return getStyle();
   }
@@ -1031,7 +1031,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use #GtkStyleContext instead
   */
-  @property void style(gtk.style.Style propval)
+  @property void style(gtk.style.Style propval) nothrow
   {
     setStyle(propval);
   }
@@ -1050,7 +1050,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         Note that if both #GtkWidget:tooltip-text and #GtkWidget:tooltip-markup
         are set, the last one wins.
   */
-  @property string tooltipMarkup()
+  @property string tooltipMarkup() nothrow
   {
     return getTooltipMarkup();
   }
@@ -1070,7 +1070,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           Note that if both #GtkWidget:tooltip-text and #GtkWidget:tooltip-markup
           are set, the last one wins.
   */
-  @property void tooltipMarkup(string propval)
+  @property void tooltipMarkup(string propval) nothrow
   {
     setTooltipMarkup(propval);
   }
@@ -1089,7 +1089,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         Note that if both #GtkWidget:tooltip-text and #GtkWidget:tooltip-markup
         are set, the last one wins.
   */
-  @property string tooltipText()
+  @property string tooltipText() nothrow
   {
     return getTooltipText();
   }
@@ -1109,7 +1109,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           Note that if both #GtkWidget:tooltip-text and #GtkWidget:tooltip-markup
           are set, the last one wins.
   */
-  @property void tooltipText(string propval)
+  @property void tooltipText(string propval) nothrow
   {
     setTooltipText(propval);
   }
@@ -1118,7 +1118,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Get `valign` property.
       Returns: How to distribute vertical space if widget gets extra space, see #GtkAlign
   */
-  @property gtk.types.Align valign()
+  @property gtk.types.Align valign() nothrow
   {
     return getValign();
   }
@@ -1128,7 +1128,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         propval = How to distribute vertical space if widget gets extra space, see #GtkAlign
   */
-  @property void valign(gtk.types.Align propval)
+  @property void valign(gtk.types.Align propval) nothrow
   {
     setValign(propval);
   }
@@ -1137,7 +1137,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Get `vexpand` property.
       Returns: Whether to expand vertically. See [gtk.widget.Widget.setVexpand].
   */
-  @property bool vexpand()
+  @property bool vexpand() nothrow
   {
     return getVexpand();
   }
@@ -1147,7 +1147,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         propval = Whether to expand vertically. See [gtk.widget.Widget.setVexpand].
   */
-  @property void vexpand(bool propval)
+  @property void vexpand(bool propval) nothrow
   {
     setVexpand(propval);
   }
@@ -1156,7 +1156,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Get `vexpandSet` property.
       Returns: Whether to use the #GtkWidget:vexpand property. See [gtk.widget.Widget.getVexpandSet].
   */
-  @property bool vexpandSet()
+  @property bool vexpandSet() nothrow
   {
     return getVexpandSet();
   }
@@ -1166,31 +1166,31 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         propval = Whether to use the #GtkWidget:vexpand property. See [gtk.widget.Widget.getVexpandSet].
   */
-  @property void vexpandSet(bool propval)
+  @property void vexpandSet(bool propval) nothrow
   {
     setVexpandSet(propval);
   }
 
   /** */
-  @property bool visible()
+  @property bool visible() nothrow
   {
     return getVisible();
   }
 
   /** */
-  @property void visible(bool propval)
+  @property void visible(bool propval) nothrow
   {
     setVisible(propval);
   }
 
   /** */
-  @property int widthRequest()
+  @property int widthRequest() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("width-request");
   }
 
   /** */
-  @property void widthRequest(int propval)
+  @property void widthRequest(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("width-request", propval);
   }
@@ -1199,7 +1199,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Get `window` property.
       Returns: The widget's window if it is realized, null otherwise.
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return getWindow();
   }
@@ -1212,7 +1212,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       [gtk.widget.Widget.setDefaultDirection].
       Returns: the current default direction.
   */
-  static gtk.types.TextDirection getDefaultDirection()
+  static gtk.types.TextDirection getDefaultDirection() nothrow
   {
     GtkTextDirection _cretval;
     _cretval = gtk_widget_get_default_direction();
@@ -1229,7 +1229,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
             [gtk.css_provider.CssProvider.getDefault] to obtain a #GtkStyleProvider
             with the default widget style information.
   */
-  static gtk.style.Style getDefaultStyle()
+  static gtk.style.Style getDefaultStyle() nothrow
   {
     GtkStyle* _cretval;
     _cretval = gtk_widget_get_default_style();
@@ -1242,7 +1242,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget_class.WidgetClass.setTemplate], or don’t use this API at all.
   */
-  static void popCompositeChild()
+  static void popCompositeChild() nothrow
   {
     gtk_widget_pop_composite_child();
   }
@@ -1260,7 +1260,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Deprecated: This API never really worked well and was mostly unused, now
         we have a more complete mechanism for composite children, see [gtk.widget_class.WidgetClass.setTemplate].
   */
-  static void pushCompositeChild()
+  static void pushCompositeChild() nothrow
   {
     gtk_widget_push_composite_child();
   }
@@ -1273,7 +1273,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         dir = the new default direction. This cannot be
                  [gtk.types.TextDirection.None].
   */
-  static void setDefaultDirection(gtk.types.TextDirection dir)
+  static void setDefaultDirection(gtk.types.TextDirection dir) nothrow
   {
     gtk_widget_set_default_direction(dir);
   }
@@ -1285,7 +1285,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       activatable, the function returns false.
       Returns: true if the widget was activatable
   */
-  bool activate()
+  bool activate() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_activate(cast(GtkWidget*)this._cPtr);
@@ -1309,7 +1309,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         accelMods = modifier key combination of the accelerator
         accelFlags = flag accelerators, e.g. [gtk.types.AccelFlags.Visible]
   */
-  void addAccelerator(string accelSignal, gtk.accel_group.AccelGroup accelGroup, uint accelKey, gdk.types.ModifierType accelMods, gtk.types.AccelFlags accelFlags)
+  void addAccelerator(string accelSignal, gtk.accel_group.AccelGroup accelGroup, uint accelKey, gdk.types.ModifierType accelMods, gtk.types.AccelFlags accelFlags) nothrow
   {
     const(char)* _accelSignal = accelSignal.toCString(No.Alloc);
     gtk_widget_add_accelerator(cast(GtkWidget*)this._cPtr, _accelSignal, accelGroup ? cast(GtkAccelGroup*)accelGroup._cPtr(No.Dup) : null, accelKey, accelMods, accelFlags);
@@ -1323,7 +1323,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         device = a #GdkDevice
         events = an event mask, see #GdkEventMask
   */
-  void addDeviceEvents(gdk.device.Device device, gdk.types.EventMask events)
+  void addDeviceEvents(gdk.device.Device device, gdk.types.EventMask events) nothrow
   {
     gtk_widget_add_device_events(cast(GtkWidget*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, events);
   }
@@ -1336,7 +1336,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         events = an event mask, see #GdkEventMask
   */
-  void addEvents(int events)
+  void addEvents(int events) nothrow
   {
     gtk_widget_add_events(cast(GtkWidget*)this._cPtr, events);
   }
@@ -1352,7 +1352,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         label = a #GtkWidget that acts as a mnemonic label for widget
   */
-  void addMnemonicLabel(gtk.widget.Widget label)
+  void addMnemonicLabel(gtk.widget.Widget label) nothrow
   {
     gtk_widget_add_mnemonic_label(cast(GtkWidget*)this._cPtr, label ? cast(GtkWidget*)label._cPtr(No.Dup) : null);
   }
@@ -1384,14 +1384,21 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns: an id for the connection of this callback. Remove the callback
             by passing it to [gtk.widget.Widget.removeTickCallback]
   */
-  uint addTickCallback(gtk.types.TickCallback callback)
+  uint addTickCallback(gtk.types.TickCallback callback) nothrow
   {
-    extern(C) gboolean _callbackCallback(GtkWidget* widget, GdkFrameClock* frameClock, void* userData)
+    extern(C) gboolean _callbackCallback(GtkWidget* widget, GdkFrameClock* frameClock, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.TickCallback*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), gobject.object.ObjectWrap._getDObject!(gdk.frame_clock.FrameClock)(cast(void*)frameClock, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), gobject.object.ObjectWrap._getDObject!(gdk.frame_clock.FrameClock)(cast(void*)frameClock, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.TickCallback");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -1417,7 +1424,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         signalId = the ID of a signal installed on widget
       Returns: true if the accelerator can be activated.
   */
-  bool canActivateAccel(uint signalId)
+  bool canActivateAccel(uint signalId) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_can_activate_accel(cast(GtkWidget*)this._cPtr, signalId);
@@ -1449,7 +1456,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         direction = direction of focus movement
       Returns: true if focus ended up inside widget
   */
-  bool childFocus(gtk.types.DirectionType direction)
+  bool childFocus(gtk.types.DirectionType direction) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_child_focus(cast(GtkWidget*)this._cPtr, direction);
@@ -1469,7 +1476,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         childProperty = the name of a child property installed on the
                            class of widget’s parent
   */
-  void childNotify(string childProperty)
+  void childNotify(string childProperty) nothrow
   {
     const(char)* _childProperty = childProperty.toCString(No.Alloc);
     gtk_widget_child_notify(cast(GtkWidget*)this._cPtr, _childProperty);
@@ -1489,7 +1496,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.getPath] instead
   */
-  void classPath(out uint pathLength, out string path, out string pathReversed)
+  void classPath(out uint pathLength, out string path, out string pathReversed) nothrow
   {
     char* _path;
     char* _pathReversed;
@@ -1515,7 +1522,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         orientation = expand direction
       Returns: whether widget tree rooted here should be expanded
   */
-  bool computeExpand(gtk.types.Orientation orientation)
+  bool computeExpand(gtk.types.Orientation orientation) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_compute_expand(cast(GtkWidget*)this._cPtr, orientation);
@@ -1528,7 +1535,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       text for this widget. See also [gtk.widget.Widget.getPangoContext].
       Returns: the new #PangoContext
   */
-  pango.context.Context createPangoContext()
+  pango.context.Context createPangoContext() nothrow
   {
     PangoContext* _cretval;
     _cretval = gtk_widget_create_pango_context(cast(GtkWidget*)this._cPtr);
@@ -1550,7 +1557,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         text = text to set on the layout (can be null)
       Returns: the new #PangoLayout
   */
-  pango.layout.Layout createPangoLayout(string text = null)
+  pango.layout.Layout createPangoLayout(string text = null) nothrow
   {
     PangoLayout* _cretval;
     const(char)* _text = text.toCString(No.Alloc);
@@ -1592,7 +1599,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       
       See also: [gtk.container.Container.remove]
   */
-  void destroy()
+  void destroy() nothrow
   {
     gtk_widget_destroy(cast(GtkWidget*)this._cPtr);
   }
@@ -1609,7 +1616,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         widgetPointer = address of a variable that contains widget
   */
-  void destroyed(gtk.widget.Widget widgetPointer)
+  void destroyed(gtk.widget.Widget widgetPointer) nothrow
   {
     gtk_widget_destroyed(cast(GtkWidget*)this._cPtr, widgetPointer ? cast(GtkWidget**)widgetPointer._cPtr(No.Dup) : null);
   }
@@ -1626,7 +1633,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns: true if there is an ongoing grab on device
                  by another #GtkWidget than widget.
   */
-  bool deviceIsShadowed(gdk.device.Device device)
+  bool deviceIsShadowed(gdk.device.Device device) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_device_is_shadowed(cast(GtkWidget*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
@@ -1648,7 +1655,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.dragBeginWithCoordinates] instead
   */
-  gdk.drag_context.DragContext dragBegin(gtk.target_list.TargetList targets, gdk.types.DragAction actions, int button, gdk.event.Event event = null)
+  gdk.drag_context.DragContext dragBegin(gtk.target_list.TargetList targets, gdk.types.DragAction actions, int button, gdk.event.Event event = null) nothrow
   {
     GdkDragContext* _cretval;
     _cretval = gtk_drag_begin(cast(GtkWidget*)this._cPtr, targets ? cast(GtkTargetList*)targets._cPtr(No.Dup) : null, actions, button, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
@@ -1698,7 +1705,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
              the current pointer position
       Returns: the context for this drag
   */
-  gdk.drag_context.DragContext dragBeginWithCoordinates(gtk.target_list.TargetList targets, gdk.types.DragAction actions, int button, gdk.event.Event event, int x, int y)
+  gdk.drag_context.DragContext dragBeginWithCoordinates(gtk.target_list.TargetList targets, gdk.types.DragAction actions, int button, gdk.event.Event event, int x, int y) nothrow
   {
     GdkDragContext* _cretval;
     _cretval = gtk_drag_begin_with_coordinates(cast(GtkWidget*)this._cPtr, targets ? cast(GtkTargetList*)targets._cPtr(No.Dup) : null, actions, button, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, x, y);
@@ -1718,7 +1725,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         currentY = current Y coordinate
       Returns: true if the drag threshold has been passed.
   */
-  bool dragCheckThreshold(int startX, int startY, int currentX, int currentY)
+  bool dragCheckThreshold(int startX, int startY, int currentX, int currentY) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_drag_check_threshold(cast(GtkWidget*)this._cPtr, startX, startY, currentX, currentY);
@@ -1732,7 +1739,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       use [gtk.target_list.TargetList.addImageTargets] and
       [gtk.widget.Widget.dragDestSetTargetList].
   */
-  void dragDestAddImageTargets()
+  void dragDestAddImageTargets() nothrow
   {
     gtk_drag_dest_add_image_targets(cast(GtkWidget*)this._cPtr);
   }
@@ -1744,7 +1751,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       use [gtk.target_list.TargetList.addTextTargets] and
       [gtk.widget.Widget.dragDestSetTargetList].
   */
-  void dragDestAddTextTargets()
+  void dragDestAddTextTargets() nothrow
   {
     gtk_drag_dest_add_text_targets(cast(GtkWidget*)this._cPtr);
   }
@@ -1756,7 +1763,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       use [gtk.target_list.TargetList.addUriTargets] and
       [gtk.widget.Widget.dragDestSetTargetList].
   */
-  void dragDestAddUriTargets()
+  void dragDestAddUriTargets() nothrow
   {
     gtk_drag_dest_add_uri_targets(cast(GtkWidget*)this._cPtr);
   }
@@ -1777,7 +1784,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns: first target that the source offers
             and the dest can accept, or `GDK_NONE`
   */
-  gdk.atom.Atom dragDestFindTarget(gdk.drag_context.DragContext context, gtk.target_list.TargetList targetList = null)
+  gdk.atom.Atom dragDestFindTarget(gdk.drag_context.DragContext context, gtk.target_list.TargetList targetList = null) nothrow
   {
     GdkAtom _cretval;
     _cretval = gtk_drag_dest_find_target(cast(GtkWidget*)this._cPtr, context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, targetList ? cast(GtkTargetList*)targetList._cPtr(No.Dup) : null);
@@ -1790,7 +1797,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       drag-and-drop.
       Returns: the #GtkTargetList, or null if none
   */
-  gtk.target_list.TargetList dragDestGetTargetList()
+  gtk.target_list.TargetList dragDestGetTargetList() nothrow
   {
     GtkTargetList* _cretval;
     _cretval = gtk_drag_dest_get_target_list(cast(GtkWidget*)this._cPtr);
@@ -1804,7 +1811,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns: true if the widget always emits
           #GtkWidget::drag-motion events
   */
-  bool dragDestGetTrackMotion()
+  bool dragDestGetTrackMotion() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_drag_dest_get_track_motion(cast(GtkWidget*)this._cPtr);
@@ -1860,7 +1867,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
               [gtk.widget.Widget.dragDestGetTargetList] and [gtk.widget.Widget.dragDestFindTarget].
         actions = a bitmask of possible actions for a drop onto this widget.
   */
-  void dragDestSet(gtk.types.DestDefaults flags, gtk.target_entry.TargetEntry[] targets, gdk.types.DragAction actions)
+  void dragDestSet(gtk.types.DestDefaults flags, gtk.target_entry.TargetEntry[] targets, gdk.types.DragAction actions) nothrow
   {
     int _nTargets;
     if (targets)
@@ -1885,7 +1892,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
             destination, because it is an embedded
             subwindow.
   */
-  void dragDestSetProxy(gdk.window.Window proxyWindow, gdk.types.DragProtocol protocol, bool useCoordinates)
+  void dragDestSetProxy(gdk.window.Window proxyWindow, gdk.types.DragProtocol protocol, bool useCoordinates) nothrow
   {
     gtk_drag_dest_set_proxy(cast(GtkWidget*)this._cPtr, proxyWindow ? cast(GdkWindow*)proxyWindow._cPtr(No.Dup) : null, protocol, useCoordinates);
   }
@@ -1898,7 +1905,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         targetList = list of droppable targets, or null for none
   */
-  void dragDestSetTargetList(gtk.target_list.TargetList targetList = null)
+  void dragDestSetTargetList(gtk.target_list.TargetList targetList = null) nothrow
   {
     gtk_drag_dest_set_target_list(cast(GtkWidget*)this._cPtr, targetList ? cast(GtkTargetList*)targetList._cPtr(No.Dup) : null);
   }
@@ -1914,7 +1921,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         trackMotion = whether to accept all targets
   */
-  void dragDestSetTrackMotion(bool trackMotion)
+  void dragDestSetTrackMotion(bool trackMotion) nothrow
   {
     gtk_drag_dest_set_track_motion(cast(GtkWidget*)this._cPtr, trackMotion);
   }
@@ -1924,7 +1931,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       [gtk.widget.Widget.dragDestSet]. The widget will no longer receive
       notification of drags.
   */
-  void dragDestUnset()
+  void dragDestUnset() nothrow
   {
     gtk_drag_dest_unset(cast(GtkWidget*)this._cPtr);
   }
@@ -1946,7 +1953,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
             generally be the time received in a #GtkWidget::drag-motion
             or #GtkWidget::drag-drop signal
   */
-  void dragGetData(gdk.drag_context.DragContext context, gdk.atom.Atom target, uint time)
+  void dragGetData(gdk.drag_context.DragContext context, gdk.atom.Atom target, uint time) nothrow
   {
     gtk_drag_get_data(cast(GtkWidget*)this._cPtr, context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, target ? cast(GdkAtom)target._cPtr : null, time);
   }
@@ -1956,7 +1963,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       To end the highlight, call [gtk.widget.Widget.dragUnhighlight].
       GTK+ calls this automatically if [gtk.types.DestDefaults.Highlight] is set.
   */
-  void dragHighlight()
+  void dragHighlight() nothrow
   {
     gtk_drag_highlight(cast(GtkWidget*)this._cPtr);
   }
@@ -1968,7 +1975,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       use [gtk.target_list.TargetList.addImageTargets] and
       [gtk.widget.Widget.dragSourceSetTargetList].
   */
-  void dragSourceAddImageTargets()
+  void dragSourceAddImageTargets() nothrow
   {
     gtk_drag_source_add_image_targets(cast(GtkWidget*)this._cPtr);
   }
@@ -1980,7 +1987,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       use [gtk.target_list.TargetList.addTextTargets] and
       [gtk.widget.Widget.dragSourceSetTargetList].
   */
-  void dragSourceAddTextTargets()
+  void dragSourceAddTextTargets() nothrow
   {
     gtk_drag_source_add_text_targets(cast(GtkWidget*)this._cPtr);
   }
@@ -1992,7 +1999,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       use [gtk.target_list.TargetList.addUriTargets] and
       [gtk.widget.Widget.dragSourceSetTargetList].
   */
-  void dragSourceAddUriTargets()
+  void dragSourceAddUriTargets() nothrow
   {
     gtk_drag_source_add_uri_targets(cast(GtkWidget*)this._cPtr);
   }
@@ -2002,7 +2009,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       drag-and-drop.
       Returns: the #GtkTargetList, or null if none
   */
-  gtk.target_list.TargetList dragSourceGetTargetList()
+  gtk.target_list.TargetList dragSourceGetTargetList() nothrow
   {
     GtkTargetList* _cretval;
     _cretval = gtk_drag_source_get_target_list(cast(GtkWidget*)this._cPtr);
@@ -2020,7 +2027,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
               that the drag will support, may be null
         actions = the bitmask of possible actions for a drag from this widget
   */
-  void dragSourceSet(gdk.types.ModifierType startButtonMask, gtk.target_entry.TargetEntry[] targets, gdk.types.DragAction actions)
+  void dragSourceSet(gdk.types.ModifierType startButtonMask, gtk.target_entry.TargetEntry[] targets, gdk.types.DragAction actions) nothrow
   {
     int _nTargets;
     if (targets)
@@ -2041,7 +2048,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         icon = A #GIcon
   */
-  void dragSourceSetIconGicon(gio.icon.Icon icon)
+  void dragSourceSetIconGicon(gio.icon.Icon icon) nothrow
   {
     gtk_drag_source_set_icon_gicon(cast(GtkWidget*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
@@ -2053,7 +2060,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         iconName = name of icon to use
   */
-  void dragSourceSetIconName(string iconName)
+  void dragSourceSetIconName(string iconName) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_drag_source_set_icon_name(cast(GtkWidget*)this._cPtr, _iconName);
@@ -2067,7 +2074,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         pixbuf = the #GdkPixbuf for the drag icon
   */
-  void dragSourceSetIconPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  void dragSourceSetIconPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf) nothrow
   {
     gtk_drag_source_set_icon_pixbuf(cast(GtkWidget*)this._cPtr, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
@@ -2081,7 +2088,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.dragSourceSetIconName] instead.
   */
-  void dragSourceSetIconStock(string stockId)
+  void dragSourceSetIconStock(string stockId) nothrow
   {
     const(char)* _stockId = stockId.toCString(No.Alloc);
     gtk_drag_source_set_icon_stock(cast(GtkWidget*)this._cPtr, _stockId);
@@ -2095,7 +2102,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         targetList = list of draggable targets, or null for none
   */
-  void dragSourceSetTargetList(gtk.target_list.TargetList targetList = null)
+  void dragSourceSetTargetList(gtk.target_list.TargetList targetList = null) nothrow
   {
     gtk_drag_source_set_target_list(cast(GtkWidget*)this._cPtr, targetList ? cast(GtkTargetList*)targetList._cPtr(No.Dup) : null);
   }
@@ -2103,7 +2110,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   /**
       Undoes the effects of [gtk.widget.Widget.dragSourceSet].
   */
-  void dragSourceUnset()
+  void dragSourceUnset() nothrow
   {
     gtk_drag_source_unset(cast(GtkWidget*)this._cPtr);
   }
@@ -2112,7 +2119,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Removes a highlight set by [gtk.widget.Widget.dragHighlight] from
       a widget.
   */
-  void dragUnhighlight()
+  void dragUnhighlight() nothrow
   {
     gtk_drag_unhighlight(cast(GtkWidget*)this._cPtr);
   }
@@ -2139,7 +2146,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         cr = a cairo context to draw to
   */
-  void draw(cairo.context.Context cr)
+  void draw(cairo.context.Context cr) nothrow
   {
     gtk_widget_draw(cast(GtkWidget*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null);
   }
@@ -2153,7 +2160,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use #GtkStyleContext instead
   */
-  void ensureStyle()
+  void ensureStyle() nothrow
   {
     gtk_widget_ensure_style(cast(GtkWidget*)this._cPtr);
   }
@@ -2167,7 +2174,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       ways, depending on the windowing backend and the desktop environment
       or window manager that is used.
   */
-  void errorBell()
+  void errorBell() nothrow
   {
     gtk_widget_error_bell(cast(GtkWidget*)this._cPtr);
   }
@@ -2187,7 +2194,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns: return from the event signal emission (true if
                       the event was handled)
   */
-  bool event(gdk.event.Event event)
+  bool event(gdk.event.Event event) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_event(cast(GtkWidget*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
@@ -2201,7 +2208,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       
       This is the analogue of [gobject.object.ObjectWrap.freezeNotify] for child properties.
   */
-  void freezeChildNotify()
+  void freezeChildNotify() nothrow
   {
     gtk_widget_freeze_child_notify(cast(GtkWidget*)this._cPtr);
   }
@@ -2221,7 +2228,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       library contains more information about accessible objects and their uses.
       Returns: the #AtkObject associated with widget
   */
-  atk.object.ObjectWrap getAccessible()
+  atk.object.ObjectWrap getAccessible() nothrow
   {
     AtkObject* _cretval;
     _cretval = gtk_widget_get_accessible(cast(GtkWidget*)this._cPtr);
@@ -2240,7 +2247,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         prefix = The “prefix” of the action group.
       Returns: A #GActionGroup or null.
   */
-  gio.action_group.ActionGroup getActionGroup(string prefix)
+  gio.action_group.ActionGroup getActionGroup(string prefix) nothrow
   {
     GActionGroup* _cretval;
     const(char)* _prefix = prefix.toCString(No.Alloc);
@@ -2256,7 +2263,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       widgets in #GtkWidget::size_allocate.
       Returns: the baseline of the widget, or -1 if none
   */
-  int getAllocatedBaseline()
+  int getAllocatedBaseline() nothrow
   {
     int _retval;
     _retval = gtk_widget_get_allocated_baseline(cast(GtkWidget*)this._cPtr);
@@ -2269,7 +2276,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       for the #GtkWidget::draw function.
       Returns: the height of the widget
   */
-  int getAllocatedHeight()
+  int getAllocatedHeight() nothrow
   {
     int _retval;
     _retval = gtk_widget_get_allocated_height(cast(GtkWidget*)this._cPtr);
@@ -2291,7 +2298,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         allocation = a pointer to a #GtkAllocation to copy to
         baseline = a pointer to an integer to copy to
   */
-  void getAllocatedSize(out gtk.types.Allocation allocation, out int baseline)
+  void getAllocatedSize(out gtk.types.Allocation allocation, out int baseline) nothrow
   {
     gtk_widget_get_allocated_size(cast(GtkWidget*)this._cPtr, cast(GtkAllocation*)&allocation, cast(int*)&baseline);
   }
@@ -2302,7 +2309,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       for the #GtkWidget::draw function.
       Returns: the width of the widget
   */
-  int getAllocatedWidth()
+  int getAllocatedWidth() nothrow
   {
     int _retval;
     _retval = gtk_widget_get_allocated_width(cast(GtkWidget*)this._cPtr);
@@ -2330,7 +2337,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         allocation = a pointer to a #GtkAllocation to copy to
   */
-  void getAllocation(out gtk.types.Allocation allocation)
+  void getAllocation(out gtk.types.Allocation allocation) nothrow
   {
     gtk_widget_get_allocation(cast(GtkWidget*)this._cPtr, cast(GtkAllocation*)&allocation);
   }
@@ -2350,7 +2357,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         widgetType = ancestor type
       Returns: the ancestor widget, or null if not found
   */
-  gtk.widget.Widget getAncestor(gobject.types.GType widgetType)
+  gtk.widget.Widget getAncestor(gobject.types.GType widgetType) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_ancestor(cast(GtkWidget*)this._cPtr, widgetType);
@@ -2365,7 +2372,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       See [gtk.widget.Widget.setAppPaintable]
       Returns: true if the widget is app paintable
   */
-  bool getAppPaintable()
+  bool getAppPaintable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_get_app_paintable(cast(GtkWidget*)this._cPtr);
@@ -2377,7 +2384,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       [gtk.widget.Widget.setCanDefault].
       Returns: true if widget can be a default widget, false otherwise
   */
-  bool getCanDefault()
+  bool getCanDefault() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_get_can_default(cast(GtkWidget*)this._cPtr);
@@ -2389,7 +2396,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       [gtk.widget.Widget.setCanFocus].
       Returns: true if widget can own the input focus, false otherwise
   */
-  bool getCanFocus()
+  bool getCanFocus() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_get_can_focus(cast(GtkWidget*)this._cPtr);
@@ -2421,7 +2428,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.getPreferredSize] instead.
   */
-  void getChildRequisition(out gtk.requisition.Requisition requisition)
+  void getChildRequisition(out gtk.requisition.Requisition requisition) nothrow
   {
     gtk_widget_get_child_requisition(cast(GtkWidget*)this._cPtr, cast(GtkRequisition*)&requisition);
   }
@@ -2435,7 +2442,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       never should be called by an application.
       Returns: true if the widget is mapped with the parent.
   */
-  bool getChildVisible()
+  bool getChildVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_get_child_visible(cast(GtkWidget*)this._cPtr);
@@ -2454,7 +2461,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         clip = a pointer to a #GtkAllocation to copy to
   */
-  void getClip(out gtk.types.Allocation clip)
+  void getClip(out gtk.types.Allocation clip) nothrow
   {
     gtk_widget_get_clip(cast(GtkWidget*)this._cPtr, cast(GtkAllocation*)&clip);
   }
@@ -2476,7 +2483,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
                     be created. Once a clipboard object has
                     been created, it is persistent for all time.
   */
-  gtk.clipboard.Clipboard getClipboard(gdk.atom.Atom selection)
+  gtk.clipboard.Clipboard getClipboard(gdk.atom.Atom selection) nothrow
   {
     GtkClipboard* _cretval;
     _cretval = gtk_widget_get_clipboard(cast(GtkWidget*)this._cPtr, selection ? cast(GdkAtom)selection._cPtr : null);
@@ -2492,7 +2499,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget_class.WidgetClass.setTemplate], or don’t use this API at all.
   */
-  string getCompositeName()
+  string getCompositeName() nothrow
   {
     char* _cretval;
     _cretval = gtk_widget_get_composite_name(cast(GtkWidget*)this._cPtr);
@@ -2508,7 +2515,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         device = a #GdkDevice
       Returns: true is device is enabled for widget
   */
-  bool getDeviceEnabled(gdk.device.Device device)
+  bool getDeviceEnabled(gdk.device.Device device) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_get_device_enabled(cast(GtkWidget*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
@@ -2523,7 +2530,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         device = a #GdkDevice
       Returns: device event mask for widget
   */
-  gdk.types.EventMask getDeviceEvents(gdk.device.Device device)
+  gdk.types.EventMask getDeviceEvents(gdk.device.Device device) nothrow
   {
     GdkEventMask _cretval;
     _cretval = gtk_widget_get_device_events(cast(GtkWidget*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
@@ -2536,7 +2543,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       [gtk.widget.Widget.setDirection].
       Returns: the reading direction for the widget.
   */
-  gtk.types.TextDirection getDirection()
+  gtk.types.TextDirection getDirection() nothrow
   {
     GtkTextDirection _cretval;
     _cretval = gtk_widget_get_direction(cast(GtkWidget*)this._cPtr);
@@ -2554,7 +2561,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       free those resources when the widget is unrealized.
       Returns: the #GdkDisplay for the toplevel for this widget.
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gtk_widget_get_display(cast(GtkWidget*)this._cPtr);
@@ -2568,7 +2575,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       See [gtk.widget.Widget.setDoubleBuffered]
       Returns: true if the widget is double buffered
   */
-  bool getDoubleBuffered()
+  bool getDoubleBuffered() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_get_double_buffered(cast(GtkWidget*)this._cPtr);
@@ -2585,7 +2592,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       widget.
       Returns: event mask for widget
   */
-  int getEvents()
+  int getEvents() nothrow
   {
     int _retval;
     _retval = gtk_widget_get_events(cast(GtkWidget*)this._cPtr);
@@ -2598,7 +2605,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns: true if the widget should grab focus when it is clicked with
                       the mouse.
   */
-  bool getFocusOnClick()
+  bool getFocusOnClick() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_get_focus_on_click(cast(GtkWidget*)this._cPtr);
@@ -2609,7 +2616,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Gets the font map that has been set with [gtk.widget.Widget.setFontMap].
       Returns: A #PangoFontMap, or null
   */
-  pango.font_map.FontMap getFontMap()
+  pango.font_map.FontMap getFontMap() nothrow
   {
     PangoFontMap* _cretval;
     _cretval = gtk_widget_get_font_map(cast(GtkWidget*)this._cPtr);
@@ -2622,7 +2629,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       the defaults font options for the #GdkScreen will be used.
       Returns: the #cairo_font_options_t or null if not set
   */
-  cairo.font_options.FontOptions getFontOptions()
+  cairo.font_options.FontOptions getFontOptions() nothrow
   {
     const(cairo_font_options_t)* _cretval;
     _cretval = gtk_widget_get_font_options(cast(GtkWidget*)this._cPtr);
@@ -2655,7 +2662,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns: a #GdkFrameClock,
         or null if widget is unrealized
   */
-  gdk.frame_clock.FrameClock getFrameClock()
+  gdk.frame_clock.FrameClock getFrameClock() nothrow
   {
     GdkFrameClock* _cretval;
     _cretval = gtk_widget_get_frame_clock(cast(GtkWidget*)this._cPtr);
@@ -2672,7 +2679,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       alignment.
       Returns: the horizontal alignment of widget
   */
-  gtk.types.Align getHalign()
+  gtk.types.Align getHalign() nothrow
   {
     GtkAlign _cretval;
     _cretval = gtk_widget_get_halign(cast(GtkWidget*)this._cPtr);
@@ -2685,7 +2692,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       #GtkWidget:has-tooltip for more information.
       Returns: current value of has-tooltip on widget.
   */
-  bool getHasTooltip()
+  bool getHasTooltip() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_get_has_tooltip(cast(GtkWidget*)this._cPtr);
@@ -2697,7 +2704,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       [gtk.widget.Widget.setHasWindow].
       Returns: true if widget has a window, false otherwise
   */
-  bool getHasWindow()
+  bool getHasWindow() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_get_has_window(cast(GtkWidget*)this._cPtr);
@@ -2721,7 +2728,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       wants to expand.
       Returns: whether hexpand flag is set
   */
-  bool getHexpand()
+  bool getHexpand() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_get_hexpand(cast(GtkWidget*)this._cPtr);
@@ -2741,7 +2748,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       for completeness and consistency.
       Returns: whether hexpand has been explicitly set
   */
-  bool getHexpandSet()
+  bool getHexpandSet() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_get_hexpand_set(cast(GtkWidget*)this._cPtr);
@@ -2752,7 +2759,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Whether the widget is mapped.
       Returns: true if the widget is mapped, false otherwise.
   */
-  bool getMapped()
+  bool getMapped() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_get_mapped(cast(GtkWidget*)this._cPtr);
@@ -2763,7 +2770,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Gets the value of the #GtkWidget:margin-bottom property.
       Returns: The bottom margin of widget
   */
-  int getMarginBottom()
+  int getMarginBottom() nothrow
   {
     int _retval;
     _retval = gtk_widget_get_margin_bottom(cast(GtkWidget*)this._cPtr);
@@ -2774,7 +2781,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Gets the value of the #GtkWidget:margin-end property.
       Returns: The end margin of widget
   */
-  int getMarginEnd()
+  int getMarginEnd() nothrow
   {
     int _retval;
     _retval = gtk_widget_get_margin_end(cast(GtkWidget*)this._cPtr);
@@ -2787,7 +2794,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.getMarginStart] instead.
   */
-  int getMarginLeft()
+  int getMarginLeft() nothrow
   {
     int _retval;
     _retval = gtk_widget_get_margin_left(cast(GtkWidget*)this._cPtr);
@@ -2800,7 +2807,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.getMarginEnd] instead.
   */
-  int getMarginRight()
+  int getMarginRight() nothrow
   {
     int _retval;
     _retval = gtk_widget_get_margin_right(cast(GtkWidget*)this._cPtr);
@@ -2811,7 +2818,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Gets the value of the #GtkWidget:margin-start property.
       Returns: The start margin of widget
   */
-  int getMarginStart()
+  int getMarginStart() nothrow
   {
     int _retval;
     _retval = gtk_widget_get_margin_start(cast(GtkWidget*)this._cPtr);
@@ -2822,7 +2829,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Gets the value of the #GtkWidget:margin-top property.
       Returns: The top margin of widget
   */
-  int getMarginTop()
+  int getMarginTop() nothrow
   {
     int _retval;
     _retval = gtk_widget_get_margin_top(cast(GtkWidget*)this._cPtr);
@@ -2839,7 +2846,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         intent = the use case for the modifier mask
       Returns: the modifier mask used for intent.
   */
-  gdk.types.ModifierType getModifierMask(gdk.types.ModifierIntent intent)
+  gdk.types.ModifierType getModifierMask(gdk.types.ModifierIntent intent) nothrow
   {
     GdkModifierType _cretval;
     _cretval = gtk_widget_get_modifier_mask(cast(GtkWidget*)this._cPtr, intent);
@@ -2867,7 +2874,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use #GtkStyleContext with a custom #GtkStyleProvider instead
   */
-  gtk.rc_style.RcStyle getModifierStyle()
+  gtk.rc_style.RcStyle getModifierStyle() nothrow
   {
     GtkRcStyle* _cretval;
     _cretval = gtk_widget_get_modifier_style(cast(GtkWidget*)this._cPtr);
@@ -2881,7 +2888,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns: name of the widget. This string is owned by GTK+ and
         should not be modified or freed
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_widget_get_name(cast(GtkWidget*)this._cPtr);
@@ -2895,7 +2902,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       will affect this widget.
       Returns: the current value of the “no-show-all” property.
   */
-  bool getNoShowAll()
+  bool getNoShowAll() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_get_no_show_all(cast(GtkWidget*)this._cPtr);
@@ -2907,7 +2914,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       See [gtk.widget.Widget.setOpacity].
       Returns: the requested opacity for this widget.
   */
-  double getOpacity()
+  double getOpacity() nothrow
   {
     double _retval;
     _retval = gtk_widget_get_opacity(cast(GtkWidget*)this._cPtr);
@@ -2924,7 +2931,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       by using the #GtkWidget::screen-changed signal on the widget.
       Returns: the #PangoContext for the widget.
   */
-  pango.context.Context getPangoContext()
+  pango.context.Context getPangoContext() nothrow
   {
     PangoContext* _cretval;
     _cretval = gtk_widget_get_pango_context(cast(GtkWidget*)this._cPtr);
@@ -2936,7 +2943,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns the parent container of widget.
       Returns: the parent container of widget, or null
   */
-  gtk.widget.Widget getParent()
+  gtk.widget.Widget getParent() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_parent(cast(GtkWidget*)this._cPtr);
@@ -2949,7 +2956,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns: the parent window of widget, or null
         if it does not have a parent window.
   */
-  gdk.window.Window getParentWindow()
+  gdk.window.Window getParentWindow() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gtk_widget_get_parent_window(cast(GtkWidget*)this._cPtr);
@@ -2963,7 +2970,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       created.
       Returns: The #GtkWidgetPath representing widget
   */
-  gtk.widget_path.WidgetPath getPath()
+  gtk.widget_path.WidgetPath getPath() nothrow
   {
     GtkWidgetPath* _cretval;
     _cretval = gtk_widget_get_path(cast(GtkWidget*)this._cPtr);
@@ -2984,7 +2991,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gdk.window.Window.getDevicePosition] instead.
   */
-  void getPointer(out int x, out int y)
+  void getPointer(out int x, out int y) nothrow
   {
     gtk_widget_get_pointer(cast(GtkWidget*)this._cPtr, cast(int*)&x, cast(int*)&y);
   }
@@ -3004,7 +3011,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         minimumHeight = location to store the minimum height, or null
         naturalHeight = location to store the natural height, or null
   */
-  void getPreferredHeight(out int minimumHeight, out int naturalHeight)
+  void getPreferredHeight(out int minimumHeight, out int naturalHeight) nothrow
   {
     gtk_widget_get_preferred_height(cast(GtkWidget*)this._cPtr, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
   }
@@ -3027,7 +3034,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         minimumBaseline = location for storing the baseline for the minimum height, or null
         naturalBaseline = location for storing the baseline for the natural height, or null
   */
-  void getPreferredHeightAndBaselineForWidth(int width, out int minimumHeight, out int naturalHeight, out int minimumBaseline, out int naturalBaseline)
+  void getPreferredHeightAndBaselineForWidth(int width, out int minimumHeight, out int naturalHeight, out int minimumBaseline, out int naturalBaseline) nothrow
   {
     gtk_widget_get_preferred_height_and_baseline_for_width(cast(GtkWidget*)this._cPtr, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight, cast(int*)&minimumBaseline, cast(int*)&naturalBaseline);
   }
@@ -3047,7 +3054,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         minimumHeight = location for storing the minimum height, or null
         naturalHeight = location for storing the natural height, or null
   */
-  void getPreferredHeightForWidth(int width, out int minimumHeight, out int naturalHeight)
+  void getPreferredHeightForWidth(int width, out int minimumHeight, out int naturalHeight) nothrow
   {
     gtk_widget_get_preferred_height_for_width(cast(GtkWidget*)this._cPtr, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
   }
@@ -3073,7 +3080,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         minimumSize = location for storing the minimum size, or null
         naturalSize = location for storing the natural size, or null
   */
-  void getPreferredSize(out gtk.requisition.Requisition minimumSize, out gtk.requisition.Requisition naturalSize)
+  void getPreferredSize(out gtk.requisition.Requisition minimumSize, out gtk.requisition.Requisition naturalSize) nothrow
   {
     gtk_widget_get_preferred_size(cast(GtkWidget*)this._cPtr, cast(GtkRequisition*)&minimumSize, cast(GtkRequisition*)&naturalSize);
   }
@@ -3093,7 +3100,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         minimumWidth = location to store the minimum width, or null
         naturalWidth = location to store the natural width, or null
   */
-  void getPreferredWidth(out int minimumWidth, out int naturalWidth)
+  void getPreferredWidth(out int minimumWidth, out int naturalWidth) nothrow
   {
     gtk_widget_get_preferred_width(cast(GtkWidget*)this._cPtr, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
   }
@@ -3113,7 +3120,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         minimumWidth = location for storing the minimum width, or null
         naturalWidth = location for storing the natural width, or null
   */
-  void getPreferredWidthForHeight(int height, out int minimumWidth, out int naturalWidth)
+  void getPreferredWidthForHeight(int height, out int minimumWidth, out int naturalWidth) nothrow
   {
     gtk_widget_get_preferred_width_for_height(cast(GtkWidget*)this._cPtr, height, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
   }
@@ -3122,7 +3129,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Determines whether widget is realized.
       Returns: true if widget is realized, false otherwise
   */
-  bool getRealized()
+  bool getRealized() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_get_realized(cast(GtkWidget*)this._cPtr);
@@ -3138,7 +3145,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns: true if widget acts as the default widget when focused,
                       false otherwise
   */
-  bool getReceivesDefault()
+  bool getReceivesDefault() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_get_receives_default(cast(GtkWidget*)this._cPtr);
@@ -3155,7 +3162,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       capabilities.
       Returns: The #GtkSizeRequestMode preferred by widget.
   */
-  gtk.types.SizeRequestMode getRequestMode()
+  gtk.types.SizeRequestMode getRequestMode() nothrow
   {
     GtkSizeRequestMode _cretval;
     _cretval = gtk_widget_get_request_mode(cast(GtkWidget*)this._cPtr);
@@ -3180,7 +3187,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         removed, If you need to cache sizes across requests and allocations,
         add an explicit cache to the widget in question instead.
   */
-  void getRequisition(out gtk.requisition.Requisition requisition)
+  void getRequisition(out gtk.requisition.Requisition requisition) nothrow
   {
     gtk_widget_get_requisition(cast(GtkWidget*)this._cPtr, cast(GtkRequisition*)&requisition);
   }
@@ -3198,7 +3205,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gdk.screen.Screen.getRootWindow] instead
   */
-  gdk.window.Window getRootWindow()
+  gdk.window.Window getRootWindow() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gtk_widget_get_root_window(cast(GtkWidget*)this._cPtr);
@@ -3214,7 +3221,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       See [gdk.window.Window.getScaleFactor].
       Returns: the scale factor for widget
   */
-  int getScaleFactor()
+  int getScaleFactor() nothrow
   {
     int _retval;
     _retval = gtk_widget_get_scale_factor(cast(GtkWidget*)this._cPtr);
@@ -3232,7 +3239,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       free those resources when the widget is unrealized.
       Returns: the #GdkScreen for the toplevel for this widget.
   */
-  gdk.screen.Screen getScreen()
+  gdk.screen.Screen getScreen() nothrow
   {
     GdkScreen* _cretval;
     _cretval = gtk_widget_get_screen(cast(GtkWidget*)this._cPtr);
@@ -3248,7 +3255,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       own and its parent widget’s sensitivity. See [gtk.widget.Widget.isSensitive].
       Returns: true if the widget is sensitive
   */
-  bool getSensitive()
+  bool getSensitive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_get_sensitive(cast(GtkWidget*)this._cPtr);
@@ -3263,7 +3270,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       to a particular #GdkScreen.
       Returns: the relevant #GtkSettings object
   */
-  gtk.settings.Settings getSettings()
+  gtk.settings.Settings getSettings() nothrow
   {
     GtkSettings* _cretval;
     _cretval = gtk_widget_get_settings(cast(GtkWidget*)this._cPtr);
@@ -3284,7 +3291,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         width = return location for width, or null
         height = return location for height, or null
   */
-  void getSizeRequest(out int width, out int height)
+  void getSizeRequest(out int width, out int height) nothrow
   {
     gtk_widget_get_size_request(cast(GtkWidget*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
@@ -3295,7 +3302,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.getStateFlags] instead.
   */
-  gtk.types.StateType getState()
+  gtk.types.StateType getState() nothrow
   {
     GtkStateType _cretval;
     _cretval = gtk_widget_get_state(cast(GtkWidget*)this._cPtr);
@@ -3314,7 +3321,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       should look at [gtk.style_context.StyleContext.getState].
       Returns: The state flags for widget
   */
-  gtk.types.StateFlags getStateFlags()
+  gtk.types.StateFlags getStateFlags() nothrow
   {
     GtkStateFlags _cretval;
     _cretval = gtk_widget_get_state_flags(cast(GtkWidget*)this._cPtr);
@@ -3328,7 +3335,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use #GtkStyleContext instead
   */
-  gtk.style.Style getStyle()
+  gtk.style.Style getStyle() nothrow
   {
     GtkStyle* _cretval;
     _cretval = gtk_widget_get_style(cast(GtkWidget*)this._cPtr);
@@ -3342,7 +3349,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns: a #GtkStyleContext. This memory is owned by widget and
                  must not be freed.
   */
-  gtk.style_context.StyleContext getStyleContext()
+  gtk.style_context.StyleContext getStyleContext() nothrow
   {
     GtkStyleContext* _cretval;
     _cretval = gtk_widget_get_style_context(cast(GtkWidget*)this._cPtr);
@@ -3355,7 +3362,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       [gtk.widget.Widget.setSupportMultidevice] for more information.
       Returns: true if widget is multidevice aware.
   */
-  bool getSupportMultidevice()
+  bool getSupportMultidevice() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_get_support_multidevice(cast(GtkWidget*)this._cPtr);
@@ -3378,7 +3385,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         name = The “id” of the child defined in the template XML
       Returns: The object built in the template XML with the id name
   */
-  gobject.object.ObjectWrap getTemplateChild(gobject.types.GType widgetType, string name)
+  gobject.object.ObjectWrap getTemplateChild(gobject.types.GType widgetType, string name) nothrow
   {
     GObject* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -3392,7 +3399,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns: the tooltip text, or null. You should free the
           returned string with [glib.global.gfree] when done.
   */
-  string getTooltipMarkup()
+  string getTooltipMarkup() nothrow
   {
     char* _cretval;
     _cretval = gtk_widget_get_tooltip_markup(cast(GtkWidget*)this._cPtr);
@@ -3405,7 +3412,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns: the tooltip text, or null. You should free the
           returned string with [glib.global.gfree] when done.
   */
-  string getTooltipText()
+  string getTooltipText() nothrow
   {
     char* _cretval;
     _cretval = gtk_widget_get_tooltip_text(cast(GtkWidget*)this._cPtr);
@@ -3419,7 +3426,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       using [gtk.widget.Widget.setTooltipWindow].
       Returns: The #GtkWindow of the current tooltip.
   */
-  gtk.window.Window getTooltipWindow()
+  gtk.window.Window getTooltipWindow() nothrow
   {
     GtkWindow* _cretval;
     _cretval = gtk_widget_get_tooltip_window(cast(GtkWidget*)this._cPtr);
@@ -3462,7 +3469,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns: the topmost ancestor of widget, or widget itself
            if there’s no ancestor.
   */
-  gtk.widget.Widget getToplevel()
+  gtk.widget.Widget getToplevel() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_toplevel(cast(GtkWidget*)this._cPtr);
@@ -3481,7 +3488,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       also report the true value.
       Returns: the vertical alignment of widget, ignoring baseline alignment
   */
-  gtk.types.Align getValign()
+  gtk.types.Align getValign() nothrow
   {
     GtkAlign _cretval;
     _cretval = gtk_widget_get_valign(cast(GtkWidget*)this._cPtr);
@@ -3494,7 +3501,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       [gtk.types.Align.Baseline].
       Returns: the vertical alignment of widget
   */
-  gtk.types.Align getValignWithBaseline()
+  gtk.types.Align getValignWithBaseline() nothrow
   {
     GtkAlign _cretval;
     _cretval = gtk_widget_get_valign_with_baseline(cast(GtkWidget*)this._cPtr);
@@ -3509,7 +3516,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       See [gtk.widget.Widget.getHexpand] for more detail.
       Returns: whether vexpand flag is set
   */
-  bool getVexpand()
+  bool getVexpand() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_get_vexpand(cast(GtkWidget*)this._cPtr);
@@ -3523,7 +3530,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       See [gtk.widget.Widget.getHexpandSet] for more detail.
       Returns: whether vexpand has been explicitly set
   */
-  bool getVexpandSet()
+  bool getVexpandSet() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_get_vexpand_set(cast(GtkWidget*)this._cPtr);
@@ -3540,7 +3547,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       See [gtk.widget.Widget.setVisible].
       Returns: true if the widget is visible
   */
-  bool getVisible()
+  bool getVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_get_visible(cast(GtkWidget*)this._cPtr);
@@ -3551,7 +3558,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Gets the visual that will be used to render widget.
       Returns: the visual for widget
   */
-  gdk.visual.Visual getVisual()
+  gdk.visual.Visual getVisual() nothrow
   {
     GdkVisual* _cretval;
     _cretval = gtk_widget_get_visual(cast(GtkWidget*)this._cPtr);
@@ -3563,7 +3570,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns the widget’s window if it is realized, null otherwise
       Returns: widget’s window.
   */
-  gdk.window.Window getWindow()
+  gdk.window.Window getWindow() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gtk_widget_get_window(cast(GtkWidget*)this._cPtr);
@@ -3581,7 +3588,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       If widget is not sensitive, it is not set as the current
       grabbed widget and this function does nothing.
   */
-  void grabAdd()
+  void grabAdd() nothrow
   {
     gtk_grab_add(cast(GtkWidget*)this._cPtr);
   }
@@ -3597,7 +3604,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       set to true before they activate the default widget when Enter
       is pressed and the #GtkEntry is focused.
   */
-  void grabDefault()
+  void grabDefault() nothrow
   {
     gtk_widget_grab_default(cast(GtkWidget*)this._cPtr);
   }
@@ -3614,7 +3621,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       related signals. Grabbing the focus immediately after creating the widget
       will likely fail and cause critical warnings.
   */
-  void grabFocus()
+  void grabFocus() nothrow
   {
     gtk_widget_grab_focus(cast(GtkWidget*)this._cPtr);
   }
@@ -3626,7 +3633,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       
       If widget does not have the grab, this function does nothing.
   */
-  void grabRemove()
+  void grabRemove() nothrow
   {
     gtk_grab_remove(cast(GtkWidget*)this._cPtr);
   }
@@ -3637,7 +3644,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns: true if widget is the current default widget within
             its toplevel, false otherwise
   */
-  bool hasDefault()
+  bool hasDefault() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_has_default(cast(GtkWidget*)this._cPtr);
@@ -3650,7 +3657,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       input focus, and only having the focus within a toplevel.
       Returns: true if the widget has the global input focus.
   */
-  bool hasFocus()
+  bool hasFocus() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_has_focus(cast(GtkWidget*)this._cPtr);
@@ -3664,7 +3671,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       See also [gtk.widget.Widget.grabAdd].
       Returns: true if the widget is in the grab_widgets stack
   */
-  bool hasGrab()
+  bool hasGrab() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_has_grab(cast(GtkWidget*)this._cPtr);
@@ -3678,7 +3685,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use #GtkStyleContext instead
   */
-  bool hasRcStyle()
+  bool hasRcStyle() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_has_rc_style(cast(GtkWidget*)this._cPtr);
@@ -3693,7 +3700,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns: true if there is a #GdkScreen associated
           with the widget.
   */
-  bool hasScreen()
+  bool hasScreen() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_has_screen(cast(GtkWidget*)this._cPtr);
@@ -3712,7 +3719,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       [gtk.widget.Widget.hasFocus].
       Returns: true if the widget should display a “focus rectangle”
   */
-  bool hasVisibleFocus()
+  bool hasVisibleFocus() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_has_visible_focus(cast(GtkWidget*)this._cPtr);
@@ -3723,7 +3730,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Reverses the effects of [gtk.widget.Widget.show], causing the widget to be
       hidden (invisible to the user).
   */
-  void hide()
+  void hide() nothrow
   {
     gtk_widget_hide(cast(GtkWidget*)this._cPtr);
   }
@@ -3738,7 +3745,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       is received.
       Returns: true
   */
-  bool hideOnDelete()
+  bool hideOnDelete() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_hide_on_delete(cast(GtkWidget*)this._cPtr);
@@ -3751,7 +3758,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       unnecessary work.
       Returns: true if widget is being destroyed
   */
-  bool inDestruction()
+  bool inDestruction() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_in_destruction(cast(GtkWidget*)this._cPtr);
@@ -3776,7 +3783,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       before the construct properties are set. Properties passed to [gobject.object.ObjectWrap.new_]
       should take precedence over properties set in the private template XML.
   */
-  void initTemplate()
+  void initTemplate() nothrow
   {
     gtk_widget_init_template(cast(GtkWidget*)this._cPtr);
   }
@@ -3789,7 +3796,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         region = shape to be added, or null to remove an existing shape
   */
-  void inputShapeCombineRegion(cairo.region.Region region = null)
+  void inputShapeCombineRegion(cairo.region.Region region = null) nothrow
   {
     gtk_widget_input_shape_combine_region(cast(GtkWidget*)this._cPtr, region ? cast(cairo_region_t*)region._cPtr(No.Dup) : null);
   }
@@ -3807,7 +3814,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         name = the prefix for actions in group
         group = a #GActionGroup, or null
   */
-  void insertActionGroup(string name, gio.action_group.ActionGroup group = null)
+  void insertActionGroup(string name, gio.action_group.ActionGroup group = null) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_insert_action_group(cast(GtkWidget*)this._cPtr, _name, group ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)group)._cPtr(No.Dup) : null);
@@ -3825,7 +3832,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
             intersection of widget and area
       Returns: true if there was an intersection
   */
-  bool intersect(gdk.rectangle.Rectangle area, out gdk.rectangle.Rectangle intersection)
+  bool intersect(gdk.rectangle.Rectangle area, out gdk.rectangle.Rectangle intersection) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_intersect(cast(GtkWidget*)this._cPtr, cast(const(GdkRectangle)*)&area, cast(GdkRectangle*)&intersection);
@@ -3841,7 +3848,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns: true if ancestor contains widget as a child,
            grandchild, great grandchild, etc.
   */
-  bool isAncestor(gtk.widget.Widget ancestor)
+  bool isAncestor(gtk.widget.Widget ancestor) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_is_ancestor(cast(GtkWidget*)this._cPtr, ancestor ? cast(GtkWidget*)ancestor._cPtr(No.Dup) : null);
@@ -3861,7 +3868,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gdk.screen.Screen.isComposited] instead.
   */
-  bool isComposited()
+  bool isComposited() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_is_composited(cast(GtkWidget*)this._cPtr);
@@ -3873,7 +3880,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       to if it is mapped and visible.
       Returns: true if widget is drawable, false otherwise
   */
-  bool isDrawable()
+  bool isDrawable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_is_drawable(cast(GtkWidget*)this._cPtr);
@@ -3887,7 +3894,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       toplevel widget additionally has the global input focus.)
       Returns: true if the widget is the focus widget.
   */
-  bool isFocus()
+  bool isFocus() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_is_focus(cast(GtkWidget*)this._cPtr);
@@ -3899,7 +3906,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       it is sensitive itself and also its parent widget is sensitive
       Returns: true if the widget is effectively sensitive
   */
-  bool isSensitive()
+  bool isSensitive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_is_sensitive(cast(GtkWidget*)this._cPtr);
@@ -3914,7 +3921,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       widget.
       Returns: true if widget is a toplevel, false otherwise
   */
-  bool isToplevel()
+  bool isToplevel() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_is_toplevel(cast(GtkWidget*)this._cPtr);
@@ -3930,7 +3937,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       See also [gtk.widget.Widget.getVisible] and [gtk.widget.Widget.setVisible]
       Returns: true if the widget and all its parents are visible
   */
-  bool isVisible()
+  bool isVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_is_visible(cast(GtkWidget*)this._cPtr);
@@ -3972,7 +3979,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
                       if the emitting widget should try to handle the keyboard
                       navigation attempt in its parent container(s).
   */
-  bool keynavFailed(gtk.types.DirectionType direction)
+  bool keynavFailed(gtk.types.DirectionType direction) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_keynav_failed(cast(GtkWidget*)this._cPtr, direction);
@@ -3988,7 +3995,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       [gtk.accel_group.AccelGroup.fromAccelClosure].
       Returns: a newly allocated #GList of closures
   */
-  gobject.closure.Closure[] listAccelClosures()
+  gobject.closure.Closure[] listAccelClosures() nothrow
   {
     GList* _cretval;
     _cretval = gtk_widget_list_accel_closures(cast(GtkWidget*)this._cPtr);
@@ -4001,7 +4008,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       #GActionGroup's available to widget.
       Returns: a null-terminated array of strings.
   */
-  string[] listActionPrefixes()
+  string[] listActionPrefixes() nothrow
   {
     const(char*)* _cretval;
     _cretval = gtk_widget_list_action_prefixes(cast(GtkWidget*)this._cPtr);
@@ -4035,7 +4042,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
          mnemonic labels; free this list
          with [glib.list.List.free] when you are done with it.
   */
-  gtk.widget.Widget[] listMnemonicLabels()
+  gtk.widget.Widget[] listMnemonicLabels() nothrow
   {
     GList* _cretval;
     _cretval = gtk_widget_list_mnemonic_labels(cast(GtkWidget*)this._cPtr);
@@ -4047,7 +4054,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       This function is only for use in widget implementations. Causes
       a widget to be mapped if it isn’t already.
   */
-  void map()
+  void map() nothrow
   {
     gtk_widget_map(cast(GtkWidget*)this._cPtr);
   }
@@ -4059,7 +4066,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         groupCycling = true if there are other widgets with the same mnemonic
       Returns: true if the signal has been handled
   */
-  bool mnemonicActivate(bool groupCycling)
+  bool mnemonicActivate(bool groupCycling) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_mnemonic_activate(cast(GtkWidget*)this._cPtr, groupCycling);
@@ -4091,7 +4098,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.overrideBackgroundColor] instead
   */
-  void modifyBase(gtk.types.StateType state, gdk.color.Color color)
+  void modifyBase(gtk.types.StateType state, gdk.color.Color color) nothrow
   {
     gtk_widget_modify_base(cast(GtkWidget*)this._cPtr, state, cast(const(GdkColor)*)&color);
   }
@@ -4120,7 +4127,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.overrideBackgroundColor] instead
   */
-  void modifyBg(gtk.types.StateType state, gdk.color.Color color)
+  void modifyBg(gtk.types.StateType state, gdk.color.Color color) nothrow
   {
     gtk_widget_modify_bg(cast(GtkWidget*)this._cPtr, state, cast(const(GdkColor)*)&color);
   }
@@ -4143,7 +4150,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.overrideCursor] instead.
   */
-  void modifyCursor(gdk.color.Color primary, gdk.color.Color secondary)
+  void modifyCursor(gdk.color.Color primary, gdk.color.Color secondary) nothrow
   {
     gtk_widget_modify_cursor(cast(GtkWidget*)this._cPtr, cast(const(GdkColor)*)&primary, cast(const(GdkColor)*)&secondary);
   }
@@ -4162,7 +4169,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.overrideColor] instead
   */
-  void modifyFg(gtk.types.StateType state, gdk.color.Color color)
+  void modifyFg(gtk.types.StateType state, gdk.color.Color color) nothrow
   {
     gtk_widget_modify_fg(cast(GtkWidget*)this._cPtr, state, cast(const(GdkColor)*)&color);
   }
@@ -4179,7 +4186,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.overrideFont] instead
   */
-  void modifyFont(pango.font_description.FontDescription fontDesc = null)
+  void modifyFont(pango.font_description.FontDescription fontDesc = null) nothrow
   {
     gtk_widget_modify_font(cast(GtkWidget*)this._cPtr, fontDesc ? cast(PangoFontDescription*)fontDesc._cPtr(No.Dup) : null);
   }
@@ -4209,7 +4216,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use #GtkStyleContext with a custom #GtkStyleProvider instead
   */
-  void modifyStyle(gtk.rc_style.RcStyle style)
+  void modifyStyle(gtk.rc_style.RcStyle style) nothrow
   {
     gtk_widget_modify_style(cast(GtkWidget*)this._cPtr, style ? cast(GtkRcStyle*)style._cPtr(No.Dup) : null);
   }
@@ -4231,7 +4238,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.overrideColor] instead
   */
-  void modifyText(gtk.types.StateType state, gdk.color.Color color)
+  void modifyText(gtk.types.StateType state, gdk.color.Color color) nothrow
   {
     gtk_widget_modify_text(cast(GtkWidget*)this._cPtr, state, cast(const(GdkColor)*)&color);
   }
@@ -4254,7 +4261,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           drawing of a widget through the #GtkWidget::draw signal, and use Cairo to
           draw a specific color, regardless of the CSS style.
   */
-  void overrideBackgroundColor(gtk.types.StateFlags state, gdk.rgba.RGBA color)
+  void overrideBackgroundColor(gtk.types.StateFlags state, gdk.rgba.RGBA color) nothrow
   {
     gtk_widget_override_background_color(cast(GtkWidget*)this._cPtr, state, cast(const(GdkRGBA)*)&color);
   }
@@ -4293,7 +4300,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use a custom style provider and style classes instead
   */
-  void overrideColor(gtk.types.StateFlags state, gdk.rgba.RGBA color)
+  void overrideColor(gtk.types.StateFlags state, gdk.rgba.RGBA color) nothrow
   {
     gtk_widget_override_color(cast(GtkWidget*)this._cPtr, state, cast(const(GdkRGBA)*)&color);
   }
@@ -4320,7 +4327,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           and secondary cursors you should use a custom CSS style, through an
           application-specific #GtkStyleProvider and a CSS style class.
   */
-  void overrideCursor(gdk.rgba.RGBA cursor, gdk.rgba.RGBA secondaryCursor)
+  void overrideCursor(gdk.rgba.RGBA cursor, gdk.rgba.RGBA secondaryCursor) nothrow
   {
     gtk_widget_override_cursor(cast(GtkWidget*)this._cPtr, cast(const(GdkRGBA)*)&cursor, cast(const(GdkRGBA)*)&secondaryCursor);
   }
@@ -4338,7 +4345,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           you should use a custom CSS style, through an application-specific
           #GtkStyleProvider and a CSS style class.
   */
-  void overrideFont(pango.font_description.FontDescription fontDesc = null)
+  void overrideFont(pango.font_description.FontDescription fontDesc = null) nothrow
   {
     gtk_widget_override_font(cast(GtkWidget*)this._cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc._cPtr(No.Dup) : null);
   }
@@ -4361,7 +4368,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           you should use a custom CSS style, through an application-specific
           #GtkStyleProvider and a CSS style class.
   */
-  void overrideSymbolicColor(string name, gdk.rgba.RGBA color)
+  void overrideSymbolicColor(string name, gdk.rgba.RGBA color) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_override_symbolic_color(cast(GtkWidget*)this._cPtr, _name, cast(const(GdkRGBA)*)&color);
@@ -4391,7 +4398,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.getPath] instead
   */
-  void path(out uint pathLength, out string path, out string pathReversed)
+  void path(out uint pathLength, out string path, out string pathReversed) nothrow
   {
     char* _path;
     char* _pathReversed;
@@ -4410,7 +4417,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       
       An example user of this function is [gtk.widget.Widget.setHalign].
   */
-  void queueAllocate()
+  void queueAllocate() nothrow
   {
     gtk_widget_queue_allocate(cast(GtkWidget*)this._cPtr);
   }
@@ -4422,7 +4429,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       
       See [gtk.widget.Widget.computeExpand].
   */
-  void queueComputeExpand()
+  void queueComputeExpand() nothrow
   {
     gtk_widget_queue_compute_expand(cast(GtkWidget*)this._cPtr);
   }
@@ -4431,7 +4438,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Equivalent to calling [gtk.widget.Widget.queueDrawArea] for the
       entire area of a widget.
   */
-  void queueDraw()
+  void queueDraw() nothrow
   {
     gtk_widget_queue_draw(cast(GtkWidget*)this._cPtr);
   }
@@ -4455,7 +4462,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         width = width of region to draw
         height = height of region to draw
   */
-  void queueDrawArea(int x, int y, int width, int height)
+  void queueDrawArea(int x, int y, int width, int height) nothrow
   {
     gtk_widget_queue_draw_area(cast(GtkWidget*)this._cPtr, x, y, width, height);
   }
@@ -4475,7 +4482,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         region = region to draw
   */
-  void queueDrawRegion(cairo.region.Region region)
+  void queueDrawRegion(cairo.region.Region region) nothrow
   {
     gtk_widget_queue_draw_region(cast(GtkWidget*)this._cPtr, region ? cast(const(cairo_region_t)*)region._cPtr(No.Dup) : null);
   }
@@ -4492,7 +4499,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       virtual method. Calls to [gtk.widget.Widget.queueResize] from inside
       GtkWidgetClass::size_allocate will be silently ignored.
   */
-  void queueResize()
+  void queueResize() nothrow
   {
     gtk_widget_queue_resize(cast(GtkWidget*)this._cPtr);
   }
@@ -4501,7 +4508,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       This function works like [gtk.widget.Widget.queueResize],
       except that the widget is not invalidated.
   */
-  void queueResizeNoRedraw()
+  void queueResizeNoRedraw() nothrow
   {
     gtk_widget_queue_resize_no_redraw(cast(GtkWidget*)this._cPtr);
   }
@@ -4526,7 +4533,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       #GtkWidget::draw. Or simply g_signal_connect () to the
       #GtkWidget::realize signal.
   */
-  void realize()
+  void realize() nothrow
   {
     gtk_widget_realize(cast(GtkWidget*)this._cPtr);
   }
@@ -4547,7 +4554,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Deprecated: Use [gtk.widget.Widget.getAllocation] and
             [cairo.region.Region.intersectRectangle] to get the same behavior.
   */
-  cairo.region.Region regionIntersect(cairo.region.Region region)
+  cairo.region.Region regionIntersect(cairo.region.Region region) nothrow
   {
     cairo_region_t* _cretval;
     _cretval = gtk_widget_region_intersect(cast(GtkWidget*)this._cPtr, region ? cast(const(cairo_region_t)*)region._cPtr(No.Dup) : null);
@@ -4568,7 +4575,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         window = a #GdkWindow
   */
-  void registerWindow(gdk.window.Window window)
+  void registerWindow(gdk.window.Window window) nothrow
   {
     gtk_widget_register_window(cast(GtkWidget*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null);
   }
@@ -4583,7 +4590,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         accelMods = modifier key combination of the accelerator
       Returns: whether an accelerator was installed and could be removed
   */
-  bool removeAccelerator(gtk.accel_group.AccelGroup accelGroup, uint accelKey, gdk.types.ModifierType accelMods)
+  bool removeAccelerator(gtk.accel_group.AccelGroup accelGroup, uint accelKey, gdk.types.ModifierType accelMods) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_remove_accelerator(cast(GtkWidget*)this._cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup._cPtr(No.Dup) : null, accelKey, accelMods);
@@ -4600,7 +4607,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         label = a #GtkWidget that was previously set as a mnemonic label for
                   widget with [gtk.widget.Widget.addMnemonicLabel].
   */
-  void removeMnemonicLabel(gtk.widget.Widget label)
+  void removeMnemonicLabel(gtk.widget.Widget label) nothrow
   {
     gtk_widget_remove_mnemonic_label(cast(GtkWidget*)this._cPtr, label ? cast(GtkWidget*)label._cPtr(No.Dup) : null);
   }
@@ -4612,7 +4619,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         id = an id returned by [gtk.widget.Widget.addTickCallback]
   */
-  void removeTickCallback(uint id)
+  void removeTickCallback(uint id) nothrow
   {
     gtk_widget_remove_tick_callback(cast(GtkWidget*)this._cPtr, id);
   }
@@ -4641,7 +4648,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.renderIconPixbuf] instead.
   */
-  gdkpixbuf.pixbuf.Pixbuf renderIcon(string stockId, gtk.types.IconSize size, string detail = null)
+  gdkpixbuf.pixbuf.Pixbuf renderIcon(string stockId, gtk.types.IconSize size, string detail = null) nothrow
   {
     GdkPixbuf* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
@@ -4672,7 +4679,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.icon_theme.IconTheme.loadIcon] instead.
   */
-  gdkpixbuf.pixbuf.Pixbuf renderIconPixbuf(string stockId, gtk.types.IconSize size)
+  gdkpixbuf.pixbuf.Pixbuf renderIconPixbuf(string stockId, gtk.types.IconSize size) nothrow
   {
     GdkPixbuf* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
@@ -4690,7 +4697,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.container.Container.remove] and [gtk.container.Container.add].
   */
-  void reparent(gtk.widget.Widget newParent)
+  void reparent(gtk.widget.Widget newParent) nothrow
   {
     gtk_widget_reparent(cast(GtkWidget*)this._cPtr, newParent ? cast(GtkWidget*)newParent._cPtr(No.Dup) : null);
   }
@@ -4704,7 +4711,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use #GtkStyleContext instead, and [gtk.widget.Widget.resetStyle]
   */
-  void resetRcStyles()
+  void resetRcStyles() nothrow
   {
     gtk_widget_reset_rc_styles(cast(GtkWidget*)this._cPtr);
   }
@@ -4715,7 +4722,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       to use this on a child when reordering it in a way that a different
       style might apply to it. See also [gtk.container.Container.getPathForChild].
   */
-  void resetStyle()
+  void resetStyle() nothrow
   {
     gtk_widget_reset_style(cast(GtkWidget*)this._cPtr);
   }
@@ -4742,7 +4749,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           API, and drawing should only happen inside #GtkWidget::draw
           implementations
   */
-  int sendExpose(gdk.event.Event event)
+  int sendExpose(gdk.event.Event event) nothrow
   {
     int _retval;
     _retval = gtk_widget_send_expose(cast(GtkWidget*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
@@ -4779,7 +4786,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Returns: the return value from the event signal emission: true
           if the event was handled, and false otherwise
   */
-  bool sendFocusChange(gdk.event.Event event)
+  bool sendFocusChange(gdk.event.Event event) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_send_focus_change(cast(GtkWidget*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
@@ -4813,7 +4820,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         accelPath = path used to look up the accelerator
         accelGroup = a #GtkAccelGroup.
   */
-  void setAccelPath(string accelPath = null, gtk.accel_group.AccelGroup accelGroup = null)
+  void setAccelPath(string accelPath = null, gtk.accel_group.AccelGroup accelGroup = null) nothrow
   {
     const(char)* _accelPath = accelPath.toCString(No.Alloc);
     gtk_widget_set_accel_path(cast(GtkWidget*)this._cPtr, _accelPath, accelGroup ? cast(GtkAccelGroup*)accelGroup._cPtr(No.Dup) : null);
@@ -4833,7 +4840,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         allocation = a pointer to a #GtkAllocation to copy from
   */
-  void setAllocation(gtk.types.Allocation allocation)
+  void setAllocation(gtk.types.Allocation allocation) nothrow
   {
     gtk_widget_set_allocation(cast(GtkWidget*)this._cPtr, cast(const(GtkAllocation)*)&allocation);
   }
@@ -4854,7 +4861,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         appPaintable = true if the application will paint on the widget
   */
-  void setAppPaintable(bool appPaintable)
+  void setAppPaintable(bool appPaintable) nothrow
   {
     gtk_widget_set_app_paintable(cast(GtkWidget*)this._cPtr, appPaintable);
   }
@@ -4867,7 +4874,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         canDefault = whether or not widget can be a default widget.
   */
-  void setCanDefault(bool canDefault)
+  void setCanDefault(bool canDefault) nothrow
   {
     gtk_widget_set_can_default(cast(GtkWidget*)this._cPtr, canDefault);
   }
@@ -4880,7 +4887,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         canFocus = whether or not widget can own the input focus.
   */
-  void setCanFocus(bool canFocus)
+  void setCanFocus(bool canFocus) nothrow
   {
     gtk_widget_set_can_focus(cast(GtkWidget*)this._cPtr, canFocus);
   }
@@ -4907,7 +4914,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         isVisible = if true, widget should be mapped along with its parent.
   */
-  void setChildVisible(bool isVisible)
+  void setChildVisible(bool isVisible) nothrow
   {
     gtk_widget_set_child_visible(cast(GtkWidget*)this._cPtr, isVisible);
   }
@@ -4927,7 +4934,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         clip = a pointer to a #GtkAllocation to copy from
   */
-  void setClip(gtk.types.Allocation clip)
+  void setClip(gtk.types.Allocation clip) nothrow
   {
     gtk_widget_set_clip(cast(GtkWidget*)this._cPtr, cast(const(GtkAllocation)*)&clip);
   }
@@ -4941,7 +4948,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget_class.WidgetClass.setTemplate], or don’t use this API at all.
   */
-  void setCompositeName(string name)
+  void setCompositeName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_set_composite_name(cast(GtkWidget*)this._cPtr, _name);
@@ -4959,7 +4966,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         device = a #GdkDevice
         enabled = whether to enable the device
   */
-  void setDeviceEnabled(gdk.device.Device device, bool enabled)
+  void setDeviceEnabled(gdk.device.Device device, bool enabled) nothrow
   {
     gtk_widget_set_device_enabled(cast(GtkWidget*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, enabled);
   }
@@ -4981,7 +4988,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         device = a #GdkDevice
         events = event mask
   */
-  void setDeviceEvents(gdk.device.Device device, gdk.types.EventMask events)
+  void setDeviceEvents(gdk.device.Device device, gdk.types.EventMask events) nothrow
   {
     gtk_widget_set_device_events(cast(GtkWidget*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, events);
   }
@@ -5003,7 +5010,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         dir = the new direction
   */
-  void setDirection(gtk.types.TextDirection dir)
+  void setDirection(gtk.types.TextDirection dir) nothrow
   {
     gtk_widget_set_direction(cast(GtkWidget*)this._cPtr, dir);
   }
@@ -5042,7 +5049,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         non-native windows.
         It should not be used in newly written code.
   */
-  void setDoubleBuffered(bool doubleBuffered)
+  void setDoubleBuffered(bool doubleBuffered) nothrow
   {
     gtk_widget_set_double_buffered(cast(GtkWidget*)this._cPtr, doubleBuffered);
   }
@@ -5063,7 +5070,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         events = event mask
   */
-  void setEvents(int events)
+  void setEvents(int events) nothrow
   {
     gtk_widget_set_events(cast(GtkWidget*)this._cPtr, events);
   }
@@ -5077,7 +5084,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         focusOnClick = whether the widget should grab focus when clicked with the mouse
   */
-  void setFocusOnClick(bool focusOnClick)
+  void setFocusOnClick(bool focusOnClick) nothrow
   {
     gtk_widget_set_focus_on_click(cast(GtkWidget*)this._cPtr, focusOnClick);
   }
@@ -5090,7 +5097,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         fontMap = a #PangoFontMap, or null to unset any previously
               set font map
   */
-  void setFontMap(pango.font_map.FontMap fontMap = null)
+  void setFontMap(pango.font_map.FontMap fontMap = null) nothrow
   {
     gtk_widget_set_font_map(cast(GtkWidget*)this._cPtr, fontMap ? cast(PangoFontMap*)fontMap._cPtr(No.Dup) : null);
   }
@@ -5103,7 +5110,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         options = a #cairo_font_options_t, or null to unset any
             previously set default font options.
   */
-  void setFontOptions(cairo.font_options.FontOptions options = null)
+  void setFontOptions(cairo.font_options.FontOptions options = null) nothrow
   {
     gtk_widget_set_font_options(cast(GtkWidget*)this._cPtr, options ? cast(const(cairo_font_options_t)*)options._cPtr(No.Dup) : null);
   }
@@ -5115,7 +5122,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         align_ = the horizontal alignment
   */
-  void setHalign(gtk.types.Align align_)
+  void setHalign(gtk.types.Align align_) nothrow
   {
     gtk_widget_set_halign(cast(GtkWidget*)this._cPtr, align_);
   }
@@ -5127,7 +5134,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         hasTooltip = whether or not widget has a tooltip.
   */
-  void setHasTooltip(bool hasTooltip)
+  void setHasTooltip(bool hasTooltip) nothrow
   {
     gtk_widget_set_has_tooltip(cast(GtkWidget*)this._cPtr, hasTooltip);
   }
@@ -5147,7 +5154,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         hasWindow = whether or not widget has a window.
   */
-  void setHasWindow(bool hasWindow)
+  void setHasWindow(bool hasWindow) nothrow
   {
     gtk_widget_set_has_window(cast(GtkWidget*)this._cPtr, hasWindow);
   }
@@ -5182,7 +5189,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         expand = whether to expand
   */
-  void setHexpand(bool expand)
+  void setHexpand(bool expand) nothrow
   {
     gtk_widget_set_hexpand(cast(GtkWidget*)this._cPtr, expand);
   }
@@ -5207,7 +5214,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         set = value for hexpand-set property
   */
-  void setHexpandSet(bool set)
+  void setHexpandSet(bool set) nothrow
   {
     gtk_widget_set_hexpand_set(cast(GtkWidget*)this._cPtr, set);
   }
@@ -5221,7 +5228,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         mapped = true to mark the widget as mapped
   */
-  void setMapped(bool mapped)
+  void setMapped(bool mapped) nothrow
   {
     gtk_widget_set_mapped(cast(GtkWidget*)this._cPtr, mapped);
   }
@@ -5233,7 +5240,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         margin = the bottom margin
   */
-  void setMarginBottom(int margin)
+  void setMarginBottom(int margin) nothrow
   {
     gtk_widget_set_margin_bottom(cast(GtkWidget*)this._cPtr, margin);
   }
@@ -5245,7 +5252,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         margin = the end margin
   */
-  void setMarginEnd(int margin)
+  void setMarginEnd(int margin) nothrow
   {
     gtk_widget_set_margin_end(cast(GtkWidget*)this._cPtr, margin);
   }
@@ -5259,7 +5266,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.setMarginStart] instead.
   */
-  void setMarginLeft(int margin)
+  void setMarginLeft(int margin) nothrow
   {
     gtk_widget_set_margin_left(cast(GtkWidget*)this._cPtr, margin);
   }
@@ -5273,7 +5280,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.setMarginEnd] instead.
   */
-  void setMarginRight(int margin)
+  void setMarginRight(int margin) nothrow
   {
     gtk_widget_set_margin_right(cast(GtkWidget*)this._cPtr, margin);
   }
@@ -5285,7 +5292,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         margin = the start margin
   */
-  void setMarginStart(int margin)
+  void setMarginStart(int margin) nothrow
   {
     gtk_widget_set_margin_start(cast(GtkWidget*)this._cPtr, margin);
   }
@@ -5297,7 +5304,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         margin = the top margin
   */
-  void setMarginTop(int margin)
+  void setMarginTop(int margin) nothrow
   {
     gtk_widget_set_margin_top(cast(GtkWidget*)this._cPtr, margin);
   }
@@ -5316,7 +5323,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         name = name for the widget
   */
-  void setName(string name)
+  void setName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_set_name(cast(GtkWidget*)this._cPtr, _name);
@@ -5332,7 +5339,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         noShowAll = the new value for the “no-show-all” property
   */
-  void setNoShowAll(bool noShowAll)
+  void setNoShowAll(bool noShowAll) nothrow
   {
     gtk_widget_set_no_show_all(cast(GtkWidget*)this._cPtr, noShowAll);
   }
@@ -5356,7 +5363,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         opacity = desired opacity, between 0 and 1
   */
-  void setOpacity(double opacity)
+  void setOpacity(double opacity) nothrow
   {
     gtk_widget_set_opacity(cast(GtkWidget*)this._cPtr, opacity);
   }
@@ -5372,7 +5379,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         parent = parent container
   */
-  void setParent(gtk.widget.Widget parent)
+  void setParent(gtk.widget.Widget parent) nothrow
   {
     gtk_widget_set_parent(cast(GtkWidget*)this._cPtr, parent ? cast(GtkWidget*)parent._cPtr(No.Dup) : null);
   }
@@ -5390,7 +5397,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         parentWindow = the new parent window.
   */
-  void setParentWindow(gdk.window.Window parentWindow)
+  void setParentWindow(gdk.window.Window parentWindow) nothrow
   {
     gtk_widget_set_parent_window(cast(GtkWidget*)this._cPtr, parentWindow ? cast(GdkWindow*)parentWindow._cPtr(No.Dup) : null);
   }
@@ -5406,7 +5413,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         realized = true to mark the widget as realized
   */
-  void setRealized(bool realized)
+  void setRealized(bool realized) nothrow
   {
     gtk_widget_set_realized(cast(GtkWidget*)this._cPtr, realized);
   }
@@ -5422,7 +5429,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         receivesDefault = whether or not widget can be a default widget.
   */
-  void setReceivesDefault(bool receivesDefault)
+  void setReceivesDefault(bool receivesDefault) nothrow
   {
     gtk_widget_set_receives_default(cast(GtkWidget*)this._cPtr, receivesDefault);
   }
@@ -5449,7 +5456,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
             when it is allocated to a new size. Otherwise, only the
             new portion of the widget will be redrawn.
   */
-  void setRedrawOnAllocate(bool redrawOnAllocate)
+  void setRedrawOnAllocate(bool redrawOnAllocate) nothrow
   {
     gtk_widget_set_redraw_on_allocate(cast(GtkWidget*)this._cPtr, redrawOnAllocate);
   }
@@ -5463,7 +5470,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         sensitive = true to make the widget sensitive
   */
-  void setSensitive(bool sensitive)
+  void setSensitive(bool sensitive) nothrow
   {
     gtk_widget_set_sensitive(cast(GtkWidget*)this._cPtr, sensitive);
   }
@@ -5504,7 +5511,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         width = width widget should request, or -1 to unset
         height = height widget should request, or -1 to unset
   */
-  void setSizeRequest(int width, int height)
+  void setSizeRequest(int width, int height) nothrow
   {
     gtk_widget_set_size_request(cast(GtkWidget*)this._cPtr, width, height);
   }
@@ -5519,7 +5526,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.setStateFlags] instead.
   */
-  void setState(gtk.types.StateType state)
+  void setState(gtk.types.StateType state) nothrow
   {
     gtk_widget_set_state(cast(GtkWidget*)this._cPtr, state);
   }
@@ -5543,7 +5550,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         flags = State flags to turn on
         clear = Whether to clear state before turning on flags
   */
-  void setStateFlags(gtk.types.StateFlags flags, bool clear)
+  void setStateFlags(gtk.types.StateFlags flags, bool clear) nothrow
   {
     gtk_widget_set_state_flags(cast(GtkWidget*)this._cPtr, flags, clear);
   }
@@ -5559,7 +5566,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use #GtkStyleContext instead
   */
-  void setStyle(gtk.style.Style style = null)
+  void setStyle(gtk.style.Style style = null) nothrow
   {
     gtk_widget_set_style(cast(GtkWidget*)this._cPtr, style ? cast(GtkStyle*)style._cPtr(No.Dup) : null);
   }
@@ -5573,7 +5580,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         supportMultidevice = true to support input from multiple devices.
   */
-  void setSupportMultidevice(bool supportMultidevice)
+  void setSupportMultidevice(bool supportMultidevice) nothrow
   {
     gtk_widget_set_support_multidevice(cast(GtkWidget*)this._cPtr, supportMultidevice);
   }
@@ -5591,7 +5598,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         markup = the contents of the tooltip for widget, or null
   */
-  void setTooltipMarkup(string markup = null)
+  void setTooltipMarkup(string markup = null) nothrow
   {
     const(char)* _markup = markup.toCString(No.Alloc);
     gtk_widget_set_tooltip_markup(cast(GtkWidget*)this._cPtr, _markup);
@@ -5607,7 +5614,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         text = the contents of the tooltip for widget
   */
-  void setTooltipText(string text = null)
+  void setTooltipText(string text = null) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_widget_set_tooltip_text(cast(GtkWidget*)this._cPtr, _text);
@@ -5623,7 +5630,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         customWindow = a #GtkWindow, or null
   */
-  void setTooltipWindow(gtk.window.Window customWindow = null)
+  void setTooltipWindow(gtk.window.Window customWindow = null) nothrow
   {
     gtk_widget_set_tooltip_window(cast(GtkWidget*)this._cPtr, customWindow ? cast(GtkWindow*)customWindow._cPtr(No.Dup) : null);
   }
@@ -5635,7 +5642,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         align_ = the vertical alignment
   */
-  void setValign(gtk.types.Align align_)
+  void setValign(gtk.types.Align align_) nothrow
   {
     gtk_widget_set_valign(cast(GtkWidget*)this._cPtr, align_);
   }
@@ -5649,7 +5656,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         expand = whether to expand
   */
-  void setVexpand(bool expand)
+  void setVexpand(bool expand) nothrow
   {
     gtk_widget_set_vexpand(cast(GtkWidget*)this._cPtr, expand);
   }
@@ -5663,7 +5670,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         set = value for vexpand-set property
   */
-  void setVexpandSet(bool set)
+  void setVexpandSet(bool set) nothrow
   {
     gtk_widget_set_vexpand_set(cast(GtkWidget*)this._cPtr, set);
   }
@@ -5680,7 +5687,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         visible = whether the widget should be shown or not
   */
-  void setVisible(bool visible)
+  void setVisible(bool visible) nothrow
   {
     gtk_widget_set_visible(cast(GtkWidget*)this._cPtr, visible);
   }
@@ -5697,7 +5704,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         visual = visual to be used or null to unset a previous one
   */
-  void setVisual(gdk.visual.Visual visual = null)
+  void setVisual(gdk.visual.Visual visual = null) nothrow
   {
     gtk_widget_set_visual(cast(GtkWidget*)this._cPtr, visual ? cast(GdkVisual*)visual._cPtr(No.Dup) : null);
   }
@@ -5718,7 +5725,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         window = a #GdkWindow
   */
-  void setWindow(gdk.window.Window window)
+  void setWindow(gdk.window.Window window) nothrow
   {
     gtk_widget_set_window(cast(GtkWidget*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(Yes.Dup) : null);
   }
@@ -5731,7 +5738,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         region = shape to be added, or null to remove an existing shape
   */
-  void shapeCombineRegion(cairo.region.Region region = null)
+  void shapeCombineRegion(cairo.region.Region region = null) nothrow
   {
     gtk_widget_shape_combine_region(cast(GtkWidget*)this._cPtr, region ? cast(cairo_region_t*)region._cPtr(No.Dup) : null);
   }
@@ -5749,7 +5756,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       mapped; other shown widgets are realized and mapped when their
       toplevel container is realized and mapped.
   */
-  void show()
+  void show() nothrow
   {
     gtk_widget_show(cast(GtkWidget*)this._cPtr);
   }
@@ -5758,7 +5765,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Recursively shows a widget, and any child widgets (if the widget is
       a container).
   */
-  void showAll()
+  void showAll() nothrow
   {
     gtk_widget_show_all(cast(GtkWidget*)this._cPtr);
   }
@@ -5770,7 +5777,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       because the main loop is running, anything can happen during
       this function.
   */
-  void showNow()
+  void showNow() nothrow
   {
     gtk_widget_show_now(cast(GtkWidget*)this._cPtr);
   }
@@ -5791,7 +5798,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         allocation = position and size to be allocated to widget
   */
-  void sizeAllocate(gtk.types.Allocation allocation)
+  void sizeAllocate(gtk.types.Allocation allocation) nothrow
   {
     gtk_widget_size_allocate(cast(GtkWidget*)this._cPtr, cast(GtkAllocation*)&allocation);
   }
@@ -5815,7 +5822,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         allocation = position and size to be allocated to widget
         baseline = The baseline of the child, or -1
   */
-  void sizeAllocateWithBaseline(gtk.types.Allocation allocation, int baseline)
+  void sizeAllocateWithBaseline(gtk.types.Allocation allocation, int baseline) nothrow
   {
     gtk_widget_size_allocate_with_baseline(cast(GtkWidget*)this._cPtr, cast(GtkAllocation*)&allocation, baseline);
   }
@@ -5839,7 +5846,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use [gtk.widget.Widget.getPreferredSize] instead.
   */
-  void sizeRequest(out gtk.requisition.Requisition requisition)
+  void sizeRequest(out gtk.requisition.Requisition requisition) nothrow
   {
     gtk_widget_size_request(cast(GtkWidget*)this._cPtr, cast(GtkRequisition*)&requisition);
   }
@@ -5859,7 +5866,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: This step is unnecessary with #GtkStyleContext.
   */
-  void styleAttach()
+  void styleAttach() nothrow
   {
     gtk_widget_style_attach(cast(GtkWidget*)this._cPtr);
   }
@@ -5871,7 +5878,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         propertyName = the name of a style property
         value = location to return the property value
   */
-  void styleGetProperty(string propertyName, gobject.value.Value value)
+  void styleGetProperty(string propertyName, gobject.value.Value value) nothrow
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
     gtk_widget_style_get_property(cast(GtkWidget*)this._cPtr, _propertyName, value ? cast(GValue*)value._cPtr(No.Dup) : null);
@@ -5882,7 +5889,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       This causes all queued #GtkWidget::child-notify signals on widget to be
       emitted.
   */
-  void thawChildNotify()
+  void thawChildNotify() nothrow
   {
     gtk_widget_thaw_child_notify(cast(GtkWidget*)this._cPtr);
   }
@@ -5903,7 +5910,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
           was no common ancestor. In this case, nothing is stored in
           *dest_x and *dest_y. Otherwise true.
   */
-  bool translateCoordinates(gtk.widget.Widget destWidget, int srcX, int srcY, out int destX, out int destY)
+  bool translateCoordinates(gtk.widget.Widget destWidget, int srcX, int srcY, out int destX, out int destY) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_translate_coordinates(cast(GtkWidget*)this._cPtr, destWidget ? cast(GtkWidget*)destWidget._cPtr(No.Dup) : null, srcX, srcY, cast(int*)&destX, cast(int*)&destY);
@@ -5915,7 +5922,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       is located. See [gtk.tooltip.Tooltip.triggerTooltipQuery] for more
       information.
   */
-  void triggerTooltipQuery()
+  void triggerTooltipQuery() nothrow
   {
     gtk_widget_trigger_tooltip_query(cast(GtkWidget*)this._cPtr);
   }
@@ -5924,7 +5931,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       This function is only for use in widget implementations. Causes
       a widget to be unmapped if it’s currently mapped.
   */
-  void unmap()
+  void unmap() nothrow
   {
     gtk_widget_unmap(cast(GtkWidget*)this._cPtr);
   }
@@ -5934,7 +5941,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Should be called by implementations of the remove method
       on #GtkContainer, to dissociate a child from the container.
   */
-  void unparent()
+  void unparent() nothrow
   {
     gtk_widget_unparent(cast(GtkWidget*)this._cPtr);
   }
@@ -5944,7 +5951,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Causes a widget to be unrealized (frees all GDK resources
       associated with the widget, such as widget->window).
   */
-  void unrealize()
+  void unrealize() nothrow
   {
     gtk_widget_unrealize(cast(GtkWidget*)this._cPtr);
   }
@@ -5957,7 +5964,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         window = a #GdkWindow
   */
-  void unregisterWindow(gdk.window.Window window)
+  void unregisterWindow(gdk.window.Window window) nothrow
   {
     gtk_widget_unregister_window(cast(GtkWidget*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null);
   }
@@ -5970,7 +5977,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         flags = State flags to turn off
   */
-  void unsetStateFlags(gtk.types.StateFlags flags)
+  void unsetStateFlags(gtk.types.StateFlags flags) nothrow
   {
     gtk_widget_unset_state_flags(cast(GtkWidget*)this._cPtr, flags);
   }
@@ -5990,13 +5997,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAccelClosuresChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAccelClosuresChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -6005,7 +6012,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.accelClosuresChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -6038,18 +6052,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectButtonPressEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectButtonPressEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_button.EventButton)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -6057,7 +6072,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.buttonPressEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -6092,18 +6114,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectButtonReleaseEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectButtonReleaseEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_button.EventButton)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -6111,7 +6134,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.buttonReleaseEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -6142,18 +6172,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCanActivateAccel(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCanActivateAccel(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -6161,7 +6192,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.canActivateAccel");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -6190,14 +6228,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChildNotify(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectChildNotify(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gobject.param_spec.ParamSpec)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -6209,7 +6247,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.childNotify");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -6235,13 +6280,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use GdkScreen::composited-changed instead.
   */
-  gulong connectCompositedChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCompositedChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -6250,7 +6295,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.compositedChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -6282,18 +6334,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectConfigureEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectConfigureEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_configure.EventConfigure)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -6301,7 +6354,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.configureEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -6331,18 +6391,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDamageEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDamageEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_expose.EventExpose)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -6350,7 +6411,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.damageEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -6382,18 +6450,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeleteEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeleteEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event.Event)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -6401,7 +6470,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.deleteEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -6429,13 +6505,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDestroy(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDestroy(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -6444,7 +6520,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.destroy");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -6477,18 +6560,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDestroyEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDestroyEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event.Event)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -6496,7 +6580,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.destroyEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -6523,14 +6614,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDirectionChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDirectionChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.TextDirection)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -6542,7 +6633,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.directionChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -6572,14 +6670,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDragBegin(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragBegin(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -6591,7 +6689,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.dragBegin");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -6618,14 +6723,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDragDataDelete(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragDataDelete(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -6637,7 +6742,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.dragDataDelete");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -6672,7 +6784,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDragDataGet(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragDataGet(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
@@ -6682,7 +6794,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gtk.widget.Widget)))
   && Parameters!T.length < 6)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -6703,7 +6815,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 4)
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.dragDataGet");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -6797,7 +6916,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDragDataReceived(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragDataReceived(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
@@ -6809,7 +6928,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   && (Parameters!T.length < 7 || (ParameterStorageClassTuple!T[6] == ParameterStorageClass.none && is(Parameters!T[6] : gtk.widget.Widget)))
   && Parameters!T.length < 8)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 7, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -6836,7 +6955,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 6)
         _paramTuple[6] = getVal!(Parameters!T[6])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.dragDataReceived");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -6876,7 +7002,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDragDrop(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragDrop(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
@@ -6886,11 +7012,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gtk.widget.Widget)))
   && Parameters!T.length < 6)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -6907,7 +7034,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 4)
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.dragDrop");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -6935,14 +7069,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDragEnd(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -6954,7 +7088,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.dragEnd");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -6985,7 +7126,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDragFailed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragFailed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
@@ -6993,11 +7134,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.widget.Widget)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -7008,7 +7150,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.dragFailed");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -7044,7 +7193,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDragLeave(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragLeave(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
@@ -7052,7 +7201,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.widget.Widget)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -7067,7 +7216,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.dragLeave");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -7183,7 +7339,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDragMotion(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragMotion(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
@@ -7193,11 +7349,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gtk.widget.Widget)))
   && Parameters!T.length < 6)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -7214,7 +7371,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 4)
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.dragMotion");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -7258,18 +7422,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDraw(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDraw(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == cairo.context.Context)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -7277,7 +7442,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.draw");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -7312,18 +7484,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEnterNotifyEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEnterNotifyEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_crossing.EventCrossing)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -7331,7 +7504,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.enterNotifyEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -7366,18 +7546,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event.Event)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -7385,7 +7566,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.event");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -7413,14 +7601,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEventAfter(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEventAfter(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event.Event)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -7432,7 +7620,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.eventAfter");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -7457,18 +7652,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFocus(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFocus(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.DirectionType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -7476,7 +7672,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.focus");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -7509,18 +7712,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFocusInEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFocusInEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_focus.EventFocus)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -7528,7 +7732,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.focusInEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -7561,18 +7772,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFocusOutEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFocusOutEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_focus.EventFocus)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -7580,7 +7792,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.focusOutEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -7613,18 +7832,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGrabBrokenEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGrabBrokenEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_grab_broken.EventGrabBroken)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -7632,7 +7852,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.grabBrokenEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -7656,13 +7883,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGrabFocus(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGrabFocus(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -7671,7 +7898,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.grabFocus");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -7703,14 +7937,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGrabNotify(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGrabNotify(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -7722,7 +7956,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.grabNotify");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -7745,13 +7986,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectHide(T)(T callback, Flag!"After" after = No.After)
+  gulong connectHide(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -7760,7 +8001,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.hide");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -7789,14 +8037,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectHierarchyChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectHierarchyChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -7808,7 +8056,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.hierarchyChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -7840,18 +8095,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectKeyPressEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectKeyPressEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_key.EventKey)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -7859,7 +8115,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.keyPressEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -7892,18 +8155,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectKeyReleaseEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectKeyReleaseEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_key.EventKey)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -7911,7 +8175,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.keyReleaseEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -7941,18 +8212,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectKeynavFailed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectKeynavFailed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.DirectionType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -7960,7 +8232,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.keynavFailed");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -7995,18 +8274,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLeaveNotifyEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLeaveNotifyEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_crossing.EventCrossing)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -8014,7 +8294,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.leaveNotifyEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -8046,13 +8333,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMap(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMap(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -8061,7 +8348,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.map");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -8092,18 +8386,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMapEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMapEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_any.EventAny)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -8111,7 +8406,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.mapEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -8140,18 +8442,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMnemonicActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMnemonicActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -8159,7 +8462,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.mnemonicActivate");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -8194,18 +8504,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMotionNotifyEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMotionNotifyEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_motion.EventMotion)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -8213,7 +8524,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.motionNotifyEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -8239,14 +8557,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveFocus(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveFocus(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.DirectionType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -8258,7 +8576,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.moveFocus");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -8284,14 +8609,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectParentSet(T)(T callback, Flag!"After" after = No.After)
+  gulong connectParentSet(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -8303,7 +8628,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.parentSet");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -8332,22 +8664,30 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPopupMenu(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPopupMenu(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.popupMenu");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -8380,18 +8720,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPropertyNotifyEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPropertyNotifyEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_property.EventProperty)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -8399,7 +8740,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.propertyNotifyEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -8431,18 +8779,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectProximityInEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectProximityInEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_proximity.EventProximity)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -8450,7 +8799,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.proximityInEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -8482,18 +8838,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectProximityOutEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectProximityOutEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_proximity.EventProximity)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -8501,7 +8858,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.proximityOutEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -8547,7 +8911,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectQueryTooltip(T)(T callback, Flag!"After" after = No.After)
+  gulong connectQueryTooltip(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -8557,11 +8921,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gtk.widget.Widget)))
   && Parameters!T.length < 6)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -8578,7 +8943,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 4)
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.queryTooltip");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -8604,13 +8976,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRealize(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRealize(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -8619,7 +8991,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.realize");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -8645,14 +9024,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectScreenChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectScreenChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.screen.Screen)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -8664,7 +9043,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.screenChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -8698,18 +9084,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectScrollEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectScrollEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_scroll.EventScroll)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -8717,7 +9104,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.scrollEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -8747,18 +9141,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectionClearEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectionClearEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_selection.EventSelection)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -8766,7 +9161,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.selectionClearEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -8796,7 +9198,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectionGet(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectionGet(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.selection_data.SelectionData)))
@@ -8805,7 +9207,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.widget.Widget)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -8823,7 +9225,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.selectionGet");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -8848,18 +9257,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectionNotifyEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectionNotifyEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_selection.EventSelection)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -8867,7 +9277,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.selectionNotifyEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -8895,7 +9312,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectionReceived(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectionReceived(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.selection_data.SelectionData)))
@@ -8903,7 +9320,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.widget.Widget)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -8918,7 +9335,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.selectionReceived");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -8947,18 +9371,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectionRequestEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectionRequestEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_selection.EventSelection)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -8966,7 +9391,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.selectionRequestEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -8991,13 +9423,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectShow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -9006,7 +9438,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.show");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -9032,18 +9471,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectShowHelp(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowHelp(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.WidgetHelpType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -9051,7 +9491,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.showHelp");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -9078,14 +9525,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSizeAllocate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSizeAllocate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.Allocation)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -9097,7 +9544,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.sizeAllocate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -9124,14 +9578,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use #GtkWidget::state-flags-changed instead.
   */
-  gulong connectStateChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStateChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.StateType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -9143,7 +9597,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.stateChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -9168,14 +9629,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectStateFlagsChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStateFlagsChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.StateFlags)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -9187,7 +9648,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.stateFlagsChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -9220,14 +9688,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use the #GtkWidget::style-updated signal
   */
-  gulong connectStyleSet(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStyleSet(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.style.Style)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -9239,7 +9707,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.styleSet");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -9266,13 +9741,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectStyleUpdated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStyleUpdated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -9281,7 +9756,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.styleUpdated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -9306,18 +9788,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTouchEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTouchEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event.Event)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -9325,7 +9808,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.touchEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -9354,13 +9844,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUnmap(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUnmap(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -9369,7 +9859,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.unmap");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -9400,18 +9897,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUnmapEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUnmapEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_any.EventAny)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -9419,7 +9917,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.unmapEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -9446,13 +9951,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUnrealize(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUnrealize(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -9461,7 +9966,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.unrealize");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -9497,18 +10009,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
             reliably, so this signal can not be guaranteed to provide useful
             information.
   */
-  gulong connectVisibilityNotifyEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectVisibilityNotifyEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_visibility.EventVisibility)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -9516,7 +10029,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.visibilityNotifyEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -9550,18 +10070,19 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWindowStateEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWindowStateEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_window_state.EventWindowState)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.widget.Widget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -9569,7 +10090,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.widget.Widget.windowStateEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -9587,19 +10115,19 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
   mixin BuildableGidBuilderT!();
 
   /** */
-  T appPaintable(bool propval)
+  T appPaintable(bool propval) nothrow
   {
     return setProperty("app-paintable", propval);
   }
 
   /** */
-  T canDefault(bool propval)
+  T canDefault(bool propval) nothrow
   {
     return setProperty("can-default", propval);
   }
 
   /** */
-  T canFocus(bool propval)
+  T canFocus(bool propval) nothrow
   {
     return setProperty("can-focus", propval);
   }
@@ -9612,13 +10140,13 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
   
       Deprecated: Widgets should not use this property.
   */
-  T doubleBuffered(bool propval)
+  T doubleBuffered(bool propval) nothrow
   {
     return setProperty("double-buffered", propval);
   }
 
   /** */
-  T events(gdk.types.EventMask propval)
+  T events(gdk.types.EventMask propval) nothrow
   {
     return setProperty("events", propval);
   }
@@ -9629,7 +10157,7 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
         propval = Whether to expand in both directions. Setting this sets both #GtkWidget:hexpand and #GtkWidget:vexpand
       Returns: Builder instance for fluent chaining
   */
-  T expand(bool propval)
+  T expand(bool propval) nothrow
   {
     return setProperty("expand", propval);
   }
@@ -9645,7 +10173,7 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
           GtkComboBox) implemented this property individually.
       Returns: Builder instance for fluent chaining
   */
-  T focusOnClick(bool propval)
+  T focusOnClick(bool propval) nothrow
   {
     return setProperty("focus-on-click", propval);
   }
@@ -9656,7 +10184,7 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
         propval = How to distribute horizontal space if widget gets extra space, see #GtkAlign
       Returns: Builder instance for fluent chaining
   */
-  T halign(gtk.types.Align propval)
+  T halign(gtk.types.Align propval) nothrow
   {
     return setProperty("halign", propval);
   }
@@ -9675,13 +10203,13 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
           property is set to false again.
       Returns: Builder instance for fluent chaining
   */
-  T hasTooltip(bool propval)
+  T hasTooltip(bool propval) nothrow
   {
     return setProperty("has-tooltip", propval);
   }
 
   /** */
-  T heightRequest(int propval)
+  T heightRequest(int propval) nothrow
   {
     return setProperty("height-request", propval);
   }
@@ -9692,7 +10220,7 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
         propval = Whether to expand horizontally. See [gtk.widget.Widget.setHexpand].
       Returns: Builder instance for fluent chaining
   */
-  T hexpand(bool propval)
+  T hexpand(bool propval) nothrow
   {
     return setProperty("hexpand", propval);
   }
@@ -9703,7 +10231,7 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
         propval = Whether to use the #GtkWidget:hexpand property. See [gtk.widget.Widget.getHexpandSet].
       Returns: Builder instance for fluent chaining
   */
-  T hexpandSet(bool propval)
+  T hexpandSet(bool propval) nothrow
   {
     return setProperty("hexpand-set", propval);
   }
@@ -9715,7 +10243,7 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
           margin on any side.
       Returns: Builder instance for fluent chaining
   */
-  T margin(int propval)
+  T margin(int propval) nothrow
   {
     return setProperty("margin", propval);
   }
@@ -9730,7 +10258,7 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
           [gtk.widget.Widget.setSizeRequest] for example.
       Returns: Builder instance for fluent chaining
   */
-  T marginBottom(int propval)
+  T marginBottom(int propval) nothrow
   {
     return setProperty("margin-bottom", propval);
   }
@@ -9746,7 +10274,7 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
           [gtk.widget.Widget.setSizeRequest] for example.
       Returns: Builder instance for fluent chaining
   */
-  T marginEnd(int propval)
+  T marginEnd(int propval) nothrow
   {
     return setProperty("margin-end", propval);
   }
@@ -9763,7 +10291,7 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
   
       Deprecated: Use #GtkWidget:margin-start instead.
   */
-  T marginLeft(int propval)
+  T marginLeft(int propval) nothrow
   {
     return setProperty("margin-left", propval);
   }
@@ -9780,7 +10308,7 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
   
       Deprecated: Use #GtkWidget:margin-end instead.
   */
-  T marginRight(int propval)
+  T marginRight(int propval) nothrow
   {
     return setProperty("margin-right", propval);
   }
@@ -9796,7 +10324,7 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
           [gtk.widget.Widget.setSizeRequest] for example.
       Returns: Builder instance for fluent chaining
   */
-  T marginStart(int propval)
+  T marginStart(int propval) nothrow
   {
     return setProperty("margin-start", propval);
   }
@@ -9811,19 +10339,19 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
           [gtk.widget.Widget.setSizeRequest] for example.
       Returns: Builder instance for fluent chaining
   */
-  T marginTop(int propval)
+  T marginTop(int propval) nothrow
   {
     return setProperty("margin-top", propval);
   }
 
   /** */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
 
   /** */
-  T noShowAll(bool propval)
+  T noShowAll(bool propval) nothrow
   {
     return setProperty("no-show-all", propval);
   }
@@ -9837,25 +10365,25 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
           Before 3.8 this was only available in GtkWindow
       Returns: Builder instance for fluent chaining
   */
-  T opacity(double propval)
+  T opacity(double propval) nothrow
   {
     return setProperty("opacity", propval);
   }
 
   /** */
-  T parent(gtk.container.Container propval)
+  T parent(gtk.container.Container propval) nothrow
   {
     return setProperty("parent", propval);
   }
 
   /** */
-  T receivesDefault(bool propval)
+  T receivesDefault(bool propval) nothrow
   {
     return setProperty("receives-default", propval);
   }
 
   /** */
-  T sensitive(bool propval)
+  T sensitive(bool propval) nothrow
   {
     return setProperty("sensitive", propval);
   }
@@ -9868,7 +10396,7 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
   
       Deprecated: Use #GtkStyleContext instead
   */
-  T style(gtk.style.Style propval)
+  T style(gtk.style.Style propval) nothrow
   {
     return setProperty("style", propval);
   }
@@ -9889,7 +10417,7 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
           are set, the last one wins.
       Returns: Builder instance for fluent chaining
   */
-  T tooltipMarkup(string propval)
+  T tooltipMarkup(string propval) nothrow
   {
     return setProperty("tooltip-markup", propval);
   }
@@ -9910,7 +10438,7 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
           are set, the last one wins.
       Returns: Builder instance for fluent chaining
   */
-  T tooltipText(string propval)
+  T tooltipText(string propval) nothrow
   {
     return setProperty("tooltip-text", propval);
   }
@@ -9921,7 +10449,7 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
         propval = How to distribute vertical space if widget gets extra space, see #GtkAlign
       Returns: Builder instance for fluent chaining
   */
-  T valign(gtk.types.Align propval)
+  T valign(gtk.types.Align propval) nothrow
   {
     return setProperty("valign", propval);
   }
@@ -9932,7 +10460,7 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
         propval = Whether to expand vertically. See [gtk.widget.Widget.setVexpand].
       Returns: Builder instance for fluent chaining
   */
-  T vexpand(bool propval)
+  T vexpand(bool propval) nothrow
   {
     return setProperty("vexpand", propval);
   }
@@ -9943,19 +10471,19 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
         propval = Whether to use the #GtkWidget:vexpand property. See [gtk.widget.Widget.getVexpandSet].
       Returns: Builder instance for fluent chaining
   */
-  T vexpandSet(bool propval)
+  T vexpandSet(bool propval) nothrow
   {
     return setProperty("vexpand-set", propval);
   }
 
   /** */
-  T visible(bool propval)
+  T visible(bool propval) nothrow
   {
     return setProperty("visible", propval);
   }
 
   /** */
-  T widthRequest(int propval)
+  T widthRequest(int propval) nothrow
   {
     return setProperty("width-request", propval);
   }
@@ -9968,7 +10496,7 @@ final class WidgetGidBuilder : WidgetGidBuilderImpl!WidgetGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Widget build()
+  Widget build() nothrow
   {
     return new Widget(cast(void*)createGObject(Widget._getGType), No.Take);
   }

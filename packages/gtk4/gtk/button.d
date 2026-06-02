@@ -55,26 +55,26 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_button_get_type != &gidSymbolNotFound ? gtk_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Button self()
+  override Button self() nothrow
   {
     return this;
   }
@@ -83,7 +83,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Get builder for [gtk.button.Button]
       Returns: New builder object
   */
-  static ButtonGidBuilder builder()
+  static ButtonGidBuilder builder() nothrow
   {
     return new ButtonGidBuilder;
   }
@@ -98,7 +98,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
         If the contents of a button are an icon or a custom widget, setting this
         property has no effect.
   */
-  @property bool canShrink()
+  @property bool canShrink() nothrow
   {
     return getCanShrink();
   }
@@ -114,7 +114,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
           If the contents of a button are an icon or a custom widget, setting this
           property has no effect.
   */
-  @property void canShrink(bool propval)
+  @property void canShrink(bool propval) nothrow
   {
     setCanShrink(propval);
   }
@@ -123,7 +123,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Get `child` property.
       Returns: The child widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -133,7 +133,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         propval = The child widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -142,7 +142,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Get `hasFrame` property.
       Returns: Whether the button has a frame.
   */
-  @property bool hasFrame()
+  @property bool hasFrame() nothrow
   {
     return getHasFrame();
   }
@@ -152,7 +152,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         propval = Whether the button has a frame.
   */
-  @property void hasFrame(bool propval)
+  @property void hasFrame(bool propval) nothrow
   {
     setHasFrame(propval);
   }
@@ -161,7 +161,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Get `iconName` property.
       Returns: The name of the icon used to automatically populate the button.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return getIconName();
   }
@@ -171,7 +171,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         propval = The name of the icon used to automatically populate the button.
   */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     setIconName(propval);
   }
@@ -180,7 +180,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Get `label` property.
       Returns: Text of the label inside the button, if the button contains a label widget.
   */
-  @property string label()
+  @property string label() nothrow
   {
     return getLabel();
   }
@@ -190,7 +190,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         propval = Text of the label inside the button, if the button contains a label widget.
   */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     setLabel(propval);
   }
@@ -200,7 +200,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Returns: If set, an underline in the text indicates that the following character is
         to be used as mnemonic.
   */
-  @property bool useUnderline()
+  @property bool useUnderline() nothrow
   {
     return getUseUnderline();
   }
@@ -211,7 +211,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
         propval = If set, an underline in the text indicates that the following character is
           to be used as mnemonic.
   */
-  @property void useUnderline(bool propval)
+  @property void useUnderline(bool propval) nothrow
   {
     setUseUnderline(propval);
   }
@@ -224,7 +224,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       To add a child widget to the button, use [gtk.button.Button.setChild].
       Returns: The newly created [gtk.button.Button] widget.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_button_new();
@@ -242,7 +242,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
         iconName = an icon name
       Returns: a new [gtk.button.Button] displaying the themed icon
   */
-  static gtk.button.Button newFromIconName(string iconName)
+  static gtk.button.Button newFromIconName(string iconName) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
@@ -258,7 +258,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
         label = The text you want the [gtk.label.Label] to hold
       Returns: The newly created [gtk.button.Button] widget
   */
-  static gtk.button.Button newWithLabel(string label)
+  static gtk.button.Button newWithLabel(string label) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -281,7 +281,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
             mnemonic character
       Returns: a new [gtk.button.Button]
   */
-  static gtk.button.Button newWithMnemonic(string label)
+  static gtk.button.Button newWithMnemonic(string label) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -295,7 +295,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       size of its contents.
       Returns: true if the button can shrink, and false otherwise
   */
-  bool getCanShrink()
+  bool getCanShrink() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_button_get_can_shrink(cast(GtkButton*)this._cPtr);
@@ -306,7 +306,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Gets the child widget of button.
       Returns: the child widget of button
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_button_get_child(cast(GtkButton*)this._cPtr);
@@ -318,7 +318,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Returns whether the button has a frame.
       Returns: true if the button has a frame
   */
-  bool getHasFrame()
+  bool getHasFrame() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_button_get_has_frame(cast(GtkButton*)this._cPtr);
@@ -333,7 +333,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       an empty button with [gtk.button.Button.new_] to use as a container.
       Returns: The icon name set via [gtk.button.Button.setIconName]
   */
-  string getIconName()
+  string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_button_get_icon_name(cast(GtkButton*)this._cPtr);
@@ -350,7 +350,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Returns: The text of the label widget. This string is owned
         by the widget and must not be modified or freed.
   */
-  string getLabel()
+  string getLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_button_get_label(cast(GtkButton*)this._cPtr);
@@ -365,7 +365,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Returns: true if an embedded underline in the button label
           indicates the mnemonic accelerator keys.
   */
-  bool getUseUnderline()
+  bool getUseUnderline() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_button_get_use_underline(cast(GtkButton*)this._cPtr);
@@ -383,7 +383,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         canShrink = whether the button can shrink
   */
-  void setCanShrink(bool canShrink)
+  void setCanShrink(bool canShrink) nothrow
   {
     gtk_button_set_can_shrink(cast(GtkButton*)this._cPtr, canShrink);
   }
@@ -400,7 +400,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     gtk_button_set_child(cast(GtkButton*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -413,7 +413,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         hasFrame = whether the button should have a visible frame
   */
-  void setHasFrame(bool hasFrame)
+  void setHasFrame(bool hasFrame) nothrow
   {
     gtk_button_set_has_frame(cast(GtkButton*)this._cPtr, hasFrame);
   }
@@ -427,7 +427,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         iconName = An icon name
   */
-  void setIconName(string iconName)
+  void setIconName(string iconName) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_button_set_icon_name(cast(GtkButton*)this._cPtr, _iconName);
@@ -441,7 +441,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         label = a string
   */
-  void setLabel(string label)
+  void setLabel(string label) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_button_set_label(cast(GtkButton*)this._cPtr, _label);
@@ -456,7 +456,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         useUnderline = true if underlines in the text indicate mnemonics
   */
-  void setUseUnderline(bool useUnderline)
+  void setUseUnderline(bool useUnderline) nothrow
   {
     gtk_button_set_use_underline(cast(GtkButton*)this._cPtr, useUnderline);
   }
@@ -482,13 +482,13 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.button.Button)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -497,7 +497,14 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.button.Button.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -519,13 +526,13 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClicked(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClicked(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.button.Button)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -534,7 +541,14 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.button.Button.clicked");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -560,7 +574,7 @@ class ButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionabl
           property has no effect.
       Returns: Builder instance for fluent chaining
   */
-  T canShrink(bool propval)
+  T canShrink(bool propval) nothrow
   {
     return setProperty("can-shrink", propval);
   }
@@ -571,7 +585,7 @@ class ButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionabl
         propval = The child widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -582,7 +596,7 @@ class ButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionabl
         propval = Whether the button has a frame.
       Returns: Builder instance for fluent chaining
   */
-  T hasFrame(bool propval)
+  T hasFrame(bool propval) nothrow
   {
     return setProperty("has-frame", propval);
   }
@@ -593,7 +607,7 @@ class ButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionabl
         propval = The name of the icon used to automatically populate the button.
       Returns: Builder instance for fluent chaining
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
@@ -604,7 +618,7 @@ class ButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionabl
         propval = Text of the label inside the button, if the button contains a label widget.
       Returns: Builder instance for fluent chaining
   */
-  T label(string propval)
+  T label(string propval) nothrow
   {
     return setProperty("label", propval);
   }
@@ -616,7 +630,7 @@ class ButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionabl
           to be used as mnemonic.
       Returns: Builder instance for fluent chaining
   */
-  T useUnderline(bool propval)
+  T useUnderline(bool propval) nothrow
   {
     return setProperty("use-underline", propval);
   }
@@ -629,7 +643,7 @@ final class ButtonGidBuilder : ButtonGidBuilderImpl!ButtonGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Button build()
+  Button build() nothrow
   {
     return new Button(cast(void*)createGObject(Button._getGType), No.Take);
   }

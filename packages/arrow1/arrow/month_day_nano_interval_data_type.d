@@ -14,26 +14,26 @@ class MonthDayNanoIntervalDataType : arrow.interval_data_type.IntervalDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_month_day_nano_interval_data_type_get_type != &gidSymbolNotFound ? garrow_month_day_nano_interval_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MonthDayNanoIntervalDataType self()
+  override MonthDayNanoIntervalDataType self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class MonthDayNanoIntervalDataType : arrow.interval_data_type.IntervalDataType
       Get builder for [arrow.month_day_nano_interval_data_type.MonthDayNanoIntervalDataType]
       Returns: New builder object
   */
-  static MonthDayNanoIntervalDataTypeGidBuilder builder()
+  static MonthDayNanoIntervalDataTypeGidBuilder builder() nothrow
   {
     return new MonthDayNanoIntervalDataTypeGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowMonthDayNanoIntervalDataType* _cretval;
     _cretval = garrow_month_day_nano_interval_data_type_new();
@@ -68,7 +68,7 @@ final class MonthDayNanoIntervalDataTypeGidBuilder : MonthDayNanoIntervalDataTyp
       Create object from builder.
       Returns: New object
   */
-  MonthDayNanoIntervalDataType build()
+  MonthDayNanoIntervalDataType build() nothrow
   {
     return new MonthDayNanoIntervalDataType(cast(void*)createGObject(MonthDayNanoIntervalDataType._getGType), Yes.Take);
   }

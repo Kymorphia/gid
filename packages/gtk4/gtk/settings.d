@@ -46,26 +46,26 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_settings_get_type != &gidSymbolNotFound ? gtk_settings_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Settings self()
+  override Settings self() nothrow
   {
     return this;
   }
@@ -74,7 +74,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Get builder for [gtk.settings.Settings]
       Returns: New builder object
   */
-  static SettingsGidBuilder builder()
+  static SettingsGidBuilder builder() nothrow
   {
     return new SettingsGidBuilder;
   }
@@ -83,7 +83,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Get `gtkAlternativeButtonOrder` property.
       Returns: Whether buttons in dialogs should use the alternative button order.
   */
-  @property bool gtkAlternativeButtonOrder()
+  @property bool gtkAlternativeButtonOrder() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-alternative-button-order");
   }
@@ -93,7 +93,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Params:
         propval = Whether buttons in dialogs should use the alternative button order.
   */
-  @property void gtkAlternativeButtonOrder(bool propval)
+  @property void gtkAlternativeButtonOrder(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-alternative-button-order", propval);
   }
@@ -106,7 +106,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         By default an arrow pointing down means the column is sorted
         in ascending order. When set to true, this order will be inverted.
   */
-  @property bool gtkAlternativeSortArrows()
+  @property bool gtkAlternativeSortArrows() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-alternative-sort-arrows");
   }
@@ -120,7 +120,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           By default an arrow pointing down means the column is sorted
           in ascending order. When set to true, this order will be inverted.
   */
-  @property void gtkAlternativeSortArrows(bool propval)
+  @property void gtkAlternativeSortArrows(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-alternative-sort-arrows", propval);
   }
@@ -142,7 +142,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         are white/light and the dark chrome creates too much contrast
         (web browser, text editor...).
   */
-  @property bool gtkApplicationPreferDarkTheme()
+  @property bool gtkApplicationPreferDarkTheme() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-application-prefer-dark-theme");
   }
@@ -165,7 +165,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           are white/light and the dark chrome creates too much contrast
           (web browser, text editor...).
   */
-  @property void gtkApplicationPreferDarkTheme(bool propval)
+  @property void gtkApplicationPreferDarkTheme(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-application-prefer-dark-theme", propval);
   }
@@ -174,7 +174,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Get `gtkCursorAspectRatio` property.
       Returns: The aspect ratio of the text caret.
   */
-  @property double gtkCursorAspectRatio()
+  @property double gtkCursorAspectRatio() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(double)("gtk-cursor-aspect-ratio");
   }
@@ -184,7 +184,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Params:
         propval = The aspect ratio of the text caret.
   */
-  @property void gtkCursorAspectRatio(double propval)
+  @property void gtkCursorAspectRatio(double propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(double)("gtk-cursor-aspect-ratio", propval);
   }
@@ -196,7 +196,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         Also see the [gtk.settings.Settings.gtkCursorBlinkTimeout] setting,
         which allows more flexible control over cursor blinking.
   */
-  @property bool gtkCursorBlink()
+  @property bool gtkCursorBlink() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-cursor-blink");
   }
@@ -209,7 +209,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           Also see the [gtk.settings.Settings.gtkCursorBlinkTimeout] setting,
           which allows more flexible control over cursor blinking.
   */
-  @property void gtkCursorBlink(bool propval)
+  @property void gtkCursorBlink(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-cursor-blink", propval);
   }
@@ -218,7 +218,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Get `gtkCursorBlinkTime` property.
       Returns: Length of the cursor blink cycle, in milliseconds.
   */
-  @property int gtkCursorBlinkTime()
+  @property int gtkCursorBlinkTime() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("gtk-cursor-blink-time");
   }
@@ -228,7 +228,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Params:
         propval = Length of the cursor blink cycle, in milliseconds.
   */
-  @property void gtkCursorBlinkTime(int propval)
+  @property void gtkCursorBlinkTime(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("gtk-cursor-blink-time", propval);
   }
@@ -242,7 +242,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         Setting this to zero has the same effect as setting
         [gtk.settings.Settings.gtkCursorBlink] to false.
   */
-  @property int gtkCursorBlinkTimeout()
+  @property int gtkCursorBlinkTimeout() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("gtk-cursor-blink-timeout");
   }
@@ -257,7 +257,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           Setting this to zero has the same effect as setting
           [gtk.settings.Settings.gtkCursorBlink] to false.
   */
-  @property void gtkCursorBlinkTimeout(int propval)
+  @property void gtkCursorBlinkTimeout(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("gtk-cursor-blink-timeout", propval);
   }
@@ -268,7 +268,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         
         Use null to use the default theme.
   */
-  @property string gtkCursorThemeName()
+  @property string gtkCursorThemeName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("gtk-cursor-theme-name");
   }
@@ -280,7 +280,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           
           Use null to use the default theme.
   */
-  @property void gtkCursorThemeName(string propval)
+  @property void gtkCursorThemeName(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("gtk-cursor-theme-name", propval);
   }
@@ -291,7 +291,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         
         0 means to use the default size.
   */
-  @property int gtkCursorThemeSize()
+  @property int gtkCursorThemeSize() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("gtk-cursor-theme-size");
   }
@@ -303,7 +303,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           
           0 means to use the default size.
   */
-  @property void gtkCursorThemeSize(int propval)
+  @property void gtkCursorThemeSize(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("gtk-cursor-theme-size", propval);
   }
@@ -331,7 +331,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         Also note that the setting can be overridden with the
         [gtk.header_bar.HeaderBar.decorationLayout] property.
   */
-  @property string gtkDecorationLayout()
+  @property string gtkDecorationLayout() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("gtk-decoration-layout");
   }
@@ -360,7 +360,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           Also note that the setting can be overridden with the
           [gtk.header_bar.HeaderBar.decorationLayout] property.
   */
-  @property void gtkDecorationLayout(string propval)
+  @property void gtkDecorationLayout(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("gtk-decoration-layout", propval);
   }
@@ -374,7 +374,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         This setting does not affect custom dialogs using [gtk.dialog.Dialog]
         directly, or message dialogs.
   */
-  @property bool gtkDialogsUseHeader()
+  @property bool gtkDialogsUseHeader() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-dialogs-use-header");
   }
@@ -389,7 +389,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           This setting does not affect custom dialogs using [gtk.dialog.Dialog]
           directly, or message dialogs.
   */
-  @property void gtkDialogsUseHeader(bool propval)
+  @property void gtkDialogsUseHeader(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-dialogs-use-header", propval);
   }
@@ -398,7 +398,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Get `gtkDndDragThreshold` property.
       Returns: The number of pixels the cursor can move before dragging.
   */
-  @property int gtkDndDragThreshold()
+  @property int gtkDndDragThreshold() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("gtk-dnd-drag-threshold");
   }
@@ -408,7 +408,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Params:
         propval = The number of pixels the cursor can move before dragging.
   */
-  @property void gtkDndDragThreshold(int propval)
+  @property void gtkDndDragThreshold(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("gtk-dnd-drag-threshold", propval);
   }
@@ -418,7 +418,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Returns: The maximum distance allowed between two clicks for them to be considered
         a double click, in pixels.
   */
-  @property int gtkDoubleClickDistance()
+  @property int gtkDoubleClickDistance() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("gtk-double-click-distance");
   }
@@ -429,7 +429,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         propval = The maximum distance allowed between two clicks for them to be considered
           a double click, in pixels.
   */
-  @property void gtkDoubleClickDistance(int propval)
+  @property void gtkDoubleClickDistance(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("gtk-double-click-distance", propval);
   }
@@ -439,7 +439,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Returns: The maximum time to allow between two clicks for them to be considered
         a double click, in milliseconds.
   */
-  @property int gtkDoubleClickTime()
+  @property int gtkDoubleClickTime() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("gtk-double-click-time");
   }
@@ -450,7 +450,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         propval = The maximum time to allow between two clicks for them to be considered
           a double click, in milliseconds.
   */
-  @property void gtkDoubleClickTime(int propval)
+  @property void gtkDoubleClickTime(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("gtk-double-click-time", propval);
   }
@@ -460,7 +460,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Returns: Whether menu items should have visible accelerators which can be
         activated.
   */
-  @property bool gtkEnableAccels()
+  @property bool gtkEnableAccels() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-enable-accels");
   }
@@ -471,7 +471,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         propval = Whether menu items should have visible accelerators which can be
           activated.
   */
-  @property void gtkEnableAccels(bool propval)
+  @property void gtkEnableAccels(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-enable-accels", propval);
   }
@@ -480,7 +480,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Get `gtkEnableAnimations` property.
       Returns: Whether to enable toolkit-wide animations.
   */
-  @property bool gtkEnableAnimations()
+  @property bool gtkEnableAnimations() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-enable-animations");
   }
@@ -490,7 +490,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Params:
         propval = Whether to enable toolkit-wide animations.
   */
-  @property void gtkEnableAnimations(bool propval)
+  @property void gtkEnableAnimations(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-enable-animations", propval);
   }
@@ -505,7 +505,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         GTK itself does not support event sounds, you have to use a loadable
         module like the one that comes with libcanberra.
   */
-  @property bool gtkEnableEventSounds()
+  @property bool gtkEnableEventSounds() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-enable-event-sounds");
   }
@@ -521,7 +521,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           GTK itself does not support event sounds, you have to use a loadable
           module like the one that comes with libcanberra.
   */
-  @property void gtkEnableEventSounds(bool propval)
+  @property void gtkEnableEventSounds(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-enable-event-sounds", propval);
   }
@@ -536,7 +536,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         GTK itself does not support event sounds, you have to use a loadable
         module like the one that comes with libcanberra.
   */
-  @property bool gtkEnableInputFeedbackSounds()
+  @property bool gtkEnableInputFeedbackSounds() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-enable-input-feedback-sounds");
   }
@@ -552,7 +552,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           GTK itself does not support event sounds, you have to use a loadable
           module like the one that comes with libcanberra.
   */
-  @property void gtkEnableInputFeedbackSounds(bool propval)
+  @property void gtkEnableInputFeedbackSounds(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-enable-input-feedback-sounds", propval);
   }
@@ -562,7 +562,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Returns: Whether a middle click on a mouse should paste the
         'PRIMARY' clipboard content at the cursor location.
   */
-  @property bool gtkEnablePrimaryPaste()
+  @property bool gtkEnablePrimaryPaste() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-enable-primary-paste");
   }
@@ -573,7 +573,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         propval = Whether a middle click on a mouse should paste the
           'PRIMARY' clipboard content at the cursor location.
   */
-  @property void gtkEnablePrimaryPaste(bool propval)
+  @property void gtkEnablePrimaryPaste(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-enable-primary-paste", propval);
   }
@@ -586,7 +586,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         This value is in milliseconds. 0 disables showing the
         last char. 600 is a good value for enabling it.
   */
-  @property uint gtkEntryPasswordHintTimeout()
+  @property uint gtkEntryPasswordHintTimeout() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("gtk-entry-password-hint-timeout");
   }
@@ -600,7 +600,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           This value is in milliseconds. 0 disables showing the
           last char. 600 is a good value for enabling it.
   */
-  @property void gtkEntryPasswordHintTimeout(uint propval)
+  @property void gtkEntryPasswordHintTimeout(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("gtk-entry-password-hint-timeout", propval);
   }
@@ -609,7 +609,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Get `gtkEntrySelectOnFocus` property.
       Returns: Whether to select the contents of an entry when it is focused.
   */
-  @property bool gtkEntrySelectOnFocus()
+  @property bool gtkEntrySelectOnFocus() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-entry-select-on-focus");
   }
@@ -619,7 +619,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Params:
         propval = Whether to select the contents of an entry when it is focused.
   */
-  @property void gtkEntrySelectOnFocus(bool propval)
+  @property void gtkEntrySelectOnFocus(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-entry-select-on-focus", propval);
   }
@@ -633,7 +633,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         windowing system may offer ways to configure the error bell in many
         ways, such as flashing the window or similar visual effects.
   */
-  @property bool gtkErrorBell()
+  @property bool gtkErrorBell() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-error-bell");
   }
@@ -648,7 +648,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           windowing system may offer ways to configure the error bell in many
           ways, such as flashing the window or similar visual effects.
   */
-  @property void gtkErrorBell(bool propval)
+  @property void gtkErrorBell(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-error-bell", propval);
   }
@@ -659,7 +659,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         
         GTK uses the family name and size from this string.
   */
-  @property string gtkFontName()
+  @property string gtkFontName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("gtk-font-name");
   }
@@ -671,7 +671,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           
           GTK uses the family name and size from this string.
   */
-  @property void gtkFontName(string propval)
+  @property void gtkFontName(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("gtk-font-name", propval);
   }
@@ -680,7 +680,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Get `gtkFontconfigTimestamp` property.
       Returns: Timestamp of the current fontconfig configuration.
   */
-  @property uint gtkFontconfigTimestamp()
+  @property uint gtkFontconfigTimestamp() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("gtk-fontconfig-timestamp");
   }
@@ -690,7 +690,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Params:
         propval = Timestamp of the current fontconfig configuration.
   */
-  @property void gtkFontconfigTimestamp(uint propval)
+  @property void gtkFontconfigTimestamp(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("gtk-fontconfig-timestamp", propval);
   }
@@ -702,7 +702,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         Note that this also turns off subpixel positioning of glyphs,
         since it conflicts with metrics hinting.
   */
-  @property bool gtkHintFontMetrics()
+  @property bool gtkHintFontMetrics() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-hint-font-metrics");
   }
@@ -715,7 +715,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           Note that this also turns off subpixel positioning of glyphs,
           since it conflicts with metrics hinting.
   */
-  @property void gtkHintFontMetrics(bool propval)
+  @property void gtkHintFontMetrics(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-hint-font-metrics", propval);
   }
@@ -727,7 +727,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         See [gtk.icon_theme.IconTheme] for details about how
         GTK handles icon themes.
   */
-  @property string gtkIconThemeName()
+  @property string gtkIconThemeName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("gtk-icon-theme-name");
   }
@@ -740,7 +740,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           See [gtk.icon_theme.IconTheme] for details about how
           GTK handles icon themes.
   */
-  @property void gtkIconThemeName(string propval)
+  @property void gtkIconThemeName(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("gtk-icon-theme-name", propval);
   }
@@ -756,7 +756,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         
         See [gtk.imcontext.IMContext].
   */
-  @property string gtkImModule()
+  @property string gtkImModule() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("gtk-im-module");
   }
@@ -773,7 +773,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           
           See [gtk.imcontext.IMContext].
   */
-  @property void gtkImModule(string propval)
+  @property void gtkImModule(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("gtk-im-module", propval);
   }
@@ -785,7 +785,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         
         This is useful when using a screen reader.
   */
-  @property bool gtkKeynavUseCaret()
+  @property bool gtkKeynavUseCaret() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-keynav-use-caret");
   }
@@ -798,7 +798,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           
           This is useful when using a screen reader.
   */
-  @property void gtkKeynavUseCaret(bool propval)
+  @property void gtkKeynavUseCaret(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-keynav-use-caret", propval);
   }
@@ -808,7 +808,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Returns: Whether to select the contents of a selectable
         label when it is focused.
   */
-  @property bool gtkLabelSelectOnFocus()
+  @property bool gtkLabelSelectOnFocus() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-label-select-on-focus");
   }
@@ -819,7 +819,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         propval = Whether to select the contents of a selectable
           label when it is focused.
   */
-  @property void gtkLabelSelectOnFocus(bool propval)
+  @property void gtkLabelSelectOnFocus(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-label-select-on-focus", propval);
   }
@@ -830,7 +830,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         
         See [gtk.gesture_long_press.GestureLongPress].
   */
-  @property uint gtkLongPressTime()
+  @property uint gtkLongPressTime() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("gtk-long-press-time");
   }
@@ -842,7 +842,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           
           See [gtk.gesture_long_press.GestureLongPress].
   */
-  @property void gtkLongPressTime(uint propval)
+  @property void gtkLongPressTime(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("gtk-long-press-time", propval);
   }
@@ -854,7 +854,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         If this is set to false, scrolled windows will have permanent
         scrollbars.
   */
-  @property bool gtkOverlayScrolling()
+  @property bool gtkOverlayScrolling() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-overlay-scrolling");
   }
@@ -867,7 +867,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           If this is set to false, scrolled windows will have permanent
           scrollbars.
   */
-  @property void gtkOverlayScrolling(bool propval)
+  @property void gtkOverlayScrolling(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-overlay-scrolling", propval);
   }
@@ -885,7 +885,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         be available by holding Shift and primary-clicking, or clicking the middle
         mouse button.
   */
-  @property bool gtkPrimaryButtonWarpsSlider()
+  @property bool gtkPrimaryButtonWarpsSlider() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-primary-button-warps-slider");
   }
@@ -904,7 +904,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           be available by holding Shift and primary-clicking, or clicking the middle
           mouse button.
   */
-  @property void gtkPrimaryButtonWarpsSlider(bool propval)
+  @property void gtkPrimaryButtonWarpsSlider(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-primary-button-warps-slider", propval);
   }
@@ -917,7 +917,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         Available print backends depend on the GTK installation,
         and may include "file", "cups", "lpr" or "papi".
   */
-  @property string gtkPrintBackends()
+  @property string gtkPrintBackends() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("gtk-print-backends");
   }
@@ -931,7 +931,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           Available print backends depend on the GTK installation,
           and may include "file", "cups", "lpr" or "papi".
   */
-  @property void gtkPrintBackends(string propval)
+  @property void gtkPrintBackends(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("gtk-print-backends", propval);
   }
@@ -949,7 +949,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         The preview application is responsible for removing the pdf
         file and the print settings file when it is done.
   */
-  @property string gtkPrintPreviewCommand()
+  @property string gtkPrintPreviewCommand() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("gtk-print-preview-command");
   }
@@ -968,7 +968,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           The preview application is responsible for removing the pdf
           file and the print settings file when it is done.
   */
-  @property void gtkPrintPreviewCommand(string propval)
+  @property void gtkPrintPreviewCommand(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("gtk-print-preview-command", propval);
   }
@@ -980,7 +980,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         
         If set to false, the list will always be empty.
   */
-  @property bool gtkRecentFilesEnabled()
+  @property bool gtkRecentFilesEnabled() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-recent-files-enabled");
   }
@@ -993,7 +993,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           
           If set to false, the list will always be empty.
   */
-  @property void gtkRecentFilesEnabled(bool propval)
+  @property void gtkRecentFilesEnabled(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-recent-files-enabled", propval);
   }
@@ -1007,7 +1007,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         If set to 0, the list will always be empty; if set to -1, no
         item will be removed.
   */
-  @property int gtkRecentFilesMaxAge()
+  @property int gtkRecentFilesMaxAge() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("gtk-recent-files-max-age");
   }
@@ -1022,7 +1022,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           If set to 0, the list will always be empty; if set to -1, no
           item will be removed.
   */
-  @property void gtkRecentFilesMaxAge(int propval)
+  @property void gtkRecentFilesMaxAge(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("gtk-recent-files-max-age", propval);
   }
@@ -1032,7 +1032,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Returns: Set to true if the desktop environment is displaying
         the app menu, false if the app should display it itself.
   */
-  @property bool gtkShellShowsAppMenu()
+  @property bool gtkShellShowsAppMenu() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-shell-shows-app-menu");
   }
@@ -1043,7 +1043,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         propval = Set to true if the desktop environment is displaying
           the app menu, false if the app should display it itself.
   */
-  @property void gtkShellShowsAppMenu(bool propval)
+  @property void gtkShellShowsAppMenu(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-shell-shows-app-menu", propval);
   }
@@ -1053,7 +1053,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Returns: Set to true if the desktop environment is displaying
         the desktop folder, false if not.
   */
-  @property bool gtkShellShowsDesktop()
+  @property bool gtkShellShowsDesktop() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-shell-shows-desktop");
   }
@@ -1064,7 +1064,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         propval = Set to true if the desktop environment is displaying
           the desktop folder, false if not.
   */
-  @property void gtkShellShowsDesktop(bool propval)
+  @property void gtkShellShowsDesktop(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-shell-shows-desktop", propval);
   }
@@ -1074,7 +1074,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Returns: Set to true if the desktop environment is displaying
         the menubar, false if the app should display it itself.
   */
-  @property bool gtkShellShowsMenubar()
+  @property bool gtkShellShowsMenubar() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-shell-shows-menubar");
   }
@@ -1085,7 +1085,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         propval = Set to true if the desktop environment is displaying
           the menubar, false if the app should display it itself.
   */
-  @property void gtkShellShowsMenubar(bool propval)
+  @property void gtkShellShowsMenubar(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-shell-shows-menubar", propval);
   }
@@ -1094,7 +1094,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Get `gtkShowStatusShapes` property.
       Returns: When true, widgets like switches include shapes to indicate their on/off state.
   */
-  @property bool gtkShowStatusShapes()
+  @property bool gtkShowStatusShapes() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-show-status-shapes");
   }
@@ -1104,7 +1104,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Params:
         propval = When true, widgets like switches include shapes to indicate their on/off state.
   */
-  @property void gtkShowStatusShapes(bool propval)
+  @property void gtkShowStatusShapes(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-show-status-shapes", propval);
   }
@@ -1119,7 +1119,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         GTK itself does not support event sounds, you have to use
         a loadable module like the one that comes with libcanberra.
   */
-  @property string gtkSoundThemeName()
+  @property string gtkSoundThemeName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("gtk-sound-theme-name");
   }
@@ -1135,7 +1135,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           GTK itself does not support event sounds, you have to use
           a loadable module like the one that comes with libcanberra.
   */
-  @property void gtkSoundThemeName(string propval)
+  @property void gtkSoundThemeName(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("gtk-sound-theme-name", propval);
   }
@@ -1145,7 +1145,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Returns: Whether two cursors should be displayed for mixed left-to-right and
         right-to-left text.
   */
-  @property bool gtkSplitCursor()
+  @property bool gtkSplitCursor() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("gtk-split-cursor");
   }
@@ -1156,7 +1156,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         propval = Whether two cursors should be displayed for mixed left-to-right and
           right-to-left text.
   */
-  @property void gtkSplitCursor(bool propval)
+  @property void gtkSplitCursor(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("gtk-split-cursor", propval);
   }
@@ -1168,7 +1168,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         See [gtk.css_provider.CssProvider] for details about how
         GTK finds the CSS stylesheet for a theme.
   */
-  @property string gtkThemeName()
+  @property string gtkThemeName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("gtk-theme-name");
   }
@@ -1181,7 +1181,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           See [gtk.css_provider.CssProvider] for details about how
           GTK finds the CSS stylesheet for a theme.
   */
-  @property void gtkThemeName(string propval)
+  @property void gtkThemeName(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("gtk-theme-name", propval);
   }
@@ -1194,7 +1194,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         Recognized actions are minimize, toggle-maximize, menu, lower
         or none.
   */
-  @property string gtkTitlebarDoubleClick()
+  @property string gtkTitlebarDoubleClick() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("gtk-titlebar-double-click");
   }
@@ -1208,7 +1208,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           Recognized actions are minimize, toggle-maximize, menu, lower
           or none.
   */
-  @property void gtkTitlebarDoubleClick(string propval)
+  @property void gtkTitlebarDoubleClick(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("gtk-titlebar-double-click", propval);
   }
@@ -1221,7 +1221,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         Recognized actions are minimize, toggle-maximize, menu, lower
         or none.
   */
-  @property string gtkTitlebarMiddleClick()
+  @property string gtkTitlebarMiddleClick() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("gtk-titlebar-middle-click");
   }
@@ -1235,7 +1235,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           Recognized actions are minimize, toggle-maximize, menu, lower
           or none.
   */
-  @property void gtkTitlebarMiddleClick(string propval)
+  @property void gtkTitlebarMiddleClick(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("gtk-titlebar-middle-click", propval);
   }
@@ -1248,7 +1248,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         Recognized actions are minimize, toggle-maximize, menu, lower
         or none.
   */
-  @property string gtkTitlebarRightClick()
+  @property string gtkTitlebarRightClick() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("gtk-titlebar-right-click");
   }
@@ -1262,7 +1262,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           Recognized actions are minimize, toggle-maximize, menu, lower
           or none.
   */
-  @property void gtkTitlebarRightClick(string propval)
+  @property void gtkTitlebarRightClick(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("gtk-titlebar-right-click", propval);
   }
@@ -1273,7 +1273,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         
         The values are 0 for no, 1 for yes, or -1 for the system default.
   */
-  @property int gtkXftAntialias()
+  @property int gtkXftAntialias() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("gtk-xft-antialias");
   }
@@ -1285,7 +1285,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           
           The values are 0 for no, 1 for yes, or -1 for the system default.
   */
-  @property void gtkXftAntialias(int propval)
+  @property void gtkXftAntialias(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("gtk-xft-antialias", propval);
   }
@@ -1296,7 +1296,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         
         -1 to use the default value.
   */
-  @property int gtkXftDpi()
+  @property int gtkXftDpi() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("gtk-xft-dpi");
   }
@@ -1308,7 +1308,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           
           -1 to use the default value.
   */
-  @property void gtkXftDpi(int propval)
+  @property void gtkXftDpi(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("gtk-xft-dpi", propval);
   }
@@ -1319,7 +1319,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         
         The values are 0 for no, 1 for yes, or -1 for the system default.
   */
-  @property int gtkXftHinting()
+  @property int gtkXftHinting() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("gtk-xft-hinting");
   }
@@ -1331,7 +1331,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           
           The values are 0 for no, 1 for yes, or -1 for the system default.
   */
-  @property void gtkXftHinting(int propval)
+  @property void gtkXftHinting(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("gtk-xft-hinting", propval);
   }
@@ -1343,7 +1343,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         The possible vaues are hintnone, hintslight,
         hintmedium, hintfull.
   */
-  @property string gtkXftHintstyle()
+  @property string gtkXftHintstyle() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("gtk-xft-hintstyle");
   }
@@ -1356,7 +1356,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           The possible vaues are hintnone, hintslight,
           hintmedium, hintfull.
   */
-  @property void gtkXftHintstyle(string propval)
+  @property void gtkXftHintstyle(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("gtk-xft-hintstyle", propval);
   }
@@ -1370,7 +1370,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         Note that GSK does not support subpixel antialiasing, and this
         setting has no effect on font rendering in GTK.
   */
-  @property string gtkXftRgba()
+  @property string gtkXftRgba() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("gtk-xft-rgba");
   }
@@ -1385,7 +1385,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           Note that GSK does not support subpixel antialiasing, and this
           setting has no effect on font rendering in GTK.
   */
-  @property void gtkXftRgba(string propval)
+  @property void gtkXftRgba(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("gtk-xft-rgba", propval);
   }
@@ -1400,7 +1400,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Returns: a [gtk.settings.Settings] object. If there is
           no default display, then returns null.
   */
-  static gtk.settings.Settings getDefault()
+  static gtk.settings.Settings getDefault() nothrow
   {
     GtkSettings* _cretval;
     _cretval = gtk_settings_get_default();
@@ -1415,7 +1415,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         display = a [gdk.display.Display]
       Returns: a [gtk.settings.Settings] object
   */
-  static gtk.settings.Settings getForDisplay(gdk.display.Display display)
+  static gtk.settings.Settings getForDisplay(gdk.display.Display display) nothrow
   {
     GtkSettings* _cretval;
     _cretval = gtk_settings_get_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
@@ -1433,7 +1433,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Params:
         name = the name of the setting to reset
   */
-  void resetProperty(string name)
+  void resetProperty(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_settings_reset_property(cast(GtkSettings*)this._cPtr, _name);
@@ -1452,7 +1452,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
         propval = Whether buttons in dialogs should use the alternative button order.
       Returns: Builder instance for fluent chaining
   */
-  T gtkAlternativeButtonOrder(bool propval)
+  T gtkAlternativeButtonOrder(bool propval) nothrow
   {
     return setProperty("gtk-alternative-button-order", propval);
   }
@@ -1467,7 +1467,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           in ascending order. When set to true, this order will be inverted.
       Returns: Builder instance for fluent chaining
   */
-  T gtkAlternativeSortArrows(bool propval)
+  T gtkAlternativeSortArrows(bool propval) nothrow
   {
     return setProperty("gtk-alternative-sort-arrows", propval);
   }
@@ -1491,7 +1491,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           (web browser, text editor...).
       Returns: Builder instance for fluent chaining
   */
-  T gtkApplicationPreferDarkTheme(bool propval)
+  T gtkApplicationPreferDarkTheme(bool propval) nothrow
   {
     return setProperty("gtk-application-prefer-dark-theme", propval);
   }
@@ -1502,7 +1502,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
         propval = The aspect ratio of the text caret.
       Returns: Builder instance for fluent chaining
   */
-  T gtkCursorAspectRatio(double propval)
+  T gtkCursorAspectRatio(double propval) nothrow
   {
     return setProperty("gtk-cursor-aspect-ratio", propval);
   }
@@ -1516,7 +1516,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           which allows more flexible control over cursor blinking.
       Returns: Builder instance for fluent chaining
   */
-  T gtkCursorBlink(bool propval)
+  T gtkCursorBlink(bool propval) nothrow
   {
     return setProperty("gtk-cursor-blink", propval);
   }
@@ -1527,7 +1527,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
         propval = Length of the cursor blink cycle, in milliseconds.
       Returns: Builder instance for fluent chaining
   */
-  T gtkCursorBlinkTime(int propval)
+  T gtkCursorBlinkTime(int propval) nothrow
   {
     return setProperty("gtk-cursor-blink-time", propval);
   }
@@ -1543,7 +1543,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           [gtk.settings.Settings.gtkCursorBlink] to false.
       Returns: Builder instance for fluent chaining
   */
-  T gtkCursorBlinkTimeout(int propval)
+  T gtkCursorBlinkTimeout(int propval) nothrow
   {
     return setProperty("gtk-cursor-blink-timeout", propval);
   }
@@ -1556,7 +1556,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           Use null to use the default theme.
       Returns: Builder instance for fluent chaining
   */
-  T gtkCursorThemeName(string propval)
+  T gtkCursorThemeName(string propval) nothrow
   {
     return setProperty("gtk-cursor-theme-name", propval);
   }
@@ -1569,7 +1569,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           0 means to use the default size.
       Returns: Builder instance for fluent chaining
   */
-  T gtkCursorThemeSize(int propval)
+  T gtkCursorThemeSize(int propval) nothrow
   {
     return setProperty("gtk-cursor-theme-size", propval);
   }
@@ -1599,7 +1599,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           [gtk.header_bar.HeaderBar.decorationLayout] property.
       Returns: Builder instance for fluent chaining
   */
-  T gtkDecorationLayout(string propval)
+  T gtkDecorationLayout(string propval) nothrow
   {
     return setProperty("gtk-decoration-layout", propval);
   }
@@ -1615,7 +1615,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           directly, or message dialogs.
       Returns: Builder instance for fluent chaining
   */
-  T gtkDialogsUseHeader(bool propval)
+  T gtkDialogsUseHeader(bool propval) nothrow
   {
     return setProperty("gtk-dialogs-use-header", propval);
   }
@@ -1626,7 +1626,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
         propval = The number of pixels the cursor can move before dragging.
       Returns: Builder instance for fluent chaining
   */
-  T gtkDndDragThreshold(int propval)
+  T gtkDndDragThreshold(int propval) nothrow
   {
     return setProperty("gtk-dnd-drag-threshold", propval);
   }
@@ -1638,7 +1638,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           a double click, in pixels.
       Returns: Builder instance for fluent chaining
   */
-  T gtkDoubleClickDistance(int propval)
+  T gtkDoubleClickDistance(int propval) nothrow
   {
     return setProperty("gtk-double-click-distance", propval);
   }
@@ -1650,7 +1650,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           a double click, in milliseconds.
       Returns: Builder instance for fluent chaining
   */
-  T gtkDoubleClickTime(int propval)
+  T gtkDoubleClickTime(int propval) nothrow
   {
     return setProperty("gtk-double-click-time", propval);
   }
@@ -1662,7 +1662,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           activated.
       Returns: Builder instance for fluent chaining
   */
-  T gtkEnableAccels(bool propval)
+  T gtkEnableAccels(bool propval) nothrow
   {
     return setProperty("gtk-enable-accels", propval);
   }
@@ -1673,7 +1673,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
         propval = Whether to enable toolkit-wide animations.
       Returns: Builder instance for fluent chaining
   */
-  T gtkEnableAnimations(bool propval)
+  T gtkEnableAnimations(bool propval) nothrow
   {
     return setProperty("gtk-enable-animations", propval);
   }
@@ -1690,7 +1690,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           module like the one that comes with libcanberra.
       Returns: Builder instance for fluent chaining
   */
-  T gtkEnableEventSounds(bool propval)
+  T gtkEnableEventSounds(bool propval) nothrow
   {
     return setProperty("gtk-enable-event-sounds", propval);
   }
@@ -1707,7 +1707,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           module like the one that comes with libcanberra.
       Returns: Builder instance for fluent chaining
   */
-  T gtkEnableInputFeedbackSounds(bool propval)
+  T gtkEnableInputFeedbackSounds(bool propval) nothrow
   {
     return setProperty("gtk-enable-input-feedback-sounds", propval);
   }
@@ -1719,7 +1719,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           'PRIMARY' clipboard content at the cursor location.
       Returns: Builder instance for fluent chaining
   */
-  T gtkEnablePrimaryPaste(bool propval)
+  T gtkEnablePrimaryPaste(bool propval) nothrow
   {
     return setProperty("gtk-enable-primary-paste", propval);
   }
@@ -1734,7 +1734,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           last char. 600 is a good value for enabling it.
       Returns: Builder instance for fluent chaining
   */
-  T gtkEntryPasswordHintTimeout(uint propval)
+  T gtkEntryPasswordHintTimeout(uint propval) nothrow
   {
     return setProperty("gtk-entry-password-hint-timeout", propval);
   }
@@ -1745,7 +1745,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
         propval = Whether to select the contents of an entry when it is focused.
       Returns: Builder instance for fluent chaining
   */
-  T gtkEntrySelectOnFocus(bool propval)
+  T gtkEntrySelectOnFocus(bool propval) nothrow
   {
     return setProperty("gtk-entry-select-on-focus", propval);
   }
@@ -1761,7 +1761,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           ways, such as flashing the window or similar visual effects.
       Returns: Builder instance for fluent chaining
   */
-  T gtkErrorBell(bool propval)
+  T gtkErrorBell(bool propval) nothrow
   {
     return setProperty("gtk-error-bell", propval);
   }
@@ -1774,7 +1774,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           GTK uses the family name and size from this string.
       Returns: Builder instance for fluent chaining
   */
-  T gtkFontName(string propval)
+  T gtkFontName(string propval) nothrow
   {
     return setProperty("gtk-font-name", propval);
   }
@@ -1785,7 +1785,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
         propval = Timestamp of the current fontconfig configuration.
       Returns: Builder instance for fluent chaining
   */
-  T gtkFontconfigTimestamp(uint propval)
+  T gtkFontconfigTimestamp(uint propval) nothrow
   {
     return setProperty("gtk-fontconfig-timestamp", propval);
   }
@@ -1799,7 +1799,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           since it conflicts with metrics hinting.
       Returns: Builder instance for fluent chaining
   */
-  T gtkHintFontMetrics(bool propval)
+  T gtkHintFontMetrics(bool propval) nothrow
   {
     return setProperty("gtk-hint-font-metrics", propval);
   }
@@ -1813,7 +1813,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           GTK handles icon themes.
       Returns: Builder instance for fluent chaining
   */
-  T gtkIconThemeName(string propval)
+  T gtkIconThemeName(string propval) nothrow
   {
     return setProperty("gtk-icon-theme-name", propval);
   }
@@ -1831,7 +1831,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           See [gtk.imcontext.IMContext].
       Returns: Builder instance for fluent chaining
   */
-  T gtkImModule(string propval)
+  T gtkImModule(string propval) nothrow
   {
     return setProperty("gtk-im-module", propval);
   }
@@ -1845,7 +1845,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           This is useful when using a screen reader.
       Returns: Builder instance for fluent chaining
   */
-  T gtkKeynavUseCaret(bool propval)
+  T gtkKeynavUseCaret(bool propval) nothrow
   {
     return setProperty("gtk-keynav-use-caret", propval);
   }
@@ -1857,7 +1857,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           label when it is focused.
       Returns: Builder instance for fluent chaining
   */
-  T gtkLabelSelectOnFocus(bool propval)
+  T gtkLabelSelectOnFocus(bool propval) nothrow
   {
     return setProperty("gtk-label-select-on-focus", propval);
   }
@@ -1870,7 +1870,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           See [gtk.gesture_long_press.GestureLongPress].
       Returns: Builder instance for fluent chaining
   */
-  T gtkLongPressTime(uint propval)
+  T gtkLongPressTime(uint propval) nothrow
   {
     return setProperty("gtk-long-press-time", propval);
   }
@@ -1884,7 +1884,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           scrollbars.
       Returns: Builder instance for fluent chaining
   */
-  T gtkOverlayScrolling(bool propval)
+  T gtkOverlayScrolling(bool propval) nothrow
   {
     return setProperty("gtk-overlay-scrolling", propval);
   }
@@ -1904,7 +1904,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           mouse button.
       Returns: Builder instance for fluent chaining
   */
-  T gtkPrimaryButtonWarpsSlider(bool propval)
+  T gtkPrimaryButtonWarpsSlider(bool propval) nothrow
   {
     return setProperty("gtk-primary-button-warps-slider", propval);
   }
@@ -1919,7 +1919,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           and may include "file", "cups", "lpr" or "papi".
       Returns: Builder instance for fluent chaining
   */
-  T gtkPrintBackends(string propval)
+  T gtkPrintBackends(string propval) nothrow
   {
     return setProperty("gtk-print-backends", propval);
   }
@@ -1939,7 +1939,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           file and the print settings file when it is done.
       Returns: Builder instance for fluent chaining
   */
-  T gtkPrintPreviewCommand(string propval)
+  T gtkPrintPreviewCommand(string propval) nothrow
   {
     return setProperty("gtk-print-preview-command", propval);
   }
@@ -1953,7 +1953,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           If set to false, the list will always be empty.
       Returns: Builder instance for fluent chaining
   */
-  T gtkRecentFilesEnabled(bool propval)
+  T gtkRecentFilesEnabled(bool propval) nothrow
   {
     return setProperty("gtk-recent-files-enabled", propval);
   }
@@ -1969,7 +1969,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           item will be removed.
       Returns: Builder instance for fluent chaining
   */
-  T gtkRecentFilesMaxAge(int propval)
+  T gtkRecentFilesMaxAge(int propval) nothrow
   {
     return setProperty("gtk-recent-files-max-age", propval);
   }
@@ -1981,7 +1981,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           the app menu, false if the app should display it itself.
       Returns: Builder instance for fluent chaining
   */
-  T gtkShellShowsAppMenu(bool propval)
+  T gtkShellShowsAppMenu(bool propval) nothrow
   {
     return setProperty("gtk-shell-shows-app-menu", propval);
   }
@@ -1993,7 +1993,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           the desktop folder, false if not.
       Returns: Builder instance for fluent chaining
   */
-  T gtkShellShowsDesktop(bool propval)
+  T gtkShellShowsDesktop(bool propval) nothrow
   {
     return setProperty("gtk-shell-shows-desktop", propval);
   }
@@ -2005,7 +2005,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           the menubar, false if the app should display it itself.
       Returns: Builder instance for fluent chaining
   */
-  T gtkShellShowsMenubar(bool propval)
+  T gtkShellShowsMenubar(bool propval) nothrow
   {
     return setProperty("gtk-shell-shows-menubar", propval);
   }
@@ -2016,7 +2016,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
         propval = When true, widgets like switches include shapes to indicate their on/off state.
       Returns: Builder instance for fluent chaining
   */
-  T gtkShowStatusShapes(bool propval)
+  T gtkShowStatusShapes(bool propval) nothrow
   {
     return setProperty("gtk-show-status-shapes", propval);
   }
@@ -2033,7 +2033,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           a loadable module like the one that comes with libcanberra.
       Returns: Builder instance for fluent chaining
   */
-  T gtkSoundThemeName(string propval)
+  T gtkSoundThemeName(string propval) nothrow
   {
     return setProperty("gtk-sound-theme-name", propval);
   }
@@ -2045,7 +2045,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           right-to-left text.
       Returns: Builder instance for fluent chaining
   */
-  T gtkSplitCursor(bool propval)
+  T gtkSplitCursor(bool propval) nothrow
   {
     return setProperty("gtk-split-cursor", propval);
   }
@@ -2059,7 +2059,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           GTK finds the CSS stylesheet for a theme.
       Returns: Builder instance for fluent chaining
   */
-  T gtkThemeName(string propval)
+  T gtkThemeName(string propval) nothrow
   {
     return setProperty("gtk-theme-name", propval);
   }
@@ -2074,7 +2074,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           or none.
       Returns: Builder instance for fluent chaining
   */
-  T gtkTitlebarDoubleClick(string propval)
+  T gtkTitlebarDoubleClick(string propval) nothrow
   {
     return setProperty("gtk-titlebar-double-click", propval);
   }
@@ -2089,7 +2089,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           or none.
       Returns: Builder instance for fluent chaining
   */
-  T gtkTitlebarMiddleClick(string propval)
+  T gtkTitlebarMiddleClick(string propval) nothrow
   {
     return setProperty("gtk-titlebar-middle-click", propval);
   }
@@ -2104,7 +2104,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           or none.
       Returns: Builder instance for fluent chaining
   */
-  T gtkTitlebarRightClick(string propval)
+  T gtkTitlebarRightClick(string propval) nothrow
   {
     return setProperty("gtk-titlebar-right-click", propval);
   }
@@ -2117,7 +2117,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           The values are 0 for no, 1 for yes, or -1 for the system default.
       Returns: Builder instance for fluent chaining
   */
-  T gtkXftAntialias(int propval)
+  T gtkXftAntialias(int propval) nothrow
   {
     return setProperty("gtk-xft-antialias", propval);
   }
@@ -2130,7 +2130,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           -1 to use the default value.
       Returns: Builder instance for fluent chaining
   */
-  T gtkXftDpi(int propval)
+  T gtkXftDpi(int propval) nothrow
   {
     return setProperty("gtk-xft-dpi", propval);
   }
@@ -2143,7 +2143,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           The values are 0 for no, 1 for yes, or -1 for the system default.
       Returns: Builder instance for fluent chaining
   */
-  T gtkXftHinting(int propval)
+  T gtkXftHinting(int propval) nothrow
   {
     return setProperty("gtk-xft-hinting", propval);
   }
@@ -2157,7 +2157,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           hintmedium, hintfull.
       Returns: Builder instance for fluent chaining
   */
-  T gtkXftHintstyle(string propval)
+  T gtkXftHintstyle(string propval) nothrow
   {
     return setProperty("gtk-xft-hintstyle", propval);
   }
@@ -2173,7 +2173,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           setting has no effect on font rendering in GTK.
       Returns: Builder instance for fluent chaining
   */
-  T gtkXftRgba(string propval)
+  T gtkXftRgba(string propval) nothrow
   {
     return setProperty("gtk-xft-rgba", propval);
   }
@@ -2186,7 +2186,7 @@ final class SettingsGidBuilder : SettingsGidBuilderImpl!SettingsGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Settings build()
+  Settings build() nothrow
   {
     return new Settings(cast(void*)createGObject(Settings._getGType), No.Take);
   }

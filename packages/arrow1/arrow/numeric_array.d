@@ -15,26 +15,26 @@ class NumericArray : arrow.primitive_array.PrimitiveArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_numeric_array_get_type != &gidSymbolNotFound ? garrow_numeric_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NumericArray self()
+  override NumericArray self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class NumericArray : arrow.primitive_array.PrimitiveArray
       Get builder for [arrow.numeric_array.NumericArray]
       Returns: New builder object
   */
-  static NumericArrayGidBuilder builder()
+  static NumericArrayGidBuilder builder() nothrow
   {
     return new NumericArrayGidBuilder;
   }
@@ -72,7 +72,7 @@ final class NumericArrayGidBuilder : NumericArrayGidBuilderImpl!NumericArrayGidB
       Create object from builder.
       Returns: New object
   */
-  NumericArray build()
+  NumericArray build() nothrow
   {
     return new NumericArray(cast(void*)createGObject(NumericArray._getGType), No.Take);
   }

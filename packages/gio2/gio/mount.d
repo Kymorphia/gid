@@ -46,7 +46,7 @@ interface Mount
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mount_get_type != &gidSymbolNotFound ? g_mount_get_type() : cast(GType)0;
@@ -396,7 +396,7 @@ interface Mount
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `PreUnmount` signal.
@@ -417,7 +417,7 @@ interface Mount
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPreUnmount(T)(T callback, Flag!"After" after = No.After);
+  gulong connectPreUnmount(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `Unmounted` signal.
@@ -437,7 +437,7 @@ interface Mount
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUnmounted(T)(T callback, Flag!"After" after = No.After);
+  gulong connectUnmounted(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gio.mount.Mount]

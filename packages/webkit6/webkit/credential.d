@@ -17,32 +17,32 @@ class Credential : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_credential_get_type != &gidSymbolNotFound ? webkit_credential_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Credential self()
+  override Credential self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class Credential : gobject.boxed.Boxed
         persistence = The #WebKitCredentialPersistence of the new credential
       Returns: A #WebKitCredential.
   */
-  this(string username, string password, webkit.types.CredentialPersistence persistence)
+  this(string username, string password, webkit.types.CredentialPersistence persistence) nothrow
   {
     WebKitCredential* _cretval;
     const(char)* _username = username.toCString(No.Alloc);
@@ -75,7 +75,7 @@ class Credential : gobject.boxed.Boxed
         persistence = The #WebKitCredentialPersistence of the new credential
       Returns: A #WebKitCredential.
   */
-  static webkit.credential.Credential newForCertificate(gio.tls_certificate.TlsCertificate certificate, webkit.types.CredentialPersistence persistence)
+  static webkit.credential.Credential newForCertificate(gio.tls_certificate.TlsCertificate certificate, webkit.types.CredentialPersistence persistence) nothrow
   {
     WebKitCredential* _cretval;
     _cretval = webkit_credential_new_for_certificate(certificate ? cast(GTlsCertificate*)certificate._cPtr(No.Dup) : null, persistence);
@@ -93,7 +93,7 @@ class Credential : gobject.boxed.Boxed
         persistence = The #WebKitCredentialPersistence of the new credential
       Returns: A #WebKitCredential.
   */
-  static webkit.credential.Credential newForCertificatePin(string pin, webkit.types.CredentialPersistence persistence)
+  static webkit.credential.Credential newForCertificatePin(string pin, webkit.types.CredentialPersistence persistence) nothrow
   {
     WebKitCredential* _cretval;
     const(char)* _pin = pin.toCString(No.Alloc);
@@ -106,7 +106,7 @@ class Credential : gobject.boxed.Boxed
       Make a copy of the #WebKitCredential.
       Returns: A copy of passed in #WebKitCredential
   */
-  webkit.credential.Credential copy()
+  webkit.credential.Credential copy() nothrow
   {
     WebKitCredential* _cretval;
     _cretval = webkit_credential_copy(cast(WebKitCredential*)this._cPtr);
@@ -118,7 +118,7 @@ class Credential : gobject.boxed.Boxed
       Get the certificate currently held by this #WebKitCredential.
       Returns: a #GTlsCertificate, or null
   */
-  gio.tls_certificate.TlsCertificate getCertificate()
+  gio.tls_certificate.TlsCertificate getCertificate() nothrow
   {
     GTlsCertificate* _cretval;
     _cretval = webkit_credential_get_certificate(cast(WebKitCredential*)this._cPtr);
@@ -130,7 +130,7 @@ class Credential : gobject.boxed.Boxed
       Get the password currently held by this #WebKitCredential.
       Returns: The password stored in the #WebKitCredential.
   */
-  string getPassword()
+  string getPassword() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_credential_get_password(cast(WebKitCredential*)this._cPtr);
@@ -142,7 +142,7 @@ class Credential : gobject.boxed.Boxed
       Get the persistence mode currently held by this #WebKitCredential.
       Returns: The #WebKitCredentialPersistence stored in the #WebKitCredential.
   */
-  webkit.types.CredentialPersistence getPersistence()
+  webkit.types.CredentialPersistence getPersistence() nothrow
   {
     WebKitCredentialPersistence _cretval;
     _cretval = webkit_credential_get_persistence(cast(WebKitCredential*)this._cPtr);
@@ -154,7 +154,7 @@ class Credential : gobject.boxed.Boxed
       Get the username currently held by this #WebKitCredential.
       Returns: The username stored in the #WebKitCredential.
   */
-  string getUsername()
+  string getUsername() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_credential_get_username(cast(WebKitCredential*)this._cPtr);
@@ -166,7 +166,7 @@ class Credential : gobject.boxed.Boxed
       Determine whether this credential has a password stored.
       Returns: true if the credential has a password or false otherwise.
   */
-  bool hasPassword()
+  bool hasPassword() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_credential_has_password(cast(WebKitCredential*)this._cPtr);

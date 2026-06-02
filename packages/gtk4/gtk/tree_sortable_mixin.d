@@ -38,7 +38,7 @@ template TreeSortableT()
       Returns: true if the sort column is not one of the special sort
           column ids.
   */
-  override bool getSortColumnId(out int sortColumnId, out gtk.types.SortType order)
+  override bool getSortColumnId(out int sortColumnId, out gtk.types.SortType order) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_sortable_get_sort_column_id(cast(GtkTreeSortable*)this._cPtr, cast(int*)&sortColumnId, &order);
@@ -51,7 +51,7 @@ template TreeSortableT()
       go back to the default state, or not.
       Returns: true, if the model has a default sort function
   */
-  override bool hasDefaultSortFunc()
+  override bool hasDefaultSortFunc() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_sortable_has_default_sort_func(cast(GtkTreeSortable*)this._cPtr);
@@ -72,13 +72,21 @@ template TreeSortableT()
       Params:
         sortFunc = The comparison function
   */
-  override void setDefaultSortFunc(gtk.types.TreeIterCompareFunc sortFunc)
+  override void setDefaultSortFunc(gtk.types.TreeIterCompareFunc sortFunc) nothrow
   {
-    extern(C) int _sortFuncCallback(GtkTreeModel* model, GtkTreeIter* a, GtkTreeIter* b, void* userData)
+    extern(C) int _sortFuncCallback(GtkTreeModel* model, GtkTreeIter* a, GtkTreeIter* b, void* userData) nothrow
     {
+      int _retval;
       auto _dlg = cast(gtk.types.TreeIterCompareFunc*)userData;
 
-      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), a ? new gtk.tree_iter.TreeIter(cast(void*)a, No.Take) : null, b ? new gtk.tree_iter.TreeIter(cast(void*)b, No.Take) : null);
+      try
+      {
+        _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), a ? new gtk.tree_iter.TreeIter(cast(void*)a, No.Take) : null, b ? new gtk.tree_iter.TreeIter(cast(void*)b, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeIterCompareFunc");
+      }
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
@@ -102,7 +110,7 @@ template TreeSortableT()
         sortColumnId = the sort column id to set
         order = The sort order of the column
   */
-  override void setSortColumnId(int sortColumnId, gtk.types.SortType order)
+  override void setSortColumnId(int sortColumnId, gtk.types.SortType order) nothrow
   {
     gtk_tree_sortable_set_sort_column_id(cast(GtkTreeSortable*)this._cPtr, sortColumnId, order);
   }
@@ -116,13 +124,21 @@ template TreeSortableT()
         sortColumnId = the sort column id to set the function for
         sortFunc = The comparison function
   */
-  override void setSortFunc(int sortColumnId, gtk.types.TreeIterCompareFunc sortFunc)
+  override void setSortFunc(int sortColumnId, gtk.types.TreeIterCompareFunc sortFunc) nothrow
   {
-    extern(C) int _sortFuncCallback(GtkTreeModel* model, GtkTreeIter* a, GtkTreeIter* b, void* userData)
+    extern(C) int _sortFuncCallback(GtkTreeModel* model, GtkTreeIter* a, GtkTreeIter* b, void* userData) nothrow
     {
+      int _retval;
       auto _dlg = cast(gtk.types.TreeIterCompareFunc*)userData;
 
-      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), a ? new gtk.tree_iter.TreeIter(cast(void*)a, No.Take) : null, b ? new gtk.tree_iter.TreeIter(cast(void*)b, No.Take) : null);
+      try
+      {
+        _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), a ? new gtk.tree_iter.TreeIter(cast(void*)a, No.Take) : null, b ? new gtk.tree_iter.TreeIter(cast(void*)b, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeIterCompareFunc");
+      }
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
@@ -134,7 +150,7 @@ template TreeSortableT()
   /**
       Emits a `GtkTreeSortable::sort-column-changed` signal on sortable.
   */
-  override void sortColumnChanged()
+  override void sortColumnChanged() nothrow
   {
     gtk_tree_sortable_sort_column_changed(cast(GtkTreeSortable*)this._cPtr);
   }
@@ -156,13 +172,13 @@ template TreeSortableT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSortColumnChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSortColumnChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tree_sortable.TreeSortable)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -171,7 +187,14 @@ template TreeSortableT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tree_sortable.TreeSortable.sortColumnChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

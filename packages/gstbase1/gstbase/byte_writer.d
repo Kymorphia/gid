@@ -22,11 +22,8 @@ class ByteWriter
   GstByteWriter _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstbase.byte_writer.ByteWriter");
-
     _cInstance = *cast(GstByteWriter*)ptr;
 
     if (take)
@@ -34,7 +31,7 @@ class ByteWriter
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -43,7 +40,7 @@ class ByteWriter
       Get `parent` field.
       Returns: #GstByteReader parent
   */
-  @property gstbase.byte_reader.ByteReader parent()
+  @property gstbase.byte_reader.ByteReader parent() nothrow
   {
     return new gstbase.byte_reader.ByteReader(cast(GstByteReader*)&(cast(GstByteWriter*)this._cPtr).parent, No.Take);
   }
@@ -52,7 +49,7 @@ class ByteWriter
       Get `allocSize` field.
       Returns: Allocation size of the data
   */
-  @property uint allocSize()
+  @property uint allocSize() nothrow
   {
     return (cast(GstByteWriter*)this._cPtr).allocSize;
   }
@@ -62,7 +59,7 @@ class ByteWriter
       Params:
         propval = Allocation size of the data
   */
-  @property void allocSize(uint propval)
+  @property void allocSize(uint propval) nothrow
   {
     (cast(GstByteWriter*)this._cPtr).allocSize = propval;
   }
@@ -71,7 +68,7 @@ class ByteWriter
       Get `fixed` field.
       Returns: If true no reallocations are allowed
   */
-  @property bool fixed()
+  @property bool fixed() nothrow
   {
     return cast(bool)(cast(GstByteWriter*)this._cPtr).fixed;
   }
@@ -81,7 +78,7 @@ class ByteWriter
       Params:
         propval = If true no reallocations are allowed
   */
-  @property void fixed(bool propval)
+  @property void fixed(bool propval) nothrow
   {
     (cast(GstByteWriter*)this._cPtr).fixed = propval;
   }
@@ -90,7 +87,7 @@ class ByteWriter
       Get `owned` field.
       Returns: If false no reallocations are allowed and copies of data are returned
   */
-  @property bool owned()
+  @property bool owned() nothrow
   {
     return cast(bool)(cast(GstByteWriter*)this._cPtr).owned;
   }
@@ -100,7 +97,7 @@ class ByteWriter
       Params:
         propval = If false no reallocations are allowed and copies of data are returned
   */
-  @property void owned(bool propval)
+  @property void owned(bool propval) nothrow
   {
     (cast(GstByteWriter*)this._cPtr).owned = propval;
   }
@@ -113,7 +110,7 @@ class ByteWriter
         size = Number of bytes that should be available
       Returns: true if at least size bytes are still available
   */
-  bool ensureFreeSpace(uint size)
+  bool ensureFreeSpace(uint size) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_ensure_free_space(cast(GstByteWriter*)this._cPtr, size);
@@ -128,7 +125,7 @@ class ByteWriter
         size = Number of bytes to be written
       Returns: true if the value could be written
   */
-  bool fill(ubyte value, uint size)
+  bool fill(ubyte value, uint size) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_fill(cast(GstByteWriter*)this._cPtr, value, size);
@@ -143,7 +140,7 @@ class ByteWriter
       Returns: the current data as buffer. gst_buffer_unref()
             after usage.
   */
-  gst.buffer.Buffer freeAndGetBuffer()
+  gst.buffer.Buffer freeAndGetBuffer() nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_byte_writer_free_and_get_buffer(cast(GstByteWriter*)this._cPtr);
@@ -158,7 +155,7 @@ class ByteWriter
       Free-function: g_free
       Returns: the current data. [glib.global.gfree] after usage.
   */
-  ubyte* freeAndGetData()
+  ubyte* freeAndGetData() nothrow
   {
     auto _retval = gst_byte_writer_free_and_get_data(cast(GstByteWriter*)this._cPtr);
     return _retval;
@@ -169,7 +166,7 @@ class ByteWriter
       -1 is returned the remaining size is only limited by system resources.
       Returns: the remaining size of data that can still be written
   */
-  uint getRemaining()
+  uint getRemaining() nothrow
   {
     uint _retval;
     _retval = gst_byte_writer_get_remaining(cast(const(GstByteWriter)*)this._cPtr);
@@ -179,7 +176,7 @@ class ByteWriter
   /**
       Initializes writer to an empty instance
   */
-  void init_()
+  void init_() nothrow
   {
     gst_byte_writer_init(cast(GstByteWriter*)this._cPtr);
   }
@@ -193,7 +190,7 @@ class ByteWriter
         data = Memory area for writing
         initialized = If true the complete data can be read from the beginning
   */
-  void initWithData(ubyte[] data, bool initialized)
+  void initWithData(ubyte[] data, bool initialized) nothrow
   {
     uint _size;
     if (data)
@@ -210,7 +207,7 @@ class ByteWriter
         size = Initial size of data
         fixed = If true the data can't be reallocated
   */
-  void initWithSize(uint size, bool fixed)
+  void initWithSize(uint size, bool fixed) nothrow
   {
     gst_byte_writer_init_with_size(cast(GstByteWriter*)this._cPtr, size, fixed);
   }
@@ -224,7 +221,7 @@ class ByteWriter
         size = total size to copy. If -1, all data is copied
       Returns: true if the data could be written
   */
-  bool putBuffer(gst.buffer.Buffer buffer, size_t offset, ptrdiff_t size)
+  bool putBuffer(gst.buffer.Buffer buffer, size_t offset, ptrdiff_t size) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_buffer(cast(GstByteWriter*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, offset, size);
@@ -238,7 +235,7 @@ class ByteWriter
         data = Data to write
       Returns: true if the value could be written
   */
-  bool putData(ubyte[] data)
+  bool putData(ubyte[] data) nothrow
   {
     bool _retval;
     uint _size;
@@ -257,7 +254,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putFloat32Be(float val)
+  bool putFloat32Be(float val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_float32_be(cast(GstByteWriter*)this._cPtr, val);
@@ -271,7 +268,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putFloat32Le(float val)
+  bool putFloat32Le(float val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_float32_le(cast(GstByteWriter*)this._cPtr, val);
@@ -285,7 +282,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putFloat64Be(double val)
+  bool putFloat64Be(double val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_float64_be(cast(GstByteWriter*)this._cPtr, val);
@@ -299,7 +296,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putFloat64Le(double val)
+  bool putFloat64Le(double val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_float64_le(cast(GstByteWriter*)this._cPtr, val);
@@ -313,7 +310,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putInt16Be(short val)
+  bool putInt16Be(short val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_int16_be(cast(GstByteWriter*)this._cPtr, val);
@@ -327,7 +324,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putInt16Le(short val)
+  bool putInt16Le(short val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_int16_le(cast(GstByteWriter*)this._cPtr, val);
@@ -341,7 +338,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putInt24Be(int val)
+  bool putInt24Be(int val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_int24_be(cast(GstByteWriter*)this._cPtr, val);
@@ -355,7 +352,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putInt24Le(int val)
+  bool putInt24Le(int val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_int24_le(cast(GstByteWriter*)this._cPtr, val);
@@ -369,7 +366,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putInt32Be(int val)
+  bool putInt32Be(int val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_int32_be(cast(GstByteWriter*)this._cPtr, val);
@@ -383,7 +380,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putInt32Le(int val)
+  bool putInt32Le(int val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_int32_le(cast(GstByteWriter*)this._cPtr, val);
@@ -397,7 +394,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putInt64Be(long val)
+  bool putInt64Be(long val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_int64_be(cast(GstByteWriter*)this._cPtr, val);
@@ -411,7 +408,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putInt64Le(long val)
+  bool putInt64Le(long val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_int64_le(cast(GstByteWriter*)this._cPtr, val);
@@ -425,7 +422,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putInt8(byte val)
+  bool putInt8(byte val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_int8(cast(GstByteWriter*)this._cPtr, val);
@@ -439,7 +436,7 @@ class ByteWriter
         data = UTF16 string to write
       Returns: true if the value could be written
   */
-  bool putStringUtf16(ushort[] data)
+  bool putStringUtf16(ushort[] data) nothrow
   {
     bool _retval;
     auto _data = data.ptr ? cast(const(ushort)*)(data ~ ushort.init).ptr : [ushort.init].ptr;
@@ -454,7 +451,7 @@ class ByteWriter
         data = UTF32 string to write
       Returns: true if the value could be written
   */
-  bool putStringUtf32(uint[] data)
+  bool putStringUtf32(uint[] data) nothrow
   {
     bool _retval;
     auto _data = data.ptr ? cast(const(uint)*)(data ~ uint.init).ptr : [uint.init].ptr;
@@ -469,7 +466,7 @@ class ByteWriter
         data = UTF8 string to write
       Returns: true if the value could be written
   */
-  bool putStringUtf8(string data)
+  bool putStringUtf8(string data) nothrow
   {
     bool _retval;
     const(char)* _data = data.toCString(No.Alloc);
@@ -484,7 +481,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putUint16Be(ushort val)
+  bool putUint16Be(ushort val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_uint16_be(cast(GstByteWriter*)this._cPtr, val);
@@ -498,7 +495,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putUint16Le(ushort val)
+  bool putUint16Le(ushort val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_uint16_le(cast(GstByteWriter*)this._cPtr, val);
@@ -512,7 +509,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putUint24Be(uint val)
+  bool putUint24Be(uint val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_uint24_be(cast(GstByteWriter*)this._cPtr, val);
@@ -526,7 +523,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putUint24Le(uint val)
+  bool putUint24Le(uint val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_uint24_le(cast(GstByteWriter*)this._cPtr, val);
@@ -540,7 +537,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putUint32Be(uint val)
+  bool putUint32Be(uint val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_uint32_be(cast(GstByteWriter*)this._cPtr, val);
@@ -554,7 +551,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putUint32Le(uint val)
+  bool putUint32Le(uint val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_uint32_le(cast(GstByteWriter*)this._cPtr, val);
@@ -568,7 +565,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putUint64Be(ulong val)
+  bool putUint64Be(ulong val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_uint64_be(cast(GstByteWriter*)this._cPtr, val);
@@ -582,7 +579,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putUint64Le(ulong val)
+  bool putUint64Le(ulong val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_uint64_le(cast(GstByteWriter*)this._cPtr, val);
@@ -596,7 +593,7 @@ class ByteWriter
         val = Value to write
       Returns: true if the value could be written
   */
-  bool putUint8(ubyte val)
+  bool putUint8(ubyte val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_writer_put_uint8(cast(GstByteWriter*)this._cPtr, val);
@@ -607,7 +604,7 @@ class ByteWriter
       Resets writer and frees the data if it's
       owned by writer.
   */
-  void reset()
+  void reset() nothrow
   {
     gst_byte_writer_reset(cast(GstByteWriter*)this._cPtr);
   }
@@ -619,7 +616,7 @@ class ByteWriter
       Returns: the current data as buffer. gst_buffer_unref()
             after usage.
   */
-  gst.buffer.Buffer resetAndGetBuffer()
+  gst.buffer.Buffer resetAndGetBuffer() nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_byte_writer_reset_and_get_buffer(cast(GstByteWriter*)this._cPtr);

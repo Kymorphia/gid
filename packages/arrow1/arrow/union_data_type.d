@@ -16,26 +16,26 @@ class UnionDataType : arrow.data_type.DataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_union_data_type_get_type != &gidSymbolNotFound ? garrow_union_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UnionDataType self()
+  override UnionDataType self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class UnionDataType : arrow.data_type.DataType
       Get builder for [arrow.union_data_type.UnionDataType]
       Returns: New builder object
   */
-  static UnionDataTypeGidBuilder builder()
+  static UnionDataTypeGidBuilder builder() nothrow
   {
     return new UnionDataTypeGidBuilder;
   }
 
   /** */
-  arrow.field.Field getField(int i)
+  arrow.field.Field getField(int i) nothrow
   {
     GArrowField* _cretval;
     _cretval = garrow_union_data_type_get_field(cast(GArrowUnionDataType*)this._cPtr, i);
@@ -59,7 +59,7 @@ class UnionDataType : arrow.data_type.DataType
   }
 
   /** */
-  arrow.field.Field[] getFields()
+  arrow.field.Field[] getFields() nothrow
   {
     GList* _cretval;
     _cretval = garrow_union_data_type_get_fields(cast(GArrowUnionDataType*)this._cPtr);
@@ -68,7 +68,7 @@ class UnionDataType : arrow.data_type.DataType
   }
 
   /** */
-  int getNFields()
+  int getNFields() nothrow
   {
     int _retval;
     _retval = garrow_union_data_type_get_n_fields(cast(GArrowUnionDataType*)this._cPtr);
@@ -76,7 +76,7 @@ class UnionDataType : arrow.data_type.DataType
   }
 
   /** */
-  byte[] getTypeCodes()
+  byte[] getTypeCodes() nothrow
   {
     byte* _cretval;
     size_t _cretlength;
@@ -104,7 +104,7 @@ final class UnionDataTypeGidBuilder : UnionDataTypeGidBuilderImpl!UnionDataTypeG
       Create object from builder.
       Returns: New object
   */
-  UnionDataType build()
+  UnionDataType build() nothrow
   {
     return new UnionDataType(cast(void*)createGObject(UnionDataType._getGType), No.Take);
   }

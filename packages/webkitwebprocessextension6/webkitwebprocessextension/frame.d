@@ -21,26 +21,26 @@ class Frame : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_frame_get_type != &gidSymbolNotFound ? webkit_frame_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Frame self()
+  override Frame self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class Frame : gobject.object.ObjectWrap
       Get builder for [webkitwebprocessextension.frame.Frame]
       Returns: New builder object
   */
-  static FrameGidBuilder builder()
+  static FrameGidBuilder builder() nothrow
   {
     return new FrameGidBuilder;
   }
@@ -60,7 +60,7 @@ class Frame : gobject.object.ObjectWrap
       in other web processes may.
       Returns: the identifier of frame
   */
-  ulong getId()
+  ulong getId() nothrow
   {
     ulong _retval;
     _retval = webkit_frame_get_id(cast(WebKitFrame*)this._cPtr);
@@ -72,7 +72,7 @@ class Frame : gobject.object.ObjectWrap
       between the WebKit and JavaScriptCore APIs.
       Returns: the #JSCContext for the JavaScript execution context of frame.
   */
-  javascriptcore.context.Context getJsContext()
+  javascriptcore.context.Context getJsContext() nothrow
   {
     JSCContext* _cretval;
     _cretval = webkit_frame_get_js_context(cast(WebKitFrame*)this._cPtr);
@@ -87,7 +87,7 @@ class Frame : gobject.object.ObjectWrap
         world = a #WebKitScriptWorld
       Returns: the #JSCContext for the JavaScript execution context of frame for world.
   */
-  javascriptcore.context.Context getJsContextForScriptWorld(webkitwebprocessextension.script_world.ScriptWorld world)
+  javascriptcore.context.Context getJsContextForScriptWorld(webkitwebprocessextension.script_world.ScriptWorld world) nothrow
   {
     JSCContext* _cretval;
     _cretval = webkit_frame_get_js_context_for_script_world(cast(WebKitFrame*)this._cPtr, world ? cast(WebKitScriptWorld*)world._cPtr(No.Dup) : null);
@@ -100,7 +100,7 @@ class Frame : gobject.object.ObjectWrap
       Returns: the current active URI of frame or null if nothing has been
            loaded yet.
   */
-  string getUri()
+  string getUri() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_frame_get_uri(cast(WebKitFrame*)this._cPtr);
@@ -112,7 +112,7 @@ class Frame : gobject.object.ObjectWrap
       Gets whether frame is the main frame of a #WebKitWebPage
       Returns: true if frame is a main frame or false otherwise
   */
-  bool isMainFrame()
+  bool isMainFrame() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_frame_is_main_frame(cast(WebKitFrame*)this._cPtr);
@@ -132,7 +132,7 @@ final class FrameGidBuilder : FrameGidBuilderImpl!FrameGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Frame build()
+  Frame build() nothrow
   {
     return new Frame(cast(void*)createGObject(Frame._getGType), No.Take);
   }

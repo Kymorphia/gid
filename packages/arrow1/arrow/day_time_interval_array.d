@@ -17,26 +17,26 @@ class DayTimeIntervalArray : arrow.primitive_array.PrimitiveArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_day_time_interval_array_get_type != &gidSymbolNotFound ? garrow_day_time_interval_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DayTimeIntervalArray self()
+  override DayTimeIntervalArray self() nothrow
   {
     return this;
   }
@@ -45,13 +45,13 @@ class DayTimeIntervalArray : arrow.primitive_array.PrimitiveArray
       Get builder for [arrow.day_time_interval_array.DayTimeIntervalArray]
       Returns: New builder object
   */
-  static DayTimeIntervalArrayGidBuilder builder()
+  static DayTimeIntervalArrayGidBuilder builder() nothrow
   {
     return new DayTimeIntervalArrayGidBuilder;
   }
 
   /** */
-  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
+  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls) nothrow
   {
     GArrowDayTimeIntervalArray* _cretval;
     _cretval = garrow_day_time_interval_array_new(length, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
@@ -59,7 +59,7 @@ class DayTimeIntervalArray : arrow.primitive_array.PrimitiveArray
   }
 
   /** */
-  arrow.day_millisecond.DayMillisecond getValue(long i)
+  arrow.day_millisecond.DayMillisecond getValue(long i) nothrow
   {
     GArrowDayMillisecond* _cretval;
     _cretval = garrow_day_time_interval_array_get_value(cast(GArrowDayTimeIntervalArray*)this._cPtr, i);
@@ -68,7 +68,7 @@ class DayTimeIntervalArray : arrow.primitive_array.PrimitiveArray
   }
 
   /** */
-  arrow.day_millisecond.DayMillisecond[] getValues()
+  arrow.day_millisecond.DayMillisecond[] getValues() nothrow
   {
     GList* _cretval;
     _cretval = garrow_day_time_interval_array_get_values(cast(GArrowDayTimeIntervalArray*)this._cPtr);
@@ -89,7 +89,7 @@ final class DayTimeIntervalArrayGidBuilder : DayTimeIntervalArrayGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  DayTimeIntervalArray build()
+  DayTimeIntervalArray build() nothrow
   {
     return new DayTimeIntervalArray(cast(void*)createGObject(DayTimeIntervalArray._getGType), Yes.Take);
   }

@@ -18,26 +18,26 @@ class VulkanRenderer : gsk.renderer.Renderer
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_vulkan_renderer_get_type != &gidSymbolNotFound ? gsk_vulkan_renderer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VulkanRenderer self()
+  override VulkanRenderer self() nothrow
   {
     return this;
   }
@@ -46,13 +46,13 @@ class VulkanRenderer : gsk.renderer.Renderer
       Get builder for [gsk.vulkan_renderer.VulkanRenderer]
       Returns: New builder object
   */
-  static VulkanRendererGidBuilder builder()
+  static VulkanRendererGidBuilder builder() nothrow
   {
     return new VulkanRendererGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GskRenderer* _cretval;
     _cretval = gsk_vulkan_renderer_new();
@@ -72,7 +72,7 @@ final class VulkanRendererGidBuilder : VulkanRendererGidBuilderImpl!VulkanRender
       Create object from builder.
       Returns: New object
   */
-  VulkanRenderer build()
+  VulkanRenderer build() nothrow
   {
     return new VulkanRenderer(cast(void*)createGObject(VulkanRenderer._getGType), Yes.Take);
   }

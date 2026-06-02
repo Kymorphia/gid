@@ -21,26 +21,26 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_base_src_get_type != &gidSymbolNotFound ? gst_audio_base_src_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AudioBaseSrc self()
+  override AudioBaseSrc self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
       Get builder for [gstaudio.audio_base_src.AudioBaseSrc]
       Returns: New builder object
   */
-  static AudioBaseSrcGidBuilder builder()
+  static AudioBaseSrcGidBuilder builder() nothrow
   {
     return new AudioBaseSrcGidBuilder;
   }
@@ -58,7 +58,7 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
       Get `actualBufferTime` property.
       Returns: Actual configured size of audio buffer in microseconds.
   */
-  @property long actualBufferTime()
+  @property long actualBufferTime() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("actual-buffer-time");
   }
@@ -67,31 +67,31 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
       Get `actualLatencyTime` property.
       Returns: Actual configured audio latency in microseconds.
   */
-  @property long actualLatencyTime()
+  @property long actualLatencyTime() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("actual-latency-time");
   }
 
   /** */
-  @property long bufferTime()
+  @property long bufferTime() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("buffer-time");
   }
 
   /** */
-  @property void bufferTime(long propval)
+  @property void bufferTime(long propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(long)("buffer-time", propval);
   }
 
   /** */
-  @property long latencyTime()
+  @property long latencyTime() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("latency-time");
   }
 
   /** */
-  @property void latencyTime(long propval)
+  @property void latencyTime(long propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(long)("latency-time", propval);
   }
@@ -99,7 +99,7 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
   alias provideClock = gst.element.Element.provideClock;
 
   /** */
-  @property bool provideClock()
+  @property bool provideClock() nothrow
   {
     return getProvideClock();
   }
@@ -107,19 +107,19 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
   alias provideClock = gst.element.Element.provideClock;
 
   /** */
-  @property void provideClock(bool propval)
+  @property void provideClock(bool propval) nothrow
   {
     setProvideClock(propval);
   }
 
   /** */
-  @property gstaudio.types.AudioBaseSrcSlaveMethod slaveMethod()
+  @property gstaudio.types.AudioBaseSrcSlaveMethod slaveMethod() nothrow
   {
     return getSlaveMethod();
   }
 
   /** */
-  @property void slaveMethod(gstaudio.types.AudioBaseSrcSlaveMethod propval)
+  @property void slaveMethod(gstaudio.types.AudioBaseSrcSlaveMethod propval) nothrow
   {
     setSlaveMethod(propval);
   }
@@ -130,7 +130,7 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
       returned buffer (see [gst.object.ObjectWrap.setParent]).
       Returns: The new ringbuffer of src.
   */
-  gstaudio.audio_ring_buffer.AudioRingBuffer createRingbuffer()
+  gstaudio.audio_ring_buffer.AudioRingBuffer createRingbuffer() nothrow
   {
     GstAudioRingBuffer* _cretval;
     _cretval = gst_audio_base_src_create_ringbuffer(cast(GstAudioBaseSrc*)this._cPtr);
@@ -143,7 +143,7 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
       gst_audio_base_src_set_provide_clock.
       Returns: true if src will provide a clock.
   */
-  bool getProvideClock()
+  bool getProvideClock() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_base_src_get_provide_clock(cast(GstAudioBaseSrc*)this._cPtr);
@@ -154,7 +154,7 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
       Get the current slave method used by src.
       Returns: The current slave method used by src.
   */
-  gstaudio.types.AudioBaseSrcSlaveMethod getSlaveMethod()
+  gstaudio.types.AudioBaseSrcSlaveMethod getSlaveMethod() nothrow
   {
     GstAudioBaseSrcSlaveMethod _cretval;
     _cretval = gst_audio_base_src_get_slave_method(cast(GstAudioBaseSrc*)this._cPtr);
@@ -170,7 +170,7 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
       Params:
         provide = new state
   */
-  void setProvideClock(bool provide)
+  void setProvideClock(bool provide) nothrow
   {
     gst_audio_base_src_set_provide_clock(cast(GstAudioBaseSrc*)this._cPtr, provide);
   }
@@ -181,7 +181,7 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
       Params:
         method = the new slave method
   */
-  void setSlaveMethod(gstaudio.types.AudioBaseSrcSlaveMethod method)
+  void setSlaveMethod(gstaudio.types.AudioBaseSrcSlaveMethod method) nothrow
   {
     gst_audio_base_src_set_slave_method(cast(GstAudioBaseSrc*)this._cPtr, method);
   }
@@ -192,25 +192,25 @@ class AudioBaseSrcGidBuilderImpl(T) : gstbase.push_src.PushSrcGidBuilderImpl!T
 {
 
   /** */
-  T bufferTime(long propval)
+  T bufferTime(long propval) nothrow
   {
     return setProperty("buffer-time", propval);
   }
 
   /** */
-  T latencyTime(long propval)
+  T latencyTime(long propval) nothrow
   {
     return setProperty("latency-time", propval);
   }
 
   /** */
-  T provideClock(bool propval)
+  T provideClock(bool propval) nothrow
   {
     return setProperty("provide-clock", propval);
   }
 
   /** */
-  T slaveMethod(gstaudio.types.AudioBaseSrcSlaveMethod propval)
+  T slaveMethod(gstaudio.types.AudioBaseSrcSlaveMethod propval) nothrow
   {
     return setProperty("slave-method", propval);
   }
@@ -223,7 +223,7 @@ final class AudioBaseSrcGidBuilder : AudioBaseSrcGidBuilderImpl!AudioBaseSrcGidB
       Create object from builder.
       Returns: New object
   */
-  AudioBaseSrc build()
+  AudioBaseSrc build() nothrow
   {
     return new AudioBaseSrc(cast(void*)createGObject(AudioBaseSrc._getGType), No.Take);
   }

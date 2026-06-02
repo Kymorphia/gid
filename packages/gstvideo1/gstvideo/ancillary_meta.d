@@ -18,11 +18,8 @@ class AncillaryMeta
   GstAncillaryMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.ancillary_meta.AncillaryMeta");
-
     _cInstance = *cast(GstAncillaryMeta*)ptr;
 
     if (take)
@@ -30,7 +27,7 @@ class AncillaryMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class AncillaryMeta
       Get `meta` field.
       Returns: Parent #GstMeta
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAncillaryMeta*)this._cPtr).meta, No.Take);
   }
@@ -48,7 +45,7 @@ class AncillaryMeta
       Get `field` field.
       Returns: The field where the ancillary data is located
   */
-  @property gstvideo.types.AncillaryMetaField field()
+  @property gstvideo.types.AncillaryMetaField field() nothrow
   {
     return cast(gstvideo.types.AncillaryMetaField)(cast(GstAncillaryMeta*)this._cPtr).field;
   }
@@ -58,7 +55,7 @@ class AncillaryMeta
       Params:
         propval = The field where the ancillary data is located
   */
-  @property void field(gstvideo.types.AncillaryMetaField propval)
+  @property void field(gstvideo.types.AncillaryMetaField propval) nothrow
   {
     (cast(GstAncillaryMeta*)this._cPtr).field = cast(GstAncillaryMetaField)propval;
   }
@@ -69,7 +66,7 @@ class AncillaryMeta
            data is located. 0 if content is SD or stored in the luminance channel
            (default). 1 if HD and stored in the chrominance channel.
   */
-  @property bool cNotYChannel()
+  @property bool cNotYChannel() nothrow
   {
     return cast(bool)(cast(GstAncillaryMeta*)this._cPtr).cNotYChannel;
   }
@@ -81,7 +78,7 @@ class AncillaryMeta
              data is located. 0 if content is SD or stored in the luminance channel
              (default). 1 if HD and stored in the chrominance channel.
   */
-  @property void cNotYChannel(bool propval)
+  @property void cNotYChannel(bool propval) nothrow
   {
     (cast(GstAncillaryMeta*)this._cPtr).cNotYChannel = propval;
   }
@@ -92,7 +89,7 @@ class AncillaryMeta
            are two special values: 0x7ff if no line is specified (default), 0x7fe
            to specify the ancillary data is on any valid line before active video
   */
-  @property ushort line()
+  @property ushort line() nothrow
   {
     return (cast(GstAncillaryMeta*)this._cPtr).line;
   }
@@ -104,7 +101,7 @@ class AncillaryMeta
              are two special values: 0x7ff if no line is specified (default), 0x7fe
              to specify the ancillary data is on any valid line before active video
   */
-  @property void line(ushort propval)
+  @property void line(ushort propval) nothrow
   {
     (cast(GstAncillaryMeta*)this._cPtr).line = propval;
   }
@@ -118,7 +115,7 @@ class AncillaryMeta
            HANC data space, 0xffd: within the ancillary data space located between
            SAV and EAV
   */
-  @property ushort offset()
+  @property ushort offset() nothrow
   {
     return (cast(GstAncillaryMeta*)this._cPtr).offset;
   }
@@ -133,7 +130,7 @@ class AncillaryMeta
              HANC data space, 0xffd: within the ancillary data space located between
              SAV and EAV
   */
-  @property void offset(ushort propval)
+  @property void offset(ushort propval) nothrow
   {
     (cast(GstAncillaryMeta*)this._cPtr).offset = propval;
   }
@@ -142,7 +139,7 @@ class AncillaryMeta
       Get `DID` field.
       Returns: Data Identified
   */
-  @property ushort DID()
+  @property ushort DID() nothrow
   {
     return (cast(GstAncillaryMeta*)this._cPtr).DID;
   }
@@ -152,7 +149,7 @@ class AncillaryMeta
       Params:
         propval = Data Identified
   */
-  @property void DID(ushort propval)
+  @property void DID(ushort propval) nothrow
   {
     (cast(GstAncillaryMeta*)this._cPtr).DID = propval;
   }
@@ -162,7 +159,7 @@ class AncillaryMeta
       Returns: Secondary Data identification (if type 2) or Data block
            number (if type 1)
   */
-  @property ushort SDIDBlockNumber()
+  @property ushort SDIDBlockNumber() nothrow
   {
     return (cast(GstAncillaryMeta*)this._cPtr).SDIDBlockNumber;
   }
@@ -173,7 +170,7 @@ class AncillaryMeta
         propval = Secondary Data identification (if type 2) or Data block
              number (if type 1)
   */
-  @property void SDIDBlockNumber(ushort propval)
+  @property void SDIDBlockNumber(ushort propval) nothrow
   {
     (cast(GstAncillaryMeta*)this._cPtr).SDIDBlockNumber = propval;
   }
@@ -182,7 +179,7 @@ class AncillaryMeta
       Get `dataCount` field.
       Returns: The amount of user data
   */
-  @property ushort dataCount()
+  @property ushort dataCount() nothrow
   {
     return (cast(GstAncillaryMeta*)this._cPtr).dataCount;
   }
@@ -192,7 +189,7 @@ class AncillaryMeta
       Params:
         propval = The amount of user data
   */
-  @property void dataCount(ushort propval)
+  @property void dataCount(ushort propval) nothrow
   {
     (cast(GstAncillaryMeta*)this._cPtr).dataCount = propval;
   }
@@ -201,7 +198,7 @@ class AncillaryMeta
       Get `checksum` field.
       Returns: The checksum of the ADF
   */
-  @property ushort checksum()
+  @property ushort checksum() nothrow
   {
     return (cast(GstAncillaryMeta*)this._cPtr).checksum;
   }
@@ -211,13 +208,13 @@ class AncillaryMeta
       Params:
         propval = The checksum of the ADF
   */
-  @property void checksum(ushort propval)
+  @property void checksum(ushort propval) nothrow
   {
     (cast(GstAncillaryMeta*)this._cPtr).checksum = propval;
   }
 
   /** */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_ancillary_meta_get_info();

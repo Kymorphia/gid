@@ -16,26 +16,26 @@ class GLBufferAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAllocator
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_buffer_allocator_get_type != &gidSymbolNotFound ? gst_gl_buffer_allocator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLBufferAllocator self()
+  override GLBufferAllocator self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class GLBufferAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAllocator
       Get builder for [gstgl.glbuffer_allocator.GLBufferAllocator]
       Returns: New builder object
   */
-  static GLBufferAllocatorGidBuilder builder()
+  static GLBufferAllocatorGidBuilder builder() nothrow
   {
     return new GLBufferAllocatorGidBuilder;
   }
@@ -62,7 +62,7 @@ final class GLBufferAllocatorGidBuilder : GLBufferAllocatorGidBuilderImpl!GLBuff
       Create object from builder.
       Returns: New object
   */
-  GLBufferAllocator build()
+  GLBufferAllocator build() nothrow
   {
     return new GLBufferAllocator(cast(void*)createGObject(GLBufferAllocator._getGType), No.Take);
   }

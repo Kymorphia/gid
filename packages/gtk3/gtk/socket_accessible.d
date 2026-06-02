@@ -16,26 +16,26 @@ class SocketAccessible : gtk.container_accessible.ContainerAccessible
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_socket_accessible_get_type != &gidSymbolNotFound ? gtk_socket_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SocketAccessible self()
+  override SocketAccessible self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class SocketAccessible : gtk.container_accessible.ContainerAccessible
       Get builder for [gtk.socket_accessible.SocketAccessible]
       Returns: New builder object
   */
-  static SocketAccessibleGidBuilder builder()
+  static SocketAccessibleGidBuilder builder() nothrow
   {
     return new SocketAccessibleGidBuilder;
   }
 
   /** */
-  void embed(string path)
+  void embed(string path) nothrow
   {
     char* _path = path.toCString(No.Alloc);
     gtk_socket_accessible_embed(cast(GtkSocketAccessible*)this._cPtr, _path);
@@ -70,7 +70,7 @@ final class SocketAccessibleGidBuilder : SocketAccessibleGidBuilderImpl!SocketAc
       Create object from builder.
       Returns: New object
   */
-  SocketAccessible build()
+  SocketAccessible build() nothrow
   {
     return new SocketAccessible(cast(void*)createGObject(SocketAccessible._getGType), No.Take);
   }

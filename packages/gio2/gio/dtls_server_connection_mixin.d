@@ -26,7 +26,7 @@ template DtlsServerConnectionT()
         before calling [gio.dtls_connection.DtlsConnection.handshake] if you want to
         rehandshake with a different mode from the initial handshake.
   */
-  @property gio.types.TlsAuthenticationMode authenticationMode()
+  @property gio.types.TlsAuthenticationMode authenticationMode() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.types.TlsAuthenticationMode)("authentication-mode");
   }
@@ -38,7 +38,7 @@ template DtlsServerConnectionT()
           before calling [gio.dtls_connection.DtlsConnection.handshake] if you want to
           rehandshake with a different mode from the initial handshake.
   */
-  @property void authenticationMode(gio.types.TlsAuthenticationMode propval)
+  @property void authenticationMode(gio.types.TlsAuthenticationMode propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gio.types.TlsAuthenticationMode)("authentication-mode", propval);
   }
@@ -57,7 +57,7 @@ template DtlsServerConnectionGidBuilderT()
           rehandshake with a different mode from the initial handshake.
       Returns: Builder instance for fluent chaining
   */
-  T authenticationMode(gio.types.TlsAuthenticationMode propval)
+  T authenticationMode(gio.types.TlsAuthenticationMode propval) nothrow
   {
     return setProperty("authentication-mode", propval);
   }

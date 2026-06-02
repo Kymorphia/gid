@@ -61,26 +61,26 @@ class ShortcutsWindow : gtk.window.Window
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_shortcuts_window_get_type != &gidSymbolNotFound ? gtk_shortcuts_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ShortcutsWindow self()
+  override ShortcutsWindow self() nothrow
   {
     return this;
   }
@@ -89,7 +89,7 @@ class ShortcutsWindow : gtk.window.Window
       Get builder for [gtk.shortcuts_window.ShortcutsWindow]
       Returns: New builder object
   */
-  static ShortcutsWindowGidBuilder builder()
+  static ShortcutsWindowGidBuilder builder() nothrow
   {
     return new ShortcutsWindowGidBuilder;
   }
@@ -101,7 +101,7 @@ class ShortcutsWindow : gtk.window.Window
         This should be the section-name of one of the #GtkShortcutsSection
         objects that are in this shortcuts window.
   */
-  @property string sectionName()
+  @property string sectionName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("section-name");
   }
@@ -114,7 +114,7 @@ class ShortcutsWindow : gtk.window.Window
           This should be the section-name of one of the #GtkShortcutsSection
           objects that are in this shortcuts window.
   */
-  @property void sectionName(string propval)
+  @property void sectionName(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("section-name", propval);
   }
@@ -128,7 +128,7 @@ class ShortcutsWindow : gtk.window.Window
         
         Set this to null to show all groups.
   */
-  @property string viewName()
+  @property string viewName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("view-name");
   }
@@ -143,7 +143,7 @@ class ShortcutsWindow : gtk.window.Window
           
           Set this to null to show all groups.
   */
-  @property void viewName(string propval)
+  @property void viewName(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("view-name", propval);
   }
@@ -168,13 +168,13 @@ class ShortcutsWindow : gtk.window.Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClose(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClose(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.shortcuts_window.ShortcutsWindow)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -183,7 +183,14 @@ class ShortcutsWindow : gtk.window.Window
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.shortcuts_window.ShortcutsWindow.close");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -209,13 +216,13 @@ class ShortcutsWindow : gtk.window.Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSearch(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSearch(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.shortcuts_window.ShortcutsWindow)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -224,7 +231,14 @@ class ShortcutsWindow : gtk.window.Window
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.shortcuts_window.ShortcutsWindow.search");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -246,7 +260,7 @@ class ShortcutsWindowGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           objects that are in this shortcuts window.
       Returns: Builder instance for fluent chaining
   */
-  T sectionName(string propval)
+  T sectionName(string propval) nothrow
   {
     return setProperty("section-name", propval);
   }
@@ -262,7 +276,7 @@ class ShortcutsWindowGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           Set this to null to show all groups.
       Returns: Builder instance for fluent chaining
   */
-  T viewName(string propval)
+  T viewName(string propval) nothrow
   {
     return setProperty("view-name", propval);
   }
@@ -275,7 +289,7 @@ final class ShortcutsWindowGidBuilder : ShortcutsWindowGidBuilderImpl!ShortcutsW
       Create object from builder.
       Returns: New object
   */
-  ShortcutsWindow build()
+  ShortcutsWindow build() nothrow
   {
     return new ShortcutsWindow(cast(void*)createGObject(ShortcutsWindow._getGType), No.Take);
   }

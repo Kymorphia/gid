@@ -15,26 +15,26 @@ class ListScalar : arrow.base_list_scalar.BaseListScalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_list_scalar_get_type != &gidSymbolNotFound ? garrow_list_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ListScalar self()
+  override ListScalar self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class ListScalar : arrow.base_list_scalar.BaseListScalar
       Get builder for [arrow.list_scalar.ListScalar]
       Returns: New builder object
   */
-  static ListScalarGidBuilder builder()
+  static ListScalarGidBuilder builder() nothrow
   {
     return new ListScalarGidBuilder;
   }
 
   /** */
-  this(arrow.list_array.ListArray value)
+  this(arrow.list_array.ListArray value) nothrow
   {
     GArrowListScalar* _cretval;
     _cretval = garrow_list_scalar_new(value ? cast(GArrowListArray*)value._cPtr(No.Dup) : null);
@@ -69,7 +69,7 @@ final class ListScalarGidBuilder : ListScalarGidBuilderImpl!ListScalarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ListScalar build()
+  ListScalar build() nothrow
   {
     return new ListScalar(cast(void*)createGObject(ListScalar._getGType), Yes.Take);
   }

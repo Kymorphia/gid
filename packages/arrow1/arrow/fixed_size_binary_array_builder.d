@@ -17,26 +17,26 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_fixed_size_binary_array_builder_get_type != &gidSymbolNotFound ? garrow_fixed_size_binary_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FixedSizeBinaryArrayBuilder self()
+  override FixedSizeBinaryArrayBuilder self() nothrow
   {
     return this;
   }
@@ -45,13 +45,13 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder]
       Returns: New builder object
   */
-  static FixedSizeBinaryArrayBuilderGidBuilder builder()
+  static FixedSizeBinaryArrayBuilderGidBuilder builder() nothrow
   {
     return new FixedSizeBinaryArrayBuilderGidBuilder;
   }
 
   /** */
-  this(arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType dataType)
+  this(arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType dataType) nothrow
   {
     GArrowFixedSizeBinaryArrayBuilder* _cretval;
     _cretval = garrow_fixed_size_binary_array_builder_new(dataType ? cast(GArrowFixedSizeBinaryDataType*)dataType._cPtr(No.Dup) : null);
@@ -166,7 +166,7 @@ final class FixedSizeBinaryArrayBuilderGidBuilder : FixedSizeBinaryArrayBuilderG
       Create object from builder.
       Returns: New object
   */
-  FixedSizeBinaryArrayBuilder build()
+  FixedSizeBinaryArrayBuilder build() nothrow
   {
     return new FixedSizeBinaryArrayBuilder(cast(void*)createGObject(FixedSizeBinaryArrayBuilder._getGType), Yes.Take);
   }

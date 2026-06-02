@@ -24,7 +24,7 @@ struct PollFD
       Initializes fd. Alternatively you can initialize it with
       #GST_POLL_FD_INIT.
   */
-  void init_()
+  void init_() nothrow
   {
     gst_poll_fd_init(cast(GstPollFD*)&this);
   }

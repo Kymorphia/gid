@@ -24,11 +24,8 @@ class UriParamsIter
   GUriParamsIter _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.uri_params_iter.UriParamsIter");
-
     _cInstance = *cast(GUriParamsIter*)ptr;
 
     if (take)
@@ -36,7 +33,7 @@ class UriParamsIter
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -86,7 +83,7 @@ class UriParamsIter
             no splitting will occur.
         flags = flags to modify the way the parameters are handled.
   */
-  void init_(string params, string separators, glib.types.UriParamsFlags flags)
+  void init_(string params, string separators, glib.types.UriParamsFlags flags) nothrow
   {
     ptrdiff_t _length;
     if (params)

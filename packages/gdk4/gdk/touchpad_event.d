@@ -20,11 +20,8 @@ class TouchpadEvent : gdk.event.Event
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.touchpad_event.TouchpadEvent");
-
     super(cast(GdkEvent*)ptr, take);
   }
 
@@ -35,7 +32,7 @@ class TouchpadEvent : gdk.event.Event
         dx = return location for x
         dy = return location for y
   */
-  void getDeltas(out double dx, out double dy)
+  void getDeltas(out double dx, out double dy) nothrow
   {
     gdk_touchpad_event_get_deltas(cast(GdkEvent*)this._cPtr, cast(double*)&dx, cast(double*)&dy);
   }
@@ -44,7 +41,7 @@ class TouchpadEvent : gdk.event.Event
       Extracts the touchpad gesture phase from a touchpad event.
       Returns: the gesture phase of event
   */
-  gdk.types.TouchpadGesturePhase getGesturePhase()
+  gdk.types.TouchpadGesturePhase getGesturePhase() nothrow
   {
     GdkTouchpadGesturePhase _cretval;
     _cretval = gdk_touchpad_event_get_gesture_phase(cast(GdkEvent*)this._cPtr);
@@ -56,7 +53,7 @@ class TouchpadEvent : gdk.event.Event
       Extracts the number of fingers from a touchpad event.
       Returns: the number of fingers for event
   */
-  uint getNFingers()
+  uint getNFingers() nothrow
   {
     uint _retval;
     _retval = gdk_touchpad_event_get_n_fingers(cast(GdkEvent*)this._cPtr);
@@ -67,7 +64,7 @@ class TouchpadEvent : gdk.event.Event
       Extracts the angle delta from a touchpad pinch event.
       Returns: the angle delta of event
   */
-  double getPinchAngleDelta()
+  double getPinchAngleDelta() nothrow
   {
     double _retval;
     _retval = gdk_touchpad_event_get_pinch_angle_delta(cast(GdkEvent*)this._cPtr);
@@ -78,7 +75,7 @@ class TouchpadEvent : gdk.event.Event
       Extracts the scale from a touchpad pinch event.
       Returns: the scale of event
   */
-  double getPinchScale()
+  double getPinchScale() nothrow
   {
     double _retval;
     _retval = gdk_touchpad_event_get_pinch_scale(cast(GdkEvent*)this._cPtr);

@@ -28,11 +28,8 @@ class AudioClippingMeta
   GstAudioClippingMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstaudio.audio_clipping_meta.AudioClippingMeta");
-
     _cInstance = *cast(GstAudioClippingMeta*)ptr;
 
     if (take)
@@ -40,7 +37,7 @@ class AudioClippingMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -49,7 +46,7 @@ class AudioClippingMeta
       Get `meta` field.
       Returns: parent #GstMeta
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAudioClippingMeta*)this._cPtr).meta, No.Take);
   }
@@ -58,7 +55,7 @@ class AudioClippingMeta
       Get `format` field.
       Returns: GstFormat of @start and @stop, GST_FORMAT_DEFAULT is samples
   */
-  @property gst.types.Format format()
+  @property gst.types.Format format() nothrow
   {
     return cast(gst.types.Format)(cast(GstAudioClippingMeta*)this._cPtr).format;
   }
@@ -68,7 +65,7 @@ class AudioClippingMeta
       Params:
         propval = GstFormat of @start and @stop, GST_FORMAT_DEFAULT is samples
   */
-  @property void format(gst.types.Format propval)
+  @property void format(gst.types.Format propval) nothrow
   {
     (cast(GstAudioClippingMeta*)this._cPtr).format = cast(GstFormat)propval;
   }
@@ -77,7 +74,7 @@ class AudioClippingMeta
       Get `start` field.
       Returns: Amount of audio to clip from start of buffer
   */
-  @property ulong start()
+  @property ulong start() nothrow
   {
     return (cast(GstAudioClippingMeta*)this._cPtr).start;
   }
@@ -87,7 +84,7 @@ class AudioClippingMeta
       Params:
         propval = Amount of audio to clip from start of buffer
   */
-  @property void start(ulong propval)
+  @property void start(ulong propval) nothrow
   {
     (cast(GstAudioClippingMeta*)this._cPtr).start = propval;
   }
@@ -96,7 +93,7 @@ class AudioClippingMeta
       Get `end` field.
       Returns: Amount of  to clip from end of buffer
   */
-  @property ulong end()
+  @property ulong end() nothrow
   {
     return (cast(GstAudioClippingMeta*)this._cPtr).end;
   }
@@ -106,13 +103,13 @@ class AudioClippingMeta
       Params:
         propval = Amount of  to clip from end of buffer
   */
-  @property void end(ulong propval)
+  @property void end(ulong propval) nothrow
   {
     (cast(GstAudioClippingMeta*)this._cPtr).end = propval;
   }
 
   /** */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_audio_clipping_meta_get_info();

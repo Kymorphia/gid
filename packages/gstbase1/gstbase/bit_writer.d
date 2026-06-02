@@ -18,11 +18,8 @@ class BitWriter
   GstBitWriter _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstbase.bit_writer.BitWriter");
-
     _cInstance = *cast(GstBitWriter*)ptr;
 
     if (take)
@@ -30,7 +27,7 @@ class BitWriter
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class BitWriter
       Get `bitSize` field.
       Returns: Size of written @data in bits
   */
-  @property uint bitSize()
+  @property uint bitSize() nothrow
   {
     return (cast(GstBitWriter*)this._cPtr).bitSize;
   }
@@ -49,7 +46,7 @@ class BitWriter
       Params:
         propval = Size of written @data in bits
   */
-  @property void bitSize(uint propval)
+  @property void bitSize(uint propval) nothrow
   {
     (cast(GstBitWriter*)this._cPtr).bitSize = propval;
   }
@@ -62,7 +59,7 @@ class BitWriter
         trailingBit = trailing bits of last byte, 0 or 1
       Returns: true if successful, false otherwise.
   */
-  bool alignBytes(ubyte trailingBit)
+  bool alignBytes(ubyte trailingBit) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bit_writer_align_bytes(cast(GstBitWriter*)this._cPtr, trailingBit);
@@ -77,7 +74,7 @@ class BitWriter
       Returns: a new allocated #GstBuffer wrapping the
             data inside. gst_buffer_unref() after usage.
   */
-  gst.buffer.Buffer freeAndGetBuffer()
+  gst.buffer.Buffer freeAndGetBuffer() nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_bit_writer_free_and_get_buffer(cast(GstBitWriter*)this._cPtr);
@@ -86,7 +83,7 @@ class BitWriter
   }
 
   /** */
-  uint getRemaining()
+  uint getRemaining() nothrow
   {
     uint _retval;
     _retval = gst_bit_writer_get_remaining(cast(const(GstBitWriter)*)this._cPtr);
@@ -97,7 +94,7 @@ class BitWriter
       Get size of written data
       Returns: size of bits written in data
   */
-  uint getSize()
+  uint getSize() nothrow
   {
     uint _retval;
     _retval = gst_bit_writer_get_size(cast(const(GstBitWriter)*)this._cPtr);
@@ -112,7 +109,7 @@ class BitWriter
         nbits = number of bits to write
       Returns: true if successful, false otherwise.
   */
-  bool putBitsUint16(ushort value, uint nbits)
+  bool putBitsUint16(ushort value, uint nbits) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bit_writer_put_bits_uint16(cast(GstBitWriter*)this._cPtr, value, nbits);
@@ -127,7 +124,7 @@ class BitWriter
         nbits = number of bits to write
       Returns: true if successful, false otherwise.
   */
-  bool putBitsUint32(uint value, uint nbits)
+  bool putBitsUint32(uint value, uint nbits) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bit_writer_put_bits_uint32(cast(GstBitWriter*)this._cPtr, value, nbits);
@@ -142,7 +139,7 @@ class BitWriter
         nbits = number of bits to write
       Returns: true if successful, false otherwise.
   */
-  bool putBitsUint64(ulong value, uint nbits)
+  bool putBitsUint64(ulong value, uint nbits) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bit_writer_put_bits_uint64(cast(GstBitWriter*)this._cPtr, value, nbits);
@@ -157,7 +154,7 @@ class BitWriter
         nbits = number of bits to write
       Returns: true if successful, false otherwise.
   */
-  bool putBitsUint8(ubyte value, uint nbits)
+  bool putBitsUint8(ubyte value, uint nbits) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bit_writer_put_bits_uint8(cast(GstBitWriter*)this._cPtr, value, nbits);
@@ -171,7 +168,7 @@ class BitWriter
         data = pointer of data to write
       Returns: true if successful, false otherwise.
   */
-  bool putBytes(ubyte[] data)
+  bool putBytes(ubyte[] data) nothrow
   {
     bool _retval;
     uint _nbytes;
@@ -186,7 +183,7 @@ class BitWriter
   /**
       Resets bitwriter and frees the data if it's owned by bitwriter.
   */
-  void reset()
+  void reset() nothrow
   {
     gst_bit_writer_reset(cast(GstBitWriter*)this._cPtr);
   }
@@ -198,7 +195,7 @@ class BitWriter
       Returns: a new allocated #GstBuffer wrapping the
             current data. gst_buffer_unref() after usage.
   */
-  gst.buffer.Buffer resetAndGetBuffer()
+  gst.buffer.Buffer resetAndGetBuffer() nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_bit_writer_reset_and_get_buffer(cast(GstBitWriter*)this._cPtr);
@@ -207,7 +204,7 @@ class BitWriter
   }
 
   /** */
-  bool setPos(uint pos)
+  bool setPos(uint pos) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bit_writer_set_pos(cast(GstBitWriter*)this._cPtr, pos);

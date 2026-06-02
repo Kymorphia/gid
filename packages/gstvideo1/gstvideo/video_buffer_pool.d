@@ -14,26 +14,26 @@ class VideoBufferPool : gst.buffer_pool.BufferPool
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_buffer_pool_get_type != &gidSymbolNotFound ? gst_video_buffer_pool_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VideoBufferPool self()
+  override VideoBufferPool self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class VideoBufferPool : gst.buffer_pool.BufferPool
       Get builder for [gstvideo.video_buffer_pool.VideoBufferPool]
       Returns: New builder object
   */
-  static VideoBufferPoolGidBuilder builder()
+  static VideoBufferPoolGidBuilder builder() nothrow
   {
     return new VideoBufferPoolGidBuilder;
   }
@@ -52,7 +52,7 @@ class VideoBufferPool : gst.buffer_pool.BufferPool
       supports all the video bufferpool options.
       Returns: a new #GstBufferPool to allocate video frames
   */
-  this()
+  this() nothrow
   {
     GstBufferPool* _cretval;
     _cretval = gst_video_buffer_pool_new();
@@ -72,7 +72,7 @@ final class VideoBufferPoolGidBuilder : VideoBufferPoolGidBuilderImpl!VideoBuffe
       Create object from builder.
       Returns: New object
   */
-  VideoBufferPool build()
+  VideoBufferPool build() nothrow
   {
     return new VideoBufferPool(cast(void*)createGObject(VideoBufferPool._getGType), Yes.Take);
   }

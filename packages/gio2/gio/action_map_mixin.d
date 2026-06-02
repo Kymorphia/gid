@@ -38,7 +38,7 @@ template ActionMapT()
       Params:
         action = a #GAction
   */
-  override void addAction(gio.action.Action action)
+  override void addAction(gio.action.Action action) nothrow
   {
     g_action_map_add_action(cast(GActionMap*)this._cPtr, action ? cast(GAction*)(cast(gobject.object.ObjectWrap)action)._cPtr(No.Dup) : null);
   }
@@ -52,7 +52,7 @@ template ActionMapT()
         actionName = the name of an action
       Returns: a #GAction, or null
   */
-  override gio.action.Action lookupAction(string actionName)
+  override gio.action.Action lookupAction(string actionName) nothrow
   {
     GAction* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
@@ -69,7 +69,7 @@ template ActionMapT()
       Params:
         actionName = the name of the action
   */
-  override void removeAction(string actionName)
+  override void removeAction(string actionName) nothrow
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     g_action_map_remove_action(cast(GActionMap*)this._cPtr, _actionName);

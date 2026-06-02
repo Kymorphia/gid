@@ -62,26 +62,26 @@ class RecentChooserDialog : gtk.dialog.Dialog, gtk.recent_chooser.RecentChooser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_recent_chooser_dialog_get_type != &gidSymbolNotFound ? gtk_recent_chooser_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RecentChooserDialog self()
+  override RecentChooserDialog self() nothrow
   {
     return this;
   }
@@ -90,7 +90,7 @@ class RecentChooserDialog : gtk.dialog.Dialog, gtk.recent_chooser.RecentChooser
       Get builder for [gtk.recent_chooser_dialog.RecentChooserDialog]
       Returns: New builder object
   */
-  static RecentChooserDialogGidBuilder builder()
+  static RecentChooserDialogGidBuilder builder() nothrow
   {
     return new RecentChooserDialogGidBuilder;
   }
@@ -112,7 +112,7 @@ final class RecentChooserDialogGidBuilder : RecentChooserDialogGidBuilderImpl!Re
       Create object from builder.
       Returns: New object
   */
-  RecentChooserDialog build()
+  RecentChooserDialog build() nothrow
   {
     return new RecentChooserDialog(cast(void*)createGObject(RecentChooserDialog._getGType), No.Take);
   }

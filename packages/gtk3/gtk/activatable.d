@@ -251,7 +251,7 @@ interface Activatable
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_activatable_get_type != &gidSymbolNotFound ? gtk_activatable_get_type() : cast(GType)0;
@@ -265,7 +265,7 @@ interface Activatable
         > #GtkActivatable implementors need to handle the this property and
         > call [gtk.activatable.Activatable.doSetRelatedAction] when it changes.
   */
-  @property gtk.action.Action relatedAction();
+  @property gtk.action.Action relatedAction() nothrow;
 
   /**
       Set `relatedAction` property.
@@ -276,7 +276,7 @@ interface Activatable
           > #GtkActivatable implementors need to handle the this property and
           > call [gtk.activatable.Activatable.doSetRelatedAction] when it changes.
   */
-  @property void relatedAction(gtk.action.Action propval);
+  @property void relatedAction(gtk.action.Action propval) nothrow;
 
   /**
       Get `useActionAppearance` property.
@@ -291,7 +291,7 @@ interface Activatable
         > and call [gtk.activatable.Activatable.syncActionProperties] on the activatable
         > widget when it changes.
   */
-  @property bool useActionAppearance();
+  @property bool useActionAppearance() nothrow;
 
   /**
       Set `useActionAppearance` property.
@@ -307,7 +307,7 @@ interface Activatable
           > and call [gtk.activatable.Activatable.syncActionProperties] on the activatable
           > widget when it changes.
   */
-  @property void useActionAppearance(bool propval);
+  @property void useActionAppearance(bool propval) nothrow;
 
   /**
       This is a utility function for #GtkActivatable implementors.
@@ -396,7 +396,7 @@ interface ActivatableGidBuilderImpl(T)
           > call [gtk.activatable.Activatable.doSetRelatedAction] when it changes.
       Returns: Builder instance for fluent chaining
   */
-  T relatedAction(gtk.action.Action propval);
+  T relatedAction(gtk.action.Action propval) nothrow;
 
   /**
       Set `useActionAppearance` property.
@@ -413,5 +413,5 @@ interface ActivatableGidBuilderImpl(T)
           > widget when it changes.
       Returns: Builder instance for fluent chaining
   */
-  T useActionAppearance(bool propval);
+  T useActionAppearance(bool propval) nothrow;
 }

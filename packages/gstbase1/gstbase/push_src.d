@@ -34,26 +34,26 @@ class PushSrc : gstbase.base_src.BaseSrc
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_push_src_get_type != &gidSymbolNotFound ? gst_push_src_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PushSrc self()
+  override PushSrc self() nothrow
   {
     return this;
   }
@@ -62,7 +62,7 @@ class PushSrc : gstbase.base_src.BaseSrc
       Get builder for [gstbase.push_src.PushSrc]
       Returns: New builder object
   */
-  static PushSrcGidBuilder builder()
+  static PushSrcGidBuilder builder() nothrow
   {
     return new PushSrcGidBuilder;
   }
@@ -80,7 +80,7 @@ final class PushSrcGidBuilder : PushSrcGidBuilderImpl!PushSrcGidBuilder
       Create object from builder.
       Returns: New object
   */
-  PushSrc build()
+  PushSrc build() nothrow
   {
     return new PushSrc(cast(void*)createGObject(PushSrc._getGType), No.Take);
   }

@@ -53,32 +53,32 @@ class BookmarkFile : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_bookmark_file_get_type != &gidSymbolNotFound ? g_bookmark_file_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BookmarkFile self()
+  override BookmarkFile self() nothrow
   {
     return this;
   }
@@ -91,7 +91,7 @@ class BookmarkFile : gobject.boxed.Boxed
       file.
       Returns: an empty #GBookmarkFile
   */
-  this()
+  this() nothrow
   {
     GBookmarkFile* _cretval;
     _cretval = g_bookmark_file_new();
@@ -128,7 +128,7 @@ class BookmarkFile : gobject.boxed.Boxed
             or null
         exec = command line to be used to launch the bookmark or null
   */
-  void addApplication(string uri, string name = null, string exec = null)
+  void addApplication(string uri, string name = null, string exec = null) nothrow
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     const(char)* _name = name.toCString(No.Alloc);
@@ -146,7 +146,7 @@ class BookmarkFile : gobject.boxed.Boxed
         uri = a valid URI
         group = the group name to be added
   */
-  void addGroup(string uri, string group)
+  void addGroup(string uri, string group) nothrow
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     const(char)* _group = group.toCString(No.Alloc);
@@ -158,7 +158,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Returns: the copy of bookmark. Use
           g_bookmark_free() when finished using it.
   */
-  glib.bookmark_file.BookmarkFile copy()
+  glib.bookmark_file.BookmarkFile copy() nothrow
   {
     GBookmarkFile* _cretval;
     _cretval = g_bookmark_file_copy(cast(GBookmarkFile*)this._cPtr);
@@ -520,7 +520,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Gets the number of bookmarks inside bookmark.
       Returns: the number of bookmarks
   */
-  int getSize()
+  int getSize() nothrow
   {
     int _retval;
     _retval = g_bookmark_file_get_size(cast(GBookmarkFile*)this._cPtr);
@@ -560,7 +560,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Returns: a newly allocated null-terminated array of strings.
           Use [glib.global.strfreev] to free it.
   */
-  string[] getUris()
+  string[] getUris() nothrow
   {
     char** _cretval;
     size_t _cretlength;
@@ -682,7 +682,7 @@ class BookmarkFile : gobject.boxed.Boxed
         uri = a valid URI
       Returns: true if uri is inside bookmark, false otherwise
   */
-  bool hasItem(string uri)
+  bool hasItem(string uri) nothrow
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -877,7 +877,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Deprecated: Use [glib.bookmark_file.BookmarkFile.setAddedDateTime] instead, as
            `time_t` is deprecated due to the year 2038 problem.
   */
-  void setAdded(string uri, long added)
+  void setAdded(string uri, long added) nothrow
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     g_bookmark_file_set_added(cast(GBookmarkFile*)this._cPtr, _uri, added);
@@ -892,7 +892,7 @@ class BookmarkFile : gobject.boxed.Boxed
         uri = a valid URI
         added = a #GDateTime
   */
-  void setAddedDateTime(string uri, glib.date_time.DateTime added)
+  void setAddedDateTime(string uri, glib.date_time.DateTime added) nothrow
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     g_bookmark_file_set_added_date_time(cast(GBookmarkFile*)this._cPtr, _uri, added ? cast(GDateTime*)added._cPtr(No.Dup) : null);
@@ -1018,7 +1018,7 @@ class BookmarkFile : gobject.boxed.Boxed
         uri = a valid URI or null
         description = a string
   */
-  void setDescription(string uri, string description)
+  void setDescription(string uri, string description) nothrow
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     const(char)* _description = description.toCString(No.Alloc);
@@ -1036,7 +1036,7 @@ class BookmarkFile : gobject.boxed.Boxed
         groups = an array of
              group names, or null to remove all groups
   */
-  void setGroups(string uri, string[] groups = null)
+  void setGroups(string uri, string[] groups = null) nothrow
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     size_t _length;
@@ -1063,7 +1063,7 @@ class BookmarkFile : gobject.boxed.Boxed
         href = the URI of the icon for the bookmark, or null
         mimeType = the MIME type of the icon for the bookmark
   */
-  void setIcon(string uri, string href, string mimeType)
+  void setIcon(string uri, string href, string mimeType) nothrow
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     const(char)* _href = href.toCString(No.Alloc);
@@ -1080,7 +1080,7 @@ class BookmarkFile : gobject.boxed.Boxed
         uri = a valid URI
         isPrivate = true if the bookmark should be marked as private
   */
-  void setIsPrivate(string uri, bool isPrivate)
+  void setIsPrivate(string uri, bool isPrivate) nothrow
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     g_bookmark_file_set_is_private(cast(GBookmarkFile*)this._cPtr, _uri, isPrivate);
@@ -1095,7 +1095,7 @@ class BookmarkFile : gobject.boxed.Boxed
         uri = a valid URI
         mimeType = a MIME type
   */
-  void setMimeType(string uri, string mimeType)
+  void setMimeType(string uri, string mimeType) nothrow
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
@@ -1119,7 +1119,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Deprecated: Use [glib.bookmark_file.BookmarkFile.setModifiedDateTime] instead, as
            `time_t` is deprecated due to the year 2038 problem.
   */
-  void setModified(string uri, long modified)
+  void setModified(string uri, long modified) nothrow
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     g_bookmark_file_set_modified(cast(GBookmarkFile*)this._cPtr, _uri, modified);
@@ -1139,7 +1139,7 @@ class BookmarkFile : gobject.boxed.Boxed
         uri = a valid URI
         modified = a #GDateTime
   */
-  void setModifiedDateTime(string uri, glib.date_time.DateTime modified)
+  void setModifiedDateTime(string uri, glib.date_time.DateTime modified) nothrow
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     g_bookmark_file_set_modified_date_time(cast(GBookmarkFile*)this._cPtr, _uri, modified ? cast(GDateTime*)modified._cPtr(No.Dup) : null);
@@ -1157,7 +1157,7 @@ class BookmarkFile : gobject.boxed.Boxed
         uri = a valid URI or null
         title = a UTF-8 encoded string
   */
-  void setTitle(string uri, string title)
+  void setTitle(string uri, string title) nothrow
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     const(char)* _title = title.toCString(No.Alloc);
@@ -1182,7 +1182,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Deprecated: Use [glib.bookmark_file.BookmarkFile.setVisitedDateTime] instead, as
            `time_t` is deprecated due to the year 2038 problem.
   */
-  void setVisited(string uri, long visited)
+  void setVisited(string uri, long visited) nothrow
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     g_bookmark_file_set_visited(cast(GBookmarkFile*)this._cPtr, _uri, visited);
@@ -1203,7 +1203,7 @@ class BookmarkFile : gobject.boxed.Boxed
         uri = a valid URI
         visited = a #GDateTime
   */
-  void setVisitedDateTime(string uri, glib.date_time.DateTime visited)
+  void setVisitedDateTime(string uri, glib.date_time.DateTime visited) nothrow
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     g_bookmark_file_set_visited_date_time(cast(GBookmarkFile*)this._cPtr, _uri, visited ? cast(GDateTime*)visited._cPtr(No.Dup) : null);
@@ -1253,7 +1253,7 @@ class BookmarkFile : gobject.boxed.Boxed
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = g_bookmark_file_error_quark();
@@ -1263,12 +1263,12 @@ class BookmarkFile : gobject.boxed.Boxed
 
 class BookmarkFileException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(glib.bookmark_file.BookmarkFile.errorQuark, cast(int)code, msg);
   }

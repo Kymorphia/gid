@@ -24,26 +24,26 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_font_family_get_type != &gidSymbolNotFound ? pango_font_family_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FontFamily self()
+  override FontFamily self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get builder for [pango.font_family.FontFamily]
       Returns: New builder object
   */
-  static FontFamilyGidBuilder builder()
+  static FontFamilyGidBuilder builder() nothrow
   {
     return new FontFamilyGidBuilder;
   }
@@ -61,7 +61,7 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `itemType` property.
       Returns: The type of items contained in this list.
   */
-  @property gobject.types.GType itemType()
+  @property gobject.types.GType itemType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
   }
@@ -70,7 +70,7 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `nItems` property.
       Returns: The number of items contained in this list.
   */
-  @property uint nItems()
+  @property uint nItems() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
@@ -79,7 +79,7 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `name` property.
       Returns: The name of the family
   */
-  @property string name()
+  @property string name() nothrow
   {
     return getName();
   }
@@ -96,7 +96,7 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
       Returns: the [pango.font_face.FontFace],
           or null if no face with the given name exists.
   */
-  pango.font_face.FontFace getFace(string name = null)
+  pango.font_face.FontFace getFace(string name = null) nothrow
   {
     PangoFontFace* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -114,7 +114,7 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
       Returns: the name of the family. This string is owned
           by the family object and must not be modified or freed.
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = pango_font_family_get_name(cast(PangoFontFamily*)this._cPtr);
@@ -139,7 +139,7 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
       be affected by double-width characters.
       Returns: true if the family is monospace.
   */
-  bool isMonospace()
+  bool isMonospace() nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_font_family_is_monospace(cast(PangoFontFamily*)this._cPtr);
@@ -154,7 +154,7 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
       [pango.font_description.FontDescription.setVariations] for more information.
       Returns: true if the family is variable
   */
-  bool isVariable()
+  bool isVariable() nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_font_family_is_variable(cast(PangoFontFamily*)this._cPtr);
@@ -178,7 +178,7 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
             or null. This array should be freed with [glib.global.gfree] when it is no
             longer needed.
   */
-  void listFaces(out pango.font_face.FontFace[] faces)
+  void listFaces(out pango.font_face.FontFace[] faces) nothrow
   {
     int _nFaces;
     PangoFontFace** _faces;
@@ -204,7 +204,7 @@ final class FontFamilyGidBuilder : FontFamilyGidBuilderImpl!FontFamilyGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FontFamily build()
+  FontFamily build() nothrow
   {
     return new FontFamily(cast(void*)createGObject(FontFamily._getGType), No.Take);
   }

@@ -17,26 +17,26 @@ class Region : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_region_get_type != &gidSymbolNotFound ? gtk_source_region_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Region self()
+  override Region self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class Region : gobject.object.ObjectWrap
       Get builder for [gtksource.region.Region]
       Returns: New builder object
   */
-  static RegionGidBuilder builder()
+  static RegionGidBuilder builder() nothrow
   {
     return new RegionGidBuilder;
   }
@@ -55,13 +55,13 @@ class Region : gobject.object.ObjectWrap
       Returns: The #GtkTextBuffer. The #GtkSourceRegion has a weak reference to the
         buffer.
   */
-  @property gtk.text_buffer.TextBuffer buffer()
+  @property gtk.text_buffer.TextBuffer buffer() nothrow
   {
     return getBuffer();
   }
 
   /** */
-  this(gtk.text_buffer.TextBuffer buffer)
+  this(gtk.text_buffer.TextBuffer buffer) nothrow
   {
     GtkSourceRegion* _cretval;
     _cretval = gtk_source_region_new(buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
@@ -74,7 +74,7 @@ class Region : gobject.object.ObjectWrap
       Params:
         regionToAdd = the #GtkSourceRegion to add to region, or null.
   */
-  void addRegion(gtksource.region.Region regionToAdd = null)
+  void addRegion(gtksource.region.Region regionToAdd = null) nothrow
   {
     gtk_source_region_add_region(cast(GtkSourceRegion*)this._cPtr, regionToAdd ? cast(GtkSourceRegion*)regionToAdd._cPtr(No.Dup) : null);
   }
@@ -86,7 +86,7 @@ class Region : gobject.object.ObjectWrap
         Start = the start of the subregion.
         End = the end of the subregion.
   */
-  void addSubregion(gtk.text_iter.TextIter Start, gtk.text_iter.TextIter End)
+  void addSubregion(gtk.text_iter.TextIter Start, gtk.text_iter.TextIter End) nothrow
   {
     gtk_source_region_add_subregion(cast(GtkSourceRegion*)this._cPtr, Start ? cast(const(GtkTextIter)*)Start._cPtr(No.Dup) : null, End ? cast(const(GtkTextIter)*)End._cPtr(No.Dup) : null);
   }
@@ -102,7 +102,7 @@ class Region : gobject.object.ObjectWrap
       Returns: true if start and end have been set successfully (if non-null),
           or false if the region is empty.
   */
-  bool getBounds(out gtk.text_iter.TextIter start, out gtk.text_iter.TextIter end)
+  bool getBounds(out gtk.text_iter.TextIter start, out gtk.text_iter.TextIter end) nothrow
   {
     bool _retval;
     GtkTextIter _start;
@@ -114,7 +114,7 @@ class Region : gobject.object.ObjectWrap
   }
 
   /** */
-  gtk.text_buffer.TextBuffer getBuffer()
+  gtk.text_buffer.TextBuffer getBuffer() nothrow
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_source_region_get_buffer(cast(GtkSourceRegion*)this._cPtr);
@@ -129,7 +129,7 @@ class Region : gobject.object.ObjectWrap
       Params:
         iter = iterator to initialize to the first subregion.
   */
-  void getStartRegionIter(out gtksource.region_iter.RegionIter iter)
+  void getStartRegionIter(out gtksource.region_iter.RegionIter iter) nothrow
   {
     GtkSourceRegionIter _iter;
     gtk_source_region_get_start_region_iter(cast(GtkSourceRegion*)this._cPtr, &_iter);
@@ -145,7 +145,7 @@ class Region : gobject.object.ObjectWrap
       Returns: the intersection as a #GtkSourceRegion
           object.
   */
-  gtksource.region.Region intersectRegion(gtksource.region.Region region2 = null)
+  gtksource.region.Region intersectRegion(gtksource.region.Region region2 = null) nothrow
   {
     GtkSourceRegion* _cretval;
     _cretval = gtk_source_region_intersect_region(cast(GtkSourceRegion*)this._cPtr, region2 ? cast(GtkSourceRegion*)region2._cPtr(No.Dup) : null);
@@ -163,7 +163,7 @@ class Region : gobject.object.ObjectWrap
       Returns: the intersection as a new
           #GtkSourceRegion.
   */
-  gtksource.region.Region intersectSubregion(gtk.text_iter.TextIter Start, gtk.text_iter.TextIter End)
+  gtksource.region.Region intersectSubregion(gtk.text_iter.TextIter Start, gtk.text_iter.TextIter End) nothrow
   {
     GtkSourceRegion* _cretval;
     _cretval = gtk_source_region_intersect_subregion(cast(GtkSourceRegion*)this._cPtr, Start ? cast(const(GtkTextIter)*)Start._cPtr(No.Dup) : null, End ? cast(const(GtkTextIter)*)End._cPtr(No.Dup) : null);
@@ -175,7 +175,7 @@ class Region : gobject.object.ObjectWrap
       Returns whether the region is empty. A null region is considered empty.
       Returns: whether the region is empty.
   */
-  bool isEmpty()
+  bool isEmpty() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_region_is_empty(cast(GtkSourceRegion*)this._cPtr);
@@ -190,7 +190,7 @@ class Region : gobject.object.ObjectWrap
         regionToSubtract = the #GtkSourceRegion to subtract from
             region, or null.
   */
-  void subtractRegion(gtksource.region.Region regionToSubtract = null)
+  void subtractRegion(gtksource.region.Region regionToSubtract = null) nothrow
   {
     gtk_source_region_subtract_region(cast(GtkSourceRegion*)this._cPtr, regionToSubtract ? cast(GtkSourceRegion*)regionToSubtract._cPtr(No.Dup) : null);
   }
@@ -202,7 +202,7 @@ class Region : gobject.object.ObjectWrap
         Start = the start of the subregion.
         End = the end of the subregion.
   */
-  void subtractSubregion(gtk.text_iter.TextIter Start, gtk.text_iter.TextIter End)
+  void subtractSubregion(gtk.text_iter.TextIter Start, gtk.text_iter.TextIter End) nothrow
   {
     gtk_source_region_subtract_subregion(cast(GtkSourceRegion*)this._cPtr, Start ? cast(const(GtkTextIter)*)Start._cPtr(No.Dup) : null, End ? cast(const(GtkTextIter)*)End._cPtr(No.Dup) : null);
   }
@@ -215,7 +215,7 @@ class Region : gobject.object.ObjectWrap
       Returns: a string represention of region. Free
           with [glib.global.gfree] when no longer needed.
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gtk_source_region_to_string(cast(GtkSourceRegion*)this._cPtr);
@@ -235,7 +235,7 @@ class RegionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           buffer.
       Returns: Builder instance for fluent chaining
   */
-  T buffer(gtk.text_buffer.TextBuffer propval)
+  T buffer(gtk.text_buffer.TextBuffer propval) nothrow
   {
     return setProperty("buffer", propval);
   }
@@ -248,7 +248,7 @@ final class RegionGidBuilder : RegionGidBuilderImpl!RegionGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Region build()
+  Region build() nothrow
   {
     return new Region(cast(void*)createGObject(Region._getGType), Yes.Take);
   }

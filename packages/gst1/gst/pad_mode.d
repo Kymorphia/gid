@@ -18,7 +18,7 @@ struct PadMode
         mode = the pad mode
       Returns: short mnemonic for pad mode mode
   */
-  static string getName(gst.types.PadMode mode)
+  static string getName(gst.types.PadMode mode) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_pad_mode_get_name(mode);

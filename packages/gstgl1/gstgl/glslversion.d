@@ -12,7 +12,7 @@ struct GLSLVersion
   alias Enum = gstgl.types.GLSLVersion; ///
 
   /** */
-  static gstgl.types.GLSLVersion fromString(string string_)
+  static gstgl.types.GLSLVersion fromString(string string_) nothrow
   {
     GstGLSLVersion _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
@@ -31,7 +31,7 @@ struct GLSLVersion
         profileRet = resulting #GstGLSLVersion
       Returns: TRUE if a valid `#version` string was found, FALSE otherwise
   */
-  static bool profileFromString(string string_, out gstgl.types.GLSLVersion versionRet, out gstgl.types.GLSLProfile profileRet)
+  static bool profileFromString(string string_, out gstgl.types.GLSLVersion versionRet, out gstgl.types.GLSLProfile profileRet) nothrow
   {
     bool _retval;
     const(char)* _string_ = string_.toCString(No.Alloc);
@@ -40,7 +40,7 @@ struct GLSLVersion
   }
 
   /** */
-  static string profileToString(gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile)
+  static string profileToString(gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile) nothrow
   {
     char* _cretval;
     _cretval = gst_glsl_version_profile_to_string(version_, profile);
@@ -49,7 +49,7 @@ struct GLSLVersion
   }
 
   /** */
-  static string toString_(gstgl.types.GLSLVersion version_)
+  static string toString_(gstgl.types.GLSLVersion version_) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_glsl_version_to_string(version_);

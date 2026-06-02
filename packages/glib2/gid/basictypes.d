@@ -15,7 +15,3 @@ else
 }
 
 alias gboolean = int;
-/** */
-class basictypes
-{
-}

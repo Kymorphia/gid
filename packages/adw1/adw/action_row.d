@@ -65,26 +65,26 @@ class ActionRow : adw.preferences_row.PreferencesRow
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_action_row_get_type != &gidSymbolNotFound ? adw_action_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ActionRow self()
+  override ActionRow self() nothrow
   {
     return this;
   }
@@ -93,7 +93,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
       Get builder for [adw.action_row.ActionRow]
       Returns: New builder object
   */
-  static ActionRowGidBuilder builder()
+  static ActionRowGidBuilder builder() nothrow
   {
     return new ActionRowGidBuilder;
   }
@@ -110,7 +110,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
         The target widget will be activated by emitting the
         [gtk.widget.Widget.mnemonicActivate] signal on it.
   */
-  @property gtk.widget.Widget activatableWidget()
+  @property gtk.widget.Widget activatableWidget() nothrow
   {
     return getActivatableWidget();
   }
@@ -128,7 +128,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
           The target widget will be activated by emitting the
           [gtk.widget.Widget.mnemonicActivate] signal on it.
   */
-  @property void activatableWidget(gtk.widget.Widget propval)
+  @property void activatableWidget(gtk.widget.Widget propval) nothrow
   {
     setActivatableWidget(propval);
   }
@@ -139,7 +139,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   
       Deprecated: Use [adw.action_row.ActionRow.addPrefix] to add an icon.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return getIconName();
   }
@@ -151,7 +151,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   
       Deprecated: Use [adw.action_row.ActionRow.addPrefix] to add an icon.
   */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     setIconName(propval);
   }
@@ -163,7 +163,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
         The subtitle is interpreted as Pango markup unless
         [adw.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
   */
-  @property string subtitle()
+  @property string subtitle() nothrow
   {
     return getSubtitle();
   }
@@ -176,7 +176,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
           The subtitle is interpreted as Pango markup unless
           [adw.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
   */
-  @property void subtitle(string propval)
+  @property void subtitle(string propval) nothrow
   {
     setSubtitle(propval);
   }
@@ -188,7 +188,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
         
         If the value is 0, the number of lines won't be limited.
   */
-  @property int subtitleLines()
+  @property int subtitleLines() nothrow
   {
     return getSubtitleLines();
   }
@@ -201,7 +201,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
           
           If the value is 0, the number of lines won't be limited.
   */
-  @property void subtitleLines(int propval)
+  @property void subtitleLines(int propval) nothrow
   {
     setSubtitleLines(propval);
   }
@@ -212,7 +212,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
         
         See also [gtk.label.Label.selectable].
   */
-  @property bool subtitleSelectable()
+  @property bool subtitleSelectable() nothrow
   {
     return getSubtitleSelectable();
   }
@@ -224,7 +224,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
           
           See also [gtk.label.Label.selectable].
   */
-  @property void subtitleSelectable(bool propval)
+  @property void subtitleSelectable(bool propval) nothrow
   {
     setSubtitleSelectable(propval);
   }
@@ -235,7 +235,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
         
         If the value is 0, the number of lines won't be limited.
   */
-  @property int titleLines()
+  @property int titleLines() nothrow
   {
     return getTitleLines();
   }
@@ -247,7 +247,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
           
           If the value is 0, the number of lines won't be limited.
   */
-  @property void titleLines(int propval)
+  @property void titleLines(int propval) nothrow
   {
     setTitleLines(propval);
   }
@@ -256,7 +256,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
       Creates a new [adw.action_row.ActionRow].
       Returns: the newly created [adw.action_row.ActionRow]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_action_row_new();
@@ -268,7 +268,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   /**
       Activates self.
   */
-  void activate()
+  void activate() nothrow
   {
     adw_action_row_activate(cast(AdwActionRow*)this._cPtr);
   }
@@ -279,7 +279,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
       Params:
         widget = a widget
   */
-  void addPrefix(gtk.widget.Widget widget)
+  void addPrefix(gtk.widget.Widget widget) nothrow
   {
     adw_action_row_add_prefix(cast(AdwActionRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -290,7 +290,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
       Params:
         widget = a widget
   */
-  void addSuffix(gtk.widget.Widget widget)
+  void addSuffix(gtk.widget.Widget widget) nothrow
   {
     adw_action_row_add_suffix(cast(AdwActionRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -299,7 +299,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
       Gets the widget activated when self is activated.
       Returns: the activatable widget for self
   */
-  gtk.widget.Widget getActivatableWidget()
+  gtk.widget.Widget getActivatableWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_action_row_get_activatable_widget(cast(AdwActionRow*)this._cPtr);
@@ -313,7 +313,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   
       Deprecated: Use [adw.action_row.ActionRow.addPrefix] to add an icon.
   */
-  string getIconName()
+  string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_action_row_get_icon_name(cast(AdwActionRow*)this._cPtr);
@@ -325,7 +325,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
       Gets the subtitle for self.
       Returns: the subtitle for self
   */
-  string getSubtitle()
+  string getSubtitle() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_action_row_get_subtitle(cast(AdwActionRow*)this._cPtr);
@@ -339,7 +339,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
       Returns: the number of lines at the end of which the subtitle label will be
           ellipsized
   */
-  int getSubtitleLines()
+  int getSubtitleLines() nothrow
   {
     int _retval;
     _retval = adw_action_row_get_subtitle_lines(cast(AdwActionRow*)this._cPtr);
@@ -350,7 +350,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
       Gets whether the user can copy the subtitle from the label
       Returns: whether the user can copy the subtitle from the label
   */
-  bool getSubtitleSelectable()
+  bool getSubtitleSelectable() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_action_row_get_subtitle_selectable(cast(AdwActionRow*)this._cPtr);
@@ -363,7 +363,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
       Returns: the number of lines at the end of which the title label will be
           ellipsized
   */
-  int getTitleLines()
+  int getTitleLines() nothrow
   {
     int _retval;
     _retval = adw_action_row_get_title_lines(cast(AdwActionRow*)this._cPtr);
@@ -376,7 +376,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
       Params:
         widget = the child to be removed
   */
-  void remove(gtk.widget.Widget widget)
+  void remove(gtk.widget.Widget widget) nothrow
   {
     adw_action_row_remove(cast(AdwActionRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -394,7 +394,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
       Params:
         widget = the target widget
   */
-  void setActivatableWidget(gtk.widget.Widget widget = null)
+  void setActivatableWidget(gtk.widget.Widget widget = null) nothrow
   {
     adw_action_row_set_activatable_widget(cast(AdwActionRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -407,7 +407,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   
       Deprecated: Use [adw.action_row.ActionRow.addPrefix] to add an icon.
   */
-  void setIconName(string iconName = null)
+  void setIconName(string iconName = null) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     adw_action_row_set_icon_name(cast(AdwActionRow*)this._cPtr, _iconName);
@@ -422,7 +422,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
       Params:
         subtitle = the subtitle
   */
-  void setSubtitle(string subtitle)
+  void setSubtitle(string subtitle) nothrow
   {
     const(char)* _subtitle = subtitle.toCString(No.Alloc);
     adw_action_row_set_subtitle(cast(AdwActionRow*)this._cPtr, _subtitle);
@@ -437,7 +437,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
       Params:
         subtitleLines = the number of lines at the end of which the subtitle label will be ellipsized
   */
-  void setSubtitleLines(int subtitleLines)
+  void setSubtitleLines(int subtitleLines) nothrow
   {
     adw_action_row_set_subtitle_lines(cast(AdwActionRow*)this._cPtr, subtitleLines);
   }
@@ -450,7 +450,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
       Params:
         subtitleSelectable = `TRUE` if the user can copy the subtitle from the label
   */
-  void setSubtitleSelectable(bool subtitleSelectable)
+  void setSubtitleSelectable(bool subtitleSelectable) nothrow
   {
     adw_action_row_set_subtitle_selectable(cast(AdwActionRow*)this._cPtr, subtitleSelectable);
   }
@@ -464,7 +464,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
       Params:
         titleLines = the number of lines at the end of which the title label will be ellipsized
   */
-  void setTitleLines(int titleLines)
+  void setTitleLines(int titleLines) nothrow
   {
     adw_action_row_set_title_lines(cast(AdwActionRow*)this._cPtr, titleLines);
   }
@@ -484,13 +484,13 @@ class ActionRow : adw.preferences_row.PreferencesRow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.action_row.ActionRow)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -499,7 +499,14 @@ class ActionRow : adw.preferences_row.PreferencesRow
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.action_row.ActionRow.activated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -526,7 +533,7 @@ class ActionRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderI
           [gtk.widget.Widget.mnemonicActivate] signal on it.
       Returns: Builder instance for fluent chaining
   */
-  T activatableWidget(gtk.widget.Widget propval)
+  T activatableWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("activatable-widget", propval);
   }
@@ -539,7 +546,7 @@ class ActionRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderI
   
       Deprecated: Use [adw.action_row.ActionRow.addPrefix] to add an icon.
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
@@ -553,7 +560,7 @@ class ActionRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderI
           [adw.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
       Returns: Builder instance for fluent chaining
   */
-  T subtitle(string propval)
+  T subtitle(string propval) nothrow
   {
     return setProperty("subtitle", propval);
   }
@@ -567,7 +574,7 @@ class ActionRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderI
           If the value is 0, the number of lines won't be limited.
       Returns: Builder instance for fluent chaining
   */
-  T subtitleLines(int propval)
+  T subtitleLines(int propval) nothrow
   {
     return setProperty("subtitle-lines", propval);
   }
@@ -580,7 +587,7 @@ class ActionRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderI
           See also [gtk.label.Label.selectable].
       Returns: Builder instance for fluent chaining
   */
-  T subtitleSelectable(bool propval)
+  T subtitleSelectable(bool propval) nothrow
   {
     return setProperty("subtitle-selectable", propval);
   }
@@ -593,7 +600,7 @@ class ActionRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderI
           If the value is 0, the number of lines won't be limited.
       Returns: Builder instance for fluent chaining
   */
-  T titleLines(int propval)
+  T titleLines(int propval) nothrow
   {
     return setProperty("title-lines", propval);
   }
@@ -606,7 +613,7 @@ final class ActionRowGidBuilder : ActionRowGidBuilderImpl!ActionRowGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ActionRow build()
+  ActionRow build() nothrow
   {
     return new ActionRow(cast(void*)createGObject(ActionRow._getGType), No.Take);
   }

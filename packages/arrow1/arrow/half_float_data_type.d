@@ -14,26 +14,26 @@ class HalfFloatDataType : arrow.floating_point_data_type.FloatingPointDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_half_float_data_type_get_type != &gidSymbolNotFound ? garrow_half_float_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HalfFloatDataType self()
+  override HalfFloatDataType self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class HalfFloatDataType : arrow.floating_point_data_type.FloatingPointDataType
       Get builder for [arrow.half_float_data_type.HalfFloatDataType]
       Returns: New builder object
   */
-  static HalfFloatDataTypeGidBuilder builder()
+  static HalfFloatDataTypeGidBuilder builder() nothrow
   {
     return new HalfFloatDataTypeGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowHalfFloatDataType* _cretval;
     _cretval = garrow_half_float_data_type_new();
@@ -68,7 +68,7 @@ final class HalfFloatDataTypeGidBuilder : HalfFloatDataTypeGidBuilderImpl!HalfFl
       Create object from builder.
       Returns: New object
   */
-  HalfFloatDataType build()
+  HalfFloatDataType build() nothrow
   {
     return new HalfFloatDataType(cast(void*)createGObject(HalfFloatDataType._getGType), Yes.Take);
   }

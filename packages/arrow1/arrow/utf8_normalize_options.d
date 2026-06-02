@@ -15,26 +15,26 @@ class UTF8NormalizeOptions : arrow.function_options.FunctionOptions
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_utf8_normalize_options_get_type != &gidSymbolNotFound ? garrow_utf8_normalize_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UTF8NormalizeOptions self()
+  override UTF8NormalizeOptions self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class UTF8NormalizeOptions : arrow.function_options.FunctionOptions
       Get builder for [arrow.utf8_normalize_options.UTF8NormalizeOptions]
       Returns: New builder object
   */
-  static UTF8NormalizeOptionsGidBuilder builder()
+  static UTF8NormalizeOptionsGidBuilder builder() nothrow
   {
     return new UTF8NormalizeOptionsGidBuilder;
   }
@@ -52,7 +52,7 @@ class UTF8NormalizeOptions : arrow.function_options.FunctionOptions
       Get `form` property.
       Returns: The Unicode normalization form to apply.
   */
-  @property arrow.types.UTF8NormalizeForm form()
+  @property arrow.types.UTF8NormalizeForm form() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.types.UTF8NormalizeForm)("form");
   }
@@ -62,13 +62,13 @@ class UTF8NormalizeOptions : arrow.function_options.FunctionOptions
       Params:
         propval = The Unicode normalization form to apply.
   */
-  @property void form(arrow.types.UTF8NormalizeForm propval)
+  @property void form(arrow.types.UTF8NormalizeForm propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(arrow.types.UTF8NormalizeForm)("form", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowUTF8NormalizeOptions* _cretval;
     _cretval = garrow_utf8_normalize_options_new();
@@ -86,7 +86,7 @@ class UTF8NormalizeOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOpt
         propval = The Unicode normalization form to apply.
       Returns: Builder instance for fluent chaining
   */
-  T form(arrow.types.UTF8NormalizeForm propval)
+  T form(arrow.types.UTF8NormalizeForm propval) nothrow
   {
     return setProperty("form", propval);
   }
@@ -99,7 +99,7 @@ final class UTF8NormalizeOptionsGidBuilder : UTF8NormalizeOptionsGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  UTF8NormalizeOptions build()
+  UTF8NormalizeOptions build() nothrow
   {
     return new UTF8NormalizeOptions(cast(void*)createGObject(UTF8NormalizeOptions._getGType), Yes.Take);
   }

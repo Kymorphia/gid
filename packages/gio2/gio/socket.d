@@ -98,26 +98,26 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_socket_get_type != &gidSymbolNotFound ? g_socket_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Socket self()
+  override Socket self() nothrow
   {
     return this;
   }
@@ -126,7 +126,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Get builder for [gio.socket.Socket]
       Returns: New builder object
   */
-  static SocketGidBuilder builder()
+  static SocketGidBuilder builder() nothrow
   {
     return new SocketGidBuilder;
   }
@@ -135,7 +135,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Get `blocking` property.
       Returns: Whether I/O on this socket is blocking.
   */
-  @property bool blocking()
+  @property bool blocking() nothrow
   {
     return getBlocking();
   }
@@ -145,7 +145,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Params:
         propval = Whether I/O on this socket is blocking.
   */
-  @property void blocking(bool propval)
+  @property void blocking(bool propval) nothrow
   {
     setBlocking(propval);
   }
@@ -154,7 +154,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Get `broadcast` property.
       Returns: Whether the socket should allow sending to broadcast addresses.
   */
-  @property bool broadcast()
+  @property bool broadcast() nothrow
   {
     return getBroadcast();
   }
@@ -164,7 +164,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Params:
         propval = Whether the socket should allow sending to broadcast addresses.
   */
-  @property void broadcast(bool propval)
+  @property void broadcast(bool propval) nothrow
   {
     setBroadcast(propval);
   }
@@ -173,7 +173,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Get `family` property.
       Returns: The socket’s address family.
   */
-  @property gio.types.SocketFamily family()
+  @property gio.types.SocketFamily family() nothrow
   {
     return getFamily();
   }
@@ -182,7 +182,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Get `fd` property.
       Returns: The socket’s file descriptor.
   */
-  @property int fd()
+  @property int fd() nothrow
   {
     return getFd();
   }
@@ -191,7 +191,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Get `keepalive` property.
       Returns: Whether to keep the connection alive by sending periodic pings.
   */
-  @property bool keepalive()
+  @property bool keepalive() nothrow
   {
     return getKeepalive();
   }
@@ -201,7 +201,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Params:
         propval = Whether to keep the connection alive by sending periodic pings.
   */
-  @property void keepalive(bool propval)
+  @property void keepalive(bool propval) nothrow
   {
     setKeepalive(propval);
   }
@@ -210,7 +210,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Get `listenBacklog` property.
       Returns: The number of outstanding connections in the listen queue.
   */
-  @property int listenBacklog()
+  @property int listenBacklog() nothrow
   {
     return getListenBacklog();
   }
@@ -220,7 +220,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Params:
         propval = The number of outstanding connections in the listen queue.
   */
-  @property void listenBacklog(int propval)
+  @property void listenBacklog(int propval) nothrow
   {
     setListenBacklog(propval);
   }
@@ -229,16 +229,16 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Get `localAddress` property.
       Returns: The local address the socket is bound to.
   */
-  @property gio.socket_address.SocketAddress localAddress()
+  @property gio.socket_address.SocketAddress localAddress() nothrow
   {
-    return getLocalAddress();
+    return gobject.object.ObjectWrap.getProperty!(gio.socket_address.SocketAddress)("local-address");
   }
 
   /**
       Get `multicastLoopback` property.
       Returns: Whether outgoing multicast packets loop back to the local host.
   */
-  @property bool multicastLoopback()
+  @property bool multicastLoopback() nothrow
   {
     return getMulticastLoopback();
   }
@@ -248,7 +248,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Params:
         propval = Whether outgoing multicast packets loop back to the local host.
   */
-  @property void multicastLoopback(bool propval)
+  @property void multicastLoopback(bool propval) nothrow
   {
     setMulticastLoopback(propval);
   }
@@ -257,7 +257,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Get `multicastTtl` property.
       Returns: Time-to-live out outgoing multicast packets
   */
-  @property uint multicastTtl()
+  @property uint multicastTtl() nothrow
   {
     return getMulticastTtl();
   }
@@ -267,7 +267,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Params:
         propval = Time-to-live out outgoing multicast packets
   */
-  @property void multicastTtl(uint propval)
+  @property void multicastTtl(uint propval) nothrow
   {
     setMulticastTtl(propval);
   }
@@ -276,7 +276,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Get `protocol` property.
       Returns: The ID of the protocol to use, or `-1` for unknown.
   */
-  @property gio.types.SocketProtocol protocol()
+  @property gio.types.SocketProtocol protocol() nothrow
   {
     return getProtocol();
   }
@@ -285,16 +285,16 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Get `remoteAddress` property.
       Returns: The remote address the socket is connected to.
   */
-  @property gio.socket_address.SocketAddress remoteAddress()
+  @property gio.socket_address.SocketAddress remoteAddress() nothrow
   {
-    return getRemoteAddress();
+    return gobject.object.ObjectWrap.getProperty!(gio.socket_address.SocketAddress)("remote-address");
   }
 
   /**
       Get `timeout` property.
       Returns: The timeout in seconds on socket I/O
   */
-  @property uint timeout()
+  @property uint timeout() nothrow
   {
     return getTimeout();
   }
@@ -304,7 +304,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Params:
         propval = The timeout in seconds on socket I/O
   */
-  @property void timeout(uint propval)
+  @property void timeout(uint propval) nothrow
   {
     setTimeout(propval);
   }
@@ -313,7 +313,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Get `ttl` property.
       Returns: Time-to-live for outgoing unicast packets
   */
-  @property uint ttl()
+  @property uint ttl() nothrow
   {
     return getTtl();
   }
@@ -323,7 +323,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Params:
         propval = Time-to-live for outgoing unicast packets
   */
-  @property void ttl(uint propval)
+  @property void ttl(uint propval) nothrow
   {
     setTtl(propval);
   }
@@ -332,7 +332,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Get `type` property.
       Returns: The socket’s type.
   */
-  @property gio.types.SocketType type()
+  @property gio.types.SocketType type() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.types.SocketType)("type");
   }
@@ -558,7 +558,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
         condition = a #GIOCondition mask to check
       Returns: the GIOCondition mask of the current state
   */
-  glib.types.IOCondition conditionCheck(glib.types.IOCondition condition)
+  glib.types.IOCondition conditionCheck(glib.types.IOCondition condition) nothrow
   {
     GIOCondition _cretval;
     _cretval = g_socket_condition_check(cast(GSocket*)this._cPtr, condition);
@@ -668,7 +668,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       socket.
       Returns: a #GSocketConnection
   */
-  gio.socket_connection.SocketConnection connectionFactoryCreateConnection()
+  gio.socket_connection.SocketConnection connectionFactoryCreateConnection() nothrow
   {
     GSocketConnection* _cretval;
     _cretval = g_socket_connection_factory_create_connection(cast(GSocket*)this._cPtr);
@@ -692,7 +692,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Returns: the number of bytes that can be read from the socket
         without blocking or truncating, or -1 on error.
   */
-  ptrdiff_t getAvailableBytes()
+  ptrdiff_t getAvailableBytes() nothrow
   {
     ptrdiff_t _retval;
     _retval = g_socket_get_available_bytes(cast(GSocket*)this._cPtr);
@@ -704,7 +704,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       see [gio.socket.Socket.setBlocking].
       Returns: true if blocking I/O is used, false otherwise.
   */
-  bool getBlocking()
+  bool getBlocking() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_socket_get_blocking(cast(GSocket*)this._cPtr);
@@ -717,7 +717,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       addresses.
       Returns: the broadcast setting on socket
   */
-  bool getBroadcast()
+  bool getBroadcast() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_socket_get_broadcast(cast(GSocket*)this._cPtr);
@@ -764,7 +764,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Gets the socket family of the socket.
       Returns: a #GSocketFamily
   */
-  gio.types.SocketFamily getFamily()
+  gio.types.SocketFamily getFamily() nothrow
   {
     GSocketFamily _cretval;
     _cretval = g_socket_get_family(cast(GSocket*)this._cPtr);
@@ -780,7 +780,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       on the socket.
       Returns: the file descriptor of the socket.
   */
-  int getFd()
+  int getFd() nothrow
   {
     int _retval;
     _retval = g_socket_get_fd(cast(GSocket*)this._cPtr);
@@ -792,7 +792,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       see [gio.socket.Socket.setKeepalive].
       Returns: true if keepalive is active, false otherwise.
   */
-  bool getKeepalive()
+  bool getKeepalive() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_socket_get_keepalive(cast(GSocket*)this._cPtr);
@@ -804,7 +804,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       see [gio.socket.Socket.setListenBacklog].
       Returns: the maximum number of pending connections.
   */
-  int getListenBacklog()
+  int getListenBacklog() nothrow
   {
     int _retval;
     _retval = g_socket_get_listen_backlog(cast(GSocket*)this._cPtr);
@@ -836,7 +836,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       multicast listeners on the same host.
       Returns: the multicast loopback setting on socket
   */
-  bool getMulticastLoopback()
+  bool getMulticastLoopback() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_socket_get_multicast_loopback(cast(GSocket*)this._cPtr);
@@ -848,7 +848,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       [gio.socket.Socket.setMulticastTtl] for more details.
       Returns: the multicast time-to-live setting on socket
   */
-  uint getMulticastTtl()
+  uint getMulticastTtl() nothrow
   {
     uint _retval;
     _retval = g_socket_get_multicast_ttl(cast(GSocket*)this._cPtr);
@@ -894,7 +894,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       In case the protocol is unknown, -1 is returned.
       Returns: a protocol id, or -1 if unknown
   */
-  gio.types.SocketProtocol getProtocol()
+  gio.types.SocketProtocol getProtocol() nothrow
   {
     GSocketProtocol _cretval;
     _cretval = g_socket_get_protocol(cast(GSocket*)this._cPtr);
@@ -924,7 +924,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Gets the socket type of the socket.
       Returns: a #GSocketType
   */
-  gio.types.SocketType getSocketType()
+  gio.types.SocketType getSocketType() nothrow
   {
     GSocketType _cretval;
     _cretval = g_socket_get_socket_type(cast(GSocket*)this._cPtr);
@@ -937,7 +937,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       [gio.socket.Socket.setTimeout].
       Returns: the timeout in seconds
   */
-  uint getTimeout()
+  uint getTimeout() nothrow
   {
     uint _retval;
     _retval = g_socket_get_timeout(cast(GSocket*)this._cPtr);
@@ -949,7 +949,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       [gio.socket.Socket.setTtl] for more details.
       Returns: the time-to-live setting on socket
   */
-  uint getTtl()
+  uint getTtl() nothrow
   {
     uint _retval;
     _retval = g_socket_get_ttl(cast(GSocket*)this._cPtr);
@@ -960,7 +960,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Checks whether a socket is closed.
       Returns: true if socket is closed, false otherwise
   */
-  bool isClosed()
+  bool isClosed() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_socket_is_closed(cast(GSocket*)this._cPtr);
@@ -977,7 +977,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       [gio.socket.Socket.checkConnectResult].
       Returns: true if socket is connected, false otherwise.
   */
-  bool isConnected()
+  bool isConnected() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_socket_is_connected(cast(GSocket*)this._cPtr);
@@ -1643,7 +1643,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Params:
         blocking = Whether to use blocking I/O or not.
   */
-  void setBlocking(bool blocking)
+  void setBlocking(bool blocking) nothrow
   {
     g_socket_set_blocking(cast(GSocket*)this._cPtr, blocking);
   }
@@ -1656,7 +1656,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
         broadcast = whether socket should allow sending to broadcast
               addresses
   */
-  void setBroadcast(bool broadcast)
+  void setBroadcast(bool broadcast) nothrow
   {
     g_socket_set_broadcast(cast(GSocket*)this._cPtr, broadcast);
   }
@@ -1681,7 +1681,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Params:
         keepalive = Value for the keepalive flag
   */
-  void setKeepalive(bool keepalive)
+  void setKeepalive(bool keepalive) nothrow
   {
     g_socket_set_keepalive(cast(GSocket*)this._cPtr, keepalive);
   }
@@ -1698,7 +1698,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Params:
         backlog = the maximum number of pending connections.
   */
-  void setListenBacklog(int backlog)
+  void setListenBacklog(int backlog) nothrow
   {
     g_socket_set_listen_backlog(cast(GSocket*)this._cPtr, backlog);
   }
@@ -1712,7 +1712,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
         loopback = whether socket should receive messages sent to its
             multicast groups from the local host
   */
-  void setMulticastLoopback(bool loopback)
+  void setMulticastLoopback(bool loopback) nothrow
   {
     g_socket_set_multicast_loopback(cast(GSocket*)this._cPtr, loopback);
   }
@@ -1725,7 +1725,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Params:
         ttl = the time-to-live value for all multicast datagrams on socket
   */
-  void setMulticastTtl(uint ttl)
+  void setMulticastTtl(uint ttl) nothrow
   {
     g_socket_set_multicast_ttl(cast(GSocket*)this._cPtr, ttl);
   }
@@ -1785,7 +1785,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Params:
         timeout = the timeout for socket, in seconds, or 0 for none
   */
-  void setTimeout(uint timeout)
+  void setTimeout(uint timeout) nothrow
   {
     g_socket_set_timeout(cast(GSocket*)this._cPtr, timeout);
   }
@@ -1797,7 +1797,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       Params:
         ttl = the time-to-live value for all unicast packets on socket
   */
-  void setTtl(uint ttl)
+  void setTtl(uint ttl) nothrow
   {
     g_socket_set_ttl(cast(GSocket*)this._cPtr, ttl);
   }
@@ -1846,7 +1846,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       of speaking IPv4.
       Returns: true if this socket can be used with IPv4.
   */
-  bool speaksIpv4()
+  bool speaksIpv4() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_socket_speaks_ipv4(cast(GSocket*)this._cPtr);
@@ -1867,7 +1867,7 @@ class SocketGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.d
         propval = Whether I/O on this socket is blocking.
       Returns: Builder instance for fluent chaining
   */
-  T blocking(bool propval)
+  T blocking(bool propval) nothrow
   {
     return setProperty("blocking", propval);
   }
@@ -1878,7 +1878,7 @@ class SocketGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.d
         propval = Whether the socket should allow sending to broadcast addresses.
       Returns: Builder instance for fluent chaining
   */
-  T broadcast(bool propval)
+  T broadcast(bool propval) nothrow
   {
     return setProperty("broadcast", propval);
   }
@@ -1889,7 +1889,7 @@ class SocketGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.d
         propval = The socket’s address family.
       Returns: Builder instance for fluent chaining
   */
-  T family(gio.types.SocketFamily propval)
+  T family(gio.types.SocketFamily propval) nothrow
   {
     return setProperty("family", propval);
   }
@@ -1900,7 +1900,7 @@ class SocketGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.d
         propval = The socket’s file descriptor.
       Returns: Builder instance for fluent chaining
   */
-  T fd(int propval)
+  T fd(int propval) nothrow
   {
     return setProperty("fd", propval);
   }
@@ -1911,7 +1911,7 @@ class SocketGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.d
         propval = Whether to keep the connection alive by sending periodic pings.
       Returns: Builder instance for fluent chaining
   */
-  T keepalive(bool propval)
+  T keepalive(bool propval) nothrow
   {
     return setProperty("keepalive", propval);
   }
@@ -1922,7 +1922,7 @@ class SocketGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.d
         propval = The number of outstanding connections in the listen queue.
       Returns: Builder instance for fluent chaining
   */
-  T listenBacklog(int propval)
+  T listenBacklog(int propval) nothrow
   {
     return setProperty("listen-backlog", propval);
   }
@@ -1933,7 +1933,7 @@ class SocketGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.d
         propval = Whether outgoing multicast packets loop back to the local host.
       Returns: Builder instance for fluent chaining
   */
-  T multicastLoopback(bool propval)
+  T multicastLoopback(bool propval) nothrow
   {
     return setProperty("multicast-loopback", propval);
   }
@@ -1944,7 +1944,7 @@ class SocketGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.d
         propval = Time-to-live out outgoing multicast packets
       Returns: Builder instance for fluent chaining
   */
-  T multicastTtl(uint propval)
+  T multicastTtl(uint propval) nothrow
   {
     return setProperty("multicast-ttl", propval);
   }
@@ -1955,7 +1955,7 @@ class SocketGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.d
         propval = The ID of the protocol to use, or `-1` for unknown.
       Returns: Builder instance for fluent chaining
   */
-  T protocol(gio.types.SocketProtocol propval)
+  T protocol(gio.types.SocketProtocol propval) nothrow
   {
     return setProperty("protocol", propval);
   }
@@ -1966,7 +1966,7 @@ class SocketGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.d
         propval = The timeout in seconds on socket I/O
       Returns: Builder instance for fluent chaining
   */
-  T timeout(uint propval)
+  T timeout(uint propval) nothrow
   {
     return setProperty("timeout", propval);
   }
@@ -1977,7 +1977,7 @@ class SocketGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.d
         propval = Time-to-live for outgoing unicast packets
       Returns: Builder instance for fluent chaining
   */
-  T ttl(uint propval)
+  T ttl(uint propval) nothrow
   {
     return setProperty("ttl", propval);
   }
@@ -1988,7 +1988,7 @@ class SocketGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.d
         propval = The socket’s type.
       Returns: Builder instance for fluent chaining
   */
-  T type(gio.types.SocketType propval)
+  T type(gio.types.SocketType propval) nothrow
   {
     return setProperty("type", propval);
   }
@@ -2001,7 +2001,7 @@ final class SocketGidBuilder : SocketGidBuilderImpl!SocketGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Socket build()
+  Socket build() nothrow
   {
     return new Socket(cast(void*)createGObject(Socket._getGType), Yes.Take);
   }

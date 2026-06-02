@@ -163,23 +163,22 @@ struct Segment
   void*[4] GstReserved;
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_segment_get_type != &gidSymbolNotFound ? gst_segment_get_type() : cast(GType)0;
   }
 
   /** */
-  @property GType _gType()
+  @property GType _gType() nothrow
   {
     return _getGType();
   }
 
-  void* boxCopy()
+  void* boxCopy() nothrow
   {
     import gobject.c.functions : g_boxed_copy;
-    return g_boxed_copy(_gType,
-        cast(void*)&this);
+    return g_boxed_copy(_gType, cast(void*)&this);
   }
 
   /**
@@ -207,7 +206,7 @@ struct Segment
             completely in segment, false if the values are completely outside
             of the segment.
   */
-  bool clip(gst.types.Format format, ulong start, ulong stop, out ulong clipStart, out ulong clipStop)
+  bool clip(gst.types.Format format, ulong start, ulong stop, out ulong clipStart, out ulong clipStop) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_segment_clip(cast(const(GstSegment)*)&this, format, start, stop, cast(ulong*)&clipStart, cast(ulong*)&clipStop);
@@ -220,7 +219,7 @@ struct Segment
       Free-function: gst_segment_free
       Returns: a new #GstSegment, free with [gst.segment.Segment.free].
   */
-  gst.segment.Segment copy()
+  gst.segment.Segment copy() nothrow
   {
     GstSegment* _cretval;
     _cretval = gst_segment_copy(cast(const(GstSegment)*)&this);
@@ -236,7 +235,7 @@ struct Segment
       Params:
         dest = a #GstSegment
   */
-  void copyInto(gst.segment.Segment dest)
+  void copyInto(gst.segment.Segment dest) nothrow
   {
     gst_segment_copy_into(cast(const(GstSegment)*)&this, cast(GstSegment*)&dest);
   }
@@ -281,7 +280,7 @@ struct Segment
         update = boolean holding whether position was updated.
       Returns: true if the seek could be performed.
   */
-  bool doSeek(double rate, gst.types.Format format, gst.types.SeekFlags flags, gst.types.SeekType startType, ulong start, gst.types.SeekType stopType, ulong stop, out bool update)
+  bool doSeek(double rate, gst.types.Format format, gst.types.SeekFlags flags, gst.types.SeekType startType, ulong start, gst.types.SeekType stopType, ulong stop, out bool update) nothrow
   {
     bool _retval;
     gboolean _update;
@@ -300,7 +299,7 @@ struct Segment
       Params:
         format = the format of the segment.
   */
-  void init_(gst.types.Format format)
+  void init_(gst.types.Format format) nothrow
   {
     gst_segment_init(cast(GstSegment*)&this, format);
   }
@@ -313,7 +312,7 @@ struct Segment
         s1 = a #GstSegment structure.
       Returns: true if the segments are equal, false otherwise.
   */
-  bool isEqual(gst.segment.Segment s1)
+  bool isEqual(gst.segment.Segment s1) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_segment_is_equal(cast(const(GstSegment)*)&this, cast(const(GstSegment)*)&s1);
@@ -330,7 +329,7 @@ struct Segment
       Returns: true if the segment could be updated successfully. If false is
         returned, offset is not in segment.
   */
-  bool offsetRunningTime(gst.types.Format format, long offset)
+  bool offsetRunningTime(gst.types.Format format, long offset) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_segment_offset_running_time(cast(GstSegment*)&this, format, offset);
@@ -347,7 +346,7 @@ struct Segment
       Returns: the position in the segment for running_time. This function returns
         -1 when running_time is -1 or when it is not inside segment.
   */
-  ulong positionFromRunningTime(gst.types.Format format, ulong runningTime)
+  ulong positionFromRunningTime(gst.types.Format format, ulong runningTime) nothrow
   {
     ulong _retval;
     _retval = gst_segment_position_from_running_time(cast(const(GstSegment)*)&this, format, runningTime);
@@ -378,7 +377,7 @@ struct Segment
         position = the resulting position in the segment
       Returns: a 1 or -1 on success, 0 on failure.
   */
-  int positionFromRunningTimeFull(gst.types.Format format, ulong runningTime, out ulong position)
+  int positionFromRunningTimeFull(gst.types.Format format, ulong runningTime, out ulong position) nothrow
   {
     int _retval;
     _retval = gst_segment_position_from_running_time_full(cast(const(GstSegment)*)&this, format, runningTime, cast(ulong*)&position);
@@ -395,7 +394,7 @@ struct Segment
       Returns: the position in the segment for stream_time. This function returns
         -1 when stream_time is -1 or when it is not inside segment.
   */
-  ulong positionFromStreamTime(gst.types.Format format, ulong streamTime)
+  ulong positionFromStreamTime(gst.types.Format format, ulong streamTime) nothrow
   {
     ulong _retval;
     _retval = gst_segment_position_from_stream_time(cast(const(GstSegment)*)&this, format, streamTime);
@@ -425,7 +424,7 @@ struct Segment
         position = the resulting position in the segment
       Returns: a 1 or -1 on success, 0 on failure.
   */
-  int positionFromStreamTimeFull(gst.types.Format format, ulong streamTime, out ulong position)
+  int positionFromStreamTimeFull(gst.types.Format format, ulong streamTime, out ulong position) nothrow
   {
     int _retval;
     _retval = gst_segment_position_from_stream_time_full(cast(const(GstSegment)*)&this, format, streamTime, cast(ulong*)&position);
@@ -442,7 +441,7 @@ struct Segment
       Returns: true if the segment could be updated successfully. If false is
         returned, running_time is -1 or not in segment.
   */
-  bool setRunningTime(gst.types.Format format, ulong runningTime)
+  bool setRunningTime(gst.types.Format format, ulong runningTime) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_segment_set_running_time(cast(GstSegment*)&this, format, runningTime);
@@ -461,7 +460,7 @@ struct Segment
   
       Deprecated: Use [gst.segment.Segment.positionFromRunningTime] instead.
   */
-  ulong toPosition(gst.types.Format format, ulong runningTime)
+  ulong toPosition(gst.types.Format format, ulong runningTime) nothrow
   {
     ulong _retval;
     _retval = gst_segment_to_position(cast(const(GstSegment)*)&this, format, runningTime);
@@ -485,7 +484,7 @@ struct Segment
       Returns: the position as the total running time or -1 when an invalid position
         was given.
   */
-  ulong toRunningTime(gst.types.Format format, ulong position)
+  ulong toRunningTime(gst.types.Format format, ulong position) nothrow
   {
     ulong _retval;
     _retval = gst_segment_to_running_time(cast(const(GstSegment)*)&this, format, position);
@@ -515,7 +514,7 @@ struct Segment
         runningTime = result running-time
       Returns: a 1 or -1 on success, 0 on failure.
   */
-  int toRunningTimeFull(gst.types.Format format, ulong position, out ulong runningTime)
+  int toRunningTimeFull(gst.types.Format format, ulong position, out ulong runningTime) nothrow
   {
     int _retval;
     _retval = gst_segment_to_running_time_full(cast(const(GstSegment)*)&this, format, position, cast(ulong*)&runningTime);
@@ -540,7 +539,7 @@ struct Segment
       Returns: the position in stream_time or -1 when an invalid position
         was given.
   */
-  ulong toStreamTime(gst.types.Format format, ulong position)
+  ulong toStreamTime(gst.types.Format format, ulong position) nothrow
   {
     ulong _retval;
     _retval = gst_segment_to_stream_time(cast(const(GstSegment)*)&this, format, position);
@@ -570,7 +569,7 @@ struct Segment
         streamTime = result stream-time
       Returns: a 1 or -1 on success, 0 on failure.
   */
-  int toStreamTimeFull(gst.types.Format format, ulong position, out ulong streamTime)
+  int toStreamTimeFull(gst.types.Format format, ulong position, out ulong streamTime) nothrow
   {
     int _retval;
     _retval = gst_segment_to_stream_time_full(cast(const(GstSegment)*)&this, format, position, cast(ulong*)&streamTime);

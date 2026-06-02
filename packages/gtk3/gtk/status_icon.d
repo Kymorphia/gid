@@ -57,26 +57,26 @@ class StatusIcon : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_status_icon_get_type != &gidSymbolNotFound ? gtk_status_icon_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StatusIcon self()
+  override StatusIcon self() nothrow
   {
     return this;
   }
@@ -85,7 +85,7 @@ class StatusIcon : gobject.object.ObjectWrap
       Get builder for [gtk.status_icon.StatusIcon]
       Returns: New builder object
   */
-  static StatusIconGidBuilder builder()
+  static StatusIconGidBuilder builder() nothrow
   {
     return new StatusIconGidBuilder;
   }
@@ -94,13 +94,13 @@ class StatusIcon : gobject.object.ObjectWrap
       Get `embedded` property.
       Returns: true if the statusicon is embedded in a notification area.
   */
-  @property bool embedded()
+  @property bool embedded() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("embedded");
   }
 
   /** */
-  @property void file(string propval)
+  @property void file(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("file", propval);
   }
@@ -110,7 +110,7 @@ class StatusIcon : gobject.object.ObjectWrap
       Returns: The #GIcon displayed in the #GtkStatusIcon. For themed icons,
         the image will be updated automatically if the theme changes.
   */
-  @property gio.icon.Icon gicon()
+  @property gio.icon.Icon gicon() nothrow
   {
     return getGicon();
   }
@@ -121,7 +121,7 @@ class StatusIcon : gobject.object.ObjectWrap
         propval = The #GIcon displayed in the #GtkStatusIcon. For themed icons,
           the image will be updated automatically if the theme changes.
   */
-  @property void gicon(gio.icon.Icon propval)
+  @property void gicon(gio.icon.Icon propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gio.icon.Icon)("gicon", propval);
   }
@@ -142,7 +142,7 @@ class StatusIcon : gobject.object.ObjectWrap
         Whether this property is respected is platform dependent.
         For plain text tooltips, use #GtkStatusIcon:tooltip-text in preference.
   */
-  @property bool hasTooltip()
+  @property bool hasTooltip() nothrow
   {
     return getHasTooltip();
   }
@@ -164,19 +164,19 @@ class StatusIcon : gobject.object.ObjectWrap
           Whether this property is respected is platform dependent.
           For plain text tooltips, use #GtkStatusIcon:tooltip-text in preference.
   */
-  @property void hasTooltip(bool propval)
+  @property void hasTooltip(bool propval) nothrow
   {
     setHasTooltip(propval);
   }
 
   /** */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return getIconName();
   }
 
   /** */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("icon-name", propval);
   }
@@ -186,55 +186,55 @@ class StatusIcon : gobject.object.ObjectWrap
       Returns: The orientation of the tray in which the statusicon
         is embedded.
   */
-  @property gtk.types.Orientation orientation()
+  @property gtk.types.Orientation orientation() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.Orientation)("orientation");
   }
 
   /** */
-  @property gdkpixbuf.pixbuf.Pixbuf pixbuf()
+  @property gdkpixbuf.pixbuf.Pixbuf pixbuf() nothrow
   {
     return getPixbuf();
   }
 
   /** */
-  @property void pixbuf(gdkpixbuf.pixbuf.Pixbuf propval)
+  @property void pixbuf(gdkpixbuf.pixbuf.Pixbuf propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdkpixbuf.pixbuf.Pixbuf)("pixbuf", propval);
   }
 
   /** */
-  @property gdk.screen.Screen screen()
+  @property gdk.screen.Screen screen() nothrow
   {
     return getScreen();
   }
 
   /** */
-  @property void screen(gdk.screen.Screen propval)
+  @property void screen(gdk.screen.Screen propval) nothrow
   {
     setScreen(propval);
   }
 
   /** */
-  @property int size()
+  @property int size() nothrow
   {
     return getSize();
   }
 
   /** */
-  @property string stock()
+  @property string stock() nothrow
   {
     return getStock();
   }
 
   /** */
-  @property void stock(string propval)
+  @property void stock(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("stock", propval);
   }
 
   /** */
-  @property gtk.types.ImageType storageType()
+  @property gtk.types.ImageType storageType() nothrow
   {
     return getStorageType();
   }
@@ -245,7 +245,7 @@ class StatusIcon : gobject.object.ObjectWrap
         localized string describing the tray icon. It may be used by tools
         like screen readers to render the tray icon.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -257,7 +257,7 @@ class StatusIcon : gobject.object.ObjectWrap
           localized string describing the tray icon. It may be used by tools
           like screen readers to render the tray icon.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -276,7 +276,7 @@ class StatusIcon : gobject.object.ObjectWrap
         
         On some platforms, embedded markup will be ignored.
   */
-  @property string tooltipMarkup()
+  @property string tooltipMarkup() nothrow
   {
     return getTooltipMarkup();
   }
@@ -296,7 +296,7 @@ class StatusIcon : gobject.object.ObjectWrap
           
           On some platforms, embedded markup will be ignored.
   */
-  @property void tooltipMarkup(string propval)
+  @property void tooltipMarkup(string propval) nothrow
   {
     setTooltipMarkup(propval);
   }
@@ -317,7 +317,7 @@ class StatusIcon : gobject.object.ObjectWrap
         that they allow on status icons, e.g. Windows only shows the first
         64 characters.
   */
-  @property string tooltipText()
+  @property string tooltipText() nothrow
   {
     return getTooltipText();
   }
@@ -339,19 +339,19 @@ class StatusIcon : gobject.object.ObjectWrap
           that they allow on status icons, e.g. Windows only shows the first
           64 characters.
   */
-  @property void tooltipText(string propval)
+  @property void tooltipText(string propval) nothrow
   {
     setTooltipText(propval);
   }
 
   /** */
-  @property bool visible()
+  @property bool visible() nothrow
   {
     return getVisible();
   }
 
   /** */
-  @property void visible(bool propval)
+  @property void visible(bool propval) nothrow
   {
     setVisible(propval);
   }
@@ -363,7 +363,7 @@ class StatusIcon : gobject.object.ObjectWrap
       Deprecated: Use #GNotification and #GtkApplication to
           provide status notifications
   */
-  this()
+  this() nothrow
   {
     GtkStatusIcon* _cretval;
     _cretval = gtk_status_icon_new();
@@ -383,7 +383,7 @@ class StatusIcon : gobject.object.ObjectWrap
       Deprecated: Use #GNotification and #GtkApplication to
           provide status notifications
   */
-  static gtk.status_icon.StatusIcon newFromFile(string filename)
+  static gtk.status_icon.StatusIcon newFromFile(string filename) nothrow
   {
     GtkStatusIcon* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -403,7 +403,7 @@ class StatusIcon : gobject.object.ObjectWrap
       Deprecated: Use #GNotification and #GtkApplication to
           provide status notifications
   */
-  static gtk.status_icon.StatusIcon newFromGicon(gio.icon.Icon icon)
+  static gtk.status_icon.StatusIcon newFromGicon(gio.icon.Icon icon) nothrow
   {
     GtkStatusIcon* _cretval;
     _cretval = gtk_status_icon_new_from_gicon(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
@@ -423,7 +423,7 @@ class StatusIcon : gobject.object.ObjectWrap
       Deprecated: Use #GNotification and #GtkApplication to
           provide status notifications
   */
-  static gtk.status_icon.StatusIcon newFromIconName(string iconName)
+  static gtk.status_icon.StatusIcon newFromIconName(string iconName) nothrow
   {
     GtkStatusIcon* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
@@ -445,7 +445,7 @@ class StatusIcon : gobject.object.ObjectWrap
       Deprecated: Use #GNotification and #GtkApplication to
           provide status notifications
   */
-  static gtk.status_icon.StatusIcon newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  static gtk.status_icon.StatusIcon newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf) nothrow
   {
     GtkStatusIcon* _cretval;
     _cretval = gtk_status_icon_new_from_pixbuf(pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
@@ -466,7 +466,7 @@ class StatusIcon : gobject.object.ObjectWrap
       Deprecated: Use #GNotification and #GtkApplication to
           provide status notifications
   */
-  static gtk.status_icon.StatusIcon newFromStock(string stockId)
+  static gtk.status_icon.StatusIcon newFromStock(string stockId) nothrow
   {
     GtkStatusIcon* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
@@ -492,7 +492,7 @@ class StatusIcon : gobject.object.ObjectWrap
           provide status notifications; notifications do not have menus,
           but can have buttons, and actions associated with each button
   */
-  static void positionMenu(gtk.menu.Menu menu, ref int x, ref int y, out bool pushIn, gtk.status_icon.StatusIcon userData)
+  static void positionMenu(gtk.menu.Menu menu, ref int x, ref int y, out bool pushIn, gtk.status_icon.StatusIcon userData) nothrow
   {
     gboolean _pushIn;
     gtk_status_icon_position_menu(menu ? cast(GtkMenu*)menu._cPtr(No.Dup) : null, cast(int*)&x, cast(int*)&y, &_pushIn, userData ? cast(GtkStatusIcon*)userData._cPtr(No.Dup) : null);
@@ -530,7 +530,7 @@ class StatusIcon : gobject.object.ObjectWrap
           for this function, as the platform is responsible for the
           presentation of notifications
   */
-  bool getGeometry(out gdk.screen.Screen screen, out gdk.rectangle.Rectangle area, out gtk.types.Orientation orientation)
+  bool getGeometry(out gdk.screen.Screen screen, out gdk.rectangle.Rectangle area, out gtk.types.Orientation orientation) nothrow
   {
     bool _retval;
     GdkScreen* _screen;
@@ -553,7 +553,7 @@ class StatusIcon : gobject.object.ObjectWrap
           provide status notifications; there is no direct replacement
           for this function
   */
-  gio.icon.Icon getGicon()
+  gio.icon.Icon getGicon() nothrow
   {
     GIcon* _cretval;
     _cretval = gtk_status_icon_get_gicon(cast(GtkStatusIcon*)this._cPtr);
@@ -570,7 +570,7 @@ class StatusIcon : gobject.object.ObjectWrap
           provide status notifications; there is no direct replacement
           for this function
   */
-  bool getHasTooltip()
+  bool getHasTooltip() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_status_icon_get_has_tooltip(cast(GtkStatusIcon*)this._cPtr);
@@ -589,7 +589,7 @@ class StatusIcon : gobject.object.ObjectWrap
           provide status notifications; there is no direct replacement
           for this function
   */
-  string getIconName()
+  string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_status_icon_get_icon_name(cast(GtkStatusIcon*)this._cPtr);
@@ -610,7 +610,7 @@ class StatusIcon : gobject.object.ObjectWrap
           provide status notifications; there is no direct replacement
           for this function
   */
-  gdkpixbuf.pixbuf.Pixbuf getPixbuf()
+  gdkpixbuf.pixbuf.Pixbuf getPixbuf() nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gtk_status_icon_get_pixbuf(cast(GtkStatusIcon*)this._cPtr);
@@ -626,7 +626,7 @@ class StatusIcon : gobject.object.ObjectWrap
           provide status notifications; there is no direct replacement
           for this function, as notifications are managed by the platform
   */
-  gdk.screen.Screen getScreen()
+  gdk.screen.Screen getScreen() nothrow
   {
     GdkScreen* _cretval;
     _cretval = gtk_status_icon_get_screen(cast(GtkStatusIcon*)this._cPtr);
@@ -650,7 +650,7 @@ class StatusIcon : gobject.object.ObjectWrap
           for this function, as the representation of a notification
           is left to the platform
   */
-  int getSize()
+  int getSize() nothrow
   {
     int _retval;
     _retval = gtk_status_icon_get_size(cast(GtkStatusIcon*)this._cPtr);
@@ -668,7 +668,7 @@ class StatusIcon : gobject.object.ObjectWrap
   
       Deprecated: Use [gtk.status_icon.StatusIcon.getIconName] instead.
   */
-  string getStock()
+  string getStock() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_status_icon_get_stock(cast(GtkStatusIcon*)this._cPtr);
@@ -687,7 +687,7 @@ class StatusIcon : gobject.object.ObjectWrap
           for this function, and #GNotification only supports #GIcon
           instances
   */
-  gtk.types.ImageType getStorageType()
+  gtk.types.ImageType getStorageType() nothrow
   {
     GtkImageType _cretval;
     _cretval = gtk_status_icon_get_storage_type(cast(GtkStatusIcon*)this._cPtr);
@@ -703,7 +703,7 @@ class StatusIcon : gobject.object.ObjectWrap
           provide status notifications; there is no direct replacement
           for this function
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_status_icon_get_title(cast(GtkStatusIcon*)this._cPtr);
@@ -720,7 +720,7 @@ class StatusIcon : gobject.object.ObjectWrap
           provide status notifications; there is no direct replacement
           for this function
   */
-  string getTooltipMarkup()
+  string getTooltipMarkup() nothrow
   {
     char* _cretval;
     _cretval = gtk_status_icon_get_tooltip_markup(cast(GtkStatusIcon*)this._cPtr);
@@ -737,7 +737,7 @@ class StatusIcon : gobject.object.ObjectWrap
           provide status notifications; there is no direct replacement
           for this function
   */
-  string getTooltipText()
+  string getTooltipText() nothrow
   {
     char* _cretval;
     _cretval = gtk_status_icon_get_tooltip_text(cast(GtkStatusIcon*)this._cPtr);
@@ -756,7 +756,7 @@ class StatusIcon : gobject.object.ObjectWrap
           provide status notifications; there is no direct replacement
           for this function
   */
-  bool getVisible()
+  bool getVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_status_icon_get_visible(cast(GtkStatusIcon*)this._cPtr);
@@ -782,7 +782,7 @@ class StatusIcon : gobject.object.ObjectWrap
           provide status notifications; there is no direct replacement
           for this function
   */
-  uint getX11WindowId()
+  uint getX11WindowId() nothrow
   {
     uint _retval;
     _retval = gtk_status_icon_get_x11_window_id(cast(GtkStatusIcon*)this._cPtr);
@@ -799,7 +799,7 @@ class StatusIcon : gobject.object.ObjectWrap
           provide status notifications; there is no direct replacement
           for this function
   */
-  bool isEmbedded()
+  bool isEmbedded() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_status_icon_is_embedded(cast(GtkStatusIcon*)this._cPtr);
@@ -817,7 +817,7 @@ class StatusIcon : gobject.object.ObjectWrap
           provide status notifications; you can use [gio.notification.Notification.setIcon]
           to associate a #GIcon with a notification
   */
-  void setFromFile(string filename)
+  void setFromFile(string filename) nothrow
   {
     const(char)* _filename = filename.toCString(No.Alloc);
     gtk_status_icon_set_from_file(cast(GtkStatusIcon*)this._cPtr, _filename);
@@ -834,7 +834,7 @@ class StatusIcon : gobject.object.ObjectWrap
           provide status notifications; you can use [gio.notification.Notification.setIcon]
           to associate a #GIcon with a notification
   */
-  void setFromGicon(gio.icon.Icon icon)
+  void setFromGicon(gio.icon.Icon icon) nothrow
   {
     gtk_status_icon_set_from_gicon(cast(GtkStatusIcon*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
@@ -851,7 +851,7 @@ class StatusIcon : gobject.object.ObjectWrap
           provide status notifications; you can use [gio.notification.Notification.setIcon]
           to associate a #GIcon with a notification
   */
-  void setFromIconName(string iconName)
+  void setFromIconName(string iconName) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_status_icon_set_from_icon_name(cast(GtkStatusIcon*)this._cPtr, _iconName);
@@ -868,7 +868,7 @@ class StatusIcon : gobject.object.ObjectWrap
           provide status notifications; you can use [gio.notification.Notification.setIcon]
           to associate a #GIcon with a notification
   */
-  void setFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
+  void setFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null) nothrow
   {
     gtk_status_icon_set_from_pixbuf(cast(GtkStatusIcon*)this._cPtr, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
@@ -882,7 +882,7 @@ class StatusIcon : gobject.object.ObjectWrap
   
       Deprecated: Use [gtk.status_icon.StatusIcon.setFromIconName] instead.
   */
-  void setFromStock(string stockId)
+  void setFromStock(string stockId) nothrow
   {
     const(char)* _stockId = stockId.toCString(No.Alloc);
     gtk_status_icon_set_from_stock(cast(GtkStatusIcon*)this._cPtr, _stockId);
@@ -900,7 +900,7 @@ class StatusIcon : gobject.object.ObjectWrap
           for this function, but notifications can display an arbitrary
           amount of text using [gio.notification.Notification.setBody]
   */
-  void setHasTooltip(bool hasTooltip)
+  void setHasTooltip(bool hasTooltip) nothrow
   {
     gtk_status_icon_set_has_tooltip(cast(GtkStatusIcon*)this._cPtr, hasTooltip);
   }
@@ -919,7 +919,7 @@ class StatusIcon : gobject.object.ObjectWrap
           for this function, as notifications are associated with a
           unique application identifier by #GApplication
   */
-  void setName(string name)
+  void setName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_status_icon_set_name(cast(GtkStatusIcon*)this._cPtr, _name);
@@ -938,7 +938,7 @@ class StatusIcon : gobject.object.ObjectWrap
           for this function, as GTK typically only has one #GdkScreen
           and notifications are managed by the platform
   */
-  void setScreen(gdk.screen.Screen screen)
+  void setScreen(gdk.screen.Screen screen) nothrow
   {
     gtk_status_icon_set_screen(cast(GtkStatusIcon*)this._cPtr, screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
   }
@@ -956,7 +956,7 @@ class StatusIcon : gobject.object.ObjectWrap
           provide status notifications; you should use [gio.notification.Notification.setTitle]
           and [gio.notification.Notification.setBody] to present text inside your notification
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_status_icon_set_title(cast(GtkStatusIcon*)this._cPtr, _title);
@@ -979,7 +979,7 @@ class StatusIcon : gobject.object.ObjectWrap
           provide status notifications; there is no direct replacement
           for this function
   */
-  void setTooltipMarkup(string markup = null)
+  void setTooltipMarkup(string markup = null) nothrow
   {
     const(char)* _markup = markup.toCString(No.Alloc);
     gtk_status_icon_set_tooltip_markup(cast(GtkStatusIcon*)this._cPtr, _markup);
@@ -1002,7 +1002,7 @@ class StatusIcon : gobject.object.ObjectWrap
           provide status notifications; there is no direct replacement
           for this function
   */
-  void setTooltipText(string text)
+  void setTooltipText(string text) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_status_icon_set_tooltip_text(cast(GtkStatusIcon*)this._cPtr, _text);
@@ -1018,7 +1018,7 @@ class StatusIcon : gobject.object.ObjectWrap
           provide status notifications; there is no direct replacement
           for this function, as notifications are managed by the platform
   */
-  void setVisible(bool visible)
+  void setVisible(bool visible) nothrow
   {
     gtk_status_icon_set_visible(cast(GtkStatusIcon*)this._cPtr, visible);
   }
@@ -1042,13 +1042,13 @@ class StatusIcon : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.status_icon.StatusIcon)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1057,7 +1057,14 @@ class StatusIcon : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.status_icon.StatusIcon.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1088,18 +1095,19 @@ class StatusIcon : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectButtonPressEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectButtonPressEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_button.EventButton)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.status_icon.StatusIcon)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1107,7 +1115,14 @@ class StatusIcon : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.status_icon.StatusIcon.buttonPressEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1140,18 +1155,19 @@ class StatusIcon : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectButtonReleaseEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectButtonReleaseEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_button.EventButton)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.status_icon.StatusIcon)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1159,7 +1175,14 @@ class StatusIcon : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.status_icon.StatusIcon.buttonReleaseEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1197,7 +1220,7 @@ class StatusIcon : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPopupMenu(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPopupMenu(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -1205,7 +1228,7 @@ class StatusIcon : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.status_icon.StatusIcon)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1220,7 +1243,14 @@ class StatusIcon : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.status_icon.StatusIcon.popupMenu");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1267,7 +1297,7 @@ class StatusIcon : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectQueryTooltip(T)(T callback, Flag!"After" after = No.After)
+  gulong connectQueryTooltip(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -1277,11 +1307,12 @@ class StatusIcon : gobject.object.ObjectWrap
   && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gtk.status_icon.StatusIcon)))
   && Parameters!T.length < 6)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1298,7 +1329,14 @@ class StatusIcon : gobject.object.ObjectWrap
       static if (Parameters!T.length > 4)
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.status_icon.StatusIcon.queryTooltip");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1331,18 +1369,19 @@ class StatusIcon : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectScrollEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectScrollEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_scroll.EventScroll)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.status_icon.StatusIcon)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1350,7 +1389,14 @@ class StatusIcon : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.status_icon.StatusIcon.scrollEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1379,18 +1425,19 @@ class StatusIcon : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSizeChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSizeChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.status_icon.StatusIcon)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1398,7 +1445,14 @@ class StatusIcon : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.status_icon.StatusIcon.sizeChanged");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1413,7 +1467,7 @@ class StatusIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T file(string propval)
+  T file(string propval) nothrow
   {
     return setProperty("file", propval);
   }
@@ -1425,7 +1479,7 @@ class StatusIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           the image will be updated automatically if the theme changes.
       Returns: Builder instance for fluent chaining
   */
-  T gicon(gio.icon.Icon propval)
+  T gicon(gio.icon.Icon propval) nothrow
   {
     return setProperty("gicon", propval);
   }
@@ -1448,31 +1502,31 @@ class StatusIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           For plain text tooltips, use #GtkStatusIcon:tooltip-text in preference.
       Returns: Builder instance for fluent chaining
   */
-  T hasTooltip(bool propval)
+  T hasTooltip(bool propval) nothrow
   {
     return setProperty("has-tooltip", propval);
   }
 
   /** */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
 
   /** */
-  T pixbuf(gdkpixbuf.pixbuf.Pixbuf propval)
+  T pixbuf(gdkpixbuf.pixbuf.Pixbuf propval) nothrow
   {
     return setProperty("pixbuf", propval);
   }
 
   /** */
-  T screen(gdk.screen.Screen propval)
+  T screen(gdk.screen.Screen propval) nothrow
   {
     return setProperty("screen", propval);
   }
 
   /** */
-  T stock(string propval)
+  T stock(string propval) nothrow
   {
     return setProperty("stock", propval);
   }
@@ -1485,7 +1539,7 @@ class StatusIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           like screen readers to render the tray icon.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -1506,7 +1560,7 @@ class StatusIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           On some platforms, embedded markup will be ignored.
       Returns: Builder instance for fluent chaining
   */
-  T tooltipMarkup(string propval)
+  T tooltipMarkup(string propval) nothrow
   {
     return setProperty("tooltip-markup", propval);
   }
@@ -1529,13 +1583,13 @@ class StatusIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           64 characters.
       Returns: Builder instance for fluent chaining
   */
-  T tooltipText(string propval)
+  T tooltipText(string propval) nothrow
   {
     return setProperty("tooltip-text", propval);
   }
 
   /** */
-  T visible(bool propval)
+  T visible(bool propval) nothrow
   {
     return setProperty("visible", propval);
   }
@@ -1548,7 +1602,7 @@ final class StatusIconGidBuilder : StatusIconGidBuilderImpl!StatusIconGidBuilder
       Create object from builder.
       Returns: New object
   */
-  StatusIcon build()
+  StatusIcon build() nothrow
   {
     return new StatusIcon(cast(void*)createGObject(StatusIcon._getGType), Yes.Take);
   }

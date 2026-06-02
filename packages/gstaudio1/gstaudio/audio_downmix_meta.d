@@ -24,11 +24,8 @@ class AudioDownmixMeta
   GstAudioDownmixMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstaudio.audio_downmix_meta.AudioDownmixMeta");
-
     _cInstance = *cast(GstAudioDownmixMeta*)ptr;
 
     if (take)
@@ -36,7 +33,7 @@ class AudioDownmixMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -45,7 +42,7 @@ class AudioDownmixMeta
       Get `meta` field.
       Returns: parent #GstMeta
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAudioDownmixMeta*)this._cPtr).meta, No.Take);
   }
@@ -54,7 +51,7 @@ class AudioDownmixMeta
       Get `fromChannels` field.
       Returns: the number of channels of the source
   */
-  @property int fromChannels()
+  @property int fromChannels() nothrow
   {
     return (cast(GstAudioDownmixMeta*)this._cPtr).fromChannels;
   }
@@ -64,7 +61,7 @@ class AudioDownmixMeta
       Params:
         propval = the number of channels of the source
   */
-  @property void fromChannels(int propval)
+  @property void fromChannels(int propval) nothrow
   {
     (cast(GstAudioDownmixMeta*)this._cPtr).fromChannels = propval;
   }
@@ -73,7 +70,7 @@ class AudioDownmixMeta
       Get `toChannels` field.
       Returns: the number of channels of the destination
   */
-  @property int toChannels()
+  @property int toChannels() nothrow
   {
     return (cast(GstAudioDownmixMeta*)this._cPtr).toChannels;
   }
@@ -83,13 +80,13 @@ class AudioDownmixMeta
       Params:
         propval = the number of channels of the destination
   */
-  @property void toChannels(int propval)
+  @property void toChannels(int propval) nothrow
   {
     (cast(GstAudioDownmixMeta*)this._cPtr).toChannels = propval;
   }
 
   /** */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_audio_downmix_meta_get_info();

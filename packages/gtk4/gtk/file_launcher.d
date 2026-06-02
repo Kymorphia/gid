@@ -33,26 +33,26 @@ class FileLauncher : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_file_launcher_get_type != &gidSymbolNotFound ? gtk_file_launcher_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileLauncher self()
+  override FileLauncher self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class FileLauncher : gobject.object.ObjectWrap
       Get builder for [gtk.file_launcher.FileLauncher]
       Returns: New builder object
   */
-  static FileLauncherGidBuilder builder()
+  static FileLauncherGidBuilder builder() nothrow
   {
     return new FileLauncherGidBuilder;
   }
@@ -71,7 +71,7 @@ class FileLauncher : gobject.object.ObjectWrap
       Returns: Whether to ask the user to choose an app for opening the file. If `FALSE`,
         the file might be opened with a default app or the previous choice.
   */
-  @property bool alwaysAsk()
+  @property bool alwaysAsk() nothrow
   {
     return getAlwaysAsk();
   }
@@ -82,7 +82,7 @@ class FileLauncher : gobject.object.ObjectWrap
         propval = Whether to ask the user to choose an app for opening the file. If `FALSE`,
           the file might be opened with a default app or the previous choice.
   */
-  @property void alwaysAsk(bool propval)
+  @property void alwaysAsk(bool propval) nothrow
   {
     setAlwaysAsk(propval);
   }
@@ -91,7 +91,7 @@ class FileLauncher : gobject.object.ObjectWrap
       Get `file` property.
       Returns: The file to launch.
   */
-  @property gio.file.File file()
+  @property gio.file.File file() nothrow
   {
     return getFile();
   }
@@ -101,7 +101,7 @@ class FileLauncher : gobject.object.ObjectWrap
       Params:
         propval = The file to launch.
   */
-  @property void file(gio.file.File propval)
+  @property void file(gio.file.File propval) nothrow
   {
     setFile(propval);
   }
@@ -110,7 +110,7 @@ class FileLauncher : gobject.object.ObjectWrap
       Get `writable` property.
       Returns: Whether to make the file writable for the handler.
   */
-  @property bool writable()
+  @property bool writable() nothrow
   {
     return getWritable();
   }
@@ -120,7 +120,7 @@ class FileLauncher : gobject.object.ObjectWrap
       Params:
         propval = Whether to make the file writable for the handler.
   */
-  @property void writable(bool propval)
+  @property void writable(bool propval) nothrow
   {
     setWritable(propval);
   }
@@ -132,7 +132,7 @@ class FileLauncher : gobject.object.ObjectWrap
         file = the file to open
       Returns: the new [gtk.file_launcher.FileLauncher]
   */
-  this(gio.file.File file = null)
+  this(gio.file.File file = null) nothrow
   {
     GtkFileLauncher* _cretval;
     _cretval = gtk_file_launcher_new(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
@@ -143,7 +143,7 @@ class FileLauncher : gobject.object.ObjectWrap
       Returns whether to ask the user to choose an app for opening the file.
       Returns: `TRUE` if always asking for app
   */
-  bool getAlwaysAsk()
+  bool getAlwaysAsk() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_file_launcher_get_always_ask(cast(GtkFileLauncher*)this._cPtr);
@@ -154,7 +154,7 @@ class FileLauncher : gobject.object.ObjectWrap
       Gets the file that will be opened.
       Returns: the file
   */
-  gio.file.File getFile()
+  gio.file.File getFile() nothrow
   {
     GFile* _cretval;
     _cretval = gtk_file_launcher_get_file(cast(GtkFileLauncher*)this._cPtr);
@@ -166,7 +166,7 @@ class FileLauncher : gobject.object.ObjectWrap
       Returns whether to make the file writable for the handler.
       Returns: `TRUE` if the file will be made writable
   */
-  bool getWritable()
+  bool getWritable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_file_launcher_get_writable(cast(GtkFileLauncher*)this._cPtr);
@@ -187,14 +187,21 @@ class FileLauncher : gobject.object.ObjectWrap
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
   */
-  void launch(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void launch(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -236,14 +243,21 @@ class FileLauncher : gobject.object.ObjectWrap
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
   */
-  void openContainingFolder(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void openContainingFolder(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -277,7 +291,7 @@ class FileLauncher : gobject.object.ObjectWrap
       Params:
         alwaysAsk = a `gboolean`
   */
-  void setAlwaysAsk(bool alwaysAsk)
+  void setAlwaysAsk(bool alwaysAsk) nothrow
   {
     gtk_file_launcher_set_always_ask(cast(GtkFileLauncher*)this._cPtr, alwaysAsk);
   }
@@ -288,7 +302,7 @@ class FileLauncher : gobject.object.ObjectWrap
       Params:
         file = a [gio.file.File]
   */
-  void setFile(gio.file.File file = null)
+  void setFile(gio.file.File file = null) nothrow
   {
     gtk_file_launcher_set_file(cast(GtkFileLauncher*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
   }
@@ -299,7 +313,7 @@ class FileLauncher : gobject.object.ObjectWrap
       Params:
         writable = a `gboolean`
   */
-  void setWritable(bool writable)
+  void setWritable(bool writable) nothrow
   {
     gtk_file_launcher_set_writable(cast(GtkFileLauncher*)this._cPtr, writable);
   }
@@ -316,7 +330,7 @@ class FileLauncherGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           the file might be opened with a default app or the previous choice.
       Returns: Builder instance for fluent chaining
   */
-  T alwaysAsk(bool propval)
+  T alwaysAsk(bool propval) nothrow
   {
     return setProperty("always-ask", propval);
   }
@@ -327,7 +341,7 @@ class FileLauncherGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The file to launch.
       Returns: Builder instance for fluent chaining
   */
-  T file(gio.file.File propval)
+  T file(gio.file.File propval) nothrow
   {
     return setProperty("file", propval);
   }
@@ -338,7 +352,7 @@ class FileLauncherGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether to make the file writable for the handler.
       Returns: Builder instance for fluent chaining
   */
-  T writable(bool propval)
+  T writable(bool propval) nothrow
   {
     return setProperty("writable", propval);
   }
@@ -351,7 +365,7 @@ final class FileLauncherGidBuilder : FileLauncherGidBuilderImpl!FileLauncherGidB
       Create object from builder.
       Returns: New object
   */
-  FileLauncher build()
+  FileLauncher build() nothrow
   {
     return new FileLauncher(cast(void*)createGObject(FileLauncher._getGType), Yes.Take);
   }

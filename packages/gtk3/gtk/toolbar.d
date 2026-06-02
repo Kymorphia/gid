@@ -50,26 +50,26 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_toolbar_get_type != &gidSymbolNotFound ? gtk_toolbar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Toolbar self()
+  override Toolbar self() nothrow
   {
     return this;
   }
@@ -78,7 +78,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       Get builder for [gtk.toolbar.Toolbar]
       Returns: New builder object
   */
-  static ToolbarGidBuilder builder()
+  static ToolbarGidBuilder builder() nothrow
   {
     return new ToolbarGidBuilder;
   }
@@ -93,7 +93,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
         application toolbars should respect the user preferences for the
         size of icons.
   */
-  @property gtk.types.IconSize iconSize()
+  @property gtk.types.IconSize iconSize() nothrow
   {
     return getIconSize();
   }
@@ -109,7 +109,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
           application toolbars should respect the user preferences for the
           size of icons.
   */
-  @property void iconSize(gtk.types.IconSize propval)
+  @property void iconSize(gtk.types.IconSize propval) nothrow
   {
     setIconSize(propval);
   }
@@ -118,7 +118,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       Get `iconSizeSet` property.
       Returns: Is true if the icon-size property has been set.
   */
-  @property bool iconSizeSet()
+  @property bool iconSizeSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("icon-size-set");
   }
@@ -128,31 +128,31 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       Params:
         propval = Is true if the icon-size property has been set.
   */
-  @property void iconSizeSet(bool propval)
+  @property void iconSizeSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("icon-size-set", propval);
   }
 
   /** */
-  @property bool showArrow()
+  @property bool showArrow() nothrow
   {
     return getShowArrow();
   }
 
   /** */
-  @property void showArrow(bool propval)
+  @property void showArrow(bool propval) nothrow
   {
     setShowArrow(propval);
   }
 
   /** */
-  @property gtk.types.ToolbarStyle toolbarStyle()
+  @property gtk.types.ToolbarStyle toolbarStyle() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.ToolbarStyle)("toolbar-style");
   }
 
   /** */
-  @property void toolbarStyle(gtk.types.ToolbarStyle propval)
+  @property void toolbarStyle(gtk.types.ToolbarStyle propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.ToolbarStyle)("toolbar-style", propval);
   }
@@ -165,7 +165,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       Creates a new toolbar.
       Returns: the newly-created toolbar.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_toolbar_new();
@@ -185,7 +185,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
         y = y coordinate of a point on the toolbar
       Returns: The position corresponding to the point (`x`, `y`) on the toolbar.
   */
-  int getDropIndex(int x, int y)
+  int getDropIndex(int x, int y) nothrow
   {
     int _retval;
     _retval = gtk_toolbar_get_drop_index(cast(GtkToolbar*)this._cPtr, x, y);
@@ -196,7 +196,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       Retrieves the icon size for the toolbar. See [gtk.toolbar.Toolbar.setIconSize].
       Returns: the current icon size for the icons on the toolbar.
   */
-  gtk.types.IconSize getIconSize()
+  gtk.types.IconSize getIconSize() nothrow
   {
     GtkIconSize _cretval;
     _cretval = gtk_toolbar_get_icon_size(cast(GtkToolbar*)this._cPtr);
@@ -212,7 +212,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
         item = a #GtkToolItem that is a child of toolbar
       Returns: the position of item on the toolbar.
   */
-  int getItemIndex(gtk.tool_item.ToolItem item)
+  int getItemIndex(gtk.tool_item.ToolItem item) nothrow
   {
     int _retval;
     _retval = gtk_toolbar_get_item_index(cast(GtkToolbar*)this._cPtr, item ? cast(GtkToolItem*)item._cPtr(No.Dup) : null);
@@ -223,7 +223,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       Returns the number of items on the toolbar.
       Returns: the number of items on the toolbar
   */
-  int getNItems()
+  int getNItems() nothrow
   {
     int _retval;
     _retval = gtk_toolbar_get_n_items(cast(GtkToolbar*)this._cPtr);
@@ -239,7 +239,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       Returns: The `n`'th #GtkToolItem on toolbar,
             or null if there isn’t an `n`'th item.
   */
-  gtk.tool_item.ToolItem getNthItem(int n)
+  gtk.tool_item.ToolItem getNthItem(int n) nothrow
   {
     GtkToolItem* _cretval;
     _cretval = gtk_toolbar_get_nth_item(cast(GtkToolbar*)this._cPtr, n);
@@ -252,7 +252,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       [gtk.button.Button.setRelief].
       Returns: The relief style of buttons on toolbar.
   */
-  gtk.types.ReliefStyle getReliefStyle()
+  gtk.types.ReliefStyle getReliefStyle() nothrow
   {
     GtkReliefStyle _cretval;
     _cretval = gtk_toolbar_get_relief_style(cast(GtkToolbar*)this._cPtr);
@@ -265,7 +265,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       See [gtk.toolbar.Toolbar.setShowArrow].
       Returns: true if the toolbar has an overflow menu.
   */
-  bool getShowArrow()
+  bool getShowArrow() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_toolbar_get_show_arrow(cast(GtkToolbar*)this._cPtr);
@@ -279,7 +279,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       [gtk.toolbar.Toolbar.setStyle].
       Returns: the current style of toolbar
   */
-  gtk.types.ToolbarStyle getStyle()
+  gtk.types.ToolbarStyle getStyle() nothrow
   {
     GtkToolbarStyle _cretval;
     _cretval = gtk_toolbar_get_style(cast(GtkToolbar*)this._cPtr);
@@ -296,7 +296,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
         item = a #GtkToolItem
         pos = the position of the new item
   */
-  void insert(gtk.tool_item.ToolItem item, int pos)
+  void insert(gtk.tool_item.ToolItem item, int pos) nothrow
   {
     gtk_toolbar_insert(cast(GtkToolbar*)this._cPtr, item ? cast(GtkToolItem*)item._cPtr(No.Dup) : null, pos);
   }
@@ -316,7 +316,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
         toolItem = a #GtkToolItem, or null to turn of highlighting
         index = a position on toolbar
   */
-  void setDropHighlightItem(gtk.tool_item.ToolItem toolItem, int index)
+  void setDropHighlightItem(gtk.tool_item.ToolItem toolItem, int index) nothrow
   {
     gtk_toolbar_set_drop_highlight_item(cast(GtkToolbar*)this._cPtr, toolItem ? cast(GtkToolItem*)toolItem._cPtr(No.Dup) : null, index);
   }
@@ -334,7 +334,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       Params:
         iconSize = The #GtkIconSize that stock icons in the toolbar shall have.
   */
-  void setIconSize(gtk.types.IconSize iconSize)
+  void setIconSize(gtk.types.IconSize iconSize) nothrow
   {
     gtk_toolbar_set_icon_size(cast(GtkToolbar*)this._cPtr, iconSize);
   }
@@ -350,7 +350,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       Params:
         showArrow = Whether to show an overflow menu
   */
-  void setShowArrow(bool showArrow)
+  void setShowArrow(bool showArrow) nothrow
   {
     gtk_toolbar_set_show_arrow(cast(GtkToolbar*)this._cPtr, showArrow);
   }
@@ -363,7 +363,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       Params:
         style = the new style for toolbar.
   */
-  void setStyle(gtk.types.ToolbarStyle style)
+  void setStyle(gtk.types.ToolbarStyle style) nothrow
   {
     gtk_toolbar_set_style(cast(GtkToolbar*)this._cPtr, style);
   }
@@ -372,7 +372,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       Unsets toolbar icon size set with [gtk.toolbar.Toolbar.setIconSize], so that
       user preferences will be used to determine the icon size.
   */
-  void unsetIconSize()
+  void unsetIconSize() nothrow
   {
     gtk_toolbar_unset_icon_size(cast(GtkToolbar*)this._cPtr);
   }
@@ -381,7 +381,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       Unsets a toolbar style set with [gtk.toolbar.Toolbar.setStyle], so that
       user preferences will be used to determine the toolbar style.
   */
-  void unsetStyle()
+  void unsetStyle() nothrow
   {
     gtk_toolbar_unset_style(cast(GtkToolbar*)this._cPtr);
   }
@@ -405,18 +405,19 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFocusHomeOrEnd(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFocusHomeOrEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.toolbar.Toolbar)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -424,7 +425,14 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.toolbar.Toolbar.focusHomeOrEnd");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -450,14 +458,14 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectOrientationChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectOrientationChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.Orientation)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.toolbar.Toolbar)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -469,7 +477,14 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.toolbar.Toolbar.orientationChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -505,7 +520,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPopupContextMenu(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPopupContextMenu(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -514,11 +529,12 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.toolbar.Toolbar)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -532,7 +548,14 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.toolbar.Toolbar.popupContextMenu");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -558,14 +581,14 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectStyleChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStyleChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ToolbarStyle)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.toolbar.Toolbar)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -577,7 +600,14 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.toolbar.Toolbar.styleChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -604,7 +634,7 @@ class ToolbarGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.or
           size of icons.
       Returns: Builder instance for fluent chaining
   */
-  T iconSize(gtk.types.IconSize propval)
+  T iconSize(gtk.types.IconSize propval) nothrow
   {
     return setProperty("icon-size", propval);
   }
@@ -615,19 +645,19 @@ class ToolbarGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.or
         propval = Is true if the icon-size property has been set.
       Returns: Builder instance for fluent chaining
   */
-  T iconSizeSet(bool propval)
+  T iconSizeSet(bool propval) nothrow
   {
     return setProperty("icon-size-set", propval);
   }
 
   /** */
-  T showArrow(bool propval)
+  T showArrow(bool propval) nothrow
   {
     return setProperty("show-arrow", propval);
   }
 
   /** */
-  T toolbarStyle(gtk.types.ToolbarStyle propval)
+  T toolbarStyle(gtk.types.ToolbarStyle propval) nothrow
   {
     return setProperty("toolbar-style", propval);
   }
@@ -640,7 +670,7 @@ final class ToolbarGidBuilder : ToolbarGidBuilderImpl!ToolbarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Toolbar build()
+  Toolbar build() nothrow
   {
     return new Toolbar(cast(void*)createGObject(Toolbar._getGType), No.Take);
   }

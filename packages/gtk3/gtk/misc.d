@@ -35,26 +35,26 @@ class Misc : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_misc_get_type != &gidSymbolNotFound ? gtk_misc_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Misc self()
+  override Misc self() nothrow
   {
     return this;
   }
@@ -63,7 +63,7 @@ class Misc : gtk.widget.Widget
       Get builder for [gtk.misc.Misc]
       Returns: New builder object
   */
-  static MiscGidBuilder builder()
+  static MiscGidBuilder builder() nothrow
   {
     return new MiscGidBuilder;
   }
@@ -77,7 +77,7 @@ class Misc : gtk.widget.Widget
       Deprecated: Use [gtk.widget.Widget.setHalign] instead. If you are using
           #GtkLabel, use #GtkLabel:xalign instead.
   */
-  @property float xalign()
+  @property float xalign() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(float)("xalign");
   }
@@ -92,7 +92,7 @@ class Misc : gtk.widget.Widget
       Deprecated: Use [gtk.widget.Widget.setHalign] instead. If you are using
           #GtkLabel, use #GtkLabel:xalign instead.
   */
-  @property void xalign(float propval)
+  @property void xalign(float propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(float)("xalign", propval);
   }
@@ -105,7 +105,7 @@ class Misc : gtk.widget.Widget
       Deprecated: Use [gtk.widget.Widget.setMarginStart] and
           [gtk.widget.Widget.setMarginEnd] instead
   */
-  @property int xpad()
+  @property int xpad() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("xpad");
   }
@@ -119,7 +119,7 @@ class Misc : gtk.widget.Widget
       Deprecated: Use [gtk.widget.Widget.setMarginStart] and
           [gtk.widget.Widget.setMarginEnd] instead
   */
-  @property void xpad(int propval)
+  @property void xpad(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("xpad", propval);
   }
@@ -132,7 +132,7 @@ class Misc : gtk.widget.Widget
       Deprecated: Use [gtk.widget.Widget.setValign] instead. If you are using
           #GtkLabel, use #GtkLabel:yalign instead.
   */
-  @property float yalign()
+  @property float yalign() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(float)("yalign");
   }
@@ -146,7 +146,7 @@ class Misc : gtk.widget.Widget
       Deprecated: Use [gtk.widget.Widget.setValign] instead. If you are using
           #GtkLabel, use #GtkLabel:yalign instead.
   */
-  @property void yalign(float propval)
+  @property void yalign(float propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(float)("yalign", propval);
   }
@@ -159,7 +159,7 @@ class Misc : gtk.widget.Widget
       Deprecated: Use [gtk.widget.Widget.setMarginTop] and
           [gtk.widget.Widget.setMarginBottom] instead
   */
-  @property int ypad()
+  @property int ypad() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("ypad");
   }
@@ -173,7 +173,7 @@ class Misc : gtk.widget.Widget
       Deprecated: Use [gtk.widget.Widget.setMarginTop] and
           [gtk.widget.Widget.setMarginBottom] instead
   */
-  @property void ypad(int propval)
+  @property void ypad(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("ypad", propval);
   }
@@ -188,7 +188,7 @@ class Misc : gtk.widget.Widget
   
       Deprecated: Use #GtkWidget alignment and margin properties.
   */
-  void getAlignment(out float xalign, out float yalign)
+  void getAlignment(out float xalign, out float yalign) nothrow
   {
     gtk_misc_get_alignment(cast(GtkMisc*)this._cPtr, cast(float*)&xalign, cast(float*)&yalign);
   }
@@ -205,7 +205,7 @@ class Misc : gtk.widget.Widget
   
       Deprecated: Use #GtkWidget alignment and margin properties.
   */
-  void getPadding(out int xpad, out int ypad)
+  void getPadding(out int xpad, out int ypad) nothrow
   {
     gtk_misc_get_padding(cast(GtkMisc*)this._cPtr, cast(int*)&xpad, cast(int*)&ypad);
   }
@@ -219,7 +219,7 @@ class Misc : gtk.widget.Widget
   
       Deprecated: Use #GtkWidget's alignment (#GtkWidget:halign and #GtkWidget:valign) and margin properties or #GtkLabel's #GtkLabel:xalign and #GtkLabel:yalign properties.
   */
-  void setAlignment(float xalign, float yalign)
+  void setAlignment(float xalign, float yalign) nothrow
   {
     gtk_misc_set_alignment(cast(GtkMisc*)this._cPtr, xalign, yalign);
   }
@@ -235,7 +235,7 @@ class Misc : gtk.widget.Widget
   
       Deprecated: Use #GtkWidget alignment and margin properties.
   */
-  void setPadding(int xpad, int ypad)
+  void setPadding(int xpad, int ypad) nothrow
   {
     gtk_misc_set_padding(cast(GtkMisc*)this._cPtr, xpad, ypad);
   }
@@ -257,7 +257,7 @@ class MiscGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Deprecated: Use [gtk.widget.Widget.setHalign] instead. If you are using
           #GtkLabel, use #GtkLabel:xalign instead.
   */
-  T xalign(float propval)
+  T xalign(float propval) nothrow
   {
     return setProperty("xalign", propval);
   }
@@ -272,7 +272,7 @@ class MiscGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Deprecated: Use [gtk.widget.Widget.setMarginStart] and
           [gtk.widget.Widget.setMarginEnd] instead
   */
-  T xpad(int propval)
+  T xpad(int propval) nothrow
   {
     return setProperty("xpad", propval);
   }
@@ -287,7 +287,7 @@ class MiscGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Deprecated: Use [gtk.widget.Widget.setValign] instead. If you are using
           #GtkLabel, use #GtkLabel:yalign instead.
   */
-  T yalign(float propval)
+  T yalign(float propval) nothrow
   {
     return setProperty("yalign", propval);
   }
@@ -302,7 +302,7 @@ class MiscGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Deprecated: Use [gtk.widget.Widget.setMarginTop] and
           [gtk.widget.Widget.setMarginBottom] instead
   */
-  T ypad(int propval)
+  T ypad(int propval) nothrow
   {
     return setProperty("ypad", propval);
   }
@@ -315,7 +315,7 @@ final class MiscGidBuilder : MiscGidBuilderImpl!MiscGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Misc build()
+  Misc build() nothrow
   {
     return new Misc(cast(void*)createGObject(Misc._getGType), No.Take);
   }

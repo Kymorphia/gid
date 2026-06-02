@@ -74,26 +74,26 @@ class ComboRow : adw.action_row.ActionRow
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_combo_row_get_type != &gidSymbolNotFound ? adw_combo_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ComboRow self()
+  override ComboRow self() nothrow
   {
     return this;
   }
@@ -102,7 +102,7 @@ class ComboRow : adw.action_row.ActionRow
       Get builder for [adw.combo_row.ComboRow]
       Returns: New builder object
   */
-  static ComboRowGidBuilder builder()
+  static ComboRowGidBuilder builder() nothrow
   {
     return new ComboRowGidBuilder;
   }
@@ -116,7 +116,7 @@ class ComboRow : adw.action_row.ActionRow
         
         Search requires [adw.combo_row.ComboRow.expression] to be set.
   */
-  @property bool enableSearch()
+  @property bool enableSearch() nothrow
   {
     return getEnableSearch();
   }
@@ -131,7 +131,7 @@ class ComboRow : adw.action_row.ActionRow
           
           Search requires [adw.combo_row.ComboRow.expression] to be set.
   */
-  @property void enableSearch(bool propval)
+  @property void enableSearch(bool propval) nothrow
   {
     setEnableSearch(propval);
   }
@@ -146,7 +146,7 @@ class ComboRow : adw.action_row.ActionRow
         [adw.combo_row.ComboRow.factory] is not set, or when
         [adw.combo_row.ComboRow.useSubtitle] is set to `TRUE`.
   */
-  @property gtk.expression.Expression expression()
+  @property gtk.expression.Expression expression() nothrow
   {
     return getExpression();
   }
@@ -162,7 +162,7 @@ class ComboRow : adw.action_row.ActionRow
           [adw.combo_row.ComboRow.factory] is not set, or when
           [adw.combo_row.ComboRow.useSubtitle] is set to `TRUE`.
   */
-  @property void expression(gtk.expression.Expression propval)
+  @property void expression(gtk.expression.Expression propval) nothrow
   {
     setExpression(propval);
   }
@@ -174,7 +174,7 @@ class ComboRow : adw.action_row.ActionRow
         This factory is always used for the item in the row. It is also used for
         items in the popup unless [adw.combo_row.ComboRow.listFactory] is set.
   */
-  @property gtk.list_item_factory.ListItemFactory factory()
+  @property gtk.list_item_factory.ListItemFactory factory() nothrow
   {
     return getFactory();
   }
@@ -187,7 +187,7 @@ class ComboRow : adw.action_row.ActionRow
           This factory is always used for the item in the row. It is also used for
           items in the popup unless [adw.combo_row.ComboRow.listFactory] is set.
   */
-  @property void factory(gtk.list_item_factory.ListItemFactory propval)
+  @property void factory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
     setFactory(propval);
   }
@@ -198,7 +198,7 @@ class ComboRow : adw.action_row.ActionRow
         
         If this is not set, [adw.combo_row.ComboRow.factory] is used.
   */
-  @property gtk.list_item_factory.ListItemFactory listFactory()
+  @property gtk.list_item_factory.ListItemFactory listFactory() nothrow
   {
     return getListFactory();
   }
@@ -210,7 +210,7 @@ class ComboRow : adw.action_row.ActionRow
           
           If this is not set, [adw.combo_row.ComboRow.factory] is used.
   */
-  @property void listFactory(gtk.list_item_factory.ListItemFactory propval)
+  @property void listFactory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
     setListFactory(propval);
   }
@@ -219,7 +219,7 @@ class ComboRow : adw.action_row.ActionRow
       Get `model` property.
       Returns: The model that provides the displayed items.
   */
-  @property gio.list_model.ListModel model()
+  @property gio.list_model.ListModel model() nothrow
   {
     return getModel();
   }
@@ -229,7 +229,7 @@ class ComboRow : adw.action_row.ActionRow
       Params:
         propval = The model that provides the displayed items.
   */
-  @property void model(gio.list_model.ListModel propval)
+  @property void model(gio.list_model.ListModel propval) nothrow
   {
     setModel(propval);
   }
@@ -241,7 +241,7 @@ class ComboRow : adw.action_row.ActionRow
         If no item is selected, the property has the value
         [gtk.types.INVALID_LIST_POSITION]
   */
-  @property uint selected()
+  @property uint selected() nothrow
   {
     return getSelected();
   }
@@ -254,7 +254,7 @@ class ComboRow : adw.action_row.ActionRow
           If no item is selected, the property has the value
           [gtk.types.INVALID_LIST_POSITION]
   */
-  @property void selected(uint propval)
+  @property void selected(uint propval) nothrow
   {
     setSelected(propval);
   }
@@ -263,7 +263,7 @@ class ComboRow : adw.action_row.ActionRow
       Get `selectedItem` property.
       Returns: The selected item.
   */
-  @property gobject.object.ObjectWrap selectedItem()
+  @property gobject.object.ObjectWrap selectedItem() nothrow
   {
     return getSelectedItem();
   }
@@ -280,7 +280,7 @@ class ComboRow : adw.action_row.ActionRow
         The subtitle is interpreted as Pango markup if
         [adw.preferences_row.PreferencesRow.useMarkup] is set to `TRUE`.
   */
-  @property bool useSubtitle()
+  @property bool useSubtitle() nothrow
   {
     return getUseSubtitle();
   }
@@ -298,7 +298,7 @@ class ComboRow : adw.action_row.ActionRow
           The subtitle is interpreted as Pango markup if
           [adw.preferences_row.PreferencesRow.useMarkup] is set to `TRUE`.
   */
-  @property void useSubtitle(bool propval)
+  @property void useSubtitle(bool propval) nothrow
   {
     setUseSubtitle(propval);
   }
@@ -307,7 +307,7 @@ class ComboRow : adw.action_row.ActionRow
       Creates a new [adw.combo_row.ComboRow].
       Returns: the newly created [adw.combo_row.ComboRow]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_combo_row_new();
@@ -323,7 +323,7 @@ class ComboRow : adw.action_row.ActionRow
       Search requires [adw.combo_row.ComboRow.expression] to be set.
       Returns: whether the popup includes a search entry
   */
-  bool getEnableSearch()
+  bool getEnableSearch() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_combo_row_get_enable_search(cast(AdwComboRow*)this._cPtr);
@@ -334,7 +334,7 @@ class ComboRow : adw.action_row.ActionRow
       Gets the expression used to obtain strings from items.
       Returns: the expression used to obtain strings from items
   */
-  gtk.expression.Expression getExpression()
+  gtk.expression.Expression getExpression() nothrow
   {
     GtkExpression* _cretval;
     _cretval = adw_combo_row_get_expression(cast(AdwComboRow*)this._cPtr);
@@ -346,7 +346,7 @@ class ComboRow : adw.action_row.ActionRow
       Gets the factory for populating list items.
       Returns: the factory in use
   */
-  gtk.list_item_factory.ListItemFactory getFactory()
+  gtk.list_item_factory.ListItemFactory getFactory() nothrow
   {
     GtkListItemFactory* _cretval;
     _cretval = adw_combo_row_get_factory(cast(AdwComboRow*)this._cPtr);
@@ -358,7 +358,7 @@ class ComboRow : adw.action_row.ActionRow
       Gets the factory for populating list items in the popup.
       Returns: the factory in use
   */
-  gtk.list_item_factory.ListItemFactory getListFactory()
+  gtk.list_item_factory.ListItemFactory getListFactory() nothrow
   {
     GtkListItemFactory* _cretval;
     _cretval = adw_combo_row_get_list_factory(cast(AdwComboRow*)this._cPtr);
@@ -370,7 +370,7 @@ class ComboRow : adw.action_row.ActionRow
       Gets the model that provides the displayed items.
       Returns: The model in use
   */
-  gio.list_model.ListModel getModel()
+  gio.list_model.ListModel getModel() nothrow
   {
     GListModel* _cretval;
     _cretval = adw_combo_row_get_model(cast(AdwComboRow*)this._cPtr);
@@ -383,7 +383,7 @@ class ComboRow : adw.action_row.ActionRow
       Returns: the position of the selected item, or
           [gtk.types.INVALID_LIST_POSITION] if no item is selected
   */
-  uint getSelected()
+  uint getSelected() nothrow
   {
     uint _retval;
     _retval = adw_combo_row_get_selected(cast(AdwComboRow*)this._cPtr);
@@ -394,7 +394,7 @@ class ComboRow : adw.action_row.ActionRow
       Gets the selected item.
       Returns: the selected item
   */
-  gobject.object.ObjectWrap getSelectedItem()
+  gobject.object.ObjectWrap getSelectedItem() nothrow
   {
     GObject* _cretval;
     _cretval = adw_combo_row_get_selected_item(cast(AdwComboRow*)this._cPtr);
@@ -406,7 +406,7 @@ class ComboRow : adw.action_row.ActionRow
       Gets whether to use the current value as the subtitle.
       Returns: whether to use the current value as the subtitle
   */
-  bool getUseSubtitle()
+  bool getUseSubtitle() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_combo_row_get_use_subtitle(cast(AdwComboRow*)this._cPtr);
@@ -424,7 +424,7 @@ class ComboRow : adw.action_row.ActionRow
       Params:
         enableSearch = whether to enable search
   */
-  void setEnableSearch(bool enableSearch)
+  void setEnableSearch(bool enableSearch) nothrow
   {
     adw_combo_row_set_enable_search(cast(AdwComboRow*)this._cPtr, enableSearch);
   }
@@ -441,7 +441,7 @@ class ComboRow : adw.action_row.ActionRow
       Params:
         expression = an expression
   */
-  void setExpression(gtk.expression.Expression expression = null)
+  void setExpression(gtk.expression.Expression expression = null) nothrow
   {
     adw_combo_row_set_expression(cast(AdwComboRow*)this._cPtr, expression ? cast(GtkExpression*)expression._cPtr(No.Dup) : null);
   }
@@ -455,7 +455,7 @@ class ComboRow : adw.action_row.ActionRow
       Params:
         factory = the factory to use
   */
-  void setFactory(gtk.list_item_factory.ListItemFactory factory = null)
+  void setFactory(gtk.list_item_factory.ListItemFactory factory = null) nothrow
   {
     adw_combo_row_set_factory(cast(AdwComboRow*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
   }
@@ -468,7 +468,7 @@ class ComboRow : adw.action_row.ActionRow
       Params:
         factory = the factory to use
   */
-  void setListFactory(gtk.list_item_factory.ListItemFactory factory = null)
+  void setListFactory(gtk.list_item_factory.ListItemFactory factory = null) nothrow
   {
     adw_combo_row_set_list_factory(cast(AdwComboRow*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
   }
@@ -479,7 +479,7 @@ class ComboRow : adw.action_row.ActionRow
       Params:
         model = the model to use
   */
-  void setModel(gio.list_model.ListModel model = null)
+  void setModel(gio.list_model.ListModel model = null) nothrow
   {
     adw_combo_row_set_model(cast(AdwComboRow*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
@@ -491,7 +491,7 @@ class ComboRow : adw.action_row.ActionRow
         position = the position of the item to select, or
             [gtk.types.INVALID_LIST_POSITION]
   */
-  void setSelected(uint position)
+  void setSelected(uint position) nothrow
   {
     adw_combo_row_set_selected(cast(AdwComboRow*)this._cPtr, position);
   }
@@ -510,7 +510,7 @@ class ComboRow : adw.action_row.ActionRow
       Params:
         useSubtitle = whether to use the current value as the subtitle
   */
-  void setUseSubtitle(bool useSubtitle)
+  void setUseSubtitle(bool useSubtitle) nothrow
   {
     adw_combo_row_set_use_subtitle(cast(AdwComboRow*)this._cPtr, useSubtitle);
   }
@@ -532,7 +532,7 @@ class ComboRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T
           Search requires [adw.combo_row.ComboRow.expression] to be set.
       Returns: Builder instance for fluent chaining
   */
-  T enableSearch(bool propval)
+  T enableSearch(bool propval) nothrow
   {
     return setProperty("enable-search", propval);
   }
@@ -549,7 +549,7 @@ class ComboRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T
           [adw.combo_row.ComboRow.useSubtitle] is set to `TRUE`.
       Returns: Builder instance for fluent chaining
   */
-  T expression(gtk.expression.Expression propval)
+  T expression(gtk.expression.Expression propval) nothrow
   {
     return setProperty("expression", propval);
   }
@@ -563,7 +563,7 @@ class ComboRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T
           items in the popup unless [adw.combo_row.ComboRow.listFactory] is set.
       Returns: Builder instance for fluent chaining
   */
-  T factory(gtk.list_item_factory.ListItemFactory propval)
+  T factory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
     return setProperty("factory", propval);
   }
@@ -576,7 +576,7 @@ class ComboRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T
           If this is not set, [adw.combo_row.ComboRow.factory] is used.
       Returns: Builder instance for fluent chaining
   */
-  T listFactory(gtk.list_item_factory.ListItemFactory propval)
+  T listFactory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
     return setProperty("list-factory", propval);
   }
@@ -587,7 +587,7 @@ class ComboRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T
         propval = The model that provides the displayed items.
       Returns: Builder instance for fluent chaining
   */
-  T model(gio.list_model.ListModel propval)
+  T model(gio.list_model.ListModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -601,7 +601,7 @@ class ComboRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T
           [gtk.types.INVALID_LIST_POSITION]
       Returns: Builder instance for fluent chaining
   */
-  T selected(uint propval)
+  T selected(uint propval) nothrow
   {
     return setProperty("selected", propval);
   }
@@ -620,7 +620,7 @@ class ComboRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T
           [adw.preferences_row.PreferencesRow.useMarkup] is set to `TRUE`.
       Returns: Builder instance for fluent chaining
   */
-  T useSubtitle(bool propval)
+  T useSubtitle(bool propval) nothrow
   {
     return setProperty("use-subtitle", propval);
   }
@@ -633,7 +633,7 @@ final class ComboRowGidBuilder : ComboRowGidBuilderImpl!ComboRowGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ComboRow build()
+  ComboRow build() nothrow
   {
     return new ComboRow(cast(void*)createGObject(ComboRow._getGType), No.Take);
   }

@@ -89,26 +89,26 @@ class Clock : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_clock_get_type != &gidSymbolNotFound ? gst_clock_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Clock self()
+  override Clock self() nothrow
   {
     return this;
   }
@@ -117,43 +117,43 @@ class Clock : gst.object.ObjectWrap
       Get builder for [gst.clock.Clock]
       Returns: New builder object
   */
-  static ClockGidBuilder builder()
+  static ClockGidBuilder builder() nothrow
   {
     return new ClockGidBuilder;
   }
 
   /** */
-  @property ulong timeout()
+  @property ulong timeout() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("timeout");
   }
 
   /** */
-  @property void timeout(ulong propval)
+  @property void timeout(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("timeout", propval);
   }
 
   /** */
-  @property int windowSize()
+  @property int windowSize() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("window-size");
   }
 
   /** */
-  @property void windowSize(int propval)
+  @property void windowSize(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("window-size", propval);
   }
 
   /** */
-  @property int windowThreshold()
+  @property int windowThreshold() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("window-threshold");
   }
 
   /** */
-  @property void windowThreshold(int propval)
+  @property void windowThreshold(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("window-threshold", propval);
   }
@@ -167,7 +167,7 @@ class Clock : gst.object.ObjectWrap
         id2 = A #GstClockID to compare with
       Returns: negative value if `a < b`; zero if `a = b`; positive value if `a > b`
   */
-  static int idCompareFunc(const(void)* id1 = null, const(void)* id2 = null)
+  static int idCompareFunc(const(void)* id1 = null, const(void)* id2 = null) nothrow
   {
     int _retval;
     _retval = gst_clock_id_compare_func(id1, id2);
@@ -182,7 +182,7 @@ class Clock : gst.object.ObjectWrap
       Returns: a #GstClock or null when the
             underlying clock has been freed.
   */
-  static gst.clock.Clock idGetClock(gst.types.ClockID id)
+  static gst.clock.Clock idGetClock(gst.types.ClockID id) nothrow
   {
     GstClock* _cretval;
     _cretval = gst_clock_id_get_clock(id);
@@ -197,7 +197,7 @@ class Clock : gst.object.ObjectWrap
         id = The #GstClockID to query
       Returns: the time of the given clock id.
   */
-  static gst.types.ClockTime idGetTime(gst.types.ClockID id)
+  static gst.types.ClockTime idGetTime(gst.types.ClockID id) nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_clock_id_get_time(id);
@@ -211,7 +211,7 @@ class Clock : gst.object.ObjectWrap
         id = The #GstClockID to ref
       Returns: The same #GstClockID with increased refcount.
   */
-  static gst.types.ClockID idRef(gst.types.ClockID id)
+  static gst.types.ClockID idRef(gst.types.ClockID id) nothrow
   {
     gst.types.ClockID _retval;
     _retval = gst_clock_id_ref(id);
@@ -225,7 +225,7 @@ class Clock : gst.object.ObjectWrap
       Params:
         id = The #GstClockID to unref
   */
-  static void idUnref(gst.types.ClockID id)
+  static void idUnref(gst.types.ClockID id) nothrow
   {
     gst_clock_id_unref(id);
   }
@@ -239,7 +239,7 @@ class Clock : gst.object.ObjectWrap
       Params:
         id = The id to unschedule
   */
-  static void idUnschedule(gst.types.ClockID id)
+  static void idUnschedule(gst.types.ClockID id) nothrow
   {
     gst_clock_id_unschedule(id);
   }
@@ -255,7 +255,7 @@ class Clock : gst.object.ObjectWrap
         clock = a #GstClock to compare against
       Returns: whether the clock id uses the same underlying #GstClock clock.
   */
-  static bool idUsesClock(gst.types.ClockID id, gst.clock.Clock clock)
+  static bool idUsesClock(gst.types.ClockID id, gst.clock.Clock clock) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_clock_id_uses_clock(id, clock ? cast(GstClock*)clock._cPtr(No.Dup) : null);
@@ -286,7 +286,7 @@ class Clock : gst.object.ObjectWrap
         id was scheduled in time. #GST_CLOCK_UNSCHEDULED if id was
         unscheduled with [gst.clock.Clock.idUnschedule].
   */
-  static gst.types.ClockReturn idWait(gst.types.ClockID id, out gst.types.ClockTimeDiff jitter)
+  static gst.types.ClockReturn idWait(gst.types.ClockID id, out gst.types.ClockTimeDiff jitter) nothrow
   {
     GstClockReturn _cretval;
     _cretval = gst_clock_id_wait(id, cast(GstClockTimeDiff*)&jitter);
@@ -309,14 +309,21 @@ class Clock : gst.object.ObjectWrap
         func = The callback function
       Returns: the result of the non blocking wait.
   */
-  static gst.types.ClockReturn idWaitAsync(gst.types.ClockID id, gst.types.ClockCallback func)
+  static gst.types.ClockReturn idWaitAsync(gst.types.ClockID id, gst.types.ClockCallback func) nothrow
   {
-    extern(C) gboolean _funcCallback(GstClock* clock, GstClockTime time, GstClockID id, void* userData)
+    extern(C) gboolean _funcCallback(GstClock* clock, GstClockTime time, GstClockID id, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gst.types.ClockCallback*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.clock.Clock)(cast(void*)clock, No.Take), time, id);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.clock.Clock)(cast(void*)clock, No.Take), time, id);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.ClockCallback");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -349,7 +356,7 @@ class Clock : gst.object.ObjectWrap
       Returns: true if enough observations were added to run the
         regression algorithm.
   */
-  bool addObservation(gst.types.ClockTime slave, gst.types.ClockTime master, out double rSquared)
+  bool addObservation(gst.types.ClockTime slave, gst.types.ClockTime master, out double rSquared) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_clock_add_observation(cast(GstClock*)this._cPtr, slave, master, cast(double*)&rSquared);
@@ -375,7 +382,7 @@ class Clock : gst.object.ObjectWrap
       Returns: true if enough observations were added to run the
         regression algorithm.
   */
-  bool addObservationUnapplied(gst.types.ClockTime slave, gst.types.ClockTime master, out double rSquared, out gst.types.ClockTime internal, out gst.types.ClockTime external, out gst.types.ClockTime rateNum, out gst.types.ClockTime rateDenom)
+  bool addObservationUnapplied(gst.types.ClockTime slave, gst.types.ClockTime master, out double rSquared, out gst.types.ClockTime internal, out gst.types.ClockTime external, out gst.types.ClockTime rateNum, out gst.types.ClockTime rateDenom) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_clock_add_observation_unapplied(cast(GstClock*)this._cPtr, slave, master, cast(double*)&rSquared, cast(GstClockTime*)&internal, cast(GstClockTime*)&external, cast(GstClockTime*)&rateNum, cast(GstClockTime*)&rateDenom);
@@ -394,7 +401,7 @@ class Clock : gst.object.ObjectWrap
         internal = a clock time
       Returns: the converted time of the clock.
   */
-  gst.types.ClockTime adjustUnlocked(gst.types.ClockTime internal)
+  gst.types.ClockTime adjustUnlocked(gst.types.ClockTime internal) nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_clock_adjust_unlocked(cast(GstClock*)this._cPtr, internal);
@@ -419,7 +426,7 @@ class Clock : gst.object.ObjectWrap
         cdenom = the denominator of the rate of the clock
       Returns: the converted time of the clock.
   */
-  gst.types.ClockTime adjustWithCalibration(gst.types.ClockTime internalTarget, gst.types.ClockTime cinternal, gst.types.ClockTime cexternal, gst.types.ClockTime cnum, gst.types.ClockTime cdenom)
+  gst.types.ClockTime adjustWithCalibration(gst.types.ClockTime internalTarget, gst.types.ClockTime cinternal, gst.types.ClockTime cexternal, gst.types.ClockTime cnum, gst.types.ClockTime cdenom) nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_clock_adjust_with_calibration(cast(GstClock*)this._cPtr, internalTarget, cinternal, cexternal, cnum, cdenom);
@@ -439,7 +446,7 @@ class Clock : gst.object.ObjectWrap
         rateNum = a location to store the rate numerator
         rateDenom = a location to store the rate denominator
   */
-  void getCalibration(out gst.types.ClockTime internal, out gst.types.ClockTime external, out gst.types.ClockTime rateNum, out gst.types.ClockTime rateDenom)
+  void getCalibration(out gst.types.ClockTime internal, out gst.types.ClockTime external, out gst.types.ClockTime rateNum, out gst.types.ClockTime rateDenom) nothrow
   {
     gst_clock_get_calibration(cast(GstClock*)this._cPtr, cast(GstClockTime*)&internal, cast(GstClockTime*)&external, cast(GstClockTime*)&rateNum, cast(GstClockTime*)&rateDenom);
   }
@@ -450,7 +457,7 @@ class Clock : gst.object.ObjectWrap
       Returns: the internal time of the clock. Or [gst.types.CLOCK_TIME_NONE] when
         given invalid input.
   */
-  gst.types.ClockTime getInternalTime()
+  gst.types.ClockTime getInternalTime() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_clock_get_internal_time(cast(GstClock*)this._cPtr);
@@ -463,7 +470,7 @@ class Clock : gst.object.ObjectWrap
       Returns: a master #GstClock or null
             when this clock is not slaved to a master clock.
   */
-  gst.clock.Clock getMaster()
+  gst.clock.Clock getMaster() nothrow
   {
     GstClock* _cretval;
     _cretval = gst_clock_get_master(cast(GstClock*)this._cPtr);
@@ -476,7 +483,7 @@ class Clock : gst.object.ObjectWrap
       of the values returned by [gst.clock.Clock.getTime].
       Returns: the resolution of the clock in units of #GstClockTime.
   */
-  gst.types.ClockTime getResolution()
+  gst.types.ClockTime getResolution() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_clock_get_resolution(cast(GstClock*)this._cPtr);
@@ -490,7 +497,7 @@ class Clock : gst.object.ObjectWrap
       Returns: the time of the clock. Or [gst.types.CLOCK_TIME_NONE] when
         given invalid input.
   */
-  gst.types.ClockTime getTime()
+  gst.types.ClockTime getTime() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_clock_get_time(cast(GstClock*)this._cPtr);
@@ -501,7 +508,7 @@ class Clock : gst.object.ObjectWrap
       Gets the amount of time that master and slave clocks are sampled.
       Returns: the interval between samples.
   */
-  gst.types.ClockTime getTimeout()
+  gst.types.ClockTime getTimeout() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_clock_get_timeout(cast(GstClock*)this._cPtr);
@@ -513,7 +520,7 @@ class Clock : gst.object.ObjectWrap
       [gst.types.ClockFlags.NeedsStartupSync] is set.
       Returns: true if the clock is currently synced
   */
-  bool isSynced()
+  bool isSynced() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_clock_is_synced(cast(GstClock*)this._cPtr);
@@ -531,7 +538,7 @@ class Clock : gst.object.ObjectWrap
       Returns: a #GstClockID that can be used to request the
             time notification.
   */
-  gst.types.ClockID newPeriodicId(gst.types.ClockTime startTime, gst.types.ClockTime interval)
+  gst.types.ClockID newPeriodicId(gst.types.ClockTime startTime, gst.types.ClockTime interval) nothrow
   {
     gst.types.ClockID _retval;
     _retval = gst_clock_new_periodic_id(cast(GstClock*)this._cPtr, startTime, interval);
@@ -547,7 +554,7 @@ class Clock : gst.object.ObjectWrap
       Returns: a #GstClockID that can be used to request the
             time notification.
   */
-  gst.types.ClockID newSingleShotId(gst.types.ClockTime time)
+  gst.types.ClockID newSingleShotId(gst.types.ClockTime time) nothrow
   {
     gst.types.ClockID _retval;
     _retval = gst_clock_new_single_shot_id(cast(GstClock*)this._cPtr, time);
@@ -565,7 +572,7 @@ class Clock : gst.object.ObjectWrap
       Returns: true if the GstClockID could be reinitialized to the provided
         time, else false.
   */
-  bool periodicIdReinit(gst.types.ClockID id, gst.types.ClockTime startTime, gst.types.ClockTime interval)
+  bool periodicIdReinit(gst.types.ClockID id, gst.types.ClockTime startTime, gst.types.ClockTime interval) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_clock_periodic_id_reinit(cast(GstClock*)this._cPtr, id, startTime, interval);
@@ -602,7 +609,7 @@ class Clock : gst.object.ObjectWrap
                      internal time
         rateDenom = the denominator of the rate of the clock
   */
-  void setCalibration(gst.types.ClockTime internal, gst.types.ClockTime external, gst.types.ClockTime rateNum, gst.types.ClockTime rateDenom)
+  void setCalibration(gst.types.ClockTime internal, gst.types.ClockTime external, gst.types.ClockTime rateNum, gst.types.ClockTime rateDenom) nothrow
   {
     gst_clock_set_calibration(cast(GstClock*)this._cPtr, internal, external, rateNum, rateDenom);
   }
@@ -625,7 +632,7 @@ class Clock : gst.object.ObjectWrap
         Trying to set a master on a clock without the
         #GST_CLOCK_FLAG_CAN_SET_MASTER flag will make this function return false.
   */
-  bool setMaster(gst.clock.Clock master = null)
+  bool setMaster(gst.clock.Clock master = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_clock_set_master(cast(GstClock*)this._cPtr, master ? cast(GstClock*)master._cPtr(No.Dup) : null);
@@ -643,7 +650,7 @@ class Clock : gst.object.ObjectWrap
         resolution = The resolution to set
       Returns: the new resolution of the clock.
   */
-  gst.types.ClockTime setResolution(gst.types.ClockTime resolution)
+  gst.types.ClockTime setResolution(gst.types.ClockTime resolution) nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_clock_set_resolution(cast(GstClock*)this._cPtr, resolution);
@@ -660,7 +667,7 @@ class Clock : gst.object.ObjectWrap
       Params:
         synced = if the clock is synced
   */
-  void setSynced(bool synced)
+  void setSynced(bool synced) nothrow
   {
     gst_clock_set_synced(cast(GstClock*)this._cPtr, synced);
   }
@@ -672,7 +679,7 @@ class Clock : gst.object.ObjectWrap
       Params:
         timeout = a timeout
   */
-  void setTimeout(gst.types.ClockTime timeout)
+  void setTimeout(gst.types.ClockTime timeout) nothrow
   {
     gst_clock_set_timeout(cast(GstClock*)this._cPtr, timeout);
   }
@@ -687,7 +694,7 @@ class Clock : gst.object.ObjectWrap
       Returns: true if the GstClockID could be reinitialized to the provided
         time, else false.
   */
-  bool singleShotIdReinit(gst.types.ClockID id, gst.types.ClockTime time)
+  bool singleShotIdReinit(gst.types.ClockID id, gst.types.ClockTime time) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_clock_single_shot_id_reinit(cast(GstClock*)this._cPtr, id, time);
@@ -706,7 +713,7 @@ class Clock : gst.object.ObjectWrap
         external = an external clock time
       Returns: the internal time of the clock corresponding to external.
   */
-  gst.types.ClockTime unadjustUnlocked(gst.types.ClockTime external)
+  gst.types.ClockTime unadjustUnlocked(gst.types.ClockTime external) nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_clock_unadjust_unlocked(cast(GstClock*)this._cPtr, external);
@@ -730,7 +737,7 @@ class Clock : gst.object.ObjectWrap
         cdenom = the denominator of the rate of the clock
       Returns: the converted time of the clock.
   */
-  gst.types.ClockTime unadjustWithCalibration(gst.types.ClockTime externalTarget, gst.types.ClockTime cinternal, gst.types.ClockTime cexternal, gst.types.ClockTime cnum, gst.types.ClockTime cdenom)
+  gst.types.ClockTime unadjustWithCalibration(gst.types.ClockTime externalTarget, gst.types.ClockTime cinternal, gst.types.ClockTime cexternal, gst.types.ClockTime cnum, gst.types.ClockTime cdenom) nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_clock_unadjust_with_calibration(cast(GstClock*)this._cPtr, externalTarget, cinternal, cexternal, cnum, cdenom);
@@ -751,7 +758,7 @@ class Clock : gst.object.ObjectWrap
         timeout = timeout for waiting or [gst.types.CLOCK_TIME_NONE]
       Returns: true if waiting was successful, or false on timeout
   */
-  bool waitForSync(gst.types.ClockTime timeout)
+  bool waitForSync(gst.types.ClockTime timeout) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_clock_wait_for_sync(cast(GstClock*)this._cPtr, timeout);
@@ -780,14 +787,14 @@ class Clock : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSynced(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSynced(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gst.clock.Clock)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -799,7 +806,14 @@ class Clock : gst.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.clock.Clock.synced");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -812,19 +826,19 @@ class ClockGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T timeout(ulong propval)
+  T timeout(ulong propval) nothrow
   {
     return setProperty("timeout", propval);
   }
 
   /** */
-  T windowSize(int propval)
+  T windowSize(int propval) nothrow
   {
     return setProperty("window-size", propval);
   }
 
   /** */
-  T windowThreshold(int propval)
+  T windowThreshold(int propval) nothrow
   {
     return setProperty("window-threshold", propval);
   }
@@ -837,7 +851,7 @@ final class ClockGidBuilder : ClockGidBuilderImpl!ClockGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Clock build()
+  Clock build() nothrow
   {
     return new Clock(cast(void*)createGObject(Clock._getGType), No.Take);
   }

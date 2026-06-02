@@ -33,26 +33,26 @@ class ShortcutsSection : gtk.box.Box
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_shortcuts_section_get_type != &gidSymbolNotFound ? gtk_shortcuts_section_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ShortcutsSection self()
+  override ShortcutsSection self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class ShortcutsSection : gtk.box.Box
       Get builder for [gtk.shortcuts_section.ShortcutsSection]
       Returns: New builder object
   */
-  static ShortcutsSectionGidBuilder builder()
+  static ShortcutsSectionGidBuilder builder() nothrow
   {
     return new ShortcutsSectionGidBuilder;
   }
@@ -73,7 +73,7 @@ class ShortcutsSection : gtk.box.Box
         across pages and columns. The default value of 15 should work in
         most cases.
   */
-  @property uint maxHeight()
+  @property uint maxHeight() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("max-height");
   }
@@ -86,7 +86,7 @@ class ShortcutsSection : gtk.box.Box
           across pages and columns. The default value of 15 should work in
           most cases.
   */
-  @property void maxHeight(uint propval)
+  @property void maxHeight(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("max-height", propval);
   }
@@ -98,7 +98,7 @@ class ShortcutsSection : gtk.box.Box
         property to this string will make this section shown in the
         GtkShortcutsWindow.
   */
-  @property string sectionName()
+  @property string sectionName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("section-name");
   }
@@ -111,7 +111,7 @@ class ShortcutsSection : gtk.box.Box
           property to this string will make this section shown in the
           GtkShortcutsWindow.
   */
-  @property void sectionName(string propval)
+  @property void sectionName(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("section-name", propval);
   }
@@ -122,7 +122,7 @@ class ShortcutsSection : gtk.box.Box
         for this section. If there is only one section, you don't need to
         set a title, since the section selector will not be shown in this case.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("title");
   }
@@ -134,7 +134,7 @@ class ShortcutsSection : gtk.box.Box
           for this section. If there is only one section, you don't need to
           set a title, since the section selector will not be shown in this case.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("title", propval);
   }
@@ -147,7 +147,7 @@ class ShortcutsSection : gtk.box.Box
         Applications are expected to use the #GtkShortcutsWindow:view-name
         property for this purpose.
   */
-  @property string viewName()
+  @property string viewName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("view-name");
   }
@@ -161,7 +161,7 @@ class ShortcutsSection : gtk.box.Box
           Applications are expected to use the #GtkShortcutsWindow:view-name
           property for this purpose.
   */
-  @property void viewName(string propval)
+  @property void viewName(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("view-name", propval);
   }
@@ -184,18 +184,19 @@ class ShortcutsSection : gtk.box.Box
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChangeCurrentPage(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChangeCurrentPage(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.shortcuts_section.ShortcutsSection)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -203,7 +204,14 @@ class ShortcutsSection : gtk.box.Box
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.shortcuts_section.ShortcutsSection.changeCurrentPage");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -227,7 +235,7 @@ class ShortcutsSectionGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
           most cases.
       Returns: Builder instance for fluent chaining
   */
-  T maxHeight(uint propval)
+  T maxHeight(uint propval) nothrow
   {
     return setProperty("max-height", propval);
   }
@@ -241,7 +249,7 @@ class ShortcutsSectionGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
           GtkShortcutsWindow.
       Returns: Builder instance for fluent chaining
   */
-  T sectionName(string propval)
+  T sectionName(string propval) nothrow
   {
     return setProperty("section-name", propval);
   }
@@ -254,7 +262,7 @@ class ShortcutsSectionGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
           set a title, since the section selector will not be shown in this case.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -269,7 +277,7 @@ class ShortcutsSectionGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
           property for this purpose.
       Returns: Builder instance for fluent chaining
   */
-  T viewName(string propval)
+  T viewName(string propval) nothrow
   {
     return setProperty("view-name", propval);
   }
@@ -282,7 +290,7 @@ final class ShortcutsSectionGidBuilder : ShortcutsSectionGidBuilderImpl!Shortcut
       Create object from builder.
       Returns: New object
   */
-  ShortcutsSection build()
+  ShortcutsSection build() nothrow
   {
     return new ShortcutsSection(cast(void*)createGObject(ShortcutsSection._getGType), No.Take);
   }

@@ -57,26 +57,26 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_signal_list_item_factory_get_type != &gidSymbolNotFound ? gtk_signal_list_item_factory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SignalListItemFactory self()
+  override SignalListItemFactory self() nothrow
   {
     return this;
   }
@@ -85,7 +85,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
       Get builder for [gtk.signal_list_item_factory.SignalListItemFactory]
       Returns: New builder object
   */
-  static SignalListItemFactoryGidBuilder builder()
+  static SignalListItemFactoryGidBuilder builder() nothrow
   {
     return new SignalListItemFactoryGidBuilder;
   }
@@ -96,7 +96,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
       You need to connect signal handlers before you use it.
       Returns: a new [gtk.signal_list_item_factory.SignalListItemFactory]
   */
-  this()
+  this() nothrow
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_signal_list_item_factory_new();
@@ -129,14 +129,14 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectBind(T)(T callback, Flag!"After" after = No.After)
+  gulong connectBind(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.signal_list_item_factory.SignalListItemFactory)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -148,7 +148,14 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.signal_list_item_factory.SignalListItemFactory.bind");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -177,14 +184,14 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSetup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSetup(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.signal_list_item_factory.SignalListItemFactory)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -196,7 +203,14 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.signal_list_item_factory.SignalListItemFactory.setup");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -225,14 +239,14 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTeardown(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTeardown(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.signal_list_item_factory.SignalListItemFactory)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -244,7 +258,14 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.signal_list_item_factory.SignalListItemFactory.teardown");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -273,14 +294,14 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUnbind(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUnbind(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.signal_list_item_factory.SignalListItemFactory)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -292,7 +313,14 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.signal_list_item_factory.SignalListItemFactory.unbind");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -312,7 +340,7 @@ final class SignalListItemFactoryGidBuilder : SignalListItemFactoryGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  SignalListItemFactory build()
+  SignalListItemFactory build() nothrow
   {
     return new SignalListItemFactory(cast(void*)createGObject(SignalListItemFactory._getGType), Yes.Take);
   }

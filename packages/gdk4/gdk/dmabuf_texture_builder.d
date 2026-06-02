@@ -77,26 +77,26 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_dmabuf_texture_builder_get_type != &gidSymbolNotFound ? gdk_dmabuf_texture_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DmabufTextureBuilder self()
+  override DmabufTextureBuilder self() nothrow
   {
     return this;
   }
@@ -105,7 +105,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Get builder for [gdk.dmabuf_texture_builder.DmabufTextureBuilder]
       Returns: New builder object
   */
-  static DmabufTextureBuilderGidBuilder builder()
+  static DmabufTextureBuilderGidBuilder builder() nothrow
   {
     return new DmabufTextureBuilderGidBuilder;
   }
@@ -114,7 +114,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Get `display` property.
       Returns: The display that this texture will be used on.
   */
-  @property gdk.display.Display display()
+  @property gdk.display.Display display() nothrow
   {
     return getDisplay();
   }
@@ -124,7 +124,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Params:
         propval = The display that this texture will be used on.
   */
-  @property void display(gdk.display.Display propval)
+  @property void display(gdk.display.Display propval) nothrow
   {
     setDisplay(propval);
   }
@@ -133,7 +133,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Get `fourcc` property.
       Returns: The format of the texture, as a fourcc value.
   */
-  @property uint fourcc()
+  @property uint fourcc() nothrow
   {
     return getFourcc();
   }
@@ -143,7 +143,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Params:
         propval = The format of the texture, as a fourcc value.
   */
-  @property void fourcc(uint propval)
+  @property void fourcc(uint propval) nothrow
   {
     setFourcc(propval);
   }
@@ -152,7 +152,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Get `height` property.
       Returns: The height of the texture.
   */
-  @property uint height()
+  @property uint height() nothrow
   {
     return getHeight();
   }
@@ -162,7 +162,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Params:
         propval = The height of the texture.
   */
-  @property void height(uint propval)
+  @property void height(uint propval) nothrow
   {
     setHeight(propval);
   }
@@ -171,7 +171,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Get `modifier` property.
       Returns: The modifier.
   */
-  @property ulong modifier()
+  @property ulong modifier() nothrow
   {
     return getModifier();
   }
@@ -181,7 +181,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Params:
         propval = The modifier.
   */
-  @property void modifier(ulong propval)
+  @property void modifier(ulong propval) nothrow
   {
     setModifier(propval);
   }
@@ -193,7 +193,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
         Note that you can set properties for other planes,
         but they will be ignored when constructing the texture.
   */
-  @property uint nPlanes()
+  @property uint nPlanes() nothrow
   {
     return getNPlanes();
   }
@@ -206,7 +206,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
           Note that you can set properties for other planes,
           but they will be ignored when constructing the texture.
   */
-  @property void nPlanes(uint propval)
+  @property void nPlanes(uint propval) nothrow
   {
     setNPlanes(propval);
   }
@@ -217,7 +217,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
         
         Only relevant if the format has alpha.
   */
-  @property bool premultiplied()
+  @property bool premultiplied() nothrow
   {
     return getPremultiplied();
   }
@@ -229,7 +229,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
           
           Only relevant if the format has alpha.
   */
-  @property void premultiplied(bool propval)
+  @property void premultiplied(bool propval) nothrow
   {
     setPremultiplied(propval);
   }
@@ -238,7 +238,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Get `updateRegion` property.
       Returns: The update region for [gdk.gltexture_builder.GLTextureBuilder.updateTexture].
   */
-  @property cairo.region.Region updateRegion()
+  @property cairo.region.Region updateRegion() nothrow
   {
     return getUpdateRegion();
   }
@@ -248,7 +248,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Params:
         propval = The update region for [gdk.gltexture_builder.GLTextureBuilder.updateTexture].
   */
-  @property void updateRegion(cairo.region.Region propval)
+  @property void updateRegion(cairo.region.Region propval) nothrow
   {
     setUpdateRegion(propval);
   }
@@ -257,7 +257,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Get `updateTexture` property.
       Returns: The texture [gdk.dmabuf_texture_builder.DmabufTextureBuilder.updateRegion] is an update for.
   */
-  @property gdk.texture.Texture updateTexture()
+  @property gdk.texture.Texture updateTexture() nothrow
   {
     return getUpdateTexture();
   }
@@ -267,7 +267,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Params:
         propval = The texture [gdk.dmabuf_texture_builder.DmabufTextureBuilder.updateRegion] is an update for.
   */
-  @property void updateTexture(gdk.texture.Texture propval)
+  @property void updateTexture(gdk.texture.Texture propval) nothrow
   {
     setUpdateTexture(propval);
   }
@@ -276,7 +276,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Get `width` property.
       Returns: The width of the texture.
   */
-  @property uint width()
+  @property uint width() nothrow
   {
     return getWidth();
   }
@@ -286,7 +286,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Params:
         propval = The width of the texture.
   */
-  @property void width(uint propval)
+  @property void width(uint propval) nothrow
   {
     setWidth(propval);
   }
@@ -295,7 +295,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Creates a new texture builder.
       Returns: the new `GdkTextureBuilder`
   */
-  this()
+  this() nothrow
   {
     GdkDmabufTextureBuilder* _cretval;
     _cretval = gdk_dmabuf_texture_builder_new();
@@ -332,12 +332,19 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   */
   gdk.texture.Texture build(glib.types.DestroyNotify destroy = null, void* data = null)
   {
-    extern(C) void _destroyCallback(void* data)
+    extern(C) void _destroyCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
     GdkTexture* _cretval;
@@ -354,7 +361,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       associated with.
       Returns: the display
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gdk_dmabuf_texture_builder_get_display(cast(GdkDmabufTextureBuilder*)this._cPtr);
@@ -369,7 +376,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
         plane = the plane to get the fd for
       Returns: the file descriptor
   */
-  int getFd(uint plane)
+  int getFd(uint plane) nothrow
   {
     int _retval;
     _retval = gdk_dmabuf_texture_builder_get_fd(cast(GdkDmabufTextureBuilder*)this._cPtr, plane);
@@ -383,7 +390,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       The format is specified as a fourcc code.
       Returns: The format
   */
-  uint getFourcc()
+  uint getFourcc() nothrow
   {
     uint _retval;
     _retval = gdk_dmabuf_texture_builder_get_fourcc(cast(GdkDmabufTextureBuilder*)this._cPtr);
@@ -395,7 +402,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       0 if the height wasn't set.
       Returns: The height
   */
-  uint getHeight()
+  uint getHeight() nothrow
   {
     uint _retval;
     _retval = gdk_dmabuf_texture_builder_get_height(cast(GdkDmabufTextureBuilder*)this._cPtr);
@@ -406,7 +413,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Gets the modifier value.
       Returns: the modifier
   */
-  ulong getModifier()
+  ulong getModifier() nothrow
   {
     ulong _retval;
     _retval = gdk_dmabuf_texture_builder_get_modifier(cast(GdkDmabufTextureBuilder*)this._cPtr);
@@ -417,7 +424,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Gets the number of planes.
       Returns: The number of planes
   */
-  uint getNPlanes()
+  uint getNPlanes() nothrow
   {
     uint _retval;
     _retval = gdk_dmabuf_texture_builder_get_n_planes(cast(GdkDmabufTextureBuilder*)this._cPtr);
@@ -431,7 +438,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
         plane = the plane to get the offset for
       Returns: the offset
   */
-  uint getOffset(uint plane)
+  uint getOffset(uint plane) nothrow
   {
     uint _retval;
     _retval = gdk_dmabuf_texture_builder_get_offset(cast(GdkDmabufTextureBuilder*)this._cPtr, plane);
@@ -442,7 +449,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Whether the data is premultiplied.
       Returns: whether the data is premultiplied
   */
-  bool getPremultiplied()
+  bool getPremultiplied() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_dmabuf_texture_builder_get_premultiplied(cast(GdkDmabufTextureBuilder*)this._cPtr);
@@ -456,7 +463,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
         plane = the plane to get the stride for
       Returns: the stride
   */
-  uint getStride(uint plane)
+  uint getStride(uint plane) nothrow
   {
     uint _retval;
     _retval = gdk_dmabuf_texture_builder_get_stride(cast(GdkDmabufTextureBuilder*)this._cPtr, plane);
@@ -468,7 +475,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       null if none was set.
       Returns: The region
   */
-  cairo.region.Region getUpdateRegion()
+  cairo.region.Region getUpdateRegion() nothrow
   {
     cairo_region_t* _cretval;
     _cretval = gdk_dmabuf_texture_builder_get_update_region(cast(GdkDmabufTextureBuilder*)this._cPtr);
@@ -481,7 +488,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       null if none was set.
       Returns: The texture
   */
-  gdk.texture.Texture getUpdateTexture()
+  gdk.texture.Texture getUpdateTexture() nothrow
   {
     GdkTexture* _cretval;
     _cretval = gdk_dmabuf_texture_builder_get_update_texture(cast(GdkDmabufTextureBuilder*)this._cPtr);
@@ -494,7 +501,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       0 if the width wasn't set.
       Returns: The width
   */
-  uint getWidth()
+  uint getWidth() nothrow
   {
     uint _retval;
     _retval = gdk_dmabuf_texture_builder_get_width(cast(GdkDmabufTextureBuilder*)this._cPtr);
@@ -511,7 +518,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Params:
         display = the display
   */
-  void setDisplay(gdk.display.Display display)
+  void setDisplay(gdk.display.Display display) nothrow
   {
     gdk_dmabuf_texture_builder_set_display(cast(GdkDmabufTextureBuilder*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
   }
@@ -523,7 +530,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
         plane = the plane to set the fd for
         fd = the file descriptor
   */
-  void setFd(uint plane, int fd)
+  void setFd(uint plane, int fd) nothrow
   {
     gdk_dmabuf_texture_builder_set_fd(cast(GdkDmabufTextureBuilder*)this._cPtr, plane, fd);
   }
@@ -538,7 +545,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Params:
         fourcc = the texture's format or 0 to unset
   */
-  void setFourcc(uint fourcc)
+  void setFourcc(uint fourcc) nothrow
   {
     gdk_dmabuf_texture_builder_set_fourcc(cast(GdkDmabufTextureBuilder*)this._cPtr, fourcc);
   }
@@ -551,7 +558,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Params:
         height = the texture's height or 0 to unset
   */
-  void setHeight(uint height)
+  void setHeight(uint height) nothrow
   {
     gdk_dmabuf_texture_builder_set_height(cast(GdkDmabufTextureBuilder*)this._cPtr, height);
   }
@@ -562,7 +569,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Params:
         modifier = the modifier value
   */
-  void setModifier(ulong modifier)
+  void setModifier(ulong modifier) nothrow
   {
     gdk_dmabuf_texture_builder_set_modifier(cast(GdkDmabufTextureBuilder*)this._cPtr, modifier);
   }
@@ -573,7 +580,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Params:
         nPlanes = the number of planes
   */
-  void setNPlanes(uint nPlanes)
+  void setNPlanes(uint nPlanes) nothrow
   {
     gdk_dmabuf_texture_builder_set_n_planes(cast(GdkDmabufTextureBuilder*)this._cPtr, nPlanes);
   }
@@ -585,7 +592,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
         plane = the plane to set the offset for
         offset = the offset value
   */
-  void setOffset(uint plane, uint offset)
+  void setOffset(uint plane, uint offset) nothrow
   {
     gdk_dmabuf_texture_builder_set_offset(cast(GdkDmabufTextureBuilder*)this._cPtr, plane, offset);
   }
@@ -599,7 +606,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Params:
         premultiplied = whether the data is premultiplied
   */
-  void setPremultiplied(bool premultiplied)
+  void setPremultiplied(bool premultiplied) nothrow
   {
     gdk_dmabuf_texture_builder_set_premultiplied(cast(GdkDmabufTextureBuilder*)this._cPtr, premultiplied);
   }
@@ -613,7 +620,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
         plane = the plane to set the stride for
         stride = the stride value
   */
-  void setStride(uint plane, uint stride)
+  void setStride(uint plane, uint stride) nothrow
   {
     gdk_dmabuf_texture_builder_set_stride(cast(GdkDmabufTextureBuilder*)this._cPtr, plane, stride);
   }
@@ -633,7 +640,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Params:
         region = the region to update
   */
-  void setUpdateRegion(cairo.region.Region region = null)
+  void setUpdateRegion(cairo.region.Region region = null) nothrow
   {
     gdk_dmabuf_texture_builder_set_update_region(cast(GdkDmabufTextureBuilder*)this._cPtr, region ? cast(cairo_region_t*)region._cPtr(No.Dup) : null);
   }
@@ -645,7 +652,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Params:
         texture = the texture to update
   */
-  void setUpdateTexture(gdk.texture.Texture texture = null)
+  void setUpdateTexture(gdk.texture.Texture texture = null) nothrow
   {
     gdk_dmabuf_texture_builder_set_update_texture(cast(GdkDmabufTextureBuilder*)this._cPtr, texture ? cast(GdkTexture*)texture._cPtr(No.Dup) : null);
   }
@@ -658,7 +665,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
       Params:
         width = The texture's width or 0 to unset
   */
-  void setWidth(uint width)
+  void setWidth(uint width) nothrow
   {
     gdk_dmabuf_texture_builder_set_width(cast(GdkDmabufTextureBuilder*)this._cPtr, width);
   }
@@ -674,7 +681,7 @@ class DmabufTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilde
         propval = The display that this texture will be used on.
       Returns: Builder instance for fluent chaining
   */
-  T display(gdk.display.Display propval)
+  T display(gdk.display.Display propval) nothrow
   {
     return setProperty("display", propval);
   }
@@ -685,7 +692,7 @@ class DmabufTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilde
         propval = The format of the texture, as a fourcc value.
       Returns: Builder instance for fluent chaining
   */
-  T fourcc(uint propval)
+  T fourcc(uint propval) nothrow
   {
     return setProperty("fourcc", propval);
   }
@@ -696,7 +703,7 @@ class DmabufTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilde
         propval = The height of the texture.
       Returns: Builder instance for fluent chaining
   */
-  T height(uint propval)
+  T height(uint propval) nothrow
   {
     return setProperty("height", propval);
   }
@@ -707,7 +714,7 @@ class DmabufTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilde
         propval = The modifier.
       Returns: Builder instance for fluent chaining
   */
-  T modifier(ulong propval)
+  T modifier(ulong propval) nothrow
   {
     return setProperty("modifier", propval);
   }
@@ -721,7 +728,7 @@ class DmabufTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilde
           but they will be ignored when constructing the texture.
       Returns: Builder instance for fluent chaining
   */
-  T nPlanes(uint propval)
+  T nPlanes(uint propval) nothrow
   {
     return setProperty("n-planes", propval);
   }
@@ -734,7 +741,7 @@ class DmabufTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilde
           Only relevant if the format has alpha.
       Returns: Builder instance for fluent chaining
   */
-  T premultiplied(bool propval)
+  T premultiplied(bool propval) nothrow
   {
     return setProperty("premultiplied", propval);
   }
@@ -745,7 +752,7 @@ class DmabufTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilde
         propval = The update region for [gdk.gltexture_builder.GLTextureBuilder.updateTexture].
       Returns: Builder instance for fluent chaining
   */
-  T updateRegion(cairo.region.Region propval)
+  T updateRegion(cairo.region.Region propval) nothrow
   {
     return setProperty("update-region", propval);
   }
@@ -756,7 +763,7 @@ class DmabufTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilde
         propval = The texture [gdk.dmabuf_texture_builder.DmabufTextureBuilder.updateRegion] is an update for.
       Returns: Builder instance for fluent chaining
   */
-  T updateTexture(gdk.texture.Texture propval)
+  T updateTexture(gdk.texture.Texture propval) nothrow
   {
     return setProperty("update-texture", propval);
   }
@@ -767,7 +774,7 @@ class DmabufTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilde
         propval = The width of the texture.
       Returns: Builder instance for fluent chaining
   */
-  T width(uint propval)
+  T width(uint propval) nothrow
   {
     return setProperty("width", propval);
   }
@@ -780,7 +787,7 @@ final class DmabufTextureBuilderGidBuilder : DmabufTextureBuilderGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  DmabufTextureBuilder build()
+  DmabufTextureBuilder build() nothrow
   {
     return new DmabufTextureBuilder(cast(void*)createGObject(DmabufTextureBuilder._getGType), Yes.Take);
   }

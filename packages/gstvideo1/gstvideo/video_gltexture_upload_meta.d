@@ -20,11 +20,8 @@ class VideoGLTextureUploadMeta
   GstVideoGLTextureUploadMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_gltexture_upload_meta.VideoGLTextureUploadMeta");
-
     _cInstance = *cast(GstVideoGLTextureUploadMeta*)ptr;
 
     if (take)
@@ -32,7 +29,7 @@ class VideoGLTextureUploadMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -41,7 +38,7 @@ class VideoGLTextureUploadMeta
       Get `meta` field.
       Returns: parent #GstMeta
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoGLTextureUploadMeta*)this._cPtr).meta, No.Take);
   }
@@ -50,7 +47,7 @@ class VideoGLTextureUploadMeta
       Get `textureOrientation` field.
       Returns: Orientation of the textures
   */
-  @property gstvideo.types.VideoGLTextureOrientation textureOrientation()
+  @property gstvideo.types.VideoGLTextureOrientation textureOrientation() nothrow
   {
     return cast(gstvideo.types.VideoGLTextureOrientation)(cast(GstVideoGLTextureUploadMeta*)this._cPtr).textureOrientation;
   }
@@ -60,7 +57,7 @@ class VideoGLTextureUploadMeta
       Params:
         propval = Orientation of the textures
   */
-  @property void textureOrientation(gstvideo.types.VideoGLTextureOrientation propval)
+  @property void textureOrientation(gstvideo.types.VideoGLTextureOrientation propval) nothrow
   {
     (cast(GstVideoGLTextureUploadMeta*)this._cPtr).textureOrientation = cast(GstVideoGLTextureOrientation)propval;
   }
@@ -69,7 +66,7 @@ class VideoGLTextureUploadMeta
       Get `nTextures` field.
       Returns: Number of textures that are generated
   */
-  @property uint nTextures()
+  @property uint nTextures() nothrow
   {
     return (cast(GstVideoGLTextureUploadMeta*)this._cPtr).nTextures;
   }
@@ -79,7 +76,7 @@ class VideoGLTextureUploadMeta
       Params:
         propval = Number of textures that are generated
   */
-  @property void nTextures(uint propval)
+  @property void nTextures(uint propval) nothrow
   {
     (cast(GstVideoGLTextureUploadMeta*)this._cPtr).nTextures = propval;
   }
@@ -91,7 +88,7 @@ class VideoGLTextureUploadMeta
         textureId = the texture IDs to upload to
       Returns: true if uploading succeeded, false otherwise.
   */
-  bool upload(uint[] textureId)
+  bool upload(uint[] textureId) nothrow
   {
     bool _retval;
     assert(!textureId || textureId.length == 4);
@@ -101,7 +98,7 @@ class VideoGLTextureUploadMeta
   }
 
   /** */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_gl_texture_upload_meta_get_info();

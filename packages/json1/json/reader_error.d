@@ -14,7 +14,7 @@ struct ReaderError
   alias Enum = json.types.ReaderError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = json_reader_error_quark();
@@ -24,12 +24,12 @@ struct ReaderError
 
 class ReadeException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(json.reader_error.ReaderError.quark, cast(int)code, msg);
   }

@@ -26,7 +26,7 @@ template TlsFileDatabaseT()
         root authorities for the purpose of verifying other certificates
         via the [gio.tls_database.TlsDatabase.verifyChain] operation.
   */
-  @property string anchors()
+  @property string anchors() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("anchors");
   }
@@ -39,7 +39,7 @@ template TlsFileDatabaseT()
           root authorities for the purpose of verifying other certificates
           via the [gio.tls_database.TlsDatabase.verifyChain] operation.
   */
-  @property void anchors(string propval)
+  @property void anchors(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("anchors", propval);
   }
@@ -59,7 +59,7 @@ template TlsFileDatabaseGidBuilderT()
           via the [gio.tls_database.TlsDatabase.verifyChain] operation.
       Returns: Builder instance for fluent chaining
   */
-  T anchors(string propval)
+  T anchors(string propval) nothrow
   {
     return setProperty("anchors", propval);
   }

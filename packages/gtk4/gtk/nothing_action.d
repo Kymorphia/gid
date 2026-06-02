@@ -17,26 +17,26 @@ class NothingAction : gtk.shortcut_action.ShortcutAction
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_nothing_action_get_type != &gidSymbolNotFound ? gtk_nothing_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NothingAction self()
+  override NothingAction self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class NothingAction : gtk.shortcut_action.ShortcutAction
       Get builder for [gtk.nothing_action.NothingAction]
       Returns: New builder object
   */
-  static NothingActionGidBuilder builder()
+  static NothingActionGidBuilder builder() nothrow
   {
     return new NothingActionGidBuilder;
   }
@@ -57,7 +57,7 @@ class NothingAction : gtk.shortcut_action.ShortcutAction
       activating it always fails.
       Returns: The nothing action
   */
-  static gtk.nothing_action.NothingAction get()
+  static gtk.nothing_action.NothingAction get() nothrow
   {
     GtkShortcutAction* _cretval;
     _cretval = gtk_nothing_action_get();
@@ -78,7 +78,7 @@ final class NothingActionGidBuilder : NothingActionGidBuilderImpl!NothingActionG
       Create object from builder.
       Returns: New object
   */
-  NothingAction build()
+  NothingAction build() nothrow
   {
     return new NothingAction(cast(void*)createGObject(NothingAction._getGType), No.Take);
   }

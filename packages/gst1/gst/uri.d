@@ -17,32 +17,32 @@ class Uri : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_uri_get_type != &gidSymbolNotFound ? gst_uri_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Uri self()
+  override Uri self() nothrow
   {
     return this;
   }
@@ -65,7 +65,7 @@ class Uri : gobject.boxed.Boxed
         fragment = The fragment name for the new URI.
       Returns: A new #GstUri object.
   */
-  this(string scheme, string userinfo, string host, uint port, string path = null, string query = null, string fragment = null)
+  this(string scheme, string userinfo, string host, uint port, string path = null, string query = null, string fragment = null) nothrow
   {
     GstUri* _cretval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -86,7 +86,7 @@ class Uri : gobject.boxed.Boxed
         relativePath = Relative path to append to the end of the current path.
       Returns: true if the path was appended successfully.
   */
-  bool appendPath(string relativePath = null)
+  bool appendPath(string relativePath = null) nothrow
   {
     bool _retval;
     const(char)* _relativePath = relativePath.toCString(No.Alloc);
@@ -101,7 +101,7 @@ class Uri : gobject.boxed.Boxed
         pathSegment = The path segment string to append to the URI path.
       Returns: true if the path was appended successfully.
   */
-  bool appendPathSegment(string pathSegment = null)
+  bool appendPathSegment(string pathSegment = null) nothrow
   {
     bool _retval;
     const(char)* _pathSegment = pathSegment.toCString(No.Alloc);
@@ -117,7 +117,7 @@ class Uri : gobject.boxed.Boxed
         second = Second #GstUri to compare.
       Returns: true if the normalized versions of the two URI's would be equal.
   */
-  bool equal(gst.uri.Uri second)
+  bool equal(gst.uri.Uri second) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_uri_equal(cast(const(GstUri)*)this._cPtr, second ? cast(const(GstUri)*)second._cPtr(No.Dup) : null);
@@ -131,7 +131,7 @@ class Uri : gobject.boxed.Boxed
         uri = The URI string to parse.
       Returns: A new #GstUri object.
   */
-  gst.uri.Uri fromStringWithBase(string uri)
+  gst.uri.Uri fromStringWithBase(string uri) nothrow
   {
     GstUri* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -145,7 +145,7 @@ class Uri : gobject.boxed.Boxed
       If uri is null then returns null.
       Returns: The host name from the #GstUri object or null.
   */
-  string getFragment()
+  string getFragment() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_uri_get_fragment(cast(const(GstUri)*)this._cPtr);
@@ -158,7 +158,7 @@ class Uri : gobject.boxed.Boxed
       If uri is null then returns null.
       Returns: The host name from the #GstUri object or null.
   */
-  string getHost()
+  string getHost() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_uri_get_host(cast(const(GstUri)*)this._cPtr);
@@ -181,7 +181,7 @@ class Uri : gobject.boxed.Boxed
       Returns: The
                  fragment hash table from the URI.
   */
-  string[string] getMediaFragmentTable()
+  string[string] getMediaFragmentTable() nothrow
   {
     GHashTable* _cretval;
     _cretval = gst_uri_get_media_fragment_table(cast(const(GstUri)*)this._cPtr);
@@ -194,7 +194,7 @@ class Uri : gobject.boxed.Boxed
       Returns: The path from the URI. Once finished
                                              with the string should be [glib.global.gfree]'d.
   */
-  string getPath()
+  string getPath() nothrow
   {
     char* _cretval;
     _cretval = gst_uri_get_path(cast(const(GstUri)*)this._cPtr);
@@ -208,7 +208,7 @@ class Uri : gobject.boxed.Boxed
                  strings or null if no path segments are available. Free the list
                  when no longer needed with g_list_free_full(list, g_free).
   */
-  string[] getPathSegments()
+  string[] getPathSegments() nothrow
   {
     GList* _cretval;
     _cretval = gst_uri_get_path_segments(cast(const(GstUri)*)this._cPtr);
@@ -221,7 +221,7 @@ class Uri : gobject.boxed.Boxed
       Returns: The path from the URI. Once finished
                                              with the string should be [glib.global.gfree]'d.
   */
-  string getPathString()
+  string getPathString() nothrow
   {
     char* _cretval;
     _cretval = gst_uri_get_path_string(cast(const(GstUri)*)this._cPtr);
@@ -234,7 +234,7 @@ class Uri : gobject.boxed.Boxed
       If uri is null then returns [gst.types.URI_NO_PORT].
       Returns: The port number from the #GstUri object or [gst.types.URI_NO_PORT].
   */
-  uint getPort()
+  uint getPort() nothrow
   {
     uint _retval;
     _retval = gst_uri_get_port(cast(const(GstUri)*)this._cPtr);
@@ -246,7 +246,7 @@ class Uri : gobject.boxed.Boxed
       Returns: A list of keys from
                  the URI query. Free the list with [glib.list.List.free].
   */
-  string[] getQueryKeys()
+  string[] getQueryKeys() nothrow
   {
     GList* _cretval;
     _cretval = gst_uri_get_query_keys(cast(const(GstUri)*)this._cPtr);
@@ -259,7 +259,7 @@ class Uri : gobject.boxed.Boxed
       Returns: A percent encoded query string. Use
                                              [glib.global.gfree] when no longer needed.
   */
-  string getQueryString()
+  string getQueryString() nothrow
   {
     char* _cretval;
     _cretval = gst_uri_get_query_string(cast(const(GstUri)*)this._cPtr);
@@ -280,7 +280,7 @@ class Uri : gobject.boxed.Boxed
       Returns: A percent encoded query string. Use
         [glib.global.gfree] when no longer needed.
   */
-  string getQueryStringOrdered(string[] keys = null)
+  string getQueryStringOrdered(string[] keys = null) nothrow
   {
     char* _cretval;
     auto _keys = gListFromD!(string)(keys);
@@ -300,7 +300,7 @@ class Uri : gobject.boxed.Boxed
       Returns: The query
                  hash table from the URI.
   */
-  string[string] getQueryTable()
+  string[string] getQueryTable() nothrow
   {
     GHashTable* _cretval;
     _cretval = gst_uri_get_query_table(cast(const(GstUri)*)this._cPtr);
@@ -319,7 +319,7 @@ class Uri : gobject.boxed.Boxed
         queryKey = The key to lookup.
       Returns: The value for the given key, or null if not found.
   */
-  string getQueryValue(string queryKey)
+  string getQueryValue(string queryKey) nothrow
   {
     const(char)* _cretval;
     const(char)* _queryKey = queryKey.toCString(No.Alloc);
@@ -333,7 +333,7 @@ class Uri : gobject.boxed.Boxed
       If uri is null then returns null.
       Returns: The scheme from the #GstUri object or null.
   */
-  string getScheme()
+  string getScheme() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_uri_get_scheme(cast(const(GstUri)*)this._cPtr);
@@ -346,7 +346,7 @@ class Uri : gobject.boxed.Boxed
       or null if it doesn't exist. If uri is null then returns null.
       Returns: The userinfo from the #GstUri object or null.
   */
-  string getUserinfo()
+  string getUserinfo() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_uri_get_userinfo(cast(const(GstUri)*)this._cPtr);
@@ -359,7 +359,7 @@ class Uri : gobject.boxed.Boxed
       normalized.
       Returns: TRUE if the URI is normalized or is null.
   */
-  bool isNormalized()
+  bool isNormalized() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_uri_is_normalized(cast(const(GstUri)*)this._cPtr);
@@ -376,7 +376,7 @@ class Uri : gobject.boxed.Boxed
       writable.
       Returns: true if it is safe to write to the object.
   */
-  bool isWritable()
+  bool isWritable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_uri_is_writable(cast(const(GstUri)*)this._cPtr);
@@ -394,7 +394,7 @@ class Uri : gobject.boxed.Boxed
       Returns: A #GstUri which represents the base
                                              with the reference URI joined on.
   */
-  gst.uri.Uri join(gst.uri.Uri refUri = null)
+  gst.uri.Uri join(gst.uri.Uri refUri = null) nothrow
   {
     GstUri* _cretval;
     _cretval = gst_uri_join(cast(GstUri*)this._cPtr, refUri ? cast(GstUri*)refUri._cPtr(No.Dup) : null);
@@ -411,7 +411,7 @@ class Uri : gobject.boxed.Boxed
       If uri is null then null is returned.
       Returns: A writable version of uri.
   */
-  gst.uri.Uri makeWritable()
+  gst.uri.Uri makeWritable() nothrow
   {
     GstUri* _cretval;
     _cretval = gst_uri_make_writable(cast(GstUri*)this._cPtr);
@@ -435,7 +435,7 @@ class Uri : gobject.boxed.Boxed
         fragment = The fragment name for the new URI.
       Returns: The new URI joined onto base.
   */
-  gst.uri.Uri newWithBase(string scheme, string userinfo, string host, uint port, string path = null, string query = null, string fragment = null)
+  gst.uri.Uri newWithBase(string scheme, string userinfo, string host, uint port, string path = null, string query = null, string fragment = null) nothrow
   {
     GstUri* _cretval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -458,7 +458,7 @@ class Uri : gobject.boxed.Boxed
       [gst.uri.Uri.makeWritable] first.
       Returns: TRUE if the URI was modified.
   */
-  bool normalize()
+  bool normalize() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_uri_normalize(cast(GstUri*)this._cPtr);
@@ -472,7 +472,7 @@ class Uri : gobject.boxed.Boxed
         queryKey = The key to lookup.
       Returns: true if query_key exists in the URI query table.
   */
-  bool queryHasKey(string queryKey)
+  bool queryHasKey(string queryKey) nothrow
   {
     bool _retval;
     const(char)* _queryKey = queryKey.toCString(No.Alloc);
@@ -487,7 +487,7 @@ class Uri : gobject.boxed.Boxed
         queryKey = The key to remove.
       Returns: true if the key existed in the table and was removed.
   */
-  bool removeQueryKey(string queryKey)
+  bool removeQueryKey(string queryKey) nothrow
   {
     bool _retval;
     const(char)* _queryKey = queryKey.toCString(No.Alloc);
@@ -503,7 +503,7 @@ class Uri : gobject.boxed.Boxed
         fragment = The fragment string to set.
       Returns: true if the fragment was set/unset successfully.
   */
-  bool setFragment(string fragment = null)
+  bool setFragment(string fragment = null) nothrow
   {
     bool _retval;
     const(char)* _fragment = fragment.toCString(No.Alloc);
@@ -518,7 +518,7 @@ class Uri : gobject.boxed.Boxed
         host = The new host string to set or null to unset.
       Returns: true if the host was set/unset successfully.
   */
-  bool setHost(string host)
+  bool setHost(string host) nothrow
   {
     bool _retval;
     const(char)* _host = host.toCString(No.Alloc);
@@ -534,7 +534,7 @@ class Uri : gobject.boxed.Boxed
                  to unset the path.
       Returns: true if the path was set successfully.
   */
-  bool setPath(string path = null)
+  bool setPath(string path = null) nothrow
   {
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -550,7 +550,7 @@ class Uri : gobject.boxed.Boxed
           '/', or use null to unset the path.
       Returns: true if the path was set successfully.
   */
-  bool setPathString(string path)
+  bool setPathString(string path) nothrow
   {
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -565,7 +565,7 @@ class Uri : gobject.boxed.Boxed
         port = The new port number to set or [gst.types.URI_NO_PORT] to unset.
       Returns: true if the port number was set/unset successfully.
   */
-  bool setPort(uint port)
+  bool setPort(uint port) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_uri_set_port(cast(GstUri*)this._cPtr, port);
@@ -580,7 +580,7 @@ class Uri : gobject.boxed.Boxed
                  table, or use null to unset the query table.
       Returns: true if the query table was set successfully.
   */
-  bool setQueryString(string query = null)
+  bool setQueryString(string query = null) nothrow
   {
     bool _retval;
     const(char)* _query = query.toCString(No.Alloc);
@@ -598,7 +598,7 @@ class Uri : gobject.boxed.Boxed
                         query table to use.
       Returns: true if the new table was successfully used for the query table.
   */
-  bool setQueryTable(string[string] queryTable = null)
+  bool setQueryTable(string[string] queryTable = null) nothrow
   {
     bool _retval;
     auto _queryTable = gHashTableFromD!(string, string)(queryTable);
@@ -617,7 +617,7 @@ class Uri : gobject.boxed.Boxed
         queryValue = The value for the key.
       Returns: true if the query table was successfully updated.
   */
-  bool setQueryValue(string queryKey, string queryValue = null)
+  bool setQueryValue(string queryKey, string queryValue = null) nothrow
   {
     bool _retval;
     const(char)* _queryKey = queryKey.toCString(No.Alloc);
@@ -633,7 +633,7 @@ class Uri : gobject.boxed.Boxed
         scheme = The new scheme to set or null to unset the scheme.
       Returns: true if the scheme was set/unset successfully.
   */
-  bool setScheme(string scheme)
+  bool setScheme(string scheme) nothrow
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -648,7 +648,7 @@ class Uri : gobject.boxed.Boxed
         userinfo = The new user-information string to set or null to unset.
       Returns: true if the user information was set/unset successfully.
   */
-  bool setUserinfo(string userinfo)
+  bool setUserinfo(string userinfo) nothrow
   {
     bool _retval;
     const(char)* _userinfo = userinfo.toCString(No.Alloc);
@@ -664,7 +664,7 @@ class Uri : gobject.boxed.Boxed
       The string is put together as described in RFC 3986.
       Returns: The string version of the URI.
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gst_uri_to_string(cast(const(GstUri)*)this._cPtr);
@@ -685,7 +685,7 @@ class Uri : gobject.boxed.Boxed
             the query argument key strings.
       Returns: The string version of the URI.
   */
-  string toStringWithKeys(string[] keys = null)
+  string toStringWithKeys(string[] keys = null) nothrow
   {
     char* _cretval;
     auto _keys = gListFromD!(string)(keys);
@@ -707,7 +707,7 @@ class Uri : gobject.boxed.Boxed
   
       Deprecated: Use GstURI instead.
   */
-  static string construct(string protocol, string location)
+  static string construct(string protocol, string location) nothrow
   {
     char* _cretval;
     const(char)* _protocol = protocol.toCString(No.Alloc);
@@ -725,7 +725,7 @@ class Uri : gobject.boxed.Boxed
         uri = The URI string to parse.
       Returns: A new #GstUri object, or NULL.
   */
-  static gst.uri.Uri fromString(string uri)
+  static gst.uri.Uri fromString(string uri) nothrow
   {
     GstUri* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -753,7 +753,7 @@ class Uri : gobject.boxed.Boxed
         uri = The URI string to parse.
       Returns: A new #GstUri object, or NULL.
   */
-  static gst.uri.Uri fromStringEscaped(string uri)
+  static gst.uri.Uri fromStringEscaped(string uri) nothrow
   {
     GstUri* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -776,7 +776,7 @@ class Uri : gobject.boxed.Boxed
             null if the URI isn't valid. If the URI does not contain a location, an
             empty string is returned.
   */
-  static string getLocation(string uri)
+  static string getLocation(string uri) nothrow
   {
     char* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -793,7 +793,7 @@ class Uri : gobject.boxed.Boxed
         uri = A URI string
       Returns: The protocol for this URI.
   */
-  static string getProtocol(string uri)
+  static string getProtocol(string uri) nothrow
   {
     char* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -810,7 +810,7 @@ class Uri : gobject.boxed.Boxed
         protocol = a protocol string (e.g. "http")
       Returns: true if the protocol matches.
   */
-  static bool hasProtocol(string uri, string protocol)
+  static bool hasProtocol(string uri, string protocol) nothrow
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -827,7 +827,7 @@ class Uri : gobject.boxed.Boxed
         uri = A URI string
       Returns: true if the string is a valid URI
   */
-  static bool isValid(string uri)
+  static bool isValid(string uri) nothrow
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -845,7 +845,7 @@ class Uri : gobject.boxed.Boxed
       Returns: A string representing the percent-encoded join of
                  the two URIs.
   */
-  static string joinStrings(string baseUri, string refUri)
+  static string joinStrings(string baseUri, string refUri) nothrow
   {
     char* _cretval;
     const(char)* _baseUri = baseUri.toCString(No.Alloc);
@@ -865,7 +865,7 @@ class Uri : gobject.boxed.Boxed
         protocol = Protocol that should be checked for (e.g. "http" or "smb")
       Returns: true
   */
-  static bool protocolIsSupported(gst.types.URIType type, string protocol)
+  static bool protocolIsSupported(gst.types.URIType type, string protocol) nothrow
   {
     bool _retval;
     const(char)* _protocol = protocol.toCString(No.Alloc);
@@ -882,7 +882,7 @@ class Uri : gobject.boxed.Boxed
         protocol = A string
       Returns: true if the string is a valid protocol identifier, false otherwise.
   */
-  static bool protocolIsValid(string protocol)
+  static bool protocolIsValid(string protocol) nothrow
   {
     bool _retval;
     const(char)* _protocol = protocol.toCString(No.Alloc);

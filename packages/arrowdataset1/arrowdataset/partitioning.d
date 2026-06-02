@@ -14,26 +14,26 @@ class Partitioning : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_partitioning_get_type != &gidSymbolNotFound ? gadataset_partitioning_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Partitioning self()
+  override Partitioning self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class Partitioning : gobject.object.ObjectWrap
       Get builder for [arrowdataset.partitioning.Partitioning]
       Returns: New builder object
   */
-  static PartitioningGidBuilder builder()
+  static PartitioningGidBuilder builder() nothrow
   {
     return new PartitioningGidBuilder;
   }
 
   /** */
-  static arrowdataset.partitioning.Partitioning createDefault()
+  static arrowdataset.partitioning.Partitioning createDefault() nothrow
   {
     GADatasetPartitioning* _cretval;
     _cretval = gadataset_partitioning_create_default();
@@ -57,7 +57,7 @@ class Partitioning : gobject.object.ObjectWrap
   }
 
   /** */
-  string getTypeName()
+  string getTypeName() nothrow
   {
     char* _cretval;
     _cretval = gadataset_partitioning_get_type_name(cast(GADatasetPartitioning*)this._cPtr);
@@ -71,7 +71,7 @@ class PartitioningGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T partitioning(void* propval)
+  T partitioning(void* propval) nothrow
   {
     return setProperty("partitioning", propval);
   }
@@ -84,7 +84,7 @@ final class PartitioningGidBuilder : PartitioningGidBuilderImpl!PartitioningGidB
       Create object from builder.
       Returns: New object
   */
-  Partitioning build()
+  Partitioning build() nothrow
   {
     return new Partitioning(cast(void*)createGObject(Partitioning._getGType), No.Take);
   }

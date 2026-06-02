@@ -17,32 +17,32 @@ class MainContext : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_main_context_get_type != &gidSymbolNotFound ? g_main_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MainContext self()
+  override MainContext self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class MainContext : gobject.boxed.Boxed
       Creates a new #GMainContext structure.
       Returns: the new #GMainContext
   */
-  this()
+  this() nothrow
   {
     GMainContext* _cretval;
     _cretval = g_main_context_new();
@@ -66,7 +66,7 @@ class MainContext : gobject.boxed.Boxed
                   set at creation time.
       Returns: the new #GMainContext
   */
-  static glib.main_context.MainContext newWithFlags(glib.types.MainContextFlags flags)
+  static glib.main_context.MainContext newWithFlags(glib.types.MainContextFlags flags) nothrow
   {
     GMainContext* _cretval;
     _cretval = g_main_context_new_with_flags(flags);
@@ -91,7 +91,7 @@ class MainContext : gobject.boxed.Boxed
       Returns: true if the operation succeeded, and
           this thread is now the owner of context.
   */
-  bool acquire()
+  bool acquire() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_main_context_acquire(cast(GMainContext*)this._cPtr);
@@ -110,7 +110,7 @@ class MainContext : gobject.boxed.Boxed
                the same as the priority used for [glib.source.Source.attach] to ensure that the
                file descriptor is polled whenever the results may be needed.
   */
-  void addPoll(glib.types.PollFD fd, int priority)
+  void addPoll(glib.types.PollFD fd, int priority) nothrow
   {
     g_main_context_add_poll(cast(GMainContext*)this._cPtr, &fd, priority);
   }
@@ -133,7 +133,7 @@ class MainContext : gobject.boxed.Boxed
                 the last call to [glib.main_context.MainContext.query]
       Returns: true if some sources are ready to be dispatched.
   */
-  bool check(int maxPriority, glib.types.PollFD[] fds)
+  bool check(int maxPriority, glib.types.PollFD[] fds) nothrow
   {
     bool _retval;
     int _nFds;
@@ -154,7 +154,7 @@ class MainContext : gobject.boxed.Boxed
       Since 2.76 context can be null to use the global-default
       main context.
   */
-  void dispatch()
+  void dispatch() nothrow
   {
     g_main_context_dispatch(cast(GMainContext*)this._cPtr);
   }
@@ -169,7 +169,7 @@ class MainContext : gobject.boxed.Boxed
         userData = the user data from the callback.
       Returns: the source, if one was found, otherwise null
   */
-  glib.source.Source findSourceByFuncsUserData(glib.types.SourceFuncs funcs, void* userData = null)
+  glib.source.Source findSourceByFuncsUserData(glib.types.SourceFuncs funcs, void* userData = null) nothrow
   {
     GSource* _cretval;
     _cretval = g_main_context_find_source_by_funcs_user_data(cast(GMainContext*)this._cPtr, &funcs, userData);
@@ -195,7 +195,7 @@ class MainContext : gobject.boxed.Boxed
         sourceId = the source ID, as returned by [glib.source.Source.getId].
       Returns: the #GSource
   */
-  glib.source.Source findSourceById(uint sourceId)
+  glib.source.Source findSourceById(uint sourceId) nothrow
   {
     GSource* _cretval;
     _cretval = g_main_context_find_source_by_id(cast(GMainContext*)this._cPtr, sourceId);
@@ -212,7 +212,7 @@ class MainContext : gobject.boxed.Boxed
         userData = the user_data for the callback.
       Returns: the source, if one was found, otherwise null
   */
-  glib.source.Source findSourceByUserData(void* userData = null)
+  glib.source.Source findSourceByUserData(void* userData = null) nothrow
   {
     GSource* _cretval;
     _cretval = g_main_context_find_source_by_user_data(cast(GMainContext*)this._cPtr, userData);
@@ -235,14 +235,21 @@ class MainContext : gobject.boxed.Boxed
         priority = the priority at which to run function
         function_ = function to call
   */
-  void invokeFull(int priority, glib.types.SourceFunc function_)
+  void invokeFull(int priority, glib.types.SourceFunc function_) nothrow
   {
-    extern(C) gboolean _function_Callback(void* userData)
+    extern(C) gboolean _function_Callback(void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-      _dretval = (*_dlg)();
+      try
+      {
+        _dretval = (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.SourceFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -260,7 +267,7 @@ class MainContext : gobject.boxed.Boxed
       blocking to get ownership of context.
       Returns: true if current thread is owner of context.
   */
-  bool isOwner()
+  bool isOwner() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_main_context_is_owner(cast(GMainContext*)this._cPtr);
@@ -285,7 +292,7 @@ class MainContext : gobject.boxed.Boxed
         mayBlock = whether the call may block.
       Returns: true if events were dispatched.
   */
-  bool iteration(bool mayBlock)
+  bool iteration(bool mayBlock) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_main_context_iteration(cast(GMainContext*)this._cPtr, mayBlock);
@@ -296,7 +303,7 @@ class MainContext : gobject.boxed.Boxed
       Checks if any sources have pending events for the given context.
       Returns: true if events are pending.
   */
-  bool pending()
+  bool pending() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_main_context_pending(cast(GMainContext*)this._cPtr);
@@ -307,7 +314,7 @@ class MainContext : gobject.boxed.Boxed
       Pops context off the thread-default context stack (verifying that
       it was on the top of the stack).
   */
-  void popThreadDefault()
+  void popThreadDefault() nothrow
   {
     g_main_context_pop_thread_default(cast(GMainContext*)this._cPtr);
   }
@@ -325,7 +332,7 @@ class MainContext : gobject.boxed.Boxed
       Returns: true if some source is ready to be dispatched
                       prior to polling.
   */
-  bool prepare(out int priority)
+  bool prepare(out int priority) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_main_context_prepare(cast(GMainContext*)this._cPtr, cast(int*)&priority);
@@ -372,7 +379,7 @@ class MainContext : gobject.boxed.Boxed
       handle being used from a thread with a thread-default context. Eg,
       see [gio.file.File.supportsThreadContexts].
   */
-  void pushThreadDefault()
+  void pushThreadDefault() nothrow
   {
     g_main_context_push_thread_default(cast(GMainContext*)this._cPtr);
   }
@@ -395,7 +402,7 @@ class MainContext : gobject.boxed.Boxed
           or, if more than n_fds records need to be stored, the number
           of records that need to be stored.
   */
-  int query(int maxPriority, out int timeout, ref glib.types.PollFD[] fds)
+  int query(int maxPriority, out int timeout, ref glib.types.PollFD[] fds) nothrow
   {
     int _retval;
     int _nFds;
@@ -413,7 +420,7 @@ class MainContext : gobject.boxed.Boxed
       You must have successfully acquired the context with
       [glib.main_context.MainContext.acquire] before you may call this function.
   */
-  void release()
+  void release() nothrow
   {
     g_main_context_release(cast(GMainContext*)this._cPtr);
   }
@@ -425,7 +432,7 @@ class MainContext : gobject.boxed.Boxed
       Params:
         fd = a #GPollFD descriptor previously added with [glib.main_context.MainContext.addPoll]
   */
-  void removePoll(glib.types.PollFD fd)
+  void removePoll(glib.types.PollFD fd) nothrow
   {
     g_main_context_remove_poll(cast(GMainContext*)this._cPtr, &fd);
   }
@@ -460,7 +467,7 @@ class MainContext : gobject.boxed.Boxed
           g_main_context_wakeup (NULL);
       ```
   */
-  void wakeup()
+  void wakeup() nothrow
   {
     g_main_context_wakeup(cast(GMainContext*)this._cPtr);
   }
@@ -472,7 +479,7 @@ class MainContext : gobject.boxed.Boxed
       [glib.main_context.MainContext.getThreadDefault].
       Returns: the global-default main context.
   */
-  static glib.main_context.MainContext default_()
+  static glib.main_context.MainContext default_() nothrow
   {
     GMainContext* _cretval;
     _cretval = g_main_context_default();
@@ -495,7 +502,7 @@ class MainContext : gobject.boxed.Boxed
       Returns: the thread-default #GMainContext, or
         null if the thread-default context is the global-default main context.
   */
-  static glib.main_context.MainContext getThreadDefault()
+  static glib.main_context.MainContext getThreadDefault() nothrow
   {
     GMainContext* _cretval;
     _cretval = g_main_context_get_thread_default();
@@ -513,7 +520,7 @@ class MainContext : gobject.boxed.Boxed
       Returns: the thread-default #GMainContext. Unref
             with [glib.main_context.MainContext.unref] when you are done with it.
   */
-  static glib.main_context.MainContext refThreadDefault()
+  static glib.main_context.MainContext refThreadDefault() nothrow
   {
     GMainContext* _cretval;
     _cretval = g_main_context_ref_thread_default();

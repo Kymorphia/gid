@@ -16,24 +16,21 @@ class Queue
   GQueue _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.queue.Queue");
-
     _cInstance = *cast(GQueue*)ptr;
 
     if (take)
       gFree(ptr);
   }
 
-  ~this()
+  ~this() nothrow
   {
     g_queue_free(&_cInstance);
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -42,7 +39,7 @@ class Queue
       Get `length` field.
       Returns: the number of elements in the queue
   */
-  @property uint length()
+  @property uint length() nothrow
   {
     return (cast(GQueue*)this._cPtr).length;
   }
@@ -52,7 +49,7 @@ class Queue
       Params:
         propval = the number of elements in the queue
   */
-  @property void length(uint propval)
+  @property void length(uint propval) nothrow
   {
     (cast(GQueue*)this._cPtr).length = propval;
   }
@@ -61,7 +58,7 @@ class Queue
       Removes all the elements in queue. If queue elements contain
       dynamically-allocated memory, they should be freed first.
   */
-  void clear()
+  void clear() nothrow
   {
     g_queue_clear(cast(GQueue*)this._cPtr);
   }
@@ -73,13 +70,20 @@ class Queue
       Params:
         freeFunc = the function to be called to free memory allocated
   */
-  void clearFull(glib.types.DestroyNotify freeFunc = null)
+  void clearFull(glib.types.DestroyNotify freeFunc = null) nothrow
   {
-    extern(C) void _freeFuncCallback(void* data)
+    extern(C) void _freeFuncCallback(void* data) nothrow
     {
       auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
     }
     auto _freeFuncCB = freeFunc ? &_freeFuncCallback : null;
     g_queue_clear_full(cast(GQueue*)this._cPtr, _freeFuncCB);
@@ -95,13 +99,20 @@ class Queue
       Params:
         func = the function to call for each element's data
   */
-  void foreach_(glib.types.Func func)
+  void foreach_(glib.types.Func func) nothrow
   {
-    extern(C) void _funcCallback(void* data, void* userData)
+    extern(C) void _funcCallback(void* data, void* userData) nothrow
     {
       auto _dlg = cast(glib.types.Func*)userData;
 
-      (*_dlg)(data);
+      try
+      {
+        (*_dlg)(data);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.Func");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -118,13 +129,20 @@ class Queue
       Params:
         freeFunc = the function to be called to free each element's data
   */
-  void freeFull(glib.types.DestroyNotify freeFunc)
+  void freeFull(glib.types.DestroyNotify freeFunc) nothrow
   {
-    extern(C) void _freeFuncCallback(void* data)
+    extern(C) void _freeFuncCallback(void* data) nothrow
     {
       auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
     }
     auto _freeFuncCB = freeFunc ? &_freeFuncCallback : null;
     g_queue_free_full(cast(GQueue*)this._cPtr, _freeFuncCB);
@@ -134,7 +152,7 @@ class Queue
       Returns the number of items in queue.
       Returns: the number of items in queue
   */
-  uint getLength()
+  uint getLength() nothrow
   {
     uint _retval;
     _retval = g_queue_get_length(cast(GQueue*)this._cPtr);
@@ -149,7 +167,7 @@ class Queue
       Returns: the position of the first element in queue which
             contains data, or -1 if no element in queue contains data
   */
-  int index(const(void)* data = null)
+  int index(const(void)* data = null) nothrow
   {
     int _retval;
     _retval = g_queue_index(cast(GQueue*)this._cPtr, data);
@@ -162,7 +180,7 @@ class Queue
       `G_QUEUE_INIT`. It is not necessary to initialize queues created with
       [glib.queue.Queue.new_].
   */
-  void init_()
+  void init_() nothrow
   {
     g_queue_init(cast(GQueue*)this._cPtr);
   }
@@ -178,13 +196,21 @@ class Queue
               element comes before the second, and a positive value if the second
               element comes before the first.
   */
-  void insertSorted(void* data, glib.types.CompareDataFunc func)
+  void insertSorted(void* data, glib.types.CompareDataFunc func) nothrow
   {
-    extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData)
+    extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      int _retval;
       auto _dlg = cast(glib.types.CompareDataFunc*)userData;
 
-      int _retval = (*_dlg)(a, b);
+      try
+      {
+        _retval = (*_dlg)(a, b);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.CompareDataFunc");
+      }
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -196,7 +222,7 @@ class Queue
       Returns true if the queue is empty.
       Returns: true if the queue is empty
   */
-  bool isEmpty()
+  bool isEmpty() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_queue_is_empty(cast(GQueue*)this._cPtr);
@@ -208,7 +234,7 @@ class Queue
       Returns: the data of the first element in the queue, or null
             if the queue is empty
   */
-  void* peekHead()
+  void* peekHead() nothrow
   {
     auto _retval = g_queue_peek_head(cast(GQueue*)this._cPtr);
     return _retval;
@@ -222,7 +248,7 @@ class Queue
       Returns: the data for the `n`'th element of queue,
             or null if `n` is off the end of queue
   */
-  void* peekNth(uint n)
+  void* peekNth(uint n) nothrow
   {
     auto _retval = g_queue_peek_nth(cast(GQueue*)this._cPtr, n);
     return _retval;
@@ -233,7 +259,7 @@ class Queue
       Returns: the data of the last element in the queue, or null
             if the queue is empty
   */
-  void* peekTail()
+  void* peekTail() nothrow
   {
     auto _retval = g_queue_peek_tail(cast(GQueue*)this._cPtr);
     return _retval;
@@ -244,7 +270,7 @@ class Queue
       Returns: the data of the first element in the queue, or null
             if the queue is empty
   */
-  void* popHead()
+  void* popHead() nothrow
   {
     auto _retval = g_queue_pop_head(cast(GQueue*)this._cPtr);
     return _retval;
@@ -257,7 +283,7 @@ class Queue
         n = the position of the element
       Returns: the element's data, or null if `n` is off the end of queue
   */
-  void* popNth(uint n)
+  void* popNth(uint n) nothrow
   {
     auto _retval = g_queue_pop_nth(cast(GQueue*)this._cPtr, n);
     return _retval;
@@ -268,7 +294,7 @@ class Queue
       Returns: the data of the last element in the queue, or null
             if the queue is empty
   */
-  void* popTail()
+  void* popTail() nothrow
   {
     auto _retval = g_queue_pop_tail(cast(GQueue*)this._cPtr);
     return _retval;
@@ -280,7 +306,7 @@ class Queue
       Params:
         data = the data for the new element.
   */
-  void pushHead(void* data = null)
+  void pushHead(void* data = null) nothrow
   {
     g_queue_push_head(cast(GQueue*)this._cPtr, data);
   }
@@ -294,7 +320,7 @@ class Queue
               larger than the number of elements in the queue, the element is
               added to the end of the queue.
   */
-  void pushNth(void* data, int n)
+  void pushNth(void* data, int n) nothrow
   {
     g_queue_push_nth(cast(GQueue*)this._cPtr, data, n);
   }
@@ -305,7 +331,7 @@ class Queue
       Params:
         data = the data for the new element
   */
-  void pushTail(void* data = null)
+  void pushTail(void* data = null) nothrow
   {
     g_queue_push_tail(cast(GQueue*)this._cPtr, data);
   }
@@ -317,7 +343,7 @@ class Queue
         data = the data to remove
       Returns: true if data was found and removed from queue
   */
-  bool remove(const(void)* data = null)
+  bool remove(const(void)* data = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_queue_remove(cast(GQueue*)this._cPtr, data);
@@ -331,7 +357,7 @@ class Queue
         data = the data to remove
       Returns: the number of elements removed from queue
   */
-  uint removeAll(const(void)* data = null)
+  uint removeAll(const(void)* data = null) nothrow
   {
     uint _retval;
     _retval = g_queue_remove_all(cast(GQueue*)this._cPtr, data);
@@ -341,7 +367,7 @@ class Queue
   /**
       Reverses the order of the items in queue.
   */
-  void reverse()
+  void reverse() nothrow
   {
     g_queue_reverse(cast(GQueue*)this._cPtr);
   }
@@ -355,13 +381,21 @@ class Queue
               equal, a negative value if the first comes before the second, and
               a positive value if the second comes before the first.
   */
-  void sort(glib.types.CompareDataFunc compareFunc)
+  void sort(glib.types.CompareDataFunc compareFunc) nothrow
   {
-    extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
+    extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      int _retval;
       auto _dlg = cast(glib.types.CompareDataFunc*)userData;
 
-      int _retval = (*_dlg)(a, b);
+      try
+      {
+        _retval = (*_dlg)(a, b);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.CompareDataFunc");
+      }
       return _retval;
     }
     auto _compareFuncCB = compareFunc ? &_compareFuncCallback : null;

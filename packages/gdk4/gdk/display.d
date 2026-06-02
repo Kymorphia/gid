@@ -42,26 +42,26 @@ class Display : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_display_get_type != &gidSymbolNotFound ? gdk_display_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Display self()
+  override Display self() nothrow
   {
     return this;
   }
@@ -70,7 +70,7 @@ class Display : gobject.object.ObjectWrap
       Get builder for [gdk.display.Display]
       Returns: New builder object
   */
-  static DisplayGidBuilder builder()
+  static DisplayGidBuilder builder() nothrow
   {
     return new DisplayGidBuilder;
   }
@@ -79,7 +79,7 @@ class Display : gobject.object.ObjectWrap
       Get `composited` property.
       Returns: true if the display properly composites the alpha channel.
   */
-  @property bool composited()
+  @property bool composited() nothrow
   {
     return isComposited();
   }
@@ -88,7 +88,7 @@ class Display : gobject.object.ObjectWrap
       Get `dmabufFormats` property.
       Returns: The dma-buf formats that are supported on this display
   */
-  @property gdk.dmabuf_formats.DmabufFormats dmabufFormats()
+  @property gdk.dmabuf_formats.DmabufFormats dmabufFormats() nothrow
   {
     return getDmabufFormats();
   }
@@ -97,7 +97,7 @@ class Display : gobject.object.ObjectWrap
       Get `inputShapes` property.
       Returns: true if the display supports input shapes.
   */
-  @property bool inputShapes()
+  @property bool inputShapes() nothrow
   {
     return supportsInputShapes();
   }
@@ -106,7 +106,7 @@ class Display : gobject.object.ObjectWrap
       Get `rgba` property.
       Returns: true if the display supports an alpha channel.
   */
-  @property bool rgba()
+  @property bool rgba() nothrow
   {
     return isRgba();
   }
@@ -115,7 +115,7 @@ class Display : gobject.object.ObjectWrap
       Get `shadowWidth` property.
       Returns: true if the display supports extensible frames.
   */
-  @property bool shadowWidth()
+  @property bool shadowWidth() nothrow
   {
     return supportsShadowWidth();
   }
@@ -129,7 +129,7 @@ class Display : gobject.object.ObjectWrap
       Returns: a [gdk.display.Display], or null if
           there is no default display
   */
-  static gdk.display.Display getDefault()
+  static gdk.display.Display getDefault() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gdk_display_get_default();
@@ -146,7 +146,7 @@ class Display : gobject.object.ObjectWrap
         displayName = the name of the display to open
       Returns: a [gdk.display.Display]
   */
-  static gdk.display.Display open(string displayName = null)
+  static gdk.display.Display open(string displayName = null) nothrow
   {
     GdkDisplay* _cretval;
     const(char)* _displayName = displayName.toCString(No.Alloc);
@@ -158,7 +158,7 @@ class Display : gobject.object.ObjectWrap
   /**
       Emits a short beep on display
   */
-  void beep()
+  void beep() nothrow
   {
     gdk_display_beep(cast(GdkDisplay*)this._cPtr);
   }
@@ -168,7 +168,7 @@ class Display : gobject.object.ObjectWrap
       
       This cleans up associated resources.
   */
-  void close()
+  void close() nothrow
   {
     gdk_display_close(cast(GdkDisplay*)this._cPtr);
   }
@@ -204,7 +204,7 @@ class Display : gobject.object.ObjectWrap
         device = a [gdk.device.Device]
       Returns: true if there is a grab in effect for device.
   */
-  bool deviceIsGrabbed(gdk.device.Device device)
+  bool deviceIsGrabbed(gdk.device.Device device) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_display_device_is_grabbed(cast(GdkDisplay*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
@@ -223,7 +223,7 @@ class Display : gobject.object.ObjectWrap
       This is most useful for X11. On windowing systems where requests are
       handled synchronously, this function will do nothing.
   */
-  void flush()
+  void flush() nothrow
   {
     gdk_display_flush(cast(GdkDisplay*)this._cPtr);
   }
@@ -233,7 +233,7 @@ class Display : gobject.object.ObjectWrap
       applications on the given display.
       Returns: a new [gdk.app_launch_context.AppLaunchContext] for display
   */
-  gdk.app_launch_context.AppLaunchContext getAppLaunchContext()
+  gdk.app_launch_context.AppLaunchContext getAppLaunchContext() nothrow
   {
     GdkAppLaunchContext* _cretval;
     _cretval = gdk_display_get_app_launch_context(cast(GdkDisplay*)this._cPtr);
@@ -245,7 +245,7 @@ class Display : gobject.object.ObjectWrap
       Gets the clipboard used for copy/paste operations.
       Returns: the display's clipboard
   */
-  gdk.clipboard.Clipboard getClipboard()
+  gdk.clipboard.Clipboard getClipboard() nothrow
   {
     GdkClipboard* _cretval;
     _cretval = gdk_display_get_clipboard(cast(GdkDisplay*)this._cPtr);
@@ -260,7 +260,7 @@ class Display : gobject.object.ObjectWrap
       this function will return null.
       Returns: the default seat.
   */
-  gdk.seat.Seat getDefaultSeat()
+  gdk.seat.Seat getDefaultSeat() nothrow
   {
     GdkSeat* _cretval;
     _cretval = gdk_display_get_default_seat(cast(GdkDisplay*)this._cPtr);
@@ -280,7 +280,7 @@ class Display : gobject.object.ObjectWrap
       To learn more about dma-bufs, see [gdk.dmabuf_texture_builder.DmabufTextureBuilder].
       Returns: a [gdk.dmabuf_formats.DmabufFormats] object
   */
-  gdk.dmabuf_formats.DmabufFormats getDmabufFormats()
+  gdk.dmabuf_formats.DmabufFormats getDmabufFormats() nothrow
   {
     GdkDmabufFormats* _cretval;
     _cretval = gdk_display_get_dmabuf_formats(cast(GdkDisplay*)this._cPtr);
@@ -297,7 +297,7 @@ class Display : gobject.object.ObjectWrap
       Returns: the monitor with the largest
           overlap with surface
   */
-  gdk.monitor.MonitorWrap getMonitorAtSurface(gdk.surface.Surface surface)
+  gdk.monitor.MonitorWrap getMonitorAtSurface(gdk.surface.Surface surface) nothrow
   {
     GdkMonitor* _cretval;
     _cretval = gdk_display_get_monitor_at_surface(cast(GdkDisplay*)this._cPtr, surface ? cast(GdkSurface*)surface._cPtr(No.Dup) : null);
@@ -315,7 +315,7 @@ class Display : gobject.object.ObjectWrap
       this list to monitor changes to the monitor of this display.
       Returns: a [gio.list_model.ListModel] of [gdk.monitor.MonitorWrap]
   */
-  gio.list_model.ListModel getMonitors()
+  gio.list_model.ListModel getMonitors() nothrow
   {
     GListModel* _cretval;
     _cretval = gdk_display_get_monitors(cast(GdkDisplay*)this._cPtr);
@@ -328,7 +328,7 @@ class Display : gobject.object.ObjectWrap
       Returns: a string representing the display name. This string is owned
           by GDK and should not be modified or freed.
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gdk_display_get_name(cast(GdkDisplay*)this._cPtr);
@@ -343,7 +343,7 @@ class Display : gobject.object.ObjectWrap
       GDK emulates this clipboard locally.
       Returns: the primary clipboard
   */
-  gdk.clipboard.Clipboard getPrimaryClipboard()
+  gdk.clipboard.Clipboard getPrimaryClipboard() nothrow
   {
     GdkClipboard* _cretval;
     _cretval = gdk_display_get_primary_clipboard(cast(GdkDisplay*)this._cPtr);
@@ -361,7 +361,7 @@ class Display : gobject.object.ObjectWrap
       Returns: true if the setting existed and a value was stored
           in value, false otherwise
   */
-  bool getSetting(string name, gobject.value.Value value)
+  bool getSetting(string name, gobject.value.Value value) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -374,7 +374,7 @@ class Display : gobject.object.ObjectWrap
       if no ID has been defined.
       Returns: the startup notification ID for display
   */
-  string getStartupNotificationId()
+  string getStartupNotificationId() nothrow
   {
     const(char)* _cretval;
     _cretval = gdk_display_get_startup_notification_id(cast(GdkDisplay*)this._cPtr);
@@ -386,7 +386,7 @@ class Display : gobject.object.ObjectWrap
       Finds out if the display has been closed.
       Returns: true if the display is closed.
   */
-  bool isClosed()
+  bool isClosed() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_display_is_closed(cast(GdkDisplay*)this._cPtr);
@@ -408,7 +408,7 @@ class Display : gobject.object.ObjectWrap
           be expected to have their alpha channels drawn correctly
           on the screen.
   */
-  bool isComposited()
+  bool isComposited() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_display_is_composited(cast(GdkDisplay*)this._cPtr);
@@ -430,7 +430,7 @@ class Display : gobject.object.ObjectWrap
       Returns: true if surfaces are created with an alpha channel or
           false if the display does not support this functionality.
   */
-  bool isRgba()
+  bool isRgba() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_display_is_rgba(cast(GdkDisplay*)this._cPtr);
@@ -442,7 +442,7 @@ class Display : gobject.object.ObjectWrap
       Returns: the
           list of seats known to the [gdk.display.Display]
   */
-  gdk.seat.Seat[] listSeats()
+  gdk.seat.Seat[] listSeats() nothrow
   {
     GList* _cretval;
     _cretval = gdk_display_list_seats(cast(GdkDisplay*)this._cPtr);
@@ -469,7 +469,7 @@ class Display : gobject.object.ObjectWrap
             location for array of keyvals
       Returns: true if there were any entries
   */
-  bool mapKeycode(uint keycode, out gdk.types.KeymapKey[] keys, out uint[] keyvals)
+  bool mapKeycode(uint keycode, out gdk.types.KeymapKey[] keys, out uint[] keyvals) nothrow
   {
     bool _retval;
     int _nEntries;
@@ -508,7 +508,7 @@ class Display : gobject.object.ObjectWrap
             for an array of [gdk.types.KeymapKey]
       Returns: true if keys were found and returned
   */
-  bool mapKeyval(uint keyval, out gdk.types.KeymapKey[] keys)
+  bool mapKeyval(uint keyval, out gdk.types.KeymapKey[] keys) nothrow
   {
     bool _retval;
     int _nKeys;
@@ -535,7 +535,7 @@ class Display : gobject.object.ObjectWrap
   
       Deprecated: Using [gdk.toplevel.Toplevel.setStartupId] is sufficient
   */
-  void notifyStartupComplete(string startupId)
+  void notifyStartupComplete(string startupId) nothrow
   {
     const(char)* _startupId = startupId.toCString(No.Alloc);
     gdk_display_notify_startup_complete(cast(GdkDisplay*)this._cPtr, _startupId);
@@ -578,7 +578,7 @@ class Display : gobject.object.ObjectWrap
       Deprecated: This function is only useful in very
         special situations and should not be used by applications.
   */
-  void putEvent(gdk.event.Event event)
+  void putEvent(gdk.event.Event event) nothrow
   {
     gdk_display_put_event(cast(GdkDisplay*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
   }
@@ -592,7 +592,7 @@ class Display : gobject.object.ObjectWrap
       On modern displays, this value is always true.
       Returns: true if surfaces with modified input shape are supported
   */
-  bool supportsInputShapes()
+  bool supportsInputShapes() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_display_supports_input_shapes(cast(GdkDisplay*)this._cPtr);
@@ -607,7 +607,7 @@ class Display : gobject.object.ObjectWrap
       Returns: true if surfaces can draw shadows or
           false if the display does not support this functionality.
   */
-  bool supportsShadowWidth()
+  bool supportsShadowWidth() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_display_supports_shadow_width(cast(GdkDisplay*)this._cPtr);
@@ -626,7 +626,7 @@ class Display : gobject.object.ObjectWrap
       This is most useful for X11. On windowing systems where requests are
       handled synchronously, this function will do nothing.
   */
-  void sync()
+  void sync() nothrow
   {
     gdk_display_sync(cast(GdkDisplay*)this._cPtr);
   }
@@ -663,7 +663,7 @@ class Display : gobject.object.ObjectWrap
             to determine the group or level
       Returns: true if there was a keyval bound to keycode/state/group.
   */
-  bool translateKey(uint keycode, gdk.types.ModifierType state, int group, out uint keyval, out int effectiveGroup, out int level, out gdk.types.ModifierType consumed)
+  bool translateKey(uint keycode, gdk.types.ModifierType state, int group, out uint keyval, out int effectiveGroup, out int level, out gdk.types.ModifierType consumed) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_display_translate_key(cast(GdkDisplay*)this._cPtr, keycode, state, group, cast(uint*)&keyval, cast(int*)&effectiveGroup, cast(int*)&level, &consumed);
@@ -687,14 +687,14 @@ class Display : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClosed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClosed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.display.Display)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -706,7 +706,14 @@ class Display : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.display.Display.closed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -728,13 +735,13 @@ class Display : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectOpened(T)(T callback, Flag!"After" after = No.After)
+  gulong connectOpened(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.display.Display)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -743,7 +750,14 @@ class Display : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.display.Display.opened");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -767,14 +781,14 @@ class Display : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSeatAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSeatAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.seat.Seat)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.display.Display)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -786,7 +800,14 @@ class Display : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.display.Display.seatAdded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -810,14 +831,14 @@ class Display : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSeatRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSeatRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.seat.Seat)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.display.Display)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -829,7 +850,14 @@ class Display : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.display.Display.seatRemoved");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -853,14 +881,14 @@ class Display : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSettingChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSettingChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.display.Display)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -872,7 +900,14 @@ class Display : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.display.Display.settingChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -892,7 +927,7 @@ final class DisplayGidBuilder : DisplayGidBuilderImpl!DisplayGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Display build()
+  Display build() nothrow
   {
     return new Display(cast(void*)createGObject(Display._getGType), No.Take);
   }

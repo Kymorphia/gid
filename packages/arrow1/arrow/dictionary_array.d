@@ -18,26 +18,26 @@ class DictionaryArray : arrow.array.Array
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_dictionary_array_get_type != &gidSymbolNotFound ? garrow_dictionary_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DictionaryArray self()
+  override DictionaryArray self() nothrow
   {
     return this;
   }
@@ -46,19 +46,19 @@ class DictionaryArray : arrow.array.Array
       Get builder for [arrow.dictionary_array.DictionaryArray]
       Returns: New builder object
   */
-  static DictionaryArrayGidBuilder builder()
+  static DictionaryArrayGidBuilder builder() nothrow
   {
     return new DictionaryArrayGidBuilder;
   }
 
   /** */
-  @property arrow.array.Array dictionary()
+  @property arrow.array.Array dictionary() nothrow
   {
     return getDictionary();
   }
 
   /** */
-  @property arrow.array.Array indices()
+  @property arrow.array.Array indices() nothrow
   {
     return getIndices();
   }
@@ -75,7 +75,7 @@ class DictionaryArray : arrow.array.Array
   }
 
   /** */
-  arrow.array.Array getDictionary()
+  arrow.array.Array getDictionary() nothrow
   {
     GArrowArray* _cretval;
     _cretval = garrow_dictionary_array_get_dictionary(cast(GArrowDictionaryArray*)this._cPtr);
@@ -84,7 +84,7 @@ class DictionaryArray : arrow.array.Array
   }
 
   /** */
-  arrow.dictionary_data_type.DictionaryDataType getDictionaryDataType()
+  arrow.dictionary_data_type.DictionaryDataType getDictionaryDataType() nothrow
   {
     GArrowDictionaryDataType* _cretval;
     _cretval = garrow_dictionary_array_get_dictionary_data_type(cast(GArrowDictionaryArray*)this._cPtr);
@@ -93,7 +93,7 @@ class DictionaryArray : arrow.array.Array
   }
 
   /** */
-  arrow.array.Array getIndices()
+  arrow.array.Array getIndices() nothrow
   {
     GArrowArray* _cretval;
     _cretval = garrow_dictionary_array_get_indices(cast(GArrowDictionaryArray*)this._cPtr);
@@ -107,13 +107,13 @@ class DictionaryArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
 {
 
   /** */
-  T dictionary(arrow.array.Array propval)
+  T dictionary(arrow.array.Array propval) nothrow
   {
     return setProperty("dictionary", propval);
   }
 
   /** */
-  T indices(arrow.array.Array propval)
+  T indices(arrow.array.Array propval) nothrow
   {
     return setProperty("indices", propval);
   }
@@ -126,7 +126,7 @@ final class DictionaryArrayGidBuilder : DictionaryArrayGidBuilderImpl!Dictionary
       Create object from builder.
       Returns: New object
   */
-  DictionaryArray build()
+  DictionaryArray build() nothrow
   {
     return new DictionaryArray(cast(void*)createGObject(DictionaryArray._getGType), Yes.Take);
   }

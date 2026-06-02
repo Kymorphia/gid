@@ -125,26 +125,26 @@ class BaseTransform : gst.element.Element
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_base_transform_get_type != &gidSymbolNotFound ? gst_base_transform_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BaseTransform self()
+  override BaseTransform self() nothrow
   {
     return this;
   }
@@ -153,19 +153,19 @@ class BaseTransform : gst.element.Element
       Get builder for [gstbase.base_transform.BaseTransform]
       Returns: New builder object
   */
-  static BaseTransformGidBuilder builder()
+  static BaseTransformGidBuilder builder() nothrow
   {
     return new BaseTransformGidBuilder;
   }
 
   /** */
-  @property bool qos()
+  @property bool qos() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("qos");
   }
 
   /** */
-  @property void qos(bool propval)
+  @property void qos(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("qos", propval);
   }
@@ -181,7 +181,7 @@ class BaseTransform : gst.element.Element
           used
         params = the #GstAllocationParams of allocator
   */
-  void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
+  void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params) nothrow
   {
     GstAllocator* _allocator;
     gst_base_transform_get_allocator(cast(GstBaseTransform*)this._cPtr, &_allocator, cast(GstAllocationParams*)&params);
@@ -189,7 +189,7 @@ class BaseTransform : gst.element.Element
   }
 
   /** */
-  gst.buffer_pool.BufferPool getBufferPool()
+  gst.buffer_pool.BufferPool getBufferPool() nothrow
   {
     GstBufferPool* _cretval;
     _cretval = gst_base_transform_get_buffer_pool(cast(GstBaseTransform*)this._cPtr);
@@ -203,7 +203,7 @@ class BaseTransform : gst.element.Element
         
         MT safe.
   */
-  bool isInPlace()
+  bool isInPlace() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_base_transform_is_in_place(cast(GstBaseTransform*)this._cPtr);
@@ -216,7 +216,7 @@ class BaseTransform : gst.element.Element
         
         MT safe.
   */
-  bool isPassthrough()
+  bool isPassthrough() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_base_transform_is_passthrough(cast(GstBaseTransform*)this._cPtr);
@@ -229,7 +229,7 @@ class BaseTransform : gst.element.Element
         
         MT safe.
   */
-  bool isQosEnabled()
+  bool isQosEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_base_transform_is_qos_enabled(cast(GstBaseTransform*)this._cPtr);
@@ -253,7 +253,7 @@ class BaseTransform : gst.element.Element
       implementation.
       Returns: true if the negotiation succeeded, else false.
   */
-  bool reconfigure()
+  bool reconfigure() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_base_transform_reconfigure(cast(GstBaseTransform*)this._cPtr);
@@ -265,7 +265,7 @@ class BaseTransform : gst.element.Element
       typically called after properties on the transform were set that
       influence the input format.
   */
-  void reconfigureSink()
+  void reconfigureSink() nothrow
   {
     gst_base_transform_reconfigure_sink(cast(GstBaseTransform*)this._cPtr);
   }
@@ -275,7 +275,7 @@ class BaseTransform : gst.element.Element
       buffer. This function is typically called after properties on the transform
       were set that influence the output format.
   */
-  void reconfigureSrc()
+  void reconfigureSrc() nothrow
   {
     gst_base_transform_reconfigure_src(cast(GstBaseTransform*)this._cPtr);
   }
@@ -293,7 +293,7 @@ class BaseTransform : gst.element.Element
       Params:
         gapAware = New state
   */
-  void setGapAware(bool gapAware)
+  void setGapAware(bool gapAware) nothrow
   {
     gst_base_transform_set_gap_aware(cast(GstBaseTransform*)this._cPtr, gapAware);
   }
@@ -311,7 +311,7 @@ class BaseTransform : gst.element.Element
         inPlace = Boolean value indicating that we would like to operate
           on in_place buffers.
   */
-  void setInPlace(bool inPlace)
+  void setInPlace(bool inPlace) nothrow
   {
     gst_base_transform_set_in_place(cast(GstBaseTransform*)this._cPtr, inPlace);
   }
@@ -328,7 +328,7 @@ class BaseTransform : gst.element.Element
       Params:
         passthrough = boolean indicating passthrough mode.
   */
-  void setPassthrough(bool passthrough)
+  void setPassthrough(bool passthrough) nothrow
   {
     gst_base_transform_set_passthrough(cast(GstBaseTransform*)this._cPtr, passthrough);
   }
@@ -349,7 +349,7 @@ class BaseTransform : gst.element.Element
       Params:
         preferPassthrough = New state
   */
-  void setPreferPassthrough(bool preferPassthrough)
+  void setPreferPassthrough(bool preferPassthrough) nothrow
   {
     gst_base_transform_set_prefer_passthrough(cast(GstBaseTransform*)this._cPtr, preferPassthrough);
   }
@@ -362,7 +362,7 @@ class BaseTransform : gst.element.Element
       Params:
         enabled = new state
   */
-  void setQosEnabled(bool enabled)
+  void setQosEnabled(bool enabled) nothrow
   {
     gst_base_transform_set_qos_enabled(cast(GstBaseTransform*)this._cPtr, enabled);
   }
@@ -380,7 +380,7 @@ class BaseTransform : gst.element.Element
         timestamp = the timestamp of the buffer generating the QoS expressed in
           running_time.
   */
-  void updateQos(double proportion, gst.types.ClockTimeDiff diff, gst.types.ClockTime timestamp)
+  void updateQos(double proportion, gst.types.ClockTimeDiff diff, gst.types.ClockTime timestamp) nothrow
   {
     gst_base_transform_update_qos(cast(GstBaseTransform*)this._cPtr, proportion, diff, timestamp);
   }
@@ -397,7 +397,7 @@ class BaseTransform : gst.element.Element
           downstream
       Returns: true if the caps could be sent downstream false otherwise
   */
-  bool updateSrcCaps(gst.caps.Caps updatedCaps)
+  bool updateSrcCaps(gst.caps.Caps updatedCaps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_base_transform_update_src_caps(cast(GstBaseTransform*)this._cPtr, updatedCaps ? cast(GstCaps*)updatedCaps._cPtr(No.Dup) : null);
@@ -410,7 +410,7 @@ class BaseTransformGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 {
 
   /** */
-  T qos(bool propval)
+  T qos(bool propval) nothrow
   {
     return setProperty("qos", propval);
   }
@@ -423,7 +423,7 @@ final class BaseTransformGidBuilder : BaseTransformGidBuilderImpl!BaseTransformG
       Create object from builder.
       Returns: New object
   */
-  BaseTransform build()
+  BaseTransform build() nothrow
   {
     return new BaseTransform(cast(void*)createGObject(BaseTransform._getGType), No.Take);
   }

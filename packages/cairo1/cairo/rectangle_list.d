@@ -21,7 +21,7 @@ class RectangleList : gobject.boxed.Boxed
         status = Error status of the rectangle list
         numRectangles = Number of rectangles in this list
   */
-  this(cairo.types.Status status = cairo.types.Status.init, int numRectangles = int.init)
+  this(cairo.types.Status status = cairo.types.Status.init, int numRectangles = int.init) nothrow
   {
     super(gMalloc(cairo_rectangle_list_t.sizeof), Yes.Take);
     this.status = status;
@@ -29,32 +29,32 @@ class RectangleList : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_rectangle_list_get_type != &gidSymbolNotFound ? cairo_gobject_rectangle_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RectangleList self()
+  override RectangleList self() nothrow
   {
     return this;
   }
@@ -63,7 +63,7 @@ class RectangleList : gobject.boxed.Boxed
       Get `status` field.
       Returns: Error status of the rectangle list
   */
-  @property cairo.types.Status status()
+  @property cairo.types.Status status() nothrow
   {
     return cast(cairo.types.Status)(cast(cairo_rectangle_list_t*)this._cPtr).status;
   }
@@ -73,7 +73,7 @@ class RectangleList : gobject.boxed.Boxed
       Params:
         propval = Error status of the rectangle list
   */
-  @property void status(cairo.types.Status propval)
+  @property void status(cairo.types.Status propval) nothrow
   {
     (cast(cairo_rectangle_list_t*)this._cPtr).status = cast(cairo_status_t)propval;
   }
@@ -82,7 +82,7 @@ class RectangleList : gobject.boxed.Boxed
       Get `rectangles` field.
       Returns: Array containing the rectangles
   */
-  @property cairo.types.Rectangle rectangles()
+  @property cairo.types.Rectangle rectangles() nothrow
   {
     return cToD!(cairo.types.Rectangle)(cast(void*)(cast(cairo_rectangle_list_t*)this._cPtr).rectangles);
   }
@@ -91,7 +91,7 @@ class RectangleList : gobject.boxed.Boxed
       Get `numRectangles` field.
       Returns: Number of rectangles in this list
   */
-  @property int numRectangles()
+  @property int numRectangles() nothrow
   {
     return (cast(cairo_rectangle_list_t*)this._cPtr).numRectangles;
   }
@@ -101,7 +101,7 @@ class RectangleList : gobject.boxed.Boxed
       Params:
         propval = Number of rectangles in this list
   */
-  @property void numRectangles(int propval)
+  @property void numRectangles(int propval) nothrow
   {
     (cast(cairo_rectangle_list_t*)this._cPtr).numRectangles = propval;
   }

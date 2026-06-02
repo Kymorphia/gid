@@ -52,26 +52,26 @@ class Message : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_message_get_type != &gidSymbolNotFound ? soup_message_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Message self()
+  override Message self() nothrow
   {
     return this;
   }
@@ -80,7 +80,7 @@ class Message : gobject.object.ObjectWrap
       Get builder for [soup.message.Message]
       Returns: New builder object
   */
-  static MessageGidBuilder builder()
+  static MessageGidBuilder builder() nothrow
   {
     return new MessageGidBuilder;
   }
@@ -90,7 +90,7 @@ class Message : gobject.object.ObjectWrap
       Returns: The [glib.uri.Uri] loaded in the application when the message was
         queued.
   */
-  @property glib.uri.Uri firstParty()
+  @property glib.uri.Uri firstParty() nothrow
   {
     return getFirstParty();
   }
@@ -101,7 +101,7 @@ class Message : gobject.object.ObjectWrap
         propval = The [glib.uri.Uri] loaded in the application when the message was
           queued.
   */
-  @property void firstParty(glib.uri.Uri propval)
+  @property void firstParty(glib.uri.Uri propval) nothrow
   {
     setFirstParty(propval);
   }
@@ -110,7 +110,7 @@ class Message : gobject.object.ObjectWrap
       Get `flags` property.
       Returns: Various message options.
   */
-  @property soup.types.MessageFlags flags()
+  @property soup.types.MessageFlags flags() nothrow
   {
     return getFlags();
   }
@@ -120,7 +120,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         propval = Various message options.
   */
-  @property void flags(soup.types.MessageFlags propval)
+  @property void flags(soup.types.MessageFlags propval) nothrow
   {
     setFlags(propval);
   }
@@ -129,7 +129,7 @@ class Message : gobject.object.ObjectWrap
       Get `httpVersion` property.
       Returns: The HTTP protocol version to use.
   */
-  @property soup.types.HTTPVersion httpVersion()
+  @property soup.types.HTTPVersion httpVersion() nothrow
   {
     return getHttpVersion();
   }
@@ -143,7 +143,7 @@ class Message : gobject.object.ObjectWrap
         path of [soup.message.Message.uri] will be ignored and
         [soup.message.Message.method] set to `SOUP_METHOD_OPTIONS`.
   */
-  @property bool isOptionsPing()
+  @property bool isOptionsPing() nothrow
   {
     return getIsOptionsPing();
   }
@@ -158,7 +158,7 @@ class Message : gobject.object.ObjectWrap
           path of [soup.message.Message.uri] will be ignored and
           [soup.message.Message.method] set to `SOUP_METHOD_OPTIONS`.
   */
-  @property void isOptionsPing(bool propval)
+  @property void isOptionsPing(bool propval) nothrow
   {
     setIsOptionsPing(propval);
   }
@@ -167,7 +167,7 @@ class Message : gobject.object.ObjectWrap
       Get `isTopLevelNavigation` property.
       Returns: Set when the message is navigating between top level domains.
   */
-  @property bool isTopLevelNavigation()
+  @property bool isTopLevelNavigation() nothrow
   {
     return getIsTopLevelNavigation();
   }
@@ -177,7 +177,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         propval = Set when the message is navigating between top level domains.
   */
-  @property void isTopLevelNavigation(bool propval)
+  @property void isTopLevelNavigation(bool propval) nothrow
   {
     setIsTopLevelNavigation(propval);
   }
@@ -186,7 +186,7 @@ class Message : gobject.object.ObjectWrap
       Get `method` property.
       Returns: The message's HTTP method.
   */
-  @property string method()
+  @property string method() nothrow
   {
     return getMethod();
   }
@@ -196,7 +196,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         propval = The message's HTTP method.
   */
-  @property void method(string propval)
+  @property void method(string propval) nothrow
   {
     setMethod(propval);
   }
@@ -206,7 +206,7 @@ class Message : gobject.object.ObjectWrap
       Returns: Sets the priority of the #SoupMessage. See
         [soup.message.Message.setPriority] for further details.
   */
-  @property soup.types.MessagePriority priority()
+  @property soup.types.MessagePriority priority() nothrow
   {
     return getPriority();
   }
@@ -217,7 +217,7 @@ class Message : gobject.object.ObjectWrap
         propval = Sets the priority of the #SoupMessage. See
           [soup.message.Message.setPriority] for further details.
   */
-  @property void priority(soup.types.MessagePriority propval)
+  @property void priority(soup.types.MessagePriority propval) nothrow
   {
     setPriority(propval);
   }
@@ -226,7 +226,7 @@ class Message : gobject.object.ObjectWrap
       Get `reasonPhrase` property.
       Returns: The HTTP response reason phrase.
   */
-  @property string reasonPhrase()
+  @property string reasonPhrase() nothrow
   {
     return getReasonPhrase();
   }
@@ -236,7 +236,7 @@ class Message : gobject.object.ObjectWrap
       Returns: The remote [gio.socket_address.SocketAddress] of the connection associated
         with the message.
   */
-  @property gio.socket_address.SocketAddress remoteAddress()
+  @property gio.socket_address.SocketAddress remoteAddress() nothrow
   {
     return getRemoteAddress();
   }
@@ -245,7 +245,7 @@ class Message : gobject.object.ObjectWrap
       Get `requestHeaders` property.
       Returns: The HTTP request headers.
   */
-  @property soup.message_headers.MessageHeaders requestHeaders()
+  @property soup.message_headers.MessageHeaders requestHeaders() nothrow
   {
     return getRequestHeaders();
   }
@@ -254,7 +254,7 @@ class Message : gobject.object.ObjectWrap
       Get `responseHeaders` property.
       Returns: The HTTP response headers.
   */
-  @property soup.message_headers.MessageHeaders responseHeaders()
+  @property soup.message_headers.MessageHeaders responseHeaders() nothrow
   {
     return getResponseHeaders();
   }
@@ -263,7 +263,7 @@ class Message : gobject.object.ObjectWrap
       Get `siteForCookies` property.
       Returns: Site used to compare cookies against. Used for SameSite cookie support.
   */
-  @property glib.uri.Uri siteForCookies()
+  @property glib.uri.Uri siteForCookies() nothrow
   {
     return getSiteForCookies();
   }
@@ -273,7 +273,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         propval = Site used to compare cookies against. Used for SameSite cookie support.
   */
-  @property void siteForCookies(glib.uri.Uri propval)
+  @property void siteForCookies(glib.uri.Uri propval) nothrow
   {
     setSiteForCookies(propval);
   }
@@ -282,7 +282,7 @@ class Message : gobject.object.ObjectWrap
       Get `statusCode` property.
       Returns: The HTTP response status code.
   */
-  @property uint statusCode()
+  @property uint statusCode() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("status-code");
   }
@@ -291,7 +291,7 @@ class Message : gobject.object.ObjectWrap
       Get `tlsCiphersuiteName` property.
       Returns: The Name of TLS ciphersuite negotiated for this message connection.
   */
-  @property string tlsCiphersuiteName()
+  @property string tlsCiphersuiteName() nothrow
   {
     return getTlsCiphersuiteName();
   }
@@ -300,7 +300,7 @@ class Message : gobject.object.ObjectWrap
       Get `tlsPeerCertificate` property.
       Returns: The peer's [gio.tls_certificate.TlsCertificate] associated with the message.
   */
-  @property gio.tls_certificate.TlsCertificate tlsPeerCertificate()
+  @property gio.tls_certificate.TlsCertificate tlsPeerCertificate() nothrow
   {
     return getTlsPeerCertificate();
   }
@@ -309,7 +309,7 @@ class Message : gobject.object.ObjectWrap
       Get `tlsPeerCertificateErrors` property.
       Returns: The verification errors on [soup.message.Message.tlsPeerCertificate].
   */
-  @property gio.types.TlsCertificateFlags tlsPeerCertificateErrors()
+  @property gio.types.TlsCertificateFlags tlsPeerCertificateErrors() nothrow
   {
     return getTlsPeerCertificateErrors();
   }
@@ -318,7 +318,7 @@ class Message : gobject.object.ObjectWrap
       Get `tlsProtocolVersion` property.
       Returns: The TLS protocol version negotiated for the message connection.
   */
-  @property gio.types.TlsProtocolVersion tlsProtocolVersion()
+  @property gio.types.TlsProtocolVersion tlsProtocolVersion() nothrow
   {
     return getTlsProtocolVersion();
   }
@@ -327,7 +327,7 @@ class Message : gobject.object.ObjectWrap
       Get `uri` property.
       Returns: The message's Request-URI.
   */
-  @property glib.uri.Uri uri()
+  @property glib.uri.Uri uri() nothrow
   {
     return getUri();
   }
@@ -337,7 +337,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         propval = The message's Request-URI.
   */
-  @property void uri(glib.uri.Uri propval)
+  @property void uri(glib.uri.Uri propval) nothrow
   {
     setUri(propval);
   }
@@ -351,7 +351,7 @@ class Message : gobject.object.ObjectWrap
       Returns: the new #SoupMessage (or null if uri
           could not be parsed).
   */
-  this(string method, string uriString)
+  this(string method, string uriString) nothrow
   {
     SoupMessage* _cretval;
     const(char)* _method = method.toCString(No.Alloc);
@@ -377,7 +377,7 @@ class Message : gobject.object.ObjectWrap
       Returns: the new #SoupMessage, or null if
           uri_string could not be parsed or method is not "GET, "POST" or "PUT"
   */
-  static soup.message.Message newFromEncodedForm(string method, string uriString, string encodedForm)
+  static soup.message.Message newFromEncodedForm(string method, string uriString, string encodedForm) nothrow
   {
     SoupMessage* _cretval;
     const(char)* _method = method.toCString(No.Alloc);
@@ -398,7 +398,7 @@ class Message : gobject.object.ObjectWrap
       Returns: the new #SoupMessage, or null if uri_string
           could not be parsed
   */
-  static soup.message.Message newFromMultipart(string uriString, soup.multipart.Multipart multipart)
+  static soup.message.Message newFromMultipart(string uriString, soup.multipart.Multipart multipart) nothrow
   {
     SoupMessage* _cretval;
     const(char)* _uriString = uriString.toCString(No.Alloc);
@@ -415,7 +415,7 @@ class Message : gobject.object.ObjectWrap
         uri = the destination endpoint
       Returns: the new #SoupMessage
   */
-  static soup.message.Message newFromUri(string method, glib.uri.Uri uri)
+  static soup.message.Message newFromUri(string method, glib.uri.Uri uri) nothrow
   {
     SoupMessage* _cretval;
     const(char)* _method = method.toCString(No.Alloc);
@@ -432,7 +432,7 @@ class Message : gobject.object.ObjectWrap
         baseUri = the destination endpoint
       Returns: the new #SoupMessage
   */
-  static soup.message.Message newOptionsPing(glib.uri.Uri baseUri)
+  static soup.message.Message newOptionsPing(glib.uri.Uri baseUri) nothrow
   {
     SoupMessage* _cretval;
     _cretval = soup_message_new_options_ping(baseUri ? cast(GUri*)baseUri._cPtr(No.Dup) : null);
@@ -446,7 +446,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         flags = a set of #SoupMessageFlags values
   */
-  void addFlags(soup.types.MessageFlags flags)
+  void addFlags(soup.types.MessageFlags flags) nothrow
   {
     soup_message_add_flags(cast(SoupMessage*)this._cPtr, flags);
   }
@@ -467,7 +467,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         featureType = the #GType of a #SoupSessionFeature
   */
-  void disableFeature(gobject.types.GType featureType)
+  void disableFeature(gobject.types.GType featureType) nothrow
   {
     soup_message_disable_feature(cast(SoupMessage*)this._cPtr, featureType);
   }
@@ -479,7 +479,7 @@ class Message : gobject.object.ObjectWrap
       a connection yet.
       Returns: An id or 0 if no connection.
   */
-  ulong getConnectionId()
+  ulong getConnectionId() nothrow
   {
     ulong _retval;
     _retval = soup_message_get_connection_id(cast(SoupMessage*)this._cPtr);
@@ -490,7 +490,7 @@ class Message : gobject.object.ObjectWrap
       Gets msg's first-party [glib.uri.Uri].
       Returns: the msg's first party #GUri
   */
-  glib.uri.Uri getFirstParty()
+  glib.uri.Uri getFirstParty() nothrow
   {
     GUri* _cretval;
     _cretval = soup_message_get_first_party(cast(SoupMessage*)this._cPtr);
@@ -502,7 +502,7 @@ class Message : gobject.object.ObjectWrap
       Gets the flags on msg.
       Returns: the flags
   */
-  soup.types.MessageFlags getFlags()
+  soup.types.MessageFlags getFlags() nothrow
   {
     SoupMessageFlags _cretval;
     _cretval = soup_message_get_flags(cast(SoupMessage*)this._cPtr);
@@ -514,7 +514,7 @@ class Message : gobject.object.ObjectWrap
       Returns whether HTTP/1 version is currently demanded for the msg send.
       Returns: true, when HTTP/1 is demanded, false otherwise.
   */
-  bool getForceHttp1()
+  bool getForceHttp1() nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_message_get_force_http1(cast(SoupMessage*)this._cPtr);
@@ -528,7 +528,7 @@ class Message : gobject.object.ObjectWrap
       response.
       Returns: the HTTP version
   */
-  soup.types.HTTPVersion getHttpVersion()
+  soup.types.HTTPVersion getHttpVersion() nothrow
   {
     SoupHTTPVersion _cretval;
     _cretval = soup_message_get_http_version(cast(SoupMessage*)this._cPtr);
@@ -540,7 +540,7 @@ class Message : gobject.object.ObjectWrap
       Gets whether msg is intended to be used to send `OPTIONS *` to a server.
       Returns: true if the message is options ping, or false otherwise
   */
-  bool getIsOptionsPing()
+  bool getIsOptionsPing() nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_message_get_is_options_ping(cast(SoupMessage*)this._cPtr);
@@ -553,7 +553,7 @@ class Message : gobject.object.ObjectWrap
       Used for same-site policy checks.
       Returns: Whether the current request is a top-level navitation
   */
-  bool getIsTopLevelNavigation()
+  bool getIsTopLevelNavigation() nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_message_get_is_top_level_navigation(cast(SoupMessage*)this._cPtr);
@@ -564,7 +564,7 @@ class Message : gobject.object.ObjectWrap
       Returns the method of this message.
       Returns: A method such as `SOUP_METHOD_GET`
   */
-  string getMethod()
+  string getMethod() nothrow
   {
     const(char)* _cretval;
     _cretval = soup_message_get_method(cast(SoupMessage*)this._cPtr);
@@ -579,7 +579,7 @@ class Message : gobject.object.ObjectWrap
       return null.
       Returns: a #SoupMessageMetrics
   */
-  soup.message_metrics.MessageMetrics getMetrics()
+  soup.message_metrics.MessageMetrics getMetrics() nothrow
   {
     SoupMessageMetrics* _cretval;
     _cretval = soup_message_get_metrics(cast(SoupMessage*)this._cPtr);
@@ -593,7 +593,7 @@ class Message : gobject.object.ObjectWrap
       If not set this value defaults to #SOUP_MESSAGE_PRIORITY_NORMAL.
       Returns: the priority of the message.
   */
-  soup.types.MessagePriority getPriority()
+  soup.types.MessagePriority getPriority() nothrow
   {
     SoupMessagePriority _cretval;
     _cretval = soup_message_get_priority(cast(SoupMessage*)this._cPtr);
@@ -605,7 +605,7 @@ class Message : gobject.object.ObjectWrap
       Returns the reason phrase for the status of this message.
       Returns: the phrase
   */
-  string getReasonPhrase()
+  string getReasonPhrase() nothrow
   {
     const(char)* _cretval;
     _cretval = soup_message_get_reason_phrase(cast(SoupMessage*)this._cPtr);
@@ -625,7 +625,7 @@ class Message : gobject.object.ObjectWrap
       Returns: a #GSocketAddress or null if the connection
             hasn't been established
   */
-  gio.socket_address.SocketAddress getRemoteAddress()
+  gio.socket_address.SocketAddress getRemoteAddress() nothrow
   {
     GSocketAddress* _cretval;
     _cretval = soup_message_get_remote_address(cast(SoupMessage*)this._cPtr);
@@ -637,7 +637,7 @@ class Message : gobject.object.ObjectWrap
       Returns the headers sent with the request.
       Returns: The #SoupMessageHeaders
   */
-  soup.message_headers.MessageHeaders getRequestHeaders()
+  soup.message_headers.MessageHeaders getRequestHeaders() nothrow
   {
     SoupMessageHeaders* _cretval;
     _cretval = soup_message_get_request_headers(cast(SoupMessage*)this._cPtr);
@@ -649,7 +649,7 @@ class Message : gobject.object.ObjectWrap
       Returns the headers recieved with the response.
       Returns: The #SoupMessageHeaders
   */
-  soup.message_headers.MessageHeaders getResponseHeaders()
+  soup.message_headers.MessageHeaders getResponseHeaders() nothrow
   {
     SoupMessageHeaders* _cretval;
     _cretval = soup_message_get_response_headers(cast(SoupMessage*)this._cPtr);
@@ -661,7 +661,7 @@ class Message : gobject.object.ObjectWrap
       Gets msg's site for cookies #GUri.
       Returns: the msg's site for cookies #GUri
   */
-  glib.uri.Uri getSiteForCookies()
+  glib.uri.Uri getSiteForCookies() nothrow
   {
     GUri* _cretval;
     _cretval = soup_message_get_site_for_cookies(cast(SoupMessage*)this._cPtr);
@@ -673,7 +673,7 @@ class Message : gobject.object.ObjectWrap
       Returns the set status of this message.
       Returns: The #SoupStatus
   */
-  soup.types.Status getStatus()
+  soup.types.Status getStatus() nothrow
   {
     SoupStatus _cretval;
     _cretval = soup_message_get_status(cast(SoupMessage*)this._cPtr);
@@ -686,7 +686,7 @@ class Message : gobject.object.ObjectWrap
       Returns: the name of the TLS ciphersuite,
           or null if msg's connection is not SSL.
   */
-  string getTlsCiphersuiteName()
+  string getTlsCiphersuiteName() nothrow
   {
     const(char)* _cretval;
     _cretval = soup_message_get_tls_ciphersuite_name(cast(SoupMessage*)this._cPtr);
@@ -702,7 +702,7 @@ class Message : gobject.object.ObjectWrap
       Returns: msg's TLS peer certificate,
           or null if msg's connection is not SSL.
   */
-  gio.tls_certificate.TlsCertificate getTlsPeerCertificate()
+  gio.tls_certificate.TlsCertificate getTlsPeerCertificate() nothrow
   {
     GTlsCertificate* _cretval;
     _cretval = soup_message_get_tls_peer_certificate(cast(SoupMessage*)this._cPtr);
@@ -716,7 +716,7 @@ class Message : gobject.object.ObjectWrap
       [soup.message.Message.acceptCertificate] signal.
       Returns: a #GTlsCertificateFlags with msg's TLS peer certificate errors.
   */
-  gio.types.TlsCertificateFlags getTlsPeerCertificateErrors()
+  gio.types.TlsCertificateFlags getTlsPeerCertificateErrors() nothrow
   {
     GTlsCertificateFlags _cretval;
     _cretval = soup_message_get_tls_peer_certificate_errors(cast(SoupMessage*)this._cPtr);
@@ -730,7 +730,7 @@ class Message : gobject.object.ObjectWrap
       If the message connection is not SSL, [gio.types.TlsProtocolVersion.Unknown] is returned.
       Returns: a #GTlsProtocolVersion
   */
-  gio.types.TlsProtocolVersion getTlsProtocolVersion()
+  gio.types.TlsProtocolVersion getTlsProtocolVersion() nothrow
   {
     GTlsProtocolVersion _cretval;
     _cretval = soup_message_get_tls_protocol_version(cast(SoupMessage*)this._cPtr);
@@ -742,7 +742,7 @@ class Message : gobject.object.ObjectWrap
       Gets msg's URI.
       Returns: the URI msg is targeted for.
   */
-  glib.uri.Uri getUri()
+  glib.uri.Uri getUri() nothrow
   {
     GUri* _cretval;
     _cretval = soup_message_get_uri(cast(SoupMessage*)this._cPtr);
@@ -760,7 +760,7 @@ class Message : gobject.object.ObjectWrap
         featureType = the #GType of a #SoupSessionFeature
       Returns: true if feature is disabled, or false otherwise.
   */
-  bool isFeatureDisabled(gobject.types.GType featureType)
+  bool isFeatureDisabled(gobject.types.GType featureType) nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_message_is_feature_disabled(cast(SoupMessage*)this._cPtr, featureType);
@@ -774,7 +774,7 @@ class Message : gobject.object.ObjectWrap
       The result is based on the HTTP version, Connection header, etc.
       Returns: true or false.
   */
-  bool isKeepalive()
+  bool isKeepalive() nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_message_is_keepalive(cast(SoupMessage*)this._cPtr);
@@ -788,7 +788,7 @@ class Message : gobject.object.ObjectWrap
         flags = a set of #SoupMessageFlags values
       Returns: true if flags are enabled in msg
   */
-  bool queryFlags(soup.types.MessageFlags flags)
+  bool queryFlags(soup.types.MessageFlags flags) nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_message_query_flags(cast(SoupMessage*)this._cPtr, flags);
@@ -801,7 +801,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         flags = a set of #SoupMessageFlags values
   */
-  void removeFlags(soup.types.MessageFlags flags)
+  void removeFlags(soup.types.MessageFlags flags) nothrow
   {
     soup_message_remove_flags(cast(SoupMessage*)this._cPtr, flags);
   }
@@ -815,7 +815,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         firstParty = the #GUri for the msg's first party
   */
-  void setFirstParty(glib.uri.Uri firstParty)
+  void setFirstParty(glib.uri.Uri firstParty) nothrow
   {
     soup_message_set_first_party(cast(SoupMessage*)this._cPtr, firstParty ? cast(GUri*)firstParty._cPtr(No.Dup) : null);
   }
@@ -826,7 +826,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         flags = a set of #SoupMessageFlags values
   */
-  void setFlags(soup.types.MessageFlags flags)
+  void setFlags(soup.types.MessageFlags flags) nothrow
   {
     soup_message_set_flags(cast(SoupMessage*)this._cPtr, flags);
   }
@@ -840,7 +840,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         value = value to set
   */
-  void setForceHttp1(bool value)
+  void setForceHttp1(bool value) nothrow
   {
     soup_message_set_force_http1(cast(SoupMessage*)this._cPtr, value);
   }
@@ -854,7 +854,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         isOptionsPing = the value to set
   */
-  void setIsOptionsPing(bool isOptionsPing)
+  void setIsOptionsPing(bool isOptionsPing) nothrow
   {
     soup_message_set_is_options_ping(cast(SoupMessage*)this._cPtr, isOptionsPing);
   }
@@ -868,7 +868,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         isTopLevelNavigation = if true indicate the current request is a top-level navigation
   */
-  void setIsTopLevelNavigation(bool isTopLevelNavigation)
+  void setIsTopLevelNavigation(bool isTopLevelNavigation) nothrow
   {
     soup_message_set_is_top_level_navigation(cast(SoupMessage*)this._cPtr, isTopLevelNavigation);
   }
@@ -879,7 +879,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         method = the value to set
   */
-  void setMethod(string method)
+  void setMethod(string method) nothrow
   {
     const(char)* _method = method.toCString(No.Alloc);
     soup_message_set_method(cast(SoupMessage*)this._cPtr, _method);
@@ -902,7 +902,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         priority = the #SoupMessagePriority
   */
-  void setPriority(soup.types.MessagePriority priority)
+  void setPriority(soup.types.MessagePriority priority) nothrow
   {
     soup_message_set_priority(cast(SoupMessage*)this._cPtr, priority);
   }
@@ -920,7 +920,7 @@ class Message : gobject.object.ObjectWrap
         stream = a #GInputStream to read the request body from
         contentLength = the byte length of stream or -1 if unknown
   */
-  void setRequestBody(string contentType, gio.input_stream.InputStream stream, ptrdiff_t contentLength)
+  void setRequestBody(string contentType, gio.input_stream.InputStream stream, ptrdiff_t contentLength) nothrow
   {
     const(char)* _contentType = contentType.toCString(No.Alloc);
     soup_message_set_request_body(cast(SoupMessage*)this._cPtr, _contentType, stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, contentLength);
@@ -938,7 +938,7 @@ class Message : gobject.object.ObjectWrap
         contentType = MIME Content-Type of the body, or null if unknown
         bytes = a #GBytes with the request body data
   */
-  void setRequestBodyFromBytes(string contentType = null, glib.bytes.Bytes bytes = null)
+  void setRequestBodyFromBytes(string contentType = null, glib.bytes.Bytes bytes = null) nothrow
   {
     const(char)* _contentType = contentType.toCString(No.Alloc);
     soup_message_set_request_body_from_bytes(cast(SoupMessage*)this._cPtr, _contentType, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null);
@@ -958,7 +958,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         siteForCookies = the #GUri for the msg's site for cookies
   */
-  void setSiteForCookies(glib.uri.Uri siteForCookies = null)
+  void setSiteForCookies(glib.uri.Uri siteForCookies = null) nothrow
   {
     soup_message_set_site_for_cookies(cast(SoupMessage*)this._cPtr, siteForCookies ? cast(GUri*)siteForCookies._cPtr(No.Dup) : null);
   }
@@ -976,7 +976,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         certificate = the #GTlsCertificate to set, or null
   */
-  void setTlsClientCertificate(gio.tls_certificate.TlsCertificate certificate = null)
+  void setTlsClientCertificate(gio.tls_certificate.TlsCertificate certificate = null) nothrow
   {
     soup_message_set_tls_client_certificate(cast(SoupMessage*)this._cPtr, certificate ? cast(GTlsCertificate*)certificate._cPtr(No.Dup) : null);
   }
@@ -990,7 +990,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         uri = the new #GUri
   */
-  void setUri(glib.uri.Uri uri)
+  void setUri(glib.uri.Uri uri) nothrow
   {
     soup_message_set_uri(cast(SoupMessage*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null);
   }
@@ -1002,7 +1002,7 @@ class Message : gobject.object.ObjectWrap
       [soup.message.Message.requestCertificatePassword] signal, to notify msg that
       the [gio.tls_password.TlsPassword] has already been updated.
   */
-  void tlsClientCertificatePasswordRequestComplete()
+  void tlsClientCertificatePasswordRequestComplete() nothrow
   {
     soup_message_tls_client_certificate_password_request_complete(cast(SoupMessage*)this._cPtr);
   }
@@ -1033,7 +1033,7 @@ class Message : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAcceptCertificate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAcceptCertificate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.tls_certificate.TlsCertificate)))
@@ -1041,11 +1041,12 @@ class Message : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : soup.message.Message)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1056,7 +1057,14 @@ class Message : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.message.Message.acceptCertificate");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1099,7 +1107,7 @@ class Message : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAuthenticate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAuthenticate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.auth.Auth)))
@@ -1107,11 +1115,12 @@ class Message : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : soup.message.Message)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1122,7 +1131,14 @@ class Message : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.message.Message.authenticate");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1156,7 +1172,7 @@ class Message : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectContentSniffed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectContentSniffed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -1164,7 +1180,7 @@ class Message : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : soup.message.Message)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1179,7 +1195,14 @@ class Message : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.message.Message.contentSniffed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1203,13 +1226,13 @@ class Message : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFinished(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFinished(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.message.Message)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1218,7 +1241,14 @@ class Message : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.message.Message.finished");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1240,13 +1270,13 @@ class Message : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGotBody(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGotBody(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.message.Message)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1255,7 +1285,14 @@ class Message : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.message.Message.gotBody");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1280,14 +1317,14 @@ class Message : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGotBodyData(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGotBodyData(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.message.Message)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1299,7 +1336,14 @@ class Message : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.message.Message.gotBodyData");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1334,13 +1378,13 @@ class Message : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGotHeaders(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGotHeaders(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.message.Message)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1349,7 +1393,14 @@ class Message : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.message.Message.gotHeaders");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1380,13 +1431,13 @@ class Message : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGotInformational(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGotInformational(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.message.Message)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1395,7 +1446,14 @@ class Message : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.message.Message.gotInformational");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1419,13 +1477,13 @@ class Message : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectHstsEnforced(T)(T callback, Flag!"After" after = No.After)
+  gulong connectHstsEnforced(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.message.Message)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1434,7 +1492,14 @@ class Message : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.message.Message.hstsEnforced");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1471,7 +1536,7 @@ class Message : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNetworkEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNetworkEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gio.types.SocketClientEvent)))
@@ -1479,7 +1544,7 @@ class Message : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : soup.message.Message)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1494,7 +1559,14 @@ class Message : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.message.Message.networkEvent");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1530,18 +1602,19 @@ class Message : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRequestCertificate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRequestCertificate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.tls_client_connection.TlsClientConnection)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.message.Message)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1549,7 +1622,14 @@ class Message : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.message.Message.requestCertificate");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1588,18 +1668,19 @@ class Message : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRequestCertificatePassword(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRequestCertificatePassword(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.tls_password.TlsPassword)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.message.Message)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1607,7 +1688,14 @@ class Message : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.message.Message.requestCertificatePassword");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1636,13 +1724,13 @@ class Message : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRestarted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRestarted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.message.Message)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1651,7 +1739,14 @@ class Message : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.message.Message.restarted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1673,13 +1768,13 @@ class Message : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectStarting(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStarting(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.message.Message)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1688,7 +1783,14 @@ class Message : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.message.Message.starting");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1711,13 +1813,13 @@ class Message : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWroteBody(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWroteBody(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.message.Message)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1726,7 +1828,14 @@ class Message : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.message.Message.wroteBody");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1751,14 +1860,14 @@ class Message : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWroteBodyData(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWroteBodyData(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.message.Message)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1770,7 +1879,14 @@ class Message : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.message.Message.wroteBodyData");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1793,13 +1909,13 @@ class Message : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWroteHeaders(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWroteHeaders(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.message.Message)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1808,7 +1924,14 @@ class Message : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.message.Message.wroteHeaders");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1827,7 +1950,7 @@ class MessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           queued.
       Returns: Builder instance for fluent chaining
   */
-  T firstParty(glib.uri.Uri propval)
+  T firstParty(glib.uri.Uri propval) nothrow
   {
     return setProperty("first-party", propval);
   }
@@ -1838,7 +1961,7 @@ class MessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Various message options.
       Returns: Builder instance for fluent chaining
   */
-  T flags(soup.types.MessageFlags propval)
+  T flags(soup.types.MessageFlags propval) nothrow
   {
     return setProperty("flags", propval);
   }
@@ -1854,7 +1977,7 @@ class MessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           [soup.message.Message.method] set to `SOUP_METHOD_OPTIONS`.
       Returns: Builder instance for fluent chaining
   */
-  T isOptionsPing(bool propval)
+  T isOptionsPing(bool propval) nothrow
   {
     return setProperty("is-options-ping", propval);
   }
@@ -1865,7 +1988,7 @@ class MessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Set when the message is navigating between top level domains.
       Returns: Builder instance for fluent chaining
   */
-  T isTopLevelNavigation(bool propval)
+  T isTopLevelNavigation(bool propval) nothrow
   {
     return setProperty("is-top-level-navigation", propval);
   }
@@ -1876,7 +1999,7 @@ class MessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The message's HTTP method.
       Returns: Builder instance for fluent chaining
   */
-  T method(string propval)
+  T method(string propval) nothrow
   {
     return setProperty("method", propval);
   }
@@ -1888,7 +2011,7 @@ class MessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           [soup.message.Message.setPriority] for further details.
       Returns: Builder instance for fluent chaining
   */
-  T priority(soup.types.MessagePriority propval)
+  T priority(soup.types.MessagePriority propval) nothrow
   {
     return setProperty("priority", propval);
   }
@@ -1899,7 +2022,7 @@ class MessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Site used to compare cookies against. Used for SameSite cookie support.
       Returns: Builder instance for fluent chaining
   */
-  T siteForCookies(glib.uri.Uri propval)
+  T siteForCookies(glib.uri.Uri propval) nothrow
   {
     return setProperty("site-for-cookies", propval);
   }
@@ -1910,7 +2033,7 @@ class MessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The message's Request-URI.
       Returns: Builder instance for fluent chaining
   */
-  T uri(glib.uri.Uri propval)
+  T uri(glib.uri.Uri propval) nothrow
   {
     return setProperty("uri", propval);
   }
@@ -1923,7 +2046,7 @@ final class MessageGidBuilder : MessageGidBuilderImpl!MessageGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Message build()
+  Message build() nothrow
   {
     return new Message(cast(void*)createGObject(Message._getGType), Yes.Take);
   }

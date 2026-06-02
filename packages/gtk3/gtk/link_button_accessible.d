@@ -22,26 +22,26 @@ class LinkButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.hyperli
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_link_button_accessible_get_type != &gidSymbolNotFound ? gtk_link_button_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LinkButtonAccessible self()
+  override LinkButtonAccessible self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class LinkButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.hyperli
       Get builder for [gtk.link_button_accessible.LinkButtonAccessible]
       Returns: New builder object
   */
-  static LinkButtonAccessibleGidBuilder builder()
+  static LinkButtonAccessibleGidBuilder builder() nothrow
   {
     return new LinkButtonAccessibleGidBuilder;
   }
@@ -72,7 +72,7 @@ final class LinkButtonAccessibleGidBuilder : LinkButtonAccessibleGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  LinkButtonAccessible build()
+  LinkButtonAccessible build() nothrow
   {
     return new LinkButtonAccessible(cast(void*)createGObject(LinkButtonAccessible._getGType), No.Take);
   }

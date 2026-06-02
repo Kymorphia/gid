@@ -34,26 +34,26 @@ class AccelGroup : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_accel_group_get_type != &gidSymbolNotFound ? gtk_accel_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AccelGroup self()
+  override AccelGroup self() nothrow
   {
     return this;
   }
@@ -62,19 +62,19 @@ class AccelGroup : gobject.object.ObjectWrap
       Get builder for [gtk.accel_group.AccelGroup]
       Returns: New builder object
   */
-  static AccelGroupGidBuilder builder()
+  static AccelGroupGidBuilder builder() nothrow
   {
     return new AccelGroupGidBuilder;
   }
 
   /** */
-  @property bool isLocked()
+  @property bool isLocked() nothrow
   {
     return getIsLocked();
   }
 
   /** */
-  @property gdk.types.ModifierType modifierMask()
+  @property gdk.types.ModifierType modifierMask() nothrow
   {
     return getModifierMask();
   }
@@ -83,7 +83,7 @@ class AccelGroup : gobject.object.ObjectWrap
       Creates a new #GtkAccelGroup.
       Returns: a new #GtkAccelGroup object
   */
-  this()
+  this() nothrow
   {
     GtkAccelGroup* _cretval;
     _cretval = gtk_accel_group_new();
@@ -99,7 +99,7 @@ class AccelGroup : gobject.object.ObjectWrap
       Returns: the #GtkAccelGroup to which closure
             is connected, or null
   */
-  static gtk.accel_group.AccelGroup fromAccelClosure(gobject.closure.Closure closure)
+  static gtk.accel_group.AccelGroup fromAccelClosure(gobject.closure.Closure closure) nothrow
   {
     GtkAccelGroup* _cretval;
     _cretval = gtk_accel_group_from_accel_closure(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null);
@@ -120,7 +120,7 @@ class AccelGroup : gobject.object.ObjectWrap
       Returns: true if an accelerator was activated and handled
             this keypress
   */
-  bool activate(glib.types.Quark accelQuark, gobject.object.ObjectWrap acceleratable, uint accelKey, gdk.types.ModifierType accelMods)
+  bool activate(glib.types.Quark accelQuark, gobject.object.ObjectWrap acceleratable, uint accelKey, gdk.types.ModifierType accelMods) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_accel_group_activate(cast(GtkAccelGroup*)this._cPtr, accelQuark, acceleratable ? cast(GObject*)acceleratable._cPtr(No.Dup) : null, accelKey, accelMods);
@@ -144,7 +144,7 @@ class AccelGroup : gobject.object.ObjectWrap
         accelFlags = a flag mask to configure this accelerator
         closure = closure to be executed upon accelerator activation
   */
-  void connect(uint accelKey, gdk.types.ModifierType accelMods, gtk.types.AccelFlags accelFlags, gobject.closure.Closure closure)
+  void connect(uint accelKey, gdk.types.ModifierType accelMods, gtk.types.AccelFlags accelFlags, gobject.closure.Closure closure) nothrow
   {
     gtk_accel_group_connect(cast(GtkAccelGroup*)this._cPtr, accelKey, accelMods, accelFlags, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null);
   }
@@ -167,7 +167,7 @@ class AccelGroup : gobject.object.ObjectWrap
         accelPath = path used for determining key and modifiers
         closure = closure to be executed upon accelerator activation
   */
-  void connectByPath(string accelPath, gobject.closure.Closure closure)
+  void connectByPath(string accelPath, gobject.closure.Closure closure) nothrow
   {
     const(char)* _accelPath = accelPath.toCString(No.Alloc);
     gtk_accel_group_connect_by_path(cast(GtkAccelGroup*)this._cPtr, _accelPath, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null);
@@ -184,7 +184,7 @@ class AccelGroup : gobject.object.ObjectWrap
               group, or null to remove all closures
       Returns: true if the closure was found and got disconnected
   */
-  bool disconnect(gobject.closure.Closure closure = null)
+  bool disconnect(gobject.closure.Closure closure = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_accel_group_disconnect(cast(GtkAccelGroup*)this._cPtr, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null);
@@ -201,7 +201,7 @@ class AccelGroup : gobject.object.ObjectWrap
       Returns: true if there was an accelerator which could be
             removed, false otherwise
   */
-  bool disconnectKey(uint accelKey, gdk.types.ModifierType accelMods)
+  bool disconnectKey(uint accelKey, gdk.types.ModifierType accelMods) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_accel_group_disconnect_key(cast(GtkAccelGroup*)this._cPtr, accelKey, accelMods);
@@ -218,14 +218,21 @@ class AccelGroup : gobject.object.ObjectWrap
       Returns: the key of the first entry passing
            find_func. The key is owned by GTK+ and must not be freed.
   */
-  gtk.types.AccelKey find(gtk.types.AccelGroupFindFunc findFunc)
+  gtk.types.AccelKey find(gtk.types.AccelGroupFindFunc findFunc) nothrow
   {
-    extern(C) gboolean _findFuncCallback(GtkAccelKey* key, GClosure* closure, void* data)
+    extern(C) gboolean _findFuncCallback(GtkAccelKey* key, GClosure* closure, void* data) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.AccelGroupFindFunc*)data;
 
-      _dretval = (*_dlg)(*cast(gtk.types.AccelKey*)key, closure ? new gobject.closure.Closure(cast(void*)closure, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(*cast(gtk.types.AccelKey*)key, closure ? new gobject.closure.Closure(cast(void*)closure, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.AccelGroupFindFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -246,7 +253,7 @@ class AccelGroup : gobject.object.ObjectWrap
       Returns: true if there are 1 or more locks on the accel_group,
             false otherwise.
   */
-  bool getIsLocked()
+  bool getIsLocked() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_accel_group_get_is_locked(cast(GtkAccelGroup*)this._cPtr);
@@ -258,7 +265,7 @@ class AccelGroup : gobject.object.ObjectWrap
       accel_group. For example, #GDK_CONTROL_MASK, #GDK_SHIFT_MASK, etc.
       Returns: the modifier mask for this accel group.
   */
-  gdk.types.ModifierType getModifierMask()
+  gdk.types.ModifierType getModifierMask() nothrow
   {
     GdkModifierType _cretval;
     _cretval = gtk_accel_group_get_modifier_mask(cast(GtkAccelGroup*)this._cPtr);
@@ -277,7 +284,7 @@ class AccelGroup : gobject.object.ObjectWrap
       [gtk.accel_group.AccelGroup.unlock] has been called an equivalent number
       of times.
   */
-  void lock()
+  void lock() nothrow
   {
     gtk_accel_group_lock(cast(GtkAccelGroup*)this._cPtr);
   }
@@ -285,7 +292,7 @@ class AccelGroup : gobject.object.ObjectWrap
   /**
       Undoes the last call to [gtk.accel_group.AccelGroup.lock] on this accel_group.
   */
-  void unlock()
+  void unlock() nothrow
   {
     gtk_accel_group_unlock(cast(GtkAccelGroup*)this._cPtr);
   }
@@ -314,7 +321,7 @@ class AccelGroup : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAccelActivate(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectAccelActivate(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
@@ -323,11 +330,12 @@ class AccelGroup : gobject.object.ObjectWrap
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.accel_group.AccelGroup)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -341,7 +349,14 @@ class AccelGroup : gobject.object.ObjectWrap
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.accel_group.AccelGroup.accelActivate");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -377,7 +392,7 @@ class AccelGroup : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAccelChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectAccelChanged(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -386,7 +401,7 @@ class AccelGroup : gobject.object.ObjectWrap
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.accel_group.AccelGroup)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -404,7 +419,14 @@ class AccelGroup : gobject.object.ObjectWrap
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.accel_group.AccelGroup.accelChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -424,7 +446,7 @@ final class AccelGroupGidBuilder : AccelGroupGidBuilderImpl!AccelGroupGidBuilder
       Create object from builder.
       Returns: New object
   */
-  AccelGroup build()
+  AccelGroup build() nothrow
   {
     return new AccelGroup(cast(void*)createGObject(AccelGroup._getGType), Yes.Take);
   }

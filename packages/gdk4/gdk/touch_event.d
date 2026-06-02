@@ -15,11 +15,8 @@ class TouchEvent : gdk.event.Event
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.touch_event.TouchEvent");
-
     super(cast(GdkEvent*)ptr, take);
   }
 
@@ -27,7 +24,7 @@ class TouchEvent : gdk.event.Event
       Extracts whether a touch event is emulating a pointer event.
       Returns: true if event is emulating
   */
-  bool getEmulatingPointer()
+  bool getEmulatingPointer() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_touch_event_get_emulating_pointer(cast(GdkEvent*)this._cPtr);

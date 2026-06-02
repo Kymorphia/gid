@@ -23,26 +23,26 @@ class ServerProvider : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_server_provider_get_type != &gidSymbolNotFound ? gda_server_provider_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ServerProvider self()
+  override ServerProvider self() nothrow
   {
     return this;
   }
@@ -51,13 +51,13 @@ class ServerProvider : gobject.object.ObjectWrap
       Get builder for [gda.server_provider.ServerProvider]
       Returns: New builder object
   */
-  static ServerProviderGidBuilder builder()
+  static ServerProviderGidBuilder builder() nothrow
   {
     return new ServerProviderGidBuilder;
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_server_provider_error_quark();
@@ -75,7 +75,7 @@ class ServerProvider : gobject.object.ObjectWrap
         filename = name of the file to load
       Returns: a new string containing filename's contents, or null if not found or if an error occurred
   */
-  static string loadFileContents(string instDir, string dataDir, string filename)
+  static string loadFileContents(string instDir, string dataDir, string filename) nothrow
   {
     char* _cretval;
     const(char)* _instDir = instDir.toCString(No.Alloc);
@@ -123,7 +123,7 @@ class ServerProvider : gobject.object.ObjectWrap
         cnc = a #GdaConnection, or null
       Returns: a new #GdaSqlParser object, or null.
   */
-  gda.sql_parser.SqlParser createParser(gda.connection.Connection cnc = null)
+  gda.sql_parser.SqlParser createParser(gda.connection.Connection cnc = null) nothrow
   {
     GdaSqlParser* _cretval;
     _cretval = gda_server_provider_create_parser(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null);
@@ -140,7 +140,7 @@ class ServerProvider : gobject.object.ObjectWrap
         str = a string to escape
       Returns: a new string suitable to use in SQL statements
   */
-  string escapeString(gda.connection.Connection cnc, string str)
+  string escapeString(gda.connection.Connection cnc, string str) nothrow
   {
     char* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -158,7 +158,7 @@ class ServerProvider : gobject.object.ObjectWrap
         filename = name of the file to find
       Returns: the complete path to filename, or null if not found
   */
-  string findFile(string instDir, string filename)
+  string findFile(string instDir, string filename) nothrow
   {
     char* _cretval;
     const(char)* _instDir = instDir.toCString(No.Alloc);
@@ -178,7 +178,7 @@ class ServerProvider : gobject.object.ObjectWrap
         forType = a DBMS type definition
       Returns: a #GdaDataHandler, or null if the provider does not know about the for_type type
   */
-  gda.data_handler.DataHandler getDataHandlerDbms(gda.connection.Connection cnc, string forType)
+  gda.data_handler.DataHandler getDataHandlerDbms(gda.connection.Connection cnc, string forType) nothrow
   {
     GdaDataHandler* _cretval;
     const(char)* _forType = forType.toCString(No.Alloc);
@@ -198,7 +198,7 @@ class ServerProvider : gobject.object.ObjectWrap
   
       Deprecated: use [gda.server_provider.ServerProvider.handlerUseDefault] instead
   */
-  gda.data_handler.DataHandler getDataHandlerDefault(gda.connection.Connection cnc, gobject.types.GType type, string dbmsType)
+  gda.data_handler.DataHandler getDataHandlerDefault(gda.connection.Connection cnc, gobject.types.GType type, string dbmsType) nothrow
   {
     GdaDataHandler* _cretval;
     const(char)* _dbmsType = dbmsType.toCString(No.Alloc);
@@ -215,7 +215,7 @@ class ServerProvider : gobject.object.ObjectWrap
         forType = a #GType
       Returns: a #GdaDataHandler, or null if the provider does not support the requested for_type data type
   */
-  gda.data_handler.DataHandler getDataHandlerGType(gda.connection.Connection cnc, gobject.types.GType forType)
+  gda.data_handler.DataHandler getDataHandlerGType(gda.connection.Connection cnc, gobject.types.GType forType) nothrow
   {
     GdaDataHandler* _cretval;
     _cretval = gda_server_provider_get_data_handler_g_type(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, forType);
@@ -235,7 +235,7 @@ class ServerProvider : gobject.object.ObjectWrap
         type = a #GType value type
       Returns: the name of the DBMS type, or null
   */
-  string getDefaultDbmsType(gda.connection.Connection cnc, gobject.types.GType type)
+  string getDefaultDbmsType(gda.connection.Connection cnc, gobject.types.GType type) nothrow
   {
     const(char)* _cretval;
     _cretval = gda_server_provider_get_default_dbms_type(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, type);
@@ -247,7 +247,7 @@ class ServerProvider : gobject.object.ObjectWrap
       Get the name (identifier) of the provider
       Returns: a string containing the provider's name
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gda_server_provider_get_name(cast(GdaServerProvider*)this._cPtr);
@@ -262,7 +262,7 @@ class ServerProvider : gobject.object.ObjectWrap
         cnc = a #GdaConnection object
       Returns: a (read only) string, or null if an error occurred
   */
-  string getServerVersion(gda.connection.Connection cnc)
+  string getServerVersion(gda.connection.Connection cnc) nothrow
   {
     const(char)* _cretval;
     _cretval = gda_server_provider_get_server_version(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null);
@@ -274,7 +274,7 @@ class ServerProvider : gobject.object.ObjectWrap
       Get the version of the provider.
       Returns: a string containing the version identification.
   */
-  string getVersion()
+  string getVersion() nothrow
   {
     const(char)* _cretval;
     _cretval = gda_server_provider_get_version(cast(GdaServerProvider*)this._cPtr);
@@ -283,7 +283,7 @@ class ServerProvider : gobject.object.ObjectWrap
   }
 
   /** */
-  void handlerDeclare(gda.data_handler.DataHandler dh, gda.connection.Connection cnc, gobject.types.GType gType, string dbmsType)
+  void handlerDeclare(gda.data_handler.DataHandler dh, gda.connection.Connection cnc, gobject.types.GType gType, string dbmsType) nothrow
   {
     const(char)* _dbmsType = dbmsType.toCString(No.Alloc);
     gda_server_provider_handler_declare(cast(GdaServerProvider*)this._cPtr, dh ? cast(GdaDataHandler*)(cast(gobject.object.ObjectWrap)dh)._cPtr(No.Dup) : null, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, gType, _dbmsType);
@@ -299,7 +299,7 @@ class ServerProvider : gobject.object.ObjectWrap
         dbmsType = a database type
       Returns: the requested #GdaDataHandler, or null if none found
   */
-  gda.data_handler.DataHandler handlerFind(gda.connection.Connection cnc, gobject.types.GType gType, string dbmsType = null)
+  gda.data_handler.DataHandler handlerFind(gda.connection.Connection cnc, gobject.types.GType gType, string dbmsType = null) nothrow
   {
     GdaDataHandler* _cretval;
     const(char)* _dbmsType = dbmsType.toCString(No.Alloc);
@@ -314,7 +314,7 @@ class ServerProvider : gobject.object.ObjectWrap
       Don't unref it.
       Returns: a #GdaSqlParser
   */
-  gda.sql_parser.SqlParser internalGetParser()
+  gda.sql_parser.SqlParser internalGetParser() nothrow
   {
     GdaSqlParser* _cretval;
     _cretval = gda_server_provider_internal_get_parser(cast(GdaServerProvider*)this._cPtr);
@@ -408,7 +408,7 @@ class ServerProvider : gobject.object.ObjectWrap
         dbmsType = place to get the actual database type used if the conversion succeeded, or null
       Returns: a new #GValue, or null
   */
-  gobject.value.Value stringToValue(gda.connection.Connection cnc, string string_, gobject.types.GType preferredType, out string dbmsType)
+  gobject.value.Value stringToValue(gda.connection.Connection cnc, string string_, gobject.types.GType preferredType, out string dbmsType) nothrow
   {
     GValue* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
@@ -427,7 +427,7 @@ class ServerProvider : gobject.object.ObjectWrap
         feature = #GdaConnectionFeature feature to test
       Returns: true if feature is supported
   */
-  bool supportsFeature(gda.connection.Connection cnc, gda.types.ConnectionFeature feature)
+  bool supportsFeature(gda.connection.Connection cnc, gda.types.ConnectionFeature feature) nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_server_provider_supports_feature(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, feature);
@@ -444,7 +444,7 @@ class ServerProvider : gobject.object.ObjectWrap
         options = a list of named parameters, or null
       Returns: true if the operation is supported
   */
-  bool supportsOperation(gda.connection.Connection cnc, gda.types.ServerOperationType type, gda.set.Set options = null)
+  bool supportsOperation(gda.connection.Connection cnc, gda.types.ServerOperationType type, gda.set.Set options = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_server_provider_supports_operation(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, type, options ? cast(GdaSet*)options._cPtr(No.Dup) : null);
@@ -459,7 +459,7 @@ class ServerProvider : gobject.object.ObjectWrap
         str = a string to escape
       Returns: a new string
   */
-  string unescapeString(gda.connection.Connection cnc, string str)
+  string unescapeString(gda.connection.Connection cnc, string str) nothrow
   {
     char* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -476,7 +476,7 @@ class ServerProvider : gobject.object.ObjectWrap
         from = #GValue to convert from
       Returns: escaped and quoted value or NULL if not supported.
   */
-  string valueToSqlString(gda.connection.Connection cnc, gobject.value.Value from)
+  string valueToSqlString(gda.connection.Connection cnc, gobject.value.Value from) nothrow
   {
     char* _cretval;
     _cretval = gda_server_provider_value_to_sql_string(cast(GdaServerProvider*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, from ? cast(GValue*)from._cPtr(No.Dup) : null);
@@ -497,7 +497,7 @@ final class ServerProviderGidBuilder : ServerProviderGidBuilderImpl!ServerProvid
       Create object from builder.
       Returns: New object
   */
-  ServerProvider build()
+  ServerProvider build() nothrow
   {
     return new ServerProvider(cast(void*)createGObject(ServerProvider._getGType), No.Take);
   }
@@ -505,12 +505,12 @@ final class ServerProviderGidBuilder : ServerProviderGidBuilderImpl!ServerProvid
 
 class ServerProviderException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.server_provider.ServerProvider.errorQuark, cast(int)code, msg);
   }

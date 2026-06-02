@@ -39,7 +39,7 @@ template DesktopAppInfoLookupT()
       Deprecated: The #GDesktopAppInfoLookup interface is deprecated and
            unused by GIO.
   */
-  override gio.app_info.AppInfo getDefaultForUriScheme(string uriScheme)
+  override gio.app_info.AppInfo getDefaultForUriScheme(string uriScheme) nothrow
   {
     GAppInfo* _cretval;
     const(char)* _uriScheme = uriScheme.toCString(No.Alloc);

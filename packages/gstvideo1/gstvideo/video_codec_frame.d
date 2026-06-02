@@ -40,7 +40,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
                     buffer should be kept.
         deadline = Running time when the frame will be used.
   */
-  this(uint systemFrameNumber = uint.init, gst.types.ClockTime dts = gst.types.ClockTime.init, gst.types.ClockTime pts = gst.types.ClockTime.init, gst.types.ClockTime duration = gst.types.ClockTime.init, int distanceFromSync = int.init, gst.buffer.Buffer inputBuffer = gst.buffer.Buffer.init, gst.buffer.Buffer outputBuffer = gst.buffer.Buffer.init, gst.types.ClockTime deadline = gst.types.ClockTime.init)
+  this(uint systemFrameNumber = uint.init, gst.types.ClockTime dts = gst.types.ClockTime.init, gst.types.ClockTime pts = gst.types.ClockTime.init, gst.types.ClockTime duration = gst.types.ClockTime.init, int distanceFromSync = int.init, gst.buffer.Buffer inputBuffer = gst.buffer.Buffer.init, gst.buffer.Buffer outputBuffer = gst.buffer.Buffer.init, gst.types.ClockTime deadline = gst.types.ClockTime.init) nothrow
   {
     super(gMalloc(GstVideoCodecFrame.sizeof), Yes.Take);
     this.systemFrameNumber = systemFrameNumber;
@@ -54,32 +54,32 @@ class VideoCodecFrame : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_codec_frame_get_type != &gidSymbolNotFound ? gst_video_codec_frame_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VideoCodecFrame self()
+  override VideoCodecFrame self() nothrow
   {
     return this;
   }
@@ -91,7 +91,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
               Typical usage in decoders is to set this on the opaque value provided
               to the library and get back the frame using [gstvideo.video_decoder.VideoDecoder.getFrame]
   */
-  @property uint systemFrameNumber()
+  @property uint systemFrameNumber() nothrow
   {
     return (cast(GstVideoCodecFrame*)this._cPtr).systemFrameNumber;
   }
@@ -104,7 +104,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
                 Typical usage in decoders is to set this on the opaque value provided
                 to the library and get back the frame using [gstvideo.video_decoder.VideoDecoder.getFrame]
   */
-  @property void systemFrameNumber(uint propval)
+  @property void systemFrameNumber(uint propval) nothrow
   {
     (cast(GstVideoCodecFrame*)this._cPtr).systemFrameNumber = propval;
   }
@@ -113,7 +113,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
       Get `dts` field.
       Returns: Decoding timestamp
   */
-  @property gst.types.ClockTime dts()
+  @property gst.types.ClockTime dts() nothrow
   {
     return (cast(GstVideoCodecFrame*)this._cPtr).dts;
   }
@@ -123,7 +123,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
       Params:
         propval = Decoding timestamp
   */
-  @property void dts(gst.types.ClockTime propval)
+  @property void dts(gst.types.ClockTime propval) nothrow
   {
     (cast(GstVideoCodecFrame*)this._cPtr).dts = propval;
   }
@@ -132,7 +132,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
       Get `pts` field.
       Returns: Presentation timestamp
   */
-  @property gst.types.ClockTime pts()
+  @property gst.types.ClockTime pts() nothrow
   {
     return (cast(GstVideoCodecFrame*)this._cPtr).pts;
   }
@@ -142,7 +142,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
       Params:
         propval = Presentation timestamp
   */
-  @property void pts(gst.types.ClockTime propval)
+  @property void pts(gst.types.ClockTime propval) nothrow
   {
     (cast(GstVideoCodecFrame*)this._cPtr).pts = propval;
   }
@@ -151,7 +151,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
       Get `duration` field.
       Returns: Duration of the frame
   */
-  @property gst.types.ClockTime duration()
+  @property gst.types.ClockTime duration() nothrow
   {
     return (cast(GstVideoCodecFrame*)this._cPtr).duration;
   }
@@ -161,7 +161,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
       Params:
         propval = Duration of the frame
   */
-  @property void duration(gst.types.ClockTime propval)
+  @property void duration(gst.types.ClockTime propval) nothrow
   {
     (cast(GstVideoCodecFrame*)this._cPtr).duration = propval;
   }
@@ -170,7 +170,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
       Get `distanceFromSync` field.
       Returns: Distance in frames from the last synchronization point.
   */
-  @property int distanceFromSync()
+  @property int distanceFromSync() nothrow
   {
     return (cast(GstVideoCodecFrame*)this._cPtr).distanceFromSync;
   }
@@ -180,7 +180,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
       Params:
         propval = Distance in frames from the last synchronization point.
   */
-  @property void distanceFromSync(int propval)
+  @property void distanceFromSync(int propval) nothrow
   {
     (cast(GstVideoCodecFrame*)this._cPtr).distanceFromSync = propval;
   }
@@ -191,7 +191,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
                   by the frame and references to the frame instead of the buffer should
                   be kept.
   */
-  @property gst.buffer.Buffer inputBuffer()
+  @property gst.buffer.Buffer inputBuffer() nothrow
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecFrame*)this._cPtr).inputBuffer);
   }
@@ -203,7 +203,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
                     by the frame and references to the frame instead of the buffer should
                     be kept.
   */
-  @property void inputBuffer(gst.buffer.Buffer propval)
+  @property void inputBuffer(gst.buffer.Buffer propval) nothrow
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecFrame*)this._cPtr).inputBuffer);
     dToC(propval, cast(void*)&(cast(GstVideoCodecFrame*)this._cPtr).inputBuffer);
@@ -218,7 +218,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
                   owned by the frame and references to the frame instead of the
                   buffer should be kept.
   */
-  @property gst.buffer.Buffer outputBuffer()
+  @property gst.buffer.Buffer outputBuffer() nothrow
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecFrame*)this._cPtr).outputBuffer);
   }
@@ -233,7 +233,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
                     owned by the frame and references to the frame instead of the
                     buffer should be kept.
   */
-  @property void outputBuffer(gst.buffer.Buffer propval)
+  @property void outputBuffer(gst.buffer.Buffer propval) nothrow
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecFrame*)this._cPtr).outputBuffer);
     dToC(propval, cast(void*)&(cast(GstVideoCodecFrame*)this._cPtr).outputBuffer);
@@ -243,7 +243,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
       Get `deadline` field.
       Returns: Running time when the frame will be used.
   */
-  @property gst.types.ClockTime deadline()
+  @property gst.types.ClockTime deadline() nothrow
   {
     return (cast(GstVideoCodecFrame*)this._cPtr).deadline;
   }
@@ -253,7 +253,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
       Params:
         propval = Running time when the frame will be used.
   */
-  @property void deadline(gst.types.ClockTime propval)
+  @property void deadline(gst.types.ClockTime propval) nothrow
   {
     (cast(GstVideoCodecFrame*)this._cPtr).deadline = propval;
   }
@@ -263,7 +263,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
       [gstvideo.video_codec_frame.VideoCodecFrame.setUserData] previously.
       Returns: The previously set user_data
   */
-  void* getUserData()
+  void* getUserData() nothrow
   {
     auto _retval = gst_video_codec_frame_get_user_data(cast(GstVideoCodecFrame*)this._cPtr);
     return _retval;
@@ -279,14 +279,21 @@ class VideoCodecFrame : gobject.boxed.Boxed
       Params:
         notify = a #GDestroyNotify
   */
-  void setUserData(glib.types.DestroyNotify notify)
+  void setUserData(glib.types.DestroyNotify notify) nothrow
   {
-    extern(C) void _notifyCallback(void* data)
+    extern(C) void _notifyCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
     auto _notify = notify ? freezeDelegate(cast(void*)&notify) : null;

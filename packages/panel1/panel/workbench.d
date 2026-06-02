@@ -19,26 +19,26 @@ class Workbench : gtk.window_group.WindowGroup
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_workbench_get_type != &gidSymbolNotFound ? panel_workbench_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Workbench self()
+  override Workbench self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class Workbench : gtk.window_group.WindowGroup
       Get builder for [panel.workbench.Workbench]
       Returns: New builder object
   */
-  static WorkbenchGidBuilder builder()
+  static WorkbenchGidBuilder builder() nothrow
   {
     return new WorkbenchGidBuilder;
   }
@@ -59,7 +59,7 @@ class Workbench : gtk.window_group.WindowGroup
         This is generally used by applications to help destinguish between
         projects, so that the project-id matches the workbench-id.
   */
-  @property string id()
+  @property string id() nothrow
   {
     return getId();
   }
@@ -72,13 +72,13 @@ class Workbench : gtk.window_group.WindowGroup
           This is generally used by applications to help destinguish between
           projects, so that the project-id matches the workbench-id.
   */
-  @property void id(string propval)
+  @property void id(string propval) nothrow
   {
     setId(propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     PanelWorkbench* _cretval;
     _cretval = panel_workbench_new();
@@ -92,7 +92,7 @@ class Workbench : gtk.window_group.WindowGroup
         widget = a #GtkWidget
       Returns: a #PanelWorkbench or null
   */
-  static panel.workbench.Workbench findFromWidget(gtk.widget.Widget widget)
+  static panel.workbench.Workbench findFromWidget(gtk.widget.Widget widget) nothrow
   {
     PanelWorkbench* _cretval;
     _cretval = panel_workbench_find_from_widget(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
@@ -101,20 +101,20 @@ class Workbench : gtk.window_group.WindowGroup
   }
 
   /** */
-  void actionSetEnabled(string actionName, bool enabled)
+  void actionSetEnabled(string actionName, bool enabled) nothrow
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     panel_workbench_action_set_enabled(cast(PanelWorkbench*)this._cPtr, _actionName, enabled);
   }
 
   /** */
-  void activate()
+  void activate() nothrow
   {
     panel_workbench_activate(cast(PanelWorkbench*)this._cPtr);
   }
 
   /** */
-  void addWorkspace(panel.workspace.Workspace workspace)
+  void addWorkspace(panel.workspace.Workspace workspace) nothrow
   {
     panel_workbench_add_workspace(cast(PanelWorkbench*)this._cPtr, workspace ? cast(PanelWorkspace*)workspace._cPtr(No.Dup) : null);
   }
@@ -126,7 +126,7 @@ class Workbench : gtk.window_group.WindowGroup
         workspaceType = 
       Returns: a #PanelWorkspace or null
   */
-  panel.workspace.Workspace findWorkspaceTyped(gobject.types.GType workspaceType)
+  panel.workspace.Workspace findWorkspaceTyped(gobject.types.GType workspaceType) nothrow
   {
     PanelWorkspace* _cretval;
     _cretval = panel_workbench_find_workspace_typed(cast(PanelWorkbench*)this._cPtr, workspaceType);
@@ -135,7 +135,7 @@ class Workbench : gtk.window_group.WindowGroup
   }
 
   /** */
-  void focusWorkspace(panel.workspace.Workspace workspace)
+  void focusWorkspace(panel.workspace.Workspace workspace) nothrow
   {
     panel_workbench_focus_workspace(cast(PanelWorkbench*)this._cPtr, workspace ? cast(PanelWorkspace*)workspace._cPtr(No.Dup) : null);
   }
@@ -146,13 +146,20 @@ class Workbench : gtk.window_group.WindowGroup
       Params:
         foreachFunc = a function to call for each workspace
   */
-  void foreachWorkspace(panel.types.WorkspaceForeach foreachFunc)
+  void foreachWorkspace(panel.types.WorkspaceForeach foreachFunc) nothrow
   {
-    extern(C) void _foreachFuncCallback(PanelWorkspace* workspace, void* userData)
+    extern(C) void _foreachFuncCallback(PanelWorkspace* workspace, void* userData) nothrow
     {
       auto _dlg = cast(panel.types.WorkspaceForeach*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(panel.workspace.Workspace)(cast(void*)workspace, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(panel.workspace.Workspace)(cast(void*)workspace, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "panel.types.WorkspaceForeach");
+      }
     }
     auto _foreachFuncCB = foreachFunc ? &_foreachFuncCallback : null;
     auto _foreachFunc = foreachFunc ? cast(void*)&(foreachFunc) : null;
@@ -160,7 +167,7 @@ class Workbench : gtk.window_group.WindowGroup
   }
 
   /** */
-  string getId()
+  string getId() nothrow
   {
     const(char)* _cretval;
     _cretval = panel_workbench_get_id(cast(PanelWorkbench*)this._cPtr);
@@ -169,13 +176,13 @@ class Workbench : gtk.window_group.WindowGroup
   }
 
   /** */
-  void removeWorkspace(panel.workspace.Workspace workspace)
+  void removeWorkspace(panel.workspace.Workspace workspace) nothrow
   {
     panel_workbench_remove_workspace(cast(PanelWorkbench*)this._cPtr, workspace ? cast(PanelWorkspace*)workspace._cPtr(No.Dup) : null);
   }
 
   /** */
-  void setId(string id)
+  void setId(string id) nothrow
   {
     const(char)* _id = id.toCString(No.Alloc);
     panel_workbench_set_id(cast(PanelWorkbench*)this._cPtr, _id);
@@ -196,13 +203,13 @@ class Workbench : gtk.window_group.WindowGroup
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.workbench.Workbench)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -211,7 +218,14 @@ class Workbench : gtk.window_group.WindowGroup
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "panel.workbench.Workbench.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -232,7 +246,7 @@ class WorkbenchGidBuilderImpl(T) : gtk.window_group.WindowGroupGidBuilderImpl!T
           projects, so that the project-id matches the workbench-id.
       Returns: Builder instance for fluent chaining
   */
-  T id(string propval)
+  T id(string propval) nothrow
   {
     return setProperty("id", propval);
   }
@@ -245,7 +259,7 @@ final class WorkbenchGidBuilder : WorkbenchGidBuilderImpl!WorkbenchGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Workbench build()
+  Workbench build() nothrow
   {
     return new Workbench(cast(void*)createGObject(Workbench._getGType), Yes.Take);
   }

@@ -14,26 +14,26 @@ class ExecuteContext : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_execute_context_get_type != &gidSymbolNotFound ? garrow_execute_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ExecuteContext self()
+  override ExecuteContext self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class ExecuteContext : gobject.object.ObjectWrap
       Get builder for [arrow.execute_context.ExecuteContext]
       Returns: New builder object
   */
-  static ExecuteContextGidBuilder builder()
+  static ExecuteContextGidBuilder builder() nothrow
   {
     return new ExecuteContextGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowExecuteContext* _cretval;
     _cretval = garrow_execute_context_new();
@@ -68,7 +68,7 @@ final class ExecuteContextGidBuilder : ExecuteContextGidBuilderImpl!ExecuteConte
       Create object from builder.
       Returns: New object
   */
-  ExecuteContext build()
+  ExecuteContext build() nothrow
   {
     return new ExecuteContext(cast(void*)createGObject(ExecuteContext._getGType), Yes.Take);
   }

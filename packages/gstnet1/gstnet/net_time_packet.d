@@ -28,30 +28,29 @@ struct NetTimePacket
   ClockTime remoteTime;
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_net_time_packet_get_type != &gidSymbolNotFound ? gst_net_time_packet_get_type() : cast(GType)0;
   }
 
   /** */
-  @property GType _gType()
+  @property GType _gType() nothrow
   {
     return _getGType();
   }
 
-  void* boxCopy()
+  void* boxCopy() nothrow
   {
     import gobject.c.functions : g_boxed_copy;
-    return g_boxed_copy(_gType,
-        cast(void*)&this);
+    return g_boxed_copy(_gType, cast(void*)&this);
   }
 
   /**
       Make a copy of packet.
       Returns: a copy of packet, free with [gstnet.net_time_packet.NetTimePacket.free].
   */
-  gstnet.net_time_packet.NetTimePacket copy()
+  gstnet.net_time_packet.NetTimePacket copy() nothrow
   {
     GstNetTimePacket* _cretval;
     _cretval = gst_net_time_packet_copy(cast(const(GstNetTimePacket)*)&this);
@@ -91,7 +90,7 @@ struct NetTimePacket
       MT safe. Caller owns return value (g_free to free).
       Returns: A newly allocated sequence of #GST_NET_TIME_PACKET_SIZE bytes.
   */
-  ubyte[] serialize()
+  ubyte[] serialize() nothrow
   {
     ubyte* _cretval;
     _cretval = gst_net_time_packet_serialize(cast(const(GstNetTimePacket)*)&this);

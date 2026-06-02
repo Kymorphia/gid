@@ -18,26 +18,26 @@ class RecordBatchBuilder : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_record_batch_builder_get_type != &gidSymbolNotFound ? garrow_record_batch_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RecordBatchBuilder self()
+  override RecordBatchBuilder self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class RecordBatchBuilder : gobject.object.ObjectWrap
       Get builder for [arrow.record_batch_builder.RecordBatchBuilder]
       Returns: New builder object
   */
-  static RecordBatchBuilderGidBuilder builder()
+  static RecordBatchBuilderGidBuilder builder() nothrow
   {
     return new RecordBatchBuilderGidBuilder;
   }
@@ -75,7 +75,7 @@ class RecordBatchBuilder : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.array_builder.ArrayBuilder getColumnBuilder(int i)
+  arrow.array_builder.ArrayBuilder getColumnBuilder(int i) nothrow
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_record_batch_builder_get_column_builder(cast(GArrowRecordBatchBuilder*)this._cPtr, i);
@@ -84,7 +84,7 @@ class RecordBatchBuilder : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.array_builder.ArrayBuilder getField(int i)
+  arrow.array_builder.ArrayBuilder getField(int i) nothrow
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_record_batch_builder_get_field(cast(GArrowRecordBatchBuilder*)this._cPtr, i);
@@ -93,7 +93,7 @@ class RecordBatchBuilder : gobject.object.ObjectWrap
   }
 
   /** */
-  long getInitialCapacity()
+  long getInitialCapacity() nothrow
   {
     long _retval;
     _retval = garrow_record_batch_builder_get_initial_capacity(cast(GArrowRecordBatchBuilder*)this._cPtr);
@@ -101,7 +101,7 @@ class RecordBatchBuilder : gobject.object.ObjectWrap
   }
 
   /** */
-  int getNColumns()
+  int getNColumns() nothrow
   {
     int _retval;
     _retval = garrow_record_batch_builder_get_n_columns(cast(GArrowRecordBatchBuilder*)this._cPtr);
@@ -109,7 +109,7 @@ class RecordBatchBuilder : gobject.object.ObjectWrap
   }
 
   /** */
-  int getNFields()
+  int getNFields() nothrow
   {
     int _retval;
     _retval = garrow_record_batch_builder_get_n_fields(cast(GArrowRecordBatchBuilder*)this._cPtr);
@@ -117,7 +117,7 @@ class RecordBatchBuilder : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.schema.Schema getSchema()
+  arrow.schema.Schema getSchema() nothrow
   {
     GArrowSchema* _cretval;
     _cretval = garrow_record_batch_builder_get_schema(cast(GArrowRecordBatchBuilder*)this._cPtr);
@@ -126,7 +126,7 @@ class RecordBatchBuilder : gobject.object.ObjectWrap
   }
 
   /** */
-  void setInitialCapacity(long capacity)
+  void setInitialCapacity(long capacity) nothrow
   {
     garrow_record_batch_builder_set_initial_capacity(cast(GArrowRecordBatchBuilder*)this._cPtr, capacity);
   }
@@ -137,7 +137,7 @@ class RecordBatchBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
 {
 
   /** */
-  T recordBatchBuilder(void* propval)
+  T recordBatchBuilder(void* propval) nothrow
   {
     return setProperty("record-batch-builder", propval);
   }
@@ -150,7 +150,7 @@ final class RecordBatchBuilderGidBuilder : RecordBatchBuilderGidBuilderImpl!Reco
       Create object from builder.
       Returns: New object
   */
-  RecordBatchBuilder build()
+  RecordBatchBuilder build() nothrow
   {
     return new RecordBatchBuilder(cast(void*)createGObject(RecordBatchBuilder._getGType), Yes.Take);
   }

@@ -22,26 +22,26 @@ class GObjectAccessible : atk.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_gobject_accessible_get_type != &gidSymbolNotFound ? atk_gobject_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GObjectAccessible self()
+  override GObjectAccessible self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class GObjectAccessible : atk.object.ObjectWrap
       Get builder for [atk.gobject_accessible.GObjectAccessible]
       Returns: New builder object
   */
-  static GObjectAccessibleGidBuilder builder()
+  static GObjectAccessibleGidBuilder builder() nothrow
   {
     return new GObjectAccessibleGidBuilder;
   }
@@ -63,7 +63,7 @@ class GObjectAccessible : atk.object.ObjectWrap
       Returns: a #AtkObject which is the accessible object for
         the obj
   */
-  static atk.object.ObjectWrap forObject(gobject.object.ObjectWrap obj)
+  static atk.object.ObjectWrap forObject(gobject.object.ObjectWrap obj) nothrow
   {
     AtkObject* _cretval;
     _cretval = atk_gobject_accessible_for_object(obj ? cast(GObject*)obj._cPtr(No.Dup) : null);
@@ -76,7 +76,7 @@ class GObjectAccessible : atk.object.ObjectWrap
       Returns: a #GObject which is the object for which obj is
         the accessible object
   */
-  gobject.object.ObjectWrap getObject()
+  gobject.object.ObjectWrap getObject() nothrow
   {
     GObject* _cretval;
     _cretval = atk_gobject_accessible_get_object(cast(AtkGObjectAccessible*)this._cPtr);
@@ -97,7 +97,7 @@ final class GObjectAccessibleGidBuilder : GObjectAccessibleGidBuilderImpl!GObjec
       Create object from builder.
       Returns: New object
   */
-  GObjectAccessible build()
+  GObjectAccessible build() nothrow
   {
     return new GObjectAccessible(cast(void*)createGObject(GObjectAccessible._getGType), No.Take);
   }

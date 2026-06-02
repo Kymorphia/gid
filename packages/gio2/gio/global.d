@@ -44,14 +44,21 @@ import gobject.value;
       cancellable = a #GCancellable or null
       callback = a #GAsyncReadyCallback to call when the request is satisfied
 */
-void busGet(gio.types.BusType busType, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+void busGet(gio.types.BusType busType, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
 {
-  extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+  extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
   {
     ptrThawGC(data);
     auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-    (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+    try
+    {
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+    }
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -143,7 +150,7 @@ gio.dbus_connection.DBusConnection busGetSync(gio.types.BusType busType, gio.can
     Returns: an identifier (never 0) that can be used with
           [gio.global.busUnownName] to stop owning the name.
 */
-uint busOwnNameOnConnection(gio.dbus_connection.DBusConnection connection, string name, gio.types.BusNameOwnerFlags flags, gobject.closure.Closure nameAcquiredClosure = null, gobject.closure.Closure nameLostClosure = null)
+uint busOwnNameOnConnection(gio.dbus_connection.DBusConnection connection, string name, gio.types.BusNameOwnerFlags flags, gobject.closure.Closure nameAcquiredClosure = null, gobject.closure.Closure nameLostClosure = null) nothrow
 {
   uint _retval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -168,7 +175,7 @@ uint busOwnNameOnConnection(gio.dbus_connection.DBusConnection connection, strin
     Returns: an identifier (never 0) that can be used with
           [gio.global.busUnownName] to stop owning the name.
 */
-uint busOwnName(gio.types.BusType busType, string name, gio.types.BusNameOwnerFlags flags, gobject.closure.Closure busAcquiredClosure = null, gobject.closure.Closure nameAcquiredClosure = null, gobject.closure.Closure nameLostClosure = null)
+uint busOwnName(gio.types.BusType busType, string name, gio.types.BusNameOwnerFlags flags, gobject.closure.Closure busAcquiredClosure = null, gobject.closure.Closure nameAcquiredClosure = null, gobject.closure.Closure nameLostClosure = null) nothrow
 {
   uint _retval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -189,7 +196,7 @@ uint busOwnName(gio.types.BusType busType, string name, gio.types.BusNameOwnerFl
     Params:
       ownerId = an identifier obtained from [gio.global.busOwnName]
 */
-void busUnownName(uint ownerId)
+void busUnownName(uint ownerId) nothrow
 {
   g_bus_unown_name(ownerId);
 }
@@ -207,7 +214,7 @@ void busUnownName(uint ownerId)
     Params:
       watcherId = An identifier obtained from [gio.global.busWatchName]
 */
-void busUnwatchName(uint watcherId)
+void busUnwatchName(uint watcherId) nothrow
 {
   g_bus_unwatch_name(watcherId);
 }
@@ -227,7 +234,7 @@ void busUnwatchName(uint watcherId)
     Returns: An identifier (never 0) that can be used with
       [gio.global.busUnwatchName] to stop watching the name.
 */
-uint busWatchNameOnConnection(gio.dbus_connection.DBusConnection connection, string name, gio.types.BusNameWatcherFlags flags, gobject.closure.Closure nameAppearedClosure = null, gobject.closure.Closure nameVanishedClosure = null)
+uint busWatchNameOnConnection(gio.dbus_connection.DBusConnection connection, string name, gio.types.BusNameWatcherFlags flags, gobject.closure.Closure nameAppearedClosure = null, gobject.closure.Closure nameVanishedClosure = null) nothrow
 {
   uint _retval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -250,7 +257,7 @@ uint busWatchNameOnConnection(gio.dbus_connection.DBusConnection connection, str
     Returns: An identifier (never 0) that can be used with
       [gio.global.busUnwatchName] to stop watching the name.
 */
-uint busWatchName(gio.types.BusType busType, string name, gio.types.BusNameWatcherFlags flags, gobject.closure.Closure nameAppearedClosure = null, gobject.closure.Closure nameVanishedClosure = null)
+uint busWatchName(gio.types.BusType busType, string name, gio.types.BusNameWatcherFlags flags, gobject.closure.Closure nameAppearedClosure = null, gobject.closure.Closure nameVanishedClosure = null) nothrow
 {
   uint _retval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -267,7 +274,7 @@ uint busWatchName(gio.types.BusType busType, string name, gio.types.BusNameWatch
     Returns: true if the file type corresponds to a type that
           can be executable, false otherwise.
 */
-bool contentTypeCanBeExecutable(string type)
+bool contentTypeCanBeExecutable(string type) nothrow
 {
   bool _retval;
   const(char)* _type = type.toCString(No.Alloc);
@@ -284,7 +291,7 @@ bool contentTypeCanBeExecutable(string type)
     Returns: true if the two strings are identical or equivalent,
           false otherwise.
 */
-bool contentTypeEquals(string type1, string type2)
+bool contentTypeEquals(string type1, string type2) nothrow
 {
   bool _retval;
   const(char)* _type1 = type1.toCString(No.Alloc);
@@ -301,7 +308,7 @@ bool contentTypeEquals(string type1, string type2)
     Returns: Newly allocated string with content type or
           null. Free with [glib.global.gfree]
 */
-string contentTypeFromMimeType(string mimeType)
+string contentTypeFromMimeType(string mimeType) nothrow
 {
   char* _cretval;
   const(char)* _mimeType = mimeType.toCString(No.Alloc);
@@ -318,7 +325,7 @@ string contentTypeFromMimeType(string mimeType)
     Returns: a short description of the content type type. Free the
           returned string with [glib.global.gfree]
 */
-string contentTypeGetDescription(string type)
+string contentTypeGetDescription(string type) nothrow
 {
   char* _cretval;
   const(char)* _type = type.toCString(No.Alloc);
@@ -339,7 +346,7 @@ string contentTypeGetDescription(string type)
     Returns: the registered generic icon name for the given type,
           or null if unknown. Free with [glib.global.gfree]
 */
-string contentTypeGetGenericIconName(string type)
+string contentTypeGetGenericIconName(string type) nothrow
 {
   char* _cretval;
   const(char)* _type = type.toCString(No.Alloc);
@@ -356,7 +363,7 @@ string contentTypeGetGenericIconName(string type)
     Returns: #GIcon corresponding to the content type. Free the returned
           object with [gobject.object.ObjectWrap.unref]
 */
-gio.icon.Icon contentTypeGetIcon(string type)
+gio.icon.Icon contentTypeGetIcon(string type) nothrow
 {
   GIcon* _cretval;
   const(char)* _type = type.toCString(No.Alloc);
@@ -372,7 +379,7 @@ gio.icon.Icon contentTypeGetIcon(string type)
          directories to load MIME data from, including any `mime/` subdirectory,
          and with the first directory to try listed first
 */
-string[] contentTypeGetMimeDirs()
+string[] contentTypeGetMimeDirs() nothrow
 {
   const(char*)* _cretval;
   _cretval = g_content_type_get_mime_dirs();
@@ -398,7 +405,7 @@ string[] contentTypeGetMimeDirs()
     Returns: the registered mime type for the
           given type, or null if unknown; free with [glib.global.gfree].
 */
-string contentTypeGetMimeType(string type)
+string contentTypeGetMimeType(string type) nothrow
 {
   char* _cretval;
   const(char)* _type = type.toCString(No.Alloc);
@@ -415,7 +422,7 @@ string contentTypeGetMimeType(string type)
     Returns: symbolic #GIcon corresponding to the content type.
           Free the returned object with [gobject.object.ObjectWrap.unref]
 */
-gio.icon.Icon contentTypeGetSymbolicIcon(string type)
+gio.icon.Icon contentTypeGetSymbolicIcon(string type) nothrow
 {
   GIcon* _cretval;
   const(char)* _type = type.toCString(No.Alloc);
@@ -438,7 +445,7 @@ gio.icon.Icon contentTypeGetSymbolicIcon(string type)
     Returns: a string indicating a guessed content type for the
           given data. Free with [glib.global.gfree]
 */
-string contentTypeGuess(string filename, ubyte[] data, out bool resultUncertain)
+string contentTypeGuess(string filename, ubyte[] data, out bool resultUncertain) nothrow
 {
   char* _cretval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -473,7 +480,7 @@ string contentTypeGuess(string filename, ubyte[] data, out bool resultUncertain)
     Returns: an null-terminated
           array of zero or more content types. Free with [glib.global.strfreev]
 */
-string[] contentTypeGuessForTree(gio.file.File root)
+string[] contentTypeGuessForTree(gio.file.File root) nothrow
 {
   char** _cretval;
   _cretval = g_content_type_guess_for_tree(root ? cast(GFile*)(cast(gobject.object.ObjectWrap)root)._cPtr(No.Dup) : null);
@@ -501,7 +508,7 @@ string[] contentTypeGuessForTree(gio.file.File root)
     Returns: true if type is a kind of supertype,
           false otherwise.
 */
-bool contentTypeIsA(string type, string supertype)
+bool contentTypeIsA(string type, string supertype) nothrow
 {
   bool _retval;
   const(char)* _type = type.toCString(No.Alloc);
@@ -520,7 +527,7 @@ bool contentTypeIsA(string type, string supertype)
     Returns: true if type is a kind of mime_type,
           false otherwise.
 */
-bool contentTypeIsMimeType(string type, string mimeType)
+bool contentTypeIsMimeType(string type, string mimeType) nothrow
 {
   bool _retval;
   const(char)* _type = type.toCString(No.Alloc);
@@ -539,7 +546,7 @@ bool contentTypeIsMimeType(string type, string mimeType)
       type = a content type string
     Returns: true if the type is the unknown type.
 */
-bool contentTypeIsUnknown(string type)
+bool contentTypeIsUnknown(string type) nothrow
 {
   bool _retval;
   const(char)* _type = type.toCString(No.Alloc);
@@ -577,7 +584,7 @@ bool contentTypeIsUnknown(string type)
            directories to load MIME data from, including any `mime/` subdirectory,
            and with the first directory to try listed first
 */
-void contentTypeSetMimeDirs(string[] dirs = null)
+void contentTypeSetMimeDirs(string[] dirs = null) nothrow
 {
   char*[] _tmpdirs;
   foreach (s; dirs)
@@ -595,7 +602,7 @@ void contentTypeSetMimeDirs(string[] dirs = null)
     Returns: list of the registered
           content types
 */
-string[] contentTypesGetRegistered()
+string[] contentTypesGetRegistered() nothrow
 {
   GList* _cretval;
   _cretval = g_content_types_get_registered();
@@ -618,7 +625,7 @@ string[] contentTypesGetRegistered()
     Returns: a copy of string with all
           non-optionally-escaped bytes escaped
 */
-string dbusAddressEscapeValue(string string_)
+string dbusAddressEscapeValue(string string_) nothrow
 {
   char* _cretval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -671,14 +678,21 @@ string dbusAddressGetForBusSync(gio.types.BusType busType, gio.cancellable.Cance
       cancellable = A #GCancellable or null.
       callback = A #GAsyncReadyCallback to call when the request is satisfied.
 */
-void dbusAddressGetStream(string address, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+void dbusAddressGetStream(string address, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
 {
-  extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+  extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
   {
     ptrThawGC(data);
     auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-    (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+    try
+    {
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+    }
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
   const(char)* _address = address.toCString(No.Alloc);
@@ -751,7 +765,7 @@ gio.iostream.IOStream dbusAddressGetStreamSync(string address, out string outGui
       s = the string to escape
     Returns: an escaped version of `s`. Free with [glib.global.gfree].
 */
-string dbusEscapeObjectPath(string s)
+string dbusEscapeObjectPath(string s) nothrow
 {
   char* _cretval;
   const(char)* _s = s.toCString(No.Alloc);
@@ -782,7 +796,7 @@ string dbusEscapeObjectPath(string s)
       bytes = the string of bytes to escape
     Returns: an escaped version of bytes. Free with [glib.global.gfree].
 */
-string dbusEscapeObjectPathBytestring(ubyte[] bytes)
+string dbusEscapeObjectPathBytestring(ubyte[] bytes) nothrow
 {
   char* _cretval;
   auto _bytes = bytes.ptr ? cast(const(ubyte)*)(bytes ~ ubyte.init).ptr : [ubyte.init].ptr;
@@ -805,7 +819,7 @@ string dbusEscapeObjectPathBytestring(ubyte[] bytes)
     [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122).
     Returns: A valid D-Bus GUID. Free with [glib.global.gfree].
 */
-string dbusGenerateGuid()
+string dbusGenerateGuid() nothrow
 {
   char* _cretval;
   _cretval = g_dbus_generate_guid();
@@ -850,7 +864,7 @@ string dbusGenerateGuid()
           #GVariantType type holding the data from gvalue or an empty #GVariant
           in case of failure. Free with [glib.variant.Variant.unref].
 */
-glib.variant.Variant dbusGvalueToGvariant(gobject.value.Value gvalue, glib.variant_type.VariantType type)
+glib.variant.Variant dbusGvalueToGvariant(gobject.value.Value gvalue, glib.variant_type.VariantType type) nothrow
 {
   GVariant* _cretval;
   _cretval = g_dbus_gvalue_to_gvariant(gvalue ? cast(const(GValue)*)gvalue._cPtr(No.Dup) : null, type ? cast(const(GVariantType)*)type._cPtr(No.Dup) : null);
@@ -875,7 +889,7 @@ glib.variant.Variant dbusGvalueToGvariant(gobject.value.Value gvalue, glib.varia
       value = A #GVariant.
       outGvalue = Return location pointing to a zero-filled (uninitialized) #GValue.
 */
-void dbusGvariantToGvalue(glib.variant.Variant value, out gobject.value.Value outGvalue)
+void dbusGvariantToGvalue(glib.variant.Variant value, out gobject.value.Value outGvalue) nothrow
 {
   GValue _outGvalue;
   g_dbus_gvariant_to_gvalue(value ? cast(GVariant*)value._cPtr(No.Dup) : null, &_outGvalue);
@@ -894,7 +908,7 @@ void dbusGvariantToGvalue(glib.variant.Variant value, out gobject.value.Value ou
       string_ = A string.
     Returns: true if string is a valid D-Bus address, false otherwise.
 */
-bool dbusIsAddress(string string_)
+bool dbusIsAddress(string string_) nothrow
 {
   bool _retval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -913,7 +927,7 @@ bool dbusIsAddress(string string_)
       string_ = The string to check.
     Returns: true if valid, false otherwise.
 */
-bool dbusIsErrorName(string string_)
+bool dbusIsErrorName(string string_) nothrow
 {
   bool _retval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -931,7 +945,7 @@ bool dbusIsErrorName(string string_)
       string_ = The string to check.
     Returns: true if string is a GUID, false otherwise.
 */
-bool dbusIsGuid(string string_)
+bool dbusIsGuid(string string_) nothrow
 {
   bool _retval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -946,7 +960,7 @@ bool dbusIsGuid(string string_)
       string_ = The string to check.
     Returns: true if valid, false otherwise.
 */
-bool dbusIsInterfaceName(string string_)
+bool dbusIsInterfaceName(string string_) nothrow
 {
   bool _retval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -961,7 +975,7 @@ bool dbusIsInterfaceName(string string_)
       string_ = The string to check.
     Returns: true if valid, false otherwise.
 */
-bool dbusIsMemberName(string string_)
+bool dbusIsMemberName(string string_) nothrow
 {
   bool _retval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -976,7 +990,7 @@ bool dbusIsMemberName(string string_)
       string_ = The string to check.
     Returns: true if valid, false otherwise.
 */
-bool dbusIsName(string string_)
+bool dbusIsName(string string_) nothrow
 {
   bool _retval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -1014,7 +1028,7 @@ bool dbusIsSupportedAddress(string string_)
       string_ = The string to check.
     Returns: true if valid, false otherwise.
 */
-bool dbusIsUniqueName(string string_)
+bool dbusIsUniqueName(string string_) nothrow
 {
   bool _retval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -1038,7 +1052,7 @@ bool dbusIsUniqueName(string string_)
         unescaped version of `s`, or null if `s` is not a string returned
         from [gio.global.dbusEscapeObjectPath]. Free with [glib.global.gfree].
 */
-ubyte[] dbusUnescapeObjectPath(string s)
+ubyte[] dbusUnescapeObjectPath(string s) nothrow
 {
   ubyte* _cretval;
   const(char)* _s = s.toCString(No.Alloc);
@@ -1080,7 +1094,7 @@ ubyte[] dbusUnescapeObjectPath(string s)
       errNo = Error number as defined in errno.h.
     Returns: #GIOErrorEnum value for the given `errno.h` error number
 */
-gio.types.IOErrorEnum ioErrorFromErrno(int errNo)
+gio.types.IOErrorEnum ioErrorFromErrno(int errNo) nothrow
 {
   GIOErrorEnum _cretval;
   _cretval = g_io_error_from_errno(errNo);
@@ -1095,7 +1109,7 @@ gio.types.IOErrorEnum ioErrorFromErrno(int errNo)
       fileError = a #GFileError.
     Returns: #GIOErrorEnum value for the given #GFileError error value.
 */
-gio.types.IOErrorEnum ioErrorFromFileError(glib.types.FileError fileError)
+gio.types.IOErrorEnum ioErrorFromFileError(glib.types.FileError fileError) nothrow
 {
   GIOErrorEnum _cretval;
   _cretval = g_io_error_from_file_error(fileError);
@@ -1107,7 +1121,7 @@ gio.types.IOErrorEnum ioErrorFromFileError(glib.types.FileError fileError)
     Gets the GIO Error Quark.
     Returns: a #GQuark.
 */
-glib.types.Quark ioErrorQuark()
+glib.types.Quark ioErrorQuark() nothrow
 {
   glib.types.Quark _retval;
   _retval = g_io_error_quark();
@@ -1131,7 +1145,7 @@ glib.types.Quark ioErrorQuark()
       dirname = pathname for a directory containing modules
             to scan.
 */
-void ioModulesScanAllInDirectory(string dirname)
+void ioModulesScanAllInDirectory(string dirname) nothrow
 {
   const(char)* _dirname = dirname.toCString(No.Alloc);
   g_io_modules_scan_all_in_directory(_dirname);
@@ -1155,7 +1169,7 @@ void ioModulesScanAllInDirectory(string dirname)
             to scan.
       scope_ = a scope to use when scanning the modules
 */
-void ioModulesScanAllInDirectoryWithScope(string dirname, gio.iomodule_scope.IOModuleScope scope_)
+void ioModulesScanAllInDirectoryWithScope(string dirname, gio.iomodule_scope.IOModuleScope scope_) nothrow
 {
   const(char)* _dirname = dirname.toCString(No.Alloc);
   g_io_modules_scan_all_in_directory_with_scope(_dirname, scope_ ? cast(GIOModuleScope*)scope_._cPtr : null);
@@ -1171,7 +1185,7 @@ void ioModulesScanAllInDirectoryWithScope(string dirname, gio.iomodule_scope.IOM
       know how other libraries in your program might be making use of
       gioscheduler.
 */
-void ioSchedulerCancelAllJobs()
+void ioSchedulerCancelAllJobs() nothrow
 {
   g_io_scheduler_cancel_all_jobs();
 }
@@ -1194,14 +1208,21 @@ void ioSchedulerCancelAllJobs()
 
     Deprecated: use #GThreadPool or [gio.task.Task.runInThread]
 */
-void ioSchedulerPushJob(gio.types.IOSchedulerJobFunc jobFunc, int ioPriority, gio.cancellable.Cancellable cancellable = null)
+void ioSchedulerPushJob(gio.types.IOSchedulerJobFunc jobFunc, int ioPriority, gio.cancellable.Cancellable cancellable = null) nothrow
 {
-  extern(C) gboolean _jobFuncCallback(GIOSchedulerJob* job, GCancellable* cancellable, void* data)
+  extern(C) gboolean _jobFuncCallback(GIOSchedulerJob* job, GCancellable* cancellable, void* data) nothrow
   {
     bool _dretval;
     auto _dlg = cast(gio.types.IOSchedulerJobFunc*)data;
 
-    _dretval = (*_dlg)(job ? new gio.ioscheduler_job.IOSchedulerJob(cast(void*)job, No.Take) : null, gobject.object.ObjectWrap._getDObject!(gio.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
+    try
+    {
+      _dretval = (*_dlg)(job ? new gio.ioscheduler_job.IOSchedulerJob(cast(void*)job, No.Take) : null, gobject.object.ObjectWrap._getDObject!(gio.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gio.types.IOSchedulerJobFunc");
+    }
     auto _retval = cast(gboolean)_dretval;
 
     return _retval;
@@ -1270,7 +1291,7 @@ void ioSchedulerPushJob(gio.types.IOSchedulerJobFunc jobFunc, int ioPriority, gi
                      root_path, or null
     Returns: a keyfile-backed #GSettingsBackend
 */
-gio.settings_backend.SettingsBackend keyfileSettingsBackendNew(string filename, string rootPath, string rootGroup = null)
+gio.settings_backend.SettingsBackend keyfileSettingsBackendNew(string filename, string rootPath, string rootGroup = null) nothrow
 {
   GSettingsBackend* _cretval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -1289,7 +1310,7 @@ gio.settings_backend.SettingsBackend keyfileSettingsBackendNew(string filename, 
     the memory backend will start out with the default values again.
     Returns: a newly created #GSettingsBackend
 */
-gio.settings_backend.SettingsBackend memorySettingsBackendNew()
+gio.settings_backend.SettingsBackend memorySettingsBackendNew() nothrow
 {
   GSettingsBackend* _cretval;
   _cretval = g_memory_settings_backend_new();
@@ -1303,7 +1324,7 @@ gio.settings_backend.SettingsBackend memorySettingsBackendNew()
     you only need to call it if you directly call system networking
     functions (without calling any GLib networking functions first).
 */
-void networkingInit()
+void networkingInit() nothrow
 {
   g_networking_init();
 }
@@ -1315,7 +1336,7 @@ void networkingInit()
     will always have their default values.
     Returns: a newly created #GSettingsBackend
 */
-gio.settings_backend.SettingsBackend nullSettingsBackendNew()
+gio.settings_backend.SettingsBackend nullSettingsBackendNew() nothrow
 {
   GSettingsBackend* _cretval;
   _cretval = g_null_settings_backend_new();
@@ -1334,7 +1355,7 @@ gio.settings_backend.SettingsBackend nullSettingsBackendNew()
       pollableStream = the stream associated with the new source
     Returns: the new #GSource.
 */
-glib.source.Source pollableSourceNew(gobject.object.ObjectWrap pollableStream)
+glib.source.Source pollableSourceNew(gobject.object.ObjectWrap pollableStream) nothrow
 {
   GSource* _cretval;
   _cretval = g_pollable_source_new(pollableStream ? cast(GObject*)pollableStream._cPtr(No.Dup) : null);
@@ -1355,7 +1376,7 @@ glib.source.Source pollableSourceNew(gobject.object.ObjectWrap pollableStream)
       cancellable = optional #GCancellable to attach
     Returns: the new #GSource.
 */
-glib.source.Source pollableSourceNewFull(gobject.object.ObjectWrap pollableStream, glib.source.Source childSource = null, gio.cancellable.Cancellable cancellable = null)
+glib.source.Source pollableSourceNewFull(gobject.object.ObjectWrap pollableStream, glib.source.Source childSource = null, gio.cancellable.Cancellable cancellable = null) nothrow
 {
   GSource* _cretval;
   _cretval = g_pollable_source_new_full(pollableStream ? cast(GObject*)pollableStream._cPtr(No.Dup) : null, childSource ? cast(GSource*)childSource._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null);
@@ -1613,7 +1634,7 @@ gio.input_stream.InputStream resourcesOpenStream(string path, gio.types.Resource
     Params:
       resource = A #GResource
 */
-void resourcesRegister(gio.resource.Resource resource)
+void resourcesRegister(gio.resource.Resource resource) nothrow
 {
   g_resources_register(resource ? cast(GResource*)resource._cPtr(No.Dup) : null);
 }
@@ -1624,7 +1645,7 @@ void resourcesRegister(gio.resource.Resource resource)
     Params:
       resource = A #GResource
 */
-void resourcesUnregister(gio.resource.Resource resource)
+void resourcesUnregister(gio.resource.Resource resource) nothrow
 {
   g_resources_unregister(resource ? cast(GResource*)resource._cPtr(No.Dup) : null);
 }
@@ -1641,14 +1662,21 @@ void resourcesUnregister(gio.resource.Resource resource)
 
     Deprecated: Use [gio.task.Task.reportError].
 */
-void simpleAsyncReportGerrorInIdle(gobject.object.ObjectWrap object, gio.types.AsyncReadyCallback callback, glib.error.ErrorWrap error)
+void simpleAsyncReportGerrorInIdle(gobject.object.ObjectWrap object, gio.types.AsyncReadyCallback callback, glib.error.ErrorWrap error) nothrow
 {
-  extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+  extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
   {
     ptrThawGC(data);
     auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-    (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+    try
+    {
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+    }
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -1666,7 +1694,7 @@ void simpleAsyncReportGerrorInIdle(gobject.object.ObjectWrap object, gio.types.A
     Returns: true if mount_path is considered an implementation detail
           of the OS.
 */
-bool unixIsMountPathSystemInternal(string mountPath)
+bool unixIsMountPathSystemInternal(string mountPath) nothrow
 {
   bool _retval;
   const(char)* _mountPath = mountPath.toCString(No.Alloc);
@@ -1688,7 +1716,7 @@ bool unixIsMountPathSystemInternal(string mountPath)
     Returns: true if device_path is considered an implementation detail of
          the OS.
 */
-bool unixIsSystemDevicePath(string devicePath)
+bool unixIsSystemDevicePath(string devicePath) nothrow
 {
   bool _retval;
   const(char)* _devicePath = devicePath.toCString(No.Alloc);
@@ -1709,7 +1737,7 @@ bool unixIsSystemDevicePath(string devicePath)
       fsType = a file system type, e.g. `procfs` or `tmpfs`
     Returns: true if fs_type is considered an implementation detail of the OS.
 */
-bool unixIsSystemFsType(string fsType)
+bool unixIsSystemFsType(string fsType) nothrow
 {
   bool _retval;
   const(char)* _fsType = fsType.toCString(No.Alloc);
@@ -1732,7 +1760,7 @@ bool unixIsSystemFsType(string fsType)
       timeRead = guint64 to contain a timestamp.
     Returns: a #GUnixMountEntry.
 */
-gio.unix_mount_entry.UnixMountEntry unixMountAt(string mountPath, out ulong timeRead)
+gio.unix_mount_entry.UnixMountEntry unixMountAt(string mountPath, out ulong timeRead) nothrow
 {
   GUnixMountEntry* _cretval;
   const(char)* _mountPath = mountPath.toCString(No.Alloc);
@@ -1750,7 +1778,7 @@ gio.unix_mount_entry.UnixMountEntry unixMountAt(string mountPath, out ulong time
     Returns: 1, 0 or -1 if mount1 is greater than, equal to,
       or less than mount2, respectively.
 */
-int unixMountCompare(gio.unix_mount_entry.UnixMountEntry mount1, gio.unix_mount_entry.UnixMountEntry mount2)
+int unixMountCompare(gio.unix_mount_entry.UnixMountEntry mount1, gio.unix_mount_entry.UnixMountEntry mount2) nothrow
 {
   int _retval;
   _retval = g_unix_mount_compare(mount1 ? cast(GUnixMountEntry*)mount1._cPtr(No.Dup) : null, mount2 ? cast(GUnixMountEntry*)mount2._cPtr(No.Dup) : null);
@@ -1764,7 +1792,7 @@ int unixMountCompare(gio.unix_mount_entry.UnixMountEntry mount1, gio.unix_mount_
       mountEntry = a #GUnixMountEntry.
     Returns: a new #GUnixMountEntry
 */
-gio.unix_mount_entry.UnixMountEntry unixMountCopy(gio.unix_mount_entry.UnixMountEntry mountEntry)
+gio.unix_mount_entry.UnixMountEntry unixMountCopy(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
 {
   GUnixMountEntry* _cretval;
   _cretval = g_unix_mount_copy(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
@@ -1788,7 +1816,7 @@ gio.unix_mount_entry.UnixMountEntry unixMountCopy(gio.unix_mount_entry.UnixMount
       timeRead = guint64 to contain a timestamp.
     Returns: a #GUnixMountEntry.
 */
-gio.unix_mount_entry.UnixMountEntry unixMountFor(string filePath, out ulong timeRead)
+gio.unix_mount_entry.UnixMountEntry unixMountFor(string filePath, out ulong timeRead) nothrow
 {
   GUnixMountEntry* _cretval;
   const(char)* _filePath = filePath.toCString(No.Alloc);
@@ -1803,7 +1831,7 @@ gio.unix_mount_entry.UnixMountEntry unixMountFor(string filePath, out ulong time
     Params:
       mountEntry = a #GUnixMountEntry.
 */
-void unixMountFree(gio.unix_mount_entry.UnixMountEntry mountEntry)
+void unixMountFree(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
 {
   g_unix_mount_free(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
 }
@@ -1815,7 +1843,7 @@ void unixMountFree(gio.unix_mount_entry.UnixMountEntry mountEntry)
       mountEntry = a #GUnixMount.
     Returns: a string containing the device path.
 */
-string unixMountGetDevicePath(gio.unix_mount_entry.UnixMountEntry mountEntry)
+string unixMountGetDevicePath(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
 {
   const(char)* _cretval;
   _cretval = g_unix_mount_get_device_path(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
@@ -1830,7 +1858,7 @@ string unixMountGetDevicePath(gio.unix_mount_entry.UnixMountEntry mountEntry)
       mountEntry = a #GUnixMount.
     Returns: a string containing the file system type.
 */
-string unixMountGetFsType(gio.unix_mount_entry.UnixMountEntry mountEntry)
+string unixMountGetFsType(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
 {
   const(char)* _cretval;
   _cretval = g_unix_mount_get_fs_type(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
@@ -1845,7 +1873,7 @@ string unixMountGetFsType(gio.unix_mount_entry.UnixMountEntry mountEntry)
       mountEntry = input #GUnixMountEntry to get the mount path for.
     Returns: the mount path for mount_entry.
 */
-string unixMountGetMountPath(gio.unix_mount_entry.UnixMountEntry mountEntry)
+string unixMountGetMountPath(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
 {
   const(char)* _cretval;
   _cretval = g_unix_mount_get_mount_path(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
@@ -1865,7 +1893,7 @@ string unixMountGetMountPath(gio.unix_mount_entry.UnixMountEntry mountEntry)
     Returns: a string containing the options, or null if not
       available.
 */
-string unixMountGetOptions(gio.unix_mount_entry.UnixMountEntry mountEntry)
+string unixMountGetOptions(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
 {
   const(char)* _cretval;
   _cretval = g_unix_mount_get_options(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
@@ -1885,7 +1913,7 @@ string unixMountGetOptions(gio.unix_mount_entry.UnixMountEntry mountEntry)
       mountEntry = a #GUnixMountEntry.
     Returns: a string containing the root, or null if not supported.
 */
-string unixMountGetRootPath(gio.unix_mount_entry.UnixMountEntry mountEntry)
+string unixMountGetRootPath(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
 {
   const(char)* _cretval;
   _cretval = g_unix_mount_get_root_path(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
@@ -1900,7 +1928,7 @@ string unixMountGetRootPath(gio.unix_mount_entry.UnixMountEntry mountEntry)
       mountEntry = a #GUnixMountEntry
     Returns: true if mount_entry is deemed to be ejectable.
 */
-bool unixMountGuessCanEject(gio.unix_mount_entry.UnixMountEntry mountEntry)
+bool unixMountGuessCanEject(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unix_mount_guess_can_eject(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
@@ -1914,7 +1942,7 @@ bool unixMountGuessCanEject(gio.unix_mount_entry.UnixMountEntry mountEntry)
       mountEntry = a #GUnixMountEntry
     Returns: a #GIcon
 */
-gio.icon.Icon unixMountGuessIcon(gio.unix_mount_entry.UnixMountEntry mountEntry)
+gio.icon.Icon unixMountGuessIcon(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
 {
   GIcon* _cretval;
   _cretval = g_unix_mount_guess_icon(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
@@ -1931,7 +1959,7 @@ gio.icon.Icon unixMountGuessIcon(gio.unix_mount_entry.UnixMountEntry mountEntry)
     Returns: A newly allocated string that must
           be freed with [glib.global.gfree]
 */
-string unixMountGuessName(gio.unix_mount_entry.UnixMountEntry mountEntry)
+string unixMountGuessName(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
 {
   char* _cretval;
   _cretval = g_unix_mount_guess_name(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
@@ -1946,7 +1974,7 @@ string unixMountGuessName(gio.unix_mount_entry.UnixMountEntry mountEntry)
       mountEntry = a #GUnixMountEntry
     Returns: true if mount_entry is deemed to be displayable.
 */
-bool unixMountGuessShouldDisplay(gio.unix_mount_entry.UnixMountEntry mountEntry)
+bool unixMountGuessShouldDisplay(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unix_mount_guess_should_display(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
@@ -1960,7 +1988,7 @@ bool unixMountGuessShouldDisplay(gio.unix_mount_entry.UnixMountEntry mountEntry)
       mountEntry = a #GUnixMountEntry
     Returns: a #GIcon
 */
-gio.icon.Icon unixMountGuessSymbolicIcon(gio.unix_mount_entry.UnixMountEntry mountEntry)
+gio.icon.Icon unixMountGuessSymbolicIcon(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
 {
   GIcon* _cretval;
   _cretval = g_unix_mount_guess_symbolic_icon(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
@@ -1975,7 +2003,7 @@ gio.icon.Icon unixMountGuessSymbolicIcon(gio.unix_mount_entry.UnixMountEntry mou
       mountEntry = a #GUnixMount.
     Returns: true if mount_entry is read only.
 */
-bool unixMountIsReadonly(gio.unix_mount_entry.UnixMountEntry mountEntry)
+bool unixMountIsReadonly(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unix_mount_is_readonly(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
@@ -1994,7 +2022,7 @@ bool unixMountIsReadonly(gio.unix_mount_entry.UnixMountEntry mountEntry)
       mountEntry = a #GUnixMount.
     Returns: true if the unix mount is for a system path.
 */
-bool unixMountIsSystemInternal(gio.unix_mount_entry.UnixMountEntry mountEntry)
+bool unixMountIsSystemInternal(gio.unix_mount_entry.UnixMountEntry mountEntry) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unix_mount_is_system_internal(mountEntry ? cast(GUnixMountEntry*)mountEntry._cPtr(No.Dup) : null);
@@ -2008,7 +2036,7 @@ bool unixMountIsSystemInternal(gio.unix_mount_entry.UnixMountEntry mountEntry)
       time = guint64 to contain a timestamp.
     Returns: true if the mount points have changed since time.
 */
-bool unixMountPointsChangedSince(ulong time)
+bool unixMountPointsChangedSince(ulong time) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unix_mount_points_changed_since(time);
@@ -2025,7 +2053,7 @@ bool unixMountPointsChangedSince(ulong time)
       timeRead = guint64 to contain a timestamp.
     Returns: a #GList of the UNIX mountpoints.
 */
-gio.unix_mount_point.UnixMountPoint[] unixMountPointsGet(out ulong timeRead)
+gio.unix_mount_point.UnixMountPoint[] unixMountPointsGet(out ulong timeRead) nothrow
 {
   GList* _cretval;
   _cretval = g_unix_mount_points_get(cast(ulong*)&timeRead);
@@ -2040,7 +2068,7 @@ gio.unix_mount_point.UnixMountPoint[] unixMountPointsGet(out ulong timeRead)
       time = guint64 to contain a timestamp.
     Returns: true if the mounts have changed since time.
 */
-bool unixMountsChangedSince(ulong time)
+bool unixMountsChangedSince(ulong time) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unix_mounts_changed_since(time);
@@ -2057,7 +2085,7 @@ bool unixMountsChangedSince(ulong time)
       timeRead = guint64 to contain a timestamp, or null
     Returns: a #GList of the UNIX mounts.
 */
-gio.unix_mount_entry.UnixMountEntry[] unixMountsGet(out ulong timeRead)
+gio.unix_mount_entry.UnixMountEntry[] unixMountsGet(out ulong timeRead) nothrow
 {
   GList* _cretval;
   _cretval = g_unix_mounts_get(cast(ulong*)&timeRead);

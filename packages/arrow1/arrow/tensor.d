@@ -16,26 +16,26 @@ class Tensor : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_tensor_get_type != &gidSymbolNotFound ? garrow_tensor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Tensor self()
+  override Tensor self() nothrow
   {
     return this;
   }
@@ -44,19 +44,19 @@ class Tensor : gobject.object.ObjectWrap
       Get builder for [arrow.tensor.Tensor]
       Returns: New builder object
   */
-  static TensorGidBuilder builder()
+  static TensorGidBuilder builder() nothrow
   {
     return new TensorGidBuilder;
   }
 
   /** */
-  @property arrow.buffer.Buffer buffer()
+  @property arrow.buffer.Buffer buffer() nothrow
   {
     return getBuffer();
   }
 
   /** */
-  this(arrow.data_type.DataType dataType, arrow.buffer.Buffer data, long[] shape, long[] strides = null, string[] dimensionNames = null)
+  this(arrow.data_type.DataType dataType, arrow.buffer.Buffer data, long[] shape, long[] strides = null, string[] dimensionNames = null) nothrow
   {
     GArrowTensor* _cretval;
     size_t _nDimensions;
@@ -83,7 +83,7 @@ class Tensor : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equal(arrow.tensor.Tensor otherTensor)
+  bool equal(arrow.tensor.Tensor otherTensor) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_tensor_equal(cast(GArrowTensor*)this._cPtr, otherTensor ? cast(GArrowTensor*)otherTensor._cPtr(No.Dup) : null);
@@ -91,7 +91,7 @@ class Tensor : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.buffer.Buffer getBuffer()
+  arrow.buffer.Buffer getBuffer() nothrow
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_tensor_get_buffer(cast(GArrowTensor*)this._cPtr);
@@ -100,7 +100,7 @@ class Tensor : gobject.object.ObjectWrap
   }
 
   /** */
-  string getDimensionName(int i)
+  string getDimensionName(int i) nothrow
   {
     const(char)* _cretval;
     _cretval = garrow_tensor_get_dimension_name(cast(GArrowTensor*)this._cPtr, i);
@@ -109,7 +109,7 @@ class Tensor : gobject.object.ObjectWrap
   }
 
   /** */
-  int getNDimensions()
+  int getNDimensions() nothrow
   {
     int _retval;
     _retval = garrow_tensor_get_n_dimensions(cast(GArrowTensor*)this._cPtr);
@@ -117,7 +117,7 @@ class Tensor : gobject.object.ObjectWrap
   }
 
   /** */
-  long[] getShape()
+  long[] getShape() nothrow
   {
     long* _cretval;
     int _cretlength;
@@ -133,7 +133,7 @@ class Tensor : gobject.object.ObjectWrap
   }
 
   /** */
-  long getSize()
+  long getSize() nothrow
   {
     long _retval;
     _retval = garrow_tensor_get_size(cast(GArrowTensor*)this._cPtr);
@@ -141,7 +141,7 @@ class Tensor : gobject.object.ObjectWrap
   }
 
   /** */
-  long[] getStrides()
+  long[] getStrides() nothrow
   {
     long* _cretval;
     int _cretlength;
@@ -157,7 +157,7 @@ class Tensor : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.data_type.DataType getValueDataType()
+  arrow.data_type.DataType getValueDataType() nothrow
   {
     GArrowDataType* _cretval;
     _cretval = garrow_tensor_get_value_data_type(cast(GArrowTensor*)this._cPtr);
@@ -166,7 +166,7 @@ class Tensor : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.types.Type getValueType()
+  arrow.types.Type getValueType() nothrow
   {
     GArrowType _cretval;
     _cretval = garrow_tensor_get_value_type(cast(GArrowTensor*)this._cPtr);
@@ -175,7 +175,7 @@ class Tensor : gobject.object.ObjectWrap
   }
 
   /** */
-  bool isColumnMajor()
+  bool isColumnMajor() nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_tensor_is_column_major(cast(GArrowTensor*)this._cPtr);
@@ -183,7 +183,7 @@ class Tensor : gobject.object.ObjectWrap
   }
 
   /** */
-  bool isContiguous()
+  bool isContiguous() nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_tensor_is_contiguous(cast(GArrowTensor*)this._cPtr);
@@ -191,7 +191,7 @@ class Tensor : gobject.object.ObjectWrap
   }
 
   /** */
-  bool isMutable()
+  bool isMutable() nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_tensor_is_mutable(cast(GArrowTensor*)this._cPtr);
@@ -199,7 +199,7 @@ class Tensor : gobject.object.ObjectWrap
   }
 
   /** */
-  bool isRowMajor()
+  bool isRowMajor() nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_tensor_is_row_major(cast(GArrowTensor*)this._cPtr);
@@ -212,13 +212,13 @@ class TensorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T buffer(arrow.buffer.Buffer propval)
+  T buffer(arrow.buffer.Buffer propval) nothrow
   {
     return setProperty("buffer", propval);
   }
 
   /** */
-  T tensor(void* propval)
+  T tensor(void* propval) nothrow
   {
     return setProperty("tensor", propval);
   }
@@ -231,7 +231,7 @@ final class TensorGidBuilder : TensorGidBuilderImpl!TensorGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Tensor build()
+  Tensor build() nothrow
   {
     return new Tensor(cast(void*)createGObject(Tensor._getGType), Yes.Take);
   }

@@ -14,7 +14,7 @@ struct PathError
   alias Enum = json.types.PathError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = json_path_error_quark();
@@ -24,12 +24,12 @@ struct PathError
 
 class PathException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(json.path_error.PathError.quark, cast(int)code, msg);
   }

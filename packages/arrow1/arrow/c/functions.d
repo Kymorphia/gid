@@ -14,7 +14,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libarrow-glib.so.1900"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // AggregateNodeOptions
   GType function() c_garrow_aggregate_node_options_get_type; ///

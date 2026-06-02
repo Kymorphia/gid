@@ -16,32 +16,32 @@ class Rand : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_rand_get_type != &gidSymbolNotFound ? g_rand_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Rand self()
+  override Rand self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class Rand : gobject.boxed.Boxed
       On Windows, the seed is taken from rand_s().
       Returns: the new #GRand
   */
-  this()
+  this() nothrow
   {
     GRand* _cretval;
     _cretval = g_rand_new();
@@ -68,7 +68,7 @@ class Rand : gobject.boxed.Boxed
         seed = a value to initialize the random number generator
       Returns: the new #GRand
   */
-  static glib.rand.Rand newWithSeed(uint seed)
+  static glib.rand.Rand newWithSeed(uint seed) nothrow
   {
     GRand* _cretval;
     _cretval = g_rand_new_with_seed(seed);
@@ -83,7 +83,7 @@ class Rand : gobject.boxed.Boxed
         seed = an array of seeds to initialize the random number generator
       Returns: the new #GRand
   */
-  static glib.rand.Rand newWithSeedArray(uint[] seed)
+  static glib.rand.Rand newWithSeedArray(uint[] seed) nothrow
   {
     GRand* _cretval;
     uint _seedLength;
@@ -102,7 +102,7 @@ class Rand : gobject.boxed.Boxed
       replaying later.
       Returns: the new #GRand
   */
-  glib.rand.Rand copy()
+  glib.rand.Rand copy() nothrow
   {
     GRand* _cretval;
     _cretval = g_rand_copy(cast(GRand*)this._cPtr);
@@ -115,7 +115,7 @@ class Rand : gobject.boxed.Boxed
       the range [0..1).
       Returns: a random number
   */
-  double double_()
+  double double_() nothrow
   {
     double _retval;
     _retval = g_rand_double(cast(GRand*)this._cPtr);
@@ -131,7 +131,7 @@ class Rand : gobject.boxed.Boxed
         end = upper open bound of the interval
       Returns: a random number
   */
-  double doubleRange(double begin, double end)
+  double doubleRange(double begin, double end) nothrow
   {
     double _retval;
     _retval = g_rand_double_range(cast(GRand*)this._cPtr, begin, end);
@@ -143,7 +143,7 @@ class Rand : gobject.boxed.Boxed
       the range [0..2^32-1].
       Returns: a random number
   */
-  uint int_()
+  uint int_() nothrow
   {
     uint _retval;
     _retval = g_rand_int(cast(GRand*)this._cPtr);
@@ -159,7 +159,7 @@ class Rand : gobject.boxed.Boxed
         end = upper open bound of the interval
       Returns: a random number
   */
-  int intRange(int begin, int end)
+  int intRange(int begin, int end) nothrow
   {
     int _retval;
     _retval = g_rand_int_range(cast(GRand*)this._cPtr, begin, end);
@@ -172,7 +172,7 @@ class Rand : gobject.boxed.Boxed
       Params:
         seed = a value to reinitialize the random number generator
   */
-  void setSeed(uint seed)
+  void setSeed(uint seed) nothrow
   {
     g_rand_set_seed(cast(GRand*)this._cPtr, seed);
   }
@@ -187,7 +187,7 @@ class Rand : gobject.boxed.Boxed
       Params:
         seed = array to initialize with
   */
-  void setSeedArray(uint[] seed)
+  void setSeedArray(uint[] seed) nothrow
   {
     uint _seedLength;
     if (seed)

@@ -17,7 +17,7 @@ struct ParseError
       Get the error quark used by the parsing subsystem.
       Returns: the quark of the parse errors.
   */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gst_parse_error_quark();
@@ -27,12 +27,12 @@ struct ParseError
 
 class ParseException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gst.parse_error.ParseError.quark, cast(int)code, msg);
   }

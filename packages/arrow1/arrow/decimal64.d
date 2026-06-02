@@ -16,26 +16,26 @@ class Decimal64 : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal64_get_type != &gidSymbolNotFound ? garrow_decimal64_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Decimal64 self()
+  override Decimal64 self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class Decimal64 : gobject.object.ObjectWrap
       Get builder for [arrow.decimal64.Decimal64]
       Returns: New builder object
   */
-  static Decimal64GidBuilder builder()
+  static Decimal64GidBuilder builder() nothrow
   {
     return new Decimal64GidBuilder;
   }
 
   /** */
-  static arrow.decimal64.Decimal64 newInteger(long data)
+  static arrow.decimal64.Decimal64 newInteger(long data) nothrow
   {
     GArrowDecimal64* _cretval;
     _cretval = garrow_decimal64_new_integer(data);
@@ -74,13 +74,13 @@ class Decimal64 : gobject.object.ObjectWrap
   /**
       Computes the absolute value of the decimal destructively.
   */
-  void abs()
+  void abs() nothrow
   {
     garrow_decimal64_abs(cast(GArrowDecimal64*)this._cPtr);
   }
 
   /** */
-  arrow.decimal64.Decimal64 copy()
+  arrow.decimal64.Decimal64 copy() nothrow
   {
     GArrowDecimal64* _cretval;
     _cretval = garrow_decimal64_copy(cast(GArrowDecimal64*)this._cPtr);
@@ -103,7 +103,7 @@ class Decimal64 : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equal(arrow.decimal64.Decimal64 otherDecimal)
+  bool equal(arrow.decimal64.Decimal64 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal64_equal(cast(GArrowDecimal64*)this._cPtr, otherDecimal ? cast(GArrowDecimal64*)otherDecimal._cPtr(No.Dup) : null);
@@ -111,7 +111,7 @@ class Decimal64 : gobject.object.ObjectWrap
   }
 
   /** */
-  bool greaterThan(arrow.decimal64.Decimal64 otherDecimal)
+  bool greaterThan(arrow.decimal64.Decimal64 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal64_greater_than(cast(GArrowDecimal64*)this._cPtr, otherDecimal ? cast(GArrowDecimal64*)otherDecimal._cPtr(No.Dup) : null);
@@ -119,7 +119,7 @@ class Decimal64 : gobject.object.ObjectWrap
   }
 
   /** */
-  bool greaterThanOrEqual(arrow.decimal64.Decimal64 otherDecimal)
+  bool greaterThanOrEqual(arrow.decimal64.Decimal64 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal64_greater_than_or_equal(cast(GArrowDecimal64*)this._cPtr, otherDecimal ? cast(GArrowDecimal64*)otherDecimal._cPtr(No.Dup) : null);
@@ -127,7 +127,7 @@ class Decimal64 : gobject.object.ObjectWrap
   }
 
   /** */
-  bool lessThan(arrow.decimal64.Decimal64 otherDecimal)
+  bool lessThan(arrow.decimal64.Decimal64 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal64_less_than(cast(GArrowDecimal64*)this._cPtr, otherDecimal ? cast(GArrowDecimal64*)otherDecimal._cPtr(No.Dup) : null);
@@ -135,7 +135,7 @@ class Decimal64 : gobject.object.ObjectWrap
   }
 
   /** */
-  bool lessThanOrEqual(arrow.decimal64.Decimal64 otherDecimal)
+  bool lessThanOrEqual(arrow.decimal64.Decimal64 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal64_less_than_or_equal(cast(GArrowDecimal64*)this._cPtr, otherDecimal ? cast(GArrowDecimal64*)otherDecimal._cPtr(No.Dup) : null);
@@ -143,7 +143,7 @@ class Decimal64 : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.decimal64.Decimal64 minus(arrow.decimal64.Decimal64 right)
+  arrow.decimal64.Decimal64 minus(arrow.decimal64.Decimal64 right) nothrow
   {
     GArrowDecimal64* _cretval;
     _cretval = garrow_decimal64_minus(cast(GArrowDecimal64*)this._cPtr, right ? cast(GArrowDecimal64*)right._cPtr(No.Dup) : null);
@@ -152,7 +152,7 @@ class Decimal64 : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.decimal64.Decimal64 multiply(arrow.decimal64.Decimal64 right)
+  arrow.decimal64.Decimal64 multiply(arrow.decimal64.Decimal64 right) nothrow
   {
     GArrowDecimal64* _cretval;
     _cretval = garrow_decimal64_multiply(cast(GArrowDecimal64*)this._cPtr, right ? cast(GArrowDecimal64*)right._cPtr(No.Dup) : null);
@@ -163,13 +163,13 @@ class Decimal64 : gobject.object.ObjectWrap
   /**
       Negate the current value of the decimal destructively.
   */
-  void negate()
+  void negate() nothrow
   {
     garrow_decimal64_negate(cast(GArrowDecimal64*)this._cPtr);
   }
 
   /** */
-  bool notEqual(arrow.decimal64.Decimal64 otherDecimal)
+  bool notEqual(arrow.decimal64.Decimal64 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal64_not_equal(cast(GArrowDecimal64*)this._cPtr, otherDecimal ? cast(GArrowDecimal64*)otherDecimal._cPtr(No.Dup) : null);
@@ -177,7 +177,7 @@ class Decimal64 : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.decimal64.Decimal64 plus(arrow.decimal64.Decimal64 right)
+  arrow.decimal64.Decimal64 plus(arrow.decimal64.Decimal64 right) nothrow
   {
     GArrowDecimal64* _cretval;
     _cretval = garrow_decimal64_plus(cast(GArrowDecimal64*)this._cPtr, right ? cast(GArrowDecimal64*)right._cPtr(No.Dup) : null);
@@ -198,7 +198,7 @@ class Decimal64 : gobject.object.ObjectWrap
   }
 
   /** */
-  glib.bytes.Bytes toBytes()
+  glib.bytes.Bytes toBytes() nothrow
   {
     GBytes* _cretval;
     _cretval = garrow_decimal64_to_bytes(cast(GArrowDecimal64*)this._cPtr);
@@ -207,7 +207,7 @@ class Decimal64 : gobject.object.ObjectWrap
   }
 
   /** */
-  long toInteger()
+  long toInteger() nothrow
   {
     long _retval;
     _retval = garrow_decimal64_to_integer(cast(GArrowDecimal64*)this._cPtr);
@@ -215,7 +215,7 @@ class Decimal64 : gobject.object.ObjectWrap
   }
 
   /** */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = garrow_decimal64_to_string(cast(GArrowDecimal64*)this._cPtr);
@@ -224,7 +224,7 @@ class Decimal64 : gobject.object.ObjectWrap
   }
 
   /** */
-  string toStringScale(int scale)
+  string toStringScale(int scale) nothrow
   {
     char* _cretval;
     _cretval = garrow_decimal64_to_string_scale(cast(GArrowDecimal64*)this._cPtr, scale);
@@ -238,7 +238,7 @@ class Decimal64GidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T decimal64(void* propval)
+  T decimal64(void* propval) nothrow
   {
     return setProperty("decimal64", propval);
   }
@@ -251,7 +251,7 @@ final class Decimal64GidBuilder : Decimal64GidBuilderImpl!Decimal64GidBuilder
       Create object from builder.
       Returns: New object
   */
-  Decimal64 build()
+  Decimal64 build() nothrow
   {
     return new Decimal64(cast(void*)createGObject(Decimal64._getGType), No.Take);
   }

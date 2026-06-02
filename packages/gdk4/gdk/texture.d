@@ -40,26 +40,26 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_texture_get_type != &gidSymbolNotFound ? gdk_texture_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Texture self()
+  override Texture self() nothrow
   {
     return this;
   }
@@ -68,7 +68,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
       Get builder for [gdk.texture.Texture]
       Returns: New builder object
   */
-  static TextureGidBuilder builder()
+  static TextureGidBuilder builder() nothrow
   {
     return new TextureGidBuilder;
   }
@@ -77,7 +77,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
       Get `height` property.
       Returns: The height of the texture, in pixels.
   */
-  @property int height()
+  @property int height() nothrow
   {
     return getHeight();
   }
@@ -86,7 +86,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
       Get `width` property.
       Returns: The width of the texture, in pixels.
   */
-  @property int width()
+  @property int width() nothrow
   {
     return getWidth();
   }
@@ -106,7 +106,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
         pixbuf = a [gdkpixbuf.pixbuf.Pixbuf]
       Returns: a new [gdk.texture.Texture]
   */
-  static gdk.texture.Texture newForPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  static gdk.texture.Texture newForPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf) nothrow
   {
     GdkTexture* _cretval;
     _cretval = gdk_texture_new_for_pixbuf(pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
@@ -218,7 +218,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
         resourcePath = the path of the resource file
       Returns: A newly-created [gdk.texture.Texture]
   */
-  static gdk.texture.Texture newFromResource(string resourcePath)
+  static gdk.texture.Texture newFromResource(string resourcePath) nothrow
   {
     GdkTexture* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
@@ -239,7 +239,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
       downloading the texture.
       Returns: the preferred format for the texture's data
   */
-  gdk.types.MemoryFormat getFormat()
+  gdk.types.MemoryFormat getFormat() nothrow
   {
     GdkMemoryFormat _cretval;
     _cretval = gdk_texture_get_format(cast(GdkTexture*)this._cPtr);
@@ -251,7 +251,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
       Returns the height of the texture, in pixels.
       Returns: the height of the [gdk.texture.Texture]
   */
-  int getHeight()
+  int getHeight() nothrow
   {
     int _retval;
     _retval = gdk_texture_get_height(cast(GdkTexture*)this._cPtr);
@@ -262,7 +262,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
       Returns the width of texture, in pixels.
       Returns: the width of the [gdk.texture.Texture]
   */
-  int getWidth()
+  int getWidth() nothrow
   {
     int _retval;
     _retval = gdk_texture_get_width(cast(GdkTexture*)this._cPtr);
@@ -282,7 +282,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
         filename = the filename to store to
       Returns: true if saving succeeded, false on failure.
   */
-  bool saveToPng(string filename)
+  bool saveToPng(string filename) nothrow
   {
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -307,7 +307,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
       instead.
       Returns: a newly allocated [glib.bytes.Bytes] containing PNG data
   */
-  glib.bytes.Bytes saveToPngBytes()
+  glib.bytes.Bytes saveToPngBytes() nothrow
   {
     GBytes* _cretval;
     _cretval = gdk_texture_save_to_png_bytes(cast(GdkTexture*)this._cPtr);
@@ -324,7 +324,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
         filename = the filename to store to
       Returns: true if saving succeeded, false on failure.
   */
-  bool saveToTiff(string filename)
+  bool saveToTiff(string filename) nothrow
   {
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -347,7 +347,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
       use [gdk.texture.Texture.saveToPngBytes].
       Returns: a newly allocated [glib.bytes.Bytes] containing TIFF data
   */
-  glib.bytes.Bytes saveToTiffBytes()
+  glib.bytes.Bytes saveToTiffBytes() nothrow
   {
     GBytes* _cretval;
     _cretval = gdk_texture_save_to_tiff_bytes(cast(GdkTexture*)this._cPtr);
@@ -370,7 +370,7 @@ class TextureGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gdk.
         propval = The height of the texture, in pixels.
       Returns: Builder instance for fluent chaining
   */
-  T height(int propval)
+  T height(int propval) nothrow
   {
     return setProperty("height", propval);
   }
@@ -381,7 +381,7 @@ class TextureGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gdk.
         propval = The width of the texture, in pixels.
       Returns: Builder instance for fluent chaining
   */
-  T width(int propval)
+  T width(int propval) nothrow
   {
     return setProperty("width", propval);
   }
@@ -394,7 +394,7 @@ final class TextureGidBuilder : TextureGidBuilderImpl!TextureGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Texture build()
+  Texture build() nothrow
   {
     return new Texture(cast(void*)createGObject(Texture._getGType), No.Take);
   }

@@ -14,26 +14,26 @@ class UInt32DataType : arrow.integer_data_type.IntegerDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_uint32_data_type_get_type != &gidSymbolNotFound ? garrow_uint32_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UInt32DataType self()
+  override UInt32DataType self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class UInt32DataType : arrow.integer_data_type.IntegerDataType
       Get builder for [arrow.uint32_data_type.UInt32DataType]
       Returns: New builder object
   */
-  static UInt32DataTypeGidBuilder builder()
+  static UInt32DataTypeGidBuilder builder() nothrow
   {
     return new UInt32DataTypeGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowUInt32DataType* _cretval;
     _cretval = garrow_uint32_data_type_new();
@@ -68,7 +68,7 @@ final class UInt32DataTypeGidBuilder : UInt32DataTypeGidBuilderImpl!UInt32DataTy
       Create object from builder.
       Returns: New object
   */
-  UInt32DataType build()
+  UInt32DataType build() nothrow
   {
     return new UInt32DataType(cast(void*)createGObject(UInt32DataType._getGType), Yes.Take);
   }

@@ -20,18 +20,15 @@ class IOModuleScope
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gio.iomodule_scope.IOModuleScope");
-
     _cInstancePtr = cast(GIOModuleScope*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -44,7 +41,7 @@ class IOModuleScope
       Params:
         basename = the basename to block
   */
-  void block(string basename)
+  void block(string basename) nothrow
   {
     const(char)* _basename = basename.toCString(No.Alloc);
     g_io_module_scope_block(cast(GIOModuleScope*)this._cPtr, _basename);

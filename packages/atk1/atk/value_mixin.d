@@ -168,7 +168,7 @@ template ValueT()
       Deprecated: Since 2.12. Use [atk.value.Value.getValueAndText]
         instead.
   */
-  override void getCurrentValue(out gobject.value.Value value)
+  override void getCurrentValue(out gobject.value.Value value) nothrow
   {
     GValue _value;
     atk_value_get_current_value(cast(AtkValue*)this._cPtr, &_value);
@@ -183,7 +183,7 @@ template ValueT()
       Returns: the minimum increment by which the value of this
         object may be changed. zero if undefined.
   */
-  override double getIncrement()
+  override double getIncrement() nothrow
   {
     double _retval;
     _retval = atk_value_get_increment(cast(AtkValue*)this._cPtr);
@@ -198,7 +198,7 @@ template ValueT()
   
       Deprecated: Since 2.12. Use [atk.value.Value.getRange] instead.
   */
-  override void getMaximumValue(out gobject.value.Value value)
+  override void getMaximumValue(out gobject.value.Value value) nothrow
   {
     GValue _value;
     atk_value_get_maximum_value(cast(AtkValue*)this._cPtr, &_value);
@@ -215,7 +215,7 @@ template ValueT()
   
       Deprecated: Since 2.12. Use [atk.value.Value.getIncrement] instead.
   */
-  override void getMinimumIncrement(out gobject.value.Value value)
+  override void getMinimumIncrement(out gobject.value.Value value) nothrow
   {
     GValue _value;
     atk_value_get_minimum_increment(cast(AtkValue*)this._cPtr, &_value);
@@ -230,7 +230,7 @@ template ValueT()
   
       Deprecated: Since 2.12. Use [atk.value.Value.getRange] instead.
   */
-  override void getMinimumValue(out gobject.value.Value value)
+  override void getMinimumValue(out gobject.value.Value value) nothrow
   {
     GValue _value;
     atk_value_get_minimum_value(cast(AtkValue*)this._cPtr, &_value);
@@ -243,7 +243,7 @@ template ValueT()
         that represents the minimum, maximum and descriptor (if available)
         of obj. NULL if that range is not defined.
   */
-  override atk.range.Range getRange()
+  override atk.range.Range getRange() nothrow
   {
     AtkRange* _cretval;
     _cretval = atk_value_get_range(cast(AtkValue*)this._cPtr);
@@ -258,7 +258,7 @@ template ValueT()
         #AtkRange which each of the subranges defined for this object. Free
         the returns list with [glib.slist.SList.free].
   */
-  override atk.range.Range[] getSubRanges()
+  override atk.range.Range[] getSubRanges() nothrow
   {
     GSList* _cretval;
     _cretval = atk_value_get_sub_ranges(cast(AtkValue*)this._cPtr);
@@ -276,7 +276,7 @@ template ValueT()
         text = address of #gchar to put the human
           readable text alternative for value
   */
-  override void getValueAndText(out double value, out string text)
+  override void getValueAndText(out double value, out string text) nothrow
   {
     char* _text;
     atk_value_get_value_and_text(cast(AtkValue*)this._cPtr, cast(double*)&value, &_text);
@@ -292,7 +292,7 @@ template ValueT()
   
       Deprecated: Since 2.12. Use [atk.value.Value.setValue] instead.
   */
-  override bool setCurrentValue(gobject.value.Value value)
+  override bool setCurrentValue(gobject.value.Value value) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_value_set_current_value(cast(AtkValue*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -318,7 +318,7 @@ template ValueT()
       Params:
         newValue = a double which is the desired new accessible value.
   */
-  override void setValue(double newValue)
+  override void setValue(double newValue) nothrow
   {
     atk_value_set_value(cast(AtkValue*)this._cPtr, newValue);
   }
@@ -354,7 +354,7 @@ template ValueT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -362,7 +362,7 @@ template ValueT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.value.Value)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -377,7 +377,14 @@ template ValueT()
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.value.Value.valueChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

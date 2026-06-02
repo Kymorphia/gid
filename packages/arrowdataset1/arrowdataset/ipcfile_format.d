@@ -14,26 +14,26 @@ class IPCFileFormat : arrowdataset.file_format.FileFormat
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_ipc_file_format_get_type != &gidSymbolNotFound ? gadataset_ipc_file_format_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override IPCFileFormat self()
+  override IPCFileFormat self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class IPCFileFormat : arrowdataset.file_format.FileFormat
       Get builder for [arrowdataset.ipcfile_format.IPCFileFormat]
       Returns: New builder object
   */
-  static IPCFileFormatGidBuilder builder()
+  static IPCFileFormatGidBuilder builder() nothrow
   {
     return new IPCFileFormatGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GADatasetIPCFileFormat* _cretval;
     _cretval = gadataset_ipc_file_format_new();
@@ -68,7 +68,7 @@ final class IPCFileFormatGidBuilder : IPCFileFormatGidBuilderImpl!IPCFileFormatG
       Create object from builder.
       Returns: New object
   */
-  IPCFileFormat build()
+  IPCFileFormat build() nothrow
   {
     return new IPCFileFormat(cast(void*)createGObject(IPCFileFormat._getGType), Yes.Take);
   }

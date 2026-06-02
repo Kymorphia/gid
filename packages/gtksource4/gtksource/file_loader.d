@@ -23,26 +23,26 @@ class FileLoader : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_file_loader_get_type != &gidSymbolNotFound ? gtk_source_file_loader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileLoader self()
+  override FileLoader self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class FileLoader : gobject.object.ObjectWrap
       Get builder for [gtksource.file_loader.FileLoader]
       Returns: New builder object
   */
-  static FileLoaderGidBuilder builder()
+  static FileLoaderGidBuilder builder() nothrow
   {
     return new FileLoaderGidBuilder;
   }
@@ -61,7 +61,7 @@ class FileLoader : gobject.object.ObjectWrap
       Returns: The #GtkSourceBuffer to load the contents into. The
         #GtkSourceFileLoader object has a weak reference to the buffer.
   */
-  @property gtksource.buffer.Buffer buffer()
+  @property gtksource.buffer.Buffer buffer() nothrow
   {
     return getBuffer();
   }
@@ -71,7 +71,7 @@ class FileLoader : gobject.object.ObjectWrap
       Returns: The #GtkSourceFile. The #GtkSourceFileLoader object has a weak
         reference to the file.
   */
-  @property gtksource.file.File file()
+  @property gtksource.file.File file() nothrow
   {
     return getFile();
   }
@@ -81,7 +81,7 @@ class FileLoader : gobject.object.ObjectWrap
       Returns: The #GInputStream to load. Useful for reading stdin. If this property
         is set, the #GtkSourceFileLoader:location property is ignored.
   */
-  @property gio.input_stream.InputStream inputStream()
+  @property gio.input_stream.InputStream inputStream() nothrow
   {
     return getInputStream();
   }
@@ -92,7 +92,7 @@ class FileLoader : gobject.object.ObjectWrap
         null, by default the location is taken from the #GtkSourceFile at
         construction time.
   */
-  @property gio.file.File location()
+  @property gio.file.File location() nothrow
   {
     return getLocation();
   }
@@ -109,7 +109,7 @@ class FileLoader : gobject.object.ObjectWrap
         file = the #GtkSourceFile.
       Returns: a new #GtkSourceFileLoader object.
   */
-  this(gtksource.buffer.Buffer buffer, gtksource.file.File file)
+  this(gtksource.buffer.Buffer buffer, gtksource.file.File file) nothrow
   {
     GtkSourceFileLoader* _cretval;
     _cretval = gtk_source_file_loader_new(buffer ? cast(GtkSourceBuffer*)buffer._cPtr(No.Dup) : null, file ? cast(GtkSourceFile*)file._cPtr(No.Dup) : null);
@@ -125,7 +125,7 @@ class FileLoader : gobject.object.ObjectWrap
         stream = the #GInputStream to load, e.g. stdin.
       Returns: a new #GtkSourceFileLoader object.
   */
-  static gtksource.file_loader.FileLoader newFromStream(gtksource.buffer.Buffer buffer, gtksource.file.File file, gio.input_stream.InputStream stream)
+  static gtksource.file_loader.FileLoader newFromStream(gtksource.buffer.Buffer buffer, gtksource.file.File file, gio.input_stream.InputStream stream) nothrow
   {
     GtkSourceFileLoader* _cretval;
     _cretval = gtk_source_file_loader_new_from_stream(buffer ? cast(GtkSourceBuffer*)buffer._cPtr(No.Dup) : null, file ? cast(GtkSourceFile*)file._cPtr(No.Dup) : null, stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null);
@@ -134,7 +134,7 @@ class FileLoader : gobject.object.ObjectWrap
   }
 
   /** */
-  gtksource.buffer.Buffer getBuffer()
+  gtksource.buffer.Buffer getBuffer() nothrow
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_file_loader_get_buffer(cast(GtkSourceFileLoader*)this._cPtr);
@@ -143,7 +143,7 @@ class FileLoader : gobject.object.ObjectWrap
   }
 
   /** */
-  gtksource.types.CompressionType getCompressionType()
+  gtksource.types.CompressionType getCompressionType() nothrow
   {
     GtkSourceCompressionType _cretval;
     _cretval = gtk_source_file_loader_get_compression_type(cast(GtkSourceFileLoader*)this._cPtr);
@@ -152,7 +152,7 @@ class FileLoader : gobject.object.ObjectWrap
   }
 
   /** */
-  gtksource.encoding.Encoding getEncoding()
+  gtksource.encoding.Encoding getEncoding() nothrow
   {
     const(GtkSourceEncoding)* _cretval;
     _cretval = gtk_source_file_loader_get_encoding(cast(GtkSourceFileLoader*)this._cPtr);
@@ -161,7 +161,7 @@ class FileLoader : gobject.object.ObjectWrap
   }
 
   /** */
-  gtksource.file.File getFile()
+  gtksource.file.File getFile() nothrow
   {
     GtkSourceFile* _cretval;
     _cretval = gtk_source_file_loader_get_file(cast(GtkSourceFileLoader*)this._cPtr);
@@ -170,7 +170,7 @@ class FileLoader : gobject.object.ObjectWrap
   }
 
   /** */
-  gio.input_stream.InputStream getInputStream()
+  gio.input_stream.InputStream getInputStream() nothrow
   {
     GInputStream* _cretval;
     _cretval = gtk_source_file_loader_get_input_stream(cast(GtkSourceFileLoader*)this._cPtr);
@@ -179,7 +179,7 @@ class FileLoader : gobject.object.ObjectWrap
   }
 
   /** */
-  gio.file.File getLocation()
+  gio.file.File getLocation() nothrow
   {
     GFile* _cretval;
     _cretval = gtk_source_file_loader_get_location(cast(GtkSourceFileLoader*)this._cPtr);
@@ -188,7 +188,7 @@ class FileLoader : gobject.object.ObjectWrap
   }
 
   /** */
-  gtksource.types.NewlineType getNewlineType()
+  gtksource.types.NewlineType getNewlineType() nothrow
   {
     GtkSourceNewlineType _cretval;
     _cretval = gtk_source_file_loader_get_newline_type(cast(GtkSourceFileLoader*)this._cPtr);
@@ -210,21 +210,35 @@ class FileLoader : gobject.object.ObjectWrap
         callback = a #GAsyncReadyCallback to call when the request is
             satisfied.
   */
-  void loadAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null, gio.types.AsyncReadyCallback callback = null)
+  void loadAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _progressCallbackCallback(long currentNumBytes, long totalNumBytes, void* data)
+    extern(C) void _progressCallbackCallback(long currentNumBytes, long totalNumBytes, void* data) nothrow
     {
       auto _dlg = cast(gio.types.FileProgressCallback*)data;
 
-      (*_dlg)(currentNumBytes, totalNumBytes);
+      try
+      {
+        (*_dlg)(currentNumBytes, totalNumBytes);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.FileProgressCallback");
+      }
     }
     auto _progressCallbackCB = progressCallback ? &_progressCallbackCallback : null;
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _progressCallback = progressCallback ? freezeDelegate(cast(void*)&progressCallback) : null;
@@ -272,7 +286,7 @@ class FileLoader : gobject.object.ObjectWrap
         candidateEncodings = a list of
             #GtkSourceEncoding<!-- -->s.
   */
-  void setCandidateEncodings(gtksource.encoding.Encoding[] candidateEncodings)
+  void setCandidateEncodings(gtksource.encoding.Encoding[] candidateEncodings) nothrow
   {
     auto _candidateEncodings = gSListFromD!(gtksource.encoding.Encoding)(candidateEncodings);
     scope(exit) containerFree!(GSList*, gtksource.encoding.Encoding, GidOwnership.None)(_candidateEncodings);
@@ -291,7 +305,7 @@ class FileLoaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           #GtkSourceFileLoader object has a weak reference to the buffer.
       Returns: Builder instance for fluent chaining
   */
-  T buffer(gtksource.buffer.Buffer propval)
+  T buffer(gtksource.buffer.Buffer propval) nothrow
   {
     return setProperty("buffer", propval);
   }
@@ -303,7 +317,7 @@ class FileLoaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           reference to the file.
       Returns: Builder instance for fluent chaining
   */
-  T file(gtksource.file.File propval)
+  T file(gtksource.file.File propval) nothrow
   {
     return setProperty("file", propval);
   }
@@ -315,7 +329,7 @@ class FileLoaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           is set, the #GtkSourceFileLoader:location property is ignored.
       Returns: Builder instance for fluent chaining
   */
-  T inputStream(gio.input_stream.InputStream propval)
+  T inputStream(gio.input_stream.InputStream propval) nothrow
   {
     return setProperty("input-stream", propval);
   }
@@ -328,7 +342,7 @@ class FileLoaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           construction time.
       Returns: Builder instance for fluent chaining
   */
-  T location(gio.file.File propval)
+  T location(gio.file.File propval) nothrow
   {
     return setProperty("location", propval);
   }
@@ -341,7 +355,7 @@ final class FileLoaderGidBuilder : FileLoaderGidBuilderImpl!FileLoaderGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FileLoader build()
+  FileLoader build() nothrow
   {
     return new FileLoader(cast(void*)createGObject(FileLoader._getGType), Yes.Take);
   }

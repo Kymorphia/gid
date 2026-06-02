@@ -17,11 +17,8 @@ class InsetShadowNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.inset_shadow_node.InsetShadowNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -38,7 +35,7 @@ class InsetShadowNode : gsk.render_node.RenderNode
         blurRadius = how much blur to apply to the shadow
       Returns: A new [gsk.render_node.RenderNode]
   */
-  this(gsk.rounded_rect.RoundedRect outline, gdk.rgba.RGBA color, float dx, float dy, float spread, float blurRadius)
+  this(gsk.rounded_rect.RoundedRect outline, gdk.rgba.RGBA color, float dx, float dy, float spread, float blurRadius) nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_inset_shadow_node_new(outline ? cast(const(GskRoundedRect)*)outline._cPtr : null, cast(const(GdkRGBA)*)&color, dx, dy, spread, blurRadius);
@@ -49,7 +46,7 @@ class InsetShadowNode : gsk.render_node.RenderNode
       Retrieves the blur radius to apply to the shadow.
       Returns: the blur radius, in pixels
   */
-  float getBlurRadius()
+  float getBlurRadius() nothrow
   {
     float _retval;
     _retval = gsk_inset_shadow_node_get_blur_radius(cast(const(GskRenderNode)*)this._cPtr);
@@ -60,7 +57,7 @@ class InsetShadowNode : gsk.render_node.RenderNode
       Retrieves the color of the inset shadow.
       Returns: the color of the shadow
   */
-  gdk.rgba.RGBA getColor()
+  gdk.rgba.RGBA getColor() nothrow
   {
     const(GdkRGBA)* _cretval;
     _cretval = gsk_inset_shadow_node_get_color(cast(const(GskRenderNode)*)this._cPtr);
@@ -74,7 +71,7 @@ class InsetShadowNode : gsk.render_node.RenderNode
       Retrieves the horizontal offset of the inset shadow.
       Returns: an offset, in pixels
   */
-  float getDx()
+  float getDx() nothrow
   {
     float _retval;
     _retval = gsk_inset_shadow_node_get_dx(cast(const(GskRenderNode)*)this._cPtr);
@@ -85,7 +82,7 @@ class InsetShadowNode : gsk.render_node.RenderNode
       Retrieves the vertical offset of the inset shadow.
       Returns: an offset, in pixels
   */
-  float getDy()
+  float getDy() nothrow
   {
     float _retval;
     _retval = gsk_inset_shadow_node_get_dy(cast(const(GskRenderNode)*)this._cPtr);
@@ -96,7 +93,7 @@ class InsetShadowNode : gsk.render_node.RenderNode
       Retrieves the outline rectangle of the inset shadow.
       Returns: a rounded rectangle
   */
-  gsk.rounded_rect.RoundedRect getOutline()
+  gsk.rounded_rect.RoundedRect getOutline() nothrow
   {
     const(GskRoundedRect)* _cretval;
     _cretval = gsk_inset_shadow_node_get_outline(cast(const(GskRenderNode)*)this._cPtr);
@@ -108,7 +105,7 @@ class InsetShadowNode : gsk.render_node.RenderNode
       Retrieves how much the shadow spreads inwards.
       Returns: the size of the shadow, in pixels
   */
-  float getSpread()
+  float getSpread() nothrow
   {
     float _retval;
     _retval = gsk_inset_shadow_node_get_spread(cast(const(GskRenderNode)*)this._cPtr);

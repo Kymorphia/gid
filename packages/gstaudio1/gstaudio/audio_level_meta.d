@@ -17,11 +17,8 @@ class AudioLevelMeta
   GstAudioLevelMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstaudio.audio_level_meta.AudioLevelMeta");
-
     _cInstance = *cast(GstAudioLevelMeta*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class AudioLevelMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class AudioLevelMeta
       Get `meta` field.
       Returns: parent #GstMeta
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAudioLevelMeta*)this._cPtr).meta, No.Take);
   }
@@ -47,7 +44,7 @@ class AudioLevelMeta
       Get `level` field.
       Returns: the -dBov from 0-127 (127 is silence).
   */
-  @property ubyte level()
+  @property ubyte level() nothrow
   {
     return (cast(GstAudioLevelMeta*)this._cPtr).level;
   }
@@ -57,7 +54,7 @@ class AudioLevelMeta
       Params:
         propval = the -dBov from 0-127 (127 is silence).
   */
-  @property void level(ubyte propval)
+  @property void level(ubyte propval) nothrow
   {
     (cast(GstAudioLevelMeta*)this._cPtr).level = propval;
   }
@@ -66,7 +63,7 @@ class AudioLevelMeta
       Get `voiceActivity` field.
       Returns: whether the buffer contains voice activity
   */
-  @property bool voiceActivity()
+  @property bool voiceActivity() nothrow
   {
     return cast(bool)(cast(GstAudioLevelMeta*)this._cPtr).voiceActivity;
   }
@@ -76,7 +73,7 @@ class AudioLevelMeta
       Params:
         propval = whether the buffer contains voice activity
   */
-  @property void voiceActivity(bool propval)
+  @property void voiceActivity(bool propval) nothrow
   {
     (cast(GstAudioLevelMeta*)this._cPtr).voiceActivity = propval;
   }
@@ -85,7 +82,7 @@ class AudioLevelMeta
       Return the #GstMetaInfo associated with #GstAudioLevelMeta.
       Returns: a #GstMetaInfo
   */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_audio_level_meta_get_info();

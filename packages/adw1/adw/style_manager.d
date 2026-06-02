@@ -24,26 +24,26 @@ class StyleManager : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_style_manager_get_type != &gidSymbolNotFound ? adw_style_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StyleManager self()
+  override StyleManager self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class StyleManager : gobject.object.ObjectWrap
       Get builder for [adw.style_manager.StyleManager]
       Returns: New builder object
   */
-  static StyleManagerGidBuilder builder()
+  static StyleManagerGidBuilder builder() nothrow
   {
     return new StyleManagerGidBuilder;
   }
@@ -91,7 +91,7 @@ class StyleManager : gobject.object.ObjectWrap
         used to check if the current environment provides a color scheme
         preference.
   */
-  @property adw.types.ColorScheme colorScheme()
+  @property adw.types.ColorScheme colorScheme() nothrow
   {
     return getColorScheme();
   }
@@ -131,7 +131,7 @@ class StyleManager : gobject.object.ObjectWrap
           used to check if the current environment provides a color scheme
           preference.
   */
-  @property void colorScheme(adw.types.ColorScheme propval)
+  @property void colorScheme(adw.types.ColorScheme propval) nothrow
   {
     setColorScheme(propval);
   }
@@ -143,7 +143,7 @@ class StyleManager : gobject.object.ObjectWrap
         This property can be used to query the current appearance, as requested via
         [adw.style_manager.StyleManager.colorScheme].
   */
-  @property bool dark()
+  @property bool dark() nothrow
   {
     return getDark();
   }
@@ -155,7 +155,7 @@ class StyleManager : gobject.object.ObjectWrap
         The display will be `NULL` for the style manager returned by
         [adw.style_manager.StyleManager.getDefault].
   */
-  @property gdk.display.Display display()
+  @property gdk.display.Display display() nothrow
   {
     return getDisplay();
   }
@@ -166,7 +166,7 @@ class StyleManager : gobject.object.ObjectWrap
         
         This cannot be overridden by applications.
   */
-  @property bool highContrast()
+  @property bool highContrast() nothrow
   {
     return getHighContrast();
   }
@@ -181,7 +181,7 @@ class StyleManager : gobject.object.ObjectWrap
         
         See [adw.style_manager.StyleManager.colorScheme].
   */
-  @property bool systemSupportsColorSchemes()
+  @property bool systemSupportsColorSchemes() nothrow
   {
     return getSystemSupportsColorSchemes();
   }
@@ -195,7 +195,7 @@ class StyleManager : gobject.object.ObjectWrap
       See [adw.style_manager.StyleManager.getForDisplay].
       Returns: the default style manager
   */
-  static adw.style_manager.StyleManager getDefault()
+  static adw.style_manager.StyleManager getDefault() nothrow
   {
     AdwStyleManager* _cretval;
     _cretval = adw_style_manager_get_default();
@@ -215,7 +215,7 @@ class StyleManager : gobject.object.ObjectWrap
         display = a [gdk.display.Display]
       Returns: the style manager for display
   */
-  static adw.style_manager.StyleManager getForDisplay(gdk.display.Display display)
+  static adw.style_manager.StyleManager getForDisplay(gdk.display.Display display) nothrow
   {
     AdwStyleManager* _cretval;
     _cretval = adw_style_manager_get_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
@@ -227,7 +227,7 @@ class StyleManager : gobject.object.ObjectWrap
       Gets the requested application color scheme.
       Returns: the color scheme
   */
-  adw.types.ColorScheme getColorScheme()
+  adw.types.ColorScheme getColorScheme() nothrow
   {
     AdwColorScheme _cretval;
     _cretval = adw_style_manager_get_color_scheme(cast(AdwStyleManager*)this._cPtr);
@@ -242,7 +242,7 @@ class StyleManager : gobject.object.ObjectWrap
       [adw.style_manager.StyleManager.colorScheme].
       Returns: whether the application is using dark appearance
   */
-  bool getDark()
+  bool getDark() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_style_manager_get_dark(cast(AdwStyleManager*)this._cPtr);
@@ -256,7 +256,7 @@ class StyleManager : gobject.object.ObjectWrap
       [adw.style_manager.StyleManager.getDefault].
       Returns: the display
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = adw_style_manager_get_display(cast(AdwStyleManager*)this._cPtr);
@@ -270,7 +270,7 @@ class StyleManager : gobject.object.ObjectWrap
       This cannot be overridden by applications.
       Returns: whether the application is using high contrast appearance
   */
-  bool getHighContrast()
+  bool getHighContrast() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_style_manager_get_high_contrast(cast(AdwStyleManager*)this._cPtr);
@@ -285,7 +285,7 @@ class StyleManager : gobject.object.ObjectWrap
       appearance switcher if it's set to `FALSE`.
       Returns: whether the system supports color schemes
   */
-  bool getSystemSupportsColorSchemes()
+  bool getSystemSupportsColorSchemes() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_style_manager_get_system_supports_color_schemes(cast(AdwStyleManager*)this._cPtr);
@@ -328,7 +328,7 @@ class StyleManager : gobject.object.ObjectWrap
       Params:
         colorScheme = the color scheme
   */
-  void setColorScheme(adw.types.ColorScheme colorScheme)
+  void setColorScheme(adw.types.ColorScheme colorScheme) nothrow
   {
     adw_style_manager_set_color_scheme(cast(AdwStyleManager*)this._cPtr, colorScheme);
   }
@@ -374,7 +374,7 @@ class StyleManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           preference.
       Returns: Builder instance for fluent chaining
   */
-  T colorScheme(adw.types.ColorScheme propval)
+  T colorScheme(adw.types.ColorScheme propval) nothrow
   {
     return setProperty("color-scheme", propval);
   }
@@ -388,7 +388,7 @@ class StyleManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           [adw.style_manager.StyleManager.getDefault].
       Returns: Builder instance for fluent chaining
   */
-  T display(gdk.display.Display propval)
+  T display(gdk.display.Display propval) nothrow
   {
     return setProperty("display", propval);
   }
@@ -401,7 +401,7 @@ final class StyleManagerGidBuilder : StyleManagerGidBuilderImpl!StyleManagerGidB
       Create object from builder.
       Returns: New object
   */
-  StyleManager build()
+  StyleManager build() nothrow
   {
     return new StyleManager(cast(void*)createGObject(StyleManager._getGType), No.Take);
   }

@@ -17,11 +17,8 @@ class TypeQuery
   GTypeQuery _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gobject.type_query.TypeQuery");
-
     _cInstance = *cast(GTypeQuery*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class TypeQuery
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class TypeQuery
       Get `type` field.
       Returns: the #GType value of the type
   */
-  @property gobject.types.GType type()
+  @property gobject.types.GType type() nothrow
   {
     return (cast(GTypeQuery*)this._cPtr).type;
   }
@@ -48,7 +45,7 @@ class TypeQuery
       Params:
         propval = the #GType value of the type
   */
-  @property void type(gobject.types.GType propval)
+  @property void type(gobject.types.GType propval) nothrow
   {
     (cast(GTypeQuery*)this._cPtr).type = propval;
   }
@@ -57,7 +54,7 @@ class TypeQuery
       Get `typeName` field.
       Returns: the name of the type
   */
-  @property string typeName()
+  @property string typeName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GTypeQuery*)this._cPtr).typeName);
   }
@@ -67,7 +64,7 @@ class TypeQuery
       Params:
         propval = the name of the type
   */
-  @property void typeName(string propval)
+  @property void typeName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GTypeQuery*)this._cPtr).typeName);
     dToC(propval, cast(void*)&(cast(GTypeQuery*)this._cPtr).typeName);
@@ -77,7 +74,7 @@ class TypeQuery
       Get `classSize` field.
       Returns: the size of the class structure
   */
-  @property uint classSize()
+  @property uint classSize() nothrow
   {
     return (cast(GTypeQuery*)this._cPtr).classSize;
   }
@@ -87,7 +84,7 @@ class TypeQuery
       Params:
         propval = the size of the class structure
   */
-  @property void classSize(uint propval)
+  @property void classSize(uint propval) nothrow
   {
     (cast(GTypeQuery*)this._cPtr).classSize = propval;
   }
@@ -96,7 +93,7 @@ class TypeQuery
       Get `instanceSize` field.
       Returns: the size of the instance structure
   */
-  @property uint instanceSize()
+  @property uint instanceSize() nothrow
   {
     return (cast(GTypeQuery*)this._cPtr).instanceSize;
   }
@@ -106,7 +103,7 @@ class TypeQuery
       Params:
         propval = the size of the instance structure
   */
-  @property void instanceSize(uint propval)
+  @property void instanceSize(uint propval) nothrow
   {
     (cast(GTypeQuery*)this._cPtr).instanceSize = propval;
   }

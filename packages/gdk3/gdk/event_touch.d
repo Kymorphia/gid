@@ -27,11 +27,8 @@ class EventTouch
   GdkEventTouch _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.event_touch.EventTouch");
-
     _cInstance = *cast(GdkEventTouch*)ptr;
 
     if (take)
@@ -39,7 +36,7 @@ class EventTouch
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -49,7 +46,7 @@ class EventTouch
       Returns: the type of the event ([gdk.types.EventType.TouchBegin], [gdk.types.EventType.TouchUpdate],
           [gdk.types.EventType.TouchEnd], [gdk.types.EventType.TouchCancel])
   */
-  @property gdk.types.EventType type()
+  @property gdk.types.EventType type() nothrow
   {
     return cast(gdk.types.EventType)(cast(GdkEventTouch*)this._cPtr).type;
   }
@@ -60,7 +57,7 @@ class EventTouch
         propval = the type of the event ([gdk.types.EventType.TouchBegin], [gdk.types.EventType.TouchUpdate],
             [gdk.types.EventType.TouchEnd], [gdk.types.EventType.TouchCancel])
   */
-  @property void type(gdk.types.EventType propval)
+  @property void type(gdk.types.EventType propval) nothrow
   {
     (cast(GdkEventTouch*)this._cPtr).type = cast(GdkEventType)propval;
   }
@@ -69,7 +66,7 @@ class EventTouch
       Get `window` field.
       Returns: the window which received the event
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventTouch*)this._cPtr).window);
   }
@@ -79,7 +76,7 @@ class EventTouch
       Params:
         propval = the window which received the event
   */
-  @property void window(gdk.window.Window propval)
+  @property void window(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventTouch*)this._cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventTouch*)this._cPtr).window);
@@ -89,7 +86,7 @@ class EventTouch
       Get `sendEvent` field.
       Returns: true if the event was sent explicitly.
   */
-  @property byte sendEvent()
+  @property byte sendEvent() nothrow
   {
     return (cast(GdkEventTouch*)this._cPtr).sendEvent;
   }
@@ -99,7 +96,7 @@ class EventTouch
       Params:
         propval = true if the event was sent explicitly.
   */
-  @property void sendEvent(byte propval)
+  @property void sendEvent(byte propval) nothrow
   {
     (cast(GdkEventTouch*)this._cPtr).sendEvent = propval;
   }
@@ -108,7 +105,7 @@ class EventTouch
       Get `time` field.
       Returns: the time of the event in milliseconds.
   */
-  @property uint time()
+  @property uint time() nothrow
   {
     return (cast(GdkEventTouch*)this._cPtr).time;
   }
@@ -118,7 +115,7 @@ class EventTouch
       Params:
         propval = the time of the event in milliseconds.
   */
-  @property void time(uint propval)
+  @property void time(uint propval) nothrow
   {
     (cast(GdkEventTouch*)this._cPtr).time = propval;
   }
@@ -127,7 +124,7 @@ class EventTouch
       Get `x` field.
       Returns: the x coordinate of the pointer relative to the window
   */
-  @property double x()
+  @property double x() nothrow
   {
     return (cast(GdkEventTouch*)this._cPtr).x;
   }
@@ -137,7 +134,7 @@ class EventTouch
       Params:
         propval = the x coordinate of the pointer relative to the window
   */
-  @property void x(double propval)
+  @property void x(double propval) nothrow
   {
     (cast(GdkEventTouch*)this._cPtr).x = propval;
   }
@@ -146,7 +143,7 @@ class EventTouch
       Get `y` field.
       Returns: the y coordinate of the pointer relative to the window
   */
-  @property double y()
+  @property double y() nothrow
   {
     return (cast(GdkEventTouch*)this._cPtr).y;
   }
@@ -156,7 +153,7 @@ class EventTouch
       Params:
         propval = the y coordinate of the pointer relative to the window
   */
-  @property void y(double propval)
+  @property void y(double propval) nothrow
   {
     (cast(GdkEventTouch*)this._cPtr).y = propval;
   }
@@ -167,7 +164,7 @@ class EventTouch
           the modifier keys (e.g. Control, Shift and Alt) and the pointer
           buttons. See #GdkModifierType
   */
-  @property gdk.types.ModifierType state()
+  @property gdk.types.ModifierType state() nothrow
   {
     return cast(gdk.types.ModifierType)(cast(GdkEventTouch*)this._cPtr).state;
   }
@@ -179,7 +176,7 @@ class EventTouch
             the modifier keys (e.g. Control, Shift and Alt) and the pointer
             buttons. See #GdkModifierType
   */
-  @property void state(gdk.types.ModifierType propval)
+  @property void state(gdk.types.ModifierType propval) nothrow
   {
     (cast(GdkEventTouch*)this._cPtr).state = cast(GdkModifierType)propval;
   }
@@ -188,7 +185,7 @@ class EventTouch
       Get `sequence` field.
       Returns: the event sequence that the event belongs to
   */
-  @property gdk.event_sequence.EventSequence sequence()
+  @property gdk.event_sequence.EventSequence sequence() nothrow
   {
     return cToD!(gdk.event_sequence.EventSequence)(cast(void*)(cast(GdkEventTouch*)this._cPtr).sequence);
   }
@@ -198,7 +195,7 @@ class EventTouch
       Params:
         propval = the event sequence that the event belongs to
   */
-  @property void sequence(gdk.event_sequence.EventSequence propval)
+  @property void sequence(gdk.event_sequence.EventSequence propval) nothrow
   {
     cValueFree!(gdk.event_sequence.EventSequence)(cast(void*)(cast(GdkEventTouch*)this._cPtr).sequence);
     dToC(propval, cast(void*)&(cast(GdkEventTouch*)this._cPtr).sequence);
@@ -209,7 +206,7 @@ class EventTouch
       Returns: whether the event should be used for emulating
           pointer event
   */
-  @property bool emulatingPointer()
+  @property bool emulatingPointer() nothrow
   {
     return cast(bool)(cast(GdkEventTouch*)this._cPtr).emulatingPointer;
   }
@@ -220,7 +217,7 @@ class EventTouch
         propval = whether the event should be used for emulating
             pointer event
   */
-  @property void emulatingPointer(bool propval)
+  @property void emulatingPointer(bool propval) nothrow
   {
     (cast(GdkEventTouch*)this._cPtr).emulatingPointer = propval;
   }
@@ -230,7 +227,7 @@ class EventTouch
       Returns: the master device that the event originated from. Use
         [gdk.event.Event.getSourceDevice] to get the slave device.
   */
-  @property gdk.device.Device device()
+  @property gdk.device.Device device() nothrow
   {
     return cToD!(gdk.device.Device)(cast(void*)(cast(GdkEventTouch*)this._cPtr).device);
   }
@@ -241,7 +238,7 @@ class EventTouch
         propval = the master device that the event originated from. Use
           [gdk.event.Event.getSourceDevice] to get the slave device.
   */
-  @property void device(gdk.device.Device propval)
+  @property void device(gdk.device.Device propval) nothrow
   {
     cValueFree!(gdk.device.Device)(cast(void*)(cast(GdkEventTouch*)this._cPtr).device);
     dToC(propval, cast(void*)&(cast(GdkEventTouch*)this._cPtr).device);
@@ -252,7 +249,7 @@ class EventTouch
       Returns: the x coordinate of the pointer relative to the root of the
           screen
   */
-  @property double xRoot()
+  @property double xRoot() nothrow
   {
     return (cast(GdkEventTouch*)this._cPtr).xRoot;
   }
@@ -263,7 +260,7 @@ class EventTouch
         propval = the x coordinate of the pointer relative to the root of the
             screen
   */
-  @property void xRoot(double propval)
+  @property void xRoot(double propval) nothrow
   {
     (cast(GdkEventTouch*)this._cPtr).xRoot = propval;
   }
@@ -273,7 +270,7 @@ class EventTouch
       Returns: the y coordinate of the pointer relative to the root of the
           screen
   */
-  @property double yRoot()
+  @property double yRoot() nothrow
   {
     return (cast(GdkEventTouch*)this._cPtr).yRoot;
   }
@@ -284,7 +281,7 @@ class EventTouch
         propval = the y coordinate of the pointer relative to the root of the
             screen
   */
-  @property void yRoot(double propval)
+  @property void yRoot(double propval) nothrow
   {
     (cast(GdkEventTouch*)this._cPtr).yRoot = propval;
   }

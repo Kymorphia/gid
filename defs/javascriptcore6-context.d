@@ -2,6 +2,8 @@
 
 import std.traits;
 
+import std.exception : assumeWontThrow;
+
 import gobject.c.functions;
 import javascriptcore.class_;
 
@@ -13,7 +15,7 @@ class Context : gobject.object.ObjectWrap
   /**
    * Register a D function/delegate as a JavaScript function.
    */
-  void registerFunction(T)(string name, T callback)
+  void registerFunction(T)(string name, T callback) nothrow
   {
     auto jsFunc = Value.newFunction(this, name, callback);
     setValue(name, jsFunc);
@@ -23,7 +25,7 @@ class Context : gobject.object.ObjectWrap
    * Register with automatic name from the function symbol.
    * Only works with function pointers/aliases, not runtime delegates.
    */
-  void registerFunction(alias Func)()
+  void registerFunction(alias Func)() nothrow
     if (isFunction!Func)
   {
     string name = __traits(identifier, Func);
@@ -45,9 +47,9 @@ class Context : gobject.object.ObjectWrap
   *   className = Class name to use or empty/null to use D class name (default)
   * Returns: The registered Class (returns the existing instance if it was already registered)
   */
-  Class registerClass(alias DClass, RegisterClassMode Mode = RegisterClassMode.UdaOnly)(string className = null)
+  Class registerClass(alias DClass, RegisterClassMode Mode = RegisterClassMode.UdaOnly)(string className = null) nothrow
   {
-    extern(C) void classDestroyNotify(const(void*) data)
+    extern(C) void classDestroyNotify(const(void*) data) nothrow
     {
       auto jsObj = cast(GObject*)data;
       if (auto dObj = g_object_get_qdata(jsObj, jscObjectQuark))
@@ -58,13 +60,13 @@ class Context : gobject.object.ObjectWrap
     }
 
     auto ti = typeid(DClass);
-    if (auto existing = classRegistry.get(ti, null))
+    if (auto existing = assumeWontThrow(classRegistry.get(ti, null)))
       return existing;
 
     if (className.length == 0)
       className = __traits(identifier, DClass);
 
-    auto parent = classRegistry.get(ti.base, null);
+    auto parent = assumeWontThrow(classRegistry.get(ti.base, null));
     auto jscParent = parent ? cast(JSCClass*)parent._cPtr : null;
 
     auto jscClass = jsc_context_register_class(cast(JSCContext*)this._cPtr, className.toCString(No.Alloc), jscParent, null, &classDestroyNotify);
@@ -156,7 +158,7 @@ class Context : gobject.object.ObjectWrap
 
   private template isMethodExposable(alias Method, RegisterClassMode Mode)
   {
-    static bool compute()
+    static bool compute() nothrow
     {
       bool isValid = true;
 
@@ -211,9 +213,9 @@ class Context : gobject.object.ObjectWrap
    *   T = The class type
    * Returns: The JSC Class or null if none registered for the given D class type
    */
-  Class getClass(T)()
+  Class getClass(T)() nothrow
   {
-    return classRegistery.get(typeid(T), null);
+    return assumeWontThrow(classRegistery.get(typeid(T), null));
   }
 
   /**
@@ -223,10 +225,10 @@ class Context : gobject.object.ObjectWrap
    *   name = The name of the JSC Class that was registered
    * Returns: The JSC Class or null if not found
    */
-  Class getClass(string name)
+  Class getClass(string name) nothrow
   {
-    if (auto ti = classNameToType.get(name, null))
-      return classRegistry.get(ti, null);
+    if (auto ti = assumeWontThrow(classNameToType.get(name, null)))
+      return assumeWontThrow(classRegistry.get(ti, null));
 
     return null;
   }

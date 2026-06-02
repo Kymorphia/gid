@@ -15,11 +15,8 @@ class TokenValue
   GTokenValue _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.token_value.TokenValue");
-
     _cInstance = *cast(GTokenValue*)ptr;
 
     if (take)
@@ -27,7 +24,7 @@ class TokenValue
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -36,7 +33,7 @@ class TokenValue
       Get `vIdentifier` field.
       Returns: token identifier value
   */
-  @property string vIdentifier()
+  @property string vIdentifier() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GTokenValue*)this._cPtr).vIdentifier);
   }
@@ -46,7 +43,7 @@ class TokenValue
       Params:
         propval = token identifier value
   */
-  @property void vIdentifier(string propval)
+  @property void vIdentifier(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GTokenValue*)this._cPtr).vIdentifier);
     dToC(propval, cast(void*)&(cast(GTokenValue*)this._cPtr).vIdentifier);
@@ -56,7 +53,7 @@ class TokenValue
       Get `vBinary` field.
       Returns: token binary integer value
   */
-  @property gulong vBinary()
+  @property gulong vBinary() nothrow
   {
     return (cast(GTokenValue*)this._cPtr).vBinary;
   }
@@ -66,7 +63,7 @@ class TokenValue
       Params:
         propval = token binary integer value
   */
-  @property void vBinary(gulong propval)
+  @property void vBinary(gulong propval) nothrow
   {
     (cast(GTokenValue*)this._cPtr).vBinary = propval;
   }
@@ -75,7 +72,7 @@ class TokenValue
       Get `vOctal` field.
       Returns: octal integer value
   */
-  @property gulong vOctal()
+  @property gulong vOctal() nothrow
   {
     return (cast(GTokenValue*)this._cPtr).vOctal;
   }
@@ -85,7 +82,7 @@ class TokenValue
       Params:
         propval = octal integer value
   */
-  @property void vOctal(gulong propval)
+  @property void vOctal(gulong propval) nothrow
   {
     (cast(GTokenValue*)this._cPtr).vOctal = propval;
   }
@@ -94,7 +91,7 @@ class TokenValue
       Get `vInt` field.
       Returns: integer value
   */
-  @property gulong vInt()
+  @property gulong vInt() nothrow
   {
     return (cast(GTokenValue*)this._cPtr).vInt;
   }
@@ -104,7 +101,7 @@ class TokenValue
       Params:
         propval = integer value
   */
-  @property void vInt(gulong propval)
+  @property void vInt(gulong propval) nothrow
   {
     (cast(GTokenValue*)this._cPtr).vInt = propval;
   }
@@ -113,7 +110,7 @@ class TokenValue
       Get `vInt64` field.
       Returns: 64-bit integer value
   */
-  @property ulong vInt64()
+  @property ulong vInt64() nothrow
   {
     return (cast(GTokenValue*)this._cPtr).vInt64;
   }
@@ -123,7 +120,7 @@ class TokenValue
       Params:
         propval = 64-bit integer value
   */
-  @property void vInt64(ulong propval)
+  @property void vInt64(ulong propval) nothrow
   {
     (cast(GTokenValue*)this._cPtr).vInt64 = propval;
   }
@@ -132,7 +129,7 @@ class TokenValue
       Get `vFloat` field.
       Returns: floating point value
   */
-  @property double vFloat()
+  @property double vFloat() nothrow
   {
     return (cast(GTokenValue*)this._cPtr).vFloat;
   }
@@ -142,7 +139,7 @@ class TokenValue
       Params:
         propval = floating point value
   */
-  @property void vFloat(double propval)
+  @property void vFloat(double propval) nothrow
   {
     (cast(GTokenValue*)this._cPtr).vFloat = propval;
   }
@@ -151,7 +148,7 @@ class TokenValue
       Get `vHex` field.
       Returns: hex integer value
   */
-  @property gulong vHex()
+  @property gulong vHex() nothrow
   {
     return (cast(GTokenValue*)this._cPtr).vHex;
   }
@@ -161,7 +158,7 @@ class TokenValue
       Params:
         propval = hex integer value
   */
-  @property void vHex(gulong propval)
+  @property void vHex(gulong propval) nothrow
   {
     (cast(GTokenValue*)this._cPtr).vHex = propval;
   }
@@ -170,7 +167,7 @@ class TokenValue
       Get `vString` field.
       Returns: string value
   */
-  @property string vString()
+  @property string vString() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GTokenValue*)this._cPtr).vString);
   }
@@ -180,7 +177,7 @@ class TokenValue
       Params:
         propval = string value
   */
-  @property void vString(string propval)
+  @property void vString(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GTokenValue*)this._cPtr).vString);
     dToC(propval, cast(void*)&(cast(GTokenValue*)this._cPtr).vString);
@@ -190,7 +187,7 @@ class TokenValue
       Get `vComment` field.
       Returns: comment value
   */
-  @property string vComment()
+  @property string vComment() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GTokenValue*)this._cPtr).vComment);
   }
@@ -200,7 +197,7 @@ class TokenValue
       Params:
         propval = comment value
   */
-  @property void vComment(string propval)
+  @property void vComment(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GTokenValue*)this._cPtr).vComment);
     dToC(propval, cast(void*)&(cast(GTokenValue*)this._cPtr).vComment);
@@ -210,7 +207,7 @@ class TokenValue
       Get `vChar` field.
       Returns: character value
   */
-  @property ubyte vChar()
+  @property ubyte vChar() nothrow
   {
     return (cast(GTokenValue*)this._cPtr).vChar;
   }
@@ -220,7 +217,7 @@ class TokenValue
       Params:
         propval = character value
   */
-  @property void vChar(ubyte propval)
+  @property void vChar(ubyte propval) nothrow
   {
     (cast(GTokenValue*)this._cPtr).vChar = propval;
   }
@@ -229,7 +226,7 @@ class TokenValue
       Get `vError` field.
       Returns: error value
   */
-  @property uint vError()
+  @property uint vError() nothrow
   {
     return (cast(GTokenValue*)this._cPtr).vError;
   }
@@ -239,7 +236,7 @@ class TokenValue
       Params:
         propval = error value
   */
-  @property void vError(uint propval)
+  @property void vError(uint propval) nothrow
   {
     (cast(GTokenValue*)this._cPtr).vError = propval;
   }

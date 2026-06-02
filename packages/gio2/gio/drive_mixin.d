@@ -52,7 +52,7 @@ template DriveT()
       Checks if a drive can be ejected.
       Returns: true if the drive can be ejected, false otherwise.
   */
-  override bool canEject()
+  override bool canEject() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_drive_can_eject(cast(GDrive*)this._cPtr);
@@ -64,7 +64,7 @@ template DriveT()
       Returns: true if the drive can be polled for media changes,
             false otherwise.
   */
-  override bool canPollForMedia()
+  override bool canPollForMedia() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_drive_can_poll_for_media(cast(GDrive*)this._cPtr);
@@ -75,7 +75,7 @@ template DriveT()
       Checks if a drive can be started.
       Returns: true if the drive can be started, false otherwise.
   */
-  override bool canStart()
+  override bool canStart() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_drive_can_start(cast(GDrive*)this._cPtr);
@@ -86,7 +86,7 @@ template DriveT()
       Checks if a drive can be started degraded.
       Returns: true if the drive can be started degraded, false otherwise.
   */
-  override bool canStartDegraded()
+  override bool canStartDegraded() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_drive_can_start_degraded(cast(GDrive*)this._cPtr);
@@ -97,7 +97,7 @@ template DriveT()
       Checks if a drive can be stopped.
       Returns: true if the drive can be stopped, false otherwise.
   */
-  override bool canStop()
+  override bool canStop() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_drive_can_stop(cast(GDrive*)this._cPtr);
@@ -118,14 +118,21 @@ template DriveT()
   
       Deprecated: Use [gio.drive.Drive.ejectWithOperation] instead.
   */
-  override void eject(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  override void eject(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -165,14 +172,21 @@ template DriveT()
         cancellable = optional #GCancellable object, null to ignore.
         callback = a #GAsyncReadyCallback, or null.
   */
-  override void ejectWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  override void ejectWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -206,7 +220,7 @@ template DriveT()
             array of strings containing kinds of identifiers. Use [glib.global.strfreev]
             to free.
   */
-  override string[] enumerateIdentifiers()
+  override string[] enumerateIdentifiers() nothrow
   {
     char** _cretval;
     _cretval = g_drive_enumerate_identifiers(cast(GDrive*)this._cPtr);
@@ -230,7 +244,7 @@ template DriveT()
       Returns: #GIcon for the drive.
            Free the returned object with [gobject.object.ObjectWrap.unref].
   */
-  override gio.icon.Icon getIcon()
+  override gio.icon.Icon getIcon() nothrow
   {
     GIcon* _cretval;
     _cretval = g_drive_get_icon(cast(GDrive*)this._cPtr);
@@ -249,7 +263,7 @@ template DriveT()
             requested identifier, or null if the #GDrive
             doesn't have this kind of identifier.
   */
-  override string getIdentifier(string kind)
+  override string getIdentifier(string kind) nothrow
   {
     char* _cretval;
     const(char)* _kind = kind.toCString(No.Alloc);
@@ -263,7 +277,7 @@ template DriveT()
       Returns: a string containing drive's name. The returned
             string should be freed when no longer needed.
   */
-  override string getName()
+  override string getName() nothrow
   {
     char* _cretval;
     _cretval = g_drive_get_name(cast(GDrive*)this._cPtr);
@@ -275,7 +289,7 @@ template DriveT()
       Gets the sort key for drive, if any.
       Returns: Sorting key for drive or null if no such key is available.
   */
-  override string getSortKey()
+  override string getSortKey() nothrow
   {
     const(char)* _cretval;
     _cretval = g_drive_get_sort_key(cast(GDrive*)this._cPtr);
@@ -287,7 +301,7 @@ template DriveT()
       Gets a hint about how a drive can be started/stopped.
       Returns: A value from the #GDriveStartStopType enumeration.
   */
-  override gio.types.DriveStartStopType getStartStopType()
+  override gio.types.DriveStartStopType getStartStopType() nothrow
   {
     GDriveStartStopType _cretval;
     _cretval = g_drive_get_start_stop_type(cast(GDrive*)this._cPtr);
@@ -300,7 +314,7 @@ template DriveT()
       Returns: symbolic #GIcon for the drive.
            Free the returned object with [gobject.object.ObjectWrap.unref].
   */
-  override gio.icon.Icon getSymbolicIcon()
+  override gio.icon.Icon getSymbolicIcon() nothrow
   {
     GIcon* _cretval;
     _cretval = g_drive_get_symbolic_icon(cast(GDrive*)this._cPtr);
@@ -315,7 +329,7 @@ template DriveT()
       its elements have been unreffed with [gobject.object.ObjectWrap.unref].
       Returns: #GList containing any #GVolume objects on the given drive.
   */
-  override gio.volume.Volume[] getVolumes()
+  override gio.volume.Volume[] getVolumes() nothrow
   {
     GList* _cretval;
     _cretval = g_drive_get_volumes(cast(GDrive*)this._cPtr);
@@ -329,7 +343,7 @@ template DriveT()
       for more details.
       Returns: true if drive has media, false otherwise.
   */
-  override bool hasMedia()
+  override bool hasMedia() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_drive_has_media(cast(GDrive*)this._cPtr);
@@ -340,7 +354,7 @@ template DriveT()
       Check if drive has any mountable volumes.
       Returns: true if the drive contains volumes, false otherwise.
   */
-  override bool hasVolumes()
+  override bool hasVolumes() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_drive_has_volumes(cast(GDrive*)this._cPtr);
@@ -352,7 +366,7 @@ template DriveT()
       Returns: true if the drive is capable of automatically detecting
             media changes, false otherwise.
   */
-  override bool isMediaCheckAutomatic()
+  override bool isMediaCheckAutomatic() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_drive_is_media_check_automatic(cast(GDrive*)this._cPtr);
@@ -363,7 +377,7 @@ template DriveT()
       Checks if the drive supports removable media.
       Returns: true if drive supports removable media, false otherwise.
   */
-  override bool isMediaRemovable()
+  override bool isMediaRemovable() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_drive_is_media_removable(cast(GDrive*)this._cPtr);
@@ -375,7 +389,7 @@ template DriveT()
       See [gio.drive.Drive.isMediaRemovable].
       Returns: true if drive and/or its media is considered removable, false otherwise.
   */
-  override bool isRemovable()
+  override bool isRemovable() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_drive_is_removable(cast(GDrive*)this._cPtr);
@@ -393,14 +407,21 @@ template DriveT()
         cancellable = optional #GCancellable object, null to ignore.
         callback = a #GAsyncReadyCallback, or null.
   */
-  override void pollForMedia(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  override void pollForMedia(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -440,14 +461,21 @@ template DriveT()
         cancellable = optional #GCancellable object, null to ignore.
         callback = a #GAsyncReadyCallback, or null.
   */
-  override void start(gio.types.DriveStartFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  override void start(gio.types.DriveStartFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -487,14 +515,21 @@ template DriveT()
         cancellable = optional #GCancellable object, null to ignore.
         callback = a #GAsyncReadyCallback, or null.
   */
-  override void stop(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  override void stop(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -535,13 +570,13 @@ template DriveT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -550,7 +585,14 @@ template DriveT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.drive.Drive.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -575,13 +617,13 @@ template DriveT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDisconnected(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDisconnected(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -590,7 +632,14 @@ template DriveT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.drive.Drive.disconnected");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -613,13 +662,13 @@ template DriveT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEjectButton(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEjectButton(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -628,7 +677,14 @@ template DriveT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.drive.Drive.ejectButton");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -651,13 +707,13 @@ template DriveT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectStopButton(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStopButton(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -666,7 +722,14 @@ template DriveT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.drive.Drive.stopButton");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

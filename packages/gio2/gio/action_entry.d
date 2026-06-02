@@ -24,11 +24,8 @@ class ActionEntry
   GActionEntry _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gio.action_entry.ActionEntry");
-
     _cInstance = *cast(GActionEntry*)ptr;
 
     if (take)
@@ -36,7 +33,7 @@ class ActionEntry
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -45,7 +42,7 @@ class ActionEntry
       Get `name` field.
       Returns: the name of the action
   */
-  @property string name()
+  @property string name() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GActionEntry*)this._cPtr).name);
   }
@@ -55,7 +52,7 @@ class ActionEntry
       Params:
         propval = the name of the action
   */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GActionEntry*)this._cPtr).name);
     dToC(propval, cast(void*)&(cast(GActionEntry*)this._cPtr).name);
@@ -74,7 +71,7 @@ class ActionEntry
                    to the state type) this will be a function that
                    just calls @change_state (which you should provide).
   */
-  @property ActivateFuncType activate()
+  @property ActivateFuncType activate() nothrow
   {
     return (cast(GActionEntry*)this._cPtr).activate;
   }
@@ -85,7 +82,7 @@ class ActionEntry
                          activate function for this action, given as a single
                          GVariant type string (or null for no parameter)
   */
-  @property string parameterType()
+  @property string parameterType() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GActionEntry*)this._cPtr).parameterType);
   }
@@ -97,7 +94,7 @@ class ActionEntry
                            activate function for this action, given as a single
                            GVariant type string (or null for no parameter)
   */
-  @property void parameterType(string propval)
+  @property void parameterType(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GActionEntry*)this._cPtr).parameterType);
     dToC(propval, cast(void*)&(cast(GActionEntry*)this._cPtr).parameterType);
@@ -111,7 +108,7 @@ class ActionEntry
                 the string if they are necessary.  Stateless actions should
                 give null here.
   */
-  @property string state()
+  @property string state() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GActionEntry*)this._cPtr).state);
   }
@@ -125,7 +122,7 @@ class ActionEntry
                   the string if they are necessary.  Stateless actions should
                   give null here.
   */
-  @property void state(string propval)
+  @property void state(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GActionEntry*)this._cPtr).state);
     dToC(propval, cast(void*)&(cast(GActionEntry*)this._cPtr).state);
@@ -140,7 +137,7 @@ class ActionEntry
                        of the action.  All stateful actions should provide a
                        handler here; stateless actions should not.
   */
-  @property ChangeStateFuncType changeState()
+  @property ChangeStateFuncType changeState() nothrow
   {
     return (cast(GActionEntry*)this._cPtr).changeState;
   }

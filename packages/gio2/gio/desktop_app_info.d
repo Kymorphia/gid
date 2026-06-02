@@ -27,26 +27,26 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_desktop_app_info_get_type != &gidSymbolNotFound ? g_desktop_app_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DesktopAppInfo self()
+  override DesktopAppInfo self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
       Get builder for [gio.desktop_app_info.DesktopAppInfo]
       Returns: New builder object
   */
-  static DesktopAppInfoGidBuilder builder()
+  static DesktopAppInfoGidBuilder builder() nothrow
   {
     return new DesktopAppInfoGidBuilder;
   }
@@ -64,7 +64,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
       Get `filename` property.
       Returns: The origin filename of this #GDesktopAppInfo
   */
-  @property string filename()
+  @property string filename() nothrow
   {
     return getFilename();
   }
@@ -89,7 +89,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
       Returns: a new #GDesktopAppInfo, or null if no desktop
             file with that id exists.
   */
-  this(string desktopId)
+  this(string desktopId) nothrow
   {
     GDesktopAppInfo* _cretval;
     const(char)* _desktopId = desktopId.toCString(No.Alloc);
@@ -105,7 +105,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
                filename encoding
       Returns: a new #GDesktopAppInfo or null on error.
   */
-  static gio.desktop_app_info.DesktopAppInfo newFromFilename(string filename)
+  static gio.desktop_app_info.DesktopAppInfo newFromFilename(string filename) nothrow
   {
     GDesktopAppInfo* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -121,7 +121,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
         keyFile = an opened #GKeyFile
       Returns: a new #GDesktopAppInfo or null on error.
   */
-  static gio.desktop_app_info.DesktopAppInfo newFromKeyfile(glib.key_file.KeyFile keyFile)
+  static gio.desktop_app_info.DesktopAppInfo newFromKeyfile(glib.key_file.KeyFile keyFile) nothrow
   {
     GDesktopAppInfo* _cretval;
     _cretval = g_desktop_app_info_new_from_keyfile(keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null);
@@ -140,7 +140,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
       Returns: a list of #GDesktopAppInfo
         objects.
   */
-  static gio.desktop_app_info.DesktopAppInfo[] getImplementations(string interface_)
+  static gio.desktop_app_info.DesktopAppInfo[] getImplementations(string interface_) nothrow
   {
     GList* _cretval;
     const(char)* _interface_ = interface_.toCString(No.Alloc);
@@ -164,7 +164,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
       Deprecated: do not use this API.  Since 2.42 the value of the
         `XDG_CURRENT_DESKTOP` environment variable will be used.
   */
-  static void setDesktopEnv(string desktopEnv)
+  static void setDesktopEnv(string desktopEnv) nothrow
   {
     const(char)* _desktopEnv = desktopEnv.toCString(No.Alloc);
     g_desktop_app_info_set_desktop_env(_desktopEnv);
@@ -182,7 +182,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
             [gio.desktop_app_info.DesktopAppInfo.listActions]
       Returns: the locale-specific action name
   */
-  string getActionName(string actionName)
+  string getActionName(string actionName) nothrow
   {
     char* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
@@ -201,7 +201,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
       Returns: the boolean value, or false if the key
             is not found
   */
-  bool getBoolean(string key)
+  bool getBoolean(string key) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -214,7 +214,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
       Returns: The unparsed Categories key from the desktop file;
             i.e. no attempt is made to split it by ';' or validate it.
   */
-  string getCategories()
+  string getCategories() nothrow
   {
     const(char)* _cretval;
     _cretval = g_desktop_app_info_get_categories(cast(GDesktopAppInfo*)this._cPtr);
@@ -229,7 +229,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
       Returns: The full path to the file for info,
             or null if not known.
   */
-  string getFilename()
+  string getFilename() nothrow
   {
     const(char)* _cretval;
     _cretval = g_desktop_app_info_get_filename(cast(GDesktopAppInfo*)this._cPtr);
@@ -241,7 +241,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
       Gets the generic name from the desktop file.
       Returns: The value of the GenericName key
   */
-  string getGenericName()
+  string getGenericName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_desktop_app_info_get_generic_name(cast(GDesktopAppInfo*)this._cPtr);
@@ -254,7 +254,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
       set to True.
       Returns: true if hidden, false otherwise.
   */
-  bool getIsHidden()
+  bool getIsHidden() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_desktop_app_info_get_is_hidden(cast(GDesktopAppInfo*)this._cPtr);
@@ -265,7 +265,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
       Gets the keywords from the desktop file.
       Returns: The value of the Keywords key
   */
-  string[] getKeywords()
+  string[] getKeywords() nothrow
   {
     const(char*)* _cretval;
     _cretval = g_desktop_app_info_get_keywords(cast(GDesktopAppInfo*)this._cPtr);
@@ -294,7 +294,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
       Returns: a newly allocated string, or null if the key
             is not found
   */
-  string getLocaleString(string key)
+  string getLocaleString(string key) nothrow
   {
     char* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -309,7 +309,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
       [glib.types.KEY_FILE_DESKTOP_KEY_NO_DISPLAY] and [gio.app_info.AppInfo.shouldShow].
       Returns: The value of the NoDisplay key
   */
-  bool getNodisplay()
+  bool getNodisplay() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_desktop_app_info_get_nodisplay(cast(GDesktopAppInfo*)this._cPtr);
@@ -335,7 +335,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
         `OnlyShowIn` and `NotShowIn` keys, false
         otherwise.
   */
-  bool getShowIn(string desktopEnv = null)
+  bool getShowIn(string desktopEnv = null) nothrow
   {
     bool _retval;
     const(char)* _desktopEnv = desktopEnv.toCString(No.Alloc);
@@ -350,7 +350,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
       Returns: the startup WM class, or null if none is set
         in the desktop file.
   */
-  string getStartupWmClass()
+  string getStartupWmClass() nothrow
   {
     const(char)* _cretval;
     _cretval = g_desktop_app_info_get_startup_wm_class(cast(GDesktopAppInfo*)this._cPtr);
@@ -368,7 +368,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
       Returns: a newly allocated string, or null if the key
             is not found
   */
-  string getString(string key)
+  string getString(string key) nothrow
   {
     char* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -387,7 +387,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
       Returns: a null-terminated string array or null if the specified
          key cannot be found. The array should be freed with [glib.global.strfreev].
   */
-  string[] getStringList(string key)
+  string[] getStringList(string key) nothrow
   {
     char** _cretval;
     size_t _cretlength;
@@ -413,7 +413,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
         key = the key to look up
       Returns: true if the key exists
   */
-  bool hasKey(string key)
+  bool hasKey(string key) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -443,7 +443,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
             [gio.desktop_app_info.DesktopAppInfo.listActions]
         launchContext = a #GAppLaunchContext
   */
-  void launchAction(string actionName, gio.app_launch_context.AppLaunchContext launchContext = null)
+  void launchAction(string actionName, gio.app_launch_context.AppLaunchContext launchContext = null) nothrow
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     g_desktop_app_info_launch_action(cast(GDesktopAppInfo*)this._cPtr, _actionName, launchContext ? cast(GAppLaunchContext*)launchContext._cPtr(No.Dup) : null);
@@ -478,19 +478,33 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
   */
   bool launchUrisAsManager(string[] uris, gio.app_launch_context.AppLaunchContext launchContext, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc userSetup = null, gio.types.DesktopAppLaunchCallback pidCallback = null)
   {
-    extern(C) void _userSetupCallback(void* data)
+    extern(C) void _userSetupCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.SpawnChildSetupFunc");
+      }
     }
     auto _userSetupCB = userSetup ? &_userSetupCallback : null;
-    extern(C) void _pidCallbackCallback(GDesktopAppInfo* appinfo, GPid pid, void* userData)
+    extern(C) void _pidCallbackCallback(GDesktopAppInfo* appinfo, GPid pid, void* userData) nothrow
     {
       auto _dlg = cast(gio.types.DesktopAppLaunchCallback*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(void*)appinfo, No.Take), pid);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(void*)appinfo, No.Take), pid);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.DesktopAppLaunchCallback");
+      }
     }
     auto _pidCallbackCB = pidCallback ? &_pidCallbackCallback : null;
     bool _retval;
@@ -528,19 +542,33 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
   */
   bool launchUrisAsManagerWithFds(string[] uris, gio.app_launch_context.AppLaunchContext launchContext, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc userSetup, gio.types.DesktopAppLaunchCallback pidCallback, int stdinFd, int stdoutFd, int stderrFd)
   {
-    extern(C) void _userSetupCallback(void* data)
+    extern(C) void _userSetupCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.SpawnChildSetupFunc");
+      }
     }
     auto _userSetupCB = userSetup ? &_userSetupCallback : null;
-    extern(C) void _pidCallbackCallback(GDesktopAppInfo* appinfo, GPid pid, void* userData)
+    extern(C) void _pidCallbackCallback(GDesktopAppInfo* appinfo, GPid pid, void* userData) nothrow
     {
       auto _dlg = cast(gio.types.DesktopAppLaunchCallback*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(void*)appinfo, No.Take), pid);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(void*)appinfo, No.Take), pid);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.DesktopAppLaunchCallback");
+      }
     }
     auto _pidCallbackCB = pidCallback ? &_pidCallbackCallback : null;
     bool _retval;
@@ -563,7 +591,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
       explicitly listed in the "Actions" key of the [Desktop Entry] group.
       Returns: a list of strings, always non-null
   */
-  string[] listActions()
+  string[] listActions() nothrow
   {
     const(char*)* _cretval;
     _cretval = g_desktop_app_info_list_actions(cast(GDesktopAppInfo*)this._cPtr);
@@ -594,7 +622,7 @@ class DesktopAppInfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = The origin filename of this #GDesktopAppInfo
       Returns: Builder instance for fluent chaining
   */
-  T filename(string propval)
+  T filename(string propval) nothrow
   {
     return setProperty("filename", propval);
   }
@@ -607,7 +635,7 @@ final class DesktopAppInfoGidBuilder : DesktopAppInfoGidBuilderImpl!DesktopAppIn
       Create object from builder.
       Returns: New object
   */
-  DesktopAppInfo build()
+  DesktopAppInfo build() nothrow
   {
     return new DesktopAppInfo(cast(void*)createGObject(DesktopAppInfo._getGType), Yes.Take);
   }

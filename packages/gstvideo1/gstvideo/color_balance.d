@@ -22,7 +22,7 @@ interface ColorBalance
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_color_balance_get_type != &gidSymbolNotFound ? gst_color_balance_get_type() : cast(GType)0;
@@ -102,7 +102,7 @@ interface ColorBalance
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gstvideo.color_balance.ColorBalance]

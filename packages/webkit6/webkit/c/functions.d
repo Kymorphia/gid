@@ -15,7 +15,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libwebkitgtk-6.0.so.4", "libjavascriptcoregtk-6.0.so.1"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // ApplicationInfo
   GType function() c_webkit_application_info_get_type; ///

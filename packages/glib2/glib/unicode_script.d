@@ -28,7 +28,7 @@ struct UnicodeScript
           of [glib.types.UnicodeScript.InvalidCode] if iso15924 is zero and
           [glib.types.UnicodeScript.Unknown] if iso15924 is unknown.
   */
-  static glib.types.UnicodeScript fromIso15924(uint iso15924)
+  static glib.types.UnicodeScript fromIso15924(uint iso15924) nothrow
   {
     GUnicodeScript _cretval;
     _cretval = g_unicode_script_from_iso15924(iso15924);
@@ -53,7 +53,7 @@ struct UnicodeScript
           of zero if script is [glib.types.UnicodeScript.InvalidCode] or
           ISO 15924 code 'Zzzz' (script code for UNKNOWN) if script is not understood.
   */
-  static uint toIso15924(glib.types.UnicodeScript script)
+  static uint toIso15924(glib.types.UnicodeScript script) nothrow
   {
     uint _retval;
     _retval = g_unicode_script_to_iso15924(script);

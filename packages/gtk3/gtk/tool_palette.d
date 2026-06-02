@@ -100,26 +100,26 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tool_palette_get_type != &gidSymbolNotFound ? gtk_tool_palette_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ToolPalette self()
+  override ToolPalette self() nothrow
   {
     return this;
   }
@@ -128,7 +128,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
       Get builder for [gtk.tool_palette.ToolPalette]
       Returns: New builder object
   */
-  static ToolPaletteGidBuilder builder()
+  static ToolPaletteGidBuilder builder() nothrow
   {
     return new ToolPaletteGidBuilder;
   }
@@ -142,7 +142,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
         application tool palettes should respect the user preferences for the
         size of icons.
   */
-  @property gtk.types.IconSize iconSize()
+  @property gtk.types.IconSize iconSize() nothrow
   {
     return getIconSize();
   }
@@ -157,7 +157,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
           application tool palettes should respect the user preferences for the
           size of icons.
   */
-  @property void iconSize(gtk.types.IconSize propval)
+  @property void iconSize(gtk.types.IconSize propval) nothrow
   {
     setIconSize(propval);
   }
@@ -166,7 +166,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
       Get `iconSizeSet` property.
       Returns: Is true if the #GtkToolPalette:icon-size property has been set.
   */
-  @property bool iconSizeSet()
+  @property bool iconSizeSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("icon-size-set");
   }
@@ -176,7 +176,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
       Params:
         propval = Is true if the #GtkToolPalette:icon-size property has been set.
   */
-  @property void iconSizeSet(bool propval)
+  @property void iconSizeSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("icon-size-set", propval);
   }
@@ -185,7 +185,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
       Get `toolbarStyle` property.
       Returns: The style of items in the tool palette.
   */
-  @property gtk.types.ToolbarStyle toolbarStyle()
+  @property gtk.types.ToolbarStyle toolbarStyle() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.ToolbarStyle)("toolbar-style");
   }
@@ -195,7 +195,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
       Params:
         propval = The style of items in the tool palette.
   */
-  @property void toolbarStyle(gtk.types.ToolbarStyle propval)
+  @property void toolbarStyle(gtk.types.ToolbarStyle propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.ToolbarStyle)("toolbar-style", propval);
   }
@@ -207,7 +207,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
       Creates a new tool palette.
       Returns: a new #GtkToolPalette
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_tool_palette_new();
@@ -218,7 +218,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
       Get the target entry for a dragged #GtkToolItemGroup.
       Returns: the #GtkTargetEntry for a dragged group
   */
-  static gtk.target_entry.TargetEntry getDragTargetGroup()
+  static gtk.target_entry.TargetEntry getDragTargetGroup() nothrow
   {
     const(GtkTargetEntry)* _cretval;
     _cretval = gtk_tool_palette_get_drag_target_group();
@@ -230,7 +230,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
       Gets the target entry for a dragged #GtkToolItem.
       Returns: the #GtkTargetEntry for a dragged item.
   */
-  static gtk.target_entry.TargetEntry getDragTargetItem()
+  static gtk.target_entry.TargetEntry getDragTargetItem() nothrow
   {
     const(GtkTargetEntry)* _cretval;
     _cretval = gtk_tool_palette_get_drag_target_item();
@@ -251,7 +251,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
               should support
         actions = the #GdkDragActions which the widget should suppport
   */
-  void addDragDest(gtk.widget.Widget widget, gtk.types.DestDefaults flags, gtk.types.ToolPaletteDragTargets targets, gdk.types.DragAction actions)
+  void addDragDest(gtk.widget.Widget widget, gtk.types.DestDefaults flags, gtk.types.ToolPaletteDragTargets targets, gdk.types.DragAction actions) nothrow
   {
     gtk_tool_palette_add_drag_dest(cast(GtkToolPalette*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, flags, targets, actions);
   }
@@ -264,7 +264,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
         selection = a #GtkSelectionData
       Returns: the dragged item in selection
   */
-  gtk.widget.Widget getDragItem(gtk.selection_data.SelectionData selection)
+  gtk.widget.Widget getDragItem(gtk.selection_data.SelectionData selection) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_tool_palette_get_drag_item(cast(GtkToolPalette*)this._cPtr, selection ? cast(const(GtkSelectionData)*)selection._cPtr(No.Dup) : null);
@@ -281,7 +281,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
       Returns: the #GtkToolItemGroup at position
         or null if there is no such group
   */
-  gtk.tool_item_group.ToolItemGroup getDropGroup(int x, int y)
+  gtk.tool_item_group.ToolItemGroup getDropGroup(int x, int y) nothrow
   {
     GtkToolItemGroup* _cretval;
     _cretval = gtk_tool_palette_get_drop_group(cast(GtkToolPalette*)this._cPtr, x, y);
@@ -298,7 +298,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
         y = the y position
       Returns: the #GtkToolItem at position or null if there is no such item
   */
-  gtk.tool_item.ToolItem getDropItem(int x, int y)
+  gtk.tool_item.ToolItem getDropItem(int x, int y) nothrow
   {
     GtkToolItem* _cretval;
     _cretval = gtk_tool_palette_get_drop_item(cast(GtkToolPalette*)this._cPtr, x, y);
@@ -314,7 +314,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
         group = a #GtkToolItemGroup which is a child of palette
       Returns: true if group is exclusive
   */
-  bool getExclusive(gtk.tool_item_group.ToolItemGroup group)
+  bool getExclusive(gtk.tool_item_group.ToolItemGroup group) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tool_palette_get_exclusive(cast(GtkToolPalette*)this._cPtr, group ? cast(GtkToolItemGroup*)group._cPtr(No.Dup) : null);
@@ -329,7 +329,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
         group = a #GtkToolItemGroup which is a child of palette
       Returns: true if group should be given extra space, false otherwise
   */
-  bool getExpand(gtk.tool_item_group.ToolItemGroup group)
+  bool getExpand(gtk.tool_item_group.ToolItemGroup group) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tool_palette_get_expand(cast(GtkToolPalette*)this._cPtr, group ? cast(GtkToolItemGroup*)group._cPtr(No.Dup) : null);
@@ -344,7 +344,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
         group = a #GtkToolItemGroup
       Returns: the index of group or -1 if group is not a child of palette
   */
-  int getGroupPosition(gtk.tool_item_group.ToolItemGroup group)
+  int getGroupPosition(gtk.tool_item_group.ToolItemGroup group) nothrow
   {
     int _retval;
     _retval = gtk_tool_palette_get_group_position(cast(GtkToolPalette*)this._cPtr, group ? cast(GtkToolItemGroup*)group._cPtr(No.Dup) : null);
@@ -357,7 +357,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   
       Deprecated: Use [gtk.scrollable.Scrollable.getHadjustment]
   */
-  gtk.adjustment.Adjustment getHadjustment()
+  gtk.adjustment.Adjustment getHadjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_tool_palette_get_hadjustment(cast(GtkToolPalette*)this._cPtr);
@@ -370,7 +370,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
       See [gtk.tool_palette.ToolPalette.setIconSize].
       Returns: the #GtkIconSize of icons in the tool palette
   */
-  gtk.types.IconSize getIconSize()
+  gtk.types.IconSize getIconSize() nothrow
   {
     GtkIconSize _cretval;
     _cretval = gtk_tool_palette_get_icon_size(cast(GtkToolPalette*)this._cPtr);
@@ -384,7 +384,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
       Gets the style (icons, text or both) of items in the tool palette.
       Returns: the #GtkToolbarStyle of items in the tool palette.
   */
-  gtk.types.ToolbarStyle getStyle()
+  gtk.types.ToolbarStyle getStyle() nothrow
   {
     GtkToolbarStyle _cretval;
     _cretval = gtk_tool_palette_get_style(cast(GtkToolPalette*)this._cPtr);
@@ -398,7 +398,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   
       Deprecated: Use [gtk.scrollable.Scrollable.getVadjustment]
   */
-  gtk.adjustment.Adjustment getVadjustment()
+  gtk.adjustment.Adjustment getVadjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_tool_palette_get_vadjustment(cast(GtkToolPalette*)this._cPtr);
@@ -416,7 +416,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
         targets = the #GtkToolPaletteDragTargets
               which the widget should support
   */
-  void setDragSource(gtk.types.ToolPaletteDragTargets targets)
+  void setDragSource(gtk.types.ToolPaletteDragTargets targets) nothrow
   {
     gtk_tool_palette_set_drag_source(cast(GtkToolPalette*)this._cPtr, targets);
   }
@@ -429,7 +429,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
         group = a #GtkToolItemGroup which is a child of palette
         exclusive = whether the group should be exclusive or not
   */
-  void setExclusive(gtk.tool_item_group.ToolItemGroup group, bool exclusive)
+  void setExclusive(gtk.tool_item_group.ToolItemGroup group, bool exclusive) nothrow
   {
     gtk_tool_palette_set_exclusive(cast(GtkToolPalette*)this._cPtr, group ? cast(GtkToolItemGroup*)group._cPtr(No.Dup) : null, exclusive);
   }
@@ -441,7 +441,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
         group = a #GtkToolItemGroup which is a child of palette
         expand = whether the group should be given extra space
   */
-  void setExpand(gtk.tool_item_group.ToolItemGroup group, bool expand)
+  void setExpand(gtk.tool_item_group.ToolItemGroup group, bool expand) nothrow
   {
     gtk_tool_palette_set_expand(cast(GtkToolPalette*)this._cPtr, group ? cast(GtkToolItemGroup*)group._cPtr(No.Dup) : null, expand);
   }
@@ -455,7 +455,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
         group = a #GtkToolItemGroup which is a child of palette
         position = a new index for group
   */
-  void setGroupPosition(gtk.tool_item_group.ToolItemGroup group, int position)
+  void setGroupPosition(gtk.tool_item_group.ToolItemGroup group, int position) nothrow
   {
     gtk_tool_palette_set_group_position(cast(GtkToolPalette*)this._cPtr, group ? cast(GtkToolItemGroup*)group._cPtr(No.Dup) : null, position);
   }
@@ -467,7 +467,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
         iconSize = the #GtkIconSize that icons in the tool
               palette shall have
   */
-  void setIconSize(gtk.types.IconSize iconSize)
+  void setIconSize(gtk.types.IconSize iconSize) nothrow
   {
     gtk_tool_palette_set_icon_size(cast(GtkToolPalette*)this._cPtr, iconSize);
   }
@@ -480,7 +480,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
       Params:
         style = the #GtkToolbarStyle that items in the tool palette shall have
   */
-  void setStyle(gtk.types.ToolbarStyle style)
+  void setStyle(gtk.types.ToolbarStyle style) nothrow
   {
     gtk_tool_palette_set_style(cast(GtkToolPalette*)this._cPtr, style);
   }
@@ -489,7 +489,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
       Unsets the tool palette icon size set with [gtk.tool_palette.ToolPalette.setIconSize],
       so that user preferences will be used to determine the icon size.
   */
-  void unsetIconSize()
+  void unsetIconSize() nothrow
   {
     gtk_tool_palette_unset_icon_size(cast(GtkToolPalette*)this._cPtr);
   }
@@ -498,7 +498,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
       Unsets a toolbar style set with [gtk.tool_palette.ToolPalette.setStyle],
       so that user preferences will be used to determine the toolbar style.
   */
-  void unsetStyle()
+  void unsetStyle() nothrow
   {
     gtk_tool_palette_unset_style(cast(GtkToolPalette*)this._cPtr);
   }
@@ -522,7 +522,7 @@ class ToolPaletteGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gt
           size of icons.
       Returns: Builder instance for fluent chaining
   */
-  T iconSize(gtk.types.IconSize propval)
+  T iconSize(gtk.types.IconSize propval) nothrow
   {
     return setProperty("icon-size", propval);
   }
@@ -533,7 +533,7 @@ class ToolPaletteGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gt
         propval = Is true if the #GtkToolPalette:icon-size property has been set.
       Returns: Builder instance for fluent chaining
   */
-  T iconSizeSet(bool propval)
+  T iconSizeSet(bool propval) nothrow
   {
     return setProperty("icon-size-set", propval);
   }
@@ -544,7 +544,7 @@ class ToolPaletteGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gt
         propval = The style of items in the tool palette.
       Returns: Builder instance for fluent chaining
   */
-  T toolbarStyle(gtk.types.ToolbarStyle propval)
+  T toolbarStyle(gtk.types.ToolbarStyle propval) nothrow
   {
     return setProperty("toolbar-style", propval);
   }
@@ -557,7 +557,7 @@ final class ToolPaletteGidBuilder : ToolPaletteGidBuilderImpl!ToolPaletteGidBuil
       Create object from builder.
       Returns: New object
   */
-  ToolPalette build()
+  ToolPalette build() nothrow
   {
     return new ToolPalette(cast(void*)createGObject(ToolPalette._getGType), No.Take);
   }

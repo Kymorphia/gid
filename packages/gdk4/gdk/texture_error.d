@@ -14,7 +14,7 @@ struct TextureError
   alias Enum = gdk.types.TextureError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gdk_texture_error_quark();
@@ -24,12 +24,12 @@ struct TextureError
 
 class TextureException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gdk.texture_error.TextureError.quark, cast(int)code, msg);
   }

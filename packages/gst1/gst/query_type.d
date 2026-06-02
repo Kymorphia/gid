@@ -19,7 +19,7 @@ struct QueryType
         type = a #GstQueryType
       Returns: a #GstQueryTypeFlags.
   */
-  static gst.types.QueryTypeFlags getFlags(gst.types.QueryType type)
+  static gst.types.QueryTypeFlags getFlags(gst.types.QueryType type) nothrow
   {
     GstQueryTypeFlags _cretval;
     _cretval = gst_query_type_get_flags(type);
@@ -34,7 +34,7 @@ struct QueryType
         type = the query type
       Returns: a reference to the static name of the query.
   */
-  static string getName(gst.types.QueryType type)
+  static string getName(gst.types.QueryType type) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_query_type_get_name(type);
@@ -49,7 +49,7 @@ struct QueryType
         type = the query type
       Returns: the quark associated with the query type
   */
-  static glib.types.Quark toQuark(gst.types.QueryType type)
+  static glib.types.Quark toQuark(gst.types.QueryType type) nothrow
   {
     glib.types.Quark _retval;
     _retval = gst_query_type_to_quark(type);

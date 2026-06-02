@@ -18,7 +18,7 @@ import javascriptcore.types;
     have included when compiling your code.
     Returns: the major version number of the JavaScriptCore library
 */
-uint getMajorVersion()
+uint getMajorVersion() nothrow
 {
   uint _retval;
   _retval = jsc_get_major_version();
@@ -35,7 +35,7 @@ uint getMajorVersion()
     have included when compiling your code.
     Returns: the micro version number of the JavaScriptCore library
 */
-uint getMicroVersion()
+uint getMicroVersion() nothrow
 {
   uint _retval;
   _retval = jsc_get_micro_version();
@@ -52,7 +52,7 @@ uint getMicroVersion()
     have included when compiling your code.
     Returns: the minor version number of the JavaScriptCore library
 */
-uint getMinorVersion()
+uint getMinorVersion() nothrow
 {
   uint _retval;
   _retval = jsc_get_minor_version();
@@ -66,16 +66,23 @@ uint getMinorVersion()
     Params:
       function_ = a #JSCOptionsFunc callback
 */
-void optionsForeach(javascriptcore.types.OptionsFunc function_)
+void optionsForeach(javascriptcore.types.OptionsFunc function_) nothrow
 {
-  extern(C) gboolean _function_Callback(const(char)* option, JSCOptionType type, const(char)* description, void* userData)
+  extern(C) gboolean _function_Callback(const(char)* option, JSCOptionType type, const(char)* description, void* userData) nothrow
   {
     bool _dretval;
     auto _dlg = cast(javascriptcore.types.OptionsFunc*)userData;
     string _option = option.fromCString(No.Free);
     string _description = description.fromCString(No.Free);
 
-    _dretval = (*_dlg)(_option, type, _description);
+    try
+    {
+      _dretval = (*_dlg)(_option, type, _description);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "javascriptcore.types.OptionsFunc");
+    }
     auto _retval = cast(gboolean)_dretval;
 
     return _retval;
@@ -93,7 +100,7 @@ void optionsForeach(javascriptcore.types.OptionsFunc function_)
       value = return location for the option value
     Returns: true if value has been set or false if the option doesn't exist
 */
-bool optionsGetBoolean(string option, out bool value)
+bool optionsGetBoolean(string option, out bool value) nothrow
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
@@ -111,7 +118,7 @@ bool optionsGetBoolean(string option, out bool value)
       value = return location for the option value
     Returns: true if value has been set or false if the option doesn't exist
 */
-bool optionsGetDouble(string option, out double value)
+bool optionsGetDouble(string option, out double value) nothrow
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
@@ -127,7 +134,7 @@ bool optionsGetDouble(string option, out double value)
       value = return location for the option value
     Returns: true if value has been set or false if the option doesn't exist
 */
-bool optionsGetInt(string option, out int value)
+bool optionsGetInt(string option, out int value) nothrow
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
@@ -145,7 +152,7 @@ bool optionsGetInt(string option, out int value)
     be taken care for automatically.
     Returns: a #GOptionGroup for the JSCOptions
 */
-glib.option_group.OptionGroup optionsGetOptionGroup()
+glib.option_group.OptionGroup optionsGetOptionGroup() nothrow
 {
   GOptionGroup* _cretval;
   _cretval = jsc_options_get_option_group();
@@ -164,7 +171,7 @@ glib.option_group.OptionGroup optionsGetOptionGroup()
       value = return location for the option value
     Returns: true if value has been set or false if the option doesn't exist
 */
-bool optionsGetRangeString(string option, out string value)
+bool optionsGetRangeString(string option, out string value) nothrow
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
@@ -182,7 +189,7 @@ bool optionsGetRangeString(string option, out string value)
       value = return location for the option value
     Returns: true if value has been set or false if the option doesn't exist
 */
-bool optionsGetSize(string option, out size_t value)
+bool optionsGetSize(string option, out size_t value) nothrow
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
@@ -198,7 +205,7 @@ bool optionsGetSize(string option, out size_t value)
       value = return location for the option value
     Returns: true if value has been set or false if the option doesn't exist
 */
-bool optionsGetString(string option, out string value)
+bool optionsGetString(string option, out string value) nothrow
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
@@ -216,7 +223,7 @@ bool optionsGetString(string option, out string value)
       value = return location for the option value
     Returns: true if value has been set or false if the option doesn't exist
 */
-bool optionsGetUint(string option, out uint value)
+bool optionsGetUint(string option, out uint value) nothrow
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
@@ -232,7 +239,7 @@ bool optionsGetUint(string option, out uint value)
       value = the value to set
     Returns: true if option was correctly set or false otherwise.
 */
-bool optionsSetBoolean(string option, bool value)
+bool optionsSetBoolean(string option, bool value) nothrow
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
@@ -248,7 +255,7 @@ bool optionsSetBoolean(string option, bool value)
       value = the value to set
     Returns: true if option was correctly set or false otherwise.
 */
-bool optionsSetDouble(string option, double value)
+bool optionsSetDouble(string option, double value) nothrow
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
@@ -264,7 +271,7 @@ bool optionsSetDouble(string option, double value)
       value = the value to set
     Returns: true if option was correctly set or false otherwise.
 */
-bool optionsSetInt(string option, int value)
+bool optionsSetInt(string option, int value) nothrow
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
@@ -283,7 +290,7 @@ bool optionsSetInt(string option, int value)
       value = the value to set
     Returns: true if option was correctly set or false otherwise.
 */
-bool optionsSetRangeString(string option, string value)
+bool optionsSetRangeString(string option, string value) nothrow
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
@@ -300,7 +307,7 @@ bool optionsSetRangeString(string option, string value)
       value = the value to set
     Returns: true if option was correctly set or false otherwise.
 */
-bool optionsSetSize(string option, size_t value)
+bool optionsSetSize(string option, size_t value) nothrow
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
@@ -316,7 +323,7 @@ bool optionsSetSize(string option, size_t value)
       value = the value to set
     Returns: true if option was correctly set or false otherwise.
 */
-bool optionsSetString(string option, string value)
+bool optionsSetString(string option, string value) nothrow
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);
@@ -333,7 +340,7 @@ bool optionsSetString(string option, string value)
       value = the value to set
     Returns: true if option was correctly set or false otherwise.
 */
-bool optionsSetUint(string option, uint value)
+bool optionsSetUint(string option, uint value) nothrow
 {
   bool _retval;
   const(char)* _option = option.toCString(No.Alloc);

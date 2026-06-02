@@ -14,26 +14,26 @@ class Int64Statistics : parquet.statistics.Statistics
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_int64_statistics_get_type != &gidSymbolNotFound ? gparquet_int64_statistics_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Int64Statistics self()
+  override Int64Statistics self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class Int64Statistics : parquet.statistics.Statistics
       Get builder for [parquet.int64_statistics.Int64Statistics]
       Returns: New builder object
   */
-  static Int64StatisticsGidBuilder builder()
+  static Int64StatisticsGidBuilder builder() nothrow
   {
     return new Int64StatisticsGidBuilder;
   }
 
   /** */
-  long getMax()
+  long getMax() nothrow
   {
     long _retval;
     _retval = gparquet_int64_statistics_get_max(cast(GParquetInt64Statistics*)this._cPtr);
@@ -56,7 +56,7 @@ class Int64Statistics : parquet.statistics.Statistics
   }
 
   /** */
-  long getMin()
+  long getMin() nothrow
   {
     long _retval;
     _retval = gparquet_int64_statistics_get_min(cast(GParquetInt64Statistics*)this._cPtr);
@@ -76,7 +76,7 @@ final class Int64StatisticsGidBuilder : Int64StatisticsGidBuilderImpl!Int64Stati
       Create object from builder.
       Returns: New object
   */
-  Int64Statistics build()
+  Int64Statistics build() nothrow
   {
     return new Int64Statistics(cast(void*)createGObject(Int64Statistics._getGType), No.Take);
   }

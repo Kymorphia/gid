@@ -17,11 +17,8 @@ class ScannerConfig
   GScannerConfig _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.scanner_config.ScannerConfig");
-
     _cInstance = *cast(GScannerConfig*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class ScannerConfig
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -40,7 +37,7 @@ class ScannerConfig
             by the scanner (the default is the whitespace characters: space,
             tab, carriage-return and line-feed).
   */
-  @property string csetSkipCharacters()
+  @property string csetSkipCharacters() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).csetSkipCharacters);
   }
@@ -52,7 +49,7 @@ class ScannerConfig
               by the scanner (the default is the whitespace characters: space,
               tab, carriage-return and line-feed).
   */
-  @property void csetSkipCharacters(string propval)
+  @property void csetSkipCharacters(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).csetSkipCharacters);
     dToC(propval, cast(void*)&(cast(GScannerConfig*)this._cPtr).csetSkipCharacters);
@@ -63,7 +60,7 @@ class ScannerConfig
       Returns: specifies the characters which can start
             identifiers (the default is [glib.types.CSET_a_2_z], "_", and [glib.types.CSET_A_2_Z]).
   */
-  @property string csetIdentifierFirst()
+  @property string csetIdentifierFirst() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).csetIdentifierFirst);
   }
@@ -74,7 +71,7 @@ class ScannerConfig
         propval = specifies the characters which can start
               identifiers (the default is [glib.types.CSET_a_2_z], "_", and [glib.types.CSET_A_2_Z]).
   */
-  @property void csetIdentifierFirst(string propval)
+  @property void csetIdentifierFirst(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).csetIdentifierFirst);
     dToC(propval, cast(void*)&(cast(GScannerConfig*)this._cPtr).csetIdentifierFirst);
@@ -87,7 +84,7 @@ class ScannerConfig
             [glib.types.CSET_a_2_z], "_0123456789", [glib.types.CSET_A_2_Z], `G_CSET_LATINS`,
             `G_CSET_LATINC`).
   */
-  @property string csetIdentifierNth()
+  @property string csetIdentifierNth() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).csetIdentifierNth);
   }
@@ -100,7 +97,7 @@ class ScannerConfig
               [glib.types.CSET_a_2_z], "_0123456789", [glib.types.CSET_A_2_Z], `G_CSET_LATINS`,
               `G_CSET_LATINC`).
   */
-  @property void csetIdentifierNth(string propval)
+  @property void csetIdentifierNth(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).csetIdentifierNth);
     dToC(propval, cast(void*)&(cast(GScannerConfig*)this._cPtr).csetIdentifierNth);
@@ -113,7 +110,7 @@ class ScannerConfig
             that single-line comments start with a '#' and continue until
             a '\n' (end of line).
   */
-  @property string cpairCommentSingle()
+  @property string cpairCommentSingle() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).cpairCommentSingle);
   }
@@ -126,7 +123,7 @@ class ScannerConfig
               that single-line comments start with a '#' and continue until
               a '\n' (end of line).
   */
-  @property void cpairCommentSingle(string propval)
+  @property void cpairCommentSingle(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).cpairCommentSingle);
     dToC(propval, cast(void*)&(cast(GScannerConfig*)this._cPtr).cpairCommentSingle);
@@ -137,7 +134,7 @@ class ScannerConfig
       Returns: specifies if symbols are case sensitive (the
             default is false).
   */
-  @property uint caseSensitive()
+  @property uint caseSensitive() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).caseSensitive;
   }
@@ -148,7 +145,7 @@ class ScannerConfig
         propval = specifies if symbols are case sensitive (the
               default is false).
   */
-  @property void caseSensitive(uint propval)
+  @property void caseSensitive(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).caseSensitive = propval;
   }
@@ -158,7 +155,7 @@ class ScannerConfig
       Returns: specifies if multi-line comments are skipped
             and not returned as tokens (the default is true).
   */
-  @property uint skipCommentMulti()
+  @property uint skipCommentMulti() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).skipCommentMulti;
   }
@@ -169,7 +166,7 @@ class ScannerConfig
         propval = specifies if multi-line comments are skipped
               and not returned as tokens (the default is true).
   */
-  @property void skipCommentMulti(uint propval)
+  @property void skipCommentMulti(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).skipCommentMulti = propval;
   }
@@ -179,7 +176,7 @@ class ScannerConfig
       Returns: specifies if single-line comments are skipped
             and not returned as tokens (the default is true).
   */
-  @property uint skipCommentSingle()
+  @property uint skipCommentSingle() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).skipCommentSingle;
   }
@@ -190,7 +187,7 @@ class ScannerConfig
         propval = specifies if single-line comments are skipped
               and not returned as tokens (the default is true).
   */
-  @property void skipCommentSingle(uint propval)
+  @property void skipCommentSingle(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).skipCommentSingle = propval;
   }
@@ -200,7 +197,7 @@ class ScannerConfig
       Returns: specifies if multi-line comments are recognized
             (the default is true).
   */
-  @property uint scanCommentMulti()
+  @property uint scanCommentMulti() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).scanCommentMulti;
   }
@@ -211,7 +208,7 @@ class ScannerConfig
         propval = specifies if multi-line comments are recognized
               (the default is true).
   */
-  @property void scanCommentMulti(uint propval)
+  @property void scanCommentMulti(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).scanCommentMulti = propval;
   }
@@ -221,7 +218,7 @@ class ScannerConfig
       Returns: specifies if identifiers are recognized (the
             default is true).
   */
-  @property uint scanIdentifier()
+  @property uint scanIdentifier() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).scanIdentifier;
   }
@@ -232,7 +229,7 @@ class ScannerConfig
         propval = specifies if identifiers are recognized (the
               default is true).
   */
-  @property void scanIdentifier(uint propval)
+  @property void scanIdentifier(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).scanIdentifier = propval;
   }
@@ -242,7 +239,7 @@ class ScannerConfig
       Returns: specifies if single-character
             identifiers are recognized (the default is false).
   */
-  @property uint scanIdentifier1char()
+  @property uint scanIdentifier1char() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).scanIdentifier1char;
   }
@@ -253,7 +250,7 @@ class ScannerConfig
         propval = specifies if single-character
               identifiers are recognized (the default is false).
   */
-  @property void scanIdentifier1char(uint propval)
+  @property void scanIdentifier1char(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).scanIdentifier1char = propval;
   }
@@ -263,7 +260,7 @@ class ScannerConfig
       Returns: specifies if null is reported as
             `G_TOKEN_IDENTIFIER_NULL` (the default is false).
   */
-  @property uint scanIdentifierNULL()
+  @property uint scanIdentifierNULL() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).scanIdentifierNULL;
   }
@@ -274,7 +271,7 @@ class ScannerConfig
         propval = specifies if null is reported as
               `G_TOKEN_IDENTIFIER_NULL` (the default is false).
   */
-  @property void scanIdentifierNULL(uint propval)
+  @property void scanIdentifierNULL(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).scanIdentifierNULL = propval;
   }
@@ -284,7 +281,7 @@ class ScannerConfig
       Returns: specifies if symbols are recognized (the default
             is true).
   */
-  @property uint scanSymbols()
+  @property uint scanSymbols() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).scanSymbols;
   }
@@ -295,7 +292,7 @@ class ScannerConfig
         propval = specifies if symbols are recognized (the default
               is true).
   */
-  @property void scanSymbols(uint propval)
+  @property void scanSymbols(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).scanSymbols = propval;
   }
@@ -305,7 +302,7 @@ class ScannerConfig
       Returns: specifies if binary numbers are recognized (the
             default is false).
   */
-  @property uint scanBinary()
+  @property uint scanBinary() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).scanBinary;
   }
@@ -316,7 +313,7 @@ class ScannerConfig
         propval = specifies if binary numbers are recognized (the
               default is false).
   */
-  @property void scanBinary(uint propval)
+  @property void scanBinary(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).scanBinary = propval;
   }
@@ -326,7 +323,7 @@ class ScannerConfig
       Returns: specifies if octal numbers are recognized (the
             default is true).
   */
-  @property uint scanOctal()
+  @property uint scanOctal() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).scanOctal;
   }
@@ -337,7 +334,7 @@ class ScannerConfig
         propval = specifies if octal numbers are recognized (the
               default is true).
   */
-  @property void scanOctal(uint propval)
+  @property void scanOctal(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).scanOctal = propval;
   }
@@ -347,7 +344,7 @@ class ScannerConfig
       Returns: specifies if floating point numbers are recognized
             (the default is true).
   */
-  @property uint scanFloat()
+  @property uint scanFloat() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).scanFloat;
   }
@@ -358,7 +355,7 @@ class ScannerConfig
         propval = specifies if floating point numbers are recognized
               (the default is true).
   */
-  @property void scanFloat(uint propval)
+  @property void scanFloat(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).scanFloat = propval;
   }
@@ -368,7 +365,7 @@ class ScannerConfig
       Returns: specifies if hexadecimal numbers are recognized (the
             default is true).
   */
-  @property uint scanHex()
+  @property uint scanHex() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).scanHex;
   }
@@ -379,7 +376,7 @@ class ScannerConfig
         propval = specifies if hexadecimal numbers are recognized (the
               default is true).
   */
-  @property void scanHex(uint propval)
+  @property void scanHex(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).scanHex = propval;
   }
@@ -389,7 +386,7 @@ class ScannerConfig
       Returns: specifies if '$' is recognized as a prefix for
             hexadecimal numbers (the default is false).
   */
-  @property uint scanHexDollar()
+  @property uint scanHexDollar() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).scanHexDollar;
   }
@@ -400,7 +397,7 @@ class ScannerConfig
         propval = specifies if '$' is recognized as a prefix for
               hexadecimal numbers (the default is false).
   */
-  @property void scanHexDollar(uint propval)
+  @property void scanHexDollar(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).scanHexDollar = propval;
   }
@@ -410,7 +407,7 @@ class ScannerConfig
       Returns: specifies if strings can be enclosed in single
             quotes (the default is true).
   */
-  @property uint scanStringSq()
+  @property uint scanStringSq() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).scanStringSq;
   }
@@ -421,7 +418,7 @@ class ScannerConfig
         propval = specifies if strings can be enclosed in single
               quotes (the default is true).
   */
-  @property void scanStringSq(uint propval)
+  @property void scanStringSq(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).scanStringSq = propval;
   }
@@ -431,7 +428,7 @@ class ScannerConfig
       Returns: specifies if strings can be enclosed in double
             quotes (the default is true).
   */
-  @property uint scanStringDq()
+  @property uint scanStringDq() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).scanStringDq;
   }
@@ -442,7 +439,7 @@ class ScannerConfig
         propval = specifies if strings can be enclosed in double
               quotes (the default is true).
   */
-  @property void scanStringDq(uint propval)
+  @property void scanStringDq(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).scanStringDq = propval;
   }
@@ -452,7 +449,7 @@ class ScannerConfig
       Returns: specifies if binary, octal and hexadecimal numbers
             are reported as `G_TOKEN_INT` (the default is true).
   */
-  @property uint numbers2Int()
+  @property uint numbers2Int() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).numbers2Int;
   }
@@ -463,7 +460,7 @@ class ScannerConfig
         propval = specifies if binary, octal and hexadecimal numbers
               are reported as `G_TOKEN_INT` (the default is true).
   */
-  @property void numbers2Int(uint propval)
+  @property void numbers2Int(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).numbers2Int = propval;
   }
@@ -473,7 +470,7 @@ class ScannerConfig
       Returns: specifies if all numbers are reported as `G_TOKEN_FLOAT`
             (the default is false).
   */
-  @property uint int2Float()
+  @property uint int2Float() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).int2Float;
   }
@@ -484,7 +481,7 @@ class ScannerConfig
         propval = specifies if all numbers are reported as `G_TOKEN_FLOAT`
               (the default is false).
   */
-  @property void int2Float(uint propval)
+  @property void int2Float(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).int2Float = propval;
   }
@@ -494,7 +491,7 @@ class ScannerConfig
       Returns: specifies if identifiers are reported as strings
             (the default is false).
   */
-  @property uint identifier2String()
+  @property uint identifier2String() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).identifier2String;
   }
@@ -505,7 +502,7 @@ class ScannerConfig
         propval = specifies if identifiers are reported as strings
               (the default is false).
   */
-  @property void identifier2String(uint propval)
+  @property void identifier2String(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).identifier2String = propval;
   }
@@ -515,7 +512,7 @@ class ScannerConfig
       Returns: specifies if characters are reported by setting
             `token = ch` or as `G_TOKEN_CHAR` (the default is true).
   */
-  @property uint char2Token()
+  @property uint char2Token() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).char2Token;
   }
@@ -526,7 +523,7 @@ class ScannerConfig
         propval = specifies if characters are reported by setting
               `token = ch` or as `G_TOKEN_CHAR` (the default is true).
   */
-  @property void char2Token(uint propval)
+  @property void char2Token(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).char2Token = propval;
   }
@@ -536,7 +533,7 @@ class ScannerConfig
       Returns: specifies if symbols are reported by setting
             `token = v_symbol` or as `G_TOKEN_SYMBOL` (the default is false).
   */
-  @property uint symbol2Token()
+  @property uint symbol2Token() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).symbol2Token;
   }
@@ -547,7 +544,7 @@ class ScannerConfig
         propval = specifies if symbols are reported by setting
               `token = v_symbol` or as `G_TOKEN_SYMBOL` (the default is false).
   */
-  @property void symbol2Token(uint propval)
+  @property void symbol2Token(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).symbol2Token = propval;
   }
@@ -557,7 +554,7 @@ class ScannerConfig
       Returns: specifies if a symbol is searched for in the
             default scope in addition to the current scope (the default is false).
   */
-  @property uint scope0Fallback()
+  @property uint scope0Fallback() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).scope0Fallback;
   }
@@ -568,7 +565,7 @@ class ScannerConfig
         propval = specifies if a symbol is searched for in the
               default scope in addition to the current scope (the default is false).
   */
-  @property void scope0Fallback(uint propval)
+  @property void scope0Fallback(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).scope0Fallback = propval;
   }
@@ -577,7 +574,7 @@ class ScannerConfig
       Get `storeInt64` field.
       Returns: use value.v_int64 rather than v_int
   */
-  @property uint storeInt64()
+  @property uint storeInt64() nothrow
   {
     return (cast(GScannerConfig*)this._cPtr).storeInt64;
   }
@@ -587,7 +584,7 @@ class ScannerConfig
       Params:
         propval = use value.v_int64 rather than v_int
   */
-  @property void storeInt64(uint propval)
+  @property void storeInt64(uint propval) nothrow
   {
     (cast(GScannerConfig*)this._cPtr).storeInt64 = propval;
   }

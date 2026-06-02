@@ -31,26 +31,26 @@ class CellRendererSpinner : gtk.cell_renderer.CellRenderer
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_renderer_spinner_get_type != &gidSymbolNotFound ? gtk_cell_renderer_spinner_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CellRendererSpinner self()
+  override CellRendererSpinner self() nothrow
   {
     return this;
   }
@@ -59,19 +59,19 @@ class CellRendererSpinner : gtk.cell_renderer.CellRenderer
       Get builder for [gtk.cell_renderer_spinner.CellRendererSpinner]
       Returns: New builder object
   */
-  static CellRendererSpinnerGidBuilder builder()
+  static CellRendererSpinnerGidBuilder builder() nothrow
   {
     return new CellRendererSpinnerGidBuilder;
   }
 
   /** */
-  @property bool active()
+  @property bool active() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("active");
   }
 
   /** */
-  @property void active(bool propval)
+  @property void active(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("active", propval);
   }
@@ -84,7 +84,7 @@ class CellRendererSpinner : gtk.cell_renderer.CellRenderer
         By default, the [gtk.spinner.Spinner] widget draws one full cycle of the animation,
         consisting of 12 frames, in 750 milliseconds.
   */
-  @property uint pulse()
+  @property uint pulse() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("pulse");
   }
@@ -98,7 +98,7 @@ class CellRendererSpinner : gtk.cell_renderer.CellRenderer
           By default, the [gtk.spinner.Spinner] widget draws one full cycle of the animation,
           consisting of 12 frames, in 750 milliseconds.
   */
-  @property void pulse(uint propval)
+  @property void pulse(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("pulse", propval);
   }
@@ -107,7 +107,7 @@ class CellRendererSpinner : gtk.cell_renderer.CellRenderer
       Get `size` property.
       Returns: The [gtk.types.IconSize] value that specifies the size of the rendered spinner.
   */
-  @property gtk.types.IconSize size()
+  @property gtk.types.IconSize size() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.IconSize)("size");
   }
@@ -117,7 +117,7 @@ class CellRendererSpinner : gtk.cell_renderer.CellRenderer
       Params:
         propval = The [gtk.types.IconSize] value that specifies the size of the rendered spinner.
   */
-  @property void size(gtk.types.IconSize propval)
+  @property void size(gtk.types.IconSize propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.IconSize)("size", propval);
   }
@@ -127,7 +127,7 @@ class CellRendererSpinner : gtk.cell_renderer.CellRenderer
       activity.
       Returns: a new [gtk.cell_renderer.CellRenderer]
   */
-  this()
+  this() nothrow
   {
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_renderer_spinner_new();
@@ -140,7 +140,7 @@ class CellRendererSpinnerGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBu
 {
 
   /** */
-  T active(bool propval)
+  T active(bool propval) nothrow
   {
     return setProperty("active", propval);
   }
@@ -155,7 +155,7 @@ class CellRendererSpinnerGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBu
           consisting of 12 frames, in 750 milliseconds.
       Returns: Builder instance for fluent chaining
   */
-  T pulse(uint propval)
+  T pulse(uint propval) nothrow
   {
     return setProperty("pulse", propval);
   }
@@ -166,7 +166,7 @@ class CellRendererSpinnerGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBu
         propval = The [gtk.types.IconSize] value that specifies the size of the rendered spinner.
       Returns: Builder instance for fluent chaining
   */
-  T size(gtk.types.IconSize propval)
+  T size(gtk.types.IconSize propval) nothrow
   {
     return setProperty("size", propval);
   }
@@ -179,7 +179,7 @@ final class CellRendererSpinnerGidBuilder : CellRendererSpinnerGidBuilderImpl!Ce
       Create object from builder.
       Returns: New object
   */
-  CellRendererSpinner build()
+  CellRendererSpinner build() nothrow
   {
     return new CellRendererSpinner(cast(void*)createGObject(CellRendererSpinner._getGType), No.Take);
   }

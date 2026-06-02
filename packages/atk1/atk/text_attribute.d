@@ -20,7 +20,7 @@ struct TextAttribute
                  name, or #ATK_TEXT_ATTRIBUTE_INVALID if no matching text attribute
                  is found.
   */
-  static atk.types.TextAttribute forName(string name)
+  static atk.types.TextAttribute forName(string name) nothrow
   {
     AtkTextAttribute _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -36,7 +36,7 @@ struct TextAttribute
         attr = The #AtkTextAttribute whose name is required
       Returns: a string containing the name; this string should not be freed
   */
-  static string getName(atk.types.TextAttribute attr)
+  static string getName(atk.types.TextAttribute attr) nothrow
   {
     const(char)* _cretval;
     _cretval = atk_text_attribute_get_name(attr);
@@ -54,7 +54,7 @@ struct TextAttribute
         should not be freed; null is returned if there are no values
         maintained for the attr value.
   */
-  static string getValue(atk.types.TextAttribute attr, int index)
+  static string getValue(atk.types.TextAttribute attr, int index) nothrow
   {
     const(char)* _cretval;
     _cretval = atk_text_attribute_get_value(attr, index);
@@ -69,7 +69,7 @@ struct TextAttribute
         name = a name string
       Returns: an #AtkTextAttribute associated with name
   */
-  static atk.types.TextAttribute register(string name)
+  static atk.types.TextAttribute register(string name) nothrow
   {
     AtkTextAttribute _cretval;
     const(char)* _name = name.toCString(No.Alloc);

@@ -44,26 +44,26 @@ class ColorChooserWidget : gtk.box.Box, gtk.color_chooser.ColorChooser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_color_chooser_widget_get_type != &gidSymbolNotFound ? gtk_color_chooser_widget_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ColorChooserWidget self()
+  override ColorChooserWidget self() nothrow
   {
     return this;
   }
@@ -72,7 +72,7 @@ class ColorChooserWidget : gtk.box.Box, gtk.color_chooser.ColorChooser
       Get builder for [gtk.color_chooser_widget.ColorChooserWidget]
       Returns: New builder object
   */
-  static ColorChooserWidgetGidBuilder builder()
+  static ColorChooserWidgetGidBuilder builder() nothrow
   {
     return new ColorChooserWidgetGidBuilder;
   }
@@ -83,7 +83,7 @@ class ColorChooserWidget : gtk.box.Box, gtk.color_chooser.ColorChooser
         is showing the single-color editor. It can be set to switch
         the color chooser into single-color editing mode.
   */
-  @property bool showEditor()
+  @property bool showEditor() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("show-editor");
   }
@@ -95,7 +95,7 @@ class ColorChooserWidget : gtk.box.Box, gtk.color_chooser.ColorChooser
           is showing the single-color editor. It can be set to switch
           the color chooser into single-color editing mode.
   */
-  @property void showEditor(bool propval)
+  @property void showEditor(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("show-editor", propval);
   }
@@ -106,7 +106,7 @@ class ColorChooserWidget : gtk.box.Box, gtk.color_chooser.ColorChooser
       Creates a new #GtkColorChooserWidget.
       Returns: a new #GtkColorChooserWidget
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_color_chooser_widget_new();
@@ -128,7 +128,7 @@ class ColorChooserWidgetGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T, gtk.col
           the color chooser into single-color editing mode.
       Returns: Builder instance for fluent chaining
   */
-  T showEditor(bool propval)
+  T showEditor(bool propval) nothrow
   {
     return setProperty("show-editor", propval);
   }
@@ -141,7 +141,7 @@ final class ColorChooserWidgetGidBuilder : ColorChooserWidgetGidBuilderImpl!Colo
       Create object from builder.
       Returns: New object
   */
-  ColorChooserWidget build()
+  ColorChooserWidget build() nothrow
   {
     return new ColorChooserWidget(cast(void*)createGObject(ColorChooserWidget._getGType), No.Take);
   }

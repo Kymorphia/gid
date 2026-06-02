@@ -21,7 +21,7 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
         key = The name of the annotation, e.g. "org.freedesktop.DBus.Deprecated".
         value = The value of the annotation.
   */
-  this(int refCount = int.init, string key = string.init, string value = string.init)
+  this(int refCount = int.init, string key = string.init, string value = string.init) nothrow
   {
     super(gMalloc(GDBusAnnotationInfo.sizeof), Yes.Take);
     this.refCount = refCount;
@@ -30,32 +30,32 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_annotation_info_get_type != &gidSymbolNotFound ? g_dbus_annotation_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DBusAnnotationInfo self()
+  override DBusAnnotationInfo self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
       Get `refCount` field.
       Returns: The reference count or -1 if statically allocated.
   */
-  @property int refCount()
+  @property int refCount() nothrow
   {
     return (cast(GDBusAnnotationInfo*)this._cPtr).refCount;
   }
@@ -74,7 +74,7 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
       Params:
         propval = The reference count or -1 if statically allocated.
   */
-  @property void refCount(int propval)
+  @property void refCount(int propval) nothrow
   {
     (cast(GDBusAnnotationInfo*)this._cPtr).refCount = propval;
   }
@@ -83,7 +83,7 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
       Get `key` field.
       Returns: The name of the annotation, e.g. "org.freedesktop.DBus.Deprecated".
   */
-  @property string key()
+  @property string key() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GDBusAnnotationInfo*)this._cPtr).key);
   }
@@ -93,7 +93,7 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
       Params:
         propval = The name of the annotation, e.g. "org.freedesktop.DBus.Deprecated".
   */
-  @property void key(string propval)
+  @property void key(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GDBusAnnotationInfo*)this._cPtr).key);
     dToC(propval, cast(void*)&(cast(GDBusAnnotationInfo*)this._cPtr).key);
@@ -103,7 +103,7 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
       Get `value` field.
       Returns: The value of the annotation.
   */
-  @property string value()
+  @property string value() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GDBusAnnotationInfo*)this._cPtr).value);
   }
@@ -113,7 +113,7 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
       Params:
         propval = The value of the annotation.
   */
-  @property void value(string propval)
+  @property void value(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GDBusAnnotationInfo*)this._cPtr).value);
     dToC(propval, cast(void*)&(cast(GDBusAnnotationInfo*)this._cPtr).value);
@@ -129,7 +129,7 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
         name = The name of the annotation to look up.
       Returns: The value or null if not found. Do not free, it is owned by annotations.
   */
-  static string lookup(gio.dbus_annotation_info.DBusAnnotationInfo[] annotations, string name)
+  static string lookup(gio.dbus_annotation_info.DBusAnnotationInfo[] annotations, string name) nothrow
   {
     const(char)* _cretval;
     GDBusAnnotationInfo*[] _tmpannotations;

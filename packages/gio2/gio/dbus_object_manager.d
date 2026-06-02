@@ -26,7 +26,7 @@ interface DBusObjectManager
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_object_manager_get_type != &gidSymbolNotFound ? g_dbus_object_manager_get_type() : cast(GType)0;
@@ -91,7 +91,7 @@ interface DBusObjectManager
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInterfaceAdded(T)(T callback, Flag!"After" after = No.After);
+  gulong connectInterfaceAdded(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `InterfaceRemoved` signal.
@@ -115,7 +115,7 @@ interface DBusObjectManager
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInterfaceRemoved(T)(T callback, Flag!"After" after = No.After);
+  gulong connectInterfaceRemoved(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `ObjectAdded` signal.
@@ -134,7 +134,7 @@ interface DBusObjectManager
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectObjectAdded(T)(T callback, Flag!"After" after = No.After);
+  gulong connectObjectAdded(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `ObjectRemoved` signal.
@@ -153,7 +153,7 @@ interface DBusObjectManager
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectObjectRemoved(T)(T callback, Flag!"After" after = No.After);
+  gulong connectObjectRemoved(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gio.dbus_object_manager.DBusObjectManager]

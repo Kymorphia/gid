@@ -27,26 +27,26 @@ class ChangesDialog : adw.alert_dialog.AlertDialog
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_changes_dialog_get_type != &gidSymbolNotFound ? panel_changes_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ChangesDialog self()
+  override ChangesDialog self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class ChangesDialog : adw.alert_dialog.AlertDialog
       Get builder for [panel.changes_dialog.ChangesDialog]
       Returns: New builder object
   */
-  static ChangesDialogGidBuilder builder()
+  static ChangesDialogGidBuilder builder() nothrow
   {
     return new ChangesDialogGidBuilder;
   }
@@ -64,7 +64,7 @@ class ChangesDialog : adw.alert_dialog.AlertDialog
       Get `closeAfterSave` property.
       Returns: This property requests that the widget close after saving.
   */
-  @property bool closeAfterSave()
+  @property bool closeAfterSave() nothrow
   {
     return getCloseAfterSave();
   }
@@ -74,7 +74,7 @@ class ChangesDialog : adw.alert_dialog.AlertDialog
       Params:
         propval = This property requests that the widget close after saving.
   */
-  @property void closeAfterSave(bool propval)
+  @property void closeAfterSave(bool propval) nothrow
   {
     setCloseAfterSave(propval);
   }
@@ -83,7 +83,7 @@ class ChangesDialog : adw.alert_dialog.AlertDialog
       Create a new #PanelChangesDialog.
       Returns: a newly created #PanelChangesDialog
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = panel_changes_dialog_new();
@@ -91,13 +91,13 @@ class ChangesDialog : adw.alert_dialog.AlertDialog
   }
 
   /** */
-  void addDelegate(panel.save_delegate.SaveDelegate delegate_)
+  void addDelegate(panel.save_delegate.SaveDelegate delegate_) nothrow
   {
     panel_changes_dialog_add_delegate(cast(PanelChangesDialog*)this._cPtr, delegate_ ? cast(PanelSaveDelegate*)delegate_._cPtr(No.Dup) : null);
   }
 
   /** */
-  bool getCloseAfterSave()
+  bool getCloseAfterSave() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_changes_dialog_get_close_after_save(cast(PanelChangesDialog*)this._cPtr);
@@ -105,14 +105,21 @@ class ChangesDialog : adw.alert_dialog.AlertDialog
   }
 
   /** */
-  void runAsync(gtk.widget.Widget parent, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void runAsync(gtk.widget.Widget parent, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -131,7 +138,7 @@ class ChangesDialog : adw.alert_dialog.AlertDialog
   }
 
   /** */
-  void setCloseAfterSave(bool closeAfterSave)
+  void setCloseAfterSave(bool closeAfterSave) nothrow
   {
     panel_changes_dialog_set_close_after_save(cast(PanelChangesDialog*)this._cPtr, closeAfterSave);
   }
@@ -148,7 +155,7 @@ class ChangesDialogGidBuilderImpl(T) : adw.alert_dialog.AlertDialogGidBuilderImp
         propval = This property requests that the widget close after saving.
       Returns: Builder instance for fluent chaining
   */
-  T closeAfterSave(bool propval)
+  T closeAfterSave(bool propval) nothrow
   {
     return setProperty("close-after-save", propval);
   }
@@ -161,7 +168,7 @@ final class ChangesDialogGidBuilder : ChangesDialogGidBuilderImpl!ChangesDialogG
       Create object from builder.
       Returns: New object
   */
-  ChangesDialog build()
+  ChangesDialog build() nothrow
   {
     return new ChangesDialog(cast(void*)createGObject(ChangesDialog._getGType), No.Take);
   }

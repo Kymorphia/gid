@@ -20,26 +20,26 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_context_get_type != &gidSymbolNotFound ? gtk_source_completion_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CompletionContext self()
+  override CompletionContext self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
       Get builder for [gtksource.completion_context.CompletionContext]
       Returns: New builder object
   */
-  static CompletionContextGidBuilder builder()
+  static CompletionContextGidBuilder builder() nothrow
   {
     return new CompletionContextGidBuilder;
   }
@@ -57,7 +57,7 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
       Get `activation` property.
       Returns: The completion activation
   */
-  @property gtksource.types.CompletionActivation activation()
+  @property gtksource.types.CompletionActivation activation() nothrow
   {
     return getActivation();
   }
@@ -67,7 +67,7 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
       Params:
         propval = The completion activation
   */
-  @property void activation(gtksource.types.CompletionActivation propval)
+  @property void activation(gtksource.types.CompletionActivation propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtksource.types.CompletionActivation)("activation", propval);
   }
@@ -76,7 +76,7 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
       Get `completion` property.
       Returns: The #GtkSourceCompletion associated with the context.
   */
-  @property gtksource.completion.Completion completion()
+  @property gtksource.completion.Completion completion() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtksource.completion.Completion)("completion");
   }
@@ -85,7 +85,7 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
       Get `iter` property.
       Returns: The #GtkTextIter at which the completion is invoked.
   */
-  @property gtk.text_iter.TextIter iter()
+  @property gtk.text_iter.TextIter iter() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.text_iter.TextIter)("iter");
   }
@@ -95,7 +95,7 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
       Params:
         propval = The #GtkTextIter at which the completion is invoked.
   */
-  @property void iter(gtk.text_iter.TextIter propval)
+  @property void iter(gtk.text_iter.TextIter propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.text_iter.TextIter)("iter", propval);
   }
@@ -113,7 +113,7 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
         proposals = The list of proposals to add.
         finished = Whether the provider is finished adding proposals.
   */
-  void addProposals(gtksource.completion_provider.CompletionProvider provider, gtksource.completion_proposal.CompletionProposal[] proposals, bool finished)
+  void addProposals(gtksource.completion_provider.CompletionProvider provider, gtksource.completion_proposal.CompletionProposal[] proposals, bool finished) nothrow
   {
     auto _proposals = gListFromD!(gtksource.completion_proposal.CompletionProposal)(proposals);
     scope(exit) containerFree!(GList*, gtksource.completion_proposal.CompletionProposal, GidOwnership.None)(_proposals);
@@ -124,7 +124,7 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
       Get the context activation.
       Returns: The context activation.
   */
-  gtksource.types.CompletionActivation getActivation()
+  gtksource.types.CompletionActivation getActivation() nothrow
   {
     GtkSourceCompletionActivation _cretval;
     _cretval = gtk_source_completion_context_get_activation(cast(GtkSourceCompletionContext*)this._cPtr);
@@ -140,7 +140,7 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
         iter = a #GtkTextIter.
       Returns: true if iter is correctly set, false otherwise.
   */
-  bool getIter(out gtk.text_iter.TextIter iter)
+  bool getIter(out gtk.text_iter.TextIter iter) nothrow
   {
     bool _retval;
     GtkTextIter _iter;
@@ -166,13 +166,13 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCancelled(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCancelled(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.completion_context.CompletionContext)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -181,7 +181,14 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.completion_context.CompletionContext.cancelled");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -199,7 +206,7 @@ class CompletionContextGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUn
         propval = The completion activation
       Returns: Builder instance for fluent chaining
   */
-  T activation(gtksource.types.CompletionActivation propval)
+  T activation(gtksource.types.CompletionActivation propval) nothrow
   {
     return setProperty("activation", propval);
   }
@@ -210,7 +217,7 @@ class CompletionContextGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUn
         propval = The #GtkSourceCompletion associated with the context.
       Returns: Builder instance for fluent chaining
   */
-  T completion(gtksource.completion.Completion propval)
+  T completion(gtksource.completion.Completion propval) nothrow
   {
     return setProperty("completion", propval);
   }
@@ -221,7 +228,7 @@ class CompletionContextGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUn
         propval = The #GtkTextIter at which the completion is invoked.
       Returns: Builder instance for fluent chaining
   */
-  T iter(gtk.text_iter.TextIter propval)
+  T iter(gtk.text_iter.TextIter propval) nothrow
   {
     return setProperty("iter", propval);
   }
@@ -234,7 +241,7 @@ final class CompletionContextGidBuilder : CompletionContextGidBuilderImpl!Comple
       Create object from builder.
       Returns: New object
   */
-  CompletionContext build()
+  CompletionContext build() nothrow
   {
     return new CompletionContext(cast(void*)createGObject(CompletionContext._getGType), No.Take);
   }

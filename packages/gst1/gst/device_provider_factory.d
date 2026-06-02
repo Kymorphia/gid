@@ -26,26 +26,26 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_device_provider_factory_get_type != &gidSymbolNotFound ? gst_device_provider_factory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DeviceProviderFactory self()
+  override DeviceProviderFactory self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
       Get builder for [gst.device_provider_factory.DeviceProviderFactory]
       Returns: New builder object
   */
-  static DeviceProviderFactoryGidBuilder builder()
+  static DeviceProviderFactoryGidBuilder builder() nothrow
   {
     return new DeviceProviderFactoryGidBuilder;
   }
@@ -68,7 +68,7 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
       Returns: #GstDeviceProviderFactory if
         found, null otherwise
   */
-  static gst.device_provider_factory.DeviceProviderFactory find(string name)
+  static gst.device_provider_factory.DeviceProviderFactory find(string name) nothrow
   {
     GstDeviceProviderFactory* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -86,7 +86,7 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
       Returns: a #GstDeviceProvider or null
         if unable to create device provider
   */
-  static gst.device_provider.DeviceProvider getByName(string factoryname)
+  static gst.device_provider.DeviceProvider getByName(string factoryname) nothrow
   {
     GstDeviceProvider* _cretval;
     const(char)* _factoryname = factoryname.toCString(No.Alloc);
@@ -104,7 +104,7 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
       Returns: a #GList of #GstDeviceProviderFactory device providers. Use
         [gst.plugin_feature.PluginFeature.listFree] after usage.
   */
-  static gst.device_provider_factory.DeviceProviderFactory[] listGetDeviceProviders(gst.types.Rank minrank)
+  static gst.device_provider_factory.DeviceProviderFactory[] listGetDeviceProviders(gst.types.Rank minrank) nothrow
   {
     GList* _cretval;
     _cretval = gst_device_provider_factory_list_get_device_providers(minrank);
@@ -118,7 +118,7 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
       Returns: the #GstDeviceProvider or null
         if the device provider couldn't be created
   */
-  gst.device_provider.DeviceProvider get()
+  gst.device_provider.DeviceProvider get() nothrow
   {
     GstDeviceProvider* _cretval;
     _cretval = gst_device_provider_factory_get(cast(GstDeviceProviderFactory*)this._cPtr);
@@ -132,7 +132,7 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
       assured with [gst.plugin_feature.PluginFeature.load].
       Returns: the #GType for device providers managed by this factory.
   */
-  gobject.types.GType getDeviceProviderType()
+  gobject.types.GType getDeviceProviderType() nothrow
   {
     gobject.types.GType _retval;
     _retval = gst_device_provider_factory_get_device_provider_type(cast(GstDeviceProviderFactory*)this._cPtr);
@@ -147,7 +147,7 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
       Returns: the metadata with key on factory or null
         when there was no metadata with the given key.
   */
-  string getMetadata(string key)
+  string getMetadata(string key) nothrow
   {
     const(char)* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -161,7 +161,7 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
       Returns: a null-terminated array of key strings, or null when there is no
         metadata. Free with [glib.global.strfreev] when no longer needed.
   */
-  string[] getMetadataKeys()
+  string[] getMetadataKeys() nothrow
   {
     char** _cretval;
     _cretval = gst_device_provider_factory_get_metadata_keys(cast(GstDeviceProviderFactory*)this._cPtr);
@@ -188,7 +188,7 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
               if all classes are matched
       Returns: true if factory matches or if classes is null.
   */
-  bool hasClasses(string classes = null)
+  bool hasClasses(string classes = null) nothrow
   {
     bool _retval;
     const(char)* _classes = classes.toCString(No.Alloc);
@@ -204,7 +204,7 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
             of classes to match, only match if all classes are matched
       Returns: true if factory matches.
   */
-  bool hasClassesv(string[] classes = null)
+  bool hasClassesv(string[] classes = null) nothrow
   {
     bool _retval;
     char*[] _tmpclasses;
@@ -230,7 +230,7 @@ final class DeviceProviderFactoryGidBuilder : DeviceProviderFactoryGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  DeviceProviderFactory build()
+  DeviceProviderFactory build() nothrow
   {
     return new DeviceProviderFactory(cast(void*)createGObject(DeviceProviderFactory._getGType), No.Take);
   }

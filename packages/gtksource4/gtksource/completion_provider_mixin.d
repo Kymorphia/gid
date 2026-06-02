@@ -39,7 +39,7 @@ template CompletionProviderT()
       Returns: true to indicate that the proposal activation has been handled,
                  false otherwise.
   */
-  override bool activateProposal(gtksource.completion_proposal.CompletionProposal proposal, gtk.text_iter.TextIter iter)
+  override bool activateProposal(gtksource.completion_proposal.CompletionProposal proposal, gtk.text_iter.TextIter iter) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_completion_provider_activate_proposal(cast(GtkSourceCompletionProvider*)this._cPtr, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
@@ -50,7 +50,7 @@ template CompletionProviderT()
       Get with what kind of activation the provider should be activated.
       Returns: a combination of #GtkSourceCompletionActivation.
   */
-  override gtksource.types.CompletionActivation getActivation()
+  override gtksource.types.CompletionActivation getActivation() nothrow
   {
     GtkSourceCompletionActivation _cretval;
     _cretval = gtk_source_completion_provider_get_activation(cast(GtkSourceCompletionProvider*)this._cPtr);
@@ -63,7 +63,7 @@ template CompletionProviderT()
       Returns: The icon to be used for the provider,
                  or null if the provider does not have a special icon.
   */
-  override gio.icon.Icon getGicon()
+  override gio.icon.Icon getGicon() nothrow
   {
     GIcon* _cretval;
     _cretval = gtk_source_completion_provider_get_gicon(cast(GtkSourceCompletionProvider*)this._cPtr);
@@ -76,7 +76,7 @@ template CompletionProviderT()
       Returns: The icon to be used for the provider,
                  or null if the provider does not have a special icon.
   */
-  override gdkpixbuf.pixbuf.Pixbuf getIcon()
+  override gdkpixbuf.pixbuf.Pixbuf getIcon() nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gtk_source_completion_provider_get_icon(cast(GtkSourceCompletionProvider*)this._cPtr);
@@ -89,7 +89,7 @@ template CompletionProviderT()
       Returns: The icon name to be used for the provider,
                  or null if the provider does not have a special icon.
   */
-  override string getIconName()
+  override string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_completion_provider_get_icon_name(cast(GtkSourceCompletionProvider*)this._cPtr);
@@ -120,7 +120,7 @@ template CompletionProviderT()
         information about proposal, or null if the provider does not have a special
         info widget.
   */
-  override gtk.widget.Widget getInfoWidget(gtksource.completion_proposal.CompletionProposal proposal)
+  override gtk.widget.Widget getInfoWidget(gtksource.completion_proposal.CompletionProposal proposal) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_source_completion_provider_get_info_widget(cast(GtkSourceCompletionProvider*)this._cPtr, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null);
@@ -134,7 +134,7 @@ template CompletionProviderT()
       by the #GtkSourceCompletion:auto-complete-delay property.
       Returns: the interactive delay in milliseconds.
   */
-  override int getInteractiveDelay()
+  override int getInteractiveDelay() nothrow
   {
     int _retval;
     _retval = gtk_source_completion_provider_get_interactive_delay(cast(GtkSourceCompletionProvider*)this._cPtr);
@@ -147,7 +147,7 @@ template CompletionProviderT()
       returned string must be freed with [glib.global.gfree].
       Returns: a new string containing the name of the provider.
   */
-  override string getName()
+  override string getName() nothrow
   {
     char* _cretval;
     _cretval = gtk_source_completion_provider_get_name(cast(GtkSourceCompletionProvider*)this._cPtr);
@@ -161,7 +161,7 @@ template CompletionProviderT()
       before lower priorities. The default priority is 0.
       Returns: the provider priority.
   */
-  override int getPriority()
+  override int getPriority() nothrow
   {
     int _retval;
     _retval = gtk_source_completion_provider_get_priority(cast(GtkSourceCompletionProvider*)this._cPtr);
@@ -188,7 +188,7 @@ template CompletionProviderT()
         iter = a #GtkTextIter.
       Returns: true if iter was set for proposal, false otherwise.
   */
-  override bool getStartIter(gtksource.completion_context.CompletionContext context, gtksource.completion_proposal.CompletionProposal proposal, out gtk.text_iter.TextIter iter)
+  override bool getStartIter(gtksource.completion_context.CompletionContext context, gtksource.completion_proposal.CompletionProposal proposal, out gtk.text_iter.TextIter iter) nothrow
   {
     bool _retval;
     GtkTextIter _iter;
@@ -205,7 +205,7 @@ template CompletionProviderT()
         context = a #GtkSourceCompletionContext.
       Returns: true if provider matches the completion context, false otherwise.
   */
-  override bool match(gtksource.completion_context.CompletionContext context)
+  override bool match(gtksource.completion_context.CompletionContext context) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_completion_provider_match(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null);
@@ -219,7 +219,7 @@ template CompletionProviderT()
       Params:
         context = a #GtkSourceCompletionContext.
   */
-  override void populate(gtksource.completion_context.CompletionContext context)
+  override void populate(gtksource.completion_context.CompletionContext context) nothrow
   {
     gtk_source_completion_provider_populate(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null);
   }
@@ -238,7 +238,7 @@ template CompletionProviderT()
         proposal = a #GtkSourceCompletionProposal.
         info = a #GtkSourceCompletionInfo.
   */
-  override void updateInfo(gtksource.completion_proposal.CompletionProposal proposal, gtksource.completion_info.CompletionInfo info)
+  override void updateInfo(gtksource.completion_proposal.CompletionProposal proposal, gtksource.completion_info.CompletionInfo info) nothrow
   {
     gtk_source_completion_provider_update_info(cast(GtkSourceCompletionProvider*)this._cPtr, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null, info ? cast(GtkSourceCompletionInfo*)info._cPtr(No.Dup) : null);
   }

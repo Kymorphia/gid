@@ -87,26 +87,26 @@ class Pad : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_pad_get_type != &gidSymbolNotFound ? gst_pad_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Pad self()
+  override Pad self() nothrow
   {
     return this;
   }
@@ -115,19 +115,19 @@ class Pad : gst.object.ObjectWrap
       Get builder for [gst.pad.Pad]
       Returns: New builder object
   */
-  static PadGidBuilder builder()
+  static PadGidBuilder builder() nothrow
   {
     return new PadGidBuilder;
   }
 
   /** */
-  @property gst.caps.Caps caps()
+  @property gst.caps.Caps caps() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gst.caps.Caps)("caps");
   }
 
   /** */
-  @property gst.types.PadDirection direction()
+  @property gst.types.PadDirection direction() nothrow
   {
     return getDirection();
   }
@@ -136,7 +136,7 @@ class Pad : gst.object.ObjectWrap
       Get `offset` property.
       Returns: The offset that will be applied to the running time of the pad.
   */
-  @property long offset()
+  @property long offset() nothrow
   {
     return getOffset();
   }
@@ -146,19 +146,19 @@ class Pad : gst.object.ObjectWrap
       Params:
         propval = The offset that will be applied to the running time of the pad.
   */
-  @property void offset(long propval)
+  @property void offset(long propval) nothrow
   {
     setOffset(propval);
   }
 
   /** */
-  @property gst.pad_template.PadTemplate template_()
+  @property gst.pad_template.PadTemplate template_() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gst.pad_template.PadTemplate)("template");
   }
 
   /** */
-  @property void template_(gst.pad_template.PadTemplate propval)
+  @property void template_(gst.pad_template.PadTemplate propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gst.pad_template.PadTemplate)("template", propval);
   }
@@ -176,7 +176,7 @@ class Pad : gst.object.ObjectWrap
         
         MT safe.
   */
-  this(string name, gst.types.PadDirection direction)
+  this(string name, gst.types.PadDirection direction) nothrow
   {
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -195,7 +195,7 @@ class Pad : gst.object.ObjectWrap
         name = the name of the pad
       Returns: a new #GstPad.
   */
-  static gst.pad.Pad newFromStaticTemplate(gst.static_pad_template.StaticPadTemplate templ, string name)
+  static gst.pad.Pad newFromStaticTemplate(gst.static_pad_template.StaticPadTemplate templ, string name) nothrow
   {
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -215,7 +215,7 @@ class Pad : gst.object.ObjectWrap
         name = the name of the pad
       Returns: a new #GstPad.
   */
-  static gst.pad.Pad newFromTemplate(gst.pad_template.PadTemplate templ, string name = null)
+  static gst.pad.Pad newFromTemplate(gst.pad_template.PadTemplate templ, string name = null) nothrow
   {
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -231,7 +231,7 @@ class Pad : gst.object.ObjectWrap
         ret = a #GstPadLinkReturn to get the name of.
       Returns: a static string with the name of the pad-link return.
   */
-  static string linkGetName(gst.types.PadLinkReturn ret)
+  static string linkGetName(gst.types.PadLinkReturn ret) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_pad_link_get_name(ret);
@@ -252,7 +252,7 @@ class Pad : gst.object.ObjectWrap
         
         MT safe.
   */
-  bool activateMode(gst.types.PadMode mode, bool active)
+  bool activateMode(gst.types.PadMode mode, bool active) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_activate_mode(cast(GstPad*)this._cPtr, mode, active);
@@ -281,14 +281,21 @@ class Pad : gst.object.ObjectWrap
         
         MT safe.
   */
-  gulong addProbe(gst.types.PadProbeType mask, gst.types.PadProbeCallback callback)
+  gulong addProbe(gst.types.PadProbeType mask, gst.types.PadProbeCallback callback) nothrow
   {
-    extern(C) GstPadProbeReturn _callbackCallback(GstPad* pad, GstPadProbeInfo* info, void* userData)
+    extern(C) GstPadProbeReturn _callbackCallback(GstPad* pad, GstPadProbeInfo* info, void* userData) nothrow
     {
       gst.types.PadProbeReturn _dretval;
       auto _dlg = cast(gst.types.PadProbeCallback*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), info ? new gst.pad_probe_info.PadProbeInfo(cast(void*)info, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), info ? new gst.pad_probe_info.PadProbeInfo(cast(void*)info, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PadProbeCallback");
+      }
       auto _retval = cast(GstPadProbeReturn)_dretval;
 
       return _retval;
@@ -309,7 +316,7 @@ class Pad : gst.object.ObjectWrap
         sinkpad = the sink #GstPad.
       Returns: true if the pads can be linked.
   */
-  bool canLink(gst.pad.Pad sinkpad)
+  bool canLink(gst.pad.Pad sinkpad) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_can_link(cast(GstPad*)this._cPtr, sinkpad ? cast(GstPad*)sinkpad._cPtr(No.Dup) : null);
@@ -340,7 +347,7 @@ class Pad : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.types.FlowReturn chain(gst.buffer.Buffer buffer)
+  gst.types.FlowReturn chain(gst.buffer.Buffer buffer) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_pad_chain(cast(GstPad*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null);
@@ -371,7 +378,7 @@ class Pad : gst.object.ObjectWrap
               if not.
       Returns: a #GstFlowReturn from the pad.
   */
-  gst.types.FlowReturn chainList(gst.buffer_list.BufferList list)
+  gst.types.FlowReturn chainList(gst.buffer_list.BufferList list) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_pad_chain_list(cast(GstPad*)this._cPtr, list ? cast(GstBufferList*)list._cPtr(Yes.Dup) : null);
@@ -384,7 +391,7 @@ class Pad : gst.object.ObjectWrap
       if the flag was set.
       Returns: true is the GST_PAD_FLAG_NEED_RECONFIGURE flag was set on pad.
   */
-  bool checkReconfigure()
+  bool checkReconfigure() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_check_reconfigure(cast(GstPad*)this._cPtr);
@@ -415,7 +422,7 @@ class Pad : gst.object.ObjectWrap
         streamId = The stream-id
       Returns: A stream-id for pad. [glib.global.gfree] after usage.
   */
-  string createStreamId(gst.element.Element parent, string streamId = null)
+  string createStreamId(gst.element.Element parent, string streamId = null) nothrow
   {
     char* _cretval;
     const(char)* _streamId = streamId.toCString(No.Alloc);
@@ -438,7 +445,7 @@ class Pad : gst.object.ObjectWrap
         event = the #GstEvent to handle.
       Returns: true if the event was sent successfully.
   */
-  bool eventDefault(gst.object.ObjectWrap parent, gst.event.Event event)
+  bool eventDefault(gst.object.ObjectWrap parent, gst.event.Event event) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_event_default(cast(GstPad*)this._cPtr, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
@@ -456,14 +463,21 @@ class Pad : gst.object.ObjectWrap
         forward = a #GstPadForwardFunction
       Returns: true if one of the dispatcher functions returned true.
   */
-  bool forward(gst.types.PadForwardFunction forward)
+  bool forward(gst.types.PadForwardFunction forward) nothrow
   {
-    extern(C) gboolean _forwardCallback(GstPad* pad, void* userData)
+    extern(C) gboolean _forwardCallback(GstPad* pad, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gst.types.PadForwardFunction*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PadForwardFunction");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -488,7 +502,7 @@ class Pad : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.caps.Caps getAllowedCaps()
+  gst.caps.Caps getAllowedCaps() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_pad_get_allowed_caps(cast(GstPad*)this._cPtr);
@@ -502,7 +516,7 @@ class Pad : gst.object.ObjectWrap
       Returns: the current caps of the pad with
         incremented ref-count or null when pad has no caps. Unref after usage.
   */
-  gst.caps.Caps getCurrentCaps()
+  gst.caps.Caps getCurrentCaps() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_pad_get_current_caps(cast(GstPad*)this._cPtr);
@@ -518,7 +532,7 @@ class Pad : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.types.PadDirection getDirection()
+  gst.types.PadDirection getDirection() nothrow
   {
     GstPadDirection _cretval;
     _cretval = gst_pad_get_direction(cast(GstPad*)this._cPtr);
@@ -531,7 +545,7 @@ class Pad : gst.object.ObjectWrap
       No locking is performed in this function.
       Returns: a #gpointer to the private data.
   */
-  void* getElementPrivate()
+  void* getElementPrivate() nothrow
   {
     auto _retval = gst_pad_get_element_private(cast(GstPad*)this._cPtr);
     return _retval;
@@ -541,7 +555,7 @@ class Pad : gst.object.ObjectWrap
       Gets the #GstFlowReturn return from the last data passed by this pad.
       Returns: 
   */
-  gst.types.FlowReturn getLastFlowReturn()
+  gst.types.FlowReturn getLastFlowReturn() nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_pad_get_last_flow_return(cast(GstPad*)this._cPtr);
@@ -554,7 +568,7 @@ class Pad : gst.object.ObjectWrap
       pad.
       Returns: the offset.
   */
-  long getOffset()
+  long getOffset() nothrow
   {
     long _retval;
     _retval = gst_pad_get_offset(cast(GstPad*)this._cPtr);
@@ -567,7 +581,7 @@ class Pad : gst.object.ObjectWrap
             this pad was instantiated, or null if this pad has no
             template. Unref after usage.
   */
-  gst.pad_template.PadTemplate getPadTemplate()
+  gst.pad_template.PadTemplate getPadTemplate() nothrow
   {
     GstPadTemplate* _cretval;
     _cretval = gst_pad_get_pad_template(cast(GstPad*)this._cPtr);
@@ -580,7 +594,7 @@ class Pad : gst.object.ObjectWrap
       Returns: the #GstCaps of this pad template.
         Unref after usage.
   */
-  gst.caps.Caps getPadTemplateCaps()
+  gst.caps.Caps getPadTemplateCaps() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_pad_get_pad_template_caps(cast(GstPad*)this._cPtr);
@@ -597,7 +611,7 @@ class Pad : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.element.Element getParentElement()
+  gst.element.Element getParentElement() nothrow
   {
     GstElement* _cretval;
     _cretval = gst_pad_get_parent_element(cast(GstPad*)this._cPtr);
@@ -612,7 +626,7 @@ class Pad : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.pad.Pad getPeer()
+  gst.pad.Pad getPeer() nothrow
   {
     GstPad* _cretval;
     _cretval = gst_pad_get_peer(cast(GstPad*)this._cPtr);
@@ -657,7 +671,7 @@ class Pad : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.types.FlowReturn getRange(ulong offset, uint size, out gst.buffer.Buffer buffer)
+  gst.types.FlowReturn getRange(ulong offset, uint size, out gst.buffer.Buffer buffer) nothrow
   {
     GstFlowReturn _cretval;
     GstBuffer* _buffer;
@@ -674,7 +688,7 @@ class Pad : gst.object.ObjectWrap
         or more than one internal links. Unref returned pad with
         [gst.object.ObjectWrap.unref].
   */
-  gst.pad.Pad getSingleInternalLink()
+  gst.pad.Pad getSingleInternalLink() nothrow
   {
     GstPad* _cretval;
     _cretval = gst_pad_get_single_internal_link(cast(GstPad*)this._cPtr);
@@ -693,7 +707,7 @@ class Pad : gst.object.ObjectWrap
         event_type or null when no event of event_type was on
         pad. Unref after usage.
   */
-  gst.event.Event getStickyEvent(gst.types.EventType eventType, uint idx)
+  gst.event.Event getStickyEvent(gst.types.EventType eventType, uint idx) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_pad_get_sticky_event(cast(GstPad*)this._cPtr, eventType, idx);
@@ -710,7 +724,7 @@ class Pad : gst.object.ObjectWrap
       Returns: the current #GstStream for pad, or null.
             unref the returned stream when no longer needed.
   */
-  gst.stream.Stream getStream()
+  gst.stream.Stream getStream() nothrow
   {
     GstStream* _cretval;
     _cretval = gst_pad_get_stream(cast(GstPad*)this._cPtr);
@@ -731,7 +745,7 @@ class Pad : gst.object.ObjectWrap
             pad, or null.  [glib.global.gfree] the returned string when no longer
             needed.
   */
-  string getStreamId()
+  string getStreamId() nothrow
   {
     char* _cretval;
     _cretval = gst_pad_get_stream_id(cast(GstPad*)this._cPtr);
@@ -744,7 +758,7 @@ class Pad : gst.object.ObjectWrap
       set, #GST_TASK_STOPPED is returned.
       Returns: The current state of pad's task.
   */
-  gst.types.TaskState getTaskState()
+  gst.types.TaskState getTaskState() nothrow
   {
     GstTaskState _cretval;
     _cretval = gst_pad_get_task_state(cast(GstPad*)this._cPtr);
@@ -756,7 +770,7 @@ class Pad : gst.object.ObjectWrap
       Check if pad has caps set on it with a #GST_EVENT_CAPS event.
       Returns: true when pad has caps associated with it.
   */
-  bool hasCurrentCaps()
+  bool hasCurrentCaps() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_has_current_caps(cast(GstPad*)this._cPtr);
@@ -769,7 +783,7 @@ class Pad : gst.object.ObjectWrap
         
         MT safe.
   */
-  bool isActive()
+  bool isActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_is_active(cast(GstPad*)this._cPtr);
@@ -784,7 +798,7 @@ class Pad : gst.object.ObjectWrap
         
         MT safe.
   */
-  bool isBlocked()
+  bool isBlocked() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_is_blocked(cast(GstPad*)this._cPtr);
@@ -798,7 +812,7 @@ class Pad : gst.object.ObjectWrap
         
         MT safe.
   */
-  bool isBlocking()
+  bool isBlocking() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_is_blocking(cast(GstPad*)this._cPtr);
@@ -811,7 +825,7 @@ class Pad : gst.object.ObjectWrap
         
         MT safe.
   */
-  bool isLinked()
+  bool isLinked() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_is_linked(cast(GstPad*)this._cPtr);
@@ -830,7 +844,7 @@ class Pad : gst.object.ObjectWrap
             or null when the pad does not have an iterator function
             configured. Use [gst.iterator.Iterator.free] after usage.
   */
-  gst.iterator.Iterator iterateInternalLinks()
+  gst.iterator.Iterator iterateInternalLinks() nothrow
   {
     GstIterator* _cretval;
     _cretval = gst_pad_iterate_internal_links(cast(GstPad*)this._cPtr);
@@ -851,7 +865,7 @@ class Pad : gst.object.ObjectWrap
       Returns: a #GstIterator of #GstPad, or null if pad
         has no parent. Unref each returned pad with [gst.object.ObjectWrap.unref].
   */
-  gst.iterator.Iterator iterateInternalLinksDefault(gst.object.ObjectWrap parent = null)
+  gst.iterator.Iterator iterateInternalLinksDefault(gst.object.ObjectWrap parent = null) nothrow
   {
     GstIterator* _cretval;
     _cretval = gst_pad_iterate_internal_links_default(cast(GstPad*)this._cPtr, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null);
@@ -869,7 +883,7 @@ class Pad : gst.object.ObjectWrap
         
         MT Safe.
   */
-  gst.types.PadLinkReturn link(gst.pad.Pad sinkpad)
+  gst.types.PadLinkReturn link(gst.pad.Pad sinkpad) nothrow
   {
     GstPadLinkReturn _cretval;
     _cretval = gst_pad_link(cast(GstPad*)this._cPtr, sinkpad ? cast(GstPad*)sinkpad._cPtr(No.Dup) : null);
@@ -894,7 +908,7 @@ class Pad : gst.object.ObjectWrap
       Returns: A result code indicating if the connection worked or
                  what went wrong.
   */
-  gst.types.PadLinkReturn linkFull(gst.pad.Pad sinkpad, gst.types.PadLinkCheck flags)
+  gst.types.PadLinkReturn linkFull(gst.pad.Pad sinkpad, gst.types.PadLinkCheck flags) nothrow
   {
     GstPadLinkReturn _cretval;
     _cretval = gst_pad_link_full(cast(GstPad*)this._cPtr, sinkpad ? cast(GstPad*)sinkpad._cPtr(No.Dup) : null, flags);
@@ -915,7 +929,7 @@ class Pad : gst.object.ObjectWrap
         sink = a #GstPad
       Returns: whether the link succeeded.
   */
-  bool linkMaybeGhosting(gst.pad.Pad sink)
+  bool linkMaybeGhosting(gst.pad.Pad sink) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_link_maybe_ghosting(cast(GstPad*)this._cPtr, sink ? cast(GstPad*)sink._cPtr(No.Dup) : null);
@@ -940,7 +954,7 @@ class Pad : gst.object.ObjectWrap
         flags = some #GstPadLinkCheck flags
       Returns: whether the link succeeded.
   */
-  bool linkMaybeGhostingFull(gst.pad.Pad sink, gst.types.PadLinkCheck flags)
+  bool linkMaybeGhostingFull(gst.pad.Pad sink, gst.types.PadLinkCheck flags) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_link_maybe_ghosting_full(cast(GstPad*)this._cPtr, sink ? cast(GstPad*)sink._cPtr(No.Dup) : null, flags);
@@ -951,7 +965,7 @@ class Pad : gst.object.ObjectWrap
       Mark a pad for needing reconfiguration. The next call to
       [gst.pad.Pad.checkReconfigure] will return true after this call.
   */
-  void markReconfigure()
+  void markReconfigure() nothrow
   {
     gst_pad_mark_reconfigure(cast(GstPad*)this._cPtr);
   }
@@ -961,7 +975,7 @@ class Pad : gst.object.ObjectWrap
       if the flag was set.
       Returns: true is the GST_PAD_FLAG_NEED_RECONFIGURE flag is set on pad.
   */
-  bool needsReconfigure()
+  bool needsReconfigure() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_needs_reconfigure(cast(GstPad*)this._cPtr);
@@ -975,7 +989,7 @@ class Pad : gst.object.ObjectWrap
       Returns: a true if the task could be paused or false when the pad
         has no task.
   */
-  bool pauseTask()
+  bool pauseTask() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_pause_task(cast(GstPad*)this._cPtr);
@@ -993,7 +1007,7 @@ class Pad : gst.object.ObjectWrap
       Returns: true if the query could be performed. This function returns false
         if pad has no peer.
   */
-  bool peerQuery(gst.query.Query query)
+  bool peerQuery(gst.query.Query query) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_peer_query(cast(GstPad*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
@@ -1008,7 +1022,7 @@ class Pad : gst.object.ObjectWrap
         caps = a #GstCaps to check on the pad
       Returns: true if the peer of pad can accept the caps or pad has no peer.
   */
-  bool peerQueryAcceptCaps(gst.caps.Caps caps)
+  bool peerQueryAcceptCaps(gst.caps.Caps caps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_peer_query_accept_caps(cast(GstPad*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
@@ -1031,7 +1045,7 @@ class Pad : gst.object.ObjectWrap
         ref-count. When there is no peer pad, this function returns filter or,
         when filter is null, ANY caps.
   */
-  gst.caps.Caps peerQueryCaps(gst.caps.Caps filter = null)
+  gst.caps.Caps peerQueryCaps(gst.caps.Caps filter = null) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_pad_peer_query_caps(cast(GstPad*)this._cPtr, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
@@ -1050,7 +1064,7 @@ class Pad : gst.object.ObjectWrap
         destVal = a pointer to the result.
       Returns: true if the query could be performed.
   */
-  bool peerQueryConvert(gst.types.Format srcFormat, long srcVal, gst.types.Format destFormat, out long destVal)
+  bool peerQueryConvert(gst.types.Format srcFormat, long srcVal, gst.types.Format destFormat, out long destVal) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_peer_query_convert(cast(GstPad*)this._cPtr, srcFormat, srcVal, destFormat, cast(long*)&destVal);
@@ -1066,7 +1080,7 @@ class Pad : gst.object.ObjectWrap
               duration, or null.
       Returns: true if the query could be performed.
   */
-  bool peerQueryDuration(gst.types.Format format, out long duration)
+  bool peerQueryDuration(gst.types.Format format, out long duration) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_peer_query_duration(cast(GstPad*)this._cPtr, format, cast(long*)&duration);
@@ -1082,7 +1096,7 @@ class Pad : gst.object.ObjectWrap
               position, or null.
       Returns: true if the query could be performed.
   */
-  bool peerQueryPosition(gst.types.Format format, out long cur)
+  bool peerQueryPosition(gst.types.Format format, out long cur) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_peer_query_position(cast(GstPad*)this._cPtr, format, cast(long*)&cur);
@@ -1101,7 +1115,7 @@ class Pad : gst.object.ObjectWrap
         query = an ACCEPT_CAPS #GstQuery.
       Returns: true if query could be executed
   */
-  bool proxyQueryAcceptCaps(gst.query.Query query)
+  bool proxyQueryAcceptCaps(gst.query.Query query) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_proxy_query_accept_caps(cast(GstPad*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
@@ -1120,7 +1134,7 @@ class Pad : gst.object.ObjectWrap
         query = a CAPS #GstQuery.
       Returns: true if query could be executed
   */
-  bool proxyQueryCaps(gst.query.Query query)
+  bool proxyQueryCaps(gst.query.Query query) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_proxy_query_caps(cast(GstPad*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
@@ -1163,7 +1177,7 @@ class Pad : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.types.FlowReturn pullRange(ulong offset, uint size, out gst.buffer.Buffer buffer)
+  gst.types.FlowReturn pullRange(ulong offset, uint size, out gst.buffer.Buffer buffer) nothrow
   {
     GstFlowReturn _cretval;
     GstBuffer* _buffer;
@@ -1193,7 +1207,7 @@ class Pad : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.types.FlowReturn push(gst.buffer.Buffer buffer)
+  gst.types.FlowReturn push(gst.buffer.Buffer buffer) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_pad_push(cast(GstPad*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null);
@@ -1215,7 +1229,7 @@ class Pad : gst.object.ObjectWrap
         
         MT safe.
   */
-  bool pushEvent(gst.event.Event event)
+  bool pushEvent(gst.event.Event event) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_push_event(cast(GstPad*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
@@ -1244,7 +1258,7 @@ class Pad : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.types.FlowReturn pushList(gst.buffer_list.BufferList list)
+  gst.types.FlowReturn pushList(gst.buffer_list.BufferList list) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_pad_push_list(cast(GstPad*)this._cPtr, list ? cast(GstBufferList*)list._cPtr(Yes.Dup) : null);
@@ -1268,7 +1282,7 @@ class Pad : gst.object.ObjectWrap
         query = the #GstQuery to perform.
       Returns: true if the query could be performed.
   */
-  bool query(gst.query.Query query)
+  bool query(gst.query.Query query) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_query(cast(GstPad*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
@@ -1282,7 +1296,7 @@ class Pad : gst.object.ObjectWrap
         caps = a #GstCaps to check on the pad
       Returns: true if the pad can accept the caps.
   */
-  bool queryAcceptCaps(gst.caps.Caps caps)
+  bool queryAcceptCaps(gst.caps.Caps caps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_query_accept_caps(cast(GstPad*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
@@ -1310,7 +1324,7 @@ class Pad : gst.object.ObjectWrap
         filter = suggested #GstCaps, or null
       Returns: the caps of the pad with incremented ref-count.
   */
-  gst.caps.Caps queryCaps(gst.caps.Caps filter = null)
+  gst.caps.Caps queryCaps(gst.caps.Caps filter = null) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_pad_query_caps(cast(GstPad*)this._cPtr, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
@@ -1328,7 +1342,7 @@ class Pad : gst.object.ObjectWrap
         destVal = a pointer to the result.
       Returns: true if the query could be performed.
   */
-  bool queryConvert(gst.types.Format srcFormat, long srcVal, gst.types.Format destFormat, out long destVal)
+  bool queryConvert(gst.types.Format srcFormat, long srcVal, gst.types.Format destFormat, out long destVal) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_query_convert(cast(GstPad*)this._cPtr, srcFormat, srcVal, destFormat, cast(long*)&destVal);
@@ -1347,7 +1361,7 @@ class Pad : gst.object.ObjectWrap
         query = the #GstQuery to handle.
       Returns: true if the query was performed successfully.
   */
-  bool queryDefault(gst.object.ObjectWrap parent, gst.query.Query query)
+  bool queryDefault(gst.object.ObjectWrap parent, gst.query.Query query) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_query_default(cast(GstPad*)this._cPtr, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
@@ -1363,7 +1377,7 @@ class Pad : gst.object.ObjectWrap
               duration, or null.
       Returns: true if the query could be performed.
   */
-  bool queryDuration(gst.types.Format format, out long duration)
+  bool queryDuration(gst.types.Format format, out long duration) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_query_duration(cast(GstPad*)this._cPtr, format, cast(long*)&duration);
@@ -1378,7 +1392,7 @@ class Pad : gst.object.ObjectWrap
         cur = A location in which to store the current position, or null.
       Returns: true if the query could be performed.
   */
-  bool queryPosition(gst.types.Format format, out long cur)
+  bool queryPosition(gst.types.Format format, out long cur) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_query_position(cast(GstPad*)this._cPtr, format, cast(long*)&cur);
@@ -1393,7 +1407,7 @@ class Pad : gst.object.ObjectWrap
       Params:
         id = the probe id to remove
   */
-  void removeProbe(gulong id)
+  void removeProbe(gulong id) nothrow
   {
     gst_pad_remove_probe(cast(GstPad*)this._cPtr, id);
   }
@@ -1424,7 +1438,7 @@ class Pad : gst.object.ObjectWrap
         event = the #GstEvent to send to the pad.
       Returns: true if the event was handled.
   */
-  bool sendEvent(gst.event.Event event)
+  bool sendEvent(gst.event.Event event) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_send_event(cast(GstPad*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
@@ -1448,7 +1462,7 @@ class Pad : gst.object.ObjectWrap
         
         MT safe.
   */
-  bool setActive(bool active)
+  bool setActive(bool active) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_set_active(cast(GstPad*)this._cPtr, active);
@@ -1463,7 +1477,7 @@ class Pad : gst.object.ObjectWrap
       Params:
         priv = The private data to attach to the pad.
   */
-  void setElementPrivate(void* priv = null)
+  void setElementPrivate(void* priv = null) nothrow
   {
     gst_pad_set_element_private(cast(GstPad*)this._cPtr, priv);
   }
@@ -1474,7 +1488,7 @@ class Pad : gst.object.ObjectWrap
       Params:
         offset = the offset
   */
-  void setOffset(long offset)
+  void setOffset(long offset) nothrow
   {
     gst_pad_set_offset(cast(GstPad*)this._cPtr, offset);
   }
@@ -1489,13 +1503,20 @@ class Pad : gst.object.ObjectWrap
         func = the task function to call
       Returns: a true if the task could be started.
   */
-  bool startTask(gst.types.TaskFunction func)
+  bool startTask(gst.types.TaskFunction func) nothrow
   {
-    extern(C) void _funcCallback(void* userData)
+    extern(C) void _funcCallback(void* userData) nothrow
     {
       auto _dlg = cast(gst.types.TaskFunction*)userData;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.TaskFunction");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     bool _retval;
@@ -1513,14 +1534,21 @@ class Pad : gst.object.ObjectWrap
         foreachFunc = the #GstPadStickyEventsForeachFunction that
                          should be called for every event.
   */
-  void stickyEventsForeach(gst.types.PadStickyEventsForeachFunction foreachFunc)
+  void stickyEventsForeach(gst.types.PadStickyEventsForeachFunction foreachFunc) nothrow
   {
-    extern(C) gboolean _foreachFuncCallback(GstPad* pad, GstEvent** event, void* userData)
+    extern(C) gboolean _foreachFuncCallback(GstPad* pad, GstEvent** event, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gst.types.PadStickyEventsForeachFunction*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), event ? new gst.event.Event(cast(void*)event, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), event ? new gst.event.Event(cast(void*)event, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PadStickyEventsForeachFunction");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -1542,7 +1570,7 @@ class Pad : gst.object.ObjectWrap
       released so as to ensure that streaming through this pad has finished.
       Returns: a true if the task could be stopped or false on error.
   */
-  bool stopTask()
+  bool stopTask() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_stop_task(cast(GstPad*)this._cPtr);
@@ -1557,7 +1585,7 @@ class Pad : gst.object.ObjectWrap
       Returns: #GST_FLOW_OK on success, #GST_FLOW_FLUSHING when the pad
         was flushing or #GST_FLOW_EOS when the pad was EOS.
   */
-  gst.types.FlowReturn storeStickyEvent(gst.event.Event event)
+  gst.types.FlowReturn storeStickyEvent(gst.event.Event event) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_pad_store_sticky_event(cast(GstPad*)this._cPtr, event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
@@ -1576,7 +1604,7 @@ class Pad : gst.object.ObjectWrap
         
         MT safe.
   */
-  bool unlink(gst.pad.Pad sinkpad)
+  bool unlink(gst.pad.Pad sinkpad) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pad_unlink(cast(GstPad*)this._cPtr, sinkpad ? cast(GstPad*)sinkpad._cPtr(No.Dup) : null);
@@ -1592,7 +1620,7 @@ class Pad : gst.object.ObjectWrap
       pad. Use this function on a pad that, once it negotiated to a CAPS, cannot
       be renegotiated to something else.
   */
-  void useFixedCaps()
+  void useFixedCaps() nothrow
   {
     gst_pad_use_fixed_caps(cast(GstPad*)this._cPtr);
   }
@@ -1614,14 +1642,14 @@ class Pad : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLinked(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLinked(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.pad.Pad)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gst.pad.Pad)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1633,7 +1661,14 @@ class Pad : gst.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.pad.Pad.linked");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1657,14 +1692,14 @@ class Pad : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUnlinked(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUnlinked(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.pad.Pad)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gst.pad.Pad)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1676,7 +1711,14 @@ class Pad : gst.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.pad.Pad.unlinked");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1689,7 +1731,7 @@ class PadGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T direction(gst.types.PadDirection propval)
+  T direction(gst.types.PadDirection propval) nothrow
   {
     return setProperty("direction", propval);
   }
@@ -1700,13 +1742,13 @@ class PadGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
         propval = The offset that will be applied to the running time of the pad.
       Returns: Builder instance for fluent chaining
   */
-  T offset(long propval)
+  T offset(long propval) nothrow
   {
     return setProperty("offset", propval);
   }
 
   /** */
-  T template_(gst.pad_template.PadTemplate propval)
+  T template_(gst.pad_template.PadTemplate propval) nothrow
   {
     return setProperty("template", propval);
   }
@@ -1719,7 +1761,7 @@ final class PadGidBuilder : PadGidBuilderImpl!PadGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Pad build()
+  Pad build() nothrow
   {
     return new Pad(cast(void*)createGObject(Pad._getGType), No.Take);
   }

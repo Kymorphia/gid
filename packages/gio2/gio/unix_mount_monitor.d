@@ -17,26 +17,26 @@ class UnixMountMonitor : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_unix_mount_monitor_get_type != &gidSymbolNotFound ? g_unix_mount_monitor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UnixMountMonitor self()
+  override UnixMountMonitor self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class UnixMountMonitor : gobject.object.ObjectWrap
       Get builder for [gio.unix_mount_monitor.UnixMountMonitor]
       Returns: New builder object
   */
-  static UnixMountMonitorGidBuilder builder()
+  static UnixMountMonitorGidBuilder builder() nothrow
   {
     return new UnixMountMonitorGidBuilder;
   }
@@ -59,7 +59,7 @@ class UnixMountMonitor : gobject.object.ObjectWrap
   
       Deprecated: Use [gio.unix_mount_monitor.UnixMountMonitor.get] instead.
   */
-  this()
+  this() nothrow
   {
     GUnixMountMonitor* _cretval;
     _cretval = g_unix_mount_monitor_new();
@@ -78,7 +78,7 @@ class UnixMountMonitor : gobject.object.ObjectWrap
       the same main context as you called this function.
       Returns: the #GUnixMountMonitor.
   */
-  static gio.unix_mount_monitor.UnixMountMonitor get()
+  static gio.unix_mount_monitor.UnixMountMonitor get() nothrow
   {
     GUnixMountMonitor* _cretval;
     _cretval = g_unix_mount_monitor_get();
@@ -101,7 +101,7 @@ class UnixMountMonitor : gobject.object.ObjectWrap
   
       Deprecated: This function does nothing.  Don't call it.
   */
-  void setRateLimit(int limitMsec)
+  void setRateLimit(int limitMsec) nothrow
   {
     g_unix_mount_monitor_set_rate_limit(cast(GUnixMountMonitor*)this._cPtr, limitMsec);
   }
@@ -121,13 +121,13 @@ class UnixMountMonitor : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMountpointsChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMountpointsChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.unix_mount_monitor.UnixMountMonitor)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -136,7 +136,14 @@ class UnixMountMonitor : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.unix_mount_monitor.UnixMountMonitor.mountpointsChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -158,13 +165,13 @@ class UnixMountMonitor : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMountsChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMountsChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.unix_mount_monitor.UnixMountMonitor)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -173,7 +180,14 @@ class UnixMountMonitor : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.unix_mount_monitor.UnixMountMonitor.mountsChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -193,7 +207,7 @@ final class UnixMountMonitorGidBuilder : UnixMountMonitorGidBuilderImpl!UnixMoun
       Create object from builder.
       Returns: New object
   */
-  UnixMountMonitor build()
+  UnixMountMonitor build() nothrow
   {
     return new UnixMountMonitor(cast(void*)createGObject(UnixMountMonitor._getGType), Yes.Take);
   }

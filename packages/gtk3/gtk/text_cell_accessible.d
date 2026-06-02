@@ -22,26 +22,26 @@ class TextCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessible, 
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_cell_accessible_get_type != &gidSymbolNotFound ? gtk_text_cell_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TextCellAccessible self()
+  override TextCellAccessible self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class TextCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessible, 
       Get builder for [gtk.text_cell_accessible.TextCellAccessible]
       Returns: New builder object
   */
-  static TextCellAccessibleGidBuilder builder()
+  static TextCellAccessibleGidBuilder builder() nothrow
   {
     return new TextCellAccessibleGidBuilder;
   }
@@ -72,7 +72,7 @@ final class TextCellAccessibleGidBuilder : TextCellAccessibleGidBuilderImpl!Text
       Create object from builder.
       Returns: New object
   */
-  TextCellAccessible build()
+  TextCellAccessible build() nothrow
   {
     return new TextCellAccessible(cast(void*)createGObject(TextCellAccessible._getGType), No.Take);
   }

@@ -31,26 +31,26 @@ class HSeparator : gtk.separator.Separator
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_hseparator_get_type != &gidSymbolNotFound ? gtk_hseparator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HSeparator self()
+  override HSeparator self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class HSeparator : gtk.separator.Separator
       Get builder for [gtk.hseparator.HSeparator]
       Returns: New builder object
   */
-  static HSeparatorGidBuilder builder()
+  static HSeparatorGidBuilder builder() nothrow
   {
     return new HSeparatorGidBuilder;
   }
@@ -70,7 +70,7 @@ class HSeparator : gtk.separator.Separator
   
       Deprecated: Use [gtk.separator.Separator.new_] with [gtk.types.Orientation.Horizontal] instead
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_hseparator_new();
@@ -91,7 +91,7 @@ final class HSeparatorGidBuilder : HSeparatorGidBuilderImpl!HSeparatorGidBuilder
       Create object from builder.
       Returns: New object
   */
-  HSeparator build()
+  HSeparator build() nothrow
   {
     return new HSeparator(cast(void*)createGObject(HSeparator._getGType), No.Take);
   }

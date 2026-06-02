@@ -84,23 +84,22 @@ struct Date
   uint year;
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_date_get_type != &gidSymbolNotFound ? g_date_get_type() : cast(GType)0;
   }
 
   /** */
-  @property GType _gType()
+  @property GType _gType() nothrow
   {
     return _getGType();
   }
 
-  void* boxCopy()
+  void* boxCopy() nothrow
   {
     import gobject.c.functions : g_boxed_copy;
-    return g_boxed_copy(_gType,
-        cast(void*)&this);
+    return g_boxed_copy(_gType, cast(void*)&this);
   }
 
   /**
@@ -122,7 +121,7 @@ struct Date
   format = format string
   Returns: The formatted date string, will be empty if result exceeds 1024 bytes
   */
-  string strftime(string format)
+  string strftime(string format) nothrow
   {
     char[] buf;
     const(char)* _format = format.toCString(No.Alloc);
@@ -149,7 +148,7 @@ struct Date
       Params:
         nDays = number of days to move the date forward
   */
-  void addDays(uint nDays)
+  void addDays(uint nDays) nothrow
   {
     g_date_add_days(cast(GDate*)&this, nDays);
   }
@@ -164,7 +163,7 @@ struct Date
       Params:
         nMonths = number of months to move forward
   */
-  void addMonths(uint nMonths)
+  void addMonths(uint nMonths) nothrow
   {
     g_date_add_months(cast(GDate*)&this, nMonths);
   }
@@ -178,7 +177,7 @@ struct Date
       Params:
         nYears = number of years to move forward
   */
-  void addYears(uint nYears)
+  void addYears(uint nYears) nothrow
   {
     g_date_add_years(cast(GDate*)&this, nYears);
   }
@@ -194,7 +193,7 @@ struct Date
         minDate = minimum accepted value for date
         maxDate = maximum accepted value for date
   */
-  void clamp(glib.date.Date minDate, glib.date.Date maxDate)
+  void clamp(glib.date.Date minDate, glib.date.Date maxDate) nothrow
   {
     g_date_clamp(cast(GDate*)&this, cast(const(GDate)*)&minDate, cast(const(GDate)*)&maxDate);
   }
@@ -208,7 +207,7 @@ struct Date
       Params:
         nDates = number of dates to clear
   */
-  void clear(uint nDates)
+  void clear(uint nDates) nothrow
   {
     g_date_clear(cast(GDate*)&this, nDates);
   }
@@ -222,7 +221,7 @@ struct Date
       Returns: 0 for equal, less than zero if lhs is less than rhs,
             greater than zero if lhs is greater than rhs
   */
-  int compare(glib.date.Date rhs)
+  int compare(glib.date.Date rhs) nothrow
   {
     int _retval;
     _retval = g_date_compare(cast(const(GDate)*)&this, cast(const(GDate)*)&rhs);
@@ -235,7 +234,7 @@ struct Date
       as is into the new object.
       Returns: a newly-allocated #GDate initialized from date
   */
-  glib.date.Date copy()
+  glib.date.Date copy() nothrow
   {
     GDate* _cretval;
     _cretval = g_date_copy(cast(const(GDate)*)&this);
@@ -254,7 +253,7 @@ struct Date
         date2 = the second date
       Returns: the number of days between date1 and date2
   */
-  int daysBetween(glib.date.Date date2)
+  int daysBetween(glib.date.Date date2) nothrow
   {
     int _retval;
     _retval = g_date_days_between(cast(const(GDate)*)&this, cast(const(GDate)*)&date2);
@@ -265,7 +264,7 @@ struct Date
       Returns the day of the month. The date must be valid.
       Returns: day of the month
   */
-  glib.types.DateDay getDay()
+  glib.types.DateDay getDay() nothrow
   {
     glib.types.DateDay _retval;
     _retval = g_date_get_day(cast(const(GDate)*)&this);
@@ -277,7 +276,7 @@ struct Date
       year. The date must be valid.
       Returns: day of the year
   */
-  uint getDayOfYear()
+  uint getDayOfYear() nothrow
   {
     uint _retval;
     _retval = g_date_get_day_of_year(cast(const(GDate)*)&this);
@@ -289,7 +288,7 @@ struct Date
       to ISO 8601.
       Returns: ISO 8601 week number of the year.
   */
-  uint getIso8601WeekOfYear()
+  uint getIso8601WeekOfYear() nothrow
   {
     uint _retval;
     _retval = g_date_get_iso8601_week_of_year(cast(const(GDate)*)&this);
@@ -303,7 +302,7 @@ struct Date
       etc. The date must be valid.
       Returns: Julian day
   */
-  uint getJulian()
+  uint getJulian() nothrow
   {
     uint _retval;
     _retval = g_date_get_julian(cast(const(GDate)*)&this);
@@ -316,7 +315,7 @@ struct Date
       The date must be valid.
       Returns: week of the year
   */
-  uint getMondayWeekOfYear()
+  uint getMondayWeekOfYear() nothrow
   {
     uint _retval;
     _retval = g_date_get_monday_week_of_year(cast(const(GDate)*)&this);
@@ -327,7 +326,7 @@ struct Date
       Returns the month of the year. The date must be valid.
       Returns: month of the year as a #GDateMonth
   */
-  glib.types.DateMonth getMonth()
+  glib.types.DateMonth getMonth() nothrow
   {
     GDateMonth _cretval;
     _cretval = g_date_get_month(cast(const(GDate)*)&this);
@@ -341,7 +340,7 @@ struct Date
       Can return 0 if the day is before the first Sunday of the year.
       Returns: week number
   */
-  uint getSundayWeekOfYear()
+  uint getSundayWeekOfYear() nothrow
   {
     uint _retval;
     _retval = g_date_get_sunday_week_of_year(cast(const(GDate)*)&this);
@@ -352,7 +351,7 @@ struct Date
       Returns the day of the week for a #GDate. The date must be valid.
       Returns: day of the week as a #GDateWeekday.
   */
-  glib.types.DateWeekday getWeekday()
+  glib.types.DateWeekday getWeekday() nothrow
   {
     GDateWeekday _cretval;
     _cretval = g_date_get_weekday(cast(const(GDate)*)&this);
@@ -364,7 +363,7 @@ struct Date
       Returns the year of a #GDate. The date must be valid.
       Returns: year in which the date falls
   */
-  glib.types.DateYear getYear()
+  glib.types.DateYear getYear() nothrow
   {
     glib.types.DateYear _retval;
     _retval = g_date_get_year(cast(const(GDate)*)&this);
@@ -376,7 +375,7 @@ struct Date
       The date must be valid.
       Returns: true if the date is the first of the month
   */
-  bool isFirstOfMonth()
+  bool isFirstOfMonth() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_date_is_first_of_month(cast(const(GDate)*)&this);
@@ -388,7 +387,7 @@ struct Date
       The date must be valid.
       Returns: true if the date is the last day of the month
   */
-  bool isLastOfMonth()
+  bool isLastOfMonth() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_date_is_last_of_month(cast(const(GDate)*)&this);
@@ -402,7 +401,7 @@ struct Date
       Params:
         date2 = the second date
   */
-  void order(glib.date.Date date2)
+  void order(glib.date.Date date2) nothrow
   {
     g_date_order(cast(GDate*)&this, cast(GDate*)&date2);
   }
@@ -414,7 +413,7 @@ struct Date
       Params:
         day = day to set
   */
-  void setDay(glib.types.DateDay day)
+  void setDay(glib.types.DateDay day) nothrow
   {
     g_date_set_day(cast(GDate*)&this, day);
   }
@@ -430,7 +429,7 @@ struct Date
         month = month
         y = year
   */
-  void setDmy(glib.types.DateDay day, glib.types.DateMonth month, glib.types.DateYear y)
+  void setDmy(glib.types.DateDay day, glib.types.DateMonth month, glib.types.DateYear y) nothrow
   {
     g_date_set_dmy(cast(GDate*)&this, day, month, y);
   }
@@ -441,7 +440,7 @@ struct Date
       Params:
         julianDate = Julian day number (days since January 1, Year 1)
   */
-  void setJulian(uint julianDate)
+  void setJulian(uint julianDate) nothrow
   {
     g_date_set_julian(cast(GDate*)&this, julianDate);
   }
@@ -453,7 +452,7 @@ struct Date
       Params:
         month = month to set
   */
-  void setMonth(glib.types.DateMonth month)
+  void setMonth(glib.types.DateMonth month) nothrow
   {
     g_date_set_month(cast(GDate*)&this, month);
   }
@@ -474,7 +473,7 @@ struct Date
       Params:
         str = string to parse
   */
-  void setParse(string str)
+  void setParse(string str) nothrow
   {
     const(char)* _str = str.toCString(No.Alloc);
     g_date_set_parse(cast(GDate*)&this, _str);
@@ -489,7 +488,7 @@ struct Date
   
       Deprecated: Use [glib.date.Date.setTimeT] instead.
   */
-  void setTime(glib.types.Time time)
+  void setTime(glib.types.Time time) nothrow
   {
     g_date_set_time(cast(GDate*)&this, time);
   }
@@ -510,7 +509,7 @@ struct Date
       Params:
         timet = time_t value to set
   */
-  void setTimeT(long timet)
+  void setTimeT(long timet) nothrow
   {
     g_date_set_time_t(cast(GDate*)&this, timet);
   }
@@ -528,7 +527,7 @@ struct Date
       Deprecated: #GTimeVal is not year-2038-safe. Use [glib.date.Date.setTimeT]
            instead.
   */
-  void setTimeVal(glib.time_val.TimeVal timeval)
+  void setTimeVal(glib.time_val.TimeVal timeval) nothrow
   {
     g_date_set_time_val(cast(GDate*)&this, cast(GTimeVal*)&timeval);
   }
@@ -540,7 +539,7 @@ struct Date
       Params:
         year = year to set
   */
-  void setYear(glib.types.DateYear year)
+  void setYear(glib.types.DateYear year) nothrow
   {
     g_date_set_year(cast(GDate*)&this, year);
   }
@@ -553,7 +552,7 @@ struct Date
       Params:
         nDays = number of days to move
   */
-  void subtractDays(uint nDays)
+  void subtractDays(uint nDays) nothrow
   {
     g_date_subtract_days(cast(GDate*)&this, nDays);
   }
@@ -567,7 +566,7 @@ struct Date
       Params:
         nMonths = number of months to move
   */
-  void subtractMonths(uint nMonths)
+  void subtractMonths(uint nMonths) nothrow
   {
     g_date_subtract_months(cast(GDate*)&this, nMonths);
   }
@@ -582,7 +581,7 @@ struct Date
       Params:
         nYears = number of years to move
   */
-  void subtractYears(uint nYears)
+  void subtractYears(uint nYears) nothrow
   {
     g_date_subtract_years(cast(GDate*)&this, nYears);
   }
@@ -594,7 +593,7 @@ struct Date
       Params:
         tm = struct tm to fill
   */
-  void toStructTm(void* tm)
+  void toStructTm(void* tm) nothrow
   {
     g_date_to_struct_tm(cast(const(GDate)*)&this, tm);
   }
@@ -605,7 +604,7 @@ struct Date
       if it wasn't allocated by one of the [glib.date.Date.new_] variants.
       Returns: Whether the date is valid
   */
-  bool valid()
+  bool valid() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_date_valid(cast(const(GDate)*)&this);
@@ -621,7 +620,7 @@ struct Date
         year = year
       Returns: number of days in month during the year
   */
-  static ubyte getDaysInMonth(glib.types.DateMonth month, glib.types.DateYear year)
+  static ubyte getDaysInMonth(glib.types.DateMonth month, glib.types.DateYear year) nothrow
   {
     ubyte _retval;
     _retval = g_date_get_days_in_month(month, year);
@@ -641,7 +640,7 @@ struct Date
         year = a year
       Returns: number of Mondays in the year
   */
-  static ubyte getMondayWeeksInYear(glib.types.DateYear year)
+  static ubyte getMondayWeeksInYear(glib.types.DateYear year) nothrow
   {
     ubyte _retval;
     _retval = g_date_get_monday_weeks_in_year(year);
@@ -661,7 +660,7 @@ struct Date
         year = year to count weeks in
       Returns: the number of weeks in year
   */
-  static ubyte getSundayWeeksInYear(glib.types.DateYear year)
+  static ubyte getSundayWeeksInYear(glib.types.DateYear year) nothrow
   {
     ubyte _retval;
     _retval = g_date_get_sunday_weeks_in_year(year);
@@ -680,7 +679,7 @@ struct Date
         year = year to check
       Returns: true if the year is a leap year
   */
-  static bool isLeapYear(glib.types.DateYear year)
+  static bool isLeapYear(glib.types.DateYear year) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_date_is_leap_year(year);
@@ -695,7 +694,7 @@ struct Date
         day = day to check
       Returns: true if the day is valid
   */
-  static bool validDay(glib.types.DateDay day)
+  static bool validDay(glib.types.DateDay day) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_date_valid_day(day);
@@ -713,7 +712,7 @@ struct Date
         year = year
       Returns: true if the date is a valid one
   */
-  static bool validDmy(glib.types.DateDay day, glib.types.DateMonth month, glib.types.DateYear year)
+  static bool validDmy(glib.types.DateDay day, glib.types.DateMonth month, glib.types.DateYear year) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_date_valid_dmy(day, month, year);
@@ -728,7 +727,7 @@ struct Date
         julianDate = Julian day to check
       Returns: true if the Julian day is valid
   */
-  static bool validJulian(uint julianDate)
+  static bool validJulian(uint julianDate) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_date_valid_julian(julianDate);
@@ -743,7 +742,7 @@ struct Date
         month = month
       Returns: true if the month is valid
   */
-  static bool validMonth(glib.types.DateMonth month)
+  static bool validMonth(glib.types.DateMonth month) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_date_valid_month(month);
@@ -758,7 +757,7 @@ struct Date
         weekday = weekday
       Returns: true if the weekday is valid
   */
-  static bool validWeekday(glib.types.DateWeekday weekday)
+  static bool validWeekday(glib.types.DateWeekday weekday) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_date_valid_weekday(weekday);
@@ -773,7 +772,7 @@ struct Date
         year = year
       Returns: true if the year is valid
   */
-  static bool validYear(glib.types.DateYear year)
+  static bool validYear(glib.types.DateYear year) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_date_valid_year(year);

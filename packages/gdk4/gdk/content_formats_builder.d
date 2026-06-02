@@ -18,32 +18,32 @@ class ContentFormatsBuilder : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_content_formats_builder_get_type != &gidSymbolNotFound ? gdk_content_formats_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ContentFormatsBuilder self()
+  override ContentFormatsBuilder self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class ContentFormatsBuilder : gobject.boxed.Boxed
       Use addition functions to add types to it.
       Returns: a new [gdk.content_formats_builder.ContentFormatsBuilder]
   */
-  this()
+  this() nothrow
   {
     GdkContentFormatsBuilder* _cretval;
     _cretval = gdk_content_formats_builder_new();
@@ -69,7 +69,7 @@ class ContentFormatsBuilder : gobject.boxed.Boxed
       Params:
         formats = the formats to add
   */
-  void addFormats(gdk.content_formats.ContentFormats formats)
+  void addFormats(gdk.content_formats.ContentFormats formats) nothrow
   {
     gdk_content_formats_builder_add_formats(cast(GdkContentFormatsBuilder*)this._cPtr, formats ? cast(const(GdkContentFormats)*)formats._cPtr(No.Dup) : null);
   }
@@ -80,7 +80,7 @@ class ContentFormatsBuilder : gobject.boxed.Boxed
       Params:
         type = a `GType`
   */
-  void addGtype(gobject.types.GType type)
+  void addGtype(gobject.types.GType type) nothrow
   {
     gdk_content_formats_builder_add_gtype(cast(GdkContentFormatsBuilder*)this._cPtr, type);
   }
@@ -91,7 +91,7 @@ class ContentFormatsBuilder : gobject.boxed.Boxed
       Params:
         mimeType = a mime type
   */
-  void addMimeType(string mimeType)
+  void addMimeType(string mimeType) nothrow
   {
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
     gdk_content_formats_builder_add_mime_type(cast(GdkContentFormatsBuilder*)this._cPtr, _mimeType);
@@ -108,7 +108,7 @@ class ContentFormatsBuilder : gobject.boxed.Boxed
       Returns: the newly created [gdk.content_formats.ContentFormats]
           with all the formats added to builder
   */
-  gdk.content_formats.ContentFormats toFormats()
+  gdk.content_formats.ContentFormats toFormats() nothrow
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_content_formats_builder_to_formats(cast(GdkContentFormatsBuilder*)this._cPtr);

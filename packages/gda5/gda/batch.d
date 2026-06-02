@@ -19,26 +19,26 @@ class Batch : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_batch_get_type != &gidSymbolNotFound ? gda_batch_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Batch self()
+  override Batch self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class Batch : gobject.object.ObjectWrap
       Get builder for [gda.batch.Batch]
       Returns: New builder object
   */
-  static BatchGidBuilder builder()
+  static BatchGidBuilder builder() nothrow
   {
     return new BatchGidBuilder;
   }
@@ -56,7 +56,7 @@ class Batch : gobject.object.ObjectWrap
       Creates a new #GdaBatch object
       Returns: the new object
   */
-  this()
+  this() nothrow
   {
     GdaBatch* _cretval;
     _cretval = gda_batch_new();
@@ -64,7 +64,7 @@ class Batch : gobject.object.ObjectWrap
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_batch_error_quark();
@@ -78,7 +78,7 @@ class Batch : gobject.object.ObjectWrap
       Params:
         stmt = a statement to add to batch's statements list
   */
-  void addStatement(gda.statement.Statement stmt)
+  void addStatement(gda.statement.Statement stmt) nothrow
   {
     gda_batch_add_statement(cast(GdaBatch*)this._cPtr, stmt ? cast(GdaStatement*)stmt._cPtr(No.Dup) : null);
   }
@@ -87,7 +87,7 @@ class Batch : gobject.object.ObjectWrap
       Copy constructor
       Returns: a the new copy of orig
   */
-  gda.batch.Batch copy()
+  gda.batch.Batch copy() nothrow
   {
     GdaBatch* _cretval;
     _cretval = gda_batch_copy(cast(GdaBatch*)this._cPtr);
@@ -123,7 +123,7 @@ class Batch : gobject.object.ObjectWrap
       Get a list of the #GdaStatement objects contained in batch
       Returns: a list of #GdaStatement which should not be modified.
   */
-  gda.statement.Statement[] getStatements()
+  gda.statement.Statement[] getStatements() nothrow
   {
     const(GSList)* _cretval;
     _cretval = gda_batch_get_statements(cast(GdaBatch*)this._cPtr);
@@ -138,7 +138,7 @@ class Batch : gobject.object.ObjectWrap
       Params:
         stmt = a statement to remove from batch's statements list
   */
-  void removeStatement(gda.statement.Statement stmt)
+  void removeStatement(gda.statement.Statement stmt) nothrow
   {
     gda_batch_remove_statement(cast(GdaBatch*)this._cPtr, stmt ? cast(GdaStatement*)stmt._cPtr(No.Dup) : null);
   }
@@ -147,7 +147,7 @@ class Batch : gobject.object.ObjectWrap
       Creates a string representing the contents of batch.
       Returns: a string containing the serialized version of batch
   */
-  string serialize()
+  string serialize() nothrow
   {
     char* _cretval;
     _cretval = gda_batch_serialize(cast(GdaBatch*)this._cPtr);
@@ -172,14 +172,14 @@ class Batch : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.batch.Batch)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -191,7 +191,14 @@ class Batch : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.batch.Batch.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -211,7 +218,7 @@ final class BatchGidBuilder : BatchGidBuilderImpl!BatchGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Batch build()
+  Batch build() nothrow
   {
     return new Batch(cast(void*)createGObject(Batch._getGType), Yes.Take);
   }
@@ -219,12 +226,12 @@ final class BatchGidBuilder : BatchGidBuilderImpl!BatchGidBuilder
 
 class BatchException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.batch.Batch.errorQuark, cast(int)code, msg);
   }

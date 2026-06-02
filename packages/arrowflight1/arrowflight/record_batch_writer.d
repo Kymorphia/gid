@@ -19,26 +19,26 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_record_batch_writer_get_type != &gidSymbolNotFound ? gaflight_record_batch_writer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RecordBatchWriter self()
+  override RecordBatchWriter self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
       Get builder for [arrowflight.record_batch_writer.RecordBatchWriter]
       Returns: New builder object
   */
-  static RecordBatchWriterGidBuilder builder()
+  static RecordBatchWriterGidBuilder builder() nothrow
   {
     return new RecordBatchWriterGidBuilder;
   }
@@ -124,7 +124,7 @@ final class RecordBatchWriterGidBuilder : RecordBatchWriterGidBuilderImpl!Record
       Create object from builder.
       Returns: New object
   */
-  RecordBatchWriter build()
+  RecordBatchWriter build() nothrow
   {
     return new RecordBatchWriter(cast(void*)createGObject(RecordBatchWriter._getGType), No.Take);
   }

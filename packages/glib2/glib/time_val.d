@@ -43,7 +43,7 @@ struct TimeVal
       Deprecated: #GTimeVal is not year-2038-safe. Use [gst.types.ulong] for
            representing microseconds since the epoch, or use #GDateTime.
   */
-  void add(glong microseconds)
+  void add(glong microseconds) nothrow
   {
     g_time_val_add(cast(GTimeVal*)&this, microseconds);
   }
@@ -89,7 +89,7 @@ struct TimeVal
       Deprecated: #GTimeVal is not year-2038-safe. Use
            g_date_time_format_iso8601(dt) instead.
   */
-  string toIso8601()
+  string toIso8601() nothrow
   {
     char* _cretval;
     _cretval = g_time_val_to_iso8601(cast(GTimeVal*)&this);
@@ -124,7 +124,7 @@ struct TimeVal
       Deprecated: #GTimeVal is not year-2038-safe. Use
            [glib.date_time.DateTime.newFromIso8601] instead.
   */
-  static bool fromIso8601(string isoDate, out glib.time_val.TimeVal time)
+  static bool fromIso8601(string isoDate, out glib.time_val.TimeVal time) nothrow
   {
     bool _retval;
     const(char)* _isoDate = isoDate.toCString(No.Alloc);

@@ -19,26 +19,26 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_display_egl_get_type != &gidSymbolNotFound ? gst_gl_display_egl_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLDisplayEGL self()
+  override GLDisplayEGL self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
       Get builder for [gstglegl.gldisplay_egl.GLDisplayEGL]
       Returns: New builder object
   */
-  static GLDisplayEGLGidBuilder builder()
+  static GLDisplayEGLGidBuilder builder() nothrow
   {
     return new GLDisplayEGLGidBuilder;
   }
@@ -56,7 +56,7 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
       Create a new #GstGLDisplayEGL using the default EGL_DEFAULT_DISPLAY.
       Returns: a new #GstGLDisplayEGL or null
   */
-  this()
+  this() nothrow
   {
     GstGLDisplayEGL* _cretval;
     _cretval = gst_gl_display_egl_new();
@@ -68,7 +68,7 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
       EGL_PLATFORM_SURFACELESS_MESA extension.
       Returns: a new #GstGLDisplayEGL or null
   */
-  static gstglegl.gldisplay_egl.GLDisplayEGL newSurfaceless()
+  static gstglegl.gldisplay_egl.GLDisplayEGL newSurfaceless() nothrow
   {
     GstGLDisplayEGL* _cretval;
     _cretval = gst_gl_display_egl_new_surfaceless();
@@ -77,7 +77,7 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
   }
 
   /** */
-  static gstglegl.gldisplay_egl.GLDisplayEGL newWithEglDisplay(void* display = null)
+  static gstglegl.gldisplay_egl.GLDisplayEGL newWithEglDisplay(void* display = null) nothrow
   {
     GstGLDisplayEGL* _cretval;
     _cretval = gst_gl_display_egl_new_with_egl_display(display);
@@ -95,7 +95,7 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
         display = an existing #GstGLDisplay
       Returns: a new #GstGLDisplayEGL
   */
-  static gstglegl.gldisplay_egl.GLDisplayEGL fromGlDisplay(gstgl.gldisplay.GLDisplay display)
+  static gstglegl.gldisplay_egl.GLDisplayEGL fromGlDisplay(gstgl.gldisplay.GLDisplay display) nothrow
   {
     GstGLDisplayEGL* _cretval;
     _cretval = gst_gl_display_egl_from_gl_display(display ? cast(GstGLDisplay*)display._cPtr(No.Dup) : null);
@@ -113,7 +113,7 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
         display = pointer to a display (or 0)
       Returns: A `EGLDisplay` or `EGL_NO_DISPLAY`
   */
-  static void* getFromNative(gstgl.types.GLDisplayType type, size_t display)
+  static void* getFromNative(gstgl.types.GLDisplayType type, size_t display) nothrow
   {
     auto _retval = gst_gl_display_egl_get_from_native(type, display);
     return _retval;
@@ -132,7 +132,7 @@ final class GLDisplayEGLGidBuilder : GLDisplayEGLGidBuilderImpl!GLDisplayEGLGidB
       Create object from builder.
       Returns: New object
   */
-  GLDisplayEGL build()
+  GLDisplayEGL build() nothrow
   {
     return new GLDisplayEGL(cast(void*)createGObject(GLDisplayEGL._getGType), Yes.Take);
   }

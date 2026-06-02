@@ -26,7 +26,7 @@ class RTSPUrl : gobject.boxed.Boxed
         abspath = the absolute path
         query = additional query parameters
   */
-  this(gstrtsp.types.RTSPLowerTrans transports = gstrtsp.types.RTSPLowerTrans.init, gstrtsp.types.RTSPFamily family = gstrtsp.types.RTSPFamily.init, string user = string.init, string passwd = string.init, string host = string.init, ushort port = ushort.init, string abspath = string.init, string query = string.init)
+  this(gstrtsp.types.RTSPLowerTrans transports = gstrtsp.types.RTSPLowerTrans.init, gstrtsp.types.RTSPFamily family = gstrtsp.types.RTSPFamily.init, string user = string.init, string passwd = string.init, string host = string.init, ushort port = ushort.init, string abspath = string.init, string query = string.init) nothrow
   {
     super(gMalloc(GstRTSPUrl.sizeof), Yes.Take);
     this.transports = transports;
@@ -40,32 +40,32 @@ class RTSPUrl : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_rtsp_url_get_type != &gidSymbolNotFound ? gst_rtsp_url_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RTSPUrl self()
+  override RTSPUrl self() nothrow
   {
     return this;
   }
@@ -74,7 +74,7 @@ class RTSPUrl : gobject.boxed.Boxed
       Get `transports` field.
       Returns: the transports allowed
   */
-  @property gstrtsp.types.RTSPLowerTrans transports()
+  @property gstrtsp.types.RTSPLowerTrans transports() nothrow
   {
     return cast(gstrtsp.types.RTSPLowerTrans)(cast(GstRTSPUrl*)this._cPtr).transports;
   }
@@ -84,7 +84,7 @@ class RTSPUrl : gobject.boxed.Boxed
       Params:
         propval = the transports allowed
   */
-  @property void transports(gstrtsp.types.RTSPLowerTrans propval)
+  @property void transports(gstrtsp.types.RTSPLowerTrans propval) nothrow
   {
     (cast(GstRTSPUrl*)this._cPtr).transports = cast(GstRTSPLowerTrans)propval;
   }
@@ -93,7 +93,7 @@ class RTSPUrl : gobject.boxed.Boxed
       Get `family` field.
       Returns: the family
   */
-  @property gstrtsp.types.RTSPFamily family()
+  @property gstrtsp.types.RTSPFamily family() nothrow
   {
     return cast(gstrtsp.types.RTSPFamily)(cast(GstRTSPUrl*)this._cPtr).family;
   }
@@ -103,7 +103,7 @@ class RTSPUrl : gobject.boxed.Boxed
       Params:
         propval = the family
   */
-  @property void family(gstrtsp.types.RTSPFamily propval)
+  @property void family(gstrtsp.types.RTSPFamily propval) nothrow
   {
     (cast(GstRTSPUrl*)this._cPtr).family = cast(GstRTSPFamily)propval;
   }
@@ -112,7 +112,7 @@ class RTSPUrl : gobject.boxed.Boxed
       Get `user` field.
       Returns: the user
   */
-  @property string user()
+  @property string user() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).user);
   }
@@ -122,7 +122,7 @@ class RTSPUrl : gobject.boxed.Boxed
       Params:
         propval = the user
   */
-  @property void user(string propval)
+  @property void user(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).user);
     dToC(propval, cast(void*)&(cast(GstRTSPUrl*)this._cPtr).user);
@@ -132,7 +132,7 @@ class RTSPUrl : gobject.boxed.Boxed
       Get `passwd` field.
       Returns: the password
   */
-  @property string passwd()
+  @property string passwd() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).passwd);
   }
@@ -142,7 +142,7 @@ class RTSPUrl : gobject.boxed.Boxed
       Params:
         propval = the password
   */
-  @property void passwd(string propval)
+  @property void passwd(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).passwd);
     dToC(propval, cast(void*)&(cast(GstRTSPUrl*)this._cPtr).passwd);
@@ -152,7 +152,7 @@ class RTSPUrl : gobject.boxed.Boxed
       Get `host` field.
       Returns: the host
   */
-  @property string host()
+  @property string host() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).host);
   }
@@ -162,7 +162,7 @@ class RTSPUrl : gobject.boxed.Boxed
       Params:
         propval = the host
   */
-  @property void host(string propval)
+  @property void host(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).host);
     dToC(propval, cast(void*)&(cast(GstRTSPUrl*)this._cPtr).host);
@@ -172,7 +172,7 @@ class RTSPUrl : gobject.boxed.Boxed
       Get `port` field.
       Returns: the port
   */
-  @property ushort port()
+  @property ushort port() nothrow
   {
     return (cast(GstRTSPUrl*)this._cPtr).port;
   }
@@ -182,7 +182,7 @@ class RTSPUrl : gobject.boxed.Boxed
       Params:
         propval = the port
   */
-  @property void port(ushort propval)
+  @property void port(ushort propval) nothrow
   {
     (cast(GstRTSPUrl*)this._cPtr).port = propval;
   }
@@ -191,7 +191,7 @@ class RTSPUrl : gobject.boxed.Boxed
       Get `abspath` field.
       Returns: the absolute path
   */
-  @property string abspath()
+  @property string abspath() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).abspath);
   }
@@ -201,7 +201,7 @@ class RTSPUrl : gobject.boxed.Boxed
       Params:
         propval = the absolute path
   */
-  @property void abspath(string propval)
+  @property void abspath(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).abspath);
     dToC(propval, cast(void*)&(cast(GstRTSPUrl*)this._cPtr).abspath);
@@ -211,7 +211,7 @@ class RTSPUrl : gobject.boxed.Boxed
       Get `query` field.
       Returns: additional query parameters
   */
-  @property string query()
+  @property string query() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).query);
   }
@@ -221,7 +221,7 @@ class RTSPUrl : gobject.boxed.Boxed
       Params:
         propval = additional query parameters
   */
-  @property void query(string propval)
+  @property void query(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).query);
     dToC(propval, cast(void*)&(cast(GstRTSPUrl*)this._cPtr).query);
@@ -231,7 +231,7 @@ class RTSPUrl : gobject.boxed.Boxed
       Make a copy of url.
       Returns: a copy of url. Free with gst_rtsp_url_free () after usage.
   */
-  gstrtsp.rtspurl.RTSPUrl copy()
+  gstrtsp.rtspurl.RTSPUrl copy() nothrow
   {
     GstRTSPUrl* _cretval;
     _cretval = gst_rtsp_url_copy(cast(const(GstRTSPUrl)*)this._cPtr);
@@ -254,7 +254,7 @@ class RTSPUrl : gobject.boxed.Boxed
       Returns: null-terminated array of URL components. Free with
         [glib.global.strfreev] when no longer needed.
   */
-  string[] decodePathComponents()
+  string[] decodePathComponents() nothrow
   {
     char** _cretval;
     _cretval = gst_rtsp_url_decode_path_components(cast(const(GstRTSPUrl)*)this._cPtr);
@@ -280,7 +280,7 @@ class RTSPUrl : gobject.boxed.Boxed
         port = location to hold the port
       Returns: #GST_RTSP_OK.
   */
-  gstrtsp.types.RTSPResult getPort(out ushort port)
+  gstrtsp.types.RTSPResult getPort(out ushort port) nothrow
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_url_get_port(cast(const(GstRTSPUrl)*)this._cPtr, cast(ushort*)&port);
@@ -292,7 +292,7 @@ class RTSPUrl : gobject.boxed.Boxed
       Get a newly allocated string describing the request URI for url.
       Returns: a string with the request URI. [glib.global.gfree] after usage.
   */
-  string getRequestUri()
+  string getRequestUri() nothrow
   {
     char* _cretval;
     _cretval = gst_rtsp_url_get_request_uri(cast(const(GstRTSPUrl)*)this._cPtr);
@@ -309,7 +309,7 @@ class RTSPUrl : gobject.boxed.Boxed
       Returns: a string with the request URI combined with the control path.
         [glib.global.gfree] after usage.
   */
-  string getRequestUriWithControl(string controlPath)
+  string getRequestUriWithControl(string controlPath) nothrow
   {
     char* _cretval;
     const(char)* _controlPath = controlPath.toCString(No.Alloc);
@@ -325,7 +325,7 @@ class RTSPUrl : gobject.boxed.Boxed
         port = the port
       Returns: #GST_RTSP_OK.
   */
-  gstrtsp.types.RTSPResult setPort(ushort port)
+  gstrtsp.types.RTSPResult setPort(ushort port) nothrow
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_url_set_port(cast(GstRTSPUrl*)this._cPtr, port);
@@ -342,7 +342,7 @@ class RTSPUrl : gobject.boxed.Boxed
         url = location to hold the result.
       Returns: a #GstRTSPResult.
   */
-  static gstrtsp.types.RTSPResult parse(string urlstr, out gstrtsp.rtspurl.RTSPUrl url)
+  static gstrtsp.types.RTSPResult parse(string urlstr, out gstrtsp.rtspurl.RTSPUrl url) nothrow
   {
     GstRTSPResult _cretval;
     const(char)* _urlstr = urlstr.toCString(No.Alloc);

@@ -15,26 +15,26 @@ class FieldExpression : arrow.expression.Expression
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_field_expression_get_type != &gidSymbolNotFound ? garrow_field_expression_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FieldExpression self()
+  override FieldExpression self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class FieldExpression : arrow.expression.Expression
       Get builder for [arrow.field_expression.FieldExpression]
       Returns: New builder object
   */
-  static FieldExpressionGidBuilder builder()
+  static FieldExpressionGidBuilder builder() nothrow
   {
     return new FieldExpressionGidBuilder;
   }
@@ -73,7 +73,7 @@ final class FieldExpressionGidBuilder : FieldExpressionGidBuilderImpl!FieldExpre
       Create object from builder.
       Returns: New object
   */
-  FieldExpression build()
+  FieldExpression build() nothrow
   {
     return new FieldExpression(cast(void*)createGObject(FieldExpression._getGType), Yes.Take);
   }

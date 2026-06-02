@@ -19,11 +19,8 @@ class RcProperty
   GtkRcProperty _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.rc_property.RcProperty");
-
     _cInstance = *cast(GtkRcProperty*)ptr;
 
     if (take)
@@ -31,7 +28,7 @@ class RcProperty
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -40,7 +37,7 @@ class RcProperty
       Get `typeName` field.
       Returns: quark-ified type identifier
   */
-  @property glib.types.Quark typeName()
+  @property glib.types.Quark typeName() nothrow
   {
     return (cast(GtkRcProperty*)this._cPtr).typeName;
   }
@@ -50,7 +47,7 @@ class RcProperty
       Params:
         propval = quark-ified type identifier
   */
-  @property void typeName(glib.types.Quark propval)
+  @property void typeName(glib.types.Quark propval) nothrow
   {
     (cast(GtkRcProperty*)this._cPtr).typeName = propval;
   }
@@ -60,7 +57,7 @@ class RcProperty
       Returns: quark-ified property identifier like
           “GtkScrollbar::spacing”
   */
-  @property glib.types.Quark propertyName()
+  @property glib.types.Quark propertyName() nothrow
   {
     return (cast(GtkRcProperty*)this._cPtr).propertyName;
   }
@@ -71,7 +68,7 @@ class RcProperty
         propval = quark-ified property identifier like
             “GtkScrollbar::spacing”
   */
-  @property void propertyName(glib.types.Quark propval)
+  @property void propertyName(glib.types.Quark propval) nothrow
   {
     (cast(GtkRcProperty*)this._cPtr).propertyName = propval;
   }
@@ -80,7 +77,7 @@ class RcProperty
       Get `origin` field.
       Returns: field similar to one found in #GtkSettingsValue
   */
-  @property string origin()
+  @property string origin() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkRcProperty*)this._cPtr).origin);
   }
@@ -90,7 +87,7 @@ class RcProperty
       Params:
         propval = field similar to one found in #GtkSettingsValue
   */
-  @property void origin(string propval)
+  @property void origin(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkRcProperty*)this._cPtr).origin);
     dToC(propval, cast(void*)&(cast(GtkRcProperty*)this._cPtr).origin);
@@ -100,7 +97,7 @@ class RcProperty
       Get `value` field.
       Returns: field similar to one found in #GtkSettingsValue
   */
-  @property gobject.value.Value value()
+  @property gobject.value.Value value() nothrow
   {
     return cToD!(gobject.value.Value)(cast(void*)&(cast(GtkRcProperty*)this._cPtr).value);
   }
@@ -119,7 +116,7 @@ class RcProperty
       Returns: true if gstring could be parsed and property_value
         has been set to the resulting #GtkBorder.
   */
-  static bool parseBorder(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue)
+  static bool parseBorder(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_rc_property_parse_border(pspec ? cast(const(GParamSpec)*)pspec._cPtr(No.Dup) : null, gstring ? cast(const(GString)*)gstring._cPtr(No.Dup) : null, propertyValue ? cast(GValue*)propertyValue._cPtr(No.Dup) : null);
@@ -141,7 +138,7 @@ class RcProperty
       Returns: true if gstring could be parsed and property_value
         has been set to the resulting #GdkColor.
   */
-  static bool parseColor(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue)
+  static bool parseColor(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_rc_property_parse_color(pspec ? cast(const(GParamSpec)*)pspec._cPtr(No.Dup) : null, gstring ? cast(const(GString)*)gstring._cPtr(No.Dup) : null, propertyValue ? cast(GValue*)propertyValue._cPtr(No.Dup) : null);
@@ -164,7 +161,7 @@ class RcProperty
       Returns: true if gstring could be parsed and property_value
         has been set to the resulting #GEnumValue.
   */
-  static bool parseEnum(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue)
+  static bool parseEnum(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_rc_property_parse_enum(pspec ? cast(const(GParamSpec)*)pspec._cPtr(No.Dup) : null, gstring ? cast(const(GString)*)gstring._cPtr(No.Dup) : null, propertyValue ? cast(GValue*)propertyValue._cPtr(No.Dup) : null);
@@ -186,7 +183,7 @@ class RcProperty
       Returns: true if gstring could be parsed and property_value
         has been set to the resulting flags value.
   */
-  static bool parseFlags(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue)
+  static bool parseFlags(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_rc_property_parse_flags(pspec ? cast(const(GParamSpec)*)pspec._cPtr(No.Dup) : null, gstring ? cast(const(GString)*)gstring._cPtr(No.Dup) : null, propertyValue ? cast(GValue*)propertyValue._cPtr(No.Dup) : null);
@@ -206,7 +203,7 @@ class RcProperty
       Returns: true if gstring could be parsed and property_value
         has been set to the resulting #GtkRequisition.
   */
-  static bool parseRequisition(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue)
+  static bool parseRequisition(gobject.param_spec.ParamSpec pspec, glib.string_.String gstring, gobject.value.Value propertyValue) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_rc_property_parse_requisition(pspec ? cast(const(GParamSpec)*)pspec._cPtr(No.Dup) : null, gstring ? cast(const(GString)*)gstring._cPtr(No.Dup) : null, propertyValue ? cast(GValue*)propertyValue._cPtr(No.Dup) : null);

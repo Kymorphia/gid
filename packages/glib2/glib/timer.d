@@ -20,18 +20,15 @@ class Timer
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.timer.Timer");
-
     _cInstancePtr = cast(GTimer*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -45,7 +42,7 @@ class Timer
   * Returns: seconds elapsed as a floating point value, including any
   *   fractional part.
   */
-  double elapsed()
+  double elapsed() nothrow
   {
     double _retval;
     _retval = g_timer_elapsed(cast(GTimer*)_cPtr, null);
@@ -58,7 +55,7 @@ class Timer
       [glib.timer.Timer.stop]. [glib.timer.Timer.stop] must be called before using this
       function.
   */
-  void continue_()
+  void continue_() nothrow
   {
     g_timer_continue(cast(GTimer*)this._cPtr);
   }
@@ -66,7 +63,7 @@ class Timer
   /**
       Destroys a timer, freeing associated resources.
   */
-  void destroy()
+  void destroy() nothrow
   {
     g_timer_destroy(cast(GTimer*)this._cPtr);
   }
@@ -86,7 +83,7 @@ class Timer
       Returns: seconds elapsed as a floating point value, including any
                  fractional part.
   */
-  double elapsed(out gulong microseconds)
+  double elapsed(out gulong microseconds) nothrow
   {
     double _retval;
     _retval = g_timer_elapsed(cast(GTimer*)this._cPtr, cast(gulong*)&microseconds);
@@ -97,7 +94,7 @@ class Timer
       Exposes whether the timer is currently active.
       Returns: true if the timer is running, false otherwise
   */
-  bool isActive()
+  bool isActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_timer_is_active(cast(GTimer*)this._cPtr);
@@ -109,7 +106,7 @@ class Timer
       already-started timer to reset the start time, so [glib.timer.Timer.reset]
       serves no purpose.
   */
-  void reset()
+  void reset() nothrow
   {
     g_timer_reset(cast(GTimer*)this._cPtr);
   }
@@ -120,7 +117,7 @@ class Timer
       automatically marks the start time, so no need to call
       [glib.timer.Timer.start] immediately after creating the timer.
   */
-  void start()
+  void start() nothrow
   {
     g_timer_start(cast(GTimer*)this._cPtr);
   }
@@ -129,7 +126,7 @@ class Timer
       Marks an end time, so calls to [glib.timer.Timer.elapsed] will return the
       difference between this end time and the start time.
   */
-  void stop()
+  void stop() nothrow
   {
     g_timer_stop(cast(GTimer*)this._cPtr);
   }
@@ -139,7 +136,7 @@ class Timer
       implicitly called for you).
       Returns: a new #GTimer.
   */
-  this()
+  this() nothrow
   {
     GTimer* _cretval;
     _cretval = g_timer_new();

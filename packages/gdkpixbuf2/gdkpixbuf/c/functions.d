@@ -14,7 +14,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgdk_pixbuf-2.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // Pixbuf
   GType function() c_gdk_pixbuf_get_type; ///

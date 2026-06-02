@@ -87,26 +87,26 @@ class Window : gtk.bin.Bin
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_window_get_type != &gidSymbolNotFound ? gtk_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Window self()
+  override Window self() nothrow
   {
     return this;
   }
@@ -115,7 +115,7 @@ class Window : gtk.bin.Bin
       Get builder for [gtk.window.Window]
       Returns: New builder object
   */
-  static WindowGidBuilder builder()
+  static WindowGidBuilder builder() nothrow
   {
     return new WindowGidBuilder;
   }
@@ -124,7 +124,7 @@ class Window : gtk.bin.Bin
       Get `acceptFocus` property.
       Returns: Whether the window should receive the input focus.
   */
-  @property bool acceptFocus()
+  @property bool acceptFocus() nothrow
   {
     return getAcceptFocus();
   }
@@ -134,7 +134,7 @@ class Window : gtk.bin.Bin
       Params:
         propval = Whether the window should receive the input focus.
   */
-  @property void acceptFocus(bool propval)
+  @property void acceptFocus(bool propval) nothrow
   {
     setAcceptFocus(propval);
   }
@@ -151,7 +151,7 @@ class Window : gtk.bin.Bin
         will remain until the window is destroyed, but you can explicitly
         remove it by setting the :application property to null.
   */
-  @property gtk.application.Application application()
+  @property gtk.application.Application application() nothrow
   {
     return getApplication();
   }
@@ -169,7 +169,7 @@ class Window : gtk.bin.Bin
           will remain until the window is destroyed, but you can explicitly
           remove it by setting the :application property to null.
   */
-  @property void application(gtk.application.Application propval)
+  @property void application(gtk.application.Application propval) nothrow
   {
     setApplication(propval);
   }
@@ -184,7 +184,7 @@ class Window : gtk.bin.Bin
         popup window created by #GtkEntry or a typeahead search entry
         created by #GtkTreeView.
   */
-  @property gtk.widget.Widget attachedTo()
+  @property gtk.widget.Widget attachedTo() nothrow
   {
     return getAttachedTo();
   }
@@ -200,7 +200,7 @@ class Window : gtk.bin.Bin
           popup window created by #GtkEntry or a typeahead search entry
           created by #GtkTreeView.
   */
-  @property void attachedTo(gtk.widget.Widget propval)
+  @property void attachedTo(gtk.widget.Widget propval) nothrow
   {
     setAttachedTo(propval);
   }
@@ -209,7 +209,7 @@ class Window : gtk.bin.Bin
       Get `decorated` property.
       Returns: Whether the window should be decorated by the window manager.
   */
-  @property bool decorated()
+  @property bool decorated() nothrow
   {
     return getDecorated();
   }
@@ -219,31 +219,31 @@ class Window : gtk.bin.Bin
       Params:
         propval = Whether the window should be decorated by the window manager.
   */
-  @property void decorated(bool propval)
+  @property void decorated(bool propval) nothrow
   {
     setDecorated(propval);
   }
 
   /** */
-  @property int defaultHeight()
+  @property int defaultHeight() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("default-height");
   }
 
   /** */
-  @property void defaultHeight(int propval)
+  @property void defaultHeight(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("default-height", propval);
   }
 
   /** */
-  @property int defaultWidth()
+  @property int defaultWidth() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("default-width");
   }
 
   /** */
-  @property void defaultWidth(int propval)
+  @property void defaultWidth(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("default-width", propval);
   }
@@ -252,7 +252,7 @@ class Window : gtk.bin.Bin
       Get `deletable` property.
       Returns: Whether the window frame should have a close button.
   */
-  @property bool deletable()
+  @property bool deletable() nothrow
   {
     return getDeletable();
   }
@@ -262,19 +262,19 @@ class Window : gtk.bin.Bin
       Params:
         propval = Whether the window frame should have a close button.
   */
-  @property void deletable(bool propval)
+  @property void deletable(bool propval) nothrow
   {
     setDeletable(propval);
   }
 
   /** */
-  @property bool destroyWithParent()
+  @property bool destroyWithParent() nothrow
   {
     return getDestroyWithParent();
   }
 
   /** */
-  @property void destroyWithParent(bool propval)
+  @property void destroyWithParent(bool propval) nothrow
   {
     setDestroyWithParent(propval);
   }
@@ -283,7 +283,7 @@ class Window : gtk.bin.Bin
       Get `focusOnMap` property.
       Returns: Whether the window should receive the input focus when mapped.
   */
-  @property bool focusOnMap()
+  @property bool focusOnMap() nothrow
   {
     return getFocusOnMap();
   }
@@ -293,7 +293,7 @@ class Window : gtk.bin.Bin
       Params:
         propval = Whether the window should receive the input focus when mapped.
   */
-  @property void focusOnMap(bool propval)
+  @property void focusOnMap(bool propval) nothrow
   {
     setFocusOnMap(propval);
   }
@@ -305,7 +305,7 @@ class Window : gtk.bin.Bin
         This property is maintained by GTK+ based on user input
         and should not be set by applications.
   */
-  @property bool focusVisible()
+  @property bool focusVisible() nothrow
   {
     return getFocusVisible();
   }
@@ -318,7 +318,7 @@ class Window : gtk.bin.Bin
           This property is maintained by GTK+ based on user input
           and should not be set by applications.
   */
-  @property void focusVisible(bool propval)
+  @property void focusVisible(bool propval) nothrow
   {
     setFocusVisible(propval);
   }
@@ -328,7 +328,7 @@ class Window : gtk.bin.Bin
       Returns: The window gravity of the window. See [gtk.window.Window.move] and #GdkGravity for
         more details about window gravity.
   */
-  @property gdk.types.Gravity gravity()
+  @property gdk.types.Gravity gravity() nothrow
   {
     return getGravity();
   }
@@ -339,7 +339,7 @@ class Window : gtk.bin.Bin
         propval = The window gravity of the window. See [gtk.window.Window.move] and #GdkGravity for
           more details about window gravity.
   */
-  @property void gravity(gdk.types.Gravity propval)
+  @property void gravity(gdk.types.Gravity propval) nothrow
   {
     setGravity(propval);
   }
@@ -355,7 +355,7 @@ class Window : gtk.bin.Bin
   
       Deprecated: Resize grips have been removed.
   */
-  @property bool hasResizeGrip()
+  @property bool hasResizeGrip() nothrow
   {
     return getHasResizeGrip();
   }
@@ -372,7 +372,7 @@ class Window : gtk.bin.Bin
   
       Deprecated: Resize grips have been removed.
   */
-  @property void hasResizeGrip(bool propval)
+  @property void hasResizeGrip(bool propval) nothrow
   {
     setHasResizeGrip(propval);
   }
@@ -381,7 +381,7 @@ class Window : gtk.bin.Bin
       Get `hideTitlebarWhenMaximized` property.
       Returns: Whether the titlebar should be hidden during maximization.
   */
-  @property bool hideTitlebarWhenMaximized()
+  @property bool hideTitlebarWhenMaximized() nothrow
   {
     return getHideTitlebarWhenMaximized();
   }
@@ -391,19 +391,19 @@ class Window : gtk.bin.Bin
       Params:
         propval = Whether the titlebar should be hidden during maximization.
   */
-  @property void hideTitlebarWhenMaximized(bool propval)
+  @property void hideTitlebarWhenMaximized(bool propval) nothrow
   {
     setHideTitlebarWhenMaximized(propval);
   }
 
   /** */
-  @property gdkpixbuf.pixbuf.Pixbuf icon()
+  @property gdkpixbuf.pixbuf.Pixbuf icon() nothrow
   {
     return getIcon();
   }
 
   /** */
-  @property void icon(gdkpixbuf.pixbuf.Pixbuf propval)
+  @property void icon(gdkpixbuf.pixbuf.Pixbuf propval) nothrow
   {
     setIcon(propval);
   }
@@ -413,7 +413,7 @@ class Window : gtk.bin.Bin
       Returns: The :icon-name property specifies the name of the themed icon to
         use as the window icon. See #GtkIconTheme for more details.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return getIconName();
   }
@@ -424,7 +424,7 @@ class Window : gtk.bin.Bin
         propval = The :icon-name property specifies the name of the themed icon to
           use as the window icon. See #GtkIconTheme for more details.
   */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     setIconName(propval);
   }
@@ -436,7 +436,7 @@ class Window : gtk.bin.Bin
         This property is maintained by GTK+ based on user input,
         and should not be set by applications.
   */
-  @property bool mnemonicsVisible()
+  @property bool mnemonicsVisible() nothrow
   {
     return getMnemonicsVisible();
   }
@@ -449,31 +449,31 @@ class Window : gtk.bin.Bin
           This property is maintained by GTK+ based on user input,
           and should not be set by applications.
   */
-  @property void mnemonicsVisible(bool propval)
+  @property void mnemonicsVisible(bool propval) nothrow
   {
     setMnemonicsVisible(propval);
   }
 
   /** */
-  @property bool modal()
+  @property bool modal() nothrow
   {
     return getModal();
   }
 
   /** */
-  @property void modal(bool propval)
+  @property void modal(bool propval) nothrow
   {
     setModal(propval);
   }
 
   /** */
-  @property bool resizable()
+  @property bool resizable() nothrow
   {
     return getResizable();
   }
 
   /** */
-  @property void resizable(bool propval)
+  @property void resizable(bool propval) nothrow
   {
     setResizable(propval);
   }
@@ -484,55 +484,55 @@ class Window : gtk.bin.Bin
   
       Deprecated: Resize grips have been removed.
   */
-  @property bool resizeGripVisible()
+  @property bool resizeGripVisible() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("resize-grip-visible");
   }
 
   /** */
-  @property string role()
+  @property string role() nothrow
   {
     return getRole();
   }
 
   /** */
-  @property void role(string propval)
+  @property void role(string propval) nothrow
   {
     setRole(propval);
   }
 
   /** */
-  @property gdk.screen.Screen screen()
+  @property gdk.screen.Screen screen() nothrow
   {
     return getScreen();
   }
 
   /** */
-  @property void screen(gdk.screen.Screen propval)
+  @property void screen(gdk.screen.Screen propval) nothrow
   {
     setScreen(propval);
   }
 
   /** */
-  @property bool skipPagerHint()
+  @property bool skipPagerHint() nothrow
   {
     return getSkipPagerHint();
   }
 
   /** */
-  @property void skipPagerHint(bool propval)
+  @property void skipPagerHint(bool propval) nothrow
   {
     setSkipPagerHint(propval);
   }
 
   /** */
-  @property bool skipTaskbarHint()
+  @property bool skipTaskbarHint() nothrow
   {
     return getSkipTaskbarHint();
   }
 
   /** */
-  @property void skipTaskbarHint(bool propval)
+  @property void skipTaskbarHint(bool propval) nothrow
   {
     setSkipTaskbarHint(propval);
   }
@@ -544,19 +544,19 @@ class Window : gtk.bin.Bin
           startup notification identifier. See [gtk.window.Window.setStartupId]
           for more details.
   */
-  @property void startupId(string propval)
+  @property void startupId(string propval) nothrow
   {
     setStartupId(propval);
   }
 
   /** */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
 
   /** */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -566,7 +566,7 @@ class Window : gtk.bin.Bin
       Returns: The transient parent of the window. See [gtk.window.Window.setTransientFor] for
         more details about transient windows.
   */
-  @property gtk.window.Window transientFor()
+  @property gtk.window.Window transientFor() nothrow
   {
     return getTransientFor();
   }
@@ -577,49 +577,49 @@ class Window : gtk.bin.Bin
         propval = The transient parent of the window. See [gtk.window.Window.setTransientFor] for
           more details about transient windows.
   */
-  @property void transientFor(gtk.window.Window propval)
+  @property void transientFor(gtk.window.Window propval) nothrow
   {
     setTransientFor(propval);
   }
 
   /** */
-  @property gtk.types.WindowType type()
+  @property gtk.types.WindowType type() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.WindowType)("type");
   }
 
   /** */
-  @property gdk.types.WindowTypeHint typeHint()
+  @property gdk.types.WindowTypeHint typeHint() nothrow
   {
     return getTypeHint();
   }
 
   /** */
-  @property void typeHint(gdk.types.WindowTypeHint propval)
+  @property void typeHint(gdk.types.WindowTypeHint propval) nothrow
   {
     setTypeHint(propval);
   }
 
   /** */
-  @property bool urgencyHint()
+  @property bool urgencyHint() nothrow
   {
     return getUrgencyHint();
   }
 
   /** */
-  @property void urgencyHint(bool propval)
+  @property void urgencyHint(bool propval) nothrow
   {
     setUrgencyHint(propval);
   }
 
   /** */
-  @property gtk.types.WindowPosition windowPosition()
+  @property gtk.types.WindowPosition windowPosition() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.WindowPosition)("window-position");
   }
 
   /** */
-  @property void windowPosition(gtk.types.WindowPosition propval)
+  @property void windowPosition(gtk.types.WindowPosition propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.WindowPosition)("window-position", propval);
   }
@@ -650,7 +650,7 @@ class Window : gtk.bin.Bin
         type = type of window
       Returns: a new #GtkWindow.
   */
-  this(gtk.types.WindowType type)
+  this(gtk.types.WindowType type) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_new(type);
@@ -664,7 +664,7 @@ class Window : gtk.bin.Bin
       incremented.
       Returns: copy of default icon list
   */
-  static gdkpixbuf.pixbuf.Pixbuf[] getDefaultIconList()
+  static gdkpixbuf.pixbuf.Pixbuf[] getDefaultIconList() nothrow
   {
     GList* _cretval;
     _cretval = gtk_window_get_default_icon_list();
@@ -680,7 +680,7 @@ class Window : gtk.bin.Bin
       [gtk.window.Window.setDefaultIconName].
       Returns: the fallback icon name for windows
   */
-  static string getDefaultIconName()
+  static string getDefaultIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_default_icon_name();
@@ -697,7 +697,7 @@ class Window : gtk.bin.Bin
       then unref all the widgets afterwards.
       Returns: list of toplevel widgets
   */
-  static gtk.widget.Widget[] listToplevels()
+  static gtk.widget.Widget[] listToplevels() nothrow
   {
     GList* _cretval;
     _cretval = gtk_window_list_toplevels();
@@ -719,7 +719,7 @@ class Window : gtk.bin.Bin
       Params:
         setting = true to automatically do startup notification
   */
-  static void setAutoStartupNotification(bool setting)
+  static void setAutoStartupNotification(bool setting) nothrow
   {
     gtk_window_set_auto_startup_notification(setting);
   }
@@ -731,7 +731,7 @@ class Window : gtk.bin.Bin
       Params:
         icon = the icon
   */
-  static void setDefaultIcon(gdkpixbuf.pixbuf.Pixbuf icon)
+  static void setDefaultIcon(gdkpixbuf.pixbuf.Pixbuf icon) nothrow
   {
     gtk_window_set_default_icon(icon ? cast(GdkPixbuf*)icon._cPtr(No.Dup) : null);
   }
@@ -765,7 +765,7 @@ class Window : gtk.bin.Bin
       Params:
         name = the name of the themed icon
   */
-  static void setDefaultIconName(string name)
+  static void setDefaultIconName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_window_set_default_icon_name(_name);
@@ -779,7 +779,7 @@ class Window : gtk.bin.Bin
       Params:
         enable = true to enable interactive debugging
   */
-  static void setInteractiveDebugging(bool enable)
+  static void setInteractiveDebugging(bool enable) nothrow
   {
     gtk_window_set_interactive_debugging(enable);
   }
@@ -791,7 +791,7 @@ class Window : gtk.bin.Bin
       focused widget is activated.
       Returns: true if a widget got activated.
   */
-  bool activateDefault()
+  bool activateDefault() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_activate_default(cast(GtkWindow*)this._cPtr);
@@ -802,7 +802,7 @@ class Window : gtk.bin.Bin
       Activates the current focused widget within the window.
       Returns: true if a widget got activated.
   */
-  bool activateFocus()
+  bool activateFocus() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_activate_focus(cast(GtkWindow*)this._cPtr);
@@ -819,7 +819,7 @@ class Window : gtk.bin.Bin
         event = a #GdkEventKey
       Returns: true if a mnemonic or accelerator was found and activated.
   */
-  bool activateKey(gdk.event_key.EventKey event)
+  bool activateKey(gdk.event_key.EventKey event) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_activate_key(cast(GtkWindow*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr : null);
@@ -834,7 +834,7 @@ class Window : gtk.bin.Bin
       Params:
         accelGroup = a #GtkAccelGroup
   */
-  void addAccelGroup(gtk.accel_group.AccelGroup accelGroup)
+  void addAccelGroup(gtk.accel_group.AccelGroup accelGroup) nothrow
   {
     gtk_window_add_accel_group(cast(GtkWindow*)this._cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup._cPtr(No.Dup) : null);
   }
@@ -846,7 +846,7 @@ class Window : gtk.bin.Bin
         keyval = the mnemonic
         target = the widget that gets activated by the mnemonic
   */
-  void addMnemonic(uint keyval, gtk.widget.Widget target)
+  void addMnemonic(uint keyval, gtk.widget.Widget target) nothrow
   {
     gtk_window_add_mnemonic(cast(GtkWindow*)this._cPtr, keyval, target ? cast(GtkWidget*)target._cPtr(No.Dup) : null);
   }
@@ -865,7 +865,7 @@ class Window : gtk.bin.Bin
         rootY = Y position where the user clicked to initiate the drag
         timestamp = timestamp from the click event that initiated the drag
   */
-  void beginMoveDrag(int button, int rootX, int rootY, uint timestamp)
+  void beginMoveDrag(int button, int rootX, int rootY, uint timestamp) nothrow
   {
     gtk_window_begin_move_drag(cast(GtkWindow*)this._cPtr, button, rootX, rootY, timestamp);
   }
@@ -885,7 +885,7 @@ class Window : gtk.bin.Bin
         rootY = Y position where the user clicked to initiate the drag
         timestamp = timestamp from the click event that initiated the drag
   */
-  void beginResizeDrag(gdk.types.WindowEdge edge, int button, int rootX, int rootY, uint timestamp)
+  void beginResizeDrag(gdk.types.WindowEdge edge, int button, int rootX, int rootY, uint timestamp) nothrow
   {
     gtk_window_begin_resize_drag(cast(GtkWindow*)this._cPtr, edge, button, rootX, rootY, timestamp);
   }
@@ -897,7 +897,7 @@ class Window : gtk.bin.Bin
       This function can be used with close buttons in custom
       titlebars.
   */
-  void close()
+  void close() nothrow
   {
     gtk_window_close(cast(GtkWindow*)this._cPtr);
   }
@@ -912,7 +912,7 @@ class Window : gtk.bin.Bin
       You can track iconification via the “window-state-event” signal
       on #GtkWidget.
   */
-  void deiconify()
+  void deiconify() nothrow
   {
     gtk_window_deiconify(cast(GtkWindow*)this._cPtr);
   }
@@ -929,7 +929,7 @@ class Window : gtk.bin.Bin
       You can track the fullscreen state via the “window-state-event” signal
       on #GtkWidget.
   */
-  void fullscreen()
+  void fullscreen() nothrow
   {
     gtk_window_fullscreen(cast(GtkWindow*)this._cPtr);
   }
@@ -945,7 +945,7 @@ class Window : gtk.bin.Bin
         screen = a #GdkScreen to draw to
         monitor = which monitor to go fullscreen on
   */
-  void fullscreenOnMonitor(gdk.screen.Screen screen, int monitor)
+  void fullscreenOnMonitor(gdk.screen.Screen screen, int monitor) nothrow
   {
     gtk_window_fullscreen_on_monitor(cast(GtkWindow*)this._cPtr, screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null, monitor);
   }
@@ -954,7 +954,7 @@ class Window : gtk.bin.Bin
       Gets the value set by [gtk.window.Window.setAcceptFocus].
       Returns: true if window should receive the input focus
   */
-  bool getAcceptFocus()
+  bool getAcceptFocus() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_accept_focus(cast(GtkWindow*)this._cPtr);
@@ -965,7 +965,7 @@ class Window : gtk.bin.Bin
       Gets the #GtkApplication associated with the window (if any).
       Returns: a #GtkApplication, or null
   */
-  gtk.application.Application getApplication()
+  gtk.application.Application getApplication() nothrow
   {
     GtkApplication* _cretval;
     _cretval = gtk_window_get_application(cast(GtkWindow*)this._cPtr);
@@ -979,7 +979,7 @@ class Window : gtk.bin.Bin
       Returns: the widget where the window
         is attached, or null if the window is not attached to any widget.
   */
-  gtk.widget.Widget getAttachedTo()
+  gtk.widget.Widget getAttachedTo() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_attached_to(cast(GtkWindow*)this._cPtr);
@@ -992,7 +992,7 @@ class Window : gtk.bin.Bin
       such as a title bar via [gtk.window.Window.setDecorated].
       Returns: true if the window has been set to have decorations
   */
-  bool getDecorated()
+  bool getDecorated() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_decorated(cast(GtkWindow*)this._cPtr);
@@ -1009,7 +1009,7 @@ class Window : gtk.bin.Bin
         width = location to store the default width, or null
         height = location to store the default height, or null
   */
-  void getDefaultSize(out int width, out int height)
+  void getDefaultSize(out int width, out int height) nothrow
   {
     gtk_window_get_default_size(cast(GtkWindow*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
@@ -1020,7 +1020,7 @@ class Window : gtk.bin.Bin
       Returns: the default widget, or null
         if there is none.
   */
-  gtk.widget.Widget getDefaultWidget()
+  gtk.widget.Widget getDefaultWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_default_widget(cast(GtkWindow*)this._cPtr);
@@ -1033,7 +1033,7 @@ class Window : gtk.bin.Bin
       via [gtk.window.Window.setDeletable].
       Returns: true if the window has been set to have a close button
   */
-  bool getDeletable()
+  bool getDeletable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_deletable(cast(GtkWindow*)this._cPtr);
@@ -1045,7 +1045,7 @@ class Window : gtk.bin.Bin
       gtk_window_set_destroy_with_parent ().
       Returns: true if the window will be destroyed with its transient parent.
   */
-  bool getDestroyWithParent()
+  bool getDestroyWithParent() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_destroy_with_parent(cast(GtkWindow*)this._cPtr);
@@ -1061,7 +1061,7 @@ class Window : gtk.bin.Bin
       Returns: the currently focused widget,
         or null if there is none.
   */
-  gtk.widget.Widget getFocus()
+  gtk.widget.Widget getFocus() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_focus(cast(GtkWindow*)this._cPtr);
@@ -1074,7 +1074,7 @@ class Window : gtk.bin.Bin
       Returns: true if window should receive the input focus when
         mapped.
   */
-  bool getFocusOnMap()
+  bool getFocusOnMap() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_focus_on_map(cast(GtkWindow*)this._cPtr);
@@ -1086,7 +1086,7 @@ class Window : gtk.bin.Bin
       Returns: true if “focus rectangles” are supposed to be visible
             in this window.
   */
-  bool getFocusVisible()
+  bool getFocusVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_focus_visible(cast(GtkWindow*)this._cPtr);
@@ -1097,7 +1097,7 @@ class Window : gtk.bin.Bin
       Gets the value set by [gtk.window.Window.setGravity].
       Returns: window gravity
   */
-  gdk.types.Gravity getGravity()
+  gdk.types.Gravity getGravity() nothrow
   {
     GdkGravity _cretval;
     _cretval = gtk_window_get_gravity(cast(GtkWindow*)this._cPtr);
@@ -1111,7 +1111,7 @@ class Window : gtk.bin.Bin
       window group.
       Returns: the #GtkWindowGroup for a window or the default group
   */
-  gtk.window_group.WindowGroup getGroup()
+  gtk.window_group.WindowGroup getGroup() nothrow
   {
     GtkWindowGroup* _cretval;
     _cretval = gtk_window_get_group(cast(GtkWindow*)this._cPtr);
@@ -1125,7 +1125,7 @@ class Window : gtk.bin.Bin
   
       Deprecated: Resize grips have been removed.
   */
-  bool getHasResizeGrip()
+  bool getHasResizeGrip() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_has_resize_grip(cast(GtkWindow*)this._cPtr);
@@ -1138,7 +1138,7 @@ class Window : gtk.bin.Bin
       Returns: true if the window has requested to have its titlebar
                       hidden when maximized
   */
-  bool getHideTitlebarWhenMaximized()
+  bool getHideTitlebarWhenMaximized() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_hide_titlebar_when_maximized(cast(GtkWindow*)this._cPtr);
@@ -1151,7 +1151,7 @@ class Window : gtk.bin.Bin
       the icon list).
       Returns: icon for window or null if none
   */
-  gdkpixbuf.pixbuf.Pixbuf getIcon()
+  gdkpixbuf.pixbuf.Pixbuf getIcon() nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gtk_window_get_icon(cast(GtkWindow*)this._cPtr);
@@ -1165,7 +1165,7 @@ class Window : gtk.bin.Bin
       member won’t be incremented.
       Returns: copy of window’s icon list
   */
-  gdkpixbuf.pixbuf.Pixbuf[] getIconList()
+  gdkpixbuf.pixbuf.Pixbuf[] getIconList() nothrow
   {
     GList* _cretval;
     _cretval = gtk_window_get_icon_list(cast(GtkWindow*)this._cPtr);
@@ -1179,7 +1179,7 @@ class Window : gtk.bin.Bin
       Returns: the icon name or null if the window has
         no themed icon
   */
-  string getIconName()
+  string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_icon_name(cast(GtkWindow*)this._cPtr);
@@ -1193,7 +1193,7 @@ class Window : gtk.bin.Bin
       Returns: the modifier mask used to activate
                       mnemonics on this window.
   */
-  gdk.types.ModifierType getMnemonicModifier()
+  gdk.types.ModifierType getMnemonicModifier() nothrow
   {
     GdkModifierType _cretval;
     _cretval = gtk_window_get_mnemonic_modifier(cast(GtkWindow*)this._cPtr);
@@ -1206,7 +1206,7 @@ class Window : gtk.bin.Bin
       Returns: true if mnemonics are supposed to be visible
         in this window.
   */
-  bool getMnemonicsVisible()
+  bool getMnemonicsVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_mnemonics_visible(cast(GtkWindow*)this._cPtr);
@@ -1218,7 +1218,7 @@ class Window : gtk.bin.Bin
       Returns: true if the window is set to be modal and
                       establishes a grab when shown
   */
-  bool getModal()
+  bool getModal() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_modal(cast(GtkWindow*)this._cPtr);
@@ -1232,7 +1232,7 @@ class Window : gtk.bin.Bin
   
       Deprecated: Use gtk_widget_get_opacity instead.
   */
-  override double getOpacity()
+  override double getOpacity() nothrow
   {
     double _retval;
     _retval = gtk_window_get_opacity(cast(GtkWindow*)this._cPtr);
@@ -1283,7 +1283,7 @@ class Window : gtk.bin.Bin
         rootY = return location for Y coordinate of
               gravity-determined reference point, or null
   */
-  void getPosition(out int rootX, out int rootY)
+  void getPosition(out int rootX, out int rootY) nothrow
   {
     gtk_window_get_position(cast(GtkWindow*)this._cPtr, cast(int*)&rootX, cast(int*)&rootY);
   }
@@ -1292,7 +1292,7 @@ class Window : gtk.bin.Bin
       Gets the value set by [gtk.window.Window.setResizable].
       Returns: true if the user can resize the window
   */
-  bool getResizable()
+  bool getResizable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_resizable(cast(GtkWindow*)this._cPtr);
@@ -1310,7 +1310,7 @@ class Window : gtk.bin.Bin
   
       Deprecated: Resize grips have been removed.
   */
-  bool getResizeGripArea(out gdk.rectangle.Rectangle rect)
+  bool getResizeGripArea(out gdk.rectangle.Rectangle rect) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_resize_grip_area(cast(GtkWindow*)this._cPtr, cast(GdkRectangle*)&rect);
@@ -1323,7 +1323,7 @@ class Window : gtk.bin.Bin
       Returns: the role of the window if set, or null. The
         returned is owned by the widget and must not be modified or freed.
   */
-  string getRole()
+  string getRole() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_role(cast(GtkWindow*)this._cPtr);
@@ -1335,7 +1335,7 @@ class Window : gtk.bin.Bin
       Returns the #GdkScreen associated with window.
       Returns: a #GdkScreen.
   */
-  override gdk.screen.Screen getScreen()
+  override gdk.screen.Screen getScreen() nothrow
   {
     GdkScreen* _cretval;
     _cretval = gtk_window_get_screen(cast(GtkWindow*)this._cPtr);
@@ -1421,7 +1421,7 @@ class Window : gtk.bin.Bin
         width = return location for width, or null
         height = return location for height, or null
   */
-  void getSize(out int width, out int height)
+  void getSize(out int width, out int height) nothrow
   {
     gtk_window_get_size(cast(GtkWindow*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
@@ -1430,7 +1430,7 @@ class Window : gtk.bin.Bin
       Gets the value set by [gtk.window.Window.setSkipPagerHint].
       Returns: true if window shouldn’t be in pager
   */
-  bool getSkipPagerHint()
+  bool getSkipPagerHint() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_skip_pager_hint(cast(GtkWindow*)this._cPtr);
@@ -1441,7 +1441,7 @@ class Window : gtk.bin.Bin
       Gets the value set by [gtk.window.Window.setSkipTaskbarHint]
       Returns: true if window shouldn’t be in taskbar
   */
-  bool getSkipTaskbarHint()
+  bool getSkipTaskbarHint() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_skip_taskbar_hint(cast(GtkWindow*)this._cPtr);
@@ -1454,7 +1454,7 @@ class Window : gtk.bin.Bin
         been set explicitly. The returned string is owned by the widget
         and must not be modified or freed.
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_title(cast(GtkWindow*)this._cPtr);
@@ -1467,7 +1467,7 @@ class Window : gtk.bin.Bin
       [gtk.window.Window.setTitlebar].
       Returns: the custom titlebar, or null
   */
-  gtk.widget.Widget getTitlebar()
+  gtk.widget.Widget getTitlebar() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_titlebar(cast(GtkWindow*)this._cPtr);
@@ -1481,7 +1481,7 @@ class Window : gtk.bin.Bin
       Returns: the transient parent for this
         window, or null if no transient parent has been set.
   */
-  gtk.window.Window getTransientFor()
+  gtk.window.Window getTransientFor() nothrow
   {
     GtkWindow* _cretval;
     _cretval = gtk_window_get_transient_for(cast(GtkWindow*)this._cPtr);
@@ -1493,7 +1493,7 @@ class Window : gtk.bin.Bin
       Gets the type hint for this window. See [gtk.window.Window.setTypeHint].
       Returns: the type hint for window.
   */
-  gdk.types.WindowTypeHint getTypeHint()
+  gdk.types.WindowTypeHint getTypeHint() nothrow
   {
     GdkWindowTypeHint _cretval;
     _cretval = gtk_window_get_type_hint(cast(GtkWindow*)this._cPtr);
@@ -1505,7 +1505,7 @@ class Window : gtk.bin.Bin
       Gets the value set by [gtk.window.Window.setUrgencyHint]
       Returns: true if window is urgent
   */
-  bool getUrgencyHint()
+  bool getUrgencyHint() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_urgency_hint(cast(GtkWindow*)this._cPtr);
@@ -1516,7 +1516,7 @@ class Window : gtk.bin.Bin
       Gets the type of the window. See #GtkWindowType.
       Returns: the type of the window
   */
-  gtk.types.WindowType getWindowType()
+  gtk.types.WindowType getWindowType() nothrow
   {
     GtkWindowType _cretval;
     _cretval = gtk_window_get_window_type(cast(GtkWindow*)this._cPtr);
@@ -1530,7 +1530,7 @@ class Window : gtk.bin.Bin
         
         Since 2.22
   */
-  bool hasGroup()
+  bool hasGroup() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_has_group(cast(GtkWindow*)this._cPtr);
@@ -1543,7 +1543,7 @@ class Window : gtk.bin.Bin
       but for embedded windows, like #GtkPlug, the results will differ.
       Returns: true if the input focus is within this GtkWindow
   */
-  bool hasToplevelFocus()
+  bool hasToplevelFocus() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_has_toplevel_focus(cast(GtkWindow*)this._cPtr);
@@ -1566,7 +1566,7 @@ class Window : gtk.bin.Bin
       You can track iconification via the “window-state-event” signal
       on #GtkWidget.
   */
-  void iconify()
+  void iconify() nothrow
   {
     gtk_window_iconify(cast(GtkWindow*)this._cPtr);
   }
@@ -1581,7 +1581,7 @@ class Window : gtk.bin.Bin
       See [gtk.window.Window.hasToplevelFocus]
       Returns: true if the window part of the current active window.
   */
-  bool isActive()
+  bool isActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_is_active(cast(GtkWindow*)this._cPtr);
@@ -1598,7 +1598,7 @@ class Window : gtk.bin.Bin
       [gtk.window.Window.maximize] or [gtk.window.Window.unmaximize].
       Returns: whether the window has a maximized state.
   */
-  bool isMaximized()
+  bool isMaximized() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_is_maximized(cast(GtkWindow*)this._cPtr);
@@ -1622,7 +1622,7 @@ class Window : gtk.bin.Bin
       on #GtkWidget, or by listening to notifications on the
       #GtkWindow:is-maximized property.
   */
-  void maximize()
+  void maximize() nothrow
   {
     gtk_window_maximize(cast(GtkWindow*)this._cPtr);
   }
@@ -1637,7 +1637,7 @@ class Window : gtk.bin.Bin
         modifier = the modifiers
       Returns: true if the activation is done.
   */
-  bool mnemonicActivate(uint keyval, gdk.types.ModifierType modifier)
+  bool mnemonicActivate(uint keyval, gdk.types.ModifierType modifier) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_mnemonic_activate(cast(GtkWindow*)this._cPtr, keyval, modifier);
@@ -1683,7 +1683,7 @@ class Window : gtk.bin.Bin
         x = X coordinate to move window to
         y = Y coordinate to move window to
   */
-  void move(int x, int y)
+  void move(int x, int y) nothrow
   {
     gtk_window_move(cast(GtkWindow*)this._cPtr, x, y);
   }
@@ -1767,7 +1767,7 @@ class Window : gtk.bin.Bin
   
       Deprecated: Geometry handling in GTK is deprecated.
   */
-  bool parseGeometry(string geometry)
+  bool parseGeometry(string geometry) nothrow
   {
     bool _retval;
     const(char)* _geometry = geometry.toCString(No.Alloc);
@@ -1780,7 +1780,7 @@ class Window : gtk.bin.Bin
       as when it is called, it is too late to gather a valid timestamp
       to allow focus stealing prevention to work correctly.
   */
-  void present()
+  void present() nothrow
   {
     gtk_window_present(cast(GtkWindow*)this._cPtr);
   }
@@ -1809,7 +1809,7 @@ class Window : gtk.bin.Bin
         timestamp = the timestamp of the user interaction (typically a
             button or key press event) which triggered this call
   */
-  void presentWithTime(uint timestamp)
+  void presentWithTime(uint timestamp) nothrow
   {
     gtk_window_present_with_time(cast(GtkWindow*)this._cPtr, timestamp);
   }
@@ -1826,7 +1826,7 @@ class Window : gtk.bin.Bin
         event = a #GdkEventKey
       Returns: true if a widget in the focus chain handled the event.
   */
-  bool propagateKeyEvent(gdk.event_key.EventKey event)
+  bool propagateKeyEvent(gdk.event_key.EventKey event) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_propagate_key_event(cast(GtkWindow*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr : null);
@@ -1839,7 +1839,7 @@ class Window : gtk.bin.Bin
       Params:
         accelGroup = a #GtkAccelGroup
   */
-  void removeAccelGroup(gtk.accel_group.AccelGroup accelGroup)
+  void removeAccelGroup(gtk.accel_group.AccelGroup accelGroup) nothrow
   {
     gtk_window_remove_accel_group(cast(GtkWindow*)this._cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup._cPtr(No.Dup) : null);
   }
@@ -1851,7 +1851,7 @@ class Window : gtk.bin.Bin
         keyval = the mnemonic
         target = the widget that gets activated by the mnemonic
   */
-  void removeMnemonic(uint keyval, gtk.widget.Widget target)
+  void removeMnemonic(uint keyval, gtk.widget.Widget target) nothrow
   {
     gtk_window_remove_mnemonic(cast(GtkWindow*)this._cPtr, keyval, target ? cast(GtkWidget*)target._cPtr(No.Dup) : null);
   }
@@ -1865,7 +1865,7 @@ class Window : gtk.bin.Bin
           [gtk.widget.Widget.unrealize] and then [gtk.widget.Widget.show] on window
           themselves, if they still need this functionality.
   */
-  void reshowWithInitialSize()
+  void reshowWithInitialSize() nothrow
   {
     gtk_window_reshow_with_initial_size(cast(GtkWindow*)this._cPtr);
   }
@@ -1904,7 +1904,7 @@ class Window : gtk.bin.Bin
         width = width in pixels to resize the window to
         height = height in pixels to resize the window to
   */
-  void resize(int width, int height)
+  void resize(int width, int height) nothrow
   {
     gtk_window_resize(cast(GtkWindow*)this._cPtr, width, height);
   }
@@ -1915,7 +1915,7 @@ class Window : gtk.bin.Bin
   
       Deprecated: Resize grips have been removed.
   */
-  bool resizeGripIsVisible()
+  bool resizeGripIsVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_resize_grip_is_visible(cast(GtkWindow*)this._cPtr);
@@ -1934,7 +1934,7 @@ class Window : gtk.bin.Bin
       Deprecated: This function does nothing. Use
            [gtk.window.Window.resize] and compute the geometry yourself.
   */
-  void resizeToGeometry(int width, int height)
+  void resizeToGeometry(int width, int height) nothrow
   {
     gtk_window_resize_to_geometry(cast(GtkWindow*)this._cPtr, width, height);
   }
@@ -1946,7 +1946,7 @@ class Window : gtk.bin.Bin
       Params:
         setting = true to let this window receive input focus
   */
-  void setAcceptFocus(bool setting)
+  void setAcceptFocus(bool setting) nothrow
   {
     gtk_window_set_accept_focus(cast(GtkWindow*)this._cPtr, setting);
   }
@@ -1968,7 +1968,7 @@ class Window : gtk.bin.Bin
       Params:
         application = a #GtkApplication, or null to unset
   */
-  void setApplication(gtk.application.Application application = null)
+  void setApplication(gtk.application.Application application = null) nothrow
   {
     gtk_window_set_application(cast(GtkWindow*)this._cPtr, application ? cast(GtkApplication*)application._cPtr(No.Dup) : null);
   }
@@ -1992,7 +1992,7 @@ class Window : gtk.bin.Bin
       Params:
         attachWidget = a #GtkWidget, or null
   */
-  void setAttachedTo(gtk.widget.Widget attachWidget = null)
+  void setAttachedTo(gtk.widget.Widget attachWidget = null) nothrow
   {
     gtk_window_set_attached_to(cast(GtkWindow*)this._cPtr, attachWidget ? cast(GtkWidget*)attachWidget._cPtr(No.Dup) : null);
   }
@@ -2013,7 +2013,7 @@ class Window : gtk.bin.Bin
       Params:
         setting = true to decorate the window
   */
-  void setDecorated(bool setting)
+  void setDecorated(bool setting) nothrow
   {
     gtk_window_set_decorated(cast(GtkWindow*)this._cPtr, setting);
   }
@@ -2031,7 +2031,7 @@ class Window : gtk.bin.Bin
         defaultWidget = widget to be the default, or null
               to unset the default widget for the toplevel
   */
-  void setDefault(gtk.widget.Widget defaultWidget = null)
+  void setDefault(gtk.widget.Widget defaultWidget = null) nothrow
   {
     gtk_window_set_default(cast(GtkWindow*)this._cPtr, defaultWidget ? cast(GtkWidget*)defaultWidget._cPtr(No.Dup) : null);
   }
@@ -2048,7 +2048,7 @@ class Window : gtk.bin.Bin
       Deprecated: This function does nothing. If you want to set a default
             size, use [gtk.window.Window.setDefaultSize] instead.
   */
-  void setDefaultGeometry(int width, int height)
+  void setDefaultGeometry(int width, int height) nothrow
   {
     gtk_window_set_default_geometry(cast(GtkWindow*)this._cPtr, width, height);
   }
@@ -2092,7 +2092,7 @@ class Window : gtk.bin.Bin
         width = width in pixels, or -1 to unset the default width
         height = height in pixels, or -1 to unset the default height
   */
-  void setDefaultSize(int width, int height)
+  void setDefaultSize(int width, int height) nothrow
   {
     gtk_window_set_default_size(cast(GtkWindow*)this._cPtr, width, height);
   }
@@ -2112,7 +2112,7 @@ class Window : gtk.bin.Bin
       Params:
         setting = true to decorate the window as deletable
   */
-  void setDeletable(bool setting)
+  void setDeletable(bool setting) nothrow
   {
     gtk_window_set_deletable(cast(GtkWindow*)this._cPtr, setting);
   }
@@ -2126,7 +2126,7 @@ class Window : gtk.bin.Bin
       Params:
         setting = whether to destroy window with its transient parent
   */
-  void setDestroyWithParent(bool setting)
+  void setDestroyWithParent(bool setting) nothrow
   {
     gtk_window_set_destroy_with_parent(cast(GtkWindow*)this._cPtr, setting);
   }
@@ -2142,7 +2142,7 @@ class Window : gtk.bin.Bin
         focus = widget to be the new focus widget, or null to unset
             any focus widget for the toplevel window.
   */
-  void setFocus(gtk.widget.Widget focus = null)
+  void setFocus(gtk.widget.Widget focus = null) nothrow
   {
     gtk_window_set_focus(cast(GtkWindow*)this._cPtr, focus ? cast(GtkWidget*)focus._cPtr(No.Dup) : null);
   }
@@ -2155,7 +2155,7 @@ class Window : gtk.bin.Bin
       Params:
         setting = true to let this window receive input focus on map
   */
-  void setFocusOnMap(bool setting)
+  void setFocusOnMap(bool setting) nothrow
   {
     gtk_window_set_focus_on_map(cast(GtkWindow*)this._cPtr, setting);
   }
@@ -2166,7 +2166,7 @@ class Window : gtk.bin.Bin
       Params:
         setting = the new value
   */
-  void setFocusVisible(bool setting)
+  void setFocusVisible(bool setting) nothrow
   {
     gtk_window_set_focus_visible(cast(GtkWindow*)this._cPtr, setting);
   }
@@ -2184,7 +2184,7 @@ class Window : gtk.bin.Bin
         geometry = struct containing geometry information or null
         geomMask = mask indicating which struct fields should be paid attention to
   */
-  void setGeometryHints(gtk.widget.Widget geometryWidget, gdk.types.Geometry geometry, gdk.types.WindowHints geomMask)
+  void setGeometryHints(gtk.widget.Widget geometryWidget, gdk.types.Geometry geometry, gdk.types.WindowHints geomMask) nothrow
   {
     gtk_window_set_geometry_hints(cast(GtkWindow*)this._cPtr, geometryWidget ? cast(GtkWidget*)geometryWidget._cPtr(No.Dup) : null, &geometry, geomMask);
   }
@@ -2200,7 +2200,7 @@ class Window : gtk.bin.Bin
       Params:
         gravity = window gravity
   */
-  void setGravity(gdk.types.Gravity gravity)
+  void setGravity(gdk.types.Gravity gravity) nothrow
   {
     gtk_window_set_gravity(cast(GtkWindow*)this._cPtr, gravity);
   }
@@ -2218,7 +2218,7 @@ class Window : gtk.bin.Bin
   
       Deprecated: Resize grips have been removed.
   */
-  void setHasResizeGrip(bool value)
+  void setHasResizeGrip(bool value) nothrow
   {
     gtk_window_set_has_resize_grip(cast(GtkWindow*)this._cPtr, value);
   }
@@ -2235,7 +2235,7 @@ class Window : gtk.bin.Bin
       Params:
         setting = the new value
   */
-  void setHasUserRefCount(bool setting)
+  void setHasUserRefCount(bool setting) nothrow
   {
     gtk_window_set_has_user_ref_count(cast(GtkWindow*)this._cPtr, setting);
   }
@@ -2255,7 +2255,7 @@ class Window : gtk.bin.Bin
       Params:
         setting = whether to hide the titlebar when window is maximized
   */
-  void setHideTitlebarWhenMaximized(bool setting)
+  void setHideTitlebarWhenMaximized(bool setting) nothrow
   {
     gtk_window_set_hide_titlebar_when_maximized(cast(GtkWindow*)this._cPtr, setting);
   }
@@ -2284,7 +2284,7 @@ class Window : gtk.bin.Bin
       Params:
         icon = icon image, or null
   */
-  void setIcon(gdkpixbuf.pixbuf.Pixbuf icon = null)
+  void setIcon(gdkpixbuf.pixbuf.Pixbuf icon = null) nothrow
   {
     gtk_window_set_icon(cast(GtkWindow*)this._cPtr, icon ? cast(GdkPixbuf*)icon._cPtr(No.Dup) : null);
   }
@@ -2342,7 +2342,7 @@ class Window : gtk.bin.Bin
       Params:
         list = list of #GdkPixbuf
   */
-  void setIconList(gdkpixbuf.pixbuf.Pixbuf[] list)
+  void setIconList(gdkpixbuf.pixbuf.Pixbuf[] list) nothrow
   {
     auto _list = gListFromD!(gdkpixbuf.pixbuf.Pixbuf)(list);
     scope(exit) containerFree!(GList*, gdkpixbuf.pixbuf.Pixbuf, GidOwnership.None)(_list);
@@ -2360,7 +2360,7 @@ class Window : gtk.bin.Bin
       Params:
         name = the name of the themed icon
   */
-  void setIconName(string name = null)
+  void setIconName(string name = null) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_window_set_icon_name(cast(GtkWindow*)this._cPtr, _name);
@@ -2391,7 +2391,7 @@ class Window : gtk.bin.Bin
       Params:
         setting = whether to keep window above other windows
   */
-  void setKeepAbove(bool setting)
+  void setKeepAbove(bool setting) nothrow
   {
     gtk_window_set_keep_above(cast(GtkWindow*)this._cPtr, setting);
   }
@@ -2421,7 +2421,7 @@ class Window : gtk.bin.Bin
       Params:
         setting = whether to keep window below other windows
   */
-  void setKeepBelow(bool setting)
+  void setKeepBelow(bool setting) nothrow
   {
     gtk_window_set_keep_below(cast(GtkWindow*)this._cPtr, setting);
   }
@@ -2433,7 +2433,7 @@ class Window : gtk.bin.Bin
         modifier = the modifier mask used to activate
                         mnemonics on this window.
   */
-  void setMnemonicModifier(gdk.types.ModifierType modifier)
+  void setMnemonicModifier(gdk.types.ModifierType modifier) nothrow
   {
     gtk_window_set_mnemonic_modifier(cast(GtkWindow*)this._cPtr, modifier);
   }
@@ -2444,7 +2444,7 @@ class Window : gtk.bin.Bin
       Params:
         setting = the new value
   */
-  void setMnemonicsVisible(bool setting)
+  void setMnemonicsVisible(bool setting) nothrow
   {
     gtk_window_set_mnemonics_visible(cast(GtkWindow*)this._cPtr, setting);
   }
@@ -2460,7 +2460,7 @@ class Window : gtk.bin.Bin
       Params:
         modal = whether the window is modal
   */
-  void setModal(bool modal)
+  void setModal(bool modal) nothrow
   {
     gtk_window_set_modal(cast(GtkWindow*)this._cPtr, modal);
   }
@@ -2481,7 +2481,7 @@ class Window : gtk.bin.Bin
   
       Deprecated: Use gtk_widget_set_opacity instead.
   */
-  override void setOpacity(double opacity)
+  override void setOpacity(double opacity) nothrow
   {
     gtk_window_set_opacity(cast(GtkWindow*)this._cPtr, opacity);
   }
@@ -2494,7 +2494,7 @@ class Window : gtk.bin.Bin
       Params:
         position = a position constraint.
   */
-  void setPosition(gtk.types.WindowPosition position)
+  void setPosition(gtk.types.WindowPosition position) nothrow
   {
     gtk_window_set_position(cast(GtkWindow*)this._cPtr, position);
   }
@@ -2506,7 +2506,7 @@ class Window : gtk.bin.Bin
       Params:
         resizable = true if the user can resize this window
   */
-  void setResizable(bool resizable)
+  void setResizable(bool resizable) nothrow
   {
     gtk_window_set_resizable(cast(GtkWindow*)this._cPtr, resizable);
   }
@@ -2528,7 +2528,7 @@ class Window : gtk.bin.Bin
       Params:
         role = unique identifier for the window to be used when restoring a session
   */
-  void setRole(string role)
+  void setRole(string role) nothrow
   {
     const(char)* _role = role.toCString(No.Alloc);
     gtk_window_set_role(cast(GtkWindow*)this._cPtr, _role);
@@ -2542,7 +2542,7 @@ class Window : gtk.bin.Bin
       Params:
         screen = a #GdkScreen.
   */
-  void setScreen(gdk.screen.Screen screen)
+  void setScreen(gdk.screen.Screen screen) nothrow
   {
     gtk_window_set_screen(cast(GtkWindow*)this._cPtr, screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
   }
@@ -2557,7 +2557,7 @@ class Window : gtk.bin.Bin
       Params:
         setting = true to keep this window from appearing in the pager
   */
-  void setSkipPagerHint(bool setting)
+  void setSkipPagerHint(bool setting) nothrow
   {
     gtk_window_set_skip_pager_hint(cast(GtkWindow*)this._cPtr, setting);
   }
@@ -2569,7 +2569,7 @@ class Window : gtk.bin.Bin
       Params:
         setting = true to keep this window from appearing in the task bar
   */
-  void setSkipTaskbarHint(bool setting)
+  void setSkipTaskbarHint(bool setting) nothrow
   {
     gtk_window_set_skip_taskbar_hint(cast(GtkWindow*)this._cPtr, setting);
   }
@@ -2589,7 +2589,7 @@ class Window : gtk.bin.Bin
       Params:
         startupId = a string with startup-notification identifier
   */
-  void setStartupId(string startupId)
+  void setStartupId(string startupId) nothrow
   {
     const(char)* _startupId = startupId.toCString(No.Alloc);
     gtk_window_set_startup_id(cast(GtkWindow*)this._cPtr, _startupId);
@@ -2608,7 +2608,7 @@ class Window : gtk.bin.Bin
       Params:
         title = title of the window
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_window_set_title(cast(GtkWindow*)this._cPtr, _title);
@@ -2629,7 +2629,7 @@ class Window : gtk.bin.Bin
       Params:
         titlebar = the widget to use as titlebar
   */
-  void setTitlebar(gtk.widget.Widget titlebar = null)
+  void setTitlebar(gtk.widget.Widget titlebar = null) nothrow
   {
     gtk_window_set_titlebar(cast(GtkWindow*)this._cPtr, titlebar ? cast(GtkWidget*)titlebar._cPtr(No.Dup) : null);
   }
@@ -2657,7 +2657,7 @@ class Window : gtk.bin.Bin
       Params:
         parent = parent window, or null
   */
-  void setTransientFor(gtk.window.Window parent = null)
+  void setTransientFor(gtk.window.Window parent = null) nothrow
   {
     gtk_window_set_transient_for(cast(GtkWindow*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
   }
@@ -2675,7 +2675,7 @@ class Window : gtk.bin.Bin
       Params:
         hint = the window type
   */
-  void setTypeHint(gdk.types.WindowTypeHint hint)
+  void setTypeHint(gdk.types.WindowTypeHint hint) nothrow
   {
     gtk_window_set_type_hint(cast(GtkWindow*)this._cPtr, hint);
   }
@@ -2687,7 +2687,7 @@ class Window : gtk.bin.Bin
       Params:
         setting = true to mark this window as urgent
   */
-  void setUrgencyHint(bool setting)
+  void setUrgencyHint(bool setting) nothrow
   {
     gtk_window_set_urgency_hint(cast(GtkWindow*)this._cPtr, setting);
   }
@@ -2706,7 +2706,7 @@ class Window : gtk.bin.Bin
         wmclassName = window name hint
         wmclassClass = window class hint
   */
-  void setWmclass(string wmclassName, string wmclassClass)
+  void setWmclass(string wmclassName, string wmclassClass) nothrow
   {
     const(char)* _wmclassName = wmclassName.toCString(No.Alloc);
     const(char)* _wmclassClass = wmclassClass.toCString(No.Alloc);
@@ -2727,7 +2727,7 @@ class Window : gtk.bin.Bin
       You can track stickiness via the “window-state-event” signal
       on #GtkWidget.
   */
-  void stick()
+  void stick() nothrow
   {
     gtk_window_stick(cast(GtkWindow*)this._cPtr);
   }
@@ -2744,7 +2744,7 @@ class Window : gtk.bin.Bin
       You can track the fullscreen state via the “window-state-event” signal
       on #GtkWidget.
   */
-  void unfullscreen()
+  void unfullscreen() nothrow
   {
     gtk_window_unfullscreen(cast(GtkWindow*)this._cPtr);
   }
@@ -2760,7 +2760,7 @@ class Window : gtk.bin.Bin
       You can track maximization via the “window-state-event” signal
       on #GtkWidget.
   */
-  void unmaximize()
+  void unmaximize() nothrow
   {
     gtk_window_unmaximize(cast(GtkWindow*)this._cPtr);
   }
@@ -2776,7 +2776,7 @@ class Window : gtk.bin.Bin
       You can track stickiness via the “window-state-event” signal
       on #GtkWidget.
   */
-  void unstick()
+  void unstick() nothrow
   {
     gtk_window_unstick(cast(GtkWindow*)this._cPtr);
   }
@@ -2799,13 +2799,13 @@ class Window : gtk.bin.Bin
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivateDefault(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivateDefault(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.window.Window)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2814,7 +2814,14 @@ class Window : gtk.bin.Bin
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.window.Window.activateDefault");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2839,13 +2846,13 @@ class Window : gtk.bin.Bin
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivateFocus(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivateFocus(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.window.Window)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2854,7 +2861,14 @@ class Window : gtk.bin.Bin
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.window.Window.activateFocus");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2886,18 +2900,19 @@ class Window : gtk.bin.Bin
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEnableDebugging(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEnableDebugging(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.window.Window)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -2905,7 +2920,14 @@ class Window : gtk.bin.Bin
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.window.Window.enableDebugging");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -2930,13 +2952,13 @@ class Window : gtk.bin.Bin
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectKeysChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectKeysChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.window.Window)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2945,7 +2967,14 @@ class Window : gtk.bin.Bin
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.window.Window.keysChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2970,14 +2999,14 @@ class Window : gtk.bin.Bin
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSetFocus(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSetFocus(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.window.Window)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2989,7 +3018,14 @@ class Window : gtk.bin.Bin
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.window.Window.setFocus");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3008,7 +3044,7 @@ class WindowGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
         propval = Whether the window should receive the input focus.
       Returns: Builder instance for fluent chaining
   */
-  T acceptFocus(bool propval)
+  T acceptFocus(bool propval) nothrow
   {
     return setProperty("accept-focus", propval);
   }
@@ -3027,7 +3063,7 @@ class WindowGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
           remove it by setting the :application property to null.
       Returns: Builder instance for fluent chaining
   */
-  T application(gtk.application.Application propval)
+  T application(gtk.application.Application propval) nothrow
   {
     return setProperty("application", propval);
   }
@@ -3044,7 +3080,7 @@ class WindowGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
           created by #GtkTreeView.
       Returns: Builder instance for fluent chaining
   */
-  T attachedTo(gtk.widget.Widget propval)
+  T attachedTo(gtk.widget.Widget propval) nothrow
   {
     return setProperty("attached-to", propval);
   }
@@ -3055,19 +3091,19 @@ class WindowGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
         propval = Whether the window should be decorated by the window manager.
       Returns: Builder instance for fluent chaining
   */
-  T decorated(bool propval)
+  T decorated(bool propval) nothrow
   {
     return setProperty("decorated", propval);
   }
 
   /** */
-  T defaultHeight(int propval)
+  T defaultHeight(int propval) nothrow
   {
     return setProperty("default-height", propval);
   }
 
   /** */
-  T defaultWidth(int propval)
+  T defaultWidth(int propval) nothrow
   {
     return setProperty("default-width", propval);
   }
@@ -3078,13 +3114,13 @@ class WindowGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
         propval = Whether the window frame should have a close button.
       Returns: Builder instance for fluent chaining
   */
-  T deletable(bool propval)
+  T deletable(bool propval) nothrow
   {
     return setProperty("deletable", propval);
   }
 
   /** */
-  T destroyWithParent(bool propval)
+  T destroyWithParent(bool propval) nothrow
   {
     return setProperty("destroy-with-parent", propval);
   }
@@ -3095,7 +3131,7 @@ class WindowGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
         propval = Whether the window should receive the input focus when mapped.
       Returns: Builder instance for fluent chaining
   */
-  T focusOnMap(bool propval)
+  T focusOnMap(bool propval) nothrow
   {
     return setProperty("focus-on-map", propval);
   }
@@ -3109,7 +3145,7 @@ class WindowGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
           and should not be set by applications.
       Returns: Builder instance for fluent chaining
   */
-  T focusVisible(bool propval)
+  T focusVisible(bool propval) nothrow
   {
     return setProperty("focus-visible", propval);
   }
@@ -3121,7 +3157,7 @@ class WindowGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
           more details about window gravity.
       Returns: Builder instance for fluent chaining
   */
-  T gravity(gdk.types.Gravity propval)
+  T gravity(gdk.types.Gravity propval) nothrow
   {
     return setProperty("gravity", propval);
   }
@@ -3139,7 +3175,7 @@ class WindowGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
   
       Deprecated: Resize grips have been removed.
   */
-  T hasResizeGrip(bool propval)
+  T hasResizeGrip(bool propval) nothrow
   {
     return setProperty("has-resize-grip", propval);
   }
@@ -3150,13 +3186,13 @@ class WindowGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
         propval = Whether the titlebar should be hidden during maximization.
       Returns: Builder instance for fluent chaining
   */
-  T hideTitlebarWhenMaximized(bool propval)
+  T hideTitlebarWhenMaximized(bool propval) nothrow
   {
     return setProperty("hide-titlebar-when-maximized", propval);
   }
 
   /** */
-  T icon(gdkpixbuf.pixbuf.Pixbuf propval)
+  T icon(gdkpixbuf.pixbuf.Pixbuf propval) nothrow
   {
     return setProperty("icon", propval);
   }
@@ -3168,7 +3204,7 @@ class WindowGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
           use as the window icon. See #GtkIconTheme for more details.
       Returns: Builder instance for fluent chaining
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
@@ -3182,43 +3218,43 @@ class WindowGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
           and should not be set by applications.
       Returns: Builder instance for fluent chaining
   */
-  T mnemonicsVisible(bool propval)
+  T mnemonicsVisible(bool propval) nothrow
   {
     return setProperty("mnemonics-visible", propval);
   }
 
   /** */
-  T modal(bool propval)
+  T modal(bool propval) nothrow
   {
     return setProperty("modal", propval);
   }
 
   /** */
-  T resizable(bool propval)
+  T resizable(bool propval) nothrow
   {
     return setProperty("resizable", propval);
   }
 
   /** */
-  T role(string propval)
+  T role(string propval) nothrow
   {
     return setProperty("role", propval);
   }
 
   /** */
-  T screen(gdk.screen.Screen propval)
+  T screen(gdk.screen.Screen propval) nothrow
   {
     return setProperty("screen", propval);
   }
 
   /** */
-  T skipPagerHint(bool propval)
+  T skipPagerHint(bool propval) nothrow
   {
     return setProperty("skip-pager-hint", propval);
   }
 
   /** */
-  T skipTaskbarHint(bool propval)
+  T skipTaskbarHint(bool propval) nothrow
   {
     return setProperty("skip-taskbar-hint", propval);
   }
@@ -3231,13 +3267,13 @@ class WindowGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
           for more details.
       Returns: Builder instance for fluent chaining
   */
-  T startupId(string propval)
+  T startupId(string propval) nothrow
   {
     return setProperty("startup-id", propval);
   }
 
   /** */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -3249,31 +3285,31 @@ class WindowGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
           more details about transient windows.
       Returns: Builder instance for fluent chaining
   */
-  T transientFor(gtk.window.Window propval)
+  T transientFor(gtk.window.Window propval) nothrow
   {
     return setProperty("transient-for", propval);
   }
 
   /** */
-  T type(gtk.types.WindowType propval)
+  T type(gtk.types.WindowType propval) nothrow
   {
     return setProperty("type", propval);
   }
 
   /** */
-  T typeHint(gdk.types.WindowTypeHint propval)
+  T typeHint(gdk.types.WindowTypeHint propval) nothrow
   {
     return setProperty("type-hint", propval);
   }
 
   /** */
-  T urgencyHint(bool propval)
+  T urgencyHint(bool propval) nothrow
   {
     return setProperty("urgency-hint", propval);
   }
 
   /** */
-  T windowPosition(gtk.types.WindowPosition propval)
+  T windowPosition(gtk.types.WindowPosition propval) nothrow
   {
     return setProperty("window-position", propval);
   }
@@ -3286,7 +3322,7 @@ final class WindowGidBuilder : WindowGidBuilderImpl!WindowGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Window build()
+  Window build() nothrow
   {
     return new Window(cast(void*)createGObject(Window._getGType), No.Take);
   }

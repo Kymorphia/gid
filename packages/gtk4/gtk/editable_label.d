@@ -52,26 +52,26 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_editable_label_get_type != &gidSymbolNotFound ? gtk_editable_label_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EditableLabel self()
+  override EditableLabel self() nothrow
   {
     return this;
   }
@@ -80,7 +80,7 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
       Get builder for [gtk.editable_label.EditableLabel]
       Returns: New builder object
   */
-  static EditableLabelGidBuilder builder()
+  static EditableLabelGidBuilder builder() nothrow
   {
     return new EditableLabelGidBuilder;
   }
@@ -89,7 +89,7 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
       Get `editing` property.
       Returns: This property is true while the widget is in edit mode.
   */
-  @property bool editing()
+  @property bool editing() nothrow
   {
     return getEditing();
   }
@@ -99,7 +99,7 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
       Params:
         propval = This property is true while the widget is in edit mode.
   */
-  @property void editing(bool propval)
+  @property void editing(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("editing", propval);
   }
@@ -113,7 +113,7 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
         str = the text for the label
       Returns: the new [gtk.editable_label.EditableLabel]
   */
-  this(string str)
+  this(string str) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -125,7 +125,7 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
       Returns whether the label is currently in “editing mode”.
       Returns: true if self is currently in editing mode
   */
-  bool getEditing()
+  bool getEditing() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_editable_label_get_editing(cast(GtkEditableLabel*)this._cPtr);
@@ -135,7 +135,7 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
   /**
       Switches the label into “editing mode”.
   */
-  void startEditing()
+  void startEditing() nothrow
   {
     gtk_editable_label_start_editing(cast(GtkEditableLabel*)this._cPtr);
   }
@@ -151,7 +151,7 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
       Params:
         commit = whether to set the edited text on the label
   */
-  void stopEditing(bool commit)
+  void stopEditing(bool commit) nothrow
   {
     gtk_editable_label_stop_editing(cast(GtkEditableLabel*)this._cPtr, commit);
   }
@@ -169,7 +169,7 @@ class EditableLabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.ed
         propval = This property is true while the widget is in edit mode.
       Returns: Builder instance for fluent chaining
   */
-  T editing(bool propval)
+  T editing(bool propval) nothrow
   {
     return setProperty("editing", propval);
   }
@@ -182,7 +182,7 @@ final class EditableLabelGidBuilder : EditableLabelGidBuilderImpl!EditableLabelG
       Create object from builder.
       Returns: New object
   */
-  EditableLabel build()
+  EditableLabel build() nothrow
   {
     return new EditableLabel(cast(void*)createGObject(EditableLabel._getGType), No.Take);
   }

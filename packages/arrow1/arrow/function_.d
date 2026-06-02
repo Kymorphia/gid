@@ -20,26 +20,26 @@ class Function : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_function_get_type != &gidSymbolNotFound ? garrow_function_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Function self()
+  override Function self() nothrow
   {
     return this;
   }
@@ -48,13 +48,13 @@ class Function : gobject.object.ObjectWrap
       Get builder for [arrow.function_.Function]
       Returns: New builder object
   */
-  static FunctionGidBuilder builder()
+  static FunctionGidBuilder builder() nothrow
   {
     return new FunctionGidBuilder;
   }
 
   /** */
-  static arrow.function_.Function[] all()
+  static arrow.function_.Function[] all() nothrow
   {
     GList* _cretval;
     _cretval = garrow_function_all();
@@ -63,7 +63,7 @@ class Function : gobject.object.ObjectWrap
   }
 
   /** */
-  static arrow.function_.Function find(string name)
+  static arrow.function_.Function find(string name) nothrow
   {
     GArrowFunction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -73,7 +73,7 @@ class Function : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equal(arrow.function_.Function otherFunction)
+  bool equal(arrow.function_.Function otherFunction) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_function_equal(cast(GArrowFunction*)this._cPtr, otherFunction ? cast(GArrowFunction*)otherFunction._cPtr(No.Dup) : null);
@@ -95,7 +95,7 @@ class Function : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.function_options.FunctionOptions getDefaultOptions()
+  arrow.function_options.FunctionOptions getDefaultOptions() nothrow
   {
     GArrowFunctionOptions* _cretval;
     _cretval = garrow_function_get_default_options(cast(GArrowFunction*)this._cPtr);
@@ -104,7 +104,7 @@ class Function : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.function_doc.FunctionDoc getDoc()
+  arrow.function_doc.FunctionDoc getDoc() nothrow
   {
     GArrowFunctionDoc* _cretval;
     _cretval = garrow_function_get_doc(cast(GArrowFunction*)this._cPtr);
@@ -113,7 +113,7 @@ class Function : gobject.object.ObjectWrap
   }
 
   /** */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = garrow_function_get_name(cast(GArrowFunction*)this._cPtr);
@@ -122,7 +122,7 @@ class Function : gobject.object.ObjectWrap
   }
 
   /** */
-  gobject.types.GType getOptionsType()
+  gobject.types.GType getOptionsType() nothrow
   {
     gobject.types.GType _retval;
     _retval = garrow_function_get_options_type(cast(GArrowFunction*)this._cPtr);
@@ -130,7 +130,7 @@ class Function : gobject.object.ObjectWrap
   }
 
   /** */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = garrow_function_to_string(cast(GArrowFunction*)this._cPtr);
@@ -144,7 +144,7 @@ class FunctionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T function_(void* propval)
+  T function_(void* propval) nothrow
   {
     return setProperty("function", propval);
   }
@@ -157,7 +157,7 @@ final class FunctionGidBuilder : FunctionGidBuilderImpl!FunctionGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Function build()
+  Function build() nothrow
   {
     return new Function(cast(void*)createGObject(Function._getGType), No.Take);
   }

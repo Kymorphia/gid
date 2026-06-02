@@ -85,13 +85,13 @@ struct TypeClass
       Deprecated: Use the G_ADD_PRIVATE() macro with the `G_DEFINE_*`
           family of macros to add instance private data to a type
   */
-  void addPrivate(size_t privateSize)
+  void addPrivate(size_t privateSize) nothrow
   {
     g_type_class_add_private(cast(GTypeClass*)&this, privateSize);
   }
 
   /** */
-  void* getPrivate(gobject.types.GType privateType)
+  void* getPrivate(gobject.types.GType privateType) nothrow
   {
     auto _retval = g_type_class_get_private(cast(GTypeClass*)&this, privateType);
     return _retval;
@@ -109,7 +109,7 @@ struct TypeClass
       Returns: the parent class
             of g_class
   */
-  gobject.type_class.TypeClass peekParent()
+  gobject.type_class.TypeClass peekParent() nothrow
   {
     GTypeClass* _cretval;
     _cretval = g_type_class_peek_parent(cast(GTypeClass*)&this);
@@ -132,7 +132,7 @@ struct TypeClass
             structure for the given type ID or null if the class does not
             currently exist
   */
-  static gobject.type_class.TypeClass peek(gobject.types.GType type)
+  static gobject.type_class.TypeClass peek(gobject.types.GType type) nothrow
   {
     GTypeClass* _cretval;
     _cretval = g_type_class_peek(type);
@@ -152,7 +152,7 @@ struct TypeClass
             structure for the given type ID or null if the class does not
             currently exist or is dynamically loaded
   */
-  static gobject.type_class.TypeClass peekStatic(gobject.types.GType type)
+  static gobject.type_class.TypeClass peekStatic(gobject.types.GType type) nothrow
   {
     GTypeClass* _cretval;
     _cretval = g_type_class_peek_static(type);
@@ -172,7 +172,7 @@ struct TypeClass
       Returns: the #GTypeClass
             structure for the given type ID
   */
-  static gobject.type_class.TypeClass ref_(gobject.types.GType type)
+  static gobject.type_class.TypeClass ref_(gobject.types.GType type) nothrow
   {
     GTypeClass* _cretval;
     _cretval = g_type_class_ref(type);

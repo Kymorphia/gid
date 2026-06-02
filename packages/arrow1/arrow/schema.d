@@ -16,26 +16,26 @@ class Schema : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_schema_get_type != &gidSymbolNotFound ? garrow_schema_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Schema self()
+  override Schema self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class Schema : gobject.object.ObjectWrap
       Get builder for [arrow.schema.Schema]
       Returns: New builder object
   */
-  static SchemaGidBuilder builder()
+  static SchemaGidBuilder builder() nothrow
   {
     return new SchemaGidBuilder;
   }
 
   /** */
-  this(arrow.field.Field[] fields)
+  this(arrow.field.Field[] fields) nothrow
   {
     GArrowSchema* _cretval;
     auto _fields = gListFromD!(arrow.field.Field)(fields);
@@ -84,7 +84,7 @@ class Schema : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equal(arrow.schema.Schema otherSchema)
+  bool equal(arrow.schema.Schema otherSchema) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_schema_equal(cast(GArrowSchema*)this._cPtr, otherSchema ? cast(GArrowSchema*)otherSchema._cPtr(No.Dup) : null);
@@ -102,7 +102,7 @@ class Schema : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.field.Field getField(uint i)
+  arrow.field.Field getField(uint i) nothrow
   {
     GArrowField* _cretval;
     _cretval = garrow_schema_get_field(cast(GArrowSchema*)this._cPtr, i);
@@ -111,7 +111,7 @@ class Schema : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.field.Field getFieldByName(string name)
+  arrow.field.Field getFieldByName(string name) nothrow
   {
     GArrowField* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -121,7 +121,7 @@ class Schema : gobject.object.ObjectWrap
   }
 
   /** */
-  int getFieldIndex(string name)
+  int getFieldIndex(string name) nothrow
   {
     int _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -130,7 +130,7 @@ class Schema : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.field.Field[] getFields()
+  arrow.field.Field[] getFields() nothrow
   {
     GList* _cretval;
     _cretval = garrow_schema_get_fields(cast(GArrowSchema*)this._cPtr);
@@ -139,7 +139,7 @@ class Schema : gobject.object.ObjectWrap
   }
 
   /** */
-  string[string] getMetadata()
+  string[string] getMetadata() nothrow
   {
     GHashTable* _cretval;
     _cretval = garrow_schema_get_metadata(cast(GArrowSchema*)this._cPtr);
@@ -148,7 +148,7 @@ class Schema : gobject.object.ObjectWrap
   }
 
   /** */
-  bool hasMetadata()
+  bool hasMetadata() nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_schema_has_metadata(cast(GArrowSchema*)this._cPtr);
@@ -156,7 +156,7 @@ class Schema : gobject.object.ObjectWrap
   }
 
   /** */
-  uint nFields()
+  uint nFields() nothrow
   {
     uint _retval;
     _retval = garrow_schema_n_fields(cast(GArrowSchema*)this._cPtr);
@@ -188,7 +188,7 @@ class Schema : gobject.object.ObjectWrap
   }
 
   /** */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = garrow_schema_to_string(cast(GArrowSchema*)this._cPtr);
@@ -197,7 +197,7 @@ class Schema : gobject.object.ObjectWrap
   }
 
   /** */
-  string toStringMetadata(bool showMetadata)
+  string toStringMetadata(bool showMetadata) nothrow
   {
     char* _cretval;
     _cretval = garrow_schema_to_string_metadata(cast(GArrowSchema*)this._cPtr, showMetadata);
@@ -206,7 +206,7 @@ class Schema : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.schema.Schema withMetadata(string[string] metadata)
+  arrow.schema.Schema withMetadata(string[string] metadata) nothrow
   {
     GArrowSchema* _cretval;
     auto _metadata = gHashTableFromD!(string, string)(metadata);
@@ -222,7 +222,7 @@ class SchemaGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T schema(void* propval)
+  T schema(void* propval) nothrow
   {
     return setProperty("schema", propval);
   }
@@ -235,7 +235,7 @@ final class SchemaGidBuilder : SchemaGidBuilderImpl!SchemaGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Schema build()
+  Schema build() nothrow
   {
     return new Schema(cast(void*)createGObject(Schema._getGType), Yes.Take);
   }

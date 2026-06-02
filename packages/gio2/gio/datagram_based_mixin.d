@@ -109,7 +109,7 @@ template DatagramBasedT()
         condition = a #GIOCondition mask to check
       Returns: the #GIOCondition mask of the current state
   */
-  override glib.types.IOCondition conditionCheck(glib.types.IOCondition condition)
+  override glib.types.IOCondition conditionCheck(glib.types.IOCondition condition) nothrow
   {
     GIOCondition _cretval;
     _cretval = g_datagram_based_condition_check(cast(GDatagramBased*)this._cPtr, condition);
@@ -164,7 +164,7 @@ template DatagramBasedT()
         cancellable = a #GCancellable
       Returns: a newly allocated #GSource
   */
-  override glib.source.Source createSource(glib.types.IOCondition condition, gio.cancellable.Cancellable cancellable = null)
+  override glib.source.Source createSource(glib.types.IOCondition condition, gio.cancellable.Cancellable cancellable = null) nothrow
   {
     GSource* _cretval;
     _cretval = g_datagram_based_create_source(cast(GDatagramBased*)this._cPtr, condition, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null);

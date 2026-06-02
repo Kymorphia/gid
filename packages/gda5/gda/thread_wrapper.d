@@ -18,26 +18,26 @@ class ThreadWrapper : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_thread_wrapper_get_type != &gidSymbolNotFound ? gda_thread_wrapper_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ThreadWrapper self()
+  override ThreadWrapper self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class ThreadWrapper : gobject.object.ObjectWrap
       Get builder for [gda.thread_wrapper.ThreadWrapper]
       Returns: New builder object
   */
-  static ThreadWrapperGidBuilder builder()
+  static ThreadWrapperGidBuilder builder() nothrow
   {
     return new ThreadWrapperGidBuilder;
   }
@@ -55,7 +55,7 @@ class ThreadWrapper : gobject.object.ObjectWrap
       Creates a new #GdaThreadWrapper object
       Returns: a new #GdaThreadWrapper object, or null if threads are not supported/enabled
   */
-  this()
+  this() nothrow
   {
     GdaThreadWrapper* _cretval;
     _cretval = gda_thread_wrapper_new();
@@ -63,7 +63,7 @@ class ThreadWrapper : gobject.object.ObjectWrap
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_thread_wrapper_error_quark();
@@ -82,7 +82,7 @@ class ThreadWrapper : gobject.object.ObjectWrap
         id = the ID of a job as returned by [gda.thread_wrapper.ThreadWrapper.execute] or [gda.thread_wrapper.ThreadWrapper.executeVoid]
       Returns: true if the job has been cancelled, or false in any other case.
   */
-  bool cancel(uint id)
+  bool cancel(uint id) nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_thread_wrapper_cancel(cast(GdaThreadWrapper*)this._cPtr, id);
@@ -124,14 +124,21 @@ class ThreadWrapper : gobject.object.ObjectWrap
         callback = a #GdaThreadWrapperCallback function
       Returns: the handler ID
   */
-  gulong connectRaw(void* instance, string sigName, bool privateThread, bool privateJob, gda.types.ThreadWrapperCallback callback)
+  gulong connectRaw(void* instance, string sigName, bool privateThread, bool privateJob, gda.types.ThreadWrapperCallback callback) nothrow
   {
-    extern(C) void _callbackCallback(GdaThreadWrapper* wrapper, void* instance, const(char)* signame, int nParamValues, const(GValue)* paramValues, void* gdaReserved, void* data)
+    extern(C) void _callbackCallback(GdaThreadWrapper* wrapper, void* instance, const(char)* signame, int nParamValues, const(GValue)* paramValues, void* gdaReserved, void* data) nothrow
     {
       auto _dlg = cast(gda.types.ThreadWrapperCallback*)data;
       string _signame = signame.fromCString(No.Free);
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gda.thread_wrapper.ThreadWrapper)(cast(void*)wrapper, No.Take), instance, _signame, nParamValues, paramValues ? new gobject.value.Value(cast(void*)paramValues, No.Take) : null, gdaReserved);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gda.thread_wrapper.ThreadWrapper)(cast(void*)wrapper, No.Take), instance, _signame, nParamValues, paramValues ? new gobject.value.Value(cast(void*)paramValues, No.Take) : null, gdaReserved);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.types.ThreadWrapperCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     gulong _retval;
@@ -151,7 +158,7 @@ class ThreadWrapper : gobject.object.ObjectWrap
       Params:
         id = a handler ID, as returned by [gda.thread_wrapper.ThreadWrapper.connectRaw]
   */
-  void disconnect(gulong id)
+  void disconnect(gulong id) nothrow
   {
     gda_thread_wrapper_disconnect(cast(GdaThreadWrapper*)this._cPtr, id);
   }
@@ -197,7 +204,7 @@ class ThreadWrapper : gobject.object.ObjectWrap
       that object anymore.
       Returns: a new #GIOChannel, or null if it could not be created
   */
-  glib.iochannel.IOChannel getIoChannel()
+  glib.iochannel.IOChannel getIoChannel() nothrow
   {
     GIOChannel* _cretval;
     _cretval = gda_thread_wrapper_get_io_channel(cast(GdaThreadWrapper*)this._cPtr);
@@ -210,7 +217,7 @@ class ThreadWrapper : gobject.object.ObjectWrap
       but which have not yet been executed.
       Returns: the number of jobs not yet executed
   */
-  int getWaitingSize()
+  int getWaitingSize() nothrow
   {
     int _retval;
     _retval = gda_thread_wrapper_get_waiting_size(cast(GdaThreadWrapper*)this._cPtr);
@@ -232,7 +239,7 @@ class ThreadWrapper : gobject.object.ObjectWrap
       Params:
         mayBlock = whether the call may block
   */
-  void iterate(bool mayBlock)
+  void iterate(bool mayBlock) nothrow
   {
     gda_thread_wrapper_iterate(cast(GdaThreadWrapper*)this._cPtr, mayBlock);
   }
@@ -245,7 +252,7 @@ class ThreadWrapper : gobject.object.ObjectWrap
       Params:
         id = a signal ID
   */
-  void stealSignal(gulong id)
+  void stealSignal(gulong id) nothrow
   {
     gda_thread_wrapper_steal_signal(cast(GdaThreadWrapper*)this._cPtr, id);
   }
@@ -253,7 +260,7 @@ class ThreadWrapper : gobject.object.ObjectWrap
   /**
       Does the opposite of [gda.thread_wrapper.ThreadWrapper.getIoChannel]
   */
-  void unsetIoChannel()
+  void unsetIoChannel() nothrow
   {
     gda_thread_wrapper_unset_io_channel(cast(GdaThreadWrapper*)this._cPtr);
   }
@@ -271,7 +278,7 @@ final class ThreadWrapperGidBuilder : ThreadWrapperGidBuilderImpl!ThreadWrapperG
       Create object from builder.
       Returns: New object
   */
-  ThreadWrapper build()
+  ThreadWrapper build() nothrow
   {
     return new ThreadWrapper(cast(void*)createGObject(ThreadWrapper._getGType), Yes.Take);
   }
@@ -279,12 +286,12 @@ final class ThreadWrapperGidBuilder : ThreadWrapperGidBuilderImpl!ThreadWrapperG
 
 class ThreadWrapperException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.thread_wrapper.ThreadWrapper.errorQuark, cast(int)code, msg);
   }

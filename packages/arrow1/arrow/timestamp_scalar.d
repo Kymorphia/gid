@@ -15,26 +15,26 @@ class TimestampScalar : arrow.scalar.Scalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_timestamp_scalar_get_type != &gidSymbolNotFound ? garrow_timestamp_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TimestampScalar self()
+  override TimestampScalar self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class TimestampScalar : arrow.scalar.Scalar
       Get builder for [arrow.timestamp_scalar.TimestampScalar]
       Returns: New builder object
   */
-  static TimestampScalarGidBuilder builder()
+  static TimestampScalarGidBuilder builder() nothrow
   {
     return new TimestampScalarGidBuilder;
   }
 
   /** */
-  this(arrow.timestamp_data_type.TimestampDataType dataType, long value)
+  this(arrow.timestamp_data_type.TimestampDataType dataType, long value) nothrow
   {
     GArrowTimestampScalar* _cretval;
     _cretval = garrow_timestamp_scalar_new(dataType ? cast(GArrowTimestampDataType*)dataType._cPtr(No.Dup) : null, value);
@@ -57,7 +57,7 @@ class TimestampScalar : arrow.scalar.Scalar
   }
 
   /** */
-  long getValue()
+  long getValue() nothrow
   {
     long _retval;
     _retval = garrow_timestamp_scalar_get_value(cast(GArrowTimestampScalar*)this._cPtr);
@@ -77,7 +77,7 @@ final class TimestampScalarGidBuilder : TimestampScalarGidBuilderImpl!TimestampS
       Create object from builder.
       Returns: New object
   */
-  TimestampScalar build()
+  TimestampScalar build() nothrow
   {
     return new TimestampScalar(cast(void*)createGObject(TimestampScalar._getGType), Yes.Take);
   }

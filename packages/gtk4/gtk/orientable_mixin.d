@@ -29,7 +29,7 @@ template OrientableT()
       Get `orientation` property.
       Returns: The orientation of the orientable.
   */
-  @property gtk.types.Orientation orientation()
+  @property gtk.types.Orientation orientation() nothrow
   {
     return getOrientation();
   }
@@ -39,7 +39,7 @@ template OrientableT()
       Params:
         propval = The orientation of the orientable.
   */
-  @property void orientation(gtk.types.Orientation propval)
+  @property void orientation(gtk.types.Orientation propval) nothrow
   {
     setOrientation(propval);
   }
@@ -48,7 +48,7 @@ template OrientableT()
       Retrieves the orientation of the orientable.
       Returns: the orientation of the orientable
   */
-  override gtk.types.Orientation getOrientation()
+  override gtk.types.Orientation getOrientation() nothrow
   {
     GtkOrientation _cretval;
     _cretval = gtk_orientable_get_orientation(cast(GtkOrientable*)this._cPtr);
@@ -62,7 +62,7 @@ template OrientableT()
       Params:
         orientation = the orientable’s new orientation
   */
-  override void setOrientation(gtk.types.Orientation orientation)
+  override void setOrientation(gtk.types.Orientation orientation) nothrow
   {
     gtk_orientable_set_orientation(cast(GtkOrientable*)this._cPtr, orientation);
   }
@@ -78,7 +78,7 @@ template OrientableGidBuilderT()
         propval = The orientation of the orientable.
       Returns: Builder instance for fluent chaining
   */
-  T orientation(gtk.types.Orientation propval)
+  T orientation(gtk.types.Orientation propval) nothrow
   {
     return setProperty("orientation", propval);
   }

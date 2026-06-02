@@ -26,26 +26,26 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_bookmark_list_get_type != &gidSymbolNotFound ? gtk_bookmark_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BookmarkList self()
+  override BookmarkList self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get builder for [gtk.bookmark_list.BookmarkList]
       Returns: New builder object
   */
-  static BookmarkListGidBuilder builder()
+  static BookmarkListGidBuilder builder() nothrow
   {
     return new BookmarkListGidBuilder;
   }
@@ -63,7 +63,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `attributes` property.
       Returns: The attributes to query.
   */
-  @property string attributes()
+  @property string attributes() nothrow
   {
     return getAttributes();
   }
@@ -73,7 +73,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Params:
         propval = The attributes to query.
   */
-  @property void attributes(string propval)
+  @property void attributes(string propval) nothrow
   {
     setAttributes(propval);
   }
@@ -82,7 +82,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `filename` property.
       Returns: The bookmark file to load.
   */
-  @property string filename()
+  @property string filename() nothrow
   {
     return getFilename();
   }
@@ -91,7 +91,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `ioPriority` property.
       Returns: Priority used when loading.
   */
-  @property int ioPriority()
+  @property int ioPriority() nothrow
   {
     return getIoPriority();
   }
@@ -101,7 +101,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Params:
         propval = Priority used when loading.
   */
-  @property void ioPriority(int propval)
+  @property void ioPriority(int propval) nothrow
   {
     setIoPriority(propval);
   }
@@ -110,7 +110,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
-  @property gobject.types.GType itemType()
+  @property gobject.types.GType itemType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
   }
@@ -119,7 +119,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `loading` property.
       Returns: true if files are being loaded.
   */
-  @property bool loading()
+  @property bool loading() nothrow
   {
     return isLoading();
   }
@@ -128,7 +128,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `nItems` property.
       Returns: The number of items. See [gio.list_model.ListModel.getNItems].
   */
-  @property uint nItems()
+  @property uint nItems() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
@@ -143,7 +143,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
         attributes = The attributes to query
       Returns: a new [gtk.bookmark_list.BookmarkList]
   */
-  this(string filename = null, string attributes = null)
+  this(string filename = null, string attributes = null) nothrow
   {
     GtkBookmarkList* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -156,7 +156,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Gets the attributes queried on the children.
       Returns: The queried attributes
   */
-  string getAttributes()
+  string getAttributes() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_bookmark_list_get_attributes(cast(GtkBookmarkList*)this._cPtr);
@@ -169,7 +169,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
       this list is loading.
       Returns: the filename of the .xbel file
   */
-  string getFilename()
+  string getFilename() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_bookmark_list_get_filename(cast(GtkBookmarkList*)this._cPtr);
@@ -181,7 +181,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Gets the IO priority to use while loading file.
       Returns: The IO priority.
   */
-  int getIoPriority()
+  int getIoPriority() nothrow
   {
     int _retval;
     _retval = gtk_bookmark_list_get_io_priority(cast(GtkBookmarkList*)this._cPtr);
@@ -196,7 +196,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
       in between runs.
       Returns: true if self is loading
   */
-  bool isLoading()
+  bool isLoading() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_bookmark_list_is_loading(cast(GtkBookmarkList*)this._cPtr);
@@ -212,7 +212,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Params:
         attributes = the attributes to enumerate
   */
-  void setAttributes(string attributes = null)
+  void setAttributes(string attributes = null) nothrow
   {
     const(char)* _attributes = attributes.toCString(No.Alloc);
     gtk_bookmark_list_set_attributes(cast(GtkBookmarkList*)this._cPtr, _attributes);
@@ -226,7 +226,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Params:
         ioPriority = IO priority to use
   */
-  void setIoPriority(int ioPriority)
+  void setIoPriority(int ioPriority) nothrow
   {
     gtk_bookmark_list_set_io_priority(cast(GtkBookmarkList*)this._cPtr, ioPriority);
   }
@@ -244,7 +244,7 @@ class BookmarkListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
         propval = The attributes to query.
       Returns: Builder instance for fluent chaining
   */
-  T attributes(string propval)
+  T attributes(string propval) nothrow
   {
     return setProperty("attributes", propval);
   }
@@ -255,7 +255,7 @@ class BookmarkListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
         propval = The bookmark file to load.
       Returns: Builder instance for fluent chaining
   */
-  T filename(string propval)
+  T filename(string propval) nothrow
   {
     return setProperty("filename", propval);
   }
@@ -266,7 +266,7 @@ class BookmarkListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
         propval = Priority used when loading.
       Returns: Builder instance for fluent chaining
   */
-  T ioPriority(int propval)
+  T ioPriority(int propval) nothrow
   {
     return setProperty("io-priority", propval);
   }
@@ -279,7 +279,7 @@ final class BookmarkListGidBuilder : BookmarkListGidBuilderImpl!BookmarkListGidB
       Create object from builder.
       Returns: New object
   */
-  BookmarkList build()
+  BookmarkList build() nothrow
   {
     return new BookmarkList(cast(void*)createGObject(BookmarkList._getGType), Yes.Take);
   }

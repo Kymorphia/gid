@@ -28,7 +28,7 @@ interface Hypertext
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_hypertext_get_type != &gidSymbolNotFound ? atk_hypertext_get_type() : cast(GType)0;
@@ -81,7 +81,7 @@ interface Hypertext
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLinkSelected(T)(T callback, Flag!"After" after = No.After);
+  gulong connectLinkSelected(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [atk.hypertext.Hypertext]

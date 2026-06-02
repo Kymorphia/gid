@@ -18,11 +18,8 @@ class SqlStatementCheckValidityData
   GdaSqlStatementCheckValidityData _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.sql_statement_check_validity_data.SqlStatementCheckValidityData");
-
     _cInstance = *cast(GdaSqlStatementCheckValidityData*)ptr;
 
     if (take)
@@ -30,45 +27,45 @@ class SqlStatementCheckValidityData
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
 
   /** */
-  @property gda.connection.Connection cnc()
+  @property gda.connection.Connection cnc() nothrow
   {
     return cToD!(gda.connection.Connection)(cast(void*)(cast(GdaSqlStatementCheckValidityData*)this._cPtr).cnc);
   }
 
   /** */
-  @property void cnc(gda.connection.Connection propval)
+  @property void cnc(gda.connection.Connection propval) nothrow
   {
     cValueFree!(gda.connection.Connection)(cast(void*)(cast(GdaSqlStatementCheckValidityData*)this._cPtr).cnc);
     dToC(propval, cast(void*)&(cast(GdaSqlStatementCheckValidityData*)this._cPtr).cnc);
   }
 
   /** */
-  @property gda.meta_store.MetaStore store()
+  @property gda.meta_store.MetaStore store() nothrow
   {
     return cToD!(gda.meta_store.MetaStore)(cast(void*)(cast(GdaSqlStatementCheckValidityData*)this._cPtr).store);
   }
 
   /** */
-  @property void store(gda.meta_store.MetaStore propval)
+  @property void store(gda.meta_store.MetaStore propval) nothrow
   {
     cValueFree!(gda.meta_store.MetaStore)(cast(void*)(cast(GdaSqlStatementCheckValidityData*)this._cPtr).store);
     dToC(propval, cast(void*)&(cast(GdaSqlStatementCheckValidityData*)this._cPtr).store);
   }
 
   /** */
-  @property gda.meta_struct.MetaStruct mstruct()
+  @property gda.meta_struct.MetaStruct mstruct() nothrow
   {
     return cToD!(gda.meta_struct.MetaStruct)(cast(void*)(cast(GdaSqlStatementCheckValidityData*)this._cPtr).mstruct);
   }
 
   /** */
-  @property void mstruct(gda.meta_struct.MetaStruct propval)
+  @property void mstruct(gda.meta_struct.MetaStruct propval) nothrow
   {
     cValueFree!(gda.meta_struct.MetaStruct)(cast(void*)(cast(GdaSqlStatementCheckValidityData*)this._cPtr).mstruct);
     dToC(propval, cast(void*)&(cast(GdaSqlStatementCheckValidityData*)this._cPtr).mstruct);

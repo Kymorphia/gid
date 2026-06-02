@@ -14,26 +14,26 @@ class FixedWidthDataType : arrow.data_type.DataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_fixed_width_data_type_get_type != &gidSymbolNotFound ? garrow_fixed_width_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FixedWidthDataType self()
+  override FixedWidthDataType self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class FixedWidthDataType : arrow.data_type.DataType
       Get builder for [arrow.fixed_width_data_type.FixedWidthDataType]
       Returns: New builder object
   */
-  static FixedWidthDataTypeGidBuilder builder()
+  static FixedWidthDataTypeGidBuilder builder() nothrow
   {
     return new FixedWidthDataTypeGidBuilder;
   }
 
   /** */
-  int getBitWidth()
+  int getBitWidth() nothrow
   {
     int _retval;
     _retval = garrow_fixed_width_data_type_get_bit_width(cast(GArrowFixedWidthDataType*)this._cPtr);
@@ -68,7 +68,7 @@ final class FixedWidthDataTypeGidBuilder : FixedWidthDataTypeGidBuilderImpl!Fixe
       Create object from builder.
       Returns: New object
   */
-  FixedWidthDataType build()
+  FixedWidthDataType build() nothrow
   {
     return new FixedWidthDataType(cast(void*)createGObject(FixedWidthDataType._getGType), No.Take);
   }

@@ -40,26 +40,26 @@ class StatusPage : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_status_page_get_type != &gidSymbolNotFound ? adw_status_page_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StatusPage self()
+  override StatusPage self() nothrow
   {
     return this;
   }
@@ -68,7 +68,7 @@ class StatusPage : gtk.widget.Widget
       Get builder for [adw.status_page.StatusPage]
       Returns: New builder object
   */
-  static StatusPageGidBuilder builder()
+  static StatusPageGidBuilder builder() nothrow
   {
     return new StatusPageGidBuilder;
   }
@@ -77,7 +77,7 @@ class StatusPage : gtk.widget.Widget
       Get `child` property.
       Returns: The child widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -87,7 +87,7 @@ class StatusPage : gtk.widget.Widget
       Params:
         propval = The child widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -96,7 +96,7 @@ class StatusPage : gtk.widget.Widget
       Get `description` property.
       Returns: The description markup to be displayed below the title.
   */
-  @property string description()
+  @property string description() nothrow
   {
     return getDescription();
   }
@@ -106,7 +106,7 @@ class StatusPage : gtk.widget.Widget
       Params:
         propval = The description markup to be displayed below the title.
   */
-  @property void description(string propval)
+  @property void description(string propval) nothrow
   {
     setDescription(propval);
   }
@@ -117,7 +117,7 @@ class StatusPage : gtk.widget.Widget
         
         Changing this will set [adw.status_page.StatusPage.paintable] to `NULL`.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return getIconName();
   }
@@ -129,7 +129,7 @@ class StatusPage : gtk.widget.Widget
           
           Changing this will set [adw.status_page.StatusPage.paintable] to `NULL`.
   */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     setIconName(propval);
   }
@@ -140,7 +140,7 @@ class StatusPage : gtk.widget.Widget
         
         Changing this will set [adw.status_page.StatusPage.iconName] to `NULL`.
   */
-  @property gdk.paintable.Paintable paintable()
+  @property gdk.paintable.Paintable paintable() nothrow
   {
     return getPaintable();
   }
@@ -152,7 +152,7 @@ class StatusPage : gtk.widget.Widget
           
           Changing this will set [adw.status_page.StatusPage.iconName] to `NULL`.
   */
-  @property void paintable(gdk.paintable.Paintable propval)
+  @property void paintable(gdk.paintable.Paintable propval) nothrow
   {
     setPaintable(propval);
   }
@@ -163,7 +163,7 @@ class StatusPage : gtk.widget.Widget
         
         It is not parsed as Pango markup.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -175,7 +175,7 @@ class StatusPage : gtk.widget.Widget
           
           It is not parsed as Pango markup.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -184,7 +184,7 @@ class StatusPage : gtk.widget.Widget
       Creates a new [adw.status_page.StatusPage].
       Returns: the newly created [adw.status_page.StatusPage]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_status_page_new();
@@ -195,7 +195,7 @@ class StatusPage : gtk.widget.Widget
       Gets the child widget of self.
       Returns: the child widget of self
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_status_page_get_child(cast(AdwStatusPage*)this._cPtr);
@@ -207,7 +207,7 @@ class StatusPage : gtk.widget.Widget
       Gets the description markup for self.
       Returns: the description
   */
-  string getDescription()
+  string getDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_status_page_get_description(cast(AdwStatusPage*)this._cPtr);
@@ -219,7 +219,7 @@ class StatusPage : gtk.widget.Widget
       Gets the icon name for self.
       Returns: the icon name
   */
-  string getIconName()
+  string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_status_page_get_icon_name(cast(AdwStatusPage*)this._cPtr);
@@ -231,7 +231,7 @@ class StatusPage : gtk.widget.Widget
       Gets the paintable for self.
       Returns: the paintable
   */
-  gdk.paintable.Paintable getPaintable()
+  gdk.paintable.Paintable getPaintable() nothrow
   {
     GdkPaintable* _cretval;
     _cretval = adw_status_page_get_paintable(cast(AdwStatusPage*)this._cPtr);
@@ -243,7 +243,7 @@ class StatusPage : gtk.widget.Widget
       Gets the title for self.
       Returns: the title
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_status_page_get_title(cast(AdwStatusPage*)this._cPtr);
@@ -257,7 +257,7 @@ class StatusPage : gtk.widget.Widget
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     adw_status_page_set_child(cast(AdwStatusPage*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -270,7 +270,7 @@ class StatusPage : gtk.widget.Widget
       Params:
         description = the description
   */
-  void setDescription(string description = null)
+  void setDescription(string description = null) nothrow
   {
     const(char)* _description = description.toCString(No.Alloc);
     adw_status_page_set_description(cast(AdwStatusPage*)this._cPtr, _description);
@@ -284,7 +284,7 @@ class StatusPage : gtk.widget.Widget
       Params:
         iconName = the icon name
   */
-  void setIconName(string iconName = null)
+  void setIconName(string iconName = null) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     adw_status_page_set_icon_name(cast(AdwStatusPage*)this._cPtr, _iconName);
@@ -298,7 +298,7 @@ class StatusPage : gtk.widget.Widget
       Params:
         paintable = the paintable
   */
-  void setPaintable(gdk.paintable.Paintable paintable = null)
+  void setPaintable(gdk.paintable.Paintable paintable = null) nothrow
   {
     adw_status_page_set_paintable(cast(AdwStatusPage*)this._cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable)._cPtr(No.Dup) : null);
   }
@@ -311,7 +311,7 @@ class StatusPage : gtk.widget.Widget
       Params:
         title = the title
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     adw_status_page_set_title(cast(AdwStatusPage*)this._cPtr, _title);
@@ -329,7 +329,7 @@ class StatusPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The child widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -340,7 +340,7 @@ class StatusPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The description markup to be displayed below the title.
       Returns: Builder instance for fluent chaining
   */
-  T description(string propval)
+  T description(string propval) nothrow
   {
     return setProperty("description", propval);
   }
@@ -353,7 +353,7 @@ class StatusPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           Changing this will set [adw.status_page.StatusPage.paintable] to `NULL`.
       Returns: Builder instance for fluent chaining
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
@@ -366,7 +366,7 @@ class StatusPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           Changing this will set [adw.status_page.StatusPage.iconName] to `NULL`.
       Returns: Builder instance for fluent chaining
   */
-  T paintable(gdk.paintable.Paintable propval)
+  T paintable(gdk.paintable.Paintable propval) nothrow
   {
     return setProperty("paintable", propval);
   }
@@ -379,7 +379,7 @@ class StatusPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           It is not parsed as Pango markup.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -392,7 +392,7 @@ final class StatusPageGidBuilder : StatusPageGidBuilderImpl!StatusPageGidBuilder
       Create object from builder.
       Returns: New object
   */
-  StatusPage build()
+  StatusPage build() nothrow
   {
     return new StatusPage(cast(void*)createGObject(StatusPage._getGType), No.Take);
   }

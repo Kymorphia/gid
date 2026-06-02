@@ -27,7 +27,7 @@ interface NetworkMonitor
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_network_monitor_get_type != &gidSymbolNotFound ? g_network_monitor_get_type() : cast(GType)0;
@@ -39,7 +39,7 @@ interface NetworkMonitor
         See [gio.network_monitor.NetworkMonitor.getConnectivity] and
         #GNetworkConnectivity for more details.
   */
-  @property gio.types.NetworkConnectivity connectivity();
+  @property gio.types.NetworkConnectivity connectivity() nothrow;
 
   /**
       Get `networkAvailable` property.
@@ -61,7 +61,7 @@ interface NetworkMonitor
         
         See also #GNetworkMonitor::network-changed.
   */
-  @property bool networkAvailable();
+  @property bool networkAvailable() nothrow;
 
   /**
       Get `networkMetered` property.
@@ -87,14 +87,14 @@ interface NetworkMonitor
         
         See also #GNetworkMonitor:network-available.
   */
-  @property bool networkMetered();
+  @property bool networkMetered() nothrow;
 
   /**
       Gets the default #GNetworkMonitor for the system.
       Returns: a #GNetworkMonitor, which will be
             a dummy object if no network monitor is available
   */
-  static gio.network_monitor.NetworkMonitor getDefault()
+  static gio.network_monitor.NetworkMonitor getDefault() nothrow
   {
     GNetworkMonitor* _cretval;
     _cretval = g_network_monitor_get_default();
@@ -216,7 +216,7 @@ interface NetworkMonitor
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNetworkChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectNetworkChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gio.network_monitor.NetworkMonitor]

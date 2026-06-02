@@ -163,26 +163,26 @@ class MessageDialog : gtk.window.Window
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_message_dialog_get_type != &gidSymbolNotFound ? adw_message_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MessageDialog self()
+  override MessageDialog self() nothrow
   {
     return this;
   }
@@ -191,7 +191,7 @@ class MessageDialog : gtk.window.Window
       Get builder for [adw.message_dialog.MessageDialog]
       Returns: New builder object
   */
-  static MessageDialogGidBuilder builder()
+  static MessageDialogGidBuilder builder() nothrow
   {
     return new MessageDialogGidBuilder;
   }
@@ -200,7 +200,7 @@ class MessageDialog : gtk.window.Window
       Get `body_` property.
       Returns: The body text of the dialog.
   */
-  @property string body_()
+  @property string body_() nothrow
   {
     return getBody();
   }
@@ -210,7 +210,7 @@ class MessageDialog : gtk.window.Window
       Params:
         propval = The body text of the dialog.
   */
-  @property void body_(string propval)
+  @property void body_(string propval) nothrow
   {
     setBody(propval);
   }
@@ -221,7 +221,7 @@ class MessageDialog : gtk.window.Window
         
         See `func@Pango.parse_markup`.
   */
-  @property bool bodyUseMarkup()
+  @property bool bodyUseMarkup() nothrow
   {
     return getBodyUseMarkup();
   }
@@ -233,7 +233,7 @@ class MessageDialog : gtk.window.Window
           
           See `func@Pango.parse_markup`.
   */
-  @property void bodyUseMarkup(bool propval)
+  @property void bodyUseMarkup(bool propval) nothrow
   {
     setBodyUseMarkup(propval);
   }
@@ -249,7 +249,7 @@ class MessageDialog : gtk.window.Window
         
         The default close response is `close`.
   */
-  @property string closeResponse()
+  @property string closeResponse() nothrow
   {
     return getCloseResponse();
   }
@@ -266,7 +266,7 @@ class MessageDialog : gtk.window.Window
           
           The default close response is `close`.
   */
-  @property void closeResponse(string propval)
+  @property void closeResponse(string propval) nothrow
   {
     setCloseResponse(propval);
   }
@@ -280,7 +280,7 @@ class MessageDialog : gtk.window.Window
         If set to `NULL` or a non-existent response ID, pressing <kbd>Enter</kbd>
         will do nothing.
   */
-  @property string defaultResponse()
+  @property string defaultResponse() nothrow
   {
     return getDefaultResponse();
   }
@@ -295,7 +295,7 @@ class MessageDialog : gtk.window.Window
           If set to `NULL` or a non-existent response ID, pressing <kbd>Enter</kbd>
           will do nothing.
   */
-  @property void defaultResponse(string propval)
+  @property void defaultResponse(string propval) nothrow
   {
     setDefaultResponse(propval);
   }
@@ -306,7 +306,7 @@ class MessageDialog : gtk.window.Window
         
         Displayed below the heading and body.
   */
-  @property gtk.widget.Widget extraChild()
+  @property gtk.widget.Widget extraChild() nothrow
   {
     return getExtraChild();
   }
@@ -318,7 +318,7 @@ class MessageDialog : gtk.window.Window
           
           Displayed below the heading and body.
   */
-  @property void extraChild(gtk.widget.Widget propval)
+  @property void extraChild(gtk.widget.Widget propval) nothrow
   {
     setExtraChild(propval);
   }
@@ -327,7 +327,7 @@ class MessageDialog : gtk.window.Window
       Get `heading` property.
       Returns: The heading of the dialog.
   */
-  @property string heading()
+  @property string heading() nothrow
   {
     return getHeading();
   }
@@ -337,7 +337,7 @@ class MessageDialog : gtk.window.Window
       Params:
         propval = The heading of the dialog.
   */
-  @property void heading(string propval)
+  @property void heading(string propval) nothrow
   {
     setHeading(propval);
   }
@@ -348,7 +348,7 @@ class MessageDialog : gtk.window.Window
         
         See `func@Pango.parse_markup`.
   */
-  @property bool headingUseMarkup()
+  @property bool headingUseMarkup() nothrow
   {
     return getHeadingUseMarkup();
   }
@@ -360,7 +360,7 @@ class MessageDialog : gtk.window.Window
           
           See `func@Pango.parse_markup`.
   */
-  @property void headingUseMarkup(bool propval)
+  @property void headingUseMarkup(bool propval) nothrow
   {
     setHeadingUseMarkup(propval);
   }
@@ -387,7 +387,7 @@ class MessageDialog : gtk.window.Window
         body_ = the body text
       Returns: the newly created [adw.message_dialog.MessageDialog]
   */
-  this(gtk.window.Window parent = null, string heading = null, string body_ = null)
+  this(gtk.window.Window parent = null, string heading = null, string body_ = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _heading = heading.toCString(No.Alloc);
@@ -418,7 +418,7 @@ class MessageDialog : gtk.window.Window
         id = the response ID
         label = the response label
   */
-  void addResponse(string id, string label)
+  void addResponse(string id, string label) nothrow
   {
     const(char)* _id = id.toCString(No.Alloc);
     const(char)* _label = label.toCString(No.Alloc);
@@ -435,14 +435,21 @@ class MessageDialog : gtk.window.Window
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
   */
-  void choose(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void choose(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -457,7 +464,7 @@ class MessageDialog : gtk.window.Window
       Returns: the ID of the response that was selected, or
           [adw.message_dialog.MessageDialog.closeResponse] if the call was cancelled.
   */
-  string chooseFinish(gio.async_result.AsyncResult result)
+  string chooseFinish(gio.async_result.AsyncResult result) nothrow
   {
     const(char)* _cretval;
     _cretval = adw_message_dialog_choose_finish(cast(AdwMessageDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null);
@@ -469,7 +476,7 @@ class MessageDialog : gtk.window.Window
       Gets the body text of self.
       Returns: the body of self.
   */
-  string getBody()
+  string getBody() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_message_dialog_get_body(cast(AdwMessageDialog*)this._cPtr);
@@ -481,7 +488,7 @@ class MessageDialog : gtk.window.Window
       Gets whether the body text of self includes Pango markup.
       Returns: whether self uses markup for body text
   */
-  bool getBodyUseMarkup()
+  bool getBodyUseMarkup() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_message_dialog_get_body_use_markup(cast(AdwMessageDialog*)this._cPtr);
@@ -492,7 +499,7 @@ class MessageDialog : gtk.window.Window
       Gets the ID of the close response of self.
       Returns: the close response ID
   */
-  string getCloseResponse()
+  string getCloseResponse() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_message_dialog_get_close_response(cast(AdwMessageDialog*)this._cPtr);
@@ -504,7 +511,7 @@ class MessageDialog : gtk.window.Window
       Gets the ID of the default response of self.
       Returns: the default response ID
   */
-  string getDefaultResponse()
+  string getDefaultResponse() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_message_dialog_get_default_response(cast(AdwMessageDialog*)this._cPtr);
@@ -516,7 +523,7 @@ class MessageDialog : gtk.window.Window
       Gets the child widget of self.
       Returns: the child widget of self.
   */
-  gtk.widget.Widget getExtraChild()
+  gtk.widget.Widget getExtraChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_message_dialog_get_extra_child(cast(AdwMessageDialog*)this._cPtr);
@@ -528,7 +535,7 @@ class MessageDialog : gtk.window.Window
       Gets the heading of self.
       Returns: the heading of self.
   */
-  string getHeading()
+  string getHeading() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_message_dialog_get_heading(cast(AdwMessageDialog*)this._cPtr);
@@ -540,7 +547,7 @@ class MessageDialog : gtk.window.Window
       Gets whether the heading of self includes Pango markup.
       Returns: whether self uses markup for heading
   */
-  bool getHeadingUseMarkup()
+  bool getHeadingUseMarkup() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_message_dialog_get_heading_use_markup(cast(AdwMessageDialog*)this._cPtr);
@@ -556,7 +563,7 @@ class MessageDialog : gtk.window.Window
         response = a response ID
       Returns: the appearance of response
   */
-  adw.types.ResponseAppearance getResponseAppearance(string response)
+  adw.types.ResponseAppearance getResponseAppearance(string response) nothrow
   {
     AdwResponseAppearance _cretval;
     const(char)* _response = response.toCString(No.Alloc);
@@ -574,7 +581,7 @@ class MessageDialog : gtk.window.Window
         response = a response ID
       Returns: whether response is enabled
   */
-  bool getResponseEnabled(string response)
+  bool getResponseEnabled(string response) nothrow
   {
     bool _retval;
     const(char)* _response = response.toCString(No.Alloc);
@@ -591,7 +598,7 @@ class MessageDialog : gtk.window.Window
         response = a response ID
       Returns: the label of response
   */
-  string getResponseLabel(string response)
+  string getResponseLabel(string response) nothrow
   {
     const(char)* _cretval;
     const(char)* _response = response.toCString(No.Alloc);
@@ -607,7 +614,7 @@ class MessageDialog : gtk.window.Window
         response = response ID
       Returns: whether self has a response with the ID response.
   */
-  bool hasResponse(string response)
+  bool hasResponse(string response) nothrow
   {
     bool _retval;
     const(char)* _response = response.toCString(No.Alloc);
@@ -621,7 +628,7 @@ class MessageDialog : gtk.window.Window
       Params:
         id = the response ID
   */
-  void removeResponse(string id)
+  void removeResponse(string id) nothrow
   {
     const(char)* _id = id.toCString(No.Alloc);
     adw_message_dialog_remove_response(cast(AdwMessageDialog*)this._cPtr, _id);
@@ -635,7 +642,7 @@ class MessageDialog : gtk.window.Window
       Params:
         response = response ID
   */
-  void response(string response)
+  void response(string response) nothrow
   {
     const(char)* _response = response.toCString(No.Alloc);
     adw_message_dialog_response(cast(AdwMessageDialog*)this._cPtr, _response);
@@ -647,7 +654,7 @@ class MessageDialog : gtk.window.Window
       Params:
         body_ = the body of self
   */
-  void setBody(string body_)
+  void setBody(string body_) nothrow
   {
     const(char)* _body_ = body_.toCString(No.Alloc);
     adw_message_dialog_set_body(cast(AdwMessageDialog*)this._cPtr, _body_);
@@ -661,7 +668,7 @@ class MessageDialog : gtk.window.Window
       Params:
         useMarkup = whether to use markup for body text
   */
-  void setBodyUseMarkup(bool useMarkup)
+  void setBodyUseMarkup(bool useMarkup) nothrow
   {
     adw_message_dialog_set_body_use_markup(cast(AdwMessageDialog*)this._cPtr, useMarkup);
   }
@@ -679,7 +686,7 @@ class MessageDialog : gtk.window.Window
       Params:
         response = the close response ID
   */
-  void setCloseResponse(string response)
+  void setCloseResponse(string response) nothrow
   {
     const(char)* _response = response.toCString(No.Alloc);
     adw_message_dialog_set_close_response(cast(AdwMessageDialog*)this._cPtr, _response);
@@ -696,7 +703,7 @@ class MessageDialog : gtk.window.Window
       Params:
         response = the default response ID
   */
-  void setDefaultResponse(string response = null)
+  void setDefaultResponse(string response = null) nothrow
   {
     const(char)* _response = response.toCString(No.Alloc);
     adw_message_dialog_set_default_response(cast(AdwMessageDialog*)this._cPtr, _response);
@@ -710,7 +717,7 @@ class MessageDialog : gtk.window.Window
       Params:
         child = the child widget
   */
-  void setExtraChild(gtk.widget.Widget child = null)
+  void setExtraChild(gtk.widget.Widget child = null) nothrow
   {
     adw_message_dialog_set_extra_child(cast(AdwMessageDialog*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -721,7 +728,7 @@ class MessageDialog : gtk.window.Window
       Params:
         heading = the heading of self
   */
-  void setHeading(string heading = null)
+  void setHeading(string heading = null) nothrow
   {
     const(char)* _heading = heading.toCString(No.Alloc);
     adw_message_dialog_set_heading(cast(AdwMessageDialog*)this._cPtr, _heading);
@@ -735,7 +742,7 @@ class MessageDialog : gtk.window.Window
       Params:
         useMarkup = whether to use markup for heading
   */
-  void setHeadingUseMarkup(bool useMarkup)
+  void setHeadingUseMarkup(bool useMarkup) nothrow
   {
     adw_message_dialog_set_heading_use_markup(cast(AdwMessageDialog*)this._cPtr, useMarkup);
   }
@@ -763,7 +770,7 @@ class MessageDialog : gtk.window.Window
         response = a response ID
         appearance = appearance for response
   */
-  void setResponseAppearance(string response, adw.types.ResponseAppearance appearance)
+  void setResponseAppearance(string response, adw.types.ResponseAppearance appearance) nothrow
   {
     const(char)* _response = response.toCString(No.Alloc);
     adw_message_dialog_set_response_appearance(cast(AdwMessageDialog*)this._cPtr, _response, appearance);
@@ -785,7 +792,7 @@ class MessageDialog : gtk.window.Window
         response = a response ID
         enabled = whether to enable response
   */
-  void setResponseEnabled(string response, bool enabled)
+  void setResponseEnabled(string response, bool enabled) nothrow
   {
     const(char)* _response = response.toCString(No.Alloc);
     adw_message_dialog_set_response_enabled(cast(AdwMessageDialog*)this._cPtr, _response, enabled);
@@ -801,7 +808,7 @@ class MessageDialog : gtk.window.Window
         response = a response ID
         label = the label of response
   */
-  void setResponseLabel(string response, string label)
+  void setResponseLabel(string response, string label) nothrow
   {
     const(char)* _response = response.toCString(No.Alloc);
     const(char)* _label = label.toCString(No.Alloc);
@@ -833,14 +840,14 @@ class MessageDialog : gtk.window.Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectResponse(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectResponse(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : adw.message_dialog.MessageDialog)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -852,7 +859,14 @@ class MessageDialog : gtk.window.Window
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.message_dialog.MessageDialog.response");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -871,7 +885,7 @@ class MessageDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
         propval = The body text of the dialog.
       Returns: Builder instance for fluent chaining
   */
-  T body_(string propval)
+  T body_(string propval) nothrow
   {
     return setProperty("body", propval);
   }
@@ -884,7 +898,7 @@ class MessageDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           See `func@Pango.parse_markup`.
       Returns: Builder instance for fluent chaining
   */
-  T bodyUseMarkup(bool propval)
+  T bodyUseMarkup(bool propval) nothrow
   {
     return setProperty("body-use-markup", propval);
   }
@@ -902,7 +916,7 @@ class MessageDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           The default close response is `close`.
       Returns: Builder instance for fluent chaining
   */
-  T closeResponse(string propval)
+  T closeResponse(string propval) nothrow
   {
     return setProperty("close-response", propval);
   }
@@ -918,7 +932,7 @@ class MessageDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           will do nothing.
       Returns: Builder instance for fluent chaining
   */
-  T defaultResponse(string propval)
+  T defaultResponse(string propval) nothrow
   {
     return setProperty("default-response", propval);
   }
@@ -931,7 +945,7 @@ class MessageDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           Displayed below the heading and body.
       Returns: Builder instance for fluent chaining
   */
-  T extraChild(gtk.widget.Widget propval)
+  T extraChild(gtk.widget.Widget propval) nothrow
   {
     return setProperty("extra-child", propval);
   }
@@ -942,7 +956,7 @@ class MessageDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
         propval = The heading of the dialog.
       Returns: Builder instance for fluent chaining
   */
-  T heading(string propval)
+  T heading(string propval) nothrow
   {
     return setProperty("heading", propval);
   }
@@ -955,7 +969,7 @@ class MessageDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           See `func@Pango.parse_markup`.
       Returns: Builder instance for fluent chaining
   */
-  T headingUseMarkup(bool propval)
+  T headingUseMarkup(bool propval) nothrow
   {
     return setProperty("heading-use-markup", propval);
   }
@@ -968,7 +982,7 @@ final class MessageDialogGidBuilder : MessageDialogGidBuilderImpl!MessageDialogG
       Create object from builder.
       Returns: New object
   */
-  MessageDialog build()
+  MessageDialog build() nothrow
   {
     return new MessageDialog(cast(void*)createGObject(MessageDialog._getGType), No.Take);
   }

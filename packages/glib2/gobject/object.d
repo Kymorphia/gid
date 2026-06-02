@@ -17,6 +17,7 @@ import gobject.value;
 
 import core.atomic;
 import std.conv : to;
+import std.exception : assumeWontThrow;
 public import std.typecons : Flag, No, Yes;
 
 import gid.basictypes;
@@ -56,10 +57,10 @@ __gshared bool classMapsInitialized;
 * A convenient string mixin to be used for ObjectWrap derived classes to declare boilerplate constructors.
 * Returns: A string value to use with mixin() within ObjectWrap derived classes.
 */
-string objectMixin()
+string objectMixin() nothrow
 {
   return
-  `  this(void* cObj, Flag!"Take" take)
+  `  this(void* cObj, Flag!"Take" take) nothrow
   {
     super(cObj, take);
   }
@@ -101,7 +102,7 @@ class ObjectWrap
   * Params:
   *   type = The GType value to use for creating the wrapped GObject
   */
-  final this(GType type)
+  final this(GType type) nothrow
   {
     this(g_object_new(type, null), Yes.Take);
   }
@@ -112,15 +113,13 @@ class ObjectWrap
   *   cObj = Pointer to the GObject
   *   take = Yes.Take if the D object should take ownership of the passed reference, No.Take to add a new reference
   */
-  final this(void* cObj, Flag!"Take" take)
+  final this(void* cObj, Flag!"Take" take) nothrow
   {
-    if (!cObj)
-      throw new GidConstructException("Null instance pointer for " ~ typeid(this).name);
-
-    _setGObject(cObj, take);
+    if (cObj)
+      _setGObject(cObj, take);
   }
 
-  ~this()
+  ~this() nothrow
   { // D object is being garbage collected. Only happens when there is only the toggle reference on GObject and there are no more pointers to the D proxy object.
     if (_cInstancePtr) // Might be null if an exception occurred during construction
     {
@@ -135,7 +134,7 @@ class ObjectWrap
   *   cObj = Pointer to the GObject
   *   take = Yes.Take if the D object should take ownership of the passed reference, No.Take to add a new reference
   */
-  final void _setGObject(void* cObj, Flag!"Take" take)
+  final void _setGObject(void* cObj, Flag!"Take" take) nothrow
   {
     assert(!_cInstancePtr);
 
@@ -165,7 +164,7 @@ class ObjectWrap
   }
 
   // Toggle ref callback
-  extern(C) static void _cObjToggleNotify(void *dObj, GObject* gObj, gboolean isLastRef)
+  extern(C) static void _cObjToggleNotify(void *dObj, GObject* gObj, gboolean isLastRef) nothrow
   {
     debug
     {
@@ -185,7 +184,7 @@ class ObjectWrap
   *   dup = Yes.Dup to add a reference with g_object_ref(), No.Dup otherwise (default)
   * Returns: The C object (reference added according to addRef parameter)
   */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     if (dup)
       g_object_ref(_cInstancePtr);
@@ -205,7 +204,7 @@ class ObjectWrap
   *   gObj = The GObject to reference
   * Returns: The GObject
   */
-  static void* _ref(void* gObj)
+  static void* _ref(void* gObj) nothrow
   {
     return g_object_ref(cast(GObject*)gObj);
   }
@@ -215,7 +214,7 @@ class ObjectWrap
   * Params:
   *   gObj = The GObject to reference
   */
-  static _unref(void* gObj)
+  static _unref(void* gObj) nothrow
   {
     g_object_unref(cast(GObject*)gObj);
   }
@@ -224,7 +223,7 @@ class ObjectWrap
   * Get the GType of an object.
   * Returns: The GType
   */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     return g_object_get_type();
   }
@@ -233,7 +232,7 @@ class ObjectWrap
   * GObject GType property.
   * Returns: The GType of the GObject class.
   */
-  @property GType _gType()
+  @property GType _gType() nothrow
   {
     return _getGType;
   }
@@ -242,7 +241,7 @@ class ObjectWrap
   * Convenience method to return `this` cast to a type. For use in D with statements.
   * Returns: The object instance
   */
-  ObjectWrap self()
+  ObjectWrap self() nothrow
   {
     return this;
   }
@@ -255,7 +254,7 @@ class ObjectWrap
   *   take = If Yes.Take then the D object will consume a GObject reference.
   * Returns: The D object (which may be a new object if the GObject wasn't already wrapped)
   */
-  static T _getDObject(T)(void* cptr, Flag!"Take" take)
+  static T _getDObject(T)(void* cptr, Flag!"Take" take) nothrow
   {
     if (!cptr)
       return null;
@@ -273,36 +272,7 @@ class ObjectWrap
     {
       synchronized
       {
-        auto gobjClass = typeid(ObjectWrap);
-        auto ifProxyClass = typeid(IfaceProxy);
-
-        foreach (m; ModuleInfo)
-        {
-          if (!m)
-            continue;
-
-          foreach (c; m.localClasses)
-          {
-            if (c && ifProxyClass.isBaseOf(c))
-            {
-              if (c is ifProxyClass)
-                continue;
-
-              auto obj = cast(IfaceProxy)_d_newclass(c);
-
-              if (auto ifaceInfo = obj.getIface)
-                ifaceProxyClasses[ifaceInfo] = c;
-            }
-            else if (c && gobjClass.isBaseOf(c))
-            { // Create object without calling the constructor which could have side effects - FIXME is there a better way to do this?
-              auto obj = _d_newclass(c);
-
-              if (auto gType = (cast(ObjectWrap)obj)._gType)
-                gtypeClasses[gType] = c;
-            }
-          }
-        }
-
+        assumeWontThrow(createClassMaps);
         atomicStore(classMapsInitialized, true);
       }
     }
@@ -316,7 +286,7 @@ class ObjectWrap
         if (is(T == interface) && !typeid(T).isBaseOf(cast(const)*dClassType))
           break;
 
-        if (auto obj = _d_newclass(cast()*dClassType))
+        if (auto obj = assumeWontThrow(_d_newclass(cast()*dClassType)))
         {
           (cast(ObjectWrap)obj)._setGObject(cptr, take);
           return cast(T)obj;
@@ -330,7 +300,7 @@ class ObjectWrap
     {
       if (auto proxyClass = typeid(T) in ifaceProxyClasses) // Interface has a proxy object?
       {
-        if (auto obj = _d_newclass(cast()*proxyClass)) // Create the object without calling the constructor
+        if (auto obj = assumeWontThrow(_d_newclass(cast()*proxyClass))) // Create the object without calling the constructor
         {
           (cast(ObjectWrap)obj)._setGObject(cptr, take); // Assign the C GObject
           return cast(T)obj;
@@ -340,12 +310,21 @@ class ObjectWrap
       return null;
     }
     else
-      return new T(cptr, take); // Fallback to attempting to create Object from this template Object type
+    {
+      T retval;
+
+      try
+      retval = new T(cptr, take); // Fallback to attempting to create Object from this template Object type
+      catch (Exception e)
+      gidInvokeCallbackExceptionHandler(e, "new " ~ T.stringof);
+
+      return retval;
+    }
   }
 
   debug
   { // Function for GObject debugging output (@nogc to avoid memory issues during GC finalization)
-    void objectDebugLog(string action) @nogc
+    void objectDebugLog(string action) @nogc nothrow
     {
       if (gidObjectDebug)
       {
@@ -372,13 +351,13 @@ class ObjectWrap
       }
     }
 
-    private static void toHex(char[] buffer, ulong value) @nogc
+    private static void toHex(char[] buffer, ulong value) @nogc nothrow
     {
       foreach (i; 0 .. 16)
         buffer[i] = "0123456789ABCDEF"[(value >> (60 - i * 4)) & 0xF];
     }
 
-    private static uint toDec(char[] buffer, uint value) @nogc
+    private static uint toDec(char[] buffer, uint value) @nogc nothrow
     {
       uint pos;
       uint div = 1_000_000_000;
@@ -401,6 +380,39 @@ class ObjectWrap
     }
   }
 
+  static private void createClassMaps()
+  {
+    auto gobjClass = typeid(ObjectWrap);
+    auto ifProxyClass = typeid(IfaceProxy);
+
+    foreach (m; ModuleInfo)
+    {
+      if (!m)
+        continue;
+
+      foreach (c; m.localClasses)
+      {
+        if (c && ifProxyClass.isBaseOf(c))
+        {
+          if (c is ifProxyClass)
+            continue;
+
+          auto obj = cast(IfaceProxy)_d_newclass(c);
+
+          if (auto ifaceInfo = obj.getIface)
+            ifaceProxyClasses[ifaceInfo] = c;
+        }
+        else if (c && gobjClass.isBaseOf(c))
+        { // Create object without calling the constructor which could have side effects - FIXME is there a better way to do this?
+          auto obj = _d_newclass(c);
+
+          if (auto gType = (cast(ObjectWrap)obj)._gType)
+            gtypeClasses[gType] = c;
+        }
+      }
+    }
+  }
+
   /**
   * Connect a D closure to an object signal.
   * Params:
@@ -409,7 +421,7 @@ class ObjectWrap
   *   after = Yes.After to invoke the signal after the default handler, No.After to execute before (default)
   * Returns: The signal connection ID
   */
-  gulong connectSignalClosure(string signalDetail, DClosure closure, Flag!"After" after = No.After)
+  gulong connectSignalClosure(string signalDetail, DClosure closure, Flag!"After" after = No.After) nothrow
   {
     auto gclosure = cast(GClosure*)(cast(Closure)closure)._cPtr;
     auto retval = g_signal_connect_closure(_cInstancePtr, signalDetail.toCString(No.Alloc), gclosure, after == Yes.After);
@@ -427,7 +439,7 @@ class ObjectWrap
   *   propertyName = Name of the GObject property
   *   val = The value to assign (must match the property value type)
   */
-  void setProperty(T)(string propertyName, T val)
+  void setProperty(T)(string propertyName, T val) nothrow
   {
     GValue value;
     initVal!T(&value);
@@ -442,7 +454,7 @@ class ObjectWrap
   *   propertyName = Name of the GObject property
   * Returns: The property value (must match the property value type)
   */
-  T getProperty(T)(string propertyName) const
+  T getProperty(T)(string propertyName) const nothrow
   {
     GValue value;
     initVal!T(&value);
@@ -453,7 +465,7 @@ class ObjectWrap
   }
 
   /** */
-  static size_t compatControl(size_t what, void* data = null)
+  static size_t compatControl(size_t what, void* data = null) nothrow
   {
     size_t _retval;
     _retval = g_object_compat_control(what, data);
@@ -502,7 +514,7 @@ class ObjectWrap
             binding between the two #GObject instances. The binding is released
             whenever the #GBinding reference count reaches zero.
   */
-  gobject.binding.Binding bindProperty(string sourceProperty, gobject.object.ObjectWrap target, string targetProperty, gobject.types.BindingFlags flags)
+  gobject.binding.Binding bindProperty(string sourceProperty, gobject.object.ObjectWrap target, string targetProperty, gobject.types.BindingFlags flags) nothrow
   {
     GBinding* _cretval;
     const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
@@ -534,7 +546,7 @@ class ObjectWrap
             binding between the two #GObject instances. The binding is released
             whenever the #GBinding reference count reaches zero.
   */
-  gobject.binding.Binding bindPropertyFull(string sourceProperty, gobject.object.ObjectWrap target, string targetProperty, gobject.types.BindingFlags flags, gobject.closure.Closure transformTo, gobject.closure.Closure transformFrom)
+  gobject.binding.Binding bindPropertyFull(string sourceProperty, gobject.object.ObjectWrap target, string targetProperty, gobject.types.BindingFlags flags, gobject.closure.Closure transformTo, gobject.closure.Closure transformFrom) nothrow
   {
     GBinding* _cretval;
     const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
@@ -550,7 +562,7 @@ class ObjectWrap
       required: all #GInitiallyUnowneds are created with a floating reference
       which usually just needs to be sunken by calling [gobject.object.ObjectWrap.refSink].
   */
-  void forceFloating()
+  void forceFloating() nothrow
   {
     g_object_force_floating(cast(GObject*)this._cPtr);
   }
@@ -566,7 +578,7 @@ class ObjectWrap
       This is necessary for accessors that modify multiple properties to prevent
       premature notification while the object is still being modified.
   */
-  void freezeNotify()
+  void freezeNotify() nothrow
   {
     g_object_freeze_notify(cast(GObject*)this._cPtr);
   }
@@ -579,7 +591,7 @@ class ObjectWrap
       Returns: the data if found,
                  or null if no such data exists.
   */
-  void* getData(string key)
+  void* getData(string key) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     auto _retval = g_object_get_data(cast(GObject*)this._cPtr, _key);
@@ -608,7 +620,7 @@ class ObjectWrap
         propertyName = the name of the property to get
         value = return location for the property value
   */
-  void getProperty(string propertyName, gobject.value.Value value)
+  void getProperty(string propertyName, gobject.value.Value value) nothrow
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
     g_object_get_property(cast(GObject*)this._cPtr, _propertyName, value ? cast(GValue*)value._cPtr(No.Dup) : null);
@@ -622,7 +634,7 @@ class ObjectWrap
         quark = A #GQuark, naming the user data pointer
       Returns: The user data pointer set, or null
   */
-  void* getQdata(glib.types.Quark quark)
+  void* getQdata(glib.types.Quark quark) nothrow
   {
     auto _retval = g_object_get_qdata(cast(GObject*)this._cPtr, quark);
     return _retval;
@@ -638,7 +650,7 @@ class ObjectWrap
         names = the names of each property to get
         values = the values of each property to get
   */
-  void getv(string[] names, gobject.value.Value[] values)
+  void getv(string[] names, gobject.value.Value[] values) nothrow
   {
     uint _nProperties;
     if (names)
@@ -664,7 +676,7 @@ class ObjectWrap
       Checks whether object has a [floating][floating-ref] reference.
       Returns: true if object has a floating reference
   */
-  bool isFloating()
+  bool isFloating() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_object_is_floating(cast(GObject*)this._cPtr);
@@ -686,7 +698,7 @@ class ObjectWrap
       Params:
         propertyName = the name of a property installed on the class of object.
   */
-  void notify(string propertyName)
+  void notify(string propertyName) nothrow
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
     g_object_notify(cast(GObject*)this._cPtr, _propertyName);
@@ -734,7 +746,7 @@ class ObjectWrap
       Params:
         pspec = the #GParamSpec of a property installed on the class of object.
   */
-  void notifyByPspec(gobject.param_spec.ParamSpec pspec)
+  void notifyByPspec(gobject.param_spec.ParamSpec pspec) nothrow
   {
     g_object_notify_by_pspec(cast(GObject*)this._cPtr, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
   }
@@ -753,7 +765,7 @@ class ObjectWrap
       under the same conditions as for [gobject.object.ObjectWrap.ref_].
       Returns: object
   */
-  gobject.object.ObjectWrap refSink()
+  gobject.object.ObjectWrap refSink() nothrow
   {
     GObject* _cretval;
     _cretval = g_object_ref_sink(cast(GObject*)this._cPtr);
@@ -767,7 +779,7 @@ class ObjectWrap
       
       This function should only be called from object system implementations.
   */
-  void runDispose()
+  void runDispose() nothrow
   {
     g_object_run_dispose(cast(GObject*)this._cPtr);
   }
@@ -788,7 +800,7 @@ class ObjectWrap
         key = name of the key
         data = data to associate with that key
   */
-  void setData(string key, void* data = null)
+  void setData(string key, void* data = null) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     g_object_set_data(cast(GObject*)this._cPtr, _key, data);
@@ -801,7 +813,7 @@ class ObjectWrap
         propertyName = the name of the property to set
         value = the value
   */
-  void setProperty(string propertyName, gobject.value.Value value)
+  void setProperty(string propertyName, gobject.value.Value value) nothrow
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
     g_object_set_property(cast(GObject*)this._cPtr, _propertyName, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -816,7 +828,7 @@ class ObjectWrap
       Returns: the data if found, or null
                  if no such data exists.
   */
-  void* stealData(string key)
+  void* stealData(string key) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     auto _retval = g_object_steal_data(cast(GObject*)this._cPtr, _key);
@@ -864,7 +876,7 @@ class ObjectWrap
         quark = A #GQuark, naming the user data pointer
       Returns: The user data pointer set, or null
   */
-  void* stealQdata(glib.types.Quark quark)
+  void* stealQdata(glib.types.Quark quark) nothrow
   {
     auto _retval = g_object_steal_qdata(cast(GObject*)this._cPtr, quark);
     return _retval;
@@ -881,7 +893,7 @@ class ObjectWrap
       
       It is an error to call this function when the freeze count is zero.
   */
-  void thawNotify()
+  void thawNotify() nothrow
   {
     g_object_thaw_notify(cast(GObject*)this._cPtr);
   }
@@ -900,7 +912,7 @@ class ObjectWrap
       Params:
         closure = #GClosure to watch
   */
-  void watchClosure(gobject.closure.Closure closure)
+  void watchClosure(gobject.closure.Closure closure) nothrow
   {
     g_object_watch_closure(cast(GObject*)this._cPtr, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null);
   }
@@ -947,14 +959,14 @@ class ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNotify(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectNotify(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gobject.param_spec.ParamSpec)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gobject.object.ObjectWrap)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -966,7 +978,14 @@ class ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gobject.object.ObjectWrap.notify");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -986,7 +1005,7 @@ final class ObjectWrapGidBuilder : ObjectWrapGidBuilderImpl!ObjectWrapGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ObjectWrap build()
+  ObjectWrap build() nothrow
   {
     return new ObjectWrap(cast(void*)createGObject(ObjectWrap._getGType), Yes.Take);
   }
@@ -997,10 +1016,10 @@ final class ObjectWrapGidBuilder : ObjectWrapGidBuilderImpl!ObjectWrapGidBuilder
 */
 abstract class IfaceProxy : ObjectWrap
 {
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
   }
 
-  abstract TypeInfo_Interface getIface();
+  abstract TypeInfo_Interface getIface() nothrow;
 }

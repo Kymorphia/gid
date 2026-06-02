@@ -17,7 +17,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgstnet-1.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // NetAddressMeta
   const(GstMetaInfo)* function() c_gst_net_address_meta_get_info; ///

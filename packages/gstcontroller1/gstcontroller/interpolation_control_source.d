@@ -24,26 +24,26 @@ class InterpolationControlSource : gstcontroller.timed_value_control_source.Time
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_interpolation_control_source_get_type != &gidSymbolNotFound ? gst_interpolation_control_source_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override InterpolationControlSource self()
+  override InterpolationControlSource self() nothrow
   {
     return this;
   }
@@ -52,19 +52,19 @@ class InterpolationControlSource : gstcontroller.timed_value_control_source.Time
       Get builder for [gstcontroller.interpolation_control_source.InterpolationControlSource]
       Returns: New builder object
   */
-  static InterpolationControlSourceGidBuilder builder()
+  static InterpolationControlSourceGidBuilder builder() nothrow
   {
     return new InterpolationControlSourceGidBuilder;
   }
 
   /** */
-  @property gstcontroller.types.InterpolationMode mode()
+  @property gstcontroller.types.InterpolationMode mode() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gstcontroller.types.InterpolationMode)("mode");
   }
 
   /** */
-  @property void mode(gstcontroller.types.InterpolationMode propval)
+  @property void mode(gstcontroller.types.InterpolationMode propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gstcontroller.types.InterpolationMode)("mode", propval);
   }
@@ -73,7 +73,7 @@ class InterpolationControlSource : gstcontroller.timed_value_control_source.Time
       This returns a new, unbound #GstInterpolationControlSource.
       Returns: a new, unbound #GstInterpolationControlSource.
   */
-  this()
+  this() nothrow
   {
     GstControlSource* _cretval;
     _cretval = gst_interpolation_control_source_new();
@@ -86,7 +86,7 @@ class InterpolationControlSourceGidBuilderImpl(T) : gstcontroller.timed_value_co
 {
 
   /** */
-  T mode(gstcontroller.types.InterpolationMode propval)
+  T mode(gstcontroller.types.InterpolationMode propval) nothrow
   {
     return setProperty("mode", propval);
   }
@@ -99,7 +99,7 @@ final class InterpolationControlSourceGidBuilder : InterpolationControlSourceGid
       Create object from builder.
       Returns: New object
   */
-  InterpolationControlSource build()
+  InterpolationControlSource build() nothrow
   {
     return new InterpolationControlSource(cast(void*)createGObject(InterpolationControlSource._getGType), Yes.Take);
   }

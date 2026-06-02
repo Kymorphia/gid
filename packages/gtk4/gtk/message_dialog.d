@@ -87,26 +87,26 @@ class MessageDialog : gtk.dialog.Dialog
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_message_dialog_get_type != &gidSymbolNotFound ? gtk_message_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MessageDialog self()
+  override MessageDialog self() nothrow
   {
     return this;
   }
@@ -115,7 +115,7 @@ class MessageDialog : gtk.dialog.Dialog
       Get builder for [gtk.message_dialog.MessageDialog]
       Returns: New builder object
   */
-  static MessageDialogGidBuilder builder()
+  static MessageDialogGidBuilder builder() nothrow
   {
     return new MessageDialogGidBuilder;
   }
@@ -127,7 +127,7 @@ class MessageDialog : gtk.dialog.Dialog
         See [gtk.message_dialog.MessageDialog.getMessageArea] for a detailed
         description of this area.
   */
-  @property gtk.widget.Widget messageArea()
+  @property gtk.widget.Widget messageArea() nothrow
   {
     return getMessageArea();
   }
@@ -136,7 +136,7 @@ class MessageDialog : gtk.dialog.Dialog
       Get `messageType` property.
       Returns: The type of the message.
   */
-  @property gtk.types.MessageType messageType()
+  @property gtk.types.MessageType messageType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.MessageType)("message-type");
   }
@@ -146,7 +146,7 @@ class MessageDialog : gtk.dialog.Dialog
       Params:
         propval = The type of the message.
   */
-  @property void messageType(gtk.types.MessageType propval)
+  @property void messageType(gtk.types.MessageType propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.MessageType)("message-type", propval);
   }
@@ -155,7 +155,7 @@ class MessageDialog : gtk.dialog.Dialog
       Get `secondaryText` property.
       Returns: The secondary text of the message dialog.
   */
-  @property string secondaryText()
+  @property string secondaryText() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("secondary-text");
   }
@@ -165,7 +165,7 @@ class MessageDialog : gtk.dialog.Dialog
       Params:
         propval = The secondary text of the message dialog.
   */
-  @property void secondaryText(string propval)
+  @property void secondaryText(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("secondary-text", propval);
   }
@@ -176,7 +176,7 @@ class MessageDialog : gtk.dialog.Dialog
         
         See `func@Pango.parse_markup`.
   */
-  @property bool secondaryUseMarkup()
+  @property bool secondaryUseMarkup() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("secondary-use-markup");
   }
@@ -188,7 +188,7 @@ class MessageDialog : gtk.dialog.Dialog
           
           See `func@Pango.parse_markup`.
   */
-  @property void secondaryUseMarkup(bool propval)
+  @property void secondaryUseMarkup(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("secondary-use-markup", propval);
   }
@@ -199,7 +199,7 @@ class MessageDialog : gtk.dialog.Dialog
         
         If the dialog has a secondary text, this will appear as the title.
   */
-  @property string text()
+  @property string text() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("text");
   }
@@ -211,7 +211,7 @@ class MessageDialog : gtk.dialog.Dialog
           
           If the dialog has a secondary text, this will appear as the title.
   */
-  @property void text(string propval)
+  @property void text(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("text", propval);
   }
@@ -222,7 +222,7 @@ class MessageDialog : gtk.dialog.Dialog
         
         See `func@Pango.parse_markup`.
   */
-  @property bool useMarkup()
+  @property bool useMarkup() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("use-markup");
   }
@@ -234,7 +234,7 @@ class MessageDialog : gtk.dialog.Dialog
           
           See `func@Pango.parse_markup`.
   */
-  @property void useMarkup(bool propval)
+  @property void useMarkup(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("use-markup", propval);
   }
@@ -251,7 +251,7 @@ class MessageDialog : gtk.dialog.Dialog
   
       Deprecated: Use [gtk.alert_dialog.AlertDialog] instead
   */
-  gtk.widget.Widget getMessageArea()
+  gtk.widget.Widget getMessageArea() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_message_dialog_get_message_area(cast(GtkMessageDialog*)this._cPtr);
@@ -267,7 +267,7 @@ class MessageDialog : gtk.dialog.Dialog
   
       Deprecated: Use [gtk.alert_dialog.AlertDialog] instead
   */
-  void setMarkup(string str)
+  void setMarkup(string str) nothrow
   {
     const(char)* _str = str.toCString(No.Alloc);
     gtk_message_dialog_set_markup(cast(GtkMessageDialog*)this._cPtr, _str);
@@ -280,7 +280,7 @@ class MessageDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
 
 
   /** */
-  T buttons(gtk.types.ButtonsType propval)
+  T buttons(gtk.types.ButtonsType propval) nothrow
   {
     return setProperty("buttons", propval);
   }
@@ -291,7 +291,7 @@ class MessageDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
         propval = The type of the message.
       Returns: Builder instance for fluent chaining
   */
-  T messageType(gtk.types.MessageType propval)
+  T messageType(gtk.types.MessageType propval) nothrow
   {
     return setProperty("message-type", propval);
   }
@@ -302,7 +302,7 @@ class MessageDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
         propval = The secondary text of the message dialog.
       Returns: Builder instance for fluent chaining
   */
-  T secondaryText(string propval)
+  T secondaryText(string propval) nothrow
   {
     return setProperty("secondary-text", propval);
   }
@@ -315,7 +315,7 @@ class MessageDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
           See `func@Pango.parse_markup`.
       Returns: Builder instance for fluent chaining
   */
-  T secondaryUseMarkup(bool propval)
+  T secondaryUseMarkup(bool propval) nothrow
   {
     return setProperty("secondary-use-markup", propval);
   }
@@ -328,7 +328,7 @@ class MessageDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
           If the dialog has a secondary text, this will appear as the title.
       Returns: Builder instance for fluent chaining
   */
-  T text(string propval)
+  T text(string propval) nothrow
   {
     return setProperty("text", propval);
   }
@@ -341,7 +341,7 @@ class MessageDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
           See `func@Pango.parse_markup`.
       Returns: Builder instance for fluent chaining
   */
-  T useMarkup(bool propval)
+  T useMarkup(bool propval) nothrow
   {
     return setProperty("use-markup", propval);
   }
@@ -354,7 +354,7 @@ final class MessageDialogGidBuilder : MessageDialogGidBuilderImpl!MessageDialogG
       Create object from builder.
       Returns: New object
   */
-  MessageDialog build()
+  MessageDialog build() nothrow
   {
     return new MessageDialog(cast(void*)createGObject(MessageDialog._getGType), No.Take);
   }

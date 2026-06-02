@@ -15,26 +15,26 @@ class LocalFileSystem : arrow.file_system.FileSystem
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_local_file_system_get_type != &gidSymbolNotFound ? garrow_local_file_system_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LocalFileSystem self()
+  override LocalFileSystem self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class LocalFileSystem : arrow.file_system.FileSystem
       Get builder for [arrow.local_file_system.LocalFileSystem]
       Returns: New builder object
   */
-  static LocalFileSystemGidBuilder builder()
+  static LocalFileSystemGidBuilder builder() nothrow
   {
     return new LocalFileSystemGidBuilder;
   }
 
   /** */
-  this(arrow.local_file_system_options.LocalFileSystemOptions options = null)
+  this(arrow.local_file_system_options.LocalFileSystemOptions options = null) nothrow
   {
     GArrowLocalFileSystem* _cretval;
     _cretval = garrow_local_file_system_new(options ? cast(GArrowLocalFileSystemOptions*)options._cPtr(No.Dup) : null);
@@ -69,7 +69,7 @@ final class LocalFileSystemGidBuilder : LocalFileSystemGidBuilderImpl!LocalFileS
       Create object from builder.
       Returns: New object
   */
-  LocalFileSystem build()
+  LocalFileSystem build() nothrow
   {
     return new LocalFileSystem(cast(void*)createGObject(LocalFileSystem._getGType), Yes.Take);
   }

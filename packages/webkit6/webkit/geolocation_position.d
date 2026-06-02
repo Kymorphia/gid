@@ -18,32 +18,32 @@ class GeolocationPosition : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_geolocation_position_get_type != &gidSymbolNotFound ? webkit_geolocation_position_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GeolocationPosition self()
+  override GeolocationPosition self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class GeolocationPosition : gobject.boxed.Boxed
         accuracy = accuracy of location in meters
       Returns: a newly created #WebKitGeolocationPosition
   */
-  this(double latitude, double longitude, double accuracy)
+  this(double latitude, double longitude, double accuracy) nothrow
   {
     WebKitGeolocationPosition* _cretval;
     _cretval = webkit_geolocation_position_new(latitude, longitude, accuracy);
@@ -68,7 +68,7 @@ class GeolocationPosition : gobject.boxed.Boxed
       Make a copy of the #WebKitGeolocationPosition.
       Returns: a copy of position
   */
-  webkit.geolocation_position.GeolocationPosition copy()
+  webkit.geolocation_position.GeolocationPosition copy() nothrow
   {
     WebKitGeolocationPosition* _cretval;
     _cretval = webkit_geolocation_position_copy(cast(WebKitGeolocationPosition*)this._cPtr);
@@ -82,7 +82,7 @@ class GeolocationPosition : gobject.boxed.Boxed
       Params:
         altitude = altitude in meters
   */
-  void setAltitude(double altitude)
+  void setAltitude(double altitude) nothrow
   {
     webkit_geolocation_position_set_altitude(cast(WebKitGeolocationPosition*)this._cPtr, altitude);
   }
@@ -93,7 +93,7 @@ class GeolocationPosition : gobject.boxed.Boxed
       Params:
         altitudeAccuracy = accuracy of position altitude in meters
   */
-  void setAltitudeAccuracy(double altitudeAccuracy)
+  void setAltitudeAccuracy(double altitudeAccuracy) nothrow
   {
     webkit_geolocation_position_set_altitude_accuracy(cast(WebKitGeolocationPosition*)this._cPtr, altitudeAccuracy);
   }
@@ -107,7 +107,7 @@ class GeolocationPosition : gobject.boxed.Boxed
       Params:
         heading = heading in degrees
   */
-  void setHeading(double heading)
+  void setHeading(double heading) nothrow
   {
     webkit_geolocation_position_set_heading(cast(WebKitGeolocationPosition*)this._cPtr, heading);
   }
@@ -118,7 +118,7 @@ class GeolocationPosition : gobject.boxed.Boxed
       Params:
         speed = speed in meters per second
   */
-  void setSpeed(double speed)
+  void setSpeed(double speed) nothrow
   {
     webkit_geolocation_position_set_speed(cast(WebKitGeolocationPosition*)this._cPtr, speed);
   }
@@ -131,7 +131,7 @@ class GeolocationPosition : gobject.boxed.Boxed
       Params:
         timestamp = timestamp in seconds since the epoch, or 0 to use current time
   */
-  void setTimestamp(ulong timestamp)
+  void setTimestamp(ulong timestamp) nothrow
   {
     webkit_geolocation_position_set_timestamp(cast(WebKitGeolocationPosition*)this._cPtr, timestamp);
   }

@@ -67,26 +67,26 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scrollbar_get_type != &gidSymbolNotFound ? gtk_scrollbar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Scrollbar self()
+  override Scrollbar self() nothrow
   {
     return this;
   }
@@ -95,7 +95,7 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
       Get builder for [gtk.scrollbar.Scrollbar]
       Returns: New builder object
   */
-  static ScrollbarGidBuilder builder()
+  static ScrollbarGidBuilder builder() nothrow
   {
     return new ScrollbarGidBuilder;
   }
@@ -104,7 +104,7 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
       Get `adjustment` property.
       Returns: The [gtk.adjustment.Adjustment] controlled by this scrollbar.
   */
-  @property gtk.adjustment.Adjustment adjustment()
+  @property gtk.adjustment.Adjustment adjustment() nothrow
   {
     return getAdjustment();
   }
@@ -114,7 +114,7 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         propval = The [gtk.adjustment.Adjustment] controlled by this scrollbar.
   */
-  @property void adjustment(gtk.adjustment.Adjustment propval)
+  @property void adjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     setAdjustment(propval);
   }
@@ -130,7 +130,7 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
             to create a new adjustment.
       Returns: the new [gtk.scrollbar.Scrollbar].
   */
-  this(gtk.types.Orientation orientation, gtk.adjustment.Adjustment adjustment = null)
+  this(gtk.types.Orientation orientation, gtk.adjustment.Adjustment adjustment = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_scrollbar_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
@@ -141,7 +141,7 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
       Returns the scrollbar's adjustment.
       Returns: the scrollbar's adjustment
   */
-  gtk.adjustment.Adjustment getAdjustment()
+  gtk.adjustment.Adjustment getAdjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrollbar_get_adjustment(cast(GtkScrollbar*)this._cPtr);
@@ -155,7 +155,7 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         adjustment = the adjustment to set
   */
-  void setAdjustment(gtk.adjustment.Adjustment adjustment = null)
+  void setAdjustment(gtk.adjustment.Adjustment adjustment = null) nothrow
   {
     gtk_scrollbar_set_adjustment(cast(GtkScrollbar*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
@@ -173,7 +173,7 @@ class ScrollbarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orient
         propval = The [gtk.adjustment.Adjustment] controlled by this scrollbar.
       Returns: Builder instance for fluent chaining
   */
-  T adjustment(gtk.adjustment.Adjustment propval)
+  T adjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     return setProperty("adjustment", propval);
   }
@@ -186,7 +186,7 @@ final class ScrollbarGidBuilder : ScrollbarGidBuilderImpl!ScrollbarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Scrollbar build()
+  Scrollbar build() nothrow
   {
     return new Scrollbar(cast(void*)createGObject(Scrollbar._getGType), No.Take);
   }

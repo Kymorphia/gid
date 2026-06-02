@@ -20,26 +20,26 @@ class DBusMenuModel : gio.menu_model.MenuModel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_menu_model_get_type != &gidSymbolNotFound ? g_dbus_menu_model_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DBusMenuModel self()
+  override DBusMenuModel self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class DBusMenuModel : gio.menu_model.MenuModel
       Get builder for [gio.dbus_menu_model.DBusMenuModel]
       Returns: New builder object
   */
-  static DBusMenuModelGidBuilder builder()
+  static DBusMenuModelGidBuilder builder() nothrow
   {
     return new DBusMenuModelGidBuilder;
   }
@@ -71,7 +71,7 @@ class DBusMenuModel : gio.menu_model.MenuModel
       Returns: a #GDBusMenuModel object. Free with
             [gobject.object.ObjectWrap.unref].
   */
-  static gio.dbus_menu_model.DBusMenuModel get(gio.dbus_connection.DBusConnection connection, string busName, string objectPath)
+  static gio.dbus_menu_model.DBusMenuModel get(gio.dbus_connection.DBusConnection connection, string busName, string objectPath) nothrow
   {
     GDBusMenuModel* _cretval;
     const(char)* _busName = busName.toCString(No.Alloc);
@@ -94,7 +94,7 @@ final class DBusMenuModelGidBuilder : DBusMenuModelGidBuilderImpl!DBusMenuModelG
       Create object from builder.
       Returns: New object
   */
-  DBusMenuModel build()
+  DBusMenuModel build() nothrow
   {
     return new DBusMenuModel(cast(void*)createGObject(DBusMenuModel._getGType), No.Take);
   }

@@ -18,26 +18,26 @@ class InternetAddressGroup : gmime.internet_address.InternetAddress
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())internet_address_group_get_type != &gidSymbolNotFound ? internet_address_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override InternetAddressGroup self()
+  override InternetAddressGroup self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class InternetAddressGroup : gmime.internet_address.InternetAddress
       Get builder for [gmime.internet_address_group.InternetAddressGroup]
       Returns: New builder object
   */
-  static InternetAddressGroupGidBuilder builder()
+  static InternetAddressGroupGidBuilder builder() nothrow
   {
     return new InternetAddressGroupGidBuilder;
   }
@@ -61,7 +61,7 @@ class InternetAddressGroup : gmime.internet_address.InternetAddress
         
         Note: The name string should be in UTF-8.
   */
-  this(string name)
+  this(string name) nothrow
   {
     GMimeInternetAddress* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -76,7 +76,7 @@ class InternetAddressGroup : gmime.internet_address.InternetAddress
         member = a #InternetAddress
       Returns: the index of the newly added member.
   */
-  int addMember(gmime.internet_address.InternetAddress member)
+  int addMember(gmime.internet_address.InternetAddress member) nothrow
   {
     int _retval;
     _retval = internet_address_group_add_member(cast(GMimeInternetAddressGroup*)this._cPtr, member ? cast(GMimeInternetAddress*)member._cPtr(No.Dup) : null);
@@ -89,7 +89,7 @@ class InternetAddressGroup : gmime.internet_address.InternetAddress
       Returns: a #InternetAddressList containing the
         members of group.
   */
-  gmime.internet_address_list.InternetAddressList getMembers()
+  gmime.internet_address_list.InternetAddressList getMembers() nothrow
   {
     GMimeInternetAddressList* _cretval;
     _cretval = internet_address_group_get_members(cast(GMimeInternetAddressGroup*)this._cPtr);
@@ -103,7 +103,7 @@ class InternetAddressGroup : gmime.internet_address.InternetAddress
       Params:
         members = a #InternetAddressList
   */
-  void setMembers(gmime.internet_address_list.InternetAddressList members)
+  void setMembers(gmime.internet_address_list.InternetAddressList members) nothrow
   {
     internet_address_group_set_members(cast(GMimeInternetAddressGroup*)this._cPtr, members ? cast(GMimeInternetAddressList*)members._cPtr(No.Dup) : null);
   }
@@ -121,7 +121,7 @@ final class InternetAddressGroupGidBuilder : InternetAddressGroupGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  InternetAddressGroup build()
+  InternetAddressGroup build() nothrow
   {
     return new InternetAddressGroup(cast(void*)createGObject(InternetAddressGroup._getGType), Yes.Take);
   }

@@ -92,26 +92,26 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_model_filter_get_type != &gidSymbolNotFound ? gtk_tree_model_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TreeModelFilter self()
+  override TreeModelFilter self() nothrow
   {
     return this;
   }
@@ -120,19 +120,19 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
       Get builder for [gtk.tree_model_filter.TreeModelFilter]
       Returns: New builder object
   */
-  static TreeModelFilterGidBuilder builder()
+  static TreeModelFilterGidBuilder builder() nothrow
   {
     return new TreeModelFilterGidBuilder;
   }
 
   /** */
-  @property gtk.tree_model.TreeModel childModel()
+  @property gtk.tree_model.TreeModel childModel() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.tree_model.TreeModel)("child-model");
   }
 
   /** */
-  @property gtk.tree_path.TreePath virtualRoot()
+  @property gtk.tree_path.TreePath virtualRoot() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.tree_path.TreePath)("virtual-root");
   }
@@ -148,7 +148,7 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
       a lot of unreffed access to nodes. As a side effect of this function,
       all unreffed iters will be invalid.
   */
-  void clearCache()
+  void clearCache() nothrow
   {
     gtk_tree_model_filter_clear_cache(cast(GtkTreeModelFilter*)this._cPtr);
   }
@@ -164,7 +164,7 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
       Returns: true, if filter_iter was set, i.e. if child_iter is a
         valid iterator pointing to a visible row in child model.
   */
-  bool convertChildIterToIter(out gtk.tree_iter.TreeIter filterIter, gtk.tree_iter.TreeIter childIter)
+  bool convertChildIterToIter(out gtk.tree_iter.TreeIter filterIter, gtk.tree_iter.TreeIter childIter) nothrow
   {
     bool _retval;
     GtkTreeIter _filterIter;
@@ -184,7 +184,7 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
         childPath = A [gtk.tree_path.TreePath] to convert.
       Returns: A newly allocated [gtk.tree_path.TreePath]
   */
-  gtk.tree_path.TreePath convertChildPathToPath(gtk.tree_path.TreePath childPath)
+  gtk.tree_path.TreePath convertChildPathToPath(gtk.tree_path.TreePath childPath) nothrow
   {
     GtkTreePath* _cretval;
     _cretval = gtk_tree_model_filter_convert_child_path_to_path(cast(GtkTreeModelFilter*)this._cPtr, childPath ? cast(GtkTreePath*)childPath._cPtr(No.Dup) : null);
@@ -199,7 +199,7 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
         childIter = An uninitialized [gtk.tree_iter.TreeIter]
         filterIter = A valid [gtk.tree_iter.TreeIter] pointing to a row on filter.
   */
-  void convertIterToChildIter(out gtk.tree_iter.TreeIter childIter, gtk.tree_iter.TreeIter filterIter)
+  void convertIterToChildIter(out gtk.tree_iter.TreeIter childIter, gtk.tree_iter.TreeIter filterIter) nothrow
   {
     GtkTreeIter _childIter;
     gtk_tree_model_filter_convert_iter_to_child_iter(cast(GtkTreeModelFilter*)this._cPtr, &_childIter, filterIter ? cast(GtkTreeIter*)filterIter._cPtr(No.Dup) : null);
@@ -216,7 +216,7 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
         filterPath = A [gtk.tree_path.TreePath] to convert.
       Returns: A newly allocated [gtk.tree_path.TreePath]
   */
-  gtk.tree_path.TreePath convertPathToChildPath(gtk.tree_path.TreePath filterPath)
+  gtk.tree_path.TreePath convertPathToChildPath(gtk.tree_path.TreePath filterPath) nothrow
   {
     GtkTreePath* _cretval;
     _cretval = gtk_tree_model_filter_convert_path_to_child_path(cast(GtkTreeModelFilter*)this._cPtr, filterPath ? cast(GtkTreePath*)filterPath._cPtr(No.Dup) : null);
@@ -228,7 +228,7 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
       Returns a pointer to the child model of filter.
       Returns: A pointer to a [gtk.tree_model.TreeModel]
   */
-  gtk.tree_model.TreeModel getModel()
+  gtk.tree_model.TreeModel getModel() nothrow
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_tree_model_filter_get_model(cast(GtkTreeModelFilter*)this._cPtr);
@@ -240,7 +240,7 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
       Emits ::row_changed for each row in the child model, which causes
       the filter to re-evaluate whether a row is visible or not.
   */
-  void refilter()
+  void refilter() nothrow
   {
     gtk_tree_model_filter_refilter(cast(GtkTreeModelFilter*)this._cPtr);
   }
@@ -261,14 +261,21 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
         types = The `GType`s of the columns.
         func = A [gtk.types.TreeModelFilterModifyFunc]
   */
-  void setModifyFunc(gobject.types.GType[] types, gtk.types.TreeModelFilterModifyFunc func)
+  void setModifyFunc(gobject.types.GType[] types, gtk.types.TreeModelFilterModifyFunc func) nothrow
   {
-    extern(C) void _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, GValue* value, int column, void* data)
+    extern(C) void _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, GValue* value, int column, void* data) nothrow
     {
       auto _dlg = cast(gtk.types.TreeModelFilterModifyFunc*)data;
       auto _value = new gobject.value.Value(value, No.Take);
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null, _value, column);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null, _value, column);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeModelFilterModifyFunc");
+      }
       *value = *cast(GValue*)_value._cPtr;
 
     }
@@ -296,7 +303,7 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
       Params:
         column = A [harfbuzz.types.int] which is the column containing the visible information
   */
-  void setVisibleColumn(int column)
+  void setVisibleColumn(int column) nothrow
   {
     gtk_tree_model_filter_set_visible_column(cast(GtkTreeModelFilter*)this._cPtr, column);
   }
@@ -341,14 +348,21 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
       Params:
         func = A [gtk.types.TreeModelFilterVisibleFunc], the visible function
   */
-  void setVisibleFunc(gtk.types.TreeModelFilterVisibleFunc func)
+  void setVisibleFunc(gtk.types.TreeModelFilterVisibleFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data)
+    extern(C) gboolean _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.TreeModelFilterVisibleFunc*)data;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeModelFilterVisibleFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -368,13 +382,13 @@ class TreeModelFilterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
   mixin TreeModelGidBuilderT!();
 
   /** */
-  T childModel(gtk.tree_model.TreeModel propval)
+  T childModel(gtk.tree_model.TreeModel propval) nothrow
   {
     return setProperty("child-model", propval);
   }
 
   /** */
-  T virtualRoot(gtk.tree_path.TreePath propval)
+  T virtualRoot(gtk.tree_path.TreePath propval) nothrow
   {
     return setProperty("virtual-root", propval);
   }
@@ -387,7 +401,7 @@ final class TreeModelFilterGidBuilder : TreeModelFilterGidBuilderImpl!TreeModelF
       Create object from builder.
       Returns: New object
   */
-  TreeModelFilter build()
+  TreeModelFilter build() nothrow
   {
     return new TreeModelFilter(cast(void*)createGObject(TreeModelFilter._getGType), No.Take);
   }

@@ -25,26 +25,26 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_simple_proxy_resolver_get_type != &gidSymbolNotFound ? g_simple_proxy_resolver_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SimpleProxyResolver self()
+  override SimpleProxyResolver self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
       Get builder for [gio.simple_proxy_resolver.SimpleProxyResolver]
       Returns: New builder object
   */
-  static SimpleProxyResolverGidBuilder builder()
+  static SimpleProxyResolverGidBuilder builder() nothrow
   {
     return new SimpleProxyResolverGidBuilder;
   }
@@ -68,7 +68,7 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
         "socks://", #GSimpleProxyResolver will treat it as referring
         to all three of the socks5, socks4a, and socks4 proxy types.
   */
-  @property string defaultProxy()
+  @property string defaultProxy() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("default-proxy");
   }
@@ -84,7 +84,7 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
           "socks://", #GSimpleProxyResolver will treat it as referring
           to all three of the socks5, socks4a, and socks4 proxy types.
   */
-  @property void defaultProxy(string propval)
+  @property void defaultProxy(string propval) nothrow
   {
     setDefaultProxy(propval);
   }
@@ -104,7 +104,7 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
               to not use a proxy for.
       Returns: a new #GSimpleProxyResolver
   */
-  static gio.proxy_resolver.ProxyResolver new_(string defaultProxy = null, string[] ignoreHosts = null)
+  static gio.proxy_resolver.ProxyResolver new_(string defaultProxy = null, string[] ignoreHosts = null) nothrow
   {
     GProxyResolver* _cretval;
     const(char)* _defaultProxy = defaultProxy.toCString(No.Alloc);
@@ -131,7 +131,7 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
       Params:
         defaultProxy = the default proxy to use
   */
-  void setDefaultProxy(string defaultProxy = null)
+  void setDefaultProxy(string defaultProxy = null) nothrow
   {
     const(char)* _defaultProxy = defaultProxy.toCString(No.Alloc);
     g_simple_proxy_resolver_set_default_proxy(cast(GSimpleProxyResolver*)this._cPtr, _defaultProxy);
@@ -147,7 +147,7 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
         ignoreHosts = null-terminated list of hosts/IP addresses
               to not use a proxy for
   */
-  void setIgnoreHosts(string[] ignoreHosts)
+  void setIgnoreHosts(string[] ignoreHosts) nothrow
   {
     char*[] _tmpignoreHosts;
     foreach (s; ignoreHosts)
@@ -172,7 +172,7 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
         uriScheme = the URI scheme to add a proxy for
         proxy = the proxy to use for uri_scheme
   */
-  void setUriProxy(string uriScheme, string proxy)
+  void setUriProxy(string uriScheme, string proxy) nothrow
   {
     const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
     const(char)* _proxy = proxy.toCString(No.Alloc);
@@ -198,7 +198,7 @@ class SimpleProxyResolverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
           to all three of the socks5, socks4a, and socks4 proxy types.
       Returns: Builder instance for fluent chaining
   */
-  T defaultProxy(string propval)
+  T defaultProxy(string propval) nothrow
   {
     return setProperty("default-proxy", propval);
   }
@@ -211,7 +211,7 @@ final class SimpleProxyResolverGidBuilder : SimpleProxyResolverGidBuilderImpl!Si
       Create object from builder.
       Returns: New object
   */
-  SimpleProxyResolver build()
+  SimpleProxyResolver build() nothrow
   {
     return new SimpleProxyResolver(cast(void*)createGObject(SimpleProxyResolver._getGType), No.Take);
   }

@@ -18,26 +18,26 @@ class TlsPassword : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_tls_password_get_type != &gidSymbolNotFound ? g_tls_password_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TlsPassword self()
+  override TlsPassword self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class TlsPassword : gobject.object.ObjectWrap
       Get builder for [gio.tls_password.TlsPassword]
       Returns: New builder object
   */
-  static TlsPasswordGidBuilder builder()
+  static TlsPasswordGidBuilder builder() nothrow
   {
     return new TlsPasswordGidBuilder;
   }
@@ -55,7 +55,7 @@ class TlsPassword : gobject.object.ObjectWrap
       Get `description` property.
       Returns: Description of what the password is for.
   */
-  @property string description()
+  @property string description() nothrow
   {
     return getDescription();
   }
@@ -65,7 +65,7 @@ class TlsPassword : gobject.object.ObjectWrap
       Params:
         propval = Description of what the password is for.
   */
-  @property void description(string propval)
+  @property void description(string propval) nothrow
   {
     setDescription(propval);
   }
@@ -74,7 +74,7 @@ class TlsPassword : gobject.object.ObjectWrap
       Get `flags` property.
       Returns: Flags about the password.
   */
-  @property gio.types.TlsPasswordFlags flags()
+  @property gio.types.TlsPasswordFlags flags() nothrow
   {
     return getFlags();
   }
@@ -84,7 +84,7 @@ class TlsPassword : gobject.object.ObjectWrap
       Params:
         propval = Flags about the password.
   */
-  @property void flags(gio.types.TlsPasswordFlags propval)
+  @property void flags(gio.types.TlsPasswordFlags propval) nothrow
   {
     setFlags(propval);
   }
@@ -93,7 +93,7 @@ class TlsPassword : gobject.object.ObjectWrap
       Get `warning` property.
       Returns: Warning about the password.
   */
-  @property string warning()
+  @property string warning() nothrow
   {
     return getWarning();
   }
@@ -103,7 +103,7 @@ class TlsPassword : gobject.object.ObjectWrap
       Params:
         propval = Warning about the password.
   */
-  @property void warning(string propval)
+  @property void warning(string propval) nothrow
   {
     setWarning(propval);
   }
@@ -116,7 +116,7 @@ class TlsPassword : gobject.object.ObjectWrap
         description = description of what the password is for
       Returns: The newly allocated password object
   */
-  this(gio.types.TlsPasswordFlags flags, string description)
+  this(gio.types.TlsPasswordFlags flags, string description) nothrow
   {
     GTlsPassword* _cretval;
     const(char)* _description = description.toCString(No.Alloc);
@@ -128,7 +128,7 @@ class TlsPassword : gobject.object.ObjectWrap
       Get a description string about what the password will be used for.
       Returns: The description of the password.
   */
-  string getDescription()
+  string getDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = g_tls_password_get_description(cast(GTlsPassword*)this._cPtr);
@@ -140,7 +140,7 @@ class TlsPassword : gobject.object.ObjectWrap
       Get flags about the password.
       Returns: The flags about the password.
   */
-  gio.types.TlsPasswordFlags getFlags()
+  gio.types.TlsPasswordFlags getFlags() nothrow
   {
     GTlsPasswordFlags _cretval;
     _cretval = g_tls_password_get_flags(cast(GTlsPassword*)this._cPtr);
@@ -156,7 +156,7 @@ class TlsPassword : gobject.object.ObjectWrap
       certain fixed length.)
       Returns: The password value (owned by the password object).
   */
-  ubyte[] getValue()
+  ubyte[] getValue() nothrow
   {
     const(ubyte)* _cretval;
     size_t _cretlength;
@@ -176,7 +176,7 @@ class TlsPassword : gobject.object.ObjectWrap
       [gio.tls_password.TlsPassword.getFlags].
       Returns: The warning.
   */
-  string getWarning()
+  string getWarning() nothrow
   {
     const(char)* _cretval;
     _cretval = g_tls_password_get_warning(cast(GTlsPassword*)this._cPtr);
@@ -190,7 +190,7 @@ class TlsPassword : gobject.object.ObjectWrap
       Params:
         description = The description of the password
   */
-  void setDescription(string description)
+  void setDescription(string description) nothrow
   {
     const(char)* _description = description.toCString(No.Alloc);
     g_tls_password_set_description(cast(GTlsPassword*)this._cPtr, _description);
@@ -202,7 +202,7 @@ class TlsPassword : gobject.object.ObjectWrap
       Params:
         flags = The flags about the password
   */
-  void setFlags(gio.types.TlsPasswordFlags flags)
+  void setFlags(gio.types.TlsPasswordFlags flags) nothrow
   {
     g_tls_password_set_flags(cast(GTlsPassword*)this._cPtr, flags);
   }
@@ -219,7 +219,7 @@ class TlsPassword : gobject.object.ObjectWrap
       Params:
         value = the new password value
   */
-  void setValue(ubyte[] value)
+  void setValue(ubyte[] value) nothrow
   {
     ptrdiff_t _length;
     if (value)
@@ -244,14 +244,21 @@ class TlsPassword : gobject.object.ObjectWrap
         value = the value for the password
         destroy = a function to use to free the password.
   */
-  void setValueFull(ubyte[] value, glib.types.DestroyNotify destroy = null)
+  void setValueFull(ubyte[] value, glib.types.DestroyNotify destroy = null) nothrow
   {
-    extern(C) void _destroyCallback(void* data)
+    extern(C) void _destroyCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
     ptrdiff_t _length;
@@ -270,7 +277,7 @@ class TlsPassword : gobject.object.ObjectWrap
       Params:
         warning = The user readable warning
   */
-  void setWarning(string warning)
+  void setWarning(string warning) nothrow
   {
     const(char)* _warning = warning.toCString(No.Alloc);
     g_tls_password_set_warning(cast(GTlsPassword*)this._cPtr, _warning);
@@ -287,7 +294,7 @@ class TlsPasswordGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Description of what the password is for.
       Returns: Builder instance for fluent chaining
   */
-  T description(string propval)
+  T description(string propval) nothrow
   {
     return setProperty("description", propval);
   }
@@ -298,7 +305,7 @@ class TlsPasswordGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Flags about the password.
       Returns: Builder instance for fluent chaining
   */
-  T flags(gio.types.TlsPasswordFlags propval)
+  T flags(gio.types.TlsPasswordFlags propval) nothrow
   {
     return setProperty("flags", propval);
   }
@@ -309,7 +316,7 @@ class TlsPasswordGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Warning about the password.
       Returns: Builder instance for fluent chaining
   */
-  T warning(string propval)
+  T warning(string propval) nothrow
   {
     return setProperty("warning", propval);
   }
@@ -322,7 +329,7 @@ final class TlsPasswordGidBuilder : TlsPasswordGidBuilderImpl!TlsPasswordGidBuil
       Create object from builder.
       Returns: New object
   */
-  TlsPassword build()
+  TlsPassword build() nothrow
   {
     return new TlsPassword(cast(void*)createGObject(TlsPassword._getGType), Yes.Take);
   }

@@ -70,26 +70,26 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_action_get_type != &gidSymbolNotFound ? gtk_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Action self()
+  override Action self() nothrow
   {
     return this;
   }
@@ -98,7 +98,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Get builder for [gtk.action.Action]
       Returns: New builder object
   */
-  static ActionGidBuilder builder()
+  static ActionGidBuilder builder() nothrow
   {
     return new ActionGidBuilder;
   }
@@ -111,7 +111,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Lookup the #GAction using [gio.action_map.ActionMap.lookupAction]
         instead
   */
-  @property gtk.action_group.ActionGroup actionGroup()
+  @property gtk.action_group.ActionGroup actionGroup() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.action_group.ActionGroup)("action-group");
   }
@@ -125,7 +125,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Lookup the #GAction using [gio.action_map.ActionMap.lookupAction]
         instead
   */
-  @property void actionGroup(gtk.action_group.ActionGroup propval)
+  @property void actionGroup(gtk.action_group.ActionGroup propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.action_group.ActionGroup)("action-group", propval);
   }
@@ -141,7 +141,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  @property bool alwaysShowImage()
+  @property bool alwaysShowImage() nothrow
   {
     return getAlwaysShowImage();
   }
@@ -158,7 +158,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  @property void alwaysShowImage(bool propval)
+  @property void alwaysShowImage(bool propval) nothrow
   {
     setAlwaysShowImage(propval);
   }
@@ -175,7 +175,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   
       Deprecated: Use the "icon" attribute on a #GMenuItem instead
   */
-  @property gio.icon.Icon gicon()
+  @property gio.icon.Icon gicon() nothrow
   {
     return getGicon();
   }
@@ -193,7 +193,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   
       Deprecated: Use the "icon" attribute on a #GMenuItem instead
   */
-  @property void gicon(gio.icon.Icon propval)
+  @property void gicon(gio.icon.Icon propval) nothrow
   {
     setGicon(propval);
   }
@@ -205,7 +205,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  @property bool hideIfEmpty()
+  @property bool hideIfEmpty() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("hide-if-empty");
   }
@@ -218,7 +218,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  @property void hideIfEmpty(bool propval)
+  @property void hideIfEmpty(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("hide-if-empty", propval);
   }
@@ -236,7 +236,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   
       Deprecated: Use the "icon" attribute on a #GMenuItem instead
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return getIconName();
   }
@@ -255,7 +255,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   
       Deprecated: Use the "icon" attribute on a #GMenuItem instead
   */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     setIconName(propval);
   }
@@ -268,7 +268,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  @property bool isImportant()
+  @property bool isImportant() nothrow
   {
     return getIsImportant();
   }
@@ -282,7 +282,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  @property void isImportant(bool propval)
+  @property void isImportant(bool propval) nothrow
   {
     setIsImportant(propval);
   }
@@ -298,7 +298,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   
       Deprecated: Use the "label" attribute on #GMenuItem instead
   */
-  @property string label()
+  @property string label() nothrow
   {
     return getLabel();
   }
@@ -315,7 +315,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   
       Deprecated: Use the "label" attribute on #GMenuItem instead
   */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     setLabel(propval);
   }
@@ -326,7 +326,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   
       Deprecated: Use #GAction:name instead
   */
-  @property string name()
+  @property string name() nothrow
   {
     return getName();
   }
@@ -338,7 +338,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction:enabled and #GSimpleAction:enabled
         instead
   */
-  @property bool sensitive()
+  @property bool sensitive() nothrow
   {
     return getSensitive();
   }
@@ -351,7 +351,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction:enabled and #GSimpleAction:enabled
         instead
   */
-  @property void sensitive(bool propval)
+  @property void sensitive(bool propval) nothrow
   {
     setSensitive(propval);
   }
@@ -366,7 +366,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  @property string shortLabel()
+  @property string shortLabel() nothrow
   {
     return getShortLabel();
   }
@@ -382,7 +382,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  @property void shortLabel(string propval)
+  @property void shortLabel(string propval) nothrow
   {
     setShortLabel(propval);
   }
@@ -397,7 +397,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  @property string stockId()
+  @property string stockId() nothrow
   {
     return getStockId();
   }
@@ -413,7 +413,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  @property void stockId(string propval)
+  @property void stockId(string propval) nothrow
   {
     setStockId(propval);
   }
@@ -424,7 +424,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   
       Deprecated: Use [gtk.widget.Widget.setTooltipText] instead
   */
-  @property string tooltip()
+  @property string tooltip() nothrow
   {
     return getTooltip();
   }
@@ -436,7 +436,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   
       Deprecated: Use [gtk.widget.Widget.setTooltipText] instead
   */
-  @property void tooltip(string propval)
+  @property void tooltip(string propval) nothrow
   {
     setTooltip(propval);
   }
@@ -448,7 +448,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  @property bool visible()
+  @property bool visible() nothrow
   {
     return getVisible();
   }
@@ -461,7 +461,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  @property void visible(bool propval)
+  @property void visible(bool propval) nothrow
   {
     setVisible(propval);
   }
@@ -473,7 +473,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  @property bool visibleHorizontal()
+  @property bool visibleHorizontal() nothrow
   {
     return getVisibleHorizontal();
   }
@@ -486,7 +486,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  @property void visibleHorizontal(bool propval)
+  @property void visibleHorizontal(bool propval) nothrow
   {
     setVisibleHorizontal(propval);
   }
@@ -499,7 +499,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  @property bool visibleOverflown()
+  @property bool visibleOverflown() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("visible-overflown");
   }
@@ -513,7 +513,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  @property void visibleOverflown(bool propval)
+  @property void visibleOverflown(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("visible-overflown", propval);
   }
@@ -525,7 +525,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  @property bool visibleVertical()
+  @property bool visibleVertical() nothrow
   {
     return getVisibleVertical();
   }
@@ -538,7 +538,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  @property void visibleVertical(bool propval)
+  @property void visibleVertical(bool propval) nothrow
   {
     setVisibleVertical(propval);
   }
@@ -564,7 +564,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction instead, associating it to a widget with
         #GtkActionable or creating a #GtkMenu with [gtk.menu.Menu.newFromModel]
   */
-  this(string name, string label = null, string tooltip = null, string stockId = null)
+  this(string name, string label = null, string tooltip = null, string stockId = null) nothrow
   {
     GtkAction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -584,7 +584,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   
       Deprecated: Use [gio.action_group.ActionGroup.activateAction] on a #GAction instead
   */
-  void activate()
+  void activate() nothrow
   {
     gtk_action_activate(cast(GtkAction*)this._cPtr);
   }
@@ -600,7 +600,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use [gio.simple_action.SimpleAction.setEnabled] to disable the
         #GSimpleAction instead
   */
-  void blockActivate()
+  void blockActivate() nothrow
   {
     gtk_action_block_activate(cast(GtkAction*)this._cPtr);
   }
@@ -618,7 +618,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction and the accelerator group on an associated
         #GtkMenu instead
   */
-  void connectAccelerator()
+  void connectAccelerator() nothrow
   {
     gtk_action_connect_accelerator(cast(GtkAction*)this._cPtr);
   }
@@ -635,7 +635,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use [gio.menu_item.MenuItem.setIcon] to set an icon on a #GMenuItem,
         or [gtk.container.Container.add] to add a #GtkImage to a #GtkButton
   */
-  gtk.widget.Widget createIcon(gtk.types.IconSize iconSize)
+  gtk.widget.Widget createIcon(gtk.types.IconSize iconSize) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_create_icon(cast(GtkAction*)this._cPtr, iconSize);
@@ -653,7 +653,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction and #GMenuModel instead, and create a
         #GtkMenu with [gtk.menu.Menu.newFromModel]
   */
-  gtk.widget.Widget createMenu()
+  gtk.widget.Widget createMenu() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_create_menu(cast(GtkAction*)this._cPtr);
@@ -668,7 +668,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use [gio.menu_item.MenuItem.new_] and associate it with a #GAction
         instead.
   */
-  gtk.widget.Widget createMenuItem()
+  gtk.widget.Widget createMenuItem() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_create_menu_item(cast(GtkAction*)this._cPtr);
@@ -683,7 +683,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use a #GtkToolItem and associate it with a #GAction using
         [gtk.actionable.Actionable.setActionName] instead
   */
-  gtk.widget.Widget createToolItem()
+  gtk.widget.Widget createToolItem() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_create_tool_item(cast(GtkAction*)this._cPtr);
@@ -697,7 +697,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction and the accelerator group on an associated
         #GtkMenu instead
   */
-  void disconnectAccelerator()
+  void disconnectAccelerator() nothrow
   {
     gtk_action_disconnect_accelerator(cast(GtkAction*)this._cPtr);
   }
@@ -711,7 +711,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction and #GtkMenu instead, which have no
         equivalent for getting the accel closure
   */
-  gobject.closure.Closure getAccelClosure()
+  gobject.closure.Closure getAccelClosure() nothrow
   {
     GClosure* _cretval;
     _cretval = gtk_action_get_accel_closure(cast(GtkAction*)this._cPtr);
@@ -728,7 +728,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction and the accelerator path on an associated
         #GtkMenu instead
   */
-  string getAccelPath()
+  string getAccelPath() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_action_get_accel_path(cast(GtkAction*)this._cPtr);
@@ -744,7 +744,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use [gio.menu_item.MenuItem.getAttributeValue] on a #GMenuItem
         instead
   */
-  bool getAlwaysShowImage()
+  bool getAlwaysShowImage() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_action_get_always_show_image(cast(GtkAction*)this._cPtr);
@@ -759,7 +759,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
         [gio.menu_item.MenuItem.getAttributeValue] to get an icon from a #GMenuItem
         associated with a #GAction
   */
-  gio.icon.Icon getGicon()
+  gio.icon.Icon getGicon() nothrow
   {
     GIcon* _cretval;
     _cretval = gtk_action_get_gicon(cast(GtkAction*)this._cPtr);
@@ -775,7 +775,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
         [gio.menu_item.MenuItem.getAttributeValue] to get an icon from a #GMenuItem
         associated with a #GAction
   */
-  string getIconName()
+  string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_action_get_icon_name(cast(GtkAction*)this._cPtr);
@@ -790,7 +790,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction instead, and control and monitor whether
         labels are shown directly
   */
-  bool getIsImportant()
+  bool getIsImportant() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_action_get_is_important(cast(GtkAction*)this._cPtr);
@@ -805,7 +805,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
         with [gio.menu_item.MenuItem.getAttributeValue]. For #GtkActionable widgets, use the
         widget-specific API to get a label
   */
-  string getLabel()
+  string getLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_action_get_label(cast(GtkAction*)this._cPtr);
@@ -820,7 +820,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   
       Deprecated: Use [gio.action.Action.getName] on a #GAction instead
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_action_get_name(cast(GtkAction*)this._cPtr);
@@ -834,7 +834,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Returns: a #GSList of proxy widgets. The list is owned by GTK+
         and must not be modified.
   */
-  gtk.widget.Widget[] getProxies()
+  gtk.widget.Widget[] getProxies() nothrow
   {
     GSList* _cretval;
     _cretval = gtk_action_get_proxies(cast(GtkAction*)this._cPtr);
@@ -851,7 +851,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use [gio.action.Action.getEnabled] on a #GAction
         instead
   */
-  bool getSensitive()
+  bool getSensitive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_action_get_sensitive(cast(GtkAction*)this._cPtr);
@@ -865,7 +865,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction instead, which has no equivalent of short
         labels
   */
-  string getShortLabel()
+  string getShortLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_action_get_short_label(cast(GtkAction*)this._cPtr);
@@ -880,7 +880,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction instead, which has no equivalent of stock
         items
   */
-  string getStockId()
+  string getStockId() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_action_get_stock_id(cast(GtkAction*)this._cPtr);
@@ -895,7 +895,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction instead, and get tooltips from associated
         #GtkActionable widgets with [gtk.widget.Widget.getTooltipText]
   */
-  string getTooltip()
+  string getTooltip() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_action_get_tooltip(cast(GtkAction*)this._cPtr);
@@ -912,7 +912,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction instead, and control and monitor the state of
         #GtkActionable widgets directly
   */
-  bool getVisible()
+  bool getVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_action_get_visible(cast(GtkAction*)this._cPtr);
@@ -926,7 +926,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction instead, and control and monitor the
         visibility of associated widgets and menu items directly
   */
-  bool getVisibleHorizontal()
+  bool getVisibleHorizontal() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_action_get_visible_horizontal(cast(GtkAction*)this._cPtr);
@@ -940,7 +940,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction instead, and control and monitor the
         visibility of associated widgets and menu items directly
   */
-  bool getVisibleVertical()
+  bool getVisibleVertical() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_action_get_visible_vertical(cast(GtkAction*)this._cPtr);
@@ -955,7 +955,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use [gio.action.Action.getEnabled] on a #GAction
         instead
   */
-  bool isSensitive()
+  bool isSensitive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_action_is_sensitive(cast(GtkAction*)this._cPtr);
@@ -970,7 +970,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction instead, and control and monitor the state of
         #GtkActionable widgets directly
   */
-  bool isVisible()
+  bool isVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_action_is_visible(cast(GtkAction*)this._cPtr);
@@ -987,7 +987,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction and the accelerator group on an associated
         #GtkMenu instead
   */
-  void setAccelGroup(gtk.accel_group.AccelGroup accelGroup = null)
+  void setAccelGroup(gtk.accel_group.AccelGroup accelGroup = null) nothrow
   {
     gtk_action_set_accel_group(cast(GtkAction*)this._cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup._cPtr(No.Dup) : null);
   }
@@ -1007,7 +1007,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction and the accelerator path on an associated
         #GtkMenu instead
   */
-  void setAccelPath(string accelPath)
+  void setAccelPath(string accelPath) nothrow
   {
     const(char)* _accelPath = accelPath.toCString(No.Alloc);
     gtk_action_set_accel_path(cast(GtkAction*)this._cPtr, _accelPath);
@@ -1026,7 +1026,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use [gio.menu_item.MenuItem.setIcon] on a #GMenuItem instead, if the
         item should have an image
   */
-  void setAlwaysShowImage(bool alwaysShow)
+  void setAlwaysShowImage(bool alwaysShow) nothrow
   {
     gtk_action_set_always_show_image(cast(GtkAction*)this._cPtr, alwaysShow);
   }
@@ -1041,7 +1041,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
         icon on a #GMenuItem associated with a #GAction, or [gtk.container.Container.add] to
         add a #GtkImage to a #GtkButton
   */
-  void setGicon(gio.icon.Icon icon)
+  void setGicon(gio.icon.Icon icon) nothrow
   {
     gtk_action_set_gicon(cast(GtkAction*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
@@ -1056,7 +1056,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
         icon on a #GMenuItem associated with a #GAction, or [gtk.container.Container.add] to
         add a #GtkImage to a #GtkButton
   */
-  void setIconName(string iconName)
+  void setIconName(string iconName) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_action_set_icon_name(cast(GtkAction*)this._cPtr, _iconName);
@@ -1073,7 +1073,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction instead, and control and monitor whether
         labels are shown directly
   */
-  void setIsImportant(bool isImportant)
+  void setIsImportant(bool isImportant) nothrow
   {
     gtk_action_set_is_important(cast(GtkAction*)this._cPtr, isImportant);
   }
@@ -1088,7 +1088,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
         [gio.menu_item.MenuItem.setLabel]. For #GtkActionable widgets, use the widget-specific
         API to set a label
   */
-  void setLabel(string label)
+  void setLabel(string label) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_action_set_label(cast(GtkAction*)this._cPtr, _label);
@@ -1106,7 +1106,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use [gio.simple_action.SimpleAction.setEnabled] on a #GSimpleAction
         instead
   */
-  void setSensitive(bool sensitive)
+  void setSensitive(bool sensitive) nothrow
   {
     gtk_action_set_sensitive(cast(GtkAction*)this._cPtr, sensitive);
   }
@@ -1120,7 +1120,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction instead, which has no equivalent of short
         labels
   */
-  void setShortLabel(string shortLabel)
+  void setShortLabel(string shortLabel) nothrow
   {
     const(char)* _shortLabel = shortLabel.toCString(No.Alloc);
     gtk_action_set_short_label(cast(GtkAction*)this._cPtr, _shortLabel);
@@ -1135,7 +1135,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction instead, which has no equivalent of stock
         items
   */
-  void setStockId(string stockId)
+  void setStockId(string stockId) nothrow
   {
     const(char)* _stockId = stockId.toCString(No.Alloc);
     gtk_action_set_stock_id(cast(GtkAction*)this._cPtr, _stockId);
@@ -1150,7 +1150,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction instead, and set tooltips on associated
         #GtkActionable widgets with [gtk.widget.Widget.setTooltipText]
   */
-  void setTooltip(string tooltip)
+  void setTooltip(string tooltip) nothrow
   {
     const(char)* _tooltip = tooltip.toCString(No.Alloc);
     gtk_action_set_tooltip(cast(GtkAction*)this._cPtr, _tooltip);
@@ -1168,7 +1168,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction instead, and control and monitor the state of
         #GtkActionable widgets directly
   */
-  void setVisible(bool visible)
+  void setVisible(bool visible) nothrow
   {
     gtk_action_set_visible(cast(GtkAction*)this._cPtr, visible);
   }
@@ -1182,7 +1182,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction instead, and control and monitor the
         visibility of associated widgets and menu items directly
   */
-  void setVisibleHorizontal(bool visibleHorizontal)
+  void setVisibleHorizontal(bool visibleHorizontal) nothrow
   {
     gtk_action_set_visible_horizontal(cast(GtkAction*)this._cPtr, visibleHorizontal);
   }
@@ -1196,7 +1196,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use #GAction instead, and control and monitor the
         visibility of associated widgets and menu items directly
   */
-  void setVisibleVertical(bool visibleVertical)
+  void setVisibleVertical(bool visibleVertical) nothrow
   {
     gtk_action_set_visible_vertical(cast(GtkAction*)this._cPtr, visibleVertical);
   }
@@ -1207,7 +1207,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Use [gio.simple_action.SimpleAction.setEnabled] to enable the
         #GSimpleAction instead
   */
-  void unblockActivate()
+  void unblockActivate() nothrow
   {
     gtk_action_unblock_activate(cast(GtkAction*)this._cPtr);
   }
@@ -1229,13 +1229,13 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   
       Deprecated: Use #GSimpleAction::activate instead
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.action.Action)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1244,7 +1244,14 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.action.Action.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1268,7 +1275,7 @@ class ActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.b
       Deprecated: Lookup the #GAction using [gio.action_map.ActionMap.lookupAction]
         instead
   */
-  T actionGroup(gtk.action_group.ActionGroup propval)
+  T actionGroup(gtk.action_group.ActionGroup propval) nothrow
   {
     return setProperty("action-group", propval);
   }
@@ -1286,7 +1293,7 @@ class ActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.b
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  T alwaysShowImage(bool propval)
+  T alwaysShowImage(bool propval) nothrow
   {
     return setProperty("always-show-image", propval);
   }
@@ -1305,7 +1312,7 @@ class ActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.b
   
       Deprecated: Use the "icon" attribute on a #GMenuItem instead
   */
-  T gicon(gio.icon.Icon propval)
+  T gicon(gio.icon.Icon propval) nothrow
   {
     return setProperty("gicon", propval);
   }
@@ -1319,7 +1326,7 @@ class ActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.b
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  T hideIfEmpty(bool propval)
+  T hideIfEmpty(bool propval) nothrow
   {
     return setProperty("hide-if-empty", propval);
   }
@@ -1339,7 +1346,7 @@ class ActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.b
   
       Deprecated: Use the "icon" attribute on a #GMenuItem instead
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
@@ -1354,7 +1361,7 @@ class ActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.b
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  T isImportant(bool propval)
+  T isImportant(bool propval) nothrow
   {
     return setProperty("is-important", propval);
   }
@@ -1372,7 +1379,7 @@ class ActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.b
   
       Deprecated: Use the "label" attribute on #GMenuItem instead
   */
-  T label(string propval)
+  T label(string propval) nothrow
   {
     return setProperty("label", propval);
   }
@@ -1385,7 +1392,7 @@ class ActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.b
   
       Deprecated: Use #GAction:name instead
   */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -1399,7 +1406,7 @@ class ActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.b
       Deprecated: Use #GAction:enabled and #GSimpleAction:enabled
         instead
   */
-  T sensitive(bool propval)
+  T sensitive(bool propval) nothrow
   {
     return setProperty("sensitive", propval);
   }
@@ -1416,7 +1423,7 @@ class ActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.b
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  T shortLabel(string propval)
+  T shortLabel(string propval) nothrow
   {
     return setProperty("short-label", propval);
   }
@@ -1433,7 +1440,7 @@ class ActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.b
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  T stockId(string propval)
+  T stockId(string propval) nothrow
   {
     return setProperty("stock-id", propval);
   }
@@ -1446,7 +1453,7 @@ class ActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.b
   
       Deprecated: Use [gtk.widget.Widget.setTooltipText] instead
   */
-  T tooltip(string propval)
+  T tooltip(string propval) nothrow
   {
     return setProperty("tooltip", propval);
   }
@@ -1460,7 +1467,7 @@ class ActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.b
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  T visible(bool propval)
+  T visible(bool propval) nothrow
   {
     return setProperty("visible", propval);
   }
@@ -1474,7 +1481,7 @@ class ActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.b
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  T visibleHorizontal(bool propval)
+  T visibleHorizontal(bool propval) nothrow
   {
     return setProperty("visible-horizontal", propval);
   }
@@ -1489,7 +1496,7 @@ class ActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.b
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  T visibleOverflown(bool propval)
+  T visibleOverflown(bool propval) nothrow
   {
     return setProperty("visible-overflown", propval);
   }
@@ -1503,7 +1510,7 @@ class ActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.b
       Deprecated: There is no corresponding replacement when using
         #GAction
   */
-  T visibleVertical(bool propval)
+  T visibleVertical(bool propval) nothrow
   {
     return setProperty("visible-vertical", propval);
   }
@@ -1516,7 +1523,7 @@ final class ActionGidBuilder : ActionGidBuilderImpl!ActionGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Action build()
+  Action build() nothrow
   {
     return new Action(cast(void*)createGObject(Action._getGType), Yes.Take);
   }

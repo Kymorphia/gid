@@ -36,26 +36,26 @@ class AudioSink : gstaudio.audio_base_sink.AudioBaseSink
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_sink_get_type != &gidSymbolNotFound ? gst_audio_sink_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AudioSink self()
+  override AudioSink self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class AudioSink : gstaudio.audio_base_sink.AudioBaseSink
       Get builder for [gstaudio.audio_sink.AudioSink]
       Returns: New builder object
   */
-  static AudioSinkGidBuilder builder()
+  static AudioSinkGidBuilder builder() nothrow
   {
     return new AudioSinkGidBuilder;
   }
@@ -82,7 +82,7 @@ final class AudioSinkGidBuilder : AudioSinkGidBuilderImpl!AudioSinkGidBuilder
       Create object from builder.
       Returns: New object
   */
-  AudioSink build()
+  AudioSink build() nothrow
   {
     return new AudioSink(cast(void*)createGObject(AudioSink._getGType), No.Take);
   }

@@ -19,26 +19,26 @@ class ServerCustomAuthHandler : arrowflight.server_auth_handler.ServerAuthHandle
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_server_custom_auth_handler_get_type != &gidSymbolNotFound ? gaflight_server_custom_auth_handler_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ServerCustomAuthHandler self()
+  override ServerCustomAuthHandler self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class ServerCustomAuthHandler : arrowflight.server_auth_handler.ServerAuthHandle
       Get builder for [arrowflight.server_custom_auth_handler.ServerCustomAuthHandler]
       Returns: New builder object
   */
-  static ServerCustomAuthHandlerGidBuilder builder()
+  static ServerCustomAuthHandlerGidBuilder builder() nothrow
   {
     return new ServerCustomAuthHandlerGidBuilder;
   }
@@ -105,7 +105,7 @@ final class ServerCustomAuthHandlerGidBuilder : ServerCustomAuthHandlerGidBuilde
       Create object from builder.
       Returns: New object
   */
-  ServerCustomAuthHandler build()
+  ServerCustomAuthHandler build() nothrow
   {
     return new ServerCustomAuthHandler(cast(void*)createGObject(ServerCustomAuthHandler._getGType), No.Take);
   }

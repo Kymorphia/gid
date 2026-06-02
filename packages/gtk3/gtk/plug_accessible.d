@@ -18,26 +18,26 @@ class PlugAccessible : gtk.window_accessible.WindowAccessible
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_plug_accessible_get_type != &gidSymbolNotFound ? gtk_plug_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PlugAccessible self()
+  override PlugAccessible self() nothrow
   {
     return this;
   }
@@ -46,13 +46,13 @@ class PlugAccessible : gtk.window_accessible.WindowAccessible
       Get builder for [gtk.plug_accessible.PlugAccessible]
       Returns: New builder object
   */
-  static PlugAccessibleGidBuilder builder()
+  static PlugAccessibleGidBuilder builder() nothrow
   {
     return new PlugAccessibleGidBuilder;
   }
 
   /** */
-  string getId()
+  string getId() nothrow
   {
     char* _cretval;
     _cretval = gtk_plug_accessible_get_id(cast(GtkPlugAccessible*)this._cPtr);
@@ -74,7 +74,7 @@ final class PlugAccessibleGidBuilder : PlugAccessibleGidBuilderImpl!PlugAccessib
       Create object from builder.
       Returns: New object
   */
-  PlugAccessible build()
+  PlugAccessible build() nothrow
   {
     return new PlugAccessible(cast(void*)createGObject(PlugAccessible._getGType), No.Take);
   }

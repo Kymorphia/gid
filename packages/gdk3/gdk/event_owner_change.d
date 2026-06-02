@@ -19,11 +19,8 @@ class EventOwnerChange
   GdkEventOwnerChange _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.event_owner_change.EventOwnerChange");
-
     _cInstance = *cast(GdkEventOwnerChange*)ptr;
 
     if (take)
@@ -31,7 +28,7 @@ class EventOwnerChange
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -40,7 +37,7 @@ class EventOwnerChange
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.OwnerChange]).
   */
-  @property gdk.types.EventType type()
+  @property gdk.types.EventType type() nothrow
   {
     return cast(gdk.types.EventType)(cast(GdkEventOwnerChange*)this._cPtr).type;
   }
@@ -50,7 +47,7 @@ class EventOwnerChange
       Params:
         propval = the type of the event ([gdk.types.EventType.OwnerChange]).
   */
-  @property void type(gdk.types.EventType propval)
+  @property void type(gdk.types.EventType propval) nothrow
   {
     (cast(GdkEventOwnerChange*)this._cPtr).type = cast(GdkEventType)propval;
   }
@@ -59,7 +56,7 @@ class EventOwnerChange
       Get `window` field.
       Returns: the window which received the event
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventOwnerChange*)this._cPtr).window);
   }
@@ -69,7 +66,7 @@ class EventOwnerChange
       Params:
         propval = the window which received the event
   */
-  @property void window(gdk.window.Window propval)
+  @property void window(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventOwnerChange*)this._cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventOwnerChange*)this._cPtr).window);
@@ -79,7 +76,7 @@ class EventOwnerChange
       Get `sendEvent` field.
       Returns: true if the event was sent explicitly.
   */
-  @property byte sendEvent()
+  @property byte sendEvent() nothrow
   {
     return (cast(GdkEventOwnerChange*)this._cPtr).sendEvent;
   }
@@ -89,7 +86,7 @@ class EventOwnerChange
       Params:
         propval = true if the event was sent explicitly.
   */
-  @property void sendEvent(byte propval)
+  @property void sendEvent(byte propval) nothrow
   {
     (cast(GdkEventOwnerChange*)this._cPtr).sendEvent = propval;
   }
@@ -98,7 +95,7 @@ class EventOwnerChange
       Get `owner` field.
       Returns: the new owner of the selection, or null if there is none
   */
-  @property gdk.window.Window owner()
+  @property gdk.window.Window owner() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventOwnerChange*)this._cPtr).owner);
   }
@@ -108,7 +105,7 @@ class EventOwnerChange
       Params:
         propval = the new owner of the selection, or null if there is none
   */
-  @property void owner(gdk.window.Window propval)
+  @property void owner(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventOwnerChange*)this._cPtr).owner);
     dToC(propval, cast(void*)&(cast(GdkEventOwnerChange*)this._cPtr).owner);
@@ -118,7 +115,7 @@ class EventOwnerChange
       Get `reason` field.
       Returns: the reason for the ownership change as a #GdkOwnerChange value
   */
-  @property gdk.types.OwnerChange reason()
+  @property gdk.types.OwnerChange reason() nothrow
   {
     return cast(gdk.types.OwnerChange)(cast(GdkEventOwnerChange*)this._cPtr).reason;
   }
@@ -128,7 +125,7 @@ class EventOwnerChange
       Params:
         propval = the reason for the ownership change as a #GdkOwnerChange value
   */
-  @property void reason(gdk.types.OwnerChange propval)
+  @property void reason(gdk.types.OwnerChange propval) nothrow
   {
     (cast(GdkEventOwnerChange*)this._cPtr).reason = cast(GdkOwnerChange)propval;
   }
@@ -137,7 +134,7 @@ class EventOwnerChange
       Get `selection` field.
       Returns: the atom identifying the selection
   */
-  @property gdk.atom.Atom selection()
+  @property gdk.atom.Atom selection() nothrow
   {
     return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventOwnerChange*)this._cPtr).selection, No.Take);
   }
@@ -146,7 +143,7 @@ class EventOwnerChange
       Get `time` field.
       Returns: the timestamp of the event
   */
-  @property uint time()
+  @property uint time() nothrow
   {
     return (cast(GdkEventOwnerChange*)this._cPtr).time;
   }
@@ -156,7 +153,7 @@ class EventOwnerChange
       Params:
         propval = the timestamp of the event
   */
-  @property void time(uint propval)
+  @property void time(uint propval) nothrow
   {
     (cast(GdkEventOwnerChange*)this._cPtr).time = propval;
   }
@@ -166,7 +163,7 @@ class EventOwnerChange
       Returns: the time at which the selection ownership was taken
           over
   */
-  @property uint selectionTime()
+  @property uint selectionTime() nothrow
   {
     return (cast(GdkEventOwnerChange*)this._cPtr).selectionTime;
   }
@@ -177,7 +174,7 @@ class EventOwnerChange
         propval = the time at which the selection ownership was taken
             over
   */
-  @property void selectionTime(uint propval)
+  @property void selectionTime(uint propval) nothrow
   {
     (cast(GdkEventOwnerChange*)this._cPtr).selectionTime = propval;
   }

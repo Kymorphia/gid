@@ -30,26 +30,26 @@ class HScrollbar : gtk.scrollbar.Scrollbar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_hscrollbar_get_type != &gidSymbolNotFound ? gtk_hscrollbar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HScrollbar self()
+  override HScrollbar self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class HScrollbar : gtk.scrollbar.Scrollbar
       Get builder for [gtk.hscrollbar.HScrollbar]
       Returns: New builder object
   */
-  static HScrollbarGidBuilder builder()
+  static HScrollbarGidBuilder builder() nothrow
   {
     return new HScrollbarGidBuilder;
   }
@@ -72,7 +72,7 @@ class HScrollbar : gtk.scrollbar.Scrollbar
   
       Deprecated: Use [gtk.scrollbar.Scrollbar.new_] with [gtk.types.Orientation.Horizontal] instead
   */
-  this(gtk.adjustment.Adjustment adjustment = null)
+  this(gtk.adjustment.Adjustment adjustment = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_hscrollbar_new(adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
@@ -93,7 +93,7 @@ final class HScrollbarGidBuilder : HScrollbarGidBuilderImpl!HScrollbarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  HScrollbar build()
+  HScrollbar build() nothrow
   {
     return new HScrollbar(cast(void*)createGObject(HScrollbar._getGType), No.Take);
   }

@@ -32,32 +32,32 @@ class FeatureList : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_feature_list_get_type != &gidSymbolNotFound ? webkit_feature_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FeatureList self()
+  override FeatureList self() nothrow
   {
     return this;
   }
@@ -69,7 +69,7 @@ class FeatureList : gobject.boxed.Boxed
         index = index of the feature
       Returns: The feature at index.
   */
-  webkit.feature.Feature get(size_t index)
+  webkit.feature.Feature get(size_t index) nothrow
   {
     WebKitFeature* _cretval;
     _cretval = webkit_feature_list_get(cast(WebKitFeatureList*)this._cPtr, index);
@@ -83,7 +83,7 @@ class FeatureList : gobject.boxed.Boxed
         
         Since 2.42
   */
-  size_t getLength()
+  size_t getLength() nothrow
   {
     size_t _retval;
     _retval = webkit_feature_list_get_length(cast(WebKitFeatureList*)this._cPtr);

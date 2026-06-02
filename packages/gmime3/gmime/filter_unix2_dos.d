@@ -16,26 +16,26 @@ class FilterUnix2Dos : gmime.filter.Filter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_filter_unix2dos_get_type != &gidSymbolNotFound ? g_mime_filter_unix2dos_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FilterUnix2Dos self()
+  override FilterUnix2Dos self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class FilterUnix2Dos : gmime.filter.Filter
       Get builder for [gmime.filter_unix2_dos.FilterUnix2Dos]
       Returns: New builder object
   */
-  static FilterUnix2DosGidBuilder builder()
+  static FilterUnix2DosGidBuilder builder() nothrow
   {
     return new FilterUnix2DosGidBuilder;
   }
@@ -56,7 +56,7 @@ class FilterUnix2Dos : gmime.filter.Filter
         ensureNewline = true if the filter should ensure that the stream ends in a new line
       Returns: a new #GMimeFilterUnix2Dos filter.
   */
-  this(bool ensureNewline)
+  this(bool ensureNewline) nothrow
   {
     GMimeFilter* _cretval;
     _cretval = g_mime_filter_unix2dos_new(ensureNewline);
@@ -76,7 +76,7 @@ final class FilterUnix2DosGidBuilder : FilterUnix2DosGidBuilderImpl!FilterUnix2D
       Create object from builder.
       Returns: New object
   */
-  FilterUnix2Dos build()
+  FilterUnix2Dos build() nothrow
   {
     return new FilterUnix2Dos(cast(void*)createGObject(FilterUnix2Dos._getGType), Yes.Take);
   }

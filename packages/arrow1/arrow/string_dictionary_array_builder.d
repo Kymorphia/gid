@@ -17,26 +17,26 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_string_dictionary_array_builder_get_type != &gidSymbolNotFound ? garrow_string_dictionary_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StringDictionaryArrayBuilder self()
+  override StringDictionaryArrayBuilder self() nothrow
   {
     return this;
   }
@@ -45,13 +45,13 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.string_dictionary_array_builder.StringDictionaryArrayBuilder]
       Returns: New builder object
   */
-  static StringDictionaryArrayBuilderGidBuilder builder()
+  static StringDictionaryArrayBuilderGidBuilder builder() nothrow
   {
     return new StringDictionaryArrayBuilderGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowStringDictionaryArrayBuilder* _cretval;
     _cretval = garrow_string_dictionary_array_builder_new();
@@ -129,7 +129,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /** */
-  long getDictionaryLength()
+  long getDictionaryLength() nothrow
   {
     long _retval;
     _retval = garrow_string_dictionary_array_builder_get_dictionary_length(cast(GArrowStringDictionaryArrayBuilder*)this._cPtr);
@@ -150,7 +150,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   /**
       Reset and also clear accumulated dictionary values in memo table.
   */
-  void resetFull()
+  void resetFull() nothrow
   {
     garrow_string_dictionary_array_builder_reset_full(cast(GArrowStringDictionaryArrayBuilder*)this._cPtr);
   }
@@ -168,7 +168,7 @@ final class StringDictionaryArrayBuilderGidBuilder : StringDictionaryArrayBuilde
       Create object from builder.
       Returns: New object
   */
-  StringDictionaryArrayBuilder build()
+  StringDictionaryArrayBuilder build() nothrow
   {
     return new StringDictionaryArrayBuilder(cast(void*)createGObject(StringDictionaryArrayBuilder._getGType), Yes.Take);
   }

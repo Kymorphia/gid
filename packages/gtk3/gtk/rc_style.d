@@ -19,26 +19,26 @@ class RcStyle : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_rc_style_get_type != &gidSymbolNotFound ? gtk_rc_style_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RcStyle self()
+  override RcStyle self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class RcStyle : gobject.object.ObjectWrap
       Get builder for [gtk.rc_style.RcStyle]
       Returns: New builder object
   */
-  static RcStyleGidBuilder builder()
+  static RcStyleGidBuilder builder() nothrow
   {
     return new RcStyleGidBuilder;
   }
@@ -59,7 +59,7 @@ class RcStyle : gobject.object.ObjectWrap
   
       Deprecated: Use #GtkCssProvider instead.
   */
-  this()
+  this() nothrow
   {
     GtkRcStyle* _cretval;
     _cretval = gtk_rc_style_new();
@@ -74,7 +74,7 @@ class RcStyle : gobject.object.ObjectWrap
   
       Deprecated: Use #GtkCssProvider instead.
   */
-  gtk.rc_style.RcStyle copy()
+  gtk.rc_style.RcStyle copy() nothrow
   {
     GtkRcStyle* _cretval;
     _cretval = gtk_rc_style_copy(cast(GtkRcStyle*)this._cPtr);
@@ -95,7 +95,7 @@ final class RcStyleGidBuilder : RcStyleGidBuilderImpl!RcStyleGidBuilder
       Create object from builder.
       Returns: New object
   */
-  RcStyle build()
+  RcStyle build() nothrow
   {
     return new RcStyle(cast(void*)createGObject(RcStyle._getGType), Yes.Take);
   }

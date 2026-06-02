@@ -16,7 +16,7 @@ import gstsdp.types;
       addr = an address
     Returns: TRUE when addr is multicast.
 */
-bool sdpAddressIsMulticast(string nettype, string addrtype, string addr)
+bool sdpAddressIsMulticast(string nettype, string addrtype, string addr) nothrow
 {
   bool _retval;
   const(char)* _nettype = nettype.toCString(No.Alloc);
@@ -34,7 +34,7 @@ bool sdpAddressIsMulticast(string nettype, string addrtype, string addr)
       base64 = a #gchar base64-encoded key data
     Returns: a #gchar key-mgmt data,
 */
-string sdpMakeKeymgmt(string uri, string base64)
+string sdpMakeKeymgmt(string uri, string base64) nothrow
 {
   char* _cretval;
   const(char)* _uri = uri.toCString(No.Alloc);

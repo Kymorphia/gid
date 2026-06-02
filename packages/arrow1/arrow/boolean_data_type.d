@@ -14,26 +14,26 @@ class BooleanDataType : arrow.fixed_width_data_type.FixedWidthDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_boolean_data_type_get_type != &gidSymbolNotFound ? garrow_boolean_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BooleanDataType self()
+  override BooleanDataType self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class BooleanDataType : arrow.fixed_width_data_type.FixedWidthDataType
       Get builder for [arrow.boolean_data_type.BooleanDataType]
       Returns: New builder object
   */
-  static BooleanDataTypeGidBuilder builder()
+  static BooleanDataTypeGidBuilder builder() nothrow
   {
     return new BooleanDataTypeGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowBooleanDataType* _cretval;
     _cretval = garrow_boolean_data_type_new();
@@ -68,7 +68,7 @@ final class BooleanDataTypeGidBuilder : BooleanDataTypeGidBuilderImpl!BooleanDat
       Create object from builder.
       Returns: New object
   */
-  BooleanDataType build()
+  BooleanDataType build() nothrow
   {
     return new BooleanDataType(cast(void*)createGObject(BooleanDataType._getGType), Yes.Take);
   }

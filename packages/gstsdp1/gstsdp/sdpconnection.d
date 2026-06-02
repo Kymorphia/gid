@@ -15,11 +15,8 @@ class SDPConnection
   GstSDPConnection _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstsdp.sdpconnection.SDPConnection");
-
     _cInstance = *cast(GstSDPConnection*)ptr;
 
     if (take)
@@ -27,7 +24,7 @@ class SDPConnection
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class SDPConnection
       Returns: the type of network. "IN" is defined to have the meaning
            "Internet".
   */
-  @property string nettype()
+  @property string nettype() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPConnection*)this._cPtr).nettype);
   }
@@ -48,7 +45,7 @@ class SDPConnection
         propval = the type of network. "IN" is defined to have the meaning
              "Internet".
   */
-  @property void nettype(string propval)
+  @property void nettype(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPConnection*)this._cPtr).nettype);
     dToC(propval, cast(void*)&(cast(GstSDPConnection*)this._cPtr).nettype);
@@ -58,7 +55,7 @@ class SDPConnection
       Get `addrtype` field.
       Returns: the type of @address.
   */
-  @property string addrtype()
+  @property string addrtype() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPConnection*)this._cPtr).addrtype);
   }
@@ -68,7 +65,7 @@ class SDPConnection
       Params:
         propval = the type of @address.
   */
-  @property void addrtype(string propval)
+  @property void addrtype(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPConnection*)this._cPtr).addrtype);
     dToC(propval, cast(void*)&(cast(GstSDPConnection*)this._cPtr).addrtype);
@@ -78,7 +75,7 @@ class SDPConnection
       Get `address` field.
       Returns: the address
   */
-  @property string address()
+  @property string address() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPConnection*)this._cPtr).address);
   }
@@ -88,7 +85,7 @@ class SDPConnection
       Params:
         propval = the address
   */
-  @property void address(string propval)
+  @property void address(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPConnection*)this._cPtr).address);
     dToC(propval, cast(void*)&(cast(GstSDPConnection*)this._cPtr).address);
@@ -98,7 +95,7 @@ class SDPConnection
       Get `ttl` field.
       Returns: the time to live of the address
   */
-  @property uint ttl()
+  @property uint ttl() nothrow
   {
     return (cast(GstSDPConnection*)this._cPtr).ttl;
   }
@@ -108,7 +105,7 @@ class SDPConnection
       Params:
         propval = the time to live of the address
   */
-  @property void ttl(uint propval)
+  @property void ttl(uint propval) nothrow
   {
     (cast(GstSDPConnection*)this._cPtr).ttl = propval;
   }
@@ -117,7 +114,7 @@ class SDPConnection
       Get `addrNumber` field.
       Returns: the number of layers
   */
-  @property uint addrNumber()
+  @property uint addrNumber() nothrow
   {
     return (cast(GstSDPConnection*)this._cPtr).addrNumber;
   }
@@ -127,7 +124,7 @@ class SDPConnection
       Params:
         propval = the number of layers
   */
-  @property void addrNumber(uint propval)
+  @property void addrNumber(uint propval) nothrow
   {
     (cast(GstSDPConnection*)this._cPtr).addrNumber = propval;
   }
@@ -136,7 +133,7 @@ class SDPConnection
       Clear the connection.
       Returns: GST_SDP_OK.
   */
-  gstsdp.types.SDPResult clear()
+  gstsdp.types.SDPResult clear() nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_connection_clear(cast(GstSDPConnection*)this._cPtr);
@@ -156,7 +153,7 @@ class SDPConnection
         addrNumber = the number of layers
       Returns: GST_SDP_OK.
   */
-  gstsdp.types.SDPResult set(string nettype, string addrtype, string address, uint ttl, uint addrNumber)
+  gstsdp.types.SDPResult set(string nettype, string addrtype, string address, uint ttl, uint addrNumber) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _nettype = nettype.toCString(No.Alloc);

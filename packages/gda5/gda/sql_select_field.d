@@ -22,11 +22,8 @@ class SqlSelectField
   GdaSqlSelectField _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.sql_select_field.SqlSelectField");
-
     _cInstance = *cast(GdaSqlSelectField*)ptr;
 
     if (take)
@@ -34,7 +31,7 @@ class SqlSelectField
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -43,7 +40,7 @@ class SqlSelectField
       Get `expr` field.
       Returns: expression
   */
-  @property gda.sql_expr.SqlExpr expr()
+  @property gda.sql_expr.SqlExpr expr() nothrow
   {
     return cToD!(gda.sql_expr.SqlExpr)(cast(void*)(cast(GdaSqlSelectField*)this._cPtr).expr);
   }
@@ -53,7 +50,7 @@ class SqlSelectField
       Params:
         propval = expression
   */
-  @property void expr(gda.sql_expr.SqlExpr propval)
+  @property void expr(gda.sql_expr.SqlExpr propval) nothrow
   {
     cValueFree!(gda.sql_expr.SqlExpr)(cast(void*)(cast(GdaSqlSelectField*)this._cPtr).expr);
     dToC(propval, cast(void*)&(cast(GdaSqlSelectField*)this._cPtr).expr);
@@ -63,7 +60,7 @@ class SqlSelectField
       Get `fieldName` field.
       Returns: field name part of @expr if @expr represents a field
   */
-  @property string fieldName()
+  @property string fieldName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaSqlSelectField*)this._cPtr).fieldName);
   }
@@ -73,7 +70,7 @@ class SqlSelectField
       Params:
         propval = field name part of @expr if @expr represents a field
   */
-  @property void fieldName(string propval)
+  @property void fieldName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaSqlSelectField*)this._cPtr).fieldName);
     dToC(propval, cast(void*)&(cast(GdaSqlSelectField*)this._cPtr).fieldName);
@@ -83,7 +80,7 @@ class SqlSelectField
       Get `tableName` field.
       Returns: table name part of @expr if @expr represents a field
   */
-  @property string tableName()
+  @property string tableName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaSqlSelectField*)this._cPtr).tableName);
   }
@@ -93,7 +90,7 @@ class SqlSelectField
       Params:
         propval = table name part of @expr if @expr represents a field
   */
-  @property void tableName(string propval)
+  @property void tableName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaSqlSelectField*)this._cPtr).tableName);
     dToC(propval, cast(void*)&(cast(GdaSqlSelectField*)this._cPtr).tableName);
@@ -103,7 +100,7 @@ class SqlSelectField
       Get `as` field.
       Returns: alias
   */
-  @property string as()
+  @property string as() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaSqlSelectField*)this._cPtr).as);
   }
@@ -113,20 +110,20 @@ class SqlSelectField
       Params:
         propval = alias
   */
-  @property void as(string propval)
+  @property void as(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaSqlSelectField*)this._cPtr).as);
     dToC(propval, cast(void*)&(cast(GdaSqlSelectField*)this._cPtr).as);
   }
 
   /** */
-  @property gda.meta_db_object.MetaDbObject validityMetaObject()
+  @property gda.meta_db_object.MetaDbObject validityMetaObject() nothrow
   {
     return new gda.meta_db_object.MetaDbObject(cast(GdaMetaDbObject*)(cast(GdaSqlSelectField*)this._cPtr).validityMetaObject, No.Take);
   }
 
   /** */
-  @property gda.meta_table_column.MetaTableColumn validityMetaTableColumn()
+  @property gda.meta_table_column.MetaTableColumn validityMetaTableColumn() nothrow
   {
     return new gda.meta_table_column.MetaTableColumn(cast(GdaMetaTableColumn*)(cast(GdaSqlSelectField*)this._cPtr).validityMetaTableColumn, No.Take);
   }
@@ -136,7 +133,7 @@ class SqlSelectField
       before the FROM clause.
       Returns: a new string with the description of the expression or "null" in case field is invalid.
   */
-  string serialize()
+  string serialize() nothrow
   {
     char* _cretval;
     _cretval = gda_sql_select_field_serialize(cast(GdaSqlSelectField*)this._cPtr);
@@ -151,7 +148,7 @@ class SqlSelectField
       Params:
         alias_ = a #GValue to take from
   */
-  void takeAlias(gobject.value.Value alias_)
+  void takeAlias(gobject.value.Value alias_) nothrow
   {
     gda_sql_select_field_take_alias(cast(GdaSqlSelectField*)this._cPtr, alias_ ? cast(GValue*)alias_._cPtr(Yes.Dup) : null);
   }
@@ -163,7 +160,7 @@ class SqlSelectField
       Params:
         value = a #GValue to take from
   */
-  void takeStarValue(gobject.value.Value value)
+  void takeStarValue(gobject.value.Value value) nothrow
   {
     gda_sql_select_field_take_star_value(cast(GdaSqlSelectField*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }

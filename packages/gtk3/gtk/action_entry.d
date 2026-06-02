@@ -16,11 +16,8 @@ class ActionEntry
   GtkActionEntry _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.action_entry.ActionEntry");
-
     _cInstance = *cast(GtkActionEntry*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class ActionEntry
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class ActionEntry
       Get `name` field.
       Returns: The name of the action.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).name);
   }
@@ -47,7 +44,7 @@ class ActionEntry
       Params:
         propval = The name of the action.
   */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).name);
     dToC(propval, cast(void*)&(cast(GtkActionEntry*)this._cPtr).name);
@@ -58,7 +55,7 @@ class ActionEntry
       Returns: The stock id for the action, or the name of an icon from the
          icon theme.
   */
-  @property string stockId()
+  @property string stockId() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).stockId);
   }
@@ -69,7 +66,7 @@ class ActionEntry
         propval = The stock id for the action, or the name of an icon from the
            icon theme.
   */
-  @property void stockId(string propval)
+  @property void stockId(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).stockId);
     dToC(propval, cast(void*)&(cast(GtkActionEntry*)this._cPtr).stockId);
@@ -81,7 +78,7 @@ class ActionEntry
          for translation, see [gtk.action_group.ActionGroup.setTranslationDomain]. If
          @label is null, the label of the stock item with id @stock_id is used.
   */
-  @property string label()
+  @property string label() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).label);
   }
@@ -93,7 +90,7 @@ class ActionEntry
            for translation, see [gtk.action_group.ActionGroup.setTranslationDomain]. If
            @label is null, the label of the stock item with id @stock_id is used.
   */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).label);
     dToC(propval, cast(void*)&(cast(GtkActionEntry*)this._cPtr).label);
@@ -104,7 +101,7 @@ class ActionEntry
       Returns: The accelerator for the action, in the format understood by
          [gtk.global.acceleratorParse].
   */
-  @property string accelerator()
+  @property string accelerator() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).accelerator);
   }
@@ -115,7 +112,7 @@ class ActionEntry
         propval = The accelerator for the action, in the format understood by
            [gtk.global.acceleratorParse].
   */
-  @property void accelerator(string propval)
+  @property void accelerator(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).accelerator);
     dToC(propval, cast(void*)&(cast(GtkActionEntry*)this._cPtr).accelerator);
@@ -126,7 +123,7 @@ class ActionEntry
       Returns: The tooltip for the action. This field should typically be
          marked for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
   */
-  @property string tooltip()
+  @property string tooltip() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).tooltip);
   }
@@ -137,7 +134,7 @@ class ActionEntry
         propval = The tooltip for the action. This field should typically be
            marked for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
   */
-  @property void tooltip(string propval)
+  @property void tooltip(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).tooltip);
     dToC(propval, cast(void*)&(cast(GtkActionEntry*)this._cPtr).tooltip);
@@ -147,7 +144,7 @@ class ActionEntry
       Get `callback` field.
       Returns: The function to call when the action is activated.
   */
-  @property GCallback callback()
+  @property GCallback callback() nothrow
   {
     return (cast(GtkActionEntry*)this._cPtr).callback;
   }
@@ -158,7 +155,7 @@ class ActionEntry
         propval = The function to call when the action is activated.
   */
 
-  @property void callback(GCallback propval)
+  @property void callback(GCallback propval) nothrow
   {
     (cast(GtkActionEntry*)this._cPtr).callback = propval;
   }

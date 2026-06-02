@@ -31,26 +31,26 @@ class Settings : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_settings_get_type != &gidSymbolNotFound ? webkit_settings_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Settings self()
+  override Settings self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class Settings : gobject.object.ObjectWrap
       Get builder for [webkit.settings.Settings]
       Returns: New builder object
   */
-  static SettingsGidBuilder builder()
+  static SettingsGidBuilder builder() nothrow
   {
     return new SettingsGidBuilder;
   }
@@ -72,7 +72,7 @@ class Settings : gobject.object.ObjectWrap
         setting allows you to change that behaviour, so that it would be
         possible to do a XMLHttpRequest of a local file, for example.
   */
-  @property bool allowFileAccessFromFileUrls()
+  @property bool allowFileAccessFromFileUrls() nothrow
   {
     return getAllowFileAccessFromFileUrls();
   }
@@ -86,7 +86,7 @@ class Settings : gobject.object.ObjectWrap
           setting allows you to change that behaviour, so that it would be
           possible to do a XMLHttpRequest of a local file, for example.
   */
-  @property void allowFileAccessFromFileUrls(bool propval)
+  @property void allowFileAccessFromFileUrls(bool propval) nothrow
   {
     setAllowFileAccessFromFileUrls(propval);
   }
@@ -100,7 +100,7 @@ class Settings : gobject.object.ObjectWrap
         new modal dialogs, so not even the #WebKitWebView::create
         signal will be emitted.
   */
-  @property bool allowModalDialogs()
+  @property bool allowModalDialogs() nothrow
   {
     return getAllowModalDialogs();
   }
@@ -115,7 +115,7 @@ class Settings : gobject.object.ObjectWrap
           new modal dialogs, so not even the #WebKitWebView::create
           signal will be emitted.
   */
-  @property void allowModalDialogs(bool propval)
+  @property void allowModalDialogs(bool propval) nothrow
   {
     setAllowModalDialogs(propval);
   }
@@ -127,7 +127,7 @@ class Settings : gobject.object.ObjectWrap
         and phishing attacks. In contrast, a scenario where it could be enabled could be an app that
         embeds a WebView and you have control of the pages being show instead of a generic browser.
   */
-  @property bool allowTopNavigationToDataUrls()
+  @property bool allowTopNavigationToDataUrls() nothrow
   {
     return getAllowTopNavigationToDataUrls();
   }
@@ -140,7 +140,7 @@ class Settings : gobject.object.ObjectWrap
           and phishing attacks. In contrast, a scenario where it could be enabled could be an app that
           embeds a WebView and you have control of the pages being show instead of a generic browser.
   */
-  @property void allowTopNavigationToDataUrls(bool propval)
+  @property void allowTopNavigationToDataUrls(bool propval) nothrow
   {
     setAllowTopNavigationToDataUrls(propval);
   }
@@ -154,7 +154,7 @@ class Settings : gobject.object.ObjectWrap
         allowed. This setting allows you to change that behaviour, so that
         it would be possible to use local storage, for example.
   */
-  @property bool allowUniversalAccessFromFileUrls()
+  @property bool allowUniversalAccessFromFileUrls() nothrow
   {
     return getAllowUniversalAccessFromFileUrls();
   }
@@ -169,7 +169,7 @@ class Settings : gobject.object.ObjectWrap
           allowed. This setting allows you to change that behaviour, so that
           it would be possible to use local storage, for example.
   */
-  @property void allowUniversalAccessFromFileUrls(bool propval)
+  @property void allowUniversalAccessFromFileUrls(bool propval) nothrow
   {
     setAllowUniversalAccessFromFileUrls(propval);
   }
@@ -180,7 +180,7 @@ class Settings : gobject.object.ObjectWrap
         On devices where network bandwidth is of concern, it might be
         useful to turn this property off.
   */
-  @property bool autoLoadImages()
+  @property bool autoLoadImages() nothrow
   {
     return getAutoLoadImages();
   }
@@ -192,7 +192,7 @@ class Settings : gobject.object.ObjectWrap
           On devices where network bandwidth is of concern, it might be
           useful to turn this property off.
   */
-  @property void autoLoadImages(bool propval)
+  @property void autoLoadImages(bool propval) nothrow
   {
     setAutoLoadImages(propval);
   }
@@ -201,7 +201,7 @@ class Settings : gobject.object.ObjectWrap
       Get `cursiveFontFamily` property.
       Returns: The font family used as the default for content using a cursive font.
   */
-  @property string cursiveFontFamily()
+  @property string cursiveFontFamily() nothrow
   {
     return getCursiveFontFamily();
   }
@@ -211,7 +211,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         propval = The font family used as the default for content using a cursive font.
   */
-  @property void cursiveFontFamily(string propval)
+  @property void cursiveFontFamily(string propval) nothrow
   {
     setCursiveFontFamily(propval);
   }
@@ -220,7 +220,7 @@ class Settings : gobject.object.ObjectWrap
       Get `defaultCharset` property.
       Returns: The default text charset used when interpreting content with an unspecified charset.
   */
-  @property string defaultCharset()
+  @property string defaultCharset() nothrow
   {
     return getDefaultCharset();
   }
@@ -230,7 +230,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         propval = The default text charset used when interpreting content with an unspecified charset.
   */
-  @property void defaultCharset(string propval)
+  @property void defaultCharset(string propval) nothrow
   {
     setDefaultCharset(propval);
   }
@@ -239,7 +239,7 @@ class Settings : gobject.object.ObjectWrap
       Get `defaultFontFamily` property.
       Returns: The font family to use as the default for content that does not specify a font.
   */
-  @property string defaultFontFamily()
+  @property string defaultFontFamily() nothrow
   {
     return getDefaultFontFamily();
   }
@@ -249,7 +249,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         propval = The font family to use as the default for content that does not specify a font.
   */
-  @property void defaultFontFamily(string propval)
+  @property void defaultFontFamily(string propval) nothrow
   {
     setDefaultFontFamily(propval);
   }
@@ -259,7 +259,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: The default font size in pixels to use for content displayed if
         no font size is specified.
   */
-  @property uint defaultFontSize()
+  @property uint defaultFontSize() nothrow
   {
     return getDefaultFontSize();
   }
@@ -270,7 +270,7 @@ class Settings : gobject.object.ObjectWrap
         propval = The default font size in pixels to use for content displayed if
           no font size is specified.
   */
-  @property void defaultFontSize(uint propval)
+  @property void defaultFontSize(uint propval) nothrow
   {
     setDefaultFontSize(propval);
   }
@@ -280,7 +280,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: The default font size in pixels to use for content displayed in
         monospace font if no font size is specified.
   */
-  @property uint defaultMonospaceFontSize()
+  @property uint defaultMonospaceFontSize() nothrow
   {
     return getDefaultMonospaceFontSize();
   }
@@ -291,7 +291,7 @@ class Settings : gobject.object.ObjectWrap
         propval = The default font size in pixels to use for content displayed in
           monospace font if no font size is specified.
   */
-  @property void defaultMonospaceFontSize(uint propval)
+  @property void defaultMonospaceFontSize(uint propval) nothrow
   {
     setDefaultMonospaceFontSize(propval);
   }
@@ -305,7 +305,7 @@ class Settings : gobject.object.ObjectWrap
         all security and allow websites to hack each other. It is impossible to use this setting
         securely.
   */
-  @property bool disableWebSecurity()
+  @property bool disableWebSecurity() nothrow
   {
     return getDisableWebSecurity();
   }
@@ -320,7 +320,7 @@ class Settings : gobject.object.ObjectWrap
           all security and allow websites to hack each other. It is impossible to use this setting
           securely.
   */
-  @property void disableWebSecurity(bool propval)
+  @property void disableWebSecurity(bool propval) nothrow
   {
     setDisableWebSecurity(propval);
   }
@@ -331,7 +331,7 @@ class Settings : gobject.object.ObjectWrap
         with accelerated compositing. This is useful for debugging issues related
         to web content that is composited with the GPU.
   */
-  @property bool drawCompositingIndicators()
+  @property bool drawCompositingIndicators() nothrow
   {
     return getDrawCompositingIndicators();
   }
@@ -343,7 +343,7 @@ class Settings : gobject.object.ObjectWrap
           with accelerated compositing. This is useful for debugging issues related
           to web content that is composited with the GPU.
   */
-  @property void drawCompositingIndicators(bool propval)
+  @property void drawCompositingIndicators(bool propval) nothrow
   {
     setDrawCompositingIndicators(propval);
   }
@@ -355,7 +355,7 @@ class Settings : gobject.object.ObjectWrap
         is used for rendering. However, the canvas can be unaccelerated even when this setting
         is enabled, for other reasons like its size or when willReadFrequently property is used.
   */
-  @property bool enable2dCanvasAcceleration()
+  @property bool enable2dCanvasAcceleration() nothrow
   {
     return getEnable2dCanvasAcceleration();
   }
@@ -368,7 +368,7 @@ class Settings : gobject.object.ObjectWrap
           is used for rendering. However, the canvas can be unaccelerated even when this setting
           is enabled, for other reasons like its size or when willReadFrequently property is used.
   */
-  @property void enable2dCanvasAcceleration(bool propval)
+  @property void enable2dCanvasAcceleration(bool propval) nothrow
   {
     setEnable2dCanvasAcceleration(propval);
   }
@@ -377,7 +377,7 @@ class Settings : gobject.object.ObjectWrap
       Get `enableBackForwardNavigationGestures` property.
       Returns: Enable or disable horizontal swipe gesture for back-forward navigation.
   */
-  @property bool enableBackForwardNavigationGestures()
+  @property bool enableBackForwardNavigationGestures() nothrow
   {
     return getEnableBackForwardNavigationGestures();
   }
@@ -387,7 +387,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         propval = Enable or disable horizontal swipe gesture for back-forward navigation.
   */
-  @property void enableBackForwardNavigationGestures(bool propval)
+  @property void enableBackForwardNavigationGestures(bool propval) nothrow
   {
     setEnableBackForwardNavigationGestures(propval);
   }
@@ -396,7 +396,7 @@ class Settings : gobject.object.ObjectWrap
       Get `enableCaretBrowsing` property.
       Returns: Whether to enable accessibility enhanced keyboard navigation.
   */
-  @property bool enableCaretBrowsing()
+  @property bool enableCaretBrowsing() nothrow
   {
     return getEnableCaretBrowsing();
   }
@@ -406,7 +406,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         propval = Whether to enable accessibility enhanced keyboard navigation.
   */
-  @property void enableCaretBrowsing(bool propval)
+  @property void enableCaretBrowsing(bool propval) nothrow
   {
     setEnableCaretBrowsing(propval);
   }
@@ -415,7 +415,7 @@ class Settings : gobject.object.ObjectWrap
       Get `enableDeveloperExtras` property.
       Returns: Determines whether or not developer tools, such as the Web Inspector, are enabled.
   */
-  @property bool enableDeveloperExtras()
+  @property bool enableDeveloperExtras() nothrow
   {
     return getEnableDeveloperExtras();
   }
@@ -425,7 +425,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         propval = Determines whether or not developer tools, such as the Web Inspector, are enabled.
   */
-  @property void enableDeveloperExtras(bool propval)
+  @property void enableDeveloperExtras(bool propval) nothrow
   {
     setEnableDeveloperExtras(propval);
   }
@@ -435,7 +435,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: Determines whether or not to prefetch domain names. DNS prefetching attempts
         to resolve domain names before a user tries to follow a link.
   */
-  @property bool enableDnsPrefetching()
+  @property bool enableDnsPrefetching() nothrow
   {
     return getEnableDnsPrefetching();
   }
@@ -446,7 +446,7 @@ class Settings : gobject.object.ObjectWrap
         propval = Determines whether or not to prefetch domain names. DNS prefetching attempts
           to resolve domain names before a user tries to follow a link.
   */
-  @property void enableDnsPrefetching(bool propval)
+  @property void enableDnsPrefetching(bool propval) nothrow
   {
     setEnableDnsPrefetching(propval);
   }
@@ -460,7 +460,7 @@ class Settings : gobject.object.ObjectWrap
         
         See https://www.w3.org/TR/encrypted-media/
   */
-  @property bool enableEncryptedMedia()
+  @property bool enableEncryptedMedia() nothrow
   {
     return getEnableEncryptedMedia();
   }
@@ -475,7 +475,7 @@ class Settings : gobject.object.ObjectWrap
           
           See https://www.w3.org/TR/encrypted-media/
   */
-  @property void enableEncryptedMedia(bool propval)
+  @property void enableEncryptedMedia(bool propval) nothrow
   {
     setEnableEncryptedMedia(propval);
   }
@@ -487,7 +487,7 @@ class Settings : gobject.object.ObjectWrap
         the current draft of the spec:
         http://www.w3.org/TR/fullscreen/
   */
-  @property bool enableFullscreen()
+  @property bool enableFullscreen() nothrow
   {
     return getEnableFullscreen();
   }
@@ -500,7 +500,7 @@ class Settings : gobject.object.ObjectWrap
           the current draft of the spec:
           http://www.w3.org/TR/fullscreen/
   */
-  @property void enableFullscreen(bool propval)
+  @property void enableFullscreen(bool propval) nothrow
   {
     setEnableFullscreen(propval);
   }
@@ -509,7 +509,7 @@ class Settings : gobject.object.ObjectWrap
       Get `enableHtml5Database` property.
       Returns: Whether to enable HTML5 client-side SQL database support (IndexedDB).
   */
-  @property bool enableHtml5Database()
+  @property bool enableHtml5Database() nothrow
   {
     return getEnableHtml5Database();
   }
@@ -519,7 +519,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         propval = Whether to enable HTML5 client-side SQL database support (IndexedDB).
   */
-  @property void enableHtml5Database(bool propval)
+  @property void enableHtml5Database(bool propval) nothrow
   {
     setEnableHtml5Database(propval);
   }
@@ -532,7 +532,7 @@ class Settings : gobject.object.ObjectWrap
         HTML5 local storage specification is available at
         http://dev.w3.org/html5/webstorage/.
   */
-  @property bool enableHtml5LocalStorage()
+  @property bool enableHtml5LocalStorage() nothrow
   {
     return getEnableHtml5LocalStorage();
   }
@@ -546,7 +546,7 @@ class Settings : gobject.object.ObjectWrap
           HTML5 local storage specification is available at
           http://dev.w3.org/html5/webstorage/.
   */
-  @property void enableHtml5LocalStorage(bool propval)
+  @property void enableHtml5LocalStorage(bool propval) nothrow
   {
     setEnableHtml5LocalStorage(propval);
   }
@@ -558,7 +558,7 @@ class Settings : gobject.object.ObjectWrap
         The hyperlink auditing specification is available at
         http://www.whatwg.org/specs/web-apps/current-work/multipage/links.html#hyperlink-auditing.
   */
-  @property bool enableHyperlinkAuditing()
+  @property bool enableHyperlinkAuditing() nothrow
   {
     return getEnableHyperlinkAuditing();
   }
@@ -571,7 +571,7 @@ class Settings : gobject.object.ObjectWrap
           The hyperlink auditing specification is available at
           http://www.whatwg.org/specs/web-apps/current-work/multipage/links.html#hyperlink-auditing.
   */
-  @property void enableHyperlinkAuditing(bool propval)
+  @property void enableHyperlinkAuditing(bool propval) nothrow
   {
     setEnableHyperlinkAuditing(propval);
   }
@@ -580,7 +580,7 @@ class Settings : gobject.object.ObjectWrap
       Get `enableJavascript` property.
       Returns: Determines whether or not JavaScript executes within a page.
   */
-  @property bool enableJavascript()
+  @property bool enableJavascript() nothrow
   {
     return getEnableJavascript();
   }
@@ -590,7 +590,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         propval = Determines whether or not JavaScript executes within a page.
   */
-  @property void enableJavascript(bool propval)
+  @property void enableJavascript(bool propval) nothrow
   {
     setEnableJavascript(propval);
   }
@@ -601,7 +601,7 @@ class Settings : gobject.object.ObjectWrap
         all JavaScript-related elements and attributes are removed from the document during parsing. Note that
         executing JavaScript is still allowed if #WebKitSettings:enable-javascript is true.
   */
-  @property bool enableJavascriptMarkup()
+  @property bool enableJavascriptMarkup() nothrow
   {
     return getEnableJavascriptMarkup();
   }
@@ -613,7 +613,7 @@ class Settings : gobject.object.ObjectWrap
           all JavaScript-related elements and attributes are removed from the document during parsing. Note that
           executing JavaScript is still allowed if #WebKitSettings:enable-javascript is true.
   */
-  @property void enableJavascriptMarkup(bool propval)
+  @property void enableJavascriptMarkup(bool propval) nothrow
   {
     setEnableJavascriptMarkup(propval);
   }
@@ -624,7 +624,7 @@ class Settings : gobject.object.ObjectWrap
         default. Disabling it means `<audio>`, `<track>` and `<video>` elements will have
         playback support disabled.
   */
-  @property bool enableMedia()
+  @property bool enableMedia() nothrow
   {
     return getEnableMedia();
   }
@@ -636,7 +636,7 @@ class Settings : gobject.object.ObjectWrap
           default. Disabling it means `<audio>`, `<track>` and `<video>` elements will have
           playback support disabled.
   */
-  @property void enableMedia(bool propval)
+  @property void enableMedia(bool propval) nothrow
   {
     setEnableMedia(propval);
   }
@@ -652,7 +652,7 @@ class Settings : gobject.object.ObjectWrap
         
         See also https://wicg.github.io/media-capabilities/
   */
-  @property bool enableMediaCapabilities()
+  @property bool enableMediaCapabilities() nothrow
   {
     return getEnableMediaCapabilities();
   }
@@ -669,7 +669,7 @@ class Settings : gobject.object.ObjectWrap
           
           See also https://wicg.github.io/media-capabilities/
   */
-  @property void enableMediaCapabilities(bool propval)
+  @property void enableMediaCapabilities(bool propval) nothrow
   {
     setEnableMediaCapabilities(propval);
   }
@@ -682,7 +682,7 @@ class Settings : gobject.object.ObjectWrap
         
         See also http://dev.w3.org/2011/webrtc/editor/getusermedia.html
   */
-  @property bool enableMediaStream()
+  @property bool enableMediaStream() nothrow
   {
     return getEnableMediaStream();
   }
@@ -696,7 +696,7 @@ class Settings : gobject.object.ObjectWrap
           
           See also http://dev.w3.org/2011/webrtc/editor/getusermedia.html
   */
-  @property void enableMediaStream(bool propval)
+  @property void enableMediaStream(bool propval) nothrow
   {
     setEnableMediaStream(propval);
   }
@@ -709,7 +709,7 @@ class Settings : gobject.object.ObjectWrap
         
         See also http://www.w3.org/TR/media-source/
   */
-  @property bool enableMediasource()
+  @property bool enableMediasource() nothrow
   {
     return getEnableMediasource();
   }
@@ -723,7 +723,7 @@ class Settings : gobject.object.ObjectWrap
           
           See also http://www.w3.org/TR/media-source/
   */
-  @property void enableMediasource(bool propval)
+  @property void enableMediasource(bool propval) nothrow
   {
     setEnableMediasource(propval);
   }
@@ -734,7 +734,7 @@ class Settings : gobject.object.ObjectWrap
         Microphone and Camera devices to be used as MediaStream
         sources.
   */
-  @property bool enableMockCaptureDevices()
+  @property bool enableMockCaptureDevices() nothrow
   {
     return getEnableMockCaptureDevices();
   }
@@ -746,7 +746,7 @@ class Settings : gobject.object.ObjectWrap
           Microphone and Camera devices to be used as MediaStream
           sources.
   */
-  @property void enableMockCaptureDevices(bool propval)
+  @property void enableMockCaptureDevices(bool propval) nothrow
   {
     setEnableMockCaptureDevices(propval);
   }
@@ -755,7 +755,7 @@ class Settings : gobject.object.ObjectWrap
       Get `enableOfflineWebApplicationCache` property.
       Returns: Unsupported setting. This property does nothing.
   */
-  @property bool enableOfflineWebApplicationCache()
+  @property bool enableOfflineWebApplicationCache() nothrow
   {
     return getEnableOfflineWebApplicationCache();
   }
@@ -765,7 +765,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         propval = Unsupported setting. This property does nothing.
   */
-  @property void enableOfflineWebApplicationCache(bool propval)
+  @property void enableOfflineWebApplicationCache(bool propval) nothrow
   {
     setEnableOfflineWebApplicationCache(propval);
   }
@@ -782,7 +782,7 @@ class Settings : gobject.object.ObjectWrap
         of caches and their purposes see:
         http://webkit.org/blog/427/webkit-page-cache-i-the-basics/
   */
-  @property bool enablePageCache()
+  @property bool enablePageCache() nothrow
   {
     return getEnablePageCache();
   }
@@ -800,7 +800,7 @@ class Settings : gobject.object.ObjectWrap
           of caches and their purposes see:
           http://webkit.org/blog/427/webkit-page-cache-i-the-basics/
   */
-  @property void enablePageCache(bool propval)
+  @property void enablePageCache(bool propval) nothrow
   {
     setEnablePageCache(propval);
   }
@@ -809,7 +809,7 @@ class Settings : gobject.object.ObjectWrap
       Get `enableResizableTextAreas` property.
       Returns: Determines whether or not text areas can be resized.
   */
-  @property bool enableResizableTextAreas()
+  @property bool enableResizableTextAreas() nothrow
   {
     return getEnableResizableTextAreas();
   }
@@ -819,7 +819,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         propval = Determines whether or not text areas can be resized.
   */
-  @property void enableResizableTextAreas(bool propval)
+  @property void enableResizableTextAreas(bool propval) nothrow
   {
     setEnableResizableTextAreas(propval);
   }
@@ -833,7 +833,7 @@ class Settings : gobject.object.ObjectWrap
         workarounds. By turning on site-specific quirks, WebKit will
         special-case this and other cases to make some specific sites work.
   */
-  @property bool enableSiteSpecificQuirks()
+  @property bool enableSiteSpecificQuirks() nothrow
   {
     return getEnableSiteSpecificQuirks();
   }
@@ -848,7 +848,7 @@ class Settings : gobject.object.ObjectWrap
           workarounds. By turning on site-specific quirks, WebKit will
           special-case this and other cases to make some specific sites work.
   */
-  @property void enableSiteSpecificQuirks(bool propval)
+  @property void enableSiteSpecificQuirks(bool propval) nothrow
   {
     setEnableSiteSpecificQuirks(propval);
   }
@@ -857,7 +857,7 @@ class Settings : gobject.object.ObjectWrap
       Get `enableSmoothScrolling` property.
       Returns: Enable or disable smooth scrolling.
   */
-  @property bool enableSmoothScrolling()
+  @property bool enableSmoothScrolling() nothrow
   {
     return getEnableSmoothScrolling();
   }
@@ -867,7 +867,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         propval = Enable or disable smooth scrolling.
   */
-  @property void enableSmoothScrolling(bool propval)
+  @property void enableSmoothScrolling(bool propval) nothrow
   {
     setEnableSmoothScrolling(propval);
   }
@@ -881,7 +881,7 @@ class Settings : gobject.object.ObjectWrap
         there is an element they might be trying to reach towards the right, and if
         there are multiple elements, which element they probably wants.
   */
-  @property bool enableSpatialNavigation()
+  @property bool enableSpatialNavigation() nothrow
   {
     return getEnableSpatialNavigation();
   }
@@ -896,7 +896,7 @@ class Settings : gobject.object.ObjectWrap
           there is an element they might be trying to reach towards the right, and if
           there are multiple elements, which element they probably wants.
   */
-  @property void enableSpatialNavigation(bool propval)
+  @property void enableSpatialNavigation(bool propval) nothrow
   {
     setEnableSpatialNavigation(propval);
   }
@@ -908,7 +908,7 @@ class Settings : gobject.object.ObjectWrap
         in the page by pressing the tab key. If the selected element is editable,
         then pressing tab key will insert the tab character.
   */
-  @property bool enableTabsToLinks()
+  @property bool enableTabsToLinks() nothrow
   {
     return getEnableTabsToLinks();
   }
@@ -921,7 +921,7 @@ class Settings : gobject.object.ObjectWrap
           in the page by pressing the tab key. If the selected element is editable,
           then pressing tab key will insert the tab character.
   */
-  @property void enableTabsToLinks(bool propval)
+  @property void enableTabsToLinks(bool propval) nothrow
   {
     setEnableTabsToLinks(propval);
   }
@@ -933,7 +933,7 @@ class Settings : gobject.object.ObjectWrap
         
         See also https://webaudio.github.io/web-audio-api
   */
-  @property bool enableWebaudio()
+  @property bool enableWebaudio() nothrow
   {
     return getEnableWebaudio();
   }
@@ -946,7 +946,7 @@ class Settings : gobject.object.ObjectWrap
           
           See also https://webaudio.github.io/web-audio-api
   */
-  @property void enableWebaudio(bool propval)
+  @property void enableWebaudio(bool propval) nothrow
   {
     setEnableWebaudio(propval);
   }
@@ -956,7 +956,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: Enable or disable support for WebGL on pages. WebGL enables web
         content to use an API based on OpenGL ES 2.0.
   */
-  @property bool enableWebgl()
+  @property bool enableWebgl() nothrow
   {
     return getEnableWebgl();
   }
@@ -967,7 +967,7 @@ class Settings : gobject.object.ObjectWrap
         propval = Enable or disable support for WebGL on pages. WebGL enables web
           content to use an API based on OpenGL ES 2.0.
   */
-  @property void enableWebgl(bool propval)
+  @property void enableWebgl(bool propval) nothrow
   {
     setEnableWebgl(propval);
   }
@@ -981,7 +981,7 @@ class Settings : gobject.object.ObjectWrap
         
         See also https://www.w3.org/TR/webrtc/
   */
-  @property bool enableWebrtc()
+  @property bool enableWebrtc() nothrow
   {
     return getEnableWebrtc();
   }
@@ -996,7 +996,7 @@ class Settings : gobject.object.ObjectWrap
           
           See also https://www.w3.org/TR/webrtc/
   */
-  @property void enableWebrtc(bool propval)
+  @property void enableWebrtc(bool propval) nothrow
   {
     setEnableWebrtc(propval);
   }
@@ -1006,7 +1006,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: Enable or disable writing console messages to stdout. These are messages
         sent to the console with console.log and related methods.
   */
-  @property bool enableWriteConsoleMessagesToStdout()
+  @property bool enableWriteConsoleMessagesToStdout() nothrow
   {
     return getEnableWriteConsoleMessagesToStdout();
   }
@@ -1017,7 +1017,7 @@ class Settings : gobject.object.ObjectWrap
         propval = Enable or disable writing console messages to stdout. These are messages
           sent to the console with console.log and related methods.
   */
-  @property void enableWriteConsoleMessagesToStdout(bool propval)
+  @property void enableWriteConsoleMessagesToStdout(bool propval) nothrow
   {
     setEnableWriteConsoleMessagesToStdout(propval);
   }
@@ -1026,7 +1026,7 @@ class Settings : gobject.object.ObjectWrap
       Get `fantasyFontFamily` property.
       Returns: The font family used as the default for content using a fantasy font.
   */
-  @property string fantasyFontFamily()
+  @property string fantasyFontFamily() nothrow
   {
     return getFantasyFontFamily();
   }
@@ -1036,7 +1036,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         propval = The font family used as the default for content using a fantasy font.
   */
-  @property void fantasyFontFamily(string propval)
+  @property void fantasyFontFamily(string propval) nothrow
   {
     setFantasyFontFamily(propval);
   }
@@ -1051,7 +1051,7 @@ class Settings : gobject.object.ObjectWrap
         supported by the hardware or the system. In that case, you can get the value to know the
         actual policy being used, but changing the setting will not have any effect.
   */
-  @property webkit.types.HardwareAccelerationPolicy hardwareAccelerationPolicy()
+  @property webkit.types.HardwareAccelerationPolicy hardwareAccelerationPolicy() nothrow
   {
     return getHardwareAccelerationPolicy();
   }
@@ -1067,7 +1067,7 @@ class Settings : gobject.object.ObjectWrap
           supported by the hardware or the system. In that case, you can get the value to know the
           actual policy being used, but changing the setting will not have any effect.
   */
-  @property void hardwareAccelerationPolicy(webkit.types.HardwareAccelerationPolicy propval)
+  @property void hardwareAccelerationPolicy(webkit.types.HardwareAccelerationPolicy propval) nothrow
   {
     setHardwareAccelerationPolicy(propval);
   }
@@ -1077,7 +1077,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: Whether JavaScript can access the clipboard. The default value is false. If
         set to true, document.execCommand() allows cut, copy and paste commands.
   */
-  @property bool javascriptCanAccessClipboard()
+  @property bool javascriptCanAccessClipboard() nothrow
   {
     return getJavascriptCanAccessClipboard();
   }
@@ -1088,7 +1088,7 @@ class Settings : gobject.object.ObjectWrap
         propval = Whether JavaScript can access the clipboard. The default value is false. If
           set to true, document.execCommand() allows cut, copy and paste commands.
   */
-  @property void javascriptCanAccessClipboard(bool propval)
+  @property void javascriptCanAccessClipboard(bool propval) nothrow
   {
     setJavascriptCanAccessClipboard(propval);
   }
@@ -1098,7 +1098,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: Whether JavaScript can open popup windows automatically without user
         intervention.
   */
-  @property bool javascriptCanOpenWindowsAutomatically()
+  @property bool javascriptCanOpenWindowsAutomatically() nothrow
   {
     return getJavascriptCanOpenWindowsAutomatically();
   }
@@ -1109,7 +1109,7 @@ class Settings : gobject.object.ObjectWrap
         propval = Whether JavaScript can open popup windows automatically without user
           intervention.
   */
-  @property void javascriptCanOpenWindowsAutomatically(bool propval)
+  @property void javascriptCanOpenWindowsAutomatically(bool propval) nothrow
   {
     setJavascriptCanOpenWindowsAutomatically(propval);
   }
@@ -1118,7 +1118,7 @@ class Settings : gobject.object.ObjectWrap
       Get `loadIconsIgnoringImageLoadSetting` property.
       Returns: Unsupported setting. This property does nothing.
   */
-  @property bool loadIconsIgnoringImageLoadSetting()
+  @property bool loadIconsIgnoringImageLoadSetting() nothrow
   {
     return getLoadIconsIgnoringImageLoadSetting();
   }
@@ -1128,7 +1128,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         propval = Unsupported setting. This property does nothing.
   */
-  @property void loadIconsIgnoringImageLoadSetting(bool propval)
+  @property void loadIconsIgnoringImageLoadSetting(bool propval) nothrow
   {
     setLoadIconsIgnoringImageLoadSetting(propval);
   }
@@ -1138,7 +1138,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: List of media content types requiring hardware support, split by semicolons (:).
         For example: 'video/webm; codecs="vp*":video/mp4; codecs="avc*":video/&ast; codecs="av1*"'.
   */
-  @property string mediaContentTypesRequiringHardwareSupport()
+  @property string mediaContentTypesRequiringHardwareSupport() nothrow
   {
     return getMediaContentTypesRequiringHardwareSupport();
   }
@@ -1149,7 +1149,7 @@ class Settings : gobject.object.ObjectWrap
         propval = List of media content types requiring hardware support, split by semicolons (:).
           For example: 'video/webm; codecs="vp*":video/mp4; codecs="avc*":video/&ast; codecs="av1*"'.
   */
-  @property void mediaContentTypesRequiringHardwareSupport(string propval)
+  @property void mediaContentTypesRequiringHardwareSupport(string propval) nothrow
   {
     setMediaContentTypesRequiringHardwareSupport(propval);
   }
@@ -1160,7 +1160,7 @@ class Settings : gobject.object.ObjectWrap
         This is true by default, so media playback can be inline. Setting it to
         false allows specifying that media playback should be always fullscreen.
   */
-  @property bool mediaPlaybackAllowsInline()
+  @property bool mediaPlaybackAllowsInline() nothrow
   {
     return getMediaPlaybackAllowsInline();
   }
@@ -1172,7 +1172,7 @@ class Settings : gobject.object.ObjectWrap
           This is true by default, so media playback can be inline. Setting it to
           false allows specifying that media playback should be always fullscreen.
   */
-  @property void mediaPlaybackAllowsInline(bool propval)
+  @property void mediaPlaybackAllowsInline(bool propval) nothrow
   {
     setMediaPlaybackAllowsInline(propval);
   }
@@ -1185,7 +1185,7 @@ class Settings : gobject.object.ObjectWrap
         Setting it on requires a gesture by the user to start playback, or to
         load the media.
   */
-  @property bool mediaPlaybackRequiresUserGesture()
+  @property bool mediaPlaybackRequiresUserGesture() nothrow
   {
     return getMediaPlaybackRequiresUserGesture();
   }
@@ -1199,7 +1199,7 @@ class Settings : gobject.object.ObjectWrap
           Setting it on requires a gesture by the user to start playback, or to
           load the media.
   */
-  @property void mediaPlaybackRequiresUserGesture(bool propval)
+  @property void mediaPlaybackRequiresUserGesture(bool propval) nothrow
   {
     setMediaPlaybackRequiresUserGesture(propval);
   }
@@ -1210,7 +1210,7 @@ class Settings : gobject.object.ObjectWrap
         controls the absolute smallest size. Values other than 0 can
         potentially break page layouts.
   */
-  @property uint minimumFontSize()
+  @property uint minimumFontSize() nothrow
   {
     return getMinimumFontSize();
   }
@@ -1222,7 +1222,7 @@ class Settings : gobject.object.ObjectWrap
           controls the absolute smallest size. Values other than 0 can
           potentially break page layouts.
   */
-  @property void minimumFontSize(uint propval)
+  @property void minimumFontSize(uint propval) nothrow
   {
     setMinimumFontSize(propval);
   }
@@ -1231,7 +1231,7 @@ class Settings : gobject.object.ObjectWrap
       Get `monospaceFontFamily` property.
       Returns: The font family used as the default for content using a monospace font.
   */
-  @property string monospaceFontFamily()
+  @property string monospaceFontFamily() nothrow
   {
     return getMonospaceFontFamily();
   }
@@ -1241,7 +1241,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         propval = The font family used as the default for content using a monospace font.
   */
-  @property void monospaceFontFamily(string propval)
+  @property void monospaceFontFamily(string propval) nothrow
   {
     setMonospaceFontFamily(propval);
   }
@@ -1250,7 +1250,7 @@ class Settings : gobject.object.ObjectWrap
       Get `pictographFontFamily` property.
       Returns: The font family used as the default for content using a pictograph font.
   */
-  @property string pictographFontFamily()
+  @property string pictographFontFamily() nothrow
   {
     return getPictographFontFamily();
   }
@@ -1260,7 +1260,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         propval = The font family used as the default for content using a pictograph font.
   */
-  @property void pictographFontFamily(string propval)
+  @property void pictographFontFamily(string propval) nothrow
   {
     setPictographFontFamily(propval);
   }
@@ -1269,7 +1269,7 @@ class Settings : gobject.object.ObjectWrap
       Get `printBackgrounds` property.
       Returns: Whether background images should be drawn during printing.
   */
-  @property bool printBackgrounds()
+  @property bool printBackgrounds() nothrow
   {
     return getPrintBackgrounds();
   }
@@ -1279,7 +1279,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         propval = Whether background images should be drawn during printing.
   */
-  @property void printBackgrounds(bool propval)
+  @property void printBackgrounds(bool propval) nothrow
   {
     setPrintBackgrounds(propval);
   }
@@ -1288,7 +1288,7 @@ class Settings : gobject.object.ObjectWrap
       Get `sansSerifFontFamily` property.
       Returns: The font family used as the default for content using a sans-serif font.
   */
-  @property string sansSerifFontFamily()
+  @property string sansSerifFontFamily() nothrow
   {
     return getSansSerifFontFamily();
   }
@@ -1298,7 +1298,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         propval = The font family used as the default for content using a sans-serif font.
   */
-  @property void sansSerifFontFamily(string propval)
+  @property void sansSerifFontFamily(string propval) nothrow
   {
     setSansSerifFontFamily(propval);
   }
@@ -1307,7 +1307,7 @@ class Settings : gobject.object.ObjectWrap
       Get `serifFontFamily` property.
       Returns: The font family used as the default for content using a serif font.
   */
-  @property string serifFontFamily()
+  @property string serifFontFamily() nothrow
   {
     return getSerifFontFamily();
   }
@@ -1317,7 +1317,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         propval = The font family used as the default for content using a serif font.
   */
-  @property void serifFontFamily(string propval)
+  @property void serifFontFamily(string propval) nothrow
   {
     setSerifFontFamily(propval);
   }
@@ -1333,7 +1333,7 @@ class Settings : gobject.object.ObjectWrap
         If this property is set to the empty string or null, it will revert to the standard
         user-agent.
   */
-  @property string userAgent()
+  @property string userAgent() nothrow
   {
     return getUserAgent();
   }
@@ -1350,7 +1350,7 @@ class Settings : gobject.object.ObjectWrap
           If this property is set to the empty string or null, it will revert to the standard
           user-agent.
   */
-  @property void userAgent(string propval)
+  @property void userAgent(string propval) nothrow
   {
     setUserAgent(propval);
   }
@@ -1365,7 +1365,7 @@ class Settings : gobject.object.ObjectWrap
         default empty string value means the OS will use no hints from the WebRTC backend. Using 0
         for one of the values is allowed and means the value is unspecified.
   */
-  @property string webrtcUdpPortsRange()
+  @property string webrtcUdpPortsRange() nothrow
   {
     return getWebrtcUdpPortsRange();
   }
@@ -1381,7 +1381,7 @@ class Settings : gobject.object.ObjectWrap
           default empty string value means the OS will use no hints from the WebRTC backend. Using 0
           for one of the values is allowed and means the value is unspecified.
   */
-  @property void webrtcUdpPortsRange(string propval)
+  @property void webrtcUdpPortsRange(string propval) nothrow
   {
     setWebrtcUdpPortsRange(propval);
   }
@@ -1393,7 +1393,7 @@ class Settings : gobject.object.ObjectWrap
         like form controls will be also affected by zoom factor when
         this property is enabled.
   */
-  @property bool zoomTextOnly()
+  @property bool zoomTextOnly() nothrow
   {
     return getZoomTextOnly();
   }
@@ -1406,7 +1406,7 @@ class Settings : gobject.object.ObjectWrap
           like form controls will be also affected by zoom factor when
           this property is enabled.
   */
-  @property void zoomTextOnly(bool propval)
+  @property void zoomTextOnly(bool propval) nothrow
   {
     setZoomTextOnly(propval);
   }
@@ -1418,7 +1418,7 @@ class Settings : gobject.object.ObjectWrap
       See also [webkit.settings.Settings.newWithSettings].
       Returns: a new #WebKitSettings instance.
   */
-  this()
+  this() nothrow
   {
     WebKitSettings* _cretval;
     _cretval = webkit_settings_new();
@@ -1436,7 +1436,7 @@ class Settings : gobject.object.ObjectWrap
         points = the font size in points to convert to pixels
       Returns: the equivalent font size in pixels.
   */
-  static uint fontSizeToPixels(uint points)
+  static uint fontSizeToPixels(uint points) nothrow
   {
     uint _retval;
     _retval = webkit_settings_font_size_to_pixels(points);
@@ -1454,7 +1454,7 @@ class Settings : gobject.object.ObjectWrap
         pixels = the font size in pixels to convert to points
       Returns: the equivalent font size in points.
   */
-  static uint fontSizeToPoints(uint pixels)
+  static uint fontSizeToPoints(uint pixels) nothrow
   {
     uint _retval;
     _retval = webkit_settings_font_size_to_points(pixels);
@@ -1473,7 +1473,7 @@ class Settings : gobject.object.ObjectWrap
       [webkit.settings.Settings.getExperimentalFeatures] instead.
       Returns: List of all features.
   */
-  static webkit.feature_list.FeatureList getAllFeatures()
+  static webkit.feature_list.FeatureList getAllFeatures() nothrow
   {
     WebKitFeatureList* _cretval;
     _cretval = webkit_settings_get_all_features();
@@ -1491,7 +1491,7 @@ class Settings : gobject.object.ObjectWrap
       more details.
       Returns: List of development features.
   */
-  static webkit.feature_list.FeatureList getDevelopmentFeatures()
+  static webkit.feature_list.FeatureList getDevelopmentFeatures() nothrow
   {
     WebKitFeatureList* _cretval;
     _cretval = webkit_settings_get_development_features();
@@ -1508,7 +1508,7 @@ class Settings : gobject.object.ObjectWrap
       [webkit.types.FeatureStatus] for more details.
       Returns: List of experimental features.
   */
-  static webkit.feature_list.FeatureList getExperimentalFeatures()
+  static webkit.feature_list.FeatureList getExperimentalFeatures() nothrow
   {
     WebKitFeatureList* _cretval;
     _cretval = webkit_settings_get_experimental_features();
@@ -1547,7 +1547,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:allow-file-access-from-file-urls property.
       Returns: true If file access from file URLs is allowed or false otherwise.
   */
-  bool getAllowFileAccessFromFileUrls()
+  bool getAllowFileAccessFromFileUrls() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_allow_file_access_from_file_urls(cast(WebKitSettings*)this._cPtr);
@@ -1558,7 +1558,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:allow-modal-dialogs property.
       Returns: true if it's allowed to create and run modal dialogs or false otherwise.
   */
-  bool getAllowModalDialogs()
+  bool getAllowModalDialogs() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_allow_modal_dialogs(cast(WebKitSettings*)this._cPtr);
@@ -1570,7 +1570,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: true If navigation to data URLs from the top frame is allowed or false\
         otherwise.
   */
-  bool getAllowTopNavigationToDataUrls()
+  bool getAllowTopNavigationToDataUrls() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_allow_top_navigation_to_data_urls(cast(WebKitSettings*)this._cPtr);
@@ -1581,7 +1581,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:allow-universal-access-from-file-urls property.
       Returns: true If universal access from file URLs is allowed or false otherwise.
   */
-  bool getAllowUniversalAccessFromFileUrls()
+  bool getAllowUniversalAccessFromFileUrls() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_allow_universal_access_from_file_urls(cast(WebKitSettings*)this._cPtr);
@@ -1592,7 +1592,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:auto-load-images property.
       Returns: true If auto loading of images is enabled or false otherwise.
   */
-  bool getAutoLoadImages()
+  bool getAutoLoadImages() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_auto_load_images(cast(WebKitSettings*)this._cPtr);
@@ -1603,7 +1603,7 @@ class Settings : gobject.object.ObjectWrap
       Gets the #WebKitSettings:cursive-font-family property.
       Returns: The default font family used to display content marked with cursive font.
   */
-  string getCursiveFontFamily()
+  string getCursiveFontFamily() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_cursive_font_family(cast(WebKitSettings*)this._cPtr);
@@ -1615,7 +1615,7 @@ class Settings : gobject.object.ObjectWrap
       Gets the #WebKitSettings:default-charset property.
       Returns: Default charset.
   */
-  string getDefaultCharset()
+  string getDefaultCharset() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_default_charset(cast(WebKitSettings*)this._cPtr);
@@ -1627,7 +1627,7 @@ class Settings : gobject.object.ObjectWrap
       Gets the #WebKitSettings:default-font-family property.
       Returns: The default font family used to display content that does not specify a font.
   */
-  string getDefaultFontFamily()
+  string getDefaultFontFamily() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_default_font_family(cast(WebKitSettings*)this._cPtr);
@@ -1639,7 +1639,7 @@ class Settings : gobject.object.ObjectWrap
       Gets the #WebKitSettings:default-font-size property.
       Returns: The default font size, in pixels.
   */
-  uint getDefaultFontSize()
+  uint getDefaultFontSize() nothrow
   {
     uint _retval;
     _retval = webkit_settings_get_default_font_size(cast(WebKitSettings*)this._cPtr);
@@ -1650,7 +1650,7 @@ class Settings : gobject.object.ObjectWrap
       Gets the #WebKitSettings:default-monospace-font-size property.
       Returns: Default monospace font size, in pixels.
   */
-  uint getDefaultMonospaceFontSize()
+  uint getDefaultMonospaceFontSize() nothrow
   {
     uint _retval;
     _retval = webkit_settings_get_default_monospace_font_size(cast(WebKitSettings*)this._cPtr);
@@ -1661,7 +1661,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:disable-web-security property.
       Returns: true If web security support is disabled or false otherwise.
   */
-  bool getDisableWebSecurity()
+  bool getDisableWebSecurity() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_disable_web_security(cast(WebKitSettings*)this._cPtr);
@@ -1672,7 +1672,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:draw-compositing-indicators property.
       Returns: true If compositing borders are drawn or false otherwise.
   */
-  bool getDrawCompositingIndicators()
+  bool getDrawCompositingIndicators() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_draw_compositing_indicators(cast(WebKitSettings*)this._cPtr);
@@ -1683,7 +1683,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-2d-canvas-acceleration property.
       Returns: true if 2D canvas acceleration is enabled or false otherwise.
   */
-  bool getEnable2dCanvasAcceleration()
+  bool getEnable2dCanvasAcceleration() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_2d_canvas_acceleration(cast(WebKitSettings*)this._cPtr);
@@ -1694,7 +1694,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-back-forward-navigation-gestures property.
       Returns: true if horizontal swipe gesture will trigger back-forward navigaiton or false otherwise.
   */
-  bool getEnableBackForwardNavigationGestures()
+  bool getEnableBackForwardNavigationGestures() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_back_forward_navigation_gestures(cast(WebKitSettings*)this._cPtr);
@@ -1705,7 +1705,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-caret-browsing property.
       Returns: true If caret browsing is enabled or false otherwise.
   */
-  bool getEnableCaretBrowsing()
+  bool getEnableCaretBrowsing() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_caret_browsing(cast(WebKitSettings*)this._cPtr);
@@ -1716,7 +1716,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-developer-extras property.
       Returns: true If developer extras is enabled or false otherwise.
   */
-  bool getEnableDeveloperExtras()
+  bool getEnableDeveloperExtras() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_developer_extras(cast(WebKitSettings*)this._cPtr);
@@ -1727,7 +1727,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-dns-prefetching property.
       Returns: true If DNS prefetching is enabled or false otherwise.
   */
-  bool getEnableDnsPrefetching()
+  bool getEnableDnsPrefetching() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_dns_prefetching(cast(WebKitSettings*)this._cPtr);
@@ -1738,7 +1738,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-encrypted-media property.
       Returns: true if EncryptedMedia support is enabled or false otherwise.
   */
-  bool getEnableEncryptedMedia()
+  bool getEnableEncryptedMedia() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_encrypted_media(cast(WebKitSettings*)this._cPtr);
@@ -1749,7 +1749,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-fullscreen property.
       Returns: true If fullscreen support is enabled or false otherwise.
   */
-  bool getEnableFullscreen()
+  bool getEnableFullscreen() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_fullscreen(cast(WebKitSettings*)this._cPtr);
@@ -1760,7 +1760,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-html5-database property.
       Returns: true if IndexedDB support is enabled or false otherwise.
   */
-  bool getEnableHtml5Database()
+  bool getEnableHtml5Database() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_html5_database(cast(WebKitSettings*)this._cPtr);
@@ -1771,7 +1771,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-html5-local-storage property.
       Returns: true If HTML5 local storage support is enabled or false otherwise.
   */
-  bool getEnableHtml5LocalStorage()
+  bool getEnableHtml5LocalStorage() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_html5_local_storage(cast(WebKitSettings*)this._cPtr);
@@ -1782,7 +1782,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-hyperlink-auditing property.
       Returns: true If hyper link auditing is enabled or false otherwise.
   */
-  bool getEnableHyperlinkAuditing()
+  bool getEnableHyperlinkAuditing() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_hyperlink_auditing(cast(WebKitSettings*)this._cPtr);
@@ -1793,7 +1793,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-javascript property.
       Returns: true If JavaScript is enabled or false otherwise.
   */
-  bool getEnableJavascript()
+  bool getEnableJavascript() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_javascript(cast(WebKitSettings*)this._cPtr);
@@ -1804,7 +1804,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-javascript-markup property.
       Returns: true if JavaScript markup is enabled or false otherwise.
   */
-  bool getEnableJavascriptMarkup()
+  bool getEnableJavascriptMarkup() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_javascript_markup(cast(WebKitSettings*)this._cPtr);
@@ -1815,7 +1815,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-media property.
       Returns: true if media support is enabled or false otherwise.
   */
-  bool getEnableMedia()
+  bool getEnableMedia() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_media(cast(WebKitSettings*)this._cPtr);
@@ -1826,7 +1826,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-media-capabilities property.
       Returns: true if MediaCapabilities support is enabled or false otherwise.
   */
-  bool getEnableMediaCapabilities()
+  bool getEnableMediaCapabilities() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_media_capabilities(cast(WebKitSettings*)this._cPtr);
@@ -1837,7 +1837,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-media-stream property.
       Returns: true If mediastream support is enabled or false otherwise.
   */
-  bool getEnableMediaStream()
+  bool getEnableMediaStream() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_media_stream(cast(WebKitSettings*)this._cPtr);
@@ -1848,7 +1848,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-mediasource property.
       Returns: true If MediaSource support is enabled or false otherwise.
   */
-  bool getEnableMediasource()
+  bool getEnableMediasource() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_mediasource(cast(WebKitSettings*)this._cPtr);
@@ -1859,7 +1859,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-mock-capture-devices property.
       Returns: true If mock capture devices is enabled or false otherwise.
   */
-  bool getEnableMockCaptureDevices()
+  bool getEnableMockCaptureDevices() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_mock_capture_devices(cast(WebKitSettings*)this._cPtr);
@@ -1870,7 +1870,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-offline-web-application-cache property.
       Returns: false.
   */
-  bool getEnableOfflineWebApplicationCache()
+  bool getEnableOfflineWebApplicationCache() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_offline_web_application_cache(cast(WebKitSettings*)this._cPtr);
@@ -1881,7 +1881,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-page-cache property.
       Returns: true if page cache enabled or false otherwise.
   */
-  bool getEnablePageCache()
+  bool getEnablePageCache() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_page_cache(cast(WebKitSettings*)this._cPtr);
@@ -1892,7 +1892,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-resizable-text-areas property.
       Returns: true If text areas can be resized or false otherwise.
   */
-  bool getEnableResizableTextAreas()
+  bool getEnableResizableTextAreas() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_resizable_text_areas(cast(WebKitSettings*)this._cPtr);
@@ -1903,7 +1903,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-site-specific-quirks property.
       Returns: true if site specific quirks are enabled or false otherwise.
   */
-  bool getEnableSiteSpecificQuirks()
+  bool getEnableSiteSpecificQuirks() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_site_specific_quirks(cast(WebKitSettings*)this._cPtr);
@@ -1914,7 +1914,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-smooth-scrolling property.
       Returns: true if smooth scrolling is enabled or false otherwise.
   */
-  bool getEnableSmoothScrolling()
+  bool getEnableSmoothScrolling() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_smooth_scrolling(cast(WebKitSettings*)this._cPtr);
@@ -1925,7 +1925,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-spatial-navigation property.
       Returns: true If HTML5 spatial navigation support is enabled or false otherwise.
   */
-  bool getEnableSpatialNavigation()
+  bool getEnableSpatialNavigation() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_spatial_navigation(cast(WebKitSettings*)this._cPtr);
@@ -1936,7 +1936,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-tabs-to-links property.
       Returns: true If tabs to link is enabled or false otherwise.
   */
-  bool getEnableTabsToLinks()
+  bool getEnableTabsToLinks() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_tabs_to_links(cast(WebKitSettings*)this._cPtr);
@@ -1947,7 +1947,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-webaudio property.
       Returns: true If webaudio support is enabled or false otherwise.
   */
-  bool getEnableWebaudio()
+  bool getEnableWebaudio() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_webaudio(cast(WebKitSettings*)this._cPtr);
@@ -1958,7 +1958,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:enable-webgl property.
       Returns: true If WebGL support is enabled or false otherwise.
   */
-  bool getEnableWebgl()
+  bool getEnableWebgl() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_webgl(cast(WebKitSettings*)this._cPtr);
@@ -1969,7 +1969,7 @@ class Settings : gobject.object.ObjectWrap
       Get the [webkit.settings.Settings.enableWebrtc] property.
       Returns: true If WebRTC support is enabled or false otherwise.
   */
-  bool getEnableWebrtc()
+  bool getEnableWebrtc() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_webrtc(cast(WebKitSettings*)this._cPtr);
@@ -1981,7 +1981,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: true if writing console messages to stdout is enabled or false
         otherwise.
   */
-  bool getEnableWriteConsoleMessagesToStdout()
+  bool getEnableWriteConsoleMessagesToStdout() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_enable_write_console_messages_to_stdout(cast(WebKitSettings*)this._cPtr);
@@ -1992,7 +1992,7 @@ class Settings : gobject.object.ObjectWrap
       Gets the #WebKitSettings:fantasy-font-family property.
       Returns: The default font family used to display content marked with fantasy font.
   */
-  string getFantasyFontFamily()
+  string getFantasyFontFamily() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_fantasy_font_family(cast(WebKitSettings*)this._cPtr);
@@ -2007,7 +2007,7 @@ class Settings : gobject.object.ObjectWrap
         feature = the feature to toggle.
       Returns: Whether the feature is enabled.
   */
-  bool getFeatureEnabled(webkit.feature.Feature feature)
+  bool getFeatureEnabled(webkit.feature.Feature feature) nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_feature_enabled(cast(WebKitSettings*)this._cPtr, feature ? cast(WebKitFeature*)feature._cPtr(No.Dup) : null);
@@ -2018,7 +2018,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:hardware-acceleration-policy property.
       Returns: a #WebKitHardwareAccelerationPolicy
   */
-  webkit.types.HardwareAccelerationPolicy getHardwareAccelerationPolicy()
+  webkit.types.HardwareAccelerationPolicy getHardwareAccelerationPolicy() nothrow
   {
     WebKitHardwareAccelerationPolicy _cretval;
     _cretval = webkit_settings_get_hardware_acceleration_policy(cast(WebKitSettings*)this._cPtr);
@@ -2030,7 +2030,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:javascript-can-access-clipboard property.
       Returns: true If javascript-can-access-clipboard is enabled or false otherwise.
   */
-  bool getJavascriptCanAccessClipboard()
+  bool getJavascriptCanAccessClipboard() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_javascript_can_access_clipboard(cast(WebKitSettings*)this._cPtr);
@@ -2041,7 +2041,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:javascript-can-open-windows-automatically property.
       Returns: true If JavaScript can open window automatically or false otherwise.
   */
-  bool getJavascriptCanOpenWindowsAutomatically()
+  bool getJavascriptCanOpenWindowsAutomatically() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_javascript_can_open_windows_automatically(cast(WebKitSettings*)this._cPtr);
@@ -2052,7 +2052,7 @@ class Settings : gobject.object.ObjectWrap
       Setting no longer supported. This function returns false.
       Returns: false
   */
-  bool getLoadIconsIgnoringImageLoadSetting()
+  bool getLoadIconsIgnoringImageLoadSetting() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_load_icons_ignoring_image_load_setting(cast(WebKitSettings*)this._cPtr);
@@ -2063,7 +2063,7 @@ class Settings : gobject.object.ObjectWrap
       Gets the #WebKitSettings:media-content-types-requiring-hardware-support property.
       Returns: Media content types requiring hardware support, or null.
   */
-  string getMediaContentTypesRequiringHardwareSupport()
+  string getMediaContentTypesRequiringHardwareSupport() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_media_content_types_requiring_hardware_support(cast(WebKitSettings*)this._cPtr);
@@ -2076,7 +2076,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: true If inline playback is allowed for media
            or false if only fullscreen playback is allowed.
   */
-  bool getMediaPlaybackAllowsInline()
+  bool getMediaPlaybackAllowsInline() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_media_playback_allows_inline(cast(WebKitSettings*)this._cPtr);
@@ -2088,7 +2088,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: true If an user gesture is needed to play or load media
            or false if no user gesture is needed.
   */
-  bool getMediaPlaybackRequiresUserGesture()
+  bool getMediaPlaybackRequiresUserGesture() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_media_playback_requires_user_gesture(cast(WebKitSettings*)this._cPtr);
@@ -2099,7 +2099,7 @@ class Settings : gobject.object.ObjectWrap
       Gets the #WebKitSettings:minimum-font-size property.
       Returns: Minimum font size, in pixels.
   */
-  uint getMinimumFontSize()
+  uint getMinimumFontSize() nothrow
   {
     uint _retval;
     _retval = webkit_settings_get_minimum_font_size(cast(WebKitSettings*)this._cPtr);
@@ -2110,7 +2110,7 @@ class Settings : gobject.object.ObjectWrap
       Gets the #WebKitSettings:monospace-font-family property.
       Returns: Default font family used to display content marked with monospace font.
   */
-  string getMonospaceFontFamily()
+  string getMonospaceFontFamily() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_monospace_font_family(cast(WebKitSettings*)this._cPtr);
@@ -2122,7 +2122,7 @@ class Settings : gobject.object.ObjectWrap
       Gets the #WebKitSettings:pictograph-font-family property.
       Returns: The default font family used to display content marked with pictograph font.
   */
-  string getPictographFontFamily()
+  string getPictographFontFamily() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_pictograph_font_family(cast(WebKitSettings*)this._cPtr);
@@ -2134,7 +2134,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:print-backgrounds property.
       Returns: true If background images should be printed or false otherwise.
   */
-  bool getPrintBackgrounds()
+  bool getPrintBackgrounds() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_print_backgrounds(cast(WebKitSettings*)this._cPtr);
@@ -2145,7 +2145,7 @@ class Settings : gobject.object.ObjectWrap
       Gets the #WebKitSettings:sans-serif-font-family property.
       Returns: The default font family used to display content marked with sans-serif font.
   */
-  string getSansSerifFontFamily()
+  string getSansSerifFontFamily() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_sans_serif_font_family(cast(WebKitSettings*)this._cPtr);
@@ -2157,7 +2157,7 @@ class Settings : gobject.object.ObjectWrap
       Gets the #WebKitSettings:serif-font-family property.
       Returns: The default font family used to display content marked with serif font.
   */
-  string getSerifFontFamily()
+  string getSerifFontFamily() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_serif_font_family(cast(WebKitSettings*)this._cPtr);
@@ -2169,7 +2169,7 @@ class Settings : gobject.object.ObjectWrap
       Get the #WebKitSettings:user-agent property.
       Returns: The current value of the user-agent property.
   */
-  string getUserAgent()
+  string getUserAgent() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_user_agent(cast(WebKitSettings*)this._cPtr);
@@ -2181,7 +2181,7 @@ class Settings : gobject.object.ObjectWrap
       Get the [webkit.settings.Settings.webrtcUdpPortsRange] property.
       Returns: The WebRTC UDP ports range, or null if un-set.
   */
-  string getWebrtcUdpPortsRange()
+  string getWebrtcUdpPortsRange() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_settings_get_webrtc_udp_ports_range(cast(WebKitSettings*)this._cPtr);
@@ -2194,7 +2194,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: true If zoom level of the view should only affect the text
            or false if all view contents should be scaled.
   */
-  bool getZoomTextOnly()
+  bool getZoomTextOnly() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_settings_get_zoom_text_only(cast(WebKitSettings*)this._cPtr);
@@ -2207,7 +2207,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         allowed = Value to be set
   */
-  void setAllowFileAccessFromFileUrls(bool allowed)
+  void setAllowFileAccessFromFileUrls(bool allowed) nothrow
   {
     webkit_settings_set_allow_file_access_from_file_urls(cast(WebKitSettings*)this._cPtr, allowed);
   }
@@ -2218,7 +2218,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         allowed = Value to be set
   */
-  void setAllowModalDialogs(bool allowed)
+  void setAllowModalDialogs(bool allowed) nothrow
   {
     webkit_settings_set_allow_modal_dialogs(cast(WebKitSettings*)this._cPtr, allowed);
   }
@@ -2229,7 +2229,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         allowed = Value to be set
   */
-  void setAllowTopNavigationToDataUrls(bool allowed)
+  void setAllowTopNavigationToDataUrls(bool allowed) nothrow
   {
     webkit_settings_set_allow_top_navigation_to_data_urls(cast(WebKitSettings*)this._cPtr, allowed);
   }
@@ -2240,7 +2240,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         allowed = Value to be set
   */
-  void setAllowUniversalAccessFromFileUrls(bool allowed)
+  void setAllowUniversalAccessFromFileUrls(bool allowed) nothrow
   {
     webkit_settings_set_allow_universal_access_from_file_urls(cast(WebKitSettings*)this._cPtr, allowed);
   }
@@ -2251,7 +2251,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setAutoLoadImages(bool enabled)
+  void setAutoLoadImages(bool enabled) nothrow
   {
     webkit_settings_set_auto_load_images(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2262,7 +2262,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         cursiveFontFamily = the new default cursive font family
   */
-  void setCursiveFontFamily(string cursiveFontFamily)
+  void setCursiveFontFamily(string cursiveFontFamily) nothrow
   {
     const(char)* _cursiveFontFamily = cursiveFontFamily.toCString(No.Alloc);
     webkit_settings_set_cursive_font_family(cast(WebKitSettings*)this._cPtr, _cursiveFontFamily);
@@ -2274,7 +2274,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         defaultCharset = default charset to be set
   */
-  void setDefaultCharset(string defaultCharset)
+  void setDefaultCharset(string defaultCharset) nothrow
   {
     const(char)* _defaultCharset = defaultCharset.toCString(No.Alloc);
     webkit_settings_set_default_charset(cast(WebKitSettings*)this._cPtr, _defaultCharset);
@@ -2286,7 +2286,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         defaultFontFamily = the new default font family
   */
-  void setDefaultFontFamily(string defaultFontFamily)
+  void setDefaultFontFamily(string defaultFontFamily) nothrow
   {
     const(char)* _defaultFontFamily = defaultFontFamily.toCString(No.Alloc);
     webkit_settings_set_default_font_family(cast(WebKitSettings*)this._cPtr, _defaultFontFamily);
@@ -2298,7 +2298,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         fontSize = default font size to be set in pixels
   */
-  void setDefaultFontSize(uint fontSize)
+  void setDefaultFontSize(uint fontSize) nothrow
   {
     webkit_settings_set_default_font_size(cast(WebKitSettings*)this._cPtr, fontSize);
   }
@@ -2309,7 +2309,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         fontSize = default monospace font size to be set in pixels
   */
-  void setDefaultMonospaceFontSize(uint fontSize)
+  void setDefaultMonospaceFontSize(uint fontSize) nothrow
   {
     webkit_settings_set_default_monospace_font_size(cast(WebKitSettings*)this._cPtr, fontSize);
   }
@@ -2320,7 +2320,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         disabled = Value to be set
   */
-  void setDisableWebSecurity(bool disabled)
+  void setDisableWebSecurity(bool disabled) nothrow
   {
     webkit_settings_set_disable_web_security(cast(WebKitSettings*)this._cPtr, disabled);
   }
@@ -2331,7 +2331,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setDrawCompositingIndicators(bool enabled)
+  void setDrawCompositingIndicators(bool enabled) nothrow
   {
     webkit_settings_set_draw_compositing_indicators(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2342,7 +2342,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnable2dCanvasAcceleration(bool enabled)
+  void setEnable2dCanvasAcceleration(bool enabled) nothrow
   {
     webkit_settings_set_enable_2d_canvas_acceleration(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2353,7 +2353,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = value to be set
   */
-  void setEnableBackForwardNavigationGestures(bool enabled)
+  void setEnableBackForwardNavigationGestures(bool enabled) nothrow
   {
     webkit_settings_set_enable_back_forward_navigation_gestures(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2364,7 +2364,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableCaretBrowsing(bool enabled)
+  void setEnableCaretBrowsing(bool enabled) nothrow
   {
     webkit_settings_set_enable_caret_browsing(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2375,7 +2375,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableDeveloperExtras(bool enabled)
+  void setEnableDeveloperExtras(bool enabled) nothrow
   {
     webkit_settings_set_enable_developer_extras(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2386,7 +2386,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableDnsPrefetching(bool enabled)
+  void setEnableDnsPrefetching(bool enabled) nothrow
   {
     webkit_settings_set_enable_dns_prefetching(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2397,7 +2397,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableEncryptedMedia(bool enabled)
+  void setEnableEncryptedMedia(bool enabled) nothrow
   {
     webkit_settings_set_enable_encrypted_media(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2408,7 +2408,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableFullscreen(bool enabled)
+  void setEnableFullscreen(bool enabled) nothrow
   {
     webkit_settings_set_enable_fullscreen(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2419,7 +2419,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableHtml5Database(bool enabled)
+  void setEnableHtml5Database(bool enabled) nothrow
   {
     webkit_settings_set_enable_html5_database(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2430,7 +2430,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableHtml5LocalStorage(bool enabled)
+  void setEnableHtml5LocalStorage(bool enabled) nothrow
   {
     webkit_settings_set_enable_html5_local_storage(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2441,7 +2441,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableHyperlinkAuditing(bool enabled)
+  void setEnableHyperlinkAuditing(bool enabled) nothrow
   {
     webkit_settings_set_enable_hyperlink_auditing(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2452,7 +2452,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableJavascript(bool enabled)
+  void setEnableJavascript(bool enabled) nothrow
   {
     webkit_settings_set_enable_javascript(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2463,7 +2463,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableJavascriptMarkup(bool enabled)
+  void setEnableJavascriptMarkup(bool enabled) nothrow
   {
     webkit_settings_set_enable_javascript_markup(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2474,7 +2474,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableMedia(bool enabled)
+  void setEnableMedia(bool enabled) nothrow
   {
     webkit_settings_set_enable_media(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2485,7 +2485,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableMediaCapabilities(bool enabled)
+  void setEnableMediaCapabilities(bool enabled) nothrow
   {
     webkit_settings_set_enable_media_capabilities(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2496,7 +2496,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableMediaStream(bool enabled)
+  void setEnableMediaStream(bool enabled) nothrow
   {
     webkit_settings_set_enable_media_stream(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2507,7 +2507,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableMediasource(bool enabled)
+  void setEnableMediasource(bool enabled) nothrow
   {
     webkit_settings_set_enable_mediasource(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2518,7 +2518,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableMockCaptureDevices(bool enabled)
+  void setEnableMockCaptureDevices(bool enabled) nothrow
   {
     webkit_settings_set_enable_mock_capture_devices(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2529,7 +2529,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableOfflineWebApplicationCache(bool enabled)
+  void setEnableOfflineWebApplicationCache(bool enabled) nothrow
   {
     webkit_settings_set_enable_offline_web_application_cache(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2540,7 +2540,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnablePageCache(bool enabled)
+  void setEnablePageCache(bool enabled) nothrow
   {
     webkit_settings_set_enable_page_cache(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2551,7 +2551,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableResizableTextAreas(bool enabled)
+  void setEnableResizableTextAreas(bool enabled) nothrow
   {
     webkit_settings_set_enable_resizable_text_areas(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2562,7 +2562,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableSiteSpecificQuirks(bool enabled)
+  void setEnableSiteSpecificQuirks(bool enabled) nothrow
   {
     webkit_settings_set_enable_site_specific_quirks(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2573,7 +2573,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableSmoothScrolling(bool enabled)
+  void setEnableSmoothScrolling(bool enabled) nothrow
   {
     webkit_settings_set_enable_smooth_scrolling(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2584,7 +2584,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableSpatialNavigation(bool enabled)
+  void setEnableSpatialNavigation(bool enabled) nothrow
   {
     webkit_settings_set_enable_spatial_navigation(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2595,7 +2595,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableTabsToLinks(bool enabled)
+  void setEnableTabsToLinks(bool enabled) nothrow
   {
     webkit_settings_set_enable_tabs_to_links(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2606,7 +2606,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableWebaudio(bool enabled)
+  void setEnableWebaudio(bool enabled) nothrow
   {
     webkit_settings_set_enable_webaudio(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2617,7 +2617,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableWebgl(bool enabled)
+  void setEnableWebgl(bool enabled) nothrow
   {
     webkit_settings_set_enable_webgl(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2630,7 +2630,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableWebrtc(bool enabled)
+  void setEnableWebrtc(bool enabled) nothrow
   {
     webkit_settings_set_enable_webrtc(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2641,7 +2641,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setEnableWriteConsoleMessagesToStdout(bool enabled)
+  void setEnableWriteConsoleMessagesToStdout(bool enabled) nothrow
   {
     webkit_settings_set_enable_write_console_messages_to_stdout(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2652,7 +2652,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         fantasyFontFamily = the new default fantasy font family
   */
-  void setFantasyFontFamily(string fantasyFontFamily)
+  void setFantasyFontFamily(string fantasyFontFamily) nothrow
   {
     const(char)* _fantasyFontFamily = fantasyFontFamily.toCString(No.Alloc);
     webkit_settings_set_fantasy_font_family(cast(WebKitSettings*)this._cPtr, _fantasyFontFamily);
@@ -2670,7 +2670,7 @@ class Settings : gobject.object.ObjectWrap
         feature = the feature to toggle.
         enabled = whether the feature will be enabled.
   */
-  void setFeatureEnabled(webkit.feature.Feature feature, bool enabled)
+  void setFeatureEnabled(webkit.feature.Feature feature, bool enabled) nothrow
   {
     webkit_settings_set_feature_enabled(cast(WebKitSettings*)this._cPtr, feature ? cast(WebKitFeature*)feature._cPtr(No.Dup) : null, enabled);
   }
@@ -2681,7 +2681,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         policy = a #WebKitHardwareAccelerationPolicy
   */
-  void setHardwareAccelerationPolicy(webkit.types.HardwareAccelerationPolicy policy)
+  void setHardwareAccelerationPolicy(webkit.types.HardwareAccelerationPolicy policy) nothrow
   {
     webkit_settings_set_hardware_acceleration_policy(cast(WebKitSettings*)this._cPtr, policy);
   }
@@ -2692,7 +2692,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setJavascriptCanAccessClipboard(bool enabled)
+  void setJavascriptCanAccessClipboard(bool enabled) nothrow
   {
     webkit_settings_set_javascript_can_access_clipboard(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2703,7 +2703,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setJavascriptCanOpenWindowsAutomatically(bool enabled)
+  void setJavascriptCanOpenWindowsAutomatically(bool enabled) nothrow
   {
     webkit_settings_set_javascript_can_open_windows_automatically(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2714,7 +2714,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setLoadIconsIgnoringImageLoadSetting(bool enabled)
+  void setLoadIconsIgnoringImageLoadSetting(bool enabled) nothrow
   {
     webkit_settings_set_load_icons_ignoring_image_load_setting(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2725,7 +2725,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         contentTypes = list of media content types requiring hardware support split by semicolons (:) or null to use the default value.
   */
-  void setMediaContentTypesRequiringHardwareSupport(string contentTypes = null)
+  void setMediaContentTypesRequiringHardwareSupport(string contentTypes = null) nothrow
   {
     const(char)* _contentTypes = contentTypes.toCString(No.Alloc);
     webkit_settings_set_media_content_types_requiring_hardware_support(cast(WebKitSettings*)this._cPtr, _contentTypes);
@@ -2737,7 +2737,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setMediaPlaybackAllowsInline(bool enabled)
+  void setMediaPlaybackAllowsInline(bool enabled) nothrow
   {
     webkit_settings_set_media_playback_allows_inline(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2748,7 +2748,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setMediaPlaybackRequiresUserGesture(bool enabled)
+  void setMediaPlaybackRequiresUserGesture(bool enabled) nothrow
   {
     webkit_settings_set_media_playback_requires_user_gesture(cast(WebKitSettings*)this._cPtr, enabled);
   }
@@ -2759,7 +2759,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         fontSize = minimum font size to be set in pixels
   */
-  void setMinimumFontSize(uint fontSize)
+  void setMinimumFontSize(uint fontSize) nothrow
   {
     webkit_settings_set_minimum_font_size(cast(WebKitSettings*)this._cPtr, fontSize);
   }
@@ -2770,7 +2770,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         monospaceFontFamily = the new default monospace font family
   */
-  void setMonospaceFontFamily(string monospaceFontFamily)
+  void setMonospaceFontFamily(string monospaceFontFamily) nothrow
   {
     const(char)* _monospaceFontFamily = monospaceFontFamily.toCString(No.Alloc);
     webkit_settings_set_monospace_font_family(cast(WebKitSettings*)this._cPtr, _monospaceFontFamily);
@@ -2782,7 +2782,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         pictographFontFamily = the new default pictograph font family
   */
-  void setPictographFontFamily(string pictographFontFamily)
+  void setPictographFontFamily(string pictographFontFamily) nothrow
   {
     const(char)* _pictographFontFamily = pictographFontFamily.toCString(No.Alloc);
     webkit_settings_set_pictograph_font_family(cast(WebKitSettings*)this._cPtr, _pictographFontFamily);
@@ -2794,7 +2794,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         printBackgrounds = Value to be set
   */
-  void setPrintBackgrounds(bool printBackgrounds)
+  void setPrintBackgrounds(bool printBackgrounds) nothrow
   {
     webkit_settings_set_print_backgrounds(cast(WebKitSettings*)this._cPtr, printBackgrounds);
   }
@@ -2805,7 +2805,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         sansSerifFontFamily = the new default sans-serif font family
   */
-  void setSansSerifFontFamily(string sansSerifFontFamily)
+  void setSansSerifFontFamily(string sansSerifFontFamily) nothrow
   {
     const(char)* _sansSerifFontFamily = sansSerifFontFamily.toCString(No.Alloc);
     webkit_settings_set_sans_serif_font_family(cast(WebKitSettings*)this._cPtr, _sansSerifFontFamily);
@@ -2817,7 +2817,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         serifFontFamily = the new default serif font family
   */
-  void setSerifFontFamily(string serifFontFamily)
+  void setSerifFontFamily(string serifFontFamily) nothrow
   {
     const(char)* _serifFontFamily = serifFontFamily.toCString(No.Alloc);
     webkit_settings_set_serif_font_family(cast(WebKitSettings*)this._cPtr, _serifFontFamily);
@@ -2829,7 +2829,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         userAgent = The new custom user agent string or null to use the default user agent
   */
-  void setUserAgent(string userAgent = null)
+  void setUserAgent(string userAgent = null) nothrow
   {
     const(char)* _userAgent = userAgent.toCString(No.Alloc);
     webkit_settings_set_user_agent(cast(WebKitSettings*)this._cPtr, _userAgent);
@@ -2846,7 +2846,7 @@ class Settings : gobject.object.ObjectWrap
         applicationName = The application name used for the user agent or null to use the default user agent.
         applicationVersion = The application version for the user agent or null to user the default version.
   */
-  void setUserAgentWithApplicationDetails(string applicationName = null, string applicationVersion = null)
+  void setUserAgentWithApplicationDetails(string applicationName = null, string applicationVersion = null) nothrow
   {
     const(char)* _applicationName = applicationName.toCString(No.Alloc);
     const(char)* _applicationVersion = applicationVersion.toCString(No.Alloc);
@@ -2859,7 +2859,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         udpPortRange = Value to be set
   */
-  void setWebrtcUdpPortsRange(string udpPortRange)
+  void setWebrtcUdpPortsRange(string udpPortRange) nothrow
   {
     const(char)* _udpPortRange = udpPortRange.toCString(No.Alloc);
     webkit_settings_set_webrtc_udp_ports_range(cast(WebKitSettings*)this._cPtr, _udpPortRange);
@@ -2871,7 +2871,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         zoomTextOnly = Value to be set
   */
-  void setZoomTextOnly(bool zoomTextOnly)
+  void setZoomTextOnly(bool zoomTextOnly) nothrow
   {
     webkit_settings_set_zoom_text_only(cast(WebKitSettings*)this._cPtr, zoomTextOnly);
   }
@@ -2891,7 +2891,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           possible to do a XMLHttpRequest of a local file, for example.
       Returns: Builder instance for fluent chaining
   */
-  T allowFileAccessFromFileUrls(bool propval)
+  T allowFileAccessFromFileUrls(bool propval) nothrow
   {
     return setProperty("allow-file-access-from-file-urls", propval);
   }
@@ -2907,7 +2907,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           signal will be emitted.
       Returns: Builder instance for fluent chaining
   */
-  T allowModalDialogs(bool propval)
+  T allowModalDialogs(bool propval) nothrow
   {
     return setProperty("allow-modal-dialogs", propval);
   }
@@ -2921,7 +2921,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           embeds a WebView and you have control of the pages being show instead of a generic browser.
       Returns: Builder instance for fluent chaining
   */
-  T allowTopNavigationToDataUrls(bool propval)
+  T allowTopNavigationToDataUrls(bool propval) nothrow
   {
     return setProperty("allow-top-navigation-to-data-urls", propval);
   }
@@ -2937,7 +2937,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           it would be possible to use local storage, for example.
       Returns: Builder instance for fluent chaining
   */
-  T allowUniversalAccessFromFileUrls(bool propval)
+  T allowUniversalAccessFromFileUrls(bool propval) nothrow
   {
     return setProperty("allow-universal-access-from-file-urls", propval);
   }
@@ -2950,7 +2950,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           useful to turn this property off.
       Returns: Builder instance for fluent chaining
   */
-  T autoLoadImages(bool propval)
+  T autoLoadImages(bool propval) nothrow
   {
     return setProperty("auto-load-images", propval);
   }
@@ -2961,7 +2961,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The font family used as the default for content using a cursive font.
       Returns: Builder instance for fluent chaining
   */
-  T cursiveFontFamily(string propval)
+  T cursiveFontFamily(string propval) nothrow
   {
     return setProperty("cursive-font-family", propval);
   }
@@ -2972,7 +2972,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The default text charset used when interpreting content with an unspecified charset.
       Returns: Builder instance for fluent chaining
   */
-  T defaultCharset(string propval)
+  T defaultCharset(string propval) nothrow
   {
     return setProperty("default-charset", propval);
   }
@@ -2983,7 +2983,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The font family to use as the default for content that does not specify a font.
       Returns: Builder instance for fluent chaining
   */
-  T defaultFontFamily(string propval)
+  T defaultFontFamily(string propval) nothrow
   {
     return setProperty("default-font-family", propval);
   }
@@ -2995,7 +2995,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           no font size is specified.
       Returns: Builder instance for fluent chaining
   */
-  T defaultFontSize(uint propval)
+  T defaultFontSize(uint propval) nothrow
   {
     return setProperty("default-font-size", propval);
   }
@@ -3007,7 +3007,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           monospace font if no font size is specified.
       Returns: Builder instance for fluent chaining
   */
-  T defaultMonospaceFontSize(uint propval)
+  T defaultMonospaceFontSize(uint propval) nothrow
   {
     return setProperty("default-monospace-font-size", propval);
   }
@@ -3023,7 +3023,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           securely.
       Returns: Builder instance for fluent chaining
   */
-  T disableWebSecurity(bool propval)
+  T disableWebSecurity(bool propval) nothrow
   {
     return setProperty("disable-web-security", propval);
   }
@@ -3036,7 +3036,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           to web content that is composited with the GPU.
       Returns: Builder instance for fluent chaining
   */
-  T drawCompositingIndicators(bool propval)
+  T drawCompositingIndicators(bool propval) nothrow
   {
     return setProperty("draw-compositing-indicators", propval);
   }
@@ -3050,7 +3050,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           is enabled, for other reasons like its size or when willReadFrequently property is used.
       Returns: Builder instance for fluent chaining
   */
-  T enable2dCanvasAcceleration(bool propval)
+  T enable2dCanvasAcceleration(bool propval) nothrow
   {
     return setProperty("enable-2d-canvas-acceleration", propval);
   }
@@ -3061,7 +3061,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Enable or disable horizontal swipe gesture for back-forward navigation.
       Returns: Builder instance for fluent chaining
   */
-  T enableBackForwardNavigationGestures(bool propval)
+  T enableBackForwardNavigationGestures(bool propval) nothrow
   {
     return setProperty("enable-back-forward-navigation-gestures", propval);
   }
@@ -3072,7 +3072,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether to enable accessibility enhanced keyboard navigation.
       Returns: Builder instance for fluent chaining
   */
-  T enableCaretBrowsing(bool propval)
+  T enableCaretBrowsing(bool propval) nothrow
   {
     return setProperty("enable-caret-browsing", propval);
   }
@@ -3083,7 +3083,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Determines whether or not developer tools, such as the Web Inspector, are enabled.
       Returns: Builder instance for fluent chaining
   */
-  T enableDeveloperExtras(bool propval)
+  T enableDeveloperExtras(bool propval) nothrow
   {
     return setProperty("enable-developer-extras", propval);
   }
@@ -3095,7 +3095,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           to resolve domain names before a user tries to follow a link.
       Returns: Builder instance for fluent chaining
   */
-  T enableDnsPrefetching(bool propval)
+  T enableDnsPrefetching(bool propval) nothrow
   {
     return setProperty("enable-dns-prefetching", propval);
   }
@@ -3111,7 +3111,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           See https://www.w3.org/TR/encrypted-media/
       Returns: Builder instance for fluent chaining
   */
-  T enableEncryptedMedia(bool propval)
+  T enableEncryptedMedia(bool propval) nothrow
   {
     return setProperty("enable-encrypted-media", propval);
   }
@@ -3125,7 +3125,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           http://www.w3.org/TR/fullscreen/
       Returns: Builder instance for fluent chaining
   */
-  T enableFullscreen(bool propval)
+  T enableFullscreen(bool propval) nothrow
   {
     return setProperty("enable-fullscreen", propval);
   }
@@ -3136,7 +3136,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether to enable HTML5 client-side SQL database support (IndexedDB).
       Returns: Builder instance for fluent chaining
   */
-  T enableHtml5Database(bool propval)
+  T enableHtml5Database(bool propval) nothrow
   {
     return setProperty("enable-html5-database", propval);
   }
@@ -3151,7 +3151,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           http://dev.w3.org/html5/webstorage/.
       Returns: Builder instance for fluent chaining
   */
-  T enableHtml5LocalStorage(bool propval)
+  T enableHtml5LocalStorage(bool propval) nothrow
   {
     return setProperty("enable-html5-local-storage", propval);
   }
@@ -3165,7 +3165,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           http://www.whatwg.org/specs/web-apps/current-work/multipage/links.html#hyperlink-auditing.
       Returns: Builder instance for fluent chaining
   */
-  T enableHyperlinkAuditing(bool propval)
+  T enableHyperlinkAuditing(bool propval) nothrow
   {
     return setProperty("enable-hyperlink-auditing", propval);
   }
@@ -3176,7 +3176,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Determines whether or not JavaScript executes within a page.
       Returns: Builder instance for fluent chaining
   */
-  T enableJavascript(bool propval)
+  T enableJavascript(bool propval) nothrow
   {
     return setProperty("enable-javascript", propval);
   }
@@ -3189,7 +3189,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           executing JavaScript is still allowed if #WebKitSettings:enable-javascript is true.
       Returns: Builder instance for fluent chaining
   */
-  T enableJavascriptMarkup(bool propval)
+  T enableJavascriptMarkup(bool propval) nothrow
   {
     return setProperty("enable-javascript-markup", propval);
   }
@@ -3202,7 +3202,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           playback support disabled.
       Returns: Builder instance for fluent chaining
   */
-  T enableMedia(bool propval)
+  T enableMedia(bool propval) nothrow
   {
     return setProperty("enable-media", propval);
   }
@@ -3220,7 +3220,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           See also https://wicg.github.io/media-capabilities/
       Returns: Builder instance for fluent chaining
   */
-  T enableMediaCapabilities(bool propval)
+  T enableMediaCapabilities(bool propval) nothrow
   {
     return setProperty("enable-media-capabilities", propval);
   }
@@ -3235,7 +3235,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           See also http://dev.w3.org/2011/webrtc/editor/getusermedia.html
       Returns: Builder instance for fluent chaining
   */
-  T enableMediaStream(bool propval)
+  T enableMediaStream(bool propval) nothrow
   {
     return setProperty("enable-media-stream", propval);
   }
@@ -3250,7 +3250,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           See also http://www.w3.org/TR/media-source/
       Returns: Builder instance for fluent chaining
   */
-  T enableMediasource(bool propval)
+  T enableMediasource(bool propval) nothrow
   {
     return setProperty("enable-mediasource", propval);
   }
@@ -3263,7 +3263,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           sources.
       Returns: Builder instance for fluent chaining
   */
-  T enableMockCaptureDevices(bool propval)
+  T enableMockCaptureDevices(bool propval) nothrow
   {
     return setProperty("enable-mock-capture-devices", propval);
   }
@@ -3274,7 +3274,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Unsupported setting. This property does nothing.
       Returns: Builder instance for fluent chaining
   */
-  T enableOfflineWebApplicationCache(bool propval)
+  T enableOfflineWebApplicationCache(bool propval) nothrow
   {
     return setProperty("enable-offline-web-application-cache", propval);
   }
@@ -3293,7 +3293,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           http://webkit.org/blog/427/webkit-page-cache-i-the-basics/
       Returns: Builder instance for fluent chaining
   */
-  T enablePageCache(bool propval)
+  T enablePageCache(bool propval) nothrow
   {
     return setProperty("enable-page-cache", propval);
   }
@@ -3304,7 +3304,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Determines whether or not text areas can be resized.
       Returns: Builder instance for fluent chaining
   */
-  T enableResizableTextAreas(bool propval)
+  T enableResizableTextAreas(bool propval) nothrow
   {
     return setProperty("enable-resizable-text-areas", propval);
   }
@@ -3320,7 +3320,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           special-case this and other cases to make some specific sites work.
       Returns: Builder instance for fluent chaining
   */
-  T enableSiteSpecificQuirks(bool propval)
+  T enableSiteSpecificQuirks(bool propval) nothrow
   {
     return setProperty("enable-site-specific-quirks", propval);
   }
@@ -3331,7 +3331,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Enable or disable smooth scrolling.
       Returns: Builder instance for fluent chaining
   */
-  T enableSmoothScrolling(bool propval)
+  T enableSmoothScrolling(bool propval) nothrow
   {
     return setProperty("enable-smooth-scrolling", propval);
   }
@@ -3347,7 +3347,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           there are multiple elements, which element they probably wants.
       Returns: Builder instance for fluent chaining
   */
-  T enableSpatialNavigation(bool propval)
+  T enableSpatialNavigation(bool propval) nothrow
   {
     return setProperty("enable-spatial-navigation", propval);
   }
@@ -3361,7 +3361,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           then pressing tab key will insert the tab character.
       Returns: Builder instance for fluent chaining
   */
-  T enableTabsToLinks(bool propval)
+  T enableTabsToLinks(bool propval) nothrow
   {
     return setProperty("enable-tabs-to-links", propval);
   }
@@ -3375,7 +3375,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           See also https://webaudio.github.io/web-audio-api
       Returns: Builder instance for fluent chaining
   */
-  T enableWebaudio(bool propval)
+  T enableWebaudio(bool propval) nothrow
   {
     return setProperty("enable-webaudio", propval);
   }
@@ -3387,7 +3387,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           content to use an API based on OpenGL ES 2.0.
       Returns: Builder instance for fluent chaining
   */
-  T enableWebgl(bool propval)
+  T enableWebgl(bool propval) nothrow
   {
     return setProperty("enable-webgl", propval);
   }
@@ -3403,7 +3403,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           See also https://www.w3.org/TR/webrtc/
       Returns: Builder instance for fluent chaining
   */
-  T enableWebrtc(bool propval)
+  T enableWebrtc(bool propval) nothrow
   {
     return setProperty("enable-webrtc", propval);
   }
@@ -3415,7 +3415,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           sent to the console with console.log and related methods.
       Returns: Builder instance for fluent chaining
   */
-  T enableWriteConsoleMessagesToStdout(bool propval)
+  T enableWriteConsoleMessagesToStdout(bool propval) nothrow
   {
     return setProperty("enable-write-console-messages-to-stdout", propval);
   }
@@ -3426,7 +3426,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The font family used as the default for content using a fantasy font.
       Returns: Builder instance for fluent chaining
   */
-  T fantasyFontFamily(string propval)
+  T fantasyFontFamily(string propval) nothrow
   {
     return setProperty("fantasy-font-family", propval);
   }
@@ -3443,7 +3443,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           actual policy being used, but changing the setting will not have any effect.
       Returns: Builder instance for fluent chaining
   */
-  T hardwareAccelerationPolicy(webkit.types.HardwareAccelerationPolicy propval)
+  T hardwareAccelerationPolicy(webkit.types.HardwareAccelerationPolicy propval) nothrow
   {
     return setProperty("hardware-acceleration-policy", propval);
   }
@@ -3455,7 +3455,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           set to true, document.execCommand() allows cut, copy and paste commands.
       Returns: Builder instance for fluent chaining
   */
-  T javascriptCanAccessClipboard(bool propval)
+  T javascriptCanAccessClipboard(bool propval) nothrow
   {
     return setProperty("javascript-can-access-clipboard", propval);
   }
@@ -3467,7 +3467,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           intervention.
       Returns: Builder instance for fluent chaining
   */
-  T javascriptCanOpenWindowsAutomatically(bool propval)
+  T javascriptCanOpenWindowsAutomatically(bool propval) nothrow
   {
     return setProperty("javascript-can-open-windows-automatically", propval);
   }
@@ -3478,7 +3478,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Unsupported setting. This property does nothing.
       Returns: Builder instance for fluent chaining
   */
-  T loadIconsIgnoringImageLoadSetting(bool propval)
+  T loadIconsIgnoringImageLoadSetting(bool propval) nothrow
   {
     return setProperty("load-icons-ignoring-image-load-setting", propval);
   }
@@ -3490,7 +3490,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           For example: 'video/webm; codecs="vp*":video/mp4; codecs="avc*":video/&ast; codecs="av1*"'.
       Returns: Builder instance for fluent chaining
   */
-  T mediaContentTypesRequiringHardwareSupport(string propval)
+  T mediaContentTypesRequiringHardwareSupport(string propval) nothrow
   {
     return setProperty("media-content-types-requiring-hardware-support", propval);
   }
@@ -3503,7 +3503,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           false allows specifying that media playback should be always fullscreen.
       Returns: Builder instance for fluent chaining
   */
-  T mediaPlaybackAllowsInline(bool propval)
+  T mediaPlaybackAllowsInline(bool propval) nothrow
   {
     return setProperty("media-playback-allows-inline", propval);
   }
@@ -3518,7 +3518,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           load the media.
       Returns: Builder instance for fluent chaining
   */
-  T mediaPlaybackRequiresUserGesture(bool propval)
+  T mediaPlaybackRequiresUserGesture(bool propval) nothrow
   {
     return setProperty("media-playback-requires-user-gesture", propval);
   }
@@ -3531,7 +3531,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           potentially break page layouts.
       Returns: Builder instance for fluent chaining
   */
-  T minimumFontSize(uint propval)
+  T minimumFontSize(uint propval) nothrow
   {
     return setProperty("minimum-font-size", propval);
   }
@@ -3542,7 +3542,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The font family used as the default for content using a monospace font.
       Returns: Builder instance for fluent chaining
   */
-  T monospaceFontFamily(string propval)
+  T monospaceFontFamily(string propval) nothrow
   {
     return setProperty("monospace-font-family", propval);
   }
@@ -3553,7 +3553,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The font family used as the default for content using a pictograph font.
       Returns: Builder instance for fluent chaining
   */
-  T pictographFontFamily(string propval)
+  T pictographFontFamily(string propval) nothrow
   {
     return setProperty("pictograph-font-family", propval);
   }
@@ -3564,7 +3564,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether background images should be drawn during printing.
       Returns: Builder instance for fluent chaining
   */
-  T printBackgrounds(bool propval)
+  T printBackgrounds(bool propval) nothrow
   {
     return setProperty("print-backgrounds", propval);
   }
@@ -3575,7 +3575,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The font family used as the default for content using a sans-serif font.
       Returns: Builder instance for fluent chaining
   */
-  T sansSerifFontFamily(string propval)
+  T sansSerifFontFamily(string propval) nothrow
   {
     return setProperty("sans-serif-font-family", propval);
   }
@@ -3586,7 +3586,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The font family used as the default for content using a serif font.
       Returns: Builder instance for fluent chaining
   */
-  T serifFontFamily(string propval)
+  T serifFontFamily(string propval) nothrow
   {
     return setProperty("serif-font-family", propval);
   }
@@ -3604,7 +3604,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           user-agent.
       Returns: Builder instance for fluent chaining
   */
-  T userAgent(string propval)
+  T userAgent(string propval) nothrow
   {
     return setProperty("user-agent", propval);
   }
@@ -3621,7 +3621,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           for one of the values is allowed and means the value is unspecified.
       Returns: Builder instance for fluent chaining
   */
-  T webrtcUdpPortsRange(string propval)
+  T webrtcUdpPortsRange(string propval) nothrow
   {
     return setProperty("webrtc-udp-ports-range", propval);
   }
@@ -3635,7 +3635,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           this property is enabled.
       Returns: Builder instance for fluent chaining
   */
-  T zoomTextOnly(bool propval)
+  T zoomTextOnly(bool propval) nothrow
   {
     return setProperty("zoom-text-only", propval);
   }
@@ -3648,7 +3648,7 @@ final class SettingsGidBuilder : SettingsGidBuilderImpl!SettingsGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Settings build()
+  Settings build() nothrow
   {
     return new Settings(cast(void*)createGObject(Settings._getGType), Yes.Take);
   }

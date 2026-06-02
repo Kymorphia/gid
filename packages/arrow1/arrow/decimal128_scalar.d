@@ -17,26 +17,26 @@ class Decimal128Scalar : arrow.scalar.Scalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal128_scalar_get_type != &gidSymbolNotFound ? garrow_decimal128_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Decimal128Scalar self()
+  override Decimal128Scalar self() nothrow
   {
     return this;
   }
@@ -45,13 +45,13 @@ class Decimal128Scalar : arrow.scalar.Scalar
       Get builder for [arrow.decimal128_scalar.Decimal128Scalar]
       Returns: New builder object
   */
-  static Decimal128ScalarGidBuilder builder()
+  static Decimal128ScalarGidBuilder builder() nothrow
   {
     return new Decimal128ScalarGidBuilder;
   }
 
   /** */
-  this(arrow.decimal128_data_type.Decimal128DataType dataType, arrow.decimal128.Decimal128 value)
+  this(arrow.decimal128_data_type.Decimal128DataType dataType, arrow.decimal128.Decimal128 value) nothrow
   {
     GArrowDecimal128Scalar* _cretval;
     _cretval = garrow_decimal128_scalar_new(dataType ? cast(GArrowDecimal128DataType*)dataType._cPtr(No.Dup) : null, value ? cast(GArrowDecimal128*)value._cPtr(No.Dup) : null);
@@ -59,7 +59,7 @@ class Decimal128Scalar : arrow.scalar.Scalar
   }
 
   /** */
-  arrow.decimal128.Decimal128 getValue()
+  arrow.decimal128.Decimal128 getValue() nothrow
   {
     GArrowDecimal128* _cretval;
     _cretval = garrow_decimal128_scalar_get_value(cast(GArrowDecimal128Scalar*)this._cPtr);
@@ -78,7 +78,7 @@ class Decimal128ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
         propval = The value of the scalar.
       Returns: Builder instance for fluent chaining
   */
-  T value(arrow.decimal128.Decimal128 propval)
+  T value(arrow.decimal128.Decimal128 propval) nothrow
   {
     return setProperty("value", propval);
   }
@@ -91,7 +91,7 @@ final class Decimal128ScalarGidBuilder : Decimal128ScalarGidBuilderImpl!Decimal1
       Create object from builder.
       Returns: New object
   */
-  Decimal128Scalar build()
+  Decimal128Scalar build() nothrow
   {
     return new Decimal128Scalar(cast(void*)createGObject(Decimal128Scalar._getGType), Yes.Take);
   }

@@ -19,11 +19,8 @@ class GLQuery
   GstGLQuery _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstgl.glquery.GLQuery");
-
     _cInstance = *cast(GstGLQuery*)ptr;
 
     if (take)
@@ -31,7 +28,7 @@ class GLQuery
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class GLQuery
   /**
       Record the result of a counter
   */
-  void counter()
+  void counter() nothrow
   {
     gst_gl_query_counter(cast(GstGLQuery*)this._cPtr);
   }
@@ -47,19 +44,19 @@ class GLQuery
   /**
       End counting the query
   */
-  void end()
+  void end() nothrow
   {
     gst_gl_query_end(cast(GstGLQuery*)this._cPtr);
   }
 
   /** */
-  void init_(gstgl.glcontext.GLContext context, gstgl.types.GLQueryType queryType)
+  void init_(gstgl.glcontext.GLContext context, gstgl.types.GLQueryType queryType) nothrow
   {
     gst_gl_query_init(cast(GstGLQuery*)this._cPtr, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, queryType);
   }
 
   /** */
-  ulong result()
+  ulong result() nothrow
   {
     ulong _retval;
     _retval = gst_gl_query_result(cast(GstGLQuery*)this._cPtr);
@@ -69,7 +66,7 @@ class GLQuery
   /**
       Start counting the query
   */
-  void start()
+  void start() nothrow
   {
     gst_gl_query_start(cast(GstGLQuery*)this._cPtr);
   }
@@ -77,7 +74,7 @@ class GLQuery
   /**
       Free any dynamically allocated resources
   */
-  void unset()
+  void unset() nothrow
   {
     gst_gl_query_unset(cast(GstGLQuery*)this._cPtr);
   }
@@ -94,7 +91,7 @@ class GLQuery
                                #GstGLContext
       Returns: whether context_ptr contains a #GstGLContext
   */
-  static bool localGlContext(gst.element.Element element, gst.types.PadDirection direction, gstgl.glcontext.GLContext contextPtr)
+  static bool localGlContext(gst.element.Element element, gst.types.PadDirection direction, gstgl.glcontext.GLContext contextPtr) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_query_local_gl_context(element ? cast(GstElement*)element._cPtr(No.Dup) : null, direction, contextPtr ? cast(GstGLContext**)contextPtr._cPtr(No.Dup) : null);

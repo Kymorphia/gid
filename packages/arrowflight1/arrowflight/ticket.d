@@ -15,26 +15,26 @@ class Ticket : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_ticket_get_type != &gidSymbolNotFound ? gaflight_ticket_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Ticket self()
+  override Ticket self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class Ticket : gobject.object.ObjectWrap
       Get builder for [arrowflight.ticket.Ticket]
       Returns: New builder object
   */
-  static TicketGidBuilder builder()
+  static TicketGidBuilder builder() nothrow
   {
     return new TicketGidBuilder;
   }
@@ -53,7 +53,7 @@ class Ticket : gobject.object.ObjectWrap
       Returns: Opaque identifier or credential to use when requesting a data
         stream with the DoGet RPC.
   */
-  @property glib.bytes.Bytes data()
+  @property glib.bytes.Bytes data() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(glib.bytes.Bytes)("data");
   }
@@ -64,13 +64,13 @@ class Ticket : gobject.object.ObjectWrap
         propval = Opaque identifier or credential to use when requesting a data
           stream with the DoGet RPC.
   */
-  @property void data(glib.bytes.Bytes propval)
+  @property void data(glib.bytes.Bytes propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(glib.bytes.Bytes)("data", propval);
   }
 
   /** */
-  this(glib.bytes.Bytes data)
+  this(glib.bytes.Bytes data) nothrow
   {
     GAFlightTicket* _cretval;
     _cretval = gaflight_ticket_new(data ? cast(GBytes*)data._cPtr(No.Dup) : null);
@@ -78,7 +78,7 @@ class Ticket : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equal(arrowflight.ticket.Ticket otherTicket)
+  bool equal(arrowflight.ticket.Ticket otherTicket) nothrow
   {
     bool _retval;
     _retval = cast(bool)gaflight_ticket_equal(cast(GAFlightTicket*)this._cPtr, otherTicket ? cast(GAFlightTicket*)otherTicket._cPtr(No.Dup) : null);
@@ -97,7 +97,7 @@ class TicketGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           stream with the DoGet RPC.
       Returns: Builder instance for fluent chaining
   */
-  T data(glib.bytes.Bytes propval)
+  T data(glib.bytes.Bytes propval) nothrow
   {
     return setProperty("data", propval);
   }
@@ -110,7 +110,7 @@ final class TicketGidBuilder : TicketGidBuilderImpl!TicketGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Ticket build()
+  Ticket build() nothrow
   {
     return new Ticket(cast(void*)createGObject(Ticket._getGType), Yes.Take);
   }

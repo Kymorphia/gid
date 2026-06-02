@@ -14,26 +14,26 @@ class UInt64Scalar : arrow.scalar.Scalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_uint64_scalar_get_type != &gidSymbolNotFound ? garrow_uint64_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UInt64Scalar self()
+  override UInt64Scalar self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class UInt64Scalar : arrow.scalar.Scalar
       Get builder for [arrow.uint64_scalar.UInt64Scalar]
       Returns: New builder object
   */
-  static UInt64ScalarGidBuilder builder()
+  static UInt64ScalarGidBuilder builder() nothrow
   {
     return new UInt64ScalarGidBuilder;
   }
 
   /** */
-  this(ulong value)
+  this(ulong value) nothrow
   {
     GArrowUInt64Scalar* _cretval;
     _cretval = garrow_uint64_scalar_new(value);
@@ -56,7 +56,7 @@ class UInt64Scalar : arrow.scalar.Scalar
   }
 
   /** */
-  ulong getValue()
+  ulong getValue() nothrow
   {
     ulong _retval;
     _retval = garrow_uint64_scalar_get_value(cast(GArrowUInt64Scalar*)this._cPtr);
@@ -76,7 +76,7 @@ final class UInt64ScalarGidBuilder : UInt64ScalarGidBuilderImpl!UInt64ScalarGidB
       Create object from builder.
       Returns: New object
   */
-  UInt64Scalar build()
+  UInt64Scalar build() nothrow
   {
     return new UInt64Scalar(cast(void*)createGObject(UInt64Scalar._getGType), Yes.Take);
   }

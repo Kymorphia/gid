@@ -21,38 +21,38 @@ class Box : gobject.boxed.Boxed
   /**
       Create a `box.Box` boxed type.
   */
-  this()
+  this() nothrow
   {
     super(gMalloc(graphene_box_t.sizeof), Yes.Take);
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())graphene_box_get_type != &gidSymbolNotFound ? graphene_box_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Box self()
+  override Box self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class Box : gobject.boxed.Boxed
       Returns: the newly allocated #graphene_box_t structure.
           Use [graphene.box.Box.free] to free the resources allocated by this function
   */
-  static graphene.box.Box alloc()
+  static graphene.box.Box alloc() nothrow
   {
     graphene_box_t* _cretval;
     _cretval = graphene_box_alloc();
@@ -80,7 +80,7 @@ class Box : gobject.boxed.Boxed
         b = a #graphene_box_t
       Returns: `true` if the box is contained in the given box
   */
-  bool containsBox(graphene.box.Box b)
+  bool containsBox(graphene.box.Box b) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_box_contains_box(cast(const(graphene_box_t)*)this._cPtr, b ? cast(const(graphene_box_t)*)b._cPtr(No.Dup) : null);
@@ -94,7 +94,7 @@ class Box : gobject.boxed.Boxed
         point = the coordinates to check
       Returns: `true` if the point is contained in the given box
   */
-  bool containsPoint(graphene.point3_d.Point3D point)
+  bool containsPoint(graphene.point3_d.Point3D point) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_box_contains_point(cast(const(graphene_box_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&point);
@@ -108,7 +108,7 @@ class Box : gobject.boxed.Boxed
         b = a #graphene_box_t
       Returns: `true` if the boxes are equal
   */
-  bool equal(graphene.box.Box b)
+  bool equal(graphene.box.Box b) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_box_equal(cast(const(graphene_box_t)*)this._cPtr, b ? cast(const(graphene_box_t)*)b._cPtr(No.Dup) : null);
@@ -122,7 +122,7 @@ class Box : gobject.boxed.Boxed
         point = the coordinates of the point to include
         res = return location for the expanded box
   */
-  void expand(graphene.point3_d.Point3D point, out graphene.box.Box res)
+  void expand(graphene.point3_d.Point3D point, out graphene.box.Box res) nothrow
   {
     graphene_box_t _res;
     graphene_box_expand(cast(const(graphene_box_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&point, &_res);
@@ -139,7 +139,7 @@ class Box : gobject.boxed.Boxed
         scalar = a scalar value
         res = return location for the expanded box
   */
-  void expandScalar(float scalar, out graphene.box.Box res)
+  void expandScalar(float scalar, out graphene.box.Box res) nothrow
   {
     graphene_box_t _res;
     graphene_box_expand_scalar(cast(const(graphene_box_t)*)this._cPtr, scalar, &_res);
@@ -154,7 +154,7 @@ class Box : gobject.boxed.Boxed
         vec = the coordinates of the point to include, as a #graphene_vec3_t
         res = return location for the expanded box
   */
-  void expandVec3(graphene.vec3.Vec3 vec, out graphene.box.Box res)
+  void expandVec3(graphene.vec3.Vec3 vec, out graphene.box.Box res) nothrow
   {
     graphene_box_t _res;
     graphene_box_expand_vec3(cast(const(graphene_box_t)*)this._cPtr, vec ? cast(const(graphene_vec3_t)*)vec._cPtr(No.Dup) : null, &_res);
@@ -168,7 +168,7 @@ class Box : gobject.boxed.Boxed
       Params:
         sphere = return location for the bounding sphere
   */
-  void getBoundingSphere(out graphene.sphere.Sphere sphere)
+  void getBoundingSphere(out graphene.sphere.Sphere sphere) nothrow
   {
     graphene_sphere_t _sphere;
     graphene_box_get_bounding_sphere(cast(const(graphene_box_t)*)this._cPtr, &_sphere);
@@ -182,7 +182,7 @@ class Box : gobject.boxed.Boxed
         center = return location for the coordinates of
             the center
   */
-  void getCenter(out graphene.point3_d.Point3D center)
+  void getCenter(out graphene.point3_d.Point3D center) nothrow
   {
     graphene_box_get_center(cast(const(graphene_box_t)*)this._cPtr, cast(graphene_point3d_t*)&center);
   }
@@ -191,7 +191,7 @@ class Box : gobject.boxed.Boxed
       Retrieves the size of the box on the Z axis.
       Returns: the depth of the box
   */
-  float getDepth()
+  float getDepth() nothrow
   {
     float _retval;
     _retval = graphene_box_get_depth(cast(const(graphene_box_t)*)this._cPtr);
@@ -202,7 +202,7 @@ class Box : gobject.boxed.Boxed
       Retrieves the size of the box on the Y axis.
       Returns: the height of the box
   */
-  float getHeight()
+  float getHeight() nothrow
   {
     float _retval;
     _retval = graphene_box_get_height(cast(const(graphene_box_t)*)this._cPtr);
@@ -216,7 +216,7 @@ class Box : gobject.boxed.Boxed
       Params:
         max = return location for the maximum point
   */
-  void getMax(out graphene.point3_d.Point3D max)
+  void getMax(out graphene.point3_d.Point3D max) nothrow
   {
     graphene_box_get_max(cast(const(graphene_box_t)*)this._cPtr, cast(graphene_point3d_t*)&max);
   }
@@ -228,7 +228,7 @@ class Box : gobject.boxed.Boxed
       Params:
         min = return location for the minimum point
   */
-  void getMin(out graphene.point3_d.Point3D min)
+  void getMin(out graphene.point3_d.Point3D min) nothrow
   {
     graphene_box_get_min(cast(const(graphene_box_t)*)this._cPtr, cast(graphene_point3d_t*)&min);
   }
@@ -240,7 +240,7 @@ class Box : gobject.boxed.Boxed
       Params:
         size = return location for the size
   */
-  void getSize(out graphene.vec3.Vec3 size)
+  void getSize(out graphene.vec3.Vec3 size) nothrow
   {
     graphene_vec3_t _size;
     graphene_box_get_size(cast(const(graphene_box_t)*)this._cPtr, &_size);
@@ -254,7 +254,7 @@ class Box : gobject.boxed.Boxed
         vertices = return location for an array
             of 8 #graphene_vec3_t
   */
-  void getVertices(ref graphene.vec3.Vec3[] vertices)
+  void getVertices(ref graphene.vec3.Vec3[] vertices) nothrow
   {
     graphene_vec3_t[] _vertices;
     _vertices.length = 8;
@@ -268,7 +268,7 @@ class Box : gobject.boxed.Boxed
       Retrieves the size of the box on the X axis.
       Returns: the width of the box
   */
-  float getWidth()
+  float getWidth() nothrow
   {
     float _retval;
     _retval = graphene_box_get_width(cast(const(graphene_box_t)*)this._cPtr);
@@ -283,7 +283,7 @@ class Box : gobject.boxed.Boxed
         max = the coordinates of the maximum vertex
       Returns: the initialized #graphene_box_t
   */
-  graphene.box.Box init_(graphene.point3_d.Point3D min, graphene.point3_d.Point3D max)
+  graphene.box.Box init_(graphene.point3_d.Point3D min, graphene.point3_d.Point3D max) nothrow
   {
     graphene_box_t* _cretval;
     _cretval = graphene_box_init(cast(graphene_box_t*)this._cPtr, cast(const(graphene_point3d_t)*)&min, cast(const(graphene_point3d_t)*)&max);
@@ -299,7 +299,7 @@ class Box : gobject.boxed.Boxed
         src = a #graphene_box_t
       Returns: the initialized #graphene_box_t
   */
-  graphene.box.Box initFromBox(graphene.box.Box src)
+  graphene.box.Box initFromBox(graphene.box.Box src) nothrow
   {
     graphene_box_t* _cretval;
     _cretval = graphene_box_init_from_box(cast(graphene_box_t*)this._cPtr, src ? cast(const(graphene_box_t)*)src._cPtr(No.Dup) : null);
@@ -318,7 +318,7 @@ class Box : gobject.boxed.Boxed
         points = an array of #graphene_point3d_t
       Returns: the initialized #graphene_box_t
   */
-  graphene.box.Box initFromPoints(graphene.point3_d.Point3D[] points)
+  graphene.box.Box initFromPoints(graphene.point3_d.Point3D[] points) nothrow
   {
     graphene_box_t* _cretval;
     uint _nPoints;
@@ -340,7 +340,7 @@ class Box : gobject.boxed.Boxed
         max = the coordinates of the maximum vertex
       Returns: the initialized #graphene_box_t
   */
-  graphene.box.Box initFromVec3(graphene.vec3.Vec3 min = null, graphene.vec3.Vec3 max = null)
+  graphene.box.Box initFromVec3(graphene.vec3.Vec3 min = null, graphene.vec3.Vec3 max = null) nothrow
   {
     graphene_box_t* _cretval;
     _cretval = graphene_box_init_from_vec3(cast(graphene_box_t*)this._cPtr, min ? cast(const(graphene_vec3_t)*)min._cPtr(No.Dup) : null, max ? cast(const(graphene_vec3_t)*)max._cPtr(No.Dup) : null);
@@ -359,7 +359,7 @@ class Box : gobject.boxed.Boxed
         vectors = an array of #graphene_vec3_t
       Returns: the initialized #graphene_box_t
   */
-  graphene.box.Box initFromVectors(graphene.vec3.Vec3[] vectors)
+  graphene.box.Box initFromVectors(graphene.vec3.Vec3[] vectors) nothrow
   {
     graphene_box_t* _cretval;
     uint _nVectors;
@@ -387,7 +387,7 @@ class Box : gobject.boxed.Boxed
         res = return location for the result
       Returns: true if the two boxes intersect
   */
-  bool intersection(graphene.box.Box b, out graphene.box.Box res)
+  bool intersection(graphene.box.Box b, out graphene.box.Box res) nothrow
   {
     bool _retval;
     graphene_box_t _res;
@@ -403,7 +403,7 @@ class Box : gobject.boxed.Boxed
         b = the box to union to `a`
         res = return location for the result
   */
-  void union_(graphene.box.Box b, out graphene.box.Box res)
+  void union_(graphene.box.Box b, out graphene.box.Box res) nothrow
   {
     graphene_box_t _res;
     graphene_box_union(cast(const(graphene_box_t)*)this._cPtr, b ? cast(const(graphene_box_t)*)b._cPtr(No.Dup) : null, &_res);
@@ -416,7 +416,7 @@ class Box : gobject.boxed.Boxed
       The returned value is owned by Graphene and should not be modified or freed.
       Returns: a #graphene_box_t
   */
-  static graphene.box.Box empty()
+  static graphene.box.Box empty() nothrow
   {
     const(graphene_box_t)* _cretval;
     _cretval = graphene_box_empty();
@@ -430,7 +430,7 @@ class Box : gobject.boxed.Boxed
       The returned value is owned by Graphene and should not be modified or freed.
       Returns: a #graphene_box_t
   */
-  static graphene.box.Box infinite()
+  static graphene.box.Box infinite() nothrow
   {
     const(graphene_box_t)* _cretval;
     _cretval = graphene_box_infinite();
@@ -445,7 +445,7 @@ class Box : gobject.boxed.Boxed
       The returned value is owned by Graphene and should not be modified or freed.
       Returns: a #graphene_box_t
   */
-  static graphene.box.Box minusOne()
+  static graphene.box.Box minusOne() nothrow
   {
     const(graphene_box_t)* _cretval;
     _cretval = graphene_box_minus_one();
@@ -460,7 +460,7 @@ class Box : gobject.boxed.Boxed
       The returned value is owned by Graphene and should not be modified or freed.
       Returns: a #graphene_box_t
   */
-  static graphene.box.Box one()
+  static graphene.box.Box one() nothrow
   {
     const(graphene_box_t)* _cretval;
     _cretval = graphene_box_one();
@@ -475,7 +475,7 @@ class Box : gobject.boxed.Boxed
       The returned value is owned by Graphene and should not be modified or freed.
       Returns: a #graphene_box_t
   */
-  static graphene.box.Box oneMinusOne()
+  static graphene.box.Box oneMinusOne() nothrow
   {
     const(graphene_box_t)* _cretval;
     _cretval = graphene_box_one_minus_one();
@@ -489,7 +489,7 @@ class Box : gobject.boxed.Boxed
       The returned value is owned by Graphene and should not be modified or freed.
       Returns: a #graphene_box_t
   */
-  static graphene.box.Box zero()
+  static graphene.box.Box zero() nothrow
   {
     const(graphene_box_t)* _cretval;
     _cretval = graphene_box_zero();

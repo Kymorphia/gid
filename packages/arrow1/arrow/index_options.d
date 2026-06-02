@@ -16,26 +16,26 @@ class IndexOptions : arrow.function_options.FunctionOptions
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_index_options_get_type != &gidSymbolNotFound ? garrow_index_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override IndexOptions self()
+  override IndexOptions self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class IndexOptions : arrow.function_options.FunctionOptions
       Get builder for [arrow.index_options.IndexOptions]
       Returns: New builder object
   */
-  static IndexOptionsGidBuilder builder()
+  static IndexOptionsGidBuilder builder() nothrow
   {
     return new IndexOptionsGidBuilder;
   }
@@ -53,7 +53,7 @@ class IndexOptions : arrow.function_options.FunctionOptions
       Get `value` property.
       Returns: The value to be compared.
   */
-  @property arrow.scalar.Scalar value()
+  @property arrow.scalar.Scalar value() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.scalar.Scalar)("value");
   }
@@ -63,13 +63,13 @@ class IndexOptions : arrow.function_options.FunctionOptions
       Params:
         propval = The value to be compared.
   */
-  @property void value(arrow.scalar.Scalar propval)
+  @property void value(arrow.scalar.Scalar propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(arrow.scalar.Scalar)("value", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowIndexOptions* _cretval;
     _cretval = garrow_index_options_new();
@@ -87,7 +87,7 @@ class IndexOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidB
         propval = The value to be compared.
       Returns: Builder instance for fluent chaining
   */
-  T value(arrow.scalar.Scalar propval)
+  T value(arrow.scalar.Scalar propval) nothrow
   {
     return setProperty("value", propval);
   }
@@ -100,7 +100,7 @@ final class IndexOptionsGidBuilder : IndexOptionsGidBuilderImpl!IndexOptionsGidB
       Create object from builder.
       Returns: New object
   */
-  IndexOptions build()
+  IndexOptions build() nothrow
   {
     return new IndexOptions(cast(void*)createGObject(IndexOptions._getGType), Yes.Take);
   }

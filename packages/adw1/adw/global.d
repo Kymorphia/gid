@@ -18,7 +18,7 @@ import gtk.widget;
       widget = a [gtk.widget.Widget]
     Returns: whether animations are enabled for widget
 */
-bool getEnableAnimations(gtk.widget.Widget widget)
+bool getEnableAnimations(gtk.widget.Widget widget) nothrow
 {
   bool _retval;
   _retval = cast(bool)adw_get_enable_animations(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
@@ -36,7 +36,7 @@ bool getEnableAnimations(gtk.widget.Widget widget)
     included when compiling your code.
     Returns: the major version number of the Adwaita library
 */
-uint getMajorVersion()
+uint getMajorVersion() nothrow
 {
   uint _retval;
   _retval = adw_get_major_version();
@@ -54,7 +54,7 @@ uint getMajorVersion()
     included when compiling your code.
     Returns: the micro version number of the Adwaita library
 */
-uint getMicroVersion()
+uint getMicroVersion() nothrow
 {
   uint _retval;
   _retval = adw_get_micro_version();
@@ -72,7 +72,7 @@ uint getMicroVersion()
     included when compiling your code.
     Returns: the minor version number of the Adwaita library
 */
-uint getMinorVersion()
+uint getMinorVersion() nothrow
 {
   uint _retval;
   _retval = adw_get_minor_version();
@@ -92,7 +92,7 @@ uint getMinorVersion()
     This makes sure translations, types, themes, and icons for the Adwaita
     library are set up properly.
 */
-void init_()
+void init_() nothrow
 {
   adw_init();
 }
@@ -102,7 +102,7 @@ void init_()
     `funcinit`.
     Returns: the initialization status
 */
-bool isInitialized()
+bool isInitialized() nothrow
 {
   bool _retval;
   _retval = cast(bool)adw_is_initialized();
@@ -118,7 +118,7 @@ bool isInitialized()
       t = the interpolation rate
     Returns: the computed value
 */
-double lerp(double a, double b, double t)
+double lerp(double a, double b, double t) nothrow
 {
   double _retval;
   _retval = adw_lerp(a, b, t);

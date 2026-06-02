@@ -14,26 +14,26 @@ class NglRenderer : gsk.renderer.Renderer
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_ngl_renderer_get_type != &gidSymbolNotFound ? gsk_ngl_renderer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NglRenderer self()
+  override NglRenderer self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class NglRenderer : gsk.renderer.Renderer
       Get builder for [gsk.ngl_renderer.NglRenderer]
       Returns: New builder object
   */
-  static NglRendererGidBuilder builder()
+  static NglRendererGidBuilder builder() nothrow
   {
     return new NglRendererGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GskRenderer* _cretval;
     _cretval = gsk_ngl_renderer_new();
@@ -68,7 +68,7 @@ final class NglRendererGidBuilder : NglRendererGidBuilderImpl!NglRendererGidBuil
       Create object from builder.
       Returns: New object
   */
-  NglRenderer build()
+  NglRenderer build() nothrow
   {
     return new NglRenderer(cast(void*)createGObject(NglRenderer._getGType), Yes.Take);
   }

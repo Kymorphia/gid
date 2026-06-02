@@ -33,26 +33,26 @@ class ContentProvider : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_content_provider_get_type != &gidSymbolNotFound ? gdk_content_provider_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ContentProvider self()
+  override ContentProvider self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class ContentProvider : gobject.object.ObjectWrap
       Get builder for [gdk.content_provider.ContentProvider]
       Returns: New builder object
   */
-  static ContentProviderGidBuilder builder()
+  static ContentProviderGidBuilder builder() nothrow
   {
     return new ContentProviderGidBuilder;
   }
@@ -70,7 +70,7 @@ class ContentProvider : gobject.object.ObjectWrap
       Get `formats` property.
       Returns: The possible formats that the provider can provide its data in.
   */
-  @property gdk.content_formats.ContentFormats formats()
+  @property gdk.content_formats.ContentFormats formats() nothrow
   {
     return refFormats();
   }
@@ -79,7 +79,7 @@ class ContentProvider : gobject.object.ObjectWrap
       Get `storableFormats` property.
       Returns: The subset of formats that clipboard managers should store this provider's data in.
   */
-  @property gdk.content_formats.ContentFormats storableFormats()
+  @property gdk.content_formats.ContentFormats storableFormats() nothrow
   {
     return refStorableFormats();
   }
@@ -93,7 +93,7 @@ class ContentProvider : gobject.object.ObjectWrap
         bytes = a [glib.bytes.Bytes] with the data for mime_type
       Returns: a new [gdk.content_provider.ContentProvider]
   */
-  static gdk.content_provider.ContentProvider newForBytes(string mimeType, glib.bytes.Bytes bytes)
+  static gdk.content_provider.ContentProvider newForBytes(string mimeType, glib.bytes.Bytes bytes) nothrow
   {
     GdkContentProvider* _cretval;
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
@@ -109,7 +109,7 @@ class ContentProvider : gobject.object.ObjectWrap
         value = a [gobject.value.Value]
       Returns: a new [gdk.content_provider.ContentProvider]
   */
-  static gdk.content_provider.ContentProvider newForValue(gobject.value.Value value)
+  static gdk.content_provider.ContentProvider newForValue(gobject.value.Value value) nothrow
   {
     GdkContentProvider* _cretval;
     _cretval = gdk_content_provider_new_for_value(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -120,7 +120,7 @@ class ContentProvider : gobject.object.ObjectWrap
   /**
       Emits the ::content-changed signal.
   */
-  void contentChanged()
+  void contentChanged() nothrow
   {
     gdk_content_provider_content_changed(cast(GdkContentProvider*)this._cPtr);
   }
@@ -156,7 +156,7 @@ class ContentProvider : gobject.object.ObjectWrap
       Gets the formats that the provider can provide its current contents in.
       Returns: The formats of the provider
   */
-  gdk.content_formats.ContentFormats refFormats()
+  gdk.content_formats.ContentFormats refFormats() nothrow
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_content_provider_ref_formats(cast(GdkContentProvider*)this._cPtr);
@@ -173,7 +173,7 @@ class ContentProvider : gobject.object.ObjectWrap
       This can be assumed to be a subset of [gdk.content_provider.ContentProvider.refFormats].
       Returns: The storable formats of the provider
   */
-  gdk.content_formats.ContentFormats refStorableFormats()
+  gdk.content_formats.ContentFormats refStorableFormats() nothrow
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_content_provider_ref_storable_formats(cast(GdkContentProvider*)this._cPtr);
@@ -202,14 +202,21 @@ class ContentProvider : gobject.object.ObjectWrap
         cancellable = optional [gio.cancellable.Cancellable] object, null to ignore.
         callback = callback to call when the request is satisfied
   */
-  void writeMimeTypeAsync(string mimeType, gio.output_stream.OutputStream stream, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void writeMimeTypeAsync(string mimeType, gio.output_stream.OutputStream stream, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
@@ -253,13 +260,13 @@ class ContentProvider : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectContentChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectContentChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.content_provider.ContentProvider)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -268,7 +275,14 @@ class ContentProvider : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.content_provider.ContentProvider.contentChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -288,7 +302,7 @@ final class ContentProviderGidBuilder : ContentProviderGidBuilderImpl!ContentPro
       Create object from builder.
       Returns: New object
   */
-  ContentProvider build()
+  ContentProvider build() nothrow
   {
     return new ContentProvider(cast(void*)createGObject(ContentProvider._getGType), No.Take);
   }

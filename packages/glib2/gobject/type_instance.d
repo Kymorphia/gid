@@ -15,11 +15,8 @@ class TypeInstance
   GTypeInstance _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gobject.type_instance.TypeInstance");
-
     _cInstance = *cast(GTypeInstance*)ptr;
 
     if (take)
@@ -27,13 +24,13 @@ class TypeInstance
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
 
   /** */
-  void* getPrivate(gobject.types.GType privateType)
+  void* getPrivate(gobject.types.GType privateType) nothrow
   {
     auto _retval = g_type_instance_get_private(cast(GTypeInstance*)this._cPtr, privateType);
     return _retval;

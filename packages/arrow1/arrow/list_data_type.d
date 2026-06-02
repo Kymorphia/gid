@@ -16,26 +16,26 @@ class ListDataType : arrow.data_type.DataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_list_data_type_get_type != &gidSymbolNotFound ? garrow_list_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ListDataType self()
+  override ListDataType self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class ListDataType : arrow.data_type.DataType
       Get builder for [arrow.list_data_type.ListDataType]
       Returns: New builder object
   */
-  static ListDataTypeGidBuilder builder()
+  static ListDataTypeGidBuilder builder() nothrow
   {
     return new ListDataTypeGidBuilder;
   }
 
   /** */
-  this(arrow.field.Field field)
+  this(arrow.field.Field field) nothrow
   {
     GArrowListDataType* _cretval;
     _cretval = garrow_list_data_type_new(field ? cast(GArrowField*)field._cPtr(No.Dup) : null);
@@ -58,7 +58,7 @@ class ListDataType : arrow.data_type.DataType
   }
 
   /** */
-  arrow.field.Field getField()
+  arrow.field.Field getField() nothrow
   {
     GArrowField* _cretval;
     _cretval = garrow_list_data_type_get_field(cast(GArrowListDataType*)this._cPtr);
@@ -67,7 +67,7 @@ class ListDataType : arrow.data_type.DataType
   }
 
   /** */
-  arrow.field.Field getValueField()
+  arrow.field.Field getValueField() nothrow
   {
     GArrowField* _cretval;
     _cretval = garrow_list_data_type_get_value_field(cast(GArrowListDataType*)this._cPtr);
@@ -88,7 +88,7 @@ final class ListDataTypeGidBuilder : ListDataTypeGidBuilderImpl!ListDataTypeGidB
       Create object from builder.
       Returns: New object
   */
-  ListDataType build()
+  ListDataType build() nothrow
   {
     return new ListDataType(cast(void*)createGObject(ListDataType._getGType), Yes.Take);
   }

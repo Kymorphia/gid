@@ -16,18 +16,15 @@ class BuildableParseContext
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.buildable_parse_context.BuildableParseContext");
-
     _cInstancePtr = cast(GtkBuildableParseContext*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -40,7 +37,7 @@ class BuildableParseContext
       elements, see [gtk.buildable_parse_context.BuildableParseContext.getElementStack].
       Returns: the name of the currently open element
   */
-  string getElement()
+  string getElement() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_buildable_parse_context_get_element(cast(GtkBuildableParseContext*)this._cPtr);
@@ -62,7 +59,7 @@ class BuildableParseContext
       processed.
       Returns: the element stack, which must not be modified
   */
-  string[] getElementStack()
+  string[] getElementStack() nothrow
   {
     GPtrArray* _cretval;
     _cretval = gtk_buildable_parse_context_get_element_stack(cast(GtkBuildableParseContext*)this._cPtr);
@@ -80,7 +77,7 @@ class BuildableParseContext
         lineNumber = return location for a line number
         charNumber = return location for a char-on-line number
   */
-  void getPosition(out int lineNumber, out int charNumber)
+  void getPosition(out int lineNumber, out int charNumber) nothrow
   {
     gtk_buildable_parse_context_get_position(cast(GtkBuildableParseContext*)this._cPtr, cast(int*)&lineNumber, cast(int*)&charNumber);
   }
@@ -101,7 +98,7 @@ class BuildableParseContext
       interface.
       Returns: the user data passed to [gtk.buildable_parse_context.BuildableParseContext.push]
   */
-  void* pop()
+  void* pop() nothrow
   {
     auto _retval = gtk_buildable_parse_context_pop(cast(GtkBuildableParseContext*)this._cPtr);
     return _retval;
@@ -142,7 +139,7 @@ class BuildableParseContext
         parser = a [gtk.types.BuildableParser]
         userData = user data to pass to [gtk.types.BuildableParser] functions
   */
-  void push(gtk.types.BuildableParser parser, void* userData = null)
+  void push(gtk.types.BuildableParser parser, void* userData = null) nothrow
   {
     gtk_buildable_parse_context_push(cast(GtkBuildableParseContext*)this._cPtr, &parser, userData);
   }

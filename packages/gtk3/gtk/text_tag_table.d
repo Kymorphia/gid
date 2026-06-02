@@ -39,26 +39,26 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_tag_table_get_type != &gidSymbolNotFound ? gtk_text_tag_table_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TextTagTable self()
+  override TextTagTable self() nothrow
   {
     return this;
   }
@@ -67,7 +67,7 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Get builder for [gtk.text_tag_table.TextTagTable]
       Returns: New builder object
   */
-  static TextTagTableGidBuilder builder()
+  static TextTagTableGidBuilder builder() nothrow
   {
     return new TextTagTableGidBuilder;
   }
@@ -79,7 +79,7 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
       default.
       Returns: a new #GtkTextTagTable
   */
-  this()
+  this() nothrow
   {
     GtkTextTagTable* _cretval;
     _cretval = gtk_text_tag_table_new();
@@ -97,7 +97,7 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
         tag = a #GtkTextTag
       Returns: true on success.
   */
-  bool add(gtk.text_tag.TextTag tag)
+  bool add(gtk.text_tag.TextTag tag) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_tag_table_add(cast(GtkTextTagTable*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
@@ -112,13 +112,20 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         func = a function to call on each tag
   */
-  void foreach_(gtk.types.TextTagTableForeach func)
+  void foreach_(gtk.types.TextTagTableForeach func) nothrow
   {
-    extern(C) void _funcCallback(GtkTextTag* tag, void* data)
+    extern(C) void _funcCallback(GtkTextTag* tag, void* data) nothrow
     {
       auto _dlg = cast(gtk.types.TextTagTableForeach*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.text_tag.TextTag)(cast(void*)tag, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.text_tag.TextTag)(cast(void*)tag, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.TextTagTableForeach");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -129,7 +136,7 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Returns the size of the table (number of tags)
       Returns: number of tags in table
   */
-  int getSize()
+  int getSize() nothrow
   {
     int _retval;
     _retval = gtk_text_tag_table_get_size(cast(GtkTextTagTable*)this._cPtr);
@@ -144,7 +151,7 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Returns: The tag, or null if none by that
         name is in the table.
   */
-  gtk.text_tag.TextTag lookup(string name)
+  gtk.text_tag.TextTag lookup(string name) nothrow
   {
     GtkTextTag* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -162,7 +169,7 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         tag = a #GtkTextTag
   */
-  void remove(gtk.text_tag.TextTag tag)
+  void remove(gtk.text_tag.TextTag tag) nothrow
   {
     gtk_text_tag_table_remove(cast(GtkTextTagTable*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
   }
@@ -184,14 +191,14 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTagAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTagAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_tag.TextTag)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text_tag_table.TextTagTable)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -203,7 +210,14 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_tag_table.TextTagTable.tagAdded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -229,7 +243,7 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTagChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTagChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_tag.TextTag)))
@@ -237,7 +251,7 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.text_tag_table.TextTagTable)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -252,7 +266,14 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_tag_table.TextTagTable.tagChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -276,14 +297,14 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTagRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTagRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_tag.TextTag)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text_tag_table.TextTagTable)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -295,7 +316,14 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_tag_table.TextTagTable.tagRemoved");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -317,7 +345,7 @@ final class TextTagTableGidBuilder : TextTagTableGidBuilderImpl!TextTagTableGidB
       Create object from builder.
       Returns: New object
   */
-  TextTagTable build()
+  TextTagTable build() nothrow
   {
     return new TextTagTable(cast(void*)createGObject(TextTagTable._getGType), Yes.Take);
   }

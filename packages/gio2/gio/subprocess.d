@@ -80,26 +80,26 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_subprocess_get_type != &gidSymbolNotFound ? g_subprocess_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Subprocess self()
+  override Subprocess self() nothrow
   {
     return this;
   }
@@ -108,7 +108,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
       Get builder for [gio.subprocess.Subprocess]
       Returns: New builder object
   */
-  static SubprocessGidBuilder builder()
+  static SubprocessGidBuilder builder() nothrow
   {
     return new SubprocessGidBuilder;
   }
@@ -218,14 +218,21 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
         cancellable = Cancellable
         callback = Callback
   */
-  void communicateAsync(glib.bytes.Bytes stdinBuf = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void communicateAsync(glib.bytes.Bytes stdinBuf = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -295,14 +302,21 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
         cancellable = Cancellable
         callback = Callback
   */
-  void communicateUtf8Async(string stdinBuf = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void communicateUtf8Async(string stdinBuf = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _stdinBuf = stdinBuf.toCString(No.Alloc);
@@ -343,7 +357,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
       
       On Unix, this function sends `SIGKILL`.
   */
-  void forceExit()
+  void forceExit() nothrow
   {
     g_subprocess_force_exit(cast(GSubprocess*)this._cPtr);
   }
@@ -359,7 +373,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
       unless [gio.subprocess.Subprocess.getIfExited] returned true.
       Returns: the exit status
   */
-  int getExitStatus()
+  int getExitStatus() nothrow
   {
     int _retval;
     _retval = g_subprocess_get_exit_status(cast(GSubprocess*)this._cPtr);
@@ -373,7 +387,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
       Returns: the subprocess identifier, or null if the subprocess
            has terminated
   */
-  string getIdentifier()
+  string getIdentifier() nothrow
   {
     const(char)* _cretval;
     _cretval = g_subprocess_get_identifier(cast(GSubprocess*)this._cPtr);
@@ -391,7 +405,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
       returned.
       Returns: true if the case of a normal exit
   */
-  bool getIfExited()
+  bool getIfExited() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_subprocess_get_if_exited(cast(GSubprocess*)this._cPtr);
@@ -407,7 +421,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
       returned.
       Returns: true if the case of termination due to a signal
   */
-  bool getIfSignaled()
+  bool getIfSignaled() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_subprocess_get_if_signaled(cast(GSubprocess*)this._cPtr);
@@ -428,7 +442,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
       returned.
       Returns: the (meaningless) waitpid() exit status from the kernel
   */
-  int getStatus()
+  int getStatus() nothrow
   {
     int _retval;
     _retval = g_subprocess_get_status(cast(GSubprocess*)this._cPtr);
@@ -443,7 +457,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
       otherwise null will be returned.
       Returns: the stderr pipe
   */
-  gio.input_stream.InputStream getStderrPipe()
+  gio.input_stream.InputStream getStderrPipe() nothrow
   {
     GInputStream* _cretval;
     _cretval = g_subprocess_get_stderr_pipe(cast(GSubprocess*)this._cPtr);
@@ -459,7 +473,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
       not [gio.types.SubprocessFlags.StdinInherit], otherwise null will be returned.
       Returns: the stdout pipe
   */
-  gio.output_stream.OutputStream getStdinPipe()
+  gio.output_stream.OutputStream getStdinPipe() nothrow
   {
     GOutputStream* _cretval;
     _cretval = g_subprocess_get_stdin_pipe(cast(GSubprocess*)this._cPtr);
@@ -475,7 +489,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
       otherwise null will be returned.
       Returns: the stdout pipe
   */
-  gio.input_stream.InputStream getStdoutPipe()
+  gio.input_stream.InputStream getStdoutPipe() nothrow
   {
     GInputStream* _cretval;
     _cretval = g_subprocess_get_stdout_pipe(cast(GSubprocess*)this._cPtr);
@@ -492,7 +506,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
       returned.
       Returns: true if the process exited cleanly with a exit status of 0
   */
-  bool getSuccessful()
+  bool getSuccessful() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_subprocess_get_successful(cast(GSubprocess*)this._cPtr);
@@ -509,7 +523,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
       unless [gio.subprocess.Subprocess.getIfSignaled] returned true.
       Returns: the signal causing termination
   */
-  int getTermSig()
+  int getTermSig() nothrow
   {
     int _retval;
     _retval = g_subprocess_get_term_sig(cast(GSubprocess*)this._cPtr);
@@ -528,7 +542,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
       Params:
         signalNum = the signal number to send
   */
-  void sendSignal(int signalNum)
+  void sendSignal(int signalNum) nothrow
   {
     g_subprocess_send_signal(cast(GSubprocess*)this._cPtr, signalNum);
   }
@@ -570,14 +584,21 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
         cancellable = a #GCancellable, or null
         callback = a #GAsyncReadyCallback to call when the operation is complete
   */
-  void waitAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void waitAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -612,14 +633,21 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
         cancellable = a #GCancellable, or null
         callback = a #GAsyncReadyCallback to call when the operation is complete
   */
-  void waitCheckAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void waitCheckAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -677,7 +705,7 @@ class SubprocessGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
         propval = Subprocess flags.
       Returns: Builder instance for fluent chaining
   */
-  T flags(gio.types.SubprocessFlags propval)
+  T flags(gio.types.SubprocessFlags propval) nothrow
   {
     return setProperty("flags", propval);
   }
@@ -690,7 +718,7 @@ final class SubprocessGidBuilder : SubprocessGidBuilderImpl!SubprocessGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Subprocess build()
+  Subprocess build() nothrow
   {
     return new Subprocess(cast(void*)createGObject(Subprocess._getGType), Yes.Take);
   }

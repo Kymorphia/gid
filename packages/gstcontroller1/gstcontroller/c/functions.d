@@ -16,7 +16,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgstcontroller-1.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // ARGBControlBinding
   GType function() c_gst_argb_control_binding_get_type; ///

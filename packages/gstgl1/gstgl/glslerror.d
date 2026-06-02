@@ -14,7 +14,7 @@ struct GLSLError
   alias Enum = gstgl.types.GLSLError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gst_glsl_error_quark();
@@ -24,12 +24,12 @@ struct GLSLError
 
 class GLSLException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gstgl.glslerror.GLSLError.quark, cast(int)code, msg);
   }

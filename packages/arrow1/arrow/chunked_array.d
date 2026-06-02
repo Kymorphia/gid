@@ -21,26 +21,26 @@ class ChunkedArray : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_chunked_array_get_type != &gidSymbolNotFound ? garrow_chunked_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ChunkedArray self()
+  override ChunkedArray self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class ChunkedArray : gobject.object.ObjectWrap
       Get builder for [arrow.chunked_array.ChunkedArray]
       Returns: New builder object
   */
-  static ChunkedArrayGidBuilder builder()
+  static ChunkedArrayGidBuilder builder() nothrow
   {
     return new ChunkedArrayGidBuilder;
   }
@@ -92,7 +92,7 @@ class ChunkedArray : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equal(arrow.chunked_array.ChunkedArray otherChunkedArray)
+  bool equal(arrow.chunked_array.ChunkedArray otherChunkedArray) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_chunked_array_equal(cast(GArrowChunkedArray*)this._cPtr, otherChunkedArray ? cast(GArrowChunkedArray*)otherChunkedArray._cPtr(No.Dup) : null);
@@ -124,7 +124,7 @@ class ChunkedArray : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.array.Array getChunk(uint i)
+  arrow.array.Array getChunk(uint i) nothrow
   {
     GArrowArray* _cretval;
     _cretval = garrow_chunked_array_get_chunk(cast(GArrowChunkedArray*)this._cPtr, i);
@@ -133,7 +133,7 @@ class ChunkedArray : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.array.Array[] getChunks()
+  arrow.array.Array[] getChunks() nothrow
   {
     GList* _cretval;
     _cretval = garrow_chunked_array_get_chunks(cast(GArrowChunkedArray*)this._cPtr);
@@ -142,7 +142,7 @@ class ChunkedArray : gobject.object.ObjectWrap
   }
 
   /** */
-  ulong getLength()
+  ulong getLength() nothrow
   {
     ulong _retval;
     _retval = garrow_chunked_array_get_length(cast(GArrowChunkedArray*)this._cPtr);
@@ -150,7 +150,7 @@ class ChunkedArray : gobject.object.ObjectWrap
   }
 
   /** */
-  uint getNChunks()
+  uint getNChunks() nothrow
   {
     uint _retval;
     _retval = garrow_chunked_array_get_n_chunks(cast(GArrowChunkedArray*)this._cPtr);
@@ -158,7 +158,7 @@ class ChunkedArray : gobject.object.ObjectWrap
   }
 
   /** */
-  ulong getNNulls()
+  ulong getNNulls() nothrow
   {
     ulong _retval;
     _retval = garrow_chunked_array_get_n_nulls(cast(GArrowChunkedArray*)this._cPtr);
@@ -166,7 +166,7 @@ class ChunkedArray : gobject.object.ObjectWrap
   }
 
   /** */
-  ulong getNRows()
+  ulong getNRows() nothrow
   {
     ulong _retval;
     _retval = garrow_chunked_array_get_n_rows(cast(GArrowChunkedArray*)this._cPtr);
@@ -174,7 +174,7 @@ class ChunkedArray : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.data_type.DataType getValueDataType()
+  arrow.data_type.DataType getValueDataType() nothrow
   {
     GArrowDataType* _cretval;
     _cretval = garrow_chunked_array_get_value_data_type(cast(GArrowChunkedArray*)this._cPtr);
@@ -183,7 +183,7 @@ class ChunkedArray : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.types.Type getValueType()
+  arrow.types.Type getValueType() nothrow
   {
     GArrowType _cretval;
     _cretval = garrow_chunked_array_get_value_type(cast(GArrowChunkedArray*)this._cPtr);
@@ -192,7 +192,7 @@ class ChunkedArray : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.chunked_array.ChunkedArray slice(ulong offset, ulong length)
+  arrow.chunked_array.ChunkedArray slice(ulong offset, ulong length) nothrow
   {
     GArrowChunkedArray* _cretval;
     _cretval = garrow_chunked_array_slice(cast(GArrowChunkedArray*)this._cPtr, offset, length);
@@ -254,13 +254,13 @@ class ChunkedArrayGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T chunkedArray(void* propval)
+  T chunkedArray(void* propval) nothrow
   {
     return setProperty("chunked-array", propval);
   }
 
   /** */
-  T dataType(arrow.data_type.DataType propval)
+  T dataType(arrow.data_type.DataType propval) nothrow
   {
     return setProperty("data-type", propval);
   }
@@ -273,7 +273,7 @@ final class ChunkedArrayGidBuilder : ChunkedArrayGidBuilderImpl!ChunkedArrayGidB
       Create object from builder.
       Returns: New object
   */
-  ChunkedArray build()
+  ChunkedArray build() nothrow
   {
     return new ChunkedArray(cast(void*)createGObject(ChunkedArray._getGType), Yes.Take);
   }

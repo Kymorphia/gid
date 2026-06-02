@@ -109,26 +109,26 @@ class Image : gtk.misc.Misc
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_image_get_type != &gidSymbolNotFound ? gtk_image_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Image self()
+  override Image self() nothrow
   {
     return this;
   }
@@ -137,19 +137,19 @@ class Image : gtk.misc.Misc
       Get builder for [gtk.image.Image]
       Returns: New builder object
   */
-  static ImageGidBuilder builder()
+  static ImageGidBuilder builder() nothrow
   {
     return new ImageGidBuilder;
   }
 
   /** */
-  @property string file()
+  @property string file() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("file");
   }
 
   /** */
-  @property void file(string propval)
+  @property void file(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("file", propval);
   }
@@ -160,7 +160,7 @@ class Image : gtk.misc.Misc
         If the icon theme is changed, the image will be updated
         automatically.
   */
-  @property gio.icon.Icon gicon()
+  @property gio.icon.Icon gicon() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.icon.Icon)("gicon");
   }
@@ -172,7 +172,7 @@ class Image : gtk.misc.Misc
           If the icon theme is changed, the image will be updated
           automatically.
   */
-  @property void gicon(gio.icon.Icon propval)
+  @property void gicon(gio.icon.Icon propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gio.icon.Icon)("gicon", propval);
   }
@@ -182,7 +182,7 @@ class Image : gtk.misc.Misc
       Returns: The name of the icon in the icon theme. If the icon theme is
         changed, the image will be updated automatically.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("icon-name");
   }
@@ -193,55 +193,55 @@ class Image : gtk.misc.Misc
         propval = The name of the icon in the icon theme. If the icon theme is
           changed, the image will be updated automatically.
   */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("icon-name", propval);
   }
 
   /** */
-  @property gtk.icon_set.IconSet iconSet()
+  @property gtk.icon_set.IconSet iconSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.icon_set.IconSet)("icon-set");
   }
 
   /** */
-  @property void iconSet(gtk.icon_set.IconSet propval)
+  @property void iconSet(gtk.icon_set.IconSet propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.icon_set.IconSet)("icon-set", propval);
   }
 
   /** */
-  @property int iconSize()
+  @property int iconSize() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("icon-size");
   }
 
   /** */
-  @property void iconSize(int propval)
+  @property void iconSize(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("icon-size", propval);
   }
 
   /** */
-  @property gdkpixbuf.pixbuf.Pixbuf pixbuf()
+  @property gdkpixbuf.pixbuf.Pixbuf pixbuf() nothrow
   {
     return getPixbuf();
   }
 
   /** */
-  @property void pixbuf(gdkpixbuf.pixbuf.Pixbuf propval)
+  @property void pixbuf(gdkpixbuf.pixbuf.Pixbuf propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdkpixbuf.pixbuf.Pixbuf)("pixbuf", propval);
   }
 
   /** */
-  @property gdkpixbuf.pixbuf_animation.PixbufAnimation pixbufAnimation()
+  @property gdkpixbuf.pixbuf_animation.PixbufAnimation pixbufAnimation() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdkpixbuf.pixbuf_animation.PixbufAnimation)("pixbuf-animation");
   }
 
   /** */
-  @property void pixbufAnimation(gdkpixbuf.pixbuf_animation.PixbufAnimation propval)
+  @property void pixbufAnimation(gdkpixbuf.pixbuf_animation.PixbufAnimation propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdkpixbuf.pixbuf_animation.PixbufAnimation)("pixbuf-animation", propval);
   }
@@ -252,7 +252,7 @@ class Image : gtk.misc.Misc
         overriding the #GtkImage:icon-size property for images of type
         [gtk.types.ImageType.IconName].
   */
-  @property int pixelSize()
+  @property int pixelSize() nothrow
   {
     return getPixelSize();
   }
@@ -264,7 +264,7 @@ class Image : gtk.misc.Misc
           overriding the #GtkImage:icon-size property for images of type
           [gtk.types.ImageType.IconName].
   */
-  @property void pixelSize(int propval)
+  @property void pixelSize(int propval) nothrow
   {
     setPixelSize(propval);
   }
@@ -273,7 +273,7 @@ class Image : gtk.misc.Misc
       Get `resource` property.
       Returns: A path to a resource file to display.
   */
-  @property string resource()
+  @property string resource() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("resource");
   }
@@ -283,37 +283,37 @@ class Image : gtk.misc.Misc
       Params:
         propval = A path to a resource file to display.
   */
-  @property void resource(string propval)
+  @property void resource(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("resource", propval);
   }
 
   /** */
-  @property string stock()
+  @property string stock() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("stock");
   }
 
   /** */
-  @property void stock(string propval)
+  @property void stock(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("stock", propval);
   }
 
   /** */
-  @property gtk.types.ImageType storageType()
+  @property gtk.types.ImageType storageType() nothrow
   {
     return getStorageType();
   }
 
   /** */
-  @property cairo.surface.Surface surface()
+  @property cairo.surface.Surface surface() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(cairo.surface.Surface)("surface");
   }
 
   /** */
-  @property void surface(cairo.surface.Surface propval)
+  @property void surface(cairo.surface.Surface propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(cairo.surface.Surface)("surface", propval);
   }
@@ -325,7 +325,7 @@ class Image : gtk.misc.Misc
         is only relevant for images of type [gtk.types.ImageType.IconName]
         and [gtk.types.ImageType.Gicon].
   */
-  @property bool useFallback()
+  @property bool useFallback() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("use-fallback");
   }
@@ -338,7 +338,7 @@ class Image : gtk.misc.Misc
           is only relevant for images of type [gtk.types.ImageType.IconName]
           and [gtk.types.ImageType.Gicon].
   */
-  @property void useFallback(bool propval)
+  @property void useFallback(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("use-fallback", propval);
   }
@@ -347,7 +347,7 @@ class Image : gtk.misc.Misc
       Creates a new empty #GtkImage widget.
       Returns: a newly created #GtkImage widget.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_new();
@@ -369,7 +369,7 @@ class Image : gtk.misc.Misc
         animation = an animation
       Returns: a new #GtkImage widget
   */
-  static gtk.image.Image newFromAnimation(gdkpixbuf.pixbuf_animation.PixbufAnimation animation)
+  static gtk.image.Image newFromAnimation(gdkpixbuf.pixbuf_animation.PixbufAnimation animation) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_new_from_animation(animation ? cast(GdkPixbufAnimation*)animation._cPtr(No.Dup) : null);
@@ -399,7 +399,7 @@ class Image : gtk.misc.Misc
         filename = a filename
       Returns: a new #GtkImage
   */
-  static gtk.image.Image newFromFile(string filename)
+  static gtk.image.Image newFromFile(string filename) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -419,7 +419,7 @@ class Image : gtk.misc.Misc
         size = a stock icon size (#GtkIconSize)
       Returns: a new #GtkImage displaying the themed icon
   */
-  static gtk.image.Image newFromGicon(gio.icon.Icon icon, gtk.types.IconSize size)
+  static gtk.image.Image newFromGicon(gio.icon.Icon icon, gtk.types.IconSize size) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_new_from_gicon(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null, size);
@@ -438,7 +438,7 @@ class Image : gtk.misc.Misc
         size = a stock icon size (#GtkIconSize)
       Returns: a new #GtkImage displaying the themed icon
   */
-  static gtk.image.Image newFromIconName(string iconName, gtk.types.IconSize size)
+  static gtk.image.Image newFromIconName(string iconName, gtk.types.IconSize size) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
@@ -467,7 +467,7 @@ class Image : gtk.misc.Misc
   
       Deprecated: Use [gtk.image.Image.newFromIconName] instead.
   */
-  static gtk.image.Image newFromIconSet(gtk.icon_set.IconSet iconSet, gtk.types.IconSize size)
+  static gtk.image.Image newFromIconSet(gtk.icon_set.IconSet iconSet, gtk.types.IconSize size) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_new_from_icon_set(iconSet ? cast(GtkIconSet*)iconSet._cPtr(No.Dup) : null, size);
@@ -489,7 +489,7 @@ class Image : gtk.misc.Misc
         pixbuf = a #GdkPixbuf, or null
       Returns: a new #GtkImage
   */
-  static gtk.image.Image newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
+  static gtk.image.Image newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_new_from_pixbuf(pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
@@ -519,7 +519,7 @@ class Image : gtk.misc.Misc
         resourcePath = a resource path
       Returns: a new #GtkImage
   */
-  static gtk.image.Image newFromResource(string resourcePath)
+  static gtk.image.Image newFromResource(string resourcePath) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
@@ -543,7 +543,7 @@ class Image : gtk.misc.Misc
   
       Deprecated: Use [gtk.image.Image.newFromIconName] instead.
   */
-  static gtk.image.Image newFromStock(string stockId, gtk.types.IconSize size)
+  static gtk.image.Image newFromStock(string stockId, gtk.types.IconSize size) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
@@ -562,7 +562,7 @@ class Image : gtk.misc.Misc
         surface = a #cairo_surface_t, or null
       Returns: a new #GtkImage
   */
-  static gtk.image.Image newFromSurface(cairo.surface.Surface surface = null)
+  static gtk.image.Image newFromSurface(cairo.surface.Surface surface = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_new_from_surface(surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null);
@@ -573,7 +573,7 @@ class Image : gtk.misc.Misc
   /**
       Resets the image to be empty.
   */
-  void clear()
+  void clear() nothrow
   {
     gtk_image_clear(cast(GtkImage*)this._cPtr);
   }
@@ -587,7 +587,7 @@ class Image : gtk.misc.Misc
       Returns: the displayed animation, or null if
         the image is empty
   */
-  gdkpixbuf.pixbuf_animation.PixbufAnimation getAnimation()
+  gdkpixbuf.pixbuf_animation.PixbufAnimation getAnimation() nothrow
   {
     GdkPixbufAnimation* _cretval;
     _cretval = gtk_image_get_animation(cast(GtkImage*)this._cPtr);
@@ -608,7 +608,7 @@ class Image : gtk.misc.Misc
         size = place to store an icon size
               (#GtkIconSize), or null
   */
-  void getGicon(out gio.icon.Icon gicon, out gtk.types.IconSize size)
+  void getGicon(out gio.icon.Icon gicon, out gtk.types.IconSize size) nothrow
   {
     GIcon* _gicon;
     gtk_image_get_gicon(cast(GtkImage*)this._cPtr, &_gicon, &size);
@@ -628,7 +628,7 @@ class Image : gtk.misc.Misc
         size = place to store an icon size
               (#GtkIconSize), or null
   */
-  void getIconName(out string iconName, out gtk.types.IconSize size)
+  void getIconName(out string iconName, out gtk.types.IconSize size) nothrow
   {
     char* _iconName;
     gtk_image_get_icon_name(cast(GtkImage*)this._cPtr, &_iconName, &size);
@@ -648,7 +648,7 @@ class Image : gtk.misc.Misc
   
       Deprecated: Use [gtk.image.Image.getIconName] instead.
   */
-  void getIconSet(out gtk.icon_set.IconSet iconSet, out gtk.types.IconSize size)
+  void getIconSet(out gtk.icon_set.IconSet iconSet, out gtk.types.IconSize size) nothrow
   {
     GtkIconSet* _iconSet;
     gtk_image_get_icon_set(cast(GtkImage*)this._cPtr, &_iconSet, &size);
@@ -664,7 +664,7 @@ class Image : gtk.misc.Misc
       Returns: the displayed pixbuf, or null if
         the image is empty
   */
-  gdkpixbuf.pixbuf.Pixbuf getPixbuf()
+  gdkpixbuf.pixbuf.Pixbuf getPixbuf() nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gtk_image_get_pixbuf(cast(GtkImage*)this._cPtr);
@@ -676,7 +676,7 @@ class Image : gtk.misc.Misc
       Gets the pixel size used for named icons.
       Returns: the pixel size used for named icons.
   */
-  int getPixelSize()
+  int getPixelSize() nothrow
   {
     int _retval;
     _retval = gtk_image_get_pixel_size(cast(GtkImage*)this._cPtr);
@@ -698,7 +698,7 @@ class Image : gtk.misc.Misc
   
       Deprecated: Use [gtk.image.Image.getIconName] instead.
   */
-  void getStock(out string stockId, out gtk.types.IconSize size)
+  void getStock(out string stockId, out gtk.types.IconSize size) nothrow
   {
     char* _stockId;
     gtk_image_get_stock(cast(GtkImage*)this._cPtr, &_stockId, &size);
@@ -711,7 +711,7 @@ class Image : gtk.misc.Misc
       the return value will be [gtk.types.ImageType.Empty].
       Returns: image representation being used
   */
-  gtk.types.ImageType getStorageType()
+  gtk.types.ImageType getStorageType() nothrow
   {
     GtkImageType _cretval;
     _cretval = gtk_image_get_storage_type(cast(GtkImage*)this._cPtr);
@@ -726,7 +726,7 @@ class Image : gtk.misc.Misc
       Params:
         animation = the #GdkPixbufAnimation
   */
-  void setFromAnimation(gdkpixbuf.pixbuf_animation.PixbufAnimation animation)
+  void setFromAnimation(gdkpixbuf.pixbuf_animation.PixbufAnimation animation) nothrow
   {
     gtk_image_set_from_animation(cast(GtkImage*)this._cPtr, animation ? cast(GdkPixbufAnimation*)animation._cPtr(No.Dup) : null);
   }
@@ -737,7 +737,7 @@ class Image : gtk.misc.Misc
       Params:
         filename = a filename or null
   */
-  void setFromFile(string filename = null)
+  void setFromFile(string filename = null) nothrow
   {
     const(char)* _filename = filename.toCString(No.Alloc);
     gtk_image_set_from_file(cast(GtkImage*)this._cPtr, _filename);
@@ -750,7 +750,7 @@ class Image : gtk.misc.Misc
         icon = an icon
         size = an icon size (#GtkIconSize)
   */
-  void setFromGicon(gio.icon.Icon icon, gtk.types.IconSize size)
+  void setFromGicon(gio.icon.Icon icon, gtk.types.IconSize size) nothrow
   {
     gtk_image_set_from_gicon(cast(GtkImage*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null, size);
   }
@@ -762,7 +762,7 @@ class Image : gtk.misc.Misc
         iconName = an icon name or null
         size = an icon size (#GtkIconSize)
   */
-  void setFromIconName(string iconName, gtk.types.IconSize size)
+  void setFromIconName(string iconName, gtk.types.IconSize size) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_image_set_from_icon_name(cast(GtkImage*)this._cPtr, _iconName, size);
@@ -777,7 +777,7 @@ class Image : gtk.misc.Misc
   
       Deprecated: Use [gtk.image.Image.setFromIconName] instead.
   */
-  void setFromIconSet(gtk.icon_set.IconSet iconSet, gtk.types.IconSize size)
+  void setFromIconSet(gtk.icon_set.IconSet iconSet, gtk.types.IconSize size) nothrow
   {
     gtk_image_set_from_icon_set(cast(GtkImage*)this._cPtr, iconSet ? cast(GtkIconSet*)iconSet._cPtr(No.Dup) : null, size);
   }
@@ -788,7 +788,7 @@ class Image : gtk.misc.Misc
       Params:
         pixbuf = a #GdkPixbuf or null
   */
-  void setFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
+  void setFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null) nothrow
   {
     gtk_image_set_from_pixbuf(cast(GtkImage*)this._cPtr, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
@@ -799,7 +799,7 @@ class Image : gtk.misc.Misc
       Params:
         resourcePath = a resource path or null
   */
-  void setFromResource(string resourcePath = null)
+  void setFromResource(string resourcePath = null) nothrow
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     gtk_image_set_from_resource(cast(GtkImage*)this._cPtr, _resourcePath);
@@ -814,7 +814,7 @@ class Image : gtk.misc.Misc
   
       Deprecated: Use [gtk.image.Image.setFromIconName] instead.
   */
-  void setFromStock(string stockId, gtk.types.IconSize size)
+  void setFromStock(string stockId, gtk.types.IconSize size) nothrow
   {
     const(char)* _stockId = stockId.toCString(No.Alloc);
     gtk_image_set_from_stock(cast(GtkImage*)this._cPtr, _stockId, size);
@@ -826,7 +826,7 @@ class Image : gtk.misc.Misc
       Params:
         surface = a cairo_surface_t or null
   */
-  void setFromSurface(cairo.surface.Surface surface = null)
+  void setFromSurface(cairo.surface.Surface surface = null) nothrow
   {
     gtk_image_set_from_surface(cast(GtkImage*)this._cPtr, surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null);
   }
@@ -839,7 +839,7 @@ class Image : gtk.misc.Misc
       Params:
         pixelSize = the new pixel size
   */
-  void setPixelSize(int pixelSize)
+  void setPixelSize(int pixelSize) nothrow
   {
     gtk_image_set_pixel_size(cast(GtkImage*)this._cPtr, pixelSize);
   }
@@ -851,7 +851,7 @@ class ImageGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
 
 
   /** */
-  T file(string propval)
+  T file(string propval) nothrow
   {
     return setProperty("file", propval);
   }
@@ -864,7 +864,7 @@ class ImageGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
           automatically.
       Returns: Builder instance for fluent chaining
   */
-  T gicon(gio.icon.Icon propval)
+  T gicon(gio.icon.Icon propval) nothrow
   {
     return setProperty("gicon", propval);
   }
@@ -876,31 +876,31 @@ class ImageGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
           changed, the image will be updated automatically.
       Returns: Builder instance for fluent chaining
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
 
   /** */
-  T iconSet(gtk.icon_set.IconSet propval)
+  T iconSet(gtk.icon_set.IconSet propval) nothrow
   {
     return setProperty("icon-set", propval);
   }
 
   /** */
-  T iconSize(int propval)
+  T iconSize(int propval) nothrow
   {
     return setProperty("icon-size", propval);
   }
 
   /** */
-  T pixbuf(gdkpixbuf.pixbuf.Pixbuf propval)
+  T pixbuf(gdkpixbuf.pixbuf.Pixbuf propval) nothrow
   {
     return setProperty("pixbuf", propval);
   }
 
   /** */
-  T pixbufAnimation(gdkpixbuf.pixbuf_animation.PixbufAnimation propval)
+  T pixbufAnimation(gdkpixbuf.pixbuf_animation.PixbufAnimation propval) nothrow
   {
     return setProperty("pixbuf-animation", propval);
   }
@@ -913,7 +913,7 @@ class ImageGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
           [gtk.types.ImageType.IconName].
       Returns: Builder instance for fluent chaining
   */
-  T pixelSize(int propval)
+  T pixelSize(int propval) nothrow
   {
     return setProperty("pixel-size", propval);
   }
@@ -924,19 +924,19 @@ class ImageGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
         propval = A path to a resource file to display.
       Returns: Builder instance for fluent chaining
   */
-  T resource(string propval)
+  T resource(string propval) nothrow
   {
     return setProperty("resource", propval);
   }
 
   /** */
-  T stock(string propval)
+  T stock(string propval) nothrow
   {
     return setProperty("stock", propval);
   }
 
   /** */
-  T surface(cairo.surface.Surface propval)
+  T surface(cairo.surface.Surface propval) nothrow
   {
     return setProperty("surface", propval);
   }
@@ -950,7 +950,7 @@ class ImageGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
           and [gtk.types.ImageType.Gicon].
       Returns: Builder instance for fluent chaining
   */
-  T useFallback(bool propval)
+  T useFallback(bool propval) nothrow
   {
     return setProperty("use-fallback", propval);
   }
@@ -963,7 +963,7 @@ final class ImageGidBuilder : ImageGidBuilderImpl!ImageGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Image build()
+  Image build() nothrow
   {
     return new Image(cast(void*)createGObject(Image._getGType), No.Take);
   }

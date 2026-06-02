@@ -43,26 +43,26 @@ class CheckMenuItem : gtk.menu_item.MenuItem
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_check_menu_item_get_type != &gidSymbolNotFound ? gtk_check_menu_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CheckMenuItem self()
+  override CheckMenuItem self() nothrow
   {
     return this;
   }
@@ -71,43 +71,43 @@ class CheckMenuItem : gtk.menu_item.MenuItem
       Get builder for [gtk.check_menu_item.CheckMenuItem]
       Returns: New builder object
   */
-  static CheckMenuItemGidBuilder builder()
+  static CheckMenuItemGidBuilder builder() nothrow
   {
     return new CheckMenuItemGidBuilder;
   }
 
   /** */
-  @property bool active()
+  @property bool active() nothrow
   {
     return getActive();
   }
 
   /** */
-  @property void active(bool propval)
+  @property void active(bool propval) nothrow
   {
     setActive(propval);
   }
 
   /** */
-  @property bool drawAsRadio()
+  @property bool drawAsRadio() nothrow
   {
     return getDrawAsRadio();
   }
 
   /** */
-  @property void drawAsRadio(bool propval)
+  @property void drawAsRadio(bool propval) nothrow
   {
     setDrawAsRadio(propval);
   }
 
   /** */
-  @property bool inconsistent()
+  @property bool inconsistent() nothrow
   {
     return getInconsistent();
   }
 
   /** */
-  @property void inconsistent(bool propval)
+  @property void inconsistent(bool propval) nothrow
   {
     setInconsistent(propval);
   }
@@ -116,7 +116,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
       Creates a new #GtkCheckMenuItem.
       Returns: a new #GtkCheckMenuItem.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_check_menu_item_new();
@@ -130,7 +130,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
         label = the string to use for the label.
       Returns: a new #GtkCheckMenuItem.
   */
-  static gtk.check_menu_item.CheckMenuItem newWithLabel(string label)
+  static gtk.check_menu_item.CheckMenuItem newWithLabel(string label) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -149,7 +149,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
               character
       Returns: a new #GtkCheckMenuItem
   */
-  static gtk.check_menu_item.CheckMenuItem newWithMnemonic(string label)
+  static gtk.check_menu_item.CheckMenuItem newWithMnemonic(string label) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -163,7 +163,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
       gtk_check_menu_item_set_active ().
       Returns: true if the menu item is checked.
   */
-  bool getActive()
+  bool getActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_check_menu_item_get_active(cast(GtkCheckMenuItem*)this._cPtr);
@@ -174,7 +174,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
       Returns whether check_menu_item looks like a #GtkRadioMenuItem
       Returns: Whether check_menu_item looks like a #GtkRadioMenuItem
   */
-  bool getDrawAsRadio()
+  bool getDrawAsRadio() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_check_menu_item_get_draw_as_radio(cast(GtkCheckMenuItem*)this._cPtr);
@@ -185,7 +185,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
       Retrieves the value set by [gtk.check_menu_item.CheckMenuItem.setInconsistent].
       Returns: true if inconsistent
   */
-  bool getInconsistent()
+  bool getInconsistent() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_check_menu_item_get_inconsistent(cast(GtkCheckMenuItem*)this._cPtr);
@@ -198,7 +198,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
       Params:
         isActive = boolean value indicating whether the check box is active.
   */
-  void setActive(bool isActive)
+  void setActive(bool isActive) nothrow
   {
     gtk_check_menu_item_set_active(cast(GtkCheckMenuItem*)this._cPtr, isActive);
   }
@@ -209,7 +209,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
       Params:
         drawAsRadio = whether check_menu_item is drawn like a #GtkRadioMenuItem
   */
-  void setDrawAsRadio(bool drawAsRadio)
+  void setDrawAsRadio(bool drawAsRadio) nothrow
   {
     gtk_check_menu_item_set_draw_as_radio(cast(GtkCheckMenuItem*)this._cPtr, drawAsRadio);
   }
@@ -227,7 +227,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
       Params:
         setting = true to display an “inconsistent” third state check
   */
-  void setInconsistent(bool setting)
+  void setInconsistent(bool setting) nothrow
   {
     gtk_check_menu_item_set_inconsistent(cast(GtkCheckMenuItem*)this._cPtr, setting);
   }
@@ -235,7 +235,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
   /**
       Emits the #GtkCheckMenuItem::toggled signal.
   */
-  void toggled()
+  void toggled() nothrow
   {
     gtk_check_menu_item_toggled(cast(GtkCheckMenuItem*)this._cPtr);
   }
@@ -258,13 +258,13 @@ class CheckMenuItem : gtk.menu_item.MenuItem
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectToggled(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToggled(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.check_menu_item.CheckMenuItem)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -273,7 +273,14 @@ class CheckMenuItem : gtk.menu_item.MenuItem
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.check_menu_item.CheckMenuItem.toggled");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -287,19 +294,19 @@ class CheckMenuItemGidBuilderImpl(T) : gtk.menu_item.MenuItemGidBuilderImpl!T
 
 
   /** */
-  T active(bool propval)
+  T active(bool propval) nothrow
   {
     return setProperty("active", propval);
   }
 
   /** */
-  T drawAsRadio(bool propval)
+  T drawAsRadio(bool propval) nothrow
   {
     return setProperty("draw-as-radio", propval);
   }
 
   /** */
-  T inconsistent(bool propval)
+  T inconsistent(bool propval) nothrow
   {
     return setProperty("inconsistent", propval);
   }
@@ -312,7 +319,7 @@ final class CheckMenuItemGidBuilder : CheckMenuItemGidBuilderImpl!CheckMenuItemG
       Create object from builder.
       Returns: New object
   */
-  CheckMenuItem build()
+  CheckMenuItem build() nothrow
   {
     return new CheckMenuItem(cast(void*)createGObject(CheckMenuItem._getGType), No.Take);
   }

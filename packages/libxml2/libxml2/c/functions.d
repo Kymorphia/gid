@@ -13,7 +13,7 @@ else version(OSX)
 else
   private immutable LIBS = [];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
 }
 

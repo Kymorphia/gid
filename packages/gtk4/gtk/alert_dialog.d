@@ -29,26 +29,26 @@ class AlertDialog : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_alert_dialog_get_type != &gidSymbolNotFound ? gtk_alert_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AlertDialog self()
+  override AlertDialog self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class AlertDialog : gobject.object.ObjectWrap
       Get builder for [gtk.alert_dialog.AlertDialog]
       Returns: New builder object
   */
-  static AlertDialogGidBuilder builder()
+  static AlertDialogGidBuilder builder() nothrow
   {
     return new AlertDialogGidBuilder;
   }
@@ -74,7 +74,7 @@ class AlertDialog : gobject.object.ObjectWrap
         If `buttons` is `NULL`, then the automatically created 'Close' button
         is treated as both cancel and default button, so 0 is returned.
   */
-  @property int cancelButton()
+  @property int cancelButton() nothrow
   {
     return getCancelButton();
   }
@@ -92,7 +92,7 @@ class AlertDialog : gobject.object.ObjectWrap
           If `buttons` is `NULL`, then the automatically created 'Close' button
           is treated as both cancel and default button, so 0 is returned.
   */
-  @property void cancelButton(int propval)
+  @property void cancelButton(int propval) nothrow
   {
     setCancelButton(propval);
   }
@@ -109,7 +109,7 @@ class AlertDialog : gobject.object.ObjectWrap
         If `buttons` is `NULL`, then the automatically created 'Close' button
         is treated as both cancel and default button, so 0 is returned.
   */
-  @property int defaultButton()
+  @property int defaultButton() nothrow
   {
     return getDefaultButton();
   }
@@ -127,7 +127,7 @@ class AlertDialog : gobject.object.ObjectWrap
           If `buttons` is `NULL`, then the automatically created 'Close' button
           is treated as both cancel and default button, so 0 is returned.
   */
-  @property void defaultButton(int propval)
+  @property void defaultButton(int propval) nothrow
   {
     setDefaultButton(propval);
   }
@@ -136,7 +136,7 @@ class AlertDialog : gobject.object.ObjectWrap
       Get `detail` property.
       Returns: The detail text for the alert.
   */
-  @property string detail()
+  @property string detail() nothrow
   {
     return getDetail();
   }
@@ -146,7 +146,7 @@ class AlertDialog : gobject.object.ObjectWrap
       Params:
         propval = The detail text for the alert.
   */
-  @property void detail(string propval)
+  @property void detail(string propval) nothrow
   {
     setDetail(propval);
   }
@@ -155,7 +155,7 @@ class AlertDialog : gobject.object.ObjectWrap
       Get `message` property.
       Returns: The message for the alert.
   */
-  @property string message()
+  @property string message() nothrow
   {
     return getMessage();
   }
@@ -165,7 +165,7 @@ class AlertDialog : gobject.object.ObjectWrap
       Params:
         propval = The message for the alert.
   */
-  @property void message(string propval)
+  @property void message(string propval) nothrow
   {
     setMessage(propval);
   }
@@ -174,7 +174,7 @@ class AlertDialog : gobject.object.ObjectWrap
       Get `modal` property.
       Returns: Whether the alert is modal.
   */
-  @property bool modal()
+  @property bool modal() nothrow
   {
     return getModal();
   }
@@ -184,7 +184,7 @@ class AlertDialog : gobject.object.ObjectWrap
       Params:
         propval = Whether the alert is modal.
   */
-  @property void modal(bool propval)
+  @property void modal(bool propval) nothrow
   {
     setModal(propval);
   }
@@ -205,14 +205,21 @@ class AlertDialog : gobject.object.ObjectWrap
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
   */
-  void choose(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void choose(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -244,7 +251,7 @@ class AlertDialog : gobject.object.ObjectWrap
       Returns the button labels for the alert.
       Returns: the button labels
   */
-  string[] getButtons()
+  string[] getButtons() nothrow
   {
     const(char*)* _cretval;
     _cretval = gtk_alert_dialog_get_buttons(cast(GtkAlertDialog*)this._cPtr);
@@ -266,7 +273,7 @@ class AlertDialog : gobject.object.ObjectWrap
       Returns the index of the cancel button.
       Returns: the index of the cancel button, or -1
   */
-  int getCancelButton()
+  int getCancelButton() nothrow
   {
     int _retval;
     _retval = gtk_alert_dialog_get_cancel_button(cast(GtkAlertDialog*)this._cPtr);
@@ -277,7 +284,7 @@ class AlertDialog : gobject.object.ObjectWrap
       Returns the index of the default button.
       Returns: the index of the default button, or -1
   */
-  int getDefaultButton()
+  int getDefaultButton() nothrow
   {
     int _retval;
     _retval = gtk_alert_dialog_get_default_button(cast(GtkAlertDialog*)this._cPtr);
@@ -288,7 +295,7 @@ class AlertDialog : gobject.object.ObjectWrap
       Returns the detail text that will be shown in the alert.
       Returns: the detail text
   */
-  string getDetail()
+  string getDetail() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_alert_dialog_get_detail(cast(GtkAlertDialog*)this._cPtr);
@@ -300,7 +307,7 @@ class AlertDialog : gobject.object.ObjectWrap
       Returns the message that will be shown in the alert.
       Returns: the message
   */
-  string getMessage()
+  string getMessage() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_alert_dialog_get_message(cast(GtkAlertDialog*)this._cPtr);
@@ -313,7 +320,7 @@ class AlertDialog : gobject.object.ObjectWrap
       with the parent window while it is presented.
       Returns: `TRUE` if the alert is modal
   */
-  bool getModal()
+  bool getModal() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_alert_dialog_get_modal(cast(GtkAlertDialog*)this._cPtr);
@@ -326,7 +333,7 @@ class AlertDialog : gobject.object.ObjectWrap
       Params:
         labels = the new button labels
   */
-  void setButtons(string[] labels)
+  void setButtons(string[] labels) nothrow
   {
     char*[] _tmplabels;
     foreach (s; labels)
@@ -346,7 +353,7 @@ class AlertDialog : gobject.object.ObjectWrap
       Params:
         button = the new cancel button
   */
-  void setCancelButton(int button)
+  void setCancelButton(int button) nothrow
   {
     gtk_alert_dialog_set_cancel_button(cast(GtkAlertDialog*)this._cPtr, button);
   }
@@ -360,7 +367,7 @@ class AlertDialog : gobject.object.ObjectWrap
       Params:
         button = the new default button
   */
-  void setDefaultButton(int button)
+  void setDefaultButton(int button) nothrow
   {
     gtk_alert_dialog_set_default_button(cast(GtkAlertDialog*)this._cPtr, button);
   }
@@ -371,7 +378,7 @@ class AlertDialog : gobject.object.ObjectWrap
       Params:
         detail = the new detail text
   */
-  void setDetail(string detail)
+  void setDetail(string detail) nothrow
   {
     const(char)* _detail = detail.toCString(No.Alloc);
     gtk_alert_dialog_set_detail(cast(GtkAlertDialog*)this._cPtr, _detail);
@@ -383,7 +390,7 @@ class AlertDialog : gobject.object.ObjectWrap
       Params:
         message = the new message
   */
-  void setMessage(string message)
+  void setMessage(string message) nothrow
   {
     const(char)* _message = message.toCString(No.Alloc);
     gtk_alert_dialog_set_message(cast(GtkAlertDialog*)this._cPtr, _message);
@@ -396,7 +403,7 @@ class AlertDialog : gobject.object.ObjectWrap
       Params:
         modal = the new value
   */
-  void setModal(bool modal)
+  void setModal(bool modal) nothrow
   {
     gtk_alert_dialog_set_modal(cast(GtkAlertDialog*)this._cPtr, modal);
   }
@@ -413,7 +420,7 @@ class AlertDialog : gobject.object.ObjectWrap
       Params:
         parent = the parent [gtk.window.Window]
   */
-  void show(gtk.window.Window parent = null)
+  void show(gtk.window.Window parent = null) nothrow
   {
     gtk_alert_dialog_show(cast(GtkAlertDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
   }
@@ -437,7 +444,7 @@ class AlertDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           is treated as both cancel and default button, so 0 is returned.
       Returns: Builder instance for fluent chaining
   */
-  T cancelButton(int propval)
+  T cancelButton(int propval) nothrow
   {
     return setProperty("cancel-button", propval);
   }
@@ -456,7 +463,7 @@ class AlertDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           is treated as both cancel and default button, so 0 is returned.
       Returns: Builder instance for fluent chaining
   */
-  T defaultButton(int propval)
+  T defaultButton(int propval) nothrow
   {
     return setProperty("default-button", propval);
   }
@@ -467,7 +474,7 @@ class AlertDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The detail text for the alert.
       Returns: Builder instance for fluent chaining
   */
-  T detail(string propval)
+  T detail(string propval) nothrow
   {
     return setProperty("detail", propval);
   }
@@ -478,7 +485,7 @@ class AlertDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The message for the alert.
       Returns: Builder instance for fluent chaining
   */
-  T message(string propval)
+  T message(string propval) nothrow
   {
     return setProperty("message", propval);
   }
@@ -489,7 +496,7 @@ class AlertDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether the alert is modal.
       Returns: Builder instance for fluent chaining
   */
-  T modal(bool propval)
+  T modal(bool propval) nothrow
   {
     return setProperty("modal", propval);
   }
@@ -502,7 +509,7 @@ final class AlertDialogGidBuilder : AlertDialogGidBuilderImpl!AlertDialogGidBuil
       Create object from builder.
       Returns: New object
   */
-  AlertDialog build()
+  AlertDialog build() nothrow
   {
     return new AlertDialog(cast(void*)createGObject(AlertDialog._getGType), Yes.Take);
   }

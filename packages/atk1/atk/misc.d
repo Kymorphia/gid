@@ -19,26 +19,26 @@ class Misc : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_misc_get_type != &gidSymbolNotFound ? atk_misc_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Misc self()
+  override Misc self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class Misc : gobject.object.ObjectWrap
       Get builder for [atk.misc.Misc]
       Returns: New builder object
   */
-  static MiscGidBuilder builder()
+  static MiscGidBuilder builder() nothrow
   {
     return new MiscGidBuilder;
   }
@@ -58,7 +58,7 @@ class Misc : gobject.object.ObjectWrap
   
       Deprecated: Since 2.12.
   */
-  static atk.misc.Misc getInstance()
+  static atk.misc.Misc getInstance() nothrow
   {
     const(AtkMisc)* _cretval;
     _cretval = atk_misc_get_instance();
@@ -74,7 +74,7 @@ class Misc : gobject.object.ObjectWrap
   
       Deprecated: Since 2.12.
   */
-  void threadsEnter()
+  void threadsEnter() nothrow
   {
     atk_misc_threads_enter(cast(AtkMisc*)this._cPtr);
   }
@@ -92,7 +92,7 @@ class Misc : gobject.object.ObjectWrap
   
       Deprecated: Since 2.12.
   */
-  void threadsLeave()
+  void threadsLeave() nothrow
   {
     atk_misc_threads_leave(cast(AtkMisc*)this._cPtr);
   }
@@ -110,7 +110,7 @@ final class MiscGidBuilder : MiscGidBuilderImpl!MiscGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Misc build()
+  Misc build() nothrow
   {
     return new Misc(cast(void*)createGObject(Misc._getGType), No.Take);
   }

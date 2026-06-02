@@ -87,26 +87,26 @@ class PrintContext : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_print_context_get_type != &gidSymbolNotFound ? gtk_print_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PrintContext self()
+  override PrintContext self() nothrow
   {
     return this;
   }
@@ -115,7 +115,7 @@ class PrintContext : gobject.object.ObjectWrap
       Get builder for [gtk.print_context.PrintContext]
       Returns: New builder object
   */
-  static PrintContextGidBuilder builder()
+  static PrintContextGidBuilder builder() nothrow
   {
     return new PrintContextGidBuilder;
   }
@@ -125,7 +125,7 @@ class PrintContext : gobject.object.ObjectWrap
       #GtkPrintContext.
       Returns: a new Pango context for context
   */
-  pango.context.Context createPangoContext()
+  pango.context.Context createPangoContext() nothrow
   {
     PangoContext* _cretval;
     _cretval = gtk_print_context_create_pango_context(cast(GtkPrintContext*)this._cPtr);
@@ -138,7 +138,7 @@ class PrintContext : gobject.object.ObjectWrap
       with the #GtkPrintContext.
       Returns: a new Pango layout for context
   */
-  pango.layout.Layout createPangoLayout()
+  pango.layout.Layout createPangoLayout() nothrow
   {
     PangoLayout* _cretval;
     _cretval = gtk_print_context_create_pango_layout(cast(GtkPrintContext*)this._cPtr);
@@ -151,7 +151,7 @@ class PrintContext : gobject.object.ObjectWrap
       #GtkPrintContext.
       Returns: the cairo context of context
   */
-  cairo.context.Context getCairoContext()
+  cairo.context.Context getCairoContext() nothrow
   {
     cairo_t* _cretval;
     _cretval = gtk_print_context_get_cairo_context(cast(GtkPrintContext*)this._cPtr);
@@ -164,7 +164,7 @@ class PrintContext : gobject.object.ObjectWrap
       in dots per inch.
       Returns: the horizontal resolution of context
   */
-  double getDpiX()
+  double getDpiX() nothrow
   {
     double _retval;
     _retval = gtk_print_context_get_dpi_x(cast(GtkPrintContext*)this._cPtr);
@@ -176,7 +176,7 @@ class PrintContext : gobject.object.ObjectWrap
       in dots per inch.
       Returns: the vertical resolution of context
   */
-  double getDpiY()
+  double getDpiY() nothrow
   {
     double _retval;
     _retval = gtk_print_context_get_dpi_y(cast(GtkPrintContext*)this._cPtr);
@@ -193,7 +193,7 @@ class PrintContext : gobject.object.ObjectWrap
         right = right hardware printer margin
       Returns: true if the hard margins were retrieved
   */
-  bool getHardMargins(out double top, out double bottom, out double left, out double right)
+  bool getHardMargins(out double top, out double bottom, out double left, out double right) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_print_context_get_hard_margins(cast(GtkPrintContext*)this._cPtr, cast(double*)&top, cast(double*)&bottom, cast(double*)&left, cast(double*)&right);
@@ -204,7 +204,7 @@ class PrintContext : gobject.object.ObjectWrap
       Obtains the height of the #GtkPrintContext, in pixels.
       Returns: the height of context
   */
-  double getHeight()
+  double getHeight() nothrow
   {
     double _retval;
     _retval = gtk_print_context_get_height(cast(GtkPrintContext*)this._cPtr);
@@ -216,7 +216,7 @@ class PrintContext : gobject.object.ObjectWrap
       dimensions of the #GtkPrintContext.
       Returns: the page setup of context
   */
-  gtk.page_setup.PageSetup getPageSetup()
+  gtk.page_setup.PageSetup getPageSetup() nothrow
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_context_get_page_setup(cast(GtkPrintContext*)this._cPtr);
@@ -229,7 +229,7 @@ class PrintContext : gobject.object.ObjectWrap
       with the #GtkPrintContext.
       Returns: the font map of context
   */
-  pango.font_map.FontMap getPangoFontmap()
+  pango.font_map.FontMap getPangoFontmap() nothrow
   {
     PangoFontMap* _cretval;
     _cretval = gtk_print_context_get_pango_fontmap(cast(GtkPrintContext*)this._cPtr);
@@ -241,7 +241,7 @@ class PrintContext : gobject.object.ObjectWrap
       Obtains the width of the #GtkPrintContext, in pixels.
       Returns: the width of context
   */
-  double getWidth()
+  double getWidth() nothrow
   {
     double _retval;
     _retval = gtk_print_context_get_width(cast(GtkPrintContext*)this._cPtr);
@@ -261,7 +261,7 @@ class PrintContext : gobject.object.ObjectWrap
         dpiX = the horizontal resolution to use with cr
         dpiY = the vertical resolution to use with cr
   */
-  void setCairoContext(cairo.context.Context cr, double dpiX, double dpiY)
+  void setCairoContext(cairo.context.Context cr, double dpiX, double dpiY) nothrow
   {
     gtk_print_context_set_cairo_context(cast(GtkPrintContext*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, dpiX, dpiY);
   }
@@ -279,7 +279,7 @@ final class PrintContextGidBuilder : PrintContextGidBuilderImpl!PrintContextGidB
       Create object from builder.
       Returns: New object
   */
-  PrintContext build()
+  PrintContext build() nothrow
   {
     return new PrintContext(cast(void*)createGObject(PrintContext._getGType), No.Take);
   }

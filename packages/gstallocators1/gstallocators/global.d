@@ -17,7 +17,7 @@ import gstallocators.types;
           descriptor is still owned by the GstMemory.  Use dup to take a copy
           if you intend to use it beyond the lifetime of this GstMemory.
 */
-int dmabufMemoryGetFd(gst.memory.Memory mem)
+int dmabufMemoryGetFd(gst.memory.Memory mem) nothrow
 {
   int _retval;
   _retval = gst_dmabuf_memory_get_fd(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
@@ -33,7 +33,7 @@ int dmabufMemoryGetFd(gst.memory.Memory mem)
     Returns: a #GstMemory from #GstDmaBufAllocator wrapping the exported dma-buf
          file descriptor.
 */
-gst.memory.Memory drmDumbMemoryExportDmabuf(gst.memory.Memory mem)
+gst.memory.Memory drmDumbMemoryExportDmabuf(gst.memory.Memory mem) nothrow
 {
   GstMemory* _cretval;
   _cretval = gst_drm_dumb_memory_export_dmabuf(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
@@ -51,7 +51,7 @@ gst.memory.Memory drmDumbMemoryExportDmabuf(gst.memory.Memory mem)
           beyond the lifetime of this GstMemory unless it is being passed
           to DRM driver, which does handle a refcount internally.
 */
-uint drmDumbMemoryGetHandle(gst.memory.Memory mem)
+uint drmDumbMemoryGetHandle(gst.memory.Memory mem) nothrow
 {
   uint _retval;
   _retval = gst_drm_dumb_memory_get_handle(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
@@ -66,7 +66,7 @@ uint drmDumbMemoryGetHandle(gst.memory.Memory mem)
       mem = #GstMemory
     Returns: the fd of mem or -1 when there is no fd on mem
 */
-int fdMemoryGetFd(gst.memory.Memory mem)
+int fdMemoryGetFd(gst.memory.Memory mem) nothrow
 {
   int _retval;
   _retval = gst_fd_memory_get_fd(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
@@ -80,7 +80,7 @@ int fdMemoryGetFd(gst.memory.Memory mem)
       mem = the memory to be check
     Returns: true if mem is dmabuf memory, otherwise false
 */
-bool isDmabufMemory(gst.memory.Memory mem)
+bool isDmabufMemory(gst.memory.Memory mem) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_is_dmabuf_memory(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
@@ -88,7 +88,7 @@ bool isDmabufMemory(gst.memory.Memory mem)
 }
 
 /** */
-bool isDrmDumbMemory(gst.memory.Memory mem)
+bool isDrmDumbMemory(gst.memory.Memory mem) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_is_drm_dumb_memory(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
@@ -103,7 +103,7 @@ bool isDrmDumbMemory(gst.memory.Memory mem)
     Returns: true when mem has an fd that can be retrieved with
       [gstallocators.global.fdMemoryGetFd].
 */
-bool isFdMemory(gst.memory.Memory mem)
+bool isFdMemory(gst.memory.Memory mem) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_is_fd_memory(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
@@ -111,7 +111,7 @@ bool isFdMemory(gst.memory.Memory mem)
 }
 
 /** */
-bool isPhysMemory(gst.memory.Memory mem)
+bool isPhysMemory(gst.memory.Memory mem) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_is_phys_memory(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
@@ -119,7 +119,7 @@ bool isPhysMemory(gst.memory.Memory mem)
 }
 
 /** */
-size_t physMemoryGetPhysAddr(gst.memory.Memory mem)
+size_t physMemoryGetPhysAddr(gst.memory.Memory mem) nothrow
 {
   size_t _retval;
   _retval = gst_phys_memory_get_phys_addr(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);

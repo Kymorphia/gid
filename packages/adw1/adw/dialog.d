@@ -77,26 +77,26 @@ class Dialog : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_dialog_get_type != &gidSymbolNotFound ? adw_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Dialog self()
+  override Dialog self() nothrow
   {
     return this;
   }
@@ -105,7 +105,7 @@ class Dialog : gtk.widget.Widget
       Get builder for [adw.dialog.Dialog]
       Returns: New builder object
   */
-  static DialogGidBuilder builder()
+  static DialogGidBuilder builder() nothrow
   {
     return new DialogGidBuilder;
   }
@@ -119,7 +119,7 @@ class Dialog : gtk.widget.Widget
         emitted instead, and bottom sheet close swipe will be disabled.
         [adw.dialog.Dialog.forceClose] still works.
   */
-  @property bool canClose()
+  @property bool canClose() nothrow
   {
     return getCanClose();
   }
@@ -134,7 +134,7 @@ class Dialog : gtk.widget.Widget
           emitted instead, and bottom sheet close swipe will be disabled.
           [adw.dialog.Dialog.forceClose] still works.
   */
-  @property void canClose(bool propval)
+  @property void canClose(bool propval) nothrow
   {
     setCanClose(propval);
   }
@@ -143,7 +143,7 @@ class Dialog : gtk.widget.Widget
       Get `child` property.
       Returns: The child widget of the [adw.dialog.Dialog].
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -153,7 +153,7 @@ class Dialog : gtk.widget.Widget
       Params:
         propval = The child widget of the [adw.dialog.Dialog].
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -166,7 +166,7 @@ class Dialog : gtk.widget.Widget
         
         See also: [gtk.window.Window.defaultHeight]
   */
-  @property int contentHeight()
+  @property int contentHeight() nothrow
   {
     return getContentHeight();
   }
@@ -180,7 +180,7 @@ class Dialog : gtk.widget.Widget
           
           See also: [gtk.window.Window.defaultHeight]
   */
-  @property void contentHeight(int propval)
+  @property void contentHeight(int propval) nothrow
   {
     setContentHeight(propval);
   }
@@ -193,7 +193,7 @@ class Dialog : gtk.widget.Widget
         
         See also: [gtk.window.Window.defaultWidth]
   */
-  @property int contentWidth()
+  @property int contentWidth() nothrow
   {
     return getContentWidth();
   }
@@ -207,7 +207,7 @@ class Dialog : gtk.widget.Widget
           
           See also: [gtk.window.Window.defaultWidth]
   */
-  @property void contentWidth(int propval)
+  @property void contentWidth(int propval) nothrow
   {
     setContentWidth(propval);
   }
@@ -216,7 +216,7 @@ class Dialog : gtk.widget.Widget
       Get `currentBreakpoint` property.
       Returns: The current breakpoint.
   */
-  @property adw.breakpoint.Breakpoint currentBreakpoint()
+  @property adw.breakpoint.Breakpoint currentBreakpoint() nothrow
   {
     return getCurrentBreakpoint();
   }
@@ -227,7 +227,7 @@ class Dialog : gtk.widget.Widget
         
         It's activated when the user presses Enter.
   */
-  @property gtk.widget.Widget defaultWidget()
+  @property gtk.widget.Widget defaultWidget() nothrow
   {
     return getDefaultWidget();
   }
@@ -239,7 +239,7 @@ class Dialog : gtk.widget.Widget
           
           It's activated when the user presses Enter.
   */
-  @property void defaultWidget(gtk.widget.Widget propval)
+  @property void defaultWidget(gtk.widget.Widget propval) nothrow
   {
     setDefaultWidget(propval);
   }
@@ -248,7 +248,7 @@ class Dialog : gtk.widget.Widget
       Get `focusWidget` property.
       Returns: The focus widget.
   */
-  @property gtk.widget.Widget focusWidget()
+  @property gtk.widget.Widget focusWidget() nothrow
   {
     return getFocus();
   }
@@ -258,7 +258,7 @@ class Dialog : gtk.widget.Widget
       Params:
         propval = The focus widget.
   */
-  @property void focusWidget(gtk.widget.Widget propval)
+  @property void focusWidget(gtk.widget.Widget propval) nothrow
   {
     setFocus(propval);
   }
@@ -273,7 +273,7 @@ class Dialog : gtk.widget.Widget
         
         See also: [gtk.window.Window.resizable]
   */
-  @property bool followsContentSize()
+  @property bool followsContentSize() nothrow
   {
     return getFollowsContentSize();
   }
@@ -289,7 +289,7 @@ class Dialog : gtk.widget.Widget
           
           See also: [gtk.window.Window.resizable]
   */
-  @property void followsContentSize(bool propval)
+  @property void followsContentSize(bool propval) nothrow
   {
     setFollowsContentSize(propval);
   }
@@ -308,7 +308,7 @@ class Dialog : gtk.widget.Widget
         
         Presentation mode does nothing for dialogs presented as a window.
   */
-  @property adw.types.DialogPresentationMode presentationMode()
+  @property adw.types.DialogPresentationMode presentationMode() nothrow
   {
     return getPresentationMode();
   }
@@ -328,7 +328,7 @@ class Dialog : gtk.widget.Widget
           
           Presentation mode does nothing for dialogs presented as a window.
   */
-  @property void presentationMode(adw.types.DialogPresentationMode propval)
+  @property void presentationMode(adw.types.DialogPresentationMode propval) nothrow
   {
     setPresentationMode(propval);
   }
@@ -337,7 +337,7 @@ class Dialog : gtk.widget.Widget
       Get `title` property.
       Returns: The title of the dialog.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -347,7 +347,7 @@ class Dialog : gtk.widget.Widget
       Params:
         propval = The title of the dialog.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -356,7 +356,7 @@ class Dialog : gtk.widget.Widget
       Creates a new [adw.dialog.Dialog].
       Returns: the new created [adw.dialog.Dialog]
   */
-  this()
+  this() nothrow
   {
     AdwDialog* _cretval;
     _cretval = adw_dialog_new();
@@ -369,7 +369,7 @@ class Dialog : gtk.widget.Widget
       Params:
         breakpoint = the breakpoint to add
   */
-  void addBreakpoint(adw.breakpoint.Breakpoint breakpoint)
+  void addBreakpoint(adw.breakpoint.Breakpoint breakpoint) nothrow
   {
     adw_dialog_add_breakpoint(cast(AdwDialog*)this._cPtr, breakpoint ? cast(AdwBreakpoint*)breakpoint._cPtr(Yes.Dup) : null);
   }
@@ -383,7 +383,7 @@ class Dialog : gtk.widget.Widget
       See also: [adw.dialog.Dialog.forceClose].
       Returns: whether self was successfully closed
   */
-  bool close()
+  bool close() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_dialog_close(cast(AdwDialog*)this._cPtr);
@@ -396,7 +396,7 @@ class Dialog : gtk.widget.Widget
       Unlike [adw.dialog.Dialog.close], it succeeds even if [adw.dialog.Dialog.canClose]
       is set to `FALSE`.
   */
-  void forceClose()
+  void forceClose() nothrow
   {
     adw_dialog_force_close(cast(AdwDialog*)this._cPtr);
   }
@@ -405,7 +405,7 @@ class Dialog : gtk.widget.Widget
       Gets whether self can be closed.
       Returns: whether the dialog can be closed
   */
-  bool getCanClose()
+  bool getCanClose() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_dialog_get_can_close(cast(AdwDialog*)this._cPtr);
@@ -416,7 +416,7 @@ class Dialog : gtk.widget.Widget
       Gets the child widget of self.
       Returns: the child widget of self
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_dialog_get_child(cast(AdwDialog*)this._cPtr);
@@ -428,7 +428,7 @@ class Dialog : gtk.widget.Widget
       Gets the height of the dialog's contents.
       Returns: the content height
   */
-  int getContentHeight()
+  int getContentHeight() nothrow
   {
     int _retval;
     _retval = adw_dialog_get_content_height(cast(AdwDialog*)this._cPtr);
@@ -439,7 +439,7 @@ class Dialog : gtk.widget.Widget
       Gets the width of the dialog's contents.
       Returns: the content width
   */
-  int getContentWidth()
+  int getContentWidth() nothrow
   {
     int _retval;
     _retval = adw_dialog_get_content_width(cast(AdwDialog*)this._cPtr);
@@ -450,7 +450,7 @@ class Dialog : gtk.widget.Widget
       Gets the current breakpoint.
       Returns: the current breakpoint
   */
-  adw.breakpoint.Breakpoint getCurrentBreakpoint()
+  adw.breakpoint.Breakpoint getCurrentBreakpoint() nothrow
   {
     AdwBreakpoint* _cretval;
     _cretval = adw_dialog_get_current_breakpoint(cast(AdwDialog*)this._cPtr);
@@ -462,7 +462,7 @@ class Dialog : gtk.widget.Widget
       Gets the default widget for self.
       Returns: the default widget
   */
-  gtk.widget.Widget getDefaultWidget()
+  gtk.widget.Widget getDefaultWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_dialog_get_default_widget(cast(AdwDialog*)this._cPtr);
@@ -474,7 +474,7 @@ class Dialog : gtk.widget.Widget
       Gets the focus widget for self.
       Returns: the focus widget
   */
-  gtk.widget.Widget getFocus()
+  gtk.widget.Widget getFocus() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_dialog_get_focus(cast(AdwDialog*)this._cPtr);
@@ -486,7 +486,7 @@ class Dialog : gtk.widget.Widget
       Gets whether to size content of self automatically.
       Returns: whether to size content automatically
   */
-  bool getFollowsContentSize()
+  bool getFollowsContentSize() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_dialog_get_follows_content_size(cast(AdwDialog*)this._cPtr);
@@ -497,7 +497,7 @@ class Dialog : gtk.widget.Widget
       Gets presentation mode for self.
       Returns: the presentation mode
   */
-  adw.types.DialogPresentationMode getPresentationMode()
+  adw.types.DialogPresentationMode getPresentationMode() nothrow
   {
     AdwDialogPresentationMode _cretval;
     _cretval = adw_dialog_get_presentation_mode(cast(AdwDialog*)this._cPtr);
@@ -509,7 +509,7 @@ class Dialog : gtk.widget.Widget
       Gets the title of self.
       Returns: the title
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_dialog_get_title(cast(AdwDialog*)this._cPtr);
@@ -528,7 +528,7 @@ class Dialog : gtk.widget.Widget
       Params:
         parent = a widget within the toplevel
   */
-  void present(gtk.widget.Widget parent = null)
+  void present(gtk.widget.Widget parent = null) nothrow
   {
     adw_dialog_present(cast(AdwDialog*)this._cPtr, parent ? cast(GtkWidget*)parent._cPtr(No.Dup) : null);
   }
@@ -544,7 +544,7 @@ class Dialog : gtk.widget.Widget
       Params:
         canClose = whether to allow closing
   */
-  void setCanClose(bool canClose)
+  void setCanClose(bool canClose) nothrow
   {
     adw_dialog_set_can_close(cast(AdwDialog*)this._cPtr, canClose);
   }
@@ -555,7 +555,7 @@ class Dialog : gtk.widget.Widget
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     adw_dialog_set_child(cast(AdwDialog*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -570,7 +570,7 @@ class Dialog : gtk.widget.Widget
       Params:
         contentHeight = the content height
   */
-  void setContentHeight(int contentHeight)
+  void setContentHeight(int contentHeight) nothrow
   {
     adw_dialog_set_content_height(cast(AdwDialog*)this._cPtr, contentHeight);
   }
@@ -585,7 +585,7 @@ class Dialog : gtk.widget.Widget
       Params:
         contentWidth = the content width
   */
-  void setContentWidth(int contentWidth)
+  void setContentWidth(int contentWidth) nothrow
   {
     adw_dialog_set_content_width(cast(AdwDialog*)this._cPtr, contentWidth);
   }
@@ -598,7 +598,7 @@ class Dialog : gtk.widget.Widget
       Params:
         defaultWidget = the default widget
   */
-  void setDefaultWidget(gtk.widget.Widget defaultWidget = null)
+  void setDefaultWidget(gtk.widget.Widget defaultWidget = null) nothrow
   {
     adw_dialog_set_default_widget(cast(AdwDialog*)this._cPtr, defaultWidget ? cast(GtkWidget*)defaultWidget._cPtr(No.Dup) : null);
   }
@@ -616,7 +616,7 @@ class Dialog : gtk.widget.Widget
       Params:
         focus = the focus widget
   */
-  void setFocus(gtk.widget.Widget focus = null)
+  void setFocus(gtk.widget.Widget focus = null) nothrow
   {
     adw_dialog_set_focus(cast(AdwDialog*)this._cPtr, focus ? cast(GtkWidget*)focus._cPtr(No.Dup) : null);
   }
@@ -633,7 +633,7 @@ class Dialog : gtk.widget.Widget
       Params:
         followsContentSize = whether to size content automatically
   */
-  void setFollowsContentSize(bool followsContentSize)
+  void setFollowsContentSize(bool followsContentSize) nothrow
   {
     adw_dialog_set_follows_content_size(cast(AdwDialog*)this._cPtr, followsContentSize);
   }
@@ -654,7 +654,7 @@ class Dialog : gtk.widget.Widget
       Params:
         presentationMode = the new presentation mode
   */
-  void setPresentationMode(adw.types.DialogPresentationMode presentationMode)
+  void setPresentationMode(adw.types.DialogPresentationMode presentationMode) nothrow
   {
     adw_dialog_set_presentation_mode(cast(AdwDialog*)this._cPtr, presentationMode);
   }
@@ -665,7 +665,7 @@ class Dialog : gtk.widget.Widget
       Params:
         title = the new title
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     adw_dialog_set_title(cast(AdwDialog*)this._cPtr, _title);
@@ -688,13 +688,13 @@ class Dialog : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCloseAttempt(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCloseAttempt(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.dialog.Dialog)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -703,7 +703,14 @@ class Dialog : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.dialog.Dialog.closeAttempt");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -725,13 +732,13 @@ class Dialog : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClosed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClosed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.dialog.Dialog)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -740,7 +747,14 @@ class Dialog : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.dialog.Dialog.closed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -764,7 +778,7 @@ class DialogGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           [adw.dialog.Dialog.forceClose] still works.
       Returns: Builder instance for fluent chaining
   */
-  T canClose(bool propval)
+  T canClose(bool propval) nothrow
   {
     return setProperty("can-close", propval);
   }
@@ -775,7 +789,7 @@ class DialogGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The child widget of the [adw.dialog.Dialog].
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -790,7 +804,7 @@ class DialogGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           See also: [gtk.window.Window.defaultHeight]
       Returns: Builder instance for fluent chaining
   */
-  T contentHeight(int propval)
+  T contentHeight(int propval) nothrow
   {
     return setProperty("content-height", propval);
   }
@@ -805,7 +819,7 @@ class DialogGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           See also: [gtk.window.Window.defaultWidth]
       Returns: Builder instance for fluent chaining
   */
-  T contentWidth(int propval)
+  T contentWidth(int propval) nothrow
   {
     return setProperty("content-width", propval);
   }
@@ -818,7 +832,7 @@ class DialogGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           It's activated when the user presses Enter.
       Returns: Builder instance for fluent chaining
   */
-  T defaultWidget(gtk.widget.Widget propval)
+  T defaultWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("default-widget", propval);
   }
@@ -829,7 +843,7 @@ class DialogGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The focus widget.
       Returns: Builder instance for fluent chaining
   */
-  T focusWidget(gtk.widget.Widget propval)
+  T focusWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("focus-widget", propval);
   }
@@ -846,7 +860,7 @@ class DialogGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           See also: [gtk.window.Window.resizable]
       Returns: Builder instance for fluent chaining
   */
-  T followsContentSize(bool propval)
+  T followsContentSize(bool propval) nothrow
   {
     return setProperty("follows-content-size", propval);
   }
@@ -867,7 +881,7 @@ class DialogGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           Presentation mode does nothing for dialogs presented as a window.
       Returns: Builder instance for fluent chaining
   */
-  T presentationMode(adw.types.DialogPresentationMode propval)
+  T presentationMode(adw.types.DialogPresentationMode propval) nothrow
   {
     return setProperty("presentation-mode", propval);
   }
@@ -878,7 +892,7 @@ class DialogGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The title of the dialog.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -891,7 +905,7 @@ final class DialogGidBuilder : DialogGidBuilderImpl!DialogGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Dialog build()
+  Dialog build() nothrow
   {
     return new Dialog(cast(void*)createGObject(Dialog._getGType), No.Take);
   }

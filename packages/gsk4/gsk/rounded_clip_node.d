@@ -16,11 +16,8 @@ class RoundedClipNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.rounded_clip_node.RoundedClipNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -33,7 +30,7 @@ class RoundedClipNode : gsk.render_node.RenderNode
         clip = The clip to apply
       Returns: A new [gsk.render_node.RenderNode]
   */
-  this(gsk.render_node.RenderNode child, gsk.rounded_rect.RoundedRect clip)
+  this(gsk.render_node.RenderNode child, gsk.rounded_rect.RoundedRect clip) nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_rounded_clip_node_new(child ? cast(GskRenderNode*)child._cPtr(No.Dup) : null, clip ? cast(const(GskRoundedRect)*)clip._cPtr : null);
@@ -44,7 +41,7 @@ class RoundedClipNode : gsk.render_node.RenderNode
       Gets the child node that is getting clipped by the given node.
       Returns: The child that is getting clipped
   */
-  gsk.render_node.RenderNode getChild()
+  gsk.render_node.RenderNode getChild() nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_rounded_clip_node_get_child(cast(const(GskRenderNode)*)this._cPtr);
@@ -56,7 +53,7 @@ class RoundedClipNode : gsk.render_node.RenderNode
       Retrieves the rounded rectangle used to clip the contents of the node.
       Returns: a rounded rectangle
   */
-  gsk.rounded_rect.RoundedRect getClip()
+  gsk.rounded_rect.RoundedRect getClip() nothrow
   {
     const(GskRoundedRect)* _cretval;
     _cretval = gsk_rounded_clip_node_get_clip(cast(const(GskRenderNode)*)this._cPtr);

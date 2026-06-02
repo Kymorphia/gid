@@ -26,7 +26,7 @@ interface FontChooser
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_font_chooser_get_type != &gidSymbolNotFound ? gtk_font_chooser_get_type() : cast(GType)0;
@@ -36,34 +36,34 @@ interface FontChooser
       Get `font` property.
       Returns: The font description as a string, e.g. "Sans Italic 12".
   */
-  @property string font();
+  @property string font() nothrow;
 
   /**
       Set `font` property.
       Params:
         propval = The font description as a string, e.g. "Sans Italic 12".
   */
-  @property void font(string propval);
+  @property void font(string propval) nothrow;
 
   /**
       Get `fontDesc` property.
       Returns: The font description as a #PangoFontDescription.
   */
-  @property pango.font_description.FontDescription fontDesc();
+  @property pango.font_description.FontDescription fontDesc() nothrow;
 
   /**
       Set `fontDesc` property.
       Params:
         propval = The font description as a #PangoFontDescription.
   */
-  @property void fontDesc(pango.font_description.FontDescription propval);
+  @property void fontDesc(pango.font_description.FontDescription propval) nothrow;
 
   /**
       Get `fontFeatures` property.
       Returns: The selected font features, in a format that is compatible with
         CSS and with Pango attributes.
   */
-  @property string fontFeatures();
+  @property string fontFeatures() nothrow;
 
   /**
       Get `language` property.
@@ -71,7 +71,7 @@ interface FontChooser
         selected, in a format that is compatible with CSS and with Pango
         attributes.
   */
-  @property string language();
+  @property string language() nothrow;
 
   /**
       Set `language` property.
@@ -80,46 +80,46 @@ interface FontChooser
           selected, in a format that is compatible with CSS and with Pango
           attributes.
   */
-  @property void language(string propval);
+  @property void language(string propval) nothrow;
 
   /**
       Get `level` property.
       Returns: The level of granularity to offer for selecting fonts.
   */
-  @property gtk.types.FontChooserLevel level();
+  @property gtk.types.FontChooserLevel level() nothrow;
 
   /**
       Set `level` property.
       Params:
         propval = The level of granularity to offer for selecting fonts.
   */
-  @property void level(gtk.types.FontChooserLevel propval);
+  @property void level(gtk.types.FontChooserLevel propval) nothrow;
 
   /**
       Get `previewText` property.
       Returns: The string with which to preview the font.
   */
-  @property string previewText();
+  @property string previewText() nothrow;
 
   /**
       Set `previewText` property.
       Params:
         propval = The string with which to preview the font.
   */
-  @property void previewText(string propval);
+  @property void previewText(string propval) nothrow;
 
   /**
       Get `showPreviewEntry` property.
       Returns: Whether to show an entry to change the preview text.
   */
-  @property bool showPreviewEntry();
+  @property bool showPreviewEntry() nothrow;
 
   /**
       Set `showPreviewEntry` property.
       Params:
         propval = Whether to show an entry to change the preview text.
   */
-  @property void showPreviewEntry(bool propval);
+  @property void showPreviewEntry(bool propval) nothrow;
 
   /**
       Gets the currently-selected font name.
@@ -331,7 +331,7 @@ interface FontChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFontActivated(T)(T callback, Flag!"After" after = No.After);
+  gulong connectFontActivated(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gtk.font_chooser.FontChooser]
@@ -344,7 +344,7 @@ interface FontChooserGidBuilderImpl(T)
         propval = The font description as a string, e.g. "Sans Italic 12".
       Returns: Builder instance for fluent chaining
   */
-  T font(string propval);
+  T font(string propval) nothrow;
 
   /**
       Set `fontDesc` property.
@@ -352,7 +352,7 @@ interface FontChooserGidBuilderImpl(T)
         propval = The font description as a #PangoFontDescription.
       Returns: Builder instance for fluent chaining
   */
-  T fontDesc(pango.font_description.FontDescription propval);
+  T fontDesc(pango.font_description.FontDescription propval) nothrow;
 
   /**
       Set `language` property.
@@ -362,7 +362,7 @@ interface FontChooserGidBuilderImpl(T)
           attributes.
       Returns: Builder instance for fluent chaining
   */
-  T language(string propval);
+  T language(string propval) nothrow;
 
   /**
       Set `level` property.
@@ -370,7 +370,7 @@ interface FontChooserGidBuilderImpl(T)
         propval = The level of granularity to offer for selecting fonts.
       Returns: Builder instance for fluent chaining
   */
-  T level(gtk.types.FontChooserLevel propval);
+  T level(gtk.types.FontChooserLevel propval) nothrow;
 
   /**
       Set `previewText` property.
@@ -378,7 +378,7 @@ interface FontChooserGidBuilderImpl(T)
         propval = The string with which to preview the font.
       Returns: Builder instance for fluent chaining
   */
-  T previewText(string propval);
+  T previewText(string propval) nothrow;
 
   /**
       Set `showPreviewEntry` property.
@@ -386,5 +386,5 @@ interface FontChooserGidBuilderImpl(T)
         propval = Whether to show an entry to change the preview text.
       Returns: Builder instance for fluent chaining
   */
-  T showPreviewEntry(bool propval);
+  T showPreviewEntry(bool propval) nothrow;
 }

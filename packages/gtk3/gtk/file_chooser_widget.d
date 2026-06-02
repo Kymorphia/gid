@@ -33,26 +33,26 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_file_chooser_widget_get_type != &gidSymbolNotFound ? gtk_file_chooser_widget_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileChooserWidget self()
+  override FileChooserWidget self() nothrow
   {
     return this;
   }
@@ -61,25 +61,25 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       Get builder for [gtk.file_chooser_widget.FileChooserWidget]
       Returns: New builder object
   */
-  static FileChooserWidgetGidBuilder builder()
+  static FileChooserWidgetGidBuilder builder() nothrow
   {
     return new FileChooserWidgetGidBuilder;
   }
 
   /** */
-  @property bool searchMode()
+  @property bool searchMode() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("search-mode");
   }
 
   /** */
-  @property void searchMode(bool propval)
+  @property void searchMode(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("search-mode", propval);
   }
 
   /** */
-  @property string subtitle()
+  @property string subtitle() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("subtitle");
   }
@@ -95,7 +95,7 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
         action = Open or save mode for the widget
       Returns: a new #GtkFileChooserWidget
   */
-  this(gtk.types.FileChooserAction action)
+  this(gtk.types.FileChooserAction action) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_file_chooser_widget_new(action);
@@ -123,13 +123,13 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDesktopFolder(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDesktopFolder(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser_widget.FileChooserWidget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -138,7 +138,14 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.file_chooser_widget.FileChooserWidget.desktopFolder");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -169,13 +176,13 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDownFolder(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDownFolder(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser_widget.FileChooserWidget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -184,7 +191,14 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.file_chooser_widget.FileChooserWidget.downFolder");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -212,13 +226,13 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectHomeFolder(T)(T callback, Flag!"After" after = No.After)
+  gulong connectHomeFolder(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser_widget.FileChooserWidget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -227,7 +241,14 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.file_chooser_widget.FileChooserWidget.homeFolder");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -261,14 +282,14 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLocationPopup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLocationPopup(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.file_chooser_widget.FileChooserWidget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -280,7 +301,14 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.file_chooser_widget.FileChooserWidget.locationPopup");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -308,13 +336,13 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLocationPopupOnPaste(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLocationPopupOnPaste(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser_widget.FileChooserWidget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -323,7 +351,14 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.file_chooser_widget.FileChooserWidget.locationPopupOnPaste");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -351,13 +386,13 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLocationTogglePopup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLocationTogglePopup(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser_widget.FileChooserWidget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -366,7 +401,14 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.file_chooser_widget.FileChooserWidget.locationTogglePopup");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -393,13 +435,13 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPlacesShortcut(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPlacesShortcut(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser_widget.FileChooserWidget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -408,7 +450,14 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.file_chooser_widget.FileChooserWidget.placesShortcut");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -443,14 +492,14 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectQuickBookmark(T)(T callback, Flag!"After" after = No.After)
+  gulong connectQuickBookmark(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.file_chooser_widget.FileChooserWidget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -462,7 +511,14 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.file_chooser_widget.FileChooserWidget.quickBookmark");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -489,13 +545,13 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRecentShortcut(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRecentShortcut(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser_widget.FileChooserWidget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -504,7 +560,14 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.file_chooser_widget.FileChooserWidget.recentShortcut");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -531,13 +594,13 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSearchShortcut(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSearchShortcut(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser_widget.FileChooserWidget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -546,7 +609,14 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.file_chooser_widget.FileChooserWidget.searchShortcut");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -573,13 +643,13 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectShowHidden(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowHidden(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser_widget.FileChooserWidget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -588,7 +658,14 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.file_chooser_widget.FileChooserWidget.showHidden");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -616,13 +693,13 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUpFolder(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUpFolder(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser_widget.FileChooserWidget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -631,7 +708,14 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.file_chooser_widget.FileChooserWidget.upFolder");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -646,7 +730,7 @@ class FileChooserWidgetGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T, gtk.file
   mixin FileChooserGidBuilderT!();
 
   /** */
-  T searchMode(bool propval)
+  T searchMode(bool propval) nothrow
   {
     return setProperty("search-mode", propval);
   }
@@ -659,7 +743,7 @@ final class FileChooserWidgetGidBuilder : FileChooserWidgetGidBuilderImpl!FileCh
       Create object from builder.
       Returns: New object
   */
-  FileChooserWidget build()
+  FileChooserWidget build() nothrow
   {
     return new FileChooserWidget(cast(void*)createGObject(FileChooserWidget._getGType), No.Take);
   }

@@ -18,7 +18,7 @@ struct ValueType
         valueType = The #AtkValueType whose localized name is required
       Returns: the localized string describing the #AtkValueType
   */
-  static string getLocalizedName(atk.types.ValueType valueType)
+  static string getLocalizedName(atk.types.ValueType valueType) nothrow
   {
     const(char)* _cretval;
     _cretval = atk_value_type_get_localized_name(valueType);
@@ -33,7 +33,7 @@ struct ValueType
         valueType = The #AtkValueType whose name is required
       Returns: the string describing the #AtkValueType
   */
-  static string getName(atk.types.ValueType valueType)
+  static string getName(atk.types.ValueType valueType) nothrow
   {
     const(char)* _cretval;
     _cretval = atk_value_type_get_name(valueType);

@@ -21,26 +21,26 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_file_system_dataset_factory_get_type != &gidSymbolNotFound ? gadataset_file_system_dataset_factory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileSystemDatasetFactory self()
+  override FileSystemDatasetFactory self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
       Get builder for [arrowdataset.file_system_dataset_factory.FileSystemDatasetFactory]
       Returns: New builder object
   */
-  static FileSystemDatasetFactoryGidBuilder builder()
+  static FileSystemDatasetFactoryGidBuilder builder() nothrow
   {
     return new FileSystemDatasetFactoryGidBuilder;
   }
@@ -58,7 +58,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
       Get `fileSystem` property.
       Returns: File system passed to #GADatasetFileSystemDataset.
   */
-  @property arrow.file_system.FileSystem fileSystem()
+  @property arrow.file_system.FileSystem fileSystem() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.file_system.FileSystem)("file-system");
   }
@@ -67,7 +67,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
       Get `format` property.
       Returns: Format passed to #GADatasetFileSystemDataset.
   */
-  @property arrowdataset.file_format.FileFormat format()
+  @property arrowdataset.file_format.FileFormat format() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrowdataset.file_format.FileFormat)("format");
   }
@@ -76,7 +76,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
       Get `partitionBaseDir` property.
       Returns: Partition base directory used by #GADatasetFileSystemDataset.
   */
-  @property string partitionBaseDir()
+  @property string partitionBaseDir() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("partition-base-dir");
   }
@@ -86,7 +86,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
       Params:
         propval = Partition base directory used by #GADatasetFileSystemDataset.
   */
-  @property void partitionBaseDir(string propval)
+  @property void partitionBaseDir(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("partition-base-dir", propval);
   }
@@ -95,7 +95,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
       Get `partitioning` property.
       Returns: Partitioning used by #GADatasetFileSystemDataset.
   */
-  @property arrowdataset.partitioning.Partitioning partitioning()
+  @property arrowdataset.partitioning.Partitioning partitioning() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrowdataset.partitioning.Partitioning)("partitioning");
   }
@@ -105,13 +105,13 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
       Params:
         propval = Partitioning used by #GADatasetFileSystemDataset.
   */
-  @property void partitioning(arrowdataset.partitioning.Partitioning propval)
+  @property void partitioning(arrowdataset.partitioning.Partitioning propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(arrowdataset.partitioning.Partitioning)("partitioning", propval);
   }
 
   /** */
-  this(arrowdataset.file_format.FileFormat fileFormat)
+  this(arrowdataset.file_format.FileFormat fileFormat) nothrow
   {
     GADatasetFileSystemDatasetFactory* _cretval;
     _cretval = gadataset_file_system_dataset_factory_new(fileFormat ? cast(GADatasetFileFormat*)fileFormat._cPtr(No.Dup) : null);
@@ -176,7 +176,7 @@ class FileSystemDatasetFactoryGidBuilderImpl(T) : arrowdataset.dataset_factory.D
         propval = Format passed to #GADatasetFileSystemDataset.
       Returns: Builder instance for fluent chaining
   */
-  T format(arrowdataset.file_format.FileFormat propval)
+  T format(arrowdataset.file_format.FileFormat propval) nothrow
   {
     return setProperty("format", propval);
   }
@@ -187,7 +187,7 @@ class FileSystemDatasetFactoryGidBuilderImpl(T) : arrowdataset.dataset_factory.D
         propval = Partition base directory used by #GADatasetFileSystemDataset.
       Returns: Builder instance for fluent chaining
   */
-  T partitionBaseDir(string propval)
+  T partitionBaseDir(string propval) nothrow
   {
     return setProperty("partition-base-dir", propval);
   }
@@ -198,7 +198,7 @@ class FileSystemDatasetFactoryGidBuilderImpl(T) : arrowdataset.dataset_factory.D
         propval = Partitioning used by #GADatasetFileSystemDataset.
       Returns: Builder instance for fluent chaining
   */
-  T partitioning(arrowdataset.partitioning.Partitioning propval)
+  T partitioning(arrowdataset.partitioning.Partitioning propval) nothrow
   {
     return setProperty("partitioning", propval);
   }
@@ -211,7 +211,7 @@ final class FileSystemDatasetFactoryGidBuilder : FileSystemDatasetFactoryGidBuil
       Create object from builder.
       Returns: New object
   */
-  FileSystemDatasetFactory build()
+  FileSystemDatasetFactory build() nothrow
   {
     return new FileSystemDatasetFactory(cast(void*)createGObject(FileSystemDatasetFactory._getGType), Yes.Take);
   }

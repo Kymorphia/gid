@@ -21,26 +21,26 @@ class WebHitTestResult : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_web_hit_test_result_get_type != &gidSymbolNotFound ? webkit_web_hit_test_result_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WebHitTestResult self()
+  override WebHitTestResult self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
       Get builder for [webkitwebprocessextension.web_hit_test_result.WebHitTestResult]
       Returns: New builder object
   */
-  static WebHitTestResultGidBuilder builder()
+  static WebHitTestResultGidBuilder builder() nothrow
   {
     return new WebHitTestResultGidBuilder;
   }
@@ -61,7 +61,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
       the context flags.
       Returns: true if the hit test covers an editable element or false otherwise.
   */
-  bool contextIsEditable()
+  bool contextIsEditable() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_hit_test_result_context_is_editable(cast(WebKitWebHitTestResult*)this._cPtr);
@@ -75,7 +75,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
       the context flags.
       Returns: true if the hit test covers an image element or false otherwise.
   */
-  bool contextIsImage()
+  bool contextIsImage() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_hit_test_result_context_is_image(cast(WebKitWebHitTestResult*)this._cPtr);
@@ -89,7 +89,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
       the context flags.
       Returns: true if the hit test covers a link element or false otherwise.
   */
-  bool contextIsLink()
+  bool contextIsLink() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_hit_test_result_context_is_link(cast(WebKitWebHitTestResult*)this._cPtr);
@@ -103,7 +103,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
       the context flags.
       Returns: true if the hit test covers a media element or false otherwise.
   */
-  bool contextIsMedia()
+  bool contextIsMedia() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_hit_test_result_context_is_media(cast(WebKitWebHitTestResult*)this._cPtr);
@@ -117,7 +117,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
       the context flags.
       Returns: true if the hit test covers a scrollbar or false otherwise.
   */
-  bool contextIsScrollbar()
+  bool contextIsScrollbar() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_hit_test_result_context_is_scrollbar(cast(WebKitWebHitTestResult*)this._cPtr);
@@ -131,7 +131,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
       the context flags.
       Returns: true if the hit test covers a selected element or false otherwise.
   */
-  bool contextIsSelection()
+  bool contextIsSelection() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_hit_test_result_context_is_selection(cast(WebKitWebHitTestResult*)this._cPtr);
@@ -142,7 +142,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
       Gets the the context flags for the hit test result.
       Returns: a bitmask of #WebKitHitTestResultContext flags
   */
-  uint getContext()
+  uint getContext() nothrow
   {
     uint _retval;
     _retval = webkit_web_hit_test_result_get_context(cast(WebKitWebHitTestResult*)this._cPtr);
@@ -153,7 +153,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
       Obtains the URI associated with the image element at the hit test position.
       Returns: the URI of the image element, or null if the hit test does not cover an image element.
   */
-  string getImageUri()
+  string getImageUri() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_web_hit_test_result_get_image_uri(cast(WebKitWebHitTestResult*)this._cPtr);
@@ -168,7 +168,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
         world = a #WebKitScriptWorld, or null to use the default
       Returns: a #JSCValue for the DOM node, or null
   */
-  javascriptcore.value.Value getJsNode(webkitwebprocessextension.script_world.ScriptWorld world = null)
+  javascriptcore.value.Value getJsNode(webkitwebprocessextension.script_world.ScriptWorld world = null) nothrow
   {
     JSCValue* _cretval;
     _cretval = webkit_web_hit_test_result_get_js_node(cast(WebKitWebHitTestResult*)this._cPtr, world ? cast(WebKitScriptWorld*)world._cPtr(No.Dup) : null);
@@ -181,7 +181,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
       Returns: the label of the link element, or null if the hit test does not cover a link element
            or the link element does not have a label.
   */
-  string getLinkLabel()
+  string getLinkLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_web_hit_test_result_get_link_label(cast(WebKitWebHitTestResult*)this._cPtr);
@@ -194,7 +194,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
       Returns: the title of the link element, or null if the hit test does not cover a link element
            or the link element does not have a title.
   */
-  string getLinkTitle()
+  string getLinkTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_web_hit_test_result_get_link_title(cast(WebKitWebHitTestResult*)this._cPtr);
@@ -206,7 +206,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
       Obtains the URI associated with the link element at the hit test position.
       Returns: the URI of the link element, or null if the hit test does not cover a link element.
   */
-  string getLinkUri()
+  string getLinkUri() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_web_hit_test_result_get_link_uri(cast(WebKitWebHitTestResult*)this._cPtr);
@@ -218,7 +218,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
       Obtains the URI associated with the media element at the hit test position.
       Returns: the URI of the media element, or null if the hit test does not cover a media element.
   */
-  string getMediaUri()
+  string getMediaUri() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_web_hit_test_result_get_media_uri(cast(WebKitWebHitTestResult*)this._cPtr);
@@ -239,7 +239,7 @@ final class WebHitTestResultGidBuilder : WebHitTestResultGidBuilderImpl!WebHitTe
       Create object from builder.
       Returns: New object
   */
-  WebHitTestResult build()
+  WebHitTestResult build() nothrow
   {
     return new WebHitTestResult(cast(void*)createGObject(WebHitTestResult._getGType), No.Take);
   }

@@ -14,26 +14,26 @@ class DayTimeIntervalDataType : arrow.interval_data_type.IntervalDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_day_time_interval_data_type_get_type != &gidSymbolNotFound ? garrow_day_time_interval_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DayTimeIntervalDataType self()
+  override DayTimeIntervalDataType self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class DayTimeIntervalDataType : arrow.interval_data_type.IntervalDataType
       Get builder for [arrow.day_time_interval_data_type.DayTimeIntervalDataType]
       Returns: New builder object
   */
-  static DayTimeIntervalDataTypeGidBuilder builder()
+  static DayTimeIntervalDataTypeGidBuilder builder() nothrow
   {
     return new DayTimeIntervalDataTypeGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowDayTimeIntervalDataType* _cretval;
     _cretval = garrow_day_time_interval_data_type_new();
@@ -68,7 +68,7 @@ final class DayTimeIntervalDataTypeGidBuilder : DayTimeIntervalDataTypeGidBuilde
       Create object from builder.
       Returns: New object
   */
-  DayTimeIntervalDataType build()
+  DayTimeIntervalDataType build() nothrow
   {
     return new DayTimeIntervalDataType(cast(void*)createGObject(DayTimeIntervalDataType._getGType), Yes.Take);
   }

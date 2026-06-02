@@ -29,26 +29,26 @@ class Stream : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_stream_get_type != &gidSymbolNotFound ? gst_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Stream self()
+  override Stream self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class Stream : gst.object.ObjectWrap
       Get builder for [gst.stream.Stream]
       Returns: New builder object
   */
-  static StreamGidBuilder builder()
+  static StreamGidBuilder builder() nothrow
   {
     return new StreamGidBuilder;
   }
@@ -66,7 +66,7 @@ class Stream : gst.object.ObjectWrap
       Get `caps` property.
       Returns: The #GstCaps of the #GstStream.
   */
-  @property gst.caps.Caps caps()
+  @property gst.caps.Caps caps() nothrow
   {
     return getCaps();
   }
@@ -76,19 +76,19 @@ class Stream : gst.object.ObjectWrap
       Params:
         propval = The #GstCaps of the #GstStream.
   */
-  @property void caps(gst.caps.Caps propval)
+  @property void caps(gst.caps.Caps propval) nothrow
   {
     setCaps(propval);
   }
 
   /** */
-  @property gst.types.StreamFlags streamFlags()
+  @property gst.types.StreamFlags streamFlags() nothrow
   {
     return getStreamFlags();
   }
 
   /** */
-  @property void streamFlags(gst.types.StreamFlags propval)
+  @property void streamFlags(gst.types.StreamFlags propval) nothrow
   {
     setStreamFlags(propval);
   }
@@ -98,7 +98,7 @@ class Stream : gst.object.ObjectWrap
       Returns: The unique identifier of the #GstStream. Can only be set at construction
         time.
   */
-  @property string streamId()
+  @property string streamId() nothrow
   {
     return getStreamId();
   }
@@ -107,7 +107,7 @@ class Stream : gst.object.ObjectWrap
       Get `streamType` property.
       Returns: The #GstStreamType of the #GstStream. Can only be set at construction time.
   */
-  @property gst.types.StreamType streamType()
+  @property gst.types.StreamType streamType() nothrow
   {
     return getStreamType();
   }
@@ -117,7 +117,7 @@ class Stream : gst.object.ObjectWrap
       Params:
         propval = The #GstStreamType of the #GstStream. Can only be set at construction time.
   */
-  @property void streamType(gst.types.StreamType propval)
+  @property void streamType(gst.types.StreamType propval) nothrow
   {
     setStreamType(propval);
   }
@@ -126,7 +126,7 @@ class Stream : gst.object.ObjectWrap
       Get `tags` property.
       Returns: The #GstTagList of the #GstStream.
   */
-  @property gst.tag_list.TagList tags()
+  @property gst.tag_list.TagList tags() nothrow
   {
     return getTags();
   }
@@ -136,7 +136,7 @@ class Stream : gst.object.ObjectWrap
       Params:
         propval = The #GstTagList of the #GstStream.
   */
-  @property void tags(gst.tag_list.TagList propval)
+  @property void tags(gst.tag_list.TagList propval) nothrow
   {
     setTags(propval);
   }
@@ -153,7 +153,7 @@ class Stream : gst.object.ObjectWrap
         flags = the #GstStreamFlags of the stream
       Returns: The new #GstStream
   */
-  this(string streamId, gst.caps.Caps caps, gst.types.StreamType type, gst.types.StreamFlags flags)
+  this(string streamId, gst.caps.Caps caps, gst.types.StreamType type, gst.types.StreamFlags flags) nothrow
   {
     GstStream* _cretval;
     const(char)* _streamId = streamId.toCString(No.Alloc);
@@ -165,7 +165,7 @@ class Stream : gst.object.ObjectWrap
       Retrieve the caps for stream, if any
       Returns: The #GstCaps for stream
   */
-  gst.caps.Caps getCaps()
+  gst.caps.Caps getCaps() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_stream_get_caps(cast(GstStream*)this._cPtr);
@@ -177,7 +177,7 @@ class Stream : gst.object.ObjectWrap
       Retrieve the current stream flags for stream
       Returns: The #GstStreamFlags for stream
   */
-  gst.types.StreamFlags getStreamFlags()
+  gst.types.StreamFlags getStreamFlags() nothrow
   {
     GstStreamFlags _cretval;
     _cretval = gst_stream_get_stream_flags(cast(GstStream*)this._cPtr);
@@ -190,7 +190,7 @@ class Stream : gst.object.ObjectWrap
       Returns: the stream ID of stream. Only valid
         during the lifetime of stream.
   */
-  string getStreamId()
+  string getStreamId() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_stream_get_stream_id(cast(GstStream*)this._cPtr);
@@ -202,7 +202,7 @@ class Stream : gst.object.ObjectWrap
       Retrieve the stream type for stream
       Returns: The #GstStreamType for stream
   */
-  gst.types.StreamType getStreamType()
+  gst.types.StreamType getStreamType() nothrow
   {
     GstStreamType _cretval;
     _cretval = gst_stream_get_stream_type(cast(GstStream*)this._cPtr);
@@ -214,7 +214,7 @@ class Stream : gst.object.ObjectWrap
       Retrieve the tags for stream, if any
       Returns: The #GstTagList for stream
   */
-  gst.tag_list.TagList getTags()
+  gst.tag_list.TagList getTags() nothrow
   {
     GstTagList* _cretval;
     _cretval = gst_stream_get_tags(cast(GstStream*)this._cPtr);
@@ -228,7 +228,7 @@ class Stream : gst.object.ObjectWrap
       Params:
         caps = a #GstCaps
   */
-  void setCaps(gst.caps.Caps caps = null)
+  void setCaps(gst.caps.Caps caps = null) nothrow
   {
     gst_stream_set_caps(cast(GstStream*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
   }
@@ -239,7 +239,7 @@ class Stream : gst.object.ObjectWrap
       Params:
         flags = the flags to set on stream
   */
-  void setStreamFlags(gst.types.StreamFlags flags)
+  void setStreamFlags(gst.types.StreamFlags flags) nothrow
   {
     gst_stream_set_stream_flags(cast(GstStream*)this._cPtr, flags);
   }
@@ -250,7 +250,7 @@ class Stream : gst.object.ObjectWrap
       Params:
         streamType = the type to set on stream
   */
-  void setStreamType(gst.types.StreamType streamType)
+  void setStreamType(gst.types.StreamType streamType) nothrow
   {
     gst_stream_set_stream_type(cast(GstStream*)this._cPtr, streamType);
   }
@@ -261,7 +261,7 @@ class Stream : gst.object.ObjectWrap
       Params:
         tags = a #GstTagList
   */
-  void setTags(gst.tag_list.TagList tags = null)
+  void setTags(gst.tag_list.TagList tags = null) nothrow
   {
     gst_stream_set_tags(cast(GstStream*)this._cPtr, tags ? cast(GstTagList*)tags._cPtr(No.Dup) : null);
   }
@@ -277,13 +277,13 @@ class StreamGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
         propval = The #GstCaps of the #GstStream.
       Returns: Builder instance for fluent chaining
   */
-  T caps(gst.caps.Caps propval)
+  T caps(gst.caps.Caps propval) nothrow
   {
     return setProperty("caps", propval);
   }
 
   /** */
-  T streamFlags(gst.types.StreamFlags propval)
+  T streamFlags(gst.types.StreamFlags propval) nothrow
   {
     return setProperty("stream-flags", propval);
   }
@@ -295,7 +295,7 @@ class StreamGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
           time.
       Returns: Builder instance for fluent chaining
   */
-  T streamId(string propval)
+  T streamId(string propval) nothrow
   {
     return setProperty("stream-id", propval);
   }
@@ -306,7 +306,7 @@ class StreamGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
         propval = The #GstStreamType of the #GstStream. Can only be set at construction time.
       Returns: Builder instance for fluent chaining
   */
-  T streamType(gst.types.StreamType propval)
+  T streamType(gst.types.StreamType propval) nothrow
   {
     return setProperty("stream-type", propval);
   }
@@ -317,7 +317,7 @@ class StreamGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
         propval = The #GstTagList of the #GstStream.
       Returns: Builder instance for fluent chaining
   */
-  T tags(gst.tag_list.TagList propval)
+  T tags(gst.tag_list.TagList propval) nothrow
   {
     return setProperty("tags", propval);
   }
@@ -330,7 +330,7 @@ final class StreamGidBuilder : StreamGidBuilderImpl!StreamGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Stream build()
+  Stream build() nothrow
   {
     return new Stream(cast(void*)createGObject(Stream._getGType), Yes.Take);
   }

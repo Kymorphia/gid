@@ -48,7 +48,7 @@ interface Icon
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_icon_get_type != &gidSymbolNotFound ? g_icon_get_type() : cast(GType)0;
@@ -61,7 +61,7 @@ interface Icon
         value = a #GVariant created with [gio.icon.Icon.serialize]
       Returns: a #GIcon, or null when deserialization fails.
   */
-  static gio.icon.Icon deserialize(glib.variant.Variant value)
+  static gio.icon.Icon deserialize(glib.variant.Variant value) nothrow
   {
     GIcon* _cretval;
     _cretval = g_icon_deserialize(value ? cast(GVariant*)value._cPtr(No.Dup) : null);

@@ -19,26 +19,26 @@ class AssistantPage : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_assistant_page_get_type != &gidSymbolNotFound ? gtk_assistant_page_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AssistantPage self()
+  override AssistantPage self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class AssistantPage : gobject.object.ObjectWrap
       Get builder for [gtk.assistant_page.AssistantPage]
       Returns: New builder object
   */
-  static AssistantPageGidBuilder builder()
+  static AssistantPageGidBuilder builder() nothrow
   {
     return new AssistantPageGidBuilder;
   }
@@ -58,7 +58,7 @@ class AssistantPage : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -72,7 +72,7 @@ class AssistantPage : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  @property bool complete()
+  @property bool complete() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("complete");
   }
@@ -87,7 +87,7 @@ class AssistantPage : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  @property void complete(bool propval)
+  @property void complete(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("complete", propval);
   }
@@ -98,7 +98,7 @@ class AssistantPage : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  @property gtk.types.AssistantPageType pageType()
+  @property gtk.types.AssistantPageType pageType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.AssistantPageType)("page-type");
   }
@@ -110,7 +110,7 @@ class AssistantPage : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  @property void pageType(gtk.types.AssistantPageType propval)
+  @property void pageType(gtk.types.AssistantPageType propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.AssistantPageType)("page-type", propval);
   }
@@ -121,7 +121,7 @@ class AssistantPage : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  @property string title()
+  @property string title() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("title");
   }
@@ -133,7 +133,7 @@ class AssistantPage : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("title", propval);
   }
@@ -144,7 +144,7 @@ class AssistantPage : gobject.object.ObjectWrap
   
       Deprecated: This widget will be removed in GTK 5
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_assistant_page_get_child(cast(GtkAssistantPage*)this._cPtr);
@@ -165,7 +165,7 @@ class AssistantPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   
       Deprecated: This object will be removed in GTK 5
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -181,7 +181,7 @@ class AssistantPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   
       Deprecated: This object will be removed in GTK 5
   */
-  T complete(bool propval)
+  T complete(bool propval) nothrow
   {
     return setProperty("complete", propval);
   }
@@ -194,7 +194,7 @@ class AssistantPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   
       Deprecated: This object will be removed in GTK 5
   */
-  T pageType(gtk.types.AssistantPageType propval)
+  T pageType(gtk.types.AssistantPageType propval) nothrow
   {
     return setProperty("page-type", propval);
   }
@@ -207,7 +207,7 @@ class AssistantPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   
       Deprecated: This object will be removed in GTK 5
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -220,7 +220,7 @@ final class AssistantPageGidBuilder : AssistantPageGidBuilderImpl!AssistantPageG
       Create object from builder.
       Returns: New object
   */
-  AssistantPage build()
+  AssistantPage build() nothrow
   {
     return new AssistantPage(cast(void*)createGObject(AssistantPage._getGType), No.Take);
   }

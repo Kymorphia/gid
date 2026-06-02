@@ -32,26 +32,26 @@ class Grid : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_grid_get_type != &gidSymbolNotFound ? panel_grid_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Grid self()
+  override Grid self() nothrow
   {
     return this;
   }
@@ -60,7 +60,7 @@ class Grid : gtk.widget.Widget
       Get builder for [panel.grid.Grid]
       Returns: New builder object
   */
-  static GridGidBuilder builder()
+  static GridGidBuilder builder() nothrow
   {
     return new GridGidBuilder;
   }
@@ -69,7 +69,7 @@ class Grid : gtk.widget.Widget
       Creates a new #PanelGrid.
       Returns: a newly created #PanelGrid
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = panel_grid_new();
@@ -82,7 +82,7 @@ class Grid : gtk.widget.Widget
       Params:
         widget = a #PanelWidget the widget to add.
   */
-  void add(panel.widget.Widget widget)
+  void add(panel.widget.Widget widget) nothrow
   {
     panel_grid_add(cast(PanelGrid*)this._cPtr, widget ? cast(PanelWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -94,14 +94,21 @@ class Grid : gtk.widget.Widget
         cancellable = 
         callback = callback called when ready
   */
-  void agreeToCloseAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback)
+  void agreeToCloseAsync(gio.cancellable.Cancellable cancellable, gio.types.AsyncReadyCallback callback) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -125,13 +132,20 @@ class Grid : gtk.widget.Widget
       Params:
         callback = a #PanelFrameCallback
   */
-  void foreachFrame(panel.types.FrameCallback callback)
+  void foreachFrame(panel.types.FrameCallback callback) nothrow
   {
-    extern(C) void _callbackCallback(PanelFrame* frame, void* userData)
+    extern(C) void _callbackCallback(PanelFrame* frame, void* userData) nothrow
     {
       auto _dlg = cast(panel.types.FrameCallback*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(panel.frame.Frame)(cast(void*)frame, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(panel.frame.Frame)(cast(void*)frame, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "panel.types.FrameCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? cast(void*)&(callback) : null;
@@ -145,7 +159,7 @@ class Grid : gtk.widget.Widget
         column = a column index
       Returns: a #PanelGridColumn
   */
-  panel.grid_column.GridColumn getColumn(uint column)
+  panel.grid_column.GridColumn getColumn(uint column) nothrow
   {
     PanelGridColumn* _cretval;
     _cretval = panel_grid_get_column(cast(PanelGrid*)this._cPtr, column);
@@ -157,7 +171,7 @@ class Grid : gtk.widget.Widget
       Gets the most recently acive column on a grid.
       Returns: a #PanelGridColumn
   */
-  panel.grid_column.GridColumn getMostRecentColumn()
+  panel.grid_column.GridColumn getMostRecentColumn() nothrow
   {
     PanelGridColumn* _cretval;
     _cretval = panel_grid_get_most_recent_column(cast(PanelGrid*)this._cPtr);
@@ -169,7 +183,7 @@ class Grid : gtk.widget.Widget
       Gets the most recently acive frame on a grid.
       Returns: a #PanelGridFrame
   */
-  panel.frame.Frame getMostRecentFrame()
+  panel.frame.Frame getMostRecentFrame() nothrow
   {
     PanelFrame* _cretval;
     _cretval = panel_grid_get_most_recent_frame(cast(PanelGrid*)this._cPtr);
@@ -181,7 +195,7 @@ class Grid : gtk.widget.Widget
       Gets the number of columns in the grid.
       Returns: The number of columns.
   */
-  uint getNColumns()
+  uint getNColumns() nothrow
   {
     uint _retval;
     _retval = panel_grid_get_n_columns(cast(PanelGrid*)this._cPtr);
@@ -194,7 +208,7 @@ class Grid : gtk.widget.Widget
       Params:
         position = The position to insert the column at.
   */
-  void insertColumn(uint position)
+  void insertColumn(uint position) nothrow
   {
     panel_grid_insert_column(cast(PanelGrid*)this._cPtr, position);
   }
@@ -219,22 +233,30 @@ class Grid : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCreateFrame(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCreateFrame(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T : panel.frame.Frame)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.grid.Grid)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      panel.frame.Frame _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "panel.grid.Grid.createFrame");
+      }
 
       setVal!(panel.frame.Frame)(_returnValue, _retval);
     }
@@ -257,7 +279,7 @@ final class GridGidBuilder : GridGidBuilderImpl!GridGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Grid build()
+  Grid build() nothrow
   {
     return new Grid(cast(void*)createGObject(Grid._getGType), No.Take);
   }

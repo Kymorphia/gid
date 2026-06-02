@@ -17,11 +17,8 @@ class BindingSignal
   GtkBindingSignal _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.binding_signal.BindingSignal");
-
     _cInstance = *cast(GtkBindingSignal*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class BindingSignal
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class BindingSignal
       Get `next` field.
       Returns: implementation detail
   */
-  @property gtk.binding_signal.BindingSignal next()
+  @property gtk.binding_signal.BindingSignal next() nothrow
   {
     return new gtk.binding_signal.BindingSignal(cast(GtkBindingSignal*)(cast(GtkBindingSignal*)this._cPtr).next, No.Take);
   }
@@ -47,7 +44,7 @@ class BindingSignal
       Get `signalName` field.
       Returns: the action signal to be emitted
   */
-  @property string signalName()
+  @property string signalName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkBindingSignal*)this._cPtr).signalName);
   }
@@ -57,7 +54,7 @@ class BindingSignal
       Params:
         propval = the action signal to be emitted
   */
-  @property void signalName(string propval)
+  @property void signalName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkBindingSignal*)this._cPtr).signalName);
     dToC(propval, cast(void*)&(cast(GtkBindingSignal*)this._cPtr).signalName);
@@ -67,7 +64,7 @@ class BindingSignal
       Get `nArgs` field.
       Returns: number of arguments specified for the signal
   */
-  @property uint nArgs()
+  @property uint nArgs() nothrow
   {
     return (cast(GtkBindingSignal*)this._cPtr).nArgs;
   }
@@ -77,7 +74,7 @@ class BindingSignal
       Params:
         propval = number of arguments specified for the signal
   */
-  @property void nArgs(uint propval)
+  @property void nArgs(uint propval) nothrow
   {
     (cast(GtkBindingSignal*)this._cPtr).nArgs = propval;
   }

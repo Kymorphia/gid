@@ -195,26 +195,26 @@ class AboutWindow : adw.window.Window
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_about_window_get_type != &gidSymbolNotFound ? adw_about_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AboutWindow self()
+  override AboutWindow self() nothrow
   {
     return this;
   }
@@ -223,7 +223,7 @@ class AboutWindow : adw.window.Window
       Get builder for [adw.about_window.AboutWindow]
       Returns: New builder object
   */
-  static AboutWindowGidBuilder builder()
+  static AboutWindowGidBuilder builder() nothrow
   {
     return new AboutWindowGidBuilder;
   }
@@ -234,7 +234,7 @@ class AboutWindow : adw.window.Window
         
         The icon is displayed at the top of the main page.
   */
-  @property string applicationIcon()
+  @property string applicationIcon() nothrow
   {
     return getApplicationIcon();
   }
@@ -246,7 +246,7 @@ class AboutWindow : adw.window.Window
           
           The icon is displayed at the top of the main page.
   */
-  @property void applicationIcon(string propval)
+  @property void applicationIcon(string propval) nothrow
   {
     setApplicationIcon(propval);
   }
@@ -257,7 +257,7 @@ class AboutWindow : adw.window.Window
         
         The name is displayed at the top of the main page.
   */
-  @property string applicationName()
+  @property string applicationName() nothrow
   {
     return getApplicationName();
   }
@@ -269,7 +269,7 @@ class AboutWindow : adw.window.Window
           
           The name is displayed at the top of the main page.
   */
-  @property void applicationName(string propval)
+  @property void applicationName(string propval) nothrow
   {
     setApplicationName(propval);
   }
@@ -283,7 +283,7 @@ class AboutWindow : adw.window.Window
         Unlike [gtk.about_dialog.AboutDialog.comments], this string can be long and
         detailed. It can also contain links and Pango markup.
   */
-  @property string comments()
+  @property string comments() nothrow
   {
     return getComments();
   }
@@ -298,7 +298,7 @@ class AboutWindow : adw.window.Window
           Unlike [gtk.about_dialog.AboutDialog.comments], this string can be long and
           detailed. It can also contain links and Pango markup.
   */
-  @property void comments(string propval)
+  @property void comments(string propval) nothrow
   {
     setComments(propval);
   }
@@ -316,7 +316,7 @@ class AboutWindow : adw.window.Window
         [adw.about_window.AboutWindow.addLegalSection] can be used to add copyright
         information for the application dependencies or other components.
   */
-  @property string copyright()
+  @property string copyright() nothrow
   {
     return getCopyright();
   }
@@ -335,7 +335,7 @@ class AboutWindow : adw.window.Window
           [adw.about_window.AboutWindow.addLegalSection] can be used to add copyright
           information for the application dependencies or other components.
   */
-  @property void copyright(string propval)
+  @property void copyright(string propval) nothrow
   {
     setCopyright(propval);
   }
@@ -354,7 +354,7 @@ class AboutWindow : adw.window.Window
         
         Debug information cannot contain markup or links.
   */
-  @property string debugInfo()
+  @property string debugInfo() nothrow
   {
     return getDebugInfo();
   }
@@ -374,7 +374,7 @@ class AboutWindow : adw.window.Window
           
           Debug information cannot contain markup or links.
   */
-  @property void debugInfo(string propval)
+  @property void debugInfo(string propval) nothrow
   {
     setDebugInfo(propval);
   }
@@ -388,7 +388,7 @@ class AboutWindow : adw.window.Window
         
         See [adw.about_window.AboutWindow.debugInfo].
   */
-  @property string debugInfoFilename()
+  @property string debugInfoFilename() nothrow
   {
     return getDebugInfoFilename();
   }
@@ -403,7 +403,7 @@ class AboutWindow : adw.window.Window
           
           See [adw.about_window.AboutWindow.debugInfo].
   */
-  @property void debugInfoFilename(string propval)
+  @property void debugInfoFilename(string propval) nothrow
   {
     setDebugInfoFilename(propval);
   }
@@ -421,7 +421,7 @@ class AboutWindow : adw.window.Window
         Credits page, with [adw.about_window.AboutWindow.developers] and related
         properties.
   */
-  @property string developerName()
+  @property string developerName() nothrow
   {
     return getDeveloperName();
   }
@@ -440,7 +440,7 @@ class AboutWindow : adw.window.Window
           Credits page, with [adw.about_window.AboutWindow.developers] and related
           properties.
   */
-  @property void developerName(string propval)
+  @property void developerName(string propval) nothrow
   {
     setDeveloperName(propval);
   }
@@ -451,7 +451,7 @@ class AboutWindow : adw.window.Window
         
         The issue tracker link is displayed on the main page.
   */
-  @property string issueUrl()
+  @property string issueUrl() nothrow
   {
     return getIssueUrl();
   }
@@ -463,7 +463,7 @@ class AboutWindow : adw.window.Window
           
           The issue tracker link is displayed on the main page.
   */
-  @property void issueUrl(string propval)
+  @property void issueUrl(string propval) nothrow
   {
     setIssueUrl(propval);
   }
@@ -486,7 +486,7 @@ class AboutWindow : adw.window.Window
         [adw.about_window.AboutWindow.addLegalSection] can be used to add license
         information for the application dependencies or other components.
   */
-  @property string license()
+  @property string license() nothrow
   {
     return getLicense();
   }
@@ -510,7 +510,7 @@ class AboutWindow : adw.window.Window
           [adw.about_window.AboutWindow.addLegalSection] can be used to add license
           information for the application dependencies or other components.
   */
-  @property void license(string propval)
+  @property void license(string propval) nothrow
   {
     setLicense(propval);
   }
@@ -536,7 +536,7 @@ class AboutWindow : adw.window.Window
         [adw.about_window.AboutWindow.addLegalSection] can be used to add license
         information for the application dependencies or other components.
   */
-  @property gtk.types.License licenseType()
+  @property gtk.types.License licenseType() nothrow
   {
     return getLicenseType();
   }
@@ -563,7 +563,7 @@ class AboutWindow : adw.window.Window
           [adw.about_window.AboutWindow.addLegalSection] can be used to add license
           information for the application dependencies or other components.
   */
-  @property void licenseType(gtk.types.License propval)
+  @property void licenseType(gtk.types.License propval) nothrow
   {
     setLicenseType(propval);
   }
@@ -595,7 +595,7 @@ class AboutWindow : adw.window.Window
         [adw.about_window.AboutWindow.releaseNotesVersion] of the property will be used
         as the version; otherwise, [adw.about_window.AboutWindow.version_] is used.
   */
-  @property string releaseNotes()
+  @property string releaseNotes() nothrow
   {
     return getReleaseNotes();
   }
@@ -628,7 +628,7 @@ class AboutWindow : adw.window.Window
           [adw.about_window.AboutWindow.releaseNotesVersion] of the property will be used
           as the version; otherwise, [adw.about_window.AboutWindow.version_] is used.
   */
-  @property void releaseNotes(string propval)
+  @property void releaseNotes(string propval) nothrow
   {
     setReleaseNotes(propval);
   }
@@ -648,7 +648,7 @@ class AboutWindow : adw.window.Window
         
         See [adw.about_window.AboutWindow.releaseNotes].
   */
-  @property string releaseNotesVersion()
+  @property string releaseNotesVersion() nothrow
   {
     return getReleaseNotesVersion();
   }
@@ -669,7 +669,7 @@ class AboutWindow : adw.window.Window
           
           See [adw.about_window.AboutWindow.releaseNotes].
   */
-  @property void releaseNotesVersion(string propval)
+  @property void releaseNotesVersion(string propval) nothrow
   {
     setReleaseNotesVersion(propval);
   }
@@ -680,7 +680,7 @@ class AboutWindow : adw.window.Window
         
         The support page link is displayed on the main page.
   */
-  @property string supportUrl()
+  @property string supportUrl() nothrow
   {
     return getSupportUrl();
   }
@@ -692,7 +692,7 @@ class AboutWindow : adw.window.Window
           
           The support page link is displayed on the main page.
   */
-  @property void supportUrl(string propval)
+  @property void supportUrl(string propval) nothrow
   {
     setSupportUrl(propval);
   }
@@ -718,7 +718,7 @@ class AboutWindow : adw.window.Window
         * [adw.about_window.AboutWindow.addCreditSection]
         * [adw.about_window.AboutWindow.addAcknowledgementSection]
   */
-  @property string translatorCredits()
+  @property string translatorCredits() nothrow
   {
     return getTranslatorCredits();
   }
@@ -745,7 +745,7 @@ class AboutWindow : adw.window.Window
           * [adw.about_window.AboutWindow.addCreditSection]
           * [adw.about_window.AboutWindow.addAcknowledgementSection]
   */
-  @property void translatorCredits(string propval)
+  @property void translatorCredits(string propval) nothrow
   {
     setTranslatorCredits(propval);
   }
@@ -759,7 +759,7 @@ class AboutWindow : adw.window.Window
         If [adw.about_window.AboutWindow.releaseNotesVersion] is not set, the version
         will also be displayed above the release notes on the What's New page.
   */
-  @property string version_()
+  @property string version_() nothrow
   {
     return getVersion();
   }
@@ -774,7 +774,7 @@ class AboutWindow : adw.window.Window
           If [adw.about_window.AboutWindow.releaseNotesVersion] is not set, the version
           will also be displayed above the release notes on the What's New page.
   */
-  @property void version_(string propval)
+  @property void version_(string propval) nothrow
   {
     setVersion(propval);
   }
@@ -788,7 +788,7 @@ class AboutWindow : adw.window.Window
         
         Applications can add other links below, see [adw.about_window.AboutWindow.addLink].
   */
-  @property string website()
+  @property string website() nothrow
   {
     return getWebsite();
   }
@@ -803,7 +803,7 @@ class AboutWindow : adw.window.Window
           
           Applications can add other links below, see [adw.about_window.AboutWindow.addLink].
   */
-  @property void website(string propval)
+  @property void website(string propval) nothrow
   {
     setWebsite(propval);
   }
@@ -812,7 +812,7 @@ class AboutWindow : adw.window.Window
       Creates a new [adw.about_window.AboutWindow].
       Returns: the newly created [adw.about_window.AboutWindow]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_about_window_new();
@@ -847,7 +847,7 @@ class AboutWindow : adw.window.Window
         releaseNotesVersion = The version to retrieve release notes for
       Returns: the newly created [adw.about_window.AboutWindow]
   */
-  static adw.about_window.AboutWindow newFromAppdata(string resourcePath, string releaseNotesVersion = null)
+  static adw.about_window.AboutWindow newFromAppdata(string resourcePath, string releaseNotesVersion = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
@@ -880,7 +880,7 @@ class AboutWindow : adw.window.Window
         name = the section name
         people = the list of names
   */
-  void addAcknowledgementSection(string name, string[] people)
+  void addAcknowledgementSection(string name, string[] people) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     char*[] _tmppeople;
@@ -913,7 +913,7 @@ class AboutWindow : adw.window.Window
         name = the section name
         people = the list of names
   */
-  void addCreditSection(string name, string[] people)
+  void addCreditSection(string name, string[] people) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     char*[] _tmppeople;
@@ -973,7 +973,7 @@ class AboutWindow : adw.window.Window
         licenseType = the type of license
         license = custom license information
   */
-  void addLegalSection(string title, string copyright, gtk.types.License licenseType, string license = null)
+  void addLegalSection(string title, string copyright, gtk.types.License licenseType, string license = null) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     const(char)* _copyright = copyright.toCString(No.Alloc);
@@ -994,7 +994,7 @@ class AboutWindow : adw.window.Window
         title = the link title
         url = the link URL
   */
-  void addLink(string title, string url)
+  void addLink(string title, string url) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     const(char)* _url = url.toCString(No.Alloc);
@@ -1005,7 +1005,7 @@ class AboutWindow : adw.window.Window
       Gets the name of the application icon for self.
       Returns: the application icon name
   */
-  string getApplicationIcon()
+  string getApplicationIcon() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_window_get_application_icon(cast(AdwAboutWindow*)this._cPtr);
@@ -1017,7 +1017,7 @@ class AboutWindow : adw.window.Window
       Gets the application name for self.
       Returns: the application name
   */
-  string getApplicationName()
+  string getApplicationName() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_window_get_application_name(cast(AdwAboutWindow*)this._cPtr);
@@ -1029,7 +1029,7 @@ class AboutWindow : adw.window.Window
       Gets the list of artists of the application.
       Returns: The list of artists
   */
-  string[] getArtists()
+  string[] getArtists() nothrow
   {
     const(char*)* _cretval;
     _cretval = adw_about_window_get_artists(cast(AdwAboutWindow*)this._cPtr);
@@ -1051,7 +1051,7 @@ class AboutWindow : adw.window.Window
       Gets the comments about the application.
       Returns: the comments
   */
-  string getComments()
+  string getComments() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_window_get_comments(cast(AdwAboutWindow*)this._cPtr);
@@ -1063,7 +1063,7 @@ class AboutWindow : adw.window.Window
       Gets the copyright information for self.
       Returns: the copyright information
   */
-  string getCopyright()
+  string getCopyright() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_window_get_copyright(cast(AdwAboutWindow*)this._cPtr);
@@ -1075,7 +1075,7 @@ class AboutWindow : adw.window.Window
       Gets the debug information for self.
       Returns: the debug information
   */
-  string getDebugInfo()
+  string getDebugInfo() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_window_get_debug_info(cast(AdwAboutWindow*)this._cPtr);
@@ -1087,7 +1087,7 @@ class AboutWindow : adw.window.Window
       Gets the debug information filename for self.
       Returns: the debug information filename
   */
-  string getDebugInfoFilename()
+  string getDebugInfoFilename() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_window_get_debug_info_filename(cast(AdwAboutWindow*)this._cPtr);
@@ -1099,7 +1099,7 @@ class AboutWindow : adw.window.Window
       Gets the list of designers of the application.
       Returns: The list of designers
   */
-  string[] getDesigners()
+  string[] getDesigners() nothrow
   {
     const(char*)* _cretval;
     _cretval = adw_about_window_get_designers(cast(AdwAboutWindow*)this._cPtr);
@@ -1121,7 +1121,7 @@ class AboutWindow : adw.window.Window
       Gets the developer name for self.
       Returns: the developer_name
   */
-  string getDeveloperName()
+  string getDeveloperName() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_window_get_developer_name(cast(AdwAboutWindow*)this._cPtr);
@@ -1133,7 +1133,7 @@ class AboutWindow : adw.window.Window
       Gets the list of developers of the application.
       Returns: The list of developers
   */
-  string[] getDevelopers()
+  string[] getDevelopers() nothrow
   {
     const(char*)* _cretval;
     _cretval = adw_about_window_get_developers(cast(AdwAboutWindow*)this._cPtr);
@@ -1155,7 +1155,7 @@ class AboutWindow : adw.window.Window
       Gets the list of documenters of the application.
       Returns: The list of documenters
   */
-  string[] getDocumenters()
+  string[] getDocumenters() nothrow
   {
     const(char*)* _cretval;
     _cretval = adw_about_window_get_documenters(cast(AdwAboutWindow*)this._cPtr);
@@ -1177,7 +1177,7 @@ class AboutWindow : adw.window.Window
       Gets the issue tracker URL for self.
       Returns: the issue tracker URL
   */
-  string getIssueUrl()
+  string getIssueUrl() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_window_get_issue_url(cast(AdwAboutWindow*)this._cPtr);
@@ -1189,7 +1189,7 @@ class AboutWindow : adw.window.Window
       Gets the license for self.
       Returns: the license
   */
-  string getLicense()
+  string getLicense() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_window_get_license(cast(AdwAboutWindow*)this._cPtr);
@@ -1201,7 +1201,7 @@ class AboutWindow : adw.window.Window
       Gets the license type for self.
       Returns: the license type
   */
-  gtk.types.License getLicenseType()
+  gtk.types.License getLicenseType() nothrow
   {
     GtkLicense _cretval;
     _cretval = adw_about_window_get_license_type(cast(AdwAboutWindow*)this._cPtr);
@@ -1213,7 +1213,7 @@ class AboutWindow : adw.window.Window
       Gets the release notes for self.
       Returns: the release notes
   */
-  string getReleaseNotes()
+  string getReleaseNotes() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_window_get_release_notes(cast(AdwAboutWindow*)this._cPtr);
@@ -1225,7 +1225,7 @@ class AboutWindow : adw.window.Window
       Gets the version described by the application's release notes.
       Returns: the release notes version
   */
-  string getReleaseNotesVersion()
+  string getReleaseNotesVersion() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_window_get_release_notes_version(cast(AdwAboutWindow*)this._cPtr);
@@ -1237,7 +1237,7 @@ class AboutWindow : adw.window.Window
       Gets the URL of the support page for self.
       Returns: the support page URL
   */
-  string getSupportUrl()
+  string getSupportUrl() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_window_get_support_url(cast(AdwAboutWindow*)this._cPtr);
@@ -1249,7 +1249,7 @@ class AboutWindow : adw.window.Window
       Gets the translator credits string.
       Returns: The translator credits string
   */
-  string getTranslatorCredits()
+  string getTranslatorCredits() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_window_get_translator_credits(cast(AdwAboutWindow*)this._cPtr);
@@ -1261,7 +1261,7 @@ class AboutWindow : adw.window.Window
       Gets the version for self.
       Returns: the version
   */
-  string getVersion()
+  string getVersion() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_window_get_version(cast(AdwAboutWindow*)this._cPtr);
@@ -1273,7 +1273,7 @@ class AboutWindow : adw.window.Window
       Gets the application website URL for self.
       Returns: the website URL
   */
-  string getWebsite()
+  string getWebsite() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_window_get_website(cast(AdwAboutWindow*)this._cPtr);
@@ -1289,7 +1289,7 @@ class AboutWindow : adw.window.Window
       Params:
         applicationIcon = the application icon name
   */
-  void setApplicationIcon(string applicationIcon)
+  void setApplicationIcon(string applicationIcon) nothrow
   {
     const(char)* _applicationIcon = applicationIcon.toCString(No.Alloc);
     adw_about_window_set_application_icon(cast(AdwAboutWindow*)this._cPtr, _applicationIcon);
@@ -1303,7 +1303,7 @@ class AboutWindow : adw.window.Window
       Params:
         applicationName = the application name
   */
-  void setApplicationName(string applicationName)
+  void setApplicationName(string applicationName) nothrow
   {
     const(char)* _applicationName = applicationName.toCString(No.Alloc);
     adw_about_window_set_application_name(cast(AdwAboutWindow*)this._cPtr, _applicationName);
@@ -1329,7 +1329,7 @@ class AboutWindow : adw.window.Window
       Params:
         artists = the list of artists
   */
-  void setArtists(string[] artists = null)
+  void setArtists(string[] artists = null) nothrow
   {
     char*[] _tmpartists;
     foreach (s; artists)
@@ -1351,7 +1351,7 @@ class AboutWindow : adw.window.Window
       Params:
         comments = the comments
   */
-  void setComments(string comments)
+  void setComments(string comments) nothrow
   {
     const(char)* _comments = comments.toCString(No.Alloc);
     adw_about_window_set_comments(cast(AdwAboutWindow*)this._cPtr, _comments);
@@ -1372,7 +1372,7 @@ class AboutWindow : adw.window.Window
       Params:
         copyright = the copyright information
   */
-  void setCopyright(string copyright)
+  void setCopyright(string copyright) nothrow
   {
     const(char)* _copyright = copyright.toCString(No.Alloc);
     adw_about_window_set_copyright(cast(AdwAboutWindow*)this._cPtr, _copyright);
@@ -1394,7 +1394,7 @@ class AboutWindow : adw.window.Window
       Params:
         debugInfo = the debug information
   */
-  void setDebugInfo(string debugInfo)
+  void setDebugInfo(string debugInfo) nothrow
   {
     const(char)* _debugInfo = debugInfo.toCString(No.Alloc);
     adw_about_window_set_debug_info(cast(AdwAboutWindow*)this._cPtr, _debugInfo);
@@ -1411,7 +1411,7 @@ class AboutWindow : adw.window.Window
       Params:
         filename = the debug info filename
   */
-  void setDebugInfoFilename(string filename)
+  void setDebugInfoFilename(string filename) nothrow
   {
     const(char)* _filename = filename.toCString(No.Alloc);
     adw_about_window_set_debug_info_filename(cast(AdwAboutWindow*)this._cPtr, _filename);
@@ -1437,7 +1437,7 @@ class AboutWindow : adw.window.Window
       Params:
         designers = the list of designers
   */
-  void setDesigners(string[] designers = null)
+  void setDesigners(string[] designers = null) nothrow
   {
     char*[] _tmpdesigners;
     foreach (s; designers)
@@ -1461,7 +1461,7 @@ class AboutWindow : adw.window.Window
       Params:
         developerName = the developer name
   */
-  void setDeveloperName(string developerName)
+  void setDeveloperName(string developerName) nothrow
   {
     const(char)* _developerName = developerName.toCString(No.Alloc);
     adw_about_window_set_developer_name(cast(AdwAboutWindow*)this._cPtr, _developerName);
@@ -1487,7 +1487,7 @@ class AboutWindow : adw.window.Window
       Params:
         developers = the list of developers
   */
-  void setDevelopers(string[] developers = null)
+  void setDevelopers(string[] developers = null) nothrow
   {
     char*[] _tmpdevelopers;
     foreach (s; developers)
@@ -1518,7 +1518,7 @@ class AboutWindow : adw.window.Window
       Params:
         documenters = the list of documenters
   */
-  void setDocumenters(string[] documenters = null)
+  void setDocumenters(string[] documenters = null) nothrow
   {
     char*[] _tmpdocumenters;
     foreach (s; documenters)
@@ -1537,7 +1537,7 @@ class AboutWindow : adw.window.Window
       Params:
         issueUrl = the issue tracker URL
   */
-  void setIssueUrl(string issueUrl)
+  void setIssueUrl(string issueUrl) nothrow
   {
     const(char)* _issueUrl = issueUrl.toCString(No.Alloc);
     adw_about_window_set_issue_url(cast(AdwAboutWindow*)this._cPtr, _issueUrl);
@@ -1563,7 +1563,7 @@ class AboutWindow : adw.window.Window
       Params:
         license = the license
   */
-  void setLicense(string license)
+  void setLicense(string license) nothrow
   {
     const(char)* _license = license.toCString(No.Alloc);
     adw_about_window_set_license(cast(AdwAboutWindow*)this._cPtr, _license);
@@ -1590,7 +1590,7 @@ class AboutWindow : adw.window.Window
       Params:
         licenseType = the license type
   */
-  void setLicenseType(gtk.types.License licenseType)
+  void setLicenseType(gtk.types.License licenseType) nothrow
   {
     adw_about_window_set_license_type(cast(AdwAboutWindow*)this._cPtr, licenseType);
   }
@@ -1624,7 +1624,7 @@ class AboutWindow : adw.window.Window
       Params:
         releaseNotes = the release notes
   */
-  void setReleaseNotes(string releaseNotes)
+  void setReleaseNotes(string releaseNotes) nothrow
   {
     const(char)* _releaseNotes = releaseNotes.toCString(No.Alloc);
     adw_about_window_set_release_notes(cast(AdwAboutWindow*)this._cPtr, _releaseNotes);
@@ -1647,7 +1647,7 @@ class AboutWindow : adw.window.Window
       Params:
         version_ = the release notes version
   */
-  void setReleaseNotesVersion(string version_)
+  void setReleaseNotesVersion(string version_) nothrow
   {
     const(char)* _version_ = version_.toCString(No.Alloc);
     adw_about_window_set_release_notes_version(cast(AdwAboutWindow*)this._cPtr, _version_);
@@ -1661,7 +1661,7 @@ class AboutWindow : adw.window.Window
       Params:
         supportUrl = the support page URL
   */
-  void setSupportUrl(string supportUrl)
+  void setSupportUrl(string supportUrl) nothrow
   {
     const(char)* _supportUrl = supportUrl.toCString(No.Alloc);
     adw_about_window_set_support_url(cast(AdwAboutWindow*)this._cPtr, _supportUrl);
@@ -1690,7 +1690,7 @@ class AboutWindow : adw.window.Window
       Params:
         translatorCredits = the translator credits
   */
-  void setTranslatorCredits(string translatorCredits)
+  void setTranslatorCredits(string translatorCredits) nothrow
   {
     const(char)* _translatorCredits = translatorCredits.toCString(No.Alloc);
     adw_about_window_set_translator_credits(cast(AdwAboutWindow*)this._cPtr, _translatorCredits);
@@ -1707,7 +1707,7 @@ class AboutWindow : adw.window.Window
       Params:
         version_ = the version
   */
-  void setVersion(string version_)
+  void setVersion(string version_) nothrow
   {
     const(char)* _version_ = version_.toCString(No.Alloc);
     adw_about_window_set_version(cast(AdwAboutWindow*)this._cPtr, _version_);
@@ -1724,7 +1724,7 @@ class AboutWindow : adw.window.Window
       Params:
         website = the website URL
   */
-  void setWebsite(string website)
+  void setWebsite(string website) nothrow
   {
     const(char)* _website = website.toCString(No.Alloc);
     adw_about_window_set_website(cast(AdwAboutWindow*)this._cPtr, _website);
@@ -1751,18 +1751,19 @@ class AboutWindow : adw.window.Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivateLink(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivateLink(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : adw.about_window.AboutWindow)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1770,7 +1771,14 @@ class AboutWindow : adw.window.Window
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.about_window.AboutWindow.activateLink");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1793,7 +1801,7 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           The icon is displayed at the top of the main page.
       Returns: Builder instance for fluent chaining
   */
-  T applicationIcon(string propval)
+  T applicationIcon(string propval) nothrow
   {
     return setProperty("application-icon", propval);
   }
@@ -1806,7 +1814,7 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           The name is displayed at the top of the main page.
       Returns: Builder instance for fluent chaining
   */
-  T applicationName(string propval)
+  T applicationName(string propval) nothrow
   {
     return setProperty("application-name", propval);
   }
@@ -1822,7 +1830,7 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           detailed. It can also contain links and Pango markup.
       Returns: Builder instance for fluent chaining
   */
-  T comments(string propval)
+  T comments(string propval) nothrow
   {
     return setProperty("comments", propval);
   }
@@ -1842,7 +1850,7 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           information for the application dependencies or other components.
       Returns: Builder instance for fluent chaining
   */
-  T copyright(string propval)
+  T copyright(string propval) nothrow
   {
     return setProperty("copyright", propval);
   }
@@ -1863,7 +1871,7 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           Debug information cannot contain markup or links.
       Returns: Builder instance for fluent chaining
   */
-  T debugInfo(string propval)
+  T debugInfo(string propval) nothrow
   {
     return setProperty("debug-info", propval);
   }
@@ -1879,7 +1887,7 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           See [adw.about_window.AboutWindow.debugInfo].
       Returns: Builder instance for fluent chaining
   */
-  T debugInfoFilename(string propval)
+  T debugInfoFilename(string propval) nothrow
   {
     return setProperty("debug-info-filename", propval);
   }
@@ -1899,7 +1907,7 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           properties.
       Returns: Builder instance for fluent chaining
   */
-  T developerName(string propval)
+  T developerName(string propval) nothrow
   {
     return setProperty("developer-name", propval);
   }
@@ -1912,7 +1920,7 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           The issue tracker link is displayed on the main page.
       Returns: Builder instance for fluent chaining
   */
-  T issueUrl(string propval)
+  T issueUrl(string propval) nothrow
   {
     return setProperty("issue-url", propval);
   }
@@ -1937,7 +1945,7 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           information for the application dependencies or other components.
       Returns: Builder instance for fluent chaining
   */
-  T license(string propval)
+  T license(string propval) nothrow
   {
     return setProperty("license", propval);
   }
@@ -1965,7 +1973,7 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           information for the application dependencies or other components.
       Returns: Builder instance for fluent chaining
   */
-  T licenseType(gtk.types.License propval)
+  T licenseType(gtk.types.License propval) nothrow
   {
     return setProperty("license-type", propval);
   }
@@ -1999,7 +2007,7 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           as the version; otherwise, [adw.about_window.AboutWindow.version_] is used.
       Returns: Builder instance for fluent chaining
   */
-  T releaseNotes(string propval)
+  T releaseNotes(string propval) nothrow
   {
     return setProperty("release-notes", propval);
   }
@@ -2021,7 +2029,7 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           See [adw.about_window.AboutWindow.releaseNotes].
       Returns: Builder instance for fluent chaining
   */
-  T releaseNotesVersion(string propval)
+  T releaseNotesVersion(string propval) nothrow
   {
     return setProperty("release-notes-version", propval);
   }
@@ -2034,7 +2042,7 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           The support page link is displayed on the main page.
       Returns: Builder instance for fluent chaining
   */
-  T supportUrl(string propval)
+  T supportUrl(string propval) nothrow
   {
     return setProperty("support-url", propval);
   }
@@ -2062,7 +2070,7 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           * [adw.about_window.AboutWindow.addAcknowledgementSection]
       Returns: Builder instance for fluent chaining
   */
-  T translatorCredits(string propval)
+  T translatorCredits(string propval) nothrow
   {
     return setProperty("translator-credits", propval);
   }
@@ -2078,7 +2086,7 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           will also be displayed above the release notes on the What's New page.
       Returns: Builder instance for fluent chaining
   */
-  T version_(string propval)
+  T version_(string propval) nothrow
   {
     return setProperty("version", propval);
   }
@@ -2094,7 +2102,7 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           Applications can add other links below, see [adw.about_window.AboutWindow.addLink].
       Returns: Builder instance for fluent chaining
   */
-  T website(string propval)
+  T website(string propval) nothrow
   {
     return setProperty("website", propval);
   }
@@ -2107,7 +2115,7 @@ final class AboutWindowGidBuilder : AboutWindowGidBuilderImpl!AboutWindowGidBuil
       Create object from builder.
       Returns: New object
   */
-  AboutWindow build()
+  AboutWindow build() nothrow
   {
     return new AboutWindow(cast(void*)createGObject(AboutWindow._getGType), No.Take);
   }

@@ -20,26 +20,26 @@ class ToggleButtonAccessible : gtk.button_accessible.ButtonAccessible
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_toggle_button_accessible_get_type != &gidSymbolNotFound ? gtk_toggle_button_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ToggleButtonAccessible self()
+  override ToggleButtonAccessible self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class ToggleButtonAccessible : gtk.button_accessible.ButtonAccessible
       Get builder for [gtk.toggle_button_accessible.ToggleButtonAccessible]
       Returns: New builder object
   */
-  static ToggleButtonAccessibleGidBuilder builder()
+  static ToggleButtonAccessibleGidBuilder builder() nothrow
   {
     return new ToggleButtonAccessibleGidBuilder;
   }
@@ -67,7 +67,7 @@ final class ToggleButtonAccessibleGidBuilder : ToggleButtonAccessibleGidBuilderI
       Create object from builder.
       Returns: New object
   */
-  ToggleButtonAccessible build()
+  ToggleButtonAccessible build() nothrow
   {
     return new ToggleButtonAccessible(cast(void*)createGObject(ToggleButtonAccessible._getGType), No.Take);
   }

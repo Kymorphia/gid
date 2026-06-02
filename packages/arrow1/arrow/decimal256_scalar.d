@@ -17,26 +17,26 @@ class Decimal256Scalar : arrow.scalar.Scalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal256_scalar_get_type != &gidSymbolNotFound ? garrow_decimal256_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Decimal256Scalar self()
+  override Decimal256Scalar self() nothrow
   {
     return this;
   }
@@ -45,13 +45,13 @@ class Decimal256Scalar : arrow.scalar.Scalar
       Get builder for [arrow.decimal256_scalar.Decimal256Scalar]
       Returns: New builder object
   */
-  static Decimal256ScalarGidBuilder builder()
+  static Decimal256ScalarGidBuilder builder() nothrow
   {
     return new Decimal256ScalarGidBuilder;
   }
 
   /** */
-  this(arrow.decimal256_data_type.Decimal256DataType dataType, arrow.decimal256.Decimal256 value)
+  this(arrow.decimal256_data_type.Decimal256DataType dataType, arrow.decimal256.Decimal256 value) nothrow
   {
     GArrowDecimal256Scalar* _cretval;
     _cretval = garrow_decimal256_scalar_new(dataType ? cast(GArrowDecimal256DataType*)dataType._cPtr(No.Dup) : null, value ? cast(GArrowDecimal256*)value._cPtr(No.Dup) : null);
@@ -59,7 +59,7 @@ class Decimal256Scalar : arrow.scalar.Scalar
   }
 
   /** */
-  arrow.decimal256.Decimal256 getValue()
+  arrow.decimal256.Decimal256 getValue() nothrow
   {
     GArrowDecimal256* _cretval;
     _cretval = garrow_decimal256_scalar_get_value(cast(GArrowDecimal256Scalar*)this._cPtr);
@@ -78,7 +78,7 @@ class Decimal256ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
         propval = The value of the scalar.
       Returns: Builder instance for fluent chaining
   */
-  T value(arrow.decimal256.Decimal256 propval)
+  T value(arrow.decimal256.Decimal256 propval) nothrow
   {
     return setProperty("value", propval);
   }
@@ -91,7 +91,7 @@ final class Decimal256ScalarGidBuilder : Decimal256ScalarGidBuilderImpl!Decimal2
       Create object from builder.
       Returns: New object
   */
-  Decimal256Scalar build()
+  Decimal256Scalar build() nothrow
   {
     return new Decimal256Scalar(cast(void*)createGObject(Decimal256Scalar._getGType), Yes.Take);
   }

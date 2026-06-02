@@ -15,11 +15,8 @@ class ContainerNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.container_node.ContainerNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -32,7 +29,7 @@ class ContainerNode : gsk.render_node.RenderNode
         children = The children of the node
       Returns: the new [gsk.render_node.RenderNode]
   */
-  this(gsk.render_node.RenderNode[] children)
+  this(gsk.render_node.RenderNode[] children) nothrow
   {
     GskRenderNode* _cretval;
     uint _nChildren;
@@ -55,7 +52,7 @@ class ContainerNode : gsk.render_node.RenderNode
         idx = the position of the child to get
       Returns: the idx'th child of container
   */
-  gsk.render_node.RenderNode getChild(uint idx)
+  gsk.render_node.RenderNode getChild(uint idx) nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_container_node_get_child(cast(const(GskRenderNode)*)this._cPtr, idx);
@@ -67,7 +64,7 @@ class ContainerNode : gsk.render_node.RenderNode
       Retrieves the number of direct children of node.
       Returns: the number of children of the [gsk.render_node.RenderNode]
   */
-  uint getNChildren()
+  uint getNChildren() nothrow
   {
     uint _retval;
     _retval = gsk_container_node_get_n_children(cast(const(GskRenderNode)*)this._cPtr);

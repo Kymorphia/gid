@@ -26,7 +26,7 @@ interface EditableText
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_editable_text_get_type != &gidSymbolNotFound ? atk_editable_text_get_type() : cast(GType)0;

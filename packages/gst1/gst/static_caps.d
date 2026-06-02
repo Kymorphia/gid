@@ -18,11 +18,8 @@ class StaticCaps
   GstStaticCaps _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gst.static_caps.StaticCaps");
-
     _cInstance = *cast(GstStaticCaps*)ptr;
 
     if (take)
@@ -30,7 +27,7 @@ class StaticCaps
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class StaticCaps
       Get `caps` field.
       Returns: the cached #GstCaps
   */
-  @property gst.caps.Caps caps()
+  @property gst.caps.Caps caps() nothrow
   {
     return cToD!(gst.caps.Caps)(cast(void*)(cast(GstStaticCaps*)this._cPtr).caps);
   }
@@ -49,7 +46,7 @@ class StaticCaps
       Params:
         propval = the cached #GstCaps
   */
-  @property void caps(gst.caps.Caps propval)
+  @property void caps(gst.caps.Caps propval) nothrow
   {
     cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstStaticCaps*)this._cPtr).caps);
     dToC(propval, cast(void*)&(cast(GstStaticCaps*)this._cPtr).caps);
@@ -59,7 +56,7 @@ class StaticCaps
       Get `string_` field.
       Returns: a string describing a caps
   */
-  @property string string_()
+  @property string string_() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstStaticCaps*)this._cPtr).string_);
   }
@@ -69,7 +66,7 @@ class StaticCaps
       Params:
         propval = a string describing a caps
   */
-  @property void string_(string propval)
+  @property void string_(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstStaticCaps*)this._cPtr).string_);
     dToC(propval, cast(void*)&(cast(GstStaticCaps*)this._cPtr).string_);
@@ -78,7 +75,7 @@ class StaticCaps
   /**
       Cleans up the cached caps contained in static_caps.
   */
-  void cleanup()
+  void cleanup() nothrow
   {
     gst_static_caps_cleanup(cast(GstStaticCaps*)this._cPtr);
   }
@@ -89,7 +86,7 @@ class StaticCaps
             core holds an additional ref to the returned caps, use
             gst_caps_make_writable() on the returned caps to modify it.
   */
-  gst.caps.Caps get()
+  gst.caps.Caps get() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_static_caps_get(cast(GstStaticCaps*)this._cPtr);

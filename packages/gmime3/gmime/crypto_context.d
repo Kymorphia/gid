@@ -20,26 +20,26 @@ class CryptoContext : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_crypto_context_get_type != &gidSymbolNotFound ? g_mime_crypto_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CryptoContext self()
+  override CryptoContext self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class CryptoContext : gobject.object.ObjectWrap
       Get builder for [gmime.crypto_context.CryptoContext]
       Returns: New builder object
   */
-  static CryptoContextGidBuilder builder()
+  static CryptoContextGidBuilder builder() nothrow
   {
     return new CryptoContextGidBuilder;
   }
@@ -60,7 +60,7 @@ class CryptoContext : gobject.object.ObjectWrap
         protocol = the crypto protocol
       Returns: a newly allocated #GMimeCryptoContext.
   */
-  this(string protocol)
+  this(string protocol) nothrow
   {
     GMimeCryptoContext* _cretval;
     const(char)* _protocol = protocol.toCString(No.Alloc);
@@ -117,7 +117,7 @@ class CryptoContext : gobject.object.ObjectWrap
         name = digest name
       Returns: the equivalent digest id or #GMIME_DIGEST_ALGO_DEFAULT on fail.
   */
-  gmime.types.DigestAlgo digestId(string name)
+  gmime.types.DigestAlgo digestId(string name) nothrow
   {
     GMimeDigestAlgo _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -133,7 +133,7 @@ class CryptoContext : gobject.object.ObjectWrap
         digest = digest id
       Returns: the equivalent digest name or null on fail.
   */
-  string digestName(gmime.types.DigestAlgo digest)
+  string digestName(gmime.types.DigestAlgo digest) nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_crypto_context_digest_name(cast(GMimeCryptoContext*)this._cPtr, digest);
@@ -201,7 +201,7 @@ class CryptoContext : gobject.object.ObjectWrap
       Gets the encryption protocol for the crypto context.
       Returns: the encryption protocol or null if not supported.
   */
-  string getEncryptionProtocol()
+  string getEncryptionProtocol() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_crypto_context_get_encryption_protocol(cast(GMimeCryptoContext*)this._cPtr);
@@ -213,7 +213,7 @@ class CryptoContext : gobject.object.ObjectWrap
       Gets the key exchange protocol for the crypto context.
       Returns: the key exchange protocol or null if not supported.
   */
-  string getKeyExchangeProtocol()
+  string getKeyExchangeProtocol() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_crypto_context_get_key_exchange_protocol(cast(GMimeCryptoContext*)this._cPtr);
@@ -225,7 +225,7 @@ class CryptoContext : gobject.object.ObjectWrap
       Gets the signature protocol for the crypto context.
       Returns: the signature protocol or null if not supported.
   */
-  string getSignatureProtocol()
+  string getSignatureProtocol() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_crypto_context_get_signature_protocol(cast(GMimeCryptoContext*)this._cPtr);
@@ -314,7 +314,7 @@ final class CryptoContextGidBuilder : CryptoContextGidBuilderImpl!CryptoContextG
       Create object from builder.
       Returns: New object
   */
-  CryptoContext build()
+  CryptoContext build() nothrow
   {
     return new CryptoContext(cast(void*)createGObject(CryptoContext._getGType), Yes.Take);
   }

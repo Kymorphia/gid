@@ -15,32 +15,32 @@ class UserContentFilter : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_user_content_filter_get_type != &gidSymbolNotFound ? webkit_user_content_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UserContentFilter self()
+  override UserContentFilter self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class UserContentFilter : gobject.boxed.Boxed
       #WebKitUserContentFilterStore.
       Returns: the identifier for the filter
   */
-  string getIdentifier()
+  string getIdentifier() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_user_content_filter_get_identifier(cast(WebKitUserContentFilter*)this._cPtr);

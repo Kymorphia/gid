@@ -19,11 +19,8 @@ class VideoTimeCodeConfig
   GstVideoTimeCodeConfig _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_time_code_config.VideoTimeCodeConfig");
-
     _cInstance = *cast(GstVideoTimeCodeConfig*)ptr;
 
     if (take)
@@ -31,7 +28,7 @@ class VideoTimeCodeConfig
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -40,7 +37,7 @@ class VideoTimeCodeConfig
       Get `fpsN` field.
       Returns: Numerator of the frame rate
   */
-  @property uint fpsN()
+  @property uint fpsN() nothrow
   {
     return (cast(GstVideoTimeCodeConfig*)this._cPtr).fpsN;
   }
@@ -50,7 +47,7 @@ class VideoTimeCodeConfig
       Params:
         propval = Numerator of the frame rate
   */
-  @property void fpsN(uint propval)
+  @property void fpsN(uint propval) nothrow
   {
     (cast(GstVideoTimeCodeConfig*)this._cPtr).fpsN = propval;
   }
@@ -59,7 +56,7 @@ class VideoTimeCodeConfig
       Get `fpsD` field.
       Returns: Denominator of the frame rate
   */
-  @property uint fpsD()
+  @property uint fpsD() nothrow
   {
     return (cast(GstVideoTimeCodeConfig*)this._cPtr).fpsD;
   }
@@ -69,7 +66,7 @@ class VideoTimeCodeConfig
       Params:
         propval = Denominator of the frame rate
   */
-  @property void fpsD(uint propval)
+  @property void fpsD(uint propval) nothrow
   {
     (cast(GstVideoTimeCodeConfig*)this._cPtr).fpsD = propval;
   }
@@ -78,7 +75,7 @@ class VideoTimeCodeConfig
       Get `flags` field.
       Returns: the corresponding #GstVideoTimeCodeFlags
   */
-  @property gstvideo.types.VideoTimeCodeFlags flags()
+  @property gstvideo.types.VideoTimeCodeFlags flags() nothrow
   {
     return cast(gstvideo.types.VideoTimeCodeFlags)(cast(GstVideoTimeCodeConfig*)this._cPtr).flags;
   }
@@ -88,7 +85,7 @@ class VideoTimeCodeConfig
       Params:
         propval = the corresponding #GstVideoTimeCodeFlags
   */
-  @property void flags(gstvideo.types.VideoTimeCodeFlags propval)
+  @property void flags(gstvideo.types.VideoTimeCodeFlags propval) nothrow
   {
     (cast(GstVideoTimeCodeConfig*)this._cPtr).flags = cast(GstVideoTimeCodeFlags)propval;
   }
@@ -97,7 +94,7 @@ class VideoTimeCodeConfig
       Get `latestDailyJam` field.
       Returns: The latest daily jam information, if present, or NULL
   */
-  @property glib.date_time.DateTime latestDailyJam()
+  @property glib.date_time.DateTime latestDailyJam() nothrow
   {
     return cToD!(glib.date_time.DateTime)(cast(void*)(cast(GstVideoTimeCodeConfig*)this._cPtr).latestDailyJam);
   }
@@ -107,7 +104,7 @@ class VideoTimeCodeConfig
       Params:
         propval = The latest daily jam information, if present, or NULL
   */
-  @property void latestDailyJam(glib.date_time.DateTime propval)
+  @property void latestDailyJam(glib.date_time.DateTime propval) nothrow
   {
     cValueFree!(glib.date_time.DateTime)(cast(void*)(cast(GstVideoTimeCodeConfig*)this._cPtr).latestDailyJam);
     dToC(propval, cast(void*)&(cast(GstVideoTimeCodeConfig*)this._cPtr).latestDailyJam);

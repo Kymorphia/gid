@@ -49,7 +49,7 @@ template SerializableT()
         propertyNode = the JSON node containing the serialized property
       Returns: `TRUE` if the property was successfully deserialized
   */
-  override bool defaultDeserializeProperty(string propertyName, gobject.value.Value value, gobject.param_spec.ParamSpec pspec, json.node.Node propertyNode)
+  override bool defaultDeserializeProperty(string propertyName, gobject.value.Value value, gobject.param_spec.ParamSpec pspec, json.node.Node propertyNode) nothrow
   {
     bool _retval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
@@ -85,7 +85,7 @@ template SerializableT()
       Returns: a node containing the
           serialized property
   */
-  override json.node.Node defaultSerializeProperty(string propertyName, gobject.value.Value value, gobject.param_spec.ParamSpec pspec)
+  override json.node.Node defaultSerializeProperty(string propertyName, gobject.value.Value value, gobject.param_spec.ParamSpec pspec) nothrow
   {
     JsonNode* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
@@ -116,7 +116,7 @@ template SerializableT()
         propertyNode = the JSON node containing the serialized property
       Returns: `TRUE` if the property was successfully deserialized
   */
-  override bool deserializeProperty(string propertyName, out gobject.value.Value value, gobject.param_spec.ParamSpec pspec, json.node.Node propertyNode)
+  override bool deserializeProperty(string propertyName, out gobject.value.Value value, gobject.param_spec.ParamSpec pspec, json.node.Node propertyNode) nothrow
   {
     bool _retval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
@@ -135,7 +135,7 @@ template SerializableT()
         name = the name of the property
       Returns: the property description
   */
-  override gobject.param_spec.ParamSpec findProperty(string name)
+  override gobject.param_spec.ParamSpec findProperty(string name) nothrow
   {
     GParamSpec* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -153,7 +153,7 @@ template SerializableT()
         pspec = a property description
         value = return location for the property value
   */
-  override void getProperty(gobject.param_spec.ParamSpec pspec, out gobject.value.Value value)
+  override void getProperty(gobject.param_spec.ParamSpec pspec, out gobject.value.Value value) nothrow
   {
     GValue _value;
     json_serializable_get_property(cast(JsonSerializable*)this._cPtr, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, &_value);
@@ -167,7 +167,7 @@ template SerializableT()
       Returns: the serializable
           properties of the object
   */
-  override gobject.param_spec.ParamSpec[] listProperties()
+  override gobject.param_spec.ParamSpec[] listProperties() nothrow
   {
     GParamSpec** _cretval;
     uint _cretlength;
@@ -194,7 +194,7 @@ template SerializableT()
         pspec = a property description
       Returns: a node containing the serialized property
   */
-  override json.node.Node serializeProperty(string propertyName, gobject.value.Value value, gobject.param_spec.ParamSpec pspec)
+  override json.node.Node serializeProperty(string propertyName, gobject.value.Value value, gobject.param_spec.ParamSpec pspec) nothrow
   {
     JsonNode* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
@@ -212,7 +212,7 @@ template SerializableT()
         pspec = a property description
         value = the property value to set
   */
-  override void setProperty(gobject.param_spec.ParamSpec pspec, gobject.value.Value value)
+  override void setProperty(gobject.param_spec.ParamSpec pspec, gobject.value.Value value) nothrow
   {
     json_serializable_set_property(cast(JsonSerializable*)this._cPtr, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }

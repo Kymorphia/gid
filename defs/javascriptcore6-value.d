@@ -17,9 +17,9 @@ class Value : gobject.object.ObjectWrap
   *   callback = The callback
   * Returns: New function Value
   */
-  static Value newFunction(T)(Context context, string name, T callback)
+  static Value newFunction(T)(Context context, string name, T callback) nothrow
   {
-    extern(C) JSCValue* _ccallback(GPtrArray* args, void* userData)
+    extern(C) JSCValue* _ccallback(GPtrArray* args, void* userData) nothrow
     {
       auto _cb = cast(T*)userData;
       auto ctx = jsc_context_get_current();
@@ -66,7 +66,7 @@ class Value : gobject.object.ObjectWrap
   *   T = The D type
   * Returns: The value as a native D type
   */
-  T get(T)()
+  T get(T)() nothrow
   {
     return getJsVal!T(cast(JSCValue*)_cInstancePtr);
   }
@@ -79,7 +79,7 @@ class Value : gobject.object.ObjectWrap
   *   val = The D value to create the Value from
   * Returns: The new Value
   */
-  static Value from(T)(Context ctx, T val)
+  static Value from(T)(Context ctx, T val) nothrow
   {
     return new Value (createJsVal!T(cast(JSCContext*)ctx._cPtr, val), Yes.Take);
   }
@@ -92,7 +92,7 @@ class Value : gobject.object.ObjectWrap
 *   jsval = C JSCValue structure pointer
 * Returns: The value of type `T`
 */
-static T getJsVal(T)(JSCValue* jsval)
+static T getJsVal(T)(JSCValue* jsval) nothrow
 {
   static if (is(T == bool))
     return cast(bool)jsc_value_to_boolean(jsval);
@@ -157,7 +157,7 @@ static T getJsVal(T)(JSCValue* jsval)
 *   val = The value to create the JSCValue from
 * Returns: The new JSCValue which the caller owns
 */
-static JSCValue* createJsVal(T)(JSCContext* ctx, T val)
+static JSCValue* createJsVal(T)(JSCContext* ctx, T val) nothrow
 {
   static if (is(T == bool))
     return jsc_value_new_boolean(ctx, cast(gboolean)val);
@@ -203,7 +203,7 @@ static JSCValue* createJsVal(T)(JSCContext* ctx, T val)
  *   T = The D type
  * Returns: true if createJsVal is supported for the type, false otherwise
  */
-bool isValidJsVal(T)()
+bool isValidJsVal(T)() nothrow
 {
   return is(T == bool) || isNumeric!T || is(T == string) || is(T == Value) || is(T == U[], U) || is(T == U[string], U);
 }

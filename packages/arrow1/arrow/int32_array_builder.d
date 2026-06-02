@@ -15,26 +15,26 @@ class Int32ArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_int32_array_builder_get_type != &gidSymbolNotFound ? garrow_int32_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Int32ArrayBuilder self()
+  override Int32ArrayBuilder self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class Int32ArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.int32_array_builder.Int32ArrayBuilder]
       Returns: New builder object
   */
-  static Int32ArrayBuilderGidBuilder builder()
+  static Int32ArrayBuilderGidBuilder builder() nothrow
   {
     return new Int32ArrayBuilderGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowInt32ArrayBuilder* _cretval;
     _cretval = garrow_int32_array_builder_new();
@@ -124,7 +124,7 @@ final class Int32ArrayBuilderGidBuilder : Int32ArrayBuilderGidBuilderImpl!Int32A
       Create object from builder.
       Returns: New object
   */
-  Int32ArrayBuilder build()
+  Int32ArrayBuilder build() nothrow
   {
     return new Int32ArrayBuilder(cast(void*)createGObject(Int32ArrayBuilder._getGType), Yes.Take);
   }

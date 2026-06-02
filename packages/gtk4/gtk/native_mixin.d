@@ -37,7 +37,7 @@ template NativeT()
       Returns the renderer that is used for this [gtk.native.Native].
       Returns: the renderer for self
   */
-  override gsk.renderer.Renderer getRenderer()
+  override gsk.renderer.Renderer getRenderer() nothrow
   {
     GskRenderer* _cretval;
     _cretval = gtk_native_get_renderer(cast(GtkNative*)this._cPtr);
@@ -49,7 +49,7 @@ template NativeT()
       Returns the surface of this [gtk.native.Native].
       Returns: the surface of self
   */
-  override gdk.surface.Surface getSurface()
+  override gdk.surface.Surface getSurface() nothrow
   {
     GdkSurface* _cretval;
     _cretval = gtk_native_get_surface(cast(GtkNative*)this._cPtr);
@@ -67,7 +67,7 @@ template NativeT()
         x = return location for the x coordinate
         y = return location for the y coordinate
   */
-  override void getSurfaceTransform(out double x, out double y)
+  override void getSurfaceTransform(out double x, out double y) nothrow
   {
     gtk_native_get_surface_transform(cast(GtkNative*)this._cPtr, cast(double*)&x, cast(double*)&y);
   }
@@ -77,7 +77,7 @@ template NativeT()
       
       This should only be used by subclasses.
   */
-  override void realize()
+  override void realize() nothrow
   {
     gtk_native_realize(cast(GtkNative*)this._cPtr);
   }
@@ -87,7 +87,7 @@ template NativeT()
       
       This should only be used by subclasses.
   */
-  override void unrealize()
+  override void unrealize() nothrow
   {
     gtk_native_unrealize(cast(GtkNative*)this._cPtr);
   }

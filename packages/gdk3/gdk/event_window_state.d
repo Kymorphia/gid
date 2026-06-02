@@ -16,11 +16,8 @@ class EventWindowState
   GdkEventWindowState _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.event_window_state.EventWindowState");
-
     _cInstance = *cast(GdkEventWindowState*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class EventWindowState
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class EventWindowState
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.WindowState]).
   */
-  @property gdk.types.EventType type()
+  @property gdk.types.EventType type() nothrow
   {
     return cast(gdk.types.EventType)(cast(GdkEventWindowState*)this._cPtr).type;
   }
@@ -47,7 +44,7 @@ class EventWindowState
       Params:
         propval = the type of the event ([gdk.types.EventType.WindowState]).
   */
-  @property void type(gdk.types.EventType propval)
+  @property void type(gdk.types.EventType propval) nothrow
   {
     (cast(GdkEventWindowState*)this._cPtr).type = cast(GdkEventType)propval;
   }
@@ -56,7 +53,7 @@ class EventWindowState
       Get `window` field.
       Returns: the window which received the event.
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventWindowState*)this._cPtr).window);
   }
@@ -66,7 +63,7 @@ class EventWindowState
       Params:
         propval = the window which received the event.
   */
-  @property void window(gdk.window.Window propval)
+  @property void window(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventWindowState*)this._cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventWindowState*)this._cPtr).window);
@@ -76,7 +73,7 @@ class EventWindowState
       Get `sendEvent` field.
       Returns: true if the event was sent explicitly.
   */
-  @property byte sendEvent()
+  @property byte sendEvent() nothrow
   {
     return (cast(GdkEventWindowState*)this._cPtr).sendEvent;
   }
@@ -86,7 +83,7 @@ class EventWindowState
       Params:
         propval = true if the event was sent explicitly.
   */
-  @property void sendEvent(byte propval)
+  @property void sendEvent(byte propval) nothrow
   {
     (cast(GdkEventWindowState*)this._cPtr).sendEvent = propval;
   }
@@ -95,7 +92,7 @@ class EventWindowState
       Get `changedMask` field.
       Returns: mask specifying what flags have changed.
   */
-  @property gdk.types.WindowState changedMask()
+  @property gdk.types.WindowState changedMask() nothrow
   {
     return cast(gdk.types.WindowState)(cast(GdkEventWindowState*)this._cPtr).changedMask;
   }
@@ -105,7 +102,7 @@ class EventWindowState
       Params:
         propval = mask specifying what flags have changed.
   */
-  @property void changedMask(gdk.types.WindowState propval)
+  @property void changedMask(gdk.types.WindowState propval) nothrow
   {
     (cast(GdkEventWindowState*)this._cPtr).changedMask = cast(GdkWindowState)propval;
   }
@@ -115,7 +112,7 @@ class EventWindowState
       Returns: the new window state, a combination of
           #GdkWindowState bits.
   */
-  @property gdk.types.WindowState newWindowState()
+  @property gdk.types.WindowState newWindowState() nothrow
   {
     return cast(gdk.types.WindowState)(cast(GdkEventWindowState*)this._cPtr).newWindowState;
   }
@@ -126,7 +123,7 @@ class EventWindowState
         propval = the new window state, a combination of
             #GdkWindowState bits.
   */
-  @property void newWindowState(gdk.types.WindowState propval)
+  @property void newWindowState(gdk.types.WindowState propval) nothrow
   {
     (cast(GdkEventWindowState*)this._cPtr).newWindowState = cast(GdkWindowState)propval;
   }

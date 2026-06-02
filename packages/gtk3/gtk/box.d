@@ -70,26 +70,26 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_box_get_type != &gidSymbolNotFound ? gtk_box_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Box self()
+  override Box self() nothrow
   {
     return this;
   }
@@ -98,43 +98,43 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
       Get builder for [gtk.box.Box]
       Returns: New builder object
   */
-  static BoxGidBuilder builder()
+  static BoxGidBuilder builder() nothrow
   {
     return new BoxGidBuilder;
   }
 
   /** */
-  @property gtk.types.BaselinePosition baselinePosition()
+  @property gtk.types.BaselinePosition baselinePosition() nothrow
   {
     return getBaselinePosition();
   }
 
   /** */
-  @property void baselinePosition(gtk.types.BaselinePosition propval)
+  @property void baselinePosition(gtk.types.BaselinePosition propval) nothrow
   {
     setBaselinePosition(propval);
   }
 
   /** */
-  @property bool homogeneous()
+  @property bool homogeneous() nothrow
   {
     return getHomogeneous();
   }
 
   /** */
-  @property void homogeneous(bool propval)
+  @property void homogeneous(bool propval) nothrow
   {
     setHomogeneous(propval);
   }
 
   /** */
-  @property int spacing()
+  @property int spacing() nothrow
   {
     return getSpacing();
   }
 
   /** */
-  @property void spacing(int propval)
+  @property void spacing(int propval) nothrow
   {
     setSpacing(propval);
   }
@@ -149,7 +149,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
         spacing = the number of pixels to place by default between children.
       Returns: a new #GtkBox.
   */
-  this(gtk.types.Orientation orientation, int spacing)
+  this(gtk.types.Orientation orientation, int spacing) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_box_new(orientation, spacing);
@@ -160,7 +160,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
       Gets the value set by [gtk.box.Box.setBaselinePosition].
       Returns: the baseline position
   */
-  gtk.types.BaselinePosition getBaselinePosition()
+  gtk.types.BaselinePosition getBaselinePosition() nothrow
   {
     GtkBaselinePosition _cretval;
     _cretval = gtk_box_get_baseline_position(cast(GtkBox*)this._cPtr);
@@ -173,7 +173,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
       Returns: the center widget
           or null in case no center widget is set.
   */
-  gtk.widget.Widget getCenterWidget()
+  gtk.widget.Widget getCenterWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_box_get_center_widget(cast(GtkBox*)this._cPtr);
@@ -186,7 +186,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
       same size). See [gtk.box.Box.setHomogeneous].
       Returns: true if the box is homogeneous.
   */
-  bool getHomogeneous()
+  bool getHomogeneous() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_box_get_homogeneous(cast(GtkBox*)this._cPtr);
@@ -197,7 +197,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
       Gets the value set by [gtk.box.Box.setSpacing].
       Returns: spacing between children
   */
-  int getSpacing()
+  int getSpacing() nothrow
   {
     int _retval;
     _retval = gtk_box_get_spacing(cast(GtkBox*)this._cPtr);
@@ -225,7 +225,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
             reference ends of box, then padding pixels are also put between
             child and the reference edge of box
   */
-  void packEnd(gtk.widget.Widget child, bool expand, bool fill, uint padding)
+  void packEnd(gtk.widget.Widget child, bool expand, bool fill, uint padding) nothrow
   {
     gtk_box_pack_end(cast(GtkBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, expand, fill, padding);
   }
@@ -251,7 +251,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
             reference ends of box, then padding pixels are also put between
             child and the reference edge of box
   */
-  void packStart(gtk.widget.Widget child, bool expand, bool fill, uint padding)
+  void packStart(gtk.widget.Widget child, bool expand, bool fill, uint padding) nothrow
   {
     gtk_box_pack_start(cast(GtkBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, expand, fill, padding);
   }
@@ -270,7 +270,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
         packType = pointer to return location for pack-type
               child property
   */
-  void queryChildPacking(gtk.widget.Widget child, out bool expand, out bool fill, out uint padding, out gtk.types.PackType packType)
+  void queryChildPacking(gtk.widget.Widget child, out bool expand, out bool fill, out uint padding, out gtk.types.PackType packType) nothrow
   {
     gboolean _expand;
     gboolean _fill;
@@ -296,7 +296,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
             of box, starting from 0. If negative, indicates the end of
             the list
   */
-  void reorderChild(gtk.widget.Widget child, int position)
+  void reorderChild(gtk.widget.Widget child, int position) nothrow
   {
     gtk_box_reorder_child(cast(GtkBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, position);
   }
@@ -312,7 +312,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
       Params:
         position = a #GtkBaselinePosition
   */
-  void setBaselinePosition(gtk.types.BaselinePosition position)
+  void setBaselinePosition(gtk.types.BaselinePosition position) nothrow
   {
     gtk_box_set_baseline_position(cast(GtkBox*)this._cPtr, position);
   }
@@ -326,7 +326,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
       Params:
         widget = the widget to center
   */
-  void setCenterWidget(gtk.widget.Widget widget = null)
+  void setCenterWidget(gtk.widget.Widget widget = null) nothrow
   {
     gtk_box_set_center_widget(cast(GtkBox*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -341,7 +341,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
         padding = the new value of the padding child property
         packType = the new value of the pack-type child property
   */
-  void setChildPacking(gtk.widget.Widget child, bool expand, bool fill, uint padding, gtk.types.PackType packType)
+  void setChildPacking(gtk.widget.Widget child, bool expand, bool fill, uint padding, gtk.types.PackType packType) nothrow
   {
     gtk_box_set_child_packing(cast(GtkBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, expand, fill, padding, packType);
   }
@@ -355,7 +355,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
         homogeneous = a boolean value, true to create equal allotments,
             false for variable allotments
   */
-  void setHomogeneous(bool homogeneous)
+  void setHomogeneous(bool homogeneous) nothrow
   {
     gtk_box_set_homogeneous(cast(GtkBox*)this._cPtr, homogeneous);
   }
@@ -367,7 +367,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
       Params:
         spacing = the number of pixels to put between children
   */
-  void setSpacing(int spacing)
+  void setSpacing(int spacing) nothrow
   {
     gtk_box_set_spacing(cast(GtkBox*)this._cPtr, spacing);
   }
@@ -380,19 +380,19 @@ class BoxGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.orient
   mixin OrientableGidBuilderT!();
 
   /** */
-  T baselinePosition(gtk.types.BaselinePosition propval)
+  T baselinePosition(gtk.types.BaselinePosition propval) nothrow
   {
     return setProperty("baseline-position", propval);
   }
 
   /** */
-  T homogeneous(bool propval)
+  T homogeneous(bool propval) nothrow
   {
     return setProperty("homogeneous", propval);
   }
 
   /** */
-  T spacing(int propval)
+  T spacing(int propval) nothrow
   {
     return setProperty("spacing", propval);
   }
@@ -405,7 +405,7 @@ final class BoxGidBuilder : BoxGidBuilderImpl!BoxGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Box build()
+  Box build() nothrow
   {
     return new Box(cast(void*)createGObject(Box._getGType), No.Take);
   }

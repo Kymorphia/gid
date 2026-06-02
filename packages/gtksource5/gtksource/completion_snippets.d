@@ -22,26 +22,26 @@ class CompletionSnippets : gobject.object.ObjectWrap, gtksource.completion_provi
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_snippets_get_type != &gidSymbolNotFound ? gtk_source_completion_snippets_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CompletionSnippets self()
+  override CompletionSnippets self() nothrow
   {
     return this;
   }
@@ -50,31 +50,31 @@ class CompletionSnippets : gobject.object.ObjectWrap, gtksource.completion_provi
       Get builder for [gtksource.completion_snippets.CompletionSnippets]
       Returns: New builder object
   */
-  static CompletionSnippetsGidBuilder builder()
+  static CompletionSnippetsGidBuilder builder() nothrow
   {
     return new CompletionSnippetsGidBuilder;
   }
 
   /** */
-  @property int priority()
+  @property int priority() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("priority");
   }
 
   /** */
-  @property void priority(int propval)
+  @property void priority(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("priority", propval);
   }
 
   /** */
-  @property string title()
+  @property string title() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("title");
   }
 
   /** */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("title", propval);
   }
@@ -82,7 +82,7 @@ class CompletionSnippets : gobject.object.ObjectWrap, gtksource.completion_provi
   mixin CompletionProviderT!();
 
   /** */
-  this()
+  this() nothrow
   {
     GtkSourceCompletionSnippets* _cretval;
     _cretval = gtk_source_completion_snippets_new();
@@ -97,13 +97,13 @@ class CompletionSnippetsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
   mixin CompletionProviderGidBuilderT!();
 
   /** */
-  T priority(int propval)
+  T priority(int propval) nothrow
   {
     return setProperty("priority", propval);
   }
 
   /** */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -116,7 +116,7 @@ final class CompletionSnippetsGidBuilder : CompletionSnippetsGidBuilderImpl!Comp
       Create object from builder.
       Returns: New object
   */
-  CompletionSnippets build()
+  CompletionSnippets build() nothrow
   {
     return new CompletionSnippets(cast(void*)createGObject(CompletionSnippets._getGType), Yes.Take);
   }

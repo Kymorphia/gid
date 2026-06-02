@@ -15,26 +15,26 @@ class IMMulticontext : gtk.imcontext.IMContext
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_im_multicontext_get_type != &gidSymbolNotFound ? gtk_im_multicontext_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override IMMulticontext self()
+  override IMMulticontext self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class IMMulticontext : gtk.imcontext.IMContext
       Get builder for [gtk.immulticontext.IMMulticontext]
       Returns: New builder object
   */
-  static IMMulticontextGidBuilder builder()
+  static IMMulticontextGidBuilder builder() nothrow
   {
     return new IMMulticontextGidBuilder;
   }
@@ -52,7 +52,7 @@ class IMMulticontext : gtk.imcontext.IMContext
       Creates a new #GtkIMMulticontext.
       Returns: a new #GtkIMMulticontext.
   */
-  this()
+  this() nothrow
   {
     GtkIMContext* _cretval;
     _cretval = gtk_im_multicontext_new();
@@ -72,7 +72,7 @@ class IMMulticontext : gtk.imcontext.IMContext
             desktop shells offer on-screen displays for this that
             can triggered with a keyboard shortcut, e.g. Super-Space.
   */
-  void appendMenuitems(gtk.menu_shell.MenuShell menushell)
+  void appendMenuitems(gtk.menu_shell.MenuShell menushell) nothrow
   {
     gtk_im_multicontext_append_menuitems(cast(GtkIMMulticontext*)this._cPtr, menushell ? cast(GtkMenuShell*)menushell._cPtr(No.Dup) : null);
   }
@@ -81,7 +81,7 @@ class IMMulticontext : gtk.imcontext.IMContext
       Gets the id of the currently active slave of the context.
       Returns: the id of the currently active slave
   */
-  string getContextId()
+  string getContextId() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_im_multicontext_get_context_id(cast(GtkIMMulticontext*)this._cPtr);
@@ -98,7 +98,7 @@ class IMMulticontext : gtk.imcontext.IMContext
       Params:
         contextId = the id to use
   */
-  void setContextId(string contextId)
+  void setContextId(string contextId) nothrow
   {
     const(char)* _contextId = contextId.toCString(No.Alloc);
     gtk_im_multicontext_set_context_id(cast(GtkIMMulticontext*)this._cPtr, _contextId);
@@ -117,7 +117,7 @@ final class IMMulticontextGidBuilder : IMMulticontextGidBuilderImpl!IMMulticonte
       Create object from builder.
       Returns: New object
   */
-  IMMulticontext build()
+  IMMulticontext build() nothrow
   {
     return new IMMulticontext(cast(void*)createGObject(IMMulticontext._getGType), Yes.Take);
   }

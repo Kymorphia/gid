@@ -60,26 +60,26 @@ class StyleContext : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_style_context_get_type != &gidSymbolNotFound ? gtk_style_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StyleContext self()
+  override StyleContext self() nothrow
   {
     return this;
   }
@@ -88,19 +88,19 @@ class StyleContext : gobject.object.ObjectWrap
       Get builder for [gtk.style_context.StyleContext]
       Returns: New builder object
   */
-  static StyleContextGidBuilder builder()
+  static StyleContextGidBuilder builder() nothrow
   {
     return new StyleContextGidBuilder;
   }
 
   /** */
-  @property gdk.display.Display display()
+  @property gdk.display.Display display() nothrow
   {
     return getDisplay();
   }
 
   /** */
-  @property void display(gdk.display.Display propval)
+  @property void display(gdk.display.Display propval) nothrow
   {
     setDisplay(propval);
   }
@@ -125,7 +125,7 @@ class StyleContext : gobject.object.ObjectWrap
             [gtk.types.STYLE_PROVIDER_PRIORITY_FALLBACK] and
             [gtk.types.STYLE_PROVIDER_PRIORITY_USER]
   */
-  static void addProviderForDisplay(gdk.display.Display display, gtk.style_provider.StyleProvider provider, uint priority)
+  static void addProviderForDisplay(gdk.display.Display display, gtk.style_provider.StyleProvider provider, uint priority) nothrow
   {
     gtk_style_context_add_provider_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, provider ? cast(GtkStyleProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null, priority);
   }
@@ -137,7 +137,7 @@ class StyleContext : gobject.object.ObjectWrap
         display = a [gdk.display.Display]
         provider = a [gtk.style_provider.StyleProvider]
   */
-  static void removeProviderForDisplay(gdk.display.Display display, gtk.style_provider.StyleProvider provider)
+  static void removeProviderForDisplay(gdk.display.Display display, gtk.style_provider.StyleProvider provider) nothrow
   {
     gtk_style_context_remove_provider_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, provider ? cast(GtkStyleProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null);
   }
@@ -164,7 +164,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: Use [gtk.widget.Widget.addCssClass] instead
   */
-  void addClass(string className)
+  void addClass(string className) nothrow
   {
     const(char)* _className = className.toCString(No.Alloc);
     gtk_style_context_add_class(cast(GtkStyleContext*)this._cPtr, _className);
@@ -192,7 +192,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: Use style classes instead
   */
-  void addProvider(gtk.style_provider.StyleProvider provider, uint priority)
+  void addProvider(gtk.style_provider.StyleProvider provider, uint priority) nothrow
   {
     gtk_style_context_add_provider(cast(GtkStyleContext*)this._cPtr, provider ? cast(GtkStyleProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null, priority);
   }
@@ -205,7 +205,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: This api will be removed in GTK 5
   */
-  void getBorder(out gtk.border.Border border)
+  void getBorder(out gtk.border.Border border) nothrow
   {
     gtk_style_context_get_border(cast(GtkStyleContext*)this._cPtr, cast(GtkBorder*)&border);
   }
@@ -218,7 +218,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: Use [gtk.widget.Widget.getColor] instead
   */
-  void getColor(out gdk.rgba.RGBA color)
+  void getColor(out gdk.rgba.RGBA color) nothrow
   {
     gtk_style_context_get_color(cast(GtkStyleContext*)this._cPtr, cast(GdkRGBA*)&color);
   }
@@ -229,7 +229,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: Use [gtk.widget.Widget.getDisplay] instead
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gtk_style_context_get_display(cast(GtkStyleContext*)this._cPtr);
@@ -245,7 +245,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: This api will be removed in GTK 5
   */
-  void getMargin(out gtk.border.Border margin)
+  void getMargin(out gtk.border.Border margin) nothrow
   {
     gtk_style_context_get_margin(cast(GtkStyleContext*)this._cPtr, cast(GtkBorder*)&margin);
   }
@@ -258,7 +258,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: This api will be removed in GTK 5
   */
-  void getPadding(out gtk.border.Border padding)
+  void getPadding(out gtk.border.Border padding) nothrow
   {
     gtk_style_context_get_padding(cast(GtkStyleContext*)this._cPtr, cast(GtkBorder*)&padding);
   }
@@ -269,7 +269,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: Use [gtk.widget.Widget.getScaleFactor] instead
   */
-  int getScale()
+  int getScale() nothrow
   {
     int _retval;
     _retval = gtk_style_context_get_scale(cast(GtkStyleContext*)this._cPtr);
@@ -288,7 +288,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: Use [gtk.widget.Widget.getStateFlags] instead
   */
-  gtk.types.StateFlags getState()
+  gtk.types.StateFlags getState() nothrow
   {
     GtkStateFlags _cretval;
     _cretval = gtk_style_context_get_state(cast(GtkStyleContext*)this._cPtr);
@@ -306,7 +306,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: Use [gtk.widget.Widget.hasCssClass] instead
   */
-  bool hasClass(string className)
+  bool hasClass(string className) nothrow
   {
     bool _retval;
     const(char)* _className = className.toCString(No.Alloc);
@@ -324,7 +324,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: This api will be removed in GTK 5
   */
-  bool lookupColor(string colorName, out gdk.rgba.RGBA color)
+  bool lookupColor(string colorName, out gdk.rgba.RGBA color) nothrow
   {
     bool _retval;
     const(char)* _colorName = colorName.toCString(No.Alloc);
@@ -340,7 +340,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: Use [gtk.widget.Widget.removeCssClass] instead
   */
-  void removeClass(string className)
+  void removeClass(string className) nothrow
   {
     const(char)* _className = className.toCString(No.Alloc);
     gtk_style_context_remove_class(cast(GtkStyleContext*)this._cPtr, _className);
@@ -352,7 +352,7 @@ class StyleContext : gobject.object.ObjectWrap
       Params:
         provider = a [gtk.style_provider.StyleProvider]
   */
-  void removeProvider(gtk.style_provider.StyleProvider provider)
+  void removeProvider(gtk.style_provider.StyleProvider provider) nothrow
   {
     gtk_style_context_remove_provider(cast(GtkStyleContext*)this._cPtr, provider ? cast(GtkStyleProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null);
   }
@@ -364,7 +364,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: This API will be removed in GTK 5
   */
-  void restore()
+  void restore() nothrow
   {
     gtk_style_context_restore(cast(GtkStyleContext*)this._cPtr);
   }
@@ -383,7 +383,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: This API will be removed in GTK 5
   */
-  void save()
+  void save() nothrow
   {
     gtk_style_context_save(cast(GtkStyleContext*)this._cPtr);
   }
@@ -403,7 +403,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: You should not use this api
   */
-  void setDisplay(gdk.display.Display display)
+  void setDisplay(gdk.display.Display display) nothrow
   {
     gtk_style_context_set_display(cast(GtkStyleContext*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
   }
@@ -416,7 +416,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: You should not use this api
   */
-  void setScale(int scale)
+  void setScale(int scale) nothrow
   {
     gtk_style_context_set_scale(cast(GtkStyleContext*)this._cPtr, scale);
   }
@@ -429,7 +429,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: You should not use this api
   */
-  void setState(gtk.types.StateFlags flags)
+  void setState(gtk.types.StateFlags flags) nothrow
   {
     gtk_style_context_set_state(cast(GtkStyleContext*)this._cPtr, flags);
   }
@@ -452,7 +452,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: This api will be removed in GTK 5
   */
-  string toString_(gtk.types.StyleContextPrintFlags flags)
+  string toString_(gtk.types.StyleContextPrintFlags flags) nothrow
   {
     char* _cretval;
     _cretval = gtk_style_context_to_string(cast(GtkStyleContext*)this._cPtr, flags);
@@ -466,7 +466,7 @@ class StyleContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T display(gdk.display.Display propval)
+  T display(gdk.display.Display propval) nothrow
   {
     return setProperty("display", propval);
   }
@@ -479,7 +479,7 @@ final class StyleContextGidBuilder : StyleContextGidBuilderImpl!StyleContextGidB
       Create object from builder.
       Returns: New object
   */
-  StyleContext build()
+  StyleContext build() nothrow
   {
     return new StyleContext(cast(void*)createGObject(StyleContext._getGType), No.Take);
   }

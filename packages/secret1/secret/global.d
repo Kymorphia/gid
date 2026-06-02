@@ -24,7 +24,7 @@ import secret.value;
       type = type of schema to get
     Returns: schema type
 */
-secret.schema.Schema getSchema(secret.types.SchemaType type)
+secret.schema.Schema getSchema(secret.types.SchemaType type) nothrow
 {
   const(SecretSchema)* _cretval;
   _cretval = secret_get_schema(type);
@@ -282,7 +282,7 @@ bool passwordStoreSync(secret.schema.Schema schema, string[string] attributes, s
     Params:
       password = password to clear
 */
-void passwordWipe(string password = null)
+void passwordWipe(string password = null) nothrow
 {
   char* _password = password.toCString(No.Alloc);
   secret_password_wipe(_password);

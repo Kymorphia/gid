@@ -14,26 +14,26 @@ class GLBaseMixerPad : gstvideo.video_aggregator_pad.VideoAggregatorPad
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_base_mixer_pad_get_type != &gidSymbolNotFound ? gst_gl_base_mixer_pad_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLBaseMixerPad self()
+  override GLBaseMixerPad self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class GLBaseMixerPad : gstvideo.video_aggregator_pad.VideoAggregatorPad
       Get builder for [gstgl.glbase_mixer_pad.GLBaseMixerPad]
       Returns: New builder object
   */
-  static GLBaseMixerPadGidBuilder builder()
+  static GLBaseMixerPadGidBuilder builder() nothrow
   {
     return new GLBaseMixerPadGidBuilder;
   }
@@ -60,7 +60,7 @@ final class GLBaseMixerPadGidBuilder : GLBaseMixerPadGidBuilderImpl!GLBaseMixerP
       Create object from builder.
       Returns: New object
   */
-  GLBaseMixerPad build()
+  GLBaseMixerPad build() nothrow
   {
     return new GLBaseMixerPad(cast(void*)createGObject(GLBaseMixerPad._getGType), No.Take);
   }

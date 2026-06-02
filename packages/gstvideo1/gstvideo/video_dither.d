@@ -17,18 +17,15 @@ class VideoDither
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_dither.VideoDither");
-
     _cInstancePtr = cast(GstVideoDither*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -44,7 +41,7 @@ class VideoDither
         y = y coordinate
         width = the width
   */
-  void line(void* line, uint x, uint y, uint width)
+  void line(void* line, uint x, uint y, uint width) nothrow
   {
     gst_video_dither_line(cast(GstVideoDither*)this._cPtr, line, x, y, width);
   }

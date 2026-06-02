@@ -53,23 +53,22 @@ struct Timestamp
   glong timezone;
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_timestamp_get_type != &gidSymbolNotFound ? gda_timestamp_get_type() : cast(GType)0;
   }
 
   /** */
-  @property GType _gType()
+  @property GType _gType() nothrow
   {
     return _getGType();
   }
 
-  void* boxCopy()
+  void* boxCopy() nothrow
   {
     import gobject.c.functions : g_boxed_copy;
-    return g_boxed_copy(_gType,
-        cast(void*)&this);
+    return g_boxed_copy(_gType, cast(void*)&this);
   }
 
   /**
@@ -80,13 +79,13 @@ struct Timestamp
       Params:
         ntz = a new timezone to use, in seconds added to GMT
   */
-  void changeTimezone(glong ntz)
+  void changeTimezone(glong ntz) nothrow
   {
     gda_timestamp_change_timezone(cast(GdaTimestamp*)&this, ntz);
   }
 
   /** */
-  bool valid()
+  bool valid() nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_timestamp_valid(cast(const(GdaTimestamp)*)&this);
@@ -94,14 +93,14 @@ struct Timestamp
   }
 
   /** */
-  static void* copy(void* boxed = null)
+  static void* copy(void* boxed = null) nothrow
   {
     auto _retval = gda_timestamp_copy(boxed);
     return _retval;
   }
 
   /** */
-  static void free(void* boxed = null)
+  static void free(void* boxed = null) nothrow
   {
     gda_timestamp_free(boxed);
   }

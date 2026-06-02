@@ -17,7 +17,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgstaudio-1.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // AudioAggregator
   GType function() c_gst_audio_aggregator_get_type; ///

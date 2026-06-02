@@ -17,11 +17,8 @@ class SignalQuery
   GSignalQuery _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gobject.signal_query.SignalQuery");
-
     _cInstance = *cast(GSignalQuery*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class SignalQuery
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class SignalQuery
       Returns: The signal id of the signal being queried, or 0 if the
          signal to be queried was unknown.
   */
-  @property uint signalId()
+  @property uint signalId() nothrow
   {
     return (cast(GSignalQuery*)this._cPtr).signalId;
   }
@@ -50,7 +47,7 @@ class SignalQuery
         propval = The signal id of the signal being queried, or 0 if the
            signal to be queried was unknown.
   */
-  @property void signalId(uint propval)
+  @property void signalId(uint propval) nothrow
   {
     (cast(GSignalQuery*)this._cPtr).signalId = propval;
   }
@@ -59,7 +56,7 @@ class SignalQuery
       Get `signalName` field.
       Returns: The signal name.
   */
-  @property string signalName()
+  @property string signalName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GSignalQuery*)this._cPtr).signalName);
   }
@@ -69,7 +66,7 @@ class SignalQuery
       Params:
         propval = The signal name.
   */
-  @property void signalName(string propval)
+  @property void signalName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GSignalQuery*)this._cPtr).signalName);
     dToC(propval, cast(void*)&(cast(GSignalQuery*)this._cPtr).signalName);
@@ -79,7 +76,7 @@ class SignalQuery
       Get `itype` field.
       Returns: The interface/instance type that this signal can be emitted for.
   */
-  @property gobject.types.GType itype()
+  @property gobject.types.GType itype() nothrow
   {
     return (cast(GSignalQuery*)this._cPtr).itype;
   }
@@ -89,7 +86,7 @@ class SignalQuery
       Params:
         propval = The interface/instance type that this signal can be emitted for.
   */
-  @property void itype(gobject.types.GType propval)
+  @property void itype(gobject.types.GType propval) nothrow
   {
     (cast(GSignalQuery*)this._cPtr).itype = propval;
   }
@@ -98,7 +95,7 @@ class SignalQuery
       Get `signalFlags` field.
       Returns: The signal flags as passed in to [gobject.global.signalNew].
   */
-  @property gobject.types.SignalFlags signalFlags()
+  @property gobject.types.SignalFlags signalFlags() nothrow
   {
     return cast(gobject.types.SignalFlags)(cast(GSignalQuery*)this._cPtr).signalFlags;
   }
@@ -108,7 +105,7 @@ class SignalQuery
       Params:
         propval = The signal flags as passed in to [gobject.global.signalNew].
   */
-  @property void signalFlags(gobject.types.SignalFlags propval)
+  @property void signalFlags(gobject.types.SignalFlags propval) nothrow
   {
     (cast(GSignalQuery*)this._cPtr).signalFlags = cast(GSignalFlags)propval;
   }
@@ -117,7 +114,7 @@ class SignalQuery
       Get `returnType` field.
       Returns: The return type for user callbacks.
   */
-  @property gobject.types.GType returnType()
+  @property gobject.types.GType returnType() nothrow
   {
     return (cast(GSignalQuery*)this._cPtr).returnType;
   }
@@ -127,7 +124,7 @@ class SignalQuery
       Params:
         propval = The return type for user callbacks.
   */
-  @property void returnType(gobject.types.GType propval)
+  @property void returnType(gobject.types.GType propval) nothrow
   {
     (cast(GSignalQuery*)this._cPtr).returnType = propval;
   }
@@ -136,7 +133,7 @@ class SignalQuery
       Get `nParams` field.
       Returns: The number of parameters that user callbacks take.
   */
-  @property uint nParams()
+  @property uint nParams() nothrow
   {
     return (cast(GSignalQuery*)this._cPtr).nParams;
   }
@@ -146,7 +143,7 @@ class SignalQuery
       Params:
         propval = The number of parameters that user callbacks take.
   */
-  @property void nParams(uint propval)
+  @property void nParams(uint propval) nothrow
   {
     (cast(GSignalQuery*)this._cPtr).nParams = propval;
   }

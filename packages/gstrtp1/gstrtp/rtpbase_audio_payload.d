@@ -46,26 +46,26 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_rtp_base_audio_payload_get_type != &gidSymbolNotFound ? gst_rtp_base_audio_payload_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RTPBaseAudioPayload self()
+  override RTPBaseAudioPayload self() nothrow
   {
     return this;
   }
@@ -74,19 +74,19 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
       Get builder for [gstrtp.rtpbase_audio_payload.RTPBaseAudioPayload]
       Returns: New builder object
   */
-  static RTPBaseAudioPayloadGidBuilder builder()
+  static RTPBaseAudioPayloadGidBuilder builder() nothrow
   {
     return new RTPBaseAudioPayloadGidBuilder;
   }
 
   /** */
-  @property bool bufferList()
+  @property bool bufferList() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("buffer-list");
   }
 
   /** */
-  @property void bufferList(bool propval)
+  @property void bufferList(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("buffer-list", propval);
   }
@@ -104,7 +104,7 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
         timestamp = a #GstClockTime
       Returns: a #GstFlowReturn
   */
-  gst.types.FlowReturn flush(uint payloadLen, gst.types.ClockTime timestamp)
+  gst.types.FlowReturn flush(uint payloadLen, gst.types.ClockTime timestamp) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_rtp_base_audio_payload_flush(cast(GstRTPBaseAudioPayload*)this._cPtr, payloadLen, timestamp);
@@ -116,7 +116,7 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
       Gets the internal adapter used by the depayloader.
       Returns: a #GstAdapter.
   */
-  gstbase.adapter.Adapter getAdapter()
+  gstbase.adapter.Adapter getAdapter() nothrow
   {
     GstAdapter* _cretval;
     _cretval = gst_rtp_base_audio_payload_get_adapter(cast(GstRTPBaseAudioPayload*)this._cPtr);
@@ -136,7 +136,7 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
         timestamp = a #GstClockTime
       Returns: a #GstFlowReturn
   */
-  gst.types.FlowReturn push(ubyte[] data, gst.types.ClockTime timestamp)
+  gst.types.FlowReturn push(ubyte[] data, gst.types.ClockTime timestamp) nothrow
   {
     GstFlowReturn _cretval;
     uint _payloadLen;
@@ -153,7 +153,7 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
       Tells #GstRTPBaseAudioPayload that the child element is for a frame based
       audio codec
   */
-  void setFrameBased()
+  void setFrameBased() nothrow
   {
     gst_rtp_base_audio_payload_set_frame_based(cast(GstRTPBaseAudioPayload*)this._cPtr);
   }
@@ -165,7 +165,7 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
         frameDuration = The duraction of an audio frame in milliseconds.
         frameSize = The size of an audio frame in bytes.
   */
-  void setFrameOptions(int frameDuration, int frameSize)
+  void setFrameOptions(int frameDuration, int frameSize) nothrow
   {
     gst_rtp_base_audio_payload_set_frame_options(cast(GstRTPBaseAudioPayload*)this._cPtr, frameDuration, frameSize);
   }
@@ -174,7 +174,7 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
       Tells #GstRTPBaseAudioPayload that the child element is for a sample based
       audio codec
   */
-  void setSampleBased()
+  void setSampleBased() nothrow
   {
     gst_rtp_base_audio_payload_set_sample_based(cast(GstRTPBaseAudioPayload*)this._cPtr);
   }
@@ -185,7 +185,7 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
       Params:
         sampleSize = Size per sample in bytes.
   */
-  void setSampleOptions(int sampleSize)
+  void setSampleOptions(int sampleSize) nothrow
   {
     gst_rtp_base_audio_payload_set_sample_options(cast(GstRTPBaseAudioPayload*)this._cPtr, sampleSize);
   }
@@ -196,7 +196,7 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
       Params:
         sampleSize = Size per sample in bits.
   */
-  void setSamplebitsOptions(int sampleSize)
+  void setSamplebitsOptions(int sampleSize) nothrow
   {
     gst_rtp_base_audio_payload_set_samplebits_options(cast(GstRTPBaseAudioPayload*)this._cPtr, sampleSize);
   }
@@ -207,7 +207,7 @@ class RTPBaseAudioPayloadGidBuilderImpl(T) : gstrtp.rtpbase_payload.RTPBasePaylo
 {
 
   /** */
-  T bufferList(bool propval)
+  T bufferList(bool propval) nothrow
   {
     return setProperty("buffer-list", propval);
   }
@@ -220,7 +220,7 @@ final class RTPBaseAudioPayloadGidBuilder : RTPBaseAudioPayloadGidBuilderImpl!RT
       Create object from builder.
       Returns: New object
   */
-  RTPBaseAudioPayload build()
+  RTPBaseAudioPayload build() nothrow
   {
     return new RTPBaseAudioPayload(cast(void*)createGObject(RTPBaseAudioPayload._getGType), No.Take);
   }

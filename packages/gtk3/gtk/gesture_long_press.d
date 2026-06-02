@@ -25,26 +25,26 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gesture_long_press_get_type != &gidSymbolNotFound ? gtk_gesture_long_press_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GestureLongPress self()
+  override GestureLongPress self() nothrow
   {
     return this;
   }
@@ -53,19 +53,19 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
       Get builder for [gtk.gesture_long_press.GestureLongPress]
       Returns: New builder object
   */
-  static GestureLongPressGidBuilder builder()
+  static GestureLongPressGidBuilder builder() nothrow
   {
     return new GestureLongPressGidBuilder;
   }
 
   /** */
-  @property double delayFactor()
+  @property double delayFactor() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(double)("delay-factor");
   }
 
   /** */
-  @property void delayFactor(double propval)
+  @property void delayFactor(double propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(double)("delay-factor", propval);
   }
@@ -77,7 +77,7 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
         widget = a #GtkWidget
       Returns: a newly created #GtkGestureLongPress
   */
-  this(gtk.widget.Widget widget)
+  this(gtk.widget.Widget widget) nothrow
   {
     GtkGesture* _cretval;
     _cretval = gtk_gesture_long_press_new(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
@@ -100,13 +100,13 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCancelled(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCancelled(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.gesture_long_press.GestureLongPress)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -115,7 +115,14 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.gesture_long_press.GestureLongPress.cancelled");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -142,7 +149,7 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPressed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPressed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -150,7 +157,7 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.gesture_long_press.GestureLongPress)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -165,7 +172,14 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.gesture_long_press.GestureLongPress.pressed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -178,7 +192,7 @@ class GestureLongPressGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBui
 {
 
   /** */
-  T delayFactor(double propval)
+  T delayFactor(double propval) nothrow
   {
     return setProperty("delay-factor", propval);
   }
@@ -191,7 +205,7 @@ final class GestureLongPressGidBuilder : GestureLongPressGidBuilderImpl!GestureL
       Create object from builder.
       Returns: New object
   */
-  GestureLongPress build()
+  GestureLongPress build() nothrow
   {
     return new GestureLongPress(cast(void*)createGObject(GestureLongPress._getGType), Yes.Take);
   }

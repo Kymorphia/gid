@@ -28,7 +28,7 @@ struct Status
         statusCode = an HTTP status code
       Returns: the (terse, English) description of status_code
   */
-  static string getPhrase(uint statusCode)
+  static string getPhrase(uint statusCode) nothrow
   {
     const(char)* _cretval;
     _cretval = soup_status_get_phrase(statusCode);

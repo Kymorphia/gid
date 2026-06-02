@@ -22,26 +22,26 @@ class WebEditor : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_web_editor_get_type != &gidSymbolNotFound ? webkit_web_editor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WebEditor self()
+  override WebEditor self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class WebEditor : gobject.object.ObjectWrap
       Get builder for [webkitwebprocessextension.web_editor.WebEditor]
       Returns: New builder object
   */
-  static WebEditorGidBuilder builder()
+  static WebEditorGidBuilder builder() nothrow
   {
     return new WebEditorGidBuilder;
   }
@@ -59,7 +59,7 @@ class WebEditor : gobject.object.ObjectWrap
       Gets the #WebKitWebPage that is associated with the #WebKitWebEditor.
       Returns: the associated #WebKitWebPage
   */
-  webkitwebprocessextension.web_page.WebPage getPage()
+  webkitwebprocessextension.web_page.WebPage getPage() nothrow
   {
     WebKitWebPage* _cretval;
     _cretval = webkit_web_editor_get_page(cast(WebKitWebEditor*)this._cPtr);
@@ -84,13 +84,13 @@ class WebEditor : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkitwebprocessextension.web_editor.WebEditor)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -99,7 +99,14 @@ class WebEditor : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkitwebprocessextension.web_editor.WebEditor.selectionChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -119,7 +126,7 @@ final class WebEditorGidBuilder : WebEditorGidBuilderImpl!WebEditorGidBuilder
       Create object from builder.
       Returns: New object
   */
-  WebEditor build()
+  WebEditor build() nothrow
   {
     return new WebEditor(cast(void*)createGObject(WebEditor._getGType), No.Take);
   }

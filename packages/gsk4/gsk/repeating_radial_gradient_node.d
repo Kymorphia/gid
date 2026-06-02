@@ -15,11 +15,8 @@ class RepeatingRadialGradientNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.repeating_radial_gradient_node.RepeatingRadialGradientNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 }

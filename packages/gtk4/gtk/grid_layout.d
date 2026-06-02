@@ -30,26 +30,26 @@ class GridLayout : gtk.layout_manager.LayoutManager
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_grid_layout_get_type != &gidSymbolNotFound ? gtk_grid_layout_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GridLayout self()
+  override GridLayout self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Get builder for [gtk.grid_layout.GridLayout]
       Returns: New builder object
   */
-  static GridLayoutGidBuilder builder()
+  static GridLayoutGidBuilder builder() nothrow
   {
     return new GridLayoutGidBuilder;
   }
@@ -68,7 +68,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Returns: The row to align to the baseline, when `GtkWidget:valign` is set
         to [gtk.types.Align.Baseline].
   */
-  @property int baselineRow()
+  @property int baselineRow() nothrow
   {
     return getBaselineRow();
   }
@@ -79,7 +79,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
         propval = The row to align to the baseline, when `GtkWidget:valign` is set
           to [gtk.types.Align.Baseline].
   */
-  @property void baselineRow(int propval)
+  @property void baselineRow(int propval) nothrow
   {
     setBaselineRow(propval);
   }
@@ -88,7 +88,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Get `columnHomogeneous` property.
       Returns: Whether all the columns in the grid have the same width.
   */
-  @property bool columnHomogeneous()
+  @property bool columnHomogeneous() nothrow
   {
     return getColumnHomogeneous();
   }
@@ -98,7 +98,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Params:
         propval = Whether all the columns in the grid have the same width.
   */
-  @property void columnHomogeneous(bool propval)
+  @property void columnHomogeneous(bool propval) nothrow
   {
     setColumnHomogeneous(propval);
   }
@@ -107,7 +107,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Get `columnSpacing` property.
       Returns: The amount of space between to consecutive columns.
   */
-  @property int columnSpacing()
+  @property int columnSpacing() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("column-spacing");
   }
@@ -117,7 +117,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Params:
         propval = The amount of space between to consecutive columns.
   */
-  @property void columnSpacing(int propval)
+  @property void columnSpacing(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("column-spacing", propval);
   }
@@ -126,7 +126,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Get `rowHomogeneous` property.
       Returns: Whether all the rows in the grid have the same height.
   */
-  @property bool rowHomogeneous()
+  @property bool rowHomogeneous() nothrow
   {
     return getRowHomogeneous();
   }
@@ -136,7 +136,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Params:
         propval = Whether all the rows in the grid have the same height.
   */
-  @property void rowHomogeneous(bool propval)
+  @property void rowHomogeneous(bool propval) nothrow
   {
     setRowHomogeneous(propval);
   }
@@ -145,7 +145,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Get `rowSpacing` property.
       Returns: The amount of space between to consecutive rows.
   */
-  @property int rowSpacing()
+  @property int rowSpacing() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("row-spacing");
   }
@@ -155,7 +155,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Params:
         propval = The amount of space between to consecutive rows.
   */
-  @property void rowSpacing(int propval)
+  @property void rowSpacing(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("row-spacing", propval);
   }
@@ -164,7 +164,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Creates a new [gtk.grid_layout.GridLayout].
       Returns: the newly created [gtk.grid_layout.GridLayout]
   */
-  this()
+  this() nothrow
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_grid_layout_new();
@@ -175,7 +175,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Retrieves the row set with [gtk.grid_layout.GridLayout.setBaselineRow].
       Returns: the global baseline row
   */
-  int getBaselineRow()
+  int getBaselineRow() nothrow
   {
     int _retval;
     _retval = gtk_grid_layout_get_baseline_row(cast(GtkGridLayout*)this._cPtr);
@@ -186,7 +186,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Checks whether all columns of grid should have the same width.
       Returns: true if the columns are homogeneous, and false otherwise
   */
-  bool getColumnHomogeneous()
+  bool getColumnHomogeneous() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_grid_layout_get_column_homogeneous(cast(GtkGridLayout*)this._cPtr);
@@ -197,7 +197,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Retrieves the spacing set with [gtk.grid_layout.GridLayout.setColumnSpacing].
       Returns: the spacing between consecutive columns
   */
-  uint getColumnSpacing()
+  uint getColumnSpacing() nothrow
   {
     uint _retval;
     _retval = gtk_grid_layout_get_column_spacing(cast(GtkGridLayout*)this._cPtr);
@@ -216,7 +216,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
         row = a row index
       Returns: the baseline position of row
   */
-  gtk.types.BaselinePosition getRowBaselinePosition(int row)
+  gtk.types.BaselinePosition getRowBaselinePosition(int row) nothrow
   {
     GtkBaselinePosition _cretval;
     _cretval = gtk_grid_layout_get_row_baseline_position(cast(GtkGridLayout*)this._cPtr, row);
@@ -228,7 +228,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Checks whether all rows of grid should have the same height.
       Returns: true if the rows are homogeneous, and false otherwise
   */
-  bool getRowHomogeneous()
+  bool getRowHomogeneous() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_grid_layout_get_row_homogeneous(cast(GtkGridLayout*)this._cPtr);
@@ -239,7 +239,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Retrieves the spacing set with [gtk.grid_layout.GridLayout.setRowSpacing].
       Returns: the spacing between consecutive rows
   */
-  uint getRowSpacing()
+  uint getRowSpacing() nothrow
   {
     uint _retval;
     _retval = gtk_grid_layout_get_row_spacing(cast(GtkGridLayout*)this._cPtr);
@@ -256,7 +256,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Params:
         row = the row index
   */
-  void setBaselineRow(int row)
+  void setBaselineRow(int row) nothrow
   {
     gtk_grid_layout_set_baseline_row(cast(GtkGridLayout*)this._cPtr, row);
   }
@@ -267,7 +267,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Params:
         homogeneous = true to make columns homogeneous
   */
-  void setColumnHomogeneous(bool homogeneous)
+  void setColumnHomogeneous(bool homogeneous) nothrow
   {
     gtk_grid_layout_set_column_homogeneous(cast(GtkGridLayout*)this._cPtr, homogeneous);
   }
@@ -278,7 +278,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Params:
         spacing = the amount of space between columns, in pixels
   */
-  void setColumnSpacing(uint spacing)
+  void setColumnSpacing(uint spacing) nothrow
   {
     gtk_grid_layout_set_column_spacing(cast(GtkGridLayout*)this._cPtr, spacing);
   }
@@ -291,7 +291,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
         row = a row index
         pos = a [gtk.types.BaselinePosition]
   */
-  void setRowBaselinePosition(int row, gtk.types.BaselinePosition pos)
+  void setRowBaselinePosition(int row, gtk.types.BaselinePosition pos) nothrow
   {
     gtk_grid_layout_set_row_baseline_position(cast(GtkGridLayout*)this._cPtr, row, pos);
   }
@@ -302,7 +302,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Params:
         homogeneous = true to make rows homogeneous
   */
-  void setRowHomogeneous(bool homogeneous)
+  void setRowHomogeneous(bool homogeneous) nothrow
   {
     gtk_grid_layout_set_row_homogeneous(cast(GtkGridLayout*)this._cPtr, homogeneous);
   }
@@ -313,7 +313,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
       Params:
         spacing = the amount of space between rows, in pixels
   */
-  void setRowSpacing(uint spacing)
+  void setRowSpacing(uint spacing) nothrow
   {
     gtk_grid_layout_set_row_spacing(cast(GtkGridLayout*)this._cPtr, spacing);
   }
@@ -330,7 +330,7 @@ class GridLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderIm
           to [gtk.types.Align.Baseline].
       Returns: Builder instance for fluent chaining
   */
-  T baselineRow(int propval)
+  T baselineRow(int propval) nothrow
   {
     return setProperty("baseline-row", propval);
   }
@@ -341,7 +341,7 @@ class GridLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderIm
         propval = Whether all the columns in the grid have the same width.
       Returns: Builder instance for fluent chaining
   */
-  T columnHomogeneous(bool propval)
+  T columnHomogeneous(bool propval) nothrow
   {
     return setProperty("column-homogeneous", propval);
   }
@@ -352,7 +352,7 @@ class GridLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderIm
         propval = The amount of space between to consecutive columns.
       Returns: Builder instance for fluent chaining
   */
-  T columnSpacing(int propval)
+  T columnSpacing(int propval) nothrow
   {
     return setProperty("column-spacing", propval);
   }
@@ -363,7 +363,7 @@ class GridLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderIm
         propval = Whether all the rows in the grid have the same height.
       Returns: Builder instance for fluent chaining
   */
-  T rowHomogeneous(bool propval)
+  T rowHomogeneous(bool propval) nothrow
   {
     return setProperty("row-homogeneous", propval);
   }
@@ -374,7 +374,7 @@ class GridLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderIm
         propval = The amount of space between to consecutive rows.
       Returns: Builder instance for fluent chaining
   */
-  T rowSpacing(int propval)
+  T rowSpacing(int propval) nothrow
   {
     return setProperty("row-spacing", propval);
   }
@@ -387,7 +387,7 @@ final class GridLayoutGidBuilder : GridLayoutGidBuilderImpl!GridLayoutGidBuilder
       Create object from builder.
       Returns: New object
   */
-  GridLayout build()
+  GridLayout build() nothrow
   {
     return new GridLayout(cast(void*)createGObject(GridLayout._getGType), Yes.Take);
   }

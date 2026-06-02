@@ -20,26 +20,26 @@ class FileInputStream : arrow.seekable_input_stream.SeekableInputStream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_file_input_stream_get_type != &gidSymbolNotFound ? garrow_file_input_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileInputStream self()
+  override FileInputStream self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class FileInputStream : arrow.seekable_input_stream.SeekableInputStream
       Get builder for [arrow.file_input_stream.FileInputStream]
       Returns: New builder object
   */
-  static FileInputStreamGidBuilder builder()
+  static FileInputStreamGidBuilder builder() nothrow
   {
     return new FileInputStreamGidBuilder;
   }
@@ -78,7 +78,7 @@ class FileInputStream : arrow.seekable_input_stream.SeekableInputStream
   }
 
   /** */
-  int getFileDescriptor()
+  int getFileDescriptor() nothrow
   {
     int _retval;
     _retval = garrow_file_input_stream_get_file_descriptor(cast(GArrowFileInputStream*)this._cPtr);
@@ -99,7 +99,7 @@ final class FileInputStreamGidBuilder : FileInputStreamGidBuilderImpl!FileInputS
       Create object from builder.
       Returns: New object
   */
-  FileInputStream build()
+  FileInputStream build() nothrow
   {
     return new FileInputStream(cast(void*)createGObject(FileInputStream._getGType), Yes.Take);
   }

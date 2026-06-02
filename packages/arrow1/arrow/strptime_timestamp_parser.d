@@ -14,26 +14,26 @@ class StrptimeTimestampParser : arrow.timestamp_parser.TimestampParser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_strptime_timestamp_parser_get_type != &gidSymbolNotFound ? garrow_strptime_timestamp_parser_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StrptimeTimestampParser self()
+  override StrptimeTimestampParser self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class StrptimeTimestampParser : arrow.timestamp_parser.TimestampParser
       Get builder for [arrow.strptime_timestamp_parser.StrptimeTimestampParser]
       Returns: New builder object
   */
-  static StrptimeTimestampParserGidBuilder builder()
+  static StrptimeTimestampParserGidBuilder builder() nothrow
   {
     return new StrptimeTimestampParserGidBuilder;
   }
 
   /** */
-  this(string format)
+  this(string format) nothrow
   {
     GArrowStrptimeTimestampParser* _cretval;
     const(char)* _format = format.toCString(No.Alloc);
@@ -57,7 +57,7 @@ class StrptimeTimestampParser : arrow.timestamp_parser.TimestampParser
   }
 
   /** */
-  string getFormat()
+  string getFormat() nothrow
   {
     const(char)* _cretval;
     _cretval = garrow_strptime_timestamp_parser_get_format(cast(GArrowStrptimeTimestampParser*)this._cPtr);
@@ -78,7 +78,7 @@ final class StrptimeTimestampParserGidBuilder : StrptimeTimestampParserGidBuilde
       Create object from builder.
       Returns: New object
   */
-  StrptimeTimestampParser build()
+  StrptimeTimestampParser build() nothrow
   {
     return new StrptimeTimestampParser(cast(void*)createGObject(StrptimeTimestampParser._getGType), Yes.Take);
   }

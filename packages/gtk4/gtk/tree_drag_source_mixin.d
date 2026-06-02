@@ -34,7 +34,7 @@ template TreeDragSourceT()
   
       Deprecated: Use list models instead
   */
-  override bool dragDataDelete(gtk.tree_path.TreePath path)
+  override bool dragDataDelete(gtk.tree_path.TreePath path) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_drag_source_drag_data_delete(cast(GtkTreeDragSource*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
@@ -53,7 +53,7 @@ template TreeDragSourceT()
   
       Deprecated: Use list models instead
   */
-  override gdk.content_provider.ContentProvider dragDataGet(gtk.tree_path.TreePath path)
+  override gdk.content_provider.ContentProvider dragDataGet(gtk.tree_path.TreePath path) nothrow
   {
     GdkContentProvider* _cretval;
     _cretval = gtk_tree_drag_source_drag_data_get(cast(GtkTreeDragSource*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
@@ -72,7 +72,7 @@ template TreeDragSourceT()
   
       Deprecated: Use list models instead
   */
-  override bool rowDraggable(gtk.tree_path.TreePath path)
+  override bool rowDraggable(gtk.tree_path.TreePath path) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_drag_source_row_draggable(cast(GtkTreeDragSource*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);

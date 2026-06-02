@@ -33,7 +33,7 @@ interface Native
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_native_get_type != &gidSymbolNotFound ? gtk_native_get_type() : cast(GType)0;
@@ -46,7 +46,7 @@ interface Native
         surface = a [gdk.surface.Surface]
       Returns: the [gtk.native.Native] that is associated with surface
   */
-  static gtk.native.Native getForSurface(gdk.surface.Surface surface)
+  static gtk.native.Native getForSurface(gdk.surface.Surface surface) nothrow
   {
     GtkNative* _cretval;
     _cretval = gtk_native_get_for_surface(surface ? cast(GdkSurface*)surface._cPtr(No.Dup) : null);

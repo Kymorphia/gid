@@ -39,26 +39,26 @@ class Separator : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_separator_get_type != &gidSymbolNotFound ? gtk_separator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Separator self()
+  override Separator self() nothrow
   {
     return this;
   }
@@ -67,7 +67,7 @@ class Separator : gtk.widget.Widget, gtk.orientable.Orientable
       Get builder for [gtk.separator.Separator]
       Returns: New builder object
   */
-  static SeparatorGidBuilder builder()
+  static SeparatorGidBuilder builder() nothrow
   {
     return new SeparatorGidBuilder;
   }
@@ -81,7 +81,7 @@ class Separator : gtk.widget.Widget, gtk.orientable.Orientable
         orientation = the separator’s orientation.
       Returns: a new [gtk.separator.Separator].
   */
-  this(gtk.types.Orientation orientation)
+  this(gtk.types.Orientation orientation) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_separator_new(orientation);
@@ -103,7 +103,7 @@ final class SeparatorGidBuilder : SeparatorGidBuilderImpl!SeparatorGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Separator build()
+  Separator build() nothrow
   {
     return new Separator(cast(void*)createGObject(Separator._getGType), No.Take);
   }

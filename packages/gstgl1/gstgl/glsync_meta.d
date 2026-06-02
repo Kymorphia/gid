@@ -19,11 +19,8 @@ class GLSyncMeta
   GstGLSyncMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstgl.glsync_meta.GLSyncMeta");
-
     _cInstance = *cast(GstGLSyncMeta*)ptr;
 
     if (take)
@@ -31,7 +28,7 @@ class GLSyncMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -40,7 +37,7 @@ class GLSyncMeta
       Get `parent` field.
       Returns: the parent #GstMeta
   */
-  @property gst.meta.Meta parent()
+  @property gst.meta.Meta parent() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstGLSyncMeta*)this._cPtr).parent, No.Take);
   }
@@ -49,7 +46,7 @@ class GLSyncMeta
       Get `context` field.
       Returns: the #GstGLContext used to allocate the meta
   */
-  @property gstgl.glcontext.GLContext context()
+  @property gstgl.glcontext.GLContext context() nothrow
   {
     return cToD!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLSyncMeta*)this._cPtr).context);
   }
@@ -59,7 +56,7 @@ class GLSyncMeta
       Params:
         propval = the #GstGLContext used to allocate the meta
   */
-  @property void context(gstgl.glcontext.GLContext propval)
+  @property void context(gstgl.glcontext.GLContext propval) nothrow
   {
     cValueFree!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLSyncMeta*)this._cPtr).context);
     dToC(propval, cast(void*)&(cast(GstGLSyncMeta*)this._cPtr).context);
@@ -72,7 +69,7 @@ class GLSyncMeta
       Get `setSync` field.
       Returns: set a sync point in the OpenGL command stream
   */
-  @property SetSyncFuncType setSync()
+  @property SetSyncFuncType setSync() nothrow
   {
     return (cast(GstGLSyncMeta*)this._cPtr).setSync;
   }
@@ -84,7 +81,7 @@ class GLSyncMeta
       Get `setSyncGl` field.
       Returns: the same as @set_sync but called from @context's thread
   */
-  @property SetSyncGlFuncType setSyncGl()
+  @property SetSyncGlFuncType setSyncGl() nothrow
   {
     return (cast(GstGLSyncMeta*)this._cPtr).setSyncGl;
   }
@@ -96,7 +93,7 @@ class GLSyncMeta
       Get `wait` field.
       Returns: execute a wait on the previously set sync point into the OpenGL command stream
   */
-  @property WaitFuncType wait()
+  @property WaitFuncType wait() nothrow
   {
     return (cast(GstGLSyncMeta*)this._cPtr).wait;
   }
@@ -108,7 +105,7 @@ class GLSyncMeta
       Get `waitGl` field.
       Returns: the same as @wait but called from @context's thread
   */
-  @property WaitGlFuncType waitGl()
+  @property WaitGlFuncType waitGl() nothrow
   {
     return (cast(GstGLSyncMeta*)this._cPtr).waitGl;
   }
@@ -120,7 +117,7 @@ class GLSyncMeta
       Get `waitCpu` field.
       Returns: wait for the previously set sync point to pass from the CPU
   */
-  @property WaitCpuFuncType waitCpu()
+  @property WaitCpuFuncType waitCpu() nothrow
   {
     return (cast(GstGLSyncMeta*)this._cPtr).waitCpu;
   }
@@ -132,7 +129,7 @@ class GLSyncMeta
       Get `waitCpuGl` field.
       Returns: the same as @wait_cpu but called from @context's thread
   */
-  @property WaitCpuGlFuncType waitCpuGl()
+  @property WaitCpuGlFuncType waitCpuGl() nothrow
   {
     return (cast(GstGLSyncMeta*)this._cPtr).waitCpuGl;
   }
@@ -144,7 +141,7 @@ class GLSyncMeta
       Get `copy` field.
       Returns: copy @data into a new #GstGLSyncMeta
   */
-  @property CopyFuncType copy()
+  @property CopyFuncType copy() nothrow
   {
     return (cast(GstGLSyncMeta*)this._cPtr).copy;
   }
@@ -156,7 +153,7 @@ class GLSyncMeta
       Get `free` field.
       Returns: free @data
   */
-  @property FreeFuncType free()
+  @property FreeFuncType free() nothrow
   {
     return (cast(GstGLSyncMeta*)this._cPtr).free;
   }
@@ -168,7 +165,7 @@ class GLSyncMeta
       Get `freeGl` field.
       Returns: free @data in @context's thread
   */
-  @property FreeGlFuncType freeGl()
+  @property FreeGlFuncType freeGl() nothrow
   {
     return (cast(GstGLSyncMeta*)this._cPtr).freeGl;
   }
@@ -179,7 +176,7 @@ class GLSyncMeta
       Params:
         context = a #GstGLContext
   */
-  void setSyncPoint(gstgl.glcontext.GLContext context)
+  void setSyncPoint(gstgl.glcontext.GLContext context) nothrow
   {
     gst_gl_sync_meta_set_sync_point(cast(GstGLSyncMeta*)this._cPtr, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
   }
@@ -191,7 +188,7 @@ class GLSyncMeta
       Params:
         context = a #GstGLContext
   */
-  void wait(gstgl.glcontext.GLContext context)
+  void wait(gstgl.glcontext.GLContext context) nothrow
   {
     gst_gl_sync_meta_wait(cast(GstGLSyncMeta*)this._cPtr, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
   }
@@ -204,13 +201,13 @@ class GLSyncMeta
       Params:
         context = a #GstGLContext
   */
-  void waitCpu(gstgl.glcontext.GLContext context)
+  void waitCpu(gstgl.glcontext.GLContext context) nothrow
   {
     gst_gl_sync_meta_wait_cpu(cast(GstGLSyncMeta*)this._cPtr, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
   }
 
   /** */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_gl_sync_meta_get_info();

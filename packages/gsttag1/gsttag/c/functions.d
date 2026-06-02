@@ -14,7 +14,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgsttag-1.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // TagDemux
   GType function() c_gst_tag_demux_get_type; ///

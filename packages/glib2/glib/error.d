@@ -19,25 +19,25 @@ class ErrorWrap : Exception
   private GError* errPtr;
 
   /** */
-  this(void* err, bool unused=false)
+  this(void* err, bool unused=false) nothrow
   {
     errPtr = cast(GError*)err;
     super(errPtr.message.fromCString(No.Free));
   }
 
   /** */
-  this(Quark domain, int code, string message)
+  this(Quark domain, int code, string message) nothrow
   {
     this(g_error_new_literal(domain, code, message.toCString(No.Alloc)));
   }
 
   /** */
-  this()
+  this() nothrow
   {
     super("");
   }
 
-  ~this()
+  ~this() nothrow
   {
     g_error_free(errPtr);
   }
@@ -45,7 +45,7 @@ class ErrorWrap : Exception
   /**
   * Get wrapped C GError pointer.
   */
-  void* _cPtr()
+  void* _cPtr() nothrow @nogc
   {
     return cast(void*)errPtr;
   }
@@ -54,7 +54,7 @@ class ErrorWrap : Exception
   * Get error domain quark.
   * Returns: Error domain string quark
   */
-  @property Quark domain()
+  @property Quark domain() nothrow @nogc
   {
     return errPtr.domain;
   }
@@ -64,7 +64,7 @@ class ErrorWrap : Exception
   * Params:
   *   propval = Quark value to assign
   */
-  @property void domain(Quark propval)
+  @property void domain(Quark propval) nothrow @nogc
   {
     errPtr.domain = propval;
   }
@@ -73,7 +73,7 @@ class ErrorWrap : Exception
   * Get error code.
   * Returns: Error code
   */
-  @property int code()
+  @property int code() nothrow @nogc
   {
     return errPtr.code;
   }
@@ -83,7 +83,7 @@ class ErrorWrap : Exception
   * Params:
   *   propval = Error code to assign
   */
-  @property void code(int propval)
+  @property void code(int propval) nothrow @nogc
   {
     errPtr.code = propval;
   }
@@ -92,7 +92,7 @@ class ErrorWrap : Exception
   * Get Error message.
   * Returns: Error message string
   */
-  @property string message()
+  @property string message() nothrow
   {
     return errPtr.message.fromCString(No.Free);
   }
@@ -102,7 +102,7 @@ class ErrorWrap : Exception
   * Params:
   *   propval = Error message to assign
   */
-  @property void message(string propval)
+  @property void message(string propval) nothrow
   {
     g_free(cast(void*)errPtr.message);
     errPtr.message = propval.toCString(Yes.Alloc);
@@ -116,7 +116,7 @@ class ErrorWrap : Exception
   *   message = The error message
   * Returns: New `ErrorWrap` object
   */
-  static ErrorWrap newLiteral(Quark domain, int code, string message)
+  static ErrorWrap newLiteral(Quark domain, int code, string message) nothrow
   {
     GError* _cretval;
     const(char)* _message = message.toCString(No.Alloc);
@@ -128,7 +128,7 @@ class ErrorWrap : Exception
   /**
   * Copy a an `ErrorWrap` object.
   */
-  ErrorWrap copy()
+  ErrorWrap copy() nothrow
   {
     GError* _cretval;
     _cretval = g_error_copy(errPtr);
@@ -143,7 +143,7 @@ class ErrorWrap : Exception
   *   code = Error code
   * Returns: true if error matches criteria, false otherwise
   */
-  bool matches(Quark domain, int code)
+  bool matches(Quark domain, int code) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_error_matches(errPtr, domain, code);

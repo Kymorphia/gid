@@ -25,26 +25,26 @@ class TlsCertificate : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_tls_certificate_get_type != &gidSymbolNotFound ? g_tls_certificate_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TlsCertificate self()
+  override TlsCertificate self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class TlsCertificate : gobject.object.ObjectWrap
       Get builder for [gio.tls_certificate.TlsCertificate]
       Returns: New builder object
   */
-  static TlsCertificateGidBuilder builder()
+  static TlsCertificateGidBuilder builder() nothrow
   {
     return new TlsCertificateGidBuilder;
   }
@@ -64,7 +64,7 @@ class TlsCertificate : gobject.object.ObjectWrap
         This property and the #GTlsCertificate:certificate
         property represent the same data, just in different forms.
   */
-  @property string certificatePem()
+  @property string certificatePem() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("certificate-pem");
   }
@@ -88,7 +88,7 @@ class TlsCertificate : gobject.object.ObjectWrap
         property cannot be used to make security-related decisions. Only
         GLib itself should make security decisions about TLS certificates.
   */
-  @property gio.tls_certificate.TlsCertificate issuer()
+  @property gio.tls_certificate.TlsCertificate issuer() nothrow
   {
     return getIssuer();
   }
@@ -98,7 +98,7 @@ class TlsCertificate : gobject.object.ObjectWrap
       Returns: The issuer from the certificate,
         null if unavailable.
   */
-  @property string issuerName()
+  @property string issuerName() nothrow
   {
     return getIssuerName();
   }
@@ -108,7 +108,7 @@ class TlsCertificate : gobject.object.ObjectWrap
       Returns: The time at which this cert is no longer valid,
         null if unavailable.
   */
-  @property glib.date_time.DateTime notValidAfter()
+  @property glib.date_time.DateTime notValidAfter() nothrow
   {
     return getNotValidAfter();
   }
@@ -118,7 +118,7 @@ class TlsCertificate : gobject.object.ObjectWrap
       Returns: The time at which this cert is considered to be valid,
         null if unavailable.
   */
-  @property glib.date_time.DateTime notValidBefore()
+  @property glib.date_time.DateTime notValidBefore() nothrow
   {
     return getNotValidBefore();
   }
@@ -131,7 +131,7 @@ class TlsCertificate : gobject.object.ObjectWrap
         If null, the certificate is either not backed by PKCS \#11 or the
         #GTlsBackend does not support PKCS \#11.
   */
-  @property string pkcs11Uri()
+  @property string pkcs11Uri() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("pkcs11-uri");
   }
@@ -157,7 +157,7 @@ class TlsCertificate : gobject.object.ObjectWrap
         When this property is read, the output format will be unencrypted
         PKCS \#8.
   */
-  @property string privateKeyPem()
+  @property string privateKeyPem() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("private-key-pem");
   }
@@ -167,7 +167,7 @@ class TlsCertificate : gobject.object.ObjectWrap
       Returns: A URI referencing a [PKCS \#11](https://docs.oasis-open.org/pkcs11/pkcs11-base/v3.0/os/pkcs11-base-v3.0-os.html)
         object containing a private key.
   */
-  @property string privateKeyPkcs11Uri()
+  @property string privateKeyPkcs11Uri() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("private-key-pkcs11-uri");
   }
@@ -177,7 +177,7 @@ class TlsCertificate : gobject.object.ObjectWrap
       Returns: The subject from the cert,
         null if unavailable.
   */
-  @property string subjectName()
+  @property string subjectName() nothrow
   {
     return getSubjectName();
   }
@@ -431,7 +431,7 @@ class TlsCertificate : gobject.object.ObjectWrap
       Returns: A #GPtrArray of
         #GBytes elements, or null if it's not available.
   */
-  glib.bytes.Bytes[] getDnsNames()
+  glib.bytes.Bytes[] getDnsNames() nothrow
   {
     GPtrArray* _cretval;
     _cretval = g_tls_certificate_get_dns_names(cast(GTlsCertificate*)this._cPtr);
@@ -444,7 +444,7 @@ class TlsCertificate : gobject.object.ObjectWrap
       Returns: A #GPtrArray
         of #GInetAddress elements, or null if it's not available.
   */
-  gio.inet_address.InetAddress[] getIpAddresses()
+  gio.inet_address.InetAddress[] getIpAddresses() nothrow
   {
     GPtrArray* _cretval;
     _cretval = g_tls_certificate_get_ip_addresses(cast(GTlsCertificate*)this._cPtr);
@@ -458,7 +458,7 @@ class TlsCertificate : gobject.object.ObjectWrap
         or null if cert is self-signed or signed with an unknown
         certificate.
   */
-  gio.tls_certificate.TlsCertificate getIssuer()
+  gio.tls_certificate.TlsCertificate getIssuer() nothrow
   {
     GTlsCertificate* _cretval;
     _cretval = g_tls_certificate_get_issuer(cast(GTlsCertificate*)this._cPtr);
@@ -470,7 +470,7 @@ class TlsCertificate : gobject.object.ObjectWrap
       Returns the issuer name from the certificate.
       Returns: The issuer name, or null if it's not available.
   */
-  string getIssuerName()
+  string getIssuerName() nothrow
   {
     char* _cretval;
     _cretval = g_tls_certificate_get_issuer_name(cast(GTlsCertificate*)this._cPtr);
@@ -482,7 +482,7 @@ class TlsCertificate : gobject.object.ObjectWrap
       Returns the time at which the certificate became or will become invalid.
       Returns: The not-valid-after date, or null if it's not available.
   */
-  glib.date_time.DateTime getNotValidAfter()
+  glib.date_time.DateTime getNotValidAfter() nothrow
   {
     GDateTime* _cretval;
     _cretval = g_tls_certificate_get_not_valid_after(cast(GTlsCertificate*)this._cPtr);
@@ -494,7 +494,7 @@ class TlsCertificate : gobject.object.ObjectWrap
       Returns the time at which the certificate became or will become valid.
       Returns: The not-valid-before date, or null if it's not available.
   */
-  glib.date_time.DateTime getNotValidBefore()
+  glib.date_time.DateTime getNotValidBefore() nothrow
   {
     GDateTime* _cretval;
     _cretval = g_tls_certificate_get_not_valid_before(cast(GTlsCertificate*)this._cPtr);
@@ -506,7 +506,7 @@ class TlsCertificate : gobject.object.ObjectWrap
       Returns the subject name from the certificate.
       Returns: The subject name, or null if it's not available.
   */
-  string getSubjectName()
+  string getSubjectName() nothrow
   {
     char* _cretval;
     _cretval = g_tls_certificate_get_subject_name(cast(GTlsCertificate*)this._cPtr);
@@ -525,7 +525,7 @@ class TlsCertificate : gobject.object.ObjectWrap
         certTwo = second certificate to compare
       Returns: whether the same or not
   */
-  bool isSame(gio.tls_certificate.TlsCertificate certTwo)
+  bool isSame(gio.tls_certificate.TlsCertificate certTwo) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_tls_certificate_is_same(cast(GTlsCertificate*)this._cPtr, certTwo ? cast(GTlsCertificate*)certTwo._cPtr(No.Dup) : null);
@@ -572,7 +572,7 @@ class TlsCertificate : gobject.object.ObjectWrap
         trustedCa = the certificate of a trusted authority
       Returns: the appropriate #GTlsCertificateFlags
   */
-  gio.types.TlsCertificateFlags verify(gio.socket_connectable.SocketConnectable identity = null, gio.tls_certificate.TlsCertificate trustedCa = null)
+  gio.types.TlsCertificateFlags verify(gio.socket_connectable.SocketConnectable identity = null, gio.tls_certificate.TlsCertificate trustedCa = null) nothrow
   {
     GTlsCertificateFlags _cretval;
     _cretval = g_tls_certificate_verify(cast(GTlsCertificate*)this._cPtr, identity ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)identity)._cPtr(No.Dup) : null, trustedCa ? cast(GTlsCertificate*)trustedCa._cPtr(No.Dup) : null);
@@ -593,7 +593,7 @@ class TlsCertificateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           property represent the same data, just in different forms.
       Returns: Builder instance for fluent chaining
   */
-  T certificatePem(string propval)
+  T certificatePem(string propval) nothrow
   {
     return setProperty("certificate-pem", propval);
   }
@@ -619,7 +619,7 @@ class TlsCertificateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           GLib itself should make security decisions about TLS certificates.
       Returns: Builder instance for fluent chaining
   */
-  T issuer(gio.tls_certificate.TlsCertificate propval)
+  T issuer(gio.tls_certificate.TlsCertificate propval) nothrow
   {
     return setProperty("issuer", propval);
   }
@@ -630,7 +630,7 @@ class TlsCertificateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = An optional password used when constructed with GTlsCertificate:pkcs12-data.
       Returns: Builder instance for fluent chaining
   */
-  T password(string propval)
+  T password(string propval) nothrow
   {
     return setProperty("password", propval);
   }
@@ -645,7 +645,7 @@ class TlsCertificateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           #GTlsBackend does not support PKCS \#11.
       Returns: Builder instance for fluent chaining
   */
-  T pkcs11Uri(string propval)
+  T pkcs11Uri(string propval) nothrow
   {
     return setProperty("pkcs11-uri", propval);
   }
@@ -673,7 +673,7 @@ class TlsCertificateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           PKCS \#8.
       Returns: Builder instance for fluent chaining
   */
-  T privateKeyPem(string propval)
+  T privateKeyPem(string propval) nothrow
   {
     return setProperty("private-key-pem", propval);
   }
@@ -685,7 +685,7 @@ class TlsCertificateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           object containing a private key.
       Returns: Builder instance for fluent chaining
   */
-  T privateKeyPkcs11Uri(string propval)
+  T privateKeyPkcs11Uri(string propval) nothrow
   {
     return setProperty("private-key-pkcs11-uri", propval);
   }
@@ -698,7 +698,7 @@ final class TlsCertificateGidBuilder : TlsCertificateGidBuilderImpl!TlsCertifica
       Create object from builder.
       Returns: New object
   */
-  TlsCertificate build()
+  TlsCertificate build() nothrow
   {
     return new TlsCertificate(cast(void*)createGObject(TlsCertificate._getGType), No.Take);
   }

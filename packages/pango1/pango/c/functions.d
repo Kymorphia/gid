@@ -16,7 +16,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libpango-1.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // AttrFontDesc
   PangoAttribute* function(const(PangoFontDescription)* desc) c_pango_attr_font_desc_new; ///

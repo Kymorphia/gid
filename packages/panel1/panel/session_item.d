@@ -17,26 +17,26 @@ class SessionItem : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_session_item_get_type != &gidSymbolNotFound ? panel_session_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SessionItem self()
+  override SessionItem self() nothrow
   {
     return this;
   }
@@ -45,73 +45,73 @@ class SessionItem : gobject.object.ObjectWrap
       Get builder for [panel.session_item.SessionItem]
       Returns: New builder object
   */
-  static SessionItemGidBuilder builder()
+  static SessionItemGidBuilder builder() nothrow
   {
     return new SessionItemGidBuilder;
   }
 
   /** */
-  @property string id()
+  @property string id() nothrow
   {
     return getId();
   }
 
   /** */
-  @property void id(string propval)
+  @property void id(string propval) nothrow
   {
     setId(propval);
   }
 
   /** */
-  @property string moduleName()
+  @property string moduleName() nothrow
   {
     return getModuleName();
   }
 
   /** */
-  @property void moduleName(string propval)
+  @property void moduleName(string propval) nothrow
   {
     setModuleName(propval);
   }
 
   /** */
-  @property panel.position.Position position()
+  @property panel.position.Position position() nothrow
   {
     return getPosition();
   }
 
   /** */
-  @property void position(panel.position.Position propval)
+  @property void position(panel.position.Position propval) nothrow
   {
     setPosition(propval);
   }
 
   /** */
-  @property string typeHint()
+  @property string typeHint() nothrow
   {
     return getTypeHint();
   }
 
   /** */
-  @property void typeHint(string propval)
+  @property void typeHint(string propval) nothrow
   {
     setTypeHint(propval);
   }
 
   /** */
-  @property string workspace()
+  @property string workspace() nothrow
   {
     return getWorkspace();
   }
 
   /** */
-  @property void workspace(string propval)
+  @property void workspace(string propval) nothrow
   {
     setWorkspace(propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     PanelSessionItem* _cretval;
     _cretval = panel_session_item_new();
@@ -122,7 +122,7 @@ class SessionItem : gobject.object.ObjectWrap
       Gets the id for the session item, if any.
       Returns: a string containing the id; otherwise null
   */
-  string getId()
+  string getId() nothrow
   {
     const(char)* _cretval;
     _cretval = panel_session_item_get_id(cast(PanelSessionItem*)this._cPtr);
@@ -142,7 +142,7 @@ class SessionItem : gobject.object.ObjectWrap
       Returns: a non-floating #GVariant which should
           be released with [glib.variant.Variant.unref]; otherwise null.
   */
-  glib.variant.Variant getMetadataValue(string key, glib.variant_type.VariantType expectedType = null)
+  glib.variant.Variant getMetadataValue(string key, glib.variant_type.VariantType expectedType = null) nothrow
   {
     GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -155,7 +155,7 @@ class SessionItem : gobject.object.ObjectWrap
       Gets the module-name that created an item.
       Returns: a module-name or null
   */
-  string getModuleName()
+  string getModuleName() nothrow
   {
     const(char)* _cretval;
     _cretval = panel_session_item_get_module_name(cast(PanelSessionItem*)this._cPtr);
@@ -167,7 +167,7 @@ class SessionItem : gobject.object.ObjectWrap
       Gets the #PanelPosition for the item.
       Returns: a #PanelPosition or null
   */
-  panel.position.Position getPosition()
+  panel.position.Position getPosition() nothrow
   {
     PanelPosition* _cretval;
     _cretval = panel_session_item_get_position(cast(PanelSessionItem*)this._cPtr);
@@ -179,7 +179,7 @@ class SessionItem : gobject.object.ObjectWrap
       Gets the type hint for an item.
       Returns: a type-hint or null
   */
-  string getTypeHint()
+  string getTypeHint() nothrow
   {
     const(char)* _cretval;
     _cretval = panel_session_item_get_type_hint(cast(PanelSessionItem*)this._cPtr);
@@ -191,7 +191,7 @@ class SessionItem : gobject.object.ObjectWrap
       Gets the workspace id for the item.
       Returns: a workspace or null
   */
-  string getWorkspace()
+  string getWorkspace() nothrow
   {
     const(char)* _cretval;
     _cretval = panel_session_item_get_workspace(cast(PanelSessionItem*)this._cPtr);
@@ -211,7 +211,7 @@ class SessionItem : gobject.object.ObjectWrap
       Returns: true if self contains metadata named key and value_type is set
           to the value's #GVariantType. Otherwise false and value_type is unchanged.
   */
-  bool hasMetadata(string key, out glib.variant_type.VariantType valueType)
+  bool hasMetadata(string key, out glib.variant_type.VariantType valueType) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -230,7 +230,7 @@ class SessionItem : gobject.object.ObjectWrap
       Returns: true if a value was found for key matching expected_typed;
           otherwise false is returned.
   */
-  bool hasMetadataWithType(string key, glib.variant_type.VariantType expectedType)
+  bool hasMetadataWithType(string key, glib.variant_type.VariantType expectedType) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -247,7 +247,7 @@ class SessionItem : gobject.object.ObjectWrap
       Params:
         id = an optional identifier for the item
   */
-  void setId(string id = null)
+  void setId(string id = null) nothrow
   {
     const(char)* _id = id.toCString(No.Alloc);
     panel_session_item_set_id(cast(PanelSessionItem*)this._cPtr, _id);
@@ -262,7 +262,7 @@ class SessionItem : gobject.object.ObjectWrap
         key = the metadata key
         value = the value for key or null
   */
-  void setMetadataValue(string key, glib.variant.Variant value = null)
+  void setMetadataValue(string key, glib.variant.Variant value = null) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     panel_session_item_set_metadata_value(cast(PanelSessionItem*)this._cPtr, _key, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
@@ -277,7 +277,7 @@ class SessionItem : gobject.object.ObjectWrap
       Params:
         moduleName = the module name owning the item
   */
-  void setModuleName(string moduleName = null)
+  void setModuleName(string moduleName = null) nothrow
   {
     const(char)* _moduleName = moduleName.toCString(No.Alloc);
     panel_session_item_set_module_name(cast(PanelSessionItem*)this._cPtr, _moduleName);
@@ -289,7 +289,7 @@ class SessionItem : gobject.object.ObjectWrap
       Params:
         position = a #PanelPosition or null
   */
-  void setPosition(panel.position.Position position = null)
+  void setPosition(panel.position.Position position = null) nothrow
   {
     panel_session_item_set_position(cast(PanelSessionItem*)this._cPtr, position ? cast(PanelPosition*)position._cPtr(No.Dup) : null);
   }
@@ -303,7 +303,7 @@ class SessionItem : gobject.object.ObjectWrap
       Params:
         typeHint = a type hint string for the item
   */
-  void setTypeHint(string typeHint = null)
+  void setTypeHint(string typeHint = null) nothrow
   {
     const(char)* _typeHint = typeHint.toCString(No.Alloc);
     panel_session_item_set_type_hint(cast(PanelSessionItem*)this._cPtr, _typeHint);
@@ -317,7 +317,7 @@ class SessionItem : gobject.object.ObjectWrap
       Params:
         workspace = a workspace string for the item
   */
-  void setWorkspace(string workspace = null)
+  void setWorkspace(string workspace = null) nothrow
   {
     const(char)* _workspace = workspace.toCString(No.Alloc);
     panel_session_item_set_workspace(cast(PanelSessionItem*)this._cPtr, _workspace);
@@ -329,31 +329,31 @@ class SessionItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T id(string propval)
+  T id(string propval) nothrow
   {
     return setProperty("id", propval);
   }
 
   /** */
-  T moduleName(string propval)
+  T moduleName(string propval) nothrow
   {
     return setProperty("module-name", propval);
   }
 
   /** */
-  T position(panel.position.Position propval)
+  T position(panel.position.Position propval) nothrow
   {
     return setProperty("position", propval);
   }
 
   /** */
-  T typeHint(string propval)
+  T typeHint(string propval) nothrow
   {
     return setProperty("type-hint", propval);
   }
 
   /** */
-  T workspace(string propval)
+  T workspace(string propval) nothrow
   {
     return setProperty("workspace", propval);
   }
@@ -366,7 +366,7 @@ final class SessionItemGidBuilder : SessionItemGidBuilderImpl!SessionItemGidBuil
       Create object from builder.
       Returns: New object
   */
-  SessionItem build()
+  SessionItem build() nothrow
   {
     return new SessionItem(cast(void*)createGObject(SessionItem._getGType), Yes.Take);
   }

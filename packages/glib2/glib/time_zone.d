@@ -40,32 +40,32 @@ class TimeZone : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_time_zone_get_type != &gidSymbolNotFound ? g_time_zone_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TimeZone self()
+  override TimeZone self() nothrow
   {
     return this;
   }
@@ -85,7 +85,7 @@ class TimeZone : gobject.boxed.Boxed
             error reporting. Change your code to handle a potentially null return
             value.
   */
-  this(string identifier = null)
+  this(string identifier = null) nothrow
   {
     GTimeZone* _cretval;
     const(char)* _identifier = identifier.toCString(No.Alloc);
@@ -165,7 +165,7 @@ class TimeZone : gobject.boxed.Boxed
       Returns: the requested timezone, or null on
             failure
   */
-  static glib.time_zone.TimeZone newIdentifier(string identifier = null)
+  static glib.time_zone.TimeZone newIdentifier(string identifier = null) nothrow
   {
     GTimeZone* _cretval;
     const(char)* _identifier = identifier.toCString(No.Alloc);
@@ -186,7 +186,7 @@ class TimeZone : gobject.boxed.Boxed
       when you are done with it.
       Returns: the local timezone
   */
-  static glib.time_zone.TimeZone newLocal()
+  static glib.time_zone.TimeZone newLocal() nothrow
   {
     GTimeZone* _cretval;
     _cretval = g_time_zone_new_local();
@@ -211,7 +211,7 @@ class TimeZone : gobject.boxed.Boxed
       Returns: a timezone at the given offset from UTC, or UTC on
           failure
   */
-  static glib.time_zone.TimeZone newOffset(int seconds)
+  static glib.time_zone.TimeZone newOffset(int seconds) nothrow
   {
     GTimeZone* _cretval;
     _cretval = g_time_zone_new_offset(seconds);
@@ -229,7 +229,7 @@ class TimeZone : gobject.boxed.Boxed
       when you are done with it.
       Returns: the universal timezone
   */
-  static glib.time_zone.TimeZone newUtc()
+  static glib.time_zone.TimeZone newUtc() nothrow
   {
     GTimeZone* _cretval;
     _cretval = g_time_zone_new_utc();
@@ -260,7 +260,7 @@ class TimeZone : gobject.boxed.Boxed
         time = a pointer to a number of seconds since January 1, 1970
       Returns: the interval containing time_, never -1
   */
-  int adjustTime(glib.types.TimeType type, ref long time)
+  int adjustTime(glib.types.TimeType type, ref long time) nothrow
   {
     int _retval;
     _retval = g_time_zone_adjust_time(cast(GTimeZone*)this._cPtr, type, cast(long*)&time);
@@ -292,7 +292,7 @@ class TimeZone : gobject.boxed.Boxed
         time = a number of seconds since January 1, 1970
       Returns: the interval containing time_, or -1 in case of failure
   */
-  int findInterval(glib.types.TimeType type, long time)
+  int findInterval(glib.types.TimeType type, long time) nothrow
   {
     int _retval;
     _retval = g_time_zone_find_interval(cast(GTimeZone*)this._cPtr, type, time);
@@ -311,7 +311,7 @@ class TimeZone : gobject.boxed.Boxed
         interval = an interval within the timezone
       Returns: the time zone abbreviation, which belongs to tz
   */
-  string getAbbreviation(int interval)
+  string getAbbreviation(int interval) nothrow
   {
     const(char)* _cretval;
     _cretval = g_time_zone_get_abbreviation(cast(GTimeZone*)this._cPtr, interval);
@@ -330,7 +330,7 @@ class TimeZone : gobject.boxed.Boxed
       this function.
       Returns: identifier for this timezone
   */
-  string getIdentifier()
+  string getIdentifier() nothrow
   {
     const(char)* _cretval;
     _cretval = g_time_zone_get_identifier(cast(GTimeZone*)this._cPtr);
@@ -351,7 +351,7 @@ class TimeZone : gobject.boxed.Boxed
       Returns: the number of seconds that should be added to UTC to get the
                  local time in tz
   */
-  int getOffset(int interval)
+  int getOffset(int interval) nothrow
   {
     int _retval;
     _retval = g_time_zone_get_offset(cast(GTimeZone*)this._cPtr, interval);
@@ -366,7 +366,7 @@ class TimeZone : gobject.boxed.Boxed
         interval = an interval within the timezone
       Returns: true if daylight savings time is in effect
   */
-  bool isDst(int interval)
+  bool isDst(int interval) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_time_zone_is_dst(cast(GTimeZone*)this._cPtr, interval);

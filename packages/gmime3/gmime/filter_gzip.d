@@ -16,26 +16,26 @@ class FilterGZip : gmime.filter.Filter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_filter_gzip_get_type != &gidSymbolNotFound ? g_mime_filter_gzip_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FilterGZip self()
+  override FilterGZip self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class FilterGZip : gmime.filter.Filter
       Get builder for [gmime.filter_gzip.FilterGZip]
       Returns: New builder object
   */
-  static FilterGZipGidBuilder builder()
+  static FilterGZipGidBuilder builder() nothrow
   {
     return new FilterGZipGidBuilder;
   }
@@ -57,7 +57,7 @@ class FilterGZip : gmime.filter.Filter
         level = compression level
       Returns: a new gzip (or gunzip) filter.
   */
-  this(gmime.types.FilterGZipMode mode, int level)
+  this(gmime.types.FilterGZipMode mode, int level) nothrow
   {
     GMimeFilter* _cretval;
     _cretval = g_mime_filter_gzip_new(mode, level);
@@ -68,7 +68,7 @@ class FilterGZip : gmime.filter.Filter
       Gets the comment that was either previously set or retrieved when decoding a gzip stream.
       Returns: a string containing the comment.
   */
-  string getComment()
+  string getComment() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_filter_gzip_get_comment(cast(GMimeFilterGZip*)this._cPtr);
@@ -80,7 +80,7 @@ class FilterGZip : gmime.filter.Filter
       Gets the filename that was either previously set or retrieved when decoding a gzip stream.
       Returns: a string containing th ename of the file.
   */
-  string getFilename()
+  string getFilename() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_filter_gzip_get_filename(cast(GMimeFilterGZip*)this._cPtr);
@@ -94,7 +94,7 @@ class FilterGZip : gmime.filter.Filter
       Params:
         comment = The comment
   */
-  void setComment(string comment)
+  void setComment(string comment) nothrow
   {
     const(char)* _comment = comment.toCString(No.Alloc);
     g_mime_filter_gzip_set_comment(cast(GMimeFilterGZip*)this._cPtr, _comment);
@@ -106,7 +106,7 @@ class FilterGZip : gmime.filter.Filter
       Params:
         filename = The name of the file
   */
-  void setFilename(string filename)
+  void setFilename(string filename) nothrow
   {
     const(char)* _filename = filename.toCString(No.Alloc);
     g_mime_filter_gzip_set_filename(cast(GMimeFilterGZip*)this._cPtr, _filename);
@@ -125,7 +125,7 @@ final class FilterGZipGidBuilder : FilterGZipGidBuilderImpl!FilterGZipGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FilterGZip build()
+  FilterGZip build() nothrow
   {
     return new FilterGZip(cast(void*)createGObject(FilterGZip._getGType), Yes.Take);
   }

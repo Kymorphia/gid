@@ -18,26 +18,26 @@ class Position : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_position_get_type != &gidSymbolNotFound ? panel_position_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Position self()
+  override Position self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class Position : gobject.object.ObjectWrap
       Get builder for [panel.position.Position]
       Returns: New builder object
   */
-  static PositionGidBuilder builder()
+  static PositionGidBuilder builder() nothrow
   {
     return new PositionGidBuilder;
   }
@@ -55,7 +55,7 @@ class Position : gobject.object.ObjectWrap
       Get `area` property.
       Returns: The area.
   */
-  @property panel.types.Area area()
+  @property panel.types.Area area() nothrow
   {
     return getArea();
   }
@@ -65,7 +65,7 @@ class Position : gobject.object.ObjectWrap
       Params:
         propval = The area.
   */
-  @property void area(panel.types.Area propval)
+  @property void area(panel.types.Area propval) nothrow
   {
     setArea(propval);
   }
@@ -74,7 +74,7 @@ class Position : gobject.object.ObjectWrap
       Get `areaSet` property.
       Returns: The area is set.
   */
-  @property bool areaSet()
+  @property bool areaSet() nothrow
   {
     return getAreaSet();
   }
@@ -84,7 +84,7 @@ class Position : gobject.object.ObjectWrap
       Params:
         propval = The area is set.
   */
-  @property void areaSet(bool propval)
+  @property void areaSet(bool propval) nothrow
   {
     setAreaSet(propval);
   }
@@ -93,7 +93,7 @@ class Position : gobject.object.ObjectWrap
       Get `column` property.
       Returns: The column in the position.
   */
-  @property uint column()
+  @property uint column() nothrow
   {
     return getColumn();
   }
@@ -103,7 +103,7 @@ class Position : gobject.object.ObjectWrap
       Params:
         propval = The column in the position.
   */
-  @property void column(uint propval)
+  @property void column(uint propval) nothrow
   {
     setColumn(propval);
   }
@@ -112,7 +112,7 @@ class Position : gobject.object.ObjectWrap
       Get `columnSet` property.
       Returns: The column is set.
   */
-  @property bool columnSet()
+  @property bool columnSet() nothrow
   {
     return getColumnSet();
   }
@@ -122,55 +122,55 @@ class Position : gobject.object.ObjectWrap
       Params:
         propval = The column is set.
   */
-  @property void columnSet(bool propval)
+  @property void columnSet(bool propval) nothrow
   {
     setColumnSet(propval);
   }
 
   /** */
-  @property uint depth()
+  @property uint depth() nothrow
   {
     return getDepth();
   }
 
   /** */
-  @property void depth(uint propval)
+  @property void depth(uint propval) nothrow
   {
     setDepth(propval);
   }
 
   /** */
-  @property bool depthSet()
+  @property bool depthSet() nothrow
   {
     return getDepthSet();
   }
 
   /** */
-  @property void depthSet(bool propval)
+  @property void depthSet(bool propval) nothrow
   {
     setDepthSet(propval);
   }
 
   /** */
-  @property uint row()
+  @property uint row() nothrow
   {
     return getRow();
   }
 
   /** */
-  @property void row(uint propval)
+  @property void row(uint propval) nothrow
   {
     setRow(propval);
   }
 
   /** */
-  @property bool rowSet()
+  @property bool rowSet() nothrow
   {
     return getRowSet();
   }
 
   /** */
-  @property void rowSet(bool propval)
+  @property void rowSet(bool propval) nothrow
   {
     setRowSet(propval);
   }
@@ -179,7 +179,7 @@ class Position : gobject.object.ObjectWrap
       Create a position.
       Returns: a newly created instance of #PanelPosition.
   */
-  this()
+  this() nothrow
   {
     PanelPosition* _cretval;
     _cretval = panel_position_new();
@@ -194,7 +194,7 @@ class Position : gobject.object.ObjectWrap
       Returns: A newly created #PanelPosition
           from the #GVariant.
   */
-  static panel.position.Position newFromVariant(glib.variant.Variant variant)
+  static panel.position.Position newFromVariant(glib.variant.Variant variant) nothrow
   {
     PanelPosition* _cretval;
     _cretval = panel_position_new_from_variant(variant ? cast(GVariant*)variant._cPtr(No.Dup) : null);
@@ -209,7 +209,7 @@ class Position : gobject.object.ObjectWrap
         b = another #PanelPosition
       Returns: whether the two pane positions are equal.
   */
-  bool equal(panel.position.Position b)
+  bool equal(panel.position.Position b) nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_position_equal(cast(PanelPosition*)this._cPtr, b ? cast(PanelPosition*)b._cPtr(No.Dup) : null);
@@ -220,7 +220,7 @@ class Position : gobject.object.ObjectWrap
       Gets the area.
       Returns: the area.
   */
-  panel.types.Area getArea()
+  panel.types.Area getArea() nothrow
   {
     PanelArea _cretval;
     _cretval = panel_position_get_area(cast(PanelPosition*)this._cPtr);
@@ -232,7 +232,7 @@ class Position : gobject.object.ObjectWrap
       Gets wether the area is set.
       Returns: the wether the area is set.
   */
-  bool getAreaSet()
+  bool getAreaSet() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_position_get_area_set(cast(PanelPosition*)this._cPtr);
@@ -240,7 +240,7 @@ class Position : gobject.object.ObjectWrap
   }
 
   /** */
-  uint getColumn()
+  uint getColumn() nothrow
   {
     uint _retval;
     _retval = panel_position_get_column(cast(PanelPosition*)this._cPtr);
@@ -248,7 +248,7 @@ class Position : gobject.object.ObjectWrap
   }
 
   /** */
-  bool getColumnSet()
+  bool getColumnSet() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_position_get_column_set(cast(PanelPosition*)this._cPtr);
@@ -256,7 +256,7 @@ class Position : gobject.object.ObjectWrap
   }
 
   /** */
-  uint getDepth()
+  uint getDepth() nothrow
   {
     uint _retval;
     _retval = panel_position_get_depth(cast(PanelPosition*)this._cPtr);
@@ -264,7 +264,7 @@ class Position : gobject.object.ObjectWrap
   }
 
   /** */
-  bool getDepthSet()
+  bool getDepthSet() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_position_get_depth_set(cast(PanelPosition*)this._cPtr);
@@ -272,7 +272,7 @@ class Position : gobject.object.ObjectWrap
   }
 
   /** */
-  uint getRow()
+  uint getRow() nothrow
   {
     uint _retval;
     _retval = panel_position_get_row(cast(PanelPosition*)this._cPtr);
@@ -280,7 +280,7 @@ class Position : gobject.object.ObjectWrap
   }
 
   /** */
-  bool getRowSet()
+  bool getRowSet() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_position_get_row_set(cast(PanelPosition*)this._cPtr);
@@ -291,7 +291,7 @@ class Position : gobject.object.ObjectWrap
       Tells is the position is indeterminate.
       Returns: whether the position is indeterminate.
   */
-  bool isIndeterminate()
+  bool isIndeterminate() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_position_is_indeterminate(cast(PanelPosition*)this._cPtr);
@@ -304,7 +304,7 @@ class Position : gobject.object.ObjectWrap
       Params:
         area = the #PanelArea
   */
-  void setArea(panel.types.Area area)
+  void setArea(panel.types.Area area) nothrow
   {
     panel_position_set_area(cast(PanelPosition*)this._cPtr, area);
   }
@@ -315,43 +315,43 @@ class Position : gobject.object.ObjectWrap
       Params:
         areaSet = whether the area is set.
   */
-  void setAreaSet(bool areaSet)
+  void setAreaSet(bool areaSet) nothrow
   {
     panel_position_set_area_set(cast(PanelPosition*)this._cPtr, areaSet);
   }
 
   /** */
-  void setColumn(uint column)
+  void setColumn(uint column) nothrow
   {
     panel_position_set_column(cast(PanelPosition*)this._cPtr, column);
   }
 
   /** */
-  void setColumnSet(bool columnSet)
+  void setColumnSet(bool columnSet) nothrow
   {
     panel_position_set_column_set(cast(PanelPosition*)this._cPtr, columnSet);
   }
 
   /** */
-  void setDepth(uint depth)
+  void setDepth(uint depth) nothrow
   {
     panel_position_set_depth(cast(PanelPosition*)this._cPtr, depth);
   }
 
   /** */
-  void setDepthSet(bool depthSet)
+  void setDepthSet(bool depthSet) nothrow
   {
     panel_position_set_depth_set(cast(PanelPosition*)this._cPtr, depthSet);
   }
 
   /** */
-  void setRow(uint row)
+  void setRow(uint row) nothrow
   {
     panel_position_set_row(cast(PanelPosition*)this._cPtr, row);
   }
 
   /** */
-  void setRowSet(bool rowSet)
+  void setRowSet(bool rowSet) nothrow
   {
     panel_position_set_row_set(cast(PanelPosition*)this._cPtr, rowSet);
   }
@@ -361,7 +361,7 @@ class Position : gobject.object.ObjectWrap
       Returns: the new #GVariant containing
         the positon values
   */
-  glib.variant.Variant toVariant()
+  glib.variant.Variant toVariant() nothrow
   {
     GVariant* _cretval;
     _cretval = panel_position_to_variant(cast(PanelPosition*)this._cPtr);
@@ -380,7 +380,7 @@ class PositionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The area.
       Returns: Builder instance for fluent chaining
   */
-  T area(panel.types.Area propval)
+  T area(panel.types.Area propval) nothrow
   {
     return setProperty("area", propval);
   }
@@ -391,7 +391,7 @@ class PositionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The area is set.
       Returns: Builder instance for fluent chaining
   */
-  T areaSet(bool propval)
+  T areaSet(bool propval) nothrow
   {
     return setProperty("area-set", propval);
   }
@@ -402,7 +402,7 @@ class PositionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The column in the position.
       Returns: Builder instance for fluent chaining
   */
-  T column(uint propval)
+  T column(uint propval) nothrow
   {
     return setProperty("column", propval);
   }
@@ -413,31 +413,31 @@ class PositionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The column is set.
       Returns: Builder instance for fluent chaining
   */
-  T columnSet(bool propval)
+  T columnSet(bool propval) nothrow
   {
     return setProperty("column-set", propval);
   }
 
   /** */
-  T depth(uint propval)
+  T depth(uint propval) nothrow
   {
     return setProperty("depth", propval);
   }
 
   /** */
-  T depthSet(bool propval)
+  T depthSet(bool propval) nothrow
   {
     return setProperty("depth-set", propval);
   }
 
   /** */
-  T row(uint propval)
+  T row(uint propval) nothrow
   {
     return setProperty("row", propval);
   }
 
   /** */
-  T rowSet(bool propval)
+  T rowSet(bool propval) nothrow
   {
     return setProperty("row-set", propval);
   }
@@ -450,7 +450,7 @@ final class PositionGidBuilder : PositionGidBuilderImpl!PositionGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Position build()
+  Position build() nothrow
   {
     return new Position(cast(void*)createGObject(Position._getGType), Yes.Take);
   }

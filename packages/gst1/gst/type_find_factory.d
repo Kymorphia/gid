@@ -66,26 +66,26 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_type_find_factory_get_type != &gidSymbolNotFound ? gst_type_find_factory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TypeFindFactory self()
+  override TypeFindFactory self() nothrow
   {
     return this;
   }
@@ -94,7 +94,7 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
       Get builder for [gst.type_find_factory.TypeFindFactory]
       Returns: New builder object
   */
-  static TypeFindFactoryGidBuilder builder()
+  static TypeFindFactoryGidBuilder builder() nothrow
   {
     return new TypeFindFactoryGidBuilder;
   }
@@ -110,7 +110,7 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
       Returns: the list of all
             registered #GstTypeFindFactory.
   */
-  static gst.type_find_factory.TypeFindFactory[] getList()
+  static gst.type_find_factory.TypeFindFactory[] getList() nothrow
   {
     GList* _cretval;
     _cretval = gst_type_find_factory_get_list();
@@ -125,7 +125,7 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
         find = a properly setup #GstTypeFind entry. The get_data
               and suggest_type members must be set.
   */
-  void callFunction(gst.type_find.TypeFind find)
+  void callFunction(gst.type_find.TypeFind find) nothrow
   {
     gst_type_find_factory_call_function(cast(GstTypeFindFactory*)this._cPtr, find ? cast(GstTypeFind*)find._cPtr : null);
   }
@@ -134,7 +134,7 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
       Gets the #GstCaps associated with a typefind factory.
       Returns: the #GstCaps associated with this factory
   */
-  gst.caps.Caps getCaps()
+  gst.caps.Caps getCaps() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_type_find_factory_get_caps(cast(GstTypeFindFactory*)this._cPtr);
@@ -149,7 +149,7 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
       a 0-length list.
       Returns: a null-terminated array of extensions associated with this factory
   */
-  string[] getExtensions()
+  string[] getExtensions() nothrow
   {
     const(char*)* _cretval;
     _cretval = gst_type_find_factory_get_extensions(cast(GstTypeFindFactory*)this._cPtr);
@@ -173,7 +173,7 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
       e.g. assume a certain media type based on the file extension.
       Returns: true if the factory has a typefind functions set, otherwise false
   */
-  bool hasFunction()
+  bool hasFunction() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_type_find_factory_has_function(cast(GstTypeFindFactory*)this._cPtr);
@@ -193,7 +193,7 @@ final class TypeFindFactoryGidBuilder : TypeFindFactoryGidBuilderImpl!TypeFindFa
       Create object from builder.
       Returns: New object
   */
-  TypeFindFactory build()
+  TypeFindFactory build() nothrow
   {
     return new TypeFindFactory(cast(void*)createGObject(TypeFindFactory._getGType), No.Take);
   }

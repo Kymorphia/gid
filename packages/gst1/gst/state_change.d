@@ -19,7 +19,7 @@ struct StateChange
       Returns: a string with the name of the state
            result.
   */
-  static string getName(gst.types.StateChange transition)
+  static string getName(gst.types.StateChange transition) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_state_change_get_name(transition);

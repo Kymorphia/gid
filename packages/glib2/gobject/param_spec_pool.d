@@ -21,18 +21,15 @@ class ParamSpecPool
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gobject.param_spec_pool.ParamSpecPool");
-
     _cInstancePtr = cast(GParamSpecPool*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -44,7 +41,7 @@ class ParamSpecPool
         pspec = the #GParamSpec to insert
         ownerType = a #GType identifying the owner of pspec
   */
-  void insert(gobject.param_spec.ParamSpec pspec, gobject.types.GType ownerType)
+  void insert(gobject.param_spec.ParamSpec pspec, gobject.types.GType ownerType) nothrow
   {
     g_param_spec_pool_insert(cast(GParamSpecPool*)this._cPtr, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, ownerType);
   }
@@ -59,7 +56,7 @@ class ParamSpecPool
                  allocated array containing pointers to all #GParamSpecs
                  owned by owner_type in the pool
   */
-  gobject.param_spec.ParamSpec[] list(gobject.types.GType ownerType)
+  gobject.param_spec.ParamSpec[] list(gobject.types.GType ownerType) nothrow
   {
     GParamSpec** _cretval;
     uint _cretlength;
@@ -86,7 +83,7 @@ class ParamSpecPool
                  #GList of all #GParamSpecs owned by owner_type in
                  the pool#GParamSpecs.
   */
-  gobject.param_spec.ParamSpec[] listOwned(gobject.types.GType ownerType)
+  gobject.param_spec.ParamSpec[] listOwned(gobject.types.GType ownerType) nothrow
   {
     GList* _cretval;
     _cretval = g_param_spec_pool_list_owned(cast(GParamSpecPool*)this._cPtr, ownerType);
@@ -105,7 +102,7 @@ class ParamSpecPool
       Returns: The found #GParamSpec, or null if no
         matching #GParamSpec was found.
   */
-  gobject.param_spec.ParamSpec lookup(string paramName, gobject.types.GType ownerType, bool walkAncestors)
+  gobject.param_spec.ParamSpec lookup(string paramName, gobject.types.GType ownerType, bool walkAncestors) nothrow
   {
     GParamSpec* _cretval;
     const(char)* _paramName = paramName.toCString(No.Alloc);
@@ -120,7 +117,7 @@ class ParamSpecPool
       Params:
         pspec = the #GParamSpec to remove
   */
-  void remove(gobject.param_spec.ParamSpec pspec)
+  void remove(gobject.param_spec.ParamSpec pspec) nothrow
   {
     g_param_spec_pool_remove(cast(GParamSpecPool*)this._cPtr, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
   }
@@ -137,7 +134,7 @@ class ParamSpecPool
         typePrefixing = Whether the pool will support type-prefixed property names.
       Returns: a newly allocated #GParamSpecPool.
   */
-  this(bool typePrefixing)
+  this(bool typePrefixing) nothrow
   {
     GParamSpecPool* _cretval;
     _cretval = g_param_spec_pool_new(typePrefixing);

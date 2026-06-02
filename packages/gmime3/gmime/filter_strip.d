@@ -16,26 +16,26 @@ class FilterStrip : gmime.filter.Filter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_filter_strip_get_type != &gidSymbolNotFound ? g_mime_filter_strip_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FilterStrip self()
+  override FilterStrip self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class FilterStrip : gmime.filter.Filter
       Get builder for [gmime.filter_strip.FilterStrip]
       Returns: New builder object
   */
-  static FilterStripGidBuilder builder()
+  static FilterStripGidBuilder builder() nothrow
   {
     return new FilterStripGidBuilder;
   }
@@ -54,7 +54,7 @@ class FilterStrip : gmime.filter.Filter
       whitespace from every line of input passed through the filter.
       Returns: a new strip filter.
   */
-  this()
+  this() nothrow
   {
     GMimeFilter* _cretval;
     _cretval = g_mime_filter_strip_new();
@@ -74,7 +74,7 @@ final class FilterStripGidBuilder : FilterStripGidBuilderImpl!FilterStripGidBuil
       Create object from builder.
       Returns: New object
   */
-  FilterStrip build()
+  FilterStrip build() nothrow
   {
     return new FilterStrip(cast(void*)createGObject(FilterStrip._getGType), Yes.Take);
   }

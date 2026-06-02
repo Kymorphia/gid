@@ -13,7 +13,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgstsdp-1.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // MIKEYMessage
   GType function() c_gst_mikey_message_get_type; ///

@@ -16,32 +16,32 @@ class GLBufferAllocationParams : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_buffer_allocation_params_get_type != &gidSymbolNotFound ? gst_gl_buffer_allocation_params_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLBufferAllocationParams self()
+  override GLBufferAllocationParams self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class GLBufferAllocationParams : gobject.boxed.Boxed
       Get `parent` field.
       Returns: parent object
   */
-  @property gstgl.glallocation_params.GLAllocationParams parent()
+  @property gstgl.glallocation_params.GLAllocationParams parent() nothrow
   {
     return cToD!(gstgl.glallocation_params.GLAllocationParams)(cast(void*)&(cast(GstGLBufferAllocationParams*)this._cPtr).parent);
   }
@@ -59,7 +59,7 @@ class GLBufferAllocationParams : gobject.boxed.Boxed
       Get `glTarget` field.
       Returns: the OpenGL target to bind the buffer to
   */
-  @property uint glTarget()
+  @property uint glTarget() nothrow
   {
     return (cast(GstGLBufferAllocationParams*)this._cPtr).glTarget;
   }
@@ -69,7 +69,7 @@ class GLBufferAllocationParams : gobject.boxed.Boxed
       Params:
         propval = the OpenGL target to bind the buffer to
   */
-  @property void glTarget(uint propval)
+  @property void glTarget(uint propval) nothrow
   {
     (cast(GstGLBufferAllocationParams*)this._cPtr).glTarget = propval;
   }
@@ -78,7 +78,7 @@ class GLBufferAllocationParams : gobject.boxed.Boxed
       Get `glUsage` field.
       Returns: the OpenGL usage hint to create the buffer with
   */
-  @property uint glUsage()
+  @property uint glUsage() nothrow
   {
     return (cast(GstGLBufferAllocationParams*)this._cPtr).glUsage;
   }
@@ -88,13 +88,13 @@ class GLBufferAllocationParams : gobject.boxed.Boxed
       Params:
         propval = the OpenGL usage hint to create the buffer with
   */
-  @property void glUsage(uint propval)
+  @property void glUsage(uint propval) nothrow
   {
     (cast(GstGLBufferAllocationParams*)this._cPtr).glUsage = propval;
   }
 
   /** */
-  this(gstgl.glcontext.GLContext context, size_t allocSize, gst.allocation_params.AllocationParams allocParams, uint glTarget, uint glUsage)
+  this(gstgl.glcontext.GLContext context, size_t allocSize, gst.allocation_params.AllocationParams allocParams, uint glTarget, uint glUsage) nothrow
   {
     GstGLBufferAllocationParams* _cretval;
     _cretval = gst_gl_buffer_allocation_params_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, allocSize, cast(const(GstAllocationParams)*)&allocParams, glTarget, glUsage);

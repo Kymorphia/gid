@@ -20,11 +20,8 @@ class EventGrabBroken
   GdkEventGrabBroken _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.event_grab_broken.EventGrabBroken");
-
     _cInstance = *cast(GdkEventGrabBroken*)ptr;
 
     if (take)
@@ -32,7 +29,7 @@ class EventGrabBroken
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -41,7 +38,7 @@ class EventGrabBroken
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.GrabBroken])
   */
-  @property gdk.types.EventType type()
+  @property gdk.types.EventType type() nothrow
   {
     return cast(gdk.types.EventType)(cast(GdkEventGrabBroken*)this._cPtr).type;
   }
@@ -51,7 +48,7 @@ class EventGrabBroken
       Params:
         propval = the type of the event ([gdk.types.EventType.GrabBroken])
   */
-  @property void type(gdk.types.EventType propval)
+  @property void type(gdk.types.EventType propval) nothrow
   {
     (cast(GdkEventGrabBroken*)this._cPtr).type = cast(GdkEventType)propval;
   }
@@ -61,7 +58,7 @@ class EventGrabBroken
       Returns: the window which received the event, i.e. the window
           that previously owned the grab
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventGrabBroken*)this._cPtr).window);
   }
@@ -72,7 +69,7 @@ class EventGrabBroken
         propval = the window which received the event, i.e. the window
             that previously owned the grab
   */
-  @property void window(gdk.window.Window propval)
+  @property void window(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventGrabBroken*)this._cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventGrabBroken*)this._cPtr).window);
@@ -82,7 +79,7 @@ class EventGrabBroken
       Get `sendEvent` field.
       Returns: true if the event was sent explicitly.
   */
-  @property byte sendEvent()
+  @property byte sendEvent() nothrow
   {
     return (cast(GdkEventGrabBroken*)this._cPtr).sendEvent;
   }
@@ -92,7 +89,7 @@ class EventGrabBroken
       Params:
         propval = true if the event was sent explicitly.
   */
-  @property void sendEvent(byte propval)
+  @property void sendEvent(byte propval) nothrow
   {
     (cast(GdkEventGrabBroken*)this._cPtr).sendEvent = propval;
   }
@@ -102,7 +99,7 @@ class EventGrabBroken
       Returns: true if a keyboard grab was broken, false if a pointer
           grab was broken
   */
-  @property bool keyboard()
+  @property bool keyboard() nothrow
   {
     return cast(bool)(cast(GdkEventGrabBroken*)this._cPtr).keyboard;
   }
@@ -113,7 +110,7 @@ class EventGrabBroken
         propval = true if a keyboard grab was broken, false if a pointer
             grab was broken
   */
-  @property void keyboard(bool propval)
+  @property void keyboard(bool propval) nothrow
   {
     (cast(GdkEventGrabBroken*)this._cPtr).keyboard = propval;
   }
@@ -122,7 +119,7 @@ class EventGrabBroken
       Get `implicit` field.
       Returns: true if the broken grab was implicit
   */
-  @property bool implicit()
+  @property bool implicit() nothrow
   {
     return cast(bool)(cast(GdkEventGrabBroken*)this._cPtr).implicit;
   }
@@ -132,7 +129,7 @@ class EventGrabBroken
       Params:
         propval = true if the broken grab was implicit
   */
-  @property void implicit(bool propval)
+  @property void implicit(bool propval) nothrow
   {
     (cast(GdkEventGrabBroken*)this._cPtr).implicit = propval;
   }
@@ -143,7 +140,7 @@ class EventGrabBroken
           application, @grab_window contains the new grab window. Otherwise
           @grab_window is null.
   */
-  @property gdk.window.Window grabWindow()
+  @property gdk.window.Window grabWindow() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventGrabBroken*)this._cPtr).grabWindow);
   }
@@ -155,7 +152,7 @@ class EventGrabBroken
             application, @grab_window contains the new grab window. Otherwise
             @grab_window is null.
   */
-  @property void grabWindow(gdk.window.Window propval)
+  @property void grabWindow(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventGrabBroken*)this._cPtr).grabWindow);
     dToC(propval, cast(void*)&(cast(GdkEventGrabBroken*)this._cPtr).grabWindow);

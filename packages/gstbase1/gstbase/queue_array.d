@@ -18,24 +18,21 @@ class QueueArray
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstbase.queue_array.QueueArray");
-
     _cInstancePtr = cast(GstQueueArray*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
 
   /** */
-  void pushTailStruct(void* pStruct = null)
+  void pushTailStruct(void* pStruct = null) nothrow
   {
     gst_queue_array_push_tail_struct(cast(GstQueueArray*)this._cPtr, pStruct);
   }

@@ -18,11 +18,8 @@ class AttrFontDesc
   PangoAttrFontDesc _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for pango.attr_font_desc.AttrFontDesc");
-
     _cInstance = *cast(PangoAttrFontDesc*)ptr;
 
     if (take)
@@ -30,7 +27,7 @@ class AttrFontDesc
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class AttrFontDesc
       Get `attr` field.
       Returns: the common portion of the attribute
   */
-  @property pango.attribute.Attribute attr()
+  @property pango.attribute.Attribute attr() nothrow
   {
     return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrFontDesc*)this._cPtr).attr);
   }
@@ -48,7 +45,7 @@ class AttrFontDesc
       Get `desc` field.
       Returns: the font description which is the value of this attribute
   */
-  @property pango.font_description.FontDescription desc()
+  @property pango.font_description.FontDescription desc() nothrow
   {
     return cToD!(pango.font_description.FontDescription)(cast(void*)(cast(PangoAttrFontDesc*)this._cPtr).desc);
   }
@@ -58,7 +55,7 @@ class AttrFontDesc
       Params:
         propval = the font description which is the value of this attribute
   */
-  @property void desc(pango.font_description.FontDescription propval)
+  @property void desc(pango.font_description.FontDescription propval) nothrow
   {
     cValueFree!(pango.font_description.FontDescription)(cast(void*)(cast(PangoAttrFontDesc*)this._cPtr).desc);
     dToC(propval, cast(void*)&(cast(PangoAttrFontDesc*)this._cPtr).desc);
@@ -76,7 +73,7 @@ class AttrFontDesc
           [pango.attribute.Attribute], which should be freed with
           [pango.attribute.Attribute.destroy]
   */
-  static pango.attribute.Attribute new_(pango.font_description.FontDescription desc)
+  static pango.attribute.Attribute new_(pango.font_description.FontDescription desc) nothrow
   {
     PangoAttribute* _cretval;
     _cretval = pango_attr_font_desc_new(desc ? cast(const(PangoFontDescription)*)desc._cPtr(No.Dup) : null);

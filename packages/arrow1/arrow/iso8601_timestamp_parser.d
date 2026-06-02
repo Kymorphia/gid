@@ -14,26 +14,26 @@ class ISO8601TimestampParser : arrow.timestamp_parser.TimestampParser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_iso8601_timestamp_parser_get_type != &gidSymbolNotFound ? garrow_iso8601_timestamp_parser_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ISO8601TimestampParser self()
+  override ISO8601TimestampParser self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class ISO8601TimestampParser : arrow.timestamp_parser.TimestampParser
       Get builder for [arrow.iso8601_timestamp_parser.ISO8601TimestampParser]
       Returns: New builder object
   */
-  static ISO8601TimestampParserGidBuilder builder()
+  static ISO8601TimestampParserGidBuilder builder() nothrow
   {
     return new ISO8601TimestampParserGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowISO8601TimestampParser* _cretval;
     _cretval = garrow_iso8601_timestamp_parser_new();
@@ -68,7 +68,7 @@ final class ISO8601TimestampParserGidBuilder : ISO8601TimestampParserGidBuilderI
       Create object from builder.
       Returns: New object
   */
-  ISO8601TimestampParser build()
+  ISO8601TimestampParser build() nothrow
   {
     return new ISO8601TimestampParser(cast(void*)createGObject(ISO8601TimestampParser._getGType), Yes.Take);
   }

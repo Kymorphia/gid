@@ -23,7 +23,7 @@ interface Orientable
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_orientable_get_type != &gidSymbolNotFound ? gtk_orientable_get_type() : cast(GType)0;
@@ -33,14 +33,14 @@ interface Orientable
       Get `orientation` property.
       Returns: The orientation of the orientable.
   */
-  @property gtk.types.Orientation orientation();
+  @property gtk.types.Orientation orientation() nothrow;
 
   /**
       Set `orientation` property.
       Params:
         propval = The orientation of the orientable.
   */
-  @property void orientation(gtk.types.Orientation propval);
+  @property void orientation(gtk.types.Orientation propval) nothrow;
 
   /**
       Retrieves the orientation of the orientable.
@@ -67,5 +67,5 @@ interface OrientableGidBuilderImpl(T)
         propval = The orientation of the orientable.
       Returns: Builder instance for fluent chaining
   */
-  T orientation(gtk.types.Orientation propval);
+  T orientation(gtk.types.Orientation propval) nothrow;
 }

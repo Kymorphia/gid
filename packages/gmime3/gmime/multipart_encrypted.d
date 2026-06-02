@@ -21,26 +21,26 @@ class MultipartEncrypted : gmime.multipart.Multipart
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_multipart_encrypted_get_type != &gidSymbolNotFound ? g_mime_multipart_encrypted_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MultipartEncrypted self()
+  override MultipartEncrypted self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class MultipartEncrypted : gmime.multipart.Multipart
       Get builder for [gmime.multipart_encrypted.MultipartEncrypted]
       Returns: New builder object
   */
-  static MultipartEncryptedGidBuilder builder()
+  static MultipartEncryptedGidBuilder builder() nothrow
   {
     return new MultipartEncryptedGidBuilder;
   }
@@ -58,7 +58,7 @@ class MultipartEncrypted : gmime.multipart.Multipart
       Creates a new MIME multipart/encrypted object.
       Returns: an empty MIME multipart/encrypted object.
   */
-  this()
+  this() nothrow
   {
     GMimeMultipartEncrypted* _cretval;
     _cretval = g_mime_multipart_encrypted_new();
@@ -146,7 +146,7 @@ final class MultipartEncryptedGidBuilder : MultipartEncryptedGidBuilderImpl!Mult
       Create object from builder.
       Returns: New object
   */
-  MultipartEncrypted build()
+  MultipartEncrypted build() nothrow
   {
     return new MultipartEncrypted(cast(void*)createGObject(MultipartEncrypted._getGType), Yes.Take);
   }

@@ -44,26 +44,26 @@ class PasswordEntryRow : adw.entry_row.EntryRow
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_password_entry_row_get_type != &gidSymbolNotFound ? adw_password_entry_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PasswordEntryRow self()
+  override PasswordEntryRow self() nothrow
   {
     return this;
   }
@@ -72,7 +72,7 @@ class PasswordEntryRow : adw.entry_row.EntryRow
       Get builder for [adw.password_entry_row.PasswordEntryRow]
       Returns: New builder object
   */
-  static PasswordEntryRowGidBuilder builder()
+  static PasswordEntryRowGidBuilder builder() nothrow
   {
     return new PasswordEntryRowGidBuilder;
   }
@@ -81,7 +81,7 @@ class PasswordEntryRow : adw.entry_row.EntryRow
       Creates a new [adw.password_entry_row.PasswordEntryRow].
       Returns: the newly created [adw.password_entry_row.PasswordEntryRow]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_password_entry_row_new();
@@ -102,7 +102,7 @@ final class PasswordEntryRowGidBuilder : PasswordEntryRowGidBuilderImpl!Password
       Create object from builder.
       Returns: New object
   */
-  PasswordEntryRow build()
+  PasswordEntryRow build() nothrow
   {
     return new PasswordEntryRow(cast(void*)createGObject(PasswordEntryRow._getGType), No.Take);
   }

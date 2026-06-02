@@ -17,32 +17,32 @@ class Stroke : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_stroke_get_type != &gidSymbolNotFound ? gsk_stroke_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Stroke self()
+  override Stroke self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class Stroke : gobject.boxed.Boxed
         lineWidth = line width of the stroke. Must be > 0
       Returns: a new [gsk.stroke.Stroke]
   */
-  this(float lineWidth)
+  this(float lineWidth) nothrow
   {
     GskStroke* _cretval;
     _cretval = gsk_stroke_new(lineWidth);
@@ -65,7 +65,7 @@ class Stroke : gobject.boxed.Boxed
       Creates a copy of the given other stroke.
       Returns: a new [gsk.stroke.Stroke]. Use [gsk.stroke.Stroke.free] to free it
   */
-  gsk.stroke.Stroke copy()
+  gsk.stroke.Stroke copy() nothrow
   {
     GskStroke* _cretval;
     _cretval = gsk_stroke_copy(cast(const(GskStroke)*)this._cPtr);
@@ -77,7 +77,7 @@ class Stroke : gobject.boxed.Boxed
       Gets the dash array in use or `NULL` if dashing is disabled.
       Returns: The dash array or `NULL` if the dash array is empty.
   */
-  float[] getDash()
+  float[] getDash() nothrow
   {
     const(float)* _cretval;
     size_t _cretlength;
@@ -95,7 +95,7 @@ class Stroke : gobject.boxed.Boxed
       Returns the dash_offset of a [gsk.stroke.Stroke].
       Returns: 
   */
-  float getDashOffset()
+  float getDashOffset() nothrow
   {
     float _retval;
     _retval = gsk_stroke_get_dash_offset(cast(const(GskStroke)*)this._cPtr);
@@ -108,7 +108,7 @@ class Stroke : gobject.boxed.Boxed
       See [gsk.types.LineCap] for details.
       Returns: The line cap
   */
-  gsk.types.LineCap getLineCap()
+  gsk.types.LineCap getLineCap() nothrow
   {
     GskLineCap _cretval;
     _cretval = gsk_stroke_get_line_cap(cast(const(GskStroke)*)this._cPtr);
@@ -122,7 +122,7 @@ class Stroke : gobject.boxed.Boxed
       See [gsk.types.LineJoin] for details.
       Returns: The line join
   */
-  gsk.types.LineJoin getLineJoin()
+  gsk.types.LineJoin getLineJoin() nothrow
   {
     GskLineJoin _cretval;
     _cretval = gsk_stroke_get_line_join(cast(const(GskStroke)*)this._cPtr);
@@ -134,7 +134,7 @@ class Stroke : gobject.boxed.Boxed
       Gets the line width used.
       Returns: The line width
   */
-  float getLineWidth()
+  float getLineWidth() nothrow
   {
     float _retval;
     _retval = gsk_stroke_get_line_width(cast(const(GskStroke)*)this._cPtr);
@@ -145,7 +145,7 @@ class Stroke : gobject.boxed.Boxed
       Returns the miter limit of a [gsk.stroke.Stroke].
       Returns: 
   */
-  float getMiterLimit()
+  float getMiterLimit() nothrow
   {
     float _retval;
     _retval = gsk_stroke_get_miter_limit(cast(const(GskStroke)*)this._cPtr);
@@ -180,7 +180,7 @@ class Stroke : gobject.boxed.Boxed
       Params:
         dash = the array of dashes
   */
-  void setDash(float[] dash = null)
+  void setDash(float[] dash = null) nothrow
   {
     size_t _nDash;
     if (dash)
@@ -201,7 +201,7 @@ class Stroke : gobject.boxed.Boxed
       Params:
         offset = offset into the dash pattern
   */
-  void setDashOffset(float offset)
+  void setDashOffset(float offset) nothrow
   {
     gsk_stroke_set_dash_offset(cast(GskStroke*)this._cPtr, offset);
   }
@@ -214,7 +214,7 @@ class Stroke : gobject.boxed.Boxed
       Params:
         lineCap = the [gsk.types.LineCap]
   */
-  void setLineCap(gsk.types.LineCap lineCap)
+  void setLineCap(gsk.types.LineCap lineCap) nothrow
   {
     gsk_stroke_set_line_cap(cast(GskStroke*)this._cPtr, lineCap);
   }
@@ -227,7 +227,7 @@ class Stroke : gobject.boxed.Boxed
       Params:
         lineJoin = The line join to use
   */
-  void setLineJoin(gsk.types.LineJoin lineJoin)
+  void setLineJoin(gsk.types.LineJoin lineJoin) nothrow
   {
     gsk_stroke_set_line_join(cast(GskStroke*)this._cPtr, lineJoin);
   }
@@ -240,7 +240,7 @@ class Stroke : gobject.boxed.Boxed
       Params:
         lineWidth = width of the line in pixels
   */
-  void setLineWidth(float lineWidth)
+  void setLineWidth(float lineWidth) nothrow
   {
     gsk_stroke_set_line_width(cast(GskStroke*)this._cPtr, lineWidth);
   }
@@ -258,7 +258,7 @@ class Stroke : gobject.boxed.Boxed
       Params:
         limit = the miter limit
   */
-  void setMiterLimit(float limit)
+  void setMiterLimit(float limit) nothrow
   {
     gsk_stroke_set_miter_limit(cast(GskStroke*)this._cPtr, limit);
   }
@@ -270,7 +270,7 @@ class Stroke : gobject.boxed.Boxed
       Params:
         cr = the cairo context to configure
   */
-  void toCairo(cairo.context.Context cr)
+  void toCairo(cairo.context.Context cr) nothrow
   {
     gsk_stroke_to_cairo(cast(const(GskStroke)*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null);
   }
@@ -283,7 +283,7 @@ class Stroke : gobject.boxed.Boxed
         stroke2 = the second [gsk.stroke.Stroke]
       Returns: `TRUE` if the 2 strokes are equal, `FALSE` otherwise
   */
-  static bool equal(const(void)* stroke1 = null, const(void)* stroke2 = null)
+  static bool equal(const(void)* stroke1 = null, const(void)* stroke2 = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)gsk_stroke_equal(stroke1, stroke2);

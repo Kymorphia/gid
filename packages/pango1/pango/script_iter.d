@@ -16,32 +16,32 @@ class ScriptIter : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_script_iter_get_type != &gidSymbolNotFound ? pango_script_iter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ScriptIter self()
+  override ScriptIter self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class ScriptIter : gobject.boxed.Boxed
          freed with [pango.script_iter.ScriptIter.free]. If the string is
          empty, it will point at an empty range.
   */
-  this(string text)
+  this(string text) nothrow
   {
     PangoScriptIter* _cretval;
     int _length;
@@ -89,7 +89,7 @@ class ScriptIter : gobject.boxed.Boxed
         end = location to store end position of the range
         script = location to store script for range
   */
-  void getRange(out string start, out string end, out pango.types.Script script)
+  void getRange(out string start, out string end, out pango.types.Script script) nothrow
   {
     char* _start;
     char* _end;
@@ -105,7 +105,7 @@ class ScriptIter : gobject.boxed.Boxed
       and false is returned.
       Returns: true if iter was successfully advanced
   */
-  bool next()
+  bool next() nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_script_iter_next(cast(PangoScriptIter*)this._cPtr);

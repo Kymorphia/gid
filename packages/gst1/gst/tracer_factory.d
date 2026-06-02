@@ -18,26 +18,26 @@ class TracerFactory : gst.plugin_feature.PluginFeature
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_tracer_factory_get_type != &gidSymbolNotFound ? gst_tracer_factory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TracerFactory self()
+  override TracerFactory self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class TracerFactory : gst.plugin_feature.PluginFeature
       Get builder for [gst.tracer_factory.TracerFactory]
       Returns: New builder object
   */
-  static TracerFactoryGidBuilder builder()
+  static TracerFactoryGidBuilder builder() nothrow
   {
     return new TracerFactoryGidBuilder;
   }
@@ -61,7 +61,7 @@ class TracerFactory : gst.plugin_feature.PluginFeature
       Returns: the list of all
             registered #GstTracerFactory.
   */
-  static gst.tracer_factory.TracerFactory[] getList()
+  static gst.tracer_factory.TracerFactory[] getList() nothrow
   {
     GList* _cretval;
     _cretval = gst_tracer_factory_get_list();
@@ -76,7 +76,7 @@ class TracerFactory : gst.plugin_feature.PluginFeature
       Returns: the #GType for tracers managed by this factory or 0 if
         the factory is not loaded.
   */
-  gobject.types.GType getTracerType()
+  gobject.types.GType getTracerType() nothrow
   {
     gobject.types.GType _retval;
     _retval = gst_tracer_factory_get_tracer_type(cast(GstTracerFactory*)this._cPtr);
@@ -96,7 +96,7 @@ final class TracerFactoryGidBuilder : TracerFactoryGidBuilderImpl!TracerFactoryG
       Create object from builder.
       Returns: New object
   */
-  TracerFactory build()
+  TracerFactory build() nothrow
   {
     return new TracerFactory(cast(void*)createGObject(TracerFactory._getGType), No.Take);
   }

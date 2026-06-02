@@ -19,11 +19,8 @@ class GLShaderNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.glshader_node.GLShaderNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -54,7 +51,7 @@ class GLShaderNode : gsk.render_node.RenderNode
             these will be rendered to textures and used as input.
       Returns: A new [gsk.render_node.RenderNode]
   */
-  this(gsk.glshader.GLShader shader, graphene.rect.Rect bounds, glib.bytes.Bytes args, gsk.render_node.RenderNode[] children = null)
+  this(gsk.glshader.GLShader shader, graphene.rect.Rect bounds, glib.bytes.Bytes args, gsk.render_node.RenderNode[] children = null) nothrow
   {
     GskRenderNode* _cretval;
     uint _nChildren;
@@ -74,7 +71,7 @@ class GLShaderNode : gsk.render_node.RenderNode
       Gets args for the node.
       Returns: A [glib.bytes.Bytes] with the uniform arguments
   */
-  glib.bytes.Bytes getArgs()
+  glib.bytes.Bytes getArgs() nothrow
   {
     GBytes* _cretval;
     _cretval = gsk_gl_shader_node_get_args(cast(const(GskRenderNode)*)this._cPtr);
@@ -89,7 +86,7 @@ class GLShaderNode : gsk.render_node.RenderNode
         idx = the position of the child to get
       Returns: the idx'th child of node
   */
-  gsk.render_node.RenderNode getChild(uint idx)
+  gsk.render_node.RenderNode getChild(uint idx) nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_gl_shader_node_get_child(cast(const(GskRenderNode)*)this._cPtr, idx);
@@ -101,7 +98,7 @@ class GLShaderNode : gsk.render_node.RenderNode
       Returns the number of children
       Returns: The number of children
   */
-  uint getNChildren()
+  uint getNChildren() nothrow
   {
     uint _retval;
     _retval = gsk_gl_shader_node_get_n_children(cast(const(GskRenderNode)*)this._cPtr);
@@ -112,7 +109,7 @@ class GLShaderNode : gsk.render_node.RenderNode
       Gets shader code for the node.
       Returns: the [gsk.glshader.GLShader] shader
   */
-  gsk.glshader.GLShader getShader()
+  gsk.glshader.GLShader getShader() nothrow
   {
     GskGLShader* _cretval;
     _cretval = gsk_gl_shader_node_get_shader(cast(const(GskRenderNode)*)this._cPtr);

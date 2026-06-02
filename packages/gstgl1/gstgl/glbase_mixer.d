@@ -20,26 +20,26 @@ class GLBaseMixer : gstvideo.video_aggregator.VideoAggregator
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_base_mixer_get_type != &gidSymbolNotFound ? gst_gl_base_mixer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLBaseMixer self()
+  override GLBaseMixer self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class GLBaseMixer : gstvideo.video_aggregator.VideoAggregator
       Get builder for [gstgl.glbase_mixer.GLBaseMixer]
       Returns: New builder object
   */
-  static GLBaseMixerGidBuilder builder()
+  static GLBaseMixerGidBuilder builder() nothrow
   {
     return new GLBaseMixerGidBuilder;
   }
@@ -57,13 +57,13 @@ class GLBaseMixer : gstvideo.video_aggregator.VideoAggregator
       Get `context` property.
       Returns: The #GstGLContext in use by this #GstGLBaseMixer
   */
-  @property gstgl.glcontext.GLContext context()
+  @property gstgl.glcontext.GLContext context() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gstgl.glcontext.GLContext)("context");
   }
 
   /** */
-  gstgl.glcontext.GLContext getGlContext()
+  gstgl.glcontext.GLContext getGlContext() nothrow
   {
     GstGLContext* _cretval;
     _cretval = gst_gl_base_mixer_get_gl_context(cast(GstGLBaseMixer*)this._cPtr);
@@ -84,7 +84,7 @@ final class GLBaseMixerGidBuilder : GLBaseMixerGidBuilderImpl!GLBaseMixerGidBuil
       Create object from builder.
       Returns: New object
   */
-  GLBaseMixer build()
+  GLBaseMixer build() nothrow
   {
     return new GLBaseMixer(cast(void*)createGObject(GLBaseMixer._getGType), No.Take);
   }

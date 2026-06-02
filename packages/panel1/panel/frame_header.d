@@ -20,7 +20,7 @@ interface FrameHeader
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_frame_header_get_type != &gidSymbolNotFound ? panel_frame_header_get_type() : cast(GType)0;
@@ -30,14 +30,14 @@ interface FrameHeader
       Get `frame` property.
       Returns: The frame the header is attached to, or null.
   */
-  @property panel.frame.Frame frame();
+  @property panel.frame.Frame frame() nothrow;
 
   /**
       Set `frame` property.
       Params:
         propval = The frame the header is attached to, or null.
   */
-  @property void frame(panel.frame.Frame propval);
+  @property void frame(panel.frame.Frame propval) nothrow;
 
   /**
       Add a widget into a the prefix area with a priority. The highest
@@ -101,5 +101,5 @@ interface FrameHeaderGidBuilderImpl(T)
         propval = The frame the header is attached to, or null.
       Returns: Builder instance for fluent chaining
   */
-  T frame(panel.frame.Frame propval);
+  T frame(panel.frame.Frame propval) nothrow;
 }

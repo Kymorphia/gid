@@ -13,11 +13,8 @@ class Diff
   GdaDiff _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.diff.Diff");
-
     _cInstance = *cast(GdaDiff*)ptr;
 
     if (take)
@@ -25,43 +22,43 @@ class Diff
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
 
   /** */
-  @property gda.types.DiffType type()
+  @property gda.types.DiffType type() nothrow
   {
     return cast(gda.types.DiffType)(cast(GdaDiff*)this._cPtr).type;
   }
 
   /** */
-  @property void type(gda.types.DiffType propval)
+  @property void type(gda.types.DiffType propval) nothrow
   {
     (cast(GdaDiff*)this._cPtr).type = cast(GdaDiffType)propval;
   }
 
   /** */
-  @property int oldRow()
+  @property int oldRow() nothrow
   {
     return (cast(GdaDiff*)this._cPtr).oldRow;
   }
 
   /** */
-  @property void oldRow(int propval)
+  @property void oldRow(int propval) nothrow
   {
     (cast(GdaDiff*)this._cPtr).oldRow = propval;
   }
 
   /** */
-  @property int newRow()
+  @property int newRow() nothrow
   {
     return (cast(GdaDiff*)this._cPtr).newRow;
   }
 
   /** */
-  @property void newRow(int propval)
+  @property void newRow(int propval) nothrow
   {
     (cast(GdaDiff*)this._cPtr).newRow = propval;
   }

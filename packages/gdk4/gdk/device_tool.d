@@ -16,26 +16,26 @@ class DeviceTool : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_device_tool_get_type != &gidSymbolNotFound ? gdk_device_tool_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DeviceTool self()
+  override DeviceTool self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class DeviceTool : gobject.object.ObjectWrap
       Get builder for [gdk.device_tool.DeviceTool]
       Returns: New builder object
   */
-  static DeviceToolGidBuilder builder()
+  static DeviceToolGidBuilder builder() nothrow
   {
     return new DeviceToolGidBuilder;
   }
@@ -53,7 +53,7 @@ class DeviceTool : gobject.object.ObjectWrap
       Get `axes` property.
       Returns: The axes of the tool.
   */
-  @property gdk.types.AxisFlags axes()
+  @property gdk.types.AxisFlags axes() nothrow
   {
     return getAxes();
   }
@@ -62,7 +62,7 @@ class DeviceTool : gobject.object.ObjectWrap
       Get `hardwareId` property.
       Returns: The hardware ID of the tool.
   */
-  @property ulong hardwareId()
+  @property ulong hardwareId() nothrow
   {
     return getHardwareId();
   }
@@ -71,7 +71,7 @@ class DeviceTool : gobject.object.ObjectWrap
       Get `serial` property.
       Returns: The serial number of the tool.
   */
-  @property ulong serial()
+  @property ulong serial() nothrow
   {
     return getSerial();
   }
@@ -80,7 +80,7 @@ class DeviceTool : gobject.object.ObjectWrap
       Get `toolType` property.
       Returns: The type of the tool.
   */
-  @property gdk.types.DeviceToolType toolType()
+  @property gdk.types.DeviceToolType toolType() nothrow
   {
     return getToolType();
   }
@@ -89,7 +89,7 @@ class DeviceTool : gobject.object.ObjectWrap
       Gets the axes of the tool.
       Returns: the axes of tool
   */
-  gdk.types.AxisFlags getAxes()
+  gdk.types.AxisFlags getAxes() nothrow
   {
     GdkAxisFlags _cretval;
     _cretval = gdk_device_tool_get_axes(cast(GdkDeviceTool*)this._cPtr);
@@ -111,7 +111,7 @@ class DeviceTool : gobject.object.ObjectWrap
       [gdk.types.DeviceToolType], but different hardware identifiers.
       Returns: The hardware identifier of this tool.
   */
-  ulong getHardwareId()
+  ulong getHardwareId() nothrow
   {
     ulong _retval;
     _retval = gdk_device_tool_get_hardware_id(cast(GdkDeviceTool*)this._cPtr);
@@ -125,7 +125,7 @@ class DeviceTool : gobject.object.ObjectWrap
       (eg. a tablet pen) across program executions.
       Returns: The serial ID for this tool
   */
-  ulong getSerial()
+  ulong getSerial() nothrow
   {
     ulong _retval;
     _retval = gdk_device_tool_get_serial(cast(GdkDeviceTool*)this._cPtr);
@@ -138,7 +138,7 @@ class DeviceTool : gobject.object.ObjectWrap
           figure out what sort of pen is being used, such as an airbrush
           or a pencil.
   */
-  gdk.types.DeviceToolType getToolType()
+  gdk.types.DeviceToolType getToolType() nothrow
   {
     GdkDeviceToolType _cretval;
     _cretval = gdk_device_tool_get_tool_type(cast(GdkDeviceTool*)this._cPtr);
@@ -157,7 +157,7 @@ class DeviceToolGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The axes of the tool.
       Returns: Builder instance for fluent chaining
   */
-  T axes(gdk.types.AxisFlags propval)
+  T axes(gdk.types.AxisFlags propval) nothrow
   {
     return setProperty("axes", propval);
   }
@@ -168,7 +168,7 @@ class DeviceToolGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The hardware ID of the tool.
       Returns: Builder instance for fluent chaining
   */
-  T hardwareId(ulong propval)
+  T hardwareId(ulong propval) nothrow
   {
     return setProperty("hardware-id", propval);
   }
@@ -179,7 +179,7 @@ class DeviceToolGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The serial number of the tool.
       Returns: Builder instance for fluent chaining
   */
-  T serial(ulong propval)
+  T serial(ulong propval) nothrow
   {
     return setProperty("serial", propval);
   }
@@ -190,7 +190,7 @@ class DeviceToolGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The type of the tool.
       Returns: Builder instance for fluent chaining
   */
-  T toolType(gdk.types.DeviceToolType propval)
+  T toolType(gdk.types.DeviceToolType propval) nothrow
   {
     return setProperty("tool-type", propval);
   }
@@ -203,7 +203,7 @@ final class DeviceToolGidBuilder : DeviceToolGidBuilderImpl!DeviceToolGidBuilder
       Create object from builder.
       Returns: New object
   */
-  DeviceTool build()
+  DeviceTool build() nothrow
   {
     return new DeviceTool(cast(void*)createGObject(DeviceTool._getGType), No.Take);
   }

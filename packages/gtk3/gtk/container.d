@@ -228,26 +228,26 @@ class Container : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_container_get_type != &gidSymbolNotFound ? gtk_container_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Container self()
+  override Container self() nothrow
   {
     return this;
   }
@@ -256,37 +256,37 @@ class Container : gtk.widget.Widget
       Get builder for [gtk.container.Container]
       Returns: New builder object
   */
-  static ContainerGidBuilder builder()
+  static ContainerGidBuilder builder() nothrow
   {
     return new ContainerGidBuilder;
   }
 
   /** */
-  @property uint borderWidth()
+  @property uint borderWidth() nothrow
   {
     return getBorderWidth();
   }
 
   /** */
-  @property void borderWidth(uint propval)
+  @property void borderWidth(uint propval) nothrow
   {
     setBorderWidth(propval);
   }
 
   /** */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.widget.Widget)("child", propval);
   }
 
   /** */
-  @property gtk.types.ResizeMode resizeMode()
+  @property gtk.types.ResizeMode resizeMode() nothrow
   {
     return getResizeMode();
   }
 
   /** */
-  @property void resizeMode(gtk.types.ResizeMode propval)
+  @property void resizeMode(gtk.types.ResizeMode propval) nothrow
   {
     setResizeMode(propval);
   }
@@ -308,13 +308,13 @@ class Container : gtk.widget.Widget
       Params:
         widget = a widget to be placed inside container
   */
-  void add(gtk.widget.Widget widget)
+  void add(gtk.widget.Widget widget) nothrow
   {
     gtk_container_add(cast(GtkContainer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /** */
-  void checkResize()
+  void checkResize() nothrow
   {
     gtk_container_check_resize(cast(GtkContainer*)this._cPtr);
   }
@@ -327,7 +327,7 @@ class Container : gtk.widget.Widget
         propertyName = the name of the property to get
         value = a location to return the value
   */
-  void childGetProperty(gtk.widget.Widget child, string propertyName, gobject.value.Value value)
+  void childGetProperty(gtk.widget.Widget child, string propertyName, gobject.value.Value value) nothrow
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
     gtk_container_child_get_property(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _propertyName, value ? cast(GValue*)value._cPtr(No.Dup) : null);
@@ -349,7 +349,7 @@ class Container : gtk.widget.Widget
         childProperty = the name of a child property installed on
               the class of container
   */
-  void childNotify(gtk.widget.Widget child, string childProperty)
+  void childNotify(gtk.widget.Widget child, string childProperty) nothrow
   {
     const(char)* _childProperty = childProperty.toCString(No.Alloc);
     gtk_container_child_notify(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _childProperty);
@@ -367,7 +367,7 @@ class Container : gtk.widget.Widget
         pspec = the #GParamSpec of a child property instealled on
               the class of container
   */
-  void childNotifyByPspec(gtk.widget.Widget child, gobject.param_spec.ParamSpec pspec)
+  void childNotifyByPspec(gtk.widget.Widget child, gobject.param_spec.ParamSpec pspec) nothrow
   {
     gtk_container_child_notify_by_pspec(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
   }
@@ -380,7 +380,7 @@ class Container : gtk.widget.Widget
         propertyName = the name of the property to set
         value = the value to set the property to
   */
-  void childSetProperty(gtk.widget.Widget child, string propertyName, gobject.value.Value value)
+  void childSetProperty(gtk.widget.Widget child, string propertyName, gobject.value.Value value) nothrow
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
     gtk_container_child_set_property(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _propertyName, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -394,7 +394,7 @@ class Container : gtk.widget.Widget
       children.
       Returns: a #GType.
   */
-  gobject.types.GType childType()
+  gobject.types.GType childType() nothrow
   {
     gobject.types.GType _retval;
     _retval = gtk_container_child_type(cast(GtkContainer*)this._cPtr);
@@ -414,13 +414,20 @@ class Container : gtk.widget.Widget
       Params:
         callback = a callback
   */
-  void forall(gtk.types.Callback callback)
+  void forall(gtk.types.Callback callback) nothrow
   {
-    extern(C) void _callbackCallback(GtkWidget* widget, void* data)
+    extern(C) void _callbackCallback(GtkWidget* widget, void* data) nothrow
     {
       auto _dlg = cast(gtk.types.Callback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.Callback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? cast(void*)&(callback) : null;
@@ -443,13 +450,20 @@ class Container : gtk.widget.Widget
       Params:
         callback = a callback
   */
-  void foreach_(gtk.types.Callback callback)
+  void foreach_(gtk.types.Callback callback) nothrow
   {
-    extern(C) void _callbackCallback(GtkWidget* widget, void* data)
+    extern(C) void _callbackCallback(GtkWidget* widget, void* data) nothrow
     {
       auto _dlg = cast(gtk.types.Callback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.Callback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? cast(void*)&(callback) : null;
@@ -461,7 +475,7 @@ class Container : gtk.widget.Widget
       [gtk.container.Container.setBorderWidth].
       Returns: the current border width
   */
-  uint getBorderWidth()
+  uint getBorderWidth() nothrow
   {
     uint _retval;
     _retval = gtk_container_get_border_width(cast(GtkContainer*)this._cPtr);
@@ -473,7 +487,7 @@ class Container : gtk.widget.Widget
       [gtk.container.Container.forall] for details on what constitutes an "internal" child.
       Returns: a newly-allocated list of the container’s non-internal children.
   */
-  gtk.widget.Widget[] getChildren()
+  gtk.widget.Widget[] getChildren() nothrow
   {
     GList* _cretval;
     _cretval = gtk_container_get_children(cast(GtkContainer*)this._cPtr);
@@ -501,7 +515,7 @@ class Container : gtk.widget.Widget
       Deprecated: For overriding focus behavior, use the
             GtkWidgetClass::focus signal.
   */
-  bool getFocusChain(out gtk.widget.Widget[] focusableWidgets)
+  bool getFocusChain(out gtk.widget.Widget[] focusableWidgets) nothrow
   {
     bool _retval;
     GList* _focusableWidgets;
@@ -518,7 +532,7 @@ class Container : gtk.widget.Widget
                  focus inside container when the container is focused,
                  or null if none is set.
   */
-  gtk.widget.Widget getFocusChild()
+  gtk.widget.Widget getFocusChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_container_get_focus_child(cast(GtkContainer*)this._cPtr);
@@ -532,7 +546,7 @@ class Container : gtk.widget.Widget
       Returns: the horizontal focus adjustment, or null if
           none has been set.
   */
-  gtk.adjustment.Adjustment getFocusHadjustment()
+  gtk.adjustment.Adjustment getFocusHadjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_container_get_focus_hadjustment(cast(GtkContainer*)this._cPtr);
@@ -546,7 +560,7 @@ class Container : gtk.widget.Widget
       Returns: the vertical focus adjustment, or
           null if none has been set.
   */
-  gtk.adjustment.Adjustment getFocusVadjustment()
+  gtk.adjustment.Adjustment getFocusVadjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_container_get_focus_vadjustment(cast(GtkContainer*)this._cPtr);
@@ -562,7 +576,7 @@ class Container : gtk.widget.Widget
         child = a child of container
       Returns: A newly created #GtkWidgetPath
   */
-  gtk.widget_path.WidgetPath getPathForChild(gtk.widget.Widget child)
+  gtk.widget_path.WidgetPath getPathForChild(gtk.widget.Widget child) nothrow
   {
     GtkWidgetPath* _cretval;
     _cretval = gtk_container_get_path_for_child(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -579,7 +593,7 @@ class Container : gtk.widget.Widget
             anymore since frame clocks and might introduce obscure bugs if
             used.
   */
-  gtk.types.ResizeMode getResizeMode()
+  gtk.types.ResizeMode getResizeMode() nothrow
   {
     GtkResizeMode _cretval;
     _cretval = gtk_container_get_resize_mode(cast(GtkContainer*)this._cPtr);
@@ -610,7 +624,7 @@ class Container : gtk.widget.Widget
             in container’s draw function, consider using [cairo.context.Context.save] and
             [cairo.context.Context.restore] before calling this function.
   */
-  void propagateDraw(gtk.widget.Widget child, cairo.context.Context cr)
+  void propagateDraw(gtk.widget.Widget child, cairo.context.Context cr) nothrow
   {
     gtk_container_propagate_draw(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null);
   }
@@ -629,13 +643,13 @@ class Container : gtk.widget.Widget
       Params:
         widget = a current child of container
   */
-  void remove(gtk.widget.Widget widget)
+  void remove(gtk.widget.Widget widget) nothrow
   {
     gtk_container_remove(cast(GtkContainer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /** */
-  void resizeChildren()
+  void resizeChildren() nothrow
   {
     gtk_container_resize_children(cast(GtkContainer*)this._cPtr);
   }
@@ -655,7 +669,7 @@ class Container : gtk.widget.Widget
         borderWidth = amount of blank space to leave outside
             the container. Valid values are in the range 0-65535 pixels.
   */
-  void setBorderWidth(uint borderWidth)
+  void setBorderWidth(uint borderWidth) nothrow
   {
     gtk_container_set_border_width(cast(GtkContainer*)this._cPtr, borderWidth);
   }
@@ -675,7 +689,7 @@ class Container : gtk.widget.Widget
       Deprecated: For overriding focus behavior, use the
             GtkWidgetClass::focus signal.
   */
-  void setFocusChain(gtk.widget.Widget[] focusableWidgets)
+  void setFocusChain(gtk.widget.Widget[] focusableWidgets) nothrow
   {
     auto _focusableWidgets = gListFromD!(gtk.widget.Widget)(focusableWidgets);
     scope(exit) containerFree!(GList*, gtk.widget.Widget, GidOwnership.None)(_focusableWidgets);
@@ -695,7 +709,7 @@ class Container : gtk.widget.Widget
       Params:
         child = a #GtkWidget, or null
   */
-  void setFocusChild(gtk.widget.Widget child = null)
+  void setFocusChild(gtk.widget.Widget child = null) nothrow
   {
     gtk_container_set_focus_child(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -715,7 +729,7 @@ class Container : gtk.widget.Widget
         adjustment = an adjustment which should be adjusted when the focus is
             moved among the descendents of container
   */
-  void setFocusHadjustment(gtk.adjustment.Adjustment adjustment)
+  void setFocusHadjustment(gtk.adjustment.Adjustment adjustment) nothrow
   {
     gtk_container_set_focus_hadjustment(cast(GtkContainer*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
@@ -735,7 +749,7 @@ class Container : gtk.widget.Widget
         adjustment = an adjustment which should be adjusted when the focus
             is moved among the descendents of container
   */
-  void setFocusVadjustment(gtk.adjustment.Adjustment adjustment)
+  void setFocusVadjustment(gtk.adjustment.Adjustment adjustment) nothrow
   {
     gtk_container_set_focus_vadjustment(cast(GtkContainer*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
@@ -751,7 +765,7 @@ class Container : gtk.widget.Widget
   
       Deprecated: Call [gtk.widget.Widget.queueDraw] in your size_allocate handler.
   */
-  void setReallocateRedraws(bool needsRedraws)
+  void setReallocateRedraws(bool needsRedraws) nothrow
   {
     gtk_container_set_reallocate_redraws(cast(GtkContainer*)this._cPtr, needsRedraws);
   }
@@ -770,7 +784,7 @@ class Container : gtk.widget.Widget
             anymore since frame clocks and might introduce obscure bugs if
             used.
   */
-  void setResizeMode(gtk.types.ResizeMode resizeMode)
+  void setResizeMode(gtk.types.ResizeMode resizeMode) nothrow
   {
     gtk_container_set_resize_mode(cast(GtkContainer*)this._cPtr, resizeMode);
   }
@@ -781,7 +795,7 @@ class Container : gtk.widget.Widget
       Deprecated: For overriding focus behavior, use the
             GtkWidgetClass::focus signal.
   */
-  void unsetFocusChain()
+  void unsetFocusChain() nothrow
   {
     gtk_container_unset_focus_chain(cast(GtkContainer*)this._cPtr);
   }
@@ -803,14 +817,14 @@ class Container : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAdd(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAdd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.container.Container)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -822,7 +836,14 @@ class Container : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.container.Container.add");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -844,13 +865,13 @@ class Container : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCheckResize(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCheckResize(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.container.Container)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -859,7 +880,14 @@ class Container : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.container.Container.checkResize");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -883,14 +911,14 @@ class Container : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRemove(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRemove(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.container.Container)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -902,7 +930,14 @@ class Container : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.container.Container.remove");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -926,14 +961,14 @@ class Container : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSetFocusChild(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSetFocusChild(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.container.Container)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -945,7 +980,14 @@ class Container : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.container.Container.setFocusChild");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -959,19 +1001,19 @@ class ContainerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 
 
   /** */
-  T borderWidth(uint propval)
+  T borderWidth(uint propval) nothrow
   {
     return setProperty("border-width", propval);
   }
 
   /** */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
 
   /** */
-  T resizeMode(gtk.types.ResizeMode propval)
+  T resizeMode(gtk.types.ResizeMode propval) nothrow
   {
     return setProperty("resize-mode", propval);
   }
@@ -984,7 +1026,7 @@ final class ContainerGidBuilder : ContainerGidBuilderImpl!ContainerGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Container build()
+  Container build() nothrow
   {
     return new Container(cast(void*)createGObject(Container._getGType), No.Take);
   }

@@ -8,12 +8,12 @@ import gtksource.undo_manager_mixin;
 /// Proxy object for [gtksource.undo_manager.UndoManager] interface when a GObject has no applicable D binding
 class UndoManagerIfaceProxy : IfaceProxy, gtksource.undo_manager.UndoManager
 {
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
-  override TypeInfo_Interface getIface()
+  override TypeInfo_Interface getIface() nothrow
   {
     return typeid(gtksource.undo_manager.UndoManager);
   }

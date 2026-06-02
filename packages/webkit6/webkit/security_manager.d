@@ -22,26 +22,26 @@ class SecurityManager : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_security_manager_get_type != &gidSymbolNotFound ? webkit_security_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SecurityManager self()
+  override SecurityManager self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class SecurityManager : gobject.object.ObjectWrap
       Get builder for [webkit.security_manager.SecurityManager]
       Returns: New builder object
   */
-  static SecurityManagerGidBuilder builder()
+  static SecurityManagerGidBuilder builder() nothrow
   {
     return new SecurityManagerGidBuilder;
   }
@@ -64,7 +64,7 @@ class SecurityManager : gobject.object.ObjectWrap
       Params:
         scheme = a URI scheme
   */
-  void registerUriSchemeAsCorsEnabled(string scheme)
+  void registerUriSchemeAsCorsEnabled(string scheme) nothrow
   {
     const(char)* _scheme = scheme.toCString(No.Alloc);
     webkit_security_manager_register_uri_scheme_as_cors_enabled(cast(WebKitSecurityManager*)this._cPtr, _scheme);
@@ -79,7 +79,7 @@ class SecurityManager : gobject.object.ObjectWrap
       Params:
         scheme = a URI scheme
   */
-  void registerUriSchemeAsDisplayIsolated(string scheme)
+  void registerUriSchemeAsDisplayIsolated(string scheme) nothrow
   {
     const(char)* _scheme = scheme.toCString(No.Alloc);
     webkit_security_manager_register_uri_scheme_as_display_isolated(cast(WebKitSecurityManager*)this._cPtr, _scheme);
@@ -94,7 +94,7 @@ class SecurityManager : gobject.object.ObjectWrap
       Params:
         scheme = a URI scheme
   */
-  void registerUriSchemeAsEmptyDocument(string scheme)
+  void registerUriSchemeAsEmptyDocument(string scheme) nothrow
   {
     const(char)* _scheme = scheme.toCString(No.Alloc);
     webkit_security_manager_register_uri_scheme_as_empty_document(cast(WebKitSecurityManager*)this._cPtr, _scheme);
@@ -109,7 +109,7 @@ class SecurityManager : gobject.object.ObjectWrap
       Params:
         scheme = a URI scheme
   */
-  void registerUriSchemeAsLocal(string scheme)
+  void registerUriSchemeAsLocal(string scheme) nothrow
   {
     const(char)* _scheme = scheme.toCString(No.Alloc);
     webkit_security_manager_register_uri_scheme_as_local(cast(WebKitSecurityManager*)this._cPtr, _scheme);
@@ -124,7 +124,7 @@ class SecurityManager : gobject.object.ObjectWrap
       Params:
         scheme = a URI scheme
   */
-  void registerUriSchemeAsNoAccess(string scheme)
+  void registerUriSchemeAsNoAccess(string scheme) nothrow
   {
     const(char)* _scheme = scheme.toCString(No.Alloc);
     webkit_security_manager_register_uri_scheme_as_no_access(cast(WebKitSecurityManager*)this._cPtr, _scheme);
@@ -140,7 +140,7 @@ class SecurityManager : gobject.object.ObjectWrap
       Params:
         scheme = a URI scheme
   */
-  void registerUriSchemeAsSecure(string scheme)
+  void registerUriSchemeAsSecure(string scheme) nothrow
   {
     const(char)* _scheme = scheme.toCString(No.Alloc);
     webkit_security_manager_register_uri_scheme_as_secure(cast(WebKitSecurityManager*)this._cPtr, _scheme);
@@ -155,7 +155,7 @@ class SecurityManager : gobject.object.ObjectWrap
         scheme = a URI scheme
       Returns: true if scheme is a CORS enabled scheme or false otherwise.
   */
-  bool uriSchemeIsCorsEnabled(string scheme)
+  bool uriSchemeIsCorsEnabled(string scheme) nothrow
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -172,7 +172,7 @@ class SecurityManager : gobject.object.ObjectWrap
         scheme = a URI scheme
       Returns: true if scheme is a display isolated scheme or false otherwise.
   */
-  bool uriSchemeIsDisplayIsolated(string scheme)
+  bool uriSchemeIsDisplayIsolated(string scheme) nothrow
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -189,7 +189,7 @@ class SecurityManager : gobject.object.ObjectWrap
         scheme = a URI scheme
       Returns: true if scheme is an empty document scheme or false otherwise.
   */
-  bool uriSchemeIsEmptyDocument(string scheme)
+  bool uriSchemeIsEmptyDocument(string scheme) nothrow
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -206,7 +206,7 @@ class SecurityManager : gobject.object.ObjectWrap
         scheme = a URI scheme
       Returns: true if scheme is a local scheme or false otherwise.
   */
-  bool uriSchemeIsLocal(string scheme)
+  bool uriSchemeIsLocal(string scheme) nothrow
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -223,7 +223,7 @@ class SecurityManager : gobject.object.ObjectWrap
         scheme = a URI scheme
       Returns: true if scheme is a no-access scheme or false otherwise.
   */
-  bool uriSchemeIsNoAccess(string scheme)
+  bool uriSchemeIsNoAccess(string scheme) nothrow
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -240,7 +240,7 @@ class SecurityManager : gobject.object.ObjectWrap
         scheme = a URI scheme
       Returns: true if scheme is a secure scheme or false otherwise.
   */
-  bool uriSchemeIsSecure(string scheme)
+  bool uriSchemeIsSecure(string scheme) nothrow
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -261,7 +261,7 @@ final class SecurityManagerGidBuilder : SecurityManagerGidBuilderImpl!SecurityMa
       Create object from builder.
       Returns: New object
   */
-  SecurityManager build()
+  SecurityManager build() nothrow
   {
     return new SecurityManager(cast(void*)createGObject(SecurityManager._getGType), No.Take);
   }

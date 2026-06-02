@@ -20,26 +20,26 @@ class WebsocketExtensionDeflate : soup.websocket_extension.WebsocketExtension
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_websocket_extension_deflate_get_type != &gidSymbolNotFound ? soup_websocket_extension_deflate_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WebsocketExtensionDeflate self()
+  override WebsocketExtensionDeflate self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class WebsocketExtensionDeflate : soup.websocket_extension.WebsocketExtension
       Get builder for [soup.websocket_extension_deflate.WebsocketExtensionDeflate]
       Returns: New builder object
   */
-  static WebsocketExtensionDeflateGidBuilder builder()
+  static WebsocketExtensionDeflateGidBuilder builder() nothrow
   {
     return new WebsocketExtensionDeflateGidBuilder;
   }
@@ -66,7 +66,7 @@ final class WebsocketExtensionDeflateGidBuilder : WebsocketExtensionDeflateGidBu
       Create object from builder.
       Returns: New object
   */
-  WebsocketExtensionDeflate build()
+  WebsocketExtensionDeflate build() nothrow
   {
     return new WebsocketExtensionDeflate(cast(void*)createGObject(WebsocketExtensionDeflate._getGType), No.Take);
   }

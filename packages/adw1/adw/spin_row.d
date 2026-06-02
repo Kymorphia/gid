@@ -64,26 +64,26 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_spin_row_get_type != &gidSymbolNotFound ? adw_spin_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SpinRow self()
+  override SpinRow self() nothrow
   {
     return this;
   }
@@ -92,7 +92,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Get builder for [adw.spin_row.SpinRow]
       Returns: New builder object
   */
-  static SpinRowGidBuilder builder()
+  static SpinRowGidBuilder builder() nothrow
   {
     return new SpinRowGidBuilder;
   }
@@ -101,7 +101,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Get `adjustment` property.
       Returns: The adjustment that holds the value of the spin row.
   */
-  @property gtk.adjustment.Adjustment adjustment()
+  @property gtk.adjustment.Adjustment adjustment() nothrow
   {
     return getAdjustment();
   }
@@ -111,7 +111,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Params:
         propval = The adjustment that holds the value of the spin row.
   */
-  @property void adjustment(gtk.adjustment.Adjustment propval)
+  @property void adjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     setAdjustment(propval);
   }
@@ -120,7 +120,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Get `climbRate` property.
       Returns: The acceleration rate when you hold down a button or key.
   */
-  @property double climbRate()
+  @property double climbRate() nothrow
   {
     return getClimbRate();
   }
@@ -130,7 +130,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Params:
         propval = The acceleration rate when you hold down a button or key.
   */
-  @property void climbRate(double propval)
+  @property void climbRate(double propval) nothrow
   {
     setClimbRate(propval);
   }
@@ -139,7 +139,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Get `digits` property.
       Returns: The number of decimal places to display.
   */
-  @property uint digits()
+  @property uint digits() nothrow
   {
     return getDigits();
   }
@@ -149,7 +149,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Params:
         propval = The number of decimal places to display.
   */
-  @property void digits(uint propval)
+  @property void digits(uint propval) nothrow
   {
     setDigits(propval);
   }
@@ -158,7 +158,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Get `numeric` property.
       Returns: Whether non-numeric characters should be ignored.
   */
-  @property bool numeric()
+  @property bool numeric() nothrow
   {
     return getNumeric();
   }
@@ -168,7 +168,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Params:
         propval = Whether non-numeric characters should be ignored.
   */
-  @property void numeric(bool propval)
+  @property void numeric(bool propval) nothrow
   {
     setNumeric(propval);
   }
@@ -177,7 +177,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Get `snapToTicks` property.
       Returns: Whether invalid values are snapped to the nearest step increment.
   */
-  @property bool snapToTicks()
+  @property bool snapToTicks() nothrow
   {
     return getSnapToTicks();
   }
@@ -187,7 +187,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Params:
         propval = Whether invalid values are snapped to the nearest step increment.
   */
-  @property void snapToTicks(bool propval)
+  @property void snapToTicks(bool propval) nothrow
   {
     setSnapToTicks(propval);
   }
@@ -198,7 +198,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
         
         The options are always, or only when the value is invalid.
   */
-  @property gtk.types.SpinButtonUpdatePolicy updatePolicy()
+  @property gtk.types.SpinButtonUpdatePolicy updatePolicy() nothrow
   {
     return getUpdatePolicy();
   }
@@ -210,7 +210,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
           
           The options are always, or only when the value is invalid.
   */
-  @property void updatePolicy(gtk.types.SpinButtonUpdatePolicy propval)
+  @property void updatePolicy(gtk.types.SpinButtonUpdatePolicy propval) nothrow
   {
     setUpdatePolicy(propval);
   }
@@ -219,7 +219,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Get `value` property.
       Returns: The current value.
   */
-  @property double value()
+  @property double value() nothrow
   {
     return getValue();
   }
@@ -229,7 +229,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Params:
         propval = The current value.
   */
-  @property void value(double propval)
+  @property void value(double propval) nothrow
   {
     setValue(propval);
   }
@@ -238,7 +238,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Get `wrap` property.
       Returns: Whether the spin row should wrap upon reaching its limits.
   */
-  @property bool wrap()
+  @property bool wrap() nothrow
   {
     return getWrap();
   }
@@ -248,7 +248,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Params:
         propval = Whether the spin row should wrap upon reaching its limits.
   */
-  @property void wrap(bool propval)
+  @property void wrap(bool propval) nothrow
   {
     setWrap(propval);
   }
@@ -264,7 +264,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
         digits = the number of decimal places to display
       Returns: the newly created [adw.spin_row.SpinRow]
   */
-  this(gtk.adjustment.Adjustment adjustment, double climbRate, uint digits)
+  this(gtk.adjustment.Adjustment adjustment, double climbRate, uint digits) nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_spin_row_new(adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null, climbRate, digits);
@@ -290,7 +290,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
         step = increment added or subtracted by spinning the widget
       Returns: the new [adw.spin_row.SpinRow]
   */
-  static adw.spin_row.SpinRow newWithRange(double min, double max, double step)
+  static adw.spin_row.SpinRow newWithRange(double min, double max, double step) nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_spin_row_new_with_range(min, max, step);
@@ -309,7 +309,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
         climbRate = the new climb rate
         digits = the number of decimal places to display
   */
-  void configure(gtk.adjustment.Adjustment adjustment, double climbRate, uint digits)
+  void configure(gtk.adjustment.Adjustment adjustment, double climbRate, uint digits) nothrow
   {
     adw_spin_row_configure(cast(AdwSpinRow*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null, climbRate, digits);
   }
@@ -318,7 +318,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Gets the adjustment that holds the value for the spin row.
       Returns: the adjustment that holds the spin row's value
   */
-  gtk.adjustment.Adjustment getAdjustment()
+  gtk.adjustment.Adjustment getAdjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = adw_spin_row_get_adjustment(cast(AdwSpinRow*)this._cPtr);
@@ -330,7 +330,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Gets the acceleration rate when you hold down a button or key.
       Returns: the acceleration rate when you hold down a button or key
   */
-  double getClimbRate()
+  double getClimbRate() nothrow
   {
     double _retval;
     _retval = adw_spin_row_get_climb_rate(cast(AdwSpinRow*)this._cPtr);
@@ -341,7 +341,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Gets the number of decimal places to display.
       Returns: the number of decimal places to display
   */
-  uint getDigits()
+  uint getDigits() nothrow
   {
     uint _retval;
     _retval = adw_spin_row_get_digits(cast(AdwSpinRow*)this._cPtr);
@@ -352,7 +352,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Gets whether non-numeric characters should be ignored.
       Returns: whether non-numeric characters should be ignored.
   */
-  bool getNumeric()
+  bool getNumeric() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_spin_row_get_numeric(cast(AdwSpinRow*)this._cPtr);
@@ -363,7 +363,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Gets whether invalid values are snapped to nearest step increment.
       Returns: whether invalid values are snapped to the nearest step increment
   */
-  bool getSnapToTicks()
+  bool getSnapToTicks() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_spin_row_get_snap_to_ticks(cast(AdwSpinRow*)this._cPtr);
@@ -374,7 +374,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Gets the policy for updating the spin row.
       Returns: the policy for updating the spin row
   */
-  gtk.types.SpinButtonUpdatePolicy getUpdatePolicy()
+  gtk.types.SpinButtonUpdatePolicy getUpdatePolicy() nothrow
   {
     GtkSpinButtonUpdatePolicy _cretval;
     _cretval = adw_spin_row_get_update_policy(cast(AdwSpinRow*)this._cPtr);
@@ -386,7 +386,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Gets the current value.
       Returns: the current value
   */
-  double getValue()
+  double getValue() nothrow
   {
     double _retval;
     _retval = adw_spin_row_get_value(cast(AdwSpinRow*)this._cPtr);
@@ -397,7 +397,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Gets whether the spin row should wrap upon reaching its limits.
       Returns: whether the spin row should wrap upon reaching its limits
   */
-  bool getWrap()
+  bool getWrap() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_spin_row_get_wrap(cast(AdwSpinRow*)this._cPtr);
@@ -410,7 +410,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Params:
         adjustment = an adjustment
   */
-  void setAdjustment(gtk.adjustment.Adjustment adjustment = null)
+  void setAdjustment(gtk.adjustment.Adjustment adjustment = null) nothrow
   {
     adw_spin_row_set_adjustment(cast(AdwSpinRow*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
@@ -421,7 +421,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Params:
         climbRate = the acceleration rate when you hold down a button or key
   */
-  void setClimbRate(double climbRate)
+  void setClimbRate(double climbRate) nothrow
   {
     adw_spin_row_set_climb_rate(cast(AdwSpinRow*)this._cPtr, climbRate);
   }
@@ -432,7 +432,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Params:
         digits = the number of decimal places to display
   */
-  void setDigits(uint digits)
+  void setDigits(uint digits) nothrow
   {
     adw_spin_row_set_digits(cast(AdwSpinRow*)this._cPtr, digits);
   }
@@ -443,7 +443,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Params:
         numeric = whether non-numeric characters should be ignored
   */
-  void setNumeric(bool numeric)
+  void setNumeric(bool numeric) nothrow
   {
     adw_spin_row_set_numeric(cast(AdwSpinRow*)this._cPtr, numeric);
   }
@@ -458,7 +458,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
         min = minimum allowable value
         max = maximum allowable value
   */
-  void setRange(double min, double max)
+  void setRange(double min, double max) nothrow
   {
     adw_spin_row_set_range(cast(AdwSpinRow*)this._cPtr, min, max);
   }
@@ -469,7 +469,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Params:
         snapToTicks = whether invalid values are snapped to the nearest step increment
   */
-  void setSnapToTicks(bool snapToTicks)
+  void setSnapToTicks(bool snapToTicks) nothrow
   {
     adw_spin_row_set_snap_to_ticks(cast(AdwSpinRow*)this._cPtr, snapToTicks);
   }
@@ -482,7 +482,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Params:
         policy = the policy for updating the spin row
   */
-  void setUpdatePolicy(gtk.types.SpinButtonUpdatePolicy policy)
+  void setUpdatePolicy(gtk.types.SpinButtonUpdatePolicy policy) nothrow
   {
     adw_spin_row_set_update_policy(cast(AdwSpinRow*)this._cPtr, policy);
   }
@@ -493,7 +493,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Params:
         value = a new value
   */
-  void setValue(double value)
+  void setValue(double value) nothrow
   {
     adw_spin_row_set_value(cast(AdwSpinRow*)this._cPtr, value);
   }
@@ -504,7 +504,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Params:
         wrap = whether the spin row should wrap upon reaching its limits
   */
-  void setWrap(bool wrap)
+  void setWrap(bool wrap) nothrow
   {
     adw_spin_row_set_wrap(cast(AdwSpinRow*)this._cPtr, wrap);
   }
@@ -512,7 +512,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   /**
       Manually force an update of the spin row.
   */
-  void update()
+  void update() nothrow
   {
     adw_spin_row_update(cast(AdwSpinRow*)this._cPtr);
   }
@@ -543,18 +543,19 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInput(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInput(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == int)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.out_ && is(Parameters!T[0] == double)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : adw.spin_row.SpinRow)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      int _retval;
 
       Parameters!T[0] newValue;
 
@@ -564,7 +565,14 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.spin_row.SpinRow.input");
+      }
 
       setVal!(int)(_returnValue, _retval);
 
@@ -594,22 +602,30 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectOutput(T)(T callback, Flag!"After" after = No.After)
+  gulong connectOutput(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.spin_row.SpinRow)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.spin_row.SpinRow.output");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -635,13 +651,13 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWrapped(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWrapped(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.spin_row.SpinRow)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -650,7 +666,14 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.spin_row.SpinRow.wrapped");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -670,7 +693,7 @@ class SpinRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T, gtk.e
         propval = The adjustment that holds the value of the spin row.
       Returns: Builder instance for fluent chaining
   */
-  T adjustment(gtk.adjustment.Adjustment propval)
+  T adjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     return setProperty("adjustment", propval);
   }
@@ -681,7 +704,7 @@ class SpinRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T, gtk.e
         propval = The acceleration rate when you hold down a button or key.
       Returns: Builder instance for fluent chaining
   */
-  T climbRate(double propval)
+  T climbRate(double propval) nothrow
   {
     return setProperty("climb-rate", propval);
   }
@@ -692,7 +715,7 @@ class SpinRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T, gtk.e
         propval = The number of decimal places to display.
       Returns: Builder instance for fluent chaining
   */
-  T digits(uint propval)
+  T digits(uint propval) nothrow
   {
     return setProperty("digits", propval);
   }
@@ -703,7 +726,7 @@ class SpinRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T, gtk.e
         propval = Whether non-numeric characters should be ignored.
       Returns: Builder instance for fluent chaining
   */
-  T numeric(bool propval)
+  T numeric(bool propval) nothrow
   {
     return setProperty("numeric", propval);
   }
@@ -714,7 +737,7 @@ class SpinRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T, gtk.e
         propval = Whether invalid values are snapped to the nearest step increment.
       Returns: Builder instance for fluent chaining
   */
-  T snapToTicks(bool propval)
+  T snapToTicks(bool propval) nothrow
   {
     return setProperty("snap-to-ticks", propval);
   }
@@ -727,7 +750,7 @@ class SpinRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T, gtk.e
           The options are always, or only when the value is invalid.
       Returns: Builder instance for fluent chaining
   */
-  T updatePolicy(gtk.types.SpinButtonUpdatePolicy propval)
+  T updatePolicy(gtk.types.SpinButtonUpdatePolicy propval) nothrow
   {
     return setProperty("update-policy", propval);
   }
@@ -738,7 +761,7 @@ class SpinRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T, gtk.e
         propval = The current value.
       Returns: Builder instance for fluent chaining
   */
-  T value(double propval)
+  T value(double propval) nothrow
   {
     return setProperty("value", propval);
   }
@@ -749,7 +772,7 @@ class SpinRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T, gtk.e
         propval = Whether the spin row should wrap upon reaching its limits.
       Returns: Builder instance for fluent chaining
   */
-  T wrap(bool propval)
+  T wrap(bool propval) nothrow
   {
     return setProperty("wrap", propval);
   }
@@ -762,7 +785,7 @@ final class SpinRowGidBuilder : SpinRowGidBuilderImpl!SpinRowGidBuilder
       Create object from builder.
       Returns: New object
   */
-  SpinRow build()
+  SpinRow build() nothrow
   {
     return new SpinRow(cast(void*)createGObject(SpinRow._getGType), No.Take);
   }

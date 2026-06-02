@@ -14,32 +14,32 @@ class QuarkList : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_quark_list_get_type != &gidSymbolNotFound ? gda_quark_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override QuarkList self()
+  override QuarkList self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class QuarkList : gobject.boxed.Boxed
         
         Free-function: gda_quark_list_free
   */
-  this()
+  this() nothrow
   {
     GdaQuarkList* _cretval;
     _cretval = gda_quark_list_new();
@@ -77,7 +77,7 @@ class QuarkList : gobject.boxed.Boxed
         
         Free-function: gda_quark_list_free
   */
-  static gda.quark_list.QuarkList newFromString(string string_)
+  static gda.quark_list.QuarkList newFromString(string string_) nothrow
   {
     GdaQuarkList* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
@@ -103,7 +103,7 @@ class QuarkList : gobject.boxed.Boxed
         string_ = a string.
         cleanup = whether to cleanup the previous content or not.
   */
-  void addFromString(string string_, bool cleanup)
+  void addFromString(string string_, bool cleanup) nothrow
   {
     const(char)* _string_ = string_.toCString(No.Alloc);
     gda_quark_list_add_from_string(cast(GdaQuarkList*)this._cPtr, _string_, cleanup);
@@ -112,7 +112,7 @@ class QuarkList : gobject.boxed.Boxed
   /**
       Removes all strings in the given #GdaQuarkList.
   */
-  void clear()
+  void clear() nothrow
   {
     gda_quark_list_clear(cast(GdaQuarkList*)this._cPtr);
   }
@@ -121,7 +121,7 @@ class QuarkList : gobject.boxed.Boxed
       Creates a new #GdaQuarkList from an existing one.
       Returns: a newly allocated #GdaQuarkList with a copy of the data in qlist.
   */
-  gda.quark_list.QuarkList copy()
+  gda.quark_list.QuarkList copy() nothrow
   {
     GdaQuarkList* _cretval;
     _cretval = gda_quark_list_copy(cast(GdaQuarkList*)this._cPtr);
@@ -138,7 +138,7 @@ class QuarkList : gobject.boxed.Boxed
         name = the name of the value to search for.
       Returns: the value associated with the given key if found, or null if not found.
   */
-  string find(string name)
+  string find(string name) nothrow
   {
     const(char)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -154,13 +154,20 @@ class QuarkList : gobject.boxed.Boxed
       Params:
         func = the function to call for each key/value pair
   */
-  void foreach_(glib.types.HFunc func)
+  void foreach_(glib.types.HFunc func) nothrow
   {
-    extern(C) void _funcCallback(void* key, void* value, void* userData)
+    extern(C) void _funcCallback(void* key, void* value, void* userData) nothrow
     {
       auto _dlg = cast(glib.types.HFunc*)userData;
 
-      (*_dlg)(key, value);
+      try
+      {
+        (*_dlg)(key, value);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.HFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -171,7 +178,7 @@ class QuarkList : gobject.boxed.Boxed
       Call this function to get rid of the clear version of the value associated to
       name.
   */
-  void protectValues()
+  void protectValues() nothrow
   {
     gda_quark_list_protect_values(cast(GdaQuarkList*)this._cPtr);
   }
@@ -182,7 +189,7 @@ class QuarkList : gobject.boxed.Boxed
       Params:
         name = an entry name.
   */
-  void remove(string name)
+  void remove(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gda_quark_list_remove(cast(GdaQuarkList*)this._cPtr, _name);

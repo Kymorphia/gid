@@ -14,26 +14,26 @@ class KeyValuePartitioningOptions : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_key_value_partitioning_options_get_type != &gidSymbolNotFound ? gadataset_key_value_partitioning_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override KeyValuePartitioningOptions self()
+  override KeyValuePartitioningOptions self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class KeyValuePartitioningOptions : gobject.object.ObjectWrap
       Get builder for [arrowdataset.key_value_partitioning_options.KeyValuePartitioningOptions]
       Returns: New builder object
   */
-  static KeyValuePartitioningOptionsGidBuilder builder()
+  static KeyValuePartitioningOptionsGidBuilder builder() nothrow
   {
     return new KeyValuePartitioningOptionsGidBuilder;
   }
@@ -52,7 +52,7 @@ class KeyValuePartitioningOptions : gobject.object.ObjectWrap
       Returns: After splitting a path into components, decode the path
         components before parsing according to this scheme.
   */
-  @property arrowdataset.types.SegmentEncoding segmentEncoding()
+  @property arrowdataset.types.SegmentEncoding segmentEncoding() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrowdataset.types.SegmentEncoding)("segment-encoding");
   }
@@ -63,13 +63,13 @@ class KeyValuePartitioningOptions : gobject.object.ObjectWrap
         propval = After splitting a path into components, decode the path
           components before parsing according to this scheme.
   */
-  @property void segmentEncoding(arrowdataset.types.SegmentEncoding propval)
+  @property void segmentEncoding(arrowdataset.types.SegmentEncoding propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(arrowdataset.types.SegmentEncoding)("segment-encoding", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GADatasetKeyValuePartitioningOptions* _cretval;
     _cretval = gadataset_key_value_partitioning_options_new();
@@ -88,7 +88,7 @@ class KeyValuePartitioningOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGi
           components before parsing according to this scheme.
       Returns: Builder instance for fluent chaining
   */
-  T segmentEncoding(arrowdataset.types.SegmentEncoding propval)
+  T segmentEncoding(arrowdataset.types.SegmentEncoding propval) nothrow
   {
     return setProperty("segment-encoding", propval);
   }
@@ -101,7 +101,7 @@ final class KeyValuePartitioningOptionsGidBuilder : KeyValuePartitioningOptionsG
       Create object from builder.
       Returns: New object
   */
-  KeyValuePartitioningOptions build()
+  KeyValuePartitioningOptions build() nothrow
   {
     return new KeyValuePartitioningOptions(cast(void*)createGObject(KeyValuePartitioningOptions._getGType), Yes.Take);
   }

@@ -28,26 +28,26 @@ class UnixOutputStream : gio.output_stream.OutputStream, gio.file_descriptor_bas
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_unix_output_stream_get_type != &gidSymbolNotFound ? g_unix_output_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UnixOutputStream self()
+  override UnixOutputStream self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class UnixOutputStream : gio.output_stream.OutputStream, gio.file_descriptor_bas
       Get builder for [gio.unix_output_stream.UnixOutputStream]
       Returns: New builder object
   */
-  static UnixOutputStreamGidBuilder builder()
+  static UnixOutputStreamGidBuilder builder() nothrow
   {
     return new UnixOutputStreamGidBuilder;
   }
@@ -65,7 +65,7 @@ class UnixOutputStream : gio.output_stream.OutputStream, gio.file_descriptor_bas
       Get `closeFd` property.
       Returns: Whether to close the file descriptor when the stream is closed.
   */
-  @property bool closeFd()
+  @property bool closeFd() nothrow
   {
     return getCloseFd();
   }
@@ -75,7 +75,7 @@ class UnixOutputStream : gio.output_stream.OutputStream, gio.file_descriptor_bas
       Params:
         propval = Whether to close the file descriptor when the stream is closed.
   */
-  @property void closeFd(bool propval)
+  @property void closeFd(bool propval) nothrow
   {
     setCloseFd(propval);
   }
@@ -84,7 +84,7 @@ class UnixOutputStream : gio.output_stream.OutputStream, gio.file_descriptor_bas
       Get `fd` property.
       Returns: The file descriptor that the stream writes to.
   */
-  @property int fd()
+  @property int fd() nothrow
   {
     return getFd();
   }
@@ -103,7 +103,7 @@ class UnixOutputStream : gio.output_stream.OutputStream, gio.file_descriptor_bas
         closeFd = true to close the file descriptor when done
       Returns: a new #GOutputStream
   */
-  this(int fd, bool closeFd)
+  this(int fd, bool closeFd) nothrow
   {
     GOutputStream* _cretval;
     _cretval = g_unix_output_stream_new(fd, closeFd);
@@ -115,7 +115,7 @@ class UnixOutputStream : gio.output_stream.OutputStream, gio.file_descriptor_bas
       closed when the stream is closed.
       Returns: true if the file descriptor is closed when done
   */
-  bool getCloseFd()
+  bool getCloseFd() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_unix_output_stream_get_close_fd(cast(GUnixOutputStream*)this._cPtr);
@@ -126,7 +126,7 @@ class UnixOutputStream : gio.output_stream.OutputStream, gio.file_descriptor_bas
       Return the UNIX file descriptor that the stream writes to.
       Returns: The file descriptor of stream
   */
-  int getFd()
+  int getFd() nothrow
   {
     int _retval;
     _retval = g_unix_output_stream_get_fd(cast(GUnixOutputStream*)this._cPtr);
@@ -140,7 +140,7 @@ class UnixOutputStream : gio.output_stream.OutputStream, gio.file_descriptor_bas
       Params:
         closeFd = true to close the file descriptor when done
   */
-  void setCloseFd(bool closeFd)
+  void setCloseFd(bool closeFd) nothrow
   {
     g_unix_output_stream_set_close_fd(cast(GUnixOutputStream*)this._cPtr, closeFd);
   }
@@ -159,7 +159,7 @@ class UnixOutputStreamGidBuilderImpl(T) : gio.output_stream.OutputStreamGidBuild
         propval = Whether to close the file descriptor when the stream is closed.
       Returns: Builder instance for fluent chaining
   */
-  T closeFd(bool propval)
+  T closeFd(bool propval) nothrow
   {
     return setProperty("close-fd", propval);
   }
@@ -170,7 +170,7 @@ class UnixOutputStreamGidBuilderImpl(T) : gio.output_stream.OutputStreamGidBuild
         propval = The file descriptor that the stream writes to.
       Returns: Builder instance for fluent chaining
   */
-  T fd(int propval)
+  T fd(int propval) nothrow
   {
     return setProperty("fd", propval);
   }
@@ -183,7 +183,7 @@ final class UnixOutputStreamGidBuilder : UnixOutputStreamGidBuilderImpl!UnixOutp
       Create object from builder.
       Returns: New object
   */
-  UnixOutputStream build()
+  UnixOutputStream build() nothrow
   {
     return new UnixOutputStream(cast(void*)createGObject(UnixOutputStream._getGType), Yes.Take);
   }

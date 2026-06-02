@@ -21,7 +21,7 @@ struct InstallPluginsReturn
         ret = the return status code
       Returns: a descriptive string for the status code in ret
   */
-  static string getName(gstpbutils.types.InstallPluginsReturn ret)
+  static string getName(gstpbutils.types.InstallPluginsReturn ret) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_install_plugins_return_get_name(ret);

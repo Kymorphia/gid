@@ -30,26 +30,26 @@ class URISchemeRequest : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_uri_scheme_request_get_type != &gidSymbolNotFound ? webkit_uri_scheme_request_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override URISchemeRequest self()
+  override URISchemeRequest self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class URISchemeRequest : gobject.object.ObjectWrap
       Get builder for [webkit.urischeme_request.URISchemeRequest]
       Returns: New builder object
   */
-  static URISchemeRequestGidBuilder builder()
+  static URISchemeRequestGidBuilder builder() nothrow
   {
     return new URISchemeRequestGidBuilder;
   }
@@ -71,7 +71,7 @@ class URISchemeRequest : gobject.object.ObjectWrap
         streamLength = the length of the stream or -1 if not known
         contentType = the content type of the stream or null if not known
   */
-  void finish(gio.input_stream.InputStream stream, long streamLength, string contentType = null)
+  void finish(gio.input_stream.InputStream stream, long streamLength, string contentType = null) nothrow
   {
     const(char)* _contentType = contentType.toCString(No.Alloc);
     webkit_uri_scheme_request_finish(cast(WebKitURISchemeRequest*)this._cPtr, stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, streamLength, _contentType);
@@ -83,7 +83,7 @@ class URISchemeRequest : gobject.object.ObjectWrap
       Params:
         error = a #GError that will be passed to the #WebKitWebView
   */
-  void finishError(glib.error.ErrorWrap error)
+  void finishError(glib.error.ErrorWrap error) nothrow
   {
     webkit_uri_scheme_request_finish_error(cast(WebKitURISchemeRequest*)this._cPtr, error ? cast(GError*)error._cPtr : null);
   }
@@ -94,7 +94,7 @@ class URISchemeRequest : gobject.object.ObjectWrap
       Params:
         response = a #WebKitURISchemeResponse
   */
-  void finishWithResponse(webkit.urischeme_response.URISchemeResponse response)
+  void finishWithResponse(webkit.urischeme_response.URISchemeResponse response) nothrow
   {
     webkit_uri_scheme_request_finish_with_response(cast(WebKitURISchemeRequest*)this._cPtr, response ? cast(WebKitURISchemeResponse*)response._cPtr(No.Dup) : null);
   }
@@ -103,7 +103,7 @@ class URISchemeRequest : gobject.object.ObjectWrap
       Get the request body.
       Returns: (nullable): the body of the request.
   */
-  gio.input_stream.InputStream getHttpBody()
+  gio.input_stream.InputStream getHttpBody() nothrow
   {
     GInputStream* _cretval;
     _cretval = webkit_uri_scheme_request_get_http_body(cast(WebKitURISchemeRequest*)this._cPtr);
@@ -115,7 +115,7 @@ class URISchemeRequest : gobject.object.ObjectWrap
       Get the #SoupMessageHeaders of the request.
       Returns: the #SoupMessageHeaders of the request.
   */
-  soup.message_headers.MessageHeaders getHttpHeaders()
+  soup.message_headers.MessageHeaders getHttpHeaders() nothrow
   {
     SoupMessageHeaders* _cretval;
     _cretval = webkit_uri_scheme_request_get_http_headers(cast(WebKitURISchemeRequest*)this._cPtr);
@@ -127,7 +127,7 @@ class URISchemeRequest : gobject.object.ObjectWrap
       Get the HTTP method of the request.
       Returns: the HTTP method of the request
   */
-  string getHttpMethod()
+  string getHttpMethod() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_uri_scheme_request_get_http_method(cast(WebKitURISchemeRequest*)this._cPtr);
@@ -139,7 +139,7 @@ class URISchemeRequest : gobject.object.ObjectWrap
       Get the URI path of request.
       Returns: the URI path of request
   */
-  string getPath()
+  string getPath() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_uri_scheme_request_get_path(cast(WebKitURISchemeRequest*)this._cPtr);
@@ -151,7 +151,7 @@ class URISchemeRequest : gobject.object.ObjectWrap
       Get the URI scheme of request.
       Returns: the URI scheme of request
   */
-  string getScheme()
+  string getScheme() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_uri_scheme_request_get_scheme(cast(WebKitURISchemeRequest*)this._cPtr);
@@ -163,7 +163,7 @@ class URISchemeRequest : gobject.object.ObjectWrap
       Get the URI of request.
       Returns: the full URI of request
   */
-  string getUri()
+  string getUri() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_uri_scheme_request_get_uri(cast(WebKitURISchemeRequest*)this._cPtr);
@@ -175,7 +175,7 @@ class URISchemeRequest : gobject.object.ObjectWrap
       Get the #WebKitWebView that initiated the request.
       Returns: the #WebKitWebView that initiated request.
   */
-  webkit.web_view.WebView getWebView()
+  webkit.web_view.WebView getWebView() nothrow
   {
     WebKitWebView* _cretval;
     _cretval = webkit_uri_scheme_request_get_web_view(cast(WebKitURISchemeRequest*)this._cPtr);
@@ -196,7 +196,7 @@ final class URISchemeRequestGidBuilder : URISchemeRequestGidBuilderImpl!URISchem
       Create object from builder.
       Returns: New object
   */
-  URISchemeRequest build()
+  URISchemeRequest build() nothrow
   {
     return new URISchemeRequest(cast(void*)createGObject(URISchemeRequest._getGType), No.Take);
   }

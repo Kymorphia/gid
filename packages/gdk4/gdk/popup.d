@@ -25,7 +25,7 @@ interface Popup
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_popup_get_type != &gidSymbolNotFound ? gdk_popup_get_type() : cast(GType)0;
@@ -35,13 +35,13 @@ interface Popup
       Get `autohide` property.
       Returns: Whether to hide on outside clicks.
   */
-  @property bool autohide();
+  @property bool autohide() nothrow;
 
   /**
       Get `parent` property.
       Returns: The parent surface.
   */
-  @property gdk.surface.Surface parent();
+  @property gdk.surface.Surface parent() nothrow;
 
   /**
       Returns whether this popup is set to hide on outside clicks.
@@ -121,7 +121,7 @@ interface PopupGidBuilderImpl(T)
         propval = Whether to hide on outside clicks.
       Returns: Builder instance for fluent chaining
   */
-  T autohide(bool propval);
+  T autohide(bool propval) nothrow;
 
   /**
       Set `parent` property.
@@ -129,5 +129,5 @@ interface PopupGidBuilderImpl(T)
         propval = The parent surface.
       Returns: Builder instance for fluent chaining
   */
-  T parent(gdk.surface.Surface propval);
+  T parent(gdk.surface.Surface propval) nothrow;
 }

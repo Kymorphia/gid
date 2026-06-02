@@ -12,7 +12,7 @@ struct GLTextureTarget
   alias Enum = gstgl.types.GLTextureTarget; ///
 
   /** */
-  static gstgl.types.GLTextureTarget fromGl(uint target)
+  static gstgl.types.GLTextureTarget fromGl(uint target) nothrow
   {
     GstGLTextureTarget _cretval;
     _cretval = gst_gl_texture_target_from_gl(target);
@@ -21,7 +21,7 @@ struct GLTextureTarget
   }
 
   /** */
-  static gstgl.types.GLTextureTarget fromString(string str)
+  static gstgl.types.GLTextureTarget fromString(string str) nothrow
   {
     GstGLTextureTarget _cretval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -31,7 +31,7 @@ struct GLTextureTarget
   }
 
   /** */
-  static string toBufferPoolOption(gstgl.types.GLTextureTarget target)
+  static string toBufferPoolOption(gstgl.types.GLTextureTarget target) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_gl_texture_target_to_buffer_pool_option(target);
@@ -40,7 +40,7 @@ struct GLTextureTarget
   }
 
   /** */
-  static uint toGl(gstgl.types.GLTextureTarget target)
+  static uint toGl(gstgl.types.GLTextureTarget target) nothrow
   {
     uint _retval;
     _retval = gst_gl_texture_target_to_gl(target);
@@ -48,7 +48,7 @@ struct GLTextureTarget
   }
 
   /** */
-  static string toString_(gstgl.types.GLTextureTarget target)
+  static string toString_(gstgl.types.GLTextureTarget target) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_gl_texture_target_to_string(target);

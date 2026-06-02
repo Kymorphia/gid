@@ -16,26 +16,26 @@ class DoPutResult : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_do_put_result_get_type != &gidSymbolNotFound ? gaflight_do_put_result_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DoPutResult self()
+  override DoPutResult self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class DoPutResult : gobject.object.ObjectWrap
       Get builder for [arrowflight.do_put_result.DoPutResult]
       Returns: New builder object
   */
-  static DoPutResultGidBuilder builder()
+  static DoPutResultGidBuilder builder() nothrow
   {
     return new DoPutResultGidBuilder;
   }
@@ -53,7 +53,7 @@ class DoPutResult : gobject.object.ObjectWrap
       Get `reader` property.
       Returns: A reader for application metadata from the server.
   */
-  @property arrowflight.metadata_reader.MetadataReader reader()
+  @property arrowflight.metadata_reader.MetadataReader reader() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrowflight.metadata_reader.MetadataReader)("reader");
   }
@@ -62,7 +62,7 @@ class DoPutResult : gobject.object.ObjectWrap
       Get `writer` property.
       Returns: A writer to write record batches to.
   */
-  @property arrowflight.stream_writer.StreamWriter writer()
+  @property arrowflight.stream_writer.StreamWriter writer() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrowflight.stream_writer.StreamWriter)("writer");
   }
@@ -73,7 +73,7 @@ class DoPutResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T result(void* propval)
+  T result(void* propval) nothrow
   {
     return setProperty("result", propval);
   }
@@ -86,7 +86,7 @@ final class DoPutResultGidBuilder : DoPutResultGidBuilderImpl!DoPutResultGidBuil
       Create object from builder.
       Returns: New object
   */
-  DoPutResult build()
+  DoPutResult build() nothrow
   {
     return new DoPutResult(cast(void*)createGObject(DoPutResult._getGType), No.Take);
   }

@@ -19,7 +19,7 @@ struct MessageType
         type = the message type
       Returns: a reference to the static name of the message.
   */
-  static string getName(gst.types.MessageType type)
+  static string getName(gst.types.MessageType type) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_message_type_get_name(type);
@@ -34,7 +34,7 @@ struct MessageType
         type = the message type
       Returns: the quark associated with the message type
   */
-  static glib.types.Quark toQuark(gst.types.MessageType type)
+  static glib.types.Quark toQuark(gst.types.MessageType type) nothrow
   {
     glib.types.Quark _retval;
     _retval = gst_message_type_to_quark(type);

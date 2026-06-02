@@ -53,26 +53,26 @@ class PreferencesGroup : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_preferences_group_get_type != &gidSymbolNotFound ? adw_preferences_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PreferencesGroup self()
+  override PreferencesGroup self() nothrow
   {
     return this;
   }
@@ -81,7 +81,7 @@ class PreferencesGroup : gtk.widget.Widget
       Get builder for [adw.preferences_group.PreferencesGroup]
       Returns: New builder object
   */
-  static PreferencesGroupGidBuilder builder()
+  static PreferencesGroupGidBuilder builder() nothrow
   {
     return new PreferencesGroupGidBuilder;
   }
@@ -90,7 +90,7 @@ class PreferencesGroup : gtk.widget.Widget
       Get `description` property.
       Returns: The description for this group of preferences.
   */
-  @property string description()
+  @property string description() nothrow
   {
     return getDescription();
   }
@@ -100,7 +100,7 @@ class PreferencesGroup : gtk.widget.Widget
       Params:
         propval = The description for this group of preferences.
   */
-  @property void description(string propval)
+  @property void description(string propval) nothrow
   {
     setDescription(propval);
   }
@@ -114,7 +114,7 @@ class PreferencesGroup : gtk.widget.Widget
         Suffixes are commonly used to show a button or a spinner for the whole
         group.
   */
-  @property gtk.widget.Widget headerSuffix()
+  @property gtk.widget.Widget headerSuffix() nothrow
   {
     return getHeaderSuffix();
   }
@@ -129,7 +129,7 @@ class PreferencesGroup : gtk.widget.Widget
           Suffixes are commonly used to show a button or a spinner for the whole
           group.
   */
-  @property void headerSuffix(gtk.widget.Widget propval)
+  @property void headerSuffix(gtk.widget.Widget propval) nothrow
   {
     setHeaderSuffix(propval);
   }
@@ -138,7 +138,7 @@ class PreferencesGroup : gtk.widget.Widget
       Get `title` property.
       Returns: The title for this group of preferences.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -148,7 +148,7 @@ class PreferencesGroup : gtk.widget.Widget
       Params:
         propval = The title for this group of preferences.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -157,7 +157,7 @@ class PreferencesGroup : gtk.widget.Widget
       Creates a new [adw.preferences_group.PreferencesGroup].
       Returns: the newly created [adw.preferences_group.PreferencesGroup]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_preferences_group_new();
@@ -170,7 +170,7 @@ class PreferencesGroup : gtk.widget.Widget
       Params:
         child = the widget to add
   */
-  void add(gtk.widget.Widget child)
+  void add(gtk.widget.Widget child) nothrow
   {
     adw_preferences_group_add(cast(AdwPreferencesGroup*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -179,7 +179,7 @@ class PreferencesGroup : gtk.widget.Widget
       Gets the description of self.
       Returns: the description of self
   */
-  string getDescription()
+  string getDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_preferences_group_get_description(cast(AdwPreferencesGroup*)this._cPtr);
@@ -191,7 +191,7 @@ class PreferencesGroup : gtk.widget.Widget
       Gets the suffix for self's header.
       Returns: the suffix for self's header.
   */
-  gtk.widget.Widget getHeaderSuffix()
+  gtk.widget.Widget getHeaderSuffix() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_preferences_group_get_header_suffix(cast(AdwPreferencesGroup*)this._cPtr);
@@ -203,7 +203,7 @@ class PreferencesGroup : gtk.widget.Widget
       Gets the title of self.
       Returns: the title of self
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_preferences_group_get_title(cast(AdwPreferencesGroup*)this._cPtr);
@@ -217,7 +217,7 @@ class PreferencesGroup : gtk.widget.Widget
       Params:
         child = the child to remove
   */
-  void remove(gtk.widget.Widget child)
+  void remove(gtk.widget.Widget child) nothrow
   {
     adw_preferences_group_remove(cast(AdwPreferencesGroup*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -228,7 +228,7 @@ class PreferencesGroup : gtk.widget.Widget
       Params:
         description = the description
   */
-  void setDescription(string description = null)
+  void setDescription(string description = null) nothrow
   {
     const(char)* _description = description.toCString(No.Alloc);
     adw_preferences_group_set_description(cast(AdwPreferencesGroup*)this._cPtr, _description);
@@ -244,7 +244,7 @@ class PreferencesGroup : gtk.widget.Widget
       Params:
         suffix = the suffix to set
   */
-  void setHeaderSuffix(gtk.widget.Widget suffix = null)
+  void setHeaderSuffix(gtk.widget.Widget suffix = null) nothrow
   {
     adw_preferences_group_set_header_suffix(cast(AdwPreferencesGroup*)this._cPtr, suffix ? cast(GtkWidget*)suffix._cPtr(No.Dup) : null);
   }
@@ -255,7 +255,7 @@ class PreferencesGroup : gtk.widget.Widget
       Params:
         title = the title
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     adw_preferences_group_set_title(cast(AdwPreferencesGroup*)this._cPtr, _title);
@@ -273,7 +273,7 @@ class PreferencesGroupGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The description for this group of preferences.
       Returns: Builder instance for fluent chaining
   */
-  T description(string propval)
+  T description(string propval) nothrow
   {
     return setProperty("description", propval);
   }
@@ -289,7 +289,7 @@ class PreferencesGroupGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           group.
       Returns: Builder instance for fluent chaining
   */
-  T headerSuffix(gtk.widget.Widget propval)
+  T headerSuffix(gtk.widget.Widget propval) nothrow
   {
     return setProperty("header-suffix", propval);
   }
@@ -300,7 +300,7 @@ class PreferencesGroupGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The title for this group of preferences.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -313,7 +313,7 @@ final class PreferencesGroupGidBuilder : PreferencesGroupGidBuilderImpl!Preferen
       Create object from builder.
       Returns: New object
   */
-  PreferencesGroup build()
+  PreferencesGroup build() nothrow
   {
     return new PreferencesGroup(cast(void*)createGObject(PreferencesGroup._getGType), No.Take);
   }

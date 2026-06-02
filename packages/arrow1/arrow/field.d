@@ -16,26 +16,26 @@ class Field : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_field_get_type != &gidSymbolNotFound ? garrow_field_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Field self()
+  override Field self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class Field : gobject.object.ObjectWrap
       Get builder for [arrow.field.Field]
       Returns: New builder object
   */
-  static FieldGidBuilder builder()
+  static FieldGidBuilder builder() nothrow
   {
     return new FieldGidBuilder;
   }
 
   /** */
-  this(string name, arrow.data_type.DataType dataType)
+  this(string name, arrow.data_type.DataType dataType) nothrow
   {
     GArrowField* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -59,7 +59,7 @@ class Field : gobject.object.ObjectWrap
   }
 
   /** */
-  static arrow.field.Field newFull(string name, arrow.data_type.DataType dataType, bool nullable)
+  static arrow.field.Field newFull(string name, arrow.data_type.DataType dataType, bool nullable) nothrow
   {
     GArrowField* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -81,7 +81,7 @@ class Field : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equal(arrow.field.Field otherField)
+  bool equal(arrow.field.Field otherField) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_field_equal(cast(GArrowField*)this._cPtr, otherField ? cast(GArrowField*)otherField._cPtr(No.Dup) : null);
@@ -99,7 +99,7 @@ class Field : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.data_type.DataType getDataType()
+  arrow.data_type.DataType getDataType() nothrow
   {
     GArrowDataType* _cretval;
     _cretval = garrow_field_get_data_type(cast(GArrowField*)this._cPtr);
@@ -108,7 +108,7 @@ class Field : gobject.object.ObjectWrap
   }
 
   /** */
-  string[string] getMetadata()
+  string[string] getMetadata() nothrow
   {
     GHashTable* _cretval;
     _cretval = garrow_field_get_metadata(cast(GArrowField*)this._cPtr);
@@ -117,7 +117,7 @@ class Field : gobject.object.ObjectWrap
   }
 
   /** */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = garrow_field_get_name(cast(GArrowField*)this._cPtr);
@@ -126,7 +126,7 @@ class Field : gobject.object.ObjectWrap
   }
 
   /** */
-  bool hasMetadata()
+  bool hasMetadata() nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_field_has_metadata(cast(GArrowField*)this._cPtr);
@@ -134,7 +134,7 @@ class Field : gobject.object.ObjectWrap
   }
 
   /** */
-  bool isNullable()
+  bool isNullable() nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_field_is_nullable(cast(GArrowField*)this._cPtr);
@@ -142,7 +142,7 @@ class Field : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.field.Field removeMetadata()
+  arrow.field.Field removeMetadata() nothrow
   {
     GArrowField* _cretval;
     _cretval = garrow_field_remove_metadata(cast(GArrowField*)this._cPtr);
@@ -151,7 +151,7 @@ class Field : gobject.object.ObjectWrap
   }
 
   /** */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = garrow_field_to_string(cast(GArrowField*)this._cPtr);
@@ -160,7 +160,7 @@ class Field : gobject.object.ObjectWrap
   }
 
   /** */
-  string toStringMetadata(bool showMetadata)
+  string toStringMetadata(bool showMetadata) nothrow
   {
     char* _cretval;
     _cretval = garrow_field_to_string_metadata(cast(GArrowField*)this._cPtr, showMetadata);
@@ -169,7 +169,7 @@ class Field : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.field.Field withMergedMetadata(string[string] metadata)
+  arrow.field.Field withMergedMetadata(string[string] metadata) nothrow
   {
     GArrowField* _cretval;
     auto _metadata = gHashTableFromD!(string, string)(metadata);
@@ -180,7 +180,7 @@ class Field : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.field.Field withMetadata(string[string] metadata)
+  arrow.field.Field withMetadata(string[string] metadata) nothrow
   {
     GArrowField* _cretval;
     auto _metadata = gHashTableFromD!(string, string)(metadata);
@@ -196,13 +196,13 @@ class FieldGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T dataType(arrow.data_type.DataType propval)
+  T dataType(arrow.data_type.DataType propval) nothrow
   {
     return setProperty("data-type", propval);
   }
 
   /** */
-  T field(void* propval)
+  T field(void* propval) nothrow
   {
     return setProperty("field", propval);
   }
@@ -215,7 +215,7 @@ final class FieldGidBuilder : FieldGidBuilderImpl!FieldGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Field build()
+  Field build() nothrow
   {
     return new Field(cast(void*)createGObject(Field._getGType), Yes.Take);
   }

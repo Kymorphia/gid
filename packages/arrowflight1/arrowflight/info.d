@@ -19,26 +19,26 @@ class Info : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_info_get_type != &gidSymbolNotFound ? gaflight_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Info self()
+  override Info self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class Info : gobject.object.ObjectWrap
       Get builder for [arrowflight.info.Info]
       Returns: New builder object
   */
-  static InfoGidBuilder builder()
+  static InfoGidBuilder builder() nothrow
   {
     return new InfoGidBuilder;
   }
@@ -66,7 +66,7 @@ class Info : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equal(arrowflight.info.Info otherInfo)
+  bool equal(arrowflight.info.Info otherInfo) nothrow
   {
     bool _retval;
     _retval = cast(bool)gaflight_info_equal(cast(GAFlightInfo*)this._cPtr, otherInfo ? cast(GAFlightInfo*)otherInfo._cPtr(No.Dup) : null);
@@ -74,7 +74,7 @@ class Info : gobject.object.ObjectWrap
   }
 
   /** */
-  arrowflight.descriptor.Descriptor getDescriptor()
+  arrowflight.descriptor.Descriptor getDescriptor() nothrow
   {
     GAFlightDescriptor* _cretval;
     _cretval = gaflight_info_get_descriptor(cast(GAFlightInfo*)this._cPtr);
@@ -83,7 +83,7 @@ class Info : gobject.object.ObjectWrap
   }
 
   /** */
-  arrowflight.endpoint.Endpoint[] getEndpoints()
+  arrowflight.endpoint.Endpoint[] getEndpoints() nothrow
   {
     GList* _cretval;
     _cretval = gaflight_info_get_endpoints(cast(GAFlightInfo*)this._cPtr);
@@ -104,7 +104,7 @@ class Info : gobject.object.ObjectWrap
   }
 
   /** */
-  long getTotalBytes()
+  long getTotalBytes() nothrow
   {
     long _retval;
     _retval = gaflight_info_get_total_bytes(cast(GAFlightInfo*)this._cPtr);
@@ -112,7 +112,7 @@ class Info : gobject.object.ObjectWrap
   }
 
   /** */
-  long getTotalRecords()
+  long getTotalRecords() nothrow
   {
     long _retval;
     _retval = gaflight_info_get_total_records(cast(GAFlightInfo*)this._cPtr);
@@ -125,7 +125,7 @@ class InfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T info(void* propval)
+  T info(void* propval) nothrow
   {
     return setProperty("info", propval);
   }
@@ -138,7 +138,7 @@ final class InfoGidBuilder : InfoGidBuilderImpl!InfoGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Info build()
+  Info build() nothrow
   {
     return new Info(cast(void*)createGObject(Info._getGType), Yes.Take);
   }

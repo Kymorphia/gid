@@ -40,7 +40,7 @@ template SymbolicPaintableT()
         height = height to snapshot in
         colors = a pointer to an array of colors
   */
-  override void snapshotSymbolic(gdk.snapshot.Snapshot snapshot, double width, double height, gdk.rgba.RGBA[] colors)
+  override void snapshotSymbolic(gdk.snapshot.Snapshot snapshot, double width, double height, gdk.rgba.RGBA[] colors) nothrow
   {
     size_t _nColors;
     if (colors)

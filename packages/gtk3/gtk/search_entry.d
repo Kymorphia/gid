@@ -49,26 +49,26 @@ class SearchEntry : gtk.entry.Entry
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_search_entry_get_type != &gidSymbolNotFound ? gtk_search_entry_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SearchEntry self()
+  override SearchEntry self() nothrow
   {
     return this;
   }
@@ -77,7 +77,7 @@ class SearchEntry : gtk.entry.Entry
       Get builder for [gtk.search_entry.SearchEntry]
       Returns: New builder object
   */
-  static SearchEntryGidBuilder builder()
+  static SearchEntryGidBuilder builder() nothrow
   {
     return new SearchEntryGidBuilder;
   }
@@ -87,7 +87,7 @@ class SearchEntry : gtk.entry.Entry
       empty, and a clear icon when it isn't.
       Returns: a new #GtkSearchEntry
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_entry_new();
@@ -113,7 +113,7 @@ class SearchEntry : gtk.entry.Entry
             in a search beginning or continuing, [gdk.types.EVENT_PROPAGATE]
             otherwise.
   */
-  bool handleEvent(gdk.event.Event event)
+  bool handleEvent(gdk.event.Event event) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_search_entry_handle_event(cast(GtkSearchEntry*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
@@ -142,13 +142,13 @@ class SearchEntry : gtk.entry.Entry
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNextMatch(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNextMatch(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.search_entry.SearchEntry)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -157,7 +157,14 @@ class SearchEntry : gtk.entry.Entry
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.search_entry.SearchEntry.nextMatch");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -186,13 +193,13 @@ class SearchEntry : gtk.entry.Entry
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPreviousMatch(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPreviousMatch(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.search_entry.SearchEntry)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -201,7 +208,14 @@ class SearchEntry : gtk.entry.Entry
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.search_entry.SearchEntry.previousMatch");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -224,13 +238,13 @@ class SearchEntry : gtk.entry.Entry
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSearchChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSearchChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.search_entry.SearchEntry)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -239,7 +253,14 @@ class SearchEntry : gtk.entry.Entry
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.search_entry.SearchEntry.searchChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -267,13 +288,13 @@ class SearchEntry : gtk.entry.Entry
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectStopSearch(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStopSearch(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.search_entry.SearchEntry)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -282,7 +303,14 @@ class SearchEntry : gtk.entry.Entry
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.search_entry.SearchEntry.stopSearch");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -303,7 +331,7 @@ final class SearchEntryGidBuilder : SearchEntryGidBuilderImpl!SearchEntryGidBuil
       Create object from builder.
       Returns: New object
   */
-  SearchEntry build()
+  SearchEntry build() nothrow
   {
     return new SearchEntry(cast(void*)createGObject(SearchEntry._getGType), No.Take);
   }

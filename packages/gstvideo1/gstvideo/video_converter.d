@@ -17,18 +17,15 @@ class VideoConverter
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_converter.VideoConverter");
-
     _cInstancePtr = cast(GstVideoConverter*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -44,7 +41,7 @@ class VideoConverter
         src = a #GstVideoFrame
         dest = a #GstVideoFrame
   */
-  void frame(gstvideo.video_frame.VideoFrame src, gstvideo.video_frame.VideoFrame dest)
+  void frame(gstvideo.video_frame.VideoFrame src, gstvideo.video_frame.VideoFrame dest) nothrow
   {
     gst_video_converter_frame(cast(GstVideoConverter*)this._cPtr, src ? cast(const(GstVideoFrame)*)src._cPtr : null, dest ? cast(GstVideoFrame*)dest._cPtr : null);
   }
@@ -53,7 +50,7 @@ class VideoConverter
       Wait for a previous async conversion performed using
       [gstvideo.video_converter.VideoConverter.frame] to complete.
   */
-  void frameFinish()
+  void frameFinish() nothrow
   {
     gst_video_converter_frame_finish(cast(GstVideoConverter*)this._cPtr);
   }
@@ -63,7 +60,7 @@ class VideoConverter
       Returns: a #GstStructure that remains valid for as long as convert is valid
           or until [gstvideo.video_converter.VideoConverter.setConfig] is called.
   */
-  gst.structure.Structure getConfig()
+  gst.structure.Structure getConfig() nothrow
   {
     const(GstStructure)* _cretval;
     _cretval = gst_video_converter_get_config(cast(GstVideoConverter*)this._cPtr);
@@ -75,7 +72,7 @@ class VideoConverter
       Retrieve the input format of convert.
       Returns: a #GstVideoInfo
   */
-  gstvideo.video_info.VideoInfo getInInfo()
+  gstvideo.video_info.VideoInfo getInInfo() nothrow
   {
     const(GstVideoInfo)* _cretval;
     _cretval = gst_video_converter_get_in_info(cast(GstVideoConverter*)this._cPtr);
@@ -87,7 +84,7 @@ class VideoConverter
       Retrieve the output format of convert.
       Returns: a #GstVideoInfo
   */
-  gstvideo.video_info.VideoInfo getOutInfo()
+  gstvideo.video_info.VideoInfo getOutInfo() nothrow
   {
     const(GstVideoInfo)* _cretval;
     _cretval = gst_video_converter_get_out_info(cast(GstVideoConverter*)this._cPtr);
@@ -109,7 +106,7 @@ class VideoConverter
         config = a #GstStructure
       Returns: true when config could be set.
   */
-  bool setConfig(gst.structure.Structure config)
+  bool setConfig(gst.structure.Structure config) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_converter_set_config(cast(GstVideoConverter*)this._cPtr, config ? cast(GstStructure*)config._cPtr(Yes.Dup) : null);

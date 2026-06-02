@@ -28,26 +28,26 @@ class FrameSwitcher : gtk.widget.Widget, gtk.orientable.Orientable, panel.frame_
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_frame_switcher_get_type != &gidSymbolNotFound ? panel_frame_switcher_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FrameSwitcher self()
+  override FrameSwitcher self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class FrameSwitcher : gtk.widget.Widget, gtk.orientable.Orientable, panel.frame_
       Get builder for [panel.frame_switcher.FrameSwitcher]
       Returns: New builder object
   */
-  static FrameSwitcherGidBuilder builder()
+  static FrameSwitcherGidBuilder builder() nothrow
   {
     return new FrameSwitcherGidBuilder;
   }
@@ -68,7 +68,7 @@ class FrameSwitcher : gtk.widget.Widget, gtk.orientable.Orientable, panel.frame_
       Create a new [panel.frame_switcher.FrameSwitcher].
       Returns: a new [panel.frame_switcher.FrameSwitcher].
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = panel_frame_switcher_new();
@@ -91,7 +91,7 @@ final class FrameSwitcherGidBuilder : FrameSwitcherGidBuilderImpl!FrameSwitcherG
       Create object from builder.
       Returns: New object
   */
-  FrameSwitcher build()
+  FrameSwitcher build() nothrow
   {
     return new FrameSwitcher(cast(void*)createGObject(FrameSwitcher._getGType), No.Take);
   }

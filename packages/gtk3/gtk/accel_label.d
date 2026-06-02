@@ -83,26 +83,26 @@ class AccelLabel : gtk.label.Label
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_accel_label_get_type != &gidSymbolNotFound ? gtk_accel_label_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AccelLabel self()
+  override AccelLabel self() nothrow
   {
     return this;
   }
@@ -111,31 +111,31 @@ class AccelLabel : gtk.label.Label
       Get builder for [gtk.accel_label.AccelLabel]
       Returns: New builder object
   */
-  static AccelLabelGidBuilder builder()
+  static AccelLabelGidBuilder builder() nothrow
   {
     return new AccelLabelGidBuilder;
   }
 
   /** */
-  @property gobject.closure.Closure accelClosure()
+  @property gobject.closure.Closure accelClosure() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.closure.Closure)("accel-closure");
   }
 
   /** */
-  @property void accelClosure(gobject.closure.Closure propval)
+  @property void accelClosure(gobject.closure.Closure propval) nothrow
   {
     setAccelClosure(propval);
   }
 
   /** */
-  @property gtk.widget.Widget accelWidget()
+  @property gtk.widget.Widget accelWidget() nothrow
   {
     return getAccelWidget();
   }
 
   /** */
-  @property void accelWidget(gtk.widget.Widget propval)
+  @property void accelWidget(gtk.widget.Widget propval) nothrow
   {
     setAccelWidget(propval);
   }
@@ -147,7 +147,7 @@ class AccelLabel : gtk.label.Label
         string_ = the label string. Must be non-null.
       Returns: a new #GtkAccelLabel.
   */
-  this(string string_)
+  this(string string_) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
@@ -163,7 +163,7 @@ class AccelLabel : gtk.label.Label
         acceleratorKey = return location for the keyval
         acceleratorMods = return location for the modifier mask
   */
-  void getAccel(out uint acceleratorKey, out gdk.types.ModifierType acceleratorMods)
+  void getAccel(out uint acceleratorKey, out gdk.types.ModifierType acceleratorMods) nothrow
   {
     gtk_accel_label_get_accel(cast(GtkAccelLabel*)this._cPtr, cast(uint*)&acceleratorKey, &acceleratorMods);
   }
@@ -173,7 +173,7 @@ class AccelLabel : gtk.label.Label
       [gtk.accel_label.AccelLabel.setAccelWidget].
       Returns: the object monitored by the accelerator label, or null.
   */
-  gtk.widget.Widget getAccelWidget()
+  gtk.widget.Widget getAccelWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_accel_label_get_accel_widget(cast(GtkAccelLabel*)this._cPtr);
@@ -187,7 +187,7 @@ class AccelLabel : gtk.label.Label
       be needed by applications.
       Returns: the width needed to display the accelerator key(s).
   */
-  uint getAccelWidth()
+  uint getAccelWidth() nothrow
   {
     uint _retval;
     _retval = gtk_accel_label_get_accel_width(cast(GtkAccelLabel*)this._cPtr);
@@ -200,7 +200,7 @@ class AccelLabel : gtk.label.Label
       accelerators are added or removed from the associated widget.
       Returns: always returns false.
   */
-  bool refetch()
+  bool refetch() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_accel_label_refetch(cast(GtkAccelLabel*)this._cPtr);
@@ -220,7 +220,7 @@ class AccelLabel : gtk.label.Label
         acceleratorKey = a keyval, or 0
         acceleratorMods = the modifier mask for the accel
   */
-  void setAccel(uint acceleratorKey, gdk.types.ModifierType acceleratorMods)
+  void setAccel(uint acceleratorKey, gdk.types.ModifierType acceleratorMods) nothrow
   {
     gtk_accel_label_set_accel(cast(GtkAccelLabel*)this._cPtr, acceleratorKey, acceleratorMods);
   }
@@ -235,7 +235,7 @@ class AccelLabel : gtk.label.Label
         accelClosure = the closure to monitor for accelerator changes,
           or null
   */
-  void setAccelClosure(gobject.closure.Closure accelClosure = null)
+  void setAccelClosure(gobject.closure.Closure accelClosure = null) nothrow
   {
     gtk_accel_label_set_accel_closure(cast(GtkAccelLabel*)this._cPtr, accelClosure ? cast(GClosure*)accelClosure._cPtr(No.Dup) : null);
   }
@@ -247,7 +247,7 @@ class AccelLabel : gtk.label.Label
       Params:
         accelWidget = the widget to be monitored, or null
   */
-  void setAccelWidget(gtk.widget.Widget accelWidget = null)
+  void setAccelWidget(gtk.widget.Widget accelWidget = null) nothrow
   {
     gtk_accel_label_set_accel_widget(cast(GtkAccelLabel*)this._cPtr, accelWidget ? cast(GtkWidget*)accelWidget._cPtr(No.Dup) : null);
   }
@@ -259,13 +259,13 @@ class AccelLabelGidBuilderImpl(T) : gtk.label.LabelGidBuilderImpl!T
 
 
   /** */
-  T accelClosure(gobject.closure.Closure propval)
+  T accelClosure(gobject.closure.Closure propval) nothrow
   {
     return setProperty("accel-closure", propval);
   }
 
   /** */
-  T accelWidget(gtk.widget.Widget propval)
+  T accelWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("accel-widget", propval);
   }
@@ -278,7 +278,7 @@ final class AccelLabelGidBuilder : AccelLabelGidBuilderImpl!AccelLabelGidBuilder
       Create object from builder.
       Returns: New object
   */
-  AccelLabel build()
+  AccelLabel build() nothrow
   {
     return new AccelLabel(cast(void*)createGObject(AccelLabel._getGType), No.Take);
   }

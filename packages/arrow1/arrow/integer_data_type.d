@@ -14,26 +14,26 @@ class IntegerDataType : arrow.numeric_data_type.NumericDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_integer_data_type_get_type != &gidSymbolNotFound ? garrow_integer_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override IntegerDataType self()
+  override IntegerDataType self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class IntegerDataType : arrow.numeric_data_type.NumericDataType
       Get builder for [arrow.integer_data_type.IntegerDataType]
       Returns: New builder object
   */
-  static IntegerDataTypeGidBuilder builder()
+  static IntegerDataTypeGidBuilder builder() nothrow
   {
     return new IntegerDataTypeGidBuilder;
   }
 
   /** */
-  bool isSigned()
+  bool isSigned() nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_integer_data_type_is_signed(cast(GArrowIntegerDataType*)this._cPtr);
@@ -68,7 +68,7 @@ final class IntegerDataTypeGidBuilder : IntegerDataTypeGidBuilderImpl!IntegerDat
       Create object from builder.
       Returns: New object
   */
-  IntegerDataType build()
+  IntegerDataType build() nothrow
   {
     return new IntegerDataType(cast(void*)createGObject(IntegerDataType._getGType), No.Take);
   }

@@ -21,26 +21,26 @@ class ArrowFileWriter : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_arrow_file_writer_get_type != &gidSymbolNotFound ? gparquet_arrow_file_writer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ArrowFileWriter self()
+  override ArrowFileWriter self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class ArrowFileWriter : gobject.object.ObjectWrap
       Get builder for [parquet.arrow_file_writer.ArrowFileWriter]
       Returns: New builder object
   */
-  static ArrowFileWriterGidBuilder builder()
+  static ArrowFileWriterGidBuilder builder() nothrow
   {
     return new ArrowFileWriterGidBuilder;
   }
@@ -91,7 +91,7 @@ class ArrowFileWriter : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.schema.Schema getSchema()
+  arrow.schema.Schema getSchema() nothrow
   {
     GArrowSchema* _cretval;
     _cretval = gparquet_arrow_file_writer_get_schema(cast(GParquetArrowFileWriter*)this._cPtr);
@@ -196,7 +196,7 @@ class ArrowFileWriterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 {
 
   /** */
-  T arrowFileWriter(void* propval)
+  T arrowFileWriter(void* propval) nothrow
   {
     return setProperty("arrow-file-writer", propval);
   }
@@ -209,7 +209,7 @@ final class ArrowFileWriterGidBuilder : ArrowFileWriterGidBuilderImpl!ArrowFileW
       Create object from builder.
       Returns: New object
   */
-  ArrowFileWriter build()
+  ArrowFileWriter build() nothrow
   {
     return new ArrowFileWriter(cast(void*)createGObject(ArrowFileWriter._getGType), No.Take);
   }

@@ -30,7 +30,7 @@ struct VideoTransferFunction
         val = a value
       Returns: the gamma decoded value of val
   */
-  static double decode(gstvideo.types.VideoTransferFunction func, double val)
+  static double decode(gstvideo.types.VideoTransferFunction func, double val) nothrow
   {
     double _retval;
     _retval = gst_video_transfer_function_decode(func, val);
@@ -55,7 +55,7 @@ struct VideoTransferFunction
         val = a value
       Returns: the gamma encoded value of val
   */
-  static double encode(gstvideo.types.VideoTransferFunction func, double val)
+  static double encode(gstvideo.types.VideoTransferFunction func, double val) nothrow
   {
     double _retval;
     _retval = gst_video_transfer_function_encode(func, val);
@@ -73,7 +73,7 @@ struct VideoTransferFunction
         value = a ITU-T H.273 transfer characteristics value
       Returns: the matched #GstVideoTransferFunction
   */
-  static gstvideo.types.VideoTransferFunction fromIso(uint value)
+  static gstvideo.types.VideoTransferFunction fromIso(uint value) nothrow
   {
     GstVideoTransferFunction _cretval;
     _cretval = gst_video_transfer_function_from_iso(value);
@@ -95,7 +95,7 @@ struct VideoTransferFunction
         toBpp = bits per pixel to convert into
       Returns: TRUE if from_func and to_func can be considered equivalent.
   */
-  static bool isEquivalent(gstvideo.types.VideoTransferFunction fromFunc, uint fromBpp, gstvideo.types.VideoTransferFunction toFunc, uint toBpp)
+  static bool isEquivalent(gstvideo.types.VideoTransferFunction fromFunc, uint fromBpp, gstvideo.types.VideoTransferFunction toFunc, uint toBpp) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_transfer_function_is_equivalent(fromFunc, fromBpp, toFunc, toBpp);
@@ -112,7 +112,7 @@ struct VideoTransferFunction
         func = a #GstVideoTransferFunction
       Returns: The value of ISO/IEC 23001-8 transfer characteristics.
   */
-  static uint toIso(gstvideo.types.VideoTransferFunction func)
+  static uint toIso(gstvideo.types.VideoTransferFunction func) nothrow
   {
     uint _retval;
     _retval = gst_video_transfer_function_to_iso(func);

@@ -32,23 +32,22 @@ struct Quaternion
   float w;
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())graphene_quaternion_get_type != &gidSymbolNotFound ? graphene_quaternion_get_type() : cast(GType)0;
   }
 
   /** */
-  @property GType _gType()
+  @property GType _gType() nothrow
   {
     return _getGType();
   }
 
-  void* boxCopy()
+  void* boxCopy() nothrow
   {
     import gobject.c.functions : g_boxed_copy;
-    return g_boxed_copy(_gType,
-        cast(void*)&this);
+    return g_boxed_copy(_gType, cast(void*)&this);
   }
 
   /**
@@ -58,7 +57,7 @@ struct Quaternion
         b = a #graphene_quaternion_t
         res = the result of the operation
   */
-  void add(graphene.quaternion.Quaternion b, out graphene.quaternion.Quaternion res)
+  void add(graphene.quaternion.Quaternion b, out graphene.quaternion.Quaternion res) nothrow
   {
     graphene_quaternion_add(cast(const(graphene_quaternion_t)*)&this, cast(const(graphene_quaternion_t)*)&b, cast(graphene_quaternion_t*)&res);
   }
@@ -70,7 +69,7 @@ struct Quaternion
         b = a #graphene_quaternion_t
       Returns: the value of the dot products
   */
-  float dot(graphene.quaternion.Quaternion b)
+  float dot(graphene.quaternion.Quaternion b) nothrow
   {
     float _retval;
     _retval = graphene_quaternion_dot(cast(const(graphene_quaternion_t)*)&this, cast(const(graphene_quaternion_t)*)&b);
@@ -84,7 +83,7 @@ struct Quaternion
         b = a #graphene_quaternion_t
       Returns: `true` if the quaternions are equal
   */
-  bool equal(graphene.quaternion.Quaternion b)
+  bool equal(graphene.quaternion.Quaternion b) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_quaternion_equal(cast(const(graphene_quaternion_t)*)&this, cast(const(graphene_quaternion_t)*)&b);
@@ -101,7 +100,7 @@ struct Quaternion
         w = the fourth component of the quaternion
       Returns: the initialized quaternion
   */
-  graphene.quaternion.Quaternion init_(float x, float y, float z, float w)
+  graphene.quaternion.Quaternion init_(float x, float y, float z, float w) nothrow
   {
     graphene_quaternion_t* _cretval;
     _cretval = graphene_quaternion_init(cast(graphene_quaternion_t*)&this, x, y, z, w);
@@ -120,7 +119,7 @@ struct Quaternion
         axis = the axis of rotation, expressed as a vector
       Returns: the initialized quaternion
   */
-  graphene.quaternion.Quaternion initFromAngleVec3(float angle, graphene.vec3.Vec3 axis)
+  graphene.quaternion.Quaternion initFromAngleVec3(float angle, graphene.vec3.Vec3 axis) nothrow
   {
     graphene_quaternion_t* _cretval;
     _cretval = graphene_quaternion_init_from_angle_vec3(cast(graphene_quaternion_t*)&this, angle, axis ? cast(const(graphene_vec3_t)*)axis._cPtr(No.Dup) : null);
@@ -143,7 +142,7 @@ struct Quaternion
         degZ = rotation angle on the Z axis (roll), in degrees
       Returns: the initialized quaternion
   */
-  graphene.quaternion.Quaternion initFromAngles(float degX, float degY, float degZ)
+  graphene.quaternion.Quaternion initFromAngles(float degX, float degY, float degZ) nothrow
   {
     graphene_quaternion_t* _cretval;
     _cretval = graphene_quaternion_init_from_angles(cast(graphene_quaternion_t*)&this, degX, degY, degZ);
@@ -160,7 +159,7 @@ struct Quaternion
         e = a #graphene_euler_t
       Returns: the initialized #graphene_quaternion_t
   */
-  graphene.quaternion.Quaternion initFromEuler(graphene.euler.Euler e)
+  graphene.quaternion.Quaternion initFromEuler(graphene.euler.Euler e) nothrow
   {
     graphene_quaternion_t* _cretval;
     _cretval = graphene_quaternion_init_from_euler(cast(graphene_quaternion_t*)&this, e ? cast(const(graphene_euler_t)*)e._cPtr(No.Dup) : null);
@@ -178,7 +177,7 @@ struct Quaternion
         m = a #graphene_matrix_t
       Returns: the initialized quaternion
   */
-  graphene.quaternion.Quaternion initFromMatrix(graphene.matrix.Matrix m)
+  graphene.quaternion.Quaternion initFromMatrix(graphene.matrix.Matrix m) nothrow
   {
     graphene_quaternion_t* _cretval;
     _cretval = graphene_quaternion_init_from_matrix(cast(graphene_quaternion_t*)&this, m ? cast(const(graphene_matrix_t)*)m._cPtr(No.Dup) : null);
@@ -195,7 +194,7 @@ struct Quaternion
         src = a #graphene_quaternion_t
       Returns: the initialized quaternion
   */
-  graphene.quaternion.Quaternion initFromQuaternion(graphene.quaternion.Quaternion src)
+  graphene.quaternion.Quaternion initFromQuaternion(graphene.quaternion.Quaternion src) nothrow
   {
     graphene_quaternion_t* _cretval;
     _cretval = graphene_quaternion_init_from_quaternion(cast(graphene_quaternion_t*)&this, cast(const(graphene_quaternion_t)*)&src);
@@ -218,7 +217,7 @@ struct Quaternion
         radZ = rotation angle on the Z axis (roll), in radians
       Returns: the initialized quaternion
   */
-  graphene.quaternion.Quaternion initFromRadians(float radX, float radY, float radZ)
+  graphene.quaternion.Quaternion initFromRadians(float radX, float radY, float radZ) nothrow
   {
     graphene_quaternion_t* _cretval;
     _cretval = graphene_quaternion_init_from_radians(cast(graphene_quaternion_t*)&this, radX, radY, radZ);
@@ -235,7 +234,7 @@ struct Quaternion
         src = a #graphene_vec4_t
       Returns: the initialized quaternion
   */
-  graphene.quaternion.Quaternion initFromVec4(graphene.vec4.Vec4 src)
+  graphene.quaternion.Quaternion initFromVec4(graphene.vec4.Vec4 src) nothrow
   {
     graphene_quaternion_t* _cretval;
     _cretval = graphene_quaternion_init_from_vec4(cast(graphene_quaternion_t*)&this, src ? cast(const(graphene_vec4_t)*)src._cPtr(No.Dup) : null);
@@ -250,7 +249,7 @@ struct Quaternion
       transformation.
       Returns: the initialized quaternion
   */
-  graphene.quaternion.Quaternion initIdentity()
+  graphene.quaternion.Quaternion initIdentity() nothrow
   {
     graphene_quaternion_t* _cretval;
     _cretval = graphene_quaternion_init_identity(cast(graphene_quaternion_t*)&this);
@@ -268,7 +267,7 @@ struct Quaternion
         res = return location for the inverted
             quaternion
   */
-  void invert(out graphene.quaternion.Quaternion res)
+  void invert(out graphene.quaternion.Quaternion res) nothrow
   {
     graphene_quaternion_invert(cast(const(graphene_quaternion_t)*)&this, cast(graphene_quaternion_t*)&res);
   }
@@ -280,7 +279,7 @@ struct Quaternion
         b = a #graphene_quaternion_t
         res = the result of the operation
   */
-  void multiply(graphene.quaternion.Quaternion b, out graphene.quaternion.Quaternion res)
+  void multiply(graphene.quaternion.Quaternion b, out graphene.quaternion.Quaternion res) nothrow
   {
     graphene_quaternion_multiply(cast(const(graphene_quaternion_t)*)&this, cast(const(graphene_quaternion_t)*)&b, cast(graphene_quaternion_t*)&res);
   }
@@ -292,7 +291,7 @@ struct Quaternion
         res = return location for the normalized
             quaternion
   */
-  void normalize(out graphene.quaternion.Quaternion res)
+  void normalize(out graphene.quaternion.Quaternion res) nothrow
   {
     graphene_quaternion_normalize(cast(const(graphene_quaternion_t)*)&this, cast(graphene_quaternion_t*)&res);
   }
@@ -305,7 +304,7 @@ struct Quaternion
         factor = a scaling factor
         res = the result of the operation
   */
-  void scale(float factor, out graphene.quaternion.Quaternion res)
+  void scale(float factor, out graphene.quaternion.Quaternion res) nothrow
   {
     graphene_quaternion_scale(cast(const(graphene_quaternion_t)*)&this, factor, cast(graphene_quaternion_t*)&res);
   }
@@ -321,7 +320,7 @@ struct Quaternion
         res = return location for the interpolated
             quaternion
   */
-  void slerp(graphene.quaternion.Quaternion b, float factor, out graphene.quaternion.Quaternion res)
+  void slerp(graphene.quaternion.Quaternion b, float factor, out graphene.quaternion.Quaternion res) nothrow
   {
     graphene_quaternion_slerp(cast(const(graphene_quaternion_t)*)&this, cast(const(graphene_quaternion_t)*)&b, factor, cast(graphene_quaternion_t*)&res);
   }
@@ -333,7 +332,7 @@ struct Quaternion
         angle = return location for the angle, in degrees
         axis = return location for the rotation axis
   */
-  void toAngleVec3(out float angle, out graphene.vec3.Vec3 axis)
+  void toAngleVec3(out float angle, out graphene.vec3.Vec3 axis) nothrow
   {
     graphene_vec3_t _axis;
     graphene_quaternion_to_angle_vec3(cast(const(graphene_quaternion_t)*)&this, cast(float*)&angle, &_axis);
@@ -353,7 +352,7 @@ struct Quaternion
         degZ = return location for the rotation angle on
             the Z axis (roll), in degrees
   */
-  void toAngles(out float degX, out float degY, out float degZ)
+  void toAngles(out float degX, out float degY, out float degZ) nothrow
   {
     graphene_quaternion_to_angles(cast(const(graphene_quaternion_t)*)&this, cast(float*)&degX, cast(float*)&degY, cast(float*)&degZ);
   }
@@ -365,7 +364,7 @@ struct Quaternion
       Params:
         m = a #graphene_matrix_t
   */
-  void toMatrix(out graphene.matrix.Matrix m)
+  void toMatrix(out graphene.matrix.Matrix m) nothrow
   {
     graphene_matrix_t _m;
     graphene_quaternion_to_matrix(cast(const(graphene_quaternion_t)*)&this, &_m);
@@ -385,7 +384,7 @@ struct Quaternion
         radZ = return location for the rotation angle on
             the Z axis (roll), in radians
   */
-  void toRadians(out float radX, out float radY, out float radZ)
+  void toRadians(out float radX, out float radY, out float radZ) nothrow
   {
     graphene_quaternion_to_radians(cast(const(graphene_quaternion_t)*)&this, cast(float*)&radX, cast(float*)&radY, cast(float*)&radZ);
   }
@@ -398,7 +397,7 @@ struct Quaternion
         res = return location for a
             #graphene_vec4_t
   */
-  void toVec4(out graphene.vec4.Vec4 res)
+  void toVec4(out graphene.vec4.Vec4 res) nothrow
   {
     graphene_vec4_t _res;
     graphene_quaternion_to_vec4(cast(const(graphene_quaternion_t)*)&this, &_res);

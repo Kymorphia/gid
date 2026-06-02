@@ -17,11 +17,8 @@ class RTPSourceMeta
   GstRTPSourceMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstrtp.rtpsource_meta.RTPSourceMeta");
-
     _cInstance = *cast(GstRTPSourceMeta*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class RTPSourceMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class RTPSourceMeta
       Get `meta` field.
       Returns: parent #GstMeta
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstRTPSourceMeta*)this._cPtr).meta, No.Take);
   }
@@ -47,7 +44,7 @@ class RTPSourceMeta
       Get `ssrc` field.
       Returns: the SSRC
   */
-  @property uint ssrc()
+  @property uint ssrc() nothrow
   {
     return (cast(GstRTPSourceMeta*)this._cPtr).ssrc;
   }
@@ -57,7 +54,7 @@ class RTPSourceMeta
       Params:
         propval = the SSRC
   */
-  @property void ssrc(uint propval)
+  @property void ssrc(uint propval) nothrow
   {
     (cast(GstRTPSourceMeta*)this._cPtr).ssrc = propval;
   }
@@ -66,7 +63,7 @@ class RTPSourceMeta
       Get `ssrcValid` field.
       Returns: whether @ssrc is set and valid
   */
-  @property bool ssrcValid()
+  @property bool ssrcValid() nothrow
   {
     return cast(bool)(cast(GstRTPSourceMeta*)this._cPtr).ssrcValid;
   }
@@ -76,7 +73,7 @@ class RTPSourceMeta
       Params:
         propval = whether @ssrc is set and valid
   */
-  @property void ssrcValid(bool propval)
+  @property void ssrcValid(bool propval) nothrow
   {
     (cast(GstRTPSourceMeta*)this._cPtr).ssrcValid = propval;
   }
@@ -85,7 +82,7 @@ class RTPSourceMeta
       Get `csrcCount` field.
       Returns: number of elements in @csrc
   */
-  @property uint csrcCount()
+  @property uint csrcCount() nothrow
   {
     return (cast(GstRTPSourceMeta*)this._cPtr).csrcCount;
   }
@@ -95,7 +92,7 @@ class RTPSourceMeta
       Params:
         propval = number of elements in @csrc
   */
-  @property void csrcCount(uint propval)
+  @property void csrcCount(uint propval) nothrow
   {
     (cast(GstRTPSourceMeta*)this._cPtr).csrcCount = propval;
   }
@@ -107,7 +104,7 @@ class RTPSourceMeta
         csrc = the csrcs to append
       Returns: true if all elements in csrc was added, false otherwise.
   */
-  bool appendCsrc(uint[] csrc)
+  bool appendCsrc(uint[] csrc) nothrow
   {
     bool _retval;
     uint _csrcCount;
@@ -123,7 +120,7 @@ class RTPSourceMeta
       Count the total number of RTP sources found in meta, both SSRC and CSRC.
       Returns: The number of RTP sources
   */
-  uint getSourceCount()
+  uint getSourceCount() nothrow
   {
     uint _retval;
     _retval = gst_rtp_source_meta_get_source_count(cast(const(GstRTPSourceMeta)*)this._cPtr);
@@ -137,7 +134,7 @@ class RTPSourceMeta
         ssrc = pointer to the SSRC
       Returns: true on success, false otherwise.
   */
-  bool setSsrc(out uint ssrc)
+  bool setSsrc(out uint ssrc) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtp_source_meta_set_ssrc(cast(GstRTPSourceMeta*)this._cPtr, cast(uint*)&ssrc);
@@ -145,7 +142,7 @@ class RTPSourceMeta
   }
 
   /** */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_rtp_source_meta_get_info();

@@ -13,7 +13,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libatk-1.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // Action
   GType function() c_atk_action_get_type; ///

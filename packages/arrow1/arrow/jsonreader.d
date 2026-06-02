@@ -18,26 +18,26 @@ class JSONReader : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_json_reader_get_type != &gidSymbolNotFound ? garrow_json_reader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override JSONReader self()
+  override JSONReader self() nothrow
   {
     return this;
   }
@@ -46,13 +46,13 @@ class JSONReader : gobject.object.ObjectWrap
       Get builder for [arrow.jsonreader.JSONReader]
       Returns: New builder object
   */
-  static JSONReaderGidBuilder builder()
+  static JSONReaderGidBuilder builder() nothrow
   {
     return new JSONReaderGidBuilder;
   }
 
   /** */
-  @property arrow.input_stream.InputStream input()
+  @property arrow.input_stream.InputStream input() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.input_stream.InputStream)("input");
   }
@@ -86,13 +86,13 @@ class JSONReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T input(arrow.input_stream.InputStream propval)
+  T input(arrow.input_stream.InputStream propval) nothrow
   {
     return setProperty("input", propval);
   }
 
   /** */
-  T jsonTableReader(void* propval)
+  T jsonTableReader(void* propval) nothrow
   {
     return setProperty("json-table-reader", propval);
   }
@@ -105,7 +105,7 @@ final class JSONReaderGidBuilder : JSONReaderGidBuilderImpl!JSONReaderGidBuilder
       Create object from builder.
       Returns: New object
   */
-  JSONReader build()
+  JSONReader build() nothrow
   {
     return new JSONReader(cast(void*)createGObject(JSONReader._getGType), Yes.Take);
   }

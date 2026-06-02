@@ -17,26 +17,26 @@ class ProxyControlBinding : gst.control_binding.ControlBinding
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_proxy_control_binding_get_type != &gidSymbolNotFound ? gst_proxy_control_binding_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ProxyControlBinding self()
+  override ProxyControlBinding self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class ProxyControlBinding : gst.control_binding.ControlBinding
       Get builder for [gstcontroller.proxy_control_binding.ProxyControlBinding]
       Returns: New builder object
   */
-  static ProxyControlBindingGidBuilder builder()
+  static ProxyControlBindingGidBuilder builder() nothrow
   {
     return new ProxyControlBindingGidBuilder;
   }
@@ -64,7 +64,7 @@ class ProxyControlBinding : gst.control_binding.ControlBinding
       Returns: a new #GstControlBinding that proxies the control interface between
         properties on different #GstObject's
   */
-  this(gst.object.ObjectWrap object, string propertyName, gst.object.ObjectWrap refObject, string refPropertyName)
+  this(gst.object.ObjectWrap object, string propertyName, gst.object.ObjectWrap refObject, string refPropertyName) nothrow
   {
     GstControlBinding* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
@@ -86,7 +86,7 @@ final class ProxyControlBindingGidBuilder : ProxyControlBindingGidBuilderImpl!Pr
       Create object from builder.
       Returns: New object
   */
-  ProxyControlBinding build()
+  ProxyControlBinding build() nothrow
   {
     return new ProxyControlBinding(cast(void*)createGObject(ProxyControlBinding._getGType), No.Take);
   }

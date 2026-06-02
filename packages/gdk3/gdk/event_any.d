@@ -18,11 +18,8 @@ class EventAny
   GdkEventAny _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.event_any.EventAny");
-
     _cInstance = *cast(GdkEventAny*)ptr;
 
     if (take)
@@ -30,7 +27,7 @@ class EventAny
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class EventAny
       Get `type` field.
       Returns: the type of the event.
   */
-  @property gdk.types.EventType type()
+  @property gdk.types.EventType type() nothrow
   {
     return cast(gdk.types.EventType)(cast(GdkEventAny*)this._cPtr).type;
   }
@@ -49,7 +46,7 @@ class EventAny
       Params:
         propval = the type of the event.
   */
-  @property void type(gdk.types.EventType propval)
+  @property void type(gdk.types.EventType propval) nothrow
   {
     (cast(GdkEventAny*)this._cPtr).type = cast(GdkEventType)propval;
   }
@@ -58,7 +55,7 @@ class EventAny
       Get `window` field.
       Returns: the window which received the event.
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventAny*)this._cPtr).window);
   }
@@ -68,7 +65,7 @@ class EventAny
       Params:
         propval = the window which received the event.
   */
-  @property void window(gdk.window.Window propval)
+  @property void window(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventAny*)this._cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventAny*)this._cPtr).window);
@@ -78,7 +75,7 @@ class EventAny
       Get `sendEvent` field.
       Returns: true if the event was sent explicitly.
   */
-  @property byte sendEvent()
+  @property byte sendEvent() nothrow
   {
     return (cast(GdkEventAny*)this._cPtr).sendEvent;
   }
@@ -88,7 +85,7 @@ class EventAny
       Params:
         propval = true if the event was sent explicitly.
   */
-  @property void sendEvent(byte propval)
+  @property void sendEvent(byte propval) nothrow
   {
     (cast(GdkEventAny*)this._cPtr).sendEvent = propval;
   }

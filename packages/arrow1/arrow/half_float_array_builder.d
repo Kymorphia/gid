@@ -15,26 +15,26 @@ class HalfFloatArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_half_float_array_builder_get_type != &gidSymbolNotFound ? garrow_half_float_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HalfFloatArrayBuilder self()
+  override HalfFloatArrayBuilder self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class HalfFloatArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.half_float_array_builder.HalfFloatArrayBuilder]
       Returns: New builder object
   */
-  static HalfFloatArrayBuilderGidBuilder builder()
+  static HalfFloatArrayBuilderGidBuilder builder() nothrow
   {
     return new HalfFloatArrayBuilderGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowHalfFloatArrayBuilder* _cretval;
     _cretval = garrow_half_float_array_builder_new();
@@ -113,7 +113,7 @@ final class HalfFloatArrayBuilderGidBuilder : HalfFloatArrayBuilderGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  HalfFloatArrayBuilder build()
+  HalfFloatArrayBuilder build() nothrow
   {
     return new HalfFloatArrayBuilder(cast(void*)createGObject(HalfFloatArrayBuilder._getGType), Yes.Take);
   }

@@ -34,32 +34,32 @@ class Gradient : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gradient_get_type != &gidSymbolNotFound ? gtk_gradient_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Gradient self()
+  override Gradient self() nothrow
   {
     return this;
   }
@@ -77,7 +77,7 @@ class Gradient : gobject.boxed.Boxed
   
       Deprecated: #GtkGradient is deprecated.
   */
-  static gtk.gradient.Gradient newLinear(double x0, double y0, double x1, double y1)
+  static gtk.gradient.Gradient newLinear(double x0, double y0, double x1, double y1) nothrow
   {
     GtkGradient* _cretval;
     _cretval = gtk_gradient_new_linear(x0, y0, x1, y1);
@@ -101,7 +101,7 @@ class Gradient : gobject.boxed.Boxed
   
       Deprecated: #GtkGradient is deprecated.
   */
-  static gtk.gradient.Gradient newRadial(double x0, double y0, double radius0, double x1, double y1, double radius1)
+  static gtk.gradient.Gradient newRadial(double x0, double y0, double radius0, double x1, double y1, double radius1) nothrow
   {
     GtkGradient* _cretval;
     _cretval = gtk_gradient_new_radial(x0, y0, radius0, x1, y1, radius1);
@@ -118,7 +118,7 @@ class Gradient : gobject.boxed.Boxed
   
       Deprecated: #GtkGradient is deprecated.
   */
-  void addColorStop(double offset, gtk.symbolic_color.SymbolicColor color)
+  void addColorStop(double offset, gtk.symbolic_color.SymbolicColor color) nothrow
   {
     gtk_gradient_add_color_stop(cast(GtkGradient*)this._cPtr, offset, color ? cast(GtkSymbolicColor*)color._cPtr(No.Dup) : null);
   }
@@ -137,7 +137,7 @@ class Gradient : gobject.boxed.Boxed
   
       Deprecated: #GtkGradient is deprecated.
   */
-  bool resolve(gtk.style_properties.StyleProperties props, out cairo.pattern.Pattern resolvedGradient)
+  bool resolve(gtk.style_properties.StyleProperties props, out cairo.pattern.Pattern resolvedGradient) nothrow
   {
     bool _retval;
     cairo_pattern_t* _resolvedGradient;
@@ -147,7 +147,7 @@ class Gradient : gobject.boxed.Boxed
   }
 
   /** */
-  cairo.pattern.Pattern resolveForContext(gtk.style_context.StyleContext context)
+  cairo.pattern.Pattern resolveForContext(gtk.style_context.StyleContext context) nothrow
   {
     cairo_pattern_t* _cretval;
     _cretval = gtk_gradient_resolve_for_context(cast(GtkGradient*)this._cPtr, context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null);
@@ -162,7 +162,7 @@ class Gradient : gobject.boxed.Boxed
   
       Deprecated: #GtkGradient is deprecated.
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gtk_gradient_to_string(cast(GtkGradient*)this._cPtr);

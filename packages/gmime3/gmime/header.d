@@ -18,26 +18,26 @@ class Header : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_header_get_type != &gidSymbolNotFound ? g_mime_header_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Header self()
+  override Header self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class Header : gobject.object.ObjectWrap
       Get builder for [gmime.header.Header]
       Returns: New builder object
   */
-  static HeaderGidBuilder builder()
+  static HeaderGidBuilder builder() nothrow
   {
     return new HeaderGidBuilder;
   }
@@ -61,7 +61,7 @@ class Header : gobject.object.ObjectWrap
         charset = a charset (note: unused)
       Returns: a newly allocated string containing the reformatted value.
   */
-  string formatAddrlist(gmime.format_options.FormatOptions options, string value, string charset)
+  string formatAddrlist(gmime.format_options.FormatOptions options, string value, string charset) nothrow
   {
     char* _cretval;
     const(char)* _value = value.toCString(No.Alloc);
@@ -81,7 +81,7 @@ class Header : gobject.object.ObjectWrap
         charset = a charset (note: unused)
       Returns: a newly allocated string containing the reformatted value.
   */
-  string formatContentDisposition(gmime.format_options.FormatOptions options, string value, string charset)
+  string formatContentDisposition(gmime.format_options.FormatOptions options, string value, string charset) nothrow
   {
     char* _cretval;
     const(char)* _value = value.toCString(No.Alloc);
@@ -101,7 +101,7 @@ class Header : gobject.object.ObjectWrap
         charset = a charset (note: unused)
       Returns: a newly allocated string containing the reformatted value.
   */
-  string formatContentType(gmime.format_options.FormatOptions options, string value, string charset)
+  string formatContentType(gmime.format_options.FormatOptions options, string value, string charset) nothrow
   {
     char* _cretval;
     const(char)* _value = value.toCString(No.Alloc);
@@ -121,7 +121,7 @@ class Header : gobject.object.ObjectWrap
         charset = a charset to use when encoding the value
       Returns: a newly allocated string containing the reformatted value.
   */
-  string formatDefault(gmime.format_options.FormatOptions options, string value, string charset)
+  string formatDefault(gmime.format_options.FormatOptions options, string value, string charset) nothrow
   {
     char* _cretval;
     const(char)* _value = value.toCString(No.Alloc);
@@ -141,7 +141,7 @@ class Header : gobject.object.ObjectWrap
         charset = a charset (note: unused)
       Returns: a newly allocated string containing the reformatted value.
   */
-  string formatMessageId(gmime.format_options.FormatOptions options, string value, string charset)
+  string formatMessageId(gmime.format_options.FormatOptions options, string value, string charset) nothrow
   {
     char* _cretval;
     const(char)* _value = value.toCString(No.Alloc);
@@ -161,7 +161,7 @@ class Header : gobject.object.ObjectWrap
         charset = a charset (note: unused)
       Returns: a newly allocated string containing the reformatted value.
   */
-  string formatNewsgroups(gmime.format_options.FormatOptions options, string value, string charset)
+  string formatNewsgroups(gmime.format_options.FormatOptions options, string value, string charset) nothrow
   {
     char* _cretval;
     const(char)* _value = value.toCString(No.Alloc);
@@ -181,7 +181,7 @@ class Header : gobject.object.ObjectWrap
         charset = a charset (note: unused)
       Returns: a newly allocated string containing the reformatted value.
   */
-  string formatReceived(gmime.format_options.FormatOptions options, string value, string charset)
+  string formatReceived(gmime.format_options.FormatOptions options, string value, string charset) nothrow
   {
     char* _cretval;
     const(char)* _value = value.toCString(No.Alloc);
@@ -201,7 +201,7 @@ class Header : gobject.object.ObjectWrap
         charset = a charset (note: unused)
       Returns: a newly allocated string containing the reformatted value.
   */
-  string formatReferences(gmime.format_options.FormatOptions options, string value, string charset)
+  string formatReferences(gmime.format_options.FormatOptions options, string value, string charset) nothrow
   {
     char* _cretval;
     const(char)* _value = value.toCString(No.Alloc);
@@ -215,7 +215,7 @@ class Header : gobject.object.ObjectWrap
       Gets the header's name.
       Returns: the header name or null if invalid.
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_header_get_name(cast(GMimeHeader*)this._cPtr);
@@ -227,7 +227,7 @@ class Header : gobject.object.ObjectWrap
       Gets the header's stream offset if known.
       Returns: the header offset or %-1 if unknown.
   */
-  long getOffset()
+  long getOffset() nothrow
   {
     long _retval;
     _retval = g_mime_header_get_offset(cast(GMimeHeader*)this._cPtr);
@@ -242,7 +242,7 @@ class Header : gobject.object.ObjectWrap
       name, such as: "Subject : this is the subject\r\n".
       Returns: the raw header name.
   */
-  string getRawName()
+  string getRawName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_header_get_raw_name(cast(GMimeHeader*)this._cPtr);
@@ -254,7 +254,7 @@ class Header : gobject.object.ObjectWrap
       Gets the header's raw (folded) value.
       Returns: the header value or null if invalid.
   */
-  string getRawValue()
+  string getRawValue() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_header_get_raw_value(cast(GMimeHeader*)this._cPtr);
@@ -266,7 +266,7 @@ class Header : gobject.object.ObjectWrap
       Gets the header's unfolded value.
       Returns: the header's decoded value or null if invalid.
   */
-  string getValue()
+  string getValue() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_header_get_value(cast(GMimeHeader*)this._cPtr);
@@ -280,7 +280,7 @@ class Header : gobject.object.ObjectWrap
       Params:
         rawValue = the raw value
   */
-  void setRawValue(string rawValue)
+  void setRawValue(string rawValue) nothrow
   {
     const(char)* _rawValue = rawValue.toCString(No.Alloc);
     g_mime_header_set_raw_value(cast(GMimeHeader*)this._cPtr, _rawValue);
@@ -294,7 +294,7 @@ class Header : gobject.object.ObjectWrap
         value = the new header value
         charset = a charset
   */
-  void setValue(gmime.format_options.FormatOptions options, string value, string charset = null)
+  void setValue(gmime.format_options.FormatOptions options, string value, string charset = null) nothrow
   {
     const(char)* _value = value.toCString(No.Alloc);
     const(char)* _charset = charset.toCString(No.Alloc);
@@ -309,7 +309,7 @@ class Header : gobject.object.ObjectWrap
         stream = a #GMimeStream
       Returns: the number of bytes written, or %-1 on fail.
   */
-  ptrdiff_t writeToStream(gmime.format_options.FormatOptions options, gmime.stream.Stream stream)
+  ptrdiff_t writeToStream(gmime.format_options.FormatOptions options, gmime.stream.Stream stream) nothrow
   {
     ptrdiff_t _retval;
     _retval = g_mime_header_write_to_stream(cast(GMimeHeader*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, stream ? cast(GMimeStream*)stream._cPtr(No.Dup) : null);
@@ -329,7 +329,7 @@ final class HeaderGidBuilder : HeaderGidBuilderImpl!HeaderGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Header build()
+  Header build() nothrow
   {
     return new Header(cast(void*)createGObject(Header._getGType), No.Take);
   }

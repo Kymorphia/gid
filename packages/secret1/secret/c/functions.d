@@ -14,7 +14,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libsecret-1.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // Backend
   GType function() c_secret_backend_get_type; ///

@@ -17,26 +17,26 @@ class ScriptWorld : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_script_world_get_type != &gidSymbolNotFound ? webkit_script_world_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ScriptWorld self()
+  override ScriptWorld self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class ScriptWorld : gobject.object.ObjectWrap
       Get builder for [webkitwebprocessextension.script_world.ScriptWorld]
       Returns: New builder object
   */
-  static ScriptWorldGidBuilder builder()
+  static ScriptWorldGidBuilder builder() nothrow
   {
     return new ScriptWorldGidBuilder;
   }
@@ -61,7 +61,7 @@ class ScriptWorld : gobject.object.ObjectWrap
       for a given #WebKitFrame with webkit_frame_get_javascript_context_for_script_world().
       Returns: a new isolated #WebKitScriptWorld
   */
-  this()
+  this() nothrow
   {
     WebKitScriptWorld* _cretval;
     _cretval = webkit_script_world_new();
@@ -79,7 +79,7 @@ class ScriptWorld : gobject.object.ObjectWrap
         name = a name for the script world
       Returns: a new isolated #WebKitScriptWorld
   */
-  static webkitwebprocessextension.script_world.ScriptWorld newWithName(string name)
+  static webkitwebprocessextension.script_world.ScriptWorld newWithName(string name) nothrow
   {
     WebKitScriptWorld* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -95,7 +95,7 @@ class ScriptWorld : gobject.object.ObjectWrap
       for a given #WebKitFrame with webkit_frame_get_javascript_context_for_script_world().
       Returns: the default #WebKitScriptWorld
   */
-  static webkitwebprocessextension.script_world.ScriptWorld getDefault()
+  static webkitwebprocessextension.script_world.ScriptWorld getDefault() nothrow
   {
     WebKitScriptWorld* _cretval;
     _cretval = webkit_script_world_get_default();
@@ -107,7 +107,7 @@ class ScriptWorld : gobject.object.ObjectWrap
       Get the name of a #WebKitScriptWorld.
       Returns: the name of world
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_script_world_get_name(cast(WebKitScriptWorld*)this._cPtr);
@@ -138,7 +138,7 @@ class ScriptWorld : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWindowObjectCleared(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWindowObjectCleared(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkitwebprocessextension.web_page.WebPage)))
@@ -146,7 +146,7 @@ class ScriptWorld : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkitwebprocessextension.script_world.ScriptWorld)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -161,7 +161,14 @@ class ScriptWorld : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkitwebprocessextension.script_world.ScriptWorld.windowObjectCleared");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -181,7 +188,7 @@ final class ScriptWorldGidBuilder : ScriptWorldGidBuilderImpl!ScriptWorldGidBuil
       Create object from builder.
       Returns: New object
   */
-  ScriptWorld build()
+  ScriptWorld build() nothrow
   {
     return new ScriptWorld(cast(void*)createGObject(ScriptWorld._getGType), Yes.Take);
   }

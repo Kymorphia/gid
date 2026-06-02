@@ -21,26 +21,26 @@ class NavigationPolicyDecision : webkit.policy_decision.PolicyDecision
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_navigation_policy_decision_get_type != &gidSymbolNotFound ? webkit_navigation_policy_decision_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NavigationPolicyDecision self()
+  override NavigationPolicyDecision self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class NavigationPolicyDecision : webkit.policy_decision.PolicyDecision
       Get builder for [webkit.navigation_policy_decision.NavigationPolicyDecision]
       Returns: New builder object
   */
-  static NavigationPolicyDecisionGidBuilder builder()
+  static NavigationPolicyDecisionGidBuilder builder() nothrow
   {
     return new NavigationPolicyDecisionGidBuilder;
   }
@@ -58,7 +58,7 @@ class NavigationPolicyDecision : webkit.policy_decision.PolicyDecision
       Get `navigationAction` property.
       Returns: The #WebKitNavigationAction that triggered this policy decision.
   */
-  @property webkit.navigation_action.NavigationAction navigationAction()
+  @property webkit.navigation_action.NavigationAction navigationAction() nothrow
   {
     return getNavigationAction();
   }
@@ -67,7 +67,7 @@ class NavigationPolicyDecision : webkit.policy_decision.PolicyDecision
       Gets the value of the #WebKitNavigationPolicyDecision:navigation-action property.
       Returns: The #WebKitNavigationAction triggering this policy decision.
   */
-  webkit.navigation_action.NavigationAction getNavigationAction()
+  webkit.navigation_action.NavigationAction getNavigationAction() nothrow
   {
     WebKitNavigationAction* _cretval;
     _cretval = webkit_navigation_policy_decision_get_navigation_action(cast(WebKitNavigationPolicyDecision*)this._cPtr);
@@ -88,7 +88,7 @@ final class NavigationPolicyDecisionGidBuilder : NavigationPolicyDecisionGidBuil
       Create object from builder.
       Returns: New object
   */
-  NavigationPolicyDecision build()
+  NavigationPolicyDecision build() nothrow
   {
     return new NavigationPolicyDecision(cast(void*)createGObject(NavigationPolicyDecision._getGType), No.Take);
   }

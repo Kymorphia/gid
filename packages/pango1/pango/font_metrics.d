@@ -56,23 +56,22 @@ struct FontMetrics
   int strikethroughThickness;
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_font_metrics_get_type != &gidSymbolNotFound ? pango_font_metrics_get_type() : cast(GType)0;
   }
 
   /** */
-  @property GType _gType()
+  @property GType _gType() nothrow
   {
     return _getGType();
   }
 
-  void* boxCopy()
+  void* boxCopy() nothrow
   {
     import gobject.c.functions : g_boxed_copy;
-    return g_boxed_copy(_gType,
-        cast(void*)&this);
+    return g_boxed_copy(_gType, cast(void*)&this);
   }
 
   /**
@@ -83,7 +82,7 @@ struct FontMetrics
       text will be wider and narrower than this.
       Returns: the character width, in Pango units.
   */
-  int getApproximateCharWidth()
+  int getApproximateCharWidth() nothrow
   {
     int _retval;
     _retval = pango_font_metrics_get_approximate_char_width(cast(PangoFontMetrics*)&this);
@@ -100,7 +99,7 @@ struct FontMetrics
       [pango.font_metrics.FontMetrics.getApproximateCharWidth] for digits.
       Returns: the digit width, in Pango units.
   */
-  int getApproximateDigitWidth()
+  int getApproximateDigitWidth() nothrow
   {
     int _retval;
     _retval = pango_font_metrics_get_approximate_digit_width(cast(PangoFontMetrics*)&this);
@@ -116,7 +115,7 @@ struct FontMetrics
       figure where the ink will be.)
       Returns: the ascent, in Pango units.
   */
-  int getAscent()
+  int getAscent() nothrow
   {
     int _retval;
     _retval = pango_font_metrics_get_ascent(cast(PangoFontMetrics*)&this);
@@ -132,7 +131,7 @@ struct FontMetrics
       to figure where the ink will be.)
       Returns: the descent, in Pango units.
   */
-  int getDescent()
+  int getDescent() nothrow
   {
     int _retval;
     _retval = pango_font_metrics_get_descent(cast(PangoFontMetrics*)&this);
@@ -148,7 +147,7 @@ struct FontMetrics
       If the line height is not available, 0 is returned.
       Returns: the height, in Pango units
   */
-  int getHeight()
+  int getHeight() nothrow
   {
     int _retval;
     _retval = pango_font_metrics_get_height(cast(PangoFontMetrics*)&this);
@@ -162,7 +161,7 @@ struct FontMetrics
       baseline of the top of the strikethrough.
       Returns: the suggested strikethrough position, in Pango units.
   */
-  int getStrikethroughPosition()
+  int getStrikethroughPosition() nothrow
   {
     int _retval;
     _retval = pango_font_metrics_get_strikethrough_position(cast(PangoFontMetrics*)&this);
@@ -173,7 +172,7 @@ struct FontMetrics
       Gets the suggested thickness to draw for the strikethrough.
       Returns: the suggested strikethrough thickness, in Pango units.
   */
-  int getStrikethroughThickness()
+  int getStrikethroughThickness() nothrow
   {
     int _retval;
     _retval = pango_font_metrics_get_strikethrough_thickness(cast(PangoFontMetrics*)&this);
@@ -188,7 +187,7 @@ struct FontMetrics
       the baseline, this value is typically negative.
       Returns: the suggested underline position, in Pango units.
   */
-  int getUnderlinePosition()
+  int getUnderlinePosition() nothrow
   {
     int _retval;
     _retval = pango_font_metrics_get_underline_position(cast(PangoFontMetrics*)&this);
@@ -199,7 +198,7 @@ struct FontMetrics
       Gets the suggested thickness to draw for the underline.
       Returns: the suggested underline thickness, in Pango units.
   */
-  int getUnderlineThickness()
+  int getUnderlineThickness() nothrow
   {
     int _retval;
     _retval = pango_font_metrics_get_underline_thickness(cast(PangoFontMetrics*)&this);

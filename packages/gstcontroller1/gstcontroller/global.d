@@ -14,7 +14,7 @@ import gstcontroller.types;
     Params:
       self = the #GstTimedValueControlSource
 */
-void timedValueControlInvalidateCache(gstcontroller.timed_value_control_source.TimedValueControlSource self)
+void timedValueControlInvalidateCache(gstcontroller.timed_value_control_source.TimedValueControlSource self) nothrow
 {
   gst_timed_value_control_invalidate_cache(self ? cast(GstTimedValueControlSource*)self._cPtr(No.Dup) : null);
 }

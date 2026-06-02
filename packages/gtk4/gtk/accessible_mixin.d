@@ -52,7 +52,7 @@ template AccessibleT()
         
         The accessible role cannot be changed once set.
   */
-  @property gtk.types.AccessibleRole accessibleRole()
+  @property gtk.types.AccessibleRole accessibleRole() nothrow
   {
     return getAccessibleRole();
   }
@@ -64,7 +64,7 @@ template AccessibleT()
           
           The accessible role cannot be changed once set.
   */
-  @property void accessibleRole(gtk.types.AccessibleRole propval)
+  @property void accessibleRole(gtk.types.AccessibleRole propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.AccessibleRole)("accessible-role", propval);
   }
@@ -84,7 +84,7 @@ template AccessibleT()
         message = the string to announce
         priority = the priority of the announcement
   */
-  override void announce(string message, gtk.types.AccessibleAnnouncementPriority priority)
+  override void announce(string message, gtk.types.AccessibleAnnouncementPriority priority) nothrow
   {
     const(char)* _message = message.toCString(No.Alloc);
     gtk_accessible_announce(cast(GtkAccessible*)this._cPtr, _message, priority);
@@ -96,7 +96,7 @@ template AccessibleT()
       This function returns `NULL` for top level widgets.
       Returns: the accessible parent
   */
-  override gtk.accessible.Accessible getAccessibleParent()
+  override gtk.accessible.Accessible getAccessibleParent() nothrow
   {
     GtkAccessible* _cretval;
     _cretval = gtk_accessible_get_accessible_parent(cast(GtkAccessible*)this._cPtr);
@@ -108,7 +108,7 @@ template AccessibleT()
       Retrieves the accessible role of an accessible object.
       Returns: the accessible role
   */
-  override gtk.types.AccessibleRole getAccessibleRole()
+  override gtk.types.AccessibleRole getAccessibleRole() nothrow
   {
     GtkAccessibleRole _cretval;
     _cretval = gtk_accessible_get_accessible_role(cast(GtkAccessible*)this._cPtr);
@@ -120,7 +120,7 @@ template AccessibleT()
       Retrieves the accessible implementation for the given [gtk.accessible.Accessible].
       Returns: the accessible implementation object
   */
-  override gtk.atcontext.ATContext getAtContext()
+  override gtk.atcontext.ATContext getAtContext() nothrow
   {
     GtkATContext* _cretval;
     _cretval = gtk_accessible_get_at_context(cast(GtkAccessible*)this._cPtr);
@@ -142,7 +142,7 @@ template AccessibleT()
         height = the height of the accessible object
       Returns: true if the bounds are valid, and false otherwise
   */
-  override bool getBounds(out int x, out int y, out int width, out int height)
+  override bool getBounds(out int x, out int y, out int width, out int height) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_accessible_get_bounds(cast(GtkAccessible*)this._cPtr, cast(int*)&x, cast(int*)&y, cast(int*)&width, cast(int*)&height);
@@ -153,7 +153,7 @@ template AccessibleT()
       Retrieves the first accessible child of an accessible object.
       Returns: the first accessible child
   */
-  override gtk.accessible.Accessible getFirstAccessibleChild()
+  override gtk.accessible.Accessible getFirstAccessibleChild() nothrow
   {
     GtkAccessible* _cretval;
     _cretval = gtk_accessible_get_first_accessible_child(cast(GtkAccessible*)this._cPtr);
@@ -165,7 +165,7 @@ template AccessibleT()
       Retrieves the next accessible sibling of an accessible object
       Returns: the next accessible sibling
   */
-  override gtk.accessible.Accessible getNextAccessibleSibling()
+  override gtk.accessible.Accessible getNextAccessibleSibling() nothrow
   {
     GtkAccessible* _cretval;
     _cretval = gtk_accessible_get_next_accessible_sibling(cast(GtkAccessible*)this._cPtr);
@@ -186,7 +186,7 @@ template AccessibleT()
         state = platform state to query
       Returns: the value of state for the accessible
   */
-  override bool getPlatformState(gtk.types.AccessiblePlatformState state)
+  override bool getPlatformState(gtk.types.AccessiblePlatformState state) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_accessible_get_platform_state(cast(GtkAccessible*)this._cPtr, state);
@@ -199,7 +199,7 @@ template AccessibleT()
       Params:
         property = a [gtk.types.AccessibleProperty]
   */
-  override void resetProperty(gtk.types.AccessibleProperty property)
+  override void resetProperty(gtk.types.AccessibleProperty property) nothrow
   {
     gtk_accessible_reset_property(cast(GtkAccessible*)this._cPtr, property);
   }
@@ -210,7 +210,7 @@ template AccessibleT()
       Params:
         relation = a [gtk.types.AccessibleRelation]
   */
-  override void resetRelation(gtk.types.AccessibleRelation relation)
+  override void resetRelation(gtk.types.AccessibleRelation relation) nothrow
   {
     gtk_accessible_reset_relation(cast(GtkAccessible*)this._cPtr, relation);
   }
@@ -221,7 +221,7 @@ template AccessibleT()
       Params:
         state = a [gtk.types.AccessibleState]
   */
-  override void resetState(gtk.types.AccessibleState state)
+  override void resetState(gtk.types.AccessibleState state) nothrow
   {
     gtk_accessible_reset_state(cast(GtkAccessible*)this._cPtr, state);
   }
@@ -241,7 +241,7 @@ template AccessibleT()
         parent = the parent accessible object
         nextSibling = the sibling accessible object
   */
-  override void setAccessibleParent(gtk.accessible.Accessible parent = null, gtk.accessible.Accessible nextSibling = null)
+  override void setAccessibleParent(gtk.accessible.Accessible parent = null, gtk.accessible.Accessible nextSibling = null) nothrow
   {
     gtk_accessible_set_accessible_parent(cast(GtkAccessible*)this._cPtr, parent ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)parent)._cPtr(No.Dup) : null, nextSibling ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)nextSibling)._cPtr(No.Dup) : null);
   }
@@ -255,7 +255,7 @@ template AccessibleT()
       Params:
         newSibling = the new next accessible sibling to set
   */
-  override void updateNextAccessibleSibling(gtk.accessible.Accessible newSibling = null)
+  override void updateNextAccessibleSibling(gtk.accessible.Accessible newSibling = null) nothrow
   {
     gtk_accessible_update_next_accessible_sibling(cast(GtkAccessible*)this._cPtr, newSibling ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)newSibling)._cPtr(No.Dup) : null);
   }
@@ -272,7 +272,7 @@ template AccessibleT()
         properties = an array of [gtk.types.AccessibleProperty]
         values = an array of `GValues`, one for each property
   */
-  override void updateProperty(gtk.types.AccessibleProperty[] properties, gobject.value.Value[] values)
+  override void updateProperty(gtk.types.AccessibleProperty[] properties, gobject.value.Value[] values) nothrow
   {
     int _nProperties;
     if (properties)
@@ -302,7 +302,7 @@ template AccessibleT()
         relations = an array of [gtk.types.AccessibleRelation]
         values = an array of `GValues`, one for each relation
   */
-  override void updateRelation(gtk.types.AccessibleRelation[] relations, gobject.value.Value[] values)
+  override void updateRelation(gtk.types.AccessibleRelation[] relations, gobject.value.Value[] values) nothrow
   {
     int _nRelations;
     if (relations)
@@ -332,7 +332,7 @@ template AccessibleT()
         states = an array of [gtk.types.AccessibleState]
         values = an array of `GValues`, one for each state
   */
-  override void updateState(gtk.types.AccessibleState[] states, gobject.value.Value[] values)
+  override void updateState(gtk.types.AccessibleState[] states, gobject.value.Value[] values) nothrow
   {
     int _nStates;
     if (states)
@@ -363,7 +363,7 @@ template AccessibleGidBuilderT()
           The accessible role cannot be changed once set.
       Returns: Builder instance for fluent chaining
   */
-  T accessibleRole(gtk.types.AccessibleRole propval)
+  T accessibleRole(gtk.types.AccessibleRole propval) nothrow
   {
     return setProperty("accessible-role", propval);
   }

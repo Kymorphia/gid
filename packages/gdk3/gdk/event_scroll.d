@@ -24,11 +24,8 @@ class EventScroll
   GdkEventScroll _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.event_scroll.EventScroll");
-
     _cInstance = *cast(GdkEventScroll*)ptr;
 
     if (take)
@@ -36,7 +33,7 @@ class EventScroll
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -45,7 +42,7 @@ class EventScroll
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.Scroll]).
   */
-  @property gdk.types.EventType type()
+  @property gdk.types.EventType type() nothrow
   {
     return cast(gdk.types.EventType)(cast(GdkEventScroll*)this._cPtr).type;
   }
@@ -55,7 +52,7 @@ class EventScroll
       Params:
         propval = the type of the event ([gdk.types.EventType.Scroll]).
   */
-  @property void type(gdk.types.EventType propval)
+  @property void type(gdk.types.EventType propval) nothrow
   {
     (cast(GdkEventScroll*)this._cPtr).type = cast(GdkEventType)propval;
   }
@@ -64,7 +61,7 @@ class EventScroll
       Get `window` field.
       Returns: the window which received the event.
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventScroll*)this._cPtr).window);
   }
@@ -74,7 +71,7 @@ class EventScroll
       Params:
         propval = the window which received the event.
   */
-  @property void window(gdk.window.Window propval)
+  @property void window(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventScroll*)this._cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventScroll*)this._cPtr).window);
@@ -84,7 +81,7 @@ class EventScroll
       Get `sendEvent` field.
       Returns: true if the event was sent explicitly.
   */
-  @property byte sendEvent()
+  @property byte sendEvent() nothrow
   {
     return (cast(GdkEventScroll*)this._cPtr).sendEvent;
   }
@@ -94,7 +91,7 @@ class EventScroll
       Params:
         propval = true if the event was sent explicitly.
   */
-  @property void sendEvent(byte propval)
+  @property void sendEvent(byte propval) nothrow
   {
     (cast(GdkEventScroll*)this._cPtr).sendEvent = propval;
   }
@@ -103,7 +100,7 @@ class EventScroll
       Get `time` field.
       Returns: the time of the event in milliseconds.
   */
-  @property uint time()
+  @property uint time() nothrow
   {
     return (cast(GdkEventScroll*)this._cPtr).time;
   }
@@ -113,7 +110,7 @@ class EventScroll
       Params:
         propval = the time of the event in milliseconds.
   */
-  @property void time(uint propval)
+  @property void time(uint propval) nothrow
   {
     (cast(GdkEventScroll*)this._cPtr).time = propval;
   }
@@ -122,7 +119,7 @@ class EventScroll
       Get `x` field.
       Returns: the x coordinate of the pointer relative to the window.
   */
-  @property double x()
+  @property double x() nothrow
   {
     return (cast(GdkEventScroll*)this._cPtr).x;
   }
@@ -132,7 +129,7 @@ class EventScroll
       Params:
         propval = the x coordinate of the pointer relative to the window.
   */
-  @property void x(double propval)
+  @property void x(double propval) nothrow
   {
     (cast(GdkEventScroll*)this._cPtr).x = propval;
   }
@@ -141,7 +138,7 @@ class EventScroll
       Get `y` field.
       Returns: the y coordinate of the pointer relative to the window.
   */
-  @property double y()
+  @property double y() nothrow
   {
     return (cast(GdkEventScroll*)this._cPtr).y;
   }
@@ -151,7 +148,7 @@ class EventScroll
       Params:
         propval = the y coordinate of the pointer relative to the window.
   */
-  @property void y(double propval)
+  @property void y(double propval) nothrow
   {
     (cast(GdkEventScroll*)this._cPtr).y = propval;
   }
@@ -162,7 +159,7 @@ class EventScroll
           the modifier keys (e.g. Control, Shift and Alt) and the pointer
           buttons. See #GdkModifierType.
   */
-  @property gdk.types.ModifierType state()
+  @property gdk.types.ModifierType state() nothrow
   {
     return cast(gdk.types.ModifierType)(cast(GdkEventScroll*)this._cPtr).state;
   }
@@ -174,7 +171,7 @@ class EventScroll
             the modifier keys (e.g. Control, Shift and Alt) and the pointer
             buttons. See #GdkModifierType.
   */
-  @property void state(gdk.types.ModifierType propval)
+  @property void state(gdk.types.ModifierType propval) nothrow
   {
     (cast(GdkEventScroll*)this._cPtr).state = cast(GdkModifierType)propval;
   }
@@ -185,7 +182,7 @@ class EventScroll
           [gdk.types.ScrollDirection.Down], [gdk.types.ScrollDirection.Left], [gdk.types.ScrollDirection.Right] or
           [gdk.types.ScrollDirection.Smooth]).
   */
-  @property gdk.types.ScrollDirection direction()
+  @property gdk.types.ScrollDirection direction() nothrow
   {
     return cast(gdk.types.ScrollDirection)(cast(GdkEventScroll*)this._cPtr).direction;
   }
@@ -197,7 +194,7 @@ class EventScroll
             [gdk.types.ScrollDirection.Down], [gdk.types.ScrollDirection.Left], [gdk.types.ScrollDirection.Right] or
             [gdk.types.ScrollDirection.Smooth]).
   */
-  @property void direction(gdk.types.ScrollDirection propval)
+  @property void direction(gdk.types.ScrollDirection propval) nothrow
   {
     (cast(GdkEventScroll*)this._cPtr).direction = cast(GdkScrollDirection)propval;
   }
@@ -207,7 +204,7 @@ class EventScroll
       Returns: the master device that the event originated from. Use
         [gdk.event.Event.getSourceDevice] to get the slave device.
   */
-  @property gdk.device.Device device()
+  @property gdk.device.Device device() nothrow
   {
     return cToD!(gdk.device.Device)(cast(void*)(cast(GdkEventScroll*)this._cPtr).device);
   }
@@ -218,7 +215,7 @@ class EventScroll
         propval = the master device that the event originated from. Use
           [gdk.event.Event.getSourceDevice] to get the slave device.
   */
-  @property void device(gdk.device.Device propval)
+  @property void device(gdk.device.Device propval) nothrow
   {
     cValueFree!(gdk.device.Device)(cast(void*)(cast(GdkEventScroll*)this._cPtr).device);
     dToC(propval, cast(void*)&(cast(GdkEventScroll*)this._cPtr).device);
@@ -229,7 +226,7 @@ class EventScroll
       Returns: the x coordinate of the pointer relative to the root of the
           screen.
   */
-  @property double xRoot()
+  @property double xRoot() nothrow
   {
     return (cast(GdkEventScroll*)this._cPtr).xRoot;
   }
@@ -240,7 +237,7 @@ class EventScroll
         propval = the x coordinate of the pointer relative to the root of the
             screen.
   */
-  @property void xRoot(double propval)
+  @property void xRoot(double propval) nothrow
   {
     (cast(GdkEventScroll*)this._cPtr).xRoot = propval;
   }
@@ -250,7 +247,7 @@ class EventScroll
       Returns: the y coordinate of the pointer relative to the root of the
           screen.
   */
-  @property double yRoot()
+  @property double yRoot() nothrow
   {
     return (cast(GdkEventScroll*)this._cPtr).yRoot;
   }
@@ -261,7 +258,7 @@ class EventScroll
         propval = the y coordinate of the pointer relative to the root of the
             screen.
   */
-  @property void yRoot(double propval)
+  @property void yRoot(double propval) nothrow
   {
     (cast(GdkEventScroll*)this._cPtr).yRoot = propval;
   }
@@ -270,7 +267,7 @@ class EventScroll
       Get `deltaX` field.
       Returns: the x coordinate of the scroll delta
   */
-  @property double deltaX()
+  @property double deltaX() nothrow
   {
     return (cast(GdkEventScroll*)this._cPtr).deltaX;
   }
@@ -280,7 +277,7 @@ class EventScroll
       Params:
         propval = the x coordinate of the scroll delta
   */
-  @property void deltaX(double propval)
+  @property void deltaX(double propval) nothrow
   {
     (cast(GdkEventScroll*)this._cPtr).deltaX = propval;
   }
@@ -289,7 +286,7 @@ class EventScroll
       Get `deltaY` field.
       Returns: the y coordinate of the scroll delta
   */
-  @property double deltaY()
+  @property double deltaY() nothrow
   {
     return (cast(GdkEventScroll*)this._cPtr).deltaY;
   }
@@ -299,19 +296,19 @@ class EventScroll
       Params:
         propval = the y coordinate of the scroll delta
   */
-  @property void deltaY(double propval)
+  @property void deltaY(double propval) nothrow
   {
     (cast(GdkEventScroll*)this._cPtr).deltaY = propval;
   }
 
   /** */
-  @property uint isStop()
+  @property uint isStop() nothrow
   {
     return (cast(GdkEventScroll*)this._cPtr).isStop;
   }
 
   /** */
-  @property void isStop(uint propval)
+  @property void isStop(uint propval) nothrow
   {
     (cast(GdkEventScroll*)this._cPtr).isStop = propval;
   }

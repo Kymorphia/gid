@@ -20,11 +20,8 @@ class ByteReader
   GstByteReader _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstbase.byte_reader.ByteReader");
-
     _cInstance = *cast(GstByteReader*)ptr;
 
     if (take)
@@ -32,7 +29,7 @@ class ByteReader
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -41,7 +38,7 @@ class ByteReader
       Get `size` field.
       Returns: Size of @data in bytes
   */
-  @property uint size()
+  @property uint size() nothrow
   {
     return (cast(GstByteReader*)this._cPtr).size;
   }
@@ -51,7 +48,7 @@ class ByteReader
       Params:
         propval = Size of @data in bytes
   */
-  @property void size(uint propval)
+  @property void size(uint propval) nothrow
   {
     (cast(GstByteReader*)this._cPtr).size = propval;
   }
@@ -60,7 +57,7 @@ class ByteReader
       Get `byte_` field.
       Returns: Current byte position
   */
-  @property uint byte_()
+  @property uint byte_() nothrow
   {
     return (cast(GstByteReader*)this._cPtr).byte_;
   }
@@ -70,7 +67,7 @@ class ByteReader
       Params:
         propval = Current byte position
   */
-  @property void byte_(uint propval)
+  @property void byte_(uint propval) nothrow
   {
     (cast(GstByteReader*)this._cPtr).byte_ = propval;
   }
@@ -97,7 +94,7 @@ class ByteReader
       Returns: true if a string could be read, false otherwise. The
             string put into str must be freed with [glib.global.gfree] when no longer needed.
   */
-  bool dupStringUtf16(out ushort[] str)
+  bool dupStringUtf16(out ushort[] str) nothrow
   {
     bool _retval;
     ushort* _str;
@@ -138,7 +135,7 @@ class ByteReader
       Returns: true if a string could be read, false otherwise. The
             string put into str must be freed with [glib.global.gfree] when no longer needed.
   */
-  bool dupStringUtf32(out uint[] str)
+  bool dupStringUtf32(out uint[] str) nothrow
   {
     bool _retval;
     uint* _str;
@@ -173,7 +170,7 @@ class ByteReader
       Returns: true if a string could be read into str, false otherwise. The
             string put into str must be freed with [glib.global.gfree] when no longer needed.
   */
-  bool dupStringUtf8(out string str)
+  bool dupStringUtf8(out string str) nothrow
   {
     bool _retval;
     char* _str;
@@ -190,7 +187,7 @@ class ByteReader
         val = Pointer to a #gfloat to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getFloat32Be(out float val)
+  bool getFloat32Be(out float val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_float32_be(cast(GstByteReader*)this._cPtr, cast(float*)&val);
@@ -205,7 +202,7 @@ class ByteReader
         val = Pointer to a #gfloat to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getFloat32Le(out float val)
+  bool getFloat32Le(out float val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_float32_le(cast(GstByteReader*)this._cPtr, cast(float*)&val);
@@ -220,7 +217,7 @@ class ByteReader
         val = Pointer to a #gdouble to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getFloat64Be(out double val)
+  bool getFloat64Be(out double val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_float64_be(cast(GstByteReader*)this._cPtr, cast(double*)&val);
@@ -235,7 +232,7 @@ class ByteReader
         val = Pointer to a #gdouble to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getFloat64Le(out double val)
+  bool getFloat64Le(out double val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_float64_le(cast(GstByteReader*)this._cPtr, cast(double*)&val);
@@ -250,7 +247,7 @@ class ByteReader
         val = Pointer to a #gint16 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getInt16Be(out short val)
+  bool getInt16Be(out short val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_int16_be(cast(GstByteReader*)this._cPtr, cast(short*)&val);
@@ -265,7 +262,7 @@ class ByteReader
         val = Pointer to a #gint16 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getInt16Le(out short val)
+  bool getInt16Le(out short val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_int16_le(cast(GstByteReader*)this._cPtr, cast(short*)&val);
@@ -280,7 +277,7 @@ class ByteReader
         val = Pointer to a #gint32 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getInt24Be(out int val)
+  bool getInt24Be(out int val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_int24_be(cast(GstByteReader*)this._cPtr, cast(int*)&val);
@@ -295,7 +292,7 @@ class ByteReader
         val = Pointer to a #gint32 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getInt24Le(out int val)
+  bool getInt24Le(out int val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_int24_le(cast(GstByteReader*)this._cPtr, cast(int*)&val);
@@ -310,7 +307,7 @@ class ByteReader
         val = Pointer to a #gint32 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getInt32Be(out int val)
+  bool getInt32Be(out int val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_int32_be(cast(GstByteReader*)this._cPtr, cast(int*)&val);
@@ -325,7 +322,7 @@ class ByteReader
         val = Pointer to a #gint32 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getInt32Le(out int val)
+  bool getInt32Le(out int val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_int32_le(cast(GstByteReader*)this._cPtr, cast(int*)&val);
@@ -340,7 +337,7 @@ class ByteReader
         val = Pointer to a #gint64 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getInt64Be(out long val)
+  bool getInt64Be(out long val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_int64_be(cast(GstByteReader*)this._cPtr, cast(long*)&val);
@@ -355,7 +352,7 @@ class ByteReader
         val = Pointer to a #gint64 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getInt64Le(out long val)
+  bool getInt64Le(out long val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_int64_le(cast(GstByteReader*)this._cPtr, cast(long*)&val);
@@ -369,7 +366,7 @@ class ByteReader
         val = Pointer to a #gint8 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getInt8(out byte val)
+  bool getInt8(out byte val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_int8(cast(GstByteReader*)this._cPtr, cast(byte*)&val);
@@ -380,7 +377,7 @@ class ByteReader
       Returns the current position of a #GstByteReader instance in bytes.
       Returns: The current position of reader in bytes.
   */
-  uint getPos()
+  uint getPos() nothrow
   {
     uint _retval;
     _retval = gst_byte_reader_get_pos(cast(const(GstByteReader)*)this._cPtr);
@@ -391,7 +388,7 @@ class ByteReader
       Returns the remaining number of bytes of a #GstByteReader instance.
       Returns: The remaining number of bytes of reader instance.
   */
-  uint getRemaining()
+  uint getRemaining() nothrow
   {
     uint _retval;
     _retval = gst_byte_reader_get_remaining(cast(const(GstByteReader)*)this._cPtr);
@@ -402,7 +399,7 @@ class ByteReader
       Returns the total number of bytes of a #GstByteReader instance.
       Returns: The total number of bytes of reader instance.
   */
-  uint getSize()
+  uint getSize() nothrow
   {
     uint _retval;
     _retval = gst_byte_reader_get_size(cast(const(GstByteReader)*)this._cPtr);
@@ -425,7 +422,7 @@ class ByteReader
               #gchar pointer variable in which to store the result
       Returns: true if a string could be found, false otherwise.
   */
-  bool getStringUtf8(out string str)
+  bool getStringUtf8(out string str) nothrow
   {
     bool _retval;
     char* _str;
@@ -442,7 +439,7 @@ class ByteReader
         val = Pointer to a #guint16 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getUint16Be(out ushort val)
+  bool getUint16Be(out ushort val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_uint16_be(cast(GstByteReader*)this._cPtr, cast(ushort*)&val);
@@ -457,7 +454,7 @@ class ByteReader
         val = Pointer to a #guint16 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getUint16Le(out ushort val)
+  bool getUint16Le(out ushort val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_uint16_le(cast(GstByteReader*)this._cPtr, cast(ushort*)&val);
@@ -472,7 +469,7 @@ class ByteReader
         val = Pointer to a #guint32 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getUint24Be(out uint val)
+  bool getUint24Be(out uint val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_uint24_be(cast(GstByteReader*)this._cPtr, cast(uint*)&val);
@@ -487,7 +484,7 @@ class ByteReader
         val = Pointer to a #guint32 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getUint24Le(out uint val)
+  bool getUint24Le(out uint val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_uint24_le(cast(GstByteReader*)this._cPtr, cast(uint*)&val);
@@ -502,7 +499,7 @@ class ByteReader
         val = Pointer to a #guint32 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getUint32Be(out uint val)
+  bool getUint32Be(out uint val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_uint32_be(cast(GstByteReader*)this._cPtr, cast(uint*)&val);
@@ -517,7 +514,7 @@ class ByteReader
         val = Pointer to a #guint32 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getUint32Le(out uint val)
+  bool getUint32Le(out uint val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_uint32_le(cast(GstByteReader*)this._cPtr, cast(uint*)&val);
@@ -532,7 +529,7 @@ class ByteReader
         val = Pointer to a #guint64 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getUint64Be(out ulong val)
+  bool getUint64Be(out ulong val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_uint64_be(cast(GstByteReader*)this._cPtr, cast(ulong*)&val);
@@ -547,7 +544,7 @@ class ByteReader
         val = Pointer to a #guint64 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getUint64Le(out ulong val)
+  bool getUint64Le(out ulong val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_uint64_le(cast(GstByteReader*)this._cPtr, cast(ulong*)&val);
@@ -561,7 +558,7 @@ class ByteReader
         val = Pointer to a #guint8 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool getUint8(out ubyte val)
+  bool getUint8(out ubyte val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_get_uint8(cast(GstByteReader*)this._cPtr, cast(ubyte*)&val);
@@ -576,7 +573,7 @@ class ByteReader
         data = data from which
               the #GstByteReader should read
   */
-  void init_(ubyte[] data)
+  void init_(ubyte[] data) nothrow
   {
     uint _size;
     if (data)
@@ -626,7 +623,7 @@ class ByteReader
         // -> returns -1
         ```
   */
-  uint maskedScanUint32(uint mask, uint pattern, uint offset, uint size)
+  uint maskedScanUint32(uint mask, uint pattern, uint offset, uint size) nothrow
   {
     uint _retval;
     _retval = gst_byte_reader_masked_scan_uint32(cast(const(GstByteReader)*)this._cPtr, mask, pattern, offset, size);
@@ -654,7 +651,7 @@ class ByteReader
         value = pointer to uint32 to return matching data
       Returns: offset of the first match, or -1 if no match was found.
   */
-  uint maskedScanUint32Peek(uint mask, uint pattern, uint offset, uint size, out uint value)
+  uint maskedScanUint32Peek(uint mask, uint pattern, uint offset, uint size, out uint value) nothrow
   {
     uint _retval;
     _retval = gst_byte_reader_masked_scan_uint32_peek(cast(const(GstByteReader)*)this._cPtr, mask, pattern, offset, size, cast(uint*)&value);
@@ -669,7 +666,7 @@ class ByteReader
         val = Pointer to a #gfloat to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekFloat32Be(out float val)
+  bool peekFloat32Be(out float val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_float32_be(cast(const(GstByteReader)*)this._cPtr, cast(float*)&val);
@@ -684,7 +681,7 @@ class ByteReader
         val = Pointer to a #gfloat to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekFloat32Le(out float val)
+  bool peekFloat32Le(out float val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_float32_le(cast(const(GstByteReader)*)this._cPtr, cast(float*)&val);
@@ -699,7 +696,7 @@ class ByteReader
         val = Pointer to a #gdouble to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekFloat64Be(out double val)
+  bool peekFloat64Be(out double val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_float64_be(cast(const(GstByteReader)*)this._cPtr, cast(double*)&val);
@@ -714,7 +711,7 @@ class ByteReader
         val = Pointer to a #gdouble to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekFloat64Le(out double val)
+  bool peekFloat64Le(out double val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_float64_le(cast(const(GstByteReader)*)this._cPtr, cast(double*)&val);
@@ -729,7 +726,7 @@ class ByteReader
         val = Pointer to a #gint16 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekInt16Be(out short val)
+  bool peekInt16Be(out short val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_int16_be(cast(const(GstByteReader)*)this._cPtr, cast(short*)&val);
@@ -744,7 +741,7 @@ class ByteReader
         val = Pointer to a #gint16 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekInt16Le(out short val)
+  bool peekInt16Le(out short val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_int16_le(cast(const(GstByteReader)*)this._cPtr, cast(short*)&val);
@@ -759,7 +756,7 @@ class ByteReader
         val = Pointer to a #gint32 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekInt24Be(out int val)
+  bool peekInt24Be(out int val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_int24_be(cast(const(GstByteReader)*)this._cPtr, cast(int*)&val);
@@ -774,7 +771,7 @@ class ByteReader
         val = Pointer to a #gint32 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekInt24Le(out int val)
+  bool peekInt24Le(out int val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_int24_le(cast(const(GstByteReader)*)this._cPtr, cast(int*)&val);
@@ -789,7 +786,7 @@ class ByteReader
         val = Pointer to a #gint32 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekInt32Be(out int val)
+  bool peekInt32Be(out int val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_int32_be(cast(const(GstByteReader)*)this._cPtr, cast(int*)&val);
@@ -804,7 +801,7 @@ class ByteReader
         val = Pointer to a #gint32 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekInt32Le(out int val)
+  bool peekInt32Le(out int val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_int32_le(cast(const(GstByteReader)*)this._cPtr, cast(int*)&val);
@@ -819,7 +816,7 @@ class ByteReader
         val = Pointer to a #gint64 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekInt64Be(out long val)
+  bool peekInt64Be(out long val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_int64_be(cast(const(GstByteReader)*)this._cPtr, cast(long*)&val);
@@ -834,7 +831,7 @@ class ByteReader
         val = Pointer to a #gint64 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekInt64Le(out long val)
+  bool peekInt64Le(out long val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_int64_le(cast(const(GstByteReader)*)this._cPtr, cast(long*)&val);
@@ -848,7 +845,7 @@ class ByteReader
         val = Pointer to a #gint8 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekInt8(out byte val)
+  bool peekInt8(out byte val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_int8(cast(const(GstByteReader)*)this._cPtr, cast(byte*)&val);
@@ -871,7 +868,7 @@ class ByteReader
               #gchar pointer variable in which to store the result
       Returns: true if a string could be skipped, false otherwise.
   */
-  bool peekStringUtf8(out string str)
+  bool peekStringUtf8(out string str) nothrow
   {
     bool _retval;
     char* _str;
@@ -888,7 +885,7 @@ class ByteReader
         val = Pointer to a #guint16 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekUint16Be(out ushort val)
+  bool peekUint16Be(out ushort val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_uint16_be(cast(const(GstByteReader)*)this._cPtr, cast(ushort*)&val);
@@ -903,7 +900,7 @@ class ByteReader
         val = Pointer to a #guint16 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekUint16Le(out ushort val)
+  bool peekUint16Le(out ushort val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_uint16_le(cast(const(GstByteReader)*)this._cPtr, cast(ushort*)&val);
@@ -918,7 +915,7 @@ class ByteReader
         val = Pointer to a #guint32 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekUint24Be(out uint val)
+  bool peekUint24Be(out uint val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_uint24_be(cast(const(GstByteReader)*)this._cPtr, cast(uint*)&val);
@@ -933,7 +930,7 @@ class ByteReader
         val = Pointer to a #guint32 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekUint24Le(out uint val)
+  bool peekUint24Le(out uint val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_uint24_le(cast(const(GstByteReader)*)this._cPtr, cast(uint*)&val);
@@ -948,7 +945,7 @@ class ByteReader
         val = Pointer to a #guint32 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekUint32Be(out uint val)
+  bool peekUint32Be(out uint val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_uint32_be(cast(const(GstByteReader)*)this._cPtr, cast(uint*)&val);
@@ -963,7 +960,7 @@ class ByteReader
         val = Pointer to a #guint32 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekUint32Le(out uint val)
+  bool peekUint32Le(out uint val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_uint32_le(cast(const(GstByteReader)*)this._cPtr, cast(uint*)&val);
@@ -978,7 +975,7 @@ class ByteReader
         val = Pointer to a #guint64 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekUint64Be(out ulong val)
+  bool peekUint64Be(out ulong val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_uint64_be(cast(const(GstByteReader)*)this._cPtr, cast(ulong*)&val);
@@ -993,7 +990,7 @@ class ByteReader
         val = Pointer to a #guint64 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekUint64Le(out ulong val)
+  bool peekUint64Le(out ulong val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_uint64_le(cast(const(GstByteReader)*)this._cPtr, cast(ulong*)&val);
@@ -1007,7 +1004,7 @@ class ByteReader
         val = Pointer to a #guint8 to store the result
       Returns: true if successful, false otherwise.
   */
-  bool peekUint8(out ubyte val)
+  bool peekUint8(out ubyte val) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_peek_uint8(cast(const(GstByteReader)*)this._cPtr, cast(ubyte*)&val);
@@ -1022,7 +1019,7 @@ class ByteReader
       Returns: true if the position could be set successfully, false
         otherwise.
   */
-  bool setPos(uint pos)
+  bool setPos(uint pos) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_set_pos(cast(GstByteReader*)this._cPtr, pos);
@@ -1036,7 +1033,7 @@ class ByteReader
         nbytes = the number of bytes to skip
       Returns: true if nbytes bytes could be skipped, false otherwise.
   */
-  bool skip(uint nbytes)
+  bool skip(uint nbytes) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_skip(cast(GstByteReader*)this._cPtr, nbytes);
@@ -1052,7 +1049,7 @@ class ByteReader
       This function will fail if no NUL-terminator was found in in the data.
       Returns: true if a string could be skipped, false otherwise.
   */
-  bool skipStringUtf16()
+  bool skipStringUtf16() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_skip_string_utf16(cast(GstByteReader*)this._cPtr);
@@ -1068,7 +1065,7 @@ class ByteReader
       This function will fail if no NUL-terminator was found in in the data.
       Returns: true if a string could be skipped, false otherwise.
   */
-  bool skipStringUtf32()
+  bool skipStringUtf32() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_skip_string_utf32(cast(GstByteReader*)this._cPtr);
@@ -1084,7 +1081,7 @@ class ByteReader
       This function will fail if no NUL-terminator was found in in the data.
       Returns: true if a string could be skipped, false otherwise.
   */
-  bool skipStringUtf8()
+  bool skipStringUtf8() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_byte_reader_skip_string_utf8(cast(GstByteReader*)this._cPtr);

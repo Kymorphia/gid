@@ -14,7 +14,7 @@ struct URIError
   alias Enum = gst.types.URIError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gst_uri_error_quark();
@@ -24,12 +24,12 @@ struct URIError
 
 class URIException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gst.urierror.URIError.quark, cast(int)code, msg);
   }

@@ -81,26 +81,26 @@ class PadTemplate : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_pad_template_get_type != &gidSymbolNotFound ? gst_pad_template_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PadTemplate self()
+  override PadTemplate self() nothrow
   {
     return this;
   }
@@ -109,7 +109,7 @@ class PadTemplate : gst.object.ObjectWrap
       Get builder for [gst.pad_template.PadTemplate]
       Returns: New builder object
   */
-  static PadTemplateGidBuilder builder()
+  static PadTemplateGidBuilder builder() nothrow
   {
     return new PadTemplateGidBuilder;
   }
@@ -118,7 +118,7 @@ class PadTemplate : gst.object.ObjectWrap
       Get `caps` property.
       Returns: The capabilities of the pad described by the pad template.
   */
-  @property gst.caps.Caps caps()
+  @property gst.caps.Caps caps() nothrow
   {
     return getCaps();
   }
@@ -127,7 +127,7 @@ class PadTemplate : gst.object.ObjectWrap
       Get `direction` property.
       Returns: The direction of the pad described by the pad template.
   */
-  @property gst.types.PadDirection direction()
+  @property gst.types.PadDirection direction() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gst.types.PadDirection)("direction");
   }
@@ -136,7 +136,7 @@ class PadTemplate : gst.object.ObjectWrap
       Get `gtype` property.
       Returns: The type of the pad described by the pad template.
   */
-  @property gobject.types.GType gtype()
+  @property gobject.types.GType gtype() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("gtype");
   }
@@ -145,7 +145,7 @@ class PadTemplate : gst.object.ObjectWrap
       Get `nameTemplate` property.
       Returns: The name template of the pad template.
   */
-  @property string nameTemplate()
+  @property string nameTemplate() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("name-template");
   }
@@ -154,7 +154,7 @@ class PadTemplate : gst.object.ObjectWrap
       Get `presence` property.
       Returns: When the pad described by the pad template will become available.
   */
-  @property gst.types.PadPresence presence()
+  @property gst.types.PadPresence presence() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gst.types.PadPresence)("presence");
   }
@@ -170,7 +170,7 @@ class PadTemplate : gst.object.ObjectWrap
         caps = a #GstCaps set for the template.
       Returns: a new #GstPadTemplate.
   */
-  this(string nameTemplate, gst.types.PadDirection direction, gst.types.PadPresence presence, gst.caps.Caps caps)
+  this(string nameTemplate, gst.types.PadDirection direction, gst.types.PadPresence presence, gst.caps.Caps caps) nothrow
   {
     GstPadTemplate* _cretval;
     const(char)* _nameTemplate = nameTemplate.toCString(No.Alloc);
@@ -186,7 +186,7 @@ class PadTemplate : gst.object.ObjectWrap
         padType = The #GType of the pad to create
       Returns: a new #GstPadTemplate.
   */
-  static gst.pad_template.PadTemplate newFromStaticPadTemplateWithGtype(gst.static_pad_template.StaticPadTemplate padTemplate, gobject.types.GType padType)
+  static gst.pad_template.PadTemplate newFromStaticPadTemplateWithGtype(gst.static_pad_template.StaticPadTemplate padTemplate, gobject.types.GType padType) nothrow
   {
     GstPadTemplate* _cretval;
     _cretval = gst_pad_template_new_from_static_pad_template_with_gtype(padTemplate ? cast(GstStaticPadTemplate*)padTemplate._cPtr : null, padType);
@@ -206,7 +206,7 @@ class PadTemplate : gst.object.ObjectWrap
         padType = The #GType of the pad to create
       Returns: a new #GstPadTemplate.
   */
-  static gst.pad_template.PadTemplate newWithGtype(string nameTemplate, gst.types.PadDirection direction, gst.types.PadPresence presence, gst.caps.Caps caps, gobject.types.GType padType)
+  static gst.pad_template.PadTemplate newWithGtype(string nameTemplate, gst.types.PadDirection direction, gst.types.PadPresence presence, gst.caps.Caps caps, gobject.types.GType padType) nothrow
   {
     GstPadTemplate* _cretval;
     const(char)* _nameTemplate = nameTemplate.toCString(No.Alloc);
@@ -220,7 +220,7 @@ class PadTemplate : gst.object.ObjectWrap
       Returns: the #GstCaps of the pad template.
         Unref after usage.
   */
-  gst.caps.Caps getCaps()
+  gst.caps.Caps getCaps() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_pad_template_get_caps(cast(GstPadTemplate*)this._cPtr);
@@ -233,7 +233,7 @@ class PadTemplate : gst.object.ObjectWrap
       Returns: The caps to document. For convenience, this will return
           [gst.pad_template.PadTemplate.getCaps] when no documentation caps were set.
   */
-  gst.caps.Caps getDocumentationCaps()
+  gst.caps.Caps getDocumentationCaps() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_pad_template_get_documentation_caps(cast(GstPadTemplate*)this._cPtr);
@@ -247,7 +247,7 @@ class PadTemplate : gst.object.ObjectWrap
       Params:
         pad = the #GstPad that created it
   */
-  void padCreated(gst.pad.Pad pad)
+  void padCreated(gst.pad.Pad pad) nothrow
   {
     gst_pad_template_pad_created(cast(GstPadTemplate*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
   }
@@ -261,7 +261,7 @@ class PadTemplate : gst.object.ObjectWrap
       Params:
         caps = the documented capabilities
   */
-  void setDocumentationCaps(gst.caps.Caps caps)
+  void setDocumentationCaps(gst.caps.Caps caps) nothrow
   {
     gst_pad_template_set_documentation_caps(cast(GstPadTemplate*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
   }
@@ -283,14 +283,14 @@ class PadTemplate : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPadCreated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPadCreated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.pad.Pad)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gst.pad_template.PadTemplate)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -302,7 +302,14 @@ class PadTemplate : gst.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.pad_template.PadTemplate.padCreated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -320,7 +327,7 @@ class PadTemplateGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
         propval = The capabilities of the pad described by the pad template.
       Returns: Builder instance for fluent chaining
   */
-  T caps(gst.caps.Caps propval)
+  T caps(gst.caps.Caps propval) nothrow
   {
     return setProperty("caps", propval);
   }
@@ -331,7 +338,7 @@ class PadTemplateGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
         propval = The direction of the pad described by the pad template.
       Returns: Builder instance for fluent chaining
   */
-  T direction(gst.types.PadDirection propval)
+  T direction(gst.types.PadDirection propval) nothrow
   {
     return setProperty("direction", propval);
   }
@@ -342,7 +349,7 @@ class PadTemplateGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
         propval = The type of the pad described by the pad template.
       Returns: Builder instance for fluent chaining
   */
-  T gtype(gobject.types.GType propval)
+  T gtype(gobject.types.GType propval) nothrow
   {
     return setProperty("gtype", propval);
   }
@@ -353,7 +360,7 @@ class PadTemplateGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
         propval = The name template of the pad template.
       Returns: Builder instance for fluent chaining
   */
-  T nameTemplate(string propval)
+  T nameTemplate(string propval) nothrow
   {
     return setProperty("name-template", propval);
   }
@@ -364,7 +371,7 @@ class PadTemplateGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
         propval = When the pad described by the pad template will become available.
       Returns: Builder instance for fluent chaining
   */
-  T presence(gst.types.PadPresence propval)
+  T presence(gst.types.PadPresence propval) nothrow
   {
     return setProperty("presence", propval);
   }
@@ -377,7 +384,7 @@ final class PadTemplateGidBuilder : PadTemplateGidBuilderImpl!PadTemplateGidBuil
       Create object from builder.
       Returns: New object
   */
-  PadTemplate build()
+  PadTemplate build() nothrow
   {
     return new PadTemplate(cast(void*)createGObject(PadTemplate._getGType), No.Take);
   }

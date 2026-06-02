@@ -21,7 +21,7 @@ struct LengthUnit
         settings = settings to use, or `NULL` for default settings
       Returns: the length in unit
   */
-  static double fromPx(adw.types.LengthUnit unit, double value, gtk.settings.Settings settings)
+  static double fromPx(adw.types.LengthUnit unit, double value, gtk.settings.Settings settings) nothrow
   {
     double _retval;
     _retval = adw_length_unit_from_px(unit, value, settings ? cast(GtkSettings*)settings._cPtr(No.Dup) : null);
@@ -37,7 +37,7 @@ struct LengthUnit
         settings = settings to use, or `NULL` for default settings
       Returns: the length in pixels
   */
-  static double toPx(adw.types.LengthUnit unit, double value, gtk.settings.Settings settings)
+  static double toPx(adw.types.LengthUnit unit, double value, gtk.settings.Settings settings) nothrow
   {
     double _retval;
     _retval = adw_length_unit_to_px(unit, value, settings ? cast(GtkSettings*)settings._cPtr(No.Dup) : null);

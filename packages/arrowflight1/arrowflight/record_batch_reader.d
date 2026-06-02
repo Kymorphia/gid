@@ -17,26 +17,26 @@ class RecordBatchReader : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_record_batch_reader_get_type != &gidSymbolNotFound ? gaflight_record_batch_reader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RecordBatchReader self()
+  override RecordBatchReader self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class RecordBatchReader : gobject.object.ObjectWrap
       Get builder for [arrowflight.record_batch_reader.RecordBatchReader]
       Returns: New builder object
   */
-  static RecordBatchReaderGidBuilder builder()
+  static RecordBatchReaderGidBuilder builder() nothrow
   {
     return new RecordBatchReaderGidBuilder;
   }
@@ -80,13 +80,13 @@ class RecordBatchReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
 {
 
   /** */
-  T isOwner(bool propval)
+  T isOwner(bool propval) nothrow
   {
     return setProperty("is-owner", propval);
   }
 
   /** */
-  T reader(void* propval)
+  T reader(void* propval) nothrow
   {
     return setProperty("reader", propval);
   }
@@ -99,7 +99,7 @@ final class RecordBatchReaderGidBuilder : RecordBatchReaderGidBuilderImpl!Record
       Create object from builder.
       Returns: New object
   */
-  RecordBatchReader build()
+  RecordBatchReader build() nothrow
   {
     return new RecordBatchReader(cast(void*)createGObject(RecordBatchReader._getGType), No.Take);
   }

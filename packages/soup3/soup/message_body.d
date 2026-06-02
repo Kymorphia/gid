@@ -28,32 +28,32 @@ class MessageBody : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_message_body_get_type != &gidSymbolNotFound ? soup_message_body_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MessageBody self()
+  override MessageBody self() nothrow
   {
     return this;
   }
@@ -62,7 +62,7 @@ class MessageBody : gobject.boxed.Boxed
       Get `length` field.
       Returns: length of @data
   */
-  @property long length()
+  @property long length() nothrow
   {
     return (cast(SoupMessageBody*)this._cPtr).length;
   }
@@ -72,7 +72,7 @@ class MessageBody : gobject.boxed.Boxed
       Params:
         propval = length of @data
   */
-  @property void length(long propval)
+  @property void length(long propval) nothrow
   {
     (cast(SoupMessageBody*)this._cPtr).length = propval;
   }
@@ -84,7 +84,7 @@ class MessageBody : gobject.boxed.Boxed
       will not normally need to call it yourself.
       Returns: a new #SoupMessageBody.
   */
-  this()
+  this() nothrow
   {
     SoupMessageBody* _cretval;
     _cretval = soup_message_body_new();
@@ -97,7 +97,7 @@ class MessageBody : gobject.boxed.Boxed
       Params:
         buffer = a #GBytes
   */
-  void appendBytes(glib.bytes.Bytes buffer)
+  void appendBytes(glib.bytes.Bytes buffer) nothrow
   {
     soup_message_body_append_bytes(cast(SoupMessageBody*)this._cPtr, buffer ? cast(GBytes*)buffer._cPtr(No.Dup) : null);
   }
@@ -107,7 +107,7 @@ class MessageBody : gobject.boxed.Boxed
       
       Call this when using chunked encoding after you have appended the last chunk.
   */
-  void complete()
+  void complete() nothrow
   {
     soup_message_body_complete(cast(SoupMessageBody*)this._cPtr);
   }
@@ -121,7 +121,7 @@ class MessageBody : gobject.boxed.Boxed
       Returns: a #GBytes containing the same data as body.
           (You must [glib.bytes.Bytes.unref] this if you do not want it.)
   */
-  glib.bytes.Bytes flatten()
+  glib.bytes.Bytes flatten() nothrow
   {
     GBytes* _cretval;
     _cretval = soup_message_body_flatten(cast(SoupMessageBody*)this._cPtr);
@@ -135,7 +135,7 @@ class MessageBody : gobject.boxed.Boxed
       See [methodMessageBody.set_accumulate. for details.
       Returns: the accumulate flag for body.
   */
-  bool getAccumulate()
+  bool getAccumulate() nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_message_body_get_accumulate(cast(SoupMessageBody*)this._cPtr);
@@ -164,7 +164,7 @@ class MessageBody : gobject.boxed.Boxed
         offset = an offset
       Returns: a #GBytes
   */
-  glib.bytes.Bytes getChunk(long offset)
+  glib.bytes.Bytes getChunk(long offset) nothrow
   {
     GBytes* _cretval;
     _cretval = soup_message_body_get_chunk(cast(SoupMessageBody*)this._cPtr, offset);
@@ -186,7 +186,7 @@ class MessageBody : gobject.boxed.Boxed
       Params:
         chunk = a #GBytes received from the network
   */
-  void gotChunk(glib.bytes.Bytes chunk)
+  void gotChunk(glib.bytes.Bytes chunk) nothrow
   {
     soup_message_body_got_chunk(cast(SoupMessageBody*)this._cPtr, chunk ? cast(GBytes*)chunk._cPtr(No.Dup) : null);
   }
@@ -209,7 +209,7 @@ class MessageBody : gobject.boxed.Boxed
       Params:
         accumulate = whether or not to accumulate body chunks in body
   */
-  void setAccumulate(bool accumulate)
+  void setAccumulate(bool accumulate) nothrow
   {
     soup_message_body_set_accumulate(cast(SoupMessageBody*)this._cPtr, accumulate);
   }
@@ -217,7 +217,7 @@ class MessageBody : gobject.boxed.Boxed
   /**
       Deletes all of the data in body.
   */
-  void truncate()
+  void truncate() nothrow
   {
     soup_message_body_truncate(cast(SoupMessageBody*)this._cPtr);
   }
@@ -236,7 +236,7 @@ class MessageBody : gobject.boxed.Boxed
       Params:
         chunk = a #GBytes returned from [soup.message_body.MessageBody.getChunk]
   */
-  void wroteChunk(glib.bytes.Bytes chunk)
+  void wroteChunk(glib.bytes.Bytes chunk) nothrow
   {
     soup_message_body_wrote_chunk(cast(SoupMessageBody*)this._cPtr, chunk ? cast(GBytes*)chunk._cPtr(No.Dup) : null);
   }

@@ -24,38 +24,38 @@ class Plane : gobject.boxed.Boxed
   /**
       Create a `plane.Plane` boxed type.
   */
-  this()
+  this() nothrow
   {
     super(gMalloc(graphene_plane_t.sizeof), Yes.Take);
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())graphene_plane_get_type != &gidSymbolNotFound ? graphene_plane_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Plane self()
+  override Plane self() nothrow
   {
     return this;
   }
@@ -68,7 +68,7 @@ class Plane : gobject.boxed.Boxed
           Use [graphene.plane.Plane.free] to free the resources allocated by
           this function
   */
-  static graphene.plane.Plane alloc()
+  static graphene.plane.Plane alloc() nothrow
   {
     graphene_plane_t* _cretval;
     _cretval = graphene_plane_alloc();
@@ -83,7 +83,7 @@ class Plane : gobject.boxed.Boxed
         point = a #graphene_point3d_t
       Returns: the distance of the given #graphene_point3d_t from the plane
   */
-  float distance(graphene.point3_d.Point3D point)
+  float distance(graphene.point3_d.Point3D point) nothrow
   {
     float _retval;
     _retval = graphene_plane_distance(cast(const(graphene_plane_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&point);
@@ -97,7 +97,7 @@ class Plane : gobject.boxed.Boxed
         b = a #graphene_plane_t
       Returns: `true` if the given planes are equal
   */
-  bool equal(graphene.plane.Plane b)
+  bool equal(graphene.plane.Plane b) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_plane_equal(cast(const(graphene_plane_t)*)this._cPtr, b ? cast(const(graphene_plane_t)*)b._cPtr(No.Dup) : null);
@@ -109,7 +109,7 @@ class Plane : gobject.boxed.Boxed
       given #graphene_plane_t from the origin.
       Returns: the constant value of the plane
   */
-  float getConstant()
+  float getConstant() nothrow
   {
     float _retval;
     _retval = graphene_plane_get_constant(cast(const(graphene_plane_t)*)this._cPtr);
@@ -123,7 +123,7 @@ class Plane : gobject.boxed.Boxed
       Params:
         normal = return location for the normal vector
   */
-  void getNormal(out graphene.vec3.Vec3 normal)
+  void getNormal(out graphene.vec3.Vec3 normal) nothrow
   {
     graphene_vec3_t _normal;
     graphene_plane_get_normal(cast(const(graphene_plane_t)*)this._cPtr, &_normal);
@@ -142,7 +142,7 @@ class Plane : gobject.boxed.Boxed
             plane
       Returns: the initialized plane
   */
-  graphene.plane.Plane init_(graphene.vec3.Vec3 normal, float constant)
+  graphene.plane.Plane init_(graphene.vec3.Vec3 normal, float constant) nothrow
   {
     graphene_plane_t* _cretval;
     _cretval = graphene_plane_init(cast(graphene_plane_t*)this._cPtr, normal ? cast(const(graphene_vec3_t)*)normal._cPtr(No.Dup) : null, constant);
@@ -158,7 +158,7 @@ class Plane : gobject.boxed.Boxed
         src = a #graphene_plane_t
       Returns: the initialized plane
   */
-  graphene.plane.Plane initFromPlane(graphene.plane.Plane src)
+  graphene.plane.Plane initFromPlane(graphene.plane.Plane src) nothrow
   {
     graphene_plane_t* _cretval;
     _cretval = graphene_plane_init_from_plane(cast(graphene_plane_t*)this._cPtr, src ? cast(const(graphene_plane_t)*)src._cPtr(No.Dup) : null);
@@ -175,7 +175,7 @@ class Plane : gobject.boxed.Boxed
         point = a #graphene_point3d_t
       Returns: the initialized plane
   */
-  graphene.plane.Plane initFromPoint(graphene.vec3.Vec3 normal, graphene.point3_d.Point3D point)
+  graphene.plane.Plane initFromPoint(graphene.vec3.Vec3 normal, graphene.point3_d.Point3D point) nothrow
   {
     graphene_plane_t* _cretval;
     _cretval = graphene_plane_init_from_point(cast(graphene_plane_t*)this._cPtr, normal ? cast(const(graphene_vec3_t)*)normal._cPtr(No.Dup) : null, cast(const(graphene_point3d_t)*)&point);
@@ -196,7 +196,7 @@ class Plane : gobject.boxed.Boxed
         c = a #graphene_point3d_t
       Returns: the initialized plane
   */
-  graphene.plane.Plane initFromPoints(graphene.point3_d.Point3D a, graphene.point3_d.Point3D b, graphene.point3_d.Point3D c)
+  graphene.plane.Plane initFromPoints(graphene.point3_d.Point3D a, graphene.point3_d.Point3D b, graphene.point3_d.Point3D c) nothrow
   {
     graphene_plane_t* _cretval;
     _cretval = graphene_plane_init_from_points(cast(graphene_plane_t*)this._cPtr, cast(const(graphene_point3d_t)*)&a, cast(const(graphene_point3d_t)*)&b, cast(const(graphene_point3d_t)*)&c);
@@ -213,7 +213,7 @@ class Plane : gobject.boxed.Boxed
             three components, and the distance in its fourth component
       Returns: the initialized plane
   */
-  graphene.plane.Plane initFromVec4(graphene.vec4.Vec4 src)
+  graphene.plane.Plane initFromVec4(graphene.vec4.Vec4 src) nothrow
   {
     graphene_plane_t* _cretval;
     _cretval = graphene_plane_init_from_vec4(cast(graphene_plane_t*)this._cPtr, src ? cast(const(graphene_vec4_t)*)src._cPtr(No.Dup) : null);
@@ -228,7 +228,7 @@ class Plane : gobject.boxed.Boxed
       Params:
         res = return location for the negated plane
   */
-  void negate(out graphene.plane.Plane res)
+  void negate(out graphene.plane.Plane res) nothrow
   {
     graphene_plane_t _res;
     graphene_plane_negate(cast(const(graphene_plane_t)*)this._cPtr, &_res);
@@ -242,7 +242,7 @@ class Plane : gobject.boxed.Boxed
       Params:
         res = return location for the normalized plane
   */
-  void normalize(out graphene.plane.Plane res)
+  void normalize(out graphene.plane.Plane res) nothrow
   {
     graphene_plane_t _res;
     graphene_plane_normalize(cast(const(graphene_plane_t)*)this._cPtr, &_res);
@@ -264,7 +264,7 @@ class Plane : gobject.boxed.Boxed
         normalMatrix = a #graphene_matrix_t
         res = the transformed plane
   */
-  void transform(graphene.matrix.Matrix matrix, graphene.matrix.Matrix normalMatrix, out graphene.plane.Plane res)
+  void transform(graphene.matrix.Matrix matrix, graphene.matrix.Matrix normalMatrix, out graphene.plane.Plane res) nothrow
   {
     graphene_plane_t _res;
     graphene_plane_transform(cast(const(graphene_plane_t)*)this._cPtr, matrix ? cast(const(graphene_matrix_t)*)matrix._cPtr(No.Dup) : null, normalMatrix ? cast(const(graphene_matrix_t)*)normalMatrix._cPtr(No.Dup) : null, &_res);

@@ -71,26 +71,26 @@ class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_property_action_get_type != &gidSymbolNotFound ? g_property_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PropertyAction self()
+  override PropertyAction self() nothrow
   {
     return this;
   }
@@ -99,7 +99,7 @@ class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
       Get builder for [gio.property_action.PropertyAction]
       Returns: New builder object
   */
-  static PropertyActionGidBuilder builder()
+  static PropertyActionGidBuilder builder() nothrow
   {
     return new PropertyActionGidBuilder;
   }
@@ -111,7 +111,7 @@ class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
         If the action is disabled then calls to [gio.action.Action.activate] and
         [gio.action.Action.changeState] have no effect.
   */
-  @property bool enabled()
+  @property bool enabled() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("enabled");
   }
@@ -121,7 +121,7 @@ class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
       Returns: If true, the state of the action will be the negation of the
         property value, provided the property is boolean.
   */
-  @property bool invertBoolean()
+  @property bool invertBoolean() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("invert-boolean");
   }
@@ -131,7 +131,7 @@ class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
       Returns: The name of the action.  This is mostly meaningful for identifying
         the action once it has been added to a #GActionMap.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("name");
   }
@@ -141,7 +141,7 @@ class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
       Returns: The type of the parameter that must be given when activating the
         action.
   */
-  @property glib.variant_type.VariantType parameterType()
+  @property glib.variant_type.VariantType parameterType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(glib.variant_type.VariantType)("parameter-type");
   }
@@ -150,7 +150,7 @@ class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
       Get `state` property.
       Returns: The state of the action, or null if the action is stateless.
   */
-  @property glib.variant.Variant state()
+  @property glib.variant.Variant state() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(glib.variant.Variant)("state");
   }
@@ -160,7 +160,7 @@ class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
       Returns: The #GVariantType of the state that the action has, or null if the
         action is stateless.
   */
-  @property glib.variant_type.VariantType stateType()
+  @property glib.variant_type.VariantType stateType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(glib.variant_type.VariantType)("state-type");
   }
@@ -184,7 +184,7 @@ class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
         propertyName = the name of the property
       Returns: a new #GPropertyAction
   */
-  this(string name, gobject.object.ObjectWrap object, string propertyName)
+  this(string name, gobject.object.ObjectWrap object, string propertyName) nothrow
   {
     GPropertyAction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -207,7 +207,7 @@ class PropertyActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           property value, provided the property is boolean.
       Returns: Builder instance for fluent chaining
   */
-  T invertBoolean(bool propval)
+  T invertBoolean(bool propval) nothrow
   {
     return setProperty("invert-boolean", propval);
   }
@@ -219,7 +219,7 @@ class PropertyActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           the action once it has been added to a #GActionMap.
       Returns: Builder instance for fluent chaining
   */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -232,7 +232,7 @@ class PropertyActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           The object must be a non-null #GObject with properties.
       Returns: Builder instance for fluent chaining
   */
-  T object(gobject.object.ObjectWrap propval)
+  T object(gobject.object.ObjectWrap propval) nothrow
   {
     return setProperty("object", propval);
   }
@@ -246,7 +246,7 @@ class PropertyActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           readable and writable (and not construct-only).
       Returns: Builder instance for fluent chaining
   */
-  T propertyName(string propval)
+  T propertyName(string propval) nothrow
   {
     return setProperty("property-name", propval);
   }
@@ -259,7 +259,7 @@ final class PropertyActionGidBuilder : PropertyActionGidBuilderImpl!PropertyActi
       Create object from builder.
       Returns: New object
   */
-  PropertyAction build()
+  PropertyAction build() nothrow
   {
     return new PropertyAction(cast(void*)createGObject(PropertyAction._getGType), Yes.Take);
   }

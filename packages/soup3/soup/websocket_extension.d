@@ -20,26 +20,26 @@ class WebsocketExtension : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_websocket_extension_get_type != &gidSymbolNotFound ? soup_websocket_extension_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WebsocketExtension self()
+  override WebsocketExtension self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class WebsocketExtension : gobject.object.ObjectWrap
       Get builder for [soup.websocket_extension.WebsocketExtension]
       Returns: New builder object
   */
-  static WebsocketExtensionGidBuilder builder()
+  static WebsocketExtensionGidBuilder builder() nothrow
   {
     return new WebsocketExtensionGidBuilder;
   }
@@ -60,7 +60,7 @@ class WebsocketExtension : gobject.object.ObjectWrap
       returns null.
       Returns: a new allocated string with the parameters
   */
-  string getRequestParams()
+  string getRequestParams() nothrow
   {
     char* _cretval;
     _cretval = soup_websocket_extension_get_request_params(cast(SoupWebsocketExtension*)this._cPtr);
@@ -75,7 +75,7 @@ class WebsocketExtension : gobject.object.ObjectWrap
       returns null.
       Returns: a new allocated string with the parameters
   */
-  string getResponseParams()
+  string getResponseParams() nothrow
   {
     char* _cretval;
     _cretval = soup_websocket_extension_get_response_params(cast(SoupWebsocketExtension*)this._cPtr);
@@ -148,7 +148,7 @@ final class WebsocketExtensionGidBuilder : WebsocketExtensionGidBuilderImpl!Webs
       Create object from builder.
       Returns: New object
   */
-  WebsocketExtension build()
+  WebsocketExtension build() nothrow
   {
     return new WebsocketExtension(cast(void*)createGObject(WebsocketExtension._getGType), No.Take);
   }

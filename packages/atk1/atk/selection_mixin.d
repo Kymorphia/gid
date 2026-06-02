@@ -37,7 +37,7 @@ template SelectionT()
         i = a #gint specifying the child index.
       Returns: TRUE if success, FALSE otherwise.
   */
-  override bool addSelection(int i)
+  override bool addSelection(int i) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_selection_add_selection(cast(AtkSelection*)this._cPtr, i);
@@ -49,7 +49,7 @@ template SelectionT()
       are selected.
       Returns: TRUE if success, FALSE otherwise.
   */
-  override bool clearSelection()
+  override bool clearSelection() nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_selection_clear_selection(cast(AtkSelection*)this._cPtr);
@@ -65,7 +65,7 @@ template SelectionT()
       Returns: a gint representing the number of items selected, or 0
         if selection does not implement this interface.
   */
-  override int getSelectionCount()
+  override int getSelectionCount() nothrow
   {
     int _retval;
     _retval = atk_selection_get_selection_count(cast(AtkSelection*)this._cPtr);
@@ -84,7 +84,7 @@ template SelectionT()
       Returns: a gboolean representing the specified child is selected, or 0
         if selection does not implement this interface.
   */
-  override bool isChildSelected(int i)
+  override bool isChildSelected(int i) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_selection_is_child_selected(cast(AtkSelection*)this._cPtr, i);
@@ -106,7 +106,7 @@ template SelectionT()
         selected accessible, or null if selection does not implement this
         interface.
   */
-  override atk.object.ObjectWrap refSelection(int i)
+  override atk.object.ObjectWrap refSelection(int i) nothrow
   {
     AtkObject* _cretval;
     _cretval = atk_selection_ref_selection(cast(AtkSelection*)this._cPtr, i);
@@ -122,7 +122,7 @@ template SelectionT()
           ith selection as opposed to the ith child).
       Returns: TRUE if success, FALSE otherwise.
   */
-  override bool removeSelection(int i)
+  override bool removeSelection(int i) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_selection_remove_selection(cast(AtkSelection*)this._cPtr, i);
@@ -134,7 +134,7 @@ template SelectionT()
       supports multiple selections.
       Returns: TRUE if success, FALSE otherwise.
   */
-  override bool selectAllSelection()
+  override bool selectAllSelection() nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_selection_select_all_selection(cast(AtkSelection*)this._cPtr);
@@ -157,13 +157,13 @@ template SelectionT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.selection.Selection)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -172,7 +172,14 @@ template SelectionT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.selection.Selection.selectionChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

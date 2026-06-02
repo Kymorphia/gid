@@ -26,26 +26,26 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_list_box_row_get_type != &gidSymbolNotFound ? gtk_list_box_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ListBoxRow self()
+  override ListBoxRow self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
       Get builder for [gtk.list_box_row.ListBoxRow]
       Returns: New builder object
   */
-  static ListBoxRowGidBuilder builder()
+  static ListBoxRowGidBuilder builder() nothrow
   {
     return new ListBoxRowGidBuilder;
   }
@@ -64,7 +64,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
       Returns: Determines whether the ::row-activated
         signal will be emitted for this row.
   */
-  @property bool activatable()
+  @property bool activatable() nothrow
   {
     return getActivatable();
   }
@@ -75,7 +75,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
         propval = Determines whether the ::row-activated
           signal will be emitted for this row.
   */
-  @property void activatable(bool propval)
+  @property void activatable(bool propval) nothrow
   {
     setActivatable(propval);
   }
@@ -84,7 +84,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
       Get `child` property.
       Returns: The child widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -94,7 +94,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         propval = The child widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -103,7 +103,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
       Get `selectable` property.
       Returns: Determines whether this row can be selected.
   */
-  @property bool selectable()
+  @property bool selectable() nothrow
   {
     return getSelectable();
   }
@@ -113,7 +113,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         propval = Determines whether this row can be selected.
   */
-  @property void selectable(bool propval)
+  @property void selectable(bool propval) nothrow
   {
     setSelectable(propval);
   }
@@ -124,7 +124,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
       Creates a new [gtk.list_box_row.ListBoxRow].
       Returns: a new [gtk.list_box_row.ListBoxRow]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_box_row_new();
@@ -151,7 +151,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
       is to call [gtk.list_box.ListBox.invalidateSort] on any model change,
       but that is more expensive.
   */
-  void changed()
+  void changed() nothrow
   {
     gtk_list_box_row_changed(cast(GtkListBoxRow*)this._cPtr);
   }
@@ -160,7 +160,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
       Gets whether the row is activatable.
       Returns: true if the row is activatable
   */
-  bool getActivatable()
+  bool getActivatable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_list_box_row_get_activatable(cast(GtkListBoxRow*)this._cPtr);
@@ -171,7 +171,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
       Gets the child widget of row.
       Returns: the child widget of row
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_box_row_get_child(cast(GtkListBoxRow*)this._cPtr);
@@ -188,7 +188,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
       the state of it.
       Returns: the current header
   */
-  gtk.widget.Widget getHeader()
+  gtk.widget.Widget getHeader() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_box_row_get_header(cast(GtkListBoxRow*)this._cPtr);
@@ -200,7 +200,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
       Gets the current index of the row in its [gtk.list_box.ListBox] container.
       Returns: the index of the row, or -1 if the row is not in a listbox
   */
-  int getIndex()
+  int getIndex() nothrow
   {
     int _retval;
     _retval = gtk_list_box_row_get_index(cast(GtkListBoxRow*)this._cPtr);
@@ -211,7 +211,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
       Gets whether the row can be selected.
       Returns: true if the row is selectable
   */
-  bool getSelectable()
+  bool getSelectable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_list_box_row_get_selectable(cast(GtkListBoxRow*)this._cPtr);
@@ -223,7 +223,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
       [gtk.list_box.ListBox] container.
       Returns: true if row is selected
   */
-  bool isSelected()
+  bool isSelected() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_list_box_row_is_selected(cast(GtkListBoxRow*)this._cPtr);
@@ -236,7 +236,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         activatable = true to mark the row as activatable
   */
-  void setActivatable(bool activatable)
+  void setActivatable(bool activatable) nothrow
   {
     gtk_list_box_row_set_activatable(cast(GtkListBoxRow*)this._cPtr, activatable);
   }
@@ -247,7 +247,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     gtk_list_box_row_set_child(cast(GtkListBoxRow*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -263,7 +263,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         header = the header
   */
-  void setHeader(gtk.widget.Widget header = null)
+  void setHeader(gtk.widget.Widget header = null) nothrow
   {
     gtk_list_box_row_set_header(cast(GtkListBoxRow*)this._cPtr, header ? cast(GtkWidget*)header._cPtr(No.Dup) : null);
   }
@@ -274,7 +274,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         selectable = true to mark the row as selectable
   */
-  void setSelectable(bool selectable)
+  void setSelectable(bool selectable) nothrow
   {
     gtk_list_box_row_set_selectable(cast(GtkListBoxRow*)this._cPtr, selectable);
   }
@@ -298,13 +298,13 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.list_box_row.ListBoxRow)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -313,7 +313,14 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.list_box_row.ListBoxRow.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -334,7 +341,7 @@ class ListBoxRowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actio
           signal will be emitted for this row.
       Returns: Builder instance for fluent chaining
   */
-  T activatable(bool propval)
+  T activatable(bool propval) nothrow
   {
     return setProperty("activatable", propval);
   }
@@ -345,7 +352,7 @@ class ListBoxRowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actio
         propval = The child widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -356,7 +363,7 @@ class ListBoxRowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actio
         propval = Determines whether this row can be selected.
       Returns: Builder instance for fluent chaining
   */
-  T selectable(bool propval)
+  T selectable(bool propval) nothrow
   {
     return setProperty("selectable", propval);
   }
@@ -369,7 +376,7 @@ final class ListBoxRowGidBuilder : ListBoxRowGidBuilderImpl!ListBoxRowGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ListBoxRow build()
+  ListBoxRow build() nothrow
   {
     return new ListBoxRow(cast(void*)createGObject(ListBoxRow._getGType), No.Take);
   }

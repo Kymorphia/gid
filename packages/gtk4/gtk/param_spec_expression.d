@@ -15,11 +15,8 @@ class ParamSpecExpression : gobject.param_spec.ParamSpec
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.param_spec_expression.ParamSpecExpression");
-
     super(cast(GParamSpec*)ptr, take);
   }
 }

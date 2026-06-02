@@ -30,7 +30,7 @@ enum GidOwnership
  * Params:
  *   ptr = Pointer to anywhere inside the region to prevent collection/move of
  */
-void ptrFreezeGC(const void* ptr)
+void ptrFreezeGC(const void* ptr) nothrow
 {
   GC.addRoot(ptr);
 
@@ -43,7 +43,7 @@ void ptrFreezeGC(const void* ptr)
  * Params:
  *   ptr = Pointer to anywhere inside the region to re-enable garbage collection of
  */
-void ptrThawGC(const void* ptr)
+void ptrThawGC(const void* ptr) nothrow
 {
   GC.removeRoot(ptr);
 
@@ -56,7 +56,7 @@ void ptrThawGC(const void* ptr)
  * Params:
  *   ptr = The data to re-enable garbage collection and moving of.
  */
-extern(C) void ptrThawDestroyNotify(void* ptr)
+extern(C) void ptrThawDestroyNotify(void* ptr) nothrow
 {
   GC.removeRoot(ptr);
   GC.clrAttr(ptr, GC.BlkAttr.NO_MOVE);
@@ -68,7 +68,7 @@ extern(C) void ptrThawDestroyNotify(void* ptr)
  *   dlg = Pointer to the delegate to freeze
  * Returns: The duplicated delegate which is added as a GC root
  */
-void* freezeDelegate(void* dlg)
+void* freezeDelegate(void* dlg) nothrow
 {
   auto dupDlg = GC.malloc((void delegate()).sizeof, GC.BlkAttr.NO_MOVE);
   *cast(void delegate()*)dupDlg = *cast(void delegate()*)dlg;
@@ -81,7 +81,7 @@ void* freezeDelegate(void* dlg)
  * Params:
  *   dlg = The C heap memory allocated delegate
  */
-extern(C) void thawDelegate(void* dlg)
+extern(C) void thawDelegate(void* dlg) nothrow
 {
   ptrThawGC(dlg);
 }
@@ -93,7 +93,7 @@ extern(C) void thawDelegate(void* dlg)
  *   alloc = Yes.Alloc if string is being transferred to C (use g_malloc), No.Alloc for D allocation (no transfer)
  * Returns: Zero terminated C string (D or C allocation)
  */
-char* toCString(string dstr, Flag!"Alloc" alloc)
+char* toCString(string dstr, Flag!"Alloc" alloc) nothrow
 {
   if (dstr is null)
     dstr = "";
@@ -120,7 +120,7 @@ char* toCString(string dstr, Flag!"Alloc" alloc)
  *   free = Yes.Free to free the C string with g_free, No.Free to just copy it
  * Returns: The D string copy
  */
-string fromCString(const(char)* cstr, Flag!"Free" free)
+string fromCString(const(char)* cstr, Flag!"Free" free) nothrow
 {
   if (!cstr)
     return null;
@@ -150,7 +150,7 @@ alias gFree = g_free;
  * Returns: The duplicate string
  * Throws: OutOfMemoryError
  */
-char* strdup(const(char)* s)
+char* strdup(const(char)* s) nothrow
 {
   if (!s)
     return null;
@@ -175,7 +175,7 @@ char* strdup(const(char)* s)
  *   array = The array to copy
  * Returns: C array or null if array is empty
  */
-T* arrayDtoC(T, Flag!"Alloc" alloc = No.Alloc, Flag!"ZeroTerm" zeroTerm = No.ZeroTerm)(T[] array)
+T* arrayDtoC(T, Flag!"Alloc" alloc = No.Alloc, Flag!"ZeroTerm" zeroTerm = No.ZeroTerm)(T[] array) nothrow
 {
   if (array.length == 0)
     return null;
@@ -231,7 +231,7 @@ T* arrayDtoC(T, Flag!"Alloc" alloc = No.Alloc, Flag!"ZeroTerm" zeroTerm = No.Zer
  *   gByteArray = The GArray instance
  * Returns: D array of the given type
  */
-ubyte[] gByteArrayToD(GidOwnership ownership = GidOwnership.None)(GByteArray* gByteArray)
+ubyte[] gByteArrayToD(GidOwnership ownership = GidOwnership.None)(GByteArray* gByteArray) nothrow
 {
   ubyte[] a;
 
@@ -256,7 +256,7 @@ ubyte[] gByteArrayToD(GidOwnership ownership = GidOwnership.None)(GByteArray* gB
  *   gBytes = The GBytes instance
  * Returns: D array of the given type
  */
-ubyte[] gBytesToD(GidOwnership ownership = GidOwnership.None)(GBytes* gBytes)
+ubyte[] gBytesToD(GidOwnership ownership = GidOwnership.None)(GBytes* gBytes) nothrow
 {
   ubyte[] a;
 
@@ -280,7 +280,7 @@ ubyte[] gBytesToD(GidOwnership ownership = GidOwnership.None)(GBytes* gBytes)
  *   gArray = The GArray instance
  * Returns: D array of the given type
  */
-T[] gArrayGToD(T, GidOwnership ownership = GidOwnership.None)(GArray* gArray)
+T[] gArrayGToD(T, GidOwnership ownership = GidOwnership.None)(GArray* gArray) nothrow
   if (containerTypeIsSupported!T)
 {
   T[] a;
@@ -315,7 +315,7 @@ T[] gArrayGToD(T, GidOwnership ownership = GidOwnership.None)(GArray* gArray)
  *   ptrArray = The pointer array instance
  * Returns: D array of the given type
  */
-T[] gPtrArrayToD(T, GidOwnership ownership = GidOwnership.None)(GPtrArray* ptrArray)
+T[] gPtrArrayToD(T, GidOwnership ownership = GidOwnership.None)(GPtrArray* ptrArray) nothrow
   if (containerTypeIsSupported!T)
 {
   T[] a;
@@ -344,7 +344,7 @@ T[] gPtrArrayToD(T, GidOwnership ownership = GidOwnership.None)(GPtrArray* ptrAr
  *   list = The list
  * Returns: D array of the given type
  */
-T[] gListToD(T, GidOwnership ownership = GidOwnership.None)(GList* list)
+T[] gListToD(T, GidOwnership ownership = GidOwnership.None)(GList* list) nothrow
   if (containerTypeIsSupported!T)
 {
   T[] a;
@@ -378,7 +378,7 @@ T[] gListToD(T, GidOwnership ownership = GidOwnership.None)(GList* list)
  *   list = The list
  * Returns: D array of the given type
  */
-T[] gSListToD(T, GidOwnership ownership = GidOwnership.None)(GSList* list)
+T[] gSListToD(T, GidOwnership ownership = GidOwnership.None)(GSList* list) nothrow
   if (containerTypeIsSupported!T)
 {
   T[] a;
@@ -413,7 +413,7 @@ T[] gSListToD(T, GidOwnership ownership = GidOwnership.None)(GSList* list)
  *   hash = The hash table to convert
  * Returns: The D associative array which is a copy of the data in hash
  */
-V[K] gHashTableToD(K, V, GidOwnership ownership = GidOwnership.None)(GHashTable* hash)
+V[K] gHashTableToD(K, V, GidOwnership ownership = GidOwnership.None)(GHashTable* hash) nothrow
   if ((is(K == string) || is(K == const(void)*))
     && (is(V : gobject.object.ObjectWrap) || is(V == interface) || is(V == string) || is(V == void*)))
 {
@@ -442,7 +442,7 @@ V[K] gHashTableToD(K, V, GidOwnership ownership = GidOwnership.None)(GHashTable*
  *   a = The D array
  * Returns: New GArray which should be freed with containerFree!() template (if ownership not taken by C code)
  */
-GByteArray* gByteArrayFromD(ubyte[] a)
+GByteArray* gByteArrayFromD(ubyte[] a) nothrow
 {
   auto gByteArray = g_byte_array_sized_new(cast(uint)a.length);
 
@@ -458,7 +458,7 @@ GByteArray* gByteArrayFromD(ubyte[] a)
  *   a = The D array
  * Returns: New GBytes which should be freed with containerFree!() template (if ownership not taken by C code)
  */
-GBytes* gBytesFromD(ubyte[] a)
+GBytes* gBytesFromD(ubyte[] a) nothrow
 {
   return g_bytes_new(cast(const(void)*)a.ptr, a.length);
 }
@@ -471,14 +471,14 @@ GBytes* gBytesFromD(ubyte[] a)
  *   a = The D array
  * Returns: New GArray which should be freed with containerFree!() template (if ownership not taken by C code)
  */
-GArray* gArrayGFromD(T, bool zeroTerminated = false)(T[] a)
+GArray* gArrayGFromD(T, bool zeroTerminated = false)(T[] a) nothrow
   if (containerTypeIsSupported!T)
 {
   auto gArray = g_array_sized_new(zeroTerminated, false, containerTypeSize!T, cast(uint)a.length);
 
   static if (!isTypeSimple!T && !is(T == void*) && !is(T == const(void)*))
   {
-    extern(C) void clearFunc(void* elem)
+    extern(C) void clearFunc(void* elem) nothrow
     {
       cValueFree!T(*cast(void**)elem);
       *cast(void**)elem = null;
@@ -504,14 +504,14 @@ GArray* gArrayGFromD(T, bool zeroTerminated = false)(T[] a)
  *   a = The D array
  * Returns: New GPtrArray which should be freed with containerFree!() template (if ownership not taken by C code)
  */
-GPtrArray* gPtrArrayFromD(T, bool zeroTerminated = false)(T[] a)
+GPtrArray* gPtrArrayFromD(T, bool zeroTerminated = false)(T[] a) nothrow
   if (containerTypeIsSupported!T)
 {
   auto gPtrArray = g_ptr_array_new();
 
   static if (!is(T == void*) && !is(T == const(void)*))
   {
-    extern(C) void clearFunc(void* elem)
+    extern(C) void clearFunc(void* elem) nothrow
     {
       cValueFree!T(elem);
     }
@@ -542,7 +542,7 @@ GPtrArray* gPtrArrayFromD(T, bool zeroTerminated = false)(T[] a)
  *   a = The D array
  * Returns: New GList which should be freed with containerFree!() template (if ownership not taken by C code)
  */
-GList* gListFromD(T)(T[] a)
+GList* gListFromD(T)(T[] a) nothrow
   if (containerTypeIsSupported!T && !isTypeSimple!T)
 {
   GList* list;
@@ -575,7 +575,7 @@ GList* gListFromD(T)(T[] a)
  *   a = The D array
  * Returns: New GSList which should be freed with containerFree!() template (if ownership not taken by C code)
  */
-GSList* gSListFromD(T)(T[] a)
+GSList* gSListFromD(T)(T[] a) nothrow
   if (containerTypeIsSupported!T)
 {
   GSList* list;
@@ -608,7 +608,7 @@ GSList* gSListFromD(T)(T[] a)
  *   map = The D map
  * Returns: A newly allocated GHashTable.
  */
-GHashTable* gHashTableFromD(K, V)(V[K] map)
+GHashTable* gHashTableFromD(K, V)(V[K] map) nothrow
   if ((is(K == string) || is(K == const(void)*))
     && (is(V : gobject.object.ObjectWrap) || is(V == interface) || is(V == string) || is(V == void*)))
 {
@@ -626,13 +626,13 @@ GHashTable* gHashTableFromD(K, V)(V[K] map)
   else
     hash = g_hash_table_new_full(g_direct_hash, g_direct_equal, null, valDestroyFunc);
 
-  foreach (k, v; map)
+  foreach (k; map.keys)
   {
     void* keyptr;
     void* valptr;
 
     dToC!K(k, &keyptr);
-    dToC!V(v, &valptr);
+    dToC!V(map[k], &valptr);
     g_hash_table_insert(hash, keyptr, valptr);
   }
 
@@ -645,7 +645,7 @@ GHashTable* gHashTableFromD(K, V)(V[K] map)
  *   T = The type to check
  * Returns: true if the type can be used for container C to/from D transformation
  */
-bool containerTypeIsSupported(T)()
+bool containerTypeIsSupported(T)() nothrow
 {
   return is(T : gobject.object.ObjectWrap) || is(T == interface) || is(T == string) || isTypeCopyableStruct!T || isTypeSimple!T
     || is(T == void*) || is(T == const(void)*);
@@ -657,7 +657,7 @@ bool containerTypeIsSupported(T)()
  *   T = The type
  * Returns: The element size in bytes
  */
-uint containerTypeSize(T)()
+uint containerTypeSize(T)() nothrow
   if (containerTypeIsSupported!T)
 {
   static if (isTypeSimple!T)
@@ -675,7 +675,7 @@ uint containerTypeSize(T)()
  *     (None is the default and frees container and items, Container frees only the container, Full does nothing)
  *   container = The GLib C container pointer
  */
-void containerFree(CT, T, GidOwnership ownership = GidOwnership.None)(CT container)
+void containerFree(CT, T, GidOwnership ownership = GidOwnership.None)(CT container) nothrow
 {
   static if (ownership == GidOwnership.Full)
     return;
@@ -753,7 +753,7 @@ void containerFree(CT, T, GidOwnership ownership = GidOwnership.None)(CT contain
  *   T = Type to check
  * Returns: true if type is a boxed or reffed type
  */
-bool isTypeCopyableStruct(T)()
+bool isTypeCopyableStruct(T)() nothrow
 {
   return __traits(compiles, {auto c = new T(cast(void*)null, No.Take); c._cPtr(Yes.Dup);});
 }
@@ -764,7 +764,7 @@ bool isTypeCopyableStruct(T)()
  *   T = The D type to check
  * Returns: bool if type is considered simple
  */
-bool isTypeSimple(T)()
+bool isTypeSimple(T)() nothrow
 {
   return isScalarType!T || is(T == struct) || is(T == union);
 }
@@ -776,7 +776,7 @@ bool isTypeSimple(T)()
 *   data = Pointer to the C value
 * Returns: D value which is a copy of the C value
 */
-T cToD(T)(void* data)
+T cToD(T)(void* data) nothrow
   if (containerTypeIsSupported!T)
 {
   static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
@@ -800,7 +800,7 @@ T cToD(T)(void* data)
 *   val = The D value to copy
 *   data = Pointer to the location to store the C value
 */
-void dToC(T)(T val, void* data)
+void dToC(T)(T val, void* data) nothrow
   if (containerTypeIsSupported!T)
 {
   static if (is(T : gobject.object.ObjectWrap) || isTypeCopyableStruct!T)
@@ -828,7 +828,7 @@ void dToC(T)(T val, void* data)
  *   T = The D type counterpart
  *   data = Pointer to the C value
  */
-void cValueFree(T)(void* data)
+void cValueFree(T)(void* data) nothrow
   if (containerTypeIsSupported!T)
 {
   static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
@@ -848,7 +848,7 @@ void cValueFree(T)(void* data)
  *   T = The type to check
  * Returns: true if T is a boxed type (just checks if it has a boxCopy member)
  */
-bool isBoxed(T)()
+bool isBoxed(T)() nothrow
 {
   return hasMember!(T, "boxCopy");
 }
@@ -860,7 +860,7 @@ bool isBoxed(T)()
   *   cBoxed = The C boxed pointer
   * Returns: A copy of the boxed type
   */
-static void* boxedCopy(T)(void* cBoxed)
+static void* boxedCopy(T)(void* cBoxed) nothrow
 {
   return cBoxed ? g_boxed_copy(T._getGType, cBoxed) : null;
 }
@@ -871,17 +871,69 @@ static void* boxedCopy(T)(void* cBoxed)
   *   T = The D boxed type
   *   cBoxed = The C boxed pointer
   */
-static void boxedFree(T)(void* cBoxed)
+static void boxedFree(T)(void* cBoxed) nothrow
 {
   if (cBoxed)
     g_boxed_free(T._getGType, cBoxed);
 }
 
-/// Exception class used for ObjectWrap constructor errors
-class GidConstructException : Exception
+// User-replaceable callback exception handler
+__gshared GidCallbackExceptionHandler gidCallbackExceptionHandler = &defaultCallbackExceptionHandler;
+
+alias GidCallbackExceptionHandler = void function(Exception e, GidCallbackExceptionInfo info) nothrow;
+
+/**
+ * Context passed to exception handlers.
+ * Empty in release builds for zero overhead.
+ */
+struct GidCallbackExceptionInfo
 {
-  this(string msg)
+  version (Debug)
   {
-    super(msg);
+    string context;
   }
+
+  static GidCallbackExceptionInfo make(lazy string context) nothrow
+  {
+    version (Debug)
+      return GidCallbackExceptionInfo(context);
+    else
+      return GidCallbackExceptionInfo();
+  }
+}
+
+/**
+ * Template helper to invoke the exception handler.
+ * This is the recommended way to call it from your wrappers.
+ * It handles debug/release logic and lazy context evaluation.
+ */
+void gidInvokeCallbackExceptionHandler(Exception e, lazy string context = null) nothrow
+{
+  auto info = GidCallbackExceptionInfo.make(context);
+  gidCallbackExceptionHandler(e, info);
+}
+
+// Default handler
+void defaultCallbackExceptionHandler(Exception e, GidCallbackExceptionInfo info) nothrow
+{
+  import std.stdio : stderr;
+
+  try
+  {
+    version (Debug)
+      stderr.writeln("Unhandled exception in giD user callback [", info.context, "]: ", e);
+    else
+      stderr.writeln("Unhandled exception in giD user callback: ", e.msg);
+  }
+  catch (Exception)
+  {
+  }
+}
+
+/**
+ * Set custom handler (null resets to default)
+ */
+void setCallbackExceptionHandler(GidCallbackExceptionHandler handler) nothrow
+{
+  gidCallbackExceptionHandler = (handler !is null) ? handler : &defaultCallbackExceptionHandler;
 }

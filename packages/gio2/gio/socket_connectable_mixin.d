@@ -77,7 +77,7 @@ template SocketConnectableT()
       Creates a #GSocketAddressEnumerator for connectable.
       Returns: a new #GSocketAddressEnumerator.
   */
-  override gio.socket_address_enumerator.SocketAddressEnumerator enumerate()
+  override gio.socket_address_enumerator.SocketAddressEnumerator enumerate() nothrow
   {
     GSocketAddressEnumerator* _cretval;
     _cretval = g_socket_connectable_enumerate(cast(GSocketConnectable*)this._cPtr);
@@ -95,7 +95,7 @@ template SocketConnectableT()
       calling [gio.socket_connectable.SocketConnectable.enumerate].
       Returns: a new #GSocketAddressEnumerator.
   */
-  override gio.socket_address_enumerator.SocketAddressEnumerator proxyEnumerate()
+  override gio.socket_address_enumerator.SocketAddressEnumerator proxyEnumerate() nothrow
   {
     GSocketAddressEnumerator* _cretval;
     _cretval = g_socket_connectable_proxy_enumerate(cast(GSocketConnectable*)this._cPtr);
@@ -113,7 +113,7 @@ template SocketConnectableT()
       the implementation’s type name will be returned as a fallback.
       Returns: the formatted string
   */
-  override string toString_()
+  override string toString_() nothrow
   {
     char* _cretval;
     _cretval = g_socket_connectable_to_string(cast(GSocketConnectable*)this._cPtr);

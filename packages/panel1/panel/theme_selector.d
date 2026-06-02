@@ -31,26 +31,26 @@ class ThemeSelector : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_theme_selector_get_type != &gidSymbolNotFound ? panel_theme_selector_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ThemeSelector self()
+  override ThemeSelector self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class ThemeSelector : gtk.widget.Widget
       Get builder for [panel.theme_selector.ThemeSelector]
       Returns: New builder object
   */
-  static ThemeSelectorGidBuilder builder()
+  static ThemeSelectorGidBuilder builder() nothrow
   {
     return new ThemeSelectorGidBuilder;
   }
@@ -68,7 +68,7 @@ class ThemeSelector : gtk.widget.Widget
       Get `actionName` property.
       Returns: The name of the action activated on activation.
   */
-  @property string actionName()
+  @property string actionName() nothrow
   {
     return getActionName();
   }
@@ -78,7 +78,7 @@ class ThemeSelector : gtk.widget.Widget
       Params:
         propval = The name of the action activated on activation.
   */
-  @property void actionName(string propval)
+  @property void actionName(string propval) nothrow
   {
     setActionName(propval);
   }
@@ -87,7 +87,7 @@ class ThemeSelector : gtk.widget.Widget
       Create a new #ThemeSelector.
       Returns: a newly created #PanelThemeSelector.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = panel_theme_selector_new();
@@ -98,7 +98,7 @@ class ThemeSelector : gtk.widget.Widget
       Gets the name of the action that will be activated.
       Returns: the name of the action.
   */
-  string getActionName()
+  string getActionName() nothrow
   {
     const(char)* _cretval;
     _cretval = panel_theme_selector_get_action_name(cast(PanelThemeSelector*)this._cPtr);
@@ -112,7 +112,7 @@ class ThemeSelector : gtk.widget.Widget
       Params:
         actionName = the action name.
   */
-  void setActionName(string actionName)
+  void setActionName(string actionName) nothrow
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     panel_theme_selector_set_action_name(cast(PanelThemeSelector*)this._cPtr, _actionName);
@@ -130,7 +130,7 @@ class ThemeSelectorGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The name of the action activated on activation.
       Returns: Builder instance for fluent chaining
   */
-  T actionName(string propval)
+  T actionName(string propval) nothrow
   {
     return setProperty("action-name", propval);
   }
@@ -143,7 +143,7 @@ final class ThemeSelectorGidBuilder : ThemeSelectorGidBuilderImpl!ThemeSelectorG
       Create object from builder.
       Returns: New object
   */
-  ThemeSelector build()
+  ThemeSelector build() nothrow
   {
     return new ThemeSelector(cast(void*)createGObject(ThemeSelector._getGType), No.Take);
   }

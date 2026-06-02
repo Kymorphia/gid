@@ -28,26 +28,26 @@ class HSV : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_hsv_get_type != &gidSymbolNotFound ? gtk_hsv_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HSV self()
+  override HSV self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class HSV : gtk.widget.Widget
       Get builder for [gtk.hsv.HSV]
       Returns: New builder object
   */
-  static HSVGidBuilder builder()
+  static HSVGidBuilder builder() nothrow
   {
     return new HSVGidBuilder;
   }
@@ -65,7 +65,7 @@ class HSV : gtk.widget.Widget
       Creates a new HSV color selector.
       Returns: A newly-created HSV color selector.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_hsv_new();
@@ -86,7 +86,7 @@ class HSV : gtk.widget.Widget
         g = Return value for the green component
         b = Return value for the blue component
   */
-  static void toRgb(double h, double s, double v, out double r, out double g, out double b)
+  static void toRgb(double h, double s, double v, out double r, out double g, out double b) nothrow
   {
     gtk_hsv_to_rgb(h, s, v, cast(double*)&r, cast(double*)&g, cast(double*)&b);
   }
@@ -100,7 +100,7 @@ class HSV : gtk.widget.Widget
         s = Return value for the saturation
         v = Return value for the value
   */
-  void getColor(out double h, out double s, out double v)
+  void getColor(out double h, out double s, out double v) nothrow
   {
     gtk_hsv_get_color(cast(GtkHSV*)this._cPtr, cast(double*)&h, cast(double*)&s, cast(double*)&v);
   }
@@ -112,7 +112,7 @@ class HSV : gtk.widget.Widget
         size = Return value for the diameter of the hue ring
         ringWidth = Return value for the width of the hue ring
   */
-  void getMetrics(out int size, out int ringWidth)
+  void getMetrics(out int size, out int ringWidth) nothrow
   {
     gtk_hsv_get_metrics(cast(GtkHSV*)this._cPtr, cast(int*)&size, cast(int*)&ringWidth);
   }
@@ -126,7 +126,7 @@ class HSV : gtk.widget.Widget
             since they may be transitory, or false if they should consider
             the color value status to be final.
   */
-  bool isAdjusting()
+  bool isAdjusting() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_hsv_is_adjusting(cast(GtkHSV*)this._cPtr);
@@ -142,7 +142,7 @@ class HSV : gtk.widget.Widget
         s = Saturation
         v = Value
   */
-  void setColor(double h, double s, double v)
+  void setColor(double h, double s, double v) nothrow
   {
     gtk_hsv_set_color(cast(GtkHSV*)this._cPtr, h, s, v);
   }
@@ -154,7 +154,7 @@ class HSV : gtk.widget.Widget
         size = Diameter for the hue ring
         ringWidth = Width of the hue ring
   */
-  void setMetrics(int size, int ringWidth)
+  void setMetrics(int size, int ringWidth) nothrow
   {
     gtk_hsv_set_metrics(cast(GtkHSV*)this._cPtr, size, ringWidth);
   }
@@ -174,13 +174,13 @@ class HSV : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.hsv.HSV)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -189,7 +189,14 @@ class HSV : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.hsv.HSV.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -213,14 +220,14 @@ class HSV : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMove(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMove(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.DirectionType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.hsv.HSV)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -232,7 +239,14 @@ class HSV : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.hsv.HSV.move");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -253,7 +267,7 @@ final class HSVGidBuilder : HSVGidBuilderImpl!HSVGidBuilder
       Create object from builder.
       Returns: New object
   */
-  HSV build()
+  HSV build() nothrow
   {
     return new HSV(cast(void*)createGObject(HSV._getGType), No.Take);
   }

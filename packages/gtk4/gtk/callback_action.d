@@ -19,26 +19,26 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_callback_action_get_type != &gidSymbolNotFound ? gtk_callback_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CallbackAction self()
+  override CallbackAction self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
       Get builder for [gtk.callback_action.CallbackAction]
       Returns: New builder object
   */
-  static CallbackActionGidBuilder builder()
+  static CallbackActionGidBuilder builder() nothrow
   {
     return new CallbackActionGidBuilder;
   }
@@ -60,14 +60,21 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
         callback = the callback to call
       Returns: A new shortcut action
   */
-  this(gtk.types.ShortcutFunc callback = null)
+  this(gtk.types.ShortcutFunc callback = null) nothrow
   {
-    extern(C) gboolean _callbackCallback(GtkWidget* widget, GVariant* args, void* userData)
+    extern(C) gboolean _callbackCallback(GtkWidget* widget, GVariant* args, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.ShortcutFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), args ? new glib.variant.Variant(cast(void*)args, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), args ? new glib.variant.Variant(cast(void*)args, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.ShortcutFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -93,7 +100,7 @@ final class CallbackActionGidBuilder : CallbackActionGidBuilderImpl!CallbackActi
       Create object from builder.
       Returns: New object
   */
-  CallbackAction build()
+  CallbackAction build() nothrow
   {
     return new CallbackAction(cast(void*)createGObject(CallbackAction._getGType), Yes.Take);
   }

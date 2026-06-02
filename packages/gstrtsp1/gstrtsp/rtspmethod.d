@@ -18,7 +18,7 @@ struct RTSPMethod
         method = a #GstRTSPMethod
       Returns: a string representation of method.
   */
-  static string asText(gstrtsp.types.RTSPMethod method)
+  static string asText(gstrtsp.types.RTSPMethod method) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_rtsp_method_as_text(method);

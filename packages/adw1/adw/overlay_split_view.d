@@ -158,26 +158,26 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_overlay_split_view_get_type != &gidSymbolNotFound ? adw_overlay_split_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override OverlaySplitView self()
+  override OverlaySplitView self() nothrow
   {
     return this;
   }
@@ -186,7 +186,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Get builder for [adw.overlay_split_view.OverlaySplitView]
       Returns: New builder object
   */
-  static OverlaySplitViewGidBuilder builder()
+  static OverlaySplitViewGidBuilder builder() nothrow
   {
     return new OverlaySplitViewGidBuilder;
   }
@@ -198,7 +198,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
         When collapsed, the sidebar widget is presented as an overlay above the
         content widget, otherwise they are displayed side by side.
   */
-  @property bool collapsed()
+  @property bool collapsed() nothrow
   {
     return getCollapsed();
   }
@@ -211,7 +211,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
           When collapsed, the sidebar widget is presented as an overlay above the
           content widget, otherwise they are displayed side by side.
   */
-  @property void collapsed(bool propval)
+  @property void collapsed(bool propval) nothrow
   {
     setCollapsed(propval);
   }
@@ -220,7 +220,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Get `content` property.
       Returns: The content widget.
   */
-  @property gtk.widget.Widget content()
+  @property gtk.widget.Widget content() nothrow
   {
     return getContent();
   }
@@ -230,7 +230,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         propval = The content widget.
   */
-  @property void content(gtk.widget.Widget propval)
+  @property void content(gtk.widget.Widget propval) nothrow
   {
     setContent(propval);
   }
@@ -241,7 +241,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
         
         Only touchscreen swipes are supported.
   */
-  @property bool enableHideGesture()
+  @property bool enableHideGesture() nothrow
   {
     return getEnableHideGesture();
   }
@@ -253,7 +253,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
           
           Only touchscreen swipes are supported.
   */
-  @property void enableHideGesture(bool propval)
+  @property void enableHideGesture(bool propval) nothrow
   {
     setEnableHideGesture(propval);
   }
@@ -264,7 +264,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
         
         Only touchscreen swipes are supported.
   */
-  @property bool enableShowGesture()
+  @property bool enableShowGesture() nothrow
   {
     return getEnableShowGesture();
   }
@@ -276,7 +276,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
           
           Only touchscreen swipes are supported.
   */
-  @property void enableShowGesture(bool propval)
+  @property void enableShowGesture(bool propval) nothrow
   {
     setEnableShowGesture(propval);
   }
@@ -291,7 +291,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
         The sidebar widget can still be allocated with larger width if its own
         minimum width exceeds it.
   */
-  @property double maxSidebarWidth()
+  @property double maxSidebarWidth() nothrow
   {
     return getMaxSidebarWidth();
   }
@@ -307,7 +307,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
           The sidebar widget can still be allocated with larger width if its own
           minimum width exceeds it.
   */
-  @property void maxSidebarWidth(double propval)
+  @property void maxSidebarWidth(double propval) nothrow
   {
     setMaxSidebarWidth(propval);
   }
@@ -322,7 +322,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
         The sidebar widget can still be allocated with larger width if its own
         minimum width exceeds it.
   */
-  @property double minSidebarWidth()
+  @property double minSidebarWidth() nothrow
   {
     return getMinSidebarWidth();
   }
@@ -338,7 +338,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
           The sidebar widget can still be allocated with larger width if its own
           minimum width exceeds it.
   */
-  @property void minSidebarWidth(double propval)
+  @property void minSidebarWidth(double propval) nothrow
   {
     setMinSidebarWidth(propval);
   }
@@ -351,7 +351,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
         uncollapsing it shows the sidebar. If set to `TRUE`, sidebar visibility
         never changes on its own.
   */
-  @property bool pinSidebar()
+  @property bool pinSidebar() nothrow
   {
     return getPinSidebar();
   }
@@ -365,7 +365,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
           uncollapsing it shows the sidebar. If set to `TRUE`, sidebar visibility
           never changes on its own.
   */
-  @property void pinSidebar(bool propval)
+  @property void pinSidebar(bool propval) nothrow
   {
     setPinSidebar(propval);
   }
@@ -374,7 +374,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Get `showSidebar` property.
       Returns: Whether the sidebar widget is shown.
   */
-  @property bool showSidebar()
+  @property bool showSidebar() nothrow
   {
     return getShowSidebar();
   }
@@ -384,7 +384,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         propval = Whether the sidebar widget is shown.
   */
-  @property void showSidebar(bool propval)
+  @property void showSidebar(bool propval) nothrow
   {
     setShowSidebar(propval);
   }
@@ -393,7 +393,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Get `sidebar` property.
       Returns: The sidebar widget.
   */
-  @property gtk.widget.Widget sidebar()
+  @property gtk.widget.Widget sidebar() nothrow
   {
     return getSidebar();
   }
@@ -403,7 +403,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         propval = The sidebar widget.
   */
-  @property void sidebar(gtk.widget.Widget propval)
+  @property void sidebar(gtk.widget.Widget propval) nothrow
   {
     setSidebar(propval);
   }
@@ -415,7 +415,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
         If it's set to [gtk.types.PackType.Start], the sidebar is displayed before the content,
         if [gtk.types.PackType.End], it's displayed after the content.
   */
-  @property gtk.types.PackType sidebarPosition()
+  @property gtk.types.PackType sidebarPosition() nothrow
   {
     return getSidebarPosition();
   }
@@ -428,7 +428,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
           If it's set to [gtk.types.PackType.Start], the sidebar is displayed before the content,
           if [gtk.types.PackType.End], it's displayed after the content.
   */
-  @property void sidebarPosition(gtk.types.PackType propval)
+  @property void sidebarPosition(gtk.types.PackType propval) nothrow
   {
     setSidebarPosition(propval);
   }
@@ -444,7 +444,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
         The sidebar widget can be allocated with larger width if its own minimum
         width exceeds the preferred width.
   */
-  @property double sidebarWidthFraction()
+  @property double sidebarWidthFraction() nothrow
   {
     return getSidebarWidthFraction();
   }
@@ -461,7 +461,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
           The sidebar widget can be allocated with larger width if its own minimum
           width exceeds the preferred width.
   */
-  @property void sidebarWidthFraction(double propval)
+  @property void sidebarWidthFraction(double propval) nothrow
   {
     setSidebarWidthFraction(propval);
   }
@@ -473,7 +473,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
         See [adw.overlay_split_view.OverlaySplitView.minSidebarWidth] and
         [adw.overlay_split_view.OverlaySplitView.maxSidebarWidth].
   */
-  @property adw.types.LengthUnit sidebarWidthUnit()
+  @property adw.types.LengthUnit sidebarWidthUnit() nothrow
   {
     return getSidebarWidthUnit();
   }
@@ -486,7 +486,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
           See [adw.overlay_split_view.OverlaySplitView.minSidebarWidth] and
           [adw.overlay_split_view.OverlaySplitView.maxSidebarWidth].
   */
-  @property void sidebarWidthUnit(adw.types.LengthUnit propval)
+  @property void sidebarWidthUnit(adw.types.LengthUnit propval) nothrow
   {
     setSidebarWidthUnit(propval);
   }
@@ -497,7 +497,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Creates a new [adw.overlay_split_view.OverlaySplitView].
       Returns: the newly created [adw.overlay_split_view.OverlaySplitView]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_overlay_split_view_new();
@@ -508,7 +508,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Gets whether self is collapsed.
       Returns: whether self is collapsed
   */
-  bool getCollapsed()
+  bool getCollapsed() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_overlay_split_view_get_collapsed(cast(AdwOverlaySplitView*)this._cPtr);
@@ -519,7 +519,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Gets the content widget for self.
       Returns: the content widget for self
   */
-  gtk.widget.Widget getContent()
+  gtk.widget.Widget getContent() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_overlay_split_view_get_content(cast(AdwOverlaySplitView*)this._cPtr);
@@ -531,7 +531,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Gets whether self can be closed with a swipe gesture.
       Returns: `TRUE` if self can be closed with a swipe gesture
   */
-  bool getEnableHideGesture()
+  bool getEnableHideGesture() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_overlay_split_view_get_enable_hide_gesture(cast(AdwOverlaySplitView*)this._cPtr);
@@ -542,7 +542,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Gets whether self can be opened with an edge swipe gesture.
       Returns: `TRUE` if self can be opened with a swipe gesture
   */
-  bool getEnableShowGesture()
+  bool getEnableShowGesture() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_overlay_split_view_get_enable_show_gesture(cast(AdwOverlaySplitView*)this._cPtr);
@@ -553,7 +553,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Gets the maximum sidebar width for self.
       Returns: the maximum width
   */
-  double getMaxSidebarWidth()
+  double getMaxSidebarWidth() nothrow
   {
     double _retval;
     _retval = adw_overlay_split_view_get_max_sidebar_width(cast(AdwOverlaySplitView*)this._cPtr);
@@ -564,7 +564,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Gets the minimum sidebar width for self.
       Returns: the minimum width
   */
-  double getMinSidebarWidth()
+  double getMinSidebarWidth() nothrow
   {
     double _retval;
     _retval = adw_overlay_split_view_get_min_sidebar_width(cast(AdwOverlaySplitView*)this._cPtr);
@@ -575,7 +575,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Gets whether the sidebar widget is pinned for self.
       Returns: whether if the sidebar widget is pinned
   */
-  bool getPinSidebar()
+  bool getPinSidebar() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_overlay_split_view_get_pin_sidebar(cast(AdwOverlaySplitView*)this._cPtr);
@@ -586,7 +586,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Gets whether the sidebar widget is shown for self.
       Returns: `TRUE` if the sidebar widget is shown
   */
-  bool getShowSidebar()
+  bool getShowSidebar() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_overlay_split_view_get_show_sidebar(cast(AdwOverlaySplitView*)this._cPtr);
@@ -597,7 +597,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Gets the sidebar widget for self.
       Returns: the sidebar widget for self
   */
-  gtk.widget.Widget getSidebar()
+  gtk.widget.Widget getSidebar() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_overlay_split_view_get_sidebar(cast(AdwOverlaySplitView*)this._cPtr);
@@ -609,7 +609,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Gets the sidebar position for self.
       Returns: the sidebar position for self
   */
-  gtk.types.PackType getSidebarPosition()
+  gtk.types.PackType getSidebarPosition() nothrow
   {
     GtkPackType _cretval;
     _cretval = adw_overlay_split_view_get_sidebar_position(cast(AdwOverlaySplitView*)this._cPtr);
@@ -621,7 +621,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Gets the preferred sidebar width fraction for self.
       Returns: the preferred width fraction
   */
-  double getSidebarWidthFraction()
+  double getSidebarWidthFraction() nothrow
   {
     double _retval;
     _retval = adw_overlay_split_view_get_sidebar_width_fraction(cast(AdwOverlaySplitView*)this._cPtr);
@@ -632,7 +632,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Gets the length unit for minimum and maximum sidebar widths.
       Returns: the length unit
   */
-  adw.types.LengthUnit getSidebarWidthUnit()
+  adw.types.LengthUnit getSidebarWidthUnit() nothrow
   {
     AdwLengthUnit _cretval;
     _cretval = adw_overlay_split_view_get_sidebar_width_unit(cast(AdwOverlaySplitView*)this._cPtr);
@@ -649,7 +649,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         collapsed = whether self is collapsed
   */
-  void setCollapsed(bool collapsed)
+  void setCollapsed(bool collapsed) nothrow
   {
     adw_overlay_split_view_set_collapsed(cast(AdwOverlaySplitView*)this._cPtr, collapsed);
   }
@@ -660,7 +660,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         content = the content widget
   */
-  void setContent(gtk.widget.Widget content = null)
+  void setContent(gtk.widget.Widget content = null) nothrow
   {
     adw_overlay_split_view_set_content(cast(AdwOverlaySplitView*)this._cPtr, content ? cast(GtkWidget*)content._cPtr(No.Dup) : null);
   }
@@ -673,7 +673,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         enableHideGesture = whether self can be closed with a swipe gesture
   */
-  void setEnableHideGesture(bool enableHideGesture)
+  void setEnableHideGesture(bool enableHideGesture) nothrow
   {
     adw_overlay_split_view_set_enable_hide_gesture(cast(AdwOverlaySplitView*)this._cPtr, enableHideGesture);
   }
@@ -686,7 +686,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         enableShowGesture = whether self can be opened with a swipe gesture
   */
-  void setEnableShowGesture(bool enableShowGesture)
+  void setEnableShowGesture(bool enableShowGesture) nothrow
   {
     adw_overlay_split_view_set_enable_show_gesture(cast(AdwOverlaySplitView*)this._cPtr, enableShowGesture);
   }
@@ -702,7 +702,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         width = the maximum width
   */
-  void setMaxSidebarWidth(double width)
+  void setMaxSidebarWidth(double width) nothrow
   {
     adw_overlay_split_view_set_max_sidebar_width(cast(AdwOverlaySplitView*)this._cPtr, width);
   }
@@ -718,7 +718,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         width = the minimum width
   */
-  void setMinSidebarWidth(double width)
+  void setMinSidebarWidth(double width) nothrow
   {
     adw_overlay_split_view_set_min_sidebar_width(cast(AdwOverlaySplitView*)this._cPtr, width);
   }
@@ -733,7 +733,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         pinSidebar = whether to pin the sidebar widget
   */
-  void setPinSidebar(bool pinSidebar)
+  void setPinSidebar(bool pinSidebar) nothrow
   {
     adw_overlay_split_view_set_pin_sidebar(cast(AdwOverlaySplitView*)this._cPtr, pinSidebar);
   }
@@ -744,7 +744,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         showSidebar = whether to show the sidebar widget
   */
-  void setShowSidebar(bool showSidebar)
+  void setShowSidebar(bool showSidebar) nothrow
   {
     adw_overlay_split_view_set_show_sidebar(cast(AdwOverlaySplitView*)this._cPtr, showSidebar);
   }
@@ -755,7 +755,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         sidebar = the sidebar widget
   */
-  void setSidebar(gtk.widget.Widget sidebar = null)
+  void setSidebar(gtk.widget.Widget sidebar = null) nothrow
   {
     adw_overlay_split_view_set_sidebar(cast(AdwOverlaySplitView*)this._cPtr, sidebar ? cast(GtkWidget*)sidebar._cPtr(No.Dup) : null);
   }
@@ -769,7 +769,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         position = the new position
   */
-  void setSidebarPosition(gtk.types.PackType position)
+  void setSidebarPosition(gtk.types.PackType position) nothrow
   {
     adw_overlay_split_view_set_sidebar_position(cast(AdwOverlaySplitView*)this._cPtr, position);
   }
@@ -787,7 +787,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         fraction = the preferred width fraction
   */
-  void setSidebarWidthFraction(double fraction)
+  void setSidebarWidthFraction(double fraction) nothrow
   {
     adw_overlay_split_view_set_sidebar_width_fraction(cast(AdwOverlaySplitView*)this._cPtr, fraction);
   }
@@ -801,7 +801,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         unit = the length unit
   */
-  void setSidebarWidthUnit(adw.types.LengthUnit unit)
+  void setSidebarWidthUnit(adw.types.LengthUnit unit) nothrow
   {
     adw_overlay_split_view_set_sidebar_width_unit(cast(AdwOverlaySplitView*)this._cPtr, unit);
   }
@@ -822,7 +822,7 @@ class OverlaySplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw
           content widget, otherwise they are displayed side by side.
       Returns: Builder instance for fluent chaining
   */
-  T collapsed(bool propval)
+  T collapsed(bool propval) nothrow
   {
     return setProperty("collapsed", propval);
   }
@@ -833,7 +833,7 @@ class OverlaySplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw
         propval = The content widget.
       Returns: Builder instance for fluent chaining
   */
-  T content(gtk.widget.Widget propval)
+  T content(gtk.widget.Widget propval) nothrow
   {
     return setProperty("content", propval);
   }
@@ -846,7 +846,7 @@ class OverlaySplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw
           Only touchscreen swipes are supported.
       Returns: Builder instance for fluent chaining
   */
-  T enableHideGesture(bool propval)
+  T enableHideGesture(bool propval) nothrow
   {
     return setProperty("enable-hide-gesture", propval);
   }
@@ -859,7 +859,7 @@ class OverlaySplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw
           Only touchscreen swipes are supported.
       Returns: Builder instance for fluent chaining
   */
-  T enableShowGesture(bool propval)
+  T enableShowGesture(bool propval) nothrow
   {
     return setProperty("enable-show-gesture", propval);
   }
@@ -876,7 +876,7 @@ class OverlaySplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw
           minimum width exceeds it.
       Returns: Builder instance for fluent chaining
   */
-  T maxSidebarWidth(double propval)
+  T maxSidebarWidth(double propval) nothrow
   {
     return setProperty("max-sidebar-width", propval);
   }
@@ -893,7 +893,7 @@ class OverlaySplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw
           minimum width exceeds it.
       Returns: Builder instance for fluent chaining
   */
-  T minSidebarWidth(double propval)
+  T minSidebarWidth(double propval) nothrow
   {
     return setProperty("min-sidebar-width", propval);
   }
@@ -908,7 +908,7 @@ class OverlaySplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw
           never changes on its own.
       Returns: Builder instance for fluent chaining
   */
-  T pinSidebar(bool propval)
+  T pinSidebar(bool propval) nothrow
   {
     return setProperty("pin-sidebar", propval);
   }
@@ -919,7 +919,7 @@ class OverlaySplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw
         propval = Whether the sidebar widget is shown.
       Returns: Builder instance for fluent chaining
   */
-  T showSidebar(bool propval)
+  T showSidebar(bool propval) nothrow
   {
     return setProperty("show-sidebar", propval);
   }
@@ -930,7 +930,7 @@ class OverlaySplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw
         propval = The sidebar widget.
       Returns: Builder instance for fluent chaining
   */
-  T sidebar(gtk.widget.Widget propval)
+  T sidebar(gtk.widget.Widget propval) nothrow
   {
     return setProperty("sidebar", propval);
   }
@@ -944,7 +944,7 @@ class OverlaySplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw
           if [gtk.types.PackType.End], it's displayed after the content.
       Returns: Builder instance for fluent chaining
   */
-  T sidebarPosition(gtk.types.PackType propval)
+  T sidebarPosition(gtk.types.PackType propval) nothrow
   {
     return setProperty("sidebar-position", propval);
   }
@@ -962,7 +962,7 @@ class OverlaySplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw
           width exceeds the preferred width.
       Returns: Builder instance for fluent chaining
   */
-  T sidebarWidthFraction(double propval)
+  T sidebarWidthFraction(double propval) nothrow
   {
     return setProperty("sidebar-width-fraction", propval);
   }
@@ -976,7 +976,7 @@ class OverlaySplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw
           [adw.overlay_split_view.OverlaySplitView.maxSidebarWidth].
       Returns: Builder instance for fluent chaining
   */
-  T sidebarWidthUnit(adw.types.LengthUnit propval)
+  T sidebarWidthUnit(adw.types.LengthUnit propval) nothrow
   {
     return setProperty("sidebar-width-unit", propval);
   }
@@ -989,7 +989,7 @@ final class OverlaySplitViewGidBuilder : OverlaySplitViewGidBuilderImpl!OverlayS
       Create object from builder.
       Returns: New object
   */
-  OverlaySplitView build()
+  OverlaySplitView build() nothrow
   {
     return new OverlaySplitView(cast(void*)createGObject(OverlaySplitView._getGType), No.Take);
   }

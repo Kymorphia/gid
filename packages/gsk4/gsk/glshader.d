@@ -134,26 +134,26 @@ class GLShader : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_gl_shader_get_type != &gidSymbolNotFound ? gsk_gl_shader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLShader self()
+  override GLShader self() nothrow
   {
     return this;
   }
@@ -162,7 +162,7 @@ class GLShader : gobject.object.ObjectWrap
       Get builder for [gsk.glshader.GLShader]
       Returns: New builder object
   */
-  static GLShaderGidBuilder builder()
+  static GLShaderGidBuilder builder() nothrow
   {
     return new GLShaderGidBuilder;
   }
@@ -174,13 +174,13 @@ class GLShader : gobject.object.ObjectWrap
         If the shader source is not coming from a resource, this
         will be null.
   */
-  @property string resource()
+  @property string resource() nothrow
   {
     return getResource();
   }
 
   /** */
-  @property glib.bytes.Bytes source()
+  @property glib.bytes.Bytes source() nothrow
   {
     return getSource();
   }
@@ -192,7 +192,7 @@ class GLShader : gobject.object.ObjectWrap
         sourcecode = GLSL sourcecode for the shader, as a [glib.bytes.Bytes]
       Returns: A new [gsk.glshader.GLShader]
   */
-  static gsk.glshader.GLShader newFromBytes(glib.bytes.Bytes sourcecode)
+  static gsk.glshader.GLShader newFromBytes(glib.bytes.Bytes sourcecode) nothrow
   {
     GskGLShader* _cretval;
     _cretval = gsk_gl_shader_new_from_bytes(sourcecode ? cast(GBytes*)sourcecode._cPtr(No.Dup) : null);
@@ -208,7 +208,7 @@ class GLShader : gobject.object.ObjectWrap
               the shader
       Returns: A new [gsk.glshader.GLShader]
   */
-  static gsk.glshader.GLShader newFromResource(string resourcePath)
+  static gsk.glshader.GLShader newFromResource(string resourcePath) nothrow
   {
     GskGLShader* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
@@ -254,7 +254,7 @@ class GLShader : gobject.object.ObjectWrap
         name = uniform name
       Returns: The index of the uniform, or -1
   */
-  int findUniformByName(string name)
+  int findUniformByName(string name) nothrow
   {
     int _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -272,7 +272,7 @@ class GLShader : gobject.object.ObjectWrap
         idx = index of the uniform
       Returns: The value
   */
-  bool getArgBool(glib.bytes.Bytes args, int idx)
+  bool getArgBool(glib.bytes.Bytes args, int idx) nothrow
   {
     bool _retval;
     _retval = cast(bool)gsk_gl_shader_get_arg_bool(cast(GskGLShader*)this._cPtr, args ? cast(GBytes*)args._cPtr(No.Dup) : null, idx);
@@ -289,7 +289,7 @@ class GLShader : gobject.object.ObjectWrap
         idx = index of the uniform
       Returns: The value
   */
-  float getArgFloat(glib.bytes.Bytes args, int idx)
+  float getArgFloat(glib.bytes.Bytes args, int idx) nothrow
   {
     float _retval;
     _retval = gsk_gl_shader_get_arg_float(cast(GskGLShader*)this._cPtr, args ? cast(GBytes*)args._cPtr(No.Dup) : null, idx);
@@ -306,7 +306,7 @@ class GLShader : gobject.object.ObjectWrap
         idx = index of the uniform
       Returns: The value
   */
-  int getArgInt(glib.bytes.Bytes args, int idx)
+  int getArgInt(glib.bytes.Bytes args, int idx) nothrow
   {
     int _retval;
     _retval = gsk_gl_shader_get_arg_int(cast(GskGLShader*)this._cPtr, args ? cast(GBytes*)args._cPtr(No.Dup) : null, idx);
@@ -323,7 +323,7 @@ class GLShader : gobject.object.ObjectWrap
         idx = index of the uniform
       Returns: The value
   */
-  uint getArgUint(glib.bytes.Bytes args, int idx)
+  uint getArgUint(glib.bytes.Bytes args, int idx) nothrow
   {
     uint _retval;
     _retval = gsk_gl_shader_get_arg_uint(cast(GskGLShader*)this._cPtr, args ? cast(GBytes*)args._cPtr(No.Dup) : null, idx);
@@ -340,7 +340,7 @@ class GLShader : gobject.object.ObjectWrap
         idx = index of the uniform
         outValue = location to store the uniform value in
   */
-  void getArgVec2(glib.bytes.Bytes args, int idx, graphene.vec2.Vec2 outValue)
+  void getArgVec2(glib.bytes.Bytes args, int idx, graphene.vec2.Vec2 outValue) nothrow
   {
     gsk_gl_shader_get_arg_vec2(cast(GskGLShader*)this._cPtr, args ? cast(GBytes*)args._cPtr(No.Dup) : null, idx, outValue ? cast(graphene_vec2_t*)outValue._cPtr(No.Dup) : null);
   }
@@ -355,7 +355,7 @@ class GLShader : gobject.object.ObjectWrap
         idx = index of the uniform
         outValue = location to store the uniform value in
   */
-  void getArgVec3(glib.bytes.Bytes args, int idx, graphene.vec3.Vec3 outValue)
+  void getArgVec3(glib.bytes.Bytes args, int idx, graphene.vec3.Vec3 outValue) nothrow
   {
     gsk_gl_shader_get_arg_vec3(cast(GskGLShader*)this._cPtr, args ? cast(GBytes*)args._cPtr(No.Dup) : null, idx, outValue ? cast(graphene_vec3_t*)outValue._cPtr(No.Dup) : null);
   }
@@ -370,7 +370,7 @@ class GLShader : gobject.object.ObjectWrap
         idx = index of the uniform
         outValue = location to store set the uniform value in
   */
-  void getArgVec4(glib.bytes.Bytes args, int idx, graphene.vec4.Vec4 outValue)
+  void getArgVec4(glib.bytes.Bytes args, int idx, graphene.vec4.Vec4 outValue) nothrow
   {
     gsk_gl_shader_get_arg_vec4(cast(GskGLShader*)this._cPtr, args ? cast(GBytes*)args._cPtr(No.Dup) : null, idx, outValue ? cast(graphene_vec4_t*)outValue._cPtr(No.Dup) : null);
   }
@@ -379,7 +379,7 @@ class GLShader : gobject.object.ObjectWrap
       Get the size of the data block used to specify arguments for this shader.
       Returns: The size of the data block
   */
-  size_t getArgsSize()
+  size_t getArgsSize() nothrow
   {
     size_t _retval;
     _retval = gsk_gl_shader_get_args_size(cast(GskGLShader*)this._cPtr);
@@ -394,7 +394,7 @@ class GLShader : gobject.object.ObjectWrap
       u_textureN value that the shader defines.
       Returns: The number of texture inputs required by shader
   */
-  int getNTextures()
+  int getNTextures() nothrow
   {
     int _retval;
     _retval = gsk_gl_shader_get_n_textures(cast(GskGLShader*)this._cPtr);
@@ -405,7 +405,7 @@ class GLShader : gobject.object.ObjectWrap
       Get the number of declared uniforms for this shader.
       Returns: The number of declared uniforms
   */
-  int getNUniforms()
+  int getNUniforms() nothrow
   {
     int _retval;
     _retval = gsk_gl_shader_get_n_uniforms(cast(GskGLShader*)this._cPtr);
@@ -417,7 +417,7 @@ class GLShader : gobject.object.ObjectWrap
       to render this shader.
       Returns: The resource path for the shader
   */
-  string getResource()
+  string getResource() nothrow
   {
     const(char)* _cretval;
     _cretval = gsk_gl_shader_get_resource(cast(GskGLShader*)this._cPtr);
@@ -429,7 +429,7 @@ class GLShader : gobject.object.ObjectWrap
       Gets the GLSL sourcecode being used to render this shader.
       Returns: The source code for the shader
   */
-  glib.bytes.Bytes getSource()
+  glib.bytes.Bytes getSource() nothrow
   {
     GBytes* _cretval;
     _cretval = gsk_gl_shader_get_source(cast(GskGLShader*)this._cPtr);
@@ -444,7 +444,7 @@ class GLShader : gobject.object.ObjectWrap
         idx = index of the uniform
       Returns: The name of the declared uniform
   */
-  string getUniformName(int idx)
+  string getUniformName(int idx) nothrow
   {
     const(char)* _cretval;
     _cretval = gsk_gl_shader_get_uniform_name(cast(GskGLShader*)this._cPtr, idx);
@@ -459,7 +459,7 @@ class GLShader : gobject.object.ObjectWrap
         idx = index of the uniform
       Returns: The data offset
   */
-  int getUniformOffset(int idx)
+  int getUniformOffset(int idx) nothrow
   {
     int _retval;
     _retval = gsk_gl_shader_get_uniform_offset(cast(GskGLShader*)this._cPtr, idx);
@@ -473,7 +473,7 @@ class GLShader : gobject.object.ObjectWrap
         idx = index of the uniform
       Returns: The type of the declared uniform
   */
-  gsk.types.GLUniformType getUniformType(int idx)
+  gsk.types.GLUniformType getUniformType(int idx) nothrow
   {
     GskGLUniformType _cretval;
     _cretval = gsk_gl_shader_get_uniform_type(cast(GskGLShader*)this._cPtr, idx);
@@ -495,13 +495,13 @@ class GLShaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           will be null.
       Returns: Builder instance for fluent chaining
   */
-  T resource(string propval)
+  T resource(string propval) nothrow
   {
     return setProperty("resource", propval);
   }
 
   /** */
-  T source(glib.bytes.Bytes propval)
+  T source(glib.bytes.Bytes propval) nothrow
   {
     return setProperty("source", propval);
   }
@@ -514,7 +514,7 @@ final class GLShaderGidBuilder : GLShaderGidBuilderImpl!GLShaderGidBuilder
       Create object from builder.
       Returns: New object
   */
-  GLShader build()
+  GLShader build() nothrow
   {
     return new GLShader(cast(void*)createGObject(GLShader._getGType), No.Take);
   }

@@ -30,26 +30,26 @@ class CellAreaContext : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_area_context_get_type != &gidSymbolNotFound ? gtk_cell_area_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CellAreaContext self()
+  override CellAreaContext self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class CellAreaContext : gobject.object.ObjectWrap
       Get builder for [gtk.cell_area_context.CellAreaContext]
       Returns: New builder object
   */
-  static CellAreaContextGidBuilder builder()
+  static CellAreaContextGidBuilder builder() nothrow
   {
     return new CellAreaContextGidBuilder;
   }
@@ -69,7 +69,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  @property gtk.cell_area.CellArea area()
+  @property gtk.cell_area.CellArea area() nothrow
   {
     return getArea();
   }
@@ -82,7 +82,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  @property int minimumHeight()
+  @property int minimumHeight() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("minimum-height");
   }
@@ -95,7 +95,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  @property int minimumWidth()
+  @property int minimumWidth() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("minimum-width");
   }
@@ -108,7 +108,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  @property int naturalHeight()
+  @property int naturalHeight() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("natural-height");
   }
@@ -121,7 +121,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  @property int naturalWidth()
+  @property int naturalWidth() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("natural-width");
   }
@@ -146,7 +146,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  void allocate(int width, int height)
+  void allocate(int width, int height) nothrow
   {
     gtk_cell_area_context_allocate(cast(GtkCellAreaContext*)this._cPtr, width, height);
   }
@@ -164,7 +164,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  void getAllocation(out int width, out int height)
+  void getAllocation(out int width, out int height) nothrow
   {
     gtk_cell_area_context_get_allocation(cast(GtkCellAreaContext*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
@@ -184,7 +184,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  gtk.cell_area.CellArea getArea()
+  gtk.cell_area.CellArea getArea() nothrow
   {
     GtkCellArea* _cretval;
     _cretval = gtk_cell_area_context_get_area(cast(GtkCellAreaContext*)this._cPtr);
@@ -205,7 +205,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  void getPreferredHeight(out int minimumHeight, out int naturalHeight)
+  void getPreferredHeight(out int minimumHeight, out int naturalHeight) nothrow
   {
     gtk_cell_area_context_get_preferred_height(cast(GtkCellAreaContext*)this._cPtr, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
   }
@@ -224,7 +224,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  void getPreferredHeightForWidth(int width, out int minimumHeight, out int naturalHeight)
+  void getPreferredHeightForWidth(int width, out int minimumHeight, out int naturalHeight) nothrow
   {
     gtk_cell_area_context_get_preferred_height_for_width(cast(GtkCellAreaContext*)this._cPtr, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
   }
@@ -242,7 +242,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  void getPreferredWidth(out int minimumWidth, out int naturalWidth)
+  void getPreferredWidth(out int minimumWidth, out int naturalWidth) nothrow
   {
     gtk_cell_area_context_get_preferred_width(cast(GtkCellAreaContext*)this._cPtr, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
   }
@@ -261,7 +261,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  void getPreferredWidthForHeight(int height, out int minimumWidth, out int naturalWidth)
+  void getPreferredWidthForHeight(int height, out int minimumWidth, out int naturalWidth) nothrow
   {
     gtk_cell_area_context_get_preferred_width_for_height(cast(GtkCellAreaContext*)this._cPtr, height, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
   }
@@ -281,7 +281,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  void pushPreferredHeight(int minimumHeight, int naturalHeight)
+  void pushPreferredHeight(int minimumHeight, int naturalHeight) nothrow
   {
     gtk_cell_area_context_push_preferred_height(cast(GtkCellAreaContext*)this._cPtr, minimumHeight, naturalHeight);
   }
@@ -301,7 +301,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  void pushPreferredWidth(int minimumWidth, int naturalWidth)
+  void pushPreferredWidth(int minimumWidth, int naturalWidth) nothrow
   {
     gtk_cell_area_context_push_preferred_width(cast(GtkCellAreaContext*)this._cPtr, minimumWidth, naturalWidth);
   }
@@ -332,7 +332,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   
       Deprecated: This object will be removed in GTK 5
   */
-  void reset()
+  void reset() nothrow
   {
     gtk_cell_area_context_reset(cast(GtkCellAreaContext*)this._cPtr);
   }
@@ -350,7 +350,7 @@ class CellAreaContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
   
       Deprecated: This object will be removed in GTK 5
   */
-  T area(gtk.cell_area.CellArea propval)
+  T area(gtk.cell_area.CellArea propval) nothrow
   {
     return setProperty("area", propval);
   }
@@ -363,7 +363,7 @@ final class CellAreaContextGidBuilder : CellAreaContextGidBuilderImpl!CellAreaCo
       Create object from builder.
       Returns: New object
   */
-  CellAreaContext build()
+  CellAreaContext build() nothrow
   {
     return new CellAreaContext(cast(void*)createGObject(CellAreaContext._getGType), No.Take);
   }

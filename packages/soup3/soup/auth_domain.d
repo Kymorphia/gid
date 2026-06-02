@@ -33,26 +33,26 @@ class AuthDomain : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_auth_domain_get_type != &gidSymbolNotFound ? soup_auth_domain_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AuthDomain self()
+  override AuthDomain self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class AuthDomain : gobject.object.ObjectWrap
       Get builder for [soup.auth_domain.AuthDomain]
       Returns: New builder object
   */
-  static AuthDomainGidBuilder builder()
+  static AuthDomainGidBuilder builder() nothrow
   {
     return new AuthDomainGidBuilder;
   }
@@ -70,7 +70,7 @@ class AuthDomain : gobject.object.ObjectWrap
       Get `filter` property.
       Returns: The [soup.types.AuthDomainFilter] for the domain.
   */
-  @property soup.types.AuthDomainFilter filter()
+  @property soup.types.AuthDomainFilter filter() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(soup.types.AuthDomainFilter)("filter");
   }
@@ -80,7 +80,7 @@ class AuthDomain : gobject.object.ObjectWrap
       Params:
         propval = The [soup.types.AuthDomainFilter] for the domain.
   */
-  @property void filter(soup.types.AuthDomainFilter propval)
+  @property void filter(soup.types.AuthDomainFilter propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(soup.types.AuthDomainFilter)("filter", propval);
   }
@@ -89,7 +89,7 @@ class AuthDomain : gobject.object.ObjectWrap
       Get `filterData` property.
       Returns: Data to pass to the [soup.types.AuthDomainFilter].
   */
-  @property void* filterData()
+  @property void* filterData() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(void*)("filter-data");
   }
@@ -99,7 +99,7 @@ class AuthDomain : gobject.object.ObjectWrap
       Params:
         propval = Data to pass to the [soup.types.AuthDomainFilter].
   */
-  @property void filterData(void* propval)
+  @property void filterData(void* propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(void*)("filter-data", propval);
   }
@@ -108,7 +108,7 @@ class AuthDomain : gobject.object.ObjectWrap
       Get `genericAuthCallback` property.
       Returns: The [soup.types.AuthDomainGenericAuthCallback].
   */
-  @property soup.types.AuthDomainGenericAuthCallback genericAuthCallback()
+  @property soup.types.AuthDomainGenericAuthCallback genericAuthCallback() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(soup.types.AuthDomainGenericAuthCallback)("generic-auth-callback");
   }
@@ -118,7 +118,7 @@ class AuthDomain : gobject.object.ObjectWrap
       Params:
         propval = The [soup.types.AuthDomainGenericAuthCallback].
   */
-  @property void genericAuthCallback(soup.types.AuthDomainGenericAuthCallback propval)
+  @property void genericAuthCallback(soup.types.AuthDomainGenericAuthCallback propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(soup.types.AuthDomainGenericAuthCallback)("generic-auth-callback", propval);
   }
@@ -127,7 +127,7 @@ class AuthDomain : gobject.object.ObjectWrap
       Get `genericAuthData` property.
       Returns: The data to pass to the [soup.types.AuthDomainGenericAuthCallback].
   */
-  @property void* genericAuthData()
+  @property void* genericAuthData() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(void*)("generic-auth-data");
   }
@@ -137,7 +137,7 @@ class AuthDomain : gobject.object.ObjectWrap
       Params:
         propval = The data to pass to the [soup.types.AuthDomainGenericAuthCallback].
   */
-  @property void genericAuthData(void* propval)
+  @property void genericAuthData(void* propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(void*)("generic-auth-data", propval);
   }
@@ -146,7 +146,7 @@ class AuthDomain : gobject.object.ObjectWrap
       Get `proxy` property.
       Returns: Whether or not this is a proxy auth domain.
   */
-  @property bool proxy()
+  @property bool proxy() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("proxy");
   }
@@ -155,7 +155,7 @@ class AuthDomain : gobject.object.ObjectWrap
       Get `realm` property.
       Returns: The realm of this auth domain.
   */
-  @property string realm()
+  @property string realm() nothrow
   {
     return getRealm();
   }
@@ -175,7 +175,7 @@ class AuthDomain : gobject.object.ObjectWrap
       Returns: the username that msg has authenticated
           as, if in fact it has authenticated. null otherwise.
   */
-  string accepts(soup.server_message.ServerMessage msg)
+  string accepts(soup.server_message.ServerMessage msg) nothrow
   {
     char* _cretval;
     _cretval = soup_auth_domain_accepts(cast(SoupAuthDomain*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null);
@@ -193,7 +193,7 @@ class AuthDomain : gobject.object.ObjectWrap
       Params:
         path = the path to add to domain
   */
-  void addPath(string path)
+  void addPath(string path) nothrow
   {
     const(char)* _path = path.toCString(No.Alloc);
     soup_auth_domain_add_path(cast(SoupAuthDomain*)this._cPtr, _path);
@@ -210,7 +210,7 @@ class AuthDomain : gobject.object.ObjectWrap
       Params:
         msg = a #SoupServerMessage
   */
-  void challenge(soup.server_message.ServerMessage msg)
+  void challenge(soup.server_message.ServerMessage msg) nothrow
   {
     soup_auth_domain_challenge(cast(SoupAuthDomain*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null);
   }
@@ -228,7 +228,7 @@ class AuthDomain : gobject.object.ObjectWrap
         password = a password
       Returns: whether or not the message is authenticated
   */
-  bool checkPassword(soup.server_message.ServerMessage msg, string username, string password)
+  bool checkPassword(soup.server_message.ServerMessage msg, string username, string password) nothrow
   {
     bool _retval;
     const(char)* _username = username.toCString(No.Alloc);
@@ -251,7 +251,7 @@ class AuthDomain : gobject.object.ObjectWrap
         msg = a #SoupServerMessage
       Returns: true if domain requires msg to be authenticated
   */
-  bool covers(soup.server_message.ServerMessage msg)
+  bool covers(soup.server_message.ServerMessage msg) nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_auth_domain_covers(cast(SoupAuthDomain*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null);
@@ -262,7 +262,7 @@ class AuthDomain : gobject.object.ObjectWrap
       Gets the realm name associated with domain.
       Returns: domain's realm
   */
-  string getRealm()
+  string getRealm() nothrow
   {
     const(char)* _cretval;
     _cretval = soup_auth_domain_get_realm(cast(SoupAuthDomain*)this._cPtr);
@@ -287,7 +287,7 @@ class AuthDomain : gobject.object.ObjectWrap
       Params:
         path = the path to remove from domain
   */
-  void removePath(string path)
+  void removePath(string path) nothrow
   {
     const(char)* _path = path.toCString(No.Alloc);
     soup_auth_domain_remove_path(cast(SoupAuthDomain*)this._cPtr, _path);
@@ -323,14 +323,21 @@ class AuthDomain : gobject.object.ObjectWrap
       Params:
         filter = the auth filter for domain
   */
-  void setFilter(soup.types.AuthDomainFilter filter)
+  void setFilter(soup.types.AuthDomainFilter filter) nothrow
   {
-    extern(C) gboolean _filterCallback(SoupAuthDomain* domain, SoupServerMessage* msg, void* userData)
+    extern(C) gboolean _filterCallback(SoupAuthDomain* domain, SoupServerMessage* msg, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(soup.types.AuthDomainFilter*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.types.AuthDomainFilter");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -353,15 +360,22 @@ class AuthDomain : gobject.object.ObjectWrap
       Params:
         authCallback = the auth callback
   */
-  void setGenericAuthCallback(soup.types.AuthDomainGenericAuthCallback authCallback)
+  void setGenericAuthCallback(soup.types.AuthDomainGenericAuthCallback authCallback) nothrow
   {
-    extern(C) gboolean _authCallbackCallback(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, void* userData)
+    extern(C) gboolean _authCallbackCallback(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(soup.types.AuthDomainGenericAuthCallback*)userData;
       string _username = username.fromCString(No.Free);
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.types.AuthDomainGenericAuthCallback");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -383,7 +397,7 @@ class AuthDomainGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The [soup.types.AuthDomainFilter] for the domain.
       Returns: Builder instance for fluent chaining
   */
-  T filter(soup.types.AuthDomainFilter propval)
+  T filter(soup.types.AuthDomainFilter propval) nothrow
   {
     return setProperty("filter", propval);
   }
@@ -394,7 +408,7 @@ class AuthDomainGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Data to pass to the [soup.types.AuthDomainFilter].
       Returns: Builder instance for fluent chaining
   */
-  T filterData(void* propval)
+  T filterData(void* propval) nothrow
   {
     return setProperty("filter-data", propval);
   }
@@ -405,7 +419,7 @@ class AuthDomainGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The [soup.types.AuthDomainGenericAuthCallback].
       Returns: Builder instance for fluent chaining
   */
-  T genericAuthCallback(soup.types.AuthDomainGenericAuthCallback propval)
+  T genericAuthCallback(soup.types.AuthDomainGenericAuthCallback propval) nothrow
   {
     return setProperty("generic-auth-callback", propval);
   }
@@ -416,7 +430,7 @@ class AuthDomainGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The data to pass to the [soup.types.AuthDomainGenericAuthCallback].
       Returns: Builder instance for fluent chaining
   */
-  T genericAuthData(void* propval)
+  T genericAuthData(void* propval) nothrow
   {
     return setProperty("generic-auth-data", propval);
   }
@@ -427,7 +441,7 @@ class AuthDomainGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether or not this is a proxy auth domain.
       Returns: Builder instance for fluent chaining
   */
-  T proxy(bool propval)
+  T proxy(bool propval) nothrow
   {
     return setProperty("proxy", propval);
   }
@@ -438,7 +452,7 @@ class AuthDomainGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The realm of this auth domain.
       Returns: Builder instance for fluent chaining
   */
-  T realm(string propval)
+  T realm(string propval) nothrow
   {
     return setProperty("realm", propval);
   }
@@ -451,7 +465,7 @@ final class AuthDomainGidBuilder : AuthDomainGidBuilderImpl!AuthDomainGidBuilder
       Create object from builder.
       Returns: New object
   */
-  AuthDomain build()
+  AuthDomain build() nothrow
   {
     return new AuthDomain(cast(void*)createGObject(AuthDomain._getGType), No.Take);
   }

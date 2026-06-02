@@ -26,7 +26,7 @@ interface Document
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_document_get_type != &gidSymbolNotFound ? atk_document_get_type() : cast(GType)0;
@@ -128,7 +128,7 @@ interface Document
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDocumentAttributeChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectDocumentAttributeChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `LoadComplete` signal.
@@ -153,7 +153,7 @@ interface Document
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLoadComplete(T)(T callback, Flag!"After" after = No.After);
+  gulong connectLoadComplete(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `LoadStopped` signal.
@@ -175,7 +175,7 @@ interface Document
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLoadStopped(T)(T callback, Flag!"After" after = No.After);
+  gulong connectLoadStopped(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `PageChanged` signal.
@@ -197,7 +197,7 @@ interface Document
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPageChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectPageChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `Reload` signal.
@@ -218,7 +218,7 @@ interface Document
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectReload(T)(T callback, Flag!"After" after = No.After);
+  gulong connectReload(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [atk.document.Document]

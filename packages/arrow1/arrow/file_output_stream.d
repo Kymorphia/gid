@@ -19,26 +19,26 @@ class FileOutputStream : arrow.output_stream.OutputStream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_file_output_stream_get_type != &gidSymbolNotFound ? garrow_file_output_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileOutputStream self()
+  override FileOutputStream self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class FileOutputStream : arrow.output_stream.OutputStream
       Get builder for [arrow.file_output_stream.FileOutputStream]
       Returns: New builder object
   */
-  static FileOutputStreamGidBuilder builder()
+  static FileOutputStreamGidBuilder builder() nothrow
   {
     return new FileOutputStreamGidBuilder;
   }
@@ -78,7 +78,7 @@ final class FileOutputStreamGidBuilder : FileOutputStreamGidBuilderImpl!FileOutp
       Create object from builder.
       Returns: New object
   */
-  FileOutputStream build()
+  FileOutputStream build() nothrow
   {
     return new FileOutputStream(cast(void*)createGObject(FileOutputStream._getGType), Yes.Take);
   }

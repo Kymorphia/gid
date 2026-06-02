@@ -25,26 +25,26 @@ class DeviceInfoPermissionRequest : gobject.object.ObjectWrap, webkit.permission
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_device_info_permission_request_get_type != &gidSymbolNotFound ? webkit_device_info_permission_request_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DeviceInfoPermissionRequest self()
+  override DeviceInfoPermissionRequest self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class DeviceInfoPermissionRequest : gobject.object.ObjectWrap, webkit.permission
       Get builder for [webkit.device_info_permission_request.DeviceInfoPermissionRequest]
       Returns: New builder object
   */
-  static DeviceInfoPermissionRequestGidBuilder builder()
+  static DeviceInfoPermissionRequestGidBuilder builder() nothrow
   {
     return new DeviceInfoPermissionRequestGidBuilder;
   }
@@ -75,7 +75,7 @@ final class DeviceInfoPermissionRequestGidBuilder : DeviceInfoPermissionRequestG
       Create object from builder.
       Returns: New object
   */
-  DeviceInfoPermissionRequest build()
+  DeviceInfoPermissionRequest build() nothrow
   {
     return new DeviceInfoPermissionRequest(cast(void*)createGObject(DeviceInfoPermissionRequest._getGType), No.Take);
   }

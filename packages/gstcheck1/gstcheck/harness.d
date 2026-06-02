@@ -118,11 +118,8 @@ class Harness
   GstHarness _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstcheck.harness.Harness");
-
     _cInstance = *cast(GstHarness*)ptr;
 
     if (take)
@@ -130,7 +127,7 @@ class Harness
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -139,7 +136,7 @@ class Harness
       Get `element` field.
       Returns: the element inside the harness
   */
-  @property gst.element.Element element()
+  @property gst.element.Element element() nothrow
   {
     return cToD!(gst.element.Element)(cast(void*)(cast(GstHarness*)this._cPtr).element);
   }
@@ -149,7 +146,7 @@ class Harness
       Params:
         propval = the element inside the harness
   */
-  @property void element(gst.element.Element propval)
+  @property void element(gst.element.Element propval) nothrow
   {
     cValueFree!(gst.element.Element)(cast(void*)(cast(GstHarness*)this._cPtr).element);
     dToC(propval, cast(void*)&(cast(GstHarness*)this._cPtr).element);
@@ -159,7 +156,7 @@ class Harness
       Get `srcpad` field.
       Returns: the internal harness source pad
   */
-  @property gst.pad.Pad srcpad()
+  @property gst.pad.Pad srcpad() nothrow
   {
     return cToD!(gst.pad.Pad)(cast(void*)(cast(GstHarness*)this._cPtr).srcpad);
   }
@@ -169,7 +166,7 @@ class Harness
       Params:
         propval = the internal harness source pad
   */
-  @property void srcpad(gst.pad.Pad propval)
+  @property void srcpad(gst.pad.Pad propval) nothrow
   {
     cValueFree!(gst.pad.Pad)(cast(void*)(cast(GstHarness*)this._cPtr).srcpad);
     dToC(propval, cast(void*)&(cast(GstHarness*)this._cPtr).srcpad);
@@ -179,7 +176,7 @@ class Harness
       Get `sinkpad` field.
       Returns: the internal harness sink pad
   */
-  @property gst.pad.Pad sinkpad()
+  @property gst.pad.Pad sinkpad() nothrow
   {
     return cToD!(gst.pad.Pad)(cast(void*)(cast(GstHarness*)this._cPtr).sinkpad);
   }
@@ -189,7 +186,7 @@ class Harness
       Params:
         propval = the internal harness sink pad
   */
-  @property void sinkpad(gst.pad.Pad propval)
+  @property void sinkpad(gst.pad.Pad propval) nothrow
   {
     cValueFree!(gst.pad.Pad)(cast(void*)(cast(GstHarness*)this._cPtr).sinkpad);
     dToC(propval, cast(void*)&(cast(GstHarness*)this._cPtr).sinkpad);
@@ -199,7 +196,7 @@ class Harness
       Get `srcHarness` field.
       Returns: the source (input) harness (if any)
   */
-  @property gstcheck.harness.Harness srcHarness()
+  @property gstcheck.harness.Harness srcHarness() nothrow
   {
     return new gstcheck.harness.Harness(cast(GstHarness*)(cast(GstHarness*)this._cPtr).srcHarness, No.Take);
   }
@@ -208,7 +205,7 @@ class Harness
       Get `sinkHarness` field.
       Returns: the sink (output) harness (if any)
   */
-  @property gstcheck.harness.Harness sinkHarness()
+  @property gstcheck.harness.Harness sinkHarness() nothrow
   {
     return new gstcheck.harness.Harness(cast(GstHarness*)(cast(GstHarness*)this._cPtr).sinkHarness, No.Take);
   }
@@ -221,7 +218,7 @@ class Harness
       Params:
         sinkpad = a #GstPad to link to the harness srcpad
   */
-  void addElementSinkPad(gst.pad.Pad sinkpad)
+  void addElementSinkPad(gst.pad.Pad sinkpad) nothrow
   {
     gst_harness_add_element_sink_pad(cast(GstHarness*)this._cPtr, sinkpad ? cast(GstPad*)sinkpad._cPtr(No.Dup) : null);
   }
@@ -236,7 +233,7 @@ class Harness
       Params:
         srcpad = a #GstPad to link to the harness sinkpad
   */
-  void addElementSrcPad(gst.pad.Pad srcpad)
+  void addElementSrcPad(gst.pad.Pad srcpad) nothrow
   {
     gst_harness_add_element_src_pad(cast(GstHarness*)this._cPtr, srcpad ? cast(GstPad*)srcpad._cPtr(No.Dup) : null);
   }
@@ -254,14 +251,21 @@ class Harness
         mask = a #GstPadProbeType (see gst_pad_add_probe)
         callback = a #GstPadProbeCallback (see gst_pad_add_probe)
   */
-  void addProbe(string elementName, string padName, gst.types.PadProbeType mask, gst.types.PadProbeCallback callback)
+  void addProbe(string elementName, string padName, gst.types.PadProbeType mask, gst.types.PadProbeCallback callback) nothrow
   {
-    extern(C) GstPadProbeReturn _callbackCallback(GstPad* pad, GstPadProbeInfo* info, void* userData)
+    extern(C) GstPadProbeReturn _callbackCallback(GstPad* pad, GstPadProbeInfo* info, void* userData) nothrow
     {
       gst.types.PadProbeReturn _dretval;
       auto _dlg = cast(gst.types.PadProbeCallback*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), info ? new gst.pad_probe_info.PadProbeInfo(cast(void*)info, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), info ? new gst.pad_probe_info.PadProbeInfo(cast(void*)info, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PadProbeCallback");
+      }
       auto _retval = cast(GstPadProbeReturn)_dretval;
 
       return _retval;
@@ -284,7 +288,7 @@ class Harness
         api = a metadata API
         params = API specific parameters
   */
-  void addProposeAllocationMeta(gobject.types.GType api, gst.structure.Structure params = null)
+  void addProposeAllocationMeta(gobject.types.GType api, gst.structure.Structure params = null) nothrow
   {
     gst_harness_add_propose_allocation_meta(cast(GstHarness*)this._cPtr, api, params ? cast(const(GstStructure)*)params._cPtr(No.Dup) : null);
   }
@@ -298,7 +302,7 @@ class Harness
       Params:
         sinkElementName = a #gchar with the name of a #GstElement
   */
-  void addSink(string sinkElementName)
+  void addSink(string sinkElementName) nothrow
   {
     const(char)* _sinkElementName = sinkElementName.toCString(No.Alloc);
     gst_harness_add_sink(cast(GstHarness*)this._cPtr, _sinkElementName);
@@ -319,7 +323,7 @@ class Harness
       Params:
         sinkHarness = a #GstHarness to be added as a sink-harness.
   */
-  void addSinkHarness(gstcheck.harness.Harness sinkHarness)
+  void addSinkHarness(gstcheck.harness.Harness sinkHarness) nothrow
   {
     gst_harness_add_sink_harness(cast(GstHarness*)this._cPtr, sinkHarness ? cast(GstHarness*)sinkHarness._cPtr : null);
   }
@@ -333,7 +337,7 @@ class Harness
       Params:
         launchline = a #gchar with the name of a #GstElement
   */
-  void addSinkParse(string launchline)
+  void addSinkParse(string launchline) nothrow
   {
     const(char)* _launchline = launchline.toCString(No.Alloc);
     gst_harness_add_sink_parse(cast(GstHarness*)this._cPtr, _launchline);
@@ -350,7 +354,7 @@ class Harness
         hasClockWait = a #gboolean specifying if the #GstElement uses
           gst_clock_wait_id internally.
   */
-  void addSrc(string srcElementName, bool hasClockWait)
+  void addSrc(string srcElementName, bool hasClockWait) nothrow
   {
     const(char)* _srcElementName = srcElementName.toCString(No.Alloc);
     gst_harness_add_src(cast(GstHarness*)this._cPtr, _srcElementName, hasClockWait);
@@ -374,7 +378,7 @@ class Harness
         hasClockWait = a #gboolean specifying if the #GstElement uses
           gst_clock_wait_id internally.
   */
-  void addSrcHarness(gstcheck.harness.Harness srcHarness, bool hasClockWait)
+  void addSrcHarness(gstcheck.harness.Harness srcHarness, bool hasClockWait) nothrow
   {
     gst_harness_add_src_harness(cast(GstHarness*)this._cPtr, srcHarness ? cast(GstHarness*)srcHarness._cPtr : null, hasClockWait);
   }
@@ -393,7 +397,7 @@ class Harness
         hasClockWait = a #gboolean specifying if the #GstElement uses
           gst_clock_wait_id internally.
   */
-  void addSrcParse(string launchline, bool hasClockWait)
+  void addSrcParse(string launchline, bool hasClockWait) nothrow
   {
     const(char)* _launchline = launchline.toCString(No.Alloc);
     gst_harness_add_src_parse(cast(GstHarness*)this._cPtr, _launchline, hasClockWait);
@@ -405,7 +409,7 @@ class Harness
       MT safe.
       Returns: a #guint number of buffers in the queue
   */
-  uint buffersInQueue()
+  uint buffersInQueue() nothrow
   {
     uint _retval;
     _retval = gst_harness_buffers_in_queue(cast(GstHarness*)this._cPtr);
@@ -420,7 +424,7 @@ class Harness
       MT safe.
       Returns: a #guint number of buffers received
   */
-  uint buffersReceived()
+  uint buffersReceived() nothrow
   {
     uint _retval;
     _retval = gst_harness_buffers_received(cast(GstHarness*)this._cPtr);
@@ -441,7 +445,7 @@ class Harness
         waits = a #guint describing the number of #GstClockIDs to crank
       Returns: a gboolean true if the "crank" was successful, false if not.
   */
-  bool crankMultipleClockWaits(uint waits)
+  bool crankMultipleClockWaits(uint waits) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_harness_crank_multiple_clock_waits(cast(GstHarness*)this._cPtr, waits);
@@ -461,7 +465,7 @@ class Harness
       MT safe.
       Returns: a gboolean true if the "crank" was successful, false if not.
   */
-  bool crankSingleClockWait()
+  bool crankSingleClockWait() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_harness_crank_single_clock_wait(cast(GstHarness*)this._cPtr);
@@ -478,7 +482,7 @@ class Harness
         size = a #gsize specifying the size of the buffer
       Returns: a #GstBuffer of size size
   */
-  gst.buffer.Buffer createBuffer(size_t size)
+  gst.buffer.Buffer createBuffer(size_t size) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_harness_create_buffer(cast(GstHarness*)this._cPtr, size);
@@ -495,7 +499,7 @@ class Harness
       Params:
         filename = a #gchar with a the name of a file
   */
-  void dumpToFile(string filename)
+  void dumpToFile(string filename) nothrow
   {
     const(char)* _filename = filename.toCString(No.Alloc);
     gst_harness_dump_to_file(cast(GstHarness*)this._cPtr, _filename);
@@ -507,7 +511,7 @@ class Harness
       MT safe.
       Returns: a #guint number of events in the queue
   */
-  uint eventsInQueue()
+  uint eventsInQueue() nothrow
   {
     uint _retval;
     _retval = gst_harness_events_in_queue(cast(GstHarness*)this._cPtr);
@@ -522,7 +526,7 @@ class Harness
       MT safe.
       Returns: a #guint number of events received
   */
-  uint eventsReceived()
+  uint eventsReceived() nothrow
   {
     uint _retval;
     _retval = gst_harness_events_received(cast(GstHarness*)this._cPtr);
@@ -541,7 +545,7 @@ class Harness
         elementName = a #gchar with a #GstElementFactory name
       Returns: a #GstElement or null if not found
   */
-  gst.element.Element findElement(string elementName)
+  gst.element.Element findElement(string elementName) nothrow
   {
     GstElement* _cretval;
     const(char)* _elementName = elementName.toCString(No.Alloc);
@@ -561,7 +565,7 @@ class Harness
         params = the #GstAllocationParams of
             allocator
   */
-  void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
+  void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params) nothrow
   {
     GstAllocator* _allocator;
     gst_harness_get_allocator(cast(GstHarness*)this._cPtr, &_allocator, cast(GstAllocationParams*)&params);
@@ -576,7 +580,7 @@ class Harness
       Returns: a #GstClockTime with the timestamp or [gst.types.CLOCK_TIME_NONE] if no
         #GstBuffer has been pushed on the #GstHarness srcpad
   */
-  gst.types.ClockTime getLastPushedTimestamp()
+  gst.types.ClockTime getLastPushedTimestamp() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_harness_get_last_pushed_timestamp(cast(GstHarness*)this._cPtr);
@@ -591,7 +595,7 @@ class Harness
       Returns: a #GstTestClock, or null if the testclock is not
         present.
   */
-  gstcheck.test_clock.TestClock getTestclock()
+  gstcheck.test_clock.TestClock getTestclock() nothrow
   {
     GstTestClock* _cretval;
     _cretval = gst_harness_get_testclock(cast(GstHarness*)this._cPtr);
@@ -610,7 +614,7 @@ class Harness
       
       MT safe.
   */
-  void play()
+  void play() nothrow
   {
     gst_harness_play(cast(GstHarness*)this._cPtr);
   }
@@ -623,7 +627,7 @@ class Harness
       MT safe.
       Returns: a #GstBuffer or null if timed out.
   */
-  gst.buffer.Buffer pull()
+  gst.buffer.Buffer pull() nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_harness_pull(cast(GstHarness*)this._cPtr);
@@ -638,7 +642,7 @@ class Harness
       MT safe.
       Returns: a #GstEvent or null if timed out.
   */
-  gst.event.Event pullEvent()
+  gst.event.Event pullEvent() nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_harness_pull_event(cast(GstHarness*)this._cPtr);
@@ -656,7 +660,7 @@ class Harness
             first.
       Returns: true on success, false on timeout.
   */
-  bool pullUntilEos(out gst.buffer.Buffer buf)
+  bool pullUntilEos(out gst.buffer.Buffer buf) nothrow
   {
     bool _retval;
     GstBuffer* _buf;
@@ -672,7 +676,7 @@ class Harness
       MT safe.
       Returns: a #GstEvent or null if timed out.
   */
-  gst.event.Event pullUpstreamEvent()
+  gst.event.Event pullUpstreamEvent() nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_harness_pull_upstream_event(cast(GstHarness*)this._cPtr);
@@ -690,7 +694,7 @@ class Harness
         buffer = a #GstBuffer to push
       Returns: a #GstFlowReturn with the result from the push
   */
-  gst.types.FlowReturn push(gst.buffer.Buffer buffer)
+  gst.types.FlowReturn push(gst.buffer.Buffer buffer) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_harness_push(cast(GstHarness*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null);
@@ -709,7 +713,7 @@ class Harness
         buffer = a #GstBuffer to push
       Returns: a #GstBuffer or null if timed out.
   */
-  gst.buffer.Buffer pushAndPull(gst.buffer.Buffer buffer)
+  gst.buffer.Buffer pushAndPull(gst.buffer.Buffer buffer) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_harness_push_and_pull(cast(GstHarness*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null);
@@ -726,7 +730,7 @@ class Harness
         event = a #GstEvent to push
       Returns: a #gboolean with the result from the push
   */
-  bool pushEvent(gst.event.Event event)
+  bool pushEvent(gst.event.Event event) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_harness_push_event(cast(GstHarness*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
@@ -744,7 +748,7 @@ class Harness
       MT safe.
       Returns: a #GstFlowReturn with the result of the push
   */
-  gst.types.FlowReturn pushFromSrc()
+  gst.types.FlowReturn pushFromSrc() nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_harness_push_from_src(cast(GstHarness*)this._cPtr);
@@ -759,7 +763,7 @@ class Harness
       MT safe.
       Returns: a #GstFlowReturn with the result of the push
   */
-  gst.types.FlowReturn pushToSink()
+  gst.types.FlowReturn pushToSink() nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_harness_push_to_sink(cast(GstHarness*)this._cPtr);
@@ -776,7 +780,7 @@ class Harness
         event = a #GstEvent to push
       Returns: a #gboolean with the result from the push
   */
-  bool pushUpstreamEvent(gst.event.Event event)
+  bool pushUpstreamEvent(gst.event.Event event) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_harness_push_upstream_event(cast(GstHarness*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
@@ -789,7 +793,7 @@ class Harness
       MT safe.
       Returns: a #GstClockTime with min latency
   */
-  gst.types.ClockTime queryLatency()
+  gst.types.ClockTime queryLatency() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_harness_query_latency(cast(GstHarness*)this._cPtr);
@@ -805,7 +809,7 @@ class Harness
       
       MT safe.
   */
-  void setBlockingPushMode()
+  void setBlockingPushMode() nothrow
   {
     gst_harness_set_blocking_push_mode(cast(GstHarness*)this._cPtr);
   }
@@ -819,7 +823,7 @@ class Harness
         in_ = a #GstCaps to set on the harness srcpad
         out_ = a #GstCaps to set on the harness sinkpad
   */
-  void setCaps(gst.caps.Caps in_, gst.caps.Caps out_)
+  void setCaps(gst.caps.Caps in_, gst.caps.Caps out_) nothrow
   {
     gst_harness_set_caps(cast(GstHarness*)this._cPtr, in_ ? cast(GstCaps*)in_._cPtr(Yes.Dup) : null, out_ ? cast(GstCaps*)out_._cPtr(Yes.Dup) : null);
   }
@@ -833,7 +837,7 @@ class Harness
         in_ = a gchar describing a #GstCaps to set on the harness srcpad
         out_ = a gchar describing a #GstCaps to set on the harness sinkpad
   */
-  void setCapsStr(string in_, string out_)
+  void setCapsStr(string in_, string out_) nothrow
   {
     const(char)* _in_ = in_.toCString(No.Alloc);
     const(char)* _out_ = out_.toCString(No.Alloc);
@@ -849,7 +853,7 @@ class Harness
       Params:
         dropBuffers = a #gboolean specifying to drop outgoing buffers or not
   */
-  void setDropBuffers(bool dropBuffers)
+  void setDropBuffers(bool dropBuffers) nothrow
   {
     gst_harness_set_drop_buffers(cast(GstHarness*)this._cPtr, dropBuffers);
   }
@@ -874,7 +878,7 @@ class Harness
       Params:
         forwarding = a #gboolean to enable/disable forwarding
   */
-  void setForwarding(bool forwarding)
+  void setForwarding(bool forwarding) nothrow
   {
     gst_harness_set_forwarding(cast(GstHarness*)this._cPtr, forwarding);
   }
@@ -886,7 +890,7 @@ class Harness
       Params:
         isLive = true for live, false for non-live
   */
-  void setLive(bool isLive)
+  void setLive(bool isLive) nothrow
   {
     gst_harness_set_live(cast(GstHarness*)this._cPtr, isLive);
   }
@@ -901,7 +905,7 @@ class Harness
         allocator = a #GstAllocator
         params = a #GstAllocationParams
   */
-  void setProposeAllocator(gst.allocator.Allocator allocator, gst.allocation_params.AllocationParams params)
+  void setProposeAllocator(gst.allocator.Allocator allocator, gst.allocation_params.AllocationParams params) nothrow
   {
     gst_harness_set_propose_allocator(cast(GstHarness*)this._cPtr, allocator ? cast(GstAllocator*)allocator._cPtr(Yes.Dup) : null, cast(const(GstAllocationParams)*)&params);
   }
@@ -914,7 +918,7 @@ class Harness
       Params:
         caps = a #GstCaps to set on the harness sinkpad
   */
-  void setSinkCaps(gst.caps.Caps caps)
+  void setSinkCaps(gst.caps.Caps caps) nothrow
   {
     gst_harness_set_sink_caps(cast(GstHarness*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(Yes.Dup) : null);
   }
@@ -927,7 +931,7 @@ class Harness
       Params:
         str = a gchar describing a #GstCaps to set on the harness sinkpad
   */
-  void setSinkCapsStr(string str)
+  void setSinkCapsStr(string str) nothrow
   {
     const(char)* _str = str.toCString(No.Alloc);
     gst_harness_set_sink_caps_str(cast(GstHarness*)this._cPtr, _str);
@@ -942,7 +946,7 @@ class Harness
       Params:
         caps = a #GstCaps to set on the harness srcpad
   */
-  void setSrcCaps(gst.caps.Caps caps)
+  void setSrcCaps(gst.caps.Caps caps) nothrow
   {
     gst_harness_set_src_caps(cast(GstHarness*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(Yes.Dup) : null);
   }
@@ -956,7 +960,7 @@ class Harness
       Params:
         str = a gchar describing a #GstCaps to set on the harness srcpad
   */
-  void setSrcCapsStr(string str)
+  void setSrcCapsStr(string str) nothrow
   {
     const(char)* _str = str.toCString(No.Alloc);
     gst_harness_set_src_caps_str(cast(GstHarness*)this._cPtr, _str);
@@ -971,7 +975,7 @@ class Harness
         time = a #GstClockTime to advance the clock to
       Returns: a gboolean true if the time could be set. false if not.
   */
-  bool setTime(gst.types.ClockTime time)
+  bool setTime(gst.types.ClockTime time) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_harness_set_time(cast(GstHarness*)this._cPtr, time);
@@ -984,7 +988,7 @@ class Harness
       Params:
         latency = a #GstClockTime specifying the latency
   */
-  void setUpstreamLatency(gst.types.ClockTime latency)
+  void setUpstreamLatency(gst.types.ClockTime latency) nothrow
   {
     gst_harness_set_upstream_latency(cast(GstHarness*)this._cPtr, latency);
   }
@@ -999,7 +1003,7 @@ class Harness
         pushes = a #gint with the number of calls to gst_harness_push_to_sink
       Returns: a #GstFlowReturn with the result of the push
   */
-  gst.types.FlowReturn sinkPushMany(int pushes)
+  gst.types.FlowReturn sinkPushMany(int pushes) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_harness_sink_push_many(cast(GstHarness*)this._cPtr, pushes);
@@ -1021,7 +1025,7 @@ class Harness
         pushes = a #gint with the number of calls to gst_harness_push
       Returns: a #GstFlowReturn with the result of the push
   */
-  gst.types.FlowReturn srcCrankAndPushMany(int cranks, int pushes)
+  gst.types.FlowReturn srcCrankAndPushMany(int cranks, int pushes) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_harness_src_crank_and_push_many(cast(GstHarness*)this._cPtr, cranks, pushes);
@@ -1038,7 +1042,7 @@ class Harness
       MT safe.
       Returns: a #gboolean with the result of the push
   */
-  bool srcPushEvent()
+  bool srcPushEvent() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_harness_src_push_event(cast(GstHarness*)this._cPtr);
@@ -1050,7 +1054,7 @@ class Harness
       Returns: the data as a buffer. Unref with gst_buffer_unref()
             when no longer needed.
   */
-  gst.buffer.Buffer takeAllDataAsBuffer()
+  gst.buffer.Buffer takeAllDataAsBuffer() nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_harness_take_all_data_as_buffer(cast(GstHarness*)this._cPtr);
@@ -1063,7 +1067,7 @@ class Harness
       Returns: a pointer to the data, newly allocated. Free
             with [glib.global.gfree] when no longer needed.
   */
-  glib.bytes.Bytes takeAllData()
+  glib.bytes.Bytes takeAllData() nothrow
   {
     GBytes* _cretval;
     _cretval = gst_harness_take_all_data_as_bytes(cast(GstHarness*)this._cPtr);
@@ -1076,7 +1080,7 @@ class Harness
       
       MT safe.
   */
-  void teardown()
+  void teardown() nothrow
   {
     gst_harness_teardown(cast(GstHarness*)this._cPtr);
   }
@@ -1089,7 +1093,7 @@ class Harness
       MT safe.
       Returns: a #GstBuffer or null if no buffers are present in the #GAsyncQueue
   */
-  gst.buffer.Buffer tryPull()
+  gst.buffer.Buffer tryPull() nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_harness_try_pull(cast(GstHarness*)this._cPtr);
@@ -1104,7 +1108,7 @@ class Harness
       MT safe.
       Returns: a #GstEvent or null if no buffers are present in the #GAsyncQueue
   */
-  gst.event.Event tryPullEvent()
+  gst.event.Event tryPullEvent() nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_harness_try_pull_event(cast(GstHarness*)this._cPtr);
@@ -1119,7 +1123,7 @@ class Harness
       MT safe.
       Returns: a #GstEvent or null if no buffers are present in the #GAsyncQueue
   */
-  gst.event.Event tryPullUpstreamEvent()
+  gst.event.Event tryPullUpstreamEvent() nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_harness_try_pull_upstream_event(cast(GstHarness*)this._cPtr);
@@ -1133,7 +1137,7 @@ class Harness
       MT safe.
       Returns: a #guint number of events in the queue
   */
-  uint upstreamEventsInQueue()
+  uint upstreamEventsInQueue() nothrow
   {
     uint _retval;
     _retval = gst_harness_upstream_events_in_queue(cast(GstHarness*)this._cPtr);
@@ -1148,7 +1152,7 @@ class Harness
       MT safe.
       Returns: a #guint number of events received
   */
-  uint upstreamEventsReceived()
+  uint upstreamEventsReceived() nothrow
   {
     uint _retval;
     _retval = gst_harness_upstream_events_received(cast(GstHarness*)this._cPtr);
@@ -1160,7 +1164,7 @@ class Harness
       
       MT safe.
   */
-  void useSystemclock()
+  void useSystemclock() nothrow
   {
     gst_harness_use_systemclock(cast(GstHarness*)this._cPtr);
   }
@@ -1170,7 +1174,7 @@ class Harness
       
       MT safe.
   */
-  void useTestclock()
+  void useTestclock() nothrow
   {
     gst_harness_use_testclock(cast(GstHarness*)this._cPtr);
   }
@@ -1190,7 +1194,7 @@ class Harness
       Returns: a gboolean true if the waits have been registered, false if not.
         (Could be that it timed out waiting or that more waits than waits was found)
   */
-  bool waitForClockIdWaits(uint waits, uint timeout)
+  bool waitForClockIdWaits(uint waits, uint timeout) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_harness_wait_for_clock_id_waits(cast(GstHarness*)this._cPtr, waits, timeout);
@@ -1206,7 +1210,7 @@ class Harness
         t = a #GstHarnessThread
       Returns: 
   */
-  static uint stressThreadStop(gstcheck.types.HarnessThread t)
+  static uint stressThreadStop(gstcheck.types.HarnessThread t) nothrow
   {
     uint _retval;
     _retval = gst_harness_stress_thread_stop(t);

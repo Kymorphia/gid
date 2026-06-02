@@ -20,11 +20,8 @@ class NetAddressMeta
   GstNetAddressMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstnet.net_address_meta.NetAddressMeta");
-
     _cInstance = *cast(GstNetAddressMeta*)ptr;
 
     if (take)
@@ -32,7 +29,7 @@ class NetAddressMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -41,7 +38,7 @@ class NetAddressMeta
       Get `meta` field.
       Returns: the parent type
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstNetAddressMeta*)this._cPtr).meta, No.Take);
   }
@@ -50,7 +47,7 @@ class NetAddressMeta
       Get `addr` field.
       Returns: a #GSocketAddress stored as metadata
   */
-  @property gio.socket_address.SocketAddress addr()
+  @property gio.socket_address.SocketAddress addr() nothrow
   {
     return cToD!(gio.socket_address.SocketAddress)(cast(void*)(cast(GstNetAddressMeta*)this._cPtr).addr);
   }
@@ -60,14 +57,14 @@ class NetAddressMeta
       Params:
         propval = a #GSocketAddress stored as metadata
   */
-  @property void addr(gio.socket_address.SocketAddress propval)
+  @property void addr(gio.socket_address.SocketAddress propval) nothrow
   {
     cValueFree!(gio.socket_address.SocketAddress)(cast(void*)(cast(GstNetAddressMeta*)this._cPtr).addr);
     dToC(propval, cast(void*)&(cast(GstNetAddressMeta*)this._cPtr).addr);
   }
 
   /** */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_net_address_meta_get_info();

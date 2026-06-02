@@ -16,26 +16,26 @@ class DenseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_dense_union_array_builder_get_type != &gidSymbolNotFound ? garrow_dense_union_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DenseUnionArrayBuilder self()
+  override DenseUnionArrayBuilder self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class DenseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
       Get builder for [arrow.dense_union_array_builder.DenseUnionArrayBuilder]
       Returns: New builder object
   */
-  static DenseUnionArrayBuilderGidBuilder builder()
+  static DenseUnionArrayBuilderGidBuilder builder() nothrow
   {
     return new DenseUnionArrayBuilderGidBuilder;
   }
@@ -73,7 +73,7 @@ final class DenseUnionArrayBuilderGidBuilder : DenseUnionArrayBuilderGidBuilderI
       Create object from builder.
       Returns: New object
   */
-  DenseUnionArrayBuilder build()
+  DenseUnionArrayBuilder build() nothrow
   {
     return new DenseUnionArrayBuilder(cast(void*)createGObject(DenseUnionArrayBuilder._getGType), Yes.Take);
   }

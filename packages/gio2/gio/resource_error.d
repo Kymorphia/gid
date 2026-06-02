@@ -17,7 +17,7 @@ struct ResourceError
       Gets the #GResource Error Quark.
       Returns: a #GQuark
   */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = g_resource_error_quark();
@@ -27,12 +27,12 @@ struct ResourceError
 
 class ResourceException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gio.resource_error.ResourceError.quark, cast(int)code, msg);
   }

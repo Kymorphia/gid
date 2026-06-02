@@ -18,26 +18,26 @@ class FilterWindows : gmime.filter.Filter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_filter_windows_get_type != &gidSymbolNotFound ? g_mime_filter_windows_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FilterWindows self()
+  override FilterWindows self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class FilterWindows : gmime.filter.Filter
       Get builder for [gmime.filter_windows.FilterWindows]
       Returns: New builder object
   */
-  static FilterWindowsGidBuilder builder()
+  static FilterWindowsGidBuilder builder() nothrow
   {
     return new FilterWindowsGidBuilder;
   }
@@ -60,7 +60,7 @@ class FilterWindows : gmime.filter.Filter
         claimedCharset = charset that a text stream claims to be
       Returns: a new windows filter.
   */
-  this(string claimedCharset)
+  this(string claimedCharset) nothrow
   {
     GMimeFilter* _cretval;
     const(char)* _claimedCharset = claimedCharset.toCString(No.Alloc);
@@ -74,7 +74,7 @@ class FilterWindows : gmime.filter.Filter
       Returns: true if the filtered stream has been detected to contain
         Windows-CP125# characters or false otherwise.
   */
-  bool isWindowsCharset()
+  bool isWindowsCharset() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_filter_windows_is_windows_charset(cast(GMimeFilterWindows*)this._cPtr);
@@ -87,7 +87,7 @@ class FilterWindows : gmime.filter.Filter
         text stream was found not to contain any Windows-CP125# characters
         or the proper Windows-CP125# charset.
   */
-  string realCharset()
+  string realCharset() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_filter_windows_real_charset(cast(GMimeFilterWindows*)this._cPtr);
@@ -108,7 +108,7 @@ final class FilterWindowsGidBuilder : FilterWindowsGidBuilderImpl!FilterWindowsG
       Create object from builder.
       Returns: New object
   */
-  FilterWindows build()
+  FilterWindows build() nothrow
   {
     return new FilterWindows(cast(void*)createGObject(FilterWindows._getGType), Yes.Take);
   }

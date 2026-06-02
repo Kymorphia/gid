@@ -68,26 +68,26 @@ class GLContext : gdk.draw_context.DrawContext
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_gl_context_get_type != &gidSymbolNotFound ? gdk_gl_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLContext self()
+  override GLContext self() nothrow
   {
     return this;
   }
@@ -96,7 +96,7 @@ class GLContext : gdk.draw_context.DrawContext
       Get builder for [gdk.glcontext.GLContext]
       Returns: New builder object
   */
-  static GLContextGidBuilder builder()
+  static GLContextGidBuilder builder() nothrow
   {
     return new GLContextGidBuilder;
   }
@@ -105,7 +105,7 @@ class GLContext : gdk.draw_context.DrawContext
       Get `allowedApis` property.
       Returns: The allowed APIs.
   */
-  @property gdk.types.GLAPI allowedApis()
+  @property gdk.types.GLAPI allowedApis() nothrow
   {
     return getAllowedApis();
   }
@@ -115,7 +115,7 @@ class GLContext : gdk.draw_context.DrawContext
       Params:
         propval = The allowed APIs.
   */
-  @property void allowedApis(gdk.types.GLAPI propval)
+  @property void allowedApis(gdk.types.GLAPI propval) nothrow
   {
     setAllowedApis(propval);
   }
@@ -124,7 +124,7 @@ class GLContext : gdk.draw_context.DrawContext
       Get `api` property.
       Returns: The API currently in use.
   */
-  @property gdk.types.GLAPI api()
+  @property gdk.types.GLAPI api() nothrow
   {
     return getApi();
   }
@@ -139,7 +139,7 @@ class GLContext : gdk.draw_context.DrawContext
       Deprecated: Use [gdk.glcontext.GLContext.isShared] to check if contexts
           can be shared.
   */
-  @property gdk.glcontext.GLContext sharedContext()
+  @property gdk.glcontext.GLContext sharedContext() nothrow
   {
     return getSharedContext();
   }
@@ -150,7 +150,7 @@ class GLContext : gdk.draw_context.DrawContext
       Any OpenGL call after this function returns will be ignored
       until [gdk.glcontext.GLContext.makeCurrent] is called.
   */
-  static void clearCurrent()
+  static void clearCurrent() nothrow
   {
     gdk_gl_context_clear_current();
   }
@@ -159,7 +159,7 @@ class GLContext : gdk.draw_context.DrawContext
       Retrieves the current [gdk.glcontext.GLContext].
       Returns: the current [gdk.glcontext.GLContext]
   */
-  static gdk.glcontext.GLContext getCurrent()
+  static gdk.glcontext.GLContext getCurrent() nothrow
   {
     GdkGLContext* _cretval;
     _cretval = gdk_gl_context_get_current();
@@ -171,7 +171,7 @@ class GLContext : gdk.draw_context.DrawContext
       Gets the allowed APIs set via [gdk.glcontext.GLContext.setAllowedApis].
       Returns: the allowed APIs
   */
-  gdk.types.GLAPI getAllowedApis()
+  gdk.types.GLAPI getAllowedApis() nothrow
   {
     GdkGLAPI _cretval;
     _cretval = gdk_gl_context_get_allowed_apis(cast(GdkGLContext*)this._cPtr);
@@ -185,7 +185,7 @@ class GLContext : gdk.draw_context.DrawContext
       If the renderer has not been realized yet, 0 is returned.
       Returns: the currently used API
   */
-  gdk.types.GLAPI getApi()
+  gdk.types.GLAPI getApi() nothrow
   {
     GdkGLAPI _cretval;
     _cretval = gdk_gl_context_get_api(cast(GdkGLContext*)this._cPtr);
@@ -199,7 +199,7 @@ class GLContext : gdk.draw_context.DrawContext
       See [gdk.glcontext.GLContext.setDebugEnabled].
       Returns: true if debugging is enabled
   */
-  bool getDebugEnabled()
+  bool getDebugEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_gl_context_get_debug_enabled(cast(GdkGLContext*)this._cPtr);
@@ -210,7 +210,7 @@ class GLContext : gdk.draw_context.DrawContext
       Retrieves the display the context is created for
       Returns: a [gdk.display.Display]
   */
-  override gdk.display.Display getDisplay()
+  override gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gdk_gl_context_get_display(cast(GdkGLContext*)this._cPtr);
@@ -224,7 +224,7 @@ class GLContext : gdk.draw_context.DrawContext
       See [gdk.glcontext.GLContext.setForwardCompatible].
       Returns: true if the context should be forward-compatible
   */
-  bool getForwardCompatible()
+  bool getForwardCompatible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_gl_context_get_forward_compatible(cast(GdkGLContext*)this._cPtr);
@@ -243,7 +243,7 @@ class GLContext : gdk.draw_context.DrawContext
         major = return location for the major version to request
         minor = return location for the minor version to request
   */
-  void getRequiredVersion(out int major, out int minor)
+  void getRequiredVersion(out int major, out int minor) nothrow
   {
     gdk_gl_context_get_required_version(cast(GdkGLContext*)this._cPtr, cast(int*)&major, cast(int*)&minor);
   }
@@ -258,7 +258,7 @@ class GLContext : gdk.draw_context.DrawContext
       Deprecated: Use [gdk.glcontext.GLContext.isShared] to check if contexts
           can be shared.
   */
-  gdk.glcontext.GLContext getSharedContext()
+  gdk.glcontext.GLContext getSharedContext() nothrow
   {
     GdkGLContext* _cretval;
     _cretval = gdk_gl_context_get_shared_context(cast(GdkGLContext*)this._cPtr);
@@ -270,7 +270,7 @@ class GLContext : gdk.draw_context.DrawContext
       Retrieves the surface used by the context.
       Returns: a [gdk.surface.Surface]
   */
-  override gdk.surface.Surface getSurface()
+  override gdk.surface.Surface getSurface() nothrow
   {
     GdkSurface* _cretval;
     _cretval = gdk_gl_context_get_surface(cast(GdkGLContext*)this._cPtr);
@@ -284,7 +284,7 @@ class GLContext : gdk.draw_context.DrawContext
         false if other profile is in use of if the context has not yet
         been realized.
   */
-  bool getUseEs()
+  bool getUseEs() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_gl_context_get_use_es(cast(GdkGLContext*)this._cPtr);
@@ -300,7 +300,7 @@ class GLContext : gdk.draw_context.DrawContext
         major = return location for the major version
         minor = return location for the minor version
   */
-  void getVersion(out int major, out int minor)
+  void getVersion(out int major, out int minor) nothrow
   {
     gdk_gl_context_get_version(cast(GdkGLContext*)this._cPtr, cast(int*)&major, cast(int*)&minor);
   }
@@ -324,7 +324,7 @@ class GLContext : gdk.draw_context.DrawContext
       kind of shader programs to load.
       Returns: true if the GL context is in legacy mode
   */
-  bool isLegacy()
+  bool isLegacy() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_gl_context_is_legacy(cast(GdkGLContext*)this._cPtr);
@@ -349,7 +349,7 @@ class GLContext : gdk.draw_context.DrawContext
         other = the [gdk.glcontext.GLContext] that should be compatible with self
       Returns: true if the two GL contexts are compatible.
   */
-  bool isShared(gdk.glcontext.GLContext other)
+  bool isShared(gdk.glcontext.GLContext other) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_gl_context_is_shared(cast(GdkGLContext*)this._cPtr, other ? cast(GdkGLContext*)other._cPtr(No.Dup) : null);
@@ -359,7 +359,7 @@ class GLContext : gdk.draw_context.DrawContext
   /**
       Makes the context the current one.
   */
-  void makeCurrent()
+  void makeCurrent() nothrow
   {
     gdk_gl_context_make_current(cast(GdkGLContext*)this._cPtr);
   }
@@ -393,7 +393,7 @@ class GLContext : gdk.draw_context.DrawContext
       Params:
         apis = the allowed APIs
   */
-  void setAllowedApis(gdk.types.GLAPI apis)
+  void setAllowedApis(gdk.types.GLAPI apis) nothrow
   {
     gdk_gl_context_set_allowed_apis(cast(GdkGLContext*)this._cPtr, apis);
   }
@@ -410,7 +410,7 @@ class GLContext : gdk.draw_context.DrawContext
       Params:
         enabled = whether to enable debugging in the context
   */
-  void setDebugEnabled(bool enabled)
+  void setDebugEnabled(bool enabled) nothrow
   {
     gdk_gl_context_set_debug_enabled(cast(GdkGLContext*)this._cPtr, enabled);
   }
@@ -429,7 +429,7 @@ class GLContext : gdk.draw_context.DrawContext
       Params:
         compatible = whether the context should be forward-compatible
   */
-  void setForwardCompatible(bool compatible)
+  void setForwardCompatible(bool compatible) nothrow
   {
     gdk_gl_context_set_forward_compatible(cast(GdkGLContext*)this._cPtr, compatible);
   }
@@ -449,7 +449,7 @@ class GLContext : gdk.draw_context.DrawContext
         major = the major version to request
         minor = the minor version to request
   */
-  void setRequiredVersion(int major, int minor)
+  void setRequiredVersion(int major, int minor) nothrow
   {
     gdk_gl_context_set_required_version(cast(GdkGLContext*)this._cPtr, major, minor);
   }
@@ -473,7 +473,7 @@ class GLContext : gdk.draw_context.DrawContext
         useEs = whether the context should use OpenGL ES instead of OpenGL,
             or -1 to allow auto-detection
   */
-  void setUseEs(int useEs)
+  void setUseEs(int useEs) nothrow
   {
     gdk_gl_context_set_use_es(cast(GdkGLContext*)this._cPtr, useEs);
   }
@@ -489,7 +489,7 @@ class GLContextGidBuilderImpl(T) : gdk.draw_context.DrawContextGidBuilderImpl!T
         propval = The allowed APIs.
       Returns: Builder instance for fluent chaining
   */
-  T allowedApis(gdk.types.GLAPI propval)
+  T allowedApis(gdk.types.GLAPI propval) nothrow
   {
     return setProperty("allowed-apis", propval);
   }
@@ -506,7 +506,7 @@ class GLContextGidBuilderImpl(T) : gdk.draw_context.DrawContextGidBuilderImpl!T
       Deprecated: Use [gdk.glcontext.GLContext.isShared] to check if contexts
           can be shared.
   */
-  T sharedContext(gdk.glcontext.GLContext propval)
+  T sharedContext(gdk.glcontext.GLContext propval) nothrow
   {
     return setProperty("shared-context", propval);
   }
@@ -519,7 +519,7 @@ final class GLContextGidBuilder : GLContextGidBuilderImpl!GLContextGidBuilder
       Create object from builder.
       Returns: New object
   */
-  GLContext build()
+  GLContext build() nothrow
   {
     return new GLContext(cast(void*)createGObject(GLContext._getGType), No.Take);
   }

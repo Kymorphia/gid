@@ -19,32 +19,32 @@ class SetSource : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_set_source_get_type != &gidSymbolNotFound ? gda_set_source_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SetSource self()
+  override SetSource self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class SetSource : gobject.boxed.Boxed
       Get `dataModel` field.
       Returns: Can't be NULL
   */
-  @property gda.data_model.DataModel dataModel()
+  @property gda.data_model.DataModel dataModel() nothrow
   {
     return cToD!(gda.data_model.DataModel)(cast(void*)(cast(GdaSetSource*)this._cPtr).dataModel);
   }
@@ -63,7 +63,7 @@ class SetSource : gobject.boxed.Boxed
       Params:
         propval = Can't be NULL
   */
-  @property void dataModel(gda.data_model.DataModel propval)
+  @property void dataModel(gda.data_model.DataModel propval) nothrow
   {
     cValueFree!(gda.data_model.DataModel)(cast(void*)(cast(GdaSetSource*)this._cPtr).dataModel);
     dToC(propval, cast(void*)&(cast(GdaSetSource*)this._cPtr).dataModel);
@@ -76,7 +76,7 @@ class SetSource : gobject.boxed.Boxed
         model = a #GdaDataModel
       Returns: a new #GdaSetSource struct.
   */
-  this(gda.data_model.DataModel model)
+  this(gda.data_model.DataModel model) nothrow
   {
     GdaSetSource* _cretval;
     _cretval = gda_set_source_new(model ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
@@ -89,7 +89,7 @@ class SetSource : gobject.boxed.Boxed
       Params:
         node = a #GdaSetNode to add
   */
-  void addNode(gda.set_node.SetNode node)
+  void addNode(gda.set_node.SetNode node) nothrow
   {
     gda_set_source_add_node(cast(GdaSetSource*)this._cPtr, node ? cast(GdaSetNode*)node._cPtr(No.Dup) : null);
   }
@@ -98,7 +98,7 @@ class SetSource : gobject.boxed.Boxed
       Copy constructor.
       Returns: a new #GdaSetSource
   */
-  gda.set_source.SetSource copy()
+  gda.set_source.SetSource copy() nothrow
   {
     GdaSetSource* _cretval;
     _cretval = gda_set_source_copy(cast(GdaSetSource*)this._cPtr);
@@ -107,7 +107,7 @@ class SetSource : gobject.boxed.Boxed
   }
 
   /** */
-  gda.data_model.DataModel getDataModel()
+  gda.data_model.DataModel getDataModel() nothrow
   {
     GdaDataModel* _cretval;
     _cretval = gda_set_source_get_data_model(cast(GdaSetSource*)this._cPtr);
@@ -116,7 +116,7 @@ class SetSource : gobject.boxed.Boxed
   }
 
   /** */
-  int getNNodes()
+  int getNNodes() nothrow
   {
     int _retval;
     _retval = gda_set_source_get_n_nodes(cast(GdaSetSource*)this._cPtr);
@@ -124,7 +124,7 @@ class SetSource : gobject.boxed.Boxed
   }
 
   /** */
-  gda.set_node.SetNode[] getNodes()
+  gda.set_node.SetNode[] getNodes() nothrow
   {
     GSList* _cretval;
     _cretval = gda_set_source_get_nodes(cast(GdaSetSource*)this._cPtr);
@@ -138,7 +138,7 @@ class SetSource : gobject.boxed.Boxed
       Params:
         model = a #GdaDataModel
   */
-  void setDataModel(gda.data_model.DataModel model)
+  void setDataModel(gda.data_model.DataModel model) nothrow
   {
     gda_set_source_set_data_model(cast(GdaSetSource*)this._cPtr, model ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }

@@ -20,26 +20,26 @@ class AuthBasic : soup.auth.Auth
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_auth_basic_get_type != &gidSymbolNotFound ? soup_auth_basic_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AuthBasic self()
+  override AuthBasic self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class AuthBasic : soup.auth.Auth
       Get builder for [soup.auth_basic.AuthBasic]
       Returns: New builder object
   */
-  static AuthBasicGidBuilder builder()
+  static AuthBasicGidBuilder builder() nothrow
   {
     return new AuthBasicGidBuilder;
   }
@@ -66,7 +66,7 @@ final class AuthBasicGidBuilder : AuthBasicGidBuilderImpl!AuthBasicGidBuilder
       Create object from builder.
       Returns: New object
   */
-  AuthBasic build()
+  AuthBasic build() nothrow
   {
     return new AuthBasic(cast(void*)createGObject(AuthBasic._getGType), No.Take);
   }

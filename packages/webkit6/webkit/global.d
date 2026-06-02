@@ -20,7 +20,7 @@ import webkit.user_media_permission_request;
     have included when compiling your code.
     Returns: the major version number of the WebKit library
 */
-uint getMajorVersion()
+uint getMajorVersion() nothrow
 {
   uint _retval;
   _retval = webkit_get_major_version();
@@ -38,7 +38,7 @@ uint getMajorVersion()
     have included when compiling your code.
     Returns: the micro version number of the WebKit library
 */
-uint getMicroVersion()
+uint getMicroVersion() nothrow
 {
   uint _retval;
   _retval = webkit_get_micro_version();
@@ -56,7 +56,7 @@ uint getMicroVersion()
     have included when compiling your code.
     Returns: the minor version number of the WebKit library
 */
-uint getMinorVersion()
+uint getMinorVersion() nothrow
 {
   uint _retval;
   _retval = webkit_get_minor_version();
@@ -70,7 +70,7 @@ uint getMinorVersion()
       request = a #WebKitMediaKeySystemPermissionRequest
     Returns: the key system name for request
 */
-string mediaKeySystemPermissionGetName(webkit.media_key_system_permission_request.MediaKeySystemPermissionRequest request)
+string mediaKeySystemPermissionGetName(webkit.media_key_system_permission_request.MediaKeySystemPermissionRequest request) nothrow
 {
   const(char)* _cretval;
   _cretval = webkit_media_key_system_permission_get_name(request ? cast(WebKitMediaKeySystemPermissionRequest*)request._cPtr(No.Dup) : null);
@@ -92,7 +92,7 @@ string mediaKeySystemPermissionGetName(webkit.media_key_system_permission_reques
     Returns: uri suitable for display, or null in
          case of error.
 */
-string uriForDisplay(string uri)
+string uriForDisplay(string uri) nothrow
 {
   char* _cretval;
   const(char)* _uri = uri.toCString(No.Alloc);
@@ -108,7 +108,7 @@ string uriForDisplay(string uri)
       request = a #WebKitUserMediaPermissionRequest
     Returns: true if access to an audio device was requested.
 */
-bool userMediaPermissionIsForAudioDevice(webkit.user_media_permission_request.UserMediaPermissionRequest request)
+bool userMediaPermissionIsForAudioDevice(webkit.user_media_permission_request.UserMediaPermissionRequest request) nothrow
 {
   bool _retval;
   _retval = cast(bool)webkit_user_media_permission_is_for_audio_device(request ? cast(WebKitUserMediaPermissionRequest*)request._cPtr(No.Dup) : null);
@@ -122,7 +122,7 @@ bool userMediaPermissionIsForAudioDevice(webkit.user_media_permission_request.Us
       request = a #WebKitUserMediaPermissionRequest
     Returns: true if access to a display device was requested.
 */
-bool userMediaPermissionIsForDisplayDevice(webkit.user_media_permission_request.UserMediaPermissionRequest request)
+bool userMediaPermissionIsForDisplayDevice(webkit.user_media_permission_request.UserMediaPermissionRequest request) nothrow
 {
   bool _retval;
   _retval = cast(bool)webkit_user_media_permission_is_for_display_device(request ? cast(WebKitUserMediaPermissionRequest*)request._cPtr(No.Dup) : null);
@@ -136,7 +136,7 @@ bool userMediaPermissionIsForDisplayDevice(webkit.user_media_permission_request.
       request = a #WebKitUserMediaPermissionRequest
     Returns: true if access to a video device was requested.
 */
-bool userMediaPermissionIsForVideoDevice(webkit.user_media_permission_request.UserMediaPermissionRequest request)
+bool userMediaPermissionIsForVideoDevice(webkit.user_media_permission_request.UserMediaPermissionRequest request) nothrow
 {
   bool _retval;
   _retval = cast(bool)webkit_user_media_permission_is_for_video_device(request ? cast(WebKitUserMediaPermissionRequest*)request._cPtr(No.Dup) : null);

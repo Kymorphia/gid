@@ -16,11 +16,8 @@ class FormatDefinition
   GstFormatDefinition _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gst.format_definition.FormatDefinition");
-
     _cInstance = *cast(GstFormatDefinition*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class FormatDefinition
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class FormatDefinition
       Get `value` field.
       Returns: The unique id of this format
   */
-  @property gst.types.Format value()
+  @property gst.types.Format value() nothrow
   {
     return cast(gst.types.Format)(cast(GstFormatDefinition*)this._cPtr).value;
   }
@@ -47,7 +44,7 @@ class FormatDefinition
       Params:
         propval = The unique id of this format
   */
-  @property void value(gst.types.Format propval)
+  @property void value(gst.types.Format propval) nothrow
   {
     (cast(GstFormatDefinition*)this._cPtr).value = cast(GstFormat)propval;
   }
@@ -56,7 +53,7 @@ class FormatDefinition
       Get `nick` field.
       Returns: A short nick of the format
   */
-  @property string nick()
+  @property string nick() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstFormatDefinition*)this._cPtr).nick);
   }
@@ -66,7 +63,7 @@ class FormatDefinition
       Params:
         propval = A short nick of the format
   */
-  @property void nick(string propval)
+  @property void nick(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstFormatDefinition*)this._cPtr).nick);
     dToC(propval, cast(void*)&(cast(GstFormatDefinition*)this._cPtr).nick);
@@ -76,7 +73,7 @@ class FormatDefinition
       Get `description` field.
       Returns: A longer description of the format
   */
-  @property string description()
+  @property string description() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstFormatDefinition*)this._cPtr).description);
   }
@@ -86,7 +83,7 @@ class FormatDefinition
       Params:
         propval = A longer description of the format
   */
-  @property void description(string propval)
+  @property void description(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstFormatDefinition*)this._cPtr).description);
     dToC(propval, cast(void*)&(cast(GstFormatDefinition*)this._cPtr).description);
@@ -96,7 +93,7 @@ class FormatDefinition
       Get `quark` field.
       Returns: A quark for the nick
   */
-  @property glib.types.Quark quark()
+  @property glib.types.Quark quark() nothrow
   {
     return (cast(GstFormatDefinition*)this._cPtr).quark;
   }
@@ -106,7 +103,7 @@ class FormatDefinition
       Params:
         propval = A quark for the nick
   */
-  @property void quark(glib.types.Quark propval)
+  @property void quark(glib.types.Quark propval) nothrow
   {
     (cast(GstFormatDefinition*)this._cPtr).quark = propval;
   }

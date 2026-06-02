@@ -44,32 +44,32 @@ class Context : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_context_get_type != &gidSymbolNotFound ? gst_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Context self()
+  override Context self() nothrow
   {
     return this;
   }
@@ -82,7 +82,7 @@ class Context : gobject.boxed.Boxed
         persistent = Persistent context
       Returns: The new context.
   */
-  this(string contextType, bool persistent)
+  this(string contextType, bool persistent) nothrow
   {
     GstContext* _cretval;
     const(char)* _contextType = contextType.toCString(No.Alloc);
@@ -94,7 +94,7 @@ class Context : gobject.boxed.Boxed
       Gets the type of context.
       Returns: The type of the context.
   */
-  string getContextType()
+  string getContextType() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_context_get_context_type(cast(const(GstContext)*)this._cPtr);
@@ -108,7 +108,7 @@ class Context : gobject.boxed.Boxed
         still owned by the context, which means that you should not modify it,
         free it and that the pointer becomes invalid when you free the context.
   */
-  gst.structure.Structure getStructure()
+  gst.structure.Structure getStructure() nothrow
   {
     const(GstStructure)* _cretval;
     _cretval = gst_context_get_structure(cast(const(GstContext)*)this._cPtr);
@@ -123,7 +123,7 @@ class Context : gobject.boxed.Boxed
         contextType = Context type to check.
       Returns: true if context has context_type.
   */
-  bool hasContextType(string contextType)
+  bool hasContextType(string contextType) nothrow
   {
     bool _retval;
     const(char)* _contextType = contextType.toCString(No.Alloc);
@@ -135,7 +135,7 @@ class Context : gobject.boxed.Boxed
       Checks if context is persistent.
       Returns: true if the context is persistent.
   */
-  bool isPersistent()
+  bool isPersistent() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_context_is_persistent(cast(const(GstContext)*)this._cPtr);
@@ -149,7 +149,7 @@ class Context : gobject.boxed.Boxed
         that the pointer becomes invalid when you free the context.
         This function checks if context is writable.
   */
-  gst.structure.Structure writableStructure()
+  gst.structure.Structure writableStructure() nothrow
   {
     GstStructure* _cretval;
     _cretval = gst_context_writable_structure(cast(GstContext*)this._cPtr);

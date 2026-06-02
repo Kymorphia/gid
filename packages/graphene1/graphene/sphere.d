@@ -20,38 +20,38 @@ class Sphere : gobject.boxed.Boxed
   /**
       Create a `sphere.Sphere` boxed type.
   */
-  this()
+  this() nothrow
   {
     super(gMalloc(graphene_sphere_t.sizeof), Yes.Take);
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())graphene_sphere_get_type != &gidSymbolNotFound ? graphene_sphere_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Sphere self()
+  override Sphere self() nothrow
   {
     return this;
   }
@@ -63,7 +63,7 @@ class Sphere : gobject.boxed.Boxed
       Returns: the newly allocated #graphene_sphere_t. Use
           [graphene.sphere.Sphere.free] to free the resources allocated by this function
   */
-  static graphene.sphere.Sphere alloc()
+  static graphene.sphere.Sphere alloc() nothrow
   {
     graphene_sphere_t* _cretval;
     _cretval = graphene_sphere_alloc();
@@ -79,7 +79,7 @@ class Sphere : gobject.boxed.Boxed
         point = a #graphene_point3d_t
       Returns: `true` if the sphere contains the point
   */
-  bool containsPoint(graphene.point3_d.Point3D point)
+  bool containsPoint(graphene.point3_d.Point3D point) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_sphere_contains_point(cast(const(graphene_sphere_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&point);
@@ -94,7 +94,7 @@ class Sphere : gobject.boxed.Boxed
         point = a #graphene_point3d_t
       Returns: the distance of the point
   */
-  float distance(graphene.point3_d.Point3D point)
+  float distance(graphene.point3_d.Point3D point) nothrow
   {
     float _retval;
     _retval = graphene_sphere_distance(cast(const(graphene_sphere_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&point);
@@ -108,7 +108,7 @@ class Sphere : gobject.boxed.Boxed
         b = a #graphene_sphere_t
       Returns: `true` if the spheres are equal
   */
-  bool equal(graphene.sphere.Sphere b)
+  bool equal(graphene.sphere.Sphere b) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_sphere_equal(cast(const(graphene_sphere_t)*)this._cPtr, b ? cast(const(graphene_sphere_t)*)b._cPtr(No.Dup) : null);
@@ -122,7 +122,7 @@ class Sphere : gobject.boxed.Boxed
       Params:
         box = return location for the bounding box
   */
-  void getBoundingBox(out graphene.box.Box box)
+  void getBoundingBox(out graphene.box.Box box) nothrow
   {
     graphene_box_t _box;
     graphene_sphere_get_bounding_box(cast(const(graphene_sphere_t)*)this._cPtr, &_box);
@@ -136,7 +136,7 @@ class Sphere : gobject.boxed.Boxed
         center = return location for the coordinates of
             the center
   */
-  void getCenter(out graphene.point3_d.Point3D center)
+  void getCenter(out graphene.point3_d.Point3D center) nothrow
   {
     graphene_sphere_get_center(cast(const(graphene_sphere_t)*)this._cPtr, cast(graphene_point3d_t*)&center);
   }
@@ -145,7 +145,7 @@ class Sphere : gobject.boxed.Boxed
       Retrieves the radius of a #graphene_sphere_t.
       Returns: 
   */
-  float getRadius()
+  float getRadius() nothrow
   {
     float _retval;
     _retval = graphene_sphere_get_radius(cast(const(graphene_sphere_t)*)this._cPtr);
@@ -161,7 +161,7 @@ class Sphere : gobject.boxed.Boxed
         radius = the radius of the sphere
       Returns: the initialized #graphene_sphere_t
   */
-  graphene.sphere.Sphere init_(graphene.point3_d.Point3D center, float radius)
+  graphene.sphere.Sphere init_(graphene.point3_d.Point3D center, float radius) nothrow
   {
     graphene_sphere_t* _cretval;
     _cretval = graphene_sphere_init(cast(graphene_sphere_t*)this._cPtr, cast(const(graphene_point3d_t)*)&center, radius);
@@ -181,7 +181,7 @@ class Sphere : gobject.boxed.Boxed
         center = the center of the sphere
       Returns: the initialized #graphene_sphere_t
   */
-  graphene.sphere.Sphere initFromPoints(graphene.point3_d.Point3D[] points, graphene.point3_d.Point3D center)
+  graphene.sphere.Sphere initFromPoints(graphene.point3_d.Point3D[] points, graphene.point3_d.Point3D center) nothrow
   {
     graphene_sphere_t* _cretval;
     uint _nPoints;
@@ -206,7 +206,7 @@ class Sphere : gobject.boxed.Boxed
         center = the center of the sphere
       Returns: the initialized #graphene_sphere_t
   */
-  graphene.sphere.Sphere initFromVectors(graphene.vec3.Vec3[] vectors, graphene.point3_d.Point3D center)
+  graphene.sphere.Sphere initFromVectors(graphene.vec3.Vec3[] vectors, graphene.point3_d.Point3D center) nothrow
   {
     graphene_sphere_t* _cretval;
     uint _nVectors;
@@ -227,7 +227,7 @@ class Sphere : gobject.boxed.Boxed
       Checks whether the sphere has a zero radius.
       Returns: `true` if the sphere is empty
   */
-  bool isEmpty()
+  bool isEmpty() nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_sphere_is_empty(cast(const(graphene_sphere_t)*)this._cPtr);
@@ -242,7 +242,7 @@ class Sphere : gobject.boxed.Boxed
         point = the coordinates of the translation
         res = return location for the translated sphere
   */
-  void translate(graphene.point3_d.Point3D point, out graphene.sphere.Sphere res)
+  void translate(graphene.point3_d.Point3D point, out graphene.sphere.Sphere res) nothrow
   {
     graphene_sphere_t _res;
     graphene_sphere_translate(cast(const(graphene_sphere_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&point, &_res);

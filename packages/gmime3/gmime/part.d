@@ -21,26 +21,26 @@ class Part : gmime.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_part_get_type != &gidSymbolNotFound ? g_mime_part_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Part self()
+  override Part self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class Part : gmime.object.ObjectWrap
       Get builder for [gmime.part.Part]
       Returns: New builder object
   */
-  static PartGidBuilder builder()
+  static PartGidBuilder builder() nothrow
   {
     return new PartGidBuilder;
   }
@@ -60,7 +60,7 @@ class Part : gmime.object.ObjectWrap
       Returns: an empty MIME Part object with a default content-type of
         application/octet-stream.
   */
-  this()
+  this() nothrow
   {
     GMimePart* _cretval;
     _cretval = g_mime_part_new();
@@ -75,7 +75,7 @@ class Part : gmime.object.ObjectWrap
         subtype = content-subtype string
       Returns: an empty MIME Part object with the specified content-type.
   */
-  static gmime.part.Part newWithType(string type, string subtype)
+  static gmime.part.Part newWithType(string type, string subtype) nothrow
   {
     GMimePart* _cretval;
     const(char)* _type = type.toCString(No.Alloc);
@@ -93,7 +93,7 @@ class Part : gmime.object.ObjectWrap
         constraint = a #GMimeEncodingConstraint
       Returns: the best content encoding for the specified mime part.
   */
-  gmime.types.ContentEncoding getBestContentEncoding(gmime.types.EncodingConstraint constraint)
+  gmime.types.ContentEncoding getBestContentEncoding(gmime.types.EncodingConstraint constraint) nothrow
   {
     GMimeContentEncoding _cretval;
     _cretval = g_mime_part_get_best_content_encoding(cast(GMimePart*)this._cPtr, constraint);
@@ -107,7 +107,7 @@ class Part : gmime.object.ObjectWrap
       Returns: the data-wrapper for the mime part's
         contents.
   */
-  gmime.data_wrapper.DataWrapper getContent()
+  gmime.data_wrapper.DataWrapper getContent() nothrow
   {
     GMimeDataWrapper* _cretval;
     _cretval = g_mime_part_get_content(cast(GMimePart*)this._cPtr);
@@ -120,7 +120,7 @@ class Part : gmime.object.ObjectWrap
       part if it exists or null otherwise.
       Returns: the content description for the specified mime part.
   */
-  string getContentDescription()
+  string getContentDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_part_get_content_description(cast(GMimePart*)this._cPtr);
@@ -132,7 +132,7 @@ class Part : gmime.object.ObjectWrap
       Gets the content encoding of the mime part.
       Returns: the content encoding for the specified mime part.
   */
-  gmime.types.ContentEncoding getContentEncoding()
+  gmime.types.ContentEncoding getContentEncoding() nothrow
   {
     GMimeContentEncoding _cretval;
     _cretval = g_mime_part_get_content_encoding(cast(GMimePart*)this._cPtr);
@@ -145,7 +145,7 @@ class Part : gmime.object.ObjectWrap
       null otherwise.
       Returns: the content id for the specified mime part.
   */
-  override string getContentId()
+  override string getContentId() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_part_get_content_id(cast(GMimePart*)this._cPtr);
@@ -158,7 +158,7 @@ class Part : gmime.object.ObjectWrap
       null otherwise.
       Returns: the content location for the specified mime part.
   */
-  string getContentLocation()
+  string getContentLocation() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_part_get_content_location(cast(GMimePart*)this._cPtr);
@@ -171,7 +171,7 @@ class Part : gmime.object.ObjectWrap
       specified mime part if it exists, or null otherwise.
       Returns: the content md5 for the specified mime part.
   */
-  string getContentMd5()
+  string getContentMd5() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_part_get_content_md5(cast(GMimePart*)this._cPtr);
@@ -186,7 +186,7 @@ class Part : gmime.object.ObjectWrap
         neither of the parameters is set. If a file name is set, the
         returned string will be in UTF-8.
   */
-  string getFilename()
+  string getFilename() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_part_get_filename(cast(GMimePart*)this._cPtr);
@@ -199,7 +199,7 @@ class Part : gmime.object.ObjectWrap
       within the #GMimePart.
       Returns: a #GMimeOpenPGPData.
   */
-  gmime.types.OpenPGPData getOpenpgpData()
+  gmime.types.OpenPGPData getOpenpgpData() nothrow
   {
     GMimeOpenPGPData _cretval;
     _cretval = g_mime_part_get_openpgp_data(cast(GMimePart*)this._cPtr);
@@ -212,7 +212,7 @@ class Part : gmime.object.ObjectWrap
       value of the Content-Disposition header.
       Returns: true if the part is an attachment, otherwise false.
   */
-  bool isAttachment()
+  bool isAttachment() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_part_is_attachment(cast(GMimePart*)this._cPtr);
@@ -312,7 +312,7 @@ class Part : gmime.object.ObjectWrap
       Params:
         content = a #GMimeDataWrapper content object
   */
-  void setContent(gmime.data_wrapper.DataWrapper content)
+  void setContent(gmime.data_wrapper.DataWrapper content) nothrow
   {
     g_mime_part_set_content(cast(GMimePart*)this._cPtr, content ? cast(GMimeDataWrapper*)content._cPtr(No.Dup) : null);
   }
@@ -323,7 +323,7 @@ class Part : gmime.object.ObjectWrap
       Params:
         description = content description
   */
-  void setContentDescription(string description)
+  void setContentDescription(string description) nothrow
   {
     const(char)* _description = description.toCString(No.Alloc);
     g_mime_part_set_content_description(cast(GMimePart*)this._cPtr, _description);
@@ -335,7 +335,7 @@ class Part : gmime.object.ObjectWrap
       Params:
         encoding = a #GMimeContentEncoding
   */
-  void setContentEncoding(gmime.types.ContentEncoding encoding)
+  void setContentEncoding(gmime.types.ContentEncoding encoding) nothrow
   {
     g_mime_part_set_content_encoding(cast(GMimePart*)this._cPtr, encoding);
   }
@@ -346,7 +346,7 @@ class Part : gmime.object.ObjectWrap
       Params:
         contentId = content id
   */
-  override void setContentId(string contentId)
+  override void setContentId(string contentId) nothrow
   {
     const(char)* _contentId = contentId.toCString(No.Alloc);
     g_mime_part_set_content_id(cast(GMimePart*)this._cPtr, _contentId);
@@ -358,7 +358,7 @@ class Part : gmime.object.ObjectWrap
       Params:
         contentLocation = content location
   */
-  void setContentLocation(string contentLocation)
+  void setContentLocation(string contentLocation) nothrow
   {
     const(char)* _contentLocation = contentLocation.toCString(No.Alloc);
     g_mime_part_set_content_location(cast(GMimePart*)this._cPtr, _contentLocation);
@@ -370,7 +370,7 @@ class Part : gmime.object.ObjectWrap
       Params:
         contentMd5 = content md5 or null to generate the md5 digest.
   */
-  void setContentMd5(string contentMd5)
+  void setContentMd5(string contentMd5) nothrow
   {
     const(char)* _contentMd5 = contentMd5.toCString(No.Alloc);
     g_mime_part_set_content_md5(cast(GMimePart*)this._cPtr, _contentMd5);
@@ -385,7 +385,7 @@ class Part : gmime.object.ObjectWrap
       Params:
         filename = the file name
   */
-  void setFilename(string filename)
+  void setFilename(string filename) nothrow
   {
     const(char)* _filename = filename.toCString(No.Alloc);
     g_mime_part_set_filename(cast(GMimePart*)this._cPtr, _filename);
@@ -398,7 +398,7 @@ class Part : gmime.object.ObjectWrap
       Params:
         data = a #GMimeOpenPGPData
   */
-  void setOpenpgpData(gmime.types.OpenPGPData data)
+  void setOpenpgpData(gmime.types.OpenPGPData data) nothrow
   {
     g_mime_part_set_openpgp_data(cast(GMimePart*)this._cPtr, data);
   }
@@ -408,7 +408,7 @@ class Part : gmime.object.ObjectWrap
       Returns: true if the md5 is valid or false otherwise. Note: will
         return false if the mime part does not contain a Content-MD5.
   */
-  bool verifyContentMd5()
+  bool verifyContentMd5() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_part_verify_content_md5(cast(GMimePart*)this._cPtr);
@@ -428,7 +428,7 @@ final class PartGidBuilder : PartGidBuilderImpl!PartGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Part build()
+  Part build() nothrow
   {
     return new Part(cast(void*)createGObject(Part._getGType), Yes.Take);
   }

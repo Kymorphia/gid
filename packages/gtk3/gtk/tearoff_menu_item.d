@@ -38,26 +38,26 @@ class TearoffMenuItem : gtk.menu_item.MenuItem
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tearoff_menu_item_get_type != &gidSymbolNotFound ? gtk_tearoff_menu_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TearoffMenuItem self()
+  override TearoffMenuItem self() nothrow
   {
     return this;
   }
@@ -66,7 +66,7 @@ class TearoffMenuItem : gtk.menu_item.MenuItem
       Get builder for [gtk.tearoff_menu_item.TearoffMenuItem]
       Returns: New builder object
   */
-  static TearoffMenuItemGidBuilder builder()
+  static TearoffMenuItemGidBuilder builder() nothrow
   {
     return new TearoffMenuItemGidBuilder;
   }
@@ -78,7 +78,7 @@ class TearoffMenuItem : gtk.menu_item.MenuItem
       Deprecated: #GtkTearoffMenuItem is deprecated and should not be
             used in newly written code.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_tearoff_menu_item_new();
@@ -99,7 +99,7 @@ final class TearoffMenuItemGidBuilder : TearoffMenuItemGidBuilderImpl!TearoffMen
       Create object from builder.
       Returns: New object
   */
-  TearoffMenuItem build()
+  TearoffMenuItem build() nothrow
   {
     return new TearoffMenuItem(cast(void*)createGObject(TearoffMenuItem._getGType), No.Take);
   }

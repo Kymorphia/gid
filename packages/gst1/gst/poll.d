@@ -40,18 +40,15 @@ class Poll
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gst.poll.Poll");
-
     _cInstancePtr = cast(GstPoll*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -63,7 +60,7 @@ class Poll
         fd = a file descriptor.
       Returns: true if the file descriptor was successfully added to the set.
   */
-  bool addFd(gst.poll_fd.PollFD fd)
+  bool addFd(gst.poll_fd.PollFD fd) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_poll_add_fd(cast(GstPoll*)this._cPtr, cast(GstPollFD*)&fd);
@@ -77,7 +74,7 @@ class Poll
         fd = a file descriptor.
       Returns: true if the descriptor has data to be read.
   */
-  bool fdCanRead(gst.poll_fd.PollFD fd)
+  bool fdCanRead(gst.poll_fd.PollFD fd) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_poll_fd_can_read(cast(const(GstPoll)*)this._cPtr, cast(GstPollFD*)&fd);
@@ -91,7 +88,7 @@ class Poll
         fd = a file descriptor.
       Returns: true if the descriptor can be used for writing.
   */
-  bool fdCanWrite(gst.poll_fd.PollFD fd)
+  bool fdCanWrite(gst.poll_fd.PollFD fd) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_poll_fd_can_write(cast(const(GstPoll)*)this._cPtr, cast(GstPollFD*)&fd);
@@ -109,7 +106,7 @@ class Poll
         active = a new status.
       Returns: true if the descriptor was successfully updated.
   */
-  bool fdCtlPri(gst.poll_fd.PollFD fd, bool active)
+  bool fdCtlPri(gst.poll_fd.PollFD fd, bool active) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_poll_fd_ctl_pri(cast(GstPoll*)this._cPtr, cast(GstPollFD*)&fd, active);
@@ -125,7 +122,7 @@ class Poll
         active = a new status.
       Returns: true if the descriptor was successfully updated.
   */
-  bool fdCtlRead(gst.poll_fd.PollFD fd, bool active)
+  bool fdCtlRead(gst.poll_fd.PollFD fd, bool active) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_poll_fd_ctl_read(cast(GstPoll*)this._cPtr, cast(GstPollFD*)&fd, active);
@@ -141,7 +138,7 @@ class Poll
         active = a new status.
       Returns: true if the descriptor was successfully updated.
   */
-  bool fdCtlWrite(gst.poll_fd.PollFD fd, bool active)
+  bool fdCtlWrite(gst.poll_fd.PollFD fd, bool active) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_poll_fd_ctl_write(cast(GstPoll*)this._cPtr, cast(GstPollFD*)&fd, active);
@@ -155,7 +152,7 @@ class Poll
         fd = a file descriptor.
       Returns: true if the connection was closed.
   */
-  bool fdHasClosed(gst.poll_fd.PollFD fd)
+  bool fdHasClosed(gst.poll_fd.PollFD fd) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_poll_fd_has_closed(cast(const(GstPoll)*)this._cPtr, cast(GstPollFD*)&fd);
@@ -169,7 +166,7 @@ class Poll
         fd = a file descriptor.
       Returns: true if the descriptor has an error.
   */
-  bool fdHasError(gst.poll_fd.PollFD fd)
+  bool fdHasError(gst.poll_fd.PollFD fd) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_poll_fd_has_error(cast(const(GstPoll)*)this._cPtr, cast(GstPollFD*)&fd);
@@ -185,7 +182,7 @@ class Poll
         fd = a file descriptor.
       Returns: true if the descriptor has an exceptional condition.
   */
-  bool fdHasPri(gst.poll_fd.PollFD fd)
+  bool fdHasPri(gst.poll_fd.PollFD fd) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_poll_fd_has_pri(cast(const(GstPoll)*)this._cPtr, cast(GstPollFD*)&fd);
@@ -205,7 +202,7 @@ class Poll
       Params:
         fd = a file descriptor.
   */
-  void fdIgnored(gst.poll_fd.PollFD fd)
+  void fdIgnored(gst.poll_fd.PollFD fd) nothrow
   {
     gst_poll_fd_ignored(cast(GstPoll*)this._cPtr, cast(GstPollFD*)&fd);
   }
@@ -217,7 +214,7 @@ class Poll
       Params:
         fd = a #GPollFD
   */
-  void getReadGpollfd(glib.types.PollFD fd)
+  void getReadGpollfd(glib.types.PollFD fd) nothrow
   {
     gst_poll_get_read_gpollfd(cast(GstPoll*)this._cPtr, &fd);
   }
@@ -232,7 +229,7 @@ class Poll
         will contain EWOULDBLOCK or EAGAIN. For all other values of errno this always signals a
         critical error.
   */
-  bool readControl()
+  bool readControl() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_poll_read_control(cast(GstPoll*)this._cPtr);
@@ -246,7 +243,7 @@ class Poll
         fd = a file descriptor.
       Returns: true if the file descriptor was successfully removed from the set.
   */
-  bool removeFd(gst.poll_fd.PollFD fd)
+  bool removeFd(gst.poll_fd.PollFD fd) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_poll_remove_fd(cast(GstPoll*)this._cPtr, cast(GstPollFD*)&fd);
@@ -262,7 +259,7 @@ class Poll
       This function only works for non-timer #GstPoll objects created with
       [gst.poll.Poll.new_].
   */
-  void restart()
+  void restart() nothrow
   {
     gst_poll_restart(cast(GstPoll*)this._cPtr);
   }
@@ -279,7 +276,7 @@ class Poll
         controllable = new controllable state.
       Returns: true if the controllability of set could be updated.
   */
-  bool setControllable(bool controllable)
+  bool setControllable(bool controllable) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_poll_set_controllable(cast(GstPoll*)this._cPtr, controllable);
@@ -298,7 +295,7 @@ class Poll
       Params:
         flushing = new flushing state.
   */
-  void setFlushing(bool flushing)
+  void setFlushing(bool flushing) nothrow
   {
     gst_poll_set_flushing(cast(GstPoll*)this._cPtr, flushing);
   }
@@ -321,7 +318,7 @@ class Poll
         activity was detected after timeout. If an error occurs, -1 is returned
         and errno is set.
   */
-  int wait(gst.types.ClockTime timeout)
+  int wait(gst.types.ClockTime timeout) nothrow
   {
     int _retval;
     _retval = gst_poll_wait(cast(GstPoll*)this._cPtr, timeout);
@@ -344,7 +341,7 @@ class Poll
         errno contains the detailed error code but will never be EAGAIN, EINTR or
         EWOULDBLOCK. false always signals a critical error.
   */
-  bool writeControl()
+  bool writeControl() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_poll_write_control(cast(GstPoll*)this._cPtr);

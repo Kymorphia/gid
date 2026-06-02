@@ -69,7 +69,7 @@ template IndenterT()
         view = a #GtkSourceView
         iter = the location of the indentation request
   */
-  override void indent(gtksource.view.View view, gtk.text_iter.TextIter iter)
+  override void indent(gtksource.view.View view, gtk.text_iter.TextIter iter) nothrow
   {
     gtk_source_indenter_indent(cast(GtkSourceIndenter*)this._cPtr, view ? cast(GtkSourceView*)view._cPtr(No.Dup) : null, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
   }
@@ -92,7 +92,7 @@ template IndenterT()
       Returns: true if indentation should be automatically triggered;
           otherwise false and no indentation will be performed.
   */
-  override bool isTrigger(gtksource.view.View view, gtk.text_iter.TextIter location, gdk.types.ModifierType state, uint keyval)
+  override bool isTrigger(gtksource.view.View view, gtk.text_iter.TextIter location, gdk.types.ModifierType state, uint keyval) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_indenter_is_trigger(cast(GtkSourceIndenter*)this._cPtr, view ? cast(GtkSourceView*)view._cPtr(No.Dup) : null, location ? cast(const(GtkTextIter)*)location._cPtr(No.Dup) : null, state, keyval);

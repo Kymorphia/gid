@@ -18,11 +18,8 @@ class BindingArg
   GtkBindingArg _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.binding_arg.BindingArg");
-
     _cInstance = *cast(GtkBindingArg*)ptr;
 
     if (take)
@@ -30,7 +27,7 @@ class BindingArg
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class BindingArg
       Get `argType` field.
       Returns: implementation detail
   */
-  @property gobject.types.GType argType()
+  @property gobject.types.GType argType() nothrow
   {
     return (cast(GtkBindingArg*)this._cPtr).argType;
   }
@@ -49,7 +46,7 @@ class BindingArg
       Params:
         propval = implementation detail
   */
-  @property void argType(gobject.types.GType propval)
+  @property void argType(gobject.types.GType propval) nothrow
   {
     (cast(GtkBindingArg*)this._cPtr).argType = propval;
   }

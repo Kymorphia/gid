@@ -47,32 +47,32 @@ class FlowCombiner : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_flow_combiner_get_type != &gidSymbolNotFound ? gst_flow_combiner_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FlowCombiner self()
+  override FlowCombiner self() nothrow
   {
     return this;
   }
@@ -81,7 +81,7 @@ class FlowCombiner : gobject.boxed.Boxed
       Creates a new #GstFlowCombiner, use [gstbase.flow_combiner.FlowCombiner.free] to free it.
       Returns: A new #GstFlowCombiner
   */
-  this()
+  this() nothrow
   {
     GstFlowCombiner* _cretval;
     _cretval = gst_flow_combiner_new();
@@ -94,7 +94,7 @@ class FlowCombiner : gobject.boxed.Boxed
       Params:
         pad = the #GstPad that is being added
   */
-  void addPad(gst.pad.Pad pad)
+  void addPad(gst.pad.Pad pad) nothrow
   {
     gst_flow_combiner_add_pad(cast(GstFlowCombiner*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
   }
@@ -102,7 +102,7 @@ class FlowCombiner : gobject.boxed.Boxed
   /**
       Removes all pads from a #GstFlowCombiner and resets it to its initial state.
   */
-  void clear()
+  void clear() nothrow
   {
     gst_flow_combiner_clear(cast(GstFlowCombiner*)this._cPtr);
   }
@@ -113,7 +113,7 @@ class FlowCombiner : gobject.boxed.Boxed
       Params:
         pad = the #GstPad to remove
   */
-  void removePad(gst.pad.Pad pad)
+  void removePad(gst.pad.Pad pad) nothrow
   {
     gst_flow_combiner_remove_pad(cast(GstFlowCombiner*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
   }
@@ -121,7 +121,7 @@ class FlowCombiner : gobject.boxed.Boxed
   /**
       Reset flow combiner and all pads to their initial state without removing pads.
   */
-  void reset()
+  void reset() nothrow
   {
     gst_flow_combiner_reset(cast(GstFlowCombiner*)this._cPtr);
   }
@@ -138,7 +138,7 @@ class FlowCombiner : gobject.boxed.Boxed
         fret = the latest #GstFlowReturn received for a pad in this #GstFlowCombiner
       Returns: The combined #GstFlowReturn
   */
-  gst.types.FlowReturn updateFlow(gst.types.FlowReturn fret)
+  gst.types.FlowReturn updateFlow(gst.types.FlowReturn fret) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_flow_combiner_update_flow(cast(GstFlowCombiner*)this._cPtr, fret);
@@ -160,7 +160,7 @@ class FlowCombiner : gobject.boxed.Boxed
         fret = the latest #GstFlowReturn received for a pad in this #GstFlowCombiner
       Returns: The combined #GstFlowReturn
   */
-  gst.types.FlowReturn updatePadFlow(gst.pad.Pad pad, gst.types.FlowReturn fret)
+  gst.types.FlowReturn updatePadFlow(gst.pad.Pad pad, gst.types.FlowReturn fret) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_flow_combiner_update_pad_flow(cast(GstFlowCombiner*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, fret);

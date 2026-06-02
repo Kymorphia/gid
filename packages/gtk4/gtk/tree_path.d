@@ -15,32 +15,32 @@ class TreePath : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_path_get_type != &gidSymbolNotFound ? gtk_tree_path_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TreePath self()
+  override TreePath self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class TreePath : gobject.boxed.Boxed
       This refers to a row.
       Returns: A newly created [gtk.tree_path.TreePath].
   */
-  this()
+  this() nothrow
   {
     GtkTreePath* _cretval;
     _cretval = gtk_tree_path_new();
@@ -63,7 +63,7 @@ class TreePath : gobject.boxed.Boxed
       The string representation of this path is “0”.
       Returns: A new [gtk.tree_path.TreePath]
   */
-  static gtk.tree_path.TreePath newFirst()
+  static gtk.tree_path.TreePath newFirst() nothrow
   {
     GtkTreePath* _cretval;
     _cretval = gtk_tree_path_new_first();
@@ -78,7 +78,7 @@ class TreePath : gobject.boxed.Boxed
         indices = array of indices
       Returns: A newly created [gtk.tree_path.TreePath]
   */
-  static gtk.tree_path.TreePath newFromIndices(int[] indices)
+  static gtk.tree_path.TreePath newFromIndices(int[] indices) nothrow
   {
     GtkTreePath* _cretval;
     size_t _length;
@@ -104,7 +104,7 @@ class TreePath : gobject.boxed.Boxed
         path = The string representation of a path
       Returns: A newly-created [gtk.tree_path.TreePath]
   */
-  static gtk.tree_path.TreePath newFromString(string path)
+  static gtk.tree_path.TreePath newFromString(string path) nothrow
   {
     GtkTreePath* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -121,7 +121,7 @@ class TreePath : gobject.boxed.Boxed
       Params:
         index = the index
   */
-  void appendIndex(int index)
+  void appendIndex(int index) nothrow
   {
     gtk_tree_path_append_index(cast(GtkTreePath*)this._cPtr, index);
   }
@@ -137,7 +137,7 @@ class TreePath : gobject.boxed.Boxed
         b = a [gtk.tree_path.TreePath] to compare with
       Returns: the relative positions of `a` and `b`
   */
-  int compare(gtk.tree_path.TreePath b)
+  int compare(gtk.tree_path.TreePath b) nothrow
   {
     int _retval;
     _retval = gtk_tree_path_compare(cast(const(GtkTreePath)*)this._cPtr, b ? cast(const(GtkTreePath)*)b._cPtr(No.Dup) : null);
@@ -148,7 +148,7 @@ class TreePath : gobject.boxed.Boxed
       Creates a new [gtk.tree_path.TreePath] as a copy of path.
       Returns: a new [gtk.tree_path.TreePath]
   */
-  gtk.tree_path.TreePath copy()
+  gtk.tree_path.TreePath copy() nothrow
   {
     GtkTreePath* _cretval;
     _cretval = gtk_tree_path_copy(cast(const(GtkTreePath)*)this._cPtr);
@@ -159,7 +159,7 @@ class TreePath : gobject.boxed.Boxed
   /**
       Moves path to point to the first child of the current path.
   */
-  void down()
+  void down() nothrow
   {
     gtk_tree_path_down(cast(GtkTreePath*)this._cPtr);
   }
@@ -168,7 +168,7 @@ class TreePath : gobject.boxed.Boxed
       Returns the current depth of path.
       Returns: The depth of path
   */
-  int getDepth()
+  int getDepth() nothrow
   {
     int _retval;
     _retval = gtk_tree_path_get_depth(cast(GtkTreePath*)this._cPtr);
@@ -184,7 +184,7 @@ class TreePath : gobject.boxed.Boxed
       Returns: The current
           indices
   */
-  int[] getIndices()
+  int[] getIndices() nothrow
   {
     int* _cretval;
     int _cretlength;
@@ -205,7 +205,7 @@ class TreePath : gobject.boxed.Boxed
         descendant = another [gtk.tree_path.TreePath]
       Returns: true if descendant is contained inside path
   */
-  bool isAncestor(gtk.tree_path.TreePath descendant)
+  bool isAncestor(gtk.tree_path.TreePath descendant) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_path_is_ancestor(cast(GtkTreePath*)this._cPtr, descendant ? cast(GtkTreePath*)descendant._cPtr(No.Dup) : null);
@@ -219,7 +219,7 @@ class TreePath : gobject.boxed.Boxed
         ancestor = another [gtk.tree_path.TreePath]
       Returns: true if ancestor contains path somewhere below it
   */
-  bool isDescendant(gtk.tree_path.TreePath ancestor)
+  bool isDescendant(gtk.tree_path.TreePath ancestor) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_path_is_descendant(cast(GtkTreePath*)this._cPtr, ancestor ? cast(GtkTreePath*)ancestor._cPtr(No.Dup) : null);
@@ -229,7 +229,7 @@ class TreePath : gobject.boxed.Boxed
   /**
       Moves the path to point to the next node at the current depth.
   */
-  void next()
+  void next() nothrow
   {
     gtk_tree_path_next(cast(GtkTreePath*)this._cPtr);
   }
@@ -242,7 +242,7 @@ class TreePath : gobject.boxed.Boxed
       Params:
         index = the index
   */
-  void prependIndex(int index)
+  void prependIndex(int index) nothrow
   {
     gtk_tree_path_prepend_index(cast(GtkTreePath*)this._cPtr, index);
   }
@@ -253,7 +253,7 @@ class TreePath : gobject.boxed.Boxed
       Returns: true if path has a previous node, and
           the move was made
   */
-  bool prev()
+  bool prev() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_path_prev(cast(GtkTreePath*)this._cPtr);
@@ -269,7 +269,7 @@ class TreePath : gobject.boxed.Boxed
       depth 0, null is returned.
       Returns: A newly-allocated string
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gtk_tree_path_to_string(cast(GtkTreePath*)this._cPtr);
@@ -281,7 +281,7 @@ class TreePath : gobject.boxed.Boxed
       Moves the path to point to its parent node, if it has a parent.
       Returns: true if path has a parent, and the move was made
   */
-  bool up()
+  bool up() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_path_up(cast(GtkTreePath*)this._cPtr);

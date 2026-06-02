@@ -35,11 +35,8 @@ class DsdPlaneOffsetMeta
   GstDsdPlaneOffsetMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstaudio.dsd_plane_offset_meta.DsdPlaneOffsetMeta");
-
     _cInstance = *cast(GstDsdPlaneOffsetMeta*)ptr;
 
     if (take)
@@ -47,7 +44,7 @@ class DsdPlaneOffsetMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -56,7 +53,7 @@ class DsdPlaneOffsetMeta
       Get `meta` field.
       Returns: parent #GstMeta
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstDsdPlaneOffsetMeta*)this._cPtr).meta, No.Take);
   }
@@ -65,7 +62,7 @@ class DsdPlaneOffsetMeta
       Get `numChannels` field.
       Returns: number of channels in the DSD data
   */
-  @property int numChannels()
+  @property int numChannels() nothrow
   {
     return (cast(GstDsdPlaneOffsetMeta*)this._cPtr).numChannels;
   }
@@ -75,7 +72,7 @@ class DsdPlaneOffsetMeta
       Params:
         propval = number of channels in the DSD data
   */
-  @property void numChannels(int propval)
+  @property void numChannels(int propval) nothrow
   {
     (cast(GstDsdPlaneOffsetMeta*)this._cPtr).numChannels = propval;
   }
@@ -84,7 +81,7 @@ class DsdPlaneOffsetMeta
       Get `numBytesPerChannel` field.
       Returns: the number of valid bytes per channel in the buffer
   */
-  @property size_t numBytesPerChannel()
+  @property size_t numBytesPerChannel() nothrow
   {
     return (cast(GstDsdPlaneOffsetMeta*)this._cPtr).numBytesPerChannel;
   }
@@ -94,13 +91,13 @@ class DsdPlaneOffsetMeta
       Params:
         propval = the number of valid bytes per channel in the buffer
   */
-  @property void numBytesPerChannel(size_t propval)
+  @property void numBytesPerChannel(size_t propval) nothrow
   {
     (cast(GstDsdPlaneOffsetMeta*)this._cPtr).numBytesPerChannel = propval;
   }
 
   /** */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_dsd_plane_offset_meta_get_info();

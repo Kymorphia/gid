@@ -15,11 +15,8 @@ class RTSPTimeRange
   GstRTSPTimeRange _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstrtsp.rtsptime_range.RTSPTimeRange");
-
     _cInstance = *cast(GstRTSPTimeRange*)ptr;
 
     if (take)
@@ -27,7 +24,7 @@ class RTSPTimeRange
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -36,7 +33,7 @@ class RTSPTimeRange
       Get `unit` field.
       Returns: the time units used
   */
-  @property gstrtsp.types.RTSPRangeUnit unit()
+  @property gstrtsp.types.RTSPRangeUnit unit() nothrow
   {
     return cast(gstrtsp.types.RTSPRangeUnit)(cast(GstRTSPTimeRange*)this._cPtr).unit;
   }
@@ -46,7 +43,7 @@ class RTSPTimeRange
       Params:
         propval = the time units used
   */
-  @property void unit(gstrtsp.types.RTSPRangeUnit propval)
+  @property void unit(gstrtsp.types.RTSPRangeUnit propval) nothrow
   {
     (cast(GstRTSPTimeRange*)this._cPtr).unit = cast(GstRTSPRangeUnit)propval;
   }
@@ -55,7 +52,7 @@ class RTSPTimeRange
       Get `min` field.
       Returns: the minimum interval
   */
-  @property gstrtsp.types.RTSPTime min()
+  @property gstrtsp.types.RTSPTime min() nothrow
   {
     return cToD!(gstrtsp.types.RTSPTime)(cast(void*)&(cast(GstRTSPTimeRange*)this._cPtr).min);
   }
@@ -65,7 +62,7 @@ class RTSPTimeRange
       Params:
         propval = the minimum interval
   */
-  @property void min(gstrtsp.types.RTSPTime propval)
+  @property void min(gstrtsp.types.RTSPTime propval) nothrow
   {
     (cast(GstRTSPTimeRange*)this._cPtr).min = cast(GstRTSPTime)propval;
   }
@@ -74,7 +71,7 @@ class RTSPTimeRange
       Get `max` field.
       Returns: the maximum interval
   */
-  @property gstrtsp.types.RTSPTime max()
+  @property gstrtsp.types.RTSPTime max() nothrow
   {
     return cToD!(gstrtsp.types.RTSPTime)(cast(void*)&(cast(GstRTSPTimeRange*)this._cPtr).max);
   }
@@ -84,7 +81,7 @@ class RTSPTimeRange
       Params:
         propval = the maximum interval
   */
-  @property void max(gstrtsp.types.RTSPTime propval)
+  @property void max(gstrtsp.types.RTSPTime propval) nothrow
   {
     (cast(GstRTSPTimeRange*)this._cPtr).max = cast(GstRTSPTime)propval;
   }
@@ -93,7 +90,7 @@ class RTSPTimeRange
       Get `min2` field.
       Returns: extra fields in the minimum interval (Since: 1.2)
   */
-  @property gstrtsp.types.RTSPTime2 min2()
+  @property gstrtsp.types.RTSPTime2 min2() nothrow
   {
     return cToD!(gstrtsp.types.RTSPTime2)(cast(void*)&(cast(GstRTSPTimeRange*)this._cPtr).min2);
   }
@@ -103,7 +100,7 @@ class RTSPTimeRange
       Params:
         propval = extra fields in the minimum interval (Since: 1.2)
   */
-  @property void min2(gstrtsp.types.RTSPTime2 propval)
+  @property void min2(gstrtsp.types.RTSPTime2 propval) nothrow
   {
     (cast(GstRTSPTimeRange*)this._cPtr).min2 = cast(GstRTSPTime2)propval;
   }
@@ -112,7 +109,7 @@ class RTSPTimeRange
       Get `max2` field.
       Returns: extra fields in the maximum interval (Since: 1.2)
   */
-  @property gstrtsp.types.RTSPTime2 max2()
+  @property gstrtsp.types.RTSPTime2 max2() nothrow
   {
     return cToD!(gstrtsp.types.RTSPTime2)(cast(void*)&(cast(GstRTSPTimeRange*)this._cPtr).max2);
   }
@@ -122,7 +119,7 @@ class RTSPTimeRange
       Params:
         propval = extra fields in the maximum interval (Since: 1.2)
   */
-  @property void max2(gstrtsp.types.RTSPTime2 propval)
+  @property void max2(gstrtsp.types.RTSPTime2 propval) nothrow
   {
     (cast(GstRTSPTimeRange*)this._cPtr).max2 = cast(GstRTSPTime2)propval;
   }

@@ -26,26 +26,26 @@ class DropControllerMotion : gtk.event_controller.EventController
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_drop_controller_motion_get_type != &gidSymbolNotFound ? gtk_drop_controller_motion_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DropControllerMotion self()
+  override DropControllerMotion self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class DropControllerMotion : gtk.event_controller.EventController
       Get builder for [gtk.drop_controller_motion.DropControllerMotion]
       Returns: New builder object
   */
-  static DropControllerMotionGidBuilder builder()
+  static DropControllerMotionGidBuilder builder() nothrow
   {
     return new DropControllerMotionGidBuilder;
   }
@@ -73,7 +73,7 @@ class DropControllerMotion : gtk.event_controller.EventController
         before [gtk.drop_controller_motion.DropControllerMotion.enter], but after
         [gtk.drop_controller_motion.DropControllerMotion.leave] is emitted.
   */
-  @property gdk.drop.Drop drop()
+  @property gdk.drop.Drop drop() nothrow
   {
     return getDrop();
   }
@@ -83,7 +83,7 @@ class DropControllerMotion : gtk.event_controller.EventController
       events during drag and drop.
       Returns: a new [gtk.drop_controller_motion.DropControllerMotion]
   */
-  this()
+  this() nothrow
   {
     GtkEventController* _cretval;
     _cretval = gtk_drop_controller_motion_new();
@@ -95,7 +95,7 @@ class DropControllerMotion : gtk.event_controller.EventController
       self or one of its children.
       Returns: true if a dragging pointer is within self or one of its children.
   */
-  bool containsPointer()
+  bool containsPointer() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_drop_controller_motion_contains_pointer(cast(GtkDropControllerMotion*)this._cPtr);
@@ -108,7 +108,7 @@ class DropControllerMotion : gtk.event_controller.EventController
       Returns: The [gdk.drop.Drop] currently
           happening within self
   */
-  gdk.drop.Drop getDrop()
+  gdk.drop.Drop getDrop() nothrow
   {
     GdkDrop* _cretval;
     _cretval = gtk_drop_controller_motion_get_drop(cast(GtkDropControllerMotion*)this._cPtr);
@@ -122,7 +122,7 @@ class DropControllerMotion : gtk.event_controller.EventController
       Returns: true if a dragging pointer is within self but
           not one of its children
   */
-  bool isPointer()
+  bool isPointer() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_drop_controller_motion_is_pointer(cast(GtkDropControllerMotion*)this._cPtr);
@@ -148,7 +148,7 @@ class DropControllerMotion : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEnter(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEnter(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -156,7 +156,7 @@ class DropControllerMotion : gtk.event_controller.EventController
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.drop_controller_motion.DropControllerMotion)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -171,7 +171,14 @@ class DropControllerMotion : gtk.event_controller.EventController
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.drop_controller_motion.DropControllerMotion.enter");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -193,13 +200,13 @@ class DropControllerMotion : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLeave(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLeave(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.drop_controller_motion.DropControllerMotion)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -208,7 +215,14 @@ class DropControllerMotion : gtk.event_controller.EventController
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.drop_controller_motion.DropControllerMotion.leave");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -234,7 +248,7 @@ class DropControllerMotion : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMotion(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMotion(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -242,7 +256,7 @@ class DropControllerMotion : gtk.event_controller.EventController
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.drop_controller_motion.DropControllerMotion)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -257,7 +271,14 @@ class DropControllerMotion : gtk.event_controller.EventController
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.drop_controller_motion.DropControllerMotion.motion");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -277,7 +298,7 @@ final class DropControllerMotionGidBuilder : DropControllerMotionGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  DropControllerMotion build()
+  DropControllerMotion build() nothrow
   {
     return new DropControllerMotion(cast(void*)createGObject(DropControllerMotion._getGType), Yes.Take);
   }

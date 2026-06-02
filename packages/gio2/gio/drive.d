@@ -49,7 +49,7 @@ interface Drive
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_drive_get_type != &gidSymbolNotFound ? g_drive_get_type() : cast(GType)0;
@@ -332,7 +332,7 @@ interface Drive
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `Disconnected` signal.
@@ -352,7 +352,7 @@ interface Drive
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDisconnected(T)(T callback, Flag!"After" after = No.After);
+  gulong connectDisconnected(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `EjectButton` signal.
@@ -370,7 +370,7 @@ interface Drive
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEjectButton(T)(T callback, Flag!"After" after = No.After);
+  gulong connectEjectButton(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `StopButton` signal.
@@ -388,7 +388,7 @@ interface Drive
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectStopButton(T)(T callback, Flag!"After" after = No.After);
+  gulong connectStopButton(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gio.drive.Drive]

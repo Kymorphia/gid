@@ -15,26 +15,26 @@ class FloatArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_float_array_builder_get_type != &gidSymbolNotFound ? garrow_float_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FloatArrayBuilder self()
+  override FloatArrayBuilder self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class FloatArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.float_array_builder.FloatArrayBuilder]
       Returns: New builder object
   */
-  static FloatArrayBuilderGidBuilder builder()
+  static FloatArrayBuilderGidBuilder builder() nothrow
   {
     return new FloatArrayBuilderGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowFloatArrayBuilder* _cretval;
     _cretval = garrow_float_array_builder_new();
@@ -124,7 +124,7 @@ final class FloatArrayBuilderGidBuilder : FloatArrayBuilderGidBuilderImpl!FloatA
       Create object from builder.
       Returns: New object
   */
-  FloatArrayBuilder build()
+  FloatArrayBuilder build() nothrow
   {
     return new FloatArrayBuilder(cast(void*)createGObject(FloatArrayBuilder._getGType), Yes.Take);
   }

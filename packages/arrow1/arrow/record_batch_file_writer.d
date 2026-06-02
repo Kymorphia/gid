@@ -17,26 +17,26 @@ class RecordBatchFileWriter : arrow.record_batch_stream_writer.RecordBatchStream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_record_batch_file_writer_get_type != &gidSymbolNotFound ? garrow_record_batch_file_writer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RecordBatchFileWriter self()
+  override RecordBatchFileWriter self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class RecordBatchFileWriter : arrow.record_batch_stream_writer.RecordBatchStream
       Get builder for [arrow.record_batch_file_writer.RecordBatchFileWriter]
       Returns: New builder object
   */
-  static RecordBatchFileWriterGidBuilder builder()
+  static RecordBatchFileWriterGidBuilder builder() nothrow
   {
     return new RecordBatchFileWriterGidBuilder;
   }
@@ -74,7 +74,7 @@ final class RecordBatchFileWriterGidBuilder : RecordBatchFileWriterGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  RecordBatchFileWriter build()
+  RecordBatchFileWriter build() nothrow
   {
     return new RecordBatchFileWriter(cast(void*)createGObject(RecordBatchFileWriter._getGType), Yes.Take);
   }

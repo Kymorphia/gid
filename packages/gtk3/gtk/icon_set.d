@@ -21,32 +21,32 @@ class IconSet : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_icon_set_get_type != &gidSymbolNotFound ? gtk_icon_set_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override IconSet self()
+  override IconSet self() nothrow
   {
     return this;
   }
@@ -65,7 +65,7 @@ class IconSet : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  this()
+  this() nothrow
   {
     GtkIconSet* _cretval;
     _cretval = gtk_icon_set_new();
@@ -85,7 +85,7 @@ class IconSet : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  static gtk.icon_set.IconSet newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  static gtk.icon_set.IconSet newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf) nothrow
   {
     GtkIconSet* _cretval;
     _cretval = gtk_icon_set_new_from_pixbuf(pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
@@ -125,7 +125,7 @@ class IconSet : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  void addSource(gtk.icon_source.IconSource source)
+  void addSource(gtk.icon_source.IconSource source) nothrow
   {
     gtk_icon_set_add_source(cast(GtkIconSet*)this._cPtr, source ? cast(const(GtkIconSource)*)source._cPtr(No.Dup) : null);
   }
@@ -136,7 +136,7 @@ class IconSet : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  gtk.icon_set.IconSet copy()
+  gtk.icon_set.IconSet copy() nothrow
   {
     GtkIconSet* _cretval;
     _cretval = gtk_icon_set_copy(cast(GtkIconSet*)this._cPtr);
@@ -154,7 +154,7 @@ class IconSet : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  void getSizes(out gtk.types.IconSize[] sizes)
+  void getSizes(out gtk.types.IconSize[] sizes) nothrow
   {
     int _nSizes;
     GtkIconSize* _sizes;
@@ -188,7 +188,7 @@ class IconSet : gobject.boxed.Boxed
   
       Deprecated: Use [gtk.icon_set.IconSet.renderIconPixbuf] instead
   */
-  gdkpixbuf.pixbuf.Pixbuf renderIcon(gtk.style.Style style, gtk.types.TextDirection direction, gtk.types.StateType state, gtk.types.IconSize size, gtk.widget.Widget widget = null, string detail = null)
+  gdkpixbuf.pixbuf.Pixbuf renderIcon(gtk.style.Style style, gtk.types.TextDirection direction, gtk.types.StateType state, gtk.types.IconSize size, gtk.widget.Widget widget = null, string detail = null) nothrow
   {
     GdkPixbuf* _cretval;
     const(char)* _detail = detail.toCString(No.Alloc);
@@ -213,7 +213,7 @@ class IconSet : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  gdkpixbuf.pixbuf.Pixbuf renderIconPixbuf(gtk.style_context.StyleContext context, gtk.types.IconSize size)
+  gdkpixbuf.pixbuf.Pixbuf renderIconPixbuf(gtk.style_context.StyleContext context, gtk.types.IconSize size) nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gtk_icon_set_render_icon_pixbuf(cast(GtkIconSet*)this._cPtr, context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, size);
@@ -239,7 +239,7 @@ class IconSet : gobject.boxed.Boxed
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  cairo.surface.Surface renderIconSurface(gtk.style_context.StyleContext context, gtk.types.IconSize size, int scale, gdk.window.Window forWindow = null)
+  cairo.surface.Surface renderIconSurface(gtk.style_context.StyleContext context, gtk.types.IconSize size, int scale, gdk.window.Window forWindow = null) nothrow
   {
     cairo_surface_t* _cretval;
     _cretval = gtk_icon_set_render_icon_surface(cast(GtkIconSet*)this._cPtr, context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, size, scale, forWindow ? cast(GdkWindow*)forWindow._cPtr(No.Dup) : null);

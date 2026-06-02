@@ -89,26 +89,26 @@ class Aggregator : gst.element.Element
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_aggregator_get_type != &gidSymbolNotFound ? gst_aggregator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Aggregator self()
+  override Aggregator self() nothrow
   {
     return this;
   }
@@ -117,7 +117,7 @@ class Aggregator : gst.element.Element
       Get builder for [gstbase.aggregator.Aggregator]
       Returns: New builder object
   */
-  static AggregatorGidBuilder builder()
+  static AggregatorGidBuilder builder() nothrow
   {
     return new AggregatorGidBuilder;
   }
@@ -126,7 +126,7 @@ class Aggregator : gst.element.Element
       Get `emitSignals` property.
       Returns: Enables the emission of signals such as #GstAggregator::samples-selected
   */
-  @property bool emitSignals()
+  @property bool emitSignals() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("emit-signals");
   }
@@ -136,19 +136,19 @@ class Aggregator : gst.element.Element
       Params:
         propval = Enables the emission of signals such as #GstAggregator::samples-selected
   */
-  @property void emitSignals(bool propval)
+  @property void emitSignals(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("emit-signals", propval);
   }
 
   /** */
-  @property ulong latency()
+  @property ulong latency() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("latency");
   }
 
   /** */
-  @property void latency(ulong propval)
+  @property void latency(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("latency", propval);
   }
@@ -161,7 +161,7 @@ class Aggregator : gst.element.Element
         latency reported by the initial source(s). This is only taken into
         account when larger than the actually reported minimum latency.
   */
-  @property ulong minUpstreamLatency()
+  @property ulong minUpstreamLatency() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("min-upstream-latency");
   }
@@ -175,31 +175,31 @@ class Aggregator : gst.element.Element
           latency reported by the initial source(s). This is only taken into
           account when larger than the actually reported minimum latency.
   */
-  @property void minUpstreamLatency(ulong propval)
+  @property void minUpstreamLatency(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("min-upstream-latency", propval);
   }
 
   /** */
-  @property ulong startTime()
+  @property ulong startTime() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("start-time");
   }
 
   /** */
-  @property void startTime(ulong propval)
+  @property void startTime(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("start-time", propval);
   }
 
   /** */
-  @property gstbase.types.AggregatorStartTimeSelection startTimeSelection()
+  @property gstbase.types.AggregatorStartTimeSelection startTimeSelection() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gstbase.types.AggregatorStartTimeSelection)("start-time-selection");
   }
 
   /** */
-  @property void startTimeSelection(gstbase.types.AggregatorStartTimeSelection propval)
+  @property void startTimeSelection(gstbase.types.AggregatorStartTimeSelection propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gstbase.types.AggregatorStartTimeSelection)("start-time-selection", propval);
   }
@@ -213,7 +213,7 @@ class Aggregator : gst.element.Element
         buffer = the #GstBuffer to push.
       Returns: 
   */
-  gst.types.FlowReturn finishBuffer(gst.buffer.Buffer buffer)
+  gst.types.FlowReturn finishBuffer(gst.buffer.Buffer buffer) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_aggregator_finish_buffer(cast(GstAggregator*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null);
@@ -230,7 +230,7 @@ class Aggregator : gst.element.Element
         bufferlist = the #GstBufferList to push.
       Returns: 
   */
-  gst.types.FlowReturn finishBufferList(gst.buffer_list.BufferList bufferlist)
+  gst.types.FlowReturn finishBufferList(gst.buffer_list.BufferList bufferlist) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_aggregator_finish_buffer_list(cast(GstAggregator*)this._cPtr, bufferlist ? cast(GstBufferList*)bufferlist._cPtr(Yes.Dup) : null);
@@ -250,7 +250,7 @@ class Aggregator : gst.element.Element
         params = the
           #GstAllocationParams of allocator
   */
-  void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
+  void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params) nothrow
   {
     GstAllocator* _allocator;
     gst_aggregator_get_allocator(cast(GstAggregator*)this._cPtr, &_allocator, cast(GstAllocationParams*)&params);
@@ -258,7 +258,7 @@ class Aggregator : gst.element.Element
   }
 
   /** */
-  gst.buffer_pool.BufferPool getBufferPool()
+  gst.buffer_pool.BufferPool getBufferPool() nothrow
   {
     GstBufferPool* _cretval;
     _cretval = gst_aggregator_get_buffer_pool(cast(GstAggregator*)this._cPtr);
@@ -271,7 +271,7 @@ class Aggregator : gst.element.Element
       [gst.types.FlowReturn.Eos] from their aggregate implementation.
       Returns: whether live status was forced on self.
   */
-  bool getForceLive()
+  bool getForceLive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_aggregator_get_force_live(cast(GstAggregator*)this._cPtr);
@@ -279,7 +279,7 @@ class Aggregator : gst.element.Element
   }
 
   /** */
-  bool getIgnoreInactivePads()
+  bool getIgnoreInactivePads() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_aggregator_get_ignore_inactive_pads(cast(GstAggregator*)this._cPtr);
@@ -294,7 +294,7 @@ class Aggregator : gst.element.Element
       Typically only called by subclasses.
       Returns: The latency or [gst.types.CLOCK_TIME_NONE] if the element does not sync
   */
-  gst.types.ClockTime getLatency()
+  gst.types.ClockTime getLatency() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_aggregator_get_latency(cast(GstAggregator*)this._cPtr);
@@ -307,7 +307,7 @@ class Aggregator : gst.element.Element
       if #GstAggregatorClass::negotiate fails.
       Returns: true if the negotiation succeeded, else false.
   */
-  bool negotiate()
+  bool negotiate() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_aggregator_negotiate(cast(GstAggregator*)this._cPtr);
@@ -327,7 +327,7 @@ class Aggregator : gst.element.Element
           and documented on a subclass basis. The buffers held by the sample are
           not writable.
   */
-  gst.sample.Sample peekNextSample(gstbase.aggregator_pad.AggregatorPad pad)
+  gst.sample.Sample peekNextSample(gstbase.aggregator_pad.AggregatorPad pad) nothrow
   {
     GstSample* _cretval;
     _cretval = gst_aggregator_peek_next_sample(cast(GstAggregator*)this._cPtr, pad ? cast(GstAggregatorPad*)pad._cPtr(No.Dup) : null);
@@ -354,7 +354,7 @@ class Aggregator : gst.element.Element
         duration = The duration of the next output buffer
         info = a #GstStructure containing additional information
   */
-  void selectedSamples(gst.types.ClockTime pts, gst.types.ClockTime dts, gst.types.ClockTime duration, gst.structure.Structure info = null)
+  void selectedSamples(gst.types.ClockTime pts, gst.types.ClockTime dts, gst.types.ClockTime duration, gst.structure.Structure info = null) nothrow
   {
     gst_aggregator_selected_samples(cast(GstAggregator*)this._cPtr, pts, dts, duration, info ? cast(GstStructure*)info._cPtr(No.Dup) : null);
   }
@@ -366,7 +366,7 @@ class Aggregator : gst.element.Element
       Params:
         forceLive = 
   */
-  void setForceLive(bool forceLive)
+  void setForceLive(bool forceLive) nothrow
   {
     gst_aggregator_set_force_live(cast(GstAggregator*)this._cPtr, forceLive);
   }
@@ -382,7 +382,7 @@ class Aggregator : gst.element.Element
       Params:
         ignore = whether inactive pads should not be waited on
   */
-  void setIgnoreInactivePads(bool ignore)
+  void setIgnoreInactivePads(bool ignore) nothrow
   {
     gst_aggregator_set_ignore_inactive_pads(cast(GstAggregator*)this._cPtr, ignore);
   }
@@ -396,7 +396,7 @@ class Aggregator : gst.element.Element
         minLatency = minimum latency
         maxLatency = maximum latency
   */
-  void setLatency(gst.types.ClockTime minLatency, gst.types.ClockTime maxLatency)
+  void setLatency(gst.types.ClockTime minLatency, gst.types.ClockTime maxLatency) nothrow
   {
     gst_aggregator_set_latency(cast(GstAggregator*)this._cPtr, minLatency, maxLatency);
   }
@@ -407,7 +407,7 @@ class Aggregator : gst.element.Element
       Params:
         caps = The #GstCaps to set on the src pad.
   */
-  void setSrcCaps(gst.caps.Caps caps)
+  void setSrcCaps(gst.caps.Caps caps) nothrow
   {
     gst_aggregator_set_src_caps(cast(GstAggregator*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
   }
@@ -421,7 +421,7 @@ class Aggregator : gst.element.Element
       and you have a dead line based aggregator subclass.
       Returns: The running time based on the position
   */
-  gst.types.ClockTime simpleGetNextTime()
+  gst.types.ClockTime simpleGetNextTime() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_aggregator_simple_get_next_time(cast(GstAggregator*)this._cPtr);
@@ -439,7 +439,7 @@ class Aggregator : gst.element.Element
       Params:
         segment = 
   */
-  void updateSegment(gst.segment.Segment segment)
+  void updateSegment(gst.segment.Segment segment) nothrow
   {
     gst_aggregator_update_segment(cast(GstAggregator*)this._cPtr, cast(const(GstSegment)*)&segment);
   }
@@ -471,7 +471,7 @@ class Aggregator : gst.element.Element
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSamplesSelected(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSamplesSelected(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gst.segment.Segment)))
@@ -482,7 +482,7 @@ class Aggregator : gst.element.Element
   && (Parameters!T.length < 6 || (ParameterStorageClassTuple!T[5] == ParameterStorageClass.none && is(Parameters!T[5] : gstbase.aggregator.Aggregator)))
   && Parameters!T.length < 7)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 6, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -506,7 +506,14 @@ class Aggregator : gst.element.Element
       static if (Parameters!T.length > 5)
         _paramTuple[5] = getVal!(Parameters!T[5])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstbase.aggregator.Aggregator.samplesSelected");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -524,13 +531,13 @@ class AggregatorGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
         propval = Enables the emission of signals such as #GstAggregator::samples-selected
       Returns: Builder instance for fluent chaining
   */
-  T emitSignals(bool propval)
+  T emitSignals(bool propval) nothrow
   {
     return setProperty("emit-signals", propval);
   }
 
   /** */
-  T latency(ulong propval)
+  T latency(ulong propval) nothrow
   {
     return setProperty("latency", propval);
   }
@@ -545,19 +552,19 @@ class AggregatorGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           account when larger than the actually reported minimum latency.
       Returns: Builder instance for fluent chaining
   */
-  T minUpstreamLatency(ulong propval)
+  T minUpstreamLatency(ulong propval) nothrow
   {
     return setProperty("min-upstream-latency", propval);
   }
 
   /** */
-  T startTime(ulong propval)
+  T startTime(ulong propval) nothrow
   {
     return setProperty("start-time", propval);
   }
 
   /** */
-  T startTimeSelection(gstbase.types.AggregatorStartTimeSelection propval)
+  T startTimeSelection(gstbase.types.AggregatorStartTimeSelection propval) nothrow
   {
     return setProperty("start-time-selection", propval);
   }
@@ -570,7 +577,7 @@ final class AggregatorGidBuilder : AggregatorGidBuilderImpl!AggregatorGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Aggregator build()
+  Aggregator build() nothrow
   {
     return new Aggregator(cast(void*)createGObject(Aggregator._getGType), No.Take);
   }

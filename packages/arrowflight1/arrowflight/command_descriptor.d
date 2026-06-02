@@ -14,26 +14,26 @@ class CommandDescriptor : arrowflight.descriptor.Descriptor
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_command_descriptor_get_type != &gidSymbolNotFound ? gaflight_command_descriptor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CommandDescriptor self()
+  override CommandDescriptor self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class CommandDescriptor : arrowflight.descriptor.Descriptor
       Get builder for [arrowflight.command_descriptor.CommandDescriptor]
       Returns: New builder object
   */
-  static CommandDescriptorGidBuilder builder()
+  static CommandDescriptorGidBuilder builder() nothrow
   {
     return new CommandDescriptorGidBuilder;
   }
 
   /** */
-  this(string command)
+  this(string command) nothrow
   {
     GAFlightCommandDescriptor* _cretval;
     const(char)* _command = command.toCString(No.Alloc);
@@ -57,7 +57,7 @@ class CommandDescriptor : arrowflight.descriptor.Descriptor
   }
 
   /** */
-  string getCommand()
+  string getCommand() nothrow
   {
     char* _cretval;
     _cretval = gaflight_command_descriptor_get_command(cast(GAFlightCommandDescriptor*)this._cPtr);
@@ -78,7 +78,7 @@ final class CommandDescriptorGidBuilder : CommandDescriptorGidBuilderImpl!Comman
       Create object from builder.
       Returns: New object
   */
-  CommandDescriptor build()
+  CommandDescriptor build() nothrow
   {
     return new CommandDescriptor(cast(void*)createGObject(CommandDescriptor._getGType), Yes.Take);
   }

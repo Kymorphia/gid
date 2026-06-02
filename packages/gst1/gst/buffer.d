@@ -120,32 +120,32 @@ class Buffer : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_buffer_get_type != &gidSymbolNotFound ? gst_buffer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Buffer self()
+  override Buffer self() nothrow
   {
     return this;
   }
@@ -154,7 +154,7 @@ class Buffer : gobject.boxed.Boxed
       Get `miniObject` field.
       Returns: the parent structure
   */
-  @property gst.mini_object.MiniObject miniObject()
+  @property gst.mini_object.MiniObject miniObject() nothrow
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstBuffer*)this._cPtr).miniObject);
   }
@@ -163,7 +163,7 @@ class Buffer : gobject.boxed.Boxed
       Get `pool` field.
       Returns: pointer to the pool owner of the buffer
   */
-  @property gst.buffer_pool.BufferPool pool()
+  @property gst.buffer_pool.BufferPool pool() nothrow
   {
     return cToD!(gst.buffer_pool.BufferPool)(cast(void*)(cast(GstBuffer*)this._cPtr).pool);
   }
@@ -173,7 +173,7 @@ class Buffer : gobject.boxed.Boxed
       Params:
         propval = pointer to the pool owner of the buffer
   */
-  @property void pool(gst.buffer_pool.BufferPool propval)
+  @property void pool(gst.buffer_pool.BufferPool propval) nothrow
   {
     cValueFree!(gst.buffer_pool.BufferPool)(cast(void*)(cast(GstBuffer*)this._cPtr).pool);
     dToC(propval, cast(void*)&(cast(GstBuffer*)this._cPtr).pool);
@@ -185,7 +185,7 @@ class Buffer : gobject.boxed.Boxed
             pts is not known or relevant. The pts contains the timestamp when the
             media should be presented to the user.
   */
-  @property gst.types.ClockTime pts()
+  @property gst.types.ClockTime pts() nothrow
   {
     return (cast(GstBuffer*)this._cPtr).pts;
   }
@@ -197,7 +197,7 @@ class Buffer : gobject.boxed.Boxed
               pts is not known or relevant. The pts contains the timestamp when the
               media should be presented to the user.
   */
-  @property void pts(gst.types.ClockTime propval)
+  @property void pts(gst.types.ClockTime propval) nothrow
   {
     (cast(GstBuffer*)this._cPtr).pts = propval;
   }
@@ -208,7 +208,7 @@ class Buffer : gobject.boxed.Boxed
             dts is not known or relevant. The dts contains the timestamp when the
             media should be processed.
   */
-  @property gst.types.ClockTime dts()
+  @property gst.types.ClockTime dts() nothrow
   {
     return (cast(GstBuffer*)this._cPtr).dts;
   }
@@ -220,7 +220,7 @@ class Buffer : gobject.boxed.Boxed
               dts is not known or relevant. The dts contains the timestamp when the
               media should be processed.
   */
-  @property void dts(gst.types.ClockTime propval)
+  @property void dts(gst.types.ClockTime propval) nothrow
   {
     (cast(GstBuffer*)this._cPtr).dts = propval;
   }
@@ -230,7 +230,7 @@ class Buffer : gobject.boxed.Boxed
       Returns: duration in time of the buffer data, can be #GST_CLOCK_TIME_NONE
             when the duration is not known or relevant.
   */
-  @property gst.types.ClockTime duration()
+  @property gst.types.ClockTime duration() nothrow
   {
     return (cast(GstBuffer*)this._cPtr).duration;
   }
@@ -241,7 +241,7 @@ class Buffer : gobject.boxed.Boxed
         propval = duration in time of the buffer data, can be #GST_CLOCK_TIME_NONE
               when the duration is not known or relevant.
   */
-  @property void duration(gst.types.ClockTime propval)
+  @property void duration(gst.types.ClockTime propval) nothrow
   {
     (cast(GstBuffer*)this._cPtr).duration = propval;
   }
@@ -254,7 +254,7 @@ class Buffer : gobject.boxed.Boxed
             For file data or compressed data this is the byte offset of the first
               byte in this buffer.
   */
-  @property ulong offset()
+  @property ulong offset() nothrow
   {
     return (cast(GstBuffer*)this._cPtr).offset;
   }
@@ -268,7 +268,7 @@ class Buffer : gobject.boxed.Boxed
               For file data or compressed data this is the byte offset of the first
                 byte in this buffer.
   */
-  @property void offset(ulong propval)
+  @property void offset(ulong propval) nothrow
   {
     (cast(GstBuffer*)this._cPtr).offset = propval;
   }
@@ -278,7 +278,7 @@ class Buffer : gobject.boxed.Boxed
       Returns: the last offset contained in this buffer. It has the same
             format as @offset.
   */
-  @property ulong offsetEnd()
+  @property ulong offsetEnd() nothrow
   {
     return (cast(GstBuffer*)this._cPtr).offsetEnd;
   }
@@ -289,7 +289,7 @@ class Buffer : gobject.boxed.Boxed
         propval = the last offset contained in this buffer. It has the same
               format as @offset.
   */
-  @property void offsetEnd(ulong propval)
+  @property void offsetEnd(ulong propval) nothrow
   {
     (cast(GstBuffer*)this._cPtr).offsetEnd = propval;
   }
@@ -298,7 +298,7 @@ class Buffer : gobject.boxed.Boxed
       Creates a newly allocated buffer without any data.
       Returns: the new #GstBuffer.
   */
-  this()
+  this() nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_buffer_new();
@@ -321,7 +321,7 @@ class Buffer : gobject.boxed.Boxed
         params = optional parameters
       Returns: a new #GstBuffer
   */
-  static gst.buffer.Buffer newAllocate(gst.allocator.Allocator allocator, size_t size, gst.allocation_params.AllocationParams params)
+  static gst.buffer.Buffer newAllocate(gst.allocator.Allocator allocator, size_t size, gst.allocation_params.AllocationParams params) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_buffer_new_allocate(allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, size, cast(GstAllocationParams*)&params);
@@ -336,7 +336,7 @@ class Buffer : gobject.boxed.Boxed
         data = data to copy into new buffer
       Returns: a new #GstBuffer
   */
-  static gst.buffer.Buffer newMemdup(ubyte[] data)
+  static gst.buffer.Buffer newMemdup(ubyte[] data) nothrow
   {
     GstBuffer* _cretval;
     size_t _size;
@@ -357,7 +357,7 @@ class Buffer : gobject.boxed.Boxed
         bytes = a #GBytes to wrap
       Returns: a new #GstBuffer wrapping bytes
   */
-  static gst.buffer.Buffer newWrappedBytes(glib.bytes.Bytes bytes)
+  static gst.buffer.Buffer newWrappedBytes(glib.bytes.Bytes bytes) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_buffer_new_wrapped_bytes(bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null);
@@ -383,14 +383,21 @@ class Buffer : gobject.boxed.Boxed
         notify = called with user_data when the memory is freed
       Returns: a new #GstBuffer
   */
-  static gst.buffer.Buffer newWrappedFull(gst.types.MemoryFlags flags, ubyte[] data, size_t maxsize, size_t offset, glib.types.DestroyNotify notify = null)
+  static gst.buffer.Buffer newWrappedFull(gst.types.MemoryFlags flags, ubyte[] data, size_t maxsize, size_t offset, glib.types.DestroyNotify notify = null) nothrow
   {
-    extern(C) void _notifyCallback(void* data)
+    extern(C) void _notifyCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
     GstBuffer* _cretval;
@@ -413,7 +420,7 @@ class Buffer : gobject.boxed.Boxed
         name = the registered name of the desired custom meta
       Returns: The #GstCustomMeta that was added to the buffer
   */
-  gst.custom_meta.CustomMeta addCustomMeta(string name)
+  gst.custom_meta.CustomMeta addCustomMeta(string name) nothrow
   {
     GstCustomMeta* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -430,7 +437,7 @@ class Buffer : gobject.boxed.Boxed
         params = params for info
       Returns: the metadata for the api in info on buffer.
   */
-  gst.meta.Meta addMeta(gst.meta_info.MetaInfo info, void* params = null)
+  gst.meta.Meta addMeta(gst.meta_info.MetaInfo info, void* params = null) nothrow
   {
     GstMeta* _cretval;
     _cretval = gst_buffer_add_meta(cast(GstBuffer*)this._cPtr, cast(const(GstMetaInfo)*)&info, params);
@@ -446,7 +453,7 @@ class Buffer : gobject.boxed.Boxed
         ref_ = a #GstBuffer to ref
       Returns: The #GstParentBufferMeta that was added to the buffer
   */
-  gst.parent_buffer_meta.ParentBufferMeta addParentBufferMeta(gst.buffer.Buffer ref_)
+  gst.parent_buffer_meta.ParentBufferMeta addParentBufferMeta(gst.buffer.Buffer ref_) nothrow
   {
     GstParentBufferMeta* _cretval;
     _cretval = gst_buffer_add_parent_buffer_meta(cast(GstBuffer*)this._cPtr, ref_ ? cast(GstBuffer*)ref_._cPtr(No.Dup) : null);
@@ -463,7 +470,7 @@ class Buffer : gobject.boxed.Boxed
               function takes ownership of info.
       Returns: a pointer to the added #GstProtectionMeta if successful
   */
-  gst.protection_meta.ProtectionMeta addProtectionMeta(gst.structure.Structure info)
+  gst.protection_meta.ProtectionMeta addProtectionMeta(gst.structure.Structure info) nothrow
   {
     GstProtectionMeta* _cretval;
     _cretval = gst_buffer_add_protection_meta(cast(GstBuffer*)this._cPtr, info ? cast(GstStructure*)info._cPtr(Yes.Dup) : null);
@@ -482,7 +489,7 @@ class Buffer : gobject.boxed.Boxed
         duration = duration, or [gst.types.CLOCK_TIME_NONE]
       Returns: The #GstReferenceTimestampMeta that was added to the buffer
   */
-  gst.reference_timestamp_meta.ReferenceTimestampMeta addReferenceTimestampMeta(gst.caps.Caps reference, gst.types.ClockTime timestamp, gst.types.ClockTime duration)
+  gst.reference_timestamp_meta.ReferenceTimestampMeta addReferenceTimestampMeta(gst.caps.Caps reference, gst.types.ClockTime timestamp, gst.types.ClockTime duration) nothrow
   {
     GstReferenceTimestampMeta* _cretval;
     _cretval = gst_buffer_add_reference_timestamp_meta(cast(GstBuffer*)this._cPtr, reference ? cast(GstCaps*)reference._cPtr(No.Dup) : null, timestamp, duration);
@@ -499,7 +506,7 @@ class Buffer : gobject.boxed.Boxed
       Returns: the new #GstBuffer that contains the memory
             of the two source buffers.
   */
-  gst.buffer.Buffer append(gst.buffer.Buffer buf2)
+  gst.buffer.Buffer append(gst.buffer.Buffer buf2) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_buffer_append(cast(GstBuffer*)this._cPtr, buf2 ? cast(GstBuffer*)buf2._cPtr(Yes.Dup) : null);
@@ -517,7 +524,7 @@ class Buffer : gobject.boxed.Boxed
       Params:
         mem = a #GstMemory.
   */
-  void appendMemory(gst.memory.Memory mem)
+  void appendMemory(gst.memory.Memory mem) nothrow
   {
     gst_buffer_append_memory(cast(GstBuffer*)this._cPtr, mem ? cast(GstMemory*)mem._cPtr(Yes.Dup) : null);
   }
@@ -534,7 +541,7 @@ class Buffer : gobject.boxed.Boxed
       Returns: the new #GstBuffer that contains the memory
             of the two source buffers.
   */
-  gst.buffer.Buffer appendRegion(gst.buffer.Buffer buf2, ptrdiff_t offset, ptrdiff_t size)
+  gst.buffer.Buffer appendRegion(gst.buffer.Buffer buf2, ptrdiff_t offset, ptrdiff_t size) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_buffer_append_region(cast(GstBuffer*)this._cPtr, buf2 ? cast(GstBuffer*)buf2._cPtr(Yes.Dup) : null, offset, size);
@@ -547,7 +554,7 @@ class Buffer : gobject.boxed.Boxed
       copy of the data the source buffer contains.
       Returns: a new copy of buf if the copy succeeded, null otherwise.
   */
-  gst.buffer.Buffer copyDeep()
+  gst.buffer.Buffer copyDeep() nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_buffer_copy_deep(cast(const(GstBuffer)*)this._cPtr);
@@ -570,7 +577,7 @@ class Buffer : gobject.boxed.Boxed
         size = total size to copy. If -1, all data is copied.
       Returns: true if the copying succeeded, false otherwise.
   */
-  bool copyInto(gst.buffer.Buffer src, gst.types.BufferCopyFlags flags, size_t offset, size_t size)
+  bool copyInto(gst.buffer.Buffer src, gst.types.BufferCopyFlags flags, size_t offset, size_t size) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_buffer_copy_into(cast(GstBuffer*)this._cPtr, src ? cast(GstBuffer*)src._cPtr(No.Dup) : null, flags, offset, size);
@@ -596,7 +603,7 @@ class Buffer : gobject.boxed.Boxed
       Returns: the new #GstBuffer or null if copying
             failed.
   */
-  gst.buffer.Buffer copyRegion(gst.types.BufferCopyFlags flags, size_t offset, size_t size)
+  gst.buffer.Buffer copyRegion(gst.types.BufferCopyFlags flags, size_t offset, size_t size) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_buffer_copy_region(cast(GstBuffer*)this._cPtr, flags, offset, size);
@@ -614,7 +621,7 @@ class Buffer : gobject.boxed.Boxed
         dest = A pointer where
            the destination array will be written. Might be null if the size is 0.
   */
-  void extractDup(size_t offset, size_t size, out ubyte[] dest)
+  void extractDup(size_t offset, size_t size, out ubyte[] dest) nothrow
   {
     size_t _destSize;
     void* _dest;
@@ -633,7 +640,7 @@ class Buffer : gobject.boxed.Boxed
       Returns: The amount of bytes copied. This value can be lower than size
            when buffer did not contain enough data.
   */
-  size_t fill(size_t offset, ubyte[] src)
+  size_t fill(size_t offset, ubyte[] src) nothrow
   {
     size_t _retval;
     size_t _size;
@@ -666,7 +673,7 @@ class Buffer : gobject.boxed.Boxed
       Returns: true when size bytes starting from offset could be found in
         buffer and idx, length and skip will be filled.
   */
-  bool findMemory(size_t offset, size_t size, out uint idx, out uint length, out size_t skip)
+  bool findMemory(size_t offset, size_t size, out uint idx, out uint length, out size_t skip) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_buffer_find_memory(cast(GstBuffer*)this._cPtr, offset, size, cast(uint*)&idx, cast(uint*)&length, cast(size_t*)&skip);
@@ -684,15 +691,22 @@ class Buffer : gobject.boxed.Boxed
         func = a #GstBufferForeachMetaFunc to call
       Returns: false when func returned false for one of the metadata.
   */
-  bool foreachMeta(gst.types.BufferForeachMetaFunc func)
+  bool foreachMeta(gst.types.BufferForeachMetaFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(GstBuffer* buffer, GstMeta** meta, void* userData)
+    extern(C) gboolean _funcCallback(GstBuffer* buffer, GstMeta** meta, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gst.types.BufferForeachMetaFunc*)userData;
       auto _meta = new gst.meta.Meta(meta, No.Take);
 
-      _dretval = (*_dlg)(buffer ? new gst.buffer.Buffer(cast(void*)buffer, No.Take) : null, _meta);
+      try
+      {
+        _dretval = (*_dlg)(buffer ? new gst.buffer.Buffer(cast(void*)buffer, No.Take) : null, _meta);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.BufferForeachMetaFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
       *meta = *cast(GstMeta**)_meta._cPtr;
 
@@ -710,7 +724,7 @@ class Buffer : gobject.boxed.Boxed
       into one large #GstMemory.
       Returns: a #GstMemory that contains the merged memory.
   */
-  gst.memory.Memory getAllMemory()
+  gst.memory.Memory getAllMemory() nothrow
   {
     GstMemory* _cretval;
     _cretval = gst_buffer_get_all_memory(cast(GstBuffer*)this._cPtr);
@@ -725,7 +739,7 @@ class Buffer : gobject.boxed.Boxed
         name = the registered name of the custom meta to retrieve.
       Returns: the #GstCustomMeta
   */
-  gst.custom_meta.CustomMeta getCustomMeta(string name)
+  gst.custom_meta.CustomMeta getCustomMeta(string name) nothrow
   {
     GstCustomMeta* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -738,7 +752,7 @@ class Buffer : gobject.boxed.Boxed
       Gets the #GstBufferFlags flags set on this buffer.
       Returns: the flags set on this buffer.
   */
-  gst.types.BufferFlags getFlags()
+  gst.types.BufferFlags getFlags() nothrow
   {
     GstBufferFlags _cretval;
     _cretval = gst_buffer_get_flags(cast(GstBuffer*)this._cPtr);
@@ -754,7 +768,7 @@ class Buffer : gobject.boxed.Boxed
       Returns: a #GstMemory that contains the data of the
         memory block at idx.
   */
-  gst.memory.Memory getMemory(uint idx)
+  gst.memory.Memory getMemory(uint idx) nothrow
   {
     GstMemory* _cretval;
     _cretval = gst_buffer_get_memory(cast(GstBuffer*)this._cPtr, idx);
@@ -774,7 +788,7 @@ class Buffer : gobject.boxed.Boxed
       Returns: a #GstMemory that contains the merged data of length
            blocks starting at idx.
   */
-  gst.memory.Memory getMemoryRange(uint idx, int length)
+  gst.memory.Memory getMemoryRange(uint idx, int length) nothrow
   {
     GstMemory* _cretval;
     _cretval = gst_buffer_get_memory_range(cast(GstBuffer*)this._cPtr, idx, length);
@@ -793,7 +807,7 @@ class Buffer : gobject.boxed.Boxed
         api = the #GType of an API
       Returns: the metadata for api on buffer.
   */
-  gst.meta.Meta getMeta(gobject.types.GType api)
+  gst.meta.Meta getMeta(gobject.types.GType api) nothrow
   {
     GstMeta* _cretval;
     _cretval = gst_buffer_get_meta(cast(GstBuffer*)this._cPtr, api);
@@ -802,7 +816,7 @@ class Buffer : gobject.boxed.Boxed
   }
 
   /** */
-  uint getNMeta(gobject.types.GType apiType)
+  uint getNMeta(gobject.types.GType apiType) nothrow
   {
     uint _retval;
     _retval = gst_buffer_get_n_meta(cast(GstBuffer*)this._cPtr, apiType);
@@ -821,7 +835,7 @@ class Buffer : gobject.boxed.Boxed
       Returns: the #GstReferenceTimestampMeta or null when there
         is no such metadata on buffer.
   */
-  gst.reference_timestamp_meta.ReferenceTimestampMeta getReferenceTimestampMeta(gst.caps.Caps reference = null)
+  gst.reference_timestamp_meta.ReferenceTimestampMeta getReferenceTimestampMeta(gst.caps.Caps reference = null) nothrow
   {
     GstReferenceTimestampMeta* _cretval;
     _cretval = gst_buffer_get_reference_timestamp_meta(cast(GstBuffer*)this._cPtr, reference ? cast(GstCaps*)reference._cPtr(No.Dup) : null);
@@ -833,7 +847,7 @@ class Buffer : gobject.boxed.Boxed
       Gets the total size of the memory blocks in buffer.
       Returns: total size of the memory blocks in buffer.
   */
-  size_t getSize()
+  size_t getSize() nothrow
   {
     size_t _retval;
     _retval = gst_buffer_get_size(cast(GstBuffer*)this._cPtr);
@@ -854,7 +868,7 @@ class Buffer : gobject.boxed.Boxed
         maxsize = a pointer to the maxsize
       Returns: total size of the memory blocks in buffer.
   */
-  size_t getSizes(out size_t offset, out size_t maxsize)
+  size_t getSizes(out size_t offset, out size_t maxsize) nothrow
   {
     size_t _retval;
     _retval = gst_buffer_get_sizes(cast(GstBuffer*)this._cPtr, cast(size_t*)&offset, cast(size_t*)&maxsize);
@@ -878,7 +892,7 @@ class Buffer : gobject.boxed.Boxed
         maxsize = a pointer to the maxsize
       Returns: total size of length memory blocks starting at idx in buffer.
   */
-  size_t getSizesRange(uint idx, int length, out size_t offset, out size_t maxsize)
+  size_t getSizesRange(uint idx, int length, out size_t offset, out size_t maxsize) nothrow
   {
     size_t _retval;
     _retval = gst_buffer_get_sizes_range(cast(GstBuffer*)this._cPtr, idx, length, cast(size_t*)&offset, cast(size_t*)&maxsize);
@@ -892,7 +906,7 @@ class Buffer : gobject.boxed.Boxed
         flags = the #GstBufferFlags flag to check.
       Returns: true if all flags in flags are found on buffer.
   */
-  bool hasFlags(gst.types.BufferFlags flags)
+  bool hasFlags(gst.types.BufferFlags flags) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_buffer_has_flags(cast(GstBuffer*)this._cPtr, flags);
@@ -911,7 +925,7 @@ class Buffer : gobject.boxed.Boxed
         idx = the index to add the memory at, or -1 to append it to the end
         mem = a #GstMemory.
   */
-  void insertMemory(int idx, gst.memory.Memory mem)
+  void insertMemory(int idx, gst.memory.Memory mem) nothrow
   {
     gst_buffer_insert_memory(cast(GstBuffer*)this._cPtr, idx, mem ? cast(GstMemory*)mem._cPtr(Yes.Dup) : null);
   }
@@ -923,7 +937,7 @@ class Buffer : gobject.boxed.Boxed
       gst_buffer_is_writable() to check that if needed.
       Returns: true if all memory blocks in buffer are writable
   */
-  bool isAllMemoryWritable()
+  bool isAllMemoryWritable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_buffer_is_all_memory_writable(cast(GstBuffer*)this._cPtr);
@@ -943,7 +957,7 @@ class Buffer : gobject.boxed.Boxed
         length = a length, should not be 0
       Returns: true if the memory range is writable
   */
-  bool isMemoryRangeWritable(uint idx, int length)
+  bool isMemoryRangeWritable(uint idx, int length) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_buffer_is_memory_range_writable(cast(GstBuffer*)this._cPtr, idx, length);
@@ -969,7 +983,7 @@ class Buffer : gobject.boxed.Boxed
         flags = flags for the mapping
       Returns: true if the map succeeded and info contains valid data.
   */
-  bool map(out gst.map_info.MapInfo info, gst.types.MapFlags flags)
+  bool map(out gst.map_info.MapInfo info, gst.types.MapFlags flags) nothrow
   {
     bool _retval;
     GstMapInfo _info;
@@ -1001,7 +1015,7 @@ class Buffer : gobject.boxed.Boxed
       Returns: true if the map succeeded and info contains valid
         data.
   */
-  bool mapRange(uint idx, int length, out gst.map_info.MapInfo info, gst.types.MapFlags flags)
+  bool mapRange(uint idx, int length, out gst.map_info.MapInfo info, gst.types.MapFlags flags) nothrow
   {
     bool _retval;
     GstMapInfo _info;
@@ -1018,7 +1032,7 @@ class Buffer : gobject.boxed.Boxed
         mem = the memory to compare
       Returns: 0 if the memory is equal.
   */
-  int memcmp(size_t offset, ubyte[] mem)
+  int memcmp(size_t offset, ubyte[] mem) nothrow
   {
     int _retval;
     size_t _size;
@@ -1040,7 +1054,7 @@ class Buffer : gobject.boxed.Boxed
       Returns: The amount of bytes filled. This value can be lower than size
            when buffer did not contain enough data.
   */
-  size_t memset(size_t offset, ubyte val, size_t size)
+  size_t memset(size_t offset, ubyte val, size_t size) nothrow
   {
     size_t _retval;
     _retval = gst_buffer_memset(cast(GstBuffer*)this._cPtr, offset, val, size);
@@ -1052,7 +1066,7 @@ class Buffer : gobject.boxed.Boxed
       larger than what [gst.buffer.Buffer.getMaxMemory] returns.
       Returns: the number of memory blocks this buffer is made of.
   */
-  uint nMemory()
+  uint nMemory() nothrow
   {
     uint _retval;
     _retval = gst_buffer_n_memory(cast(GstBuffer*)this._cPtr);
@@ -1068,7 +1082,7 @@ class Buffer : gobject.boxed.Boxed
         idx = an index
       Returns: the #GstMemory at idx.
   */
-  gst.memory.Memory peekMemory(uint idx)
+  gst.memory.Memory peekMemory(uint idx) nothrow
   {
     GstMemory* _cretval;
     _cretval = gst_buffer_peek_memory(cast(GstBuffer*)this._cPtr, idx);
@@ -1086,7 +1100,7 @@ class Buffer : gobject.boxed.Boxed
       Params:
         mem = a #GstMemory.
   */
-  void prependMemory(gst.memory.Memory mem)
+  void prependMemory(gst.memory.Memory mem) nothrow
   {
     gst_buffer_prepend_memory(cast(GstBuffer*)this._cPtr, mem ? cast(GstMemory*)mem._cPtr(Yes.Dup) : null);
   }
@@ -1094,7 +1108,7 @@ class Buffer : gobject.boxed.Boxed
   /**
       Removes all the memory blocks in buffer.
   */
-  void removeAllMemory()
+  void removeAllMemory() nothrow
   {
     gst_buffer_remove_all_memory(cast(GstBuffer*)this._cPtr);
   }
@@ -1105,7 +1119,7 @@ class Buffer : gobject.boxed.Boxed
       Params:
         idx = an index
   */
-  void removeMemory(uint idx)
+  void removeMemory(uint idx) nothrow
   {
     gst_buffer_remove_memory(cast(GstBuffer*)this._cPtr, idx);
   }
@@ -1119,7 +1133,7 @@ class Buffer : gobject.boxed.Boxed
         idx = an index
         length = a length
   */
-  void removeMemoryRange(uint idx, int length)
+  void removeMemoryRange(uint idx, int length) nothrow
   {
     gst_buffer_remove_memory_range(cast(GstBuffer*)this._cPtr, idx, length);
   }
@@ -1132,7 +1146,7 @@ class Buffer : gobject.boxed.Boxed
       Returns: true if the metadata existed and was removed, false if no such
         metadata was on buffer.
   */
-  bool removeMeta(gst.meta.Meta meta)
+  bool removeMeta(gst.meta.Meta meta) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_buffer_remove_meta(cast(GstBuffer*)this._cPtr, meta ? cast(GstMeta*)meta._cPtr : null);
@@ -1145,7 +1159,7 @@ class Buffer : gobject.boxed.Boxed
       Params:
         mem = a #GstMemory
   */
-  void replaceAllMemory(gst.memory.Memory mem)
+  void replaceAllMemory(gst.memory.Memory mem) nothrow
   {
     gst_buffer_replace_all_memory(cast(GstBuffer*)this._cPtr, mem ? cast(GstMemory*)mem._cPtr(Yes.Dup) : null);
   }
@@ -1157,7 +1171,7 @@ class Buffer : gobject.boxed.Boxed
         idx = an index
         mem = a #GstMemory
   */
-  void replaceMemory(uint idx, gst.memory.Memory mem)
+  void replaceMemory(uint idx, gst.memory.Memory mem) nothrow
   {
     gst_buffer_replace_memory(cast(GstBuffer*)this._cPtr, idx, mem ? cast(GstMemory*)mem._cPtr(Yes.Dup) : null);
   }
@@ -1175,7 +1189,7 @@ class Buffer : gobject.boxed.Boxed
         length = a length, should not be 0
         mem = a #GstMemory
   */
-  void replaceMemoryRange(uint idx, int length, gst.memory.Memory mem)
+  void replaceMemoryRange(uint idx, int length, gst.memory.Memory mem) nothrow
   {
     gst_buffer_replace_memory_range(cast(GstBuffer*)this._cPtr, idx, length, mem ? cast(GstMemory*)mem._cPtr(Yes.Dup) : null);
   }
@@ -1187,7 +1201,7 @@ class Buffer : gobject.boxed.Boxed
         offset = the offset adjustment
         size = the new size or -1 to just adjust the offset
   */
-  void resize(ptrdiff_t offset, ptrdiff_t size)
+  void resize(ptrdiff_t offset, ptrdiff_t size) nothrow
   {
     gst_buffer_resize(cast(GstBuffer*)this._cPtr, offset, size);
   }
@@ -1203,7 +1217,7 @@ class Buffer : gobject.boxed.Boxed
         size = the new size or -1 to just adjust the offset
       Returns: true if resizing succeeded, false otherwise.
   */
-  bool resizeRange(uint idx, int length, ptrdiff_t offset, ptrdiff_t size)
+  bool resizeRange(uint idx, int length, ptrdiff_t offset, ptrdiff_t size) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_buffer_resize_range(cast(GstBuffer*)this._cPtr, idx, length, offset, size);
@@ -1217,7 +1231,7 @@ class Buffer : gobject.boxed.Boxed
         flags = the #GstBufferFlags to set.
       Returns: true if flags were successfully set on buffer.
   */
-  bool setFlags(gst.types.BufferFlags flags)
+  bool setFlags(gst.types.BufferFlags flags) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_buffer_set_flags(cast(GstBuffer*)this._cPtr, flags);
@@ -1230,7 +1244,7 @@ class Buffer : gobject.boxed.Boxed
       Params:
         size = the new size
   */
-  void setSize(ptrdiff_t size)
+  void setSize(ptrdiff_t size) nothrow
   {
     gst_buffer_set_size(cast(GstBuffer*)this._cPtr, size);
   }
@@ -1241,7 +1255,7 @@ class Buffer : gobject.boxed.Boxed
       Params:
         info = a #GstMapInfo
   */
-  void unmap(gst.map_info.MapInfo info)
+  void unmap(gst.map_info.MapInfo info) nothrow
   {
     gst_buffer_unmap(cast(GstBuffer*)this._cPtr, info ? cast(GstMapInfo*)info._cPtr : null);
   }
@@ -1253,7 +1267,7 @@ class Buffer : gobject.boxed.Boxed
         flags = the #GstBufferFlags to clear
       Returns: true if flags is successfully cleared from buffer.
   */
-  bool unsetFlags(gst.types.BufferFlags flags)
+  bool unsetFlags(gst.types.BufferFlags flags) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_buffer_unset_flags(cast(GstBuffer*)this._cPtr, flags);
@@ -1268,7 +1282,7 @@ class Buffer : gobject.boxed.Boxed
       together to make room for the new block.
       Returns: the maximum amount of memory blocks that a buffer can hold.
   */
-  static uint getMaxMemory()
+  static uint getMaxMemory() nothrow
   {
     uint _retval;
     _retval = gst_buffer_get_max_memory();

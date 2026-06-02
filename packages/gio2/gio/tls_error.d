@@ -17,7 +17,7 @@ struct TlsError
       Gets the TLS error quark.
       Returns: a #GQuark.
   */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = g_tls_error_quark();
@@ -27,12 +27,12 @@ struct TlsError
 
 class TlsException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gio.tls_error.TlsError.quark, cast(int)code, msg);
   }

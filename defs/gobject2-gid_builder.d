@@ -9,13 +9,13 @@ import gobject.value;
 /// giD GObject builder base class
 abstract class GidBuilder(T)
 {
-  ~this()
+  ~this() nothrow
   {
     foreach (ref val; _propValues)
       g_value_unset(&val);
   }
 
-  protected T _self()
+  protected T _self() nothrow
   {
     return cast(T)this;
   }
@@ -26,7 +26,7 @@ abstract class GidBuilder(T)
    *   name = The property name
    *   val = The D type value to assign to the property
    */
-  T setProperty(V)(immutable(char)* name, V val)
+  T setProperty(V)(immutable(char)* name, V val) nothrow
   {
     _propNames ~= name;
     _propValues ~= GValue();
@@ -39,7 +39,7 @@ abstract class GidBuilder(T)
    * Build the object.
    * Returns: New D wrapped ObjectWrap
    */
-  GObject* createGObject(GType gtype)
+  GObject* createGObject(GType gtype) nothrow
   {
     return g_object_new_with_properties(gtype, cast(uint)_propNames.length, _propNames.ptr, _propValues.ptr);
   }

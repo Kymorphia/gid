@@ -15,11 +15,8 @@ class RepeatingLinearGradientNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.repeating_linear_gradient_node.RepeatingLinearGradientNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 }

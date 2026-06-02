@@ -18,26 +18,26 @@ class FlowBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.sele
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_flow_box_accessible_get_type != &gidSymbolNotFound ? gtk_flow_box_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FlowBoxAccessible self()
+  override FlowBoxAccessible self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class FlowBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.sele
       Get builder for [gtk.flow_box_accessible.FlowBoxAccessible]
       Returns: New builder object
   */
-  static FlowBoxAccessibleGidBuilder builder()
+  static FlowBoxAccessibleGidBuilder builder() nothrow
   {
     return new FlowBoxAccessibleGidBuilder;
   }
@@ -68,7 +68,7 @@ final class FlowBoxAccessibleGidBuilder : FlowBoxAccessibleGidBuilderImpl!FlowBo
       Create object from builder.
       Returns: New object
   */
-  FlowBoxAccessible build()
+  FlowBoxAccessible build() nothrow
   {
     return new FlowBoxAccessible(cast(void*)createGObject(FlowBoxAccessible._getGType), No.Take);
   }

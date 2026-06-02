@@ -17,26 +17,26 @@ class DiscovererContainerInfo : gstpbutils.discoverer_stream_info.DiscovererStre
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_discoverer_container_info_get_type != &gidSymbolNotFound ? gst_discoverer_container_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DiscovererContainerInfo self()
+  override DiscovererContainerInfo self() nothrow
   {
     return this;
   }
@@ -45,13 +45,13 @@ class DiscovererContainerInfo : gstpbutils.discoverer_stream_info.DiscovererStre
       Get builder for [gstpbutils.discoverer_container_info.DiscovererContainerInfo]
       Returns: New builder object
   */
-  static DiscovererContainerInfoGidBuilder builder()
+  static DiscovererContainerInfoGidBuilder builder() nothrow
   {
     return new DiscovererContainerInfoGidBuilder;
   }
 
   /** */
-  gstpbutils.discoverer_stream_info.DiscovererStreamInfo[] getStreams()
+  gstpbutils.discoverer_stream_info.DiscovererStreamInfo[] getStreams() nothrow
   {
     GList* _cretval;
     _cretval = gst_discoverer_container_info_get_streams(cast(GstDiscovererContainerInfo*)this._cPtr);
@@ -60,7 +60,7 @@ class DiscovererContainerInfo : gstpbutils.discoverer_stream_info.DiscovererStre
   }
 
   /** */
-  override gst.tag_list.TagList getTags()
+  override gst.tag_list.TagList getTags() nothrow
   {
     const(GstTagList)* _cretval;
     _cretval = gst_discoverer_container_info_get_tags(cast(const(GstDiscovererContainerInfo)*)this._cPtr);
@@ -81,7 +81,7 @@ final class DiscovererContainerInfoGidBuilder : DiscovererContainerInfoGidBuilde
       Create object from builder.
       Returns: New object
   */
-  DiscovererContainerInfo build()
+  DiscovererContainerInfo build() nothrow
   {
     return new DiscovererContainerInfo(cast(void*)createGObject(DiscovererContainerInfo._getGType), No.Take);
   }

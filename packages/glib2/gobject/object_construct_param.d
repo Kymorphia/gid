@@ -18,11 +18,8 @@ class ObjectConstructParam
   GObjectConstructParam _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gobject.object_construct_param.ObjectConstructParam");
-
     _cInstance = *cast(GObjectConstructParam*)ptr;
 
     if (take)
@@ -30,7 +27,7 @@ class ObjectConstructParam
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class ObjectConstructParam
       Get `pspec` field.
       Returns: the #GParamSpec of the construct parameter
   */
-  @property gobject.param_spec.ParamSpec pspec()
+  @property gobject.param_spec.ParamSpec pspec() nothrow
   {
     return cToD!(gobject.param_spec.ParamSpec)(cast(void*)(cast(GObjectConstructParam*)this._cPtr).pspec);
   }
@@ -49,7 +46,7 @@ class ObjectConstructParam
       Params:
         propval = the #GParamSpec of the construct parameter
   */
-  @property void pspec(gobject.param_spec.ParamSpec propval)
+  @property void pspec(gobject.param_spec.ParamSpec propval) nothrow
   {
     cValueFree!(gobject.param_spec.ParamSpec)(cast(void*)(cast(GObjectConstructParam*)this._cPtr).pspec);
     dToC(propval, cast(void*)&(cast(GObjectConstructParam*)this._cPtr).pspec);
@@ -59,7 +56,7 @@ class ObjectConstructParam
       Get `value` field.
       Returns: the value to set the parameter to
   */
-  @property gobject.value.Value value()
+  @property gobject.value.Value value() nothrow
   {
     return cToD!(gobject.value.Value)(cast(void*)(cast(GObjectConstructParam*)this._cPtr).value);
   }
@@ -69,7 +66,7 @@ class ObjectConstructParam
       Params:
         propval = the value to set the parameter to
   */
-  @property void value(gobject.value.Value propval)
+  @property void value(gobject.value.Value propval) nothrow
   {
     cValueFree!(gobject.value.Value)(cast(void*)(cast(GObjectConstructParam*)this._cPtr).value);
     dToC(propval, cast(void*)&(cast(GObjectConstructParam*)this._cPtr).value);

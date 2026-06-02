@@ -30,23 +30,22 @@ struct Point3D
   float z;
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())graphene_point3d_get_type != &gidSymbolNotFound ? graphene_point3d_get_type() : cast(GType)0;
   }
 
   /** */
-  @property GType _gType()
+  @property GType _gType() nothrow
   {
     return _getGType();
   }
 
-  void* boxCopy()
+  void* boxCopy() nothrow
   {
     import gobject.c.functions : g_boxed_copy;
-    return g_boxed_copy(_gType,
-        cast(void*)&this);
+    return g_boxed_copy(_gType, cast(void*)&this);
   }
 
   /**
@@ -57,7 +56,7 @@ struct Point3D
         res = return location for the cross
             product
   */
-  void cross(graphene.point3_d.Point3D b, out graphene.point3_d.Point3D res)
+  void cross(graphene.point3_d.Point3D b, out graphene.point3_d.Point3D res) nothrow
   {
     graphene_point3d_cross(cast(const(graphene_point3d_t)*)&this, cast(const(graphene_point3d_t)*)&b, cast(graphene_point3d_t*)&res);
   }
@@ -71,7 +70,7 @@ struct Point3D
             components on the X, Y, and Z axis
       Returns: the distance between two points
   */
-  float distance(graphene.point3_d.Point3D b, out graphene.vec3.Vec3 delta)
+  float distance(graphene.point3_d.Point3D b, out graphene.vec3.Vec3 delta) nothrow
   {
     float _retval;
     graphene_vec3_t _delta;
@@ -87,7 +86,7 @@ struct Point3D
         b = a #graphene_point3d_t
       Returns: the value of the dot product
   */
-  float dot(graphene.point3_d.Point3D b)
+  float dot(graphene.point3_d.Point3D b) nothrow
   {
     float _retval;
     _retval = graphene_point3d_dot(cast(const(graphene_point3d_t)*)&this, cast(const(graphene_point3d_t)*)&b);
@@ -101,7 +100,7 @@ struct Point3D
         b = a #graphene_point3d_t
       Returns: `true` if the points are equal
   */
-  bool equal(graphene.point3_d.Point3D b)
+  bool equal(graphene.point3_d.Point3D b) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_point3d_equal(cast(const(graphene_point3d_t)*)&this, cast(const(graphene_point3d_t)*)&b);
@@ -117,7 +116,7 @@ struct Point3D
         z = the Z coordinate of the point
       Returns: the initialized #graphene_point3d_t
   */
-  graphene.point3_d.Point3D init_(float x, float y, float z)
+  graphene.point3_d.Point3D init_(float x, float y, float z) nothrow
   {
     graphene_point3d_t* _cretval;
     _cretval = graphene_point3d_init(cast(graphene_point3d_t*)&this, x, y, z);
@@ -135,7 +134,7 @@ struct Point3D
         src = a #graphene_point3d_t
       Returns: the initialized point
   */
-  graphene.point3_d.Point3D initFromPoint(graphene.point3_d.Point3D src)
+  graphene.point3_d.Point3D initFromPoint(graphene.point3_d.Point3D src) nothrow
   {
     graphene_point3d_t* _cretval;
     _cretval = graphene_point3d_init_from_point(cast(graphene_point3d_t*)&this, cast(const(graphene_point3d_t)*)&src);
@@ -153,7 +152,7 @@ struct Point3D
         v = a #graphene_vec3_t
       Returns: the initialized #graphene_point3d_t
   */
-  graphene.point3_d.Point3D initFromVec3(graphene.vec3.Vec3 v)
+  graphene.point3_d.Point3D initFromVec3(graphene.vec3.Vec3 v) nothrow
   {
     graphene_point3d_t* _cretval;
     _cretval = graphene_point3d_init_from_vec3(cast(graphene_point3d_t*)&this, v ? cast(const(graphene_vec3_t)*)v._cPtr(No.Dup) : null);
@@ -173,7 +172,7 @@ struct Point3D
         res = the return location for the
             interpolated #graphene_point3d_t
   */
-  void interpolate(graphene.point3_d.Point3D b, double factor, out graphene.point3_d.Point3D res)
+  void interpolate(graphene.point3_d.Point3D b, double factor, out graphene.point3_d.Point3D res) nothrow
   {
     graphene_point3d_interpolate(cast(const(graphene_point3d_t)*)&this, cast(const(graphene_point3d_t)*)&b, factor, cast(graphene_point3d_t*)&res);
   }
@@ -183,7 +182,7 @@ struct Point3D
       coordinates of the given #graphene_point3d_t.
       Returns: the length of the vector represented by the point
   */
-  float length()
+  float length() nothrow
   {
     float _retval;
     _retval = graphene_point3d_length(cast(const(graphene_point3d_t)*)&this);
@@ -199,7 +198,7 @@ struct Point3D
         epsilon = fuzzyness factor
       Returns: `true` if the points are near each other
   */
-  bool near(graphene.point3_d.Point3D b, float epsilon)
+  bool near(graphene.point3_d.Point3D b, float epsilon) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_point3d_near(cast(const(graphene_point3d_t)*)&this, cast(const(graphene_point3d_t)*)&b, epsilon);
@@ -214,7 +213,7 @@ struct Point3D
         res = return location for the normalized
             #graphene_point3d_t
   */
-  void normalize(out graphene.point3_d.Point3D res)
+  void normalize(out graphene.point3_d.Point3D res) nothrow
   {
     graphene_point3d_normalize(cast(const(graphene_point3d_t)*)&this, cast(graphene_point3d_t*)&res);
   }
@@ -235,7 +234,7 @@ struct Point3D
         res = the return location for the
             normalized #graphene_point3d_t
   */
-  void normalizeViewport(graphene.rect.Rect viewport, float zNear, float zFar, out graphene.point3_d.Point3D res)
+  void normalizeViewport(graphene.rect.Rect viewport, float zNear, float zFar, out graphene.point3_d.Point3D res) nothrow
   {
     graphene_point3d_normalize_viewport(cast(const(graphene_point3d_t)*)&this, viewport ? cast(const(graphene_rect_t)*)viewport._cPtr(No.Dup) : null, zNear, zFar, cast(graphene_point3d_t*)&res);
   }
@@ -248,7 +247,7 @@ struct Point3D
         factor = the scaling factor
         res = return location for the scaled point
   */
-  void scale(float factor, out graphene.point3_d.Point3D res)
+  void scale(float factor, out graphene.point3_d.Point3D res) nothrow
   {
     graphene_point3d_scale(cast(const(graphene_point3d_t)*)&this, factor, cast(graphene_point3d_t*)&res);
   }
@@ -260,7 +259,7 @@ struct Point3D
       Params:
         v = return location for a #graphene_vec3_t
   */
-  void toVec3(out graphene.vec3.Vec3 v)
+  void toVec3(out graphene.vec3.Vec3 v) nothrow
   {
     graphene_vec3_t _v;
     graphene_point3d_to_vec3(cast(const(graphene_point3d_t)*)&this, &_v);
@@ -271,7 +270,7 @@ struct Point3D
       Retrieves a constant point with all three coordinates set to 0.
       Returns: a zero point
   */
-  static graphene.point3_d.Point3D zero()
+  static graphene.point3_d.Point3D zero() nothrow
   {
     const(graphene_point3d_t)* _cretval;
     _cretval = graphene_point3d_zero();

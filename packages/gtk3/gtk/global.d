@@ -60,7 +60,7 @@ import pango.types;
     Returns: true if an accelerator was activated and handled
           this keypress
 */
-bool accelGroupsActivate(gobject.object.ObjectWrap object, uint accelKey, gdk.types.ModifierType accelMods)
+bool accelGroupsActivate(gobject.object.ObjectWrap object, uint accelKey, gdk.types.ModifierType accelMods) nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_accel_groups_activate(object ? cast(GObject*)object._cPtr(No.Dup) : null, accelKey, accelMods);
@@ -75,7 +75,7 @@ bool accelGroupsActivate(gobject.object.ObjectWrap object, uint accelKey, gdk.ty
     Returns: a list of
           all accel groups which are attached to object
 */
-gtk.accel_group.AccelGroup[] accelGroupsFromObject(gobject.object.ObjectWrap object)
+gtk.accel_group.AccelGroup[] accelGroupsFromObject(gobject.object.ObjectWrap object) nothrow
 {
   GSList* _cretval;
   _cretval = gtk_accel_groups_from_object(object ? cast(GObject*)object._cPtr(No.Dup) : null);
@@ -90,7 +90,7 @@ gtk.accel_group.AccelGroup[] accelGroupsFromObject(gobject.object.ObjectWrap obj
     for keyboard accelerators. See [gtk.global.acceleratorSetDefaultModMask].
     Returns: the default accelerator modifier mask
 */
-gdk.types.ModifierType acceleratorGetDefaultModMask()
+gdk.types.ModifierType acceleratorGetDefaultModMask() nothrow
 {
   GdkModifierType _cretval;
   _cretval = gtk_accelerator_get_default_mod_mask();
@@ -107,7 +107,7 @@ gdk.types.ModifierType acceleratorGetDefaultModMask()
       acceleratorMods = accelerator modifier mask
     Returns: a newly-allocated string representing the accelerator.
 */
-string acceleratorGetLabel(uint acceleratorKey, gdk.types.ModifierType acceleratorMods)
+string acceleratorGetLabel(uint acceleratorKey, gdk.types.ModifierType acceleratorMods) nothrow
 {
   char* _cretval;
   _cretval = gtk_accelerator_get_label(acceleratorKey, acceleratorMods);
@@ -131,7 +131,7 @@ string acceleratorGetLabel(uint acceleratorKey, gdk.types.ModifierType accelerat
       acceleratorMods = accelerator modifier mask
     Returns: a newly-allocated string representing the accelerator.
 */
-string acceleratorGetLabelWithKeycode(gdk.display.Display display, uint acceleratorKey, uint keycode, gdk.types.ModifierType acceleratorMods)
+string acceleratorGetLabelWithKeycode(gdk.display.Display display, uint acceleratorKey, uint keycode, gdk.types.ModifierType acceleratorMods) nothrow
 {
   char* _cretval;
   _cretval = gtk_accelerator_get_label_with_keycode(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, acceleratorKey, keycode, acceleratorMods);
@@ -152,7 +152,7 @@ string acceleratorGetLabelWithKeycode(gdk.display.Display display, uint accelera
       acceleratorMods = accelerator modifier mask
     Returns: a newly-allocated accelerator name
 */
-string acceleratorName(uint acceleratorKey, gdk.types.ModifierType acceleratorMods)
+string acceleratorName(uint acceleratorKey, gdk.types.ModifierType acceleratorMods) nothrow
 {
   char* _cretval;
   _cretval = gtk_accelerator_name(acceleratorKey, acceleratorMods);
@@ -174,7 +174,7 @@ string acceleratorName(uint acceleratorKey, gdk.types.ModifierType acceleratorMo
       acceleratorMods = accelerator modifier mask
     Returns: a newly allocated accelerator name.
 */
-string acceleratorNameWithKeycode(gdk.display.Display display, uint acceleratorKey, uint keycode, gdk.types.ModifierType acceleratorMods)
+string acceleratorNameWithKeycode(gdk.display.Display display, uint acceleratorKey, uint keycode, gdk.types.ModifierType acceleratorMods) nothrow
 {
   char* _cretval;
   _cretval = gtk_accelerator_name_with_keycode(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, acceleratorKey, keycode, acceleratorMods);
@@ -203,7 +203,7 @@ string acceleratorNameWithKeycode(gdk.display.Display display, uint acceleratorK
       acceleratorMods = return location for accelerator
             modifier mask, null
 */
-void acceleratorParse(string accelerator, out uint acceleratorKey, out gdk.types.ModifierType acceleratorMods)
+void acceleratorParse(string accelerator, out uint acceleratorKey, out gdk.types.ModifierType acceleratorMods) nothrow
 {
   const(char)* _accelerator = accelerator.toCString(No.Alloc);
   gtk_accelerator_parse(_accelerator, cast(uint*)&acceleratorKey, &acceleratorMods);
@@ -232,7 +232,7 @@ void acceleratorParse(string accelerator, out uint acceleratorKey, out gdk.types
       acceleratorMods = return location for accelerator
             modifier mask, null
 */
-void acceleratorParseWithKeycode(string accelerator, out uint acceleratorKey, out uint[] acceleratorCodes, out gdk.types.ModifierType acceleratorMods)
+void acceleratorParseWithKeycode(string accelerator, out uint acceleratorKey, out uint[] acceleratorCodes, out gdk.types.ModifierType acceleratorMods) nothrow
 {
   const(char)* _accelerator = accelerator.toCString(No.Alloc);
   uint* _acceleratorCodes;
@@ -267,7 +267,7 @@ void acceleratorParseWithKeycode(string accelerator, out uint acceleratorKey, ou
     Params:
       defaultModMask = accelerator modifier mask
 */
-void acceleratorSetDefaultModMask(gdk.types.ModifierType defaultModMask)
+void acceleratorSetDefaultModMask(gdk.types.ModifierType defaultModMask) nothrow
 {
   gtk_accelerator_set_default_mod_mask(defaultModMask);
 }
@@ -284,7 +284,7 @@ void acceleratorSetDefaultModMask(gdk.types.ModifierType defaultModMask)
       modifiers = modifier mask
     Returns: true if the accelerator is valid
 */
-bool acceleratorValid(uint keyval, gdk.types.ModifierType modifiers)
+bool acceleratorValid(uint keyval, gdk.types.ModifierType modifiers) nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_accelerator_valid(keyval, modifiers);
@@ -308,7 +308,7 @@ bool acceleratorValid(uint keyval, gdk.types.ModifierType modifiers)
 
     Deprecated: Deprecated
 */
-bool alternativeDialogButtonOrder(gdk.screen.Screen screen = null)
+bool alternativeDialogButtonOrder(gdk.screen.Screen screen = null) nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_alternative_dialog_button_order(screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
@@ -325,7 +325,7 @@ bool alternativeDialogButtonOrder(gdk.screen.Screen screen = null)
       modifiers = key modifier of the binding
     Returns: true if a binding was found and activated
 */
-bool bindingsActivate(gobject.object.ObjectWrap object, uint keyval, gdk.types.ModifierType modifiers)
+bool bindingsActivate(gobject.object.ObjectWrap object, uint keyval, gdk.types.ModifierType modifiers) nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_bindings_activate(object ? cast(GObject*)object._cPtr(No.Dup) : null, keyval, modifiers);
@@ -341,7 +341,7 @@ bool bindingsActivate(gobject.object.ObjectWrap object, uint keyval, gdk.types.M
       event = a #GdkEventKey
     Returns: true if a matching key binding was found
 */
-bool bindingsActivateEvent(gobject.object.ObjectWrap object, gdk.event_key.EventKey event)
+bool bindingsActivateEvent(gobject.object.ObjectWrap object, gdk.event_key.EventKey event) nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_bindings_activate_event(object ? cast(GObject*)object._cPtr(No.Dup) : null, event ? cast(GdkEventKey*)event._cPtr : null);
@@ -365,7 +365,7 @@ bool bindingsActivateEvent(gobject.object.ObjectWrap object, gdk.event_key.Event
                  window.
     Returns: true if window should be drawn
 */
-bool cairoShouldDrawWindow(cairo.context.Context cr, gdk.window.Window window)
+bool cairoShouldDrawWindow(cairo.context.Context cr, gdk.window.Window window) nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_cairo_should_draw_window(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null);
@@ -388,7 +388,7 @@ bool cairoShouldDrawWindow(cairo.context.Context cr, gdk.window.Window window)
       widget = the widget the context is currently centered for
       window = the window to transform the context to
 */
-void cairoTransformToWindow(cairo.context.Context cr, gtk.widget.Widget widget, gdk.window.Window window)
+void cairoTransformToWindow(cairo.context.Context cr, gtk.widget.Widget widget, gdk.window.Window window) nothrow
 {
   gtk_cairo_transform_to_window(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null);
 }
@@ -426,7 +426,7 @@ void cairoTransformToWindow(cairo.context.Context cr, gtk.widget.Widget widget, 
         The returned string is owned by GTK+ and should not be modified
         or freed.
 */
-string checkVersion(uint requiredMajor, uint requiredMinor, uint requiredMicro)
+string checkVersion(uint requiredMajor, uint requiredMinor, uint requiredMicro) nothrow
 {
   const(char)* _cretval;
   _cretval = gtk_check_version(requiredMajor, requiredMinor, requiredMicro);
@@ -445,7 +445,7 @@ string checkVersion(uint requiredMajor, uint requiredMinor, uint requiredMicro)
       device = a #GdkDevice to grab on.
       blockOthers = true to prevent other devices to interact with widget.
 */
-void deviceGrabAdd(gtk.widget.Widget widget, gdk.device.Device device, bool blockOthers)
+void deviceGrabAdd(gtk.widget.Widget widget, gdk.device.Device device, bool blockOthers) nothrow
 {
   gtk_device_grab_add(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, blockOthers);
 }
@@ -460,7 +460,7 @@ void deviceGrabAdd(gtk.widget.Widget widget, gdk.device.Device device, bool bloc
       widget = a #GtkWidget
       device = a #GdkDevice
 */
-void deviceGrabRemove(gtk.widget.Widget widget, gdk.device.Device device)
+void deviceGrabRemove(gtk.widget.Widget widget, gdk.device.Device device) nothrow
 {
   gtk_device_grab_remove(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
 }
@@ -475,7 +475,7 @@ void deviceGrabRemove(gtk.widget.Widget widget, gdk.device.Device device)
     
     Most programs should not need to call this function.
 */
-void disableSetlocale()
+void disableSetlocale() nothrow
 {
   gtk_disable_setlocale();
 }
@@ -497,7 +497,7 @@ void disableSetlocale()
     Returns: The remainder of extra_space after redistributing space
       to sizes.
 */
-int distributeNaturalAllocation(int extraSpace, uint nRequestedSizes, gtk.types.RequestedSize sizes)
+int distributeNaturalAllocation(int extraSpace, uint nRequestedSizes, gtk.types.RequestedSize sizes) nothrow
 {
   int _retval;
   _retval = gtk_distribute_natural_allocation(extraSpace, nRequestedSizes, &sizes);
@@ -521,7 +521,7 @@ int distributeNaturalAllocation(int extraSpace, uint nRequestedSizes, gtk.types.
     Params:
       context = a #GdkDragContext, as e.g. returned by [gtk.widget.Widget.dragBeginWithCoordinates]
 */
-void dragCancel(gdk.drag_context.DragContext context)
+void dragCancel(gdk.drag_context.DragContext context) nothrow
 {
   gtk_drag_cancel(context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null);
 }
@@ -537,7 +537,7 @@ void dragCancel(gdk.drag_context.DragContext context)
           original data. (This should be true for a move)
       time = the timestamp from the #GtkWidget::drag-drop signal
 */
-void dragFinish(gdk.drag_context.DragContext context, bool success, bool del, uint time)
+void dragFinish(gdk.drag_context.DragContext context, bool success, bool del, uint time) nothrow
 {
   gtk_drag_finish(context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, success, del, time);
 }
@@ -551,7 +551,7 @@ void dragFinish(gdk.drag_context.DragContext context, bool success, bool del, ui
           within a single application, a pointer to the source widget.
           Otherwise, null.
 */
-gtk.widget.Widget dragGetSourceWidget(gdk.drag_context.DragContext context)
+gtk.widget.Widget dragGetSourceWidget(gdk.drag_context.DragContext context) nothrow
 {
   GtkWidget* _cretval;
   _cretval = gtk_drag_get_source_widget(context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null);
@@ -567,7 +567,7 @@ gtk.widget.Widget dragGetSourceWidget(gdk.drag_context.DragContext context)
       context = the context for a drag (This must be called
             with a  context for the source side of a drag)
 */
-void dragSetIconDefault(gdk.drag_context.DragContext context)
+void dragSetIconDefault(gdk.drag_context.DragContext context) nothrow
 {
   gtk_drag_set_icon_default(context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null);
 }
@@ -584,7 +584,7 @@ void dragSetIconDefault(gdk.drag_context.DragContext context)
       hotX = the X offset of the hotspot within the icon
       hotY = the Y offset of the hotspot within the icon
 */
-void dragSetIconGicon(gdk.drag_context.DragContext context, gio.icon.Icon icon, int hotX, int hotY)
+void dragSetIconGicon(gdk.drag_context.DragContext context, gio.icon.Icon icon, int hotX, int hotY) nothrow
 {
   gtk_drag_set_icon_gicon(context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null, hotX, hotY);
 }
@@ -603,7 +603,7 @@ void dragSetIconGicon(gdk.drag_context.DragContext context, gio.icon.Icon icon, 
       hotX = the X offset of the hotspot within the icon
       hotY = the Y offset of the hotspot within the icon
 */
-void dragSetIconName(gdk.drag_context.DragContext context, string iconName, int hotX, int hotY)
+void dragSetIconName(gdk.drag_context.DragContext context, string iconName, int hotX, int hotY) nothrow
 {
   const(char)* _iconName = iconName.toCString(No.Alloc);
   gtk_drag_set_icon_name(context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, _iconName, hotX, hotY);
@@ -619,7 +619,7 @@ void dragSetIconName(gdk.drag_context.DragContext context, string iconName, int 
       hotX = the X offset within widget of the hotspot
       hotY = the Y offset within widget of the hotspot
 */
-void dragSetIconPixbuf(gdk.drag_context.DragContext context, gdkpixbuf.pixbuf.Pixbuf pixbuf, int hotX, int hotY)
+void dragSetIconPixbuf(gdk.drag_context.DragContext context, gdkpixbuf.pixbuf.Pixbuf pixbuf, int hotX, int hotY) nothrow
 {
   gtk_drag_set_icon_pixbuf(context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null, hotX, hotY);
 }
@@ -636,7 +636,7 @@ void dragSetIconPixbuf(gdk.drag_context.DragContext context, gdkpixbuf.pixbuf.Pi
 
     Deprecated: Use [gtk.global.dragSetIconName] instead.
 */
-void dragSetIconStock(gdk.drag_context.DragContext context, string stockId, int hotX, int hotY)
+void dragSetIconStock(gdk.drag_context.DragContext context, string stockId, int hotX, int hotY) nothrow
 {
   const(char)* _stockId = stockId.toCString(No.Alloc);
   gtk_drag_set_icon_stock(context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, _stockId, hotX, hotY);
@@ -657,7 +657,7 @@ void dragSetIconStock(gdk.drag_context.DragContext context, string stockId, int 
             with a context for the source side of a drag)
       surface = the surface to use as icon
 */
-void dragSetIconSurface(gdk.drag_context.DragContext context, cairo.surface.Surface surface)
+void dragSetIconSurface(gdk.drag_context.DragContext context, cairo.surface.Surface surface) nothrow
 {
   gtk_drag_set_icon_surface(context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null);
 }
@@ -675,7 +675,7 @@ void dragSetIconSurface(gdk.drag_context.DragContext context, cairo.surface.Surf
       hotX = the X offset within widget of the hotspot
       hotY = the Y offset within widget of the hotspot
 */
-void dragSetIconWidget(gdk.drag_context.DragContext context, gtk.widget.Widget widget, int hotX, int hotY)
+void dragSetIconWidget(gdk.drag_context.DragContext context, gtk.widget.Widget widget, int hotX, int hotY) nothrow
 {
   gtk_drag_set_icon_widget(context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, hotX, hotY);
 }
@@ -696,7 +696,7 @@ void dragSetIconWidget(gdk.drag_context.DragContext context, gtk.widget.Widget w
 
     Deprecated: Use [gtk.global.renderInsertionCursor] instead.
 */
-void drawInsertionCursor(gtk.widget.Widget widget, cairo.context.Context cr, gdk.rectangle.Rectangle location, bool isPrimary, gtk.types.TextDirection direction, bool drawArrow)
+void drawInsertionCursor(gtk.widget.Widget widget, cairo.context.Context cr, gdk.rectangle.Rectangle location, bool isPrimary, gtk.types.TextDirection direction, bool drawArrow) nothrow
 {
   gtk_draw_insertion_cursor(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&location, isPrimary, direction, drawArrow);
 }
@@ -719,7 +719,7 @@ void drawInsertionCursor(gtk.widget.Widget widget, cairo.context.Context cr, gdk
     ```
     Returns: true if any events are pending, false otherwise
 */
-bool eventsPending()
+bool eventsPending() nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_events_pending();
@@ -731,7 +731,7 @@ bool eventsPending()
     but always returns false.
     Returns: false
 */
-bool false_()
+bool false_() nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_false();
@@ -745,7 +745,7 @@ bool false_()
     worry about it.
     Returns: the binary age of the GTK+ library
 */
-uint getBinaryAge()
+uint getBinaryAge() nothrow
 {
   uint _retval;
   _retval = gtk_get_binary_age();
@@ -762,7 +762,7 @@ uint getBinaryAge()
           null if there is no current event. The returned event must be
           freed with [gdk.event.Event.free].
 */
-gdk.event.Event getCurrentEvent()
+gdk.event.Event getCurrentEvent() nothrow
 {
   GdkEvent* _cretval;
   _cretval = gtk_get_current_event();
@@ -775,7 +775,7 @@ gdk.event.Event getCurrentEvent()
     device, otherwise return null.
     Returns: a #GdkDevice, or null
 */
-gdk.device.Device getCurrentEventDevice()
+gdk.device.Device getCurrentEventDevice() nothrow
 {
   GdkDevice* _cretval;
   _cretval = gtk_get_current_event_device();
@@ -793,7 +793,7 @@ gdk.device.Device getCurrentEventDevice()
     Returns: true if there was a current event and it
           had a state field
 */
-bool getCurrentEventState(out gdk.types.ModifierType state)
+bool getCurrentEventState(out gdk.types.ModifierType state) nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_get_current_event_state(&state);
@@ -806,7 +806,7 @@ bool getCurrentEventState(out gdk.types.ModifierType state)
     Returns: the timestamp from the current event,
           or [gdk.types.CURRENT_TIME].
 */
-uint getCurrentEventTime()
+uint getCurrentEventTime() nothrow
 {
   uint _retval;
   _retval = gtk_get_current_event_time();
@@ -820,7 +820,7 @@ uint getCurrentEventTime()
     to adjust their debug output based on GTK+ debug flags.
     Returns: the GTK+ debug flags.
 */
-uint getDebugFlags()
+uint getDebugFlags() nothrow
 {
   uint _retval;
   _retval = gtk_get_debug_flags();
@@ -839,7 +839,7 @@ uint getDebugFlags()
     Returns: the default language as a #PangoLanguage,
           must not be freed
 */
-pango.language.Language getDefaultLanguage()
+pango.language.Language getDefaultLanguage() nothrow
 {
   PangoLanguage* _cretval;
   _cretval = gtk_get_default_language();
@@ -857,7 +857,7 @@ pango.language.Language getDefaultLanguage()
     Returns: the widget that originally
           received event, or null
 */
-gtk.widget.Widget getEventWidget(gdk.event.Event event)
+gtk.widget.Widget getEventWidget(gdk.event.Event event) nothrow
 {
   GtkWidget* _cretval;
   _cretval = gtk_get_event_widget(event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
@@ -872,7 +872,7 @@ gtk.widget.Widget getEventWidget(gdk.event.Event event)
     worry about it.
     Returns: the interface age of the GTK+ library
 */
-uint getInterfaceAge()
+uint getInterfaceAge() nothrow
 {
   uint _retval;
   _retval = gtk_get_interface_age();
@@ -903,7 +903,7 @@ uint getInterfaceAge()
     ```
     Returns: the #GtkTextDirection of the current locale
 */
-gtk.types.TextDirection getLocaleDirection()
+gtk.types.TextDirection getLocaleDirection() nothrow
 {
   GtkTextDirection _cretval;
   _cretval = gtk_get_locale_direction();
@@ -921,7 +921,7 @@ gtk.types.TextDirection getLocaleDirection()
     have included when compiling your code.
     Returns: the major version number of the GTK+ library
 */
-uint getMajorVersion()
+uint getMajorVersion() nothrow
 {
   uint _retval;
   _retval = gtk_get_major_version();
@@ -938,7 +938,7 @@ uint getMajorVersion()
     GTK+ headers you have included when compiling your code.
     Returns: the micro version number of the GTK+ library
 */
-uint getMicroVersion()
+uint getMicroVersion() nothrow
 {
   uint _retval;
   _retval = gtk_get_micro_version();
@@ -955,7 +955,7 @@ uint getMicroVersion()
     GTK+ headers you have included when compiling your code.
     Returns: the minor version number of the GTK+ library
 */
-uint getMinorVersion()
+uint getMinorVersion() nothrow
 {
   uint _retval;
   _retval = gtk_get_minor_version();
@@ -976,7 +976,7 @@ uint getMinorVersion()
     Returns: a #GOptionGroup for the commandline
           arguments recognized by GTK+
 */
-glib.option_group.OptionGroup getOptionGroup(bool openDefaultDisplay)
+glib.option_group.OptionGroup getOptionGroup(bool openDefaultDisplay) nothrow
 {
   GOptionGroup* _cretval;
   _cretval = gtk_get_option_group(openDefaultDisplay);
@@ -989,7 +989,7 @@ glib.option_group.OptionGroup getOptionGroup(bool openDefaultDisplay)
     Returns: The widget which currently
           has the grab or null if no grab is active
 */
-gtk.widget.Widget grabGetCurrent()
+gtk.widget.Widget grabGetCurrent() nothrow
 {
   GtkWidget* _cretval;
   _cretval = gtk_grab_get_current();
@@ -1006,7 +1006,7 @@ gtk.widget.Widget grabGetCurrent()
     Deprecated: Key snooping should not be done. Events should
           be handled by widgets.
 */
-void keySnooperRemove(uint snooperHandlerId)
+void keySnooperRemove(uint snooperHandlerId) nothrow
 {
   gtk_key_snooper_remove(snooperHandlerId);
 }
@@ -1017,7 +1017,7 @@ void keySnooperRemove(uint snooperHandlerId)
     You can nest calls to [gtk.global.main_]. In that case [gtk.global.mainQuit]
     will make the innermost invocation of the main loop return.
 */
-void main_()
+void main_() nothrow
 {
   gtk_main();
 }
@@ -1063,7 +1063,7 @@ void main_()
     Params:
       event = An event to process (normally passed by GDK)
 */
-void mainDoEvent(gdk.event.Event event)
+void mainDoEvent(gdk.event.Event event) nothrow
 {
   gtk_main_do_event(event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
 }
@@ -1078,7 +1078,7 @@ void mainDoEvent(gdk.event.Event event)
     Returns: true if [gtk.global.mainQuit] has been called for the
           innermost mainloop
 */
-bool mainIteration()
+bool mainIteration() nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_main_iteration();
@@ -1095,7 +1095,7 @@ bool mainIteration()
     Returns: true if [gtk.global.mainQuit] has been called for the
           innermost mainloop
 */
-bool mainIterationDo(bool blocking)
+bool mainIterationDo(bool blocking) nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_main_iteration_do(blocking);
@@ -1107,7 +1107,7 @@ bool mainIterationDo(bool blocking)
     Returns: the nesting level of the current invocation
           of the main loop
 */
-uint mainLevel()
+uint mainLevel() nothrow
 {
   uint _retval;
   _retval = gtk_main_level();
@@ -1118,7 +1118,7 @@ uint mainLevel()
     Makes the innermost invocation of the main loop return
     when it regains control.
 */
-void mainQuit()
+void mainQuit() nothrow
 {
   gtk_main_quit();
 }
@@ -1143,7 +1143,7 @@ void mainQuit()
 
     Deprecated: Use [gtk.global.renderArrow] instead
 */
-void paintArrow(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, gtk.types.ArrowType arrowType, bool fill, int x, int y, int width, int height)
+void paintArrow(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, gtk.types.ArrowType arrowType, bool fill, int x, int y, int width, int height) nothrow
 {
   const(char)* _detail = detail.toCString(No.Alloc);
   gtk_paint_arrow(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, arrowType, fill, x, y, width, height);
@@ -1166,7 +1166,7 @@ void paintArrow(gtk.style.Style style, cairo.context.Context cr, gtk.types.State
 
     Deprecated: Use [gtk.global.renderFrame] and [gtk.global.renderBackground] instead
 */
-void paintBox(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height)
+void paintBox(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height) nothrow
 {
   const(char)* _detail = detail.toCString(No.Alloc);
   gtk_paint_box(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height);
@@ -1193,7 +1193,7 @@ void paintBox(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateTy
 
     Deprecated: Use [gtk.global.renderFrameGap] instead
 */
-void paintBoxGap(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height, gtk.types.PositionType gapSide, int gapX, int gapWidth)
+void paintBoxGap(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height, gtk.types.PositionType gapSide, int gapX, int gapWidth) nothrow
 {
   const(char)* _detail = detail.toCString(No.Alloc);
   gtk_paint_box_gap(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height, gapSide, gapX, gapWidth);
@@ -1217,7 +1217,7 @@ void paintBoxGap(gtk.style.Style style, cairo.context.Context cr, gtk.types.Stat
 
     Deprecated: Use [gtk.global.renderCheck] instead
 */
-void paintCheck(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height)
+void paintCheck(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height) nothrow
 {
   const(char)* _detail = detail.toCString(No.Alloc);
   gtk_paint_check(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height);
@@ -1241,7 +1241,7 @@ void paintCheck(gtk.style.Style style, cairo.context.Context cr, gtk.types.State
 
     Deprecated: Use cairo instead
 */
-void paintDiamond(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height)
+void paintDiamond(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height) nothrow
 {
   const(char)* _detail = detail.toCString(No.Alloc);
   gtk_paint_diamond(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height);
@@ -1272,7 +1272,7 @@ void paintDiamond(gtk.style.Style style, cairo.context.Context cr, gtk.types.Sta
 
     Deprecated: Use [gtk.global.renderExpander] instead
 */
-void paintExpander(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, int x, int y, gtk.types.ExpanderStyle expanderStyle)
+void paintExpander(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, int x, int y, gtk.types.ExpanderStyle expanderStyle) nothrow
 {
   const(char)* _detail = detail.toCString(No.Alloc);
   gtk_paint_expander(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, expanderStyle);
@@ -1296,7 +1296,7 @@ void paintExpander(gtk.style.Style style, cairo.context.Context cr, gtk.types.St
 
     Deprecated: Use [gtk.global.renderExtension] instead
 */
-void paintExtension(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height, gtk.types.PositionType gapSide)
+void paintExtension(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height, gtk.types.PositionType gapSide) nothrow
 {
   const(char)* _detail = detail.toCString(No.Alloc);
   gtk_paint_extension(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height, gapSide);
@@ -1319,7 +1319,7 @@ void paintExtension(gtk.style.Style style, cairo.context.Context cr, gtk.types.S
 
     Deprecated: Use [gtk.global.renderFrame] and [gtk.global.renderBackground] instead
 */
-void paintFlatBox(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height)
+void paintFlatBox(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height) nothrow
 {
   const(char)* _detail = detail.toCString(No.Alloc);
   gtk_paint_flat_box(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height);
@@ -1342,7 +1342,7 @@ void paintFlatBox(gtk.style.Style style, cairo.context.Context cr, gtk.types.Sta
 
     Deprecated: Use [gtk.global.renderFocus] instead
 */
-void paintFocus(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height)
+void paintFocus(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height) nothrow
 {
   const(char)* _detail = detail.toCString(No.Alloc);
   gtk_paint_focus(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height);
@@ -1366,7 +1366,7 @@ void paintFocus(gtk.style.Style style, cairo.context.Context cr, gtk.types.State
 
     Deprecated: Use [gtk.global.renderHandle] instead
 */
-void paintHandle(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height, gtk.types.Orientation orientation)
+void paintHandle(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height, gtk.types.Orientation orientation) nothrow
 {
   const(char)* _detail = detail.toCString(No.Alloc);
   gtk_paint_handle(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height, orientation);
@@ -1388,7 +1388,7 @@ void paintHandle(gtk.style.Style style, cairo.context.Context cr, gtk.types.Stat
 
     Deprecated: Use [gtk.global.renderLine] instead
 */
-void paintHline(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, int x1, int x2, int y)
+void paintHline(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, int x1, int x2, int y) nothrow
 {
   const(char)* _detail = detail.toCString(No.Alloc);
   gtk_paint_hline(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x1, x2, y);
@@ -1411,7 +1411,7 @@ void paintHline(gtk.style.Style style, cairo.context.Context cr, gtk.types.State
 
     Deprecated: Use [gtk.global.renderLayout] instead
 */
-void paintLayout(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, bool useText, gtk.widget.Widget widget, string detail, int x, int y, pango.layout.Layout layout)
+void paintLayout(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, bool useText, gtk.widget.Widget widget, string detail, int x, int y, pango.layout.Layout layout) nothrow
 {
   const(char)* _detail = detail.toCString(No.Alloc);
   gtk_paint_layout(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, useText, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, layout ? cast(PangoLayout*)layout._cPtr(No.Dup) : null);
@@ -1435,7 +1435,7 @@ void paintLayout(gtk.style.Style style, cairo.context.Context cr, gtk.types.Stat
 
     Deprecated: Use [gtk.global.renderOption] instead
 */
-void paintOption(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height)
+void paintOption(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height) nothrow
 {
   const(char)* _detail = detail.toCString(No.Alloc);
   gtk_paint_option(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height);
@@ -1459,7 +1459,7 @@ void paintOption(gtk.style.Style style, cairo.context.Context cr, gtk.types.Stat
 
     Deprecated: Use [gtk.global.renderHandle] instead
 */
-void paintResizeGrip(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, gdk.types.WindowEdge edge, int x, int y, int width, int height)
+void paintResizeGrip(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, gdk.types.WindowEdge edge, int x, int y, int width, int height) nothrow
 {
   const(char)* _detail = detail.toCString(No.Alloc);
   gtk_paint_resize_grip(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, edge, x, y, width, height);
@@ -1483,7 +1483,7 @@ void paintResizeGrip(gtk.style.Style style, cairo.context.Context cr, gtk.types.
 
     Deprecated: Use [gtk.global.renderFrame] instead
 */
-void paintShadow(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height)
+void paintShadow(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height) nothrow
 {
   const(char)* _detail = detail.toCString(No.Alloc);
   gtk_paint_shadow(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height);
@@ -1511,7 +1511,7 @@ void paintShadow(gtk.style.Style style, cairo.context.Context cr, gtk.types.Stat
 
     Deprecated: Use [gtk.global.renderFrameGap] instead
 */
-void paintShadowGap(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height, gtk.types.PositionType gapSide, int gapX, int gapWidth)
+void paintShadowGap(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height, gtk.types.PositionType gapSide, int gapX, int gapWidth) nothrow
 {
   const(char)* _detail = detail.toCString(No.Alloc);
   gtk_paint_shadow_gap(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height, gapSide, gapX, gapWidth);
@@ -1536,7 +1536,7 @@ void paintShadowGap(gtk.style.Style style, cairo.context.Context cr, gtk.types.S
 
     Deprecated: Use [gtk.global.renderSlider] instead
 */
-void paintSlider(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height, gtk.types.Orientation orientation)
+void paintSlider(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height, gtk.types.Orientation orientation) nothrow
 {
   const(char)* _detail = detail.toCString(No.Alloc);
   gtk_paint_slider(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height, orientation);
@@ -1560,7 +1560,7 @@ void paintSlider(gtk.style.Style style, cairo.context.Context cr, gtk.types.Stat
     Deprecated: Use [gtk.global.renderIcon] and the #GtkStyleContext
         you are drawing instead
 */
-void paintSpinner(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, uint step, int x, int y, int width, int height)
+void paintSpinner(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, uint step, int x, int y, int width, int height) nothrow
 {
   const(char)* _detail = detail.toCString(No.Alloc);
   gtk_paint_spinner(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, step, x, y, width, height);
@@ -1584,7 +1584,7 @@ void paintSpinner(gtk.style.Style style, cairo.context.Context cr, gtk.types.Sta
 
     Deprecated: Use cairo instead
 */
-void paintTab(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height)
+void paintTab(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height) nothrow
 {
   const(char)* _detail = detail.toCString(No.Alloc);
   gtk_paint_tab(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, x, y, width, height);
@@ -1606,7 +1606,7 @@ void paintTab(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateTy
 
     Deprecated: Use [gtk.global.renderLine] instead
 */
-void paintVline(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, int y1, int y2, int x)
+void paintVline(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, int y1, int y2, int x) nothrow
 {
   const(char)* _detail = detail.toCString(No.Alloc);
   gtk_paint_vline(style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, stateType, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail, y1, y2, x);
@@ -1628,7 +1628,7 @@ void paintVline(gtk.style.Style style, cairo.context.Context cr, gtk.types.State
       settings = a #GtkPrintSettings
     Returns: a new #GtkPageSetup
 */
-gtk.page_setup.PageSetup printRunPageSetupDialog(gtk.window.Window parent, gtk.page_setup.PageSetup pageSetup, gtk.print_settings.PrintSettings settings)
+gtk.page_setup.PageSetup printRunPageSetupDialog(gtk.window.Window parent, gtk.page_setup.PageSetup pageSetup, gtk.print_settings.PrintSettings settings) nothrow
 {
   GtkPageSetup* _cretval;
   _cretval = gtk_print_run_page_setup_dialog(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, pageSetup ? cast(GtkPageSetup*)pageSetup._cPtr(No.Dup) : null, settings ? cast(GtkPrintSettings*)settings._cPtr(No.Dup) : null);
@@ -1650,14 +1650,21 @@ gtk.page_setup.PageSetup printRunPageSetupDialog(gtk.window.Window parent, gtk.p
       doneCb = a function to call when the user saves
                   the modified page setup
 */
-void printRunPageSetupDialogAsync(gtk.window.Window parent, gtk.page_setup.PageSetup pageSetup, gtk.print_settings.PrintSettings settings, gtk.types.PageSetupDoneFunc doneCb)
+void printRunPageSetupDialogAsync(gtk.window.Window parent, gtk.page_setup.PageSetup pageSetup, gtk.print_settings.PrintSettings settings, gtk.types.PageSetupDoneFunc doneCb) nothrow
 {
-  extern(C) void _doneCbCallback(GtkPageSetup* pageSetup, void* data)
+  extern(C) void _doneCbCallback(GtkPageSetup* pageSetup, void* data) nothrow
   {
     ptrThawGC(data);
     auto _dlg = cast(gtk.types.PageSetupDoneFunc*)data;
 
-    (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.page_setup.PageSetup)(cast(void*)pageSetup, No.Take));
+    try
+    {
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.page_setup.PageSetup)(cast(void*)pageSetup, No.Take));
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gtk.types.PageSetupDoneFunc");
+    }
   }
   auto _doneCbCB = doneCb ? &_doneCbCallback : null;
   auto _doneCb = doneCb ? freezeDelegate(cast(void*)&doneCb) : null;
@@ -1688,7 +1695,7 @@ void printRunPageSetupDialogAsync(gtk.window.Window parent, gtk.page_setup.PageS
       widget = a #GtkWidget
       event = an event
 */
-void propagateEvent(gtk.widget.Widget widget, gdk.event.Event event)
+void propagateEvent(gtk.widget.Widget widget, gdk.event.Event event) nothrow
 {
   gtk_propagate_event(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
 }
@@ -1703,7 +1710,7 @@ void propagateEvent(gtk.widget.Widget widget, gdk.event.Event event)
 
     Deprecated: Use #GtkStyleContext with a custom #GtkStyleProvider instead
 */
-void rcAddDefaultFile(string filename)
+void rcAddDefaultFile(string filename) nothrow
 {
   const(char)* _filename = filename.toCString(No.Alloc);
   gtk_rc_add_default_file(_filename);
@@ -1720,7 +1727,7 @@ void rcAddDefaultFile(string filename)
 
     Deprecated: Use #GtkCssProvider instead.
 */
-string rcFindModuleInPath(string moduleFile)
+string rcFindModuleInPath(string moduleFile) nothrow
 {
   char* _cretval;
   const(char)* _moduleFile = moduleFile.toCString(No.Alloc);
@@ -1743,7 +1750,7 @@ string rcFindModuleInPath(string moduleFile)
 
     Deprecated: Use #GtkCssProvider instead.
 */
-string rcFindPixmapInPath(gtk.settings.Settings settings, glib.scanner.Scanner scanner, string pixmapFile)
+string rcFindPixmapInPath(gtk.settings.Settings settings, glib.scanner.Scanner scanner, string pixmapFile) nothrow
 {
   char* _cretval;
   const(char)* _pixmapFile = pixmapFile.toCString(No.Alloc);
@@ -1761,7 +1768,7 @@ string rcFindPixmapInPath(gtk.settings.Settings settings, glib.scanner.Scanner s
 
     Deprecated: Use #GtkStyleContext instead
 */
-string[] rcGetDefaultFiles()
+string[] rcGetDefaultFiles() nothrow
 {
   char** _cretval;
   _cretval = gtk_rc_get_default_files();
@@ -1788,7 +1795,7 @@ string[] rcGetDefaultFiles()
 
     Deprecated: Use #GtkCssProvider instead.
 */
-string rcGetImModuleFile()
+string rcGetImModuleFile() nothrow
 {
   char* _cretval;
   _cretval = gtk_rc_get_im_module_file();
@@ -1807,7 +1814,7 @@ string rcGetImModuleFile()
 
     Deprecated: Use #GtkCssProvider instead.
 */
-string rcGetImModulePath()
+string rcGetImModulePath() nothrow
 {
   char* _cretval;
   _cretval = gtk_rc_get_im_module_path();
@@ -1823,7 +1830,7 @@ string rcGetImModulePath()
 
     Deprecated: Use #GtkCssProvider instead.
 */
-string rcGetModuleDir()
+string rcGetModuleDir() nothrow
 {
   char* _cretval;
   _cretval = gtk_rc_get_module_dir();
@@ -1847,7 +1854,7 @@ string rcGetModuleDir()
 
     Deprecated: Use #GtkStyleContext instead
 */
-gtk.style.Style rcGetStyle(gtk.widget.Widget widget)
+gtk.style.Style rcGetStyle(gtk.widget.Widget widget) nothrow
 {
   GtkStyle* _cretval;
   _cretval = gtk_rc_get_style(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
@@ -1888,7 +1895,7 @@ gtk.style.Style rcGetStyle(gtk.widget.Widget widget)
 
     Deprecated: Use #GtkStyleContext instead
 */
-gtk.style.Style rcGetStyleByPaths(gtk.settings.Settings settings, string widgetPath, string classPath, gobject.types.GType type)
+gtk.style.Style rcGetStyleByPaths(gtk.settings.Settings settings, string widgetPath, string classPath, gobject.types.GType type) nothrow
 {
   GtkStyle* _cretval;
   const(char)* _widgetPath = widgetPath.toCString(No.Alloc);
@@ -1906,7 +1913,7 @@ gtk.style.Style rcGetStyleByPaths(gtk.settings.Settings settings, string widgetP
 
     Deprecated: Use #GtkCssProvider instead.
 */
-string rcGetThemeDir()
+string rcGetThemeDir() nothrow
 {
   char* _cretval;
   _cretval = gtk_rc_get_theme_dir();
@@ -1923,7 +1930,7 @@ string rcGetThemeDir()
 
     Deprecated: Use #GtkCssProvider instead.
 */
-void rcParse(string filename)
+void rcParse(string filename) nothrow
 {
   const(char)* _filename = filename.toCString(No.Alloc);
   gtk_rc_parse(_filename);
@@ -1945,7 +1952,7 @@ void rcParse(string filename)
 
     Deprecated: Use #GtkCssProvider instead
 */
-uint rcParseColor(glib.scanner.Scanner scanner, out gdk.color.Color color)
+uint rcParseColor(glib.scanner.Scanner scanner, out gdk.color.Color color) nothrow
 {
   uint _retval;
   _retval = gtk_rc_parse_color(scanner ? cast(GScanner*)scanner._cPtr : null, cast(GdkColor*)&color);
@@ -1967,7 +1974,7 @@ uint rcParseColor(glib.scanner.Scanner scanner, out gdk.color.Color color)
 
     Deprecated: Use #GtkCssProvider instead
 */
-uint rcParseColorFull(glib.scanner.Scanner scanner, gtk.rc_style.RcStyle style, out gdk.color.Color color)
+uint rcParseColorFull(glib.scanner.Scanner scanner, gtk.rc_style.RcStyle style, out gdk.color.Color color) nothrow
 {
   uint _retval;
   _retval = gtk_rc_parse_color_full(scanner ? cast(GScanner*)scanner._cPtr : null, style ? cast(GtkRcStyle*)style._cPtr(No.Dup) : null, cast(GdkColor*)&color);
@@ -1987,7 +1994,7 @@ uint rcParseColorFull(glib.scanner.Scanner scanner, gtk.rc_style.RcStyle style, 
 
     Deprecated: Use #GtkCssProvider instead
 */
-uint rcParsePriority(glib.scanner.Scanner scanner, out gtk.types.PathPriorityType priority)
+uint rcParsePriority(glib.scanner.Scanner scanner, out gtk.types.PathPriorityType priority) nothrow
 {
   uint _retval;
   _retval = gtk_rc_parse_priority(scanner ? cast(GScanner*)scanner._cPtr : null, &priority);
@@ -2007,7 +2014,7 @@ uint rcParsePriority(glib.scanner.Scanner scanner, out gtk.types.PathPriorityTyp
 
     Deprecated: Use #GtkCssProvider instead
 */
-uint rcParseState(glib.scanner.Scanner scanner, out gtk.types.StateType state)
+uint rcParseState(glib.scanner.Scanner scanner, out gtk.types.StateType state) nothrow
 {
   uint _retval;
   _retval = gtk_rc_parse_state(scanner ? cast(GScanner*)scanner._cPtr : null, &state);
@@ -2022,7 +2029,7 @@ uint rcParseState(glib.scanner.Scanner scanner, out gtk.types.StateType state)
 
     Deprecated: Use #GtkCssProvider instead.
 */
-void rcParseString(string rcString)
+void rcParseString(string rcString) nothrow
 {
   const(char)* _rcString = rcString.toCString(No.Alloc);
   gtk_rc_parse_string(_rcString);
@@ -2036,7 +2043,7 @@ void rcParseString(string rcString)
 
     Deprecated: Use #GtkCssProvider instead.
 */
-bool rcReparseAll()
+bool rcReparseAll() nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_rc_reparse_all();
@@ -2055,7 +2062,7 @@ bool rcReparseAll()
 
     Deprecated: Use #GtkCssProvider instead.
 */
-bool rcReparseAllForSettings(gtk.settings.Settings settings, bool forceLoad)
+bool rcReparseAllForSettings(gtk.settings.Settings settings, bool forceLoad) nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_rc_reparse_all_for_settings(settings ? cast(GtkSettings*)settings._cPtr(No.Dup) : null, forceLoad);
@@ -2079,7 +2086,7 @@ bool rcReparseAllForSettings(gtk.settings.Settings settings, bool forceLoad)
 
     Deprecated: Use #GtkCssProvider instead.
 */
-void rcResetStyles(gtk.settings.Settings settings)
+void rcResetStyles(gtk.settings.Settings settings) nothrow
 {
   gtk_rc_reset_styles(settings ? cast(GtkSettings*)settings._cPtr(No.Dup) : null);
 }
@@ -2094,7 +2101,7 @@ void rcResetStyles(gtk.settings.Settings settings)
 
     Deprecated: Use #GtkStyleContext with a custom #GtkStyleProvider instead
 */
-void rcSetDefaultFiles(string[] filenames)
+void rcSetDefaultFiles(string[] filenames) nothrow
 {
   char*[] _tmpfilenames;
   foreach (s; filenames)
@@ -2118,7 +2125,7 @@ void rcSetDefaultFiles(string[] filenames)
       width = rectangle width
       height = rectangle height
 */
-void renderActivity(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height)
+void renderActivity(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height) nothrow
 {
   gtk_render_activity(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, x, y, width, height);
 }
@@ -2138,7 +2145,7 @@ void renderActivity(gtk.style_context.StyleContext context, cairo.context.Contex
       y = Y origin of the render area
       size = square side for render area
 */
-void renderArrow(gtk.style_context.StyleContext context, cairo.context.Context cr, double angle, double x, double y, double size)
+void renderArrow(gtk.style_context.StyleContext context, cairo.context.Context cr, double angle, double x, double y, double size) nothrow
 {
   gtk_render_arrow(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, angle, x, y, size);
 }
@@ -2159,7 +2166,7 @@ void renderArrow(gtk.style_context.StyleContext context, cairo.context.Context c
       width = rectangle width
       height = rectangle height
 */
-void renderBackground(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height)
+void renderBackground(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height) nothrow
 {
   gtk_render_background(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, x, y, width, height);
 }
@@ -2177,7 +2184,7 @@ void renderBackground(gtk.style_context.StyleContext context, cairo.context.Cont
       height = rectangle height
       outClip = return location for the clip
 */
-void renderBackgroundGetClip(gtk.style_context.StyleContext context, double x, double y, double width, double height, out gdk.rectangle.Rectangle outClip)
+void renderBackgroundGetClip(gtk.style_context.StyleContext context, double x, double y, double width, double height, out gdk.rectangle.Rectangle outClip) nothrow
 {
   gtk_render_background_get_clip(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, x, y, width, height, cast(GdkRectangle*)&outClip);
 }
@@ -2201,7 +2208,7 @@ void renderBackgroundGetClip(gtk.style_context.StyleContext context, double x, d
       width = rectangle width
       height = rectangle height
 */
-void renderCheck(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height)
+void renderCheck(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height) nothrow
 {
   gtk_render_check(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, x, y, width, height);
 }
@@ -2223,7 +2230,7 @@ void renderCheck(gtk.style_context.StyleContext context, cairo.context.Context c
       width = rectangle width
       height = rectangle height
 */
-void renderExpander(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height)
+void renderExpander(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height) nothrow
 {
   gtk_render_expander(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, x, y, width, height);
 }
@@ -2246,7 +2253,7 @@ void renderExpander(gtk.style_context.StyleContext context, cairo.context.Contex
       height = rectangle height
       gapSide = side where the gap is
 */
-void renderExtension(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height, gtk.types.PositionType gapSide)
+void renderExtension(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height, gtk.types.PositionType gapSide) nothrow
 {
   gtk_render_extension(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, x, y, width, height, gapSide);
 }
@@ -2266,7 +2273,7 @@ void renderExtension(gtk.style_context.StyleContext context, cairo.context.Conte
       width = rectangle width
       height = rectangle height
 */
-void renderFocus(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height)
+void renderFocus(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height) nothrow
 {
   gtk_render_focus(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, x, y, width, height);
 }
@@ -2287,7 +2294,7 @@ void renderFocus(gtk.style_context.StyleContext context, cairo.context.Context c
       width = rectangle width
       height = rectangle height
 */
-void renderFrame(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height)
+void renderFrame(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height) nothrow
 {
   gtk_render_frame(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, x, y, width, height);
 }
@@ -2316,7 +2323,7 @@ void renderFrame(gtk.style_context.StyleContext context, cairo.context.Context c
     Deprecated: Use [gtk.global.renderFrame] instead. Themes can create gaps
           by omitting borders via CSS.
 */
-void renderFrameGap(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height, gtk.types.PositionType gapSide, double xy0Gap, double xy1Gap)
+void renderFrameGap(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height, gtk.types.PositionType gapSide, double xy0Gap, double xy1Gap) nothrow
 {
   gtk_render_frame_gap(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, x, y, width, height, gapSide, xy0Gap, xy1Gap);
 }
@@ -2338,7 +2345,7 @@ void renderFrameGap(gtk.style_context.StyleContext context, cairo.context.Contex
       width = rectangle width
       height = rectangle height
 */
-void renderHandle(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height)
+void renderHandle(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height) nothrow
 {
   gtk_render_handle(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, x, y, width, height);
 }
@@ -2360,7 +2367,7 @@ void renderHandle(gtk.style_context.StyleContext context, cairo.context.Context 
       x = X position for the pixbuf
       y = Y position for the pixbuf
 */
-void renderIcon(gtk.style_context.StyleContext context, cairo.context.Context cr, gdkpixbuf.pixbuf.Pixbuf pixbuf, double x, double y)
+void renderIcon(gtk.style_context.StyleContext context, cairo.context.Context cr, gdkpixbuf.pixbuf.Pixbuf pixbuf, double x, double y) nothrow
 {
   gtk_render_icon(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null, x, y);
 }
@@ -2379,7 +2386,7 @@ void renderIcon(gtk.style_context.StyleContext context, cairo.context.Context cr
 
     Deprecated: Use [gtk.icon_theme.IconTheme.loadIcon] instead.
 */
-gdkpixbuf.pixbuf.Pixbuf renderIconPixbuf(gtk.style_context.StyleContext context, gtk.icon_source.IconSource source, gtk.types.IconSize size)
+gdkpixbuf.pixbuf.Pixbuf renderIconPixbuf(gtk.style_context.StyleContext context, gtk.icon_source.IconSource source, gtk.types.IconSize size) nothrow
 {
   GdkPixbuf* _cretval;
   _cretval = gtk_render_icon_pixbuf(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, source ? cast(const(GtkIconSource)*)source._cPtr(No.Dup) : null, size);
@@ -2397,7 +2404,7 @@ gdkpixbuf.pixbuf.Pixbuf renderIconPixbuf(gtk.style_context.StyleContext context,
       x = X position for the icon
       y = Y position for the incon
 */
-void renderIconSurface(gtk.style_context.StyleContext context, cairo.context.Context cr, cairo.surface.Surface surface, double x, double y)
+void renderIconSurface(gtk.style_context.StyleContext context, cairo.context.Context cr, cairo.surface.Surface surface, double x, double y) nothrow
 {
   gtk_render_icon_surface(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null, x, y);
 }
@@ -2414,7 +2421,7 @@ void renderIconSurface(gtk.style_context.StyleContext context, cairo.context.Con
       index = the index in the #PangoLayout
       direction = the #PangoDirection of the text
 */
-void renderInsertionCursor(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, pango.layout.Layout layout, int index, pango.types.Direction direction)
+void renderInsertionCursor(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, pango.layout.Layout layout, int index, pango.types.Direction direction) nothrow
 {
   gtk_render_insertion_cursor(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, x, y, layout ? cast(PangoLayout*)layout._cPtr(No.Dup) : null, index, direction);
 }
@@ -2429,7 +2436,7 @@ void renderInsertionCursor(gtk.style_context.StyleContext context, cairo.context
       y = Y origin
       layout = the #PangoLayout to render
 */
-void renderLayout(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, pango.layout.Layout layout)
+void renderLayout(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, pango.layout.Layout layout) nothrow
 {
   gtk_render_layout(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, x, y, layout ? cast(PangoLayout*)layout._cPtr(No.Dup) : null);
 }
@@ -2445,7 +2452,7 @@ void renderLayout(gtk.style_context.StyleContext context, cairo.context.Context 
       x1 = X coordinate for the end of the line
       y1 = Y coordinate for the end of the line
 */
-void renderLine(gtk.style_context.StyleContext context, cairo.context.Context cr, double x0, double y0, double x1, double y1)
+void renderLine(gtk.style_context.StyleContext context, cairo.context.Context cr, double x0, double y0, double x1, double y1) nothrow
 {
   gtk_render_line(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, x0, y0, x1, y1);
 }
@@ -2467,7 +2474,7 @@ void renderLine(gtk.style_context.StyleContext context, cairo.context.Context cr
       width = rectangle width
       height = rectangle height
 */
-void renderOption(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height)
+void renderOption(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height) nothrow
 {
   gtk_render_option(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, x, y, width, height);
 }
@@ -2490,7 +2497,7 @@ void renderOption(gtk.style_context.StyleContext context, cairo.context.Context 
       height = rectangle height
       orientation = orientation of the slider
 */
-void renderSlider(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height, gtk.types.Orientation orientation)
+void renderSlider(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height, gtk.types.Orientation orientation) nothrow
 {
   gtk_render_slider(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, x, y, width, height, orientation);
 }
@@ -2509,7 +2516,7 @@ void renderSlider(gtk.style_context.StyleContext context, cairo.context.Context 
       s = Return value for the saturation component
       v = Return value for the value component
 */
-void rgbToHsv(double r, double g, double b, out double h, out double s, out double v)
+void rgbToHsv(double r, double g, double b, out double h, out double s, out double v) nothrow
 {
   gtk_rgb_to_hsv(r, g, b, cast(double*)&h, cast(double*)&s, cast(double*)&v);
 }
@@ -2524,7 +2531,7 @@ void rgbToHsv(double r, double g, double b, out double h, out double s, out doub
       target = target to add.
       info = A unsigned integer which will be passed back to the application.
 */
-void selectionAddTarget(gtk.widget.Widget widget, gdk.atom.Atom selection, gdk.atom.Atom target, uint info)
+void selectionAddTarget(gtk.widget.Widget widget, gdk.atom.Atom selection, gdk.atom.Atom target, uint info) nothrow
 {
   gtk_selection_add_target(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection._cPtr : null, target ? cast(GdkAtom)target._cPtr : null, info);
 }
@@ -2538,7 +2545,7 @@ void selectionAddTarget(gtk.widget.Widget widget, gdk.atom.Atom selection, gdk.a
       selection = the selection
       targets = a table of targets to add
 */
-void selectionAddTargets(gtk.widget.Widget widget, gdk.atom.Atom selection, gtk.target_entry.TargetEntry[] targets)
+void selectionAddTargets(gtk.widget.Widget widget, gdk.atom.Atom selection, gtk.target_entry.TargetEntry[] targets) nothrow
 {
   uint _ntargets;
   if (targets)
@@ -2560,7 +2567,7 @@ void selectionAddTargets(gtk.widget.Widget widget, gdk.atom.Atom selection, gtk.
       widget = a #GtkWidget
       selection = an atom representing a selection
 */
-void selectionClearTargets(gtk.widget.Widget widget, gdk.atom.Atom selection)
+void selectionClearTargets(gtk.widget.Widget widget, gdk.atom.Atom selection) nothrow
 {
   gtk_selection_clear_targets(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection._cPtr : null);
 }
@@ -2579,7 +2586,7 @@ void selectionClearTargets(gtk.widget.Widget widget, gdk.atom.Atom selection)
                request. (e.g., there was already a request in process for
                this widget).
 */
-bool selectionConvert(gtk.widget.Widget widget, gdk.atom.Atom selection, gdk.atom.Atom target, uint time)
+bool selectionConvert(gtk.widget.Widget widget, gdk.atom.Atom selection, gdk.atom.Atom target, uint time) nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_selection_convert(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection._cPtr : null, target ? cast(GdkAtom)target._cPtr : null, time);
@@ -2596,7 +2603,7 @@ bool selectionConvert(gtk.widget.Widget widget, gdk.atom.Atom selection, gdk.ato
       time = timestamp with which to claim the selection
     Returns: true if the operation succeeded
 */
-bool selectionOwnerSet(gtk.widget.Widget widget, gdk.atom.Atom selection, uint time)
+bool selectionOwnerSet(gtk.widget.Widget widget, gdk.atom.Atom selection, uint time) nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_selection_owner_set(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection._cPtr : null, time);
@@ -2614,7 +2621,7 @@ bool selectionOwnerSet(gtk.widget.Widget widget, gdk.atom.Atom selection, uint t
       time = timestamp with which to claim the selection
     Returns: TRUE if the operation succeeded
 */
-bool selectionOwnerSetForDisplay(gdk.display.Display display, gtk.widget.Widget widget, gdk.atom.Atom selection, uint time)
+bool selectionOwnerSetForDisplay(gdk.display.Display display, gtk.widget.Widget widget, gdk.atom.Atom selection, uint time) nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_selection_owner_set_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection._cPtr : null, time);
@@ -2630,7 +2637,7 @@ bool selectionOwnerSetForDisplay(gdk.display.Display display, gtk.widget.Widget 
     Params:
       widget = a #GtkWidget
 */
-void selectionRemoveAll(gtk.widget.Widget widget)
+void selectionRemoveAll(gtk.widget.Widget widget) nothrow
 {
   gtk_selection_remove_all(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
 }
@@ -2641,7 +2648,7 @@ void selectionRemoveAll(gtk.widget.Widget widget)
     Params:
       flags = 
 */
-void setDebugFlags(uint flags)
+void setDebugFlags(uint flags) nothrow
 {
   gtk_set_debug_flags(flags);
 }
@@ -2717,7 +2724,7 @@ bool showUriOnWindow(gtk.window.Window parent, string uri, uint timestamp)
     and each string in the list must be freed with [glib.global.gfree].
     Returns: a list of known stock IDs
 */
-string[] stockListIds()
+string[] stockListIds() nothrow
 {
   GSList* _cretval;
   _cretval = gtk_stock_list_ids();
@@ -2734,7 +2741,7 @@ string[] stockListIds()
       item = stock item to initialize with values
     Returns: true if item was initialized
 */
-bool stockLookup(string stockId, out gtk.stock_item.StockItem item)
+bool stockLookup(string stockId, out gtk.stock_item.StockItem item) nothrow
 {
   bool _retval;
   const(char)* _stockId = stockId.toCString(No.Alloc);
@@ -2784,15 +2791,22 @@ bool stockLookup(string stockId, out gtk.stock_item.StockItem item)
       domain = the translation domain for which func shall be used
       func = a #GtkTranslateFunc
 */
-void stockSetTranslateFunc(string domain, gtk.types.TranslateFunc func)
+void stockSetTranslateFunc(string domain, gtk.types.TranslateFunc func) nothrow
 {
-  extern(C) char* _funcCallback(const(char)* path, void* funcData)
+  extern(C) char* _funcCallback(const(char)* path, void* funcData) nothrow
   {
     string _dretval;
     auto _dlg = cast(gtk.types.TranslateFunc*)funcData;
     string _path = path.fromCString(No.Free);
 
-    _dretval = (*_dlg)(_path);
+    try
+    {
+      _dretval = (*_dlg)(_path);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gtk.types.TranslateFunc");
+    }
     auto _retval = _dretval.toCString(Yes.Alloc);
 
     return _retval;
@@ -2811,7 +2825,7 @@ void stockSetTranslateFunc(string domain, gtk.types.TranslateFunc func)
     Params:
       targets = a #GtkTargetEntry array
 */
-void targetTableFree(gtk.target_entry.TargetEntry[] targets)
+void targetTableFree(gtk.target_entry.TargetEntry[] targets) nothrow
 {
   int _nTargets;
   if (targets)
@@ -2835,7 +2849,7 @@ void targetTableFree(gtk.target_entry.TargetEntry[] targets)
       list = a #GtkTargetList
     Returns: the new table.
 */
-gtk.target_entry.TargetEntry[] targetTableNewFromList(gtk.target_list.TargetList list)
+gtk.target_entry.TargetEntry[] targetTableNewFromList(gtk.target_list.TargetList list) nothrow
 {
   GtkTargetEntry* _cretval;
   int _cretlength;
@@ -2865,7 +2879,7 @@ gtk.target_entry.TargetEntry[] targetTableNewFromList(gtk.target_list.TargetList
 
     Deprecated: This testing infrastructure is phased out in favor of reftests.
 */
-gtk.widget.Widget testCreateSimpleWindow(string windowTitle, string dialogText)
+gtk.widget.Widget testCreateSimpleWindow(string windowTitle, string dialogText) nothrow
 {
   GtkWidget* _cretval;
   const(char)* _windowTitle = windowTitle.toCString(No.Alloc);
@@ -2889,7 +2903,7 @@ gtk.widget.Widget testCreateSimpleWindow(string windowTitle, string dialogText)
       labelPattern = Shell-glob pattern to match a label string.
     Returns: a GtkLabel widget if any is found.
 */
-gtk.widget.Widget testFindLabel(gtk.widget.Widget widget, string labelPattern)
+gtk.widget.Widget testFindLabel(gtk.widget.Widget widget, string labelPattern) nothrow
 {
   GtkWidget* _cretval;
   const(char)* _labelPattern = labelPattern.toCString(No.Alloc);
@@ -2912,7 +2926,7 @@ gtk.widget.Widget testFindLabel(gtk.widget.Widget widget, string labelPattern)
       widgetType = Type of a aearched for sibling widget
     Returns: a widget of type widget_type if any is found.
 */
-gtk.widget.Widget testFindSibling(gtk.widget.Widget baseWidget, gobject.types.GType widgetType)
+gtk.widget.Widget testFindSibling(gtk.widget.Widget baseWidget, gobject.types.GType widgetType) nothrow
 {
   GtkWidget* _cretval;
   _cretval = gtk_test_find_sibling(baseWidget ? cast(GtkWidget*)baseWidget._cPtr(No.Dup) : null, widgetType);
@@ -2935,7 +2949,7 @@ gtk.widget.Widget testFindSibling(gtk.widget.Widget baseWidget, gobject.types.GT
       widgetType = Type of a aearched for label sibling widget.
     Returns: a valid widget if any is found or null.
 */
-gtk.widget.Widget testFindWidget(gtk.widget.Widget widget, string labelPattern, gobject.types.GType widgetType)
+gtk.widget.Widget testFindWidget(gtk.widget.Widget widget, string labelPattern, gobject.types.GType widgetType) nothrow
 {
   GtkWidget* _cretval;
   const(char)* _labelPattern = labelPattern.toCString(No.Alloc);
@@ -2949,7 +2963,7 @@ gtk.widget.Widget testFindWidget(gtk.widget.Widget widget, string labelPattern, 
     calling [gtk.global.testRegisterAllTypes].
     Returns: 0-terminated array of type ids
 */
-gobject.types.GType[] testListAllTypes()
+gobject.types.GType[] testListAllTypes() nothrow
 {
   const(GType)* _cretval;
   uint _cretlength;
@@ -2968,7 +2982,7 @@ gobject.types.GType[] testListAllTypes()
     This allowes to refer to any of those object types via
     [gobject.global.typeFromName] after calling this function.
 */
-void testRegisterAllTypes()
+void testRegisterAllTypes() nothrow
 {
   gtk_test_register_all_types();
 }
@@ -2986,7 +3000,7 @@ void testRegisterAllTypes()
 
     Deprecated: This testing infrastructure is phased out in favor of reftests.
 */
-double testSliderGetValue(gtk.widget.Widget widget)
+double testSliderGetValue(gtk.widget.Widget widget) nothrow
 {
   double _retval;
   _retval = gtk_test_slider_get_value(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
@@ -3006,7 +3020,7 @@ double testSliderGetValue(gtk.widget.Widget widget)
 
     Deprecated: This testing infrastructure is phased out in favor of reftests.
 */
-void testSliderSetPerc(gtk.widget.Widget widget, double percentage)
+void testSliderSetPerc(gtk.widget.Widget widget, double percentage) nothrow
 {
   gtk_test_slider_set_perc(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, percentage);
 }
@@ -3024,7 +3038,7 @@ void testSliderSetPerc(gtk.widget.Widget widget, double percentage)
 
     Deprecated: This testing infrastructure is phased out in favor of reftests.
 */
-bool testSpinButtonClick(gtk.spin_button.SpinButton spinner, uint button, bool upwards)
+bool testSpinButtonClick(gtk.spin_button.SpinButton spinner, uint button, bool upwards) nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_test_spin_button_click(spinner ? cast(GtkSpinButton*)spinner._cPtr(No.Dup) : null, button, upwards);
@@ -3041,7 +3055,7 @@ bool testSpinButtonClick(gtk.spin_button.SpinButton spinner, uint button, bool u
 
     Deprecated: This testing infrastructure is phased out in favor of reftests.
 */
-string testTextGet(gtk.widget.Widget widget)
+string testTextGet(gtk.widget.Widget widget) nothrow
 {
   char* _cretval;
   _cretval = gtk_test_text_get(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
@@ -3059,7 +3073,7 @@ string testTextGet(gtk.widget.Widget widget)
 
     Deprecated: This testing infrastructure is phased out in favor of reftests.
 */
-void testTextSet(gtk.widget.Widget widget, string string_)
+void testTextSet(gtk.widget.Widget widget, string string_) nothrow
 {
   const(char)* _string_ = string_.toCString(No.Alloc);
   gtk_test_text_set(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _string_);
@@ -3084,7 +3098,7 @@ void testTextSet(gtk.widget.Widget widget, string string_)
 
     Deprecated: This testing infrastructure is phased out in favor of reftests.
 */
-bool testWidgetClick(gtk.widget.Widget widget, uint button, gdk.types.ModifierType modifiers)
+bool testWidgetClick(gtk.widget.Widget widget, uint button, gdk.types.ModifierType modifiers) nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_test_widget_click(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, button, modifiers);
@@ -3107,7 +3121,7 @@ bool testWidgetClick(gtk.widget.Widget widget, uint button, gdk.types.ModifierTy
       modifiers = Keyboard modifiers the event is setup with.
     Returns: whether all actions neccessary for the key event simulation were carried out successfully.
 */
-bool testWidgetSendKey(gtk.widget.Widget widget, uint keyval, gdk.types.ModifierType modifiers)
+bool testWidgetSendKey(gtk.widget.Widget widget, uint keyval, gdk.types.ModifierType modifiers) nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_test_widget_send_key(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, keyval, modifiers);
@@ -3126,7 +3140,7 @@ bool testWidgetSendKey(gtk.widget.Widget widget, uint keyval, gdk.types.Modifier
     Params:
       widget = the widget to wait for
 */
-void testWidgetWaitForDraw(gtk.widget.Widget widget)
+void testWidgetWaitForDraw(gtk.widget.Widget widget) nothrow
 {
   gtk_test_widget_wait_for_draw(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
 }
@@ -3149,7 +3163,7 @@ void testWidgetWaitForDraw(gtk.widget.Widget widget)
     Returns: true if selection_data had target type `GTK_TREE_MODEL_ROW` and
        is otherwise valid
 */
-bool treeGetRowDragData(gtk.selection_data.SelectionData selectionData, out gtk.tree_model.TreeModel treeModel, out gtk.tree_path.TreePath path)
+bool treeGetRowDragData(gtk.selection_data.SelectionData selectionData, out gtk.tree_model.TreeModel treeModel, out gtk.tree_path.TreePath path) nothrow
 {
   bool _retval;
   GtkTreeModel* _treeModel;
@@ -3170,7 +3184,7 @@ bool treeGetRowDragData(gtk.selection_data.SelectionData selectionData, out gtk.
       path = a row in tree_model
     Returns: true if the #GtkSelectionData had the proper target type to allow us to set a tree row
 */
-bool treeSetRowDragData(gtk.selection_data.SelectionData selectionData, gtk.tree_model.TreeModel treeModel, gtk.tree_path.TreePath path)
+bool treeSetRowDragData(gtk.selection_data.SelectionData selectionData, gtk.tree_model.TreeModel treeModel, gtk.tree_path.TreePath path) nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_tree_set_row_drag_data(selectionData ? cast(GtkSelectionData*)selectionData._cPtr(No.Dup) : null, treeModel ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)treeModel)._cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
@@ -3221,7 +3235,7 @@ bool treeSetRowDragData(gtk.selection_data.SelectionData selectionData, gtk.tree
     ```
     Returns: true
 */
-bool true_()
+bool true_() nothrow
 {
   bool _retval;
   _retval = cast(bool)gtk_true();

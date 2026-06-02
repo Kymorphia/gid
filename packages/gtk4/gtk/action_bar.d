@@ -60,26 +60,26 @@ class ActionBar : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_action_bar_get_type != &gidSymbolNotFound ? gtk_action_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ActionBar self()
+  override ActionBar self() nothrow
   {
     return this;
   }
@@ -88,7 +88,7 @@ class ActionBar : gtk.widget.Widget
       Get builder for [gtk.action_bar.ActionBar]
       Returns: New builder object
   */
-  static ActionBarGidBuilder builder()
+  static ActionBarGidBuilder builder() nothrow
   {
     return new ActionBarGidBuilder;
   }
@@ -97,7 +97,7 @@ class ActionBar : gtk.widget.Widget
       Get `revealed` property.
       Returns: Controls whether the action bar shows its contents.
   */
-  @property bool revealed()
+  @property bool revealed() nothrow
   {
     return getRevealed();
   }
@@ -107,7 +107,7 @@ class ActionBar : gtk.widget.Widget
       Params:
         propval = Controls whether the action bar shows its contents.
   */
-  @property void revealed(bool propval)
+  @property void revealed(bool propval) nothrow
   {
     setRevealed(propval);
   }
@@ -116,7 +116,7 @@ class ActionBar : gtk.widget.Widget
       Creates a new [gtk.action_bar.ActionBar] widget.
       Returns: a new [gtk.action_bar.ActionBar]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_bar_new();
@@ -127,7 +127,7 @@ class ActionBar : gtk.widget.Widget
       Retrieves the center bar widget of the bar.
       Returns: the center [gtk.widget.Widget]
   */
-  gtk.widget.Widget getCenterWidget()
+  gtk.widget.Widget getCenterWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_bar_get_center_widget(cast(GtkActionBar*)this._cPtr);
@@ -140,7 +140,7 @@ class ActionBar : gtk.widget.Widget
       Returns: the current value of the [gtk.action_bar.ActionBar.revealed]
           property
   */
-  bool getRevealed()
+  bool getRevealed() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_action_bar_get_revealed(cast(GtkActionBar*)this._cPtr);
@@ -154,7 +154,7 @@ class ActionBar : gtk.widget.Widget
       Params:
         child = the [gtk.widget.Widget] to be added to action_bar
   */
-  void packEnd(gtk.widget.Widget child)
+  void packEnd(gtk.widget.Widget child) nothrow
   {
     gtk_action_bar_pack_end(cast(GtkActionBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -166,7 +166,7 @@ class ActionBar : gtk.widget.Widget
       Params:
         child = the [gtk.widget.Widget] to be added to action_bar
   */
-  void packStart(gtk.widget.Widget child)
+  void packStart(gtk.widget.Widget child) nothrow
   {
     gtk_action_bar_pack_start(cast(GtkActionBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -177,7 +177,7 @@ class ActionBar : gtk.widget.Widget
       Params:
         child = the [gtk.widget.Widget] to be removed
   */
-  void remove(gtk.widget.Widget child)
+  void remove(gtk.widget.Widget child) nothrow
   {
     gtk_action_bar_remove(cast(GtkActionBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -188,7 +188,7 @@ class ActionBar : gtk.widget.Widget
       Params:
         centerWidget = a widget to use for the center
   */
-  void setCenterWidget(gtk.widget.Widget centerWidget = null)
+  void setCenterWidget(gtk.widget.Widget centerWidget = null) nothrow
   {
     gtk_action_bar_set_center_widget(cast(GtkActionBar*)this._cPtr, centerWidget ? cast(GtkWidget*)centerWidget._cPtr(No.Dup) : null);
   }
@@ -203,7 +203,7 @@ class ActionBar : gtk.widget.Widget
       Params:
         revealed = The new value of the property
   */
-  void setRevealed(bool revealed)
+  void setRevealed(bool revealed) nothrow
   {
     gtk_action_bar_set_revealed(cast(GtkActionBar*)this._cPtr, revealed);
   }
@@ -220,7 +220,7 @@ class ActionBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Controls whether the action bar shows its contents.
       Returns: Builder instance for fluent chaining
   */
-  T revealed(bool propval)
+  T revealed(bool propval) nothrow
   {
     return setProperty("revealed", propval);
   }
@@ -233,7 +233,7 @@ final class ActionBarGidBuilder : ActionBarGidBuilderImpl!ActionBarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ActionBar build()
+  ActionBar build() nothrow
   {
     return new ActionBar(cast(void*)createGObject(ActionBar._getGType), No.Take);
   }

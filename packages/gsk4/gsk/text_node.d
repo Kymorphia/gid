@@ -20,11 +20,8 @@ class TextNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.text_node.TextNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -41,7 +38,7 @@ class TextNode : gsk.render_node.RenderNode
         offset = offset of the baseline
       Returns: a new [gsk.render_node.RenderNode]
   */
-  this(pango.font.Font font, pango.glyph_string.GlyphString glyphs, gdk.rgba.RGBA color, graphene.point.Point offset)
+  this(pango.font.Font font, pango.glyph_string.GlyphString glyphs, gdk.rgba.RGBA color, graphene.point.Point offset) nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_text_node_new(font ? cast(PangoFont*)font._cPtr(No.Dup) : null, glyphs ? cast(PangoGlyphString*)glyphs._cPtr(No.Dup) : null, cast(const(GdkRGBA)*)&color, cast(const(graphene_point_t)*)&offset);
@@ -52,7 +49,7 @@ class TextNode : gsk.render_node.RenderNode
       Retrieves the color used by the text node.
       Returns: the text color
   */
-  gdk.rgba.RGBA getColor()
+  gdk.rgba.RGBA getColor() nothrow
   {
     const(GdkRGBA)* _cretval;
     _cretval = gsk_text_node_get_color(cast(const(GskRenderNode)*)this._cPtr);
@@ -66,7 +63,7 @@ class TextNode : gsk.render_node.RenderNode
       Returns the font used by the text node.
       Returns: the font
   */
-  pango.font.Font getFont()
+  pango.font.Font getFont() nothrow
   {
     PangoFont* _cretval;
     _cretval = gsk_text_node_get_font(cast(const(GskRenderNode)*)this._cPtr);
@@ -78,7 +75,7 @@ class TextNode : gsk.render_node.RenderNode
       Retrieves the number of glyphs in the text node.
       Returns: the number of glyphs
   */
-  uint getNumGlyphs()
+  uint getNumGlyphs() nothrow
   {
     uint _retval;
     _retval = gsk_text_node_get_num_glyphs(cast(const(GskRenderNode)*)this._cPtr);
@@ -89,7 +86,7 @@ class TextNode : gsk.render_node.RenderNode
       Retrieves the offset applied to the text.
       Returns: a point with the horizontal and vertical offsets
   */
-  graphene.point.Point getOffset()
+  graphene.point.Point getOffset() nothrow
   {
     const(graphene_point_t)* _cretval;
     _cretval = gsk_text_node_get_offset(cast(const(GskRenderNode)*)this._cPtr);
@@ -103,7 +100,7 @@ class TextNode : gsk.render_node.RenderNode
       Checks whether the text node has color glyphs.
       Returns: true if the text node has color glyphs
   */
-  bool hasColorGlyphs()
+  bool hasColorGlyphs() nothrow
   {
     bool _retval;
     _retval = cast(bool)gsk_text_node_has_color_glyphs(cast(const(GskRenderNode)*)this._cPtr);

@@ -17,32 +17,32 @@ class FormatOptions : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_format_options_get_type != &gidSymbolNotFound ? g_mime_format_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FormatOptions self()
+  override FormatOptions self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class FormatOptions : gobject.boxed.Boxed
       Creates a new set of #GMimeFormatOptions.
       Returns: a newly allocated set of #GMimeFormatOptions with the default values.
   */
-  this()
+  this() nothrow
   {
     GMimeFormatOptions* _cretval;
     _cretval = g_mime_format_options_new();
@@ -64,7 +64,7 @@ class FormatOptions : gobject.boxed.Boxed
       Params:
         header = a header name
   */
-  void addHiddenHeader(string header)
+  void addHiddenHeader(string header) nothrow
   {
     const(char)* _header = header.toCString(No.Alloc);
     g_mime_format_options_add_hidden_header(cast(GMimeFormatOptions*)this._cPtr, _header);
@@ -73,7 +73,7 @@ class FormatOptions : gobject.boxed.Boxed
   /**
       Clears the list of headers that should be hidden.
   */
-  void clearHiddenHeaders()
+  void clearHiddenHeaders() nothrow
   {
     g_mime_format_options_clear_hidden_headers(cast(GMimeFormatOptions*)this._cPtr);
   }
@@ -82,7 +82,7 @@ class FormatOptions : gobject.boxed.Boxed
       Clones a #GMimeFormatOptions.
       Returns: a newly allocated #GMimeFormatOptions.
   */
-  gmime.format_options.FormatOptions clone()
+  gmime.format_options.FormatOptions clone() nothrow
   {
     GMimeFormatOptions* _cretval;
     _cretval = g_mime_format_options_clone(cast(GMimeFormatOptions*)this._cPtr);
@@ -98,7 +98,7 @@ class FormatOptions : gobject.boxed.Boxed
         ensureNewline = true if the output must *always* end with a new line
       Returns: a #GMimeFilter to convert to the specified new-line format.
   */
-  gmime.filter.Filter createNewlineFilter(bool ensureNewline)
+  gmime.filter.Filter createNewlineFilter(bool ensureNewline) nothrow
   {
     GMimeFilter* _cretval;
     _cretval = g_mime_format_options_create_newline_filter(cast(GMimeFormatOptions*)this._cPtr, ensureNewline);
@@ -110,7 +110,7 @@ class FormatOptions : gobject.boxed.Boxed
       Gets a string representing the currently set new-line format.
       Returns: a new-line character sequence.
   */
-  string getNewline()
+  string getNewline() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_format_options_get_newline(cast(GMimeFormatOptions*)this._cPtr);
@@ -122,7 +122,7 @@ class FormatOptions : gobject.boxed.Boxed
       Gets the new-line format to use when writing out messages and headers.
       Returns: the new-line format that is currently set.
   */
-  gmime.types.NewLineFormat getNewlineFormat()
+  gmime.types.NewLineFormat getNewlineFormat() nothrow
   {
     GMimeNewLineFormat _cretval;
     _cretval = g_mime_format_options_get_newline_format(cast(GMimeFormatOptions*)this._cPtr);
@@ -135,7 +135,7 @@ class FormatOptions : gobject.boxed.Boxed
       already have an encoding method specified.
       Returns: the encoding method that is currently set.
   */
-  gmime.types.ParamEncodingMethod getParamEncodingMethod()
+  gmime.types.ParamEncodingMethod getParamEncodingMethod() nothrow
   {
     GMimeParamEncodingMethod _cretval;
     _cretval = g_mime_format_options_get_param_encoding_method(cast(GMimeFormatOptions*)this._cPtr);
@@ -150,7 +150,7 @@ class FormatOptions : gobject.boxed.Boxed
         header = the name of a header
       Returns: true if the header should be hidden or false otherwise.
   */
-  bool isHiddenHeader(string header)
+  bool isHiddenHeader(string header) nothrow
   {
     bool _retval;
     const(char)* _header = header.toCString(No.Alloc);
@@ -164,7 +164,7 @@ class FormatOptions : gobject.boxed.Boxed
       Params:
         header = a header name
   */
-  void removeHiddenHeader(string header)
+  void removeHiddenHeader(string header) nothrow
   {
     const(char)* _header = header.toCString(No.Alloc);
     g_mime_format_options_remove_hidden_header(cast(GMimeFormatOptions*)this._cPtr, _header);
@@ -176,7 +176,7 @@ class FormatOptions : gobject.boxed.Boxed
       Params:
         newline = a #GMimeNewLineFormat
   */
-  void setNewlineFormat(gmime.types.NewLineFormat newline)
+  void setNewlineFormat(gmime.types.NewLineFormat newline) nothrow
   {
     g_mime_format_options_set_newline_format(cast(GMimeFormatOptions*)this._cPtr, newline);
   }
@@ -190,7 +190,7 @@ class FormatOptions : gobject.boxed.Boxed
       Params:
         method = a #GMimeParamEncodingMethod
   */
-  void setParamEncodingMethod(gmime.types.ParamEncodingMethod method)
+  void setParamEncodingMethod(gmime.types.ParamEncodingMethod method) nothrow
   {
     g_mime_format_options_set_param_encoding_method(cast(GMimeFormatOptions*)this._cPtr, method);
   }
@@ -199,7 +199,7 @@ class FormatOptions : gobject.boxed.Boxed
       Gets the default format options.
       Returns: the default format options.
   */
-  static gmime.format_options.FormatOptions getDefault()
+  static gmime.format_options.FormatOptions getDefault() nothrow
   {
     GMimeFormatOptions* _cretval;
     _cretval = g_mime_format_options_get_default();

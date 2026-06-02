@@ -82,26 +82,26 @@ class Element : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_element_get_type != &gidSymbolNotFound ? gst_element_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Element self()
+  override Element self() nothrow
   {
     return this;
   }
@@ -110,7 +110,7 @@ class Element : gst.object.ObjectWrap
       Get builder for [gst.element.Element]
       Returns: New builder object
   */
-  static ElementGidBuilder builder()
+  static ElementGidBuilder builder() nothrow
   {
     return new ElementGidBuilder;
   }
@@ -151,7 +151,7 @@ class Element : gst.object.ObjectWrap
         type = GType of element to register
       Returns: true, if the registering succeeded, false on error
   */
-  static bool register(gst.plugin.Plugin plugin, string name, uint rank, gobject.types.GType type)
+  static bool register(gst.plugin.Plugin plugin, string name, uint rank, gobject.types.GType type) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -167,7 +167,7 @@ class Element : gst.object.ObjectWrap
       Returns: a string with the name of the state
            result.
   */
-  static string stateChangeReturnGetName(gst.types.StateChangeReturn stateRet)
+  static string stateChangeReturnGetName(gst.types.StateChangeReturn stateRet) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_element_state_change_return_get_name(stateRet);
@@ -182,7 +182,7 @@ class Element : gst.object.ObjectWrap
         state = a #GstState to get the name of.
       Returns: a string with the name of the state.
   */
-  static string stateGetName(gst.types.State state)
+  static string stateGetName(gst.types.State state) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_element_state_get_name(state);
@@ -212,7 +212,7 @@ class Element : gst.object.ObjectWrap
       Params:
         type = a #GType of element
   */
-  static void typeSetSkipDocumentation(gobject.types.GType type)
+  static void typeSetSkipDocumentation(gobject.types.GType type) nothrow
   {
     gst_element_type_set_skip_documentation(type);
   }
@@ -226,7 +226,7 @@ class Element : gst.object.ObjectWrap
       
       MT safe.
   */
-  void abortState()
+  void abortState() nothrow
   {
     gst_element_abort_state(cast(GstElement*)this._cPtr);
   }
@@ -250,7 +250,7 @@ class Element : gst.object.ObjectWrap
         
         MT safe.
   */
-  bool addPad(gst.pad.Pad pad)
+  bool addPad(gst.pad.Pad pad) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_add_pad(cast(GstElement*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
@@ -258,7 +258,7 @@ class Element : gst.object.ObjectWrap
   }
 
   /** */
-  gulong addPropertyDeepNotifyWatch(string propertyName, bool includeValue)
+  gulong addPropertyDeepNotifyWatch(string propertyName, bool includeValue) nothrow
   {
     gulong _retval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
@@ -267,7 +267,7 @@ class Element : gst.object.ObjectWrap
   }
 
   /** */
-  gulong addPropertyNotifyWatch(string propertyName, bool includeValue)
+  gulong addPropertyNotifyWatch(string propertyName, bool includeValue) nothrow
   {
     gulong _retval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
@@ -290,13 +290,20 @@ class Element : gst.object.ObjectWrap
       Params:
         func = Function to call asynchronously from another thread
   */
-  void callAsync(gst.types.ElementCallAsyncFunc func)
+  void callAsync(gst.types.ElementCallAsyncFunc func) nothrow
   {
-    extern(C) void _funcCallback(GstElement* element, void* userData)
+    extern(C) void _funcCallback(GstElement* element, void* userData) nothrow
     {
       auto _dlg = cast(gst.types.ElementCallAsyncFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.ElementCallAsyncFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -314,7 +321,7 @@ class Element : gst.object.ObjectWrap
         transition = the requested transition
       Returns: the #GstStateChangeReturn of the state transition.
   */
-  gst.types.StateChangeReturn changeState(gst.types.StateChange transition)
+  gst.types.StateChangeReturn changeState(gst.types.StateChange transition) nothrow
   {
     GstStateChangeReturn _cretval;
     _cretval = gst_element_change_state(cast(GstElement*)this._cPtr, transition);
@@ -343,7 +350,7 @@ class Element : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.types.StateChangeReturn continueState(gst.types.StateChangeReturn ret)
+  gst.types.StateChangeReturn continueState(gst.types.StateChangeReturn ret) nothrow
   {
     GstStateChangeReturn _cretval;
     _cretval = gst_element_continue_state(cast(GstElement*)this._cPtr, ret);
@@ -356,7 +363,7 @@ class Element : gst.object.ObjectWrap
       This function is only useful during object initialization of
       subclasses of #GstElement.
   */
-  void createAllPads()
+  void createAllPads() nothrow
   {
     gst_element_create_all_pads(cast(GstElement*)this._cPtr);
   }
@@ -380,7 +387,7 @@ class Element : gst.object.ObjectWrap
         streamId = The stream-id
       Returns: A stream-id for element.
   */
-  string decorateStreamId(string streamId)
+  string decorateStreamId(string streamId) nothrow
   {
     char* _cretval;
     const(char)* _streamId = streamId.toCString(No.Alloc);
@@ -402,14 +409,21 @@ class Element : gst.object.ObjectWrap
       Returns: false if element had no pads or if one of the calls to func
           returned false.
   */
-  bool foreachPad(gst.types.ElementForeachPadFunc func)
+  bool foreachPad(gst.types.ElementForeachPadFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(GstElement* element, GstPad* pad, void* userData)
+    extern(C) gboolean _funcCallback(GstElement* element, GstPad* pad, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gst.types.ElementForeachPadFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.ElementForeachPadFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -434,14 +448,21 @@ class Element : gst.object.ObjectWrap
       Returns: false if element had no sink pads or if one of the calls to func
           returned false.
   */
-  bool foreachSinkPad(gst.types.ElementForeachPadFunc func)
+  bool foreachSinkPad(gst.types.ElementForeachPadFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(GstElement* element, GstPad* pad, void* userData)
+    extern(C) gboolean _funcCallback(GstElement* element, GstPad* pad, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gst.types.ElementForeachPadFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.ElementForeachPadFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -466,14 +487,21 @@ class Element : gst.object.ObjectWrap
       Returns: false if element had no source pads or if one of the calls
           to func returned false.
   */
-  bool foreachSrcPad(gst.types.ElementForeachPadFunc func)
+  bool foreachSrcPad(gst.types.ElementForeachPadFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(GstElement* element, GstPad* pad, void* userData)
+    extern(C) gboolean _funcCallback(GstElement* element, GstPad* pad, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gst.types.ElementForeachPadFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.ElementForeachPadFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -494,7 +522,7 @@ class Element : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.types.ClockTime getBaseTime()
+  gst.types.ClockTime getBaseTime() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_element_get_base_time(cast(GstElement*)this._cPtr);
@@ -509,7 +537,7 @@ class Element : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.bus.Bus getBus()
+  gst.bus.Bus getBus() nothrow
   {
     GstBus* _cretval;
     _cretval = gst_element_get_bus(cast(GstElement*)this._cPtr);
@@ -527,7 +555,7 @@ class Element : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.clock.Clock getClock()
+  gst.clock.Clock getClock() nothrow
   {
     GstClock* _cretval;
     _cretval = gst_element_get_clock(cast(GstElement*)this._cPtr);
@@ -551,7 +579,7 @@ class Element : gst.object.ObjectWrap
           can be made, or null if one cannot be found. [gst.object.ObjectWrap.unref]
           after usage.
   */
-  gst.pad.Pad getCompatiblePad(gst.pad.Pad pad, gst.caps.Caps caps = null)
+  gst.pad.Pad getCompatiblePad(gst.pad.Pad pad, gst.caps.Caps caps = null) nothrow
   {
     GstPad* _cretval;
     _cretval = gst_element_get_compatible_pad(cast(GstElement*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
@@ -569,7 +597,7 @@ class Element : gst.object.ObjectWrap
       Returns: a compatible #GstPadTemplate,
           or null if none was found. No unreferencing is necessary.
   */
-  gst.pad_template.PadTemplate getCompatiblePadTemplate(gst.pad_template.PadTemplate compattempl)
+  gst.pad_template.PadTemplate getCompatiblePadTemplate(gst.pad_template.PadTemplate compattempl) nothrow
   {
     GstPadTemplate* _cretval;
     _cretval = gst_element_get_compatible_pad_template(cast(GstElement*)this._cPtr, compattempl ? cast(GstPadTemplate*)compattempl._cPtr(No.Dup) : null);
@@ -586,7 +614,7 @@ class Element : gst.object.ObjectWrap
         contextType = a name of a context to retrieve
       Returns: A #GstContext or NULL
   */
-  gst.context.Context getContext(string contextType)
+  gst.context.Context getContext(string contextType) nothrow
   {
     GstContext* _cretval;
     const(char)* _contextType = contextType.toCString(No.Alloc);
@@ -602,7 +630,7 @@ class Element : gst.object.ObjectWrap
         contextType = a name of a context to retrieve
       Returns: A #GstContext or NULL
   */
-  gst.context.Context getContextUnlocked(string contextType)
+  gst.context.Context getContextUnlocked(string contextType) nothrow
   {
     GstContext* _cretval;
     const(char)* _contextType = contextType.toCString(No.Alloc);
@@ -617,7 +645,7 @@ class Element : gst.object.ObjectWrap
       MT safe.
       Returns: List of #GstContext
   */
-  gst.context.Context[] getContexts()
+  gst.context.Context[] getContexts() nothrow
   {
     GList* _cretval;
     _cretval = gst_element_get_contexts(cast(GstElement*)this._cPtr);
@@ -631,7 +659,7 @@ class Element : gst.object.ObjectWrap
       Returns: the clock time of the element, or GST_CLOCK_TIME_NONE if there is
         no clock.
   */
-  gst.types.ClockTime getCurrentClockTime()
+  gst.types.ClockTime getCurrentClockTime() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_element_get_current_clock_time(cast(GstElement*)this._cPtr);
@@ -645,7 +673,7 @@ class Element : gst.object.ObjectWrap
       Returns: the running time of the element, or GST_CLOCK_TIME_NONE if the
         element has no clock or its base time has not been set.
   */
-  gst.types.ClockTime getCurrentRunningTime()
+  gst.types.ClockTime getCurrentRunningTime() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_element_get_current_running_time(cast(GstElement*)this._cPtr);
@@ -657,7 +685,7 @@ class Element : gst.object.ObjectWrap
       Returns: the #GstElementFactory used for creating this
             element or null if element has not been registered (static element). no refcounting is needed.
   */
-  gst.element_factory.ElementFactory getFactory()
+  gst.element_factory.ElementFactory getFactory() nothrow
   {
     GstElementFactory* _cretval;
     _cretval = gst_element_get_factory(cast(GstElement*)this._cPtr);
@@ -672,7 +700,7 @@ class Element : gst.object.ObjectWrap
         key = the key to get
       Returns: the metadata for key.
   */
-  string getMetadata(string key)
+  string getMetadata(string key) nothrow
   {
     const(char)* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -690,7 +718,7 @@ class Element : gst.object.ObjectWrap
             given name, or null if none was found. No unreferencing is
             necessary.
   */
-  gst.pad_template.PadTemplate getPadTemplate(string name)
+  gst.pad_template.PadTemplate getPadTemplate(string name) nothrow
   {
     GstPadTemplate* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -705,7 +733,7 @@ class Element : gst.object.ObjectWrap
       Returns: the #GList of
             pad templates.
   */
-  gst.pad_template.PadTemplate[] getPadTemplateList()
+  gst.pad_template.PadTemplate[] getPadTemplateList() nothrow
   {
     GList* _cretval;
     _cretval = gst_element_get_pad_template_list(cast(GstElement*)this._cPtr);
@@ -726,7 +754,7 @@ class Element : gst.object.ObjectWrap
       Deprecated: Prefer using [gst.element.Element.requestPadSimple] which
         provides the exact same functionality.
   */
-  gst.pad.Pad getRequestPad(string name)
+  gst.pad.Pad getRequestPad(string name) nothrow
   {
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -745,7 +773,7 @@ class Element : gst.object.ObjectWrap
       MT safe.
       Returns: the start time of the element.
   */
-  gst.types.ClockTime getStartTime()
+  gst.types.ClockTime getStartTime() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_element_get_start_time(cast(GstElement*)this._cPtr);
@@ -788,7 +816,7 @@ class Element : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.types.StateChangeReturn getState(out gst.types.State state, out gst.types.State pending, gst.types.ClockTime timeout)
+  gst.types.StateChangeReturn getState(out gst.types.State state, out gst.types.State pending, gst.types.ClockTime timeout) nothrow
   {
     GstStateChangeReturn _cretval;
     _cretval = gst_element_get_state(cast(GstElement*)this._cPtr, &state, &pending, timeout);
@@ -807,7 +835,7 @@ class Element : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.pad.Pad getStaticPad(string name)
+  gst.pad.Pad getStaticPad(string name) nothrow
   {
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -826,7 +854,7 @@ class Element : gst.object.ObjectWrap
       MT safe.
       Returns: true, if the element's state is locked.
   */
-  bool isLockedState()
+  bool isLockedState() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_is_locked_state(cast(GstElement*)this._cPtr);
@@ -844,7 +872,7 @@ class Element : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.iterator.Iterator iteratePads()
+  gst.iterator.Iterator iteratePads() nothrow
   {
     GstIterator* _cretval;
     _cretval = gst_element_iterate_pads(cast(GstElement*)this._cPtr);
@@ -861,7 +889,7 @@ class Element : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.iterator.Iterator iterateSinkPads()
+  gst.iterator.Iterator iterateSinkPads() nothrow
   {
     GstIterator* _cretval;
     _cretval = gst_element_iterate_sink_pads(cast(GstElement*)this._cPtr);
@@ -878,7 +906,7 @@ class Element : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.iterator.Iterator iterateSrcPads()
+  gst.iterator.Iterator iterateSrcPads() nothrow
   {
     GstIterator* _cretval;
     _cretval = gst_element_iterate_src_pads(cast(GstElement*)this._cPtr);
@@ -900,7 +928,7 @@ class Element : gst.object.ObjectWrap
         dest = the #GstElement containing the destination pad.
       Returns: true if the elements could be linked, false otherwise.
   */
-  bool link(gst.element.Element dest)
+  bool link(gst.element.Element dest) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_link(cast(GstElement*)this._cPtr, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null);
@@ -923,7 +951,7 @@ class Element : gst.object.ObjectWrap
               or null for no filter.
       Returns: true if the pads could be linked, false otherwise.
   */
-  bool linkFiltered(gst.element.Element dest, gst.caps.Caps filter = null)
+  bool linkFiltered(gst.element.Element dest, gst.caps.Caps filter = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_link_filtered(cast(GstElement*)this._cPtr, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
@@ -944,7 +972,7 @@ class Element : gst.object.ObjectWrap
           or null for any pad.
       Returns: true if the pads could be linked, false otherwise.
   */
-  bool linkPads(string srcpadname, gst.element.Element dest, string destpadname = null)
+  bool linkPads(string srcpadname, gst.element.Element dest, string destpadname = null) nothrow
   {
     bool _retval;
     const(char)* _srcpadname = srcpadname.toCString(No.Alloc);
@@ -969,7 +997,7 @@ class Element : gst.object.ObjectWrap
               or null for no filter.
       Returns: true if the pads could be linked, false otherwise.
   */
-  bool linkPadsFiltered(string srcpadname, gst.element.Element dest, string destpadname = null, gst.caps.Caps filter = null)
+  bool linkPadsFiltered(string srcpadname, gst.element.Element dest, string destpadname = null, gst.caps.Caps filter = null) nothrow
   {
     bool _retval;
     const(char)* _srcpadname = srcpadname.toCString(No.Alloc);
@@ -999,7 +1027,7 @@ class Element : gst.object.ObjectWrap
         flags = the #GstPadLinkCheck to be performed when linking pads.
       Returns: true if the pads could be linked, false otherwise.
   */
-  bool linkPadsFull(string srcpadname, gst.element.Element dest, string destpadname, gst.types.PadLinkCheck flags)
+  bool linkPadsFull(string srcpadname, gst.element.Element dest, string destpadname, gst.types.PadLinkCheck flags) nothrow
   {
     bool _retval;
     const(char)* _srcpadname = srcpadname.toCString(No.Alloc);
@@ -1026,7 +1054,7 @@ class Element : gst.object.ObjectWrap
       This function is used internally and should normally not be called from
       plugins or applications.
   */
-  void lostState()
+  void lostState() nothrow
   {
     gst_element_lost_state(cast(GstElement*)this._cPtr);
   }
@@ -1053,7 +1081,7 @@ class Element : gst.object.ObjectWrap
         function_ = the source code function where the error was generated
         line = the source code line where the error was generated
   */
-  void messageFull(gst.types.MessageType type, glib.types.Quark domain, int code, string text, string debug_, string file, string function_, int line)
+  void messageFull(gst.types.MessageType type, glib.types.Quark domain, int code, string text, string debug_, string file, string function_, int line) nothrow
   {
     char* _text = text.toCString(Yes.Alloc);
     char* _debug_ = debug_.toCString(Yes.Alloc);
@@ -1083,7 +1111,7 @@ class Element : gst.object.ObjectWrap
         line = the source code line where the error was generated
         structure = optional details structure
   */
-  void messageFullWithDetails(gst.types.MessageType type, glib.types.Quark domain, int code, string text, string debug_, string file, string function_, int line, gst.structure.Structure structure)
+  void messageFullWithDetails(gst.types.MessageType type, glib.types.Quark domain, int code, string text, string debug_, string file, string function_, int line, gst.structure.Structure structure) nothrow
   {
     char* _text = text.toCString(Yes.Alloc);
     char* _debug_ = debug_.toCString(Yes.Alloc);
@@ -1103,7 +1131,7 @@ class Element : gst.object.ObjectWrap
       
       MT safe.
   */
-  void noMorePads()
+  void noMorePads() nothrow
   {
     gst_element_no_more_pads(cast(GstElement*)this._cPtr);
   }
@@ -1120,7 +1148,7 @@ class Element : gst.object.ObjectWrap
         
         MT safe.
   */
-  bool postMessage(gst.message.Message message)
+  bool postMessage(gst.message.Message message) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_post_message(cast(GstElement*)this._cPtr, message ? cast(GstMessage*)message._cPtr(Yes.Dup) : null);
@@ -1136,7 +1164,7 @@ class Element : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.clock.Clock provideClock()
+  gst.clock.Clock provideClock() nothrow
   {
     GstClock* _cretval;
     _cretval = gst_element_provide_clock(cast(GstElement*)this._cPtr);
@@ -1159,7 +1187,7 @@ class Element : gst.object.ObjectWrap
         
         MT safe.
   */
-  bool query(gst.query.Query query)
+  bool query(gst.query.Query query) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_query(cast(GstElement*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
@@ -1176,7 +1204,7 @@ class Element : gst.object.ObjectWrap
         destVal = a pointer to the result.
       Returns: true if the query could be performed.
   */
-  bool queryConvert(gst.types.Format srcFormat, long srcVal, gst.types.Format destFormat, out long destVal)
+  bool queryConvert(gst.types.Format srcFormat, long srcVal, gst.types.Format destFormat, out long destVal) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_query_convert(cast(GstElement*)this._cPtr, srcFormat, srcVal, destFormat, cast(long*)&destVal);
@@ -1198,7 +1226,7 @@ class Element : gst.object.ObjectWrap
         duration = A location in which to store the total duration, or null.
       Returns: true if the query could be performed.
   */
-  bool queryDuration(gst.types.Format format, out long duration)
+  bool queryDuration(gst.types.Format format, out long duration) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_query_duration(cast(GstElement*)this._cPtr, format, cast(long*)&duration);
@@ -1222,7 +1250,7 @@ class Element : gst.object.ObjectWrap
               position, or null.
       Returns: true if the query could be performed.
   */
-  bool queryPosition(gst.types.Format format, out long cur)
+  bool queryPosition(gst.types.Format format, out long cur) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_query_position(cast(GstElement*)this._cPtr, format, cast(long*)&cur);
@@ -1242,7 +1270,7 @@ class Element : gst.object.ObjectWrap
       Params:
         pad = the #GstPad to release.
   */
-  void releaseRequestPad(gst.pad.Pad pad)
+  void releaseRequestPad(gst.pad.Pad pad) nothrow
   {
     gst_element_release_request_pad(cast(GstElement*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
   }
@@ -1272,7 +1300,7 @@ class Element : gst.object.ObjectWrap
         
         MT safe.
   */
-  bool removePad(gst.pad.Pad pad)
+  bool removePad(gst.pad.Pad pad) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_remove_pad(cast(GstElement*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
@@ -1280,7 +1308,7 @@ class Element : gst.object.ObjectWrap
   }
 
   /** */
-  void removePropertyNotifyWatch(gulong watchId)
+  void removePropertyNotifyWatch(gulong watchId) nothrow
   {
     gst_element_remove_property_notify_watch(cast(GstElement*)this._cPtr, watchId);
   }
@@ -1301,7 +1329,7 @@ class Element : gst.object.ObjectWrap
       Returns: requested #GstPad if found,
             otherwise null.  Release after usage.
   */
-  gst.pad.Pad requestPad(gst.pad_template.PadTemplate templ, string name = null, gst.caps.Caps caps = null)
+  gst.pad.Pad requestPad(gst.pad_template.PadTemplate templ, string name = null, gst.caps.Caps caps = null) nothrow
   {
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -1329,7 +1357,7 @@ class Element : gst.object.ObjectWrap
       Returns: requested #GstPad if found,
             otherwise null.  Release after usage.
   */
-  gst.pad.Pad requestPadSimple(string name)
+  gst.pad.Pad requestPadSimple(string name) nothrow
   {
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -1356,7 +1384,7 @@ class Element : gst.object.ObjectWrap
       Returns: true if the event was handled. Flushing seeks will trigger a
         preroll, which will emit [gst.types.MessageType.AsyncDone].
   */
-  bool seek(double rate, gst.types.Format format, gst.types.SeekFlags flags, gst.types.SeekType startType, long start, gst.types.SeekType stopType, long stop)
+  bool seek(double rate, gst.types.Format format, gst.types.SeekFlags flags, gst.types.SeekType startType, long start, gst.types.SeekType stopType, long stop) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_seek(cast(GstElement*)this._cPtr, rate, format, flags, startType, start, stopType, stop);
@@ -1390,7 +1418,7 @@ class Element : gst.object.ObjectWrap
       Returns: true if the seek operation succeeded. Flushing seeks will trigger a
         preroll, which will emit [gst.types.MessageType.AsyncDone].
   */
-  bool seekSimple(gst.types.Format format, gst.types.SeekFlags seekFlags, long seekPos)
+  bool seekSimple(gst.types.Format format, gst.types.SeekFlags seekFlags, long seekPos) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_seek_simple(cast(GstElement*)this._cPtr, format, seekFlags, seekPos);
@@ -1412,7 +1440,7 @@ class Element : gst.object.ObjectWrap
       Returns: true if the event was handled. Events that trigger a preroll (such
         as flushing seeks and steps) will emit [gst.types.MessageType.AsyncDone].
   */
-  bool sendEvent(gst.event.Event event)
+  bool sendEvent(gst.event.Event event) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_send_event(cast(GstElement*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
@@ -1427,7 +1455,7 @@ class Element : gst.object.ObjectWrap
       Params:
         time = the base time to set.
   */
-  void setBaseTime(gst.types.ClockTime time)
+  void setBaseTime(gst.types.ClockTime time) nothrow
   {
     gst_element_set_base_time(cast(GstElement*)this._cPtr, time);
   }
@@ -1441,7 +1469,7 @@ class Element : gst.object.ObjectWrap
       Params:
         bus = the #GstBus to set.
   */
-  void setBus(gst.bus.Bus bus = null)
+  void setBus(gst.bus.Bus bus = null) nothrow
   {
     gst_element_set_bus(cast(GstElement*)this._cPtr, bus ? cast(GstBus*)bus._cPtr(No.Dup) : null);
   }
@@ -1459,7 +1487,7 @@ class Element : gst.object.ObjectWrap
         
         MT safe.
   */
-  bool setClock(gst.clock.Clock clock = null)
+  bool setClock(gst.clock.Clock clock = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_set_clock(cast(GstElement*)this._cPtr, clock ? cast(GstClock*)clock._cPtr(No.Dup) : null);
@@ -1474,7 +1502,7 @@ class Element : gst.object.ObjectWrap
       Params:
         context = the #GstContext to set.
   */
-  void setContext(gst.context.Context context)
+  void setContext(gst.context.Context context) nothrow
   {
     gst_element_set_context(cast(GstElement*)this._cPtr, context ? cast(GstContext*)context._cPtr(No.Dup) : null);
   }
@@ -1494,7 +1522,7 @@ class Element : gst.object.ObjectWrap
       Returns: true if the state was changed, false if bad parameters were given
         or the elements state-locking needed no change.
   */
-  bool setLockedState(bool lockedState)
+  bool setLockedState(bool lockedState) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_set_locked_state(cast(GstElement*)this._cPtr, lockedState);
@@ -1518,7 +1546,7 @@ class Element : gst.object.ObjectWrap
       Params:
         time = the base time to set.
   */
-  void setStartTime(gst.types.ClockTime time)
+  void setStartTime(gst.types.ClockTime time) nothrow
   {
     gst_element_set_start_time(cast(GstElement*)this._cPtr, time);
   }
@@ -1544,7 +1572,7 @@ class Element : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.types.StateChangeReturn setState(gst.types.State state)
+  gst.types.StateChangeReturn setState(gst.types.State state) nothrow
   {
     GstStateChangeReturn _cretval;
     _cretval = gst_element_set_state(cast(GstElement*)this._cPtr, state);
@@ -1559,7 +1587,7 @@ class Element : gst.object.ObjectWrap
         
         MT safe.
   */
-  bool syncStateWithParent()
+  bool syncStateWithParent() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_sync_state_with_parent(cast(GstElement*)this._cPtr);
@@ -1576,7 +1604,7 @@ class Element : gst.object.ObjectWrap
       Params:
         dest = the sink #GstElement to unlink.
   */
-  void unlink(gst.element.Element dest)
+  void unlink(gst.element.Element dest) nothrow
   {
     gst_element_unlink(cast(GstElement*)this._cPtr, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null);
   }
@@ -1591,7 +1619,7 @@ class Element : gst.object.ObjectWrap
         dest = a #GstElement containing the destination pad.
         destpadname = the name of the #GstPad in destination element.
   */
-  void unlinkPads(string srcpadname, gst.element.Element dest, string destpadname)
+  void unlinkPads(string srcpadname, gst.element.Element dest, string destpadname) nothrow
   {
     const(char)* _srcpadname = srcpadname.toCString(No.Alloc);
     const(char)* _destpadname = destpadname.toCString(No.Alloc);
@@ -1615,13 +1643,13 @@ class Element : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNoMorePads(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNoMorePads(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.element.Element)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1630,7 +1658,14 @@ class Element : gst.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.element.Element.noMorePads");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1658,14 +1693,14 @@ class Element : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPadAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPadAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.pad.Pad)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gst.element.Element)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1677,7 +1712,14 @@ class Element : gst.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.element.Element.padAdded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1701,14 +1743,14 @@ class Element : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPadRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPadRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.pad.Pad)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gst.element.Element)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1720,7 +1762,14 @@ class Element : gst.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.element.Element.padRemoved");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1740,7 +1789,7 @@ final class ElementGidBuilder : ElementGidBuilderImpl!ElementGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Element build()
+  Element build() nothrow
   {
     return new Element(cast(void*)createGObject(Element._getGType), No.Take);
   }

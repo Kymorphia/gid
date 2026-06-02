@@ -57,26 +57,26 @@ class Statusbar : gtk.box.Box
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_statusbar_get_type != &gidSymbolNotFound ? gtk_statusbar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Statusbar self()
+  override Statusbar self() nothrow
   {
     return this;
   }
@@ -85,7 +85,7 @@ class Statusbar : gtk.box.Box
       Get builder for [gtk.statusbar.Statusbar]
       Returns: New builder object
   */
-  static StatusbarGidBuilder builder()
+  static StatusbarGidBuilder builder() nothrow
   {
     return new StatusbarGidBuilder;
   }
@@ -94,7 +94,7 @@ class Statusbar : gtk.box.Box
       Creates a new #GtkStatusbar ready for messages.
       Returns: the new #GtkStatusbar
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_statusbar_new();
@@ -111,7 +111,7 @@ class Statusbar : gtk.box.Box
                                 the new message is being used in
       Returns: an integer id
   */
-  uint getContextId(string contextDescription)
+  uint getContextId(string contextDescription) nothrow
   {
     uint _retval;
     const(char)* _contextDescription = contextDescription.toCString(No.Alloc);
@@ -123,7 +123,7 @@ class Statusbar : gtk.box.Box
       Retrieves the box containing the label widget.
       Returns: a #GtkBox
   */
-  gtk.box.Box getMessageArea()
+  gtk.box.Box getMessageArea() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_statusbar_get_message_area(cast(GtkStatusbar*)this._cPtr);
@@ -142,7 +142,7 @@ class Statusbar : gtk.box.Box
       Params:
         contextId = a context identifier
   */
-  void pop(uint contextId)
+  void pop(uint contextId) nothrow
   {
     gtk_statusbar_pop(cast(GtkStatusbar*)this._cPtr, contextId);
   }
@@ -157,7 +157,7 @@ class Statusbar : gtk.box.Box
       Returns: a message id that can be used with
                  [gtk.statusbar.Statusbar.remove].
   */
-  uint push(uint contextId, string text)
+  uint push(uint contextId, string text) nothrow
   {
     uint _retval;
     const(char)* _text = text.toCString(No.Alloc);
@@ -175,7 +175,7 @@ class Statusbar : gtk.box.Box
         contextId = a context identifier
         messageId = a message identifier, as returned by [gtk.statusbar.Statusbar.push]
   */
-  void remove(uint contextId, uint messageId)
+  void remove(uint contextId, uint messageId) nothrow
   {
     gtk_statusbar_remove(cast(GtkStatusbar*)this._cPtr, contextId, messageId);
   }
@@ -187,7 +187,7 @@ class Statusbar : gtk.box.Box
       Params:
         contextId = a context identifier
   */
-  void removeAll(uint contextId)
+  void removeAll(uint contextId) nothrow
   {
     gtk_statusbar_remove_all(cast(GtkStatusbar*)this._cPtr, contextId);
   }
@@ -211,7 +211,7 @@ class Statusbar : gtk.box.Box
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTextPopped(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTextPopped(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -219,7 +219,7 @@ class Statusbar : gtk.box.Box
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.statusbar.Statusbar)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -234,7 +234,14 @@ class Statusbar : gtk.box.Box
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.statusbar.Statusbar.textPopped");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -260,7 +267,7 @@ class Statusbar : gtk.box.Box
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTextPushed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTextPushed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -268,7 +275,7 @@ class Statusbar : gtk.box.Box
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.statusbar.Statusbar)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -283,7 +290,14 @@ class Statusbar : gtk.box.Box
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.statusbar.Statusbar.textPushed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -304,7 +318,7 @@ final class StatusbarGidBuilder : StatusbarGidBuilderImpl!StatusbarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Statusbar build()
+  Statusbar build() nothrow
   {
     return new Statusbar(cast(void*)createGObject(Statusbar._getGType), No.Take);
   }

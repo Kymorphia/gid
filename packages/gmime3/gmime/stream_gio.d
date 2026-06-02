@@ -18,26 +18,26 @@ class StreamGIO : gmime.stream.Stream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_stream_gio_get_type != &gidSymbolNotFound ? g_mime_stream_gio_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StreamGIO self()
+  override StreamGIO self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class StreamGIO : gmime.stream.Stream
       Get builder for [gmime.stream_gio.StreamGIO]
       Returns: New builder object
   */
-  static StreamGIOGidBuilder builder()
+  static StreamGIOGidBuilder builder() nothrow
   {
     return new StreamGIOGidBuilder;
   }
@@ -58,7 +58,7 @@ class StreamGIO : gmime.stream.Stream
         file = a #GFile
       Returns: a stream using file.
   */
-  this(gio.file.File file)
+  this(gio.file.File file) nothrow
   {
     GMimeStream* _cretval;
     _cretval = g_mime_stream_gio_new(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
@@ -76,7 +76,7 @@ class StreamGIO : gmime.stream.Stream
       Returns: a stream using file with bounds start
         and end.
   */
-  static gmime.stream_gio.StreamGIO newWithBounds(gio.file.File file, long start, long end)
+  static gmime.stream_gio.StreamGIO newWithBounds(gio.file.File file, long start, long end) nothrow
   {
     GMimeStream* _cretval;
     _cretval = g_mime_stream_gio_new_with_bounds(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, start, end);
@@ -89,7 +89,7 @@ class StreamGIO : gmime.stream.Stream
       Returns: true if stream owns the backend #GFile or false
         otherwise.
   */
-  bool getOwner()
+  bool getOwner() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_stream_gio_get_owner(cast(GMimeStreamGIO*)this._cPtr);
@@ -105,7 +105,7 @@ class StreamGIO : gmime.stream.Stream
       Params:
         owner = true if this stream should own the #GFile or false otherwise
   */
-  void setOwner(bool owner)
+  void setOwner(bool owner) nothrow
   {
     g_mime_stream_gio_set_owner(cast(GMimeStreamGIO*)this._cPtr, owner);
   }
@@ -123,7 +123,7 @@ final class StreamGIOGidBuilder : StreamGIOGidBuilderImpl!StreamGIOGidBuilder
       Create object from builder.
       Returns: New object
   */
-  StreamGIO build()
+  StreamGIO build() nothrow
   {
     return new StreamGIO(cast(void*)createGObject(StreamGIO._getGType), Yes.Take);
   }

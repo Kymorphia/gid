@@ -24,7 +24,7 @@ interface RTSPExtension
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_rtsp_extension_get_type != &gidSymbolNotFound ? gst_rtsp_extension_get_type() : cast(GType)0;
@@ -80,7 +80,7 @@ interface RTSPExtension
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSend(T)(T callback, Flag!"After" after = No.After);
+  gulong connectSend(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gstrtsp.rtspextension.RTSPExtension]

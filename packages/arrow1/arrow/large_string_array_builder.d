@@ -15,26 +15,26 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_large_string_array_builder_get_type != &gidSymbolNotFound ? garrow_large_string_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LargeStringArrayBuilder self()
+  override LargeStringArrayBuilder self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
       Get builder for [arrow.large_string_array_builder.LargeStringArrayBuilder]
       Returns: New builder object
   */
-  static LargeStringArrayBuilderGidBuilder builder()
+  static LargeStringArrayBuilderGidBuilder builder() nothrow
   {
     return new LargeStringArrayBuilderGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowLargeStringArrayBuilder* _cretval;
     _cretval = garrow_large_string_array_builder_new();
@@ -130,7 +130,7 @@ final class LargeStringArrayBuilderGidBuilder : LargeStringArrayBuilderGidBuilde
       Create object from builder.
       Returns: New object
   */
-  LargeStringArrayBuilder build()
+  LargeStringArrayBuilder build() nothrow
   {
     return new LargeStringArrayBuilder(cast(void*)createGObject(LargeStringArrayBuilder._getGType), Yes.Take);
   }

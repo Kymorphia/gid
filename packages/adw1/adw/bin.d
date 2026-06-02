@@ -34,26 +34,26 @@ class Bin : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_bin_get_type != &gidSymbolNotFound ? adw_bin_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Bin self()
+  override Bin self() nothrow
   {
     return this;
   }
@@ -62,7 +62,7 @@ class Bin : gtk.widget.Widget
       Get builder for [adw.bin.Bin]
       Returns: New builder object
   */
-  static BinGidBuilder builder()
+  static BinGidBuilder builder() nothrow
   {
     return new BinGidBuilder;
   }
@@ -71,7 +71,7 @@ class Bin : gtk.widget.Widget
       Get `child` property.
       Returns: The child widget of the [adw.bin.Bin].
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -81,7 +81,7 @@ class Bin : gtk.widget.Widget
       Params:
         propval = The child widget of the [adw.bin.Bin].
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -90,7 +90,7 @@ class Bin : gtk.widget.Widget
       Creates a new [adw.bin.Bin].
       Returns: the new created [adw.bin.Bin]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_bin_new();
@@ -101,7 +101,7 @@ class Bin : gtk.widget.Widget
       Gets the child widget of self.
       Returns: the child widget of self
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_bin_get_child(cast(AdwBin*)this._cPtr);
@@ -115,7 +115,7 @@ class Bin : gtk.widget.Widget
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     adw_bin_set_child(cast(AdwBin*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -132,7 +132,7 @@ class BinGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The child widget of the [adw.bin.Bin].
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -145,7 +145,7 @@ final class BinGidBuilder : BinGidBuilderImpl!BinGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Bin build()
+  Bin build() nothrow
   {
     return new Bin(cast(void*)createGObject(Bin._getGType), No.Take);
   }

@@ -66,26 +66,26 @@ class Session : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_session_get_type != &gidSymbolNotFound ? soup_session_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Session self()
+  override Session self() nothrow
   {
     return this;
   }
@@ -94,7 +94,7 @@ class Session : gobject.object.ObjectWrap
       Get builder for [soup.session.Session]
       Returns: New builder object
   */
-  static SessionGidBuilder builder()
+  static SessionGidBuilder builder() nothrow
   {
     return new SessionGidBuilder;
   }
@@ -106,7 +106,7 @@ class Session : gobject.object.ObjectWrap
         
         Setting this will disable [soup.session.Session.acceptLanguageAuto].
   */
-  @property string acceptLanguage()
+  @property string acceptLanguage() nothrow
   {
     return getAcceptLanguage();
   }
@@ -119,7 +119,7 @@ class Session : gobject.object.ObjectWrap
           
           Setting this will disable [soup.session.Session.acceptLanguageAuto].
   */
-  @property void acceptLanguage(string propval)
+  @property void acceptLanguage(string propval) nothrow
   {
     setAcceptLanguage(propval);
   }
@@ -133,7 +133,7 @@ class Session : gobject.object.ObjectWrap
         Setting this will override any previous value of
         [soup.session.Session.acceptLanguage].
   */
-  @property bool acceptLanguageAuto()
+  @property bool acceptLanguageAuto() nothrow
   {
     return getAcceptLanguageAuto();
   }
@@ -148,7 +148,7 @@ class Session : gobject.object.ObjectWrap
           Setting this will override any previous value of
           [soup.session.Session.acceptLanguage].
   */
-  @property void acceptLanguageAuto(bool propval)
+  @property void acceptLanguageAuto(bool propval) nothrow
   {
     setAcceptLanguageAuto(propval);
   }
@@ -164,7 +164,7 @@ class Session : gobject.object.ObjectWrap
         if you want to ensure that all future connections will have
         this timeout value.
   */
-  @property uint idleTimeout()
+  @property uint idleTimeout() nothrow
   {
     return getIdleTimeout();
   }
@@ -181,7 +181,7 @@ class Session : gobject.object.ObjectWrap
           if you want to ensure that all future connections will have
           this timeout value.
   */
-  @property void idleTimeout(uint propval)
+  @property void idleTimeout(uint propval) nothrow
   {
     setIdleTimeout(propval);
   }
@@ -194,7 +194,7 @@ class Session : gobject.object.ObjectWrap
         Use this property if you want for instance to bind the
         local socket to a specific IP address.
   */
-  @property gio.inet_socket_address.InetSocketAddress localAddress()
+  @property gio.inet_socket_address.InetSocketAddress localAddress() nothrow
   {
     return getLocalAddress();
   }
@@ -203,7 +203,7 @@ class Session : gobject.object.ObjectWrap
       Get `maxConns` property.
       Returns: The maximum number of connections that the session can open at once.
   */
-  @property int maxConns()
+  @property int maxConns() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("max-conns");
   }
@@ -213,7 +213,7 @@ class Session : gobject.object.ObjectWrap
       Returns: The maximum number of connections that the session can open at once
         to a given host.
   */
-  @property int maxConnsPerHost()
+  @property int maxConnsPerHost() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("max-conns-per-host");
   }
@@ -228,7 +228,7 @@ class Session : gobject.object.ObjectWrap
         set it to your own [gio.proxy_resolver.ProxyResolver] if you want to control
         what proxies get used.
   */
-  @property gio.proxy_resolver.ProxyResolver proxyResolver()
+  @property gio.proxy_resolver.ProxyResolver proxyResolver() nothrow
   {
     return getProxyResolver();
   }
@@ -244,7 +244,7 @@ class Session : gobject.object.ObjectWrap
           set it to your own [gio.proxy_resolver.ProxyResolver] if you want to control
           what proxies get used.
   */
-  @property void proxyResolver(gio.proxy_resolver.ProxyResolver propval)
+  @property void proxyResolver(gio.proxy_resolver.ProxyResolver propval) nothrow
   {
     setProxyResolver(propval);
   }
@@ -259,7 +259,7 @@ class Session : gobject.object.ObjectWrap
         this is a local service that uses HTTP over UNIX-domain sockets, in that case
         a [gio.unix_socket_address.UnixSocketAddress] can be passed to this function.
   */
-  @property gio.socket_connectable.SocketConnectable remoteConnectable()
+  @property gio.socket_connectable.SocketConnectable remoteConnectable() nothrow
   {
     return getRemoteConnectable();
   }
@@ -280,7 +280,7 @@ class Session : gobject.object.ObjectWrap
         the length of time that idle persistent connections will be
         kept open).
   */
-  @property uint timeout()
+  @property uint timeout() nothrow
   {
     return getTimeout();
   }
@@ -302,7 +302,7 @@ class Session : gobject.object.ObjectWrap
           the length of time that idle persistent connections will be
           kept open).
   */
-  @property void timeout(uint propval)
+  @property void timeout(uint propval) nothrow
   {
     setTimeout(propval);
   }
@@ -315,7 +315,7 @@ class Session : gobject.object.ObjectWrap
         If no certificate database is set, then the default database will be
         used. See [gio.tls_backend.TlsBackend.getDefaultDatabase].
   */
-  @property gio.tls_database.TlsDatabase tlsDatabase()
+  @property gio.tls_database.TlsDatabase tlsDatabase() nothrow
   {
     return getTlsDatabase();
   }
@@ -329,7 +329,7 @@ class Session : gobject.object.ObjectWrap
           If no certificate database is set, then the default database will be
           used. See [gio.tls_backend.TlsBackend.getDefaultDatabase].
   */
-  @property void tlsDatabase(gio.tls_database.TlsDatabase propval)
+  @property void tlsDatabase(gio.tls_database.TlsDatabase propval) nothrow
   {
     setTlsDatabase(propval);
   }
@@ -341,7 +341,7 @@ class Session : gobject.object.ObjectWrap
         
         This can be used to provide client-side certificates, for example.
   */
-  @property gio.tls_interaction.TlsInteraction tlsInteraction()
+  @property gio.tls_interaction.TlsInteraction tlsInteraction() nothrow
   {
     return getTlsInteraction();
   }
@@ -354,7 +354,7 @@ class Session : gobject.object.ObjectWrap
           
           This can be used to provide client-side certificates, for example.
   */
-  @property void tlsInteraction(gio.tls_interaction.TlsInteraction propval)
+  @property void tlsInteraction(gio.tls_interaction.TlsInteraction propval) nothrow
   {
     setTlsInteraction(propval);
   }
@@ -387,7 +387,7 @@ class Session : gobject.object.ObjectWrap
         (eg, `libsoup/2.3.2`) to the end of the
         header for you.
   */
-  @property string userAgent()
+  @property string userAgent() nothrow
   {
     return getUserAgent();
   }
@@ -421,7 +421,7 @@ class Session : gobject.object.ObjectWrap
           (eg, `libsoup/2.3.2`) to the end of the
           header for you.
   */
-  @property void userAgent(string propval)
+  @property void userAgent(string propval) nothrow
   {
     setUserAgent(propval);
   }
@@ -430,7 +430,7 @@ class Session : gobject.object.ObjectWrap
       Creates a #SoupSession with the default options.
       Returns: the new session.
   */
-  this()
+  this() nothrow
   {
     SoupSession* _cretval;
     _cretval = soup_session_new();
@@ -441,7 +441,7 @@ class Session : gobject.object.ObjectWrap
       Cancels all pending requests in session and closes all idle
       persistent connections.
   */
-  void abort()
+  void abort() nothrow
   {
     soup_session_abort(cast(SoupSession*)this._cPtr);
   }
@@ -456,7 +456,7 @@ class Session : gobject.object.ObjectWrap
       Params:
         feature = an object that implements #SoupSessionFeature
   */
-  void addFeature(soup.session_feature.SessionFeature feature)
+  void addFeature(soup.session_feature.SessionFeature feature) nothrow
   {
     soup_session_add_feature(cast(SoupSession*)this._cPtr, feature ? cast(SoupSessionFeature*)(cast(gobject.object.ObjectWrap)feature)._cPtr(No.Dup) : null);
   }
@@ -478,7 +478,7 @@ class Session : gobject.object.ObjectWrap
       Params:
         featureType = a #GType
   */
-  void addFeatureByType(gobject.types.GType featureType)
+  void addFeatureByType(gobject.types.GType featureType) nothrow
   {
     soup_session_add_feature_by_type(cast(SoupSession*)this._cPtr, featureType);
   }
@@ -488,7 +488,7 @@ class Session : gobject.object.ObjectWrap
       requests.
       Returns: the accept language string
   */
-  string getAcceptLanguage()
+  string getAcceptLanguage() nothrow
   {
     const(char)* _cretval;
     _cretval = soup_session_get_accept_language(cast(SoupSession*)this._cPtr);
@@ -502,7 +502,7 @@ class Session : gobject.object.ObjectWrap
       Returns: true if session sets "Accept-Language" header automatically, or
           false otherwise.
   */
-  bool getAcceptLanguageAuto()
+  bool getAcceptLanguageAuto() nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_session_get_accept_language_auto(cast(SoupSession*)this._cPtr);
@@ -519,7 +519,7 @@ class Session : gobject.object.ObjectWrap
       Returns: a #SoupMessage or
           null if result is not a valid session async operation result.
   */
-  soup.message.Message getAsyncResultMessage(gio.async_result.AsyncResult result)
+  soup.message.Message getAsyncResultMessage(gio.async_result.AsyncResult result) nothrow
   {
     SoupMessage* _cretval;
     _cretval = soup_session_get_async_result_message(cast(SoupSession*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null);
@@ -535,7 +535,7 @@ class Session : gobject.object.ObjectWrap
       Returns: a #SoupSessionFeature, or null. The
           feature is owned by session.
   */
-  soup.session_feature.SessionFeature getFeature(gobject.types.GType featureType)
+  soup.session_feature.SessionFeature getFeature(gobject.types.GType featureType) nothrow
   {
     SoupSessionFeature* _cretval;
     _cretval = soup_session_get_feature(cast(SoupSession*)this._cPtr, featureType);
@@ -553,7 +553,7 @@ class Session : gobject.object.ObjectWrap
       Returns: a #SoupSessionFeature. The feature is
           owned by session.
   */
-  soup.session_feature.SessionFeature getFeatureForMessage(gobject.types.GType featureType, soup.message.Message msg)
+  soup.session_feature.SessionFeature getFeatureForMessage(gobject.types.GType featureType, soup.message.Message msg) nothrow
   {
     SoupSessionFeature* _cretval;
     _cretval = soup_session_get_feature_for_message(cast(SoupSession*)this._cPtr, featureType, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null);
@@ -566,7 +566,7 @@ class Session : gobject.object.ObjectWrap
       session.
       Returns: the timeout in seconds
   */
-  uint getIdleTimeout()
+  uint getIdleTimeout() nothrow
   {
     uint _retval;
     _retval = soup_session_get_idle_timeout(cast(SoupSession*)this._cPtr);
@@ -578,7 +578,7 @@ class Session : gobject.object.ObjectWrap
       connections in session.
       Returns: a #GInetSocketAddress
   */
-  gio.inet_socket_address.InetSocketAddress getLocalAddress()
+  gio.inet_socket_address.InetSocketAddress getLocalAddress() nothrow
   {
     GInetSocketAddress* _cretval;
     _cretval = soup_session_get_local_address(cast(SoupSession*)this._cPtr);
@@ -590,7 +590,7 @@ class Session : gobject.object.ObjectWrap
       Get the maximum number of connections that session can open at once.
       Returns: the maximum number of connections
   */
-  uint getMaxConns()
+  uint getMaxConns() nothrow
   {
     uint _retval;
     _retval = soup_session_get_max_conns(cast(SoupSession*)this._cPtr);
@@ -602,7 +602,7 @@ class Session : gobject.object.ObjectWrap
       given host.
       Returns: the maximum number of connections per host
   */
-  uint getMaxConnsPerHost()
+  uint getMaxConnsPerHost() nothrow
   {
     uint _retval;
     _retval = soup_session_get_max_conns_per_host(cast(SoupSession*)this._cPtr);
@@ -614,7 +614,7 @@ class Session : gobject.object.ObjectWrap
       Returns: a #GProxyResolver or null if proxies
           are disabled in session
   */
-  gio.proxy_resolver.ProxyResolver getProxyResolver()
+  gio.proxy_resolver.ProxyResolver getProxyResolver() nothrow
   {
     GProxyResolver* _cretval;
     _cretval = soup_session_get_proxy_resolver(cast(SoupSession*)this._cPtr);
@@ -626,7 +626,7 @@ class Session : gobject.object.ObjectWrap
       Gets the remote connectable if one set.
       Returns: the #GSocketConnectable
   */
-  gio.socket_connectable.SocketConnectable getRemoteConnectable()
+  gio.socket_connectable.SocketConnectable getRemoteConnectable() nothrow
   {
     GSocketConnectable* _cretval;
     _cretval = soup_session_get_remote_connectable(cast(SoupSession*)this._cPtr);
@@ -639,7 +639,7 @@ class Session : gobject.object.ObjectWrap
       session.
       Returns: the timeout in seconds
   */
-  uint getTimeout()
+  uint getTimeout() nothrow
   {
     uint _retval;
     _retval = soup_session_get_timeout(cast(SoupSession*)this._cPtr);
@@ -650,7 +650,7 @@ class Session : gobject.object.ObjectWrap
       Get the [gio.tls_database.TlsDatabase] currently used by session.
       Returns: a #GTlsDatabase
   */
-  gio.tls_database.TlsDatabase getTlsDatabase()
+  gio.tls_database.TlsDatabase getTlsDatabase() nothrow
   {
     GTlsDatabase* _cretval;
     _cretval = soup_session_get_tls_database(cast(SoupSession*)this._cPtr);
@@ -662,7 +662,7 @@ class Session : gobject.object.ObjectWrap
       Get the [gio.tls_interaction.TlsInteraction] currently used by session.
       Returns: a #GTlsInteraction
   */
-  gio.tls_interaction.TlsInteraction getTlsInteraction()
+  gio.tls_interaction.TlsInteraction getTlsInteraction() nothrow
   {
     GTlsInteraction* _cretval;
     _cretval = soup_session_get_tls_interaction(cast(SoupSession*)this._cPtr);
@@ -674,7 +674,7 @@ class Session : gobject.object.ObjectWrap
       Get the value used by session for the "User-Agent" header on new requests.
       Returns: the user agent string
   */
-  string getUserAgent()
+  string getUserAgent() nothrow
   {
     const(char)* _cretval;
     _cretval = soup_session_get_user_agent(cast(SoupSession*)this._cPtr);
@@ -691,7 +691,7 @@ class Session : gobject.object.ObjectWrap
         featureType = the #GType of the class of features to check for
       Returns: true or false
   */
-  bool hasFeature(gobject.types.GType featureType)
+  bool hasFeature(gobject.types.GType featureType) nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_session_has_feature(cast(SoupSession*)this._cPtr, featureType);
@@ -717,14 +717,21 @@ class Session : gobject.object.ObjectWrap
         cancellable = a #GCancellable
         callback = the callback to invoke when the operation finishes
   */
-  void preconnectAsync(soup.message.Message msg, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void preconnectAsync(soup.message.Message msg, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -755,7 +762,7 @@ class Session : gobject.object.ObjectWrap
       Params:
         feature = a feature that has previously been added to session
   */
-  void removeFeature(soup.session_feature.SessionFeature feature)
+  void removeFeature(soup.session_feature.SessionFeature feature) nothrow
   {
     soup_session_remove_feature(cast(SoupSession*)this._cPtr, feature ? cast(SoupSessionFeature*)(cast(gobject.object.ObjectWrap)feature)._cPtr(No.Dup) : null);
   }
@@ -767,7 +774,7 @@ class Session : gobject.object.ObjectWrap
       Params:
         featureType = a #GType
   */
-  void removeFeatureByType(gobject.types.GType featureType)
+  void removeFeatureByType(gobject.types.GType featureType) nothrow
   {
     soup_session_remove_feature_by_type(cast(SoupSession*)this._cPtr, featureType);
   }
@@ -853,14 +860,21 @@ class Session : gobject.object.ObjectWrap
         cancellable = a #GCancellable
         callback = the callback to invoke
   */
-  void sendAndReadAsync(soup.message.Message msg, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void sendAndReadAsync(soup.message.Message msg, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -926,14 +940,21 @@ class Session : gobject.object.ObjectWrap
         cancellable = a #GCancellable
         callback = the callback to invoke
   */
-  void sendAndSpliceAsync(soup.message.Message msg, gio.output_stream.OutputStream outStream, gio.types.OutputStreamSpliceFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void sendAndSpliceAsync(soup.message.Message msg, gio.output_stream.OutputStream outStream, gio.types.OutputStreamSpliceFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -974,14 +995,21 @@ class Session : gobject.object.ObjectWrap
         cancellable = a #GCancellable
         callback = the callback to invoke
   */
-  void sendAsync(soup.message.Message msg, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void sendAsync(soup.message.Message msg, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -1021,7 +1049,7 @@ class Session : gobject.object.ObjectWrap
       Params:
         acceptLanguage = the languages string
   */
-  void setAcceptLanguage(string acceptLanguage)
+  void setAcceptLanguage(string acceptLanguage) nothrow
   {
     const(char)* _acceptLanguage = acceptLanguage.toCString(No.Alloc);
     soup_session_set_accept_language(cast(SoupSession*)this._cPtr, _acceptLanguage);
@@ -1037,7 +1065,7 @@ class Session : gobject.object.ObjectWrap
       Params:
         acceptLanguageAuto = the value to set
   */
-  void setAcceptLanguageAuto(bool acceptLanguageAuto)
+  void setAcceptLanguageAuto(bool acceptLanguageAuto) nothrow
   {
     soup_session_set_accept_language_auto(cast(SoupSession*)this._cPtr, acceptLanguageAuto);
   }
@@ -1051,7 +1079,7 @@ class Session : gobject.object.ObjectWrap
       Params:
         timeout = a timeout in seconds
   */
-  void setIdleTimeout(uint timeout)
+  void setIdleTimeout(uint timeout) nothrow
   {
     soup_session_set_idle_timeout(cast(SoupSession*)this._cPtr, timeout);
   }
@@ -1065,7 +1093,7 @@ class Session : gobject.object.ObjectWrap
       Params:
         proxyResolver = a #GProxyResolver or null
   */
-  void setProxyResolver(gio.proxy_resolver.ProxyResolver proxyResolver = null)
+  void setProxyResolver(gio.proxy_resolver.ProxyResolver proxyResolver = null) nothrow
   {
     soup_session_set_proxy_resolver(cast(SoupSession*)this._cPtr, proxyResolver ? cast(GProxyResolver*)(cast(gobject.object.ObjectWrap)proxyResolver)._cPtr(No.Dup) : null);
   }
@@ -1079,7 +1107,7 @@ class Session : gobject.object.ObjectWrap
       Params:
         timeout = a timeout in seconds
   */
-  void setTimeout(uint timeout)
+  void setTimeout(uint timeout) nothrow
   {
     soup_session_set_timeout(cast(SoupSession*)this._cPtr, timeout);
   }
@@ -1093,7 +1121,7 @@ class Session : gobject.object.ObjectWrap
       Params:
         tlsDatabase = a #GTlsDatabase
   */
-  void setTlsDatabase(gio.tls_database.TlsDatabase tlsDatabase = null)
+  void setTlsDatabase(gio.tls_database.TlsDatabase tlsDatabase = null) nothrow
   {
     soup_session_set_tls_database(cast(SoupSession*)this._cPtr, tlsDatabase ? cast(GTlsDatabase*)tlsDatabase._cPtr(No.Dup) : null);
   }
@@ -1109,7 +1137,7 @@ class Session : gobject.object.ObjectWrap
       Params:
         tlsInteraction = a #GTlsInteraction
   */
-  void setTlsInteraction(gio.tls_interaction.TlsInteraction tlsInteraction = null)
+  void setTlsInteraction(gio.tls_interaction.TlsInteraction tlsInteraction = null) nothrow
   {
     soup_session_set_tls_interaction(cast(SoupSession*)this._cPtr, tlsInteraction ? cast(GTlsInteraction*)tlsInteraction._cPtr(No.Dup) : null);
   }
@@ -1126,7 +1154,7 @@ class Session : gobject.object.ObjectWrap
       Params:
         userAgent = the user agent string
   */
-  void setUserAgent(string userAgent)
+  void setUserAgent(string userAgent) nothrow
   {
     const(char)* _userAgent = userAgent.toCString(No.Alloc);
     soup_session_set_user_agent(cast(SoupSession*)this._cPtr, _userAgent);
@@ -1160,14 +1188,21 @@ class Session : gobject.object.ObjectWrap
         cancellable = a #GCancellable
         callback = the callback to invoke
   */
-  void websocketConnectAsync(soup.message.Message msg, string origin, string[] protocols, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void websocketConnectAsync(soup.message.Message msg, string origin, string[] protocols, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _origin = origin.toCString(No.Alloc);
@@ -1249,14 +1284,14 @@ class Session : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRequestQueued(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRequestQueued(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.message.Message)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.session.Session)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1268,7 +1303,14 @@ class Session : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.session.Session.requestQueued");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1296,14 +1338,14 @@ class Session : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRequestUnqueued(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRequestUnqueued(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.message.Message)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.session.Session)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1315,7 +1357,14 @@ class Session : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.session.Session.requestUnqueued");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1336,7 +1385,7 @@ class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           Setting this will disable [soup.session.Session.acceptLanguageAuto].
       Returns: Builder instance for fluent chaining
   */
-  T acceptLanguage(string propval)
+  T acceptLanguage(string propval) nothrow
   {
     return setProperty("accept-language", propval);
   }
@@ -1352,7 +1401,7 @@ class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           [soup.session.Session.acceptLanguage].
       Returns: Builder instance for fluent chaining
   */
-  T acceptLanguageAuto(bool propval)
+  T acceptLanguageAuto(bool propval) nothrow
   {
     return setProperty("accept-language-auto", propval);
   }
@@ -1370,7 +1419,7 @@ class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           this timeout value.
       Returns: Builder instance for fluent chaining
   */
-  T idleTimeout(uint propval)
+  T idleTimeout(uint propval) nothrow
   {
     return setProperty("idle-timeout", propval);
   }
@@ -1385,7 +1434,7 @@ class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           local socket to a specific IP address.
       Returns: Builder instance for fluent chaining
   */
-  T localAddress(gio.inet_socket_address.InetSocketAddress propval)
+  T localAddress(gio.inet_socket_address.InetSocketAddress propval) nothrow
   {
     return setProperty("local-address", propval);
   }
@@ -1396,7 +1445,7 @@ class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The maximum number of connections that the session can open at once.
       Returns: Builder instance for fluent chaining
   */
-  T maxConns(int propval)
+  T maxConns(int propval) nothrow
   {
     return setProperty("max-conns", propval);
   }
@@ -1408,7 +1457,7 @@ class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           to a given host.
       Returns: Builder instance for fluent chaining
   */
-  T maxConnsPerHost(int propval)
+  T maxConnsPerHost(int propval) nothrow
   {
     return setProperty("max-conns-per-host", propval);
   }
@@ -1425,7 +1474,7 @@ class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           what proxies get used.
       Returns: Builder instance for fluent chaining
   */
-  T proxyResolver(gio.proxy_resolver.ProxyResolver propval)
+  T proxyResolver(gio.proxy_resolver.ProxyResolver propval) nothrow
   {
     return setProperty("proxy-resolver", propval);
   }
@@ -1442,7 +1491,7 @@ class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           a [gio.unix_socket_address.UnixSocketAddress] can be passed to this function.
       Returns: Builder instance for fluent chaining
   */
-  T remoteConnectable(gio.socket_connectable.SocketConnectable propval)
+  T remoteConnectable(gio.socket_connectable.SocketConnectable propval) nothrow
   {
     return setProperty("remote-connectable", propval);
   }
@@ -1465,7 +1514,7 @@ class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           kept open).
       Returns: Builder instance for fluent chaining
   */
-  T timeout(uint propval)
+  T timeout(uint propval) nothrow
   {
     return setProperty("timeout", propval);
   }
@@ -1480,7 +1529,7 @@ class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           used. See [gio.tls_backend.TlsBackend.getDefaultDatabase].
       Returns: Builder instance for fluent chaining
   */
-  T tlsDatabase(gio.tls_database.TlsDatabase propval)
+  T tlsDatabase(gio.tls_database.TlsDatabase propval) nothrow
   {
     return setProperty("tls-database", propval);
   }
@@ -1494,7 +1543,7 @@ class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           This can be used to provide client-side certificates, for example.
       Returns: Builder instance for fluent chaining
   */
-  T tlsInteraction(gio.tls_interaction.TlsInteraction propval)
+  T tlsInteraction(gio.tls_interaction.TlsInteraction propval) nothrow
   {
     return setProperty("tls-interaction", propval);
   }
@@ -1529,7 +1578,7 @@ class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           header for you.
       Returns: Builder instance for fluent chaining
   */
-  T userAgent(string propval)
+  T userAgent(string propval) nothrow
   {
     return setProperty("user-agent", propval);
   }
@@ -1542,7 +1591,7 @@ final class SessionGidBuilder : SessionGidBuilderImpl!SessionGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Session build()
+  Session build() nothrow
   {
     return new Session(cast(void*)createGObject(Session._getGType), Yes.Take);
   }

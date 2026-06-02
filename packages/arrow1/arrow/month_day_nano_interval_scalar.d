@@ -16,26 +16,26 @@ class MonthDayNanoIntervalScalar : arrow.scalar.Scalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_month_day_nano_interval_scalar_get_type != &gidSymbolNotFound ? garrow_month_day_nano_interval_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MonthDayNanoIntervalScalar self()
+  override MonthDayNanoIntervalScalar self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class MonthDayNanoIntervalScalar : arrow.scalar.Scalar
       Get builder for [arrow.month_day_nano_interval_scalar.MonthDayNanoIntervalScalar]
       Returns: New builder object
   */
-  static MonthDayNanoIntervalScalarGidBuilder builder()
+  static MonthDayNanoIntervalScalarGidBuilder builder() nothrow
   {
     return new MonthDayNanoIntervalScalarGidBuilder;
   }
 
   /** */
-  this(arrow.month_day_nano.MonthDayNano value)
+  this(arrow.month_day_nano.MonthDayNano value) nothrow
   {
     GArrowMonthDayNanoIntervalScalar* _cretval;
     _cretval = garrow_month_day_nano_interval_scalar_new(value ? cast(GArrowMonthDayNano*)value._cPtr(No.Dup) : null);
@@ -58,7 +58,7 @@ class MonthDayNanoIntervalScalar : arrow.scalar.Scalar
   }
 
   /** */
-  arrow.month_day_nano.MonthDayNano getValue()
+  arrow.month_day_nano.MonthDayNano getValue() nothrow
   {
     GArrowMonthDayNano* _cretval;
     _cretval = garrow_month_day_nano_interval_scalar_get_value(cast(GArrowMonthDayNanoIntervalScalar*)this._cPtr);
@@ -79,7 +79,7 @@ final class MonthDayNanoIntervalScalarGidBuilder : MonthDayNanoIntervalScalarGid
       Create object from builder.
       Returns: New object
   */
-  MonthDayNanoIntervalScalar build()
+  MonthDayNanoIntervalScalar build() nothrow
   {
     return new MonthDayNanoIntervalScalar(cast(void*)createGObject(MonthDayNanoIntervalScalar._getGType), Yes.Take);
   }

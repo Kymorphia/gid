@@ -16,26 +16,26 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_discoverer_audio_info_get_type != &gidSymbolNotFound ? gst_discoverer_audio_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DiscovererAudioInfo self()
+  override DiscovererAudioInfo self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
       Get builder for [gstpbutils.discoverer_audio_info.DiscovererAudioInfo]
       Returns: New builder object
   */
-  static DiscovererAudioInfoGidBuilder builder()
+  static DiscovererAudioInfoGidBuilder builder() nothrow
   {
     return new DiscovererAudioInfoGidBuilder;
   }
 
   /** */
-  uint getBitrate()
+  uint getBitrate() nothrow
   {
     uint _retval;
     _retval = gst_discoverer_audio_info_get_bitrate(cast(const(GstDiscovererAudioInfo)*)this._cPtr);
@@ -58,7 +58,7 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   }
 
   /** */
-  ulong getChannelMask()
+  ulong getChannelMask() nothrow
   {
     ulong _retval;
     _retval = gst_discoverer_audio_info_get_channel_mask(cast(const(GstDiscovererAudioInfo)*)this._cPtr);
@@ -66,7 +66,7 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   }
 
   /** */
-  uint getChannels()
+  uint getChannels() nothrow
   {
     uint _retval;
     _retval = gst_discoverer_audio_info_get_channels(cast(const(GstDiscovererAudioInfo)*)this._cPtr);
@@ -74,7 +74,7 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   }
 
   /** */
-  uint getDepth()
+  uint getDepth() nothrow
   {
     uint _retval;
     _retval = gst_discoverer_audio_info_get_depth(cast(const(GstDiscovererAudioInfo)*)this._cPtr);
@@ -82,7 +82,7 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   }
 
   /** */
-  string getLanguage()
+  string getLanguage() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_discoverer_audio_info_get_language(cast(const(GstDiscovererAudioInfo)*)this._cPtr);
@@ -91,7 +91,7 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   }
 
   /** */
-  uint getMaxBitrate()
+  uint getMaxBitrate() nothrow
   {
     uint _retval;
     _retval = gst_discoverer_audio_info_get_max_bitrate(cast(const(GstDiscovererAudioInfo)*)this._cPtr);
@@ -99,7 +99,7 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   }
 
   /** */
-  uint getSampleRate()
+  uint getSampleRate() nothrow
   {
     uint _retval;
     _retval = gst_discoverer_audio_info_get_sample_rate(cast(const(GstDiscovererAudioInfo)*)this._cPtr);
@@ -119,7 +119,7 @@ final class DiscovererAudioInfoGidBuilder : DiscovererAudioInfoGidBuilderImpl!Di
       Create object from builder.
       Returns: New object
   */
-  DiscovererAudioInfo build()
+  DiscovererAudioInfo build() nothrow
   {
     return new DiscovererAudioInfo(cast(void*)createGObject(DiscovererAudioInfo._getGType), No.Take);
   }

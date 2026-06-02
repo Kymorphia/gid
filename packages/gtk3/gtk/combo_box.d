@@ -84,26 +84,26 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_combo_box_get_type != &gidSymbolNotFound ? gtk_combo_box_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ComboBox self()
+  override ComboBox self() nothrow
   {
     return this;
   }
@@ -112,7 +112,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Get builder for [gtk.combo_box.ComboBox]
       Returns: New builder object
   */
-  static ComboBoxGidBuilder builder()
+  static ComboBoxGidBuilder builder() nothrow
   {
     return new ComboBoxGidBuilder;
   }
@@ -125,7 +125,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         `gtk_tree_path_get_indices (path)[0]`,
         where `path` is the #GtkTreePath of the active item.
   */
-  @property int active()
+  @property int active() nothrow
   {
     return getActive();
   }
@@ -139,7 +139,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
           `gtk_tree_path_get_indices (path)[0]`,
           where `path` is the #GtkTreePath of the active item.
   */
-  @property void active(int propval)
+  @property void active(int propval) nothrow
   {
     setActive(propval);
   }
@@ -148,7 +148,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Get `activeId` property.
       Returns: The value of the ID column of the active row.
   */
-  @property string activeId()
+  @property string activeId() nothrow
   {
     return getActiveId();
   }
@@ -158,7 +158,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Params:
         propval = The value of the ID column of the active row.
   */
-  @property void activeId(string propval)
+  @property void activeId(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("active-id", propval);
   }
@@ -170,7 +170,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         
         Note that this only affects menu style combo boxes.
   */
-  @property bool addTearoffs()
+  @property bool addTearoffs() nothrow
   {
     return getAddTearoffs();
   }
@@ -183,7 +183,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
           
           Note that this only affects menu style combo boxes.
   */
-  @property void addTearoffs(bool propval)
+  @property void addTearoffs(bool propval) nothrow
   {
     setAddTearoffs(propval);
   }
@@ -193,7 +193,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Returns: Whether the dropdown button is sensitive when
         the model is empty.
   */
-  @property gtk.types.SensitivityType buttonSensitivity()
+  @property gtk.types.SensitivityType buttonSensitivity() nothrow
   {
     return getButtonSensitivity();
   }
@@ -204,7 +204,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         propval = Whether the dropdown button is sensitive when
           the model is empty.
   */
-  @property void buttonSensitivity(gtk.types.SensitivityType propval)
+  @property void buttonSensitivity(gtk.types.SensitivityType propval) nothrow
   {
     setButtonSensitivity(propval);
   }
@@ -216,7 +216,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         If no area is specified when creating the combo box with [gtk.combo_box.ComboBox.newWithArea]
         a horizontally oriented #GtkCellAreaBox will be used.
   */
-  @property gtk.cell_area.CellArea cellArea()
+  @property gtk.cell_area.CellArea cellArea() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.cell_area.CellArea)("cell-area");
   }
@@ -229,7 +229,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         Therefore, values in this column must be greater than zero, and the sum of
         an item’s column position + span should not exceed #GtkComboBox:wrap-width.
   */
-  @property int columnSpanColumn()
+  @property int columnSpanColumn() nothrow
   {
     return getColumnSpanColumn();
   }
@@ -243,7 +243,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
           Therefore, values in this column must be greater than zero, and the sum of
           an item’s column position + span should not exceed #GtkComboBox:wrap-width.
   */
-  @property void columnSpanColumn(int propval)
+  @property void columnSpanColumn(int propval) nothrow
   {
     setColumnSpanColumn(propval);
   }
@@ -253,7 +253,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Returns: The column in the combo box's model to associate with strings from the entry
         if the combo was created with #GtkComboBox:has-entry = true.
   */
-  @property int entryTextColumn()
+  @property int entryTextColumn() nothrow
   {
     return getEntryTextColumn();
   }
@@ -264,7 +264,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         propval = The column in the combo box's model to associate with strings from the entry
           if the combo was created with #GtkComboBox:has-entry = true.
   */
-  @property void entryTextColumn(int propval)
+  @property void entryTextColumn(int propval) nothrow
   {
     setEntryTextColumn(propval);
   }
@@ -273,7 +273,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Get `hasEntry` property.
       Returns: Whether the combo box has an entry.
   */
-  @property bool hasEntry()
+  @property bool hasEntry() nothrow
   {
     return getHasEntry();
   }
@@ -283,7 +283,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Returns: The has-frame property controls whether a frame
         is drawn around the entry.
   */
-  @property bool hasFrame()
+  @property bool hasFrame() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("has-frame");
   }
@@ -294,7 +294,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         propval = The has-frame property controls whether a frame
           is drawn around the entry.
   */
-  @property void hasFrame(bool propval)
+  @property void hasFrame(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("has-frame", propval);
   }
@@ -304,7 +304,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Returns: The column in the combo box's model that provides string
         IDs for the values in the model, if != -1.
   */
-  @property int idColumn()
+  @property int idColumn() nothrow
   {
     return getIdColumn();
   }
@@ -315,7 +315,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         propval = The column in the combo box's model that provides string
           IDs for the values in the model, if != -1.
   */
-  @property void idColumn(int propval)
+  @property void idColumn(int propval) nothrow
   {
     setIdColumn(propval);
   }
@@ -325,7 +325,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Returns: The model from which the combo box takes the values shown
         in the list.
   */
-  @property gtk.tree_model.TreeModel model()
+  @property gtk.tree_model.TreeModel model() nothrow
   {
     return getModel();
   }
@@ -336,7 +336,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         propval = The model from which the combo box takes the values shown
           in the list.
   */
-  @property void model(gtk.tree_model.TreeModel propval)
+  @property void model(gtk.tree_model.TreeModel propval) nothrow
   {
     setModel(propval);
   }
@@ -346,7 +346,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Returns: Whether the popup's width should be a fixed width matching the
         allocated width of the combo box.
   */
-  @property bool popupFixedWidth()
+  @property bool popupFixedWidth() nothrow
   {
     return getPopupFixedWidth();
   }
@@ -357,7 +357,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         propval = Whether the popup's width should be a fixed width matching the
           allocated width of the combo box.
   */
-  @property void popupFixedWidth(bool propval)
+  @property void popupFixedWidth(bool propval) nothrow
   {
     setPopupFixedWidth(propval);
   }
@@ -368,7 +368,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         Note that this property is mainly useful, because
         it allows you to connect to notify::popup-shown.
   */
-  @property bool popupShown()
+  @property bool popupShown() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("popup-shown");
   }
@@ -380,7 +380,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         will determine how many rows that item will span in the popup. Therefore,
         values in this column must be greater than zero.
   */
-  @property int rowSpanColumn()
+  @property int rowSpanColumn() nothrow
   {
     return getRowSpanColumn();
   }
@@ -393,7 +393,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
           will determine how many rows that item will span in the popup. Therefore,
           values in this column must be greater than zero.
   */
-  @property void rowSpanColumn(int propval)
+  @property void rowSpanColumn(int propval) nothrow
   {
     setRowSpanColumn(propval);
   }
@@ -403,7 +403,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Returns: A title that may be displayed by the window manager
         when the popup is torn-off.
   */
-  @property string tearoffTitle()
+  @property string tearoffTitle() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("tearoff-title");
   }
@@ -414,7 +414,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         propval = A title that may be displayed by the window manager
           when the popup is torn-off.
   */
-  @property void tearoffTitle(string propval)
+  @property void tearoffTitle(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("tearoff-title", propval);
   }
@@ -424,7 +424,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Returns: If wrap-width is set to a positive value, items in the popup will be laid
         out along multiple columns, starting a new row on reaching the wrap width.
   */
-  @property int wrapWidth()
+  @property int wrapWidth() nothrow
   {
     return getWrapWidth();
   }
@@ -435,7 +435,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         propval = If wrap-width is set to a positive value, items in the popup will be laid
           out along multiple columns, starting a new row on reaching the wrap width.
   */
-  @property void wrapWidth(int propval)
+  @property void wrapWidth(int propval) nothrow
   {
     setWrapWidth(propval);
   }
@@ -447,7 +447,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Creates a new empty #GtkComboBox.
       Returns: A new #GtkComboBox.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_new();
@@ -461,7 +461,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         area = the #GtkCellArea to use to layout cell renderers
       Returns: A new #GtkComboBox.
   */
-  static gtk.combo_box.ComboBox newWithArea(gtk.cell_area.CellArea area)
+  static gtk.combo_box.ComboBox newWithArea(gtk.cell_area.CellArea area) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_new_with_area(area ? cast(GtkCellArea*)area._cPtr(No.Dup) : null);
@@ -478,7 +478,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         area = the #GtkCellArea to use to layout cell renderers
       Returns: A new #GtkComboBox.
   */
-  static gtk.combo_box.ComboBox newWithAreaAndEntry(gtk.cell_area.CellArea area)
+  static gtk.combo_box.ComboBox newWithAreaAndEntry(gtk.cell_area.CellArea area) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_new_with_area_and_entry(area ? cast(GtkCellArea*)area._cPtr(No.Dup) : null);
@@ -490,7 +490,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Creates a new empty #GtkComboBox with an entry.
       Returns: A new #GtkComboBox.
   */
-  static gtk.combo_box.ComboBox newWithEntry()
+  static gtk.combo_box.ComboBox newWithEntry() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_new_with_entry();
@@ -505,7 +505,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         model = A #GtkTreeModel.
       Returns: A new #GtkComboBox.
   */
-  static gtk.combo_box.ComboBox newWithModel(gtk.tree_model.TreeModel model)
+  static gtk.combo_box.ComboBox newWithModel(gtk.tree_model.TreeModel model) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_new_with_model(model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
@@ -521,7 +521,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         model = A #GtkTreeModel
       Returns: A new #GtkComboBox
   */
-  static gtk.combo_box.ComboBox newWithModelAndEntry(gtk.tree_model.TreeModel model)
+  static gtk.combo_box.ComboBox newWithModelAndEntry(gtk.tree_model.TreeModel model) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_new_with_model_and_entry(model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
@@ -538,7 +538,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Returns: An integer which is the index of the currently active item,
             or -1 if there’s no active item.
   */
-  int getActive()
+  int getActive() nothrow
   {
     int _retval;
     _retval = gtk_combo_box_get_active(cast(GtkComboBox*)this._cPtr);
@@ -559,7 +559,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       is returned.
       Returns: the ID of the active row, or null
   */
-  string getActiveId()
+  string getActiveId() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_combo_box_get_active_id(cast(GtkComboBox*)this._cPtr);
@@ -575,7 +575,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         iter = A #GtkTreeIter
       Returns: true if iter was set, false otherwise
   */
-  bool getActiveIter(out gtk.tree_iter.TreeIter iter)
+  bool getActiveIter(out gtk.tree_iter.TreeIter iter) nothrow
   {
     bool _retval;
     GtkTreeIter _iter;
@@ -588,7 +588,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Gets the current value of the :add-tearoffs property.
       Returns: the current value of the :add-tearoffs property.
   */
-  bool getAddTearoffs()
+  bool getAddTearoffs() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_combo_box_get_add_tearoffs(cast(GtkComboBox*)this._cPtr);
@@ -604,7 +604,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
            [gtk.types.SensitivityType.Auto] if it is only sensitive as long as
            the model has one item to be selected.
   */
-  gtk.types.SensitivityType getButtonSensitivity()
+  gtk.types.SensitivityType getButtonSensitivity() nothrow
   {
     GtkSensitivityType _cretval;
     _cretval = gtk_combo_box_get_button_sensitivity(cast(GtkComboBox*)this._cPtr);
@@ -616,7 +616,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Returns the column with column span information for combo_box.
       Returns: the column span column.
   */
-  int getColumnSpanColumn()
+  int getColumnSpanColumn() nothrow
   {
     int _retval;
     _retval = gtk_combo_box_get_column_span_column(cast(GtkComboBox*)this._cPtr);
@@ -628,7 +628,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       from to display in the internal entry.
       Returns: A column in the data source model of combo_box.
   */
-  int getEntryTextColumn()
+  int getEntryTextColumn() nothrow
   {
     int _retval;
     _retval = gtk_combo_box_get_entry_text_column(cast(GtkComboBox*)this._cPtr);
@@ -643,7 +643,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   
       Deprecated: Use [gtk.widget.Widget.getFocusOnClick] instead
   */
-  override bool getFocusOnClick()
+  override bool getFocusOnClick() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_combo_box_get_focus_on_click(cast(GtkComboBox*)this._cPtr);
@@ -654,7 +654,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Returns whether the combo box has an entry.
       Returns: whether there is an entry in combo_box.
   */
-  bool getHasEntry()
+  bool getHasEntry() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_combo_box_get_has_entry(cast(GtkComboBox*)this._cPtr);
@@ -666,7 +666,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       for values from.
       Returns: A column in the data source model of combo_box.
   */
-  int getIdColumn()
+  int getIdColumn() nothrow
   {
     int _retval;
     _retval = gtk_combo_box_get_id_column(cast(GtkComboBox*)this._cPtr);
@@ -678,7 +678,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Returns: A #GtkTreeModel which was passed
             during construction.
   */
-  gtk.tree_model.TreeModel getModel()
+  gtk.tree_model.TreeModel getModel() nothrow
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_combo_box_get_model(cast(GtkComboBox*)this._cPtr);
@@ -694,7 +694,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Returns: the accessible object corresponding
             to the combo box’s popup.
   */
-  atk.object.ObjectWrap getPopupAccessible()
+  atk.object.ObjectWrap getPopupAccessible() nothrow
   {
     AtkObject* _cretval;
     _cretval = gtk_combo_box_get_popup_accessible(cast(GtkComboBox*)this._cPtr);
@@ -707,7 +707,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       the allocated width of the combo box.
       Returns: true if the popup uses a fixed width
   */
-  bool getPopupFixedWidth()
+  bool getPopupFixedWidth() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_combo_box_get_popup_fixed_width(cast(GtkComboBox*)this._cPtr);
@@ -718,7 +718,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Returns the column with row span information for combo_box.
       Returns: the row span column.
   */
-  int getRowSpanColumn()
+  int getRowSpanColumn() nothrow
   {
     int _retval;
     _retval = gtk_combo_box_get_row_span_column(cast(GtkComboBox*)this._cPtr);
@@ -731,7 +731,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Returns: the menu’s title in tearoff mode. This is an internal copy of the
         string which must not be freed.
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_combo_box_get_title(cast(GtkComboBox*)this._cPtr);
@@ -745,7 +745,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       is in table mode.
       Returns: the wrap width.
   */
-  int getWrapWidth()
+  int getWrapWidth() nothrow
   {
     int _retval;
     _retval = gtk_combo_box_get_wrap_width(cast(GtkComboBox*)this._cPtr);
@@ -758,7 +758,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       This function is mostly intended for use by accessibility technologies;
       applications should have little use for it.
   */
-  void popdown()
+  void popdown() nothrow
   {
     gtk_combo_box_popdown(cast(GtkComboBox*)this._cPtr);
   }
@@ -771,7 +771,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       
       Before calling this, combo_box must be mapped, or nothing will happen.
   */
-  void popup()
+  void popup() nothrow
   {
     gtk_combo_box_popup(cast(GtkComboBox*)this._cPtr);
   }
@@ -784,7 +784,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Params:
         device = a #GdkDevice
   */
-  void popupForDevice(gdk.device.Device device)
+  void popupForDevice(gdk.device.Device device) nothrow
   {
     gtk_combo_box_popup_for_device(cast(GtkComboBox*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
   }
@@ -796,7 +796,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         index = An index in the model passed during construction, or -1 to have
           no active item
   */
-  void setActive(int index)
+  void setActive(int index) nothrow
   {
     gtk_combo_box_set_active(cast(GtkComboBox*)this._cPtr, index);
   }
@@ -815,7 +815,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
                  active_id was given to unset the active row, the function
                  always returns true.
   */
-  bool setActiveId(string activeId = null)
+  bool setActiveId(string activeId = null) nothrow
   {
     bool _retval;
     const(char)* _activeId = activeId.toCString(No.Alloc);
@@ -830,7 +830,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Params:
         iter = The #GtkTreeIter, or null
   */
-  void setActiveIter(gtk.tree_iter.TreeIter iter = null)
+  void setActiveIter(gtk.tree_iter.TreeIter iter = null) nothrow
   {
     gtk_combo_box_set_active_iter(cast(GtkComboBox*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
   }
@@ -842,7 +842,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Params:
         addTearoffs = true to add tearoff menu items
   */
-  void setAddTearoffs(bool addTearoffs)
+  void setAddTearoffs(bool addTearoffs) nothrow
   {
     gtk_combo_box_set_add_tearoffs(cast(GtkComboBox*)this._cPtr, addTearoffs);
   }
@@ -855,7 +855,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Params:
         sensitivity = specify the sensitivity of the dropdown button
   */
-  void setButtonSensitivity(gtk.types.SensitivityType sensitivity)
+  void setButtonSensitivity(gtk.types.SensitivityType sensitivity) nothrow
   {
     gtk_combo_box_set_button_sensitivity(cast(GtkComboBox*)this._cPtr, sensitivity);
   }
@@ -868,7 +868,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Params:
         columnSpan = A column in the model passed during construction
   */
-  void setColumnSpanColumn(int columnSpan)
+  void setColumnSpanColumn(int columnSpan) nothrow
   {
     gtk_combo_box_set_column_span_column(cast(GtkComboBox*)this._cPtr, columnSpan);
   }
@@ -885,7 +885,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         textColumn = A column in model to get the strings from for
               the internal entry
   */
-  void setEntryTextColumn(int textColumn)
+  void setEntryTextColumn(int textColumn) nothrow
   {
     gtk_combo_box_set_entry_text_column(cast(GtkComboBox*)this._cPtr, textColumn);
   }
@@ -902,7 +902,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   
       Deprecated: Use [gtk.widget.Widget.setFocusOnClick] instead
   */
-  override void setFocusOnClick(bool focusOnClick)
+  override void setFocusOnClick(bool focusOnClick) nothrow
   {
     gtk_combo_box_set_focus_on_click(cast(GtkComboBox*)this._cPtr, focusOnClick);
   }
@@ -915,7 +915,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Params:
         idColumn = A column in model to get string IDs for values from
   */
-  void setIdColumn(int idColumn)
+  void setIdColumn(int idColumn) nothrow
   {
     gtk_combo_box_set_id_column(cast(GtkComboBox*)this._cPtr, idColumn);
   }
@@ -931,7 +931,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Params:
         model = A #GtkTreeModel
   */
-  void setModel(gtk.tree_model.TreeModel model = null)
+  void setModel(gtk.tree_model.TreeModel model = null) nothrow
   {
     gtk_combo_box_set_model(cast(GtkComboBox*)this._cPtr, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
@@ -943,7 +943,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Params:
         fixed = whether to use a fixed popup width
   */
-  void setPopupFixedWidth(bool fixed)
+  void setPopupFixedWidth(bool fixed) nothrow
   {
     gtk_combo_box_set_popup_fixed_width(cast(GtkComboBox*)this._cPtr, fixed);
   }
@@ -956,14 +956,21 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Params:
         func = a #GtkTreeViewRowSeparatorFunc
   */
-  void setRowSeparatorFunc(gtk.types.TreeViewRowSeparatorFunc func)
+  void setRowSeparatorFunc(gtk.types.TreeViewRowSeparatorFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data)
+    extern(C) gboolean _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.TreeViewRowSeparatorFunc*)data;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeViewRowSeparatorFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -982,7 +989,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Params:
         rowSpan = A column in the model passed during construction.
   */
-  void setRowSpanColumn(int rowSpan)
+  void setRowSpanColumn(int rowSpan) nothrow
   {
     gtk_combo_box_set_row_span_column(cast(GtkComboBox*)this._cPtr, rowSpan);
   }
@@ -993,7 +1000,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Params:
         title = a title for the menu in tearoff mode
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_combo_box_set_title(cast(GtkComboBox*)this._cPtr, _title);
@@ -1007,7 +1014,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Params:
         width = Preferred number of columns
   */
-  void setWrapWidth(int width)
+  void setWrapWidth(int width) nothrow
   {
     gtk_combo_box_set_wrap_width(cast(GtkComboBox*)this._cPtr, width);
   }
@@ -1032,13 +1039,13 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.combo_box.ComboBox)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1047,7 +1054,14 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.combo_box.ComboBox.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1104,18 +1118,19 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFormatEntryText(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFormatEntryText(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == string)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.combo_box.ComboBox)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      string _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1123,7 +1138,14 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.combo_box.ComboBox.formatEntryText");
+      }
 
       setVal!(string)(_returnValue, _retval);
     }
@@ -1151,14 +1173,14 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveActive(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveActive(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ScrollType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.combo_box.ComboBox)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1170,7 +1192,14 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.combo_box.ComboBox.moveActive");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1197,22 +1226,30 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPopdown(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPopdown(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.combo_box.ComboBox)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.combo_box.ComboBox.popdown");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1240,13 +1277,13 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPopup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPopup(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.combo_box.ComboBox)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1255,7 +1292,14 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.combo_box.ComboBox.popup");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1280,7 +1324,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.cell_editable
           where `path` is the #GtkTreePath of the active item.
       Returns: Builder instance for fluent chaining
   */
-  T active(int propval)
+  T active(int propval) nothrow
   {
     return setProperty("active", propval);
   }
@@ -1291,7 +1335,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.cell_editable
         propval = The value of the ID column of the active row.
       Returns: Builder instance for fluent chaining
   */
-  T activeId(string propval)
+  T activeId(string propval) nothrow
   {
     return setProperty("active-id", propval);
   }
@@ -1305,7 +1349,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.cell_editable
           Note that this only affects menu style combo boxes.
       Returns: Builder instance for fluent chaining
   */
-  T addTearoffs(bool propval)
+  T addTearoffs(bool propval) nothrow
   {
     return setProperty("add-tearoffs", propval);
   }
@@ -1317,7 +1361,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.cell_editable
           the model is empty.
       Returns: Builder instance for fluent chaining
   */
-  T buttonSensitivity(gtk.types.SensitivityType propval)
+  T buttonSensitivity(gtk.types.SensitivityType propval) nothrow
   {
     return setProperty("button-sensitivity", propval);
   }
@@ -1331,7 +1375,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.cell_editable
           a horizontally oriented #GtkCellAreaBox will be used.
       Returns: Builder instance for fluent chaining
   */
-  T cellArea(gtk.cell_area.CellArea propval)
+  T cellArea(gtk.cell_area.CellArea propval) nothrow
   {
     return setProperty("cell-area", propval);
   }
@@ -1346,7 +1390,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.cell_editable
           an item’s column position + span should not exceed #GtkComboBox:wrap-width.
       Returns: Builder instance for fluent chaining
   */
-  T columnSpanColumn(int propval)
+  T columnSpanColumn(int propval) nothrow
   {
     return setProperty("column-span-column", propval);
   }
@@ -1358,7 +1402,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.cell_editable
           if the combo was created with #GtkComboBox:has-entry = true.
       Returns: Builder instance for fluent chaining
   */
-  T entryTextColumn(int propval)
+  T entryTextColumn(int propval) nothrow
   {
     return setProperty("entry-text-column", propval);
   }
@@ -1369,7 +1413,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.cell_editable
         propval = Whether the combo box has an entry.
       Returns: Builder instance for fluent chaining
   */
-  T hasEntry(bool propval)
+  T hasEntry(bool propval) nothrow
   {
     return setProperty("has-entry", propval);
   }
@@ -1381,7 +1425,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.cell_editable
           is drawn around the entry.
       Returns: Builder instance for fluent chaining
   */
-  T hasFrame(bool propval)
+  T hasFrame(bool propval) nothrow
   {
     return setProperty("has-frame", propval);
   }
@@ -1393,7 +1437,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.cell_editable
           IDs for the values in the model, if != -1.
       Returns: Builder instance for fluent chaining
   */
-  T idColumn(int propval)
+  T idColumn(int propval) nothrow
   {
     return setProperty("id-column", propval);
   }
@@ -1405,7 +1449,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.cell_editable
           in the list.
       Returns: Builder instance for fluent chaining
   */
-  T model(gtk.tree_model.TreeModel propval)
+  T model(gtk.tree_model.TreeModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -1417,7 +1461,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.cell_editable
           allocated width of the combo box.
       Returns: Builder instance for fluent chaining
   */
-  T popupFixedWidth(bool propval)
+  T popupFixedWidth(bool propval) nothrow
   {
     return setProperty("popup-fixed-width", propval);
   }
@@ -1431,7 +1475,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.cell_editable
           values in this column must be greater than zero.
       Returns: Builder instance for fluent chaining
   */
-  T rowSpanColumn(int propval)
+  T rowSpanColumn(int propval) nothrow
   {
     return setProperty("row-span-column", propval);
   }
@@ -1443,7 +1487,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.cell_editable
           when the popup is torn-off.
       Returns: Builder instance for fluent chaining
   */
-  T tearoffTitle(string propval)
+  T tearoffTitle(string propval) nothrow
   {
     return setProperty("tearoff-title", propval);
   }
@@ -1455,7 +1499,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.cell_editable
           out along multiple columns, starting a new row on reaching the wrap width.
       Returns: Builder instance for fluent chaining
   */
-  T wrapWidth(int propval)
+  T wrapWidth(int propval) nothrow
   {
     return setProperty("wrap-width", propval);
   }
@@ -1468,7 +1512,7 @@ final class ComboBoxGidBuilder : ComboBoxGidBuilderImpl!ComboBoxGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ComboBox build()
+  ComboBox build() nothrow
   {
     return new ComboBox(cast(void*)createGObject(ComboBox._getGType), No.Take);
   }

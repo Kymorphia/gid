@@ -33,26 +33,26 @@ class ColorChooserRequest : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_color_chooser_request_get_type != &gidSymbolNotFound ? webkit_color_chooser_request_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ColorChooserRequest self()
+  override ColorChooserRequest self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class ColorChooserRequest : gobject.object.ObjectWrap
       Get builder for [webkit.color_chooser_request.ColorChooserRequest]
       Returns: New builder object
   */
-  static ColorChooserRequestGidBuilder builder()
+  static ColorChooserRequestGidBuilder builder() nothrow
   {
     return new ColorChooserRequestGidBuilder;
   }
@@ -70,7 +70,7 @@ class ColorChooserRequest : gobject.object.ObjectWrap
       Get `rgba` property.
       Returns: The #GdkRGBA color of the request
   */
-  @property gdk.rgba.RGBA rgba()
+  @property gdk.rgba.RGBA rgba() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("rgba");
   }
@@ -80,7 +80,7 @@ class ColorChooserRequest : gobject.object.ObjectWrap
       Params:
         propval = The #GdkRGBA color of the request
   */
-  @property void rgba(gdk.rgba.RGBA propval)
+  @property void rgba(gdk.rgba.RGBA propval) nothrow
   {
     setRgba(propval);
   }
@@ -93,7 +93,7 @@ class ColorChooserRequest : gobject.object.ObjectWrap
       The signal #WebKitColorChooserRequest::finished
       is emitted to notify that the request has finished.
   */
-  void cancel()
+  void cancel() nothrow
   {
     webkit_color_chooser_request_cancel(cast(WebKitColorChooserRequest*)this._cPtr);
   }
@@ -107,7 +107,7 @@ class ColorChooserRequest : gobject.object.ObjectWrap
       The signal #WebKitColorChooserRequest::finished
       is emitted to notify that the request has finished.
   */
-  void finish()
+  void finish() nothrow
   {
     webkit_color_chooser_request_finish(cast(WebKitColorChooserRequest*)this._cPtr);
   }
@@ -118,7 +118,7 @@ class ColorChooserRequest : gobject.object.ObjectWrap
       Params:
         rect = a #GdkRectangle to fill in with the element area
   */
-  void getElementRectangle(out gdk.rectangle.Rectangle rect)
+  void getElementRectangle(out gdk.rectangle.Rectangle rect) nothrow
   {
     webkit_color_chooser_request_get_element_rectangle(cast(WebKitColorChooserRequest*)this._cPtr, cast(GdkRectangle*)&rect);
   }
@@ -129,7 +129,7 @@ class ColorChooserRequest : gobject.object.ObjectWrap
       Params:
         rgba = a #GdkRGBA to fill in with the current color.
   */
-  void getRgba(out gdk.rgba.RGBA rgba)
+  void getRgba(out gdk.rgba.RGBA rgba) nothrow
   {
     webkit_color_chooser_request_get_rgba(cast(WebKitColorChooserRequest*)this._cPtr, cast(GdkRGBA*)&rgba);
   }
@@ -140,7 +140,7 @@ class ColorChooserRequest : gobject.object.ObjectWrap
       Params:
         rgba = a pointer #GdkRGBA
   */
-  void setRgba(gdk.rgba.RGBA rgba)
+  void setRgba(gdk.rgba.RGBA rgba) nothrow
   {
     webkit_color_chooser_request_set_rgba(cast(WebKitColorChooserRequest*)this._cPtr, cast(const(GdkRGBA)*)&rgba);
   }
@@ -163,13 +163,13 @@ class ColorChooserRequest : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFinished(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFinished(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.color_chooser_request.ColorChooserRequest)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -178,7 +178,14 @@ class ColorChooserRequest : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.color_chooser_request.ColorChooserRequest.finished");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -196,7 +203,7 @@ class ColorChooserRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
         propval = The #GdkRGBA color of the request
       Returns: Builder instance for fluent chaining
   */
-  T rgba(gdk.rgba.RGBA propval)
+  T rgba(gdk.rgba.RGBA propval) nothrow
   {
     return setProperty("rgba", propval);
   }
@@ -209,7 +216,7 @@ final class ColorChooserRequestGidBuilder : ColorChooserRequestGidBuilderImpl!Co
       Create object from builder.
       Returns: New object
   */
-  ColorChooserRequest build()
+  ColorChooserRequest build() nothrow
   {
     return new ColorChooserRequest(cast(void*)createGObject(ColorChooserRequest._getGType), No.Take);
   }

@@ -26,26 +26,26 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_themed_icon_get_type != &gidSymbolNotFound ? g_themed_icon_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ThemedIcon self()
+  override ThemedIcon self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
       Get builder for [gio.themed_icon.ThemedIcon]
       Returns: New builder object
   */
-  static ThemedIconGidBuilder builder()
+  static ThemedIconGidBuilder builder() nothrow
   {
     return new ThemedIconGidBuilder;
   }
@@ -77,7 +77,7 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
         };
         ```
   */
-  @property bool useDefaultFallbacks()
+  @property bool useDefaultFallbacks() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("use-default-fallbacks");
   }
@@ -91,7 +91,7 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
         iconname = a string containing an icon name.
       Returns: a new #GThemedIcon.
   */
-  this(string iconname)
+  this(string iconname) nothrow
   {
     GIcon* _cretval;
     const(char)* _iconname = iconname.toCString(No.Alloc);
@@ -106,7 +106,7 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
         iconnames = an array of strings containing icon names.
       Returns: a new #GThemedIcon
   */
-  static gio.themed_icon.ThemedIcon newFromNames(string[] iconnames)
+  static gio.themed_icon.ThemedIcon newFromNames(string[] iconnames) nothrow
   {
     GIcon* _cretval;
     int _len;
@@ -144,7 +144,7 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
         iconname = a string containing an icon name
       Returns: a new #GThemedIcon.
   */
-  static gio.themed_icon.ThemedIcon newWithDefaultFallbacks(string iconname)
+  static gio.themed_icon.ThemedIcon newWithDefaultFallbacks(string iconname) nothrow
   {
     GIcon* _cretval;
     const(char)* _iconname = iconname.toCString(No.Alloc);
@@ -162,7 +162,7 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
       Params:
         iconname = name of icon to append to list of icons from within icon.
   */
-  void appendName(string iconname)
+  void appendName(string iconname) nothrow
   {
     const(char)* _iconname = iconname.toCString(No.Alloc);
     g_themed_icon_append_name(cast(GThemedIcon*)this._cPtr, _iconname);
@@ -172,7 +172,7 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
       Gets the names of icons from within icon.
       Returns: a list of icon names.
   */
-  string[] getNames()
+  string[] getNames() nothrow
   {
     const(char*)* _cretval;
     _cretval = g_themed_icon_get_names(cast(GThemedIcon*)this._cPtr);
@@ -199,7 +199,7 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
       Params:
         iconname = name of icon to prepend to list of icons from within icon.
   */
-  void prependName(string iconname)
+  void prependName(string iconname) nothrow
   {
     const(char)* _iconname = iconname.toCString(No.Alloc);
     g_themed_icon_prepend_name(cast(GThemedIcon*)this._cPtr, _iconname);
@@ -218,7 +218,7 @@ class ThemedIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
         propval = The icon name.
       Returns: Builder instance for fluent chaining
   */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -243,7 +243,7 @@ class ThemedIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
           ```
       Returns: Builder instance for fluent chaining
   */
-  T useDefaultFallbacks(bool propval)
+  T useDefaultFallbacks(bool propval) nothrow
   {
     return setProperty("use-default-fallbacks", propval);
   }
@@ -256,7 +256,7 @@ final class ThemedIconGidBuilder : ThemedIconGidBuilderImpl!ThemedIconGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ThemedIcon build()
+  ThemedIcon build() nothrow
   {
     return new ThemedIcon(cast(void*)createGObject(ThemedIcon._getGType), Yes.Take);
   }

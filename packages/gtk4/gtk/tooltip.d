@@ -46,26 +46,26 @@ class Tooltip : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tooltip_get_type != &gidSymbolNotFound ? gtk_tooltip_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Tooltip self()
+  override Tooltip self() nothrow
   {
     return this;
   }
@@ -74,7 +74,7 @@ class Tooltip : gobject.object.ObjectWrap
       Get builder for [gtk.tooltip.Tooltip]
       Returns: New builder object
   */
-  static TooltipGidBuilder builder()
+  static TooltipGidBuilder builder() nothrow
   {
     return new TooltipGidBuilder;
   }
@@ -90,7 +90,7 @@ class Tooltip : gobject.object.ObjectWrap
       Params:
         customWidget = a [gtk.widget.Widget], or null to unset the old custom widget.
   */
-  void setCustom(gtk.widget.Widget customWidget = null)
+  void setCustom(gtk.widget.Widget customWidget = null) nothrow
   {
     gtk_tooltip_set_custom(cast(GtkTooltip*)this._cPtr, customWidget ? cast(GtkWidget*)customWidget._cPtr(No.Dup) : null);
   }
@@ -102,7 +102,7 @@ class Tooltip : gobject.object.ObjectWrap
       Params:
         paintable = a [gdk.paintable.Paintable]
   */
-  void setIcon(gdk.paintable.Paintable paintable = null)
+  void setIcon(gdk.paintable.Paintable paintable = null) nothrow
   {
     gtk_tooltip_set_icon(cast(GtkTooltip*)this._cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable)._cPtr(No.Dup) : null);
   }
@@ -115,7 +115,7 @@ class Tooltip : gobject.object.ObjectWrap
       Params:
         gicon = a [gio.icon.Icon] representing the icon
   */
-  void setIconFromGicon(gio.icon.Icon gicon = null)
+  void setIconFromGicon(gio.icon.Icon gicon = null) nothrow
   {
     gtk_tooltip_set_icon_from_gicon(cast(GtkTooltip*)this._cPtr, gicon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)gicon)._cPtr(No.Dup) : null);
   }
@@ -128,7 +128,7 @@ class Tooltip : gobject.object.ObjectWrap
       Params:
         iconName = an icon name
   */
-  void setIconFromIconName(string iconName = null)
+  void setIconFromIconName(string iconName = null) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_tooltip_set_icon_from_icon_name(cast(GtkTooltip*)this._cPtr, _iconName);
@@ -143,7 +143,7 @@ class Tooltip : gobject.object.ObjectWrap
       Params:
         markup = a string with Pango markup or `NLL`
   */
-  void setMarkup(string markup = null)
+  void setMarkup(string markup = null) nothrow
   {
     const(char)* _markup = markup.toCString(No.Alloc);
     gtk_tooltip_set_markup(cast(GtkTooltip*)this._cPtr, _markup);
@@ -158,7 +158,7 @@ class Tooltip : gobject.object.ObjectWrap
       Params:
         text = a text string
   */
-  void setText(string text = null)
+  void setText(string text = null) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_tooltip_set_text(cast(GtkTooltip*)this._cPtr, _text);
@@ -177,7 +177,7 @@ class Tooltip : gobject.object.ObjectWrap
       Params:
         rect = a [gtk.types.Rectangle]
   */
-  void setTipArea(gdk.rectangle.Rectangle rect)
+  void setTipArea(gdk.rectangle.Rectangle rect) nothrow
   {
     gtk_tooltip_set_tip_area(cast(GtkTooltip*)this._cPtr, cast(const(GdkRectangle)*)&rect);
   }
@@ -195,7 +195,7 @@ final class TooltipGidBuilder : TooltipGidBuilderImpl!TooltipGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Tooltip build()
+  Tooltip build() nothrow
   {
     return new Tooltip(cast(void*)createGObject(Tooltip._getGType), No.Take);
   }

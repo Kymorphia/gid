@@ -17,11 +17,8 @@ class AttrShape
   PangoAttrShape _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for pango.attr_shape.AttrShape");
-
     _cInstance = *cast(PangoAttrShape*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class AttrShape
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class AttrShape
       Get `attr` field.
       Returns: the common portion of the attribute
   */
-  @property pango.attribute.Attribute attr()
+  @property pango.attribute.Attribute attr() nothrow
   {
     return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrShape*)this._cPtr).attr);
   }
@@ -47,7 +44,7 @@ class AttrShape
       Get `inkRect` field.
       Returns: the ink rectangle to restrict to
   */
-  @property pango.types.Rectangle inkRect()
+  @property pango.types.Rectangle inkRect() nothrow
   {
     return cToD!(pango.types.Rectangle)(cast(void*)&(cast(PangoAttrShape*)this._cPtr).inkRect);
   }
@@ -57,7 +54,7 @@ class AttrShape
       Params:
         propval = the ink rectangle to restrict to
   */
-  @property void inkRect(pango.types.Rectangle propval)
+  @property void inkRect(pango.types.Rectangle propval) nothrow
   {
     (cast(PangoAttrShape*)this._cPtr).inkRect = cast(PangoRectangle)propval;
   }
@@ -66,7 +63,7 @@ class AttrShape
       Get `logicalRect` field.
       Returns: the logical rectangle to restrict to
   */
-  @property pango.types.Rectangle logicalRect()
+  @property pango.types.Rectangle logicalRect() nothrow
   {
     return cToD!(pango.types.Rectangle)(cast(void*)&(cast(PangoAttrShape*)this._cPtr).logicalRect);
   }
@@ -76,7 +73,7 @@ class AttrShape
       Params:
         propval = the logical rectangle to restrict to
   */
-  @property void logicalRect(pango.types.Rectangle propval)
+  @property void logicalRect(pango.types.Rectangle propval) nothrow
   {
     (cast(PangoAttrShape*)this._cPtr).logicalRect = cast(PangoRectangle)propval;
   }
@@ -85,7 +82,7 @@ class AttrShape
       Get `copyFunc` field.
       Returns: copy function for the user data
   */
-  @property PangoAttrDataCopyFunc copyFunc()
+  @property PangoAttrDataCopyFunc copyFunc() nothrow
   {
     return (cast(PangoAttrShape*)this._cPtr).copyFunc;
   }
@@ -96,7 +93,7 @@ class AttrShape
         propval = copy function for the user data
   */
 
-  @property void copyFunc(PangoAttrDataCopyFunc propval)
+  @property void copyFunc(PangoAttrDataCopyFunc propval) nothrow
   {
     (cast(PangoAttrShape*)this._cPtr).copyFunc = propval;
   }
@@ -105,7 +102,7 @@ class AttrShape
       Get `destroyFunc` field.
       Returns: destroy function for the user data
   */
-  @property GDestroyNotify destroyFunc()
+  @property GDestroyNotify destroyFunc() nothrow
   {
     return (cast(PangoAttrShape*)this._cPtr).destroyFunc;
   }
@@ -116,7 +113,7 @@ class AttrShape
         propval = destroy function for the user data
   */
 
-  @property void destroyFunc(GDestroyNotify propval)
+  @property void destroyFunc(GDestroyNotify propval) nothrow
   {
     (cast(PangoAttrShape*)this._cPtr).destroyFunc = propval;
   }
@@ -136,7 +133,7 @@ class AttrShape
           [pango.attribute.Attribute], which should be freed with
           [pango.attribute.Attribute.destroy]
   */
-  static pango.attribute.Attribute new_(pango.types.Rectangle inkRect, pango.types.Rectangle logicalRect)
+  static pango.attribute.Attribute new_(pango.types.Rectangle inkRect, pango.types.Rectangle logicalRect) nothrow
   {
     PangoAttribute* _cretval;
     _cretval = pango_attr_shape_new(&inkRect, &logicalRect);

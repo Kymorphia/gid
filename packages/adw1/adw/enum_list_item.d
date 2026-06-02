@@ -16,26 +16,26 @@ class EnumListItem : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_enum_list_item_get_type != &gidSymbolNotFound ? adw_enum_list_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EnumListItem self()
+  override EnumListItem self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class EnumListItem : gobject.object.ObjectWrap
       Get builder for [adw.enum_list_item.EnumListItem]
       Returns: New builder object
   */
-  static EnumListItemGidBuilder builder()
+  static EnumListItemGidBuilder builder() nothrow
   {
     return new EnumListItemGidBuilder;
   }
@@ -53,7 +53,7 @@ class EnumListItem : gobject.object.ObjectWrap
       Get `name` property.
       Returns: The enum value name.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return getName();
   }
@@ -62,7 +62,7 @@ class EnumListItem : gobject.object.ObjectWrap
       Get `nick` property.
       Returns: The enum value nick.
   */
-  @property string nick()
+  @property string nick() nothrow
   {
     return getNick();
   }
@@ -71,7 +71,7 @@ class EnumListItem : gobject.object.ObjectWrap
       Get `value` property.
       Returns: The enum value.
   */
-  @property int value()
+  @property int value() nothrow
   {
     return getValue();
   }
@@ -80,7 +80,7 @@ class EnumListItem : gobject.object.ObjectWrap
       Gets the enum value name.
       Returns: the enum value name
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_enum_list_item_get_name(cast(AdwEnumListItem*)this._cPtr);
@@ -92,7 +92,7 @@ class EnumListItem : gobject.object.ObjectWrap
       Gets the enum value nick.
       Returns: the enum value nick
   */
-  string getNick()
+  string getNick() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_enum_list_item_get_nick(cast(AdwEnumListItem*)this._cPtr);
@@ -104,7 +104,7 @@ class EnumListItem : gobject.object.ObjectWrap
       Gets the enum value.
       Returns: the enum value
   */
-  int getValue()
+  int getValue() nothrow
   {
     int _retval;
     _retval = adw_enum_list_item_get_value(cast(AdwEnumListItem*)this._cPtr);
@@ -124,7 +124,7 @@ final class EnumListItemGidBuilder : EnumListItemGidBuilderImpl!EnumListItemGidB
       Create object from builder.
       Returns: New object
   */
-  EnumListItem build()
+  EnumListItem build() nothrow
   {
     return new EnumListItem(cast(void*)createGObject(EnumListItem._getGType), No.Take);
   }

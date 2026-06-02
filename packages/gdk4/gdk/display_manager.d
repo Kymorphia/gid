@@ -59,26 +59,26 @@ class DisplayManager : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_display_manager_get_type != &gidSymbolNotFound ? gdk_display_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DisplayManager self()
+  override DisplayManager self() nothrow
   {
     return this;
   }
@@ -87,7 +87,7 @@ class DisplayManager : gobject.object.ObjectWrap
       Get builder for [gdk.display_manager.DisplayManager]
       Returns: New builder object
   */
-  static DisplayManagerGidBuilder builder()
+  static DisplayManagerGidBuilder builder() nothrow
   {
     return new DisplayManagerGidBuilder;
   }
@@ -96,7 +96,7 @@ class DisplayManager : gobject.object.ObjectWrap
       Get `defaultDisplay` property.
       Returns: The default display.
   */
-  @property gdk.display.Display defaultDisplay()
+  @property gdk.display.Display defaultDisplay() nothrow
   {
     return getDefaultDisplay();
   }
@@ -106,7 +106,7 @@ class DisplayManager : gobject.object.ObjectWrap
       Params:
         propval = The default display.
   */
-  @property void defaultDisplay(gdk.display.Display propval)
+  @property void defaultDisplay(gdk.display.Display propval) nothrow
   {
     setDefaultDisplay(propval);
   }
@@ -123,7 +123,7 @@ class DisplayManager : gobject.object.ObjectWrap
       backends will be used.
       Returns: The global [gdk.display_manager.DisplayManager] singleton
   */
-  static gdk.display_manager.DisplayManager get()
+  static gdk.display_manager.DisplayManager get() nothrow
   {
     GdkDisplayManager* _cretval;
     _cretval = gdk_display_manager_get();
@@ -135,7 +135,7 @@ class DisplayManager : gobject.object.ObjectWrap
       Gets the default [gdk.display.Display].
       Returns: a [gdk.display.Display]
   */
-  gdk.display.Display getDefaultDisplay()
+  gdk.display.Display getDefaultDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gdk_display_manager_get_default_display(cast(GdkDisplayManager*)this._cPtr);
@@ -148,7 +148,7 @@ class DisplayManager : gobject.object.ObjectWrap
       Returns: a newly
           allocated [glib.slist.SList] of [gdk.display.Display] objects
   */
-  gdk.display.Display[] listDisplays()
+  gdk.display.Display[] listDisplays() nothrow
   {
     GSList* _cretval;
     _cretval = gdk_display_manager_list_displays(cast(GdkDisplayManager*)this._cPtr);
@@ -164,7 +164,7 @@ class DisplayManager : gobject.object.ObjectWrap
       Returns: a [gdk.display.Display], or null
           if the display could not be opened
   */
-  gdk.display.Display openDisplay(string name = null)
+  gdk.display.Display openDisplay(string name = null) nothrow
   {
     GdkDisplay* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -179,7 +179,7 @@ class DisplayManager : gobject.object.ObjectWrap
       Params:
         display = a [gdk.display.Display]
   */
-  void setDefaultDisplay(gdk.display.Display display)
+  void setDefaultDisplay(gdk.display.Display display) nothrow
   {
     gdk_display_manager_set_default_display(cast(GdkDisplayManager*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
   }
@@ -201,14 +201,14 @@ class DisplayManager : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDisplayOpened(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDisplayOpened(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.display.Display)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.display_manager.DisplayManager)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -220,7 +220,14 @@ class DisplayManager : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.display_manager.DisplayManager.displayOpened");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -238,7 +245,7 @@ class DisplayManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = The default display.
       Returns: Builder instance for fluent chaining
   */
-  T defaultDisplay(gdk.display.Display propval)
+  T defaultDisplay(gdk.display.Display propval) nothrow
   {
     return setProperty("default-display", propval);
   }
@@ -251,7 +258,7 @@ final class DisplayManagerGidBuilder : DisplayManagerGidBuilderImpl!DisplayManag
       Create object from builder.
       Returns: New object
   */
-  DisplayManager build()
+  DisplayManager build() nothrow
   {
     return new DisplayManager(cast(void*)createGObject(DisplayManager._getGType), No.Take);
   }

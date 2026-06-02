@@ -31,26 +31,26 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_renderer_pixbuf_get_type != &gidSymbolNotFound ? gtk_cell_renderer_pixbuf_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CellRendererPixbuf self()
+  override CellRendererPixbuf self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
       Get builder for [gtk.cell_renderer_pixbuf.CellRendererPixbuf]
       Returns: New builder object
   */
-  static CellRendererPixbufGidBuilder builder()
+  static CellRendererPixbufGidBuilder builder() nothrow
   {
     return new CellRendererPixbufGidBuilder;
   }
@@ -71,7 +71,7 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
   
       Deprecated: Cell renderers always follow state.
   */
-  @property bool followState()
+  @property bool followState() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("follow-state");
   }
@@ -84,7 +84,7 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
   
       Deprecated: Cell renderers always follow state.
   */
-  @property void followState(bool propval)
+  @property void followState(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("follow-state", propval);
   }
@@ -95,7 +95,7 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
         If the icon theme is changed, the image will be updated
         automatically.
   */
-  @property gio.icon.Icon gicon()
+  @property gio.icon.Icon gicon() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.icon.Icon)("gicon");
   }
@@ -107,7 +107,7 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
           If the icon theme is changed, the image will be updated
           automatically.
   */
-  @property void gicon(gio.icon.Icon propval)
+  @property void gicon(gio.icon.Icon propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gio.icon.Icon)("gicon", propval);
   }
@@ -118,7 +118,7 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
         This property only has an effect if not overridden by "stock_id"
         or "pixbuf" properties.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("icon-name");
   }
@@ -130,67 +130,67 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
           This property only has an effect if not overridden by "stock_id"
           or "pixbuf" properties.
   */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("icon-name", propval);
   }
 
   /** */
-  @property gdkpixbuf.pixbuf.Pixbuf pixbuf()
+  @property gdkpixbuf.pixbuf.Pixbuf pixbuf() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdkpixbuf.pixbuf.Pixbuf)("pixbuf");
   }
 
   /** */
-  @property void pixbuf(gdkpixbuf.pixbuf.Pixbuf propval)
+  @property void pixbuf(gdkpixbuf.pixbuf.Pixbuf propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdkpixbuf.pixbuf.Pixbuf)("pixbuf", propval);
   }
 
   /** */
-  @property gdkpixbuf.pixbuf.Pixbuf pixbufExpanderClosed()
+  @property gdkpixbuf.pixbuf.Pixbuf pixbufExpanderClosed() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdkpixbuf.pixbuf.Pixbuf)("pixbuf-expander-closed");
   }
 
   /** */
-  @property void pixbufExpanderClosed(gdkpixbuf.pixbuf.Pixbuf propval)
+  @property void pixbufExpanderClosed(gdkpixbuf.pixbuf.Pixbuf propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdkpixbuf.pixbuf.Pixbuf)("pixbuf-expander-closed", propval);
   }
 
   /** */
-  @property gdkpixbuf.pixbuf.Pixbuf pixbufExpanderOpen()
+  @property gdkpixbuf.pixbuf.Pixbuf pixbufExpanderOpen() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdkpixbuf.pixbuf.Pixbuf)("pixbuf-expander-open");
   }
 
   /** */
-  @property void pixbufExpanderOpen(gdkpixbuf.pixbuf.Pixbuf propval)
+  @property void pixbufExpanderOpen(gdkpixbuf.pixbuf.Pixbuf propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdkpixbuf.pixbuf.Pixbuf)("pixbuf-expander-open", propval);
   }
 
   /** */
-  @property string stockDetail()
+  @property string stockDetail() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("stock-detail");
   }
 
   /** */
-  @property void stockDetail(string propval)
+  @property void stockDetail(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("stock-detail", propval);
   }
 
   /** */
-  @property string stockId()
+  @property string stockId() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("stock-id");
   }
 
   /** */
-  @property void stockId(string propval)
+  @property void stockId(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("stock-id", propval);
   }
@@ -199,7 +199,7 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
       Get `stockSize` property.
       Returns: The #GtkIconSize value that specifies the size of the rendered icon.
   */
-  @property uint stockSize()
+  @property uint stockSize() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("stock-size");
   }
@@ -209,19 +209,19 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
       Params:
         propval = The #GtkIconSize value that specifies the size of the rendered icon.
   */
-  @property void stockSize(uint propval)
+  @property void stockSize(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("stock-size", propval);
   }
 
   /** */
-  @property cairo.surface.Surface surface()
+  @property cairo.surface.Surface surface() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(cairo.surface.Surface)("surface");
   }
 
   /** */
-  @property void surface(cairo.surface.Surface propval)
+  @property void surface(cairo.surface.Surface propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(cairo.surface.Surface)("surface", propval);
   }
@@ -236,7 +236,7 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
       #GtkTreeView.
       Returns: the new cell renderer
   */
-  this()
+  this() nothrow
   {
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_renderer_pixbuf_new();
@@ -257,7 +257,7 @@ class CellRendererPixbufGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBui
   
       Deprecated: Cell renderers always follow state.
   */
-  T followState(bool propval)
+  T followState(bool propval) nothrow
   {
     return setProperty("follow-state", propval);
   }
@@ -270,7 +270,7 @@ class CellRendererPixbufGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBui
           automatically.
       Returns: Builder instance for fluent chaining
   */
-  T gicon(gio.icon.Icon propval)
+  T gicon(gio.icon.Icon propval) nothrow
   {
     return setProperty("gicon", propval);
   }
@@ -283,37 +283,37 @@ class CellRendererPixbufGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBui
           or "pixbuf" properties.
       Returns: Builder instance for fluent chaining
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
 
   /** */
-  T pixbuf(gdkpixbuf.pixbuf.Pixbuf propval)
+  T pixbuf(gdkpixbuf.pixbuf.Pixbuf propval) nothrow
   {
     return setProperty("pixbuf", propval);
   }
 
   /** */
-  T pixbufExpanderClosed(gdkpixbuf.pixbuf.Pixbuf propval)
+  T pixbufExpanderClosed(gdkpixbuf.pixbuf.Pixbuf propval) nothrow
   {
     return setProperty("pixbuf-expander-closed", propval);
   }
 
   /** */
-  T pixbufExpanderOpen(gdkpixbuf.pixbuf.Pixbuf propval)
+  T pixbufExpanderOpen(gdkpixbuf.pixbuf.Pixbuf propval) nothrow
   {
     return setProperty("pixbuf-expander-open", propval);
   }
 
   /** */
-  T stockDetail(string propval)
+  T stockDetail(string propval) nothrow
   {
     return setProperty("stock-detail", propval);
   }
 
   /** */
-  T stockId(string propval)
+  T stockId(string propval) nothrow
   {
     return setProperty("stock-id", propval);
   }
@@ -324,13 +324,13 @@ class CellRendererPixbufGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBui
         propval = The #GtkIconSize value that specifies the size of the rendered icon.
       Returns: Builder instance for fluent chaining
   */
-  T stockSize(uint propval)
+  T stockSize(uint propval) nothrow
   {
     return setProperty("stock-size", propval);
   }
 
   /** */
-  T surface(cairo.surface.Surface propval)
+  T surface(cairo.surface.Surface propval) nothrow
   {
     return setProperty("surface", propval);
   }
@@ -343,7 +343,7 @@ final class CellRendererPixbufGidBuilder : CellRendererPixbufGidBuilderImpl!Cell
       Create object from builder.
       Returns: New object
   */
-  CellRendererPixbuf build()
+  CellRendererPixbuf build() nothrow
   {
     return new CellRendererPixbuf(cast(void*)createGObject(CellRendererPixbuf._getGType), No.Take);
   }

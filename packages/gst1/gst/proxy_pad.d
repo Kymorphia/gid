@@ -19,26 +19,26 @@ class ProxyPad : gst.pad.Pad
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_proxy_pad_get_type != &gidSymbolNotFound ? gst_proxy_pad_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ProxyPad self()
+  override ProxyPad self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class ProxyPad : gst.pad.Pad
       Get builder for [gst.proxy_pad.ProxyPad]
       Returns: New builder object
   */
-  static ProxyPadGidBuilder builder()
+  static ProxyPadGidBuilder builder() nothrow
   {
     return new ProxyPadGidBuilder;
   }
@@ -62,7 +62,7 @@ class ProxyPad : gst.pad.Pad
               if not.
       Returns: a #GstFlowReturn from the pad.
   */
-  static gst.types.FlowReturn chainDefault(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.buffer.Buffer buffer)
+  static gst.types.FlowReturn chainDefault(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.buffer.Buffer buffer) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_proxy_pad_chain_default(pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null);
@@ -80,7 +80,7 @@ class ProxyPad : gst.pad.Pad
               if not.
       Returns: a #GstFlowReturn from the pad.
   */
-  static gst.types.FlowReturn chainListDefault(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.buffer_list.BufferList list)
+  static gst.types.FlowReturn chainListDefault(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.buffer_list.BufferList list) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_proxy_pad_chain_list_default(pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, list ? cast(GstBufferList*)list._cPtr(Yes.Dup) : null);
@@ -100,7 +100,7 @@ class ProxyPad : gst.pad.Pad
               returns #GST_FLOW_ERROR if null.
       Returns: a #GstFlowReturn from the pad.
   */
-  static gst.types.FlowReturn getrangeDefault(gst.pad.Pad pad, gst.object.ObjectWrap parent, ulong offset, uint size, out gst.buffer.Buffer buffer)
+  static gst.types.FlowReturn getrangeDefault(gst.pad.Pad pad, gst.object.ObjectWrap parent, ulong offset, uint size, out gst.buffer.Buffer buffer) nothrow
   {
     GstFlowReturn _cretval;
     GstBuffer* _buffer;
@@ -119,7 +119,7 @@ class ProxyPad : gst.pad.Pad
       Returns: a #GstIterator of #GstPad, or null if pad
         has no parent. Unref each returned pad with [gst.object.ObjectWrap.unref].
   */
-  static gst.iterator.Iterator iterateInternalLinksDefault(gst.pad.Pad pad, gst.object.ObjectWrap parent = null)
+  static gst.iterator.Iterator iterateInternalLinksDefault(gst.pad.Pad pad, gst.object.ObjectWrap parent = null) nothrow
   {
     GstIterator* _cretval;
     _cretval = gst_proxy_pad_iterate_internal_links_default(pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null);
@@ -135,7 +135,7 @@ class ProxyPad : gst.pad.Pad
       Returns: the target #GstProxyPad, can
         be null.  Unref target pad after usage.
   */
-  gst.proxy_pad.ProxyPad getInternal()
+  gst.proxy_pad.ProxyPad getInternal() nothrow
   {
     GstProxyPad* _cretval;
     _cretval = gst_proxy_pad_get_internal(cast(GstProxyPad*)this._cPtr);
@@ -156,7 +156,7 @@ final class ProxyPadGidBuilder : ProxyPadGidBuilderImpl!ProxyPadGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ProxyPad build()
+  ProxyPad build() nothrow
   {
     return new ProxyPad(cast(void*)createGObject(ProxyPad._getGType), No.Take);
   }

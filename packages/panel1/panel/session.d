@@ -17,26 +17,26 @@ class Session : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_session_get_type != &gidSymbolNotFound ? panel_session_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Session self()
+  override Session self() nothrow
   {
     return this;
   }
@@ -45,13 +45,13 @@ class Session : gobject.object.ObjectWrap
       Get builder for [panel.session.Session]
       Returns: New builder object
   */
-  static SessionGidBuilder builder()
+  static SessionGidBuilder builder() nothrow
   {
     return new SessionGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     PanelSession* _cretval;
     _cretval = panel_session_new();
@@ -81,7 +81,7 @@ class Session : gobject.object.ObjectWrap
   }
 
   /** */
-  void append(panel.session_item.SessionItem item)
+  void append(panel.session_item.SessionItem item) nothrow
   {
     panel_session_append(cast(PanelSession*)this._cPtr, item ? cast(PanelSessionItem*)item._cPtr(No.Dup) : null);
   }
@@ -94,7 +94,7 @@ class Session : gobject.object.ObjectWrap
       Returns: The #PanelSessionItem at position
           or null if there is no item at that position.
   */
-  panel.session_item.SessionItem getItem(uint position)
+  panel.session_item.SessionItem getItem(uint position) nothrow
   {
     PanelSessionItem* _cretval;
     _cretval = panel_session_get_item(cast(PanelSession*)this._cPtr, position);
@@ -103,7 +103,7 @@ class Session : gobject.object.ObjectWrap
   }
 
   /** */
-  uint getNItems()
+  uint getNItems() nothrow
   {
     uint _retval;
     _retval = panel_session_get_n_items(cast(PanelSession*)this._cPtr);
@@ -111,7 +111,7 @@ class Session : gobject.object.ObjectWrap
   }
 
   /** */
-  void insert(uint position, panel.session_item.SessionItem item)
+  void insert(uint position, panel.session_item.SessionItem item) nothrow
   {
     panel_session_insert(cast(PanelSession*)this._cPtr, position, item ? cast(PanelSessionItem*)item._cPtr(No.Dup) : null);
   }
@@ -123,7 +123,7 @@ class Session : gobject.object.ObjectWrap
         id = the id of the item
       Returns: an #PanelSessionItem or null
   */
-  panel.session_item.SessionItem lookupById(string id)
+  panel.session_item.SessionItem lookupById(string id) nothrow
   {
     PanelSessionItem* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -133,19 +133,19 @@ class Session : gobject.object.ObjectWrap
   }
 
   /** */
-  void prepend(panel.session_item.SessionItem item)
+  void prepend(panel.session_item.SessionItem item) nothrow
   {
     panel_session_prepend(cast(PanelSession*)this._cPtr, item ? cast(PanelSessionItem*)item._cPtr(No.Dup) : null);
   }
 
   /** */
-  void remove(panel.session_item.SessionItem item)
+  void remove(panel.session_item.SessionItem item) nothrow
   {
     panel_session_remove(cast(PanelSession*)this._cPtr, item ? cast(PanelSessionItem*)item._cPtr(No.Dup) : null);
   }
 
   /** */
-  void removeAt(uint position)
+  void removeAt(uint position) nothrow
   {
     panel_session_remove_at(cast(PanelSession*)this._cPtr, position);
   }
@@ -159,7 +159,7 @@ class Session : gobject.object.ObjectWrap
       The resulting variant will not be floating.
       Returns: a #GVariant
   */
-  glib.variant.Variant toVariant()
+  glib.variant.Variant toVariant() nothrow
   {
     GVariant* _cretval;
     _cretval = panel_session_to_variant(cast(PanelSession*)this._cPtr);
@@ -180,7 +180,7 @@ final class SessionGidBuilder : SessionGidBuilderImpl!SessionGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Session build()
+  Session build() nothrow
   {
     return new Session(cast(void*)createGObject(Session._getGType), Yes.Take);
   }

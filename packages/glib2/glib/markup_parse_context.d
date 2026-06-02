@@ -20,38 +20,38 @@ class MarkupParseContext : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_markup_parse_context_get_type != &gidSymbolNotFound ? g_markup_parse_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MarkupParseContext self()
+  override MarkupParseContext self() nothrow
   {
     return this;
   }
 
   /** */
-  this(ref MarkupParser parser, MarkupParseFlags flags)
+  this(ref MarkupParser parser, MarkupParseFlags flags) nothrow
   {
     GMarkupParseContext* _cretval;
     GMarkupParseFlags _flags = cast(GMarkupParseFlags)cast(uint)flags;
@@ -87,7 +87,7 @@ class MarkupParseContext : gobject.boxed.Boxed
       elements, see [glib.markup_parse_context.MarkupParseContext.getElementStack].
       Returns: the name of the currently open element, or null
   */
-  string getElement()
+  string getElement() nothrow
   {
     const(char)* _cretval;
     _cretval = g_markup_parse_context_get_element(cast(GMarkupParseContext*)this._cPtr);
@@ -109,7 +109,7 @@ class MarkupParseContext : gobject.boxed.Boxed
       processed.
       Returns: the element stack, which must not be modified
   */
-  string[] getElementStack()
+  string[] getElementStack() nothrow
   {
     const(GSList)* _cretval;
     _cretval = g_markup_parse_context_get_element_stack(cast(GMarkupParseContext*)this._cPtr);
@@ -127,7 +127,7 @@ class MarkupParseContext : gobject.boxed.Boxed
         lineNumber = return location for a line number, or null
         charNumber = return location for a char-on-line number, or null
   */
-  void getPosition(out int lineNumber, out int charNumber)
+  void getPosition(out int lineNumber, out int charNumber) nothrow
   {
     g_markup_parse_context_get_position(cast(GMarkupParseContext*)this._cPtr, cast(int*)&lineNumber, cast(int*)&charNumber);
   }
@@ -142,7 +142,7 @@ class MarkupParseContext : gobject.boxed.Boxed
             the markup context and will be freed when
             [glib.markup_parse_context.MarkupParseContext.free] is called.
   */
-  void* getUserData()
+  void* getUserData() nothrow
   {
     auto _retval = g_markup_parse_context_get_user_data(cast(GMarkupParseContext*)this._cPtr);
     return _retval;
@@ -196,7 +196,7 @@ class MarkupParseContext : gobject.boxed.Boxed
       interface.
       Returns: the user data passed to [glib.markup_parse_context.MarkupParseContext.push]
   */
-  void* pop()
+  void* pop() nothrow
   {
     auto _retval = g_markup_parse_context_pop(cast(GMarkupParseContext*)this._cPtr);
     return _retval;
@@ -322,7 +322,7 @@ class MarkupParseContext : gobject.boxed.Boxed
         parser = a #GMarkupParser
         userData = user data to pass to #GMarkupParser functions
   */
-  void push(glib.types.MarkupParser parser, void* userData = null)
+  void push(glib.types.MarkupParser parser, void* userData = null) nothrow
   {
     g_markup_parse_context_push(cast(GMarkupParseContext*)this._cPtr, &parser, userData);
   }

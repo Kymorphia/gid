@@ -17,26 +17,26 @@ class CallbackAnimationTarget : adw.animation_target.AnimationTarget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_callback_animation_target_get_type != &gidSymbolNotFound ? adw_callback_animation_target_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CallbackAnimationTarget self()
+  override CallbackAnimationTarget self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class CallbackAnimationTarget : adw.animation_target.AnimationTarget
       Get builder for [adw.callback_animation_target.CallbackAnimationTarget]
       Returns: New builder object
   */
-  static CallbackAnimationTargetGidBuilder builder()
+  static CallbackAnimationTargetGidBuilder builder() nothrow
   {
     return new CallbackAnimationTargetGidBuilder;
   }
@@ -58,13 +58,20 @@ class CallbackAnimationTarget : adw.animation_target.AnimationTarget
         callback = the callback to call
       Returns: the newly created callback target
   */
-  this(adw.types.AnimationTargetFunc callback)
+  this(adw.types.AnimationTargetFunc callback) nothrow
   {
-    extern(C) void _callbackCallback(double value, void* userData)
+    extern(C) void _callbackCallback(double value, void* userData) nothrow
     {
       auto _dlg = cast(adw.types.AnimationTargetFunc*)userData;
 
-      (*_dlg)(value);
+      try
+      {
+        (*_dlg)(value);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.types.AnimationTargetFunc");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     AdwAnimationTarget* _cretval;
@@ -87,7 +94,7 @@ final class CallbackAnimationTargetGidBuilder : CallbackAnimationTargetGidBuilde
       Create object from builder.
       Returns: New object
   */
-  CallbackAnimationTarget build()
+  CallbackAnimationTarget build() nothrow
   {
     return new CallbackAnimationTarget(cast(void*)createGObject(CallbackAnimationTarget._getGType), Yes.Take);
   }

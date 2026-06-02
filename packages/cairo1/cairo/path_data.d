@@ -76,11 +76,8 @@ class PathData
   cairo_path_data_t _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for cairo.path_data.PathData");
-
     _cInstance = *cast(cairo_path_data_t*)ptr;
 
     if (take)
@@ -88,7 +85,7 @@ class PathData
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }

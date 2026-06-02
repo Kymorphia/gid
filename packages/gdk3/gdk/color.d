@@ -39,23 +39,22 @@ struct Color
   ushort blue;
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_color_get_type != &gidSymbolNotFound ? gdk_color_get_type() : cast(GType)0;
   }
 
   /** */
-  @property GType _gType()
+  @property GType _gType() nothrow
   {
     return _getGType();
   }
 
-  void* boxCopy()
+  void* boxCopy() nothrow
   {
     import gobject.c.functions : g_boxed_copy;
-    return g_boxed_copy(_gType,
-        cast(void*)&this);
+    return g_boxed_copy(_gType, cast(void*)&this);
   }
 
   /**
@@ -66,7 +65,7 @@ struct Color
   
       Deprecated: Use #GdkRGBA
   */
-  gdk.color.Color copy()
+  gdk.color.Color copy() nothrow
   {
     GdkColor* _cretval;
     _cretval = gdk_color_copy(cast(const(GdkColor)*)&this);
@@ -85,7 +84,7 @@ struct Color
   
       Deprecated: Use #GdkRGBA
   */
-  bool equal(gdk.color.Color colorb)
+  bool equal(gdk.color.Color colorb) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_color_equal(cast(const(GdkColor)*)&this, cast(const(GdkColor)*)&colorb);
@@ -99,7 +98,7 @@ struct Color
   
       Deprecated: Use #GdkRGBA
   */
-  uint hash()
+  uint hash() nothrow
   {
     uint _retval;
     _retval = gdk_color_hash(cast(const(GdkColor)*)&this);
@@ -116,7 +115,7 @@ struct Color
   
       Deprecated: Use #GdkRGBA
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gdk_color_to_string(cast(const(GdkColor)*)&this);
@@ -143,7 +142,7 @@ struct Color
   
       Deprecated: Use #GdkRGBA
   */
-  static bool parse(string spec, out gdk.color.Color color)
+  static bool parse(string spec, out gdk.color.Color color) nothrow
   {
     bool _retval;
     const(char)* _spec = spec.toCString(No.Alloc);

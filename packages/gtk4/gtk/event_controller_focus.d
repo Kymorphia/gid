@@ -25,26 +25,26 @@ class EventControllerFocus : gtk.event_controller.EventController
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_event_controller_focus_get_type != &gidSymbolNotFound ? gtk_event_controller_focus_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EventControllerFocus self()
+  override EventControllerFocus self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class EventControllerFocus : gtk.event_controller.EventController
       Get builder for [gtk.event_controller_focus.EventControllerFocus]
       Returns: New builder object
   */
-  static EventControllerFocusGidBuilder builder()
+  static EventControllerFocusGidBuilder builder() nothrow
   {
     return new EventControllerFocusGidBuilder;
   }
@@ -62,7 +62,7 @@ class EventControllerFocus : gtk.event_controller.EventController
       Creates a new event controller that will handle focus events.
       Returns: a new [gtk.event_controller_focus.EventControllerFocus]
   */
-  this()
+  this() nothrow
   {
     GtkEventController* _cretval;
     _cretval = gtk_event_controller_focus_new();
@@ -73,7 +73,7 @@ class EventControllerFocus : gtk.event_controller.EventController
       Returns true if focus is within self or one of its children.
       Returns: true if focus is within self or one of its children
   */
-  bool containsFocus()
+  bool containsFocus() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_event_controller_focus_contains_focus(cast(GtkEventControllerFocus*)this._cPtr);
@@ -84,7 +84,7 @@ class EventControllerFocus : gtk.event_controller.EventController
       Returns true if focus is within self, but not one of its children.
       Returns: true if focus is within self, but not one of its children
   */
-  bool isFocus()
+  bool isFocus() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_event_controller_focus_is_focus(cast(GtkEventControllerFocus*)this._cPtr);
@@ -115,13 +115,13 @@ class EventControllerFocus : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEnter(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEnter(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.event_controller_focus.EventControllerFocus)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -130,7 +130,14 @@ class EventControllerFocus : gtk.event_controller.EventController
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.event_controller_focus.EventControllerFocus.enter");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -160,13 +167,13 @@ class EventControllerFocus : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLeave(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLeave(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.event_controller_focus.EventControllerFocus)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -175,7 +182,14 @@ class EventControllerFocus : gtk.event_controller.EventController
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.event_controller_focus.EventControllerFocus.leave");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -195,7 +209,7 @@ final class EventControllerFocusGidBuilder : EventControllerFocusGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  EventControllerFocus build()
+  EventControllerFocus build() nothrow
   {
     return new EventControllerFocus(cast(void*)createGObject(EventControllerFocus._getGType), Yes.Take);
   }

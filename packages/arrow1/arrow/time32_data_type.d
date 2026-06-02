@@ -15,26 +15,26 @@ class Time32DataType : arrow.time_data_type.TimeDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_time32_data_type_get_type != &gidSymbolNotFound ? garrow_time32_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Time32DataType self()
+  override Time32DataType self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class Time32DataType : arrow.time_data_type.TimeDataType
       Get builder for [arrow.time32_data_type.Time32DataType]
       Returns: New builder object
   */
-  static Time32DataTypeGidBuilder builder()
+  static Time32DataTypeGidBuilder builder() nothrow
   {
     return new Time32DataTypeGidBuilder;
   }
@@ -72,7 +72,7 @@ final class Time32DataTypeGidBuilder : Time32DataTypeGidBuilderImpl!Time32DataTy
       Create object from builder.
       Returns: New object
   */
-  Time32DataType build()
+  Time32DataType build() nothrow
   {
     return new Time32DataType(cast(void*)createGObject(Time32DataType._getGType), Yes.Take);
   }

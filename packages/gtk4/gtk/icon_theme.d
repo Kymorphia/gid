@@ -51,26 +51,26 @@ class IconTheme : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_icon_theme_get_type != &gidSymbolNotFound ? gtk_icon_theme_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override IconTheme self()
+  override IconTheme self() nothrow
   {
     return this;
   }
@@ -79,7 +79,7 @@ class IconTheme : gobject.object.ObjectWrap
       Get builder for [gtk.icon_theme.IconTheme]
       Returns: New builder object
   */
-  static IconThemeGidBuilder builder()
+  static IconThemeGidBuilder builder() nothrow
   {
     return new IconThemeGidBuilder;
   }
@@ -88,7 +88,7 @@ class IconTheme : gobject.object.ObjectWrap
       Get `display` property.
       Returns: The display that this icon theme object is attached to.
   */
-  @property gdk.display.Display display()
+  @property gdk.display.Display display() nothrow
   {
     return getDisplay();
   }
@@ -98,7 +98,7 @@ class IconTheme : gobject.object.ObjectWrap
       Params:
         propval = The display that this icon theme object is attached to.
   */
-  @property void display(gdk.display.Display propval)
+  @property void display(gdk.display.Display propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.display.Display)("display", propval);
   }
@@ -111,7 +111,7 @@ class IconTheme : gobject.object.ObjectWrap
         the `GtkSettings:gtk-icon-theme-name` property of the [gtk.settings.Settings]
         object associated to the display of the icontheme object.
   */
-  @property string themeName()
+  @property string themeName() nothrow
   {
     return getThemeName();
   }
@@ -125,7 +125,7 @@ class IconTheme : gobject.object.ObjectWrap
           the `GtkSettings:gtk-icon-theme-name` property of the [gtk.settings.Settings]
           object associated to the display of the icontheme object.
   */
-  @property void themeName(string propval)
+  @property void themeName(string propval) nothrow
   {
     setThemeName(propval);
   }
@@ -139,7 +139,7 @@ class IconTheme : gobject.object.ObjectWrap
       a new icon theme object for scratch.
       Returns: the newly created [gtk.icon_theme.IconTheme] object.
   */
-  this()
+  this() nothrow
   {
     GtkIconTheme* _cretval;
     _cretval = gtk_icon_theme_new();
@@ -162,7 +162,7 @@ class IconTheme : gobject.object.ObjectWrap
           the given display. This icon theme is associated with the display
           and can be used as long as the display is open. Do not ref or unref it.
   */
-  static gtk.icon_theme.IconTheme getForDisplay(gdk.display.Display display)
+  static gtk.icon_theme.IconTheme getForDisplay(gdk.display.Display display) nothrow
   {
     GtkIconTheme* _cretval;
     _cretval = gtk_icon_theme_get_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
@@ -182,7 +182,7 @@ class IconTheme : gobject.object.ObjectWrap
       Params:
         path = a resource path
   */
-  void addResourcePath(string path)
+  void addResourcePath(string path) nothrow
   {
     const(char)* _path = path.toCString(No.Alloc);
     gtk_icon_theme_add_resource_path(cast(GtkIconTheme*)this._cPtr, _path);
@@ -196,7 +196,7 @@ class IconTheme : gobject.object.ObjectWrap
       Params:
         path = directory name to append to the icon path
   */
-  void addSearchPath(string path)
+  void addSearchPath(string path) nothrow
   {
     const(char)* _path = path.toCString(No.Alloc);
     gtk_icon_theme_add_search_path(cast(GtkIconTheme*)this._cPtr, _path);
@@ -207,7 +207,7 @@ class IconTheme : gobject.object.ObjectWrap
       created for.
       Returns: the display of icon_theme
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gtk_icon_theme_get_display(cast(GtkIconTheme*)this._cPtr);
@@ -221,7 +221,7 @@ class IconTheme : gobject.object.ObjectWrap
           holding the names of all the icons in the theme. You must
           free the array using [glib.global.strfreev].
   */
-  string[] getIconNames()
+  string[] getIconNames() nothrow
   {
     char** _cretval;
     _cretval = gtk_icon_theme_get_icon_names(cast(GtkIconTheme*)this._cPtr);
@@ -254,7 +254,7 @@ class IconTheme : gobject.object.ObjectWrap
           available. The array should be freed with [glib.global.gfree] when it is no
           longer needed.
   */
-  int[] getIconSizes(string iconName)
+  int[] getIconSizes(string iconName) nothrow
   {
     int* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
@@ -278,7 +278,7 @@ class IconTheme : gobject.object.ObjectWrap
       See [gtk.icon_theme.IconTheme.setResourcePath].
       Returns: A list of resource paths
   */
-  string[] getResourcePath()
+  string[] getResourcePath() nothrow
   {
     char** _cretval;
     _cretval = gtk_icon_theme_get_resource_path(cast(GtkIconTheme*)this._cPtr);
@@ -303,7 +303,7 @@ class IconTheme : gobject.object.ObjectWrap
       See [gtk.icon_theme.IconTheme.setSearchPath].
       Returns: a list of icon theme path directories
   */
-  string[] getSearchPath()
+  string[] getSearchPath() nothrow
   {
     char** _cretval;
     _cretval = gtk_icon_theme_get_search_path(cast(GtkIconTheme*)this._cPtr);
@@ -328,7 +328,7 @@ class IconTheme : gobject.object.ObjectWrap
       Returns (transfer full): the current icon theme name,
       Returns: 
   */
-  string getThemeName()
+  string getThemeName() nothrow
   {
     char* _cretval;
     _cretval = gtk_icon_theme_get_theme_name(cast(GtkIconTheme*)this._cPtr);
@@ -344,7 +344,7 @@ class IconTheme : gobject.object.ObjectWrap
         gicon = a [gio.icon.Icon]
       Returns: true if self includes an icon for gicon
   */
-  bool hasGicon(gio.icon.Icon gicon)
+  bool hasGicon(gio.icon.Icon gicon) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_icon_theme_has_gicon(cast(GtkIconTheme*)this._cPtr, gicon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)gicon)._cPtr(No.Dup) : null);
@@ -360,7 +360,7 @@ class IconTheme : gobject.object.ObjectWrap
       Returns: true if self includes an
          icon for icon_name.
   */
-  bool hasIcon(string iconName)
+  bool hasIcon(string iconName) nothrow
   {
     bool _retval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
@@ -383,7 +383,7 @@ class IconTheme : gobject.object.ObjectWrap
       Returns: a [gtk.icon_paintable.IconPaintable] containing
           information about the icon. Unref with [gobject.object.ObjectWrap.unref]
   */
-  gtk.icon_paintable.IconPaintable lookupByGicon(gio.icon.Icon icon, int size, int scale, gtk.types.TextDirection direction, gtk.types.IconLookupFlags flags)
+  gtk.icon_paintable.IconPaintable lookupByGicon(gio.icon.Icon icon, int size, int scale, gtk.types.TextDirection direction, gtk.types.IconLookupFlags flags) nothrow
   {
     GtkIconPaintable* _cretval;
     _cretval = gtk_icon_theme_lookup_by_gicon(cast(GtkIconTheme*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null, size, scale, direction, flags);
@@ -419,7 +419,7 @@ class IconTheme : gobject.object.ObjectWrap
       Returns: a [gtk.icon_paintable.IconPaintable] object
           containing the icon.
   */
-  gtk.icon_paintable.IconPaintable lookupIcon(string iconName, string[] fallbacks, int size, int scale, gtk.types.TextDirection direction, gtk.types.IconLookupFlags flags)
+  gtk.icon_paintable.IconPaintable lookupIcon(string iconName, string[] fallbacks, int size, int scale, gtk.types.TextDirection direction, gtk.types.IconLookupFlags flags) nothrow
   {
     GtkIconPaintable* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
@@ -451,7 +451,7 @@ class IconTheme : gobject.object.ObjectWrap
         path = NULL-terminated array of resource paths
             that are searched for icons
   */
-  void setResourcePath(string[] path = null)
+  void setResourcePath(string[] path = null) nothrow
   {
     const(char)*[] _tmppath;
     foreach (s; path)
@@ -483,7 +483,7 @@ class IconTheme : gobject.object.ObjectWrap
         path = NULL-terminated
             array of directories that are searched for icon themes
   */
-  void setSearchPath(string[] path = null)
+  void setSearchPath(string[] path = null) nothrow
   {
     const(char)*[] _tmppath;
     foreach (s; path)
@@ -505,7 +505,7 @@ class IconTheme : gobject.object.ObjectWrap
         themeName = name of icon theme to use instead of
             configured theme, or null to unset a previously set custom theme
   */
-  void setThemeName(string themeName = null)
+  void setThemeName(string themeName = null) nothrow
   {
     const(char)* _themeName = themeName.toCString(No.Alloc);
     gtk_icon_theme_set_theme_name(cast(GtkIconTheme*)this._cPtr, _themeName);
@@ -530,13 +530,13 @@ class IconTheme : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.icon_theme.IconTheme)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -545,7 +545,14 @@ class IconTheme : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.icon_theme.IconTheme.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -563,7 +570,7 @@ class IconThemeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The display that this icon theme object is attached to.
       Returns: Builder instance for fluent chaining
   */
-  T display(gdk.display.Display propval)
+  T display(gdk.display.Display propval) nothrow
   {
     return setProperty("display", propval);
   }
@@ -578,7 +585,7 @@ class IconThemeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           object associated to the display of the icontheme object.
       Returns: Builder instance for fluent chaining
   */
-  T themeName(string propval)
+  T themeName(string propval) nothrow
   {
     return setProperty("theme-name", propval);
   }
@@ -591,7 +598,7 @@ final class IconThemeGidBuilder : IconThemeGidBuilderImpl!IconThemeGidBuilder
       Create object from builder.
       Returns: New object
   */
-  IconTheme build()
+  IconTheme build() nothrow
   {
     return new IconTheme(cast(void*)createGObject(IconTheme._getGType), Yes.Take);
   }

@@ -132,26 +132,26 @@ class DeviceManager : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_device_manager_get_type != &gidSymbolNotFound ? gdk_device_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DeviceManager self()
+  override DeviceManager self() nothrow
   {
     return this;
   }
@@ -160,13 +160,13 @@ class DeviceManager : gobject.object.ObjectWrap
       Get builder for [gdk.device_manager.DeviceManager]
       Returns: New builder object
   */
-  static DeviceManagerGidBuilder builder()
+  static DeviceManagerGidBuilder builder() nothrow
   {
     return new DeviceManagerGidBuilder;
   }
 
   /** */
-  @property gdk.display.Display display()
+  @property gdk.display.Display display() nothrow
   {
     return getDisplay();
   }
@@ -183,7 +183,7 @@ class DeviceManager : gobject.object.ObjectWrap
   
       Deprecated: Use [gdk.seat.Seat.getPointer] instead.
   */
-  gdk.device.Device getClientPointer()
+  gdk.device.Device getClientPointer() nothrow
   {
     GdkDevice* _cretval;
     _cretval = gdk_device_manager_get_client_pointer(cast(GdkDeviceManager*)this._cPtr);
@@ -197,7 +197,7 @@ class DeviceManager : gobject.object.ObjectWrap
                  device_manager is associated to, or null. This memory is
                  owned by GDK and must not be freed or unreferenced.
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gdk_device_manager_get_display(cast(GdkDeviceManager*)this._cPtr);
@@ -219,7 +219,7 @@ class DeviceManager : gobject.object.ObjectWrap
       Deprecated: , use [gdk.seat.Seat.getPointer], [gdk.seat.Seat.getKeyboard]
                     and [gdk.seat.Seat.getSlaves] instead.
   */
-  gdk.device.Device[] listDevices(gdk.types.DeviceType type)
+  gdk.device.Device[] listDevices(gdk.types.DeviceType type) nothrow
   {
     GList* _cretval;
     _cretval = gdk_device_manager_list_devices(cast(GdkDeviceManager*)this._cPtr, type);
@@ -246,14 +246,14 @@ class DeviceManager : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeviceAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeviceAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.device.Device)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.device_manager.DeviceManager)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -265,7 +265,14 @@ class DeviceManager : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.device_manager.DeviceManager.deviceAdded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -298,14 +305,14 @@ class DeviceManager : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeviceChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeviceChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.device.Device)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.device_manager.DeviceManager)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -317,7 +324,14 @@ class DeviceManager : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.device_manager.DeviceManager.deviceChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -343,14 +357,14 @@ class DeviceManager : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeviceRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeviceRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.device.Device)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.device_manager.DeviceManager)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -362,7 +376,14 @@ class DeviceManager : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.device_manager.DeviceManager.deviceRemoved");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -375,7 +396,7 @@ class DeviceManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T display(gdk.display.Display propval)
+  T display(gdk.display.Display propval) nothrow
   {
     return setProperty("display", propval);
   }
@@ -388,7 +409,7 @@ final class DeviceManagerGidBuilder : DeviceManagerGidBuilderImpl!DeviceManagerG
       Create object from builder.
       Returns: New object
   */
-  DeviceManager build()
+  DeviceManager build() nothrow
   {
     return new DeviceManager(cast(void*)createGObject(DeviceManager._getGType), No.Take);
   }

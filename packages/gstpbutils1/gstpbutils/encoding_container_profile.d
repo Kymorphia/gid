@@ -17,26 +17,26 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_encoding_container_profile_get_type != &gidSymbolNotFound ? gst_encoding_container_profile_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EncodingContainerProfile self()
+  override EncodingContainerProfile self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
       Get builder for [gstpbutils.encoding_container_profile.EncodingContainerProfile]
       Returns: New builder object
   */
-  static EncodingContainerProfileGidBuilder builder()
+  static EncodingContainerProfileGidBuilder builder() nothrow
   {
     return new EncodingContainerProfileGidBuilder;
   }
@@ -61,7 +61,7 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
         preset = The preset to use for this profile.
       Returns: The newly created #GstEncodingContainerProfile.
   */
-  this(string name, string description, gst.caps.Caps format, string preset = null)
+  this(string name, string description, gst.caps.Caps format, string preset = null) nothrow
   {
     GstEncodingContainerProfile* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -81,7 +81,7 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
         profile = the #GstEncodingProfile to add.
       Returns: true if the stream was properly added, else false.
   */
-  bool addProfile(gstpbutils.encoding_profile.EncodingProfile profile)
+  bool addProfile(gstpbutils.encoding_profile.EncodingProfile profile) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_encoding_container_profile_add_profile(cast(GstEncodingContainerProfile*)this._cPtr, profile ? cast(GstEncodingProfile*)profile._cPtr(Yes.Dup) : null);
@@ -97,7 +97,7 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
       Returns: true if container contains a #GstEncodingProfile identical
         to profile, else false.
   */
-  bool containsProfile(gstpbutils.encoding_profile.EncodingProfile profile)
+  bool containsProfile(gstpbutils.encoding_profile.EncodingProfile profile) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_encoding_container_profile_contains_profile(cast(GstEncodingContainerProfile*)this._cPtr, profile ? cast(GstEncodingProfile*)profile._cPtr(No.Dup) : null);
@@ -105,7 +105,7 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
   }
 
   /** */
-  gstpbutils.encoding_profile.EncodingProfile[] getProfiles()
+  gstpbutils.encoding_profile.EncodingProfile[] getProfiles() nothrow
   {
     const(GList)* _cretval;
     _cretval = gst_encoding_container_profile_get_profiles(cast(GstEncodingContainerProfile*)this._cPtr);
@@ -126,7 +126,7 @@ final class EncodingContainerProfileGidBuilder : EncodingContainerProfileGidBuil
       Create object from builder.
       Returns: New object
   */
-  EncodingContainerProfile build()
+  EncodingContainerProfile build() nothrow
   {
     return new EncodingContainerProfile(cast(void*)createGObject(EncodingContainerProfile._getGType), Yes.Take);
   }

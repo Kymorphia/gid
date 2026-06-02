@@ -16,26 +16,26 @@ class StructFieldOptions : arrow.function_options.FunctionOptions
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_struct_field_options_get_type != &gidSymbolNotFound ? garrow_struct_field_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StructFieldOptions self()
+  override StructFieldOptions self() nothrow
   {
     return this;
   }
@@ -44,19 +44,19 @@ class StructFieldOptions : arrow.function_options.FunctionOptions
       Get builder for [arrow.struct_field_options.StructFieldOptions]
       Returns: New builder object
   */
-  static StructFieldOptionsGidBuilder builder()
+  static StructFieldOptionsGidBuilder builder() nothrow
   {
     return new StructFieldOptionsGidBuilder;
   }
 
   /** */
-  @property string fieldRef()
+  @property string fieldRef() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("field-ref");
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowStructFieldOptions* _cretval;
     _cretval = garrow_struct_field_options_new();
@@ -86,7 +86,7 @@ final class StructFieldOptionsGidBuilder : StructFieldOptionsGidBuilderImpl!Stru
       Create object from builder.
       Returns: New object
   */
-  StructFieldOptions build()
+  StructFieldOptions build() nothrow
   {
     return new StructFieldOptions(cast(void*)createGObject(StructFieldOptions._getGType), Yes.Take);
   }

@@ -18,26 +18,26 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_item_get_type != &gidSymbolNotFound ? gtk_source_completion_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CompletionItem self()
+  override CompletionItem self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
       Get builder for [gtksource.completion_item.CompletionItem]
       Returns: New builder object
   */
-  static CompletionItemGidBuilder builder()
+  static CompletionItemGidBuilder builder() nothrow
   {
     return new CompletionItemGidBuilder;
   }
@@ -55,7 +55,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
       Get `gicon` property.
       Returns: The #GIcon for the icon to be shown for this proposal.
   */
-  @property gio.icon.Icon gicon()
+  @property gio.icon.Icon gicon() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.icon.Icon)("gicon");
   }
@@ -65,7 +65,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
       Params:
         propval = The #GIcon for the icon to be shown for this proposal.
   */
-  @property void gicon(gio.icon.Icon propval)
+  @property void gicon(gio.icon.Icon propval) nothrow
   {
     setGicon(propval);
   }
@@ -74,7 +74,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
       Get `icon` property.
       Returns: The #GdkPixbuf for the icon to be shown for this proposal.
   */
-  @property gdkpixbuf.pixbuf.Pixbuf icon()
+  @property gdkpixbuf.pixbuf.Pixbuf icon() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdkpixbuf.pixbuf.Pixbuf)("icon");
   }
@@ -84,7 +84,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
       Params:
         propval = The #GdkPixbuf for the icon to be shown for this proposal.
   */
-  @property void icon(gdkpixbuf.pixbuf.Pixbuf propval)
+  @property void icon(gdkpixbuf.pixbuf.Pixbuf propval) nothrow
   {
     setIcon(propval);
   }
@@ -93,7 +93,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
       Get `iconName` property.
       Returns: The icon name for the icon to be shown for this proposal.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("icon-name");
   }
@@ -103,7 +103,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
       Params:
         propval = The icon name for the icon to be shown for this proposal.
   */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     setIconName(propval);
   }
@@ -112,7 +112,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
       Get `info` property.
       Returns: Optional extra information to be shown for this proposal.
   */
-  @property string info()
+  @property string info() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("info");
   }
@@ -122,7 +122,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
       Params:
         propval = Optional extra information to be shown for this proposal.
   */
-  @property void info(string propval)
+  @property void info(string propval) nothrow
   {
     setInfo(propval);
   }
@@ -131,7 +131,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
       Get `label` property.
       Returns: Label to be shown for this proposal.
   */
-  @property string label()
+  @property string label() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("label");
   }
@@ -141,7 +141,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
       Params:
         propval = Label to be shown for this proposal.
   */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     setLabel(propval);
   }
@@ -150,7 +150,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
       Get `markup` property.
       Returns: Label with markup to be shown for this proposal.
   */
-  @property string markup()
+  @property string markup() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("markup");
   }
@@ -160,7 +160,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
       Params:
         propval = Label with markup to be shown for this proposal.
   */
-  @property void markup(string propval)
+  @property void markup(string propval) nothrow
   {
     setMarkup(propval);
   }
@@ -169,7 +169,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
       Get `text` property.
       Returns: Proposal text.
   */
-  @property string text()
+  @property string text() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("text");
   }
@@ -179,7 +179,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
       Params:
         propval = Proposal text.
   */
-  @property void text(string propval)
+  @property void text(string propval) nothrow
   {
     setText(propval);
   }
@@ -191,7 +191,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
       afterwards.
       Returns: a new #GtkSourceCompletionItem.
   */
-  this()
+  this() nothrow
   {
     GtkSourceCompletionItem* _cretval;
     _cretval = gtk_source_completion_item_new();
@@ -199,47 +199,47 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
   }
 
   /** */
-  void setGicon(gio.icon.Icon gicon = null)
+  void setGicon(gio.icon.Icon gicon = null) nothrow
   {
     gtk_source_completion_item_set_gicon(cast(GtkSourceCompletionItem*)this._cPtr, gicon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)gicon)._cPtr(No.Dup) : null);
   }
 
   /** */
-  void setIcon(gdkpixbuf.pixbuf.Pixbuf icon = null)
+  void setIcon(gdkpixbuf.pixbuf.Pixbuf icon = null) nothrow
   {
     gtk_source_completion_item_set_icon(cast(GtkSourceCompletionItem*)this._cPtr, icon ? cast(GdkPixbuf*)icon._cPtr(No.Dup) : null);
   }
 
   /** */
-  void setIconName(string iconName = null)
+  void setIconName(string iconName = null) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_source_completion_item_set_icon_name(cast(GtkSourceCompletionItem*)this._cPtr, _iconName);
   }
 
   /** */
-  void setInfo(string info = null)
+  void setInfo(string info = null) nothrow
   {
     const(char)* _info = info.toCString(No.Alloc);
     gtk_source_completion_item_set_info(cast(GtkSourceCompletionItem*)this._cPtr, _info);
   }
 
   /** */
-  void setLabel(string label = null)
+  void setLabel(string label = null) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_source_completion_item_set_label(cast(GtkSourceCompletionItem*)this._cPtr, _label);
   }
 
   /** */
-  void setMarkup(string markup = null)
+  void setMarkup(string markup = null) nothrow
   {
     const(char)* _markup = markup.toCString(No.Alloc);
     gtk_source_completion_item_set_markup(cast(GtkSourceCompletionItem*)this._cPtr, _markup);
   }
 
   /** */
-  void setText(string text = null)
+  void setText(string text = null) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_source_completion_item_set_text(cast(GtkSourceCompletionItem*)this._cPtr, _text);
@@ -258,7 +258,7 @@ class CompletionItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = The #GIcon for the icon to be shown for this proposal.
       Returns: Builder instance for fluent chaining
   */
-  T gicon(gio.icon.Icon propval)
+  T gicon(gio.icon.Icon propval) nothrow
   {
     return setProperty("gicon", propval);
   }
@@ -269,7 +269,7 @@ class CompletionItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = The #GdkPixbuf for the icon to be shown for this proposal.
       Returns: Builder instance for fluent chaining
   */
-  T icon(gdkpixbuf.pixbuf.Pixbuf propval)
+  T icon(gdkpixbuf.pixbuf.Pixbuf propval) nothrow
   {
     return setProperty("icon", propval);
   }
@@ -280,7 +280,7 @@ class CompletionItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = The icon name for the icon to be shown for this proposal.
       Returns: Builder instance for fluent chaining
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
@@ -291,7 +291,7 @@ class CompletionItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Optional extra information to be shown for this proposal.
       Returns: Builder instance for fluent chaining
   */
-  T info(string propval)
+  T info(string propval) nothrow
   {
     return setProperty("info", propval);
   }
@@ -302,7 +302,7 @@ class CompletionItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Label to be shown for this proposal.
       Returns: Builder instance for fluent chaining
   */
-  T label(string propval)
+  T label(string propval) nothrow
   {
     return setProperty("label", propval);
   }
@@ -313,7 +313,7 @@ class CompletionItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Label with markup to be shown for this proposal.
       Returns: Builder instance for fluent chaining
   */
-  T markup(string propval)
+  T markup(string propval) nothrow
   {
     return setProperty("markup", propval);
   }
@@ -324,7 +324,7 @@ class CompletionItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Proposal text.
       Returns: Builder instance for fluent chaining
   */
-  T text(string propval)
+  T text(string propval) nothrow
   {
     return setProperty("text", propval);
   }
@@ -337,7 +337,7 @@ final class CompletionItemGidBuilder : CompletionItemGidBuilderImpl!CompletionIt
       Create object from builder.
       Returns: New object
   */
-  CompletionItem build()
+  CompletionItem build() nothrow
   {
     return new CompletionItem(cast(void*)createGObject(CompletionItem._getGType), Yes.Take);
   }

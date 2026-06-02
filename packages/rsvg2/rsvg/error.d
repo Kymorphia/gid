@@ -17,7 +17,7 @@ struct Error
       The error domain for RSVG
       Returns: The error domain
   */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = rsvg_error_quark();
@@ -27,12 +27,12 @@ struct Error
 
 class RsvgException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(rsvg.error.Error.quark, cast(int)code, msg);
   }

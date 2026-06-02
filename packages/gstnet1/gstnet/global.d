@@ -23,7 +23,7 @@ import gstnet.types;
       addr = a GSocketAddress to connect to buffer
     Returns: a #GstNetAddressMeta connected to buffer
 */
-gstnet.net_address_meta.NetAddressMeta bufferAddNetAddressMeta(gst.buffer.Buffer buffer, gio.socket_address.SocketAddress addr)
+gstnet.net_address_meta.NetAddressMeta bufferAddNetAddressMeta(gst.buffer.Buffer buffer, gio.socket_address.SocketAddress addr) nothrow
 {
   GstNetAddressMeta* _cretval;
   _cretval = gst_buffer_add_net_address_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, addr ? cast(GSocketAddress*)addr._cPtr(No.Dup) : null);
@@ -39,7 +39,7 @@ gstnet.net_address_meta.NetAddressMeta bufferAddNetAddressMeta(gst.buffer.Buffer
       message = a GSocketControlMessage to attach to buffer
     Returns: a #GstNetControlMessageMeta connected to buffer
 */
-gstnet.net_control_message_meta.NetControlMessageMeta bufferAddNetControlMessageMeta(gst.buffer.Buffer buffer, gio.socket_control_message.SocketControlMessage message)
+gstnet.net_control_message_meta.NetControlMessageMeta bufferAddNetControlMessageMeta(gst.buffer.Buffer buffer, gio.socket_control_message.SocketControlMessage message) nothrow
 {
   GstNetControlMessageMeta* _cretval;
   _cretval = gst_buffer_add_net_control_message_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, message ? cast(GSocketControlMessage*)message._cPtr(No.Dup) : null);
@@ -55,7 +55,7 @@ gstnet.net_control_message_meta.NetControlMessageMeta bufferAddNetControlMessage
     Returns: the #GstNetAddressMeta or null when there
       is no such metadata on buffer.
 */
-gstnet.net_address_meta.NetAddressMeta bufferGetNetAddressMeta(gst.buffer.Buffer buffer)
+gstnet.net_address_meta.NetAddressMeta bufferGetNetAddressMeta(gst.buffer.Buffer buffer) nothrow
 {
   GstNetAddressMeta* _cretval;
   _cretval = gst_buffer_get_net_address_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
@@ -64,7 +64,7 @@ gstnet.net_address_meta.NetAddressMeta bufferGetNetAddressMeta(gst.buffer.Buffer
 }
 
 /** */
-gobject.types.GType netAddressMetaApiGetType()
+gobject.types.GType netAddressMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_net_address_meta_api_get_type();
@@ -72,7 +72,7 @@ gobject.types.GType netAddressMetaApiGetType()
 }
 
 /** */
-gobject.types.GType netControlMessageMetaApiGetType()
+gobject.types.GType netControlMessageMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_net_control_message_meta_api_get_type();
@@ -87,7 +87,7 @@ gobject.types.GType netControlMessageMetaApiGetType()
       qosDscp = QoS DSCP value
     Returns: TRUE if successful, FALSE in case an error occurred.
 */
-bool netUtilsSetSocketTos(gio.socket.Socket socket, int qosDscp)
+bool netUtilsSetSocketTos(gio.socket.Socket socket, int qosDscp) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_net_utils_set_socket_tos(socket ? cast(GSocket*)socket._cPtr(No.Dup) : null, qosDscp);
@@ -99,7 +99,7 @@ bool netUtilsSetSocketTos(gio.socket.Socket socket, int qosDscp)
     are any remaining GstPtpClock instances, they won't be further synchronized
     to the PTP network clock.
 */
-void ptpDeinit()
+void ptpDeinit() nothrow
 {
   gst_ptp_deinit();
 }
@@ -120,7 +120,7 @@ void ptpDeinit()
       interfaces = network interfaces to run the clock on
     Returns: true if the GStreamer PTP clock subsystem could be initialized.
 */
-bool ptpInit(ulong clockId, string[] interfaces = null)
+bool ptpInit(ulong clockId, string[] interfaces = null) nothrow
 {
   bool _retval;
   char*[] _tmpinterfaces;
@@ -154,7 +154,7 @@ bool ptpInit(ulong clockId, string[] interfaces = null)
       config = Configuration for initializing the GStreamer PTP subsystem
     Returns: true if the GStreamer PTP clock subsystem could be initialized.
 */
-bool ptpInitFull(gst.structure.Structure config)
+bool ptpInitFull(gst.structure.Structure config) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_ptp_init_full(config ? cast(const(GstStructure)*)config._cPtr(No.Dup) : null);
@@ -165,7 +165,7 @@ bool ptpInitFull(gst.structure.Structure config)
     Check if the GStreamer PTP clock subsystem is initialized.
     Returns: true if the GStreamer PTP clock subsystem is initialized.
 */
-bool ptpIsInitialized()
+bool ptpIsInitialized() nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_ptp_is_initialized();
@@ -178,7 +178,7 @@ bool ptpIsInitialized()
     Returns: true if PTP clocks are generally supported on this system, and
       previous initializations did not fail.
 */
-bool ptpIsSupported()
+bool ptpIsSupported() nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_ptp_is_supported();
@@ -194,14 +194,21 @@ bool ptpIsSupported()
     Returns: Id for the callback that can be passed to
       [gstnet.global.ptpStatisticsCallbackRemove]
 */
-gulong ptpStatisticsCallbackAdd(gstnet.types.PtpStatisticsCallback callback)
+gulong ptpStatisticsCallbackAdd(gstnet.types.PtpStatisticsCallback callback) nothrow
 {
-  extern(C) gboolean _callbackCallback(ubyte domain, const(GstStructure)* stats, void* userData)
+  extern(C) gboolean _callbackCallback(ubyte domain, const(GstStructure)* stats, void* userData) nothrow
   {
     bool _dretval;
     auto _dlg = cast(gstnet.types.PtpStatisticsCallback*)userData;
 
-    _dretval = (*_dlg)(domain, stats ? new gst.structure.Structure(cast(void*)stats, No.Take) : null);
+    try
+    {
+      _dretval = (*_dlg)(domain, stats ? new gst.structure.Structure(cast(void*)stats, No.Take) : null);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gstnet.types.PtpStatisticsCallback");
+    }
     auto _retval = cast(gboolean)_dretval;
 
     return _retval;
@@ -221,7 +228,7 @@ gulong ptpStatisticsCallbackAdd(gstnet.types.PtpStatisticsCallback callback)
     Params:
       id = Callback id to remove
 */
-void ptpStatisticsCallbackRemove(gulong id)
+void ptpStatisticsCallbackRemove(gulong id) nothrow
 {
   gst_ptp_statistics_callback_remove(id);
 }

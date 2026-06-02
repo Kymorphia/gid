@@ -27,26 +27,26 @@ class DiscovererInfo : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_discoverer_info_get_type != &gidSymbolNotFound ? gst_discoverer_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DiscovererInfo self()
+  override DiscovererInfo self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
       Get builder for [gstpbutils.discoverer_info.DiscovererInfo]
       Returns: New builder object
   */
-  static DiscovererInfoGidBuilder builder()
+  static DiscovererInfoGidBuilder builder() nothrow
   {
     return new DiscovererInfoGidBuilder;
   }
@@ -68,7 +68,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
         variant = A #GVariant to deserialize into a #GstDiscovererInfo.
       Returns: A newly-allocated #GstDiscovererInfo.
   */
-  static gstpbutils.discoverer_info.DiscovererInfo fromVariant(glib.variant.Variant variant)
+  static gstpbutils.discoverer_info.DiscovererInfo fromVariant(glib.variant.Variant variant) nothrow
   {
     GstDiscovererInfo* _cretval;
     _cretval = gst_discoverer_info_from_variant(variant ? cast(GVariant*)variant._cPtr(No.Dup) : null);
@@ -77,7 +77,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  gstpbutils.discoverer_info.DiscovererInfo copy()
+  gstpbutils.discoverer_info.DiscovererInfo copy() nothrow
   {
     GstDiscovererInfo* _cretval;
     _cretval = gst_discoverer_info_copy(cast(GstDiscovererInfo*)this._cPtr);
@@ -91,7 +91,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
         matching #GstDiscovererStreamInfo. The caller should free it with
         [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.listFree].
   */
-  gstpbutils.discoverer_audio_info.DiscovererAudioInfo[] getAudioStreams()
+  gstpbutils.discoverer_audio_info.DiscovererAudioInfo[] getAudioStreams() nothrow
   {
     GList* _cretval;
     _cretval = gst_discoverer_info_get_audio_streams(cast(GstDiscovererInfo*)this._cPtr);
@@ -105,7 +105,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
         matching #GstDiscovererStreamInfo. The caller should free it with
         [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.listFree].
   */
-  gstpbutils.discoverer_container_info.DiscovererContainerInfo[] getContainerStreams()
+  gstpbutils.discoverer_container_info.DiscovererContainerInfo[] getContainerStreams() nothrow
   {
     GList* _cretval;
     _cretval = gst_discoverer_info_get_container_streams(cast(GstDiscovererInfo*)this._cPtr);
@@ -114,7 +114,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  gst.types.ClockTime getDuration()
+  gst.types.ClockTime getDuration() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_discoverer_info_get_duration(cast(const(GstDiscovererInfo)*)this._cPtr);
@@ -122,7 +122,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  bool getLive()
+  bool getLive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_discoverer_info_get_live(cast(const(GstDiscovererInfo)*)this._cPtr);
@@ -130,7 +130,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  gst.structure.Structure getMisc()
+  gst.structure.Structure getMisc() nothrow
   {
     const(GstStructure)* _cretval;
     _cretval = gst_discoverer_info_get_misc(cast(const(GstDiscovererInfo)*)this._cPtr);
@@ -145,7 +145,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
         for info to be usable. If you wish to use the strings after the life-time
         of info, you will need to copy them.
   */
-  string[] getMissingElementsInstallerDetails()
+  string[] getMissingElementsInstallerDetails() nothrow
   {
     const(char*)* _cretval;
     _cretval = gst_discoverer_info_get_missing_elements_installer_details(cast(const(GstDiscovererInfo)*)this._cPtr);
@@ -164,7 +164,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  gstpbutils.types.DiscovererResult getResult()
+  gstpbutils.types.DiscovererResult getResult() nothrow
   {
     GstDiscovererResult _cretval;
     _cretval = gst_discoverer_info_get_result(cast(const(GstDiscovererInfo)*)this._cPtr);
@@ -173,7 +173,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  bool getSeekable()
+  bool getSeekable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_discoverer_info_get_seekable(cast(const(GstDiscovererInfo)*)this._cPtr);
@@ -181,7 +181,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  gstpbutils.discoverer_stream_info.DiscovererStreamInfo getStreamInfo()
+  gstpbutils.discoverer_stream_info.DiscovererStreamInfo getStreamInfo() nothrow
   {
     GstDiscovererStreamInfo* _cretval;
     _cretval = gst_discoverer_info_get_stream_info(cast(GstDiscovererInfo*)this._cPtr);
@@ -190,7 +190,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  gstpbutils.discoverer_stream_info.DiscovererStreamInfo[] getStreamList()
+  gstpbutils.discoverer_stream_info.DiscovererStreamInfo[] getStreamList() nothrow
   {
     GList* _cretval;
     _cretval = gst_discoverer_info_get_stream_list(cast(GstDiscovererInfo*)this._cPtr);
@@ -208,7 +208,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
         matching #GstDiscovererStreamInfo. The caller should free it with
         [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.listFree].
   */
-  gstpbutils.discoverer_stream_info.DiscovererStreamInfo[] getStreams(gobject.types.GType streamtype)
+  gstpbutils.discoverer_stream_info.DiscovererStreamInfo[] getStreams(gobject.types.GType streamtype) nothrow
   {
     GList* _cretval;
     _cretval = gst_discoverer_info_get_streams(cast(GstDiscovererInfo*)this._cPtr, streamtype);
@@ -222,7 +222,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
         matching #GstDiscovererStreamInfo. The caller should free it with
         [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.listFree].
   */
-  gstpbutils.discoverer_subtitle_info.DiscovererSubtitleInfo[] getSubtitleStreams()
+  gstpbutils.discoverer_subtitle_info.DiscovererSubtitleInfo[] getSubtitleStreams() nothrow
   {
     GList* _cretval;
     _cretval = gst_discoverer_info_get_subtitle_streams(cast(GstDiscovererInfo*)this._cPtr);
@@ -231,7 +231,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  gst.tag_list.TagList getTags()
+  gst.tag_list.TagList getTags() nothrow
   {
     const(GstTagList)* _cretval;
     _cretval = gst_discoverer_info_get_tags(cast(const(GstDiscovererInfo)*)this._cPtr);
@@ -240,7 +240,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  gst.toc.Toc getToc()
+  gst.toc.Toc getToc() nothrow
   {
     const(GstToc)* _cretval;
     _cretval = gst_discoverer_info_get_toc(cast(const(GstDiscovererInfo)*)this._cPtr);
@@ -249,7 +249,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  string getUri()
+  string getUri() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_discoverer_info_get_uri(cast(const(GstDiscovererInfo)*)this._cPtr);
@@ -263,7 +263,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
         matching #GstDiscovererStreamInfo. The caller should free it with
         [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.listFree].
   */
-  gstpbutils.discoverer_video_info.DiscovererVideoInfo[] getVideoStreams()
+  gstpbutils.discoverer_video_info.DiscovererVideoInfo[] getVideoStreams() nothrow
   {
     GList* _cretval;
     _cretval = gst_discoverer_info_get_video_streams(cast(GstDiscovererInfo*)this._cPtr);
@@ -283,7 +283,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
           what needs to be serialized.
       Returns: A newly-allocated #GVariant representing info.
   */
-  glib.variant.Variant toVariant(gstpbutils.types.DiscovererSerializeFlags flags)
+  glib.variant.Variant toVariant(gstpbutils.types.DiscovererSerializeFlags flags) nothrow
   {
     GVariant* _cretval;
     _cretval = gst_discoverer_info_to_variant(cast(GstDiscovererInfo*)this._cPtr, flags);
@@ -304,7 +304,7 @@ final class DiscovererInfoGidBuilder : DiscovererInfoGidBuilderImpl!DiscovererIn
       Create object from builder.
       Returns: New object
   */
-  DiscovererInfo build()
+  DiscovererInfo build() nothrow
   {
     return new DiscovererInfo(cast(void*)createGObject(DiscovererInfo._getGType), No.Take);
   }

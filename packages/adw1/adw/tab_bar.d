@@ -48,26 +48,26 @@ class TabBar : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_tab_bar_get_type != &gidSymbolNotFound ? adw_tab_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TabBar self()
+  override TabBar self() nothrow
   {
     return this;
   }
@@ -76,7 +76,7 @@ class TabBar : gtk.widget.Widget
       Get builder for [adw.tab_bar.TabBar]
       Returns: New builder object
   */
-  static TabBarGidBuilder builder()
+  static TabBarGidBuilder builder() nothrow
   {
     return new TabBarGidBuilder;
   }
@@ -90,7 +90,7 @@ class TabBar : gtk.widget.Widget
         
         See [adw.tab_bar.TabBar.tabsRevealed].
   */
-  @property bool autohide()
+  @property bool autohide() nothrow
   {
     return getAutohide();
   }
@@ -105,7 +105,7 @@ class TabBar : gtk.widget.Widget
           
           See [adw.tab_bar.TabBar.tabsRevealed].
   */
-  @property void autohide(bool propval)
+  @property void autohide(bool propval) nothrow
   {
     setAutohide(propval);
   }
@@ -114,7 +114,7 @@ class TabBar : gtk.widget.Widget
       Get `endActionWidget` property.
       Returns: The widget shown after the tabs.
   */
-  @property gtk.widget.Widget endActionWidget()
+  @property gtk.widget.Widget endActionWidget() nothrow
   {
     return getEndActionWidget();
   }
@@ -124,7 +124,7 @@ class TabBar : gtk.widget.Widget
       Params:
         propval = The widget shown after the tabs.
   */
-  @property void endActionWidget(gtk.widget.Widget propval)
+  @property void endActionWidget(gtk.widget.Widget propval) nothrow
   {
     setEndActionWidget(propval);
   }
@@ -136,7 +136,7 @@ class TabBar : gtk.widget.Widget
         If set to `TRUE`, the tabs will always vary width filling the whole width
         when possible, otherwise tabs will always have the minimum possible size.
   */
-  @property bool expandTabs()
+  @property bool expandTabs() nothrow
   {
     return getExpandTabs();
   }
@@ -149,7 +149,7 @@ class TabBar : gtk.widget.Widget
           If set to `TRUE`, the tabs will always vary width filling the whole width
           when possible, otherwise tabs will always have the minimum possible size.
   */
-  @property void expandTabs(bool propval)
+  @property void expandTabs(bool propval) nothrow
   {
     setExpandTabs(propval);
   }
@@ -163,7 +163,7 @@ class TabBar : gtk.widget.Widget
         and is always a subset of what was originally passed to
         [adw.tab_bar.TabBar.setupExtraDropTarget].
   */
-  @property gdk.types.DragAction extraDragPreferredAction()
+  @property gdk.types.DragAction extraDragPreferredAction() nothrow
   {
     return getExtraDragPreferredAction();
   }
@@ -174,7 +174,7 @@ class TabBar : gtk.widget.Widget
         
         See [gtk.drop_target.DropTarget.preload].
   */
-  @property bool extraDragPreload()
+  @property bool extraDragPreload() nothrow
   {
     return getExtraDragPreload();
   }
@@ -186,7 +186,7 @@ class TabBar : gtk.widget.Widget
           
           See [gtk.drop_target.DropTarget.preload].
   */
-  @property void extraDragPreload(bool propval)
+  @property void extraDragPreload(bool propval) nothrow
   {
     setExtraDragPreload(propval);
   }
@@ -198,7 +198,7 @@ class TabBar : gtk.widget.Widget
         If set to `TRUE`, non-pinned tabs will have the close button at the
         beginning and the indicator at the end rather than the opposite.
   */
-  @property bool inverted()
+  @property bool inverted() nothrow
   {
     return getInverted();
   }
@@ -211,7 +211,7 @@ class TabBar : gtk.widget.Widget
           If set to `TRUE`, non-pinned tabs will have the close button at the
           beginning and the indicator at the end rather than the opposite.
   */
-  @property void inverted(bool propval)
+  @property void inverted(bool propval) nothrow
   {
     setInverted(propval);
   }
@@ -222,7 +222,7 @@ class TabBar : gtk.widget.Widget
         
         If `TRUE`, all tabs cannot be displayed at once and require scrolling.
   */
-  @property bool isOverflowing()
+  @property bool isOverflowing() nothrow
   {
     return getIsOverflowing();
   }
@@ -231,7 +231,7 @@ class TabBar : gtk.widget.Widget
       Get `startActionWidget` property.
       Returns: The widget shown before the tabs.
   */
-  @property gtk.widget.Widget startActionWidget()
+  @property gtk.widget.Widget startActionWidget() nothrow
   {
     return getStartActionWidget();
   }
@@ -241,7 +241,7 @@ class TabBar : gtk.widget.Widget
       Params:
         propval = The widget shown before the tabs.
   */
-  @property void startActionWidget(gtk.widget.Widget propval)
+  @property void startActionWidget(gtk.widget.Widget propval) nothrow
   {
     setStartActionWidget(propval);
   }
@@ -252,7 +252,7 @@ class TabBar : gtk.widget.Widget
         
         See [adw.tab_bar.TabBar.autohide].
   */
-  @property bool tabsRevealed()
+  @property bool tabsRevealed() nothrow
   {
     return getTabsRevealed();
   }
@@ -261,7 +261,7 @@ class TabBar : gtk.widget.Widget
       Get `view` property.
       Returns: The tab view the tab bar controls.
   */
-  @property adw.tab_view.TabView view()
+  @property adw.tab_view.TabView view() nothrow
   {
     return getView();
   }
@@ -271,7 +271,7 @@ class TabBar : gtk.widget.Widget
       Params:
         propval = The tab view the tab bar controls.
   */
-  @property void view(adw.tab_view.TabView propval)
+  @property void view(adw.tab_view.TabView propval) nothrow
   {
     setView(propval);
   }
@@ -280,7 +280,7 @@ class TabBar : gtk.widget.Widget
       Creates a new [adw.tab_bar.TabBar].
       Returns: the newly created [adw.tab_bar.TabBar]
   */
-  this()
+  this() nothrow
   {
     AdwTabBar* _cretval;
     _cretval = adw_tab_bar_new();
@@ -291,7 +291,7 @@ class TabBar : gtk.widget.Widget
       Gets whether the tabs automatically hide.
       Returns: whether the tabs automatically hide
   */
-  bool getAutohide()
+  bool getAutohide() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_bar_get_autohide(cast(AdwTabBar*)this._cPtr);
@@ -302,7 +302,7 @@ class TabBar : gtk.widget.Widget
       Gets the widget shown after the tabs.
       Returns: the widget shown after the tabs
   */
-  gtk.widget.Widget getEndActionWidget()
+  gtk.widget.Widget getEndActionWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_tab_bar_get_end_action_widget(cast(AdwTabBar*)this._cPtr);
@@ -314,7 +314,7 @@ class TabBar : gtk.widget.Widget
       Gets whether tabs expand to full width.
       Returns: whether tabs expand to full width.
   */
-  bool getExpandTabs()
+  bool getExpandTabs() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_bar_get_expand_tabs(cast(AdwTabBar*)this._cPtr);
@@ -325,7 +325,7 @@ class TabBar : gtk.widget.Widget
       Gets the current action during a drop on the extra_drop_target.
       Returns: the drag action of the current drop.
   */
-  gdk.types.DragAction getExtraDragPreferredAction()
+  gdk.types.DragAction getExtraDragPreferredAction() nothrow
   {
     GdkDragAction _cretval;
     _cretval = adw_tab_bar_get_extra_drag_preferred_action(cast(AdwTabBar*)this._cPtr);
@@ -337,7 +337,7 @@ class TabBar : gtk.widget.Widget
       Gets whether drop data should be preloaded on hover.
       Returns: whether drop data should be preloaded on hover
   */
-  bool getExtraDragPreload()
+  bool getExtraDragPreload() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_bar_get_extra_drag_preload(cast(AdwTabBar*)this._cPtr);
@@ -348,7 +348,7 @@ class TabBar : gtk.widget.Widget
       Gets whether tabs use inverted layout.
       Returns: whether tabs use inverted layout
   */
-  bool getInverted()
+  bool getInverted() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_bar_get_inverted(cast(AdwTabBar*)this._cPtr);
@@ -361,7 +361,7 @@ class TabBar : gtk.widget.Widget
       If `TRUE`, all tabs cannot be displayed at once and require scrolling.
       Returns: whether self is overflowing
   */
-  bool getIsOverflowing()
+  bool getIsOverflowing() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_bar_get_is_overflowing(cast(AdwTabBar*)this._cPtr);
@@ -372,7 +372,7 @@ class TabBar : gtk.widget.Widget
       Gets the widget shown before the tabs.
       Returns: the widget shown before the tabs
   */
-  gtk.widget.Widget getStartActionWidget()
+  gtk.widget.Widget getStartActionWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_tab_bar_get_start_action_widget(cast(AdwTabBar*)this._cPtr);
@@ -386,7 +386,7 @@ class TabBar : gtk.widget.Widget
       See [adw.tab_bar.TabBar.autohide].
       Returns: whether the tabs are currently revealed
   */
-  bool getTabsRevealed()
+  bool getTabsRevealed() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_bar_get_tabs_revealed(cast(AdwTabBar*)this._cPtr);
@@ -397,7 +397,7 @@ class TabBar : gtk.widget.Widget
       Gets the tab view self controls.
       Returns: the view self controls
   */
-  adw.tab_view.TabView getView()
+  adw.tab_view.TabView getView() nothrow
   {
     AdwTabView* _cretval;
     _cretval = adw_tab_bar_get_view(cast(AdwTabBar*)this._cPtr);
@@ -416,7 +416,7 @@ class TabBar : gtk.widget.Widget
       Params:
         autohide = whether the tabs automatically hide
   */
-  void setAutohide(bool autohide)
+  void setAutohide(bool autohide) nothrow
   {
     adw_tab_bar_set_autohide(cast(AdwTabBar*)this._cPtr, autohide);
   }
@@ -427,7 +427,7 @@ class TabBar : gtk.widget.Widget
       Params:
         widget = the widget to show after the tabs
   */
-  void setEndActionWidget(gtk.widget.Widget widget = null)
+  void setEndActionWidget(gtk.widget.Widget widget = null) nothrow
   {
     adw_tab_bar_set_end_action_widget(cast(AdwTabBar*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -441,7 +441,7 @@ class TabBar : gtk.widget.Widget
       Params:
         expandTabs = whether to expand tabs
   */
-  void setExpandTabs(bool expandTabs)
+  void setExpandTabs(bool expandTabs) nothrow
   {
     adw_tab_bar_set_expand_tabs(cast(AdwTabBar*)this._cPtr, expandTabs);
   }
@@ -454,7 +454,7 @@ class TabBar : gtk.widget.Widget
       Params:
         preload = whether to preload drop data
   */
-  void setExtraDragPreload(bool preload)
+  void setExtraDragPreload(bool preload) nothrow
   {
     adw_tab_bar_set_extra_drag_preload(cast(AdwTabBar*)this._cPtr, preload);
   }
@@ -468,7 +468,7 @@ class TabBar : gtk.widget.Widget
       Params:
         inverted = whether tabs use inverted layout
   */
-  void setInverted(bool inverted)
+  void setInverted(bool inverted) nothrow
   {
     adw_tab_bar_set_inverted(cast(AdwTabBar*)this._cPtr, inverted);
   }
@@ -479,7 +479,7 @@ class TabBar : gtk.widget.Widget
       Params:
         widget = the widget to show before the tabs
   */
-  void setStartActionWidget(gtk.widget.Widget widget = null)
+  void setStartActionWidget(gtk.widget.Widget widget = null) nothrow
   {
     adw_tab_bar_set_start_action_widget(cast(AdwTabBar*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -490,7 +490,7 @@ class TabBar : gtk.widget.Widget
       Params:
         view = a tab view
   */
-  void setView(adw.tab_view.TabView view = null)
+  void setView(adw.tab_view.TabView view = null) nothrow
   {
     adw_tab_bar_set_view(cast(AdwTabBar*)this._cPtr, view ? cast(AdwTabView*)view._cPtr(No.Dup) : null);
   }
@@ -512,7 +512,7 @@ class TabBar : gtk.widget.Widget
         actions = the supported actions
         types = all supported `GType`s that can be dropped
   */
-  void setupExtraDropTarget(gdk.types.DragAction actions, gobject.types.GType[] types = null)
+  void setupExtraDropTarget(gdk.types.DragAction actions, gobject.types.GType[] types = null) nothrow
   {
     size_t _nTypes;
     if (types)
@@ -547,7 +547,7 @@ class TabBar : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectExtraDragDrop(T)(T callback, Flag!"After" after = No.After)
+  gulong connectExtraDragDrop(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.tab_page.TabPage)))
@@ -555,11 +555,12 @@ class TabBar : gtk.widget.Widget
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : adw.tab_bar.TabBar)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -570,7 +571,14 @@ class TabBar : gtk.widget.Widget
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.tab_bar.TabBar.extraDragDrop");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -607,7 +615,7 @@ class TabBar : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectExtraDragValue(T)(T callback, Flag!"After" after = No.After)
+  gulong connectExtraDragValue(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == gdk.types.DragAction)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.tab_page.TabPage)))
@@ -615,11 +623,12 @@ class TabBar : gtk.widget.Widget
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : adw.tab_bar.TabBar)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gdk.types.DragAction _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -630,7 +639,14 @@ class TabBar : gtk.widget.Widget
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.tab_bar.TabBar.extraDragValue");
+      }
 
       setVal!(gdk.types.DragAction)(_returnValue, _retval);
     }
@@ -656,7 +672,7 @@ class TabBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           See [adw.tab_bar.TabBar.tabsRevealed].
       Returns: Builder instance for fluent chaining
   */
-  T autohide(bool propval)
+  T autohide(bool propval) nothrow
   {
     return setProperty("autohide", propval);
   }
@@ -667,7 +683,7 @@ class TabBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The widget shown after the tabs.
       Returns: Builder instance for fluent chaining
   */
-  T endActionWidget(gtk.widget.Widget propval)
+  T endActionWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("end-action-widget", propval);
   }
@@ -681,7 +697,7 @@ class TabBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           when possible, otherwise tabs will always have the minimum possible size.
       Returns: Builder instance for fluent chaining
   */
-  T expandTabs(bool propval)
+  T expandTabs(bool propval) nothrow
   {
     return setProperty("expand-tabs", propval);
   }
@@ -694,7 +710,7 @@ class TabBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           See [gtk.drop_target.DropTarget.preload].
       Returns: Builder instance for fluent chaining
   */
-  T extraDragPreload(bool propval)
+  T extraDragPreload(bool propval) nothrow
   {
     return setProperty("extra-drag-preload", propval);
   }
@@ -708,7 +724,7 @@ class TabBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           beginning and the indicator at the end rather than the opposite.
       Returns: Builder instance for fluent chaining
   */
-  T inverted(bool propval)
+  T inverted(bool propval) nothrow
   {
     return setProperty("inverted", propval);
   }
@@ -719,7 +735,7 @@ class TabBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The widget shown before the tabs.
       Returns: Builder instance for fluent chaining
   */
-  T startActionWidget(gtk.widget.Widget propval)
+  T startActionWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("start-action-widget", propval);
   }
@@ -730,7 +746,7 @@ class TabBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The tab view the tab bar controls.
       Returns: Builder instance for fluent chaining
   */
-  T view(adw.tab_view.TabView propval)
+  T view(adw.tab_view.TabView propval) nothrow
   {
     return setProperty("view", propval);
   }
@@ -743,7 +759,7 @@ final class TabBarGidBuilder : TabBarGidBuilderImpl!TabBarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  TabBar build()
+  TabBar build() nothrow
   {
     return new TabBar(cast(void*)createGObject(TabBar._getGType), No.Take);
   }

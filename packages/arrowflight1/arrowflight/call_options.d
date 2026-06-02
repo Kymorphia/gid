@@ -14,26 +14,26 @@ class CallOptions : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_call_options_get_type != &gidSymbolNotFound ? gaflight_call_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CallOptions self()
+  override CallOptions self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class CallOptions : gobject.object.ObjectWrap
       Get builder for [arrowflight.call_options.CallOptions]
       Returns: New builder object
   */
-  static CallOptionsGidBuilder builder()
+  static CallOptionsGidBuilder builder() nothrow
   {
     return new CallOptionsGidBuilder;
   }
@@ -53,7 +53,7 @@ class CallOptions : gobject.object.ObjectWrap
         implementation-defined default behavior will be used
         instead. This is the default value.
   */
-  @property double timeout()
+  @property double timeout() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(double)("timeout");
   }
@@ -65,13 +65,13 @@ class CallOptions : gobject.object.ObjectWrap
           implementation-defined default behavior will be used
           instead. This is the default value.
   */
-  @property void timeout(double propval)
+  @property void timeout(double propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(double)("timeout", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GAFlightCallOptions* _cretval;
     _cretval = gaflight_call_options_new();
@@ -85,7 +85,7 @@ class CallOptions : gobject.object.ObjectWrap
         name = A header name.
         value = A header value.
   */
-  void addHeader(string name, string value)
+  void addHeader(string name, string value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -95,7 +95,7 @@ class CallOptions : gobject.object.ObjectWrap
   /**
       Clear all headers.
   */
-  void clearHeaders()
+  void clearHeaders() nothrow
   {
     gaflight_call_options_clear_headers(cast(GAFlightCallOptions*)this._cPtr);
   }
@@ -106,15 +106,22 @@ class CallOptions : gobject.object.ObjectWrap
       Params:
         func = The user's callback function.
   */
-  void foreachHeader(arrowflight.types.HeaderFunc func)
+  void foreachHeader(arrowflight.types.HeaderFunc func) nothrow
   {
-    extern(C) void _funcCallback(const(char)* name, const(char)* value, void* userData)
+    extern(C) void _funcCallback(const(char)* name, const(char)* value, void* userData) nothrow
     {
       auto _dlg = cast(arrowflight.types.HeaderFunc*)userData;
       string _name = name.fromCString(No.Free);
       string _value = value.fromCString(No.Free);
 
-      (*_dlg)(_name, _value);
+      try
+      {
+        (*_dlg)(_name, _value);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "arrowflight.types.HeaderFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -134,7 +141,7 @@ class CallOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           instead. This is the default value.
       Returns: Builder instance for fluent chaining
   */
-  T timeout(double propval)
+  T timeout(double propval) nothrow
   {
     return setProperty("timeout", propval);
   }
@@ -147,7 +154,7 @@ final class CallOptionsGidBuilder : CallOptionsGidBuilderImpl!CallOptionsGidBuil
       Create object from builder.
       Returns: New object
   */
-  CallOptions build()
+  CallOptions build() nothrow
   {
     return new CallOptions(cast(void*)createGObject(CallOptions._getGType), Yes.Take);
   }

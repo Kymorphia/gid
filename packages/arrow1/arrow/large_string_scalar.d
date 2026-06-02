@@ -15,26 +15,26 @@ class LargeStringScalar : arrow.base_binary_scalar.BaseBinaryScalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_large_string_scalar_get_type != &gidSymbolNotFound ? garrow_large_string_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LargeStringScalar self()
+  override LargeStringScalar self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class LargeStringScalar : arrow.base_binary_scalar.BaseBinaryScalar
       Get builder for [arrow.large_string_scalar.LargeStringScalar]
       Returns: New builder object
   */
-  static LargeStringScalarGidBuilder builder()
+  static LargeStringScalarGidBuilder builder() nothrow
   {
     return new LargeStringScalarGidBuilder;
   }
 
   /** */
-  this(arrow.buffer.Buffer value)
+  this(arrow.buffer.Buffer value) nothrow
   {
     GArrowLargeStringScalar* _cretval;
     _cretval = garrow_large_string_scalar_new(value ? cast(GArrowBuffer*)value._cPtr(No.Dup) : null);
@@ -69,7 +69,7 @@ final class LargeStringScalarGidBuilder : LargeStringScalarGidBuilderImpl!LargeS
       Create object from builder.
       Returns: New object
   */
-  LargeStringScalar build()
+  LargeStringScalar build() nothrow
   {
     return new LargeStringScalar(cast(void*)createGObject(LargeStringScalar._getGType), Yes.Take);
   }

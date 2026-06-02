@@ -25,26 +25,26 @@ class UserMediaPermissionRequest : gobject.object.ObjectWrap, webkit.permission_
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_user_media_permission_request_get_type != &gidSymbolNotFound ? webkit_user_media_permission_request_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UserMediaPermissionRequest self()
+  override UserMediaPermissionRequest self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class UserMediaPermissionRequest : gobject.object.ObjectWrap, webkit.permission_
       Get builder for [webkit.user_media_permission_request.UserMediaPermissionRequest]
       Returns: New builder object
   */
-  static UserMediaPermissionRequestGidBuilder builder()
+  static UserMediaPermissionRequestGidBuilder builder() nothrow
   {
     return new UserMediaPermissionRequestGidBuilder;
   }
@@ -62,7 +62,7 @@ class UserMediaPermissionRequest : gobject.object.ObjectWrap, webkit.permission_
       Get `isForAudioDevice` property.
       Returns: Whether the media device to which the permission was requested has a microphone or not.
   */
-  @property bool isForAudioDevice()
+  @property bool isForAudioDevice() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("is-for-audio-device");
   }
@@ -71,7 +71,7 @@ class UserMediaPermissionRequest : gobject.object.ObjectWrap, webkit.permission_
       Get `isForVideoDevice` property.
       Returns: Whether the media device to which the permission was requested has a video capture capability or not.
   */
-  @property bool isForVideoDevice()
+  @property bool isForVideoDevice() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("is-for-video-device");
   }
@@ -93,7 +93,7 @@ final class UserMediaPermissionRequestGidBuilder : UserMediaPermissionRequestGid
       Create object from builder.
       Returns: New object
   */
-  UserMediaPermissionRequest build()
+  UserMediaPermissionRequest build() nothrow
   {
     return new UserMediaPermissionRequest(cast(void*)createGObject(UserMediaPermissionRequest._getGType), No.Take);
   }

@@ -20,32 +20,32 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_shader_args_builder_get_type != &gidSymbolNotFound ? gsk_shader_args_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ShaderArgsBuilder self()
+  override ShaderArgsBuilder self() nothrow
   {
     return this;
   }
@@ -60,7 +60,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
       Returns: The newly allocated builder, free with
             [gsk.shader_args_builder.ShaderArgsBuilder.unref]
   */
-  this(gsk.glshader.GLShader shader, glib.bytes.Bytes initialValues = null)
+  this(gsk.glshader.GLShader shader, glib.bytes.Bytes initialValues = null) nothrow
   {
     GskShaderArgsBuilder* _cretval;
     _cretval = gsk_shader_args_builder_new(shader ? cast(GskGLShader*)shader._cPtr(No.Dup) : null, initialValues ? cast(GBytes*)initialValues._cPtr(No.Dup) : null);
@@ -76,7 +76,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
         idx = index of the uniform
         value = value to set the uniform to
   */
-  void setBool(int idx, bool value)
+  void setBool(int idx, bool value) nothrow
   {
     gsk_shader_args_builder_set_bool(cast(GskShaderArgsBuilder*)this._cPtr, idx, value);
   }
@@ -90,7 +90,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
         idx = index of the uniform
         value = value to set the uniform to
   */
-  void setFloat(int idx, float value)
+  void setFloat(int idx, float value) nothrow
   {
     gsk_shader_args_builder_set_float(cast(GskShaderArgsBuilder*)this._cPtr, idx, value);
   }
@@ -104,7 +104,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
         idx = index of the uniform
         value = value to set the uniform to
   */
-  void setInt(int idx, int value)
+  void setInt(int idx, int value) nothrow
   {
     gsk_shader_args_builder_set_int(cast(GskShaderArgsBuilder*)this._cPtr, idx, value);
   }
@@ -118,7 +118,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
         idx = index of the uniform
         value = value to set the uniform to
   */
-  void setUint(int idx, uint value)
+  void setUint(int idx, uint value) nothrow
   {
     gsk_shader_args_builder_set_uint(cast(GskShaderArgsBuilder*)this._cPtr, idx, value);
   }
@@ -132,7 +132,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
         idx = index of the uniform
         value = value to set the uniform too
   */
-  void setVec2(int idx, graphene.vec2.Vec2 value)
+  void setVec2(int idx, graphene.vec2.Vec2 value) nothrow
   {
     gsk_shader_args_builder_set_vec2(cast(GskShaderArgsBuilder*)this._cPtr, idx, value ? cast(const(graphene_vec2_t)*)value._cPtr(No.Dup) : null);
   }
@@ -146,7 +146,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
         idx = index of the uniform
         value = value to set the uniform too
   */
-  void setVec3(int idx, graphene.vec3.Vec3 value)
+  void setVec3(int idx, graphene.vec3.Vec3 value) nothrow
   {
     gsk_shader_args_builder_set_vec3(cast(GskShaderArgsBuilder*)this._cPtr, idx, value ? cast(const(graphene_vec3_t)*)value._cPtr(No.Dup) : null);
   }
@@ -160,7 +160,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
         idx = index of the uniform
         value = value to set the uniform too
   */
-  void setVec4(int idx, graphene.vec4.Vec4 value)
+  void setVec4(int idx, graphene.vec4.Vec4 value) nothrow
   {
     gsk_shader_args_builder_set_vec4(cast(GskShaderArgsBuilder*)this._cPtr, idx, value ? cast(const(graphene_vec4_t)*)value._cPtr(No.Dup) : null);
   }
@@ -180,7 +180,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
       Returns: the newly allocated buffer with
           all the args added to builder
   */
-  glib.bytes.Bytes toArgs()
+  glib.bytes.Bytes toArgs() nothrow
   {
     GBytes* _cretval;
     _cretval = gsk_shader_args_builder_to_args(cast(GskShaderArgsBuilder*)this._cPtr);

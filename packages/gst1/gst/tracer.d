@@ -22,26 +22,26 @@ class Tracer : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_tracer_get_type != &gidSymbolNotFound ? gst_tracer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Tracer self()
+  override Tracer self() nothrow
   {
     return this;
   }
@@ -50,19 +50,19 @@ class Tracer : gst.object.ObjectWrap
       Get builder for [gst.tracer.Tracer]
       Returns: New builder object
   */
-  static TracerGidBuilder builder()
+  static TracerGidBuilder builder() nothrow
   {
     return new TracerGidBuilder;
   }
 
   /** */
-  @property string params()
+  @property string params() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("params");
   }
 
   /** */
-  @property void params(string propval)
+  @property void params(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("params", propval);
   }
@@ -77,7 +77,7 @@ class Tracer : gst.object.ObjectWrap
         type = GType of tracer to register
       Returns: true, if the registering succeeded, false on error
   */
-  static bool register(gst.plugin.Plugin plugin, string name, gobject.types.GType type)
+  static bool register(gst.plugin.Plugin plugin, string name, gobject.types.GType type) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -91,7 +91,7 @@ class TracerGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T params(string propval)
+  T params(string propval) nothrow
   {
     return setProperty("params", propval);
   }
@@ -104,7 +104,7 @@ final class TracerGidBuilder : TracerGidBuilderImpl!TracerGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Tracer build()
+  Tracer build() nothrow
   {
     return new Tracer(cast(void*)createGObject(Tracer._getGType), No.Take);
   }

@@ -16,26 +16,26 @@ class FileMetadata : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_file_metadata_get_type != &gidSymbolNotFound ? gparquet_file_metadata_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileMetadata self()
+  override FileMetadata self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class FileMetadata : gobject.object.ObjectWrap
       Get builder for [parquet.file_metadata.FileMetadata]
       Returns: New builder object
   */
-  static FileMetadataGidBuilder builder()
+  static FileMetadataGidBuilder builder() nothrow
   {
     return new FileMetadataGidBuilder;
   }
 
   /** */
-  bool canDecompress()
+  bool canDecompress() nothrow
   {
     bool _retval;
     _retval = cast(bool)gparquet_file_metadata_can_decompress(cast(GParquetFileMetadata*)this._cPtr);
@@ -58,7 +58,7 @@ class FileMetadata : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equal(parquet.file_metadata.FileMetadata otherMetadata)
+  bool equal(parquet.file_metadata.FileMetadata otherMetadata) nothrow
   {
     bool _retval;
     _retval = cast(bool)gparquet_file_metadata_equal(cast(GParquetFileMetadata*)this._cPtr, otherMetadata ? cast(GParquetFileMetadata*)otherMetadata._cPtr(No.Dup) : null);
@@ -66,7 +66,7 @@ class FileMetadata : gobject.object.ObjectWrap
   }
 
   /** */
-  string getCreatedBy()
+  string getCreatedBy() nothrow
   {
     const(char)* _cretval;
     _cretval = gparquet_file_metadata_get_created_by(cast(GParquetFileMetadata*)this._cPtr);
@@ -75,7 +75,7 @@ class FileMetadata : gobject.object.ObjectWrap
   }
 
   /** */
-  int getNColumns()
+  int getNColumns() nothrow
   {
     int _retval;
     _retval = gparquet_file_metadata_get_n_columns(cast(GParquetFileMetadata*)this._cPtr);
@@ -83,7 +83,7 @@ class FileMetadata : gobject.object.ObjectWrap
   }
 
   /** */
-  int getNRowGroups()
+  int getNRowGroups() nothrow
   {
     int _retval;
     _retval = gparquet_file_metadata_get_n_row_groups(cast(GParquetFileMetadata*)this._cPtr);
@@ -91,7 +91,7 @@ class FileMetadata : gobject.object.ObjectWrap
   }
 
   /** */
-  long getNRows()
+  long getNRows() nothrow
   {
     long _retval;
     _retval = gparquet_file_metadata_get_n_rows(cast(GParquetFileMetadata*)this._cPtr);
@@ -99,7 +99,7 @@ class FileMetadata : gobject.object.ObjectWrap
   }
 
   /** */
-  int getNSchemaElements()
+  int getNSchemaElements() nothrow
   {
     int _retval;
     _retval = gparquet_file_metadata_get_n_schema_elements(cast(GParquetFileMetadata*)this._cPtr);
@@ -119,7 +119,7 @@ class FileMetadata : gobject.object.ObjectWrap
   }
 
   /** */
-  uint getSize()
+  uint getSize() nothrow
   {
     uint _retval;
     _retval = gparquet_file_metadata_get_size(cast(GParquetFileMetadata*)this._cPtr);
@@ -132,7 +132,7 @@ class FileMetadataGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T metadata(void* propval)
+  T metadata(void* propval) nothrow
   {
     return setProperty("metadata", propval);
   }
@@ -145,7 +145,7 @@ final class FileMetadataGidBuilder : FileMetadataGidBuilderImpl!FileMetadataGidB
       Create object from builder.
       Returns: New object
   */
-  FileMetadata build()
+  FileMetadata build() nothrow
   {
     return new FileMetadata(cast(void*)createGObject(FileMetadata._getGType), No.Take);
   }

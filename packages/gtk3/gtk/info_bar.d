@@ -95,26 +95,26 @@ class InfoBar : gtk.box.Box
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_info_bar_get_type != &gidSymbolNotFound ? gtk_info_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override InfoBar self()
+  override InfoBar self() nothrow
   {
     return this;
   }
@@ -123,7 +123,7 @@ class InfoBar : gtk.box.Box
       Get builder for [gtk.info_bar.InfoBar]
       Returns: New builder object
   */
-  static InfoBarGidBuilder builder()
+  static InfoBarGidBuilder builder() nothrow
   {
     return new InfoBarGidBuilder;
   }
@@ -134,7 +134,7 @@ class InfoBar : gtk.box.Box
         
         The type may be used to determine the appearance of the info bar.
   */
-  @property gtk.types.MessageType messageType()
+  @property gtk.types.MessageType messageType() nothrow
   {
     return getMessageType();
   }
@@ -146,19 +146,19 @@ class InfoBar : gtk.box.Box
           
           The type may be used to determine the appearance of the info bar.
   */
-  @property void messageType(gtk.types.MessageType propval)
+  @property void messageType(gtk.types.MessageType propval) nothrow
   {
     setMessageType(propval);
   }
 
   /** */
-  @property bool revealed()
+  @property bool revealed() nothrow
   {
     return getRevealed();
   }
 
   /** */
-  @property void revealed(bool propval)
+  @property void revealed(bool propval) nothrow
   {
     setRevealed(propval);
   }
@@ -167,7 +167,7 @@ class InfoBar : gtk.box.Box
       Get `showCloseButton` property.
       Returns: Whether to include a standard close button.
   */
-  @property bool showCloseButton()
+  @property bool showCloseButton() nothrow
   {
     return getShowCloseButton();
   }
@@ -177,7 +177,7 @@ class InfoBar : gtk.box.Box
       Params:
         propval = Whether to include a standard close button.
   */
-  @property void showCloseButton(bool propval)
+  @property void showCloseButton(bool propval) nothrow
   {
     setShowCloseButton(propval);
   }
@@ -186,7 +186,7 @@ class InfoBar : gtk.box.Box
       Creates a new #GtkInfoBar object.
       Returns: a new #GtkInfoBar object
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_info_bar_new();
@@ -203,7 +203,7 @@ class InfoBar : gtk.box.Box
         child = an activatable widget
         responseId = response ID for child
   */
-  void addActionWidget(gtk.widget.Widget child, int responseId)
+  void addActionWidget(gtk.widget.Widget child, int responseId) nothrow
   {
     gtk_info_bar_add_action_widget(cast(GtkInfoBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, responseId);
   }
@@ -221,7 +221,7 @@ class InfoBar : gtk.box.Box
       Returns: the #GtkButton widget
         that was added
   */
-  gtk.button.Button addButton(string buttonText, int responseId)
+  gtk.button.Button addButton(string buttonText, int responseId) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _buttonText = buttonText.toCString(No.Alloc);
@@ -234,7 +234,7 @@ class InfoBar : gtk.box.Box
       Returns the action area of info_bar.
       Returns: the action area
   */
-  gtk.box.Box getActionArea()
+  gtk.box.Box getActionArea() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_info_bar_get_action_area(cast(GtkInfoBar*)this._cPtr);
@@ -246,7 +246,7 @@ class InfoBar : gtk.box.Box
       Returns the content area of info_bar.
       Returns: the content area
   */
-  gtk.box.Box getContentArea()
+  gtk.box.Box getContentArea() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_info_bar_get_content_area(cast(GtkInfoBar*)this._cPtr);
@@ -258,7 +258,7 @@ class InfoBar : gtk.box.Box
       Returns the message type of the message area.
       Returns: the message type of the message area.
   */
-  gtk.types.MessageType getMessageType()
+  gtk.types.MessageType getMessageType() nothrow
   {
     GtkMessageType _cretval;
     _cretval = gtk_info_bar_get_message_type(cast(GtkInfoBar*)this._cPtr);
@@ -267,7 +267,7 @@ class InfoBar : gtk.box.Box
   }
 
   /** */
-  bool getRevealed()
+  bool getRevealed() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_info_bar_get_revealed(cast(GtkInfoBar*)this._cPtr);
@@ -278,7 +278,7 @@ class InfoBar : gtk.box.Box
       Returns whether the widget will display a standard close button.
       Returns: true if the widget displays standard close button
   */
-  bool getShowCloseButton()
+  bool getShowCloseButton() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_info_bar_get_show_close_button(cast(GtkInfoBar*)this._cPtr);
@@ -291,7 +291,7 @@ class InfoBar : gtk.box.Box
       Params:
         responseId = a response ID
   */
-  void response(int responseId)
+  void response(int responseId) nothrow
   {
     gtk_info_bar_response(cast(GtkInfoBar*)this._cPtr, responseId);
   }
@@ -307,7 +307,7 @@ class InfoBar : gtk.box.Box
       Params:
         responseId = a response ID
   */
-  void setDefaultResponse(int responseId)
+  void setDefaultResponse(int responseId) nothrow
   {
     gtk_info_bar_set_default_response(cast(GtkInfoBar*)this._cPtr, responseId);
   }
@@ -320,7 +320,7 @@ class InfoBar : gtk.box.Box
       Params:
         messageType = a #GtkMessageType
   */
-  void setMessageType(gtk.types.MessageType messageType)
+  void setMessageType(gtk.types.MessageType messageType) nothrow
   {
     gtk_info_bar_set_message_type(cast(GtkInfoBar*)this._cPtr, messageType);
   }
@@ -334,7 +334,7 @@ class InfoBar : gtk.box.Box
         responseId = a response ID
         setting = TRUE for sensitive
   */
-  void setResponseSensitive(int responseId, bool setting)
+  void setResponseSensitive(int responseId, bool setting) nothrow
   {
     gtk_info_bar_set_response_sensitive(cast(GtkInfoBar*)this._cPtr, responseId, setting);
   }
@@ -349,7 +349,7 @@ class InfoBar : gtk.box.Box
       Params:
         revealed = The new value of the property
   */
-  void setRevealed(bool revealed)
+  void setRevealed(bool revealed) nothrow
   {
     gtk_info_bar_set_revealed(cast(GtkInfoBar*)this._cPtr, revealed);
   }
@@ -361,7 +361,7 @@ class InfoBar : gtk.box.Box
       Params:
         setting = true to include a close button
   */
-  void setShowCloseButton(bool setting)
+  void setShowCloseButton(bool setting) nothrow
   {
     gtk_info_bar_set_show_close_button(cast(GtkInfoBar*)this._cPtr, setting);
   }
@@ -386,13 +386,13 @@ class InfoBar : gtk.box.Box
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClose(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClose(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.info_bar.InfoBar)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -401,7 +401,14 @@ class InfoBar : gtk.box.Box
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.info_bar.InfoBar.close");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -427,14 +434,14 @@ class InfoBar : gtk.box.Box
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectResponse(T)(T callback, Flag!"After" after = No.After)
+  gulong connectResponse(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.info_bar.InfoBar)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -446,7 +453,14 @@ class InfoBar : gtk.box.Box
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.info_bar.InfoBar.response");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -467,13 +481,13 @@ class InfoBarGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
           The type may be used to determine the appearance of the info bar.
       Returns: Builder instance for fluent chaining
   */
-  T messageType(gtk.types.MessageType propval)
+  T messageType(gtk.types.MessageType propval) nothrow
   {
     return setProperty("message-type", propval);
   }
 
   /** */
-  T revealed(bool propval)
+  T revealed(bool propval) nothrow
   {
     return setProperty("revealed", propval);
   }
@@ -484,7 +498,7 @@ class InfoBarGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
         propval = Whether to include a standard close button.
       Returns: Builder instance for fluent chaining
   */
-  T showCloseButton(bool propval)
+  T showCloseButton(bool propval) nothrow
   {
     return setProperty("show-close-button", propval);
   }
@@ -497,7 +511,7 @@ final class InfoBarGidBuilder : InfoBarGidBuilderImpl!InfoBarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  InfoBar build()
+  InfoBar build() nothrow
   {
     return new InfoBar(cast(void*)createGObject(InfoBar._getGType), No.Take);
   }

@@ -17,26 +17,26 @@ class MnemonicAction : gtk.shortcut_action.ShortcutAction
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_mnemonic_action_get_type != &gidSymbolNotFound ? gtk_mnemonic_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MnemonicAction self()
+  override MnemonicAction self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class MnemonicAction : gtk.shortcut_action.ShortcutAction
       Get builder for [gtk.mnemonic_action.MnemonicAction]
       Returns: New builder object
   */
-  static MnemonicActionGidBuilder builder()
+  static MnemonicActionGidBuilder builder() nothrow
   {
     return new MnemonicActionGidBuilder;
   }
@@ -57,7 +57,7 @@ class MnemonicAction : gtk.shortcut_action.ShortcutAction
       on the given widget upon activation.
       Returns: The mnemonic action
   */
-  static gtk.mnemonic_action.MnemonicAction get()
+  static gtk.mnemonic_action.MnemonicAction get() nothrow
   {
     GtkShortcutAction* _cretval;
     _cretval = gtk_mnemonic_action_get();
@@ -78,7 +78,7 @@ final class MnemonicActionGidBuilder : MnemonicActionGidBuilderImpl!MnemonicActi
       Create object from builder.
       Returns: New object
   */
-  MnemonicAction build()
+  MnemonicAction build() nothrow
   {
     return new MnemonicAction(cast(void*)createGObject(MnemonicAction._getGType), No.Take);
   }

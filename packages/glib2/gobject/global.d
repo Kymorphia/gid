@@ -34,7 +34,7 @@ Params:
 instance = The instance to remove the signal handler from.
 handlerId = Handler id of the handler to be disconnected.
 */
-void signalHandlerDisconnect(gobject.object.ObjectWrap instance, gulong handlerId)
+void signalHandlerDisconnect(gobject.object.ObjectWrap instance, gulong handlerId) nothrow
 {
   g_signal_handler_disconnect(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, handlerId);
   instance.signalClosures.remove(handlerId);
@@ -48,7 +48,7 @@ and should not be used outside of the type system.
 Params:
 instance = The instance whose signal handlers are destroyed
 */
-void signalHandlersDestroy(gobject.object.ObjectWrap instance)
+void signalHandlersDestroy(gobject.object.ObjectWrap instance) nothrow
 {
   g_signal_handlers_destroy(instance ? cast(GObject*)instance._cPtr(No.Dup) : null);
   instance.signalClosures.clear;
@@ -66,7 +66,7 @@ void signalHandlersDestroy(gobject.object.ObjectWrap instance)
       source = the source
       closure = a #GClosure
 */
-void setClosure(glib.source.Source source, gobject.closure.Closure closure)
+void setClosure(glib.source.Source source, gobject.closure.Closure closure) nothrow
 {
   g_source_set_closure(source ? cast(GSource*)source._cPtr(No.Dup) : null, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null);
 }
@@ -86,7 +86,7 @@ void setClosure(glib.source.Source source, gobject.closure.Closure closure)
     Params:
       source = the source
 */
-void setDummyCallback(glib.source.Source source)
+void setDummyCallback(glib.source.Source source) nothrow
 {
   g_source_set_dummy_callback(source ? cast(GSource*)source._cPtr(No.Dup) : null);
 }
@@ -100,7 +100,7 @@ void setDummyCallback(glib.source.Source source)
     Returns: The newly created copy of the boxed
          structure.
 */
-void* boxedCopy(gobject.types.GType boxedType, const(void)* srcBoxed)
+void* boxedCopy(gobject.types.GType boxedType, const(void)* srcBoxed) nothrow
 {
   auto _retval = g_boxed_copy(boxedType, srcBoxed);
   return _retval;
@@ -113,7 +113,7 @@ void* boxedCopy(gobject.types.GType boxedType, const(void)* srcBoxed)
       boxedType = The type of boxed.
       boxed = The boxed structure to be freed.
 */
-void boxedFree(gobject.types.GType boxedType, void* boxed)
+void boxedFree(gobject.types.GType boxedType, void* boxed) nothrow
 {
   g_boxed_free(boxedType, boxed);
 }
@@ -133,7 +133,7 @@ void boxedFree(gobject.types.GType boxedType, void* boxed)
       instance = The instance to remove the signal handler from.
           This pointer may be null or invalid, if the handler ID is zero.
 */
-void clearSignalHandler(ref gulong handlerIdPtr, gobject.object.ObjectWrap instance)
+void clearSignalHandler(ref gulong handlerIdPtr, gobject.object.ObjectWrap instance) nothrow
 {
   g_clear_signal_handler(cast(gulong*)&handlerIdPtr, instance ? cast(GObject*)instance._cPtr(No.Dup) : null);
 }
@@ -147,7 +147,7 @@ void clearSignalHandler(ref gulong handlerIdPtr, gobject.object.ObjectWrap insta
     Returns: the #GEnumValue for value, or null
                if value is not a member of the enumeration
 */
-gobject.enum_value.EnumValue enumGetValue(gobject.enum_class.EnumClass enumClass, int value)
+gobject.enum_value.EnumValue enumGetValue(gobject.enum_class.EnumClass enumClass, int value) nothrow
 {
   GEnumValue* _cretval;
   _cretval = g_enum_get_value(cast(GEnumClass*)&enumClass, value);
@@ -167,7 +167,7 @@ gobject.enum_value.EnumValue enumGetValue(gobject.enum_class.EnumClass enumClass
                or null if the enumeration doesn't have a member
                with that name
 */
-gobject.enum_value.EnumValue enumGetValueByName(gobject.enum_class.EnumClass enumClass, string name)
+gobject.enum_value.EnumValue enumGetValueByName(gobject.enum_class.EnumClass enumClass, string name) nothrow
 {
   GEnumValue* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -188,7 +188,7 @@ gobject.enum_value.EnumValue enumGetValueByName(gobject.enum_class.EnumClass enu
                or null if the enumeration doesn't have a member
                with that nickname
 */
-gobject.enum_value.EnumValue enumGetValueByNick(gobject.enum_class.EnumClass enumClass, string nick)
+gobject.enum_value.EnumValue enumGetValueByNick(gobject.enum_class.EnumClass enumClass, string nick) nothrow
 {
   GEnumValue* _cretval;
   const(char)* _nick = nick.toCString(No.Alloc);
@@ -214,7 +214,7 @@ gobject.enum_value.EnumValue enumGetValueByNick(gobject.enum_class.EnumClass enu
          be stack-allocated.
     Returns: The new type identifier.
 */
-gobject.types.GType enumRegisterStatic(string name, gobject.enum_value.EnumValue constStaticValues)
+gobject.types.GType enumRegisterStatic(string name, gobject.enum_value.EnumValue constStaticValues) nothrow
 {
   gobject.types.GType _retval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -233,7 +233,7 @@ gobject.types.GType enumRegisterStatic(string name, gobject.enum_value.EnumValue
       value = the value
     Returns: a newly-allocated text string
 */
-string enumToString(gobject.types.GType gEnumType, int value)
+string enumToString(gobject.types.GType gEnumType, int value) nothrow
 {
   char* _cretval;
   _cretval = g_enum_to_string(gEnumType, value);
@@ -250,7 +250,7 @@ string enumToString(gobject.types.GType gEnumType, int value)
     Returns: the first #GFlagsValue which is set in
                value, or null if none is set
 */
-gobject.flags_value.FlagsValue flagsGetFirstValue(gobject.flags_class.FlagsClass flagsClass, uint value)
+gobject.flags_value.FlagsValue flagsGetFirstValue(gobject.flags_class.FlagsClass flagsClass, uint value) nothrow
 {
   GFlagsValue* _cretval;
   _cretval = g_flags_get_first_value(cast(GFlagsClass*)&flagsClass, value);
@@ -269,7 +269,7 @@ gobject.flags_value.FlagsValue flagsGetFirstValue(gobject.flags_class.FlagsClass
     Returns: the #GFlagsValue with name name,
                or null if there is no flag with that name
 */
-gobject.flags_value.FlagsValue flagsGetValueByName(gobject.flags_class.FlagsClass flagsClass, string name)
+gobject.flags_value.FlagsValue flagsGetValueByName(gobject.flags_class.FlagsClass flagsClass, string name) nothrow
 {
   GFlagsValue* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -289,7 +289,7 @@ gobject.flags_value.FlagsValue flagsGetValueByName(gobject.flags_class.FlagsClas
     Returns: the #GFlagsValue with nickname nick,
                or null if there is no flag with that nickname
 */
-gobject.flags_value.FlagsValue flagsGetValueByNick(gobject.flags_class.FlagsClass flagsClass, string nick)
+gobject.flags_value.FlagsValue flagsGetValueByNick(gobject.flags_class.FlagsClass flagsClass, string nick) nothrow
 {
   GFlagsValue* _cretval;
   const(char)* _nick = nick.toCString(No.Alloc);
@@ -314,7 +314,7 @@ gobject.flags_value.FlagsValue flagsGetValueByNick(gobject.flags_class.FlagsClas
          GObject keeps a reference to the data, so it cannot be stack-allocated.
     Returns: The new type identifier.
 */
-gobject.types.GType flagsRegisterStatic(string name, gobject.flags_value.FlagsValue constStaticValues)
+gobject.types.GType flagsRegisterStatic(string name, gobject.flags_value.FlagsValue constStaticValues) nothrow
 {
   gobject.types.GType _retval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -334,7 +334,7 @@ gobject.types.GType flagsRegisterStatic(string name, gobject.flags_value.FlagsVa
       value = the value
     Returns: a newly-allocated text string
 */
-string flagsToString(gobject.types.GType flagsType, uint value)
+string flagsToString(gobject.types.GType flagsType, uint value) nothrow
 {
   char* _cretval;
   _cretval = g_flags_to_string(flagsType, value);
@@ -343,7 +343,7 @@ string flagsToString(gobject.types.GType flagsType, uint value)
 }
 
 /** */
-gobject.types.GType gtypeGetType()
+gobject.types.GType gtypeGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = g_gtype_get_type();
@@ -367,7 +367,7 @@ gobject.types.GType gtypeGetType()
       flags = flags for the property specified
     Returns: a newly created parameter specification
 */
-gobject.param_spec.ParamSpec paramSpecBoolean(string name, string nick, string blurb, bool defaultValue, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecBoolean(string name, string nick, string blurb, bool defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -392,7 +392,7 @@ gobject.param_spec.ParamSpec paramSpecBoolean(string name, string nick, string b
       flags = flags for the property specified
     Returns: a newly created parameter specification
 */
-gobject.param_spec.ParamSpec paramSpecBoxed(string name, string nick, string blurb, gobject.types.GType boxedType, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecBoxed(string name, string nick, string blurb, gobject.types.GType boxedType, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -416,7 +416,7 @@ gobject.param_spec.ParamSpec paramSpecBoxed(string name, string nick, string blu
       flags = flags for the property specified
     Returns: a newly created parameter specification
 */
-gobject.param_spec.ParamSpec paramSpecChar(string name, string nick, string blurb, byte minimum, byte maximum, byte defaultValue, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecChar(string name, string nick, string blurb, byte minimum, byte maximum, byte defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -443,7 +443,7 @@ gobject.param_spec.ParamSpec paramSpecChar(string name, string nick, string blur
       flags = flags for the property specified
     Returns: a newly created parameter specification
 */
-gobject.param_spec.ParamSpec paramSpecDouble(string name, string nick, string blurb, double minimum, double maximum, double defaultValue, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecDouble(string name, string nick, string blurb, double minimum, double maximum, double defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -469,7 +469,7 @@ gobject.param_spec.ParamSpec paramSpecDouble(string name, string nick, string bl
       flags = flags for the property specified
     Returns: a newly created parameter specification
 */
-gobject.param_spec.ParamSpec paramSpecEnum(string name, string nick, string blurb, gobject.types.GType enumType, int defaultValue, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecEnum(string name, string nick, string blurb, gobject.types.GType enumType, int defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -495,7 +495,7 @@ gobject.param_spec.ParamSpec paramSpecEnum(string name, string nick, string blur
       flags = flags for the property specified
     Returns: a newly created parameter specification
 */
-gobject.param_spec.ParamSpec paramSpecFlags(string name, string nick, string blurb, gobject.types.GType flagsType, uint defaultValue, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecFlags(string name, string nick, string blurb, gobject.types.GType flagsType, uint defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -521,7 +521,7 @@ gobject.param_spec.ParamSpec paramSpecFlags(string name, string nick, string blu
       flags = flags for the property specified
     Returns: a newly created parameter specification
 */
-gobject.param_spec.ParamSpec paramSpecFloat(string name, string nick, string blurb, float minimum, float maximum, float defaultValue, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecFloat(string name, string nick, string blurb, float minimum, float maximum, float defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -547,7 +547,7 @@ gobject.param_spec.ParamSpec paramSpecFloat(string name, string nick, string blu
       flags = flags for the property specified
     Returns: a newly created parameter specification
 */
-gobject.param_spec.ParamSpec paramSpecGtype(string name, string nick, string blurb, gobject.types.GType isAType, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecGtype(string name, string nick, string blurb, gobject.types.GType isAType, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -573,7 +573,7 @@ gobject.param_spec.ParamSpec paramSpecGtype(string name, string nick, string blu
       flags = flags for the property specified
     Returns: a newly created parameter specification
 */
-gobject.param_spec.ParamSpec paramSpecInt(string name, string nick, string blurb, int minimum, int maximum, int defaultValue, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecInt(string name, string nick, string blurb, int minimum, int maximum, int defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -599,7 +599,7 @@ gobject.param_spec.ParamSpec paramSpecInt(string name, string nick, string blurb
       flags = flags for the property specified
     Returns: a newly created parameter specification
 */
-gobject.param_spec.ParamSpec paramSpecInt64(string name, string nick, string blurb, long minimum, long maximum, long defaultValue, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecInt64(string name, string nick, string blurb, long minimum, long maximum, long defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -625,7 +625,7 @@ gobject.param_spec.ParamSpec paramSpecInt64(string name, string nick, string blu
       flags = flags for the property specified
     Returns: a newly created parameter specification
 */
-gobject.param_spec.ParamSpec paramSpecLong(string name, string nick, string blurb, glong minimum, glong maximum, glong defaultValue, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecLong(string name, string nick, string blurb, glong minimum, glong maximum, glong defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -650,7 +650,7 @@ gobject.param_spec.ParamSpec paramSpecLong(string name, string nick, string blur
       flags = flags for the property specified
     Returns: a newly created parameter specification
 */
-gobject.param_spec.ParamSpec paramSpecObject(string name, string nick, string blurb, gobject.types.GType objectType, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecObject(string name, string nick, string blurb, gobject.types.GType objectType, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -675,7 +675,7 @@ gobject.param_spec.ParamSpec paramSpecObject(string name, string nick, string bl
       flags = flags for the property specified
     Returns: a newly created parameter specification
 */
-gobject.param_spec.ParamSpec paramSpecParam(string name, string nick, string blurb, gobject.types.GType paramType, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecParam(string name, string nick, string blurb, gobject.types.GType paramType, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -700,7 +700,7 @@ gobject.param_spec.ParamSpec paramSpecParam(string name, string nick, string blu
       flags = flags for the property specified
     Returns: a newly created parameter specification
 */
-gobject.param_spec.ParamSpec paramSpecPointer(string name, string nick, string blurb, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecPointer(string name, string nick, string blurb, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -724,7 +724,7 @@ gobject.param_spec.ParamSpec paramSpecPointer(string name, string nick, string b
       flags = flags for the property specified
     Returns: a newly created parameter specification
 */
-gobject.param_spec.ParamSpec paramSpecString(string name, string nick, string blurb, string defaultValue, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecString(string name, string nick, string blurb, string defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -749,7 +749,7 @@ gobject.param_spec.ParamSpec paramSpecString(string name, string nick, string bl
       flags = flags for the property specified
     Returns: a newly created parameter specification
 */
-gobject.param_spec.ParamSpec paramSpecUchar(string name, string nick, string blurb, ubyte minimum, ubyte maximum, ubyte defaultValue, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecUchar(string name, string nick, string blurb, ubyte minimum, ubyte maximum, ubyte defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -775,7 +775,7 @@ gobject.param_spec.ParamSpec paramSpecUchar(string name, string nick, string blu
       flags = flags for the property specified
     Returns: a newly created parameter specification
 */
-gobject.param_spec.ParamSpec paramSpecUint(string name, string nick, string blurb, uint minimum, uint maximum, uint defaultValue, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecUint(string name, string nick, string blurb, uint minimum, uint maximum, uint defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -802,7 +802,7 @@ gobject.param_spec.ParamSpec paramSpecUint(string name, string nick, string blur
       flags = flags for the property specified
     Returns: a newly created parameter specification
 */
-gobject.param_spec.ParamSpec paramSpecUint64(string name, string nick, string blurb, ulong minimum, ulong maximum, ulong defaultValue, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecUint64(string name, string nick, string blurb, ulong minimum, ulong maximum, ulong defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -829,7 +829,7 @@ gobject.param_spec.ParamSpec paramSpecUint64(string name, string nick, string bl
       flags = flags for the property specified
     Returns: a newly created parameter specification
 */
-gobject.param_spec.ParamSpec paramSpecUlong(string name, string nick, string blurb, gulong minimum, gulong maximum, gulong defaultValue, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecUlong(string name, string nick, string blurb, gulong minimum, gulong maximum, gulong defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -855,7 +855,7 @@ gobject.param_spec.ParamSpec paramSpecUlong(string name, string nick, string blu
       flags = flags for the property specified
     Returns: a newly created parameter specification
 */
-gobject.param_spec.ParamSpec paramSpecUnichar(string name, string nick, string blurb, dchar defaultValue, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecUnichar(string name, string nick, string blurb, dchar defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -884,7 +884,7 @@ gobject.param_spec.ParamSpec paramSpecUnichar(string name, string nick, string b
       flags = flags for the property specified
     Returns: the newly created #GParamSpec
 */
-gobject.param_spec.ParamSpec paramSpecVariant(string name, string nick, string blurb, glib.variant_type.VariantType type, glib.variant.Variant defaultValue, gobject.types.ParamFlags flags)
+gobject.param_spec.ParamSpec paramSpecVariant(string name, string nick, string blurb, glib.variant_type.VariantType type, glib.variant.Variant defaultValue, gobject.types.ParamFlags flags) nothrow
 {
   GParamSpec* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -908,7 +908,7 @@ gobject.param_spec.ParamSpec paramSpecVariant(string name, string nick, string b
       pspecInfo = The #GParamSpecTypeInfo for this #GParamSpec type.
     Returns: The new type identifier.
 */
-gobject.types.GType paramTypeRegisterStatic(string name, gobject.types.ParamSpecTypeInfo pspecInfo)
+gobject.types.GType paramTypeRegisterStatic(string name, gobject.types.ParamSpecTypeInfo pspecInfo) nothrow
 {
   gobject.types.GType _retval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -934,7 +934,7 @@ gobject.types.GType paramTypeRegisterStatic(string name, gobject.types.ParamSpec
     Returns: true if transformation and validation were successful,
        false otherwise and dest_value is left untouched.
 */
-bool paramValueConvert(gobject.param_spec.ParamSpec pspec, gobject.value.Value srcValue, gobject.value.Value destValue, bool strictValidation)
+bool paramValueConvert(gobject.param_spec.ParamSpec pspec, gobject.value.Value srcValue, gobject.value.Value destValue, bool strictValidation) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_param_value_convert(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, srcValue ? cast(const(GValue)*)srcValue._cPtr(No.Dup) : null, destValue ? cast(GValue*)destValue._cPtr(No.Dup) : null, strictValidation);
@@ -949,7 +949,7 @@ bool paramValueConvert(gobject.param_spec.ParamSpec pspec, gobject.value.Value s
       value = a #GValue of correct type for pspec
     Returns: whether value contains the canonical default for this pspec
 */
-bool paramValueDefaults(gobject.param_spec.ParamSpec pspec, gobject.value.Value value)
+bool paramValueDefaults(gobject.param_spec.ParamSpec pspec, gobject.value.Value value) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_param_value_defaults(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -966,7 +966,7 @@ bool paramValueDefaults(gobject.param_spec.ParamSpec pspec, gobject.value.Value 
     Returns: whether the contents of value comply with the specifications
         set out by pspec.
 */
-bool paramValueIsValid(gobject.param_spec.ParamSpec pspec, gobject.value.Value value)
+bool paramValueIsValid(gobject.param_spec.ParamSpec pspec, gobject.value.Value value) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_param_value_is_valid(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -981,7 +981,7 @@ bool paramValueIsValid(gobject.param_spec.ParamSpec pspec, gobject.value.Value v
       value = a #GValue of correct type for pspec; since 2.64, you
           can also pass an empty #GValue, initialized with `G_VALUE_INIT`
 */
-void paramValueSetDefault(gobject.param_spec.ParamSpec pspec, gobject.value.Value value)
+void paramValueSetDefault(gobject.param_spec.ParamSpec pspec, gobject.value.Value value) nothrow
 {
   g_param_value_set_default(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, value ? cast(GValue*)value._cPtr(No.Dup) : null);
 }
@@ -999,7 +999,7 @@ void paramValueSetDefault(gobject.param_spec.ParamSpec pspec, gobject.value.Valu
       value = a #GValue of correct type for pspec
     Returns: whether modifying value was necessary to ensure validity
 */
-bool paramValueValidate(gobject.param_spec.ParamSpec pspec, gobject.value.Value value)
+bool paramValueValidate(gobject.param_spec.ParamSpec pspec, gobject.value.Value value) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_param_value_validate(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, value ? cast(GValue*)value._cPtr(No.Dup) : null);
@@ -1017,7 +1017,7 @@ bool paramValueValidate(gobject.param_spec.ParamSpec pspec, gobject.value.Value 
       value2 = a #GValue of correct type for pspec
     Returns: -1, 0 or +1, for a less than, equal to or greater than result
 */
-int paramValuesCmp(gobject.param_spec.ParamSpec pspec, gobject.value.Value value1, gobject.value.Value value2)
+int paramValuesCmp(gobject.param_spec.ParamSpec pspec, gobject.value.Value value1, gobject.value.Value value2) nothrow
 {
   int _retval;
   _retval = g_param_values_cmp(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
@@ -1032,7 +1032,7 @@ int paramValuesCmp(gobject.param_spec.ParamSpec pspec, gobject.value.Value value
       name = the name of the new pointer type.
     Returns: a new `G_TYPE_POINTER` derived type id for name.
 */
-gobject.types.GType pointerTypeRegisterStatic(string name)
+gobject.types.GType pointerTypeRegisterStatic(string name) nothrow
 {
   gobject.types.GType _retval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -1059,7 +1059,7 @@ gobject.types.GType pointerTypeRegisterStatic(string name)
       dummy = standard #GSignalAccumulator parameter
     Returns: standard #GSignalAccumulator result
 */
-bool signalAccumulatorFirstWins(gobject.types.SignalInvocationHint ihint, gobject.value.Value returnAccu, gobject.value.Value handlerReturn, void* dummy = null)
+bool signalAccumulatorFirstWins(gobject.types.SignalInvocationHint ihint, gobject.value.Value returnAccu, gobject.value.Value handlerReturn, void* dummy = null) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_signal_accumulator_first_wins(&ihint, returnAccu ? cast(GValue*)returnAccu._cPtr(No.Dup) : null, handlerReturn ? cast(const(GValue)*)handlerReturn._cPtr(No.Dup) : null, dummy);
@@ -1082,7 +1082,7 @@ bool signalAccumulatorFirstWins(gobject.types.SignalInvocationHint ihint, gobjec
       dummy = standard #GSignalAccumulator parameter
     Returns: standard #GSignalAccumulator result
 */
-bool signalAccumulatorTrueHandled(gobject.types.SignalInvocationHint ihint, gobject.value.Value returnAccu, gobject.value.Value handlerReturn, void* dummy = null)
+bool signalAccumulatorTrueHandled(gobject.types.SignalInvocationHint ihint, gobject.value.Value returnAccu, gobject.value.Value handlerReturn, void* dummy = null) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_signal_accumulator_true_handled(&ihint, returnAccu ? cast(GValue*)returnAccu._cPtr(No.Dup) : null, handlerReturn ? cast(const(GValue)*)handlerReturn._cPtr(No.Dup) : null, dummy);
@@ -1100,9 +1100,9 @@ bool signalAccumulatorTrueHandled(gobject.types.SignalInvocationHint ihint, gobj
       hookFunc = a #GSignalEmissionHook function.
     Returns: the hook id, for later use with [gobject.global.signalRemoveEmissionHook].
 */
-gulong signalAddEmissionHook(uint signalId, glib.types.Quark detail, gobject.types.SignalEmissionHook hookFunc)
+gulong signalAddEmissionHook(uint signalId, glib.types.Quark detail, gobject.types.SignalEmissionHook hookFunc) nothrow
 {
-  extern(C) gboolean _hookFuncCallback(GSignalInvocationHint* ihint, uint nParamValues, const(GValue)* paramValues, void* data)
+  extern(C) gboolean _hookFuncCallback(GSignalInvocationHint* ihint, uint nParamValues, const(GValue)* paramValues, void* data) nothrow
   {
     bool _dretval;
     auto _dlg = cast(gobject.types.SignalEmissionHook*)data;
@@ -1111,7 +1111,14 @@ gulong signalAddEmissionHook(uint signalId, glib.types.Quark detail, gobject.typ
     foreach (i; 0 .. nParamValues)
       _paramValues[i] = new gobject.value.Value(cast(GValue*)&paramValues[i], No.Take);
 
-    _dretval = (*_dlg)(*cast(gobject.types.SignalInvocationHint*)ihint, _paramValues);
+    try
+    {
+      _dretval = (*_dlg)(*cast(gobject.types.SignalInvocationHint*)ihint, _paramValues);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gobject.types.SignalEmissionHook");
+    }
     auto _retval = cast(gboolean)_dretval;
 
     return _retval;
@@ -1141,7 +1148,7 @@ gulong signalAddEmissionHook(uint signalId, glib.types.Quark detail, gobject.typ
          default handler of the signal.
     Returns: the handler ID (always greater than 0)
 */
-gulong signalConnectClosure(gobject.object.ObjectWrap instance, string detailedSignal, gobject.closure.Closure closure, bool after)
+gulong signalConnectClosure(gobject.object.ObjectWrap instance, string detailedSignal, gobject.closure.Closure closure, bool after) nothrow
 {
   gulong _retval;
   const(char)* _detailedSignal = detailedSignal.toCString(No.Alloc);
@@ -1167,7 +1174,7 @@ gulong signalConnectClosure(gobject.object.ObjectWrap instance, string detailedS
          default handler of the signal.
     Returns: the handler ID (always greater than 0)
 */
-gulong signalConnectClosureById(gobject.object.ObjectWrap instance, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure, bool after)
+gulong signalConnectClosureById(gobject.object.ObjectWrap instance, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure, bool after) nothrow
 {
   gulong _retval;
   _retval = g_signal_connect_closure_by_id(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, signalId, detail, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, after);
@@ -1182,7 +1189,7 @@ gulong signalConnectClosureById(gobject.object.ObjectWrap instance, uint signalI
     Returns: the invocation hint of the innermost
           signal emission, or null if not found.
 */
-gobject.types.SignalInvocationHint signalGetInvocationHint(gobject.object.ObjectWrap instance)
+gobject.types.SignalInvocationHint signalGetInvocationHint(gobject.object.ObjectWrap instance) nothrow
 {
   GSignalInvocationHint* _cretval;
   _cretval = g_signal_get_invocation_hint(instance ? cast(GObject*)instance._cPtr(No.Dup) : null);
@@ -1206,7 +1213,7 @@ gobject.types.SignalInvocationHint signalGetInvocationHint(gobject.object.Object
       instance = The instance to block the signal handler of.
       handlerId = Handler id of the handler to be blocked.
 */
-void signalHandlerBlock(gobject.object.ObjectWrap instance, gulong handlerId)
+void signalHandlerBlock(gobject.object.ObjectWrap instance, gulong handlerId) nothrow
 {
   g_signal_handler_block(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, handlerId);
 }
@@ -1228,7 +1235,7 @@ void signalHandlerBlock(gobject.object.ObjectWrap instance, gulong handlerId)
       func = The C closure callback of the handler (useless for non-C closures).
     Returns: A valid non-0 signal handler id for a successful match.
 */
-gulong signalHandlerFind(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null)
+gulong signalHandlerFind(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null) nothrow
 {
   gulong _retval;
   _retval = g_signal_handler_find(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, func, null);
@@ -1243,7 +1250,7 @@ gulong signalHandlerFind(gobject.object.ObjectWrap instance, gobject.types.Signa
       handlerId = the handler ID.
     Returns: whether handler_id identifies a handler connected to instance.
 */
-bool signalHandlerIsConnected(gobject.object.ObjectWrap instance, gulong handlerId)
+bool signalHandlerIsConnected(gobject.object.ObjectWrap instance, gulong handlerId) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_signal_handler_is_connected(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, handlerId);
@@ -1269,7 +1276,7 @@ bool signalHandlerIsConnected(gobject.object.ObjectWrap instance, gulong handler
       instance = The instance to unblock the signal handler of.
       handlerId = Handler id of the handler to be unblocked.
 */
-void signalHandlerUnblock(gobject.object.ObjectWrap instance, gulong handlerId)
+void signalHandlerUnblock(gobject.object.ObjectWrap instance, gulong handlerId) nothrow
 {
   g_signal_handler_unblock(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, handlerId);
 }
@@ -1299,7 +1306,7 @@ void signalHandlerUnblock(gobject.object.ObjectWrap instance, gulong handlerId)
       func = The C closure callback of the handlers (useless for non-C closures).
     Returns: The number of handlers that matched.
 */
-uint signalHandlersBlockMatched(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null)
+uint signalHandlersBlockMatched(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null) nothrow
 {
   uint _retval;
   _retval = g_signal_handlers_block_matched(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, func, null);
@@ -1332,7 +1339,7 @@ uint signalHandlersBlockMatched(gobject.object.ObjectWrap instance, gobject.type
       func = The C closure callback of the handlers (useless for non-C closures).
     Returns: The number of handlers that matched.
 */
-uint signalHandlersDisconnectMatched(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null)
+uint signalHandlersDisconnectMatched(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null) nothrow
 {
   uint _retval;
   _retval = g_signal_handlers_disconnect_matched(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, func, null);
@@ -1366,7 +1373,7 @@ uint signalHandlersDisconnectMatched(gobject.object.ObjectWrap instance, gobject
       func = The C closure callback of the handlers (useless for non-C closures).
     Returns: The number of handlers that matched.
 */
-uint signalHandlersUnblockMatched(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null)
+uint signalHandlersUnblockMatched(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null) nothrow
 {
   uint _retval;
   _retval = g_signal_handlers_unblock_matched(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, func, null);
@@ -1399,7 +1406,7 @@ uint signalHandlersUnblockMatched(gobject.object.ObjectWrap instance, gobject.ty
     Returns: true if a handler is connected to the signal, false
                otherwise.
 */
-bool signalHasHandlerPending(gobject.object.ObjectWrap instance, uint signalId, glib.types.Quark detail, bool mayBeBlocked)
+bool signalHasHandlerPending(gobject.object.ObjectWrap instance, uint signalId, glib.types.Quark detail, bool mayBeBlocked) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_signal_has_handler_pending(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, signalId, detail, mayBeBlocked);
@@ -1418,7 +1425,7 @@ bool signalHasHandlerPending(gobject.object.ObjectWrap instance, uint signalId, 
       name = the canonical name of the signal
     Returns: true if name is a valid signal name, false otherwise.
 */
-bool signalIsValidName(string name)
+bool signalIsValidName(string name) nothrow
 {
   bool _retval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -1435,7 +1442,7 @@ bool signalIsValidName(string name)
       itype = Instance or interface type.
     Returns: Newly allocated array of signal IDs.
 */
-uint[] signalListIds(gobject.types.GType itype)
+uint[] signalListIds(gobject.types.GType itype) nothrow
 {
   uint* _cretval;
   uint _cretlength;
@@ -1468,7 +1475,7 @@ uint[] signalListIds(gobject.types.GType itype)
       itype = the type that the signal operates on.
     Returns: the signal's identifying number, or 0 if no signal was found.
 */
-uint signalLookup(string name, gobject.types.GType itype)
+uint signalLookup(string name, gobject.types.GType itype) nothrow
 {
   uint _retval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -1485,7 +1492,7 @@ uint signalLookup(string name, gobject.types.GType itype)
       signalId = the signal's identifying number.
     Returns: the signal name, or null if the signal number was invalid.
 */
-string signalName(uint signalId)
+string signalName(uint signalId) nothrow
 {
   const(char)* _cretval;
   _cretval = g_signal_name(signalId);
@@ -1520,20 +1527,27 @@ string signalName(uint signalId)
             each parameter (may be null if n_params is zero)
     Returns: the signal id
 */
-uint signalNewv(string signalName, gobject.types.GType itype, gobject.types.SignalFlags signalFlags, gobject.closure.Closure classClosure, gobject.types.SignalAccumulator accumulator, gobject.types.SignalCMarshaller cMarshaller, gobject.types.GType returnType, gobject.types.GType[] paramTypes = null)
+uint signalNewv(string signalName, gobject.types.GType itype, gobject.types.SignalFlags signalFlags, gobject.closure.Closure classClosure, gobject.types.SignalAccumulator accumulator, gobject.types.SignalCMarshaller cMarshaller, gobject.types.GType returnType, gobject.types.GType[] paramTypes = null) nothrow
 {
-  extern(C) gboolean _accumulatorCallback(GSignalInvocationHint* ihint, GValue* returnAccu, const(GValue)* handlerReturn, void* data)
+  extern(C) gboolean _accumulatorCallback(GSignalInvocationHint* ihint, GValue* returnAccu, const(GValue)* handlerReturn, void* data) nothrow
   {
     bool _dretval;
     auto _dlg = cast(gobject.types.SignalAccumulator*)data;
 
-    _dretval = (*_dlg)(*cast(gobject.types.SignalInvocationHint*)ihint, returnAccu ? new gobject.value.Value(cast(void*)returnAccu, No.Take) : null, handlerReturn ? new gobject.value.Value(cast(void*)handlerReturn, No.Take) : null);
+    try
+    {
+      _dretval = (*_dlg)(*cast(gobject.types.SignalInvocationHint*)ihint, returnAccu ? new gobject.value.Value(cast(void*)returnAccu, No.Take) : null, handlerReturn ? new gobject.value.Value(cast(void*)handlerReturn, No.Take) : null);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gobject.types.SignalAccumulator");
+    }
     auto _retval = cast(gboolean)_dretval;
 
     return _retval;
   }
   auto _accumulatorCB = accumulator ? &_accumulatorCallback : null;
-  extern(C) void _cMarshallerCallback(GClosure* closure, GValue* returnValue, uint nParamValues, const(GValue)* paramValues, void* invocationHint, void* marshalData)
+  extern(C) void _cMarshallerCallback(GClosure* closure, GValue* returnValue, uint nParamValues, const(GValue)* paramValues, void* invocationHint, void* marshalData) nothrow
   {
     auto _dlg = cast(gobject.types.SignalCMarshaller*)marshalData;
     gobject.value.Value[] _paramValues;
@@ -1541,7 +1555,14 @@ uint signalNewv(string signalName, gobject.types.GType itype, gobject.types.Sign
     foreach (i; 0 .. nParamValues)
       _paramValues[i] = new gobject.value.Value(cast(GValue*)&paramValues[i], No.Take);
 
-    (*_dlg)(closure ? new gobject.closure.Closure(cast(void*)closure, No.Take) : null, returnValue ? new gobject.value.Value(cast(void*)returnValue, No.Take) : null, _paramValues, invocationHint);
+    try
+    {
+      (*_dlg)(closure ? new gobject.closure.Closure(cast(void*)closure, No.Take) : null, returnValue ? new gobject.value.Value(cast(void*)returnValue, No.Take) : null, _paramValues, invocationHint);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gobject.types.ClosureMarshal");
+    }
   }
   auto _cMarshallerCB = cMarshaller ? &_cMarshallerCallback : null;
   uint _retval;
@@ -1571,7 +1592,7 @@ uint signalNewv(string signalName, gobject.types.GType itype, gobject.types.Sign
          for the signal.
       classClosure = the closure.
 */
-void signalOverrideClassClosure(uint signalId, gobject.types.GType instanceType, gobject.closure.Closure classClosure)
+void signalOverrideClassClosure(uint signalId, gobject.types.GType instanceType, gobject.closure.Closure classClosure) nothrow
 {
   g_signal_override_class_closure(signalId, instanceType, classClosure ? cast(GClosure*)classClosure._cPtr(No.Dup) : null);
 }
@@ -1588,7 +1609,7 @@ void signalOverrideClassClosure(uint signalId, gobject.types.GType instanceType,
       forceDetailQuark = true forces creation of a #GQuark for the detail.
     Returns: Whether the signal name could successfully be parsed and signal_id_p and detail_p contain valid return values.
 */
-bool signalParseName(string detailedSignal, gobject.types.GType itype, out uint signalIdP, out glib.types.Quark detailP, bool forceDetailQuark)
+bool signalParseName(string detailedSignal, gobject.types.GType itype, out uint signalIdP, out glib.types.Quark detailP, bool forceDetailQuark) nothrow
 {
   bool _retval;
   const(char)* _detailedSignal = detailedSignal.toCString(No.Alloc);
@@ -1609,7 +1630,7 @@ bool signalParseName(string detailedSignal, gobject.types.GType itype, out uint 
       query = A user provided structure that is
          filled in with constant values upon success.
 */
-void signalQuery(uint signalId, out gobject.signal_query.SignalQuery query)
+void signalQuery(uint signalId, out gobject.signal_query.SignalQuery query) nothrow
 {
   GSignalQuery _query;
   g_signal_query(signalId, &_query);
@@ -1624,7 +1645,7 @@ void signalQuery(uint signalId, out gobject.signal_query.SignalQuery query)
       hookId = the id of the emission hook, as returned by
          [gobject.global.signalAddEmissionHook]
 */
-void signalRemoveEmissionHook(uint signalId, gulong hookId)
+void signalRemoveEmissionHook(uint signalId, gulong hookId) nothrow
 {
   g_signal_remove_emission_hook(signalId, hookId);
 }
@@ -1643,7 +1664,7 @@ void signalRemoveEmissionHook(uint signalId, gulong hookId)
       signalId = the signal identifier, as returned by [gobject.global.signalLookup].
       detail = the detail which the signal was emitted with.
 */
-void signalStopEmission(gobject.object.ObjectWrap instance, uint signalId, glib.types.Quark detail)
+void signalStopEmission(gobject.object.ObjectWrap instance, uint signalId, glib.types.Quark detail) nothrow
 {
   g_signal_stop_emission(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, signalId, detail);
 }
@@ -1658,7 +1679,7 @@ void signalStopEmission(gobject.object.ObjectWrap instance, uint signalId, glib.
       instance = the object whose signal handlers you wish to stop.
       detailedSignal = a string of the form "signal-name::detail".
 */
-void signalStopEmissionByName(gobject.object.ObjectWrap instance, string detailedSignal)
+void signalStopEmissionByName(gobject.object.ObjectWrap instance, string detailedSignal) nothrow
 {
   const(char)* _detailedSignal = detailedSignal.toCString(No.Alloc);
   g_signal_stop_emission_by_name(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, _detailedSignal);
@@ -1675,7 +1696,7 @@ void signalStopEmissionByName(gobject.object.ObjectWrap instance, string detaile
          structure which is to be invoked by the new closure
     Returns: a floating reference to a new #GCClosure
 */
-gobject.closure.Closure signalTypeCclosureNew(gobject.types.GType itype, uint structOffset)
+gobject.closure.Closure signalTypeCclosureNew(gobject.types.GType itype, uint structOffset) nothrow
 {
   GClosure* _cretval;
   _cretval = g_signal_type_cclosure_new(itype, structOffset);
@@ -1693,7 +1714,7 @@ gobject.closure.Closure signalTypeCclosureNew(gobject.types.GType itype, uint st
       value = #GValue which contents are to be described.
     Returns: Newly allocated string.
 */
-string strdupValueContents(gobject.value.Value value)
+string strdupValueContents(gobject.value.Value value) nothrow
 {
   char* _cretval;
   _cretval = g_strdup_value_contents(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -1717,13 +1738,13 @@ string strdupValueContents(gobject.value.Value value)
       classType = GType of a classed type
       privateSize = size of private structure
 */
-void typeAddClassPrivate(gobject.types.GType classType, size_t privateSize)
+void typeAddClassPrivate(gobject.types.GType classType, size_t privateSize) nothrow
 {
   g_type_add_class_private(classType, privateSize);
 }
 
 /** */
-int typeAddInstancePrivate(gobject.types.GType classType, size_t privateSize)
+int typeAddInstancePrivate(gobject.types.GType classType, size_t privateSize) nothrow
 {
   int _retval;
   _retval = g_type_add_instance_private(classType, privateSize);
@@ -1738,7 +1759,7 @@ int typeAddInstancePrivate(gobject.types.GType classType, size_t privateSize)
       instance = a valid #GTypeInstance structure
     Returns: true if instance is valid, false otherwise
 */
-bool typeCheckInstance(gobject.type_instance.TypeInstance instance)
+bool typeCheckInstance(gobject.type_instance.TypeInstance instance) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_type_check_instance(instance ? cast(GTypeInstance*)instance._cPtr : null);
@@ -1746,7 +1767,7 @@ bool typeCheckInstance(gobject.type_instance.TypeInstance instance)
 }
 
 /** */
-bool typeCheckInstanceIsA(gobject.type_instance.TypeInstance instance, gobject.types.GType ifaceType)
+bool typeCheckInstanceIsA(gobject.type_instance.TypeInstance instance, gobject.types.GType ifaceType) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_type_check_instance_is_a(instance ? cast(GTypeInstance*)instance._cPtr : null, ifaceType);
@@ -1754,7 +1775,7 @@ bool typeCheckInstanceIsA(gobject.type_instance.TypeInstance instance, gobject.t
 }
 
 /** */
-bool typeCheckInstanceIsFundamentallyA(gobject.type_instance.TypeInstance instance, gobject.types.GType fundamentalType)
+bool typeCheckInstanceIsFundamentallyA(gobject.type_instance.TypeInstance instance, gobject.types.GType fundamentalType) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_type_check_instance_is_fundamentally_a(instance ? cast(GTypeInstance*)instance._cPtr : null, fundamentalType);
@@ -1762,7 +1783,7 @@ bool typeCheckInstanceIsFundamentallyA(gobject.type_instance.TypeInstance instan
 }
 
 /** */
-bool typeCheckIsValueType(gobject.types.GType type)
+bool typeCheckIsValueType(gobject.types.GType type) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_type_check_is_value_type(type);
@@ -1770,7 +1791,7 @@ bool typeCheckIsValueType(gobject.types.GType type)
 }
 
 /** */
-bool typeCheckValue(gobject.value.Value value)
+bool typeCheckValue(gobject.value.Value value) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_type_check_value(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -1778,7 +1799,7 @@ bool typeCheckValue(gobject.value.Value value)
 }
 
 /** */
-bool typeCheckValueHolds(gobject.value.Value value, gobject.types.GType type)
+bool typeCheckValueHolds(gobject.value.Value value, gobject.types.GType type) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_type_check_value_holds(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, type);
@@ -1794,7 +1815,7 @@ bool typeCheckValueHolds(gobject.value.Value value, gobject.types.GType type)
     Returns: Newly allocated
           and 0-terminated array of child types, free with [glib.global.gfree]
 */
-gobject.types.GType[] typeChildren(gobject.types.GType type)
+gobject.types.GType[] typeChildren(gobject.types.GType type) nothrow
 {
   GType* _cretval;
   uint _cretlength;
@@ -1817,7 +1838,7 @@ gobject.types.GType[] typeChildren(gobject.types.GType type)
       type = a #GType
     Returns: the depth of type
 */
-uint typeDepth(gobject.types.GType type)
+uint typeDepth(gobject.types.GType type) nothrow
 {
   uint _retval;
   _retval = g_type_depth(type);
@@ -1841,7 +1862,7 @@ uint typeDepth(gobject.types.GType type)
     Params:
       type = a #GType
 */
-void typeEnsure(gobject.types.GType type)
+void typeEnsure(gobject.types.GType type) nothrow
 {
   g_type_ensure(type);
 }
@@ -1856,7 +1877,7 @@ void typeEnsure(gobject.types.GType type)
     Params:
       instance = an instance of a type
 */
-void typeFreeInstance(gobject.type_instance.TypeInstance instance)
+void typeFreeInstance(gobject.type_instance.TypeInstance instance) nothrow
 {
   g_type_free_instance(instance ? cast(GTypeInstance*)instance._cPtr : null);
 }
@@ -1871,7 +1892,7 @@ void typeFreeInstance(gobject.type_instance.TypeInstance instance)
       name = type name to look up
     Returns: corresponding type ID or 0
 */
-gobject.types.GType typeFromName(string name)
+gobject.types.GType typeFromName(string name) nothrow
 {
   gobject.types.GType _retval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -1887,7 +1908,7 @@ gobject.types.GType typeFromName(string name)
       typeId = valid type ID
     Returns: fundamental type ID
 */
-gobject.types.GType typeFundamental(gobject.types.GType typeId)
+gobject.types.GType typeFundamental(gobject.types.GType typeId) nothrow
 {
   gobject.types.GType _retval;
   _retval = g_type_fundamental(typeId);
@@ -1902,7 +1923,7 @@ gobject.types.GType typeFundamental(gobject.types.GType typeId)
     Returns: the next available fundamental type ID to be registered,
           or 0 if the type system ran out of fundamental type IDs
 */
-gobject.types.GType typeFundamentalNext()
+gobject.types.GType typeFundamentalNext() nothrow
 {
   gobject.types.GType _retval;
   _retval = g_type_fundamental_next();
@@ -1920,7 +1941,7 @@ gobject.types.GType typeFundamentalNext()
     Returns: the number of instances allocated of the given type;
         if instance counts are not available, returns 0.
 */
-int typeGetInstanceCount(gobject.types.GType type)
+int typeGetInstanceCount(gobject.types.GType type) nothrow
 {
   int _retval;
   _retval = g_type_get_instance_count(type);
@@ -1940,7 +1961,7 @@ int typeGetInstanceCount(gobject.types.GType type)
       quark = a #GQuark id to identify the data
     Returns: the data, or null if no data was found
 */
-void* typeGetQdata(gobject.types.GType type, glib.types.Quark quark)
+void* typeGetQdata(gobject.types.GType type, glib.types.Quark quark) nothrow
 {
   auto _retval = g_type_get_qdata(type, quark);
   return _retval;
@@ -1954,7 +1975,7 @@ void* typeGetQdata(gobject.types.GType type, glib.types.Quark quark)
     time by comparing the current serial with the one at the type lookup.
     Returns: An unsigned int, representing the state of type registrations
 */
-uint typeGetTypeRegistrationSerial()
+uint typeGetTypeRegistrationSerial() nothrow
 {
   uint _retval;
   _retval = g_type_get_type_registration_serial();
@@ -1968,7 +1989,7 @@ uint typeGetTypeRegistrationSerial()
 
     Deprecated: the type system is now initialised automatically
 */
-void typeInit()
+void typeInit() nothrow
 {
   g_type_init();
 }
@@ -1987,7 +2008,7 @@ void typeInit()
 
     Deprecated: the type system is now initialised automatically
 */
-void typeInitWithDebugFlags(gobject.types.TypeDebugFlags debugFlags)
+void typeInitWithDebugFlags(gobject.types.TypeDebugFlags debugFlags) nothrow
 {
   g_type_init_with_debug_flags(debugFlags);
 }
@@ -2001,7 +2022,7 @@ void typeInitWithDebugFlags(gobject.types.TypeDebugFlags debugFlags)
     Returns: Newly allocated
           and 0-terminated array of interface types, free with [glib.global.gfree]
 */
-gobject.types.GType[] typeInterfaces(gobject.types.GType type)
+gobject.types.GType[] typeInterfaces(gobject.types.GType type) nothrow
 {
   GType* _cretval;
   uint _cretlength;
@@ -2027,7 +2048,7 @@ gobject.types.GType[] typeInterfaces(gobject.types.GType type)
             could conform to
     Returns: true if type is a is_a_type
 */
-bool typeIsA(gobject.types.GType type, gobject.types.GType isAType)
+bool typeIsA(gobject.types.GType type, gobject.types.GType isAType) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_type_is_a(type, isAType);
@@ -2045,7 +2066,7 @@ bool typeIsA(gobject.types.GType type, gobject.types.GType isAType)
       type = type to return name for
     Returns: static type name or null
 */
-string typeName(gobject.types.GType type)
+string typeName(gobject.types.GType type) nothrow
 {
   const(char)* _cretval;
   _cretval = g_type_name(type);
@@ -2054,7 +2075,7 @@ string typeName(gobject.types.GType type)
 }
 
 /** */
-string typeNameFromInstance(gobject.type_instance.TypeInstance instance)
+string typeNameFromInstance(gobject.type_instance.TypeInstance instance) nothrow
 {
   const(char)* _cretval;
   _cretval = g_type_name_from_instance(instance ? cast(GTypeInstance*)instance._cPtr : null);
@@ -2076,7 +2097,7 @@ string typeNameFromInstance(gobject.type_instance.TypeInstance instance)
       rootType = immediate parent of the returned type
     Returns: immediate child of root_type and ancestor of leaf_type
 */
-gobject.types.GType typeNextBase(gobject.types.GType leafType, gobject.types.GType rootType)
+gobject.types.GType typeNextBase(gobject.types.GType leafType, gobject.types.GType rootType) nothrow
 {
   gobject.types.GType _retval;
   _retval = g_type_next_base(leafType, rootType);
@@ -2091,7 +2112,7 @@ gobject.types.GType typeNextBase(gobject.types.GType leafType, gobject.types.GTy
       type = the derived type
     Returns: the parent type
 */
-gobject.types.GType typeParent(gobject.types.GType type)
+gobject.types.GType typeParent(gobject.types.GType type) nothrow
 {
   gobject.types.GType _retval;
   _retval = g_type_parent(type);
@@ -2105,7 +2126,7 @@ gobject.types.GType typeParent(gobject.types.GType type)
       type = type to return quark of type name for
     Returns: the type names quark or 0
 */
-glib.types.Quark typeQname(gobject.types.GType type)
+glib.types.Quark typeQname(gobject.types.GType type) nothrow
 {
   glib.types.Quark _retval;
   _retval = g_type_qname(type);
@@ -2129,7 +2150,7 @@ glib.types.Quark typeQname(gobject.types.GType type)
       query = a user provided structure that is
             filled in with constant values upon success
 */
-void typeQuery(gobject.types.GType type, out gobject.type_query.TypeQuery query)
+void typeQuery(gobject.types.GType type, out gobject.type_query.TypeQuery query) nothrow
 {
   GTypeQuery _query;
   g_type_query(type, &_query);
@@ -2144,13 +2165,13 @@ void typeQuery(gobject.types.GType type, out gobject.type_query.TypeQuery query)
       quark = a #GQuark id to identify the data
       data = the data
 */
-void typeSetQdata(gobject.types.GType type, glib.types.Quark quark, void* data = null)
+void typeSetQdata(gobject.types.GType type, glib.types.Quark quark, void* data = null) nothrow
 {
   g_type_set_qdata(type, quark, data);
 }
 
 /** */
-bool typeTestFlags(gobject.types.GType type, uint flags)
+bool typeTestFlags(gobject.types.GType type, uint flags) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_type_test_flags(type, flags);

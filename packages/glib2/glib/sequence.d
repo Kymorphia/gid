@@ -18,24 +18,21 @@ class Sequence
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.sequence.Sequence");
-
     _cInstancePtr = cast(GSequence*)ptr;
 
     owned = take;
   }
 
-  ~this()
+  ~this() nothrow
   {
-    if (owned)
+    if (owned && _cInstancePtr)
       g_sequence_free(_cInstancePtr);
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -47,7 +44,7 @@ class Sequence
         data = the data for the new item
       Returns: an iterator pointing to the new item
   */
-  glib.sequence_iter.SequenceIter append(void* data = null)
+  glib.sequence_iter.SequenceIter append(void* data = null) nothrow
   {
     GSequenceIter* _cretval;
     _cretval = g_sequence_append(cast(GSequence*)this._cPtr, data);
@@ -62,13 +59,20 @@ class Sequence
       Params:
         func = the function to call for each item in seq
   */
-  void foreach_(glib.types.Func func)
+  void foreach_(glib.types.Func func) nothrow
   {
-    extern(C) void _funcCallback(void* data, void* userData)
+    extern(C) void _funcCallback(void* data, void* userData) nothrow
     {
       auto _dlg = cast(glib.types.Func*)userData;
 
-      (*_dlg)(data);
+      try
+      {
+        (*_dlg)(data);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.Func");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -79,7 +83,7 @@ class Sequence
       Returns the begin iterator for seq.
       Returns: the begin iterator for seq.
   */
-  glib.sequence_iter.SequenceIter getBeginIter()
+  glib.sequence_iter.SequenceIter getBeginIter() nothrow
   {
     GSequenceIter* _cretval;
     _cretval = g_sequence_get_begin_iter(cast(GSequence*)this._cPtr);
@@ -91,7 +95,7 @@ class Sequence
       Returns the end iterator for seg
       Returns: the end iterator for seq
   */
-  glib.sequence_iter.SequenceIter getEndIter()
+  glib.sequence_iter.SequenceIter getEndIter() nothrow
   {
     GSequenceIter* _cretval;
     _cretval = g_sequence_get_end_iter(cast(GSequence*)this._cPtr);
@@ -107,7 +111,7 @@ class Sequence
         pos = a position in seq, or -1 for the end
       Returns: The #GSequenceIter at position pos
   */
-  glib.sequence_iter.SequenceIter getIterAtPos(int pos)
+  glib.sequence_iter.SequenceIter getIterAtPos(int pos) nothrow
   {
     GSequenceIter* _cretval;
     _cretval = g_sequence_get_iter_at_pos(cast(GSequence*)this._cPtr, pos);
@@ -121,7 +125,7 @@ class Sequence
       to use [glib.sequence.Sequence.isEmpty] when comparing the length to zero.
       Returns: the length of seq
   */
-  int getLength()
+  int getLength() nothrow
   {
     int _retval;
     _retval = g_sequence_get_length(cast(GSequence*)this._cPtr);
@@ -147,13 +151,21 @@ class Sequence
         cmpFunc = the function used to compare items in the sequence
       Returns: a #GSequenceIter pointing to the new item.
   */
-  glib.sequence_iter.SequenceIter insertSorted(void* data, glib.types.CompareDataFunc cmpFunc)
+  glib.sequence_iter.SequenceIter insertSorted(void* data, glib.types.CompareDataFunc cmpFunc) nothrow
   {
-    extern(C) int _cmpFuncCallback(const(void)* a, const(void)* b, void* userData)
+    extern(C) int _cmpFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      int _retval;
       auto _dlg = cast(glib.types.CompareDataFunc*)userData;
 
-      int _retval = (*_dlg)(a, b);
+      try
+      {
+        _retval = (*_dlg)(a, b);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.CompareDataFunc");
+      }
       return _retval;
     }
     auto _cmpFuncCB = cmpFunc ? &_cmpFuncCallback : null;
@@ -183,13 +195,21 @@ class Sequence
         iterCmp = the function used to compare iterators in the sequence
       Returns: a #GSequenceIter pointing to the new item
   */
-  glib.sequence_iter.SequenceIter insertSortedIter(void* data, glib.types.SequenceIterCompareFunc iterCmp)
+  glib.sequence_iter.SequenceIter insertSortedIter(void* data, glib.types.SequenceIterCompareFunc iterCmp) nothrow
   {
-    extern(C) int _iterCmpCallback(GSequenceIter* a, GSequenceIter* b, void* data)
+    extern(C) int _iterCmpCallback(GSequenceIter* a, GSequenceIter* b, void* data) nothrow
     {
+      int _retval;
       auto _dlg = cast(glib.types.SequenceIterCompareFunc*)data;
 
-      int _retval = (*_dlg)(a ? new glib.sequence_iter.SequenceIter(cast(void*)a, No.Take) : null, b ? new glib.sequence_iter.SequenceIter(cast(void*)b, No.Take) : null);
+      try
+      {
+        _retval = (*_dlg)(a ? new glib.sequence_iter.SequenceIter(cast(void*)a, No.Take) : null, b ? new glib.sequence_iter.SequenceIter(cast(void*)b, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.SequenceIterCompareFunc");
+      }
       return _retval;
     }
     auto _iterCmpCB = iterCmp ? &_iterCmpCallback : null;
@@ -208,7 +228,7 @@ class Sequence
       implemented in O(1) running time.
       Returns: true if the sequence is empty, otherwise false.
   */
-  bool isEmpty()
+  bool isEmpty() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_sequence_is_empty(cast(GSequence*)this._cPtr);
@@ -237,13 +257,21 @@ class Sequence
             first item found equal to data according to cmp_func and
             cmp_data, or null if no such item exists
   */
-  glib.sequence_iter.SequenceIter lookup(void* data, glib.types.CompareDataFunc cmpFunc)
+  glib.sequence_iter.SequenceIter lookup(void* data, glib.types.CompareDataFunc cmpFunc) nothrow
   {
-    extern(C) int _cmpFuncCallback(const(void)* a, const(void)* b, void* userData)
+    extern(C) int _cmpFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      int _retval;
       auto _dlg = cast(glib.types.CompareDataFunc*)userData;
 
-      int _retval = (*_dlg)(a, b);
+      try
+      {
+        _retval = (*_dlg)(a, b);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.CompareDataFunc");
+      }
       return _retval;
     }
     auto _cmpFuncCB = cmpFunc ? &_cmpFuncCallback : null;
@@ -273,13 +301,21 @@ class Sequence
             the first item found equal to data according to iter_cmp
             and cmp_data, or null if no such item exists
   */
-  glib.sequence_iter.SequenceIter lookupIter(void* data, glib.types.SequenceIterCompareFunc iterCmp)
+  glib.sequence_iter.SequenceIter lookupIter(void* data, glib.types.SequenceIterCompareFunc iterCmp) nothrow
   {
-    extern(C) int _iterCmpCallback(GSequenceIter* a, GSequenceIter* b, void* data)
+    extern(C) int _iterCmpCallback(GSequenceIter* a, GSequenceIter* b, void* data) nothrow
     {
+      int _retval;
       auto _dlg = cast(glib.types.SequenceIterCompareFunc*)data;
 
-      int _retval = (*_dlg)(a ? new glib.sequence_iter.SequenceIter(cast(void*)a, No.Take) : null, b ? new glib.sequence_iter.SequenceIter(cast(void*)b, No.Take) : null);
+      try
+      {
+        _retval = (*_dlg)(a ? new glib.sequence_iter.SequenceIter(cast(void*)a, No.Take) : null, b ? new glib.sequence_iter.SequenceIter(cast(void*)b, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.SequenceIterCompareFunc");
+      }
       return _retval;
     }
     auto _iterCmpCB = iterCmp ? &_iterCmpCallback : null;
@@ -297,7 +333,7 @@ class Sequence
         data = the data for the new item
       Returns: an iterator pointing to the new item
   */
-  glib.sequence_iter.SequenceIter prepend(void* data = null)
+  glib.sequence_iter.SequenceIter prepend(void* data = null) nothrow
   {
     GSequenceIter* _cretval;
     _cretval = g_sequence_prepend(cast(GSequence*)this._cPtr, data);
@@ -326,13 +362,21 @@ class Sequence
       Returns: an #GSequenceIter pointing to the position where data
             would have been inserted according to cmp_func and cmp_data
   */
-  glib.sequence_iter.SequenceIter search(void* data, glib.types.CompareDataFunc cmpFunc)
+  glib.sequence_iter.SequenceIter search(void* data, glib.types.CompareDataFunc cmpFunc) nothrow
   {
-    extern(C) int _cmpFuncCallback(const(void)* a, const(void)* b, void* userData)
+    extern(C) int _cmpFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      int _retval;
       auto _dlg = cast(glib.types.CompareDataFunc*)userData;
 
-      int _retval = (*_dlg)(a, b);
+      try
+      {
+        _retval = (*_dlg)(a, b);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.CompareDataFunc");
+      }
       return _retval;
     }
     auto _cmpFuncCB = cmpFunc ? &_cmpFuncCallback : null;
@@ -365,13 +409,21 @@ class Sequence
             where data would have been inserted according to iter_cmp
             and cmp_data
   */
-  glib.sequence_iter.SequenceIter searchIter(void* data, glib.types.SequenceIterCompareFunc iterCmp)
+  glib.sequence_iter.SequenceIter searchIter(void* data, glib.types.SequenceIterCompareFunc iterCmp) nothrow
   {
-    extern(C) int _iterCmpCallback(GSequenceIter* a, GSequenceIter* b, void* data)
+    extern(C) int _iterCmpCallback(GSequenceIter* a, GSequenceIter* b, void* data) nothrow
     {
+      int _retval;
       auto _dlg = cast(glib.types.SequenceIterCompareFunc*)data;
 
-      int _retval = (*_dlg)(a ? new glib.sequence_iter.SequenceIter(cast(void*)a, No.Take) : null, b ? new glib.sequence_iter.SequenceIter(cast(void*)b, No.Take) : null);
+      try
+      {
+        _retval = (*_dlg)(a ? new glib.sequence_iter.SequenceIter(cast(void*)a, No.Take) : null, b ? new glib.sequence_iter.SequenceIter(cast(void*)b, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.SequenceIterCompareFunc");
+      }
       return _retval;
     }
     auto _iterCmpCB = iterCmp ? &_iterCmpCallback : null;
@@ -393,13 +445,21 @@ class Sequence
       Params:
         cmpFunc = the function used to sort the sequence
   */
-  void sort(glib.types.CompareDataFunc cmpFunc)
+  void sort(glib.types.CompareDataFunc cmpFunc) nothrow
   {
-    extern(C) int _cmpFuncCallback(const(void)* a, const(void)* b, void* userData)
+    extern(C) int _cmpFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      int _retval;
       auto _dlg = cast(glib.types.CompareDataFunc*)userData;
 
-      int _retval = (*_dlg)(a, b);
+      try
+      {
+        _retval = (*_dlg)(a, b);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.CompareDataFunc");
+      }
       return _retval;
     }
     auto _cmpFuncCB = cmpFunc ? &_cmpFuncCallback : null;
@@ -419,13 +479,21 @@ class Sequence
       Params:
         cmpFunc = the function used to compare iterators in the sequence
   */
-  void sortIter(glib.types.SequenceIterCompareFunc cmpFunc)
+  void sortIter(glib.types.SequenceIterCompareFunc cmpFunc) nothrow
   {
-    extern(C) int _cmpFuncCallback(GSequenceIter* a, GSequenceIter* b, void* data)
+    extern(C) int _cmpFuncCallback(GSequenceIter* a, GSequenceIter* b, void* data) nothrow
     {
+      int _retval;
       auto _dlg = cast(glib.types.SequenceIterCompareFunc*)data;
 
-      int _retval = (*_dlg)(a ? new glib.sequence_iter.SequenceIter(cast(void*)a, No.Take) : null, b ? new glib.sequence_iter.SequenceIter(cast(void*)b, No.Take) : null);
+      try
+      {
+        _retval = (*_dlg)(a ? new glib.sequence_iter.SequenceIter(cast(void*)a, No.Take) : null, b ? new glib.sequence_iter.SequenceIter(cast(void*)b, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.SequenceIterCompareFunc");
+      }
       return _retval;
     }
     auto _cmpFuncCB = cmpFunc ? &_cmpFuncCallback : null;
@@ -443,13 +511,20 @@ class Sequence
         end = a #GSequenceIter
         func = a #GFunc
   */
-  static void foreachRange(glib.sequence_iter.SequenceIter begin, glib.sequence_iter.SequenceIter end, glib.types.Func func)
+  static void foreachRange(glib.sequence_iter.SequenceIter begin, glib.sequence_iter.SequenceIter end, glib.types.Func func) nothrow
   {
-    extern(C) void _funcCallback(void* data, void* userData)
+    extern(C) void _funcCallback(void* data, void* userData) nothrow
     {
       auto _dlg = cast(glib.types.Func*)userData;
 
-      (*_dlg)(data);
+      try
+      {
+        (*_dlg)(data);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.Func");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -463,7 +538,7 @@ class Sequence
         iter = a #GSequenceIter
       Returns: the data that iter points to
   */
-  static void* get(glib.sequence_iter.SequenceIter iter)
+  static void* get(glib.sequence_iter.SequenceIter iter) nothrow
   {
     auto _retval = g_sequence_get(iter ? cast(GSequenceIter*)iter._cPtr : null);
     return _retval;
@@ -477,7 +552,7 @@ class Sequence
         data = the data for the new item
       Returns: an iterator pointing to the new item
   */
-  static glib.sequence_iter.SequenceIter insertBefore(glib.sequence_iter.SequenceIter iter, void* data = null)
+  static glib.sequence_iter.SequenceIter insertBefore(glib.sequence_iter.SequenceIter iter, void* data = null) nothrow
   {
     GSequenceIter* _cretval;
     _cretval = g_sequence_insert_before(iter ? cast(GSequenceIter*)iter._cPtr : null, data);
@@ -496,7 +571,7 @@ class Sequence
         dest = a #GSequenceIter pointing to the position to which
               the item is moved
   */
-  static void move(glib.sequence_iter.SequenceIter src, glib.sequence_iter.SequenceIter dest)
+  static void move(glib.sequence_iter.SequenceIter src, glib.sequence_iter.SequenceIter dest) nothrow
   {
     g_sequence_move(src ? cast(GSequenceIter*)src._cPtr : null, dest ? cast(GSequenceIter*)dest._cPtr : null);
   }
@@ -516,7 +591,7 @@ class Sequence
         begin = a #GSequenceIter
         end = a #GSequenceIter
   */
-  static void moveRange(glib.sequence_iter.SequenceIter dest, glib.sequence_iter.SequenceIter begin, glib.sequence_iter.SequenceIter end)
+  static void moveRange(glib.sequence_iter.SequenceIter dest, glib.sequence_iter.SequenceIter begin, glib.sequence_iter.SequenceIter end) nothrow
   {
     g_sequence_move_range(dest ? cast(GSequenceIter*)dest._cPtr : null, begin ? cast(GSequenceIter*)begin._cPtr : null, end ? cast(GSequenceIter*)end._cPtr : null);
   }
@@ -535,7 +610,7 @@ class Sequence
       Returns: a #GSequenceIter pointing somewhere in the
            (begin, end) range
   */
-  static glib.sequence_iter.SequenceIter rangeGetMidpoint(glib.sequence_iter.SequenceIter begin, glib.sequence_iter.SequenceIter end)
+  static glib.sequence_iter.SequenceIter rangeGetMidpoint(glib.sequence_iter.SequenceIter begin, glib.sequence_iter.SequenceIter end) nothrow
   {
     GSequenceIter* _cretval;
     _cretval = g_sequence_range_get_midpoint(begin ? cast(GSequenceIter*)begin._cPtr : null, end ? cast(GSequenceIter*)end._cPtr : null);
@@ -553,7 +628,7 @@ class Sequence
       Params:
         iter = a #GSequenceIter
   */
-  static void remove(glib.sequence_iter.SequenceIter iter)
+  static void remove(glib.sequence_iter.SequenceIter iter) nothrow
   {
     g_sequence_remove(iter ? cast(GSequenceIter*)iter._cPtr : null);
   }
@@ -568,7 +643,7 @@ class Sequence
         begin = a #GSequenceIter
         end = a #GSequenceIter
   */
-  static void removeRange(glib.sequence_iter.SequenceIter begin, glib.sequence_iter.SequenceIter end)
+  static void removeRange(glib.sequence_iter.SequenceIter begin, glib.sequence_iter.SequenceIter end) nothrow
   {
     g_sequence_remove_range(begin ? cast(GSequenceIter*)begin._cPtr : null, end ? cast(GSequenceIter*)end._cPtr : null);
   }
@@ -582,7 +657,7 @@ class Sequence
         iter = a #GSequenceIter
         data = new data for the item
   */
-  static void set(glib.sequence_iter.SequenceIter iter, void* data = null)
+  static void set(glib.sequence_iter.SequenceIter iter, void* data = null) nothrow
   {
     g_sequence_set(iter ? cast(GSequenceIter*)iter._cPtr : null, data);
   }
@@ -603,13 +678,21 @@ class Sequence
         iter = A #GSequenceIter
         cmpFunc = the function used to compare items in the sequence
   */
-  static void sortChanged(glib.sequence_iter.SequenceIter iter, glib.types.CompareDataFunc cmpFunc)
+  static void sortChanged(glib.sequence_iter.SequenceIter iter, glib.types.CompareDataFunc cmpFunc) nothrow
   {
-    extern(C) int _cmpFuncCallback(const(void)* a, const(void)* b, void* userData)
+    extern(C) int _cmpFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      int _retval;
       auto _dlg = cast(glib.types.CompareDataFunc*)userData;
 
-      int _retval = (*_dlg)(a, b);
+      try
+      {
+        _retval = (*_dlg)(a, b);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.CompareDataFunc");
+      }
       return _retval;
     }
     auto _cmpFuncCB = cmpFunc ? &_cmpFuncCallback : null;
@@ -632,13 +715,21 @@ class Sequence
         iter = a #GSequenceIter
         iterCmp = the function used to compare iterators in the sequence
   */
-  static void sortChangedIter(glib.sequence_iter.SequenceIter iter, glib.types.SequenceIterCompareFunc iterCmp)
+  static void sortChangedIter(glib.sequence_iter.SequenceIter iter, glib.types.SequenceIterCompareFunc iterCmp) nothrow
   {
-    extern(C) int _iterCmpCallback(GSequenceIter* a, GSequenceIter* b, void* data)
+    extern(C) int _iterCmpCallback(GSequenceIter* a, GSequenceIter* b, void* data) nothrow
     {
+      int _retval;
       auto _dlg = cast(glib.types.SequenceIterCompareFunc*)data;
 
-      int _retval = (*_dlg)(a ? new glib.sequence_iter.SequenceIter(cast(void*)a, No.Take) : null, b ? new glib.sequence_iter.SequenceIter(cast(void*)b, No.Take) : null);
+      try
+      {
+        _retval = (*_dlg)(a ? new glib.sequence_iter.SequenceIter(cast(void*)a, No.Take) : null, b ? new glib.sequence_iter.SequenceIter(cast(void*)b, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.SequenceIterCompareFunc");
+      }
       return _retval;
     }
     auto _iterCmpCB = iterCmp ? &_iterCmpCallback : null;
@@ -654,7 +745,7 @@ class Sequence
         a = a #GSequenceIter
         b = a #GSequenceIter
   */
-  static void swap(glib.sequence_iter.SequenceIter a, glib.sequence_iter.SequenceIter b)
+  static void swap(glib.sequence_iter.SequenceIter a, glib.sequence_iter.SequenceIter b) nothrow
   {
     g_sequence_swap(a ? cast(GSequenceIter*)a._cPtr : null, b ? cast(GSequenceIter*)b._cPtr : null);
   }

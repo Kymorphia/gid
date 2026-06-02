@@ -37,26 +37,26 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_omni_bar_get_type != &gidSymbolNotFound ? panel_omni_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override OmniBar self()
+  override OmniBar self() nothrow
   {
     return this;
   }
@@ -65,7 +65,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
       Get builder for [panel.omni_bar.OmniBar]
       Returns: New builder object
   */
-  static OmniBarGidBuilder builder()
+  static OmniBarGidBuilder builder() nothrow
   {
     return new OmniBarGidBuilder;
   }
@@ -74,7 +74,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
       Get `actionTooltip` property.
       Returns: The tooltip for the action.
   */
-  @property string actionTooltip()
+  @property string actionTooltip() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("action-tooltip");
   }
@@ -84,7 +84,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         propval = The tooltip for the action.
   */
-  @property void actionTooltip(string propval)
+  @property void actionTooltip(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("action-tooltip", propval);
   }
@@ -93,7 +93,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
       Get `iconName` property.
       Returns: The name of the icon to use.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("icon-name");
   }
@@ -103,7 +103,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         propval = The name of the icon to use.
   */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("icon-name", propval);
   }
@@ -112,7 +112,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
       Get `menuModel` property.
       Returns: The menu model of the omni bar menu.
   */
-  @property gio.menu_model.MenuModel menuModel()
+  @property gio.menu_model.MenuModel menuModel() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.menu_model.MenuModel)("menu-model");
   }
@@ -122,7 +122,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         propval = The menu model of the omni bar menu.
   */
-  @property void menuModel(gio.menu_model.MenuModel propval)
+  @property void menuModel(gio.menu_model.MenuModel propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gio.menu_model.MenuModel)("menu-model", propval);
   }
@@ -131,7 +131,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
       Get `popover` property.
       Returns: The popover to show.
   */
-  @property gtk.popover.Popover popover()
+  @property gtk.popover.Popover popover() nothrow
   {
     return getPopover();
   }
@@ -141,7 +141,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         propval = The popover to show.
   */
-  @property void popover(gtk.popover.Popover propval)
+  @property void popover(gtk.popover.Popover propval) nothrow
   {
     setPopover(propval);
   }
@@ -150,7 +150,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
       Get `progress` property.
       Returns: The current progress value.
   */
-  @property double progress()
+  @property double progress() nothrow
   {
     return getProgress();
   }
@@ -160,7 +160,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         propval = The current progress value.
   */
-  @property void progress(double propval)
+  @property void progress(double propval) nothrow
   {
     setProgress(propval);
   }
@@ -171,7 +171,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
       Create a new #PanelOmniBar.
       Returns: a newly created #PanelOmniBar
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = panel_omni_bar_new();
@@ -186,7 +186,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
         priority = the priority
         widget = the widget to add at the start.
   */
-  void addPrefix(int priority, gtk.widget.Widget widget)
+  void addPrefix(int priority, gtk.widget.Widget widget) nothrow
   {
     panel_omni_bar_add_prefix(cast(PanelOmniBar*)this._cPtr, priority, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -199,7 +199,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
         priority = the priority
         widget = the widget to add toward the end.
   */
-  void addSuffix(int priority, gtk.widget.Widget widget)
+  void addSuffix(int priority, gtk.widget.Widget widget) nothrow
   {
     panel_omni_bar_add_suffix(cast(PanelOmniBar*)this._cPtr, priority, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -208,7 +208,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
       Gets the current popover or null if none is setup.
       Returns: a #GtkPopover or null
   */
-  gtk.popover.Popover getPopover()
+  gtk.popover.Popover getPopover() nothrow
   {
     GtkPopover* _cretval;
     _cretval = panel_omni_bar_get_popover(cast(PanelOmniBar*)this._cPtr);
@@ -220,7 +220,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
       Gets the progress value displayed in the omni bar.
       Returns: the progress value.
   */
-  double getProgress()
+  double getProgress() nothrow
   {
     double _retval;
     _retval = panel_omni_bar_get_progress(cast(PanelOmniBar*)this._cPtr);
@@ -234,7 +234,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         widget = The widget to remove.
   */
-  void remove(gtk.widget.Widget widget)
+  void remove(gtk.widget.Widget widget) nothrow
   {
     panel_omni_bar_remove(cast(PanelOmniBar*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -245,7 +245,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         popover = a #GtkPopover or null
   */
-  void setPopover(gtk.popover.Popover popover = null)
+  void setPopover(gtk.popover.Popover popover = null) nothrow
   {
     panel_omni_bar_set_popover(cast(PanelOmniBar*)this._cPtr, popover ? cast(GtkPopover*)popover._cPtr(No.Dup) : null);
   }
@@ -256,7 +256,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         progress = the progress value
   */
-  void setProgress(double progress)
+  void setProgress(double progress) nothrow
   {
     panel_omni_bar_set_progress(cast(PanelOmniBar*)this._cPtr, progress);
   }
@@ -265,7 +265,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
       Starts pulsing the omni bar. Use
       panel_omni_bar_stop_pulsing to stop.
   */
-  void startPulsing()
+  void startPulsing() nothrow
   {
     panel_omni_bar_start_pulsing(cast(PanelOmniBar*)this._cPtr);
   }
@@ -274,7 +274,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
       Stops pulsing the omni bar, that was started with
       panel_omni_bar_start_pulsing.
   */
-  void stopPulsing()
+  void stopPulsing() nothrow
   {
     panel_omni_bar_stop_pulsing(cast(PanelOmniBar*)this._cPtr);
   }
@@ -292,7 +292,7 @@ class OmniBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionab
         propval = The tooltip for the action.
       Returns: Builder instance for fluent chaining
   */
-  T actionTooltip(string propval)
+  T actionTooltip(string propval) nothrow
   {
     return setProperty("action-tooltip", propval);
   }
@@ -303,7 +303,7 @@ class OmniBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionab
         propval = The name of the icon to use.
       Returns: Builder instance for fluent chaining
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
@@ -314,7 +314,7 @@ class OmniBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionab
         propval = The menu model of the omni bar menu.
       Returns: Builder instance for fluent chaining
   */
-  T menuModel(gio.menu_model.MenuModel propval)
+  T menuModel(gio.menu_model.MenuModel propval) nothrow
   {
     return setProperty("menu-model", propval);
   }
@@ -325,7 +325,7 @@ class OmniBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionab
         propval = The popover to show.
       Returns: Builder instance for fluent chaining
   */
-  T popover(gtk.popover.Popover propval)
+  T popover(gtk.popover.Popover propval) nothrow
   {
     return setProperty("popover", propval);
   }
@@ -336,7 +336,7 @@ class OmniBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionab
         propval = The current progress value.
       Returns: Builder instance for fluent chaining
   */
-  T progress(double propval)
+  T progress(double propval) nothrow
   {
     return setProperty("progress", propval);
   }
@@ -349,7 +349,7 @@ final class OmniBarGidBuilder : OmniBarGidBuilderImpl!OmniBarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  OmniBar build()
+  OmniBar build() nothrow
   {
     return new OmniBar(cast(void*)createGObject(OmniBar._getGType), No.Take);
   }

@@ -49,26 +49,26 @@ class Overlay : gtk.bin.Bin
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_overlay_get_type != &gidSymbolNotFound ? gtk_overlay_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Overlay self()
+  override Overlay self() nothrow
   {
     return this;
   }
@@ -77,7 +77,7 @@ class Overlay : gtk.bin.Bin
       Get builder for [gtk.overlay.Overlay]
       Returns: New builder object
   */
-  static OverlayGidBuilder builder()
+  static OverlayGidBuilder builder() nothrow
   {
     return new OverlayGidBuilder;
   }
@@ -86,7 +86,7 @@ class Overlay : gtk.bin.Bin
       Creates a new #GtkOverlay.
       Returns: a new #GtkOverlay object.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_overlay_new();
@@ -105,7 +105,7 @@ class Overlay : gtk.bin.Bin
       Params:
         widget = a #GtkWidget to be added to the container
   */
-  void addOverlay(gtk.widget.Widget widget)
+  void addOverlay(gtk.widget.Widget widget) nothrow
   {
     gtk_overlay_add_overlay(cast(GtkOverlay*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -118,7 +118,7 @@ class Overlay : gtk.bin.Bin
         widget = an overlay child of #GtkOverlay
       Returns: whether the widget is a pass through child.
   */
-  bool getOverlayPassThrough(gtk.widget.Widget widget)
+  bool getOverlayPassThrough(gtk.widget.Widget widget) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_overlay_get_overlay_pass_through(cast(GtkOverlay*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
@@ -140,7 +140,7 @@ class Overlay : gtk.bin.Bin
             of overlay, starting from 0. If negative, indicates the end of
             the list
   */
-  void reorderOverlay(gtk.widget.Widget child, int index)
+  void reorderOverlay(gtk.widget.Widget child, int index) nothrow
   {
     gtk_overlay_reorder_overlay(cast(GtkOverlay*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, index);
   }
@@ -153,7 +153,7 @@ class Overlay : gtk.bin.Bin
         widget = an overlay child of #GtkOverlay
         passThrough = whether the child should pass the input through
   */
-  void setOverlayPassThrough(gtk.widget.Widget widget, bool passThrough)
+  void setOverlayPassThrough(gtk.widget.Widget widget, bool passThrough) nothrow
   {
     gtk_overlay_set_overlay_pass_through(cast(GtkOverlay*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, passThrough);
   }
@@ -191,7 +191,7 @@ class Overlay : gtk.bin.Bin
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGetChildPosition(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGetChildPosition(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -199,11 +199,12 @@ class Overlay : gtk.bin.Bin
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.overlay.Overlay)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -216,7 +217,14 @@ class Overlay : gtk.bin.Bin
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.overlay.Overlay.getChildPosition");
+      }
 
       setVal!(bool)(_returnValue, _retval);
 
@@ -242,7 +250,7 @@ final class OverlayGidBuilder : OverlayGidBuilderImpl!OverlayGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Overlay build()
+  Overlay build() nothrow
   {
     return new Overlay(cast(void*)createGObject(Overlay._getGType), No.Take);
   }

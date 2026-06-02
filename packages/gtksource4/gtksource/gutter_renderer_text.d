@@ -15,26 +15,26 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_gutter_renderer_text_get_type != &gidSymbolNotFound ? gtk_source_gutter_renderer_text_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GutterRendererText self()
+  override GutterRendererText self() nothrow
   {
     return this;
   }
@@ -43,31 +43,31 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
       Get builder for [gtksource.gutter_renderer_text.GutterRendererText]
       Returns: New builder object
   */
-  static GutterRendererTextGidBuilder builder()
+  static GutterRendererTextGidBuilder builder() nothrow
   {
     return new GutterRendererTextGidBuilder;
   }
 
   /** */
-  @property string markup()
+  @property string markup() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("markup");
   }
 
   /** */
-  @property void markup(string propval)
+  @property void markup(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("markup", propval);
   }
 
   /** */
-  @property string text()
+  @property string text() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("text");
   }
 
   /** */
-  @property void text(string propval)
+  @property void text(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("text", propval);
   }
@@ -76,7 +76,7 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
       Create a new #GtkSourceGutterRendererText.
       Returns: A #GtkSourceGutterRenderer
   */
-  this()
+  this() nothrow
   {
     GtkSourceGutterRenderer* _cretval;
     _cretval = gtk_source_gutter_renderer_text_new();
@@ -94,7 +94,7 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
         height = location to store the height of the text in
             pixels, or null.
   */
-  void measure(string text, out int width, out int height)
+  void measure(string text, out int width, out int height) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_source_gutter_renderer_text_measure(cast(GtkSourceGutterRendererText*)this._cPtr, _text, cast(int*)&width, cast(int*)&height);
@@ -111,14 +111,14 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
         height = location to store the height of the text in
             pixels, or null.
   */
-  void measureMarkup(string markup, out int width, out int height)
+  void measureMarkup(string markup, out int width, out int height) nothrow
   {
     const(char)* _markup = markup.toCString(No.Alloc);
     gtk_source_gutter_renderer_text_measure_markup(cast(GtkSourceGutterRendererText*)this._cPtr, _markup, cast(int*)&width, cast(int*)&height);
   }
 
   /** */
-  void setMarkup(string markup)
+  void setMarkup(string markup) nothrow
   {
     int _length;
     if (markup)
@@ -129,7 +129,7 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
   }
 
   /** */
-  void setText(string text)
+  void setText(string text) nothrow
   {
     int _length;
     if (text)
@@ -145,13 +145,13 @@ class GutterRendererTextGidBuilderImpl(T) : gtksource.gutter_renderer.GutterRend
 {
 
   /** */
-  T markup(string propval)
+  T markup(string propval) nothrow
   {
     return setProperty("markup", propval);
   }
 
   /** */
-  T text(string propval)
+  T text(string propval) nothrow
   {
     return setProperty("text", propval);
   }
@@ -164,7 +164,7 @@ final class GutterRendererTextGidBuilder : GutterRendererTextGidBuilderImpl!Gutt
       Create object from builder.
       Returns: New object
   */
-  GutterRendererText build()
+  GutterRendererText build() nothrow
   {
     return new GutterRendererText(cast(void*)createGObject(GutterRendererText._getGType), Yes.Take);
   }

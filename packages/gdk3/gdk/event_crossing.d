@@ -16,11 +16,8 @@ class EventCrossing
   GdkEventCrossing _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.event_crossing.EventCrossing");
-
     _cInstance = *cast(GdkEventCrossing*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class EventCrossing
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class EventCrossing
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.EnterNotify] or [gdk.types.EventType.LeaveNotify]).
   */
-  @property gdk.types.EventType type()
+  @property gdk.types.EventType type() nothrow
   {
     return cast(gdk.types.EventType)(cast(GdkEventCrossing*)this._cPtr).type;
   }
@@ -47,7 +44,7 @@ class EventCrossing
       Params:
         propval = the type of the event ([gdk.types.EventType.EnterNotify] or [gdk.types.EventType.LeaveNotify]).
   */
-  @property void type(gdk.types.EventType propval)
+  @property void type(gdk.types.EventType propval) nothrow
   {
     (cast(GdkEventCrossing*)this._cPtr).type = cast(GdkEventType)propval;
   }
@@ -56,7 +53,7 @@ class EventCrossing
       Get `window` field.
       Returns: the window which received the event.
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventCrossing*)this._cPtr).window);
   }
@@ -66,7 +63,7 @@ class EventCrossing
       Params:
         propval = the window which received the event.
   */
-  @property void window(gdk.window.Window propval)
+  @property void window(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventCrossing*)this._cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventCrossing*)this._cPtr).window);
@@ -76,7 +73,7 @@ class EventCrossing
       Get `sendEvent` field.
       Returns: true if the event was sent explicitly.
   */
-  @property byte sendEvent()
+  @property byte sendEvent() nothrow
   {
     return (cast(GdkEventCrossing*)this._cPtr).sendEvent;
   }
@@ -86,7 +83,7 @@ class EventCrossing
       Params:
         propval = true if the event was sent explicitly.
   */
-  @property void sendEvent(byte propval)
+  @property void sendEvent(byte propval) nothrow
   {
     (cast(GdkEventCrossing*)this._cPtr).sendEvent = propval;
   }
@@ -95,7 +92,7 @@ class EventCrossing
       Get `subwindow` field.
       Returns: the window that was entered or left.
   */
-  @property gdk.window.Window subwindow()
+  @property gdk.window.Window subwindow() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventCrossing*)this._cPtr).subwindow);
   }
@@ -105,7 +102,7 @@ class EventCrossing
       Params:
         propval = the window that was entered or left.
   */
-  @property void subwindow(gdk.window.Window propval)
+  @property void subwindow(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventCrossing*)this._cPtr).subwindow);
     dToC(propval, cast(void*)&(cast(GdkEventCrossing*)this._cPtr).subwindow);
@@ -115,7 +112,7 @@ class EventCrossing
       Get `time` field.
       Returns: the time of the event in milliseconds.
   */
-  @property uint time()
+  @property uint time() nothrow
   {
     return (cast(GdkEventCrossing*)this._cPtr).time;
   }
@@ -125,7 +122,7 @@ class EventCrossing
       Params:
         propval = the time of the event in milliseconds.
   */
-  @property void time(uint propval)
+  @property void time(uint propval) nothrow
   {
     (cast(GdkEventCrossing*)this._cPtr).time = propval;
   }
@@ -134,7 +131,7 @@ class EventCrossing
       Get `x` field.
       Returns: the x coordinate of the pointer relative to the window.
   */
-  @property double x()
+  @property double x() nothrow
   {
     return (cast(GdkEventCrossing*)this._cPtr).x;
   }
@@ -144,7 +141,7 @@ class EventCrossing
       Params:
         propval = the x coordinate of the pointer relative to the window.
   */
-  @property void x(double propval)
+  @property void x(double propval) nothrow
   {
     (cast(GdkEventCrossing*)this._cPtr).x = propval;
   }
@@ -153,7 +150,7 @@ class EventCrossing
       Get `y` field.
       Returns: the y coordinate of the pointer relative to the window.
   */
-  @property double y()
+  @property double y() nothrow
   {
     return (cast(GdkEventCrossing*)this._cPtr).y;
   }
@@ -163,7 +160,7 @@ class EventCrossing
       Params:
         propval = the y coordinate of the pointer relative to the window.
   */
-  @property void y(double propval)
+  @property void y(double propval) nothrow
   {
     (cast(GdkEventCrossing*)this._cPtr).y = propval;
   }
@@ -172,7 +169,7 @@ class EventCrossing
       Get `xRoot` field.
       Returns: the x coordinate of the pointer relative to the root of the screen.
   */
-  @property double xRoot()
+  @property double xRoot() nothrow
   {
     return (cast(GdkEventCrossing*)this._cPtr).xRoot;
   }
@@ -182,7 +179,7 @@ class EventCrossing
       Params:
         propval = the x coordinate of the pointer relative to the root of the screen.
   */
-  @property void xRoot(double propval)
+  @property void xRoot(double propval) nothrow
   {
     (cast(GdkEventCrossing*)this._cPtr).xRoot = propval;
   }
@@ -191,7 +188,7 @@ class EventCrossing
       Get `yRoot` field.
       Returns: the y coordinate of the pointer relative to the root of the screen.
   */
-  @property double yRoot()
+  @property double yRoot() nothrow
   {
     return (cast(GdkEventCrossing*)this._cPtr).yRoot;
   }
@@ -201,7 +198,7 @@ class EventCrossing
       Params:
         propval = the y coordinate of the pointer relative to the root of the screen.
   */
-  @property void yRoot(double propval)
+  @property void yRoot(double propval) nothrow
   {
     (cast(GdkEventCrossing*)this._cPtr).yRoot = propval;
   }
@@ -214,7 +211,7 @@ class EventCrossing
          and [gdk.types.CrossingMode.StateChanged] were added in 2.14 and are always synthesized,
          never native.
   */
-  @property gdk.types.CrossingMode mode()
+  @property gdk.types.CrossingMode mode() nothrow
   {
     return cast(gdk.types.CrossingMode)(cast(GdkEventCrossing*)this._cPtr).mode;
   }
@@ -228,7 +225,7 @@ class EventCrossing
            and [gdk.types.CrossingMode.StateChanged] were added in 2.14 and are always synthesized,
            never native.
   */
-  @property void mode(gdk.types.CrossingMode propval)
+  @property void mode(gdk.types.CrossingMode propval) nothrow
   {
     (cast(GdkEventCrossing*)this._cPtr).mode = cast(GdkCrossingMode)propval;
   }
@@ -239,7 +236,7 @@ class EventCrossing
          [gdk.types.NotifyType.Ancestor], [gdk.types.NotifyType.Virtual], [gdk.types.NotifyType.Nonlinear] or
          [gdk.types.NotifyType.NonlinearVirtual]).
   */
-  @property gdk.types.NotifyType detail()
+  @property gdk.types.NotifyType detail() nothrow
   {
     return cast(gdk.types.NotifyType)(cast(GdkEventCrossing*)this._cPtr).detail;
   }
@@ -251,7 +248,7 @@ class EventCrossing
            [gdk.types.NotifyType.Ancestor], [gdk.types.NotifyType.Virtual], [gdk.types.NotifyType.Nonlinear] or
            [gdk.types.NotifyType.NonlinearVirtual]).
   */
-  @property void detail(gdk.types.NotifyType propval)
+  @property void detail(gdk.types.NotifyType propval) nothrow
   {
     (cast(GdkEventCrossing*)this._cPtr).detail = cast(GdkNotifyType)propval;
   }
@@ -260,7 +257,7 @@ class EventCrossing
       Get `focus` field.
       Returns: true if @window is the focus window or an inferior.
   */
-  @property bool focus()
+  @property bool focus() nothrow
   {
     return cast(bool)(cast(GdkEventCrossing*)this._cPtr).focus;
   }
@@ -270,7 +267,7 @@ class EventCrossing
       Params:
         propval = true if @window is the focus window or an inferior.
   */
-  @property void focus(bool propval)
+  @property void focus(bool propval) nothrow
   {
     (cast(GdkEventCrossing*)this._cPtr).focus = propval;
   }
@@ -281,7 +278,7 @@ class EventCrossing
           the modifier keys (e.g. Control, Shift and Alt) and the pointer
           buttons. See #GdkModifierType.
   */
-  @property gdk.types.ModifierType state()
+  @property gdk.types.ModifierType state() nothrow
   {
     return cast(gdk.types.ModifierType)(cast(GdkEventCrossing*)this._cPtr).state;
   }
@@ -293,7 +290,7 @@ class EventCrossing
             the modifier keys (e.g. Control, Shift and Alt) and the pointer
             buttons. See #GdkModifierType.
   */
-  @property void state(gdk.types.ModifierType propval)
+  @property void state(gdk.types.ModifierType propval) nothrow
   {
     (cast(GdkEventCrossing*)this._cPtr).state = cast(GdkModifierType)propval;
   }

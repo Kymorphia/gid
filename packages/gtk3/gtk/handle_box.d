@@ -47,26 +47,26 @@ class HandleBox : gtk.bin.Bin
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_handle_box_get_type != &gidSymbolNotFound ? gtk_handle_box_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HandleBox self()
+  override HandleBox self() nothrow
   {
     return this;
   }
@@ -75,61 +75,61 @@ class HandleBox : gtk.bin.Bin
       Get builder for [gtk.handle_box.HandleBox]
       Returns: New builder object
   */
-  static HandleBoxGidBuilder builder()
+  static HandleBoxGidBuilder builder() nothrow
   {
     return new HandleBoxGidBuilder;
   }
 
   /** */
-  @property bool childDetached()
+  @property bool childDetached() nothrow
   {
     return getChildDetached();
   }
 
   /** */
-  @property gtk.types.PositionType handlePosition()
+  @property gtk.types.PositionType handlePosition() nothrow
   {
     return getHandlePosition();
   }
 
   /** */
-  @property void handlePosition(gtk.types.PositionType propval)
+  @property void handlePosition(gtk.types.PositionType propval) nothrow
   {
     setHandlePosition(propval);
   }
 
   /** */
-  @property gtk.types.ShadowType shadowType()
+  @property gtk.types.ShadowType shadowType() nothrow
   {
     return getShadowType();
   }
 
   /** */
-  @property void shadowType(gtk.types.ShadowType propval)
+  @property void shadowType(gtk.types.ShadowType propval) nothrow
   {
     setShadowType(propval);
   }
 
   /** */
-  @property gtk.types.PositionType snapEdge()
+  @property gtk.types.PositionType snapEdge() nothrow
   {
     return getSnapEdge();
   }
 
   /** */
-  @property void snapEdge(gtk.types.PositionType propval)
+  @property void snapEdge(gtk.types.PositionType propval) nothrow
   {
     setSnapEdge(propval);
   }
 
   /** */
-  @property bool snapEdgeSet()
+  @property bool snapEdgeSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("snap-edge-set");
   }
 
   /** */
-  @property void snapEdgeSet(bool propval)
+  @property void snapEdgeSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("snap-edge-set", propval);
   }
@@ -140,7 +140,7 @@ class HandleBox : gtk.bin.Bin
   
       Deprecated: #GtkHandleBox has been deprecated.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_handle_box_new();
@@ -153,7 +153,7 @@ class HandleBox : gtk.bin.Bin
   
       Deprecated: #GtkHandleBox has been deprecated.
   */
-  bool getChildDetached()
+  bool getChildDetached() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_handle_box_get_child_detached(cast(GtkHandleBox*)this._cPtr);
@@ -167,7 +167,7 @@ class HandleBox : gtk.bin.Bin
   
       Deprecated: #GtkHandleBox has been deprecated.
   */
-  gtk.types.PositionType getHandlePosition()
+  gtk.types.PositionType getHandlePosition() nothrow
   {
     GtkPositionType _cretval;
     _cretval = gtk_handle_box_get_handle_position(cast(GtkHandleBox*)this._cPtr);
@@ -182,7 +182,7 @@ class HandleBox : gtk.bin.Bin
   
       Deprecated: #GtkHandleBox has been deprecated.
   */
-  gtk.types.ShadowType getShadowType()
+  gtk.types.ShadowType getShadowType() nothrow
   {
     GtkShadowType _cretval;
     _cretval = gtk_handle_box_get_shadow_type(cast(GtkHandleBox*)this._cPtr);
@@ -199,7 +199,7 @@ class HandleBox : gtk.bin.Bin
   
       Deprecated: #GtkHandleBox has been deprecated.
   */
-  gtk.types.PositionType getSnapEdge()
+  gtk.types.PositionType getSnapEdge() nothrow
   {
     GtkPositionType _cretval;
     _cretval = gtk_handle_box_get_snap_edge(cast(GtkHandleBox*)this._cPtr);
@@ -215,7 +215,7 @@ class HandleBox : gtk.bin.Bin
   
       Deprecated: #GtkHandleBox has been deprecated.
   */
-  void setHandlePosition(gtk.types.PositionType position)
+  void setHandlePosition(gtk.types.PositionType position) nothrow
   {
     gtk_handle_box_set_handle_position(cast(GtkHandleBox*)this._cPtr, position);
   }
@@ -229,7 +229,7 @@ class HandleBox : gtk.bin.Bin
   
       Deprecated: #GtkHandleBox has been deprecated.
   */
-  void setShadowType(gtk.types.ShadowType type)
+  void setShadowType(gtk.types.ShadowType type) nothrow
   {
     gtk_handle_box_set_shadow_type(cast(GtkHandleBox*)this._cPtr, type);
   }
@@ -256,7 +256,7 @@ class HandleBox : gtk.bin.Bin
   
       Deprecated: #GtkHandleBox has been deprecated.
   */
-  void setSnapEdge(gtk.types.PositionType edge)
+  void setSnapEdge(gtk.types.PositionType edge) nothrow
   {
     gtk_handle_box_set_snap_edge(cast(GtkHandleBox*)this._cPtr, edge);
   }
@@ -283,14 +283,14 @@ class HandleBox : gtk.bin.Bin
   
       Deprecated: #GtkHandleBox has been deprecated.
   */
-  gulong connectChildAttached(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChildAttached(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.handle_box.HandleBox)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -302,7 +302,14 @@ class HandleBox : gtk.bin.Bin
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.handle_box.HandleBox.childAttached");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -331,14 +338,14 @@ class HandleBox : gtk.bin.Bin
   
       Deprecated: #GtkHandleBox has been deprecated.
   */
-  gulong connectChildDetached(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChildDetached(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.handle_box.HandleBox)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -350,7 +357,14 @@ class HandleBox : gtk.bin.Bin
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.handle_box.HandleBox.childDetached");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -364,25 +378,25 @@ class HandleBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 
 
   /** */
-  T handlePosition(gtk.types.PositionType propval)
+  T handlePosition(gtk.types.PositionType propval) nothrow
   {
     return setProperty("handle-position", propval);
   }
 
   /** */
-  T shadowType(gtk.types.ShadowType propval)
+  T shadowType(gtk.types.ShadowType propval) nothrow
   {
     return setProperty("shadow-type", propval);
   }
 
   /** */
-  T snapEdge(gtk.types.PositionType propval)
+  T snapEdge(gtk.types.PositionType propval) nothrow
   {
     return setProperty("snap-edge", propval);
   }
 
   /** */
-  T snapEdgeSet(bool propval)
+  T snapEdgeSet(bool propval) nothrow
   {
     return setProperty("snap-edge-set", propval);
   }
@@ -395,7 +409,7 @@ final class HandleBoxGidBuilder : HandleBoxGidBuilderImpl!HandleBoxGidBuilder
       Create object from builder.
       Returns: New object
   */
-  HandleBox build()
+  HandleBox build() nothrow
   {
     return new HandleBox(cast(void*)createGObject(HandleBox._getGType), No.Take);
   }

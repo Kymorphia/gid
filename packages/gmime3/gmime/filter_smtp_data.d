@@ -16,26 +16,26 @@ class FilterSmtpData : gmime.filter.Filter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_filter_smtp_data_get_type != &gidSymbolNotFound ? g_mime_filter_smtp_data_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FilterSmtpData self()
+  override FilterSmtpData self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class FilterSmtpData : gmime.filter.Filter
       Get builder for [gmime.filter_smtp_data.FilterSmtpData]
       Returns: New builder object
   */
-  static FilterSmtpDataGidBuilder builder()
+  static FilterSmtpDataGidBuilder builder() nothrow
   {
     return new FilterSmtpDataGidBuilder;
   }
@@ -53,7 +53,7 @@ class FilterSmtpData : gmime.filter.Filter
       Creates a new #GMimeFilterSmtpData filter.
       Returns: a new #GMimeFilterSmtpData filter.
   */
-  this()
+  this() nothrow
   {
     GMimeFilter* _cretval;
     _cretval = g_mime_filter_smtp_data_new();
@@ -73,7 +73,7 @@ final class FilterSmtpDataGidBuilder : FilterSmtpDataGidBuilderImpl!FilterSmtpDa
       Create object from builder.
       Returns: New object
   */
-  FilterSmtpData build()
+  FilterSmtpData build() nothrow
   {
     return new FilterSmtpData(cast(void*)createGObject(FilterSmtpData._getGType), Yes.Take);
   }

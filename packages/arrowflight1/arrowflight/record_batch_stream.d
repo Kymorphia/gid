@@ -17,26 +17,26 @@ class RecordBatchStream : arrowflight.data_stream.DataStream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_record_batch_stream_get_type != &gidSymbolNotFound ? gaflight_record_batch_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RecordBatchStream self()
+  override RecordBatchStream self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class RecordBatchStream : arrowflight.data_stream.DataStream
       Get builder for [arrowflight.record_batch_stream.RecordBatchStream]
       Returns: New builder object
   */
-  static RecordBatchStreamGidBuilder builder()
+  static RecordBatchStreamGidBuilder builder() nothrow
   {
     return new RecordBatchStreamGidBuilder;
   }
@@ -54,13 +54,13 @@ class RecordBatchStream : arrowflight.data_stream.DataStream
       Get `reader` property.
       Returns: The reader that produces record batches.
   */
-  @property arrow.record_batch_reader.RecordBatchReader reader()
+  @property arrow.record_batch_reader.RecordBatchReader reader() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.record_batch_reader.RecordBatchReader)("reader");
   }
 
   /** */
-  this(arrow.record_batch_reader.RecordBatchReader reader, arrow.write_options.WriteOptions options = null)
+  this(arrow.record_batch_reader.RecordBatchReader reader, arrow.write_options.WriteOptions options = null) nothrow
   {
     GAFlightRecordBatchStream* _cretval;
     _cretval = gaflight_record_batch_stream_new(reader ? cast(GArrowRecordBatchReader*)reader._cPtr(No.Dup) : null, options ? cast(GArrowWriteOptions*)options._cPtr(No.Dup) : null);
@@ -78,7 +78,7 @@ class RecordBatchStreamGidBuilderImpl(T) : arrowflight.data_stream.DataStreamGid
         propval = The reader that produces record batches.
       Returns: Builder instance for fluent chaining
   */
-  T reader(arrow.record_batch_reader.RecordBatchReader propval)
+  T reader(arrow.record_batch_reader.RecordBatchReader propval) nothrow
   {
     return setProperty("reader", propval);
   }
@@ -91,7 +91,7 @@ final class RecordBatchStreamGidBuilder : RecordBatchStreamGidBuilderImpl!Record
       Create object from builder.
       Returns: New object
   */
-  RecordBatchStream build()
+  RecordBatchStream build() nothrow
   {
     return new RecordBatchStream(cast(void*)createGObject(RecordBatchStream._getGType), Yes.Take);
   }

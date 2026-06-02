@@ -16,26 +16,26 @@ class TimestampDataType : arrow.temporal_data_type.TemporalDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_timestamp_data_type_get_type != &gidSymbolNotFound ? garrow_timestamp_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TimestampDataType self()
+  override TimestampDataType self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class TimestampDataType : arrow.temporal_data_type.TemporalDataType
       Get builder for [arrow.timestamp_data_type.TimestampDataType]
       Returns: New builder object
   */
-  static TimestampDataTypeGidBuilder builder()
+  static TimestampDataTypeGidBuilder builder() nothrow
   {
     return new TimestampDataTypeGidBuilder;
   }
@@ -53,13 +53,13 @@ class TimestampDataType : arrow.temporal_data_type.TemporalDataType
       Get `timeZone` property.
       Returns: The time zone of this data type.
   */
-  @property glib.time_zone.TimeZone timeZone()
+  @property glib.time_zone.TimeZone timeZone() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(glib.time_zone.TimeZone)("time-zone");
   }
 
   /** */
-  this(arrow.types.TimeUnit unit, glib.time_zone.TimeZone timeZone = null)
+  this(arrow.types.TimeUnit unit, glib.time_zone.TimeZone timeZone = null) nothrow
   {
     GArrowTimestampDataType* _cretval;
     _cretval = garrow_timestamp_data_type_new(unit, timeZone ? cast(GTimeZone*)timeZone._cPtr(No.Dup) : null);
@@ -67,7 +67,7 @@ class TimestampDataType : arrow.temporal_data_type.TemporalDataType
   }
 
   /** */
-  arrow.types.TimeUnit getUnit()
+  arrow.types.TimeUnit getUnit() nothrow
   {
     GArrowTimeUnit _cretval;
     _cretval = garrow_timestamp_data_type_get_unit(cast(GArrowTimestampDataType*)this._cPtr);
@@ -86,7 +86,7 @@ class TimestampDataTypeGidBuilderImpl(T) : arrow.temporal_data_type.TemporalData
         propval = The time zone of this data type.
       Returns: Builder instance for fluent chaining
   */
-  T timeZone(glib.time_zone.TimeZone propval)
+  T timeZone(glib.time_zone.TimeZone propval) nothrow
   {
     return setProperty("time-zone", propval);
   }
@@ -99,7 +99,7 @@ final class TimestampDataTypeGidBuilder : TimestampDataTypeGidBuilderImpl!Timest
       Create object from builder.
       Returns: New object
   */
-  TimestampDataType build()
+  TimestampDataType build() nothrow
   {
     return new TimestampDataType(cast(void*)createGObject(TimestampDataType._getGType), Yes.Take);
   }

@@ -39,7 +39,7 @@ interface PowerProfileMonitor
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_power_profile_monitor_get_type != &gidSymbolNotFound ? g_power_profile_monitor_get_type() : cast(GType)0;
@@ -49,13 +49,13 @@ interface PowerProfileMonitor
       Get `powerSaverEnabled` property.
       Returns: Whether “Power Saver” mode is enabled on the system.
   */
-  @property bool powerSaverEnabled();
+  @property bool powerSaverEnabled() nothrow;
 
   /**
       Gets a reference to the default #GPowerProfileMonitor for the system.
       Returns: a new reference to the default #GPowerProfileMonitor
   */
-  static gio.power_profile_monitor.PowerProfileMonitor dupDefault()
+  static gio.power_profile_monitor.PowerProfileMonitor dupDefault() nothrow
   {
     GPowerProfileMonitor* _cretval;
     _cretval = g_power_profile_monitor_dup_default();

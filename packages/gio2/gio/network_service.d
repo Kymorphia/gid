@@ -26,26 +26,26 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_network_service_get_type != &gidSymbolNotFound ? g_network_service_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NetworkService self()
+  override NetworkService self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
       Get builder for [gio.network_service.NetworkService]
       Returns: New builder object
   */
-  static NetworkServiceGidBuilder builder()
+  static NetworkServiceGidBuilder builder() nothrow
   {
     return new NetworkServiceGidBuilder;
   }
@@ -63,7 +63,7 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
       Get `domain` property.
       Returns: Network domain, for example `example.com`.
   */
-  @property string domain()
+  @property string domain() nothrow
   {
     return getDomain();
   }
@@ -72,7 +72,7 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
       Get `protocol` property.
       Returns: Network protocol, for example `tcp`.
   */
-  @property string protocol()
+  @property string protocol() nothrow
   {
     return getProtocol();
   }
@@ -81,7 +81,7 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
       Get `scheme` property.
       Returns: Network scheme (default is to use service).
   */
-  @property string scheme()
+  @property string scheme() nothrow
   {
     return getScheme();
   }
@@ -91,7 +91,7 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
       Params:
         propval = Network scheme (default is to use service).
   */
-  @property void scheme(string propval)
+  @property void scheme(string propval) nothrow
   {
     setScheme(propval);
   }
@@ -100,7 +100,7 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
       Get `service` property.
       Returns: Service name, for example `ldap`.
   */
-  @property string service()
+  @property string service() nothrow
   {
     return getService();
   }
@@ -118,7 +118,7 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
         domain = the DNS domain to look up the service in
       Returns: a new #GNetworkService
   */
-  this(string service, string protocol, string domain)
+  this(string service, string protocol, string domain) nothrow
   {
     GSocketConnectable* _cretval;
     const(char)* _service = service.toCString(No.Alloc);
@@ -133,7 +133,7 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
       ASCII-encoded, depending on what srv was created with.
       Returns: srv's domain name
   */
-  string getDomain()
+  string getDomain() nothrow
   {
     const(char)* _cretval;
     _cretval = g_network_service_get_domain(cast(GNetworkService*)this._cPtr);
@@ -145,7 +145,7 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
       Gets srv's protocol name (eg, "tcp").
       Returns: srv's protocol name
   */
-  string getProtocol()
+  string getProtocol() nothrow
   {
     const(char)* _cretval;
     _cretval = g_network_service_get_protocol(cast(GNetworkService*)this._cPtr);
@@ -158,7 +158,7 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
       is used as scheme.
       Returns: srv's scheme name
   */
-  string getScheme()
+  string getScheme() nothrow
   {
     const(char)* _cretval;
     _cretval = g_network_service_get_scheme(cast(GNetworkService*)this._cPtr);
@@ -170,7 +170,7 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
       Gets srv's service name (eg, "ldap").
       Returns: srv's service name
   */
-  string getService()
+  string getService() nothrow
   {
     const(char)* _cretval;
     _cretval = g_network_service_get_service(cast(GNetworkService*)this._cPtr);
@@ -185,7 +185,7 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
       Params:
         scheme = a URI scheme
   */
-  void setScheme(string scheme)
+  void setScheme(string scheme) nothrow
   {
     const(char)* _scheme = scheme.toCString(No.Alloc);
     g_network_service_set_scheme(cast(GNetworkService*)this._cPtr, _scheme);
@@ -204,7 +204,7 @@ class NetworkServiceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Network domain, for example `example.com`.
       Returns: Builder instance for fluent chaining
   */
-  T domain(string propval)
+  T domain(string propval) nothrow
   {
     return setProperty("domain", propval);
   }
@@ -215,7 +215,7 @@ class NetworkServiceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Network protocol, for example `tcp`.
       Returns: Builder instance for fluent chaining
   */
-  T protocol(string propval)
+  T protocol(string propval) nothrow
   {
     return setProperty("protocol", propval);
   }
@@ -226,7 +226,7 @@ class NetworkServiceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Network scheme (default is to use service).
       Returns: Builder instance for fluent chaining
   */
-  T scheme(string propval)
+  T scheme(string propval) nothrow
   {
     return setProperty("scheme", propval);
   }
@@ -237,7 +237,7 @@ class NetworkServiceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Service name, for example `ldap`.
       Returns: Builder instance for fluent chaining
   */
-  T service(string propval)
+  T service(string propval) nothrow
   {
     return setProperty("service", propval);
   }
@@ -250,7 +250,7 @@ final class NetworkServiceGidBuilder : NetworkServiceGidBuilderImpl!NetworkServi
       Create object from builder.
       Returns: New object
   */
-  NetworkService build()
+  NetworkService build() nothrow
   {
     return new NetworkService(cast(void*)createGObject(NetworkService._getGType), Yes.Take);
   }

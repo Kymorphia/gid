@@ -15,7 +15,7 @@ import gtksource.types;
     memory debugging tools. This function is meant to be called at the end of
     main(). It can be called several times.
 */
-void finalize()
+void finalize() nothrow
 {
   gtk_source_finalize();
 }
@@ -26,7 +26,7 @@ void finalize()
     This function can be called several times, but is meant to be called at the
     beginning of main(), before any other GtkSourceView function call.
 */
-void init_()
+void init_() nothrow
 {
   gtk_source_init();
 }
@@ -53,7 +53,7 @@ void init_()
       text = the text to escape.
     Returns: the escaped text.
 */
-string utilsEscapeSearchText(string text)
+string utilsEscapeSearchText(string text) nothrow
 {
   char* _cretval;
   const(char)* _text = text.toCString(No.Alloc);
@@ -76,7 +76,7 @@ string utilsEscapeSearchText(string text)
       text = the text to unescape.
     Returns: the unescaped text.
 */
-string utilsUnescapeSearchText(string text)
+string utilsUnescapeSearchText(string text) nothrow
 {
   char* _cretval;
   const(char)* _text = text.toCString(No.Alloc);

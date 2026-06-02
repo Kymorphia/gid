@@ -23,32 +23,32 @@ class VariantBuilder : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_variant_builder_get_type != &gidSymbolNotFound ? g_variant_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VariantBuilder self()
+  override VariantBuilder self() nothrow
   {
     return this;
   }
@@ -68,7 +68,7 @@ class VariantBuilder : gobject.boxed.Boxed
         type = a container type
       Returns: a #GVariantBuilder
   */
-  this(glib.variant_type.VariantType type)
+  this(glib.variant_type.VariantType type) nothrow
   {
     GVariantBuilder* _cretval;
     _cretval = g_variant_builder_new(type ? cast(const(GVariantType)*)type._cPtr(No.Dup) : null);
@@ -90,7 +90,7 @@ class VariantBuilder : gobject.boxed.Boxed
       Params:
         value = a #GVariant
   */
-  void addValue(glib.variant.Variant value)
+  void addValue(glib.variant.Variant value) nothrow
   {
     g_variant_builder_add_value(cast(GVariantBuilder*)this._cPtr, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
   }
@@ -103,7 +103,7 @@ class VariantBuilder : gobject.boxed.Boxed
       inconsistent value to be constructed (ie: too few values added to the
       subcontainer).
   */
-  void close()
+  void close() nothrow
   {
     g_variant_builder_close(cast(GVariantBuilder*)this._cPtr);
   }
@@ -128,7 +128,7 @@ class VariantBuilder : gobject.boxed.Boxed
       the empty array.
       Returns: a new, floating, #GVariant
   */
-  glib.variant.Variant end()
+  glib.variant.Variant end() nothrow
   {
     GVariant* _cretval;
     _cretval = g_variant_builder_end(cast(GVariantBuilder*)this._cPtr);
@@ -177,7 +177,7 @@ class VariantBuilder : gobject.boxed.Boxed
       Params:
         type = the #GVariantType of the container
   */
-  void open(glib.variant_type.VariantType type)
+  void open(glib.variant_type.VariantType type) nothrow
   {
     g_variant_builder_open(cast(GVariantBuilder*)this._cPtr, type ? cast(const(GVariantType)*)type._cPtr(No.Dup) : null);
   }

@@ -25,26 +25,26 @@ class DBusActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGroup,
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_action_group_get_type != &gidSymbolNotFound ? g_dbus_action_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DBusActionGroup self()
+  override DBusActionGroup self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class DBusActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGroup,
       Get builder for [gio.dbus_action_group.DBusActionGroup]
       Returns: New builder object
   */
-  static DBusActionGroupGidBuilder builder()
+  static DBusActionGroupGidBuilder builder() nothrow
   {
     return new DBusActionGroupGidBuilder;
   }
@@ -83,7 +83,7 @@ class DBusActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGroup,
         objectPath = the object path at which the action group is exported
       Returns: a #GDBusActionGroup
   */
-  static gio.dbus_action_group.DBusActionGroup get(gio.dbus_connection.DBusConnection connection, string busName, string objectPath)
+  static gio.dbus_action_group.DBusActionGroup get(gio.dbus_connection.DBusConnection connection, string busName, string objectPath) nothrow
   {
     GDBusActionGroup* _cretval;
     const(char)* _busName = busName.toCString(No.Alloc);
@@ -109,7 +109,7 @@ final class DBusActionGroupGidBuilder : DBusActionGroupGidBuilderImpl!DBusAction
       Create object from builder.
       Returns: New object
   */
-  DBusActionGroup build()
+  DBusActionGroup build() nothrow
   {
     return new DBusActionGroup(cast(void*)createGObject(DBusActionGroup._getGType), No.Take);
   }

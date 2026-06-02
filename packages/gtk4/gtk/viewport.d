@@ -44,26 +44,26 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_viewport_get_type != &gidSymbolNotFound ? gtk_viewport_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Viewport self()
+  override Viewport self() nothrow
   {
     return this;
   }
@@ -72,7 +72,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get builder for [gtk.viewport.Viewport]
       Returns: New builder object
   */
-  static ViewportGidBuilder builder()
+  static ViewportGidBuilder builder() nothrow
   {
     return new ViewportGidBuilder;
   }
@@ -81,7 +81,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `child` property.
       Returns: The child widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -91,7 +91,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = The child widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -104,7 +104,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
         code needs to work with older versions, consider setting it explicitly to
         TRUE.
   */
-  @property bool scrollToFocus()
+  @property bool scrollToFocus() nothrow
   {
     return getScrollToFocus();
   }
@@ -118,7 +118,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
           code needs to work with older versions, consider setting it explicitly to
           TRUE.
   */
-  @property void scrollToFocus(bool propval)
+  @property void scrollToFocus(bool propval) nothrow
   {
     setScrollToFocus(propval);
   }
@@ -136,7 +136,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
         vadjustment = vertical adjustment
       Returns: a new [gtk.viewport.Viewport]
   */
-  this(gtk.adjustment.Adjustment hadjustment = null, gtk.adjustment.Adjustment vadjustment = null)
+  this(gtk.adjustment.Adjustment hadjustment = null, gtk.adjustment.Adjustment vadjustment = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_viewport_new(hadjustment ? cast(GtkAdjustment*)hadjustment._cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment._cPtr(No.Dup) : null);
@@ -147,7 +147,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
       Gets the child widget of viewport.
       Returns: the child widget of viewport
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_viewport_get_child(cast(GtkViewport*)this._cPtr);
@@ -160,7 +160,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
       child in view.
       Returns: true if the viewport keeps the focus child scrolled to view
   */
-  bool getScrollToFocus()
+  bool getScrollToFocus() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_viewport_get_scroll_to_focus(cast(GtkViewport*)this._cPtr);
@@ -178,7 +178,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
         scroll = details of how to perform
             the scroll operation or NULL to scroll into view
   */
-  void scrollTo(gtk.widget.Widget descendant, gtk.scroll_info.ScrollInfo scroll = null)
+  void scrollTo(gtk.widget.Widget descendant, gtk.scroll_info.ScrollInfo scroll = null) nothrow
   {
     gtk_viewport_scroll_to(cast(GtkViewport*)this._cPtr, descendant ? cast(GtkWidget*)descendant._cPtr(No.Dup) : null, scroll ? cast(GtkScrollInfo*)scroll._cPtr(Yes.Dup) : null);
   }
@@ -189,7 +189,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     gtk_viewport_set_child(cast(GtkViewport*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -201,7 +201,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         scrollToFocus = whether to keep the focus widget scrolled to view
   */
-  void setScrollToFocus(bool scrollToFocus)
+  void setScrollToFocus(bool scrollToFocus) nothrow
   {
     gtk_viewport_set_scroll_to_focus(cast(GtkViewport*)this._cPtr, scrollToFocus);
   }
@@ -219,7 +219,7 @@ class ViewportGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
         propval = The child widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -234,7 +234,7 @@ class ViewportGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
           TRUE.
       Returns: Builder instance for fluent chaining
   */
-  T scrollToFocus(bool propval)
+  T scrollToFocus(bool propval) nothrow
   {
     return setProperty("scroll-to-focus", propval);
   }
@@ -247,7 +247,7 @@ final class ViewportGidBuilder : ViewportGidBuilderImpl!ViewportGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Viewport build()
+  Viewport build() nothrow
   {
     return new Viewport(cast(void*)createGObject(Viewport._getGType), No.Take);
   }

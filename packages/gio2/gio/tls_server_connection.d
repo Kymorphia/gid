@@ -21,7 +21,7 @@ interface TlsServerConnection
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_tls_server_connection_get_type != &gidSymbolNotFound ? g_tls_server_connection_get_type() : cast(GType)0;
@@ -33,7 +33,7 @@ interface TlsServerConnection
         before calling [gio.tls_connection.TlsConnection.handshake] if you want to
         rehandshake with a different mode from the initial handshake.
   */
-  @property gio.types.TlsAuthenticationMode authenticationMode();
+  @property gio.types.TlsAuthenticationMode authenticationMode() nothrow;
 
   /**
       Set `authenticationMode` property.
@@ -42,7 +42,7 @@ interface TlsServerConnection
           before calling [gio.tls_connection.TlsConnection.handshake] if you want to
           rehandshake with a different mode from the initial handshake.
   */
-  @property void authenticationMode(gio.types.TlsAuthenticationMode propval);
+  @property void authenticationMode(gio.types.TlsAuthenticationMode propval) nothrow;
 
   /**
       Creates a new #GTlsServerConnection wrapping base_io_stream (which
@@ -83,5 +83,5 @@ interface TlsServerConnectionGidBuilderImpl(T)
           rehandshake with a different mode from the initial handshake.
       Returns: Builder instance for fluent chaining
   */
-  T authenticationMode(gio.types.TlsAuthenticationMode propval);
+  T authenticationMode(gio.types.TlsAuthenticationMode propval) nothrow;
 }

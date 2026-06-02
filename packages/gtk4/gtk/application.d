@@ -92,26 +92,26 @@ class Application : gio.application.Application
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_application_get_type != &gidSymbolNotFound ? gtk_application_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Application self()
+  override Application self() nothrow
   {
     return this;
   }
@@ -120,7 +120,7 @@ class Application : gio.application.Application
       Get builder for [gtk.application.Application]
       Returns: New builder object
   */
-  static ApplicationGidBuilder builder()
+  static ApplicationGidBuilder builder() nothrow
   {
     return new ApplicationGidBuilder;
   }
@@ -129,7 +129,7 @@ class Application : gio.application.Application
       Get `activeWindow` property.
       Returns: The currently focused window of the application.
   */
-  @property gtk.window.Window activeWindow()
+  @property gtk.window.Window activeWindow() nothrow
   {
     return getActiveWindow();
   }
@@ -138,7 +138,7 @@ class Application : gio.application.Application
       Get `menubar` property.
       Returns: The [gio.menu_model.MenuModel] to be used for the application's menu bar.
   */
-  @property gio.menu_model.MenuModel menubar()
+  @property gio.menu_model.MenuModel menubar() nothrow
   {
     return getMenubar();
   }
@@ -148,7 +148,7 @@ class Application : gio.application.Application
       Params:
         propval = The [gio.menu_model.MenuModel] to be used for the application's menu bar.
   */
-  @property void menubar(gio.menu_model.MenuModel propval)
+  @property void menubar(gio.menu_model.MenuModel propval) nothrow
   {
     setMenubar(propval);
   }
@@ -160,7 +160,7 @@ class Application : gio.application.Application
         This will make GTK track the session state (such as the
         [gtk.application.Application.screensaverActive] property).
   */
-  @property bool registerSession()
+  @property bool registerSession() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("register-session");
   }
@@ -173,7 +173,7 @@ class Application : gio.application.Application
           This will make GTK track the session state (such as the
           [gtk.application.Application.screensaverActive] property).
   */
-  @property void registerSession(bool propval)
+  @property void registerSession(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("register-session", propval);
   }
@@ -189,7 +189,7 @@ class Application : gio.application.Application
         Tracking the screensaver state is currently only supported on
         Linux.
   */
-  @property bool screensaverActive()
+  @property bool screensaverActive() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("screensaver-active");
   }
@@ -219,7 +219,7 @@ class Application : gio.application.Application
         flags = the application flags
       Returns: a new [gtk.application.Application] instance
   */
-  this(string applicationId, gio.types.ApplicationFlags flags)
+  this(string applicationId, gio.types.ApplicationFlags flags) nothrow
   {
     GtkApplication* _cretval;
     const(char)* _applicationId = applicationId.toCString(No.Alloc);
@@ -247,7 +247,7 @@ class Application : gio.application.Application
       Params:
         window = a [gtk.window.Window]
   */
-  void addWindow(gtk.window.Window window)
+  void addWindow(gtk.window.Window window) nothrow
   {
     gtk_application_add_window(cast(GtkApplication*)this._cPtr, window ? cast(GtkWindow*)window._cPtr(No.Dup) : null);
   }
@@ -261,7 +261,7 @@ class Application : gio.application.Application
             and target to obtain accelerators for
       Returns: accelerators for `detailed_action_name`
   */
-  string[] getAccelsForAction(string detailedActionName)
+  string[] getAccelsForAction(string detailedActionName) nothrow
   {
     char** _cretval;
     const(char)* _detailedActionName = detailedActionName.toCString(No.Alloc);
@@ -304,7 +304,7 @@ class Application : gio.application.Application
         accel = an accelerator that can be parsed by `funcGtk.accelerator_parse`
       Returns: a null-terminated array of actions for `accel`
   */
-  string[] getActionsForAccel(string accel)
+  string[] getActionsForAccel(string accel) nothrow
   {
     char** _cretval;
     const(char)* _accel = accel.toCString(No.Alloc);
@@ -333,7 +333,7 @@ class Application : gio.application.Application
       recently-focused window within this application.
       Returns: the active window
   */
-  gtk.window.Window getActiveWindow()
+  gtk.window.Window getActiveWindow() nothrow
   {
     GtkWindow* _cretval;
     _cretval = gtk_application_get_active_window(cast(GtkApplication*)this._cPtr);
@@ -352,7 +352,7 @@ class Application : gio.application.Application
       Returns: Gets the menu with the
           given id from the automatically loaded resources
   */
-  gio.menu.Menu getMenuById(string id)
+  gio.menu.Menu getMenuById(string id) nothrow
   {
     GMenu* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -366,7 +366,7 @@ class Application : gio.application.Application
       [gtk.application.Application.setMenubar].
       Returns: the menubar for windows of `application`
   */
-  gio.menu_model.MenuModel getMenubar()
+  gio.menu_model.MenuModel getMenubar() nothrow
   {
     GMenuModel* _cretval;
     _cretval = gtk_application_get_menubar(cast(GtkApplication*)this._cPtr);
@@ -384,7 +384,7 @@ class Application : gio.application.Application
         id = an identifier number
       Returns: the window for the given `id`
   */
-  gtk.window.Window getWindowById(uint id)
+  gtk.window.Window getWindowById(uint id) nothrow
   {
     GtkWindow* _cretval;
     _cretval = gtk_application_get_window_by_id(cast(GtkApplication*)this._cPtr, id);
@@ -405,7 +405,7 @@ class Application : gio.application.Application
       Returns: a [glib.list.List] of [gtk.window.Window]
           instances
   */
-  gtk.window.Window[] getWindows()
+  gtk.window.Window[] getWindows() nothrow
   {
     GList* _cretval;
     _cretval = gtk_application_get_windows(cast(GtkApplication*)this._cPtr);
@@ -448,7 +448,7 @@ class Application : gio.application.Application
           in order to remove the request. If the platform does not support
           inhibiting or the request failed for some reason, 0 is returned.
   */
-  uint inhibit(gtk.window.Window window, gtk.types.ApplicationInhibitFlags flags, string reason = null)
+  uint inhibit(gtk.window.Window window, gtk.types.ApplicationInhibitFlags flags, string reason = null) nothrow
   {
     uint _retval;
     const(char)* _reason = reason.toCString(No.Alloc);
@@ -462,7 +462,7 @@ class Application : gio.application.Application
       See [gtk.application.Application.setAccelsForAction].
       Returns: the detailed action names
   */
-  string[] listActionDescriptions()
+  string[] listActionDescriptions() nothrow
   {
     char** _cretval;
     _cretval = gtk_application_list_action_descriptions(cast(GtkApplication*)this._cPtr);
@@ -494,7 +494,7 @@ class Application : gio.application.Application
       Params:
         window = a [gtk.window.Window]
   */
-  void removeWindow(gtk.window.Window window)
+  void removeWindow(gtk.window.Window window) nothrow
   {
     gtk_application_remove_window(cast(GtkApplication*)this._cPtr, window ? cast(GtkWindow*)window._cPtr(No.Dup) : null);
   }
@@ -518,7 +518,7 @@ class Application : gio.application.Application
         accels = a list of accelerators in the format
             understood by `funcGtk.accelerator_parse`
   */
-  void setAccelsForAction(string detailedActionName, string[] accels)
+  void setAccelsForAction(string detailedActionName, string[] accels) nothrow
   {
     const(char)* _detailedActionName = detailedActionName.toCString(No.Alloc);
     char*[] _tmpaccels;
@@ -553,7 +553,7 @@ class Application : gio.application.Application
       Params:
         menubar = a [gio.menu_model.MenuModel]
   */
-  void setMenubar(gio.menu_model.MenuModel menubar = null)
+  void setMenubar(gio.menu_model.MenuModel menubar = null) nothrow
   {
     gtk_application_set_menubar(cast(GtkApplication*)this._cPtr, menubar ? cast(GMenuModel*)menubar._cPtr(No.Dup) : null);
   }
@@ -568,7 +568,7 @@ class Application : gio.application.Application
       Params:
         cookie = a cookie that was returned by [gtk.application.Application.inhibit]
   */
-  void uninhibit(uint cookie)
+  void uninhibit(uint cookie) nothrow
   {
     gtk_application_uninhibit(cast(GtkApplication*)this._cPtr, cookie);
   }
@@ -593,13 +593,13 @@ class Application : gio.application.Application
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectQueryEnd(T)(T callback, Flag!"After" after = No.After)
+  gulong connectQueryEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.application.Application)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -608,7 +608,14 @@ class Application : gio.application.Application
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.application.Application.queryEnd");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -633,14 +640,14 @@ class Application : gio.application.Application
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWindowAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWindowAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.window.Window)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.application.Application)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -652,7 +659,14 @@ class Application : gio.application.Application
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.application.Application.windowAdded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -679,14 +693,14 @@ class Application : gio.application.Application
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWindowRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWindowRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.window.Window)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.application.Application)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -698,7 +712,14 @@ class Application : gio.application.Application
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.application.Application.windowRemoved");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -717,7 +738,7 @@ class ApplicationGidBuilderImpl(T) : gio.application.ApplicationGidBuilderImpl!T
         propval = The [gio.menu_model.MenuModel] to be used for the application's menu bar.
       Returns: Builder instance for fluent chaining
   */
-  T menubar(gio.menu_model.MenuModel propval)
+  T menubar(gio.menu_model.MenuModel propval) nothrow
   {
     return setProperty("menubar", propval);
   }
@@ -731,7 +752,7 @@ class ApplicationGidBuilderImpl(T) : gio.application.ApplicationGidBuilderImpl!T
           [gtk.application.Application.screensaverActive] property).
       Returns: Builder instance for fluent chaining
   */
-  T registerSession(bool propval)
+  T registerSession(bool propval) nothrow
   {
     return setProperty("register-session", propval);
   }
@@ -744,7 +765,7 @@ final class ApplicationGidBuilder : ApplicationGidBuilderImpl!ApplicationGidBuil
       Create object from builder.
       Returns: New object
   */
-  Application build()
+  Application build() nothrow
   {
     return new Application(cast(void*)createGObject(Application._getGType), Yes.Take);
   }

@@ -14,26 +14,26 @@ class NullArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_null_array_builder_get_type != &gidSymbolNotFound ? garrow_null_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NullArrayBuilder self()
+  override NullArrayBuilder self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class NullArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.null_array_builder.NullArrayBuilder]
       Returns: New builder object
   */
-  static NullArrayBuilderGidBuilder builder()
+  static NullArrayBuilderGidBuilder builder() nothrow
   {
     return new NullArrayBuilderGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowNullArrayBuilder* _cretval;
     _cretval = garrow_null_array_builder_new();
@@ -68,7 +68,7 @@ final class NullArrayBuilderGidBuilder : NullArrayBuilderGidBuilderImpl!NullArra
       Create object from builder.
       Returns: New object
   */
-  NullArrayBuilder build()
+  NullArrayBuilder build() nothrow
   {
     return new NullArrayBuilder(cast(void*)createGObject(NullArrayBuilder._getGType), Yes.Take);
   }

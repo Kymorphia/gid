@@ -17,11 +17,8 @@ class SqlTable
   GdaSqlTable _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.sql_table.SqlTable");
-
     _cInstance = *cast(GdaSqlTable*)ptr;
 
     if (take)
@@ -29,26 +26,26 @@ class SqlTable
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
 
   /** */
-  @property string tableName()
+  @property string tableName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaSqlTable*)this._cPtr).tableName);
   }
 
   /** */
-  @property void tableName(string propval)
+  @property void tableName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaSqlTable*)this._cPtr).tableName);
     dToC(propval, cast(void*)&(cast(GdaSqlTable*)this._cPtr).tableName);
   }
 
   /** */
-  @property gda.meta_db_object.MetaDbObject validityMetaObject()
+  @property gda.meta_db_object.MetaDbObject validityMetaObject() nothrow
   {
     return new gda.meta_db_object.MetaDbObject(cast(GdaMetaDbObject*)(cast(GdaSqlTable*)this._cPtr).validityMetaObject, No.Take);
   }
@@ -58,7 +55,7 @@ class SqlTable
       using [glib.global.gfree];
       Returns: a new string with the name of the field or "null" in case table is invalid.
   */
-  string serialize()
+  string serialize() nothrow
   {
     char* _cretval;
     _cretval = gda_sql_table_serialize(cast(GdaSqlTable*)this._cPtr);
@@ -73,7 +70,7 @@ class SqlTable
       Params:
         value = a #GValue holding a string to take from
   */
-  void takeName(gobject.value.Value value)
+  void takeName(gobject.value.Value value) nothrow
   {
     gda_sql_table_take_name(cast(GdaSqlTable*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }

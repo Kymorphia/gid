@@ -41,26 +41,26 @@ class ObjectWrap : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_object_get_type != &gidSymbolNotFound ? atk_object_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ObjectWrap self()
+  override ObjectWrap self() nothrow
   {
     return this;
   }
@@ -69,97 +69,97 @@ class ObjectWrap : gobject.object.ObjectWrap
       Get builder for [atk.object.ObjectWrap]
       Returns: New builder object
   */
-  static ObjectWrapGidBuilder builder()
+  static ObjectWrapGidBuilder builder() nothrow
   {
     return new ObjectWrapGidBuilder;
   }
 
   /** */
-  @property int accessibleComponentLayer()
+  @property int accessibleComponentLayer() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("accessible-component-layer");
   }
 
   /** */
-  @property int accessibleComponentMdiZorder()
+  @property int accessibleComponentMdiZorder() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("accessible-component-mdi-zorder");
   }
 
   /** */
-  @property string accessibleDescription()
+  @property string accessibleDescription() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("accessible-description");
   }
 
   /** */
-  @property void accessibleDescription(string propval)
+  @property void accessibleDescription(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("accessible-description", propval);
   }
 
   /** */
-  @property string accessibleHelpText()
+  @property string accessibleHelpText() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("accessible-help-text");
   }
 
   /** */
-  @property void accessibleHelpText(string propval)
+  @property void accessibleHelpText(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("accessible-help-text", propval);
   }
 
   /** */
-  @property int accessibleHypertextNlinks()
+  @property int accessibleHypertextNlinks() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("accessible-hypertext-nlinks");
   }
 
   /** */
-  @property string accessibleId()
+  @property string accessibleId() nothrow
   {
     return getAccessibleId();
   }
 
   /** */
-  @property void accessibleId(string propval)
+  @property void accessibleId(string propval) nothrow
   {
     setAccessibleId(propval);
   }
 
   /** */
-  @property string accessibleName()
+  @property string accessibleName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("accessible-name");
   }
 
   /** */
-  @property void accessibleName(string propval)
+  @property void accessibleName(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("accessible-name", propval);
   }
 
   /** */
-  @property atk.object.ObjectWrap accessibleParent()
+  @property atk.object.ObjectWrap accessibleParent() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(atk.object.ObjectWrap)("accessible-parent");
   }
 
   /** */
-  @property void accessibleParent(atk.object.ObjectWrap propval)
+  @property void accessibleParent(atk.object.ObjectWrap propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(atk.object.ObjectWrap)("accessible-parent", propval);
   }
 
   /** */
-  @property atk.types.Role accessibleRole()
+  @property atk.types.Role accessibleRole() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(atk.types.Role)("accessible-role");
   }
 
   /** */
-  @property void accessibleRole(atk.types.Role propval)
+  @property void accessibleRole(atk.types.Role propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(atk.types.Role)("accessible-role", propval);
   }
@@ -170,7 +170,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   
       Deprecated: Since 1.3. Use table-caption-object instead.
   */
-  @property string accessibleTableCaption()
+  @property string accessibleTableCaption() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("accessible-table-caption");
   }
@@ -182,19 +182,19 @@ class ObjectWrap : gobject.object.ObjectWrap
   
       Deprecated: Since 1.3. Use table-caption-object instead.
   */
-  @property void accessibleTableCaption(string propval)
+  @property void accessibleTableCaption(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("accessible-table-caption", propval);
   }
 
   /** */
-  @property atk.object.ObjectWrap accessibleTableCaptionObject()
+  @property atk.object.ObjectWrap accessibleTableCaptionObject() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(atk.object.ObjectWrap)("accessible-table-caption-object");
   }
 
   /** */
-  @property void accessibleTableCaptionObject(atk.object.ObjectWrap propval)
+  @property void accessibleTableCaptionObject(atk.object.ObjectWrap propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(atk.object.ObjectWrap)("accessible-table-caption-object", propval);
   }
@@ -206,7 +206,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Deprecated: Since 2.12. Use [atk.table.Table.getColumnDescription]
         and [atk.table.Table.setColumnDescription] instead.
   */
-  @property string accessibleTableColumnDescription()
+  @property string accessibleTableColumnDescription() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("accessible-table-column-description");
   }
@@ -219,7 +219,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Deprecated: Since 2.12. Use [atk.table.Table.getColumnDescription]
         and [atk.table.Table.setColumnDescription] instead.
   */
-  @property void accessibleTableColumnDescription(string propval)
+  @property void accessibleTableColumnDescription(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("accessible-table-column-description", propval);
   }
@@ -231,7 +231,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Deprecated: Since 2.12. Use [atk.table.Table.getColumnHeader] and
         [atk.table.Table.setColumnHeader] instead.
   */
-  @property atk.object.ObjectWrap accessibleTableColumnHeader()
+  @property atk.object.ObjectWrap accessibleTableColumnHeader() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(atk.object.ObjectWrap)("accessible-table-column-header");
   }
@@ -244,7 +244,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Deprecated: Since 2.12. Use [atk.table.Table.getColumnHeader] and
         [atk.table.Table.setColumnHeader] instead.
   */
-  @property void accessibleTableColumnHeader(atk.object.ObjectWrap propval)
+  @property void accessibleTableColumnHeader(atk.object.ObjectWrap propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(atk.object.ObjectWrap)("accessible-table-column-header", propval);
   }
@@ -256,7 +256,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Deprecated: Since 2.12. Use [atk.table.Table.getRowDescription] and
         [atk.table.Table.setRowDescription] instead.
   */
-  @property string accessibleTableRowDescription()
+  @property string accessibleTableRowDescription() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("accessible-table-row-description");
   }
@@ -269,7 +269,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Deprecated: Since 2.12. Use [atk.table.Table.getRowDescription] and
         [atk.table.Table.setRowDescription] instead.
   */
-  @property void accessibleTableRowDescription(string propval)
+  @property void accessibleTableRowDescription(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("accessible-table-row-description", propval);
   }
@@ -281,7 +281,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Deprecated: Since 2.12. Use [atk.table.Table.getRowHeader] and
         [atk.table.Table.setRowHeader] instead.
   */
-  @property atk.object.ObjectWrap accessibleTableRowHeader()
+  @property atk.object.ObjectWrap accessibleTableRowHeader() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(atk.object.ObjectWrap)("accessible-table-row-header");
   }
@@ -294,19 +294,19 @@ class ObjectWrap : gobject.object.ObjectWrap
       Deprecated: Since 2.12. Use [atk.table.Table.getRowHeader] and
         [atk.table.Table.setRowHeader] instead.
   */
-  @property void accessibleTableRowHeader(atk.object.ObjectWrap propval)
+  @property void accessibleTableRowHeader(atk.object.ObjectWrap propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(atk.object.ObjectWrap)("accessible-table-row-header", propval);
   }
 
   /** */
-  @property atk.object.ObjectWrap accessibleTableSummary()
+  @property atk.object.ObjectWrap accessibleTableSummary() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(atk.object.ObjectWrap)("accessible-table-summary");
   }
 
   /** */
-  @property void accessibleTableSummary(atk.object.ObjectWrap propval)
+  @property void accessibleTableSummary(atk.object.ObjectWrap propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(atk.object.ObjectWrap)("accessible-table-summary", propval);
   }
@@ -319,7 +319,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         the value, and value-changed signal to be notified on their value
         changes.
   */
-  @property double accessibleValue()
+  @property double accessibleValue() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(double)("accessible-value");
   }
@@ -333,7 +333,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         the value, and value-changed signal to be notified on their value
         changes.
   */
-  @property void accessibleValue(double propval)
+  @property void accessibleValue(double propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(double)("accessible-value", propval);
   }
@@ -346,7 +346,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         target = The #AtkObject which is to be the target of the relation.
       Returns: TRUE if the relationship is added.
   */
-  bool addRelationship(atk.types.RelationType relationship, atk.object.ObjectWrap target)
+  bool addRelationship(atk.types.RelationType relationship, atk.object.ObjectWrap target) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_object_add_relationship(cast(AtkObject*)this._cPtr, relationship, target ? cast(AtkObject*)target._cPtr(No.Dup) : null);
@@ -358,7 +358,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: a character string representing the accessible id of the object, or
         NULL if no such string was set.
   */
-  string getAccessibleId()
+  string getAccessibleId() nothrow
   {
     const(char)* _cretval;
     _cretval = atk_object_get_accessible_id(cast(AtkObject*)this._cPtr);
@@ -371,7 +371,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: a character string representing the accessible description
         of the accessible.
   */
-  string getDescription()
+  string getDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = atk_object_get_description(cast(AtkObject*)this._cPtr);
@@ -384,7 +384,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: a character string representing the help text or the object, or
         NULL if no such string was set.
   */
-  string getHelpText()
+  string getHelpText() nothrow
   {
     const(char)* _cretval;
     _cretval = atk_object_get_help_text(cast(AtkObject*)this._cPtr);
@@ -397,7 +397,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       accessible does not have an accessible parent.
       Returns: an integer which is the index of the accessible in its parent
   */
-  int getIndexInParent()
+  int getIndexInParent() nothrow
   {
     int _retval;
     _retval = atk_object_get_index_in_parent(cast(AtkObject*)this._cPtr);
@@ -410,7 +410,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   
       Deprecated: Use atk_component_get_layer instead.
   */
-  atk.types.Layer getLayer()
+  atk.types.Layer getLayer() nothrow
   {
     AtkLayer _cretval;
     _cretval = atk_object_get_layer(cast(AtkObject*)this._cPtr);
@@ -427,7 +427,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   
       Deprecated: Use atk_component_get_mdi_zorder instead.
   */
-  int getMdiZorder()
+  int getMdiZorder() nothrow
   {
     int _retval;
     _retval = atk_object_get_mdi_zorder(cast(AtkObject*)this._cPtr);
@@ -439,7 +439,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: an integer representing the number of accessible children
         of the accessible.
   */
-  int getNAccessibleChildren()
+  int getNAccessibleChildren() nothrow
   {
     int _retval;
     _retval = atk_object_get_n_accessible_children(cast(AtkObject*)this._cPtr);
@@ -450,7 +450,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Gets the accessible name of the accessible.
       Returns: a character string representing the accessible name of the object.
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = atk_object_get_name(cast(AtkObject*)this._cPtr);
@@ -464,7 +464,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: a UTF-8 string indicating the POSIX-style LC_MESSAGES
                  locale of accessible.
   */
-  string getObjectLocale()
+  string getObjectLocale() nothrow
   {
     const(char)* _cretval;
     _cretval = atk_object_get_object_locale(cast(AtkObject*)this._cPtr);
@@ -484,7 +484,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: an #AtkObject representing the accessible
         parent of the accessible
   */
-  atk.object.ObjectWrap getParent()
+  atk.object.ObjectWrap getParent() nothrow
   {
     AtkObject* _cretval;
     _cretval = atk_object_get_parent(cast(AtkObject*)this._cPtr);
@@ -496,7 +496,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Gets the role of the accessible.
       Returns: an #AtkRole which is the role of the accessible
   */
-  atk.types.Role getRole()
+  atk.types.Role getRole() nothrow
   {
     AtkRole _cretval;
     _cretval = atk_object_get_role(cast(AtkObject*)this._cPtr);
@@ -513,7 +513,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Params:
         data = a #gpointer which identifies the object for which the AtkObject was created.
   */
-  void initialize(void* data = null)
+  void initialize(void* data = null) nothrow
   {
     atk_object_initialize(cast(AtkObject*)this._cPtr, data);
   }
@@ -528,7 +528,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         state = an #AtkState whose state is changed
         value = a gboolean which indicates whether the state is being set on or off
   */
-  void notifyStateChange(atk.types.State state, bool value)
+  void notifyStateChange(atk.types.State state, bool value) nothrow
   {
     atk_object_notify_state_change(cast(AtkObject*)this._cPtr, state, value);
   }
@@ -544,7 +544,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: an #AtkObject representing the accessible
         parent of the accessible if assigned
   */
-  atk.object.ObjectWrap peekParent()
+  atk.object.ObjectWrap peekParent() nothrow
   {
     AtkObject* _cretval;
     _cretval = atk_object_peek_parent(cast(AtkObject*)this._cPtr);
@@ -562,7 +562,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: an #AtkObject representing the specified
         accessible child of the accessible.
   */
-  atk.object.ObjectWrap refAccessibleChild(int i)
+  atk.object.ObjectWrap refAccessibleChild(int i) nothrow
   {
     AtkObject* _cretval;
     _cretval = atk_object_ref_accessible_child(cast(AtkObject*)this._cPtr, i);
@@ -575,7 +575,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: an #AtkRelationSet representing the relation set
         of the object.
   */
-  atk.relation_set.RelationSet refRelationSet()
+  atk.relation_set.RelationSet refRelationSet() nothrow
   {
     AtkRelationSet* _cretval;
     _cretval = atk_object_ref_relation_set(cast(AtkObject*)this._cPtr);
@@ -589,7 +589,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Returns: a reference to an #AtkStateSet which is the state
         set of the accessible
   */
-  atk.state_set.StateSet refStateSet()
+  atk.state_set.StateSet refStateSet() nothrow
   {
     AtkStateSet* _cretval;
     _cretval = atk_object_ref_state_set(cast(AtkObject*)this._cPtr);
@@ -605,7 +605,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   
       Deprecated: See [atk.object.ObjectWrap.connectPropertyChangeHandler]
   */
-  void removePropertyChangeHandler(uint handlerId)
+  void removePropertyChangeHandler(uint handlerId) nothrow
   {
     atk_object_remove_property_change_handler(cast(AtkObject*)this._cPtr, handlerId);
   }
@@ -618,7 +618,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         target = The #AtkObject which is the target of the relation to be removed.
       Returns: TRUE if the relationship is removed.
   */
-  bool removeRelationship(atk.types.RelationType relationship, atk.object.ObjectWrap target)
+  bool removeRelationship(atk.types.RelationType relationship, atk.object.ObjectWrap target) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_object_remove_relationship(cast(AtkObject*)this._cPtr, relationship, target ? cast(AtkObject*)target._cPtr(No.Dup) : null);
@@ -635,7 +635,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Params:
         id = a character string to be set as the accessible id
   */
-  void setAccessibleId(string id)
+  void setAccessibleId(string id) nothrow
   {
     const(char)* _id = id.toCString(No.Alloc);
     atk_object_set_accessible_id(cast(AtkObject*)this._cPtr, _id);
@@ -650,7 +650,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Params:
         description = a character string to be set as the accessible description
   */
-  void setDescription(string description)
+  void setDescription(string description) nothrow
   {
     const(char)* _description = description.toCString(No.Alloc);
     atk_object_set_description(cast(AtkObject*)this._cPtr, _description);
@@ -664,7 +664,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Params:
         helpText = a character string to be set as the accessible's help text
   */
-  void setHelpText(string helpText)
+  void setHelpText(string helpText) nothrow
   {
     const(char)* _helpText = helpText.toCString(No.Alloc);
     atk_object_set_help_text(cast(AtkObject*)this._cPtr, _helpText);
@@ -679,7 +679,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Params:
         name = a character string to be set as the accessible name
   */
-  void setName(string name)
+  void setName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     atk_object_set_name(cast(AtkObject*)this._cPtr, _name);
@@ -691,7 +691,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Params:
         parent = an #AtkObject to be set as the accessible parent
   */
-  void setParent(atk.object.ObjectWrap parent)
+  void setParent(atk.object.ObjectWrap parent) nothrow
   {
     atk_object_set_parent(cast(AtkObject*)this._cPtr, parent ? cast(AtkObject*)parent._cPtr(No.Dup) : null);
   }
@@ -702,7 +702,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Params:
         role = an #AtkRole to be set as the role
   */
-  void setRole(atk.types.Role role)
+  void setRole(atk.types.Role role) nothrow
   {
     atk_object_set_role(cast(AtkObject*)this._cPtr, role);
   }
@@ -728,14 +728,14 @@ class ObjectWrap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActiveDescendantChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectActiveDescendantChanged(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.object.ObjectWrap)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -747,7 +747,14 @@ class ObjectWrap : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.object.ObjectWrap.activeDescendantChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -774,14 +781,14 @@ class ObjectWrap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAnnouncement(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAnnouncement(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.object.ObjectWrap)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -793,7 +800,14 @@ class ObjectWrap : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.object.ObjectWrap.announcement");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -821,7 +835,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAttributeChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAttributeChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -829,7 +843,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.object.ObjectWrap)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -844,7 +858,14 @@ class ObjectWrap : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.object.ObjectWrap.attributeChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -878,7 +899,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChildrenChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectChildrenChanged(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -886,7 +907,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.object.ObjectWrap)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -901,7 +922,14 @@ class ObjectWrap : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.object.ObjectWrap.childrenChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -929,14 +957,14 @@ class ObjectWrap : gobject.object.ObjectWrap
   
       Deprecated: Use the #AtkObject::state-change signal instead.
   */
-  gulong connectFocusEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFocusEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.object.ObjectWrap)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -948,7 +976,14 @@ class ObjectWrap : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.object.ObjectWrap.focusEvent");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -976,7 +1011,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNotification(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNotification(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -984,7 +1019,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.object.ObjectWrap)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -999,7 +1034,14 @@ class ObjectWrap : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.object.ObjectWrap.notification");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1037,14 +1079,14 @@ class ObjectWrap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPropertyChange(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectPropertyChange(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == atk.property_values.PropertyValues)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.object.ObjectWrap)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1056,7 +1098,14 @@ class ObjectWrap : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.object.ObjectWrap.propertyChange");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1085,7 +1134,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectStateChange(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectStateChange(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -1093,7 +1142,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.object.ObjectWrap)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1108,7 +1157,14 @@ class ObjectWrap : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.object.ObjectWrap.stateChange");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1131,13 +1187,13 @@ class ObjectWrap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectVisibleDataChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectVisibleDataChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.object.ObjectWrap)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1146,7 +1202,14 @@ class ObjectWrap : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.object.ObjectWrap.visibleDataChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1159,37 +1222,37 @@ class ObjectWrapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T accessibleDescription(string propval)
+  T accessibleDescription(string propval) nothrow
   {
     return setProperty("accessible-description", propval);
   }
 
   /** */
-  T accessibleHelpText(string propval)
+  T accessibleHelpText(string propval) nothrow
   {
     return setProperty("accessible-help-text", propval);
   }
 
   /** */
-  T accessibleId(string propval)
+  T accessibleId(string propval) nothrow
   {
     return setProperty("accessible-id", propval);
   }
 
   /** */
-  T accessibleName(string propval)
+  T accessibleName(string propval) nothrow
   {
     return setProperty("accessible-name", propval);
   }
 
   /** */
-  T accessibleParent(atk.object.ObjectWrap propval)
+  T accessibleParent(atk.object.ObjectWrap propval) nothrow
   {
     return setProperty("accessible-parent", propval);
   }
 
   /** */
-  T accessibleRole(atk.types.Role propval)
+  T accessibleRole(atk.types.Role propval) nothrow
   {
     return setProperty("accessible-role", propval);
   }
@@ -1202,13 +1265,13 @@ class ObjectWrapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   
       Deprecated: Since 1.3. Use table-caption-object instead.
   */
-  T accessibleTableCaption(string propval)
+  T accessibleTableCaption(string propval) nothrow
   {
     return setProperty("accessible-table-caption", propval);
   }
 
   /** */
-  T accessibleTableCaptionObject(atk.object.ObjectWrap propval)
+  T accessibleTableCaptionObject(atk.object.ObjectWrap propval) nothrow
   {
     return setProperty("accessible-table-caption-object", propval);
   }
@@ -1222,7 +1285,7 @@ class ObjectWrapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Deprecated: Since 2.12. Use [atk.table.Table.getColumnDescription]
         and [atk.table.Table.setColumnDescription] instead.
   */
-  T accessibleTableColumnDescription(string propval)
+  T accessibleTableColumnDescription(string propval) nothrow
   {
     return setProperty("accessible-table-column-description", propval);
   }
@@ -1236,7 +1299,7 @@ class ObjectWrapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Deprecated: Since 2.12. Use [atk.table.Table.getColumnHeader] and
         [atk.table.Table.setColumnHeader] instead.
   */
-  T accessibleTableColumnHeader(atk.object.ObjectWrap propval)
+  T accessibleTableColumnHeader(atk.object.ObjectWrap propval) nothrow
   {
     return setProperty("accessible-table-column-header", propval);
   }
@@ -1250,7 +1313,7 @@ class ObjectWrapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Deprecated: Since 2.12. Use [atk.table.Table.getRowDescription] and
         [atk.table.Table.setRowDescription] instead.
   */
-  T accessibleTableRowDescription(string propval)
+  T accessibleTableRowDescription(string propval) nothrow
   {
     return setProperty("accessible-table-row-description", propval);
   }
@@ -1264,13 +1327,13 @@ class ObjectWrapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Deprecated: Since 2.12. Use [atk.table.Table.getRowHeader] and
         [atk.table.Table.setRowHeader] instead.
   */
-  T accessibleTableRowHeader(atk.object.ObjectWrap propval)
+  T accessibleTableRowHeader(atk.object.ObjectWrap propval) nothrow
   {
     return setProperty("accessible-table-row-header", propval);
   }
 
   /** */
-  T accessibleTableSummary(atk.object.ObjectWrap propval)
+  T accessibleTableSummary(atk.object.ObjectWrap propval) nothrow
   {
     return setProperty("accessible-table-summary", propval);
   }
@@ -1285,7 +1348,7 @@ class ObjectWrapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         the value, and value-changed signal to be notified on their value
         changes.
   */
-  T accessibleValue(double propval)
+  T accessibleValue(double propval) nothrow
   {
     return setProperty("accessible-value", propval);
   }
@@ -1298,7 +1361,7 @@ final class ObjectWrapGidBuilder : ObjectWrapGidBuilderImpl!ObjectWrapGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ObjectWrap build()
+  ObjectWrap build() nothrow
   {
     return new ObjectWrap(cast(void*)createGObject(ObjectWrap._getGType), No.Take);
   }

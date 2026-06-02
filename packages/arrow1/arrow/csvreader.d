@@ -18,26 +18,26 @@ class CSVReader : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_csv_reader_get_type != &gidSymbolNotFound ? garrow_csv_reader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CSVReader self()
+  override CSVReader self() nothrow
   {
     return this;
   }
@@ -46,13 +46,13 @@ class CSVReader : gobject.object.ObjectWrap
       Get builder for [arrow.csvreader.CSVReader]
       Returns: New builder object
   */
-  static CSVReaderGidBuilder builder()
+  static CSVReaderGidBuilder builder() nothrow
   {
     return new CSVReaderGidBuilder;
   }
 
   /** */
-  @property arrow.input_stream.InputStream input()
+  @property arrow.input_stream.InputStream input() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.input_stream.InputStream)("input");
   }
@@ -86,13 +86,13 @@ class CSVReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T csvTableReader(void* propval)
+  T csvTableReader(void* propval) nothrow
   {
     return setProperty("csv-table-reader", propval);
   }
 
   /** */
-  T input(arrow.input_stream.InputStream propval)
+  T input(arrow.input_stream.InputStream propval) nothrow
   {
     return setProperty("input", propval);
   }
@@ -105,7 +105,7 @@ final class CSVReaderGidBuilder : CSVReaderGidBuilderImpl!CSVReaderGidBuilder
       Create object from builder.
       Returns: New object
   */
-  CSVReader build()
+  CSVReader build() nothrow
   {
     return new CSVReader(cast(void*)createGObject(CSVReader._getGType), Yes.Take);
   }

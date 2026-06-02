@@ -23,26 +23,26 @@ class Tag : gtk.text_tag.TextTag
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_tag_get_type != &gidSymbolNotFound ? gtk_source_tag_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Tag self()
+  override Tag self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class Tag : gtk.text_tag.TextTag
       Get builder for [gtksource.tag.Tag]
       Returns: New builder object
   */
-  static TagGidBuilder builder()
+  static TagGidBuilder builder() nothrow
   {
     return new TagGidBuilder;
   }
@@ -66,7 +66,7 @@ class Tag : gtk.text_tag.TextTag
         Setting this property also changes [gtksource.tag.Tag.drawSpacesSet] to
         true.
   */
-  @property bool drawSpaces()
+  @property bool drawSpaces() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("draw-spaces");
   }
@@ -82,7 +82,7 @@ class Tag : gtk.text_tag.TextTag
           Setting this property also changes [gtksource.tag.Tag.drawSpacesSet] to
           true.
   */
-  @property void drawSpaces(bool propval)
+  @property void drawSpaces(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("draw-spaces", propval);
   }
@@ -92,7 +92,7 @@ class Tag : gtk.text_tag.TextTag
       Returns: Whether the [gtksource.tag.Tag.drawSpaces] property is set and must be
         taken into account.
   */
-  @property bool drawSpacesSet()
+  @property bool drawSpacesSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("draw-spaces-set");
   }
@@ -103,7 +103,7 @@ class Tag : gtk.text_tag.TextTag
         propval = Whether the [gtksource.tag.Tag.drawSpaces] property is set and must be
           taken into account.
   */
-  @property void drawSpacesSet(bool propval)
+  @property void drawSpacesSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("draw-spaces-set", propval);
   }
@@ -120,7 +120,7 @@ class Tag : gtk.text_tag.TextTag
         name = tag name, or null.
       Returns: a new [gtksource.tag.Tag].
   */
-  this(string name = null)
+  this(string name = null) nothrow
   {
     GtkTextTag* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -145,7 +145,7 @@ class TagGidBuilderImpl(T) : gtk.text_tag.TextTagGidBuilderImpl!T
           true.
       Returns: Builder instance for fluent chaining
   */
-  T drawSpaces(bool propval)
+  T drawSpaces(bool propval) nothrow
   {
     return setProperty("draw-spaces", propval);
   }
@@ -157,7 +157,7 @@ class TagGidBuilderImpl(T) : gtk.text_tag.TextTagGidBuilderImpl!T
           taken into account.
       Returns: Builder instance for fluent chaining
   */
-  T drawSpacesSet(bool propval)
+  T drawSpacesSet(bool propval) nothrow
   {
     return setProperty("draw-spaces-set", propval);
   }
@@ -170,7 +170,7 @@ final class TagGidBuilder : TagGidBuilderImpl!TagGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Tag build()
+  Tag build() nothrow
   {
     return new Tag(cast(void*)createGObject(Tag._getGType), Yes.Take);
   }

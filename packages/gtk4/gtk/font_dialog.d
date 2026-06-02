@@ -38,26 +38,26 @@ class FontDialog : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_font_dialog_get_type != &gidSymbolNotFound ? gtk_font_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FontDialog self()
+  override FontDialog self() nothrow
   {
     return this;
   }
@@ -66,7 +66,7 @@ class FontDialog : gobject.object.ObjectWrap
       Get builder for [gtk.font_dialog.FontDialog]
       Returns: New builder object
   */
-  static FontDialogGidBuilder builder()
+  static FontDialogGidBuilder builder() nothrow
   {
     return new FontDialogGidBuilder;
   }
@@ -76,7 +76,7 @@ class FontDialog : gobject.object.ObjectWrap
       Returns: Sets a filter to restrict what fonts are shown
         in the font chooser dialog.
   */
-  @property gtk.filter.Filter filter()
+  @property gtk.filter.Filter filter() nothrow
   {
     return getFilter();
   }
@@ -87,7 +87,7 @@ class FontDialog : gobject.object.ObjectWrap
         propval = Sets a filter to restrict what fonts are shown
           in the font chooser dialog.
   */
-  @property void filter(gtk.filter.Filter propval)
+  @property void filter(gtk.filter.Filter propval) nothrow
   {
     setFilter(propval);
   }
@@ -99,7 +99,7 @@ class FontDialog : gobject.object.ObjectWrap
         A custom font map can be used to present application-specific
         fonts instead of or in addition to the normal system fonts.
   */
-  @property pango.font_map.FontMap fontMap()
+  @property pango.font_map.FontMap fontMap() nothrow
   {
     return getFontMap();
   }
@@ -112,7 +112,7 @@ class FontDialog : gobject.object.ObjectWrap
           A custom font map can be used to present application-specific
           fonts instead of or in addition to the normal system fonts.
   */
-  @property void fontMap(pango.font_map.FontMap propval)
+  @property void fontMap(pango.font_map.FontMap propval) nothrow
   {
     setFontMap(propval);
   }
@@ -121,7 +121,7 @@ class FontDialog : gobject.object.ObjectWrap
       Get `language` property.
       Returns: The language for which the font features are selected.
   */
-  @property pango.language.Language language()
+  @property pango.language.Language language() nothrow
   {
     return getLanguage();
   }
@@ -131,7 +131,7 @@ class FontDialog : gobject.object.ObjectWrap
       Params:
         propval = The language for which the font features are selected.
   */
-  @property void language(pango.language.Language propval)
+  @property void language(pango.language.Language propval) nothrow
   {
     setLanguage(propval);
   }
@@ -140,7 +140,7 @@ class FontDialog : gobject.object.ObjectWrap
       Get `modal` property.
       Returns: Whether the font chooser dialog is modal.
   */
-  @property bool modal()
+  @property bool modal() nothrow
   {
     return getModal();
   }
@@ -150,7 +150,7 @@ class FontDialog : gobject.object.ObjectWrap
       Params:
         propval = Whether the font chooser dialog is modal.
   */
-  @property void modal(bool propval)
+  @property void modal(bool propval) nothrow
   {
     setModal(propval);
   }
@@ -160,7 +160,7 @@ class FontDialog : gobject.object.ObjectWrap
       Returns: A title that may be shown on the font chooser
         dialog that is presented by [gtk.font_dialog.FontDialog.chooseFont].
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -171,7 +171,7 @@ class FontDialog : gobject.object.ObjectWrap
         propval = A title that may be shown on the font chooser
           dialog that is presented by [gtk.font_dialog.FontDialog.chooseFont].
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -180,7 +180,7 @@ class FontDialog : gobject.object.ObjectWrap
       Creates a new [gtk.font_dialog.FontDialog] object.
       Returns: the new [gtk.font_dialog.FontDialog]
   */
-  this()
+  this() nothrow
   {
     GtkFontDialog* _cretval;
     _cretval = gtk_font_dialog_new();
@@ -202,14 +202,21 @@ class FontDialog : gobject.object.ObjectWrap
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
   */
-  void chooseFace(gtk.window.Window parent = null, pango.font_face.FontFace initialValue = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void chooseFace(gtk.window.Window parent = null, pango.font_face.FontFace initialValue = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -250,14 +257,21 @@ class FontDialog : gobject.object.ObjectWrap
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
   */
-  void chooseFamily(gtk.window.Window parent = null, pango.font_family.FontFamily initialValue = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void chooseFamily(gtk.window.Window parent = null, pango.font_family.FontFamily initialValue = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -305,14 +319,21 @@ class FontDialog : gobject.object.ObjectWrap
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
   */
-  void chooseFont(gtk.window.Window parent = null, pango.font_description.FontDescription initialValue = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void chooseFont(gtk.window.Window parent = null, pango.font_description.FontDescription initialValue = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -337,14 +358,21 @@ class FontDialog : gobject.object.ObjectWrap
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
   */
-  void chooseFontAndFeatures(gtk.window.Window parent = null, pango.font_description.FontDescription initialValue = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void chooseFontAndFeatures(gtk.window.Window parent = null, pango.font_description.FontDescription initialValue = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -405,7 +433,7 @@ class FontDialog : gobject.object.ObjectWrap
       in the font chooser dialog.
       Returns: the filter
   */
-  gtk.filter.Filter getFilter()
+  gtk.filter.Filter getFilter() nothrow
   {
     GtkFilter* _cretval;
     _cretval = gtk_font_dialog_get_filter(cast(GtkFontDialog*)this._cPtr);
@@ -418,7 +446,7 @@ class FontDialog : gobject.object.ObjectWrap
       or `NULL` for the default fontmap.
       Returns: the fontmap
   */
-  pango.font_map.FontMap getFontMap()
+  pango.font_map.FontMap getFontMap() nothrow
   {
     PangoFontMap* _cretval;
     _cretval = gtk_font_dialog_get_font_map(cast(GtkFontDialog*)this._cPtr);
@@ -430,7 +458,7 @@ class FontDialog : gobject.object.ObjectWrap
       Returns the language for which font features are applied.
       Returns: the language for font features
   */
-  pango.language.Language getLanguage()
+  pango.language.Language getLanguage() nothrow
   {
     PangoLanguage* _cretval;
     _cretval = gtk_font_dialog_get_language(cast(GtkFontDialog*)this._cPtr);
@@ -444,7 +472,7 @@ class FontDialog : gobject.object.ObjectWrap
       while it is presented.
       Returns: `TRUE` if the font chooser dialog is modal
   */
-  bool getModal()
+  bool getModal() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_font_dialog_get_modal(cast(GtkFontDialog*)this._cPtr);
@@ -456,7 +484,7 @@ class FontDialog : gobject.object.ObjectWrap
       font chooser dialog.
       Returns: the title
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_font_dialog_get_title(cast(GtkFontDialog*)this._cPtr);
@@ -474,7 +502,7 @@ class FontDialog : gobject.object.ObjectWrap
       Params:
         filter = a [gtk.filter.Filter]
   */
-  void setFilter(gtk.filter.Filter filter = null)
+  void setFilter(gtk.filter.Filter filter = null) nothrow
   {
     gtk_font_dialog_set_filter(cast(GtkFontDialog*)this._cPtr, filter ? cast(GtkFilter*)filter._cPtr(No.Dup) : null);
   }
@@ -487,7 +515,7 @@ class FontDialog : gobject.object.ObjectWrap
       Params:
         fontmap = the fontmap
   */
-  void setFontMap(pango.font_map.FontMap fontmap = null)
+  void setFontMap(pango.font_map.FontMap fontmap = null) nothrow
   {
     gtk_font_dialog_set_font_map(cast(GtkFontDialog*)this._cPtr, fontmap ? cast(PangoFontMap*)fontmap._cPtr(No.Dup) : null);
   }
@@ -498,7 +526,7 @@ class FontDialog : gobject.object.ObjectWrap
       Params:
         language = the language for font features
   */
-  void setLanguage(pango.language.Language language)
+  void setLanguage(pango.language.Language language) nothrow
   {
     gtk_font_dialog_set_language(cast(GtkFontDialog*)this._cPtr, language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);
   }
@@ -511,7 +539,7 @@ class FontDialog : gobject.object.ObjectWrap
       Params:
         modal = the new value
   */
-  void setModal(bool modal)
+  void setModal(bool modal) nothrow
   {
     gtk_font_dialog_set_modal(cast(GtkFontDialog*)this._cPtr, modal);
   }
@@ -523,7 +551,7 @@ class FontDialog : gobject.object.ObjectWrap
       Params:
         title = the new title
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_font_dialog_set_title(cast(GtkFontDialog*)this._cPtr, _title);
@@ -541,7 +569,7 @@ class FontDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           in the font chooser dialog.
       Returns: Builder instance for fluent chaining
   */
-  T filter(gtk.filter.Filter propval)
+  T filter(gtk.filter.Filter propval) nothrow
   {
     return setProperty("filter", propval);
   }
@@ -555,7 +583,7 @@ class FontDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           fonts instead of or in addition to the normal system fonts.
       Returns: Builder instance for fluent chaining
   */
-  T fontMap(pango.font_map.FontMap propval)
+  T fontMap(pango.font_map.FontMap propval) nothrow
   {
     return setProperty("font-map", propval);
   }
@@ -566,7 +594,7 @@ class FontDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The language for which the font features are selected.
       Returns: Builder instance for fluent chaining
   */
-  T language(pango.language.Language propval)
+  T language(pango.language.Language propval) nothrow
   {
     return setProperty("language", propval);
   }
@@ -577,7 +605,7 @@ class FontDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether the font chooser dialog is modal.
       Returns: Builder instance for fluent chaining
   */
-  T modal(bool propval)
+  T modal(bool propval) nothrow
   {
     return setProperty("modal", propval);
   }
@@ -589,7 +617,7 @@ class FontDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           dialog that is presented by [gtk.font_dialog.FontDialog.chooseFont].
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -602,7 +630,7 @@ final class FontDialogGidBuilder : FontDialogGidBuilderImpl!FontDialogGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FontDialog build()
+  FontDialog build() nothrow
   {
     return new FontDialog(cast(void*)createGObject(FontDialog._getGType), Yes.Take);
   }

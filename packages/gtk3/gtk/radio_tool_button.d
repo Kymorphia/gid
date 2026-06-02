@@ -36,26 +36,26 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_radio_tool_button_get_type != &gidSymbolNotFound ? gtk_radio_tool_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RadioToolButton self()
+  override RadioToolButton self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
       Get builder for [gtk.radio_tool_button.RadioToolButton]
       Returns: New builder object
   */
-  static RadioToolButtonGidBuilder builder()
+  static RadioToolButtonGidBuilder builder() nothrow
   {
     return new RadioToolButtonGidBuilder;
   }
@@ -74,7 +74,7 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
       Params:
         propval = Sets a new group for a radio tool button.
   */
-  @property void group(gtk.radio_tool_button.RadioToolButton propval)
+  @property void group(gtk.radio_tool_button.RadioToolButton propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.radio_tool_button.RadioToolButton)("group", propval);
   }
@@ -87,7 +87,7 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
             existing radio button group, or null if you are creating a new group
       Returns: The new #GtkRadioToolButton
   */
-  this(gtk.radio_button.RadioButton[] group = null)
+  this(gtk.radio_button.RadioButton[] group = null) nothrow
   {
     GtkToolItem* _cretval;
     auto _group = gSListFromD!(gtk.radio_button.RadioButton)(group);
@@ -109,7 +109,7 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
   
       Deprecated: Use [gtk.radio_tool_button.RadioToolButton.new_] instead.
   */
-  static gtk.radio_tool_button.RadioToolButton newFromStock(gtk.radio_button.RadioButton[] group, string stockId)
+  static gtk.radio_tool_button.RadioToolButton newFromStock(gtk.radio_button.RadioButton[] group, string stockId) nothrow
   {
     GtkToolItem* _cretval;
     auto _group = gSListFromD!(gtk.radio_button.RadioButton)(group);
@@ -127,7 +127,7 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
         group = An existing #GtkRadioToolButton, or null
       Returns: The new #GtkRadioToolButton
   */
-  static gtk.radio_tool_button.RadioToolButton newFromWidget(gtk.radio_tool_button.RadioToolButton group = null)
+  static gtk.radio_tool_button.RadioToolButton newFromWidget(gtk.radio_tool_button.RadioToolButton group = null) nothrow
   {
     GtkToolItem* _cretval;
     _cretval = gtk_radio_tool_button_new_from_widget(group ? cast(GtkRadioToolButton*)group._cPtr(No.Dup) : null);
@@ -147,7 +147,7 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
   
       Deprecated: gtk_radio_tool_button_new_from_widget
   */
-  static gtk.radio_tool_button.RadioToolButton newWithStockFromWidget(gtk.radio_tool_button.RadioToolButton group, string stockId)
+  static gtk.radio_tool_button.RadioToolButton newWithStockFromWidget(gtk.radio_tool_button.RadioToolButton group, string stockId) nothrow
   {
     GtkToolItem* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
@@ -160,7 +160,7 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
       Returns the radio button group button belongs to.
       Returns: The group button belongs to.
   */
-  gtk.radio_button.RadioButton[] getGroup()
+  gtk.radio_button.RadioButton[] getGroup() nothrow
   {
     GSList* _cretval;
     _cretval = gtk_radio_tool_button_get_group(cast(GtkRadioToolButton*)this._cPtr);
@@ -174,7 +174,7 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
       Params:
         group = an existing radio button group, or null
   */
-  void setGroup(gtk.radio_button.RadioButton[] group = null)
+  void setGroup(gtk.radio_button.RadioButton[] group = null) nothrow
   {
     auto _group = gSListFromD!(gtk.radio_button.RadioButton)(group);
     scope(exit) containerFree!(GSList*, gtk.radio_button.RadioButton, GidOwnership.None)(_group);
@@ -193,7 +193,7 @@ class RadioToolButtonGidBuilderImpl(T) : gtk.toggle_tool_button.ToggleToolButton
         propval = Sets a new group for a radio tool button.
       Returns: Builder instance for fluent chaining
   */
-  T group(gtk.radio_tool_button.RadioToolButton propval)
+  T group(gtk.radio_tool_button.RadioToolButton propval) nothrow
   {
     return setProperty("group", propval);
   }
@@ -206,7 +206,7 @@ final class RadioToolButtonGidBuilder : RadioToolButtonGidBuilderImpl!RadioToolB
       Create object from builder.
       Returns: New object
   */
-  RadioToolButton build()
+  RadioToolButton build() nothrow
   {
     return new RadioToolButton(cast(void*)createGObject(RadioToolButton._getGType), No.Take);
   }

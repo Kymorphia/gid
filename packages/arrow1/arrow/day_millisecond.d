@@ -14,26 +14,26 @@ class DayMillisecond : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_day_millisecond_get_type != &gidSymbolNotFound ? garrow_day_millisecond_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DayMillisecond self()
+  override DayMillisecond self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class DayMillisecond : gobject.object.ObjectWrap
       Get builder for [arrow.day_millisecond.DayMillisecond]
       Returns: New builder object
   */
-  static DayMillisecondGidBuilder builder()
+  static DayMillisecondGidBuilder builder() nothrow
   {
     return new DayMillisecondGidBuilder;
   }
@@ -51,7 +51,7 @@ class DayMillisecond : gobject.object.ObjectWrap
       Get `day` property.
       Returns: The day part value.
   */
-  @property int day()
+  @property int day() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("day");
   }
@@ -61,7 +61,7 @@ class DayMillisecond : gobject.object.ObjectWrap
       Params:
         propval = The day part value.
   */
-  @property void day(int propval)
+  @property void day(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("day", propval);
   }
@@ -70,7 +70,7 @@ class DayMillisecond : gobject.object.ObjectWrap
       Get `millisecond` property.
       Returns: The millisecond part value.
   */
-  @property int millisecond()
+  @property int millisecond() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("millisecond");
   }
@@ -80,13 +80,13 @@ class DayMillisecond : gobject.object.ObjectWrap
       Params:
         propval = The millisecond part value.
   */
-  @property void millisecond(int propval)
+  @property void millisecond(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("millisecond", propval);
   }
 
   /** */
-  this(int day, int millisecond)
+  this(int day, int millisecond) nothrow
   {
     GArrowDayMillisecond* _cretval;
     _cretval = garrow_day_millisecond_new(day, millisecond);
@@ -94,7 +94,7 @@ class DayMillisecond : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equal(arrow.day_millisecond.DayMillisecond otherDayMillisecond)
+  bool equal(arrow.day_millisecond.DayMillisecond otherDayMillisecond) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_day_millisecond_equal(cast(GArrowDayMillisecond*)this._cPtr, otherDayMillisecond ? cast(GArrowDayMillisecond*)otherDayMillisecond._cPtr(No.Dup) : null);
@@ -102,7 +102,7 @@ class DayMillisecond : gobject.object.ObjectWrap
   }
 
   /** */
-  bool lessThan(arrow.day_millisecond.DayMillisecond otherDayMillisecond)
+  bool lessThan(arrow.day_millisecond.DayMillisecond otherDayMillisecond) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_day_millisecond_less_than(cast(GArrowDayMillisecond*)this._cPtr, otherDayMillisecond ? cast(GArrowDayMillisecond*)otherDayMillisecond._cPtr(No.Dup) : null);
@@ -120,7 +120,7 @@ class DayMillisecondGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = The day part value.
       Returns: Builder instance for fluent chaining
   */
-  T day(int propval)
+  T day(int propval) nothrow
   {
     return setProperty("day", propval);
   }
@@ -131,7 +131,7 @@ class DayMillisecondGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = The millisecond part value.
       Returns: Builder instance for fluent chaining
   */
-  T millisecond(int propval)
+  T millisecond(int propval) nothrow
   {
     return setProperty("millisecond", propval);
   }
@@ -144,7 +144,7 @@ final class DayMillisecondGidBuilder : DayMillisecondGidBuilderImpl!DayMilliseco
       Create object from builder.
       Returns: New object
   */
-  DayMillisecond build()
+  DayMillisecond build() nothrow
   {
     return new DayMillisecond(cast(void*)createGObject(DayMillisecond._getGType), Yes.Take);
   }

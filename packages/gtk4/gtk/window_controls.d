@@ -71,26 +71,26 @@ class WindowControls : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_window_controls_get_type != &gidSymbolNotFound ? gtk_window_controls_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WindowControls self()
+  override WindowControls self() nothrow
   {
     return this;
   }
@@ -99,7 +99,7 @@ class WindowControls : gtk.widget.Widget
       Get builder for [gtk.window_controls.WindowControls]
       Returns: New builder object
   */
-  static WindowControlsGidBuilder builder()
+  static WindowControlsGidBuilder builder() nothrow
   {
     return new WindowControlsGidBuilder;
   }
@@ -111,7 +111,7 @@ class WindowControls : gtk.widget.Widget
         If this property is not set, the
         [gtk.settings.Settings.gtkDecorationLayout] setting is used.
   */
-  @property string decorationLayout()
+  @property string decorationLayout() nothrow
   {
     return getDecorationLayout();
   }
@@ -124,7 +124,7 @@ class WindowControls : gtk.widget.Widget
           If this property is not set, the
           [gtk.settings.Settings.gtkDecorationLayout] setting is used.
   */
-  @property void decorationLayout(string propval)
+  @property void decorationLayout(string propval) nothrow
   {
     setDecorationLayout(propval);
   }
@@ -133,7 +133,7 @@ class WindowControls : gtk.widget.Widget
       Get `empty` property.
       Returns: Whether the widget has any window buttons.
   */
-  @property bool empty()
+  @property bool empty() nothrow
   {
     return getEmpty();
   }
@@ -144,7 +144,7 @@ class WindowControls : gtk.widget.Widget
         
         See `property@Gtk.WindowControls:decoration_layout`.
   */
-  @property gtk.types.PackType side()
+  @property gtk.types.PackType side() nothrow
   {
     return getSide();
   }
@@ -156,7 +156,7 @@ class WindowControls : gtk.widget.Widget
           
           See `property@Gtk.WindowControls:decoration_layout`.
   */
-  @property void side(gtk.types.PackType propval)
+  @property void side(gtk.types.PackType propval) nothrow
   {
     setSide(propval);
   }
@@ -168,7 +168,7 @@ class WindowControls : gtk.widget.Widget
         side = the side
       Returns: a new [gtk.window_controls.WindowControls].
   */
-  this(gtk.types.PackType side)
+  this(gtk.types.PackType side) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_controls_new(side);
@@ -179,7 +179,7 @@ class WindowControls : gtk.widget.Widget
       Gets the decoration layout of this [gtk.window_controls.WindowControls].
       Returns: the decoration layout or null if it is unset
   */
-  string getDecorationLayout()
+  string getDecorationLayout() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_window_controls_get_decoration_layout(cast(GtkWindowControls*)this._cPtr);
@@ -191,7 +191,7 @@ class WindowControls : gtk.widget.Widget
       Gets whether the widget has any window buttons.
       Returns: true if the widget has window buttons, otherwise false
   */
-  bool getEmpty()
+  bool getEmpty() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_controls_get_empty(cast(GtkWindowControls*)this._cPtr);
@@ -202,7 +202,7 @@ class WindowControls : gtk.widget.Widget
       Gets the side to which this [gtk.window_controls.WindowControls] instance belongs.
       Returns: the side
   */
-  gtk.types.PackType getSide()
+  gtk.types.PackType getSide() nothrow
   {
     GtkPackType _cretval;
     _cretval = gtk_window_controls_get_side(cast(GtkWindowControls*)this._cPtr);
@@ -230,7 +230,7 @@ class WindowControls : gtk.widget.Widget
       Params:
         layout = a decoration layout, or null to unset the layout
   */
-  void setDecorationLayout(string layout = null)
+  void setDecorationLayout(string layout = null) nothrow
   {
     const(char)* _layout = layout.toCString(No.Alloc);
     gtk_window_controls_set_decoration_layout(cast(GtkWindowControls*)this._cPtr, _layout);
@@ -244,7 +244,7 @@ class WindowControls : gtk.widget.Widget
       Params:
         side = a side
   */
-  void setSide(gtk.types.PackType side)
+  void setSide(gtk.types.PackType side) nothrow
   {
     gtk_window_controls_set_side(cast(GtkWindowControls*)this._cPtr, side);
   }
@@ -264,7 +264,7 @@ class WindowControlsGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           [gtk.settings.Settings.gtkDecorationLayout] setting is used.
       Returns: Builder instance for fluent chaining
   */
-  T decorationLayout(string propval)
+  T decorationLayout(string propval) nothrow
   {
     return setProperty("decoration-layout", propval);
   }
@@ -277,7 +277,7 @@ class WindowControlsGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           See `property@Gtk.WindowControls:decoration_layout`.
       Returns: Builder instance for fluent chaining
   */
-  T side(gtk.types.PackType propval)
+  T side(gtk.types.PackType propval) nothrow
   {
     return setProperty("side", propval);
   }
@@ -290,7 +290,7 @@ final class WindowControlsGidBuilder : WindowControlsGidBuilderImpl!WindowContro
       Create object from builder.
       Returns: New object
   */
-  WindowControls build()
+  WindowControls build() nothrow
   {
     return new WindowControls(cast(void*)createGObject(WindowControls._getGType), No.Take);
   }

@@ -17,7 +17,7 @@ struct SnapshotError
       Gets the quark for the domain of page snapshot errors.
       Returns: snapshot error domain.
   */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = webkit_snapshot_error_quark();
@@ -27,12 +27,12 @@ struct SnapshotError
 
 class SnapshotException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(webkit.snapshot_error.SnapshotError.quark, cast(int)code, msg);
   }

@@ -27,7 +27,7 @@ template FontT()
       Returns: the [cairo.scaled_font.ScaledFont]
           used by font
   */
-  override cairo.scaled_font.ScaledFont getScaledFont()
+  override cairo.scaled_font.ScaledFont getScaledFont() nothrow
   {
     cairo_scaled_font_t* _cretval;
     _cretval = pango_cairo_font_get_scaled_font(cast(PangoCairoFont*)this._cPtr);

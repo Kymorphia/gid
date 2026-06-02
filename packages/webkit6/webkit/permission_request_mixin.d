@@ -25,7 +25,7 @@ template PermissionRequestT()
   /**
       Allow the action which triggered this request.
   */
-  override void allow()
+  override void allow() nothrow
   {
     webkit_permission_request_allow(cast(WebKitPermissionRequest*)this._cPtr);
   }
@@ -33,7 +33,7 @@ template PermissionRequestT()
   /**
       Deny the action which triggered this request.
   */
-  override void deny()
+  override void deny() nothrow
   {
     webkit_permission_request_deny(cast(WebKitPermissionRequest*)this._cPtr);
   }

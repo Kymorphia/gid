@@ -27,26 +27,26 @@ class VulkanContext : gdk.draw_context.DrawContext, gio.initable.Initable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_vulkan_context_get_type != &gidSymbolNotFound ? gdk_vulkan_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VulkanContext self()
+  override VulkanContext self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class VulkanContext : gdk.draw_context.DrawContext, gio.initable.Initable
       Get builder for [gdk.vulkan_context.VulkanContext]
       Returns: New builder object
   */
-  static VulkanContextGidBuilder builder()
+  static VulkanContextGidBuilder builder() nothrow
   {
     return new VulkanContextGidBuilder;
   }
@@ -80,13 +80,13 @@ class VulkanContext : gdk.draw_context.DrawContext, gio.initable.Initable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectImagesUpdated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectImagesUpdated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.vulkan_context.VulkanContext)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -95,7 +95,14 @@ class VulkanContext : gdk.draw_context.DrawContext, gio.initable.Initable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.vulkan_context.VulkanContext.imagesUpdated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -117,7 +124,7 @@ final class VulkanContextGidBuilder : VulkanContextGidBuilderImpl!VulkanContextG
       Create object from builder.
       Returns: New object
   */
-  VulkanContext build()
+  VulkanContext build() nothrow
   {
     return new VulkanContext(cast(void*)createGObject(VulkanContext._getGType), No.Take);
   }

@@ -21,26 +21,26 @@ class MultipartSigned : gmime.multipart.Multipart
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_multipart_signed_get_type != &gidSymbolNotFound ? g_mime_multipart_signed_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MultipartSigned self()
+  override MultipartSigned self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class MultipartSigned : gmime.multipart.Multipart
       Get builder for [gmime.multipart_signed.MultipartSigned]
       Returns: New builder object
   */
-  static MultipartSignedGidBuilder builder()
+  static MultipartSignedGidBuilder builder() nothrow
   {
     return new MultipartSignedGidBuilder;
   }
@@ -58,7 +58,7 @@ class MultipartSigned : gmime.multipart.Multipart
       Creates a new MIME multipart/signed object.
       Returns: an empty MIME multipart/signed object.
   */
-  this()
+  this() nothrow
   {
     GMimeMultipartSigned* _cretval;
     _cretval = g_mime_multipart_signed_new();
@@ -127,7 +127,7 @@ final class MultipartSignedGidBuilder : MultipartSignedGidBuilderImpl!MultipartS
       Create object from builder.
       Returns: New object
   */
-  MultipartSigned build()
+  MultipartSigned build() nothrow
   {
     return new MultipartSigned(cast(void*)createGObject(MultipartSigned._getGType), Yes.Take);
   }

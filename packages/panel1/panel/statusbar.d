@@ -23,26 +23,26 @@ class Statusbar : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_statusbar_get_type != &gidSymbolNotFound ? panel_statusbar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Statusbar self()
+  override Statusbar self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class Statusbar : gtk.widget.Widget
       Get builder for [panel.statusbar.Statusbar]
       Returns: New builder object
   */
-  static StatusbarGidBuilder builder()
+  static StatusbarGidBuilder builder() nothrow
   {
     return new StatusbarGidBuilder;
   }
@@ -60,7 +60,7 @@ class Statusbar : gtk.widget.Widget
       Create a new #PanelStatusbar.
       Returns: a newly created #PanelStatusBar.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = panel_statusbar_new();
@@ -75,7 +75,7 @@ class Statusbar : gtk.widget.Widget
         priority = the priority
         widget = a #GtkWidget to add.
   */
-  void addPrefix(int priority, gtk.widget.Widget widget)
+  void addPrefix(int priority, gtk.widget.Widget widget) nothrow
   {
     panel_statusbar_add_prefix(cast(PanelStatusbar*)this._cPtr, priority, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -88,7 +88,7 @@ class Statusbar : gtk.widget.Widget
         priority = the priority
         widget = a #GtkWidget to add.
   */
-  void addSuffix(int priority, gtk.widget.Widget widget)
+  void addSuffix(int priority, gtk.widget.Widget widget) nothrow
   {
     panel_statusbar_add_suffix(cast(PanelStatusbar*)this._cPtr, priority, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -99,7 +99,7 @@ class Statusbar : gtk.widget.Widget
       Params:
         widget = a #GtkWidget to remove.
   */
-  void remove(gtk.widget.Widget widget)
+  void remove(gtk.widget.Widget widget) nothrow
   {
     panel_statusbar_remove(cast(PanelStatusbar*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -118,7 +118,7 @@ final class StatusbarGidBuilder : StatusbarGidBuilderImpl!StatusbarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Statusbar build()
+  Statusbar build() nothrow
   {
     return new Statusbar(cast(void*)createGObject(Statusbar._getGType), No.Take);
   }

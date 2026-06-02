@@ -22,7 +22,7 @@ struct DragAction
         action = a [gdk.types.DragAction]
       Returns: true if exactly one action was given
   */
-  static bool isUnique(gdk.types.DragAction action)
+  static bool isUnique(gdk.types.DragAction action) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_drag_action_is_unique(action);

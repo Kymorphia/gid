@@ -117,26 +117,26 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_model_sort_get_type != &gidSymbolNotFound ? gtk_tree_model_sort_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TreeModelSort self()
+  override TreeModelSort self() nothrow
   {
     return this;
   }
@@ -145,13 +145,13 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
       Get builder for [gtk.tree_model_sort.TreeModelSort]
       Returns: New builder object
   */
-  static TreeModelSortGidBuilder builder()
+  static TreeModelSortGidBuilder builder() nothrow
   {
     return new TreeModelSortGidBuilder;
   }
 
   /** */
-  @property gtk.tree_model.TreeModel model()
+  @property gtk.tree_model.TreeModel model() nothrow
   {
     return getModel();
   }
@@ -167,7 +167,7 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
         childModel = A #GtkTreeModel
       Returns: A new #GtkTreeModelSort.
   */
-  static gtk.tree_model_sort.TreeModelSort newWithModel(gtk.tree_model.TreeModel childModel)
+  static gtk.tree_model_sort.TreeModelSort newWithModel(gtk.tree_model.TreeModel childModel) nothrow
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_tree_model_sort_new_with_model(childModel ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)childModel)._cPtr(No.Dup) : null);
@@ -183,7 +183,7 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
       unreffed access to nodes.  As a side effect of this function, all unreffed
       iters will be invalid.
   */
-  void clearCache()
+  void clearCache() nothrow
   {
     gtk_tree_model_sort_clear_cache(cast(GtkTreeModelSort*)this._cPtr);
   }
@@ -199,7 +199,7 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
       Returns: true, if sort_iter was set, i.e. if sort_iter is a
         valid iterator pointer to a visible row in the child model.
   */
-  bool convertChildIterToIter(out gtk.tree_iter.TreeIter sortIter, gtk.tree_iter.TreeIter childIter)
+  bool convertChildIterToIter(out gtk.tree_iter.TreeIter sortIter, gtk.tree_iter.TreeIter childIter) nothrow
   {
     bool _retval;
     GtkTreeIter _sortIter;
@@ -218,7 +218,7 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
         childPath = A #GtkTreePath to convert
       Returns: A newly allocated #GtkTreePath, or null
   */
-  gtk.tree_path.TreePath convertChildPathToPath(gtk.tree_path.TreePath childPath)
+  gtk.tree_path.TreePath convertChildPathToPath(gtk.tree_path.TreePath childPath) nothrow
   {
     GtkTreePath* _cretval;
     _cretval = gtk_tree_model_sort_convert_child_path_to_path(cast(GtkTreeModelSort*)this._cPtr, childPath ? cast(GtkTreePath*)childPath._cPtr(No.Dup) : null);
@@ -233,7 +233,7 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
         childIter = An uninitialized #GtkTreeIter
         sortedIter = A valid #GtkTreeIter pointing to a row on tree_model_sort.
   */
-  void convertIterToChildIter(out gtk.tree_iter.TreeIter childIter, gtk.tree_iter.TreeIter sortedIter)
+  void convertIterToChildIter(out gtk.tree_iter.TreeIter childIter, gtk.tree_iter.TreeIter sortedIter) nothrow
   {
     GtkTreeIter _childIter;
     gtk_tree_model_sort_convert_iter_to_child_iter(cast(GtkTreeModelSort*)this._cPtr, &_childIter, sortedIter ? cast(GtkTreeIter*)sortedIter._cPtr(No.Dup) : null);
@@ -251,7 +251,7 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
         sortedPath = A #GtkTreePath to convert
       Returns: A newly allocated #GtkTreePath, or null
   */
-  gtk.tree_path.TreePath convertPathToChildPath(gtk.tree_path.TreePath sortedPath)
+  gtk.tree_path.TreePath convertPathToChildPath(gtk.tree_path.TreePath sortedPath) nothrow
   {
     GtkTreePath* _cretval;
     _cretval = gtk_tree_model_sort_convert_path_to_child_path(cast(GtkTreeModelSort*)this._cPtr, sortedPath ? cast(GtkTreePath*)sortedPath._cPtr(No.Dup) : null);
@@ -263,7 +263,7 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
       Returns the model the #GtkTreeModelSort is sorting.
       Returns: the "child model" being sorted
   */
-  gtk.tree_model.TreeModel getModel()
+  gtk.tree_model.TreeModel getModel() nothrow
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_tree_model_sort_get_model(cast(GtkTreeModelSort*)this._cPtr);
@@ -281,7 +281,7 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
         iter = A #GtkTreeIter.
       Returns: true if the iter is valid, false if the iter is invalid.
   */
-  bool iterIsValid(gtk.tree_iter.TreeIter iter)
+  bool iterIsValid(gtk.tree_iter.TreeIter iter) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_model_sort_iter_is_valid(cast(GtkTreeModelSort*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
@@ -294,7 +294,7 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
       to be in the same order as the child model only if the #GtkTreeModelSort
       is in “unsorted” state.
   */
-  void resetDefaultSortFunc()
+  void resetDefaultSortFunc() nothrow
   {
     gtk_tree_model_sort_reset_default_sort_func(cast(GtkTreeModelSort*)this._cPtr);
   }
@@ -309,7 +309,7 @@ class TreeModelSortGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   mixin TreeSortableGidBuilderT!();
 
   /** */
-  T model(gtk.tree_model.TreeModel propval)
+  T model(gtk.tree_model.TreeModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -322,7 +322,7 @@ final class TreeModelSortGidBuilder : TreeModelSortGidBuilderImpl!TreeModelSortG
       Create object from builder.
       Returns: New object
   */
-  TreeModelSort build()
+  TreeModelSort build() nothrow
   {
     return new TreeModelSort(cast(void*)createGObject(TreeModelSort._getGType), No.Take);
   }

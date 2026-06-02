@@ -15,7 +15,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libpangocairo-1.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // Font
   GType function() c_pango_cairo_font_get_type; ///

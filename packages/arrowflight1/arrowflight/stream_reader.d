@@ -14,26 +14,26 @@ class StreamReader : arrowflight.record_batch_reader.RecordBatchReader
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_stream_reader_get_type != &gidSymbolNotFound ? gaflight_stream_reader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StreamReader self()
+  override StreamReader self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class StreamReader : arrowflight.record_batch_reader.RecordBatchReader
       Get builder for [arrowflight.stream_reader.StreamReader]
       Returns: New builder object
   */
-  static StreamReaderGidBuilder builder()
+  static StreamReaderGidBuilder builder() nothrow
   {
     return new StreamReaderGidBuilder;
   }
@@ -60,7 +60,7 @@ final class StreamReaderGidBuilder : StreamReaderGidBuilderImpl!StreamReaderGidB
       Create object from builder.
       Returns: New object
   */
-  StreamReader build()
+  StreamReader build() nothrow
   {
     return new StreamReader(cast(void*)createGObject(StreamReader._getGType), No.Take);
   }

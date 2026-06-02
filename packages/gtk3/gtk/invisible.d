@@ -26,26 +26,26 @@ class Invisible : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_invisible_get_type != &gidSymbolNotFound ? gtk_invisible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Invisible self()
+  override Invisible self() nothrow
   {
     return this;
   }
@@ -54,19 +54,19 @@ class Invisible : gtk.widget.Widget
       Get builder for [gtk.invisible.Invisible]
       Returns: New builder object
   */
-  static InvisibleGidBuilder builder()
+  static InvisibleGidBuilder builder() nothrow
   {
     return new InvisibleGidBuilder;
   }
 
   /** */
-  @property gdk.screen.Screen screen()
+  @property gdk.screen.Screen screen() nothrow
   {
     return getScreen();
   }
 
   /** */
-  @property void screen(gdk.screen.Screen propval)
+  @property void screen(gdk.screen.Screen propval) nothrow
   {
     setScreen(propval);
   }
@@ -75,7 +75,7 @@ class Invisible : gtk.widget.Widget
       Creates a new #GtkInvisible.
       Returns: a new #GtkInvisible.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_invisible_new();
@@ -90,7 +90,7 @@ class Invisible : gtk.widget.Widget
               the new #GtkInvisible will be created.
       Returns: a newly created #GtkInvisible object
   */
-  static gtk.invisible.Invisible newForScreen(gdk.screen.Screen screen)
+  static gtk.invisible.Invisible newForScreen(gdk.screen.Screen screen) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_invisible_new_for_screen(screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
@@ -102,7 +102,7 @@ class Invisible : gtk.widget.Widget
       Returns the #GdkScreen object associated with invisible
       Returns: the associated #GdkScreen.
   */
-  override gdk.screen.Screen getScreen()
+  override gdk.screen.Screen getScreen() nothrow
   {
     GdkScreen* _cretval;
     _cretval = gtk_invisible_get_screen(cast(GtkInvisible*)this._cPtr);
@@ -116,7 +116,7 @@ class Invisible : gtk.widget.Widget
       Params:
         screen = a #GdkScreen.
   */
-  void setScreen(gdk.screen.Screen screen)
+  void setScreen(gdk.screen.Screen screen) nothrow
   {
     gtk_invisible_set_screen(cast(GtkInvisible*)this._cPtr, screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
   }
@@ -128,7 +128,7 @@ class InvisibleGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 
 
   /** */
-  T screen(gdk.screen.Screen propval)
+  T screen(gdk.screen.Screen propval) nothrow
   {
     return setProperty("screen", propval);
   }
@@ -141,7 +141,7 @@ final class InvisibleGidBuilder : InvisibleGidBuilderImpl!InvisibleGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Invisible build()
+  Invisible build() nothrow
   {
     return new Invisible(cast(void*)createGObject(Invisible._getGType), No.Take);
   }

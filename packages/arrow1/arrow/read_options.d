@@ -14,26 +14,26 @@ class ReadOptions : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_read_options_get_type != &gidSymbolNotFound ? garrow_read_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ReadOptions self()
+  override ReadOptions self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class ReadOptions : gobject.object.ObjectWrap
       Get builder for [arrow.read_options.ReadOptions]
       Returns: New builder object
   */
-  static ReadOptionsGidBuilder builder()
+  static ReadOptionsGidBuilder builder() nothrow
   {
     return new ReadOptionsGidBuilder;
   }
@@ -51,7 +51,7 @@ class ReadOptions : gobject.object.ObjectWrap
       Get `maxRecursionDepth` property.
       Returns: The maximum permitted schema nesting depth.
   */
-  @property int maxRecursionDepth()
+  @property int maxRecursionDepth() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("max-recursion-depth");
   }
@@ -61,7 +61,7 @@ class ReadOptions : gobject.object.ObjectWrap
       Params:
         propval = The maximum permitted schema nesting depth.
   */
-  @property void maxRecursionDepth(int propval)
+  @property void maxRecursionDepth(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("max-recursion-depth", propval);
   }
@@ -70,7 +70,7 @@ class ReadOptions : gobject.object.ObjectWrap
       Get `useThreads` property.
       Returns: Whether to use the global CPU thread pool.
   */
-  @property bool useThreads()
+  @property bool useThreads() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("use-threads");
   }
@@ -80,13 +80,13 @@ class ReadOptions : gobject.object.ObjectWrap
       Params:
         propval = Whether to use the global CPU thread pool.
   */
-  @property void useThreads(bool propval)
+  @property void useThreads(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("use-threads", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowReadOptions* _cretval;
     _cretval = garrow_read_options_new();
@@ -94,7 +94,7 @@ class ReadOptions : gobject.object.ObjectWrap
   }
 
   /** */
-  int[] getIncludedFields()
+  int[] getIncludedFields() nothrow
   {
     int* _cretval;
     size_t _cretlength;
@@ -110,7 +110,7 @@ class ReadOptions : gobject.object.ObjectWrap
   }
 
   /** */
-  void setIncludedFields(int[] fields)
+  void setIncludedFields(int[] fields) nothrow
   {
     size_t _nFields;
     if (fields)
@@ -131,7 +131,7 @@ class ReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The maximum permitted schema nesting depth.
       Returns: Builder instance for fluent chaining
   */
-  T maxRecursionDepth(int propval)
+  T maxRecursionDepth(int propval) nothrow
   {
     return setProperty("max-recursion-depth", propval);
   }
@@ -142,7 +142,7 @@ class ReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether to use the global CPU thread pool.
       Returns: Builder instance for fluent chaining
   */
-  T useThreads(bool propval)
+  T useThreads(bool propval) nothrow
   {
     return setProperty("use-threads", propval);
   }
@@ -155,7 +155,7 @@ final class ReadOptionsGidBuilder : ReadOptionsGidBuilderImpl!ReadOptionsGidBuil
       Create object from builder.
       Returns: New object
   */
-  ReadOptions build()
+  ReadOptions build() nothrow
   {
     return new ReadOptions(cast(void*)createGObject(ReadOptions._getGType), Yes.Take);
   }

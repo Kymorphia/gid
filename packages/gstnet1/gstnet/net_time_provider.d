@@ -28,26 +28,26 @@ class NetTimeProvider : gst.object.ObjectWrap, gio.initable.Initable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_net_time_provider_get_type != &gidSymbolNotFound ? gst_net_time_provider_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NetTimeProvider self()
+  override NetTimeProvider self() nothrow
   {
     return this;
   }
@@ -56,49 +56,49 @@ class NetTimeProvider : gst.object.ObjectWrap, gio.initable.Initable
       Get builder for [gstnet.net_time_provider.NetTimeProvider]
       Returns: New builder object
   */
-  static NetTimeProviderGidBuilder builder()
+  static NetTimeProviderGidBuilder builder() nothrow
   {
     return new NetTimeProviderGidBuilder;
   }
 
   /** */
-  @property bool active()
+  @property bool active() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("active");
   }
 
   /** */
-  @property void active(bool propval)
+  @property void active(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("active", propval);
   }
 
   /** */
-  @property string address()
+  @property string address() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("address");
   }
 
   /** */
-  @property gst.clock.Clock clock()
+  @property gst.clock.Clock clock() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gst.clock.Clock)("clock");
   }
 
   /** */
-  @property int port()
+  @property int port() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("port");
   }
 
   /** */
-  @property int qosDscp()
+  @property int qosDscp() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("qos-dscp");
   }
 
   /** */
-  @property void qosDscp(int propval)
+  @property void qosDscp(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("qos-dscp", propval);
   }
@@ -115,7 +115,7 @@ class NetTimeProvider : gst.object.ObjectWrap, gio.initable.Initable
         port = a port to bind on, or 0 to let the kernel choose
       Returns: the new #GstNetTimeProvider, or NULL on error
   */
-  this(gst.clock.Clock clock, string address, int port)
+  this(gst.clock.Clock clock, string address, int port) nothrow
   {
     GstNetTimeProvider* _cretval;
     const(char)* _address = address.toCString(No.Alloc);
@@ -131,31 +131,31 @@ class NetTimeProviderGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T, 
   mixin InitableGidBuilderT!();
 
   /** */
-  T active(bool propval)
+  T active(bool propval) nothrow
   {
     return setProperty("active", propval);
   }
 
   /** */
-  T address(string propval)
+  T address(string propval) nothrow
   {
     return setProperty("address", propval);
   }
 
   /** */
-  T clock(gst.clock.Clock propval)
+  T clock(gst.clock.Clock propval) nothrow
   {
     return setProperty("clock", propval);
   }
 
   /** */
-  T port(int propval)
+  T port(int propval) nothrow
   {
     return setProperty("port", propval);
   }
 
   /** */
-  T qosDscp(int propval)
+  T qosDscp(int propval) nothrow
   {
     return setProperty("qos-dscp", propval);
   }
@@ -168,7 +168,7 @@ final class NetTimeProviderGidBuilder : NetTimeProviderGidBuilderImpl!NetTimePro
       Create object from builder.
       Returns: New object
   */
-  NetTimeProvider build()
+  NetTimeProvider build() nothrow
   {
     return new NetTimeProvider(cast(void*)createGObject(NetTimeProvider._getGType), Yes.Take);
   }

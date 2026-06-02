@@ -22,26 +22,26 @@ class AnyFilter : gtk.multi_filter.MultiFilter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_any_filter_get_type != &gidSymbolNotFound ? gtk_any_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AnyFilter self()
+  override AnyFilter self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class AnyFilter : gtk.multi_filter.MultiFilter
       Get builder for [gtk.any_filter.AnyFilter]
       Returns: New builder object
   */
-  static AnyFilterGidBuilder builder()
+  static AnyFilterGidBuilder builder() nothrow
   {
     return new AnyFilterGidBuilder;
   }
@@ -65,7 +65,7 @@ class AnyFilter : gtk.multi_filter.MultiFilter
       has been added to it, the filter matches no item.
       Returns: a new [gtk.any_filter.AnyFilter]
   */
-  this()
+  this() nothrow
   {
     GtkAnyFilter* _cretval;
     _cretval = gtk_any_filter_new();
@@ -86,7 +86,7 @@ final class AnyFilterGidBuilder : AnyFilterGidBuilderImpl!AnyFilterGidBuilder
       Create object from builder.
       Returns: New object
   */
-  AnyFilter build()
+  AnyFilter build() nothrow
   {
     return new AnyFilter(cast(void*)createGObject(AnyFilter._getGType), Yes.Take);
   }

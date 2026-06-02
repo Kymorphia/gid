@@ -23,26 +23,26 @@ class BindingGroup : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_binding_group_get_type != &gidSymbolNotFound ? g_binding_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BindingGroup self()
+  override BindingGroup self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class BindingGroup : gobject.object.ObjectWrap
       Get builder for [gobject.binding_group.BindingGroup]
       Returns: New builder object
   */
-  static BindingGroupGidBuilder builder()
+  static BindingGroupGidBuilder builder() nothrow
   {
     return new BindingGroupGidBuilder;
   }
@@ -60,7 +60,7 @@ class BindingGroup : gobject.object.ObjectWrap
       Get `source` property.
       Returns: The source object used for binding properties.
   */
-  @property gobject.object.ObjectWrap source()
+  @property gobject.object.ObjectWrap source() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.object.ObjectWrap)("source");
   }
@@ -70,7 +70,7 @@ class BindingGroup : gobject.object.ObjectWrap
       Params:
         propval = The source object used for binding properties.
   */
-  @property void source(gobject.object.ObjectWrap propval)
+  @property void source(gobject.object.ObjectWrap propval) nothrow
   {
     setSource(propval);
   }
@@ -79,7 +79,7 @@ class BindingGroup : gobject.object.ObjectWrap
       Creates a new #GBindingGroup.
       Returns: a new #GBindingGroup
   */
-  this()
+  this() nothrow
   {
     GBindingGroup* _cretval;
     _cretval = g_binding_group_new();
@@ -100,7 +100,7 @@ class BindingGroup : gobject.object.ObjectWrap
         targetProperty = the property on target to bind
         flags = the flags used to create the #GBinding
   */
-  void bind(string sourceProperty, gobject.object.ObjectWrap target, string targetProperty, gobject.types.BindingFlags flags)
+  void bind(string sourceProperty, gobject.object.ObjectWrap target, string targetProperty, gobject.types.BindingFlags flags) nothrow
   {
     const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
     const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
@@ -131,7 +131,7 @@ class BindingGroup : gobject.object.ObjectWrap
               transformation function from the target to the source object,
               or null to use the default
   */
-  void bindFull(string sourceProperty, gobject.object.ObjectWrap target, string targetProperty, gobject.types.BindingFlags flags, gobject.closure.Closure transformTo = null, gobject.closure.Closure transformFrom = null)
+  void bindFull(string sourceProperty, gobject.object.ObjectWrap target, string targetProperty, gobject.types.BindingFlags flags, gobject.closure.Closure transformTo = null, gobject.closure.Closure transformFrom = null) nothrow
   {
     const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
     const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
@@ -142,7 +142,7 @@ class BindingGroup : gobject.object.ObjectWrap
       Gets the source object used for binding properties.
       Returns: a #GObject or null.
   */
-  gobject.object.ObjectWrap dupSource()
+  gobject.object.ObjectWrap dupSource() nothrow
   {
     GObject* _cretval;
     _cretval = g_binding_group_dup_source(cast(GBindingGroup*)this._cPtr);
@@ -161,7 +161,7 @@ class BindingGroup : gobject.object.ObjectWrap
         source = the source #GObject,
             or null to clear it
   */
-  void setSource(gobject.object.ObjectWrap source = null)
+  void setSource(gobject.object.ObjectWrap source = null) nothrow
   {
     g_binding_group_set_source(cast(GBindingGroup*)this._cPtr, source ? cast(GObject*)source._cPtr(No.Dup) : null);
   }
@@ -177,7 +177,7 @@ class BindingGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The source object used for binding properties.
       Returns: Builder instance for fluent chaining
   */
-  T source(gobject.object.ObjectWrap propval)
+  T source(gobject.object.ObjectWrap propval) nothrow
   {
     return setProperty("source", propval);
   }
@@ -190,7 +190,7 @@ final class BindingGroupGidBuilder : BindingGroupGidBuilderImpl!BindingGroupGidB
       Create object from builder.
       Returns: New object
   */
-  BindingGroup build()
+  BindingGroup build() nothrow
   {
     return new BindingGroup(cast(void*)createGObject(BindingGroup._getGType), Yes.Take);
   }

@@ -19,7 +19,7 @@ struct RelationType
       Returns: the #AtkRelationType enumerated type corresponding to the specified name,
                  or #ATK_RELATION_NULL if no matching relation type is found.
   */
-  static atk.types.RelationType forName(string name)
+  static atk.types.RelationType forName(string name) nothrow
   {
     AtkRelationType _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -35,7 +35,7 @@ struct RelationType
         type = The #AtkRelationType whose name is required
       Returns: the string describing the AtkRelationType
   */
-  static string getName(atk.types.RelationType type)
+  static string getName(atk.types.RelationType type) nothrow
   {
     const(char)* _cretval;
     _cretval = atk_relation_type_get_name(type);
@@ -50,7 +50,7 @@ struct RelationType
         name = a name string
       Returns: an #AtkRelationType associated with name
   */
-  static atk.types.RelationType register(string name)
+  static atk.types.RelationType register(string name) nothrow
   {
     AtkRelationType _cretval;
     const(char)* _name = name.toCString(No.Alloc);

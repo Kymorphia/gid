@@ -17,32 +17,32 @@ class FileList : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_file_list_get_type != &gidSymbolNotFound ? gdk_file_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileList self()
+  override FileList self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class FileList : gobject.boxed.Boxed
         files = the files to add to the list
       Returns: the newly create files list
   */
-  static gdk.file_list.FileList newFromArray(gio.file.File[] files)
+  static gdk.file_list.FileList newFromArray(gio.file.File[] files) nothrow
   {
     GdkFileList* _cretval;
     size_t _nFiles;
@@ -83,7 +83,7 @@ class FileList : gobject.boxed.Boxed
         files = a list of files
       Returns: the newly created files list
   */
-  static gdk.file_list.FileList newFromList(gio.file.File[] files)
+  static gdk.file_list.FileList newFromList(gio.file.File[] files) nothrow
   {
     GdkFileList* _cretval;
     auto _files = gSListFromD!(gio.file.File)(files);
@@ -99,7 +99,7 @@ class FileList : gobject.boxed.Boxed
       This function is meant for language bindings.
       Returns: the files inside the list
   */
-  gio.file.File[] getFiles()
+  gio.file.File[] getFiles() nothrow
   {
     GSList* _cretval;
     _cretval = gdk_file_list_get_files(cast(GdkFileList*)this._cPtr);

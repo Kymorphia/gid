@@ -92,26 +92,26 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_combo_box_get_type != &gidSymbolNotFound ? gtk_combo_box_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ComboBox self()
+  override ComboBox self() nothrow
   {
     return this;
   }
@@ -120,7 +120,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Get builder for [gtk.combo_box.ComboBox]
       Returns: New builder object
   */
-  static ComboBoxGidBuilder builder()
+  static ComboBoxGidBuilder builder() nothrow
   {
     return new ComboBoxGidBuilder;
   }
@@ -134,7 +134,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
         `gtk_tree_path_get_indices (path)[0]`, where `path` is the
         [gtk.tree_path.TreePath] of the active item.
   */
-  @property int active()
+  @property int active() nothrow
   {
     return getActive();
   }
@@ -149,7 +149,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
           `gtk_tree_path_get_indices (path)[0]`, where `path` is the
           [gtk.tree_path.TreePath] of the active item.
   */
-  @property void active(int propval)
+  @property void active(int propval) nothrow
   {
     setActive(propval);
   }
@@ -158,7 +158,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Get `activeId` property.
       Returns: The value of the ID column of the active row.
   */
-  @property string activeId()
+  @property string activeId() nothrow
   {
     return getActiveId();
   }
@@ -168,7 +168,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Params:
         propval = The value of the ID column of the active row.
   */
-  @property void activeId(string propval)
+  @property void activeId(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("active-id", propval);
   }
@@ -178,7 +178,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Returns: Whether the dropdown button is sensitive when
         the model is empty.
   */
-  @property gtk.types.SensitivityType buttonSensitivity()
+  @property gtk.types.SensitivityType buttonSensitivity() nothrow
   {
     return getButtonSensitivity();
   }
@@ -189,7 +189,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
         propval = Whether the dropdown button is sensitive when
           the model is empty.
   */
-  @property void buttonSensitivity(gtk.types.SensitivityType propval)
+  @property void buttonSensitivity(gtk.types.SensitivityType propval) nothrow
   {
     setButtonSensitivity(propval);
   }
@@ -198,7 +198,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Get `child` property.
       Returns: The child widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -208,7 +208,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Params:
         propval = The child widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -220,7 +220,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
         This is property only relevant if the combo was created with
         [gtk.combo_box.ComboBox.hasEntry] is true.
   */
-  @property int entryTextColumn()
+  @property int entryTextColumn() nothrow
   {
     return getEntryTextColumn();
   }
@@ -233,7 +233,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
           This is property only relevant if the combo was created with
           [gtk.combo_box.ComboBox.hasEntry] is true.
   */
-  @property void entryTextColumn(int propval)
+  @property void entryTextColumn(int propval) nothrow
   {
     setEntryTextColumn(propval);
   }
@@ -242,7 +242,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Get `hasEntry` property.
       Returns: Whether the combo box has an entry.
   */
-  @property bool hasEntry()
+  @property bool hasEntry() nothrow
   {
     return getHasEntry();
   }
@@ -251,7 +251,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Get `hasFrame` property.
       Returns: The `has-frame` property controls whether a frame is drawn around the entry.
   */
-  @property bool hasFrame()
+  @property bool hasFrame() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("has-frame");
   }
@@ -261,7 +261,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Params:
         propval = The `has-frame` property controls whether a frame is drawn around the entry.
   */
-  @property void hasFrame(bool propval)
+  @property void hasFrame(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("has-frame", propval);
   }
@@ -271,7 +271,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Returns: The model column that provides string IDs for the values
         in the model, if != -1.
   */
-  @property int idColumn()
+  @property int idColumn() nothrow
   {
     return getIdColumn();
   }
@@ -282,7 +282,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
         propval = The model column that provides string IDs for the values
           in the model, if != -1.
   */
-  @property void idColumn(int propval)
+  @property void idColumn(int propval) nothrow
   {
     setIdColumn(propval);
   }
@@ -291,7 +291,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Get `model` property.
       Returns: The model from which the combo box takes its values.
   */
-  @property gtk.tree_model.TreeModel model()
+  @property gtk.tree_model.TreeModel model() nothrow
   {
     return getModel();
   }
@@ -301,7 +301,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Params:
         propval = The model from which the combo box takes its values.
   */
-  @property void model(gtk.tree_model.TreeModel propval)
+  @property void model(gtk.tree_model.TreeModel propval) nothrow
   {
     setModel(propval);
   }
@@ -311,7 +311,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Returns: Whether the popup's width should be a fixed width matching the
         allocated width of the combo box.
   */
-  @property bool popupFixedWidth()
+  @property bool popupFixedWidth() nothrow
   {
     return getPopupFixedWidth();
   }
@@ -322,7 +322,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
         propval = Whether the popup's width should be a fixed width matching the
           allocated width of the combo box.
   */
-  @property void popupFixedWidth(bool propval)
+  @property void popupFixedWidth(bool propval) nothrow
   {
     setPopupFixedWidth(propval);
   }
@@ -334,7 +334,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
         Note that this property is mainly useful, because
         it allows you to connect to notify::popup-shown.
   */
-  @property bool popupShown()
+  @property bool popupShown() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("popup-shown");
   }
@@ -348,7 +348,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_new();
@@ -365,7 +365,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  static gtk.combo_box.ComboBox newWithEntry()
+  static gtk.combo_box.ComboBox newWithEntry() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_new_with_entry();
@@ -382,7 +382,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  static gtk.combo_box.ComboBox newWithModel(gtk.tree_model.TreeModel model)
+  static gtk.combo_box.ComboBox newWithModel(gtk.tree_model.TreeModel model) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_new_with_model(model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
@@ -401,7 +401,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  static gtk.combo_box.ComboBox newWithModelAndEntry(gtk.tree_model.TreeModel model)
+  static gtk.combo_box.ComboBox newWithModelAndEntry(gtk.tree_model.TreeModel model) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_new_with_model_and_entry(model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
@@ -421,7 +421,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  int getActive()
+  int getActive() nothrow
   {
     int _retval;
     _retval = gtk_combo_box_get_active(cast(GtkComboBox*)this._cPtr);
@@ -446,7 +446,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  string getActiveId()
+  string getActiveId() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_combo_box_get_active_id(cast(GtkComboBox*)this._cPtr);
@@ -465,7 +465,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  bool getActiveIter(out gtk.tree_iter.TreeIter iter)
+  bool getActiveIter(out gtk.tree_iter.TreeIter iter) nothrow
   {
     bool _retval;
     GtkTreeIter _iter;
@@ -485,7 +485,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  gtk.types.SensitivityType getButtonSensitivity()
+  gtk.types.SensitivityType getButtonSensitivity() nothrow
   {
     GtkSensitivityType _cretval;
     _cretval = gtk_combo_box_get_button_sensitivity(cast(GtkComboBox*)this._cPtr);
@@ -499,7 +499,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_get_child(cast(GtkComboBox*)this._cPtr);
@@ -514,7 +514,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  int getEntryTextColumn()
+  int getEntryTextColumn() nothrow
   {
     int _retval;
     _retval = gtk_combo_box_get_entry_text_column(cast(GtkComboBox*)this._cPtr);
@@ -527,7 +527,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  bool getHasEntry()
+  bool getHasEntry() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_combo_box_get_has_entry(cast(GtkComboBox*)this._cPtr);
@@ -541,7 +541,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  int getIdColumn()
+  int getIdColumn() nothrow
   {
     int _retval;
     _retval = gtk_combo_box_get_id_column(cast(GtkComboBox*)this._cPtr);
@@ -555,7 +555,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  gtk.tree_model.TreeModel getModel()
+  gtk.tree_model.TreeModel getModel() nothrow
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_combo_box_get_model(cast(GtkComboBox*)this._cPtr);
@@ -569,7 +569,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  bool getPopupFixedWidth()
+  bool getPopupFixedWidth() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_combo_box_get_popup_fixed_width(cast(GtkComboBox*)this._cPtr);
@@ -584,7 +584,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  void popdown()
+  void popdown() nothrow
   {
     gtk_combo_box_popdown(cast(GtkComboBox*)this._cPtr);
   }
@@ -599,7 +599,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  void popup()
+  void popup() nothrow
   {
     gtk_combo_box_popup(cast(GtkComboBox*)this._cPtr);
   }
@@ -617,7 +617,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  void popupForDevice(gdk.device.Device device)
+  void popupForDevice(gdk.device.Device device) nothrow
   {
     gtk_combo_box_popup_for_device(cast(GtkComboBox*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
   }
@@ -631,7 +631,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  void setActive(int index)
+  void setActive(int index) nothrow
   {
     gtk_combo_box_set_active(cast(GtkComboBox*)this._cPtr, index);
   }
@@ -655,7 +655,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  bool setActiveId(string activeId = null)
+  bool setActiveId(string activeId = null) nothrow
   {
     bool _retval;
     const(char)* _activeId = activeId.toCString(No.Alloc);
@@ -673,7 +673,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  void setActiveIter(gtk.tree_iter.TreeIter iter = null)
+  void setActiveIter(gtk.tree_iter.TreeIter iter = null) nothrow
   {
     gtk_combo_box_set_active_iter(cast(GtkComboBox*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
   }
@@ -687,7 +687,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  void setButtonSensitivity(gtk.types.SensitivityType sensitivity)
+  void setButtonSensitivity(gtk.types.SensitivityType sensitivity) nothrow
   {
     gtk_combo_box_set_button_sensitivity(cast(GtkComboBox*)this._cPtr, sensitivity);
   }
@@ -700,7 +700,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     gtk_combo_box_set_child(cast(GtkComboBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -724,7 +724,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  void setEntryTextColumn(int textColumn)
+  void setEntryTextColumn(int textColumn) nothrow
   {
     gtk_combo_box_set_entry_text_column(cast(GtkComboBox*)this._cPtr, textColumn);
   }
@@ -741,7 +741,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  void setIdColumn(int idColumn)
+  void setIdColumn(int idColumn) nothrow
   {
     gtk_combo_box_set_id_column(cast(GtkComboBox*)this._cPtr, idColumn);
   }
@@ -761,7 +761,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  void setModel(gtk.tree_model.TreeModel model = null)
+  void setModel(gtk.tree_model.TreeModel model = null) nothrow
   {
     gtk_combo_box_set_model(cast(GtkComboBox*)this._cPtr, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
@@ -777,7 +777,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  void setPopupFixedWidth(bool fixed)
+  void setPopupFixedWidth(bool fixed) nothrow
   {
     gtk_combo_box_set_popup_fixed_width(cast(GtkComboBox*)this._cPtr, fixed);
   }
@@ -794,14 +794,21 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Deprecated: Use [gtk.drop_down.DropDown]
   */
-  void setRowSeparatorFunc(gtk.types.TreeViewRowSeparatorFunc func = null)
+  void setRowSeparatorFunc(gtk.types.TreeViewRowSeparatorFunc func = null) nothrow
   {
-    extern(C) gboolean _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data)
+    extern(C) gboolean _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.TreeViewRowSeparatorFunc*)data;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeViewRowSeparatorFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -830,13 +837,13 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.combo_box.ComboBox)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -845,7 +852,14 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.combo_box.ComboBox.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -871,13 +885,13 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.combo_box.ComboBox)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -886,7 +900,14 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.combo_box.ComboBox.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -943,18 +964,19 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFormatEntryText(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFormatEntryText(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == string)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.combo_box.ComboBox)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      string _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -962,7 +984,14 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.combo_box.ComboBox.formatEntryText");
+      }
 
       setVal!(string)(_returnValue, _retval);
     }
@@ -990,14 +1019,14 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveActive(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveActive(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ScrollType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.combo_box.ComboBox)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1009,7 +1038,14 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.combo_box.ComboBox.moveActive");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1036,22 +1072,30 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPopdown(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPopdown(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.combo_box.ComboBox)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.combo_box.ComboBox.popdown");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1079,13 +1123,13 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPopup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPopup(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.combo_box.ComboBox)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1094,7 +1138,14 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.combo_box.ComboBox.popup");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1120,7 +1171,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_ed
           [gtk.tree_path.TreePath] of the active item.
       Returns: Builder instance for fluent chaining
   */
-  T active(int propval)
+  T active(int propval) nothrow
   {
     return setProperty("active", propval);
   }
@@ -1131,7 +1182,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_ed
         propval = The value of the ID column of the active row.
       Returns: Builder instance for fluent chaining
   */
-  T activeId(string propval)
+  T activeId(string propval) nothrow
   {
     return setProperty("active-id", propval);
   }
@@ -1143,7 +1194,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_ed
           the model is empty.
       Returns: Builder instance for fluent chaining
   */
-  T buttonSensitivity(gtk.types.SensitivityType propval)
+  T buttonSensitivity(gtk.types.SensitivityType propval) nothrow
   {
     return setProperty("button-sensitivity", propval);
   }
@@ -1154,7 +1205,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_ed
         propval = The child widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -1168,7 +1219,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_ed
           [gtk.combo_box.ComboBox.hasEntry] is true.
       Returns: Builder instance for fluent chaining
   */
-  T entryTextColumn(int propval)
+  T entryTextColumn(int propval) nothrow
   {
     return setProperty("entry-text-column", propval);
   }
@@ -1179,7 +1230,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_ed
         propval = Whether the combo box has an entry.
       Returns: Builder instance for fluent chaining
   */
-  T hasEntry(bool propval)
+  T hasEntry(bool propval) nothrow
   {
     return setProperty("has-entry", propval);
   }
@@ -1190,7 +1241,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_ed
         propval = The `has-frame` property controls whether a frame is drawn around the entry.
       Returns: Builder instance for fluent chaining
   */
-  T hasFrame(bool propval)
+  T hasFrame(bool propval) nothrow
   {
     return setProperty("has-frame", propval);
   }
@@ -1202,7 +1253,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_ed
           in the model, if != -1.
       Returns: Builder instance for fluent chaining
   */
-  T idColumn(int propval)
+  T idColumn(int propval) nothrow
   {
     return setProperty("id-column", propval);
   }
@@ -1213,7 +1264,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_ed
         propval = The model from which the combo box takes its values.
       Returns: Builder instance for fluent chaining
   */
-  T model(gtk.tree_model.TreeModel propval)
+  T model(gtk.tree_model.TreeModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -1225,7 +1276,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_ed
           allocated width of the combo box.
       Returns: Builder instance for fluent chaining
   */
-  T popupFixedWidth(bool propval)
+  T popupFixedWidth(bool propval) nothrow
   {
     return setProperty("popup-fixed-width", propval);
   }
@@ -1238,7 +1289,7 @@ final class ComboBoxGidBuilder : ComboBoxGidBuilderImpl!ComboBoxGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ComboBox build()
+  ComboBox build() nothrow
   {
     return new ComboBox(cast(void*)createGObject(ComboBox._getGType), No.Take);
   }

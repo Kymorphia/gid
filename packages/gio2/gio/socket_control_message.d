@@ -35,26 +35,26 @@ class SocketControlMessage : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_socket_control_message_get_type != &gidSymbolNotFound ? g_socket_control_message_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SocketControlMessage self()
+  override SocketControlMessage self() nothrow
   {
     return this;
   }
@@ -63,7 +63,7 @@ class SocketControlMessage : gobject.object.ObjectWrap
       Get builder for [gio.socket_control_message.SocketControlMessage]
       Returns: New builder object
   */
-  static SocketControlMessageGidBuilder builder()
+  static SocketControlMessageGidBuilder builder() nothrow
   {
     return new SocketControlMessageGidBuilder;
   }
@@ -83,7 +83,7 @@ class SocketControlMessage : gobject.object.ObjectWrap
         data = pointer to the message data
       Returns: the deserialized message or null
   */
-  static gio.socket_control_message.SocketControlMessage deserialize(int level, int type, ubyte[] data)
+  static gio.socket_control_message.SocketControlMessage deserialize(int level, int type, ubyte[] data) nothrow
   {
     GSocketControlMessage* _cretval;
     size_t _size;
@@ -101,7 +101,7 @@ class SocketControlMessage : gobject.object.ObjectWrap
       This is often SOL_SOCKET.
       Returns: an integer describing the level
   */
-  int getLevel()
+  int getLevel() nothrow
   {
     int _retval;
     _retval = g_socket_control_message_get_level(cast(GSocketControlMessage*)this._cPtr);
@@ -113,7 +113,7 @@ class SocketControlMessage : gobject.object.ObjectWrap
       For instance, for UNIX fd passing this would be SCM_RIGHTS.
       Returns: an integer describing the type of control message
   */
-  int getMsgType()
+  int getMsgType() nothrow
   {
     int _retval;
     _retval = g_socket_control_message_get_msg_type(cast(GSocketControlMessage*)this._cPtr);
@@ -125,7 +125,7 @@ class SocketControlMessage : gobject.object.ObjectWrap
       headers or alignment.
       Returns: The number of bytes required.
   */
-  size_t getSize()
+  size_t getSize() nothrow
   {
     size_t _retval;
     _retval = g_socket_control_message_get_size(cast(GSocketControlMessage*)this._cPtr);
@@ -143,7 +143,7 @@ class SocketControlMessage : gobject.object.ObjectWrap
       Params:
         data = A buffer to write data to
   */
-  void serialize(void* data)
+  void serialize(void* data) nothrow
   {
     g_socket_control_message_serialize(cast(GSocketControlMessage*)this._cPtr, data);
   }
@@ -161,7 +161,7 @@ final class SocketControlMessageGidBuilder : SocketControlMessageGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  SocketControlMessage build()
+  SocketControlMessage build() nothrow
   {
     return new SocketControlMessage(cast(void*)createGObject(SocketControlMessage._getGType), No.Take);
   }

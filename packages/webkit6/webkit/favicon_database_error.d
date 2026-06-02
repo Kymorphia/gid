@@ -17,7 +17,7 @@ struct FaviconDatabaseError
       Gets the quark for the domain of favicon database errors.
       Returns: favicon database error domain.
   */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = webkit_favicon_database_error_quark();
@@ -27,12 +27,12 @@ struct FaviconDatabaseError
 
 class FaviconDatabaseException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(webkit.favicon_database_error.FaviconDatabaseError.quark, cast(int)code, msg);
   }

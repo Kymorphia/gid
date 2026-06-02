@@ -18,26 +18,26 @@ class Snapshot : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_snapshot_get_type != &gidSymbolNotFound ? gdk_snapshot_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Snapshot self()
+  override Snapshot self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class Snapshot : gobject.object.ObjectWrap
       Get builder for [gdk.snapshot.Snapshot]
       Returns: New builder object
   */
-  static SnapshotGidBuilder builder()
+  static SnapshotGidBuilder builder() nothrow
   {
     return new SnapshotGidBuilder;
   }
@@ -64,7 +64,7 @@ final class SnapshotGidBuilder : SnapshotGidBuilderImpl!SnapshotGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Snapshot build()
+  Snapshot build() nothrow
   {
     return new Snapshot(cast(void*)createGObject(Snapshot._getGType), No.Take);
   }

@@ -21,26 +21,26 @@ class ServerOperation : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_server_operation_get_type != &gidSymbolNotFound ? gda_server_operation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ServerOperation self()
+  override ServerOperation self() nothrow
   {
     return this;
   }
@@ -49,25 +49,25 @@ class ServerOperation : gobject.object.ObjectWrap
       Get builder for [gda.server_operation.ServerOperation]
       Returns: New builder object
   */
-  static ServerOperationGidBuilder builder()
+  static ServerOperationGidBuilder builder() nothrow
   {
     return new ServerOperationGidBuilder;
   }
 
   /** */
-  @property gda.connection.Connection connection()
+  @property gda.connection.Connection connection() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.connection.Connection)("connection");
   }
 
   /** */
-  @property int opType()
+  @property int opType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("op-type");
   }
 
   /** */
-  @property gda.server_provider.ServerProvider provider()
+  @property gda.server_provider.ServerProvider provider() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.server_provider.ServerProvider)("provider");
   }
@@ -87,7 +87,7 @@ class ServerOperation : gobject.object.ObjectWrap
         xmlFile = a file which has the specifications for the GdaServerOperation object to create
       Returns: a new #GdaServerOperation object
   */
-  this(gda.types.ServerOperationType opType, string xmlFile)
+  this(gda.types.ServerOperationType opType, string xmlFile) nothrow
   {
     GdaServerOperation* _cretval;
     const(char)* _xmlFile = xmlFile.toCString(No.Alloc);
@@ -96,7 +96,7 @@ class ServerOperation : gobject.object.ObjectWrap
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_server_operation_error_quark();
@@ -110,7 +110,7 @@ class ServerOperation : gobject.object.ObjectWrap
         type = a #GdaServerOperationType value
       Returns: a non null string (do not free or modify)
   */
-  static string opTypeToString(gda.types.ServerOperationType type)
+  static string opTypeToString(gda.types.ServerOperationType type) nothrow
   {
     const(char)* _cretval;
     _cretval = gda_server_operation_op_type_to_string(type);
@@ -204,7 +204,7 @@ class ServerOperation : gobject.object.ObjectWrap
       Returns: the #GdaServerOperationType represented by str, or #G_MAXINT if str is not a valid representation
         of a #GdaServerOperationType
   */
-  static gda.types.ServerOperationType stringToOpType(string str)
+  static gda.types.ServerOperationType stringToOpType(string str) nothrow
   {
     GdaServerOperationType _cretval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -214,7 +214,7 @@ class ServerOperation : gobject.object.ObjectWrap
   }
 
   /** */
-  uint addItemToSequence(string seqPath)
+  uint addItemToSequence(string seqPath) nothrow
   {
     uint _retval;
     const(char)* _seqPath = seqPath.toCString(No.Alloc);
@@ -223,7 +223,7 @@ class ServerOperation : gobject.object.ObjectWrap
   }
 
   /** */
-  bool delItemFromSequence(string itemPath)
+  bool delItemFromSequence(string itemPath) nothrow
   {
     bool _retval;
     const(char)* _itemPath = itemPath.toCString(No.Alloc);
@@ -238,7 +238,7 @@ class ServerOperation : gobject.object.ObjectWrap
         path = a complete path to a node (starting with "/")
       Returns: a new string or null if the node does not have any parent or does not exist.
   */
-  string getNodeParent(string path)
+  string getNodeParent(string path) nothrow
   {
     char* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -254,7 +254,7 @@ class ServerOperation : gobject.object.ObjectWrap
         path = a complete path to a node (starting with "/")
       Returns: a new string, or null if an error occurred
   */
-  string getNodePathPortion(string path)
+  string getNodePathPortion(string path) nothrow
   {
     char* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -267,7 +267,7 @@ class ServerOperation : gobject.object.ObjectWrap
       Get the type of operation op is for
       Returns: a #GdaServerOperationType enum
   */
-  gda.types.ServerOperationType getOpType()
+  gda.types.ServerOperationType getOpType() nothrow
   {
     GdaServerOperationType _cretval;
     _cretval = gda_server_operation_get_op_type(cast(GdaServerOperation*)this._cPtr);
@@ -279,7 +279,7 @@ class ServerOperation : gobject.object.ObjectWrap
       Get an array of strings containing the paths of nodes situated at the root of op.
       Returns: a new array, which must be freed with [glib.global.strfreev].
   */
-  string[] getRootNodes()
+  string[] getRootNodes() nothrow
   {
     char** _cretval;
     _cretval = gda_server_operation_get_root_nodes(cast(GdaServerOperation*)this._cPtr);
@@ -306,7 +306,7 @@ class ServerOperation : gobject.object.ObjectWrap
         path = a complete path to a sequence node (starting with "/")
       Returns: a array of strings containing the complete paths of the nodes contained at path (free with [glib.global.strfreev])
   */
-  string[] getSequenceItemNames(string path)
+  string[] getSequenceItemNames(string path) nothrow
   {
     char** _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -327,7 +327,7 @@ class ServerOperation : gobject.object.ObjectWrap
   }
 
   /** */
-  uint getSequenceMaxSize(string path)
+  uint getSequenceMaxSize(string path) nothrow
   {
     uint _retval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -336,7 +336,7 @@ class ServerOperation : gobject.object.ObjectWrap
   }
 
   /** */
-  uint getSequenceMinSize(string path)
+  uint getSequenceMinSize(string path) nothrow
   {
     uint _retval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -345,7 +345,7 @@ class ServerOperation : gobject.object.ObjectWrap
   }
 
   /** */
-  string getSequenceName(string path)
+  string getSequenceName(string path) nothrow
   {
     const(char)* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -355,7 +355,7 @@ class ServerOperation : gobject.object.ObjectWrap
   }
 
   /** */
-  uint getSequenceSize(string path)
+  uint getSequenceSize(string path) nothrow
   {
     uint _retval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -377,7 +377,7 @@ class ServerOperation : gobject.object.ObjectWrap
         if the path is not defined or path does not hold any value, or if the value held is not a string
         (in that last case a warning is shown).
   */
-  string getSqlIdentifierAt(gda.connection.Connection cnc, gda.server_provider.ServerProvider prov, string path)
+  string getSqlIdentifierAt(gda.connection.Connection cnc, gda.server_provider.ServerProvider prov, string path) nothrow
   {
     char* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -393,7 +393,7 @@ class ServerOperation : gobject.object.ObjectWrap
         path = a complete path to a node (starting with "/")
       Returns: a constant #GValue if a value has been defined, or null if the value is undefined or if the path is not defined or path does not hold any value.
   */
-  gobject.value.Value getValueAt(string path)
+  gobject.value.Value getValueAt(string path) nothrow
   {
     const(GValue)* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -583,7 +583,7 @@ class ServerOperation : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSequenceItemAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSequenceItemAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -591,7 +591,7 @@ class ServerOperation : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gda.server_operation.ServerOperation)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -606,7 +606,14 @@ class ServerOperation : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.server_operation.ServerOperation.sequenceItemAdded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -632,7 +639,7 @@ class ServerOperation : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSequenceItemRemove(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSequenceItemRemove(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -640,7 +647,7 @@ class ServerOperation : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gda.server_operation.ServerOperation)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -655,7 +662,14 @@ class ServerOperation : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.server_operation.ServerOperation.sequenceItemRemove");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -668,25 +682,25 @@ class ServerOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 {
 
   /** */
-  T connection(gda.connection.Connection propval)
+  T connection(gda.connection.Connection propval) nothrow
   {
     return setProperty("connection", propval);
   }
 
   /** */
-  T opType(int propval)
+  T opType(int propval) nothrow
   {
     return setProperty("op-type", propval);
   }
 
   /** */
-  T provider(gda.server_provider.ServerProvider propval)
+  T provider(gda.server_provider.ServerProvider propval) nothrow
   {
     return setProperty("provider", propval);
   }
 
   /** */
-  T specFilename(string propval)
+  T specFilename(string propval) nothrow
   {
     return setProperty("spec-filename", propval);
   }
@@ -699,7 +713,7 @@ final class ServerOperationGidBuilder : ServerOperationGidBuilderImpl!ServerOper
       Create object from builder.
       Returns: New object
   */
-  ServerOperation build()
+  ServerOperation build() nothrow
   {
     return new ServerOperation(cast(void*)createGObject(ServerOperation._getGType), Yes.Take);
   }
@@ -707,12 +721,12 @@ final class ServerOperationGidBuilder : ServerOperationGidBuilderImpl!ServerOper
 
 class ServerOperationException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.server_operation.ServerOperation.errorQuark, cast(int)code, msg);
   }

@@ -35,7 +35,7 @@ template SeekableT()
       Tests if the stream supports the #GSeekableIface.
       Returns: true if seekable can be seeked. false otherwise.
   */
-  override bool canSeek()
+  override bool canSeek() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_seekable_can_seek(cast(GSeekable*)this._cPtr);
@@ -47,7 +47,7 @@ template SeekableT()
       [gio.seekable.Seekable.truncate].
       Returns: true if the stream can be truncated, false otherwise.
   */
-  override bool canTruncate()
+  override bool canTruncate() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_seekable_can_truncate(cast(GSeekable*)this._cPtr);
@@ -94,7 +94,7 @@ template SeekableT()
       Returns: the (positive or zero) offset from the beginning of the
         buffer, zero if the target is not seekable.
   */
-  override long tell()
+  override long tell() nothrow
   {
     long _retval;
     _retval = g_seekable_tell(cast(GSeekable*)this._cPtr);

@@ -17,26 +17,26 @@ class Gutter : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_gutter_get_type != &gidSymbolNotFound ? gtk_source_gutter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Gutter self()
+  override Gutter self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class Gutter : gobject.object.ObjectWrap
       Get builder for [gtksource.gutter.Gutter]
       Returns: New builder object
   */
-  static GutterGidBuilder builder()
+  static GutterGidBuilder builder() nothrow
   {
     return new GutterGidBuilder;
   }
@@ -54,7 +54,7 @@ class Gutter : gobject.object.ObjectWrap
       Get `view` property.
       Returns: The #GtkSourceView of the gutter.
   */
-  @property gtksource.view.View view()
+  @property gtksource.view.View view() nothrow
   {
     return getView();
   }
@@ -63,7 +63,7 @@ class Gutter : gobject.object.ObjectWrap
       Get `windowType` property.
       Returns: The text window type on which the window is placed.
   */
-  @property gtk.types.TextWindowType windowType()
+  @property gtk.types.TextWindowType windowType() nothrow
   {
     return getWindowType();
   }
@@ -76,7 +76,7 @@ class Gutter : gobject.object.ObjectWrap
         y = The y position to get identified.
       Returns: the renderer at (x, y) or null.
   */
-  gtksource.gutter_renderer.GutterRenderer getRendererAtPos(int x, int y)
+  gtksource.gutter_renderer.GutterRenderer getRendererAtPos(int x, int y) nothrow
   {
     GtkSourceGutterRenderer* _cretval;
     _cretval = gtk_source_gutter_get_renderer_at_pos(cast(GtkSourceGutter*)this._cPtr, x, y);
@@ -85,7 +85,7 @@ class Gutter : gobject.object.ObjectWrap
   }
 
   /** */
-  gtksource.view.View getView()
+  gtksource.view.View getView() nothrow
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_gutter_get_view(cast(GtkSourceGutter*)this._cPtr);
@@ -94,7 +94,7 @@ class Gutter : gobject.object.ObjectWrap
   }
 
   /** */
-  gtk.types.TextWindowType getWindowType()
+  gtk.types.TextWindowType getWindowType() nothrow
   {
     GtkTextWindowType _cretval;
     _cretval = gtk_source_gutter_get_window_type(cast(GtkSourceGutter*)this._cPtr);
@@ -112,7 +112,7 @@ class Gutter : gobject.object.ObjectWrap
         position = the renderer position.
       Returns: true if operation succeeded. Otherwise false.
   */
-  bool insert(gtksource.gutter_renderer.GutterRenderer renderer, int position)
+  bool insert(gtksource.gutter_renderer.GutterRenderer renderer, int position) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_gutter_insert(cast(GtkSourceGutter*)this._cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer._cPtr(No.Dup) : null, position);
@@ -123,7 +123,7 @@ class Gutter : gobject.object.ObjectWrap
       Invalidates the drawable area of the gutter. You can use this to force a
       redraw of the gutter if something has changed and needs to be redrawn.
   */
-  void queueDraw()
+  void queueDraw() nothrow
   {
     gtk_source_gutter_queue_draw(cast(GtkSourceGutter*)this._cPtr);
   }
@@ -134,7 +134,7 @@ class Gutter : gobject.object.ObjectWrap
       Params:
         renderer = a #GtkSourceGutterRenderer.
   */
-  void remove(gtksource.gutter_renderer.GutterRenderer renderer)
+  void remove(gtksource.gutter_renderer.GutterRenderer renderer) nothrow
   {
     gtk_source_gutter_remove(cast(GtkSourceGutter*)this._cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer._cPtr(No.Dup) : null);
   }
@@ -146,7 +146,7 @@ class Gutter : gobject.object.ObjectWrap
         renderer = a #GtkCellRenderer.
         position = the new renderer position.
   */
-  void reorder(gtksource.gutter_renderer.GutterRenderer renderer, int position)
+  void reorder(gtksource.gutter_renderer.GutterRenderer renderer, int position) nothrow
   {
     gtk_source_gutter_reorder(cast(GtkSourceGutter*)this._cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer._cPtr(No.Dup) : null, position);
   }
@@ -162,7 +162,7 @@ class GutterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The #GtkSourceView of the gutter.
       Returns: Builder instance for fluent chaining
   */
-  T view(gtksource.view.View propval)
+  T view(gtksource.view.View propval) nothrow
   {
     return setProperty("view", propval);
   }
@@ -173,7 +173,7 @@ class GutterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The text window type on which the window is placed.
       Returns: Builder instance for fluent chaining
   */
-  T windowType(gtk.types.TextWindowType propval)
+  T windowType(gtk.types.TextWindowType propval) nothrow
   {
     return setProperty("window-type", propval);
   }
@@ -186,7 +186,7 @@ final class GutterGidBuilder : GutterGidBuilderImpl!GutterGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Gutter build()
+  Gutter build() nothrow
   {
     return new Gutter(cast(void*)createGObject(Gutter._getGType), No.Take);
   }

@@ -25,26 +25,26 @@ class SystemClock : gst.clock.Clock
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_system_clock_get_type != &gidSymbolNotFound ? gst_system_clock_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SystemClock self()
+  override SystemClock self() nothrow
   {
     return this;
   }
@@ -53,19 +53,19 @@ class SystemClock : gst.clock.Clock
       Get builder for [gst.system_clock.SystemClock]
       Returns: New builder object
   */
-  static SystemClockGidBuilder builder()
+  static SystemClockGidBuilder builder() nothrow
   {
     return new SystemClockGidBuilder;
   }
 
   /** */
-  @property gst.types.ClockType clockType()
+  @property gst.types.ClockType clockType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gst.types.ClockType)("clock-type");
   }
 
   /** */
-  @property void clockType(gst.types.ClockType propval)
+  @property void clockType(gst.types.ClockType propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gst.types.ClockType)("clock-type", propval);
   }
@@ -78,7 +78,7 @@ class SystemClock : gst.clock.Clock
         
         MT safe.
   */
-  static gst.clock.Clock obtain()
+  static gst.clock.Clock obtain() nothrow
   {
     GstClock* _cretval;
     _cretval = gst_system_clock_obtain();
@@ -99,7 +99,7 @@ class SystemClock : gst.clock.Clock
       Params:
         newClock = a #GstClock
   */
-  static void setDefault(gst.clock.Clock newClock = null)
+  static void setDefault(gst.clock.Clock newClock = null) nothrow
   {
     gst_system_clock_set_default(newClock ? cast(GstClock*)newClock._cPtr(No.Dup) : null);
   }
@@ -110,7 +110,7 @@ class SystemClockGidBuilderImpl(T) : gst.clock.ClockGidBuilderImpl!T
 {
 
   /** */
-  T clockType(gst.types.ClockType propval)
+  T clockType(gst.types.ClockType propval) nothrow
   {
     return setProperty("clock-type", propval);
   }
@@ -123,7 +123,7 @@ final class SystemClockGidBuilder : SystemClockGidBuilderImpl!SystemClockGidBuil
       Create object from builder.
       Returns: New object
   */
-  SystemClock build()
+  SystemClock build() nothrow
   {
     return new SystemClock(cast(void*)createGObject(SystemClock._getGType), No.Take);
   }

@@ -61,26 +61,26 @@ class Scrollbar : gtk.range.Range
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scrollbar_get_type != &gidSymbolNotFound ? gtk_scrollbar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Scrollbar self()
+  override Scrollbar self() nothrow
   {
     return this;
   }
@@ -89,7 +89,7 @@ class Scrollbar : gtk.range.Range
       Get builder for [gtk.scrollbar.Scrollbar]
       Returns: New builder object
   */
-  static ScrollbarGidBuilder builder()
+  static ScrollbarGidBuilder builder() nothrow
   {
     return new ScrollbarGidBuilder;
   }
@@ -102,7 +102,7 @@ class Scrollbar : gtk.range.Range
         adjustment = the #GtkAdjustment to use, or null to create a new adjustment.
       Returns: the new #GtkScrollbar.
   */
-  this(gtk.types.Orientation orientation, gtk.adjustment.Adjustment adjustment = null)
+  this(gtk.types.Orientation orientation, gtk.adjustment.Adjustment adjustment = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_scrollbar_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
@@ -123,7 +123,7 @@ final class ScrollbarGidBuilder : ScrollbarGidBuilderImpl!ScrollbarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Scrollbar build()
+  Scrollbar build() nothrow
   {
     return new Scrollbar(cast(void*)createGObject(Scrollbar._getGType), No.Take);
   }

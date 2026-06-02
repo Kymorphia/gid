@@ -26,26 +26,26 @@ class VideoAggregator : gstbase.aggregator.Aggregator
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_aggregator_get_type != &gidSymbolNotFound ? gst_video_aggregator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VideoAggregator self()
+  override VideoAggregator self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class VideoAggregator : gstbase.aggregator.Aggregator
       Get builder for [gstvideo.video_aggregator.VideoAggregator]
       Returns: New builder object
   */
-  static VideoAggregatorGidBuilder builder()
+  static VideoAggregatorGidBuilder builder() nothrow
   {
     return new VideoAggregatorGidBuilder;
   }
@@ -66,7 +66,7 @@ class VideoAggregator : gstbase.aggregator.Aggregator
         companion property: in the vast majority of cases where you plan to plug in
         live sources with a non-zero latency, you should set it to a non-zero value.
   */
-  @property bool forceLive()
+  @property bool forceLive() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("force-live");
   }
@@ -80,7 +80,7 @@ class VideoAggregator : gstbase.aggregator.Aggregator
       Returns: the #GstTaskPool that can be used by subclasses
             for performing concurrent operations
   */
-  gst.task_pool.TaskPool getExecutionTaskPool()
+  gst.task_pool.TaskPool getExecutionTaskPool() nothrow
   {
     GstTaskPool* _cretval;
     _cretval = gst_video_aggregator_get_execution_task_pool(cast(GstVideoAggregator*)this._cPtr);
@@ -102,7 +102,7 @@ class VideoAggregatorGidBuilderImpl(T) : gstbase.aggregator.AggregatorGidBuilder
           live sources with a non-zero latency, you should set it to a non-zero value.
       Returns: Builder instance for fluent chaining
   */
-  T forceLive(bool propval)
+  T forceLive(bool propval) nothrow
   {
     return setProperty("force-live", propval);
   }
@@ -115,7 +115,7 @@ final class VideoAggregatorGidBuilder : VideoAggregatorGidBuilderImpl!VideoAggre
       Create object from builder.
       Returns: New object
   */
-  VideoAggregator build()
+  VideoAggregator build() nothrow
   {
     return new VideoAggregator(cast(void*)createGObject(VideoAggregator._getGType), No.Take);
   }

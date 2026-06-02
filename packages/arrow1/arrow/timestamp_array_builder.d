@@ -16,26 +16,26 @@ class TimestampArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_timestamp_array_builder_get_type != &gidSymbolNotFound ? garrow_timestamp_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TimestampArrayBuilder self()
+  override TimestampArrayBuilder self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class TimestampArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.timestamp_array_builder.TimestampArrayBuilder]
       Returns: New builder object
   */
-  static TimestampArrayBuilderGidBuilder builder()
+  static TimestampArrayBuilderGidBuilder builder() nothrow
   {
     return new TimestampArrayBuilderGidBuilder;
   }
 
   /** */
-  this(arrow.timestamp_data_type.TimestampDataType dataType)
+  this(arrow.timestamp_data_type.TimestampDataType dataType) nothrow
   {
     GArrowTimestampArrayBuilder* _cretval;
     _cretval = garrow_timestamp_array_builder_new(dataType ? cast(GArrowTimestampDataType*)dataType._cPtr(No.Dup) : null);
@@ -126,7 +126,7 @@ final class TimestampArrayBuilderGidBuilder : TimestampArrayBuilderGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  TimestampArrayBuilder build()
+  TimestampArrayBuilder build() nothrow
   {
     return new TimestampArrayBuilder(cast(void*)createGObject(TimestampArrayBuilder._getGType), Yes.Take);
   }

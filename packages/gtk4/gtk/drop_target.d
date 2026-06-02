@@ -93,26 +93,26 @@ class DropTarget : gtk.event_controller.EventController
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_drop_target_get_type != &gidSymbolNotFound ? gtk_drop_target_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DropTarget self()
+  override DropTarget self() nothrow
   {
     return this;
   }
@@ -121,7 +121,7 @@ class DropTarget : gtk.event_controller.EventController
       Get builder for [gtk.drop_target.DropTarget]
       Returns: New builder object
   */
-  static DropTargetGidBuilder builder()
+  static DropTargetGidBuilder builder() nothrow
   {
     return new DropTargetGidBuilder;
   }
@@ -130,7 +130,7 @@ class DropTarget : gtk.event_controller.EventController
       Get `actions` property.
       Returns: The `GdkDragActions` that this drop target supports.
   */
-  @property gdk.types.DragAction actions()
+  @property gdk.types.DragAction actions() nothrow
   {
     return getActions();
   }
@@ -140,7 +140,7 @@ class DropTarget : gtk.event_controller.EventController
       Params:
         propval = The `GdkDragActions` that this drop target supports.
   */
-  @property void actions(gdk.types.DragAction propval)
+  @property void actions(gdk.types.DragAction propval) nothrow
   {
     setActions(propval);
   }
@@ -149,7 +149,7 @@ class DropTarget : gtk.event_controller.EventController
       Get `currentDrop` property.
       Returns: The [gdk.drop.Drop] that is currently being performed.
   */
-  @property gdk.drop.Drop currentDrop()
+  @property gdk.drop.Drop currentDrop() nothrow
   {
     return getCurrentDrop();
   }
@@ -158,7 +158,7 @@ class DropTarget : gtk.event_controller.EventController
       Get `formats` property.
       Returns: The [gdk.content_formats.ContentFormats] that determine the supported data formats.
   */
-  @property gdk.content_formats.ContentFormats formats()
+  @property gdk.content_formats.ContentFormats formats() nothrow
   {
     return getFormats();
   }
@@ -184,7 +184,7 @@ class DropTarget : gtk.event_controller.EventController
         And for local-only Drag-and-Drop operations, no data transfer is done,
         so enabling it there is free.
   */
-  @property bool preload()
+  @property bool preload() nothrow
   {
     return getPreload();
   }
@@ -211,7 +211,7 @@ class DropTarget : gtk.event_controller.EventController
           And for local-only Drag-and-Drop operations, no data transfer is done,
           so enabling it there is free.
   */
-  @property void preload(bool propval)
+  @property void preload(bool propval) nothrow
   {
     setPreload(propval);
   }
@@ -228,7 +228,7 @@ class DropTarget : gtk.event_controller.EventController
         property is set. You can use the ::notify signal to be notified
         of available data.
   */
-  @property gobject.value.Value value()
+  @property gobject.value.Value value() nothrow
   {
     return getValue();
   }
@@ -245,7 +245,7 @@ class DropTarget : gtk.event_controller.EventController
         actions = the supported actions
       Returns: the new [gtk.drop_target.DropTarget]
   */
-  this(gobject.types.GType type, gdk.types.DragAction actions)
+  this(gobject.types.GType type, gdk.types.DragAction actions) nothrow
   {
     GtkDropTarget* _cretval;
     _cretval = gtk_drop_target_new(type, actions);
@@ -256,7 +256,7 @@ class DropTarget : gtk.event_controller.EventController
       Gets the actions that this drop target supports.
       Returns: the actions that this drop target supports
   */
-  gdk.types.DragAction getActions()
+  gdk.types.DragAction getActions() nothrow
   {
     GdkDragAction _cretval;
     _cretval = gtk_drop_target_get_actions(cast(GtkDropTarget*)this._cPtr);
@@ -270,7 +270,7 @@ class DropTarget : gtk.event_controller.EventController
       If no drop operation is going on, null is returned.
       Returns: The current drop
   */
-  gdk.drop.Drop getCurrentDrop()
+  gdk.drop.Drop getCurrentDrop() nothrow
   {
     GdkDrop* _cretval;
     _cretval = gtk_drop_target_get_current_drop(cast(GtkDropTarget*)this._cPtr);
@@ -286,7 +286,7 @@ class DropTarget : gtk.event_controller.EventController
   
       Deprecated: Use [gtk.drop_target.DropTarget.getCurrentDrop] instead
   */
-  gdk.drop.Drop getDrop()
+  gdk.drop.Drop getDrop() nothrow
   {
     GdkDrop* _cretval;
     _cretval = gtk_drop_target_get_drop(cast(GtkDropTarget*)this._cPtr);
@@ -300,7 +300,7 @@ class DropTarget : gtk.event_controller.EventController
       If the result is null, all formats are expected to be supported.
       Returns: the supported data formats
   */
-  gdk.content_formats.ContentFormats getFormats()
+  gdk.content_formats.ContentFormats getFormats() nothrow
   {
     GdkContentFormats* _cretval;
     _cretval = gtk_drop_target_get_formats(cast(GtkDropTarget*)this._cPtr);
@@ -315,7 +315,7 @@ class DropTarget : gtk.event_controller.EventController
       Returns: the `G_TYPE_INVALID`-terminated array of types included in
           formats
   */
-  gobject.types.GType[] getGtypes()
+  gobject.types.GType[] getGtypes() nothrow
   {
     const(GType)* _cretval;
     size_t _cretlength;
@@ -333,7 +333,7 @@ class DropTarget : gtk.event_controller.EventController
       Gets whether data should be preloaded on hover.
       Returns: true if drop data should be preloaded
   */
-  bool getPreload()
+  bool getPreload() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_drop_target_get_preload(cast(GtkDropTarget*)this._cPtr);
@@ -344,7 +344,7 @@ class DropTarget : gtk.event_controller.EventController
       Gets the current drop data, as a [gobject.value.Value].
       Returns: The current drop data
   */
-  gobject.value.Value getValue()
+  gobject.value.Value getValue() nothrow
   {
     const(GValue)* _cretval;
     _cretval = gtk_drop_target_get_value(cast(GtkDropTarget*)this._cPtr);
@@ -362,7 +362,7 @@ class DropTarget : gtk.event_controller.EventController
       on whether to accept a drag or not until after reading
       the data.
   */
-  void reject()
+  void reject() nothrow
   {
     gtk_drop_target_reject(cast(GtkDropTarget*)this._cPtr);
   }
@@ -373,7 +373,7 @@ class DropTarget : gtk.event_controller.EventController
       Params:
         actions = the supported actions
   */
-  void setActions(gdk.types.DragAction actions)
+  void setActions(gdk.types.DragAction actions) nothrow
   {
     gtk_drop_target_set_actions(cast(GtkDropTarget*)this._cPtr, actions);
   }
@@ -385,7 +385,7 @@ class DropTarget : gtk.event_controller.EventController
         types = all supported `GType`s
             that can be dropped on the target
   */
-  void setGtypes(gobject.types.GType[] types = null)
+  void setGtypes(gobject.types.GType[] types = null) nothrow
   {
     size_t _nTypes;
     if (types)
@@ -401,7 +401,7 @@ class DropTarget : gtk.event_controller.EventController
       Params:
         preload = true to preload drop data
   */
-  void setPreload(bool preload)
+  void setPreload(bool preload) nothrow
   {
     gtk_drop_target_set_preload(cast(GtkDropTarget*)this._cPtr, preload);
   }
@@ -439,18 +439,19 @@ class DropTarget : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAccept(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAccept(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drop.Drop)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.drop_target.DropTarget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -458,7 +459,14 @@ class DropTarget : gtk.event_controller.EventController
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.drop_target.DropTarget.accept");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -497,7 +505,7 @@ class DropTarget : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDrop(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDrop(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gobject.value.Value)))
@@ -506,11 +514,12 @@ class DropTarget : gtk.event_controller.EventController
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.drop_target.DropTarget)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -524,7 +533,14 @@ class DropTarget : gtk.event_controller.EventController
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.drop_target.DropTarget.drop");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -556,7 +572,7 @@ class DropTarget : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEnter(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEnter(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == gdk.types.DragAction)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -564,11 +580,12 @@ class DropTarget : gtk.event_controller.EventController
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.drop_target.DropTarget)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gdk.types.DragAction _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -579,7 +596,14 @@ class DropTarget : gtk.event_controller.EventController
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.drop_target.DropTarget.enter");
+      }
 
       setVal!(gdk.types.DragAction)(_returnValue, _retval);
     }
@@ -606,13 +630,13 @@ class DropTarget : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLeave(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLeave(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.drop_target.DropTarget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -621,7 +645,14 @@ class DropTarget : gtk.event_controller.EventController
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.drop_target.DropTarget.leave");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -649,7 +680,7 @@ class DropTarget : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMotion(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMotion(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == gdk.types.DragAction)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -657,11 +688,12 @@ class DropTarget : gtk.event_controller.EventController
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.drop_target.DropTarget)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gdk.types.DragAction _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -672,7 +704,14 @@ class DropTarget : gtk.event_controller.EventController
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.drop_target.DropTarget.motion");
+      }
 
       setVal!(gdk.types.DragAction)(_returnValue, _retval);
     }
@@ -692,7 +731,7 @@ class DropTargetGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuild
         propval = The `GdkDragActions` that this drop target supports.
       Returns: Builder instance for fluent chaining
   */
-  T actions(gdk.types.DragAction propval)
+  T actions(gdk.types.DragAction propval) nothrow
   {
     return setProperty("actions", propval);
   }
@@ -703,7 +742,7 @@ class DropTargetGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuild
         propval = The [gdk.content_formats.ContentFormats] that determine the supported data formats.
       Returns: Builder instance for fluent chaining
   */
-  T formats(gdk.content_formats.ContentFormats propval)
+  T formats(gdk.content_formats.ContentFormats propval) nothrow
   {
     return setProperty("formats", propval);
   }
@@ -731,7 +770,7 @@ class DropTargetGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuild
           so enabling it there is free.
       Returns: Builder instance for fluent chaining
   */
-  T preload(bool propval)
+  T preload(bool propval) nothrow
   {
     return setProperty("preload", propval);
   }
@@ -744,7 +783,7 @@ final class DropTargetGidBuilder : DropTargetGidBuilderImpl!DropTargetGidBuilder
       Create object from builder.
       Returns: New object
   */
-  DropTarget build()
+  DropTarget build() nothrow
   {
     return new DropTarget(cast(void*)createGObject(DropTarget._getGType), Yes.Take);
   }

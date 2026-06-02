@@ -30,26 +30,26 @@ class UnixFDList : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_unix_fd_list_get_type != &gidSymbolNotFound ? g_unix_fd_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UnixFDList self()
+  override UnixFDList self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class UnixFDList : gobject.object.ObjectWrap
       Get builder for [gio.unix_fdlist.UnixFDList]
       Returns: New builder object
   */
-  static UnixFDListGidBuilder builder()
+  static UnixFDListGidBuilder builder() nothrow
   {
     return new UnixFDListGidBuilder;
   }
@@ -67,7 +67,7 @@ class UnixFDList : gobject.object.ObjectWrap
       Creates a new #GUnixFDList containing no file descriptors.
       Returns: a new #GUnixFDList
   */
-  this()
+  this() nothrow
   {
     GUnixFDList* _cretval;
     _cretval = g_unix_fd_list_new();
@@ -88,7 +88,7 @@ class UnixFDList : gobject.object.ObjectWrap
         fds = the initial list of file descriptors
       Returns: a new #GUnixFDList
   */
-  static gio.unix_fdlist.UnixFDList newFromArray(int[] fds)
+  static gio.unix_fdlist.UnixFDList newFromArray(int[] fds) nothrow
   {
     GUnixFDList* _cretval;
     int _nFds;
@@ -165,7 +165,7 @@ class UnixFDList : gobject.object.ObjectWrap
       contained within).
       Returns: the length of list
   */
-  int getLength()
+  int getLength() nothrow
   {
     int _retval;
     _retval = g_unix_fd_list_get_length(cast(GUnixFDList*)this._cPtr);
@@ -189,7 +189,7 @@ class UnixFDList : gobject.object.ObjectWrap
       Returns: an array of file
             descriptors
   */
-  int[] peekFds()
+  int[] peekFds() nothrow
   {
     const(int)* _cretval;
     int _cretlength;
@@ -225,7 +225,7 @@ class UnixFDList : gobject.object.ObjectWrap
       Returns: an array of file
             descriptors
   */
-  int[] stealFds()
+  int[] stealFds() nothrow
   {
     int* _cretval;
     int _cretlength;
@@ -253,7 +253,7 @@ final class UnixFDListGidBuilder : UnixFDListGidBuilderImpl!UnixFDListGidBuilder
       Create object from builder.
       Returns: New object
   */
-  UnixFDList build()
+  UnixFDList build() nothrow
   {
     return new UnixFDList(cast(void*)createGObject(UnixFDList._getGType), Yes.Take);
   }

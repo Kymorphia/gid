@@ -162,26 +162,26 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_pixbuf_get_type != &gidSymbolNotFound ? gdk_pixbuf_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Pixbuf self()
+  override Pixbuf self() nothrow
   {
     return this;
   }
@@ -190,7 +190,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       Get builder for [gdkpixbuf.pixbuf.Pixbuf]
       Returns: New builder object
   */
-  static PixbufGidBuilder builder()
+  static PixbufGidBuilder builder() nothrow
   {
     return new PixbufGidBuilder;
   }
@@ -201,7 +201,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         
         Currently only 8 bit per sample are supported.
   */
-  @property int bitsPerSample()
+  @property int bitsPerSample() nothrow
   {
     return getBitsPerSample();
   }
@@ -212,7 +212,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         
         Currently, only [gdkpixbuf.types.Colorspace.Rgb] is supported.
   */
-  @property gdkpixbuf.types.Colorspace colorspace()
+  @property gdkpixbuf.types.Colorspace colorspace() nothrow
   {
     return getColorspace();
   }
@@ -221,7 +221,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       Get `hasAlpha` property.
       Returns: Whether the pixbuf has an alpha channel.
   */
-  @property bool hasAlpha()
+  @property bool hasAlpha() nothrow
   {
     return getHasAlpha();
   }
@@ -230,7 +230,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       Get `height` property.
       Returns: The number of rows of the pixbuf.
   */
-  @property int height()
+  @property int height() nothrow
   {
     return getHeight();
   }
@@ -241,13 +241,13 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         
         Currently, only 3 or 4 samples per pixel are supported.
   */
-  @property int nChannels()
+  @property int nChannels() nothrow
   {
     return getNChannels();
   }
 
   /** */
-  @property glib.bytes.Bytes pixelBytes()
+  @property glib.bytes.Bytes pixelBytes() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(glib.bytes.Bytes)("pixel-bytes");
   }
@@ -256,7 +256,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       Get `pixels` property.
       Returns: A pointer to the pixel data of the pixbuf.
   */
-  @property void* pixels()
+  @property void* pixels() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(void*)("pixels");
   }
@@ -269,7 +269,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         This number must (obviously) be at least as large as the
         width of the pixbuf.
   */
-  @property int rowstride()
+  @property int rowstride() nothrow
   {
     return getRowstride();
   }
@@ -278,7 +278,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       Get `width` property.
       Returns: The number of columns of the pixbuf.
   */
-  @property int width()
+  @property int width() nothrow
   {
     return getWidth();
   }
@@ -302,7 +302,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         height = Height of image in pixels, must be > 0
       Returns: A newly-created pixel buffer
   */
-  this(gdkpixbuf.types.Colorspace colorspace, bool hasAlpha, int bitsPerSample, int width, int height)
+  this(gdkpixbuf.types.Colorspace colorspace, bool hasAlpha, int bitsPerSample, int width, int height) nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gdk_pixbuf_new(colorspace, hasAlpha, bitsPerSample, width, height);
@@ -327,7 +327,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         rowstride = Distance in bytes between row starts
       Returns: A newly-created pixbuf
   */
-  static gdkpixbuf.pixbuf.Pixbuf newFromBytes(glib.bytes.Bytes data, gdkpixbuf.types.Colorspace colorspace, bool hasAlpha, int bitsPerSample, int width, int height, int rowstride)
+  static gdkpixbuf.pixbuf.Pixbuf newFromBytes(glib.bytes.Bytes data, gdkpixbuf.types.Colorspace colorspace, bool hasAlpha, int bitsPerSample, int width, int height, int rowstride) nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gdk_pixbuf_new_from_bytes(data ? cast(GBytes*)data._cPtr(No.Dup) : null, colorspace, hasAlpha, bitsPerSample, width, height, rowstride);
@@ -675,7 +675,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         data = Pointer to inline XPM data.
       Returns: A newly-created pixbuf
   */
-  static gdkpixbuf.pixbuf.Pixbuf newFromXpmData(string[] data)
+  static gdkpixbuf.pixbuf.Pixbuf newFromXpmData(string[] data) nothrow
   {
     GdkPixbuf* _cretval;
     char*[] _tmpdata;
@@ -704,7 +704,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         height = Height of image in pixels, must be > 0
       Returns: the rowstride for the given values, or -1 in case of error.
   */
-  static int calculateRowstride(gdkpixbuf.types.Colorspace colorspace, bool hasAlpha, int bitsPerSample, int width, int height)
+  static int calculateRowstride(gdkpixbuf.types.Colorspace colorspace, bool hasAlpha, int bitsPerSample, int width, int height) nothrow
   {
     int _retval;
     _retval = gdk_pixbuf_calculate_rowstride(colorspace, hasAlpha, bitsPerSample, width, height);
@@ -721,7 +721,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       Returns: A [gdkpixbuf.pixbuf_format.PixbufFormat] describing
           the image format of the file
   */
-  static gdkpixbuf.pixbuf_format.PixbufFormat getFileInfo(string filename, out int width, out int height)
+  static gdkpixbuf.pixbuf_format.PixbufFormat getFileInfo(string filename, out int width, out int height) nothrow
   {
     GdkPixbufFormat* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -746,14 +746,21 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         cancellable = optional [gio.cancellable.Cancellable] object, `NULL` to ignore
         callback = a [gio.types.AsyncReadyCallback] to call when the file info is available
   */
-  static void getFileInfoAsync(string filename, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  static void getFileInfoAsync(string filename, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -790,7 +797,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       Returns: A list of
           support image formats.
   */
-  static gdkpixbuf.pixbuf_format.PixbufFormat[] getFormats()
+  static gdkpixbuf.pixbuf_format.PixbufFormat[] getFormats() nothrow
   {
     GSList* _cretval;
     _cretval = gdk_pixbuf_get_formats();
@@ -844,14 +851,21 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         cancellable = optional [gio.cancellable.Cancellable] object, `NULL` to ignore
         callback = a [gio.types.AsyncReadyCallback] to call when the pixbuf is loaded
   */
-  static void newFromStreamAsync(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  static void newFromStreamAsync(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -875,14 +889,21 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         cancellable = optional [gio.cancellable.Cancellable] object, `NULL` to ignore
         callback = a [gio.types.AsyncReadyCallback] to call when the pixbuf is loaded
   */
-  static void newFromStreamAtScaleAsync(gio.input_stream.InputStream stream, int width, int height, bool preserveAspectRatio, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  static void newFromStreamAtScaleAsync(gio.input_stream.InputStream stream, int width, int height, bool preserveAspectRatio, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -930,7 +951,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         b = Blue value to substitute.
       Returns: A newly-created pixbuf
   */
-  gdkpixbuf.pixbuf.Pixbuf addAlpha(bool substituteColor, ubyte r, ubyte g, ubyte b)
+  gdkpixbuf.pixbuf.Pixbuf addAlpha(bool substituteColor, ubyte r, ubyte g, ubyte b) nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gdk_pixbuf_add_alpha(cast(const(GdkPixbuf)*)this._cPtr, substituteColor, r, g, b);
@@ -951,7 +972,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       will be performed so that the pixbuf is oriented correctly.
       Returns: A newly-created pixbuf
   */
-  gdkpixbuf.pixbuf.Pixbuf applyEmbeddedOrientation()
+  gdkpixbuf.pixbuf.Pixbuf applyEmbeddedOrientation() nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gdk_pixbuf_apply_embedded_orientation(cast(GdkPixbuf*)this._cPtr);
@@ -987,7 +1008,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         interpType = the interpolation type for the transformation.
         overallAlpha = overall alpha for source image (0..255)
   */
-  void composite(gdkpixbuf.pixbuf.Pixbuf dest, int destX, int destY, int destWidth, int destHeight, double offsetX, double offsetY, double scaleX, double scaleY, gdkpixbuf.types.InterpType interpType, int overallAlpha)
+  void composite(gdkpixbuf.pixbuf.Pixbuf dest, int destX, int destY, int destWidth, int destHeight, double offsetX, double offsetY, double scaleX, double scaleY, gdkpixbuf.types.InterpType interpType, int overallAlpha) nothrow
   {
     gdk_pixbuf_composite(cast(const(GdkPixbuf)*)this._cPtr, dest ? cast(GdkPixbuf*)dest._cPtr(No.Dup) : null, destX, destY, destWidth, destHeight, offsetX, offsetY, scaleX, scaleY, interpType, overallAlpha);
   }
@@ -1024,7 +1045,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         color1 = the color of check at upper left
         color2 = the color of the other check
   */
-  void compositeColor(gdkpixbuf.pixbuf.Pixbuf dest, int destX, int destY, int destWidth, int destHeight, double offsetX, double offsetY, double scaleX, double scaleY, gdkpixbuf.types.InterpType interpType, int overallAlpha, int checkX, int checkY, int checkSize, uint color1, uint color2)
+  void compositeColor(gdkpixbuf.pixbuf.Pixbuf dest, int destX, int destY, int destWidth, int destHeight, double offsetX, double offsetY, double scaleX, double scaleY, gdkpixbuf.types.InterpType interpType, int overallAlpha, int checkX, int checkY, int checkSize, uint color1, uint color2) nothrow
   {
     gdk_pixbuf_composite_color(cast(const(GdkPixbuf)*)this._cPtr, dest ? cast(GdkPixbuf*)dest._cPtr(No.Dup) : null, destX, destY, destWidth, destHeight, offsetX, offsetY, scaleX, scaleY, interpType, overallAlpha, checkX, checkY, checkSize, color1, color2);
   }
@@ -1044,7 +1065,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         color2 = the color of the other check
       Returns: the new pixbuf
   */
-  gdkpixbuf.pixbuf.Pixbuf compositeColorSimple(int destWidth, int destHeight, gdkpixbuf.types.InterpType interpType, int overallAlpha, int checkSize, uint color1, uint color2)
+  gdkpixbuf.pixbuf.Pixbuf compositeColorSimple(int destWidth, int destHeight, gdkpixbuf.types.InterpType interpType, int overallAlpha, int checkSize, uint color1, uint color2) nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gdk_pixbuf_composite_color_simple(cast(const(GdkPixbuf)*)this._cPtr, destWidth, destHeight, interpType, overallAlpha, checkSize, color1, color2);
@@ -1060,7 +1081,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       use [gdkpixbuf.pixbuf.Pixbuf.copyOptions] for this.
       Returns: A newly-created pixbuf
   */
-  gdkpixbuf.pixbuf.Pixbuf copy()
+  gdkpixbuf.pixbuf.Pixbuf copy() nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gdk_pixbuf_copy(cast(const(GdkPixbuf)*)this._cPtr);
@@ -1086,7 +1107,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         destX = X coordinate within dest_pixbuf.
         destY = Y coordinate within dest_pixbuf.
   */
-  void copyArea(int srcX, int srcY, int width, int height, gdkpixbuf.pixbuf.Pixbuf destPixbuf, int destX, int destY)
+  void copyArea(int srcX, int srcY, int width, int height, gdkpixbuf.pixbuf.Pixbuf destPixbuf, int destX, int destY) nothrow
   {
     gdk_pixbuf_copy_area(cast(const(GdkPixbuf)*)this._cPtr, srcX, srcY, width, height, destPixbuf ? cast(GdkPixbuf*)destPixbuf._cPtr(No.Dup) : null, destX, destY);
   }
@@ -1103,7 +1124,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         destPixbuf = the destination pixbuf
       Returns: `TRUE` on success.
   */
-  bool copyOptions(gdkpixbuf.pixbuf.Pixbuf destPixbuf)
+  bool copyOptions(gdkpixbuf.pixbuf.Pixbuf destPixbuf) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_pixbuf_copy_options(cast(GdkPixbuf*)this._cPtr, destPixbuf ? cast(GdkPixbuf*)destPixbuf._cPtr(No.Dup) : null);
@@ -1121,7 +1142,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         pixel = RGBA pixel to used to clear (`0xffffffff` is opaque white,
             `0x00000000` transparent black)
   */
-  void fill(uint pixel)
+  void fill(uint pixel) nothrow
   {
     gdk_pixbuf_fill(cast(GdkPixbuf*)this._cPtr, pixel);
   }
@@ -1134,7 +1155,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         horizontal = `TRUE` to flip horizontally, `FALSE` to flip vertically
       Returns: the new pixbuf
   */
-  gdkpixbuf.pixbuf.Pixbuf flip(bool horizontal)
+  gdkpixbuf.pixbuf.Pixbuf flip(bool horizontal) nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gdk_pixbuf_flip(cast(const(GdkPixbuf)*)this._cPtr, horizontal);
@@ -1146,7 +1167,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       Queries the number of bits per color sample in a pixbuf.
       Returns: Number of bits per color sample.
   */
-  int getBitsPerSample()
+  int getBitsPerSample() nothrow
   {
     int _retval;
     _retval = gdk_pixbuf_get_bits_per_sample(cast(const(GdkPixbuf)*)this._cPtr);
@@ -1157,7 +1178,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       Returns the length of the pixel data, in bytes.
       Returns: The length of the pixel data.
   */
-  size_t getByteLength()
+  size_t getByteLength() nothrow
   {
     size_t _retval;
     _retval = gdk_pixbuf_get_byte_length(cast(const(GdkPixbuf)*)this._cPtr);
@@ -1168,7 +1189,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       Queries the color space of a pixbuf.
       Returns: Color space.
   */
-  gdkpixbuf.types.Colorspace getColorspace()
+  gdkpixbuf.types.Colorspace getColorspace() nothrow
   {
     GdkColorspace _cretval;
     _cretval = gdk_pixbuf_get_colorspace(cast(const(GdkPixbuf)*)this._cPtr);
@@ -1180,7 +1201,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       Queries whether a pixbuf has an alpha channel (opacity information).
       Returns: `TRUE` if it has an alpha channel, `FALSE` otherwise.
   */
-  bool getHasAlpha()
+  bool getHasAlpha() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_pixbuf_get_has_alpha(cast(const(GdkPixbuf)*)this._cPtr);
@@ -1191,7 +1212,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       Queries the height of a pixbuf.
       Returns: Height in pixels.
   */
-  int getHeight()
+  int getHeight() nothrow
   {
     int _retval;
     _retval = gdk_pixbuf_get_height(cast(const(GdkPixbuf)*)this._cPtr);
@@ -1202,7 +1223,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       Queries the number of channels of a pixbuf.
       Returns: Number of channels.
   */
-  int getNChannels()
+  int getNChannels() nothrow
   {
     int _retval;
     _retval = gdk_pixbuf_get_n_channels(cast(const(GdkPixbuf)*)this._cPtr);
@@ -1230,7 +1251,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         key = a nul-terminated string.
       Returns: the value associated with `key`
   */
-  string getOption(string key)
+  string getOption(string key) nothrow
   {
     const(char)* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1246,7 +1267,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       Returns: a #GHashTable
           of key/values pairs
   */
-  string[string] getOptions()
+  string[string] getOptions() nothrow
   {
     GHashTable* _cretval;
     _cretval = gdk_pixbuf_get_options(cast(GdkPixbuf*)this._cPtr);
@@ -1265,7 +1286,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       Returns: A pointer to the pixbuf's
         pixel data.
   */
-  ubyte[] getPixels()
+  ubyte[] getPixels() nothrow
   {
     ubyte* _cretval;
     uint _cretlength;
@@ -1284,7 +1305,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       the start of a row and the start of the next row.
       Returns: Distance between row starts.
   */
-  int getRowstride()
+  int getRowstride() nothrow
   {
     int _retval;
     _retval = gdk_pixbuf_get_rowstride(cast(const(GdkPixbuf)*)this._cPtr);
@@ -1295,7 +1316,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       Queries the width of a pixbuf.
       Returns: Width in pixels.
   */
-  int getWidth()
+  int getWidth() nothrow
   {
     int _retval;
     _retval = gdk_pixbuf_get_width(cast(const(GdkPixbuf)*)this._cPtr);
@@ -1320,7 +1341,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         height = height of region in src_pixbuf
       Returns: a new pixbuf
   */
-  gdkpixbuf.pixbuf.Pixbuf newSubpixbuf(int srcX, int srcY, int width, int height)
+  gdkpixbuf.pixbuf.Pixbuf newSubpixbuf(int srcX, int srcY, int width, int height) nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gdk_pixbuf_new_subpixbuf(cast(GdkPixbuf*)this._cPtr, srcX, srcY, width, height);
@@ -1339,7 +1360,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
           incur a one-time copy of the pixel data for conversion into the
           returned #GBytes.
   */
-  glib.bytes.Bytes readPixelBytes()
+  glib.bytes.Bytes readPixelBytes() nothrow
   {
     GBytes* _cretval;
     _cretval = gdk_pixbuf_read_pixel_bytes(cast(const(GdkPixbuf)*)this._cPtr);
@@ -1354,7 +1375,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       if [gdkpixbuf.pixbuf.Pixbuf.getPixels] is called on a read-only pixbuf.
       Returns: a read-only pointer to the raw pixel data
   */
-  const(ubyte)* readPixels()
+  const(ubyte)* readPixels() nothrow
   {
     auto _retval = gdk_pixbuf_read_pixels(cast(const(GdkPixbuf)*)this._cPtr);
     return _retval;
@@ -1367,7 +1388,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         key = a nul-terminated string representing the key to remove.
       Returns: `TRUE` if an option was removed, `FALSE` if not.
   */
-  bool removeOption(string key)
+  bool removeOption(string key) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1385,7 +1406,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         angle = the angle to rotate by
       Returns: the new pixbuf
   */
-  gdkpixbuf.pixbuf.Pixbuf rotateSimple(gdkpixbuf.types.PixbufRotation angle)
+  gdkpixbuf.pixbuf.Pixbuf rotateSimple(gdkpixbuf.types.PixbufRotation angle) nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gdk_pixbuf_rotate_simple(cast(const(GdkPixbuf)*)this._cPtr, angle);
@@ -1414,7 +1435,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         saturation = saturation factor
         pixelate = whether to pixelate
   */
-  void saturateAndPixelate(gdkpixbuf.pixbuf.Pixbuf dest, float saturation, bool pixelate)
+  void saturateAndPixelate(gdkpixbuf.pixbuf.Pixbuf dest, float saturation, bool pixelate) nothrow
   {
     gdk_pixbuf_saturate_and_pixelate(cast(const(GdkPixbuf)*)this._cPtr, dest ? cast(GdkPixbuf*)dest._cPtr(No.Dup) : null, saturation, pixelate);
   }
@@ -1484,7 +1505,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
   */
   bool saveToCallbackv(gdkpixbuf.types.PixbufSaveFunc saveFunc, string type, string[] optionKeys = null, string[] optionValues = null)
   {
-    extern(C) gboolean _saveFuncCallback(const(ubyte)* buf, size_t count, GError** error, void* data)
+    extern(C) gboolean _saveFuncCallback(const(ubyte)* buf, size_t count, GError** error, void* data) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gdkpixbuf.types.PixbufSaveFunc*)data;
@@ -1493,7 +1514,14 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       _buf[0 .. count] = buf[0 .. count];
       auto _error = new glib.error.ErrorWrap(error, No.Take);
 
-      _dretval = (*_dlg)(_buf, _error);
+      try
+      {
+        _dretval = (*_dlg)(_buf, _error);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdkpixbuf.types.PixbufSaveFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
       *error = *cast(GError**)_error._cPtr;
 
@@ -1582,14 +1610,21 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         cancellable = optional [gio.cancellable.Cancellable] object, `NULL` to ignore
         callback = a [gio.types.AsyncReadyCallback] to call when the pixbuf is saved
   */
-  void saveToStreamvAsync(gio.output_stream.OutputStream stream, string type, string[] optionKeys = null, string[] optionValues = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void saveToStreamvAsync(gio.output_stream.OutputStream stream, string type, string[] optionKeys = null, string[] optionValues = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _type = type.toCString(No.Alloc);
@@ -1677,7 +1712,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         scaleY = the scale factor in the Y direction
         interpType = the interpolation type for the transformation.
   */
-  void scale(gdkpixbuf.pixbuf.Pixbuf dest, int destX, int destY, int destWidth, int destHeight, double offsetX, double offsetY, double scaleX, double scaleY, gdkpixbuf.types.InterpType interpType)
+  void scale(gdkpixbuf.pixbuf.Pixbuf dest, int destX, int destY, int destWidth, int destHeight, double offsetX, double offsetY, double scaleX, double scaleY, gdkpixbuf.types.InterpType interpType) nothrow
   {
     gdk_pixbuf_scale(cast(const(GdkPixbuf)*)this._cPtr, dest ? cast(GdkPixbuf*)dest._cPtr(No.Dup) : null, destX, destY, destWidth, destHeight, offsetX, offsetY, scaleX, scaleY, interpType);
   }
@@ -1708,7 +1743,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         interpType = the interpolation type for the transformation.
       Returns: the new pixbuf
   */
-  gdkpixbuf.pixbuf.Pixbuf scaleSimple(int destWidth, int destHeight, gdkpixbuf.types.InterpType interpType)
+  gdkpixbuf.pixbuf.Pixbuf scaleSimple(int destWidth, int destHeight, gdkpixbuf.types.InterpType interpType) nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gdk_pixbuf_scale_simple(cast(const(GdkPixbuf)*)this._cPtr, destWidth, destHeight, interpType);
@@ -1727,7 +1762,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
         value = a nul-terminated string.
       Returns: `TRUE` on success
   */
-  bool setOption(string key, string value)
+  bool setOption(string key, string value) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1752,7 +1787,7 @@ class PixbufGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.i
           Currently only 8 bit per sample are supported.
       Returns: Builder instance for fluent chaining
   */
-  T bitsPerSample(int propval)
+  T bitsPerSample(int propval) nothrow
   {
     return setProperty("bits-per-sample", propval);
   }
@@ -1765,7 +1800,7 @@ class PixbufGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.i
           Currently, only [gdkpixbuf.types.Colorspace.Rgb] is supported.
       Returns: Builder instance for fluent chaining
   */
-  T colorspace(gdkpixbuf.types.Colorspace propval)
+  T colorspace(gdkpixbuf.types.Colorspace propval) nothrow
   {
     return setProperty("colorspace", propval);
   }
@@ -1776,7 +1811,7 @@ class PixbufGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.i
         propval = Whether the pixbuf has an alpha channel.
       Returns: Builder instance for fluent chaining
   */
-  T hasAlpha(bool propval)
+  T hasAlpha(bool propval) nothrow
   {
     return setProperty("has-alpha", propval);
   }
@@ -1787,7 +1822,7 @@ class PixbufGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.i
         propval = The number of rows of the pixbuf.
       Returns: Builder instance for fluent chaining
   */
-  T height(int propval)
+  T height(int propval) nothrow
   {
     return setProperty("height", propval);
   }
@@ -1800,13 +1835,13 @@ class PixbufGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.i
           Currently, only 3 or 4 samples per pixel are supported.
       Returns: Builder instance for fluent chaining
   */
-  T nChannels(int propval)
+  T nChannels(int propval) nothrow
   {
     return setProperty("n-channels", propval);
   }
 
   /** */
-  T pixelBytes(glib.bytes.Bytes propval)
+  T pixelBytes(glib.bytes.Bytes propval) nothrow
   {
     return setProperty("pixel-bytes", propval);
   }
@@ -1817,7 +1852,7 @@ class PixbufGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.i
         propval = A pointer to the pixel data of the pixbuf.
       Returns: Builder instance for fluent chaining
   */
-  T pixels(void* propval)
+  T pixels(void* propval) nothrow
   {
     return setProperty("pixels", propval);
   }
@@ -1832,7 +1867,7 @@ class PixbufGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.i
           width of the pixbuf.
       Returns: Builder instance for fluent chaining
   */
-  T rowstride(int propval)
+  T rowstride(int propval) nothrow
   {
     return setProperty("rowstride", propval);
   }
@@ -1843,7 +1878,7 @@ class PixbufGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.i
         propval = The number of columns of the pixbuf.
       Returns: Builder instance for fluent chaining
   */
-  T width(int propval)
+  T width(int propval) nothrow
   {
     return setProperty("width", propval);
   }
@@ -1856,7 +1891,7 @@ final class PixbufGidBuilder : PixbufGidBuilderImpl!PixbufGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Pixbuf build()
+  Pixbuf build() nothrow
   {
     return new Pixbuf(cast(void*)createGObject(Pixbuf._getGType), Yes.Take);
   }

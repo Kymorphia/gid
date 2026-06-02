@@ -13,7 +13,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libarrow-dataset-glib.so.2000"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // CSVFileFormat
   GType function() c_gadataset_csv_file_format_get_type; ///

@@ -96,26 +96,26 @@ class View : gtk.text_view.TextView
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_view_get_type != &gidSymbolNotFound ? gtk_source_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override View self()
+  override View self() nothrow
   {
     return this;
   }
@@ -124,19 +124,19 @@ class View : gtk.text_view.TextView
       Get builder for [gtksource.view.View]
       Returns: New builder object
   */
-  static ViewGidBuilder builder()
+  static ViewGidBuilder builder() nothrow
   {
     return new ViewGidBuilder;
   }
 
   /** */
-  @property bool autoIndent()
+  @property bool autoIndent() nothrow
   {
     return getAutoIndent();
   }
 
   /** */
-  @property void autoIndent(bool propval)
+  @property void autoIndent(bool propval) nothrow
   {
     setAutoIndent(propval);
   }
@@ -145,7 +145,7 @@ class View : gtk.text_view.TextView
       Get `backgroundPattern` property.
       Returns: Draw a specific background pattern on the view.
   */
-  @property gtksource.types.BackgroundPatternType backgroundPattern()
+  @property gtksource.types.BackgroundPatternType backgroundPattern() nothrow
   {
     return getBackgroundPattern();
   }
@@ -155,7 +155,7 @@ class View : gtk.text_view.TextView
       Params:
         propval = Draw a specific background pattern on the view.
   */
-  @property void backgroundPattern(gtksource.types.BackgroundPatternType propval)
+  @property void backgroundPattern(gtksource.types.BackgroundPatternType propval) nothrow
   {
     setBackgroundPattern(propval);
   }
@@ -164,7 +164,7 @@ class View : gtk.text_view.TextView
       Get `completion` property.
       Returns: The completion object associated with the view
   */
-  @property gtksource.completion.Completion completion()
+  @property gtksource.completion.Completion completion() nothrow
   {
     return getCompletion();
   }
@@ -179,7 +179,7 @@ class View : gtk.text_view.TextView
         are available by pressing Tab repeatedly until the desired focus
         position is selected.
   */
-  @property bool enableSnippets()
+  @property bool enableSnippets() nothrow
   {
     return getEnableSnippets();
   }
@@ -195,31 +195,31 @@ class View : gtk.text_view.TextView
           are available by pressing Tab repeatedly until the desired focus
           position is selected.
   */
-  @property void enableSnippets(bool propval)
+  @property void enableSnippets(bool propval) nothrow
   {
     setEnableSnippets(propval);
   }
 
   /** */
-  @property bool highlightCurrentLine()
+  @property bool highlightCurrentLine() nothrow
   {
     return getHighlightCurrentLine();
   }
 
   /** */
-  @property void highlightCurrentLine(bool propval)
+  @property void highlightCurrentLine(bool propval) nothrow
   {
     setHighlightCurrentLine(propval);
   }
 
   /** */
-  @property bool indentOnTab()
+  @property bool indentOnTab() nothrow
   {
     return getIndentOnTab();
   }
 
   /** */
-  @property void indentOnTab(bool propval)
+  @property void indentOnTab(bool propval) nothrow
   {
     setIndentOnTab(propval);
   }
@@ -228,7 +228,7 @@ class View : gtk.text_view.TextView
       Get `indentWidth` property.
       Returns: Width of an indentation step expressed in number of spaces.
   */
-  @property int indentWidth()
+  @property int indentWidth() nothrow
   {
     return getIndentWidth();
   }
@@ -238,7 +238,7 @@ class View : gtk.text_view.TextView
       Params:
         propval = Width of an indentation step expressed in number of spaces.
   */
-  @property void indentWidth(int propval)
+  @property void indentWidth(int propval) nothrow
   {
     setIndentWidth(propval);
   }
@@ -248,7 +248,7 @@ class View : gtk.text_view.TextView
       Returns: The property is a [gtksource.indenter.Indenter] to use to indent
         as the user types into the [gtksource.view.View].
   */
-  @property gtksource.indenter.Indenter indenter()
+  @property gtksource.indenter.Indenter indenter() nothrow
   {
     return getIndenter();
   }
@@ -259,19 +259,19 @@ class View : gtk.text_view.TextView
         propval = The property is a [gtksource.indenter.Indenter] to use to indent
           as the user types into the [gtksource.view.View].
   */
-  @property void indenter(gtksource.indenter.Indenter propval)
+  @property void indenter(gtksource.indenter.Indenter propval) nothrow
   {
     setIndenter(propval);
   }
 
   /** */
-  @property bool insertSpacesInsteadOfTabs()
+  @property bool insertSpacesInsteadOfTabs() nothrow
   {
     return getInsertSpacesInsteadOfTabs();
   }
 
   /** */
-  @property void insertSpacesInsteadOfTabs(bool propval)
+  @property void insertSpacesInsteadOfTabs(bool propval) nothrow
   {
     setInsertSpacesInsteadOfTabs(propval);
   }
@@ -280,7 +280,7 @@ class View : gtk.text_view.TextView
       Get `rightMarginPosition` property.
       Returns: Position of the right margin.
   */
-  @property uint rightMarginPosition()
+  @property uint rightMarginPosition() nothrow
   {
     return getRightMarginPosition();
   }
@@ -290,7 +290,7 @@ class View : gtk.text_view.TextView
       Params:
         propval = Position of the right margin.
   */
-  @property void rightMarginPosition(uint propval)
+  @property void rightMarginPosition(uint propval) nothrow
   {
     setRightMarginPosition(propval);
   }
@@ -299,7 +299,7 @@ class View : gtk.text_view.TextView
       Get `showLineMarks` property.
       Returns: Whether to display line mark pixbufs
   */
-  @property bool showLineMarks()
+  @property bool showLineMarks() nothrow
   {
     return getShowLineMarks();
   }
@@ -309,7 +309,7 @@ class View : gtk.text_view.TextView
       Params:
         propval = Whether to display line mark pixbufs
   */
-  @property void showLineMarks(bool propval)
+  @property void showLineMarks(bool propval) nothrow
   {
     setShowLineMarks(propval);
   }
@@ -318,7 +318,7 @@ class View : gtk.text_view.TextView
       Get `showLineNumbers` property.
       Returns: Whether to display line numbers
   */
-  @property bool showLineNumbers()
+  @property bool showLineNumbers() nothrow
   {
     return getShowLineNumbers();
   }
@@ -328,7 +328,7 @@ class View : gtk.text_view.TextView
       Params:
         propval = Whether to display line numbers
   */
-  @property void showLineNumbers(bool propval)
+  @property void showLineNumbers(bool propval) nothrow
   {
     setShowLineNumbers(propval);
   }
@@ -337,7 +337,7 @@ class View : gtk.text_view.TextView
       Get `showRightMargin` property.
       Returns: Whether to display the right margin.
   */
-  @property bool showRightMargin()
+  @property bool showRightMargin() nothrow
   {
     return getShowRightMargin();
   }
@@ -347,7 +347,7 @@ class View : gtk.text_view.TextView
       Params:
         propval = Whether to display the right margin.
   */
-  @property void showRightMargin(bool propval)
+  @property void showRightMargin(bool propval) nothrow
   {
     setShowRightMargin(propval);
   }
@@ -356,7 +356,7 @@ class View : gtk.text_view.TextView
       Get `smartBackspace` property.
       Returns: Whether smart Backspace should be used.
   */
-  @property bool smartBackspace()
+  @property bool smartBackspace() nothrow
   {
     return getSmartBackspace();
   }
@@ -366,7 +366,7 @@ class View : gtk.text_view.TextView
       Params:
         propval = Whether smart Backspace should be used.
   */
-  @property void smartBackspace(bool propval)
+  @property void smartBackspace(bool propval) nothrow
   {
     setSmartBackspace(propval);
   }
@@ -375,7 +375,7 @@ class View : gtk.text_view.TextView
       Get `smartHomeEnd` property.
       Returns: Set the behavior of the HOME and END keys.
   */
-  @property gtksource.types.SmartHomeEndType smartHomeEnd()
+  @property gtksource.types.SmartHomeEndType smartHomeEnd() nothrow
   {
     return getSmartHomeEnd();
   }
@@ -385,7 +385,7 @@ class View : gtk.text_view.TextView
       Params:
         propval = Set the behavior of the HOME and END keys.
   */
-  @property void smartHomeEnd(gtksource.types.SmartHomeEndType propval)
+  @property void smartHomeEnd(gtksource.types.SmartHomeEndType propval) nothrow
   {
     setSmartHomeEnd(propval);
   }
@@ -394,7 +394,7 @@ class View : gtk.text_view.TextView
       Get `spaceDrawer` property.
       Returns: The [gtksource.space_drawer.SpaceDrawer] object associated with the view.4
   */
-  @property gtksource.space_drawer.SpaceDrawer spaceDrawer()
+  @property gtksource.space_drawer.SpaceDrawer spaceDrawer() nothrow
   {
     return getSpaceDrawer();
   }
@@ -403,7 +403,7 @@ class View : gtk.text_view.TextView
       Get `tabWidth` property.
       Returns: Width of a tab character expressed in number of spaces.
   */
-  @property uint tabWidth()
+  @property uint tabWidth() nothrow
   {
     return getTabWidth();
   }
@@ -413,7 +413,7 @@ class View : gtk.text_view.TextView
       Params:
         propval = Width of a tab character expressed in number of spaces.
   */
-  @property void tabWidth(uint propval)
+  @property void tabWidth(uint propval) nothrow
   {
     setTabWidth(propval);
   }
@@ -429,7 +429,7 @@ class View : gtk.text_view.TextView
       [gtksource.view.View.newWithBuffer].
       Returns: a new #GtkSourceView.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_source_view_new();
@@ -445,7 +445,7 @@ class View : gtk.text_view.TextView
         buffer = a #GtkSourceBuffer.
       Returns: a new #GtkSourceView.
   */
-  static gtksource.view.View newWithBuffer(gtksource.buffer.Buffer buffer)
+  static gtksource.view.View newWithBuffer(gtksource.buffer.Buffer buffer) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_source_view_new_with_buffer(buffer ? cast(GtkSourceBuffer*)buffer._cPtr(No.Dup) : null);
@@ -457,7 +457,7 @@ class View : gtk.text_view.TextView
       Returns whether auto-indentation of text is enabled.
       Returns: true if auto indentation is enabled.
   */
-  bool getAutoIndent()
+  bool getAutoIndent() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_view_get_auto_indent(cast(GtkSourceView*)this._cPtr);
@@ -469,7 +469,7 @@ class View : gtk.text_view.TextView
       the background pattern should be displayed for this view.
       Returns: the #GtkSourceBackgroundPatternType.
   */
-  gtksource.types.BackgroundPatternType getBackgroundPattern()
+  gtksource.types.BackgroundPatternType getBackgroundPattern() nothrow
   {
     GtkSourceBackgroundPatternType _cretval;
     _cretval = gtk_source_view_get_background_pattern(cast(GtkSourceView*)this._cPtr);
@@ -484,7 +484,7 @@ class View : gtk.text_view.TextView
       Each [gtksource.view.View] object has a different [gtksource.completion.Completion].
       Returns: the #GtkSourceCompletion associated with view.
   */
-  gtksource.completion.Completion getCompletion()
+  gtksource.completion.Completion getCompletion() nothrow
   {
     GtkSourceCompletion* _cretval;
     _cretval = gtk_source_view_get_completion(cast(GtkSourceView*)this._cPtr);
@@ -499,7 +499,7 @@ class View : gtk.text_view.TextView
       may be expanded when the user presses Tab after a word in the [gtksource.view.View].
       Returns: true if enabled
   */
-  bool getEnableSnippets()
+  bool getEnableSnippets() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_view_get_enable_snippets(cast(GtkSourceView*)this._cPtr);
@@ -517,7 +517,7 @@ class View : gtk.text_view.TextView
         windowType = the gutter window type.
       Returns: the #GtkSourceGutter.
   */
-  override gtksource.gutter.Gutter getGutter(gtk.types.TextWindowType windowType)
+  override gtksource.gutter.Gutter getGutter(gtk.types.TextWindowType windowType) nothrow
   {
     GtkSourceGutter* _cretval;
     _cretval = gtk_source_view_get_gutter(cast(GtkSourceView*)this._cPtr, windowType);
@@ -529,7 +529,7 @@ class View : gtk.text_view.TextView
       Returns whether the current line is highlighted.
       Returns: true if the current line is highlighted.
   */
-  bool getHighlightCurrentLine()
+  bool getHighlightCurrentLine() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_view_get_highlight_current_line(cast(GtkSourceView*)this._cPtr);
@@ -543,7 +543,7 @@ class View : gtk.text_view.TextView
       Each [gtksource.view.View] object has a different [gtksource.hover.Hover].
       Returns: a #GtkSourceHover associated with view.
   */
-  gtksource.hover.Hover getHover()
+  gtksource.hover.Hover getHover() nothrow
   {
     GtkSourceHover* _cretval;
     _cretval = gtk_source_view_get_hover(cast(GtkSourceView*)this._cPtr);
@@ -556,7 +556,7 @@ class View : gtk.text_view.TextView
       should get indented instead of replaced with the `\t` character.
       Returns: true if the selection is indented when tab is pressed.
   */
-  bool getIndentOnTab()
+  bool getIndentOnTab() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_view_get_indent_on_tab(cast(GtkSourceView*)this._cPtr);
@@ -569,7 +569,7 @@ class View : gtk.text_view.TextView
       See [gtksource.view.View.setIndentWidth] for details.
       Returns: indent width.
   */
-  int getIndentWidth()
+  int getIndentWidth() nothrow
   {
     int _retval;
     _retval = gtk_source_view_get_indent_width(cast(GtkSourceView*)this._cPtr);
@@ -580,7 +580,7 @@ class View : gtk.text_view.TextView
       Gets the [gtksource.view.View.indenter] property.
       Returns: a #GtkSourceIndenter or null
   */
-  gtksource.indenter.Indenter getIndenter()
+  gtksource.indenter.Indenter getIndenter() nothrow
   {
     GtkSourceIndenter* _cretval;
     _cretval = gtk_source_view_get_indenter(cast(GtkSourceView*)this._cPtr);
@@ -593,7 +593,7 @@ class View : gtk.text_view.TextView
       be replaced by a group of space characters.
       Returns: true if spaces are inserted instead of tabs.
   */
-  bool getInsertSpacesInsteadOfTabs()
+  bool getInsertSpacesInsteadOfTabs() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_view_get_insert_spaces_instead_of_tabs(cast(GtkSourceView*)this._cPtr);
@@ -609,7 +609,7 @@ class View : gtk.text_view.TextView
       Returns: #GtkSourceMarkAttributes for the category.
         The object belongs to view, so it must not be unreffed.
   */
-  gtksource.mark_attributes.MarkAttributes getMarkAttributes(string category, out int priority)
+  gtksource.mark_attributes.MarkAttributes getMarkAttributes(string category, out int priority) nothrow
   {
     GtkSourceMarkAttributes* _cretval;
     const(char)* _category = category.toCString(No.Alloc);
@@ -622,7 +622,7 @@ class View : gtk.text_view.TextView
       Gets the position of the right margin in the given view.
       Returns: the position of the right margin.
   */
-  uint getRightMarginPosition()
+  uint getRightMarginPosition() nothrow
   {
     uint _retval;
     _retval = gtk_source_view_get_right_margin_position(cast(GtkSourceView*)this._cPtr);
@@ -633,7 +633,7 @@ class View : gtk.text_view.TextView
       Returns whether line marks are displayed beside the text.
       Returns: true if the line marks are displayed.
   */
-  bool getShowLineMarks()
+  bool getShowLineMarks() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_view_get_show_line_marks(cast(GtkSourceView*)this._cPtr);
@@ -644,7 +644,7 @@ class View : gtk.text_view.TextView
       Returns whether line numbers are displayed beside the text.
       Returns: true if the line numbers are displayed.
   */
-  bool getShowLineNumbers()
+  bool getShowLineNumbers() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_view_get_show_line_numbers(cast(GtkSourceView*)this._cPtr);
@@ -655,7 +655,7 @@ class View : gtk.text_view.TextView
       Returns whether a right margin is displayed.
       Returns: true if the right margin is shown.
   */
-  bool getShowRightMargin()
+  bool getShowRightMargin() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_view_get_show_right_margin(cast(GtkSourceView*)this._cPtr);
@@ -667,7 +667,7 @@ class View : gtk.text_view.TextView
       up to the previous tab stop.
       Returns: true if smart Backspace handling is enabled.
   */
-  bool getSmartBackspace()
+  bool getSmartBackspace() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_view_get_smart_backspace(cast(GtkSourceView*)this._cPtr);
@@ -679,7 +679,7 @@ class View : gtk.text_view.TextView
       how the cursor will move when HOME and END keys are pressed.
       Returns: a #GtkSourceSmartHomeEndType value.
   */
-  gtksource.types.SmartHomeEndType getSmartHomeEnd()
+  gtksource.types.SmartHomeEndType getSmartHomeEnd() nothrow
   {
     GtkSourceSmartHomeEndType _cretval;
     _cretval = gtk_source_view_get_smart_home_end(cast(GtkSourceView*)this._cPtr);
@@ -694,7 +694,7 @@ class View : gtk.text_view.TextView
       Each [gtksource.view.View] object has a different [gtksource.space_drawer.SpaceDrawer].
       Returns: the #GtkSourceSpaceDrawer associated with view.
   */
-  gtksource.space_drawer.SpaceDrawer getSpaceDrawer()
+  gtksource.space_drawer.SpaceDrawer getSpaceDrawer() nothrow
   {
     GtkSourceSpaceDrawer* _cretval;
     _cretval = gtk_source_view_get_space_drawer(cast(GtkSourceView*)this._cPtr);
@@ -706,7 +706,7 @@ class View : gtk.text_view.TextView
       Returns the width of tabulation in characters.
       Returns: width of tab.
   */
-  uint getTabWidth()
+  uint getTabWidth() nothrow
   {
     uint _retval;
     _retval = gtk_source_view_get_tab_width(cast(GtkSourceView*)this._cPtr);
@@ -721,7 +721,7 @@ class View : gtk.text_view.TextView
         iter = a position in view.
       Returns: the visual column at iter.
   */
-  uint getVisualColumn(gtk.text_iter.TextIter iter)
+  uint getVisualColumn(gtk.text_iter.TextIter iter) nothrow
   {
     uint _retval;
     _retval = gtk_source_view_get_visual_column(cast(GtkSourceView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null);
@@ -736,7 +736,7 @@ class View : gtk.text_view.TextView
         start = #GtkTextIter of the first line to indent
         end = #GtkTextIter of the last line to indent
   */
-  void indentLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
+  void indentLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end) nothrow
   {
     gtk_source_view_indent_lines(cast(GtkSourceView*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
   }
@@ -752,7 +752,7 @@ class View : gtk.text_view.TextView
         snippet = a #GtkSourceSnippet
         location = a #GtkTextIter or null for the cursor position
   */
-  void pushSnippet(gtksource.snippet.Snippet snippet, gtk.text_iter.TextIter location = null)
+  void pushSnippet(gtksource.snippet.Snippet snippet, gtk.text_iter.TextIter location = null) nothrow
   {
     gtk_source_view_push_snippet(cast(GtkSourceView*)this._cPtr, snippet ? cast(GtkSourceSnippet*)snippet._cPtr(No.Dup) : null, location ? cast(GtkTextIter*)location._cPtr(No.Dup) : null);
   }
@@ -768,7 +768,7 @@ class View : gtk.text_view.TextView
       Params:
         enable = whether to enable auto indentation.
   */
-  void setAutoIndent(bool enable)
+  void setAutoIndent(bool enable) nothrow
   {
     gtk_source_view_set_auto_indent(cast(GtkSourceView*)this._cPtr, enable);
   }
@@ -779,7 +779,7 @@ class View : gtk.text_view.TextView
       Params:
         backgroundPattern = the #GtkSourceBackgroundPatternType.
   */
-  void setBackgroundPattern(gtksource.types.BackgroundPatternType backgroundPattern)
+  void setBackgroundPattern(gtksource.types.BackgroundPatternType backgroundPattern) nothrow
   {
     gtk_source_view_set_background_pattern(cast(GtkSourceView*)this._cPtr, backgroundPattern);
   }
@@ -794,7 +794,7 @@ class View : gtk.text_view.TextView
       Params:
         enableSnippets = if snippets should be enabled
   */
-  void setEnableSnippets(bool enableSnippets)
+  void setEnableSnippets(bool enableSnippets) nothrow
   {
     gtk_source_view_set_enable_snippets(cast(GtkSourceView*)this._cPtr, enableSnippets);
   }
@@ -805,7 +805,7 @@ class View : gtk.text_view.TextView
       Params:
         highlight = whether to highlight the current line.
   */
-  void setHighlightCurrentLine(bool highlight)
+  void setHighlightCurrentLine(bool highlight) nothrow
   {
     gtk_source_view_set_highlight_current_line(cast(GtkSourceView*)this._cPtr, highlight);
   }
@@ -824,7 +824,7 @@ class View : gtk.text_view.TextView
       Params:
         enable = whether to indent a block when tab is pressed.
   */
-  void setIndentOnTab(bool enable)
+  void setIndentOnTab(bool enable) nothrow
   {
     gtk_source_view_set_indent_on_tab(cast(GtkSourceView*)this._cPtr, enable);
   }
@@ -856,7 +856,7 @@ class View : gtk.text_view.TextView
       Params:
         width = indent width in characters.
   */
-  void setIndentWidth(int width)
+  void setIndentWidth(int width) nothrow
   {
     gtk_source_view_set_indent_width(cast(GtkSourceView*)this._cPtr, width);
   }
@@ -870,7 +870,7 @@ class View : gtk.text_view.TextView
       Params:
         indenter = a #GtkSourceIndenter or null
   */
-  void setIndenter(gtksource.indenter.Indenter indenter = null)
+  void setIndenter(gtksource.indenter.Indenter indenter = null) nothrow
   {
     gtk_source_view_set_indenter(cast(GtkSourceView*)this._cPtr, indenter ? cast(GtkSourceIndenter*)(cast(gobject.object.ObjectWrap)indenter)._cPtr(No.Dup) : null);
   }
@@ -884,7 +884,7 @@ class View : gtk.text_view.TextView
       Params:
         enable = whether to insert spaces instead of tabs.
   */
-  void setInsertSpacesInsteadOfTabs(bool enable)
+  void setInsertSpacesInsteadOfTabs(bool enable) nothrow
   {
     gtk_source_view_set_insert_spaces_instead_of_tabs(cast(GtkSourceView*)this._cPtr, enable);
   }
@@ -897,7 +897,7 @@ class View : gtk.text_view.TextView
         attributes = mark attributes.
         priority = priority of the category.
   */
-  void setMarkAttributes(string category, gtksource.mark_attributes.MarkAttributes attributes, int priority)
+  void setMarkAttributes(string category, gtksource.mark_attributes.MarkAttributes attributes, int priority) nothrow
   {
     const(char)* _category = category.toCString(No.Alloc);
     gtk_source_view_set_mark_attributes(cast(GtkSourceView*)this._cPtr, _category, attributes ? cast(GtkSourceMarkAttributes*)attributes._cPtr(No.Dup) : null, priority);
@@ -909,7 +909,7 @@ class View : gtk.text_view.TextView
       Params:
         pos = the width in characters where to position the right margin.
   */
-  void setRightMarginPosition(uint pos)
+  void setRightMarginPosition(uint pos) nothrow
   {
     gtk_source_view_set_right_margin_position(cast(GtkSourceView*)this._cPtr, pos);
   }
@@ -920,7 +920,7 @@ class View : gtk.text_view.TextView
       Params:
         show = whether line marks should be displayed.
   */
-  void setShowLineMarks(bool show)
+  void setShowLineMarks(bool show) nothrow
   {
     gtk_source_view_set_show_line_marks(cast(GtkSourceView*)this._cPtr, show);
   }
@@ -931,7 +931,7 @@ class View : gtk.text_view.TextView
       Params:
         show = whether line numbers should be displayed.
   */
-  void setShowLineNumbers(bool show)
+  void setShowLineNumbers(bool show) nothrow
   {
     gtk_source_view_set_show_line_numbers(cast(GtkSourceView*)this._cPtr, show);
   }
@@ -942,7 +942,7 @@ class View : gtk.text_view.TextView
       Params:
         show = whether to show a right margin.
   */
-  void setShowRightMargin(bool show)
+  void setShowRightMargin(bool show) nothrow
   {
     gtk_source_view_set_show_right_margin(cast(GtkSourceView*)this._cPtr, show);
   }
@@ -954,7 +954,7 @@ class View : gtk.text_view.TextView
       Params:
         smartBackspace = whether to enable smart Backspace handling.
   */
-  void setSmartBackspace(bool smartBackspace)
+  void setSmartBackspace(bool smartBackspace) nothrow
   {
     gtk_source_view_set_smart_backspace(cast(GtkSourceView*)this._cPtr, smartBackspace);
   }
@@ -966,7 +966,7 @@ class View : gtk.text_view.TextView
       Params:
         smartHomeEnd = the desired behavior among #GtkSourceSmartHomeEndType.
   */
-  void setSmartHomeEnd(gtksource.types.SmartHomeEndType smartHomeEnd)
+  void setSmartHomeEnd(gtksource.types.SmartHomeEndType smartHomeEnd) nothrow
   {
     gtk_source_view_set_smart_home_end(cast(GtkSourceView*)this._cPtr, smartHomeEnd);
   }
@@ -980,7 +980,7 @@ class View : gtk.text_view.TextView
       Params:
         width = width of tab in characters.
   */
-  void setTabWidth(uint width)
+  void setTabWidth(uint width) nothrow
   {
     gtk_source_view_set_tab_width(cast(GtkSourceView*)this._cPtr, width);
   }
@@ -993,7 +993,7 @@ class View : gtk.text_view.TextView
         start = #GtkTextIter of the first line to indent
         end = #GtkTextIter of the last line to indent
   */
-  void unindentLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
+  void unindentLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end) nothrow
   {
     gtk_source_view_unindent_lines(cast(GtkSourceView*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
   }
@@ -1015,14 +1015,14 @@ class View : gtk.text_view.TextView
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChangeCase(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChangeCase(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtksource.types.ChangeCaseType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtksource.view.View)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1034,7 +1034,14 @@ class View : gtk.text_view.TextView
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.view.View.changeCase");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1058,14 +1065,14 @@ class View : gtk.text_view.TextView
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChangeNumber(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChangeNumber(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtksource.view.View)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1077,7 +1084,14 @@ class View : gtk.text_view.TextView
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.view.View.changeNumber");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1099,13 +1113,13 @@ class View : gtk.text_view.TextView
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectJoinLines(T)(T callback, Flag!"After" after = No.After)
+  gulong connectJoinLines(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.view.View)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1114,7 +1128,14 @@ class View : gtk.text_view.TextView
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.view.View.joinLines");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1147,7 +1168,7 @@ class View : gtk.text_view.TextView
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLineMarkActivated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLineMarkActivated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
@@ -1157,7 +1178,7 @@ class View : gtk.text_view.TextView
   && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gtksource.view.View)))
   && Parameters!T.length < 6)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1178,7 +1199,14 @@ class View : gtk.text_view.TextView
       static if (Parameters!T.length > 4)
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.view.View.lineMarkActivated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1205,14 +1233,14 @@ class View : gtk.text_view.TextView
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveLines(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveLines(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtksource.view.View)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1224,7 +1252,14 @@ class View : gtk.text_view.TextView
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.view.View.moveLines");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1248,14 +1283,14 @@ class View : gtk.text_view.TextView
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveToMatchingBracket(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveToMatchingBracket(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtksource.view.View)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1267,7 +1302,14 @@ class View : gtk.text_view.TextView
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.view.View.moveToMatchingBracket");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1294,14 +1336,14 @@ class View : gtk.text_view.TextView
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveWords(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveWords(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtksource.view.View)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1313,7 +1355,14 @@ class View : gtk.text_view.TextView
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.view.View.moveWords");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1343,7 +1392,7 @@ class View : gtk.text_view.TextView
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPushSnippet(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPushSnippet(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.snippet.Snippet)))
@@ -1351,7 +1400,7 @@ class View : gtk.text_view.TextView
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtksource.view.View)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1368,7 +1417,14 @@ class View : gtk.text_view.TextView
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.view.View.pushSnippet");
+      }
 
       static if (Parameters!T.length > 1)
         *getVal!(Parameters!T[1]*)(&_paramVals[2]) = location;
@@ -1402,13 +1458,13 @@ class View : gtk.text_view.TextView
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectShowCompletion(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowCompletion(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.view.View)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1417,7 +1473,14 @@ class View : gtk.text_view.TextView
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.view.View.showCompletion");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1448,7 +1511,7 @@ class View : gtk.text_view.TextView
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSmartHomeEnd(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSmartHomeEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
@@ -1456,7 +1519,7 @@ class View : gtk.text_view.TextView
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtksource.view.View)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1471,7 +1534,14 @@ class View : gtk.text_view.TextView
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.view.View.smartHomeEnd");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1485,7 +1555,7 @@ class ViewGidBuilderImpl(T) : gtk.text_view.TextViewGidBuilderImpl!T
 
 
   /** */
-  T autoIndent(bool propval)
+  T autoIndent(bool propval) nothrow
   {
     return setProperty("auto-indent", propval);
   }
@@ -1496,7 +1566,7 @@ class ViewGidBuilderImpl(T) : gtk.text_view.TextViewGidBuilderImpl!T
         propval = Draw a specific background pattern on the view.
       Returns: Builder instance for fluent chaining
   */
-  T backgroundPattern(gtksource.types.BackgroundPatternType propval)
+  T backgroundPattern(gtksource.types.BackgroundPatternType propval) nothrow
   {
     return setProperty("background-pattern", propval);
   }
@@ -1513,19 +1583,19 @@ class ViewGidBuilderImpl(T) : gtk.text_view.TextViewGidBuilderImpl!T
           position is selected.
       Returns: Builder instance for fluent chaining
   */
-  T enableSnippets(bool propval)
+  T enableSnippets(bool propval) nothrow
   {
     return setProperty("enable-snippets", propval);
   }
 
   /** */
-  T highlightCurrentLine(bool propval)
+  T highlightCurrentLine(bool propval) nothrow
   {
     return setProperty("highlight-current-line", propval);
   }
 
   /** */
-  T indentOnTab(bool propval)
+  T indentOnTab(bool propval) nothrow
   {
     return setProperty("indent-on-tab", propval);
   }
@@ -1536,7 +1606,7 @@ class ViewGidBuilderImpl(T) : gtk.text_view.TextViewGidBuilderImpl!T
         propval = Width of an indentation step expressed in number of spaces.
       Returns: Builder instance for fluent chaining
   */
-  T indentWidth(int propval)
+  T indentWidth(int propval) nothrow
   {
     return setProperty("indent-width", propval);
   }
@@ -1548,13 +1618,13 @@ class ViewGidBuilderImpl(T) : gtk.text_view.TextViewGidBuilderImpl!T
           as the user types into the [gtksource.view.View].
       Returns: Builder instance for fluent chaining
   */
-  T indenter(gtksource.indenter.Indenter propval)
+  T indenter(gtksource.indenter.Indenter propval) nothrow
   {
     return setProperty("indenter", propval);
   }
 
   /** */
-  T insertSpacesInsteadOfTabs(bool propval)
+  T insertSpacesInsteadOfTabs(bool propval) nothrow
   {
     return setProperty("insert-spaces-instead-of-tabs", propval);
   }
@@ -1565,7 +1635,7 @@ class ViewGidBuilderImpl(T) : gtk.text_view.TextViewGidBuilderImpl!T
         propval = Position of the right margin.
       Returns: Builder instance for fluent chaining
   */
-  T rightMarginPosition(uint propval)
+  T rightMarginPosition(uint propval) nothrow
   {
     return setProperty("right-margin-position", propval);
   }
@@ -1576,7 +1646,7 @@ class ViewGidBuilderImpl(T) : gtk.text_view.TextViewGidBuilderImpl!T
         propval = Whether to display line mark pixbufs
       Returns: Builder instance for fluent chaining
   */
-  T showLineMarks(bool propval)
+  T showLineMarks(bool propval) nothrow
   {
     return setProperty("show-line-marks", propval);
   }
@@ -1587,7 +1657,7 @@ class ViewGidBuilderImpl(T) : gtk.text_view.TextViewGidBuilderImpl!T
         propval = Whether to display line numbers
       Returns: Builder instance for fluent chaining
   */
-  T showLineNumbers(bool propval)
+  T showLineNumbers(bool propval) nothrow
   {
     return setProperty("show-line-numbers", propval);
   }
@@ -1598,7 +1668,7 @@ class ViewGidBuilderImpl(T) : gtk.text_view.TextViewGidBuilderImpl!T
         propval = Whether to display the right margin.
       Returns: Builder instance for fluent chaining
   */
-  T showRightMargin(bool propval)
+  T showRightMargin(bool propval) nothrow
   {
     return setProperty("show-right-margin", propval);
   }
@@ -1609,7 +1679,7 @@ class ViewGidBuilderImpl(T) : gtk.text_view.TextViewGidBuilderImpl!T
         propval = Whether smart Backspace should be used.
       Returns: Builder instance for fluent chaining
   */
-  T smartBackspace(bool propval)
+  T smartBackspace(bool propval) nothrow
   {
     return setProperty("smart-backspace", propval);
   }
@@ -1620,7 +1690,7 @@ class ViewGidBuilderImpl(T) : gtk.text_view.TextViewGidBuilderImpl!T
         propval = Set the behavior of the HOME and END keys.
       Returns: Builder instance for fluent chaining
   */
-  T smartHomeEnd(gtksource.types.SmartHomeEndType propval)
+  T smartHomeEnd(gtksource.types.SmartHomeEndType propval) nothrow
   {
     return setProperty("smart-home-end", propval);
   }
@@ -1631,7 +1701,7 @@ class ViewGidBuilderImpl(T) : gtk.text_view.TextViewGidBuilderImpl!T
         propval = Width of a tab character expressed in number of spaces.
       Returns: Builder instance for fluent chaining
   */
-  T tabWidth(uint propval)
+  T tabWidth(uint propval) nothrow
   {
     return setProperty("tab-width", propval);
   }
@@ -1644,7 +1714,7 @@ final class ViewGidBuilder : ViewGidBuilderImpl!ViewGidBuilder
       Create object from builder.
       Returns: New object
   */
-  View build()
+  View build() nothrow
   {
     return new View(cast(void*)createGObject(View._getGType), No.Take);
   }

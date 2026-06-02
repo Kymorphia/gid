@@ -38,26 +38,26 @@ class Surface : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_surface_get_type != &gidSymbolNotFound ? gdk_surface_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Surface self()
+  override Surface self() nothrow
   {
     return this;
   }
@@ -66,7 +66,7 @@ class Surface : gobject.object.ObjectWrap
       Get builder for [gdk.surface.Surface]
       Returns: New builder object
   */
-  static SurfaceGidBuilder builder()
+  static SurfaceGidBuilder builder() nothrow
   {
     return new SurfaceGidBuilder;
   }
@@ -75,7 +75,7 @@ class Surface : gobject.object.ObjectWrap
       Get `cursor` property.
       Returns: The mouse pointer for the [gdk.surface.Surface].
   */
-  @property gdk.cursor.Cursor cursor()
+  @property gdk.cursor.Cursor cursor() nothrow
   {
     return getCursor();
   }
@@ -85,7 +85,7 @@ class Surface : gobject.object.ObjectWrap
       Params:
         propval = The mouse pointer for the [gdk.surface.Surface].
   */
-  @property void cursor(gdk.cursor.Cursor propval)
+  @property void cursor(gdk.cursor.Cursor propval) nothrow
   {
     setCursor(propval);
   }
@@ -94,7 +94,7 @@ class Surface : gobject.object.ObjectWrap
       Get `display` property.
       Returns: The [gdk.display.Display] connection of the surface.
   */
-  @property gdk.display.Display display()
+  @property gdk.display.Display display() nothrow
   {
     return getDisplay();
   }
@@ -103,7 +103,7 @@ class Surface : gobject.object.ObjectWrap
       Get `frameClock` property.
       Returns: The [gdk.frame_clock.FrameClock] of the surface.
   */
-  @property gdk.frame_clock.FrameClock frameClock()
+  @property gdk.frame_clock.FrameClock frameClock() nothrow
   {
     return getFrameClock();
   }
@@ -112,7 +112,7 @@ class Surface : gobject.object.ObjectWrap
       Get `height` property.
       Returns: The height of the surface, in pixels.
   */
-  @property int height()
+  @property int height() nothrow
   {
     return getHeight();
   }
@@ -121,7 +121,7 @@ class Surface : gobject.object.ObjectWrap
       Get `mapped` property.
       Returns: Whether the surface is mapped.
   */
-  @property bool mapped()
+  @property bool mapped() nothrow
   {
     return getMapped();
   }
@@ -130,7 +130,7 @@ class Surface : gobject.object.ObjectWrap
       Get `scale` property.
       Returns: The scale of the surface.
   */
-  @property double scale()
+  @property double scale() nothrow
   {
     return getScale();
   }
@@ -142,7 +142,7 @@ class Surface : gobject.object.ObjectWrap
         The scale factor is the next larger integer,
         compared to [gdk.surface.Surface.scale].
   */
-  @property int scaleFactor()
+  @property int scaleFactor() nothrow
   {
     return getScaleFactor();
   }
@@ -151,7 +151,7 @@ class Surface : gobject.object.ObjectWrap
       Get `width` property.
       Returns: The width of the surface in pixels.
   */
-  @property int width()
+  @property int width() nothrow
   {
     return getWidth();
   }
@@ -167,7 +167,7 @@ class Surface : gobject.object.ObjectWrap
         autohide = whether to hide the surface on outside clicks
       Returns: a new [gdk.surface.Surface]
   */
-  static gdk.surface.Surface newPopup(gdk.surface.Surface parent, bool autohide)
+  static gdk.surface.Surface newPopup(gdk.surface.Surface parent, bool autohide) nothrow
   {
     GdkSurface* _cretval;
     _cretval = gdk_surface_new_popup(parent ? cast(GdkSurface*)parent._cPtr(No.Dup) : null, autohide);
@@ -182,7 +182,7 @@ class Surface : gobject.object.ObjectWrap
         display = the display to create the surface on
       Returns: the new [gdk.surface.Surface]
   */
-  static gdk.surface.Surface newToplevel(gdk.display.Display display)
+  static gdk.surface.Surface newToplevel(gdk.display.Display display) nothrow
   {
     GdkSurface* _cretval;
     _cretval = gdk_surface_new_toplevel(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
@@ -196,7 +196,7 @@ class Surface : gobject.object.ObjectWrap
       If the display of surface does not support per-surface beeps,
       emits a short beep on the display just as [gdk.display.Display.beep].
   */
-  void beep()
+  void beep() nothrow
   {
     gdk_surface_beep(cast(GdkSurface*)this._cPtr);
   }
@@ -205,7 +205,7 @@ class Surface : gobject.object.ObjectWrap
       Creates a new [gdk.cairo_context.CairoContext] for rendering on surface.
       Returns: the newly created [gdk.cairo_context.CairoContext]
   */
-  gdk.cairo_context.CairoContext createCairoContext()
+  gdk.cairo_context.CairoContext createCairoContext() nothrow
   {
     GdkCairoContext* _cretval;
     _cretval = gdk_surface_create_cairo_context(cast(GdkSurface*)this._cPtr);
@@ -261,7 +261,7 @@ class Surface : gobject.object.ObjectWrap
   
       Deprecated: Create a suitable cairo image surface yourself
   */
-  cairo.surface.Surface createSimilarSurface(cairo.types.Content content, int width, int height)
+  cairo.surface.Surface createSimilarSurface(cairo.types.Content content, int width, int height) nothrow
   {
     cairo_surface_t* _cretval;
     _cretval = gdk_surface_create_similar_surface(cast(GdkSurface*)this._cPtr, content, width, height);
@@ -299,7 +299,7 @@ class Surface : gobject.object.ObjectWrap
       reference count reaches zero. You must call this function yourself
       before that happens.
   */
-  void destroy()
+  void destroy() nothrow
   {
     gdk_surface_destroy(cast(GdkSurface*)this._cPtr);
   }
@@ -314,7 +314,7 @@ class Surface : gobject.object.ObjectWrap
       Use [gdk.surface.Surface.setCursor] to unset the cursor of the surface.
       Returns: a [gdk.cursor.Cursor]
   */
-  gdk.cursor.Cursor getCursor()
+  gdk.cursor.Cursor getCursor() nothrow
   {
     GdkCursor* _cretval;
     _cretval = gdk_surface_get_cursor(cast(GdkSurface*)this._cPtr);
@@ -335,7 +335,7 @@ class Surface : gobject.object.ObjectWrap
         device = a pointer [gdk.device.Device]
       Returns: a [gdk.cursor.Cursor]
   */
-  gdk.cursor.Cursor getDeviceCursor(gdk.device.Device device)
+  gdk.cursor.Cursor getDeviceCursor(gdk.device.Device device) nothrow
   {
     GdkCursor* _cretval;
     _cretval = gdk_surface_get_device_cursor(cast(GdkSurface*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
@@ -356,7 +356,7 @@ class Surface : gobject.object.ObjectWrap
         mask = return location for the modifier mask
       Returns: true if the device is over the surface
   */
-  bool getDevicePosition(gdk.device.Device device, out double x, out double y, out gdk.types.ModifierType mask)
+  bool getDevicePosition(gdk.device.Device device, out double x, out double y, out gdk.types.ModifierType mask) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_surface_get_device_position(cast(GdkSurface*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y, &mask);
@@ -367,7 +367,7 @@ class Surface : gobject.object.ObjectWrap
       Gets the [gdk.display.Display] associated with a [gdk.surface.Surface].
       Returns: the [gdk.display.Display] associated with surface
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gdk_surface_get_display(cast(GdkSurface*)this._cPtr);
@@ -382,7 +382,7 @@ class Surface : gobject.object.ObjectWrap
       reparented to a new toplevel surface.
       Returns: the frame clock
   */
-  gdk.frame_clock.FrameClock getFrameClock()
+  gdk.frame_clock.FrameClock getFrameClock() nothrow
   {
     GdkFrameClock* _cretval;
     _cretval = gdk_surface_get_frame_clock(cast(GdkSurface*)this._cPtr);
@@ -397,7 +397,7 @@ class Surface : gobject.object.ObjectWrap
       ”device pixels” (see [gdk.surface.Surface.getScaleFactor]).
       Returns: The height of surface
   */
-  int getHeight()
+  int getHeight() nothrow
   {
     int _retval;
     _retval = gdk_surface_get_height(cast(GdkSurface*)this._cPtr);
@@ -411,7 +411,7 @@ class Surface : gobject.object.ObjectWrap
       or [gdk.popup.Popup.present].
       Returns: true if the surface is mapped
   */
-  bool getMapped()
+  bool getMapped() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_surface_get_mapped(cast(GdkSurface*)this._cPtr);
@@ -432,7 +432,7 @@ class Surface : gobject.object.ObjectWrap
       The scale may change during the lifetime of the surface.
       Returns: the scale
   */
-  double getScale()
+  double getScale() nothrow
   {
     double _retval;
     _retval = gdk_surface_get_scale(cast(GdkSurface*)this._cPtr);
@@ -453,7 +453,7 @@ class Surface : gobject.object.ObjectWrap
       The scale factor may change during the lifetime of the surface.
       Returns: the scale factor
   */
-  int getScaleFactor()
+  int getScaleFactor() nothrow
   {
     int _retval;
     _retval = gdk_surface_get_scale_factor(cast(GdkSurface*)this._cPtr);
@@ -467,7 +467,7 @@ class Surface : gobject.object.ObjectWrap
       ”device pixels” (see [gdk.surface.Surface.getScaleFactor]).
       Returns: The width of surface
   */
-  int getWidth()
+  int getWidth() nothrow
   {
     int _retval;
     _retval = gdk_surface_get_width(cast(GdkSurface*)this._cPtr);
@@ -482,7 +482,7 @@ class Surface : gobject.object.ObjectWrap
       they won’t be displayed. Normally done automatically as
       part of [[gtk.widget.Widget.hide]](../gtk4/method.Widget.hide.html).
   */
-  void hide()
+  void hide() nothrow
   {
     gdk_surface_hide(cast(GdkSurface*)this._cPtr);
   }
@@ -491,7 +491,7 @@ class Surface : gobject.object.ObjectWrap
       Check to see if a surface is destroyed.
       Returns: true if the surface is destroyed
   */
-  bool isDestroyed()
+  bool isDestroyed() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_surface_is_destroyed(cast(GdkSurface*)this._cPtr);
@@ -505,7 +505,7 @@ class Surface : gobject.object.ObjectWrap
       This function is useful for implementations that track invalid
       regions on their own.
   */
-  void queueRender()
+  void queueRender() nothrow
   {
     gdk_surface_queue_render(cast(GdkSurface*)this._cPtr);
   }
@@ -515,7 +515,7 @@ class Surface : gobject.object.ObjectWrap
       
       See [gdk.frame_clock.FrameClock.requestPhase].
   */
-  void requestLayout()
+  void requestLayout() nothrow
   {
     gdk_surface_request_layout(cast(GdkSurface*)this._cPtr);
   }
@@ -533,7 +533,7 @@ class Surface : gobject.object.ObjectWrap
       Params:
         cursor = a [gdk.cursor.Cursor]
   */
-  void setCursor(gdk.cursor.Cursor cursor = null)
+  void setCursor(gdk.cursor.Cursor cursor = null) nothrow
   {
     gdk_surface_set_cursor(cast(GdkSurface*)this._cPtr, cursor ? cast(GdkCursor*)cursor._cPtr(No.Dup) : null);
   }
@@ -551,7 +551,7 @@ class Surface : gobject.object.ObjectWrap
         device = a pointer [gdk.device.Device]
         cursor = a [gdk.cursor.Cursor]
   */
-  void setDeviceCursor(gdk.device.Device device, gdk.cursor.Cursor cursor)
+  void setDeviceCursor(gdk.device.Device device, gdk.cursor.Cursor cursor) nothrow
   {
     gdk_surface_set_device_cursor(cast(GdkSurface*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, cursor ? cast(GdkCursor*)cursor._cPtr(No.Dup) : null);
   }
@@ -575,7 +575,7 @@ class Surface : gobject.object.ObjectWrap
       Params:
         region = region of surface to be reactive
   */
-  void setInputRegion(cairo.region.Region region)
+  void setInputRegion(cairo.region.Region region) nothrow
   {
     gdk_surface_set_input_region(cast(GdkSurface*)this._cPtr, region ? cast(cairo_region_t*)region._cPtr(No.Dup) : null);
   }
@@ -601,7 +601,7 @@ class Surface : gobject.object.ObjectWrap
         region = a region, or null to make the entire
             surface opaque
   */
-  void setOpaqueRegion(cairo.region.Region region = null)
+  void setOpaqueRegion(cairo.region.Region region = null) nothrow
   {
     gdk_surface_set_opaque_region(cast(GdkSurface*)this._cPtr, region ? cast(cairo_region_t*)region._cPtr(No.Dup) : null);
   }
@@ -618,7 +618,7 @@ class Surface : gobject.object.ObjectWrap
         y = coordinates to translate
       Returns: true if the coordinates were successfully translated
   */
-  bool translateCoordinates(gdk.surface.Surface to, ref double x, ref double y)
+  bool translateCoordinates(gdk.surface.Surface to, ref double x, ref double y) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_surface_translate_coordinates(cast(GdkSurface*)this._cPtr, to ? cast(GdkSurface*)to._cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
@@ -642,14 +642,14 @@ class Surface : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEnterMonitor(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEnterMonitor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.monitor.MonitorWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.surface.Surface)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -661,7 +661,14 @@ class Surface : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.surface.Surface.enterMonitor");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -686,18 +693,19 @@ class Surface : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event.Event)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.surface.Surface)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -705,7 +713,14 @@ class Surface : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.surface.Surface.event");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -737,7 +752,7 @@ class Surface : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLayout(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLayout(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -745,7 +760,7 @@ class Surface : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gdk.surface.Surface)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -760,7 +775,14 @@ class Surface : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.surface.Surface.layout");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -784,14 +806,14 @@ class Surface : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLeaveMonitor(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLeaveMonitor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.monitor.MonitorWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.surface.Surface)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -803,7 +825,14 @@ class Surface : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.surface.Surface.leaveMonitor");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -828,18 +857,19 @@ class Surface : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRender(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRender(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == cairo.region.Region)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.surface.Surface)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -847,7 +877,14 @@ class Surface : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.surface.Surface.render");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -867,7 +904,7 @@ class SurfaceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The mouse pointer for the [gdk.surface.Surface].
       Returns: Builder instance for fluent chaining
   */
-  T cursor(gdk.cursor.Cursor propval)
+  T cursor(gdk.cursor.Cursor propval) nothrow
   {
     return setProperty("cursor", propval);
   }
@@ -878,7 +915,7 @@ class SurfaceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The [gdk.display.Display] connection of the surface.
       Returns: Builder instance for fluent chaining
   */
-  T display(gdk.display.Display propval)
+  T display(gdk.display.Display propval) nothrow
   {
     return setProperty("display", propval);
   }
@@ -889,7 +926,7 @@ class SurfaceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The [gdk.frame_clock.FrameClock] of the surface.
       Returns: Builder instance for fluent chaining
   */
-  T frameClock(gdk.frame_clock.FrameClock propval)
+  T frameClock(gdk.frame_clock.FrameClock propval) nothrow
   {
     return setProperty("frame-clock", propval);
   }
@@ -902,7 +939,7 @@ final class SurfaceGidBuilder : SurfaceGidBuilderImpl!SurfaceGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Surface build()
+  Surface build() nothrow
   {
     return new Surface(cast(void*)createGObject(Surface._getGType), No.Take);
   }

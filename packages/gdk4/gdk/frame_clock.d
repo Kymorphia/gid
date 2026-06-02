@@ -50,26 +50,26 @@ class FrameClock : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_frame_clock_get_type != &gidSymbolNotFound ? gdk_frame_clock_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FrameClock self()
+  override FrameClock self() nothrow
   {
     return this;
   }
@@ -78,7 +78,7 @@ class FrameClock : gobject.object.ObjectWrap
       Get builder for [gdk.frame_clock.FrameClock]
       Returns: New builder object
   */
-  static FrameClockGidBuilder builder()
+  static FrameClockGidBuilder builder() nothrow
   {
     return new FrameClockGidBuilder;
   }
@@ -92,7 +92,7 @@ class FrameClock : gobject.object.ObjectWrap
       times and frames will be requested until [gdk.frame_clock.FrameClock.endUpdating]
       is called the same number of times.
   */
-  void beginUpdating()
+  void beginUpdating() nothrow
   {
     gdk_frame_clock_begin_updating(cast(GdkFrameClock*)this._cPtr);
   }
@@ -102,7 +102,7 @@ class FrameClock : gobject.object.ObjectWrap
       
       See the documentation for [gdk.frame_clock.FrameClock.beginUpdating].
   */
-  void endUpdating()
+  void endUpdating() nothrow
   {
     gdk_frame_clock_end_updating(cast(GdkFrameClock*)this._cPtr);
   }
@@ -114,7 +114,7 @@ class FrameClock : gobject.object.ObjectWrap
           processed, for the previous frame. Before any frames have been
           processed, returns null.
   */
-  gdk.frame_timings.FrameTimings getCurrentTimings()
+  gdk.frame_timings.FrameTimings getCurrentTimings() nothrow
   {
     GdkFrameTimings* _cretval;
     _cretval = gdk_frame_clock_get_current_timings(cast(GdkFrameClock*)this._cPtr);
@@ -127,7 +127,7 @@ class FrameClock : gobject.object.ObjectWrap
       frame timings of frame_clock.
       Returns: the current fps, as a `double`
   */
-  double getFps()
+  double getFps() nothrow
   {
     double _retval;
     _retval = gdk_frame_clock_get_fps(cast(GdkFrameClock*)this._cPtr);
@@ -141,7 +141,7 @@ class FrameClock : gobject.object.ObjectWrap
           for the current frame. Outside of frame processing, the frame
           counter for the last frame.
   */
-  long getFrameCounter()
+  long getFrameCounter() nothrow
   {
     long _retval;
     _retval = gdk_frame_clock_get_frame_counter(cast(GdkFrameClock*)this._cPtr);
@@ -159,7 +159,7 @@ class FrameClock : gobject.object.ObjectWrap
       Returns: a timestamp in microseconds, in the timescale of
          of [glib.global.getMonotonicTime].
   */
-  long getFrameTime()
+  long getFrameTime() nothrow
   {
     long _retval;
     _retval = gdk_frame_clock_get_frame_time(cast(GdkFrameClock*)this._cPtr);
@@ -179,7 +179,7 @@ class FrameClock : gobject.object.ObjectWrap
          that is available in the internal frame history of the
          [gdk.frame_clock.FrameClock]
   */
-  long getHistoryStart()
+  long getHistoryStart() nothrow
   {
     long _retval;
     _retval = gdk_frame_clock_get_history_start(cast(GdkFrameClock*)this._cPtr);
@@ -204,7 +204,7 @@ class FrameClock : gobject.object.ObjectWrap
             candidate presentation time after the given base time.
             0 will be will be stored if no history is present.
   */
-  void getRefreshInfo(long baseTime, out long refreshIntervalReturn, out long presentationTimeReturn)
+  void getRefreshInfo(long baseTime, out long refreshIntervalReturn, out long presentationTimeReturn) nothrow
   {
     gdk_frame_clock_get_refresh_info(cast(GdkFrameClock*)this._cPtr, baseTime, cast(long*)&refreshIntervalReturn, cast(long*)&presentationTimeReturn);
   }
@@ -223,7 +223,7 @@ class FrameClock : gobject.object.ObjectWrap
       Returns: the [gdk.frame_timings.FrameTimings] object
           for the specified frame, or null if it is not available
   */
-  gdk.frame_timings.FrameTimings getTimings(long frameCounter)
+  gdk.frame_timings.FrameTimings getTimings(long frameCounter) nothrow
   {
     GdkFrameTimings* _cretval;
     _cretval = gdk_frame_clock_get_timings(cast(GdkFrameClock*)this._cPtr, frameCounter);
@@ -247,7 +247,7 @@ class FrameClock : gobject.object.ObjectWrap
       Params:
         phase = the phase that is requested
   */
-  void requestPhase(gdk.types.FrameClockPhase phase)
+  void requestPhase(gdk.types.FrameClockPhase phase) nothrow
   {
     gdk_frame_clock_request_phase(cast(GdkFrameClock*)this._cPtr, phase);
   }
@@ -269,13 +269,13 @@ class FrameClock : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAfterPaint(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAfterPaint(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.frame_clock.FrameClock)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -284,7 +284,14 @@ class FrameClock : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.frame_clock.FrameClock.afterPaint");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -308,13 +315,13 @@ class FrameClock : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectBeforePaint(T)(T callback, Flag!"After" after = No.After)
+  gulong connectBeforePaint(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.frame_clock.FrameClock)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -323,7 +330,14 @@ class FrameClock : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.frame_clock.FrameClock.beforePaint");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -348,13 +362,13 @@ class FrameClock : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFlushEvents(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFlushEvents(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.frame_clock.FrameClock)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -363,7 +377,14 @@ class FrameClock : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.frame_clock.FrameClock.flushEvents");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -389,13 +410,13 @@ class FrameClock : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLayout(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLayout(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.frame_clock.FrameClock)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -404,7 +425,14 @@ class FrameClock : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.frame_clock.FrameClock.layout");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -432,13 +460,13 @@ class FrameClock : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPaint(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPaint(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.frame_clock.FrameClock)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -447,7 +475,14 @@ class FrameClock : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.frame_clock.FrameClock.paint");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -472,13 +507,13 @@ class FrameClock : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectResumeEvents(T)(T callback, Flag!"After" after = No.After)
+  gulong connectResumeEvents(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.frame_clock.FrameClock)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -487,7 +522,14 @@ class FrameClock : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.frame_clock.FrameClock.resumeEvents");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -515,13 +557,13 @@ class FrameClock : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUpdate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUpdate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.frame_clock.FrameClock)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -530,7 +572,14 @@ class FrameClock : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.frame_clock.FrameClock.update");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -550,7 +599,7 @@ final class FrameClockGidBuilder : FrameClockGidBuilderImpl!FrameClockGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FrameClock build()
+  FrameClock build() nothrow
   {
     return new FrameClock(cast(void*)createGObject(FrameClock._getGType), No.Take);
   }

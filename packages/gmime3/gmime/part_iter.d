@@ -17,32 +17,32 @@ class PartIter : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_part_iter_get_type != &gidSymbolNotFound ? g_mime_part_iter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PartIter self()
+  override PartIter self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class PartIter : gobject.boxed.Boxed
       Returns: a newly allocated #GMimePartIter which should be freed
         using [gmime.part_iter.PartIter.free] when finished with it.
   */
-  this(gmime.object.ObjectWrap toplevel)
+  this(gmime.object.ObjectWrap toplevel) nothrow
   {
     GMimePartIter* _cretval;
     _cretval = g_mime_part_iter_new(toplevel ? cast(GMimeObject*)toplevel._cPtr(No.Dup) : null);
@@ -66,7 +66,7 @@ class PartIter : gobject.boxed.Boxed
       Clones the iter, including its current state.
       Returns: a new #GMimePartIter that is identical to iter.
   */
-  gmime.part_iter.PartIter clone()
+  gmime.part_iter.PartIter clone() nothrow
   {
     GMimePartIter* _cretval;
     _cretval = g_mime_part_iter_clone(cast(GMimePartIter*)this._cPtr);
@@ -79,7 +79,7 @@ class PartIter : gobject.boxed.Boxed
       Returns: the current #GMimeObject or null if the
         state of iter is invalid.
   */
-  gmime.object.ObjectWrap getCurrent()
+  gmime.object.ObjectWrap getCurrent() nothrow
   {
     GMimeObject* _cretval;
     _cretval = g_mime_part_iter_get_current(cast(GMimePartIter*)this._cPtr);
@@ -93,7 +93,7 @@ class PartIter : gobject.boxed.Boxed
       Returns: the parent #GMimeObject or null if the
         state of iter is invalid.
   */
-  gmime.object.ObjectWrap getParent()
+  gmime.object.ObjectWrap getParent() nothrow
   {
     GMimeObject* _cretval;
     _cretval = g_mime_part_iter_get_parent(cast(GMimePartIter*)this._cPtr);
@@ -107,7 +107,7 @@ class PartIter : gobject.boxed.Boxed
       Returns: a newly allocated string representation of the path to the
         #GMimeObject at the current #GMimePartIter position.
   */
-  string getPath()
+  string getPath() nothrow
   {
     char* _cretval;
     _cretval = g_mime_part_iter_get_path(cast(GMimePartIter*)this._cPtr);
@@ -119,7 +119,7 @@ class PartIter : gobject.boxed.Boxed
       Gets the toplevel #GMimeObject used to initialize iter.
       Returns: the toplevel #GMimeObject.
   */
-  gmime.object.ObjectWrap getToplevel()
+  gmime.object.ObjectWrap getToplevel() nothrow
   {
     GMimeObject* _cretval;
     _cretval = g_mime_part_iter_get_toplevel(cast(GMimePartIter*)this._cPtr);
@@ -131,7 +131,7 @@ class PartIter : gobject.boxed.Boxed
       Checks that the current state of iter is valid.
       Returns: true if iter is valid or false otherwise.
   */
-  bool isValid()
+  bool isValid() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_part_iter_is_valid(cast(GMimePartIter*)this._cPtr);
@@ -147,7 +147,7 @@ class PartIter : gobject.boxed.Boxed
       Returns: true if the #GMimeObject specified by path exists or
         false otherwise.
   */
-  bool jumpTo(string path)
+  bool jumpTo(string path) nothrow
   {
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -160,7 +160,7 @@ class PartIter : gobject.boxed.Boxed
       iter.
       Returns: true if successful or false otherwise.
   */
-  bool next()
+  bool next() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_part_iter_next(cast(GMimePartIter*)this._cPtr);
@@ -172,7 +172,7 @@ class PartIter : gobject.boxed.Boxed
       initialize iter.
       Returns: true if successful or false otherwise.
   */
-  bool prev()
+  bool prev() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_part_iter_prev(cast(GMimePartIter*)this._cPtr);
@@ -186,7 +186,7 @@ class PartIter : gobject.boxed.Boxed
       Returns: true if the part at the current position was removed or
         false otherwise.
   */
-  bool remove()
+  bool remove() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_part_iter_remove(cast(GMimePartIter*)this._cPtr);
@@ -201,7 +201,7 @@ class PartIter : gobject.boxed.Boxed
       Returns: true if the part at the current position was replaced or
         false otherwise.
   */
-  bool replace(gmime.object.ObjectWrap replacement)
+  bool replace(gmime.object.ObjectWrap replacement) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_part_iter_replace(cast(GMimePartIter*)this._cPtr, replacement ? cast(GMimeObject*)replacement._cPtr(No.Dup) : null);
@@ -211,7 +211,7 @@ class PartIter : gobject.boxed.Boxed
   /**
       Resets the state of iter to its initial state.
   */
-  void reset()
+  void reset() nothrow
   {
     g_mime_part_iter_reset(cast(GMimePartIter*)this._cPtr);
   }

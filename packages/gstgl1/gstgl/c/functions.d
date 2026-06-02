@@ -15,7 +15,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgstgl-1.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // GLAllocationParams
   GType function() c_gst_gl_allocation_params_get_type; ///

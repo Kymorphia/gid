@@ -16,11 +16,8 @@ class SDPKey
   GstSDPKey _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstsdp.sdpkey.SDPKey");
-
     _cInstance = *cast(GstSDPKey*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class SDPKey
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class SDPKey
       Get `type` field.
       Returns: the encryption type
   */
-  @property string type()
+  @property string type() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPKey*)this._cPtr).type);
   }
@@ -47,7 +44,7 @@ class SDPKey
       Params:
         propval = the encryption type
   */
-  @property void type(string propval)
+  @property void type(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPKey*)this._cPtr).type);
     dToC(propval, cast(void*)&(cast(GstSDPKey*)this._cPtr).type);
@@ -57,7 +54,7 @@ class SDPKey
       Get `data` field.
       Returns: the encryption data
   */
-  @property string data()
+  @property string data() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPKey*)this._cPtr).data);
   }
@@ -67,7 +64,7 @@ class SDPKey
       Params:
         propval = the encryption data
   */
-  @property void data(string propval)
+  @property void data(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPKey*)this._cPtr).data);
     dToC(propval, cast(void*)&(cast(GstSDPKey*)this._cPtr).data);

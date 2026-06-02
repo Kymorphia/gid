@@ -33,26 +33,26 @@ class FileDialog : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_file_dialog_get_type != &gidSymbolNotFound ? gtk_file_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileDialog self()
+  override FileDialog self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class FileDialog : gobject.object.ObjectWrap
       Get builder for [gtk.file_dialog.FileDialog]
       Returns: New builder object
   */
-  static FileDialogGidBuilder builder()
+  static FileDialogGidBuilder builder() nothrow
   {
     return new FileDialogGidBuilder;
   }
@@ -70,7 +70,7 @@ class FileDialog : gobject.object.ObjectWrap
       Get `acceptLabel` property.
       Returns: Label for the file chooser's accept button.
   */
-  @property string acceptLabel()
+  @property string acceptLabel() nothrow
   {
     return getAcceptLabel();
   }
@@ -80,7 +80,7 @@ class FileDialog : gobject.object.ObjectWrap
       Params:
         propval = Label for the file chooser's accept button.
   */
-  @property void acceptLabel(string propval)
+  @property void acceptLabel(string propval) nothrow
   {
     setAcceptLabel(propval);
   }
@@ -97,7 +97,7 @@ class FileDialog : gobject.object.ObjectWrap
         If [gtk.file_dialog.FileDialog.filters] is not null, the default filter should be part
         of the list. If it is not, the dialog may choose to not make it available.
   */
-  @property gtk.file_filter.FileFilter defaultFilter()
+  @property gtk.file_filter.FileFilter defaultFilter() nothrow
   {
     return getDefaultFilter();
   }
@@ -115,7 +115,7 @@ class FileDialog : gobject.object.ObjectWrap
           If [gtk.file_dialog.FileDialog.filters] is not null, the default filter should be part
           of the list. If it is not, the dialog may choose to not make it available.
   */
-  @property void defaultFilter(gtk.file_filter.FileFilter propval)
+  @property void defaultFilter(gtk.file_filter.FileFilter propval) nothrow
   {
     setDefaultFilter(propval);
   }
@@ -126,7 +126,7 @@ class FileDialog : gobject.object.ObjectWrap
         
         See [gtk.file_dialog.FileDialog.defaultFilter] about how those two properties interact.
   */
-  @property gio.list_model.ListModel filters()
+  @property gio.list_model.ListModel filters() nothrow
   {
     return getFilters();
   }
@@ -138,7 +138,7 @@ class FileDialog : gobject.object.ObjectWrap
           
           See [gtk.file_dialog.FileDialog.defaultFilter] about how those two properties interact.
   */
-  @property void filters(gio.list_model.ListModel propval)
+  @property void filters(gio.list_model.ListModel propval) nothrow
   {
     setFilters(propval);
   }
@@ -151,7 +151,7 @@ class FileDialog : gobject.object.ObjectWrap
         This is a utility property that sets both [gtk.file_dialog.FileDialog.initialFolder] and
         [gtk.file_dialog.FileDialog.initialName].
   */
-  @property gio.file.File initialFile()
+  @property gio.file.File initialFile() nothrow
   {
     return getInitialFile();
   }
@@ -165,7 +165,7 @@ class FileDialog : gobject.object.ObjectWrap
           This is a utility property that sets both [gtk.file_dialog.FileDialog.initialFolder] and
           [gtk.file_dialog.FileDialog.initialName].
   */
-  @property void initialFile(gio.file.File propval)
+  @property void initialFile(gio.file.File propval) nothrow
   {
     setInitialFile(propval);
   }
@@ -175,7 +175,7 @@ class FileDialog : gobject.object.ObjectWrap
       Returns: The initial folder, that is, the directory that is initially
         opened in the file chooser dialog
   */
-  @property gio.file.File initialFolder()
+  @property gio.file.File initialFolder() nothrow
   {
     return getInitialFolder();
   }
@@ -186,7 +186,7 @@ class FileDialog : gobject.object.ObjectWrap
         propval = The initial folder, that is, the directory that is initially
           opened in the file chooser dialog
   */
-  @property void initialFolder(gio.file.File propval)
+  @property void initialFolder(gio.file.File propval) nothrow
   {
     setInitialFolder(propval);
   }
@@ -196,7 +196,7 @@ class FileDialog : gobject.object.ObjectWrap
       Returns: The initial name, that is, the filename that is initially
         selected in the file chooser dialog.
   */
-  @property string initialName()
+  @property string initialName() nothrow
   {
     return getInitialName();
   }
@@ -207,7 +207,7 @@ class FileDialog : gobject.object.ObjectWrap
         propval = The initial name, that is, the filename that is initially
           selected in the file chooser dialog.
   */
-  @property void initialName(string propval)
+  @property void initialName(string propval) nothrow
   {
     setInitialName(propval);
   }
@@ -216,7 +216,7 @@ class FileDialog : gobject.object.ObjectWrap
       Get `modal` property.
       Returns: Whether the file chooser dialog is modal.
   */
-  @property bool modal()
+  @property bool modal() nothrow
   {
     return getModal();
   }
@@ -226,7 +226,7 @@ class FileDialog : gobject.object.ObjectWrap
       Params:
         propval = Whether the file chooser dialog is modal.
   */
-  @property void modal(bool propval)
+  @property void modal(bool propval) nothrow
   {
     setModal(propval);
   }
@@ -235,7 +235,7 @@ class FileDialog : gobject.object.ObjectWrap
       Get `title` property.
       Returns: A title that may be shown on the file chooser dialog.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -245,7 +245,7 @@ class FileDialog : gobject.object.ObjectWrap
       Params:
         propval = A title that may be shown on the file chooser dialog.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -254,7 +254,7 @@ class FileDialog : gobject.object.ObjectWrap
       Creates a new [gtk.file_dialog.FileDialog] object.
       Returns: the new [gtk.file_dialog.FileDialog]
   */
-  this()
+  this() nothrow
   {
     GtkFileDialog* _cretval;
     _cretval = gtk_file_dialog_new();
@@ -262,7 +262,7 @@ class FileDialog : gobject.object.ObjectWrap
   }
 
   /** */
-  string getAcceptLabel()
+  string getAcceptLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_file_dialog_get_accept_label(cast(GtkFileDialog*)this._cPtr);
@@ -275,7 +275,7 @@ class FileDialog : gobject.object.ObjectWrap
       in the file chooser dialog.
       Returns: the current filter
   */
-  gtk.file_filter.FileFilter getDefaultFilter()
+  gtk.file_filter.FileFilter getDefaultFilter() nothrow
   {
     GtkFileFilter* _cretval;
     _cretval = gtk_file_dialog_get_default_filter(cast(GtkFileDialog*)this._cPtr);
@@ -289,7 +289,7 @@ class FileDialog : gobject.object.ObjectWrap
       Returns: the filters, as
           a [gio.list_model.ListModel] of `GtkFileFilters`
   */
-  gio.list_model.ListModel getFilters()
+  gio.list_model.ListModel getFilters() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_file_dialog_get_filters(cast(GtkFileDialog*)this._cPtr);
@@ -302,7 +302,7 @@ class FileDialog : gobject.object.ObjectWrap
       the file chooser dialog.
       Returns: the file
   */
-  gio.file.File getInitialFile()
+  gio.file.File getInitialFile() nothrow
   {
     GFile* _cretval;
     _cretval = gtk_file_dialog_get_initial_file(cast(GtkFileDialog*)this._cPtr);
@@ -315,7 +315,7 @@ class FileDialog : gobject.object.ObjectWrap
       initial folder in the file chooser dialog.
       Returns: the folder
   */
-  gio.file.File getInitialFolder()
+  gio.file.File getInitialFolder() nothrow
   {
     GFile* _cretval;
     _cretval = gtk_file_dialog_get_initial_folder(cast(GtkFileDialog*)this._cPtr);
@@ -327,7 +327,7 @@ class FileDialog : gobject.object.ObjectWrap
       Gets the name for the file that should be initially set.
       Returns: the name
   */
-  string getInitialName()
+  string getInitialName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_file_dialog_get_initial_name(cast(GtkFileDialog*)this._cPtr);
@@ -341,7 +341,7 @@ class FileDialog : gobject.object.ObjectWrap
       while it is presented.
       Returns: `TRUE` if the file chooser dialog is modal
   */
-  bool getModal()
+  bool getModal() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_file_dialog_get_modal(cast(GtkFileDialog*)this._cPtr);
@@ -353,7 +353,7 @@ class FileDialog : gobject.object.ObjectWrap
       file chooser dialog.
       Returns: the title
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_file_dialog_get_title(cast(GtkFileDialog*)this._cPtr);
@@ -374,14 +374,21 @@ class FileDialog : gobject.object.ObjectWrap
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
   */
-  void open(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void open(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -425,14 +432,21 @@ class FileDialog : gobject.object.ObjectWrap
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
   */
-  void openMultiple(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void openMultiple(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -474,14 +488,21 @@ class FileDialog : gobject.object.ObjectWrap
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
   */
-  void save(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void save(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -526,14 +547,21 @@ class FileDialog : gobject.object.ObjectWrap
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
   */
-  void selectFolder(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void selectFolder(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -577,14 +605,21 @@ class FileDialog : gobject.object.ObjectWrap
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
   */
-  void selectMultipleFolders(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void selectMultipleFolders(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -622,7 +657,7 @@ class FileDialog : gobject.object.ObjectWrap
       Params:
         acceptLabel = the new accept label
   */
-  void setAcceptLabel(string acceptLabel = null)
+  void setAcceptLabel(string acceptLabel = null) nothrow
   {
     const(char)* _acceptLabel = acceptLabel.toCString(No.Alloc);
     gtk_file_dialog_set_accept_label(cast(GtkFileDialog*)this._cPtr, _acceptLabel);
@@ -639,7 +674,7 @@ class FileDialog : gobject.object.ObjectWrap
       Params:
         filter = a [gtk.file_filter.FileFilter]
   */
-  void setDefaultFilter(gtk.file_filter.FileFilter filter = null)
+  void setDefaultFilter(gtk.file_filter.FileFilter filter = null) nothrow
   {
     gtk_file_dialog_set_default_filter(cast(GtkFileDialog*)this._cPtr, filter ? cast(GtkFileFilter*)filter._cPtr(No.Dup) : null);
   }
@@ -651,7 +686,7 @@ class FileDialog : gobject.object.ObjectWrap
       Params:
         filters = a [gio.list_model.ListModel] of `GtkFileFilters`
   */
-  void setFilters(gio.list_model.ListModel filters = null)
+  void setFilters(gio.list_model.ListModel filters = null) nothrow
   {
     gtk_file_dialog_set_filters(cast(GtkFileDialog*)this._cPtr, filters ? cast(GListModel*)(cast(gobject.object.ObjectWrap)filters)._cPtr(No.Dup) : null);
   }
@@ -668,7 +703,7 @@ class FileDialog : gobject.object.ObjectWrap
       Params:
         file = a [gio.file.File]
   */
-  void setInitialFile(gio.file.File file = null)
+  void setInitialFile(gio.file.File file = null) nothrow
   {
     gtk_file_dialog_set_initial_file(cast(GtkFileDialog*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
   }
@@ -680,7 +715,7 @@ class FileDialog : gobject.object.ObjectWrap
       Params:
         folder = a [gio.file.File]
   */
-  void setInitialFolder(gio.file.File folder = null)
+  void setInitialFolder(gio.file.File folder = null) nothrow
   {
     gtk_file_dialog_set_initial_folder(cast(GtkFileDialog*)this._cPtr, folder ? cast(GFile*)(cast(gobject.object.ObjectWrap)folder)._cPtr(No.Dup) : null);
   }
@@ -695,7 +730,7 @@ class FileDialog : gobject.object.ObjectWrap
       Params:
         name = a UTF8 string
   */
-  void setInitialName(string name = null)
+  void setInitialName(string name = null) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_file_dialog_set_initial_name(cast(GtkFileDialog*)this._cPtr, _name);
@@ -709,7 +744,7 @@ class FileDialog : gobject.object.ObjectWrap
       Params:
         modal = the new value
   */
-  void setModal(bool modal)
+  void setModal(bool modal) nothrow
   {
     gtk_file_dialog_set_modal(cast(GtkFileDialog*)this._cPtr, modal);
   }
@@ -721,7 +756,7 @@ class FileDialog : gobject.object.ObjectWrap
       Params:
         title = the new title
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_file_dialog_set_title(cast(GtkFileDialog*)this._cPtr, _title);
@@ -738,7 +773,7 @@ class FileDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Label for the file chooser's accept button.
       Returns: Builder instance for fluent chaining
   */
-  T acceptLabel(string propval)
+  T acceptLabel(string propval) nothrow
   {
     return setProperty("accept-label", propval);
   }
@@ -757,7 +792,7 @@ class FileDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           of the list. If it is not, the dialog may choose to not make it available.
       Returns: Builder instance for fluent chaining
   */
-  T defaultFilter(gtk.file_filter.FileFilter propval)
+  T defaultFilter(gtk.file_filter.FileFilter propval) nothrow
   {
     return setProperty("default-filter", propval);
   }
@@ -770,7 +805,7 @@ class FileDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           See [gtk.file_dialog.FileDialog.defaultFilter] about how those two properties interact.
       Returns: Builder instance for fluent chaining
   */
-  T filters(gio.list_model.ListModel propval)
+  T filters(gio.list_model.ListModel propval) nothrow
   {
     return setProperty("filters", propval);
   }
@@ -785,7 +820,7 @@ class FileDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           [gtk.file_dialog.FileDialog.initialName].
       Returns: Builder instance for fluent chaining
   */
-  T initialFile(gio.file.File propval)
+  T initialFile(gio.file.File propval) nothrow
   {
     return setProperty("initial-file", propval);
   }
@@ -797,7 +832,7 @@ class FileDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           opened in the file chooser dialog
       Returns: Builder instance for fluent chaining
   */
-  T initialFolder(gio.file.File propval)
+  T initialFolder(gio.file.File propval) nothrow
   {
     return setProperty("initial-folder", propval);
   }
@@ -809,7 +844,7 @@ class FileDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           selected in the file chooser dialog.
       Returns: Builder instance for fluent chaining
   */
-  T initialName(string propval)
+  T initialName(string propval) nothrow
   {
     return setProperty("initial-name", propval);
   }
@@ -820,7 +855,7 @@ class FileDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether the file chooser dialog is modal.
       Returns: Builder instance for fluent chaining
   */
-  T modal(bool propval)
+  T modal(bool propval) nothrow
   {
     return setProperty("modal", propval);
   }
@@ -831,7 +866,7 @@ class FileDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = A title that may be shown on the file chooser dialog.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -844,7 +879,7 @@ final class FileDialogGidBuilder : FileDialogGidBuilderImpl!FileDialogGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FileDialog build()
+  FileDialog build() nothrow
   {
     return new FileDialog(cast(void*)createGObject(FileDialog._getGType), Yes.Take);
   }

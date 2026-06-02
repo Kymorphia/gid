@@ -18,26 +18,26 @@ class Decimal32ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBin
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal32_array_builder_get_type != &gidSymbolNotFound ? garrow_decimal32_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Decimal32ArrayBuilder self()
+  override Decimal32ArrayBuilder self() nothrow
   {
     return this;
   }
@@ -46,13 +46,13 @@ class Decimal32ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBin
       Get builder for [arrow.decimal32_array_builder.Decimal32ArrayBuilder]
       Returns: New builder object
   */
-  static Decimal32ArrayBuilderGidBuilder builder()
+  static Decimal32ArrayBuilderGidBuilder builder() nothrow
   {
     return new Decimal32ArrayBuilderGidBuilder;
   }
 
   /** */
-  this(arrow.decimal32_data_type.Decimal32DataType dataType)
+  this(arrow.decimal32_data_type.Decimal32DataType dataType) nothrow
   {
     GArrowDecimal32ArrayBuilder* _cretval;
     _cretval = garrow_decimal32_array_builder_new(dataType ? cast(GArrowDecimal32DataType*)dataType._cPtr(No.Dup) : null);
@@ -124,7 +124,7 @@ final class Decimal32ArrayBuilderGidBuilder : Decimal32ArrayBuilderGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  Decimal32ArrayBuilder build()
+  Decimal32ArrayBuilder build() nothrow
   {
     return new Decimal32ArrayBuilder(cast(void*)createGObject(Decimal32ArrayBuilder._getGType), Yes.Take);
   }

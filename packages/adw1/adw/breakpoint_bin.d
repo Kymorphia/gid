@@ -134,26 +134,26 @@ class BreakpointBin : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_breakpoint_bin_get_type != &gidSymbolNotFound ? adw_breakpoint_bin_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BreakpointBin self()
+  override BreakpointBin self() nothrow
   {
     return this;
   }
@@ -162,7 +162,7 @@ class BreakpointBin : gtk.widget.Widget
       Get builder for [adw.breakpoint_bin.BreakpointBin]
       Returns: New builder object
   */
-  static BreakpointBinGidBuilder builder()
+  static BreakpointBinGidBuilder builder() nothrow
   {
     return new BreakpointBinGidBuilder;
   }
@@ -171,7 +171,7 @@ class BreakpointBin : gtk.widget.Widget
       Get `child` property.
       Returns: The child widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -181,7 +181,7 @@ class BreakpointBin : gtk.widget.Widget
       Params:
         propval = The child widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -190,7 +190,7 @@ class BreakpointBin : gtk.widget.Widget
       Get `currentBreakpoint` property.
       Returns: The current breakpoint.
   */
-  @property adw.breakpoint.Breakpoint currentBreakpoint()
+  @property adw.breakpoint.Breakpoint currentBreakpoint() nothrow
   {
     return getCurrentBreakpoint();
   }
@@ -199,7 +199,7 @@ class BreakpointBin : gtk.widget.Widget
       Creates a new [adw.breakpoint_bin.BreakpointBin].
       Returns: the newly created [adw.breakpoint_bin.BreakpointBin]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_breakpoint_bin_new();
@@ -212,7 +212,7 @@ class BreakpointBin : gtk.widget.Widget
       Params:
         breakpoint = the breakpoint to add
   */
-  void addBreakpoint(adw.breakpoint.Breakpoint breakpoint)
+  void addBreakpoint(adw.breakpoint.Breakpoint breakpoint) nothrow
   {
     adw_breakpoint_bin_add_breakpoint(cast(AdwBreakpointBin*)this._cPtr, breakpoint ? cast(AdwBreakpoint*)breakpoint._cPtr(Yes.Dup) : null);
   }
@@ -221,7 +221,7 @@ class BreakpointBin : gtk.widget.Widget
       Gets the child widget of self.
       Returns: the child widget of self
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_breakpoint_bin_get_child(cast(AdwBreakpointBin*)this._cPtr);
@@ -233,7 +233,7 @@ class BreakpointBin : gtk.widget.Widget
       Gets the current breakpoint.
       Returns: the current breakpoint
   */
-  adw.breakpoint.Breakpoint getCurrentBreakpoint()
+  adw.breakpoint.Breakpoint getCurrentBreakpoint() nothrow
   {
     AdwBreakpoint* _cretval;
     _cretval = adw_breakpoint_bin_get_current_breakpoint(cast(AdwBreakpointBin*)this._cPtr);
@@ -247,7 +247,7 @@ class BreakpointBin : gtk.widget.Widget
       Params:
         breakpoint = a breakpoint to remove
   */
-  void removeBreakpoint(adw.breakpoint.Breakpoint breakpoint)
+  void removeBreakpoint(adw.breakpoint.Breakpoint breakpoint) nothrow
   {
     adw_breakpoint_bin_remove_breakpoint(cast(AdwBreakpointBin*)this._cPtr, breakpoint ? cast(AdwBreakpoint*)breakpoint._cPtr(No.Dup) : null);
   }
@@ -258,7 +258,7 @@ class BreakpointBin : gtk.widget.Widget
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     adw_breakpoint_bin_set_child(cast(AdwBreakpointBin*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -275,7 +275,7 @@ class BreakpointBinGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The child widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -288,7 +288,7 @@ final class BreakpointBinGidBuilder : BreakpointBinGidBuilderImpl!BreakpointBinG
       Create object from builder.
       Returns: New object
   */
-  BreakpointBin build()
+  BreakpointBin build() nothrow
   {
     return new BreakpointBin(cast(void*)createGObject(BreakpointBin._getGType), No.Take);
   }

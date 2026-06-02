@@ -27,26 +27,26 @@ class PolicyDecision : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_policy_decision_get_type != &gidSymbolNotFound ? webkit_policy_decision_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PolicyDecision self()
+  override PolicyDecision self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class PolicyDecision : gobject.object.ObjectWrap
       Get builder for [webkit.policy_decision.PolicyDecision]
       Returns: New builder object
   */
-  static PolicyDecisionGidBuilder builder()
+  static PolicyDecisionGidBuilder builder() nothrow
   {
     return new PolicyDecisionGidBuilder;
   }
@@ -63,7 +63,7 @@ class PolicyDecision : gobject.object.ObjectWrap
   /**
       Spawn a download from this decision.
   */
-  void download()
+  void download() nothrow
   {
     webkit_policy_decision_download(cast(WebKitPolicyDecision*)this._cPtr);
   }
@@ -74,7 +74,7 @@ class PolicyDecision : gobject.object.ObjectWrap
       Ignore the action which triggered this decision. For instance, for a
       #WebKitResponsePolicyDecision, this would cancel the request.
   */
-  void ignore()
+  void ignore() nothrow
   {
     webkit_policy_decision_ignore(cast(WebKitPolicyDecision*)this._cPtr);
   }
@@ -82,7 +82,7 @@ class PolicyDecision : gobject.object.ObjectWrap
   /**
       Accept the action which triggered this decision.
   */
-  void use()
+  void use() nothrow
   {
     webkit_policy_decision_use(cast(WebKitPolicyDecision*)this._cPtr);
   }
@@ -101,7 +101,7 @@ class PolicyDecision : gobject.object.ObjectWrap
       Params:
         policies = a #WebKitWebsitePolicies
   */
-  void useWithPolicies(webkit.website_policies.WebsitePolicies policies)
+  void useWithPolicies(webkit.website_policies.WebsitePolicies policies) nothrow
   {
     webkit_policy_decision_use_with_policies(cast(WebKitPolicyDecision*)this._cPtr, policies ? cast(WebKitWebsitePolicies*)policies._cPtr(No.Dup) : null);
   }
@@ -119,7 +119,7 @@ final class PolicyDecisionGidBuilder : PolicyDecisionGidBuilderImpl!PolicyDecisi
       Create object from builder.
       Returns: New object
   */
-  PolicyDecision build()
+  PolicyDecision build() nothrow
   {
     return new PolicyDecision(cast(void*)createGObject(PolicyDecision._getGType), No.Take);
   }

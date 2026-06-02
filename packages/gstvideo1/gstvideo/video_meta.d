@@ -39,11 +39,8 @@ class VideoMeta
   GstVideoMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_meta.VideoMeta");
-
     _cInstance = *cast(GstVideoMeta*)ptr;
 
     if (take)
@@ -51,7 +48,7 @@ class VideoMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -60,7 +57,7 @@ class VideoMeta
       Get `meta` field.
       Returns: parent #GstMeta
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoMeta*)this._cPtr).meta, No.Take);
   }
@@ -69,7 +66,7 @@ class VideoMeta
       Get `buffer` field.
       Returns: the buffer this metadata belongs to
   */
-  @property gst.buffer.Buffer buffer()
+  @property gst.buffer.Buffer buffer() nothrow
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoMeta*)this._cPtr).buffer);
   }
@@ -79,7 +76,7 @@ class VideoMeta
       Params:
         propval = the buffer this metadata belongs to
   */
-  @property void buffer(gst.buffer.Buffer propval)
+  @property void buffer(gst.buffer.Buffer propval) nothrow
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoMeta*)this._cPtr).buffer);
     dToC(propval, cast(void*)&(cast(GstVideoMeta*)this._cPtr).buffer);
@@ -89,7 +86,7 @@ class VideoMeta
       Get `flags` field.
       Returns: additional video flags
   */
-  @property gstvideo.types.VideoFrameFlags flags()
+  @property gstvideo.types.VideoFrameFlags flags() nothrow
   {
     return cast(gstvideo.types.VideoFrameFlags)(cast(GstVideoMeta*)this._cPtr).flags;
   }
@@ -99,7 +96,7 @@ class VideoMeta
       Params:
         propval = additional video flags
   */
-  @property void flags(gstvideo.types.VideoFrameFlags propval)
+  @property void flags(gstvideo.types.VideoFrameFlags propval) nothrow
   {
     (cast(GstVideoMeta*)this._cPtr).flags = cast(GstVideoFrameFlags)propval;
   }
@@ -108,7 +105,7 @@ class VideoMeta
       Get `format` field.
       Returns: the video format
   */
-  @property gstvideo.types.VideoFormat format()
+  @property gstvideo.types.VideoFormat format() nothrow
   {
     return cast(gstvideo.types.VideoFormat)(cast(GstVideoMeta*)this._cPtr).format;
   }
@@ -118,7 +115,7 @@ class VideoMeta
       Params:
         propval = the video format
   */
-  @property void format(gstvideo.types.VideoFormat propval)
+  @property void format(gstvideo.types.VideoFormat propval) nothrow
   {
     (cast(GstVideoMeta*)this._cPtr).format = cast(GstVideoFormat)propval;
   }
@@ -127,7 +124,7 @@ class VideoMeta
       Get `id` field.
       Returns: identifier of the frame
   */
-  @property int id()
+  @property int id() nothrow
   {
     return (cast(GstVideoMeta*)this._cPtr).id;
   }
@@ -137,7 +134,7 @@ class VideoMeta
       Params:
         propval = identifier of the frame
   */
-  @property void id(int propval)
+  @property void id(int propval) nothrow
   {
     (cast(GstVideoMeta*)this._cPtr).id = propval;
   }
@@ -146,7 +143,7 @@ class VideoMeta
       Get `width` field.
       Returns: the video width
   */
-  @property uint width()
+  @property uint width() nothrow
   {
     return (cast(GstVideoMeta*)this._cPtr).width;
   }
@@ -156,7 +153,7 @@ class VideoMeta
       Params:
         propval = the video width
   */
-  @property void width(uint propval)
+  @property void width(uint propval) nothrow
   {
     (cast(GstVideoMeta*)this._cPtr).width = propval;
   }
@@ -165,7 +162,7 @@ class VideoMeta
       Get `height` field.
       Returns: the video height
   */
-  @property uint height()
+  @property uint height() nothrow
   {
     return (cast(GstVideoMeta*)this._cPtr).height;
   }
@@ -175,7 +172,7 @@ class VideoMeta
       Params:
         propval = the video height
   */
-  @property void height(uint propval)
+  @property void height(uint propval) nothrow
   {
     (cast(GstVideoMeta*)this._cPtr).height = propval;
   }
@@ -184,7 +181,7 @@ class VideoMeta
       Get `nPlanes` field.
       Returns: the number of planes in the image
   */
-  @property uint nPlanes()
+  @property uint nPlanes() nothrow
   {
     return (cast(GstVideoMeta*)this._cPtr).nPlanes;
   }
@@ -194,7 +191,7 @@ class VideoMeta
       Params:
         propval = the number of planes in the image
   */
-  @property void nPlanes(uint propval)
+  @property void nPlanes(uint propval) nothrow
   {
     (cast(GstVideoMeta*)this._cPtr).nPlanes = propval;
   }
@@ -206,7 +203,7 @@ class VideoMeta
       Get `unmap` field.
       Returns: unmap the memory of a plane
   */
-  @property UnmapFuncType unmap()
+  @property UnmapFuncType unmap() nothrow
   {
     return (cast(GstVideoMeta*)this._cPtr).unmap;
   }
@@ -218,7 +215,7 @@ class VideoMeta
         using [gstvideo.video_meta.VideoMeta.setAlignment], if they did not it defaults
         to no padding and no alignment. Since: 1.18
   */
-  @property gstvideo.video_alignment.VideoAlignment alignment()
+  @property gstvideo.video_alignment.VideoAlignment alignment() nothrow
   {
     return cToD!(gstvideo.video_alignment.VideoAlignment)(cast(void*)&(cast(GstVideoMeta*)this._cPtr).alignment);
   }
@@ -231,7 +228,7 @@ class VideoMeta
           using [gstvideo.video_meta.VideoMeta.setAlignment], if they did not it defaults
           to no padding and no alignment. Since: 1.18
   */
-  @property void alignment(gstvideo.video_alignment.VideoAlignment propval)
+  @property void alignment(gstvideo.video_alignment.VideoAlignment propval) nothrow
   {
     (cast(GstVideoMeta*)this._cPtr).alignment = cast(GstVideoAlignment)propval;
   }
@@ -248,7 +245,7 @@ class VideoMeta
       Returns: true if meta's alignment is valid and plane_height has been
         updated, false otherwise
   */
-  bool getPlaneHeight(ref uint[] planeHeight)
+  bool getPlaneHeight(ref uint[] planeHeight) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_meta_get_plane_height(cast(GstVideoMeta*)this._cPtr, planeHeight.ptr);
@@ -264,7 +261,7 @@ class VideoMeta
       Returns: true if meta's alignment is valid and plane_size has been
         updated, false otherwise
   */
-  bool getPlaneSize(ref size_t[] planeSize)
+  bool getPlaneSize(ref size_t[] planeSize) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_meta_get_plane_size(cast(GstVideoMeta*)this._cPtr, planeSize.ptr);
@@ -283,7 +280,7 @@ class VideoMeta
         flags = GstMapFlags
       Returns: TRUE if the map operation was successful.
   */
-  bool map(uint plane, gst.map_info.MapInfo info, out void* data, out int stride, gst.types.MapFlags flags)
+  bool map(uint plane, gst.map_info.MapInfo info, out void* data, out int stride, gst.types.MapFlags flags) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_meta_map(cast(GstVideoMeta*)this._cPtr, plane, info ? cast(GstMapInfo*)info._cPtr : null, cast(void**)&data, cast(int*)&stride, flags);
@@ -298,7 +295,7 @@ class VideoMeta
         info = a #GstMapInfo
       Returns: TRUE if the memory was successfully unmapped.
   */
-  bool unmap(uint plane, gst.map_info.MapInfo info)
+  bool unmap(uint plane, gst.map_info.MapInfo info) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_meta_unmap(cast(GstVideoMeta*)this._cPtr, plane, info ? cast(GstMapInfo*)info._cPtr : null);
@@ -306,7 +303,7 @@ class VideoMeta
   }
 
   /** */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_meta_get_info();

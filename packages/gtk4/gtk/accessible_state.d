@@ -13,7 +13,7 @@ struct AccessibleState
   alias Enum = gtk.types.AccessibleState; ///
 
   /** */
-  static void initValue(gtk.types.AccessibleState state, gobject.value.Value value)
+  static void initValue(gtk.types.AccessibleState state, gobject.value.Value value) nothrow
   {
     gtk_accessible_state_init_value(state, value ? cast(GValue*)value._cPtr(No.Dup) : null);
   }

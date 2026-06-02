@@ -28,26 +28,26 @@ class ProxyAddressEnumerator : gio.socket_address_enumerator.SocketAddressEnumer
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_proxy_address_enumerator_get_type != &gidSymbolNotFound ? g_proxy_address_enumerator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ProxyAddressEnumerator self()
+  override ProxyAddressEnumerator self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class ProxyAddressEnumerator : gio.socket_address_enumerator.SocketAddressEnumer
       Get builder for [gio.proxy_address_enumerator.ProxyAddressEnumerator]
       Returns: New builder object
   */
-  static ProxyAddressEnumeratorGidBuilder builder()
+  static ProxyAddressEnumeratorGidBuilder builder() nothrow
   {
     return new ProxyAddressEnumeratorGidBuilder;
   }
@@ -65,7 +65,7 @@ class ProxyAddressEnumerator : gio.socket_address_enumerator.SocketAddressEnumer
       Get `connectable` property.
       Returns: The connectable being enumerated.
   */
-  @property gio.socket_connectable.SocketConnectable connectable()
+  @property gio.socket_connectable.SocketConnectable connectable() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.socket_connectable.SocketConnectable)("connectable");
   }
@@ -75,7 +75,7 @@ class ProxyAddressEnumerator : gio.socket_address_enumerator.SocketAddressEnumer
       Returns: The default port to use if #GProxyAddressEnumerator:uri does not
         specify one.
   */
-  @property uint defaultPort()
+  @property uint defaultPort() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("default-port");
   }
@@ -84,7 +84,7 @@ class ProxyAddressEnumerator : gio.socket_address_enumerator.SocketAddressEnumer
       Get `proxyResolver` property.
       Returns: The proxy resolver to use.
   */
-  @property gio.proxy_resolver.ProxyResolver proxyResolver()
+  @property gio.proxy_resolver.ProxyResolver proxyResolver() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.proxy_resolver.ProxyResolver)("proxy-resolver");
   }
@@ -94,7 +94,7 @@ class ProxyAddressEnumerator : gio.socket_address_enumerator.SocketAddressEnumer
       Params:
         propval = The proxy resolver to use.
   */
-  @property void proxyResolver(gio.proxy_resolver.ProxyResolver propval)
+  @property void proxyResolver(gio.proxy_resolver.ProxyResolver propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gio.proxy_resolver.ProxyResolver)("proxy-resolver", propval);
   }
@@ -103,7 +103,7 @@ class ProxyAddressEnumerator : gio.socket_address_enumerator.SocketAddressEnumer
       Get `uri` property.
       Returns: The destination URI. Use `none://` for a generic socket.
   */
-  @property string uri()
+  @property string uri() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("uri");
   }
@@ -119,7 +119,7 @@ class ProxyAddressEnumeratorGidBuilderImpl(T) : gio.socket_address_enumerator.So
         propval = The connectable being enumerated.
       Returns: Builder instance for fluent chaining
   */
-  T connectable(gio.socket_connectable.SocketConnectable propval)
+  T connectable(gio.socket_connectable.SocketConnectable propval) nothrow
   {
     return setProperty("connectable", propval);
   }
@@ -131,7 +131,7 @@ class ProxyAddressEnumeratorGidBuilderImpl(T) : gio.socket_address_enumerator.So
           specify one.
       Returns: Builder instance for fluent chaining
   */
-  T defaultPort(uint propval)
+  T defaultPort(uint propval) nothrow
   {
     return setProperty("default-port", propval);
   }
@@ -142,7 +142,7 @@ class ProxyAddressEnumeratorGidBuilderImpl(T) : gio.socket_address_enumerator.So
         propval = The proxy resolver to use.
       Returns: Builder instance for fluent chaining
   */
-  T proxyResolver(gio.proxy_resolver.ProxyResolver propval)
+  T proxyResolver(gio.proxy_resolver.ProxyResolver propval) nothrow
   {
     return setProperty("proxy-resolver", propval);
   }
@@ -153,7 +153,7 @@ class ProxyAddressEnumeratorGidBuilderImpl(T) : gio.socket_address_enumerator.So
         propval = The destination URI. Use `none://` for a generic socket.
       Returns: Builder instance for fluent chaining
   */
-  T uri(string propval)
+  T uri(string propval) nothrow
   {
     return setProperty("uri", propval);
   }
@@ -166,7 +166,7 @@ final class ProxyAddressEnumeratorGidBuilder : ProxyAddressEnumeratorGidBuilderI
       Create object from builder.
       Returns: New object
   */
-  ProxyAddressEnumerator build()
+  ProxyAddressEnumerator build() nothrow
   {
     return new ProxyAddressEnumerator(cast(void*)createGObject(ProxyAddressEnumerator._getGType), No.Take);
   }

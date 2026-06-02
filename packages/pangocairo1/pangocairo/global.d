@@ -30,7 +30,7 @@ import pangocairo.types;
         context, or null if no options have been set. This value is
         owned by the context and must not be modified or freed.
 */
-cairo.font_options.FontOptions contextGetFontOptions(pango.context.Context context)
+cairo.font_options.FontOptions contextGetFontOptions(pango.context.Context context) nothrow
 {
   const(cairo_font_options_t)* _cretval;
   _cretval = pango_cairo_context_get_font_options(context ? cast(PangoContext*)context._cPtr(No.Dup) : null);
@@ -48,7 +48,7 @@ cairo.font_options.FontOptions contextGetFontOptions(pango.context.Context conte
     Returns: the resolution in "dots per inch". A negative value will
         be returned if no resolution has previously been set.
 */
-double contextGetResolution(pango.context.Context context)
+double contextGetResolution(pango.context.Context context) nothrow
 {
   double _retval;
   _retval = pango_cairo_context_get_resolution(context ? cast(PangoContext*)context._cPtr(No.Dup) : null);
@@ -66,7 +66,7 @@ double contextGetResolution(pango.context.Context context)
       options = a [cairo.font_options.FontOptions], or null to unset
           any previously set options. A copy is made.
 */
-void contextSetFontOptions(pango.context.Context context, cairo.font_options.FontOptions options = null)
+void contextSetFontOptions(pango.context.Context context, cairo.font_options.FontOptions options = null) nothrow
 {
   pango_cairo_context_set_font_options(context ? cast(PangoContext*)context._cPtr(No.Dup) : null, options ? cast(const(cairo_font_options_t)*)options._cPtr(No.Dup) : null);
 }
@@ -84,7 +84,7 @@ void contextSetFontOptions(pango.context.Context context, cairo.font_options.Fon
           involved; the terminology is conventional.) A 0 or negative value
           means to use the resolution from the font map.
 */
-void contextSetResolution(pango.context.Context context, double dpi)
+void contextSetResolution(pango.context.Context context, double dpi) nothrow
 {
   pango_cairo_context_set_resolution(context ? cast(PangoContext*)context._cPtr(No.Dup) : null, dpi);
 }
@@ -100,13 +100,20 @@ void contextSetResolution(pango.context.Context context, double dpi)
       func = Callback function for rendering attributes of
           type [pango.types.AttrType.Shape], or null to disable shape rendering.
 */
-void contextSetShapeRenderer(pango.context.Context context, pangocairo.types.ShapeRendererFunc func = null)
+void contextSetShapeRenderer(pango.context.Context context, pangocairo.types.ShapeRendererFunc func = null) nothrow
 {
-  extern(C) void _funcCallback(cairo_t* cr, PangoAttrShape* attr, gboolean doPath, void* data)
+  extern(C) void _funcCallback(cairo_t* cr, PangoAttrShape* attr, gboolean doPath, void* data) nothrow
   {
     auto _dlg = cast(pangocairo.types.ShapeRendererFunc*)data;
 
-    (*_dlg)(cr ? new cairo.context.Context(cast(void*)cr, No.Take) : null, attr ? new pango.attr_shape.AttrShape(cast(void*)attr, No.Take) : null, cast(bool)doPath);
+    try
+    {
+      (*_dlg)(cr ? new cairo.context.Context(cast(void*)cr, No.Take) : null, attr ? new pango.attr_shape.AttrShape(cast(void*)attr, No.Take) : null, cast(bool)doPath);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "pangocairo.types.ShapeRendererFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -130,7 +137,7 @@ void contextSetShapeRenderer(pango.context.Context context, pangocairo.types.Sha
       cr = a Cairo context
     Returns: the newly created [pango.context.Context]
 */
-pango.context.Context createContext(cairo.context.Context cr)
+pango.context.Context createContext(cairo.context.Context cr) nothrow
 {
   PangoContext* _cretval;
   _cretval = pango_cairo_create_context(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null);
@@ -156,7 +163,7 @@ pango.context.Context createContext(cairo.context.Context cr)
       cr = a Cairo context
     Returns: the newly created [pango.layout.Layout]
 */
-pango.layout.Layout createLayout(cairo.context.Context cr)
+pango.layout.Layout createLayout(cairo.context.Context cr) nothrow
 {
   PangoLayout* _cretval;
   _cretval = pango_cairo_create_layout(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null);
@@ -179,7 +186,7 @@ pango.layout.Layout createLayout(cairo.context.Context cr)
       width = Non-negative width of the rectangle
       height = Non-negative height of the rectangle
 */
-void errorUnderlinePath(cairo.context.Context cr, double x, double y, double width, double height)
+void errorUnderlinePath(cairo.context.Context cr, double x, double y, double width, double height) nothrow
 {
   pango_cairo_error_underline_path(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, x, y, width, height);
 }
@@ -196,7 +203,7 @@ void errorUnderlinePath(cairo.context.Context cr, double x, double y, double wid
       font = a [pango.font.Font] from a [pangocairo.font_map.FontMap]
       glyphs = a [pango.glyph_string.GlyphString]
 */
-void glyphStringPath(cairo.context.Context cr, pango.font.Font font, pango.glyph_string.GlyphString glyphs)
+void glyphStringPath(cairo.context.Context cr, pango.font.Font font, pango.glyph_string.GlyphString glyphs) nothrow
 {
   pango_cairo_glyph_string_path(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, font ? cast(PangoFont*)font._cPtr(No.Dup) : null, glyphs ? cast(PangoGlyphString*)glyphs._cPtr(No.Dup) : null);
 }
@@ -212,7 +219,7 @@ void glyphStringPath(cairo.context.Context cr, pango.font.Font font, pango.glyph
       cr = a Cairo context
       line = a [pango.layout_line.LayoutLine]
 */
-void layoutLinePath(cairo.context.Context cr, pango.layout_line.LayoutLine line)
+void layoutLinePath(cairo.context.Context cr, pango.layout_line.LayoutLine line) nothrow
 {
   pango_cairo_layout_line_path(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, line ? cast(PangoLayoutLine*)line._cPtr(No.Dup) : null);
 }
@@ -228,7 +235,7 @@ void layoutLinePath(cairo.context.Context cr, pango.layout_line.LayoutLine line)
       cr = a Cairo context
       layout = a Pango layout
 */
-void layoutPath(cairo.context.Context cr, pango.layout.Layout layout)
+void layoutPath(cairo.context.Context cr, pango.layout.Layout layout) nothrow
 {
   pango_cairo_layout_path(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, layout ? cast(PangoLayout*)layout._cPtr(No.Dup) : null);
 }
@@ -249,7 +256,7 @@ void layoutPath(cairo.context.Context cr, pango.layout.Layout layout)
       width = Non-negative width of the rectangle
       height = Non-negative height of the rectangle
 */
-void showErrorUnderline(cairo.context.Context cr, double x, double y, double width, double height)
+void showErrorUnderline(cairo.context.Context cr, double x, double y, double width, double height) nothrow
 {
   pango_cairo_show_error_underline(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, x, y, width, height);
 }
@@ -272,7 +279,7 @@ void showErrorUnderline(cairo.context.Context cr, double x, double y, double wid
       text = the UTF-8 text that glyph_item refers to
       glyphItem = a [pango.glyph_item.GlyphItem]
 */
-void showGlyphItem(cairo.context.Context cr, string text, pango.glyph_item.GlyphItem glyphItem)
+void showGlyphItem(cairo.context.Context cr, string text, pango.glyph_item.GlyphItem glyphItem) nothrow
 {
   const(char)* _text = text.toCString(No.Alloc);
   pango_cairo_show_glyph_item(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, _text, glyphItem ? cast(PangoGlyphItem*)glyphItem._cPtr(No.Dup) : null);
@@ -289,7 +296,7 @@ void showGlyphItem(cairo.context.Context cr, string text, pango.glyph_item.Glyph
       font = a [pango.font.Font] from a [pangocairo.font_map.FontMap]
       glyphs = a [pango.glyph_string.GlyphString]
 */
-void showGlyphString(cairo.context.Context cr, pango.font.Font font, pango.glyph_string.GlyphString glyphs)
+void showGlyphString(cairo.context.Context cr, pango.font.Font font, pango.glyph_string.GlyphString glyphs) nothrow
 {
   pango_cairo_show_glyph_string(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, font ? cast(PangoFont*)font._cPtr(No.Dup) : null, glyphs ? cast(PangoGlyphString*)glyphs._cPtr(No.Dup) : null);
 }
@@ -304,7 +311,7 @@ void showGlyphString(cairo.context.Context cr, pango.font.Font font, pango.glyph
       cr = a Cairo context
       layout = a Pango layout
 */
-void showLayout(cairo.context.Context cr, pango.layout.Layout layout)
+void showLayout(cairo.context.Context cr, pango.layout.Layout layout) nothrow
 {
   pango_cairo_show_layout(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, layout ? cast(PangoLayout*)layout._cPtr(No.Dup) : null);
 }
@@ -319,7 +326,7 @@ void showLayout(cairo.context.Context cr, pango.layout.Layout layout)
       cr = a Cairo context
       line = a [pango.layout_line.LayoutLine]
 */
-void showLayoutLine(cairo.context.Context cr, pango.layout_line.LayoutLine line)
+void showLayoutLine(cairo.context.Context cr, pango.layout_line.LayoutLine line) nothrow
 {
   pango_cairo_show_layout_line(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, line ? cast(PangoLayoutLine*)line._cPtr(No.Dup) : null);
 }
@@ -336,7 +343,7 @@ void showLayoutLine(cairo.context.Context cr, pango.layout_line.LayoutLine line)
       cr = a Cairo context
       context = a [pango.context.Context], from a pangocairo font map
 */
-void updateContext(cairo.context.Context cr, pango.context.Context context)
+void updateContext(cairo.context.Context cr, pango.context.Context context) nothrow
 {
   pango_cairo_update_context(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, context ? cast(PangoContext*)context._cPtr(No.Dup) : null);
 }
@@ -350,7 +357,7 @@ void updateContext(cairo.context.Context cr, pango.context.Context context)
       cr = a Cairo context
       layout = a [pango.layout.Layout], from `funccreate_layout`
 */
-void updateLayout(cairo.context.Context cr, pango.layout.Layout layout)
+void updateLayout(cairo.context.Context cr, pango.layout.Layout layout) nothrow
 {
   pango_cairo_update_layout(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, layout ? cast(PangoLayout*)layout._cPtr(No.Dup) : null);
 }

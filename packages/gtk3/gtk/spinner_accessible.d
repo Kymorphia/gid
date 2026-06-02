@@ -18,26 +18,26 @@ class SpinnerAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Imag
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_spinner_accessible_get_type != &gidSymbolNotFound ? gtk_spinner_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SpinnerAccessible self()
+  override SpinnerAccessible self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class SpinnerAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Imag
       Get builder for [gtk.spinner_accessible.SpinnerAccessible]
       Returns: New builder object
   */
-  static SpinnerAccessibleGidBuilder builder()
+  static SpinnerAccessibleGidBuilder builder() nothrow
   {
     return new SpinnerAccessibleGidBuilder;
   }
@@ -68,7 +68,7 @@ final class SpinnerAccessibleGidBuilder : SpinnerAccessibleGidBuilderImpl!Spinne
       Create object from builder.
       Returns: New object
   */
-  SpinnerAccessible build()
+  SpinnerAccessible build() nothrow
   {
     return new SpinnerAccessible(cast(void*)createGObject(SpinnerAccessible._getGType), No.Take);
   }

@@ -14,7 +14,7 @@ struct DmabufError
   alias Enum = gdk.types.DmabufError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gdk_dmabuf_error_quark();
@@ -24,12 +24,12 @@ struct DmabufError
 
 class DmabufException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gdk.dmabuf_error.DmabufError.quark, cast(int)code, msg);
   }

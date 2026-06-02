@@ -19,26 +19,26 @@ class VideoFilter : gstbase.base_transform.BaseTransform
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_filter_get_type != &gidSymbolNotFound ? gst_video_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VideoFilter self()
+  override VideoFilter self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class VideoFilter : gstbase.base_transform.BaseTransform
       Get builder for [gstvideo.video_filter.VideoFilter]
       Returns: New builder object
   */
-  static VideoFilterGidBuilder builder()
+  static VideoFilterGidBuilder builder() nothrow
   {
     return new VideoFilterGidBuilder;
   }
@@ -65,7 +65,7 @@ final class VideoFilterGidBuilder : VideoFilterGidBuilderImpl!VideoFilterGidBuil
       Create object from builder.
       Returns: New object
   */
-  VideoFilter build()
+  VideoFilter build() nothrow
   {
     return new VideoFilter(cast(void*)createGObject(VideoFilter._getGType), No.Take);
   }

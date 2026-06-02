@@ -17,11 +17,8 @@ class ColorMatrixNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.color_matrix_node.ColorMatrixNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -42,7 +39,7 @@ class ColorMatrixNode : gsk.render_node.RenderNode
         colorOffset = Values to add to the color
       Returns: A new [gsk.render_node.RenderNode]
   */
-  this(gsk.render_node.RenderNode child, graphene.matrix.Matrix colorMatrix, graphene.vec4.Vec4 colorOffset)
+  this(gsk.render_node.RenderNode child, graphene.matrix.Matrix colorMatrix, graphene.vec4.Vec4 colorOffset) nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_color_matrix_node_new(child ? cast(GskRenderNode*)child._cPtr(No.Dup) : null, colorMatrix ? cast(const(graphene_matrix_t)*)colorMatrix._cPtr(No.Dup) : null, colorOffset ? cast(const(graphene_vec4_t)*)colorOffset._cPtr(No.Dup) : null);
@@ -53,7 +50,7 @@ class ColorMatrixNode : gsk.render_node.RenderNode
       Gets the child node that is getting its colors modified by the given node.
       Returns: The child that is getting its colors modified
   */
-  gsk.render_node.RenderNode getChild()
+  gsk.render_node.RenderNode getChild() nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_color_matrix_node_get_child(cast(const(GskRenderNode)*)this._cPtr);
@@ -65,7 +62,7 @@ class ColorMatrixNode : gsk.render_node.RenderNode
       Retrieves the color matrix used by the node.
       Returns: a 4x4 color matrix
   */
-  graphene.matrix.Matrix getColorMatrix()
+  graphene.matrix.Matrix getColorMatrix() nothrow
   {
     const(graphene_matrix_t)* _cretval;
     _cretval = gsk_color_matrix_node_get_color_matrix(cast(const(GskRenderNode)*)this._cPtr);
@@ -77,7 +74,7 @@ class ColorMatrixNode : gsk.render_node.RenderNode
       Retrieves the color offset used by the node.
       Returns: a color vector
   */
-  graphene.vec4.Vec4 getColorOffset()
+  graphene.vec4.Vec4 getColorOffset() nothrow
   {
     const(graphene_vec4_t)* _cretval;
     _cretval = gsk_color_matrix_node_get_color_offset(cast(const(GskRenderNode)*)this._cPtr);

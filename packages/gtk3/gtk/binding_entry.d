@@ -20,11 +20,8 @@ class BindingEntry
   GtkBindingEntry _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.binding_entry.BindingEntry");
-
     _cInstance = *cast(GtkBindingEntry*)ptr;
 
     if (take)
@@ -32,7 +29,7 @@ class BindingEntry
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -41,7 +38,7 @@ class BindingEntry
       Get `keyval` field.
       Returns: key value to match
   */
-  @property uint keyval()
+  @property uint keyval() nothrow
   {
     return (cast(GtkBindingEntry*)this._cPtr).keyval;
   }
@@ -51,7 +48,7 @@ class BindingEntry
       Params:
         propval = key value to match
   */
-  @property void keyval(uint propval)
+  @property void keyval(uint propval) nothrow
   {
     (cast(GtkBindingEntry*)this._cPtr).keyval = propval;
   }
@@ -60,7 +57,7 @@ class BindingEntry
       Get `modifiers` field.
       Returns: key modifiers to match
   */
-  @property gdk.types.ModifierType modifiers()
+  @property gdk.types.ModifierType modifiers() nothrow
   {
     return cast(gdk.types.ModifierType)(cast(GtkBindingEntry*)this._cPtr).modifiers;
   }
@@ -70,7 +67,7 @@ class BindingEntry
       Params:
         propval = key modifiers to match
   */
-  @property void modifiers(gdk.types.ModifierType propval)
+  @property void modifiers(gdk.types.ModifierType propval) nothrow
   {
     (cast(GtkBindingEntry*)this._cPtr).modifiers = cast(GdkModifierType)propval;
   }
@@ -79,7 +76,7 @@ class BindingEntry
       Get `bindingSet` field.
       Returns: binding set this entry belongs to
   */
-  @property gtk.binding_set.BindingSet bindingSet()
+  @property gtk.binding_set.BindingSet bindingSet() nothrow
   {
     return new gtk.binding_set.BindingSet(cast(GtkBindingSet*)(cast(GtkBindingEntry*)this._cPtr).bindingSet, No.Take);
   }
@@ -88,7 +85,7 @@ class BindingEntry
       Get `destroyed` field.
       Returns: implementation detail
   */
-  @property uint destroyed()
+  @property uint destroyed() nothrow
   {
     return (cast(GtkBindingEntry*)this._cPtr).destroyed;
   }
@@ -98,7 +95,7 @@ class BindingEntry
       Params:
         propval = implementation detail
   */
-  @property void destroyed(uint propval)
+  @property void destroyed(uint propval) nothrow
   {
     (cast(GtkBindingEntry*)this._cPtr).destroyed = propval;
   }
@@ -107,7 +104,7 @@ class BindingEntry
       Get `inEmission` field.
       Returns: implementation detail
   */
-  @property uint inEmission()
+  @property uint inEmission() nothrow
   {
     return (cast(GtkBindingEntry*)this._cPtr).inEmission;
   }
@@ -117,7 +114,7 @@ class BindingEntry
       Params:
         propval = implementation detail
   */
-  @property void inEmission(uint propval)
+  @property void inEmission(uint propval) nothrow
   {
     (cast(GtkBindingEntry*)this._cPtr).inEmission = propval;
   }
@@ -126,7 +123,7 @@ class BindingEntry
       Get `marksUnbound` field.
       Returns: implementation detail
   */
-  @property uint marksUnbound()
+  @property uint marksUnbound() nothrow
   {
     return (cast(GtkBindingEntry*)this._cPtr).marksUnbound;
   }
@@ -136,7 +133,7 @@ class BindingEntry
       Params:
         propval = implementation detail
   */
-  @property void marksUnbound(uint propval)
+  @property void marksUnbound(uint propval) nothrow
   {
     (cast(GtkBindingEntry*)this._cPtr).marksUnbound = propval;
   }
@@ -145,7 +142,7 @@ class BindingEntry
       Get `setNext` field.
       Returns: linked list of entries maintained by binding set
   */
-  @property gtk.binding_entry.BindingEntry setNext()
+  @property gtk.binding_entry.BindingEntry setNext() nothrow
   {
     return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingEntry*)this._cPtr).setNext, No.Take);
   }
@@ -154,7 +151,7 @@ class BindingEntry
       Get `hashNext` field.
       Returns: implementation detail
   */
-  @property gtk.binding_entry.BindingEntry hashNext()
+  @property gtk.binding_entry.BindingEntry hashNext() nothrow
   {
     return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingEntry*)this._cPtr).hashNext, No.Take);
   }
@@ -163,7 +160,7 @@ class BindingEntry
       Get `signals` field.
       Returns: action signals of this entry
   */
-  @property gtk.binding_signal.BindingSignal signals()
+  @property gtk.binding_signal.BindingSignal signals() nothrow
   {
     return new gtk.binding_signal.BindingSignal(cast(GtkBindingSignal*)(cast(GtkBindingEntry*)this._cPtr).signals, No.Take);
   }
@@ -195,7 +192,7 @@ class BindingEntry
       Returns: `G_TOKEN_NONE` if the signal was successfully parsed and added,
             the expected token otherwise
   */
-  static glib.types.TokenType addSignalFromString(gtk.binding_set.BindingSet bindingSet, string signalDesc)
+  static glib.types.TokenType addSignalFromString(gtk.binding_set.BindingSet bindingSet, string signalDesc) nothrow
   {
     GTokenType _cretval;
     const(char)* _signalDesc = signalDesc.toCString(No.Alloc);
@@ -213,7 +210,7 @@ class BindingEntry
         keyval = key value of binding to remove
         modifiers = key modifier of binding to remove
   */
-  static void remove(gtk.binding_set.BindingSet bindingSet, uint keyval, gdk.types.ModifierType modifiers)
+  static void remove(gtk.binding_set.BindingSet bindingSet, uint keyval, gdk.types.ModifierType modifiers) nothrow
   {
     gtk_binding_entry_remove(bindingSet ? cast(GtkBindingSet*)bindingSet._cPtr : null, keyval, modifiers);
   }
@@ -228,7 +225,7 @@ class BindingEntry
         keyval = key value of binding to skip
         modifiers = key modifier of binding to skip
   */
-  static void skip(gtk.binding_set.BindingSet bindingSet, uint keyval, gdk.types.ModifierType modifiers)
+  static void skip(gtk.binding_set.BindingSet bindingSet, uint keyval, gdk.types.ModifierType modifiers) nothrow
   {
     gtk_binding_entry_skip(bindingSet ? cast(GtkBindingSet*)bindingSet._cPtr : null, keyval, modifiers);
   }

@@ -27,26 +27,26 @@ class Download : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_download_get_type != &gidSymbolNotFound ? webkit_download_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Download self()
+  override Download self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class Download : gobject.object.ObjectWrap
       Get builder for [webkit.download.Download]
       Returns: New builder object
   */
-  static DownloadGidBuilder builder()
+  static DownloadGidBuilder builder() nothrow
   {
     return new DownloadGidBuilder;
   }
@@ -66,7 +66,7 @@ class Download : gobject.object.ObjectWrap
         disk. If this property is false and the destination already exists,
         the download will fail.
   */
-  @property bool allowOverwrite()
+  @property bool allowOverwrite() nothrow
   {
     return getAllowOverwrite();
   }
@@ -78,7 +78,7 @@ class Download : gobject.object.ObjectWrap
           disk. If this property is false and the destination already exists,
           the download will fail.
   */
-  @property void allowOverwrite(bool propval)
+  @property void allowOverwrite(bool propval) nothrow
   {
     setAllowOverwrite(propval);
   }
@@ -87,7 +87,7 @@ class Download : gobject.object.ObjectWrap
       Get `destination` property.
       Returns: The local path to where the download will be saved.
   */
-  @property string destination()
+  @property string destination() nothrow
   {
     return getDestination();
   }
@@ -101,7 +101,7 @@ class Download : gobject.object.ObjectWrap
         If you need a more accurate progress information you can connect to
         #WebKitDownload::received-data signal to track the progress.
   */
-  @property double estimatedProgress()
+  @property double estimatedProgress() nothrow
   {
     return getEstimatedProgress();
   }
@@ -110,7 +110,7 @@ class Download : gobject.object.ObjectWrap
       Get `response` property.
       Returns: The #WebKitURIResponse associated with this download.
   */
-  @property webkit.uriresponse.URIResponse response()
+  @property webkit.uriresponse.URIResponse response() nothrow
   {
     return getResponse();
   }
@@ -123,7 +123,7 @@ class Download : gobject.object.ObjectWrap
       #WebKitDownload::failed is emitted with
       [webkit.types.DownloadError.CancelledByUser] error.
   */
-  void cancel()
+  void cancel() nothrow
   {
     webkit_download_cancel(cast(WebKitDownload*)this._cPtr);
   }
@@ -136,7 +136,7 @@ class Download : gobject.object.ObjectWrap
       disk, or if it will fail if the destination already exists.
       Returns: the current value of the #WebKitDownload:allow-overwrite property
   */
-  bool getAllowOverwrite()
+  bool getAllowOverwrite() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_download_get_allow_overwrite(cast(WebKitDownload*)this._cPtr);
@@ -150,7 +150,7 @@ class Download : gobject.object.ObjectWrap
       sure this method returns a valid destination.
       Returns: the destination or null
   */
-  string getDestination()
+  string getDestination() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_download_get_destination(cast(WebKitDownload*)this._cPtr);
@@ -165,7 +165,7 @@ class Download : gobject.object.ObjectWrap
       the time between its start and the event.
       Returns: seconds since the download was started
   */
-  double getElapsedTime()
+  double getElapsedTime() nothrow
   {
     double _retval;
     _retval = webkit_download_get_elapsed_time(cast(WebKitDownload*)this._cPtr);
@@ -180,7 +180,7 @@ class Download : gobject.object.ObjectWrap
       Returns: an estimate of the of the percent complete for a download
             as a range from 0.0 to 1.0.
   */
-  double getEstimatedProgress()
+  double getEstimatedProgress() nothrow
   {
     double _retval;
     _retval = webkit_download_get_estimated_progress(cast(WebKitDownload*)this._cPtr);
@@ -194,7 +194,7 @@ class Download : gobject.object.ObjectWrap
       in bytes.
       Returns: the amount of bytes already downloaded.
   */
-  ulong getReceivedDataLength()
+  ulong getReceivedDataLength() nothrow
   {
     ulong _retval;
     _retval = webkit_download_get_received_data_length(cast(WebKitDownload*)this._cPtr);
@@ -206,7 +206,7 @@ class Download : gobject.object.ObjectWrap
       process.
       Returns: the #WebKitURIRequest of download
   */
-  webkit.urirequest.URIRequest getRequest()
+  webkit.urirequest.URIRequest getRequest() nothrow
   {
     WebKitURIRequest* _cretval;
     _cretval = webkit_download_get_request(cast(WebKitDownload*)this._cPtr);
@@ -224,7 +224,7 @@ class Download : gobject.object.ObjectWrap
       Returns: the #WebKitURIResponse, or null if
             the response hasn't been received yet.
   */
-  webkit.uriresponse.URIResponse getResponse()
+  webkit.uriresponse.URIResponse getResponse() nothrow
   {
     WebKitURIResponse* _cretval;
     _cretval = webkit_download_get_response(cast(WebKitDownload*)this._cPtr);
@@ -237,7 +237,7 @@ class Download : gobject.object.ObjectWrap
       Returns: the #WebKitWebView that initiated download,
            or null if download was not initiated by a #WebKitWebView.
   */
-  webkit.web_view.WebView getWebView()
+  webkit.web_view.WebView getWebView() nothrow
   {
     WebKitWebView* _cretval;
     _cretval = webkit_download_get_web_view(cast(WebKitDownload*)this._cPtr);
@@ -255,7 +255,7 @@ class Download : gobject.object.ObjectWrap
       Params:
         allowed = the new value for the #WebKitDownload:allow-overwrite property
   */
-  void setAllowOverwrite(bool allowed)
+  void setAllowOverwrite(bool allowed) nothrow
   {
     webkit_download_set_allow_overwrite(cast(WebKitDownload*)this._cPtr, allowed);
   }
@@ -280,7 +280,7 @@ class Download : gobject.object.ObjectWrap
       Params:
         destination = the destination
   */
-  void setDestination(string destination)
+  void setDestination(string destination) nothrow
   {
     const(char)* _destination = destination.toCString(No.Alloc);
     webkit_download_set_destination(cast(WebKitDownload*)this._cPtr, _destination);
@@ -305,14 +305,14 @@ class Download : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCreatedDestination(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCreatedDestination(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.download.Download)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -324,7 +324,14 @@ class Download : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.download.Download.createdDestination");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -360,18 +367,19 @@ class Download : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDecideDestination(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDecideDestination(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.download.Download)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -379,7 +387,14 @@ class Download : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.download.Download.decideDestination");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -410,14 +425,14 @@ class Download : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFailed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFailed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.error.ErrorWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.download.Download)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -429,7 +444,14 @@ class Download : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.download.Download.failed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -452,13 +474,13 @@ class Download : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFinished(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFinished(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.download.Download)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -467,7 +489,14 @@ class Download : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.download.Download.finished");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -493,14 +522,14 @@ class Download : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectReceivedData(T)(T callback, Flag!"After" after = No.After)
+  gulong connectReceivedData(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == ulong)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.download.Download)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -512,7 +541,14 @@ class Download : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.download.Download.receivedData");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -532,7 +568,7 @@ class DownloadGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           the download will fail.
       Returns: Builder instance for fluent chaining
   */
-  T allowOverwrite(bool propval)
+  T allowOverwrite(bool propval) nothrow
   {
     return setProperty("allow-overwrite", propval);
   }
@@ -545,7 +581,7 @@ final class DownloadGidBuilder : DownloadGidBuilderImpl!DownloadGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Download build()
+  Download build() nothrow
   {
     return new Download(cast(void*)createGObject(Download._getGType), No.Take);
   }

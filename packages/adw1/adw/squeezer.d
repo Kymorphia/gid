@@ -50,26 +50,26 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_squeezer_get_type != &gidSymbolNotFound ? adw_squeezer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Squeezer self()
+  override Squeezer self() nothrow
   {
     return this;
   }
@@ -78,7 +78,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
       Get builder for [adw.squeezer.Squeezer]
       Returns: New builder object
   */
-  static SqueezerGidBuilder builder()
+  static SqueezerGidBuilder builder() nothrow
   {
     return new SqueezerGidBuilder;
   }
@@ -93,7 +93,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property bool allowNone()
+  @property bool allowNone() nothrow
   {
     return getAllowNone();
   }
@@ -109,7 +109,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property void allowNone(bool propval)
+  @property void allowNone(bool propval) nothrow
   {
     setAllowNone(propval);
   }
@@ -124,7 +124,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property bool homogeneous()
+  @property bool homogeneous() nothrow
   {
     return getHomogeneous();
   }
@@ -140,7 +140,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property void homogeneous(bool propval)
+  @property void homogeneous(bool propval) nothrow
   {
     setHomogeneous(propval);
   }
@@ -156,7 +156,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property bool interpolateSize()
+  @property bool interpolateSize() nothrow
   {
     return getInterpolateSize();
   }
@@ -173,7 +173,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property void interpolateSize(bool propval)
+  @property void interpolateSize(bool propval) nothrow
   {
     setInterpolateSize(propval);
   }
@@ -187,7 +187,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property gtk.selection_model.SelectionModel pages()
+  @property gtk.selection_model.SelectionModel pages() nothrow
   {
     return getPages();
   }
@@ -207,7 +207,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property adw.types.FoldThresholdPolicy switchThresholdPolicy()
+  @property adw.types.FoldThresholdPolicy switchThresholdPolicy() nothrow
   {
     return getSwitchThresholdPolicy();
   }
@@ -228,7 +228,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property void switchThresholdPolicy(adw.types.FoldThresholdPolicy propval)
+  @property void switchThresholdPolicy(adw.types.FoldThresholdPolicy propval) nothrow
   {
     setSwitchThresholdPolicy(propval);
   }
@@ -239,7 +239,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property uint transitionDuration()
+  @property uint transitionDuration() nothrow
   {
     return getTransitionDuration();
   }
@@ -251,7 +251,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property void transitionDuration(uint propval)
+  @property void transitionDuration(uint propval) nothrow
   {
     setTransitionDuration(propval);
   }
@@ -266,7 +266,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property bool transitionRunning()
+  @property bool transitionRunning() nothrow
   {
     return getTransitionRunning();
   }
@@ -277,7 +277,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property adw.types.SqueezerTransitionType transitionType()
+  @property adw.types.SqueezerTransitionType transitionType() nothrow
   {
     return getTransitionType();
   }
@@ -289,7 +289,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property void transitionType(adw.types.SqueezerTransitionType propval)
+  @property void transitionType(adw.types.SqueezerTransitionType propval) nothrow
   {
     setTransitionType(propval);
   }
@@ -300,7 +300,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property gtk.widget.Widget visibleChild()
+  @property gtk.widget.Widget visibleChild() nothrow
   {
     return getVisibleChild();
   }
@@ -317,7 +317,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property float xalign()
+  @property float xalign() nothrow
   {
     return getXalign();
   }
@@ -335,7 +335,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property void xalign(float propval)
+  @property void xalign(float propval) nothrow
   {
     setXalign(propval);
   }
@@ -352,7 +352,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property float yalign()
+  @property float yalign() nothrow
   {
     return getYalign();
   }
@@ -370,7 +370,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property void yalign(float propval)
+  @property void yalign(float propval) nothrow
   {
     setYalign(propval);
   }
@@ -383,7 +383,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_squeezer_new();
@@ -399,7 +399,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  adw.squeezer_page.SqueezerPage add(gtk.widget.Widget child)
+  adw.squeezer_page.SqueezerPage add(gtk.widget.Widget child) nothrow
   {
     AdwSqueezerPage* _cretval;
     _cretval = adw_squeezer_add(cast(AdwSqueezer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -413,7 +413,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  bool getAllowNone()
+  bool getAllowNone() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_squeezer_get_allow_none(cast(AdwSqueezer*)this._cPtr);
@@ -426,7 +426,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  bool getHomogeneous()
+  bool getHomogeneous() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_squeezer_get_homogeneous(cast(AdwSqueezer*)this._cPtr);
@@ -439,7 +439,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  bool getInterpolateSize()
+  bool getInterpolateSize() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_squeezer_get_interpolate_size(cast(AdwSqueezer*)this._cPtr);
@@ -455,7 +455,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  adw.squeezer_page.SqueezerPage getPage(gtk.widget.Widget child)
+  adw.squeezer_page.SqueezerPage getPage(gtk.widget.Widget child) nothrow
   {
     AdwSqueezerPage* _cretval;
     _cretval = adw_squeezer_get_page(cast(AdwSqueezer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -472,7 +472,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  gtk.selection_model.SelectionModel getPages()
+  gtk.selection_model.SelectionModel getPages() nothrow
   {
     GtkSelectionModel* _cretval;
     _cretval = adw_squeezer_get_pages(cast(AdwSqueezer*)this._cPtr);
@@ -486,7 +486,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  adw.types.FoldThresholdPolicy getSwitchThresholdPolicy()
+  adw.types.FoldThresholdPolicy getSwitchThresholdPolicy() nothrow
   {
     AdwFoldThresholdPolicy _cretval;
     _cretval = adw_squeezer_get_switch_threshold_policy(cast(AdwSqueezer*)this._cPtr);
@@ -500,7 +500,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  uint getTransitionDuration()
+  uint getTransitionDuration() nothrow
   {
     uint _retval;
     _retval = adw_squeezer_get_transition_duration(cast(AdwSqueezer*)this._cPtr);
@@ -517,7 +517,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  bool getTransitionRunning()
+  bool getTransitionRunning() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_squeezer_get_transition_running(cast(AdwSqueezer*)this._cPtr);
@@ -530,7 +530,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  adw.types.SqueezerTransitionType getTransitionType()
+  adw.types.SqueezerTransitionType getTransitionType() nothrow
   {
     AdwSqueezerTransitionType _cretval;
     _cretval = adw_squeezer_get_transition_type(cast(AdwSqueezer*)this._cPtr);
@@ -544,7 +544,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  gtk.widget.Widget getVisibleChild()
+  gtk.widget.Widget getVisibleChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_squeezer_get_visible_child(cast(AdwSqueezer*)this._cPtr);
@@ -558,7 +558,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  float getXalign()
+  float getXalign() nothrow
   {
     float _retval;
     _retval = adw_squeezer_get_xalign(cast(AdwSqueezer*)this._cPtr);
@@ -571,7 +571,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  float getYalign()
+  float getYalign() nothrow
   {
     float _retval;
     _retval = adw_squeezer_get_yalign(cast(AdwSqueezer*)this._cPtr);
@@ -586,7 +586,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  void remove(gtk.widget.Widget child)
+  void remove(gtk.widget.Widget child) nothrow
   {
     adw_squeezer_remove(cast(AdwSqueezer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -603,7 +603,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  void setAllowNone(bool allowNone)
+  void setAllowNone(bool allowNone) nothrow
   {
     adw_squeezer_set_allow_none(cast(AdwSqueezer*)this._cPtr, allowNone);
   }
@@ -620,7 +620,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  void setHomogeneous(bool homogeneous)
+  void setHomogeneous(bool homogeneous) nothrow
   {
     adw_squeezer_set_homogeneous(cast(AdwSqueezer*)this._cPtr, homogeneous);
   }
@@ -638,7 +638,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  void setInterpolateSize(bool interpolateSize)
+  void setInterpolateSize(bool interpolateSize) nothrow
   {
     adw_squeezer_set_interpolate_size(cast(AdwSqueezer*)this._cPtr, interpolateSize);
   }
@@ -660,7 +660,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  void setSwitchThresholdPolicy(adw.types.FoldThresholdPolicy policy)
+  void setSwitchThresholdPolicy(adw.types.FoldThresholdPolicy policy) nothrow
   {
     adw_squeezer_set_switch_threshold_policy(cast(AdwSqueezer*)this._cPtr, policy);
   }
@@ -673,7 +673,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  void setTransitionDuration(uint duration)
+  void setTransitionDuration(uint duration) nothrow
   {
     adw_squeezer_set_transition_duration(cast(AdwSqueezer*)this._cPtr, duration);
   }
@@ -686,7 +686,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  void setTransitionType(adw.types.SqueezerTransitionType transition)
+  void setTransitionType(adw.types.SqueezerTransitionType transition) nothrow
   {
     adw_squeezer_set_transition_type(cast(AdwSqueezer*)this._cPtr, transition);
   }
@@ -705,7 +705,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  void setXalign(float xalign)
+  void setXalign(float xalign) nothrow
   {
     adw_squeezer_set_xalign(cast(AdwSqueezer*)this._cPtr, xalign);
   }
@@ -724,7 +724,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  void setYalign(float yalign)
+  void setYalign(float yalign) nothrow
   {
     adw_squeezer_set_yalign(cast(AdwSqueezer*)this._cPtr, yalign);
   }
@@ -748,7 +748,7 @@ class SqueezerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orienta
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  T allowNone(bool propval)
+  T allowNone(bool propval) nothrow
   {
     return setProperty("allow-none", propval);
   }
@@ -765,7 +765,7 @@ class SqueezerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orienta
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  T homogeneous(bool propval)
+  T homogeneous(bool propval) nothrow
   {
     return setProperty("homogeneous", propval);
   }
@@ -783,7 +783,7 @@ class SqueezerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orienta
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  T interpolateSize(bool propval)
+  T interpolateSize(bool propval) nothrow
   {
     return setProperty("interpolate-size", propval);
   }
@@ -805,7 +805,7 @@ class SqueezerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orienta
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  T switchThresholdPolicy(adw.types.FoldThresholdPolicy propval)
+  T switchThresholdPolicy(adw.types.FoldThresholdPolicy propval) nothrow
   {
     return setProperty("switch-threshold-policy", propval);
   }
@@ -818,7 +818,7 @@ class SqueezerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orienta
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  T transitionDuration(uint propval)
+  T transitionDuration(uint propval) nothrow
   {
     return setProperty("transition-duration", propval);
   }
@@ -831,7 +831,7 @@ class SqueezerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orienta
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  T transitionType(adw.types.SqueezerTransitionType propval)
+  T transitionType(adw.types.SqueezerTransitionType propval) nothrow
   {
     return setProperty("transition-type", propval);
   }
@@ -850,7 +850,7 @@ class SqueezerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orienta
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  T xalign(float propval)
+  T xalign(float propval) nothrow
   {
     return setProperty("xalign", propval);
   }
@@ -869,7 +869,7 @@ class SqueezerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orienta
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  T yalign(float propval)
+  T yalign(float propval) nothrow
   {
     return setProperty("yalign", propval);
   }
@@ -882,7 +882,7 @@ final class SqueezerGidBuilder : SqueezerGidBuilderImpl!SqueezerGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Squeezer build()
+  Squeezer build() nothrow
   {
     return new Squeezer(cast(void*)createGObject(Squeezer._getGType), No.Take);
   }

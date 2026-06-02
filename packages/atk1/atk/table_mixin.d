@@ -55,7 +55,7 @@ template TableT()
       Returns: a gboolean representing if the column was successfully added to
         the selection, or 0 if value does not implement this interface.
   */
-  override bool addColumnSelection(int column)
+  override bool addColumnSelection(int column) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_table_add_column_selection(cast(AtkTable*)this._cPtr, column);
@@ -70,7 +70,7 @@ template TableT()
       Returns: a gboolean representing if row was successfully added to selection,
         or 0 if value does not implement this interface.
   */
-  override bool addRowSelection(int row)
+  override bool addRowSelection(int row) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_table_add_row_selection(cast(AtkTable*)this._cPtr, row);
@@ -82,7 +82,7 @@ template TableT()
       Returns: a AtkObject* representing the
         table caption, or null if value does not implement this interface.
   */
-  override atk.object.ObjectWrap getCaption()
+  override atk.object.ObjectWrap getCaption() nothrow
   {
     AtkObject* _cretval;
     _cretval = atk_table_get_caption(cast(AtkTable*)this._cPtr);
@@ -100,7 +100,7 @@ template TableT()
   
       Deprecated: Since 2.12.
   */
-  override int getColumnAtIndex(int index)
+  override int getColumnAtIndex(int index) nothrow
   {
     int _retval;
     _retval = atk_table_get_column_at_index(cast(AtkTable*)this._cPtr, index);
@@ -115,7 +115,7 @@ template TableT()
       Returns: a gchar* representing the column description, or null
         if value does not implement this interface.
   */
-  override string getColumnDescription(int column)
+  override string getColumnDescription(int column) nothrow
   {
     const(char)* _cretval;
     _cretval = atk_table_get_column_description(cast(AtkTable*)this._cPtr, column);
@@ -133,7 +133,7 @@ template TableT()
       Returns: a gint representing the column extent at specified position, or 0
         if value does not implement this interface.
   */
-  override int getColumnExtentAt(int row, int column)
+  override int getColumnExtentAt(int row, int column) nothrow
   {
     int _retval;
     _retval = atk_table_get_column_extent_at(cast(AtkTable*)this._cPtr, row, column);
@@ -149,7 +149,7 @@ template TableT()
         specified column header, or null if value does not implement this
         interface.
   */
-  override atk.object.ObjectWrap getColumnHeader(int column)
+  override atk.object.ObjectWrap getColumnHeader(int column) nothrow
   {
     AtkObject* _cretval;
     _cretval = atk_table_get_column_header(cast(AtkTable*)this._cPtr, column);
@@ -171,7 +171,7 @@ template TableT()
       Deprecated: Since 2.12. Use [atk.table.Table.refAt] in order to get the
         accessible that represents the cell at (row, column)
   */
-  override int getIndexAt(int row, int column)
+  override int getIndexAt(int row, int column) nothrow
   {
     int _retval;
     _retval = atk_table_get_index_at(cast(AtkTable*)this._cPtr, row, column);
@@ -183,7 +183,7 @@ template TableT()
       Returns: a gint representing the number of columns, or 0
         if value does not implement this interface.
   */
-  override int getNColumns()
+  override int getNColumns() nothrow
   {
     int _retval;
     _retval = atk_table_get_n_columns(cast(AtkTable*)this._cPtr);
@@ -195,7 +195,7 @@ template TableT()
       Returns: a gint representing the number of rows, or 0
         if value does not implement this interface.
   */
-  override int getNRows()
+  override int getNRows() nothrow
   {
     int _retval;
     _retval = atk_table_get_n_rows(cast(AtkTable*)this._cPtr);
@@ -212,7 +212,7 @@ template TableT()
   
       Deprecated: since 2.12.
   */
-  override int getRowAtIndex(int index)
+  override int getRowAtIndex(int index) nothrow
   {
     int _retval;
     _retval = atk_table_get_row_at_index(cast(AtkTable*)this._cPtr, index);
@@ -227,7 +227,7 @@ template TableT()
       Returns: a gchar* representing the row description, or
         null if value does not implement this interface.
   */
-  override string getRowDescription(int row)
+  override string getRowDescription(int row) nothrow
   {
     const(char)* _cretval;
     _cretval = atk_table_get_row_description(cast(AtkTable*)this._cPtr, row);
@@ -245,7 +245,7 @@ template TableT()
       Returns: a gint representing the row extent at specified position, or 0
         if value does not implement this interface.
   */
-  override int getRowExtentAt(int row, int column)
+  override int getRowExtentAt(int row, int column) nothrow
   {
     int _retval;
     _retval = atk_table_get_row_extent_at(cast(AtkTable*)this._cPtr, row, column);
@@ -261,7 +261,7 @@ template TableT()
         specified row header, or null if value does not implement this
         interface.
   */
-  override atk.object.ObjectWrap getRowHeader(int row)
+  override atk.object.ObjectWrap getRowHeader(int row) nothrow
   {
     AtkObject* _cretval;
     _cretval = atk_table_get_row_header(cast(AtkTable*)this._cPtr, row);
@@ -276,7 +276,7 @@ template TableT()
       Params:
         selected = a #gint** that is to contain the selected columns numbers
   */
-  override void getSelectedColumns(out int[] selected)
+  override void getSelectedColumns(out int[] selected) nothrow
   {
     int* _selected;
     auto _ret_length = atk_table_get_selected_columns(cast(AtkTable*)this._cPtr, &_selected);
@@ -292,7 +292,7 @@ template TableT()
       Params:
         selected = a #gint** that is to contain the selected row numbers
   */
-  override void getSelectedRows(out int[] selected)
+  override void getSelectedRows(out int[] selected) nothrow
   {
     int* _selected;
     auto _ret_length = atk_table_get_selected_rows(cast(AtkTable*)this._cPtr, &_selected);
@@ -306,7 +306,7 @@ template TableT()
       Returns: a AtkObject* representing a summary description
         of the table, or zero if value does not implement this interface.
   */
-  override atk.object.ObjectWrap getSummary()
+  override atk.object.ObjectWrap getSummary() nothrow
   {
     AtkObject* _cretval;
     _cretval = atk_table_get_summary(cast(AtkTable*)this._cPtr);
@@ -323,7 +323,7 @@ template TableT()
       Returns: a gboolean representing if the column is selected, or 0
         if value does not implement this interface.
   */
-  override bool isColumnSelected(int column)
+  override bool isColumnSelected(int column) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_table_is_column_selected(cast(AtkTable*)this._cPtr, column);
@@ -339,7 +339,7 @@ template TableT()
       Returns: a gboolean representing if the row is selected, or 0
         if value does not implement this interface.
   */
-  override bool isRowSelected(int row)
+  override bool isRowSelected(int row) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_table_is_row_selected(cast(AtkTable*)this._cPtr, row);
@@ -356,7 +356,7 @@ template TableT()
       Returns: a gboolean representing if the cell is selected, or 0
         if value does not implement this interface.
   */
-  override bool isSelected(int row, int column)
+  override bool isSelected(int row, int column) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_table_is_selected(cast(AtkTable*)this._cPtr, row, column);
@@ -373,7 +373,7 @@ template TableT()
       Returns: an #AtkObject representing the referred
         to accessible
   */
-  override atk.object.ObjectWrap refAt(int row, int column)
+  override atk.object.ObjectWrap refAt(int row, int column) nothrow
   {
     AtkObject* _cretval;
     _cretval = atk_table_ref_at(cast(AtkTable*)this._cPtr, row, column);
@@ -389,7 +389,7 @@ template TableT()
       Returns: a gboolean representing if the column was successfully removed from
         the selection, or 0 if value does not implement this interface.
   */
-  override bool removeColumnSelection(int column)
+  override bool removeColumnSelection(int column) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_table_remove_column_selection(cast(AtkTable*)this._cPtr, column);
@@ -404,7 +404,7 @@ template TableT()
       Returns: a gboolean representing if the row was successfully removed from
         the selection, or 0 if value does not implement this interface.
   */
-  override bool removeRowSelection(int row)
+  override bool removeRowSelection(int row) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_table_remove_row_selection(cast(AtkTable*)this._cPtr, row);
@@ -417,7 +417,7 @@ template TableT()
       Params:
         caption = a #AtkObject representing the caption to set for table
   */
-  override void setCaption(atk.object.ObjectWrap caption)
+  override void setCaption(atk.object.ObjectWrap caption) nothrow
   {
     atk_table_set_caption(cast(AtkTable*)this._cPtr, caption ? cast(AtkObject*)caption._cPtr(No.Dup) : null);
   }
@@ -430,7 +430,7 @@ template TableT()
         description = a #gchar representing the description text
           to set for the specified column of the table
   */
-  override void setColumnDescription(int column, string description)
+  override void setColumnDescription(int column, string description) nothrow
   {
     const(char)* _description = description.toCString(No.Alloc);
     atk_table_set_column_description(cast(AtkTable*)this._cPtr, column, _description);
@@ -443,7 +443,7 @@ template TableT()
         column = a #gint representing a column in table
         header = an #AtkTable
   */
-  override void setColumnHeader(int column, atk.object.ObjectWrap header)
+  override void setColumnHeader(int column, atk.object.ObjectWrap header) nothrow
   {
     atk_table_set_column_header(cast(AtkTable*)this._cPtr, column, header ? cast(AtkObject*)header._cPtr(No.Dup) : null);
   }
@@ -456,7 +456,7 @@ template TableT()
         description = a #gchar representing the description text
           to set for the specified row of table
   */
-  override void setRowDescription(int row, string description)
+  override void setRowDescription(int row, string description) nothrow
   {
     const(char)* _description = description.toCString(No.Alloc);
     atk_table_set_row_description(cast(AtkTable*)this._cPtr, row, _description);
@@ -469,7 +469,7 @@ template TableT()
         row = a #gint representing a row in table
         header = an #AtkTable
   */
-  override void setRowHeader(int row, atk.object.ObjectWrap header)
+  override void setRowHeader(int row, atk.object.ObjectWrap header) nothrow
   {
     atk_table_set_row_header(cast(AtkTable*)this._cPtr, row, header ? cast(AtkObject*)header._cPtr(No.Dup) : null);
   }
@@ -481,7 +481,7 @@ template TableT()
         accessible = an #AtkObject representing the summary description
           to set for table
   */
-  override void setSummary(atk.object.ObjectWrap accessible)
+  override void setSummary(atk.object.ObjectWrap accessible) nothrow
   {
     atk_table_set_summary(cast(AtkTable*)this._cPtr, accessible ? cast(AtkObject*)accessible._cPtr(No.Dup) : null);
   }
@@ -506,7 +506,7 @@ template TableT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectColumnDeleted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectColumnDeleted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -514,7 +514,7 @@ template TableT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.table.Table)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -529,7 +529,14 @@ template TableT()
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.table.Table.columnDeleted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -556,7 +563,7 @@ template TableT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectColumnInserted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectColumnInserted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -564,7 +571,7 @@ template TableT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.table.Table)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -579,7 +586,14 @@ template TableT()
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.table.Table.columnInserted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -603,13 +617,13 @@ template TableT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectColumnReordered(T)(T callback, Flag!"After" after = No.After)
+  gulong connectColumnReordered(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.table.Table)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -618,7 +632,14 @@ template TableT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.table.Table.columnReordered");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -642,13 +663,13 @@ template TableT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectModelChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectModelChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.table.Table)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -657,7 +678,14 @@ template TableT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.table.Table.modelChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -684,7 +712,7 @@ template TableT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowDeleted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRowDeleted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -692,7 +720,7 @@ template TableT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.table.Table)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -707,7 +735,14 @@ template TableT()
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.table.Table.rowDeleted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -734,7 +769,7 @@ template TableT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowInserted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRowInserted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -742,7 +777,7 @@ template TableT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.table.Table)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -757,7 +792,14 @@ template TableT()
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.table.Table.rowInserted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -781,13 +823,13 @@ template TableT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowReordered(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRowReordered(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.table.Table)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -796,7 +838,14 @@ template TableT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.table.Table.rowReordered");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

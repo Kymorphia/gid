@@ -34,11 +34,8 @@ class TextSelection
   AtkTextSelection _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for atk.text_selection.TextSelection");
-
     _cInstance = *cast(AtkTextSelection*)ptr;
 
     if (take)
@@ -46,7 +43,7 @@ class TextSelection
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -55,7 +52,7 @@ class TextSelection
       Get `startObject` field.
       Returns: the AtkText containing the start of the selection.
   */
-  @property atk.object.ObjectWrap startObject()
+  @property atk.object.ObjectWrap startObject() nothrow
   {
     return cToD!(atk.object.ObjectWrap)(cast(void*)(cast(AtkTextSelection*)this._cPtr).startObject);
   }
@@ -65,7 +62,7 @@ class TextSelection
       Params:
         propval = the AtkText containing the start of the selection.
   */
-  @property void startObject(atk.object.ObjectWrap propval)
+  @property void startObject(atk.object.ObjectWrap propval) nothrow
   {
     cValueFree!(atk.object.ObjectWrap)(cast(void*)(cast(AtkTextSelection*)this._cPtr).startObject);
     dToC(propval, cast(void*)&(cast(AtkTextSelection*)this._cPtr).startObject);
@@ -76,7 +73,7 @@ class TextSelection
       Returns: the text offset of the beginning of the selection within
                        @start_object.
   */
-  @property int startOffset()
+  @property int startOffset() nothrow
   {
     return (cast(AtkTextSelection*)this._cPtr).startOffset;
   }
@@ -87,7 +84,7 @@ class TextSelection
         propval = the text offset of the beginning of the selection within
                          @start_object.
   */
-  @property void startOffset(int propval)
+  @property void startOffset(int propval) nothrow
   {
     (cast(AtkTextSelection*)this._cPtr).startOffset = propval;
   }
@@ -96,7 +93,7 @@ class TextSelection
       Get `endObject` field.
       Returns: the AtkText containing the end of the selection.
   */
-  @property atk.object.ObjectWrap endObject()
+  @property atk.object.ObjectWrap endObject() nothrow
   {
     return cToD!(atk.object.ObjectWrap)(cast(void*)(cast(AtkTextSelection*)this._cPtr).endObject);
   }
@@ -106,7 +103,7 @@ class TextSelection
       Params:
         propval = the AtkText containing the end of the selection.
   */
-  @property void endObject(atk.object.ObjectWrap propval)
+  @property void endObject(atk.object.ObjectWrap propval) nothrow
   {
     cValueFree!(atk.object.ObjectWrap)(cast(void*)(cast(AtkTextSelection*)this._cPtr).endObject);
     dToC(propval, cast(void*)&(cast(AtkTextSelection*)this._cPtr).endObject);
@@ -116,7 +113,7 @@ class TextSelection
       Get `endOffset` field.
       Returns: the text offset of the end of the selection within @end_object.
   */
-  @property int endOffset()
+  @property int endOffset() nothrow
   {
     return (cast(AtkTextSelection*)this._cPtr).endOffset;
   }
@@ -126,7 +123,7 @@ class TextSelection
       Params:
         propval = the text offset of the end of the selection within @end_object.
   */
-  @property void endOffset(int propval)
+  @property void endOffset(int propval) nothrow
   {
     (cast(AtkTextSelection*)this._cPtr).endOffset = propval;
   }
@@ -136,7 +133,7 @@ class TextSelection
       Returns: a gboolean indicating whether the start of the selection
                          is the active point.
   */
-  @property bool startIsActive()
+  @property bool startIsActive() nothrow
   {
     return cast(bool)(cast(AtkTextSelection*)this._cPtr).startIsActive;
   }
@@ -147,7 +144,7 @@ class TextSelection
         propval = a gboolean indicating whether the start of the selection
                            is the active point.
   */
-  @property void startIsActive(bool propval)
+  @property void startIsActive(bool propval) nothrow
   {
     (cast(AtkTextSelection*)this._cPtr).startIsActive = propval;
   }

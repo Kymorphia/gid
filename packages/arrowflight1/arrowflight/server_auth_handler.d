@@ -14,26 +14,26 @@ class ServerAuthHandler : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_server_auth_handler_get_type != &gidSymbolNotFound ? gaflight_server_auth_handler_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ServerAuthHandler self()
+  override ServerAuthHandler self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class ServerAuthHandler : gobject.object.ObjectWrap
       Get builder for [arrowflight.server_auth_handler.ServerAuthHandler]
       Returns: New builder object
   */
-  static ServerAuthHandlerGidBuilder builder()
+  static ServerAuthHandlerGidBuilder builder() nothrow
   {
     return new ServerAuthHandlerGidBuilder;
   }
@@ -53,7 +53,7 @@ class ServerAuthHandlerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
 {
 
   /** */
-  T handler(void* propval)
+  T handler(void* propval) nothrow
   {
     return setProperty("handler", propval);
   }
@@ -66,7 +66,7 @@ final class ServerAuthHandlerGidBuilder : ServerAuthHandlerGidBuilderImpl!Server
       Create object from builder.
       Returns: New object
   */
-  ServerAuthHandler build()
+  ServerAuthHandler build() nothrow
   {
     return new ServerAuthHandler(cast(void*)createGObject(ServerAuthHandler._getGType), No.Take);
   }

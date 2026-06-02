@@ -134,26 +134,26 @@ class MenuModel : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_menu_model_get_type != &gidSymbolNotFound ? g_menu_model_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MenuModel self()
+  override MenuModel self() nothrow
   {
     return this;
   }
@@ -162,7 +162,7 @@ class MenuModel : gobject.object.ObjectWrap
       Get builder for [gio.menu_model.MenuModel]
       Returns: New builder object
   */
-  static MenuModelGidBuilder builder()
+  static MenuModelGidBuilder builder() nothrow
   {
     return new MenuModelGidBuilder;
   }
@@ -187,7 +187,7 @@ class MenuModel : gobject.object.ObjectWrap
               null
       Returns: the value of the attribute
   */
-  glib.variant.Variant getItemAttributeValue(int itemIndex, string attribute, glib.variant_type.VariantType expectedType = null)
+  glib.variant.Variant getItemAttributeValue(int itemIndex, string attribute, glib.variant_type.VariantType expectedType = null) nothrow
   {
     GVariant* _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -208,7 +208,7 @@ class MenuModel : gobject.object.ObjectWrap
         link = the link to query
       Returns: the linked #GMenuModel, or null
   */
-  gio.menu_model.MenuModel getItemLink(int itemIndex, string link)
+  gio.menu_model.MenuModel getItemLink(int itemIndex, string link) nothrow
   {
     GMenuModel* _cretval;
     const(char)* _link = link.toCString(No.Alloc);
@@ -221,7 +221,7 @@ class MenuModel : gobject.object.ObjectWrap
       Query the number of items in model.
       Returns: the number of items
   */
-  int getNItems()
+  int getNItems() nothrow
   {
     int _retval;
     _retval = g_menu_model_get_n_items(cast(GMenuModel*)this._cPtr);
@@ -236,7 +236,7 @@ class MenuModel : gobject.object.ObjectWrap
       Returns: true if the model is mutable (ie: "items-changed" may be
             emitted).
   */
-  bool isMutable()
+  bool isMutable() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_menu_model_is_mutable(cast(GMenuModel*)this._cPtr);
@@ -265,7 +265,7 @@ class MenuModel : gobject.object.ObjectWrap
         removed = the number of items removed
         added = the number of items added
   */
-  void itemsChanged(int position, int removed, int added)
+  void itemsChanged(int position, int removed, int added) nothrow
   {
     g_menu_model_items_changed(cast(GMenuModel*)this._cPtr, position, removed, added);
   }
@@ -280,7 +280,7 @@ class MenuModel : gobject.object.ObjectWrap
         itemIndex = the index of the item
       Returns: a new #GMenuAttributeIter
   */
-  gio.menu_attribute_iter.MenuAttributeIter iterateItemAttributes(int itemIndex)
+  gio.menu_attribute_iter.MenuAttributeIter iterateItemAttributes(int itemIndex) nothrow
   {
     GMenuAttributeIter* _cretval;
     _cretval = g_menu_model_iterate_item_attributes(cast(GMenuModel*)this._cPtr, itemIndex);
@@ -298,7 +298,7 @@ class MenuModel : gobject.object.ObjectWrap
         itemIndex = the index of the item
       Returns: a new #GMenuLinkIter
   */
-  gio.menu_link_iter.MenuLinkIter iterateItemLinks(int itemIndex)
+  gio.menu_link_iter.MenuLinkIter iterateItemLinks(int itemIndex) nothrow
   {
     GMenuLinkIter* _cretval;
     _cretval = g_menu_model_iterate_item_links(cast(GMenuModel*)this._cPtr, itemIndex);
@@ -346,7 +346,7 @@ class MenuModel : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectItemsChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectItemsChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -355,7 +355,7 @@ class MenuModel : gobject.object.ObjectWrap
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gio.menu_model.MenuModel)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -373,7 +373,14 @@ class MenuModel : gobject.object.ObjectWrap
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.menu_model.MenuModel.itemsChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -393,7 +400,7 @@ final class MenuModelGidBuilder : MenuModelGidBuilderImpl!MenuModelGidBuilder
       Create object from builder.
       Returns: New object
   */
-  MenuModel build()
+  MenuModel build() nothrow
   {
     return new MenuModel(cast(void*)createGObject(MenuModel._getGType), No.Take);
   }

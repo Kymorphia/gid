@@ -28,26 +28,26 @@ class InputMethodContext : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_input_method_context_get_type != &gidSymbolNotFound ? webkit_input_method_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override InputMethodContext self()
+  override InputMethodContext self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class InputMethodContext : gobject.object.ObjectWrap
       Get builder for [webkit.input_method_context.InputMethodContext]
       Returns: New builder object
   */
-  static InputMethodContextGidBuilder builder()
+  static InputMethodContextGidBuilder builder() nothrow
   {
     return new InputMethodContextGidBuilder;
   }
@@ -65,7 +65,7 @@ class InputMethodContext : gobject.object.ObjectWrap
       Get `inputHints` property.
       Returns: The #WebKitInputHints of the input associated with this context.
   */
-  @property webkit.types.InputHints inputHints()
+  @property webkit.types.InputHints inputHints() nothrow
   {
     return getInputHints();
   }
@@ -75,7 +75,7 @@ class InputMethodContext : gobject.object.ObjectWrap
       Params:
         propval = The #WebKitInputHints of the input associated with this context.
   */
-  @property void inputHints(webkit.types.InputHints propval)
+  @property void inputHints(webkit.types.InputHints propval) nothrow
   {
     setInputHints(propval);
   }
@@ -84,7 +84,7 @@ class InputMethodContext : gobject.object.ObjectWrap
       Get `inputPurpose` property.
       Returns: The #WebKitInputPurpose of the input associated with this context.
   */
-  @property webkit.types.InputPurpose inputPurpose()
+  @property webkit.types.InputPurpose inputPurpose() nothrow
   {
     return getInputPurpose();
   }
@@ -94,7 +94,7 @@ class InputMethodContext : gobject.object.ObjectWrap
       Params:
         propval = The #WebKitInputPurpose of the input associated with this context.
   */
-  @property void inputPurpose(webkit.types.InputPurpose propval)
+  @property void inputPurpose(webkit.types.InputPurpose propval) nothrow
   {
     setInputPurpose(propval);
   }
@@ -109,7 +109,7 @@ class InputMethodContext : gobject.object.ObjectWrap
         keyEvent = the key event to filter
       Returns: true if the key event was handled, or false otherwise
   */
-  bool filterKeyEvent(gdk.event.Event keyEvent)
+  bool filterKeyEvent(gdk.event.Event keyEvent) nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_input_method_context_filter_key_event(cast(WebKitInputMethodContext*)this._cPtr, keyEvent ? cast(GdkEvent*)keyEvent._cPtr(No.Dup) : null);
@@ -120,7 +120,7 @@ class InputMethodContext : gobject.object.ObjectWrap
       Get the value of the #WebKitInputMethodContext:input-hints property.
       Returns: the #WebKitInputHints of the input associated with context
   */
-  webkit.types.InputHints getInputHints()
+  webkit.types.InputHints getInputHints() nothrow
   {
     WebKitInputHints _cretval;
     _cretval = webkit_input_method_context_get_input_hints(cast(WebKitInputMethodContext*)this._cPtr);
@@ -132,7 +132,7 @@ class InputMethodContext : gobject.object.ObjectWrap
       Get the value of the #WebKitInputMethodContext:input-purpose property.
       Returns: the #WebKitInputPurpose of the input associated with context
   */
-  webkit.types.InputPurpose getInputPurpose()
+  webkit.types.InputPurpose getInputPurpose() nothrow
   {
     WebKitInputPurpose _cretval;
     _cretval = webkit_input_method_context_get_input_purpose(cast(WebKitInputMethodContext*)this._cPtr);
@@ -151,7 +151,7 @@ class InputMethodContext : gobject.object.ObjectWrap
         underlines = location to store the underlines as a #GList of #WebKitInputMethodUnderline
         cursorOffset = location to store the position of cursor in preedit string
   */
-  void getPreedit(out string text, out webkit.input_method_underline.InputMethodUnderline[] underlines, out uint cursorOffset)
+  void getPreedit(out string text, out webkit.input_method_underline.InputMethodUnderline[] underlines, out uint cursorOffset) nothrow
   {
     char* _text;
     GList* _underlines;
@@ -169,7 +169,7 @@ class InputMethodContext : gobject.object.ObjectWrap
         width = the width of cursor area
         height = the height of cursor area
   */
-  void notifyCursorArea(int x, int y, int width, int height)
+  void notifyCursorArea(int x, int y, int width, int height) nothrow
   {
     webkit_input_method_context_notify_cursor_area(cast(WebKitInputMethodContext*)this._cPtr, x, y, width, height);
   }
@@ -177,7 +177,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   /**
       Notify context that input associated has gained focus.
   */
-  void notifyFocusIn()
+  void notifyFocusIn() nothrow
   {
     webkit_input_method_context_notify_focus_in(cast(WebKitInputMethodContext*)this._cPtr);
   }
@@ -185,7 +185,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   /**
       Notify context that input associated has lost focus.
   */
-  void notifyFocusOut()
+  void notifyFocusOut() nothrow
   {
     webkit_input_method_context_notify_focus_out(cast(WebKitInputMethodContext*)this._cPtr);
   }
@@ -200,7 +200,7 @@ class InputMethodContext : gobject.object.ObjectWrap
         cursorIndex = the byte index of the insertion cursor within text.
         selectionIndex = the byte index of the selection cursor within text.
   */
-  void notifySurrounding(string text, uint cursorIndex, uint selectionIndex)
+  void notifySurrounding(string text, uint cursorIndex, uint selectionIndex) nothrow
   {
     int _length;
     if (text)
@@ -215,7 +215,7 @@ class InputMethodContext : gobject.object.ObjectWrap
       
       This will typically cause the input to clear the preedit state.
   */
-  void reset()
+  void reset() nothrow
   {
     webkit_input_method_context_reset(cast(WebKitInputMethodContext*)this._cPtr);
   }
@@ -226,7 +226,7 @@ class InputMethodContext : gobject.object.ObjectWrap
       Params:
         enabled = whether to enable preedit
   */
-  void setEnablePreedit(bool enabled)
+  void setEnablePreedit(bool enabled) nothrow
   {
     webkit_input_method_context_set_enable_preedit(cast(WebKitInputMethodContext*)this._cPtr, enabled);
   }
@@ -237,7 +237,7 @@ class InputMethodContext : gobject.object.ObjectWrap
       Params:
         hints = a #WebKitInputHints
   */
-  void setInputHints(webkit.types.InputHints hints)
+  void setInputHints(webkit.types.InputHints hints) nothrow
   {
     webkit_input_method_context_set_input_hints(cast(WebKitInputMethodContext*)this._cPtr, hints);
   }
@@ -248,7 +248,7 @@ class InputMethodContext : gobject.object.ObjectWrap
       Params:
         purpose = a #WebKitInputPurpose
   */
-  void setInputPurpose(webkit.types.InputPurpose purpose)
+  void setInputPurpose(webkit.types.InputPurpose purpose) nothrow
   {
     webkit_input_method_context_set_input_purpose(cast(WebKitInputMethodContext*)this._cPtr, purpose);
   }
@@ -272,14 +272,14 @@ class InputMethodContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCommitted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCommitted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.input_method_context.InputMethodContext)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -291,7 +291,14 @@ class InputMethodContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.input_method_context.InputMethodContext.committed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -318,7 +325,7 @@ class InputMethodContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeleteSurrounding(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeleteSurrounding(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -326,7 +333,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkit.input_method_context.InputMethodContext)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -341,7 +348,14 @@ class InputMethodContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.input_method_context.InputMethodContext.deleteSurrounding");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -365,13 +379,13 @@ class InputMethodContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.input_method_context.InputMethodContext)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -380,7 +394,14 @@ class InputMethodContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.input_method_context.InputMethodContext.preeditChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -402,13 +423,13 @@ class InputMethodContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPreeditFinished(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPreeditFinished(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.input_method_context.InputMethodContext)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -417,7 +438,14 @@ class InputMethodContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.input_method_context.InputMethodContext.preeditFinished");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -439,13 +467,13 @@ class InputMethodContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPreeditStarted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPreeditStarted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.input_method_context.InputMethodContext)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -454,7 +482,14 @@ class InputMethodContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.input_method_context.InputMethodContext.preeditStarted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -472,7 +507,7 @@ class InputMethodContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
         propval = The #WebKitInputHints of the input associated with this context.
       Returns: Builder instance for fluent chaining
   */
-  T inputHints(webkit.types.InputHints propval)
+  T inputHints(webkit.types.InputHints propval) nothrow
   {
     return setProperty("input-hints", propval);
   }
@@ -483,7 +518,7 @@ class InputMethodContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
         propval = The #WebKitInputPurpose of the input associated with this context.
       Returns: Builder instance for fluent chaining
   */
-  T inputPurpose(webkit.types.InputPurpose propval)
+  T inputPurpose(webkit.types.InputPurpose propval) nothrow
   {
     return setProperty("input-purpose", propval);
   }
@@ -496,7 +531,7 @@ final class InputMethodContextGidBuilder : InputMethodContextGidBuilderImpl!Inpu
       Create object from builder.
       Returns: New object
   */
-  InputMethodContext build()
+  InputMethodContext build() nothrow
   {
     return new InputMethodContext(cast(void*)createGObject(InputMethodContext._getGType), No.Take);
   }

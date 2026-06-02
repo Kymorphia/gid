@@ -189,26 +189,26 @@ class AboutDialog : adw.dialog.Dialog
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_about_dialog_get_type != &gidSymbolNotFound ? adw_about_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AboutDialog self()
+  override AboutDialog self() nothrow
   {
     return this;
   }
@@ -217,7 +217,7 @@ class AboutDialog : adw.dialog.Dialog
       Get builder for [adw.about_dialog.AboutDialog]
       Returns: New builder object
   */
-  static AboutDialogGidBuilder builder()
+  static AboutDialogGidBuilder builder() nothrow
   {
     return new AboutDialogGidBuilder;
   }
@@ -228,7 +228,7 @@ class AboutDialog : adw.dialog.Dialog
         
         The icon is displayed at the top of the main page.
   */
-  @property string applicationIcon()
+  @property string applicationIcon() nothrow
   {
     return getApplicationIcon();
   }
@@ -240,7 +240,7 @@ class AboutDialog : adw.dialog.Dialog
           
           The icon is displayed at the top of the main page.
   */
-  @property void applicationIcon(string propval)
+  @property void applicationIcon(string propval) nothrow
   {
     setApplicationIcon(propval);
   }
@@ -251,7 +251,7 @@ class AboutDialog : adw.dialog.Dialog
         
         The name is displayed at the top of the main page.
   */
-  @property string applicationName()
+  @property string applicationName() nothrow
   {
     return getApplicationName();
   }
@@ -263,7 +263,7 @@ class AboutDialog : adw.dialog.Dialog
           
           The name is displayed at the top of the main page.
   */
-  @property void applicationName(string propval)
+  @property void applicationName(string propval) nothrow
   {
     setApplicationName(propval);
   }
@@ -277,7 +277,7 @@ class AboutDialog : adw.dialog.Dialog
         Unlike [gtk.about_dialog.AboutDialog.comments], this string can be long and
         detailed. It can also contain links and Pango markup.
   */
-  @property string comments()
+  @property string comments() nothrow
   {
     return getComments();
   }
@@ -292,7 +292,7 @@ class AboutDialog : adw.dialog.Dialog
           Unlike [gtk.about_dialog.AboutDialog.comments], this string can be long and
           detailed. It can also contain links and Pango markup.
   */
-  @property void comments(string propval)
+  @property void comments(string propval) nothrow
   {
     setComments(propval);
   }
@@ -310,7 +310,7 @@ class AboutDialog : adw.dialog.Dialog
         [adw.about_dialog.AboutDialog.addLegalSection] can be used to add copyright
         information for the application dependencies or other components.
   */
-  @property string copyright()
+  @property string copyright() nothrow
   {
     return getCopyright();
   }
@@ -329,7 +329,7 @@ class AboutDialog : adw.dialog.Dialog
           [adw.about_dialog.AboutDialog.addLegalSection] can be used to add copyright
           information for the application dependencies or other components.
   */
-  @property void copyright(string propval)
+  @property void copyright(string propval) nothrow
   {
     setCopyright(propval);
   }
@@ -348,7 +348,7 @@ class AboutDialog : adw.dialog.Dialog
         
         Debug information cannot contain markup or links.
   */
-  @property string debugInfo()
+  @property string debugInfo() nothrow
   {
     return getDebugInfo();
   }
@@ -368,7 +368,7 @@ class AboutDialog : adw.dialog.Dialog
           
           Debug information cannot contain markup or links.
   */
-  @property void debugInfo(string propval)
+  @property void debugInfo(string propval) nothrow
   {
     setDebugInfo(propval);
   }
@@ -382,7 +382,7 @@ class AboutDialog : adw.dialog.Dialog
         
         See [adw.about_dialog.AboutDialog.debugInfo].
   */
-  @property string debugInfoFilename()
+  @property string debugInfoFilename() nothrow
   {
     return getDebugInfoFilename();
   }
@@ -397,7 +397,7 @@ class AboutDialog : adw.dialog.Dialog
           
           See [adw.about_dialog.AboutDialog.debugInfo].
   */
-  @property void debugInfoFilename(string propval)
+  @property void debugInfoFilename(string propval) nothrow
   {
     setDebugInfoFilename(propval);
   }
@@ -415,7 +415,7 @@ class AboutDialog : adw.dialog.Dialog
         Credits page, with [adw.about_dialog.AboutDialog.developers] and related
         properties.
   */
-  @property string developerName()
+  @property string developerName() nothrow
   {
     return getDeveloperName();
   }
@@ -434,7 +434,7 @@ class AboutDialog : adw.dialog.Dialog
           Credits page, with [adw.about_dialog.AboutDialog.developers] and related
           properties.
   */
-  @property void developerName(string propval)
+  @property void developerName(string propval) nothrow
   {
     setDeveloperName(propval);
   }
@@ -445,7 +445,7 @@ class AboutDialog : adw.dialog.Dialog
         
         The issue tracker link is displayed on the main page.
   */
-  @property string issueUrl()
+  @property string issueUrl() nothrow
   {
     return getIssueUrl();
   }
@@ -457,7 +457,7 @@ class AboutDialog : adw.dialog.Dialog
           
           The issue tracker link is displayed on the main page.
   */
-  @property void issueUrl(string propval)
+  @property void issueUrl(string propval) nothrow
   {
     setIssueUrl(propval);
   }
@@ -480,7 +480,7 @@ class AboutDialog : adw.dialog.Dialog
         [adw.about_dialog.AboutDialog.addLegalSection] can be used to add license
         information for the application dependencies or other components.
   */
-  @property string license()
+  @property string license() nothrow
   {
     return getLicense();
   }
@@ -504,7 +504,7 @@ class AboutDialog : adw.dialog.Dialog
           [adw.about_dialog.AboutDialog.addLegalSection] can be used to add license
           information for the application dependencies or other components.
   */
-  @property void license(string propval)
+  @property void license(string propval) nothrow
   {
     setLicense(propval);
   }
@@ -530,7 +530,7 @@ class AboutDialog : adw.dialog.Dialog
         [adw.about_dialog.AboutDialog.addLegalSection] can be used to add license
         information for the application dependencies or other components.
   */
-  @property gtk.types.License licenseType()
+  @property gtk.types.License licenseType() nothrow
   {
     return getLicenseType();
   }
@@ -557,7 +557,7 @@ class AboutDialog : adw.dialog.Dialog
           [adw.about_dialog.AboutDialog.addLegalSection] can be used to add license
           information for the application dependencies or other components.
   */
-  @property void licenseType(gtk.types.License propval)
+  @property void licenseType(gtk.types.License propval) nothrow
   {
     setLicenseType(propval);
   }
@@ -589,7 +589,7 @@ class AboutDialog : adw.dialog.Dialog
         [adw.about_dialog.AboutDialog.releaseNotesVersion] of the property will be used
         as the version; otherwise, [adw.about_dialog.AboutDialog.version_] is used.
   */
-  @property string releaseNotes()
+  @property string releaseNotes() nothrow
   {
     return getReleaseNotes();
   }
@@ -622,7 +622,7 @@ class AboutDialog : adw.dialog.Dialog
           [adw.about_dialog.AboutDialog.releaseNotesVersion] of the property will be used
           as the version; otherwise, [adw.about_dialog.AboutDialog.version_] is used.
   */
-  @property void releaseNotes(string propval)
+  @property void releaseNotes(string propval) nothrow
   {
     setReleaseNotes(propval);
   }
@@ -642,7 +642,7 @@ class AboutDialog : adw.dialog.Dialog
         
         See [adw.about_dialog.AboutDialog.releaseNotes].
   */
-  @property string releaseNotesVersion()
+  @property string releaseNotesVersion() nothrow
   {
     return getReleaseNotesVersion();
   }
@@ -663,7 +663,7 @@ class AboutDialog : adw.dialog.Dialog
           
           See [adw.about_dialog.AboutDialog.releaseNotes].
   */
-  @property void releaseNotesVersion(string propval)
+  @property void releaseNotesVersion(string propval) nothrow
   {
     setReleaseNotesVersion(propval);
   }
@@ -674,7 +674,7 @@ class AboutDialog : adw.dialog.Dialog
         
         The support page link is displayed on the main page.
   */
-  @property string supportUrl()
+  @property string supportUrl() nothrow
   {
     return getSupportUrl();
   }
@@ -686,7 +686,7 @@ class AboutDialog : adw.dialog.Dialog
           
           The support page link is displayed on the main page.
   */
-  @property void supportUrl(string propval)
+  @property void supportUrl(string propval) nothrow
   {
     setSupportUrl(propval);
   }
@@ -712,7 +712,7 @@ class AboutDialog : adw.dialog.Dialog
         * [adw.about_dialog.AboutDialog.addCreditSection]
         * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
   */
-  @property string translatorCredits()
+  @property string translatorCredits() nothrow
   {
     return getTranslatorCredits();
   }
@@ -739,7 +739,7 @@ class AboutDialog : adw.dialog.Dialog
           * [adw.about_dialog.AboutDialog.addCreditSection]
           * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
   */
-  @property void translatorCredits(string propval)
+  @property void translatorCredits(string propval) nothrow
   {
     setTranslatorCredits(propval);
   }
@@ -753,7 +753,7 @@ class AboutDialog : adw.dialog.Dialog
         If [adw.about_dialog.AboutDialog.releaseNotesVersion] is not set, the version
         will also be displayed above the release notes on the What's New page.
   */
-  @property string version_()
+  @property string version_() nothrow
   {
     return getVersion();
   }
@@ -768,7 +768,7 @@ class AboutDialog : adw.dialog.Dialog
           If [adw.about_dialog.AboutDialog.releaseNotesVersion] is not set, the version
           will also be displayed above the release notes on the What's New page.
   */
-  @property void version_(string propval)
+  @property void version_(string propval) nothrow
   {
     setVersion(propval);
   }
@@ -782,7 +782,7 @@ class AboutDialog : adw.dialog.Dialog
         
         Applications can add other links below, see [adw.about_dialog.AboutDialog.addLink].
   */
-  @property string website()
+  @property string website() nothrow
   {
     return getWebsite();
   }
@@ -797,7 +797,7 @@ class AboutDialog : adw.dialog.Dialog
           
           Applications can add other links below, see [adw.about_dialog.AboutDialog.addLink].
   */
-  @property void website(string propval)
+  @property void website(string propval) nothrow
   {
     setWebsite(propval);
   }
@@ -806,7 +806,7 @@ class AboutDialog : adw.dialog.Dialog
       Creates a new [adw.about_dialog.AboutDialog].
       Returns: the newly created [adw.about_dialog.AboutDialog]
   */
-  this()
+  this() nothrow
   {
     AdwDialog* _cretval;
     _cretval = adw_about_dialog_new();
@@ -841,7 +841,7 @@ class AboutDialog : adw.dialog.Dialog
         releaseNotesVersion = The version to retrieve release notes for
       Returns: the newly created [adw.about_dialog.AboutDialog]
   */
-  static adw.about_dialog.AboutDialog newFromAppdata(string resourcePath, string releaseNotesVersion = null)
+  static adw.about_dialog.AboutDialog newFromAppdata(string resourcePath, string releaseNotesVersion = null) nothrow
   {
     AdwDialog* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
@@ -874,7 +874,7 @@ class AboutDialog : adw.dialog.Dialog
         name = the section name
         people = the list of names
   */
-  void addAcknowledgementSection(string name, string[] people)
+  void addAcknowledgementSection(string name, string[] people) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     char*[] _tmppeople;
@@ -907,7 +907,7 @@ class AboutDialog : adw.dialog.Dialog
         name = the section name
         people = the list of names
   */
-  void addCreditSection(string name, string[] people)
+  void addCreditSection(string name, string[] people) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     char*[] _tmppeople;
@@ -967,7 +967,7 @@ class AboutDialog : adw.dialog.Dialog
         licenseType = the type of license
         license = custom license information
   */
-  void addLegalSection(string title, string copyright, gtk.types.License licenseType, string license = null)
+  void addLegalSection(string title, string copyright, gtk.types.License licenseType, string license = null) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     const(char)* _copyright = copyright.toCString(No.Alloc);
@@ -988,7 +988,7 @@ class AboutDialog : adw.dialog.Dialog
         title = the link title
         url = the link URL
   */
-  void addLink(string title, string url)
+  void addLink(string title, string url) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     const(char)* _url = url.toCString(No.Alloc);
@@ -999,7 +999,7 @@ class AboutDialog : adw.dialog.Dialog
       Gets the name of the application icon for self.
       Returns: the application icon name
   */
-  string getApplicationIcon()
+  string getApplicationIcon() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_application_icon(cast(AdwAboutDialog*)this._cPtr);
@@ -1011,7 +1011,7 @@ class AboutDialog : adw.dialog.Dialog
       Gets the application name for self.
       Returns: the application name
   */
-  string getApplicationName()
+  string getApplicationName() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_application_name(cast(AdwAboutDialog*)this._cPtr);
@@ -1023,7 +1023,7 @@ class AboutDialog : adw.dialog.Dialog
       Gets the list of artists of the application.
       Returns: The list of artists
   */
-  string[] getArtists()
+  string[] getArtists() nothrow
   {
     const(char*)* _cretval;
     _cretval = adw_about_dialog_get_artists(cast(AdwAboutDialog*)this._cPtr);
@@ -1045,7 +1045,7 @@ class AboutDialog : adw.dialog.Dialog
       Gets the comments about the application.
       Returns: the comments
   */
-  string getComments()
+  string getComments() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_comments(cast(AdwAboutDialog*)this._cPtr);
@@ -1057,7 +1057,7 @@ class AboutDialog : adw.dialog.Dialog
       Gets the copyright information for self.
       Returns: the copyright information
   */
-  string getCopyright()
+  string getCopyright() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_copyright(cast(AdwAboutDialog*)this._cPtr);
@@ -1069,7 +1069,7 @@ class AboutDialog : adw.dialog.Dialog
       Gets the debug information for self.
       Returns: the debug information
   */
-  string getDebugInfo()
+  string getDebugInfo() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_debug_info(cast(AdwAboutDialog*)this._cPtr);
@@ -1081,7 +1081,7 @@ class AboutDialog : adw.dialog.Dialog
       Gets the debug information filename for self.
       Returns: the debug information filename
   */
-  string getDebugInfoFilename()
+  string getDebugInfoFilename() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_debug_info_filename(cast(AdwAboutDialog*)this._cPtr);
@@ -1093,7 +1093,7 @@ class AboutDialog : adw.dialog.Dialog
       Gets the list of designers of the application.
       Returns: The list of designers
   */
-  string[] getDesigners()
+  string[] getDesigners() nothrow
   {
     const(char*)* _cretval;
     _cretval = adw_about_dialog_get_designers(cast(AdwAboutDialog*)this._cPtr);
@@ -1115,7 +1115,7 @@ class AboutDialog : adw.dialog.Dialog
       Gets the developer name for self.
       Returns: the developer_name
   */
-  string getDeveloperName()
+  string getDeveloperName() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_developer_name(cast(AdwAboutDialog*)this._cPtr);
@@ -1127,7 +1127,7 @@ class AboutDialog : adw.dialog.Dialog
       Gets the list of developers of the application.
       Returns: The list of developers
   */
-  string[] getDevelopers()
+  string[] getDevelopers() nothrow
   {
     const(char*)* _cretval;
     _cretval = adw_about_dialog_get_developers(cast(AdwAboutDialog*)this._cPtr);
@@ -1149,7 +1149,7 @@ class AboutDialog : adw.dialog.Dialog
       Gets the list of documenters of the application.
       Returns: The list of documenters
   */
-  string[] getDocumenters()
+  string[] getDocumenters() nothrow
   {
     const(char*)* _cretval;
     _cretval = adw_about_dialog_get_documenters(cast(AdwAboutDialog*)this._cPtr);
@@ -1171,7 +1171,7 @@ class AboutDialog : adw.dialog.Dialog
       Gets the issue tracker URL for self.
       Returns: the issue tracker URL
   */
-  string getIssueUrl()
+  string getIssueUrl() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_issue_url(cast(AdwAboutDialog*)this._cPtr);
@@ -1183,7 +1183,7 @@ class AboutDialog : adw.dialog.Dialog
       Gets the license for self.
       Returns: the license
   */
-  string getLicense()
+  string getLicense() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_license(cast(AdwAboutDialog*)this._cPtr);
@@ -1195,7 +1195,7 @@ class AboutDialog : adw.dialog.Dialog
       Gets the license type for self.
       Returns: the license type
   */
-  gtk.types.License getLicenseType()
+  gtk.types.License getLicenseType() nothrow
   {
     GtkLicense _cretval;
     _cretval = adw_about_dialog_get_license_type(cast(AdwAboutDialog*)this._cPtr);
@@ -1207,7 +1207,7 @@ class AboutDialog : adw.dialog.Dialog
       Gets the release notes for self.
       Returns: the release notes
   */
-  string getReleaseNotes()
+  string getReleaseNotes() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_release_notes(cast(AdwAboutDialog*)this._cPtr);
@@ -1219,7 +1219,7 @@ class AboutDialog : adw.dialog.Dialog
       Gets the version described by the application's release notes.
       Returns: the release notes version
   */
-  string getReleaseNotesVersion()
+  string getReleaseNotesVersion() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_release_notes_version(cast(AdwAboutDialog*)this._cPtr);
@@ -1231,7 +1231,7 @@ class AboutDialog : adw.dialog.Dialog
       Gets the URL of the support page for self.
       Returns: the support page URL
   */
-  string getSupportUrl()
+  string getSupportUrl() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_support_url(cast(AdwAboutDialog*)this._cPtr);
@@ -1243,7 +1243,7 @@ class AboutDialog : adw.dialog.Dialog
       Gets the translator credits string.
       Returns: The translator credits string
   */
-  string getTranslatorCredits()
+  string getTranslatorCredits() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_translator_credits(cast(AdwAboutDialog*)this._cPtr);
@@ -1255,7 +1255,7 @@ class AboutDialog : adw.dialog.Dialog
       Gets the version for self.
       Returns: the version
   */
-  string getVersion()
+  string getVersion() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_version(cast(AdwAboutDialog*)this._cPtr);
@@ -1267,7 +1267,7 @@ class AboutDialog : adw.dialog.Dialog
       Gets the application website URL for self.
       Returns: the website URL
   */
-  string getWebsite()
+  string getWebsite() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_about_dialog_get_website(cast(AdwAboutDialog*)this._cPtr);
@@ -1283,7 +1283,7 @@ class AboutDialog : adw.dialog.Dialog
       Params:
         applicationIcon = the application icon name
   */
-  void setApplicationIcon(string applicationIcon)
+  void setApplicationIcon(string applicationIcon) nothrow
   {
     const(char)* _applicationIcon = applicationIcon.toCString(No.Alloc);
     adw_about_dialog_set_application_icon(cast(AdwAboutDialog*)this._cPtr, _applicationIcon);
@@ -1297,7 +1297,7 @@ class AboutDialog : adw.dialog.Dialog
       Params:
         applicationName = the application name
   */
-  void setApplicationName(string applicationName)
+  void setApplicationName(string applicationName) nothrow
   {
     const(char)* _applicationName = applicationName.toCString(No.Alloc);
     adw_about_dialog_set_application_name(cast(AdwAboutDialog*)this._cPtr, _applicationName);
@@ -1323,7 +1323,7 @@ class AboutDialog : adw.dialog.Dialog
       Params:
         artists = the list of artists
   */
-  void setArtists(string[] artists = null)
+  void setArtists(string[] artists = null) nothrow
   {
     char*[] _tmpartists;
     foreach (s; artists)
@@ -1345,7 +1345,7 @@ class AboutDialog : adw.dialog.Dialog
       Params:
         comments = the comments
   */
-  void setComments(string comments)
+  void setComments(string comments) nothrow
   {
     const(char)* _comments = comments.toCString(No.Alloc);
     adw_about_dialog_set_comments(cast(AdwAboutDialog*)this._cPtr, _comments);
@@ -1366,7 +1366,7 @@ class AboutDialog : adw.dialog.Dialog
       Params:
         copyright = the copyright information
   */
-  void setCopyright(string copyright)
+  void setCopyright(string copyright) nothrow
   {
     const(char)* _copyright = copyright.toCString(No.Alloc);
     adw_about_dialog_set_copyright(cast(AdwAboutDialog*)this._cPtr, _copyright);
@@ -1388,7 +1388,7 @@ class AboutDialog : adw.dialog.Dialog
       Params:
         debugInfo = the debug information
   */
-  void setDebugInfo(string debugInfo)
+  void setDebugInfo(string debugInfo) nothrow
   {
     const(char)* _debugInfo = debugInfo.toCString(No.Alloc);
     adw_about_dialog_set_debug_info(cast(AdwAboutDialog*)this._cPtr, _debugInfo);
@@ -1405,7 +1405,7 @@ class AboutDialog : adw.dialog.Dialog
       Params:
         filename = the debug info filename
   */
-  void setDebugInfoFilename(string filename)
+  void setDebugInfoFilename(string filename) nothrow
   {
     const(char)* _filename = filename.toCString(No.Alloc);
     adw_about_dialog_set_debug_info_filename(cast(AdwAboutDialog*)this._cPtr, _filename);
@@ -1431,7 +1431,7 @@ class AboutDialog : adw.dialog.Dialog
       Params:
         designers = the list of designers
   */
-  void setDesigners(string[] designers = null)
+  void setDesigners(string[] designers = null) nothrow
   {
     char*[] _tmpdesigners;
     foreach (s; designers)
@@ -1455,7 +1455,7 @@ class AboutDialog : adw.dialog.Dialog
       Params:
         developerName = the developer name
   */
-  void setDeveloperName(string developerName)
+  void setDeveloperName(string developerName) nothrow
   {
     const(char)* _developerName = developerName.toCString(No.Alloc);
     adw_about_dialog_set_developer_name(cast(AdwAboutDialog*)this._cPtr, _developerName);
@@ -1481,7 +1481,7 @@ class AboutDialog : adw.dialog.Dialog
       Params:
         developers = the list of developers
   */
-  void setDevelopers(string[] developers = null)
+  void setDevelopers(string[] developers = null) nothrow
   {
     char*[] _tmpdevelopers;
     foreach (s; developers)
@@ -1512,7 +1512,7 @@ class AboutDialog : adw.dialog.Dialog
       Params:
         documenters = the list of documenters
   */
-  void setDocumenters(string[] documenters = null)
+  void setDocumenters(string[] documenters = null) nothrow
   {
     char*[] _tmpdocumenters;
     foreach (s; documenters)
@@ -1531,7 +1531,7 @@ class AboutDialog : adw.dialog.Dialog
       Params:
         issueUrl = the issue tracker URL
   */
-  void setIssueUrl(string issueUrl)
+  void setIssueUrl(string issueUrl) nothrow
   {
     const(char)* _issueUrl = issueUrl.toCString(No.Alloc);
     adw_about_dialog_set_issue_url(cast(AdwAboutDialog*)this._cPtr, _issueUrl);
@@ -1557,7 +1557,7 @@ class AboutDialog : adw.dialog.Dialog
       Params:
         license = the license
   */
-  void setLicense(string license)
+  void setLicense(string license) nothrow
   {
     const(char)* _license = license.toCString(No.Alloc);
     adw_about_dialog_set_license(cast(AdwAboutDialog*)this._cPtr, _license);
@@ -1584,7 +1584,7 @@ class AboutDialog : adw.dialog.Dialog
       Params:
         licenseType = the license type
   */
-  void setLicenseType(gtk.types.License licenseType)
+  void setLicenseType(gtk.types.License licenseType) nothrow
   {
     adw_about_dialog_set_license_type(cast(AdwAboutDialog*)this._cPtr, licenseType);
   }
@@ -1618,7 +1618,7 @@ class AboutDialog : adw.dialog.Dialog
       Params:
         releaseNotes = the release notes
   */
-  void setReleaseNotes(string releaseNotes)
+  void setReleaseNotes(string releaseNotes) nothrow
   {
     const(char)* _releaseNotes = releaseNotes.toCString(No.Alloc);
     adw_about_dialog_set_release_notes(cast(AdwAboutDialog*)this._cPtr, _releaseNotes);
@@ -1641,7 +1641,7 @@ class AboutDialog : adw.dialog.Dialog
       Params:
         version_ = the release notes version
   */
-  void setReleaseNotesVersion(string version_)
+  void setReleaseNotesVersion(string version_) nothrow
   {
     const(char)* _version_ = version_.toCString(No.Alloc);
     adw_about_dialog_set_release_notes_version(cast(AdwAboutDialog*)this._cPtr, _version_);
@@ -1655,7 +1655,7 @@ class AboutDialog : adw.dialog.Dialog
       Params:
         supportUrl = the support page URL
   */
-  void setSupportUrl(string supportUrl)
+  void setSupportUrl(string supportUrl) nothrow
   {
     const(char)* _supportUrl = supportUrl.toCString(No.Alloc);
     adw_about_dialog_set_support_url(cast(AdwAboutDialog*)this._cPtr, _supportUrl);
@@ -1684,7 +1684,7 @@ class AboutDialog : adw.dialog.Dialog
       Params:
         translatorCredits = the translator credits
   */
-  void setTranslatorCredits(string translatorCredits)
+  void setTranslatorCredits(string translatorCredits) nothrow
   {
     const(char)* _translatorCredits = translatorCredits.toCString(No.Alloc);
     adw_about_dialog_set_translator_credits(cast(AdwAboutDialog*)this._cPtr, _translatorCredits);
@@ -1701,7 +1701,7 @@ class AboutDialog : adw.dialog.Dialog
       Params:
         version_ = the version
   */
-  void setVersion(string version_)
+  void setVersion(string version_) nothrow
   {
     const(char)* _version_ = version_.toCString(No.Alloc);
     adw_about_dialog_set_version(cast(AdwAboutDialog*)this._cPtr, _version_);
@@ -1718,7 +1718,7 @@ class AboutDialog : adw.dialog.Dialog
       Params:
         website = the website URL
   */
-  void setWebsite(string website)
+  void setWebsite(string website) nothrow
   {
     const(char)* _website = website.toCString(No.Alloc);
     adw_about_dialog_set_website(cast(AdwAboutDialog*)this._cPtr, _website);
@@ -1745,18 +1745,19 @@ class AboutDialog : adw.dialog.Dialog
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivateLink(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivateLink(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : adw.about_dialog.AboutDialog)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1764,7 +1765,14 @@ class AboutDialog : adw.dialog.Dialog
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.about_dialog.AboutDialog.activateLink");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1787,7 +1795,7 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           The icon is displayed at the top of the main page.
       Returns: Builder instance for fluent chaining
   */
-  T applicationIcon(string propval)
+  T applicationIcon(string propval) nothrow
   {
     return setProperty("application-icon", propval);
   }
@@ -1800,7 +1808,7 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           The name is displayed at the top of the main page.
       Returns: Builder instance for fluent chaining
   */
-  T applicationName(string propval)
+  T applicationName(string propval) nothrow
   {
     return setProperty("application-name", propval);
   }
@@ -1816,7 +1824,7 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           detailed. It can also contain links and Pango markup.
       Returns: Builder instance for fluent chaining
   */
-  T comments(string propval)
+  T comments(string propval) nothrow
   {
     return setProperty("comments", propval);
   }
@@ -1836,7 +1844,7 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           information for the application dependencies or other components.
       Returns: Builder instance for fluent chaining
   */
-  T copyright(string propval)
+  T copyright(string propval) nothrow
   {
     return setProperty("copyright", propval);
   }
@@ -1857,7 +1865,7 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           Debug information cannot contain markup or links.
       Returns: Builder instance for fluent chaining
   */
-  T debugInfo(string propval)
+  T debugInfo(string propval) nothrow
   {
     return setProperty("debug-info", propval);
   }
@@ -1873,7 +1881,7 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           See [adw.about_dialog.AboutDialog.debugInfo].
       Returns: Builder instance for fluent chaining
   */
-  T debugInfoFilename(string propval)
+  T debugInfoFilename(string propval) nothrow
   {
     return setProperty("debug-info-filename", propval);
   }
@@ -1893,7 +1901,7 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           properties.
       Returns: Builder instance for fluent chaining
   */
-  T developerName(string propval)
+  T developerName(string propval) nothrow
   {
     return setProperty("developer-name", propval);
   }
@@ -1906,7 +1914,7 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           The issue tracker link is displayed on the main page.
       Returns: Builder instance for fluent chaining
   */
-  T issueUrl(string propval)
+  T issueUrl(string propval) nothrow
   {
     return setProperty("issue-url", propval);
   }
@@ -1931,7 +1939,7 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           information for the application dependencies or other components.
       Returns: Builder instance for fluent chaining
   */
-  T license(string propval)
+  T license(string propval) nothrow
   {
     return setProperty("license", propval);
   }
@@ -1959,7 +1967,7 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           information for the application dependencies or other components.
       Returns: Builder instance for fluent chaining
   */
-  T licenseType(gtk.types.License propval)
+  T licenseType(gtk.types.License propval) nothrow
   {
     return setProperty("license-type", propval);
   }
@@ -1993,7 +2001,7 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           as the version; otherwise, [adw.about_dialog.AboutDialog.version_] is used.
       Returns: Builder instance for fluent chaining
   */
-  T releaseNotes(string propval)
+  T releaseNotes(string propval) nothrow
   {
     return setProperty("release-notes", propval);
   }
@@ -2015,7 +2023,7 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           See [adw.about_dialog.AboutDialog.releaseNotes].
       Returns: Builder instance for fluent chaining
   */
-  T releaseNotesVersion(string propval)
+  T releaseNotesVersion(string propval) nothrow
   {
     return setProperty("release-notes-version", propval);
   }
@@ -2028,7 +2036,7 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           The support page link is displayed on the main page.
       Returns: Builder instance for fluent chaining
   */
-  T supportUrl(string propval)
+  T supportUrl(string propval) nothrow
   {
     return setProperty("support-url", propval);
   }
@@ -2056,7 +2064,7 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
       Returns: Builder instance for fluent chaining
   */
-  T translatorCredits(string propval)
+  T translatorCredits(string propval) nothrow
   {
     return setProperty("translator-credits", propval);
   }
@@ -2072,7 +2080,7 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           will also be displayed above the release notes on the What's New page.
       Returns: Builder instance for fluent chaining
   */
-  T version_(string propval)
+  T version_(string propval) nothrow
   {
     return setProperty("version", propval);
   }
@@ -2088,7 +2096,7 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           Applications can add other links below, see [adw.about_dialog.AboutDialog.addLink].
       Returns: Builder instance for fluent chaining
   */
-  T website(string propval)
+  T website(string propval) nothrow
   {
     return setProperty("website", propval);
   }
@@ -2101,7 +2109,7 @@ final class AboutDialogGidBuilder : AboutDialogGidBuilderImpl!AboutDialogGidBuil
       Create object from builder.
       Returns: New object
   */
-  AboutDialog build()
+  AboutDialog build() nothrow
   {
     return new AboutDialog(cast(void*)createGObject(AboutDialog._getGType), No.Take);
   }

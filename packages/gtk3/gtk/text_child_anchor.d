@@ -19,26 +19,26 @@ class TextChildAnchor : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_child_anchor_get_type != &gidSymbolNotFound ? gtk_text_child_anchor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TextChildAnchor self()
+  override TextChildAnchor self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class TextChildAnchor : gobject.object.ObjectWrap
       Get builder for [gtk.text_child_anchor.TextChildAnchor]
       Returns: New builder object
   */
-  static TextChildAnchorGidBuilder builder()
+  static TextChildAnchorGidBuilder builder() nothrow
   {
     return new TextChildAnchorGidBuilder;
   }
@@ -59,7 +59,7 @@ class TextChildAnchor : gobject.object.ObjectWrap
       convenience function [gtk.text_buffer.TextBuffer.createChildAnchor].
       Returns: a new #GtkTextChildAnchor
   */
-  this()
+  this() nothrow
   {
     GtkTextChildAnchor* _cretval;
     _cretval = gtk_text_child_anchor_new();
@@ -75,7 +75,7 @@ class TextChildAnchor : gobject.object.ObjectWrap
       will also be finalized.
       Returns: true if the child anchor has been deleted from its buffer
   */
-  bool getDeleted()
+  bool getDeleted() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_child_anchor_get_deleted(cast(GtkTextChildAnchor*)this._cPtr);
@@ -87,7 +87,7 @@ class TextChildAnchor : gobject.object.ObjectWrap
       The returned list should be freed with [glib.list.List.free].
       Returns: list of widgets anchored at anchor
   */
-  gtk.widget.Widget[] getWidgets()
+  gtk.widget.Widget[] getWidgets() nothrow
   {
     GList* _cretval;
     _cretval = gtk_text_child_anchor_get_widgets(cast(GtkTextChildAnchor*)this._cPtr);
@@ -108,7 +108,7 @@ final class TextChildAnchorGidBuilder : TextChildAnchorGidBuilderImpl!TextChildA
       Create object from builder.
       Returns: New object
   */
-  TextChildAnchor build()
+  TextChildAnchor build() nothrow
   {
     return new TextChildAnchor(cast(void*)createGObject(TextChildAnchor._getGType), Yes.Take);
   }

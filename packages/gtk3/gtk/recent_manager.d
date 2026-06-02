@@ -79,26 +79,26 @@ class RecentManager : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_recent_manager_get_type != &gidSymbolNotFound ? gtk_recent_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RecentManager self()
+  override RecentManager self() nothrow
   {
     return this;
   }
@@ -107,7 +107,7 @@ class RecentManager : gobject.object.ObjectWrap
       Get builder for [gtk.recent_manager.RecentManager]
       Returns: New builder object
   */
-  static RecentManagerGidBuilder builder()
+  static RecentManagerGidBuilder builder() nothrow
   {
     return new RecentManagerGidBuilder;
   }
@@ -117,7 +117,7 @@ class RecentManager : gobject.object.ObjectWrap
       Returns: The full path to the file to be used to store and read the
         recently used resources list
   */
-  @property string filename()
+  @property string filename() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("filename");
   }
@@ -126,7 +126,7 @@ class RecentManager : gobject.object.ObjectWrap
       Get `size` property.
       Returns: The size of the recently used resources list.
   */
-  @property int size()
+  @property int size() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("size");
   }
@@ -141,7 +141,7 @@ class RecentManager : gobject.object.ObjectWrap
       needed. You should use [gtk.recent_manager.RecentManager.getDefault] instead.
       Returns: A newly created #GtkRecentManager object
   */
-  this()
+  this() nothrow
   {
     GtkRecentManager* _cretval;
     _cretval = gtk_recent_manager_new();
@@ -154,7 +154,7 @@ class RecentManager : gobject.object.ObjectWrap
       Returns: A unique #GtkRecentManager. Do not ref or
           unref it.
   */
-  static gtk.recent_manager.RecentManager getDefault()
+  static gtk.recent_manager.RecentManager getDefault() nothrow
   {
     GtkRecentManager* _cretval;
     _cretval = gtk_recent_manager_get_default();
@@ -189,7 +189,7 @@ class RecentManager : gobject.object.ObjectWrap
       Returns: true if the new item was successfully added to the
             recently used resources list, false otherwise
   */
-  bool addFull(string uri, gtk.recent_data.RecentData recentData)
+  bool addFull(string uri, gtk.recent_data.RecentData recentData) nothrow
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -213,7 +213,7 @@ class RecentManager : gobject.object.ObjectWrap
       Returns: true if the new item was successfully added
           to the recently used resources list
   */
-  bool addItem(string uri)
+  bool addItem(string uri) nothrow
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -228,7 +228,7 @@ class RecentManager : gobject.object.ObjectWrap
           [gtk.recent_info.RecentInfo.unref] on each item inside the list, and then
           free the list itself using [glib.list.List.free].
   */
-  gtk.recent_info.RecentInfo[] getItems()
+  gtk.recent_info.RecentInfo[] getItems() nothrow
   {
     GList* _cretval;
     _cretval = gtk_recent_manager_get_items(cast(GtkRecentManager*)this._cPtr);
@@ -244,7 +244,7 @@ class RecentManager : gobject.object.ObjectWrap
         uri = a URI
       Returns: true if the resource was found, false otherwise
   */
-  bool hasItem(string uri)
+  bool hasItem(string uri) nothrow
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -356,13 +356,13 @@ class RecentManager : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.recent_manager.RecentManager)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -371,7 +371,14 @@ class RecentManager : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.recent_manager.RecentManager.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -390,7 +397,7 @@ class RecentManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           recently used resources list
       Returns: Builder instance for fluent chaining
   */
-  T filename(string propval)
+  T filename(string propval) nothrow
   {
     return setProperty("filename", propval);
   }
@@ -403,7 +410,7 @@ final class RecentManagerGidBuilder : RecentManagerGidBuilderImpl!RecentManagerG
       Create object from builder.
       Returns: New object
   */
-  RecentManager build()
+  RecentManager build() nothrow
   {
     return new RecentManager(cast(void*)createGObject(RecentManager._getGType), Yes.Take);
   }

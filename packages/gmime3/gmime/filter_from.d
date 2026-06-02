@@ -16,26 +16,26 @@ class FilterFrom : gmime.filter.Filter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_filter_from_get_type != &gidSymbolNotFound ? g_mime_filter_from_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FilterFrom self()
+  override FilterFrom self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class FilterFrom : gmime.filter.Filter
       Get builder for [gmime.filter_from.FilterFrom]
       Returns: New builder object
   */
-  static FilterFromGidBuilder builder()
+  static FilterFromGidBuilder builder() nothrow
   {
     return new FilterFromGidBuilder;
   }
@@ -65,7 +65,7 @@ class FilterFrom : gmime.filter.Filter
         mode = filter mode
       Returns: a new from filter with mode mode.
   */
-  this(gmime.types.FilterFromMode mode)
+  this(gmime.types.FilterFromMode mode) nothrow
   {
     GMimeFilter* _cretval;
     _cretval = g_mime_filter_from_new(mode);
@@ -85,7 +85,7 @@ final class FilterFromGidBuilder : FilterFromGidBuilderImpl!FilterFromGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FilterFrom build()
+  FilterFrom build() nothrow
   {
     return new FilterFrom(cast(void*)createGObject(FilterFrom._getGType), Yes.Take);
   }

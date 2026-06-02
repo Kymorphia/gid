@@ -42,7 +42,7 @@ template StreamableContentT()
       Returns: a gchar* representing the specified mime type; the caller
         should not free the character string.
   */
-  override string getMimeType(int i)
+  override string getMimeType(int i) nothrow
   {
     const(char)* _cretval;
     _cretval = atk_streamable_content_get_mime_type(cast(AtkStreamableContent*)this._cPtr, i);
@@ -54,7 +54,7 @@ template StreamableContentT()
       Gets the number of mime types supported by this object.
       Returns: a gint which is the number of mime types supported by the object.
   */
-  override int getNMimeTypes()
+  override int getNMimeTypes() nothrow
   {
     int _retval;
     _retval = atk_streamable_content_get_n_mime_types(cast(AtkStreamableContent*)this._cPtr);
@@ -69,7 +69,7 @@ template StreamableContentT()
       Returns: A #GIOChannel which contains the content in the
         specified mime type.
   */
-  override glib.iochannel.IOChannel getStream(string mimeType)
+  override glib.iochannel.IOChannel getStream(string mimeType) nothrow
   {
     GIOChannel* _cretval;
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
@@ -94,7 +94,7 @@ template StreamableContentT()
       Returns: Returns a string representing a URI, or null
         if no corresponding URI can be constructed.
   */
-  override string getUri(string mimeType)
+  override string getUri(string mimeType) nothrow
   {
     const(char)* _cretval;
     const(char)* _mimeType = mimeType.toCString(No.Alloc);

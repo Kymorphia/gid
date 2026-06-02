@@ -18,26 +18,26 @@ class WindowAccessible : gtk.container_accessible.ContainerAccessible, atk.windo
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_window_accessible_get_type != &gidSymbolNotFound ? gtk_window_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WindowAccessible self()
+  override WindowAccessible self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class WindowAccessible : gtk.container_accessible.ContainerAccessible, atk.windo
       Get builder for [gtk.window_accessible.WindowAccessible]
       Returns: New builder object
   */
-  static WindowAccessibleGidBuilder builder()
+  static WindowAccessibleGidBuilder builder() nothrow
   {
     return new WindowAccessibleGidBuilder;
   }
@@ -68,7 +68,7 @@ final class WindowAccessibleGidBuilder : WindowAccessibleGidBuilderImpl!WindowAc
       Create object from builder.
       Returns: New object
   */
-  WindowAccessible build()
+  WindowAccessible build() nothrow
   {
     return new WindowAccessible(cast(void*)createGObject(WindowAccessible._getGType), No.Take);
   }

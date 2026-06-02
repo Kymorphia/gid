@@ -142,26 +142,26 @@ class Dialog : gtk.window.Window
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_dialog_get_type != &gidSymbolNotFound ? gtk_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Dialog self()
+  override Dialog self() nothrow
   {
     return this;
   }
@@ -170,7 +170,7 @@ class Dialog : gtk.window.Window
       Get builder for [gtk.dialog.Dialog]
       Returns: New builder object
   */
-  static DialogGidBuilder builder()
+  static DialogGidBuilder builder() nothrow
   {
     return new DialogGidBuilder;
   }
@@ -183,7 +183,7 @@ class Dialog : gtk.window.Window
         For technical reasons, this property is declared as an integer
         property, but you should only set it to true or false.
   */
-  @property int useHeaderBar()
+  @property int useHeaderBar() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("use-header-bar");
   }
@@ -195,7 +195,7 @@ class Dialog : gtk.window.Window
       directly, but into the vbox and action_area, as described above.
       Returns: the new dialog as a #GtkWidget
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_dialog_new();
@@ -214,7 +214,7 @@ class Dialog : gtk.window.Window
         child = an activatable widget
         responseId = response ID for child
   */
-  void addActionWidget(gtk.widget.Widget child, int responseId)
+  void addActionWidget(gtk.widget.Widget child, int responseId) nothrow
   {
     gtk_dialog_add_action_widget(cast(GtkDialog*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, responseId);
   }
@@ -231,7 +231,7 @@ class Dialog : gtk.window.Window
         responseId = response ID for the button
       Returns: the #GtkButton widget that was added
   */
-  gtk.widget.Widget addButton(string buttonText, int responseId)
+  gtk.widget.Widget addButton(string buttonText, int responseId) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _buttonText = buttonText.toCString(No.Alloc);
@@ -247,7 +247,7 @@ class Dialog : gtk.window.Window
       Deprecated: Direct access to the action area
           is discouraged; use [gtk.dialog.Dialog.addButton], etc.
   */
-  gtk.box.Box getActionArea()
+  gtk.box.Box getActionArea() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_dialog_get_action_area(cast(GtkDialog*)this._cPtr);
@@ -259,7 +259,7 @@ class Dialog : gtk.window.Window
       Returns the content area of dialog.
       Returns: the content area #GtkBox.
   */
-  gtk.box.Box getContentArea()
+  gtk.box.Box getContentArea() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_dialog_get_content_area(cast(GtkDialog*)this._cPtr);
@@ -273,7 +273,7 @@ class Dialog : gtk.window.Window
       #GtkDialog:use-header-bar property is true.
       Returns: the header bar
   */
-  gtk.header_bar.HeaderBar getHeaderBar()
+  gtk.header_bar.HeaderBar getHeaderBar() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_dialog_get_header_bar(cast(GtkDialog*)this._cPtr);
@@ -290,7 +290,7 @@ class Dialog : gtk.window.Window
       Returns: the response id of widget, or [gtk.types.ResponseType.None]
          if widget doesn’t have a response id set.
   */
-  int getResponseForWidget(gtk.widget.Widget widget)
+  int getResponseForWidget(gtk.widget.Widget widget) nothrow
   {
     int _retval;
     _retval = gtk_dialog_get_response_for_widget(cast(GtkDialog*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
@@ -306,7 +306,7 @@ class Dialog : gtk.window.Window
       Returns: the widget button that uses the given
             response_id, or null.
   */
-  gtk.widget.Widget getWidgetForResponse(int responseId)
+  gtk.widget.Widget getWidgetForResponse(int responseId) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_dialog_get_widget_for_response(cast(GtkDialog*)this._cPtr, responseId);
@@ -323,7 +323,7 @@ class Dialog : gtk.window.Window
       Params:
         responseId = response ID
   */
-  void response(int responseId)
+  void response(int responseId) nothrow
   {
     gtk_dialog_response(cast(GtkDialog*)this._cPtr, responseId);
   }
@@ -376,7 +376,7 @@ class Dialog : gtk.window.Window
       be triggered during a [gtk.dialog.Dialog.run] call.
       Returns: response ID
   */
-  int run()
+  int run() nothrow
   {
     int _retval;
     _retval = gtk_dialog_run(cast(GtkDialog*)this._cPtr);
@@ -399,7 +399,7 @@ class Dialog : gtk.window.Window
   
       Deprecated: Deprecated
   */
-  void setAlternativeButtonOrderFromArray(int[] newOrder)
+  void setAlternativeButtonOrderFromArray(int[] newOrder) nothrow
   {
     int _nParams;
     if (newOrder)
@@ -417,7 +417,7 @@ class Dialog : gtk.window.Window
       Params:
         responseId = a response ID
   */
-  void setDefaultResponse(int responseId)
+  void setDefaultResponse(int responseId) nothrow
   {
     gtk_dialog_set_default_response(cast(GtkDialog*)this._cPtr, responseId);
   }
@@ -431,7 +431,7 @@ class Dialog : gtk.window.Window
         responseId = a response ID
         setting = true for sensitive
   */
-  void setResponseSensitive(int responseId, bool setting)
+  void setResponseSensitive(int responseId, bool setting) nothrow
   {
     gtk_dialog_set_response_sensitive(cast(GtkDialog*)this._cPtr, responseId, setting);
   }
@@ -456,13 +456,13 @@ class Dialog : gtk.window.Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClose(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClose(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.dialog.Dialog)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -471,7 +471,14 @@ class Dialog : gtk.window.Window
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.dialog.Dialog.close");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -498,14 +505,14 @@ class Dialog : gtk.window.Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectResponse(T)(T callback, Flag!"After" after = No.After)
+  gulong connectResponse(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.dialog.Dialog)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -517,7 +524,14 @@ class Dialog : gtk.window.Window
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.dialog.Dialog.response");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -540,7 +554,7 @@ class DialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           property, but you should only set it to true or false.
       Returns: Builder instance for fluent chaining
   */
-  T useHeaderBar(int propval)
+  T useHeaderBar(int propval) nothrow
   {
     return setProperty("use-header-bar", propval);
   }
@@ -553,7 +567,7 @@ final class DialogGidBuilder : DialogGidBuilderImpl!DialogGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Dialog build()
+  Dialog build() nothrow
   {
     return new Dialog(cast(void*)createGObject(Dialog._getGType), No.Take);
   }

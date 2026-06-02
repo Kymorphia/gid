@@ -29,26 +29,26 @@ class Value : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())jsc_value_get_type != &gidSymbolNotFound ? jsc_value_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Value self()
+  override Value self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class Value : gobject.object.ObjectWrap
       Get builder for [javascriptcore.value.Value]
       Returns: New builder object
   */
-  static ValueGidBuilder builder()
+  static ValueGidBuilder builder() nothrow
   {
     return new ValueGidBuilder;
   }
@@ -66,7 +66,7 @@ class Value : gobject.object.ObjectWrap
       Get `context` property.
       Returns: The #JSCContext in which the value was created.
   */
-  @property javascriptcore.context.Context context()
+  @property javascriptcore.context.Context context() nothrow
   {
     return getContext();
   }
@@ -78,9 +78,9 @@ class Value : gobject.object.ObjectWrap
   *   callback = The callback
   * Returns: New function Value
   */
-  static Value newFunction(T)(Context context, string name, T callback)
+  static Value newFunction(T)(Context context, string name, T callback) nothrow
   {
-    extern(C) JSCValue* _ccallback(GPtrArray* args, void* userData)
+    extern(C) JSCValue* _ccallback(GPtrArray* args, void* userData) nothrow
     {
       auto _cb = cast(T*)userData;
       auto ctx = jsc_context_get_current();
@@ -127,7 +127,7 @@ class Value : gobject.object.ObjectWrap
   *   T = The D type
   * Returns: The value as a native D type
   */
-  T get(T)()
+  T get(T)() nothrow
   {
     return getJsVal!T(cast(JSCValue*)_cInstancePtr);
   }
@@ -140,7 +140,7 @@ class Value : gobject.object.ObjectWrap
   *   val = The D value to create the Value from
   * Returns: The new Value
   */
-  static Value from(T)(Context ctx, T val)
+  static Value from(T)(Context ctx, T val) nothrow
   {
     return new Value (createJsVal!T(cast(JSCContext*)ctx._cPtr, val), Yes.Take);
   }
@@ -178,14 +178,21 @@ class Value : gobject.object.ObjectWrap
         destroyNotify = destroy notifier for user_data.
       Returns: A #JSCValue, or null in case of exception.
   */
-  static javascriptcore.value.Value newArrayBuffer(javascriptcore.context.Context context, void* data, size_t size, glib.types.DestroyNotify destroyNotify = null)
+  static javascriptcore.value.Value newArrayBuffer(javascriptcore.context.Context context, void* data, size_t size, glib.types.DestroyNotify destroyNotify = null) nothrow
   {
-    extern(C) void _destroyNotifyCallback(void* data)
+    extern(C) void _destroyNotifyCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
     }
     auto _destroyNotifyCB = destroyNotify ? &_destroyNotifyCallback : null;
     JSCValue* _cretval;
@@ -205,7 +212,7 @@ class Value : gobject.object.ObjectWrap
         array = a #GPtrArray
       Returns: a #JSCValue.
   */
-  static javascriptcore.value.Value newArrayFromGarray(javascriptcore.context.Context context, javascriptcore.value.Value[] array = null)
+  static javascriptcore.value.Value newArrayFromGarray(javascriptcore.context.Context context, javascriptcore.value.Value[] array = null) nothrow
   {
     JSCValue* _cretval;
     auto _array = gPtrArrayFromD!(javascriptcore.value.Value, false)(array);
@@ -224,7 +231,7 @@ class Value : gobject.object.ObjectWrap
         strv = a null-terminated array of strings
       Returns: a #JSCValue.
   */
-  static javascriptcore.value.Value newArrayFromStrv(javascriptcore.context.Context context, string[] strv)
+  static javascriptcore.value.Value newArrayFromStrv(javascriptcore.context.Context context, string[] strv) nothrow
   {
     JSCValue* _cretval;
     const(char)*[] _tmpstrv;
@@ -246,7 +253,7 @@ class Value : gobject.object.ObjectWrap
         value = a #gboolean
       Returns: a #JSCValue.
   */
-  static javascriptcore.value.Value newBoolean(javascriptcore.context.Context context, bool value)
+  static javascriptcore.value.Value newBoolean(javascriptcore.context.Context context, bool value) nothrow
   {
     JSCValue* _cretval;
     _cretval = jsc_value_new_boolean(context ? cast(JSCContext*)context._cPtr(No.Dup) : null, value);
@@ -262,7 +269,7 @@ class Value : gobject.object.ObjectWrap
         json = the JSON string to be parsed
       Returns: a #JSCValue.
   */
-  static javascriptcore.value.Value newFromJson(javascriptcore.context.Context context, string json)
+  static javascriptcore.value.Value newFromJson(javascriptcore.context.Context context, string json) nothrow
   {
     JSCValue* _cretval;
     const(char)* _json = json.toCString(No.Alloc);
@@ -278,7 +285,7 @@ class Value : gobject.object.ObjectWrap
         context = a #JSCContext
       Returns: a #JSCValue.
   */
-  static javascriptcore.value.Value newNull(javascriptcore.context.Context context)
+  static javascriptcore.value.Value newNull(javascriptcore.context.Context context) nothrow
   {
     JSCValue* _cretval;
     _cretval = jsc_value_new_null(context ? cast(JSCContext*)context._cPtr(No.Dup) : null);
@@ -294,7 +301,7 @@ class Value : gobject.object.ObjectWrap
         number = a number
       Returns: a #JSCValue.
   */
-  static javascriptcore.value.Value newNumber(javascriptcore.context.Context context, double number)
+  static javascriptcore.value.Value newNumber(javascriptcore.context.Context context, double number) nothrow
   {
     JSCValue* _cretval;
     _cretval = jsc_value_new_number(context ? cast(JSCContext*)context._cPtr(No.Dup) : null, number);
@@ -313,7 +320,7 @@ class Value : gobject.object.ObjectWrap
         jscClass = the #JSCClass of instance
       Returns: a #JSCValue.
   */
-  static javascriptcore.value.Value newObject(javascriptcore.context.Context context, void* instance = null, javascriptcore.class_.Class jscClass = null)
+  static javascriptcore.value.Value newObject(javascriptcore.context.Context context, void* instance = null, javascriptcore.class_.Class jscClass = null) nothrow
   {
     JSCValue* _cretval;
     _cretval = jsc_value_new_object(context ? cast(JSCContext*)context._cPtr(No.Dup) : null, instance, jscClass ? cast(JSCClass*)jscClass._cPtr(No.Dup) : null);
@@ -333,13 +340,20 @@ class Value : gobject.object.ObjectWrap
         executor = an initialization callback
       Returns: a deferred promise object
   */
-  static javascriptcore.value.Value newPromise(javascriptcore.context.Context context, javascriptcore.types.Executor executor)
+  static javascriptcore.value.Value newPromise(javascriptcore.context.Context context, javascriptcore.types.Executor executor) nothrow
   {
-    extern(C) void _executorCallback(JSCValue* resolve, JSCValue* reject, void* userData)
+    extern(C) void _executorCallback(JSCValue* resolve, JSCValue* reject, void* userData) nothrow
     {
       auto _dlg = cast(javascriptcore.types.Executor*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(void*)resolve, No.Take), gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(void*)reject, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(void*)resolve, No.Take), gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(void*)reject, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "javascriptcore.types.Executor");
+      }
     }
     auto _executorCB = executor ? &_executorCallback : null;
     JSCValue* _cretval;
@@ -358,7 +372,7 @@ class Value : gobject.object.ObjectWrap
         string_ = a null-terminated string
       Returns: a #JSCValue.
   */
-  static javascriptcore.value.Value newString(javascriptcore.context.Context context, string string_ = null)
+  static javascriptcore.value.Value newString(javascriptcore.context.Context context, string string_ = null) nothrow
   {
     JSCValue* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
@@ -375,7 +389,7 @@ class Value : gobject.object.ObjectWrap
         bytes = a #GBytes
       Returns: a #JSCValue.
   */
-  static javascriptcore.value.Value newStringFromBytes(javascriptcore.context.Context context, glib.bytes.Bytes bytes = null)
+  static javascriptcore.value.Value newStringFromBytes(javascriptcore.context.Context context, glib.bytes.Bytes bytes = null) nothrow
   {
     JSCValue* _cretval;
     _cretval = jsc_value_new_string_from_bytes(context ? cast(JSCContext*)context._cPtr(No.Dup) : null, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null);
@@ -399,7 +413,7 @@ class Value : gobject.object.ObjectWrap
         length = number of elements in the array
       Returns: a #JSCValue
   */
-  static javascriptcore.value.Value newTypedArray(javascriptcore.context.Context context, javascriptcore.types.TypedArrayType type, size_t length)
+  static javascriptcore.value.Value newTypedArray(javascriptcore.context.Context context, javascriptcore.types.TypedArrayType type, size_t length) nothrow
   {
     JSCValue* _cretval;
     _cretval = jsc_value_new_typed_array(context ? cast(JSCContext*)context._cPtr(No.Dup) : null, type, length);
@@ -414,7 +428,7 @@ class Value : gobject.object.ObjectWrap
         context = a #JSCContext
       Returns: a #JSCValue.
   */
-  static javascriptcore.value.Value newUndefined(javascriptcore.context.Context context)
+  static javascriptcore.value.Value newUndefined(javascriptcore.context.Context context) nothrow
   {
     JSCValue* _cretval;
     _cretval = jsc_value_new_undefined(context ? cast(JSCContext*)context._cPtr(No.Dup) : null);
@@ -429,7 +443,7 @@ class Value : gobject.object.ObjectWrap
       an `ArrayBuffer`.
       Returns: size, in bytes.
   */
-  size_t arrayBufferGetSize()
+  size_t arrayBufferGetSize() nothrow
   {
     size_t _retval;
     _retval = jsc_value_array_buffer_get_size(cast(JSCValue*)this._cPtr);
@@ -444,7 +458,7 @@ class Value : gobject.object.ObjectWrap
         parameters = the #JSCValue<!-- -->s to pass as parameters to the constructor, or null
       Returns: a #JSCValue referencing the newly created object instance.
   */
-  javascriptcore.value.Value constructorCall(javascriptcore.value.Value[] parameters = null)
+  javascriptcore.value.Value constructorCall(javascriptcore.value.Value[] parameters = null) nothrow
   {
     JSCValue* _cretval;
     uint _nParameters;
@@ -472,7 +486,7 @@ class Value : gobject.object.ObjectWrap
         parameters = the #JSCValue<!-- -->s to pass as parameters to the function, or null
       Returns: a #JSCValue with the return value of the function.
   */
-  javascriptcore.value.Value functionCall(javascriptcore.value.Value[] parameters = null)
+  javascriptcore.value.Value functionCall(javascriptcore.value.Value[] parameters = null) nothrow
   {
     JSCValue* _cretval;
     uint _nParameters;
@@ -493,7 +507,7 @@ class Value : gobject.object.ObjectWrap
       Get the #JSCContext in which value was created.
       Returns: the #JSCValue context.
   */
-  javascriptcore.context.Context getContext()
+  javascriptcore.context.Context getContext() nothrow
   {
     JSCContext* _cretval;
     _cretval = jsc_value_get_context(cast(JSCValue*)this._cPtr);
@@ -505,7 +519,7 @@ class Value : gobject.object.ObjectWrap
       Get whether the value referenced by value is an array.
       Returns: whether the value is an array.
   */
-  bool isArray()
+  bool isArray() nothrow
   {
     bool _retval;
     _retval = cast(bool)jsc_value_is_array(cast(JSCValue*)this._cPtr);
@@ -516,7 +530,7 @@ class Value : gobject.object.ObjectWrap
       Check whether the value is an `ArrayBuffer`.
       Returns: whether the value is an `ArrayBuffer`
   */
-  bool isArrayBuffer()
+  bool isArrayBuffer() nothrow
   {
     bool _retval;
     _retval = cast(bool)jsc_value_is_array_buffer(cast(JSCValue*)this._cPtr);
@@ -527,7 +541,7 @@ class Value : gobject.object.ObjectWrap
       Get whether the value referenced by value is a boolean.
       Returns: whether the value is a boolean.
   */
-  bool isBoolean()
+  bool isBoolean() nothrow
   {
     bool _retval;
     _retval = cast(bool)jsc_value_is_boolean(cast(JSCValue*)this._cPtr);
@@ -538,7 +552,7 @@ class Value : gobject.object.ObjectWrap
       Get whether the value referenced by value is a constructor.
       Returns: whether the value is a constructor.
   */
-  bool isConstructor()
+  bool isConstructor() nothrow
   {
     bool _retval;
     _retval = cast(bool)jsc_value_is_constructor(cast(JSCValue*)this._cPtr);
@@ -549,7 +563,7 @@ class Value : gobject.object.ObjectWrap
       Get whether the value referenced by value is a function
       Returns: whether the value is a function.
   */
-  bool isFunction()
+  bool isFunction() nothrow
   {
     bool _retval;
     _retval = cast(bool)jsc_value_is_function(cast(JSCValue*)this._cPtr);
@@ -560,7 +574,7 @@ class Value : gobject.object.ObjectWrap
       Get whether the value referenced by value is <function>null</function>.
       Returns: whether the value is null.
   */
-  bool isNull()
+  bool isNull() nothrow
   {
     bool _retval;
     _retval = cast(bool)jsc_value_is_null(cast(JSCValue*)this._cPtr);
@@ -571,7 +585,7 @@ class Value : gobject.object.ObjectWrap
       Get whether the value referenced by value is a number.
       Returns: whether the value is a number.
   */
-  bool isNumber()
+  bool isNumber() nothrow
   {
     bool _retval;
     _retval = cast(bool)jsc_value_is_number(cast(JSCValue*)this._cPtr);
@@ -582,7 +596,7 @@ class Value : gobject.object.ObjectWrap
       Get whether the value referenced by value is an object.
       Returns: whether the value is an object.
   */
-  bool isObject()
+  bool isObject() nothrow
   {
     bool _retval;
     _retval = cast(bool)jsc_value_is_object(cast(JSCValue*)this._cPtr);
@@ -593,7 +607,7 @@ class Value : gobject.object.ObjectWrap
       Get whether the value referenced by value is a string
       Returns: whether the value is a string
   */
-  bool isString()
+  bool isString() nothrow
   {
     bool _retval;
     _retval = cast(bool)jsc_value_is_string(cast(JSCValue*)this._cPtr);
@@ -604,7 +618,7 @@ class Value : gobject.object.ObjectWrap
       Determines whether a value is a typed array.
       Returns: Whether value is a typed array.
   */
-  bool isTypedArray()
+  bool isTypedArray() nothrow
   {
     bool _retval;
     _retval = cast(bool)jsc_value_is_typed_array(cast(JSCValue*)this._cPtr);
@@ -615,7 +629,7 @@ class Value : gobject.object.ObjectWrap
       Get whether the value referenced by value is <function>undefined</function>.
       Returns: whether the value is undefined.
   */
-  bool isUndefined()
+  bool isUndefined() nothrow
   {
     bool _retval;
     _retval = cast(bool)jsc_value_is_undefined(cast(JSCValue*)this._cPtr);
@@ -644,7 +658,7 @@ class Value : gobject.object.ObjectWrap
         length = number of array elements, or `-1`.
       Returns: a #JSCValue
   */
-  javascriptcore.value.Value newTypedArrayWithBuffer(javascriptcore.types.TypedArrayType type, size_t offset, ptrdiff_t length)
+  javascriptcore.value.Value newTypedArrayWithBuffer(javascriptcore.types.TypedArrayType type, size_t offset, ptrdiff_t length) nothrow
   {
     JSCValue* _cretval;
     _cretval = jsc_value_new_typed_array_with_buffer(cast(JSCValue*)this._cPtr, type, offset, length);
@@ -661,7 +675,7 @@ class Value : gobject.object.ObjectWrap
         flags = #JSCValuePropertyFlags
         propertyValue = the default property value
   */
-  void objectDefinePropertyData(string propertyName, javascriptcore.types.ValuePropertyFlags flags, javascriptcore.value.Value propertyValue = null)
+  void objectDefinePropertyData(string propertyName, javascriptcore.types.ValuePropertyFlags flags, javascriptcore.value.Value propertyValue = null) nothrow
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
     jsc_value_object_define_property_data(cast(JSCValue*)this._cPtr, _propertyName, flags, propertyValue ? cast(JSCValue*)propertyValue._cPtr(No.Dup) : null);
@@ -675,7 +689,7 @@ class Value : gobject.object.ObjectWrap
         name = the property name
       Returns: true if the property was deleted, or false otherwise.
   */
-  bool objectDeleteProperty(string name)
+  bool objectDeleteProperty(string name) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -689,7 +703,7 @@ class Value : gobject.object.ObjectWrap
       Returns: a null-terminated array of strings containing the
            property names, or null if value doesn't have enumerable properties.  Use [glib.global.strfreev] to free.
   */
-  string[] objectEnumerateProperties()
+  string[] objectEnumerateProperties() nothrow
   {
     char** _cretval;
     _cretval = jsc_value_object_enumerate_properties(cast(JSCValue*)this._cPtr);
@@ -715,7 +729,7 @@ class Value : gobject.object.ObjectWrap
         name = the property name
       Returns: the property #JSCValue.
   */
-  javascriptcore.value.Value objectGetProperty(string name)
+  javascriptcore.value.Value objectGetProperty(string name) nothrow
   {
     JSCValue* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -731,7 +745,7 @@ class Value : gobject.object.ObjectWrap
         index = the property index
       Returns: the property #JSCValue.
   */
-  javascriptcore.value.Value objectGetPropertyAtIndex(uint index)
+  javascriptcore.value.Value objectGetPropertyAtIndex(uint index) nothrow
   {
     JSCValue* _cretval;
     _cretval = jsc_value_object_get_property_at_index(cast(JSCValue*)this._cPtr, index);
@@ -746,7 +760,7 @@ class Value : gobject.object.ObjectWrap
         name = the property name
       Returns: true if value has a property with name, or false otherwise
   */
-  bool objectHasProperty(string name)
+  bool objectHasProperty(string name) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -769,7 +783,7 @@ class Value : gobject.object.ObjectWrap
         parameters = the #JSCValue<!-- -->s to pass as parameters to the method, or null
       Returns: a #JSCValue with the return value of the method.
   */
-  javascriptcore.value.Value objectInvokeMethod(string name, javascriptcore.value.Value[] parameters = null)
+  javascriptcore.value.Value objectInvokeMethod(string name, javascriptcore.value.Value[] parameters = null) nothrow
   {
     JSCValue* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -794,7 +808,7 @@ class Value : gobject.object.ObjectWrap
         name = a class name
       Returns: whether the value is an object instance of class name.
   */
-  bool objectIsInstanceOf(string name)
+  bool objectIsInstanceOf(string name) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -809,7 +823,7 @@ class Value : gobject.object.ObjectWrap
         name = the property name
         property = the #JSCValue to set
   */
-  void objectSetProperty(string name, javascriptcore.value.Value property)
+  void objectSetProperty(string name, javascriptcore.value.Value property) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     jsc_value_object_set_property(cast(JSCValue*)this._cPtr, _name, property ? cast(JSCValue*)property._cPtr(No.Dup) : null);
@@ -822,7 +836,7 @@ class Value : gobject.object.ObjectWrap
         index = the property index
         property = the #JSCValue to set
   */
-  void objectSetPropertyAtIndex(uint index, javascriptcore.value.Value property)
+  void objectSetPropertyAtIndex(uint index, javascriptcore.value.Value property) nothrow
   {
     jsc_value_object_set_property_at_index(cast(JSCValue*)this._cPtr, index, property ? cast(JSCValue*)property._cPtr(No.Dup) : null);
   }
@@ -831,7 +845,7 @@ class Value : gobject.object.ObjectWrap
       Convert value to a boolean.
       Returns: a #gboolean result of the conversion.
   */
-  bool toBoolean()
+  bool toBoolean() nothrow
   {
     bool _retval;
     _retval = cast(bool)jsc_value_to_boolean(cast(JSCValue*)this._cPtr);
@@ -842,7 +856,7 @@ class Value : gobject.object.ObjectWrap
       Convert value to a double.
       Returns: a #gdouble result of the conversion.
   */
-  double toDouble()
+  double toDouble() nothrow
   {
     double _retval;
     _retval = jsc_value_to_double(cast(JSCValue*)this._cPtr);
@@ -853,7 +867,7 @@ class Value : gobject.object.ObjectWrap
       Convert value to a #gint32.
       Returns: a #gint32 result of the conversion.
   */
-  int toInt32()
+  int toInt32() nothrow
   {
     int _retval;
     _retval = jsc_value_to_int32(cast(JSCValue*)this._cPtr);
@@ -868,7 +882,7 @@ class Value : gobject.object.ObjectWrap
         indent = The number of spaces to indent when nesting.
       Returns: a null-terminated JSON string with serialization of value
   */
-  string toJson(uint indent)
+  string toJson(uint indent) nothrow
   {
     char* _cretval;
     _cretval = jsc_value_to_json(cast(JSCValue*)this._cPtr, indent);
@@ -881,7 +895,7 @@ class Value : gobject.object.ObjectWrap
       handle strings containing null characters.
       Returns: a null-terminated string result of the conversion.
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = jsc_value_to_string(cast(JSCValue*)this._cPtr);
@@ -894,7 +908,7 @@ class Value : gobject.object.ObjectWrap
       to handle strings with null characters.
       Returns: a #GBytes with the result of the conversion.
   */
-  glib.bytes.Bytes toStringAsBytes()
+  glib.bytes.Bytes toStringAsBytes() nothrow
   {
     GBytes* _cretval;
     _cretval = jsc_value_to_string_as_bytes(cast(JSCValue*)this._cPtr);
@@ -906,7 +920,7 @@ class Value : gobject.object.ObjectWrap
       Obtain the `ArrayBuffer` for the memory region of the typed array elements.
       Returns: A #JSCValue
   */
-  javascriptcore.value.Value typedArrayGetBuffer()
+  javascriptcore.value.Value typedArrayGetBuffer() nothrow
   {
     JSCValue* _cretval;
     _cretval = jsc_value_typed_array_get_buffer(cast(JSCValue*)this._cPtr);
@@ -943,7 +957,7 @@ class Value : gobject.object.ObjectWrap
         length = location to return the number of elements contained
       Returns: pointer to memory.
   */
-  void* typedArrayGetData(out size_t length)
+  void* typedArrayGetData(out size_t length) nothrow
   {
     auto _retval = jsc_value_typed_array_get_data(cast(JSCValue*)this._cPtr, cast(size_t*)&length);
     return _retval;
@@ -953,7 +967,7 @@ class Value : gobject.object.ObjectWrap
       Gets the number of elements in a typed array.
       Returns: number of elements.
   */
-  size_t typedArrayGetLength()
+  size_t typedArrayGetLength() nothrow
   {
     size_t _retval;
     _retval = jsc_value_typed_array_get_length(cast(JSCValue*)this._cPtr);
@@ -964,7 +978,7 @@ class Value : gobject.object.ObjectWrap
       Gets the offset over the underlying array buffer data.
       Returns: offset, in bytes.
   */
-  size_t typedArrayGetOffset()
+  size_t typedArrayGetOffset() nothrow
   {
     size_t _retval;
     _retval = jsc_value_typed_array_get_offset(cast(JSCValue*)this._cPtr);
@@ -975,7 +989,7 @@ class Value : gobject.object.ObjectWrap
       Gets the size of a typed array.
       Returns: size, in bytes.
   */
-  size_t typedArrayGetSize()
+  size_t typedArrayGetSize() nothrow
   {
     size_t _retval;
     _retval = jsc_value_typed_array_get_size(cast(JSCValue*)this._cPtr);
@@ -986,7 +1000,7 @@ class Value : gobject.object.ObjectWrap
       Gets the type of elements contained in a typed array.
       Returns: type of the elements, or `JSC_TYPED_ARRAY_NONE` if value is not a typed array.
   */
-  javascriptcore.types.TypedArrayType typedArrayGetType()
+  javascriptcore.types.TypedArrayType typedArrayGetType() nothrow
   {
     JSCTypedArrayType _cretval;
     _cretval = jsc_value_typed_array_get_type(cast(JSCValue*)this._cPtr);
@@ -1005,7 +1019,7 @@ class ValueGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The #JSCContext in which the value was created.
       Returns: Builder instance for fluent chaining
   */
-  T context(javascriptcore.context.Context propval)
+  T context(javascriptcore.context.Context propval) nothrow
   {
     return setProperty("context", propval);
   }
@@ -1018,7 +1032,7 @@ final class ValueGidBuilder : ValueGidBuilderImpl!ValueGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Value build()
+  Value build() nothrow
   {
     return new Value(cast(void*)createGObject(Value._getGType), No.Take);
   }
@@ -1031,7 +1045,7 @@ final class ValueGidBuilder : ValueGidBuilderImpl!ValueGidBuilder
 *   jsval = C JSCValue structure pointer
 * Returns: The value of type `T`
 */
-static T getJsVal(T)(JSCValue* jsval)
+static T getJsVal(T)(JSCValue* jsval) nothrow
 {
   static if (is(T == bool))
     return cast(bool)jsc_value_to_boolean(jsval);
@@ -1096,7 +1110,7 @@ static T getJsVal(T)(JSCValue* jsval)
 *   val = The value to create the JSCValue from
 * Returns: The new JSCValue which the caller owns
 */
-static JSCValue* createJsVal(T)(JSCContext* ctx, T val)
+static JSCValue* createJsVal(T)(JSCContext* ctx, T val) nothrow
 {
   static if (is(T == bool))
     return jsc_value_new_boolean(ctx, cast(gboolean)val);
@@ -1142,7 +1156,7 @@ static JSCValue* createJsVal(T)(JSCContext* ctx, T val)
 *   T = The D type
 * Returns: true if createJsVal is supported for the type, false otherwise
 */
-bool isValidJsVal(T)()
+bool isValidJsVal(T)() nothrow
 {
   return is(T == bool) || isNumeric!T || is(T == string) || is(T == Value) || is(T == U[], U) || is(T == U[string], U);
 }

@@ -17,26 +17,26 @@ class ExceptionWrap : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())jsc_exception_get_type != &gidSymbolNotFound ? jsc_exception_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ExceptionWrap self()
+  override ExceptionWrap self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class ExceptionWrap : gobject.object.ObjectWrap
       Get builder for [javascriptcore.exception.ExceptionWrap]
       Returns: New builder object
   */
-  static ExceptionWrapGidBuilder builder()
+  static ExceptionWrapGidBuilder builder() nothrow
   {
     return new ExceptionWrapGidBuilder;
   }
@@ -58,7 +58,7 @@ class ExceptionWrap : gobject.object.ObjectWrap
         message = the error message
       Returns: a new #JSCException.
   */
-  this(javascriptcore.context.Context context, string message)
+  this(javascriptcore.context.Context context, string message) nothrow
   {
     JSCException* _cretval;
     const(char)* _message = message.toCString(No.Alloc);
@@ -75,7 +75,7 @@ class ExceptionWrap : gobject.object.ObjectWrap
         message = the error message
       Returns: a new #JSCException.
   */
-  static javascriptcore.exception.ExceptionWrap newWithName(javascriptcore.context.Context context, string name, string message)
+  static javascriptcore.exception.ExceptionWrap newWithName(javascriptcore.context.Context context, string name, string message) nothrow
   {
     JSCException* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -89,7 +89,7 @@ class ExceptionWrap : gobject.object.ObjectWrap
       Get a string with the exception backtrace.
       Returns: the exception backtrace string or null.
   */
-  string getBacktraceString()
+  string getBacktraceString() nothrow
   {
     const(char)* _cretval;
     _cretval = jsc_exception_get_backtrace_string(cast(JSCException*)this._cPtr);
@@ -101,7 +101,7 @@ class ExceptionWrap : gobject.object.ObjectWrap
       Get the column number at which exception happened.
       Returns: the column number of exception.
   */
-  uint getColumnNumber()
+  uint getColumnNumber() nothrow
   {
     uint _retval;
     _retval = jsc_exception_get_column_number(cast(JSCException*)this._cPtr);
@@ -112,7 +112,7 @@ class ExceptionWrap : gobject.object.ObjectWrap
       Get the line number at which exception happened.
       Returns: the line number of exception.
   */
-  uint getLineNumber()
+  uint getLineNumber() nothrow
   {
     uint _retval;
     _retval = jsc_exception_get_line_number(cast(JSCException*)this._cPtr);
@@ -123,7 +123,7 @@ class ExceptionWrap : gobject.object.ObjectWrap
       Get the error message of exception.
       Returns: the exception error message.
   */
-  string getMessage()
+  string getMessage() nothrow
   {
     const(char)* _cretval;
     _cretval = jsc_exception_get_message(cast(JSCException*)this._cPtr);
@@ -135,7 +135,7 @@ class ExceptionWrap : gobject.object.ObjectWrap
       Get the error name of exception
       Returns: the exception error name.
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = jsc_exception_get_name(cast(JSCException*)this._cPtr);
@@ -147,7 +147,7 @@ class ExceptionWrap : gobject.object.ObjectWrap
       Get the source URI of exception.
       Returns: the the source URI of exception, or null.
   */
-  string getSourceUri()
+  string getSourceUri() nothrow
   {
     const(char)* _cretval;
     _cretval = jsc_exception_get_source_uri(cast(JSCException*)this._cPtr);
@@ -160,7 +160,7 @@ class ExceptionWrap : gobject.object.ObjectWrap
       source URI, line, column and backtrace, and formatted to be printed.
       Returns: a new string with the exception report
   */
-  string report()
+  string report() nothrow
   {
     char* _cretval;
     _cretval = jsc_exception_report(cast(JSCException*)this._cPtr);
@@ -172,7 +172,7 @@ class ExceptionWrap : gobject.object.ObjectWrap
       Get the string representation of exception error.
       Returns: the string representation of exception.
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = jsc_exception_to_string(cast(JSCException*)this._cPtr);
@@ -193,7 +193,7 @@ final class ExceptionWrapGidBuilder : ExceptionWrapGidBuilderImpl!ExceptionWrapG
       Create object from builder.
       Returns: New object
   */
-  ExceptionWrap build()
+  ExceptionWrap build() nothrow
   {
     return new ExceptionWrap(cast(void*)createGObject(ExceptionWrap._getGType), Yes.Take);
   }

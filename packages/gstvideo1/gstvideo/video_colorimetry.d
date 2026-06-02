@@ -42,7 +42,7 @@ struct VideoColorimetry
         color = a colorimetry string
       Returns: true if color points to valid colorimetry info.
   */
-  bool fromString(string color)
+  bool fromString(string color) nothrow
   {
     bool _retval;
     const(char)* _color = color.toCString(No.Alloc);
@@ -57,7 +57,7 @@ struct VideoColorimetry
         other = another #GstVideoColorimetry
       Returns: true if cinfo and other are equal.
   */
-  bool isEqual(gstvideo.video_colorimetry.VideoColorimetry other)
+  bool isEqual(gstvideo.video_colorimetry.VideoColorimetry other) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_colorimetry_is_equal(cast(const(GstVideoColorimetry)*)&this, cast(const(GstVideoColorimetry)*)&other);
@@ -73,7 +73,7 @@ struct VideoColorimetry
         otherBitdepth = bitdepth of a format associated with other
       Returns: true if cinfo and other are equivalent.
   */
-  bool isEquivalent(uint bitdepth, gstvideo.video_colorimetry.VideoColorimetry other, uint otherBitdepth)
+  bool isEquivalent(uint bitdepth, gstvideo.video_colorimetry.VideoColorimetry other, uint otherBitdepth) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_colorimetry_is_equivalent(cast(const(GstVideoColorimetry)*)&this, bitdepth, cast(const(GstVideoColorimetry)*)&other, otherBitdepth);
@@ -89,7 +89,7 @@ struct VideoColorimetry
       Returns: true if color conveys the same colorimetry info as the color
         information in info.
   */
-  bool matches(string color)
+  bool matches(string color) nothrow
   {
     bool _retval;
     const(char)* _color = color.toCString(No.Alloc);
@@ -102,7 +102,7 @@ struct VideoColorimetry
       Returns: a string representation of cinfo
         or null if all the entries of cinfo are unknown values.
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gst_video_colorimetry_to_string(cast(const(GstVideoColorimetry)*)&this);

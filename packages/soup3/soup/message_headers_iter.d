@@ -22,11 +22,8 @@ class MessageHeadersIter
   SoupMessageHeadersIter _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for soup.message_headers_iter.MessageHeadersIter");
-
     _cInstance = *cast(SoupMessageHeadersIter*)ptr;
 
     if (take)
@@ -34,7 +31,7 @@ class MessageHeadersIter
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -55,7 +52,7 @@ class MessageHeadersIter
       Returns: true if another name and value were returned, false
           if the end of the headers has been reached.
   */
-  bool next(out string name, out string value)
+  bool next(out string name, out string value) nothrow
   {
     bool _retval;
     char* _name;
@@ -74,7 +71,7 @@ class MessageHeadersIter
             structure
         hdrs = a [soup.message_headers.MessageHeaders]
   */
-  static void init_(out soup.message_headers_iter.MessageHeadersIter iter, soup.message_headers.MessageHeaders hdrs)
+  static void init_(out soup.message_headers_iter.MessageHeadersIter iter, soup.message_headers.MessageHeaders hdrs) nothrow
   {
     SoupMessageHeadersIter _iter;
     soup_message_headers_iter_init(&_iter, hdrs ? cast(SoupMessageHeaders*)hdrs._cPtr(No.Dup) : null);

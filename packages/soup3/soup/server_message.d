@@ -37,26 +37,26 @@ class ServerMessage : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_server_message_get_type != &gidSymbolNotFound ? soup_server_message_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ServerMessage self()
+  override ServerMessage self() nothrow
   {
     return this;
   }
@@ -65,7 +65,7 @@ class ServerMessage : gobject.object.ObjectWrap
       Get builder for [soup.server_message.ServerMessage]
       Returns: New builder object
   */
-  static ServerMessageGidBuilder builder()
+  static ServerMessageGidBuilder builder() nothrow
   {
     return new ServerMessageGidBuilder;
   }
@@ -74,7 +74,7 @@ class ServerMessage : gobject.object.ObjectWrap
       Get `tlsPeerCertificate` property.
       Returns: The peer's #GTlsCertificate associated with the message
   */
-  @property gio.tls_certificate.TlsCertificate tlsPeerCertificate()
+  @property gio.tls_certificate.TlsCertificate tlsPeerCertificate() nothrow
   {
     return getTlsPeerCertificate();
   }
@@ -83,7 +83,7 @@ class ServerMessage : gobject.object.ObjectWrap
       Get `tlsPeerCertificateErrors` property.
       Returns: The verification errors on #SoupServerMessage:tls-peer-certificate
   */
-  @property gio.types.TlsCertificateFlags tlsPeerCertificateErrors()
+  @property gio.types.TlsCertificateFlags tlsPeerCertificateErrors() nothrow
   {
     return getTlsPeerCertificateErrors();
   }
@@ -92,7 +92,7 @@ class ServerMessage : gobject.object.ObjectWrap
       Get the HTTP version of msg.
       Returns: a #SoupHTTPVersion.
   */
-  soup.types.HTTPVersion getHttpVersion()
+  soup.types.HTTPVersion getHttpVersion() nothrow
   {
     SoupHTTPVersion _cretval;
     _cretval = soup_server_message_get_http_version(cast(SoupServerMessage*)this._cPtr);
@@ -107,7 +107,7 @@ class ServerMessage : gobject.object.ObjectWrap
           associated with the local end of a connection, it may be
           null if you used [soup.server.Server.acceptIostream].
   */
-  gio.socket_address.SocketAddress getLocalAddress()
+  gio.socket_address.SocketAddress getLocalAddress() nothrow
   {
     GSocketAddress* _cretval;
     _cretval = soup_server_message_get_local_address(cast(SoupServerMessage*)this._cPtr);
@@ -119,7 +119,7 @@ class ServerMessage : gobject.object.ObjectWrap
       Get the HTTP method of msg.
       Returns: the HTTP method.
   */
-  string getMethod()
+  string getMethod() nothrow
   {
     const(char)* _cretval;
     _cretval = soup_server_message_get_method(cast(SoupServerMessage*)this._cPtr);
@@ -131,7 +131,7 @@ class ServerMessage : gobject.object.ObjectWrap
       Get the HTTP reason phrase of msg.
       Returns: the reason phrase.
   */
-  string getReasonPhrase()
+  string getReasonPhrase() nothrow
   {
     const(char)* _cretval;
     _cretval = soup_server_message_get_reason_phrase(cast(SoupServerMessage*)this._cPtr);
@@ -146,7 +146,7 @@ class ServerMessage : gobject.object.ObjectWrap
           associated with the remote end of a connection, it may be
           null if you used `classServer.accept_iostream`.
   */
-  gio.socket_address.SocketAddress getRemoteAddress()
+  gio.socket_address.SocketAddress getRemoteAddress() nothrow
   {
     GSocketAddress* _cretval;
     _cretval = soup_server_message_get_remote_address(cast(SoupServerMessage*)this._cPtr);
@@ -161,7 +161,7 @@ class ServerMessage : gobject.object.ObjectWrap
           end of a connection, it may be null if you used
           [soup.server.Server.acceptIostream].
   */
-  string getRemoteHost()
+  string getRemoteHost() nothrow
   {
     const(char)* _cretval;
     _cretval = soup_server_message_get_remote_host(cast(SoupServerMessage*)this._cPtr);
@@ -173,7 +173,7 @@ class ServerMessage : gobject.object.ObjectWrap
       Get the request body of msg.
       Returns: a #SoupMessageBody.
   */
-  soup.message_body.MessageBody getRequestBody()
+  soup.message_body.MessageBody getRequestBody() nothrow
   {
     SoupMessageBody* _cretval;
     _cretval = soup_server_message_get_request_body(cast(SoupServerMessage*)this._cPtr);
@@ -185,7 +185,7 @@ class ServerMessage : gobject.object.ObjectWrap
       Get the request headers of msg.
       Returns: a #SoupMessageHeaders with the request headers.
   */
-  soup.message_headers.MessageHeaders getRequestHeaders()
+  soup.message_headers.MessageHeaders getRequestHeaders() nothrow
   {
     SoupMessageHeaders* _cretval;
     _cretval = soup_server_message_get_request_headers(cast(SoupServerMessage*)this._cPtr);
@@ -197,7 +197,7 @@ class ServerMessage : gobject.object.ObjectWrap
       Get the response body of msg.
       Returns: a #SoupMessageBody.
   */
-  soup.message_body.MessageBody getResponseBody()
+  soup.message_body.MessageBody getResponseBody() nothrow
   {
     SoupMessageBody* _cretval;
     _cretval = soup_server_message_get_response_body(cast(SoupServerMessage*)this._cPtr);
@@ -209,7 +209,7 @@ class ServerMessage : gobject.object.ObjectWrap
       Get the response headers of msg.
       Returns: a #SoupMessageHeaders with the response headers.
   */
-  soup.message_headers.MessageHeaders getResponseHeaders()
+  soup.message_headers.MessageHeaders getResponseHeaders() nothrow
   {
     SoupMessageHeaders* _cretval;
     _cretval = soup_server_message_get_response_headers(cast(SoupServerMessage*)this._cPtr);
@@ -229,7 +229,7 @@ class ServerMessage : gobject.object.ObjectWrap
       Returns: the #GSocket that msg is
           associated with, null if you used [soup.server.Server.acceptIostream].
   */
-  gio.socket.Socket getSocket()
+  gio.socket.Socket getSocket() nothrow
   {
     GSocket* _cretval;
     _cretval = soup_server_message_get_socket(cast(SoupServerMessage*)this._cPtr);
@@ -241,7 +241,7 @@ class ServerMessage : gobject.object.ObjectWrap
       Get the HTTP status code of msg.
       Returns: the HTTP status code.
   */
-  uint getStatus()
+  uint getStatus() nothrow
   {
     uint _retval;
     _retval = soup_server_message_get_status(cast(SoupServerMessage*)this._cPtr);
@@ -255,7 +255,7 @@ class ServerMessage : gobject.object.ObjectWrap
       Returns: msg's TLS peer certificate,
            or null if msg's connection is not SSL.
   */
-  gio.tls_certificate.TlsCertificate getTlsPeerCertificate()
+  gio.tls_certificate.TlsCertificate getTlsPeerCertificate() nothrow
   {
     GTlsCertificate* _cretval;
     _cretval = soup_server_message_get_tls_peer_certificate(cast(SoupServerMessage*)this._cPtr);
@@ -269,7 +269,7 @@ class ServerMessage : gobject.object.ObjectWrap
       SoupServerMessage::accept-certificate signal.
       Returns: a #GTlsCertificateFlags with msg's TLS peer certificate errors.
   */
-  gio.types.TlsCertificateFlags getTlsPeerCertificateErrors()
+  gio.types.TlsCertificateFlags getTlsPeerCertificateErrors() nothrow
   {
     GTlsCertificateFlags _cretval;
     _cretval = soup_server_message_get_tls_peer_certificate_errors(cast(SoupServerMessage*)this._cPtr);
@@ -281,7 +281,7 @@ class ServerMessage : gobject.object.ObjectWrap
       Get msg's URI.
       Returns: a #GUri
   */
-  glib.uri.Uri getUri()
+  glib.uri.Uri getUri() nothrow
   {
     GUri* _cretval;
     _cretval = soup_server_message_get_uri(cast(SoupServerMessage*)this._cPtr);
@@ -293,7 +293,7 @@ class ServerMessage : gobject.object.ObjectWrap
       Gets if msg represents an OPTIONS message with the path `*`.
       Returns: true if is an OPTIONS ping
   */
-  bool isOptionsPing()
+  bool isOptionsPing() nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_server_message_is_options_ping(cast(SoupServerMessage*)this._cPtr);
@@ -307,7 +307,7 @@ class ServerMessage : gobject.object.ObjectWrap
       having the full response ready yet. Use [soup.server_message.ServerMessage.unpause] to
       resume I/O.
   */
-  void pause()
+  void pause() nothrow
   {
     soup_server_message_pause(cast(SoupServerMessage*)this._cPtr);
   }
@@ -318,7 +318,7 @@ class ServerMessage : gobject.object.ObjectWrap
       Params:
         version_ = a #SoupHTTPVersion
   */
-  void setHttpVersion(soup.types.HTTPVersion version_)
+  void setHttpVersion(soup.types.HTTPVersion version_) nothrow
   {
     soup_server_message_set_http_version(cast(SoupServerMessage*)this._cPtr, version_);
   }
@@ -337,7 +337,7 @@ class ServerMessage : gobject.object.ObjectWrap
         statusCode = a 3xx status code
         redirectUri = the URI to redirect msg to
   */
-  void setRedirect(uint statusCode, string redirectUri)
+  void setRedirect(uint statusCode, string redirectUri) nothrow
   {
     const(char)* _redirectUri = redirectUri.toCString(No.Alloc);
     soup_server_message_set_redirect(cast(SoupServerMessage*)this._cPtr, statusCode, _redirectUri);
@@ -352,7 +352,7 @@ class ServerMessage : gobject.object.ObjectWrap
         respUse = a #SoupMemoryUse describing how to handle resp_body
         respBody = a data buffer containing the body of the message response.
   */
-  void setResponse(string contentType, soup.types.MemoryUse respUse, ubyte[] respBody = null)
+  void setResponse(string contentType, soup.types.MemoryUse respUse, ubyte[] respBody = null) nothrow
   {
     const(char)* _contentType = contentType.toCString(No.Alloc);
     size_t _respLength;
@@ -373,7 +373,7 @@ class ServerMessage : gobject.object.ObjectWrap
         statusCode = an HTTP status code
         reasonPhrase = a reason phrase
   */
-  void setStatus(uint statusCode, string reasonPhrase = null)
+  void setStatus(uint statusCode, string reasonPhrase = null) nothrow
   {
     const(char)* _reasonPhrase = reasonPhrase.toCString(No.Alloc);
     soup_server_message_set_status(cast(SoupServerMessage*)this._cPtr, statusCode, _reasonPhrase);
@@ -395,7 +395,7 @@ class ServerMessage : gobject.object.ObjectWrap
           connection). No guarantees are made about what kind of #GIOStream
           is returned.
   */
-  gio.iostream.IOStream stealConnection()
+  gio.iostream.IOStream stealConnection() nothrow
   {
     GIOStream* _cretval;
     _cretval = soup_server_message_steal_connection(cast(SoupServerMessage*)this._cPtr);
@@ -410,7 +410,7 @@ class ServerMessage : gobject.object.ObjectWrap
       adding a new chunk to a chunked response. I/O won't actually resume until you
       return to the main loop.
   */
-  void unpause()
+  void unpause() nothrow
   {
     soup_server_message_unpause(cast(SoupServerMessage*)this._cPtr);
   }
@@ -440,7 +440,7 @@ class ServerMessage : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAcceptCertificate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAcceptCertificate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.tls_certificate.TlsCertificate)))
@@ -448,11 +448,12 @@ class ServerMessage : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -463,7 +464,14 @@ class ServerMessage : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.server_message.ServerMessage.acceptCertificate");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -487,13 +495,13 @@ class ServerMessage : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectConnected(T)(T callback, Flag!"After" after = No.After)
+  gulong connectConnected(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -502,7 +510,14 @@ class ServerMessage : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.server_message.ServerMessage.connected");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -524,13 +539,13 @@ class ServerMessage : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDisconnected(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDisconnected(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -539,7 +554,14 @@ class ServerMessage : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.server_message.ServerMessage.disconnected");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -562,13 +584,13 @@ class ServerMessage : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFinished(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFinished(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -577,7 +599,14 @@ class ServerMessage : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.server_message.ServerMessage.finished");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -599,13 +628,13 @@ class ServerMessage : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGotBody(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGotBody(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -614,7 +643,14 @@ class ServerMessage : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.server_message.ServerMessage.gotBody");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -641,14 +677,14 @@ class ServerMessage : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGotChunk(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGotChunk(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.bytes.Bytes)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -660,7 +696,14 @@ class ServerMessage : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.server_message.ServerMessage.gotChunk");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -682,13 +725,13 @@ class ServerMessage : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGotHeaders(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGotHeaders(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -697,7 +740,14 @@ class ServerMessage : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.server_message.ServerMessage.gotHeaders");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -720,13 +770,13 @@ class ServerMessage : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWroteBody(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWroteBody(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -735,7 +785,14 @@ class ServerMessage : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.server_message.ServerMessage.wroteBody");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -760,14 +817,14 @@ class ServerMessage : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWroteBodyData(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWroteBodyData(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -779,7 +836,14 @@ class ServerMessage : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.server_message.ServerMessage.wroteBodyData");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -808,13 +872,13 @@ class ServerMessage : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWroteChunk(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWroteChunk(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -823,7 +887,14 @@ class ServerMessage : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.server_message.ServerMessage.wroteChunk");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -846,13 +917,13 @@ class ServerMessage : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWroteHeaders(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWroteHeaders(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -861,7 +932,14 @@ class ServerMessage : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.server_message.ServerMessage.wroteHeaders");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -883,13 +961,13 @@ class ServerMessage : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWroteInformational(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWroteInformational(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -898,7 +976,14 @@ class ServerMessage : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.server_message.ServerMessage.wroteInformational");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -918,7 +1003,7 @@ final class ServerMessageGidBuilder : ServerMessageGidBuilderImpl!ServerMessageG
       Create object from builder.
       Returns: New object
   */
-  ServerMessage build()
+  ServerMessage build() nothrow
   {
     return new ServerMessage(cast(void*)createGObject(ServerMessage._getGType), No.Take);
   }

@@ -22,32 +22,32 @@ class TextAttributes : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_attributes_get_type != &gidSymbolNotFound ? gtk_text_attributes_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TextAttributes self()
+  override TextAttributes self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class TextAttributes : gobject.boxed.Boxed
       Get `appearance` field.
       Returns: #GtkTextAppearance for text.
   */
-  @property gtk.text_appearance.TextAppearance appearance()
+  @property gtk.text_appearance.TextAppearance appearance() nothrow
   {
     return new gtk.text_appearance.TextAppearance(cast(GtkTextAppearance*)&(cast(GtkTextAttributes*)this._cPtr).appearance, No.Take);
   }
@@ -65,7 +65,7 @@ class TextAttributes : gobject.boxed.Boxed
       Get `justification` field.
       Returns: #GtkJustification for text.
   */
-  @property gtk.types.Justification justification()
+  @property gtk.types.Justification justification() nothrow
   {
     return cast(gtk.types.Justification)(cast(GtkTextAttributes*)this._cPtr).justification;
   }
@@ -75,7 +75,7 @@ class TextAttributes : gobject.boxed.Boxed
       Params:
         propval = #GtkJustification for text.
   */
-  @property void justification(gtk.types.Justification propval)
+  @property void justification(gtk.types.Justification propval) nothrow
   {
     (cast(GtkTextAttributes*)this._cPtr).justification = cast(GtkJustification)propval;
   }
@@ -84,7 +84,7 @@ class TextAttributes : gobject.boxed.Boxed
       Get `direction` field.
       Returns: #GtkTextDirection for text.
   */
-  @property gtk.types.TextDirection direction()
+  @property gtk.types.TextDirection direction() nothrow
   {
     return cast(gtk.types.TextDirection)(cast(GtkTextAttributes*)this._cPtr).direction;
   }
@@ -94,7 +94,7 @@ class TextAttributes : gobject.boxed.Boxed
       Params:
         propval = #GtkTextDirection for text.
   */
-  @property void direction(gtk.types.TextDirection propval)
+  @property void direction(gtk.types.TextDirection propval) nothrow
   {
     (cast(GtkTextAttributes*)this._cPtr).direction = cast(GtkTextDirection)propval;
   }
@@ -103,7 +103,7 @@ class TextAttributes : gobject.boxed.Boxed
       Get `font` field.
       Returns: #PangoFontDescription for text.
   */
-  @property pango.font_description.FontDescription font()
+  @property pango.font_description.FontDescription font() nothrow
   {
     return cToD!(pango.font_description.FontDescription)(cast(void*)(cast(GtkTextAttributes*)this._cPtr).font);
   }
@@ -113,7 +113,7 @@ class TextAttributes : gobject.boxed.Boxed
       Params:
         propval = #PangoFontDescription for text.
   */
-  @property void font(pango.font_description.FontDescription propval)
+  @property void font(pango.font_description.FontDescription propval) nothrow
   {
     cValueFree!(pango.font_description.FontDescription)(cast(void*)(cast(GtkTextAttributes*)this._cPtr).font);
     dToC(propval, cast(void*)&(cast(GtkTextAttributes*)this._cPtr).font);
@@ -123,7 +123,7 @@ class TextAttributes : gobject.boxed.Boxed
       Get `fontScale` field.
       Returns: Font scale factor.
   */
-  @property double fontScale()
+  @property double fontScale() nothrow
   {
     return (cast(GtkTextAttributes*)this._cPtr).fontScale;
   }
@@ -133,7 +133,7 @@ class TextAttributes : gobject.boxed.Boxed
       Params:
         propval = Font scale factor.
   */
-  @property void fontScale(double propval)
+  @property void fontScale(double propval) nothrow
   {
     (cast(GtkTextAttributes*)this._cPtr).fontScale = propval;
   }
@@ -142,7 +142,7 @@ class TextAttributes : gobject.boxed.Boxed
       Get `leftMargin` field.
       Returns: Width of the left margin in pixels.
   */
-  @property int leftMargin()
+  @property int leftMargin() nothrow
   {
     return (cast(GtkTextAttributes*)this._cPtr).leftMargin;
   }
@@ -152,7 +152,7 @@ class TextAttributes : gobject.boxed.Boxed
       Params:
         propval = Width of the left margin in pixels.
   */
-  @property void leftMargin(int propval)
+  @property void leftMargin(int propval) nothrow
   {
     (cast(GtkTextAttributes*)this._cPtr).leftMargin = propval;
   }
@@ -161,7 +161,7 @@ class TextAttributes : gobject.boxed.Boxed
       Get `rightMargin` field.
       Returns: Width of the right margin in pixels.
   */
-  @property int rightMargin()
+  @property int rightMargin() nothrow
   {
     return (cast(GtkTextAttributes*)this._cPtr).rightMargin;
   }
@@ -171,7 +171,7 @@ class TextAttributes : gobject.boxed.Boxed
       Params:
         propval = Width of the right margin in pixels.
   */
-  @property void rightMargin(int propval)
+  @property void rightMargin(int propval) nothrow
   {
     (cast(GtkTextAttributes*)this._cPtr).rightMargin = propval;
   }
@@ -180,7 +180,7 @@ class TextAttributes : gobject.boxed.Boxed
       Get `indent` field.
       Returns: Amount to indent the paragraph, in pixels.
   */
-  @property int indent()
+  @property int indent() nothrow
   {
     return (cast(GtkTextAttributes*)this._cPtr).indent;
   }
@@ -190,7 +190,7 @@ class TextAttributes : gobject.boxed.Boxed
       Params:
         propval = Amount to indent the paragraph, in pixels.
   */
-  @property void indent(int propval)
+  @property void indent(int propval) nothrow
   {
     (cast(GtkTextAttributes*)this._cPtr).indent = propval;
   }
@@ -199,7 +199,7 @@ class TextAttributes : gobject.boxed.Boxed
       Get `pixelsAboveLines` field.
       Returns: Pixels of blank space above paragraphs.
   */
-  @property int pixelsAboveLines()
+  @property int pixelsAboveLines() nothrow
   {
     return (cast(GtkTextAttributes*)this._cPtr).pixelsAboveLines;
   }
@@ -209,7 +209,7 @@ class TextAttributes : gobject.boxed.Boxed
       Params:
         propval = Pixels of blank space above paragraphs.
   */
-  @property void pixelsAboveLines(int propval)
+  @property void pixelsAboveLines(int propval) nothrow
   {
     (cast(GtkTextAttributes*)this._cPtr).pixelsAboveLines = propval;
   }
@@ -218,7 +218,7 @@ class TextAttributes : gobject.boxed.Boxed
       Get `pixelsBelowLines` field.
       Returns: Pixels of blank space below paragraphs.
   */
-  @property int pixelsBelowLines()
+  @property int pixelsBelowLines() nothrow
   {
     return (cast(GtkTextAttributes*)this._cPtr).pixelsBelowLines;
   }
@@ -228,7 +228,7 @@ class TextAttributes : gobject.boxed.Boxed
       Params:
         propval = Pixels of blank space below paragraphs.
   */
-  @property void pixelsBelowLines(int propval)
+  @property void pixelsBelowLines(int propval) nothrow
   {
     (cast(GtkTextAttributes*)this._cPtr).pixelsBelowLines = propval;
   }
@@ -238,7 +238,7 @@ class TextAttributes : gobject.boxed.Boxed
       Returns: Pixels of blank space between wrapped lines in
           a paragraph.
   */
-  @property int pixelsInsideWrap()
+  @property int pixelsInsideWrap() nothrow
   {
     return (cast(GtkTextAttributes*)this._cPtr).pixelsInsideWrap;
   }
@@ -249,7 +249,7 @@ class TextAttributes : gobject.boxed.Boxed
         propval = Pixels of blank space between wrapped lines in
             a paragraph.
   */
-  @property void pixelsInsideWrap(int propval)
+  @property void pixelsInsideWrap(int propval) nothrow
   {
     (cast(GtkTextAttributes*)this._cPtr).pixelsInsideWrap = propval;
   }
@@ -258,7 +258,7 @@ class TextAttributes : gobject.boxed.Boxed
       Get `tabs` field.
       Returns: Custom #PangoTabArray for this text.
   */
-  @property pango.tab_array.TabArray tabs()
+  @property pango.tab_array.TabArray tabs() nothrow
   {
     return cToD!(pango.tab_array.TabArray)(cast(void*)(cast(GtkTextAttributes*)this._cPtr).tabs);
   }
@@ -268,7 +268,7 @@ class TextAttributes : gobject.boxed.Boxed
       Params:
         propval = Custom #PangoTabArray for this text.
   */
-  @property void tabs(pango.tab_array.TabArray propval)
+  @property void tabs(pango.tab_array.TabArray propval) nothrow
   {
     cValueFree!(pango.tab_array.TabArray)(cast(void*)(cast(GtkTextAttributes*)this._cPtr).tabs);
     dToC(propval, cast(void*)&(cast(GtkTextAttributes*)this._cPtr).tabs);
@@ -278,7 +278,7 @@ class TextAttributes : gobject.boxed.Boxed
       Get `wrapMode` field.
       Returns: #GtkWrapMode for text.
   */
-  @property gtk.types.WrapMode wrapMode()
+  @property gtk.types.WrapMode wrapMode() nothrow
   {
     return cast(gtk.types.WrapMode)(cast(GtkTextAttributes*)this._cPtr).wrapMode;
   }
@@ -288,7 +288,7 @@ class TextAttributes : gobject.boxed.Boxed
       Params:
         propval = #GtkWrapMode for text.
   */
-  @property void wrapMode(gtk.types.WrapMode propval)
+  @property void wrapMode(gtk.types.WrapMode propval) nothrow
   {
     (cast(GtkTextAttributes*)this._cPtr).wrapMode = cast(GtkWrapMode)propval;
   }
@@ -297,7 +297,7 @@ class TextAttributes : gobject.boxed.Boxed
       Get `language` field.
       Returns: #PangoLanguage for text.
   */
-  @property pango.language.Language language()
+  @property pango.language.Language language() nothrow
   {
     return cToD!(pango.language.Language)(cast(void*)(cast(GtkTextAttributes*)this._cPtr).language);
   }
@@ -307,7 +307,7 @@ class TextAttributes : gobject.boxed.Boxed
       Params:
         propval = #PangoLanguage for text.
   */
-  @property void language(pango.language.Language propval)
+  @property void language(pango.language.Language propval) nothrow
   {
     cValueFree!(pango.language.Language)(cast(void*)(cast(GtkTextAttributes*)this._cPtr).language);
     dToC(propval, cast(void*)&(cast(GtkTextAttributes*)this._cPtr).language);
@@ -317,7 +317,7 @@ class TextAttributes : gobject.boxed.Boxed
       Get `invisible` field.
       Returns: Hide the text.
   */
-  @property uint invisible()
+  @property uint invisible() nothrow
   {
     return (cast(GtkTextAttributes*)this._cPtr).invisible;
   }
@@ -327,7 +327,7 @@ class TextAttributes : gobject.boxed.Boxed
       Params:
         propval = Hide the text.
   */
-  @property void invisible(uint propval)
+  @property void invisible(uint propval) nothrow
   {
     (cast(GtkTextAttributes*)this._cPtr).invisible = propval;
   }
@@ -337,7 +337,7 @@ class TextAttributes : gobject.boxed.Boxed
       Returns: Background is fit to full line height rather than
            baseline +/- ascent/descent (font height).
   */
-  @property uint bgFullHeight()
+  @property uint bgFullHeight() nothrow
   {
     return (cast(GtkTextAttributes*)this._cPtr).bgFullHeight;
   }
@@ -348,7 +348,7 @@ class TextAttributes : gobject.boxed.Boxed
         propval = Background is fit to full line height rather than
              baseline +/- ascent/descent (font height).
   */
-  @property void bgFullHeight(uint propval)
+  @property void bgFullHeight(uint propval) nothrow
   {
     (cast(GtkTextAttributes*)this._cPtr).bgFullHeight = propval;
   }
@@ -357,7 +357,7 @@ class TextAttributes : gobject.boxed.Boxed
       Get `editable` field.
       Returns: Can edit this text.
   */
-  @property uint editable()
+  @property uint editable() nothrow
   {
     return (cast(GtkTextAttributes*)this._cPtr).editable;
   }
@@ -367,7 +367,7 @@ class TextAttributes : gobject.boxed.Boxed
       Params:
         propval = Can edit this text.
   */
-  @property void editable(uint propval)
+  @property void editable(uint propval) nothrow
   {
     (cast(GtkTextAttributes*)this._cPtr).editable = propval;
   }
@@ -376,7 +376,7 @@ class TextAttributes : gobject.boxed.Boxed
       Get `noFallback` field.
       Returns: Whether to disable font fallback.
   */
-  @property uint noFallback()
+  @property uint noFallback() nothrow
   {
     return (cast(GtkTextAttributes*)this._cPtr).noFallback;
   }
@@ -386,7 +386,7 @@ class TextAttributes : gobject.boxed.Boxed
       Params:
         propval = Whether to disable font fallback.
   */
-  @property void noFallback(uint propval)
+  @property void noFallback(uint propval) nothrow
   {
     (cast(GtkTextAttributes*)this._cPtr).noFallback = propval;
   }
@@ -395,7 +395,7 @@ class TextAttributes : gobject.boxed.Boxed
       Get `letterSpacing` field.
       Returns: Extra space to insert between graphemes, in Pango units
   */
-  @property int letterSpacing()
+  @property int letterSpacing() nothrow
   {
     return (cast(GtkTextAttributes*)this._cPtr).letterSpacing;
   }
@@ -405,7 +405,7 @@ class TextAttributes : gobject.boxed.Boxed
       Params:
         propval = Extra space to insert between graphemes, in Pango units
   */
-  @property void letterSpacing(int propval)
+  @property void letterSpacing(int propval) nothrow
   {
     (cast(GtkTextAttributes*)this._cPtr).letterSpacing = propval;
   }
@@ -416,7 +416,7 @@ class TextAttributes : gobject.boxed.Boxed
       Returns: a new #GtkTextAttributes,
             free with [gtk.text_attributes.TextAttributes.unref].
   */
-  this()
+  this() nothrow
   {
     GtkTextAttributes* _cretval;
     _cretval = gtk_text_attributes_new();
@@ -428,7 +428,7 @@ class TextAttributes : gobject.boxed.Boxed
       Returns: a copy of src,
             free with [gtk.text_attributes.TextAttributes.unref]
   */
-  gtk.text_attributes.TextAttributes copy()
+  gtk.text_attributes.TextAttributes copy() nothrow
   {
     GtkTextAttributes* _cretval;
     _cretval = gtk_text_attributes_copy(cast(GtkTextAttributes*)this._cPtr);
@@ -443,7 +443,7 @@ class TextAttributes : gobject.boxed.Boxed
       Params:
         dest = another #GtkTextAttributes
   */
-  void copyValues(gtk.text_attributes.TextAttributes dest)
+  void copyValues(gtk.text_attributes.TextAttributes dest) nothrow
   {
     gtk_text_attributes_copy_values(cast(GtkTextAttributes*)this._cPtr, dest ? cast(GtkTextAttributes*)dest._cPtr(No.Dup) : null);
   }

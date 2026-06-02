@@ -15,32 +15,32 @@ class ParseContext : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_parse_context_get_type != &gidSymbolNotFound ? gst_parse_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ParseContext self()
+  override ParseContext self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class ParseContext : gobject.boxed.Boxed
       Returns: a newly-allocated parse context. Free
             with [gst.parse_context.ParseContext.free] when no longer needed.
   */
-  this()
+  this() nothrow
   {
     GstParseContext* _cretval;
     _cretval = gst_parse_context_new();
@@ -64,7 +64,7 @@ class ParseContext : gobject.boxed.Boxed
       Copies the context.
       Returns: A copied #GstParseContext
   */
-  gst.parse_context.ParseContext copy()
+  gst.parse_context.ParseContext copy() nothrow
   {
     GstParseContext* _cretval;
     _cretval = gst_parse_context_copy(cast(const(GstParseContext)*)this._cPtr);
@@ -80,7 +80,7 @@ class ParseContext : gobject.boxed.Boxed
             null-terminated array of element factory name strings of missing
             elements. Free with [glib.global.strfreev] when no longer needed.
   */
-  string[] getMissingElements()
+  string[] getMissingElements() nothrow
   {
     char** _cretval;
     _cretval = gst_parse_context_get_missing_elements(cast(GstParseContext*)this._cPtr);

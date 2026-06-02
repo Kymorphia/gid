@@ -16,11 +16,8 @@ class RecentFilterInfo
   GtkRecentFilterInfo _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.recent_filter_info.RecentFilterInfo");
-
     _cInstance = *cast(GtkRecentFilterInfo*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class RecentFilterInfo
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class RecentFilterInfo
       Get `contains` field.
       Returns: #GtkRecentFilterFlags to indicate which fields are set.
   */
-  @property gtk.types.RecentFilterFlags contains()
+  @property gtk.types.RecentFilterFlags contains() nothrow
   {
     return cast(gtk.types.RecentFilterFlags)(cast(GtkRecentFilterInfo*)this._cPtr).contains;
   }
@@ -47,7 +44,7 @@ class RecentFilterInfo
       Params:
         propval = #GtkRecentFilterFlags to indicate which fields are set.
   */
-  @property void contains(gtk.types.RecentFilterFlags propval)
+  @property void contains(gtk.types.RecentFilterFlags propval) nothrow
   {
     (cast(GtkRecentFilterInfo*)this._cPtr).contains = cast(GtkRecentFilterFlags)propval;
   }
@@ -56,7 +53,7 @@ class RecentFilterInfo
       Get `uri` field.
       Returns: The URI of the file being tested.
   */
-  @property string uri()
+  @property string uri() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkRecentFilterInfo*)this._cPtr).uri);
   }
@@ -66,7 +63,7 @@ class RecentFilterInfo
       Params:
         propval = The URI of the file being tested.
   */
-  @property void uri(string propval)
+  @property void uri(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkRecentFilterInfo*)this._cPtr).uri);
     dToC(propval, cast(void*)&(cast(GtkRecentFilterInfo*)this._cPtr).uri);
@@ -77,7 +74,7 @@ class RecentFilterInfo
       Returns: The string that will be used to display
            the file in the recent chooser.
   */
-  @property string displayName()
+  @property string displayName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkRecentFilterInfo*)this._cPtr).displayName);
   }
@@ -88,7 +85,7 @@ class RecentFilterInfo
         propval = The string that will be used to display
              the file in the recent chooser.
   */
-  @property void displayName(string propval)
+  @property void displayName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkRecentFilterInfo*)this._cPtr).displayName);
     dToC(propval, cast(void*)&(cast(GtkRecentFilterInfo*)this._cPtr).displayName);
@@ -98,7 +95,7 @@ class RecentFilterInfo
       Get `mimeType` field.
       Returns: MIME type of the file.
   */
-  @property string mimeType()
+  @property string mimeType() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkRecentFilterInfo*)this._cPtr).mimeType);
   }
@@ -108,7 +105,7 @@ class RecentFilterInfo
       Params:
         propval = MIME type of the file.
   */
-  @property void mimeType(string propval)
+  @property void mimeType(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkRecentFilterInfo*)this._cPtr).mimeType);
     dToC(propval, cast(void*)&(cast(GtkRecentFilterInfo*)this._cPtr).mimeType);
@@ -119,7 +116,7 @@ class RecentFilterInfo
       Returns: The number of days elapsed since the file has been
            registered.
   */
-  @property int age()
+  @property int age() nothrow
   {
     return (cast(GtkRecentFilterInfo*)this._cPtr).age;
   }
@@ -130,7 +127,7 @@ class RecentFilterInfo
         propval = The number of days elapsed since the file has been
              registered.
   */
-  @property void age(int propval)
+  @property void age(int propval) nothrow
   {
     (cast(GtkRecentFilterInfo*)this._cPtr).age = propval;
   }

@@ -44,26 +44,26 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_area_box_get_type != &gidSymbolNotFound ? gtk_cell_area_box_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CellAreaBox self()
+  override CellAreaBox self() nothrow
   {
     return this;
   }
@@ -72,7 +72,7 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
       Get builder for [gtk.cell_area_box.CellAreaBox]
       Returns: New builder object
   */
-  static CellAreaBoxGidBuilder builder()
+  static CellAreaBoxGidBuilder builder() nothrow
   {
     return new CellAreaBoxGidBuilder;
   }
@@ -81,7 +81,7 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
       Get `spacing` property.
       Returns: The amount of space to reserve between cells.
   */
-  @property int spacing()
+  @property int spacing() nothrow
   {
     return getSpacing();
   }
@@ -91,7 +91,7 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
       Params:
         propval = The amount of space to reserve between cells.
   */
-  @property void spacing(int propval)
+  @property void spacing(int propval) nothrow
   {
     setSpacing(propval);
   }
@@ -102,7 +102,7 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
       Creates a new [gtk.cell_area_box.CellAreaBox].
       Returns: a newly created [gtk.cell_area_box.CellAreaBox]
   */
-  this()
+  this() nothrow
   {
     GtkCellArea* _cretval;
     _cretval = gtk_cell_area_box_new();
@@ -113,7 +113,7 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
       Gets the spacing added between cell renderers.
       Returns: the space added between cell renderers in box.
   */
-  int getSpacing()
+  int getSpacing() nothrow
   {
     int _retval;
     _retval = gtk_cell_area_box_get_spacing(cast(GtkCellAreaBox*)this._cPtr);
@@ -133,7 +133,7 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
         align_ = whether renderer should be aligned in adjacent rows
         fixed = whether renderer should have the same size in all rows
   */
-  void packEnd(gtk.cell_renderer.CellRenderer renderer, bool expand, bool align_, bool fixed)
+  void packEnd(gtk.cell_renderer.CellRenderer renderer, bool expand, bool align_, bool fixed) nothrow
   {
     gtk_cell_area_box_pack_end(cast(GtkCellAreaBox*)this._cPtr, renderer ? cast(GtkCellRenderer*)renderer._cPtr(No.Dup) : null, expand, align_, fixed);
   }
@@ -151,7 +151,7 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
         align_ = whether renderer should be aligned in adjacent rows
         fixed = whether renderer should have the same size in all rows
   */
-  void packStart(gtk.cell_renderer.CellRenderer renderer, bool expand, bool align_, bool fixed)
+  void packStart(gtk.cell_renderer.CellRenderer renderer, bool expand, bool align_, bool fixed) nothrow
   {
     gtk_cell_area_box_pack_start(cast(GtkCellAreaBox*)this._cPtr, renderer ? cast(GtkCellRenderer*)renderer._cPtr(No.Dup) : null, expand, align_, fixed);
   }
@@ -162,7 +162,7 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
       Params:
         spacing = the space to add between [gtk.cell_renderer.CellRenderer]s
   */
-  void setSpacing(int spacing)
+  void setSpacing(int spacing) nothrow
   {
     gtk_cell_area_box_set_spacing(cast(GtkCellAreaBox*)this._cPtr, spacing);
   }
@@ -180,7 +180,7 @@ class CellAreaBoxGidBuilderImpl(T) : gtk.cell_area.CellAreaGidBuilderImpl!T, gtk
         propval = The amount of space to reserve between cells.
       Returns: Builder instance for fluent chaining
   */
-  T spacing(int propval)
+  T spacing(int propval) nothrow
   {
     return setProperty("spacing", propval);
   }
@@ -193,7 +193,7 @@ final class CellAreaBoxGidBuilder : CellAreaBoxGidBuilderImpl!CellAreaBoxGidBuil
       Create object from builder.
       Returns: New object
   */
-  CellAreaBox build()
+  CellAreaBox build() nothrow
   {
     return new CellAreaBox(cast(void*)createGObject(CellAreaBox._getGType), No.Take);
   }

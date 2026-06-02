@@ -24,26 +24,26 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_gutter_renderer_get_type != &gidSymbolNotFound ? gtk_source_gutter_renderer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GutterRenderer self()
+  override GutterRenderer self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Get builder for [gtksource.gutter_renderer.GutterRenderer]
       Returns: New builder object
   */
-  static GutterRendererGidBuilder builder()
+  static GutterRendererGidBuilder builder() nothrow
   {
     return new GutterRendererGidBuilder;
   }
@@ -64,7 +64,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
         the alignment should work on either the full cell, the first line
         or the last line.
   */
-  @property gtksource.types.GutterRendererAlignmentMode alignmentMode()
+  @property gtksource.types.GutterRendererAlignmentMode alignmentMode() nothrow
   {
     return getAlignmentMode();
   }
@@ -77,43 +77,43 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
           the alignment should work on either the full cell, the first line
           or the last line.
   */
-  @property void alignmentMode(gtksource.types.GutterRendererAlignmentMode propval)
+  @property void alignmentMode(gtksource.types.GutterRendererAlignmentMode propval) nothrow
   {
     setAlignmentMode(propval);
   }
 
   /** */
-  @property gdk.rgba.RGBA backgroundRgba()
+  @property gdk.rgba.RGBA backgroundRgba() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("background-rgba");
   }
 
   /** */
-  @property void backgroundRgba(gdk.rgba.RGBA propval)
+  @property void backgroundRgba(gdk.rgba.RGBA propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.rgba.RGBA)("background-rgba", propval);
   }
 
   /** */
-  @property bool backgroundSet()
+  @property bool backgroundSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("background-set");
   }
 
   /** */
-  @property void backgroundSet(bool propval)
+  @property void backgroundSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("background-set", propval);
   }
 
   /** */
-  @property int size()
+  @property int size() nothrow
   {
     return getSize();
   }
 
   /** */
-  @property void size(int propval)
+  @property void size(int propval) nothrow
   {
     setSize(propval);
   }
@@ -122,7 +122,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Get `view` property.
       Returns: The view on which the renderer is placed.
   */
-  @property gtk.text_view.TextView view()
+  @property gtk.text_view.TextView view() nothrow
   {
     return getView();
   }
@@ -131,7 +131,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Get `visible` property.
       Returns: The visibility of the renderer.
   */
-  @property bool visible()
+  @property bool visible() nothrow
   {
     return getVisible();
   }
@@ -141,7 +141,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Params:
         propval = The visibility of the renderer.
   */
-  @property void visible(bool propval)
+  @property void visible(bool propval) nothrow
   {
     setVisible(propval);
   }
@@ -151,7 +151,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Returns: The window type of the view on which the renderer is placed (left,
         or right).
   */
-  @property gtk.types.TextWindowType windowType()
+  @property gtk.types.TextWindowType windowType() nothrow
   {
     return getWindowType();
   }
@@ -162,7 +162,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
         alignment. 1 for a right alignment. And 0.5 for centering the cells.
         A value lower than 0 doesn't modify the alignment.
   */
-  @property float xalign()
+  @property float xalign() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(float)("xalign");
   }
@@ -174,7 +174,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
           alignment. 1 for a right alignment. And 0.5 for centering the cells.
           A value lower than 0 doesn't modify the alignment.
   */
-  @property void xalign(float propval)
+  @property void xalign(float propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(float)("xalign", propval);
   }
@@ -183,7 +183,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Get `xpad` property.
       Returns: The left and right padding of the renderer.
   */
-  @property int xpad()
+  @property int xpad() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("xpad");
   }
@@ -193,7 +193,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Params:
         propval = The left and right padding of the renderer.
   */
-  @property void xpad(int propval)
+  @property void xpad(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("xpad", propval);
   }
@@ -204,7 +204,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
         alignment. 1 for a bottom alignment. And 0.5 for centering the cells.
         A value lower than 0 doesn't modify the alignment.
   */
-  @property float yalign()
+  @property float yalign() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(float)("yalign");
   }
@@ -216,7 +216,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
           alignment. 1 for a bottom alignment. And 0.5 for centering the cells.
           A value lower than 0 doesn't modify the alignment.
   */
-  @property void yalign(float propval)
+  @property void yalign(float propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(float)("yalign", propval);
   }
@@ -225,7 +225,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Get `ypad` property.
       Returns: The top and bottom padding of the renderer.
   */
-  @property int ypad()
+  @property int ypad() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("ypad");
   }
@@ -235,7 +235,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Params:
         propval = The top and bottom padding of the renderer.
   */
-  @property void ypad(int propval)
+  @property void ypad(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("ypad", propval);
   }
@@ -249,7 +249,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
         area = a #GdkRectangle of the cell area where the renderer is activated
         event = the event that triggered the activation
   */
-  void activate(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, gdk.event.Event event)
+  void activate(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, gdk.event.Event event) nothrow
   {
     gtk_source_gutter_renderer_activate(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, cast(GdkRectangle*)&area, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
   }
@@ -266,7 +266,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
         start = a #GtkTextIter
         end = a #GtkTextIter
   */
-  void begin(cairo.context.Context cr, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
+  void begin(cairo.context.Context cr, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end) nothrow
   {
     gtk_source_gutter_renderer_begin(cast(GtkSourceGutterRenderer*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(GdkRectangle*)&backgroundArea, cast(GdkRectangle*)&cellArea, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
   }
@@ -294,7 +294,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
         end = a #GtkTextIter
         state = a #GtkSourceGutterRendererState
   */
-  void draw(cairo.context.Context cr, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtksource.types.GutterRendererState state)
+  void draw(cairo.context.Context cr, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtksource.types.GutterRendererState state) nothrow
   {
     gtk_source_gutter_renderer_draw(cast(GtkSourceGutterRenderer*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(GdkRectangle*)&backgroundArea, cast(GdkRectangle*)&cellArea, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null, state);
   }
@@ -302,7 +302,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   /**
       Called when drawing a region of lines has ended.
   */
-  void end()
+  void end() nothrow
   {
     gtk_source_gutter_renderer_end(cast(GtkSourceGutterRenderer*)this._cPtr);
   }
@@ -316,7 +316,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
         yalign = return location for the y-alignment,
             or null to ignore.
   */
-  void getAlignment(out float xalign, out float yalign)
+  void getAlignment(out float xalign, out float yalign) nothrow
   {
     gtk_source_gutter_renderer_get_alignment(cast(GtkSourceGutterRenderer*)this._cPtr, cast(float*)&xalign, cast(float*)&yalign);
   }
@@ -326,7 +326,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       renderer is aligned (see :xalign and :yalign).
       Returns: a #GtkSourceGutterRendererAlignmentMode
   */
-  gtksource.types.GutterRendererAlignmentMode getAlignmentMode()
+  gtksource.types.GutterRendererAlignmentMode getAlignmentMode() nothrow
   {
     GtkSourceGutterRendererAlignmentMode _cretval;
     _cretval = gtk_source_gutter_renderer_get_alignment_mode(cast(GtkSourceGutterRenderer*)this._cPtr);
@@ -341,7 +341,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
         color = return value for a #GdkRGBA
       Returns: true if the background color is set, false otherwise
   */
-  bool getBackground(out gdk.rgba.RGBA color)
+  bool getBackground(out gdk.rgba.RGBA color) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_gutter_renderer_get_background(cast(GtkSourceGutterRenderer*)this._cPtr, cast(GdkRGBA*)&color);
@@ -357,7 +357,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
         ypad = return location for the y-padding,
             or null to ignore.
   */
-  void getPadding(out int xpad, out int ypad)
+  void getPadding(out int xpad, out int ypad) nothrow
   {
     gtk_source_gutter_renderer_get_padding(cast(GtkSourceGutterRenderer*)this._cPtr, cast(int*)&xpad, cast(int*)&ypad);
   }
@@ -366,7 +366,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Get the size of the renderer.
       Returns: the size of the renderer.
   */
-  int getSize()
+  int getSize() nothrow
   {
     int _retval;
     _retval = gtk_source_gutter_renderer_get_size(cast(GtkSourceGutterRenderer*)this._cPtr);
@@ -377,7 +377,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Get the view associated to the gutter renderer
       Returns: a #GtkTextView
   */
-  gtk.text_view.TextView getView()
+  gtk.text_view.TextView getView() nothrow
   {
     GtkTextView* _cretval;
     _cretval = gtk_source_gutter_renderer_get_view(cast(GtkSourceGutterRenderer*)this._cPtr);
@@ -389,7 +389,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Get whether the gutter renderer is visible.
       Returns: true if the renderer is visible, false otherwise
   */
-  bool getVisible()
+  bool getVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_gutter_renderer_get_visible(cast(GtkSourceGutterRenderer*)this._cPtr);
@@ -400,7 +400,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Get the #GtkTextWindowType associated with the gutter renderer.
       Returns: a #GtkTextWindowType
   */
-  gtk.types.TextWindowType getWindowType()
+  gtk.types.TextWindowType getWindowType() nothrow
   {
     GtkTextWindowType _cretval;
     _cretval = gtk_source_gutter_renderer_get_window_type(cast(GtkSourceGutterRenderer*)this._cPtr);
@@ -419,7 +419,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
         event = the event that triggered the query
       Returns: true if the renderer can be activated, false otherwise
   */
-  bool queryActivatable(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, gdk.event.Event event)
+  bool queryActivatable(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, gdk.event.Event event) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, cast(GdkRectangle*)&area, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
@@ -438,7 +438,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
         end = a #GtkTextIter.
         state = a #GtkSourceGutterRendererState.
   */
-  void queryData(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtksource.types.GutterRendererState state)
+  void queryData(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtksource.types.GutterRendererState state) nothrow
   {
     gtk_source_gutter_renderer_query_data(cast(GtkSourceGutterRenderer*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null, state);
   }
@@ -456,7 +456,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
         tooltip = a #GtkTooltip.
       Returns: true if the tooltip has been set, false otherwise
   */
-  bool queryTooltip(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, int x, int y, gtk.tooltip.Tooltip tooltip)
+  bool queryTooltip(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, int x, int y, gtk.tooltip.Tooltip tooltip) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_gutter_renderer_query_tooltip(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, cast(GdkRectangle*)&area, x, y, tooltip ? cast(GtkTooltip*)tooltip._cPtr(No.Dup) : null);
@@ -468,7 +468,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       this from an implementation to inform that the renderer has changed such that
       it needs to redraw.
   */
-  void queueDraw()
+  void queueDraw() nothrow
   {
     gtk_source_gutter_renderer_queue_draw(cast(GtkSourceGutterRenderer*)this._cPtr);
   }
@@ -486,7 +486,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
         xalign = the x-alignment
         yalign = the y-alignment
   */
-  void setAlignment(float xalign, float yalign)
+  void setAlignment(float xalign, float yalign) nothrow
   {
     gtk_source_gutter_renderer_set_alignment(cast(GtkSourceGutterRenderer*)this._cPtr, xalign, yalign);
   }
@@ -498,7 +498,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Params:
         mode = a #GtkSourceGutterRendererAlignmentMode
   */
-  void setAlignmentMode(gtksource.types.GutterRendererAlignmentMode mode)
+  void setAlignmentMode(gtksource.types.GutterRendererAlignmentMode mode) nothrow
   {
     gtk_source_gutter_renderer_set_alignment_mode(cast(GtkSourceGutterRenderer*)this._cPtr, mode);
   }
@@ -510,7 +510,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Params:
         color = a #GdkRGBA or null
   */
-  void setBackground(gdk.rgba.RGBA color)
+  void setBackground(gdk.rgba.RGBA color) nothrow
   {
     gtk_source_gutter_renderer_set_background(cast(GtkSourceGutterRenderer*)this._cPtr, cast(const(GdkRGBA)*)&color);
   }
@@ -526,7 +526,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
         xpad = the x-padding
         ypad = the y-padding
   */
-  void setPadding(int xpad, int ypad)
+  void setPadding(int xpad, int ypad) nothrow
   {
     gtk_source_gutter_renderer_set_padding(cast(GtkSourceGutterRenderer*)this._cPtr, xpad, ypad);
   }
@@ -538,7 +538,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Params:
         size = the size
   */
-  void setSize(int size)
+  void setSize(int size) nothrow
   {
     gtk_source_gutter_renderer_set_size(cast(GtkSourceGutterRenderer*)this._cPtr, size);
   }
@@ -549,7 +549,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Params:
         visible = the visibility
   */
-  void setVisible(bool visible)
+  void setVisible(bool visible) nothrow
   {
     gtk_source_gutter_renderer_set_visible(cast(GtkSourceGutterRenderer*)this._cPtr, visible);
   }
@@ -576,7 +576,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
@@ -585,7 +585,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtksource.gutter_renderer.GutterRenderer)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -603,7 +603,14 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.gutter_renderer.GutterRenderer.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -633,7 +640,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectQueryActivatable(T)(T callback, Flag!"After" after = No.After)
+  gulong connectQueryActivatable(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
@@ -642,11 +649,12 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtksource.gutter_renderer.GutterRenderer)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -660,7 +668,14 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.gutter_renderer.GutterRenderer.queryActivatable");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -693,7 +708,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectQueryData(T)(T callback, Flag!"After" after = No.After)
+  gulong connectQueryData(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
@@ -702,7 +717,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtksource.gutter_renderer.GutterRenderer)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -720,7 +735,14 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.gutter_renderer.GutterRenderer.queryData");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -754,7 +776,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectQueryTooltip(T)(T callback, Flag!"After" after = No.After)
+  gulong connectQueryTooltip(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
@@ -765,11 +787,12 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   && (Parameters!T.length < 6 || (ParameterStorageClassTuple!T[5] == ParameterStorageClass.none && is(Parameters!T[5] : gtksource.gutter_renderer.GutterRenderer)))
   && Parameters!T.length < 7)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 6, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -789,7 +812,14 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       static if (Parameters!T.length > 5)
         _paramTuple[5] = getVal!(Parameters!T[5])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.gutter_renderer.GutterRenderer.queryTooltip");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -816,13 +846,13 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectQueueDraw(T)(T callback, Flag!"After" after = No.After)
+  gulong connectQueueDraw(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.gutter_renderer.GutterRenderer)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -831,7 +861,14 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.gutter_renderer.GutterRenderer.queueDraw");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -852,25 +889,25 @@ class GutterRendererGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnown
           or the last line.
       Returns: Builder instance for fluent chaining
   */
-  T alignmentMode(gtksource.types.GutterRendererAlignmentMode propval)
+  T alignmentMode(gtksource.types.GutterRendererAlignmentMode propval) nothrow
   {
     return setProperty("alignment-mode", propval);
   }
 
   /** */
-  T backgroundRgba(gdk.rgba.RGBA propval)
+  T backgroundRgba(gdk.rgba.RGBA propval) nothrow
   {
     return setProperty("background-rgba", propval);
   }
 
   /** */
-  T backgroundSet(bool propval)
+  T backgroundSet(bool propval) nothrow
   {
     return setProperty("background-set", propval);
   }
 
   /** */
-  T size(int propval)
+  T size(int propval) nothrow
   {
     return setProperty("size", propval);
   }
@@ -881,7 +918,7 @@ class GutterRendererGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnown
         propval = The visibility of the renderer.
       Returns: Builder instance for fluent chaining
   */
-  T visible(bool propval)
+  T visible(bool propval) nothrow
   {
     return setProperty("visible", propval);
   }
@@ -894,7 +931,7 @@ class GutterRendererGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnown
           A value lower than 0 doesn't modify the alignment.
       Returns: Builder instance for fluent chaining
   */
-  T xalign(float propval)
+  T xalign(float propval) nothrow
   {
     return setProperty("xalign", propval);
   }
@@ -905,7 +942,7 @@ class GutterRendererGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnown
         propval = The left and right padding of the renderer.
       Returns: Builder instance for fluent chaining
   */
-  T xpad(int propval)
+  T xpad(int propval) nothrow
   {
     return setProperty("xpad", propval);
   }
@@ -918,7 +955,7 @@ class GutterRendererGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnown
           A value lower than 0 doesn't modify the alignment.
       Returns: Builder instance for fluent chaining
   */
-  T yalign(float propval)
+  T yalign(float propval) nothrow
   {
     return setProperty("yalign", propval);
   }
@@ -929,7 +966,7 @@ class GutterRendererGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnown
         propval = The top and bottom padding of the renderer.
       Returns: Builder instance for fluent chaining
   */
-  T ypad(int propval)
+  T ypad(int propval) nothrow
   {
     return setProperty("ypad", propval);
   }
@@ -942,7 +979,7 @@ final class GutterRendererGidBuilder : GutterRendererGidBuilderImpl!GutterRender
       Create object from builder.
       Returns: New object
   */
-  GutterRenderer build()
+  GutterRenderer build() nothrow
   {
     return new GutterRenderer(cast(void*)createGObject(GutterRenderer._getGType), No.Take);
   }

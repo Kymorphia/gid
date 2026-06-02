@@ -39,26 +39,26 @@ class OffscreenWindow : gtk.window.Window
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_offscreen_window_get_type != &gidSymbolNotFound ? gtk_offscreen_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override OffscreenWindow self()
+  override OffscreenWindow self() nothrow
   {
     return this;
   }
@@ -67,7 +67,7 @@ class OffscreenWindow : gtk.window.Window
       Get builder for [gtk.offscreen_window.OffscreenWindow]
       Returns: New builder object
   */
-  static OffscreenWindowGidBuilder builder()
+  static OffscreenWindowGidBuilder builder() nothrow
   {
     return new OffscreenWindowGidBuilder;
   }
@@ -77,7 +77,7 @@ class OffscreenWindow : gtk.window.Window
       snapshots of widgets without showing them on the screen.
       Returns: A pointer to a #GtkWidget
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_offscreen_window_new();
@@ -91,7 +91,7 @@ class OffscreenWindow : gtk.window.Window
       needed.
       Returns: A #GdkPixbuf pointer, or null.
   */
-  gdkpixbuf.pixbuf.Pixbuf getPixbuf()
+  gdkpixbuf.pixbuf.Pixbuf getPixbuf() nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gtk_offscreen_window_get_pixbuf(cast(GtkOffscreenWindow*)this._cPtr);
@@ -106,7 +106,7 @@ class OffscreenWindow : gtk.window.Window
       Returns: A #cairo_surface_t pointer to the offscreen
             surface, or null.
   */
-  cairo.surface.Surface getSurface()
+  cairo.surface.Surface getSurface() nothrow
   {
     cairo_surface_t* _cretval;
     _cretval = gtk_offscreen_window_get_surface(cast(GtkOffscreenWindow*)this._cPtr);
@@ -128,7 +128,7 @@ final class OffscreenWindowGidBuilder : OffscreenWindowGidBuilderImpl!OffscreenW
       Create object from builder.
       Returns: New object
   */
-  OffscreenWindow build()
+  OffscreenWindow build() nothrow
   {
     return new OffscreenWindow(cast(void*)createGObject(OffscreenWindow._getGType), No.Take);
   }

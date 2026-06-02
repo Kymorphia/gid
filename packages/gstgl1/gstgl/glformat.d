@@ -14,7 +14,7 @@ struct GLFormat
   alias Enum = gstgl.types.GLFormat; ///
 
   /** */
-  static gstgl.types.GLFormat fromVideoInfo(gstgl.glcontext.GLContext context, gstvideo.video_info.VideoInfo vinfo, uint plane)
+  static gstgl.types.GLFormat fromVideoInfo(gstgl.glcontext.GLContext context, gstvideo.video_info.VideoInfo vinfo, uint plane) nothrow
   {
     GstGLFormat _cretval;
     _cretval = gst_gl_format_from_video_info(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, vinfo ? cast(const(GstVideoInfo)*)vinfo._cPtr(No.Dup) : null, plane);
@@ -23,7 +23,7 @@ struct GLFormat
   }
 
   /** */
-  static bool isSupported(gstgl.glcontext.GLContext context, gstgl.types.GLFormat format)
+  static bool isSupported(gstgl.glcontext.GLContext context, gstgl.types.GLFormat format) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_format_is_supported(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, format);
@@ -31,7 +31,7 @@ struct GLFormat
   }
 
   /** */
-  static uint nComponents(gstgl.types.GLFormat glFormat)
+  static uint nComponents(gstgl.types.GLFormat glFormat) nothrow
   {
     uint _retval;
     _retval = gst_gl_format_n_components(glFormat);
@@ -47,13 +47,13 @@ struct GLFormat
         unsizedFormat = location for the resulting unsized #GstGLFormat
         glType = location for the resulting GL type
   */
-  static void typeFromSizedGlFormat(gstgl.types.GLFormat format, out gstgl.types.GLFormat unsizedFormat, out uint glType)
+  static void typeFromSizedGlFormat(gstgl.types.GLFormat format, out gstgl.types.GLFormat unsizedFormat, out uint glType) nothrow
   {
     gst_gl_format_type_from_sized_gl_format(format, &unsizedFormat, cast(uint*)&glType);
   }
 
   /** */
-  static uint typeNBytes(uint format, uint type)
+  static uint typeNBytes(uint format, uint type) nothrow
   {
     uint _retval;
     _retval = gst_gl_format_type_n_bytes(format, type);

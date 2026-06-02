@@ -17,18 +17,15 @@ class VideoScaler
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_scaler.VideoScaler");
-
     _cInstancePtr = cast(GstVideoScaler*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -55,7 +52,7 @@ class VideoScaler
         width = the number of output pixels to scale
         height = the number of output lines to scale
   */
-  void _2d(gstvideo.video_scaler.VideoScaler vscale, gstvideo.types.VideoFormat format, void* src, int srcStride, void* dest, int destStride, uint x, uint y, uint width, uint height)
+  void _2d(gstvideo.video_scaler.VideoScaler vscale, gstvideo.types.VideoFormat format, void* src, int srcStride, void* dest, int destStride, uint x, uint y, uint width, uint height) nothrow
   {
     gst_video_scaler_2d(cast(GstVideoScaler*)this._cPtr, vscale ? cast(GstVideoScaler*)vscale._cPtr : null, format, src, srcStride, dest, destStride, x, y, width, height);
   }
@@ -73,7 +70,7 @@ class VideoScaler
         nTaps = result n_taps
       Returns: an array of n_tap gdouble values with filter coefficients.
   */
-  const(double)* getCoeff(uint outOffset, out uint inOffset, out uint nTaps)
+  const(double)* getCoeff(uint outOffset, out uint inOffset, out uint nTaps) nothrow
   {
     auto _retval = gst_video_scaler_get_coeff(cast(GstVideoScaler*)this._cPtr, outOffset, cast(uint*)&inOffset, cast(uint*)&nTaps);
     return _retval;
@@ -83,7 +80,7 @@ class VideoScaler
       Get the maximum number of taps for scale.
       Returns: the maximum number of taps
   */
-  uint getMaxTaps()
+  uint getMaxTaps() nothrow
   {
     uint _retval;
     _retval = gst_video_scaler_get_max_taps(cast(GstVideoScaler*)this._cPtr);
@@ -101,7 +98,7 @@ class VideoScaler
         destOffset = the horizontal destination offset
         width = the number of pixels to scale
   */
-  void horizontal(gstvideo.types.VideoFormat format, void* src, void* dest, uint destOffset, uint width)
+  void horizontal(gstvideo.types.VideoFormat format, void* src, void* dest, uint destOffset, uint width) nothrow
   {
     gst_video_scaler_horizontal(cast(GstVideoScaler*)this._cPtr, format, src, dest, destOffset, width);
   }

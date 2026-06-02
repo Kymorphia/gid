@@ -15,26 +15,26 @@ class WriterProperties : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_writer_properties_get_type != &gidSymbolNotFound ? gparquet_writer_properties_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WriterProperties self()
+  override WriterProperties self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class WriterProperties : gobject.object.ObjectWrap
       Get builder for [parquet.writer_properties.WriterProperties]
       Returns: New builder object
   */
-  static WriterPropertiesGidBuilder builder()
+  static WriterPropertiesGidBuilder builder() nothrow
   {
     return new WriterPropertiesGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GParquetWriterProperties* _cretval;
     _cretval = gparquet_writer_properties_new();
@@ -57,21 +57,21 @@ class WriterProperties : gobject.object.ObjectWrap
   }
 
   /** */
-  void disableDictionary(string path = null)
+  void disableDictionary(string path = null) nothrow
   {
     const(char)* _path = path.toCString(No.Alloc);
     gparquet_writer_properties_disable_dictionary(cast(GParquetWriterProperties*)this._cPtr, _path);
   }
 
   /** */
-  void enableDictionary(string path = null)
+  void enableDictionary(string path = null) nothrow
   {
     const(char)* _path = path.toCString(No.Alloc);
     gparquet_writer_properties_enable_dictionary(cast(GParquetWriterProperties*)this._cPtr, _path);
   }
 
   /** */
-  long getBatchSize()
+  long getBatchSize() nothrow
   {
     long _retval;
     _retval = gparquet_writer_properties_get_batch_size(cast(GParquetWriterProperties*)this._cPtr);
@@ -79,7 +79,7 @@ class WriterProperties : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.types.CompressionType getCompressionPath(string path)
+  arrow.types.CompressionType getCompressionPath(string path) nothrow
   {
     GArrowCompressionType _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -89,7 +89,7 @@ class WriterProperties : gobject.object.ObjectWrap
   }
 
   /** */
-  long getDataPageSize()
+  long getDataPageSize() nothrow
   {
     long _retval;
     _retval = gparquet_writer_properties_get_data_page_size(cast(GParquetWriterProperties*)this._cPtr);
@@ -97,7 +97,7 @@ class WriterProperties : gobject.object.ObjectWrap
   }
 
   /** */
-  long getDictionaryPageSizeLimit()
+  long getDictionaryPageSizeLimit() nothrow
   {
     long _retval;
     _retval = gparquet_writer_properties_get_dictionary_page_size_limit(cast(GParquetWriterProperties*)this._cPtr);
@@ -105,7 +105,7 @@ class WriterProperties : gobject.object.ObjectWrap
   }
 
   /** */
-  long getMaxRowGroupLength()
+  long getMaxRowGroupLength() nothrow
   {
     long _retval;
     _retval = gparquet_writer_properties_get_max_row_group_length(cast(GParquetWriterProperties*)this._cPtr);
@@ -113,7 +113,7 @@ class WriterProperties : gobject.object.ObjectWrap
   }
 
   /** */
-  bool isDictionaryEnabled(string path)
+  bool isDictionaryEnabled(string path) nothrow
   {
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -122,32 +122,32 @@ class WriterProperties : gobject.object.ObjectWrap
   }
 
   /** */
-  void setBatchSize(long batchSize)
+  void setBatchSize(long batchSize) nothrow
   {
     gparquet_writer_properties_set_batch_size(cast(GParquetWriterProperties*)this._cPtr, batchSize);
   }
 
   /** */
-  void setCompression(arrow.types.CompressionType compressionType, string path = null)
+  void setCompression(arrow.types.CompressionType compressionType, string path = null) nothrow
   {
     const(char)* _path = path.toCString(No.Alloc);
     gparquet_writer_properties_set_compression(cast(GParquetWriterProperties*)this._cPtr, compressionType, _path);
   }
 
   /** */
-  void setDataPageSize(long dataPageSize)
+  void setDataPageSize(long dataPageSize) nothrow
   {
     gparquet_writer_properties_set_data_page_size(cast(GParquetWriterProperties*)this._cPtr, dataPageSize);
   }
 
   /** */
-  void setDictionaryPageSizeLimit(long limit)
+  void setDictionaryPageSizeLimit(long limit) nothrow
   {
     gparquet_writer_properties_set_dictionary_page_size_limit(cast(GParquetWriterProperties*)this._cPtr, limit);
   }
 
   /** */
-  void setMaxRowGroupLength(long length)
+  void setMaxRowGroupLength(long length) nothrow
   {
     gparquet_writer_properties_set_max_row_group_length(cast(GParquetWriterProperties*)this._cPtr, length);
   }
@@ -165,7 +165,7 @@ final class WriterPropertiesGidBuilder : WriterPropertiesGidBuilderImpl!WriterPr
       Create object from builder.
       Returns: New object
   */
-  WriterProperties build()
+  WriterProperties build() nothrow
   {
     return new WriterProperties(cast(void*)createGObject(WriterProperties._getGType), Yes.Take);
   }

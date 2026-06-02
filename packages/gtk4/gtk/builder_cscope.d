@@ -33,26 +33,26 @@ class BuilderCScope : gobject.object.ObjectWrap, gtk.builder_scope.BuilderScope
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_builder_cscope_get_type != &gidSymbolNotFound ? gtk_builder_cscope_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BuilderCScope self()
+  override BuilderCScope self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class BuilderCScope : gobject.object.ObjectWrap, gtk.builder_scope.BuilderScope
       Get builder for [gtk.builder_cscope.BuilderCScope]
       Returns: New builder object
   */
-  static BuilderCScopeGidBuilder builder()
+  static BuilderCScopeGidBuilder builder() nothrow
   {
     return new BuilderCScopeGidBuilder;
   }
@@ -76,7 +76,7 @@ class BuilderCScope : gobject.object.ObjectWrap, gtk.builder_scope.BuilderScope
       custom callbacks via [gtk.builder_cscope.BuilderCScope.addCallbackSymbol].
       Returns: a new [gtk.builder_cscope.BuilderCScope]
   */
-  this()
+  this() nothrow
   {
     GtkBuilderScope* _cretval;
     _cretval = gtk_builder_cscope_new();
@@ -98,7 +98,7 @@ final class BuilderCScopeGidBuilder : BuilderCScopeGidBuilderImpl!BuilderCScopeG
       Create object from builder.
       Returns: New object
   */
-  BuilderCScope build()
+  BuilderCScope build() nothrow
   {
     return new BuilderCScope(cast(void*)createGObject(BuilderCScope._getGType), Yes.Take);
   }

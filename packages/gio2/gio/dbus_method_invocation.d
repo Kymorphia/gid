@@ -31,26 +31,26 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_method_invocation_get_type != &gidSymbolNotFound ? g_dbus_method_invocation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DBusMethodInvocation self()
+  override DBusMethodInvocation self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
       Get builder for [gio.dbus_method_invocation.DBusMethodInvocation]
       Returns: New builder object
   */
-  static DBusMethodInvocationGidBuilder builder()
+  static DBusMethodInvocationGidBuilder builder() nothrow
   {
     return new DBusMethodInvocationGidBuilder;
   }
@@ -68,7 +68,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
       Gets the #GDBusConnection the method was invoked on.
       Returns: A #GDBusConnection. Do not free, it is owned by invocation.
   */
-  gio.dbus_connection.DBusConnection getConnection()
+  gio.dbus_connection.DBusConnection getConnection() nothrow
   {
     GDBusConnection* _cretval;
     _cretval = g_dbus_method_invocation_get_connection(cast(GDBusMethodInvocation*)this._cPtr);
@@ -85,7 +85,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
       #GDBusInterfaceVTable for more information.
       Returns: A string. Do not free, it is owned by invocation.
   */
-  string getInterfaceName()
+  string getInterfaceName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_method_invocation_get_interface_name(cast(GDBusMethodInvocation*)this._cPtr);
@@ -104,7 +104,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
       UNIX file descriptors.
       Returns: #GDBusMessage. Do not free, it is owned by invocation.
   */
-  gio.dbus_message.DBusMessage getMessage()
+  gio.dbus_message.DBusMessage getMessage() nothrow
   {
     GDBusMessage* _cretval;
     _cretval = g_dbus_method_invocation_get_message(cast(GDBusMethodInvocation*)this._cPtr);
@@ -121,7 +121,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
       #GDBusInterfaceVTable for more information.
       Returns: A #GDBusMethodInfo or null. Do not free, it is owned by invocation.
   */
-  gio.dbus_method_info.DBusMethodInfo getMethodInfo()
+  gio.dbus_method_info.DBusMethodInfo getMethodInfo() nothrow
   {
     const(GDBusMethodInfo)* _cretval;
     _cretval = g_dbus_method_invocation_get_method_info(cast(GDBusMethodInvocation*)this._cPtr);
@@ -133,7 +133,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
       Gets the name of the method that was invoked.
       Returns: A string. Do not free, it is owned by invocation.
   */
-  string getMethodName()
+  string getMethodName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_method_invocation_get_method_name(cast(GDBusMethodInvocation*)this._cPtr);
@@ -145,7 +145,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
       Gets the object path the method was invoked on.
       Returns: A string. Do not free, it is owned by invocation.
   */
-  string getObjectPath()
+  string getObjectPath() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_method_invocation_get_object_path(cast(GDBusMethodInvocation*)this._cPtr);
@@ -158,7 +158,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
       parameters then this will return a GVariant with 0 children rather than NULL.
       Returns: A #GVariant tuple. Do not unref this because it is owned by invocation.
   */
-  glib.variant.Variant getParameters()
+  glib.variant.Variant getParameters() nothrow
   {
     GVariant* _cretval;
     _cretval = g_dbus_method_invocation_get_parameters(cast(GDBusMethodInvocation*)this._cPtr);
@@ -180,7 +180,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
       If the call was GetAll, null will be returned.
       Returns: a #GDBusPropertyInfo or null
   */
-  gio.dbus_property_info.DBusPropertyInfo getPropertyInfo()
+  gio.dbus_property_info.DBusPropertyInfo getPropertyInfo() nothrow
   {
     const(GDBusPropertyInfo)* _cretval;
     _cretval = g_dbus_method_invocation_get_property_info(cast(GDBusMethodInvocation*)this._cPtr);
@@ -192,7 +192,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
       Gets the bus name that invoked the method.
       Returns: A string. Do not free, it is owned by invocation.
   */
-  string getSender()
+  string getSender() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_method_invocation_get_sender(cast(GDBusMethodInvocation*)this._cPtr);
@@ -211,7 +211,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
         errorName = A valid D-Bus error name.
         errorMessage = A valid D-Bus error message.
   */
-  void returnDbusError(string errorName, string errorMessage)
+  void returnDbusError(string errorName, string errorMessage) nothrow
   {
     const(char)* _errorName = errorName.toCString(No.Alloc);
     const(char)* _errorMessage = errorMessage.toCString(No.Alloc);
@@ -230,7 +230,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
         code = The error code.
         message = The error message.
   */
-  void returnErrorLiteral(glib.types.Quark domain, int code, string message)
+  void returnErrorLiteral(glib.types.Quark domain, int code, string message) nothrow
   {
     const(char)* _message = message.toCString(No.Alloc);
     g_dbus_method_invocation_return_error_literal(cast(GDBusMethodInvocation*)this._cPtr, domain, code, _message);
@@ -247,7 +247,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
       Params:
         error = A #GError.
   */
-  void returnGerror(glib.error.ErrorWrap error)
+  void returnGerror(glib.error.ErrorWrap error) nothrow
   {
     g_dbus_method_invocation_return_gerror(cast(GDBusMethodInvocation*)this._cPtr, error ? cast(const(GError)*)error._cPtr : null);
   }
@@ -289,7 +289,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
       Params:
         parameters = A #GVariant tuple with out parameters for the method or null if not passing any parameters.
   */
-  void returnValue(glib.variant.Variant parameters = null)
+  void returnValue(glib.variant.Variant parameters = null) nothrow
   {
     g_dbus_method_invocation_return_value(cast(GDBusMethodInvocation*)this._cPtr, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null);
   }
@@ -307,7 +307,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
         parameters = A #GVariant tuple with out parameters for the method or null if not passing any parameters.
         fdList = A #GUnixFDList or null.
   */
-  void returnValueWithUnixFdList(glib.variant.Variant parameters = null, gio.unix_fdlist.UnixFDList fdList = null)
+  void returnValueWithUnixFdList(glib.variant.Variant parameters = null, gio.unix_fdlist.UnixFDList fdList = null) nothrow
   {
     g_dbus_method_invocation_return_value_with_unix_fd_list(cast(GDBusMethodInvocation*)this._cPtr, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null, fdList ? cast(GUnixFDList*)fdList._cPtr(No.Dup) : null);
   }
@@ -325,7 +325,7 @@ final class DBusMethodInvocationGidBuilder : DBusMethodInvocationGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  DBusMethodInvocation build()
+  DBusMethodInvocation build() nothrow
   {
     return new DBusMethodInvocation(cast(void*)createGObject(DBusMethodInvocation._getGType), No.Take);
   }

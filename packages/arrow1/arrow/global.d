@@ -46,7 +46,7 @@ bool s3Initialize(arrow.s3_global_options.S3GlobalOptions options = null)
 }
 
 /** */
-bool s3IsEnabled()
+bool s3IsEnabled() nothrow
 {
   bool _retval;
   _retval = cast(bool)garrow_s3_is_enabled();

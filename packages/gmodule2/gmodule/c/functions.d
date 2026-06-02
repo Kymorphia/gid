@@ -13,7 +13,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgmodule-2.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // Module
   gboolean function(ModuleC* module_) c_g_module_close; ///

@@ -17,26 +17,26 @@ class RepetitiveStatement : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_repetitive_statement_get_type != &gidSymbolNotFound ? gda_repetitive_statement_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RepetitiveStatement self()
+  override RepetitiveStatement self() nothrow
   {
     return this;
   }
@@ -45,13 +45,13 @@ class RepetitiveStatement : gobject.object.ObjectWrap
       Get builder for [gda.repetitive_statement.RepetitiveStatement]
       Returns: New builder object
   */
-  static RepetitiveStatementGidBuilder builder()
+  static RepetitiveStatementGidBuilder builder() nothrow
   {
     return new RepetitiveStatementGidBuilder;
   }
 
   /** */
-  @property gda.statement.Statement statement()
+  @property gda.statement.Statement statement() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.statement.Statement)("statement");
   }
@@ -65,7 +65,7 @@ class RepetitiveStatement : gobject.object.ObjectWrap
         stmt = a #GdaStatement object
       Returns: a new #GdaRepetitiveStatement object
   */
-  this(gda.statement.Statement stmt)
+  this(gda.statement.Statement stmt) nothrow
   {
     GdaRepetitiveStatement* _cretval;
     _cretval = gda_repetitive_statement_new(stmt ? cast(GdaStatement*)stmt._cPtr(No.Dup) : null);
@@ -83,7 +83,7 @@ class RepetitiveStatement : gobject.object.ObjectWrap
         makeCopy = true if values is copied, and false if values is only ref'ed
       Returns: a new #GdaRepetitiveStatement object
   */
-  bool appendSet(gda.set.Set values, bool makeCopy)
+  bool appendSet(gda.set.Set values, bool makeCopy) nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_repetitive_statement_append_set(cast(GdaRepetitiveStatement*)this._cPtr, values ? cast(GdaSet*)values._cPtr(No.Dup) : null, makeCopy);
@@ -94,7 +94,7 @@ class RepetitiveStatement : gobject.object.ObjectWrap
       Get all the values sets which will have been added using [gda.repetitive_statement.RepetitiveStatement.appendSet].
       Returns: a new #GSList of #GdaSet objects (free with [glib.slist.SList.free]).
   */
-  gda.set.Set[] getAllSets()
+  gda.set.Set[] getAllSets() nothrow
   {
     GSList* _cretval;
     _cretval = gda_repetitive_statement_get_all_sets(cast(GdaRepetitiveStatement*)this._cPtr);
@@ -129,7 +129,7 @@ class RepetitiveStatementGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
 {
 
   /** */
-  T statement(gda.statement.Statement propval)
+  T statement(gda.statement.Statement propval) nothrow
   {
     return setProperty("statement", propval);
   }
@@ -142,7 +142,7 @@ final class RepetitiveStatementGidBuilder : RepetitiveStatementGidBuilderImpl!Re
       Create object from builder.
       Returns: New object
   */
-  RepetitiveStatement build()
+  RepetitiveStatement build() nothrow
   {
     return new RepetitiveStatement(cast(void*)createGObject(RepetitiveStatement._getGType), Yes.Take);
   }

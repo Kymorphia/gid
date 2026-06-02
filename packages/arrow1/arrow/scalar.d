@@ -18,26 +18,26 @@ class Scalar : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_scalar_get_type != &gidSymbolNotFound ? garrow_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Scalar self()
+  override Scalar self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class Scalar : gobject.object.ObjectWrap
       Get builder for [arrow.scalar.Scalar]
       Returns: New builder object
   */
-  static ScalarGidBuilder builder()
+  static ScalarGidBuilder builder() nothrow
   {
     return new ScalarGidBuilder;
   }
@@ -81,7 +81,7 @@ class Scalar : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equal(arrow.scalar.Scalar otherScalar)
+  bool equal(arrow.scalar.Scalar otherScalar) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_scalar_equal(cast(GArrowScalar*)this._cPtr, otherScalar ? cast(GArrowScalar*)otherScalar._cPtr(No.Dup) : null);
@@ -89,7 +89,7 @@ class Scalar : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equalOptions(arrow.scalar.Scalar otherScalar, arrow.equal_options.EqualOptions options = null)
+  bool equalOptions(arrow.scalar.Scalar otherScalar, arrow.equal_options.EqualOptions options = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_scalar_equal_options(cast(GArrowScalar*)this._cPtr, otherScalar ? cast(GArrowScalar*)otherScalar._cPtr(No.Dup) : null, options ? cast(GArrowEqualOptions*)options._cPtr(No.Dup) : null);
@@ -97,7 +97,7 @@ class Scalar : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.data_type.DataType getDataType()
+  arrow.data_type.DataType getDataType() nothrow
   {
     GArrowDataType* _cretval;
     _cretval = garrow_scalar_get_data_type(cast(GArrowScalar*)this._cPtr);
@@ -106,7 +106,7 @@ class Scalar : gobject.object.ObjectWrap
   }
 
   /** */
-  bool isValid()
+  bool isValid() nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_scalar_is_valid(cast(GArrowScalar*)this._cPtr);
@@ -114,7 +114,7 @@ class Scalar : gobject.object.ObjectWrap
   }
 
   /** */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = garrow_scalar_to_string(cast(GArrowScalar*)this._cPtr);
@@ -133,13 +133,13 @@ class ScalarGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The data type of the scalar.
       Returns: Builder instance for fluent chaining
   */
-  T dataType(arrow.data_type.DataType propval)
+  T dataType(arrow.data_type.DataType propval) nothrow
   {
     return setProperty("data-type", propval);
   }
 
   /** */
-  T scalar(void* propval)
+  T scalar(void* propval) nothrow
   {
     return setProperty("scalar", propval);
   }
@@ -152,7 +152,7 @@ final class ScalarGidBuilder : ScalarGidBuilderImpl!ScalarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Scalar build()
+  Scalar build() nothrow
   {
     return new Scalar(cast(void*)createGObject(Scalar._getGType), No.Take);
   }

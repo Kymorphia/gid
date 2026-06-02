@@ -112,26 +112,26 @@ class Server : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_server_get_type != &gidSymbolNotFound ? soup_server_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Server self()
+  override Server self() nothrow
   {
     return this;
   }
@@ -140,7 +140,7 @@ class Server : gobject.object.ObjectWrap
       Get builder for [soup.server.Server]
       Returns: New builder object
   */
-  static ServerGidBuilder builder()
+  static ServerGidBuilder builder() nothrow
   {
     return new ServerGidBuilder;
   }
@@ -150,7 +150,7 @@ class Server : gobject.object.ObjectWrap
       Returns: If true, percent-encoding in the Request-URI path will not be
         automatically decoded.
   */
-  @property bool rawPaths()
+  @property bool rawPaths() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("raw-paths");
   }
@@ -183,7 +183,7 @@ class Server : gobject.object.ObjectWrap
         whitespace, #SoupServer will append its own product token (eg,
         `libsoup/2.3.2`) to the end of the header for you.
   */
-  @property string serverHeader()
+  @property string serverHeader() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("server-header");
   }
@@ -217,7 +217,7 @@ class Server : gobject.object.ObjectWrap
           whitespace, #SoupServer will append its own product token (eg,
           `libsoup/2.3.2`) to the end of the header for you.
   */
-  @property void serverHeader(string propval)
+  @property void serverHeader(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("server-header", propval);
   }
@@ -226,7 +226,7 @@ class Server : gobject.object.ObjectWrap
       Get `tlsAuthMode` property.
       Returns: A [gio.types.TlsAuthenticationMode] for SSL/TLS client authentication.
   */
-  @property gio.types.TlsAuthenticationMode tlsAuthMode()
+  @property gio.types.TlsAuthenticationMode tlsAuthMode() nothrow
   {
     return getTlsAuthMode();
   }
@@ -236,7 +236,7 @@ class Server : gobject.object.ObjectWrap
       Params:
         propval = A [gio.types.TlsAuthenticationMode] for SSL/TLS client authentication.
   */
-  @property void tlsAuthMode(gio.types.TlsAuthenticationMode propval)
+  @property void tlsAuthMode(gio.types.TlsAuthenticationMode propval) nothrow
   {
     setTlsAuthMode(propval);
   }
@@ -249,7 +249,7 @@ class Server : gobject.object.ObjectWrap
         If this is set, then the server will be able to speak
         https in addition to (or instead of) plain http.
   */
-  @property gio.tls_certificate.TlsCertificate tlsCertificate()
+  @property gio.tls_certificate.TlsCertificate tlsCertificate() nothrow
   {
     return getTlsCertificate();
   }
@@ -263,7 +263,7 @@ class Server : gobject.object.ObjectWrap
           If this is set, then the server will be able to speak
           https in addition to (or instead of) plain http.
   */
-  @property void tlsCertificate(gio.tls_certificate.TlsCertificate propval)
+  @property void tlsCertificate(gio.tls_certificate.TlsCertificate propval) nothrow
   {
     setTlsCertificate(propval);
   }
@@ -273,7 +273,7 @@ class Server : gobject.object.ObjectWrap
       Returns: A [gio.tls_database.TlsDatabase] to use for validating SSL/TLS client
         certificates.
   */
-  @property gio.tls_database.TlsDatabase tlsDatabase()
+  @property gio.tls_database.TlsDatabase tlsDatabase() nothrow
   {
     return getTlsDatabase();
   }
@@ -284,7 +284,7 @@ class Server : gobject.object.ObjectWrap
         propval = A [gio.tls_database.TlsDatabase] to use for validating SSL/TLS client
           certificates.
   */
-  @property void tlsDatabase(gio.tls_database.TlsDatabase propval)
+  @property void tlsDatabase(gio.tls_database.TlsDatabase propval) nothrow
   {
     setTlsDatabase(propval);
   }
@@ -329,7 +329,7 @@ class Server : gobject.object.ObjectWrap
       Params:
         authDomain = a #SoupAuthDomain
   */
-  void addAuthDomain(soup.auth_domain.AuthDomain authDomain)
+  void addAuthDomain(soup.auth_domain.AuthDomain authDomain) nothrow
   {
     soup_server_add_auth_domain(cast(SoupServer*)this._cPtr, authDomain ? cast(SoupAuthDomain*)authDomain._cPtr(No.Dup) : null);
   }
@@ -367,15 +367,22 @@ class Server : gobject.object.ObjectWrap
         callback = callback to invoke for
             requests under path
   */
-  void addEarlyHandler(string path, soup.types.ServerCallback callback)
+  void addEarlyHandler(string path, soup.types.ServerCallback callback) nothrow
   {
-    extern(C) void _callbackCallback(SoupServer* server, SoupServerMessage* msg, const(char)* path, GHashTable* query, void* userData)
+    extern(C) void _callbackCallback(SoupServer* server, SoupServerMessage* msg, const(char)* path, GHashTable* query, void* userData) nothrow
     {
       auto _dlg = cast(soup.types.ServerCallback*)userData;
       string _path = path.fromCString(No.Free);
       auto _query = gHashTableToD!(string, string, GidOwnership.None)(query);
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.server.Server)(cast(void*)server, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, _query);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.server.Server)(cast(void*)server, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, _query);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.types.ServerCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _path = path.toCString(No.Alloc);
@@ -424,15 +431,22 @@ class Server : gobject.object.ObjectWrap
         callback = callback to invoke for
             requests under path
   */
-  void addHandler(string path, soup.types.ServerCallback callback)
+  void addHandler(string path, soup.types.ServerCallback callback) nothrow
   {
-    extern(C) void _callbackCallback(SoupServer* server, SoupServerMessage* msg, const(char)* path, GHashTable* query, void* userData)
+    extern(C) void _callbackCallback(SoupServer* server, SoupServerMessage* msg, const(char)* path, GHashTable* query, void* userData) nothrow
     {
       auto _dlg = cast(soup.types.ServerCallback*)userData;
       string _path = path.fromCString(No.Free);
       auto _query = gHashTableToD!(string, string, GidOwnership.None)(query);
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.server.Server)(cast(void*)server, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, _query);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.server.Server)(cast(void*)server, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, _query);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.types.ServerCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _path = path.toCString(No.Alloc);
@@ -454,7 +468,7 @@ class Server : gobject.object.ObjectWrap
       Params:
         extensionType = a #GType
   */
-  void addWebsocketExtension(gobject.types.GType extensionType)
+  void addWebsocketExtension(gobject.types.GType extensionType) nothrow
   {
     soup_server_add_websocket_extension(cast(SoupServer*)this._cPtr, extensionType);
   }
@@ -487,14 +501,21 @@ class Server : gobject.object.ObjectWrap
         callback = callback to invoke for
             successful WebSocket requests under path
   */
-  void addWebsocketHandler(string path, string origin, string[] protocols, soup.types.ServerWebsocketCallback callback)
+  void addWebsocketHandler(string path, string origin, string[] protocols, soup.types.ServerWebsocketCallback callback) nothrow
   {
-    extern(C) void _callbackCallback(SoupServer* server, SoupServerMessage* msg, const(char)* path, SoupWebsocketConnection* connection, void* userData)
+    extern(C) void _callbackCallback(SoupServer* server, SoupServerMessage* msg, const(char)* path, SoupWebsocketConnection* connection, void* userData) nothrow
     {
       auto _dlg = cast(soup.types.ServerWebsocketCallback*)userData;
       string _path = path.fromCString(No.Free);
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.server.Server)(cast(void*)server, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, gobject.object.ObjectWrap._getDObject!(soup.websocket_connection.WebsocketConnection)(cast(void*)connection, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.server.Server)(cast(void*)server, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, gobject.object.ObjectWrap._getDObject!(soup.websocket_connection.WebsocketConnection)(cast(void*)connection, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.types.ServerWebsocketCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _path = path.toCString(No.Alloc);
@@ -520,7 +541,7 @@ class Server : gobject.object.ObjectWrap
       You can call [soup.server.Server.listen], etc, after calling this function
       if you want to start listening again.
   */
-  void disconnect()
+  void disconnect() nothrow
   {
     soup_server_disconnect(cast(SoupServer*)this._cPtr);
   }
@@ -533,7 +554,7 @@ class Server : gobject.object.ObjectWrap
       Returns: a
           list of listening sockets.
   */
-  gio.socket.Socket[] getListeners()
+  gio.socket.Socket[] getListeners() nothrow
   {
     GSList* _cretval;
     _cretval = soup_server_get_listeners(cast(SoupServer*)this._cPtr);
@@ -545,7 +566,7 @@ class Server : gobject.object.ObjectWrap
       Gets the server SSL/TLS client authentication mode.
       Returns: a #GTlsAuthenticationMode
   */
-  gio.types.TlsAuthenticationMode getTlsAuthMode()
+  gio.types.TlsAuthenticationMode getTlsAuthMode() nothrow
   {
     GTlsAuthenticationMode _cretval;
     _cretval = soup_server_get_tls_auth_mode(cast(SoupServer*)this._cPtr);
@@ -557,7 +578,7 @@ class Server : gobject.object.ObjectWrap
       Gets the server SSL/TLS certificate.
       Returns: a #GTlsCertificate or null
   */
-  gio.tls_certificate.TlsCertificate getTlsCertificate()
+  gio.tls_certificate.TlsCertificate getTlsCertificate() nothrow
   {
     GTlsCertificate* _cretval;
     _cretval = soup_server_get_tls_certificate(cast(SoupServer*)this._cPtr);
@@ -569,7 +590,7 @@ class Server : gobject.object.ObjectWrap
       Gets the server SSL/TLS database.
       Returns: a #GTlsDatabase
   */
-  gio.tls_database.TlsDatabase getTlsDatabase()
+  gio.tls_database.TlsDatabase getTlsDatabase() nothrow
   {
     GTlsDatabase* _cretval;
     _cretval = soup_server_get_tls_database(cast(SoupServer*)this._cPtr);
@@ -590,7 +611,7 @@ class Server : gobject.object.ObjectWrap
       Returns: a list of #GUris, which you
           must free when you are done with it.
   */
-  glib.uri.Uri[] getUris()
+  glib.uri.Uri[] getUris() nothrow
   {
     GSList* _cretval;
     _cretval = soup_server_get_uris(cast(SoupServer*)this._cPtr);
@@ -614,7 +635,7 @@ class Server : gobject.object.ObjectWrap
       any https listeners.
       Returns: true if server is configured to serve https.
   */
-  bool isHttps()
+  bool isHttps() nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_server_is_https(cast(SoupServer*)this._cPtr);
@@ -754,7 +775,7 @@ class Server : gobject.object.ObjectWrap
   
       Deprecated: Use [soup.server_message.ServerMessage.pause] instead.
   */
-  void pauseMessage(soup.server_message.ServerMessage msg)
+  void pauseMessage(soup.server_message.ServerMessage msg) nothrow
   {
     soup_server_pause_message(cast(SoupServer*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null);
   }
@@ -765,7 +786,7 @@ class Server : gobject.object.ObjectWrap
       Params:
         authDomain = a #SoupAuthDomain
   */
-  void removeAuthDomain(soup.auth_domain.AuthDomain authDomain)
+  void removeAuthDomain(soup.auth_domain.AuthDomain authDomain) nothrow
   {
     soup_server_remove_auth_domain(cast(SoupServer*)this._cPtr, authDomain ? cast(SoupAuthDomain*)authDomain._cPtr(No.Dup) : null);
   }
@@ -776,7 +797,7 @@ class Server : gobject.object.ObjectWrap
       Params:
         path = the toplevel path for the handler
   */
-  void removeHandler(string path)
+  void removeHandler(string path) nothrow
   {
     const(char)* _path = path.toCString(No.Alloc);
     soup_server_remove_handler(cast(SoupServer*)this._cPtr, _path);
@@ -789,7 +810,7 @@ class Server : gobject.object.ObjectWrap
       Params:
         extensionType = a #GType
   */
-  void removeWebsocketExtension(gobject.types.GType extensionType)
+  void removeWebsocketExtension(gobject.types.GType extensionType) nothrow
   {
     soup_server_remove_websocket_extension(cast(SoupServer*)this._cPtr, extensionType);
   }
@@ -800,7 +821,7 @@ class Server : gobject.object.ObjectWrap
       Params:
         mode = a #GTlsAuthenticationMode
   */
-  void setTlsAuthMode(gio.types.TlsAuthenticationMode mode)
+  void setTlsAuthMode(gio.types.TlsAuthenticationMode mode) nothrow
   {
     soup_server_set_tls_auth_mode(cast(SoupServer*)this._cPtr, mode);
   }
@@ -811,7 +832,7 @@ class Server : gobject.object.ObjectWrap
       Params:
         certificate = a #GTlsCertificate
   */
-  void setTlsCertificate(gio.tls_certificate.TlsCertificate certificate)
+  void setTlsCertificate(gio.tls_certificate.TlsCertificate certificate) nothrow
   {
     soup_server_set_tls_certificate(cast(SoupServer*)this._cPtr, certificate ? cast(GTlsCertificate*)certificate._cPtr(No.Dup) : null);
   }
@@ -822,7 +843,7 @@ class Server : gobject.object.ObjectWrap
       Params:
         tlsDatabase = a #GTlsDatabase
   */
-  void setTlsDatabase(gio.tls_database.TlsDatabase tlsDatabase)
+  void setTlsDatabase(gio.tls_database.TlsDatabase tlsDatabase) nothrow
   {
     soup_server_set_tls_database(cast(SoupServer*)this._cPtr, tlsDatabase ? cast(GTlsDatabase*)tlsDatabase._cPtr(No.Dup) : null);
   }
@@ -845,7 +866,7 @@ class Server : gobject.object.ObjectWrap
   
       Deprecated: Use [soup.server_message.ServerMessage.unpause] instead.
   */
-  void unpauseMessage(soup.server_message.ServerMessage msg)
+  void unpauseMessage(soup.server_message.ServerMessage msg) nothrow
   {
     soup_server_unpause_message(cast(SoupServer*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null);
   }
@@ -877,14 +898,14 @@ class Server : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRequestAborted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRequestAborted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.server.Server)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -896,7 +917,14 @@ class Server : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.server.Server.requestAborted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -921,14 +949,14 @@ class Server : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRequestFinished(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRequestFinished(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.server.Server)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -940,7 +968,14 @@ class Server : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.server.Server.requestFinished");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -971,14 +1006,14 @@ class Server : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRequestRead(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRequestRead(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.server.Server)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -990,7 +1025,14 @@ class Server : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.server.Server.requestRead");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1025,14 +1067,14 @@ class Server : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRequestStarted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRequestStarted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.server.Server)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1044,7 +1086,14 @@ class Server : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.server.Server.requestStarted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1063,7 +1112,7 @@ class ServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           automatically decoded.
       Returns: Builder instance for fluent chaining
   */
-  T rawPaths(bool propval)
+  T rawPaths(bool propval) nothrow
   {
     return setProperty("raw-paths", propval);
   }
@@ -1098,7 +1147,7 @@ class ServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           `libsoup/2.3.2`) to the end of the header for you.
       Returns: Builder instance for fluent chaining
   */
-  T serverHeader(string propval)
+  T serverHeader(string propval) nothrow
   {
     return setProperty("server-header", propval);
   }
@@ -1109,7 +1158,7 @@ class ServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = A [gio.types.TlsAuthenticationMode] for SSL/TLS client authentication.
       Returns: Builder instance for fluent chaining
   */
-  T tlsAuthMode(gio.types.TlsAuthenticationMode propval)
+  T tlsAuthMode(gio.types.TlsAuthenticationMode propval) nothrow
   {
     return setProperty("tls-auth-mode", propval);
   }
@@ -1124,7 +1173,7 @@ class ServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           https in addition to (or instead of) plain http.
       Returns: Builder instance for fluent chaining
   */
-  T tlsCertificate(gio.tls_certificate.TlsCertificate propval)
+  T tlsCertificate(gio.tls_certificate.TlsCertificate propval) nothrow
   {
     return setProperty("tls-certificate", propval);
   }
@@ -1136,7 +1185,7 @@ class ServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           certificates.
       Returns: Builder instance for fluent chaining
   */
-  T tlsDatabase(gio.tls_database.TlsDatabase propval)
+  T tlsDatabase(gio.tls_database.TlsDatabase propval) nothrow
   {
     return setProperty("tls-database", propval);
   }
@@ -1149,7 +1198,7 @@ final class ServerGidBuilder : ServerGidBuilderImpl!ServerGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Server build()
+  Server build() nothrow
   {
     return new Server(cast(void*)createGObject(Server._getGType), Yes.Take);
   }

@@ -21,38 +21,38 @@ class OptionGroup : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_option_group_get_type != &gidSymbolNotFound ? g_option_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override OptionGroup self()
+  override OptionGroup self() nothrow
   {
     return this;
   }
 
   /** */
-  this(string name, string description, string helpDescription)
+  this(string name, string description, string helpDescription) nothrow
   {
     GOptionGroup* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -69,7 +69,7 @@ class OptionGroup : gobject.boxed.Boxed
       Params:
         entries = a null-terminated array of #GOptionEntrys
   */
-  void addEntries(glib.types.OptionEntry[] entries)
+  void addEntries(glib.types.OptionEntry[] entries) nothrow
   {
     auto _entries = entries.ptr ? cast(const(GOptionEntry)*)(entries ~ GOptionEntry.init).ptr : [GOptionEntry.init].ptr;
     g_option_group_add_entries(cast(GOptionGroup*)this._cPtr, _entries);
@@ -86,15 +86,22 @@ class OptionGroup : gobject.boxed.Boxed
       Params:
         func = the #GTranslateFunc, or null
   */
-  void setTranslateFunc(glib.types.TranslateFunc func = null)
+  void setTranslateFunc(glib.types.TranslateFunc func = null) nothrow
   {
-    extern(C) const(char)* _funcCallback(const(char)* str, void* data)
+    extern(C) const(char)* _funcCallback(const(char)* str, void* data) nothrow
     {
       string _dretval;
       auto _dlg = cast(glib.types.TranslateFunc*)data;
       string _str = str.fromCString(No.Free);
 
-      _dretval = (*_dlg)(_str);
+      try
+      {
+        _dretval = (*_dlg)(_str);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.TranslateFunc");
+      }
       auto _retval = _dretval.toCString(Yes.Alloc);
 
       return _retval;
@@ -112,7 +119,7 @@ class OptionGroup : gobject.boxed.Boxed
       Params:
         domain = the domain to use
   */
-  void setTranslationDomain(string domain)
+  void setTranslationDomain(string domain) nothrow
   {
     const(char)* _domain = domain.toCString(No.Alloc);
     g_option_group_set_translation_domain(cast(GOptionGroup*)this._cPtr, _domain);

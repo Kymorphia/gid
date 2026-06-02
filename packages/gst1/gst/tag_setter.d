@@ -57,7 +57,7 @@ interface TagSetter
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_tag_setter_get_type != &gidSymbolNotFound ? gst_tag_setter_get_type() : cast(GType)0;

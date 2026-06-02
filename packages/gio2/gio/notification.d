@@ -62,26 +62,26 @@ class Notification : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_notification_get_type != &gidSymbolNotFound ? g_notification_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Notification self()
+  override Notification self() nothrow
   {
     return this;
   }
@@ -90,7 +90,7 @@ class Notification : gobject.object.ObjectWrap
       Get builder for [gio.notification.Notification]
       Returns: New builder object
   */
-  static NotificationGidBuilder builder()
+  static NotificationGidBuilder builder() nothrow
   {
     return new NotificationGidBuilder;
   }
@@ -107,7 +107,7 @@ class Notification : gobject.object.ObjectWrap
         title = the title of the notification
       Returns: a new #GNotification instance
   */
-  this(string title)
+  this(string title) nothrow
   {
     GNotification* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -129,7 +129,7 @@ class Notification : gobject.object.ObjectWrap
         label = label of the button
         detailedAction = a detailed action name
   */
-  void addButton(string label, string detailedAction)
+  void addButton(string label, string detailedAction) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
@@ -148,7 +148,7 @@ class Notification : gobject.object.ObjectWrap
         action = an action name
         target = a #GVariant to use as action's parameter, or null
   */
-  void addButtonWithTarget(string label, string action, glib.variant.Variant target = null)
+  void addButtonWithTarget(string label, string action, glib.variant.Variant target = null) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     const(char)* _action = action.toCString(No.Alloc);
@@ -161,7 +161,7 @@ class Notification : gobject.object.ObjectWrap
       Params:
         body_ = the new body for notification, or null
   */
-  void setBody(string body_ = null)
+  void setBody(string body_ = null) nothrow
   {
     const(char)* _body_ = body_.toCString(No.Alloc);
     g_notification_set_body(cast(GNotification*)this._cPtr, _body_);
@@ -178,7 +178,7 @@ class Notification : gobject.object.ObjectWrap
       Params:
         category = the category for notification, or null for no category
   */
-  void setCategory(string category = null)
+  void setCategory(string category = null) nothrow
   {
     const(char)* _category = category.toCString(No.Alloc);
     g_notification_set_category(cast(GNotification*)this._cPtr, _category);
@@ -200,7 +200,7 @@ class Notification : gobject.object.ObjectWrap
       Params:
         detailedAction = a detailed action name
   */
-  void setDefaultAction(string detailedAction)
+  void setDefaultAction(string detailedAction) nothrow
   {
     const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
     g_notification_set_default_action(cast(GNotification*)this._cPtr, _detailedAction);
@@ -221,7 +221,7 @@ class Notification : gobject.object.ObjectWrap
         action = an action name
         target = a #GVariant to use as action's parameter, or null
   */
-  void setDefaultActionAndTarget(string action, glib.variant.Variant target = null)
+  void setDefaultActionAndTarget(string action, glib.variant.Variant target = null) nothrow
   {
     const(char)* _action = action.toCString(No.Alloc);
     g_notification_set_default_action_and_target_value(cast(GNotification*)this._cPtr, _action, target ? cast(GVariant*)target._cPtr(No.Dup) : null);
@@ -233,7 +233,7 @@ class Notification : gobject.object.ObjectWrap
       Params:
         icon = the icon to be shown in notification, as a #GIcon
   */
-  void setIcon(gio.icon.Icon icon)
+  void setIcon(gio.icon.Icon icon) nothrow
   {
     g_notification_set_icon(cast(GNotification*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
@@ -245,7 +245,7 @@ class Notification : gobject.object.ObjectWrap
       Params:
         priority = a #GNotificationPriority
   */
-  void setPriority(gio.types.NotificationPriority priority)
+  void setPriority(gio.types.NotificationPriority priority) nothrow
   {
     g_notification_set_priority(cast(GNotification*)this._cPtr, priority);
   }
@@ -256,7 +256,7 @@ class Notification : gobject.object.ObjectWrap
       Params:
         title = the new title for notification
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     g_notification_set_title(cast(GNotification*)this._cPtr, _title);
@@ -271,7 +271,7 @@ class Notification : gobject.object.ObjectWrap
       Deprecated: Since 2.42, this has been deprecated in favour of
            [gio.notification.Notification.setPriority].
   */
-  void setUrgent(bool urgent)
+  void setUrgent(bool urgent) nothrow
   {
     g_notification_set_urgent(cast(GNotification*)this._cPtr, urgent);
   }
@@ -289,7 +289,7 @@ final class NotificationGidBuilder : NotificationGidBuilderImpl!NotificationGidB
       Create object from builder.
       Returns: New object
   */
-  Notification build()
+  Notification build() nothrow
   {
     return new Notification(cast(void*)createGObject(Notification._getGType), Yes.Take);
   }

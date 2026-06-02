@@ -14,26 +14,26 @@ class DataStream : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_data_stream_get_type != &gidSymbolNotFound ? gaflight_data_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DataStream self()
+  override DataStream self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class DataStream : gobject.object.ObjectWrap
       Get builder for [arrowflight.data_stream.DataStream]
       Returns: New builder object
   */
-  static DataStreamGidBuilder builder()
+  static DataStreamGidBuilder builder() nothrow
   {
     return new DataStreamGidBuilder;
   }
@@ -53,7 +53,7 @@ class DataStreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T stream(void* propval)
+  T stream(void* propval) nothrow
   {
     return setProperty("stream", propval);
   }
@@ -66,7 +66,7 @@ final class DataStreamGidBuilder : DataStreamGidBuilderImpl!DataStreamGidBuilder
       Create object from builder.
       Returns: New object
   */
-  DataStream build()
+  DataStream build() nothrow
   {
     return new DataStream(cast(void*)createGObject(DataStream._getGType), No.Take);
   }

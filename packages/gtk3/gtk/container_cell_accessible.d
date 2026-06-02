@@ -20,26 +20,26 @@ class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_container_cell_accessible_get_type != &gidSymbolNotFound ? gtk_container_cell_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ContainerCellAccessible self()
+  override ContainerCellAccessible self() nothrow
   {
     return this;
   }
@@ -48,13 +48,13 @@ class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
       Get builder for [gtk.container_cell_accessible.ContainerCellAccessible]
       Returns: New builder object
   */
-  static ContainerCellAccessibleGidBuilder builder()
+  static ContainerCellAccessibleGidBuilder builder() nothrow
   {
     return new ContainerCellAccessibleGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GtkContainerCellAccessible* _cretval;
     _cretval = gtk_container_cell_accessible_new();
@@ -62,7 +62,7 @@ class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
   }
 
   /** */
-  void addChild(gtk.cell_accessible.CellAccessible child)
+  void addChild(gtk.cell_accessible.CellAccessible child) nothrow
   {
     gtk_container_cell_accessible_add_child(cast(GtkContainerCellAccessible*)this._cPtr, child ? cast(GtkCellAccessible*)child._cPtr(No.Dup) : null);
   }
@@ -71,7 +71,7 @@ class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
       Get a list of children.
       Returns: 
   */
-  gtk.cell_accessible.CellAccessible[] getChildren()
+  gtk.cell_accessible.CellAccessible[] getChildren() nothrow
   {
     GList* _cretval;
     _cretval = gtk_container_cell_accessible_get_children(cast(GtkContainerCellAccessible*)this._cPtr);
@@ -80,7 +80,7 @@ class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
   }
 
   /** */
-  void removeChild(gtk.cell_accessible.CellAccessible child)
+  void removeChild(gtk.cell_accessible.CellAccessible child) nothrow
   {
     gtk_container_cell_accessible_remove_child(cast(GtkContainerCellAccessible*)this._cPtr, child ? cast(GtkCellAccessible*)child._cPtr(No.Dup) : null);
   }
@@ -99,7 +99,7 @@ final class ContainerCellAccessibleGidBuilder : ContainerCellAccessibleGidBuilde
       Create object from builder.
       Returns: New object
   */
-  ContainerCellAccessible build()
+  ContainerCellAccessible build() nothrow
   {
     return new ContainerCellAccessible(cast(void*)createGObject(ContainerCellAccessible._getGType), Yes.Take);
   }

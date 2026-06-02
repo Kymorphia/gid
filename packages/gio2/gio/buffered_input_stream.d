@@ -35,26 +35,26 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_buffered_input_stream_get_type != &gidSymbolNotFound ? g_buffered_input_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BufferedInputStream self()
+  override BufferedInputStream self() nothrow
   {
     return this;
   }
@@ -63,7 +63,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
       Get builder for [gio.buffered_input_stream.BufferedInputStream]
       Returns: New builder object
   */
-  static BufferedInputStreamGidBuilder builder()
+  static BufferedInputStreamGidBuilder builder() nothrow
   {
     return new BufferedInputStreamGidBuilder;
   }
@@ -72,7 +72,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
       Get `bufferSize` property.
       Returns: The size of the backend buffer, in bytes.
   */
-  @property uint bufferSize()
+  @property uint bufferSize() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("buffer-size");
   }
@@ -82,7 +82,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
       Params:
         propval = The size of the backend buffer, in bytes.
   */
-  @property void bufferSize(uint propval)
+  @property void bufferSize(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("buffer-size", propval);
   }
@@ -97,7 +97,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
         baseStream = a #GInputStream
       Returns: a #GInputStream for the given base_stream.
   */
-  this(gio.input_stream.InputStream baseStream)
+  this(gio.input_stream.InputStream baseStream) nothrow
   {
     GInputStream* _cretval;
     _cretval = g_buffered_input_stream_new(baseStream ? cast(GInputStream*)baseStream._cPtr(No.Dup) : null);
@@ -113,7 +113,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
         size = a #gsize
       Returns: a #GInputStream.
   */
-  static gio.buffered_input_stream.BufferedInputStream newSized(gio.input_stream.InputStream baseStream, size_t size)
+  static gio.buffered_input_stream.BufferedInputStream newSized(gio.input_stream.InputStream baseStream, size_t size) nothrow
   {
     GInputStream* _cretval;
     _cretval = g_buffered_input_stream_new_sized(baseStream ? cast(GInputStream*)baseStream._cPtr(No.Dup) : null, size);
@@ -178,14 +178,21 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
         cancellable = optional #GCancellable object
         callback = a #GAsyncReadyCallback
   */
-  void fillAsync(ptrdiff_t count, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void fillAsync(ptrdiff_t count, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -214,7 +221,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
       Gets the size of the available data within the stream.
       Returns: size of the available stream.
   */
-  size_t getAvailable()
+  size_t getAvailable() nothrow
   {
     size_t _retval;
     _retval = g_buffered_input_stream_get_available(cast(GBufferedInputStream*)this._cPtr);
@@ -225,7 +232,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
       Gets the size of the input buffer.
       Returns: the current buffer size.
   */
-  size_t getBufferSize()
+  size_t getBufferSize() nothrow
   {
     size_t _retval;
     _retval = g_buffered_input_stream_get_buffer_size(cast(GBufferedInputStream*)this._cPtr);
@@ -242,7 +249,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
         offset = a #gsize
       Returns: a #gsize of the number of bytes peeked, or -1 on error.
   */
-  size_t peek(ubyte[] buffer, size_t offset)
+  size_t peek(ubyte[] buffer, size_t offset) nothrow
   {
     size_t _retval;
     size_t _count;
@@ -260,7 +267,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
       the stream or filling the buffer.
       Returns: read-only buffer
   */
-  ubyte[] peekBuffer()
+  ubyte[] peekBuffer() nothrow
   {
     void* _cretval;
     size_t _cretlength;
@@ -312,7 +319,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
       Params:
         size = a #gsize
   */
-  void setBufferSize(size_t size)
+  void setBufferSize(size_t size) nothrow
   {
     g_buffered_input_stream_set_buffer_size(cast(GBufferedInputStream*)this._cPtr, size);
   }
@@ -330,7 +337,7 @@ class BufferedInputStreamGidBuilderImpl(T) : gio.filter_input_stream.FilterInput
         propval = The size of the backend buffer, in bytes.
       Returns: Builder instance for fluent chaining
   */
-  T bufferSize(uint propval)
+  T bufferSize(uint propval) nothrow
   {
     return setProperty("buffer-size", propval);
   }
@@ -343,7 +350,7 @@ final class BufferedInputStreamGidBuilder : BufferedInputStreamGidBuilderImpl!Bu
       Create object from builder.
       Returns: New object
   */
-  BufferedInputStream build()
+  BufferedInputStream build() nothrow
   {
     return new BufferedInputStream(cast(void*)createGObject(BufferedInputStream._getGType), Yes.Take);
   }

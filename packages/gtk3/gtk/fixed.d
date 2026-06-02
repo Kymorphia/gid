@@ -60,26 +60,26 @@ class Fixed : gtk.container.Container
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_fixed_get_type != &gidSymbolNotFound ? gtk_fixed_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Fixed self()
+  override Fixed self() nothrow
   {
     return this;
   }
@@ -88,7 +88,7 @@ class Fixed : gtk.container.Container
       Get builder for [gtk.fixed.Fixed]
       Returns: New builder object
   */
-  static FixedGidBuilder builder()
+  static FixedGidBuilder builder() nothrow
   {
     return new FixedGidBuilder;
   }
@@ -97,7 +97,7 @@ class Fixed : gtk.container.Container
       Creates a new #GtkFixed.
       Returns: a new #GtkFixed.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_fixed_new();
@@ -112,7 +112,7 @@ class Fixed : gtk.container.Container
         x = the horizontal position to move the widget to.
         y = the vertical position to move the widget to.
   */
-  void move(gtk.widget.Widget widget, int x, int y)
+  void move(gtk.widget.Widget widget, int x, int y) nothrow
   {
     gtk_fixed_move(cast(GtkFixed*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, x, y);
   }
@@ -125,7 +125,7 @@ class Fixed : gtk.container.Container
         x = the horizontal position to place the widget at.
         y = the vertical position to place the widget at.
   */
-  void put(gtk.widget.Widget widget, int x, int y)
+  void put(gtk.widget.Widget widget, int x, int y) nothrow
   {
     gtk_fixed_put(cast(GtkFixed*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, x, y);
   }
@@ -144,7 +144,7 @@ final class FixedGidBuilder : FixedGidBuilderImpl!FixedGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Fixed build()
+  Fixed build() nothrow
   {
     return new Fixed(cast(void*)createGObject(Fixed._getGType), No.Take);
   }

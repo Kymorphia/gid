@@ -27,7 +27,7 @@ struct Charset
       Returns: the charset name that best represents the charset
         mask charset or null for us-ascii.
   */
-  string bestName()
+  string bestName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_charset_best_name(cast(GMimeCharset*)&this);
@@ -44,7 +44,7 @@ struct Charset
       Returns: true if it is safe to encode text into charset or false
         otherwise.
   */
-  bool canEncode(string charset, string text)
+  bool canEncode(string charset, string text) nothrow
   {
     bool _retval;
     const(char)* _charset = charset.toCString(No.Alloc);
@@ -60,7 +60,7 @@ struct Charset
   /**
       Initializes a charset mask structure.
   */
-  void init_()
+  void init_() nothrow
   {
     g_mime_charset_init(cast(GMimeCharset*)&this);
   }
@@ -74,7 +74,7 @@ struct Charset
       Params:
         inbuf = input text buffer (must be in UTF-8)
   */
-  void step(string inbuf)
+  void step(string inbuf) nothrow
   {
     size_t _inlen;
     if (inbuf)
@@ -92,7 +92,7 @@ struct Charset
       Returns: the charset name best suited for the input text
         or null if it is ascii-safe.
   */
-  static string best(string inbuf)
+  static string best(string inbuf) nothrow
   {
     const(char)* _cretval;
     size_t _inlen;
@@ -117,7 +117,7 @@ struct Charset
         charset = charset name
       Returns: a canonical charset name for charset.
   */
-  static string canonName(string charset)
+  static string canonName(string charset) nothrow
   {
     const(char)* _cretval;
     const(char)* _charset = charset.toCString(No.Alloc);
@@ -133,7 +133,7 @@ struct Charset
         charset = charset name
       Returns: an iconv-friendly charset name for charset.
   */
-  static string iconvName(string charset)
+  static string iconvName(string charset) nothrow
   {
     const(char)* _cretval;
     const(char)* _charset = charset.toCString(No.Alloc);
@@ -150,7 +150,7 @@ struct Charset
         isocharset = ISO-8859-# charset
       Returns: equivalent Windows charset.
   */
-  static string isoToWindows(string isocharset)
+  static string isoToWindows(string isocharset) nothrow
   {
     const(char)* _cretval;
     const(char)* _isocharset = isocharset.toCString(No.Alloc);
@@ -169,7 +169,7 @@ struct Charset
       Returns: a language code that is specific to charset,
         or null on fail.
   */
-  static string language(string charset)
+  static string language(string charset) nothrow
   {
     const(char)* _cretval;
     const(char)* _charset = charset.toCString(No.Alloc);
@@ -185,7 +185,7 @@ struct Charset
       instead.
       Returns: the user's locale charset (or iso-8859-1 by default).
   */
-  static string localeName()
+  static string localeName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_charset_locale_name();
@@ -198,7 +198,7 @@ struct Charset
       
       Note: [gmime.global.init_] calls this routine for you.
   */
-  static void mapInit()
+  static void mapInit() nothrow
   {
     g_mime_charset_map_init();
   }
@@ -206,7 +206,7 @@ struct Charset
   /**
       Frees internal lookup tables created in [gmime.charset.Charset.mapInit].
   */
-  static void mapShutdown()
+  static void mapShutdown() nothrow
   {
     g_mime_charset_map_shutdown();
   }
@@ -221,7 +221,7 @@ struct Charset
         charset = charset name
       Returns: an iconv-friendly charset name for charset.
   */
-  static string name(string charset)
+  static string name(string charset) nothrow
   {
     const(char)* _cretval;
     const(char)* _charset = charset.toCString(No.Alloc);

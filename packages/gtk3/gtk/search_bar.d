@@ -45,26 +45,26 @@ class SearchBar : gtk.bin.Bin
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_search_bar_get_type != &gidSymbolNotFound ? gtk_search_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SearchBar self()
+  override SearchBar self() nothrow
   {
     return this;
   }
@@ -73,31 +73,31 @@ class SearchBar : gtk.bin.Bin
       Get builder for [gtk.search_bar.SearchBar]
       Returns: New builder object
   */
-  static SearchBarGidBuilder builder()
+  static SearchBarGidBuilder builder() nothrow
   {
     return new SearchBarGidBuilder;
   }
 
   /** */
-  @property bool searchModeEnabled()
+  @property bool searchModeEnabled() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("search-mode-enabled");
   }
 
   /** */
-  @property void searchModeEnabled(bool propval)
+  @property void searchModeEnabled(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("search-mode-enabled", propval);
   }
 
   /** */
-  @property bool showCloseButton()
+  @property bool showCloseButton() nothrow
   {
     return getShowCloseButton();
   }
 
   /** */
-  @property void showCloseButton(bool propval)
+  @property void showCloseButton(bool propval) nothrow
   {
     setShowCloseButton(propval);
   }
@@ -108,7 +108,7 @@ class SearchBar : gtk.bin.Bin
       [gtk.search_bar.SearchBar.connectEntry].
       Returns: a new #GtkSearchBar
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_bar_new();
@@ -124,7 +124,7 @@ class SearchBar : gtk.bin.Bin
       Params:
         entry = a #GtkEntry
   */
-  void connectEntry(gtk.entry.Entry entry)
+  void connectEntry(gtk.entry.Entry entry) nothrow
   {
     gtk_search_bar_connect_entry(cast(GtkSearchBar*)this._cPtr, entry ? cast(GtkEntry*)entry._cPtr(No.Dup) : null);
   }
@@ -133,7 +133,7 @@ class SearchBar : gtk.bin.Bin
       Returns whether the search mode is on or off.
       Returns: whether search mode is toggled on
   */
-  bool getSearchMode()
+  bool getSearchMode() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_search_bar_get_search_mode(cast(GtkSearchBar*)this._cPtr);
@@ -144,7 +144,7 @@ class SearchBar : gtk.bin.Bin
       Returns whether the close button is shown.
       Returns: whether the close button is shown
   */
-  bool getShowCloseButton()
+  bool getShowCloseButton() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_search_bar_get_show_close_button(cast(GtkSearchBar*)this._cPtr);
@@ -197,7 +197,7 @@ class SearchBar : gtk.bin.Bin
             in text being entered in the search entry (and revealing
             the search bar if necessary), [gdk.types.EVENT_PROPAGATE] otherwise.
   */
-  bool handleEvent(gdk.event.Event event)
+  bool handleEvent(gdk.event.Event event) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_search_bar_handle_event(cast(GtkSearchBar*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
@@ -210,7 +210,7 @@ class SearchBar : gtk.bin.Bin
       Params:
         searchMode = the new state of the search mode
   */
-  void setSearchMode(bool searchMode)
+  void setSearchMode(bool searchMode) nothrow
   {
     gtk_search_bar_set_search_mode(cast(GtkSearchBar*)this._cPtr, searchMode);
   }
@@ -224,7 +224,7 @@ class SearchBar : gtk.bin.Bin
       Params:
         visible = whether the close button will be shown or not
   */
-  void setShowCloseButton(bool visible)
+  void setShowCloseButton(bool visible) nothrow
   {
     gtk_search_bar_set_show_close_button(cast(GtkSearchBar*)this._cPtr, visible);
   }
@@ -236,13 +236,13 @@ class SearchBarGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 
 
   /** */
-  T searchModeEnabled(bool propval)
+  T searchModeEnabled(bool propval) nothrow
   {
     return setProperty("search-mode-enabled", propval);
   }
 
   /** */
-  T showCloseButton(bool propval)
+  T showCloseButton(bool propval) nothrow
   {
     return setProperty("show-close-button", propval);
   }
@@ -255,7 +255,7 @@ final class SearchBarGidBuilder : SearchBarGidBuilderImpl!SearchBarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  SearchBar build()
+  SearchBar build() nothrow
   {
     return new SearchBar(cast(void*)createGObject(SearchBar._getGType), No.Take);
   }

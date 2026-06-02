@@ -30,7 +30,7 @@ template DBusObjectT()
       Returns: null if not found, otherwise a
           #GDBusInterface that must be freed with [gobject.object.ObjectWrap.unref].
   */
-  override gio.dbus_interface.DBusInterface getInterface(string interfaceName)
+  override gio.dbus_interface.DBusInterface getInterface(string interfaceName) nothrow
   {
     GDBusInterface* _cretval;
     const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
@@ -45,7 +45,7 @@ template DBusObjectT()
           The returned list must be freed by [glib.list.List.free] after each element has been freed
           with [gobject.object.ObjectWrap.unref].
   */
-  override gio.dbus_interface.DBusInterface[] getInterfaces()
+  override gio.dbus_interface.DBusInterface[] getInterfaces() nothrow
   {
     GList* _cretval;
     _cretval = g_dbus_object_get_interfaces(cast(GDBusObject*)this._cPtr);
@@ -57,7 +57,7 @@ template DBusObjectT()
       Gets the object path for object.
       Returns: A string owned by object. Do not free.
   */
-  override string getObjectPath()
+  override string getObjectPath() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_object_get_object_path(cast(GDBusObject*)this._cPtr);
@@ -82,14 +82,14 @@ template DBusObjectT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInterfaceAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInterfaceAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.dbus_interface.DBusInterface)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.dbus_object.DBusObject)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -101,7 +101,14 @@ template DBusObjectT()
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.dbus_object.DBusObject.interfaceAdded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -125,14 +132,14 @@ template DBusObjectT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInterfaceRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInterfaceRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.dbus_interface.DBusInterface)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.dbus_object.DBusObject)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -144,7 +151,14 @@ template DBusObjectT()
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.dbus_object.DBusObject.interfaceRemoved");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

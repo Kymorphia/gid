@@ -17,11 +17,8 @@ class RegionIter
   GtkSourceRegionIter _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtksource.region_iter.RegionIter");
-
     _cInstance = *cast(GtkSourceRegionIter*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class RegionIter
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -43,7 +40,7 @@ class RegionIter
       Returns: true if start and end have been set successfully (if non-null),
           or false if iter is the end iterator or if the region is empty.
   */
-  bool getSubregion(out gtk.text_iter.TextIter start, out gtk.text_iter.TextIter end)
+  bool getSubregion(out gtk.text_iter.TextIter start, out gtk.text_iter.TextIter end) nothrow
   {
     bool _retval;
     GtkTextIter _start;
@@ -55,7 +52,7 @@ class RegionIter
   }
 
   /** */
-  bool isEnd()
+  bool isEnd() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_region_iter_is_end(cast(GtkSourceRegionIter*)this._cPtr);
@@ -67,7 +64,7 @@ class RegionIter
       Returns: true if iter moved and is dereferenceable, or false if iter has
           been set to the end iterator.
   */
-  bool next()
+  bool next() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_region_iter_next(cast(GtkSourceRegionIter*)this._cPtr);

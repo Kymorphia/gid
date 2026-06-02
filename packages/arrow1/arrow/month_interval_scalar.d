@@ -14,26 +14,26 @@ class MonthIntervalScalar : arrow.scalar.Scalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_month_interval_scalar_get_type != &gidSymbolNotFound ? garrow_month_interval_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MonthIntervalScalar self()
+  override MonthIntervalScalar self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class MonthIntervalScalar : arrow.scalar.Scalar
       Get builder for [arrow.month_interval_scalar.MonthIntervalScalar]
       Returns: New builder object
   */
-  static MonthIntervalScalarGidBuilder builder()
+  static MonthIntervalScalarGidBuilder builder() nothrow
   {
     return new MonthIntervalScalarGidBuilder;
   }
 
   /** */
-  this(int value)
+  this(int value) nothrow
   {
     GArrowMonthIntervalScalar* _cretval;
     _cretval = garrow_month_interval_scalar_new(value);
@@ -56,7 +56,7 @@ class MonthIntervalScalar : arrow.scalar.Scalar
   }
 
   /** */
-  int getValue()
+  int getValue() nothrow
   {
     int _retval;
     _retval = garrow_month_interval_scalar_get_value(cast(GArrowMonthIntervalScalar*)this._cPtr);
@@ -76,7 +76,7 @@ final class MonthIntervalScalarGidBuilder : MonthIntervalScalarGidBuilderImpl!Mo
       Create object from builder.
       Returns: New object
   */
-  MonthIntervalScalar build()
+  MonthIntervalScalar build() nothrow
   {
     return new MonthIntervalScalar(cast(void*)createGObject(MonthIntervalScalar._getGType), Yes.Take);
   }

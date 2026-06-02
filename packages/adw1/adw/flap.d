@@ -87,26 +87,26 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_flap_get_type != &gidSymbolNotFound ? adw_flap_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Flap self()
+  override Flap self() nothrow
   {
     return this;
   }
@@ -115,7 +115,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
       Get builder for [adw.flap.Flap]
       Returns: New builder object
   */
-  static FlapGidBuilder builder()
+  static FlapGidBuilder builder() nothrow
   {
     return new FlapGidBuilder;
   }
@@ -128,7 +128,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property gtk.widget.Widget content()
+  @property gtk.widget.Widget content() nothrow
   {
     return getContent();
   }
@@ -142,7 +142,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property void content(gtk.widget.Widget propval)
+  @property void content(gtk.widget.Widget propval) nothrow
   {
     setContent(propval);
   }
@@ -155,7 +155,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property gtk.widget.Widget flap()
+  @property gtk.widget.Widget flap() nothrow
   {
     return getFlap();
   }
@@ -169,7 +169,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property void flap(gtk.widget.Widget propval)
+  @property void flap(gtk.widget.Widget propval) nothrow
   {
     setFlap(propval);
   }
@@ -183,7 +183,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property gtk.types.PackType flapPosition()
+  @property gtk.types.PackType flapPosition() nothrow
   {
     return getFlapPosition();
   }
@@ -198,7 +198,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property void flapPosition(gtk.types.PackType propval)
+  @property void flapPosition(gtk.types.PackType propval) nothrow
   {
     setFlapPosition(propval);
   }
@@ -209,7 +209,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property uint foldDuration()
+  @property uint foldDuration() nothrow
   {
     return getFoldDuration();
   }
@@ -221,7 +221,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property void foldDuration(uint propval)
+  @property void foldDuration(uint propval) nothrow
   {
     setFoldDuration(propval);
   }
@@ -232,7 +232,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property adw.types.FlapFoldPolicy foldPolicy()
+  @property adw.types.FlapFoldPolicy foldPolicy() nothrow
   {
     return getFoldPolicy();
   }
@@ -244,7 +244,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property void foldPolicy(adw.types.FlapFoldPolicy propval)
+  @property void foldPolicy(adw.types.FlapFoldPolicy propval) nothrow
   {
     setFoldPolicy(propval);
   }
@@ -262,7 +262,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property adw.types.FoldThresholdPolicy foldThresholdPolicy()
+  @property adw.types.FoldThresholdPolicy foldThresholdPolicy() nothrow
   {
     return getFoldThresholdPolicy();
   }
@@ -281,7 +281,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property void foldThresholdPolicy(adw.types.FoldThresholdPolicy propval)
+  @property void foldThresholdPolicy(adw.types.FoldThresholdPolicy propval) nothrow
   {
     setFoldThresholdPolicy(propval);
   }
@@ -294,7 +294,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property bool folded()
+  @property bool folded() nothrow
   {
     return getFolded();
   }
@@ -309,7 +309,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property bool locked()
+  @property bool locked() nothrow
   {
     return getLocked();
   }
@@ -325,7 +325,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property void locked(bool propval)
+  @property void locked(bool propval) nothrow
   {
     setLocked(propval);
   }
@@ -340,7 +340,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property bool modal()
+  @property bool modal() nothrow
   {
     return getModal();
   }
@@ -356,7 +356,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property void modal(bool propval)
+  @property void modal(bool propval) nothrow
   {
     setModal(propval);
   }
@@ -367,7 +367,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property bool revealFlap()
+  @property bool revealFlap() nothrow
   {
     return getRevealFlap();
   }
@@ -379,7 +379,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property void revealFlap(bool propval)
+  @property void revealFlap(bool propval) nothrow
   {
     setRevealFlap(propval);
   }
@@ -396,7 +396,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property adw.spring_params.SpringParams revealParams()
+  @property adw.spring_params.SpringParams revealParams() nothrow
   {
     return getRevealParams();
   }
@@ -414,7 +414,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property void revealParams(adw.spring_params.SpringParams propval)
+  @property void revealParams(adw.spring_params.SpringParams propval) nothrow
   {
     setRevealParams(propval);
   }
@@ -429,7 +429,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property double revealProgress()
+  @property double revealProgress() nothrow
   {
     return getRevealProgress();
   }
@@ -444,7 +444,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property gtk.widget.Widget separator()
+  @property gtk.widget.Widget separator() nothrow
   {
     return getSeparator();
   }
@@ -460,7 +460,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property void separator(gtk.widget.Widget propval)
+  @property void separator(gtk.widget.Widget propval) nothrow
   {
     setSeparator(propval);
   }
@@ -474,7 +474,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property bool swipeToClose()
+  @property bool swipeToClose() nothrow
   {
     return getSwipeToClose();
   }
@@ -489,7 +489,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property void swipeToClose(bool propval)
+  @property void swipeToClose(bool propval) nothrow
   {
     setSwipeToClose(propval);
   }
@@ -503,7 +503,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property bool swipeToOpen()
+  @property bool swipeToOpen() nothrow
   {
     return getSwipeToOpen();
   }
@@ -518,7 +518,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property void swipeToOpen(bool propval)
+  @property void swipeToOpen(bool propval) nothrow
   {
     setSwipeToOpen(propval);
   }
@@ -534,7 +534,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property adw.types.FlapTransitionType transitionType()
+  @property adw.types.FlapTransitionType transitionType() nothrow
   {
     return getTransitionType();
   }
@@ -551,7 +551,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  @property void transitionType(adw.types.FlapTransitionType propval)
+  @property void transitionType(adw.types.FlapTransitionType propval) nothrow
   {
     setTransitionType(propval);
   }
@@ -565,7 +565,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_flap_new();
@@ -578,7 +578,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  gtk.widget.Widget getContent()
+  gtk.widget.Widget getContent() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_flap_get_content(cast(AdwFlap*)this._cPtr);
@@ -592,7 +592,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  gtk.widget.Widget getFlap()
+  gtk.widget.Widget getFlap() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_flap_get_flap(cast(AdwFlap*)this._cPtr);
@@ -606,7 +606,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  gtk.types.PackType getFlapPosition()
+  gtk.types.PackType getFlapPosition() nothrow
   {
     GtkPackType _cretval;
     _cretval = adw_flap_get_flap_position(cast(AdwFlap*)this._cPtr);
@@ -620,7 +620,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  uint getFoldDuration()
+  uint getFoldDuration() nothrow
   {
     uint _retval;
     _retval = adw_flap_get_fold_duration(cast(AdwFlap*)this._cPtr);
@@ -633,7 +633,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  adw.types.FlapFoldPolicy getFoldPolicy()
+  adw.types.FlapFoldPolicy getFoldPolicy() nothrow
   {
     AdwFlapFoldPolicy _cretval;
     _cretval = adw_flap_get_fold_policy(cast(AdwFlap*)this._cPtr);
@@ -647,7 +647,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  adw.types.FoldThresholdPolicy getFoldThresholdPolicy()
+  adw.types.FoldThresholdPolicy getFoldThresholdPolicy() nothrow
   {
     AdwFoldThresholdPolicy _cretval;
     _cretval = adw_flap_get_fold_threshold_policy(cast(AdwFlap*)this._cPtr);
@@ -663,7 +663,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  bool getFolded()
+  bool getFolded() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_flap_get_folded(cast(AdwFlap*)this._cPtr);
@@ -676,7 +676,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  bool getLocked()
+  bool getLocked() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_flap_get_locked(cast(AdwFlap*)this._cPtr);
@@ -689,7 +689,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  bool getModal()
+  bool getModal() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_flap_get_modal(cast(AdwFlap*)this._cPtr);
@@ -702,7 +702,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  bool getRevealFlap()
+  bool getRevealFlap() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_flap_get_reveal_flap(cast(AdwFlap*)this._cPtr);
@@ -715,7 +715,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  adw.spring_params.SpringParams getRevealParams()
+  adw.spring_params.SpringParams getRevealParams() nothrow
   {
     AdwSpringParams* _cretval;
     _cretval = adw_flap_get_reveal_params(cast(AdwFlap*)this._cPtr);
@@ -733,7 +733,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  double getRevealProgress()
+  double getRevealProgress() nothrow
   {
     double _retval;
     _retval = adw_flap_get_reveal_progress(cast(AdwFlap*)this._cPtr);
@@ -746,7 +746,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  gtk.widget.Widget getSeparator()
+  gtk.widget.Widget getSeparator() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_flap_get_separator(cast(AdwFlap*)this._cPtr);
@@ -760,7 +760,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  bool getSwipeToClose()
+  bool getSwipeToClose() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_flap_get_swipe_to_close(cast(AdwFlap*)this._cPtr);
@@ -773,7 +773,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  bool getSwipeToOpen()
+  bool getSwipeToOpen() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_flap_get_swipe_to_open(cast(AdwFlap*)this._cPtr);
@@ -786,7 +786,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  adw.types.FlapTransitionType getTransitionType()
+  adw.types.FlapTransitionType getTransitionType() nothrow
   {
     AdwFlapTransitionType _cretval;
     _cretval = adw_flap_get_transition_type(cast(AdwFlap*)this._cPtr);
@@ -804,7 +804,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  void setContent(gtk.widget.Widget content = null)
+  void setContent(gtk.widget.Widget content = null) nothrow
   {
     adw_flap_set_content(cast(AdwFlap*)this._cPtr, content ? cast(GtkWidget*)content._cPtr(No.Dup) : null);
   }
@@ -819,7 +819,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  void setFlap(gtk.widget.Widget flap = null)
+  void setFlap(gtk.widget.Widget flap = null) nothrow
   {
     adw_flap_set_flap(cast(AdwFlap*)this._cPtr, flap ? cast(GtkWidget*)flap._cPtr(No.Dup) : null);
   }
@@ -835,7 +835,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  void setFlapPosition(gtk.types.PackType position)
+  void setFlapPosition(gtk.types.PackType position) nothrow
   {
     adw_flap_set_flap_position(cast(AdwFlap*)this._cPtr, position);
   }
@@ -848,7 +848,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  void setFoldDuration(uint duration)
+  void setFoldDuration(uint duration) nothrow
   {
     adw_flap_set_fold_duration(cast(AdwFlap*)this._cPtr, duration);
   }
@@ -861,7 +861,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  void setFoldPolicy(adw.types.FlapFoldPolicy policy)
+  void setFoldPolicy(adw.types.FlapFoldPolicy policy) nothrow
   {
     adw_flap_set_fold_policy(cast(AdwFlap*)this._cPtr, policy);
   }
@@ -881,7 +881,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  void setFoldThresholdPolicy(adw.types.FoldThresholdPolicy policy)
+  void setFoldThresholdPolicy(adw.types.FoldThresholdPolicy policy) nothrow
   {
     adw_flap_set_fold_threshold_policy(cast(AdwFlap*)this._cPtr, policy);
   }
@@ -898,7 +898,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  void setLocked(bool locked)
+  void setLocked(bool locked) nothrow
   {
     adw_flap_set_locked(cast(AdwFlap*)this._cPtr, locked);
   }
@@ -915,7 +915,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  void setModal(bool modal)
+  void setModal(bool modal) nothrow
   {
     adw_flap_set_modal(cast(AdwFlap*)this._cPtr, modal);
   }
@@ -928,7 +928,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  void setRevealFlap(bool revealFlap)
+  void setRevealFlap(bool revealFlap) nothrow
   {
     adw_flap_set_reveal_flap(cast(AdwFlap*)this._cPtr, revealFlap);
   }
@@ -947,7 +947,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  void setRevealParams(adw.spring_params.SpringParams params)
+  void setRevealParams(adw.spring_params.SpringParams params) nothrow
   {
     adw_flap_set_reveal_params(cast(AdwFlap*)this._cPtr, params ? cast(AdwSpringParams*)params._cPtr(No.Dup) : null);
   }
@@ -964,7 +964,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  void setSeparator(gtk.widget.Widget separator = null)
+  void setSeparator(gtk.widget.Widget separator = null) nothrow
   {
     adw_flap_set_separator(cast(AdwFlap*)this._cPtr, separator ? cast(GtkWidget*)separator._cPtr(No.Dup) : null);
   }
@@ -980,7 +980,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  void setSwipeToClose(bool swipeToClose)
+  void setSwipeToClose(bool swipeToClose) nothrow
   {
     adw_flap_set_swipe_to_close(cast(AdwFlap*)this._cPtr, swipeToClose);
   }
@@ -996,7 +996,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  void setSwipeToOpen(bool swipeToOpen)
+  void setSwipeToOpen(bool swipeToOpen) nothrow
   {
     adw_flap_set_swipe_to_open(cast(AdwFlap*)this._cPtr, swipeToOpen);
   }
@@ -1014,7 +1014,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  void setTransitionType(adw.types.FlapTransitionType transitionType)
+  void setTransitionType(adw.types.FlapTransitionType transitionType) nothrow
   {
     adw_flap_set_transition_type(cast(AdwFlap*)this._cPtr, transitionType);
   }
@@ -1037,7 +1037,7 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  T content(gtk.widget.Widget propval)
+  T content(gtk.widget.Widget propval) nothrow
   {
     return setProperty("content", propval);
   }
@@ -1052,7 +1052,7 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  T flap(gtk.widget.Widget propval)
+  T flap(gtk.widget.Widget propval) nothrow
   {
     return setProperty("flap", propval);
   }
@@ -1068,7 +1068,7 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  T flapPosition(gtk.types.PackType propval)
+  T flapPosition(gtk.types.PackType propval) nothrow
   {
     return setProperty("flap-position", propval);
   }
@@ -1081,7 +1081,7 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  T foldDuration(uint propval)
+  T foldDuration(uint propval) nothrow
   {
     return setProperty("fold-duration", propval);
   }
@@ -1094,7 +1094,7 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  T foldPolicy(adw.types.FlapFoldPolicy propval)
+  T foldPolicy(adw.types.FlapFoldPolicy propval) nothrow
   {
     return setProperty("fold-policy", propval);
   }
@@ -1114,7 +1114,7 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  T foldThresholdPolicy(adw.types.FoldThresholdPolicy propval)
+  T foldThresholdPolicy(adw.types.FoldThresholdPolicy propval) nothrow
   {
     return setProperty("fold-threshold-policy", propval);
   }
@@ -1131,7 +1131,7 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  T locked(bool propval)
+  T locked(bool propval) nothrow
   {
     return setProperty("locked", propval);
   }
@@ -1148,7 +1148,7 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  T modal(bool propval)
+  T modal(bool propval) nothrow
   {
     return setProperty("modal", propval);
   }
@@ -1161,7 +1161,7 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  T revealFlap(bool propval)
+  T revealFlap(bool propval) nothrow
   {
     return setProperty("reveal-flap", propval);
   }
@@ -1180,7 +1180,7 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  T revealParams(adw.spring_params.SpringParams propval)
+  T revealParams(adw.spring_params.SpringParams propval) nothrow
   {
     return setProperty("reveal-params", propval);
   }
@@ -1197,7 +1197,7 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  T separator(gtk.widget.Widget propval)
+  T separator(gtk.widget.Widget propval) nothrow
   {
     return setProperty("separator", propval);
   }
@@ -1213,7 +1213,7 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  T swipeToClose(bool propval)
+  T swipeToClose(bool propval) nothrow
   {
     return setProperty("swipe-to-close", propval);
   }
@@ -1229,7 +1229,7 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  T swipeToOpen(bool propval)
+  T swipeToOpen(bool propval) nothrow
   {
     return setProperty("swipe-to-open", propval);
   }
@@ -1247,7 +1247,7 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
-  T transitionType(adw.types.FlapTransitionType propval)
+  T transitionType(adw.types.FlapTransitionType propval) nothrow
   {
     return setProperty("transition-type", propval);
   }
@@ -1260,7 +1260,7 @@ final class FlapGidBuilder : FlapGidBuilderImpl!FlapGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Flap build()
+  Flap build() nothrow
   {
     return new Flap(cast(void*)createGObject(Flap._getGType), No.Take);
   }

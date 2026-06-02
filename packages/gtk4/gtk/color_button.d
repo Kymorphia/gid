@@ -46,26 +46,26 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_color_button_get_type != &gidSymbolNotFound ? gtk_color_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ColorButton self()
+  override ColorButton self() nothrow
   {
     return this;
   }
@@ -74,7 +74,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
       Get builder for [gtk.color_button.ColorButton]
       Returns: New builder object
   */
-  static ColorButtonGidBuilder builder()
+  static ColorButtonGidBuilder builder() nothrow
   {
     return new ColorButtonGidBuilder;
   }
@@ -83,7 +83,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
       Get `modal` property.
       Returns: Whether the color chooser dialog should be modal.
   */
-  @property bool modal()
+  @property bool modal() nothrow
   {
     return getModal();
   }
@@ -93,7 +93,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
       Params:
         propval = Whether the color chooser dialog should be modal.
   */
-  @property void modal(bool propval)
+  @property void modal(bool propval) nothrow
   {
     setModal(propval);
   }
@@ -106,7 +106,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
         in the editor would be redundant, such as when the color
         button is already part of a palette.
   */
-  @property bool showEditor()
+  @property bool showEditor() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("show-editor");
   }
@@ -120,7 +120,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
           in the editor would be redundant, such as when the color
           button is already part of a palette.
   */
-  @property void showEditor(bool propval)
+  @property void showEditor(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("show-editor", propval);
   }
@@ -129,7 +129,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
       Get `title` property.
       Returns: The title of the color chooser dialog
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -139,7 +139,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
       Params:
         propval = The title of the color chooser dialog
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -158,7 +158,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   
       Deprecated: Use [gtk.color_dialog_button.ColorDialogButton] instead
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_color_button_new();
@@ -172,7 +172,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
         rgba = A [gdk.rgba.RGBA] to set the current color with
       Returns: a new color button
   */
-  static gtk.color_button.ColorButton newWithRgba(gdk.rgba.RGBA rgba)
+  static gtk.color_button.ColorButton newWithRgba(gdk.rgba.RGBA rgba) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_color_button_new_with_rgba(cast(const(GdkRGBA)*)&rgba);
@@ -186,7 +186,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   
       Deprecated: Use [gtk.color_dialog_button.ColorDialogButton] instead
   */
-  bool getModal()
+  bool getModal() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_color_button_get_modal(cast(GtkColorButton*)this._cPtr);
@@ -199,7 +199,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   
       Deprecated: Use [gtk.color_dialog_button.ColorDialogButton] instead
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_color_button_get_title(cast(GtkColorButton*)this._cPtr);
@@ -215,7 +215,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   
       Deprecated: Use [gtk.color_dialog_button.ColorDialogButton] instead
   */
-  void setModal(bool modal)
+  void setModal(bool modal) nothrow
   {
     gtk_color_button_set_modal(cast(GtkColorButton*)this._cPtr, modal);
   }
@@ -228,7 +228,7 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   
       Deprecated: Use [gtk.color_dialog_button.ColorDialogButton] instead
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_color_button_set_title(cast(GtkColorButton*)this._cPtr, _title);
@@ -252,13 +252,13 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.color_button.ColorButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -267,7 +267,14 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.color_button.ColorButton.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -296,13 +303,13 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectColorSet(T)(T callback, Flag!"After" after = No.After)
+  gulong connectColorSet(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.color_button.ColorButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -311,7 +318,14 @@ class ColorButton : gtk.widget.Widget, gtk.color_chooser.ColorChooser
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.color_button.ColorButton.colorSet");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -331,7 +345,7 @@ class ColorButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.colo
         propval = Whether the color chooser dialog should be modal.
       Returns: Builder instance for fluent chaining
   */
-  T modal(bool propval)
+  T modal(bool propval) nothrow
   {
     return setProperty("modal", propval);
   }
@@ -346,7 +360,7 @@ class ColorButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.colo
           button is already part of a palette.
       Returns: Builder instance for fluent chaining
   */
-  T showEditor(bool propval)
+  T showEditor(bool propval) nothrow
   {
     return setProperty("show-editor", propval);
   }
@@ -357,7 +371,7 @@ class ColorButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.colo
         propval = The title of the color chooser dialog
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -370,7 +384,7 @@ final class ColorButtonGidBuilder : ColorButtonGidBuilderImpl!ColorButtonGidBuil
       Create object from builder.
       Returns: New object
   */
-  ColorButton build()
+  ColorButton build() nothrow
   {
     return new ColorButton(cast(void*)createGObject(ColorButton._getGType), No.Take);
   }

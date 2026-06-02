@@ -16,11 +16,8 @@ class TypeValueTable
   GTypeValueTable _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gobject.type_value_table.TypeValueTable");
-
     _cInstance = *cast(GTypeValueTable*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class TypeValueTable
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class TypeValueTable
       Get `valueInit` field.
       Returns: Function to initialize a GValue
   */
-  @property GTypeValueInitFunc valueInit()
+  @property GTypeValueInitFunc valueInit() nothrow
   {
     return (cast(GTypeValueTable*)this._cPtr).valueInit;
   }
@@ -48,7 +45,7 @@ class TypeValueTable
         propval = Function to initialize a GValue
   */
 
-  @property void valueInit(GTypeValueInitFunc propval)
+  @property void valueInit(GTypeValueInitFunc propval) nothrow
   {
     (cast(GTypeValueTable*)this._cPtr).valueInit = propval;
   }
@@ -57,7 +54,7 @@ class TypeValueTable
       Get `valueFree` field.
       Returns: Function to free a GValue
   */
-  @property GTypeValueFreeFunc valueFree()
+  @property GTypeValueFreeFunc valueFree() nothrow
   {
     return (cast(GTypeValueTable*)this._cPtr).valueFree;
   }
@@ -68,7 +65,7 @@ class TypeValueTable
         propval = Function to free a GValue
   */
 
-  @property void valueFree(GTypeValueFreeFunc propval)
+  @property void valueFree(GTypeValueFreeFunc propval) nothrow
   {
     (cast(GTypeValueTable*)this._cPtr).valueFree = propval;
   }
@@ -77,7 +74,7 @@ class TypeValueTable
       Get `valueCopy` field.
       Returns: Function to copy a GValue
   */
-  @property GTypeValueCopyFunc valueCopy()
+  @property GTypeValueCopyFunc valueCopy() nothrow
   {
     return (cast(GTypeValueTable*)this._cPtr).valueCopy;
   }
@@ -88,7 +85,7 @@ class TypeValueTable
         propval = Function to copy a GValue
   */
 
-  @property void valueCopy(GTypeValueCopyFunc propval)
+  @property void valueCopy(GTypeValueCopyFunc propval) nothrow
   {
     (cast(GTypeValueTable*)this._cPtr).valueCopy = propval;
   }
@@ -98,7 +95,7 @@ class TypeValueTable
       Returns: Function to peek the contents of a GValue if they fit
           into a pointer
   */
-  @property GTypeValuePeekPointerFunc valuePeekPointer()
+  @property GTypeValuePeekPointerFunc valuePeekPointer() nothrow
   {
     return (cast(GTypeValueTable*)this._cPtr).valuePeekPointer;
   }
@@ -110,7 +107,7 @@ class TypeValueTable
             into a pointer
   */
 
-  @property void valuePeekPointer(GTypeValuePeekPointerFunc propval)
+  @property void valuePeekPointer(GTypeValuePeekPointerFunc propval) nothrow
   {
     (cast(GTypeValueTable*)this._cPtr).valuePeekPointer = propval;
   }
@@ -130,7 +127,7 @@ class TypeValueTable
           floats to doubles. So for collection of short int or char, `'i'`
           needs to be used, and for collection of floats `'d'`.
   */
-  @property string collectFormat()
+  @property string collectFormat() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GTypeValueTable*)this._cPtr).collectFormat);
   }
@@ -151,7 +148,7 @@ class TypeValueTable
             floats to doubles. So for collection of short int or char, `'i'`
             needs to be used, and for collection of floats `'d'`.
   */
-  @property void collectFormat(string propval)
+  @property void collectFormat(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GTypeValueTable*)this._cPtr).collectFormat);
     dToC(propval, cast(void*)&(cast(GTypeValueTable*)this._cPtr).collectFormat);
@@ -163,7 +160,7 @@ class TypeValueTable
           analogous to @collect_format. Usually, @lcopy_format string consists
           only of `'p'`s to provide lcopy_value() with pointers to storage locations.
   */
-  @property string lcopyFormat()
+  @property string lcopyFormat() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GTypeValueTable*)this._cPtr).lcopyFormat);
   }
@@ -175,7 +172,7 @@ class TypeValueTable
             analogous to @collect_format. Usually, @lcopy_format string consists
             only of `'p'`s to provide lcopy_value() with pointers to storage locations.
   */
-  @property void lcopyFormat(string propval)
+  @property void lcopyFormat(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GTypeValueTable*)this._cPtr).lcopyFormat);
     dToC(propval, cast(void*)&(cast(GTypeValueTable*)this._cPtr).lcopyFormat);

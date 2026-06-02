@@ -28,26 +28,26 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_network_address_get_type != &gidSymbolNotFound ? g_network_address_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NetworkAddress self()
+  override NetworkAddress self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
       Get builder for [gio.network_address.NetworkAddress]
       Returns: New builder object
   */
-  static NetworkAddressGidBuilder builder()
+  static NetworkAddressGidBuilder builder() nothrow
   {
     return new NetworkAddressGidBuilder;
   }
@@ -65,7 +65,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
       Get `hostname` property.
       Returns: Hostname to resolve.
   */
-  @property string hostname()
+  @property string hostname() nothrow
   {
     return getHostname();
   }
@@ -74,7 +74,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
       Get `port` property.
       Returns: Network port.
   */
-  @property uint port()
+  @property uint port() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("port");
   }
@@ -83,7 +83,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
       Get `scheme` property.
       Returns: URI scheme.
   */
-  @property string scheme()
+  @property string scheme() nothrow
   {
     return getScheme();
   }
@@ -105,7 +105,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
         port = the port
       Returns: the new #GNetworkAddress
   */
-  this(string hostname, ushort port)
+  this(string hostname, ushort port) nothrow
   {
     GSocketConnectable* _cretval;
     const(char)* _hostname = hostname.toCString(No.Alloc);
@@ -131,7 +131,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
         port = the port
       Returns: the new #GNetworkAddress
   */
-  static gio.network_address.NetworkAddress newLoopback(ushort port)
+  static gio.network_address.NetworkAddress newLoopback(ushort port) nothrow
   {
     GSocketConnectable* _cretval;
     _cretval = g_network_address_new_loopback(port);
@@ -213,7 +213,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
       depending on what addr was created with.
       Returns: addr's hostname
   */
-  string getHostname()
+  string getHostname() nothrow
   {
     const(char)* _cretval;
     _cretval = g_network_address_get_hostname(cast(GNetworkAddress*)this._cPtr);
@@ -225,7 +225,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
       Gets addr's port number
       Returns: addr's port (which may be 0)
   */
-  ushort getPort()
+  ushort getPort() nothrow
   {
     ushort _retval;
     _retval = g_network_address_get_port(cast(GNetworkAddress*)this._cPtr);
@@ -236,7 +236,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
       Gets addr's scheme
       Returns: addr's scheme (null if not built from URI)
   */
-  string getScheme()
+  string getScheme() nothrow
   {
     const(char)* _cretval;
     _cretval = g_network_address_get_scheme(cast(GNetworkAddress*)this._cPtr);
@@ -257,7 +257,7 @@ class NetworkAddressGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Hostname to resolve.
       Returns: Builder instance for fluent chaining
   */
-  T hostname(string propval)
+  T hostname(string propval) nothrow
   {
     return setProperty("hostname", propval);
   }
@@ -268,7 +268,7 @@ class NetworkAddressGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Network port.
       Returns: Builder instance for fluent chaining
   */
-  T port(uint propval)
+  T port(uint propval) nothrow
   {
     return setProperty("port", propval);
   }
@@ -279,7 +279,7 @@ class NetworkAddressGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = URI scheme.
       Returns: Builder instance for fluent chaining
   */
-  T scheme(string propval)
+  T scheme(string propval) nothrow
   {
     return setProperty("scheme", propval);
   }
@@ -292,7 +292,7 @@ final class NetworkAddressGidBuilder : NetworkAddressGidBuilderImpl!NetworkAddre
       Create object from builder.
       Returns: New object
   */
-  NetworkAddress build()
+  NetworkAddress build() nothrow
   {
     return new NetworkAddress(cast(void*)createGObject(NetworkAddress._getGType), Yes.Take);
   }

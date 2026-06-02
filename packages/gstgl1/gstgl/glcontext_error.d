@@ -14,7 +14,7 @@ struct GLContextError
   alias Enum = gstgl.types.GLContextError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gst_gl_context_error_quark();
@@ -24,12 +24,12 @@ struct GLContextError
 
 class GLContextException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gstgl.glcontext_error.GLContextError.quark, cast(int)code, msg);
   }

@@ -31,26 +31,26 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_renderer_combo_get_type != &gidSymbolNotFound ? gtk_cell_renderer_combo_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CellRendererCombo self()
+  override CellRendererCombo self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
       Get builder for [gtk.cell_renderer_combo.CellRendererCombo]
       Returns: New builder object
   */
-  static CellRendererComboGidBuilder builder()
+  static CellRendererComboGidBuilder builder() nothrow
   {
     return new CellRendererComboGidBuilder;
   }
@@ -69,7 +69,7 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
       Returns: If true, the cell renderer will include an entry and allow to enter
         values other than the ones in the popup list.
   */
-  @property bool hasEntry()
+  @property bool hasEntry() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("has-entry");
   }
@@ -80,7 +80,7 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
         propval = If true, the cell renderer will include an entry and allow to enter
           values other than the ones in the popup list.
   */
-  @property void hasEntry(bool propval)
+  @property void hasEntry(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("has-entry", propval);
   }
@@ -90,7 +90,7 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
       Returns: Holds a tree model containing the possible values for the combo box.
         Use the text_column property to specify the column holding the values.
   */
-  @property gtk.tree_model.TreeModel model()
+  @property gtk.tree_model.TreeModel model() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.tree_model.TreeModel)("model");
   }
@@ -101,7 +101,7 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
         propval = Holds a tree model containing the possible values for the combo box.
           Use the text_column property to specify the column holding the values.
   */
-  @property void model(gtk.tree_model.TreeModel propval)
+  @property void model(gtk.tree_model.TreeModel propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.tree_model.TreeModel)("model", propval);
   }
@@ -118,7 +118,7 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
         #GtkCellRendererCombo automatically adds a text cell renderer for
         this column to its combo box.
   */
-  @property int textColumn()
+  @property int textColumn() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("text-column");
   }
@@ -136,7 +136,7 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
           #GtkCellRendererCombo automatically adds a text cell renderer for
           this column to its combo box.
   */
-  @property void textColumn(int propval)
+  @property void textColumn(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("text-column", propval);
   }
@@ -151,7 +151,7 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
       a different string in each row of the #GtkTreeView.
       Returns: the new cell renderer
   */
-  this()
+  this() nothrow
   {
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_renderer_combo_new();
@@ -189,7 +189,7 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -197,7 +197,7 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.cell_renderer_combo.CellRendererCombo)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -212,7 +212,14 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.cell_renderer_combo.CellRendererCombo.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -231,7 +238,7 @@ class CellRendererComboGidBuilderImpl(T) : gtk.cell_renderer_text.CellRendererTe
           values other than the ones in the popup list.
       Returns: Builder instance for fluent chaining
   */
-  T hasEntry(bool propval)
+  T hasEntry(bool propval) nothrow
   {
     return setProperty("has-entry", propval);
   }
@@ -243,7 +250,7 @@ class CellRendererComboGidBuilderImpl(T) : gtk.cell_renderer_text.CellRendererTe
           Use the text_column property to specify the column holding the values.
       Returns: Builder instance for fluent chaining
   */
-  T model(gtk.tree_model.TreeModel propval)
+  T model(gtk.tree_model.TreeModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -262,7 +269,7 @@ class CellRendererComboGidBuilderImpl(T) : gtk.cell_renderer_text.CellRendererTe
           this column to its combo box.
       Returns: Builder instance for fluent chaining
   */
-  T textColumn(int propval)
+  T textColumn(int propval) nothrow
   {
     return setProperty("text-column", propval);
   }
@@ -275,7 +282,7 @@ final class CellRendererComboGidBuilder : CellRendererComboGidBuilderImpl!CellRe
       Create object from builder.
       Returns: New object
   */
-  CellRendererCombo build()
+  CellRendererCombo build() nothrow
   {
     return new CellRendererCombo(cast(void*)createGObject(CellRendererCombo._getGType), No.Take);
   }

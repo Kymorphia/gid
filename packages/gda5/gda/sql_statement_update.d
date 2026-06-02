@@ -13,11 +13,8 @@ class SqlStatementUpdate
   GdaSqlStatementUpdate _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.sql_statement_update.SqlStatementUpdate");
-
     _cInstance = *cast(GdaSqlStatementUpdate*)ptr;
 
     if (take)
@@ -25,19 +22,19 @@ class SqlStatementUpdate
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
 
   /** */
-  @property string onConflict()
+  @property string onConflict() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaSqlStatementUpdate*)this._cPtr).onConflict);
   }
 
   /** */
-  @property void onConflict(string propval)
+  @property void onConflict(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaSqlStatementUpdate*)this._cPtr).onConflict);
     dToC(propval, cast(void*)&(cast(GdaSqlStatementUpdate*)this._cPtr).onConflict);

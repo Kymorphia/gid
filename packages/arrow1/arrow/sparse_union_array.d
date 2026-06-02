@@ -19,26 +19,26 @@ class SparseUnionArray : arrow.union_array.UnionArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_sparse_union_array_get_type != &gidSymbolNotFound ? garrow_sparse_union_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SparseUnionArray self()
+  override SparseUnionArray self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class SparseUnionArray : arrow.union_array.UnionArray
       Get builder for [arrow.sparse_union_array.SparseUnionArray]
       Returns: New builder object
   */
-  static SparseUnionArrayGidBuilder builder()
+  static SparseUnionArrayGidBuilder builder() nothrow
   {
     return new SparseUnionArrayGidBuilder;
   }
@@ -92,7 +92,7 @@ final class SparseUnionArrayGidBuilder : SparseUnionArrayGidBuilderImpl!SparseUn
       Create object from builder.
       Returns: New object
   */
-  SparseUnionArray build()
+  SparseUnionArray build() nothrow
   {
     return new SparseUnionArray(cast(void*)createGObject(SparseUnionArray._getGType), Yes.Take);
   }

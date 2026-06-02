@@ -28,26 +28,26 @@ class MediaControls : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_media_controls_get_type != &gidSymbolNotFound ? gtk_media_controls_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MediaControls self()
+  override MediaControls self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class MediaControls : gtk.widget.Widget
       Get builder for [gtk.media_controls.MediaControls]
       Returns: New builder object
   */
-  static MediaControlsGidBuilder builder()
+  static MediaControlsGidBuilder builder() nothrow
   {
     return new MediaControlsGidBuilder;
   }
@@ -65,7 +65,7 @@ class MediaControls : gtk.widget.Widget
       Get `mediaStream` property.
       Returns: The media-stream managed by this object or null if none.
   */
-  @property gtk.media_stream.MediaStream mediaStream()
+  @property gtk.media_stream.MediaStream mediaStream() nothrow
   {
     return getMediaStream();
   }
@@ -75,7 +75,7 @@ class MediaControls : gtk.widget.Widget
       Params:
         propval = The media-stream managed by this object or null if none.
   */
-  @property void mediaStream(gtk.media_stream.MediaStream propval)
+  @property void mediaStream(gtk.media_stream.MediaStream propval) nothrow
   {
     setMediaStream(propval);
   }
@@ -87,7 +87,7 @@ class MediaControls : gtk.widget.Widget
         stream = a [gtk.media_stream.MediaStream] to manage
       Returns: a new [gtk.media_controls.MediaControls]
   */
-  this(gtk.media_stream.MediaStream stream = null)
+  this(gtk.media_stream.MediaStream stream = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_media_controls_new(stream ? cast(GtkMediaStream*)stream._cPtr(No.Dup) : null);
@@ -98,7 +98,7 @@ class MediaControls : gtk.widget.Widget
       Gets the media stream managed by controls or null if none.
       Returns: The media stream managed by controls
   */
-  gtk.media_stream.MediaStream getMediaStream()
+  gtk.media_stream.MediaStream getMediaStream() nothrow
   {
     GtkMediaStream* _cretval;
     _cretval = gtk_media_controls_get_media_stream(cast(GtkMediaControls*)this._cPtr);
@@ -112,7 +112,7 @@ class MediaControls : gtk.widget.Widget
       Params:
         stream = a [gtk.media_stream.MediaStream]
   */
-  void setMediaStream(gtk.media_stream.MediaStream stream = null)
+  void setMediaStream(gtk.media_stream.MediaStream stream = null) nothrow
   {
     gtk_media_controls_set_media_stream(cast(GtkMediaControls*)this._cPtr, stream ? cast(GtkMediaStream*)stream._cPtr(No.Dup) : null);
   }
@@ -129,7 +129,7 @@ class MediaControlsGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The media-stream managed by this object or null if none.
       Returns: Builder instance for fluent chaining
   */
-  T mediaStream(gtk.media_stream.MediaStream propval)
+  T mediaStream(gtk.media_stream.MediaStream propval) nothrow
   {
     return setProperty("media-stream", propval);
   }
@@ -142,7 +142,7 @@ final class MediaControlsGidBuilder : MediaControlsGidBuilderImpl!MediaControlsG
       Create object from builder.
       Returns: New object
   */
-  MediaControls build()
+  MediaControls build() nothrow
   {
     return new MediaControls(cast(void*)createGObject(MediaControls._getGType), No.Take);
   }

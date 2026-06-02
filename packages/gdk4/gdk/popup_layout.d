@@ -48,32 +48,32 @@ class PopupLayout : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_popup_layout_get_type != &gidSymbolNotFound ? gdk_popup_layout_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PopupLayout self()
+  override PopupLayout self() nothrow
   {
     return this;
   }
@@ -98,7 +98,7 @@ class PopupLayout : gobject.boxed.Boxed
         surfaceAnchor = the point on surface to align with rect's anchor point
       Returns: newly created instance of [gdk.popup_layout.PopupLayout]
   */
-  this(gdk.rectangle.Rectangle anchorRect, gdk.types.Gravity rectAnchor, gdk.types.Gravity surfaceAnchor)
+  this(gdk.rectangle.Rectangle anchorRect, gdk.types.Gravity rectAnchor, gdk.types.Gravity surfaceAnchor) nothrow
   {
     GdkPopupLayout* _cretval;
     _cretval = gdk_popup_layout_new(cast(const(GdkRectangle)*)&anchorRect, rectAnchor, surfaceAnchor);
@@ -109,7 +109,7 @@ class PopupLayout : gobject.boxed.Boxed
       Makes a copy of layout.
       Returns: a copy of layout.
   */
-  gdk.popup_layout.PopupLayout copy()
+  gdk.popup_layout.PopupLayout copy() nothrow
   {
     GdkPopupLayout* _cretval;
     _cretval = gdk_popup_layout_copy(cast(GdkPopupLayout*)this._cPtr);
@@ -125,7 +125,7 @@ class PopupLayout : gobject.boxed.Boxed
       Returns: true if layout and other have identical layout properties,
           otherwise false.
   */
-  bool equal(gdk.popup_layout.PopupLayout other)
+  bool equal(gdk.popup_layout.PopupLayout other) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_popup_layout_equal(cast(GdkPopupLayout*)this._cPtr, other ? cast(GdkPopupLayout*)other._cPtr(No.Dup) : null);
@@ -136,7 +136,7 @@ class PopupLayout : gobject.boxed.Boxed
       Get the [gdk.types.AnchorHints].
       Returns: the [gdk.types.AnchorHints]
   */
-  gdk.types.AnchorHints getAnchorHints()
+  gdk.types.AnchorHints getAnchorHints() nothrow
   {
     GdkAnchorHints _cretval;
     _cretval = gdk_popup_layout_get_anchor_hints(cast(GdkPopupLayout*)this._cPtr);
@@ -148,7 +148,7 @@ class PopupLayout : gobject.boxed.Boxed
       Get the anchor rectangle.
       Returns: The anchor rectangle
   */
-  gdk.rectangle.Rectangle getAnchorRect()
+  gdk.rectangle.Rectangle getAnchorRect() nothrow
   {
     const(GdkRectangle)* _cretval;
     _cretval = gdk_popup_layout_get_anchor_rect(cast(GdkPopupLayout*)this._cPtr);
@@ -165,7 +165,7 @@ class PopupLayout : gobject.boxed.Boxed
         dx = return location for the delta X coordinate
         dy = return location for the delta Y coordinate
   */
-  void getOffset(out int dx, out int dy)
+  void getOffset(out int dx, out int dy) nothrow
   {
     gdk_popup_layout_get_offset(cast(GdkPopupLayout*)this._cPtr, cast(int*)&dx, cast(int*)&dy);
   }
@@ -174,7 +174,7 @@ class PopupLayout : gobject.boxed.Boxed
       Returns the anchor position on the anchor rectangle.
       Returns: the anchor on the anchor rectangle.
   */
-  gdk.types.Gravity getRectAnchor()
+  gdk.types.Gravity getRectAnchor() nothrow
   {
     GdkGravity _cretval;
     _cretval = gdk_popup_layout_get_rect_anchor(cast(GdkPopupLayout*)this._cPtr);
@@ -191,7 +191,7 @@ class PopupLayout : gobject.boxed.Boxed
         top = return location for the top shadow width
         bottom = return location for the bottom shadow width
   */
-  void getShadowWidth(out int left, out int right, out int top, out int bottom)
+  void getShadowWidth(out int left, out int right, out int top, out int bottom) nothrow
   {
     gdk_popup_layout_get_shadow_width(cast(GdkPopupLayout*)this._cPtr, cast(int*)&left, cast(int*)&right, cast(int*)&top, cast(int*)&bottom);
   }
@@ -200,7 +200,7 @@ class PopupLayout : gobject.boxed.Boxed
       Returns the anchor position on the popup surface.
       Returns: the anchor on the popup surface.
   */
-  gdk.types.Gravity getSurfaceAnchor()
+  gdk.types.Gravity getSurfaceAnchor() nothrow
   {
     GdkGravity _cretval;
     _cretval = gdk_popup_layout_get_surface_anchor(cast(GdkPopupLayout*)this._cPtr);
@@ -220,7 +220,7 @@ class PopupLayout : gobject.boxed.Boxed
       Params:
         anchorHints = the new [gdk.types.AnchorHints]
   */
-  void setAnchorHints(gdk.types.AnchorHints anchorHints)
+  void setAnchorHints(gdk.types.AnchorHints anchorHints) nothrow
   {
     gdk_popup_layout_set_anchor_hints(cast(GdkPopupLayout*)this._cPtr, anchorHints);
   }
@@ -231,7 +231,7 @@ class PopupLayout : gobject.boxed.Boxed
       Params:
         anchorRect = the new anchor rectangle
   */
-  void setAnchorRect(gdk.rectangle.Rectangle anchorRect)
+  void setAnchorRect(gdk.rectangle.Rectangle anchorRect) nothrow
   {
     gdk_popup_layout_set_anchor_rect(cast(GdkPopupLayout*)this._cPtr, cast(const(GdkRectangle)*)&anchorRect);
   }
@@ -243,7 +243,7 @@ class PopupLayout : gobject.boxed.Boxed
         dx = x delta to offset the anchor rectangle with
         dy = y delta to offset the anchor rectangle with
   */
-  void setOffset(int dx, int dy)
+  void setOffset(int dx, int dy) nothrow
   {
     gdk_popup_layout_set_offset(cast(GdkPopupLayout*)this._cPtr, dx, dy);
   }
@@ -254,7 +254,7 @@ class PopupLayout : gobject.boxed.Boxed
       Params:
         anchor = the new rect anchor
   */
-  void setRectAnchor(gdk.types.Gravity anchor)
+  void setRectAnchor(gdk.types.Gravity anchor) nothrow
   {
     gdk_popup_layout_set_rect_anchor(cast(GdkPopupLayout*)this._cPtr, anchor);
   }
@@ -272,7 +272,7 @@ class PopupLayout : gobject.boxed.Boxed
         top = height of the top part of the shadow
         bottom = height of the bottom part of the shadow
   */
-  void setShadowWidth(int left, int right, int top, int bottom)
+  void setShadowWidth(int left, int right, int top, int bottom) nothrow
   {
     gdk_popup_layout_set_shadow_width(cast(GdkPopupLayout*)this._cPtr, left, right, top, bottom);
   }
@@ -283,7 +283,7 @@ class PopupLayout : gobject.boxed.Boxed
       Params:
         anchor = the new popup surface anchor
   */
-  void setSurfaceAnchor(gdk.types.Gravity anchor)
+  void setSurfaceAnchor(gdk.types.Gravity anchor) nothrow
   {
     gdk_popup_layout_set_surface_anchor(cast(GdkPopupLayout*)this._cPtr, anchor);
   }

@@ -72,26 +72,26 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_progress_bar_get_type != &gidSymbolNotFound ? gtk_progress_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ProgressBar self()
+  override ProgressBar self() nothrow
   {
     return this;
   }
@@ -100,7 +100,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Get builder for [gtk.progress_bar.ProgressBar]
       Returns: New builder object
   */
-  static ProgressBarGidBuilder builder()
+  static ProgressBarGidBuilder builder() nothrow
   {
     return new ProgressBarGidBuilder;
   }
@@ -117,7 +117,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
         only enough space to display the ellipsis ("..."). Another means to set a
         progress bar's width is [gtk.widget.Widget.setSizeRequest].
   */
-  @property pango.types.EllipsizeMode ellipsize()
+  @property pango.types.EllipsizeMode ellipsize() nothrow
   {
     return getEllipsize();
   }
@@ -135,7 +135,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
           only enough space to display the ellipsis ("..."). Another means to set a
           progress bar's width is [gtk.widget.Widget.setSizeRequest].
   */
-  @property void ellipsize(pango.types.EllipsizeMode propval)
+  @property void ellipsize(pango.types.EllipsizeMode propval) nothrow
   {
     setEllipsize(propval);
   }
@@ -144,7 +144,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Get `fraction` property.
       Returns: The fraction of total work that has been completed.
   */
-  @property double fraction()
+  @property double fraction() nothrow
   {
     return getFraction();
   }
@@ -154,7 +154,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Params:
         propval = The fraction of total work that has been completed.
   */
-  @property void fraction(double propval)
+  @property void fraction(double propval) nothrow
   {
     setFraction(propval);
   }
@@ -163,7 +163,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Get `inverted` property.
       Returns: Invert the direction in which the progress bar grows.
   */
-  @property bool inverted()
+  @property bool inverted() nothrow
   {
     return getInverted();
   }
@@ -173,7 +173,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Params:
         propval = Invert the direction in which the progress bar grows.
   */
-  @property void inverted(bool propval)
+  @property void inverted(bool propval) nothrow
   {
     setInverted(propval);
   }
@@ -182,7 +182,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Get `pulseStep` property.
       Returns: The fraction of total progress to move the bounding block when pulsed.
   */
-  @property double pulseStep()
+  @property double pulseStep() nothrow
   {
     return getPulseStep();
   }
@@ -192,7 +192,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Params:
         propval = The fraction of total progress to move the bounding block when pulsed.
   */
-  @property void pulseStep(double propval)
+  @property void pulseStep(double propval) nothrow
   {
     setPulseStep(propval);
   }
@@ -210,7 +210,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
         (even if the actual text is blank), set [gtk.progress_bar.ProgressBar.showText]
         to true and [gtk.progress_bar.ProgressBar.text] to the empty string (not null).
   */
-  @property bool showText()
+  @property bool showText() nothrow
   {
     return getShowText();
   }
@@ -229,7 +229,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
           (even if the actual text is blank), set [gtk.progress_bar.ProgressBar.showText]
           to true and [gtk.progress_bar.ProgressBar.text] to the empty string (not null).
   */
-  @property void showText(bool propval)
+  @property void showText(bool propval) nothrow
   {
     setShowText(propval);
   }
@@ -238,7 +238,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Get `text` property.
       Returns: Text to be displayed in the progress bar.
   */
-  @property string text()
+  @property string text() nothrow
   {
     return getText();
   }
@@ -248,7 +248,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Params:
         propval = Text to be displayed in the progress bar.
   */
-  @property void text(string propval)
+  @property void text(string propval) nothrow
   {
     setText(propval);
   }
@@ -260,7 +260,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Creates a new [gtk.progress_bar.ProgressBar].
       Returns: a [gtk.progress_bar.ProgressBar].
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_progress_bar_new();
@@ -273,7 +273,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       See [gtk.progress_bar.ProgressBar.setEllipsize].
       Returns: [pango.types.EllipsizeMode]
   */
-  pango.types.EllipsizeMode getEllipsize()
+  pango.types.EllipsizeMode getEllipsize() nothrow
   {
     PangoEllipsizeMode _cretval;
     _cretval = gtk_progress_bar_get_ellipsize(cast(GtkProgressBar*)this._cPtr);
@@ -285,7 +285,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Returns the current fraction of the task that’s been completed.
       Returns: a fraction from 0.0 to 1.0
   */
-  double getFraction()
+  double getFraction() nothrow
   {
     double _retval;
     _retval = gtk_progress_bar_get_fraction(cast(GtkProgressBar*)this._cPtr);
@@ -296,7 +296,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Returns whether the progress bar is inverted.
       Returns: true if the progress bar is inverted
   */
-  bool getInverted()
+  bool getInverted() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_progress_bar_get_inverted(cast(GtkProgressBar*)this._cPtr);
@@ -309,7 +309,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       See [gtk.progress_bar.ProgressBar.setPulseStep].
       Returns: a fraction from 0.0 to 1.0
   */
-  double getPulseStep()
+  double getPulseStep() nothrow
   {
     double _retval;
     _retval = gtk_progress_bar_get_pulse_step(cast(GtkProgressBar*)this._cPtr);
@@ -322,7 +322,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       See [gtk.progress_bar.ProgressBar.setShowText].
       Returns: true if text is shown in the progress bar
   */
-  bool getShowText()
+  bool getShowText() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_progress_bar_get_show_text(cast(GtkProgressBar*)this._cPtr);
@@ -336,7 +336,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       so will become invalid if you change the text in the progress bar.
       Returns: the text
   */
-  string getText()
+  string getText() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_progress_bar_get_text(cast(GtkProgressBar*)this._cPtr);
@@ -352,7 +352,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       causes the block to move by a little bit (the amount of movement
       per pulse is determined by [gtk.progress_bar.ProgressBar.setPulseStep]).
   */
-  void pulse()
+  void pulse() nothrow
   {
     gtk_progress_bar_pulse(cast(GtkProgressBar*)this._cPtr);
   }
@@ -366,7 +366,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Params:
         mode = a [pango.types.EllipsizeMode]
   */
-  void setEllipsize(pango.types.EllipsizeMode mode)
+  void setEllipsize(pango.types.EllipsizeMode mode) nothrow
   {
     gtk_progress_bar_set_ellipsize(cast(GtkProgressBar*)this._cPtr, mode);
   }
@@ -380,7 +380,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Params:
         fraction = fraction of the task that’s been completed
   */
-  void setFraction(double fraction)
+  void setFraction(double fraction) nothrow
   {
     gtk_progress_bar_set_fraction(cast(GtkProgressBar*)this._cPtr, fraction);
   }
@@ -394,7 +394,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Params:
         inverted = true to invert the progress bar
   */
-  void setInverted(bool inverted)
+  void setInverted(bool inverted) nothrow
   {
     gtk_progress_bar_set_inverted(cast(GtkProgressBar*)this._cPtr, inverted);
   }
@@ -409,7 +409,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Params:
         fraction = fraction between 0.0 and 1.0
   */
-  void setPulseStep(double fraction)
+  void setPulseStep(double fraction) nothrow
   {
     gtk_progress_bar_set_pulse_step(cast(GtkProgressBar*)this._cPtr, fraction);
   }
@@ -428,7 +428,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Params:
         showText = whether to show text
   */
-  void setShowText(bool showText)
+  void setShowText(bool showText) nothrow
   {
     gtk_progress_bar_set_show_text(cast(GtkProgressBar*)this._cPtr, showText);
   }
@@ -449,7 +449,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Params:
         text = a UTF-8 string
   */
-  void setText(string text = null)
+  void setText(string text = null) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_progress_bar_set_text(cast(GtkProgressBar*)this._cPtr, _text);
@@ -477,7 +477,7 @@ class ProgressBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
           progress bar's width is [gtk.widget.Widget.setSizeRequest].
       Returns: Builder instance for fluent chaining
   */
-  T ellipsize(pango.types.EllipsizeMode propval)
+  T ellipsize(pango.types.EllipsizeMode propval) nothrow
   {
     return setProperty("ellipsize", propval);
   }
@@ -488,7 +488,7 @@ class ProgressBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
         propval = The fraction of total work that has been completed.
       Returns: Builder instance for fluent chaining
   */
-  T fraction(double propval)
+  T fraction(double propval) nothrow
   {
     return setProperty("fraction", propval);
   }
@@ -499,7 +499,7 @@ class ProgressBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
         propval = Invert the direction in which the progress bar grows.
       Returns: Builder instance for fluent chaining
   */
-  T inverted(bool propval)
+  T inverted(bool propval) nothrow
   {
     return setProperty("inverted", propval);
   }
@@ -510,7 +510,7 @@ class ProgressBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
         propval = The fraction of total progress to move the bounding block when pulsed.
       Returns: Builder instance for fluent chaining
   */
-  T pulseStep(double propval)
+  T pulseStep(double propval) nothrow
   {
     return setProperty("pulse-step", propval);
   }
@@ -530,7 +530,7 @@ class ProgressBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
           to true and [gtk.progress_bar.ProgressBar.text] to the empty string (not null).
       Returns: Builder instance for fluent chaining
   */
-  T showText(bool propval)
+  T showText(bool propval) nothrow
   {
     return setProperty("show-text", propval);
   }
@@ -541,7 +541,7 @@ class ProgressBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
         propval = Text to be displayed in the progress bar.
       Returns: Builder instance for fluent chaining
   */
-  T text(string propval)
+  T text(string propval) nothrow
   {
     return setProperty("text", propval);
   }
@@ -554,7 +554,7 @@ final class ProgressBarGidBuilder : ProgressBarGidBuilderImpl!ProgressBarGidBuil
       Create object from builder.
       Returns: New object
   */
-  ProgressBar build()
+  ProgressBar build() nothrow
   {
     return new ProgressBar(cast(void*)createGObject(ProgressBar._getGType), No.Take);
   }

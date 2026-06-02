@@ -42,32 +42,32 @@ class ValueArray : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_value_array_get_type != &gidSymbolNotFound ? g_value_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ValueArray self()
+  override ValueArray self() nothrow
   {
     return this;
   }
@@ -76,7 +76,7 @@ class ValueArray : gobject.boxed.Boxed
       Get `nValues` field.
       Returns: number of values contained in the array
   */
-  @property uint nValues()
+  @property uint nValues() nothrow
   {
     return (cast(GValueArray*)this._cPtr).nValues;
   }
@@ -86,7 +86,7 @@ class ValueArray : gobject.boxed.Boxed
       Params:
         propval = number of values contained in the array
   */
-  @property void nValues(uint propval)
+  @property void nValues(uint propval) nothrow
   {
     (cast(GValueArray*)this._cPtr).nValues = propval;
   }
@@ -95,7 +95,7 @@ class ValueArray : gobject.boxed.Boxed
       Get `values` field.
       Returns: array of values
   */
-  @property gobject.value.Value values()
+  @property gobject.value.Value values() nothrow
   {
     return cToD!(gobject.value.Value)(cast(void*)(cast(GValueArray*)this._cPtr).values);
   }
@@ -105,7 +105,7 @@ class ValueArray : gobject.boxed.Boxed
       Params:
         propval = array of values
   */
-  @property void values(gobject.value.Value propval)
+  @property void values(gobject.value.Value propval) nothrow
   {
     cValueFree!(gobject.value.Value)(cast(void*)(cast(GValueArray*)this._cPtr).values);
     dToC(propval, cast(void*)&(cast(GValueArray*)this._cPtr).values);
@@ -122,7 +122,7 @@ class ValueArray : gobject.boxed.Boxed
   
       Deprecated: Use #GArray and [glib.array.Array.sizedNew] instead.
   */
-  this(uint nPrealloced)
+  this(uint nPrealloced) nothrow
   {
     GValueArray* _cretval;
     _cretval = g_value_array_new(nPrealloced);
@@ -139,7 +139,7 @@ class ValueArray : gobject.boxed.Boxed
   
       Deprecated: Use #GArray and g_array_append_val() instead.
   */
-  gobject.value_array.ValueArray append(gobject.value.Value value = null)
+  gobject.value_array.ValueArray append(gobject.value.Value value = null) nothrow
   {
     GValueArray* _cretval;
     _cretval = g_value_array_append(cast(GValueArray*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -154,7 +154,7 @@ class ValueArray : gobject.boxed.Boxed
   
       Deprecated: Use #GArray and [glib.array.Array.ref_] instead.
   */
-  gobject.value_array.ValueArray copy()
+  gobject.value_array.ValueArray copy() nothrow
   {
     GValueArray* _cretval;
     _cretval = g_value_array_copy(cast(const(GValueArray)*)this._cPtr);
@@ -171,7 +171,7 @@ class ValueArray : gobject.boxed.Boxed
   
       Deprecated: Use g_array_index() instead.
   */
-  gobject.value.Value getNth(uint index)
+  gobject.value.Value getNth(uint index) nothrow
   {
     GValue* _cretval;
     _cretval = g_value_array_get_nth(cast(GValueArray*)this._cPtr, index);
@@ -190,7 +190,7 @@ class ValueArray : gobject.boxed.Boxed
   
       Deprecated: Use #GArray and g_array_insert_val() instead.
   */
-  gobject.value_array.ValueArray insert(uint index, gobject.value.Value value = null)
+  gobject.value_array.ValueArray insert(uint index, gobject.value.Value value = null) nothrow
   {
     GValueArray* _cretval;
     _cretval = g_value_array_insert(cast(GValueArray*)this._cPtr, index, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -208,7 +208,7 @@ class ValueArray : gobject.boxed.Boxed
   
       Deprecated: Use #GArray and g_array_prepend_val() instead.
   */
-  gobject.value_array.ValueArray prepend(gobject.value.Value value = null)
+  gobject.value_array.ValueArray prepend(gobject.value.Value value = null) nothrow
   {
     GValueArray* _cretval;
     _cretval = g_value_array_prepend(cast(GValueArray*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -226,7 +226,7 @@ class ValueArray : gobject.boxed.Boxed
   
       Deprecated: Use #GArray and [glib.array.Array.removeIndex] instead.
   */
-  gobject.value_array.ValueArray remove(uint index)
+  gobject.value_array.ValueArray remove(uint index) nothrow
   {
     GValueArray* _cretval;
     _cretval = g_value_array_remove(cast(GValueArray*)this._cPtr, index);
@@ -247,13 +247,21 @@ class ValueArray : gobject.boxed.Boxed
   
       Deprecated: Use #GArray and [glib.array.Array.sortWithData].
   */
-  gobject.value_array.ValueArray sort(glib.types.CompareDataFunc compareFunc)
+  gobject.value_array.ValueArray sort(glib.types.CompareDataFunc compareFunc) nothrow
   {
-    extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
+    extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      int _retval;
       auto _dlg = cast(glib.types.CompareDataFunc*)userData;
 
-      int _retval = (*_dlg)(a, b);
+      try
+      {
+        _retval = (*_dlg)(a, b);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.CompareDataFunc");
+      }
       return _retval;
     }
     auto _compareFuncCB = compareFunc ? &_compareFuncCallback : null;

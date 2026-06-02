@@ -30,26 +30,26 @@ class TlsDatabase : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_tls_database_get_type != &gidSymbolNotFound ? g_tls_database_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TlsDatabase self()
+  override TlsDatabase self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class TlsDatabase : gobject.object.ObjectWrap
       Get builder for [gio.tls_database.TlsDatabase]
       Returns: New builder object
   */
-  static TlsDatabaseGidBuilder builder()
+  static TlsDatabaseGidBuilder builder() nothrow
   {
     return new TlsDatabaseGidBuilder;
   }
@@ -78,7 +78,7 @@ class TlsDatabase : gobject.object.ObjectWrap
       Returns: a newly allocated string containing the
         handle.
   */
-  string createCertificateHandle(gio.tls_certificate.TlsCertificate certificate)
+  string createCertificateHandle(gio.tls_certificate.TlsCertificate certificate) nothrow
   {
     char* _cretval;
     _cretval = g_tls_database_create_certificate_handle(cast(GTlsDatabase*)this._cPtr, certificate ? cast(GTlsCertificate*)certificate._cPtr(No.Dup) : null);
@@ -132,14 +132,21 @@ class TlsDatabase : gobject.object.ObjectWrap
         cancellable = a #GCancellable, or null
         callback = callback to call when the operation completes
   */
-  void lookupCertificateForHandleAsync(string handle, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void lookupCertificateForHandleAsync(string handle, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _handle = handle.toCString(No.Alloc);
@@ -224,14 +231,21 @@ class TlsDatabase : gobject.object.ObjectWrap
         cancellable = a #GCancellable, or null
         callback = callback to call when the operation completes
   */
-  void lookupCertificateIssuerAsync(gio.tls_certificate.TlsCertificate certificate, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void lookupCertificateIssuerAsync(gio.tls_certificate.TlsCertificate certificate, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -302,14 +316,21 @@ class TlsDatabase : gobject.object.ObjectWrap
         cancellable = a #GCancellable, or null
         callback = callback to call when the operation completes
   */
-  void lookupCertificatesIssuedByAsync(ubyte[] issuerRawDn, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void lookupCertificatesIssuedByAsync(ubyte[] issuerRawDn, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _issuerRawDn = gByteArrayFromD(issuerRawDn);
@@ -438,14 +459,21 @@ class TlsDatabase : gobject.object.ObjectWrap
         cancellable = a #GCancellable, or null
         callback = callback to call when the operation completes
   */
-  void verifyChainAsync(gio.tls_certificate.TlsCertificate chain, string purpose, gio.socket_connectable.SocketConnectable identity, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseVerifyFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void verifyChainAsync(gio.tls_certificate.TlsCertificate chain, string purpose, gio.socket_connectable.SocketConnectable identity, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseVerifyFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _purpose = purpose.toCString(No.Alloc);
@@ -496,7 +524,7 @@ final class TlsDatabaseGidBuilder : TlsDatabaseGidBuilderImpl!TlsDatabaseGidBuil
       Create object from builder.
       Returns: New object
   */
-  TlsDatabase build()
+  TlsDatabase build() nothrow
   {
     return new TlsDatabase(cast(void*)createGObject(TlsDatabase._getGType), No.Take);
   }

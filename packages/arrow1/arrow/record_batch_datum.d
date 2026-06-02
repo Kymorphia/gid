@@ -16,26 +16,26 @@ class RecordBatchDatum : arrow.datum.Datum
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_record_batch_datum_get_type != &gidSymbolNotFound ? garrow_record_batch_datum_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RecordBatchDatum self()
+  override RecordBatchDatum self() nothrow
   {
     return this;
   }
@@ -44,19 +44,19 @@ class RecordBatchDatum : arrow.datum.Datum
       Get builder for [arrow.record_batch_datum.RecordBatchDatum]
       Returns: New builder object
   */
-  static RecordBatchDatumGidBuilder builder()
+  static RecordBatchDatumGidBuilder builder() nothrow
   {
     return new RecordBatchDatumGidBuilder;
   }
 
   /** */
-  @property arrow.record_batch.RecordBatch value()
+  @property arrow.record_batch.RecordBatch value() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.record_batch.RecordBatch)("value");
   }
 
   /** */
-  this(arrow.record_batch.RecordBatch value)
+  this(arrow.record_batch.RecordBatch value) nothrow
   {
     GArrowRecordBatchDatum* _cretval;
     _cretval = garrow_record_batch_datum_new(value ? cast(GArrowRecordBatch*)value._cPtr(No.Dup) : null);
@@ -69,7 +69,7 @@ class RecordBatchDatumGidBuilderImpl(T) : arrow.datum.DatumGidBuilderImpl!T
 {
 
   /** */
-  T value(arrow.record_batch.RecordBatch propval)
+  T value(arrow.record_batch.RecordBatch propval) nothrow
   {
     return setProperty("value", propval);
   }
@@ -82,7 +82,7 @@ final class RecordBatchDatumGidBuilder : RecordBatchDatumGidBuilderImpl!RecordBa
       Create object from builder.
       Returns: New object
   */
-  RecordBatchDatum build()
+  RecordBatchDatum build() nothrow
   {
     return new RecordBatchDatum(cast(void*)createGObject(RecordBatchDatum._getGType), Yes.Take);
   }

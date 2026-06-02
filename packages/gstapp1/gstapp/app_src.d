@@ -89,26 +89,26 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_app_src_get_type != &gidSymbolNotFound ? gst_app_src_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AppSrc self()
+  override AppSrc self() nothrow
   {
     return this;
   }
@@ -117,7 +117,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Get builder for [gstapp.app_src.AppSrc]
       Returns: New builder object
   */
-  static AppSrcGidBuilder builder()
+  static AppSrcGidBuilder builder() nothrow
   {
     return new AppSrcGidBuilder;
   }
@@ -128,7 +128,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         block any further push-buffer calls until the amount of queued bytes drops
         below the max-bytes limit.
   */
-  @property bool block()
+  @property bool block() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("block");
   }
@@ -140,7 +140,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
           block any further push-buffer calls until the amount of queued bytes drops
           below the max-bytes limit.
   */
-  @property void block(bool propval)
+  @property void block(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("block", propval);
   }
@@ -150,7 +150,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Returns: The GstCaps that will negotiated downstream and will be put
         on outgoing buffers.
   */
-  @property gst.caps.Caps caps()
+  @property gst.caps.Caps caps() nothrow
   {
     return getCaps();
   }
@@ -161,7 +161,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         propval = The GstCaps that will negotiated downstream and will be put
           on outgoing buffers.
   */
-  @property void caps(gst.caps.Caps propval)
+  @property void caps(gst.caps.Caps propval) nothrow
   {
     setCaps(propval);
   }
@@ -170,7 +170,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Get `currentLevelBuffers` property.
       Returns: The number of currently queued buffers inside appsrc.
   */
-  @property ulong currentLevelBuffers()
+  @property ulong currentLevelBuffers() nothrow
   {
     return getCurrentLevelBuffers();
   }
@@ -179,7 +179,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Get `currentLevelBytes` property.
       Returns: The number of currently queued bytes inside appsrc.
   */
-  @property ulong currentLevelBytes()
+  @property ulong currentLevelBytes() nothrow
   {
     return getCurrentLevelBytes();
   }
@@ -188,7 +188,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Get `currentLevelTime` property.
       Returns: The amount of currently queued time inside appsrc.
   */
-  @property ulong currentLevelTime()
+  @property ulong currentLevelTime() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("current-level-time");
   }
@@ -198,7 +198,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Returns: The total duration in nanoseconds of the data stream. If the total duration is known, it
         is recommended to configure it with this property.
   */
-  @property ulong duration()
+  @property ulong duration() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("duration");
   }
@@ -209,7 +209,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         propval = The total duration in nanoseconds of the data stream. If the total duration is known, it
           is recommended to configure it with this property.
   */
-  @property void duration(ulong propval)
+  @property void duration(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("duration", propval);
   }
@@ -220,7 +220,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         This option is by default enabled for backwards compatibility reasons but
         can disabled when needed because signal emission is expensive.
   */
-  @property bool emitSignals()
+  @property bool emitSignals() nothrow
   {
     return getEmitSignals();
   }
@@ -232,7 +232,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
           This option is by default enabled for backwards compatibility reasons but
           can disabled when needed because signal emission is expensive.
   */
-  @property void emitSignals(bool propval)
+  @property void emitSignals(bool propval) nothrow
   {
     setEmitSignals(propval);
   }
@@ -242,7 +242,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Returns: The format to use for segment events. When the source is producing
         timestamped buffers this property should be set to GST_FORMAT_TIME.
   */
-  @property gst.types.Format format()
+  @property gst.types.Format format() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gst.types.Format)("format");
   }
@@ -253,7 +253,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         propval = The format to use for segment events. When the source is producing
           timestamped buffers this property should be set to GST_FORMAT_TIME.
   */
-  @property void format(gst.types.Format propval)
+  @property void format(gst.types.Format propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gst.types.Format)("format", propval);
   }
@@ -269,7 +269,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         GstAppSrc::format should be time. However, possibly #GstAppSrc can support
         other formats.
   */
-  @property bool handleSegmentChange()
+  @property bool handleSegmentChange() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("handle-segment-change");
   }
@@ -286,7 +286,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
           GstAppSrc::format should be time. However, possibly #GstAppSrc can support
           other formats.
   */
-  @property void handleSegmentChange(bool propval)
+  @property void handleSegmentChange(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("handle-segment-change", propval);
   }
@@ -296,7 +296,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Returns: Instruct the source to behave like a live source. This includes that it
         will only push out buffers in the PLAYING state.
   */
-  override @property bool isLive()
+  override @property bool isLive() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("is-live");
   }
@@ -309,7 +309,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         propval = Instruct the source to behave like a live source. This includes that it
           will only push out buffers in the PLAYING state.
   */
-  @property void isLive(bool propval)
+  @property void isLive(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("is-live", propval);
   }
@@ -321,7 +321,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         full. The selected type defines whether to drop the oldest or new
         buffers.
   */
-  @property gstapp.types.AppLeakyType leakyType()
+  @property gstapp.types.AppLeakyType leakyType() nothrow
   {
     return getLeakyType();
   }
@@ -334,7 +334,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
           full. The selected type defines whether to drop the oldest or new
           buffers.
   */
-  @property void leakyType(gstapp.types.AppLeakyType propval)
+  @property void leakyType(gstapp.types.AppLeakyType propval) nothrow
   {
     setLeakyType(propval);
   }
@@ -345,7 +345,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         After the maximum amount of buffers are queued, appsrc will emit the
         "enough-data" signal.
   */
-  @property ulong maxBuffers()
+  @property ulong maxBuffers() nothrow
   {
     return getMaxBuffers();
   }
@@ -357,7 +357,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
           After the maximum amount of buffers are queued, appsrc will emit the
           "enough-data" signal.
   */
-  @property void maxBuffers(ulong propval)
+  @property void maxBuffers(ulong propval) nothrow
   {
     setMaxBuffers(propval);
   }
@@ -368,7 +368,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         After the maximum amount of bytes are queued, appsrc will emit the
         "enough-data" signal.
   */
-  @property ulong maxBytes()
+  @property ulong maxBytes() nothrow
   {
     return getMaxBytes();
   }
@@ -380,19 +380,19 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
           After the maximum amount of bytes are queued, appsrc will emit the
           "enough-data" signal.
   */
-  @property void maxBytes(ulong propval)
+  @property void maxBytes(ulong propval) nothrow
   {
     setMaxBytes(propval);
   }
 
   /** */
-  @property long maxLatency()
+  @property long maxLatency() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("max-latency");
   }
 
   /** */
-  @property void maxLatency(long propval)
+  @property void maxLatency(long propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(long)("max-latency", propval);
   }
@@ -403,7 +403,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         After the maximum amount of time are queued, appsrc will emit the
         "enough-data" signal.
   */
-  @property ulong maxTime()
+  @property ulong maxTime() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("max-time");
   }
@@ -415,7 +415,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
           After the maximum amount of time are queued, appsrc will emit the
           "enough-data" signal.
   */
-  @property void maxTime(ulong propval)
+  @property void maxTime(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("max-time", propval);
   }
@@ -425,7 +425,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Returns: The minimum latency of the source. A value of -1 will use the default
         latency calculations of #GstBaseSrc.
   */
-  @property long minLatency()
+  @property long minLatency() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("min-latency");
   }
@@ -436,7 +436,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         propval = The minimum latency of the source. A value of -1 will use the default
           latency calculations of #GstBaseSrc.
   */
-  @property void minLatency(long propval)
+  @property void minLatency(long propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(long)("min-latency", propval);
   }
@@ -446,7 +446,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Returns: Make appsrc emit the "need-data" signal when the amount of bytes in the
         queue drops below this percentage of max-bytes.
   */
-  @property uint minPercent()
+  @property uint minPercent() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("min-percent");
   }
@@ -457,7 +457,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         propval = Make appsrc emit the "need-data" signal when the amount of bytes in the
           queue drops below this percentage of max-bytes.
   */
-  @property void minPercent(uint propval)
+  @property void minPercent(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("min-percent", propval);
   }
@@ -467,7 +467,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Returns: The total size in bytes of the data stream. If the total size is known, it
         is recommended to configure it with this property.
   */
-  @property long size()
+  @property long size() nothrow
   {
     return getSize();
   }
@@ -478,7 +478,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         propval = The total size in bytes of the data stream. If the total size is known, it
           is recommended to configure it with this property.
   */
-  @property void size(long propval)
+  @property void size(long propval) nothrow
   {
     setSize(propval);
   }
@@ -488,7 +488,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Returns: The type of stream that this source is producing.  For seekable streams the
         application should connect to the seek-data signal.
   */
-  @property gstapp.types.AppStreamType streamType()
+  @property gstapp.types.AppStreamType streamType() nothrow
   {
     return getStreamType();
   }
@@ -499,7 +499,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         propval = The type of stream that this source is producing.  For seekable streams the
           application should connect to the seek-data signal.
   */
-  @property void streamType(gstapp.types.AppStreamType propval)
+  @property void streamType(gstapp.types.AppStreamType propval) nothrow
   {
     setStreamType(propval);
   }
@@ -512,7 +512,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Returns: #GST_FLOW_OK when the EOS was successfully queued.
         #GST_FLOW_FLUSHING when appsrc is not PAUSED or PLAYING.
   */
-  gst.types.FlowReturn endOfStream()
+  gst.types.FlowReturn endOfStream() nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_app_src_end_of_stream(cast(GstAppSrc*)this._cPtr);
@@ -524,7 +524,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Get the configured caps on appsrc.
       Returns: the #GstCaps produced by the source. gst_caps_unref() after usage.
   */
-  gst.caps.Caps getCaps()
+  gst.caps.Caps getCaps() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_app_src_get_caps(cast(GstAppSrc*)this._cPtr);
@@ -536,7 +536,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Get the number of currently queued buffers inside appsrc.
       Returns: The number of currently queued buffers.
   */
-  ulong getCurrentLevelBuffers()
+  ulong getCurrentLevelBuffers() nothrow
   {
     ulong _retval;
     _retval = gst_app_src_get_current_level_buffers(cast(GstAppSrc*)this._cPtr);
@@ -547,7 +547,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Get the number of currently queued bytes inside appsrc.
       Returns: The number of currently queued bytes.
   */
-  ulong getCurrentLevelBytes()
+  ulong getCurrentLevelBytes() nothrow
   {
     ulong _retval;
     _retval = gst_app_src_get_current_level_bytes(cast(GstAppSrc*)this._cPtr);
@@ -558,7 +558,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Get the amount of currently queued time inside appsrc.
       Returns: The amount of currently queued time.
   */
-  gst.types.ClockTime getCurrentLevelTime()
+  gst.types.ClockTime getCurrentLevelTime() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_app_src_get_current_level_time(cast(GstAppSrc*)this._cPtr);
@@ -570,7 +570,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       not known.
       Returns: the duration of the stream previously set with [gstapp.app_src.AppSrc.setDuration];
   */
-  gst.types.ClockTime getDuration()
+  gst.types.ClockTime getDuration() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_app_src_get_duration(cast(GstAppSrc*)this._cPtr);
@@ -582,7 +582,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Returns: true if appsrc is emitting the "new-preroll" and "new-buffer"
         signals.
   */
-  bool getEmitSignals()
+  bool getEmitSignals() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_app_src_get_emit_signals(cast(GstAppSrc*)this._cPtr);
@@ -596,7 +596,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         min = the min latency
         max = the max latency
   */
-  void getLatency(out ulong min, out ulong max)
+  void getLatency(out ulong min, out ulong max) nothrow
   {
     gst_app_src_get_latency(cast(GstAppSrc*)this._cPtr, cast(ulong*)&min, cast(ulong*)&max);
   }
@@ -606,7 +606,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       for more details.
       Returns: The currently set #GstAppLeakyType.
   */
-  gstapp.types.AppLeakyType getLeakyType()
+  gstapp.types.AppLeakyType getLeakyType() nothrow
   {
     GstAppLeakyType _cretval;
     _cretval = gst_app_src_get_leaky_type(cast(GstAppSrc*)this._cPtr);
@@ -618,7 +618,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Get the maximum amount of buffers that can be queued in appsrc.
       Returns: The maximum amount of buffers that can be queued.
   */
-  ulong getMaxBuffers()
+  ulong getMaxBuffers() nothrow
   {
     ulong _retval;
     _retval = gst_app_src_get_max_buffers(cast(GstAppSrc*)this._cPtr);
@@ -629,7 +629,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Get the maximum amount of bytes that can be queued in appsrc.
       Returns: The maximum amount of bytes that can be queued.
   */
-  ulong getMaxBytes()
+  ulong getMaxBytes() nothrow
   {
     ulong _retval;
     _retval = gst_app_src_get_max_bytes(cast(GstAppSrc*)this._cPtr);
@@ -640,7 +640,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Get the maximum amount of time that can be queued in appsrc.
       Returns: The maximum amount of time that can be queued.
   */
-  gst.types.ClockTime getMaxTime()
+  gst.types.ClockTime getMaxTime() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_app_src_get_max_time(cast(GstAppSrc*)this._cPtr);
@@ -652,7 +652,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       not known.
       Returns: the size of the stream previously set with [gstapp.app_src.AppSrc.setSize];
   */
-  long getSize()
+  long getSize() nothrow
   {
     long _retval;
     _retval = gst_app_src_get_size(cast(GstAppSrc*)this._cPtr);
@@ -664,7 +664,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       with [gstapp.app_src.AppSrc.setStreamType].
       Returns: the stream type.
   */
-  gstapp.types.AppStreamType getStreamType()
+  gstapp.types.AppStreamType getStreamType() nothrow
   {
     GstAppStreamType _cretval;
     _cretval = gst_app_src_get_stream_type(cast(GstAppSrc*)this._cPtr);
@@ -685,7 +685,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         #GST_FLOW_FLUSHING when appsrc is not PAUSED or PLAYING.
         #GST_FLOW_EOS when EOS occurred.
   */
-  gst.types.FlowReturn pushBuffer(gst.buffer.Buffer buffer)
+  gst.types.FlowReturn pushBuffer(gst.buffer.Buffer buffer) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_app_src_push_buffer(cast(GstAppSrc*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null);
@@ -707,7 +707,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         #GST_FLOW_FLUSHING when appsrc is not PAUSED or PLAYING.
         #GST_FLOW_EOS when EOS occurred.
   */
-  gst.types.FlowReturn pushBufferList(gst.buffer_list.BufferList bufferList)
+  gst.types.FlowReturn pushBufferList(gst.buffer_list.BufferList bufferList) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_app_src_push_buffer_list(cast(GstAppSrc*)this._cPtr, bufferList ? cast(GstBufferList*)bufferList._cPtr(Yes.Dup) : null);
@@ -734,7 +734,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         #GST_FLOW_FLUSHING when appsrc is not PAUSED or PLAYING.
         #GST_FLOW_EOS when EOS occurred.
   */
-  gst.types.FlowReturn pushSample(gst.sample.Sample sample)
+  gst.types.FlowReturn pushSample(gst.sample.Sample sample) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_app_src_push_sample(cast(GstAppSrc*)this._cPtr, sample ? cast(GstSample*)sample._cPtr(No.Dup) : null);
@@ -753,7 +753,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Params:
         caps = caps to set
   */
-  void setCaps(gst.caps.Caps caps = null)
+  void setCaps(gst.caps.Caps caps = null) nothrow
   {
     gst_app_src_set_caps(cast(GstAppSrc*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
   }
@@ -765,7 +765,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Params:
         duration = the duration to set
   */
-  void setDuration(gst.types.ClockTime duration)
+  void setDuration(gst.types.ClockTime duration) nothrow
   {
     gst_app_src_set_duration(cast(GstAppSrc*)this._cPtr, duration);
   }
@@ -778,7 +778,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Params:
         emit = the new state
   */
-  void setEmitSignals(bool emit)
+  void setEmitSignals(bool emit) nothrow
   {
     gst_app_src_set_emit_signals(cast(GstAppSrc*)this._cPtr, emit);
   }
@@ -791,7 +791,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         min = the min latency
         max = the max latency
   */
-  void setLatency(ulong min, ulong max)
+  void setLatency(ulong min, ulong max) nothrow
   {
     gst_app_src_set_latency(cast(GstAppSrc*)this._cPtr, min, max);
   }
@@ -805,7 +805,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Params:
         leaky = the #GstAppLeakyType
   */
-  void setLeakyType(gstapp.types.AppLeakyType leaky)
+  void setLeakyType(gstapp.types.AppLeakyType leaky) nothrow
   {
     gst_app_src_set_leaky_type(cast(GstAppSrc*)this._cPtr, leaky);
   }
@@ -818,7 +818,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Params:
         max = the maximum number of buffers to queue
   */
-  void setMaxBuffers(ulong max)
+  void setMaxBuffers(ulong max) nothrow
   {
     gst_app_src_set_max_buffers(cast(GstAppSrc*)this._cPtr, max);
   }
@@ -831,7 +831,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Params:
         max = the maximum number of bytes to queue
   */
-  void setMaxBytes(ulong max)
+  void setMaxBytes(ulong max) nothrow
   {
     gst_app_src_set_max_bytes(cast(GstAppSrc*)this._cPtr, max);
   }
@@ -844,7 +844,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Params:
         max = the maximum amonut of time to queue
   */
-  void setMaxTime(gst.types.ClockTime max)
+  void setMaxTime(gst.types.ClockTime max) nothrow
   {
     gst_app_src_set_max_time(cast(GstAppSrc*)this._cPtr, max);
   }
@@ -856,7 +856,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Params:
         size = the size to set
   */
-  void setSize(long size)
+  void setSize(long size) nothrow
   {
     gst_app_src_set_size(cast(GstAppSrc*)this._cPtr, size);
   }
@@ -870,7 +870,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Params:
         type = the new state
   */
-  void setStreamType(gstapp.types.AppStreamType type)
+  void setStreamType(gstapp.types.AppStreamType type) nothrow
   {
     gst_app_src_set_stream_type(cast(GstAppSrc*)this._cPtr, type);
   }
@@ -891,22 +891,30 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEndOfStream(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEndOfStream(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == gst.types.FlowReturn)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_src.AppSrc)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gst.types.FlowReturn _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstapp.app_src.AppSrc.endOfStream");
+      }
 
       setVal!(gst.types.FlowReturn)(_returnValue, _retval);
     }
@@ -932,13 +940,13 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEnoughData(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEnoughData(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_src.AppSrc)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -947,7 +955,14 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstapp.app_src.AppSrc.enoughData");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -978,14 +993,14 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNeedData(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNeedData(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstapp.app_src.AppSrc)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -997,7 +1012,14 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstapp.app_src.AppSrc.needData");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1030,18 +1052,19 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPushBuffer(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPushBuffer(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == gst.types.FlowReturn)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gst.buffer.Buffer)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstapp.app_src.AppSrc)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gst.types.FlowReturn _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1049,7 +1072,14 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstapp.app_src.AppSrc.pushBuffer");
+      }
 
       setVal!(gst.types.FlowReturn)(_returnValue, _retval);
     }
@@ -1084,18 +1114,19 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPushBufferList(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPushBufferList(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == gst.types.FlowReturn)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gst.buffer_list.BufferList)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstapp.app_src.AppSrc)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gst.types.FlowReturn _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1103,7 +1134,14 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstapp.app_src.AppSrc.pushBufferList");
+      }
 
       setVal!(gst.types.FlowReturn)(_returnValue, _retval);
     }
@@ -1142,18 +1180,19 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPushSample(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPushSample(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == gst.types.FlowReturn)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gst.sample.Sample)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstapp.app_src.AppSrc)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gst.types.FlowReturn _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1161,7 +1200,14 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstapp.app_src.AppSrc.pushSample");
+      }
 
       setVal!(gst.types.FlowReturn)(_returnValue, _retval);
     }
@@ -1190,18 +1236,19 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSeekData(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSeekData(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == ulong)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstapp.app_src.AppSrc)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1209,7 +1256,14 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstapp.app_src.AppSrc.seekData");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1233,7 +1287,7 @@ class AppSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T, gst.ur
           below the max-bytes limit.
       Returns: Builder instance for fluent chaining
   */
-  T block(bool propval)
+  T block(bool propval) nothrow
   {
     return setProperty("block", propval);
   }
@@ -1245,7 +1299,7 @@ class AppSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T, gst.ur
           on outgoing buffers.
       Returns: Builder instance for fluent chaining
   */
-  T caps(gst.caps.Caps propval)
+  T caps(gst.caps.Caps propval) nothrow
   {
     return setProperty("caps", propval);
   }
@@ -1257,7 +1311,7 @@ class AppSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T, gst.ur
           is recommended to configure it with this property.
       Returns: Builder instance for fluent chaining
   */
-  T duration(ulong propval)
+  T duration(ulong propval) nothrow
   {
     return setProperty("duration", propval);
   }
@@ -1270,7 +1324,7 @@ class AppSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T, gst.ur
           can disabled when needed because signal emission is expensive.
       Returns: Builder instance for fluent chaining
   */
-  T emitSignals(bool propval)
+  T emitSignals(bool propval) nothrow
   {
     return setProperty("emit-signals", propval);
   }
@@ -1282,7 +1336,7 @@ class AppSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T, gst.ur
           timestamped buffers this property should be set to GST_FORMAT_TIME.
       Returns: Builder instance for fluent chaining
   */
-  T format(gst.types.Format propval)
+  T format(gst.types.Format propval) nothrow
   {
     return setProperty("format", propval);
   }
@@ -1300,7 +1354,7 @@ class AppSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T, gst.ur
           other formats.
       Returns: Builder instance for fluent chaining
   */
-  T handleSegmentChange(bool propval)
+  T handleSegmentChange(bool propval) nothrow
   {
     return setProperty("handle-segment-change", propval);
   }
@@ -1312,7 +1366,7 @@ class AppSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T, gst.ur
           will only push out buffers in the PLAYING state.
       Returns: Builder instance for fluent chaining
   */
-  T isLive(bool propval)
+  T isLive(bool propval) nothrow
   {
     return setProperty("is-live", propval);
   }
@@ -1326,7 +1380,7 @@ class AppSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T, gst.ur
           buffers.
       Returns: Builder instance for fluent chaining
   */
-  T leakyType(gstapp.types.AppLeakyType propval)
+  T leakyType(gstapp.types.AppLeakyType propval) nothrow
   {
     return setProperty("leaky-type", propval);
   }
@@ -1339,7 +1393,7 @@ class AppSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T, gst.ur
           "enough-data" signal.
       Returns: Builder instance for fluent chaining
   */
-  T maxBuffers(ulong propval)
+  T maxBuffers(ulong propval) nothrow
   {
     return setProperty("max-buffers", propval);
   }
@@ -1352,13 +1406,13 @@ class AppSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T, gst.ur
           "enough-data" signal.
       Returns: Builder instance for fluent chaining
   */
-  T maxBytes(ulong propval)
+  T maxBytes(ulong propval) nothrow
   {
     return setProperty("max-bytes", propval);
   }
 
   /** */
-  T maxLatency(long propval)
+  T maxLatency(long propval) nothrow
   {
     return setProperty("max-latency", propval);
   }
@@ -1371,7 +1425,7 @@ class AppSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T, gst.ur
           "enough-data" signal.
       Returns: Builder instance for fluent chaining
   */
-  T maxTime(ulong propval)
+  T maxTime(ulong propval) nothrow
   {
     return setProperty("max-time", propval);
   }
@@ -1383,7 +1437,7 @@ class AppSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T, gst.ur
           latency calculations of #GstBaseSrc.
       Returns: Builder instance for fluent chaining
   */
-  T minLatency(long propval)
+  T minLatency(long propval) nothrow
   {
     return setProperty("min-latency", propval);
   }
@@ -1395,7 +1449,7 @@ class AppSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T, gst.ur
           queue drops below this percentage of max-bytes.
       Returns: Builder instance for fluent chaining
   */
-  T minPercent(uint propval)
+  T minPercent(uint propval) nothrow
   {
     return setProperty("min-percent", propval);
   }
@@ -1407,7 +1461,7 @@ class AppSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T, gst.ur
           is recommended to configure it with this property.
       Returns: Builder instance for fluent chaining
   */
-  T size(long propval)
+  T size(long propval) nothrow
   {
     return setProperty("size", propval);
   }
@@ -1419,7 +1473,7 @@ class AppSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T, gst.ur
           application should connect to the seek-data signal.
       Returns: Builder instance for fluent chaining
   */
-  T streamType(gstapp.types.AppStreamType propval)
+  T streamType(gstapp.types.AppStreamType propval) nothrow
   {
     return setProperty("stream-type", propval);
   }
@@ -1432,7 +1486,7 @@ final class AppSrcGidBuilder : AppSrcGidBuilderImpl!AppSrcGidBuilder
       Create object from builder.
       Returns: New object
   */
-  AppSrc build()
+  AppSrc build() nothrow
   {
     return new AppSrc(cast(void*)createGObject(AppSrc._getGType), No.Take);
   }

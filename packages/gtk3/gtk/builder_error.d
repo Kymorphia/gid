@@ -14,7 +14,7 @@ struct BuilderError
   alias Enum = gtk.types.BuilderError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gtk_builder_error_quark();
@@ -24,12 +24,12 @@ struct BuilderError
 
 class BuildeException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gtk.builder_error.BuilderError.quark, cast(int)code, msg);
   }

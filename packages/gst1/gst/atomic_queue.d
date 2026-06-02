@@ -16,32 +16,32 @@ class AtomicQueue : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_atomic_queue_get_type != &gidSymbolNotFound ? gst_atomic_queue_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AtomicQueue self()
+  override AtomicQueue self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class AtomicQueue : gobject.boxed.Boxed
         initialSize = initial queue size
       Returns: a new #GstAtomicQueue
   */
-  this(uint initialSize)
+  this(uint initialSize) nothrow
   {
     GstAtomicQueue* _cretval;
     _cretval = gst_atomic_queue_new(initialSize);
@@ -65,7 +65,7 @@ class AtomicQueue : gobject.boxed.Boxed
       Get the amount of items in the queue.
       Returns: the number of elements in the queue.
   */
-  uint length()
+  uint length() nothrow
   {
     uint _retval;
     _retval = gst_atomic_queue_length(cast(GstAtomicQueue*)this._cPtr);
@@ -77,7 +77,7 @@ class AtomicQueue : gobject.boxed.Boxed
       Returns: the head element of queue or
         null when the queue is empty.
   */
-  void* peek()
+  void* peek() nothrow
   {
     auto _retval = gst_atomic_queue_peek(cast(GstAtomicQueue*)this._cPtr);
     return _retval;
@@ -88,7 +88,7 @@ class AtomicQueue : gobject.boxed.Boxed
       Returns: the head element of queue or null when
         the queue is empty.
   */
-  void* pop()
+  void* pop() nothrow
   {
     auto _retval = gst_atomic_queue_pop(cast(GstAtomicQueue*)this._cPtr);
     return _retval;
@@ -100,7 +100,7 @@ class AtomicQueue : gobject.boxed.Boxed
       Params:
         data = the data
   */
-  void push(void* data = null)
+  void push(void* data = null) nothrow
   {
     gst_atomic_queue_push(cast(GstAtomicQueue*)this._cPtr, data);
   }

@@ -16,11 +16,8 @@ class MIKEYPayloadKEMAC
   GstMIKEYPayloadKEMAC _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstsdp.mikeypayload_kemac.MIKEYPayloadKEMAC");
-
     _cInstance = *cast(GstMIKEYPayloadKEMAC*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class MIKEYPayloadKEMAC
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class MIKEYPayloadKEMAC
       Get `pt` field.
       Returns: the common #GstMIKEYPayload
   */
-  @property gstsdp.mikeypayload.MIKEYPayload pt()
+  @property gstsdp.mikeypayload.MIKEYPayload pt() nothrow
   {
     return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadKEMAC*)this._cPtr).pt);
   }
@@ -46,7 +43,7 @@ class MIKEYPayloadKEMAC
       Get `encAlg` field.
       Returns: the #GstMIKEYEncAlg
   */
-  @property gstsdp.types.MIKEYEncAlg encAlg()
+  @property gstsdp.types.MIKEYEncAlg encAlg() nothrow
   {
     return cast(gstsdp.types.MIKEYEncAlg)(cast(GstMIKEYPayloadKEMAC*)this._cPtr).encAlg;
   }
@@ -56,7 +53,7 @@ class MIKEYPayloadKEMAC
       Params:
         propval = the #GstMIKEYEncAlg
   */
-  @property void encAlg(gstsdp.types.MIKEYEncAlg propval)
+  @property void encAlg(gstsdp.types.MIKEYEncAlg propval) nothrow
   {
     (cast(GstMIKEYPayloadKEMAC*)this._cPtr).encAlg = cast(GstMIKEYEncAlg)propval;
   }
@@ -65,7 +62,7 @@ class MIKEYPayloadKEMAC
       Get `macAlg` field.
       Returns: the #GstMIKEYMacAlg
   */
-  @property gstsdp.types.MIKEYMacAlg macAlg()
+  @property gstsdp.types.MIKEYMacAlg macAlg() nothrow
   {
     return cast(gstsdp.types.MIKEYMacAlg)(cast(GstMIKEYPayloadKEMAC*)this._cPtr).macAlg;
   }
@@ -75,7 +72,7 @@ class MIKEYPayloadKEMAC
       Params:
         propval = the #GstMIKEYMacAlg
   */
-  @property void macAlg(gstsdp.types.MIKEYMacAlg propval)
+  @property void macAlg(gstsdp.types.MIKEYMacAlg propval) nothrow
   {
     (cast(GstMIKEYPayloadKEMAC*)this._cPtr).macAlg = cast(GstMIKEYMacAlg)propval;
   }

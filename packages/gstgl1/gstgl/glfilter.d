@@ -21,26 +21,26 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_filter_get_type != &gidSymbolNotFound ? gst_gl_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLFilter self()
+  override GLFilter self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
       Get builder for [gstgl.glfilter.GLFilter]
       Returns: New builder object
   */
-  static GLFilterGidBuilder builder()
+  static GLFilterGidBuilder builder() nothrow
   {
     return new GLFilterGidBuilder;
   }
@@ -60,7 +60,7 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
       Vertex Array Object for drawing a fullscreen quad.  Framebuffer state,
       any shaders, viewport state, etc must be setup by the caller.
   */
-  void drawFullscreenQuad()
+  void drawFullscreenQuad() nothrow
   {
     gst_gl_filter_draw_fullscreen_quad(cast(GstGLFilter*)this._cPtr);
   }
@@ -73,7 +73,7 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
         output = an output buffer
       Returns: whether the transformation succeeded
   */
-  bool filterTexture(gst.buffer.Buffer input, gst.buffer.Buffer output)
+  bool filterTexture(gst.buffer.Buffer input, gst.buffer.Buffer output) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_filter_filter_texture(cast(GstGLFilter*)this._cPtr, input ? cast(GstBuffer*)input._cPtr(No.Dup) : null, output ? cast(GstBuffer*)output._cPtr(No.Dup) : null);
@@ -89,14 +89,21 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
         func = the function to transform input into output. called with data
       Returns: the return value of func
   */
-  bool renderToTarget(gstgl.glmemory.GLMemory input, gstgl.glmemory.GLMemory output, gstgl.types.GLFilterRenderFunc func)
+  bool renderToTarget(gstgl.glmemory.GLMemory input, gstgl.glmemory.GLMemory output, gstgl.types.GLFilterRenderFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(GstGLFilter* filter, GstGLMemory* inTex, void* userData)
+    extern(C) gboolean _funcCallback(GstGLFilter* filter, GstGLMemory* inTex, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gstgl.types.GLFilterRenderFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstgl.glfilter.GLFilter)(cast(void*)filter, No.Take), inTex ? new gstgl.glmemory.GLMemory(cast(void*)inTex, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstgl.glfilter.GLFilter)(cast(void*)filter, No.Take), inTex ? new gstgl.glmemory.GLMemory(cast(void*)inTex, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstgl.types.GLFilterRenderFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -118,7 +125,7 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
         output = the output texture
         shader = the shader to use.
   */
-  void renderToTargetWithShader(gstgl.glmemory.GLMemory input, gstgl.glmemory.GLMemory output, gstgl.glshader.GLShader shader)
+  void renderToTargetWithShader(gstgl.glmemory.GLMemory input, gstgl.glmemory.GLMemory output, gstgl.glshader.GLShader shader) nothrow
   {
     gst_gl_filter_render_to_target_with_shader(cast(GstGLFilter*)this._cPtr, input ? cast(GstGLMemory*)input._cPtr(No.Dup) : null, output ? cast(GstGLMemory*)output._cPtr(No.Dup) : null, shader ? cast(GstGLShader*)shader._cPtr(No.Dup) : null);
   }
@@ -136,7 +143,7 @@ final class GLFilterGidBuilder : GLFilterGidBuilderImpl!GLFilterGidBuilder
       Create object from builder.
       Returns: New object
   */
-  GLFilter build()
+  GLFilter build() nothrow
   {
     return new GLFilter(cast(void*)createGObject(GLFilter._getGType), No.Take);
   }

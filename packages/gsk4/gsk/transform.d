@@ -29,38 +29,38 @@ class Transform : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_transform_get_type != &gidSymbolNotFound ? gsk_transform_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Transform self()
+  override Transform self() nothrow
   {
     return this;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_new();
@@ -74,7 +74,7 @@ class Transform : gobject.boxed.Boxed
         second = the second transform
       Returns: true if the two transforms perform the same operation
   */
-  bool equal(gsk.transform.Transform second = null)
+  bool equal(gsk.transform.Transform second = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)gsk_transform_equal(cast(GskTransform*)this._cPtr, second ? cast(GskTransform*)second._cPtr(No.Dup) : null);
@@ -85,7 +85,7 @@ class Transform : gobject.boxed.Boxed
       Returns the category this transform belongs to.
       Returns: The category of the transform
   */
-  gsk.types.TransformCategory getCategory()
+  gsk.types.TransformCategory getCategory() nothrow
   {
     GskTransformCategory _cretval;
     _cretval = gsk_transform_get_category(cast(GskTransform*)this._cPtr);
@@ -103,7 +103,7 @@ class Transform : gobject.boxed.Boxed
       before calling this function.
       Returns: The inverted transform
   */
-  gsk.transform.Transform invert()
+  gsk.transform.Transform invert() nothrow
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_invert(cast(GskTransform*)this._cPtr);
@@ -118,7 +118,7 @@ class Transform : gobject.boxed.Boxed
         matrix = the matrix to multiply next with
       Returns: The new transform
   */
-  gsk.transform.Transform matrix(graphene.matrix.Matrix matrix)
+  gsk.transform.Transform matrix(graphene.matrix.Matrix matrix) nothrow
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_matrix(cast(GskTransform*)this._cPtr, matrix ? cast(const(graphene_matrix_t)*)matrix._cPtr(No.Dup) : null);
@@ -140,7 +140,7 @@ class Transform : gobject.boxed.Boxed
             perspective effect.
       Returns: The new transform
   */
-  gsk.transform.Transform perspective(float depth)
+  gsk.transform.Transform perspective(float depth) nothrow
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_perspective(cast(GskTransform*)this._cPtr, depth);
@@ -158,7 +158,7 @@ class Transform : gobject.boxed.Boxed
       Params:
         string_ = The string to print into
   */
-  void print(glib.string_.String string_)
+  void print(glib.string_.String string_) nothrow
   {
     gsk_transform_print(cast(GskTransform*)this._cPtr, string_ ? cast(GString*)string_._cPtr(No.Dup) : null);
   }
@@ -171,7 +171,7 @@ class Transform : gobject.boxed.Boxed
         angle = the rotation angle, in degrees (clockwise)
       Returns: The new transform
   */
-  gsk.transform.Transform rotate(float angle)
+  gsk.transform.Transform rotate(float angle) nothrow
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_rotate(cast(GskTransform*)this._cPtr, angle);
@@ -189,7 +189,7 @@ class Transform : gobject.boxed.Boxed
         axis = The rotation axis
       Returns: The new transform
   */
-  gsk.transform.Transform rotate3d(float angle, graphene.vec3.Vec3 axis)
+  gsk.transform.Transform rotate3d(float angle, graphene.vec3.Vec3 axis) nothrow
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_rotate_3d(cast(GskTransform*)this._cPtr, angle, axis ? cast(const(graphene_vec3_t)*)axis._cPtr(No.Dup) : null);
@@ -207,7 +207,7 @@ class Transform : gobject.boxed.Boxed
         factorY = scaling factor on the Y axis
       Returns: The new transform
   */
-  gsk.transform.Transform scale(float factorX, float factorY)
+  gsk.transform.Transform scale(float factorX, float factorY) nothrow
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_scale(cast(GskTransform*)this._cPtr, factorX, factorY);
@@ -224,7 +224,7 @@ class Transform : gobject.boxed.Boxed
         factorZ = scaling factor on the Z axis
       Returns: The new transform
   */
-  gsk.transform.Transform scale3d(float factorX, float factorY, float factorZ)
+  gsk.transform.Transform scale3d(float factorX, float factorY, float factorZ) nothrow
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_scale_3d(cast(GskTransform*)this._cPtr, factorX, factorY, factorZ);
@@ -240,7 +240,7 @@ class Transform : gobject.boxed.Boxed
         skewY = skew factor, in degrees, on the Y axis
       Returns: The new transform
   */
-  gsk.transform.Transform skew(float skewX, float skewY)
+  gsk.transform.Transform skew(float skewX, float skewY) nothrow
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_skew(cast(GskTransform*)this._cPtr, skewX, skewY);
@@ -275,7 +275,7 @@ class Transform : gobject.boxed.Boxed
         outDx = return location for the x0 member
         outDy = return location for the y0 member
   */
-  void to2d(out float outXx, out float outYx, out float outXy, out float outYy, out float outDx, out float outDy)
+  void to2d(out float outXx, out float outYx, out float outXy, out float outYy, out float outDx, out float outDy) nothrow
   {
     gsk_transform_to_2d(cast(GskTransform*)this._cPtr, cast(float*)&outXx, cast(float*)&outYx, cast(float*)&outXy, cast(float*)&outYy, cast(float*)&outDx, cast(float*)&outDy);
   }
@@ -315,7 +315,7 @@ class Transform : gobject.boxed.Boxed
         outDy = return location for the translation
             in the y direction
   */
-  void to2dComponents(out float outSkewX, out float outSkewY, out float outScaleX, out float outScaleY, out float outAngle, out float outDx, out float outDy)
+  void to2dComponents(out float outSkewX, out float outSkewY, out float outScaleX, out float outScaleY, out float outAngle, out float outDx, out float outDy) nothrow
   {
     gsk_transform_to_2d_components(cast(GskTransform*)this._cPtr, cast(float*)&outSkewX, cast(float*)&outSkewY, cast(float*)&outScaleX, cast(float*)&outScaleY, cast(float*)&outAngle, cast(float*)&outDx, cast(float*)&outDy);
   }
@@ -347,7 +347,7 @@ class Transform : gobject.boxed.Boxed
         outDy = return location for the translation
             in the y direction
   */
-  void toAffine(out float outScaleX, out float outScaleY, out float outDx, out float outDy)
+  void toAffine(out float outScaleX, out float outScaleY, out float outDx, out float outDy) nothrow
   {
     gsk_transform_to_affine(cast(GskTransform*)this._cPtr, cast(float*)&outScaleX, cast(float*)&outScaleY, cast(float*)&outDx, cast(float*)&outDy);
   }
@@ -360,7 +360,7 @@ class Transform : gobject.boxed.Boxed
       Params:
         outMatrix = The matrix to set
   */
-  void toMatrix(out graphene.matrix.Matrix outMatrix)
+  void toMatrix(out graphene.matrix.Matrix outMatrix) nothrow
   {
     graphene_matrix_t _outMatrix;
     gsk_transform_to_matrix(cast(GskTransform*)this._cPtr, &_outMatrix);
@@ -375,7 +375,7 @@ class Transform : gobject.boxed.Boxed
       This is a wrapper around [gsk.transform.Transform.print].
       Returns: A new string for self
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gsk_transform_to_string(cast(GskTransform*)this._cPtr);
@@ -399,7 +399,7 @@ class Transform : gobject.boxed.Boxed
         outDy = return location for the translation
             in the y direction
   */
-  void toTranslate(out float outDx, out float outDy)
+  void toTranslate(out float outDx, out float outDy) nothrow
   {
     gsk_transform_to_translate(cast(GskTransform*)this._cPtr, cast(float*)&outDx, cast(float*)&outDy);
   }
@@ -411,7 +411,7 @@ class Transform : gobject.boxed.Boxed
         other = Transform to apply
       Returns: The new transform
   */
-  gsk.transform.Transform transform(gsk.transform.Transform other = null)
+  gsk.transform.Transform transform(gsk.transform.Transform other = null) nothrow
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_transform(cast(GskTransform*)this._cPtr, other ? cast(GskTransform*)other._cPtr(No.Dup) : null);
@@ -429,7 +429,7 @@ class Transform : gobject.boxed.Boxed
         outRect = return location for the bounds
             of the transformed rectangle
   */
-  void transformBounds(graphene.rect.Rect rect, out graphene.rect.Rect outRect)
+  void transformBounds(graphene.rect.Rect rect, out graphene.rect.Rect outRect) nothrow
   {
     graphene_rect_t _outRect;
     gsk_transform_transform_bounds(cast(GskTransform*)this._cPtr, rect ? cast(const(graphene_rect_t)*)rect._cPtr(No.Dup) : null, &_outRect);
@@ -444,7 +444,7 @@ class Transform : gobject.boxed.Boxed
         outPoint = return location for
             the transformed point
   */
-  void transformPoint(graphene.point.Point point, out graphene.point.Point outPoint)
+  void transformPoint(graphene.point.Point point, out graphene.point.Point outPoint) nothrow
   {
     gsk_transform_transform_point(cast(GskTransform*)this._cPtr, cast(const(graphene_point_t)*)&point, cast(graphene_point_t*)&outPoint);
   }
@@ -456,7 +456,7 @@ class Transform : gobject.boxed.Boxed
         point = the point to translate the transform by
       Returns: The new transform
   */
-  gsk.transform.Transform translate(graphene.point.Point point)
+  gsk.transform.Transform translate(graphene.point.Point point) nothrow
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_translate(cast(GskTransform*)this._cPtr, cast(const(graphene_point_t)*)&point);
@@ -471,7 +471,7 @@ class Transform : gobject.boxed.Boxed
         point = the point to translate the transform by
       Returns: The new transform
   */
-  gsk.transform.Transform translate3d(graphene.point3_d.Point3D point)
+  gsk.transform.Transform translate3d(graphene.point3_d.Point3D point) nothrow
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_translate_3d(cast(GskTransform*)this._cPtr, cast(const(graphene_point3d_t)*)&point);
@@ -494,7 +494,7 @@ class Transform : gobject.boxed.Boxed
         outTransform = The location to put the transform in
       Returns: true if string described a valid transform.
   */
-  static bool parse(string string_, out gsk.transform.Transform outTransform)
+  static bool parse(string string_, out gsk.transform.Transform outTransform) nothrow
   {
     bool _retval;
     const(char)* _string_ = string_.toCString(No.Alloc);

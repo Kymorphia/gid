@@ -21,26 +21,26 @@ class Statement : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_statement_get_type != &gidSymbolNotFound ? gda_statement_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Statement self()
+  override Statement self() nothrow
   {
     return this;
   }
@@ -49,19 +49,19 @@ class Statement : gobject.object.ObjectWrap
       Get builder for [gda.statement.Statement]
       Returns: New builder object
   */
-  static StatementGidBuilder builder()
+  static StatementGidBuilder builder() nothrow
   {
     return new StatementGidBuilder;
   }
 
   /** */
-  @property void* structure()
+  @property void* structure() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(void*)("structure");
   }
 
   /** */
-  @property void structure(void* propval)
+  @property void structure(void* propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(void*)("structure", propval);
   }
@@ -70,7 +70,7 @@ class Statement : gobject.object.ObjectWrap
       Creates a new #GdaStatement object
       Returns: the new object
   */
-  this()
+  this() nothrow
   {
     GdaStatement* _cretval;
     _cretval = gda_statement_new();
@@ -78,7 +78,7 @@ class Statement : gobject.object.ObjectWrap
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_statement_error_quark();
@@ -127,7 +127,7 @@ class Statement : gobject.object.ObjectWrap
       Copy constructor
       Returns: a the new copy of orig
   */
-  gda.statement.Statement copy()
+  gda.statement.Statement copy() nothrow
   {
     GdaStatement* _cretval;
     _cretval = gda_statement_copy(cast(GdaStatement*)this._cPtr);
@@ -163,7 +163,7 @@ class Statement : gobject.object.ObjectWrap
       stmt does not hold any statement
       Returns: the statement type
   */
-  gda.types.SqlStatementType getStatementType()
+  gda.types.SqlStatementType getStatementType() nothrow
   {
     GdaSqlStatementType _cretval;
     _cretval = gda_statement_get_statement_type(cast(GdaStatement*)this._cPtr);
@@ -176,7 +176,7 @@ class Statement : gobject.object.ObjectWrap
       useless as such.
       Returns: TRUE if executing stmt does nothing
   */
-  bool isUseless()
+  bool isUseless() nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_statement_is_useless(cast(GdaStatement*)this._cPtr);
@@ -206,7 +206,7 @@ class Statement : gobject.object.ObjectWrap
       Creates a string representing the contents of stmt.
       Returns: a string containing the serialized version of stmt
   */
-  string serialize()
+  string serialize() nothrow
   {
     char* _cretval;
     _cretval = gda_statement_serialize(cast(GdaStatement*)this._cPtr);
@@ -284,7 +284,7 @@ class Statement : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChecked(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChecked(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.connection.Connection)))
@@ -292,7 +292,7 @@ class Statement : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gda.statement.Statement)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -307,7 +307,14 @@ class Statement : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.statement.Statement.checked");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -329,13 +336,13 @@ class Statement : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectReset(T)(T callback, Flag!"After" after = No.After)
+  gulong connectReset(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.statement.Statement)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -344,7 +351,14 @@ class Statement : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.statement.Statement.reset");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -357,7 +371,7 @@ class StatementGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T structure(void* propval)
+  T structure(void* propval) nothrow
   {
     return setProperty("structure", propval);
   }
@@ -370,7 +384,7 @@ final class StatementGidBuilder : StatementGidBuilderImpl!StatementGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Statement build()
+  Statement build() nothrow
   {
     return new Statement(cast(void*)createGObject(Statement._getGType), Yes.Take);
   }
@@ -378,12 +392,12 @@ final class StatementGidBuilder : StatementGidBuilderImpl!StatementGidBuilder
 
 class StatementException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.statement.Statement.errorQuark, cast(int)code, msg);
   }

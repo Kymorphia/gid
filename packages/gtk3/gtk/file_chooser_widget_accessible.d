@@ -19,26 +19,26 @@ class FileChooserWidgetAccessible : gtk.container_accessible.ContainerAccessible
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_file_chooser_widget_accessible_get_type != &gidSymbolNotFound ? gtk_file_chooser_widget_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileChooserWidgetAccessible self()
+  override FileChooserWidgetAccessible self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class FileChooserWidgetAccessible : gtk.container_accessible.ContainerAccessible
       Get builder for [gtk.file_chooser_widget_accessible.FileChooserWidgetAccessible]
       Returns: New builder object
   */
-  static FileChooserWidgetAccessibleGidBuilder builder()
+  static FileChooserWidgetAccessibleGidBuilder builder() nothrow
   {
     return new FileChooserWidgetAccessibleGidBuilder;
   }
@@ -72,7 +72,7 @@ final class FileChooserWidgetAccessibleGidBuilder : FileChooserWidgetAccessibleG
       Create object from builder.
       Returns: New object
   */
-  FileChooserWidgetAccessible build()
+  FileChooserWidgetAccessible build() nothrow
   {
     return new FileChooserWidgetAccessible(cast(void*)createGObject(FileChooserWidgetAccessible._getGType), No.Take);
   }

@@ -18,7 +18,7 @@ struct RTSPVersion
         version_ = a #GstRTSPVersion
       Returns: a string representation of version.
   */
-  static string asText(gstrtsp.types.RTSPVersion version_)
+  static string asText(gstrtsp.types.RTSPVersion version_) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_rtsp_version_as_text(version_);

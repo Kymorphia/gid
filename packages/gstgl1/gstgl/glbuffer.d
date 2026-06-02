@@ -25,7 +25,7 @@ class GLBuffer : gobject.boxed.Boxed
         target = the OpenGL target of this texture for binding purposes
         usageHints = the OpenGL usage hints this buffer was created with
   */
-  this(uint id = uint.init, uint target = uint.init, uint usageHints = uint.init)
+  this(uint id = uint.init, uint target = uint.init, uint usageHints = uint.init) nothrow
   {
     super(gMalloc(GstGLBuffer.sizeof), Yes.Take);
     this.id = id;
@@ -34,32 +34,32 @@ class GLBuffer : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_buffer_get_type != &gidSymbolNotFound ? gst_gl_buffer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLBuffer self()
+  override GLBuffer self() nothrow
   {
     return this;
   }
@@ -68,7 +68,7 @@ class GLBuffer : gobject.boxed.Boxed
       Get `mem` field.
       Returns: the parent object
   */
-  @property gstgl.glbase_memory.GLBaseMemory mem()
+  @property gstgl.glbase_memory.GLBaseMemory mem() nothrow
   {
     return cToD!(gstgl.glbase_memory.GLBaseMemory)(cast(void*)&(cast(GstGLBuffer*)this._cPtr).mem);
   }
@@ -77,7 +77,7 @@ class GLBuffer : gobject.boxed.Boxed
       Get `id` field.
       Returns: the buffer id for this memory
   */
-  @property uint id()
+  @property uint id() nothrow
   {
     return (cast(GstGLBuffer*)this._cPtr).id;
   }
@@ -87,7 +87,7 @@ class GLBuffer : gobject.boxed.Boxed
       Params:
         propval = the buffer id for this memory
   */
-  @property void id(uint propval)
+  @property void id(uint propval) nothrow
   {
     (cast(GstGLBuffer*)this._cPtr).id = propval;
   }
@@ -96,7 +96,7 @@ class GLBuffer : gobject.boxed.Boxed
       Get `target` field.
       Returns: the OpenGL target of this texture for binding purposes
   */
-  @property uint target()
+  @property uint target() nothrow
   {
     return (cast(GstGLBuffer*)this._cPtr).target;
   }
@@ -106,7 +106,7 @@ class GLBuffer : gobject.boxed.Boxed
       Params:
         propval = the OpenGL target of this texture for binding purposes
   */
-  @property void target(uint propval)
+  @property void target(uint propval) nothrow
   {
     (cast(GstGLBuffer*)this._cPtr).target = propval;
   }
@@ -115,7 +115,7 @@ class GLBuffer : gobject.boxed.Boxed
       Get `usageHints` field.
       Returns: the OpenGL usage hints this buffer was created with
   */
-  @property uint usageHints()
+  @property uint usageHints() nothrow
   {
     return (cast(GstGLBuffer*)this._cPtr).usageHints;
   }
@@ -125,7 +125,7 @@ class GLBuffer : gobject.boxed.Boxed
       Params:
         propval = the OpenGL usage hints this buffer was created with
   */
-  @property void usageHints(uint propval)
+  @property void usageHints(uint propval) nothrow
   {
     (cast(GstGLBuffer*)this._cPtr).usageHints = propval;
   }
@@ -134,7 +134,7 @@ class GLBuffer : gobject.boxed.Boxed
       Initializes the GL Buffer allocator. It is safe to call this function
       multiple times.  This must be called before any other #GstGLBuffer operation.
   */
-  static void initOnce()
+  static void initOnce() nothrow
   {
     gst_gl_buffer_init_once();
   }

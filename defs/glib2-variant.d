@@ -4,6 +4,7 @@ import glib.variant_builder;
 import glib.variant_type;
 
 import std.conv : to;
+import std.exception : assumeWontThrow;
 import std.traits : isSomeString, isTypeTuple;
 import std.typecons : Tuple;
 import std.variant : StdVariant = Variant;
@@ -16,7 +17,7 @@ class Variant
    *   T = The D type to create the variant from
    *   val = The value to assign
    */
-  this(T)(T val)
+  this(T)(T val) nothrow
     if (isTypeTuple!T && !is(T == void*))
   { // Somewhat counter-intuitive.. We don't "own" a reference, it is floating, so pass false to sink it.
     this(cast(void*)createVariant(val), No.Take);
@@ -28,7 +29,7 @@ class Variant
    *   T = The D types to create the variant from
    *   vals = The values to assign
    */
-  this(T...)(T vals)
+  this(T...)(T vals) nothrow
     if (isTypeTuple!T && vals.length > 1 && !is(T[0] == void*))
   {
     this(createVariant!T(vals), No.Take);
@@ -40,34 +41,40 @@ class Variant
    *   T = The D types to create the tuple variant from
    *   vals = The values to assign
    */
-  static Variant newTuple(T...)(T vals)
+  static Variant newTuple(T...)(T vals) nothrow
     if (isTypeTuple!T)
   {
     return new Variant(createVariantTuple!T(vals), No.Take);
   }
 
   /** */
-  override bool opEquals(Object other)
+  override bool opEquals(Object other) const nothrow
   {
     if (auto otherVariant = cast(Variant)other)
-      return equal(otherVariant);
-    else
-      return this.opEquals(other);
+      return (cast(Variant)this).equal(otherVariant);
+
+    return false;
   }
 
   /** */
-  override int opCmp(Object other)
+  override int opCmp(Object other) const nothrow
   {
     if (auto otherVariant = cast(Variant)other)
-      return compare(otherVariant);
-    else
-      return this.opCmp(other);
+      return (cast(Variant)this).compare(otherVariant);
+
+    return 1;
   }
 
   /** */
-  override string toString()
+  override size_t toHash() const @trusted nothrow
   {
-    return print(true);
+    return cast(size_t)g_variant_hash(cast(GVariant*)this._cInstancePtr);
+  }
+
+  /** */
+  override string toString() const nothrow
+  {
+    return (cast(Variant)this).print(true);
   }
 
   /**
@@ -76,9 +83,9 @@ class Variant
    *   T = The D type of the value to get
    * Returns: The single value of the Variant of type `T`
    */
-  T get(T)()
+  T get(T)() nothrow
   {
-    return getVal!T(cast(GVariant*)_cPtr);
+    return getVal!T(cast(GVariant*)_cInstancePtr);
   }
 
   /**
@@ -87,7 +94,7 @@ class Variant
    *   T = The D types of the values to get
    * Returns: A tuple containing the values from the Variant of the specified types
    */
-  auto get(T...)()
+  auto get(T...)() nothrow
     if (T.length > 1)
   {
     return getItems!T;
@@ -99,7 +106,7 @@ class Variant
    *   T = The D types of the values to get
    * Returns: A tuple containing the values from the Variant of the specified types
    */
-  auto getItems(T...)()
+  auto getItems(T...)() nothrow
   {
     Tuple!T vals;
 
@@ -117,7 +124,7 @@ class Variant
  *   val = The value to assign to the new Variant.
  * Returns: New variant C instance with floating reference
  */
-GVariant* createVariant(T)(T val)
+GVariant* createVariant(T)(T val) nothrow
 {
   static if (is(T == bool))
     return g_variant_new_boolean(val);
@@ -158,39 +165,44 @@ GVariant* createVariant(T)(T val)
     g_variant_builder_init(&builder, variantType);
     g_variant_type_free(variantType); // -- free
 
-    foreach (k, v; val)
-      g_variant_builder_add_value(&builder, g_variant_new_dict_entry(createVariant(k), createVariant(v))); // !! takes over floating reference of new GVariant
+    foreach (k; val.keys)
+      g_variant_builder_add_value(&builder, g_variant_new_dict_entry(createVariant(k), createVariant(val[k]))); // !! takes over floating reference of new GVariant
 
     return g_variant_builder_end(&builder);
   }
   else static if (is(T : Variant))
-    return g_variant_new_variant(cast(GVariant*)val._cPtr);
+    return g_variant_new_variant(cast(GVariant*)val._cInstancePtr);
   else static if (is(T == GVariant*))
     return g_variant_new_variant(val);
   else static if (is(T == StdVariant)) // std.variant.Variant (only basic types supported currently)
   {
-    if (val.type is typeid(bool))
-      return createVariant(val.get!bool);
-    else if (val.type is typeid(byte) || val.type is typeid(ubyte))
-      return createVariant(val.coerce!byte);
-    else if (val.type is typeid(short))
-      return createVariant(val.get!short);
-    else if (val.type is typeid(ushort))
-      return createVariant(val.get!ushort);
-    else if (val.type is typeid(int))
-      return createVariant(val.get!int);
-    else if (val.type is typeid(uint))
-      return createVariant(val.get!uint);
-    else if (val.type is typeid(long))
-      return createVariant(val.get!long);
-    else if (val.type is typeid(ulong))
-      return createVariant(val.get!ulong);
-    else if (val.type is typeid(float) || val.type is typeid(double))
-      return createVariant(val.coerce!double);
-    else if (val.type is typeid(string) || val.type is typeid(wstring) || val.type is typeid(dstring))
-      return createVariant(val.coerce!string);
-    else
-      assert(false, "Variant.createVariant does not support D Variant type " ~ val.type.to!string);
+    try
+    {
+      if (val.type is typeid(bool))
+        return createVariant(val.get!bool);
+      else if (val.type is typeid(byte) || val.type is typeid(ubyte))
+        return createVariant(val.coerce!byte);
+      else if (val.type is typeid(short))
+        return createVariant(val.get!short);
+      else if (val.type is typeid(ushort))
+        return createVariant(val.get!ushort);
+      else if (val.type is typeid(int))
+        return createVariant(val.get!int);
+      else if (val.type is typeid(uint))
+        return createVariant(val.get!uint);
+      else if (val.type is typeid(long))
+        return createVariant(val.get!long);
+      else if (val.type is typeid(ulong))
+        return createVariant(val.get!ulong);
+      else if (val.type is typeid(float) || val.type is typeid(double))
+        return createVariant(val.coerce!double);
+      else if (val.type is typeid(string) || val.type is typeid(wstring) || val.type is typeid(dstring))
+        return createVariant(val.coerce!string);
+      else
+        assert(false, "Variant.createVariant does not support D Variant type " ~ val.type.to!string);
+    }
+    catch (Exception)
+      assert(false, "Variant.createVariant exception with std.variant.Variant value get"); // Should not happen
   }
   else static if (isTypeTuple!T)
     return createVariant(val.expand);
@@ -205,7 +217,7 @@ GVariant* createVariant(T)(T val)
  *   vals = The values to assign
  * Returns: New variant C instance with floating reference
  */
-GVariant* createVariant(T...)(T vals)
+GVariant* createVariant(T...)(T vals) nothrow
   if (vals.length > 1)
 {
   return createVariantTuple!T(vals);
@@ -218,7 +230,7 @@ GVariant* createVariant(T...)(T vals)
  *   vals = The values to assign
  * Returns: New variant C instance with floating reference
  */
-GVariant* createVariantTuple(T...)(T vals)
+GVariant* createVariantTuple(T...)(T vals) nothrow
 {
   auto variantType = g_variant_type_new("r"); // ++ new
   GVariantBuilder builder;
@@ -238,7 +250,7 @@ GVariant* createVariantTuple(T...)(T vals)
  *   v = GVariant struct pointer
  * Returns: The single variant value of type `T`
  */
-T getVal(T)(GVariant* v)
+T getVal(T)(GVariant* v) nothrow
 {
   static if (is(T == bool))
     return g_variant_get_boolean(v);
@@ -330,7 +342,7 @@ T getVal(T)(GVariant* v)
  *   v = GVariant struct pointer
  * Returns: A tuple containing the values from the Variant of the specified types
  */
-auto getVal(T...)(GVariant* v)
+auto getVal(T...)(GVariant* v) nothrow
   if (T.length > 1)
 {
   return getValTuple!T(v);
@@ -343,7 +355,7 @@ auto getVal(T...)(GVariant* v)
  *   v = GVariant struct pointer
  * Returns: A tuple containing the values from the container Variant of the specified types
  */
-auto getValTuple(T...)(GVariant* v)
+auto getValTuple(T...)(GVariant* v) nothrow
 {
   Tuple!T vals;
 

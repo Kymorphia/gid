@@ -16,26 +16,26 @@ class Decimal32 : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal32_get_type != &gidSymbolNotFound ? garrow_decimal32_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Decimal32 self()
+  override Decimal32 self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class Decimal32 : gobject.object.ObjectWrap
       Get builder for [arrow.decimal32.Decimal32]
       Returns: New builder object
   */
-  static Decimal32GidBuilder builder()
+  static Decimal32GidBuilder builder() nothrow
   {
     return new Decimal32GidBuilder;
   }
 
   /** */
-  static arrow.decimal32.Decimal32 newInteger(long data)
+  static arrow.decimal32.Decimal32 newInteger(long data) nothrow
   {
     GArrowDecimal32* _cretval;
     _cretval = garrow_decimal32_new_integer(data);
@@ -74,13 +74,13 @@ class Decimal32 : gobject.object.ObjectWrap
   /**
       Computes the absolute value of the decimal destructively.
   */
-  void abs()
+  void abs() nothrow
   {
     garrow_decimal32_abs(cast(GArrowDecimal32*)this._cPtr);
   }
 
   /** */
-  arrow.decimal32.Decimal32 copy()
+  arrow.decimal32.Decimal32 copy() nothrow
   {
     GArrowDecimal32* _cretval;
     _cretval = garrow_decimal32_copy(cast(GArrowDecimal32*)this._cPtr);
@@ -103,7 +103,7 @@ class Decimal32 : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equal(arrow.decimal32.Decimal32 otherDecimal)
+  bool equal(arrow.decimal32.Decimal32 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal32_equal(cast(GArrowDecimal32*)this._cPtr, otherDecimal ? cast(GArrowDecimal32*)otherDecimal._cPtr(No.Dup) : null);
@@ -111,7 +111,7 @@ class Decimal32 : gobject.object.ObjectWrap
   }
 
   /** */
-  bool greaterThan(arrow.decimal32.Decimal32 otherDecimal)
+  bool greaterThan(arrow.decimal32.Decimal32 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal32_greater_than(cast(GArrowDecimal32*)this._cPtr, otherDecimal ? cast(GArrowDecimal32*)otherDecimal._cPtr(No.Dup) : null);
@@ -119,7 +119,7 @@ class Decimal32 : gobject.object.ObjectWrap
   }
 
   /** */
-  bool greaterThanOrEqual(arrow.decimal32.Decimal32 otherDecimal)
+  bool greaterThanOrEqual(arrow.decimal32.Decimal32 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal32_greater_than_or_equal(cast(GArrowDecimal32*)this._cPtr, otherDecimal ? cast(GArrowDecimal32*)otherDecimal._cPtr(No.Dup) : null);
@@ -127,7 +127,7 @@ class Decimal32 : gobject.object.ObjectWrap
   }
 
   /** */
-  bool lessThan(arrow.decimal32.Decimal32 otherDecimal)
+  bool lessThan(arrow.decimal32.Decimal32 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal32_less_than(cast(GArrowDecimal32*)this._cPtr, otherDecimal ? cast(GArrowDecimal32*)otherDecimal._cPtr(No.Dup) : null);
@@ -135,7 +135,7 @@ class Decimal32 : gobject.object.ObjectWrap
   }
 
   /** */
-  bool lessThanOrEqual(arrow.decimal32.Decimal32 otherDecimal)
+  bool lessThanOrEqual(arrow.decimal32.Decimal32 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal32_less_than_or_equal(cast(GArrowDecimal32*)this._cPtr, otherDecimal ? cast(GArrowDecimal32*)otherDecimal._cPtr(No.Dup) : null);
@@ -143,7 +143,7 @@ class Decimal32 : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.decimal32.Decimal32 minus(arrow.decimal32.Decimal32 right)
+  arrow.decimal32.Decimal32 minus(arrow.decimal32.Decimal32 right) nothrow
   {
     GArrowDecimal32* _cretval;
     _cretval = garrow_decimal32_minus(cast(GArrowDecimal32*)this._cPtr, right ? cast(GArrowDecimal32*)right._cPtr(No.Dup) : null);
@@ -152,7 +152,7 @@ class Decimal32 : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.decimal32.Decimal32 multiply(arrow.decimal32.Decimal32 right)
+  arrow.decimal32.Decimal32 multiply(arrow.decimal32.Decimal32 right) nothrow
   {
     GArrowDecimal32* _cretval;
     _cretval = garrow_decimal32_multiply(cast(GArrowDecimal32*)this._cPtr, right ? cast(GArrowDecimal32*)right._cPtr(No.Dup) : null);
@@ -163,13 +163,13 @@ class Decimal32 : gobject.object.ObjectWrap
   /**
       Negate the current value of the decimal destructively.
   */
-  void negate()
+  void negate() nothrow
   {
     garrow_decimal32_negate(cast(GArrowDecimal32*)this._cPtr);
   }
 
   /** */
-  bool notEqual(arrow.decimal32.Decimal32 otherDecimal)
+  bool notEqual(arrow.decimal32.Decimal32 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal32_not_equal(cast(GArrowDecimal32*)this._cPtr, otherDecimal ? cast(GArrowDecimal32*)otherDecimal._cPtr(No.Dup) : null);
@@ -177,7 +177,7 @@ class Decimal32 : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.decimal32.Decimal32 plus(arrow.decimal32.Decimal32 right)
+  arrow.decimal32.Decimal32 plus(arrow.decimal32.Decimal32 right) nothrow
   {
     GArrowDecimal32* _cretval;
     _cretval = garrow_decimal32_plus(cast(GArrowDecimal32*)this._cPtr, right ? cast(GArrowDecimal32*)right._cPtr(No.Dup) : null);
@@ -198,7 +198,7 @@ class Decimal32 : gobject.object.ObjectWrap
   }
 
   /** */
-  glib.bytes.Bytes toBytes()
+  glib.bytes.Bytes toBytes() nothrow
   {
     GBytes* _cretval;
     _cretval = garrow_decimal32_to_bytes(cast(GArrowDecimal32*)this._cPtr);
@@ -207,7 +207,7 @@ class Decimal32 : gobject.object.ObjectWrap
   }
 
   /** */
-  long toInteger()
+  long toInteger() nothrow
   {
     long _retval;
     _retval = garrow_decimal32_to_integer(cast(GArrowDecimal32*)this._cPtr);
@@ -215,7 +215,7 @@ class Decimal32 : gobject.object.ObjectWrap
   }
 
   /** */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = garrow_decimal32_to_string(cast(GArrowDecimal32*)this._cPtr);
@@ -224,7 +224,7 @@ class Decimal32 : gobject.object.ObjectWrap
   }
 
   /** */
-  string toStringScale(int scale)
+  string toStringScale(int scale) nothrow
   {
     char* _cretval;
     _cretval = garrow_decimal32_to_string_scale(cast(GArrowDecimal32*)this._cPtr, scale);
@@ -238,7 +238,7 @@ class Decimal32GidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T decimal32(void* propval)
+  T decimal32(void* propval) nothrow
   {
     return setProperty("decimal32", propval);
   }
@@ -251,7 +251,7 @@ final class Decimal32GidBuilder : Decimal32GidBuilderImpl!Decimal32GidBuilder
       Create object from builder.
       Returns: New object
   */
-  Decimal32 build()
+  Decimal32 build() nothrow
   {
     return new Decimal32(cast(void*)createGObject(Decimal32._getGType), No.Take);
   }

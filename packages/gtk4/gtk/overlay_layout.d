@@ -22,26 +22,26 @@ class OverlayLayout : gtk.layout_manager.LayoutManager
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_overlay_layout_get_type != &gidSymbolNotFound ? gtk_overlay_layout_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override OverlayLayout self()
+  override OverlayLayout self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class OverlayLayout : gtk.layout_manager.LayoutManager
       Get builder for [gtk.overlay_layout.OverlayLayout]
       Returns: New builder object
   */
-  static OverlayLayoutGidBuilder builder()
+  static OverlayLayoutGidBuilder builder() nothrow
   {
     return new OverlayLayoutGidBuilder;
   }
@@ -59,7 +59,7 @@ class OverlayLayout : gtk.layout_manager.LayoutManager
       Creates a new [gtk.overlay_layout.OverlayLayout] instance.
       Returns: the newly created instance
   */
-  this()
+  this() nothrow
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_overlay_layout_new();
@@ -79,7 +79,7 @@ final class OverlayLayoutGidBuilder : OverlayLayoutGidBuilderImpl!OverlayLayoutG
       Create object from builder.
       Returns: New object
   */
-  OverlayLayout build()
+  OverlayLayout build() nothrow
   {
     return new OverlayLayout(cast(void*)createGObject(OverlayLayout._getGType), Yes.Take);
   }

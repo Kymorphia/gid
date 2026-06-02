@@ -38,24 +38,21 @@ class StringChunk
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.string_chunk.StringChunk");
-
     _cInstancePtr = cast(GStringChunk*)ptr;
 
     owned = take;
   }
 
-  ~this()
+  ~this() nothrow
   {
-    if (owned)
+    if (owned && _cInstancePtr)
       g_string_chunk_free(_cInstancePtr);
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -65,7 +62,7 @@ class StringChunk
       After calling [glib.string_chunk.StringChunk.clear] it is not safe to
       access any of the strings which were contained within it.
   */
-  void clear()
+  void clear() nothrow
   {
     g_string_chunk_clear(cast(GStringChunk*)this._cPtr);
   }
@@ -88,7 +85,7 @@ class StringChunk
       Returns: a pointer to the copy of string within
             the #GStringChunk
   */
-  string insert(string string_)
+  string insert(string string_) nothrow
   {
     char* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
@@ -117,7 +114,7 @@ class StringChunk
       Returns: a pointer to the new or existing copy of string
             within the #GStringChunk
   */
-  string insertConst(string string_)
+  string insertConst(string string_) nothrow
   {
     char* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
@@ -143,7 +140,7 @@ class StringChunk
               nul-terminated string
       Returns: a pointer to the copy of string within the #GStringChunk
   */
-  string insertLen(string string_, ptrdiff_t len)
+  string insertLen(string string_, ptrdiff_t len) nothrow
   {
     char* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);

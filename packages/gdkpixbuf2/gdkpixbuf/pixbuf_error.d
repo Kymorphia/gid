@@ -14,7 +14,7 @@ struct PixbufError
   alias Enum = gdkpixbuf.types.PixbufError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gdk_pixbuf_error_quark();
@@ -24,12 +24,12 @@ struct PixbufError
 
 class PixbufException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gdkpixbuf.pixbuf_error.PixbufError.quark, cast(int)code, msg);
   }

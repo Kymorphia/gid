@@ -24,26 +24,26 @@ class Keymap : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_keymap_get_type != &gidSymbolNotFound ? gdk_keymap_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Keymap self()
+  override Keymap self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class Keymap : gobject.object.ObjectWrap
       Get builder for [gdk.keymap.Keymap]
       Returns: New builder object
   */
-  static KeymapGidBuilder builder()
+  static KeymapGidBuilder builder() nothrow
   {
     return new KeymapGidBuilder;
   }
@@ -63,7 +63,7 @@ class Keymap : gobject.object.ObjectWrap
   
       Deprecated: Use [gdk.keymap.Keymap.getForDisplay] instead
   */
-  static gdk.keymap.Keymap getDefault()
+  static gdk.keymap.Keymap getDefault() nothrow
   {
     GdkKeymap* _cretval;
     _cretval = gdk_keymap_get_default();
@@ -78,7 +78,7 @@ class Keymap : gobject.object.ObjectWrap
         display = the #GdkDisplay.
       Returns: the #GdkKeymap attached to display.
   */
-  static gdk.keymap.Keymap getForDisplay(gdk.display.Display display)
+  static gdk.keymap.Keymap getForDisplay(gdk.display.Display display) nothrow
   {
     GdkKeymap* _cretval;
     _cretval = gdk_keymap_get_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
@@ -101,7 +101,7 @@ class Keymap : gobject.object.ObjectWrap
       Params:
         state = pointer to the modifier mask to change
   */
-  void addVirtualModifiers(ref gdk.types.ModifierType state)
+  void addVirtualModifiers(ref gdk.types.ModifierType state) nothrow
   {
     gdk_keymap_add_virtual_modifiers(cast(GdkKeymap*)this._cPtr, &state);
   }
@@ -110,7 +110,7 @@ class Keymap : gobject.object.ObjectWrap
       Returns whether the Caps Lock modifer is locked.
       Returns: true if Caps Lock is on
   */
-  bool getCapsLockState()
+  bool getCapsLockState() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_keymap_get_caps_lock_state(cast(GdkKeymap*)this._cPtr);
@@ -123,7 +123,7 @@ class Keymap : gobject.object.ObjectWrap
           if it can determine the direction. [pango.types.Direction.Neutral]
           otherwise.
   */
-  pango.types.Direction getDirection()
+  pango.types.Direction getDirection() nothrow
   {
     PangoDirection _cretval;
     _cretval = gdk_keymap_get_direction(cast(GdkKeymap*)this._cPtr);
@@ -147,7 +147,7 @@ class Keymap : gobject.object.ObjectWrap
               location for array of keyvals, or null
       Returns: true if there were any entries
   */
-  bool getEntriesForKeycode(uint hardwareKeycode, out gdk.types.KeymapKey[] keys, out uint[] keyvals)
+  bool getEntriesForKeycode(uint hardwareKeycode, out gdk.types.KeymapKey[] keys, out uint[] keyvals) nothrow
   {
     bool _retval;
     int _nEntries;
@@ -182,7 +182,7 @@ class Keymap : gobject.object.ObjectWrap
               for an array of #GdkKeymapKey
       Returns: true if keys were found and returned
   */
-  bool getEntriesForKeyval(uint keyval, out gdk.types.KeymapKey[] keys)
+  bool getEntriesForKeyval(uint keyval, out gdk.types.KeymapKey[] keys) nothrow
   {
     bool _retval;
     int _nKeys;
@@ -209,7 +209,7 @@ class Keymap : gobject.object.ObjectWrap
         intent = the use case for the modifier mask
       Returns: the modifier mask used for intent.
   */
-  gdk.types.ModifierType getModifierMask(gdk.types.ModifierIntent intent)
+  gdk.types.ModifierType getModifierMask(gdk.types.ModifierIntent intent) nothrow
   {
     GdkModifierType _cretval;
     _cretval = gdk_keymap_get_modifier_mask(cast(GdkKeymap*)this._cPtr, intent);
@@ -221,7 +221,7 @@ class Keymap : gobject.object.ObjectWrap
       Returns the current modifier state.
       Returns: the current modifier state.
   */
-  uint getModifierState()
+  uint getModifierState() nothrow
   {
     uint _retval;
     _retval = gdk_keymap_get_modifier_state(cast(GdkKeymap*)this._cPtr);
@@ -232,7 +232,7 @@ class Keymap : gobject.object.ObjectWrap
       Returns whether the Num Lock modifer is locked.
       Returns: true if Num Lock is on
   */
-  bool getNumLockState()
+  bool getNumLockState() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_keymap_get_num_lock_state(cast(GdkKeymap*)this._cPtr);
@@ -243,7 +243,7 @@ class Keymap : gobject.object.ObjectWrap
       Returns whether the Scroll Lock modifer is locked.
       Returns: true if Scroll Lock is on
   */
-  bool getScrollLockState()
+  bool getScrollLockState() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_keymap_get_scroll_lock_state(cast(GdkKeymap*)this._cPtr);
@@ -255,7 +255,7 @@ class Keymap : gobject.object.ObjectWrap
       languages are in use.
       Returns: true if there are layouts in both directions, false otherwise
   */
-  bool haveBidiLayouts()
+  bool haveBidiLayouts() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_keymap_have_bidi_layouts(cast(GdkKeymap*)this._cPtr);
@@ -273,7 +273,7 @@ class Keymap : gobject.object.ObjectWrap
         key = a #GdkKeymapKey with keycode, group, and level initialized
       Returns: a keyval, or 0 if none was mapped to the given key
   */
-  uint lookupKey(gdk.types.KeymapKey key)
+  uint lookupKey(gdk.types.KeymapKey key) nothrow
   {
     uint _retval;
     _retval = gdk_keymap_lookup_key(cast(GdkKeymap*)this._cPtr, &key);
@@ -295,7 +295,7 @@ class Keymap : gobject.object.ObjectWrap
             if a virtual modifier is mapped to a non-virtual modifier that
             was already set in state.
   */
-  bool mapVirtualModifiers(ref gdk.types.ModifierType state)
+  bool mapVirtualModifiers(ref gdk.types.ModifierType state) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_keymap_map_virtual_modifiers(cast(GdkKeymap*)this._cPtr, &state);
@@ -363,7 +363,7 @@ class Keymap : gobject.object.ObjectWrap
               that were used to determine the group or level, or null
       Returns: true if there was a keyval bound to the keycode/state/group
   */
-  bool translateKeyboardState(uint hardwareKeycode, gdk.types.ModifierType state, int group, out uint keyval, out int effectiveGroup, out int level, out gdk.types.ModifierType consumedModifiers)
+  bool translateKeyboardState(uint hardwareKeycode, gdk.types.ModifierType state, int group, out uint keyval, out int effectiveGroup, out int level, out gdk.types.ModifierType consumedModifiers) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_keymap_translate_keyboard_state(cast(GdkKeymap*)this._cPtr, hardwareKeycode, state, group, cast(uint*)&keyval, cast(int*)&effectiveGroup, cast(int*)&level, &consumedModifiers);
@@ -386,13 +386,13 @@ class Keymap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDirectionChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDirectionChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.keymap.Keymap)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -401,7 +401,14 @@ class Keymap : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.keymap.Keymap.directionChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -424,13 +431,13 @@ class Keymap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectKeysChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectKeysChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.keymap.Keymap)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -439,7 +446,14 @@ class Keymap : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.keymap.Keymap.keysChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -463,13 +477,13 @@ class Keymap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectStateChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStateChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.keymap.Keymap)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -478,7 +492,14 @@ class Keymap : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.keymap.Keymap.stateChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -498,7 +519,7 @@ final class KeymapGidBuilder : KeymapGidBuilderImpl!KeymapGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Keymap build()
+  Keymap build() nothrow
   {
     return new Keymap(cast(void*)createGObject(Keymap._getGType), No.Take);
   }

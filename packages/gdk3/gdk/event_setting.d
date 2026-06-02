@@ -16,11 +16,8 @@ class EventSetting
   GdkEventSetting _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.event_setting.EventSetting");
-
     _cInstance = *cast(GdkEventSetting*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class EventSetting
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class EventSetting
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.Setting]).
   */
-  @property gdk.types.EventType type()
+  @property gdk.types.EventType type() nothrow
   {
     return cast(gdk.types.EventType)(cast(GdkEventSetting*)this._cPtr).type;
   }
@@ -47,7 +44,7 @@ class EventSetting
       Params:
         propval = the type of the event ([gdk.types.EventType.Setting]).
   */
-  @property void type(gdk.types.EventType propval)
+  @property void type(gdk.types.EventType propval) nothrow
   {
     (cast(GdkEventSetting*)this._cPtr).type = cast(GdkEventType)propval;
   }
@@ -56,7 +53,7 @@ class EventSetting
       Get `window` field.
       Returns: the window which received the event.
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventSetting*)this._cPtr).window);
   }
@@ -66,7 +63,7 @@ class EventSetting
       Params:
         propval = the window which received the event.
   */
-  @property void window(gdk.window.Window propval)
+  @property void window(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventSetting*)this._cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventSetting*)this._cPtr).window);
@@ -76,7 +73,7 @@ class EventSetting
       Get `sendEvent` field.
       Returns: true if the event was sent explicitly.
   */
-  @property byte sendEvent()
+  @property byte sendEvent() nothrow
   {
     return (cast(GdkEventSetting*)this._cPtr).sendEvent;
   }
@@ -86,7 +83,7 @@ class EventSetting
       Params:
         propval = true if the event was sent explicitly.
   */
-  @property void sendEvent(byte propval)
+  @property void sendEvent(byte propval) nothrow
   {
     (cast(GdkEventSetting*)this._cPtr).sendEvent = propval;
   }
@@ -96,7 +93,7 @@ class EventSetting
       Returns: what happened to the setting ([gdk.types.SettingAction.New],
           [gdk.types.SettingAction.Changed] or [gdk.types.SettingAction.Deleted]).
   */
-  @property gdk.types.SettingAction action()
+  @property gdk.types.SettingAction action() nothrow
   {
     return cast(gdk.types.SettingAction)(cast(GdkEventSetting*)this._cPtr).action;
   }
@@ -107,7 +104,7 @@ class EventSetting
         propval = what happened to the setting ([gdk.types.SettingAction.New],
             [gdk.types.SettingAction.Changed] or [gdk.types.SettingAction.Deleted]).
   */
-  @property void action(gdk.types.SettingAction propval)
+  @property void action(gdk.types.SettingAction propval) nothrow
   {
     (cast(GdkEventSetting*)this._cPtr).action = cast(GdkSettingAction)propval;
   }
@@ -116,7 +113,7 @@ class EventSetting
       Get `name` field.
       Returns: the name of the setting.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdkEventSetting*)this._cPtr).name);
   }
@@ -126,7 +123,7 @@ class EventSetting
       Params:
         propval = the name of the setting.
   */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdkEventSetting*)this._cPtr).name);
     dToC(propval, cast(void*)&(cast(GdkEventSetting*)this._cPtr).name);

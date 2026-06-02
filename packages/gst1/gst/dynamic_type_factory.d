@@ -35,26 +35,26 @@ class DynamicTypeFactory : gst.plugin_feature.PluginFeature
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_dynamic_type_factory_get_type != &gidSymbolNotFound ? gst_dynamic_type_factory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DynamicTypeFactory self()
+  override DynamicTypeFactory self() nothrow
   {
     return this;
   }
@@ -63,13 +63,13 @@ class DynamicTypeFactory : gst.plugin_feature.PluginFeature
       Get builder for [gst.dynamic_type_factory.DynamicTypeFactory]
       Returns: New builder object
   */
-  static DynamicTypeFactoryGidBuilder builder()
+  static DynamicTypeFactoryGidBuilder builder() nothrow
   {
     return new DynamicTypeFactoryGidBuilder;
   }
 
   /** */
-  static gobject.types.GType load(string factoryname)
+  static gobject.types.GType load(string factoryname) nothrow
   {
     gobject.types.GType _retval;
     const(char)* _factoryname = factoryname.toCString(No.Alloc);
@@ -90,7 +90,7 @@ final class DynamicTypeFactoryGidBuilder : DynamicTypeFactoryGidBuilderImpl!Dyna
       Create object from builder.
       Returns: New object
   */
-  DynamicTypeFactory build()
+  DynamicTypeFactory build() nothrow
   {
     return new DynamicTypeFactory(cast(void*)createGObject(DynamicTypeFactory._getGType), No.Take);
   }

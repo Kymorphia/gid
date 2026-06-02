@@ -184,26 +184,26 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_navigation_view_get_type != &gidSymbolNotFound ? adw_navigation_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NavigationView self()
+  override NavigationView self() nothrow
   {
     return this;
   }
@@ -212,7 +212,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Get builder for [adw.navigation_view.NavigationView]
       Returns: New builder object
   */
-  static NavigationViewGidBuilder builder()
+  static NavigationViewGidBuilder builder() nothrow
   {
     return new NavigationViewGidBuilder;
   }
@@ -223,7 +223,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
         
         Gesture-based transitions are always animated.
   */
-  @property bool animateTransitions()
+  @property bool animateTransitions() nothrow
   {
     return getAnimateTransitions();
   }
@@ -235,7 +235,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
           
           Gesture-based transitions are always animated.
   */
-  @property void animateTransitions(bool propval)
+  @property void animateTransitions(bool propval) nothrow
   {
     setAnimateTransitions(propval);
   }
@@ -248,7 +248,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
         
         This can be used to keep an up-to-date view.
   */
-  @property gio.list_model.ListModel navigationStack()
+  @property gio.list_model.ListModel navigationStack() nothrow
   {
     return getNavigationStack();
   }
@@ -260,7 +260,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
         Applications using [adw.navigation_view.NavigationView] to implement a browser may want to
         disable it.
   */
-  @property bool popOnEscape()
+  @property bool popOnEscape() nothrow
   {
     return getPopOnEscape();
   }
@@ -273,7 +273,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
           Applications using [adw.navigation_view.NavigationView] to implement a browser may want to
           disable it.
   */
-  @property void popOnEscape(bool propval)
+  @property void popOnEscape(bool propval) nothrow
   {
     setPopOnEscape(propval);
   }
@@ -282,7 +282,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Get `visiblePage` property.
       Returns: The currently visible page.
   */
-  @property adw.navigation_page.NavigationPage visiblePage()
+  @property adw.navigation_page.NavigationPage visiblePage() nothrow
   {
     return getVisiblePage();
   }
@@ -293,7 +293,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Creates a new [adw.navigation_view.NavigationView].
       Returns: the new created [adw.navigation_view.NavigationView]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_navigation_view_new();
@@ -314,7 +314,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         page = the page to add
   */
-  void add(adw.navigation_page.NavigationPage page)
+  void add(adw.navigation_page.NavigationPage page) nothrow
   {
     adw_navigation_view_add(cast(AdwNavigationView*)this._cPtr, page ? cast(AdwNavigationPage*)page._cPtr(No.Dup) : null);
   }
@@ -328,7 +328,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
         tag = a page tag
       Returns: the page with the given tag
   */
-  adw.navigation_page.NavigationPage findPage(string tag)
+  adw.navigation_page.NavigationPage findPage(string tag) nothrow
   {
     AdwNavigationPage* _cretval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -341,7 +341,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Gets whether self animates page transitions.
       Returns: whether to animate page transitions
   */
-  bool getAnimateTransitions()
+  bool getAnimateTransitions() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_navigation_view_get_animate_transitions(cast(AdwNavigationView*)this._cPtr);
@@ -356,7 +356,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       This can be used to keep an up-to-date view.
       Returns: a list model for the navigation stack
   */
-  gio.list_model.ListModel getNavigationStack()
+  gio.list_model.ListModel getNavigationStack() nothrow
   {
     GListModel* _cretval;
     _cretval = adw_navigation_view_get_navigation_stack(cast(AdwNavigationView*)this._cPtr);
@@ -368,7 +368,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Gets whether pressing Escape pops the current page on self.
       Returns: whether to pop the current page
   */
-  bool getPopOnEscape()
+  bool getPopOnEscape() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_navigation_view_get_pop_on_escape(cast(AdwNavigationView*)this._cPtr);
@@ -387,7 +387,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
         page = a page in self
       Returns: the previous page
   */
-  adw.navigation_page.NavigationPage getPreviousPage(adw.navigation_page.NavigationPage page)
+  adw.navigation_page.NavigationPage getPreviousPage(adw.navigation_page.NavigationPage page) nothrow
   {
     AdwNavigationPage* _cretval;
     _cretval = adw_navigation_view_get_previous_page(cast(AdwNavigationView*)this._cPtr, page ? cast(AdwNavigationPage*)page._cPtr(No.Dup) : null);
@@ -399,7 +399,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Gets the currently visible page in self.
       Returns: the currently visible page
   */
-  adw.navigation_page.NavigationPage getVisiblePage()
+  adw.navigation_page.NavigationPage getVisiblePage() nothrow
   {
     AdwNavigationPage* _cretval;
     _cretval = adw_navigation_view_get_visible_page(cast(AdwNavigationView*)this._cPtr);
@@ -421,7 +421,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       [adw.navigation_view.NavigationView.popToTag].
       Returns: `TRUE` if a page has been popped
   */
-  bool pop()
+  bool pop() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_navigation_view_pop(cast(AdwNavigationView*)this._cPtr);
@@ -445,7 +445,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
         page = the page to pop to
       Returns: `TRUE` if any pages have been popped
   */
-  bool popToPage(adw.navigation_page.NavigationPage page)
+  bool popToPage(adw.navigation_page.NavigationPage page) nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_navigation_view_pop_to_page(cast(AdwNavigationView*)this._cPtr, page ? cast(AdwNavigationPage*)page._cPtr(No.Dup) : null);
@@ -468,7 +468,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
         tag = a page tag
       Returns: `TRUE` if any pages have been popped
   */
-  bool popToTag(string tag)
+  bool popToTag(string tag) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -489,7 +489,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         page = the page to push
   */
-  void push(adw.navigation_page.NavigationPage page)
+  void push(adw.navigation_page.NavigationPage page) nothrow
   {
     adw_navigation_view_push(cast(AdwNavigationView*)this._cPtr, page ? cast(AdwNavigationPage*)page._cPtr(No.Dup) : null);
   }
@@ -507,7 +507,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         tag = the page tag
   */
-  void pushByTag(string tag)
+  void pushByTag(string tag) nothrow
   {
     const(char)* _tag = tag.toCString(No.Alloc);
     adw_navigation_view_push_by_tag(cast(AdwNavigationView*)this._cPtr, _tag);
@@ -524,7 +524,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         page = the page to remove
   */
-  void remove(adw.navigation_page.NavigationPage page)
+  void remove(adw.navigation_page.NavigationPage page) nothrow
   {
     adw_navigation_view_remove(cast(AdwNavigationView*)this._cPtr, page ? cast(AdwNavigationPage*)page._cPtr(No.Dup) : null);
   }
@@ -549,7 +549,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         pages = the new navigation stack
   */
-  void replace(adw.navigation_page.NavigationPage[] pages)
+  void replace(adw.navigation_page.NavigationPage[] pages) nothrow
   {
     int _nPages;
     if (pages)
@@ -584,7 +584,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
         tags = tags of the pages in the
             navigation stack
   */
-  void replaceWithTags(string[] tags)
+  void replaceWithTags(string[] tags) nothrow
   {
     int _nTags;
     if (tags)
@@ -606,7 +606,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         animateTransitions = whether to animate page transitions
   */
-  void setAnimateTransitions(bool animateTransitions)
+  void setAnimateTransitions(bool animateTransitions) nothrow
   {
     adw_navigation_view_set_animate_transitions(cast(AdwNavigationView*)this._cPtr, animateTransitions);
   }
@@ -620,7 +620,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         popOnEscape = whether to pop the current page when pressing Escape
   */
-  void setPopOnEscape(bool popOnEscape)
+  void setPopOnEscape(bool popOnEscape) nothrow
   {
     adw_navigation_view_set_pop_on_escape(cast(AdwNavigationView*)this._cPtr, popOnEscape);
   }
@@ -651,22 +651,30 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGetNextPage(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGetNextPage(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T : adw.navigation_page.NavigationPage)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.navigation_view.NavigationView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      adw.navigation_page.NavigationPage _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.navigation_view.NavigationView.getNextPage");
+      }
 
       setVal!(adw.navigation_page.NavigationPage)(_returnValue, _retval);
     }
@@ -698,14 +706,14 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPopped(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPopped(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.navigation_page.NavigationPage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : adw.navigation_view.NavigationView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -717,7 +725,14 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.navigation_view.NavigationView.popped");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -741,13 +756,13 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPushed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPushed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.navigation_view.NavigationView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -756,7 +771,14 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.navigation_view.NavigationView.pushed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -780,13 +802,13 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectReplaced(T)(T callback, Flag!"After" after = No.After)
+  gulong connectReplaced(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.navigation_view.NavigationView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -795,7 +817,14 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.navigation_view.NavigationView.replaced");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -817,7 +846,7 @@ class NavigationViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.s
           Gesture-based transitions are always animated.
       Returns: Builder instance for fluent chaining
   */
-  T animateTransitions(bool propval)
+  T animateTransitions(bool propval) nothrow
   {
     return setProperty("animate-transitions", propval);
   }
@@ -831,7 +860,7 @@ class NavigationViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.s
           disable it.
       Returns: Builder instance for fluent chaining
   */
-  T popOnEscape(bool propval)
+  T popOnEscape(bool propval) nothrow
   {
     return setProperty("pop-on-escape", propval);
   }
@@ -844,7 +873,7 @@ final class NavigationViewGidBuilder : NavigationViewGidBuilderImpl!NavigationVi
       Create object from builder.
       Returns: New object
   */
-  NavigationView build()
+  NavigationView build() nothrow
   {
     return new NavigationView(cast(void*)createGObject(NavigationView._getGType), No.Take);
   }

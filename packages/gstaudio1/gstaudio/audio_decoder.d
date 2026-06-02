@@ -112,26 +112,26 @@ class AudioDecoder : gst.element.Element
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_decoder_get_type != &gidSymbolNotFound ? gst_audio_decoder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AudioDecoder self()
+  override AudioDecoder self() nothrow
   {
     return this;
   }
@@ -140,7 +140,7 @@ class AudioDecoder : gst.element.Element
       Get builder for [gstaudio.audio_decoder.AudioDecoder]
       Returns: New builder object
   */
-  static AudioDecoderGidBuilder builder()
+  static AudioDecoderGidBuilder builder() nothrow
   {
     return new AudioDecoderGidBuilder;
   }
@@ -150,7 +150,7 @@ class AudioDecoder : gst.element.Element
       Returns: Maximum number of tolerated consecutive decode errors. See
         [gstaudio.audio_decoder.AudioDecoder.setMaxErrors] for more details.
   */
-  @property int maxErrors()
+  @property int maxErrors() nothrow
   {
     return getMaxErrors();
   }
@@ -161,43 +161,43 @@ class AudioDecoder : gst.element.Element
         propval = Maximum number of tolerated consecutive decode errors. See
           [gstaudio.audio_decoder.AudioDecoder.setMaxErrors] for more details.
   */
-  @property void maxErrors(int propval)
+  @property void maxErrors(int propval) nothrow
   {
     setMaxErrors(propval);
   }
 
   /** */
-  @property long minLatency()
+  @property long minLatency() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("min-latency");
   }
 
   /** */
-  @property void minLatency(long propval)
+  @property void minLatency(long propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(long)("min-latency", propval);
   }
 
   /** */
-  @property bool plc()
+  @property bool plc() nothrow
   {
     return getPlc();
   }
 
   /** */
-  @property void plc(bool propval)
+  @property void plc(bool propval) nothrow
   {
     setPlc(propval);
   }
 
   /** */
-  @property long tolerance()
+  @property long tolerance() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("tolerance");
   }
 
   /** */
-  @property void tolerance(long propval)
+  @property void tolerance(long propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(long)("tolerance", propval);
   }
@@ -210,7 +210,7 @@ class AudioDecoder : gst.element.Element
         size = size of the buffer
       Returns: allocated buffer
   */
-  gst.buffer.Buffer allocateOutputBuffer(size_t size)
+  gst.buffer.Buffer allocateOutputBuffer(size_t size) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_audio_decoder_allocate_output_buffer(cast(GstAudioDecoder*)this._cPtr, size);
@@ -235,7 +235,7 @@ class AudioDecoder : gst.element.Element
         frames = number of decoded frames represented by decoded data
       Returns: a #GstFlowReturn that should be escalated to caller (of caller)
   */
-  gst.types.FlowReturn finishFrame(gst.buffer.Buffer buf, int frames)
+  gst.types.FlowReturn finishFrame(gst.buffer.Buffer buf, int frames) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_audio_decoder_finish_frame(cast(GstAudioDecoder*)this._cPtr, buf ? cast(GstBuffer*)buf._cPtr(Yes.Dup) : null, frames);
@@ -262,7 +262,7 @@ class AudioDecoder : gst.element.Element
         buf = decoded data
       Returns: a #GstFlowReturn that should be escalated to caller (of caller)
   */
-  gst.types.FlowReturn finishSubframe(gst.buffer.Buffer buf = null)
+  gst.types.FlowReturn finishSubframe(gst.buffer.Buffer buf = null) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_audio_decoder_finish_subframe(cast(GstAudioDecoder*)this._cPtr, buf ? cast(GstBuffer*)buf._cPtr(Yes.Dup) : null);
@@ -282,7 +282,7 @@ class AudioDecoder : gst.element.Element
         params = the
           #GstAllocationParams of allocator
   */
-  void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
+  void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params) nothrow
   {
     GstAllocator* _allocator;
     gst_audio_decoder_get_allocator(cast(GstAudioDecoder*)this._cPtr, &_allocator, cast(GstAllocationParams*)&params);
@@ -290,7 +290,7 @@ class AudioDecoder : gst.element.Element
   }
 
   /** */
-  gstaudio.audio_info.AudioInfo getAudioInfo()
+  gstaudio.audio_info.AudioInfo getAudioInfo() nothrow
   {
     GstAudioInfo* _cretval;
     _cretval = gst_audio_decoder_get_audio_info(cast(GstAudioDecoder*)this._cPtr);
@@ -299,7 +299,7 @@ class AudioDecoder : gst.element.Element
   }
 
   /** */
-  int getDelay()
+  int getDelay() nothrow
   {
     int _retval;
     _retval = gst_audio_decoder_get_delay(cast(GstAudioDecoder*)this._cPtr);
@@ -312,7 +312,7 @@ class AudioDecoder : gst.element.Element
         
         MT safe.
   */
-  bool getDrainable()
+  bool getDrainable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_decoder_get_drainable(cast(GstAudioDecoder*)this._cPtr);
@@ -320,7 +320,7 @@ class AudioDecoder : gst.element.Element
   }
 
   /** */
-  int getEstimateRate()
+  int getEstimateRate() nothrow
   {
     int _retval;
     _retval = gst_audio_decoder_get_estimate_rate(cast(GstAudioDecoder*)this._cPtr);
@@ -335,13 +335,13 @@ class AudioDecoder : gst.element.Element
         min = a pointer to storage to hold minimum latency
         max = a pointer to storage to hold maximum latency
   */
-  void getLatency(out gst.types.ClockTime min, out gst.types.ClockTime max)
+  void getLatency(out gst.types.ClockTime min, out gst.types.ClockTime max) nothrow
   {
     gst_audio_decoder_get_latency(cast(GstAudioDecoder*)this._cPtr, cast(GstClockTime*)&min, cast(GstClockTime*)&max);
   }
 
   /** */
-  int getMaxErrors()
+  int getMaxErrors() nothrow
   {
     int _retval;
     _retval = gst_audio_decoder_get_max_errors(cast(GstAudioDecoder*)this._cPtr);
@@ -354,7 +354,7 @@ class AudioDecoder : gst.element.Element
         
         MT safe.
   */
-  gst.types.ClockTime getMinLatency()
+  gst.types.ClockTime getMinLatency() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_audio_decoder_get_min_latency(cast(GstAudioDecoder*)this._cPtr);
@@ -367,7 +367,7 @@ class AudioDecoder : gst.element.Element
         
         MT safe.
   */
-  bool getNeedsFormat()
+  bool getNeedsFormat() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_decoder_get_needs_format(cast(GstAudioDecoder*)this._cPtr);
@@ -381,7 +381,7 @@ class AudioDecoder : gst.element.Element
         sync = a pointer to a variable to hold the current sync state
         eos = a pointer to a variable to hold the current eos state
   */
-  void getParseState(out bool sync, out bool eos)
+  void getParseState(out bool sync, out bool eos) nothrow
   {
     gboolean _sync;
     gboolean _eos;
@@ -396,7 +396,7 @@ class AudioDecoder : gst.element.Element
         
         MT safe.
   */
-  bool getPlc()
+  bool getPlc() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_decoder_get_plc(cast(GstAudioDecoder*)this._cPtr);
@@ -404,7 +404,7 @@ class AudioDecoder : gst.element.Element
   }
 
   /** */
-  int getPlcAware()
+  int getPlcAware() nothrow
   {
     int _retval;
     _retval = gst_audio_decoder_get_plc_aware(cast(GstAudioDecoder*)this._cPtr);
@@ -417,7 +417,7 @@ class AudioDecoder : gst.element.Element
         
         MT safe.
   */
-  gst.types.ClockTime getTolerance()
+  gst.types.ClockTime getTolerance() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_audio_decoder_get_tolerance(cast(GstAudioDecoder*)this._cPtr);
@@ -436,7 +436,7 @@ class AudioDecoder : gst.element.Element
         tags = a #GstTagList to merge, or NULL
         mode = the #GstTagMergeMode to use, usually #GST_TAG_MERGE_REPLACE
   */
-  void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode)
+  void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode) nothrow
   {
     gst_audio_decoder_merge_tags(cast(GstAudioDecoder*)this._cPtr, tags ? cast(const(GstTagList)*)tags._cPtr(No.Dup) : null, mode);
   }
@@ -447,7 +447,7 @@ class AudioDecoder : gst.element.Element
       negotiate fails.
       Returns: true if the negotiation succeeded, else false.
   */
-  bool negotiate()
+  bool negotiate() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_decoder_negotiate(cast(GstAudioDecoder*)this._cPtr);
@@ -464,7 +464,7 @@ class AudioDecoder : gst.element.Element
         filter = filter caps
       Returns: a #GstCaps owned by caller
   */
-  gst.caps.Caps proxyGetcaps(gst.caps.Caps caps = null, gst.caps.Caps filter = null)
+  gst.caps.Caps proxyGetcaps(gst.caps.Caps caps = null, gst.caps.Caps filter = null) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_audio_decoder_proxy_getcaps(cast(GstAudioDecoder*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
@@ -481,7 +481,7 @@ class AudioDecoder : gst.element.Element
       Params:
         allocationCaps = a #GstCaps or null
   */
-  void setAllocationCaps(gst.caps.Caps allocationCaps = null)
+  void setAllocationCaps(gst.caps.Caps allocationCaps = null) nothrow
   {
     gst_audio_decoder_set_allocation_caps(cast(GstAudioDecoder*)this._cPtr, allocationCaps ? cast(GstCaps*)allocationCaps._cPtr(No.Dup) : null);
   }
@@ -497,7 +497,7 @@ class AudioDecoder : gst.element.Element
       Params:
         enabled = new state
   */
-  void setDrainable(bool enabled)
+  void setDrainable(bool enabled) nothrow
   {
     gst_audio_decoder_set_drainable(cast(GstAudioDecoder*)this._cPtr, enabled);
   }
@@ -508,7 +508,7 @@ class AudioDecoder : gst.element.Element
       Params:
         enabled = whether to enable byte to time conversion
   */
-  void setEstimateRate(bool enabled)
+  void setEstimateRate(bool enabled) nothrow
   {
     gst_audio_decoder_set_estimate_rate(cast(GstAudioDecoder*)this._cPtr, enabled);
   }
@@ -522,7 +522,7 @@ class AudioDecoder : gst.element.Element
         min = minimum latency
         max = maximum latency
   */
-  void setLatency(gst.types.ClockTime min, gst.types.ClockTime max)
+  void setLatency(gst.types.ClockTime min, gst.types.ClockTime max) nothrow
   {
     gst_audio_decoder_set_latency(cast(GstAudioDecoder*)this._cPtr, min, max);
   }
@@ -536,7 +536,7 @@ class AudioDecoder : gst.element.Element
       Params:
         num = max tolerated errors
   */
-  void setMaxErrors(int num)
+  void setMaxErrors(int num) nothrow
   {
     gst_audio_decoder_set_max_errors(cast(GstAudioDecoder*)this._cPtr, num);
   }
@@ -549,7 +549,7 @@ class AudioDecoder : gst.element.Element
       Params:
         num = new minimum latency
   */
-  void setMinLatency(gst.types.ClockTime num)
+  void setMinLatency(gst.types.ClockTime num) nothrow
   {
     gst_audio_decoder_set_min_latency(cast(GstAudioDecoder*)this._cPtr, num);
   }
@@ -567,7 +567,7 @@ class AudioDecoder : gst.element.Element
       Params:
         enabled = new state
   */
-  void setNeedsFormat(bool enabled)
+  void setNeedsFormat(bool enabled) nothrow
   {
     gst_audio_decoder_set_needs_format(cast(GstAudioDecoder*)this._cPtr, enabled);
   }
@@ -582,7 +582,7 @@ class AudioDecoder : gst.element.Element
         caps = (fixed) #GstCaps
       Returns: true on success.
   */
-  bool setOutputCaps(gst.caps.Caps caps)
+  bool setOutputCaps(gst.caps.Caps caps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_decoder_set_output_caps(cast(GstAudioDecoder*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
@@ -596,7 +596,7 @@ class AudioDecoder : gst.element.Element
         info = #GstAudioInfo
       Returns: true on success.
   */
-  bool setOutputFormat(gstaudio.audio_info.AudioInfo info)
+  bool setOutputFormat(gstaudio.audio_info.AudioInfo info) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_decoder_set_output_format(cast(GstAudioDecoder*)this._cPtr, info ? cast(const(GstAudioInfo)*)info._cPtr(No.Dup) : null);
@@ -612,7 +612,7 @@ class AudioDecoder : gst.element.Element
       Params:
         enabled = new state
   */
-  void setPlc(bool enabled)
+  void setPlc(bool enabled) nothrow
   {
     gst_audio_decoder_set_plc(cast(GstAudioDecoder*)this._cPtr, enabled);
   }
@@ -623,7 +623,7 @@ class AudioDecoder : gst.element.Element
       Params:
         plc = new plc state
   */
-  void setPlcAware(bool plc)
+  void setPlcAware(bool plc) nothrow
   {
     gst_audio_decoder_set_plc_aware(cast(GstAudioDecoder*)this._cPtr, plc);
   }
@@ -636,7 +636,7 @@ class AudioDecoder : gst.element.Element
       Params:
         tolerance = new tolerance
   */
-  void setTolerance(gst.types.ClockTime tolerance)
+  void setTolerance(gst.types.ClockTime tolerance) nothrow
   {
     gst_audio_decoder_set_tolerance(cast(GstAudioDecoder*)this._cPtr, tolerance);
   }
@@ -652,7 +652,7 @@ class AudioDecoder : gst.element.Element
       Params:
         use = if the default pad accept-caps query handling should be used
   */
-  void setUseDefaultPadAcceptcaps(bool use)
+  void setUseDefaultPadAcceptcaps(bool use) nothrow
   {
     gst_audio_decoder_set_use_default_pad_acceptcaps(cast(GstAudioDecoder*)this._cPtr, use);
   }
@@ -669,25 +669,25 @@ class AudioDecoderGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           [gstaudio.audio_decoder.AudioDecoder.setMaxErrors] for more details.
       Returns: Builder instance for fluent chaining
   */
-  T maxErrors(int propval)
+  T maxErrors(int propval) nothrow
   {
     return setProperty("max-errors", propval);
   }
 
   /** */
-  T minLatency(long propval)
+  T minLatency(long propval) nothrow
   {
     return setProperty("min-latency", propval);
   }
 
   /** */
-  T plc(bool propval)
+  T plc(bool propval) nothrow
   {
     return setProperty("plc", propval);
   }
 
   /** */
-  T tolerance(long propval)
+  T tolerance(long propval) nothrow
   {
     return setProperty("tolerance", propval);
   }
@@ -700,7 +700,7 @@ final class AudioDecoderGidBuilder : AudioDecoderGidBuilderImpl!AudioDecoderGidB
       Create object from builder.
       Returns: New object
   */
-  AudioDecoder build()
+  AudioDecoder build() nothrow
   {
     return new AudioDecoder(cast(void*)createGObject(AudioDecoder._getGType), No.Take);
   }

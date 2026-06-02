@@ -36,26 +36,26 @@ class UserContentFilterStore : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_user_content_filter_store_get_type != &gidSymbolNotFound ? webkit_user_content_filter_store_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UserContentFilterStore self()
+  override UserContentFilterStore self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
       Get builder for [webkit.user_content_filter_store.UserContentFilterStore]
       Returns: New builder object
   */
-  static UserContentFilterStoreGidBuilder builder()
+  static UserContentFilterStoreGidBuilder builder() nothrow
   {
     return new UserContentFilterStoreGidBuilder;
   }
@@ -74,7 +74,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
       Returns: The directory used for filter storage. This path is used as the base
         directory where user content filters are stored on disk.
   */
-  @property string path()
+  @property string path() nothrow
   {
     return getPath();
   }
@@ -88,7 +88,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
         storagePath = path where data for filters will be stored on disk
       Returns: a newly created #WebKitUserContentFilterStore
   */
-  this(string storagePath)
+  this(string storagePath) nothrow
   {
     WebKitUserContentFilterStore* _cretval;
     const(char)* _storagePath = storagePath.toCString(No.Alloc);
@@ -107,14 +107,21 @@ class UserContentFilterStore : gobject.object.ObjectWrap
         cancellable = a #GCancellable or null to ignore
         callback = a #GAsyncReadyCallback to call when the removal is completed
   */
-  void fetchIdentifiers(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void fetchIdentifiers(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -131,7 +138,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
         result = a #GAsyncResult
       Returns: a null-terminated list of filter identifiers.
   */
-  string[] fetchIdentifiersFinish(gio.async_result.AsyncResult result)
+  string[] fetchIdentifiersFinish(gio.async_result.AsyncResult result) nothrow
   {
     char** _cretval;
     _cretval = webkit_user_content_filter_store_fetch_identifiers_finish(cast(WebKitUserContentFilterStore*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null);
@@ -154,7 +161,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
       Gets the storage path for user content filters.
       Returns: path, as a string.
   */
-  string getPath()
+  string getPath() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_user_content_filter_store_get_path(cast(WebKitUserContentFilterStore*)this._cPtr);
@@ -176,14 +183,21 @@ class UserContentFilterStore : gobject.object.ObjectWrap
         cancellable = a #GCancellable or null to ignore
         callback = a #GAsyncReadyCallback to call when the load is completed
   */
-  void load(string identifier, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void load(string identifier, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _identifier = identifier.toCString(No.Alloc);
@@ -223,14 +237,21 @@ class UserContentFilterStore : gobject.object.ObjectWrap
         cancellable = a #GCancellable or null to ignore
         callback = a #GAsyncReadyCallback to call when the removal is completed
   */
-  void remove(string identifier, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void remove(string identifier, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _identifier = identifier.toCString(No.Alloc);
@@ -277,14 +298,21 @@ class UserContentFilterStore : gobject.object.ObjectWrap
         cancellable = a #GCancellable or null to ignore
         callback = a #GAsyncReadyCallback to call when saving is completed
   */
-  void save(string identifier, glib.bytes.Bytes source, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void save(string identifier, glib.bytes.Bytes source, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _identifier = identifier.toCString(No.Alloc);
@@ -328,14 +356,21 @@ class UserContentFilterStore : gobject.object.ObjectWrap
         cancellable = a #GCancellable or null to ignore
         callback = a #GAsyncReadyCallback to call when saving is completed
   */
-  void saveFromFile(string identifier, gio.file.File file, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void saveFromFile(string identifier, gio.file.File file, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _identifier = identifier.toCString(No.Alloc);
@@ -375,7 +410,7 @@ class UserContentFilterStoreGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuil
           directory where user content filters are stored on disk.
       Returns: Builder instance for fluent chaining
   */
-  T path(string propval)
+  T path(string propval) nothrow
   {
     return setProperty("path", propval);
   }
@@ -388,7 +423,7 @@ final class UserContentFilterStoreGidBuilder : UserContentFilterStoreGidBuilderI
       Create object from builder.
       Returns: New object
   */
-  UserContentFilterStore build()
+  UserContentFilterStore build() nothrow
   {
     return new UserContentFilterStore(cast(void*)createGObject(UserContentFilterStore._getGType), Yes.Take);
   }

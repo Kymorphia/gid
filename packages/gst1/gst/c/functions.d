@@ -15,7 +15,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgstreamer-1.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // AllocationParams
   GType function() c_gst_allocation_params_get_type; ///

@@ -22,26 +22,26 @@ class SocketAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketCo
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_socket_address_get_type != &gidSymbolNotFound ? g_socket_address_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SocketAddress self()
+  override SocketAddress self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class SocketAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketCo
       Get builder for [gio.socket_address.SocketAddress]
       Returns: New builder object
   */
-  static SocketAddressGidBuilder builder()
+  static SocketAddressGidBuilder builder() nothrow
   {
     return new SocketAddressGidBuilder;
   }
@@ -59,7 +59,7 @@ class SocketAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketCo
       Get `family` property.
       Returns: The family of the socket address.
   */
-  @property gio.types.SocketFamily family()
+  @property gio.types.SocketFamily family() nothrow
   {
     return getFamily();
   }
@@ -76,7 +76,7 @@ class SocketAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketCo
       Returns: a new #GSocketAddress if native could successfully
             be converted, otherwise null
   */
-  static gio.socket_address.SocketAddress newFromNative(void* native, size_t len)
+  static gio.socket_address.SocketAddress newFromNative(void* native, size_t len) nothrow
   {
     GSocketAddress* _cretval;
     _cretval = g_socket_address_new_from_native(native, len);
@@ -88,7 +88,7 @@ class SocketAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketCo
       Gets the socket family type of address.
       Returns: the socket family type of address
   */
-  gio.types.SocketFamily getFamily()
+  gio.types.SocketFamily getFamily() nothrow
   {
     GSocketFamily _cretval;
     _cretval = g_socket_address_get_family(cast(GSocketAddress*)this._cPtr);
@@ -103,7 +103,7 @@ class SocketAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketCo
       Returns: the size of the native struct sockaddr that
             address represents
   */
-  ptrdiff_t getNativeSize()
+  ptrdiff_t getNativeSize() nothrow
   {
     ptrdiff_t _retval;
     _retval = g_socket_address_get_native_size(cast(GSocketAddress*)this._cPtr);
@@ -151,7 +151,7 @@ final class SocketAddressGidBuilder : SocketAddressGidBuilderImpl!SocketAddressG
       Create object from builder.
       Returns: New object
   */
-  SocketAddress build()
+  SocketAddress build() nothrow
   {
     return new SocketAddress(cast(void*)createGObject(SocketAddress._getGType), No.Take);
   }

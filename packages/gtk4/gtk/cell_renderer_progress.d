@@ -25,26 +25,26 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_renderer_progress_get_type != &gidSymbolNotFound ? gtk_cell_renderer_progress_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CellRendererProgress self()
+  override CellRendererProgress self() nothrow
   {
     return this;
   }
@@ -53,19 +53,19 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
       Get builder for [gtk.cell_renderer_progress.CellRendererProgress]
       Returns: New builder object
   */
-  static CellRendererProgressGidBuilder builder()
+  static CellRendererProgressGidBuilder builder() nothrow
   {
     return new CellRendererProgressGidBuilder;
   }
 
   /** */
-  @property bool inverted()
+  @property bool inverted() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("inverted");
   }
 
   /** */
-  @property void inverted(bool propval)
+  @property void inverted(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("inverted", propval);
   }
@@ -83,7 +83,7 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
         To indicate that the activity has not started yet, set the property
         to zero. To indicate completion, set the property to `G_MAXINT`.
   */
-  @property int pulse()
+  @property int pulse() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("pulse");
   }
@@ -102,7 +102,7 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
           To indicate that the activity has not started yet, set the property
           to zero. To indicate completion, set the property to `G_MAXINT`.
   */
-  @property void pulse(int propval)
+  @property void pulse(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("pulse", propval);
   }
@@ -114,7 +114,7 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
         label to be displayed. Setting this property to an empty string causes
         no label to be displayed.
   */
-  @property string text()
+  @property string text() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("text");
   }
@@ -127,7 +127,7 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
           label to be displayed. Setting this property to an empty string causes
           no label to be displayed.
   */
-  @property void text(string propval)
+  @property void text(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("text", propval);
   }
@@ -138,7 +138,7 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
         text in the progress bar.  Valid values range from 0 (left) to 1
         (right).  Reserved for RTL layouts.
   */
-  @property float textXalign()
+  @property float textXalign() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(float)("text-xalign");
   }
@@ -150,7 +150,7 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
           text in the progress bar.  Valid values range from 0 (left) to 1
           (right).  Reserved for RTL layouts.
   */
-  @property void textXalign(float propval)
+  @property void textXalign(float propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(float)("text-xalign", propval);
   }
@@ -161,7 +161,7 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
         text in the progress bar.  Valid values range from 0 (top) to 1
         (bottom).
   */
-  @property float textYalign()
+  @property float textYalign() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(float)("text-yalign");
   }
@@ -173,7 +173,7 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
           text in the progress bar.  Valid values range from 0 (top) to 1
           (bottom).
   */
-  @property void textYalign(float propval)
+  @property void textYalign(float propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(float)("text-yalign", propval);
   }
@@ -183,7 +183,7 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
       Returns: The "value" property determines the percentage to which the
         progress bar will be "filled in".
   */
-  @property int value()
+  @property int value() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("value");
   }
@@ -194,7 +194,7 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
         propval = The "value" property determines the percentage to which the
           progress bar will be "filled in".
   */
-  @property void value(int propval)
+  @property void value(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("value", propval);
   }
@@ -205,7 +205,7 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
       Creates a new [gtk.cell_renderer_progress.CellRendererProgress].
       Returns: the new cell renderer
   */
-  this()
+  this() nothrow
   {
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_renderer_progress_new();
@@ -220,7 +220,7 @@ class CellRendererProgressGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidB
   mixin OrientableGidBuilderT!();
 
   /** */
-  T inverted(bool propval)
+  T inverted(bool propval) nothrow
   {
     return setProperty("inverted", propval);
   }
@@ -240,7 +240,7 @@ class CellRendererProgressGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidB
           to zero. To indicate completion, set the property to `G_MAXINT`.
       Returns: Builder instance for fluent chaining
   */
-  T pulse(int propval)
+  T pulse(int propval) nothrow
   {
     return setProperty("pulse", propval);
   }
@@ -254,7 +254,7 @@ class CellRendererProgressGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidB
           no label to be displayed.
       Returns: Builder instance for fluent chaining
   */
-  T text(string propval)
+  T text(string propval) nothrow
   {
     return setProperty("text", propval);
   }
@@ -267,7 +267,7 @@ class CellRendererProgressGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidB
           (right).  Reserved for RTL layouts.
       Returns: Builder instance for fluent chaining
   */
-  T textXalign(float propval)
+  T textXalign(float propval) nothrow
   {
     return setProperty("text-xalign", propval);
   }
@@ -280,7 +280,7 @@ class CellRendererProgressGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidB
           (bottom).
       Returns: Builder instance for fluent chaining
   */
-  T textYalign(float propval)
+  T textYalign(float propval) nothrow
   {
     return setProperty("text-yalign", propval);
   }
@@ -292,7 +292,7 @@ class CellRendererProgressGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidB
           progress bar will be "filled in".
       Returns: Builder instance for fluent chaining
   */
-  T value(int propval)
+  T value(int propval) nothrow
   {
     return setProperty("value", propval);
   }
@@ -305,7 +305,7 @@ final class CellRendererProgressGidBuilder : CellRendererProgressGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  CellRendererProgress build()
+  CellRendererProgress build() nothrow
   {
     return new CellRendererProgress(cast(void*)createGObject(CellRendererProgress._getGType), No.Take);
   }

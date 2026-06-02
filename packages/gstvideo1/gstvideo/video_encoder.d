@@ -84,26 +84,26 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_encoder_get_type != &gidSymbolNotFound ? gst_video_encoder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VideoEncoder self()
+  override VideoEncoder self() nothrow
   {
     return this;
   }
@@ -112,7 +112,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
       Get builder for [gstvideo.video_encoder.VideoEncoder]
       Returns: New builder object
   */
-  static VideoEncoderGidBuilder builder()
+  static VideoEncoderGidBuilder builder() nothrow
   {
     return new VideoEncoderGidBuilder;
   }
@@ -122,7 +122,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
       Returns: Minimum interval between force-keyunit requests in nanoseconds. See
         [gstvideo.video_encoder.VideoEncoder.setMinForceKeyUnitInterval] for more details.
   */
-  @property ulong minForceKeyUnitInterval()
+  @property ulong minForceKeyUnitInterval() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("min-force-key-unit-interval");
   }
@@ -133,19 +133,19 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
         propval = Minimum interval between force-keyunit requests in nanoseconds. See
           [gstvideo.video_encoder.VideoEncoder.setMinForceKeyUnitInterval] for more details.
   */
-  @property void minForceKeyUnitInterval(ulong propval)
+  @property void minForceKeyUnitInterval(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("min-force-key-unit-interval", propval);
   }
 
   /** */
-  @property bool qos()
+  @property bool qos() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("qos");
   }
 
   /** */
-  @property void qos(bool propval)
+  @property void qos(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("qos", propval);
   }
@@ -160,7 +160,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
         size = size of the buffer
       Returns: allocated buffer
   */
-  gst.buffer.Buffer allocateOutputBuffer(size_t size)
+  gst.buffer.Buffer allocateOutputBuffer(size_t size) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_video_encoder_allocate_output_buffer(cast(GstVideoEncoder*)this._cPtr, size);
@@ -181,7 +181,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
         size = size of the buffer
       Returns: [gst.types.FlowReturn.Ok] if an output buffer could be allocated
   */
-  gst.types.FlowReturn allocateOutputFrame(gstvideo.video_codec_frame.VideoCodecFrame frame, size_t size)
+  gst.types.FlowReturn allocateOutputFrame(gstvideo.video_codec_frame.VideoCodecFrame frame, size_t size) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_video_encoder_allocate_output_frame(cast(GstVideoEncoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(No.Dup) : null, size);
@@ -204,7 +204,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
         frame = an encoded #GstVideoCodecFrame
       Returns: a #GstFlowReturn resulting from sending data downstream
   */
-  gst.types.FlowReturn finishFrame(gstvideo.video_codec_frame.VideoCodecFrame frame)
+  gst.types.FlowReturn finishFrame(gstvideo.video_codec_frame.VideoCodecFrame frame) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_video_encoder_finish_frame(cast(GstVideoEncoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(Yes.Dup) : null);
@@ -227,7 +227,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
         frame = a #GstVideoCodecFrame being encoded
       Returns: a #GstFlowReturn resulting from pushing the buffer downstream.
   */
-  gst.types.FlowReturn finishSubframe(gstvideo.video_codec_frame.VideoCodecFrame frame)
+  gst.types.FlowReturn finishSubframe(gstvideo.video_codec_frame.VideoCodecFrame frame) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_video_encoder_finish_subframe(cast(GstVideoEncoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(No.Dup) : null);
@@ -247,7 +247,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
         params = the
           #GstAllocationParams of allocator
   */
-  void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
+  void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params) nothrow
   {
     GstAllocator* _allocator;
     gst_video_encoder_get_allocator(cast(GstVideoEncoder*)this._cPtr, &_allocator, cast(GstAllocationParams*)&params);
@@ -261,7 +261,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
         frameNumber = system_frame_number of a frame
       Returns: pending unfinished #GstVideoCodecFrame identified by frame_number.
   */
-  gstvideo.video_codec_frame.VideoCodecFrame getFrame(int frameNumber)
+  gstvideo.video_codec_frame.VideoCodecFrame getFrame(int frameNumber) nothrow
   {
     GstVideoCodecFrame* _cretval;
     _cretval = gst_video_encoder_get_frame(cast(GstVideoEncoder*)this._cPtr, frameNumber);
@@ -273,7 +273,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
       Get all pending unfinished #GstVideoCodecFrame
       Returns: pending unfinished #GstVideoCodecFrame.
   */
-  gstvideo.video_codec_frame.VideoCodecFrame[] getFrames()
+  gstvideo.video_codec_frame.VideoCodecFrame[] getFrames() nothrow
   {
     GList* _cretval;
     _cretval = gst_video_encoder_get_frames(cast(GstVideoEncoder*)this._cPtr);
@@ -291,7 +291,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
         maxLatency = address of variable in which to store the
               configured maximum latency, or null
   */
-  void getLatency(out gst.types.ClockTime minLatency, out gst.types.ClockTime maxLatency)
+  void getLatency(out gst.types.ClockTime minLatency, out gst.types.ClockTime maxLatency) nothrow
   {
     gst_video_encoder_get_latency(cast(GstVideoEncoder*)this._cPtr, cast(GstClockTime*)&minLatency, cast(GstClockTime*)&maxLatency);
   }
@@ -309,7 +309,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
         frame = a #GstVideoCodecFrame
       Returns: max decoding time.
   */
-  gst.types.ClockTimeDiff getMaxEncodeTime(gstvideo.video_codec_frame.VideoCodecFrame frame)
+  gst.types.ClockTimeDiff getMaxEncodeTime(gstvideo.video_codec_frame.VideoCodecFrame frame) nothrow
   {
     gst.types.ClockTimeDiff _retval;
     _retval = gst_video_encoder_get_max_encode_time(cast(GstVideoEncoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(No.Dup) : null);
@@ -321,7 +321,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
       for more details.
       Returns: the minimum force-keyunit interval
   */
-  gst.types.ClockTime getMinForceKeyUnitInterval()
+  gst.types.ClockTime getMinForceKeyUnitInterval() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_video_encoder_get_min_force_key_unit_interval(cast(GstVideoEncoder*)this._cPtr);
@@ -332,7 +332,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
       Get the oldest unfinished pending #GstVideoCodecFrame
       Returns: oldest unfinished pending #GstVideoCodecFrame
   */
-  gstvideo.video_codec_frame.VideoCodecFrame getOldestFrame()
+  gstvideo.video_codec_frame.VideoCodecFrame getOldestFrame() nothrow
   {
     GstVideoCodecFrame* _cretval;
     _cretval = gst_video_encoder_get_oldest_frame(cast(GstVideoEncoder*)this._cPtr);
@@ -344,7 +344,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
       Get the current #GstVideoCodecState
       Returns: #GstVideoCodecState describing format of video data.
   */
-  gstvideo.video_codec_state.VideoCodecState getOutputState()
+  gstvideo.video_codec_state.VideoCodecState getOutputState() nothrow
   {
     GstVideoCodecState* _cretval;
     _cretval = gst_video_encoder_get_output_state(cast(GstVideoEncoder*)this._cPtr);
@@ -357,7 +357,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
       events from downstream.
       Returns: true if the encoder is configured to perform Quality-of-Service.
   */
-  bool isQosEnabled()
+  bool isQosEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_encoder_is_qos_enabled(cast(GstVideoEncoder*)this._cPtr);
@@ -379,7 +379,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
               previously-set tags
         mode = the #GstTagMergeMode to use, usually #GST_TAG_MERGE_REPLACE
   */
-  void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode)
+  void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode) nothrow
   {
     gst_video_encoder_merge_tags(cast(GstVideoEncoder*)this._cPtr, tags ? cast(const(GstTagList)*)tags._cPtr(No.Dup) : null, mode);
   }
@@ -390,7 +390,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
       negotiate fails.
       Returns: true if the negotiation succeeded, else false.
   */
-  bool negotiate()
+  bool negotiate() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_encoder_negotiate(cast(GstVideoEncoder*)this._cPtr);
@@ -407,7 +407,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
         filter = filter caps
       Returns: a #GstCaps owned by caller
   */
-  gst.caps.Caps proxyGetcaps(gst.caps.Caps caps = null, gst.caps.Caps filter = null)
+  gst.caps.Caps proxyGetcaps(gst.caps.Caps caps = null, gst.caps.Caps filter = null) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_video_encoder_proxy_getcaps(cast(GstVideoEncoder*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
@@ -424,7 +424,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
         minLatency = minimum latency
         maxLatency = maximum latency
   */
-  void setLatency(gst.types.ClockTime minLatency, gst.types.ClockTime maxLatency)
+  void setLatency(gst.types.ClockTime minLatency, gst.types.ClockTime maxLatency) nothrow
   {
     gst_video_encoder_set_latency(cast(GstVideoEncoder*)this._cPtr, minLatency, maxLatency);
   }
@@ -437,7 +437,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
       Params:
         interval = minimum interval
   */
-  void setMinForceKeyUnitInterval(gst.types.ClockTime interval)
+  void setMinForceKeyUnitInterval(gst.types.ClockTime interval) nothrow
   {
     gst_video_encoder_set_min_force_key_unit_interval(cast(GstVideoEncoder*)this._cPtr, interval);
   }
@@ -451,7 +451,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
       Params:
         minPts = minimal PTS that will be passed to handle_frame
   */
-  void setMinPts(gst.types.ClockTime minPts)
+  void setMinPts(gst.types.ClockTime minPts) nothrow
   {
     gst_video_encoder_set_min_pts(cast(GstVideoEncoder*)this._cPtr, minPts);
   }
@@ -481,7 +481,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
         reference = An optional reference GstVideoCodecState
       Returns: the newly configured output state.
   */
-  gstvideo.video_codec_state.VideoCodecState setOutputState(gst.caps.Caps caps, gstvideo.video_codec_state.VideoCodecState reference = null)
+  gstvideo.video_codec_state.VideoCodecState setOutputState(gst.caps.Caps caps, gstvideo.video_codec_state.VideoCodecState reference = null) nothrow
   {
     GstVideoCodecState* _cretval;
     _cretval = gst_video_encoder_set_output_state(cast(GstVideoEncoder*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(Yes.Dup) : null, reference ? cast(GstVideoCodecState*)reference._cPtr(No.Dup) : null);
@@ -495,7 +495,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
       Params:
         enabled = the new qos value.
   */
-  void setQosEnabled(bool enabled)
+  void setQosEnabled(bool enabled) nothrow
   {
     gst_video_encoder_set_qos_enabled(cast(GstVideoEncoder*)this._cPtr, enabled);
   }
@@ -514,13 +514,13 @@ class VideoEncoderGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T, gst.p
           [gstvideo.video_encoder.VideoEncoder.setMinForceKeyUnitInterval] for more details.
       Returns: Builder instance for fluent chaining
   */
-  T minForceKeyUnitInterval(ulong propval)
+  T minForceKeyUnitInterval(ulong propval) nothrow
   {
     return setProperty("min-force-key-unit-interval", propval);
   }
 
   /** */
-  T qos(bool propval)
+  T qos(bool propval) nothrow
   {
     return setProperty("qos", propval);
   }
@@ -533,7 +533,7 @@ final class VideoEncoderGidBuilder : VideoEncoderGidBuilderImpl!VideoEncoderGidB
       Create object from builder.
       Returns: New object
   */
-  VideoEncoder build()
+  VideoEncoder build() nothrow
   {
     return new VideoEncoder(cast(void*)createGObject(VideoEncoder._getGType), No.Take);
   }

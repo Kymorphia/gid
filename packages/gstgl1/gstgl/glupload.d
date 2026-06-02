@@ -23,26 +23,26 @@ class GLUpload : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_upload_get_type != &gidSymbolNotFound ? gst_gl_upload_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLUpload self()
+  override GLUpload self() nothrow
   {
     return this;
   }
@@ -51,13 +51,13 @@ class GLUpload : gst.object.ObjectWrap
       Get builder for [gstgl.glupload.GLUpload]
       Returns: New builder object
   */
-  static GLUploadGidBuilder builder()
+  static GLUploadGidBuilder builder() nothrow
   {
     return new GLUploadGidBuilder;
   }
 
   /** */
-  this(gstgl.glcontext.GLContext context)
+  this(gstgl.glcontext.GLContext context) nothrow
   {
     GstGLUpload* _cretval;
     _cretval = gst_gl_upload_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
@@ -65,7 +65,7 @@ class GLUpload : gst.object.ObjectWrap
   }
 
   /** */
-  static gst.caps.Caps getInputTemplateCaps()
+  static gst.caps.Caps getInputTemplateCaps() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_gl_upload_get_input_template_caps();
@@ -82,7 +82,7 @@ class GLUpload : gst.object.ObjectWrap
         othercaps = a #GstCaps to fixate
       Returns: the fixated caps
   */
-  gst.caps.Caps fixateCaps(gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps othercaps)
+  gst.caps.Caps fixateCaps(gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps othercaps) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_gl_upload_fixate_caps(cast(GstGLUpload*)this._cPtr, direction, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, othercaps ? cast(GstCaps*)othercaps._cPtr(Yes.Dup) : null);
@@ -91,7 +91,7 @@ class GLUpload : gst.object.ObjectWrap
   }
 
   /** */
-  void getCaps(out gst.caps.Caps inCaps, out gst.caps.Caps outCaps)
+  void getCaps(out gst.caps.Caps inCaps, out gst.caps.Caps outCaps) nothrow
   {
     GstCaps* _inCaps;
     GstCaps* _outCaps;
@@ -109,7 +109,7 @@ class GLUpload : gst.object.ObjectWrap
         outbufPtr = resulting #GstBuffer
       Returns: whether the upload was successful
   */
-  gstgl.types.GLUploadReturn performWithBuffer(gst.buffer.Buffer buffer, out gst.buffer.Buffer outbufPtr)
+  gstgl.types.GLUploadReturn performWithBuffer(gst.buffer.Buffer buffer, out gst.buffer.Buffer outbufPtr) nothrow
   {
     GstGLUploadReturn _cretval;
     GstBuffer* _outbufPtr;
@@ -126,7 +126,7 @@ class GLUpload : gst.object.ObjectWrap
         decideQuery = a #GstQuery from a decide allocation
         query = the proposed allocation query
   */
-  void proposeAllocation(gst.query.Query decideQuery, gst.query.Query query)
+  void proposeAllocation(gst.query.Query decideQuery, gst.query.Query query) nothrow
   {
     gst_gl_upload_propose_allocation(cast(GstGLUpload*)this._cPtr, decideQuery ? cast(GstQuery*)decideQuery._cPtr(No.Dup) : null, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
   }
@@ -139,7 +139,7 @@ class GLUpload : gst.object.ObjectWrap
         outCaps = output #GstCaps
       Returns: whether in_caps and out_caps could be set on upload
   */
-  bool setCaps(gst.caps.Caps inCaps, gst.caps.Caps outCaps)
+  bool setCaps(gst.caps.Caps inCaps, gst.caps.Caps outCaps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_upload_set_caps(cast(GstGLUpload*)this._cPtr, inCaps ? cast(GstCaps*)inCaps._cPtr(No.Dup) : null, outCaps ? cast(GstCaps*)outCaps._cPtr(No.Dup) : null);
@@ -147,13 +147,13 @@ class GLUpload : gst.object.ObjectWrap
   }
 
   /** */
-  void setContext(gstgl.glcontext.GLContext context)
+  void setContext(gstgl.glcontext.GLContext context) nothrow
   {
     gst_gl_upload_set_context(cast(GstGLUpload*)this._cPtr, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
   }
 
   /** */
-  gst.caps.Caps transformCaps(gstgl.glcontext.GLContext context, gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps filter)
+  gst.caps.Caps transformCaps(gstgl.glcontext.GLContext context, gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps filter) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_gl_upload_transform_caps(cast(GstGLUpload*)this._cPtr, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, direction, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
@@ -174,7 +174,7 @@ final class GLUploadGidBuilder : GLUploadGidBuilderImpl!GLUploadGidBuilder
       Create object from builder.
       Returns: New object
   */
-  GLUpload build()
+  GLUpload build() nothrow
   {
     return new GLUpload(cast(void*)createGObject(GLUpload._getGType), Yes.Take);
   }

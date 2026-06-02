@@ -68,26 +68,26 @@ class ButtonContent : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_button_content_get_type != &gidSymbolNotFound ? adw_button_content_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ButtonContent self()
+  override ButtonContent self() nothrow
   {
     return this;
   }
@@ -96,7 +96,7 @@ class ButtonContent : gtk.widget.Widget
       Get builder for [adw.button_content.ButtonContent]
       Returns: New builder object
   */
-  static ButtonContentGidBuilder builder()
+  static ButtonContentGidBuilder builder() nothrow
   {
     return new ButtonContentGidBuilder;
   }
@@ -109,7 +109,7 @@ class ButtonContent : gtk.widget.Widget
         
         See [gtk.button.Button.canShrink].
   */
-  @property bool canShrink()
+  @property bool canShrink() nothrow
   {
     return getCanShrink();
   }
@@ -123,7 +123,7 @@ class ButtonContent : gtk.widget.Widget
           
           See [gtk.button.Button.canShrink].
   */
-  @property void canShrink(bool propval)
+  @property void canShrink(bool propval) nothrow
   {
     setCanShrink(propval);
   }
@@ -134,7 +134,7 @@ class ButtonContent : gtk.widget.Widget
         
         If empty, the icon is not shown.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return getIconName();
   }
@@ -146,7 +146,7 @@ class ButtonContent : gtk.widget.Widget
           
           If empty, the icon is not shown.
   */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     setIconName(propval);
   }
@@ -155,7 +155,7 @@ class ButtonContent : gtk.widget.Widget
       Get `label` property.
       Returns: The displayed label.
   */
-  @property string label()
+  @property string label() nothrow
   {
     return getLabel();
   }
@@ -165,7 +165,7 @@ class ButtonContent : gtk.widget.Widget
       Params:
         propval = The displayed label.
   */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     setLabel(propval);
   }
@@ -178,7 +178,7 @@ class ButtonContent : gtk.widget.Widget
         
         See [adw.button_content.ButtonContent.label].
   */
-  @property bool useUnderline()
+  @property bool useUnderline() nothrow
   {
     return getUseUnderline();
   }
@@ -192,7 +192,7 @@ class ButtonContent : gtk.widget.Widget
           
           See [adw.button_content.ButtonContent.label].
   */
-  @property void useUnderline(bool propval)
+  @property void useUnderline(bool propval) nothrow
   {
     setUseUnderline(propval);
   }
@@ -201,7 +201,7 @@ class ButtonContent : gtk.widget.Widget
       Creates a new [adw.button_content.ButtonContent].
       Returns: the new created [adw.button_content.ButtonContent]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_button_content_new();
@@ -212,7 +212,7 @@ class ButtonContent : gtk.widget.Widget
       gets whether the button can be smaller than the natural size of its contents.
       Returns: whether the button can shrink
   */
-  bool getCanShrink()
+  bool getCanShrink() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_button_content_get_can_shrink(cast(AdwButtonContent*)this._cPtr);
@@ -223,7 +223,7 @@ class ButtonContent : gtk.widget.Widget
       Gets the name of the displayed icon.
       Returns: the icon name
   */
-  string getIconName()
+  string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_button_content_get_icon_name(cast(AdwButtonContent*)this._cPtr);
@@ -235,7 +235,7 @@ class ButtonContent : gtk.widget.Widget
       Gets the displayed label.
       Returns: the label
   */
-  string getLabel()
+  string getLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_button_content_get_label(cast(AdwButtonContent*)this._cPtr);
@@ -247,7 +247,7 @@ class ButtonContent : gtk.widget.Widget
       Gets whether an underline in the text indicates a mnemonic.
       Returns: whether an underline in the text indicates a mnemonic
   */
-  bool getUseUnderline()
+  bool getUseUnderline() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_button_content_get_use_underline(cast(AdwButtonContent*)this._cPtr);
@@ -264,7 +264,7 @@ class ButtonContent : gtk.widget.Widget
       Params:
         canShrink = whether the button can shrink
   */
-  void setCanShrink(bool canShrink)
+  void setCanShrink(bool canShrink) nothrow
   {
     adw_button_content_set_can_shrink(cast(AdwButtonContent*)this._cPtr, canShrink);
   }
@@ -277,7 +277,7 @@ class ButtonContent : gtk.widget.Widget
       Params:
         iconName = the new icon name
   */
-  void setIconName(string iconName)
+  void setIconName(string iconName) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     adw_button_content_set_icon_name(cast(AdwButtonContent*)this._cPtr, _iconName);
@@ -289,7 +289,7 @@ class ButtonContent : gtk.widget.Widget
       Params:
         label = the new label
   */
-  void setLabel(string label)
+  void setLabel(string label) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     adw_button_content_set_label(cast(AdwButtonContent*)this._cPtr, _label);
@@ -305,7 +305,7 @@ class ButtonContent : gtk.widget.Widget
       Params:
         useUnderline = whether an underline in the text indicates a mnemonic
   */
-  void setUseUnderline(bool useUnderline)
+  void setUseUnderline(bool useUnderline) nothrow
   {
     adw_button_content_set_use_underline(cast(AdwButtonContent*)this._cPtr, useUnderline);
   }
@@ -326,7 +326,7 @@ class ButtonContentGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           See [gtk.button.Button.canShrink].
       Returns: Builder instance for fluent chaining
   */
-  T canShrink(bool propval)
+  T canShrink(bool propval) nothrow
   {
     return setProperty("can-shrink", propval);
   }
@@ -339,7 +339,7 @@ class ButtonContentGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           If empty, the icon is not shown.
       Returns: Builder instance for fluent chaining
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
@@ -350,7 +350,7 @@ class ButtonContentGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The displayed label.
       Returns: Builder instance for fluent chaining
   */
-  T label(string propval)
+  T label(string propval) nothrow
   {
     return setProperty("label", propval);
   }
@@ -365,7 +365,7 @@ class ButtonContentGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           See [adw.button_content.ButtonContent.label].
       Returns: Builder instance for fluent chaining
   */
-  T useUnderline(bool propval)
+  T useUnderline(bool propval) nothrow
   {
     return setProperty("use-underline", propval);
   }
@@ -378,7 +378,7 @@ final class ButtonContentGidBuilder : ButtonContentGidBuilderImpl!ButtonContentG
       Create object from builder.
       Returns: New object
   */
-  ButtonContent build()
+  ButtonContent build() nothrow
   {
     return new ButtonContent(cast(void*)createGObject(ButtonContent._getGType), No.Take);
   }

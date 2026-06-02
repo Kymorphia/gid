@@ -27,26 +27,26 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_slice_list_model_get_type != &gidSymbolNotFound ? gtk_slice_list_model_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SliceListModel self()
+  override SliceListModel self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Get builder for [gtk.slice_list_model.SliceListModel]
       Returns: New builder object
   */
-  static SliceListModelGidBuilder builder()
+  static SliceListModelGidBuilder builder() nothrow
   {
     return new SliceListModelGidBuilder;
   }
@@ -64,7 +64,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
-  @property gobject.types.GType itemType()
+  @property gobject.types.GType itemType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
   }
@@ -73,7 +73,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Get `model` property.
       Returns: Child model to take slice from.
   */
-  @property gio.list_model.ListModel model()
+  @property gio.list_model.ListModel model() nothrow
   {
     return getModel();
   }
@@ -83,7 +83,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Params:
         propval = Child model to take slice from.
   */
-  @property void model(gio.list_model.ListModel propval)
+  @property void model(gio.list_model.ListModel propval) nothrow
   {
     setModel(propval);
   }
@@ -92,7 +92,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Get `nItems` property.
       Returns: The number of items. See [gio.list_model.ListModel.getNItems].
   */
-  @property uint nItems()
+  @property uint nItems() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
@@ -101,7 +101,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Get `offset` property.
       Returns: Offset of slice.
   */
-  @property uint offset()
+  @property uint offset() nothrow
   {
     return getOffset();
   }
@@ -111,7 +111,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Params:
         propval = Offset of slice.
   */
-  @property void offset(uint propval)
+  @property void offset(uint propval) nothrow
   {
     setOffset(propval);
   }
@@ -120,7 +120,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Get `size` property.
       Returns: Maximum size of slice.
   */
-  @property uint size()
+  @property uint size() nothrow
   {
     return getSize();
   }
@@ -130,7 +130,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Params:
         propval = Maximum size of slice.
   */
-  @property void size(uint propval)
+  @property void size(uint propval) nothrow
   {
     setSize(propval);
   }
@@ -150,7 +150,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
         size = maximum size of the slice
       Returns: A new [gtk.slice_list_model.SliceListModel]
   */
-  this(gio.list_model.ListModel model, uint offset, uint size)
+  this(gio.list_model.ListModel model, uint offset, uint size) nothrow
   {
     GtkSliceListModel* _cretval;
     _cretval = gtk_slice_list_model_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(Yes.Dup) : null, offset, size);
@@ -161,7 +161,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Gets the model that is currently being used or null if none.
       Returns: The model in use
   */
-  gio.list_model.ListModel getModel()
+  gio.list_model.ListModel getModel() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_slice_list_model_get_model(cast(GtkSliceListModel*)this._cPtr);
@@ -173,7 +173,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Gets the offset set via [gtk.slice_list_model.SliceListModel.setOffset].
       Returns: The offset
   */
-  uint getOffset()
+  uint getOffset() nothrow
   {
     uint _retval;
     _retval = gtk_slice_list_model_get_offset(cast(GtkSliceListModel*)this._cPtr);
@@ -184,7 +184,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Gets the size set via [gtk.slice_list_model.SliceListModel.setSize].
       Returns: The size
   */
-  uint getSize()
+  uint getSize() nothrow
   {
     uint _retval;
     _retval = gtk_slice_list_model_get_size(cast(GtkSliceListModel*)this._cPtr);
@@ -199,7 +199,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Params:
         model = The model to be sliced
   */
-  void setModel(gio.list_model.ListModel model = null)
+  void setModel(gio.list_model.ListModel model = null) nothrow
   {
     gtk_slice_list_model_set_model(cast(GtkSliceListModel*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
@@ -213,7 +213,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Params:
         offset = the new offset to use
   */
-  void setOffset(uint offset)
+  void setOffset(uint offset) nothrow
   {
     gtk_slice_list_model_set_offset(cast(GtkSliceListModel*)this._cPtr, offset);
   }
@@ -228,7 +228,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Params:
         size = the maximum size
   */
-  void setSize(uint size)
+  void setSize(uint size) nothrow
   {
     gtk_slice_list_model_set_size(cast(GtkSliceListModel*)this._cPtr, size);
   }
@@ -247,7 +247,7 @@ class SliceListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Child model to take slice from.
       Returns: Builder instance for fluent chaining
   */
-  T model(gio.list_model.ListModel propval)
+  T model(gio.list_model.ListModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -258,7 +258,7 @@ class SliceListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Offset of slice.
       Returns: Builder instance for fluent chaining
   */
-  T offset(uint propval)
+  T offset(uint propval) nothrow
   {
     return setProperty("offset", propval);
   }
@@ -269,7 +269,7 @@ class SliceListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Maximum size of slice.
       Returns: Builder instance for fluent chaining
   */
-  T size(uint propval)
+  T size(uint propval) nothrow
   {
     return setProperty("size", propval);
   }
@@ -282,7 +282,7 @@ final class SliceListModelGidBuilder : SliceListModelGidBuilderImpl!SliceListMod
       Create object from builder.
       Returns: New object
   */
-  SliceListModel build()
+  SliceListModel build() nothrow
   {
     return new SliceListModel(cast(void*)createGObject(SliceListModel._getGType), Yes.Take);
   }

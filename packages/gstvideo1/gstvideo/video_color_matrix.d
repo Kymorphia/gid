@@ -22,7 +22,7 @@ struct VideoColorMatrix
         value = a ITU-T H.273 matrix coefficients value
       Returns: the matched #GstVideoColorMatrix
   */
-  static gstvideo.types.VideoColorMatrix fromIso(uint value)
+  static gstvideo.types.VideoColorMatrix fromIso(uint value) nothrow
   {
     GstVideoColorMatrix _cretval;
     _cretval = gst_video_color_matrix_from_iso(value);
@@ -63,7 +63,7 @@ struct VideoColorMatrix
       Returns: TRUE if matrix was a YUV color format and Kr and Kb contain valid
            values.
   */
-  static bool getKrKb(gstvideo.types.VideoColorMatrix matrix, out double Kr, out double Kb)
+  static bool getKrKb(gstvideo.types.VideoColorMatrix matrix, out double Kr, out double Kb) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_color_matrix_get_Kr_Kb(matrix, cast(double*)&Kr, cast(double*)&Kb);
@@ -80,7 +80,7 @@ struct VideoColorMatrix
         matrix = a #GstVideoColorMatrix
       Returns: The value of ISO/IEC 23001-8 matrix coefficients.
   */
-  static uint toIso(gstvideo.types.VideoColorMatrix matrix)
+  static uint toIso(gstvideo.types.VideoColorMatrix matrix) nothrow
   {
     uint _retval;
     _retval = gst_video_color_matrix_to_iso(matrix);

@@ -38,7 +38,7 @@ interface Preset
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_preset_get_type != &gidSymbolNotFound ? gst_preset_get_type() : cast(GType)0;
@@ -50,7 +50,7 @@ interface Preset
       Returns: the directory or null, don't free or modify
         the string
   */
-  static string getAppDir()
+  static string getAppDir() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_preset_get_app_dir();
@@ -67,7 +67,7 @@ interface Preset
         appDir = the application specific preset dir
       Returns: true for success, false if the dir already has been set
   */
-  static bool setAppDir(string appDir)
+  static bool setAppDir(string appDir) nothrow
   {
     bool _retval;
     const(char)* _appDir = appDir.toCString(No.Alloc);

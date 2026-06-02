@@ -17,26 +17,26 @@ class CSVReadOptions : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_csv_read_options_get_type != &gidSymbolNotFound ? garrow_csv_read_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CSVReadOptions self()
+  override CSVReadOptions self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Get builder for [arrow.csvread_options.CSVReadOptions]
       Returns: New builder object
   */
-  static CSVReadOptionsGidBuilder builder()
+  static CSVReadOptionsGidBuilder builder() nothrow
   {
     return new CSVReadOptionsGidBuilder;
   }
@@ -54,7 +54,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Get `allowNewlinesInValues` property.
       Returns: Whether values are allowed to contain CR (0x0d) and LF (0x0a) characters.
   */
-  @property bool allowNewlinesInValues()
+  @property bool allowNewlinesInValues() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("allow-newlines-in-values");
   }
@@ -64,7 +64,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Params:
         propval = Whether values are allowed to contain CR (0x0d) and LF (0x0a) characters.
   */
-  @property void allowNewlinesInValues(bool propval)
+  @property void allowNewlinesInValues(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("allow-newlines-in-values", propval);
   }
@@ -75,7 +75,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
         If true, then strings in "null_values" are considered null for string columns.
         If false, then all strings are valid string values.
   */
-  @property bool allowNullStrings()
+  @property bool allowNullStrings() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("allow-null-strings");
   }
@@ -87,7 +87,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
           If true, then strings in "null_values" are considered null for string columns.
           If false, then all strings are valid string values.
   */
-  @property void allowNullStrings(bool propval)
+  @property void allowNullStrings(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("allow-null-strings", propval);
   }
@@ -97,7 +97,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Returns: Block size we request from the IO layer; also determines the size
         of chunks when #GArrowCSVReadOptions:use-threads is true.
   */
-  @property int blockSize()
+  @property int blockSize() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("block-size");
   }
@@ -108,7 +108,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
         propval = Block size we request from the IO layer; also determines the size
           of chunks when #GArrowCSVReadOptions:use-threads is true.
   */
-  @property void blockSize(int propval)
+  @property void blockSize(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("block-size", propval);
   }
@@ -117,7 +117,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Get `checkUtf8` property.
       Returns: Whether to check UTF8 validity of string columns.
   */
-  @property bool checkUtf8()
+  @property bool checkUtf8() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("check-utf8");
   }
@@ -127,7 +127,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Params:
         propval = Whether to check UTF8 validity of string columns.
   */
-  @property void checkUtf8(bool propval)
+  @property void checkUtf8(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("check-utf8", propval);
   }
@@ -136,7 +136,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Get `delimiter` property.
       Returns: Field delimiter character.
   */
-  @property char delimiter()
+  @property char delimiter() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(char)("delimiter");
   }
@@ -146,7 +146,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Params:
         propval = Field delimiter character.
   */
-  @property void delimiter(char propval)
+  @property void delimiter(char propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(char)("delimiter", propval);
   }
@@ -156,7 +156,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Returns: Escaping character. This is used only when
         #GArrowCSVReadOptions:is-escaped is true.
   */
-  @property char escapeCharacter()
+  @property char escapeCharacter() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(char)("escape-character");
   }
@@ -167,19 +167,19 @@ class CSVReadOptions : gobject.object.ObjectWrap
         propval = Escaping character. This is used only when
           #GArrowCSVReadOptions:is-escaped is true.
   */
-  @property void escapeCharacter(char propval)
+  @property void escapeCharacter(char propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(char)("escape-character", propval);
   }
 
   /** */
-  @property bool generateColumnNames()
+  @property bool generateColumnNames() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("generate-column-names");
   }
 
   /** */
-  @property void generateColumnNames(bool propval)
+  @property void generateColumnNames(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("generate-column-names", propval);
   }
@@ -189,7 +189,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Returns: Whether empty lines are ignored. If false, an empty line
         represents a simple empty value (assuming a one-column CSV file).
   */
-  @property bool ignoreEmptyLines()
+  @property bool ignoreEmptyLines() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("ignore-empty-lines");
   }
@@ -200,7 +200,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
         propval = Whether empty lines are ignored. If false, an empty line
           represents a simple empty value (assuming a one-column CSV file).
   */
-  @property void ignoreEmptyLines(bool propval)
+  @property void ignoreEmptyLines(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("ignore-empty-lines", propval);
   }
@@ -209,7 +209,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Get `isDoubleQuoted` property.
       Returns: Whether a quote inside a value is double quoted.
   */
-  @property bool isDoubleQuoted()
+  @property bool isDoubleQuoted() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("is-double-quoted");
   }
@@ -219,7 +219,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Params:
         propval = Whether a quote inside a value is double quoted.
   */
-  @property void isDoubleQuoted(bool propval)
+  @property void isDoubleQuoted(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("is-double-quoted", propval);
   }
@@ -228,7 +228,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Get `isEscaped` property.
       Returns: Whether escaping is used.
   */
-  @property bool isEscaped()
+  @property bool isEscaped() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("is-escaped");
   }
@@ -238,7 +238,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Params:
         propval = Whether escaping is used.
   */
-  @property void isEscaped(bool propval)
+  @property void isEscaped(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("is-escaped", propval);
   }
@@ -247,7 +247,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Get `isQuoted` property.
       Returns: Whether quoting is used.
   */
-  @property bool isQuoted()
+  @property bool isQuoted() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("is-quoted");
   }
@@ -257,7 +257,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Params:
         propval = Whether quoting is used.
   */
-  @property void isQuoted(bool propval)
+  @property void isQuoted(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("is-quoted", propval);
   }
@@ -267,7 +267,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Returns: The number of header rows to skip (not including
         the row of column names, if any)
   */
-  @property uint nSkipRows()
+  @property uint nSkipRows() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-skip-rows");
   }
@@ -278,7 +278,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
         propval = The number of header rows to skip (not including
           the row of column names, if any)
   */
-  @property void nSkipRows(uint propval)
+  @property void nSkipRows(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("n-skip-rows", propval);
   }
@@ -288,7 +288,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Returns: Quoting character. This is used only when
         #GArrowCSVReadOptions:is-quoted is true.
   */
-  @property char quoteCharacter()
+  @property char quoteCharacter() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(char)("quote-character");
   }
@@ -299,7 +299,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
         propval = Quoting character. This is used only when
           #GArrowCSVReadOptions:is-quoted is true.
   */
-  @property void quoteCharacter(char propval)
+  @property void quoteCharacter(char propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(char)("quote-character", propval);
   }
@@ -308,7 +308,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Get `useThreads` property.
       Returns: Whether to use the global CPU thread pool.
   */
-  @property bool useThreads()
+  @property bool useThreads() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("use-threads");
   }
@@ -318,13 +318,13 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Params:
         propval = Whether to use the global CPU thread pool.
   */
-  @property void useThreads(bool propval)
+  @property void useThreads(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("use-threads", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowCSVReadOptions* _cretval;
     _cretval = garrow_csv_read_options_new();
@@ -332,7 +332,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
   }
 
   /** */
-  void addColumnName(string columnName)
+  void addColumnName(string columnName) nothrow
   {
     const(char)* _columnName = columnName.toCString(No.Alloc);
     garrow_csv_read_options_add_column_name(cast(GArrowCSVReadOptions*)this._cPtr, _columnName);
@@ -345,21 +345,21 @@ class CSVReadOptions : gobject.object.ObjectWrap
         name = The name of the target column.
         dataType = The #GArrowDataType for the column.
   */
-  void addColumnType(string name, arrow.data_type.DataType dataType)
+  void addColumnType(string name, arrow.data_type.DataType dataType) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     garrow_csv_read_options_add_column_type(cast(GArrowCSVReadOptions*)this._cPtr, _name, dataType ? cast(GArrowDataType*)dataType._cPtr(No.Dup) : null);
   }
 
   /** */
-  void addFalseValue(string falseValue)
+  void addFalseValue(string falseValue) nothrow
   {
     const(char)* _falseValue = falseValue.toCString(No.Alloc);
     garrow_csv_read_options_add_false_value(cast(GArrowCSVReadOptions*)this._cPtr, _falseValue);
   }
 
   /** */
-  void addNullValue(string nullValue)
+  void addNullValue(string nullValue) nothrow
   {
     const(char)* _nullValue = nullValue.toCString(No.Alloc);
     garrow_csv_read_options_add_null_value(cast(GArrowCSVReadOptions*)this._cPtr, _nullValue);
@@ -371,26 +371,26 @@ class CSVReadOptions : gobject.object.ObjectWrap
       Params:
         schema = The #GArrowSchema that specifies columns and their types.
   */
-  void addSchema(arrow.schema.Schema schema)
+  void addSchema(arrow.schema.Schema schema) nothrow
   {
     garrow_csv_read_options_add_schema(cast(GArrowCSVReadOptions*)this._cPtr, schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null);
   }
 
   /** */
-  void addTimestampParser(arrow.timestamp_parser.TimestampParser parser)
+  void addTimestampParser(arrow.timestamp_parser.TimestampParser parser) nothrow
   {
     garrow_csv_read_options_add_timestamp_parser(cast(GArrowCSVReadOptions*)this._cPtr, parser ? cast(GArrowTimestampParser*)parser._cPtr(No.Dup) : null);
   }
 
   /** */
-  void addTrueValue(string trueValue)
+  void addTrueValue(string trueValue) nothrow
   {
     const(char)* _trueValue = trueValue.toCString(No.Alloc);
     garrow_csv_read_options_add_true_value(cast(GArrowCSVReadOptions*)this._cPtr, _trueValue);
   }
 
   /** */
-  string[] getColumnNames()
+  string[] getColumnNames() nothrow
   {
     char** _cretval;
     _cretval = garrow_csv_read_options_get_column_names(cast(GArrowCSVReadOptions*)this._cPtr);
@@ -410,7 +410,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.data_type.DataType[string] getColumnTypes()
+  arrow.data_type.DataType[string] getColumnTypes() nothrow
   {
     GHashTable* _cretval;
     _cretval = garrow_csv_read_options_get_column_types(cast(GArrowCSVReadOptions*)this._cPtr);
@@ -419,7 +419,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
   }
 
   /** */
-  string[] getFalseValues()
+  string[] getFalseValues() nothrow
   {
     char** _cretval;
     _cretval = garrow_csv_read_options_get_false_values(cast(GArrowCSVReadOptions*)this._cPtr);
@@ -439,7 +439,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
   }
 
   /** */
-  string[] getNullValues()
+  string[] getNullValues() nothrow
   {
     char** _cretval;
     _cretval = garrow_csv_read_options_get_null_values(cast(GArrowCSVReadOptions*)this._cPtr);
@@ -459,7 +459,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.timestamp_parser.TimestampParser[] getTimestampParsers()
+  arrow.timestamp_parser.TimestampParser[] getTimestampParsers() nothrow
   {
     GList* _cretval;
     _cretval = garrow_csv_read_options_get_timestamp_parsers(cast(GArrowCSVReadOptions*)this._cPtr);
@@ -468,7 +468,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
   }
 
   /** */
-  string[] getTrueValues()
+  string[] getTrueValues() nothrow
   {
     char** _cretval;
     _cretval = garrow_csv_read_options_get_true_values(cast(GArrowCSVReadOptions*)this._cPtr);
@@ -488,7 +488,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
   }
 
   /** */
-  void setColumnNames(string[] columnNames)
+  void setColumnNames(string[] columnNames) nothrow
   {
     size_t _nColumnNames;
     if (columnNames)
@@ -503,7 +503,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
   }
 
   /** */
-  void setFalseValues(string[] falseValues)
+  void setFalseValues(string[] falseValues) nothrow
   {
     size_t _nFalseValues;
     if (falseValues)
@@ -518,7 +518,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
   }
 
   /** */
-  void setNullValues(string[] nullValues)
+  void setNullValues(string[] nullValues) nothrow
   {
     size_t _nNullValues;
     if (nullValues)
@@ -533,7 +533,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
   }
 
   /** */
-  void setTimestampParsers(arrow.timestamp_parser.TimestampParser[] parsers)
+  void setTimestampParsers(arrow.timestamp_parser.TimestampParser[] parsers) nothrow
   {
     auto _parsers = gListFromD!(arrow.timestamp_parser.TimestampParser)(parsers);
     scope(exit) containerFree!(GList*, arrow.timestamp_parser.TimestampParser, GidOwnership.None)(_parsers);
@@ -541,7 +541,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
   }
 
   /** */
-  void setTrueValues(string[] trueValues)
+  void setTrueValues(string[] trueValues) nothrow
   {
     size_t _nTrueValues;
     if (trueValues)
@@ -566,7 +566,7 @@ class CSVReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Whether values are allowed to contain CR (0x0d) and LF (0x0a) characters.
       Returns: Builder instance for fluent chaining
   */
-  T allowNewlinesInValues(bool propval)
+  T allowNewlinesInValues(bool propval) nothrow
   {
     return setProperty("allow-newlines-in-values", propval);
   }
@@ -579,7 +579,7 @@ class CSVReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           If false, then all strings are valid string values.
       Returns: Builder instance for fluent chaining
   */
-  T allowNullStrings(bool propval)
+  T allowNullStrings(bool propval) nothrow
   {
     return setProperty("allow-null-strings", propval);
   }
@@ -591,7 +591,7 @@ class CSVReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           of chunks when #GArrowCSVReadOptions:use-threads is true.
       Returns: Builder instance for fluent chaining
   */
-  T blockSize(int propval)
+  T blockSize(int propval) nothrow
   {
     return setProperty("block-size", propval);
   }
@@ -602,7 +602,7 @@ class CSVReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Whether to check UTF8 validity of string columns.
       Returns: Builder instance for fluent chaining
   */
-  T checkUtf8(bool propval)
+  T checkUtf8(bool propval) nothrow
   {
     return setProperty("check-utf8", propval);
   }
@@ -613,7 +613,7 @@ class CSVReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Field delimiter character.
       Returns: Builder instance for fluent chaining
   */
-  T delimiter(char propval)
+  T delimiter(char propval) nothrow
   {
     return setProperty("delimiter", propval);
   }
@@ -625,13 +625,13 @@ class CSVReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           #GArrowCSVReadOptions:is-escaped is true.
       Returns: Builder instance for fluent chaining
   */
-  T escapeCharacter(char propval)
+  T escapeCharacter(char propval) nothrow
   {
     return setProperty("escape-character", propval);
   }
 
   /** */
-  T generateColumnNames(bool propval)
+  T generateColumnNames(bool propval) nothrow
   {
     return setProperty("generate-column-names", propval);
   }
@@ -643,7 +643,7 @@ class CSVReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           represents a simple empty value (assuming a one-column CSV file).
       Returns: Builder instance for fluent chaining
   */
-  T ignoreEmptyLines(bool propval)
+  T ignoreEmptyLines(bool propval) nothrow
   {
     return setProperty("ignore-empty-lines", propval);
   }
@@ -654,7 +654,7 @@ class CSVReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Whether a quote inside a value is double quoted.
       Returns: Builder instance for fluent chaining
   */
-  T isDoubleQuoted(bool propval)
+  T isDoubleQuoted(bool propval) nothrow
   {
     return setProperty("is-double-quoted", propval);
   }
@@ -665,7 +665,7 @@ class CSVReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Whether escaping is used.
       Returns: Builder instance for fluent chaining
   */
-  T isEscaped(bool propval)
+  T isEscaped(bool propval) nothrow
   {
     return setProperty("is-escaped", propval);
   }
@@ -676,7 +676,7 @@ class CSVReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Whether quoting is used.
       Returns: Builder instance for fluent chaining
   */
-  T isQuoted(bool propval)
+  T isQuoted(bool propval) nothrow
   {
     return setProperty("is-quoted", propval);
   }
@@ -688,7 +688,7 @@ class CSVReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           the row of column names, if any)
       Returns: Builder instance for fluent chaining
   */
-  T nSkipRows(uint propval)
+  T nSkipRows(uint propval) nothrow
   {
     return setProperty("n-skip-rows", propval);
   }
@@ -700,7 +700,7 @@ class CSVReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           #GArrowCSVReadOptions:is-quoted is true.
       Returns: Builder instance for fluent chaining
   */
-  T quoteCharacter(char propval)
+  T quoteCharacter(char propval) nothrow
   {
     return setProperty("quote-character", propval);
   }
@@ -711,7 +711,7 @@ class CSVReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Whether to use the global CPU thread pool.
       Returns: Builder instance for fluent chaining
   */
-  T useThreads(bool propval)
+  T useThreads(bool propval) nothrow
   {
     return setProperty("use-threads", propval);
   }
@@ -724,7 +724,7 @@ final class CSVReadOptionsGidBuilder : CSVReadOptionsGidBuilderImpl!CSVReadOptio
       Create object from builder.
       Returns: New object
   */
-  CSVReadOptions build()
+  CSVReadOptions build() nothrow
   {
     return new CSVReadOptions(cast(void*)createGObject(CSVReadOptions._getGType), Yes.Take);
   }

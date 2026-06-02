@@ -24,26 +24,26 @@ class GestureClick : gtk.gesture_single.GestureSingle
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gesture_click_get_type != &gidSymbolNotFound ? gtk_gesture_click_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GestureClick self()
+  override GestureClick self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class GestureClick : gtk.gesture_single.GestureSingle
       Get builder for [gtk.gesture_click.GestureClick]
       Returns: New builder object
   */
-  static GestureClickGidBuilder builder()
+  static GestureClickGidBuilder builder() nothrow
   {
     return new GestureClickGidBuilder;
   }
@@ -62,7 +62,7 @@ class GestureClick : gtk.gesture_single.GestureSingle
       single and multiple presses.
       Returns: a newly created [gtk.gesture_click.GestureClick]
   */
-  this()
+  this() nothrow
   {
     GtkGesture* _cretval;
     _cretval = gtk_gesture_click_new();
@@ -90,7 +90,7 @@ class GestureClick : gtk.gesture_single.GestureSingle
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPressed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPressed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -99,7 +99,7 @@ class GestureClick : gtk.gesture_single.GestureSingle
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.gesture_click.GestureClick)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -117,7 +117,14 @@ class GestureClick : gtk.gesture_single.GestureSingle
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.gesture_click.GestureClick.pressed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -150,7 +157,7 @@ class GestureClick : gtk.gesture_single.GestureSingle
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectReleased(T)(T callback, Flag!"After" after = No.After)
+  gulong connectReleased(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -159,7 +166,7 @@ class GestureClick : gtk.gesture_single.GestureSingle
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.gesture_click.GestureClick)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -177,7 +184,14 @@ class GestureClick : gtk.gesture_single.GestureSingle
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.gesture_click.GestureClick.released");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -199,13 +213,13 @@ class GestureClick : gtk.gesture_single.GestureSingle
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectStopped(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStopped(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.gesture_click.GestureClick)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -214,7 +228,14 @@ class GestureClick : gtk.gesture_single.GestureSingle
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.gesture_click.GestureClick.stopped");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -249,7 +270,7 @@ class GestureClick : gtk.gesture_single.GestureSingle
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUnpairedRelease(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUnpairedRelease(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -259,7 +280,7 @@ class GestureClick : gtk.gesture_single.GestureSingle
   && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gtk.gesture_click.GestureClick)))
   && Parameters!T.length < 6)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -280,7 +301,14 @@ class GestureClick : gtk.gesture_single.GestureSingle
       static if (Parameters!T.length > 4)
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.gesture_click.GestureClick.unpairedRelease");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -300,7 +328,7 @@ final class GestureClickGidBuilder : GestureClickGidBuilderImpl!GestureClickGidB
       Create object from builder.
       Returns: New object
   */
-  GestureClick build()
+  GestureClick build() nothrow
   {
     return new GestureClick(cast(void*)createGObject(GestureClick._getGType), Yes.Take);
   }

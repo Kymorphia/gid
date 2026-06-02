@@ -15,26 +15,26 @@ class PStmt : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_pstmt_get_type != &gidSymbolNotFound ? gda_pstmt_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PStmt self()
+  override PStmt self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class PStmt : gobject.object.ObjectWrap
       Get builder for [gda.pstmt.PStmt]
       Returns: New builder object
   */
-  static PStmtGidBuilder builder()
+  static PStmtGidBuilder builder() nothrow
   {
     return new PStmtGidBuilder;
   }
@@ -54,7 +54,7 @@ class PStmt : gobject.object.ObjectWrap
       Params:
         dest = a #GdaPStmt object
   */
-  void copyContents(gda.pstmt.PStmt dest)
+  void copyContents(gda.pstmt.PStmt dest) nothrow
   {
     gda_pstmt_copy_contents(cast(GdaPStmt*)this._cPtr, dest ? cast(GdaPStmt*)dest._cPtr(No.Dup) : null);
   }
@@ -66,7 +66,7 @@ class PStmt : gobject.object.ObjectWrap
       will return null
       Returns: the #GdaStatement
   */
-  gda.statement.Statement getGdaStatement()
+  gda.statement.Statement getGdaStatement() nothrow
   {
     GdaStatement* _cretval;
     _cretval = gda_pstmt_get_gda_statement(cast(GdaPStmt*)this._cPtr);
@@ -80,7 +80,7 @@ class PStmt : gobject.object.ObjectWrap
       Params:
         stmt = a #GdaStatement object, or null
   */
-  void setGdaStatement(gda.statement.Statement stmt = null)
+  void setGdaStatement(gda.statement.Statement stmt = null) nothrow
   {
     gda_pstmt_set_gda_statement(cast(GdaPStmt*)this._cPtr, stmt ? cast(GdaStatement*)stmt._cPtr(No.Dup) : null);
   }
@@ -98,7 +98,7 @@ final class PStmtGidBuilder : PStmtGidBuilderImpl!PStmtGidBuilder
       Create object from builder.
       Returns: New object
   */
-  PStmt build()
+  PStmt build() nothrow
   {
     return new PStmt(cast(void*)createGObject(PStmt._getGType), No.Take);
   }

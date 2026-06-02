@@ -19,26 +19,26 @@ class ColorBalanceChannel : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_color_balance_channel_get_type != &gidSymbolNotFound ? gst_color_balance_channel_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ColorBalanceChannel self()
+  override ColorBalanceChannel self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class ColorBalanceChannel : gobject.object.ObjectWrap
       Get builder for [gstvideo.color_balance_channel.ColorBalanceChannel]
       Returns: New builder object
   */
-  static ColorBalanceChannelGidBuilder builder()
+  static ColorBalanceChannelGidBuilder builder() nothrow
   {
     return new ColorBalanceChannelGidBuilder;
   }
@@ -69,14 +69,14 @@ class ColorBalanceChannel : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstvideo.color_balance_channel.ColorBalanceChannel)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -88,7 +88,14 @@ class ColorBalanceChannel : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstvideo.color_balance_channel.ColorBalanceChannel.valueChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -108,7 +115,7 @@ final class ColorBalanceChannelGidBuilder : ColorBalanceChannelGidBuilderImpl!Co
       Create object from builder.
       Returns: New object
   */
-  ColorBalanceChannel build()
+  ColorBalanceChannel build() nothrow
   {
     return new ColorBalanceChannel(cast(void*)createGObject(ColorBalanceChannel._getGType), No.Take);
   }

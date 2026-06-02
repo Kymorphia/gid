@@ -16,26 +16,26 @@ class StatusbarAccessible : gtk.container_accessible.ContainerAccessible
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_statusbar_accessible_get_type != &gidSymbolNotFound ? gtk_statusbar_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StatusbarAccessible self()
+  override StatusbarAccessible self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class StatusbarAccessible : gtk.container_accessible.ContainerAccessible
       Get builder for [gtk.statusbar_accessible.StatusbarAccessible]
       Returns: New builder object
   */
-  static StatusbarAccessibleGidBuilder builder()
+  static StatusbarAccessibleGidBuilder builder() nothrow
   {
     return new StatusbarAccessibleGidBuilder;
   }
@@ -63,7 +63,7 @@ final class StatusbarAccessibleGidBuilder : StatusbarAccessibleGidBuilderImpl!St
       Create object from builder.
       Returns: New object
   */
-  StatusbarAccessible build()
+  StatusbarAccessible build() nothrow
   {
     return new StatusbarAccessible(cast(void*)createGObject(StatusbarAccessible._getGType), No.Take);
   }

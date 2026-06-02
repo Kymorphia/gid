@@ -61,26 +61,26 @@ class Layout : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_layout_get_type != &gidSymbolNotFound ? pango_layout_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Layout self()
+  override Layout self() nothrow
   {
     return this;
   }
@@ -89,7 +89,7 @@ class Layout : gobject.object.ObjectWrap
       Get builder for [pango.layout.Layout]
       Returns: New builder object
   */
-  static LayoutGidBuilder builder()
+  static LayoutGidBuilder builder() nothrow
   {
     return new LayoutGidBuilder;
   }
@@ -102,7 +102,7 @@ class Layout : gobject.object.ObjectWrap
         context = a [pango.context.Context]
       Returns: the newly allocated [pango.layout.Layout]
   */
-  this(pango.context.Context context)
+  this(pango.context.Context context) nothrow
   {
     PangoLayout* _cretval;
     _cretval = pango_layout_new(context ? cast(PangoContext*)context._cPtr(No.Dup) : null);
@@ -143,7 +143,7 @@ class Layout : gobject.object.ObjectWrap
       This function should be called if you make changes to the context
       subsequent to creating the layout.
   */
-  void contextChanged()
+  void contextChanged() nothrow
   {
     pango_layout_context_changed(cast(PangoLayout*)this._cPtr);
   }
@@ -155,7 +155,7 @@ class Layout : gobject.object.ObjectWrap
       are all copied by value.
       Returns: the newly allocated [pango.layout.Layout]
   */
-  pango.layout.Layout copy()
+  pango.layout.Layout copy() nothrow
   {
     PangoLayout* _cretval;
     _cretval = pango_layout_copy(cast(PangoLayout*)this._cPtr);
@@ -168,7 +168,7 @@ class Layout : gobject.object.ObjectWrap
       positioned within the horizontal space available.
       Returns: the alignment
   */
-  pango.types.Alignment getAlignment()
+  pango.types.Alignment getAlignment() nothrow
   {
     PangoAlignment _cretval;
     _cretval = pango_layout_get_alignment(cast(PangoLayout*)this._cPtr);
@@ -180,7 +180,7 @@ class Layout : gobject.object.ObjectWrap
       Gets the attribute list for the layout, if any.
       Returns: a [pango.attr_list.AttrList]
   */
-  pango.attr_list.AttrList getAttributes()
+  pango.attr_list.AttrList getAttributes() nothrow
   {
     PangoAttrList* _cretval;
     _cretval = pango_layout_get_attributes(cast(PangoLayout*)this._cPtr);
@@ -196,7 +196,7 @@ class Layout : gobject.object.ObjectWrap
       Returns: true if the bidirectional base direction
           is computed from the layout's contents, false otherwise
   */
-  bool getAutoDir()
+  bool getAutoDir() nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_layout_get_auto_dir(cast(PangoLayout*)this._cPtr);
@@ -207,7 +207,7 @@ class Layout : gobject.object.ObjectWrap
       Gets the Y position of baseline of the first line in layout.
       Returns: baseline of first line, from top of layout
   */
-  int getBaseline()
+  int getBaseline() nothrow
   {
     int _retval;
     _retval = pango_layout_get_baseline(cast(PangoLayout*)this._cPtr);
@@ -232,7 +232,7 @@ class Layout : gobject.object.ObjectWrap
         strongPos = location to store the strong cursor position
         weakPos = location to store the weak cursor position
   */
-  void getCaretPos(int index, out pango.types.Rectangle strongPos, out pango.types.Rectangle weakPos)
+  void getCaretPos(int index, out pango.types.Rectangle strongPos, out pango.types.Rectangle weakPos) nothrow
   {
     pango_layout_get_caret_pos(cast(PangoLayout*)this._cPtr, index, &strongPos, &weakPos);
   }
@@ -243,7 +243,7 @@ class Layout : gobject.object.ObjectWrap
       Returns: the number of Unicode characters
           in the text of layout
   */
-  int getCharacterCount()
+  int getCharacterCount() nothrow
   {
     int _retval;
     _retval = pango_layout_get_character_count(cast(PangoLayout*)this._cPtr);
@@ -254,7 +254,7 @@ class Layout : gobject.object.ObjectWrap
       Retrieves the [pango.context.Context] used for this layout.
       Returns: the [pango.context.Context] for the layout
   */
-  pango.context.Context getContext()
+  pango.context.Context getContext() nothrow
   {
     PangoContext* _cretval;
     _cretval = pango_layout_get_context(cast(PangoLayout*)this._cPtr);
@@ -296,7 +296,7 @@ class Layout : gobject.object.ObjectWrap
         strongPos = location to store the strong cursor position
         weakPos = location to store the weak cursor position
   */
-  void getCursorPos(int index, out pango.types.Rectangle strongPos, out pango.types.Rectangle weakPos)
+  void getCursorPos(int index, out pango.types.Rectangle strongPos, out pango.types.Rectangle weakPos) nothrow
   {
     pango_layout_get_cursor_pos(cast(PangoLayout*)this._cPtr, index, &strongPos, &weakPos);
   }
@@ -308,7 +308,7 @@ class Layout : gobject.object.ObjectWrap
         index = the byte index of the char
       Returns: the text direction at index
   */
-  pango.types.Direction getDirection(int index)
+  pango.types.Direction getDirection(int index) nothrow
   {
     PangoDirection _cretval;
     _cretval = pango_layout_get_direction(cast(PangoLayout*)this._cPtr, index);
@@ -325,7 +325,7 @@ class Layout : gobject.object.ObjectWrap
       paragraphs were actually ellipsized.
       Returns: the current ellipsization mode for layout
   */
-  pango.types.EllipsizeMode getEllipsize()
+  pango.types.EllipsizeMode getEllipsize() nothrow
   {
     PangoEllipsizeMode _cretval;
     _cretval = pango_layout_get_ellipsize(cast(PangoLayout*)this._cPtr);
@@ -351,7 +351,7 @@ class Layout : gobject.object.ObjectWrap
         logicalRect = rectangle used to store the logical
             extents of the layout
   */
-  void getExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
+  void getExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect) nothrow
   {
     pango_layout_get_extents(cast(PangoLayout*)this._cPtr, &inkRect, &logicalRect);
   }
@@ -362,7 +362,7 @@ class Layout : gobject.object.ObjectWrap
           layout's font description, or null if the font description
           from the layout's context is inherited.
   */
-  pango.font_description.FontDescription getFontDescription()
+  pango.font_description.FontDescription getFontDescription() nothrow
   {
     const(PangoFontDescription)* _cretval;
     _cretval = pango_layout_get_font_description(cast(PangoLayout*)this._cPtr);
@@ -377,7 +377,7 @@ class Layout : gobject.object.ObjectWrap
       Returns: the height, in Pango units if positive,
           or number of lines if negative.
   */
-  int getHeight()
+  int getHeight() nothrow
   {
     int _retval;
     _retval = pango_layout_get_height(cast(PangoLayout*)this._cPtr);
@@ -390,7 +390,7 @@ class Layout : gobject.object.ObjectWrap
       A negative value indicates a hanging indentation.
       Returns: the indent in Pango units
   */
-  int getIndent()
+  int getIndent() nothrow
   {
     int _retval;
     _retval = pango_layout_get_indent(cast(PangoLayout*)this._cPtr);
@@ -401,7 +401,7 @@ class Layout : gobject.object.ObjectWrap
       Returns an iterator to iterate over the visual extents of the layout.
       Returns: the new [pango.layout_iter.LayoutIter]
   */
-  pango.layout_iter.LayoutIter getIter()
+  pango.layout_iter.LayoutIter getIter() nothrow
   {
     PangoLayoutIter* _cretval;
     _cretval = pango_layout_get_iter(cast(PangoLayout*)this._cPtr);
@@ -414,7 +414,7 @@ class Layout : gobject.object.ObjectWrap
       width of the layout.
       Returns: the justify value
   */
-  bool getJustify()
+  bool getJustify() nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_layout_get_justify(cast(PangoLayout*)this._cPtr);
@@ -426,7 +426,7 @@ class Layout : gobject.object.ObjectWrap
       to fill the entire width of the layout.
       Returns: the justify value
   */
-  bool getJustifyLastLine()
+  bool getJustifyLastLine() nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_layout_get_justify_last_line(cast(PangoLayout*)this._cPtr);
@@ -447,7 +447,7 @@ class Layout : gobject.object.ObjectWrap
           and retained, but will become invalid if changes are made to the
           [pango.layout.Layout].
   */
-  pango.layout_line.LayoutLine getLine(int line)
+  pango.layout_line.LayoutLine getLine(int line) nothrow
   {
     PangoLayoutLine* _cretval;
     _cretval = pango_layout_get_line(cast(PangoLayout*)this._cPtr, line);
@@ -459,7 +459,7 @@ class Layout : gobject.object.ObjectWrap
       Retrieves the count of lines for the layout.
       Returns: the line count
   */
-  int getLineCount()
+  int getLineCount() nothrow
   {
     int _retval;
     _retval = pango_layout_get_line_count(cast(PangoLayout*)this._cPtr);
@@ -481,7 +481,7 @@ class Layout : gobject.object.ObjectWrap
           and retained, but will become invalid if changes are made to the
           [pango.layout.Layout]. No changes should be made to the line.
   */
-  pango.layout_line.LayoutLine getLineReadonly(int line)
+  pango.layout_line.LayoutLine getLineReadonly(int line) nothrow
   {
     PangoLayoutLine* _cretval;
     _cretval = pango_layout_get_line_readonly(cast(PangoLayout*)this._cPtr, line);
@@ -495,7 +495,7 @@ class Layout : gobject.object.ObjectWrap
       See [pango.layout.Layout.setLineSpacing].
       Returns: 
   */
-  float getLineSpacing()
+  float getLineSpacing() nothrow
   {
     float _retval;
     _retval = pango_layout_get_line_spacing(cast(PangoLayout*)this._cPtr);
@@ -512,7 +512,7 @@ class Layout : gobject.object.ObjectWrap
           [pango.layout.Layout] and must be used with care. It will become invalid on any
           change to the layout's text or properties.
   */
-  pango.layout_line.LayoutLine[] getLines()
+  pango.layout_line.LayoutLine[] getLines() nothrow
   {
     GSList* _cretval;
     _cretval = pango_layout_get_lines(cast(PangoLayout*)this._cPtr);
@@ -532,7 +532,7 @@ class Layout : gobject.object.ObjectWrap
           change to the layout's text or properties. No changes should be made to
           the lines.
   */
-  pango.layout_line.LayoutLine[] getLinesReadonly()
+  pango.layout_line.LayoutLine[] getLinesReadonly() nothrow
   {
     GSList* _cretval;
     _cretval = pango_layout_get_lines_readonly(cast(PangoLayout*)this._cPtr);
@@ -548,7 +548,7 @@ class Layout : gobject.object.ObjectWrap
         attrs = location to store a pointer to an array of logical attributes.
             This value must be freed with [glib.global.gfree].
   */
-  void getLogAttrs(out pango.types.LogAttr[] attrs)
+  void getLogAttrs(out pango.types.LogAttr[] attrs) nothrow
   {
     int _nAttrs;
     PangoLogAttr* _attrs;
@@ -572,7 +572,7 @@ class Layout : gobject.object.ObjectWrap
       the first character and the position after the last character.
       Returns: an array of logical attributes
   */
-  pango.types.LogAttr[] getLogAttrsReadonly()
+  pango.types.LogAttr[] getLogAttrsReadonly() nothrow
   {
     const(PangoLogAttr)* _cretval;
     int _cretlength;
@@ -602,7 +602,7 @@ class Layout : gobject.object.ObjectWrap
         logicalRect = rectangle used to store the logical
             extents of the layout
   */
-  void getPixelExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
+  void getPixelExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect) nothrow
   {
     pango_layout_get_pixel_extents(cast(PangoLayout*)this._cPtr, &inkRect, &logicalRect);
   }
@@ -619,7 +619,7 @@ class Layout : gobject.object.ObjectWrap
         width = location to store the logical width
         height = location to store the logical height
   */
-  void getPixelSize(out int width, out int height)
+  void getPixelSize(out int width, out int height) nothrow
   {
     pango_layout_get_pixel_size(cast(PangoLayout*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
@@ -639,7 +639,7 @@ class Layout : gobject.object.ObjectWrap
       [pango.layout.Layout.contextChanged].
       Returns: The current serial number of layout.
   */
-  uint getSerial()
+  uint getSerial() nothrow
   {
     uint _retval;
     _retval = pango_layout_get_serial(cast(PangoLayout*)this._cPtr);
@@ -653,7 +653,7 @@ class Layout : gobject.object.ObjectWrap
       Returns: true if the layout does not break paragraphs
           at paragraph separator characters, false otherwise
   */
-  bool getSingleParagraphMode()
+  bool getSingleParagraphMode() nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_layout_get_single_paragraph_mode(cast(PangoLayout*)this._cPtr);
@@ -670,7 +670,7 @@ class Layout : gobject.object.ObjectWrap
         width = location to store the logical width
         height = location to store the logical height
   */
-  void getSize(out int width, out int height)
+  void getSize(out int width, out int height) nothrow
   {
     pango_layout_get_size(cast(PangoLayout*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
@@ -679,7 +679,7 @@ class Layout : gobject.object.ObjectWrap
       Gets the amount of spacing between the lines of the layout.
       Returns: the spacing in Pango units
   */
-  int getSpacing()
+  int getSpacing() nothrow
   {
     int _retval;
     _retval = pango_layout_get_spacing(cast(PangoLayout*)this._cPtr);
@@ -695,7 +695,7 @@ class Layout : gobject.object.ObjectWrap
       The return value should be freed with [pango.tab_array.TabArray.free].
       Returns: a copy of the tabs for this layout
   */
-  pango.tab_array.TabArray getTabs()
+  pango.tab_array.TabArray getTabs() nothrow
   {
     PangoTabArray* _cretval;
     _cretval = pango_layout_get_tabs(cast(PangoLayout*)this._cPtr);
@@ -709,7 +709,7 @@ class Layout : gobject.object.ObjectWrap
       The returned text should not be freed or modified.
       Returns: the text in the layout
   */
-  string getText()
+  string getText() nothrow
   {
     const(char)* _cretval;
     _cretval = pango_layout_get_text(cast(PangoLayout*)this._cPtr);
@@ -726,7 +726,7 @@ class Layout : gobject.object.ObjectWrap
       certain font supports all the characters in the string.
       Returns: The number of unknown glyphs in layout
   */
-  int getUnknownGlyphsCount()
+  int getUnknownGlyphsCount() nothrow
   {
     int _retval;
     _retval = pango_layout_get_unknown_glyphs_count(cast(PangoLayout*)this._cPtr);
@@ -737,7 +737,7 @@ class Layout : gobject.object.ObjectWrap
       Gets the width to which the lines of the [pango.layout.Layout] should wrap.
       Returns: the width in Pango units, or -1 if no width set.
   */
-  int getWidth()
+  int getWidth() nothrow
   {
     int _retval;
     _retval = pango_layout_get_width(cast(PangoLayout*)this._cPtr);
@@ -751,7 +751,7 @@ class Layout : gobject.object.ObjectWrap
       any paragraphs were actually wrapped.
       Returns: active wrap mode.
   */
-  pango.types.WrapMode getWrap()
+  pango.types.WrapMode getWrap() nothrow
   {
     PangoWrapMode _cretval;
     _cretval = pango_layout_get_wrap(cast(PangoLayout*)this._cPtr);
@@ -774,7 +774,7 @@ class Layout : gobject.object.ObjectWrap
         xPos = location to store resulting position within line
             ([pango.types.SCALE] units per device unit)
   */
-  void indexToLineX(int index, bool trailing, out int line, out int xPos)
+  void indexToLineX(int index, bool trailing, out int line, out int xPos) nothrow
   {
     pango_layout_index_to_line_x(cast(PangoLayout*)this._cPtr, index, trailing, cast(int*)&line, cast(int*)&xPos);
   }
@@ -792,7 +792,7 @@ class Layout : gobject.object.ObjectWrap
         index = byte index within layout
         pos = rectangle in which to store the position of the grapheme
   */
-  void indexToPos(int index, out pango.types.Rectangle pos)
+  void indexToPos(int index, out pango.types.Rectangle pos) nothrow
   {
     pango_layout_index_to_pos(cast(PangoLayout*)this._cPtr, index, &pos);
   }
@@ -807,7 +807,7 @@ class Layout : gobject.object.ObjectWrap
       Returns: true if any paragraphs had to be ellipsized,
           false otherwise
   */
-  bool isEllipsized()
+  bool isEllipsized() nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_layout_is_ellipsized(cast(PangoLayout*)this._cPtr);
@@ -824,7 +824,7 @@ class Layout : gobject.object.ObjectWrap
       Returns: true if any paragraphs had to be wrapped, false
           otherwise
   */
-  bool isWrapped()
+  bool isWrapped() nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_layout_is_wrapped(cast(PangoLayout*)this._cPtr);
@@ -869,7 +869,7 @@ class Layout : gobject.object.ObjectWrap
             end of the preceding line. new_index is always on the line where
             the cursor should be displayed.
   */
-  void moveCursorVisually(bool strong, int oldIndex, int oldTrailing, int direction, out int newIndex, out int newTrailing)
+  void moveCursorVisually(bool strong, int oldIndex, int oldTrailing, int direction, out int newIndex, out int newTrailing) nothrow
   {
     pango_layout_move_cursor_visually(cast(PangoLayout*)this._cPtr, strong, oldIndex, oldTrailing, direction, cast(int*)&newIndex, cast(int*)&newTrailing);
   }
@@ -888,7 +888,7 @@ class Layout : gobject.object.ObjectWrap
         flags = [pango.types.LayoutSerializeFlags]
       Returns: a [glib.bytes.Bytes] containing the serialized form of layout
   */
-  glib.bytes.Bytes serialize(pango.types.LayoutSerializeFlags flags)
+  glib.bytes.Bytes serialize(pango.types.LayoutSerializeFlags flags) nothrow
   {
     GBytes* _cretval;
     _cretval = pango_layout_serialize(cast(PangoLayout*)this._cPtr, flags);
@@ -905,7 +905,7 @@ class Layout : gobject.object.ObjectWrap
       Params:
         alignment = the alignment
   */
-  void setAlignment(pango.types.Alignment alignment)
+  void setAlignment(pango.types.Alignment alignment) nothrow
   {
     pango_layout_set_alignment(cast(PangoLayout*)this._cPtr, alignment);
   }
@@ -918,7 +918,7 @@ class Layout : gobject.object.ObjectWrap
       Params:
         attrs = a [pango.attr_list.AttrList]
   */
-  void setAttributes(pango.attr_list.AttrList attrs = null)
+  void setAttributes(pango.attr_list.AttrList attrs = null) nothrow
   {
     pango_layout_set_attributes(cast(PangoLayout*)this._cPtr, attrs ? cast(PangoAttrList*)attrs._cPtr(No.Dup) : null);
   }
@@ -945,7 +945,7 @@ class Layout : gobject.object.ObjectWrap
         autoDir = if true, compute the bidirectional base direction
             from the layout's contents
   */
-  void setAutoDir(bool autoDir)
+  void setAutoDir(bool autoDir) nothrow
   {
     pango_layout_set_auto_dir(cast(PangoLayout*)this._cPtr, autoDir);
   }
@@ -970,7 +970,7 @@ class Layout : gobject.object.ObjectWrap
       Params:
         ellipsize = the new ellipsization mode for layout
   */
-  void setEllipsize(pango.types.EllipsizeMode ellipsize)
+  void setEllipsize(pango.types.EllipsizeMode ellipsize) nothrow
   {
     pango_layout_set_ellipsize(cast(PangoLayout*)this._cPtr, ellipsize);
   }
@@ -985,7 +985,7 @@ class Layout : gobject.object.ObjectWrap
         desc = the new [pango.font_description.FontDescription]
             to unset the current font description
   */
-  void setFontDescription(pango.font_description.FontDescription desc = null)
+  void setFontDescription(pango.font_description.FontDescription desc = null) nothrow
   {
     pango_layout_set_font_description(cast(PangoLayout*)this._cPtr, desc ? cast(const(PangoFontDescription)*)desc._cPtr(No.Dup) : null);
   }
@@ -1021,7 +1021,7 @@ class Layout : gobject.object.ObjectWrap
         height = the desired height of the layout in Pango units if positive,
             or desired number of lines if negative.
   */
-  void setHeight(int height)
+  void setHeight(int height) nothrow
   {
     pango_layout_set_height(cast(PangoLayout*)this._cPtr, height);
   }
@@ -1041,7 +1041,7 @@ class Layout : gobject.object.ObjectWrap
       Params:
         indent = the amount by which to indent
   */
-  void setIndent(int indent)
+  void setIndent(int indent) nothrow
   {
     pango_layout_set_indent(cast(PangoLayout*)this._cPtr, indent);
   }
@@ -1068,7 +1068,7 @@ class Layout : gobject.object.ObjectWrap
       Params:
         justify = whether the lines in the layout should be justified
   */
-  void setJustify(bool justify)
+  void setJustify(bool justify) nothrow
   {
     pango_layout_set_justify(cast(PangoLayout*)this._cPtr, justify);
   }
@@ -1085,7 +1085,7 @@ class Layout : gobject.object.ObjectWrap
       Params:
         justify = whether the last line in the layout should be justified
   */
-  void setJustifyLastLine(bool justify)
+  void setJustifyLastLine(bool justify) nothrow
   {
     pango_layout_set_justify_last_line(cast(PangoLayout*)this._cPtr, justify);
   }
@@ -1111,7 +1111,7 @@ class Layout : gobject.object.ObjectWrap
       Params:
         factor = the new line spacing factor
   */
-  void setLineSpacing(float factor)
+  void setLineSpacing(float factor) nothrow
   {
     pango_layout_set_line_spacing(cast(PangoLayout*)this._cPtr, factor);
   }
@@ -1129,7 +1129,7 @@ class Layout : gobject.object.ObjectWrap
       Params:
         markup = marked-up text
   */
-  void setMarkup(string markup)
+  void setMarkup(string markup) nothrow
   {
     int _length;
     if (markup)
@@ -1160,7 +1160,7 @@ class Layout : gobject.object.ObjectWrap
         accelChar = return location
             for first located accelerator
   */
-  void setMarkupWithAccel(string markup, dchar accelMarker, out dchar accelChar)
+  void setMarkupWithAccel(string markup, dchar accelMarker, out dchar accelChar) nothrow
   {
     int _length;
     if (markup)
@@ -1183,7 +1183,7 @@ class Layout : gobject.object.ObjectWrap
       Params:
         setting = new setting
   */
-  void setSingleParagraphMode(bool setting)
+  void setSingleParagraphMode(bool setting) nothrow
   {
     pango_layout_set_single_paragraph_mode(cast(PangoLayout*)this._cPtr, setting);
   }
@@ -1209,7 +1209,7 @@ class Layout : gobject.object.ObjectWrap
       Params:
         spacing = the amount of spacing
   */
-  void setSpacing(int spacing)
+  void setSpacing(int spacing) nothrow
   {
     pango_layout_set_spacing(cast(PangoLayout*)this._cPtr, spacing);
   }
@@ -1232,7 +1232,7 @@ class Layout : gobject.object.ObjectWrap
       Params:
         tabs = a [pango.tab_array.TabArray]
   */
-  void setTabs(pango.tab_array.TabArray tabs = null)
+  void setTabs(pango.tab_array.TabArray tabs = null) nothrow
   {
     pango_layout_set_tabs(cast(PangoLayout*)this._cPtr, tabs ? cast(PangoTabArray*)tabs._cPtr(No.Dup) : null);
   }
@@ -1252,7 +1252,7 @@ class Layout : gobject.object.ObjectWrap
       Params:
         text = the text
   */
-  void setText(string text)
+  void setText(string text) nothrow
   {
     int _length;
     if (text)
@@ -1272,7 +1272,7 @@ class Layout : gobject.object.ObjectWrap
         width = the desired width in Pango units, or -1 to indicate that no
             wrapping or ellipsization should be performed.
   */
-  void setWidth(int width)
+  void setWidth(int width) nothrow
   {
     pango_layout_set_width(cast(PangoLayout*)this._cPtr, width);
   }
@@ -1289,7 +1289,7 @@ class Layout : gobject.object.ObjectWrap
       Params:
         wrap = the wrap mode
   */
-  void setWrap(pango.types.WrapMode wrap)
+  void setWrap(pango.types.WrapMode wrap) nothrow
   {
     pango_layout_set_wrap(cast(PangoLayout*)this._cPtr, wrap);
   }
@@ -1343,7 +1343,7 @@ class Layout : gobject.object.ObjectWrap
             of the grapheme.
       Returns: true if the coordinates were inside text, false otherwise
   */
-  bool xyToIndex(int x, int y, out int index, out int trailing)
+  bool xyToIndex(int x, int y, out int index, out int trailing) nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_layout_xy_to_index(cast(PangoLayout*)this._cPtr, x, y, cast(int*)&index, cast(int*)&trailing);
@@ -1363,7 +1363,7 @@ final class LayoutGidBuilder : LayoutGidBuilderImpl!LayoutGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Layout build()
+  Layout build() nothrow
   {
     return new Layout(cast(void*)createGObject(Layout._getGType), Yes.Take);
   }

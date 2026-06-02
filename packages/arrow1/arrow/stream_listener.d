@@ -17,26 +17,26 @@ class StreamListener : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_stream_listener_get_type != &gidSymbolNotFound ? garrow_stream_listener_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StreamListener self()
+  override StreamListener self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class StreamListener : gobject.object.ObjectWrap
       Get builder for [arrow.stream_listener.StreamListener]
       Returns: New builder object
   */
-  static StreamListenerGidBuilder builder()
+  static StreamListenerGidBuilder builder() nothrow
   {
     return new StreamListenerGidBuilder;
   }
@@ -118,7 +118,7 @@ final class StreamListenerGidBuilder : StreamListenerGidBuilderImpl!StreamListen
       Create object from builder.
       Returns: New object
   */
-  StreamListener build()
+  StreamListener build() nothrow
   {
     return new StreamListener(cast(void*)createGObject(StreamListener._getGType), No.Take);
   }

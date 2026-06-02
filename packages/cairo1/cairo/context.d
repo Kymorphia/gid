@@ -33,32 +33,32 @@ class Context : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_context_get_type != &gidSymbolNotFound ? cairo_gobject_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Context self()
+  override Context self() nothrow
   {
     return this;
   }
@@ -74,7 +74,7 @@ class Context : gobject.boxed.Boxed
       Params:
         path = path to be appended
   */
-  void appendPath(cairo.path.Path path)
+  void appendPath(cairo.path.Path path) nothrow
   {
     cairo_append_path(cast(cairo_t*)this._cPtr, path ? cast(const(cairo_path_t)*)path._cPtr(No.Dup) : null);
   }
@@ -126,7 +126,7 @@ class Context : gobject.boxed.Boxed
         angle1 = the start angle, in radians
         angle2 = the end angle, in radians
   */
-  void arc(double xc, double yc, double radius, double angle1, double angle2)
+  void arc(double xc, double yc, double radius, double angle1, double angle2) nothrow
   {
     cairo_arc(cast(cairo_t*)this._cPtr, xc, yc, radius, angle1, angle2);
   }
@@ -148,7 +148,7 @@ class Context : gobject.boxed.Boxed
         angle1 = the start angle, in radians
         angle2 = the end angle, in radians
   */
-  void arcNegative(double xc, double yc, double radius, double angle1, double angle2)
+  void arcNegative(double xc, double yc, double radius, double angle1, double angle2) nothrow
   {
     cairo_arc_negative(cast(cairo_t*)this._cPtr, xc, yc, radius, angle1, angle2);
   }
@@ -172,7 +172,7 @@ class Context : gobject.boxed.Boxed
       pair. The only other means of increasing the size of the clip
       region is [cairo.context.Context.resetClip].
   */
-  void clip()
+  void clip() nothrow
   {
     cairo_clip(cast(cairo_t*)this._cPtr);
   }
@@ -187,7 +187,7 @@ class Context : gobject.boxed.Boxed
         x2 = right of the resulting extents
         y2 = bottom of the resulting extents
   */
-  void clipExtents(out double x1, out double y1, out double x2, out double y2)
+  void clipExtents(out double x1, out double y1, out double x2, out double y2) nothrow
   {
     cairo_clip_extents(cast(cairo_t*)this._cPtr, cast(double*)&x1, cast(double*)&y1, cast(double*)&x2, cast(double*)&y2);
   }
@@ -211,7 +211,7 @@ class Context : gobject.boxed.Boxed
       pair. The only other means of increasing the size of the clip
       region is [cairo.context.Context.resetClip].
   */
-  void clipPreserve()
+  void clipPreserve() nothrow
   {
     cairo_clip_preserve(cast(cairo_t*)this._cPtr);
   }
@@ -239,7 +239,7 @@ class Context : gobject.boxed.Boxed
       as the MOVE_TO immediately after the CLOSE_PATH will provide that
       point.
   */
-  void closePath()
+  void closePath() nothrow
   {
     cairo_close_path(cast(cairo_t*)this._cPtr);
   }
@@ -255,7 +255,7 @@ class Context : gobject.boxed.Boxed
       Returns: the current clip region as a list of rectangles in user coordinates,
         which should be destroyed using [cairo.rectangle_list.RectangleList.destroy].
   */
-  cairo.rectangle_list.RectangleList copyClipRectangleList()
+  cairo.rectangle_list.RectangleList copyClipRectangleList() nothrow
   {
     cairo_rectangle_list_t* _cretval;
     _cretval = cairo_copy_clip_rectangle_list(cast(cairo_t*)this._cPtr);
@@ -272,7 +272,7 @@ class Context : gobject.boxed.Boxed
       This is a convenience function that simply calls
       [cairo.surface.Surface.copyPage] on cr's target.
   */
-  void copyPage()
+  void copyPage() nothrow
   {
     cairo_copy_page(cast(cairo_t*)this._cPtr);
   }
@@ -299,7 +299,7 @@ class Context : gobject.boxed.Boxed
         returned object and should call [cairo.path.Path.destroy] when finished
         with it.
   */
-  cairo.path.Path copyPath()
+  cairo.path.Path copyPath() nothrow
   {
     cairo_path_t* _cretval;
     _cretval = cairo_copy_path(cast(cairo_t*)this._cPtr);
@@ -336,7 +336,7 @@ class Context : gobject.boxed.Boxed
         returned object and should call [cairo.path.Path.destroy] when finished
         with it.
   */
-  cairo.path.Path copyPathFlat()
+  cairo.path.Path copyPathFlat() nothrow
   {
     cairo_path_t* _cretval;
     _cretval = cairo_copy_path_flat(cast(cairo_t*)this._cPtr);
@@ -362,7 +362,7 @@ class Context : gobject.boxed.Boxed
         x3 = the X coordinate of the end of the curve
         y3 = the Y coordinate of the end of the curve
   */
-  void curveTo(double x1, double y1, double x2, double y2, double x3, double y3)
+  void curveTo(double x1, double y1, double x2, double y2, double x3, double y3) nothrow
   {
     cairo_curve_to(cast(cairo_t*)this._cPtr, x1, y1, x2, y2, x3, y3);
   }
@@ -376,7 +376,7 @@ class Context : gobject.boxed.Boxed
         x = X value of coordinate (in/out parameter)
         y = Y value of coordinate (in/out parameter)
   */
-  void deviceToUser(out double x, out double y)
+  void deviceToUser(out double x, out double y) nothrow
   {
     cairo_device_to_user(cast(cairo_t*)this._cPtr, cast(double*)&x, cast(double*)&y);
   }
@@ -391,7 +391,7 @@ class Context : gobject.boxed.Boxed
         dx = X component of a distance vector (in/out parameter)
         dy = Y component of a distance vector (in/out parameter)
   */
-  void deviceToUserDistance(out double dx, out double dy)
+  void deviceToUserDistance(out double dx, out double dy) nothrow
   {
     cairo_device_to_user_distance(cast(cairo_t*)this._cPtr, cast(double*)&dx, cast(double*)&dy);
   }
@@ -403,7 +403,7 @@ class Context : gobject.boxed.Boxed
       the cairo context. See [cairo.context.Context.setFillRule] and
       [cairo.context.Context.fillPreserve].
   */
-  void fill()
+  void fill() nothrow
   {
     cairo_fill(cast(cairo_t*)this._cPtr);
   }
@@ -432,7 +432,7 @@ class Context : gobject.boxed.Boxed
         x2 = right of the resulting extents
         y2 = bottom of the resulting extents
   */
-  void fillExtents(out double x1, out double y1, out double x2, out double y2)
+  void fillExtents(out double x1, out double y1, out double x2, out double y2) nothrow
   {
     cairo_fill_extents(cast(cairo_t*)this._cPtr, cast(double*)&x1, cast(double*)&y1, cast(double*)&x2, cast(double*)&y2);
   }
@@ -445,7 +445,7 @@ class Context : gobject.boxed.Boxed
       
       See [cairo.context.Context.setFillRule] and [cairo.context.Context.fill].
   */
-  void fillPreserve()
+  void fillPreserve() nothrow
   {
     cairo_fill_preserve(cast(cairo_t*)this._cPtr);
   }
@@ -457,7 +457,7 @@ class Context : gobject.boxed.Boxed
         extents = a #cairo_font_extents_t object into which the results
           will be stored.
   */
-  void fontExtents(out cairo.types.FontExtents extents)
+  void fontExtents(out cairo.types.FontExtents extents) nothrow
   {
     cairo_font_extents(cast(cairo_t*)this._cPtr, &extents);
   }
@@ -467,7 +467,7 @@ class Context : gobject.boxed.Boxed
       [cairo.context.Context.setAntialias].
       Returns: the current shape antialiasing mode.
   */
-  cairo.types.Antialias getAntialias()
+  cairo.types.Antialias getAntialias() nothrow
   {
     cairo_antialias_t _cretval;
     _cretval = cairo_get_antialias(cast(cairo_t*)this._cPtr);
@@ -504,7 +504,7 @@ class Context : gobject.boxed.Boxed
         x = return value for X coordinate of the current point
         y = return value for Y coordinate of the current point
   */
-  void getCurrentPoint(out double x, out double y)
+  void getCurrentPoint(out double x, out double y) nothrow
   {
     cairo_get_current_point(cast(cairo_t*)this._cPtr, cast(double*)&x, cast(double*)&y);
   }
@@ -518,7 +518,7 @@ class Context : gobject.boxed.Boxed
         dashes = return value for the dash array, or null
         offset = return value for the current dash offset, or null
   */
-  void getDash(out double dashes, out double offset)
+  void getDash(out double dashes, out double offset) nothrow
   {
     cairo_get_dash(cast(cairo_t*)this._cPtr, cast(double*)&dashes, cast(double*)&offset);
   }
@@ -530,7 +530,7 @@ class Context : gobject.boxed.Boxed
       See also [cairo.context.Context.setDash] and [cairo.context.Context.getDash].
       Returns: the length of the dash array, or 0 if no dash array set.
   */
-  int getDashCount()
+  int getDashCount() nothrow
   {
     int _retval;
     _retval = cairo_get_dash_count(cast(cairo_t*)this._cPtr);
@@ -541,7 +541,7 @@ class Context : gobject.boxed.Boxed
       Gets the current fill rule, as set by [cairo.context.Context.setFillRule].
       Returns: the current fill rule.
   */
-  cairo.types.FillRule getFillRule()
+  cairo.types.FillRule getFillRule() nothrow
   {
     cairo_fill_rule_t _cretval;
     _cretval = cairo_get_fill_rule(cast(cairo_t*)this._cPtr);
@@ -563,7 +563,7 @@ class Context : gobject.boxed.Boxed
         [cairo.context.Context.setFontFace] with a nil font will trigger an error that
         will shutdown the #cairo_t object).
   */
-  cairo.font_face.FontFace getFontFace()
+  cairo.font_face.FontFace getFontFace() nothrow
   {
     cairo_font_face_t* _cretval;
     _cretval = cairo_get_font_face(cast(cairo_t*)this._cPtr);
@@ -578,7 +578,7 @@ class Context : gobject.boxed.Boxed
       Params:
         matrix = return value for the matrix
   */
-  void getFontMatrix(out cairo.matrix.Matrix matrix)
+  void getFontMatrix(out cairo.matrix.Matrix matrix) nothrow
   {
     cairo_get_font_matrix(cast(cairo_t*)this._cPtr, cast(cairo_matrix_t*)&matrix);
   }
@@ -593,7 +593,7 @@ class Context : gobject.boxed.Boxed
         options = a #cairo_font_options_t object into which to store
             the retrieved options. All existing values are overwritten
   */
-  void getFontOptions(cairo.font_options.FontOptions options)
+  void getFontOptions(cairo.font_options.FontOptions options) nothrow
   {
     cairo_get_font_options(cast(cairo_t*)this._cPtr, options ? cast(cairo_font_options_t*)options._cPtr(No.Dup) : null);
   }
@@ -612,7 +612,7 @@ class Context : gobject.boxed.Boxed
       Returns: the target surface. This object is owned by cairo. To
         keep a reference to it, you must call [cairo.surface.Surface.reference].
   */
-  cairo.surface.Surface getGroupTarget()
+  cairo.surface.Surface getGroupTarget() nothrow
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_get_group_target(cast(cairo_t*)this._cPtr);
@@ -624,7 +624,7 @@ class Context : gobject.boxed.Boxed
       Returns whether or not hairline mode is set, as set by [cairo.context.Context.setHairline].
       Returns: whether hairline mode is set.
   */
-  cairo.types.Bool getHairline()
+  cairo.types.Bool getHairline() nothrow
   {
     cairo.types.Bool _retval;
     _retval = cairo_get_hairline(cast(cairo_t*)this._cPtr);
@@ -635,7 +635,7 @@ class Context : gobject.boxed.Boxed
       Gets the current line cap style, as set by [cairo.context.Context.setLineCap].
       Returns: the current line cap style.
   */
-  cairo.types.LineCap getLineCap()
+  cairo.types.LineCap getLineCap() nothrow
   {
     cairo_line_cap_t _cretval;
     _cretval = cairo_get_line_cap(cast(cairo_t*)this._cPtr);
@@ -647,7 +647,7 @@ class Context : gobject.boxed.Boxed
       Gets the current line join style, as set by [cairo.context.Context.setLineJoin].
       Returns: the current line join style.
   */
-  cairo.types.LineJoin getLineJoin()
+  cairo.types.LineJoin getLineJoin() nothrow
   {
     cairo_line_join_t _cretval;
     _cretval = cairo_get_line_join(cast(cairo_t*)this._cPtr);
@@ -662,7 +662,7 @@ class Context : gobject.boxed.Boxed
       [cairo.context.Context.getLineWidth].
       Returns: the current line width.
   */
-  double getLineWidth()
+  double getLineWidth() nothrow
   {
     double _retval;
     _retval = cairo_get_line_width(cast(cairo_t*)this._cPtr);
@@ -675,7 +675,7 @@ class Context : gobject.boxed.Boxed
       Params:
         matrix = return value for the matrix
   */
-  void getMatrix(out cairo.matrix.Matrix matrix)
+  void getMatrix(out cairo.matrix.Matrix matrix) nothrow
   {
     cairo_get_matrix(cast(cairo_t*)this._cPtr, cast(cairo_matrix_t*)&matrix);
   }
@@ -684,7 +684,7 @@ class Context : gobject.boxed.Boxed
       Gets the current miter limit, as set by [cairo.context.Context.setMiterLimit].
       Returns: the current miter limit.
   */
-  double getMiterLimit()
+  double getMiterLimit() nothrow
   {
     double _retval;
     _retval = cairo_get_miter_limit(cast(cairo_t*)this._cPtr);
@@ -695,7 +695,7 @@ class Context : gobject.boxed.Boxed
       Gets the current compositing operator for a cairo context.
       Returns: the current compositing operator.
   */
-  cairo.types.Operator getOperator()
+  cairo.types.Operator getOperator() nothrow
   {
     cairo_operator_t _cretval;
     _cretval = cairo_get_operator(cast(cairo_t*)this._cPtr);
@@ -717,7 +717,7 @@ class Context : gobject.boxed.Boxed
         [cairo.context.Context.setScaledFont] with a nil font will trigger an error that
         will shutdown the #cairo_t object).
   */
-  cairo.scaled_font.ScaledFont getScaledFont()
+  cairo.scaled_font.ScaledFont getScaledFont() nothrow
   {
     cairo_scaled_font_t* _cretval;
     _cretval = cairo_get_scaled_font(cast(cairo_t*)this._cPtr);
@@ -731,7 +731,7 @@ class Context : gobject.boxed.Boxed
         cairo. To keep a reference to it, you must call
         [cairo.pattern.Pattern.reference].
   */
-  cairo.pattern.Pattern getSource()
+  cairo.pattern.Pattern getSource() nothrow
   {
     cairo_pattern_t* _cretval;
     _cretval = cairo_get_source(cast(cairo_t*)this._cPtr);
@@ -751,7 +751,7 @@ class Context : gobject.boxed.Boxed
       Returns: the target surface. This object is owned by cairo. To
         keep a reference to it, you must call [cairo.surface.Surface.reference].
   */
-  cairo.surface.Surface getTarget()
+  cairo.surface.Surface getTarget() nothrow
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_get_target(cast(cairo_t*)this._cPtr);
@@ -763,7 +763,7 @@ class Context : gobject.boxed.Boxed
       Gets the current tolerance value, as set by [cairo.context.Context.setTolerance].
       Returns: the current tolerance value.
   */
-  double getTolerance()
+  double getTolerance() nothrow
   {
     double _retval;
     _retval = cairo_get_tolerance(cast(cairo_t*)this._cPtr);
@@ -787,7 +787,7 @@ class Context : gobject.boxed.Boxed
         extents = a #cairo_text_extents_t object into which the results
           will be stored
   */
-  void glyphExtents(cairo.glyph.Glyph glyphs, int numGlyphs, out cairo.types.TextExtents extents)
+  void glyphExtents(cairo.glyph.Glyph glyphs, int numGlyphs, out cairo.types.TextExtents extents) nothrow
   {
     cairo_glyph_extents(cast(cairo_t*)this._cPtr, cast(const(cairo_glyph_t)*)&glyphs, numGlyphs, &extents);
   }
@@ -801,7 +801,7 @@ class Context : gobject.boxed.Boxed
         glyphs = array of glyphs to show
         numGlyphs = number of glyphs to show
   */
-  void glyphPath(cairo.glyph.Glyph glyphs, int numGlyphs)
+  void glyphPath(cairo.glyph.Glyph glyphs, int numGlyphs) nothrow
   {
     cairo_glyph_path(cast(cairo_t*)this._cPtr, cast(const(cairo_glyph_t)*)&glyphs, numGlyphs);
   }
@@ -811,7 +811,7 @@ class Context : gobject.boxed.Boxed
       See [cairo.context.Context.getCurrentPoint] for details on the current point.
       Returns: whether a current point is defined.
   */
-  cairo.types.Bool hasCurrentPoint()
+  cairo.types.Bool hasCurrentPoint() nothrow
   {
     cairo.types.Bool _retval;
     _retval = cairo_has_current_point(cast(cairo_t*)this._cPtr);
@@ -824,7 +824,7 @@ class Context : gobject.boxed.Boxed
       axes will be aligned and one user-space unit will transform to one
       device-space unit.
   */
-  void identityMatrix()
+  void identityMatrix() nothrow
   {
     cairo_identity_matrix(cast(cairo_t*)this._cPtr);
   }
@@ -842,7 +842,7 @@ class Context : gobject.boxed.Boxed
       Returns: A non-zero value if the point is inside, or zero if
         outside.
   */
-  cairo.types.Bool inClip(double x, double y)
+  cairo.types.Bool inClip(double x, double y) nothrow
   {
     cairo.types.Bool _retval;
     _retval = cairo_in_clip(cast(cairo_t*)this._cPtr, x, y);
@@ -863,7 +863,7 @@ class Context : gobject.boxed.Boxed
       Returns: A non-zero value if the point is inside, or zero if
         outside.
   */
-  cairo.types.Bool inFill(double x, double y)
+  cairo.types.Bool inFill(double x, double y) nothrow
   {
     cairo.types.Bool _retval;
     _retval = cairo_in_fill(cast(cairo_t*)this._cPtr, x, y);
@@ -886,7 +886,7 @@ class Context : gobject.boxed.Boxed
       Returns: A non-zero value if the point is inside, or zero if
         outside.
   */
-  cairo.types.Bool inStroke(double x, double y)
+  cairo.types.Bool inStroke(double x, double y) nothrow
   {
     cairo.types.Bool _retval;
     _retval = cairo_in_stroke(cast(cairo_t*)this._cPtr, x, y);
@@ -905,7 +905,7 @@ class Context : gobject.boxed.Boxed
         x = the X coordinate of the end of the new line
         y = the Y coordinate of the end of the new line
   */
-  void lineTo(double x, double y)
+  void lineTo(double x, double y) nothrow
   {
     cairo_line_to(cast(cairo_t*)this._cPtr, x, y);
   }
@@ -919,7 +919,7 @@ class Context : gobject.boxed.Boxed
       Params:
         pattern = a #cairo_pattern_t
   */
-  void mask(cairo.pattern.Pattern pattern)
+  void mask(cairo.pattern.Pattern pattern) nothrow
   {
     cairo_mask(cast(cairo_t*)this._cPtr, pattern ? cast(cairo_pattern_t*)pattern._cPtr(No.Dup) : null);
   }
@@ -935,7 +935,7 @@ class Context : gobject.boxed.Boxed
         surfaceX = X coordinate at which to place the origin of surface
         surfaceY = Y coordinate at which to place the origin of surface
   */
-  void maskSurface(cairo.surface.Surface surface, double surfaceX, double surfaceY)
+  void maskSurface(cairo.surface.Surface surface, double surfaceX, double surfaceY) nothrow
   {
     cairo_mask_surface(cast(cairo_t*)this._cPtr, surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null, surfaceX, surfaceY);
   }
@@ -948,7 +948,7 @@ class Context : gobject.boxed.Boxed
         x = the X coordinate of the new position
         y = the Y coordinate of the new position
   */
-  void moveTo(double x, double y)
+  void moveTo(double x, double y) nothrow
   {
     cairo_move_to(cast(cairo_t*)this._cPtr, x, y);
   }
@@ -957,7 +957,7 @@ class Context : gobject.boxed.Boxed
       Clears the current path. After this call there will be no path and
       no current point.
   */
-  void newPath()
+  void newPath() nothrow
   {
     cairo_new_path(cast(cairo_t*)this._cPtr);
   }
@@ -975,7 +975,7 @@ class Context : gobject.boxed.Boxed
       compute the arc's initial coordinates for a call to
       [cairo.context.Context.moveTo].
   */
-  void newSubPath()
+  void newSubPath() nothrow
   {
     cairo_new_sub_path(cast(cairo_t*)this._cPtr);
   }
@@ -984,7 +984,7 @@ class Context : gobject.boxed.Boxed
       A drawing operator that paints the current source everywhere within
       the current clip region.
   */
-  void paint()
+  void paint() nothrow
   {
     cairo_paint(cast(cairo_t*)this._cPtr);
   }
@@ -998,7 +998,7 @@ class Context : gobject.boxed.Boxed
       Params:
         alpha = alpha value, between 0 (transparent) and 1 (opaque)
   */
-  void paintWithAlpha(double alpha)
+  void paintWithAlpha(double alpha) nothrow
   {
     cairo_paint_with_alpha(cast(cairo_t*)this._cPtr, alpha);
   }
@@ -1031,7 +1031,7 @@ class Context : gobject.boxed.Boxed
         x2 = right of the resulting extents
         y2 = bottom of the resulting extents
   */
-  void pathExtents(out double x1, out double y1, out double x2, out double y2)
+  void pathExtents(out double x1, out double y1, out double x2, out double y2) nothrow
   {
     cairo_path_extents(cast(cairo_t*)this._cPtr, cast(double*)&x1, cast(double*)&y1, cast(double*)&x2, cast(double*)&y2);
   }
@@ -1051,7 +1051,7 @@ class Context : gobject.boxed.Boxed
         caller owns the returned object and should call
         [cairo.pattern.Pattern.destroy] when finished with it.
   */
-  cairo.pattern.Pattern popGroup()
+  cairo.pattern.Pattern popGroup() nothrow
   {
     cairo_pattern_t* _cretval;
     _cretval = cairo_pop_group(cast(cairo_t*)this._cPtr);
@@ -1081,7 +1081,7 @@ class Context : gobject.boxed.Boxed
       changes to the graphics state will not be visible outside the
       group.
   */
-  void popGroupToSource()
+  void popGroupToSource() nothrow
   {
     cairo_pop_group_to_source(cast(cairo_t*)this._cPtr);
   }
@@ -1125,7 +1125,7 @@ class Context : gobject.boxed.Boxed
       cairo_paint_with_alpha (cr, alpha);
       </programlisting></informalexample>
   */
-  void pushGroup()
+  void pushGroup() nothrow
   {
     cairo_push_group(cast(cairo_t*)this._cPtr);
   }
@@ -1146,7 +1146,7 @@ class Context : gobject.boxed.Boxed
         content = a #cairo_content_t indicating the type of group that
                     will be created
   */
-  void pushGroupWithContent(cairo.types.Content content)
+  void pushGroupWithContent(cairo.types.Content content) nothrow
   {
     cairo_push_group_with_content(cast(cairo_t*)this._cPtr, content);
   }
@@ -1170,7 +1170,7 @@ class Context : gobject.boxed.Boxed
         width = the width of the rectangle
         height = the height of the rectangle
   */
-  void rectangle(double x, double y, double width, double height)
+  void rectangle(double x, double y, double width, double height) nothrow
   {
     cairo_rectangle(cast(cairo_t*)this._cPtr, x, y, width, height);
   }
@@ -1199,7 +1199,7 @@ class Context : gobject.boxed.Boxed
         dx3 = the X offset to the end of the curve
         dy3 = the Y offset to the end of the curve
   */
-  void relCurveTo(double dx1, double dy1, double dx2, double dy2, double dx3, double dy3)
+  void relCurveTo(double dx1, double dy1, double dx2, double dy2, double dx3, double dy3) nothrow
   {
     cairo_rel_curve_to(cast(cairo_t*)this._cPtr, dx1, dy1, dx2, dy2, dx3, dy3);
   }
@@ -1221,7 +1221,7 @@ class Context : gobject.boxed.Boxed
         dx = the X offset to the end of the new line
         dy = the Y offset to the end of the new line
   */
-  void relLineTo(double dx, double dy)
+  void relLineTo(double dx, double dy) nothrow
   {
     cairo_rel_line_to(cast(cairo_t*)this._cPtr, dx, dy);
   }
@@ -1241,7 +1241,7 @@ class Context : gobject.boxed.Boxed
         dx = the X offset
         dy = the Y offset
   */
-  void relMoveTo(double dx, double dy)
+  void relMoveTo(double dx, double dy) nothrow
   {
     cairo_rel_move_to(cast(cairo_t*)this._cPtr, dx, dy);
   }
@@ -1259,7 +1259,7 @@ class Context : gobject.boxed.Boxed
       [cairo.context.Context.save] and [cairo.context.Context.restore] around [cairo.context.Context.clip] as a more
       robust means of temporarily restricting the clip region.
   */
-  void resetClip()
+  void resetClip() nothrow
   {
     cairo_reset_clip(cast(cairo_t*)this._cPtr);
   }
@@ -1269,7 +1269,7 @@ class Context : gobject.boxed.Boxed
       [cairo.context.Context.save] and removes that state from the stack of
       saved states.
   */
-  void restore()
+  void restore() nothrow
   {
     cairo_restore(cast(cairo_t*)this._cPtr);
   }
@@ -1285,7 +1285,7 @@ class Context : gobject.boxed.Boxed
         angle = angle (in radians) by which the user-space axes will be
           rotated
   */
-  void rotate(double angle)
+  void rotate(double angle) nothrow
   {
     cairo_rotate(cast(cairo_t*)this._cPtr, angle);
   }
@@ -1303,7 +1303,7 @@ class Context : gobject.boxed.Boxed
       drops to zero in response to a call to [cairo.global.destroy],
       any saved states will be freed along with the #cairo_t.
   */
-  void save()
+  void save() nothrow
   {
     cairo_save(cast(cairo_t*)this._cPtr);
   }
@@ -1318,7 +1318,7 @@ class Context : gobject.boxed.Boxed
         sx = scale factor for the X dimension
         sy = scale factor for the Y dimension
   */
-  void scale(double sx, double sy)
+  void scale(double sx, double sy) nothrow
   {
     cairo_scale(cast(cairo_t*)this._cPtr, sx, sy);
   }
@@ -1373,7 +1373,7 @@ class Context : gobject.boxed.Boxed
         slant = the slant for the font
         weight = the weight for the font
   */
-  void selectFontFace(string family, cairo.types.FontSlant slant, cairo.types.FontWeight weight)
+  void selectFontFace(string family, cairo.types.FontSlant slant, cairo.types.FontWeight weight) nothrow
   {
     const(char)* _family = family.toCString(No.Alloc);
     cairo_select_font_face(cast(cairo_t*)this._cPtr, _family, slant, weight);
@@ -1391,7 +1391,7 @@ class Context : gobject.boxed.Boxed
       Params:
         antialias = the new antialiasing mode
   */
-  void setAntialias(cairo.types.Antialias antialias)
+  void setAntialias(cairo.types.Antialias antialias) nothrow
   {
     cairo_set_antialias(cast(cairo_t*)this._cPtr, antialias);
   }
@@ -1426,7 +1426,7 @@ class Context : gobject.boxed.Boxed
         dashes = an array specifying alternate lengths of on and off stroke portions
         offset = an offset into the dash pattern at which the stroke should start
   */
-  void setDash(double[] dashes, double offset)
+  void setDash(double[] dashes, double offset) nothrow
   {
     int _numDashes;
     if (dashes)
@@ -1448,7 +1448,7 @@ class Context : gobject.boxed.Boxed
       Params:
         fillRule = a fill rule, specified as a #cairo_fill_rule_t
   */
-  void setFillRule(cairo.types.FillRule fillRule)
+  void setFillRule(cairo.types.FillRule fillRule) nothrow
   {
     cairo_set_fill_rule(cast(cairo_t*)this._cPtr, fillRule);
   }
@@ -1461,7 +1461,7 @@ class Context : gobject.boxed.Boxed
       Params:
         fontFace = a #cairo_font_face_t, or null to restore to the default font
   */
-  void setFontFace(cairo.font_face.FontFace fontFace)
+  void setFontFace(cairo.font_face.FontFace fontFace) nothrow
   {
     cairo_set_font_face(cast(cairo_t*)this._cPtr, fontFace ? cast(cairo_font_face_t*)fontFace._cPtr(No.Dup) : null);
   }
@@ -1478,7 +1478,7 @@ class Context : gobject.boxed.Boxed
         matrix = a #cairo_matrix_t describing a transform to be applied to
           the current font.
   */
-  void setFontMatrix(cairo.matrix.Matrix matrix)
+  void setFontMatrix(cairo.matrix.Matrix matrix) nothrow
   {
     cairo_set_font_matrix(cast(cairo_t*)this._cPtr, cast(const(cairo_matrix_t)*)&matrix);
   }
@@ -1493,7 +1493,7 @@ class Context : gobject.boxed.Boxed
       Params:
         options = font options to use
   */
-  void setFontOptions(cairo.font_options.FontOptions options)
+  void setFontOptions(cairo.font_options.FontOptions options) nothrow
   {
     cairo_set_font_options(cast(cairo_t*)this._cPtr, options ? cast(const(cairo_font_options_t)*)options._cPtr(No.Dup) : null);
   }
@@ -1512,7 +1512,7 @@ class Context : gobject.boxed.Boxed
       Params:
         size = the new font size, in user space units
   */
-  void setFontSize(double size)
+  void setFontSize(double size) nothrow
   {
     cairo_set_font_size(cast(cairo_t*)this._cPtr, size);
   }
@@ -1541,7 +1541,7 @@ class Context : gobject.boxed.Boxed
       Params:
         setHairline = whether or not to set hairline mode
   */
-  void setHairline(cairo.types.Bool setHairline)
+  void setHairline(cairo.types.Bool setHairline) nothrow
   {
     cairo_set_hairline(cast(cairo_t*)this._cPtr, setHairline);
   }
@@ -1560,7 +1560,7 @@ class Context : gobject.boxed.Boxed
       Params:
         lineCap = a line cap style
   */
-  void setLineCap(cairo.types.LineCap lineCap)
+  void setLineCap(cairo.types.LineCap lineCap) nothrow
   {
     cairo_set_line_cap(cast(cairo_t*)this._cPtr, lineCap);
   }
@@ -1579,7 +1579,7 @@ class Context : gobject.boxed.Boxed
       Params:
         lineJoin = a line join style
   */
-  void setLineJoin(cairo.types.LineJoin lineJoin)
+  void setLineJoin(cairo.types.LineJoin lineJoin) nothrow
   {
     cairo_set_line_join(cast(cairo_t*)this._cPtr, lineJoin);
   }
@@ -1608,7 +1608,7 @@ class Context : gobject.boxed.Boxed
       Params:
         width = a line width
   */
-  void setLineWidth(double width)
+  void setLineWidth(double width) nothrow
   {
     cairo_set_line_width(cast(cairo_t*)this._cPtr, width);
   }
@@ -1620,7 +1620,7 @@ class Context : gobject.boxed.Boxed
       Params:
         matrix = a transformation matrix from user space to device space
   */
-  void setMatrix(cairo.matrix.Matrix matrix)
+  void setMatrix(cairo.matrix.Matrix matrix) nothrow
   {
     cairo_set_matrix(cast(cairo_t*)this._cPtr, cast(const(cairo_matrix_t)*)&matrix);
   }
@@ -1651,7 +1651,7 @@ class Context : gobject.boxed.Boxed
       Params:
         limit = miter limit to set
   */
-  void setMiterLimit(double limit)
+  void setMiterLimit(double limit) nothrow
   {
     cairo_set_miter_limit(cast(cairo_t*)this._cPtr, limit);
   }
@@ -1666,7 +1666,7 @@ class Context : gobject.boxed.Boxed
       Params:
         op = a compositing operator, specified as a #cairo_operator_t
   */
-  void setOperator(cairo.types.Operator op)
+  void setOperator(cairo.types.Operator op) nothrow
   {
     cairo_set_operator(cast(cairo_t*)this._cPtr, op);
   }
@@ -1681,7 +1681,7 @@ class Context : gobject.boxed.Boxed
       Params:
         scaledFont = a #cairo_scaled_font_t
   */
-  void setScaledFont(cairo.scaled_font.ScaledFont scaledFont)
+  void setScaledFont(cairo.scaled_font.ScaledFont scaledFont) nothrow
   {
     cairo_set_scaled_font(cast(cairo_t*)this._cPtr, scaledFont ? cast(const(cairo_scaled_font_t)*)scaledFont._cPtr(No.Dup) : null);
   }
@@ -1704,7 +1704,7 @@ class Context : gobject.boxed.Boxed
         source = a #cairo_pattern_t to be used as the source for
           subsequent drawing operations.
   */
-  void setSource(cairo.pattern.Pattern source)
+  void setSource(cairo.pattern.Pattern source) nothrow
   {
     cairo_set_source(cast(cairo_t*)this._cPtr, source ? cast(cairo_pattern_t*)source._cPtr(No.Dup) : null);
   }
@@ -1726,7 +1726,7 @@ class Context : gobject.boxed.Boxed
         green = green component of color
         blue = blue component of color
   */
-  void setSourceRgb(double red, double green, double blue)
+  void setSourceRgb(double red, double green, double blue) nothrow
   {
     cairo_set_source_rgb(cast(cairo_t*)this._cPtr, red, green, blue);
   }
@@ -1751,7 +1751,7 @@ class Context : gobject.boxed.Boxed
         blue = blue component of color
         alpha = alpha component of color
   */
-  void setSourceRgba(double red, double green, double blue, double alpha)
+  void setSourceRgba(double red, double green, double blue, double alpha) nothrow
   {
     cairo_set_source_rgba(cast(cairo_t*)this._cPtr, red, green, blue, alpha);
   }
@@ -1778,7 +1778,7 @@ class Context : gobject.boxed.Boxed
         x = User-space X coordinate for surface origin
         y = User-space Y coordinate for surface origin
   */
-  void setSourceSurface(cairo.surface.Surface surface, double x, double y)
+  void setSourceSurface(cairo.surface.Surface surface, double x, double y) nothrow
   {
     cairo_set_source_surface(cast(cairo_t*)this._cPtr, surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null, x, y);
   }
@@ -1798,7 +1798,7 @@ class Context : gobject.boxed.Boxed
       Params:
         tolerance = the tolerance, in device units (typically pixels)
   */
-  void setTolerance(double tolerance)
+  void setTolerance(double tolerance) nothrow
   {
     cairo_set_tolerance(cast(cairo_t*)this._cPtr, tolerance);
   }
@@ -1812,7 +1812,7 @@ class Context : gobject.boxed.Boxed
         glyphs = array of glyphs to show
         numGlyphs = number of glyphs to show
   */
-  void showGlyphs(cairo.glyph.Glyph glyphs, int numGlyphs)
+  void showGlyphs(cairo.glyph.Glyph glyphs, int numGlyphs) nothrow
   {
     cairo_show_glyphs(cast(cairo_t*)this._cPtr, cast(const(cairo_glyph_t)*)&glyphs, numGlyphs);
   }
@@ -1824,7 +1824,7 @@ class Context : gobject.boxed.Boxed
       This is a convenience function that simply calls
       [cairo.surface.Surface.showPage] on cr's target.
   */
-  void showPage()
+  void showPage() nothrow
   {
     cairo_show_page(cast(cairo_t*)this._cPtr);
   }
@@ -1855,7 +1855,7 @@ class Context : gobject.boxed.Boxed
       Params:
         utf8 = a NUL-terminated string of text encoded in UTF-8, or null
   */
-  void showText(string utf8)
+  void showText(string utf8) nothrow
   {
     const(char)* _utf8 = utf8.toCString(No.Alloc);
     cairo_show_text(cast(cairo_t*)this._cPtr, _utf8);
@@ -1891,7 +1891,7 @@ class Context : gobject.boxed.Boxed
         numClusters = number of clusters in the mapping
         clusterFlags = cluster mapping flags
   */
-  void showTextGlyphs(string utf8, cairo.glyph.Glyph glyphs, int numGlyphs, cairo.text_cluster.TextCluster clusters, int numClusters, cairo.types.TextClusterFlags clusterFlags)
+  void showTextGlyphs(string utf8, cairo.glyph.Glyph glyphs, int numGlyphs, cairo.text_cluster.TextCluster clusters, int numClusters, cairo.types.TextClusterFlags clusterFlags) nothrow
   {
     int _utf8Len;
     if (utf8)
@@ -1905,7 +1905,7 @@ class Context : gobject.boxed.Boxed
       Checks whether an error has previously occurred for this context.
       Returns: the current status of this context, see #cairo_status_t
   */
-  cairo.types.Status status()
+  cairo.types.Status status() nothrow
   {
     cairo_status_t _cretval;
     _cretval = cairo_status(cast(cairo_t*)this._cPtr);
@@ -1942,7 +1942,7 @@ class Context : gobject.boxed.Boxed
       In no case will a cap style of [cairo.types.LineCap.Butt] cause anything
       to be drawn in the case of either degenerate segments or sub-paths.
   */
-  void stroke()
+  void stroke() nothrow
   {
     cairo_stroke(cast(cairo_t*)this._cPtr);
   }
@@ -1974,7 +1974,7 @@ class Context : gobject.boxed.Boxed
         x2 = right of the resulting extents
         y2 = bottom of the resulting extents
   */
-  void strokeExtents(out double x1, out double y1, out double x2, out double y2)
+  void strokeExtents(out double x1, out double y1, out double x2, out double y2) nothrow
   {
     cairo_stroke_extents(cast(cairo_t*)this._cPtr, cast(double*)&x1, cast(double*)&y1, cast(double*)&x2, cast(double*)&y2);
   }
@@ -1989,7 +1989,7 @@ class Context : gobject.boxed.Boxed
       [cairo.context.Context.setLineCap], [cairo.context.Context.setDash], and
       [cairo.context.Context.strokePreserve].
   */
-  void strokePreserve()
+  void strokePreserve() nothrow
   {
     cairo_stroke_preserve(cast(cairo_t*)this._cPtr);
   }
@@ -2027,7 +2027,7 @@ class Context : gobject.boxed.Boxed
         tagName = tag name
         attributes = tag attributes
   */
-  void tagBegin(string tagName, string attributes)
+  void tagBegin(string tagName, string attributes) nothrow
   {
     const(char)* _tagName = tagName.toCString(No.Alloc);
     const(char)* _attributes = attributes.toCString(No.Alloc);
@@ -2045,7 +2045,7 @@ class Context : gobject.boxed.Boxed
       Params:
         tagName = tag name
   */
-  void tagEnd(string tagName)
+  void tagEnd(string tagName) nothrow
   {
     const(char)* _tagName = tagName.toCString(No.Alloc);
     cairo_tag_end(cast(cairo_t*)this._cPtr, _tagName);
@@ -2070,7 +2070,7 @@ class Context : gobject.boxed.Boxed
         extents = a #cairo_text_extents_t object into which the results
           will be stored
   */
-  void textExtents(string utf8, out cairo.types.TextExtents extents)
+  void textExtents(string utf8, out cairo.types.TextExtents extents) nothrow
   {
     const(char)* _utf8 = utf8.toCString(No.Alloc);
     cairo_text_extents(cast(cairo_t*)this._cPtr, _utf8, &extents);
@@ -2099,7 +2099,7 @@ class Context : gobject.boxed.Boxed
       Params:
         utf8 = a NUL-terminated string of text encoded in UTF-8, or null
   */
-  void textPath(string utf8)
+  void textPath(string utf8) nothrow
   {
     const(char)* _utf8 = utf8.toCString(No.Alloc);
     cairo_text_path(cast(cairo_t*)this._cPtr, _utf8);
@@ -2113,7 +2113,7 @@ class Context : gobject.boxed.Boxed
       Params:
         matrix = a transformation to be applied to the user-space axes
   */
-  void transform(cairo.matrix.Matrix matrix)
+  void transform(cairo.matrix.Matrix matrix) nothrow
   {
     cairo_transform(cast(cairo_t*)this._cPtr, cast(const(cairo_matrix_t)*)&matrix);
   }
@@ -2129,7 +2129,7 @@ class Context : gobject.boxed.Boxed
         tx = amount to translate in the X direction
         ty = amount to translate in the Y direction
   */
-  void translate(double tx, double ty)
+  void translate(double tx, double ty) nothrow
   {
     cairo_translate(cast(cairo_t*)this._cPtr, tx, ty);
   }
@@ -2143,7 +2143,7 @@ class Context : gobject.boxed.Boxed
         x = X value of coordinate (in/out parameter)
         y = Y value of coordinate (in/out parameter)
   */
-  void userToDevice(out double x, out double y)
+  void userToDevice(out double x, out double y) nothrow
   {
     cairo_user_to_device(cast(cairo_t*)this._cPtr, cast(double*)&x, cast(double*)&y);
   }
@@ -2158,7 +2158,7 @@ class Context : gobject.boxed.Boxed
         dx = X component of a distance vector (in/out parameter)
         dy = Y component of a distance vector (in/out parameter)
   */
-  void userToDeviceDistance(out double dx, out double dy)
+  void userToDeviceDistance(out double dx, out double dy) nothrow
   {
     cairo_user_to_device_distance(cast(cairo_t*)this._cPtr, cast(double*)&dx, cast(double*)&dy);
   }

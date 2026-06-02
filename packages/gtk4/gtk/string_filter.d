@@ -29,26 +29,26 @@ class StringFilter : gtk.filter.Filter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_string_filter_get_type != &gidSymbolNotFound ? gtk_string_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StringFilter self()
+  override StringFilter self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class StringFilter : gtk.filter.Filter
       Get builder for [gtk.string_filter.StringFilter]
       Returns: New builder object
   */
-  static StringFilterGidBuilder builder()
+  static StringFilterGidBuilder builder() nothrow
   {
     return new StringFilterGidBuilder;
   }
@@ -66,7 +66,7 @@ class StringFilter : gtk.filter.Filter
       Get `expression` property.
       Returns: The expression to evaluate on item to get a string to compare with.
   */
-  @property gtk.expression.Expression expression()
+  @property gtk.expression.Expression expression() nothrow
   {
     return getExpression();
   }
@@ -76,7 +76,7 @@ class StringFilter : gtk.filter.Filter
       Params:
         propval = The expression to evaluate on item to get a string to compare with.
   */
-  @property void expression(gtk.expression.Expression propval)
+  @property void expression(gtk.expression.Expression propval) nothrow
   {
     setExpression(propval);
   }
@@ -85,7 +85,7 @@ class StringFilter : gtk.filter.Filter
       Get `ignoreCase` property.
       Returns: If matching is case sensitive.
   */
-  @property bool ignoreCase()
+  @property bool ignoreCase() nothrow
   {
     return getIgnoreCase();
   }
@@ -95,7 +95,7 @@ class StringFilter : gtk.filter.Filter
       Params:
         propval = If matching is case sensitive.
   */
-  @property void ignoreCase(bool propval)
+  @property void ignoreCase(bool propval) nothrow
   {
     setIgnoreCase(propval);
   }
@@ -104,7 +104,7 @@ class StringFilter : gtk.filter.Filter
       Get `matchMode` property.
       Returns: If exact matches are necessary or if substrings are allowed.
   */
-  @property gtk.types.StringFilterMatchMode matchMode()
+  @property gtk.types.StringFilterMatchMode matchMode() nothrow
   {
     return getMatchMode();
   }
@@ -114,7 +114,7 @@ class StringFilter : gtk.filter.Filter
       Params:
         propval = If exact matches are necessary or if substrings are allowed.
   */
-  @property void matchMode(gtk.types.StringFilterMatchMode propval)
+  @property void matchMode(gtk.types.StringFilterMatchMode propval) nothrow
   {
     setMatchMode(propval);
   }
@@ -123,7 +123,7 @@ class StringFilter : gtk.filter.Filter
       Get `search` property.
       Returns: The search term.
   */
-  @property string search()
+  @property string search() nothrow
   {
     return getSearch();
   }
@@ -133,7 +133,7 @@ class StringFilter : gtk.filter.Filter
       Params:
         propval = The search term.
   */
-  @property void search(string propval)
+  @property void search(string propval) nothrow
   {
     setSearch(propval);
   }
@@ -148,7 +148,7 @@ class StringFilter : gtk.filter.Filter
         expression = The expression to evaluate
       Returns: a new [gtk.string_filter.StringFilter]
   */
-  this(gtk.expression.Expression expression = null)
+  this(gtk.expression.Expression expression = null) nothrow
   {
     GtkStringFilter* _cretval;
     _cretval = gtk_string_filter_new(expression ? cast(GtkExpression*)expression._cPtr(Yes.Dup) : null);
@@ -160,7 +160,7 @@ class StringFilter : gtk.filter.Filter
       obtain strings from items.
       Returns: a [gtk.expression.Expression]
   */
-  gtk.expression.Expression getExpression()
+  gtk.expression.Expression getExpression() nothrow
   {
     GtkExpression* _cretval;
     _cretval = gtk_string_filter_get_expression(cast(GtkStringFilter*)this._cPtr);
@@ -172,7 +172,7 @@ class StringFilter : gtk.filter.Filter
       Returns whether the filter ignores case differences.
       Returns: true if the filter ignores case
   */
-  bool getIgnoreCase()
+  bool getIgnoreCase() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_string_filter_get_ignore_case(cast(GtkStringFilter*)this._cPtr);
@@ -183,7 +183,7 @@ class StringFilter : gtk.filter.Filter
       Returns the match mode that the filter is using.
       Returns: the match mode of the filter
   */
-  gtk.types.StringFilterMatchMode getMatchMode()
+  gtk.types.StringFilterMatchMode getMatchMode() nothrow
   {
     GtkStringFilterMatchMode _cretval;
     _cretval = gtk_string_filter_get_match_mode(cast(GtkStringFilter*)this._cPtr);
@@ -195,7 +195,7 @@ class StringFilter : gtk.filter.Filter
       Gets the search term.
       Returns: The search term
   */
-  string getSearch()
+  string getSearch() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_string_filter_get_search(cast(GtkStringFilter*)this._cPtr);
@@ -212,7 +212,7 @@ class StringFilter : gtk.filter.Filter
       Params:
         expression = a [gtk.expression.Expression]
   */
-  void setExpression(gtk.expression.Expression expression = null)
+  void setExpression(gtk.expression.Expression expression = null) nothrow
   {
     gtk_string_filter_set_expression(cast(GtkStringFilter*)this._cPtr, expression ? cast(GtkExpression*)expression._cPtr(No.Dup) : null);
   }
@@ -223,7 +223,7 @@ class StringFilter : gtk.filter.Filter
       Params:
         ignoreCase = true to ignore case
   */
-  void setIgnoreCase(bool ignoreCase)
+  void setIgnoreCase(bool ignoreCase) nothrow
   {
     gtk_string_filter_set_ignore_case(cast(GtkStringFilter*)this._cPtr, ignoreCase);
   }
@@ -234,7 +234,7 @@ class StringFilter : gtk.filter.Filter
       Params:
         mode = the new match mode
   */
-  void setMatchMode(gtk.types.StringFilterMatchMode mode)
+  void setMatchMode(gtk.types.StringFilterMatchMode mode) nothrow
   {
     gtk_string_filter_set_match_mode(cast(GtkStringFilter*)this._cPtr, mode);
   }
@@ -246,7 +246,7 @@ class StringFilter : gtk.filter.Filter
         search = The string to search for
             or null to clear the search
   */
-  void setSearch(string search = null)
+  void setSearch(string search = null) nothrow
   {
     const(char)* _search = search.toCString(No.Alloc);
     gtk_string_filter_set_search(cast(GtkStringFilter*)this._cPtr, _search);
@@ -263,7 +263,7 @@ class StringFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T
         propval = The expression to evaluate on item to get a string to compare with.
       Returns: Builder instance for fluent chaining
   */
-  T expression(gtk.expression.Expression propval)
+  T expression(gtk.expression.Expression propval) nothrow
   {
     return setProperty("expression", propval);
   }
@@ -274,7 +274,7 @@ class StringFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T
         propval = If matching is case sensitive.
       Returns: Builder instance for fluent chaining
   */
-  T ignoreCase(bool propval)
+  T ignoreCase(bool propval) nothrow
   {
     return setProperty("ignore-case", propval);
   }
@@ -285,7 +285,7 @@ class StringFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T
         propval = If exact matches are necessary or if substrings are allowed.
       Returns: Builder instance for fluent chaining
   */
-  T matchMode(gtk.types.StringFilterMatchMode propval)
+  T matchMode(gtk.types.StringFilterMatchMode propval) nothrow
   {
     return setProperty("match-mode", propval);
   }
@@ -296,7 +296,7 @@ class StringFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T
         propval = The search term.
       Returns: Builder instance for fluent chaining
   */
-  T search(string propval)
+  T search(string propval) nothrow
   {
     return setProperty("search", propval);
   }
@@ -309,7 +309,7 @@ final class StringFilterGidBuilder : StringFilterGidBuilderImpl!StringFilterGidB
       Create object from builder.
       Returns: New object
   */
-  StringFilter build()
+  StringFilter build() nothrow
   {
     return new StringFilter(cast(void*)createGObject(StringFilter._getGType), Yes.Take);
   }

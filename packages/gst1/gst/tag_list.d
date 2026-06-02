@@ -23,32 +23,32 @@ class TagList : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_tag_list_get_type != &gidSymbolNotFound ? gst_tag_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TagList self()
+  override TagList self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class TagList : gobject.boxed.Boxed
       Get `miniObject` field.
       Returns: the parent type
   */
-  @property gst.mini_object.MiniObject miniObject()
+  @property gst.mini_object.MiniObject miniObject() nothrow
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstTagList*)this._cPtr).miniObject);
   }
@@ -68,7 +68,7 @@ class TagList : gobject.boxed.Boxed
       Free-function: gst_tag_list_unref
       Returns: An empty tag list
   */
-  static gst.tag_list.TagList newEmpty()
+  static gst.tag_list.TagList newEmpty() nothrow
   {
     GstTagList* _cretval;
     _cretval = gst_tag_list_new_empty();
@@ -84,7 +84,7 @@ class TagList : gobject.boxed.Boxed
       Returns: a new #GstTagList, or null in case of an
         error.
   */
-  static gst.tag_list.TagList newFromString(string str)
+  static gst.tag_list.TagList newFromString(string str) nothrow
   {
     GstTagList* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -101,7 +101,7 @@ class TagList : gobject.boxed.Boxed
         tag = tag
         value = GValue for this tag
   */
-  void addValue(gst.types.TagMergeMode mode, string tag, gobject.value.Value value)
+  void addValue(gst.types.TagMergeMode mode, string tag, gobject.value.Value value) nothrow
   {
     const(char)* _tag = tag.toCString(No.Alloc);
     gst_tag_list_add_value(cast(GstTagList*)this._cPtr, mode, _tag, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -119,7 +119,7 @@ class TagList : gobject.boxed.Boxed
       When you are finished with the taglist, call gst_tag_list_unref() on it.
       Returns: the new #GstTagList
   */
-  gst.tag_list.TagList copy()
+  gst.tag_list.TagList copy() nothrow
   {
     GstTagList* _cretval;
     _cretval = gst_tag_list_copy(cast(const(GstTagList)*)this._cPtr);
@@ -134,14 +134,21 @@ class TagList : gobject.boxed.Boxed
       Params:
         func = function to be called for each tag
   */
-  void foreach_(gst.types.TagForeachFunc func)
+  void foreach_(gst.types.TagForeachFunc func) nothrow
   {
-    extern(C) void _funcCallback(const(GstTagList)* list, const(char)* tag, void* userData)
+    extern(C) void _funcCallback(const(GstTagList)* list, const(char)* tag, void* userData) nothrow
     {
       auto _dlg = cast(gst.types.TagForeachFunc*)userData;
       string _tag = tag.fromCString(No.Free);
 
-      (*_dlg)(list ? new gst.tag_list.TagList(cast(void*)list, No.Take) : null, _tag);
+      try
+      {
+        (*_dlg)(list ? new gst.tag_list.TagList(cast(void*)list, No.Take) : null, _tag);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.TagForeachFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -158,7 +165,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was copied, false if the tag didn't exist in the
                      given list.
   */
-  bool getBoolean(string tag, out bool value)
+  bool getBoolean(string tag, out bool value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -179,7 +186,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was copied, false if the tag didn't exist in the
                      given list.
   */
-  bool getBooleanIndex(string tag, uint index, out bool value)
+  bool getBooleanIndex(string tag, uint index, out bool value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -203,7 +210,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a date was copied, false if the tag didn't exist in the
                      given list or if it was null.
   */
-  bool getDate(string tag, out glib.date.Date value)
+  bool getDate(string tag, out glib.date.Date value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -227,7 +234,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was copied, false if the tag didn't exist in the
                      given list or if it was null.
   */
-  bool getDateIndex(string tag, uint index, out glib.date.Date value)
+  bool getDateIndex(string tag, uint index, out glib.date.Date value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -251,7 +258,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a datetime was copied, false if the tag didn't exist in
                      the given list or if it was null.
   */
-  bool getDateTime(string tag, out gst.date_time.DateTime value)
+  bool getDateTime(string tag, out gst.date_time.DateTime value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -275,7 +282,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was copied, false if the tag didn't exist in the
                      given list or if it was null.
   */
-  bool getDateTimeIndex(string tag, uint index, out gst.date_time.DateTime value)
+  bool getDateTimeIndex(string tag, uint index, out gst.date_time.DateTime value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -295,7 +302,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was copied, false if the tag didn't exist in the
                      given list.
   */
-  bool getDouble(string tag, out double value)
+  bool getDouble(string tag, out double value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -314,7 +321,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was copied, false if the tag didn't exist in the
                      given list.
   */
-  bool getDoubleIndex(string tag, uint index, out double value)
+  bool getDoubleIndex(string tag, uint index, out double value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -332,7 +339,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was copied, false if the tag didn't exist in the
                      given list.
   */
-  bool getFloat(string tag, out float value)
+  bool getFloat(string tag, out float value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -351,7 +358,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was copied, false if the tag didn't exist in the
                      given list.
   */
-  bool getFloatIndex(string tag, uint index, out float value)
+  bool getFloatIndex(string tag, uint index, out float value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -369,7 +376,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was copied, false if the tag didn't exist in the
                      given list.
   */
-  bool getInt(string tag, out int value)
+  bool getInt(string tag, out int value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -387,7 +394,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was copied, false if the tag didn't exist in the
                      given list.
   */
-  bool getInt64(string tag, out long value)
+  bool getInt64(string tag, out long value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -406,7 +413,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was copied, false if the tag didn't exist in the
                      given list.
   */
-  bool getInt64Index(string tag, uint index, out long value)
+  bool getInt64Index(string tag, uint index, out long value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -425,7 +432,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was copied, false if the tag didn't exist in the
                      given list.
   */
-  bool getIntIndex(string tag, uint index, out int value)
+  bool getIntIndex(string tag, uint index, out int value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -443,7 +450,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was copied, false if the tag didn't exist in the
                      given list.
   */
-  bool getPointer(string tag, out void* value)
+  bool getPointer(string tag, out void* value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -462,7 +469,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was copied, false if the tag didn't exist in the
                      given list.
   */
-  bool getPointerIndex(string tag, uint index, out void* value)
+  bool getPointerIndex(string tag, uint index, out void* value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -486,7 +493,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a sample was returned, false if the tag didn't exist in
                      the given list or if it was null.
   */
-  bool getSample(string tag, out gst.sample.Sample sample)
+  bool getSample(string tag, out gst.sample.Sample sample) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -513,7 +520,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a sample was copied, false if the tag didn't exist in the
                      given list or if it was null.
   */
-  bool getSampleIndex(string tag, uint index, out gst.sample.Sample sample)
+  bool getSampleIndex(string tag, uint index, out gst.sample.Sample sample) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -527,7 +534,7 @@ class TagList : gobject.boxed.Boxed
       Gets the scope of list.
       Returns: The scope of list
   */
-  gst.types.TagScope getScope()
+  gst.types.TagScope getScope() nothrow
   {
     GstTagScope _cretval;
     _cretval = gst_tag_list_get_scope(cast(const(GstTagList)*)this._cPtr);
@@ -554,7 +561,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was copied, false if the tag didn't exist in the
                      given list.
   */
-  bool getString(string tag, out string value)
+  bool getString(string tag, out string value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -581,7 +588,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was copied, false if the tag didn't exist in the
                      given list.
   */
-  bool getStringIndex(string tag, uint index, out string value)
+  bool getStringIndex(string tag, uint index, out string value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -598,7 +605,7 @@ class TagList : gobject.boxed.Boxed
         tag = the tag to query
       Returns: The number of tags stored
   */
-  uint getTagSize(string tag)
+  uint getTagSize(string tag) nothrow
   {
     uint _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -616,7 +623,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was copied, false if the tag didn't exist in the
                      given list.
   */
-  bool getUint(string tag, out uint value)
+  bool getUint(string tag, out uint value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -634,7 +641,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was copied, false if the tag didn't exist in the
                      given list.
   */
-  bool getUint64(string tag, out ulong value)
+  bool getUint64(string tag, out ulong value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -653,7 +660,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was copied, false if the tag didn't exist in the
                      given list.
   */
-  bool getUint64Index(string tag, uint index, out ulong value)
+  bool getUint64Index(string tag, uint index, out ulong value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -672,7 +679,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was copied, false if the tag didn't exist in the
                      given list.
   */
-  bool getUintIndex(string tag, uint index, out uint value)
+  bool getUintIndex(string tag, uint index, out uint value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -691,7 +698,7 @@ class TagList : gobject.boxed.Boxed
                  entry or null if the tag wasn't available or the tag
                  doesn't have as many entries
   */
-  gobject.value.Value getValueIndex(string tag, uint index)
+  gobject.value.Value getValueIndex(string tag, uint index) nothrow
   {
     const(GValue)* _cretval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -707,7 +714,7 @@ class TagList : gobject.boxed.Boxed
         from = list to merge from
         mode = the mode to use
   */
-  void insert(gst.tag_list.TagList from, gst.types.TagMergeMode mode)
+  void insert(gst.tag_list.TagList from, gst.types.TagMergeMode mode) nothrow
   {
     gst_tag_list_insert(cast(GstTagList*)this._cPtr, from ? cast(const(GstTagList)*)from._cPtr(No.Dup) : null, mode);
   }
@@ -716,7 +723,7 @@ class TagList : gobject.boxed.Boxed
       Checks if the given taglist is empty.
       Returns: true if the taglist is empty, otherwise false.
   */
-  bool isEmpty()
+  bool isEmpty() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_tag_list_is_empty(cast(const(GstTagList)*)this._cPtr);
@@ -730,7 +737,7 @@ class TagList : gobject.boxed.Boxed
         list2 = a #GstTagList.
       Returns: true if the taglists are equal, otherwise false
   */
-  bool isEqual(gst.tag_list.TagList list2)
+  bool isEqual(gst.tag_list.TagList list2) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_tag_list_is_equal(cast(const(GstTagList)*)this._cPtr, list2 ? cast(const(GstTagList)*)list2._cPtr(No.Dup) : null);
@@ -748,7 +755,7 @@ class TagList : gobject.boxed.Boxed
         mode = the mode to use
       Returns: the new list
   */
-  gst.tag_list.TagList merge(gst.tag_list.TagList list2, gst.types.TagMergeMode mode)
+  gst.tag_list.TagList merge(gst.tag_list.TagList list2, gst.types.TagMergeMode mode) nothrow
   {
     GstTagList* _cretval;
     _cretval = gst_tag_list_merge(cast(const(GstTagList)*)this._cPtr, list2 ? cast(const(GstTagList)*)list2._cPtr(No.Dup) : null, mode);
@@ -760,7 +767,7 @@ class TagList : gobject.boxed.Boxed
       Get the number of tags in list.
       Returns: The number of tags in list.
   */
-  int nTags()
+  int nTags() nothrow
   {
     int _retval;
     _retval = gst_tag_list_n_tags(cast(const(GstTagList)*)this._cPtr);
@@ -774,7 +781,7 @@ class TagList : gobject.boxed.Boxed
         index = the index
       Returns: The name of the tag at index.
   */
-  string nthTagName(uint index)
+  string nthTagName(uint index) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_tag_list_nth_tag_name(cast(const(GstTagList)*)this._cPtr, index);
@@ -797,7 +804,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was set, false if the tag didn't exist in the
                      given list.
   */
-  bool peekStringIndex(string tag, uint index, out string value)
+  bool peekStringIndex(string tag, uint index, out string value) nothrow
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
@@ -813,7 +820,7 @@ class TagList : gobject.boxed.Boxed
       Params:
         tag = tag to remove
   */
-  void removeTag(string tag)
+  void removeTag(string tag) nothrow
   {
     const(char)* _tag = tag.toCString(No.Alloc);
     gst_tag_list_remove_tag(cast(GstTagList*)this._cPtr, _tag);
@@ -826,7 +833,7 @@ class TagList : gobject.boxed.Boxed
       Params:
         scope_ = new scope for list
   */
-  void setScope(gst.types.TagScope scope_)
+  void setScope(gst.types.TagScope scope_) nothrow
   {
     gst_tag_list_set_scope(cast(GstTagList*)this._cPtr, scope_);
   }
@@ -837,7 +844,7 @@ class TagList : gobject.boxed.Boxed
             The string must be freed with [glib.global.gfree] when no longer
             needed.
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gst_tag_list_to_string(cast(const(GstTagList)*)this._cPtr);
@@ -858,7 +865,7 @@ class TagList : gobject.boxed.Boxed
       Returns: true, if a value was copied, false if the tag didn't exist in the
                  given list.
   */
-  static bool copyValue(out gobject.value.Value dest, gst.tag_list.TagList list, string tag)
+  static bool copyValue(out gobject.value.Value dest, gst.tag_list.TagList list, string tag) nothrow
   {
     bool _retval;
     GValue _dest;

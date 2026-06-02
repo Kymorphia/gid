@@ -15,11 +15,8 @@ class MountOperationHandlerSkeleton
   _GtkMountOperationHandlerSkeleton _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.__mount_operation_handler_skeleton.MountOperationHandlerSkeleton");
-
     _cInstance = *cast(_GtkMountOperationHandlerSkeleton*)ptr;
 
     if (take)
@@ -27,7 +24,7 @@ class MountOperationHandlerSkeleton
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }

@@ -30,26 +30,26 @@ class VolumeMonitor : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_volume_monitor_get_type != &gidSymbolNotFound ? g_volume_monitor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VolumeMonitor self()
+  override VolumeMonitor self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
       Get builder for [gio.volume_monitor.VolumeMonitor]
       Returns: New builder object
   */
-  static VolumeMonitorGidBuilder builder()
+  static VolumeMonitorGidBuilder builder() nothrow
   {
     return new VolumeMonitorGidBuilder;
   }
@@ -104,7 +104,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
         gvfs for an example of this. Also see [gio.mount.Mount.isShadowed],
         [gio.mount.Mount.shadow] and [gio.mount.Mount.unshadow] functions.
   */
-  static gio.volume.Volume adoptOrphanMount(gio.mount.Mount mount)
+  static gio.volume.Volume adoptOrphanMount(gio.mount.Mount mount) nothrow
   {
     GVolume* _cretval;
     _cretval = g_volume_monitor_adopt_orphan_mount(mount ? cast(GMount*)(cast(gobject.object.ObjectWrap)mount)._cPtr(No.Dup) : null);
@@ -117,7 +117,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
       Returns: a reference to the #GVolumeMonitor used by gio. Call
            [gobject.object.ObjectWrap.unref] when done with it.
   */
-  static gio.volume_monitor.VolumeMonitor get()
+  static gio.volume_monitor.VolumeMonitor get() nothrow
   {
     GVolumeMonitor* _cretval;
     _cretval = g_volume_monitor_get();
@@ -132,7 +132,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
       its elements have been unreffed with [gobject.object.ObjectWrap.unref].
       Returns: a #GList of connected #GDrive objects.
   */
-  gio.drive.Drive[] getConnectedDrives()
+  gio.drive.Drive[] getConnectedDrives() nothrow
   {
     GList* _cretval;
     _cretval = g_volume_monitor_get_connected_drives(cast(GVolumeMonitor*)this._cPtr);
@@ -148,7 +148,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
       Returns: a #GMount or null if no such mount is available.
             Free the returned object with [gobject.object.ObjectWrap.unref].
   */
-  gio.mount.Mount getMountForUuid(string uuid)
+  gio.mount.Mount getMountForUuid(string uuid) nothrow
   {
     GMount* _cretval;
     const(char)* _uuid = uuid.toCString(No.Alloc);
@@ -164,7 +164,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
       its elements have been unreffed with [gobject.object.ObjectWrap.unref].
       Returns: a #GList of #GMount objects.
   */
-  gio.mount.Mount[] getMounts()
+  gio.mount.Mount[] getMounts() nothrow
   {
     GList* _cretval;
     _cretval = g_volume_monitor_get_mounts(cast(GVolumeMonitor*)this._cPtr);
@@ -180,7 +180,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
       Returns: a #GVolume or null if no such volume is available.
             Free the returned object with [gobject.object.ObjectWrap.unref].
   */
-  gio.volume.Volume getVolumeForUuid(string uuid)
+  gio.volume.Volume getVolumeForUuid(string uuid) nothrow
   {
     GVolume* _cretval;
     const(char)* _uuid = uuid.toCString(No.Alloc);
@@ -196,7 +196,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
       its elements have been unreffed with [gobject.object.ObjectWrap.unref].
       Returns: a #GList of #GVolume objects.
   */
-  gio.volume.Volume[] getVolumes()
+  gio.volume.Volume[] getVolumes() nothrow
   {
     GList* _cretval;
     _cretval = g_volume_monitor_get_volumes(cast(GVolumeMonitor*)this._cPtr);
@@ -221,14 +221,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDriveChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDriveChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -240,7 +240,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.volume_monitor.VolumeMonitor.driveChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -264,14 +271,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDriveConnected(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDriveConnected(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -283,7 +290,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.volume_monitor.VolumeMonitor.driveConnected");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -307,14 +321,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDriveDisconnected(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDriveDisconnected(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -326,7 +340,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.volume_monitor.VolumeMonitor.driveDisconnected");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -350,14 +371,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDriveEjectButton(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDriveEjectButton(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -369,7 +390,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.volume_monitor.VolumeMonitor.driveEjectButton");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -393,14 +421,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDriveStopButton(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDriveStopButton(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.drive.Drive)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -412,7 +440,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.volume_monitor.VolumeMonitor.driveStopButton");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -436,14 +471,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMountAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMountAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.mount.Mount)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -455,7 +490,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.volume_monitor.VolumeMonitor.mountAdded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -479,14 +521,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMountChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMountChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.mount.Mount)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -498,7 +540,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.volume_monitor.VolumeMonitor.mountChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -525,14 +574,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMountPreUnmount(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMountPreUnmount(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.mount.Mount)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -544,7 +593,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.volume_monitor.VolumeMonitor.mountPreUnmount");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -568,14 +624,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMountRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMountRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.mount.Mount)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -587,7 +643,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.volume_monitor.VolumeMonitor.mountRemoved");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -611,14 +674,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectVolumeAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectVolumeAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.volume.Volume)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -630,7 +693,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.volume_monitor.VolumeMonitor.volumeAdded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -654,14 +724,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectVolumeChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectVolumeChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.volume.Volume)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -673,7 +743,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.volume_monitor.VolumeMonitor.volumeChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -697,14 +774,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectVolumeRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectVolumeRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.volume.Volume)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.volume_monitor.VolumeMonitor)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -716,7 +793,14 @@ class VolumeMonitor : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.volume_monitor.VolumeMonitor.volumeRemoved");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -736,7 +820,7 @@ final class VolumeMonitorGidBuilder : VolumeMonitorGidBuilderImpl!VolumeMonitorG
       Create object from builder.
       Returns: New object
   */
-  VolumeMonitor build()
+  VolumeMonitor build() nothrow
   {
     return new VolumeMonitor(cast(void*)createGObject(VolumeMonitor._getGType), No.Take);
   }

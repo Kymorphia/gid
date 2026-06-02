@@ -22,26 +22,26 @@ class ButtonBox : gtk.box.Box
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_button_box_get_type != &gidSymbolNotFound ? gtk_button_box_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ButtonBox self()
+  override ButtonBox self() nothrow
   {
     return this;
   }
@@ -50,19 +50,19 @@ class ButtonBox : gtk.box.Box
       Get builder for [gtk.button_box.ButtonBox]
       Returns: New builder object
   */
-  static ButtonBoxGidBuilder builder()
+  static ButtonBoxGidBuilder builder() nothrow
   {
     return new ButtonBoxGidBuilder;
   }
 
   /** */
-  @property gtk.types.ButtonBoxStyle layoutStyle()
+  @property gtk.types.ButtonBoxStyle layoutStyle() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.ButtonBoxStyle)("layout-style");
   }
 
   /** */
-  @property void layoutStyle(gtk.types.ButtonBoxStyle propval)
+  @property void layoutStyle(gtk.types.ButtonBoxStyle propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.ButtonBoxStyle)("layout-style", propval);
   }
@@ -74,7 +74,7 @@ class ButtonBox : gtk.box.Box
         orientation = the box's orientation.
       Returns: a new #GtkButtonBox.
   */
-  this(gtk.types.Orientation orientation)
+  this(gtk.types.Orientation orientation) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_button_box_new(orientation);
@@ -89,7 +89,7 @@ class ButtonBox : gtk.box.Box
         child = a child of widget
       Returns: true if the child is not subject to homogenous sizing
   */
-  bool getChildNonHomogeneous(gtk.widget.Widget child)
+  bool getChildNonHomogeneous(gtk.widget.Widget child) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_button_box_get_child_non_homogeneous(cast(GtkButtonBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -103,7 +103,7 @@ class ButtonBox : gtk.box.Box
         child = a child of widget
       Returns: whether child should appear in a secondary group of children.
   */
-  bool getChildSecondary(gtk.widget.Widget child)
+  bool getChildSecondary(gtk.widget.Widget child) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_button_box_get_child_secondary(cast(GtkButtonBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -114,7 +114,7 @@ class ButtonBox : gtk.box.Box
       Retrieves the method being used to arrange the buttons in a button box.
       Returns: the method used to lay out buttons in widget.
   */
-  gtk.types.ButtonBoxStyle getLayout()
+  gtk.types.ButtonBoxStyle getLayout() nothrow
   {
     GtkButtonBoxStyle _cretval;
     _cretval = gtk_button_box_get_layout(cast(GtkButtonBox*)this._cPtr);
@@ -129,7 +129,7 @@ class ButtonBox : gtk.box.Box
         child = a child of widget
         nonHomogeneous = the new value
   */
-  void setChildNonHomogeneous(gtk.widget.Widget child, bool nonHomogeneous)
+  void setChildNonHomogeneous(gtk.widget.Widget child, bool nonHomogeneous) nothrow
   {
     gtk_button_box_set_child_non_homogeneous(cast(GtkButtonBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, nonHomogeneous);
   }
@@ -153,7 +153,7 @@ class ButtonBox : gtk.box.Box
         isSecondary = if true, the child appears in a secondary group of the
                          button box.
   */
-  void setChildSecondary(gtk.widget.Widget child, bool isSecondary)
+  void setChildSecondary(gtk.widget.Widget child, bool isSecondary) nothrow
   {
     gtk_button_box_set_child_secondary(cast(GtkButtonBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, isSecondary);
   }
@@ -164,7 +164,7 @@ class ButtonBox : gtk.box.Box
       Params:
         layoutStyle = the new layout style
   */
-  void setLayout(gtk.types.ButtonBoxStyle layoutStyle)
+  void setLayout(gtk.types.ButtonBoxStyle layoutStyle) nothrow
   {
     gtk_button_box_set_layout(cast(GtkButtonBox*)this._cPtr, layoutStyle);
   }
@@ -176,7 +176,7 @@ class ButtonBoxGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
 
 
   /** */
-  T layoutStyle(gtk.types.ButtonBoxStyle propval)
+  T layoutStyle(gtk.types.ButtonBoxStyle propval) nothrow
   {
     return setProperty("layout-style", propval);
   }
@@ -189,7 +189,7 @@ final class ButtonBoxGidBuilder : ButtonBoxGidBuilderImpl!ButtonBoxGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ButtonBox build()
+  ButtonBox build() nothrow
   {
     return new ButtonBox(cast(void*)createGObject(ButtonBox._getGType), No.Take);
   }

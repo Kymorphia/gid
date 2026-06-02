@@ -69,26 +69,26 @@ class Pipeline : gst.bin.Bin
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_pipeline_get_type != &gidSymbolNotFound ? gst_pipeline_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Pipeline self()
+  override Pipeline self() nothrow
   {
     return this;
   }
@@ -97,7 +97,7 @@ class Pipeline : gst.bin.Bin
       Get builder for [gst.pipeline.Pipeline]
       Returns: New builder object
   */
-  static PipelineGidBuilder builder()
+  static PipelineGidBuilder builder() nothrow
   {
     return new PipelineGidBuilder;
   }
@@ -108,7 +108,7 @@ class Pipeline : gst.bin.Bin
         pipeline's bus when going from READY to NULL state. Please see
         [gst.pipeline.Pipeline.setAutoFlushBus] for more information on this option.
   */
-  @property bool autoFlushBus()
+  @property bool autoFlushBus() nothrow
   {
     return getAutoFlushBus();
   }
@@ -120,7 +120,7 @@ class Pipeline : gst.bin.Bin
           pipeline's bus when going from READY to NULL state. Please see
           [gst.pipeline.Pipeline.setAutoFlushBus] for more information on this option.
   */
-  @property void autoFlushBus(bool propval)
+  @property void autoFlushBus(bool propval) nothrow
   {
     setAutoFlushBus(propval);
   }
@@ -131,7 +131,7 @@ class Pipeline : gst.bin.Bin
         PLAYING state expressed in nanoseconds.
         see [gst.pipeline.Pipeline.setDelay] for more information on this option.
   */
-  @property ulong delay()
+  @property ulong delay() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("delay");
   }
@@ -143,7 +143,7 @@ class Pipeline : gst.bin.Bin
           PLAYING state expressed in nanoseconds.
           see [gst.pipeline.Pipeline.setDelay] for more information on this option.
   */
-  @property void delay(ulong propval)
+  @property void delay(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("delay", propval);
   }
@@ -152,7 +152,7 @@ class Pipeline : gst.bin.Bin
       Get `latency` property.
       Returns: Latency to configure on the pipeline. See [gst.pipeline.Pipeline.setLatency].
   */
-  @property ulong latency()
+  @property ulong latency() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("latency");
   }
@@ -162,7 +162,7 @@ class Pipeline : gst.bin.Bin
       Params:
         propval = Latency to configure on the pipeline. See [gst.pipeline.Pipeline.setLatency].
   */
-  @property void latency(ulong propval)
+  @property void latency(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("latency", propval);
   }
@@ -176,7 +176,7 @@ class Pipeline : gst.bin.Bin
         
         MT safe.
   */
-  this(string name = null)
+  this(string name = null) nothrow
   {
     GstElement* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -194,7 +194,7 @@ class Pipeline : gst.bin.Bin
       
       MT safe.
   */
-  void autoClock()
+  void autoClock() nothrow
   {
     gst_pipeline_auto_clock(cast(GstPipeline*)this._cPtr);
   }
@@ -207,7 +207,7 @@ class Pipeline : gst.bin.Bin
         
         MT safe.
   */
-  bool getAutoFlushBus()
+  bool getAutoFlushBus() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pipeline_get_auto_flush_bus(cast(GstPipeline*)this._cPtr);
@@ -221,7 +221,7 @@ class Pipeline : gst.bin.Bin
         
         MT safe.
   */
-  override gst.bus.Bus getBus()
+  override gst.bus.Bus getBus() nothrow
   {
     GstBus* _cretval;
     _cretval = gst_pipeline_get_bus(cast(GstPipeline*)this._cPtr);
@@ -236,7 +236,7 @@ class Pipeline : gst.bin.Bin
         
         MT safe.
   */
-  gst.types.ClockTime getConfiguredLatency()
+  gst.types.ClockTime getConfiguredLatency() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_pipeline_get_configured_latency(cast(GstPipeline*)this._cPtr);
@@ -249,7 +249,7 @@ class Pipeline : gst.bin.Bin
         
         MT safe.
   */
-  gst.types.ClockTime getDelay()
+  gst.types.ClockTime getDelay() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_pipeline_get_delay(cast(GstPipeline*)this._cPtr);
@@ -261,7 +261,7 @@ class Pipeline : gst.bin.Bin
       [gst.pipeline.Pipeline.setLatency].
       Returns: Latency to configure on the pipeline or GST_CLOCK_TIME_NONE
   */
-  gst.types.ClockTime getLatency()
+  gst.types.ClockTime getLatency() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_pipeline_get_latency(cast(GstPipeline*)this._cPtr);
@@ -275,7 +275,7 @@ class Pipeline : gst.bin.Bin
       clock, even if the pipeline is not in the PLAYING state.
       Returns: a #GstClock, unref after usage.
   */
-  gst.clock.Clock getPipelineClock()
+  gst.clock.Clock getPipelineClock() nothrow
   {
     GstClock* _cretval;
     _cretval = gst_pipeline_get_pipeline_clock(cast(GstPipeline*)this._cPtr);
@@ -289,7 +289,7 @@ class Pipeline : gst.bin.Bin
         
         MT safe.
   */
-  bool isLive()
+  bool isLive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_pipeline_is_live(cast(GstPipeline*)this._cPtr);
@@ -316,7 +316,7 @@ class Pipeline : gst.bin.Bin
         autoFlush = whether or not to automatically flush the bus when
           the pipeline goes from READY to NULL state
   */
-  void setAutoFlushBus(bool autoFlush)
+  void setAutoFlushBus(bool autoFlush) nothrow
   {
     gst_pipeline_set_auto_flush_bus(cast(GstPipeline*)this._cPtr, autoFlush);
   }
@@ -336,7 +336,7 @@ class Pipeline : gst.bin.Bin
       Params:
         delay = the delay
   */
-  void setDelay(gst.types.ClockTime delay)
+  void setDelay(gst.types.ClockTime delay) nothrow
   {
     gst_pipeline_set_delay(cast(GstPipeline*)this._cPtr, delay);
   }
@@ -353,7 +353,7 @@ class Pipeline : gst.bin.Bin
       Params:
         latency = latency to configure
   */
-  void setLatency(gst.types.ClockTime latency)
+  void setLatency(gst.types.ClockTime latency) nothrow
   {
     gst_pipeline_set_latency(cast(GstPipeline*)this._cPtr, latency);
   }
@@ -371,7 +371,7 @@ class Pipeline : gst.bin.Bin
       Params:
         clock = the clock to use
   */
-  void useClock(gst.clock.Clock clock = null)
+  void useClock(gst.clock.Clock clock = null) nothrow
   {
     gst_pipeline_use_clock(cast(GstPipeline*)this._cPtr, clock ? cast(GstClock*)clock._cPtr(No.Dup) : null);
   }
@@ -390,7 +390,7 @@ class PipelineGidBuilderImpl(T) : gst.bin.BinGidBuilderImpl!T
           [gst.pipeline.Pipeline.setAutoFlushBus] for more information on this option.
       Returns: Builder instance for fluent chaining
   */
-  T autoFlushBus(bool propval)
+  T autoFlushBus(bool propval) nothrow
   {
     return setProperty("auto-flush-bus", propval);
   }
@@ -403,7 +403,7 @@ class PipelineGidBuilderImpl(T) : gst.bin.BinGidBuilderImpl!T
           see [gst.pipeline.Pipeline.setDelay] for more information on this option.
       Returns: Builder instance for fluent chaining
   */
-  T delay(ulong propval)
+  T delay(ulong propval) nothrow
   {
     return setProperty("delay", propval);
   }
@@ -414,7 +414,7 @@ class PipelineGidBuilderImpl(T) : gst.bin.BinGidBuilderImpl!T
         propval = Latency to configure on the pipeline. See [gst.pipeline.Pipeline.setLatency].
       Returns: Builder instance for fluent chaining
   */
-  T latency(ulong propval)
+  T latency(ulong propval) nothrow
   {
     return setProperty("latency", propval);
   }
@@ -427,7 +427,7 @@ final class PipelineGidBuilder : PipelineGidBuilderImpl!PipelineGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Pipeline build()
+  Pipeline build() nothrow
   {
     return new Pipeline(cast(void*)createGObject(Pipeline._getGType), No.Take);
   }

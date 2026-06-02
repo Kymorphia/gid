@@ -22,26 +22,26 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_data_output_stream_get_type != &gidSymbolNotFound ? g_data_output_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DataOutputStream self()
+  override DataOutputStream self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
       Get builder for [gio.data_output_stream.DataOutputStream]
       Returns: New builder object
   */
-  static DataOutputStreamGidBuilder builder()
+  static DataOutputStreamGidBuilder builder() nothrow
   {
     return new DataOutputStreamGidBuilder;
   }
@@ -60,7 +60,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
       Returns: Determines the byte ordering that is used when writing
         multi-byte entities (such as integers) to the stream.
   */
-  @property gio.types.DataStreamByteOrder byteOrder()
+  @property gio.types.DataStreamByteOrder byteOrder() nothrow
   {
     return getByteOrder();
   }
@@ -71,7 +71,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
         propval = Determines the byte ordering that is used when writing
           multi-byte entities (such as integers) to the stream.
   */
-  @property void byteOrder(gio.types.DataStreamByteOrder propval)
+  @property void byteOrder(gio.types.DataStreamByteOrder propval) nothrow
   {
     setByteOrder(propval);
   }
@@ -85,7 +85,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
         baseStream = a #GOutputStream.
       Returns: #GDataOutputStream.
   */
-  this(gio.output_stream.OutputStream baseStream)
+  this(gio.output_stream.OutputStream baseStream) nothrow
   {
     GDataOutputStream* _cretval;
     _cretval = g_data_output_stream_new(baseStream ? cast(GOutputStream*)baseStream._cPtr(No.Dup) : null);
@@ -96,7 +96,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
       Gets the byte order for the stream.
       Returns: the #GDataStreamByteOrder for the stream.
   */
-  gio.types.DataStreamByteOrder getByteOrder()
+  gio.types.DataStreamByteOrder getByteOrder() nothrow
   {
     GDataStreamByteOrder _cretval;
     _cretval = g_data_output_stream_get_byte_order(cast(GDataOutputStream*)this._cPtr);
@@ -263,7 +263,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
       Params:
         order = a [gio.types.DataStreamByteOrder].
   */
-  void setByteOrder(gio.types.DataStreamByteOrder order)
+  void setByteOrder(gio.types.DataStreamByteOrder order) nothrow
   {
     g_data_output_stream_set_byte_order(cast(GDataOutputStream*)this._cPtr, order);
   }
@@ -282,7 +282,7 @@ class DataOutputStreamGidBuilderImpl(T) : gio.filter_output_stream.FilterOutputS
           multi-byte entities (such as integers) to the stream.
       Returns: Builder instance for fluent chaining
   */
-  T byteOrder(gio.types.DataStreamByteOrder propval)
+  T byteOrder(gio.types.DataStreamByteOrder propval) nothrow
   {
     return setProperty("byte-order", propval);
   }
@@ -295,7 +295,7 @@ final class DataOutputStreamGidBuilder : DataOutputStreamGidBuilderImpl!DataOutp
       Create object from builder.
       Returns: New object
   */
-  DataOutputStream build()
+  DataOutputStream build() nothrow
   {
     return new DataOutputStream(cast(void*)createGObject(DataOutputStream._getGType), Yes.Take);
   }

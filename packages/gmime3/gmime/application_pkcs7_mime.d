@@ -21,26 +21,26 @@ class ApplicationPkcs7Mime : gmime.part.Part
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_application_pkcs7_mime_get_type != &gidSymbolNotFound ? g_mime_application_pkcs7_mime_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ApplicationPkcs7Mime self()
+  override ApplicationPkcs7Mime self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class ApplicationPkcs7Mime : gmime.part.Part
       Get builder for [gmime.application_pkcs7_mime.ApplicationPkcs7Mime]
       Returns: New builder object
   */
-  static ApplicationPkcs7MimeGidBuilder builder()
+  static ApplicationPkcs7MimeGidBuilder builder() nothrow
   {
     return new ApplicationPkcs7MimeGidBuilder;
   }
@@ -61,7 +61,7 @@ class ApplicationPkcs7Mime : gmime.part.Part
         type = The type of S/MIME data contained within the part.
       Returns: an empty application/pkcs7-mime object.
   */
-  this(gmime.types.SecureMimeType type)
+  this(gmime.types.SecureMimeType type) nothrow
   {
     GMimeApplicationPkcs7Mime* _cretval;
     _cretval = g_mime_application_pkcs7_mime_new(type);
@@ -156,7 +156,7 @@ class ApplicationPkcs7Mime : gmime.part.Part
       Gets the smime-type value of the Content-Type header.
       Returns: the smime-type value.
   */
-  gmime.types.SecureMimeType getSmimeType()
+  gmime.types.SecureMimeType getSmimeType() nothrow
   {
     GMimeSecureMimeType _cretval;
     _cretval = g_mime_application_pkcs7_mime_get_smime_type(cast(GMimeApplicationPkcs7Mime*)this._cPtr);
@@ -203,7 +203,7 @@ final class ApplicationPkcs7MimeGidBuilder : ApplicationPkcs7MimeGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  ApplicationPkcs7Mime build()
+  ApplicationPkcs7Mime build() nothrow
   {
     return new ApplicationPkcs7Mime(cast(void*)createGObject(ApplicationPkcs7Mime._getGType), Yes.Take);
   }

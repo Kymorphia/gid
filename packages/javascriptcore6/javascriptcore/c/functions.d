@@ -13,7 +13,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libjavascriptcoregtk-6.0.so.1"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // Class
   GType function() c_jsc_class_get_type; ///

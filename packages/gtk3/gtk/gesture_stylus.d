@@ -22,26 +22,26 @@ class GestureStylus : gtk.gesture_single.GestureSingle
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gesture_stylus_get_type != &gidSymbolNotFound ? gtk_gesture_stylus_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GestureStylus self()
+  override GestureStylus self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
       Get builder for [gtk.gesture_stylus.GestureStylus]
       Returns: New builder object
   */
-  static GestureStylusGidBuilder builder()
+  static GestureStylusGidBuilder builder() nothrow
   {
     return new GestureStylusGidBuilder;
   }
@@ -62,7 +62,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
         widget = a #GtkWidget
       Returns: a newly created stylus gesture
   */
-  this(gtk.widget.Widget widget)
+  this(gtk.widget.Widget widget) nothrow
   {
     GtkGesture* _cretval;
     _cretval = gtk_gesture_stylus_new(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
@@ -80,7 +80,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
         values = return location for the axis values
       Returns: #TRUE if there is a current value for the axes
   */
-  bool getAxes(gdk.types.AxisUse[] axes, out double[] values)
+  bool getAxes(gdk.types.AxisUse[] axes, out double[] values) nothrow
   {
     bool _retval;
     auto _axes = axes.ptr ? cast(GdkAxisUse*)(axes ~ GdkAxisUse.init).ptr : [GdkAxisUse.init].ptr;
@@ -103,7 +103,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
         value = return location for the axis value
       Returns: #TRUE if there is a current value for the axis
   */
-  bool getAxis(gdk.types.AxisUse axis, out double value)
+  bool getAxis(gdk.types.AxisUse axis, out double value) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_gesture_stylus_get_axis(cast(GtkGestureStylus*)this._cPtr, axis, cast(double*)&value);
@@ -117,7 +117,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
       signal handlers.
       Returns: The current stylus tool
   */
-  gdk.device_tool.DeviceTool getDeviceTool()
+  gdk.device_tool.DeviceTool getDeviceTool() nothrow
   {
     GdkDeviceTool* _cretval;
     _cretval = gtk_gesture_stylus_get_device_tool(cast(GtkGestureStylus*)this._cPtr);
@@ -144,7 +144,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDown(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDown(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -152,7 +152,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.gesture_stylus.GestureStylus)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -167,7 +167,14 @@ class GestureStylus : gtk.gesture_single.GestureSingle
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.gesture_stylus.GestureStylus.down");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -193,7 +200,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMotion(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMotion(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -201,7 +208,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.gesture_stylus.GestureStylus)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -216,7 +223,14 @@ class GestureStylus : gtk.gesture_single.GestureSingle
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.gesture_stylus.GestureStylus.motion");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -242,7 +256,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectProximity(T)(T callback, Flag!"After" after = No.After)
+  gulong connectProximity(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -250,7 +264,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.gesture_stylus.GestureStylus)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -265,7 +279,14 @@ class GestureStylus : gtk.gesture_single.GestureSingle
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.gesture_stylus.GestureStylus.proximity");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -291,7 +312,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUp(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUp(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -299,7 +320,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.gesture_stylus.GestureStylus)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -314,7 +335,14 @@ class GestureStylus : gtk.gesture_single.GestureSingle
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.gesture_stylus.GestureStylus.up");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -334,7 +362,7 @@ final class GestureStylusGidBuilder : GestureStylusGidBuilderImpl!GestureStylusG
       Create object from builder.
       Returns: New object
   */
-  GestureStylus build()
+  GestureStylus build() nothrow
   {
     return new GestureStylus(cast(void*)createGObject(GestureStylus._getGType), Yes.Take);
   }

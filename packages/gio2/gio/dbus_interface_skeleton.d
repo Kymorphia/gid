@@ -24,26 +24,26 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_interface_skeleton_get_type != &gidSymbolNotFound ? g_dbus_interface_skeleton_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DBusInterfaceSkeleton self()
+  override DBusInterfaceSkeleton self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
       Get builder for [gio.dbus_interface_skeleton.DBusInterfaceSkeleton]
       Returns: New builder object
   */
-  static DBusInterfaceSkeletonGidBuilder builder()
+  static DBusInterfaceSkeletonGidBuilder builder() nothrow
   {
     return new DBusInterfaceSkeletonGidBuilder;
   }
@@ -61,7 +61,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
       Get `gFlags` property.
       Returns: Flags from the #GDBusInterfaceSkeletonFlags enumeration.
   */
-  @property gio.types.DBusInterfaceSkeletonFlags gFlags()
+  @property gio.types.DBusInterfaceSkeletonFlags gFlags() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.types.DBusInterfaceSkeletonFlags)("g-flags");
   }
@@ -71,7 +71,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
       Params:
         propval = Flags from the #GDBusInterfaceSkeletonFlags enumeration.
   */
-  @property void gFlags(gio.types.DBusInterfaceSkeletonFlags propval)
+  @property void gFlags(gio.types.DBusInterfaceSkeletonFlags propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gio.types.DBusInterfaceSkeletonFlags)("g-flags", propval);
   }
@@ -115,7 +115,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
       signal later (e.g. in an idle handler). This technique is useful
       for collapsing multiple property changes into one.
   */
-  void flush()
+  void flush() nothrow
   {
     g_dbus_interface_skeleton_flush(cast(GDBusInterfaceSkeleton*)this._cPtr);
   }
@@ -125,7 +125,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
       Returns: A #GDBusConnection or null if interface_ is
         not exported anywhere. Do not free, the object belongs to interface_.
   */
-  gio.dbus_connection.DBusConnection getConnection()
+  gio.dbus_connection.DBusConnection getConnection() nothrow
   {
     GDBusConnection* _cretval;
     _cretval = g_dbus_interface_skeleton_get_connection(cast(GDBusInterfaceSkeleton*)this._cPtr);
@@ -140,7 +140,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
           list should be freed with [glib.list.List.free] after each element has
           been freed with [gobject.object.ObjectWrap.unref].
   */
-  gio.dbus_connection.DBusConnection[] getConnections()
+  gio.dbus_connection.DBusConnection[] getConnections() nothrow
   {
     GList* _cretval;
     _cretval = g_dbus_interface_skeleton_get_connections(cast(GDBusInterfaceSkeleton*)this._cPtr);
@@ -153,7 +153,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
       of interface_
       Returns: One or more flags from the #GDBusInterfaceSkeletonFlags enumeration.
   */
-  gio.types.DBusInterfaceSkeletonFlags getFlags()
+  gio.types.DBusInterfaceSkeletonFlags getFlags() nothrow
   {
     GDBusInterfaceSkeletonFlags _cretval;
     _cretval = g_dbus_interface_skeleton_get_flags(cast(GDBusInterfaceSkeleton*)this._cPtr);
@@ -166,7 +166,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
       implemented by interface_.
       Returns: A #GDBusInterfaceInfo (never null). Do not free.
   */
-  gio.dbus_interface_info.DBusInterfaceInfo getInfo()
+  gio.dbus_interface_info.DBusInterfaceInfo getInfo() nothrow
   {
     GDBusInterfaceInfo* _cretval;
     _cretval = g_dbus_interface_skeleton_get_info(cast(GDBusInterfaceSkeleton*)this._cPtr);
@@ -179,7 +179,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
       Returns: A string owned by interface_ or null if interface_ is not exported
         anywhere. Do not free, the string belongs to interface_.
   */
-  string getObjectPath()
+  string getObjectPath() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_interface_skeleton_get_object_path(cast(GDBusInterfaceSkeleton*)this._cPtr);
@@ -193,7 +193,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
         ['a{sv}'][G-VARIANT-TYPE-VARDICT:CAPS].
         Free with [glib.variant.Variant.unref].
   */
-  glib.variant.Variant getProperties()
+  glib.variant.Variant getProperties() nothrow
   {
     GVariant* _cretval;
     _cretval = g_dbus_interface_skeleton_get_properties(cast(GDBusInterfaceSkeleton*)this._cPtr);
@@ -207,7 +207,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
       itself to be passed as user_data.
       Returns: the vtable of the D-Bus interface implemented by the skeleton
   */
-  gio.types.DBusInterfaceVTable getVtable()
+  gio.types.DBusInterfaceVTable getVtable() nothrow
   {
     GDBusInterfaceVTable* _cretval;
     _cretval = g_dbus_interface_skeleton_get_vtable(cast(GDBusInterfaceSkeleton*)this._cPtr);
@@ -224,7 +224,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
         connection = A #GDBusConnection.
       Returns: true if interface_ is exported on connection, false otherwise.
   */
-  bool hasConnection(gio.dbus_connection.DBusConnection connection)
+  bool hasConnection(gio.dbus_connection.DBusConnection connection) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_dbus_interface_skeleton_has_connection(cast(GDBusInterfaceSkeleton*)this._cPtr, connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null);
@@ -237,7 +237,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
       Params:
         flags = Flags from the #GDBusInterfaceSkeletonFlags enumeration.
   */
-  void setFlags(gio.types.DBusInterfaceSkeletonFlags flags)
+  void setFlags(gio.types.DBusInterfaceSkeletonFlags flags) nothrow
   {
     g_dbus_interface_skeleton_set_flags(cast(GDBusInterfaceSkeleton*)this._cPtr, flags);
   }
@@ -248,7 +248,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
       To unexport interface_ from only a single connection, use
       [gio.dbus_interface_skeleton.DBusInterfaceSkeleton.unexportFromConnection]
   */
-  void unexport()
+  void unexport() nothrow
   {
     g_dbus_interface_skeleton_unexport(cast(GDBusInterfaceSkeleton*)this._cPtr);
   }
@@ -262,7 +262,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
       Params:
         connection = A #GDBusConnection.
   */
-  void unexportFromConnection(gio.dbus_connection.DBusConnection connection)
+  void unexportFromConnection(gio.dbus_connection.DBusConnection connection) nothrow
   {
     g_dbus_interface_skeleton_unexport_from_connection(cast(GDBusInterfaceSkeleton*)this._cPtr, connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null);
   }
@@ -317,18 +317,19 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGAuthorizeMethod(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGAuthorizeMethod(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.dbus_method_invocation.DBusMethodInvocation)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.dbus_interface_skeleton.DBusInterfaceSkeleton)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -336,7 +337,14 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.dbus_interface_skeleton.DBusInterfaceSkeleton.gAuthorizeMethod");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -358,7 +366,7 @@ class DBusInterfaceSkeletonGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuild
         propval = Flags from the #GDBusInterfaceSkeletonFlags enumeration.
       Returns: Builder instance for fluent chaining
   */
-  T gFlags(gio.types.DBusInterfaceSkeletonFlags propval)
+  T gFlags(gio.types.DBusInterfaceSkeletonFlags propval) nothrow
   {
     return setProperty("g-flags", propval);
   }
@@ -371,7 +379,7 @@ final class DBusInterfaceSkeletonGidBuilder : DBusInterfaceSkeletonGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  DBusInterfaceSkeleton build()
+  DBusInterfaceSkeleton build() nothrow
   {
     return new DBusInterfaceSkeleton(cast(void*)createGObject(DBusInterfaceSkeleton._getGType), No.Take);
   }

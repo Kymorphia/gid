@@ -23,7 +23,7 @@ class ControlPoint : gobject.boxed.Boxed
         timestamp = timestamp of the value change
         value = the new value
   */
-  this(gst.types.ClockTime timestamp = gst.types.ClockTime.init, double value = 0.0)
+  this(gst.types.ClockTime timestamp = gst.types.ClockTime.init, double value = 0.0) nothrow
   {
     super(gMalloc(GstControlPoint.sizeof), Yes.Take);
     this.timestamp = timestamp;
@@ -31,32 +31,32 @@ class ControlPoint : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_control_point_get_type != &gidSymbolNotFound ? gst_control_point_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ControlPoint self()
+  override ControlPoint self() nothrow
   {
     return this;
   }
@@ -65,7 +65,7 @@ class ControlPoint : gobject.boxed.Boxed
       Get `timestamp` field.
       Returns: timestamp of the value change
   */
-  @property gst.types.ClockTime timestamp()
+  @property gst.types.ClockTime timestamp() nothrow
   {
     return (cast(GstControlPoint*)this._cPtr).timestamp;
   }
@@ -75,7 +75,7 @@ class ControlPoint : gobject.boxed.Boxed
       Params:
         propval = timestamp of the value change
   */
-  @property void timestamp(gst.types.ClockTime propval)
+  @property void timestamp(gst.types.ClockTime propval) nothrow
   {
     (cast(GstControlPoint*)this._cPtr).timestamp = propval;
   }
@@ -84,7 +84,7 @@ class ControlPoint : gobject.boxed.Boxed
       Get `value` field.
       Returns: the new value
   */
-  @property double value()
+  @property double value() nothrow
   {
     return (cast(GstControlPoint*)this._cPtr).value;
   }
@@ -94,7 +94,7 @@ class ControlPoint : gobject.boxed.Boxed
       Params:
         propval = the new value
   */
-  @property void value(double propval)
+  @property void value(double propval) nothrow
   {
     (cast(GstControlPoint*)this._cPtr).value = propval;
   }
@@ -103,7 +103,7 @@ class ControlPoint : gobject.boxed.Boxed
       Copies a #GstControlPoint
       Returns: A copy of cp
   */
-  gstcontroller.control_point.ControlPoint copy()
+  gstcontroller.control_point.ControlPoint copy() nothrow
   {
     GstControlPoint* _cretval;
     _cretval = gst_control_point_copy(cast(GstControlPoint*)this._cPtr);

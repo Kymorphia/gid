@@ -18,11 +18,8 @@ class VideoOverlayCompositionMeta
   GstVideoOverlayCompositionMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_overlay_composition_meta.VideoOverlayCompositionMeta");
-
     _cInstance = *cast(GstVideoOverlayCompositionMeta*)ptr;
 
     if (take)
@@ -30,7 +27,7 @@ class VideoOverlayCompositionMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class VideoOverlayCompositionMeta
       Get `meta` field.
       Returns: parent #GstMeta
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoOverlayCompositionMeta*)this._cPtr).meta, No.Take);
   }
@@ -48,7 +45,7 @@ class VideoOverlayCompositionMeta
       Get `overlay` field.
       Returns: the attached #GstVideoOverlayComposition
   */
-  @property gstvideo.video_overlay_composition.VideoOverlayComposition overlay()
+  @property gstvideo.video_overlay_composition.VideoOverlayComposition overlay() nothrow
   {
     return cToD!(gstvideo.video_overlay_composition.VideoOverlayComposition)(cast(void*)(cast(GstVideoOverlayCompositionMeta*)this._cPtr).overlay);
   }
@@ -58,14 +55,14 @@ class VideoOverlayCompositionMeta
       Params:
         propval = the attached #GstVideoOverlayComposition
   */
-  @property void overlay(gstvideo.video_overlay_composition.VideoOverlayComposition propval)
+  @property void overlay(gstvideo.video_overlay_composition.VideoOverlayComposition propval) nothrow
   {
     cValueFree!(gstvideo.video_overlay_composition.VideoOverlayComposition)(cast(void*)(cast(GstVideoOverlayCompositionMeta*)this._cPtr).overlay);
     dToC(propval, cast(void*)&(cast(GstVideoOverlayCompositionMeta*)this._cPtr).overlay);
   }
 
   /** */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_overlay_composition_meta_get_info();

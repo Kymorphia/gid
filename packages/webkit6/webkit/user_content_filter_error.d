@@ -17,7 +17,7 @@ struct UserContentFilterError
       Gets the quark for the domain of user content filter errors.
       Returns: user content filter error domain.
   */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = webkit_user_content_filter_error_quark();
@@ -27,12 +27,12 @@ struct UserContentFilterError
 
 class UserContentFilteException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(webkit.user_content_filter_error.UserContentFilterError.quark, cast(int)code, msg);
   }

@@ -14,26 +14,26 @@ class Date32Scalar : arrow.scalar.Scalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_date32_scalar_get_type != &gidSymbolNotFound ? garrow_date32_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Date32Scalar self()
+  override Date32Scalar self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class Date32Scalar : arrow.scalar.Scalar
       Get builder for [arrow.date32_scalar.Date32Scalar]
       Returns: New builder object
   */
-  static Date32ScalarGidBuilder builder()
+  static Date32ScalarGidBuilder builder() nothrow
   {
     return new Date32ScalarGidBuilder;
   }
 
   /** */
-  this(int value)
+  this(int value) nothrow
   {
     GArrowDate32Scalar* _cretval;
     _cretval = garrow_date32_scalar_new(value);
@@ -56,7 +56,7 @@ class Date32Scalar : arrow.scalar.Scalar
   }
 
   /** */
-  int getValue()
+  int getValue() nothrow
   {
     int _retval;
     _retval = garrow_date32_scalar_get_value(cast(GArrowDate32Scalar*)this._cPtr);
@@ -76,7 +76,7 @@ final class Date32ScalarGidBuilder : Date32ScalarGidBuilderImpl!Date32ScalarGidB
       Create object from builder.
       Returns: New object
   */
-  Date32Scalar build()
+  Date32Scalar build() nothrow
   {
     return new Date32Scalar(cast(void*)createGObject(Date32Scalar._getGType), Yes.Take);
   }

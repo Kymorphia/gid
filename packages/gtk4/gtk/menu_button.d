@@ -87,26 +87,26 @@ class MenuButton : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_menu_button_get_type != &gidSymbolNotFound ? gtk_menu_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MenuButton self()
+  override MenuButton self() nothrow
   {
     return this;
   }
@@ -115,7 +115,7 @@ class MenuButton : gtk.widget.Widget
       Get builder for [gtk.menu_button.MenuButton]
       Returns: New builder object
   */
-  static MenuButtonGidBuilder builder()
+  static MenuButtonGidBuilder builder() nothrow
   {
     return new MenuButtonGidBuilder;
   }
@@ -124,7 +124,7 @@ class MenuButton : gtk.widget.Widget
       Get `active` property.
       Returns: Whether the menu button is active.
   */
-  @property bool active()
+  @property bool active() nothrow
   {
     return getActive();
   }
@@ -134,7 +134,7 @@ class MenuButton : gtk.widget.Widget
       Params:
         propval = Whether the menu button is active.
   */
-  @property void active(bool propval)
+  @property void active(bool propval) nothrow
   {
     setActive(propval);
   }
@@ -143,7 +143,7 @@ class MenuButton : gtk.widget.Widget
       Get `alwaysShowArrow` property.
       Returns: Whether to show a dropdown arrow even when using an icon or a custom child.
   */
-  @property bool alwaysShowArrow()
+  @property bool alwaysShowArrow() nothrow
   {
     return getAlwaysShowArrow();
   }
@@ -153,7 +153,7 @@ class MenuButton : gtk.widget.Widget
       Params:
         propval = Whether to show a dropdown arrow even when using an icon or a custom child.
   */
-  @property void alwaysShowArrow(bool propval)
+  @property void alwaysShowArrow(bool propval) nothrow
   {
     setAlwaysShowArrow(propval);
   }
@@ -163,7 +163,7 @@ class MenuButton : gtk.widget.Widget
       Returns: Whether the size of the button can be made smaller than the natural
         size of its contents.
   */
-  @property bool canShrink()
+  @property bool canShrink() nothrow
   {
     return getCanShrink();
   }
@@ -174,7 +174,7 @@ class MenuButton : gtk.widget.Widget
         propval = Whether the size of the button can be made smaller than the natural
           size of its contents.
   */
-  @property void canShrink(bool propval)
+  @property void canShrink(bool propval) nothrow
   {
     setCanShrink(propval);
   }
@@ -183,7 +183,7 @@ class MenuButton : gtk.widget.Widget
       Get `child` property.
       Returns: The child widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -193,7 +193,7 @@ class MenuButton : gtk.widget.Widget
       Params:
         propval = The child widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -203,7 +203,7 @@ class MenuButton : gtk.widget.Widget
       Returns: The [gtk.types.ArrowType] representing the direction in which the
         menu or popover will be popped out.
   */
-  @property gtk.types.ArrowType direction()
+  @property gtk.types.ArrowType direction() nothrow
   {
     return getDirection();
   }
@@ -214,7 +214,7 @@ class MenuButton : gtk.widget.Widget
         propval = The [gtk.types.ArrowType] representing the direction in which the
           menu or popover will be popped out.
   */
-  @property void direction(gtk.types.ArrowType propval)
+  @property void direction(gtk.types.ArrowType propval) nothrow
   {
     setDirection(propval);
   }
@@ -223,7 +223,7 @@ class MenuButton : gtk.widget.Widget
       Get `hasFrame` property.
       Returns: Whether the button has a frame.
   */
-  @property bool hasFrame()
+  @property bool hasFrame() nothrow
   {
     return getHasFrame();
   }
@@ -233,7 +233,7 @@ class MenuButton : gtk.widget.Widget
       Params:
         propval = Whether the button has a frame.
   */
-  @property void hasFrame(bool propval)
+  @property void hasFrame(bool propval) nothrow
   {
     setHasFrame(propval);
   }
@@ -242,7 +242,7 @@ class MenuButton : gtk.widget.Widget
       Get `iconName` property.
       Returns: The name of the icon used to automatically populate the button.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return getIconName();
   }
@@ -252,7 +252,7 @@ class MenuButton : gtk.widget.Widget
       Params:
         propval = The name of the icon used to automatically populate the button.
   */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     setIconName(propval);
   }
@@ -261,7 +261,7 @@ class MenuButton : gtk.widget.Widget
       Get `label` property.
       Returns: The label for the button.
   */
-  @property string label()
+  @property string label() nothrow
   {
     return getLabel();
   }
@@ -271,7 +271,7 @@ class MenuButton : gtk.widget.Widget
       Params:
         propval = The label for the button.
   */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     setLabel(propval);
   }
@@ -283,7 +283,7 @@ class MenuButton : gtk.widget.Widget
         See [gtk.menu_button.MenuButton.setMenuModel] for the interaction
         with the [gtk.menu_button.MenuButton.popover] property.
   */
-  @property gio.menu_model.MenuModel menuModel()
+  @property gio.menu_model.MenuModel menuModel() nothrow
   {
     return getMenuModel();
   }
@@ -296,7 +296,7 @@ class MenuButton : gtk.widget.Widget
           See [gtk.menu_button.MenuButton.setMenuModel] for the interaction
           with the [gtk.menu_button.MenuButton.popover] property.
   */
-  @property void menuModel(gio.menu_model.MenuModel propval)
+  @property void menuModel(gio.menu_model.MenuModel propval) nothrow
   {
     setMenuModel(propval);
   }
@@ -305,7 +305,7 @@ class MenuButton : gtk.widget.Widget
       Get `popover` property.
       Returns: The [gtk.popover.Popover] that will be popped up when the button is clicked.
   */
-  @property gtk.popover.Popover popover()
+  @property gtk.popover.Popover popover() nothrow
   {
     return getPopover();
   }
@@ -315,7 +315,7 @@ class MenuButton : gtk.widget.Widget
       Params:
         propval = The [gtk.popover.Popover] that will be popped up when the button is clicked.
   */
-  @property void popover(gtk.popover.Popover propval)
+  @property void popover(gtk.popover.Popover propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.popover.Popover)("popover", propval);
   }
@@ -326,7 +326,7 @@ class MenuButton : gtk.widget.Widget
         
         Primary menus can be opened using the <kbd>F10</kbd> key
   */
-  @property bool primary()
+  @property bool primary() nothrow
   {
     return getPrimary();
   }
@@ -338,7 +338,7 @@ class MenuButton : gtk.widget.Widget
           
           Primary menus can be opened using the <kbd>F10</kbd> key
   */
-  @property void primary(bool propval)
+  @property void primary(bool propval) nothrow
   {
     setPrimary(propval);
   }
@@ -347,7 +347,7 @@ class MenuButton : gtk.widget.Widget
       Get `useUnderline` property.
       Returns: If set an underscore in the text indicates a mnemonic.
   */
-  @property bool useUnderline()
+  @property bool useUnderline() nothrow
   {
     return getUseUnderline();
   }
@@ -357,7 +357,7 @@ class MenuButton : gtk.widget.Widget
       Params:
         propval = If set an underscore in the text indicates a mnemonic.
   */
-  @property void useUnderline(bool propval)
+  @property void useUnderline(bool propval) nothrow
   {
     setUseUnderline(propval);
   }
@@ -370,7 +370,7 @@ class MenuButton : gtk.widget.Widget
       should you wish to.
       Returns: The newly created [gtk.menu_button.MenuButton]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_button_new();
@@ -381,7 +381,7 @@ class MenuButton : gtk.widget.Widget
       Returns whether the menu button is active.
       Returns: TRUE if the button is active
   */
-  bool getActive()
+  bool getActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_menu_button_get_active(cast(GtkMenuButton*)this._cPtr);
@@ -394,7 +394,7 @@ class MenuButton : gtk.widget.Widget
       Returns: whether to show a dropdown arrow even when using an icon or a custom
         child.
   */
-  bool getAlwaysShowArrow()
+  bool getAlwaysShowArrow() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_menu_button_get_always_show_arrow(cast(GtkMenuButton*)this._cPtr);
@@ -406,7 +406,7 @@ class MenuButton : gtk.widget.Widget
       size of its contents.
       Returns: true if the button can shrink, and false otherwise
   */
-  bool getCanShrink()
+  bool getCanShrink() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_menu_button_get_can_shrink(cast(GtkMenuButton*)this._cPtr);
@@ -417,7 +417,7 @@ class MenuButton : gtk.widget.Widget
       Gets the child widget of menu_button.
       Returns: the child widget of menu_button
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_button_get_child(cast(GtkMenuButton*)this._cPtr);
@@ -431,7 +431,7 @@ class MenuButton : gtk.widget.Widget
       Returns the direction the popup will be pointing at when popped up.
       Returns: a [gtk.types.ArrowType] value
   */
-  gtk.types.ArrowType getDirection()
+  gtk.types.ArrowType getDirection() nothrow
   {
     GtkArrowType _cretval;
     _cretval = gtk_menu_button_get_direction(cast(GtkMenuButton*)this._cPtr);
@@ -443,7 +443,7 @@ class MenuButton : gtk.widget.Widget
       Returns whether the button has a frame.
       Returns: true if the button has a frame
   */
-  bool getHasFrame()
+  bool getHasFrame() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_menu_button_get_has_frame(cast(GtkMenuButton*)this._cPtr);
@@ -454,7 +454,7 @@ class MenuButton : gtk.widget.Widget
       Gets the name of the icon shown in the button.
       Returns: the name of the icon shown in the button
   */
-  string getIconName()
+  string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_menu_button_get_icon_name(cast(GtkMenuButton*)this._cPtr);
@@ -466,7 +466,7 @@ class MenuButton : gtk.widget.Widget
       Gets the label shown in the button
       Returns: the label shown in the button
   */
-  string getLabel()
+  string getLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_menu_button_get_label(cast(GtkMenuButton*)this._cPtr);
@@ -478,7 +478,7 @@ class MenuButton : gtk.widget.Widget
       Returns the [gio.menu_model.MenuModel] used to generate the popup.
       Returns: a [gio.menu_model.MenuModel]
   */
-  gio.menu_model.MenuModel getMenuModel()
+  gio.menu_model.MenuModel getMenuModel() nothrow
   {
     GMenuModel* _cretval;
     _cretval = gtk_menu_button_get_menu_model(cast(GtkMenuButton*)this._cPtr);
@@ -493,7 +493,7 @@ class MenuButton : gtk.widget.Widget
       returns null.
       Returns: a [gtk.popover.Popover] or null
   */
-  gtk.popover.Popover getPopover()
+  gtk.popover.Popover getPopover() nothrow
   {
     GtkPopover* _cretval;
     _cretval = gtk_menu_button_get_popover(cast(GtkMenuButton*)this._cPtr);
@@ -505,7 +505,7 @@ class MenuButton : gtk.widget.Widget
       Returns whether the menu button acts as a primary menu.
       Returns: true if the button is a primary menu
   */
-  bool getPrimary()
+  bool getPrimary() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_menu_button_get_primary(cast(GtkMenuButton*)this._cPtr);
@@ -518,7 +518,7 @@ class MenuButton : gtk.widget.Widget
       Returns: true whether an embedded underline in the text indicates
           the mnemonic accelerator keys.
   */
-  bool getUseUnderline()
+  bool getUseUnderline() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_menu_button_get_use_underline(cast(GtkMenuButton*)this._cPtr);
@@ -528,7 +528,7 @@ class MenuButton : gtk.widget.Widget
   /**
       Dismiss the menu.
   */
-  void popdown()
+  void popdown() nothrow
   {
     gtk_menu_button_popdown(cast(GtkMenuButton*)this._cPtr);
   }
@@ -536,7 +536,7 @@ class MenuButton : gtk.widget.Widget
   /**
       Pop up the menu.
   */
-  void popup()
+  void popup() nothrow
   {
     gtk_menu_button_popup(cast(GtkMenuButton*)this._cPtr);
   }
@@ -547,7 +547,7 @@ class MenuButton : gtk.widget.Widget
       Params:
         active = whether the menu button is active
   */
-  void setActive(bool active)
+  void setActive(bool active) nothrow
   {
     gtk_menu_button_set_active(cast(GtkMenuButton*)this._cPtr, active);
   }
@@ -560,7 +560,7 @@ class MenuButton : gtk.widget.Widget
         alwaysShowArrow = whether to show a dropdown arrow even when using an icon
           or a custom child
   */
-  void setAlwaysShowArrow(bool alwaysShowArrow)
+  void setAlwaysShowArrow(bool alwaysShowArrow) nothrow
   {
     gtk_menu_button_set_always_show_arrow(cast(GtkMenuButton*)this._cPtr, alwaysShowArrow);
   }
@@ -576,7 +576,7 @@ class MenuButton : gtk.widget.Widget
       Params:
         canShrink = whether the button can shrink
   */
-  void setCanShrink(bool canShrink)
+  void setCanShrink(bool canShrink) nothrow
   {
     gtk_menu_button_set_can_shrink(cast(GtkMenuButton*)this._cPtr, canShrink);
   }
@@ -594,7 +594,7 @@ class MenuButton : gtk.widget.Widget
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     gtk_menu_button_set_child(cast(GtkMenuButton*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -618,13 +618,20 @@ class MenuButton : gtk.widget.Widget
             be shown, but none has been provided via other means, or null
             to reset to default behavior.
   */
-  void setCreatePopupFunc(gtk.types.MenuButtonCreatePopupFunc func = null)
+  void setCreatePopupFunc(gtk.types.MenuButtonCreatePopupFunc func = null) nothrow
   {
-    extern(C) void _funcCallback(GtkMenuButton* menuButton, void* userData)
+    extern(C) void _funcCallback(GtkMenuButton* menuButton, void* userData) nothrow
     {
       auto _dlg = cast(gtk.types.MenuButtonCreatePopupFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.menu_button.MenuButton)(cast(void*)menuButton, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.menu_button.MenuButton)(cast(void*)menuButton, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.MenuButtonCreatePopupFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -649,7 +656,7 @@ class MenuButton : gtk.widget.Widget
       Params:
         direction = a [gtk.types.ArrowType]
   */
-  void setDirection(gtk.types.ArrowType direction)
+  void setDirection(gtk.types.ArrowType direction) nothrow
   {
     gtk_menu_button_set_direction(cast(GtkMenuButton*)this._cPtr, direction);
   }
@@ -660,7 +667,7 @@ class MenuButton : gtk.widget.Widget
       Params:
         hasFrame = whether the button should have a visible frame
   */
-  void setHasFrame(bool hasFrame)
+  void setHasFrame(bool hasFrame) nothrow
   {
     gtk_menu_button_set_has_frame(cast(GtkMenuButton*)this._cPtr, hasFrame);
   }
@@ -678,7 +685,7 @@ class MenuButton : gtk.widget.Widget
       Params:
         iconName = the icon name
   */
-  void setIconName(string iconName)
+  void setIconName(string iconName) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_menu_button_set_icon_name(cast(GtkMenuButton*)this._cPtr, _iconName);
@@ -696,7 +703,7 @@ class MenuButton : gtk.widget.Widget
       Params:
         label = the label
   */
-  void setLabel(string label)
+  void setLabel(string label) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_menu_button_set_label(cast(GtkMenuButton*)this._cPtr, _label);
@@ -718,7 +725,7 @@ class MenuButton : gtk.widget.Widget
         menuModel = a [gio.menu_model.MenuModel], or null to unset and disable the
             button
   */
-  void setMenuModel(gio.menu_model.MenuModel menuModel = null)
+  void setMenuModel(gio.menu_model.MenuModel menuModel = null) nothrow
   {
     gtk_menu_button_set_menu_model(cast(GtkMenuButton*)this._cPtr, menuModel ? cast(GMenuModel*)menuModel._cPtr(No.Dup) : null);
   }
@@ -734,7 +741,7 @@ class MenuButton : gtk.widget.Widget
       Params:
         popover = a [gtk.popover.Popover], or null to unset and disable the button
   */
-  void setPopover(gtk.widget.Widget popover = null)
+  void setPopover(gtk.widget.Widget popover = null) nothrow
   {
     gtk_menu_button_set_popover(cast(GtkMenuButton*)this._cPtr, popover ? cast(GtkWidget*)popover._cPtr(No.Dup) : null);
   }
@@ -747,7 +754,7 @@ class MenuButton : gtk.widget.Widget
       Params:
         primary = whether the menubutton should act as a primary menu
   */
-  void setPrimary(bool primary)
+  void setPrimary(bool primary) nothrow
   {
     gtk_menu_button_set_primary(cast(GtkMenuButton*)this._cPtr, primary);
   }
@@ -758,7 +765,7 @@ class MenuButton : gtk.widget.Widget
       Params:
         useUnderline = true if underlines in the text indicate mnemonics
   */
-  void setUseUnderline(bool useUnderline)
+  void setUseUnderline(bool useUnderline) nothrow
   {
     gtk_menu_button_set_use_underline(cast(GtkMenuButton*)this._cPtr, useUnderline);
   }
@@ -781,13 +788,13 @@ class MenuButton : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.menu_button.MenuButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -796,7 +803,14 @@ class MenuButton : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.menu_button.MenuButton.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -815,7 +829,7 @@ class MenuButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether the menu button is active.
       Returns: Builder instance for fluent chaining
   */
-  T active(bool propval)
+  T active(bool propval) nothrow
   {
     return setProperty("active", propval);
   }
@@ -826,7 +840,7 @@ class MenuButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether to show a dropdown arrow even when using an icon or a custom child.
       Returns: Builder instance for fluent chaining
   */
-  T alwaysShowArrow(bool propval)
+  T alwaysShowArrow(bool propval) nothrow
   {
     return setProperty("always-show-arrow", propval);
   }
@@ -838,7 +852,7 @@ class MenuButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           size of its contents.
       Returns: Builder instance for fluent chaining
   */
-  T canShrink(bool propval)
+  T canShrink(bool propval) nothrow
   {
     return setProperty("can-shrink", propval);
   }
@@ -849,7 +863,7 @@ class MenuButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The child widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -861,7 +875,7 @@ class MenuButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           menu or popover will be popped out.
       Returns: Builder instance for fluent chaining
   */
-  T direction(gtk.types.ArrowType propval)
+  T direction(gtk.types.ArrowType propval) nothrow
   {
     return setProperty("direction", propval);
   }
@@ -872,7 +886,7 @@ class MenuButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether the button has a frame.
       Returns: Builder instance for fluent chaining
   */
-  T hasFrame(bool propval)
+  T hasFrame(bool propval) nothrow
   {
     return setProperty("has-frame", propval);
   }
@@ -883,7 +897,7 @@ class MenuButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The name of the icon used to automatically populate the button.
       Returns: Builder instance for fluent chaining
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
@@ -894,7 +908,7 @@ class MenuButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The label for the button.
       Returns: Builder instance for fluent chaining
   */
-  T label(string propval)
+  T label(string propval) nothrow
   {
     return setProperty("label", propval);
   }
@@ -908,7 +922,7 @@ class MenuButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           with the [gtk.menu_button.MenuButton.popover] property.
       Returns: Builder instance for fluent chaining
   */
-  T menuModel(gio.menu_model.MenuModel propval)
+  T menuModel(gio.menu_model.MenuModel propval) nothrow
   {
     return setProperty("menu-model", propval);
   }
@@ -919,7 +933,7 @@ class MenuButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The [gtk.popover.Popover] that will be popped up when the button is clicked.
       Returns: Builder instance for fluent chaining
   */
-  T popover(gtk.popover.Popover propval)
+  T popover(gtk.popover.Popover propval) nothrow
   {
     return setProperty("popover", propval);
   }
@@ -932,7 +946,7 @@ class MenuButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           Primary menus can be opened using the <kbd>F10</kbd> key
       Returns: Builder instance for fluent chaining
   */
-  T primary(bool propval)
+  T primary(bool propval) nothrow
   {
     return setProperty("primary", propval);
   }
@@ -943,7 +957,7 @@ class MenuButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = If set an underscore in the text indicates a mnemonic.
       Returns: Builder instance for fluent chaining
   */
-  T useUnderline(bool propval)
+  T useUnderline(bool propval) nothrow
   {
     return setProperty("use-underline", propval);
   }
@@ -956,7 +970,7 @@ final class MenuButtonGidBuilder : MenuButtonGidBuilderImpl!MenuButtonGidBuilder
       Create object from builder.
       Returns: New object
   */
-  MenuButton build()
+  MenuButton build() nothrow
   {
     return new MenuButton(cast(void*)createGObject(MenuButton._getGType), No.Take);
   }

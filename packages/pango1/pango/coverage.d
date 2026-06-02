@@ -23,26 +23,26 @@ class Coverage : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_coverage_get_type != &gidSymbolNotFound ? pango_coverage_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Coverage self()
+  override Coverage self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class Coverage : gobject.object.ObjectWrap
       Get builder for [pango.coverage.Coverage]
       Returns: New builder object
   */
-  static CoverageGidBuilder builder()
+  static CoverageGidBuilder builder() nothrow
   {
     return new CoverageGidBuilder;
   }
@@ -62,7 +62,7 @@ class Coverage : gobject.object.ObjectWrap
           to [pango.types.CoverageLevel.None] with a reference count of one, which
           should be freed with [pango.coverage.Coverage.unref].
   */
-  this()
+  this() nothrow
   {
     PangoCoverage* _cretval;
     _cretval = pango_coverage_new();
@@ -80,7 +80,7 @@ class Coverage : gobject.object.ObjectWrap
   
       Deprecated: This returns null
   */
-  static pango.coverage.Coverage fromBytes(ubyte[] bytes)
+  static pango.coverage.Coverage fromBytes(ubyte[] bytes) nothrow
   {
     PangoCoverage* _cretval;
     int _nBytes;
@@ -99,7 +99,7 @@ class Coverage : gobject.object.ObjectWrap
           with a reference count of one, which should be freed with
           [pango.coverage.Coverage.unref].
   */
-  pango.coverage.Coverage copy()
+  pango.coverage.Coverage copy() nothrow
   {
     PangoCoverage* _cretval;
     _cretval = pango_coverage_copy(cast(PangoCoverage*)this._cPtr);
@@ -114,7 +114,7 @@ class Coverage : gobject.object.ObjectWrap
         index = the index to check
       Returns: the coverage level of coverage for character index_.
   */
-  pango.types.CoverageLevel get(int index)
+  pango.types.CoverageLevel get(int index) nothrow
   {
     PangoCoverageLevel _cretval;
     _cretval = pango_coverage_get(cast(PangoCoverage*)this._cPtr, index);
@@ -132,7 +132,7 @@ class Coverage : gobject.object.ObjectWrap
   
       Deprecated: This function does nothing
   */
-  void max(pango.coverage.Coverage other)
+  void max(pango.coverage.Coverage other) nothrow
   {
     pango_coverage_max(cast(PangoCoverage*)this._cPtr, other ? cast(PangoCoverage*)other._cPtr(No.Dup) : null);
   }
@@ -144,7 +144,7 @@ class Coverage : gobject.object.ObjectWrap
         index = the index to modify
         level = the new level for index_
   */
-  void set(int index, pango.types.CoverageLevel level)
+  void set(int index, pango.types.CoverageLevel level) nothrow
   {
     pango_coverage_set(cast(PangoCoverage*)this._cPtr, index, level);
   }
@@ -157,7 +157,7 @@ class Coverage : gobject.object.ObjectWrap
   
       Deprecated: This returns null
   */
-  void toBytes(out ubyte[] bytes)
+  void toBytes(out ubyte[] bytes) nothrow
   {
     int _nBytes;
     ubyte* _bytes;
@@ -180,7 +180,7 @@ final class CoverageGidBuilder : CoverageGidBuilderImpl!CoverageGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Coverage build()
+  Coverage build() nothrow
   {
     return new Coverage(cast(void*)createGObject(Coverage._getGType), Yes.Take);
   }

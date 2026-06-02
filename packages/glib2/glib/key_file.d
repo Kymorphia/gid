@@ -147,32 +147,32 @@ class KeyFile : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_key_file_get_type != &gidSymbolNotFound ? g_key_file_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override KeyFile self()
+  override KeyFile self() nothrow
   {
     return this;
   }
@@ -184,7 +184,7 @@ class KeyFile : gobject.boxed.Boxed
       read an existing key file.
       Returns: an empty #GKeyFile.
   */
-  this()
+  this() nothrow
   {
     GKeyFile* _cretval;
     _cretval = g_key_file_new();
@@ -359,7 +359,7 @@ class KeyFile : gobject.boxed.Boxed
       Returns: a newly-allocated null-terminated array of strings.
           Use [glib.global.strfreev] to free it.
   */
-  string[] getGroups()
+  string[] getGroups() nothrow
   {
     char** _cretval;
     size_t _cretlength;
@@ -519,7 +519,7 @@ class KeyFile : gobject.boxed.Boxed
       Returns: the locale from the file, or null if the key was not
           found or the entry in the file was was untranslated
   */
-  string getLocaleForKey(string groupName, string key, string locale = null)
+  string getLocaleForKey(string groupName, string key, string locale = null) nothrow
   {
     char* _cretval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
@@ -618,7 +618,7 @@ class KeyFile : gobject.boxed.Boxed
       Returns the name of the start group of the file.
       Returns: The start group of the key file.
   */
-  string getStartGroup()
+  string getStartGroup() nothrow
   {
     char* _cretval;
     _cretval = g_key_file_get_start_group(cast(GKeyFile*)this._cPtr);
@@ -754,7 +754,7 @@ class KeyFile : gobject.boxed.Boxed
       Returns: true if group_name is a part of key_file, false
         otherwise.
   */
-  bool hasGroup(string groupName)
+  bool hasGroup(string groupName) nothrow
   {
     bool _retval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
@@ -1000,7 +1000,7 @@ class KeyFile : gobject.boxed.Boxed
         key = a key
         value = true or false
   */
-  void setBoolean(string groupName, string key, bool value)
+  void setBoolean(string groupName, string key, bool value) nothrow
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     const(char)* _key = key.toCString(No.Alloc);
@@ -1017,7 +1017,7 @@ class KeyFile : gobject.boxed.Boxed
         key = a key
         list = an array of boolean values
   */
-  void setBooleanList(string groupName, string key, bool[] list)
+  void setBooleanList(string groupName, string key, bool[] list) nothrow
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     const(char)* _key = key.toCString(No.Alloc);
@@ -1068,7 +1068,7 @@ class KeyFile : gobject.boxed.Boxed
         key = a key
         value = a double value
   */
-  void setDouble(string groupName, string key, double value)
+  void setDouble(string groupName, string key, double value) nothrow
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     const(char)* _key = key.toCString(No.Alloc);
@@ -1084,7 +1084,7 @@ class KeyFile : gobject.boxed.Boxed
         key = a key
         list = an array of double values
   */
-  void setDoubleList(string groupName, string key, double[] list)
+  void setDoubleList(string groupName, string key, double[] list) nothrow
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     const(char)* _key = key.toCString(No.Alloc);
@@ -1105,7 +1105,7 @@ class KeyFile : gobject.boxed.Boxed
         key = a key
         value = an integer value
   */
-  void setInt64(string groupName, string key, long value)
+  void setInt64(string groupName, string key, long value) nothrow
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     const(char)* _key = key.toCString(No.Alloc);
@@ -1121,7 +1121,7 @@ class KeyFile : gobject.boxed.Boxed
         key = a key
         value = an integer value
   */
-  void setInteger(string groupName, string key, int value)
+  void setInteger(string groupName, string key, int value) nothrow
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     const(char)* _key = key.toCString(No.Alloc);
@@ -1137,7 +1137,7 @@ class KeyFile : gobject.boxed.Boxed
         key = a key
         list = an array of integer values
   */
-  void setIntegerList(string groupName, string key, int[] list)
+  void setIntegerList(string groupName, string key, int[] list) nothrow
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     const(char)* _key = key.toCString(No.Alloc);
@@ -1157,7 +1157,7 @@ class KeyFile : gobject.boxed.Boxed
       Params:
         separator = the separator
   */
-  void setListSeparator(char separator)
+  void setListSeparator(char separator) nothrow
   {
     g_key_file_set_list_separator(cast(GKeyFile*)this._cPtr, separator);
   }
@@ -1172,7 +1172,7 @@ class KeyFile : gobject.boxed.Boxed
         locale = a locale identifier
         string_ = a string
   */
-  void setLocaleString(string groupName, string key, string locale, string string_)
+  void setLocaleString(string groupName, string key, string locale, string string_) nothrow
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     const(char)* _key = key.toCString(No.Alloc);
@@ -1192,7 +1192,7 @@ class KeyFile : gobject.boxed.Boxed
         locale = a locale identifier
         list = a null-terminated array of locale string values
   */
-  void setLocaleStringList(string groupName, string key, string locale, string[] list)
+  void setLocaleStringList(string groupName, string key, string locale, string[] list) nothrow
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     const(char)* _key = key.toCString(No.Alloc);
@@ -1222,7 +1222,7 @@ class KeyFile : gobject.boxed.Boxed
         key = a key
         string_ = a string
   */
-  void setString(string groupName, string key, string string_)
+  void setString(string groupName, string key, string string_) nothrow
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     const(char)* _key = key.toCString(No.Alloc);
@@ -1240,7 +1240,7 @@ class KeyFile : gobject.boxed.Boxed
         key = a key
         list = an array of string values
   */
-  void setStringList(string groupName, string key, string[] list)
+  void setStringList(string groupName, string key, string[] list) nothrow
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     const(char)* _key = key.toCString(No.Alloc);
@@ -1266,7 +1266,7 @@ class KeyFile : gobject.boxed.Boxed
         key = a key
         value = an integer value
   */
-  void setUint64(string groupName, string key, ulong value)
+  void setUint64(string groupName, string key, ulong value) nothrow
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     const(char)* _key = key.toCString(No.Alloc);
@@ -1286,7 +1286,7 @@ class KeyFile : gobject.boxed.Boxed
         key = a key
         value = a string
   */
-  void setValue(string groupName, string key, string value)
+  void setValue(string groupName, string key, string value) nothrow
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     const(char)* _key = key.toCString(No.Alloc);
@@ -1322,7 +1322,7 @@ class KeyFile : gobject.boxed.Boxed
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = g_key_file_error_quark();
@@ -1332,12 +1332,12 @@ class KeyFile : gobject.boxed.Boxed
 
 class KeyFileException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(glib.key_file.KeyFile.errorQuark, cast(int)code, msg);
   }

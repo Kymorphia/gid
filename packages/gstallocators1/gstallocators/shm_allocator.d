@@ -26,26 +26,26 @@ class ShmAllocator : gstallocators.fd_allocator.FdAllocator
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_shm_allocator_get_type != &gidSymbolNotFound ? gst_shm_allocator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ShmAllocator self()
+  override ShmAllocator self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class ShmAllocator : gstallocators.fd_allocator.FdAllocator
       Get builder for [gstallocators.shm_allocator.ShmAllocator]
       Returns: New builder object
   */
-  static ShmAllocatorGidBuilder builder()
+  static ShmAllocatorGidBuilder builder() nothrow
   {
     return new ShmAllocatorGidBuilder;
   }
@@ -65,7 +65,7 @@ class ShmAllocator : gstallocators.fd_allocator.FdAllocator
       Returns: a #GstAllocator or null if
         [gstallocators.shm_allocator.ShmAllocator.initOnce] has not been previously called.
   */
-  static gst.allocator.Allocator get()
+  static gst.allocator.Allocator get() nothrow
   {
     GstAllocator* _cretval;
     _cretval = gst_shm_allocator_get();
@@ -77,7 +77,7 @@ class ShmAllocator : gstallocators.fd_allocator.FdAllocator
       Register a #GstShmAllocator using [gst.allocator.Allocator.register] with the name
       [gstallocators.types.ALLOCATOR_SHM]. This is no-op after the first call.
   */
-  static void initOnce()
+  static void initOnce() nothrow
   {
     gst_shm_allocator_init_once();
   }
@@ -95,7 +95,7 @@ final class ShmAllocatorGidBuilder : ShmAllocatorGidBuilderImpl!ShmAllocatorGidB
       Create object from builder.
       Returns: New object
   */
-  ShmAllocator build()
+  ShmAllocator build() nothrow
   {
     return new ShmAllocator(cast(void*)createGObject(ShmAllocator._getGType), No.Take);
   }

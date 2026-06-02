@@ -16,7 +16,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgdk-3.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // AppLaunchContext
   GType function() c_gdk_app_launch_context_get_type; ///

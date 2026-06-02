@@ -16,32 +16,32 @@ class Dir : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dir_get_type != &gidSymbolNotFound ? g_dir_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Dir self()
+  override Dir self() nothrow
   {
     return this;
   }
@@ -90,7 +90,7 @@ class Dir : gobject.boxed.Boxed
           more entries. The return value is owned by GLib and
           must not be modified or freed.
   */
-  string readName()
+  string readName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dir_read_name(cast(GDir*)this._cPtr);
@@ -102,7 +102,7 @@ class Dir : gobject.boxed.Boxed
       Resets the given directory. The next call to [glib.dir.Dir.readName]
       will return the first entry again.
   */
-  void rewind()
+  void rewind() nothrow
   {
     g_dir_rewind(cast(GDir*)this._cPtr);
   }

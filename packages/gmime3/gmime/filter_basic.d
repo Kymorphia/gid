@@ -16,26 +16,26 @@ class FilterBasic : gmime.filter.Filter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_filter_basic_get_type != &gidSymbolNotFound ? g_mime_filter_basic_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FilterBasic self()
+  override FilterBasic self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class FilterBasic : gmime.filter.Filter
       Get builder for [gmime.filter_basic.FilterBasic]
       Returns: New builder object
   */
-  static FilterBasicGidBuilder builder()
+  static FilterBasicGidBuilder builder() nothrow
   {
     return new FilterBasicGidBuilder;
   }
@@ -57,7 +57,7 @@ class FilterBasic : gmime.filter.Filter
         encode = true to encode or false to decode
       Returns: a new basic encoder filter.
   */
-  this(gmime.types.ContentEncoding encoding, bool encode)
+  this(gmime.types.ContentEncoding encoding, bool encode) nothrow
   {
     GMimeFilter* _cretval;
     _cretval = g_mime_filter_basic_new(encoding, encode);
@@ -77,7 +77,7 @@ final class FilterBasicGidBuilder : FilterBasicGidBuilderImpl!FilterBasicGidBuil
       Create object from builder.
       Returns: New object
   */
-  FilterBasic build()
+  FilterBasic build() nothrow
   {
     return new FilterBasic(cast(void*)createGObject(FilterBasic._getGType), Yes.Take);
   }

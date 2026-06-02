@@ -38,26 +38,26 @@ class SettingsBackend : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_settings_backend_get_type != &gidSymbolNotFound ? g_settings_backend_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SettingsBackend self()
+  override SettingsBackend self() nothrow
   {
     return this;
   }
@@ -66,7 +66,7 @@ class SettingsBackend : gobject.object.ObjectWrap
       Get builder for [gio.settings_backend.SettingsBackend]
       Returns: New builder object
   */
-  static SettingsBackendGidBuilder builder()
+  static SettingsBackendGidBuilder builder() nothrow
   {
     return new SettingsBackendGidBuilder;
   }
@@ -81,7 +81,7 @@ class SettingsBackend : gobject.object.ObjectWrap
             which will be a dummy (memory) settings backend if no other settings
             backend is available.
   */
-  static gio.settings_backend.SettingsBackend getDefault()
+  static gio.settings_backend.SettingsBackend getDefault() nothrow
   {
     GSettingsBackend* _cretval;
     _cretval = g_settings_backend_get_default();
@@ -117,7 +117,7 @@ class SettingsBackend : gobject.object.ObjectWrap
         key = the name of the key
         originTag = the origin tag
   */
-  void changed(string key, void* originTag = null)
+  void changed(string key, void* originTag = null) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     g_settings_backend_changed(cast(GSettingsBackend*)this._cPtr, _key, originTag);
@@ -151,7 +151,7 @@ class SettingsBackend : gobject.object.ObjectWrap
         items = the null-terminated list of changed keys
         originTag = the origin tag
   */
-  void keysChanged(string path, string[] items, void* originTag = null)
+  void keysChanged(string path, string[] items, void* originTag = null) nothrow
   {
     const(char)* _path = path.toCString(No.Alloc);
     char*[] _tmpitems;
@@ -190,7 +190,7 @@ class SettingsBackend : gobject.object.ObjectWrap
         path = the path containing the changes
         originTag = the origin tag
   */
-  void pathChanged(string path, void* originTag = null)
+  void pathChanged(string path, void* originTag = null) nothrow
   {
     const(char)* _path = path.toCString(No.Alloc);
     g_settings_backend_path_changed(cast(GSettingsBackend*)this._cPtr, _path, originTag);
@@ -206,7 +206,7 @@ class SettingsBackend : gobject.object.ObjectWrap
       Params:
         path = the name of the path
   */
-  void pathWritableChanged(string path)
+  void pathWritableChanged(string path) nothrow
   {
     const(char)* _path = path.toCString(No.Alloc);
     g_settings_backend_path_writable_changed(cast(GSettingsBackend*)this._cPtr, _path);
@@ -221,7 +221,7 @@ class SettingsBackend : gobject.object.ObjectWrap
       Params:
         key = the name of the key
   */
-  void writableChanged(string key)
+  void writableChanged(string key) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     g_settings_backend_writable_changed(cast(GSettingsBackend*)this._cPtr, _key);
@@ -240,7 +240,7 @@ final class SettingsBackendGidBuilder : SettingsBackendGidBuilderImpl!SettingsBa
       Create object from builder.
       Returns: New object
   */
-  SettingsBackend build()
+  SettingsBackend build() nothrow
   {
     return new SettingsBackend(cast(void*)createGObject(SettingsBackend._getGType), No.Take);
   }

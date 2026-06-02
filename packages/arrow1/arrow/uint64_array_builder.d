@@ -15,26 +15,26 @@ class UInt64ArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_uint64_array_builder_get_type != &gidSymbolNotFound ? garrow_uint64_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UInt64ArrayBuilder self()
+  override UInt64ArrayBuilder self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class UInt64ArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.uint64_array_builder.UInt64ArrayBuilder]
       Returns: New builder object
   */
-  static UInt64ArrayBuilderGidBuilder builder()
+  static UInt64ArrayBuilderGidBuilder builder() nothrow
   {
     return new UInt64ArrayBuilderGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowUInt64ArrayBuilder* _cretval;
     _cretval = garrow_uint64_array_builder_new();
@@ -124,7 +124,7 @@ final class UInt64ArrayBuilderGidBuilder : UInt64ArrayBuilderGidBuilderImpl!UInt
       Create object from builder.
       Returns: New object
   */
-  UInt64ArrayBuilder build()
+  UInt64ArrayBuilder build() nothrow
   {
     return new UInt64ArrayBuilder(cast(void*)createGObject(UInt64ArrayBuilder._getGType), Yes.Take);
   }

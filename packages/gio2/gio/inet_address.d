@@ -25,26 +25,26 @@ class InetAddress : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_inet_address_get_type != &gidSymbolNotFound ? g_inet_address_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override InetAddress self()
+  override InetAddress self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class InetAddress : gobject.object.ObjectWrap
       Get builder for [gio.inet_address.InetAddress]
       Returns: New builder object
   */
-  static InetAddressGidBuilder builder()
+  static InetAddressGidBuilder builder() nothrow
   {
     return new InetAddressGidBuilder;
   }
@@ -62,7 +62,7 @@ class InetAddress : gobject.object.ObjectWrap
       Get `bytes` property.
       Returns: The raw address data.
   */
-  @property void* bytes()
+  @property void* bytes() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(void*)("bytes");
   }
@@ -71,7 +71,7 @@ class InetAddress : gobject.object.ObjectWrap
       Get `family` property.
       Returns: The address family (IPv4 or IPv6).
   */
-  @property gio.types.SocketFamily family()
+  @property gio.types.SocketFamily family() nothrow
   {
     return getFamily();
   }
@@ -81,7 +81,7 @@ class InetAddress : gobject.object.ObjectWrap
       Returns: Whether this is the "any" address for its family.
         See [gio.inet_address.InetAddress.getIsAny].
   */
-  @property bool isAny()
+  @property bool isAny() nothrow
   {
     return getIsAny();
   }
@@ -91,7 +91,7 @@ class InetAddress : gobject.object.ObjectWrap
       Returns: Whether this is a link-local address.
         See [gio.inet_address.InetAddress.getIsLinkLocal].
   */
-  @property bool isLinkLocal()
+  @property bool isLinkLocal() nothrow
   {
     return getIsLinkLocal();
   }
@@ -101,7 +101,7 @@ class InetAddress : gobject.object.ObjectWrap
       Returns: Whether this is the loopback address for its family.
         See [gio.inet_address.InetAddress.getIsLoopback].
   */
-  @property bool isLoopback()
+  @property bool isLoopback() nothrow
   {
     return getIsLoopback();
   }
@@ -111,7 +111,7 @@ class InetAddress : gobject.object.ObjectWrap
       Returns: Whether this is a global multicast address.
         See [gio.inet_address.InetAddress.getIsMcGlobal].
   */
-  @property bool isMcGlobal()
+  @property bool isMcGlobal() nothrow
   {
     return getIsMcGlobal();
   }
@@ -121,7 +121,7 @@ class InetAddress : gobject.object.ObjectWrap
       Returns: Whether this is a link-local multicast address.
         See [gio.inet_address.InetAddress.getIsMcLinkLocal].
   */
-  @property bool isMcLinkLocal()
+  @property bool isMcLinkLocal() nothrow
   {
     return getIsMcLinkLocal();
   }
@@ -131,7 +131,7 @@ class InetAddress : gobject.object.ObjectWrap
       Returns: Whether this is a node-local multicast address.
         See [gio.inet_address.InetAddress.getIsMcNodeLocal].
   */
-  @property bool isMcNodeLocal()
+  @property bool isMcNodeLocal() nothrow
   {
     return getIsMcNodeLocal();
   }
@@ -141,7 +141,7 @@ class InetAddress : gobject.object.ObjectWrap
       Returns: Whether this is an organization-local multicast address.
         See [gio.inet_address.InetAddress.getIsMcOrgLocal].
   */
-  @property bool isMcOrgLocal()
+  @property bool isMcOrgLocal() nothrow
   {
     return getIsMcOrgLocal();
   }
@@ -151,7 +151,7 @@ class InetAddress : gobject.object.ObjectWrap
       Returns: Whether this is a site-local multicast address.
         See [gio.inet_address.InetAddress.getIsMcSiteLocal].
   */
-  @property bool isMcSiteLocal()
+  @property bool isMcSiteLocal() nothrow
   {
     return getIsMcSiteLocal();
   }
@@ -161,7 +161,7 @@ class InetAddress : gobject.object.ObjectWrap
       Returns: Whether this is a multicast address.
         See [gio.inet_address.InetAddress.getIsMulticast].
   */
-  @property bool isMulticast()
+  @property bool isMulticast() nothrow
   {
     return getIsMulticast();
   }
@@ -171,7 +171,7 @@ class InetAddress : gobject.object.ObjectWrap
       Returns: Whether this is a site-local address.
         See [gio.inet_address.InetAddress.getIsLoopback].
   */
-  @property bool isSiteLocal()
+  @property bool isSiteLocal() nothrow
   {
     return getIsSiteLocal();
   }
@@ -186,7 +186,7 @@ class InetAddress : gobject.object.ObjectWrap
         for family.
             Free the returned object with [gobject.object.ObjectWrap.unref].
   */
-  static gio.inet_address.InetAddress newAny(gio.types.SocketFamily family)
+  static gio.inet_address.InetAddress newAny(gio.types.SocketFamily family) nothrow
   {
     GInetAddress* _cretval;
     _cretval = g_inet_address_new_any(family);
@@ -205,7 +205,7 @@ class InetAddress : gobject.object.ObjectWrap
       Returns: a new #GInetAddress corresponding to family and bytes.
             Free the returned object with [gobject.object.ObjectWrap.unref].
   */
-  static gio.inet_address.InetAddress newFromBytes(ubyte[] bytes, gio.types.SocketFamily family)
+  static gio.inet_address.InetAddress newFromBytes(ubyte[] bytes, gio.types.SocketFamily family) nothrow
   {
     GInetAddress* _cretval;
     auto _bytes = bytes.ptr ? cast(const(ubyte)*)(bytes ~ ubyte.init).ptr : [ubyte.init].ptr;
@@ -223,7 +223,7 @@ class InetAddress : gobject.object.ObjectWrap
         to string, or null if string could not be parsed.
             Free the returned object with [gobject.object.ObjectWrap.unref].
   */
-  static gio.inet_address.InetAddress newFromString(string string_)
+  static gio.inet_address.InetAddress newFromString(string string_) nothrow
   {
     GInetAddress* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
@@ -241,7 +241,7 @@ class InetAddress : gobject.object.ObjectWrap
         for family.
             Free the returned object with [gobject.object.ObjectWrap.unref].
   */
-  static gio.inet_address.InetAddress newLoopback(gio.types.SocketFamily family)
+  static gio.inet_address.InetAddress newLoopback(gio.types.SocketFamily family) nothrow
   {
     GInetAddress* _cretval;
     _cretval = g_inet_address_new_loopback(family);
@@ -256,7 +256,7 @@ class InetAddress : gobject.object.ObjectWrap
         otherAddress = Another #GInetAddress.
       Returns: true if address and other_address are equal, false otherwise.
   */
-  bool equal(gio.inet_address.InetAddress otherAddress)
+  bool equal(gio.inet_address.InetAddress otherAddress) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_inet_address_equal(cast(GInetAddress*)this._cPtr, otherAddress ? cast(GInetAddress*)otherAddress._cPtr(No.Dup) : null);
@@ -267,7 +267,7 @@ class InetAddress : gobject.object.ObjectWrap
       Gets address's family
       Returns: address's family
   */
-  gio.types.SocketFamily getFamily()
+  gio.types.SocketFamily getFamily() nothrow
   {
     GSocketFamily _cretval;
     _cretval = g_inet_address_get_family(cast(GInetAddress*)this._cPtr);
@@ -279,7 +279,7 @@ class InetAddress : gobject.object.ObjectWrap
       Tests whether address is the "any" address for its family.
       Returns: true if address is the "any" address for its family.
   */
-  bool getIsAny()
+  bool getIsAny() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_inet_address_get_is_any(cast(GInetAddress*)this._cPtr);
@@ -292,7 +292,7 @@ class InetAddress : gobject.object.ObjectWrap
       Internet).
       Returns: true if address is a link-local address.
   */
-  bool getIsLinkLocal()
+  bool getIsLinkLocal() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_inet_address_get_is_link_local(cast(GInetAddress*)this._cPtr);
@@ -303,7 +303,7 @@ class InetAddress : gobject.object.ObjectWrap
       Tests whether address is the loopback address for its family.
       Returns: true if address is the loopback address for its family.
   */
-  bool getIsLoopback()
+  bool getIsLoopback() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_inet_address_get_is_loopback(cast(GInetAddress*)this._cPtr);
@@ -314,7 +314,7 @@ class InetAddress : gobject.object.ObjectWrap
       Tests whether address is a global multicast address.
       Returns: true if address is a global multicast address.
   */
-  bool getIsMcGlobal()
+  bool getIsMcGlobal() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_inet_address_get_is_mc_global(cast(GInetAddress*)this._cPtr);
@@ -325,7 +325,7 @@ class InetAddress : gobject.object.ObjectWrap
       Tests whether address is a link-local multicast address.
       Returns: true if address is a link-local multicast address.
   */
-  bool getIsMcLinkLocal()
+  bool getIsMcLinkLocal() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_inet_address_get_is_mc_link_local(cast(GInetAddress*)this._cPtr);
@@ -336,7 +336,7 @@ class InetAddress : gobject.object.ObjectWrap
       Tests whether address is a node-local multicast address.
       Returns: true if address is a node-local multicast address.
   */
-  bool getIsMcNodeLocal()
+  bool getIsMcNodeLocal() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_inet_address_get_is_mc_node_local(cast(GInetAddress*)this._cPtr);
@@ -347,7 +347,7 @@ class InetAddress : gobject.object.ObjectWrap
       Tests whether address is an organization-local multicast address.
       Returns: true if address is an organization-local multicast address.
   */
-  bool getIsMcOrgLocal()
+  bool getIsMcOrgLocal() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_inet_address_get_is_mc_org_local(cast(GInetAddress*)this._cPtr);
@@ -358,7 +358,7 @@ class InetAddress : gobject.object.ObjectWrap
       Tests whether address is a site-local multicast address.
       Returns: true if address is a site-local multicast address.
   */
-  bool getIsMcSiteLocal()
+  bool getIsMcSiteLocal() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_inet_address_get_is_mc_site_local(cast(GInetAddress*)this._cPtr);
@@ -369,7 +369,7 @@ class InetAddress : gobject.object.ObjectWrap
       Tests whether address is a multicast address.
       Returns: true if address is a multicast address.
   */
-  bool getIsMulticast()
+  bool getIsMulticast() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_inet_address_get_is_multicast(cast(GInetAddress*)this._cPtr);
@@ -383,7 +383,7 @@ class InetAddress : gobject.object.ObjectWrap
       outgoing Internet connectivity via a NAT or firewall).
       Returns: true if address is a site-local address.
   */
-  bool getIsSiteLocal()
+  bool getIsSiteLocal() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_inet_address_get_is_site_local(cast(GInetAddress*)this._cPtr);
@@ -395,7 +395,7 @@ class InetAddress : gobject.object.ObjectWrap
       is the size of the data that you get from [gio.inet_address.InetAddress.toBytes].
       Returns: the number of bytes used for the native version of address.
   */
-  size_t getNativeSize()
+  size_t getNativeSize() nothrow
   {
     size_t _retval;
     _retval = g_inet_address_get_native_size(cast(GInetAddress*)this._cPtr);
@@ -407,7 +407,7 @@ class InetAddress : gobject.object.ObjectWrap
       Returns: a representation of address as a string, which should be
         freed after use.
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = g_inet_address_to_string(cast(GInetAddress*)this._cPtr);
@@ -426,7 +426,7 @@ class InetAddressGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The raw address data.
       Returns: Builder instance for fluent chaining
   */
-  T bytes(void* propval)
+  T bytes(void* propval) nothrow
   {
     return setProperty("bytes", propval);
   }
@@ -437,7 +437,7 @@ class InetAddressGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The address family (IPv4 or IPv6).
       Returns: Builder instance for fluent chaining
   */
-  T family(gio.types.SocketFamily propval)
+  T family(gio.types.SocketFamily propval) nothrow
   {
     return setProperty("family", propval);
   }
@@ -450,7 +450,7 @@ final class InetAddressGidBuilder : InetAddressGidBuilderImpl!InetAddressGidBuil
       Create object from builder.
       Returns: New object
   */
-  InetAddress build()
+  InetAddress build() nothrow
   {
     return new InetAddress(cast(void*)createGObject(InetAddress._getGType), No.Take);
   }

@@ -24,32 +24,32 @@ class StrvBuilder : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_strv_builder_get_type != &gidSymbolNotFound ? g_strv_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StrvBuilder self()
+  override StrvBuilder self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class StrvBuilder : gobject.boxed.Boxed
       Use [glib.strv_builder.StrvBuilder.unref] on the returned value when no longer needed.
       Returns: the new #GStrvBuilder
   */
-  this()
+  this() nothrow
   {
     GStrvBuilder* _cretval;
     _cretval = g_strv_builder_new();
@@ -74,7 +74,7 @@ class StrvBuilder : gobject.boxed.Boxed
       Params:
         value = a string.
   */
-  void add(string value)
+  void add(string value) nothrow
   {
     const(char)* _value = value.toCString(No.Alloc);
     g_strv_builder_add(cast(GStrvBuilder*)this._cPtr, _value);
@@ -88,7 +88,7 @@ class StrvBuilder : gobject.boxed.Boxed
       Params:
         value = the vector of strings to add
   */
-  void addv(string[] value)
+  void addv(string[] value) nothrow
   {
     char*[] _tmpvalue;
     foreach (s; value)
@@ -107,7 +107,7 @@ class StrvBuilder : gobject.boxed.Boxed
         
         Since 2.68
   */
-  string[] end()
+  string[] end() nothrow
   {
     char** _cretval;
     _cretval = g_strv_builder_end(cast(GStrvBuilder*)this._cPtr);
@@ -136,7 +136,7 @@ class StrvBuilder : gobject.boxed.Boxed
         value = a string.
               Ownership of the string is transferred to the #GStrvBuilder
   */
-  void take(string value)
+  void take(string value) nothrow
   {
     char* _value = value.toCString(Yes.Alloc);
     g_strv_builder_take(cast(GStrvBuilder*)this._cPtr, _value);

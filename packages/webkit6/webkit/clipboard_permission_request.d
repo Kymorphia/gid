@@ -25,26 +25,26 @@ class ClipboardPermissionRequest : gobject.object.ObjectWrap, webkit.permission_
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_clipboard_permission_request_get_type != &gidSymbolNotFound ? webkit_clipboard_permission_request_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ClipboardPermissionRequest self()
+  override ClipboardPermissionRequest self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class ClipboardPermissionRequest : gobject.object.ObjectWrap, webkit.permission_
       Get builder for [webkit.clipboard_permission_request.ClipboardPermissionRequest]
       Returns: New builder object
   */
-  static ClipboardPermissionRequestGidBuilder builder()
+  static ClipboardPermissionRequestGidBuilder builder() nothrow
   {
     return new ClipboardPermissionRequestGidBuilder;
   }
@@ -75,7 +75,7 @@ final class ClipboardPermissionRequestGidBuilder : ClipboardPermissionRequestGid
       Create object from builder.
       Returns: New object
   */
-  ClipboardPermissionRequest build()
+  ClipboardPermissionRequest build() nothrow
   {
     return new ClipboardPermissionRequest(cast(void*)createGObject(ClipboardPermissionRequest._getGType), No.Take);
   }

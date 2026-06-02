@@ -16,26 +16,26 @@ class MapDataType : arrow.list_data_type.ListDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_map_data_type_get_type != &gidSymbolNotFound ? garrow_map_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MapDataType self()
+  override MapDataType self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class MapDataType : arrow.list_data_type.ListDataType
       Get builder for [arrow.map_data_type.MapDataType]
       Returns: New builder object
   */
-  static MapDataTypeGidBuilder builder()
+  static MapDataTypeGidBuilder builder() nothrow
   {
     return new MapDataTypeGidBuilder;
   }
 
   /** */
-  this(arrow.data_type.DataType keyType, arrow.data_type.DataType itemType)
+  this(arrow.data_type.DataType keyType, arrow.data_type.DataType itemType) nothrow
   {
     GArrowMapDataType* _cretval;
     _cretval = garrow_map_data_type_new(keyType ? cast(GArrowDataType*)keyType._cPtr(No.Dup) : null, itemType ? cast(GArrowDataType*)itemType._cPtr(No.Dup) : null);
@@ -58,7 +58,7 @@ class MapDataType : arrow.list_data_type.ListDataType
   }
 
   /** */
-  arrow.data_type.DataType getItemType()
+  arrow.data_type.DataType getItemType() nothrow
   {
     GArrowDataType* _cretval;
     _cretval = garrow_map_data_type_get_item_type(cast(GArrowMapDataType*)this._cPtr);
@@ -67,7 +67,7 @@ class MapDataType : arrow.list_data_type.ListDataType
   }
 
   /** */
-  arrow.data_type.DataType getKeyType()
+  arrow.data_type.DataType getKeyType() nothrow
   {
     GArrowDataType* _cretval;
     _cretval = garrow_map_data_type_get_key_type(cast(GArrowMapDataType*)this._cPtr);
@@ -88,7 +88,7 @@ final class MapDataTypeGidBuilder : MapDataTypeGidBuilderImpl!MapDataTypeGidBuil
       Create object from builder.
       Returns: New object
   */
-  MapDataType build()
+  MapDataType build() nothrow
   {
     return new MapDataType(cast(void*)createGObject(MapDataType._getGType), Yes.Take);
   }

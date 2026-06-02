@@ -30,7 +30,7 @@ struct Tuples
   
       Deprecated: Rarely used API
   */
-  void destroy()
+  void destroy() nothrow
   {
     g_tuples_destroy(cast(GTuples*)&this);
   }
@@ -47,7 +47,7 @@ struct Tuples
   
       Deprecated: Rarely used API
   */
-  void* index(int index, int field)
+  void* index(int index, int field) nothrow
   {
     auto _retval = g_tuples_index(cast(GTuples*)&this, index, field);
     return _retval;

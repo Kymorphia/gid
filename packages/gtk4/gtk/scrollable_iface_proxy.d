@@ -8,12 +8,12 @@ import gtk.scrollable_mixin;
 /// Proxy object for [gtk.scrollable.Scrollable] interface when a GObject has no applicable D binding
 class ScrollableIfaceProxy : IfaceProxy, gtk.scrollable.Scrollable
 {
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
-  override TypeInfo_Interface getIface()
+  override TypeInfo_Interface getIface() nothrow
   {
     return typeid(gtk.scrollable.Scrollable);
   }

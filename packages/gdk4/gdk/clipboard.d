@@ -44,26 +44,26 @@ class Clipboard : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_clipboard_get_type != &gidSymbolNotFound ? gdk_clipboard_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Clipboard self()
+  override Clipboard self() nothrow
   {
     return this;
   }
@@ -72,7 +72,7 @@ class Clipboard : gobject.object.ObjectWrap
       Get builder for [gdk.clipboard.Clipboard]
       Returns: New builder object
   */
-  static ClipboardGidBuilder builder()
+  static ClipboardGidBuilder builder() nothrow
   {
     return new ClipboardGidBuilder;
   }
@@ -82,7 +82,7 @@ class Clipboard : gobject.object.ObjectWrap
       Returns: The [gdk.content_provider.ContentProvider] or null if the clipboard is empty or contents are
         provided otherwise.
   */
-  @property gdk.content_provider.ContentProvider content()
+  @property gdk.content_provider.ContentProvider content() nothrow
   {
     return getContent();
   }
@@ -91,7 +91,7 @@ class Clipboard : gobject.object.ObjectWrap
       Get `display` property.
       Returns: The [gdk.display.Display] that the clipboard belongs to.
   */
-  @property gdk.display.Display display()
+  @property gdk.display.Display display() nothrow
   {
     return getDisplay();
   }
@@ -100,7 +100,7 @@ class Clipboard : gobject.object.ObjectWrap
       Get `formats` property.
       Returns: The possible formats that the clipboard can provide its data in.
   */
-  @property gdk.content_formats.ContentFormats formats()
+  @property gdk.content_formats.ContentFormats formats() nothrow
   {
     return getFormats();
   }
@@ -109,7 +109,7 @@ class Clipboard : gobject.object.ObjectWrap
       Get `local` property.
       Returns: true if the contents of the clipboard are owned by this process.
   */
-  @property bool local()
+  @property bool local() nothrow
   {
     return isLocal();
   }
@@ -122,7 +122,7 @@ class Clipboard : gobject.object.ObjectWrap
       Returns: The content of a clipboard
           if the clipboard does not maintain any content
   */
-  gdk.content_provider.ContentProvider getContent()
+  gdk.content_provider.ContentProvider getContent() nothrow
   {
     GdkContentProvider* _cretval;
     _cretval = gdk_clipboard_get_content(cast(GdkClipboard*)this._cPtr);
@@ -134,7 +134,7 @@ class Clipboard : gobject.object.ObjectWrap
       Gets the [gdk.display.Display] that the clipboard was created for.
       Returns: a [gdk.display.Display]
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gdk_clipboard_get_display(cast(GdkClipboard*)this._cPtr);
@@ -146,7 +146,7 @@ class Clipboard : gobject.object.ObjectWrap
       Gets the formats that the clipboard can provide its current contents in.
       Returns: The formats of the clipboard
   */
-  gdk.content_formats.ContentFormats getFormats()
+  gdk.content_formats.ContentFormats getFormats() nothrow
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_clipboard_get_formats(cast(GdkClipboard*)this._cPtr);
@@ -164,7 +164,7 @@ class Clipboard : gobject.object.ObjectWrap
       even on a local clipboard. In this case the clipboard is empty.
       Returns: true if the clipboard is local
   */
-  bool isLocal()
+  bool isLocal() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_clipboard_is_local(cast(GdkClipboard*)this._cPtr);
@@ -187,14 +187,21 @@ class Clipboard : gobject.object.ObjectWrap
         cancellable = optional [gio.cancellable.Cancellable] object
         callback = callback to call when the request is satisfied
   */
-  void readAsync(string[] mimeTypes, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void readAsync(string[] mimeTypes, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     char*[] _tmpmimeTypes;
@@ -246,14 +253,21 @@ class Clipboard : gobject.object.ObjectWrap
         cancellable = optional [gio.cancellable.Cancellable] object
         callback = callback to call when the request is satisfied
   */
-  void readTextAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void readTextAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -295,14 +309,21 @@ class Clipboard : gobject.object.ObjectWrap
         cancellable = optional [gio.cancellable.Cancellable] object, null to ignore.
         callback = callback to call when the request is satisfied
   */
-  void readTextureAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void readTextureAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -347,14 +368,21 @@ class Clipboard : gobject.object.ObjectWrap
         cancellable = optional [gio.cancellable.Cancellable] object
         callback = callback to call when the request is satisfied
   */
-  void readValueAsync(gobject.types.GType type, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void readValueAsync(gobject.types.GType type, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -401,7 +429,7 @@ class Clipboard : gobject.object.ObjectWrap
             or null to clear the clipboard
       Returns: true if setting the clipboard succeeded
   */
-  bool setContent(gdk.content_provider.ContentProvider provider = null)
+  bool setContent(gdk.content_provider.ContentProvider provider = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_clipboard_set_content(cast(GdkClipboard*)this._cPtr, provider ? cast(GdkContentProvider*)provider._cPtr(No.Dup) : null);
@@ -414,7 +442,7 @@ class Clipboard : gobject.object.ObjectWrap
       Params:
         value = a [gobject.value.Value] to set
   */
-  void set(gobject.value.Value value)
+  void set(gobject.value.Value value) nothrow
   {
     gdk_clipboard_set_value(cast(GdkClipboard*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
@@ -440,14 +468,21 @@ class Clipboard : gobject.object.ObjectWrap
         cancellable = optional [gio.cancellable.Cancellable] object
         callback = callback to call when the request is satisfied
   */
-  void storeAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void storeAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -489,13 +524,13 @@ class Clipboard : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.clipboard.Clipboard)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -504,7 +539,14 @@ class Clipboard : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.clipboard.Clipboard.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -522,7 +564,7 @@ class ClipboardGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The [gdk.display.Display] that the clipboard belongs to.
       Returns: Builder instance for fluent chaining
   */
-  T display(gdk.display.Display propval)
+  T display(gdk.display.Display propval) nothrow
   {
     return setProperty("display", propval);
   }
@@ -535,7 +577,7 @@ final class ClipboardGidBuilder : ClipboardGidBuilderImpl!ClipboardGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Clipboard build()
+  Clipboard build() nothrow
   {
     return new Clipboard(cast(void*)createGObject(Clipboard._getGType), No.Take);
   }

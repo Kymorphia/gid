@@ -19,26 +19,26 @@ class DataComparator : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_data_comparator_get_type != &gidSymbolNotFound ? gda_data_comparator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DataComparator self()
+  override DataComparator self() nothrow
   {
     return this;
   }
@@ -47,31 +47,31 @@ class DataComparator : gobject.object.ObjectWrap
       Get builder for [gda.data_comparator.DataComparator]
       Returns: New builder object
   */
-  static DataComparatorGidBuilder builder()
+  static DataComparatorGidBuilder builder() nothrow
   {
     return new DataComparatorGidBuilder;
   }
 
   /** */
-  @property gda.data_model.DataModel newModel()
+  @property gda.data_model.DataModel newModel() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.data_model.DataModel)("new-model");
   }
 
   /** */
-  @property void newModel(gda.data_model.DataModel propval)
+  @property void newModel(gda.data_model.DataModel propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gda.data_model.DataModel)("new-model", propval);
   }
 
   /** */
-  @property gda.data_model.DataModel oldModel()
+  @property gda.data_model.DataModel oldModel() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.data_model.DataModel)("old-model");
   }
 
   /** */
-  @property void oldModel(gda.data_model.DataModel propval)
+  @property void oldModel(gda.data_model.DataModel propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gda.data_model.DataModel)("old-model", propval);
   }
@@ -86,7 +86,7 @@ class DataComparator : gobject.object.ObjectWrap
         newModel = Target data model.
       Returns: a new #GdaDataComparator object
   */
-  this(gda.data_model.DataModel oldModel, gda.data_model.DataModel newModel)
+  this(gda.data_model.DataModel oldModel, gda.data_model.DataModel newModel) nothrow
   {
     GObject* _cretval;
     _cretval = gda_data_comparator_new(oldModel ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)oldModel)._cPtr(No.Dup) : null, newModel ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)newModel)._cPtr(No.Dup) : null);
@@ -94,7 +94,7 @@ class DataComparator : gobject.object.ObjectWrap
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_data_comparator_error_quark();
@@ -127,7 +127,7 @@ class DataComparator : gobject.object.ObjectWrap
         pos = the requested difference number (starting at 0)
       Returns: a pointer to a #GdaDiff, or null if pos is invalid
   */
-  gda.diff.Diff getDiff(int pos)
+  gda.diff.Diff getDiff(int pos) nothrow
   {
     const(GdaDiff)* _cretval;
     _cretval = gda_data_comparator_get_diff(cast(GdaDataComparator*)this._cPtr, pos);
@@ -139,7 +139,7 @@ class DataComparator : gobject.object.ObjectWrap
       Get the number of differences as computed by the last time [gda.data_comparator.DataComparator.computeDiff] was called.
       Returns: the number of computed differences
   */
-  int getNDiffs()
+  int getNDiffs() nothrow
   {
     int _retval;
     _retval = gda_data_comparator_get_n_diffs(cast(GdaDataComparator*)this._cPtr);
@@ -153,7 +153,7 @@ class DataComparator : gobject.object.ObjectWrap
       Params:
         colNumbers = an array of nb_cols values
   */
-  void setKeyColumns(int[] colNumbers)
+  void setKeyColumns(int[] colNumbers) nothrow
   {
     int _nbCols;
     if (colNumbers)
@@ -181,18 +181,19 @@ class DataComparator : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDiffComputed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDiffComputed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == void*)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.data_comparator.DataComparator)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -200,7 +201,14 @@ class DataComparator : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.data_comparator.DataComparator.diffComputed");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -215,13 +223,13 @@ class DataComparatorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 {
 
   /** */
-  T newModel(gda.data_model.DataModel propval)
+  T newModel(gda.data_model.DataModel propval) nothrow
   {
     return setProperty("new-model", propval);
   }
 
   /** */
-  T oldModel(gda.data_model.DataModel propval)
+  T oldModel(gda.data_model.DataModel propval) nothrow
   {
     return setProperty("old-model", propval);
   }
@@ -234,7 +242,7 @@ final class DataComparatorGidBuilder : DataComparatorGidBuilderImpl!DataComparat
       Create object from builder.
       Returns: New object
   */
-  DataComparator build()
+  DataComparator build() nothrow
   {
     return new DataComparator(cast(void*)createGObject(DataComparator._getGType), Yes.Take);
   }
@@ -242,12 +250,12 @@ final class DataComparatorGidBuilder : DataComparatorGidBuilderImpl!DataComparat
 
 class DataComparatorException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.data_comparator.DataComparator.errorQuark, cast(int)code, msg);
   }

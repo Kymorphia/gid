@@ -20,26 +20,26 @@ class NumericSorter : gtk.sorter.Sorter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_numeric_sorter_get_type != &gidSymbolNotFound ? gtk_numeric_sorter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NumericSorter self()
+  override NumericSorter self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class NumericSorter : gtk.sorter.Sorter
       Get builder for [gtk.numeric_sorter.NumericSorter]
       Returns: New builder object
   */
-  static NumericSorterGidBuilder builder()
+  static NumericSorterGidBuilder builder() nothrow
   {
     return new NumericSorterGidBuilder;
   }
@@ -57,7 +57,7 @@ class NumericSorter : gtk.sorter.Sorter
       Get `expression` property.
       Returns: The expression to evaluate on items to get a number to compare with.
   */
-  @property gtk.expression.Expression expression()
+  @property gtk.expression.Expression expression() nothrow
   {
     return getExpression();
   }
@@ -67,7 +67,7 @@ class NumericSorter : gtk.sorter.Sorter
       Params:
         propval = The expression to evaluate on items to get a number to compare with.
   */
-  @property void expression(gtk.expression.Expression propval)
+  @property void expression(gtk.expression.Expression propval) nothrow
   {
     setExpression(propval);
   }
@@ -76,7 +76,7 @@ class NumericSorter : gtk.sorter.Sorter
       Get `sortOrder` property.
       Returns: Whether the sorter will sort smaller numbers first.
   */
-  @property gtk.types.SortType sortOrder()
+  @property gtk.types.SortType sortOrder() nothrow
   {
     return getSortOrder();
   }
@@ -86,7 +86,7 @@ class NumericSorter : gtk.sorter.Sorter
       Params:
         propval = Whether the sorter will sort smaller numbers first.
   */
-  @property void sortOrder(gtk.types.SortType propval)
+  @property void sortOrder(gtk.types.SortType propval) nothrow
   {
     setSortOrder(propval);
   }
@@ -101,7 +101,7 @@ class NumericSorter : gtk.sorter.Sorter
         expression = The expression to evaluate
       Returns: a new [gtk.numeric_sorter.NumericSorter]
   */
-  this(gtk.expression.Expression expression = null)
+  this(gtk.expression.Expression expression = null) nothrow
   {
     GtkNumericSorter* _cretval;
     _cretval = gtk_numeric_sorter_new(expression ? cast(GtkExpression*)expression._cPtr(Yes.Dup) : null);
@@ -112,7 +112,7 @@ class NumericSorter : gtk.sorter.Sorter
       Gets the expression that is evaluated to obtain numbers from items.
       Returns: a [gtk.expression.Expression]
   */
-  gtk.expression.Expression getExpression()
+  gtk.expression.Expression getExpression() nothrow
   {
     GtkExpression* _cretval;
     _cretval = gtk_numeric_sorter_get_expression(cast(GtkNumericSorter*)this._cPtr);
@@ -124,7 +124,7 @@ class NumericSorter : gtk.sorter.Sorter
       Gets whether this sorter will sort smaller numbers first.
       Returns: the order of the numbers
   */
-  gtk.types.SortType getSortOrder()
+  gtk.types.SortType getSortOrder() nothrow
   {
     GtkSortType _cretval;
     _cretval = gtk_numeric_sorter_get_sort_order(cast(GtkNumericSorter*)this._cPtr);
@@ -144,7 +144,7 @@ class NumericSorter : gtk.sorter.Sorter
       Params:
         expression = a [gtk.expression.Expression]
   */
-  void setExpression(gtk.expression.Expression expression = null)
+  void setExpression(gtk.expression.Expression expression = null) nothrow
   {
     gtk_numeric_sorter_set_expression(cast(GtkNumericSorter*)this._cPtr, expression ? cast(GtkExpression*)expression._cPtr(No.Dup) : null);
   }
@@ -155,7 +155,7 @@ class NumericSorter : gtk.sorter.Sorter
       Params:
         sortOrder = whether to sort smaller numbers first
   */
-  void setSortOrder(gtk.types.SortType sortOrder)
+  void setSortOrder(gtk.types.SortType sortOrder) nothrow
   {
     gtk_numeric_sorter_set_sort_order(cast(GtkNumericSorter*)this._cPtr, sortOrder);
   }
@@ -171,7 +171,7 @@ class NumericSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T
         propval = The expression to evaluate on items to get a number to compare with.
       Returns: Builder instance for fluent chaining
   */
-  T expression(gtk.expression.Expression propval)
+  T expression(gtk.expression.Expression propval) nothrow
   {
     return setProperty("expression", propval);
   }
@@ -182,7 +182,7 @@ class NumericSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T
         propval = Whether the sorter will sort smaller numbers first.
       Returns: Builder instance for fluent chaining
   */
-  T sortOrder(gtk.types.SortType propval)
+  T sortOrder(gtk.types.SortType propval) nothrow
   {
     return setProperty("sort-order", propval);
   }
@@ -195,7 +195,7 @@ final class NumericSorterGidBuilder : NumericSorterGidBuilderImpl!NumericSorterG
       Create object from builder.
       Returns: New object
   */
-  NumericSorter build()
+  NumericSorter build() nothrow
   {
     return new NumericSorter(cast(void*)createGObject(NumericSorter._getGType), Yes.Take);
   }

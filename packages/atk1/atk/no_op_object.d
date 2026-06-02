@@ -46,26 +46,26 @@ class NoOpObject : atk.object.ObjectWrap, atk.action.Action, atk.component.Compo
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_no_op_object_get_type != &gidSymbolNotFound ? atk_no_op_object_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NoOpObject self()
+  override NoOpObject self() nothrow
   {
     return this;
   }
@@ -74,7 +74,7 @@ class NoOpObject : atk.object.ObjectWrap, atk.action.Action, atk.component.Compo
       Get builder for [atk.no_op_object.NoOpObject]
       Returns: New builder object
   */
-  static NoOpObjectGidBuilder builder()
+  static NoOpObjectGidBuilder builder() nothrow
   {
     return new NoOpObjectGidBuilder;
   }
@@ -103,7 +103,7 @@ class NoOpObject : atk.object.ObjectWrap, atk.action.Action, atk.component.Compo
         obj = a #GObject
       Returns: a default (non-functioning stub) #AtkObject
   */
-  this(gobject.object.ObjectWrap obj)
+  this(gobject.object.ObjectWrap obj) nothrow
   {
     AtkObject* _cretval;
     _cretval = atk_no_op_object_new(obj ? cast(GObject*)obj._cPtr(No.Dup) : null);
@@ -136,7 +136,7 @@ final class NoOpObjectGidBuilder : NoOpObjectGidBuilderImpl!NoOpObjectGidBuilder
       Create object from builder.
       Returns: New object
   */
-  NoOpObject build()
+  NoOpObject build() nothrow
   {
     return new NoOpObject(cast(void*)createGObject(NoOpObject._getGType), Yes.Take);
   }

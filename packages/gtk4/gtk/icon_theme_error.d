@@ -14,7 +14,7 @@ struct IconThemeError
   alias Enum = gtk.types.IconThemeError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gtk_icon_theme_error_quark();
@@ -24,12 +24,12 @@ struct IconThemeError
 
 class IconThemeException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gtk.icon_theme_error.IconThemeError.quark, cast(int)code, msg);
   }

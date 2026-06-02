@@ -14,26 +14,26 @@ class Language : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_language_get_type != &gidSymbolNotFound ? gtk_source_language_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Language self()
+  override Language self() nothrow
   {
     return this;
   }
@@ -42,31 +42,31 @@ class Language : gobject.object.ObjectWrap
       Get builder for [gtksource.language.Language]
       Returns: New builder object
   */
-  static LanguageGidBuilder builder()
+  static LanguageGidBuilder builder() nothrow
   {
     return new LanguageGidBuilder;
   }
 
   /** */
-  @property bool hidden()
+  @property bool hidden() nothrow
   {
     return getHidden();
   }
 
   /** */
-  @property string id()
+  @property string id() nothrow
   {
     return getId();
   }
 
   /** */
-  @property string name()
+  @property string name() nothrow
   {
     return getName();
   }
 
   /** */
-  @property string section()
+  @property string section() nothrow
   {
     return getSection();
   }
@@ -79,7 +79,7 @@ class Language : gobject.object.ObjectWrap
         if no globs are found.
         The returned array must be freed with [glib.global.strfreev].
   */
-  string[] getGlobs()
+  string[] getGlobs() nothrow
   {
     char** _cretval;
     _cretval = gtk_source_language_get_globs(cast(GtkSourceLanguage*)this._cPtr);
@@ -102,7 +102,7 @@ class Language : gobject.object.ObjectWrap
       Returns whether the language should be hidden from the user.
       Returns: true if the language should be hidden, false otherwise.
   */
-  bool getHidden()
+  bool getHidden() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_language_get_hidden(cast(GtkSourceLanguage*)this._cPtr);
@@ -115,7 +115,7 @@ class Language : gobject.object.ObjectWrap
       or modified.
       Returns: the ID of language.
   */
-  string getId()
+  string getId() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_language_get_id(cast(GtkSourceLanguage*)this._cPtr);
@@ -124,7 +124,7 @@ class Language : gobject.object.ObjectWrap
   }
 
   /** */
-  string getMetadata(string name)
+  string getMetadata(string name) nothrow
   {
     const(char)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -142,7 +142,7 @@ class Language : gobject.object.ObjectWrap
         or null if no mime types are found.
         The returned array must be freed with [glib.global.strfreev].
   */
-  string[] getMimeTypes()
+  string[] getMimeTypes() nothrow
   {
     char** _cretval;
     _cretval = gtk_source_language_get_mime_types(cast(GtkSourceLanguage*)this._cPtr);
@@ -167,7 +167,7 @@ class Language : gobject.object.ObjectWrap
       or modified.
       Returns: the name of language.
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_language_get_name(cast(GtkSourceLanguage*)this._cPtr);
@@ -183,7 +183,7 @@ class Language : gobject.object.ObjectWrap
       or modified.
       Returns: the section of language.
   */
-  string getSection()
+  string getSection() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_language_get_section(cast(GtkSourceLanguage*)this._cPtr);
@@ -202,7 +202,7 @@ class Language : gobject.object.ObjectWrap
         if the style has no fallback defined.
         The returned string is owned by the language and must not be modified.
   */
-  string getStyleFallback(string styleId)
+  string getStyleFallback(string styleId) nothrow
   {
     const(char)* _cretval;
     const(char)* _styleId = styleId.toCString(No.Alloc);
@@ -217,7 +217,7 @@ class Language : gobject.object.ObjectWrap
         styles defined by this language or null if no style is defined.
         The returned array must be freed with [glib.global.strfreev].
   */
-  string[] getStyleIds()
+  string[] getStyleIds() nothrow
   {
     char** _cretval;
     _cretval = gtk_source_language_get_style_ids(cast(GtkSourceLanguage*)this._cPtr);
@@ -246,7 +246,7 @@ class Language : gobject.object.ObjectWrap
         style with ID style_id defined by this language.
         The returned string is owned by the language and must not be modified.
   */
-  string getStyleName(string styleId)
+  string getStyleName(string styleId) nothrow
   {
     const(char)* _cretval;
     const(char)* _styleId = styleId.toCString(No.Alloc);
@@ -268,7 +268,7 @@ final class LanguageGidBuilder : LanguageGidBuilderImpl!LanguageGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Language build()
+  Language build() nothrow
   {
     return new Language(cast(void*)createGObject(Language._getGType), No.Take);
   }

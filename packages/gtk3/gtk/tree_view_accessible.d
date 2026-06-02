@@ -22,26 +22,26 @@ class TreeViewAccessible : gtk.container_accessible.ContainerAccessible, atk.sel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_view_accessible_get_type != &gidSymbolNotFound ? gtk_tree_view_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TreeViewAccessible self()
+  override TreeViewAccessible self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class TreeViewAccessible : gtk.container_accessible.ContainerAccessible, atk.sel
       Get builder for [gtk.tree_view_accessible.TreeViewAccessible]
       Returns: New builder object
   */
-  static TreeViewAccessibleGidBuilder builder()
+  static TreeViewAccessibleGidBuilder builder() nothrow
   {
     return new TreeViewAccessibleGidBuilder;
   }
@@ -76,7 +76,7 @@ final class TreeViewAccessibleGidBuilder : TreeViewAccessibleGidBuilderImpl!Tree
       Create object from builder.
       Returns: New object
   */
-  TreeViewAccessible build()
+  TreeViewAccessible build() nothrow
   {
     return new TreeViewAccessible(cast(void*)createGObject(TreeViewAccessible._getGType), No.Take);
   }

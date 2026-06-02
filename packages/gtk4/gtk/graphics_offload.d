@@ -58,26 +58,26 @@ class GraphicsOffload : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_graphics_offload_get_type != &gidSymbolNotFound ? gtk_graphics_offload_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GraphicsOffload self()
+  override GraphicsOffload self() nothrow
   {
     return this;
   }
@@ -86,7 +86,7 @@ class GraphicsOffload : gtk.widget.Widget
       Get builder for [gtk.graphics_offload.GraphicsOffload]
       Returns: New builder object
   */
-  static GraphicsOffloadGidBuilder builder()
+  static GraphicsOffloadGidBuilder builder() nothrow
   {
     return new GraphicsOffloadGidBuilder;
   }
@@ -95,7 +95,7 @@ class GraphicsOffload : gtk.widget.Widget
       Get `child` property.
       Returns: The child widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -105,7 +105,7 @@ class GraphicsOffload : gtk.widget.Widget
       Params:
         propval = The child widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -114,7 +114,7 @@ class GraphicsOffload : gtk.widget.Widget
       Get `enabled` property.
       Returns: Whether graphics offload is enabled.
   */
-  @property gtk.types.GraphicsOffloadEnabled enabled()
+  @property gtk.types.GraphicsOffloadEnabled enabled() nothrow
   {
     return getEnabled();
   }
@@ -124,7 +124,7 @@ class GraphicsOffload : gtk.widget.Widget
       Params:
         propval = Whether graphics offload is enabled.
   */
-  @property void enabled(gtk.types.GraphicsOffloadEnabled propval)
+  @property void enabled(gtk.types.GraphicsOffloadEnabled propval) nothrow
   {
     setEnabled(propval);
   }
@@ -136,7 +136,7 @@ class GraphicsOffload : gtk.widget.Widget
         child = the child widget
       Returns: the new widget
   */
-  this(gtk.widget.Widget child = null)
+  this(gtk.widget.Widget child = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_graphics_offload_new(child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -147,7 +147,7 @@ class GraphicsOffload : gtk.widget.Widget
       Gets the child of self.
       Returns: the child widget
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_graphics_offload_get_child(cast(GtkGraphicsOffload*)this._cPtr);
@@ -159,7 +159,7 @@ class GraphicsOffload : gtk.widget.Widget
       Returns whether offload is enabled for self.
       Returns: whether offload is enabled
   */
-  gtk.types.GraphicsOffloadEnabled getEnabled()
+  gtk.types.GraphicsOffloadEnabled getEnabled() nothrow
   {
     GtkGraphicsOffloadEnabled _cretval;
     _cretval = gtk_graphics_offload_get_enabled(cast(GtkGraphicsOffload*)this._cPtr);
@@ -173,7 +173,7 @@ class GraphicsOffload : gtk.widget.Widget
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     gtk_graphics_offload_set_child(cast(GtkGraphicsOffload*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -185,7 +185,7 @@ class GraphicsOffload : gtk.widget.Widget
       Params:
         enabled = whether to enable offload
   */
-  void setEnabled(gtk.types.GraphicsOffloadEnabled enabled)
+  void setEnabled(gtk.types.GraphicsOffloadEnabled enabled) nothrow
   {
     gtk_graphics_offload_set_enabled(cast(GtkGraphicsOffload*)this._cPtr, enabled);
   }
@@ -202,7 +202,7 @@ class GraphicsOffloadGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The child widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -213,7 +213,7 @@ class GraphicsOffloadGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether graphics offload is enabled.
       Returns: Builder instance for fluent chaining
   */
-  T enabled(gtk.types.GraphicsOffloadEnabled propval)
+  T enabled(gtk.types.GraphicsOffloadEnabled propval) nothrow
   {
     return setProperty("enabled", propval);
   }
@@ -226,7 +226,7 @@ final class GraphicsOffloadGidBuilder : GraphicsOffloadGidBuilderImpl!GraphicsOf
       Create object from builder.
       Returns: New object
   */
-  GraphicsOffload build()
+  GraphicsOffload build() nothrow
   {
     return new GraphicsOffload(cast(void*)createGObject(GraphicsOffload._getGType), Yes.Take);
   }

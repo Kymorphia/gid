@@ -15,26 +15,26 @@ class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_union_array_builder_get_type != &gidSymbolNotFound ? garrow_union_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UnionArrayBuilder self()
+  override UnionArrayBuilder self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.union_array_builder.UnionArrayBuilder]
       Returns: New builder object
   */
-  static UnionArrayBuilderGidBuilder builder()
+  static UnionArrayBuilderGidBuilder builder() nothrow
   {
     return new UnionArrayBuilderGidBuilder;
   }
 
   /** */
-  byte appendChild(arrow.array_builder.ArrayBuilder child, string fieldName = null)
+  byte appendChild(arrow.array_builder.ArrayBuilder child, string fieldName = null) nothrow
   {
     byte _retval;
     const(char)* _fieldName = fieldName.toCString(No.Alloc);
@@ -97,7 +97,7 @@ final class UnionArrayBuilderGidBuilder : UnionArrayBuilderGidBuilderImpl!UnionA
       Create object from builder.
       Returns: New object
   */
-  UnionArrayBuilder build()
+  UnionArrayBuilder build() nothrow
   {
     return new UnionArrayBuilder(cast(void*)createGObject(UnionArrayBuilder._getGType), No.Take);
   }

@@ -16,11 +16,8 @@ class ParamSpecArray
   GstParamSpecArray _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gst.param_spec_array.ParamSpecArray");
-
     _cInstance = *cast(GstParamSpecArray*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class ParamSpecArray
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class ParamSpecArray
       Get `parentInstance` field.
       Returns: super class
   */
-  @property gobject.param_spec.ParamSpec parentInstance()
+  @property gobject.param_spec.ParamSpec parentInstance() nothrow
   {
     return cToD!(gobject.param_spec.ParamSpec)(cast(void*)&(cast(GstParamSpecArray*)this._cPtr).parentInstance);
   }
@@ -47,7 +44,7 @@ class ParamSpecArray
       Params:
         propval = super class
   */
-  @property void parentInstance(gobject.param_spec.ParamSpec propval)
+  @property void parentInstance(gobject.param_spec.ParamSpec propval) nothrow
   {
     cValueFree!(gobject.param_spec.ParamSpec)(cast(void*)&(cast(GstParamSpecArray*)this._cPtr).parentInstance);
     dToC(propval, cast(void*)&(cast(GstParamSpecArray*)this._cPtr).parentInstance);
@@ -57,7 +54,7 @@ class ParamSpecArray
       Get `elementSpec` field.
       Returns: the #GParamSpec of the type of values in the array
   */
-  @property gobject.param_spec.ParamSpec elementSpec()
+  @property gobject.param_spec.ParamSpec elementSpec() nothrow
   {
     return cToD!(gobject.param_spec.ParamSpec)(cast(void*)(cast(GstParamSpecArray*)this._cPtr).elementSpec);
   }
@@ -67,7 +64,7 @@ class ParamSpecArray
       Params:
         propval = the #GParamSpec of the type of values in the array
   */
-  @property void elementSpec(gobject.param_spec.ParamSpec propval)
+  @property void elementSpec(gobject.param_spec.ParamSpec propval) nothrow
   {
     cValueFree!(gobject.param_spec.ParamSpec)(cast(void*)(cast(GstParamSpecArray*)this._cPtr).elementSpec);
     dToC(propval, cast(void*)&(cast(GstParamSpecArray*)this._cPtr).elementSpec);

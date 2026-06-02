@@ -35,7 +35,7 @@ template TreeDragDestT()
   
       Deprecated: Use list models instead
   */
-  override bool dragDataReceived(gtk.tree_path.TreePath dest, gobject.value.Value value)
+  override bool dragDataReceived(gtk.tree_path.TreePath dest, gobject.value.Value value) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_drag_dest_drag_data_received(cast(GtkTreeDragDest*)this._cPtr, dest ? cast(GtkTreePath*)dest._cPtr(No.Dup) : null, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -56,7 +56,7 @@ template TreeDragDestT()
   
       Deprecated: Use list models instead
   */
-  override bool rowDropPossible(gtk.tree_path.TreePath destPath, gobject.value.Value value)
+  override bool rowDropPossible(gtk.tree_path.TreePath destPath, gobject.value.Value value) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_drag_dest_row_drop_possible(cast(GtkTreeDragDest*)this._cPtr, destPath ? cast(GtkTreePath*)destPath._cPtr(No.Dup) : null, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);

@@ -24,26 +24,26 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_data_input_stream_get_type != &gidSymbolNotFound ? g_data_input_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DataInputStream self()
+  override DataInputStream self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
       Get builder for [gio.data_input_stream.DataInputStream]
       Returns: New builder object
   */
-  static DataInputStreamGidBuilder builder()
+  static DataInputStreamGidBuilder builder() nothrow
   {
     return new DataInputStreamGidBuilder;
   }
@@ -63,7 +63,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
         is used when reading multi-byte entities (such as integers)
         from the stream.
   */
-  @property gio.types.DataStreamByteOrder byteOrder()
+  @property gio.types.DataStreamByteOrder byteOrder() nothrow
   {
     return getByteOrder();
   }
@@ -75,7 +75,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
           is used when reading multi-byte entities (such as integers)
           from the stream.
   */
-  @property void byteOrder(gio.types.DataStreamByteOrder propval)
+  @property void byteOrder(gio.types.DataStreamByteOrder propval) nothrow
   {
     setByteOrder(propval);
   }
@@ -85,7 +85,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
       Returns: The :newline-type property determines what is considered
         as a line ending when reading complete lines from the stream.
   */
-  @property gio.types.DataStreamNewlineType newlineType()
+  @property gio.types.DataStreamNewlineType newlineType() nothrow
   {
     return getNewlineType();
   }
@@ -96,7 +96,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
         propval = The :newline-type property determines what is considered
           as a line ending when reading complete lines from the stream.
   */
-  @property void newlineType(gio.types.DataStreamNewlineType propval)
+  @property void newlineType(gio.types.DataStreamNewlineType propval) nothrow
   {
     setNewlineType(propval);
   }
@@ -108,7 +108,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
         baseStream = a #GInputStream.
       Returns: a new #GDataInputStream.
   */
-  this(gio.input_stream.InputStream baseStream)
+  this(gio.input_stream.InputStream baseStream) nothrow
   {
     GDataInputStream* _cretval;
     _cretval = g_data_input_stream_new(baseStream ? cast(GInputStream*)baseStream._cPtr(No.Dup) : null);
@@ -119,7 +119,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
       Gets the byte order for the data input stream.
       Returns: the stream's current #GDataStreamByteOrder.
   */
-  gio.types.DataStreamByteOrder getByteOrder()
+  gio.types.DataStreamByteOrder getByteOrder() nothrow
   {
     GDataStreamByteOrder _cretval;
     _cretval = g_data_input_stream_get_byte_order(cast(GDataInputStream*)this._cPtr);
@@ -131,7 +131,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
       Gets the current newline type for the stream.
       Returns: #GDataStreamNewlineType for the given stream.
   */
-  gio.types.DataStreamNewlineType getNewlineType()
+  gio.types.DataStreamNewlineType getNewlineType() nothrow
   {
     GDataStreamNewlineType _cretval;
     _cretval = g_data_input_stream_get_newline_type(cast(GDataInputStream*)this._cPtr);
@@ -245,14 +245,21 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
         cancellable = optional #GCancellable object, null to ignore.
         callback = callback to call when the request is satisfied.
   */
-  void readLineAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void readLineAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -453,14 +460,21 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
       Deprecated: Use [gio.data_input_stream.DataInputStream.readUptoAsync] instead, which
             has more consistent behaviour regarding the stop character.
   */
-  void readUntilAsync(string stopChars, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void readUntilAsync(string stopChars, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _stopChars = stopChars.toCString(No.Alloc);
@@ -557,14 +571,21 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
         cancellable = optional #GCancellable object, null to ignore
         callback = callback to call when the request is satisfied
   */
-  void readUptoAsync(string stopChars, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void readUptoAsync(string stopChars, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     ptrdiff_t _stopCharsLen;
@@ -613,7 +634,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
       Params:
         order = a #GDataStreamByteOrder to set.
   */
-  void setByteOrder(gio.types.DataStreamByteOrder order)
+  void setByteOrder(gio.types.DataStreamByteOrder order) nothrow
   {
     g_data_input_stream_set_byte_order(cast(GDataInputStream*)this._cPtr, order);
   }
@@ -628,7 +649,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
       Params:
         type = the type of new line return as #GDataStreamNewlineType.
   */
-  void setNewlineType(gio.types.DataStreamNewlineType type)
+  void setNewlineType(gio.types.DataStreamNewlineType type) nothrow
   {
     g_data_input_stream_set_newline_type(cast(GDataInputStream*)this._cPtr, type);
   }
@@ -647,7 +668,7 @@ class DataInputStreamGidBuilderImpl(T) : gio.buffered_input_stream.BufferedInput
           from the stream.
       Returns: Builder instance for fluent chaining
   */
-  T byteOrder(gio.types.DataStreamByteOrder propval)
+  T byteOrder(gio.types.DataStreamByteOrder propval) nothrow
   {
     return setProperty("byte-order", propval);
   }
@@ -659,7 +680,7 @@ class DataInputStreamGidBuilderImpl(T) : gio.buffered_input_stream.BufferedInput
           as a line ending when reading complete lines from the stream.
       Returns: Builder instance for fluent chaining
   */
-  T newlineType(gio.types.DataStreamNewlineType propval)
+  T newlineType(gio.types.DataStreamNewlineType propval) nothrow
   {
     return setProperty("newline-type", propval);
   }
@@ -672,7 +693,7 @@ final class DataInputStreamGidBuilder : DataInputStreamGidBuilderImpl!DataInputS
       Create object from builder.
       Returns: New object
   */
-  DataInputStream build()
+  DataInputStream build() nothrow
   {
     return new DataInputStream(cast(void*)createGObject(DataInputStream._getGType), Yes.Take);
   }

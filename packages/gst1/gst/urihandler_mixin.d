@@ -31,7 +31,7 @@ template URIHandlerT()
             implemented properly, or the handler doesn't support any
             protocols.
   */
-  override string[] getProtocols()
+  override string[] getProtocols() nothrow
   {
     const(char*)* _cretval;
     _cretval = gst_uri_handler_get_protocols(cast(GstURIHandler*)this._cPtr);
@@ -56,7 +56,7 @@ template URIHandlerT()
           handled. The returned string must be freed with [glib.global.gfree] when no
           longer needed.
   */
-  override string getUri()
+  override string getUri() nothrow
   {
     char* _cretval;
     _cretval = gst_uri_handler_get_uri(cast(GstURIHandler*)this._cPtr);
@@ -69,7 +69,7 @@ template URIHandlerT()
       Returns: the #GstURIType of the URI handler.
         Returns #GST_URI_UNKNOWN if the handler isn't implemented correctly.
   */
-  override gst.types.URIType getUriType()
+  override gst.types.URIType getUriType() nothrow
   {
     GstURIType _cretval;
     _cretval = gst_uri_handler_get_uri_type(cast(GstURIHandler*)this._cPtr);

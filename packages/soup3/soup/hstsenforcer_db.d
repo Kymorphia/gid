@@ -22,26 +22,26 @@ class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_hsts_enforcer_db_get_type != &gidSymbolNotFound ? soup_hsts_enforcer_db_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HSTSEnforcerDB self()
+  override HSTSEnforcerDB self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
       Get builder for [soup.hstsenforcer_db.HSTSEnforcerDB]
       Returns: New builder object
   */
-  static HSTSEnforcerDBGidBuilder builder()
+  static HSTSEnforcerDBGidBuilder builder() nothrow
   {
     return new HSTSEnforcerDBGidBuilder;
   }
@@ -59,7 +59,7 @@ class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
       Get `filename` property.
       Returns: The filename of the SQLite database where HSTS policies are stored.
   */
-  @property string filename()
+  @property string filename() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("filename");
   }
@@ -78,7 +78,7 @@ class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
         filename = the filename of the database to read/write from.
       Returns: the new #SoupHSTSEnforcer
   */
-  this(string filename)
+  this(string filename) nothrow
   {
     SoupHSTSEnforcer* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -98,7 +98,7 @@ class HSTSEnforcerDBGidBuilderImpl(T) : soup.hstsenforcer.HSTSEnforcerGidBuilder
         propval = The filename of the SQLite database where HSTS policies are stored.
       Returns: Builder instance for fluent chaining
   */
-  T filename(string propval)
+  T filename(string propval) nothrow
   {
     return setProperty("filename", propval);
   }
@@ -111,7 +111,7 @@ final class HSTSEnforcerDBGidBuilder : HSTSEnforcerDBGidBuilderImpl!HSTSEnforcer
       Create object from builder.
       Returns: New object
   */
-  HSTSEnforcerDB build()
+  HSTSEnforcerDB build() nothrow
   {
     return new HSTSEnforcerDB(cast(void*)createGObject(HSTSEnforcerDB._getGType), Yes.Take);
   }

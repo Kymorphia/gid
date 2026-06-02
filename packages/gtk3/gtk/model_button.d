@@ -124,26 +124,26 @@ class ModelButton : gtk.button.Button
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_model_button_get_type != &gidSymbolNotFound ? gtk_model_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ModelButton self()
+  override ModelButton self() nothrow
   {
     return this;
   }
@@ -152,7 +152,7 @@ class ModelButton : gtk.button.Button
       Get builder for [gtk.model_button.ModelButton]
       Returns: New builder object
   */
-  static ModelButtonGidBuilder builder()
+  static ModelButtonGidBuilder builder() nothrow
   {
     return new ModelButtonGidBuilder;
   }
@@ -162,7 +162,7 @@ class ModelButton : gtk.button.Button
       Returns: The state of the button. This is reflecting the state of the associated
         #GAction.
   */
-  @property bool active()
+  @property bool active() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("active");
   }
@@ -173,7 +173,7 @@ class ModelButton : gtk.button.Button
         propval = The state of the button. This is reflecting the state of the associated
           #GAction.
   */
-  @property void active(bool propval)
+  @property void active(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("active", propval);
   }
@@ -183,7 +183,7 @@ class ModelButton : gtk.button.Button
       Returns: Whether to render the button contents centered instead of left-aligned.
         This property should be set for title-like items.
   */
-  @property bool centered()
+  @property bool centered() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("centered");
   }
@@ -194,7 +194,7 @@ class ModelButton : gtk.button.Button
         propval = Whether to render the button contents centered instead of left-aligned.
           This property should be set for title-like items.
   */
-  @property void centered(bool propval)
+  @property void centered(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("centered", propval);
   }
@@ -204,7 +204,7 @@ class ModelButton : gtk.button.Button
       Returns: A #GIcon that will be used if iconic appearance for the button is
         desired.
   */
-  @property gio.icon.Icon icon()
+  @property gio.icon.Icon icon() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.icon.Icon)("icon");
   }
@@ -215,7 +215,7 @@ class ModelButton : gtk.button.Button
         propval = A #GIcon that will be used if iconic appearance for the button is
           desired.
   */
-  @property void icon(gio.icon.Icon propval)
+  @property void icon(gio.icon.Icon propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gio.icon.Icon)("icon", propval);
   }
@@ -226,7 +226,7 @@ class ModelButton : gtk.button.Button
         If no icon is set, the text will be used. This is typically used for
         horizontal sections of linked buttons.
   */
-  @property bool iconic()
+  @property bool iconic() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("iconic");
   }
@@ -238,7 +238,7 @@ class ModelButton : gtk.button.Button
           If no icon is set, the text will be used. This is typically used for
           horizontal sections of linked buttons.
   */
-  @property void iconic(bool propval)
+  @property void iconic(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("iconic", propval);
   }
@@ -249,7 +249,7 @@ class ModelButton : gtk.button.Button
         This property should be set for model buttons that 'go back' to a parent
         menu.
   */
-  @property bool inverted()
+  @property bool inverted() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("inverted");
   }
@@ -261,7 +261,7 @@ class ModelButton : gtk.button.Button
           This property should be set for model buttons that 'go back' to a parent
           menu.
   */
-  @property void inverted(bool propval)
+  @property void inverted(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("inverted", propval);
   }
@@ -271,7 +271,7 @@ class ModelButton : gtk.button.Button
       Returns: The name of a submenu to open when the button is activated.
         If this is set, the button should not have an action associated with it.
   */
-  @property string menuName()
+  @property string menuName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("menu-name");
   }
@@ -282,7 +282,7 @@ class ModelButton : gtk.button.Button
         propval = The name of a submenu to open when the button is activated.
           If this is set, the button should not have an action associated with it.
   */
-  @property void menuName(string propval)
+  @property void menuName(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("menu-name", propval);
   }
@@ -293,7 +293,7 @@ class ModelButton : gtk.button.Button
         When #GtkActionable:action-name is set, the role will be determined
         from the action and does not have to be set explicitly.
   */
-  @property gtk.types.ButtonRole role()
+  @property gtk.types.ButtonRole role() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.ButtonRole)("role");
   }
@@ -305,7 +305,7 @@ class ModelButton : gtk.button.Button
           When #GtkActionable:action-name is set, the role will be determined
           from the action and does not have to be set explicitly.
   */
-  @property void role(gtk.types.ButtonRole propval)
+  @property void role(gtk.types.ButtonRole propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.ButtonRole)("role", propval);
   }
@@ -314,7 +314,7 @@ class ModelButton : gtk.button.Button
       Get `text` property.
       Returns: The label for the button.
   */
-  @property string text()
+  @property string text() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("text");
   }
@@ -324,7 +324,7 @@ class ModelButton : gtk.button.Button
       Params:
         propval = The label for the button.
   */
-  @property void text(string propval)
+  @property void text(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("text", propval);
   }
@@ -335,7 +335,7 @@ class ModelButton : gtk.button.Button
         [pango.global.parseMarkup] to format the enclosed spans of text. If false, the
         text will be displayed verbatim.
   */
-  @property bool useMarkup()
+  @property bool useMarkup() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("use-markup");
   }
@@ -347,7 +347,7 @@ class ModelButton : gtk.button.Button
           [pango.global.parseMarkup] to format the enclosed spans of text. If false, the
           text will be displayed verbatim.
   */
-  @property void useMarkup(bool propval)
+  @property void useMarkup(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("use-markup", propval);
   }
@@ -356,7 +356,7 @@ class ModelButton : gtk.button.Button
       Creates a new GtkModelButton.
       Returns: the newly created #GtkModelButton widget
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_model_button_new();
@@ -376,7 +376,7 @@ class ModelButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
           #GAction.
       Returns: Builder instance for fluent chaining
   */
-  T active(bool propval)
+  T active(bool propval) nothrow
   {
     return setProperty("active", propval);
   }
@@ -388,7 +388,7 @@ class ModelButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
           This property should be set for title-like items.
       Returns: Builder instance for fluent chaining
   */
-  T centered(bool propval)
+  T centered(bool propval) nothrow
   {
     return setProperty("centered", propval);
   }
@@ -400,7 +400,7 @@ class ModelButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
           desired.
       Returns: Builder instance for fluent chaining
   */
-  T icon(gio.icon.Icon propval)
+  T icon(gio.icon.Icon propval) nothrow
   {
     return setProperty("icon", propval);
   }
@@ -413,7 +413,7 @@ class ModelButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
           horizontal sections of linked buttons.
       Returns: Builder instance for fluent chaining
   */
-  T iconic(bool propval)
+  T iconic(bool propval) nothrow
   {
     return setProperty("iconic", propval);
   }
@@ -426,7 +426,7 @@ class ModelButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
           menu.
       Returns: Builder instance for fluent chaining
   */
-  T inverted(bool propval)
+  T inverted(bool propval) nothrow
   {
     return setProperty("inverted", propval);
   }
@@ -438,7 +438,7 @@ class ModelButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
           If this is set, the button should not have an action associated with it.
       Returns: Builder instance for fluent chaining
   */
-  T menuName(string propval)
+  T menuName(string propval) nothrow
   {
     return setProperty("menu-name", propval);
   }
@@ -451,7 +451,7 @@ class ModelButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
           from the action and does not have to be set explicitly.
       Returns: Builder instance for fluent chaining
   */
-  T role(gtk.types.ButtonRole propval)
+  T role(gtk.types.ButtonRole propval) nothrow
   {
     return setProperty("role", propval);
   }
@@ -462,7 +462,7 @@ class ModelButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
         propval = The label for the button.
       Returns: Builder instance for fluent chaining
   */
-  T text(string propval)
+  T text(string propval) nothrow
   {
     return setProperty("text", propval);
   }
@@ -475,7 +475,7 @@ class ModelButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
           text will be displayed verbatim.
       Returns: Builder instance for fluent chaining
   */
-  T useMarkup(bool propval)
+  T useMarkup(bool propval) nothrow
   {
     return setProperty("use-markup", propval);
   }
@@ -488,7 +488,7 @@ final class ModelButtonGidBuilder : ModelButtonGidBuilderImpl!ModelButtonGidBuil
       Create object from builder.
       Returns: New object
   */
-  ModelButton build()
+  ModelButton build() nothrow
   {
     return new ModelButton(cast(void*)createGObject(ModelButton._getGType), No.Take);
   }

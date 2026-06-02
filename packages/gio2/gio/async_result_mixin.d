@@ -106,7 +106,7 @@ template AsyncResultT()
       Returns: a new reference to the source
            object for the res, or null if there is none.
   */
-  override gobject.object.ObjectWrap getSourceObject()
+  override gobject.object.ObjectWrap getSourceObject() nothrow
   {
     GObject* _cretval;
     _cretval = g_async_result_get_source_object(cast(GAsyncResult*)this._cPtr);
@@ -118,7 +118,7 @@ template AsyncResultT()
       Gets the user data from a #GAsyncResult.
       Returns: the user data for res.
   */
-  override void* getUserData()
+  override void* getUserData() nothrow
   {
     auto _retval = g_async_result_get_user_data(cast(GAsyncResult*)this._cPtr);
     return _retval;
@@ -133,7 +133,7 @@ template AsyncResultT()
       Returns: true if res has the indicated source_tag, false if
           not.
   */
-  override bool isTagged(void* sourceTag = null)
+  override bool isTagged(void* sourceTag = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_async_result_is_tagged(cast(GAsyncResult*)this._cPtr, sourceTag);

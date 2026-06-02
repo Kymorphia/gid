@@ -23,26 +23,26 @@ class RTPBasePayload : gst.element.Element
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_rtp_base_payload_get_type != &gidSymbolNotFound ? gst_rtp_base_payload_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RTPBasePayload self()
+  override RTPBasePayload self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class RTPBasePayload : gst.element.Element
       Get builder for [gstrtp.rtpbase_payload.RTPBasePayload]
       Returns: New builder object
   */
-  static RTPBasePayloadGidBuilder builder()
+  static RTPBasePayloadGidBuilder builder() nothrow
   {
     return new RTPBasePayloadGidBuilder;
   }
@@ -63,7 +63,7 @@ class RTPBasePayload : gst.element.Element
         the need to handle these extensions manually using the
         GstRTPBasePayload::request-extension: signal.
   */
-  @property bool autoHeaderExtension()
+  @property bool autoHeaderExtension() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("auto-header-extension");
   }
@@ -76,19 +76,19 @@ class RTPBasePayload : gst.element.Element
           the need to handle these extensions manually using the
           GstRTPBasePayload::request-extension: signal.
   */
-  @property void autoHeaderExtension(bool propval)
+  @property void autoHeaderExtension(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("auto-header-extension", propval);
   }
 
   /** */
-  @property long maxPtime()
+  @property long maxPtime() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("max-ptime");
   }
 
   /** */
-  @property void maxPtime(long propval)
+  @property void maxPtime(long propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(long)("max-ptime", propval);
   }
@@ -97,7 +97,7 @@ class RTPBasePayload : gst.element.Element
       Get `minPtime` property.
       Returns: Minimum duration of the packet data in ns (can't go above MTU)
   */
-  @property long minPtime()
+  @property long minPtime() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("min-ptime");
   }
@@ -107,19 +107,19 @@ class RTPBasePayload : gst.element.Element
       Params:
         propval = Minimum duration of the packet data in ns (can't go above MTU)
   */
-  @property void minPtime(long propval)
+  @property void minPtime(long propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(long)("min-ptime", propval);
   }
 
   /** */
-  @property uint mtu()
+  @property uint mtu() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("mtu");
   }
 
   /** */
-  @property void mtu(uint propval)
+  @property void mtu(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("mtu", propval);
   }
@@ -129,7 +129,7 @@ class RTPBasePayload : gst.element.Element
       Returns: Make the payloader timestamp packets according to the Rate-Control=no
         behaviour specified in the ONVIF replay spec.
   */
-  @property bool onvifNoRateControl()
+  @property bool onvifNoRateControl() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("onvif-no-rate-control");
   }
@@ -140,7 +140,7 @@ class RTPBasePayload : gst.element.Element
         propval = Make the payloader timestamp packets according to the Rate-Control=no
           behaviour specified in the ONVIF replay spec.
   */
-  @property void onvifNoRateControl(bool propval)
+  @property void onvifNoRateControl(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("onvif-no-rate-control", propval);
   }
@@ -163,7 +163,7 @@ class RTPBasePayload : gst.element.Element
         buffer. Currently GstRTPBasePayload is limited to handling perfect RTP
         timestamps for audio streams.
   */
-  @property bool perfectRtptime()
+  @property bool perfectRtptime() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("perfect-rtptime");
   }
@@ -187,19 +187,19 @@ class RTPBasePayload : gst.element.Element
           buffer. Currently GstRTPBasePayload is limited to handling perfect RTP
           timestamps for audio streams.
   */
-  @property void perfectRtptime(bool propval)
+  @property void perfectRtptime(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("perfect-rtptime", propval);
   }
 
   /** */
-  @property uint pt()
+  @property uint pt() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("pt");
   }
 
   /** */
-  @property void pt(uint propval)
+  @property void pt(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("pt", propval);
   }
@@ -208,7 +208,7 @@ class RTPBasePayload : gst.element.Element
       Get `ptimeMultiple` property.
       Returns: Force buffers to be multiples of this duration in ns (0 disables)
   */
-  @property long ptimeMultiple()
+  @property long ptimeMultiple() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("ptime-multiple");
   }
@@ -218,7 +218,7 @@ class RTPBasePayload : gst.element.Element
       Params:
         propval = Force buffers to be multiples of this duration in ns (0 disables)
   */
-  @property void ptimeMultiple(long propval)
+  @property void ptimeMultiple(long propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(long)("ptime-multiple", propval);
   }
@@ -234,7 +234,7 @@ class RTPBasePayload : gst.element.Element
         video. This is achieved by the client setting RTSP Speed to 2 while the
         server has this property disabled.
   */
-  @property bool scaleRtptime()
+  @property bool scaleRtptime() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("scale-rtptime");
   }
@@ -251,25 +251,25 @@ class RTPBasePayload : gst.element.Element
           video. This is achieved by the client setting RTSP Speed to 2 while the
           server has this property disabled.
   */
-  @property void scaleRtptime(bool propval)
+  @property void scaleRtptime(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("scale-rtptime", propval);
   }
 
   /** */
-  @property uint seqnum()
+  @property uint seqnum() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("seqnum");
   }
 
   /** */
-  @property int seqnumOffset()
+  @property int seqnumOffset() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("seqnum-offset");
   }
 
   /** */
-  @property void seqnumOffset(int propval)
+  @property void seqnumOffset(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("seqnum-offset", propval);
   }
@@ -279,7 +279,7 @@ class RTPBasePayload : gst.element.Element
       Returns: Enable writing the CSRC field in allocated RTP header based on RTP source
         information found in the input buffer's #GstRTPSourceMeta.
   */
-  @property bool sourceInfo()
+  @property bool sourceInfo() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("source-info");
   }
@@ -290,19 +290,19 @@ class RTPBasePayload : gst.element.Element
         propval = Enable writing the CSRC field in allocated RTP header based on RTP source
           information found in the input buffer's #GstRTPSourceMeta.
   */
-  @property void sourceInfo(bool propval)
+  @property void sourceInfo(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("source-info", propval);
   }
 
   /** */
-  @property uint ssrc()
+  @property uint ssrc() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("ssrc");
   }
 
   /** */
-  @property void ssrc(uint propval)
+  @property void ssrc(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("ssrc", propval);
   }
@@ -324,25 +324,25 @@ class RTPBasePayload : gst.element.Element
           * `seqnum-offset` :#G_TYPE_UINT, The current offset added to the seqnum
           * `timestamp-offset` :#G_TYPE_UINT, The current offset added to the timestamp
   */
-  @property gst.structure.Structure stats()
+  @property gst.structure.Structure stats() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gst.structure.Structure)("stats");
   }
 
   /** */
-  @property uint timestamp()
+  @property uint timestamp() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("timestamp");
   }
 
   /** */
-  @property uint timestampOffset()
+  @property uint timestampOffset() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("timestamp-offset");
   }
 
   /** */
-  @property void timestampOffset(uint propval)
+  @property void timestampOffset(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("timestamp-offset", propval);
   }
@@ -360,7 +360,7 @@ class RTPBasePayload : gst.element.Element
       Returns: A newly allocated buffer that can hold an RTP packet with given
         parameters.
   */
-  gst.buffer.Buffer allocateOutputBuffer(uint payloadLen, ubyte padLen, ubyte csrcCount)
+  gst.buffer.Buffer allocateOutputBuffer(uint payloadLen, ubyte padLen, ubyte csrcCount) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_rtp_base_payload_allocate_output_buffer(cast(GstRTPBasePayload*)this._cPtr, payloadLen, padLen, csrcCount);
@@ -377,7 +377,7 @@ class RTPBasePayload : gst.element.Element
         buffer = a #GstBuffer, typically the buffer to payload
       Returns: The number of sources.
   */
-  uint getSourceCount(gst.buffer.Buffer buffer)
+  uint getSourceCount(gst.buffer.Buffer buffer) nothrow
   {
     uint _retval;
     _retval = gst_rtp_base_payload_get_source_count(cast(GstRTPBasePayload*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
@@ -394,7 +394,7 @@ class RTPBasePayload : gst.element.Element
       Returns: true if the packet of size and duration would exceed the
         configured MTU or max_ptime.
   */
-  bool isFilled(uint size, gst.types.ClockTime duration)
+  bool isFilled(uint size, gst.types.ClockTime duration) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtp_base_payload_is_filled(cast(GstRTPBasePayload*)this._cPtr, size, duration);
@@ -406,7 +406,7 @@ class RTPBasePayload : gst.element.Element
       RTP header from #GstRTPSourceMeta.
       Returns: true if source-info is enabled.
   */
-  bool isSourceInfoEnabled()
+  bool isSourceInfoEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtp_base_payload_is_source_info_enabled(cast(GstRTPBasePayload*)this._cPtr);
@@ -423,7 +423,7 @@ class RTPBasePayload : gst.element.Element
         buffer = a #GstBuffer
       Returns: a #GstFlowReturn.
   */
-  gst.types.FlowReturn push(gst.buffer.Buffer buffer)
+  gst.types.FlowReturn push(gst.buffer.Buffer buffer) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_rtp_base_payload_push(cast(GstRTPBasePayload*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null);
@@ -441,7 +441,7 @@ class RTPBasePayload : gst.element.Element
         list = a #GstBufferList
       Returns: a #GstFlowReturn.
   */
-  gst.types.FlowReturn pushList(gst.buffer_list.BufferList list)
+  gst.types.FlowReturn pushList(gst.buffer_list.BufferList list) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_rtp_base_payload_push_list(cast(GstRTPBasePayload*)this._cPtr, list ? cast(GstBufferList*)list._cPtr(Yes.Dup) : null);
@@ -460,7 +460,7 @@ class RTPBasePayload : gst.element.Element
         encodingName = the encoding name
         clockRate = the clock rate of the media
   */
-  void setOptions(string media, bool dynamic, string encodingName, uint clockRate)
+  void setOptions(string media, bool dynamic, string encodingName, uint clockRate) nothrow
   {
     const(char)* _media = media.toCString(No.Alloc);
     const(char)* _encodingName = encodingName.toCString(No.Alloc);
@@ -474,7 +474,7 @@ class RTPBasePayload : gst.element.Element
         s = a #GstStructure with the caps fields
       Returns: true if the caps could be set.
   */
-  bool setOutcapsStructure(gst.structure.Structure s = null)
+  bool setOutcapsStructure(gst.structure.Structure s = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtp_base_payload_set_outcaps_structure(cast(GstRTPBasePayload*)this._cPtr, s ? cast(GstStructure*)s._cPtr(No.Dup) : null);
@@ -488,7 +488,7 @@ class RTPBasePayload : gst.element.Element
       Params:
         enable = whether to add contributing sources to RTP packets
   */
-  void setSourceInfoEnabled(bool enable)
+  void setSourceInfoEnabled(bool enable) nothrow
   {
     gst_rtp_base_payload_set_source_info_enabled(cast(GstRTPBasePayload*)this._cPtr, enable);
   }
@@ -511,14 +511,14 @@ class RTPBasePayload : gst.element.Element
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAddExtension(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAddExtension(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstrtp.rtpheader_extension.RTPHeaderExtension)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstrtp.rtpbase_payload.RTPBasePayload)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -530,7 +530,14 @@ class RTPBasePayload : gst.element.Element
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstrtp.rtpbase_payload.RTPBasePayload.addExtension");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -552,13 +559,13 @@ class RTPBasePayload : gst.element.Element
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClearExtensions(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClearExtensions(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstrtp.rtpbase_payload.RTPBasePayload)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -567,7 +574,14 @@ class RTPBasePayload : gst.element.Element
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstrtp.rtpbase_payload.RTPBasePayload.clearExtensions");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -595,7 +609,7 @@ class RTPBasePayload : gst.element.Element
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRequestExtension(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRequestExtension(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T : gstrtp.rtpheader_extension.RTPHeaderExtension)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -603,11 +617,12 @@ class RTPBasePayload : gst.element.Element
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gstrtp.rtpbase_payload.RTPBasePayload)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gstrtp.rtpheader_extension.RTPHeaderExtension _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -618,7 +633,14 @@ class RTPBasePayload : gst.element.Element
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstrtp.rtpbase_payload.RTPBasePayload.requestExtension");
+      }
 
       setVal!(gstrtp.rtpheader_extension.RTPHeaderExtension)(_returnValue, _retval);
     }
@@ -641,13 +663,13 @@ class RTPBasePayloadGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           GstRTPBasePayload::request-extension: signal.
       Returns: Builder instance for fluent chaining
   */
-  T autoHeaderExtension(bool propval)
+  T autoHeaderExtension(bool propval) nothrow
   {
     return setProperty("auto-header-extension", propval);
   }
 
   /** */
-  T maxPtime(long propval)
+  T maxPtime(long propval) nothrow
   {
     return setProperty("max-ptime", propval);
   }
@@ -658,13 +680,13 @@ class RTPBasePayloadGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
         propval = Minimum duration of the packet data in ns (can't go above MTU)
       Returns: Builder instance for fluent chaining
   */
-  T minPtime(long propval)
+  T minPtime(long propval) nothrow
   {
     return setProperty("min-ptime", propval);
   }
 
   /** */
-  T mtu(uint propval)
+  T mtu(uint propval) nothrow
   {
     return setProperty("mtu", propval);
   }
@@ -676,7 +698,7 @@ class RTPBasePayloadGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           behaviour specified in the ONVIF replay spec.
       Returns: Builder instance for fluent chaining
   */
-  T onvifNoRateControl(bool propval)
+  T onvifNoRateControl(bool propval) nothrow
   {
     return setProperty("onvif-no-rate-control", propval);
   }
@@ -701,13 +723,13 @@ class RTPBasePayloadGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           timestamps for audio streams.
       Returns: Builder instance for fluent chaining
   */
-  T perfectRtptime(bool propval)
+  T perfectRtptime(bool propval) nothrow
   {
     return setProperty("perfect-rtptime", propval);
   }
 
   /** */
-  T pt(uint propval)
+  T pt(uint propval) nothrow
   {
     return setProperty("pt", propval);
   }
@@ -718,7 +740,7 @@ class RTPBasePayloadGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
         propval = Force buffers to be multiples of this duration in ns (0 disables)
       Returns: Builder instance for fluent chaining
   */
-  T ptimeMultiple(long propval)
+  T ptimeMultiple(long propval) nothrow
   {
     return setProperty("ptime-multiple", propval);
   }
@@ -736,13 +758,13 @@ class RTPBasePayloadGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           server has this property disabled.
       Returns: Builder instance for fluent chaining
   */
-  T scaleRtptime(bool propval)
+  T scaleRtptime(bool propval) nothrow
   {
     return setProperty("scale-rtptime", propval);
   }
 
   /** */
-  T seqnumOffset(int propval)
+  T seqnumOffset(int propval) nothrow
   {
     return setProperty("seqnum-offset", propval);
   }
@@ -754,19 +776,19 @@ class RTPBasePayloadGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           information found in the input buffer's #GstRTPSourceMeta.
       Returns: Builder instance for fluent chaining
   */
-  T sourceInfo(bool propval)
+  T sourceInfo(bool propval) nothrow
   {
     return setProperty("source-info", propval);
   }
 
   /** */
-  T ssrc(uint propval)
+  T ssrc(uint propval) nothrow
   {
     return setProperty("ssrc", propval);
   }
 
   /** */
-  T timestampOffset(uint propval)
+  T timestampOffset(uint propval) nothrow
   {
     return setProperty("timestamp-offset", propval);
   }
@@ -779,7 +801,7 @@ final class RTPBasePayloadGidBuilder : RTPBasePayloadGidBuilderImpl!RTPBasePaylo
       Create object from builder.
       Returns: New object
   */
-  RTPBasePayload build()
+  RTPBasePayload build() nothrow
   {
     return new RTPBasePayload(cast(void*)createGObject(RTPBasePayload._getGType), No.Take);
   }

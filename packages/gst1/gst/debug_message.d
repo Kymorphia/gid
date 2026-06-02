@@ -14,18 +14,15 @@ class DebugMessage
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gst.debug_message.DebugMessage");
-
     _cInstancePtr = cast(GstDebugMessage*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -35,7 +32,7 @@ class DebugMessage
       in debug handlers to extract the message.
       Returns: the string representation of a #GstDebugMessage.
   */
-  string get()
+  string get() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_debug_message_get(cast(GstDebugMessage*)this._cPtr);
@@ -48,7 +45,7 @@ class DebugMessage
       debug handlers. Can be empty.
       Returns: The emitter of a #GstDebugMessage.
   */
-  string getId()
+  string getId() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_debug_message_get_id(cast(GstDebugMessage*)this._cPtr);

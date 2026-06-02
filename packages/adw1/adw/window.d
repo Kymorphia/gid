@@ -106,26 +106,26 @@ class Window : gtk.window.Window
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_window_get_type != &gidSymbolNotFound ? adw_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Window self()
+  override Window self() nothrow
   {
     return this;
   }
@@ -134,7 +134,7 @@ class Window : gtk.window.Window
       Get builder for [adw.window.Window]
       Returns: New builder object
   */
-  static WindowGidBuilder builder()
+  static WindowGidBuilder builder() nothrow
   {
     return new WindowGidBuilder;
   }
@@ -145,7 +145,7 @@ class Window : gtk.window.Window
         
         This property should always be used instead of [gtk.window.Window.child].
   */
-  @property gtk.widget.Widget content()
+  @property gtk.widget.Widget content() nothrow
   {
     return getContent();
   }
@@ -157,7 +157,7 @@ class Window : gtk.window.Window
           
           This property should always be used instead of [gtk.window.Window.child].
   */
-  @property void content(gtk.widget.Widget propval)
+  @property void content(gtk.widget.Widget propval) nothrow
   {
     setContent(propval);
   }
@@ -166,7 +166,7 @@ class Window : gtk.window.Window
       Get `currentBreakpoint` property.
       Returns: The current breakpoint.
   */
-  @property adw.breakpoint.Breakpoint currentBreakpoint()
+  @property adw.breakpoint.Breakpoint currentBreakpoint() nothrow
   {
     return getCurrentBreakpoint();
   }
@@ -175,7 +175,7 @@ class Window : gtk.window.Window
       Get `dialogs` property.
       Returns: The open dialogs.
   */
-  @property gio.list_model.ListModel dialogs()
+  @property gio.list_model.ListModel dialogs() nothrow
   {
     return getDialogs();
   }
@@ -184,7 +184,7 @@ class Window : gtk.window.Window
       Get `visibleDialog` property.
       Returns: The currently visible dialog
   */
-  @property adw.dialog.Dialog visibleDialog()
+  @property adw.dialog.Dialog visibleDialog() nothrow
   {
     return getVisibleDialog();
   }
@@ -193,7 +193,7 @@ class Window : gtk.window.Window
       Creates a new [adw.window.Window].
       Returns: the newly created [adw.window.Window]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_window_new();
@@ -206,7 +206,7 @@ class Window : gtk.window.Window
       Params:
         breakpoint = the breakpoint to add
   */
-  void addBreakpoint(adw.breakpoint.Breakpoint breakpoint)
+  void addBreakpoint(adw.breakpoint.Breakpoint breakpoint) nothrow
   {
     adw_window_add_breakpoint(cast(AdwWindow*)this._cPtr, breakpoint ? cast(AdwBreakpoint*)breakpoint._cPtr(Yes.Dup) : null);
   }
@@ -217,7 +217,7 @@ class Window : gtk.window.Window
       This method should always be used instead of [gtk.window.Window.getChild].
       Returns: the content widget of self
   */
-  gtk.widget.Widget getContent()
+  gtk.widget.Widget getContent() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_window_get_content(cast(AdwWindow*)this._cPtr);
@@ -229,7 +229,7 @@ class Window : gtk.window.Window
       Gets the current breakpoint.
       Returns: the current breakpoint
   */
-  adw.breakpoint.Breakpoint getCurrentBreakpoint()
+  adw.breakpoint.Breakpoint getCurrentBreakpoint() nothrow
   {
     AdwBreakpoint* _cretval;
     _cretval = adw_window_get_current_breakpoint(cast(AdwWindow*)this._cPtr);
@@ -243,7 +243,7 @@ class Window : gtk.window.Window
       This can be used to keep an up-to-date view.
       Returns: a list model for the dialogs of self
   */
-  gio.list_model.ListModel getDialogs()
+  gio.list_model.ListModel getDialogs() nothrow
   {
     GListModel* _cretval;
     _cretval = adw_window_get_dialogs(cast(AdwWindow*)this._cPtr);
@@ -255,7 +255,7 @@ class Window : gtk.window.Window
       Returns the currently visible dialog in self, if there's one.
       Returns: the visible dialog
   */
-  adw.dialog.Dialog getVisibleDialog()
+  adw.dialog.Dialog getVisibleDialog() nothrow
   {
     AdwDialog* _cretval;
     _cretval = adw_window_get_visible_dialog(cast(AdwWindow*)this._cPtr);
@@ -271,7 +271,7 @@ class Window : gtk.window.Window
       Params:
         content = the content widget
   */
-  void setContent(gtk.widget.Widget content = null)
+  void setContent(gtk.widget.Widget content = null) nothrow
   {
     adw_window_set_content(cast(AdwWindow*)this._cPtr, content ? cast(GtkWidget*)content._cPtr(No.Dup) : null);
   }
@@ -290,7 +290,7 @@ class WindowGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           This property should always be used instead of [gtk.window.Window.child].
       Returns: Builder instance for fluent chaining
   */
-  T content(gtk.widget.Widget propval)
+  T content(gtk.widget.Widget propval) nothrow
   {
     return setProperty("content", propval);
   }
@@ -303,7 +303,7 @@ final class WindowGidBuilder : WindowGidBuilderImpl!WindowGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Window build()
+  Window build() nothrow
   {
     return new Window(cast(void*)createGObject(Window._getGType), No.Take);
   }

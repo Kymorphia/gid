@@ -15,26 +15,26 @@ class StructScalar : arrow.scalar.Scalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_struct_scalar_get_type != &gidSymbolNotFound ? garrow_struct_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StructScalar self()
+  override StructScalar self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class StructScalar : arrow.scalar.Scalar
       Get builder for [arrow.struct_scalar.StructScalar]
       Returns: New builder object
   */
-  static StructScalarGidBuilder builder()
+  static StructScalarGidBuilder builder() nothrow
   {
     return new StructScalarGidBuilder;
   }
 
   /** */
-  this(arrow.struct_data_type.StructDataType dataType, arrow.scalar.Scalar[] value)
+  this(arrow.struct_data_type.StructDataType dataType, arrow.scalar.Scalar[] value) nothrow
   {
     GArrowStructScalar* _cretval;
     auto _value = gListFromD!(arrow.scalar.Scalar)(value);
@@ -59,7 +59,7 @@ class StructScalar : arrow.scalar.Scalar
   }
 
   /** */
-  arrow.scalar.Scalar[] getValue()
+  arrow.scalar.Scalar[] getValue() nothrow
   {
     GList* _cretval;
     _cretval = garrow_struct_scalar_get_value(cast(GArrowStructScalar*)this._cPtr);
@@ -80,7 +80,7 @@ final class StructScalarGidBuilder : StructScalarGidBuilderImpl!StructScalarGidB
       Create object from builder.
       Returns: New object
   */
-  StructScalar build()
+  StructScalar build() nothrow
   {
     return new StructScalar(cast(void*)createGObject(StructScalar._getGType), Yes.Take);
   }

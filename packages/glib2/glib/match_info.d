@@ -18,32 +18,32 @@ class MatchInfo : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_match_info_get_type != &gidSymbolNotFound ? g_match_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MatchInfo self()
+  override MatchInfo self() nothrow
   {
     return this;
   }
@@ -107,7 +107,7 @@ class MatchInfo : gobject.boxed.Boxed
       Returns: The matched substring, or null if an error
             occurred. You have to free the string yourself
   */
-  string fetch(int matchNum)
+  string fetch(int matchNum) nothrow
   {
     char* _cretval;
     _cretval = g_match_info_fetch(cast(const(GMatchInfo)*)this._cPtr, matchNum);
@@ -136,7 +136,7 @@ class MatchInfo : gobject.boxed.Boxed
             pointers.  It must be freed using [glib.global.strfreev]. If the previous
             match failed null is returned
   */
-  string[] fetchAll()
+  string[] fetchAll() nothrow
   {
     char** _cretval;
     _cretval = g_match_info_fetch_all(cast(const(GMatchInfo)*)this._cPtr);
@@ -170,7 +170,7 @@ class MatchInfo : gobject.boxed.Boxed
       Returns: The matched substring, or null if an error
             occurred. You have to free the string yourself
   */
-  string fetchNamed(string name)
+  string fetchNamed(string name) nothrow
   {
     char* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -196,7 +196,7 @@ class MatchInfo : gobject.boxed.Boxed
             If the position cannot be fetched, start_pos and end_pos
             are left unchanged.
   */
-  bool fetchNamedPos(string name, out int startPos, out int endPos)
+  bool fetchNamedPos(string name, out int startPos, out int endPos) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -229,7 +229,7 @@ class MatchInfo : gobject.boxed.Boxed
           the position cannot be fetched, start_pos and end_pos are left
           unchanged
   */
-  bool fetchPos(int matchNum, out int startPos, out int endPos)
+  bool fetchPos(int matchNum, out int startPos, out int endPos) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_match_info_fetch_pos(cast(const(GMatchInfo)*)this._cPtr, matchNum, cast(int*)&startPos, cast(int*)&endPos);
@@ -247,7 +247,7 @@ class MatchInfo : gobject.boxed.Boxed
       the number of matched substrings.
       Returns: Number of matched substrings, or -1 if an error occurred
   */
-  int getMatchCount()
+  int getMatchCount() nothrow
   {
     int _retval;
     _retval = g_match_info_get_match_count(cast(const(GMatchInfo)*)this._cPtr);
@@ -260,7 +260,7 @@ class MatchInfo : gobject.boxed.Boxed
       after you free match_info object.
       Returns: #GRegex object used in match_info
   */
-  glib.regex.Regex getRegex()
+  glib.regex.Regex getRegex() nothrow
   {
     GRegex* _cretval;
     _cretval = g_match_info_get_regex(cast(const(GMatchInfo)*)this._cPtr);
@@ -274,7 +274,7 @@ class MatchInfo : gobject.boxed.Boxed
       you may not free it before calling this function.
       Returns: the string searched with match_info
   */
-  string getString()
+  string getString() nothrow
   {
     const(char)* _cretval;
     _cretval = g_match_info_get_string(cast(const(GMatchInfo)*)this._cPtr);
@@ -318,7 +318,7 @@ class MatchInfo : gobject.boxed.Boxed
       See pcrepartial(3) for more information on partial matching.
       Returns: true if the match was partial, false otherwise
   */
-  bool isPartialMatch()
+  bool isPartialMatch() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_match_info_is_partial_match(cast(const(GMatchInfo)*)this._cPtr);
@@ -330,7 +330,7 @@ class MatchInfo : gobject.boxed.Boxed
       Returns: true if the previous match operation succeeded,
           false otherwise
   */
-  bool matches()
+  bool matches() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_match_info_matches(cast(const(GMatchInfo)*)this._cPtr);

@@ -33,26 +33,26 @@ class TimedAnimation : adw.animation.Animation
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_timed_animation_get_type != &gidSymbolNotFound ? adw_timed_animation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TimedAnimation self()
+  override TimedAnimation self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class TimedAnimation : adw.animation.Animation
       Get builder for [adw.timed_animation.TimedAnimation]
       Returns: New builder object
   */
-  static TimedAnimationGidBuilder builder()
+  static TimedAnimationGidBuilder builder() nothrow
   {
     return new TimedAnimationGidBuilder;
   }
@@ -70,7 +70,7 @@ class TimedAnimation : adw.animation.Animation
       Get `alternate` property.
       Returns: Whether the animation changes direction on every iteration.
   */
-  @property bool alternate()
+  @property bool alternate() nothrow
   {
     return getAlternate();
   }
@@ -80,7 +80,7 @@ class TimedAnimation : adw.animation.Animation
       Params:
         propval = Whether the animation changes direction on every iteration.
   */
-  @property void alternate(bool propval)
+  @property void alternate(bool propval) nothrow
   {
     setAlternate(propval);
   }
@@ -94,7 +94,7 @@ class TimedAnimation : adw.animation.Animation
         If the animation repeats more than once, describes the duration of one
         iteration.
   */
-  @property uint duration()
+  @property uint duration() nothrow
   {
     return getDuration();
   }
@@ -109,7 +109,7 @@ class TimedAnimation : adw.animation.Animation
           If the animation repeats more than once, describes the duration of one
           iteration.
   */
-  @property void duration(uint propval)
+  @property void duration(uint propval) nothrow
   {
     setDuration(propval);
   }
@@ -122,7 +122,7 @@ class TimedAnimation : adw.animation.Animation
         
         See [adw.types.Easing] for the description of specific easing functions.
   */
-  @property adw.types.Easing easing()
+  @property adw.types.Easing easing() nothrow
   {
     return getEasing();
   }
@@ -136,7 +136,7 @@ class TimedAnimation : adw.animation.Animation
           
           See [adw.types.Easing] for the description of specific easing functions.
   */
-  @property void easing(adw.types.Easing propval)
+  @property void easing(adw.types.Easing propval) nothrow
   {
     setEasing(propval);
   }
@@ -147,7 +147,7 @@ class TimedAnimation : adw.animation.Animation
         
         If set to 0, the animation will repeat endlessly.
   */
-  @property uint repeatCount()
+  @property uint repeatCount() nothrow
   {
     return getRepeatCount();
   }
@@ -159,7 +159,7 @@ class TimedAnimation : adw.animation.Animation
           
           If set to 0, the animation will repeat endlessly.
   */
-  @property void repeatCount(uint propval)
+  @property void repeatCount(uint propval) nothrow
   {
     setRepeatCount(propval);
   }
@@ -168,7 +168,7 @@ class TimedAnimation : adw.animation.Animation
       Get `reverse` property.
       Returns: Whether the animation plays backwards.
   */
-  @property bool reverse()
+  @property bool reverse() nothrow
   {
     return getReverse();
   }
@@ -178,7 +178,7 @@ class TimedAnimation : adw.animation.Animation
       Params:
         propval = Whether the animation plays backwards.
   */
-  @property void reverse(bool propval)
+  @property void reverse(bool propval) nothrow
   {
     setReverse(propval);
   }
@@ -193,7 +193,7 @@ class TimedAnimation : adw.animation.Animation
         If [adw.timed_animation.TimedAnimation.reverse] is `TRUE`, the animation will end at
         this value instead.
   */
-  @property double valueFrom()
+  @property double valueFrom() nothrow
   {
     return getValueFrom();
   }
@@ -209,7 +209,7 @@ class TimedAnimation : adw.animation.Animation
           If [adw.timed_animation.TimedAnimation.reverse] is `TRUE`, the animation will end at
           this value instead.
   */
-  @property void valueFrom(double propval)
+  @property void valueFrom(double propval) nothrow
   {
     setValueFrom(propval);
   }
@@ -224,7 +224,7 @@ class TimedAnimation : adw.animation.Animation
         If [adw.timed_animation.TimedAnimation.reverse] is `TRUE`, the animation will start
         at this value instead.
   */
-  @property double valueTo()
+  @property double valueTo() nothrow
   {
     return getValueTo();
   }
@@ -240,7 +240,7 @@ class TimedAnimation : adw.animation.Animation
           If [adw.timed_animation.TimedAnimation.reverse] is `TRUE`, the animation will start
           at this value instead.
   */
-  @property void valueTo(double propval)
+  @property void valueTo(double propval) nothrow
   {
     setValueTo(propval);
   }
@@ -257,7 +257,7 @@ class TimedAnimation : adw.animation.Animation
         target = a target value to animate
       Returns: the newly created animation
   */
-  this(gtk.widget.Widget widget, double from, double to, uint duration, adw.animation_target.AnimationTarget target)
+  this(gtk.widget.Widget widget, double from, double to, uint duration, adw.animation_target.AnimationTarget target) nothrow
   {
     AdwAnimation* _cretval;
     _cretval = adw_timed_animation_new(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, from, to, duration, target ? cast(AdwAnimationTarget*)target._cPtr(Yes.Dup) : null);
@@ -268,7 +268,7 @@ class TimedAnimation : adw.animation.Animation
       Gets whether self changes direction on every iteration.
       Returns: whether self alternates
   */
-  bool getAlternate()
+  bool getAlternate() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_timed_animation_get_alternate(cast(AdwTimedAnimation*)this._cPtr);
@@ -279,7 +279,7 @@ class TimedAnimation : adw.animation.Animation
       Gets the duration of self.
       Returns: the duration of self, in milliseconds
   */
-  uint getDuration()
+  uint getDuration() nothrow
   {
     uint _retval;
     _retval = adw_timed_animation_get_duration(cast(AdwTimedAnimation*)this._cPtr);
@@ -290,7 +290,7 @@ class TimedAnimation : adw.animation.Animation
       Gets the easing function self uses.
       Returns: the easing function self uses
   */
-  adw.types.Easing getEasing()
+  adw.types.Easing getEasing() nothrow
   {
     AdwEasing _cretval;
     _cretval = adw_timed_animation_get_easing(cast(AdwTimedAnimation*)this._cPtr);
@@ -302,7 +302,7 @@ class TimedAnimation : adw.animation.Animation
       Gets the number of times self will play.
       Returns: the number of times self will play
   */
-  uint getRepeatCount()
+  uint getRepeatCount() nothrow
   {
     uint _retval;
     _retval = adw_timed_animation_get_repeat_count(cast(AdwTimedAnimation*)this._cPtr);
@@ -313,7 +313,7 @@ class TimedAnimation : adw.animation.Animation
       Gets whether self plays backwards.
       Returns: whether self plays backwards
   */
-  bool getReverse()
+  bool getReverse() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_timed_animation_get_reverse(cast(AdwTimedAnimation*)this._cPtr);
@@ -324,7 +324,7 @@ class TimedAnimation : adw.animation.Animation
       Gets the value self will animate from.
       Returns: the value to animate from
   */
-  double getValueFrom()
+  double getValueFrom() nothrow
   {
     double _retval;
     _retval = adw_timed_animation_get_value_from(cast(AdwTimedAnimation*)this._cPtr);
@@ -335,7 +335,7 @@ class TimedAnimation : adw.animation.Animation
       Gets the value self will animate to.
       Returns: the value to animate to
   */
-  double getValueTo()
+  double getValueTo() nothrow
   {
     double _retval;
     _retval = adw_timed_animation_get_value_to(cast(AdwTimedAnimation*)this._cPtr);
@@ -348,7 +348,7 @@ class TimedAnimation : adw.animation.Animation
       Params:
         alternate = whether self alternates
   */
-  void setAlternate(bool alternate)
+  void setAlternate(bool alternate) nothrow
   {
     adw_timed_animation_set_alternate(cast(AdwTimedAnimation*)this._cPtr, alternate);
   }
@@ -361,7 +361,7 @@ class TimedAnimation : adw.animation.Animation
       Params:
         duration = the duration to use, in milliseconds
   */
-  void setDuration(uint duration)
+  void setDuration(uint duration) nothrow
   {
     adw_timed_animation_set_duration(cast(AdwTimedAnimation*)this._cPtr, duration);
   }
@@ -374,7 +374,7 @@ class TimedAnimation : adw.animation.Animation
       Params:
         easing = the easing function to use
   */
-  void setEasing(adw.types.Easing easing)
+  void setEasing(adw.types.Easing easing) nothrow
   {
     adw_timed_animation_set_easing(cast(AdwTimedAnimation*)this._cPtr, easing);
   }
@@ -387,7 +387,7 @@ class TimedAnimation : adw.animation.Animation
       Params:
         repeatCount = the number of times self will play
   */
-  void setRepeatCount(uint repeatCount)
+  void setRepeatCount(uint repeatCount) nothrow
   {
     adw_timed_animation_set_repeat_count(cast(AdwTimedAnimation*)this._cPtr, repeatCount);
   }
@@ -398,7 +398,7 @@ class TimedAnimation : adw.animation.Animation
       Params:
         reverse = whether self plays backwards
   */
-  void setReverse(bool reverse)
+  void setReverse(bool reverse) nothrow
   {
     adw_timed_animation_set_reverse(cast(AdwTimedAnimation*)this._cPtr, reverse);
   }
@@ -415,7 +415,7 @@ class TimedAnimation : adw.animation.Animation
       Params:
         value = the value to animate from
   */
-  void setValueFrom(double value)
+  void setValueFrom(double value) nothrow
   {
     adw_timed_animation_set_value_from(cast(AdwTimedAnimation*)this._cPtr, value);
   }
@@ -432,7 +432,7 @@ class TimedAnimation : adw.animation.Animation
       Params:
         value = the value to animate to
   */
-  void setValueTo(double value)
+  void setValueTo(double value) nothrow
   {
     adw_timed_animation_set_value_to(cast(AdwTimedAnimation*)this._cPtr, value);
   }
@@ -448,7 +448,7 @@ class TimedAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
         propval = Whether the animation changes direction on every iteration.
       Returns: Builder instance for fluent chaining
   */
-  T alternate(bool propval)
+  T alternate(bool propval) nothrow
   {
     return setProperty("alternate", propval);
   }
@@ -464,7 +464,7 @@ class TimedAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
           iteration.
       Returns: Builder instance for fluent chaining
   */
-  T duration(uint propval)
+  T duration(uint propval) nothrow
   {
     return setProperty("duration", propval);
   }
@@ -479,7 +479,7 @@ class TimedAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
           See [adw.types.Easing] for the description of specific easing functions.
       Returns: Builder instance for fluent chaining
   */
-  T easing(adw.types.Easing propval)
+  T easing(adw.types.Easing propval) nothrow
   {
     return setProperty("easing", propval);
   }
@@ -492,7 +492,7 @@ class TimedAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
           If set to 0, the animation will repeat endlessly.
       Returns: Builder instance for fluent chaining
   */
-  T repeatCount(uint propval)
+  T repeatCount(uint propval) nothrow
   {
     return setProperty("repeat-count", propval);
   }
@@ -503,7 +503,7 @@ class TimedAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
         propval = Whether the animation plays backwards.
       Returns: Builder instance for fluent chaining
   */
-  T reverse(bool propval)
+  T reverse(bool propval) nothrow
   {
     return setProperty("reverse", propval);
   }
@@ -520,7 +520,7 @@ class TimedAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
           this value instead.
       Returns: Builder instance for fluent chaining
   */
-  T valueFrom(double propval)
+  T valueFrom(double propval) nothrow
   {
     return setProperty("value-from", propval);
   }
@@ -537,7 +537,7 @@ class TimedAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
           at this value instead.
       Returns: Builder instance for fluent chaining
   */
-  T valueTo(double propval)
+  T valueTo(double propval) nothrow
   {
     return setProperty("value-to", propval);
   }
@@ -550,7 +550,7 @@ final class TimedAnimationGidBuilder : TimedAnimationGidBuilderImpl!TimedAnimati
       Create object from builder.
       Returns: New object
   */
-  TimedAnimation build()
+  TimedAnimation build() nothrow
   {
     return new TimedAnimation(cast(void*)createGObject(TimedAnimation._getGType), No.Take);
   }

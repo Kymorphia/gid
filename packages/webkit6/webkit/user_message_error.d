@@ -17,7 +17,7 @@ struct UserMessageError
       Gets the quark for the domain of user message errors.
       Returns: user message error domain.
   */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = webkit_user_message_error_quark();
@@ -27,12 +27,12 @@ struct UserMessageError
 
 class UserMessageException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(webkit.user_message_error.UserMessageError.quark, cast(int)code, msg);
   }

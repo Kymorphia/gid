@@ -23,26 +23,26 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_snippet_chunk_get_type != &gidSymbolNotFound ? gtk_source_snippet_chunk_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SnippetChunk self()
+  override SnippetChunk self() nothrow
   {
     return this;
   }
@@ -51,79 +51,79 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
       Get builder for [gtksource.snippet_chunk.SnippetChunk]
       Returns: New builder object
   */
-  static SnippetChunkGidBuilder builder()
+  static SnippetChunkGidBuilder builder() nothrow
   {
     return new SnippetChunkGidBuilder;
   }
 
   /** */
-  @property gtksource.snippet_context.SnippetContext context()
+  @property gtksource.snippet_context.SnippetContext context() nothrow
   {
     return getContext();
   }
 
   /** */
-  @property void context(gtksource.snippet_context.SnippetContext propval)
+  @property void context(gtksource.snippet_context.SnippetContext propval) nothrow
   {
     setContext(propval);
   }
 
   /** */
-  @property int focusPosition()
+  @property int focusPosition() nothrow
   {
     return getFocusPosition();
   }
 
   /** */
-  @property void focusPosition(int propval)
+  @property void focusPosition(int propval) nothrow
   {
     setFocusPosition(propval);
   }
 
   /** */
-  @property string spec()
+  @property string spec() nothrow
   {
     return getSpec();
   }
 
   /** */
-  @property void spec(string propval)
+  @property void spec(string propval) nothrow
   {
     setSpec(propval);
   }
 
   /** */
-  @property string text()
+  @property string text() nothrow
   {
     return getText();
   }
 
   /** */
-  @property void text(string propval)
+  @property void text(string propval) nothrow
   {
     setText(propval);
   }
 
   /** */
-  @property bool textSet()
+  @property bool textSet() nothrow
   {
     return getTextSet();
   }
 
   /** */
-  @property void textSet(bool propval)
+  @property void textSet(bool propval) nothrow
   {
     setTextSet(propval);
   }
 
   /** */
-  @property string tooltipText()
+  @property string tooltipText() nothrow
   {
     return getTooltipText();
   }
 
   /** */
-  @property void tooltipText(string propval)
+  @property void tooltipText(string propval) nothrow
   {
     setTooltipText(propval);
   }
@@ -133,7 +133,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
       a [gtksource.snippet.Snippet].
       Returns: 
   */
-  this()
+  this() nothrow
   {
     GtkSourceSnippetChunk* _cretval;
     _cretval = gtk_source_snippet_chunk_new();
@@ -144,7 +144,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
       Copies the source snippet.
       Returns: A #GtkSourceSnippetChunk
   */
-  gtksource.snippet_chunk.SnippetChunk copy()
+  gtksource.snippet_chunk.SnippetChunk copy() nothrow
   {
     GtkSourceSnippetChunk* _cretval;
     _cretval = gtk_source_snippet_chunk_copy(cast(GtkSourceSnippetChunk*)this._cPtr);
@@ -156,7 +156,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
       Gets the context for the snippet insertion.
       Returns: A #GtkSourceSnippetContext
   */
-  gtksource.snippet_context.SnippetContext getContext()
+  gtksource.snippet_context.SnippetContext getContext() nothrow
   {
     GtkSourceSnippetContext* _cretval;
     _cretval = gtk_source_snippet_chunk_get_context(cast(GtkSourceSnippetChunk*)this._cPtr);
@@ -176,7 +176,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
       A focus-position of -1 means the chunk cannot be focused by the user.
       Returns: the focus-position
   */
-  int getFocusPosition()
+  int getFocusPosition() nothrow
   {
     int _retval;
     _retval = gtk_source_snippet_chunk_get_focus_position(cast(GtkSourceSnippetChunk*)this._cPtr);
@@ -192,7 +192,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
       are updated.
       Returns: the specification, if any
   */
-  string getSpec()
+  string getSpec() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_chunk_get_spec(cast(GtkSourceSnippetChunk*)this._cPtr);
@@ -208,7 +208,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
       returned.
       Returns: the text of the chunk
   */
-  string getText()
+  string getText() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_chunk_get_text(cast(GtkSourceSnippetChunk*)this._cPtr);
@@ -222,7 +222,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
       This is typically set when the user has edited a snippet chunk.
       Returns: 
   */
-  bool getTextSet()
+  bool getTextSet() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_snippet_chunk_get_text_set(cast(GtkSourceSnippetChunk*)this._cPtr);
@@ -230,7 +230,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   }
 
   /** */
-  string getTooltipText()
+  string getTooltipText() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_chunk_get_tooltip_text(cast(GtkSourceSnippetChunk*)this._cPtr);
@@ -239,7 +239,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   }
 
   /** */
-  void setContext(gtksource.snippet_context.SnippetContext context)
+  void setContext(gtksource.snippet_context.SnippetContext context) nothrow
   {
     gtk_source_snippet_chunk_set_context(cast(GtkSourceSnippetChunk*)this._cPtr, context ? cast(GtkSourceSnippetContext*)context._cPtr(No.Dup) : null);
   }
@@ -258,7 +258,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
       Params:
         focusPosition = the focus-position
   */
-  void setFocusPosition(int focusPosition)
+  void setFocusPosition(int focusPosition) nothrow
   {
     gtk_source_snippet_chunk_set_focus_position(cast(GtkSourceSnippetChunk*)this._cPtr, focusPosition);
   }
@@ -274,7 +274,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
       Params:
         spec = the new specification for the chunk
   */
-  void setSpec(string spec)
+  void setSpec(string spec) nothrow
   {
     const(char)* _spec = spec.toCString(No.Alloc);
     gtk_source_snippet_chunk_set_spec(cast(GtkSourceSnippetChunk*)this._cPtr, _spec);
@@ -290,7 +290,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
       Params:
         text = the text of the property
   */
-  void setText(string text)
+  void setText(string text) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_source_snippet_chunk_set_text(cast(GtkSourceSnippetChunk*)this._cPtr, _text);
@@ -305,13 +305,13 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
       Params:
         textSet = the property value
   */
-  void setTextSet(bool textSet)
+  void setTextSet(bool textSet) nothrow
   {
     gtk_source_snippet_chunk_set_text_set(cast(GtkSourceSnippetChunk*)this._cPtr, textSet);
   }
 
   /** */
-  void setTooltipText(string tooltipText)
+  void setTooltipText(string tooltipText) nothrow
   {
     const(char)* _tooltipText = tooltipText.toCString(No.Alloc);
     gtk_source_snippet_chunk_set_tooltip_text(cast(GtkSourceSnippetChunk*)this._cPtr, _tooltipText);
@@ -323,37 +323,37 @@ class SnippetChunkGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnowned
 {
 
   /** */
-  T context(gtksource.snippet_context.SnippetContext propval)
+  T context(gtksource.snippet_context.SnippetContext propval) nothrow
   {
     return setProperty("context", propval);
   }
 
   /** */
-  T focusPosition(int propval)
+  T focusPosition(int propval) nothrow
   {
     return setProperty("focus-position", propval);
   }
 
   /** */
-  T spec(string propval)
+  T spec(string propval) nothrow
   {
     return setProperty("spec", propval);
   }
 
   /** */
-  T text(string propval)
+  T text(string propval) nothrow
   {
     return setProperty("text", propval);
   }
 
   /** */
-  T textSet(bool propval)
+  T textSet(bool propval) nothrow
   {
     return setProperty("text-set", propval);
   }
 
   /** */
-  T tooltipText(string propval)
+  T tooltipText(string propval) nothrow
   {
     return setProperty("tooltip-text", propval);
   }
@@ -366,7 +366,7 @@ final class SnippetChunkGidBuilder : SnippetChunkGidBuilderImpl!SnippetChunkGidB
       Create object from builder.
       Returns: New object
   */
-  SnippetChunk build()
+  SnippetChunk build() nothrow
   {
     return new SnippetChunk(cast(void*)createGObject(SnippetChunk._getGType), No.Take);
   }

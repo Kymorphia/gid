@@ -159,7 +159,7 @@ template DataModelT()
       <programlisting><![CDATA[iter = g_object_new (GDA_TYPE_DATA_MODEL_ITER, "data-model", proxy, NULL);]]></programlisting>
       Returns: a #GdaDataModelIter object, or null if an error occurred
   */
-  override gda.data_model_iter.DataModelIter createIter()
+  override gda.data_model_iter.DataModelIter createIter() nothrow
   {
     GdaDataModelIter* _cretval;
     _cretval = gda_data_model_create_iter(cast(GdaDataModel*)this._cPtr);
@@ -180,7 +180,7 @@ template DataModelT()
         col = column number.
       Returns: the description of the column.
   */
-  override gda.column.Column describeColumn(int col)
+  override gda.column.Column describeColumn(int col) nothrow
   {
     GdaColumn* _cretval;
     _cretval = gda_data_model_describe_column(cast(GdaDataModel*)this._cPtr, col);
@@ -203,7 +203,7 @@ template DataModelT()
       Params:
         toStream = where to dump the data model
   */
-  override void dump(void* toStream = null)
+  override void dump(void* toStream = null) nothrow
   {
     gda_data_model_dump(cast(GdaDataModel*)this._cPtr, toStream);
   }
@@ -222,7 +222,7 @@ template DataModelT()
       </itemizedlist>
       Returns: a new string.
   */
-  override string dumpAsString()
+  override string dumpAsString() nothrow
   {
     char* _cretval;
     _cretval = gda_data_model_dump_as_string(cast(GdaDataModel*)this._cPtr);
@@ -316,7 +316,7 @@ template DataModelT()
         options = list of options for the export
       Returns: a new string, use [glib.global.gfree] when no longer needed
   */
-  override string exportToString(gda.types.DataModelIOFormat format, int[] cols, int[] rows, gda.set.Set options)
+  override string exportToString(gda.types.DataModelIOFormat format, int[] cols, int[] rows, gda.set.Set options) nothrow
   {
     char* _cretval;
     int _nbCols;
@@ -339,7 +339,7 @@ template DataModelT()
       re-enable notifications again, you should call the
       #gda_data_model_thaw function.
   */
-  override void freeze()
+  override void freeze() nothrow
   {
     gda_data_model_freeze(cast(GdaDataModel*)this._cPtr);
   }
@@ -348,7 +348,7 @@ template DataModelT()
       Get the attributes of model such as how to access the data it contains if it's modifiable, etc.
       Returns: an ORed value of #GdaDataModelAccessFlags flags
   */
-  override gda.types.DataModelAccessFlags getAccessFlags()
+  override gda.types.DataModelAccessFlags getAccessFlags() nothrow
   {
     GdaDataModelAccessFlags _cretval;
     _cretval = gda_data_model_get_access_flags(cast(GdaDataModel*)this._cPtr);
@@ -367,7 +367,7 @@ template DataModelT()
         row = a valid row number, or -1
       Returns: the attributes as an ORed value of #GdaValueAttribute
   */
-  override gda.types.ValueAttribute getAttributesAt(int col, int row)
+  override gda.types.ValueAttribute getAttributesAt(int col, int row) nothrow
   {
     GdaValueAttribute _cretval;
     _cretval = gda_data_model_get_attributes_at(cast(GdaDataModel*)this._cPtr, col, row);
@@ -382,7 +382,7 @@ template DataModelT()
         name = a column name
       Returns: the column index, or -1 if no column named name was found
   */
-  override int getColumnIndex(string name)
+  override int getColumnIndex(string name) nothrow
   {
     int _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -391,7 +391,7 @@ template DataModelT()
   }
 
   /** */
-  override string getColumnName(int col)
+  override string getColumnName(int col) nothrow
   {
     const(char)* _cretval;
     _cretval = gda_data_model_get_column_name(cast(GdaDataModel*)this._cPtr, col);
@@ -400,7 +400,7 @@ template DataModelT()
   }
 
   /** */
-  override string getColumnTitle(int col)
+  override string getColumnTitle(int col) nothrow
   {
     const(char)* _cretval;
     _cretval = gda_data_model_get_column_title(cast(GdaDataModel*)this._cPtr, col);
@@ -409,7 +409,7 @@ template DataModelT()
   }
 
   /** */
-  override int getNColumns()
+  override int getNColumns() nothrow
   {
     int _retval;
     _retval = gda_data_model_get_n_columns(cast(GdaDataModel*)this._cPtr);
@@ -417,7 +417,7 @@ template DataModelT()
   }
 
   /** */
-  override int getNRows()
+  override int getNRows() nothrow
   {
     int _retval;
     _retval = gda_data_model_get_n_rows(cast(GdaDataModel*)this._cPtr);
@@ -428,7 +428,7 @@ template DataModelT()
       Returns the status of notifications changes on the given data model.
       Returns: 
   */
-  override bool getNotify()
+  override bool getNotify() nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_data_model_get_notify(cast(GdaDataModel*)this._cPtr);
@@ -521,7 +521,7 @@ template DataModelT()
   
       Deprecated: use [gda.data_model_iter.DataModelIter.moveToRow] instead
   */
-  override bool iterAtRow(gda.data_model_iter.DataModelIter iter, int row)
+  override bool iterAtRow(gda.data_model_iter.DataModelIter iter, int row) nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_data_model_iter_at_row(cast(GdaDataModel*)this._cPtr, iter ? cast(GdaDataModelIter*)iter._cPtr(No.Dup) : null, row);
@@ -537,7 +537,7 @@ template DataModelT()
   
       Deprecated: use [gda.data_model_iter.DataModelIter.moveNext] instead
   */
-  override bool iterNext(gda.data_model_iter.DataModelIter iter)
+  override bool iterNext(gda.data_model_iter.DataModelIter iter) nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_data_model_iter_next(cast(GdaDataModel*)this._cPtr, iter ? cast(GdaDataModelIter*)iter._cPtr(No.Dup) : null);
@@ -553,7 +553,7 @@ template DataModelT()
   
       Deprecated: use [gda.data_model_iter.DataModelIter.movePrev] instead
   */
-  override bool iterPrev(gda.data_model_iter.DataModelIter iter)
+  override bool iterPrev(gda.data_model_iter.DataModelIter iter) nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_data_model_iter_prev(cast(GdaDataModel*)this._cPtr, iter ? cast(GdaDataModelIter*)iter._cPtr(No.Dup) : null);
@@ -606,7 +606,7 @@ template DataModelT()
   /**
       Emits the 'reset' and 'changed' signal on model.
   */
-  override void reset()
+  override void reset() nothrow
   {
     gda_data_model_reset(cast(GdaDataModel*)this._cPtr);
   }
@@ -620,7 +620,7 @@ template DataModelT()
       Params:
         row = row number.
   */
-  override void rowInserted(int row)
+  override void rowInserted(int row) nothrow
   {
     gda_data_model_row_inserted(cast(GdaDataModel*)this._cPtr, row);
   }
@@ -634,7 +634,7 @@ template DataModelT()
       Params:
         row = row number.
   */
-  override void rowRemoved(int row)
+  override void rowRemoved(int row) nothrow
   {
     gda_data_model_row_removed(cast(GdaDataModel*)this._cPtr, row);
   }
@@ -648,7 +648,7 @@ template DataModelT()
       Params:
         row = row number.
   */
-  override void rowUpdated(int row)
+  override void rowUpdated(int row) nothrow
   {
     gda_data_model_row_updated(cast(GdaDataModel*)this._cPtr, row);
   }
@@ -661,7 +661,7 @@ template DataModelT()
         hint = a hint to send to the model
         hintValue = an optional value to specify the hint, or null
   */
-  override void sendHint(gda.types.DataModelHint hint, gobject.value.Value hintValue = null)
+  override void sendHint(gda.types.DataModelHint hint, gobject.value.Value hintValue = null) nothrow
   {
     gda_data_model_send_hint(cast(GdaDataModel*)this._cPtr, hint, hintValue ? cast(const(GValue)*)hintValue._cPtr(No.Dup) : null);
   }
@@ -674,7 +674,7 @@ template DataModelT()
         col = column number
         name = name for the given column.
   */
-  override void setColumnName(int col, string name)
+  override void setColumnName(int col, string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gda_data_model_set_column_name(cast(GdaDataModel*)this._cPtr, col, _name);
@@ -687,7 +687,7 @@ template DataModelT()
         col = column number
         title = title for the given column.
   */
-  override void setColumnTitle(int col, string title)
+  override void setColumnTitle(int col, string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     gda_data_model_set_column_title(cast(GdaDataModel*)this._cPtr, col, _title);
@@ -701,7 +701,7 @@ template DataModelT()
   
       Deprecated: use [gda.data_model.DataModel.freeze] and [gda.data_model.DataModel.thaw] instead
   */
-  override void setNotify(bool doNotifyChanges)
+  override void setNotify(bool doNotifyChanges) nothrow
   {
     gda_data_model_set_notify(cast(GdaDataModel*)this._cPtr, doNotifyChanges);
   }
@@ -760,7 +760,7 @@ template DataModelT()
   /**
       Re-enables notifications of changes on the given data model.
   */
-  override void thaw()
+  override void thaw() nothrow
   {
     gda_data_model_thaw(cast(GdaDataModel*)this._cPtr);
   }
@@ -781,13 +781,13 @@ template DataModelT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAccessChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAccessChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.data_model.DataModel)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -796,7 +796,14 @@ template DataModelT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.data_model.DataModel.accessChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -818,13 +825,13 @@ template DataModelT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.data_model.DataModel)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -833,7 +840,14 @@ template DataModelT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.data_model.DataModel.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -856,13 +870,13 @@ template DataModelT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectReset(T)(T callback, Flag!"After" after = No.After)
+  gulong connectReset(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.data_model.DataModel)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -871,7 +885,14 @@ template DataModelT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.data_model.DataModel.reset");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -895,14 +916,14 @@ template DataModelT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowInserted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRowInserted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.data_model.DataModel)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -914,7 +935,14 @@ template DataModelT()
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.data_model.DataModel.rowInserted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -938,14 +966,14 @@ template DataModelT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRowRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.data_model.DataModel)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -957,7 +985,14 @@ template DataModelT()
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.data_model.DataModel.rowRemoved");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -981,14 +1016,14 @@ template DataModelT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowUpdated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRowUpdated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.data_model.DataModel)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1000,7 +1035,14 @@ template DataModelT()
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.data_model.DataModel.rowUpdated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

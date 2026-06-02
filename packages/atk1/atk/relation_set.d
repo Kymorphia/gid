@@ -28,26 +28,26 @@ class RelationSet : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_relation_set_get_type != &gidSymbolNotFound ? atk_relation_set_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RelationSet self()
+  override RelationSet self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class RelationSet : gobject.object.ObjectWrap
       Get builder for [atk.relation_set.RelationSet]
       Returns: New builder object
   */
-  static RelationSetGidBuilder builder()
+  static RelationSetGidBuilder builder() nothrow
   {
     return new RelationSetGidBuilder;
   }
@@ -65,7 +65,7 @@ class RelationSet : gobject.object.ObjectWrap
       Creates a new empty relation set.
       Returns: a new #AtkRelationSet
   */
-  this()
+  this() nothrow
   {
     AtkRelationSet* _cretval;
     _cretval = atk_relation_set_new();
@@ -82,7 +82,7 @@ class RelationSet : gobject.object.ObjectWrap
       Params:
         relation = an #AtkRelation
   */
-  void add(atk.relation.Relation relation)
+  void add(atk.relation.Relation relation) nothrow
   {
     atk_relation_set_add(cast(AtkRelationSet*)this._cPtr, relation ? cast(AtkRelation*)relation._cPtr(No.Dup) : null);
   }
@@ -97,7 +97,7 @@ class RelationSet : gobject.object.ObjectWrap
         relationship = an #AtkRelationType
         target = an #AtkObject
   */
-  void addRelationByType(atk.types.RelationType relationship, atk.object.ObjectWrap target)
+  void addRelationByType(atk.types.RelationType relationship, atk.object.ObjectWrap target) nothrow
   {
     atk_relation_set_add_relation_by_type(cast(AtkRelationSet*)this._cPtr, relationship, target ? cast(AtkObject*)target._cPtr(No.Dup) : null);
   }
@@ -111,7 +111,7 @@ class RelationSet : gobject.object.ObjectWrap
       Returns: true if relationship is the relationship type of a relation
         in set, false otherwise
   */
-  bool contains(atk.types.RelationType relationship)
+  bool contains(atk.types.RelationType relationship) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_relation_set_contains(cast(AtkRelationSet*)this._cPtr, relationship);
@@ -129,7 +129,7 @@ class RelationSet : gobject.object.ObjectWrap
       Returns: true if set contains a relation with the relationship
         type relationship with an object target, false otherwise
   */
-  bool containsTarget(atk.types.RelationType relationship, atk.object.ObjectWrap target)
+  bool containsTarget(atk.types.RelationType relationship, atk.object.ObjectWrap target) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_relation_set_contains_target(cast(AtkRelationSet*)this._cPtr, relationship, target ? cast(AtkObject*)target._cPtr(No.Dup) : null);
@@ -140,7 +140,7 @@ class RelationSet : gobject.object.ObjectWrap
       Determines the number of relations in a relation set.
       Returns: an integer representing the number of relations in the set.
   */
-  int getNRelations()
+  int getNRelations() nothrow
   {
     int _retval;
     _retval = atk_relation_set_get_n_relations(cast(AtkRelationSet*)this._cPtr);
@@ -155,7 +155,7 @@ class RelationSet : gobject.object.ObjectWrap
       Returns: a #AtkRelation, which is the relation at
         position i in the set.
   */
-  atk.relation.Relation getRelation(int i)
+  atk.relation.Relation getRelation(int i) nothrow
   {
     AtkRelation* _cretval;
     _cretval = atk_relation_set_get_relation(cast(AtkRelationSet*)this._cPtr, i);
@@ -171,7 +171,7 @@ class RelationSet : gobject.object.ObjectWrap
       Returns: an #AtkRelation, which is a relation matching the
         specified type.
   */
-  atk.relation.Relation getRelationByType(atk.types.RelationType relationship)
+  atk.relation.Relation getRelationByType(atk.types.RelationType relationship) nothrow
   {
     AtkRelation* _cretval;
     _cretval = atk_relation_set_get_relation_by_type(cast(AtkRelationSet*)this._cPtr, relationship);
@@ -187,7 +187,7 @@ class RelationSet : gobject.object.ObjectWrap
       Params:
         relation = an #AtkRelation
   */
-  void remove(atk.relation.Relation relation)
+  void remove(atk.relation.Relation relation) nothrow
   {
     atk_relation_set_remove(cast(AtkRelationSet*)this._cPtr, relation ? cast(AtkRelation*)relation._cPtr(No.Dup) : null);
   }
@@ -205,7 +205,7 @@ final class RelationSetGidBuilder : RelationSetGidBuilderImpl!RelationSetGidBuil
       Create object from builder.
       Returns: New object
   */
-  RelationSet build()
+  RelationSet build() nothrow
   {
     return new RelationSet(cast(void*)createGObject(RelationSet._getGType), Yes.Take);
   }

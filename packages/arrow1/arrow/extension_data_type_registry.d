@@ -16,26 +16,26 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_extension_data_type_registry_get_type != &gidSymbolNotFound ? garrow_extension_data_type_registry_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ExtensionDataTypeRegistry self()
+  override ExtensionDataTypeRegistry self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectWrap
       Get builder for [arrow.extension_data_type_registry.ExtensionDataTypeRegistry]
       Returns: New builder object
   */
-  static ExtensionDataTypeRegistryGidBuilder builder()
+  static ExtensionDataTypeRegistryGidBuilder builder() nothrow
   {
     return new ExtensionDataTypeRegistryGidBuilder;
   }
 
   /** */
-  static arrow.extension_data_type_registry.ExtensionDataTypeRegistry default_()
+  static arrow.extension_data_type_registry.ExtensionDataTypeRegistry default_() nothrow
   {
     GArrowExtensionDataTypeRegistry* _cretval;
     _cretval = garrow_extension_data_type_registry_default();
@@ -59,7 +59,7 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.extension_data_type.ExtensionDataType lookup(string name)
+  arrow.extension_data_type.ExtensionDataType lookup(string name) nothrow
   {
     GArrowExtensionDataType* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -112,7 +112,7 @@ class ExtensionDataTypeRegistryGidBuilderImpl(T) : gobject.object.ObjectWrapGidB
 {
 
   /** */
-  T registry(void* propval)
+  T registry(void* propval) nothrow
   {
     return setProperty("registry", propval);
   }
@@ -125,7 +125,7 @@ final class ExtensionDataTypeRegistryGidBuilder : ExtensionDataTypeRegistryGidBu
       Create object from builder.
       Returns: New object
   */
-  ExtensionDataTypeRegistry build()
+  ExtensionDataTypeRegistry build() nothrow
   {
     return new ExtensionDataTypeRegistry(cast(void*)createGObject(ExtensionDataTypeRegistry._getGType), No.Take);
   }

@@ -17,26 +17,26 @@ class FileWriter : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_file_writer_get_type != &gidSymbolNotFound ? gadataset_file_writer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileWriter self()
+  override FileWriter self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class FileWriter : gobject.object.ObjectWrap
       Get builder for [arrowdataset.file_writer.FileWriter]
       Returns: New builder object
   */
-  static FileWriterGidBuilder builder()
+  static FileWriterGidBuilder builder() nothrow
   {
     return new FileWriterGidBuilder;
   }
@@ -89,7 +89,7 @@ class FileWriterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T writer(void* propval)
+  T writer(void* propval) nothrow
   {
     return setProperty("writer", propval);
   }
@@ -102,7 +102,7 @@ final class FileWriterGidBuilder : FileWriterGidBuilderImpl!FileWriterGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FileWriter build()
+  FileWriter build() nothrow
   {
     return new FileWriter(cast(void*)createGObject(FileWriter._getGType), No.Take);
   }

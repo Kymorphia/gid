@@ -31,26 +31,26 @@ class AspectFrame : gtk.frame.Frame
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_aspect_frame_get_type != &gidSymbolNotFound ? gtk_aspect_frame_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AspectFrame self()
+  override AspectFrame self() nothrow
   {
     return this;
   }
@@ -59,55 +59,55 @@ class AspectFrame : gtk.frame.Frame
       Get builder for [gtk.aspect_frame.AspectFrame]
       Returns: New builder object
   */
-  static AspectFrameGidBuilder builder()
+  static AspectFrameGidBuilder builder() nothrow
   {
     return new AspectFrameGidBuilder;
   }
 
   /** */
-  @property bool obeyChild()
+  @property bool obeyChild() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("obey-child");
   }
 
   /** */
-  @property void obeyChild(bool propval)
+  @property void obeyChild(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("obey-child", propval);
   }
 
   /** */
-  @property float ratio()
+  @property float ratio() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(float)("ratio");
   }
 
   /** */
-  @property void ratio(float propval)
+  @property void ratio(float propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(float)("ratio", propval);
   }
 
   /** */
-  @property float xalign()
+  @property float xalign() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(float)("xalign");
   }
 
   /** */
-  @property void xalign(float propval)
+  @property void xalign(float propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(float)("xalign", propval);
   }
 
   /** */
-  @property float yalign()
+  @property float yalign() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(float)("yalign");
   }
 
   /** */
-  @property void yalign(float propval)
+  @property void yalign(float propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(float)("yalign", propval);
   }
@@ -128,7 +128,7 @@ class AspectFrame : gtk.frame.Frame
            ratio is taken from the requistion of the child.
       Returns: the new #GtkAspectFrame.
   */
-  this(string label, float xalign, float yalign, float ratio, bool obeyChild)
+  this(string label, float xalign, float yalign, float ratio, bool obeyChild) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -150,7 +150,7 @@ class AspectFrame : gtk.frame.Frame
         obeyChild = If true, ratio is ignored, and the aspect
            ratio is taken from the requistion of the child.
   */
-  void set(float xalign, float yalign, float ratio, bool obeyChild)
+  void set(float xalign, float yalign, float ratio, bool obeyChild) nothrow
   {
     gtk_aspect_frame_set(cast(GtkAspectFrame*)this._cPtr, xalign, yalign, ratio, obeyChild);
   }
@@ -162,25 +162,25 @@ class AspectFrameGidBuilderImpl(T) : gtk.frame.FrameGidBuilderImpl!T
 
 
   /** */
-  T obeyChild(bool propval)
+  T obeyChild(bool propval) nothrow
   {
     return setProperty("obey-child", propval);
   }
 
   /** */
-  T ratio(float propval)
+  T ratio(float propval) nothrow
   {
     return setProperty("ratio", propval);
   }
 
   /** */
-  T xalign(float propval)
+  T xalign(float propval) nothrow
   {
     return setProperty("xalign", propval);
   }
 
   /** */
-  T yalign(float propval)
+  T yalign(float propval) nothrow
   {
     return setProperty("yalign", propval);
   }
@@ -193,7 +193,7 @@ final class AspectFrameGidBuilder : AspectFrameGidBuilderImpl!AspectFrameGidBuil
       Create object from builder.
       Returns: New object
   */
-  AspectFrame build()
+  AspectFrame build() nothrow
   {
     return new AspectFrame(cast(void*)createGObject(AspectFrame._getGType), No.Take);
   }

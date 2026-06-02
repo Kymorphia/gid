@@ -39,7 +39,7 @@ template BuildableT()
         child = child to add
         type = kind of child or null
   */
-  override void addChild(gtk.builder.Builder builder, gobject.object.ObjectWrap child, string type = null)
+  override void addChild(gtk.builder.Builder builder, gobject.object.ObjectWrap child, string type = null) nothrow
   {
     const(char)* _type = type.toCString(No.Alloc);
     gtk_buildable_add_child(cast(GtkBuildable*)this._cPtr, builder ? cast(GtkBuilder*)builder._cPtr(No.Dup) : null, child ? cast(GObject*)child._cPtr(No.Dup) : null, _type);
@@ -56,7 +56,7 @@ template BuildableT()
         name = name of child to construct
       Returns: the constructed child
   */
-  override gobject.object.ObjectWrap constructChild(gtk.builder.Builder builder, string name)
+  override gobject.object.ObjectWrap constructChild(gtk.builder.Builder builder, string name) nothrow
   {
     GObject* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -75,7 +75,7 @@ template BuildableT()
         tagname = the name of the tag
         data = user data created in custom_tag_start
   */
-  override void customFinished(gtk.builder.Builder builder, gobject.object.ObjectWrap child, string tagname, void* data = null)
+  override void customFinished(gtk.builder.Builder builder, gobject.object.ObjectWrap child, string tagname, void* data = null) nothrow
   {
     const(char)* _tagname = tagname.toCString(No.Alloc);
     gtk_buildable_custom_finished(cast(GtkBuildable*)this._cPtr, builder ? cast(GtkBuilder*)builder._cPtr(No.Dup) : null, child ? cast(GObject*)child._cPtr(No.Dup) : null, _tagname, data);
@@ -94,7 +94,7 @@ template BuildableT()
       Returns: true if a object has a custom implementation, false
                  if it doesn't.
   */
-  override bool customTagStart(gtk.builder.Builder builder, gobject.object.ObjectWrap child, string tagname, out glib.types.MarkupParser parser, out void* data)
+  override bool customTagStart(gtk.builder.Builder builder, gobject.object.ObjectWrap child, string tagname, out glib.types.MarkupParser parser, out void* data) nothrow
   {
     bool _retval;
     const(char)* _tagname = tagname.toCString(No.Alloc);
@@ -110,7 +110,7 @@ template BuildableT()
         childname = name of child
       Returns: the internal child of the buildable object
   */
-  override gobject.object.ObjectWrap getInternalChild(gtk.builder.Builder builder, string childname)
+  override gobject.object.ObjectWrap getInternalChild(gtk.builder.Builder builder, string childname) nothrow
   {
     GObject* _cretval;
     const(char)* _childname = childname.toCString(No.Alloc);
@@ -127,7 +127,7 @@ template BuildableT()
       used to construct the buildable.
       Returns: the name set with [gtk.buildable.Buildable.setName]
   */
-  override string getName()
+  override string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_buildable_get_name(cast(GtkBuildable*)this._cPtr);
@@ -145,7 +145,7 @@ template BuildableT()
       Params:
         builder = a #GtkBuilder
   */
-  override void parserFinished(gtk.builder.Builder builder)
+  override void parserFinished(gtk.builder.Builder builder) nothrow
   {
     gtk_buildable_parser_finished(cast(GtkBuildable*)this._cPtr, builder ? cast(GtkBuilder*)builder._cPtr(No.Dup) : null);
   }
@@ -158,7 +158,7 @@ template BuildableT()
         name = name of property
         value = value of property
   */
-  override void setBuildableProperty(gtk.builder.Builder builder, string name, gobject.value.Value value)
+  override void setBuildableProperty(gtk.builder.Builder builder, string name, gobject.value.Value value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_buildable_set_buildable_property(cast(GtkBuildable*)this._cPtr, builder ? cast(GtkBuilder*)builder._cPtr(No.Dup) : null, _name, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -170,7 +170,7 @@ template BuildableT()
       Params:
         name = name to set
   */
-  override void setName(string name)
+  override void setName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_buildable_set_name(cast(GtkBuildable*)this._cPtr, _name);

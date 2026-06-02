@@ -17,26 +17,26 @@ class FilterEnriched : gmime.filter.Filter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_filter_enriched_get_type != &gidSymbolNotFound ? g_mime_filter_enriched_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FilterEnriched self()
+  override FilterEnriched self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class FilterEnriched : gmime.filter.Filter
       Get builder for [gmime.filter_enriched.FilterEnriched]
       Returns: New builder object
   */
-  static FilterEnrichedGidBuilder builder()
+  static FilterEnrichedGidBuilder builder() nothrow
   {
     return new FilterEnrichedGidBuilder;
   }
@@ -57,7 +57,7 @@ class FilterEnriched : gmime.filter.Filter
         flags = flags
       Returns: a new GMimeFilter object.
   */
-  this(uint flags)
+  this(uint flags) nothrow
   {
     GMimeFilter* _cretval;
     _cretval = g_mime_filter_enriched_new(flags);
@@ -77,7 +77,7 @@ final class FilterEnrichedGidBuilder : FilterEnrichedGidBuilderImpl!FilterEnrich
       Create object from builder.
       Returns: New object
   */
-  FilterEnriched build()
+  FilterEnriched build() nothrow
   {
     return new FilterEnriched(cast(void*)createGObject(FilterEnriched._getGType), Yes.Take);
   }

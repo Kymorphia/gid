@@ -77,11 +77,8 @@ class RWLock
   GRWLock _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.rwlock.RWLock");
-
     _cInstance = *cast(GRWLock*)ptr;
 
     if (take)
@@ -89,7 +86,7 @@ class RWLock
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -103,7 +100,7 @@ class RWLock
       Calling [glib.rwlock.RWLock.clear] when any thread holds the lock
       leads to undefined behaviour.
   */
-  void clear()
+  void clear() nothrow
   {
     g_rw_lock_clear(cast(GRWLock*)this._cPtr);
   }
@@ -134,7 +131,7 @@ class RWLock
       Calling [glib.rwlock.RWLock.init_] on an already initialized #GRWLock leads
       to undefined behaviour.
   */
-  void init_()
+  void init_() nothrow
   {
     g_rw_lock_init(cast(GRWLock*)this._cPtr);
   }
@@ -156,7 +153,7 @@ class RWLock
       held on the same lock simultaneously. If the limit is hit,
       or if a deadlock is detected, a critical warning will be emitted.
   */
-  void readerLock()
+  void readerLock() nothrow
   {
     g_rw_lock_reader_lock(cast(GRWLock*)this._cPtr);
   }
@@ -167,7 +164,7 @@ class RWLock
       returns false.
       Returns: true if rw_lock could be locked
   */
-  bool readerTrylock()
+  bool readerTrylock() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_rw_lock_reader_trylock(cast(GRWLock*)this._cPtr);
@@ -180,7 +177,7 @@ class RWLock
       Calling [glib.rwlock.RWLock.readerUnlock] on a lock that is not held
       by the current thread leads to undefined behaviour.
   */
-  void readerUnlock()
+  void readerUnlock() nothrow
   {
     g_rw_lock_reader_unlock(cast(GRWLock*)this._cPtr);
   }
@@ -193,7 +190,7 @@ class RWLock
       Calling [glib.rwlock.RWLock.writerLock] while the current thread already
       owns a read or write lock on rw_lock leads to undefined behaviour.
   */
-  void writerLock()
+  void writerLock() nothrow
   {
     g_rw_lock_writer_lock(cast(GRWLock*)this._cPtr);
   }
@@ -205,7 +202,7 @@ class RWLock
       Otherwise it locks rw_lock and returns true.
       Returns: true if rw_lock could be locked
   */
-  bool writerTrylock()
+  bool writerTrylock() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_rw_lock_writer_trylock(cast(GRWLock*)this._cPtr);
@@ -218,7 +215,7 @@ class RWLock
       Calling [glib.rwlock.RWLock.writerUnlock] on a lock that is not held
       by the current thread leads to undefined behaviour.
   */
-  void writerUnlock()
+  void writerUnlock() nothrow
   {
     g_rw_lock_writer_unlock(cast(GRWLock*)this._cPtr);
   }

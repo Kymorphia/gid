@@ -13,11 +13,8 @@ class SqlStatementCompound
   GdaSqlStatementCompound _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.sql_statement_compound.SqlStatementCompound");
-
     _cInstance = *cast(GdaSqlStatementCompound*)ptr;
 
     if (take)
@@ -25,19 +22,19 @@ class SqlStatementCompound
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
 
   /** */
-  @property gda.types.SqlStatementCompoundType compoundType()
+  @property gda.types.SqlStatementCompoundType compoundType() nothrow
   {
     return cast(gda.types.SqlStatementCompoundType)(cast(GdaSqlStatementCompound*)this._cPtr).compoundType;
   }
 
   /** */
-  @property void compoundType(gda.types.SqlStatementCompoundType propval)
+  @property void compoundType(gda.types.SqlStatementCompoundType propval) nothrow
   {
     (cast(GdaSqlStatementCompound*)this._cPtr).compoundType = cast(GdaSqlStatementCompoundType)propval;
   }

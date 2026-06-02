@@ -40,26 +40,26 @@ class PreferencesDialog : adw.dialog.Dialog
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_preferences_dialog_get_type != &gidSymbolNotFound ? adw_preferences_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PreferencesDialog self()
+  override PreferencesDialog self() nothrow
   {
     return this;
   }
@@ -68,7 +68,7 @@ class PreferencesDialog : adw.dialog.Dialog
       Get builder for [adw.preferences_dialog.PreferencesDialog]
       Returns: New builder object
   */
-  static PreferencesDialogGidBuilder builder()
+  static PreferencesDialogGidBuilder builder() nothrow
   {
     return new PreferencesDialogGidBuilder;
   }
@@ -77,7 +77,7 @@ class PreferencesDialog : adw.dialog.Dialog
       Get `searchEnabled` property.
       Returns: Whether search is enabled.
   */
-  @property bool searchEnabled()
+  @property bool searchEnabled() nothrow
   {
     return getSearchEnabled();
   }
@@ -87,7 +87,7 @@ class PreferencesDialog : adw.dialog.Dialog
       Params:
         propval = Whether search is enabled.
   */
-  @property void searchEnabled(bool propval)
+  @property void searchEnabled(bool propval) nothrow
   {
     setSearchEnabled(propval);
   }
@@ -96,7 +96,7 @@ class PreferencesDialog : adw.dialog.Dialog
       Get `visiblePage` property.
       Returns: The currently visible page.
   */
-  @property gtk.widget.Widget visiblePage()
+  @property gtk.widget.Widget visiblePage() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.widget.Widget)("visible-page");
   }
@@ -106,7 +106,7 @@ class PreferencesDialog : adw.dialog.Dialog
       Params:
         propval = The currently visible page.
   */
-  @property void visiblePage(gtk.widget.Widget propval)
+  @property void visiblePage(gtk.widget.Widget propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.widget.Widget)("visible-page", propval);
   }
@@ -117,7 +117,7 @@ class PreferencesDialog : adw.dialog.Dialog
         
         See `property@AdwPreferencesDialog:visible-page`.
   */
-  @property string visiblePageName()
+  @property string visiblePageName() nothrow
   {
     return getVisiblePageName();
   }
@@ -129,7 +129,7 @@ class PreferencesDialog : adw.dialog.Dialog
           
           See `property@AdwPreferencesDialog:visible-page`.
   */
-  @property void visiblePageName(string propval)
+  @property void visiblePageName(string propval) nothrow
   {
     setVisiblePageName(propval);
   }
@@ -138,7 +138,7 @@ class PreferencesDialog : adw.dialog.Dialog
       Creates a new [adw.preferences_dialog.PreferencesDialog].
       Returns: the newly created [adw.preferences_dialog.PreferencesDialog]
   */
-  this()
+  this() nothrow
   {
     AdwDialog* _cretval;
     _cretval = adw_preferences_dialog_new();
@@ -151,7 +151,7 @@ class PreferencesDialog : adw.dialog.Dialog
       Params:
         page = the page to add
   */
-  void add(adw.preferences_page.PreferencesPage page)
+  void add(adw.preferences_page.PreferencesPage page) nothrow
   {
     adw_preferences_dialog_add(cast(AdwPreferencesDialog*)this._cPtr, page ? cast(AdwPreferencesPage*)page._cPtr(No.Dup) : null);
   }
@@ -164,7 +164,7 @@ class PreferencesDialog : adw.dialog.Dialog
       Params:
         toast = a toast
   */
-  void addToast(adw.toast.Toast toast)
+  void addToast(adw.toast.Toast toast) nothrow
   {
     adw_preferences_dialog_add_toast(cast(AdwPreferencesDialog*)this._cPtr, toast ? cast(AdwToast*)toast._cPtr(Yes.Dup) : null);
   }
@@ -173,7 +173,7 @@ class PreferencesDialog : adw.dialog.Dialog
       Gets whether search is enabled for self.
       Returns: whether search is enabled for self.
   */
-  bool getSearchEnabled()
+  bool getSearchEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_preferences_dialog_get_search_enabled(cast(AdwPreferencesDialog*)this._cPtr);
@@ -184,7 +184,7 @@ class PreferencesDialog : adw.dialog.Dialog
       Gets the currently visible page of self.
       Returns: the visible page
   */
-  adw.preferences_page.PreferencesPage getVisiblePage()
+  adw.preferences_page.PreferencesPage getVisiblePage() nothrow
   {
     AdwPreferencesPage* _cretval;
     _cretval = adw_preferences_dialog_get_visible_page(cast(AdwPreferencesDialog*)this._cPtr);
@@ -196,7 +196,7 @@ class PreferencesDialog : adw.dialog.Dialog
       Gets the name of currently visible page of self.
       Returns: the name of the visible page
   */
-  string getVisiblePageName()
+  string getVisiblePageName() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_preferences_dialog_get_visible_page_name(cast(AdwPreferencesDialog*)this._cPtr);
@@ -208,7 +208,7 @@ class PreferencesDialog : adw.dialog.Dialog
       Pop the visible page from the subpage stack of self.
       Returns: `TRUE` if a page has been popped
   */
-  bool popSubpage()
+  bool popSubpage() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_preferences_dialog_pop_subpage(cast(AdwPreferencesDialog*)this._cPtr);
@@ -223,7 +223,7 @@ class PreferencesDialog : adw.dialog.Dialog
       Params:
         page = the subpage
   */
-  void pushSubpage(adw.navigation_page.NavigationPage page)
+  void pushSubpage(adw.navigation_page.NavigationPage page) nothrow
   {
     adw_preferences_dialog_push_subpage(cast(AdwPreferencesDialog*)this._cPtr, page ? cast(AdwNavigationPage*)page._cPtr(No.Dup) : null);
   }
@@ -234,7 +234,7 @@ class PreferencesDialog : adw.dialog.Dialog
       Params:
         page = the page to remove
   */
-  void remove(adw.preferences_page.PreferencesPage page)
+  void remove(adw.preferences_page.PreferencesPage page) nothrow
   {
     adw_preferences_dialog_remove(cast(AdwPreferencesDialog*)this._cPtr, page ? cast(AdwPreferencesPage*)page._cPtr(No.Dup) : null);
   }
@@ -245,7 +245,7 @@ class PreferencesDialog : adw.dialog.Dialog
       Params:
         searchEnabled = whether search is enabled
   */
-  void setSearchEnabled(bool searchEnabled)
+  void setSearchEnabled(bool searchEnabled) nothrow
   {
     adw_preferences_dialog_set_search_enabled(cast(AdwPreferencesDialog*)this._cPtr, searchEnabled);
   }
@@ -256,7 +256,7 @@ class PreferencesDialog : adw.dialog.Dialog
       Params:
         page = a page of self
   */
-  void setVisiblePage(adw.preferences_page.PreferencesPage page)
+  void setVisiblePage(adw.preferences_page.PreferencesPage page) nothrow
   {
     adw_preferences_dialog_set_visible_page(cast(AdwPreferencesDialog*)this._cPtr, page ? cast(AdwPreferencesPage*)page._cPtr(No.Dup) : null);
   }
@@ -269,7 +269,7 @@ class PreferencesDialog : adw.dialog.Dialog
       Params:
         name = the name of the page to make visible
   */
-  void setVisiblePageName(string name)
+  void setVisiblePageName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     adw_preferences_dialog_set_visible_page_name(cast(AdwPreferencesDialog*)this._cPtr, _name);
@@ -287,7 +287,7 @@ class PreferencesDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
         propval = Whether search is enabled.
       Returns: Builder instance for fluent chaining
   */
-  T searchEnabled(bool propval)
+  T searchEnabled(bool propval) nothrow
   {
     return setProperty("search-enabled", propval);
   }
@@ -298,7 +298,7 @@ class PreferencesDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
         propval = The currently visible page.
       Returns: Builder instance for fluent chaining
   */
-  T visiblePage(gtk.widget.Widget propval)
+  T visiblePage(gtk.widget.Widget propval) nothrow
   {
     return setProperty("visible-page", propval);
   }
@@ -311,7 +311,7 @@ class PreferencesDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           See `property@AdwPreferencesDialog:visible-page`.
       Returns: Builder instance for fluent chaining
   */
-  T visiblePageName(string propval)
+  T visiblePageName(string propval) nothrow
   {
     return setProperty("visible-page-name", propval);
   }
@@ -324,7 +324,7 @@ final class PreferencesDialogGidBuilder : PreferencesDialogGidBuilderImpl!Prefer
       Create object from builder.
       Returns: New object
   */
-  PreferencesDialog build()
+  PreferencesDialog build() nothrow
   {
     return new PreferencesDialog(cast(void*)createGObject(PreferencesDialog._getGType), No.Take);
   }

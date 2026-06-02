@@ -24,7 +24,7 @@ import gstvideo.video_info;
 
 
 /** */
-gstgl.glsync_meta.GLSyncMeta bufferAddGlSyncMeta(gstgl.glcontext.GLContext context, gst.buffer.Buffer buffer)
+gstgl.glsync_meta.GLSyncMeta bufferAddGlSyncMeta(gstgl.glcontext.GLContext context, gst.buffer.Buffer buffer) nothrow
 {
   GstGLSyncMeta* _cretval;
   _cretval = gst_buffer_add_gl_sync_meta(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
@@ -33,7 +33,7 @@ gstgl.glsync_meta.GLSyncMeta bufferAddGlSyncMeta(gstgl.glcontext.GLContext conte
 }
 
 /** */
-gstgl.glsync_meta.GLSyncMeta bufferAddGlSyncMetaFull(gstgl.glcontext.GLContext context, gst.buffer.Buffer buffer, void* data = null)
+gstgl.glsync_meta.GLSyncMeta bufferAddGlSyncMetaFull(gstgl.glcontext.GLContext context, gst.buffer.Buffer buffer, void* data = null) nothrow
 {
   GstGLSyncMeta* _cretval;
   _cretval = gst_buffer_add_gl_sync_meta_full(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, data);
@@ -42,7 +42,7 @@ gstgl.glsync_meta.GLSyncMeta bufferAddGlSyncMetaFull(gstgl.glcontext.GLContext c
 }
 
 /** */
-gstgl.glallocation_params.GLAllocationParams bufferPoolConfigGetGlAllocationParams(gst.structure.Structure config)
+gstgl.glallocation_params.GLAllocationParams bufferPoolConfigGetGlAllocationParams(gst.structure.Structure config) nothrow
 {
   GstGLAllocationParams* _cretval;
   _cretval = gst_buffer_pool_config_get_gl_allocation_params(config ? cast(GstStructure*)config._cPtr(No.Dup) : null);
@@ -57,7 +57,7 @@ gstgl.glallocation_params.GLAllocationParams bufferPoolConfigGetGlAllocationPara
       config = a buffer pool config
     Returns: then number of buffers configured the free queue
 */
-uint bufferPoolConfigGetGlMinFreeQueueSize(gst.structure.Structure config)
+uint bufferPoolConfigGetGlMinFreeQueueSize(gst.structure.Structure config) nothrow
 {
   uint _retval;
   _retval = gst_buffer_pool_config_get_gl_min_free_queue_size(config ? cast(GstStructure*)config._cPtr(No.Dup) : null);
@@ -71,7 +71,7 @@ uint bufferPoolConfigGetGlMinFreeQueueSize(gst.structure.Structure config)
       config = a buffer pool config
       params = a #GstGLAllocationParams
 */
-void bufferPoolConfigSetGlAllocationParams(gst.structure.Structure config, gstgl.glallocation_params.GLAllocationParams params = null)
+void bufferPoolConfigSetGlAllocationParams(gst.structure.Structure config, gstgl.glallocation_params.GLAllocationParams params = null) nothrow
 {
   gst_buffer_pool_config_set_gl_allocation_params(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, params ? cast(const(GstGLAllocationParams)*)params._cPtr(No.Dup) : null);
 }
@@ -93,13 +93,13 @@ void bufferPoolConfigSetGlAllocationParams(gst.structure.Structure config, gstgl
       config = a buffer pool config
       queueSize = the number of buffers
 */
-void bufferPoolConfigSetGlMinFreeQueueSize(gst.structure.Structure config, uint queueSize)
+void bufferPoolConfigSetGlMinFreeQueueSize(gst.structure.Structure config, uint queueSize) nothrow
 {
   gst_buffer_pool_config_set_gl_min_free_queue_size(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, queueSize);
 }
 
 /** */
-bool contextGetGlDisplay(gst.context.Context context, out gstgl.gldisplay.GLDisplay display)
+bool contextGetGlDisplay(gst.context.Context context, out gstgl.gldisplay.GLDisplay display) nothrow
 {
   bool _retval;
   GstGLDisplay* _display;
@@ -115,13 +115,13 @@ bool contextGetGlDisplay(gst.context.Context context, out gstgl.gldisplay.GLDisp
       context = a #GstContext
       display = resulting #GstGLDisplay
 */
-void contextSetGlDisplay(gst.context.Context context, gstgl.gldisplay.GLDisplay display = null)
+void contextSetGlDisplay(gst.context.Context context, gstgl.gldisplay.GLDisplay display = null) nothrow
 {
   gst_context_set_gl_display(context ? cast(GstContext*)context._cPtr(No.Dup) : null, display ? cast(GstGLDisplay*)display._cPtr(No.Dup) : null);
 }
 
 /** */
-bool glCheckExtension(string name, string ext)
+bool glCheckExtension(string name, string ext) nothrow
 {
   bool _retval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -131,7 +131,7 @@ bool glCheckExtension(string name, string ext)
 }
 
 /** */
-void glElementPropagateDisplayContext(gst.element.Element element, gstgl.gldisplay.GLDisplay display)
+void glElementPropagateDisplayContext(gst.element.Element element, gstgl.gldisplay.GLDisplay display) nothrow
 {
   gst_gl_element_propagate_display_context(element ? cast(GstElement*)element._cPtr(No.Dup) : null, display ? cast(GstGLDisplay*)display._cPtr(No.Dup) : null);
 }
@@ -160,7 +160,7 @@ void glElementPropagateDisplayContext(gst.element.Element element, gstgl.gldispl
       otherContextPtr = the resulting #GstGLContext
     Returns: whether a #GstGLDisplay exists in display_ptr
 */
-bool glEnsureElementData(gst.element.Element element, gstgl.gldisplay.GLDisplay displayPtr, gstgl.glcontext.GLContext otherContextPtr)
+bool glEnsureElementData(gst.element.Element element, gstgl.gldisplay.GLDisplay displayPtr, gstgl.glcontext.GLContext otherContextPtr) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_gl_ensure_element_data(element ? cast(GstElement*)element._cPtr(No.Dup) : null, displayPtr ? cast(GstGLDisplay**)displayPtr._cPtr(No.Dup) : null, otherContextPtr ? cast(GstGLContext**)otherContextPtr._cPtr(No.Dup) : null);
@@ -180,7 +180,7 @@ bool glEnsureElementData(gst.element.Element element, gstgl.gldisplay.GLDisplay 
       meta = a #GstVideoAffineTransformationMeta
       matrix = result of the 4x4 matrix
 */
-void glGetAffineTransformationMetaAsNdc(gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta meta, ref float[] matrix)
+void glGetAffineTransformationMetaAsNdc(gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta meta, ref float[] matrix) nothrow
 {
   gst_gl_get_affine_transformation_meta_as_ndc(meta ? cast(GstVideoAffineTransformationMeta*)meta._cPtr : null, matrix.ptr);
 }
@@ -194,7 +194,7 @@ void glGetAffineTransformationMetaAsNdc(gstvideo.video_affine_transformation_met
       plane = plane number in info to retrieve the data size of
     Returns: 
 */
-size_t glGetPlaneDataSize(gstvideo.video_info.VideoInfo info, gstvideo.video_alignment.VideoAlignment align_, uint plane)
+size_t glGetPlaneDataSize(gstvideo.video_info.VideoInfo info, gstvideo.video_alignment.VideoAlignment align_, uint plane) nothrow
 {
   size_t _retval;
   _retval = gst_gl_get_plane_data_size(info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, cast(const(GstVideoAlignment)*)&align_, plane);
@@ -202,7 +202,7 @@ size_t glGetPlaneDataSize(gstvideo.video_info.VideoInfo info, gstvideo.video_ali
 }
 
 /** */
-size_t glGetPlaneStart(gstvideo.video_info.VideoInfo info, gstvideo.video_alignment.VideoAlignment valign, uint plane)
+size_t glGetPlaneStart(gstvideo.video_info.VideoInfo info, gstvideo.video_alignment.VideoAlignment valign, uint plane) nothrow
 {
   size_t _retval;
   _retval = gst_gl_get_plane_start(info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, cast(const(GstVideoAlignment)*)&valign, plane);
@@ -210,7 +210,7 @@ size_t glGetPlaneStart(gstvideo.video_info.VideoInfo info, gstvideo.video_alignm
 }
 
 /** */
-bool glHandleContextQuery(gst.element.Element element, gst.query.Query query, gstgl.gldisplay.GLDisplay display = null, gstgl.glcontext.GLContext context = null, gstgl.glcontext.GLContext otherContext = null)
+bool glHandleContextQuery(gst.element.Element element, gst.query.Query query, gstgl.gldisplay.GLDisplay display = null, gstgl.glcontext.GLContext context = null, gstgl.glcontext.GLContext otherContext = null) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_gl_handle_context_query(element ? cast(GstElement*)element._cPtr(No.Dup) : null, query ? cast(GstQuery*)query._cPtr(No.Dup) : null, display ? cast(GstGLDisplay*)display._cPtr(No.Dup) : null, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, otherContext ? cast(GstGLContext*)otherContext._cPtr(No.Dup) : null);
@@ -231,7 +231,7 @@ bool glHandleContextQuery(gst.element.Element element, gst.query.Query query, gs
       otherContext = location of a #GstGLContext
     Returns: whether the display or other_context could be set successfully
 */
-bool glHandleSetContext(gst.element.Element element, gst.context.Context context, out gstgl.gldisplay.GLDisplay display, out gstgl.glcontext.GLContext otherContext)
+bool glHandleSetContext(gst.element.Element element, gst.context.Context context, out gstgl.gldisplay.GLDisplay display, out gstgl.glcontext.GLContext otherContext) nothrow
 {
   bool _retval;
   GstGLDisplay* _display;
@@ -251,7 +251,7 @@ bool glHandleSetContext(gst.element.Element element, gst.context.Context context
       b = another 2-dimensional 4x4 array of #gfloat
       result = the result of the multiplication
 */
-void glMultiplyMatrix4(float[] a, float[] b, ref float[] result)
+void glMultiplyMatrix4(float[] a, float[] b, ref float[] result) nothrow
 {
   assert(!a || a.length == 16);
   auto _a = a.ptr ? cast(const(float)*)a.ptr : [float.init].ptr;
@@ -268,7 +268,7 @@ void glMultiplyMatrix4(float[] a, float[] b, ref float[] result)
       meta = a #GstVideoAffineTransformationMeta
       matrix = a 4x4 matrix
 */
-void glSetAffineTransformationMetaFromNdc(gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta meta, float[] matrix)
+void glSetAffineTransformationMetaFromNdc(gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta meta, float[] matrix) nothrow
 {
   assert(!matrix || matrix.length == 16);
   auto _matrix = matrix.ptr ? cast(const(float)*)matrix.ptr : [float.init].ptr;
@@ -276,7 +276,7 @@ void glSetAffineTransformationMetaFromNdc(gstvideo.video_affine_transformation_m
 }
 
 /** */
-uint glSizedGlFormatFromGlFormatType(gstgl.glcontext.GLContext context, uint format, uint type)
+uint glSizedGlFormatFromGlFormatType(gstgl.glcontext.GLContext context, uint format, uint type) nothrow
 {
   uint _retval;
   _retval = gst_gl_sized_gl_format_from_gl_format_type(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, format, type);
@@ -284,7 +284,7 @@ uint glSizedGlFormatFromGlFormatType(gstgl.glcontext.GLContext context, uint for
 }
 
 /** */
-gobject.types.GType glStereoDownmixModeGetType()
+gobject.types.GType glStereoDownmixModeGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_gl_stereo_downmix_mode_get_type();
@@ -302,7 +302,7 @@ gobject.types.GType glStereoDownmixModeGetType()
       swizzle = input swizzle
       inversion = resulting inversion
 */
-void glSwizzleInvert(int[] swizzle, ref int[] inversion)
+void glSwizzleInvert(int[] swizzle, ref int[] inversion) nothrow
 {
   assert(!swizzle || swizzle.length == 4);
   auto _swizzle = swizzle.ptr ? cast(int*)swizzle.ptr : [int.init].ptr;
@@ -310,7 +310,7 @@ void glSwizzleInvert(int[] swizzle, ref int[] inversion)
 }
 
 /** */
-gobject.types.GType glSyncMetaApiGetType()
+gobject.types.GType glSyncMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_gl_sync_meta_api_get_type();
@@ -325,7 +325,7 @@ gobject.types.GType glSyncMetaApiGetType()
     Returns: the mask of #GstGLTextureTarget's in value or
           [gstgl.types.GLTextureTarget.None] on failure
 */
-gstgl.types.GLTextureTarget glValueGetTextureTargetMask(gobject.value.Value value)
+gstgl.types.GLTextureTarget glValueGetTextureTargetMask(gobject.value.Value value) nothrow
 {
   GstGLTextureTarget _cretval;
   _cretval = gst_gl_value_get_texture_target_mask(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -334,7 +334,7 @@ gstgl.types.GLTextureTarget glValueGetTextureTargetMask(gobject.value.Value valu
 }
 
 /** */
-bool glValueSetTextureTarget(gobject.value.Value value, gstgl.types.GLTextureTarget target)
+bool glValueSetTextureTarget(gobject.value.Value value, gstgl.types.GLTextureTarget target) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_gl_value_set_texture_target(value ? cast(GValue*)value._cPtr(No.Dup) : null, target);
@@ -350,7 +350,7 @@ bool glValueSetTextureTarget(gobject.value.Value value, gstgl.types.GLTextureTar
       targetMask = a bitwise mask of #GstGLTextureTarget's
     Returns: whether the target_mask could be set on value
 */
-bool glValueSetTextureTargetFromMask(gobject.value.Value value, gstgl.types.GLTextureTarget targetMask)
+bool glValueSetTextureTargetFromMask(gobject.value.Value value, gstgl.types.GLTextureTarget targetMask) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_gl_value_set_texture_target_from_mask(value ? cast(GValue*)value._cPtr(No.Dup) : null, targetMask);
@@ -358,7 +358,7 @@ bool glValueSetTextureTargetFromMask(gobject.value.Value value, gstgl.types.GLTe
 }
 
 /** */
-gstgl.types.GLSLVersion glVersionToGlslVersion(gstgl.types.GLAPI glApi, int maj, int min)
+gstgl.types.GLSLVersion glVersionToGlslVersion(gstgl.types.GLAPI glApi, int maj, int min) nothrow
 {
   GstGLSLVersion _cretval;
   _cretval = gst_gl_version_to_glsl_version(glApi, maj, min);
@@ -383,7 +383,7 @@ gstgl.types.GLSLVersion glVersionToGlslVersion(gstgl.types.GLAPI glApi, int maj,
       swizzle = the returned swizzle indices
     Returns: whether valid swizzle indices could be found
 */
-bool glVideoFormatSwizzle(gstvideo.types.VideoFormat videoFormat, ref int[] swizzle)
+bool glVideoFormatSwizzle(gstvideo.types.VideoFormat videoFormat, ref int[] swizzle) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_gl_video_format_swizzle(videoFormat, swizzle.ptr);
@@ -400,7 +400,7 @@ bool glVideoFormatSwizzle(gstvideo.types.VideoFormat videoFormat, ref int[] swiz
       profile = resulting #GstGLSLProfile
     Returns: TRUE if a valid `#version` string was found, FALSE otherwise
 */
-bool glslStringGetVersionProfile(string s, out gstgl.types.GLSLVersion version_, out gstgl.types.GLSLProfile profile)
+bool glslStringGetVersionProfile(string s, out gstgl.types.GLSLVersion version_, out gstgl.types.GLSLProfile profile) nothrow
 {
   bool _retval;
   const(char)* _s = s.toCString(No.Alloc);
@@ -409,7 +409,7 @@ bool glslStringGetVersionProfile(string s, out gstgl.types.GLSLVersion version_,
 }
 
 /** */
-bool isGlBaseMemory(gst.memory.Memory mem)
+bool isGlBaseMemory(gst.memory.Memory mem) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_is_gl_base_memory(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
@@ -417,7 +417,7 @@ bool isGlBaseMemory(gst.memory.Memory mem)
 }
 
 /** */
-bool isGlBuffer(gst.memory.Memory mem)
+bool isGlBuffer(gst.memory.Memory mem) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_is_gl_buffer(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
@@ -425,7 +425,7 @@ bool isGlBuffer(gst.memory.Memory mem)
 }
 
 /** */
-bool isGlMemory(gst.memory.Memory mem)
+bool isGlMemory(gst.memory.Memory mem) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_is_gl_memory(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
@@ -433,7 +433,7 @@ bool isGlMemory(gst.memory.Memory mem)
 }
 
 /** */
-bool isGlMemoryPbo(gst.memory.Memory mem)
+bool isGlMemoryPbo(gst.memory.Memory mem) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_is_gl_memory_pbo(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
@@ -441,7 +441,7 @@ bool isGlMemoryPbo(gst.memory.Memory mem)
 }
 
 /** */
-bool isGlRenderbuffer(gst.memory.Memory mem)
+bool isGlRenderbuffer(gst.memory.Memory mem) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_is_gl_renderbuffer(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);

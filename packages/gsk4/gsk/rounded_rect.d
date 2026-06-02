@@ -30,11 +30,8 @@ class RoundedRect
   GskRoundedRect _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.rounded_rect.RoundedRect");
-
     _cInstance = *cast(GskRoundedRect*)ptr;
 
     if (take)
@@ -42,7 +39,7 @@ class RoundedRect
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -51,7 +48,7 @@ class RoundedRect
       Get `bounds` field.
       Returns: the bounds of the rectangle
   */
-  @property graphene.rect.Rect bounds()
+  @property graphene.rect.Rect bounds() nothrow
   {
     return cToD!(graphene.rect.Rect)(cast(void*)&(cast(GskRoundedRect*)this._cPtr).bounds);
   }
@@ -63,7 +60,7 @@ class RoundedRect
         point = the point to check
       Returns: true if the point is inside the rounded rectangle
   */
-  bool containsPoint(graphene.point.Point point)
+  bool containsPoint(graphene.point.Point point) nothrow
   {
     bool _retval;
     _retval = cast(bool)gsk_rounded_rect_contains_point(cast(const(GskRoundedRect)*)this._cPtr, cast(const(graphene_point_t)*)&point);
@@ -77,7 +74,7 @@ class RoundedRect
         rect = the rectangle to check
       Returns: true if the rect is fully contained inside the rounded rectangle
   */
-  bool containsRect(graphene.rect.Rect rect)
+  bool containsRect(graphene.rect.Rect rect) nothrow
   {
     bool _retval;
     _retval = cast(bool)gsk_rounded_rect_contains_rect(cast(const(GskRoundedRect)*)this._cPtr, rect ? cast(const(graphene_rect_t)*)rect._cPtr(No.Dup) : null);
@@ -98,7 +95,7 @@ class RoundedRect
         bottomLeft = the rounding radius of the bottom left corner
       Returns: the initialized rectangle
   */
-  gsk.rounded_rect.RoundedRect init_(graphene.rect.Rect bounds, graphene.size.Size topLeft, graphene.size.Size topRight, graphene.size.Size bottomRight, graphene.size.Size bottomLeft)
+  gsk.rounded_rect.RoundedRect init_(graphene.rect.Rect bounds, graphene.size.Size topLeft, graphene.size.Size topRight, graphene.size.Size bottomRight, graphene.size.Size bottomLeft) nothrow
   {
     GskRoundedRect* _cretval;
     _cretval = gsk_rounded_rect_init(cast(GskRoundedRect*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, cast(const(graphene_size_t)*)&topLeft, cast(const(graphene_size_t)*)&topRight, cast(const(graphene_size_t)*)&bottomRight, cast(const(graphene_size_t)*)&bottomLeft);
@@ -116,7 +113,7 @@ class RoundedRect
         src = a [gsk.rounded_rect.RoundedRect]
       Returns: the initialized rectangle
   */
-  gsk.rounded_rect.RoundedRect initCopy(gsk.rounded_rect.RoundedRect src)
+  gsk.rounded_rect.RoundedRect initCopy(gsk.rounded_rect.RoundedRect src) nothrow
   {
     GskRoundedRect* _cretval;
     _cretval = gsk_rounded_rect_init_copy(cast(GskRoundedRect*)this._cPtr, src ? cast(const(GskRoundedRect)*)src._cPtr : null);
@@ -133,7 +130,7 @@ class RoundedRect
         radius = the border radius
       Returns: the initialized rectangle
   */
-  gsk.rounded_rect.RoundedRect initFromRect(graphene.rect.Rect bounds, float radius)
+  gsk.rounded_rect.RoundedRect initFromRect(graphene.rect.Rect bounds, float radius) nothrow
   {
     GskRoundedRect* _cretval;
     _cretval = gsk_rounded_rect_init_from_rect(cast(GskRoundedRect*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, radius);
@@ -148,7 +145,7 @@ class RoundedRect
         rect = the rectangle to check
       Returns: true if the rect intersects with the rounded rectangle
   */
-  bool intersectsRect(graphene.rect.Rect rect)
+  bool intersectsRect(graphene.rect.Rect rect) nothrow
   {
     bool _retval;
     _retval = cast(bool)gsk_rounded_rect_intersects_rect(cast(const(GskRoundedRect)*)this._cPtr, rect ? cast(const(graphene_rect_t)*)rect._cPtr(No.Dup) : null);
@@ -163,7 +160,7 @@ class RoundedRect
       or [gsk.rounded_clip_node.RoundedClipNode.new_] should be called.
       Returns: true if the rectangle is rectilinear
   */
-  bool isRectilinear()
+  bool isRectilinear() nothrow
   {
     bool _retval;
     _retval = cast(bool)gsk_rounded_rect_is_rectilinear(cast(const(GskRoundedRect)*)this._cPtr);
@@ -178,7 +175,7 @@ class RoundedRect
       and the corners do not overlap.
       Returns: the normalized rectangle
   */
-  gsk.rounded_rect.RoundedRect normalize()
+  gsk.rounded_rect.RoundedRect normalize() nothrow
   {
     GskRoundedRect* _cretval;
     _cretval = gsk_rounded_rect_normalize(cast(GskRoundedRect*)this._cPtr);
@@ -196,7 +193,7 @@ class RoundedRect
         dy = the vertical offset
       Returns: the offset rectangle
   */
-  gsk.rounded_rect.RoundedRect offset(float dx, float dy)
+  gsk.rounded_rect.RoundedRect offset(float dx, float dy) nothrow
   {
     GskRoundedRect* _cretval;
     _cretval = gsk_rounded_rect_offset(cast(GskRoundedRect*)this._cPtr, dx, dy);
@@ -221,7 +218,7 @@ class RoundedRect
         left = How far to move the left side to the right
       Returns: the resized [gsk.rounded_rect.RoundedRect]
   */
-  gsk.rounded_rect.RoundedRect shrink(float top, float right, float bottom, float left)
+  gsk.rounded_rect.RoundedRect shrink(float top, float right, float bottom, float left) nothrow
   {
     GskRoundedRect* _cretval;
     _cretval = gsk_rounded_rect_shrink(cast(GskRoundedRect*)this._cPtr, top, right, bottom, left);

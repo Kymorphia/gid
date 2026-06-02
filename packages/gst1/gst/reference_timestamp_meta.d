@@ -38,11 +38,8 @@ class ReferenceTimestampMeta
   GstReferenceTimestampMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gst.reference_timestamp_meta.ReferenceTimestampMeta");
-
     _cInstance = *cast(GstReferenceTimestampMeta*)ptr;
 
     if (take)
@@ -50,7 +47,7 @@ class ReferenceTimestampMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -59,7 +56,7 @@ class ReferenceTimestampMeta
       Get `parent` field.
       Returns: the parent #GstMeta structure
   */
-  @property gst.meta.Meta parent()
+  @property gst.meta.Meta parent() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstReferenceTimestampMeta*)this._cPtr).parent, No.Take);
   }
@@ -68,7 +65,7 @@ class ReferenceTimestampMeta
       Get `reference` field.
       Returns: identifier for the timestamp reference.
   */
-  @property gst.caps.Caps reference()
+  @property gst.caps.Caps reference() nothrow
   {
     return cToD!(gst.caps.Caps)(cast(void*)(cast(GstReferenceTimestampMeta*)this._cPtr).reference);
   }
@@ -78,7 +75,7 @@ class ReferenceTimestampMeta
       Params:
         propval = identifier for the timestamp reference.
   */
-  @property void reference(gst.caps.Caps propval)
+  @property void reference(gst.caps.Caps propval) nothrow
   {
     cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstReferenceTimestampMeta*)this._cPtr).reference);
     dToC(propval, cast(void*)&(cast(GstReferenceTimestampMeta*)this._cPtr).reference);
@@ -88,7 +85,7 @@ class ReferenceTimestampMeta
       Get `timestamp` field.
       Returns: timestamp
   */
-  @property gst.types.ClockTime timestamp()
+  @property gst.types.ClockTime timestamp() nothrow
   {
     return (cast(GstReferenceTimestampMeta*)this._cPtr).timestamp;
   }
@@ -98,7 +95,7 @@ class ReferenceTimestampMeta
       Params:
         propval = timestamp
   */
-  @property void timestamp(gst.types.ClockTime propval)
+  @property void timestamp(gst.types.ClockTime propval) nothrow
   {
     (cast(GstReferenceTimestampMeta*)this._cPtr).timestamp = propval;
   }
@@ -107,7 +104,7 @@ class ReferenceTimestampMeta
       Get `duration` field.
       Returns: duration, or [gst.types.CLOCK_TIME_NONE]
   */
-  @property gst.types.ClockTime duration()
+  @property gst.types.ClockTime duration() nothrow
   {
     return (cast(GstReferenceTimestampMeta*)this._cPtr).duration;
   }
@@ -117,7 +114,7 @@ class ReferenceTimestampMeta
       Params:
         propval = duration, or [gst.types.CLOCK_TIME_NONE]
   */
-  @property void duration(gst.types.ClockTime propval)
+  @property void duration(gst.types.ClockTime propval) nothrow
   {
     (cast(GstReferenceTimestampMeta*)this._cPtr).duration = propval;
   }
@@ -126,7 +123,7 @@ class ReferenceTimestampMeta
       Gets the global #GstMetaInfo describing the #GstReferenceTimestampMeta meta.
       Returns: The #GstMetaInfo
   */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_reference_timestamp_meta_get_info();

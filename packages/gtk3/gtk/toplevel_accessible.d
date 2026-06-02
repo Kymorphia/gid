@@ -15,26 +15,26 @@ class ToplevelAccessible : atk.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_toplevel_accessible_get_type != &gidSymbolNotFound ? gtk_toplevel_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ToplevelAccessible self()
+  override ToplevelAccessible self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class ToplevelAccessible : atk.object.ObjectWrap
       Get builder for [gtk.toplevel_accessible.ToplevelAccessible]
       Returns: New builder object
   */
-  static ToplevelAccessibleGidBuilder builder()
+  static ToplevelAccessibleGidBuilder builder() nothrow
   {
     return new ToplevelAccessibleGidBuilder;
   }
 
   /** */
-  gtk.window.Window[] getChildren()
+  gtk.window.Window[] getChildren() nothrow
   {
     GList* _cretval;
     _cretval = gtk_toplevel_accessible_get_children(cast(GtkToplevelAccessible*)this._cPtr);
@@ -70,7 +70,7 @@ final class ToplevelAccessibleGidBuilder : ToplevelAccessibleGidBuilderImpl!Topl
       Create object from builder.
       Returns: New object
   */
-  ToplevelAccessible build()
+  ToplevelAccessible build() nothrow
   {
     return new ToplevelAccessible(cast(void*)createGObject(ToplevelAccessible._getGType), No.Take);
   }

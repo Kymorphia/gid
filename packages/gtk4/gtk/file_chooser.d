@@ -62,7 +62,7 @@ interface FileChooser
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_file_chooser_get_type != &gidSymbolNotFound ? gtk_file_chooser_get_type() : cast(GType)0;
@@ -74,7 +74,7 @@ interface FileChooser
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  @property gtk.types.FileChooserAction action();
+  @property gtk.types.FileChooserAction action() nothrow;
 
   /**
       Set `action` property.
@@ -83,7 +83,7 @@ interface FileChooser
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  @property void action(gtk.types.FileChooserAction propval);
+  @property void action(gtk.types.FileChooserAction propval) nothrow;
 
   /**
       Get `createFolders` property.
@@ -92,7 +92,7 @@ interface FileChooser
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  @property bool createFolders();
+  @property bool createFolders() nothrow;
 
   /**
       Set `createFolders` property.
@@ -102,7 +102,7 @@ interface FileChooser
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  @property void createFolders(bool propval);
+  @property void createFolders(bool propval) nothrow;
 
   /**
       Get `filter` property.
@@ -110,7 +110,7 @@ interface FileChooser
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  @property gtk.file_filter.FileFilter filter();
+  @property gtk.file_filter.FileFilter filter() nothrow;
 
   /**
       Set `filter` property.
@@ -119,7 +119,7 @@ interface FileChooser
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  @property void filter(gtk.file_filter.FileFilter propval);
+  @property void filter(gtk.file_filter.FileFilter propval) nothrow;
 
   /**
       Get `filters` property.
@@ -131,7 +131,7 @@ interface FileChooser
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  @property gio.list_model.ListModel filters();
+  @property gio.list_model.ListModel filters() nothrow;
 
   /**
       Get `selectMultiple` property.
@@ -139,7 +139,7 @@ interface FileChooser
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  @property bool selectMultiple();
+  @property bool selectMultiple() nothrow;
 
   /**
       Set `selectMultiple` property.
@@ -148,7 +148,7 @@ interface FileChooser
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  @property void selectMultiple(bool propval);
+  @property void selectMultiple(bool propval) nothrow;
 
   /**
       Get `shortcutFolders` property.
@@ -160,7 +160,7 @@ interface FileChooser
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  @property gio.list_model.ListModel shortcutFolders();
+  @property gio.list_model.ListModel shortcutFolders() nothrow;
 
   /**
       Adds a 'choice' to the file chooser.
@@ -541,7 +541,7 @@ interface FileChooserGidBuilderImpl(T)
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  T action(gtk.types.FileChooserAction propval);
+  T action(gtk.types.FileChooserAction propval) nothrow;
 
   /**
       Set `createFolders` property.
@@ -552,7 +552,7 @@ interface FileChooserGidBuilderImpl(T)
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  T createFolders(bool propval);
+  T createFolders(bool propval) nothrow;
 
   /**
       Set `filter` property.
@@ -562,7 +562,7 @@ interface FileChooserGidBuilderImpl(T)
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  T filter(gtk.file_filter.FileFilter propval);
+  T filter(gtk.file_filter.FileFilter propval) nothrow;
 
   /**
       Set `selectMultiple` property.
@@ -572,5 +572,5 @@ interface FileChooserGidBuilderImpl(T)
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  T selectMultiple(bool propval);
+  T selectMultiple(bool propval) nothrow;
 }

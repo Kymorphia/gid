@@ -102,26 +102,26 @@ class DrawingArea : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_drawing_area_get_type != &gidSymbolNotFound ? gtk_drawing_area_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DrawingArea self()
+  override DrawingArea self() nothrow
   {
     return this;
   }
@@ -130,7 +130,7 @@ class DrawingArea : gtk.widget.Widget
       Get builder for [gtk.drawing_area.DrawingArea]
       Returns: New builder object
   */
-  static DrawingAreaGidBuilder builder()
+  static DrawingAreaGidBuilder builder() nothrow
   {
     return new DrawingAreaGidBuilder;
   }
@@ -139,7 +139,7 @@ class DrawingArea : gtk.widget.Widget
       Get `contentHeight` property.
       Returns: The content height.
   */
-  @property int contentHeight()
+  @property int contentHeight() nothrow
   {
     return getContentHeight();
   }
@@ -149,7 +149,7 @@ class DrawingArea : gtk.widget.Widget
       Params:
         propval = The content height.
   */
-  @property void contentHeight(int propval)
+  @property void contentHeight(int propval) nothrow
   {
     setContentHeight(propval);
   }
@@ -158,7 +158,7 @@ class DrawingArea : gtk.widget.Widget
       Get `contentWidth` property.
       Returns: The content width.
   */
-  @property int contentWidth()
+  @property int contentWidth() nothrow
   {
     return getContentWidth();
   }
@@ -168,7 +168,7 @@ class DrawingArea : gtk.widget.Widget
       Params:
         propval = The content width.
   */
-  @property void contentWidth(int propval)
+  @property void contentWidth(int propval) nothrow
   {
     setContentWidth(propval);
   }
@@ -177,7 +177,7 @@ class DrawingArea : gtk.widget.Widget
       Creates a new drawing area.
       Returns: a new [gtk.drawing_area.DrawingArea]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_drawing_area_new();
@@ -188,7 +188,7 @@ class DrawingArea : gtk.widget.Widget
       Retrieves the content height of the [gtk.drawing_area.DrawingArea].
       Returns: The height requested for content of the drawing area
   */
-  int getContentHeight()
+  int getContentHeight() nothrow
   {
     int _retval;
     _retval = gtk_drawing_area_get_content_height(cast(GtkDrawingArea*)this._cPtr);
@@ -199,7 +199,7 @@ class DrawingArea : gtk.widget.Widget
       Retrieves the content width of the [gtk.drawing_area.DrawingArea].
       Returns: The width requested for content of the drawing area
   */
-  int getContentWidth()
+  int getContentWidth() nothrow
   {
     int _retval;
     _retval = gtk_drawing_area_get_content_width(cast(GtkDrawingArea*)this._cPtr);
@@ -219,7 +219,7 @@ class DrawingArea : gtk.widget.Widget
       Params:
         height = the height of contents
   */
-  void setContentHeight(int height)
+  void setContentHeight(int height) nothrow
   {
     gtk_drawing_area_set_content_height(cast(GtkDrawingArea*)this._cPtr, height);
   }
@@ -237,7 +237,7 @@ class DrawingArea : gtk.widget.Widget
       Params:
         width = the width of contents
   */
-  void setContentWidth(int width)
+  void setContentWidth(int width) nothrow
   {
     gtk_drawing_area_set_content_width(cast(GtkDrawingArea*)this._cPtr, width);
   }
@@ -262,13 +262,20 @@ class DrawingArea : gtk.widget.Widget
         drawFunc = callback that lets you draw
             the drawing area's contents
   */
-  void setDrawFunc(gtk.types.DrawingAreaDrawFunc drawFunc = null)
+  void setDrawFunc(gtk.types.DrawingAreaDrawFunc drawFunc = null) nothrow
   {
-    extern(C) void _drawFuncCallback(GtkDrawingArea* drawingArea, cairo_t* cr, int width, int height, void* userData)
+    extern(C) void _drawFuncCallback(GtkDrawingArea* drawingArea, cairo_t* cr, int width, int height, void* userData) nothrow
     {
       auto _dlg = cast(gtk.types.DrawingAreaDrawFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.drawing_area.DrawingArea)(cast(void*)drawingArea, No.Take), cr ? new cairo.context.Context(cast(void*)cr, No.Take) : null, width, height);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.drawing_area.DrawingArea)(cast(void*)drawingArea, No.Take), cr ? new cairo.context.Context(cast(void*)cr, No.Take) : null, width, height);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.DrawingAreaDrawFunc");
+      }
     }
     auto _drawFuncCB = drawFunc ? &_drawFuncCallback : null;
     auto _drawFunc = drawFunc ? freezeDelegate(cast(void*)&drawFunc) : null;
@@ -299,7 +306,7 @@ class DrawingArea : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectResize(T)(T callback, Flag!"After" after = No.After)
+  gulong connectResize(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -307,7 +314,7 @@ class DrawingArea : gtk.widget.Widget
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.drawing_area.DrawingArea)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -322,7 +329,14 @@ class DrawingArea : gtk.widget.Widget
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.drawing_area.DrawingArea.resize");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -341,7 +355,7 @@ class DrawingAreaGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The content height.
       Returns: Builder instance for fluent chaining
   */
-  T contentHeight(int propval)
+  T contentHeight(int propval) nothrow
   {
     return setProperty("content-height", propval);
   }
@@ -352,7 +366,7 @@ class DrawingAreaGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The content width.
       Returns: Builder instance for fluent chaining
   */
-  T contentWidth(int propval)
+  T contentWidth(int propval) nothrow
   {
     return setProperty("content-width", propval);
   }
@@ -365,7 +379,7 @@ final class DrawingAreaGidBuilder : DrawingAreaGidBuilderImpl!DrawingAreaGidBuil
       Create object from builder.
       Returns: New object
   */
-  DrawingArea build()
+  DrawingArea build() nothrow
   {
     return new DrawingArea(cast(void*)createGObject(DrawingArea._getGType), No.Take);
   }

@@ -15,26 +15,26 @@ class UIntArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_uint_array_builder_get_type != &gidSymbolNotFound ? garrow_uint_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UIntArrayBuilder self()
+  override UIntArrayBuilder self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class UIntArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.uint_array_builder.UIntArrayBuilder]
       Returns: New builder object
   */
-  static UIntArrayBuilderGidBuilder builder()
+  static UIntArrayBuilderGidBuilder builder() nothrow
   {
     return new UIntArrayBuilderGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowUIntArrayBuilder* _cretval;
     _cretval = garrow_uint_array_builder_new();
@@ -124,7 +124,7 @@ final class UIntArrayBuilderGidBuilder : UIntArrayBuilderGidBuilderImpl!UIntArra
       Create object from builder.
       Returns: New object
   */
-  UIntArrayBuilder build()
+  UIntArrayBuilder build() nothrow
   {
     return new UIntArrayBuilder(cast(void*)createGObject(UIntArrayBuilder._getGType), Yes.Take);
   }

@@ -16,26 +16,26 @@ class RecordBatchIterator : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_record_batch_iterator_get_type != &gidSymbolNotFound ? garrow_record_batch_iterator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RecordBatchIterator self()
+  override RecordBatchIterator self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class RecordBatchIterator : gobject.object.ObjectWrap
       Get builder for [arrow.record_batch_iterator.RecordBatchIterator]
       Returns: New builder object
   */
-  static RecordBatchIteratorGidBuilder builder()
+  static RecordBatchIteratorGidBuilder builder() nothrow
   {
     return new RecordBatchIteratorGidBuilder;
   }
 
   /** */
-  this(arrow.record_batch.RecordBatch[] recordBatches)
+  this(arrow.record_batch.RecordBatch[] recordBatches) nothrow
   {
     GArrowRecordBatchIterator* _cretval;
     auto _recordBatches = gListFromD!(arrow.record_batch.RecordBatch)(recordBatches);
@@ -60,7 +60,7 @@ class RecordBatchIterator : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equal(arrow.record_batch_iterator.RecordBatchIterator otherIterator)
+  bool equal(arrow.record_batch_iterator.RecordBatchIterator otherIterator) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_record_batch_iterator_equal(cast(GArrowRecordBatchIterator*)this._cPtr, otherIterator ? cast(GArrowRecordBatchIterator*)otherIterator._cPtr(No.Dup) : null);
@@ -97,7 +97,7 @@ class RecordBatchIteratorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
 {
 
   /** */
-  T iterator(void* propval)
+  T iterator(void* propval) nothrow
   {
     return setProperty("iterator", propval);
   }
@@ -110,7 +110,7 @@ final class RecordBatchIteratorGidBuilder : RecordBatchIteratorGidBuilderImpl!Re
       Create object from builder.
       Returns: New object
   */
-  RecordBatchIterator build()
+  RecordBatchIterator build() nothrow
   {
     return new RecordBatchIterator(cast(void*)createGObject(RecordBatchIterator._getGType), Yes.Take);
   }

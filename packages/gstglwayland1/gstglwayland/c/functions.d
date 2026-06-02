@@ -16,7 +16,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgstgl-1.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // GLDisplayWayland
   GType function() c_gst_gl_display_wayland_get_type; ///

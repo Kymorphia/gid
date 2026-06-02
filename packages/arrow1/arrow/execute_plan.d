@@ -23,26 +23,26 @@ class ExecutePlan : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_execute_plan_get_type != &gidSymbolNotFound ? garrow_execute_plan_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ExecutePlan self()
+  override ExecutePlan self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class ExecutePlan : gobject.object.ObjectWrap
       Get builder for [arrow.execute_plan.ExecutePlan]
       Returns: New builder object
   */
-  static ExecutePlanGidBuilder builder()
+  static ExecutePlanGidBuilder builder() nothrow
   {
     return new ExecutePlanGidBuilder;
   }
@@ -215,7 +215,7 @@ class ExecutePlan : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.execute_node.ExecuteNode[] getNodes()
+  arrow.execute_node.ExecuteNode[] getNodes() nothrow
   {
     GList* _cretval;
     _cretval = garrow_execute_plan_get_nodes(cast(GArrowExecutePlan*)this._cPtr);
@@ -226,7 +226,7 @@ class ExecutePlan : gobject.object.ObjectWrap
   /**
       Starts this plan.
   */
-  void start()
+  void start() nothrow
   {
     garrow_execute_plan_start(cast(GArrowExecutePlan*)this._cPtr);
   }
@@ -234,7 +234,7 @@ class ExecutePlan : gobject.object.ObjectWrap
   /**
       Stops this plan.
   */
-  void stop()
+  void stop() nothrow
   {
     garrow_execute_plan_stop(cast(GArrowExecutePlan*)this._cPtr);
   }
@@ -271,7 +271,7 @@ class ExecutePlanGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T plan(void* propval)
+  T plan(void* propval) nothrow
   {
     return setProperty("plan", propval);
   }
@@ -284,7 +284,7 @@ final class ExecutePlanGidBuilder : ExecutePlanGidBuilderImpl!ExecutePlanGidBuil
       Create object from builder.
       Returns: New object
   */
-  ExecutePlan build()
+  ExecutePlan build() nothrow
   {
     return new ExecutePlan(cast(void*)createGObject(ExecutePlan._getGType), Yes.Take);
   }

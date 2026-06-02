@@ -19,11 +19,8 @@ class MIKEYPayloadPKE
   GstMIKEYPayloadPKE _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstsdp.mikeypayload_pke.MIKEYPayloadPKE");
-
     _cInstance = *cast(GstMIKEYPayloadPKE*)ptr;
 
     if (take)
@@ -31,7 +28,7 @@ class MIKEYPayloadPKE
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -40,7 +37,7 @@ class MIKEYPayloadPKE
       Get `pt` field.
       Returns: the common #GstMIKEYPayload
   */
-  @property gstsdp.mikeypayload.MIKEYPayload pt()
+  @property gstsdp.mikeypayload.MIKEYPayload pt() nothrow
   {
     return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadPKE*)this._cPtr).pt);
   }
@@ -49,7 +46,7 @@ class MIKEYPayloadPKE
       Get `C` field.
       Returns: envelope key cache indicator
   */
-  @property gstsdp.types.MIKEYCacheType C()
+  @property gstsdp.types.MIKEYCacheType C() nothrow
   {
     return cast(gstsdp.types.MIKEYCacheType)(cast(GstMIKEYPayloadPKE*)this._cPtr).C;
   }
@@ -59,7 +56,7 @@ class MIKEYPayloadPKE
       Params:
         propval = envelope key cache indicator
   */
-  @property void C(gstsdp.types.MIKEYCacheType propval)
+  @property void C(gstsdp.types.MIKEYCacheType propval) nothrow
   {
     (cast(GstMIKEYPayloadPKE*)this._cPtr).C = cast(GstMIKEYCacheType)propval;
   }
@@ -68,7 +65,7 @@ class MIKEYPayloadPKE
       Get `dataLen` field.
       Returns: length of @data
   */
-  @property ushort dataLen()
+  @property ushort dataLen() nothrow
   {
     return (cast(GstMIKEYPayloadPKE*)this._cPtr).dataLen;
   }
@@ -78,7 +75,7 @@ class MIKEYPayloadPKE
       Params:
         propval = length of @data
   */
-  @property void dataLen(ushort propval)
+  @property void dataLen(ushort propval) nothrow
   {
     (cast(GstMIKEYPayloadPKE*)this._cPtr).dataLen = propval;
   }

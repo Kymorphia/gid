@@ -25,7 +25,7 @@ class GLAllocationParams : gobject.boxed.Boxed
         context = a #GstGLContext
         notify = a #GDestroyNotify
   */
-  this(size_t structSize = size_t.init, GstGLAllocationParamsFreeFunc free = GstGLAllocationParamsFreeFunc.init, uint allocFlags = uint.init, size_t allocSize = size_t.init, gstgl.glcontext.GLContext context = gstgl.glcontext.GLContext.init, GDestroyNotify notify = GDestroyNotify.init)
+  this(size_t structSize = size_t.init, GstGLAllocationParamsFreeFunc free = GstGLAllocationParamsFreeFunc.init, uint allocFlags = uint.init, size_t allocSize = size_t.init, gstgl.glcontext.GLContext context = gstgl.glcontext.GLContext.init, GDestroyNotify notify = GDestroyNotify.init) nothrow
   {
     super(gMalloc(GstGLAllocationParams.sizeof), Yes.Take);
     this.structSize = structSize;
@@ -37,32 +37,32 @@ class GLAllocationParams : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_allocation_params_get_type != &gidSymbolNotFound ? gst_gl_allocation_params_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLAllocationParams self()
+  override GLAllocationParams self() nothrow
   {
     return this;
   }
@@ -71,7 +71,7 @@ class GLAllocationParams : gobject.boxed.Boxed
       Get `structSize` field.
       Returns: the size of the struct (including and subclass data)
   */
-  @property size_t structSize()
+  @property size_t structSize() nothrow
   {
     return (cast(GstGLAllocationParams*)this._cPtr).structSize;
   }
@@ -81,7 +81,7 @@ class GLAllocationParams : gobject.boxed.Boxed
       Params:
         propval = the size of the struct (including and subclass data)
   */
-  @property void structSize(size_t propval)
+  @property void structSize(size_t propval) nothrow
   {
     (cast(GstGLAllocationParams*)this._cPtr).structSize = propval;
   }
@@ -90,7 +90,7 @@ class GLAllocationParams : gobject.boxed.Boxed
       Get `free` field.
       Returns: a #GstGLAllocationParamsFreeFunc
   */
-  @property GstGLAllocationParamsFreeFunc free()
+  @property GstGLAllocationParamsFreeFunc free() nothrow
   {
     return (cast(GstGLAllocationParams*)this._cPtr).free;
   }
@@ -101,7 +101,7 @@ class GLAllocationParams : gobject.boxed.Boxed
         propval = a #GstGLAllocationParamsFreeFunc
   */
 
-  @property void free(GstGLAllocationParamsFreeFunc propval)
+  @property void free(GstGLAllocationParamsFreeFunc propval) nothrow
   {
     (cast(GstGLAllocationParams*)this._cPtr).free = propval;
   }
@@ -110,7 +110,7 @@ class GLAllocationParams : gobject.boxed.Boxed
       Get `allocFlags` field.
       Returns: allocation flags
   */
-  @property uint allocFlags()
+  @property uint allocFlags() nothrow
   {
     return (cast(GstGLAllocationParams*)this._cPtr).allocFlags;
   }
@@ -120,7 +120,7 @@ class GLAllocationParams : gobject.boxed.Boxed
       Params:
         propval = allocation flags
   */
-  @property void allocFlags(uint propval)
+  @property void allocFlags(uint propval) nothrow
   {
     (cast(GstGLAllocationParams*)this._cPtr).allocFlags = propval;
   }
@@ -129,7 +129,7 @@ class GLAllocationParams : gobject.boxed.Boxed
       Get `allocSize` field.
       Returns: the allocation size
   */
-  @property size_t allocSize()
+  @property size_t allocSize() nothrow
   {
     return (cast(GstGLAllocationParams*)this._cPtr).allocSize;
   }
@@ -139,7 +139,7 @@ class GLAllocationParams : gobject.boxed.Boxed
       Params:
         propval = the allocation size
   */
-  @property void allocSize(size_t propval)
+  @property void allocSize(size_t propval) nothrow
   {
     (cast(GstGLAllocationParams*)this._cPtr).allocSize = propval;
   }
@@ -148,7 +148,7 @@ class GLAllocationParams : gobject.boxed.Boxed
       Get `allocParams` field.
       Returns: the #GstAllocationParams
   */
-  @property gst.allocation_params.AllocationParams allocParams()
+  @property gst.allocation_params.AllocationParams allocParams() nothrow
   {
     return cToD!(gst.allocation_params.AllocationParams)(cast(void*)(cast(GstGLAllocationParams*)this._cPtr).allocParams);
   }
@@ -157,7 +157,7 @@ class GLAllocationParams : gobject.boxed.Boxed
       Get `context` field.
       Returns: a #GstGLContext
   */
-  @property gstgl.glcontext.GLContext context()
+  @property gstgl.glcontext.GLContext context() nothrow
   {
     return cToD!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLAllocationParams*)this._cPtr).context);
   }
@@ -167,7 +167,7 @@ class GLAllocationParams : gobject.boxed.Boxed
       Params:
         propval = a #GstGLContext
   */
-  @property void context(gstgl.glcontext.GLContext propval)
+  @property void context(gstgl.glcontext.GLContext propval) nothrow
   {
     cValueFree!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLAllocationParams*)this._cPtr).context);
     dToC(propval, cast(void*)&(cast(GstGLAllocationParams*)this._cPtr).context);
@@ -177,7 +177,7 @@ class GLAllocationParams : gobject.boxed.Boxed
       Get `notify` field.
       Returns: a #GDestroyNotify
   */
-  @property GDestroyNotify notify()
+  @property GDestroyNotify notify() nothrow
   {
     return (cast(GstGLAllocationParams*)this._cPtr).notify;
   }
@@ -188,13 +188,13 @@ class GLAllocationParams : gobject.boxed.Boxed
         propval = a #GDestroyNotify
   */
 
-  @property void notify(GDestroyNotify propval)
+  @property void notify(GDestroyNotify propval) nothrow
   {
     (cast(GstGLAllocationParams*)this._cPtr).notify = propval;
   }
 
   /** */
-  gstgl.glallocation_params.GLAllocationParams copy()
+  gstgl.glallocation_params.GLAllocationParams copy() nothrow
   {
     GstGLAllocationParams* _cretval;
     _cretval = gst_gl_allocation_params_copy(cast(GstGLAllocationParams*)this._cPtr);
@@ -209,7 +209,7 @@ class GLAllocationParams : gobject.boxed.Boxed
       Params:
         dest = the destination #GstGLAllocationParams
   */
-  void copyData(gstgl.glallocation_params.GLAllocationParams dest)
+  void copyData(gstgl.glallocation_params.GLAllocationParams dest) nothrow
   {
     gst_gl_allocation_params_copy_data(cast(GstGLAllocationParams*)this._cPtr, dest ? cast(GstGLAllocationParams*)dest._cPtr(No.Dup) : null);
   }
@@ -218,7 +218,7 @@ class GLAllocationParams : gobject.boxed.Boxed
       Frees the dynamically allocated data in params.  Direct subclasses
       should call this function in their own overridden free function.
   */
-  void freeData()
+  void freeData() nothrow
   {
     gst_gl_allocation_params_free_data(cast(GstGLAllocationParams*)this._cPtr);
   }

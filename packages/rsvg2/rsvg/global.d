@@ -15,7 +15,7 @@ import rsvg.types;
 
     Deprecated: No-op. This function should not be called from normal programs.
 */
-void cleanup()
+void cleanup() nothrow
 {
   rsvg_cleanup();
 }
@@ -25,7 +25,7 @@ void cleanup()
 
     Deprecated: There is no need to initialize librsvg.
 */
-void init_()
+void init_() nothrow
 {
   rsvg_init();
 }
@@ -178,7 +178,7 @@ gdkpixbuf.pixbuf.Pixbuf pixbufFromFileAtZoomWithMax(string filename, double xZoo
       created; it would not work after that.  To avoid global mutable state, please
       use [rsvg.handle.Handle.setDpi] instead.
 */
-void setDefaultDpi(double dpi)
+void setDefaultDpi(double dpi) nothrow
 {
   rsvg_set_default_dpi(dpi);
 }
@@ -196,7 +196,7 @@ void setDefaultDpi(double dpi)
       created; it would not work after that.  To avoid global mutable state, please
       use [rsvg.handle.Handle.setDpi] instead.
 */
-void setDefaultDpiXY(double dpiX, double dpiY)
+void setDefaultDpiXY(double dpiX, double dpiY) nothrow
 {
   rsvg_set_default_dpi_x_y(dpiX, dpiY);
 }
@@ -206,7 +206,7 @@ void setDefaultDpiXY(double dpiX, double dpiY)
 
     Deprecated: There is no need to de-initialize librsvg.
 */
-void term()
+void term() nothrow
 {
   rsvg_term();
 }

@@ -17,11 +17,8 @@ class SDPZone
   GstSDPZone _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstsdp.sdpzone.SDPZone");
-
     _cInstance = *cast(GstSDPZone*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class SDPZone
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class SDPZone
       Get `time` field.
       Returns: the NTP time that a time zone adjustment happens
   */
-  @property string time()
+  @property string time() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPZone*)this._cPtr).time);
   }
@@ -48,7 +45,7 @@ class SDPZone
       Params:
         propval = the NTP time that a time zone adjustment happens
   */
-  @property void time(string propval)
+  @property void time(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPZone*)this._cPtr).time);
     dToC(propval, cast(void*)&(cast(GstSDPZone*)this._cPtr).time);
@@ -58,7 +55,7 @@ class SDPZone
       Get `typedTime` field.
       Returns: the offset from the time when the session was first scheduled
   */
-  @property string typedTime()
+  @property string typedTime() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPZone*)this._cPtr).typedTime);
   }
@@ -68,7 +65,7 @@ class SDPZone
       Params:
         propval = the offset from the time when the session was first scheduled
   */
-  @property void typedTime(string propval)
+  @property void typedTime(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPZone*)this._cPtr).typedTime);
     dToC(propval, cast(void*)&(cast(GstSDPZone*)this._cPtr).typedTime);
@@ -78,7 +75,7 @@ class SDPZone
       Reset the zone information in zone.
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult clear()
+  gstsdp.types.SDPResult clear() nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_zone_clear(cast(GstSDPZone*)this._cPtr);
@@ -94,7 +91,7 @@ class SDPZone
         typedTime = the offset from the time when the session was first scheduled
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult set(string adjTime, string typedTime)
+  gstsdp.types.SDPResult set(string adjTime, string typedTime) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _adjTime = adjTime.toCString(No.Alloc);

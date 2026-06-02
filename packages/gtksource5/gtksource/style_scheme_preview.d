@@ -32,26 +32,26 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_style_scheme_preview_get_type != &gidSymbolNotFound ? gtk_source_style_scheme_preview_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StyleSchemePreview self()
+  override StyleSchemePreview self() nothrow
   {
     return this;
   }
@@ -60,25 +60,25 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
       Get builder for [gtksource.style_scheme_preview.StyleSchemePreview]
       Returns: New builder object
   */
-  static StyleSchemePreviewGidBuilder builder()
+  static StyleSchemePreviewGidBuilder builder() nothrow
   {
     return new StyleSchemePreviewGidBuilder;
   }
 
   /** */
-  @property gtksource.style_scheme.StyleScheme scheme()
+  @property gtksource.style_scheme.StyleScheme scheme() nothrow
   {
     return getScheme();
   }
 
   /** */
-  @property bool selected()
+  @property bool selected() nothrow
   {
     return getSelected();
   }
 
   /** */
-  @property void selected(bool propval)
+  @property void selected(bool propval) nothrow
   {
     setSelected(propval);
   }
@@ -93,7 +93,7 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
         scheme = a #GtkSourceStyleScheme
       Returns: a #GtkWidget
   */
-  this(gtksource.style_scheme.StyleScheme scheme)
+  this(gtksource.style_scheme.StyleScheme scheme) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_source_style_scheme_preview_new(scheme ? cast(GtkSourceStyleScheme*)scheme._cPtr(No.Dup) : null);
@@ -104,7 +104,7 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
       Gets the #GtkSourceStyleScheme previewed by the widget.
       Returns: a #GtkSourceStyleScheme
   */
-  gtksource.style_scheme.StyleScheme getScheme()
+  gtksource.style_scheme.StyleScheme getScheme() nothrow
   {
     GtkSourceStyleScheme* _cretval;
     _cretval = gtk_source_style_scheme_preview_get_scheme(cast(GtkSourceStyleSchemePreview*)this._cPtr);
@@ -113,7 +113,7 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /** */
-  bool getSelected()
+  bool getSelected() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_style_scheme_preview_get_selected(cast(GtkSourceStyleSchemePreview*)this._cPtr);
@@ -121,7 +121,7 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /** */
-  void setSelected(bool selected)
+  void setSelected(bool selected) nothrow
   {
     gtk_source_style_scheme_preview_set_selected(cast(GtkSourceStyleSchemePreview*)this._cPtr, selected);
   }
@@ -141,13 +141,13 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.style_scheme_preview.StyleSchemePreview)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -156,7 +156,14 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.style_scheme_preview.StyleSchemePreview.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -171,13 +178,13 @@ class StyleSchemePreviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, g
   mixin ActionableGidBuilderT!();
 
   /** */
-  T scheme(gtksource.style_scheme.StyleScheme propval)
+  T scheme(gtksource.style_scheme.StyleScheme propval) nothrow
   {
     return setProperty("scheme", propval);
   }
 
   /** */
-  T selected(bool propval)
+  T selected(bool propval) nothrow
   {
     return setProperty("selected", propval);
   }
@@ -190,7 +197,7 @@ final class StyleSchemePreviewGidBuilder : StyleSchemePreviewGidBuilderImpl!Styl
       Create object from builder.
       Returns: New object
   */
-  StyleSchemePreview build()
+  StyleSchemePreview build() nothrow
   {
     return new StyleSchemePreview(cast(void*)createGObject(StyleSchemePreview._getGType), No.Take);
   }

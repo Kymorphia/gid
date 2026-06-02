@@ -116,26 +116,26 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_level_bar_get_type != &gidSymbolNotFound ? gtk_level_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LevelBar self()
+  override LevelBar self() nothrow
   {
     return this;
   }
@@ -144,7 +144,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Get builder for [gtk.level_bar.LevelBar]
       Returns: New builder object
   */
-  static LevelBarGidBuilder builder()
+  static LevelBarGidBuilder builder() nothrow
   {
     return new LevelBarGidBuilder;
   }
@@ -154,7 +154,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Returns: Level bars normally grow from top to bottom or left to right.
         Inverted level bars grow in the opposite direction.
   */
-  @property bool inverted()
+  @property bool inverted() nothrow
   {
     return getInverted();
   }
@@ -165,7 +165,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
         propval = Level bars normally grow from top to bottom or left to right.
           Inverted level bars grow in the opposite direction.
   */
-  @property void inverted(bool propval)
+  @property void inverted(bool propval) nothrow
   {
     setInverted(propval);
   }
@@ -175,7 +175,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Returns: The #GtkLevelBar:max-value property determaxes the maximum value of
         the interval that can be displayed by the bar.
   */
-  @property double maxValue()
+  @property double maxValue() nothrow
   {
     return getMaxValue();
   }
@@ -186,7 +186,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
         propval = The #GtkLevelBar:max-value property determaxes the maximum value of
           the interval that can be displayed by the bar.
   */
-  @property void maxValue(double propval)
+  @property void maxValue(double propval) nothrow
   {
     setMaxValue(propval);
   }
@@ -196,7 +196,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Returns: The #GtkLevelBar:min-value property determines the minimum value of
         the interval that can be displayed by the bar.
   */
-  @property double minValue()
+  @property double minValue() nothrow
   {
     return getMinValue();
   }
@@ -207,7 +207,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
         propval = The #GtkLevelBar:min-value property determines the minimum value of
           the interval that can be displayed by the bar.
   */
-  @property void minValue(double propval)
+  @property void minValue(double propval) nothrow
   {
     setMinValue(propval);
   }
@@ -223,7 +223,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
         draw area, with the number of blocks being equal to the units separating
         the integral roundings of #GtkLevelBar:min-value and #GtkLevelBar:max-value.
   */
-  @property gtk.types.LevelBarMode mode()
+  @property gtk.types.LevelBarMode mode() nothrow
   {
     return getMode();
   }
@@ -240,7 +240,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
           draw area, with the number of blocks being equal to the units separating
           the integral roundings of #GtkLevelBar:min-value and #GtkLevelBar:max-value.
   */
-  @property void mode(gtk.types.LevelBarMode propval)
+  @property void mode(gtk.types.LevelBarMode propval) nothrow
   {
     setMode(propval);
   }
@@ -250,7 +250,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Returns: The #GtkLevelBar:value property determines the currently
         filled value of the level bar.
   */
-  @property double value()
+  @property double value() nothrow
   {
     return getValue();
   }
@@ -261,7 +261,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
         propval = The #GtkLevelBar:value property determines the currently
           filled value of the level bar.
   */
-  @property void value(double propval)
+  @property void value(double propval) nothrow
   {
     setValue(propval);
   }
@@ -272,7 +272,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Creates a new #GtkLevelBar.
       Returns: a #GtkLevelBar.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_level_bar_new();
@@ -288,7 +288,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
         maxValue = a positive value
       Returns: a #GtkLevelBar
   */
-  static gtk.level_bar.LevelBar newForInterval(double minValue, double maxValue)
+  static gtk.level_bar.LevelBar newForInterval(double minValue, double maxValue) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_level_bar_new_for_interval(minValue, maxValue);
@@ -309,7 +309,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
         name = the name of the new offset
         value = the value for the new offset
   */
-  void addOffsetValue(string name, double value)
+  void addOffsetValue(string name, double value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_level_bar_add_offset_value(cast(GtkLevelBar*)this._cPtr, _name, value);
@@ -319,7 +319,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Return the value of the #GtkLevelBar:inverted property.
       Returns: true if the level bar is inverted
   */
-  bool getInverted()
+  bool getInverted() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_level_bar_get_inverted(cast(GtkLevelBar*)this._cPtr);
@@ -330,7 +330,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Returns the value of the #GtkLevelBar:max-value property.
       Returns: a positive value
   */
-  double getMaxValue()
+  double getMaxValue() nothrow
   {
     double _retval;
     _retval = gtk_level_bar_get_max_value(cast(GtkLevelBar*)this._cPtr);
@@ -341,7 +341,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Returns the value of the #GtkLevelBar:min-value property.
       Returns: a positive value
   */
-  double getMinValue()
+  double getMinValue() nothrow
   {
     double _retval;
     _retval = gtk_level_bar_get_min_value(cast(GtkLevelBar*)this._cPtr);
@@ -352,7 +352,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Returns the value of the #GtkLevelBar:mode property.
       Returns: a #GtkLevelBarMode
   */
-  gtk.types.LevelBarMode getMode()
+  gtk.types.LevelBarMode getMode() nothrow
   {
     GtkLevelBarMode _cretval;
     _cretval = gtk_level_bar_get_mode(cast(GtkLevelBar*)this._cPtr);
@@ -369,7 +369,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
         value = location where to store the value
       Returns: true if the specified offset is found
   */
-  bool getOffsetValue(string name, out double value)
+  bool getOffsetValue(string name, out double value) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -382,7 +382,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Returns: a value in the interval between
             #GtkLevelBar:min-value and #GtkLevelBar:max-value
   */
-  double getValue()
+  double getValue() nothrow
   {
     double _retval;
     _retval = gtk_level_bar_get_value(cast(GtkLevelBar*)this._cPtr);
@@ -396,7 +396,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         name = the name of an offset in the bar
   */
-  void removeOffsetValue(string name = null)
+  void removeOffsetValue(string name = null) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_level_bar_remove_offset_value(cast(GtkLevelBar*)this._cPtr, _name);
@@ -408,7 +408,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         inverted = true to invert the level bar
   */
-  void setInverted(bool inverted)
+  void setInverted(bool inverted) nothrow
   {
     gtk_level_bar_set_inverted(cast(GtkLevelBar*)this._cPtr, inverted);
   }
@@ -422,7 +422,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         value = a positive value
   */
-  void setMaxValue(double value)
+  void setMaxValue(double value) nothrow
   {
     gtk_level_bar_set_max_value(cast(GtkLevelBar*)this._cPtr, value);
   }
@@ -436,7 +436,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         value = a positive value
   */
-  void setMinValue(double value)
+  void setMinValue(double value) nothrow
   {
     gtk_level_bar_set_min_value(cast(GtkLevelBar*)this._cPtr, value);
   }
@@ -447,7 +447,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         mode = a #GtkLevelBarMode
   */
-  void setMode(gtk.types.LevelBarMode mode)
+  void setMode(gtk.types.LevelBarMode mode) nothrow
   {
     gtk_level_bar_set_mode(cast(GtkLevelBar*)this._cPtr, mode);
   }
@@ -459,7 +459,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
         value = a value in the interval between
               #GtkLevelBar:min-value and #GtkLevelBar:max-value
   */
-  void setValue(double value)
+  void setValue(double value) nothrow
   {
     gtk_level_bar_set_value(cast(GtkLevelBar*)this._cPtr, value);
   }
@@ -487,14 +487,14 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectOffsetChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectOffsetChanged(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.level_bar.LevelBar)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -506,7 +506,14 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.level_bar.LevelBar.offsetChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -527,7 +534,7 @@ class LevelBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orienta
           Inverted level bars grow in the opposite direction.
       Returns: Builder instance for fluent chaining
   */
-  T inverted(bool propval)
+  T inverted(bool propval) nothrow
   {
     return setProperty("inverted", propval);
   }
@@ -539,7 +546,7 @@ class LevelBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orienta
           the interval that can be displayed by the bar.
       Returns: Builder instance for fluent chaining
   */
-  T maxValue(double propval)
+  T maxValue(double propval) nothrow
   {
     return setProperty("max-value", propval);
   }
@@ -551,7 +558,7 @@ class LevelBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orienta
           the interval that can be displayed by the bar.
       Returns: Builder instance for fluent chaining
   */
-  T minValue(double propval)
+  T minValue(double propval) nothrow
   {
     return setProperty("min-value", propval);
   }
@@ -569,7 +576,7 @@ class LevelBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orienta
           the integral roundings of #GtkLevelBar:min-value and #GtkLevelBar:max-value.
       Returns: Builder instance for fluent chaining
   */
-  T mode(gtk.types.LevelBarMode propval)
+  T mode(gtk.types.LevelBarMode propval) nothrow
   {
     return setProperty("mode", propval);
   }
@@ -581,7 +588,7 @@ class LevelBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orienta
           filled value of the level bar.
       Returns: Builder instance for fluent chaining
   */
-  T value(double propval)
+  T value(double propval) nothrow
   {
     return setProperty("value", propval);
   }
@@ -594,7 +601,7 @@ final class LevelBarGidBuilder : LevelBarGidBuilderImpl!LevelBarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  LevelBar build()
+  LevelBar build() nothrow
   {
     return new LevelBar(cast(void*)createGObject(LevelBar._getGType), No.Take);
   }

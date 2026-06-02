@@ -30,26 +30,26 @@ class HScale : gtk.scale.Scale
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_hscale_get_type != &gidSymbolNotFound ? gtk_hscale_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HScale self()
+  override HScale self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class HScale : gtk.scale.Scale
       Get builder for [gtk.hscale.HScale]
       Returns: New builder object
   */
-  static HScaleGidBuilder builder()
+  static HScaleGidBuilder builder() nothrow
   {
     return new HScaleGidBuilder;
   }
@@ -73,7 +73,7 @@ class HScale : gtk.scale.Scale
   
       Deprecated: Use [gtk.scale.Scale.new_] with [gtk.types.Orientation.Horizontal] instead
   */
-  this(gtk.adjustment.Adjustment adjustment = null)
+  this(gtk.adjustment.Adjustment adjustment = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_hscale_new(adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
@@ -98,7 +98,7 @@ class HScale : gtk.scale.Scale
   
       Deprecated: Use [gtk.scale.Scale.newWithRange] with [gtk.types.Orientation.Horizontal] instead
   */
-  static gtk.hscale.HScale newWithRange(double min, double max, double step)
+  static gtk.hscale.HScale newWithRange(double min, double max, double step) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_hscale_new_with_range(min, max, step);
@@ -120,7 +120,7 @@ final class HScaleGidBuilder : HScaleGidBuilderImpl!HScaleGidBuilder
       Create object from builder.
       Returns: New object
   */
-  HScale build()
+  HScale build() nothrow
   {
     return new HScale(cast(void*)createGObject(HScale._getGType), No.Take);
   }

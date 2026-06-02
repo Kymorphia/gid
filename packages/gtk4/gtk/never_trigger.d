@@ -17,26 +17,26 @@ class NeverTrigger : gtk.shortcut_trigger.ShortcutTrigger
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_never_trigger_get_type != &gidSymbolNotFound ? gtk_never_trigger_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NeverTrigger self()
+  override NeverTrigger self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class NeverTrigger : gtk.shortcut_trigger.ShortcutTrigger
       Get builder for [gtk.never_trigger.NeverTrigger]
       Returns: New builder object
   */
-  static NeverTriggerGidBuilder builder()
+  static NeverTriggerGidBuilder builder() nothrow
   {
     return new NeverTriggerGidBuilder;
   }
@@ -58,7 +58,7 @@ class NeverTrigger : gtk.shortcut_trigger.ShortcutTrigger
       all virtual functions.
       Returns: The never trigger
   */
-  static gtk.never_trigger.NeverTrigger get()
+  static gtk.never_trigger.NeverTrigger get() nothrow
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_never_trigger_get();
@@ -79,7 +79,7 @@ final class NeverTriggerGidBuilder : NeverTriggerGidBuilderImpl!NeverTriggerGidB
       Create object from builder.
       Returns: New object
   */
-  NeverTrigger build()
+  NeverTrigger build() nothrow
   {
     return new NeverTrigger(cast(void*)createGObject(NeverTrigger._getGType), No.Take);
   }

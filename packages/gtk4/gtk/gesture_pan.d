@@ -30,26 +30,26 @@ class GesturePan : gtk.gesture_drag.GestureDrag
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gesture_pan_get_type != &gidSymbolNotFound ? gtk_gesture_pan_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GesturePan self()
+  override GesturePan self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class GesturePan : gtk.gesture_drag.GestureDrag
       Get builder for [gtk.gesture_pan.GesturePan]
       Returns: New builder object
   */
-  static GesturePanGidBuilder builder()
+  static GesturePanGidBuilder builder() nothrow
   {
     return new GesturePanGidBuilder;
   }
@@ -67,7 +67,7 @@ class GesturePan : gtk.gesture_drag.GestureDrag
       Get `orientation` property.
       Returns: The expected orientation of pan gestures.
   */
-  @property gtk.types.Orientation orientation()
+  @property gtk.types.Orientation orientation() nothrow
   {
     return getOrientation();
   }
@@ -77,7 +77,7 @@ class GesturePan : gtk.gesture_drag.GestureDrag
       Params:
         propval = The expected orientation of pan gestures.
   */
-  @property void orientation(gtk.types.Orientation propval)
+  @property void orientation(gtk.types.Orientation propval) nothrow
   {
     setOrientation(propval);
   }
@@ -89,7 +89,7 @@ class GesturePan : gtk.gesture_drag.GestureDrag
         orientation = expected orientation
       Returns: a newly created [gtk.gesture_pan.GesturePan]
   */
-  this(gtk.types.Orientation orientation)
+  this(gtk.types.Orientation orientation) nothrow
   {
     GtkGesture* _cretval;
     _cretval = gtk_gesture_pan_new(orientation);
@@ -100,7 +100,7 @@ class GesturePan : gtk.gesture_drag.GestureDrag
       Returns the orientation of the pan gestures that this gesture expects.
       Returns: the expected orientation for pan gestures
   */
-  gtk.types.Orientation getOrientation()
+  gtk.types.Orientation getOrientation() nothrow
   {
     GtkOrientation _cretval;
     _cretval = gtk_gesture_pan_get_orientation(cast(GtkGesturePan*)this._cPtr);
@@ -114,7 +114,7 @@ class GesturePan : gtk.gesture_drag.GestureDrag
       Params:
         orientation = expected orientation
   */
-  void setOrientation(gtk.types.Orientation orientation)
+  void setOrientation(gtk.types.Orientation orientation) nothrow
   {
     gtk_gesture_pan_set_orientation(cast(GtkGesturePan*)this._cPtr, orientation);
   }
@@ -138,7 +138,7 @@ class GesturePan : gtk.gesture_drag.GestureDrag
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPan(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPan(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.PanDirection)))
@@ -146,7 +146,7 @@ class GesturePan : gtk.gesture_drag.GestureDrag
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.gesture_pan.GesturePan)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -161,7 +161,14 @@ class GesturePan : gtk.gesture_drag.GestureDrag
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.gesture_pan.GesturePan.pan");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -179,7 +186,7 @@ class GesturePanGidBuilderImpl(T) : gtk.gesture_drag.GestureDragGidBuilderImpl!T
         propval = The expected orientation of pan gestures.
       Returns: Builder instance for fluent chaining
   */
-  T orientation(gtk.types.Orientation propval)
+  T orientation(gtk.types.Orientation propval) nothrow
   {
     return setProperty("orientation", propval);
   }
@@ -192,7 +199,7 @@ final class GesturePanGidBuilder : GesturePanGidBuilderImpl!GesturePanGidBuilder
       Create object from builder.
       Returns: New object
   */
-  GesturePan build()
+  GesturePan build() nothrow
   {
     return new GesturePan(cast(void*)createGObject(GesturePan._getGType), Yes.Take);
   }

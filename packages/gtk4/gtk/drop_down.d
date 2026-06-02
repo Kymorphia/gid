@@ -82,26 +82,26 @@ class DropDown : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_drop_down_get_type != &gidSymbolNotFound ? gtk_drop_down_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DropDown self()
+  override DropDown self() nothrow
   {
     return this;
   }
@@ -110,7 +110,7 @@ class DropDown : gtk.widget.Widget
       Get builder for [gtk.drop_down.DropDown]
       Returns: New builder object
   */
-  static DropDownGidBuilder builder()
+  static DropDownGidBuilder builder() nothrow
   {
     return new DropDownGidBuilder;
   }
@@ -122,7 +122,7 @@ class DropDown : gtk.widget.Widget
         Note that search requires [gtk.drop_down.DropDown.expression]
         to be set.
   */
-  @property bool enableSearch()
+  @property bool enableSearch() nothrow
   {
     return getEnableSearch();
   }
@@ -135,7 +135,7 @@ class DropDown : gtk.widget.Widget
           Note that search requires [gtk.drop_down.DropDown.expression]
           to be set.
   */
-  @property void enableSearch(bool propval)
+  @property void enableSearch(bool propval) nothrow
   {
     setEnableSearch(propval);
   }
@@ -149,7 +149,7 @@ class DropDown : gtk.widget.Widget
         If [gtk.drop_down.DropDown.factory] is not set, the expression is also
         used to bind strings to labels produced by a default factory.
   */
-  @property gtk.expression.Expression expression()
+  @property gtk.expression.Expression expression() nothrow
   {
     return getExpression();
   }
@@ -164,7 +164,7 @@ class DropDown : gtk.widget.Widget
           If [gtk.drop_down.DropDown.factory] is not set, the expression is also
           used to bind strings to labels produced by a default factory.
   */
-  @property void expression(gtk.expression.Expression propval)
+  @property void expression(gtk.expression.Expression propval) nothrow
   {
     setExpression(propval);
   }
@@ -173,7 +173,7 @@ class DropDown : gtk.widget.Widget
       Get `factory` property.
       Returns: Factory for populating list items.
   */
-  @property gtk.list_item_factory.ListItemFactory factory()
+  @property gtk.list_item_factory.ListItemFactory factory() nothrow
   {
     return getFactory();
   }
@@ -183,7 +183,7 @@ class DropDown : gtk.widget.Widget
       Params:
         propval = Factory for populating list items.
   */
-  @property void factory(gtk.list_item_factory.ListItemFactory propval)
+  @property void factory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
     setFactory(propval);
   }
@@ -192,7 +192,7 @@ class DropDown : gtk.widget.Widget
       Get `headerFactory` property.
       Returns: The factory for creating header widgets for the popup.
   */
-  @property gtk.list_item_factory.ListItemFactory headerFactory()
+  @property gtk.list_item_factory.ListItemFactory headerFactory() nothrow
   {
     return getHeaderFactory();
   }
@@ -202,7 +202,7 @@ class DropDown : gtk.widget.Widget
       Params:
         propval = The factory for creating header widgets for the popup.
   */
-  @property void headerFactory(gtk.list_item_factory.ListItemFactory propval)
+  @property void headerFactory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
     setHeaderFactory(propval);
   }
@@ -213,7 +213,7 @@ class DropDown : gtk.widget.Widget
         
         If this is not set, [gtk.drop_down.DropDown.factory] is used.
   */
-  @property gtk.list_item_factory.ListItemFactory listFactory()
+  @property gtk.list_item_factory.ListItemFactory listFactory() nothrow
   {
     return getListFactory();
   }
@@ -225,7 +225,7 @@ class DropDown : gtk.widget.Widget
           
           If this is not set, [gtk.drop_down.DropDown.factory] is used.
   */
-  @property void listFactory(gtk.list_item_factory.ListItemFactory propval)
+  @property void listFactory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
     setListFactory(propval);
   }
@@ -234,7 +234,7 @@ class DropDown : gtk.widget.Widget
       Get `model` property.
       Returns: Model for the displayed items.
   */
-  @property gio.list_model.ListModel model()
+  @property gio.list_model.ListModel model() nothrow
   {
     return getModel();
   }
@@ -244,7 +244,7 @@ class DropDown : gtk.widget.Widget
       Params:
         propval = Model for the displayed items.
   */
-  @property void model(gio.list_model.ListModel propval)
+  @property void model(gio.list_model.ListModel propval) nothrow
   {
     setModel(propval);
   }
@@ -253,7 +253,7 @@ class DropDown : gtk.widget.Widget
       Get `searchMatchMode` property.
       Returns: The match mode for the search filter.
   */
-  @property gtk.types.StringFilterMatchMode searchMatchMode()
+  @property gtk.types.StringFilterMatchMode searchMatchMode() nothrow
   {
     return getSearchMatchMode();
   }
@@ -263,7 +263,7 @@ class DropDown : gtk.widget.Widget
       Params:
         propval = The match mode for the search filter.
   */
-  @property void searchMatchMode(gtk.types.StringFilterMatchMode propval)
+  @property void searchMatchMode(gtk.types.StringFilterMatchMode propval) nothrow
   {
     setSearchMatchMode(propval);
   }
@@ -275,7 +275,7 @@ class DropDown : gtk.widget.Widget
         If no item is selected, the property has the value
         [gtk.types.INVALID_LIST_POSITION].
   */
-  @property uint selected()
+  @property uint selected() nothrow
   {
     return getSelected();
   }
@@ -288,7 +288,7 @@ class DropDown : gtk.widget.Widget
           If no item is selected, the property has the value
           [gtk.types.INVALID_LIST_POSITION].
   */
-  @property void selected(uint propval)
+  @property void selected(uint propval) nothrow
   {
     setSelected(propval);
   }
@@ -297,7 +297,7 @@ class DropDown : gtk.widget.Widget
       Get `selectedItem` property.
       Returns: The selected item.
   */
-  @property gobject.object.ObjectWrap selectedItem()
+  @property gobject.object.ObjectWrap selectedItem() nothrow
   {
     return getSelectedItem();
   }
@@ -306,7 +306,7 @@ class DropDown : gtk.widget.Widget
       Get `showArrow` property.
       Returns: Whether to show an arrow within the GtkDropDown widget.
   */
-  @property bool showArrow()
+  @property bool showArrow() nothrow
   {
     return getShowArrow();
   }
@@ -316,7 +316,7 @@ class DropDown : gtk.widget.Widget
       Params:
         propval = Whether to show an arrow within the GtkDropDown widget.
   */
-  @property void showArrow(bool propval)
+  @property void showArrow(bool propval) nothrow
   {
     setShowArrow(propval);
   }
@@ -332,7 +332,7 @@ class DropDown : gtk.widget.Widget
         expression = the expression to use
       Returns: a new [gtk.drop_down.DropDown]
   */
-  this(gio.list_model.ListModel model = null, gtk.expression.Expression expression = null)
+  this(gio.list_model.ListModel model = null, gtk.expression.Expression expression = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_drop_down_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(Yes.Dup) : null, expression ? cast(GtkExpression*)expression._cPtr(Yes.Dup) : null);
@@ -347,7 +347,7 @@ class DropDown : gtk.widget.Widget
         strings = The strings to put in the dropdown
       Returns: a new [gtk.drop_down.DropDown]
   */
-  static gtk.drop_down.DropDown newFromStrings(string[] strings)
+  static gtk.drop_down.DropDown newFromStrings(string[] strings) nothrow
   {
     GtkWidget* _cretval;
     char*[] _tmpstrings;
@@ -365,7 +365,7 @@ class DropDown : gtk.widget.Widget
       Returns whether search is enabled.
       Returns: true if the popup includes a search entry
   */
-  bool getEnableSearch()
+  bool getEnableSearch() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_drop_down_get_enable_search(cast(GtkDropDown*)this._cPtr);
@@ -378,7 +378,7 @@ class DropDown : gtk.widget.Widget
       See [gtk.drop_down.DropDown.setExpression].
       Returns: a [gtk.expression.Expression]
   */
-  gtk.expression.Expression getExpression()
+  gtk.expression.Expression getExpression() nothrow
   {
     GtkExpression* _cretval;
     _cretval = gtk_drop_down_get_expression(cast(GtkDropDown*)this._cPtr);
@@ -394,7 +394,7 @@ class DropDown : gtk.widget.Widget
       if [gtk.drop_down.DropDown.listFactory] is not set.
       Returns: The factory in use
   */
-  gtk.list_item_factory.ListItemFactory getFactory()
+  gtk.list_item_factory.ListItemFactory getFactory() nothrow
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_drop_down_get_factory(cast(GtkDropDown*)this._cPtr);
@@ -406,7 +406,7 @@ class DropDown : gtk.widget.Widget
       Gets the factory that's currently used to create header widgets for the popup.
       Returns: The factory in use
   */
-  gtk.list_item_factory.ListItemFactory getHeaderFactory()
+  gtk.list_item_factory.ListItemFactory getHeaderFactory() nothrow
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_drop_down_get_header_factory(cast(GtkDropDown*)this._cPtr);
@@ -418,7 +418,7 @@ class DropDown : gtk.widget.Widget
       Gets the factory that's currently used to populate list items in the popup.
       Returns: The factory in use
   */
-  gtk.list_item_factory.ListItemFactory getListFactory()
+  gtk.list_item_factory.ListItemFactory getListFactory() nothrow
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_drop_down_get_list_factory(cast(GtkDropDown*)this._cPtr);
@@ -430,7 +430,7 @@ class DropDown : gtk.widget.Widget
       Gets the model that provides the displayed items.
       Returns: The model in use
   */
-  gio.list_model.ListModel getModel()
+  gio.list_model.ListModel getModel() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_drop_down_get_model(cast(GtkDropDown*)this._cPtr);
@@ -442,7 +442,7 @@ class DropDown : gtk.widget.Widget
       Returns the match mode that the search filter is using.
       Returns: the match mode of the search filter
   */
-  gtk.types.StringFilterMatchMode getSearchMatchMode()
+  gtk.types.StringFilterMatchMode getSearchMatchMode() nothrow
   {
     GtkStringFilterMatchMode _cretval;
     _cretval = gtk_drop_down_get_search_match_mode(cast(GtkDropDown*)this._cPtr);
@@ -455,7 +455,7 @@ class DropDown : gtk.widget.Widget
       Returns: the position of the selected item, or [gtk.types.INVALID_LIST_POSITION]
           if not item is selected
   */
-  uint getSelected()
+  uint getSelected() nothrow
   {
     uint _retval;
     _retval = gtk_drop_down_get_selected(cast(GtkDropDown*)this._cPtr);
@@ -466,7 +466,7 @@ class DropDown : gtk.widget.Widget
       Gets the selected item. If no item is selected, null is returned.
       Returns: The selected item
   */
-  gobject.object.ObjectWrap getSelectedItem()
+  gobject.object.ObjectWrap getSelectedItem() nothrow
   {
     GObject* _cretval;
     _cretval = gtk_drop_down_get_selected_item(cast(GtkDropDown*)this._cPtr);
@@ -478,7 +478,7 @@ class DropDown : gtk.widget.Widget
       Returns whether to show an arrow within the widget.
       Returns: true if an arrow will be shown.
   */
-  bool getShowArrow()
+  bool getShowArrow() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_drop_down_get_show_arrow(cast(GtkDropDown*)this._cPtr);
@@ -495,7 +495,7 @@ class DropDown : gtk.widget.Widget
       Params:
         enableSearch = whether to enable search
   */
-  void setEnableSearch(bool enableSearch)
+  void setEnableSearch(bool enableSearch) nothrow
   {
     gtk_drop_down_set_enable_search(cast(GtkDropDown*)this._cPtr, enableSearch);
   }
@@ -509,7 +509,7 @@ class DropDown : gtk.widget.Widget
       Params:
         expression = a [gtk.expression.Expression]
   */
-  void setExpression(gtk.expression.Expression expression = null)
+  void setExpression(gtk.expression.Expression expression = null) nothrow
   {
     gtk_drop_down_set_expression(cast(GtkDropDown*)this._cPtr, expression ? cast(GtkExpression*)expression._cPtr(No.Dup) : null);
   }
@@ -520,7 +520,7 @@ class DropDown : gtk.widget.Widget
       Params:
         factory = the factory to use
   */
-  void setFactory(gtk.list_item_factory.ListItemFactory factory = null)
+  void setFactory(gtk.list_item_factory.ListItemFactory factory = null) nothrow
   {
     gtk_drop_down_set_factory(cast(GtkDropDown*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
   }
@@ -531,7 +531,7 @@ class DropDown : gtk.widget.Widget
       Params:
         factory = the factory to use
   */
-  void setHeaderFactory(gtk.list_item_factory.ListItemFactory factory = null)
+  void setHeaderFactory(gtk.list_item_factory.ListItemFactory factory = null) nothrow
   {
     gtk_drop_down_set_header_factory(cast(GtkDropDown*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
   }
@@ -542,7 +542,7 @@ class DropDown : gtk.widget.Widget
       Params:
         factory = the factory to use
   */
-  void setListFactory(gtk.list_item_factory.ListItemFactory factory = null)
+  void setListFactory(gtk.list_item_factory.ListItemFactory factory = null) nothrow
   {
     gtk_drop_down_set_list_factory(cast(GtkDropDown*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
   }
@@ -553,7 +553,7 @@ class DropDown : gtk.widget.Widget
       Params:
         model = the model to use
   */
-  void setModel(gio.list_model.ListModel model = null)
+  void setModel(gio.list_model.ListModel model = null) nothrow
   {
     gtk_drop_down_set_model(cast(GtkDropDown*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
@@ -564,7 +564,7 @@ class DropDown : gtk.widget.Widget
       Params:
         searchMatchMode = the new match mode
   */
-  void setSearchMatchMode(gtk.types.StringFilterMatchMode searchMatchMode)
+  void setSearchMatchMode(gtk.types.StringFilterMatchMode searchMatchMode) nothrow
   {
     gtk_drop_down_set_search_match_mode(cast(GtkDropDown*)this._cPtr, searchMatchMode);
   }
@@ -575,7 +575,7 @@ class DropDown : gtk.widget.Widget
       Params:
         position = the position of the item to select, or [gtk.types.INVALID_LIST_POSITION]
   */
-  void setSelected(uint position)
+  void setSelected(uint position) nothrow
   {
     gtk_drop_down_set_selected(cast(GtkDropDown*)this._cPtr, position);
   }
@@ -586,7 +586,7 @@ class DropDown : gtk.widget.Widget
       Params:
         showArrow = whether to show an arrow within the widget
   */
-  void setShowArrow(bool showArrow)
+  void setShowArrow(bool showArrow) nothrow
   {
     gtk_drop_down_set_show_arrow(cast(GtkDropDown*)this._cPtr, showArrow);
   }
@@ -609,13 +609,13 @@ class DropDown : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.drop_down.DropDown)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -624,7 +624,14 @@ class DropDown : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.drop_down.DropDown.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -646,7 +653,7 @@ class DropDownGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           to be set.
       Returns: Builder instance for fluent chaining
   */
-  T enableSearch(bool propval)
+  T enableSearch(bool propval) nothrow
   {
     return setProperty("enable-search", propval);
   }
@@ -662,7 +669,7 @@ class DropDownGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           used to bind strings to labels produced by a default factory.
       Returns: Builder instance for fluent chaining
   */
-  T expression(gtk.expression.Expression propval)
+  T expression(gtk.expression.Expression propval) nothrow
   {
     return setProperty("expression", propval);
   }
@@ -673,7 +680,7 @@ class DropDownGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Factory for populating list items.
       Returns: Builder instance for fluent chaining
   */
-  T factory(gtk.list_item_factory.ListItemFactory propval)
+  T factory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
     return setProperty("factory", propval);
   }
@@ -684,7 +691,7 @@ class DropDownGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The factory for creating header widgets for the popup.
       Returns: Builder instance for fluent chaining
   */
-  T headerFactory(gtk.list_item_factory.ListItemFactory propval)
+  T headerFactory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
     return setProperty("header-factory", propval);
   }
@@ -697,7 +704,7 @@ class DropDownGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           If this is not set, [gtk.drop_down.DropDown.factory] is used.
       Returns: Builder instance for fluent chaining
   */
-  T listFactory(gtk.list_item_factory.ListItemFactory propval)
+  T listFactory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
     return setProperty("list-factory", propval);
   }
@@ -708,7 +715,7 @@ class DropDownGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Model for the displayed items.
       Returns: Builder instance for fluent chaining
   */
-  T model(gio.list_model.ListModel propval)
+  T model(gio.list_model.ListModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -719,7 +726,7 @@ class DropDownGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The match mode for the search filter.
       Returns: Builder instance for fluent chaining
   */
-  T searchMatchMode(gtk.types.StringFilterMatchMode propval)
+  T searchMatchMode(gtk.types.StringFilterMatchMode propval) nothrow
   {
     return setProperty("search-match-mode", propval);
   }
@@ -733,7 +740,7 @@ class DropDownGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           [gtk.types.INVALID_LIST_POSITION].
       Returns: Builder instance for fluent chaining
   */
-  T selected(uint propval)
+  T selected(uint propval) nothrow
   {
     return setProperty("selected", propval);
   }
@@ -744,7 +751,7 @@ class DropDownGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether to show an arrow within the GtkDropDown widget.
       Returns: Builder instance for fluent chaining
   */
-  T showArrow(bool propval)
+  T showArrow(bool propval) nothrow
   {
     return setProperty("show-arrow", propval);
   }
@@ -757,7 +764,7 @@ final class DropDownGidBuilder : DropDownGidBuilderImpl!DropDownGidBuilder
       Create object from builder.
       Returns: New object
   */
-  DropDown build()
+  DropDown build() nothrow
   {
     return new DropDown(cast(void*)createGObject(DropDown._getGType), No.Take);
   }

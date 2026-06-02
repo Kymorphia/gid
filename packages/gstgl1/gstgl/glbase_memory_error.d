@@ -14,7 +14,7 @@ struct GLBaseMemoryError
   alias Enum = gstgl.types.GLBaseMemoryError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gst_gl_base_memory_error_quark();
@@ -24,12 +24,12 @@ struct GLBaseMemoryError
 
 class GLBaseMemoryException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gstgl.glbase_memory_error.GLBaseMemoryError.quark, cast(int)code, msg);
   }

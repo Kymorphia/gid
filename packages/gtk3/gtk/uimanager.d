@@ -248,26 +248,26 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_ui_manager_get_type != &gidSymbolNotFound ? gtk_ui_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UIManager self()
+  override UIManager self() nothrow
   {
     return this;
   }
@@ -276,7 +276,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Get builder for [gtk.uimanager.UIManager]
       Returns: New builder object
   */
-  static UIManagerGidBuilder builder()
+  static UIManagerGidBuilder builder() nothrow
   {
     return new UIManagerGidBuilder;
   }
@@ -292,7 +292,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Tearoff menus are deprecated and should not
             be used in newly written code.
   */
-  @property bool addTearoffs()
+  @property bool addTearoffs() nothrow
   {
     return getAddTearoffs();
   }
@@ -309,13 +309,13 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Tearoff menus are deprecated and should not
             be used in newly written code.
   */
-  @property void addTearoffs(bool propval)
+  @property void addTearoffs(bool propval) nothrow
   {
     setAddTearoffs(propval);
   }
 
   /** */
-  @property string ui()
+  @property string ui() nothrow
   {
     return getUi();
   }
@@ -326,7 +326,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Creates a new ui manager object.
       Returns: a new ui manager object.
   */
-  this()
+  this() nothrow
   {
     GtkUIManager* _cretval;
     _cretval = gtk_ui_manager_new();
@@ -353,7 +353,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
         top = if true, the UI element is added before its siblings, otherwise it
             is added after its siblings.
   */
-  void addUi(uint mergeId, string path, string name, string action, gtk.types.UIManagerItemType type, bool top)
+  void addUi(uint mergeId, string path, string name, string action, gtk.types.UIManagerItemType type, bool top) nothrow
   {
     const(char)* _path = path.toCString(No.Alloc);
     const(char)* _name = name.toCString(No.Alloc);
@@ -449,7 +449,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       gtk_widget_show (window);
       ```
   */
-  void ensureUpdate()
+  void ensureUpdate() nothrow
   {
     gtk_ui_manager_ensure_update(cast(GtkUIManager*)this._cPtr);
   }
@@ -458,7 +458,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Returns the #GtkAccelGroup associated with manager.
       Returns: the #GtkAccelGroup.
   */
-  gtk.accel_group.AccelGroup getAccelGroup()
+  gtk.accel_group.AccelGroup getAccelGroup() nothrow
   {
     GtkAccelGroup* _cretval;
     _cretval = gtk_ui_manager_get_accel_group(cast(GtkUIManager*)this._cPtr);
@@ -475,7 +475,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Returns: the action whose proxy widget is found by following the path,
             or null if no widget was found.
   */
-  gtk.action.Action getAction(string path)
+  gtk.action.Action getAction(string path) nothrow
   {
     GtkAction* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -490,7 +490,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
           action groups. The list is owned by GTK+
           and should not be modified.
   */
-  gtk.action_group.ActionGroup[] getActionGroups()
+  gtk.action_group.ActionGroup[] getActionGroups() nothrow
   {
     GList* _cretval;
     _cretval = gtk_ui_manager_get_action_groups(cast(GtkUIManager*)this._cPtr);
@@ -506,7 +506,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Tearoff menus are deprecated and should not
             be used in newly written code.
   */
-  bool getAddTearoffs()
+  bool getAddTearoffs() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_ui_manager_get_add_tearoffs(cast(GtkUIManager*)this._cPtr);
@@ -523,7 +523,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Returns: a newly-allocated #GSList of
         all toplevel widgets of the requested types.  Free the returned list with [glib.slist.SList.free].
   */
-  gtk.widget.Widget[] getToplevels(gtk.types.UIManagerItemType types)
+  gtk.widget.Widget[] getToplevels(gtk.types.UIManagerItemType types) nothrow
   {
     GSList* _cretval;
     _cretval = gtk_ui_manager_get_toplevels(cast(GtkUIManager*)this._cPtr, types);
@@ -536,7 +536,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Returns: A newly allocated string containing an XML representation of
         the merged UI.
   */
-  string getUi()
+  string getUi() nothrow
   {
     char* _cretval;
     _cretval = gtk_ui_manager_get_ui(cast(GtkUIManager*)this._cPtr);
@@ -565,7 +565,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Returns: the widget found by following the path,
             or null if no widget was found
   */
-  gtk.widget.Widget getWidget(string path)
+  gtk.widget.Widget getWidget(string path) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -587,7 +587,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
         actionGroup = the action group to be inserted
         pos = the position at which the group will be inserted.
   */
-  void insertActionGroup(gtk.action_group.ActionGroup actionGroup, int pos)
+  void insertActionGroup(gtk.action_group.ActionGroup actionGroup, int pos) nothrow
   {
     gtk_ui_manager_insert_action_group(cast(GtkUIManager*)this._cPtr, actionGroup ? cast(GtkActionGroup*)actionGroup._cPtr(No.Dup) : null, pos);
   }
@@ -597,7 +597,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       [gtk.uimanager.UIManager.addUi].
       Returns: an unused merge id.
   */
-  uint newMergeId()
+  uint newMergeId() nothrow
   {
     uint _retval;
     _retval = gtk_ui_manager_new_merge_id(cast(GtkUIManager*)this._cPtr);
@@ -611,7 +611,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         actionGroup = the action group to be removed
   */
-  void removeActionGroup(gtk.action_group.ActionGroup actionGroup)
+  void removeActionGroup(gtk.action_group.ActionGroup actionGroup) nothrow
   {
     gtk_ui_manager_remove_action_group(cast(GtkUIManager*)this._cPtr, actionGroup ? cast(GtkActionGroup*)actionGroup._cPtr(No.Dup) : null);
   }
@@ -622,7 +622,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         mergeId = a merge id as returned by [gtk.uimanager.UIManager.addUiFromString]
   */
-  void removeUi(uint mergeId)
+  void removeUi(uint mergeId) nothrow
   {
     gtk_ui_manager_remove_ui(cast(GtkUIManager*)this._cPtr, mergeId);
   }
@@ -640,7 +640,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Deprecated: Tearoff menus are deprecated and should not
             be used in newly written code.
   */
-  void setAddTearoffs(bool addTearoffs)
+  void setAddTearoffs(bool addTearoffs) nothrow
   {
     gtk_ui_manager_set_add_tearoffs(cast(GtkUIManager*)this._cPtr, addTearoffs);
   }
@@ -661,13 +661,13 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActionsChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActionsChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.uimanager.UIManager)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -676,7 +676,14 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.uimanager.UIManager.actionsChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -702,14 +709,14 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAddWidget(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAddWidget(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.uimanager.UIManager)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -721,7 +728,14 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.uimanager.UIManager.addWidget");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -752,7 +766,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectConnectProxy(T)(T callback, Flag!"After" after = No.After)
+  gulong connectConnectProxy(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.action.Action)))
@@ -760,7 +774,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.uimanager.UIManager)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -775,7 +789,14 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.uimanager.UIManager.connectProxy");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -802,7 +823,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDisconnectProxy(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDisconnectProxy(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.action.Action)))
@@ -810,7 +831,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.uimanager.UIManager)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -825,7 +846,14 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.uimanager.UIManager.disconnectProxy");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -853,14 +881,14 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPostActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPostActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.action.Action)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.uimanager.UIManager)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -872,7 +900,14 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.uimanager.UIManager.postActivate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -900,14 +935,14 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPreActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPreActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.action.Action)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.uimanager.UIManager)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -919,7 +954,14 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.uimanager.UIManager.preActivate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -946,7 +988,7 @@ class UIManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gt
       Deprecated: Tearoff menus are deprecated and should not
             be used in newly written code.
   */
-  T addTearoffs(bool propval)
+  T addTearoffs(bool propval) nothrow
   {
     return setProperty("add-tearoffs", propval);
   }
@@ -959,7 +1001,7 @@ final class UIManagerGidBuilder : UIManagerGidBuilderImpl!UIManagerGidBuilder
       Create object from builder.
       Returns: New object
   */
-  UIManager build()
+  UIManager build() nothrow
   {
     return new UIManager(cast(void*)createGObject(UIManager._getGType), Yes.Take);
   }

@@ -20,32 +20,32 @@ class OptionMenuItem : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_option_menu_item_get_type != &gidSymbolNotFound ? webkit_option_menu_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override OptionMenuItem self()
+  override OptionMenuItem self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class OptionMenuItem : gobject.boxed.Boxed
       Make a copy of the #WebKitOptionMenuItem.
       Returns: A copy of passed in #WebKitOptionMenuItem
   */
-  webkit.option_menu_item.OptionMenuItem copy()
+  webkit.option_menu_item.OptionMenuItem copy() nothrow
   {
     WebKitOptionMenuItem* _cretval;
     _cretval = webkit_option_menu_item_copy(cast(WebKitOptionMenuItem*)this._cPtr);
@@ -66,7 +66,7 @@ class OptionMenuItem : gobject.boxed.Boxed
       Get the label of a #WebKitOptionMenuItem.
       Returns: The label of item.
   */
-  string getLabel()
+  string getLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_option_menu_item_get_label(cast(WebKitOptionMenuItem*)this._cPtr);
@@ -78,7 +78,7 @@ class OptionMenuItem : gobject.boxed.Boxed
       Get the tooltip of a #WebKitOptionMenuItem.
       Returns: The tooltip of item, or null.
   */
-  string getTooltip()
+  string getTooltip() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_option_menu_item_get_tooltip(cast(WebKitOptionMenuItem*)this._cPtr);
@@ -90,7 +90,7 @@ class OptionMenuItem : gobject.boxed.Boxed
       Whether a #WebKitOptionMenuItem is enabled.
       Returns: true if the item is enabled or false otherwise.
   */
-  bool isEnabled()
+  bool isEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_option_menu_item_is_enabled(cast(WebKitOptionMenuItem*)this._cPtr);
@@ -101,7 +101,7 @@ class OptionMenuItem : gobject.boxed.Boxed
       Whether a #WebKitOptionMenuItem is a group child.
       Returns: true if the item is a group child or false otherwise.
   */
-  bool isGroupChild()
+  bool isGroupChild() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_option_menu_item_is_group_child(cast(WebKitOptionMenuItem*)this._cPtr);
@@ -112,7 +112,7 @@ class OptionMenuItem : gobject.boxed.Boxed
       Whether a #WebKitOptionMenuItem is a group label.
       Returns: true if the item is a group label or false otherwise.
   */
-  bool isGroupLabel()
+  bool isGroupLabel() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_option_menu_item_is_group_label(cast(WebKitOptionMenuItem*)this._cPtr);
@@ -123,7 +123,7 @@ class OptionMenuItem : gobject.boxed.Boxed
       Whether a #WebKitOptionMenuItem is the currently selected one.
       Returns: true if the item is selected or false otherwise.
   */
-  bool isSelected()
+  bool isSelected() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_option_menu_item_is_selected(cast(WebKitOptionMenuItem*)this._cPtr);

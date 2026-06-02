@@ -60,26 +60,26 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_radio_menu_item_get_type != &gidSymbolNotFound ? gtk_radio_menu_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RadioMenuItem self()
+  override RadioMenuItem self() nothrow
   {
     return this;
   }
@@ -88,7 +88,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
       Get builder for [gtk.radio_menu_item.RadioMenuItem]
       Returns: New builder object
   */
-  static RadioMenuItemGidBuilder builder()
+  static RadioMenuItemGidBuilder builder() nothrow
   {
     return new RadioMenuItemGidBuilder;
   }
@@ -98,7 +98,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
       Params:
         propval = The radio menu item whose group this widget belongs to.
   */
-  @property void group(gtk.radio_menu_item.RadioMenuItem propval)
+  @property void group(gtk.radio_menu_item.RadioMenuItem propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.radio_menu_item.RadioMenuItem)("group", propval);
   }
@@ -111,7 +111,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
             radio menu item is to be attached, or null
       Returns: a new #GtkRadioMenuItem
   */
-  this(gtk.radio_menu_item.RadioMenuItem[] group = null)
+  this(gtk.radio_menu_item.RadioMenuItem[] group = null) nothrow
   {
     GtkWidget* _cretval;
     auto _group = gSListFromD!(gtk.radio_menu_item.RadioMenuItem)(group);
@@ -127,7 +127,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
         group = An existing #GtkRadioMenuItem
       Returns: The new #GtkRadioMenuItem
   */
-  static gtk.radio_menu_item.RadioMenuItem newFromWidget(gtk.radio_menu_item.RadioMenuItem group = null)
+  static gtk.radio_menu_item.RadioMenuItem newFromWidget(gtk.radio_menu_item.RadioMenuItem group = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_radio_menu_item_new_from_widget(group ? cast(GtkRadioMenuItem*)group._cPtr(No.Dup) : null);
@@ -143,7 +143,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
         label = the text for the label
       Returns: A new #GtkRadioMenuItem
   */
-  static gtk.radio_menu_item.RadioMenuItem newWithLabel(gtk.radio_menu_item.RadioMenuItem[] group, string label)
+  static gtk.radio_menu_item.RadioMenuItem newWithLabel(gtk.radio_menu_item.RadioMenuItem[] group, string label) nothrow
   {
     GtkWidget* _cretval;
     auto _group = gSListFromD!(gtk.radio_menu_item.RadioMenuItem)(group);
@@ -163,7 +163,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
         label = the text for the label
       Returns: The new #GtkRadioMenuItem
   */
-  static gtk.radio_menu_item.RadioMenuItem newWithLabelFromWidget(gtk.radio_menu_item.RadioMenuItem group = null, string label = null)
+  static gtk.radio_menu_item.RadioMenuItem newWithLabelFromWidget(gtk.radio_menu_item.RadioMenuItem group = null, string label = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -183,7 +183,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
                   mnemonic character
       Returns: a new #GtkRadioMenuItem
   */
-  static gtk.radio_menu_item.RadioMenuItem newWithMnemonic(gtk.radio_menu_item.RadioMenuItem[] group, string label)
+  static gtk.radio_menu_item.RadioMenuItem newWithMnemonic(gtk.radio_menu_item.RadioMenuItem[] group, string label) nothrow
   {
     GtkWidget* _cretval;
     auto _group = gSListFromD!(gtk.radio_menu_item.RadioMenuItem)(group);
@@ -207,7 +207,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
                   mnemonic character
       Returns: The new #GtkRadioMenuItem
   */
-  static gtk.radio_menu_item.RadioMenuItem newWithMnemonicFromWidget(gtk.radio_menu_item.RadioMenuItem group = null, string label = null)
+  static gtk.radio_menu_item.RadioMenuItem newWithMnemonicFromWidget(gtk.radio_menu_item.RadioMenuItem group = null, string label = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -222,7 +222,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
       Returns: the group
             of radio_menu_item
   */
-  gtk.radio_menu_item.RadioMenuItem[] getGroup()
+  gtk.radio_menu_item.RadioMenuItem[] getGroup() nothrow
   {
     GSList* _cretval;
     _cretval = gtk_radio_menu_item_get_group(cast(GtkRadioMenuItem*)this._cPtr);
@@ -259,7 +259,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
             joining, or null to remove the radio_menu_item from its current
             group
   */
-  void joinGroup(gtk.radio_menu_item.RadioMenuItem groupSource = null)
+  void joinGroup(gtk.radio_menu_item.RadioMenuItem groupSource = null) nothrow
   {
     gtk_radio_menu_item_join_group(cast(GtkRadioMenuItem*)this._cPtr, groupSource ? cast(GtkRadioMenuItem*)groupSource._cPtr(No.Dup) : null);
   }
@@ -270,7 +270,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
       Params:
         group = the new group, or null.
   */
-  void setGroup(gtk.radio_menu_item.RadioMenuItem[] group = null)
+  void setGroup(gtk.radio_menu_item.RadioMenuItem[] group = null) nothrow
   {
     auto _group = gSListFromD!(gtk.radio_menu_item.RadioMenuItem)(group);
     scope(exit) containerFree!(GSList*, gtk.radio_menu_item.RadioMenuItem, GidOwnership.None)(_group);
@@ -292,13 +292,13 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGroupChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGroupChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.radio_menu_item.RadioMenuItem)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -307,7 +307,14 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.radio_menu_item.RadioMenuItem.groupChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -326,7 +333,7 @@ class RadioMenuItemGidBuilderImpl(T) : gtk.check_menu_item.CheckMenuItemGidBuild
         propval = The radio menu item whose group this widget belongs to.
       Returns: Builder instance for fluent chaining
   */
-  T group(gtk.radio_menu_item.RadioMenuItem propval)
+  T group(gtk.radio_menu_item.RadioMenuItem propval) nothrow
   {
     return setProperty("group", propval);
   }
@@ -339,7 +346,7 @@ final class RadioMenuItemGidBuilder : RadioMenuItemGidBuilderImpl!RadioMenuItemG
       Create object from builder.
       Returns: New object
   */
-  RadioMenuItem build()
+  RadioMenuItem build() nothrow
   {
     return new RadioMenuItem(cast(void*)createGObject(RadioMenuItem._getGType), No.Take);
   }

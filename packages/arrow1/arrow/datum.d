@@ -14,26 +14,26 @@ class Datum : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_datum_get_type != &gidSymbolNotFound ? garrow_datum_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Datum self()
+  override Datum self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class Datum : gobject.object.ObjectWrap
       Get builder for [arrow.datum.Datum]
       Returns: New builder object
   */
-  static DatumGidBuilder builder()
+  static DatumGidBuilder builder() nothrow
   {
     return new DatumGidBuilder;
   }
 
   /** */
-  bool equal(arrow.datum.Datum otherDatum)
+  bool equal(arrow.datum.Datum otherDatum) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_datum_equal(cast(GArrowDatum*)this._cPtr, otherDatum ? cast(GArrowDatum*)otherDatum._cPtr(No.Dup) : null);
@@ -56,7 +56,7 @@ class Datum : gobject.object.ObjectWrap
   }
 
   /** */
-  bool isArray()
+  bool isArray() nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_datum_is_array(cast(GArrowDatum*)this._cPtr);
@@ -64,7 +64,7 @@ class Datum : gobject.object.ObjectWrap
   }
 
   /** */
-  bool isArrayLike()
+  bool isArrayLike() nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_datum_is_array_like(cast(GArrowDatum*)this._cPtr);
@@ -72,7 +72,7 @@ class Datum : gobject.object.ObjectWrap
   }
 
   /** */
-  bool isScalar()
+  bool isScalar() nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_datum_is_scalar(cast(GArrowDatum*)this._cPtr);
@@ -80,7 +80,7 @@ class Datum : gobject.object.ObjectWrap
   }
 
   /** */
-  bool isValue()
+  bool isValue() nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_datum_is_value(cast(GArrowDatum*)this._cPtr);
@@ -88,7 +88,7 @@ class Datum : gobject.object.ObjectWrap
   }
 
   /** */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = garrow_datum_to_string(cast(GArrowDatum*)this._cPtr);
@@ -102,7 +102,7 @@ class DatumGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T datum(void* propval)
+  T datum(void* propval) nothrow
   {
     return setProperty("datum", propval);
   }
@@ -115,7 +115,7 @@ final class DatumGidBuilder : DatumGidBuilderImpl!DatumGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Datum build()
+  Datum build() nothrow
   {
     return new Datum(cast(void*)createGObject(Datum._getGType), No.Take);
   }

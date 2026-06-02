@@ -27,7 +27,7 @@ interface Toplevel
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_toplevel_get_type != &gidSymbolNotFound ? gdk_toplevel_get_type() : cast(GType)0;
@@ -37,72 +37,72 @@ interface Toplevel
       Get `decorated` property.
       Returns: Whether the window manager should add decorations.
   */
-  @property bool decorated();
+  @property bool decorated() nothrow;
 
   /**
       Set `decorated` property.
       Params:
         propval = Whether the window manager should add decorations.
   */
-  @property void decorated(bool propval);
+  @property void decorated(bool propval) nothrow;
 
   /**
       Get `deletable` property.
       Returns: Whether the window manager should allow to close the surface.
   */
-  @property bool deletable();
+  @property bool deletable() nothrow;
 
   /**
       Set `deletable` property.
       Params:
         propval = Whether the window manager should allow to close the surface.
   */
-  @property void deletable(bool propval);
+  @property void deletable(bool propval) nothrow;
 
   /**
       Get `fullscreenMode` property.
       Returns: The fullscreen mode of the surface.
   */
-  @property gdk.types.FullscreenMode fullscreenMode();
+  @property gdk.types.FullscreenMode fullscreenMode() nothrow;
 
   /**
       Set `fullscreenMode` property.
       Params:
         propval = The fullscreen mode of the surface.
   */
-  @property void fullscreenMode(gdk.types.FullscreenMode propval);
+  @property void fullscreenMode(gdk.types.FullscreenMode propval) nothrow;
 
   /**
       Get `iconList` property.
       Returns: A list of textures to use as icon.
   */
-  @property void* iconList();
+  @property void* iconList() nothrow;
 
   /**
       Set `iconList` property.
       Params:
         propval = A list of textures to use as icon.
   */
-  @property void iconList(void* propval);
+  @property void iconList(void* propval) nothrow;
 
   /**
       Get `modal` property.
       Returns: Whether the surface is modal.
   */
-  @property bool modal();
+  @property bool modal() nothrow;
 
   /**
       Set `modal` property.
       Params:
         propval = Whether the surface is modal.
   */
-  @property void modal(bool propval);
+  @property void modal(bool propval) nothrow;
 
   /**
       Get `shortcutsInhibited` property.
       Returns: Whether the surface should inhibit keyboard shortcuts.
   */
-  @property bool shortcutsInhibited();
+  @property bool shortcutsInhibited() nothrow;
 
   /**
       Get `startupId` property.
@@ -111,7 +111,7 @@ interface Toplevel
         See [gdk.app_launch_context.AppLaunchContext] for more information about
         startup feedback.
   */
-  @property string startupId();
+  @property string startupId() nothrow;
 
   /**
       Set `startupId` property.
@@ -121,39 +121,39 @@ interface Toplevel
           See [gdk.app_launch_context.AppLaunchContext] for more information about
           startup feedback.
   */
-  @property void startupId(string propval);
+  @property void startupId(string propval) nothrow;
 
   /**
       Get `state` property.
       Returns: The state of the toplevel.
   */
-  @property gdk.types.ToplevelState state();
+  @property gdk.types.ToplevelState state() nothrow;
 
   /**
       Get `title` property.
       Returns: The title of the surface.
   */
-  @property string title();
+  @property string title() nothrow;
 
   /**
       Set `title` property.
       Params:
         propval = The title of the surface.
   */
-  @property void title(string propval);
+  @property void title(string propval) nothrow;
 
   /**
       Get `transientFor` property.
       Returns: The transient parent of the surface.
   */
-  @property gdk.surface.Surface transientFor();
+  @property gdk.surface.Surface transientFor() nothrow;
 
   /**
       Set `transientFor` property.
       Params:
         propval = The transient parent of the surface.
   */
-  @property void transientFor(gdk.surface.Surface propval);
+  @property void transientFor(gdk.surface.Surface propval) nothrow;
 
   /**
       Begins an interactive move operation.
@@ -423,7 +423,7 @@ interface Toplevel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectComputeSize(T)(T callback, Flag!"After" after = No.After);
+  gulong connectComputeSize(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gdk.toplevel.Toplevel]
@@ -436,7 +436,7 @@ interface ToplevelGidBuilderImpl(T)
         propval = Whether the window manager should add decorations.
       Returns: Builder instance for fluent chaining
   */
-  T decorated(bool propval);
+  T decorated(bool propval) nothrow;
 
   /**
       Set `deletable` property.
@@ -444,7 +444,7 @@ interface ToplevelGidBuilderImpl(T)
         propval = Whether the window manager should allow to close the surface.
       Returns: Builder instance for fluent chaining
   */
-  T deletable(bool propval);
+  T deletable(bool propval) nothrow;
 
   /**
       Set `fullscreenMode` property.
@@ -452,7 +452,7 @@ interface ToplevelGidBuilderImpl(T)
         propval = The fullscreen mode of the surface.
       Returns: Builder instance for fluent chaining
   */
-  T fullscreenMode(gdk.types.FullscreenMode propval);
+  T fullscreenMode(gdk.types.FullscreenMode propval) nothrow;
 
   /**
       Set `iconList` property.
@@ -460,7 +460,7 @@ interface ToplevelGidBuilderImpl(T)
         propval = A list of textures to use as icon.
       Returns: Builder instance for fluent chaining
   */
-  T iconList(void* propval);
+  T iconList(void* propval) nothrow;
 
   /**
       Set `modal` property.
@@ -468,7 +468,7 @@ interface ToplevelGidBuilderImpl(T)
         propval = Whether the surface is modal.
       Returns: Builder instance for fluent chaining
   */
-  T modal(bool propval);
+  T modal(bool propval) nothrow;
 
   /**
       Set `startupId` property.
@@ -479,7 +479,7 @@ interface ToplevelGidBuilderImpl(T)
           startup feedback.
       Returns: Builder instance for fluent chaining
   */
-  T startupId(string propval);
+  T startupId(string propval) nothrow;
 
   /**
       Set `title` property.
@@ -487,7 +487,7 @@ interface ToplevelGidBuilderImpl(T)
         propval = The title of the surface.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval);
+  T title(string propval) nothrow;
 
   /**
       Set `transientFor` property.
@@ -495,5 +495,5 @@ interface ToplevelGidBuilderImpl(T)
         propval = The transient parent of the surface.
       Returns: Builder instance for fluent chaining
   */
-  T transientFor(gdk.surface.Surface propval);
+  T transientFor(gdk.surface.Surface propval) nothrow;
 }

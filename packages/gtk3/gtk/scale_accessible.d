@@ -18,26 +18,26 @@ class ScaleAccessible : gtk.range_accessible.RangeAccessible
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scale_accessible_get_type != &gidSymbolNotFound ? gtk_scale_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ScaleAccessible self()
+  override ScaleAccessible self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class ScaleAccessible : gtk.range_accessible.RangeAccessible
       Get builder for [gtk.scale_accessible.ScaleAccessible]
       Returns: New builder object
   */
-  static ScaleAccessibleGidBuilder builder()
+  static ScaleAccessibleGidBuilder builder() nothrow
   {
     return new ScaleAccessibleGidBuilder;
   }
@@ -65,7 +65,7 @@ final class ScaleAccessibleGidBuilder : ScaleAccessibleGidBuilderImpl!ScaleAcces
       Create object from builder.
       Returns: New object
   */
-  ScaleAccessible build()
+  ScaleAccessible build() nothrow
   {
     return new ScaleAccessible(cast(void*)createGObject(ScaleAccessible._getGType), No.Take);
   }

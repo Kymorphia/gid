@@ -21,7 +21,7 @@ template StyleSchemeChooserT()
         scheme. The property can be set to change
         the current selection programmatically.
   */
-  @property gtksource.style_scheme.StyleScheme styleScheme()
+  @property gtksource.style_scheme.StyleScheme styleScheme() nothrow
   {
     return getStyleScheme();
   }
@@ -33,7 +33,7 @@ template StyleSchemeChooserT()
           scheme. The property can be set to change
           the current selection programmatically.
   */
-  @property void styleScheme(gtksource.style_scheme.StyleScheme propval)
+  @property void styleScheme(gtksource.style_scheme.StyleScheme propval) nothrow
   {
     setStyleScheme(propval);
   }
@@ -42,7 +42,7 @@ template StyleSchemeChooserT()
       Gets the currently-selected scheme.
       Returns: the currently-selected scheme.
   */
-  override gtksource.style_scheme.StyleScheme getStyleScheme()
+  override gtksource.style_scheme.StyleScheme getStyleScheme() nothrow
   {
     GtkSourceStyleScheme* _cretval;
     _cretval = gtk_source_style_scheme_chooser_get_style_scheme(cast(GtkSourceStyleSchemeChooser*)this._cPtr);
@@ -56,7 +56,7 @@ template StyleSchemeChooserT()
       Params:
         scheme = a #GtkSourceStyleScheme
   */
-  override void setStyleScheme(gtksource.style_scheme.StyleScheme scheme)
+  override void setStyleScheme(gtksource.style_scheme.StyleScheme scheme) nothrow
   {
     gtk_source_style_scheme_chooser_set_style_scheme(cast(GtkSourceStyleSchemeChooser*)this._cPtr, scheme ? cast(GtkSourceStyleScheme*)scheme._cPtr(No.Dup) : null);
   }
@@ -74,7 +74,7 @@ template StyleSchemeChooserGidBuilderT()
           the current selection programmatically.
       Returns: Builder instance for fluent chaining
   */
-  T styleScheme(gtksource.style_scheme.StyleScheme propval)
+  T styleScheme(gtksource.style_scheme.StyleScheme propval) nothrow
   {
     return setProperty("style-scheme", propval);
   }

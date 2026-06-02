@@ -15,26 +15,26 @@ class StrftimeOptions : arrow.function_options.FunctionOptions
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_strftime_options_get_type != &gidSymbolNotFound ? garrow_strftime_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StrftimeOptions self()
+  override StrftimeOptions self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class StrftimeOptions : arrow.function_options.FunctionOptions
       Get builder for [arrow.strftime_options.StrftimeOptions]
       Returns: New builder object
   */
-  static StrftimeOptionsGidBuilder builder()
+  static StrftimeOptionsGidBuilder builder() nothrow
   {
     return new StrftimeOptionsGidBuilder;
   }
@@ -52,7 +52,7 @@ class StrftimeOptions : arrow.function_options.FunctionOptions
       Get `format` property.
       Returns: The desired format string.
   */
-  @property string format()
+  @property string format() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("format");
   }
@@ -62,7 +62,7 @@ class StrftimeOptions : arrow.function_options.FunctionOptions
       Params:
         propval = The desired format string.
   */
-  @property void format(string propval)
+  @property void format(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("format", propval);
   }
@@ -71,7 +71,7 @@ class StrftimeOptions : arrow.function_options.FunctionOptions
       Get `locale` property.
       Returns: The desired output locale string.
   */
-  @property string locale()
+  @property string locale() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("locale");
   }
@@ -81,13 +81,13 @@ class StrftimeOptions : arrow.function_options.FunctionOptions
       Params:
         propval = The desired output locale string.
   */
-  @property void locale(string propval)
+  @property void locale(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("locale", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowStrftimeOptions* _cretval;
     _cretval = garrow_strftime_options_new();
@@ -105,7 +105,7 @@ class StrftimeOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsG
         propval = The desired format string.
       Returns: Builder instance for fluent chaining
   */
-  T format(string propval)
+  T format(string propval) nothrow
   {
     return setProperty("format", propval);
   }
@@ -116,7 +116,7 @@ class StrftimeOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsG
         propval = The desired output locale string.
       Returns: Builder instance for fluent chaining
   */
-  T locale(string propval)
+  T locale(string propval) nothrow
   {
     return setProperty("locale", propval);
   }
@@ -129,7 +129,7 @@ final class StrftimeOptionsGidBuilder : StrftimeOptionsGidBuilderImpl!StrftimeOp
       Create object from builder.
       Returns: New object
   */
-  StrftimeOptions build()
+  StrftimeOptions build() nothrow
   {
     return new StrftimeOptions(cast(void*)createGObject(StrftimeOptions._getGType), Yes.Take);
   }

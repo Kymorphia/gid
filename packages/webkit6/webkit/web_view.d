@@ -78,26 +78,26 @@ class WebView : webkit.web_view_base.WebViewBase
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_web_view_get_type != &gidSymbolNotFound ? webkit_web_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WebView self()
+  override WebView self() nothrow
   {
     return this;
   }
@@ -106,7 +106,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Get builder for [webkit.web_view.WebView]
       Returns: New builder object
   */
-  static WebViewGidBuilder builder()
+  static WebViewGidBuilder builder() nothrow
   {
     return new WebViewGidBuilder;
   }
@@ -118,7 +118,7 @@ class WebView : webkit.web_view_base.WebViewBase
         signal request. If the new WebView was added to a new tab of current browsing context window
         [webkit.types.AutomationBrowsingContextPresentation.Tab] should be used.
   */
-  @property webkit.types.AutomationBrowsingContextPresentation automationPresentationType()
+  @property webkit.types.AutomationBrowsingContextPresentation automationPresentationType() nothrow
   {
     return getAutomationPresentationType();
   }
@@ -137,7 +137,7 @@ class WebView : webkit.web_view_base.WebViewBase
         can still re-request the permission to the user. Permission desision caching is left to the
         application.
   */
-  @property webkit.types.MediaCaptureState cameraCaptureState()
+  @property webkit.types.MediaCaptureState cameraCaptureState() nothrow
   {
     return getCameraCaptureState();
   }
@@ -157,7 +157,7 @@ class WebView : webkit.web_view_base.WebViewBase
           can still re-request the permission to the user. Permission desision caching is left to the
           application.
   */
-  @property void cameraCaptureState(webkit.types.MediaCaptureState propval)
+  @property void cameraCaptureState(webkit.types.MediaCaptureState propval) nothrow
   {
     setCameraCaptureState(propval);
   }
@@ -175,7 +175,7 @@ class WebView : webkit.web_view_base.WebViewBase
         Policies are additive so if a website sets its own policy it still applies
         on top of the policy set here.
   */
-  @property string defaultContentSecurityPolicy()
+  @property string defaultContentSecurityPolicy() nothrow
   {
     return getDefaultContentSecurityPolicy();
   }
@@ -194,7 +194,7 @@ class WebView : webkit.web_view_base.WebViewBase
         can still re-request the permission to the user. Permission desision caching is left to the
         application.
   */
-  @property webkit.types.MediaCaptureState displayCaptureState()
+  @property webkit.types.MediaCaptureState displayCaptureState() nothrow
   {
     return getDisplayCaptureState();
   }
@@ -214,7 +214,7 @@ class WebView : webkit.web_view_base.WebViewBase
           can still re-request the permission to the user. Permission desision caching is left to the
           application.
   */
-  @property void displayCaptureState(webkit.types.MediaCaptureState propval)
+  @property void displayCaptureState(webkit.types.MediaCaptureState propval) nothrow
   {
     setDisplayCaptureState(propval);
   }
@@ -224,7 +224,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Returns: Whether the pages loaded inside #WebKitWebView are editable. For more
         information see [webkit.web_view.WebView.setEditable].
   */
-  @property bool editable()
+  @property bool editable() nothrow
   {
     return isEditable();
   }
@@ -235,7 +235,7 @@ class WebView : webkit.web_view_base.WebViewBase
         propval = Whether the pages loaded inside #WebKitWebView are editable. For more
           information see [webkit.web_view.WebView.setEditable].
   */
-  @property void editable(bool propval)
+  @property void editable(bool propval) nothrow
   {
     setEditable(propval);
   }
@@ -250,7 +250,7 @@ class WebView : webkit.web_view_base.WebViewBase
         to be received for a document, including all its possible subresources
         and child documents.
   */
-  @property double estimatedLoadProgress()
+  @property double estimatedLoadProgress() nothrow
   {
     return getEstimatedLoadProgress();
   }
@@ -260,7 +260,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Returns: The favicon currently associated to the #WebKitWebView.
         See [webkit.web_view.WebView.getFavicon] for more details.
   */
-  @property gdk.texture.Texture favicon()
+  @property gdk.texture.Texture favicon() nothrow
   {
     return getFavicon();
   }
@@ -270,7 +270,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Returns: Whether the #WebKitWebView audio is muted. When true, audio is silenced.
         It may still be playing, i.e. #WebKitWebView:is-playing-audio may be true.
   */
-  @property bool isMuted()
+  @property bool isMuted() nothrow
   {
     return getIsMuted();
   }
@@ -281,7 +281,7 @@ class WebView : webkit.web_view_base.WebViewBase
         propval = Whether the #WebKitWebView audio is muted. When true, audio is silenced.
           It may still be playing, i.e. #WebKitWebView:is-playing-audio may be true.
   */
-  @property void isMuted(bool propval)
+  @property void isMuted(bool propval) nothrow
   {
     setIsMuted(propval);
   }
@@ -290,7 +290,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Get `isWebProcessResponsive` property.
       Returns: Whether the web process currently associated to the #WebKitWebView is responsive.
   */
-  @property bool isWebProcessResponsive()
+  @property bool isWebProcessResponsive() nothrow
   {
     return getIsWebProcessResponsive();
   }
@@ -309,7 +309,7 @@ class WebView : webkit.web_view_base.WebViewBase
         can still re-request the permission to the user. Permission desision caching is left to the
         application.
   */
-  @property webkit.types.MediaCaptureState microphoneCaptureState()
+  @property webkit.types.MediaCaptureState microphoneCaptureState() nothrow
   {
     return getMicrophoneCaptureState();
   }
@@ -329,7 +329,7 @@ class WebView : webkit.web_view_base.WebViewBase
           can still re-request the permission to the user. Permission desision caching is left to the
           application.
   */
-  @property void microphoneCaptureState(webkit.types.MediaCaptureState propval)
+  @property void microphoneCaptureState(webkit.types.MediaCaptureState propval) nothrow
   {
     setMicrophoneCaptureState(propval);
   }
@@ -338,7 +338,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Get `networkSession` property.
       Returns: The #WebKitNetworkSession of the view
   */
-  @property webkit.network_session.NetworkSession networkSession()
+  @property webkit.network_session.NetworkSession networkSession() nothrow
   {
     return getNetworkSession();
   }
@@ -347,7 +347,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Get `pageId` property.
       Returns: The identifier of the #WebKitWebPage corresponding to the #WebKitWebView.
   */
-  @property ulong pageId()
+  @property ulong pageId() nothrow
   {
     return getPageId();
   }
@@ -357,7 +357,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         propval = The #WebKitSettings of the view.
   */
-  @property void settings(webkit.settings.Settings propval)
+  @property void settings(webkit.settings.Settings propval) nothrow
   {
     setSettings(propval);
   }
@@ -367,7 +367,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Returns: The main frame document title of this #WebKitWebView. If
         the title has not been received yet, it will be null.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -377,7 +377,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Returns: The current active URI of the #WebKitWebView.
         See [webkit.web_view.WebView.getUri] for more details.
   */
-  @property string uri()
+  @property string uri() nothrow
   {
     return getUri();
   }
@@ -386,7 +386,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Get `userContentManager` property.
       Returns: The #WebKitUserContentManager of the view.
   */
-  @property webkit.user_content_manager.UserContentManager userContentManager()
+  @property webkit.user_content_manager.UserContentManager userContentManager() nothrow
   {
     return getUserContentManager();
   }
@@ -395,7 +395,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Get `webContext` property.
       Returns: The #WebKitWebContext of the view.
   */
-  @property webkit.web_context.WebContext webContext()
+  @property webkit.web_context.WebContext webContext() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(webkit.web_context.WebContext)("web-context");
   }
@@ -410,7 +410,7 @@ class WebView : webkit.web_view_base.WebViewBase
         In practice this limits the Content-Security-Policies that are allowed to be set. Some details can be found in
         [Chrome's documentation](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/#content-security-policy).
   */
-  @property webkit.types.WebExtensionMode webExtensionMode()
+  @property webkit.types.WebExtensionMode webExtensionMode() nothrow
   {
     return getWebExtensionMode();
   }
@@ -419,7 +419,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Get `websitePolicies` property.
       Returns: The #WebKitWebsitePolicies for the view.
   */
-  @property webkit.website_policies.WebsitePolicies websitePolicies()
+  @property webkit.website_policies.WebsitePolicies websitePolicies() nothrow
   {
     return getWebsitePolicies();
   }
@@ -429,7 +429,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Returns: The zoom level of the #WebKitWebView content.
         See [webkit.web_view.WebView.setZoomLevel] for more details.
   */
-  @property double zoomLevel()
+  @property double zoomLevel() nothrow
   {
     return getZoomLevel();
   }
@@ -440,7 +440,7 @@ class WebView : webkit.web_view_base.WebViewBase
         propval = The zoom level of the #WebKitWebView content.
           See [webkit.web_view.WebView.setZoomLevel] for more details.
   */
-  @property void zoomLevel(double propval)
+  @property void zoomLevel(double propval) nothrow
   {
     setZoomLevel(propval);
   }
@@ -455,7 +455,7 @@ class WebView : webkit.web_view_base.WebViewBase
       webkit_web_view_new_with_settings().
       Returns: The newly created #WebKitWebView widget
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = webkit_web_view_new();
@@ -530,14 +530,21 @@ class WebView : webkit.web_view_base.WebViewBase
         cancellable = a #GCancellable or null to ignore
         callback = a #GAsyncReadyCallback to call when the script finished
   */
-  void callAsyncJavascriptFunction(string body_, glib.variant.Variant arguments = null, string worldName = null, string sourceUri = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void callAsyncJavascriptFunction(string body_, glib.variant.Variant arguments = null, string worldName = null, string sourceUri = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     ptrdiff_t _length;
@@ -582,14 +589,21 @@ class WebView : webkit.web_view_base.WebViewBase
         cancellable = a #GCancellable or null to ignore
         callback = a #GAsyncReadyCallback to call when the request is satisfied
   */
-  void canExecuteEditingCommand(string command, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void canExecuteEditingCommand(string command, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _command = command.toCString(No.Alloc);
@@ -619,7 +633,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Determines whether web_view has a previous history item.
       Returns: true if able to move back or false otherwise.
   */
-  bool canGoBack()
+  bool canGoBack() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_view_can_go_back(cast(WebKitWebView*)this._cPtr);
@@ -630,7 +644,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Determines whether web_view has a next history item.
       Returns: true if able to move forward or false otherwise.
   */
-  bool canGoForward()
+  bool canGoForward() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_view_can_go_forward(cast(WebKitWebView*)this._cPtr);
@@ -644,7 +658,7 @@ class WebView : webkit.web_view_base.WebViewBase
         mimeType = a MIME type
       Returns: true if the MIME type mime_type can be displayed or false otherwise
   */
-  bool canShowMimeType(string mimeType)
+  bool canShowMimeType(string mimeType) nothrow
   {
     bool _retval;
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
@@ -660,7 +674,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Returns: a new #WebKitDownload representing
            the download operation.
   */
-  webkit.download.Download downloadUri(string uri)
+  webkit.download.Download downloadUri(string uri) nothrow
   {
     WebKitDownload* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -732,14 +746,21 @@ class WebView : webkit.web_view_base.WebViewBase
         cancellable = a #GCancellable or null to ignore
         callback = a #GAsyncReadyCallback to call when the script finished
   */
-  void evaluateJavascript(string script, string worldName = null, string sourceUri = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void evaluateJavascript(string script, string worldName = null, string sourceUri = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     ptrdiff_t _length;
@@ -782,7 +803,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         command = the command to execute
   */
-  void executeEditingCommand(string command)
+  void executeEditingCommand(string command) nothrow
   {
     const(char)* _command = command.toCString(No.Alloc);
     webkit_web_view_execute_editing_command(cast(WebKitWebView*)this._cPtr, _command);
@@ -799,7 +820,7 @@ class WebView : webkit.web_view_base.WebViewBase
         command = the command to execute
         argument = the command argument
   */
-  void executeEditingCommandWithArgument(string command, string argument)
+  void executeEditingCommandWithArgument(string command, string argument) nothrow
   {
     const(char)* _command = command.toCString(No.Alloc);
     const(char)* _argument = argument.toCString(No.Alloc);
@@ -810,7 +831,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Get the presentation type of #WebKitWebView when created for automation.
       Returns: a #WebKitAutomationBrowsingContextPresentation.
   */
-  webkit.types.AutomationBrowsingContextPresentation getAutomationPresentationType()
+  webkit.types.AutomationBrowsingContextPresentation getAutomationPresentationType() nothrow
   {
     WebKitAutomationBrowsingContextPresentation _cretval;
     _cretval = webkit_web_view_get_automation_presentation_type(cast(WebKitWebView*)this._cPtr);
@@ -824,7 +845,7 @@ class WebView : webkit.web_view_base.WebViewBase
       The #WebKitBackForwardList is owned by the #WebKitWebView.
       Returns: the #WebKitBackForwardList
   */
-  webkit.back_forward_list.BackForwardList getBackForwardList()
+  webkit.back_forward_list.BackForwardList getBackForwardList() nothrow
   {
     WebKitBackForwardList* _cretval;
     _cretval = webkit_web_view_get_back_forward_list(cast(WebKitWebView*)this._cPtr);
@@ -842,7 +863,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         rgba = a #GdkRGBA to fill in with the background color
   */
-  void getBackgroundColor(out gdk.rgba.RGBA rgba)
+  void getBackgroundColor(out gdk.rgba.RGBA rgba) nothrow
   {
     webkit_web_view_get_background_color(cast(WebKitWebView*)this._cPtr, cast(GdkRGBA*)&rgba);
   }
@@ -852,7 +873,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Returns: The #WebKitMediaCaptureState of the camera device. If #WebKitSettings:enable-mediastream
         is false, this method will return [webkit.types.MediaCaptureState.None].
   */
-  webkit.types.MediaCaptureState getCameraCaptureState()
+  webkit.types.MediaCaptureState getCameraCaptureState() nothrow
   {
     WebKitMediaCaptureState _cretval;
     _cretval = webkit_web_view_get_camera_capture_state(cast(WebKitWebView*)this._cPtr);
@@ -864,7 +885,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Gets the web context of web_view.
       Returns: the #WebKitWebContext of the view
   */
-  webkit.web_context.WebContext getContext()
+  webkit.web_context.WebContext getContext() nothrow
   {
     WebKitWebContext* _cretval;
     _cretval = webkit_web_view_get_context(cast(WebKitWebView*)this._cPtr);
@@ -877,7 +898,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Returns: the current custom character encoding name or null if no
            custom character encoding has been set.
   */
-  string getCustomCharset()
+  string getCustomCharset() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_web_view_get_custom_charset(cast(WebKitWebView*)this._cPtr);
@@ -889,7 +910,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Gets the configured default Content-Security-Policy.
       Returns: The default policy or null
   */
-  string getDefaultContentSecurityPolicy()
+  string getDefaultContentSecurityPolicy() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_web_view_get_default_content_security_policy(cast(WebKitWebView*)this._cPtr);
@@ -902,7 +923,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Returns: The #WebKitMediaCaptureState of the display device. If #WebKitSettings:enable-mediastream
         is false, this method will return [webkit.types.MediaCaptureState.None].
   */
-  webkit.types.MediaCaptureState getDisplayCaptureState()
+  webkit.types.MediaCaptureState getDisplayCaptureState() nothrow
   {
     WebKitMediaCaptureState _cretval;
     _cretval = webkit_web_view_get_display_capture_state(cast(WebKitWebView*)this._cPtr);
@@ -914,7 +935,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Gets the web editor state of web_view.
       Returns: the #WebKitEditorState of the view
   */
-  webkit.editor_state.EditorState getEditorState()
+  webkit.editor_state.EditorState getEditorState() nothrow
   {
     WebKitEditorState* _cretval;
     _cretval = webkit_web_view_get_editor_state(cast(WebKitWebView*)this._cPtr);
@@ -930,7 +951,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Returns: an estimate of the of the percent complete for a document
             load as a range from 0.0 to 1.0.
   */
-  double getEstimatedLoadProgress()
+  double getEstimatedLoadProgress() nothrow
   {
     double _retval;
     _retval = webkit_web_view_get_estimated_load_progress(cast(WebKitWebView*)this._cPtr);
@@ -946,7 +967,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Returns: the favicon image or null if there's no
            icon associated with web_view.
   */
-  gdk.texture.Texture getFavicon()
+  gdk.texture.Texture getFavicon() nothrow
   {
     GdkTexture* _cretval;
     _cretval = webkit_web_view_get_favicon(cast(WebKitWebView*)this._cPtr);
@@ -962,7 +983,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Returns: the #WebKitFindController associated to
         this particular #WebKitWebView.
   */
-  webkit.find_controller.FindController getFindController()
+  webkit.find_controller.FindController getFindController() nothrow
   {
     WebKitFindController* _cretval;
     _cretval = webkit_web_view_get_find_controller(cast(WebKitWebView*)this._cPtr);
@@ -976,7 +997,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Get the #WebKitInputMethodContext currently in use by web_view, or null if no input method is being used.
       Returns: a #WebKitInputMethodContext, or null
   */
-  webkit.input_method_context.InputMethodContext getInputMethodContext()
+  webkit.input_method_context.InputMethodContext getInputMethodContext() nothrow
   {
     WebKitInputMethodContext* _cretval;
     _cretval = webkit_web_view_get_input_method_context(cast(WebKitWebView*)this._cPtr);
@@ -988,7 +1009,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Get the #WebKitWebInspector associated to web_view
       Returns: the #WebKitWebInspector of web_view
   */
-  webkit.web_inspector.WebInspector getInspector()
+  webkit.web_inspector.WebInspector getInspector() nothrow
   {
     WebKitWebInspector* _cretval;
     _cretval = webkit_web_view_get_inspector(cast(WebKitWebView*)this._cPtr);
@@ -1000,7 +1021,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Gets the mute state of web_view.
       Returns: true if web_view audio is muted or false is audio is not muted.
   */
-  bool getIsMuted()
+  bool getIsMuted() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_view_get_is_muted(cast(WebKitWebView*)this._cPtr);
@@ -1011,7 +1032,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Get whether the current web process of a #WebKitWebView is responsive.
       Returns: true if the web process attached to web_view is responsive, or false otherwise.
   */
-  bool getIsWebProcessResponsive()
+  bool getIsWebProcessResponsive() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_view_get_is_web_process_responsive(cast(WebKitWebView*)this._cPtr);
@@ -1023,7 +1044,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Returns: the main #WebKitWebResource of the view
            or null if nothing has been loaded.
   */
-  webkit.web_resource.WebResource getMainResource()
+  webkit.web_resource.WebResource getMainResource() nothrow
   {
     WebKitWebResource* _cretval;
     _cretval = webkit_web_view_get_main_resource(cast(WebKitWebView*)this._cPtr);
@@ -1036,7 +1057,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Returns: The #WebKitMediaCaptureState of the microphone device. If #WebKitSettings:enable-mediastream
         is false, this method will return [webkit.types.MediaCaptureState.None].
   */
-  webkit.types.MediaCaptureState getMicrophoneCaptureState()
+  webkit.types.MediaCaptureState getMicrophoneCaptureState() nothrow
   {
     WebKitMediaCaptureState _cretval;
     _cretval = webkit_web_view_get_microphone_capture_state(cast(WebKitWebView*)this._cPtr);
@@ -1048,7 +1069,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Get the #WebKitNetworkSession associated to web_view.
       Returns: a #WebKitNetworkSession
   */
-  webkit.network_session.NetworkSession getNetworkSession()
+  webkit.network_session.NetworkSession getNetworkSession() nothrow
   {
     WebKitNetworkSession* _cretval;
     _cretval = webkit_web_view_get_network_session(cast(WebKitWebView*)this._cPtr);
@@ -1061,7 +1082,7 @@ class WebView : webkit.web_view_base.WebViewBase
       the #WebKitWebView
       Returns: the page ID of web_view.
   */
-  ulong getPageId()
+  ulong getPageId() nothrow
   {
     ulong _retval;
     _retval = webkit_web_view_get_page_id(cast(WebKitWebView*)this._cPtr);
@@ -1072,7 +1093,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Gets the current session state of web_view
       Returns: a #WebKitWebViewSessionState
   */
-  webkit.web_view_session_state.WebViewSessionState getSessionState()
+  webkit.web_view_session_state.WebViewSessionState getSessionState() nothrow
   {
     WebKitWebViewSessionState* _cretval;
     _cretval = webkit_web_view_get_session_state(cast(WebKitWebView*)this._cPtr);
@@ -1099,7 +1120,7 @@ class WebView : webkit.web_view_base.WebViewBase
       #WebKitWebView<!-- -->s using the same #WebKitSettings.
       Returns: the #WebKitSettings attached to web_view
   */
-  webkit.settings.Settings getSettings()
+  webkit.settings.Settings getSettings() nothrow
   {
     WebKitSettings* _cretval;
     _cretval = webkit_web_view_get_settings(cast(WebKitWebView*)this._cPtr);
@@ -1122,14 +1143,21 @@ class WebView : webkit.web_view_base.WebViewBase
         cancellable = a #GCancellable
         callback = a #GAsyncReadyCallback
   */
-  void getSnapshot(webkit.types.SnapshotRegion region, webkit.types.SnapshotOptions options, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void getSnapshot(webkit.types.SnapshotRegion region, webkit.types.SnapshotOptions options, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -1162,7 +1190,7 @@ class WebView : webkit.web_view_base.WebViewBase
       be notified when the title has been received.
       Returns: The main frame document title of web_view.
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_web_view_get_title(cast(WebKitWebView*)this._cPtr);
@@ -1194,7 +1222,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Returns: true if the web_view connection uses HTTPS and a response has been received
            from the server, or false otherwise.
   */
-  bool getTlsInfo(out gio.tls_certificate.TlsCertificate certificate, out gio.types.TlsCertificateFlags errors)
+  bool getTlsInfo(out gio.tls_certificate.TlsCertificate certificate, out gio.types.TlsCertificateFlags errors) nothrow
   {
     bool _retval;
     GTlsCertificate* _certificate;
@@ -1259,7 +1287,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Returns: the current active URI of web_view or null
            if nothing has been loaded yet.
   */
-  string getUri()
+  string getUri() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_web_view_get_uri(cast(WebKitWebView*)this._cPtr);
@@ -1271,7 +1299,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Gets the user content manager associated to web_view.
       Returns: the #WebKitUserContentManager associated with the view
   */
-  webkit.user_content_manager.UserContentManager getUserContentManager()
+  webkit.user_content_manager.UserContentManager getUserContentManager() nothrow
   {
     WebKitUserContentManager* _cretval;
     _cretval = webkit_web_view_get_user_content_manager(cast(WebKitWebView*)this._cPtr);
@@ -1283,7 +1311,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Get the view's #WebKitWebExtensionMode.
       Returns: the #WebKitWebExtensionMode
   */
-  webkit.types.WebExtensionMode getWebExtensionMode()
+  webkit.types.WebExtensionMode getWebExtensionMode() nothrow
   {
     WebKitWebExtensionMode _cretval;
     _cretval = webkit_web_view_get_web_extension_mode(cast(WebKitWebView*)this._cPtr);
@@ -1302,7 +1330,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Returns: the default #WebKitWebsitePolicies
             associated with the view.
   */
-  webkit.website_policies.WebsitePolicies getWebsitePolicies()
+  webkit.website_policies.WebsitePolicies getWebsitePolicies() nothrow
   {
     WebKitWebsitePolicies* _cretval;
     _cretval = webkit_web_view_get_website_policies(cast(WebKitWebView*)this._cPtr);
@@ -1317,7 +1345,7 @@ class WebView : webkit.web_view_base.WebViewBase
       that the window containing web_view should have.
       Returns: the #WebKitWindowProperties of web_view
   */
-  webkit.window_properties.WindowProperties getWindowProperties()
+  webkit.window_properties.WindowProperties getWindowProperties() nothrow
   {
     WebKitWindowProperties* _cretval;
     _cretval = webkit_web_view_get_window_properties(cast(WebKitWebView*)this._cPtr);
@@ -1332,7 +1360,7 @@ class WebView : webkit.web_view_base.WebViewBase
       view contents are scaled with respect to their original size.
       Returns: the current zoom level of web_view
   */
-  double getZoomLevel()
+  double getZoomLevel() nothrow
   {
     double _retval;
     _retval = webkit_web_view_get_zoom_level(cast(WebKitWebView*)this._cPtr);
@@ -1345,7 +1373,7 @@ class WebView : webkit.web_view_base.WebViewBase
       You can monitor the load operation by connecting to
       #WebKitWebView::load-changed signal.
   */
-  void goBack()
+  void goBack() nothrow
   {
     webkit_web_view_go_back(cast(WebKitWebView*)this._cPtr);
   }
@@ -1356,7 +1384,7 @@ class WebView : webkit.web_view_base.WebViewBase
       You can monitor the load operation by connecting to
       #WebKitWebView::load-changed signal.
   */
-  void goForward()
+  void goForward() nothrow
   {
     webkit_web_view_go_forward(cast(WebKitWebView*)this._cPtr);
   }
@@ -1370,7 +1398,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         listItem = a #WebKitBackForwardListItem
   */
-  void goToBackForwardListItem(webkit.back_forward_list_item.BackForwardListItem listItem)
+  void goToBackForwardListItem(webkit.back_forward_list_item.BackForwardListItem listItem) nothrow
   {
     webkit_web_view_go_to_back_forward_list_item(cast(WebKitWebView*)this._cPtr, listItem ? cast(WebKitBackForwardListItem*)listItem._cPtr(No.Dup) : null);
   }
@@ -1383,7 +1411,7 @@ class WebView : webkit.web_view_base.WebViewBase
       automation session.
       Returns: true if web_view is controlled by automation, or false otherwise.
   */
-  bool isControlledByAutomation()
+  bool isControlledByAutomation() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_view_is_controlled_by_automation(cast(WebKitWebView*)this._cPtr);
@@ -1398,7 +1426,7 @@ class WebView : webkit.web_view_base.WebViewBase
       elements. By default a #WebKitWebView is not editable.
       Returns: true if the user is allowed to edit the HTML document, or false otherwise.
   */
-  bool isEditable()
+  bool isEditable() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_view_is_editable(cast(WebKitWebView*)this._cPtr);
@@ -1415,7 +1443,7 @@ class WebView : webkit.web_view_base.WebViewBase
       when the view is loading a page and stop it when it finishes.
       Returns: true if web_view is loading a page or false otherwise.
   */
-  bool isLoading()
+  bool isLoading() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_view_is_loading(cast(WebKitWebView*)this._cPtr);
@@ -1431,7 +1459,7 @@ class WebView : webkit.web_view_base.WebViewBase
       page is producing sound.
       Returns: true if a page in web_view is playing audio or false otherwise.
   */
-  bool isPlayingAudio()
+  bool isPlayingAudio() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_view_is_playing_audio(cast(WebKitWebView*)this._cPtr);
@@ -1451,7 +1479,7 @@ class WebView : webkit.web_view_base.WebViewBase
         contentUri = the URI for the alternate page content
         baseUri = the base URI for relative locations or null
   */
-  void loadAlternateHtml(string content, string contentUri, string baseUri = null)
+  void loadAlternateHtml(string content, string contentUri, string baseUri = null) nothrow
   {
     const(char)* _content = content.toCString(No.Alloc);
     const(char)* _contentUri = contentUri.toCString(No.Alloc);
@@ -1473,7 +1501,7 @@ class WebView : webkit.web_view_base.WebViewBase
         encoding = the character encoding of bytes, or null
         baseUri = the base URI for relative locations or null
   */
-  void loadBytes(glib.bytes.Bytes bytes, string mimeType = null, string encoding = null, string baseUri = null)
+  void loadBytes(glib.bytes.Bytes bytes, string mimeType = null, string encoding = null, string baseUri = null) nothrow
   {
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
     const(char)* _encoding = encoding.toCString(No.Alloc);
@@ -1497,7 +1525,7 @@ class WebView : webkit.web_view_base.WebViewBase
         content = The HTML string to load
         baseUri = The base URI for relative locations or null
   */
-  void loadHtml(string content, string baseUri = null)
+  void loadHtml(string content, string baseUri = null) nothrow
   {
     const(char)* _content = content.toCString(No.Alloc);
     const(char)* _baseUri = baseUri.toCString(No.Alloc);
@@ -1513,7 +1541,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         plainText = The plain text to load
   */
-  void loadPlainText(string plainText)
+  void loadPlainText(string plainText) nothrow
   {
     const(char)* _plainText = plainText.toCString(No.Alloc);
     webkit_web_view_load_plain_text(cast(WebKitWebView*)this._cPtr, _plainText);
@@ -1528,7 +1556,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         request = a #WebKitURIRequest to load
   */
-  void loadRequest(webkit.urirequest.URIRequest request)
+  void loadRequest(webkit.urirequest.URIRequest request) nothrow
   {
     webkit_web_view_load_request(cast(WebKitWebView*)this._cPtr, request ? cast(WebKitURIRequest*)request._cPtr(No.Dup) : null);
   }
@@ -1542,7 +1570,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         uri = an URI string
   */
-  void loadUri(string uri)
+  void loadUri(string uri) nothrow
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     webkit_web_view_load_uri(cast(WebKitWebView*)this._cPtr, _uri);
@@ -1553,7 +1581,7 @@ class WebView : webkit.web_view_base.WebViewBase
       
       See also [webkit.web_view.WebView.reloadBypassCache].
   */
-  void reload()
+  void reload() nothrow
   {
     webkit_web_view_reload(cast(WebKitWebView*)this._cPtr);
   }
@@ -1562,7 +1590,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Reloads the current contents of web_view without
       using any cached data.
   */
-  void reloadBypassCache()
+  void reloadBypassCache() nothrow
   {
     webkit_web_view_reload_bypass_cache(cast(WebKitWebView*)this._cPtr);
   }
@@ -1573,7 +1601,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         state = a #WebKitWebViewSessionState
   */
-  void restoreSessionState(webkit.web_view_session_state.WebViewSessionState state)
+  void restoreSessionState(webkit.web_view_session_state.WebViewSessionState state) nothrow
   {
     webkit_web_view_restore_session_state(cast(WebKitWebView*)this._cPtr, state ? cast(WebKitWebViewSessionState*)state._cPtr(No.Dup) : null);
   }
@@ -1594,14 +1622,21 @@ class WebView : webkit.web_view_base.WebViewBase
         cancellable = a #GCancellable or null to ignore
         callback = a #GAsyncReadyCallback to call when the request is satisfied
   */
-  void save(webkit.types.SaveMode saveMode, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void save(webkit.types.SaveMode saveMode, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -1645,14 +1680,21 @@ class WebView : webkit.web_view_base.WebViewBase
         cancellable = a #GCancellable or null to ignore
         callback = a #GAsyncReadyCallback to call when the request is satisfied
   */
-  void saveToFile(gio.file.File file, webkit.types.SaveMode saveMode, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void saveToFile(gio.file.File file, webkit.types.SaveMode saveMode, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -1690,14 +1732,21 @@ class WebView : webkit.web_view_base.WebViewBase
         cancellable = a #GCancellable or null to ignore
         callback = (nullable): A #GAsyncReadyCallback to call when the request is satisfied or null
   */
-  void sendMessageToPage(webkit.user_message.UserMessage message, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void sendMessageToPage(webkit.user_message.UserMessage message, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -1734,7 +1783,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         rgba = a #GdkRGBA
   */
-  void setBackgroundColor(gdk.rgba.RGBA rgba)
+  void setBackgroundColor(gdk.rgba.RGBA rgba) nothrow
   {
     webkit_web_view_set_background_color(cast(WebKitWebView*)this._cPtr, cast(const(GdkRGBA)*)&rgba);
   }
@@ -1749,7 +1798,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         state = a #WebKitMediaCaptureState
   */
-  void setCameraCaptureState(webkit.types.MediaCaptureState state)
+  void setCameraCaptureState(webkit.types.MediaCaptureState state) nothrow
   {
     webkit_web_view_set_camera_capture_state(cast(WebKitWebView*)this._cPtr, state);
   }
@@ -1775,7 +1824,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         allowlist = an allowlist of URI patterns, or null
   */
-  void setCorsAllowlist(string[] allowlist = null)
+  void setCorsAllowlist(string[] allowlist = null) nothrow
   {
     const(char)*[] _tmpallowlist;
     foreach (s; allowlist)
@@ -1797,7 +1846,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         charset = a character encoding name or null
   */
-  void setCustomCharset(string charset = null)
+  void setCustomCharset(string charset = null) nothrow
   {
     const(char)* _charset = charset.toCString(No.Alloc);
     webkit_web_view_set_custom_charset(cast(WebKitWebView*)this._cPtr, _charset);
@@ -1813,7 +1862,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         state = a #WebKitMediaCaptureState
   */
-  void setDisplayCaptureState(webkit.types.MediaCaptureState state)
+  void setDisplayCaptureState(webkit.types.MediaCaptureState state) nothrow
   {
     webkit_web_view_set_display_capture_state(cast(WebKitWebView*)this._cPtr, state);
   }
@@ -1833,7 +1882,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         editable = a #gboolean indicating the editable state
   */
-  void setEditable(bool editable)
+  void setEditable(bool editable) nothrow
   {
     webkit_web_view_set_editable(cast(WebKitWebView*)this._cPtr, editable);
   }
@@ -1847,7 +1896,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         context = the #WebKitInputMethodContext to set, or null
   */
-  void setInputMethodContext(webkit.input_method_context.InputMethodContext context = null)
+  void setInputMethodContext(webkit.input_method_context.InputMethodContext context = null) nothrow
   {
     webkit_web_view_set_input_method_context(cast(WebKitWebView*)this._cPtr, context ? cast(WebKitInputMethodContext*)context._cPtr(No.Dup) : null);
   }
@@ -1858,7 +1907,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         muted = mute flag
   */
-  void setIsMuted(bool muted)
+  void setIsMuted(bool muted) nothrow
   {
     webkit_web_view_set_is_muted(cast(WebKitWebView*)this._cPtr, muted);
   }
@@ -1873,7 +1922,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         state = a #WebKitMediaCaptureState
   */
-  void setMicrophoneCaptureState(webkit.types.MediaCaptureState state)
+  void setMicrophoneCaptureState(webkit.types.MediaCaptureState state) nothrow
   {
     webkit_web_view_set_microphone_capture_state(cast(WebKitWebView*)this._cPtr, state);
   }
@@ -1890,7 +1939,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         settings = a #WebKitSettings
   */
-  void setSettings(webkit.settings.Settings settings)
+  void setSettings(webkit.settings.Settings settings) nothrow
   {
     webkit_web_view_set_settings(cast(WebKitWebView*)this._cPtr, settings ? cast(WebKitSettings*)settings._cPtr(No.Dup) : null);
   }
@@ -1904,7 +1953,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         zoomLevel = the zoom level
   */
-  void setZoomLevel(double zoomLevel)
+  void setZoomLevel(double zoomLevel) nothrow
   {
     webkit_web_view_set_zoom_level(cast(WebKitWebView*)this._cPtr, zoomLevel);
   }
@@ -1917,7 +1966,7 @@ class WebView : webkit.web_view_base.WebViewBase
       #WebKitWebView::load-failed signal will be emitted with
       [webkit.types.NetworkError.Cancelled] error.
   */
-  void stopLoading()
+  void stopLoading() nothrow
   {
     webkit_web_view_stop_loading(cast(WebKitWebView*)this._cPtr);
   }
@@ -1929,7 +1978,7 @@ class WebView : webkit.web_view_base.WebViewBase
       using this method, the #WebKitWebView::web-process-terminated signal is emitted with
       [webkit.types.WebProcessTerminationReason.TerminatedByApi] as the reason for termination.
   */
-  void terminateWebProcess()
+  void terminateWebProcess() nothrow
   {
     webkit_web_view_terminate_web_process(cast(WebKitWebView*)this._cPtr);
   }
@@ -1942,7 +1991,7 @@ class WebView : webkit.web_view_base.WebViewBase
       onbeforeunload event handler or the user confirms to close the page,
       the #WebKitWebView::close signal is emitted, otherwise nothing happens.
   */
-  void tryClose()
+  void tryClose() nothrow
   {
     webkit_web_view_try_close(cast(WebKitWebView*)this._cPtr);
   }
@@ -1977,18 +2026,19 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAuthenticate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAuthenticate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.authentication_request.AuthenticationRequest)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1996,7 +2046,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.authenticate");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -2024,13 +2081,13 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClose(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClose(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_view.WebView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2039,7 +2096,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.close");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2099,7 +2163,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectContextMenu(T)(T callback, Flag!"After" after = No.After)
+  gulong connectContextMenu(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.context_menu.ContextMenu)))
@@ -2107,11 +2171,12 @@ class WebView : webkit.web_view_base.WebViewBase
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkit.web_view.WebView)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -2122,7 +2187,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.contextMenu");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -2147,13 +2219,13 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectContextMenuDismissed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectContextMenuDismissed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_view.WebView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2162,7 +2234,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.contextMenuDismissed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2202,18 +2281,19 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCreate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCreate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T : gtk.widget.Widget)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.navigation_action.NavigationAction)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gtk.widget.Widget _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -2221,7 +2301,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.create");
+      }
 
       setVal!(gtk.widget.Widget)(_returnValue, _retval);
     }
@@ -2291,7 +2378,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDecidePolicy(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDecidePolicy(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.policy_decision.PolicyDecision)))
@@ -2299,11 +2386,12 @@ class WebView : webkit.web_view_base.WebViewBase
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkit.web_view.WebView)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -2314,7 +2402,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.decidePolicy");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -2347,22 +2442,30 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEnterFullscreen(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEnterFullscreen(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_view.WebView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.enterFullscreen");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -2390,14 +2493,14 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInsecureContentDetected(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInsecureContentDetected(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.types.InsecureContentEvent)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2409,7 +2512,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.insecureContentDetected");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2436,22 +2546,30 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLeaveFullscreen(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLeaveFullscreen(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_view.WebView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.leaveFullscreen");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -2520,14 +2638,14 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLoadChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLoadChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.types.LoadEvent)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2539,7 +2657,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.loadChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2578,7 +2703,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLoadFailed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLoadFailed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.types.LoadEvent)))
@@ -2587,11 +2712,12 @@ class WebView : webkit.web_view_base.WebViewBase
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : webkit.web_view.WebView)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -2605,7 +2731,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.loadFailed");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -2645,7 +2778,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLoadFailedWithTlsErrors(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLoadFailedWithTlsErrors(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -2654,11 +2787,12 @@ class WebView : webkit.web_view_base.WebViewBase
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : webkit.web_view.WebView)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -2672,7 +2806,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.loadFailedWithTlsErrors");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -2707,7 +2848,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMouseTargetChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMouseTargetChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.hit_test_result.HitTestResult)))
@@ -2715,7 +2856,7 @@ class WebView : webkit.web_view_base.WebViewBase
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkit.web_view.WebView)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2730,7 +2871,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.mouseTargetChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2801,18 +2949,19 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPermissionRequest(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPermissionRequest(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.permission_request.PermissionRequest)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -2820,7 +2969,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.permissionRequest");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -2856,18 +3012,19 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPrint(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPrint(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.print_operation.PrintOperation)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -2875,7 +3032,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.print");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -2908,18 +3072,19 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectQueryPermissionState(T)(T callback, Flag!"After" after = No.After)
+  gulong connectQueryPermissionState(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.permission_state_query.PermissionStateQuery)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -2927,7 +3092,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.queryPermissionState");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -2956,13 +3128,13 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectReadyToShow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectReadyToShow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_view.WebView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2971,7 +3143,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.readyToShow");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3000,7 +3179,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectResourceLoadStarted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectResourceLoadStarted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_resource.WebResource)))
@@ -3008,7 +3187,7 @@ class WebView : webkit.web_view_base.WebViewBase
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkit.web_view.WebView)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3023,7 +3202,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.resourceLoadStarted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3051,13 +3237,13 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRunAsModal(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRunAsModal(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_view.WebView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3066,7 +3252,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.runAsModal");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3104,18 +3297,19 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRunColorChooser(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRunColorChooser(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.color_chooser_request.ColorChooserRequest)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -3123,7 +3317,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.runColorChooser");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -3161,18 +3362,19 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRunFileChooser(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRunFileChooser(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.file_chooser_request.FileChooserRequest)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -3180,7 +3382,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.runFileChooser");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -3234,18 +3443,19 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectScriptDialog(T)(T callback, Flag!"After" after = No.After)
+  gulong connectScriptDialog(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.script_dialog.ScriptDialog)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -3253,7 +3463,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.scriptDialog");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -3285,18 +3502,19 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectShowNotification(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowNotification(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.notification.Notification)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -3304,7 +3522,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.showNotification");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -3341,7 +3566,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectShowOptionMenu(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowOptionMenu(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.option_menu.OptionMenu)))
@@ -3349,11 +3574,12 @@ class WebView : webkit.web_view_base.WebViewBase
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkit.web_view.WebView)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -3364,7 +3590,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.showOptionMenu");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -3400,14 +3633,14 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSubmitForm(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSubmitForm(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.form_submission_request.FormSubmissionRequest)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3419,7 +3652,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.submitForm");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3451,18 +3691,19 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUserMessageReceived(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUserMessageReceived(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.user_message.UserMessage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -3470,7 +3711,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.userMessageReceived");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -3497,14 +3745,14 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWebProcessTerminated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWebProcessTerminated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.types.WebProcessTerminationReason)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_view.WebView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3516,7 +3764,14 @@ class WebView : webkit.web_view_base.WebViewBase
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_view.WebView.webProcessTerminated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3538,7 +3793,7 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
           [webkit.types.AutomationBrowsingContextPresentation.Tab] should be used.
       Returns: Builder instance for fluent chaining
   */
-  T automationPresentationType(webkit.types.AutomationBrowsingContextPresentation propval)
+  T automationPresentationType(webkit.types.AutomationBrowsingContextPresentation propval) nothrow
   {
     return setProperty("automation-presentation-type", propval);
   }
@@ -3559,7 +3814,7 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
           application.
       Returns: Builder instance for fluent chaining
   */
-  T cameraCaptureState(webkit.types.MediaCaptureState propval)
+  T cameraCaptureState(webkit.types.MediaCaptureState propval) nothrow
   {
     return setProperty("camera-capture-state", propval);
   }
@@ -3579,7 +3834,7 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
           on top of the policy set here.
       Returns: Builder instance for fluent chaining
   */
-  T defaultContentSecurityPolicy(string propval)
+  T defaultContentSecurityPolicy(string propval) nothrow
   {
     return setProperty("default-content-security-policy", propval);
   }
@@ -3600,7 +3855,7 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
           application.
       Returns: Builder instance for fluent chaining
   */
-  T displayCaptureState(webkit.types.MediaCaptureState propval)
+  T displayCaptureState(webkit.types.MediaCaptureState propval) nothrow
   {
     return setProperty("display-capture-state", propval);
   }
@@ -3612,7 +3867,7 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
           information see [webkit.web_view.WebView.setEditable].
       Returns: Builder instance for fluent chaining
   */
-  T editable(bool propval)
+  T editable(bool propval) nothrow
   {
     return setProperty("editable", propval);
   }
@@ -3624,7 +3879,7 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
           It may still be playing, i.e. #WebKitWebView:is-playing-audio may be true.
       Returns: Builder instance for fluent chaining
   */
-  T isMuted(bool propval)
+  T isMuted(bool propval) nothrow
   {
     return setProperty("is-muted", propval);
   }
@@ -3645,7 +3900,7 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
           application.
       Returns: Builder instance for fluent chaining
   */
-  T microphoneCaptureState(webkit.types.MediaCaptureState propval)
+  T microphoneCaptureState(webkit.types.MediaCaptureState propval) nothrow
   {
     return setProperty("microphone-capture-state", propval);
   }
@@ -3656,7 +3911,7 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
         propval = The #WebKitNetworkSession of the view
       Returns: Builder instance for fluent chaining
   */
-  T networkSession(webkit.network_session.NetworkSession propval)
+  T networkSession(webkit.network_session.NetworkSession propval) nothrow
   {
     return setProperty("network-session", propval);
   }
@@ -3669,7 +3924,7 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
           because the related web view is only valid during the object construction.
       Returns: Builder instance for fluent chaining
   */
-  T relatedView(webkit.web_view.WebView propval)
+  T relatedView(webkit.web_view.WebView propval) nothrow
   {
     return setProperty("related-view", propval);
   }
@@ -3680,7 +3935,7 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
         propval = The #WebKitSettings of the view.
       Returns: Builder instance for fluent chaining
   */
-  T settings(webkit.settings.Settings propval)
+  T settings(webkit.settings.Settings propval) nothrow
   {
     return setProperty("settings", propval);
   }
@@ -3691,7 +3946,7 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
         propval = The #WebKitUserContentManager of the view.
       Returns: Builder instance for fluent chaining
   */
-  T userContentManager(webkit.user_content_manager.UserContentManager propval)
+  T userContentManager(webkit.user_content_manager.UserContentManager propval) nothrow
   {
     return setProperty("user-content-manager", propval);
   }
@@ -3702,7 +3957,7 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
         propval = The #WebKitWebContext of the view.
       Returns: Builder instance for fluent chaining
   */
-  T webContext(webkit.web_context.WebContext propval)
+  T webContext(webkit.web_context.WebContext propval) nothrow
   {
     return setProperty("web-context", propval);
   }
@@ -3719,7 +3974,7 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
           [Chrome's documentation](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/#content-security-policy).
       Returns: Builder instance for fluent chaining
   */
-  T webExtensionMode(webkit.types.WebExtensionMode propval)
+  T webExtensionMode(webkit.types.WebExtensionMode propval) nothrow
   {
     return setProperty("web-extension-mode", propval);
   }
@@ -3730,7 +3985,7 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
         propval = The #WebKitWebsitePolicies for the view.
       Returns: Builder instance for fluent chaining
   */
-  T websitePolicies(webkit.website_policies.WebsitePolicies propval)
+  T websitePolicies(webkit.website_policies.WebsitePolicies propval) nothrow
   {
     return setProperty("website-policies", propval);
   }
@@ -3742,7 +3997,7 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
           See [webkit.web_view.WebView.setZoomLevel] for more details.
       Returns: Builder instance for fluent chaining
   */
-  T zoomLevel(double propval)
+  T zoomLevel(double propval) nothrow
   {
     return setProperty("zoom-level", propval);
   }
@@ -3755,7 +4010,7 @@ final class WebViewGidBuilder : WebViewGidBuilderImpl!WebViewGidBuilder
       Create object from builder.
       Returns: New object
   */
-  WebView build()
+  WebView build() nothrow
   {
     return new WebView(cast(void*)createGObject(WebView._getGType), No.Take);
   }

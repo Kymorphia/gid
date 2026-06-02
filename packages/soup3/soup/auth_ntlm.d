@@ -20,26 +20,26 @@ class AuthNTLM : soup.auth.Auth
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_auth_ntlm_get_type != &gidSymbolNotFound ? soup_auth_ntlm_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AuthNTLM self()
+  override AuthNTLM self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class AuthNTLM : soup.auth.Auth
       Get builder for [soup.auth_ntlm.AuthNTLM]
       Returns: New builder object
   */
-  static AuthNTLMGidBuilder builder()
+  static AuthNTLMGidBuilder builder() nothrow
   {
     return new AuthNTLMGidBuilder;
   }
@@ -66,7 +66,7 @@ final class AuthNTLMGidBuilder : AuthNTLMGidBuilderImpl!AuthNTLMGidBuilder
       Create object from builder.
       Returns: New object
   */
-  AuthNTLM build()
+  AuthNTLM build() nothrow
   {
     return new AuthNTLM(cast(void*)createGObject(AuthNTLM._getGType), No.Take);
   }

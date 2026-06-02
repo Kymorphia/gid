@@ -20,23 +20,21 @@ abstract class Boxed
   *   boxPtr = The pointer to the boxed type instance
   *   take = Yes.Take if ownership of pointer should be taken by the D object, No.Take to do a box copy of it
   */
-  this(void* boxPtr, Flag!"Take" take)
+  this(void* boxPtr, Flag!"Take" take) nothrow
   {
-    if (!boxPtr)
-      throw new GidConstructException("Null instance pointer for " ~ typeid(this).name);
-
-    this._cInstancePtr = take ? boxPtr : g_boxed_copy(_gType, boxPtr);
+    if (boxPtr)
+      this._cInstancePtr = take ? boxPtr : g_boxed_copy(_gType, boxPtr);
   }
 
   /**
   * Constructor for duplicating a wrapped boxed type value.
   */
-  this(Boxed boxed)
+  this(Boxed boxed) nothrow
   {
     this(boxed._cInstancePtr, No.Take);
   }
 
-  ~this()
+  ~this() nothrow
   {
     if (_cInstancePtr) // Might be null if an exception occurred during construction
       g_boxed_free(_gType, _cInstancePtr);
@@ -46,7 +44,7 @@ abstract class Boxed
   * Get the GType of this boxed type.
   * Returns: The GObject GType
   */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     return cast(GType)0; // Gets overridden by derived boxed types
   }
@@ -55,7 +53,7 @@ abstract class Boxed
   * Boxed GType property.
   * Returns: The GType of the Boxed class.
   */
-  @property GType _gType()
+  @property GType _gType() nothrow
   {
     return _getGType;
   }
@@ -63,7 +61,7 @@ abstract class Boxed
   /**
   * Convenience method to return `this` cast to a type. For use in D with statements.
   */
-  Boxed self()
+  Boxed self() nothrow
   {
     return this;
   }
@@ -72,7 +70,7 @@ abstract class Boxed
   * Make a copy of the wrapped C boxed data.
   * Returns: Copy of the boxed type
   */
-  void* boxCopy()
+  void* boxCopy() nothrow
   {
     return _cInstancePtr ? cast(void*)g_boxed_copy(_gType, _cInstancePtr) : null;
   }
@@ -84,7 +82,7 @@ abstract class Boxed
   *   cBoxed = The C boxed pointer
   * Returns: A copy of the boxed type
   */
-  static void* boxedCopy(T)(void* cBoxed)
+  static void* boxedCopy(T)(void* cBoxed) nothrow
   {
     return cBoxed ? g_boxed_copy(T._getGType, cBoxed) : null;
   }
@@ -95,7 +93,7 @@ abstract class Boxed
   *   T = The D boxed type
   *   cBoxed = The C boxed pointer
   */
-  static void boxedFree(T)(void* cBoxed)
+  static void boxedFree(T)(void* cBoxed) nothrow
   {
     if (cBoxed)
       g_boxed_free(T._getGType, cBoxed);

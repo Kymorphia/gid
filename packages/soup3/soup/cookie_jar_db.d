@@ -26,26 +26,26 @@ class CookieJarDB : soup.cookie_jar.CookieJar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_cookie_jar_db_get_type != &gidSymbolNotFound ? soup_cookie_jar_db_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CookieJarDB self()
+  override CookieJarDB self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class CookieJarDB : soup.cookie_jar.CookieJar
       Get builder for [soup.cookie_jar_db.CookieJarDB]
       Returns: New builder object
   */
-  static CookieJarDBGidBuilder builder()
+  static CookieJarDBGidBuilder builder() nothrow
   {
     return new CookieJarDBGidBuilder;
   }
@@ -63,7 +63,7 @@ class CookieJarDB : soup.cookie_jar.CookieJar
       Get `filename` property.
       Returns: Cookie-storage filename.
   */
-  @property string filename()
+  @property string filename() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("filename");
   }
@@ -82,7 +82,7 @@ class CookieJarDB : soup.cookie_jar.CookieJar
         readOnly = true if filename is read-only
       Returns: the new #SoupCookieJar
   */
-  this(string filename, bool readOnly)
+  this(string filename, bool readOnly) nothrow
   {
     SoupCookieJar* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -102,7 +102,7 @@ class CookieJarDBGidBuilderImpl(T) : soup.cookie_jar.CookieJarGidBuilderImpl!T
         propval = Cookie-storage filename.
       Returns: Builder instance for fluent chaining
   */
-  T filename(string propval)
+  T filename(string propval) nothrow
   {
     return setProperty("filename", propval);
   }
@@ -115,7 +115,7 @@ final class CookieJarDBGidBuilder : CookieJarDBGidBuilderImpl!CookieJarDBGidBuil
       Create object from builder.
       Returns: New object
   */
-  CookieJarDB build()
+  CookieJarDB build() nothrow
   {
     return new CookieJarDB(cast(void*)createGObject(CookieJarDB._getGType), Yes.Take);
   }

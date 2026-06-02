@@ -15,26 +15,26 @@ class ProjectNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_project_node_options_get_type != &gidSymbolNotFound ? garrow_project_node_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ProjectNodeOptions self()
+  override ProjectNodeOptions self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class ProjectNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
       Get builder for [arrow.project_node_options.ProjectNodeOptions]
       Returns: New builder object
   */
-  static ProjectNodeOptionsGidBuilder builder()
+  static ProjectNodeOptionsGidBuilder builder() nothrow
   {
     return new ProjectNodeOptionsGidBuilder;
   }
 
   /** */
-  this(arrow.expression.Expression[] expressions, string[] names = null)
+  this(arrow.expression.Expression[] expressions, string[] names = null) nothrow
   {
     GArrowProjectNodeOptions* _cretval;
     auto _expressions = gListFromD!(arrow.expression.Expression)(expressions);
@@ -80,7 +80,7 @@ final class ProjectNodeOptionsGidBuilder : ProjectNodeOptionsGidBuilderImpl!Proj
       Create object from builder.
       Returns: New object
   */
-  ProjectNodeOptions build()
+  ProjectNodeOptions build() nothrow
   {
     return new ProjectNodeOptions(cast(void*)createGObject(ProjectNodeOptions._getGType), Yes.Take);
   }

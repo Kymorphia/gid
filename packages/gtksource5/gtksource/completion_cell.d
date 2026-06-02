@@ -40,26 +40,26 @@ class CompletionCell : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_cell_get_type != &gidSymbolNotFound ? gtk_source_completion_cell_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CompletionCell self()
+  override CompletionCell self() nothrow
   {
     return this;
   }
@@ -68,67 +68,67 @@ class CompletionCell : gtk.widget.Widget
       Get builder for [gtksource.completion_cell.CompletionCell]
       Returns: New builder object
   */
-  static CompletionCellGidBuilder builder()
+  static CompletionCellGidBuilder builder() nothrow
   {
     return new CompletionCellGidBuilder;
   }
 
   /** */
-  @property gtksource.types.CompletionColumn column()
+  @property gtksource.types.CompletionColumn column() nothrow
   {
     return getColumn();
   }
 
   /** */
-  @property string markup()
+  @property string markup() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("markup");
   }
 
   /** */
-  @property void markup(string propval)
+  @property void markup(string propval) nothrow
   {
     setMarkup(propval);
   }
 
   /** */
-  @property gdk.paintable.Paintable paintable()
+  @property gdk.paintable.Paintable paintable() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.paintable.Paintable)("paintable");
   }
 
   /** */
-  @property void paintable(gdk.paintable.Paintable propval)
+  @property void paintable(gdk.paintable.Paintable propval) nothrow
   {
     setPaintable(propval);
   }
 
   /** */
-  @property string text()
+  @property string text() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("text");
   }
 
   /** */
-  @property void text(string propval)
+  @property void text(string propval) nothrow
   {
     setText(propval);
   }
 
   /** */
-  @property gtk.widget.Widget widget()
+  @property gtk.widget.Widget widget() nothrow
   {
     return getWidget();
   }
 
   /** */
-  @property void widget(gtk.widget.Widget propval)
+  @property void widget(gtk.widget.Widget propval) nothrow
   {
     setWidget(propval);
   }
 
   /** */
-  gtksource.types.CompletionColumn getColumn()
+  gtksource.types.CompletionColumn getColumn() nothrow
   {
     GtkSourceCompletionColumn _cretval;
     _cretval = gtk_source_completion_cell_get_column(cast(GtkSourceCompletionCell*)this._cPtr);
@@ -140,7 +140,7 @@ class CompletionCell : gtk.widget.Widget
       Gets the child #GtkWidget, if any.
       Returns: a #GtkWidget or null
   */
-  gtk.widget.Widget getWidget()
+  gtk.widget.Widget getWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_source_completion_cell_get_widget(cast(GtkSourceCompletionCell*)this._cPtr);
@@ -149,27 +149,27 @@ class CompletionCell : gtk.widget.Widget
   }
 
   /** */
-  void setGicon(gio.icon.Icon gicon)
+  void setGicon(gio.icon.Icon gicon) nothrow
   {
     gtk_source_completion_cell_set_gicon(cast(GtkSourceCompletionCell*)this._cPtr, gicon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)gicon)._cPtr(No.Dup) : null);
   }
 
   /** */
-  void setIconName(string iconName)
+  void setIconName(string iconName) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_source_completion_cell_set_icon_name(cast(GtkSourceCompletionCell*)this._cPtr, _iconName);
   }
 
   /** */
-  void setMarkup(string markup)
+  void setMarkup(string markup) nothrow
   {
     const(char)* _markup = markup.toCString(No.Alloc);
     gtk_source_completion_cell_set_markup(cast(GtkSourceCompletionCell*)this._cPtr, _markup);
   }
 
   /** */
-  void setPaintable(gdk.paintable.Paintable paintable)
+  void setPaintable(gdk.paintable.Paintable paintable) nothrow
   {
     gtk_source_completion_cell_set_paintable(cast(GtkSourceCompletionCell*)this._cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable)._cPtr(No.Dup) : null);
   }
@@ -180,21 +180,21 @@ class CompletionCell : gtk.widget.Widget
       Params:
         text = the text to set or null
   */
-  void setText(string text = null)
+  void setText(string text = null) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_source_completion_cell_set_text(cast(GtkSourceCompletionCell*)this._cPtr, _text);
   }
 
   /** */
-  void setTextWithAttributes(string text, pango.attr_list.AttrList attrs)
+  void setTextWithAttributes(string text, pango.attr_list.AttrList attrs) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_source_completion_cell_set_text_with_attributes(cast(GtkSourceCompletionCell*)this._cPtr, _text, attrs ? cast(PangoAttrList*)attrs._cPtr(No.Dup) : null);
   }
 
   /** */
-  void setWidget(gtk.widget.Widget child)
+  void setWidget(gtk.widget.Widget child) nothrow
   {
     gtk_source_completion_cell_set_widget(cast(GtkSourceCompletionCell*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -206,31 +206,31 @@ class CompletionCellGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 
 
   /** */
-  T column(gtksource.types.CompletionColumn propval)
+  T column(gtksource.types.CompletionColumn propval) nothrow
   {
     return setProperty("column", propval);
   }
 
   /** */
-  T markup(string propval)
+  T markup(string propval) nothrow
   {
     return setProperty("markup", propval);
   }
 
   /** */
-  T paintable(gdk.paintable.Paintable propval)
+  T paintable(gdk.paintable.Paintable propval) nothrow
   {
     return setProperty("paintable", propval);
   }
 
   /** */
-  T text(string propval)
+  T text(string propval) nothrow
   {
     return setProperty("text", propval);
   }
 
   /** */
-  T widget(gtk.widget.Widget propval)
+  T widget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("widget", propval);
   }
@@ -243,7 +243,7 @@ final class CompletionCellGidBuilder : CompletionCellGidBuilderImpl!CompletionCe
       Create object from builder.
       Returns: New object
   */
-  CompletionCell build()
+  CompletionCell build() nothrow
   {
     return new CompletionCell(cast(void*)createGObject(CompletionCell._getGType), No.Take);
   }

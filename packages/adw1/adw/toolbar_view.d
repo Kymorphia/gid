@@ -120,26 +120,26 @@ class ToolbarView : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_toolbar_view_get_type != &gidSymbolNotFound ? adw_toolbar_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ToolbarView self()
+  override ToolbarView self() nothrow
   {
     return this;
   }
@@ -148,7 +148,7 @@ class ToolbarView : gtk.widget.Widget
       Get builder for [adw.toolbar_view.ToolbarView]
       Returns: New builder object
   */
-  static ToolbarViewGidBuilder builder()
+  static ToolbarViewGidBuilder builder() nothrow
   {
     return new ToolbarViewGidBuilder;
   }
@@ -162,7 +162,7 @@ class ToolbarView : gtk.widget.Widget
         
         See [adw.toolbar_view.ToolbarView.topBarHeight].
   */
-  @property int bottomBarHeight()
+  @property int bottomBarHeight() nothrow
   {
     return getBottomBarHeight();
   }
@@ -194,7 +194,7 @@ class ToolbarView : gtk.widget.Widget
         
         See also [adw.toolbar_view.ToolbarView.topBarStyle].
   */
-  @property adw.types.ToolbarStyle bottomBarStyle()
+  @property adw.types.ToolbarStyle bottomBarStyle() nothrow
   {
     return getBottomBarStyle();
   }
@@ -227,7 +227,7 @@ class ToolbarView : gtk.widget.Widget
           
           See also [adw.toolbar_view.ToolbarView.topBarStyle].
   */
-  @property void bottomBarStyle(adw.types.ToolbarStyle propval)
+  @property void bottomBarStyle(adw.types.ToolbarStyle propval) nothrow
   {
     setBottomBarStyle(propval);
   }
@@ -236,7 +236,7 @@ class ToolbarView : gtk.widget.Widget
       Get `content` property.
       Returns: The content widget.
   */
-  @property gtk.widget.Widget content()
+  @property gtk.widget.Widget content() nothrow
   {
     return getContent();
   }
@@ -246,7 +246,7 @@ class ToolbarView : gtk.widget.Widget
       Params:
         propval = The content widget.
   */
-  @property void content(gtk.widget.Widget propval)
+  @property void content(gtk.widget.Widget propval) nothrow
   {
     setContent(propval);
   }
@@ -261,7 +261,7 @@ class ToolbarView : gtk.widget.Widget
         
         See [adw.toolbar_view.ToolbarView.extendContentToTopEdge].
   */
-  @property bool extendContentToBottomEdge()
+  @property bool extendContentToBottomEdge() nothrow
   {
     return getExtendContentToBottomEdge();
   }
@@ -277,7 +277,7 @@ class ToolbarView : gtk.widget.Widget
           
           See [adw.toolbar_view.ToolbarView.extendContentToTopEdge].
   */
-  @property void extendContentToBottomEdge(bool propval)
+  @property void extendContentToBottomEdge(bool propval) nothrow
   {
     setExtendContentToBottomEdge(propval);
   }
@@ -291,7 +291,7 @@ class ToolbarView : gtk.widget.Widget
         
         See [adw.toolbar_view.ToolbarView.extendContentToBottomEdge].
   */
-  @property bool extendContentToTopEdge()
+  @property bool extendContentToTopEdge() nothrow
   {
     return getExtendContentToTopEdge();
   }
@@ -306,7 +306,7 @@ class ToolbarView : gtk.widget.Widget
           
           See [adw.toolbar_view.ToolbarView.extendContentToBottomEdge].
   */
-  @property void extendContentToTopEdge(bool propval)
+  @property void extendContentToTopEdge(bool propval) nothrow
   {
     setExtendContentToTopEdge(propval);
   }
@@ -323,7 +323,7 @@ class ToolbarView : gtk.widget.Widget
         
         See [adw.toolbar_view.ToolbarView.revealTopBars].
   */
-  @property bool revealBottomBars()
+  @property bool revealBottomBars() nothrow
   {
     return getRevealBottomBars();
   }
@@ -341,7 +341,7 @@ class ToolbarView : gtk.widget.Widget
           
           See [adw.toolbar_view.ToolbarView.revealTopBars].
   */
-  @property void revealBottomBars(bool propval)
+  @property void revealBottomBars(bool propval) nothrow
   {
     setRevealBottomBars(propval);
   }
@@ -358,7 +358,7 @@ class ToolbarView : gtk.widget.Widget
         
         See [adw.toolbar_view.ToolbarView.revealBottomBars].
   */
-  @property bool revealTopBars()
+  @property bool revealTopBars() nothrow
   {
     return getRevealTopBars();
   }
@@ -376,7 +376,7 @@ class ToolbarView : gtk.widget.Widget
           
           See [adw.toolbar_view.ToolbarView.revealBottomBars].
   */
-  @property void revealTopBars(bool propval)
+  @property void revealTopBars(bool propval) nothrow
   {
     setRevealTopBars(propval);
   }
@@ -390,7 +390,7 @@ class ToolbarView : gtk.widget.Widget
         
         See [adw.toolbar_view.ToolbarView.bottomBarHeight].
   */
-  @property int topBarHeight()
+  @property int topBarHeight() nothrow
   {
     return getTopBarHeight();
   }
@@ -422,7 +422,7 @@ class ToolbarView : gtk.widget.Widget
         
         See also [adw.toolbar_view.ToolbarView.bottomBarStyle].
   */
-  @property adw.types.ToolbarStyle topBarStyle()
+  @property adw.types.ToolbarStyle topBarStyle() nothrow
   {
     return getTopBarStyle();
   }
@@ -455,7 +455,7 @@ class ToolbarView : gtk.widget.Widget
           
           See also [adw.toolbar_view.ToolbarView.bottomBarStyle].
   */
-  @property void topBarStyle(adw.types.ToolbarStyle propval)
+  @property void topBarStyle(adw.types.ToolbarStyle propval) nothrow
   {
     setTopBarStyle(propval);
   }
@@ -464,7 +464,7 @@ class ToolbarView : gtk.widget.Widget
       Creates a new [adw.toolbar_view.ToolbarView].
       Returns: the newly created [adw.toolbar_view.ToolbarView]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_toolbar_view_new();
@@ -477,7 +477,7 @@ class ToolbarView : gtk.widget.Widget
       Params:
         widget = a widget
   */
-  void addBottomBar(gtk.widget.Widget widget)
+  void addBottomBar(gtk.widget.Widget widget) nothrow
   {
     adw_toolbar_view_add_bottom_bar(cast(AdwToolbarView*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -488,7 +488,7 @@ class ToolbarView : gtk.widget.Widget
       Params:
         widget = a widget
   */
-  void addTopBar(gtk.widget.Widget widget)
+  void addTopBar(gtk.widget.Widget widget) nothrow
   {
     adw_toolbar_view_add_top_bar(cast(AdwToolbarView*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -502,7 +502,7 @@ class ToolbarView : gtk.widget.Widget
       See [adw.toolbar_view.ToolbarView.getTopBarHeight].
       Returns: the current bottom bar height
   */
-  int getBottomBarHeight()
+  int getBottomBarHeight() nothrow
   {
     int _retval;
     _retval = adw_toolbar_view_get_bottom_bar_height(cast(AdwToolbarView*)this._cPtr);
@@ -513,7 +513,7 @@ class ToolbarView : gtk.widget.Widget
       Gets appearance of the botom bars for self.
       Returns: bottom bar style
   */
-  adw.types.ToolbarStyle getBottomBarStyle()
+  adw.types.ToolbarStyle getBottomBarStyle() nothrow
   {
     AdwToolbarStyle _cretval;
     _cretval = adw_toolbar_view_get_bottom_bar_style(cast(AdwToolbarView*)this._cPtr);
@@ -525,7 +525,7 @@ class ToolbarView : gtk.widget.Widget
       Gets the content widget for self.
       Returns: the content widget
   */
-  gtk.widget.Widget getContent()
+  gtk.widget.Widget getContent() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_toolbar_view_get_content(cast(AdwToolbarView*)this._cPtr);
@@ -537,7 +537,7 @@ class ToolbarView : gtk.widget.Widget
       Gets whether the content widget can extend behind bottom bars.
       Returns: whether content extends behind bottom bars
   */
-  bool getExtendContentToBottomEdge()
+  bool getExtendContentToBottomEdge() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_toolbar_view_get_extend_content_to_bottom_edge(cast(AdwToolbarView*)this._cPtr);
@@ -548,7 +548,7 @@ class ToolbarView : gtk.widget.Widget
       Gets whether the content widget can extend behind top bars.
       Returns: whether content extends behind top bars
   */
-  bool getExtendContentToTopEdge()
+  bool getExtendContentToTopEdge() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_toolbar_view_get_extend_content_to_top_edge(cast(AdwToolbarView*)this._cPtr);
@@ -559,7 +559,7 @@ class ToolbarView : gtk.widget.Widget
       Gets whether bottom bars are revealed for self.
       Returns: whether bottom bars are revealed
   */
-  bool getRevealBottomBars()
+  bool getRevealBottomBars() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_toolbar_view_get_reveal_bottom_bars(cast(AdwToolbarView*)this._cPtr);
@@ -570,7 +570,7 @@ class ToolbarView : gtk.widget.Widget
       Gets whether top bars are revealed for self.
       Returns: whether top bars are revealed
   */
-  bool getRevealTopBars()
+  bool getRevealTopBars() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_toolbar_view_get_reveal_top_bars(cast(AdwToolbarView*)this._cPtr);
@@ -586,7 +586,7 @@ class ToolbarView : gtk.widget.Widget
       See [adw.toolbar_view.ToolbarView.getBottomBarHeight].
       Returns: the current top bar height
   */
-  int getTopBarHeight()
+  int getTopBarHeight() nothrow
   {
     int _retval;
     _retval = adw_toolbar_view_get_top_bar_height(cast(AdwToolbarView*)this._cPtr);
@@ -597,7 +597,7 @@ class ToolbarView : gtk.widget.Widget
       Gets appearance of the top bars for self.
       Returns: top bar style
   */
-  adw.types.ToolbarStyle getTopBarStyle()
+  adw.types.ToolbarStyle getTopBarStyle() nothrow
   {
     AdwToolbarStyle _cretval;
     _cretval = adw_toolbar_view_get_top_bar_style(cast(AdwToolbarView*)this._cPtr);
@@ -611,7 +611,7 @@ class ToolbarView : gtk.widget.Widget
       Params:
         widget = the child to be removed
   */
-  void remove(gtk.widget.Widget widget)
+  void remove(gtk.widget.Widget widget) nothrow
   {
     adw_toolbar_view_remove(cast(AdwToolbarView*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -645,7 +645,7 @@ class ToolbarView : gtk.widget.Widget
       Params:
         style = bottom bar style
   */
-  void setBottomBarStyle(adw.types.ToolbarStyle style)
+  void setBottomBarStyle(adw.types.ToolbarStyle style) nothrow
   {
     adw_toolbar_view_set_bottom_bar_style(cast(AdwToolbarView*)this._cPtr, style);
   }
@@ -656,7 +656,7 @@ class ToolbarView : gtk.widget.Widget
       Params:
         content = the content widget
   */
-  void setContent(gtk.widget.Widget content = null)
+  void setContent(gtk.widget.Widget content = null) nothrow
   {
     adw_toolbar_view_set_content(cast(AdwToolbarView*)this._cPtr, content ? cast(GtkWidget*)content._cPtr(No.Dup) : null);
   }
@@ -672,7 +672,7 @@ class ToolbarView : gtk.widget.Widget
       Params:
         extend = whether content extends behind bottom bars
   */
-  void setExtendContentToBottomEdge(bool extend)
+  void setExtendContentToBottomEdge(bool extend) nothrow
   {
     adw_toolbar_view_set_extend_content_to_bottom_edge(cast(AdwToolbarView*)this._cPtr, extend);
   }
@@ -688,7 +688,7 @@ class ToolbarView : gtk.widget.Widget
       Params:
         extend = whether content extends behind top bars
   */
-  void setExtendContentToTopEdge(bool extend)
+  void setExtendContentToTopEdge(bool extend) nothrow
   {
     adw_toolbar_view_set_extend_content_to_top_edge(cast(AdwToolbarView*)this._cPtr, extend);
   }
@@ -707,7 +707,7 @@ class ToolbarView : gtk.widget.Widget
       Params:
         reveal = whether to reveal bottom bars
   */
-  void setRevealBottomBars(bool reveal)
+  void setRevealBottomBars(bool reveal) nothrow
   {
     adw_toolbar_view_set_reveal_bottom_bars(cast(AdwToolbarView*)this._cPtr, reveal);
   }
@@ -726,7 +726,7 @@ class ToolbarView : gtk.widget.Widget
       Params:
         reveal = whether to reveal top bars
   */
-  void setRevealTopBars(bool reveal)
+  void setRevealTopBars(bool reveal) nothrow
   {
     adw_toolbar_view_set_reveal_top_bars(cast(AdwToolbarView*)this._cPtr, reveal);
   }
@@ -760,7 +760,7 @@ class ToolbarView : gtk.widget.Widget
       Params:
         style = top bar style
   */
-  void setTopBarStyle(adw.types.ToolbarStyle style)
+  void setTopBarStyle(adw.types.ToolbarStyle style) nothrow
   {
     adw_toolbar_view_set_top_bar_style(cast(AdwToolbarView*)this._cPtr, style);
   }
@@ -800,7 +800,7 @@ class ToolbarViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           See also [adw.toolbar_view.ToolbarView.topBarStyle].
       Returns: Builder instance for fluent chaining
   */
-  T bottomBarStyle(adw.types.ToolbarStyle propval)
+  T bottomBarStyle(adw.types.ToolbarStyle propval) nothrow
   {
     return setProperty("bottom-bar-style", propval);
   }
@@ -811,7 +811,7 @@ class ToolbarViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The content widget.
       Returns: Builder instance for fluent chaining
   */
-  T content(gtk.widget.Widget propval)
+  T content(gtk.widget.Widget propval) nothrow
   {
     return setProperty("content", propval);
   }
@@ -828,7 +828,7 @@ class ToolbarViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           See [adw.toolbar_view.ToolbarView.extendContentToTopEdge].
       Returns: Builder instance for fluent chaining
   */
-  T extendContentToBottomEdge(bool propval)
+  T extendContentToBottomEdge(bool propval) nothrow
   {
     return setProperty("extend-content-to-bottom-edge", propval);
   }
@@ -844,7 +844,7 @@ class ToolbarViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           See [adw.toolbar_view.ToolbarView.extendContentToBottomEdge].
       Returns: Builder instance for fluent chaining
   */
-  T extendContentToTopEdge(bool propval)
+  T extendContentToTopEdge(bool propval) nothrow
   {
     return setProperty("extend-content-to-top-edge", propval);
   }
@@ -863,7 +863,7 @@ class ToolbarViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           See [adw.toolbar_view.ToolbarView.revealTopBars].
       Returns: Builder instance for fluent chaining
   */
-  T revealBottomBars(bool propval)
+  T revealBottomBars(bool propval) nothrow
   {
     return setProperty("reveal-bottom-bars", propval);
   }
@@ -882,7 +882,7 @@ class ToolbarViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           See [adw.toolbar_view.ToolbarView.revealBottomBars].
       Returns: Builder instance for fluent chaining
   */
-  T revealTopBars(bool propval)
+  T revealTopBars(bool propval) nothrow
   {
     return setProperty("reveal-top-bars", propval);
   }
@@ -916,7 +916,7 @@ class ToolbarViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           See also [adw.toolbar_view.ToolbarView.bottomBarStyle].
       Returns: Builder instance for fluent chaining
   */
-  T topBarStyle(adw.types.ToolbarStyle propval)
+  T topBarStyle(adw.types.ToolbarStyle propval) nothrow
   {
     return setProperty("top-bar-style", propval);
   }
@@ -929,7 +929,7 @@ final class ToolbarViewGidBuilder : ToolbarViewGidBuilderImpl!ToolbarViewGidBuil
       Create object from builder.
       Returns: New object
   */
-  ToolbarView build()
+  ToolbarView build() nothrow
   {
     return new ToolbarView(cast(void*)createGObject(ToolbarView._getGType), No.Take);
   }

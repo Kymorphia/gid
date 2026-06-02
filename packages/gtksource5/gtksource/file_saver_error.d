@@ -14,7 +14,7 @@ struct FileSaverError
   alias Enum = gtksource.types.FileSaverError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gtk_source_file_saver_error_quark();
@@ -24,12 +24,12 @@ struct FileSaverError
 
 class FileSaveException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gtksource.file_saver_error.FileSaverError.quark, cast(int)code, msg);
   }

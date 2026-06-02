@@ -20,18 +20,15 @@ class RTSPWatch
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstrtsp.rtspwatch.RTSPWatch");
-
     _cInstancePtr = cast(GstRTSPWatch*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -43,7 +40,7 @@ class RTSPWatch
         context = a GMainContext (if NULL, the default context will be used)
       Returns: the ID (greater than 0) for the watch within the GMainContext.
   */
-  uint attach(glib.main_context.MainContext context = null)
+  uint attach(glib.main_context.MainContext context = null) nothrow
   {
     uint _retval;
     _retval = gst_rtsp_watch_attach(cast(GstRTSPWatch*)this._cPtr, context ? cast(GMainContext*)context._cPtr(No.Dup) : null);
@@ -58,7 +55,7 @@ class RTSPWatch
         bytes = maximum bytes
         messages = maximum messages
   */
-  void getSendBacklog(out size_t bytes, out uint messages)
+  void getSendBacklog(out size_t bytes, out uint messages) nothrow
   {
     gst_rtsp_watch_get_send_backlog(cast(GstRTSPWatch*)this._cPtr, cast(size_t*)&bytes, cast(uint*)&messages);
   }
@@ -67,7 +64,7 @@ class RTSPWatch
       Reset watch, this is usually called after [gstrtsp.rtspconnection.RTSPConnection.doTunnel]
       when the file descriptors of the connection might have changed.
   */
-  void reset()
+  void reset() nothrow
   {
     gst_rtsp_watch_reset(cast(GstRTSPWatch*)this._cPtr);
   }
@@ -85,7 +82,7 @@ class RTSPWatch
         id = location for a message ID or null
       Returns: #GST_RTSP_OK on success.
   */
-  gstrtsp.types.RTSPResult sendMessage(gstrtsp.rtspmessage.RTSPMessage message, out uint id)
+  gstrtsp.types.RTSPResult sendMessage(gstrtsp.rtspmessage.RTSPMessage message, out uint id) nothrow
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_watch_send_message(cast(GstRTSPWatch*)this._cPtr, message ? cast(GstRTSPMessage*)message._cPtr(No.Dup) : null, cast(uint*)&id);
@@ -107,7 +104,7 @@ class RTSPWatch
         id = location for a message ID or null
       Returns: #GST_RTSP_OK on success.
   */
-  gstrtsp.types.RTSPResult sendMessages(gstrtsp.rtspmessage.RTSPMessage[] messages, out uint id)
+  gstrtsp.types.RTSPResult sendMessages(gstrtsp.rtspmessage.RTSPMessage[] messages, out uint id) nothrow
   {
     GstRTSPResult _cretval;
     uint _nMessages;
@@ -132,7 +129,7 @@ class RTSPWatch
       Params:
         flushing = new flushing state
   */
-  void setFlushing(bool flushing)
+  void setFlushing(bool flushing) nothrow
   {
     gst_rtsp_watch_set_flushing(cast(GstRTSPWatch*)this._cPtr, flushing);
   }
@@ -148,7 +145,7 @@ class RTSPWatch
         bytes = maximum bytes
         messages = maximum messages
   */
-  void setSendBacklog(size_t bytes, uint messages)
+  void setSendBacklog(size_t bytes, uint messages) nothrow
   {
     gst_rtsp_watch_set_send_backlog(cast(GstRTSPWatch*)this._cPtr, bytes, messages);
   }
@@ -172,7 +169,7 @@ class RTSPWatch
                  [gstrtsp.types.RTSPResult.Eintr] when watch is flushing
                  [gstrtsp.types.RTSPResult.Einval] when called with invalid parameters.
   */
-  gstrtsp.types.RTSPResult waitBacklog(glib.time_val.TimeVal timeout)
+  gstrtsp.types.RTSPResult waitBacklog(glib.time_val.TimeVal timeout) nothrow
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_watch_wait_backlog(cast(GstRTSPWatch*)this._cPtr, cast(GTimeVal*)&timeout);
@@ -199,7 +196,7 @@ class RTSPWatch
                  [gstrtsp.types.RTSPResult.Eintr] when watch is flushing
                  [gstrtsp.types.RTSPResult.Einval] when called with invalid parameters.
   */
-  gstrtsp.types.RTSPResult waitBacklogUsec(long timeout)
+  gstrtsp.types.RTSPResult waitBacklogUsec(long timeout) nothrow
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_watch_wait_backlog_usec(cast(GstRTSPWatch*)this._cPtr, timeout);

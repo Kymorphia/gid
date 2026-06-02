@@ -27,25 +27,23 @@ class Event
   GdkEvent* _cInstancePtr;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.event.Event");
-
     _cInstancePtr = cast(GdkEvent*)ptr;
 
-    if (!take)
+    if (!take && ptr)
       gdk_event_ref(_cInstancePtr);
   }
 
-  ~this()
+  ~this() nothrow
   {
-    gdk_event_unref(_cInstancePtr);
+    if (_cInstancePtr)
+      gdk_event_unref(_cInstancePtr);
   }
 
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     if (dup)
       gdk_event_ref(_cInstancePtr);
@@ -63,7 +61,7 @@ class Event
         axes = the array of values for all axes
       Returns: true on success, otherwise false
   */
-  bool getAxes(out double[] axes)
+  bool getAxes(out double[] axes) nothrow
   {
     bool _retval;
     uint _nAxes;
@@ -86,7 +84,7 @@ class Event
         value = location to store the value found
       Returns: true if the specified axis was found, otherwise false
   */
-  bool getAxis(gdk.types.AxisUse axisUse, out double value)
+  bool getAxis(gdk.types.AxisUse axisUse, out double value) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_event_get_axis(cast(GdkEvent*)this._cPtr, axisUse, cast(double*)&value);
@@ -97,7 +95,7 @@ class Event
       Returns the device of an event.
       Returns: a [gdk.device.Device]
   */
-  gdk.device.Device getDevice()
+  gdk.device.Device getDevice() nothrow
   {
     GdkDevice* _cretval;
     _cretval = gdk_event_get_device(cast(GdkEvent*)this._cPtr);
@@ -118,7 +116,7 @@ class Event
       persistently across runs, see [gdk.device_tool.DeviceTool.getSerial].
       Returns: The current device tool
   */
-  gdk.device_tool.DeviceTool getDeviceTool()
+  gdk.device_tool.DeviceTool getDeviceTool() nothrow
   {
     GdkDeviceTool* _cretval;
     _cretval = gdk_event_get_device_tool(cast(GdkEvent*)this._cPtr);
@@ -130,7 +128,7 @@ class Event
       Retrieves the display associated to the event.
       Returns: a [gdk.display.Display]
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gdk_event_get_display(cast(GdkEvent*)this._cPtr);
@@ -145,7 +143,7 @@ class Event
       events typically don't have event sequence information.
       Returns: the event sequence that the event belongs to
   */
-  gdk.event_sequence.EventSequence getEventSequence()
+  gdk.event_sequence.EventSequence getEventSequence() nothrow
   {
     GdkEventSequence* _cretval;
     _cretval = gdk_event_get_event_sequence(cast(GdkEvent*)this._cPtr);
@@ -157,7 +155,7 @@ class Event
       Retrieves the type of the event.
       Returns: a [gdk.event.Event]Type
   */
-  gdk.types.EventType getEventType()
+  gdk.types.EventType getEventType() nothrow
   {
     GdkEventType _cretval;
     _cretval = gdk_event_get_event_type(cast(GdkEvent*)this._cPtr);
@@ -178,7 +176,7 @@ class Event
       Returns: an
           array of time and coordinates
   */
-  gdk.types.TimeCoord[] getHistory()
+  gdk.types.TimeCoord[] getHistory() nothrow
   {
     GdkTimeCoord* _cretval;
     uint _cretlength;
@@ -199,7 +197,7 @@ class Event
       Returns the modifier state field of an event.
       Returns: the modifier state of event
   */
-  gdk.types.ModifierType getModifierState()
+  gdk.types.ModifierType getModifierState() nothrow
   {
     GdkModifierType _cretval;
     _cretval = gdk_event_get_modifier_state(cast(GdkEvent*)this._cPtr);
@@ -213,7 +211,7 @@ class Event
       Emulated pointer events typically originate from a touch events.
       Returns: true if this event is emulated
   */
-  bool getPointerEmulated()
+  bool getPointerEmulated() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_event_get_pointer_emulated(cast(GdkEvent*)this._cPtr);
@@ -230,7 +228,7 @@ class Event
         y = location to put event surface y coordinate
       Returns: 
   */
-  bool getPosition(out double x, out double y)
+  bool getPosition(out double x, out double y) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_event_get_position(cast(GdkEvent*)this._cPtr, cast(double*)&x, cast(double*)&y);
@@ -241,7 +239,7 @@ class Event
       Returns the seat that originated the event.
       Returns: a [gdk.seat.Seat].
   */
-  gdk.seat.Seat getSeat()
+  gdk.seat.Seat getSeat() nothrow
   {
     GdkSeat* _cretval;
     _cretval = gdk_event_get_seat(cast(GdkEvent*)this._cPtr);
@@ -253,7 +251,7 @@ class Event
       Extracts the surface associated with an event.
       Returns: The [gdk.surface.Surface] associated with the event
   */
-  gdk.surface.Surface getSurface()
+  gdk.surface.Surface getSurface() nothrow
   {
     GdkSurface* _cretval;
     _cretval = gdk_event_get_surface(cast(GdkEvent*)this._cPtr);
@@ -268,7 +266,7 @@ class Event
       returns [gdk.types.CURRENT_TIME].
       Returns: timestamp field from event
   */
-  uint getTime()
+  uint getTime() nothrow
   {
     uint _retval;
     _retval = gdk_event_get_time(cast(GdkEvent*)this._cPtr);
@@ -285,7 +283,7 @@ class Event
       event->button == [gdk.types.BUTTON_SECONDARY].
       Returns: true if the event should trigger a context menu.
   */
-  bool triggersContextMenu()
+  bool triggersContextMenu() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_event_triggers_context_menu(cast(GdkEvent*)this._cPtr);

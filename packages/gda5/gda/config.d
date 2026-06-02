@@ -21,26 +21,26 @@ class Config : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_config_get_type != &gidSymbolNotFound ? gda_config_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Config self()
+  override Config self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class Config : gobject.object.ObjectWrap
       Get builder for [gda.config.Config]
       Returns: New builder object
   */
-  static ConfigGidBuilder builder()
+  static ConfigGidBuilder builder() nothrow
   {
     return new ConfigGidBuilder;
   }
@@ -58,7 +58,7 @@ class Config : gobject.object.ObjectWrap
       Get `systemFilename` property.
       Returns: File to use for system-wide DSN list. When changed, the whole list of DSN will be reloaded.
   */
-  @property string systemFilename()
+  @property string systemFilename() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("system-filename");
   }
@@ -68,7 +68,7 @@ class Config : gobject.object.ObjectWrap
       Params:
         propval = File to use for system-wide DSN list. When changed, the whole list of DSN will be reloaded.
   */
-  @property void systemFilename(string propval)
+  @property void systemFilename(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("system-filename", propval);
   }
@@ -77,7 +77,7 @@ class Config : gobject.object.ObjectWrap
       Get `userFilename` property.
       Returns: File to use for per-user DSN list. When changed, the whole list of DSN will be reloaded.
   */
-  @property string userFilename()
+  @property string userFilename() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("user-filename");
   }
@@ -87,7 +87,7 @@ class Config : gobject.object.ObjectWrap
       Params:
         propval = File to use for per-user DSN list. When changed, the whole list of DSN will be reloaded.
   */
-  @property void userFilename(string propval)
+  @property void userFilename(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("user-filename", propval);
   }
@@ -97,7 +97,7 @@ class Config : gobject.object.ObjectWrap
       system permissions and settings)
       Returns: TRUE if system-wide configuration can be modified
   */
-  static bool canModifySystemConfig()
+  static bool canModifySystemConfig() nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_config_can_modify_system_config();
@@ -132,7 +132,7 @@ class Config : gobject.object.ObjectWrap
         dsnName = the name of a DSN, in the "[&lt;username&gt;[:&lt;password&gt;]@]&lt;DSN&gt;" format
       Returns: TRUE if an authentication is needed
   */
-  static bool dsnNeedsAuthentication(string dsnName)
+  static bool dsnNeedsAuthentication(string dsnName) nothrow
   {
     bool _retval;
     const(char)* _dsnName = dsnName.toCString(No.Alloc);
@@ -141,7 +141,7 @@ class Config : gobject.object.ObjectWrap
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_config_error_quark();
@@ -153,7 +153,7 @@ class Config : gobject.object.ObjectWrap
       the reference count of the object, so you need to call [gobject.object.ObjectWrap.unref] on it once finished.
       Returns: a non null pointer to the unique #GdaConfig
   */
-  static gda.config.Config get()
+  static gda.config.Config get() nothrow
   {
     GdaConfig* _cretval;
     _cretval = gda_config_get();
@@ -172,7 +172,7 @@ class Config : gobject.object.ObjectWrap
         dsnName = the name of the DSN to look for
       Returns: a pointer to read-only #GdaDsnInfo structure, or null if not found
   */
-  static gda.dsn_info.DsnInfo getDsnInfo(string dsnName)
+  static gda.dsn_info.DsnInfo getDsnInfo(string dsnName) nothrow
   {
     GdaDsnInfo* _cretval;
     const(char)* _dsnName = dsnName.toCString(No.Alloc);
@@ -188,7 +188,7 @@ class Config : gobject.object.ObjectWrap
         index = an index
       Returns: the pointer or null if no DSN exists at position index
   */
-  static gda.dsn_info.DsnInfo getDsnInfoAtIndex(int index)
+  static gda.dsn_info.DsnInfo getDsnInfoAtIndex(int index) nothrow
   {
     GdaDsnInfo* _cretval;
     _cretval = gda_config_get_dsn_info_at_index(index);
@@ -203,7 +203,7 @@ class Config : gobject.object.ObjectWrap
         dsnName = a DSN
       Returns: the index or -1 if not found
   */
-  static int getDsnInfoIndex(string dsnName)
+  static int getDsnInfoIndex(string dsnName) nothrow
   {
     int _retval;
     const(char)* _dsnName = dsnName.toCString(No.Alloc);
@@ -215,7 +215,7 @@ class Config : gobject.object.ObjectWrap
       Get the number of defined DSN
       Returns: the number of defined DSN
   */
-  static int getNbDsn()
+  static int getNbDsn() nothrow
   {
     int _retval;
     _retval = gda_config_get_nb_dsn();
@@ -253,7 +253,7 @@ class Config : gobject.object.ObjectWrap
         providerName = a database provider
       Returns: a pointer to read-only #GdaProviderInfo structure, or null if not found
   */
-  static gda.provider_info.ProviderInfo getProviderInfo(string providerName)
+  static gda.provider_info.ProviderInfo getProviderInfo(string providerName) nothrow
   {
     GdaProviderInfo* _cretval;
     const(char)* _providerName = providerName.toCString(No.Alloc);
@@ -276,7 +276,7 @@ class Config : gobject.object.ObjectWrap
       </itemizedlist>
       Returns: a new #GdaDataModel
   */
-  static gda.data_model.DataModel listDsn()
+  static gda.data_model.DataModel listDsn() nothrow
   {
     GdaDataModel* _cretval;
     _cretval = gda_config_list_dsn();
@@ -297,7 +297,7 @@ class Config : gobject.object.ObjectWrap
       </itemizedlist>
       Returns: a new #GdaDataModel
   */
-  static gda.data_model.DataModel listProviders()
+  static gda.data_model.DataModel listProviders() nothrow
   {
     GdaDataModel* _cretval;
     _cretval = gda_config_list_providers();
@@ -343,14 +343,14 @@ class Config : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDsnAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDsnAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == void*)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.config.Config)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -362,7 +362,14 @@ class Config : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.config.Config.dsnAdded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -386,14 +393,14 @@ class Config : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDsnChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDsnChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == void*)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.config.Config)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -405,7 +412,14 @@ class Config : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.config.Config.dsnChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -429,14 +443,14 @@ class Config : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDsnRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDsnRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == void*)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.config.Config)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -448,7 +462,14 @@ class Config : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.config.Config.dsnRemoved");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -472,14 +493,14 @@ class Config : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDsnToBeRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDsnToBeRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == void*)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.config.Config)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -491,7 +512,14 @@ class Config : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.config.Config.dsnToBeRemoved");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -509,7 +537,7 @@ class ConfigGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = File to use for system-wide DSN list. When changed, the whole list of DSN will be reloaded.
       Returns: Builder instance for fluent chaining
   */
-  T systemFilename(string propval)
+  T systemFilename(string propval) nothrow
   {
     return setProperty("system-filename", propval);
   }
@@ -520,7 +548,7 @@ class ConfigGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = File to use for per-user DSN list. When changed, the whole list of DSN will be reloaded.
       Returns: Builder instance for fluent chaining
   */
-  T userFilename(string propval)
+  T userFilename(string propval) nothrow
   {
     return setProperty("user-filename", propval);
   }
@@ -533,7 +561,7 @@ final class ConfigGidBuilder : ConfigGidBuilderImpl!ConfigGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Config build()
+  Config build() nothrow
   {
     return new Config(cast(void*)createGObject(Config._getGType), No.Take);
   }
@@ -541,12 +569,12 @@ final class ConfigGidBuilder : ConfigGidBuilderImpl!ConfigGidBuilder
 
 class ConfigException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.config.Config.errorQuark, cast(int)code, msg);
   }

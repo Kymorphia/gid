@@ -29,7 +29,7 @@ template ColorChooserT()
         as a #GdkRGBA struct. The property can be set to change
         the current selection programmatically.
   */
-  @property gdk.rgba.RGBA rgba()
+  @property gdk.rgba.RGBA rgba() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("rgba");
   }
@@ -41,7 +41,7 @@ template ColorChooserT()
           as a #GdkRGBA struct. The property can be set to change
           the current selection programmatically.
   */
-  @property void rgba(gdk.rgba.RGBA propval)
+  @property void rgba(gdk.rgba.RGBA propval) nothrow
   {
     setRgba(propval);
   }
@@ -56,7 +56,7 @@ template ColorChooserT()
         Implementations are expected to show alpha by rendering the color
         over a non-uniform background (like a checkerboard pattern).
   */
-  @property bool useAlpha()
+  @property bool useAlpha() nothrow
   {
     return getUseAlpha();
   }
@@ -72,7 +72,7 @@ template ColorChooserT()
           Implementations are expected to show alpha by rendering the color
           over a non-uniform background (like a checkerboard pattern).
   */
-  @property void useAlpha(bool propval)
+  @property void useAlpha(bool propval) nothrow
   {
     setUseAlpha(propval);
   }
@@ -102,7 +102,7 @@ template ColorChooserT()
         colorsPerLine = the number of colors to show in each row/column
         colors = the colors of the palette, or null
   */
-  override void addPalette(gtk.types.Orientation orientation, int colorsPerLine, gdk.rgba.RGBA[] colors = null)
+  override void addPalette(gtk.types.Orientation orientation, int colorsPerLine, gdk.rgba.RGBA[] colors = null) nothrow
   {
     int _nColors;
     if (colors)
@@ -118,7 +118,7 @@ template ColorChooserT()
       Params:
         color = a #GdkRGBA to fill in with the current color
   */
-  override void getRgba(out gdk.rgba.RGBA color)
+  override void getRgba(out gdk.rgba.RGBA color) nothrow
   {
     gtk_color_chooser_get_rgba(cast(GtkColorChooser*)this._cPtr, cast(GdkRGBA*)&color);
   }
@@ -128,7 +128,7 @@ template ColorChooserT()
       Returns: true if the color chooser uses the alpha channel,
             false if not
   */
-  override bool getUseAlpha()
+  override bool getUseAlpha() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_color_chooser_get_use_alpha(cast(GtkColorChooser*)this._cPtr);
@@ -141,7 +141,7 @@ template ColorChooserT()
       Params:
         color = the new color
   */
-  override void setRgba(gdk.rgba.RGBA color)
+  override void setRgba(gdk.rgba.RGBA color) nothrow
   {
     gtk_color_chooser_set_rgba(cast(GtkColorChooser*)this._cPtr, cast(const(GdkRGBA)*)&color);
   }
@@ -152,7 +152,7 @@ template ColorChooserT()
       Params:
         useAlpha = true if color chooser should use alpha channel, false if not
   */
-  override void setUseAlpha(bool useAlpha)
+  override void setUseAlpha(bool useAlpha) nothrow
   {
     gtk_color_chooser_set_use_alpha(cast(GtkColorChooser*)this._cPtr, useAlpha);
   }
@@ -177,14 +177,14 @@ template ColorChooserT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectColorActivated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectColorActivated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.rgba.RGBA)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.color_chooser.ColorChooser)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -196,7 +196,14 @@ template ColorChooserT()
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.color_chooser.ColorChooser.colorActivated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -216,7 +223,7 @@ template ColorChooserGidBuilderT()
           the current selection programmatically.
       Returns: Builder instance for fluent chaining
   */
-  T rgba(gdk.rgba.RGBA propval)
+  T rgba(gdk.rgba.RGBA propval) nothrow
   {
     return setProperty("rgba", propval);
   }
@@ -233,7 +240,7 @@ template ColorChooserGidBuilderT()
           over a non-uniform background (like a checkerboard pattern).
       Returns: Builder instance for fluent chaining
   */
-  T useAlpha(bool propval)
+  T useAlpha(bool propval) nothrow
   {
     return setProperty("use-alpha", propval);
   }

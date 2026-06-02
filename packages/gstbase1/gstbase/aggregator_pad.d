@@ -21,26 +21,26 @@ class AggregatorPad : gst.pad.Pad
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_aggregator_pad_get_type != &gidSymbolNotFound ? gst_aggregator_pad_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AggregatorPad self()
+  override AggregatorPad self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class AggregatorPad : gst.pad.Pad
       Get builder for [gstbase.aggregator_pad.AggregatorPad]
       Returns: New builder object
   */
-  static AggregatorPadGidBuilder builder()
+  static AggregatorPadGidBuilder builder() nothrow
   {
     return new AggregatorPadGidBuilder;
   }
@@ -58,7 +58,7 @@ class AggregatorPad : gst.pad.Pad
       Get `emitSignals` property.
       Returns: Enables the emission of signals such as #GstAggregatorPad::buffer-consumed
   */
-  @property bool emitSignals()
+  @property bool emitSignals() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("emit-signals");
   }
@@ -68,7 +68,7 @@ class AggregatorPad : gst.pad.Pad
       Params:
         propval = Enables the emission of signals such as #GstAggregatorPad::buffer-consumed
   */
-  @property void emitSignals(bool propval)
+  @property void emitSignals(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("emit-signals", propval);
   }
@@ -77,7 +77,7 @@ class AggregatorPad : gst.pad.Pad
       Drop the buffer currently queued in pad.
       Returns: TRUE if there was a buffer queued in pad, or FALSE if not.
   */
-  bool dropBuffer()
+  bool dropBuffer() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_aggregator_pad_drop_buffer(cast(GstAggregatorPad*)this._cPtr);
@@ -90,7 +90,7 @@ class AggregatorPad : gst.pad.Pad
       [gstbase.aggregator_pad.AggregatorPad.popBuffer].
       Returns: true if the pad has a buffer available as the next thing.
   */
-  bool hasBuffer()
+  bool hasBuffer() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_aggregator_pad_has_buffer(cast(GstAggregatorPad*)this._cPtr);
@@ -98,7 +98,7 @@ class AggregatorPad : gst.pad.Pad
   }
 
   /** */
-  bool isEos()
+  bool isEos() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_aggregator_pad_is_eos(cast(GstAggregatorPad*)this._cPtr);
@@ -110,7 +110,7 @@ class AggregatorPad : gst.pad.Pad
       Returns: true if the pad is inactive, false otherwise.
           See gst_aggregator_ignore_inactive_pads() for more info.
   */
-  bool isInactive()
+  bool isInactive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_aggregator_pad_is_inactive(cast(GstAggregatorPad*)this._cPtr);
@@ -118,7 +118,7 @@ class AggregatorPad : gst.pad.Pad
   }
 
   /** */
-  gst.buffer.Buffer peekBuffer()
+  gst.buffer.Buffer peekBuffer() nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_aggregator_pad_peek_buffer(cast(GstAggregatorPad*)this._cPtr);
@@ -131,7 +131,7 @@ class AggregatorPad : gst.pad.Pad
       Returns: The buffer in pad or NULL if no buffer was
           queued. You should unref the buffer after usage.
   */
-  gst.buffer.Buffer popBuffer()
+  gst.buffer.Buffer popBuffer() nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_aggregator_pad_pop_buffer(cast(GstAggregatorPad*)this._cPtr);
@@ -156,14 +156,14 @@ class AggregatorPad : gst.pad.Pad
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectBufferConsumed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectBufferConsumed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gst.buffer.Buffer)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstbase.aggregator_pad.AggregatorPad)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -175,7 +175,14 @@ class AggregatorPad : gst.pad.Pad
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstbase.aggregator_pad.AggregatorPad.bufferConsumed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -193,7 +200,7 @@ class AggregatorPadGidBuilderImpl(T) : gst.pad.PadGidBuilderImpl!T
         propval = Enables the emission of signals such as #GstAggregatorPad::buffer-consumed
       Returns: Builder instance for fluent chaining
   */
-  T emitSignals(bool propval)
+  T emitSignals(bool propval) nothrow
   {
     return setProperty("emit-signals", propval);
   }
@@ -206,7 +213,7 @@ final class AggregatorPadGidBuilder : AggregatorPadGidBuilderImpl!AggregatorPadG
       Create object from builder.
       Returns: New object
   */
-  AggregatorPad build()
+  AggregatorPad build() nothrow
   {
     return new AggregatorPad(cast(void*)createGObject(AggregatorPad._getGType), No.Take);
   }

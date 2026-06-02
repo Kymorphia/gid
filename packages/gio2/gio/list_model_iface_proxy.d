@@ -8,12 +8,12 @@ import gio.list_model_mixin;
 /// Proxy object for [gio.list_model.ListModel] interface when a GObject has no applicable D binding
 class ListModelIfaceProxy : IfaceProxy, gio.list_model.ListModel
 {
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
-  override TypeInfo_Interface getIface()
+  override TypeInfo_Interface getIface() nothrow
   {
     return typeid(gio.list_model.ListModel);
   }

@@ -143,26 +143,26 @@ class VideoDecoder : gst.element.Element
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_decoder_get_type != &gidSymbolNotFound ? gst_video_decoder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VideoDecoder self()
+  override VideoDecoder self() nothrow
   {
     return this;
   }
@@ -171,7 +171,7 @@ class VideoDecoder : gst.element.Element
       Get builder for [gstvideo.video_decoder.VideoDecoder]
       Returns: New builder object
   */
-  static VideoDecoderGidBuilder builder()
+  static VideoDecoderGidBuilder builder() nothrow
   {
     return new VideoDecoderGidBuilder;
   }
@@ -181,7 +181,7 @@ class VideoDecoder : gst.element.Element
       Returns: GstVideoDecoderRequestSyncPointFlags to use for the automatically
         requested sync points if `automatic-request-sync-points` is enabled.
   */
-  @property gstvideo.types.VideoDecoderRequestSyncPointFlags automaticRequestSyncPointFlags()
+  @property gstvideo.types.VideoDecoderRequestSyncPointFlags automaticRequestSyncPointFlags() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gstvideo.types.VideoDecoderRequestSyncPointFlags)("automatic-request-sync-point-flags");
   }
@@ -192,7 +192,7 @@ class VideoDecoder : gst.element.Element
         propval = GstVideoDecoderRequestSyncPointFlags to use for the automatically
           requested sync points if `automatic-request-sync-points` is enabled.
   */
-  @property void automaticRequestSyncPointFlags(gstvideo.types.VideoDecoderRequestSyncPointFlags propval)
+  @property void automaticRequestSyncPointFlags(gstvideo.types.VideoDecoderRequestSyncPointFlags propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gstvideo.types.VideoDecoderRequestSyncPointFlags)("automatic-request-sync-point-flags", propval);
   }
@@ -203,7 +203,7 @@ class VideoDecoder : gst.element.Element
         it seems like a good idea, e.g. if the first frames are not key frames or
         if packet loss was reported by upstream.
   */
-  @property bool automaticRequestSyncPoints()
+  @property bool automaticRequestSyncPoints() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("automatic-request-sync-points");
   }
@@ -215,7 +215,7 @@ class VideoDecoder : gst.element.Element
           it seems like a good idea, e.g. if the first frames are not key frames or
           if packet loss was reported by upstream.
   */
-  @property void automaticRequestSyncPoints(bool propval)
+  @property void automaticRequestSyncPoints(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("automatic-request-sync-points", propval);
   }
@@ -225,7 +225,7 @@ class VideoDecoder : gst.element.Element
       Returns: If set to true the decoder will discard frames that are marked as
         corrupted instead of outputting them.
   */
-  @property bool discardCorruptedFrames()
+  @property bool discardCorruptedFrames() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("discard-corrupted-frames");
   }
@@ -236,7 +236,7 @@ class VideoDecoder : gst.element.Element
         propval = If set to true the decoder will discard frames that are marked as
           corrupted instead of outputting them.
   */
-  @property void discardCorruptedFrames(bool propval)
+  @property void discardCorruptedFrames(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("discard-corrupted-frames", propval);
   }
@@ -246,7 +246,7 @@ class VideoDecoder : gst.element.Element
       Returns: Maximum number of tolerated consecutive decode errors. See
         [gstvideo.video_decoder.VideoDecoder.setMaxErrors] for more details.
   */
-  @property int maxErrors()
+  @property int maxErrors() nothrow
   {
     return getMaxErrors();
   }
@@ -257,7 +257,7 @@ class VideoDecoder : gst.element.Element
         propval = Maximum number of tolerated consecutive decode errors. See
           [gstvideo.video_decoder.VideoDecoder.setMaxErrors] for more details.
   */
-  @property void maxErrors(int propval)
+  @property void maxErrors(int propval) nothrow
   {
     setMaxErrors(propval);
   }
@@ -271,7 +271,7 @@ class VideoDecoder : gst.element.Element
         See [gstvideo.global.videoEventNewUpstreamForceKeyUnit] for more details about
         force-key-unit events.
   */
-  @property ulong minForceKeyUnitInterval()
+  @property ulong minForceKeyUnitInterval() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("min-force-key-unit-interval");
   }
@@ -286,7 +286,7 @@ class VideoDecoder : gst.element.Element
           See [gstvideo.global.videoEventNewUpstreamForceKeyUnit] for more details about
           force-key-unit events.
   */
-  @property void minForceKeyUnitInterval(ulong propval)
+  @property void minForceKeyUnitInterval(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("min-force-key-unit-interval", propval);
   }
@@ -298,7 +298,7 @@ class VideoDecoder : gst.element.Element
         This includes dropping output frames which are detected as late
         using the metrics reported by those events.
   */
-  @property bool qos()
+  @property bool qos() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("qos");
   }
@@ -311,7 +311,7 @@ class VideoDecoder : gst.element.Element
           This includes dropping output frames which are detected as late
           using the metrics reported by those events.
   */
-  @property void qos(bool propval)
+  @property void qos(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("qos", propval);
   }
@@ -322,7 +322,7 @@ class VideoDecoder : gst.element.Element
       Params:
         nBytes = the number of bytes to add
   */
-  void addToFrame(int nBytes)
+  void addToFrame(int nBytes) nothrow
   {
     gst_video_decoder_add_to_frame(cast(GstVideoDecoder*)this._cPtr, nBytes);
   }
@@ -336,7 +336,7 @@ class VideoDecoder : gst.element.Element
       Returns: allocated buffer, or NULL if no buffer could be
             allocated (e.g. when downstream is flushing or shutting down)
   */
-  gst.buffer.Buffer allocateOutputBuffer()
+  gst.buffer.Buffer allocateOutputBuffer() nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_video_decoder_allocate_output_buffer(cast(GstVideoDecoder*)this._cPtr);
@@ -356,7 +356,7 @@ class VideoDecoder : gst.element.Element
         frame = a #GstVideoCodecFrame
       Returns: [gst.types.FlowReturn.Ok] if an output buffer could be allocated
   */
-  gst.types.FlowReturn allocateOutputFrame(gstvideo.video_codec_frame.VideoCodecFrame frame)
+  gst.types.FlowReturn allocateOutputFrame(gstvideo.video_codec_frame.VideoCodecFrame frame) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_video_decoder_allocate_output_frame(cast(GstVideoDecoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(No.Dup) : null);
@@ -373,7 +373,7 @@ class VideoDecoder : gst.element.Element
         params = a #GstBufferPoolAcquireParams
       Returns: [gst.types.FlowReturn.Ok] if an output buffer could be allocated
   */
-  gst.types.FlowReturn allocateOutputFrameWithParams(gstvideo.video_codec_frame.VideoCodecFrame frame, gst.types.BufferPoolAcquireParams params)
+  gst.types.FlowReturn allocateOutputFrameWithParams(gstvideo.video_codec_frame.VideoCodecFrame frame, gst.types.BufferPoolAcquireParams params) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_video_decoder_allocate_output_frame_with_params(cast(GstVideoDecoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(No.Dup) : null, &params);
@@ -390,7 +390,7 @@ class VideoDecoder : gst.element.Element
         frame = the #GstVideoCodecFrame to drop
       Returns: a #GstFlowReturn, usually GST_FLOW_OK.
   */
-  gst.types.FlowReturn dropFrame(gstvideo.video_codec_frame.VideoCodecFrame frame)
+  gst.types.FlowReturn dropFrame(gstvideo.video_codec_frame.VideoCodecFrame frame) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_video_decoder_drop_frame(cast(GstVideoDecoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(Yes.Dup) : null);
@@ -407,7 +407,7 @@ class VideoDecoder : gst.element.Element
         frame = the #GstVideoCodecFrame
       Returns: a #GstFlowReturn, usually GST_FLOW_OK.
   */
-  gst.types.FlowReturn dropSubframe(gstvideo.video_codec_frame.VideoCodecFrame frame)
+  gst.types.FlowReturn dropSubframe(gstvideo.video_codec_frame.VideoCodecFrame frame) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_video_decoder_drop_subframe(cast(GstVideoDecoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(Yes.Dup) : null);
@@ -429,7 +429,7 @@ class VideoDecoder : gst.element.Element
         frame = a decoded #GstVideoCodecFrame
       Returns: a #GstFlowReturn resulting from sending data downstream
   */
-  gst.types.FlowReturn finishFrame(gstvideo.video_codec_frame.VideoCodecFrame frame)
+  gst.types.FlowReturn finishFrame(gstvideo.video_codec_frame.VideoCodecFrame frame) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_video_decoder_finish_frame(cast(GstVideoDecoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(Yes.Dup) : null);
@@ -447,7 +447,7 @@ class VideoDecoder : gst.element.Element
         frame = the #GstVideoCodecFrame
       Returns: a #GstFlowReturn, usually GST_FLOW_OK.
   */
-  gst.types.FlowReturn finishSubframe(gstvideo.video_codec_frame.VideoCodecFrame frame)
+  gst.types.FlowReturn finishSubframe(gstvideo.video_codec_frame.VideoCodecFrame frame) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_video_decoder_finish_subframe(cast(GstVideoDecoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(Yes.Dup) : null);
@@ -467,7 +467,7 @@ class VideoDecoder : gst.element.Element
         params = the
           #GstAllocationParams of allocator
   */
-  void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
+  void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params) nothrow
   {
     GstAllocator* _allocator;
     gst_video_decoder_get_allocator(cast(GstVideoDecoder*)this._cPtr, &_allocator, cast(GstAllocationParams*)&params);
@@ -475,7 +475,7 @@ class VideoDecoder : gst.element.Element
   }
 
   /** */
-  gst.buffer_pool.BufferPool getBufferPool()
+  gst.buffer_pool.BufferPool getBufferPool() nothrow
   {
     GstBufferPool* _cretval;
     _cretval = gst_video_decoder_get_buffer_pool(cast(GstVideoDecoder*)this._cPtr);
@@ -484,7 +484,7 @@ class VideoDecoder : gst.element.Element
   }
 
   /** */
-  int getEstimateRate()
+  int getEstimateRate() nothrow
   {
     int _retval;
     _retval = gst_video_decoder_get_estimate_rate(cast(GstVideoDecoder*)this._cPtr);
@@ -498,7 +498,7 @@ class VideoDecoder : gst.element.Element
         frameNumber = system_frame_number of a frame
       Returns: pending unfinished #GstVideoCodecFrame identified by frame_number.
   */
-  gstvideo.video_codec_frame.VideoCodecFrame getFrame(int frameNumber)
+  gstvideo.video_codec_frame.VideoCodecFrame getFrame(int frameNumber) nothrow
   {
     GstVideoCodecFrame* _cretval;
     _cretval = gst_video_decoder_get_frame(cast(GstVideoDecoder*)this._cPtr, frameNumber);
@@ -510,7 +510,7 @@ class VideoDecoder : gst.element.Element
       Get all pending unfinished #GstVideoCodecFrame
       Returns: pending unfinished #GstVideoCodecFrame.
   */
-  gstvideo.video_codec_frame.VideoCodecFrame[] getFrames()
+  gstvideo.video_codec_frame.VideoCodecFrame[] getFrames() nothrow
   {
     GList* _cretval;
     _cretval = gst_video_decoder_get_frames(cast(GstVideoDecoder*)this._cPtr);
@@ -526,7 +526,7 @@ class VideoDecoder : gst.element.Element
         frame = the #GstVideoCodecFrame to update
       Returns: the current subframe index received in subframe mode, 1 otherwise.
   */
-  uint getInputSubframeIndex(gstvideo.video_codec_frame.VideoCodecFrame frame)
+  uint getInputSubframeIndex(gstvideo.video_codec_frame.VideoCodecFrame frame) nothrow
   {
     uint _retval;
     _retval = gst_video_decoder_get_input_subframe_index(cast(GstVideoDecoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(No.Dup) : null);
@@ -543,7 +543,7 @@ class VideoDecoder : gst.element.Element
         maxLatency = address of variable in which to store the
               configured mximum latency, or null
   */
-  void getLatency(out gst.types.ClockTime minLatency, out gst.types.ClockTime maxLatency)
+  void getLatency(out gst.types.ClockTime minLatency, out gst.types.ClockTime maxLatency) nothrow
   {
     gst_video_decoder_get_latency(cast(GstVideoDecoder*)this._cPtr, cast(GstClockTime*)&minLatency, cast(GstClockTime*)&maxLatency);
   }
@@ -558,7 +558,7 @@ class VideoDecoder : gst.element.Element
         frame = a #GstVideoCodecFrame
       Returns: max decoding time.
   */
-  gst.types.ClockTimeDiff getMaxDecodeTime(gstvideo.video_codec_frame.VideoCodecFrame frame)
+  gst.types.ClockTimeDiff getMaxDecodeTime(gstvideo.video_codec_frame.VideoCodecFrame frame) nothrow
   {
     gst.types.ClockTimeDiff _retval;
     _retval = gst_video_decoder_get_max_decode_time(cast(GstVideoDecoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(No.Dup) : null);
@@ -566,7 +566,7 @@ class VideoDecoder : gst.element.Element
   }
 
   /** */
-  int getMaxErrors()
+  int getMaxErrors() nothrow
   {
     int _retval;
     _retval = gst_video_decoder_get_max_errors(cast(GstVideoDecoder*)this._cPtr);
@@ -577,7 +577,7 @@ class VideoDecoder : gst.element.Element
       Queries decoder required format handling.
       Returns: true if required format handling is enabled.
   */
-  bool getNeedsFormat()
+  bool getNeedsFormat() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_decoder_get_needs_format(cast(GstVideoDecoder*)this._cPtr);
@@ -589,7 +589,7 @@ class VideoDecoder : gst.element.Element
       data in the beginning.
       Returns: true if a sync point is required in the beginning.
   */
-  bool getNeedsSyncPoint()
+  bool getNeedsSyncPoint() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_decoder_get_needs_sync_point(cast(GstVideoDecoder*)this._cPtr);
@@ -600,7 +600,7 @@ class VideoDecoder : gst.element.Element
       Get the oldest pending unfinished #GstVideoCodecFrame
       Returns: oldest pending unfinished #GstVideoCodecFrame.
   */
-  gstvideo.video_codec_frame.VideoCodecFrame getOldestFrame()
+  gstvideo.video_codec_frame.VideoCodecFrame getOldestFrame() nothrow
   {
     GstVideoCodecFrame* _cretval;
     _cretval = gst_video_decoder_get_oldest_frame(cast(GstVideoDecoder*)this._cPtr);
@@ -612,7 +612,7 @@ class VideoDecoder : gst.element.Element
       Get the #GstVideoCodecState currently describing the output stream.
       Returns: #GstVideoCodecState describing format of video data.
   */
-  gstvideo.video_codec_state.VideoCodecState getOutputState()
+  gstvideo.video_codec_state.VideoCodecState getOutputState() nothrow
   {
     GstVideoCodecState* _cretval;
     _cretval = gst_video_decoder_get_output_state(cast(GstVideoDecoder*)this._cPtr);
@@ -625,7 +625,7 @@ class VideoDecoder : gst.element.Element
       base class.
       Returns: TRUE if input data is considered packetized.
   */
-  bool getPacketized()
+  bool getPacketized() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_decoder_get_packetized(cast(GstVideoDecoder*)this._cPtr);
@@ -637,7 +637,7 @@ class VideoDecoder : gst.element.Element
       by calling [gstvideo.video_decoder.VideoDecoder.addToFrame].
       Returns: The number of bytes pending for the current frame
   */
-  size_t getPendingFrameSize()
+  size_t getPendingFrameSize() nothrow
   {
     size_t _retval;
     _retval = gst_video_decoder_get_pending_frame_size(cast(GstVideoDecoder*)this._cPtr);
@@ -652,7 +652,7 @@ class VideoDecoder : gst.element.Element
         frame = the #GstVideoCodecFrame to update
       Returns: the current subframe processed received in subframe mode.
   */
-  uint getProcessedSubframeIndex(gstvideo.video_codec_frame.VideoCodecFrame frame)
+  uint getProcessedSubframeIndex(gstvideo.video_codec_frame.VideoCodecFrame frame) nothrow
   {
     uint _retval;
     _retval = gst_video_decoder_get_processed_subframe_index(cast(GstVideoDecoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(No.Dup) : null);
@@ -660,7 +660,7 @@ class VideoDecoder : gst.element.Element
   }
 
   /** */
-  double getQosProportion()
+  double getQosProportion() nothrow
   {
     double _retval;
     _retval = gst_video_decoder_get_qos_proportion(cast(GstVideoDecoder*)this._cPtr);
@@ -673,7 +673,7 @@ class VideoDecoder : gst.element.Element
       frame.
       Returns: TRUE if input data is considered as sub frames.
   */
-  bool getSubframeMode()
+  bool getSubframeMode() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_decoder_get_subframe_mode(cast(GstVideoDecoder*)this._cPtr);
@@ -685,7 +685,7 @@ class VideoDecoder : gst.element.Element
       metadata and passes it along for further processing, i.e. handle_frame.
       Returns: a #GstFlowReturn
   */
-  gst.types.FlowReturn haveFrame()
+  gst.types.FlowReturn haveFrame() nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_video_decoder_have_frame(cast(GstVideoDecoder*)this._cPtr);
@@ -703,7 +703,7 @@ class VideoDecoder : gst.element.Element
         frame = the #GstVideoCodecFrame to update
       Returns: a #GstFlowReturn, usually GST_FLOW_OK.
   */
-  gst.types.FlowReturn haveLastSubframe(gstvideo.video_codec_frame.VideoCodecFrame frame)
+  gst.types.FlowReturn haveLastSubframe(gstvideo.video_codec_frame.VideoCodecFrame frame) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_video_decoder_have_last_subframe(cast(GstVideoDecoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(No.Dup) : null);
@@ -726,7 +726,7 @@ class VideoDecoder : gst.element.Element
               previously-set tags
         mode = the #GstTagMergeMode to use, usually #GST_TAG_MERGE_REPLACE
   */
-  void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode)
+  void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode) nothrow
   {
     gst_video_decoder_merge_tags(cast(GstVideoDecoder*)this._cPtr, tags ? cast(const(GstTagList)*)tags._cPtr(No.Dup) : null, mode);
   }
@@ -737,7 +737,7 @@ class VideoDecoder : gst.element.Element
       negotiate fails.
       Returns: true if the negotiation succeeded, else false.
   */
-  bool negotiate()
+  bool negotiate() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_decoder_negotiate(cast(GstVideoDecoder*)this._cPtr);
@@ -754,7 +754,7 @@ class VideoDecoder : gst.element.Element
         filter = filter caps
       Returns: a #GstCaps owned by caller
   */
-  gst.caps.Caps proxyGetcaps(gst.caps.Caps caps = null, gst.caps.Caps filter = null)
+  gst.caps.Caps proxyGetcaps(gst.caps.Caps caps = null, gst.caps.Caps filter = null) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_video_decoder_proxy_getcaps(cast(GstVideoDecoder*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
@@ -770,7 +770,7 @@ class VideoDecoder : gst.element.Element
       Params:
         frame = the #GstVideoCodecFrame to release
   */
-  void releaseFrame(gstvideo.video_codec_frame.VideoCodecFrame frame)
+  void releaseFrame(gstvideo.video_codec_frame.VideoCodecFrame frame) nothrow
   {
     gst_video_decoder_release_frame(cast(GstVideoDecoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(Yes.Dup) : null);
   }
@@ -804,7 +804,7 @@ class VideoDecoder : gst.element.Element
         frame = a #GstVideoCodecFrame
         flags = #GstVideoDecoderRequestSyncPointFlags
   */
-  void requestSyncPoint(gstvideo.video_codec_frame.VideoCodecFrame frame, gstvideo.types.VideoDecoderRequestSyncPointFlags flags)
+  void requestSyncPoint(gstvideo.video_codec_frame.VideoCodecFrame frame, gstvideo.types.VideoDecoderRequestSyncPointFlags flags) nothrow
   {
     gst_video_decoder_request_sync_point(cast(GstVideoDecoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(No.Dup) : null, flags);
   }
@@ -815,7 +815,7 @@ class VideoDecoder : gst.element.Element
       Params:
         enabled = whether to enable byte to time conversion
   */
-  void setEstimateRate(bool enabled)
+  void setEstimateRate(bool enabled) nothrow
   {
     gst_video_decoder_set_estimate_rate(cast(GstVideoDecoder*)this._cPtr, enabled);
   }
@@ -832,7 +832,7 @@ class VideoDecoder : gst.element.Element
         reference = An optional reference #GstVideoCodecState
       Returns: the newly configured output state.
   */
-  gstvideo.video_codec_state.VideoCodecState setInterlacedOutputState(gstvideo.types.VideoFormat fmt, gstvideo.types.VideoInterlaceMode interlaceMode, uint width, uint height, gstvideo.video_codec_state.VideoCodecState reference = null)
+  gstvideo.video_codec_state.VideoCodecState setInterlacedOutputState(gstvideo.types.VideoFormat fmt, gstvideo.types.VideoInterlaceMode interlaceMode, uint width, uint height, gstvideo.video_codec_state.VideoCodecState reference = null) nothrow
   {
     GstVideoCodecState* _cretval;
     _cretval = gst_video_decoder_set_interlaced_output_state(cast(GstVideoDecoder*)this._cPtr, fmt, interlaceMode, width, height, reference ? cast(GstVideoCodecState*)reference._cPtr(No.Dup) : null);
@@ -850,7 +850,7 @@ class VideoDecoder : gst.element.Element
         minLatency = minimum latency
         maxLatency = maximum latency
   */
-  void setLatency(gst.types.ClockTime minLatency, gst.types.ClockTime maxLatency)
+  void setLatency(gst.types.ClockTime minLatency, gst.types.ClockTime maxLatency) nothrow
   {
     gst_video_decoder_set_latency(cast(GstVideoDecoder*)this._cPtr, minLatency, maxLatency);
   }
@@ -866,7 +866,7 @@ class VideoDecoder : gst.element.Element
       Params:
         num = max tolerated errors
   */
-  void setMaxErrors(int num)
+  void setMaxErrors(int num) nothrow
   {
     gst_video_decoder_set_max_errors(cast(GstVideoDecoder*)this._cPtr, num);
   }
@@ -882,7 +882,7 @@ class VideoDecoder : gst.element.Element
       Params:
         enabled = new state
   */
-  void setNeedsFormat(bool enabled)
+  void setNeedsFormat(bool enabled) nothrow
   {
     gst_video_decoder_set_needs_format(cast(GstVideoDecoder*)this._cPtr, enabled);
   }
@@ -899,7 +899,7 @@ class VideoDecoder : gst.element.Element
       Params:
         enabled = new state
   */
-  void setNeedsSyncPoint(bool enabled)
+  void setNeedsSyncPoint(bool enabled) nothrow
   {
     gst_video_decoder_set_needs_sync_point(cast(GstVideoDecoder*)this._cPtr, enabled);
   }
@@ -927,7 +927,7 @@ class VideoDecoder : gst.element.Element
         reference = An optional reference #GstVideoCodecState
       Returns: the newly configured output state.
   */
-  gstvideo.video_codec_state.VideoCodecState setOutputState(gstvideo.types.VideoFormat fmt, uint width, uint height, gstvideo.video_codec_state.VideoCodecState reference = null)
+  gstvideo.video_codec_state.VideoCodecState setOutputState(gstvideo.types.VideoFormat fmt, uint width, uint height, gstvideo.video_codec_state.VideoCodecState reference = null) nothrow
   {
     GstVideoCodecState* _cretval;
     _cretval = gst_video_decoder_set_output_state(cast(GstVideoDecoder*)this._cPtr, fmt, width, height, reference ? cast(GstVideoCodecState*)reference._cPtr(No.Dup) : null);
@@ -942,7 +942,7 @@ class VideoDecoder : gst.element.Element
       Params:
         packetized = whether the input data should be considered as packetized.
   */
-  void setPacketized(bool packetized)
+  void setPacketized(bool packetized) nothrow
   {
     gst_video_decoder_set_packetized(cast(GstVideoDecoder*)this._cPtr, packetized);
   }
@@ -967,7 +967,7 @@ class VideoDecoder : gst.element.Element
       Params:
         subframeMode = whether the input data should be considered as subframes.
   */
-  void setSubframeMode(bool subframeMode)
+  void setSubframeMode(bool subframeMode) nothrow
   {
     gst_video_decoder_set_subframe_mode(cast(GstVideoDecoder*)this._cPtr, subframeMode);
   }
@@ -983,7 +983,7 @@ class VideoDecoder : gst.element.Element
       Params:
         use = if the default pad accept-caps query handling should be used
   */
-  void setUseDefaultPadAcceptcaps(bool use)
+  void setUseDefaultPadAcceptcaps(bool use) nothrow
   {
     gst_video_decoder_set_use_default_pad_acceptcaps(cast(GstVideoDecoder*)this._cPtr, use);
   }
@@ -1000,7 +1000,7 @@ class VideoDecoderGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           requested sync points if `automatic-request-sync-points` is enabled.
       Returns: Builder instance for fluent chaining
   */
-  T automaticRequestSyncPointFlags(gstvideo.types.VideoDecoderRequestSyncPointFlags propval)
+  T automaticRequestSyncPointFlags(gstvideo.types.VideoDecoderRequestSyncPointFlags propval) nothrow
   {
     return setProperty("automatic-request-sync-point-flags", propval);
   }
@@ -1013,7 +1013,7 @@ class VideoDecoderGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           if packet loss was reported by upstream.
       Returns: Builder instance for fluent chaining
   */
-  T automaticRequestSyncPoints(bool propval)
+  T automaticRequestSyncPoints(bool propval) nothrow
   {
     return setProperty("automatic-request-sync-points", propval);
   }
@@ -1025,7 +1025,7 @@ class VideoDecoderGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           corrupted instead of outputting them.
       Returns: Builder instance for fluent chaining
   */
-  T discardCorruptedFrames(bool propval)
+  T discardCorruptedFrames(bool propval) nothrow
   {
     return setProperty("discard-corrupted-frames", propval);
   }
@@ -1037,7 +1037,7 @@ class VideoDecoderGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           [gstvideo.video_decoder.VideoDecoder.setMaxErrors] for more details.
       Returns: Builder instance for fluent chaining
   */
-  T maxErrors(int propval)
+  T maxErrors(int propval) nothrow
   {
     return setProperty("max-errors", propval);
   }
@@ -1053,7 +1053,7 @@ class VideoDecoderGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           force-key-unit events.
       Returns: Builder instance for fluent chaining
   */
-  T minForceKeyUnitInterval(ulong propval)
+  T minForceKeyUnitInterval(ulong propval) nothrow
   {
     return setProperty("min-force-key-unit-interval", propval);
   }
@@ -1067,7 +1067,7 @@ class VideoDecoderGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           using the metrics reported by those events.
       Returns: Builder instance for fluent chaining
   */
-  T qos(bool propval)
+  T qos(bool propval) nothrow
   {
     return setProperty("qos", propval);
   }
@@ -1080,7 +1080,7 @@ final class VideoDecoderGidBuilder : VideoDecoderGidBuilderImpl!VideoDecoderGidB
       Create object from builder.
       Returns: New object
   */
-  VideoDecoder build()
+  VideoDecoder build() nothrow
   {
     return new VideoDecoder(cast(void*)createGObject(VideoDecoder._getGType), No.Take);
   }

@@ -15,7 +15,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgio-2.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // Action
   GType function() c_g_action_get_type; ///

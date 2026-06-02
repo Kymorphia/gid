@@ -62,26 +62,26 @@ class PageSetup : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_page_setup_get_type != &gidSymbolNotFound ? gtk_page_setup_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PageSetup self()
+  override PageSetup self() nothrow
   {
     return this;
   }
@@ -90,7 +90,7 @@ class PageSetup : gobject.object.ObjectWrap
       Get builder for [gtk.page_setup.PageSetup]
       Returns: New builder object
   */
-  static PageSetupGidBuilder builder()
+  static PageSetupGidBuilder builder() nothrow
   {
     return new PageSetupGidBuilder;
   }
@@ -99,7 +99,7 @@ class PageSetup : gobject.object.ObjectWrap
       Creates a new #GtkPageSetup.
       Returns: a new #GtkPageSetup.
   */
-  this()
+  this() nothrow
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_page_setup_new();
@@ -136,7 +136,7 @@ class PageSetup : gobject.object.ObjectWrap
         variant = an a{sv} #GVariant
       Returns: a new #GtkPageSetup object
   */
-  static gtk.page_setup.PageSetup newFromGvariant(glib.variant.Variant variant)
+  static gtk.page_setup.PageSetup newFromGvariant(glib.variant.Variant variant) nothrow
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_page_setup_new_from_gvariant(variant ? cast(GVariant*)variant._cPtr(No.Dup) : null);
@@ -172,7 +172,7 @@ class PageSetup : gobject.object.ObjectWrap
       Copies a #GtkPageSetup.
       Returns: a copy of other
   */
-  gtk.page_setup.PageSetup copy()
+  gtk.page_setup.PageSetup copy() nothrow
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_page_setup_copy(cast(GtkPageSetup*)this._cPtr);
@@ -187,7 +187,7 @@ class PageSetup : gobject.object.ObjectWrap
         unit = the unit for the return value
       Returns: the bottom margin
   */
-  double getBottomMargin(gtk.types.Unit unit)
+  double getBottomMargin(gtk.types.Unit unit) nothrow
   {
     double _retval;
     _retval = gtk_page_setup_get_bottom_margin(cast(GtkPageSetup*)this._cPtr, unit);
@@ -201,7 +201,7 @@ class PageSetup : gobject.object.ObjectWrap
         unit = the unit for the return value
       Returns: the left margin
   */
-  double getLeftMargin(gtk.types.Unit unit)
+  double getLeftMargin(gtk.types.Unit unit) nothrow
   {
     double _retval;
     _retval = gtk_page_setup_get_left_margin(cast(GtkPageSetup*)this._cPtr, unit);
@@ -212,7 +212,7 @@ class PageSetup : gobject.object.ObjectWrap
       Gets the page orientation of the #GtkPageSetup.
       Returns: the page orientation
   */
-  gtk.types.PageOrientation getOrientation()
+  gtk.types.PageOrientation getOrientation() nothrow
   {
     GtkPageOrientation _cretval;
     _cretval = gtk_page_setup_get_orientation(cast(GtkPageSetup*)this._cPtr);
@@ -231,7 +231,7 @@ class PageSetup : gobject.object.ObjectWrap
         unit = the unit for the return value
       Returns: the page height.
   */
-  double getPageHeight(gtk.types.Unit unit)
+  double getPageHeight(gtk.types.Unit unit) nothrow
   {
     double _retval;
     _retval = gtk_page_setup_get_page_height(cast(GtkPageSetup*)this._cPtr, unit);
@@ -249,7 +249,7 @@ class PageSetup : gobject.object.ObjectWrap
         unit = the unit for the return value
       Returns: the page width.
   */
-  double getPageWidth(gtk.types.Unit unit)
+  double getPageWidth(gtk.types.Unit unit) nothrow
   {
     double _retval;
     _retval = gtk_page_setup_get_page_width(cast(GtkPageSetup*)this._cPtr, unit);
@@ -267,7 +267,7 @@ class PageSetup : gobject.object.ObjectWrap
         unit = the unit for the return value
       Returns: the paper height.
   */
-  double getPaperHeight(gtk.types.Unit unit)
+  double getPaperHeight(gtk.types.Unit unit) nothrow
   {
     double _retval;
     _retval = gtk_page_setup_get_paper_height(cast(GtkPageSetup*)this._cPtr, unit);
@@ -278,7 +278,7 @@ class PageSetup : gobject.object.ObjectWrap
       Gets the paper size of the #GtkPageSetup.
       Returns: the paper size
   */
-  gtk.paper_size.PaperSize getPaperSize()
+  gtk.paper_size.PaperSize getPaperSize() nothrow
   {
     GtkPaperSize* _cretval;
     _cretval = gtk_page_setup_get_paper_size(cast(GtkPageSetup*)this._cPtr);
@@ -297,7 +297,7 @@ class PageSetup : gobject.object.ObjectWrap
         unit = the unit for the return value
       Returns: the paper width.
   */
-  double getPaperWidth(gtk.types.Unit unit)
+  double getPaperWidth(gtk.types.Unit unit) nothrow
   {
     double _retval;
     _retval = gtk_page_setup_get_paper_width(cast(GtkPageSetup*)this._cPtr, unit);
@@ -311,7 +311,7 @@ class PageSetup : gobject.object.ObjectWrap
         unit = the unit for the return value
       Returns: the right margin
   */
-  double getRightMargin(gtk.types.Unit unit)
+  double getRightMargin(gtk.types.Unit unit) nothrow
   {
     double _retval;
     _retval = gtk_page_setup_get_right_margin(cast(GtkPageSetup*)this._cPtr, unit);
@@ -325,7 +325,7 @@ class PageSetup : gobject.object.ObjectWrap
         unit = the unit for the return value
       Returns: the top margin
   */
-  double getTopMargin(gtk.types.Unit unit)
+  double getTopMargin(gtk.types.Unit unit) nothrow
   {
     double _retval;
     _retval = gtk_page_setup_get_top_margin(cast(GtkPageSetup*)this._cPtr, unit);
@@ -381,7 +381,7 @@ class PageSetup : gobject.object.ObjectWrap
         margin = the new bottom margin in units of unit
         unit = the units for margin
   */
-  void setBottomMargin(double margin, gtk.types.Unit unit)
+  void setBottomMargin(double margin, gtk.types.Unit unit) nothrow
   {
     gtk_page_setup_set_bottom_margin(cast(GtkPageSetup*)this._cPtr, margin, unit);
   }
@@ -393,7 +393,7 @@ class PageSetup : gobject.object.ObjectWrap
         margin = the new left margin in units of unit
         unit = the units for margin
   */
-  void setLeftMargin(double margin, gtk.types.Unit unit)
+  void setLeftMargin(double margin, gtk.types.Unit unit) nothrow
   {
     gtk_page_setup_set_left_margin(cast(GtkPageSetup*)this._cPtr, margin, unit);
   }
@@ -404,7 +404,7 @@ class PageSetup : gobject.object.ObjectWrap
       Params:
         orientation = a #GtkPageOrientation value
   */
-  void setOrientation(gtk.types.PageOrientation orientation)
+  void setOrientation(gtk.types.PageOrientation orientation) nothrow
   {
     gtk_page_setup_set_orientation(cast(GtkPageSetup*)this._cPtr, orientation);
   }
@@ -417,7 +417,7 @@ class PageSetup : gobject.object.ObjectWrap
       Params:
         size = a #GtkPaperSize
   */
-  void setPaperSize(gtk.paper_size.PaperSize size)
+  void setPaperSize(gtk.paper_size.PaperSize size) nothrow
   {
     gtk_page_setup_set_paper_size(cast(GtkPageSetup*)this._cPtr, size ? cast(GtkPaperSize*)size._cPtr(No.Dup) : null);
   }
@@ -429,7 +429,7 @@ class PageSetup : gobject.object.ObjectWrap
       Params:
         size = a #GtkPaperSize
   */
-  void setPaperSizeAndDefaultMargins(gtk.paper_size.PaperSize size)
+  void setPaperSizeAndDefaultMargins(gtk.paper_size.PaperSize size) nothrow
   {
     gtk_page_setup_set_paper_size_and_default_margins(cast(GtkPageSetup*)this._cPtr, size ? cast(GtkPaperSize*)size._cPtr(No.Dup) : null);
   }
@@ -441,7 +441,7 @@ class PageSetup : gobject.object.ObjectWrap
         margin = the new right margin in units of unit
         unit = the units for margin
   */
-  void setRightMargin(double margin, gtk.types.Unit unit)
+  void setRightMargin(double margin, gtk.types.Unit unit) nothrow
   {
     gtk_page_setup_set_right_margin(cast(GtkPageSetup*)this._cPtr, margin, unit);
   }
@@ -453,7 +453,7 @@ class PageSetup : gobject.object.ObjectWrap
         margin = the new top margin in units of unit
         unit = the units for margin
   */
-  void setTopMargin(double margin, gtk.types.Unit unit)
+  void setTopMargin(double margin, gtk.types.Unit unit) nothrow
   {
     gtk_page_setup_set_top_margin(cast(GtkPageSetup*)this._cPtr, margin, unit);
   }
@@ -481,7 +481,7 @@ class PageSetup : gobject.object.ObjectWrap
       Serialize page setup to an a{sv} variant.
       Returns: a new, floating, #GVariant
   */
-  glib.variant.Variant toGvariant()
+  glib.variant.Variant toGvariant() nothrow
   {
     GVariant* _cretval;
     _cretval = gtk_page_setup_to_gvariant(cast(GtkPageSetup*)this._cPtr);
@@ -497,7 +497,7 @@ class PageSetup : gobject.object.ObjectWrap
         groupName = the group to add the settings to in key_file,
                or null to use the default name “Page Setup”
   */
-  void toKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
+  void toKeyFile(glib.key_file.KeyFile keyFile, string groupName = null) nothrow
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     gtk_page_setup_to_key_file(cast(GtkPageSetup*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName);
@@ -516,7 +516,7 @@ final class PageSetupGidBuilder : PageSetupGidBuilderImpl!PageSetupGidBuilder
       Create object from builder.
       Returns: New object
   */
-  PageSetup build()
+  PageSetup build() nothrow
   {
     return new PageSetup(cast(void*)createGObject(PageSetup._getGType), Yes.Take);
   }

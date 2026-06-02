@@ -19,32 +19,32 @@ class Language : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_language_get_type != &gidSymbolNotFound ? pango_language_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Language self()
+  override Language self() nothrow
   {
     return this;
   }
@@ -71,7 +71,7 @@ class Language : gobject.boxed.Boxed
       ```
       Returns: the sample string
   */
-  string getSampleString()
+  string getSampleString() nothrow
   {
     const(char)* _cretval;
     _cretval = pango_language_get_sample_string(cast(PangoLanguage*)this._cPtr);
@@ -108,7 +108,7 @@ class Language : gobject.boxed.Boxed
           any information about this particular language tag (also the case
           if language is null).
   */
-  pango.types.Script[] getScripts()
+  pango.types.Script[] getScripts() nothrow
   {
     const(PangoScript)* _cretval;
     int _cretlength;
@@ -145,7 +145,7 @@ class Language : gobject.boxed.Boxed
           to write language or if nothing is known about language
           (including the case that language is null), false otherwise.
   */
-  bool includesScript(pango.types.Script script)
+  bool includesScript(pango.types.Script script) nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_language_includes_script(cast(PangoLanguage*)this._cPtr, script);
@@ -167,7 +167,7 @@ class Language : gobject.boxed.Boxed
             canonicalized as by [pango.language.Language.fromString]
       Returns: true if a match was found
   */
-  bool matches(string rangeList)
+  bool matches(string rangeList) nothrow
   {
     bool _retval;
     const(char)* _rangeList = rangeList.toCString(No.Alloc);
@@ -181,7 +181,7 @@ class Language : gobject.boxed.Boxed
       Returns (transfer none): a string representing the language tag
       Returns: 
   */
-  string toString_()
+  string toString_() nothrow
   {
     const(char)* _cretval;
     _cretval = pango_language_to_string(cast(PangoLanguage*)this._cPtr);
@@ -207,7 +207,7 @@ class Language : gobject.boxed.Boxed
         language = a string representing a language tag
       Returns: a [pango.language.Language]
   */
-  static pango.language.Language fromString(string language = null)
+  static pango.language.Language fromString(string language = null) nothrow
   {
     PangoLanguage* _cretval;
     const(char)* _language = language.toCString(No.Alloc);
@@ -250,7 +250,7 @@ class Language : gobject.boxed.Boxed
       just call [pango.language.Language.fromString] yourself.
       Returns: the default language as a [pango.language.Language]
   */
-  static pango.language.Language getDefault()
+  static pango.language.Language getDefault() nothrow
   {
     PangoLanguage* _cretval;
     _cretval = pango_language_get_default();
@@ -273,7 +273,7 @@ class Language : gobject.boxed.Boxed
       Returns: a null-terminated array
           of [pango.language.Language]*
   */
-  static pango.language.Language[] getPreferred()
+  static pango.language.Language[] getPreferred() nothrow
   {
     PangoLanguage** _cretval;
     _cretval = pango_language_get_preferred();

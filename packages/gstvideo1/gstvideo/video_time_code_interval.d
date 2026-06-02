@@ -34,35 +34,34 @@ struct VideoTimeCodeInterval
   uint frames;
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_time_code_interval_get_type != &gidSymbolNotFound ? gst_video_time_code_interval_get_type() : cast(GType)0;
   }
 
   /** */
-  @property GType _gType()
+  @property GType _gType() nothrow
   {
     return _getGType();
   }
 
-  void* boxCopy()
+  void* boxCopy() nothrow
   {
     import gobject.c.functions : g_boxed_copy;
-    return g_boxed_copy(_gType,
-        cast(void*)&this);
+    return g_boxed_copy(_gType, cast(void*)&this);
   }
 
   /**
       Initializes tc with empty/zero/NULL values.
   */
-  void clear()
+  void clear() nothrow
   {
     gst_video_time_code_interval_clear(cast(GstVideoTimeCodeInterval*)&this);
   }
 
   /** */
-  gstvideo.video_time_code_interval.VideoTimeCodeInterval copy()
+  gstvideo.video_time_code_interval.VideoTimeCodeInterval copy() nothrow
   {
     GstVideoTimeCodeInterval* _cretval;
     _cretval = gst_video_time_code_interval_copy(cast(const(GstVideoTimeCodeInterval)*)&this);
@@ -81,7 +80,7 @@ struct VideoTimeCodeInterval
         seconds = the seconds field of #GstVideoTimeCodeInterval
         frames = the frames field of #GstVideoTimeCodeInterval
   */
-  void init_(uint hours, uint minutes, uint seconds, uint frames)
+  void init_(uint hours, uint minutes, uint seconds, uint frames) nothrow
   {
     gst_video_time_code_interval_init(cast(GstVideoTimeCodeInterval*)&this, hours, minutes, seconds, frames);
   }

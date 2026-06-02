@@ -28,26 +28,26 @@ class MediaFile : gtk.media_stream.MediaStream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_media_file_get_type != &gidSymbolNotFound ? gtk_media_file_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MediaFile self()
+  override MediaFile self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class MediaFile : gtk.media_stream.MediaStream
       Get builder for [gtk.media_file.MediaFile]
       Returns: New builder object
   */
-  static MediaFileGidBuilder builder()
+  static MediaFileGidBuilder builder() nothrow
   {
     return new MediaFileGidBuilder;
   }
@@ -65,7 +65,7 @@ class MediaFile : gtk.media_stream.MediaStream
       Get `file` property.
       Returns: The file being played back or null if not playing a file.
   */
-  @property gio.file.File file()
+  @property gio.file.File file() nothrow
   {
     return getFile();
   }
@@ -75,7 +75,7 @@ class MediaFile : gtk.media_stream.MediaStream
       Params:
         propval = The file being played back or null if not playing a file.
   */
-  @property void file(gio.file.File propval)
+  @property void file(gio.file.File propval) nothrow
   {
     setFile(propval);
   }
@@ -86,7 +86,7 @@ class MediaFile : gtk.media_stream.MediaStream
         
         This is null when playing a file.
   */
-  @property gio.input_stream.InputStream inputStream()
+  @property gio.input_stream.InputStream inputStream() nothrow
   {
     return getInputStream();
   }
@@ -98,7 +98,7 @@ class MediaFile : gtk.media_stream.MediaStream
           
           This is null when playing a file.
   */
-  @property void inputStream(gio.input_stream.InputStream propval)
+  @property void inputStream(gio.input_stream.InputStream propval) nothrow
   {
     setInputStream(propval);
   }
@@ -107,7 +107,7 @@ class MediaFile : gtk.media_stream.MediaStream
       Creates a new empty media file.
       Returns: a new [gtk.media_file.MediaFile]
   */
-  this()
+  this() nothrow
   {
     GtkMediaStream* _cretval;
     _cretval = gtk_media_file_new();
@@ -121,7 +121,7 @@ class MediaFile : gtk.media_stream.MediaStream
         file = The file to play
       Returns: a new [gtk.media_file.MediaFile] playing file
   */
-  static gtk.media_file.MediaFile newForFile(gio.file.File file)
+  static gtk.media_file.MediaFile newForFile(gio.file.File file) nothrow
   {
     GtkMediaStream* _cretval;
     _cretval = gtk_media_file_new_for_file(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
@@ -139,7 +139,7 @@ class MediaFile : gtk.media_stream.MediaStream
         filename = filename to open
       Returns: a new [gtk.media_file.MediaFile] playing filename
   */
-  static gtk.media_file.MediaFile newForFilename(string filename)
+  static gtk.media_file.MediaFile newForFilename(string filename) nothrow
   {
     GtkMediaStream* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -158,7 +158,7 @@ class MediaFile : gtk.media_stream.MediaStream
         stream = The stream to play
       Returns: a new [gtk.media_file.MediaFile]
   */
-  static gtk.media_file.MediaFile newForInputStream(gio.input_stream.InputStream stream)
+  static gtk.media_file.MediaFile newForInputStream(gio.input_stream.InputStream stream) nothrow
   {
     GtkMediaStream* _cretval;
     _cretval = gtk_media_file_new_for_input_stream(stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null);
@@ -176,7 +176,7 @@ class MediaFile : gtk.media_stream.MediaStream
         resourcePath = resource path to open
       Returns: a new [gtk.media_file.MediaFile] playing resource_path
   */
-  static gtk.media_file.MediaFile newForResource(string resourcePath)
+  static gtk.media_file.MediaFile newForResource(string resourcePath) nothrow
   {
     GtkMediaStream* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
@@ -188,7 +188,7 @@ class MediaFile : gtk.media_stream.MediaStream
   /**
       Resets the media file to be empty.
   */
-  void clear()
+  void clear() nothrow
   {
     gtk_media_file_clear(cast(GtkMediaFile*)this._cPtr);
   }
@@ -200,7 +200,7 @@ class MediaFile : gtk.media_stream.MediaStream
       null is returned.
       Returns: The currently playing file
   */
-  gio.file.File getFile()
+  gio.file.File getFile() nothrow
   {
     GFile* _cretval;
     _cretval = gtk_media_file_get_file(cast(GtkMediaFile*)this._cPtr);
@@ -215,7 +215,7 @@ class MediaFile : gtk.media_stream.MediaStream
       null is returned.
       Returns: The currently playing stream
   */
-  gio.input_stream.InputStream getInputStream()
+  gio.input_stream.InputStream getInputStream() nothrow
   {
     GInputStream* _cretval;
     _cretval = gtk_media_file_get_input_stream(cast(GtkMediaFile*)this._cPtr);
@@ -231,7 +231,7 @@ class MediaFile : gtk.media_stream.MediaStream
       Params:
         file = the file to play
   */
-  void setFile(gio.file.File file = null)
+  void setFile(gio.file.File file = null) nothrow
   {
     gtk_media_file_set_file(cast(GtkMediaFile*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
   }
@@ -245,7 +245,7 @@ class MediaFile : gtk.media_stream.MediaStream
       Params:
         filename = name of file to play
   */
-  void setFilename(string filename = null)
+  void setFilename(string filename = null) nothrow
   {
     const(char)* _filename = filename.toCString(No.Alloc);
     gtk_media_file_set_filename(cast(GtkMediaFile*)this._cPtr, _filename);
@@ -262,7 +262,7 @@ class MediaFile : gtk.media_stream.MediaStream
       Params:
         stream = the stream to play from
   */
-  void setInputStream(gio.input_stream.InputStream stream = null)
+  void setInputStream(gio.input_stream.InputStream stream = null) nothrow
   {
     gtk_media_file_set_input_stream(cast(GtkMediaFile*)this._cPtr, stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null);
   }
@@ -276,7 +276,7 @@ class MediaFile : gtk.media_stream.MediaStream
       Params:
         resourcePath = path to resource to play
   */
-  void setResource(string resourcePath = null)
+  void setResource(string resourcePath = null) nothrow
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     gtk_media_file_set_resource(cast(GtkMediaFile*)this._cPtr, _resourcePath);
@@ -294,7 +294,7 @@ class MediaFileGidBuilderImpl(T) : gtk.media_stream.MediaStreamGidBuilderImpl!T
         propval = The file being played back or null if not playing a file.
       Returns: Builder instance for fluent chaining
   */
-  T file(gio.file.File propval)
+  T file(gio.file.File propval) nothrow
   {
     return setProperty("file", propval);
   }
@@ -307,7 +307,7 @@ class MediaFileGidBuilderImpl(T) : gtk.media_stream.MediaStreamGidBuilderImpl!T
           This is null when playing a file.
       Returns: Builder instance for fluent chaining
   */
-  T inputStream(gio.input_stream.InputStream propval)
+  T inputStream(gio.input_stream.InputStream propval) nothrow
   {
     return setProperty("input-stream", propval);
   }
@@ -320,7 +320,7 @@ final class MediaFileGidBuilder : MediaFileGidBuilderImpl!MediaFileGidBuilder
       Create object from builder.
       Returns: New object
   */
-  MediaFile build()
+  MediaFile build() nothrow
   {
     return new MediaFile(cast(void*)createGObject(MediaFile._getGType), Yes.Take);
   }

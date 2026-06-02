@@ -15,32 +15,32 @@ class DsnInfo : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_dsn_info_get_type != &gidSymbolNotFound ? gda_dsn_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DsnInfo self()
+  override DsnInfo self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class DsnInfo : gobject.boxed.Boxed
       Get `name` field.
       Returns: the (unique) name of the DSN (plain text, not RFC 1738 encoded)
   */
-  @property string name()
+  @property string name() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaDsnInfo*)this._cPtr).name);
   }
@@ -59,7 +59,7 @@ class DsnInfo : gobject.boxed.Boxed
       Params:
         propval = the (unique) name of the DSN (plain text, not RFC 1738 encoded)
   */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaDsnInfo*)this._cPtr).name);
     dToC(propval, cast(void*)&(cast(GdaDsnInfo*)this._cPtr).name);
@@ -69,7 +69,7 @@ class DsnInfo : gobject.boxed.Boxed
       Get `provider` field.
       Returns: the ID of the database provider to be used (plain text, not RFC 1738 encoded)
   */
-  @property string provider()
+  @property string provider() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaDsnInfo*)this._cPtr).provider);
   }
@@ -79,7 +79,7 @@ class DsnInfo : gobject.boxed.Boxed
       Params:
         propval = the ID of the database provider to be used (plain text, not RFC 1738 encoded)
   */
-  @property void provider(string propval)
+  @property void provider(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaDsnInfo*)this._cPtr).provider);
     dToC(propval, cast(void*)&(cast(GdaDsnInfo*)this._cPtr).provider);
@@ -89,7 +89,7 @@ class DsnInfo : gobject.boxed.Boxed
       Get `description` field.
       Returns: a descriptive string (plain text, not RFC 1738 encoded), can be null.
   */
-  @property string description()
+  @property string description() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaDsnInfo*)this._cPtr).description);
   }
@@ -99,7 +99,7 @@ class DsnInfo : gobject.boxed.Boxed
       Params:
         propval = a descriptive string (plain text, not RFC 1738 encoded), can be null.
   */
-  @property void description(string propval)
+  @property void description(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaDsnInfo*)this._cPtr).description);
     dToC(propval, cast(void*)&(cast(GdaDsnInfo*)this._cPtr).description);
@@ -109,7 +109,7 @@ class DsnInfo : gobject.boxed.Boxed
       Get `cncString` field.
       Returns: the connection string, a semi-colon separated &lt;key>=&lt;value&gt; list where &lt;key&gt; and &lt;value&gt; are RFC 1738 encoded
   */
-  @property string cncString()
+  @property string cncString() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaDsnInfo*)this._cPtr).cncString);
   }
@@ -119,7 +119,7 @@ class DsnInfo : gobject.boxed.Boxed
       Params:
         propval = the connection string, a semi-colon separated &lt;key>=&lt;value&gt; list where &lt;key&gt; and &lt;value&gt; are RFC 1738 encoded
   */
-  @property void cncString(string propval)
+  @property void cncString(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaDsnInfo*)this._cPtr).cncString);
     dToC(propval, cast(void*)&(cast(GdaDsnInfo*)this._cPtr).cncString);
@@ -129,7 +129,7 @@ class DsnInfo : gobject.boxed.Boxed
       Get `authString` field.
       Returns: the authentication string, a semi-colon separated &lt;key>=&lt;value&gt; list where &lt;key&gt; and &lt;value&gt; are RFC 1738 encoded. Can be null.
   */
-  @property string authString()
+  @property string authString() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaDsnInfo*)this._cPtr).authString);
   }
@@ -139,7 +139,7 @@ class DsnInfo : gobject.boxed.Boxed
       Params:
         propval = the authentication string, a semi-colon separated &lt;key>=&lt;value&gt; list where &lt;key&gt; and &lt;value&gt; are RFC 1738 encoded. Can be null.
   */
-  @property void authString(string propval)
+  @property void authString(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaDsnInfo*)this._cPtr).authString);
     dToC(propval, cast(void*)&(cast(GdaDsnInfo*)this._cPtr).authString);
@@ -149,7 +149,7 @@ class DsnInfo : gobject.boxed.Boxed
       Get `isSystem` field.
       Returns: true if the DSN is a system wide defined data source
   */
-  @property bool isSystem()
+  @property bool isSystem() nothrow
   {
     return cast(bool)(cast(GdaDsnInfo*)this._cPtr).isSystem;
   }
@@ -159,7 +159,7 @@ class DsnInfo : gobject.boxed.Boxed
       Params:
         propval = true if the DSN is a system wide defined data source
   */
-  @property void isSystem(bool propval)
+  @property void isSystem(bool propval) nothrow
   {
     (cast(GdaDsnInfo*)this._cPtr).isSystem = propval;
   }
@@ -168,7 +168,7 @@ class DsnInfo : gobject.boxed.Boxed
       Creates a new #GdaDsnInfo struct.
       Returns: a new #GdaDsnInfo struct.
   */
-  this()
+  this() nothrow
   {
     GdaDsnInfo* _cretval;
     _cretval = gda_dsn_info_new();
@@ -179,7 +179,7 @@ class DsnInfo : gobject.boxed.Boxed
       Copy constructor.
       Returns: a new #GdaDsnInfo
   */
-  gda.dsn_info.DsnInfo copy()
+  gda.dsn_info.DsnInfo copy() nothrow
   {
     GdaDsnInfo* _cretval;
     _cretval = gda_dsn_info_copy(cast(GdaDsnInfo*)this._cPtr);

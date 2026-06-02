@@ -14,7 +14,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgtk-4.so.1"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // BlendNode
   GType function() c_gsk_blend_node_get_type; ///

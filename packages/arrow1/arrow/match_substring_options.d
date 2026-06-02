@@ -15,26 +15,26 @@ class MatchSubstringOptions : arrow.function_options.FunctionOptions
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_match_substring_options_get_type != &gidSymbolNotFound ? garrow_match_substring_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MatchSubstringOptions self()
+  override MatchSubstringOptions self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class MatchSubstringOptions : arrow.function_options.FunctionOptions
       Get builder for [arrow.match_substring_options.MatchSubstringOptions]
       Returns: New builder object
   */
-  static MatchSubstringOptionsGidBuilder builder()
+  static MatchSubstringOptionsGidBuilder builder() nothrow
   {
     return new MatchSubstringOptionsGidBuilder;
   }
@@ -52,7 +52,7 @@ class MatchSubstringOptions : arrow.function_options.FunctionOptions
       Get `ignoreCase` property.
       Returns: Whether to perform a case-insensitive match.
   */
-  @property bool ignoreCase()
+  @property bool ignoreCase() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("ignore-case");
   }
@@ -62,7 +62,7 @@ class MatchSubstringOptions : arrow.function_options.FunctionOptions
       Params:
         propval = Whether to perform a case-insensitive match.
   */
-  @property void ignoreCase(bool propval)
+  @property void ignoreCase(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("ignore-case", propval);
   }
@@ -72,7 +72,7 @@ class MatchSubstringOptions : arrow.function_options.FunctionOptions
       Returns: The exact substring (or regex, depending on kernel) to look for
         inside input values.
   */
-  @property string pattern()
+  @property string pattern() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("pattern");
   }
@@ -83,13 +83,13 @@ class MatchSubstringOptions : arrow.function_options.FunctionOptions
         propval = The exact substring (or regex, depending on kernel) to look for
           inside input values.
   */
-  @property void pattern(string propval)
+  @property void pattern(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("pattern", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowMatchSubstringOptions* _cretval;
     _cretval = garrow_match_substring_options_new();
@@ -107,7 +107,7 @@ class MatchSubstringOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOp
         propval = Whether to perform a case-insensitive match.
       Returns: Builder instance for fluent chaining
   */
-  T ignoreCase(bool propval)
+  T ignoreCase(bool propval) nothrow
   {
     return setProperty("ignore-case", propval);
   }
@@ -119,7 +119,7 @@ class MatchSubstringOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOp
           inside input values.
       Returns: Builder instance for fluent chaining
   */
-  T pattern(string propval)
+  T pattern(string propval) nothrow
   {
     return setProperty("pattern", propval);
   }
@@ -132,7 +132,7 @@ final class MatchSubstringOptionsGidBuilder : MatchSubstringOptionsGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  MatchSubstringOptions build()
+  MatchSubstringOptions build() nothrow
   {
     return new MatchSubstringOptions(cast(void*)createGObject(MatchSubstringOptions._getGType), Yes.Take);
   }

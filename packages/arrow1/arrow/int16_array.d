@@ -16,26 +16,26 @@ class Int16Array : arrow.numeric_array.NumericArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_int16_array_get_type != &gidSymbolNotFound ? garrow_int16_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Int16Array self()
+  override Int16Array self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class Int16Array : arrow.numeric_array.NumericArray
       Get builder for [arrow.int16_array.Int16Array]
       Returns: New builder object
   */
-  static Int16ArrayGidBuilder builder()
+  static Int16ArrayGidBuilder builder() nothrow
   {
     return new Int16ArrayGidBuilder;
   }
 
   /** */
-  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
+  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls) nothrow
   {
     GArrowInt16Array* _cretval;
     _cretval = garrow_int16_array_new(length, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
@@ -58,7 +58,7 @@ class Int16Array : arrow.numeric_array.NumericArray
   }
 
   /** */
-  short getValue(long i)
+  short getValue(long i) nothrow
   {
     short _retval;
     _retval = garrow_int16_array_get_value(cast(GArrowInt16Array*)this._cPtr, i);
@@ -66,7 +66,7 @@ class Int16Array : arrow.numeric_array.NumericArray
   }
 
   /** */
-  short[] getValues()
+  short[] getValues() nothrow
   {
     const(short)* _cretval;
     long _cretlength;
@@ -104,7 +104,7 @@ final class Int16ArrayGidBuilder : Int16ArrayGidBuilderImpl!Int16ArrayGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Int16Array build()
+  Int16Array build() nothrow
   {
     return new Int16Array(cast(void*)createGObject(Int16Array._getGType), Yes.Take);
   }

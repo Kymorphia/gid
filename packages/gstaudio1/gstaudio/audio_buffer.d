@@ -26,11 +26,8 @@ class AudioBuffer
   GstAudioBuffer _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstaudio.audio_buffer.AudioBuffer");
-
     _cInstance = *cast(GstAudioBuffer*)ptr;
 
     if (take)
@@ -38,7 +35,7 @@ class AudioBuffer
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -47,7 +44,7 @@ class AudioBuffer
       Get `info` field.
       Returns: a #GstAudioInfo describing the audio properties of this buffer
   */
-  @property gstaudio.audio_info.AudioInfo info()
+  @property gstaudio.audio_info.AudioInfo info() nothrow
   {
     return cToD!(gstaudio.audio_info.AudioInfo)(cast(void*)&(cast(GstAudioBuffer*)this._cPtr).info);
   }
@@ -56,7 +53,7 @@ class AudioBuffer
       Get `nSamples` field.
       Returns: the size of the buffer in samples
   */
-  @property size_t nSamples()
+  @property size_t nSamples() nothrow
   {
     return (cast(GstAudioBuffer*)this._cPtr).nSamples;
   }
@@ -66,7 +63,7 @@ class AudioBuffer
       Params:
         propval = the size of the buffer in samples
   */
-  @property void nSamples(size_t propval)
+  @property void nSamples(size_t propval) nothrow
   {
     (cast(GstAudioBuffer*)this._cPtr).nSamples = propval;
   }
@@ -75,7 +72,7 @@ class AudioBuffer
       Get `nPlanes` field.
       Returns: the number of planes available
   */
-  @property int nPlanes()
+  @property int nPlanes() nothrow
   {
     return (cast(GstAudioBuffer*)this._cPtr).nPlanes;
   }
@@ -85,7 +82,7 @@ class AudioBuffer
       Params:
         propval = the number of planes available
   */
-  @property void nPlanes(int propval)
+  @property void nPlanes(int propval) nothrow
   {
     (cast(GstAudioBuffer*)this._cPtr).nPlanes = propval;
   }
@@ -94,7 +91,7 @@ class AudioBuffer
       Get `buffer` field.
       Returns: the mapped buffer
   */
-  @property gst.buffer.Buffer buffer()
+  @property gst.buffer.Buffer buffer() nothrow
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstAudioBuffer*)this._cPtr).buffer);
   }
@@ -104,7 +101,7 @@ class AudioBuffer
       Params:
         propval = the mapped buffer
   */
-  @property void buffer(gst.buffer.Buffer propval)
+  @property void buffer(gst.buffer.Buffer propval) nothrow
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstAudioBuffer*)this._cPtr).buffer);
     dToC(propval, cast(void*)&(cast(GstAudioBuffer*)this._cPtr).buffer);
@@ -114,7 +111,7 @@ class AudioBuffer
       Unmaps an audio buffer that was previously mapped with
       [gstaudio.audio_buffer.AudioBuffer.map].
   */
-  void unmap()
+  void unmap() nothrow
   {
     gst_audio_buffer_unmap(cast(GstAudioBuffer*)this._cPtr);
   }
@@ -138,7 +135,7 @@ class AudioBuffer
         If the buffer has no timestamp, it is assumed to be inside the segment and
         is not clipped
   */
-  static gst.buffer.Buffer clip(gst.buffer.Buffer buffer, gst.segment.Segment segment, int rate, int bpf)
+  static gst.buffer.Buffer clip(gst.buffer.Buffer buffer, gst.segment.Segment segment, int rate, int bpf) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_audio_buffer_clip(buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null, cast(const(GstSegment)*)&segment, rate, bpf);
@@ -179,7 +176,7 @@ class AudioBuffer
         flags = the access mode for the memory
       Returns: true if the map operation succeeded or false on failure
   */
-  static bool map(out gstaudio.audio_buffer.AudioBuffer buffer, gstaudio.audio_info.AudioInfo info, gst.buffer.Buffer gstbuffer, gst.types.MapFlags flags)
+  static bool map(out gstaudio.audio_buffer.AudioBuffer buffer, gstaudio.audio_info.AudioInfo info, gst.buffer.Buffer gstbuffer, gst.types.MapFlags flags) nothrow
   {
     bool _retval;
     GstAudioBuffer _buffer;
@@ -201,7 +198,7 @@ class AudioBuffer
         to = The channel positions to convert to.
       Returns: true if the reordering was possible.
   */
-  static bool reorderChannels(gst.buffer.Buffer buffer, gstaudio.types.AudioFormat format, gstaudio.types.AudioChannelPosition[] from, gstaudio.types.AudioChannelPosition[] to)
+  static bool reorderChannels(gst.buffer.Buffer buffer, gstaudio.types.AudioFormat format, gstaudio.types.AudioChannelPosition[] from, gstaudio.types.AudioChannelPosition[] to) nothrow
   {
     bool _retval;
     int _channels;
@@ -241,7 +238,7 @@ class AudioBuffer
           beginning.
       Returns: the truncated buffer
   */
-  static gst.buffer.Buffer truncate(gst.buffer.Buffer buffer, int bpf, size_t trim, size_t samples)
+  static gst.buffer.Buffer truncate(gst.buffer.Buffer buffer, int bpf, size_t trim, size_t samples) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_audio_buffer_truncate(buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null, bpf, trim, samples);

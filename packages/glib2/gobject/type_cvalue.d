@@ -15,11 +15,8 @@ class TypeCValue
   GTypeCValue _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gobject.type_cvalue.TypeCValue");
-
     _cInstance = *cast(GTypeCValue*)ptr;
 
     if (take)
@@ -27,7 +24,7 @@ class TypeCValue
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -36,7 +33,7 @@ class TypeCValue
       Get `vInt` field.
       Returns: the field for holding integer values
   */
-  @property int vInt()
+  @property int vInt() nothrow
   {
     return (cast(GTypeCValue*)this._cPtr).vInt;
   }
@@ -46,7 +43,7 @@ class TypeCValue
       Params:
         propval = the field for holding integer values
   */
-  @property void vInt(int propval)
+  @property void vInt(int propval) nothrow
   {
     (cast(GTypeCValue*)this._cPtr).vInt = propval;
   }
@@ -55,7 +52,7 @@ class TypeCValue
       Get `vLong` field.
       Returns: the field for holding long integer values
   */
-  @property glong vLong()
+  @property glong vLong() nothrow
   {
     return (cast(GTypeCValue*)this._cPtr).vLong;
   }
@@ -65,7 +62,7 @@ class TypeCValue
       Params:
         propval = the field for holding long integer values
   */
-  @property void vLong(glong propval)
+  @property void vLong(glong propval) nothrow
   {
     (cast(GTypeCValue*)this._cPtr).vLong = propval;
   }
@@ -74,7 +71,7 @@ class TypeCValue
       Get `vInt64` field.
       Returns: the field for holding 64 bit integer values
   */
-  @property long vInt64()
+  @property long vInt64() nothrow
   {
     return (cast(GTypeCValue*)this._cPtr).vInt64;
   }
@@ -84,7 +81,7 @@ class TypeCValue
       Params:
         propval = the field for holding 64 bit integer values
   */
-  @property void vInt64(long propval)
+  @property void vInt64(long propval) nothrow
   {
     (cast(GTypeCValue*)this._cPtr).vInt64 = propval;
   }
@@ -93,7 +90,7 @@ class TypeCValue
       Get `vDouble` field.
       Returns: the field for holding floating point values
   */
-  @property double vDouble()
+  @property double vDouble() nothrow
   {
     return (cast(GTypeCValue*)this._cPtr).vDouble;
   }
@@ -103,7 +100,7 @@ class TypeCValue
       Params:
         propval = the field for holding floating point values
   */
-  @property void vDouble(double propval)
+  @property void vDouble(double propval) nothrow
   {
     (cast(GTypeCValue*)this._cPtr).vDouble = propval;
   }

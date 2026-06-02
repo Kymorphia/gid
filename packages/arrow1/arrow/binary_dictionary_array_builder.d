@@ -18,26 +18,26 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_binary_dictionary_array_builder_get_type != &gidSymbolNotFound ? garrow_binary_dictionary_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BinaryDictionaryArrayBuilder self()
+  override BinaryDictionaryArrayBuilder self() nothrow
   {
     return this;
   }
@@ -46,13 +46,13 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.binary_dictionary_array_builder.BinaryDictionaryArrayBuilder]
       Returns: New builder object
   */
-  static BinaryDictionaryArrayBuilderGidBuilder builder()
+  static BinaryDictionaryArrayBuilderGidBuilder builder() nothrow
   {
     return new BinaryDictionaryArrayBuilderGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowBinaryDictionaryArrayBuilder* _cretval;
     _cretval = garrow_binary_dictionary_array_builder_new();
@@ -145,7 +145,7 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /** */
-  long getDictionaryLength()
+  long getDictionaryLength() nothrow
   {
     long _retval;
     _retval = garrow_binary_dictionary_array_builder_get_dictionary_length(cast(GArrowBinaryDictionaryArrayBuilder*)this._cPtr);
@@ -166,7 +166,7 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   /**
       Reset and also clear accumulated dictionary values in memo table.
   */
-  void resetFull()
+  void resetFull() nothrow
   {
     garrow_binary_dictionary_array_builder_reset_full(cast(GArrowBinaryDictionaryArrayBuilder*)this._cPtr);
   }
@@ -184,7 +184,7 @@ final class BinaryDictionaryArrayBuilderGidBuilder : BinaryDictionaryArrayBuilde
       Create object from builder.
       Returns: New object
   */
-  BinaryDictionaryArrayBuilder build()
+  BinaryDictionaryArrayBuilder build() nothrow
   {
     return new BinaryDictionaryArrayBuilder(cast(void*)createGObject(BinaryDictionaryArrayBuilder._getGType), Yes.Take);
   }

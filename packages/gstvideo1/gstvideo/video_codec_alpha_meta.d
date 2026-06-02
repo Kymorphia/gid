@@ -23,11 +23,8 @@ class VideoCodecAlphaMeta
   GstVideoCodecAlphaMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_codec_alpha_meta.VideoCodecAlphaMeta");
-
     _cInstance = *cast(GstVideoCodecAlphaMeta*)ptr;
 
     if (take)
@@ -35,7 +32,7 @@ class VideoCodecAlphaMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -44,7 +41,7 @@ class VideoCodecAlphaMeta
       Get `meta` field.
       Returns: parent #GstMeta
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoCodecAlphaMeta*)this._cPtr).meta, No.Take);
   }
@@ -53,7 +50,7 @@ class VideoCodecAlphaMeta
       Get `buffer` field.
       Returns: the encoded alpha frame
   */
-  @property gst.buffer.Buffer buffer()
+  @property gst.buffer.Buffer buffer() nothrow
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecAlphaMeta*)this._cPtr).buffer);
   }
@@ -63,14 +60,14 @@ class VideoCodecAlphaMeta
       Params:
         propval = the encoded alpha frame
   */
-  @property void buffer(gst.buffer.Buffer propval)
+  @property void buffer(gst.buffer.Buffer propval) nothrow
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecAlphaMeta*)this._cPtr).buffer);
     dToC(propval, cast(void*)&(cast(GstVideoCodecAlphaMeta*)this._cPtr).buffer);
   }
 
   /** */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_codec_alpha_meta_get_info();

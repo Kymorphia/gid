@@ -15,26 +15,26 @@ class LargeBinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_large_binary_scalar_get_type != &gidSymbolNotFound ? garrow_large_binary_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LargeBinaryScalar self()
+  override LargeBinaryScalar self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class LargeBinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
       Get builder for [arrow.large_binary_scalar.LargeBinaryScalar]
       Returns: New builder object
   */
-  static LargeBinaryScalarGidBuilder builder()
+  static LargeBinaryScalarGidBuilder builder() nothrow
   {
     return new LargeBinaryScalarGidBuilder;
   }
 
   /** */
-  this(arrow.buffer.Buffer value)
+  this(arrow.buffer.Buffer value) nothrow
   {
     GArrowLargeBinaryScalar* _cretval;
     _cretval = garrow_large_binary_scalar_new(value ? cast(GArrowBuffer*)value._cPtr(No.Dup) : null);
@@ -69,7 +69,7 @@ final class LargeBinaryScalarGidBuilder : LargeBinaryScalarGidBuilderImpl!LargeB
       Create object from builder.
       Returns: New object
   */
-  LargeBinaryScalar build()
+  LargeBinaryScalar build() nothrow
   {
     return new LargeBinaryScalar(cast(void*)createGObject(LargeBinaryScalar._getGType), Yes.Take);
   }

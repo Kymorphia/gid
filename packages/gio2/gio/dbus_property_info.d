@@ -22,7 +22,7 @@ class DBusPropertyInfo : gobject.boxed.Boxed
         signature = The D-Bus signature of the property (a single complete type).
         flags = Access control flags for the property.
   */
-  this(int refCount = int.init, string name = string.init, string signature = string.init, gio.types.DBusPropertyInfoFlags flags = gio.types.DBusPropertyInfoFlags.init)
+  this(int refCount = int.init, string name = string.init, string signature = string.init, gio.types.DBusPropertyInfoFlags flags = gio.types.DBusPropertyInfoFlags.init) nothrow
   {
     super(gMalloc(GDBusPropertyInfo.sizeof), Yes.Take);
     this.refCount = refCount;
@@ -32,32 +32,32 @@ class DBusPropertyInfo : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_property_info_get_type != &gidSymbolNotFound ? g_dbus_property_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DBusPropertyInfo self()
+  override DBusPropertyInfo self() nothrow
   {
     return this;
   }
@@ -66,7 +66,7 @@ class DBusPropertyInfo : gobject.boxed.Boxed
       Get `refCount` field.
       Returns: The reference count or -1 if statically allocated.
   */
-  @property int refCount()
+  @property int refCount() nothrow
   {
     return (cast(GDBusPropertyInfo*)this._cPtr).refCount;
   }
@@ -76,7 +76,7 @@ class DBusPropertyInfo : gobject.boxed.Boxed
       Params:
         propval = The reference count or -1 if statically allocated.
   */
-  @property void refCount(int propval)
+  @property void refCount(int propval) nothrow
   {
     (cast(GDBusPropertyInfo*)this._cPtr).refCount = propval;
   }
@@ -85,7 +85,7 @@ class DBusPropertyInfo : gobject.boxed.Boxed
       Get `name` field.
       Returns: The name of the D-Bus property, e.g. "SupportedFilesystems".
   */
-  @property string name()
+  @property string name() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GDBusPropertyInfo*)this._cPtr).name);
   }
@@ -95,7 +95,7 @@ class DBusPropertyInfo : gobject.boxed.Boxed
       Params:
         propval = The name of the D-Bus property, e.g. "SupportedFilesystems".
   */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GDBusPropertyInfo*)this._cPtr).name);
     dToC(propval, cast(void*)&(cast(GDBusPropertyInfo*)this._cPtr).name);
@@ -105,7 +105,7 @@ class DBusPropertyInfo : gobject.boxed.Boxed
       Get `signature` field.
       Returns: The D-Bus signature of the property (a single complete type).
   */
-  @property string signature()
+  @property string signature() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GDBusPropertyInfo*)this._cPtr).signature);
   }
@@ -115,7 +115,7 @@ class DBusPropertyInfo : gobject.boxed.Boxed
       Params:
         propval = The D-Bus signature of the property (a single complete type).
   */
-  @property void signature(string propval)
+  @property void signature(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GDBusPropertyInfo*)this._cPtr).signature);
     dToC(propval, cast(void*)&(cast(GDBusPropertyInfo*)this._cPtr).signature);
@@ -125,7 +125,7 @@ class DBusPropertyInfo : gobject.boxed.Boxed
       Get `flags` field.
       Returns: Access control flags for the property.
   */
-  @property gio.types.DBusPropertyInfoFlags flags()
+  @property gio.types.DBusPropertyInfoFlags flags() nothrow
   {
     return cast(gio.types.DBusPropertyInfoFlags)(cast(GDBusPropertyInfo*)this._cPtr).flags;
   }
@@ -135,7 +135,7 @@ class DBusPropertyInfo : gobject.boxed.Boxed
       Params:
         propval = Access control flags for the property.
   */
-  @property void flags(gio.types.DBusPropertyInfoFlags propval)
+  @property void flags(gio.types.DBusPropertyInfoFlags propval) nothrow
   {
     (cast(GDBusPropertyInfo*)this._cPtr).flags = cast(GDBusPropertyInfoFlags)propval;
   }

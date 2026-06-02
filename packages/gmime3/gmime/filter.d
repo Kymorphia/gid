@@ -16,26 +16,26 @@ class Filter : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_filter_get_type != &gidSymbolNotFound ? g_mime_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Filter self()
+  override Filter self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class Filter : gobject.object.ObjectWrap
       Get builder for [gmime.filter.Filter]
       Returns: New builder object
   */
-  static FilterGidBuilder builder()
+  static FilterGidBuilder builder() nothrow
   {
     return new FilterGidBuilder;
   }
@@ -56,7 +56,7 @@ class Filter : gobject.object.ObjectWrap
       Params:
         data = data to backup
   */
-  void backup(ubyte[] data)
+  void backup(ubyte[] data) nothrow
   {
     size_t _length;
     if (data)
@@ -75,7 +75,7 @@ class Filter : gobject.object.ObjectWrap
         outbuf = pointer to output buffer
         outprespace = pointer to output prespace buffer length
   */
-  void complete(ubyte[] inbuf, size_t prespace, out ubyte[] outbuf, out size_t outprespace)
+  void complete(ubyte[] inbuf, size_t prespace, out ubyte[] outbuf, out size_t outprespace) nothrow
   {
     size_t _inlen;
     if (inbuf)
@@ -93,7 +93,7 @@ class Filter : gobject.object.ObjectWrap
       Copies filter into a new #GMimeFilter object.
       Returns: a duplicate of filter.
   */
-  gmime.filter.Filter copy()
+  gmime.filter.Filter copy() nothrow
   {
     GMimeFilter* _cretval;
     _cretval = g_mime_filter_copy(cast(GMimeFilter*)this._cPtr);
@@ -110,7 +110,7 @@ class Filter : gobject.object.ObjectWrap
         outbuf = pointer to output buffer
         outprespace = pointer to output prespace buffer length
   */
-  void filter(ubyte[] inbuf, size_t prespace, out ubyte[] outbuf, out size_t outprespace)
+  void filter(ubyte[] inbuf, size_t prespace, out ubyte[] outbuf, out size_t outprespace) nothrow
   {
     size_t _inlen;
     if (inbuf)
@@ -127,7 +127,7 @@ class Filter : gobject.object.ObjectWrap
   /**
       Resets the filter.
   */
-  void reset()
+  void reset() nothrow
   {
     g_mime_filter_reset(cast(GMimeFilter*)this._cPtr);
   }
@@ -139,7 +139,7 @@ class Filter : gobject.object.ObjectWrap
         size = requested size for the output buffer
         keep = true if existing data in the output buffer should be kept
   */
-  void setSize(size_t size, bool keep)
+  void setSize(size_t size, bool keep) nothrow
   {
     g_mime_filter_set_size(cast(GMimeFilter*)this._cPtr, size, keep);
   }
@@ -157,7 +157,7 @@ final class FilterGidBuilder : FilterGidBuilderImpl!FilterGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Filter build()
+  Filter build() nothrow
   {
     return new Filter(cast(void*)createGObject(Filter._getGType), No.Take);
   }

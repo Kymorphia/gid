@@ -18,26 +18,26 @@ class DataPivot : gobject.object.ObjectWrap, gda.data_model.DataModel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_data_pivot_get_type != &gidSymbolNotFound ? gda_data_pivot_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DataPivot self()
+  override DataPivot self() nothrow
   {
     return this;
   }
@@ -46,19 +46,19 @@ class DataPivot : gobject.object.ObjectWrap, gda.data_model.DataModel
       Get builder for [gda.data_pivot.DataPivot]
       Returns: New builder object
   */
-  static DataPivotGidBuilder builder()
+  static DataPivotGidBuilder builder() nothrow
   {
     return new DataPivotGidBuilder;
   }
 
   /** */
-  @property gda.data_model.DataModel model()
+  @property gda.data_model.DataModel model() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.data_model.DataModel)("model");
   }
 
   /** */
-  @property void model(gda.data_model.DataModel propval)
+  @property void model(gda.data_model.DataModel propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gda.data_model.DataModel)("model", propval);
   }
@@ -66,7 +66,7 @@ class DataPivot : gobject.object.ObjectWrap, gda.data_model.DataModel
   mixin DataModelT!();
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_data_pivot_error_quark();
@@ -80,7 +80,7 @@ class DataPivot : gobject.object.ObjectWrap, gda.data_model.DataModel
         model = a #GdaDataModel to analyse data from, or null
       Returns: a pointer to the newly created #GdaDataModel.
   */
-  static gda.data_model.DataModel new_(gda.data_model.DataModel model = null)
+  static gda.data_model.DataModel new_(gda.data_model.DataModel model = null) nothrow
   {
     GdaDataModel* _cretval;
     _cretval = gda_data_pivot_new(model ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
@@ -181,7 +181,7 @@ class DataPivotGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gd
   mixin DataModelGidBuilderT!();
 
   /** */
-  T model(gda.data_model.DataModel propval)
+  T model(gda.data_model.DataModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -194,7 +194,7 @@ final class DataPivotGidBuilder : DataPivotGidBuilderImpl!DataPivotGidBuilder
       Create object from builder.
       Returns: New object
   */
-  DataPivot build()
+  DataPivot build() nothrow
   {
     return new DataPivot(cast(void*)createGObject(DataPivot._getGType), No.Take);
   }
@@ -202,12 +202,12 @@ final class DataPivotGidBuilder : DataPivotGidBuilderImpl!DataPivotGidBuilder
 
 class DataPivotException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.data_pivot.DataPivot.errorQuark, cast(int)code, msg);
   }

@@ -34,26 +34,26 @@ class FileChooserRequest : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_file_chooser_request_get_type != &gidSymbolNotFound ? webkit_file_chooser_request_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileChooserRequest self()
+  override FileChooserRequest self() nothrow
   {
     return this;
   }
@@ -62,7 +62,7 @@ class FileChooserRequest : gobject.object.ObjectWrap
       Get builder for [webkit.file_chooser_request.FileChooserRequest]
       Returns: New builder object
   */
-  static FileChooserRequestGidBuilder builder()
+  static FileChooserRequestGidBuilder builder() nothrow
   {
     return new FileChooserRequestGidBuilder;
   }
@@ -73,7 +73,7 @@ class FileChooserRequest : gobject.object.ObjectWrap
         [webkit.file_chooser_request.FileChooserRequest.getMimeTypesFilter] for more
         details.
   */
-  @property gtk.file_filter.FileFilter filter()
+  @property gtk.file_filter.FileFilter filter() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.file_filter.FileFilter)("filter");
   }
@@ -85,7 +85,7 @@ class FileChooserRequest : gobject.object.ObjectWrap
         [webkit.file_chooser_request.FileChooserRequest.getSelectMultiple] for
         more details.
   */
-  @property bool selectMultiple()
+  @property bool selectMultiple() nothrow
   {
     return getSelectMultiple();
   }
@@ -98,7 +98,7 @@ class FileChooserRequest : gobject.object.ObjectWrap
       won't be properly completed and the browser will keep the request
       pending forever, which might cause the browser to hang.
   */
-  void cancel()
+  void cancel() nothrow
   {
     webkit_file_chooser_request_cancel(cast(WebKitFileChooserRequest*)this._cPtr);
   }
@@ -118,7 +118,7 @@ class FileChooserRequest : gobject.object.ObjectWrap
         accepted. This array and its contents are owned by WebKit and
         should not be modified or freed.
   */
-  string[] getMimeTypes()
+  string[] getMimeTypes() nothrow
   {
     const(char*)* _cretval;
     _cretval = webkit_file_chooser_request_get_mime_types(cast(WebKitFileChooserRequest*)this._cPtr);
@@ -151,7 +151,7 @@ class FileChooserRequest : gobject.object.ObjectWrap
         MIME types is defined or null otherwise. The returned object is
         owned by WebKit should not be modified or freed.
   */
-  gtk.file_filter.FileFilter getMimeTypesFilter()
+  gtk.file_filter.FileFilter getMimeTypesFilter() nothrow
   {
     GtkFileFilter* _cretval;
     _cretval = webkit_file_chooser_request_get_mime_types_filter(cast(WebKitFileChooserRequest*)this._cPtr);
@@ -168,7 +168,7 @@ class FileChooserRequest : gobject.object.ObjectWrap
       attribute defined.
       Returns: true if the file chooser should allow selecting multiple files or false otherwise.
   */
-  bool getSelectMultiple()
+  bool getSelectMultiple() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_file_chooser_request_get_select_multiple(cast(WebKitFileChooserRequest*)this._cPtr);
@@ -193,7 +193,7 @@ class FileChooserRequest : gobject.object.ObjectWrap
         contents are owned by WebKit and should not be modified or
         freed.
   */
-  string[] getSelectedFiles()
+  string[] getSelectedFiles() nothrow
   {
     const(char*)* _cretval;
     _cretval = webkit_file_chooser_request_get_selected_files(cast(WebKitFileChooserRequest*)this._cPtr);
@@ -219,7 +219,7 @@ class FileChooserRequest : gobject.object.ObjectWrap
         files = a
           null-terminated array of strings, containing paths to local files.
   */
-  void selectFiles(string[] files)
+  void selectFiles(string[] files) nothrow
   {
     char*[] _tmpfiles;
     foreach (s; files)
@@ -243,7 +243,7 @@ final class FileChooserRequestGidBuilder : FileChooserRequestGidBuilderImpl!File
       Create object from builder.
       Returns: New object
   */
-  FileChooserRequest build()
+  FileChooserRequest build() nothrow
   {
     return new FileChooserRequest(cast(void*)createGObject(FileChooserRequest._getGType), No.Take);
   }

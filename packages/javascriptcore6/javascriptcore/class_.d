@@ -35,26 +35,26 @@ class Class : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())jsc_class_get_type != &gidSymbolNotFound ? jsc_class_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Class self()
+  override Class self() nothrow
   {
     return this;
   }
@@ -63,7 +63,7 @@ class Class : gobject.object.ObjectWrap
       Get builder for [javascriptcore.class_.Class]
       Returns: New builder object
   */
-  static ClassGidBuilder builder()
+  static ClassGidBuilder builder() nothrow
   {
     return new ClassGidBuilder;
   }
@@ -72,7 +72,7 @@ class Class : gobject.object.ObjectWrap
       Get `name` property.
       Returns: The name of the class.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return getName();
   }
@@ -81,7 +81,7 @@ class Class : gobject.object.ObjectWrap
       Get `parent` property.
       Returns: The parent class or null in case of final classes.
   */
-  @property javascriptcore.class_.Class parent()
+  @property javascriptcore.class_.Class parent() nothrow
   {
     return getParent();
   }
@@ -94,10 +94,10 @@ class Class : gobject.object.ObjectWrap
   *   callback = The callback
   * Returns: A Value representing the class constructor
   */
-  Value addConstructor(alias Ctor)(string name = null)
+  Value addConstructor(alias Ctor)(string name = null) nothrow
   if (isCallable!Ctor && is(ReturnType!Ctor : Object))
   {
-    extern(C) JSCValue* ctorThunk(GPtrArray* args, void* userData)
+    extern(C) JSCValue* ctorThunk(GPtrArray* args, void* userData) nothrow
     {
       auto ctx = jsc_context_get_current();
 
@@ -142,13 +142,13 @@ class Class : gobject.object.ObjectWrap
   *   Method = The method
   *   name = The JSC name of the method or null to use the D method name (default)
   */
-  void addMethod(alias Method)(string name = null)
+  void addMethod(alias Method)(string name = null) nothrow
   if (isCallable!Method)
   {
     alias ClassT = __traits(parent, Method);
     enum string dMethodName = __traits(identifier, Method);
 
-    extern(C) JSCValue* methodThunk(JSCValue* instance, GPtrArray* args, void* userData)
+    extern(C) JSCValue* methodThunk(JSCValue* instance, GPtrArray* args, void* userData) nothrow
     {
       auto ctx = jsc_context_get_current();
 
@@ -192,7 +192,7 @@ class Class : gobject.object.ObjectWrap
   }
 
   /// Used as a default value for addProperty template Setter argument which results in a read-only property
-  void readOnlyProperty() {}
+  void readOnlyProperty() nothrow {}
 
   /**
   * Add a property to a Class.
@@ -201,12 +201,12 @@ class Class : gobject.object.ObjectWrap
   *   Setter = The setter method (optional)
   *   name = The property name
   */
-  void addProperty(alias Getter, alias Setter = readOnlyProperty)(string name)
+  void addProperty(alias Getter, alias Setter = readOnlyProperty)(string name) nothrow
   if ((isCallable!Getter && !is(ReturnType!Getter == void) && Parameters!Getter.length == 0)
     && (__traits(isSame, Setter, readOnlyProperty)
   || (isCallable!Setter && is(ReturnType!Setter == void) && Parameters!Setter.length == 1)))
   {
-    extern(C) JSCValue* getterThunk(JSCValue* instance, void* userData)
+    extern(C) JSCValue* getterThunk(JSCValue* instance, void* userData) nothrow
     {
       alias ClassT = __traits(parent, Getter);
       enum string getterName = __traits(identifier, Getter);
@@ -234,7 +234,7 @@ class Class : gobject.object.ObjectWrap
 
     static if (!__traits(isSame, Setter, readOnlyProperty))
     {
-      extern(C) void setterThunk(JSCValue* instance, JSCValue* value, void* userData)
+      extern(C) void setterThunk(JSCValue* instance, JSCValue* value, void* userData) nothrow
       {
         alias ClassT = __traits(parent, Setter);
         enum string setterName = __traits(identifier, Setter);
@@ -264,7 +264,7 @@ class Class : gobject.object.ObjectWrap
       Get the class name of jsc_class
       Returns: the name of jsc_class
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = jsc_class_get_name(cast(JSCClass*)this._cPtr);
@@ -276,7 +276,7 @@ class Class : gobject.object.ObjectWrap
       Get the parent class of jsc_class
       Returns: the parent class of jsc_class
   */
-  javascriptcore.class_.Class getParent()
+  javascriptcore.class_.Class getParent() nothrow
   {
     JSCClass* _cretval;
     _cretval = jsc_class_get_parent(cast(JSCClass*)this._cPtr);
@@ -295,7 +295,7 @@ class ClassGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The #JSCContext in which the class was registered.
       Returns: Builder instance for fluent chaining
   */
-  T context(javascriptcore.context.Context propval)
+  T context(javascriptcore.context.Context propval) nothrow
   {
     return setProperty("context", propval);
   }
@@ -306,7 +306,7 @@ class ClassGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The name of the class.
       Returns: Builder instance for fluent chaining
   */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -317,7 +317,7 @@ class ClassGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The parent class or null in case of final classes.
       Returns: Builder instance for fluent chaining
   */
-  T parent(javascriptcore.class_.Class propval)
+  T parent(javascriptcore.class_.Class propval) nothrow
   {
     return setProperty("parent", propval);
   }
@@ -330,7 +330,7 @@ final class ClassGidBuilder : ClassGidBuilderImpl!ClassGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Class build()
+  Class build() nothrow
   {
     return new Class(cast(void*)createGObject(Class._getGType), No.Take);
   }

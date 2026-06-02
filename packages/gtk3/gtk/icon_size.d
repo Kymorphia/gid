@@ -21,7 +21,7 @@ struct IconSize
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  static gtk.types.IconSize fromName(string name)
+  static gtk.types.IconSize fromName(string name) nothrow
   {
     GtkIconSize _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -40,7 +40,7 @@ struct IconSize
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  static string getName(gtk.types.IconSize size)
+  static string getName(gtk.types.IconSize size) nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_icon_size_get_name(size);
@@ -64,7 +64,7 @@ struct IconSize
         height = location to store icon height
       Returns: true if size was a valid size
   */
-  static bool lookup(gtk.types.IconSize size, out int width, out int height)
+  static bool lookup(gtk.types.IconSize size, out int width, out int height) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_icon_size_lookup(size, cast(int*)&width, cast(int*)&height);
@@ -93,7 +93,7 @@ struct IconSize
   
       Deprecated: Use [gtk.global.iconSizeLookup] instead.
   */
-  static bool lookupForSettings(gtk.settings.Settings settings, gtk.types.IconSize size, out int width, out int height)
+  static bool lookupForSettings(gtk.settings.Settings settings, gtk.types.IconSize size, out int width, out int height) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_icon_size_lookup_for_settings(settings ? cast(GtkSettings*)settings._cPtr(No.Dup) : null, size, cast(int*)&width, cast(int*)&height);
@@ -112,7 +112,7 @@ struct IconSize
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  static gtk.types.IconSize register(string name, int width, int height)
+  static gtk.types.IconSize register(string name, int width, int height) nothrow
   {
     GtkIconSize _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -132,7 +132,7 @@ struct IconSize
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  static void registerAlias(string alias_, gtk.types.IconSize target)
+  static void registerAlias(string alias_, gtk.types.IconSize target) nothrow
   {
     const(char)* _alias_ = alias_.toCString(No.Alloc);
     gtk_icon_size_register_alias(_alias_, target);

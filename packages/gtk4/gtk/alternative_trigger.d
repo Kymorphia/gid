@@ -21,26 +21,26 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_alternative_trigger_get_type != &gidSymbolNotFound ? gtk_alternative_trigger_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AlternativeTrigger self()
+  override AlternativeTrigger self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
       Get builder for [gtk.alternative_trigger.AlternativeTrigger]
       Returns: New builder object
   */
-  static AlternativeTriggerGidBuilder builder()
+  static AlternativeTriggerGidBuilder builder() nothrow
   {
     return new AlternativeTriggerGidBuilder;
   }
@@ -58,7 +58,7 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
       Get `first` property.
       Returns: The first [gtk.shortcut_trigger.ShortcutTrigger] to check.
   */
-  @property gtk.shortcut_trigger.ShortcutTrigger first()
+  @property gtk.shortcut_trigger.ShortcutTrigger first() nothrow
   {
     return getFirst();
   }
@@ -67,7 +67,7 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
       Get `second` property.
       Returns: The second [gtk.shortcut_trigger.ShortcutTrigger] to check.
   */
-  @property gtk.shortcut_trigger.ShortcutTrigger second()
+  @property gtk.shortcut_trigger.ShortcutTrigger second() nothrow
   {
     return getSecond();
   }
@@ -84,7 +84,7 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
         second = The second trigger that may trigger
       Returns: a new [gtk.shortcut_trigger.ShortcutTrigger]
   */
-  this(gtk.shortcut_trigger.ShortcutTrigger first, gtk.shortcut_trigger.ShortcutTrigger second)
+  this(gtk.shortcut_trigger.ShortcutTrigger first, gtk.shortcut_trigger.ShortcutTrigger second) nothrow
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_alternative_trigger_new(first ? cast(GtkShortcutTrigger*)first._cPtr(Yes.Dup) : null, second ? cast(GtkShortcutTrigger*)second._cPtr(Yes.Dup) : null);
@@ -99,7 +99,7 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
       the other one.
       Returns: the first alternative trigger
   */
-  gtk.shortcut_trigger.ShortcutTrigger getFirst()
+  gtk.shortcut_trigger.ShortcutTrigger getFirst() nothrow
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_alternative_trigger_get_first(cast(GtkAlternativeTrigger*)this._cPtr);
@@ -115,7 +115,7 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
       the other one.
       Returns: the second alternative trigger
   */
-  gtk.shortcut_trigger.ShortcutTrigger getSecond()
+  gtk.shortcut_trigger.ShortcutTrigger getSecond() nothrow
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_alternative_trigger_get_second(cast(GtkAlternativeTrigger*)this._cPtr);
@@ -134,7 +134,7 @@ class AlternativeTriggerGidBuilderImpl(T) : gtk.shortcut_trigger.ShortcutTrigger
         propval = The first [gtk.shortcut_trigger.ShortcutTrigger] to check.
       Returns: Builder instance for fluent chaining
   */
-  T first(gtk.shortcut_trigger.ShortcutTrigger propval)
+  T first(gtk.shortcut_trigger.ShortcutTrigger propval) nothrow
   {
     return setProperty("first", propval);
   }
@@ -145,7 +145,7 @@ class AlternativeTriggerGidBuilderImpl(T) : gtk.shortcut_trigger.ShortcutTrigger
         propval = The second [gtk.shortcut_trigger.ShortcutTrigger] to check.
       Returns: Builder instance for fluent chaining
   */
-  T second(gtk.shortcut_trigger.ShortcutTrigger propval)
+  T second(gtk.shortcut_trigger.ShortcutTrigger propval) nothrow
   {
     return setProperty("second", propval);
   }
@@ -158,7 +158,7 @@ final class AlternativeTriggerGidBuilder : AlternativeTriggerGidBuilderImpl!Alte
       Create object from builder.
       Returns: New object
   */
-  AlternativeTrigger build()
+  AlternativeTrigger build() nothrow
   {
     return new AlternativeTrigger(cast(void*)createGObject(AlternativeTrigger._getGType), Yes.Take);
   }

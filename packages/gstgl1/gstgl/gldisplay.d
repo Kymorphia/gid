@@ -42,26 +42,26 @@ class GLDisplay : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_display_get_type != &gidSymbolNotFound ? gst_gl_display_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLDisplay self()
+  override GLDisplay self() nothrow
   {
     return this;
   }
@@ -70,13 +70,13 @@ class GLDisplay : gst.object.ObjectWrap
       Get builder for [gstgl.gldisplay.GLDisplay]
       Returns: New builder object
   */
-  static GLDisplayGidBuilder builder()
+  static GLDisplayGidBuilder builder() nothrow
   {
     return new GLDisplayGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GstGLDisplay* _cretval;
     _cretval = gst_gl_display_new();
@@ -94,7 +94,7 @@ class GLDisplay : gst.object.ObjectWrap
       Returns: a new #GstGLDisplay or null if type is
                  not supported
   */
-  static gstgl.gldisplay.GLDisplay newWithType(gstgl.types.GLDisplayType type)
+  static gstgl.gldisplay.GLDisplay newWithType(gstgl.types.GLDisplayType type) nothrow
   {
     GstGLDisplay* _cretval;
     _cretval = gst_gl_display_new_with_type(type);
@@ -103,7 +103,7 @@ class GLDisplay : gst.object.ObjectWrap
   }
 
   /** */
-  bool addContext(gstgl.glcontext.GLContext context)
+  bool addContext(gstgl.glcontext.GLContext context) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_display_add_context(cast(GstGLDisplay*)this._cPtr, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
@@ -132,7 +132,7 @@ class GLDisplay : gst.object.ObjectWrap
   }
 
   /** */
-  gstgl.glwindow.GLWindow createWindow()
+  gstgl.glwindow.GLWindow createWindow() nothrow
   {
     GstGLWindow* _cretval;
     _cretval = gst_gl_display_create_window(cast(GstGLDisplay*)this._cPtr);
@@ -169,7 +169,7 @@ class GLDisplay : gst.object.ObjectWrap
       Params:
         glApi = a #GstGLAPI to filter with
   */
-  void filterGlApi(gstgl.types.GLAPI glApi)
+  void filterGlApi(gstgl.types.GLAPI glApi) nothrow
   {
     gst_gl_display_filter_gl_api(cast(GstGLDisplay*)this._cPtr, glApi);
   }
@@ -187,13 +187,22 @@ class GLDisplay : gst.object.ObjectWrap
   
       Deprecated: Use [gstgl.gldisplay.GLDisplay.retrieveWindow] instead.
   */
-  gstgl.glwindow.GLWindow findWindow(void* data, glib.types.CompareFunc compareFunc)
+  gstgl.glwindow.GLWindow findWindow(void* data, glib.types.CompareFunc compareFunc) nothrow
   {
     static glib.types.CompareFunc _static_compareFunc;
 
-    extern(C) int _compareFuncCallback(const(void)* a, const(void)* b)
+    extern(C) int _compareFuncCallback(const(void)* a, const(void)* b) nothrow
     {
-      int _retval = _static_compareFunc(a, b);
+      int _retval;
+
+      try
+      {
+        _retval = _static_compareFunc(a, b);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.CompareFunc");
+      }
       return _retval;
     }
     auto _compareFuncCB = compareFunc ? &_compareFuncCallback : null;
@@ -209,7 +218,7 @@ class GLDisplay : gst.object.ObjectWrap
       see [gstgl.gldisplay.GLDisplay.filterGlApi] for what the returned value represents
       Returns: the #GstGLAPI configured for display
   */
-  gstgl.types.GLAPI getGlApi()
+  gstgl.types.GLAPI getGlApi() nothrow
   {
     GstGLAPI _cretval;
     _cretval = gst_gl_display_get_gl_api(cast(GstGLDisplay*)this._cPtr);
@@ -218,7 +227,7 @@ class GLDisplay : gst.object.ObjectWrap
   }
 
   /** */
-  gstgl.types.GLAPI getGlApiUnlocked()
+  gstgl.types.GLAPI getGlApiUnlocked() nothrow
   {
     GstGLAPI _cretval;
     _cretval = gst_gl_display_get_gl_api_unlocked(cast(GstGLDisplay*)this._cPtr);
@@ -227,7 +236,7 @@ class GLDisplay : gst.object.ObjectWrap
   }
 
   /** */
-  gstgl.glcontext.GLContext getGlContextForThread(glib.thread.Thread thread)
+  gstgl.glcontext.GLContext getGlContextForThread(glib.thread.Thread thread) nothrow
   {
     GstGLContext* _cretval;
     _cretval = gst_gl_display_get_gl_context_for_thread(cast(GstGLDisplay*)this._cPtr, thread ? cast(GThread*)thread._cPtr(No.Dup) : null);
@@ -236,7 +245,7 @@ class GLDisplay : gst.object.ObjectWrap
   }
 
   /** */
-  size_t getHandle()
+  size_t getHandle() nothrow
   {
     size_t _retval;
     _retval = gst_gl_display_get_handle(cast(GstGLDisplay*)this._cPtr);
@@ -244,7 +253,7 @@ class GLDisplay : gst.object.ObjectWrap
   }
 
   /** */
-  gstgl.types.GLDisplayType getHandleType()
+  gstgl.types.GLDisplayType getHandleType() nothrow
   {
     GstGLDisplayType _cretval;
     _cretval = gst_gl_display_get_handle_type(cast(GstGLDisplay*)this._cPtr);
@@ -258,13 +267,13 @@ class GLDisplay : gst.object.ObjectWrap
       Params:
         context = the #GstGLContext to remove
   */
-  void removeContext(gstgl.glcontext.GLContext context)
+  void removeContext(gstgl.glcontext.GLContext context) nothrow
   {
     gst_gl_display_remove_context(cast(GstGLDisplay*)this._cPtr, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
   }
 
   /** */
-  bool removeWindow(gstgl.glwindow.GLWindow window)
+  bool removeWindow(gstgl.glwindow.GLWindow window) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_display_remove_window(cast(GstGLDisplay*)this._cPtr, window ? cast(GstGLWindow*)window._cPtr(No.Dup) : null);
@@ -282,13 +291,22 @@ class GLDisplay : gst.object.ObjectWrap
       Returns: The first #GstGLWindow that causes a match
                  from compare_func
   */
-  gstgl.glwindow.GLWindow retrieveWindow(void* data, glib.types.CompareFunc compareFunc)
+  gstgl.glwindow.GLWindow retrieveWindow(void* data, glib.types.CompareFunc compareFunc) nothrow
   {
     static glib.types.CompareFunc _static_compareFunc;
 
-    extern(C) int _compareFuncCallback(const(void)* a, const(void)* b)
+    extern(C) int _compareFuncCallback(const(void)* a, const(void)* b) nothrow
     {
-      int _retval = _static_compareFunc(a, b);
+      int _retval;
+
+      try
+      {
+        _retval = _static_compareFunc(a, b);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.CompareFunc");
+      }
       return _retval;
     }
     auto _compareFuncCB = compareFunc ? &_compareFuncCallback : null;
@@ -320,18 +338,19 @@ class GLDisplay : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCreateContext(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCreateContext(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T : gstgl.glcontext.GLContext)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstgl.glcontext.GLContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstgl.gldisplay.GLDisplay)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gstgl.glcontext.GLContext _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -339,7 +358,14 @@ class GLDisplay : gst.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstgl.gldisplay.GLDisplay.createContext");
+      }
 
       setVal!(gstgl.glcontext.GLContext)(_returnValue, _retval);
     }
@@ -361,7 +387,7 @@ final class GLDisplayGidBuilder : GLDisplayGidBuilderImpl!GLDisplayGidBuilder
       Create object from builder.
       Returns: New object
   */
-  GLDisplay build()
+  GLDisplay build() nothrow
   {
     return new GLDisplay(cast(void*)createGObject(GLDisplay._getGType), Yes.Take);
   }

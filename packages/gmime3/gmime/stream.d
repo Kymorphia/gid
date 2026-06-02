@@ -16,26 +16,26 @@ class Stream : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_stream_get_type != &gidSymbolNotFound ? g_mime_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Stream self()
+  override Stream self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class Stream : gobject.object.ObjectWrap
       Get builder for [gmime.stream.Stream]
       Returns: New builder object
   */
-  static StreamGidBuilder builder()
+  static StreamGidBuilder builder() nothrow
   {
     return new StreamGidBuilder;
   }
@@ -61,7 +61,7 @@ class Stream : gobject.object.ObjectWrap
       Returns: the number of characters read into buf on success or %-1
         on fail.
   */
-  ptrdiff_t bufferGets(ubyte[] buf)
+  ptrdiff_t bufferGets(ubyte[] buf) nothrow
   {
     ptrdiff_t _retval;
     size_t _max;
@@ -79,7 +79,7 @@ class Stream : gobject.object.ObjectWrap
       Params:
         buffer = output buffer
   */
-  void bufferReadln(ubyte[] buffer)
+  void bufferReadln(ubyte[] buffer) nothrow
   {
     auto _buffer = gByteArrayFromD(buffer);
     scope(exit) containerFree!(GByteArray*, ubyte, GidOwnership.None)(_buffer);
@@ -90,7 +90,7 @@ class Stream : gobject.object.ObjectWrap
       Closes the stream.
       Returns: `0` on success or %-1 on fail.
   */
-  int close()
+  int close() nothrow
   {
     int _retval;
     _retval = g_mime_stream_close(cast(GMimeStream*)this._cPtr);
@@ -104,7 +104,7 @@ class Stream : gobject.object.ObjectWrap
         start = start boundary
         end = end boundary
   */
-  void construct(long start, long end)
+  void construct(long start, long end) nothrow
   {
     g_mime_stream_construct(cast(GMimeStream*)this._cPtr, start, end);
   }
@@ -113,7 +113,7 @@ class Stream : gobject.object.ObjectWrap
       Tests the end-of-stream indicator for stream.
       Returns: true on EOS or false otherwise.
   */
-  bool eos()
+  bool eos() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_stream_eos(cast(GMimeStream*)this._cPtr);
@@ -124,7 +124,7 @@ class Stream : gobject.object.ObjectWrap
       Sync's the stream to disk.
       Returns: `0` on success or %-1 on fail.
   */
-  int flush()
+  int flush() nothrow
   {
     int _retval;
     _retval = g_mime_stream_flush(cast(GMimeStream*)this._cPtr);
@@ -135,7 +135,7 @@ class Stream : gobject.object.ObjectWrap
       Gets the length of the stream.
       Returns: the length of the stream or %-1 if unknown.
   */
-  long length()
+  long length() nothrow
   {
     long _retval;
     _retval = g_mime_stream_length(cast(GMimeStream*)this._cPtr);
@@ -149,7 +149,7 @@ class Stream : gobject.object.ObjectWrap
         buf = buffer
       Returns: the number of bytes read or %-1 on fail.
   */
-  ptrdiff_t read(ubyte[] buf)
+  ptrdiff_t read(ubyte[] buf) nothrow
   {
     ptrdiff_t _retval;
     size_t _len;
@@ -165,7 +165,7 @@ class Stream : gobject.object.ObjectWrap
       Resets the stream.
       Returns: `0` on success or %-1 on fail.
   */
-  int reset()
+  int reset() nothrow
   {
     int _retval;
     _retval = g_mime_stream_reset(cast(GMimeStream*)this._cPtr);
@@ -191,7 +191,7 @@ class Stream : gobject.object.ObjectWrap
         whence = seek directive
       Returns: the resultant position on success or %-1 on fail.
   */
-  long seek(long offset, gmime.types.SeekWhence whence)
+  long seek(long offset, gmime.types.SeekWhence whence) nothrow
   {
     long _retval;
     _retval = g_mime_stream_seek(cast(GMimeStream*)this._cPtr, offset, whence);
@@ -205,7 +205,7 @@ class Stream : gobject.object.ObjectWrap
         start = start boundary
         end = end boundary
   */
-  void setBounds(long start, long end)
+  void setBounds(long start, long end) nothrow
   {
     g_mime_stream_set_bounds(cast(GMimeStream*)this._cPtr, start, end);
   }
@@ -219,7 +219,7 @@ class Stream : gobject.object.ObjectWrap
       Returns: a substream of stream with bounds start
         and end.
   */
-  gmime.stream.Stream substream(long start, long end)
+  gmime.stream.Stream substream(long start, long end) nothrow
   {
     GMimeStream* _cretval;
     _cretval = g_mime_stream_substream(cast(GMimeStream*)this._cPtr, start, end);
@@ -231,7 +231,7 @@ class Stream : gobject.object.ObjectWrap
       Gets the current offset within the stream.
       Returns: the current position within the stream or %-1 on fail.
   */
-  long tell()
+  long tell() nothrow
   {
     long _retval;
     _retval = g_mime_stream_tell(cast(GMimeStream*)this._cPtr);
@@ -245,7 +245,7 @@ class Stream : gobject.object.ObjectWrap
         buf = buffer
       Returns: the number of bytes written or %-1 on fail.
   */
-  ptrdiff_t write(ubyte[] buf)
+  ptrdiff_t write(ubyte[] buf) nothrow
   {
     ptrdiff_t _retval;
     size_t _len;
@@ -264,7 +264,7 @@ class Stream : gobject.object.ObjectWrap
         str = string to write
       Returns: the number of bytes written or %-1 on fail.
   */
-  ptrdiff_t writeString(string str)
+  ptrdiff_t writeString(string str) nothrow
   {
     ptrdiff_t _retval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -279,7 +279,7 @@ class Stream : gobject.object.ObjectWrap
         dest = destination stream
       Returns: the number of bytes written or %-1 on fail.
   */
-  long writeToStream(gmime.stream.Stream dest)
+  long writeToStream(gmime.stream.Stream dest) nothrow
   {
     long _retval;
     _retval = g_mime_stream_write_to_stream(cast(GMimeStream*)this._cPtr, dest ? cast(GMimeStream*)dest._cPtr(No.Dup) : null);
@@ -293,7 +293,7 @@ class Stream : gobject.object.ObjectWrap
         vector = a #GMimeStreamIOVector
       Returns: the number of bytes written or %-1 on fail.
   */
-  long writev(gmime.types.StreamIOVector[] vector)
+  long writev(gmime.types.StreamIOVector[] vector) nothrow
   {
     long _retval;
     size_t _count;
@@ -318,7 +318,7 @@ final class StreamGidBuilder : StreamGidBuilderImpl!StreamGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Stream build()
+  Stream build() nothrow
   {
     return new Stream(cast(void*)createGObject(Stream._getGType), No.Take);
   }

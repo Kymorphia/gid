@@ -25,26 +25,26 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_frame_tab_bar_get_type != &gidSymbolNotFound ? panel_frame_tab_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FrameTabBar self()
+  override FrameTabBar self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
       Get builder for [panel.frame_tab_bar.FrameTabBar]
       Returns: New builder object
   */
-  static FrameTabBarGidBuilder builder()
+  static FrameTabBarGidBuilder builder() nothrow
   {
     return new FrameTabBarGidBuilder;
   }
@@ -62,7 +62,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
       Get `autohide` property.
       Returns: Whether the tabs automatically hide.
   */
-  @property bool autohide()
+  @property bool autohide() nothrow
   {
     return getAutohide();
   }
@@ -72,7 +72,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
       Params:
         propval = Whether the tabs automatically hide.
   */
-  @property void autohide(bool propval)
+  @property void autohide(bool propval) nothrow
   {
     setAutohide(propval);
   }
@@ -81,7 +81,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
       Get `expandTabs` property.
       Returns: Whether tabs expand to full width.
   */
-  @property bool expandTabs()
+  @property bool expandTabs() nothrow
   {
     return getExpandTabs();
   }
@@ -91,7 +91,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
       Params:
         propval = Whether tabs expand to full width.
   */
-  @property void expandTabs(bool propval)
+  @property void expandTabs(bool propval) nothrow
   {
     setExpandTabs(propval);
   }
@@ -100,7 +100,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
       Get `inverted` property.
       Returns: Whether tabs use inverted layout.
   */
-  @property bool inverted()
+  @property bool inverted() nothrow
   {
     return getInverted();
   }
@@ -110,7 +110,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
       Params:
         propval = Whether tabs use inverted layout.
   */
-  @property void inverted(bool propval)
+  @property void inverted(bool propval) nothrow
   {
     setInverted(propval);
   }
@@ -121,7 +121,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
       Create a new #PanelFrameTabBar.
       Returns: a newly created #PanelFrameTabBar
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = panel_frame_tab_bar_new();
@@ -132,7 +132,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
       Gets whether the tabs automatically hide.
       Returns: the value of the autohide property.
   */
-  bool getAutohide()
+  bool getAutohide() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_frame_tab_bar_get_autohide(cast(PanelFrameTabBar*)this._cPtr);
@@ -143,7 +143,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
       Gets whether tabs expand to full width.
       Returns: the value of the expand_tabs property.
   */
-  bool getExpandTabs()
+  bool getExpandTabs() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_frame_tab_bar_get_expand_tabs(cast(PanelFrameTabBar*)this._cPtr);
@@ -154,7 +154,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
       Gets whether tabs use inverted layout.
       Returns: the value of the inverted property.
   */
-  bool getInverted()
+  bool getInverted() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_frame_tab_bar_get_inverted(cast(PanelFrameTabBar*)this._cPtr);
@@ -167,7 +167,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
       Params:
         autohide = the autohide value
   */
-  void setAutohide(bool autohide)
+  void setAutohide(bool autohide) nothrow
   {
     panel_frame_tab_bar_set_autohide(cast(PanelFrameTabBar*)this._cPtr, autohide);
   }
@@ -178,7 +178,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
       Params:
         expandTabs = the expand_tabs value
   */
-  void setExpandTabs(bool expandTabs)
+  void setExpandTabs(bool expandTabs) nothrow
   {
     panel_frame_tab_bar_set_expand_tabs(cast(PanelFrameTabBar*)this._cPtr, expandTabs);
   }
@@ -189,7 +189,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
       Params:
         inverted = the inverted value
   */
-  void setInverted(bool inverted)
+  void setInverted(bool inverted) nothrow
   {
     panel_frame_tab_bar_set_inverted(cast(PanelFrameTabBar*)this._cPtr, inverted);
   }
@@ -207,7 +207,7 @@ class FrameTabBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, panel.fr
         propval = Whether the tabs automatically hide.
       Returns: Builder instance for fluent chaining
   */
-  T autohide(bool propval)
+  T autohide(bool propval) nothrow
   {
     return setProperty("autohide", propval);
   }
@@ -218,7 +218,7 @@ class FrameTabBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, panel.fr
         propval = Whether tabs expand to full width.
       Returns: Builder instance for fluent chaining
   */
-  T expandTabs(bool propval)
+  T expandTabs(bool propval) nothrow
   {
     return setProperty("expand-tabs", propval);
   }
@@ -229,7 +229,7 @@ class FrameTabBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, panel.fr
         propval = Whether tabs use inverted layout.
       Returns: Builder instance for fluent chaining
   */
-  T inverted(bool propval)
+  T inverted(bool propval) nothrow
   {
     return setProperty("inverted", propval);
   }
@@ -242,7 +242,7 @@ final class FrameTabBarGidBuilder : FrameTabBarGidBuilderImpl!FrameTabBarGidBuil
       Create object from builder.
       Returns: New object
   */
-  FrameTabBar build()
+  FrameTabBar build() nothrow
   {
     return new FrameTabBar(cast(void*)createGObject(FrameTabBar._getGType), No.Take);
   }

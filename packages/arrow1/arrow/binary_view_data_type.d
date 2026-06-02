@@ -14,26 +14,26 @@ class BinaryViewDataType : arrow.data_type.DataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_binary_view_data_type_get_type != &gidSymbolNotFound ? garrow_binary_view_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BinaryViewDataType self()
+  override BinaryViewDataType self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class BinaryViewDataType : arrow.data_type.DataType
       Get builder for [arrow.binary_view_data_type.BinaryViewDataType]
       Returns: New builder object
   */
-  static BinaryViewDataTypeGidBuilder builder()
+  static BinaryViewDataTypeGidBuilder builder() nothrow
   {
     return new BinaryViewDataTypeGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowBinaryViewDataType* _cretval;
     _cretval = garrow_binary_view_data_type_new();
@@ -68,7 +68,7 @@ final class BinaryViewDataTypeGidBuilder : BinaryViewDataTypeGidBuilderImpl!Bina
       Create object from builder.
       Returns: New object
   */
-  BinaryViewDataType build()
+  BinaryViewDataType build() nothrow
   {
     return new BinaryViewDataType(cast(void*)createGObject(BinaryViewDataType._getGType), Yes.Take);
   }

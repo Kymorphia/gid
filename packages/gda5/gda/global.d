@@ -33,7 +33,7 @@ import libxml2.types;
       string_ = string to escape
     Returns: a new string
 */
-string escapeString(string string_)
+string escapeString(string string_) nothrow
 {
   char* _cretval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -50,7 +50,7 @@ string escapeString(string string_)
       string_ = string to unescape
     Returns: a new unescaped string, or null in an error was found in string
 */
-string unescapeString(string string_)
+string unescapeString(string string_) nothrow
 {
   char* _cretval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -66,7 +66,7 @@ string unescapeString(string string_)
       text = a string
     Returns: text if conversion succeeded or null if an error occurred
 */
-string alphanumToText(string text)
+string alphanumToText(string text) nothrow
 {
   char* _cretval;
   char* _text = text.toCString(No.Alloc);
@@ -87,7 +87,7 @@ string alphanumToText(string text)
       end = ending position within sql of the "token" to complete
     Returns: a new array of strings, or null (use [glib.global.strfreev] to free the returned array)
 */
-string[] completionListGet(gda.connection.Connection cnc, string sql, int start, int end)
+string[] completionListGet(gda.connection.Connection cnc, string sql, int start, int end) nothrow
 {
   char** _cretval;
   const(char)* _sql = sql.toCString(No.Alloc);
@@ -145,7 +145,7 @@ bool computeDmlStatements(gda.connection.Connection cnc, gda.statement.Statement
       outUsername = a place to store the new string containing the &lt;username&gt; part
       outPassword = a place to store the new string containing the &lt;password&gt; part
 */
-void dsnSplit(string string_, out string outDsn, out string outUsername, out string outPassword)
+void dsnSplit(string string_, out string outDsn, out string outUsername, out string outPassword) nothrow
 {
   const(char)* _string_ = string_.toCString(No.Alloc);
   char* _outDsn;
@@ -185,7 +185,7 @@ void dsnSplit(string string_, out string outDsn, out string outUsername, out str
       str = the name of a #GType, as returned by [gda.global.gTypeToString].
     Returns: the #GType represented by the given str, or #G_TYPE_INVALID if not found
 */
-gobject.types.GType gTypeFromString(string str)
+gobject.types.GType gTypeFromString(string str) nothrow
 {
   gobject.types.GType _retval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -206,7 +206,7 @@ gobject.types.GType gTypeFromString(string str)
     Returns: the GDA's string representing the given #GType or the name
       returned by #g_type_name.
 */
-string gTypeToString(gobject.types.GType type)
+string gTypeToString(gobject.types.GType type) nothrow
 {
   const(char)* _cretval;
   _cretval = gda_g_type_to_string(type);
@@ -224,7 +224,7 @@ string gTypeToString(gobject.types.GType type)
       appName = the name of the application to find
     Returns: the path as a new string, or null if the application cannot be found
 */
-string getApplicationExecPath(string appName)
+string getApplicationExecPath(string appName) nothrow
 {
   char* _cretval;
   const(char)* _appName = appName.toCString(No.Alloc);
@@ -242,7 +242,7 @@ string getApplicationExecPath(string appName)
       id2 = an identifier string
     Returns: true if id1 and id2 are equal.
 */
-bool identifierEqual(string id1, string id2)
+bool identifierEqual(string id1, string id2) nothrow
 {
   bool _retval;
   const(char)* _id1 = id1.toCString(No.Alloc);
@@ -258,7 +258,7 @@ bool identifierEqual(string id1, string id2)
       id = an identifier string
     Returns: a new hash
 */
-uint identifierHash(string id)
+uint identifierHash(string id) nothrow
 {
   uint _retval;
   const(char)* _id = id.toCString(No.Alloc);
@@ -272,7 +272,7 @@ uint identifierHash(string id)
     Please note that if you call setlocale() to modify the current locale, you should also
     call [gda.global.localeChanged] before using Libgda again.
 */
-void init_()
+void init_() nothrow
 {
   gda_init();
 }
@@ -285,7 +285,7 @@ void init_()
     Failing to call this function after having changed the current locale may result
     in Libgda reverting to the previous set locale.
 */
-void localeChanged()
+void localeChanged() nothrow
 {
   gda_locale_changed();
 }
@@ -293,7 +293,7 @@ void localeChanged()
 /**
     Disables GDA logs.
 */
-void logDisable()
+void logDisable() nothrow
 {
   gda_log_disable();
 }
@@ -301,13 +301,13 @@ void logDisable()
 /**
     Enables GDA logs.
 */
-void logEnable()
+void logEnable() nothrow
 {
   gda_log_enable();
 }
 
 /** */
-bool logIsEnabled()
+bool logIsEnabled() nothrow
 {
   bool _retval;
   _retval = cast(bool)gda_log_is_enabled();
@@ -327,7 +327,7 @@ bool logIsEnabled()
       sep = spcifies the expected separator character bewteen year, month and day (for example '-')
     Returns: true if value has been sucessfuly parsed as a valid date (see [glib.date.Date.valid]).
 */
-bool parseFormattedDate(glib.date.Date gdate, string value, glib.types.DateDMY first, glib.types.DateDMY second, glib.types.DateDMY third, char sep)
+bool parseFormattedDate(glib.date.Date gdate, string value, glib.types.DateDMY first, glib.types.DateDMY second, glib.types.DateDMY third, char sep) nothrow
 {
   bool _retval;
   const(char)* _value = value.toCString(No.Alloc);
@@ -336,7 +336,7 @@ bool parseFormattedDate(glib.date.Date gdate, string value, glib.types.DateDMY f
 }
 
 /** */
-bool parseFormattedTime(gda.time.Time timegda, string value, char sep)
+bool parseFormattedTime(gda.time.Time timegda, string value, char sep) nothrow
 {
   bool _retval;
   const(char)* _value = value.toCString(No.Alloc);
@@ -357,7 +357,7 @@ bool parseFormattedTime(gda.time.Time timegda, string value, char sep)
       sep = spcifies the expected separator character bewteen year, month and day (for example '-')
     Returns: true if value has been sucessfuly parsed as a valid date (see [glib.date.Date.valid]).
 */
-bool parseFormattedTimestamp(gda.timestamp.Timestamp timestamp, string value, glib.types.DateDMY first, glib.types.DateDMY second, glib.types.DateDMY third, char sep)
+bool parseFormattedTimestamp(gda.timestamp.Timestamp timestamp, string value, glib.types.DateDMY first, glib.types.DateDMY second, glib.types.DateDMY third, char sep) nothrow
 {
   bool _retval;
   const(char)* _value = value.toCString(No.Alloc);
@@ -377,7 +377,7 @@ bool parseFormattedTimestamp(gda.timestamp.Timestamp timestamp, string value, gl
       value = a string
     Returns: true if value has been sucessfuly parsed as a valid date (see [glib.date.Date.valid]).
 */
-bool parseIso8601Date(glib.date.Date gdate, string value)
+bool parseIso8601Date(glib.date.Date gdate, string value) nothrow
 {
   bool _retval;
   const(char)* _value = value.toCString(No.Alloc);
@@ -395,7 +395,7 @@ bool parseIso8601Date(glib.date.Date gdate, string value)
       value = a string
     Returns: true if no error occurred
 */
-bool parseIso8601Time(gda.time.Time timegda, string value)
+bool parseIso8601Time(gda.time.Time timegda, string value) nothrow
 {
   bool _retval;
   const(char)* _value = value.toCString(No.Alloc);
@@ -413,7 +413,7 @@ bool parseIso8601Time(gda.time.Time timegda, string value)
       value = a string
     Returns: true if value has been sucessfuly parsed as a valid timestamp (see [glib.date.Date.valid])
 */
-bool parseIso8601Timestamp(gda.timestamp.Timestamp timestamp, string value)
+bool parseIso8601Timestamp(gda.timestamp.Timestamp timestamp, string value) nothrow
 {
   bool _retval;
   const(char)* _value = value.toCString(No.Alloc);
@@ -476,7 +476,7 @@ bool rewriteStatementForNullParameters(gda.statement.Statement stmt, gda.set.Set
       string_ = a string to decode
     Returns: true if no error occurred.
 */
-bool rfc1738Decode(string string_)
+bool rfc1738Decode(string string_) nothrow
 {
   bool _retval;
   char* _string_ = string_.toCString(No.Alloc);
@@ -494,7 +494,7 @@ bool rfc1738Decode(string string_)
       string_ = a string to encode
     Returns: a new string
 */
-string rfc1738Encode(string string_)
+string rfc1738Encode(string string_) nothrow
 {
   char* _cretval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -524,7 +524,7 @@ gda.statement.Statement selectAlterSelectForEmpty(gda.statement.Statement stmt)
 }
 
 /** */
-glib.types.Quark sqlErrorQuark()
+glib.types.Quark sqlErrorQuark() nothrow
 {
   glib.types.Quark _retval;
   _retval = gda_sql_error_quark();
@@ -541,7 +541,7 @@ glib.types.Quark sqlErrorQuark()
       str = an SQL identifier
     Returns: 
 */
-string sqlIdentifierForceQuotes(string str)
+string sqlIdentifierForceQuotes(string str) nothrow
 {
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -572,7 +572,7 @@ string sqlIdentifierForceQuotes(string str)
       str = a quoted string
     Returns: str
 */
-string sqlIdentifierPrepareForCompare(string str)
+string sqlIdentifierPrepareForCompare(string str) nothrow
 {
   char* _cretval;
   char* _str = str.toCString(No.Alloc);
@@ -762,7 +762,7 @@ string sqlIdentifierPrepareForCompare(string str)
     Returns: the representation of id ready to be used in SQL statement, as a new string,
                or null if id is in a wrong format
 */
-string sqlIdentifierQuote(string id, gda.connection.Connection cnc, gda.server_provider.ServerProvider prov, bool metaStoreConvention, bool forceQuotes)
+string sqlIdentifierQuote(string id, gda.connection.Connection cnc, gda.server_provider.ServerProvider prov, bool metaStoreConvention, bool forceQuotes) nothrow
 {
   char* _cretval;
   const(char)* _id = id.toCString(No.Alloc);
@@ -782,7 +782,7 @@ string sqlIdentifierQuote(string id, gda.connection.Connection cnc, gda.server_p
       id = an SQL identifier
     Returns: a new null-terminated array of strings, or NULL (use [glib.global.strfreev] to free the returned array)
 */
-string[] sqlIdentifierSplit(string id)
+string[] sqlIdentifierSplit(string id) nothrow
 {
   char** _cretval;
   const(char)* _id = id.toCString(No.Alloc);
@@ -809,7 +809,7 @@ string[] sqlIdentifierSplit(string id)
       value = a #GValue pointer
     Returns: a new string
 */
-string sqlValueStringify(gobject.value.Value value)
+string sqlValueStringify(gobject.value.Value value) nothrow
 {
   char* _cretval;
   _cretval = gda_sql_value_stringify(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -828,7 +828,7 @@ string sqlValueStringify(gobject.value.Value value)
       str = a string to convert, or null
     Returns: a new #GdaBinary if no error were found in str, or null otherwise
 */
-gda.binary.Binary stringToBinary(string str = null)
+gda.binary.Binary stringToBinary(string str = null) nothrow
 {
   GdaBinary* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -844,7 +844,7 @@ gda.binary.Binary stringToBinary(string str = null)
       str = a string to convert
     Returns: a new #gdaBlob if no error were found in str, or NULL otherwise
 */
-gda.blob.Blob stringToBlob(string str)
+gda.blob.Blob stringToBlob(string str) nothrow
 {
   GdaBlob* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -862,7 +862,7 @@ gda.blob.Blob stringToBlob(string str)
       text = the text to convert
     Returns: a new string
 */
-string textToAlphanum(string text)
+string textToAlphanum(string text) nothrow
 {
   char* _cretval;
   const(char)* _text = text.toCString(No.Alloc);
@@ -879,7 +879,7 @@ string textToAlphanum(string text)
       types = array with nbcols length of type GType or null (if any data type is accepted)
     Returns: true if the data model's columns match the provided data types and number
 */
-bool utilityCheckDataModel(gda.data_model.DataModel model, gobject.types.GType[] types)
+bool utilityCheckDataModel(gda.data_model.DataModel model, gobject.types.GType[] types) nothrow
 {
   bool _retval;
   int _nbcols;
@@ -907,7 +907,7 @@ bool utilityCheckDataModel(gda.data_model.DataModel model, gobject.types.GType[]
       useColIds = set to true to add column ID information
     Returns: true if no error occurred
 */
-bool utilityDataModelDumpDataToXml(gda.data_model.DataModel model, libxml2.types.NodePtr parent, int[] cols, int[] rows, bool useColIds)
+bool utilityDataModelDumpDataToXml(gda.data_model.DataModel model, libxml2.types.NodePtr parent, int[] cols, int[] rows, bool useColIds) nothrow
 {
   bool _retval;
   int _nbCols;
@@ -932,7 +932,7 @@ bool utilityDataModelDumpDataToXml(gda.data_model.DataModel model, libxml2.types
       fieldName = field name
     Returns: The field's description, or NULL if description is not set
 */
-string utilityDataModelFindColumnDescription(gda.data_select.DataSelect model, string fieldName)
+string utilityDataModelFindColumnDescription(gda.data_select.DataSelect model, string fieldName) nothrow
 {
   const(char)* _cretval;
   const(char)* _fieldName = fieldName.toCString(No.Alloc);
@@ -980,7 +980,7 @@ bool utilityHolderLoadAttributes(gda.holder.Holder holder, libxml2.types.NodePtr
       the same value, an integer less than 0 if value1 is less than value2 or
       an integer greater than 0 if value1 is greater than value2.
 */
-int valueCompare(gobject.value.Value value1, gobject.value.Value value2)
+int valueCompare(gobject.value.Value value1, gobject.value.Value value2) nothrow
 {
   int _retval;
   _retval = gda_value_compare(value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
@@ -1005,7 +1005,7 @@ int valueCompare(gobject.value.Value value1, gobject.value.Value value2)
       value2 = the other #GValue to be compared to value1.
     Returns: a non 0 value if value1 and value2 differ, and 0 if they are equal
 */
-int valueDiffer(gobject.value.Value value1, gobject.value.Value value2)
+int valueDiffer(gobject.value.Value value1, gobject.value.Value value2) nothrow
 {
   int _retval;
   _retval = gda_value_differ(value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
@@ -1019,7 +1019,7 @@ int valueDiffer(gobject.value.Value value1, gobject.value.Value value2)
       value = value to test.
     Returns: a boolean that says whether or not value is of type #GDA_TYPE_NULL.
 */
-bool valueIsNull(gobject.value.Value value)
+bool valueIsNull(gobject.value.Value value) nothrow
 {
   bool _retval;
   _retval = cast(bool)gda_value_is_null(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -1038,7 +1038,7 @@ bool valueIsNull(gobject.value.Value value)
       value = a #GValue.
     Returns: a new string, or null if the conversion cannot be done. Free the value with a [glib.global.gfree] when you've finished using it.
 */
-string valueStringify(gobject.value.Value value)
+string valueStringify(gobject.value.Value value) nothrow
 {
   char* _cretval;
   _cretval = gda_value_stringify(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);

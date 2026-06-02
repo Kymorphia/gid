@@ -16,37 +16,41 @@ class AttributesManager
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.attributes_manager.AttributesManager");
-
     _cInstancePtr = cast(GdaAttributesManager*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
 
   /** */
-  void clear(void* ptr = null)
+  void clear(void* ptr = null) nothrow
   {
     gda_attributes_manager_clear(cast(GdaAttributesManager*)this._cPtr, ptr);
   }
 
   /** */
-  void foreach_(void* ptr, gda.types.AttributesManagerFunc func)
+  void foreach_(void* ptr, gda.types.AttributesManagerFunc func) nothrow
   {
-    extern(C) void _funcCallback(const(char)* attName, const(GValue)* value, void* data)
+    extern(C) void _funcCallback(const(char)* attName, const(GValue)* value, void* data) nothrow
     {
       auto _dlg = cast(gda.types.AttributesManagerFunc*)data;
       string _attName = attName.fromCString(No.Free);
 
-      (*_dlg)(_attName, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
+      try
+      {
+        (*_dlg)(_attName, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.types.AttributesManagerFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -54,7 +58,7 @@ class AttributesManager
   }
 
   /** */
-  gobject.value.Value get(void* ptr, string attName)
+  gobject.value.Value get(void* ptr, string attName) nothrow
   {
     const(GValue)* _cretval;
     const(char)* _attName = attName.toCString(No.Alloc);
@@ -64,21 +68,28 @@ class AttributesManager
   }
 
   /** */
-  void set(void* ptr, string attName, gobject.value.Value value)
+  void set(void* ptr, string attName, gobject.value.Value value) nothrow
   {
     const(char)* _attName = attName.toCString(No.Alloc);
     gda_attributes_manager_set(cast(GdaAttributesManager*)this._cPtr, ptr, _attName, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 
   /** */
-  void setFull(void* ptr, string attName, gobject.value.Value value, glib.types.DestroyNotify destroy)
+  void setFull(void* ptr, string attName, gobject.value.Value value, glib.types.DestroyNotify destroy) nothrow
   {
-    extern(C) void _destroyCallback(void* data)
+    extern(C) void _destroyCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
     const(char)* _attName = attName.toCString(No.Alloc);

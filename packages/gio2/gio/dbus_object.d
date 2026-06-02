@@ -22,7 +22,7 @@ interface DBusObject
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_object_get_type != &gidSymbolNotFound ? g_dbus_object_get_type() : cast(GType)0;
@@ -70,7 +70,7 @@ interface DBusObject
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInterfaceAdded(T)(T callback, Flag!"After" after = No.After);
+  gulong connectInterfaceAdded(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `InterfaceRemoved` signal.
@@ -89,7 +89,7 @@ interface DBusObject
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInterfaceRemoved(T)(T callback, Flag!"After" after = No.After);
+  gulong connectInterfaceRemoved(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gio.dbus_object.DBusObject]

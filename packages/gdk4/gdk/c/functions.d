@@ -17,7 +17,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgtk-4.so.1"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // AppLaunchContext
   GType function() c_gdk_app_launch_context_get_type; ///

@@ -14,26 +14,26 @@ class FileInfo : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_file_info_get_type != &gidSymbolNotFound ? garrow_file_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileInfo self()
+  override FileInfo self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class FileInfo : gobject.object.ObjectWrap
       Get builder for [arrow.file_info.FileInfo]
       Returns: New builder object
   */
-  static FileInfoGidBuilder builder()
+  static FileInfoGidBuilder builder() nothrow
   {
     return new FileInfoGidBuilder;
   }
@@ -51,7 +51,7 @@ class FileInfo : gobject.object.ObjectWrap
       Get `baseName` property.
       Returns: The file base name (component after the last directory separator).
   */
-  @property string baseName()
+  @property string baseName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("base-name");
   }
@@ -60,7 +60,7 @@ class FileInfo : gobject.object.ObjectWrap
       Get `dirName` property.
       Returns: The directory base name (component before the file base name).
   */
-  @property string dirName()
+  @property string dirName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("dir-name");
   }
@@ -69,7 +69,7 @@ class FileInfo : gobject.object.ObjectWrap
       Get `extension` property.
       Returns: The file extension (excluding the dot).
   */
-  @property string extension()
+  @property string extension() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("extension");
   }
@@ -78,7 +78,7 @@ class FileInfo : gobject.object.ObjectWrap
       Get `mtime` property.
       Returns: The time of last modification, if available.
   */
-  @property long mtime()
+  @property long mtime() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("mtime");
   }
@@ -88,7 +88,7 @@ class FileInfo : gobject.object.ObjectWrap
       Params:
         propval = The time of last modification, if available.
   */
-  @property void mtime(long propval)
+  @property void mtime(long propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(long)("mtime", propval);
   }
@@ -97,7 +97,7 @@ class FileInfo : gobject.object.ObjectWrap
       Get `path` property.
       Returns: The full file path in the file system.
   */
-  @property string path()
+  @property string path() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("path");
   }
@@ -107,7 +107,7 @@ class FileInfo : gobject.object.ObjectWrap
       Params:
         propval = The full file path in the file system.
   */
-  @property void path(string propval)
+  @property void path(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("path", propval);
   }
@@ -117,7 +117,7 @@ class FileInfo : gobject.object.ObjectWrap
       Returns: The size in bytes, if available
         Only regular files are guaranteed to have a size.
   */
-  @property long size()
+  @property long size() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("size");
   }
@@ -128,7 +128,7 @@ class FileInfo : gobject.object.ObjectWrap
         propval = The size in bytes, if available
           Only regular files are guaranteed to have a size.
   */
-  @property void size(long propval)
+  @property void size(long propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(long)("size", propval);
   }
@@ -137,7 +137,7 @@ class FileInfo : gobject.object.ObjectWrap
       Get `type` property.
       Returns: The type of the entry.
   */
-  @property arrow.types.FileType type()
+  @property arrow.types.FileType type() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.types.FileType)("type");
   }
@@ -147,13 +147,13 @@ class FileInfo : gobject.object.ObjectWrap
       Params:
         propval = The type of the entry.
   */
-  @property void type(arrow.types.FileType propval)
+  @property void type(arrow.types.FileType propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(arrow.types.FileType)("type", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowFileInfo* _cretval;
     _cretval = garrow_file_info_new();
@@ -161,7 +161,7 @@ class FileInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equal(arrow.file_info.FileInfo otherFileInfo)
+  bool equal(arrow.file_info.FileInfo otherFileInfo) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_file_info_equal(cast(GArrowFileInfo*)this._cPtr, otherFileInfo ? cast(GArrowFileInfo*)otherFileInfo._cPtr(No.Dup) : null);
@@ -169,7 +169,7 @@ class FileInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  bool isDir()
+  bool isDir() nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_file_info_is_dir(cast(GArrowFileInfo*)this._cPtr);
@@ -177,7 +177,7 @@ class FileInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  bool isFile()
+  bool isFile() nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_file_info_is_file(cast(GArrowFileInfo*)this._cPtr);
@@ -185,7 +185,7 @@ class FileInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = garrow_file_info_to_string(cast(GArrowFileInfo*)this._cPtr);
@@ -204,7 +204,7 @@ class FileInfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The time of last modification, if available.
       Returns: Builder instance for fluent chaining
   */
-  T mtime(long propval)
+  T mtime(long propval) nothrow
   {
     return setProperty("mtime", propval);
   }
@@ -215,7 +215,7 @@ class FileInfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The full file path in the file system.
       Returns: Builder instance for fluent chaining
   */
-  T path(string propval)
+  T path(string propval) nothrow
   {
     return setProperty("path", propval);
   }
@@ -227,7 +227,7 @@ class FileInfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           Only regular files are guaranteed to have a size.
       Returns: Builder instance for fluent chaining
   */
-  T size(long propval)
+  T size(long propval) nothrow
   {
     return setProperty("size", propval);
   }
@@ -238,7 +238,7 @@ class FileInfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The type of the entry.
       Returns: Builder instance for fluent chaining
   */
-  T type(arrow.types.FileType propval)
+  T type(arrow.types.FileType propval) nothrow
   {
     return setProperty("type", propval);
   }
@@ -251,7 +251,7 @@ final class FileInfoGidBuilder : FileInfoGidBuilderImpl!FileInfoGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FileInfo build()
+  FileInfo build() nothrow
   {
     return new FileInfo(cast(void*)createGObject(FileInfo._getGType), Yes.Take);
   }

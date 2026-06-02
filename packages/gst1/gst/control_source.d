@@ -28,26 +28,26 @@ class ControlSource : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_control_source_get_type != &gidSymbolNotFound ? gst_control_source_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ControlSource self()
+  override ControlSource self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class ControlSource : gst.object.ObjectWrap
       Get builder for [gst.control_source.ControlSource]
       Returns: New builder object
   */
-  static ControlSourceGidBuilder builder()
+  static ControlSourceGidBuilder builder() nothrow
   {
     return new ControlSourceGidBuilder;
   }
@@ -69,7 +69,7 @@ class ControlSource : gst.object.ObjectWrap
         value = the value
       Returns: false if the value couldn't be returned, true otherwise.
   */
-  bool controlSourceGetValue(gst.types.ClockTime timestamp, out double value)
+  bool controlSourceGetValue(gst.types.ClockTime timestamp, out double value) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_control_source_get_value(cast(GstControlSource*)this._cPtr, timestamp, cast(double*)&value);
@@ -86,7 +86,7 @@ class ControlSource : gst.object.ObjectWrap
         values = array to put control-values in
       Returns: true if the given array could be filled, false otherwise
   */
-  bool controlSourceGetValueArray(gst.types.ClockTime timestamp, gst.types.ClockTime interval, double[] values)
+  bool controlSourceGetValueArray(gst.types.ClockTime timestamp, gst.types.ClockTime interval, double[] values) nothrow
   {
     bool _retval;
     uint _nValues;
@@ -111,7 +111,7 @@ final class ControlSourceGidBuilder : ControlSourceGidBuilderImpl!ControlSourceG
       Create object from builder.
       Returns: New object
   */
-  ControlSource build()
+  ControlSource build() nothrow
   {
     return new ControlSource(cast(void*)createGObject(ControlSource._getGType), No.Take);
   }

@@ -44,26 +44,26 @@ class TagDemux : gst.element.Element
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_tag_demux_get_type != &gidSymbolNotFound ? gst_tag_demux_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TagDemux self()
+  override TagDemux self() nothrow
   {
     return this;
   }
@@ -72,7 +72,7 @@ class TagDemux : gst.element.Element
       Get builder for [gsttag.tag_demux.TagDemux]
       Returns: New builder object
   */
-  static TagDemuxGidBuilder builder()
+  static TagDemuxGidBuilder builder() nothrow
   {
     return new TagDemuxGidBuilder;
   }
@@ -90,7 +90,7 @@ final class TagDemuxGidBuilder : TagDemuxGidBuilderImpl!TagDemuxGidBuilder
       Create object from builder.
       Returns: New object
   */
-  TagDemux build()
+  TagDemux build() nothrow
   {
     return new TagDemux(cast(void*)createGObject(TagDemux._getGType), No.Take);
   }

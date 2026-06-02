@@ -51,26 +51,26 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_clamp_get_type != &gidSymbolNotFound ? adw_clamp_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Clamp self()
+  override Clamp self() nothrow
   {
     return this;
   }
@@ -79,7 +79,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
       Get builder for [adw.clamp.Clamp]
       Returns: New builder object
   */
-  static ClampGidBuilder builder()
+  static ClampGidBuilder builder() nothrow
   {
     return new ClampGidBuilder;
   }
@@ -88,7 +88,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
       Get `child` property.
       Returns: The child widget of the [adw.clamp.Clamp].
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -98,7 +98,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         propval = The child widget of the [adw.clamp.Clamp].
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -109,7 +109,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
         
         It is the width if the clamp is horizontal, or the height if it is vertical.
   */
-  @property int maximumSize()
+  @property int maximumSize() nothrow
   {
     return getMaximumSize();
   }
@@ -121,7 +121,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
           
           It is the width if the clamp is horizontal, or the height if it is vertical.
   */
-  @property void maximumSize(int propval)
+  @property void maximumSize(int propval) nothrow
   {
     setMaximumSize(propval);
   }
@@ -143,7 +143,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
         Effectively, tightening the grip on the child before it reaches its maximum
         size makes transitions to and from the maximum size smoother when resizing.
   */
-  @property int tighteningThreshold()
+  @property int tighteningThreshold() nothrow
   {
     return getTighteningThreshold();
   }
@@ -166,7 +166,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
           Effectively, tightening the grip on the child before it reaches its maximum
           size makes transitions to and from the maximum size smoother when resizing.
   */
-  @property void tighteningThreshold(int propval)
+  @property void tighteningThreshold(int propval) nothrow
   {
     setTighteningThreshold(propval);
   }
@@ -177,7 +177,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
         
         Allows the sizes to vary depending on the text scale factor.
   */
-  @property adw.types.LengthUnit unit()
+  @property adw.types.LengthUnit unit() nothrow
   {
     return getUnit();
   }
@@ -189,7 +189,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
           
           Allows the sizes to vary depending on the text scale factor.
   */
-  @property void unit(adw.types.LengthUnit propval)
+  @property void unit(adw.types.LengthUnit propval) nothrow
   {
     setUnit(propval);
   }
@@ -200,7 +200,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
       Creates a new [adw.clamp.Clamp].
       Returns: the newly created [adw.clamp.Clamp]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_clamp_new();
@@ -211,7 +211,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
       Gets the child widget of self.
       Returns: the child widget of self
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_clamp_get_child(cast(AdwClamp*)this._cPtr);
@@ -223,7 +223,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
       Gets the maximum size allocated to the child.
       Returns: the maximum size to allocate to the child
   */
-  int getMaximumSize()
+  int getMaximumSize() nothrow
   {
     int _retval;
     _retval = adw_clamp_get_maximum_size(cast(AdwClamp*)this._cPtr);
@@ -234,7 +234,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
       Gets the size above which the child is clamped.
       Returns: the size above which the child is clamped
   */
-  int getTighteningThreshold()
+  int getTighteningThreshold() nothrow
   {
     int _retval;
     _retval = adw_clamp_get_tightening_threshold(cast(AdwClamp*)this._cPtr);
@@ -245,7 +245,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
       Gets the length unit for maximum size and tightening threshold.
       Returns: the length unit
   */
-  adw.types.LengthUnit getUnit()
+  adw.types.LengthUnit getUnit() nothrow
   {
     AdwLengthUnit _cretval;
     _cretval = adw_clamp_get_unit(cast(AdwClamp*)this._cPtr);
@@ -259,7 +259,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     adw_clamp_set_child(cast(AdwClamp*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -272,7 +272,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         maximumSize = the maximum size
   */
-  void setMaximumSize(int maximumSize)
+  void setMaximumSize(int maximumSize) nothrow
   {
     adw_clamp_set_maximum_size(cast(AdwClamp*)this._cPtr, maximumSize);
   }
@@ -296,7 +296,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         tighteningThreshold = the tightening threshold
   */
-  void setTighteningThreshold(int tighteningThreshold)
+  void setTighteningThreshold(int tighteningThreshold) nothrow
   {
     adw_clamp_set_tightening_threshold(cast(AdwClamp*)this._cPtr, tighteningThreshold);
   }
@@ -309,7 +309,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         unit = the length unit
   */
-  void setUnit(adw.types.LengthUnit unit)
+  void setUnit(adw.types.LengthUnit unit) nothrow
   {
     adw_clamp_set_unit(cast(AdwClamp*)this._cPtr, unit);
   }
@@ -327,7 +327,7 @@ class ClampGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable
         propval = The child widget of the [adw.clamp.Clamp].
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -340,7 +340,7 @@ class ClampGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable
           It is the width if the clamp is horizontal, or the height if it is vertical.
       Returns: Builder instance for fluent chaining
   */
-  T maximumSize(int propval)
+  T maximumSize(int propval) nothrow
   {
     return setProperty("maximum-size", propval);
   }
@@ -364,7 +364,7 @@ class ClampGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable
           size makes transitions to and from the maximum size smoother when resizing.
       Returns: Builder instance for fluent chaining
   */
-  T tighteningThreshold(int propval)
+  T tighteningThreshold(int propval) nothrow
   {
     return setProperty("tightening-threshold", propval);
   }
@@ -377,7 +377,7 @@ class ClampGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable
           Allows the sizes to vary depending on the text scale factor.
       Returns: Builder instance for fluent chaining
   */
-  T unit(adw.types.LengthUnit propval)
+  T unit(adw.types.LengthUnit propval) nothrow
   {
     return setProperty("unit", propval);
   }
@@ -390,7 +390,7 @@ final class ClampGidBuilder : ClampGidBuilderImpl!ClampGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Clamp build()
+  Clamp build() nothrow
   {
     return new Clamp(cast(void*)createGObject(Clamp._getGType), No.Take);
   }

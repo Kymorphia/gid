@@ -26,26 +26,26 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_memory_input_stream_get_type != &gidSymbolNotFound ? g_memory_input_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MemoryInputStream self()
+  override MemoryInputStream self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
       Get builder for [gio.memory_input_stream.MemoryInputStream]
       Returns: New builder object
   */
-  static MemoryInputStreamGidBuilder builder()
+  static MemoryInputStreamGidBuilder builder() nothrow
   {
     return new MemoryInputStreamGidBuilder;
   }
@@ -66,7 +66,7 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
       Creates a new empty #GMemoryInputStream.
       Returns: a new #GInputStream
   */
-  this()
+  this() nothrow
   {
     GInputStream* _cretval;
     _cretval = g_memory_input_stream_new();
@@ -80,7 +80,7 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
         bytes = a #GBytes
       Returns: new #GInputStream read from bytes
   */
-  static gio.memory_input_stream.MemoryInputStream newFromBytes(glib.bytes.Bytes bytes)
+  static gio.memory_input_stream.MemoryInputStream newFromBytes(glib.bytes.Bytes bytes) nothrow
   {
     GInputStream* _cretval;
     _cretval = g_memory_input_stream_new_from_bytes(bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null);
@@ -94,7 +94,7 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
       Params:
         bytes = input data
   */
-  void addBytes(glib.bytes.Bytes bytes)
+  void addBytes(glib.bytes.Bytes bytes) nothrow
   {
     g_memory_input_stream_add_bytes(cast(GMemoryInputStream*)this._cPtr, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null);
   }
@@ -115,7 +115,7 @@ final class MemoryInputStreamGidBuilder : MemoryInputStreamGidBuilderImpl!Memory
       Create object from builder.
       Returns: New object
   */
-  MemoryInputStream build()
+  MemoryInputStream build() nothrow
   {
     return new MemoryInputStream(cast(void*)createGObject(MemoryInputStream._getGType), Yes.Take);
   }

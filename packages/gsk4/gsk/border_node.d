@@ -17,11 +17,8 @@ class BorderNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.border_node.BorderNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -39,7 +36,7 @@ class BorderNode : gsk.render_node.RenderNode
               bottom and left side.
       Returns: A new [gsk.render_node.RenderNode]
   */
-  this(gsk.rounded_rect.RoundedRect outline, float[] borderWidth, gdk.rgba.RGBA[] borderColor)
+  this(gsk.rounded_rect.RoundedRect outline, float[] borderWidth, gdk.rgba.RGBA[] borderColor) nothrow
   {
     GskRenderNode* _cretval;
     assert(!borderWidth || borderWidth.length == 4);
@@ -55,7 +52,7 @@ class BorderNode : gsk.render_node.RenderNode
       Returns: an array of 4 [gdk.rgba.RGBA] structs
             for the top, right, bottom and left color of the border
   */
-  gdk.rgba.RGBA getColors()
+  gdk.rgba.RGBA getColors() nothrow
   {
     const(GdkRGBA)* _cretval;
     _cretval = gsk_border_node_get_colors(cast(const(GskRenderNode)*)this._cPtr);
@@ -69,7 +66,7 @@ class BorderNode : gsk.render_node.RenderNode
       Retrieves the outline of the border.
       Returns: the outline of the border
   */
-  gsk.rounded_rect.RoundedRect getOutline()
+  gsk.rounded_rect.RoundedRect getOutline() nothrow
   {
     const(GskRoundedRect)* _cretval;
     _cretval = gsk_border_node_get_outline(cast(const(GskRenderNode)*)this._cPtr);
@@ -83,7 +80,7 @@ class BorderNode : gsk.render_node.RenderNode
           for the top, right, bottom and left stroke width of the border,
           respectively
   */
-  float[] getWidths()
+  float[] getWidths() nothrow
   {
     const(float)* _cretval;
     _cretval = gsk_border_node_get_widths(cast(const(GskRenderNode)*)this._cPtr);

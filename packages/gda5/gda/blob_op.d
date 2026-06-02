@@ -15,26 +15,26 @@ class BlobOp : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_blob_op_get_type != &gidSymbolNotFound ? gda_blob_op_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BlobOp self()
+  override BlobOp self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class BlobOp : gobject.object.ObjectWrap
       Get builder for [gda.blob_op.BlobOp]
       Returns: New builder object
   */
-  static BlobOpGidBuilder builder()
+  static BlobOpGidBuilder builder() nothrow
   {
     return new BlobOpGidBuilder;
   }
 
   /** */
-  glong getLength()
+  glong getLength() nothrow
   {
     glong _retval;
     _retval = gda_blob_op_get_length(cast(GdaBlobOp*)this._cPtr);
@@ -66,7 +66,7 @@ class BlobOp : gobject.object.ObjectWrap
       Returns: the number of bytes actually read. In case of error, -1 is returned and the
         provider should have added an error to the connection.
   */
-  glong read(gda.blob.Blob blob, glong offset, glong size)
+  glong read(gda.blob.Blob blob, glong offset, glong size) nothrow
   {
     glong _retval;
     _retval = gda_blob_op_read(cast(GdaBlobOp*)this._cPtr, blob ? cast(GdaBlob*)blob._cPtr(No.Dup) : null, offset, size);
@@ -80,7 +80,7 @@ class BlobOp : gobject.object.ObjectWrap
         blob = a #GdaBlob to read data to
       Returns: TRUE if blob->data contains the whole BLOB manipulated by op
   */
-  bool readAll(gda.blob.Blob blob)
+  bool readAll(gda.blob.Blob blob) nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_blob_op_read_all(cast(GdaBlobOp*)this._cPtr, blob ? cast(GdaBlob*)blob._cPtr(No.Dup) : null);
@@ -100,7 +100,7 @@ class BlobOp : gobject.object.ObjectWrap
       Returns: the number of bytes written. In case of error, -1 is returned and the
         provider should have added an error to the connection.
   */
-  glong write(gda.blob.Blob blob, glong offset)
+  glong write(gda.blob.Blob blob, glong offset) nothrow
   {
     glong _retval;
     _retval = gda_blob_op_write(cast(GdaBlobOp*)this._cPtr, blob ? cast(GdaBlob*)blob._cPtr(No.Dup) : null, offset);
@@ -115,7 +115,7 @@ class BlobOp : gobject.object.ObjectWrap
         blob = a #GdaBlob which contains the data to write
       Returns: TRUE on success
   */
-  bool writeAll(gda.blob.Blob blob)
+  bool writeAll(gda.blob.Blob blob) nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_blob_op_write_all(cast(GdaBlobOp*)this._cPtr, blob ? cast(GdaBlob*)blob._cPtr(No.Dup) : null);
@@ -135,7 +135,7 @@ final class BlobOpGidBuilder : BlobOpGidBuilderImpl!BlobOpGidBuilder
       Create object from builder.
       Returns: New object
   */
-  BlobOp build()
+  BlobOp build() nothrow
   {
     return new BlobOp(cast(void*)createGObject(BlobOp._getGType), No.Take);
   }

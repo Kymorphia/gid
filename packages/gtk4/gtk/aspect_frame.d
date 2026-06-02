@@ -36,26 +36,26 @@ class AspectFrame : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_aspect_frame_get_type != &gidSymbolNotFound ? gtk_aspect_frame_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AspectFrame self()
+  override AspectFrame self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class AspectFrame : gtk.widget.Widget
       Get builder for [gtk.aspect_frame.AspectFrame]
       Returns: New builder object
   */
-  static AspectFrameGidBuilder builder()
+  static AspectFrameGidBuilder builder() nothrow
   {
     return new AspectFrameGidBuilder;
   }
@@ -73,7 +73,7 @@ class AspectFrame : gtk.widget.Widget
       Get `child` property.
       Returns: The child widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -83,7 +83,7 @@ class AspectFrame : gtk.widget.Widget
       Params:
         propval = The child widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -92,7 +92,7 @@ class AspectFrame : gtk.widget.Widget
       Get `obeyChild` property.
       Returns: Whether the [gtk.aspect_frame.AspectFrame] should use the aspect ratio of its child.
   */
-  @property bool obeyChild()
+  @property bool obeyChild() nothrow
   {
     return getObeyChild();
   }
@@ -102,7 +102,7 @@ class AspectFrame : gtk.widget.Widget
       Params:
         propval = Whether the [gtk.aspect_frame.AspectFrame] should use the aspect ratio of its child.
   */
-  @property void obeyChild(bool propval)
+  @property void obeyChild(bool propval) nothrow
   {
     setObeyChild(propval);
   }
@@ -114,7 +114,7 @@ class AspectFrame : gtk.widget.Widget
         This property is only used if
         [gtk.aspect_frame.AspectFrame.obeyChild] is set to false.
   */
-  @property float ratio()
+  @property float ratio() nothrow
   {
     return getRatio();
   }
@@ -127,7 +127,7 @@ class AspectFrame : gtk.widget.Widget
           This property is only used if
           [gtk.aspect_frame.AspectFrame.obeyChild] is set to false.
   */
-  @property void ratio(float propval)
+  @property void ratio(float propval) nothrow
   {
     setRatio(propval);
   }
@@ -136,7 +136,7 @@ class AspectFrame : gtk.widget.Widget
       Get `xalign` property.
       Returns: The horizontal alignment of the child.
   */
-  @property float xalign()
+  @property float xalign() nothrow
   {
     return getXalign();
   }
@@ -146,7 +146,7 @@ class AspectFrame : gtk.widget.Widget
       Params:
         propval = The horizontal alignment of the child.
   */
-  @property void xalign(float propval)
+  @property void xalign(float propval) nothrow
   {
     setXalign(propval);
   }
@@ -155,7 +155,7 @@ class AspectFrame : gtk.widget.Widget
       Get `yalign` property.
       Returns: The vertical alignment of the child.
   */
-  @property float yalign()
+  @property float yalign() nothrow
   {
     return getYalign();
   }
@@ -165,7 +165,7 @@ class AspectFrame : gtk.widget.Widget
       Params:
         propval = The vertical alignment of the child.
   */
-  @property void yalign(float propval)
+  @property void yalign(float propval) nothrow
   {
     setYalign(propval);
   }
@@ -183,7 +183,7 @@ class AspectFrame : gtk.widget.Widget
             ratio is taken from the requistion of the child.
       Returns: the new [gtk.aspect_frame.AspectFrame].
   */
-  this(float xalign, float yalign, float ratio, bool obeyChild)
+  this(float xalign, float yalign, float ratio, bool obeyChild) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_aspect_frame_new(xalign, yalign, ratio, obeyChild);
@@ -194,7 +194,7 @@ class AspectFrame : gtk.widget.Widget
       Gets the child widget of self.
       Returns: the child widget of self
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_aspect_frame_get_child(cast(GtkAspectFrame*)this._cPtr);
@@ -207,7 +207,7 @@ class AspectFrame : gtk.widget.Widget
       the set aspect ratio of the [gtk.aspect_frame.AspectFrame].
       Returns: whether to obey the child's size request
   */
-  bool getObeyChild()
+  bool getObeyChild() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_aspect_frame_get_obey_child(cast(GtkAspectFrame*)this._cPtr);
@@ -218,7 +218,7 @@ class AspectFrame : gtk.widget.Widget
       Returns the desired aspect ratio of the child.
       Returns: the desired aspect ratio
   */
-  float getRatio()
+  float getRatio() nothrow
   {
     float _retval;
     _retval = gtk_aspect_frame_get_ratio(cast(GtkAspectFrame*)this._cPtr);
@@ -230,7 +230,7 @@ class AspectFrame : gtk.widget.Widget
       allocation of the [gtk.aspect_frame.AspectFrame].
       Returns: the horizontal alignment
   */
-  float getXalign()
+  float getXalign() nothrow
   {
     float _retval;
     _retval = gtk_aspect_frame_get_xalign(cast(GtkAspectFrame*)this._cPtr);
@@ -242,7 +242,7 @@ class AspectFrame : gtk.widget.Widget
       allocation of the [gtk.aspect_frame.AspectFrame].
       Returns: the vertical alignment
   */
-  float getYalign()
+  float getYalign() nothrow
   {
     float _retval;
     _retval = gtk_aspect_frame_get_yalign(cast(GtkAspectFrame*)this._cPtr);
@@ -255,7 +255,7 @@ class AspectFrame : gtk.widget.Widget
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     gtk_aspect_frame_set_child(cast(GtkAspectFrame*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -269,7 +269,7 @@ class AspectFrame : gtk.widget.Widget
         obeyChild = If true, ratio is ignored, and the aspect
              ratio is taken from the requisition of the child.
   */
-  void setObeyChild(bool obeyChild)
+  void setObeyChild(bool obeyChild) nothrow
   {
     gtk_aspect_frame_set_obey_child(cast(GtkAspectFrame*)this._cPtr, obeyChild);
   }
@@ -280,7 +280,7 @@ class AspectFrame : gtk.widget.Widget
       Params:
         ratio = aspect ratio of the child
   */
-  void setRatio(float ratio)
+  void setRatio(float ratio) nothrow
   {
     gtk_aspect_frame_set_ratio(cast(GtkAspectFrame*)this._cPtr, ratio);
   }
@@ -292,7 +292,7 @@ class AspectFrame : gtk.widget.Widget
       Params:
         xalign = horizontal alignment, from 0.0 (left aligned) to 1.0 (right aligned)
   */
-  void setXalign(float xalign)
+  void setXalign(float xalign) nothrow
   {
     gtk_aspect_frame_set_xalign(cast(GtkAspectFrame*)this._cPtr, xalign);
   }
@@ -304,7 +304,7 @@ class AspectFrame : gtk.widget.Widget
       Params:
         yalign = horizontal alignment, from 0.0 (top aligned) to 1.0 (bottom aligned)
   */
-  void setYalign(float yalign)
+  void setYalign(float yalign) nothrow
   {
     gtk_aspect_frame_set_yalign(cast(GtkAspectFrame*)this._cPtr, yalign);
   }
@@ -321,7 +321,7 @@ class AspectFrameGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The child widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -332,7 +332,7 @@ class AspectFrameGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether the [gtk.aspect_frame.AspectFrame] should use the aspect ratio of its child.
       Returns: Builder instance for fluent chaining
   */
-  T obeyChild(bool propval)
+  T obeyChild(bool propval) nothrow
   {
     return setProperty("obey-child", propval);
   }
@@ -346,7 +346,7 @@ class AspectFrameGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           [gtk.aspect_frame.AspectFrame.obeyChild] is set to false.
       Returns: Builder instance for fluent chaining
   */
-  T ratio(float propval)
+  T ratio(float propval) nothrow
   {
     return setProperty("ratio", propval);
   }
@@ -357,7 +357,7 @@ class AspectFrameGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The horizontal alignment of the child.
       Returns: Builder instance for fluent chaining
   */
-  T xalign(float propval)
+  T xalign(float propval) nothrow
   {
     return setProperty("xalign", propval);
   }
@@ -368,7 +368,7 @@ class AspectFrameGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The vertical alignment of the child.
       Returns: Builder instance for fluent chaining
   */
-  T yalign(float propval)
+  T yalign(float propval) nothrow
   {
     return setProperty("yalign", propval);
   }
@@ -381,7 +381,7 @@ final class AspectFrameGidBuilder : AspectFrameGidBuilderImpl!AspectFrameGidBuil
       Create object from builder.
       Returns: New object
   */
-  AspectFrame build()
+  AspectFrame build() nothrow
   {
     return new AspectFrame(cast(void*)createGObject(AspectFrame._getGType), No.Take);
   }

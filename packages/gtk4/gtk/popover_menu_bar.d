@@ -52,26 +52,26 @@ class PopoverMenuBar : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_popover_menu_bar_get_type != &gidSymbolNotFound ? gtk_popover_menu_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PopoverMenuBar self()
+  override PopoverMenuBar self() nothrow
   {
     return this;
   }
@@ -80,7 +80,7 @@ class PopoverMenuBar : gtk.widget.Widget
       Get builder for [gtk.popover_menu_bar.PopoverMenuBar]
       Returns: New builder object
   */
-  static PopoverMenuBarGidBuilder builder()
+  static PopoverMenuBarGidBuilder builder() nothrow
   {
     return new PopoverMenuBarGidBuilder;
   }
@@ -91,7 +91,7 @@ class PopoverMenuBar : gtk.widget.Widget
         
         The model should only contain submenus as toplevel elements.
   */
-  @property gio.menu_model.MenuModel menuModel()
+  @property gio.menu_model.MenuModel menuModel() nothrow
   {
     return getMenuModel();
   }
@@ -103,7 +103,7 @@ class PopoverMenuBar : gtk.widget.Widget
           
           The model should only contain submenus as toplevel elements.
   */
-  @property void menuModel(gio.menu_model.MenuModel propval)
+  @property void menuModel(gio.menu_model.MenuModel propval) nothrow
   {
     setMenuModel(propval);
   }
@@ -115,7 +115,7 @@ class PopoverMenuBar : gtk.widget.Widget
         model = a [gio.menu_model.MenuModel]
       Returns: a new [gtk.popover_menu_bar.PopoverMenuBar]
   */
-  static gtk.popover_menu_bar.PopoverMenuBar newFromModel(gio.menu_model.MenuModel model = null)
+  static gtk.popover_menu_bar.PopoverMenuBar newFromModel(gio.menu_model.MenuModel model = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_menu_bar_new_from_model(model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
@@ -134,7 +134,7 @@ class PopoverMenuBar : gtk.widget.Widget
         id = the ID to insert child at
       Returns: true if id was found and the widget added
   */
-  bool addChild(gtk.widget.Widget child, string id)
+  bool addChild(gtk.widget.Widget child, string id) nothrow
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -146,7 +146,7 @@ class PopoverMenuBar : gtk.widget.Widget
       Returns the model from which the contents of bar are taken.
       Returns: a [gio.menu_model.MenuModel]
   */
-  gio.menu_model.MenuModel getMenuModel()
+  gio.menu_model.MenuModel getMenuModel() nothrow
   {
     GMenuModel* _cretval;
     _cretval = gtk_popover_menu_bar_get_menu_model(cast(GtkPopoverMenuBar*)this._cPtr);
@@ -162,7 +162,7 @@ class PopoverMenuBar : gtk.widget.Widget
         child = the [gtk.widget.Widget] to remove
       Returns: true if the widget was removed
   */
-  bool removeChild(gtk.widget.Widget child)
+  bool removeChild(gtk.widget.Widget child) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_popover_menu_bar_remove_child(cast(GtkPopoverMenuBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -176,7 +176,7 @@ class PopoverMenuBar : gtk.widget.Widget
       Params:
         model = a [gio.menu_model.MenuModel]
   */
-  void setMenuModel(gio.menu_model.MenuModel model = null)
+  void setMenuModel(gio.menu_model.MenuModel model = null) nothrow
   {
     gtk_popover_menu_bar_set_menu_model(cast(GtkPopoverMenuBar*)this._cPtr, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
   }
@@ -195,7 +195,7 @@ class PopoverMenuBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           The model should only contain submenus as toplevel elements.
       Returns: Builder instance for fluent chaining
   */
-  T menuModel(gio.menu_model.MenuModel propval)
+  T menuModel(gio.menu_model.MenuModel propval) nothrow
   {
     return setProperty("menu-model", propval);
   }
@@ -208,7 +208,7 @@ final class PopoverMenuBarGidBuilder : PopoverMenuBarGidBuilderImpl!PopoverMenuB
       Create object from builder.
       Returns: New object
   */
-  PopoverMenuBar build()
+  PopoverMenuBar build() nothrow
   {
     return new PopoverMenuBar(cast(void*)createGObject(PopoverMenuBar._getGType), No.Take);
   }

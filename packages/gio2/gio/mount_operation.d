@@ -39,26 +39,26 @@ class MountOperation : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mount_operation_get_type != &gidSymbolNotFound ? g_mount_operation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MountOperation self()
+  override MountOperation self() nothrow
   {
     return this;
   }
@@ -67,7 +67,7 @@ class MountOperation : gobject.object.ObjectWrap
       Get builder for [gio.mount_operation.MountOperation]
       Returns: New builder object
   */
-  static MountOperationGidBuilder builder()
+  static MountOperationGidBuilder builder() nothrow
   {
     return new MountOperationGidBuilder;
   }
@@ -76,7 +76,7 @@ class MountOperation : gobject.object.ObjectWrap
       Get `anonymous` property.
       Returns: Whether to use an anonymous user when authenticating.
   */
-  @property bool anonymous()
+  @property bool anonymous() nothrow
   {
     return getAnonymous();
   }
@@ -86,7 +86,7 @@ class MountOperation : gobject.object.ObjectWrap
       Params:
         propval = Whether to use an anonymous user when authenticating.
   */
-  @property void anonymous(bool propval)
+  @property void anonymous(bool propval) nothrow
   {
     setAnonymous(propval);
   }
@@ -96,7 +96,7 @@ class MountOperation : gobject.object.ObjectWrap
       Returns: The index of the user's choice when a question is asked during the
         mount operation. See the #GMountOperation::ask-question signal.
   */
-  @property int choice()
+  @property int choice() nothrow
   {
     return getChoice();
   }
@@ -107,7 +107,7 @@ class MountOperation : gobject.object.ObjectWrap
         propval = The index of the user's choice when a question is asked during the
           mount operation. See the #GMountOperation::ask-question signal.
   */
-  @property void choice(int propval)
+  @property void choice(int propval) nothrow
   {
     setChoice(propval);
   }
@@ -116,7 +116,7 @@ class MountOperation : gobject.object.ObjectWrap
       Get `domain` property.
       Returns: The domain to use for the mount operation.
   */
-  @property string domain()
+  @property string domain() nothrow
   {
     return getDomain();
   }
@@ -126,7 +126,7 @@ class MountOperation : gobject.object.ObjectWrap
       Params:
         propval = The domain to use for the mount operation.
   */
-  @property void domain(string propval)
+  @property void domain(string propval) nothrow
   {
     setDomain(propval);
   }
@@ -136,7 +136,7 @@ class MountOperation : gobject.object.ObjectWrap
       Returns: Whether the device to be unlocked is a TCRYPT hidden volume.
         See [the VeraCrypt documentation](https://www.veracrypt.fr/en/Hidden`20Volume`.html).
   */
-  @property bool isTcryptHiddenVolume()
+  @property bool isTcryptHiddenVolume() nothrow
   {
     return getIsTcryptHiddenVolume();
   }
@@ -147,7 +147,7 @@ class MountOperation : gobject.object.ObjectWrap
         propval = Whether the device to be unlocked is a TCRYPT hidden volume.
           See [the VeraCrypt documentation](https://www.veracrypt.fr/en/Hidden`20Volume`.html).
   */
-  @property void isTcryptHiddenVolume(bool propval)
+  @property void isTcryptHiddenVolume(bool propval) nothrow
   {
     setIsTcryptHiddenVolume(propval);
   }
@@ -160,7 +160,7 @@ class MountOperation : gobject.object.ObjectWrap
         operating systems. For further documentation, see
         [the VeraCrypt documentation](https://www.veracrypt.fr/en/System`20Encryption`.html).
   */
-  @property bool isTcryptSystemVolume()
+  @property bool isTcryptSystemVolume() nothrow
   {
     return getIsTcryptSystemVolume();
   }
@@ -174,7 +174,7 @@ class MountOperation : gobject.object.ObjectWrap
           operating systems. For further documentation, see
           [the VeraCrypt documentation](https://www.veracrypt.fr/en/System`20Encryption`.html).
   */
-  @property void isTcryptSystemVolume(bool propval)
+  @property void isTcryptSystemVolume(bool propval) nothrow
   {
     setIsTcryptSystemVolume(propval);
   }
@@ -184,7 +184,7 @@ class MountOperation : gobject.object.ObjectWrap
       Returns: The password that is used for authentication when carrying out
         the mount operation.
   */
-  @property string password()
+  @property string password() nothrow
   {
     return getPassword();
   }
@@ -195,7 +195,7 @@ class MountOperation : gobject.object.ObjectWrap
         propval = The password that is used for authentication when carrying out
           the mount operation.
   */
-  @property void password(string propval)
+  @property void password(string propval) nothrow
   {
     setPassword(propval);
   }
@@ -204,7 +204,7 @@ class MountOperation : gobject.object.ObjectWrap
       Get `passwordSave` property.
       Returns: Determines if and how the password information should be saved.
   */
-  @property gio.types.PasswordSave passwordSave()
+  @property gio.types.PasswordSave passwordSave() nothrow
   {
     return getPasswordSave();
   }
@@ -214,7 +214,7 @@ class MountOperation : gobject.object.ObjectWrap
       Params:
         propval = Determines if and how the password information should be saved.
   */
-  @property void passwordSave(gio.types.PasswordSave propval)
+  @property void passwordSave(gio.types.PasswordSave propval) nothrow
   {
     setPasswordSave(propval);
   }
@@ -224,7 +224,7 @@ class MountOperation : gobject.object.ObjectWrap
       Returns: The VeraCrypt PIM value, when unlocking a VeraCrypt volume. See
         [the VeraCrypt documentation](https://www.veracrypt.fr/en/Personal`20Iterations``20Multiplier``20`(PIM).html).
   */
-  @property uint pim()
+  @property uint pim() nothrow
   {
     return getPim();
   }
@@ -235,7 +235,7 @@ class MountOperation : gobject.object.ObjectWrap
         propval = The VeraCrypt PIM value, when unlocking a VeraCrypt volume. See
           [the VeraCrypt documentation](https://www.veracrypt.fr/en/Personal`20Iterations``20Multiplier``20`(PIM).html).
   */
-  @property void pim(uint propval)
+  @property void pim(uint propval) nothrow
   {
     setPim(propval);
   }
@@ -245,7 +245,7 @@ class MountOperation : gobject.object.ObjectWrap
       Returns: The user name that is used for authentication when carrying out
         the mount operation.
   */
-  @property string username()
+  @property string username() nothrow
   {
     return getUsername();
   }
@@ -256,7 +256,7 @@ class MountOperation : gobject.object.ObjectWrap
         propval = The user name that is used for authentication when carrying out
           the mount operation.
   */
-  @property void username(string propval)
+  @property void username(string propval) nothrow
   {
     setUsername(propval);
   }
@@ -265,7 +265,7 @@ class MountOperation : gobject.object.ObjectWrap
       Creates a new mount operation.
       Returns: a #GMountOperation.
   */
-  this()
+  this() nothrow
   {
     GMountOperation* _cretval;
     _cretval = g_mount_operation_new();
@@ -277,7 +277,7 @@ class MountOperation : gobject.object.ObjectWrap
       for an anonymous user.
       Returns: true if mount operation is anonymous.
   */
-  bool getAnonymous()
+  bool getAnonymous() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mount_operation_get_anonymous(cast(GMountOperation*)this._cPtr);
@@ -289,7 +289,7 @@ class MountOperation : gobject.object.ObjectWrap
       Returns: an integer containing an index of the user's choice from
         the choice's list, or `0`.
   */
-  int getChoice()
+  int getChoice() nothrow
   {
     int _retval;
     _retval = g_mount_operation_get_choice(cast(GMountOperation*)this._cPtr);
@@ -300,7 +300,7 @@ class MountOperation : gobject.object.ObjectWrap
       Gets the domain of the mount operation.
       Returns: a string set to the domain.
   */
-  string getDomain()
+  string getDomain() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mount_operation_get_domain(cast(GMountOperation*)this._cPtr);
@@ -313,7 +313,7 @@ class MountOperation : gobject.object.ObjectWrap
       for a TCRYPT hidden volume.
       Returns: true if mount operation is for hidden volume.
   */
-  bool getIsTcryptHiddenVolume()
+  bool getIsTcryptHiddenVolume() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mount_operation_get_is_tcrypt_hidden_volume(cast(GMountOperation*)this._cPtr);
@@ -325,7 +325,7 @@ class MountOperation : gobject.object.ObjectWrap
       for a TCRYPT system volume.
       Returns: true if mount operation is for system volume.
   */
-  bool getIsTcryptSystemVolume()
+  bool getIsTcryptSystemVolume() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mount_operation_get_is_tcrypt_system_volume(cast(GMountOperation*)this._cPtr);
@@ -336,7 +336,7 @@ class MountOperation : gobject.object.ObjectWrap
       Gets a password from the mount operation.
       Returns: a string containing the password within op.
   */
-  string getPassword()
+  string getPassword() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mount_operation_get_password(cast(GMountOperation*)this._cPtr);
@@ -348,7 +348,7 @@ class MountOperation : gobject.object.ObjectWrap
       Gets the state of saving passwords for the mount operation.
       Returns: a #GPasswordSave flag.
   */
-  gio.types.PasswordSave getPasswordSave()
+  gio.types.PasswordSave getPasswordSave() nothrow
   {
     GPasswordSave _cretval;
     _cretval = g_mount_operation_get_password_save(cast(GMountOperation*)this._cPtr);
@@ -360,7 +360,7 @@ class MountOperation : gobject.object.ObjectWrap
       Gets a PIM from the mount operation.
       Returns: The VeraCrypt PIM within op.
   */
-  uint getPim()
+  uint getPim() nothrow
   {
     uint _retval;
     _retval = g_mount_operation_get_pim(cast(GMountOperation*)this._cPtr);
@@ -371,7 +371,7 @@ class MountOperation : gobject.object.ObjectWrap
       Get the user name from the mount operation.
       Returns: a string containing the user name.
   */
-  string getUsername()
+  string getUsername() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mount_operation_get_username(cast(GMountOperation*)this._cPtr);
@@ -385,7 +385,7 @@ class MountOperation : gobject.object.ObjectWrap
       Params:
         result = a #GMountOperationResult
   */
-  void reply(gio.types.MountOperationResult result)
+  void reply(gio.types.MountOperationResult result) nothrow
   {
     g_mount_operation_reply(cast(GMountOperation*)this._cPtr, result);
   }
@@ -396,7 +396,7 @@ class MountOperation : gobject.object.ObjectWrap
       Params:
         anonymous = boolean value.
   */
-  void setAnonymous(bool anonymous)
+  void setAnonymous(bool anonymous) nothrow
   {
     g_mount_operation_set_anonymous(cast(GMountOperation*)this._cPtr, anonymous);
   }
@@ -407,7 +407,7 @@ class MountOperation : gobject.object.ObjectWrap
       Params:
         choice = an integer.
   */
-  void setChoice(int choice)
+  void setChoice(int choice) nothrow
   {
     g_mount_operation_set_choice(cast(GMountOperation*)this._cPtr, choice);
   }
@@ -418,7 +418,7 @@ class MountOperation : gobject.object.ObjectWrap
       Params:
         domain = the domain to set.
   */
-  void setDomain(string domain = null)
+  void setDomain(string domain = null) nothrow
   {
     const(char)* _domain = domain.toCString(No.Alloc);
     g_mount_operation_set_domain(cast(GMountOperation*)this._cPtr, _domain);
@@ -430,7 +430,7 @@ class MountOperation : gobject.object.ObjectWrap
       Params:
         hiddenVolume = boolean value.
   */
-  void setIsTcryptHiddenVolume(bool hiddenVolume)
+  void setIsTcryptHiddenVolume(bool hiddenVolume) nothrow
   {
     g_mount_operation_set_is_tcrypt_hidden_volume(cast(GMountOperation*)this._cPtr, hiddenVolume);
   }
@@ -441,7 +441,7 @@ class MountOperation : gobject.object.ObjectWrap
       Params:
         systemVolume = boolean value.
   */
-  void setIsTcryptSystemVolume(bool systemVolume)
+  void setIsTcryptSystemVolume(bool systemVolume) nothrow
   {
     g_mount_operation_set_is_tcrypt_system_volume(cast(GMountOperation*)this._cPtr, systemVolume);
   }
@@ -452,7 +452,7 @@ class MountOperation : gobject.object.ObjectWrap
       Params:
         password = password to set.
   */
-  void setPassword(string password = null)
+  void setPassword(string password = null) nothrow
   {
     const(char)* _password = password.toCString(No.Alloc);
     g_mount_operation_set_password(cast(GMountOperation*)this._cPtr, _password);
@@ -464,7 +464,7 @@ class MountOperation : gobject.object.ObjectWrap
       Params:
         save = a set of #GPasswordSave flags.
   */
-  void setPasswordSave(gio.types.PasswordSave save)
+  void setPasswordSave(gio.types.PasswordSave save) nothrow
   {
     g_mount_operation_set_password_save(cast(GMountOperation*)this._cPtr, save);
   }
@@ -475,7 +475,7 @@ class MountOperation : gobject.object.ObjectWrap
       Params:
         pim = an unsigned integer.
   */
-  void setPim(uint pim)
+  void setPim(uint pim) nothrow
   {
     g_mount_operation_set_pim(cast(GMountOperation*)this._cPtr, pim);
   }
@@ -486,7 +486,7 @@ class MountOperation : gobject.object.ObjectWrap
       Params:
         username = input username.
   */
-  void setUsername(string username = null)
+  void setUsername(string username = null) nothrow
   {
     const(char)* _username = username.toCString(No.Alloc);
     g_mount_operation_set_username(cast(GMountOperation*)this._cPtr, _username);
@@ -511,13 +511,13 @@ class MountOperation : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAborted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAborted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.mount_operation.MountOperation)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -526,7 +526,14 @@ class MountOperation : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.mount_operation.MountOperation.aborted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -560,7 +567,7 @@ class MountOperation : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAskPassword(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAskPassword(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -570,7 +577,7 @@ class MountOperation : gobject.object.ObjectWrap
   && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gio.mount_operation.MountOperation)))
   && Parameters!T.length < 6)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -591,7 +598,14 @@ class MountOperation : gobject.object.ObjectWrap
       static if (Parameters!T.length > 4)
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.mount_operation.MountOperation.askPassword");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -622,7 +636,7 @@ class MountOperation : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAskQuestion(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAskQuestion(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -630,7 +644,7 @@ class MountOperation : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.mount_operation.MountOperation)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -645,7 +659,14 @@ class MountOperation : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.mount_operation.MountOperation.askQuestion");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -669,14 +690,14 @@ class MountOperation : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectReply(T)(T callback, Flag!"After" after = No.After)
+  gulong connectReply(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gio.types.MountOperationResult)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.mount_operation.MountOperation)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -688,7 +709,14 @@ class MountOperation : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.mount_operation.MountOperation.reply");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -728,7 +756,7 @@ class MountOperation : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectShowProcesses(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowProcesses(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -737,7 +765,7 @@ class MountOperation : gobject.object.ObjectWrap
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gio.mount_operation.MountOperation)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -755,7 +783,14 @@ class MountOperation : gobject.object.ObjectWrap
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.mount_operation.MountOperation.showProcesses");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -801,7 +836,7 @@ class MountOperation : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectShowUnmountProgress(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowUnmountProgress(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -810,7 +845,7 @@ class MountOperation : gobject.object.ObjectWrap
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gio.mount_operation.MountOperation)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -828,7 +863,14 @@ class MountOperation : gobject.object.ObjectWrap
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.mount_operation.MountOperation.showUnmountProgress");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -846,7 +888,7 @@ class MountOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Whether to use an anonymous user when authenticating.
       Returns: Builder instance for fluent chaining
   */
-  T anonymous(bool propval)
+  T anonymous(bool propval) nothrow
   {
     return setProperty("anonymous", propval);
   }
@@ -858,7 +900,7 @@ class MountOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           mount operation. See the #GMountOperation::ask-question signal.
       Returns: Builder instance for fluent chaining
   */
-  T choice(int propval)
+  T choice(int propval) nothrow
   {
     return setProperty("choice", propval);
   }
@@ -869,7 +911,7 @@ class MountOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = The domain to use for the mount operation.
       Returns: Builder instance for fluent chaining
   */
-  T domain(string propval)
+  T domain(string propval) nothrow
   {
     return setProperty("domain", propval);
   }
@@ -881,7 +923,7 @@ class MountOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           See [the VeraCrypt documentation](https://www.veracrypt.fr/en/Hidden`20Volume`.html).
       Returns: Builder instance for fluent chaining
   */
-  T isTcryptHiddenVolume(bool propval)
+  T isTcryptHiddenVolume(bool propval) nothrow
   {
     return setProperty("is-tcrypt-hidden-volume", propval);
   }
@@ -896,7 +938,7 @@ class MountOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           [the VeraCrypt documentation](https://www.veracrypt.fr/en/System`20Encryption`.html).
       Returns: Builder instance for fluent chaining
   */
-  T isTcryptSystemVolume(bool propval)
+  T isTcryptSystemVolume(bool propval) nothrow
   {
     return setProperty("is-tcrypt-system-volume", propval);
   }
@@ -908,7 +950,7 @@ class MountOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           the mount operation.
       Returns: Builder instance for fluent chaining
   */
-  T password(string propval)
+  T password(string propval) nothrow
   {
     return setProperty("password", propval);
   }
@@ -919,7 +961,7 @@ class MountOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Determines if and how the password information should be saved.
       Returns: Builder instance for fluent chaining
   */
-  T passwordSave(gio.types.PasswordSave propval)
+  T passwordSave(gio.types.PasswordSave propval) nothrow
   {
     return setProperty("password-save", propval);
   }
@@ -931,7 +973,7 @@ class MountOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           [the VeraCrypt documentation](https://www.veracrypt.fr/en/Personal`20Iterations``20Multiplier``20`(PIM).html).
       Returns: Builder instance for fluent chaining
   */
-  T pim(uint propval)
+  T pim(uint propval) nothrow
   {
     return setProperty("pim", propval);
   }
@@ -943,7 +985,7 @@ class MountOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           the mount operation.
       Returns: Builder instance for fluent chaining
   */
-  T username(string propval)
+  T username(string propval) nothrow
   {
     return setProperty("username", propval);
   }
@@ -956,7 +998,7 @@ final class MountOperationGidBuilder : MountOperationGidBuilderImpl!MountOperati
       Create object from builder.
       Returns: New object
   */
-  MountOperation build()
+  MountOperation build() nothrow
   {
     return new MountOperation(cast(void*)createGObject(MountOperation._getGType), Yes.Take);
   }

@@ -14,7 +14,7 @@ struct LayoutDeserializeError
   alias Enum = pango.types.LayoutDeserializeError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = pango_layout_deserialize_error_quark();
@@ -24,12 +24,12 @@ struct LayoutDeserializeError
 
 class LayoutDeserializeException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(pango.layout_deserialize_error.LayoutDeserializeError.quark, cast(int)code, msg);
   }

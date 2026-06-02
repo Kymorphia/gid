@@ -18,26 +18,26 @@ class GLShader : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_shader_get_type != &gidSymbolNotFound ? gst_gl_shader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLShader self()
+  override GLShader self() nothrow
   {
     return this;
   }
@@ -46,13 +46,13 @@ class GLShader : gst.object.ObjectWrap
       Get builder for [gstgl.glshader.GLShader]
       Returns: New builder object
   */
-  static GLShaderGidBuilder builder()
+  static GLShaderGidBuilder builder() nothrow
   {
     return new GLShaderGidBuilder;
   }
 
   /** */
-  @property bool linked()
+  @property bool linked() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("linked");
   }
@@ -64,7 +64,7 @@ class GLShader : gst.object.ObjectWrap
         context = a #GstGLContext
       Returns: a new empty shader
   */
-  this(gstgl.glcontext.GLContext context)
+  this(gstgl.glcontext.GLContext context) nothrow
   {
     GstGLShader* _cretval;
     _cretval = gst_gl_shader_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
@@ -91,7 +91,7 @@ class GLShader : gst.object.ObjectWrap
   }
 
   /** */
-  static string stringFragmentExternalOesGetDefault(gstgl.glcontext.GLContext context, gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile)
+  static string stringFragmentExternalOesGetDefault(gstgl.glcontext.GLContext context, gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile) nothrow
   {
     char* _cretval;
     _cretval = gst_gl_shader_string_fragment_external_oes_get_default(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, version_, profile);
@@ -100,7 +100,7 @@ class GLShader : gst.object.ObjectWrap
   }
 
   /** */
-  static string stringFragmentGetDefault(gstgl.glcontext.GLContext context, gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile)
+  static string stringFragmentGetDefault(gstgl.glcontext.GLContext context, gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile) nothrow
   {
     char* _cretval;
     _cretval = gst_gl_shader_string_fragment_get_default(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, version_, profile);
@@ -124,7 +124,7 @@ class GLShader : gst.object.ObjectWrap
       Returns: a shader string defining the precision of float types based on
              context, version and profile
   */
-  static string stringGetHighestPrecision(gstgl.glcontext.GLContext context, gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile)
+  static string stringGetHighestPrecision(gstgl.glcontext.GLContext context, gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_gl_shader_string_get_highest_precision(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, version_, profile);
@@ -142,7 +142,7 @@ class GLShader : gst.object.ObjectWrap
         stage = a #GstGLSLStage to attach
       Returns: whether stage could be attached to shader
   */
-  bool attach(gstgl.glslstage.GLSLStage stage)
+  bool attach(gstgl.glslstage.GLSLStage stage) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_shader_attach(cast(GstGLShader*)this._cPtr, stage ? cast(GstGLSLStage*)stage._cPtr(No.Dup) : null);
@@ -159,7 +159,7 @@ class GLShader : gst.object.ObjectWrap
         stage = a #GstGLSLStage to attach
       Returns: whether stage could be attached to shader
   */
-  bool attachUnlocked(gstgl.glslstage.GLSLStage stage)
+  bool attachUnlocked(gstgl.glslstage.GLSLStage stage) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_shader_attach_unlocked(cast(GstGLShader*)this._cPtr, stage ? cast(GstGLSLStage*)stage._cPtr(No.Dup) : null);
@@ -174,7 +174,7 @@ class GLShader : gst.object.ObjectWrap
         index = attribute index to set
         name = name of the attribute
   */
-  void bindAttributeLocation(uint index, string name)
+  void bindAttributeLocation(uint index, string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gst_gl_shader_bind_attribute_location(cast(GstGLShader*)this._cPtr, index, _name);
@@ -188,7 +188,7 @@ class GLShader : gst.object.ObjectWrap
         index = attribute index to set
         name = name of the attribute
   */
-  void bindFragDataLocation(uint index, string name)
+  void bindFragDataLocation(uint index, string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gst_gl_shader_bind_frag_data_location(cast(GstGLShader*)this._cPtr, index, _name);
@@ -223,7 +223,7 @@ class GLShader : gst.object.ObjectWrap
       Params:
         stage = a #GstGLSLStage to attach
   */
-  void detach(gstgl.glslstage.GLSLStage stage)
+  void detach(gstgl.glslstage.GLSLStage stage) nothrow
   {
     gst_gl_shader_detach(cast(GstGLShader*)this._cPtr, stage ? cast(GstGLSLStage*)stage._cPtr(No.Dup) : null);
   }
@@ -237,13 +237,13 @@ class GLShader : gst.object.ObjectWrap
       Params:
         stage = a #GstGLSLStage to attach
   */
-  void detachUnlocked(gstgl.glslstage.GLSLStage stage)
+  void detachUnlocked(gstgl.glslstage.GLSLStage stage) nothrow
   {
     gst_gl_shader_detach_unlocked(cast(GstGLShader*)this._cPtr, stage ? cast(GstGLSLStage*)stage._cPtr(No.Dup) : null);
   }
 
   /** */
-  int getAttributeLocation(string name)
+  int getAttributeLocation(string name) nothrow
   {
     int _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -252,7 +252,7 @@ class GLShader : gst.object.ObjectWrap
   }
 
   /** */
-  int getProgramHandle()
+  int getProgramHandle() nothrow
   {
     int _retval;
     _retval = gst_gl_shader_get_program_handle(cast(GstGLShader*)this._cPtr);
@@ -263,7 +263,7 @@ class GLShader : gst.object.ObjectWrap
       Note: must be called in the GL thread
       Returns: whether shader has been successfully linked
   */
-  bool isLinked()
+  bool isLinked() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_shader_is_linked(cast(GstGLShader*)this._cPtr);
@@ -292,7 +292,7 @@ class GLShader : gst.object.ObjectWrap
       
       Note: must be called in the GL thread
   */
-  void release()
+  void release() nothrow
   {
     gst_gl_shader_release(cast(GstGLShader*)this._cPtr);
   }
@@ -302,7 +302,7 @@ class GLShader : gst.object.ObjectWrap
       
       Note: must be called in the GL thread
   */
-  void releaseUnlocked()
+  void releaseUnlocked() nothrow
   {
     gst_gl_shader_release_unlocked(cast(GstGLShader*)this._cPtr);
   }
@@ -314,7 +314,7 @@ class GLShader : gst.object.ObjectWrap
         name = name of the uniform
         value = value to set
   */
-  void setUniform1f(string name, float value)
+  void setUniform1f(string name, float value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gst_gl_shader_set_uniform_1f(cast(GstGLShader*)this._cPtr, _name, value);
@@ -327,7 +327,7 @@ class GLShader : gst.object.ObjectWrap
         name = name of the uniform
         value = values to set
   */
-  void setUniform1fv(string name, float[] value)
+  void setUniform1fv(string name, float[] value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     uint _count;
@@ -345,7 +345,7 @@ class GLShader : gst.object.ObjectWrap
         name = name of the uniform
         value = value to set
   */
-  void setUniform1i(string name, int value)
+  void setUniform1i(string name, int value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gst_gl_shader_set_uniform_1i(cast(GstGLShader*)this._cPtr, _name, value);
@@ -358,7 +358,7 @@ class GLShader : gst.object.ObjectWrap
         name = name of the uniform
         value = values to set
   */
-  void setUniform1iv(string name, int[] value)
+  void setUniform1iv(string name, int[] value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     uint _count;
@@ -377,7 +377,7 @@ class GLShader : gst.object.ObjectWrap
         v0 = first value to set
         v1 = second value to set
   */
-  void setUniform2f(string name, float v0, float v1)
+  void setUniform2f(string name, float v0, float v1) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gst_gl_shader_set_uniform_2f(cast(GstGLShader*)this._cPtr, _name, v0, v1);
@@ -390,7 +390,7 @@ class GLShader : gst.object.ObjectWrap
         name = name of the uniform
         value = values to set
   */
-  void setUniform2fv(string name, float[] value)
+  void setUniform2fv(string name, float[] value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     uint _count;
@@ -409,7 +409,7 @@ class GLShader : gst.object.ObjectWrap
         v0 = first value to set
         v1 = second value to set
   */
-  void setUniform2i(string name, int v0, int v1)
+  void setUniform2i(string name, int v0, int v1) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gst_gl_shader_set_uniform_2i(cast(GstGLShader*)this._cPtr, _name, v0, v1);
@@ -422,7 +422,7 @@ class GLShader : gst.object.ObjectWrap
         name = name of the uniform
         value = values to set
   */
-  void setUniform2iv(string name, int[] value)
+  void setUniform2iv(string name, int[] value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     uint _count;
@@ -442,7 +442,7 @@ class GLShader : gst.object.ObjectWrap
         v1 = second value to set
         v2 = third value to set
   */
-  void setUniform3f(string name, float v0, float v1, float v2)
+  void setUniform3f(string name, float v0, float v1, float v2) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gst_gl_shader_set_uniform_3f(cast(GstGLShader*)this._cPtr, _name, v0, v1, v2);
@@ -455,7 +455,7 @@ class GLShader : gst.object.ObjectWrap
         name = name of the uniform
         value = values to set
   */
-  void setUniform3fv(string name, float[] value)
+  void setUniform3fv(string name, float[] value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     uint _count;
@@ -475,7 +475,7 @@ class GLShader : gst.object.ObjectWrap
         v1 = second value to set
         v2 = third value to set
   */
-  void setUniform3i(string name, int v0, int v1, int v2)
+  void setUniform3i(string name, int v0, int v1, int v2) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gst_gl_shader_set_uniform_3i(cast(GstGLShader*)this._cPtr, _name, v0, v1, v2);
@@ -488,7 +488,7 @@ class GLShader : gst.object.ObjectWrap
         name = name of the uniform
         value = values to set
   */
-  void setUniform3iv(string name, int[] value)
+  void setUniform3iv(string name, int[] value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     uint _count;
@@ -509,7 +509,7 @@ class GLShader : gst.object.ObjectWrap
         v2 = third value to set
         v3 = fourth value to set
   */
-  void setUniform4f(string name, float v0, float v1, float v2, float v3)
+  void setUniform4f(string name, float v0, float v1, float v2, float v3) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gst_gl_shader_set_uniform_4f(cast(GstGLShader*)this._cPtr, _name, v0, v1, v2, v3);
@@ -522,7 +522,7 @@ class GLShader : gst.object.ObjectWrap
         name = name of the uniform
         value = values to set
   */
-  void setUniform4fv(string name, float[] value)
+  void setUniform4fv(string name, float[] value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     uint _count;
@@ -543,7 +543,7 @@ class GLShader : gst.object.ObjectWrap
         v2 = third value to set
         v3 = fourth value to set
   */
-  void setUniform4i(string name, int v0, int v1, int v2, int v3)
+  void setUniform4i(string name, int v0, int v1, int v2, int v3) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gst_gl_shader_set_uniform_4i(cast(GstGLShader*)this._cPtr, _name, v0, v1, v2, v3);
@@ -556,7 +556,7 @@ class GLShader : gst.object.ObjectWrap
         name = name of the uniform
         value = values to set
   */
-  void setUniform4iv(string name, int[] value)
+  void setUniform4iv(string name, int[] value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     uint _count;
@@ -572,7 +572,7 @@ class GLShader : gst.object.ObjectWrap
       
       Note: must be called in the GL thread and shader must have been linked.
   */
-  void use()
+  void use() nothrow
   {
     gst_gl_shader_use(cast(GstGLShader*)this._cPtr);
   }
@@ -590,7 +590,7 @@ final class GLShaderGidBuilder : GLShaderGidBuilderImpl!GLShaderGidBuilder
       Create object from builder.
       Returns: New object
   */
-  GLShader build()
+  GLShader build() nothrow
   {
     return new GLShader(cast(void*)createGObject(GLShader._getGType), Yes.Take);
   }

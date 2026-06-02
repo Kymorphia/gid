@@ -17,11 +17,8 @@ class FillNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.fill_node.FillNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -35,7 +32,7 @@ class FillNode : gsk.render_node.RenderNode
         fillRule = The fill rule to use
       Returns: A new [gsk.render_node.RenderNode]
   */
-  this(gsk.render_node.RenderNode child, gsk.path.Path path, gsk.types.FillRule fillRule)
+  this(gsk.render_node.RenderNode child, gsk.path.Path path, gsk.types.FillRule fillRule) nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_fill_node_new(child ? cast(GskRenderNode*)child._cPtr(No.Dup) : null, path ? cast(GskPath*)path._cPtr(No.Dup) : null, fillRule);
@@ -46,7 +43,7 @@ class FillNode : gsk.render_node.RenderNode
       Gets the child node that is getting drawn by the given node.
       Returns: The child that is getting drawn
   */
-  gsk.render_node.RenderNode getChild()
+  gsk.render_node.RenderNode getChild() nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_fill_node_get_child(cast(const(GskRenderNode)*)this._cPtr);
@@ -58,7 +55,7 @@ class FillNode : gsk.render_node.RenderNode
       Retrieves the fill rule used to determine how the path is filled.
       Returns: a [gsk.types.FillRule]
   */
-  gsk.types.FillRule getFillRule()
+  gsk.types.FillRule getFillRule() nothrow
   {
     GskFillRule _cretval;
     _cretval = gsk_fill_node_get_fill_rule(cast(const(GskRenderNode)*)this._cPtr);
@@ -71,7 +68,7 @@ class FillNode : gsk.render_node.RenderNode
       the node.
       Returns: a [gsk.path.Path]
   */
-  gsk.path.Path getPath()
+  gsk.path.Path getPath() nothrow
   {
     GskPath* _cretval;
     _cretval = gsk_fill_node_get_path(cast(const(GskRenderNode)*)this._cPtr);

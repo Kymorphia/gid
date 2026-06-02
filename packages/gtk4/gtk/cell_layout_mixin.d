@@ -144,7 +144,7 @@ template CellLayoutT()
         attribute = a property on the renderer
         column = the column position on the model to get the attribute from
   */
-  override void addAttribute(gtk.cell_renderer.CellRenderer cell, string attribute, int column)
+  override void addAttribute(gtk.cell_renderer.CellRenderer cell, string attribute, int column) nothrow
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
     gtk_cell_layout_add_attribute(cast(GtkCellLayout*)this._cPtr, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, _attribute, column);
@@ -154,7 +154,7 @@ template CellLayoutT()
       Unsets all the mappings on all renderers on cell_layout and
       removes all renderers from cell_layout.
   */
-  override void clear()
+  override void clear() nothrow
   {
     gtk_cell_layout_clear(cast(GtkCellLayout*)this._cPtr);
   }
@@ -166,7 +166,7 @@ template CellLayoutT()
       Params:
         cell = a [gtk.cell_renderer.CellRenderer] to clear the attribute mapping on
   */
-  override void clearAttributes(gtk.cell_renderer.CellRenderer cell)
+  override void clearAttributes(gtk.cell_renderer.CellRenderer cell) nothrow
   {
     gtk_cell_layout_clear_attributes(cast(GtkCellLayout*)this._cPtr, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null);
   }
@@ -177,7 +177,7 @@ template CellLayoutT()
       is used by cell_layout.
       Returns: the cell area used by cell_layout
   */
-  override gtk.cell_area.CellArea getArea()
+  override gtk.cell_area.CellArea getArea() nothrow
   {
     GtkCellArea* _cretval;
     _cretval = gtk_cell_layout_get_area(cast(GtkCellLayout*)this._cPtr);
@@ -191,7 +191,7 @@ template CellLayoutT()
           been newly allocated and should be freed with [glib.list.List.free]
           when no longer needed.
   */
-  override gtk.cell_renderer.CellRenderer[] getCells()
+  override gtk.cell_renderer.CellRenderer[] getCells() nothrow
   {
     GList* _cretval;
     _cretval = gtk_cell_layout_get_cells(cast(GtkCellLayout*)this._cPtr);
@@ -210,7 +210,7 @@ template CellLayoutT()
         cell = a [gtk.cell_renderer.CellRenderer]
         expand = true if cell is to be given extra space allocated to cell_layout
   */
-  override void packEnd(gtk.cell_renderer.CellRenderer cell, bool expand)
+  override void packEnd(gtk.cell_renderer.CellRenderer cell, bool expand) nothrow
   {
     gtk_cell_layout_pack_end(cast(GtkCellLayout*)this._cPtr, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, expand);
   }
@@ -226,7 +226,7 @@ template CellLayoutT()
         cell = a [gtk.cell_renderer.CellRenderer]
         expand = true if cell is to be given extra space allocated to cell_layout
   */
-  override void packStart(gtk.cell_renderer.CellRenderer cell, bool expand)
+  override void packStart(gtk.cell_renderer.CellRenderer cell, bool expand) nothrow
   {
     gtk_cell_layout_pack_start(cast(GtkCellLayout*)this._cPtr, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, expand);
   }
@@ -241,7 +241,7 @@ template CellLayoutT()
         cell = a [gtk.cell_renderer.CellRenderer] to reorder
         position = new position to insert cell at
   */
-  override void reorder(gtk.cell_renderer.CellRenderer cell, int position)
+  override void reorder(gtk.cell_renderer.CellRenderer cell, int position) nothrow
   {
     gtk_cell_layout_reorder(cast(GtkCellLayout*)this._cPtr, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, position);
   }
@@ -259,13 +259,20 @@ template CellLayoutT()
         cell = a [gtk.cell_renderer.CellRenderer]
         func = the [gtk.cell_layout.CellLayout]DataFunc to use
   */
-  override void setCellDataFunc(gtk.cell_renderer.CellRenderer cell, gtk.types.CellLayoutDataFunc func = null)
+  override void setCellDataFunc(gtk.cell_renderer.CellRenderer cell, gtk.types.CellLayoutDataFunc func = null) nothrow
   {
-    extern(C) void _funcCallback(GtkCellLayout* cellLayout, GtkCellRenderer* cell, GtkTreeModel* treeModel, GtkTreeIter* iter, void* data)
+    extern(C) void _funcCallback(GtkCellLayout* cellLayout, GtkCellRenderer* cell, GtkTreeModel* treeModel, GtkTreeIter* iter, void* data) nothrow
     {
       auto _dlg = cast(gtk.types.CellLayoutDataFunc*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.cell_layout.CellLayout)(cast(void*)cellLayout, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)cell, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)treeModel, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.cell_layout.CellLayout)(cast(void*)cellLayout, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)cell, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)treeModel, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.CellLayoutDataFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;

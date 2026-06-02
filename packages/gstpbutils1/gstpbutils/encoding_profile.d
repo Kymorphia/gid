@@ -20,26 +20,26 @@ class EncodingProfile : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_encoding_profile_get_type != &gidSymbolNotFound ? gst_encoding_profile_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EncodingProfile self()
+  override EncodingProfile self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class EncodingProfile : gobject.object.ObjectWrap
       Get builder for [gstpbutils.encoding_profile.EncodingProfile]
       Returns: New builder object
   */
-  static EncodingProfileGidBuilder builder()
+  static EncodingProfileGidBuilder builder() nothrow
   {
     return new EncodingProfileGidBuilder;
   }
@@ -64,7 +64,7 @@ class EncodingProfile : gobject.object.ObjectWrap
         element-properties,row-mt=true, end-usage=vbr
         ```
   */
-  @property gst.structure.Structure elementProperties()
+  @property gst.structure.Structure elementProperties() nothrow
   {
     return getElementProperties();
   }
@@ -81,19 +81,19 @@ class EncodingProfile : gobject.object.ObjectWrap
           element-properties,row-mt=true, end-usage=vbr
           ```
   */
-  @property void elementProperties(gst.structure.Structure propval)
+  @property void elementProperties(gst.structure.Structure propval) nothrow
   {
     setElementProperties(propval);
   }
 
   /** */
-  @property gst.caps.Caps restrictionCaps()
+  @property gst.caps.Caps restrictionCaps() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gst.caps.Caps)("restriction-caps");
   }
 
   /** */
-  @property void restrictionCaps(gst.caps.Caps propval)
+  @property void restrictionCaps(gst.caps.Caps propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gst.caps.Caps)("restriction-caps", propval);
   }
@@ -108,7 +108,7 @@ class EncodingProfile : gobject.object.ObjectWrap
         category = The target category. Can be null
       Returns: The matching #GstEncodingProfile or null.
   */
-  static gstpbutils.encoding_profile.EncodingProfile find(string targetname, string profilename = null, string category = null)
+  static gstpbutils.encoding_profile.EncodingProfile find(string targetname, string profilename = null, string category = null) nothrow
   {
     GstEncodingProfile* _cretval;
     const(char)* _targetname = targetname.toCString(No.Alloc);
@@ -128,7 +128,7 @@ class EncodingProfile : gobject.object.ObjectWrap
         info = The #GstDiscovererInfo to read from
       Returns: The new #GstEncodingProfile or null.
   */
-  static gstpbutils.encoding_profile.EncodingProfile fromDiscoverer(gstpbutils.discoverer_info.DiscovererInfo info)
+  static gstpbutils.encoding_profile.EncodingProfile fromDiscoverer(gstpbutils.discoverer_info.DiscovererInfo info) nothrow
   {
     GstEncodingProfile* _cretval;
     _cretval = gst_encoding_profile_from_discoverer(info ? cast(GstDiscovererInfo*)info._cPtr(No.Dup) : null);
@@ -140,7 +140,7 @@ class EncodingProfile : gobject.object.ObjectWrap
       Makes a deep copy of self
       Returns: The copy of self
   */
-  gstpbutils.encoding_profile.EncodingProfile copy()
+  gstpbutils.encoding_profile.EncodingProfile copy() nothrow
   {
     GstEncodingProfile* _cretval;
     _cretval = gst_encoding_profile_copy(cast(GstEncodingProfile*)this._cPtr);
@@ -153,7 +153,7 @@ class EncodingProfile : gobject.object.ObjectWrap
       later during the encoding.
       Returns: 
   */
-  bool getAllowDynamicOutput()
+  bool getAllowDynamicOutput() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_encoding_profile_get_allow_dynamic_output(cast(GstEncodingProfile*)this._cPtr);
@@ -161,7 +161,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   }
 
   /** */
-  string getDescription()
+  string getDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_encoding_profile_get_description(cast(GstEncodingProfile*)this._cPtr);
@@ -170,7 +170,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   }
 
   /** */
-  gst.structure.Structure getElementProperties()
+  gst.structure.Structure getElementProperties() nothrow
   {
     GstStructure* _cretval;
     _cretval = gst_encoding_profile_get_element_properties(cast(GstEncodingProfile*)this._cPtr);
@@ -179,7 +179,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   }
 
   /** */
-  string getFileExtension()
+  string getFileExtension() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_encoding_profile_get_file_extension(cast(GstEncodingProfile*)this._cPtr);
@@ -188,7 +188,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   }
 
   /** */
-  gst.caps.Caps getFormat()
+  gst.caps.Caps getFormat() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_encoding_profile_get_format(cast(GstEncodingProfile*)this._cPtr);
@@ -201,7 +201,7 @@ class EncodingProfile : gobject.object.ObjectWrap
       Returns: The full caps the given profile can consume. Call
         gst_caps_unref() when you are done with the caps.
   */
-  gst.caps.Caps getInputCaps()
+  gst.caps.Caps getInputCaps() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_encoding_profile_get_input_caps(cast(GstEncodingProfile*)this._cPtr);
@@ -210,7 +210,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   }
 
   /** */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_encoding_profile_get_name(cast(GstEncodingProfile*)this._cPtr);
@@ -219,7 +219,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   }
 
   /** */
-  uint getPresence()
+  uint getPresence() nothrow
   {
     uint _retval;
     _retval = gst_encoding_profile_get_presence(cast(GstEncodingProfile*)this._cPtr);
@@ -227,7 +227,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   }
 
   /** */
-  string getPreset()
+  string getPreset() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_encoding_profile_get_preset(cast(GstEncodingProfile*)this._cPtr);
@@ -236,7 +236,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   }
 
   /** */
-  string getPresetName()
+  string getPresetName() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_encoding_profile_get_preset_name(cast(GstEncodingProfile*)this._cPtr);
@@ -245,7 +245,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   }
 
   /** */
-  gst.caps.Caps getRestriction()
+  gst.caps.Caps getRestriction() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_encoding_profile_get_restriction(cast(GstEncodingProfile*)this._cPtr);
@@ -254,7 +254,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   }
 
   /** */
-  bool getSingleSegment()
+  bool getSingleSegment() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_encoding_profile_get_single_segment(cast(GstEncodingProfile*)this._cPtr);
@@ -262,7 +262,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   }
 
   /** */
-  string getTypeNick()
+  string getTypeNick() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_encoding_profile_get_type_nick(cast(GstEncodingProfile*)this._cPtr);
@@ -271,7 +271,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   }
 
   /** */
-  bool isEnabled()
+  bool isEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_encoding_profile_is_enabled(cast(GstEncodingProfile*)this._cPtr);
@@ -285,7 +285,7 @@ class EncodingProfile : gobject.object.ObjectWrap
         b = a #GstEncodingProfile
       Returns: true if `a` and `b` are equal, else false.
   */
-  bool isEqual(gstpbutils.encoding_profile.EncodingProfile b)
+  bool isEqual(gstpbutils.encoding_profile.EncodingProfile b) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_encoding_profile_is_equal(cast(GstEncodingProfile*)this._cPtr, b ? cast(GstEncodingProfile*)b._cPtr(No.Dup) : null);
@@ -300,7 +300,7 @@ class EncodingProfile : gobject.object.ObjectWrap
         allowDynamicOutput = Whether the format that has been negotiated first can be renegotiated
           during the encoding
   */
-  void setAllowDynamicOutput(bool allowDynamicOutput)
+  void setAllowDynamicOutput(bool allowDynamicOutput) nothrow
   {
     gst_encoding_profile_set_allow_dynamic_output(cast(GstEncodingProfile*)this._cPtr, allowDynamicOutput);
   }
@@ -312,7 +312,7 @@ class EncodingProfile : gobject.object.ObjectWrap
       Params:
         description = the description to set on the profile
   */
-  void setDescription(string description = null)
+  void setDescription(string description = null) nothrow
   {
     const(char)* _description = description.toCString(No.Alloc);
     gst_encoding_profile_set_description(cast(GstEncodingProfile*)this._cPtr, _description);
@@ -340,7 +340,7 @@ class EncodingProfile : gobject.object.ObjectWrap
         elementProperties = A #GstStructure defining the properties
           to be set to the element the profile represents.
   */
-  void setElementProperties(gst.structure.Structure elementProperties)
+  void setElementProperties(gst.structure.Structure elementProperties) nothrow
   {
     gst_encoding_profile_set_element_properties(cast(GstEncodingProfile*)this._cPtr, elementProperties ? cast(GstStructure*)elementProperties._cPtr(Yes.Dup) : null);
   }
@@ -351,7 +351,7 @@ class EncodingProfile : gobject.object.ObjectWrap
       Params:
         enabled = false to disable profile, true to enable it
   */
-  void setEnabled(bool enabled)
+  void setEnabled(bool enabled) nothrow
   {
     gst_encoding_profile_set_enabled(cast(GstEncodingProfile*)this._cPtr, enabled);
   }
@@ -362,7 +362,7 @@ class EncodingProfile : gobject.object.ObjectWrap
       Params:
         format = the media format to use in the profile.
   */
-  void setFormat(gst.caps.Caps format)
+  void setFormat(gst.caps.Caps format) nothrow
   {
     gst_encoding_profile_set_format(cast(GstEncodingProfile*)this._cPtr, format ? cast(GstCaps*)format._cPtr(No.Dup) : null);
   }
@@ -374,7 +374,7 @@ class EncodingProfile : gobject.object.ObjectWrap
       Params:
         name = the name to set on the profile
   */
-  void setName(string name = null)
+  void setName(string name = null) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gst_encoding_profile_set_name(cast(GstEncodingProfile*)this._cPtr, _name);
@@ -387,7 +387,7 @@ class EncodingProfile : gobject.object.ObjectWrap
       Params:
         presence = the number of time the profile can be used
   */
-  void setPresence(uint presence)
+  void setPresence(uint presence) nothrow
   {
     gst_encoding_profile_set_presence(cast(GstEncodingProfile*)this._cPtr, presence);
   }
@@ -400,7 +400,7 @@ class EncodingProfile : gobject.object.ObjectWrap
       Params:
         preset = the element preset to use
   */
-  void setPreset(string preset = null)
+  void setPreset(string preset = null) nothrow
   {
     const(char)* _preset = preset.toCString(No.Alloc);
     gst_encoding_profile_set_preset(cast(GstEncodingProfile*)this._cPtr, _preset);
@@ -412,7 +412,7 @@ class EncodingProfile : gobject.object.ObjectWrap
       Params:
         presetName = The name of the preset to use in this profile.
   */
-  void setPresetName(string presetName = null)
+  void setPresetName(string presetName = null) nothrow
   {
     const(char)* _presetName = presetName.toCString(No.Alloc);
     gst_encoding_profile_set_preset_name(cast(GstEncodingProfile*)this._cPtr, _presetName);
@@ -426,7 +426,7 @@ class EncodingProfile : gobject.object.ObjectWrap
       Params:
         restriction = the restriction to apply
   */
-  void setRestriction(gst.caps.Caps restriction = null)
+  void setRestriction(gst.caps.Caps restriction = null) nothrow
   {
     gst_encoding_profile_set_restriction(cast(GstEncodingProfile*)this._cPtr, restriction ? cast(GstCaps*)restriction._cPtr(Yes.Dup) : null);
   }
@@ -442,7 +442,7 @@ class EncodingProfile : gobject.object.ObjectWrap
         singleSegment = #TRUE if the stream represented by profile should use a
           single segment before the encoder, #FALSE otherwise.
   */
-  void setSingleSegment(bool singleSegment)
+  void setSingleSegment(bool singleSegment) nothrow
   {
     gst_encoding_profile_set_single_segment(cast(GstEncodingProfile*)this._cPtr, singleSegment);
   }
@@ -465,13 +465,13 @@ class EncodingProfileGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           ```
       Returns: Builder instance for fluent chaining
   */
-  T elementProperties(gst.structure.Structure propval)
+  T elementProperties(gst.structure.Structure propval) nothrow
   {
     return setProperty("element-properties", propval);
   }
 
   /** */
-  T restrictionCaps(gst.caps.Caps propval)
+  T restrictionCaps(gst.caps.Caps propval) nothrow
   {
     return setProperty("restriction-caps", propval);
   }
@@ -484,7 +484,7 @@ final class EncodingProfileGidBuilder : EncodingProfileGidBuilderImpl!EncodingPr
       Create object from builder.
       Returns: New object
   */
-  EncodingProfile build()
+  EncodingProfile build() nothrow
   {
     return new EncodingProfile(cast(void*)createGObject(EncodingProfile._getGType), No.Take);
   }

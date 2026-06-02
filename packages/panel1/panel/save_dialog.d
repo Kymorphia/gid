@@ -32,26 +32,26 @@ class SaveDialog : adw.message_dialog.MessageDialog
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_save_dialog_get_type != &gidSymbolNotFound ? panel_save_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SaveDialog self()
+  override SaveDialog self() nothrow
   {
     return this;
   }
@@ -60,7 +60,7 @@ class SaveDialog : adw.message_dialog.MessageDialog
       Get builder for [panel.save_dialog.SaveDialog]
       Returns: New builder object
   */
-  static SaveDialogGidBuilder builder()
+  static SaveDialogGidBuilder builder() nothrow
   {
     return new SaveDialogGidBuilder;
   }
@@ -71,7 +71,7 @@ class SaveDialog : adw.message_dialog.MessageDialog
   
       Deprecated: Use `class@PanelChangesDialog`
   */
-  @property bool closeAfterSave()
+  @property bool closeAfterSave() nothrow
   {
     return getCloseAfterSave();
   }
@@ -83,7 +83,7 @@ class SaveDialog : adw.message_dialog.MessageDialog
   
       Deprecated: Use `class@PanelChangesDialog`
   */
-  @property void closeAfterSave(bool propval)
+  @property void closeAfterSave(bool propval) nothrow
   {
     setCloseAfterSave(propval);
   }
@@ -92,7 +92,7 @@ class SaveDialog : adw.message_dialog.MessageDialog
       Create a new #PanelSaveDialog.
       Returns: a newly created #PanelSaveDialog
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = panel_save_dialog_new();
@@ -100,13 +100,13 @@ class SaveDialog : adw.message_dialog.MessageDialog
   }
 
   /** */
-  void addDelegate(panel.save_delegate.SaveDelegate delegate_)
+  void addDelegate(panel.save_delegate.SaveDelegate delegate_) nothrow
   {
     panel_save_dialog_add_delegate(cast(PanelSaveDialog*)this._cPtr, delegate_ ? cast(PanelSaveDelegate*)delegate_._cPtr(No.Dup) : null);
   }
 
   /** */
-  bool getCloseAfterSave()
+  bool getCloseAfterSave() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_save_dialog_get_close_after_save(cast(PanelSaveDialog*)this._cPtr);
@@ -114,14 +114,21 @@ class SaveDialog : adw.message_dialog.MessageDialog
   }
 
   /** */
-  void runAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void runAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -140,7 +147,7 @@ class SaveDialog : adw.message_dialog.MessageDialog
   }
 
   /** */
-  void setCloseAfterSave(bool closeAfterSave)
+  void setCloseAfterSave(bool closeAfterSave) nothrow
   {
     panel_save_dialog_set_close_after_save(cast(PanelSaveDialog*)this._cPtr, closeAfterSave);
   }
@@ -159,7 +166,7 @@ class SaveDialogGidBuilderImpl(T) : adw.message_dialog.MessageDialogGidBuilderIm
   
       Deprecated: Use `class@PanelChangesDialog`
   */
-  T closeAfterSave(bool propval)
+  T closeAfterSave(bool propval) nothrow
   {
     return setProperty("close-after-save", propval);
   }
@@ -172,7 +179,7 @@ final class SaveDialogGidBuilder : SaveDialogGidBuilderImpl!SaveDialogGidBuilder
       Create object from builder.
       Returns: New object
   */
-  SaveDialog build()
+  SaveDialog build() nothrow
   {
     return new SaveDialog(cast(void*)createGObject(SaveDialog._getGType), No.Take);
   }

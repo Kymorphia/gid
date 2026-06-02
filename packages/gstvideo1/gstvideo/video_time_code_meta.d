@@ -21,11 +21,8 @@ class VideoTimeCodeMeta
   GstVideoTimeCodeMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_time_code_meta.VideoTimeCodeMeta");
-
     _cInstance = *cast(GstVideoTimeCodeMeta*)ptr;
 
     if (take)
@@ -33,7 +30,7 @@ class VideoTimeCodeMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -42,7 +39,7 @@ class VideoTimeCodeMeta
       Get `meta` field.
       Returns: parent #GstMeta
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoTimeCodeMeta*)this._cPtr).meta, No.Take);
   }
@@ -51,13 +48,13 @@ class VideoTimeCodeMeta
       Get `tc` field.
       Returns: the GstVideoTimeCode to attach
   */
-  @property gstvideo.video_time_code.VideoTimeCode tc()
+  @property gstvideo.video_time_code.VideoTimeCode tc() nothrow
   {
     return cToD!(gstvideo.video_time_code.VideoTimeCode)(cast(void*)&(cast(GstVideoTimeCodeMeta*)this._cPtr).tc);
   }
 
   /** */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_time_code_meta_get_info();

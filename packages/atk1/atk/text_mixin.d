@@ -45,7 +45,7 @@ template TextT()
         endOffset = the offset of the first character after the selected region.
       Returns: true if successful, false otherwise
   */
-  override bool addSelection(int startOffset, int endOffset)
+  override bool addSelection(int startOffset, int endOffset) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_text_add_selection(cast(AtkText*)this._cPtr, startOffset, endOffset);
@@ -63,7 +63,7 @@ template TextT()
       Returns: Array of AtkTextRange. The last
                  element of the array returned by this function will be NULL.
   */
-  override atk.text_range.TextRange[] getBoundedRanges(atk.types.TextRectangle rect, atk.types.CoordType coordType, atk.types.TextClipType xClipType, atk.types.TextClipType yClipType)
+  override atk.text_range.TextRange[] getBoundedRanges(atk.types.TextRectangle rect, atk.types.CoordType coordType, atk.types.TextClipType xClipType, atk.types.TextClipType yClipType) nothrow
   {
     AtkTextRange** _cretval;
     _cretval = atk_text_get_bounded_ranges(cast(AtkText*)this._cPtr, &rect, coordType, xClipType, yClipType);
@@ -88,7 +88,7 @@ template TextT()
                  the caret is not located inside the element or in the case of
                  any other failure.
   */
-  override int getCaretOffset()
+  override int getCaretOffset() nothrow
   {
     int _retval;
     _retval = atk_text_get_caret_offset(cast(AtkText*)this._cPtr);
@@ -102,7 +102,7 @@ template TextT()
         offset = a character offset within text
       Returns: the character at offset or 0 in the case of failure.
   */
-  override dchar getCharacterAtOffset(int offset)
+  override dchar getCharacterAtOffset(int offset) nothrow
   {
     dchar _retval;
     _retval = atk_text_get_character_at_offset(cast(AtkText*)this._cPtr, offset);
@@ -113,7 +113,7 @@ template TextT()
       Gets the character count.
       Returns: the number of characters or -1 in case of failure.
   */
-  override int getCharacterCount()
+  override int getCharacterCount() nothrow
   {
     int _retval;
     _retval = atk_text_get_character_count(cast(AtkText*)this._cPtr);
@@ -135,7 +135,7 @@ template TextT()
         height = Pointer for the height of the bounding box
         coords = specify whether coordinates are relative to the screen or widget window
   */
-  override void getCharacterExtents(int offset, out int x, out int y, out int width, out int height, atk.types.CoordType coords)
+  override void getCharacterExtents(int offset, out int x, out int y, out int width, out int height, atk.types.CoordType coords) nothrow
   {
     atk_text_get_character_extents(cast(AtkText*)this._cPtr, offset, cast(int*)&x, cast(int*)&y, cast(int*)&width, cast(int*)&height, coords);
   }
@@ -144,7 +144,7 @@ template TextT()
       Gets the number of selected regions.
       Returns: The number of selected regions, or -1 in the case of failure.
   */
-  override int getNSelections()
+  override int getNSelections() nothrow
   {
     int _retval;
     _retval = atk_text_get_n_selections(cast(AtkText*)this._cPtr);
@@ -164,7 +164,7 @@ template TextT()
       Returns: the offset to the character which is located at  the specified
                  `x` and `y` coordinates of -1 in case of failure.
   */
-  override int getOffsetAtPoint(int x, int y, atk.types.CoordType coords)
+  override int getOffsetAtPoint(int x, int y, atk.types.CoordType coords) nothrow
   {
     int _retval;
     _retval = atk_text_get_offset_at_point(cast(AtkText*)this._cPtr, x, y, coords);
@@ -185,7 +185,7 @@ template TextT()
         coordType = Specify whether coordinates are relative to the screen or widget window.
         rect = A pointer to a AtkTextRectangle which is filled in by this function.
   */
-  override void getRangeExtents(int startOffset, int endOffset, atk.types.CoordType coordType, out atk.types.TextRectangle rect)
+  override void getRangeExtents(int startOffset, int endOffset, atk.types.CoordType coordType, out atk.types.TextRectangle rect) nothrow
   {
     atk_text_get_range_extents(cast(AtkText*)this._cPtr, startOffset, endOffset, coordType, &rect);
   }
@@ -205,7 +205,7 @@ template TextT()
       Returns: a newly allocated string containing the selected text. Use [glib.global.gfree]
                  to free the returned string.
   */
-  override string getSelection(int selectionNum, out int startOffset, out int endOffset)
+  override string getSelection(int selectionNum, out int startOffset, out int endOffset) nothrow
   {
     char* _cretval;
     _cretval = atk_text_get_selection(cast(AtkText*)this._cPtr, selectionNum, cast(int*)&startOffset, cast(int*)&endOffset);
@@ -257,7 +257,7 @@ template TextT()
                  to free the returned string.  Returns null if the offset is invalid
                  or no implementation is available.
   */
-  override string getStringAtOffset(int offset, atk.types.TextGranularity granularity, out int startOffset, out int endOffset)
+  override string getStringAtOffset(int offset, atk.types.TextGranularity granularity, out int startOffset, out int endOffset) nothrow
   {
     char* _cretval;
     _cretval = atk_text_get_string_at_offset(cast(AtkText*)this._cPtr, offset, granularity, cast(int*)&startOffset, cast(int*)&endOffset);
@@ -275,7 +275,7 @@ template TextT()
                  to, but not including end_offset. Use [glib.global.gfree] to free the returned
                  string.
   */
-  override string getText(int startOffset, int endOffset)
+  override string getText(int startOffset, int endOffset) nothrow
   {
     char* _cretval;
     _cretval = atk_text_get_text(cast(AtkText*)this._cPtr, startOffset, endOffset);
@@ -298,7 +298,7 @@ template TextT()
   
       Deprecated: Please use [atk.text.Text.getStringAtOffset] instead.
   */
-  override string getTextAfterOffset(int offset, atk.types.TextBoundary boundaryType, out int startOffset, out int endOffset)
+  override string getTextAfterOffset(int offset, atk.types.TextBoundary boundaryType, out int startOffset, out int endOffset) nothrow
   {
     char* _cretval;
     _cretval = atk_text_get_text_after_offset(cast(AtkText*)this._cPtr, offset, boundaryType, cast(int*)&startOffset, cast(int*)&endOffset);
@@ -345,7 +345,7 @@ template TextT()
       Deprecated: This method is deprecated since ATK version
         2.9.4. Please use [atk.text.Text.getStringAtOffset] instead.
   */
-  override string getTextAtOffset(int offset, atk.types.TextBoundary boundaryType, out int startOffset, out int endOffset)
+  override string getTextAtOffset(int offset, atk.types.TextBoundary boundaryType, out int startOffset, out int endOffset) nothrow
   {
     char* _cretval;
     _cretval = atk_text_get_text_at_offset(cast(AtkText*)this._cPtr, offset, boundaryType, cast(int*)&startOffset, cast(int*)&endOffset);
@@ -368,7 +368,7 @@ template TextT()
   
       Deprecated: Please use [atk.text.Text.getStringAtOffset] instead.
   */
-  override string getTextBeforeOffset(int offset, atk.types.TextBoundary boundaryType, out int startOffset, out int endOffset)
+  override string getTextBeforeOffset(int offset, atk.types.TextBoundary boundaryType, out int startOffset, out int endOffset) nothrow
   {
     char* _cretval;
     _cretval = atk_text_get_text_before_offset(cast(AtkText*)this._cPtr, offset, boundaryType, cast(int*)&startOffset, cast(int*)&endOffset);
@@ -387,7 +387,7 @@ template TextT()
           moving or deleting a selected region can change the numbering.
       Returns: true if successful, false otherwise
   */
-  override bool textRemoveSelection(int selectionNum)
+  override bool textRemoveSelection(int selectionNum) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_text_remove_selection(cast(AtkText*)this._cPtr, selectionNum);
@@ -403,7 +403,7 @@ template TextT()
         type = specify where the object should be made visible.
       Returns: whether scrolling was successful.
   */
-  override bool scrollSubstringTo(int startOffset, int endOffset, atk.types.ScrollType type)
+  override bool scrollSubstringTo(int startOffset, int endOffset, atk.types.ScrollType type) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_text_scroll_substring_to(cast(AtkText*)this._cPtr, startOffset, endOffset, type);
@@ -423,7 +423,7 @@ template TextT()
         y = y-position where to scroll to
       Returns: whether scrolling was successful.
   */
-  override bool scrollSubstringToPoint(int startOffset, int endOffset, atk.types.CoordType coords, int x, int y)
+  override bool scrollSubstringToPoint(int startOffset, int endOffset, atk.types.CoordType coords, int x, int y) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_text_scroll_substring_to_point(cast(AtkText*)this._cPtr, startOffset, endOffset, coords, x, y);
@@ -453,7 +453,7 @@ template TextT()
         offset = the character offset of the new caret position
       Returns: true if successful, false otherwise.
   */
-  override bool setCaretOffset(int offset)
+  override bool setCaretOffset(int offset) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_text_set_caret_offset(cast(AtkText*)this._cPtr, offset);
@@ -474,7 +474,7 @@ template TextT()
           the selection
       Returns: true if successful, false otherwise
   */
-  override bool setSelection(int selectionNum, int startOffset, int endOffset)
+  override bool setSelection(int selectionNum, int startOffset, int endOffset) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_text_set_selection(cast(AtkText*)this._cPtr, selectionNum, startOffset, endOffset);
@@ -498,13 +498,13 @@ template TextT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTextAttributesChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTextAttributesChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.text.Text)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -513,7 +513,14 @@ template TextT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.text.Text.textAttributesChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -539,14 +546,14 @@ template TextT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTextCaretMoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTextCaretMoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.text.Text)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -558,7 +565,14 @@ template TextT()
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.text.Text.textCaretMoved");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -592,7 +606,7 @@ template TextT()
       Deprecated: Use #AtkObject::text-insert or
         #AtkObject::text-remove instead.
   */
-  gulong connectTextChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectTextChanged(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -600,7 +614,7 @@ template TextT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.text.Text)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -615,7 +629,14 @@ template TextT()
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.text.Text.textChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -647,7 +668,7 @@ template TextT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTextInsert(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectTextInsert(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -656,7 +677,7 @@ template TextT()
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : atk.text.Text)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -674,7 +695,14 @@ template TextT()
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.text.Text.textInsert");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -706,7 +734,7 @@ template TextT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTextRemove(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectTextRemove(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -715,7 +743,7 @@ template TextT()
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : atk.text.Text)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -733,7 +761,14 @@ template TextT()
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.text.Text.textRemove");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -756,13 +791,13 @@ template TextT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTextSelectionChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTextSelectionChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.text.Text)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -771,7 +806,14 @@ template TextT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.text.Text.textSelectionChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

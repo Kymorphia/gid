@@ -17,26 +17,26 @@ class DragContext : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_drag_context_get_type != &gidSymbolNotFound ? gdk_drag_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DragContext self()
+  override DragContext self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class DragContext : gobject.object.ObjectWrap
       Get builder for [gdk.drag_context.DragContext]
       Returns: New builder object
   */
-  static DragContextGidBuilder builder()
+  static DragContextGidBuilder builder() nothrow
   {
     return new DragContextGidBuilder;
   }
@@ -55,7 +55,7 @@ class DragContext : gobject.object.ObjectWrap
       [gdk.drag_context.DragContext.getSuggestedAction] returns [gdk.types.DragAction.Ask].
       Returns: the #GdkDragAction flags
   */
-  gdk.types.DragAction getActions()
+  gdk.types.DragAction getActions() nothrow
   {
     GdkDragAction _cretval;
     _cretval = gdk_drag_context_get_actions(cast(GdkDragContext*)this._cPtr);
@@ -67,7 +67,7 @@ class DragContext : gobject.object.ObjectWrap
       Returns the destination window for the DND operation.
       Returns: a #GdkWindow
   */
-  gdk.window.Window getDestWindow()
+  gdk.window.Window getDestWindow() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gdk_drag_context_get_dest_window(cast(GdkDragContext*)this._cPtr);
@@ -79,7 +79,7 @@ class DragContext : gobject.object.ObjectWrap
       Returns the #GdkDevice associated to the drag context.
       Returns: The #GdkDevice associated to context.
   */
-  gdk.device.Device getDevice()
+  gdk.device.Device getDevice() nothrow
   {
     GdkDevice* _cretval;
     _cretval = gdk_drag_context_get_device(cast(GdkDragContext*)this._cPtr);
@@ -96,7 +96,7 @@ class DragContext : gobject.object.ObjectWrap
       the drag operation is over.
       Returns: the drag window, or null
   */
-  gdk.window.Window getDragWindow()
+  gdk.window.Window getDragWindow() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gdk_drag_context_get_drag_window(cast(GdkDragContext*)this._cPtr);
@@ -108,7 +108,7 @@ class DragContext : gobject.object.ObjectWrap
       Returns the drag protocol that is used by this context.
       Returns: the drag protocol
   */
-  gdk.types.DragProtocol getProtocol()
+  gdk.types.DragProtocol getProtocol() nothrow
   {
     GdkDragProtocol _cretval;
     _cretval = gdk_drag_context_get_protocol(cast(GdkDragContext*)this._cPtr);
@@ -120,7 +120,7 @@ class DragContext : gobject.object.ObjectWrap
       Determines the action chosen by the drag destination.
       Returns: a #GdkDragAction value
   */
-  gdk.types.DragAction getSelectedAction()
+  gdk.types.DragAction getSelectedAction() nothrow
   {
     GdkDragAction _cretval;
     _cretval = gdk_drag_context_get_selected_action(cast(GdkDragContext*)this._cPtr);
@@ -132,7 +132,7 @@ class DragContext : gobject.object.ObjectWrap
       Returns the #GdkWindow where the DND operation started.
       Returns: a #GdkWindow
   */
-  gdk.window.Window getSourceWindow()
+  gdk.window.Window getSourceWindow() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gdk_drag_context_get_source_window(cast(GdkDragContext*)this._cPtr);
@@ -144,7 +144,7 @@ class DragContext : gobject.object.ObjectWrap
       Determines the suggested drag action of the context.
       Returns: a #GdkDragAction value
   */
-  gdk.types.DragAction getSuggestedAction()
+  gdk.types.DragAction getSuggestedAction() nothrow
   {
     GdkDragAction _cretval;
     _cretval = gdk_drag_context_get_suggested_action(cast(GdkDragContext*)this._cPtr);
@@ -175,7 +175,7 @@ class DragContext : gobject.object.ObjectWrap
         actions = the actions supported by the drag source
       Returns: #TRUE if the drag and drop operation is managed.
   */
-  bool manageDnd(gdk.window.Window ipcWindow, gdk.types.DragAction actions)
+  bool manageDnd(gdk.window.Window ipcWindow, gdk.types.DragAction actions) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_drag_context_manage_dnd(cast(GdkDragContext*)this._cPtr, ipcWindow ? cast(GdkWindow*)ipcWindow._cPtr(No.Dup) : null, actions);
@@ -189,7 +189,7 @@ class DragContext : gobject.object.ObjectWrap
       Params:
         device = a #GdkDevice
   */
-  void setDevice(gdk.device.Device device)
+  void setDevice(gdk.device.Device device) nothrow
   {
     gdk_drag_context_set_device(cast(GdkDragContext*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
   }
@@ -203,7 +203,7 @@ class DragContext : gobject.object.ObjectWrap
         hotX = x coordinate of the drag window hotspot
         hotY = y coordinate of the drag window hotspot
   */
-  void setHotspot(int hotX, int hotY)
+  void setHotspot(int hotX, int hotY) nothrow
   {
     gdk_drag_context_set_hotspot(cast(GdkDragContext*)this._cPtr, hotX, hotY);
   }
@@ -229,14 +229,14 @@ class DragContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActionChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActionChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.types.DragAction)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.drag_context.DragContext)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -248,7 +248,14 @@ class DragContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.drag_context.DragContext.actionChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -276,14 +283,14 @@ class DragContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCancel(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCancel(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.types.DragCancelReason)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.drag_context.DragContext)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -295,7 +302,14 @@ class DragContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.drag_context.DragContext.cancel");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -323,13 +337,13 @@ class DragContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDndFinished(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDndFinished(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -338,7 +352,14 @@ class DragContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.drag_context.DragContext.dndFinished");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -366,14 +387,14 @@ class DragContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDropPerformed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDropPerformed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.drag_context.DragContext)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -385,7 +406,14 @@ class DragContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.drag_context.DragContext.dropPerformed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -405,7 +433,7 @@ final class DragContextGidBuilder : DragContextGidBuilderImpl!DragContextGidBuil
       Create object from builder.
       Returns: New object
   */
-  DragContext build()
+  DragContext build() nothrow
   {
     return new DragContext(cast(void*)createGObject(DragContext._getGType), No.Take);
   }

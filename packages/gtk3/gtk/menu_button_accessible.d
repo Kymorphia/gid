@@ -20,26 +20,26 @@ class MenuButtonAccessible : gtk.toggle_button_accessible.ToggleButtonAccessible
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_menu_button_accessible_get_type != &gidSymbolNotFound ? gtk_menu_button_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MenuButtonAccessible self()
+  override MenuButtonAccessible self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class MenuButtonAccessible : gtk.toggle_button_accessible.ToggleButtonAccessible
       Get builder for [gtk.menu_button_accessible.MenuButtonAccessible]
       Returns: New builder object
   */
-  static MenuButtonAccessibleGidBuilder builder()
+  static MenuButtonAccessibleGidBuilder builder() nothrow
   {
     return new MenuButtonAccessibleGidBuilder;
   }
@@ -67,7 +67,7 @@ final class MenuButtonAccessibleGidBuilder : MenuButtonAccessibleGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  MenuButtonAccessible build()
+  MenuButtonAccessible build() nothrow
   {
     return new MenuButtonAccessible(cast(void*)createGObject(MenuButtonAccessible._getGType), No.Take);
   }

@@ -9,7 +9,7 @@ import vte.types;
 
 
 /** */
-gobject.types.GType eventContextGetType()
+gobject.types.GType eventContextGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = vte_event_context_get_type();
@@ -28,7 +28,7 @@ gobject.types.GType eventContextGetType()
       encoding = the name of the legacy encoding
     Returns: true iff the legacy encoding encoding is supported
 */
-bool getEncodingSupported(string encoding)
+bool getEncodingSupported(string encoding) nothrow
 {
   bool _retval;
   const(char)* _encoding = encoding.toCString(No.Alloc);
@@ -48,7 +48,7 @@ bool getEncodingSupported(string encoding)
     Returns: the list of supported encodings; free with
         [glib.global.strfreev]
 */
-string[] getEncodings(bool includeAliases)
+string[] getEncodings(bool includeAliases) nothrow
 {
   char** _cretval;
   _cretval = vte_get_encodings(includeAliases);
@@ -71,7 +71,7 @@ string[] getEncodings(bool includeAliases)
     Gets features VTE was compiled with.
     Returns: flags from #VteFeatureFlags
 */
-vte.types.FeatureFlags getFeatureFlags()
+vte.types.FeatureFlags getFeatureFlags() nothrow
 {
   VteFeatureFlags _cretval;
   _cretval = vte_get_feature_flags();
@@ -83,7 +83,7 @@ vte.types.FeatureFlags getFeatureFlags()
     Gets a list of features vte was compiled with.
     Returns: a string with features
 */
-string getFeatures()
+string getFeatures() nothrow
 {
   const(char)* _cretval;
   _cretval = vte_get_features();
@@ -98,7 +98,7 @@ string getFeatures()
     with.
     Returns: the major version
 */
-uint getMajorVersion()
+uint getMajorVersion() nothrow
 {
   uint _retval;
   _retval = vte_get_major_version();
@@ -112,7 +112,7 @@ uint getMajorVersion()
     with.
     Returns: the micro version
 */
-uint getMicroVersion()
+uint getMicroVersion() nothrow
 {
   uint _retval;
   _retval = vte_get_micro_version();
@@ -126,7 +126,7 @@ uint getMicroVersion()
     with.
     Returns: the minor version
 */
-uint getMinorVersion()
+uint getMinorVersion() nothrow
 {
   uint _retval;
   _retval = vte_get_minor_version();
@@ -139,7 +139,7 @@ uint getMinorVersion()
     Returns: a newly allocated string with the
         user's shell, or null
 */
-string getUserShell()
+string getUserShell() nothrow
 {
   char* _cretval;
   _cretval = vte_get_user_shell();

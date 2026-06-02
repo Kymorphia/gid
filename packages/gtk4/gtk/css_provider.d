@@ -51,26 +51,26 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_css_provider_get_type != &gidSymbolNotFound ? gtk_css_provider_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CssProvider self()
+  override CssProvider self() nothrow
   {
     return this;
   }
@@ -79,7 +79,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Get builder for [gtk.css_provider.CssProvider]
       Returns: New builder object
   */
-  static CssProviderGidBuilder builder()
+  static CssProviderGidBuilder builder() nothrow
   {
     return new CssProviderGidBuilder;
   }
@@ -90,7 +90,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Returns a newly created [gtk.css_provider.CssProvider].
       Returns: A new [gtk.css_provider.CssProvider]
   */
-  this()
+  this() nothrow
   {
     GtkCssProvider* _cretval;
     _cretval = gtk_css_provider_new();
@@ -105,7 +105,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Params:
         data = [glib.bytes.Bytes] containing the data to load
   */
-  void loadFromBytes(glib.bytes.Bytes data)
+  void loadFromBytes(glib.bytes.Bytes data) nothrow
   {
     gtk_css_provider_load_from_bytes(cast(GtkCssProvider*)this._cPtr, data ? cast(GBytes*)data._cPtr(No.Dup) : null);
   }
@@ -121,7 +121,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Deprecated: Use [gtk.css_provider.CssProvider.loadFromString]
           or [gtk.css_provider.CssProvider.loadFromBytes] instead
   */
-  void loadFromData(string data)
+  void loadFromData(string data) nothrow
   {
     ptrdiff_t _length;
     if (data)
@@ -139,7 +139,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Params:
         file = [gio.file.File] pointing to a file to load
   */
-  void loadFromFile(gio.file.File file)
+  void loadFromFile(gio.file.File file) nothrow
   {
     gtk_css_provider_load_from_file(cast(GtkCssProvider*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
   }
@@ -152,7 +152,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Params:
         path = the path of a filename to load, in the GLib filename encoding
   */
-  void loadFromPath(string path)
+  void loadFromPath(string path) nothrow
   {
     const(char)* _path = path.toCString(No.Alloc);
     gtk_css_provider_load_from_path(cast(GtkCssProvider*)this._cPtr, _path);
@@ -167,7 +167,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Params:
         resourcePath = a [gio.resource.Resource] resource path
   */
-  void loadFromResource(string resourcePath)
+  void loadFromResource(string resourcePath) nothrow
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     gtk_css_provider_load_from_resource(cast(GtkCssProvider*)this._cPtr, _resourcePath);
@@ -181,7 +181,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Params:
         string_ = the CSS to load
   */
-  void loadFromString(string string_)
+  void loadFromString(string string_) nothrow
   {
     const(char)* _string_ = string_.toCString(No.Alloc);
     gtk_css_provider_load_from_string(cast(GtkCssProvider*)this._cPtr, _string_);
@@ -199,7 +199,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         variant = variant to load, for example, "dark", or
             null for the default
   */
-  void loadNamed(string name, string variant = null)
+  void loadNamed(string name, string variant = null) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _variant = variant.toCString(No.Alloc);
@@ -216,7 +216,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       of this provider.
       Returns: a new string representing the provider.
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gtk_css_provider_to_string(cast(GtkCssProvider*)this._cPtr);
@@ -255,7 +255,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectParsingError(T)(T callback, Flag!"After" after = No.After)
+  gulong connectParsingError(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.css_section.CssSection)))
@@ -263,7 +263,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.css_provider.CssProvider)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -278,7 +278,14 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.css_provider.CssProvider.parsingError");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -300,7 +307,7 @@ final class CssProviderGidBuilder : CssProviderGidBuilderImpl!CssProviderGidBuil
       Create object from builder.
       Returns: New object
   */
-  CssProvider build()
+  CssProvider build() nothrow
   {
     return new CssProvider(cast(void*)createGObject(CssProvider._getGType), Yes.Take);
   }

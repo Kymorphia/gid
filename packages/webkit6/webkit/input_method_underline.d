@@ -16,32 +16,32 @@ class InputMethodUnderline : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_input_method_underline_get_type != &gidSymbolNotFound ? webkit_input_method_underline_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override InputMethodUnderline self()
+  override InputMethodUnderline self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class InputMethodUnderline : gobject.boxed.Boxed
         endOffset = the end offset in preedit string
       Returns: A newly created #WebKitInputMethodUnderline
   */
-  this(uint startOffset, uint endOffset)
+  this(uint startOffset, uint endOffset) nothrow
   {
     WebKitInputMethodUnderline* _cretval;
     _cretval = webkit_input_method_underline_new(startOffset, endOffset);
@@ -65,7 +65,7 @@ class InputMethodUnderline : gobject.boxed.Boxed
       Make a copy of the #WebKitInputMethodUnderline.
       Returns: A copy of passed in #WebKitInputMethodUnderline
   */
-  webkit.input_method_underline.InputMethodUnderline copy()
+  webkit.input_method_underline.InputMethodUnderline copy() nothrow
   {
     WebKitInputMethodUnderline* _cretval;
     _cretval = webkit_input_method_underline_copy(cast(WebKitInputMethodUnderline*)this._cPtr);
@@ -82,7 +82,7 @@ class InputMethodUnderline : gobject.boxed.Boxed
       Params:
         rgba = a #GdkRGBA or null
   */
-  void setColor(gdk.rgba.RGBA rgba)
+  void setColor(gdk.rgba.RGBA rgba) nothrow
   {
     webkit_input_method_underline_set_color(cast(WebKitInputMethodUnderline*)this._cPtr, cast(const(GdkRGBA)*)&rgba);
   }

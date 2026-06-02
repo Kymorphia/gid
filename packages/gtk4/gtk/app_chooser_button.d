@@ -57,26 +57,26 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_app_chooser_button_get_type != &gidSymbolNotFound ? gtk_app_chooser_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AppChooserButton self()
+  override AppChooserButton self() nothrow
   {
     return this;
   }
@@ -85,7 +85,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Get builder for [gtk.app_chooser_button.AppChooserButton]
       Returns: New builder object
   */
-  static AppChooserButtonGidBuilder builder()
+  static AppChooserButtonGidBuilder builder() nothrow
   {
     return new AppChooserButtonGidBuilder;
   }
@@ -97,7 +97,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
         
         The string may contain Pango markup.
   */
-  @property string heading()
+  @property string heading() nothrow
   {
     return getHeading();
   }
@@ -110,7 +110,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
           
           The string may contain Pango markup.
   */
-  @property void heading(string propval)
+  @property void heading(string propval) nothrow
   {
     setHeading(propval);
   }
@@ -119,7 +119,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Get `modal` property.
       Returns: Whether the app chooser dialog should be modal.
   */
-  @property bool modal()
+  @property bool modal() nothrow
   {
     return getModal();
   }
@@ -129,7 +129,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Params:
         propval = Whether the app chooser dialog should be modal.
   */
-  @property void modal(bool propval)
+  @property void modal(bool propval) nothrow
   {
     setModal(propval);
   }
@@ -139,7 +139,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Returns: Determines whether the dropdown menu shows the default application
         on top for the provided content type.
   */
-  @property bool showDefaultItem()
+  @property bool showDefaultItem() nothrow
   {
     return getShowDefaultItem();
   }
@@ -150,7 +150,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
         propval = Determines whether the dropdown menu shows the default application
           on top for the provided content type.
   */
-  @property void showDefaultItem(bool propval)
+  @property void showDefaultItem(bool propval) nothrow
   {
     setShowDefaultItem(propval);
   }
@@ -160,7 +160,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Returns: Determines whether the dropdown menu shows an item to open
         a [gtk.app_chooser_dialog.AppChooserDialog].
   */
-  @property bool showDialogItem()
+  @property bool showDialogItem() nothrow
   {
     return getShowDialogItem();
   }
@@ -171,7 +171,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
         propval = Determines whether the dropdown menu shows an item to open
           a [gtk.app_chooser_dialog.AppChooserDialog].
   */
-  @property void showDialogItem(bool propval)
+  @property void showDialogItem(bool propval) nothrow
   {
     setShowDialogItem(propval);
   }
@@ -188,7 +188,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  this(string contentType)
+  this(string contentType) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _contentType = contentType.toCString(No.Alloc);
@@ -214,7 +214,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  void appendCustomItem(string name, string label, gio.icon.Icon icon)
+  void appendCustomItem(string name, string label, gio.icon.Icon icon) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _label = label.toCString(No.Alloc);
@@ -227,7 +227,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  void appendSeparator()
+  void appendSeparator() nothrow
   {
     gtk_app_chooser_button_append_separator(cast(GtkAppChooserButton*)this._cPtr);
   }
@@ -239,7 +239,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  string getHeading()
+  string getHeading() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_app_chooser_button_get_heading(cast(GtkAppChooserButton*)this._cPtr);
@@ -253,7 +253,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  bool getModal()
+  bool getModal() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_app_chooser_button_get_modal(cast(GtkAppChooserButton*)this._cPtr);
@@ -267,7 +267,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  bool getShowDefaultItem()
+  bool getShowDefaultItem() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_app_chooser_button_get_show_default_item(cast(GtkAppChooserButton*)this._cPtr);
@@ -281,7 +281,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  bool getShowDialogItem()
+  bool getShowDialogItem() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_app_chooser_button_get_show_dialog_item(cast(GtkAppChooserButton*)this._cPtr);
@@ -301,7 +301,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  void setActiveCustomItem(string name)
+  void setActiveCustomItem(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_app_chooser_button_set_active_custom_item(cast(GtkAppChooserButton*)this._cPtr, _name);
@@ -317,7 +317,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  void setHeading(string heading)
+  void setHeading(string heading) nothrow
   {
     const(char)* _heading = heading.toCString(No.Alloc);
     gtk_app_chooser_button_set_heading(cast(GtkAppChooserButton*)this._cPtr, _heading);
@@ -331,7 +331,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  void setModal(bool modal)
+  void setModal(bool modal) nothrow
   {
     gtk_app_chooser_button_set_modal(cast(GtkAppChooserButton*)this._cPtr, modal);
   }
@@ -345,7 +345,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  void setShowDefaultItem(bool setting)
+  void setShowDefaultItem(bool setting) nothrow
   {
     gtk_app_chooser_button_set_show_default_item(cast(GtkAppChooserButton*)this._cPtr, setting);
   }
@@ -359,7 +359,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  void setShowDialogItem(bool setting)
+  void setShowDialogItem(bool setting) nothrow
   {
     gtk_app_chooser_button_set_show_dialog_item(cast(GtkAppChooserButton*)this._cPtr, setting);
   }
@@ -382,13 +382,13 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.app_chooser_button.AppChooserButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -397,7 +397,14 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.app_chooser_button.AppChooserButton.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -419,13 +426,13 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.app_chooser_button.AppChooserButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -434,7 +441,14 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.app_chooser_button.AppChooserButton.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -462,14 +476,14 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCustomItemActivated(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectCustomItemActivated(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.app_chooser_button.AppChooserButton)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -481,7 +495,14 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.app_chooser_button.AppChooserButton.customItemActivated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -504,7 +525,7 @@ class AppChooserButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk
           The string may contain Pango markup.
       Returns: Builder instance for fluent chaining
   */
-  T heading(string propval)
+  T heading(string propval) nothrow
   {
     return setProperty("heading", propval);
   }
@@ -515,7 +536,7 @@ class AppChooserButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk
         propval = Whether the app chooser dialog should be modal.
       Returns: Builder instance for fluent chaining
   */
-  T modal(bool propval)
+  T modal(bool propval) nothrow
   {
     return setProperty("modal", propval);
   }
@@ -527,7 +548,7 @@ class AppChooserButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk
           on top for the provided content type.
       Returns: Builder instance for fluent chaining
   */
-  T showDefaultItem(bool propval)
+  T showDefaultItem(bool propval) nothrow
   {
     return setProperty("show-default-item", propval);
   }
@@ -539,7 +560,7 @@ class AppChooserButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk
           a [gtk.app_chooser_dialog.AppChooserDialog].
       Returns: Builder instance for fluent chaining
   */
-  T showDialogItem(bool propval)
+  T showDialogItem(bool propval) nothrow
   {
     return setProperty("show-dialog-item", propval);
   }
@@ -552,7 +573,7 @@ final class AppChooserButtonGidBuilder : AppChooserButtonGidBuilderImpl!AppChoos
       Create object from builder.
       Returns: New object
   */
-  AppChooserButton build()
+  AppChooserButton build() nothrow
   {
     return new AppChooserButton(cast(void*)createGObject(AppChooserButton._getGType), No.Take);
   }

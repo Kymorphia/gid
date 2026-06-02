@@ -16,26 +16,26 @@ class PrimitiveArray : arrow.array.Array
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_primitive_array_get_type != &gidSymbolNotFound ? garrow_primitive_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PrimitiveArray self()
+  override PrimitiveArray self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class PrimitiveArray : arrow.array.Array
       Get builder for [arrow.primitive_array.PrimitiveArray]
       Returns: New builder object
   */
-  static PrimitiveArrayGidBuilder builder()
+  static PrimitiveArrayGidBuilder builder() nothrow
   {
     return new PrimitiveArrayGidBuilder;
   }
 
   /** */
-  arrow.buffer.Buffer getBuffer()
+  arrow.buffer.Buffer getBuffer() nothrow
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_primitive_array_get_buffer(cast(GArrowPrimitiveArray*)this._cPtr);
@@ -59,7 +59,7 @@ class PrimitiveArray : arrow.array.Array
   }
 
   /** */
-  arrow.buffer.Buffer getDataBuffer()
+  arrow.buffer.Buffer getDataBuffer() nothrow
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_primitive_array_get_data_buffer(cast(GArrowPrimitiveArray*)this._cPtr);
@@ -80,7 +80,7 @@ final class PrimitiveArrayGidBuilder : PrimitiveArrayGidBuilderImpl!PrimitiveArr
       Create object from builder.
       Returns: New object
   */
-  PrimitiveArray build()
+  PrimitiveArray build() nothrow
   {
     return new PrimitiveArray(cast(void*)createGObject(PrimitiveArray._getGType), No.Take);
   }

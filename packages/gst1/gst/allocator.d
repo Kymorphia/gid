@@ -29,26 +29,26 @@ class Allocator : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_allocator_get_type != &gidSymbolNotFound ? gst_allocator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Allocator self()
+  override Allocator self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class Allocator : gst.object.ObjectWrap
       Get builder for [gst.allocator.Allocator]
       Returns: New builder object
   */
-  static AllocatorGidBuilder builder()
+  static AllocatorGidBuilder builder() nothrow
   {
     return new AllocatorGidBuilder;
   }
@@ -71,7 +71,7 @@ class Allocator : gst.object.ObjectWrap
       Returns: a #GstAllocator or null when
         the allocator with name was not registered.
   */
-  static gst.allocator.Allocator find(string name = null)
+  static gst.allocator.Allocator find(string name = null) nothrow
   {
     GstAllocator* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -87,7 +87,7 @@ class Allocator : gst.object.ObjectWrap
         name = the name of the allocator
         allocator = #GstAllocator
   */
-  static void register(string name, gst.allocator.Allocator allocator)
+  static void register(string name, gst.allocator.Allocator allocator) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gst_allocator_register(_name, allocator ? cast(GstAllocator*)allocator._cPtr(Yes.Dup) : null);
@@ -115,7 +115,7 @@ class Allocator : gst.object.ObjectWrap
         params = optional parameters
       Returns: a new #GstMemory.
   */
-  gst.memory.Memory alloc(size_t size, gst.allocation_params.AllocationParams params)
+  gst.memory.Memory alloc(size_t size, gst.allocation_params.AllocationParams params) nothrow
   {
     GstMemory* _cretval;
     _cretval = gst_allocator_alloc(cast(GstAllocator*)this._cPtr, size, cast(GstAllocationParams*)&params);
@@ -126,7 +126,7 @@ class Allocator : gst.object.ObjectWrap
   /**
       Set the default allocator.
   */
-  void setDefault()
+  void setDefault() nothrow
   {
     gst_allocator_set_default(cast(GstAllocator*)this._cPtr);
   }
@@ -144,7 +144,7 @@ final class AllocatorGidBuilder : AllocatorGidBuilderImpl!AllocatorGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Allocator build()
+  Allocator build() nothrow
   {
     return new Allocator(cast(void*)createGObject(Allocator._getGType), No.Take);
   }

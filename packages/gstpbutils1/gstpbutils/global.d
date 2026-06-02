@@ -28,7 +28,7 @@ import gstpbutils.types;
                        in ISO/IEC 14496-1. (See below for more details)
     Returns: true if the level and profile could be set, false otherwise.
 */
-bool codecUtilsAacCapsSetLevelAndProfile(gst.caps.Caps caps, ubyte[] audioConfig)
+bool codecUtilsAacCapsSetLevelAndProfile(gst.caps.Caps caps, ubyte[] audioConfig) nothrow
 {
   bool _retval;
   uint _len;
@@ -49,7 +49,7 @@ bool codecUtilsAacCapsSetLevelAndProfile(gst.caps.Caps caps, ubyte[] audioConfig
                        in ISO/IEC 14496-1.
     Returns: The channels or 0 if the channel could not be determined.
 */
-uint codecUtilsAacGetChannels(ubyte[] audioConfig)
+uint codecUtilsAacGetChannels(ubyte[] audioConfig) nothrow
 {
   uint _retval;
   uint _len;
@@ -69,7 +69,7 @@ uint codecUtilsAacGetChannels(ubyte[] audioConfig)
     Returns: The AAC index for this sample rate, -1 if the rate is not a
       valid AAC sample rate.
 */
-int codecUtilsAacGetIndexFromSampleRate(uint rate)
+int codecUtilsAacGetIndexFromSampleRate(uint rate) nothrow
 {
   int _retval;
   _retval = gst_codec_utils_aac_get_index_from_sample_rate(rate);
@@ -98,7 +98,7 @@ int codecUtilsAacGetIndexFromSampleRate(uint rate)
     Returns: The level as a const string and null if the level could not be
       determined.
 */
-string codecUtilsAacGetLevel(ubyte[] audioConfig)
+string codecUtilsAacGetLevel(ubyte[] audioConfig) nothrow
 {
   const(char)* _cretval;
   uint _len;
@@ -123,7 +123,7 @@ string codecUtilsAacGetLevel(ubyte[] audioConfig)
     Returns: The profile as a const string and null if the profile could not be
       determined.
 */
-string codecUtilsAacGetProfile(ubyte[] audioConfig)
+string codecUtilsAacGetProfile(ubyte[] audioConfig) nothrow
 {
   const(char)* _cretval;
   uint _len;
@@ -146,7 +146,7 @@ string codecUtilsAacGetProfile(ubyte[] audioConfig)
                        in ISO/IEC 14496-1.
     Returns: The sample rate if sr_idx is valid, 0 otherwise.
 */
-uint codecUtilsAacGetSampleRate(ubyte[] audioConfig)
+uint codecUtilsAacGetSampleRate(ubyte[] audioConfig) nothrow
 {
   uint _retval;
   uint _len;
@@ -167,7 +167,7 @@ uint codecUtilsAacGetSampleRate(ubyte[] audioConfig)
                  container) or ADTS frame header
     Returns: The sample rate if sr_idx is valid, 0 otherwise.
 */
-uint codecUtilsAacGetSampleRateFromIndex(uint srIdx)
+uint codecUtilsAacGetSampleRateFromIndex(uint srIdx) nothrow
 {
   uint _retval;
   _retval = gst_codec_utils_aac_get_sample_rate_from_index(srIdx);
@@ -184,7 +184,7 @@ uint codecUtilsAacGetSampleRateFromIndex(uint srIdx)
       codecsField = A mime codec string field
     Returns: The corresponding #GstCaps or null
 */
-gst.caps.Caps codecUtilsCapsFromMimeCodec(string codecsField)
+gst.caps.Caps codecUtilsCapsFromMimeCodec(string codecsField) nothrow
 {
   GstCaps* _cretval;
   const(char)* _codecsField = codecsField.toCString(No.Alloc);
@@ -205,7 +205,7 @@ gst.caps.Caps codecUtilsCapsFromMimeCodec(string codecsField)
       caps = A #GstCaps to convert to mime codec
     Returns: a RFC 6381 compatible codec string or null
 */
-string codecUtilsCapsGetMimeCodec(gst.caps.Caps caps)
+string codecUtilsCapsGetMimeCodec(gst.caps.Caps caps) nothrow
 {
   char* _cretval;
   _cretval = gst_codec_utils_caps_get_mime_codec(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
@@ -223,7 +223,7 @@ string codecUtilsCapsGetMimeCodec(gst.caps.Caps caps)
       sps = Pointer to the sequence parameter set for the stream.
     Returns: true if the level and profile could be set, false otherwise.
 */
-bool codecUtilsH264CapsSetLevelAndProfile(gst.caps.Caps caps, ubyte[] sps)
+bool codecUtilsH264CapsSetLevelAndProfile(gst.caps.Caps caps, ubyte[] sps) nothrow
 {
   bool _retval;
   uint _len;
@@ -244,7 +244,7 @@ bool codecUtilsH264CapsSetLevelAndProfile(gst.caps.Caps caps, ubyte[] sps)
       sps = Pointer to the sequence parameter set for the stream.
     Returns: The level as a const string, or null if there is an error.
 */
-string codecUtilsH264GetLevel(ubyte[] sps)
+string codecUtilsH264GetLevel(ubyte[] sps) nothrow
 {
   const(char)* _cretval;
   uint _len;
@@ -264,7 +264,7 @@ string codecUtilsH264GetLevel(ubyte[] sps)
       level = A level string from caps
     Returns: the level_idc or 0 if the level is unknown
 */
-ubyte codecUtilsH264GetLevelIdc(string level)
+ubyte codecUtilsH264GetLevelIdc(string level) nothrow
 {
   ubyte _retval;
   const(char)* _level = level.toCString(No.Alloc);
@@ -292,7 +292,7 @@ ubyte codecUtilsH264GetLevelIdc(string level)
       sps = Pointer to the sequence parameter set for the stream.
     Returns: The profile as a const string, or null if there is an error.
 */
-string codecUtilsH264GetProfile(ubyte[] sps)
+string codecUtilsH264GetProfile(ubyte[] sps) nothrow
 {
   const(char)* _cretval;
   uint _len;
@@ -321,7 +321,7 @@ string codecUtilsH264GetProfile(ubyte[] sps)
       level = return location h264 level_idc or null
     Returns: true on success, false on failure
 */
-bool codecUtilsH264GetProfileFlagsLevel(ubyte[] codecData, out ubyte profile, out ubyte flags, out ubyte level)
+bool codecUtilsH264GetProfileFlagsLevel(ubyte[] codecData, out ubyte profile, out ubyte flags, out ubyte level) nothrow
 {
   bool _retval;
   uint _len;
@@ -345,7 +345,7 @@ bool codecUtilsH264GetProfileFlagsLevel(ubyte[] codecData, out ubyte profile, ou
           struct
     Returns: true if the level, tier, profile could be set, false otherwise.
 */
-bool codecUtilsH265CapsSetLevelTierAndProfile(gst.caps.Caps caps, ubyte[] profileTierLevel)
+bool codecUtilsH265CapsSetLevelTierAndProfile(gst.caps.Caps caps, ubyte[] profileTierLevel) nothrow
 {
   bool _retval;
   uint _len;
@@ -367,7 +367,7 @@ bool codecUtilsH265CapsSetLevelTierAndProfile(gst.caps.Caps caps, ubyte[] profil
           for the stream
     Returns: The level as a const string, or null if there is an error.
 */
-string codecUtilsH265GetLevel(ubyte[] profileTierLevel)
+string codecUtilsH265GetLevel(ubyte[] profileTierLevel) nothrow
 {
   const(char)* _cretval;
   uint _len;
@@ -387,7 +387,7 @@ string codecUtilsH265GetLevel(ubyte[] profileTierLevel)
       level = A level string from caps
     Returns: the level_idc or 0 if the level is unknown
 */
-ubyte codecUtilsH265GetLevelIdc(string level)
+ubyte codecUtilsH265GetLevelIdc(string level) nothrow
 {
   ubyte _retval;
   const(char)* _level = level.toCString(No.Alloc);
@@ -418,7 +418,7 @@ ubyte codecUtilsH265GetLevelIdc(string level)
           structure for the stream.
     Returns: The profile as a const string, or null if there is an error.
 */
-string codecUtilsH265GetProfile(ubyte[] profileTierLevel)
+string codecUtilsH265GetProfile(ubyte[] profileTierLevel) nothrow
 {
   const(char)* _cretval;
   uint _len;
@@ -441,7 +441,7 @@ string codecUtilsH265GetProfile(ubyte[] profileTierLevel)
           for the stream.
     Returns: The tier as a const string, or null if there is an error.
 */
-string codecUtilsH265GetTier(ubyte[] profileTierLevel)
+string codecUtilsH265GetTier(ubyte[] profileTierLevel) nothrow
 {
   const(char)* _cretval;
   uint _len;
@@ -466,7 +466,7 @@ string codecUtilsH265GetTier(ubyte[] profileTierLevel)
           sequence for the stream.
     Returns: true if the level and profile could be set, false otherwise.
 */
-bool codecUtilsMpeg4videoCapsSetLevelAndProfile(gst.caps.Caps caps, ubyte[] visObjSeq)
+bool codecUtilsMpeg4videoCapsSetLevelAndProfile(gst.caps.Caps caps, ubyte[] visObjSeq) nothrow
 {
   bool _retval;
   uint _len;
@@ -489,7 +489,7 @@ bool codecUtilsMpeg4videoCapsSetLevelAndProfile(gst.caps.Caps caps, ubyte[] visO
           sequence for the stream.
     Returns: The level as a const string, or NULL if there is an error.
 */
-string codecUtilsMpeg4videoGetLevel(ubyte[] visObjSeq)
+string codecUtilsMpeg4videoGetLevel(ubyte[] visObjSeq) nothrow
 {
   const(char)* _cretval;
   uint _len;
@@ -513,7 +513,7 @@ string codecUtilsMpeg4videoGetLevel(ubyte[] visObjSeq)
           sequence for the stream.
     Returns: The profile as a const string, or NULL if there is an error.
 */
-string codecUtilsMpeg4videoGetProfile(ubyte[] visObjSeq)
+string codecUtilsMpeg4videoGetProfile(ubyte[] visObjSeq) nothrow
 {
   const(char)* _cretval;
   uint _len;
@@ -535,7 +535,7 @@ string codecUtilsMpeg4videoGetProfile(ubyte[] visObjSeq)
       comments = Comment header or NULL
     Returns: The #GstCaps.
 */
-gst.caps.Caps codecUtilsOpusCreateCapsFromHeader(gst.buffer.Buffer header, gst.buffer.Buffer comments = null)
+gst.caps.Caps codecUtilsOpusCreateCapsFromHeader(gst.buffer.Buffer header, gst.buffer.Buffer comments = null) nothrow
 {
   GstCaps* _cretval;
   _cretval = gst_codec_utils_opus_create_caps_from_header(header ? cast(GstBuffer*)header._cPtr(No.Dup) : null, comments ? cast(GstBuffer*)comments._cPtr(No.Dup) : null);
@@ -556,7 +556,7 @@ gst.caps.Caps codecUtilsOpusCreateCapsFromHeader(gst.buffer.Buffer header, gst.b
       channelMapping = the mapping between the streams
     Returns: true if parsing was successful, false otherwise.
 */
-bool codecUtilsOpusParseCaps(gst.caps.Caps caps, out uint rate, out ubyte channels, out ubyte channelMappingFamily, out ubyte streamCount, out ubyte coupledCount, ref ubyte[] channelMapping)
+bool codecUtilsOpusParseCaps(gst.caps.Caps caps, out uint rate, out ubyte channels, out ubyte channelMappingFamily, out ubyte streamCount, out ubyte coupledCount, ref ubyte[] channelMapping) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_codec_utils_opus_parse_caps(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, cast(uint*)&rate, cast(ubyte*)&channels, cast(ubyte*)&channelMappingFamily, cast(ubyte*)&streamCount, cast(ubyte*)&coupledCount, channelMapping.ptr);
@@ -578,7 +578,7 @@ bool codecUtilsOpusParseCaps(gst.caps.Caps caps, out uint rate, out ubyte channe
       outputGain = Output gain or 0
     Returns: true if parsing was successful, false otherwise.
 */
-bool codecUtilsOpusParseHeader(gst.buffer.Buffer header, out uint rate, out ubyte channels, out ubyte channelMappingFamily, out ubyte streamCount, out ubyte coupledCount, ref ubyte[] channelMapping, out ushort preSkip, out short outputGain)
+bool codecUtilsOpusParseHeader(gst.buffer.Buffer header, out uint rate, out ubyte channels, out ubyte channelMappingFamily, out ubyte streamCount, out ubyte coupledCount, ref ubyte[] channelMapping, out ushort preSkip, out short outputGain) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_codec_utils_opus_parse_header(header ? cast(GstBuffer*)header._cPtr(No.Dup) : null, cast(uint*)&rate, cast(ubyte*)&channels, cast(ubyte*)&channelMappingFamily, cast(ubyte*)&streamCount, cast(ubyte*)&coupledCount, channelMapping.ptr, cast(ushort*)&preSkip, cast(short*)&outputGain);
@@ -594,7 +594,7 @@ bool codecUtilsOpusParseHeader(gst.buffer.Buffer header, out uint rate, out ubyt
         Can be null.
     Returns: The list of #GstEncodingTarget
 */
-gstpbutils.encoding_target.EncodingTarget[] encodingListAllTargets(string categoryname = null)
+gstpbutils.encoding_target.EncodingTarget[] encodingListAllTargets(string categoryname = null) nothrow
 {
   GList* _cretval;
   const(char)* _categoryname = categoryname.toCString(No.Alloc);
@@ -608,7 +608,7 @@ gstpbutils.encoding_target.EncodingTarget[] encodingListAllTargets(string catego
     Returns: A list
       of #GstEncodingTarget categories.
 */
-string[] encodingListAvailableCategories()
+string[] encodingListAvailableCategories() nothrow
 {
   GList* _cretval;
   _cretval = gst_encoding_list_available_categories();
@@ -641,14 +641,21 @@ string[] encodingListAvailableCategories()
       func = the function to call when the installer program returns
     Returns: result code whether an external installer could be started
 */
-gstpbutils.types.InstallPluginsReturn installPluginsAsync(string[] details, gstpbutils.install_plugins_context.InstallPluginsContext ctx, gstpbutils.types.InstallPluginsResultFunc func)
+gstpbutils.types.InstallPluginsReturn installPluginsAsync(string[] details, gstpbutils.install_plugins_context.InstallPluginsContext ctx, gstpbutils.types.InstallPluginsResultFunc func) nothrow
 {
-  extern(C) void _funcCallback(GstInstallPluginsReturn result, void* userData)
+  extern(C) void _funcCallback(GstInstallPluginsReturn result, void* userData) nothrow
   {
     ptrThawGC(userData);
     auto _dlg = cast(gstpbutils.types.InstallPluginsResultFunc*)userData;
 
-    (*_dlg)(result);
+    try
+    {
+      (*_dlg)(result);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gstpbutils.types.InstallPluginsResultFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   GstInstallPluginsReturn _cretval;
@@ -669,7 +676,7 @@ gstpbutils.types.InstallPluginsReturn installPluginsAsync(string[] details, gstp
     is currently in progress.
     Returns: TRUE if plugin installation is in progress, otherwise FALSE
 */
-bool installPluginsInstallationInProgress()
+bool installPluginsInstallationInProgress() nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_install_plugins_installation_in_progress();
@@ -683,7 +690,7 @@ bool installPluginsInstallationInProgress()
     exists.
     Returns: TRUE if plugin installation is likely to be supported.
 */
-bool installPluginsSupported()
+bool installPluginsSupported() nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_install_plugins_supported();
@@ -706,7 +713,7 @@ bool installPluginsSupported()
       ctx = a #GstInstallPluginsContext, or NULL
     Returns: the result of the installation.
 */
-gstpbutils.types.InstallPluginsReturn installPluginsSync(string[] details, gstpbutils.install_plugins_context.InstallPluginsContext ctx = null)
+gstpbutils.types.InstallPluginsReturn installPluginsSync(string[] details, gstpbutils.install_plugins_context.InstallPluginsContext ctx = null) nothrow
 {
   GstInstallPluginsReturn _cretval;
   char*[] _tmpdetails;
@@ -727,7 +734,7 @@ gstpbutils.types.InstallPluginsReturn installPluginsSync(string[] details, gstpb
       msg = a #GstMessage
     Returns: true if msg is a missing-plugins message, otherwise false.
 */
-bool isMissingPluginMessage(gst.message.Message msg)
+bool isMissingPluginMessage(gst.message.Message msg) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_is_missing_plugin_message(msg ? cast(GstMessage*)msg._cPtr(No.Dup) : null);
@@ -749,7 +756,7 @@ bool isMissingPluginMessage(gst.message.Message msg)
     Returns: a newly-allocated detail string. Free string
                with [glib.global.gfree] when not needed any longer.
 */
-string missingDecoderInstallerDetailNew(gst.caps.Caps decodeCaps)
+string missingDecoderInstallerDetailNew(gst.caps.Caps decodeCaps) nothrow
 {
   char* _cretval;
   _cretval = gst_missing_decoder_installer_detail_new(decodeCaps ? cast(const(GstCaps)*)decodeCaps._cPtr(No.Dup) : null);
@@ -767,7 +774,7 @@ string missingDecoderInstallerDetailNew(gst.caps.Caps decodeCaps)
       decodeCaps = the (fixed) caps for which a decoder element is needed
     Returns: a new #GstMessage
 */
-gst.message.Message missingDecoderMessageNew(gst.element.Element element, gst.caps.Caps decodeCaps)
+gst.message.Message missingDecoderMessageNew(gst.element.Element element, gst.caps.Caps decodeCaps) nothrow
 {
   GstMessage* _cretval;
   _cretval = gst_missing_decoder_message_new(element ? cast(GstElement*)element._cPtr(No.Dup) : null, decodeCaps ? cast(const(GstCaps)*)decodeCaps._cPtr(No.Dup) : null);
@@ -791,7 +798,7 @@ gst.message.Message missingDecoderMessageNew(gst.element.Element element, gst.ca
     Returns: a newly-allocated detail string. Free string
                with [glib.global.gfree] when not needed any longer.
 */
-string missingElementInstallerDetailNew(string factoryName)
+string missingElementInstallerDetailNew(string factoryName) nothrow
 {
   char* _cretval;
   const(char)* _factoryName = factoryName.toCString(No.Alloc);
@@ -811,7 +818,7 @@ string missingElementInstallerDetailNew(string factoryName)
                    e.g. "videoscale" or "cdparanoiasrc"
     Returns: a new #GstMessage
 */
-gst.message.Message missingElementMessageNew(gst.element.Element element, string factoryName)
+gst.message.Message missingElementMessageNew(gst.element.Element element, string factoryName) nothrow
 {
   GstMessage* _cretval;
   const(char)* _factoryName = factoryName.toCString(No.Alloc);
@@ -835,7 +842,7 @@ gst.message.Message missingElementMessageNew(gst.element.Element element, string
     Returns: a newly-allocated detail string. Free string
                with [glib.global.gfree] when not needed any longer.
 */
-string missingEncoderInstallerDetailNew(gst.caps.Caps encodeCaps)
+string missingEncoderInstallerDetailNew(gst.caps.Caps encodeCaps) nothrow
 {
   char* _cretval;
   _cretval = gst_missing_encoder_installer_detail_new(encodeCaps ? cast(const(GstCaps)*)encodeCaps._cPtr(No.Dup) : null);
@@ -853,7 +860,7 @@ string missingEncoderInstallerDetailNew(gst.caps.Caps encodeCaps)
       encodeCaps = the (fixed) caps for which an encoder element is needed
     Returns: a new #GstMessage
 */
-gst.message.Message missingEncoderMessageNew(gst.element.Element element, gst.caps.Caps encodeCaps)
+gst.message.Message missingEncoderMessageNew(gst.element.Element element, gst.caps.Caps encodeCaps) nothrow
 {
   GstMessage* _cretval;
   _cretval = gst_missing_encoder_message_new(element ? cast(GstElement*)element._cPtr(No.Dup) : null, encodeCaps ? cast(const(GstCaps)*)encodeCaps._cPtr(No.Dup) : null);
@@ -875,7 +882,7 @@ gst.message.Message missingEncoderMessageNew(gst.element.Element element, gst.ca
     Returns: a newly-allocated description string. Free
                string with [glib.global.gfree] when not needed any longer.
 */
-string missingPluginMessageGetDescription(gst.message.Message msg)
+string missingPluginMessageGetDescription(gst.message.Message msg) nothrow
 {
   char* _cretval;
   _cretval = gst_missing_plugin_message_get_description(msg ? cast(GstMessage*)msg._cPtr(No.Dup) : null);
@@ -896,7 +903,7 @@ string missingPluginMessageGetDescription(gst.message.Message msg)
     Returns: a newly-allocated detail string, or NULL on error. Free string
                with [glib.global.gfree] when not needed any longer.
 */
-string missingPluginMessageGetInstallerDetail(gst.message.Message msg)
+string missingPluginMessageGetInstallerDetail(gst.message.Message msg) nothrow
 {
   char* _cretval;
   _cretval = gst_missing_plugin_message_get_installer_detail(msg ? cast(GstMessage*)msg._cPtr(No.Dup) : null);
@@ -920,7 +927,7 @@ string missingPluginMessageGetInstallerDetail(gst.message.Message msg)
     Returns: a newly-allocated detail string. Free string
                with [glib.global.gfree] when not needed any longer.
 */
-string missingUriSinkInstallerDetailNew(string protocol)
+string missingUriSinkInstallerDetailNew(string protocol) nothrow
 {
   char* _cretval;
   const(char)* _protocol = protocol.toCString(No.Alloc);
@@ -940,7 +947,7 @@ string missingUriSinkInstallerDetailNew(string protocol)
                    e.g. "http" or "smb"
     Returns: a new #GstMessage
 */
-gst.message.Message missingUriSinkMessageNew(gst.element.Element element, string protocol)
+gst.message.Message missingUriSinkMessageNew(gst.element.Element element, string protocol) nothrow
 {
   GstMessage* _cretval;
   const(char)* _protocol = protocol.toCString(No.Alloc);
@@ -965,7 +972,7 @@ gst.message.Message missingUriSinkMessageNew(gst.element.Element element, string
     Returns: a newly-allocated detail string. Free string
                with [glib.global.gfree] when not needed any longer.
 */
-string missingUriSourceInstallerDetailNew(string protocol)
+string missingUriSourceInstallerDetailNew(string protocol) nothrow
 {
   char* _cretval;
   const(char)* _protocol = protocol.toCString(No.Alloc);
@@ -985,7 +992,7 @@ string missingUriSourceInstallerDetailNew(string protocol)
                    e.g. "http" or "mms"
     Returns: a new #GstMessage
 */
-gst.message.Message missingUriSourceMessageNew(gst.element.Element element, string protocol)
+gst.message.Message missingUriSourceMessageNew(gst.element.Element element, string protocol) nothrow
 {
   GstMessage* _cretval;
   const(char)* _protocol = protocol.toCString(No.Alloc);
@@ -1005,7 +1012,7 @@ gst.message.Message missingUriSourceMessageNew(gst.element.Element element, stri
       caps = the (fixed) #GstCaps for which a codec tag should be added.
     Returns: TRUE if a codec tag was added, FALSE otherwise.
 */
-bool pbUtilsAddCodecDescriptionToTagList(gst.tag_list.TagList taglist, string codecTag, gst.caps.Caps caps)
+bool pbUtilsAddCodecDescriptionToTagList(gst.tag_list.TagList taglist, string codecTag, gst.caps.Caps caps) nothrow
 {
   bool _retval;
   const(char)* _codecTag = codecTag.toCString(No.Alloc);
@@ -1022,7 +1029,7 @@ bool pbUtilsAddCodecDescriptionToTagList(gst.tag_list.TagList taglist, string co
     Returns: #GstPbUtilsCapsDescriptionFlags that describe caps, or no flags
                if the caps are unknown.
 */
-gstpbutils.types.PbUtilsCapsDescriptionFlags pbUtilsGetCapsDescriptionFlags(gst.caps.Caps caps)
+gstpbutils.types.PbUtilsCapsDescriptionFlags pbUtilsGetCapsDescriptionFlags(gst.caps.Caps caps) nothrow
 {
   GstPbUtilsCapsDescriptionFlags _cretval;
   _cretval = gst_pb_utils_get_caps_description_flags(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
@@ -1043,7 +1050,7 @@ gstpbutils.types.PbUtilsCapsDescriptionFlags pbUtilsGetCapsDescriptionFlags(gst.
     Returns: a newly-allocated description string, or NULL on error. Free
                string with [glib.global.gfree] when not needed any longer.
 */
-string pbUtilsGetCodecDescription(gst.caps.Caps caps)
+string pbUtilsGetCodecDescription(gst.caps.Caps caps) nothrow
 {
   char* _cretval;
   _cretval = gst_pb_utils_get_codec_description(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
@@ -1064,7 +1071,7 @@ string pbUtilsGetCodecDescription(gst.caps.Caps caps)
     Returns: a newly-allocated description string. Free
                string with [glib.global.gfree] when not needed any longer.
 */
-string pbUtilsGetDecoderDescription(gst.caps.Caps caps)
+string pbUtilsGetDecoderDescription(gst.caps.Caps caps) nothrow
 {
   char* _cretval;
   _cretval = gst_pb_utils_get_decoder_description(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
@@ -1085,7 +1092,7 @@ string pbUtilsGetDecoderDescription(gst.caps.Caps caps)
     Returns: a newly-allocated description string. Free
                string with [glib.global.gfree] when not needed any longer.
 */
-string pbUtilsGetElementDescription(string factoryName)
+string pbUtilsGetElementDescription(string factoryName) nothrow
 {
   char* _cretval;
   const(char)* _factoryName = factoryName.toCString(No.Alloc);
@@ -1107,7 +1114,7 @@ string pbUtilsGetElementDescription(string factoryName)
     Returns: a newly-allocated description string. Free
                string with [glib.global.gfree] when not needed any longer.
 */
-string pbUtilsGetEncoderDescription(gst.caps.Caps caps)
+string pbUtilsGetEncoderDescription(gst.caps.Caps caps) nothrow
 {
   char* _cretval;
   _cretval = gst_pb_utils_get_encoder_description(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
@@ -1123,7 +1130,7 @@ string pbUtilsGetEncoderDescription(gst.caps.Caps caps)
     Returns: a newly-allocated file extension string, or NULL on error. Free
                string with [glib.global.gfree] when not needed any longer.
 */
-string pbUtilsGetFileExtensionFromCaps(gst.caps.Caps caps)
+string pbUtilsGetFileExtensionFromCaps(gst.caps.Caps caps) nothrow
 {
   char* _cretval;
   _cretval = gst_pb_utils_get_file_extension_from_caps(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
@@ -1145,7 +1152,7 @@ string pbUtilsGetFileExtensionFromCaps(gst.caps.Caps caps)
     Returns: a newly-allocated description string. Free
                string with [glib.global.gfree] when not needed any longer.
 */
-string pbUtilsGetSinkDescription(string protocol)
+string pbUtilsGetSinkDescription(string protocol) nothrow
 {
   char* _cretval;
   const(char)* _protocol = protocol.toCString(No.Alloc);
@@ -1168,7 +1175,7 @@ string pbUtilsGetSinkDescription(string protocol)
     Returns: a newly-allocated description string. Free
                string with [glib.global.gfree] when not needed any longer.
 */
-string pbUtilsGetSourceDescription(string protocol)
+string pbUtilsGetSourceDescription(string protocol) nothrow
 {
   char* _cretval;
   const(char)* _protocol = protocol.toCString(No.Alloc);
@@ -1185,7 +1192,7 @@ string pbUtilsGetSourceDescription(string protocol)
     This function may be called multiple times. It will do nothing if the
     library has already been initialised.
 */
-void pbUtilsInit()
+void pbUtilsInit() nothrow
 {
   gst_pb_utils_init();
 }
@@ -1199,7 +1206,7 @@ void pbUtilsInit()
       micro = pointer to a guint to store the micro version number, or null
       nano = pointer to a guint to store the nano version number, or null
 */
-void pluginsBaseVersion(out uint major, out uint minor, out uint micro, out uint nano)
+void pluginsBaseVersion(out uint major, out uint minor, out uint micro, out uint nano) nothrow
 {
   gst_plugins_base_version(cast(uint*)&major, cast(uint*)&minor, cast(uint*)&micro, cast(uint*)&nano);
 }
@@ -1210,7 +1217,7 @@ void pluginsBaseVersion(out uint major, out uint minor, out uint micro, out uint
     strings, logging, about dialogs ...
     Returns: a newly allocated string describing this version of gst-plugins-base
 */
-string pluginsBaseVersionString()
+string pluginsBaseVersionString() nothrow
 {
   char* _cretval;
   _cretval = gst_plugins_base_version_string();

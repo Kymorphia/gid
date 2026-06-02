@@ -22,26 +22,26 @@ class EventBox : gtk.bin.Bin
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_event_box_get_type != &gidSymbolNotFound ? gtk_event_box_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EventBox self()
+  override EventBox self() nothrow
   {
     return this;
   }
@@ -50,31 +50,31 @@ class EventBox : gtk.bin.Bin
       Get builder for [gtk.event_box.EventBox]
       Returns: New builder object
   */
-  static EventBoxGidBuilder builder()
+  static EventBoxGidBuilder builder() nothrow
   {
     return new EventBoxGidBuilder;
   }
 
   /** */
-  @property bool aboveChild()
+  @property bool aboveChild() nothrow
   {
     return getAboveChild();
   }
 
   /** */
-  @property void aboveChild(bool propval)
+  @property void aboveChild(bool propval) nothrow
   {
     setAboveChild(propval);
   }
 
   /** */
-  @property bool visibleWindow()
+  @property bool visibleWindow() nothrow
   {
     return getVisibleWindow();
   }
 
   /** */
-  @property void visibleWindow(bool propval)
+  @property void visibleWindow(bool propval) nothrow
   {
     setVisibleWindow(propval);
   }
@@ -83,7 +83,7 @@ class EventBox : gtk.bin.Bin
       Creates a new #GtkEventBox.
       Returns: a new #GtkEventBox
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_event_box_new();
@@ -97,7 +97,7 @@ class EventBox : gtk.bin.Bin
       Returns: true if the event box window is above the
             window of its child
   */
-  bool getAboveChild()
+  bool getAboveChild() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_event_box_get_above_child(cast(GtkEventBox*)this._cPtr);
@@ -109,7 +109,7 @@ class EventBox : gtk.bin.Bin
       See [gtk.event_box.EventBox.setVisibleWindow] for details.
       Returns: true if the event box window is visible
   */
-  bool getVisibleWindow()
+  bool getVisibleWindow() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_event_box_get_visible_window(cast(GtkEventBox*)this._cPtr);
@@ -128,7 +128,7 @@ class EventBox : gtk.bin.Bin
       Params:
         aboveChild = true if the event box window is above its child
   */
-  void setAboveChild(bool aboveChild)
+  void setAboveChild(bool aboveChild) nothrow
   {
     gtk_event_box_set_above_child(cast(GtkEventBox*)this._cPtr, aboveChild);
   }
@@ -171,7 +171,7 @@ class EventBox : gtk.bin.Bin
       Params:
         visibleWindow = true to make the event box have a visible window
   */
-  void setVisibleWindow(bool visibleWindow)
+  void setVisibleWindow(bool visibleWindow) nothrow
   {
     gtk_event_box_set_visible_window(cast(GtkEventBox*)this._cPtr, visibleWindow);
   }
@@ -183,13 +183,13 @@ class EventBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 
 
   /** */
-  T aboveChild(bool propval)
+  T aboveChild(bool propval) nothrow
   {
     return setProperty("above-child", propval);
   }
 
   /** */
-  T visibleWindow(bool propval)
+  T visibleWindow(bool propval) nothrow
   {
     return setProperty("visible-window", propval);
   }
@@ -202,7 +202,7 @@ final class EventBoxGidBuilder : EventBoxGidBuilderImpl!EventBoxGidBuilder
       Create object from builder.
       Returns: New object
   */
-  EventBox build()
+  EventBox build() nothrow
   {
     return new EventBox(cast(void*)createGObject(EventBox._getGType), No.Take);
   }

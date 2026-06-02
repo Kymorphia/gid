@@ -34,26 +34,26 @@ class ThreadedSocketService : gio.socket_service.SocketService
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_threaded_socket_service_get_type != &gidSymbolNotFound ? g_threaded_socket_service_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ThreadedSocketService self()
+  override ThreadedSocketService self() nothrow
   {
     return this;
   }
@@ -62,7 +62,7 @@ class ThreadedSocketService : gio.socket_service.SocketService
       Get builder for [gio.threaded_socket_service.ThreadedSocketService]
       Returns: New builder object
   */
-  static ThreadedSocketServiceGidBuilder builder()
+  static ThreadedSocketServiceGidBuilder builder() nothrow
   {
     return new ThreadedSocketServiceGidBuilder;
   }
@@ -71,7 +71,7 @@ class ThreadedSocketService : gio.socket_service.SocketService
       Get `maxThreads` property.
       Returns: The maximum number of threads handling clients for this service.
   */
-  @property int maxThreads()
+  @property int maxThreads() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("max-threads");
   }
@@ -85,7 +85,7 @@ class ThreadedSocketService : gio.socket_service.SocketService
             handling incoming clients, -1 means no limit
       Returns: a new #GSocketService.
   */
-  this(int maxThreads)
+  this(int maxThreads) nothrow
   {
     GSocketService* _cretval;
     _cretval = g_threaded_socket_service_new(maxThreads);
@@ -115,7 +115,7 @@ class ThreadedSocketService : gio.socket_service.SocketService
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRun(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRun(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.socket_connection.SocketConnection)))
@@ -123,11 +123,12 @@ class ThreadedSocketService : gio.socket_service.SocketService
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.threaded_socket_service.ThreadedSocketService)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -138,7 +139,14 @@ class ThreadedSocketService : gio.socket_service.SocketService
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.threaded_socket_service.ThreadedSocketService.run");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -158,7 +166,7 @@ class ThreadedSocketServiceGidBuilderImpl(T) : gio.socket_service.SocketServiceG
         propval = The maximum number of threads handling clients for this service.
       Returns: Builder instance for fluent chaining
   */
-  T maxThreads(int propval)
+  T maxThreads(int propval) nothrow
   {
     return setProperty("max-threads", propval);
   }
@@ -171,7 +179,7 @@ final class ThreadedSocketServiceGidBuilder : ThreadedSocketServiceGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  ThreadedSocketService build()
+  ThreadedSocketService build() nothrow
   {
     return new ThreadedSocketService(cast(void*)createGObject(ThreadedSocketService._getGType), Yes.Take);
   }

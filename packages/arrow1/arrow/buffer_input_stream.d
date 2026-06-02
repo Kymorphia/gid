@@ -20,26 +20,26 @@ class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_buffer_input_stream_get_type != &gidSymbolNotFound ? garrow_buffer_input_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BufferInputStream self()
+  override BufferInputStream self() nothrow
   {
     return this;
   }
@@ -48,19 +48,19 @@ class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
       Get builder for [arrow.buffer_input_stream.BufferInputStream]
       Returns: New builder object
   */
-  static BufferInputStreamGidBuilder builder()
+  static BufferInputStreamGidBuilder builder() nothrow
   {
     return new BufferInputStreamGidBuilder;
   }
 
   /** */
-  @property arrow.buffer.Buffer buffer()
+  @property arrow.buffer.Buffer buffer() nothrow
   {
     return getBuffer();
   }
 
   /** */
-  this(arrow.buffer.Buffer buffer)
+  this(arrow.buffer.Buffer buffer) nothrow
   {
     GArrowBufferInputStream* _cretval;
     _cretval = garrow_buffer_input_stream_new(buffer ? cast(GArrowBuffer*)buffer._cPtr(No.Dup) : null);
@@ -68,7 +68,7 @@ class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
   }
 
   /** */
-  arrow.buffer.Buffer getBuffer()
+  arrow.buffer.Buffer getBuffer() nothrow
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_buffer_input_stream_get_buffer(cast(GArrowBufferInputStream*)this._cPtr);
@@ -83,7 +83,7 @@ class BufferInputStreamGidBuilderImpl(T) : arrow.seekable_input_stream.SeekableI
 
 
   /** */
-  T buffer(arrow.buffer.Buffer propval)
+  T buffer(arrow.buffer.Buffer propval) nothrow
   {
     return setProperty("buffer", propval);
   }
@@ -96,7 +96,7 @@ final class BufferInputStreamGidBuilder : BufferInputStreamGidBuilderImpl!Buffer
       Create object from builder.
       Returns: New object
   */
-  BufferInputStream build()
+  BufferInputStream build() nothrow
   {
     return new BufferInputStream(cast(void*)createGObject(BufferInputStream._getGType), Yes.Take);
   }

@@ -24,26 +24,26 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_input_stream_get_type != &gidSymbolNotFound ? garrow_input_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override InputStream self()
+  override InputStream self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
       Get builder for [arrow.input_stream.InputStream]
       Returns: New builder object
   */
-  static InputStreamGidBuilder builder()
+  static InputStreamGidBuilder builder() nothrow
   {
     return new InputStreamGidBuilder;
   }
@@ -118,7 +118,7 @@ class InputStreamGidBuilderImpl(T) : gio.input_stream.InputStreamGidBuilderImpl!
   mixin ReadableGidBuilderT!();
 
   /** */
-  T inputStream(void* propval)
+  T inputStream(void* propval) nothrow
   {
     return setProperty("input-stream", propval);
   }
@@ -131,7 +131,7 @@ final class InputStreamGidBuilder : InputStreamGidBuilderImpl!InputStreamGidBuil
       Create object from builder.
       Returns: New object
   */
-  InputStream build()
+  InputStream build() nothrow
   {
     return new InputStream(cast(void*)createGObject(InputStream._getGType), No.Take);
   }

@@ -20,11 +20,8 @@ class RTPBuffer
   GstRTPBuffer _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstrtp.rtpbuffer.RTPBuffer");
-
     _cInstance = *cast(GstRTPBuffer*)ptr;
 
     if (take)
@@ -32,7 +29,7 @@ class RTPBuffer
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -41,7 +38,7 @@ class RTPBuffer
       Get `buffer` field.
       Returns: pointer to RTP buffer
   */
-  @property gst.buffer.Buffer buffer()
+  @property gst.buffer.Buffer buffer() nothrow
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstRTPBuffer*)this._cPtr).buffer);
   }
@@ -51,7 +48,7 @@ class RTPBuffer
       Params:
         propval = pointer to RTP buffer
   */
-  @property void buffer(gst.buffer.Buffer propval)
+  @property void buffer(gst.buffer.Buffer propval) nothrow
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstRTPBuffer*)this._cPtr).buffer);
     dToC(propval, cast(void*)&(cast(GstRTPBuffer*)this._cPtr).buffer);
@@ -61,7 +58,7 @@ class RTPBuffer
       Get `state` field.
       Returns: internal state
   */
-  @property uint state()
+  @property uint state() nothrow
   {
     return (cast(GstRTPBuffer*)this._cPtr).state;
   }
@@ -71,7 +68,7 @@ class RTPBuffer
       Params:
         propval = internal state
   */
-  @property void state(uint propval)
+  @property void state(uint propval) nothrow
   {
     (cast(GstRTPBuffer*)this._cPtr).state = propval;
   }
@@ -90,7 +87,7 @@ class RTPBuffer
         data = location for data
       Returns: true if header extension could be added
   */
-  bool addExtensionOnebyteHeader(ubyte id, ubyte[] data)
+  bool addExtensionOnebyteHeader(ubyte id, ubyte[] data) nothrow
   {
     bool _retval;
     uint _size;
@@ -117,7 +114,7 @@ class RTPBuffer
         data = location for data
       Returns: true if header extension could be added
   */
-  bool addExtensionTwobytesHeader(ubyte appbits, ubyte id, ubyte[] data)
+  bool addExtensionTwobytesHeader(ubyte appbits, ubyte id, ubyte[] data) nothrow
   {
     bool _retval;
     uint _size;
@@ -136,7 +133,7 @@ class RTPBuffer
         idx = the index of the CSRC to get
       Returns: the CSRC at index idx in host order.
   */
-  uint getCsrc(ubyte idx)
+  uint getCsrc(ubyte idx) nothrow
   {
     uint _retval;
     _retval = gst_rtp_buffer_get_csrc(cast(GstRTPBuffer*)this._cPtr, idx);
@@ -147,7 +144,7 @@ class RTPBuffer
       Get the CSRC count of the RTP packet in buffer.
       Returns: the CSRC count of buffer.
   */
-  ubyte getCsrcCount()
+  ubyte getCsrcCount() nothrow
   {
     ubyte _retval;
     _retval = gst_rtp_buffer_get_csrc_count(cast(GstRTPBuffer*)this._cPtr);
@@ -158,7 +155,7 @@ class RTPBuffer
       Check if the extension bit is set on the RTP packet in buffer.
       Returns: TRUE if buffer has the extension bit set.
   */
-  bool getExtension()
+  bool getExtension() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtp_buffer_get_extension(cast(GstRTPBuffer*)this._cPtr);
@@ -180,7 +177,7 @@ class RTPBuffer
       Returns: A new #GBytes if an extension header was present
         and null otherwise.
   */
-  glib.bytes.Bytes getExtensionData(out ushort bits)
+  glib.bytes.Bytes getExtensionData(out ushort bits) nothrow
   {
     GBytes* _cretval;
     _cretval = gst_rtp_buffer_get_extension_bytes(cast(GstRTPBuffer*)this._cPtr, cast(ushort*)&bits);
@@ -198,7 +195,7 @@ class RTPBuffer
         data = location for data
       Returns: TRUE if buffer had the requested header extension
   */
-  bool getExtensionOnebyteHeader(ubyte id, uint nth, out ubyte[] data)
+  bool getExtensionOnebyteHeader(ubyte id, uint nth, out ubyte[] data) nothrow
   {
     bool _retval;
     uint _size;
@@ -220,7 +217,7 @@ class RTPBuffer
         data = location for data
       Returns: TRUE if buffer had the requested header extension
   */
-  bool getExtensionTwobytesHeader(out ubyte appbits, ubyte id, uint nth, out ubyte[] data)
+  bool getExtensionTwobytesHeader(out ubyte appbits, ubyte id, uint nth, out ubyte[] data) nothrow
   {
     bool _retval;
     uint _size;
@@ -236,7 +233,7 @@ class RTPBuffer
       the fixed header, the CSRC list and the extension header.
       Returns: The total length of the header in buffer.
   */
-  uint getHeaderLen()
+  uint getHeaderLen() nothrow
   {
     uint _retval;
     _retval = gst_rtp_buffer_get_header_len(cast(GstRTPBuffer*)this._cPtr);
@@ -247,7 +244,7 @@ class RTPBuffer
       Check if the marker bit is set on the RTP packet in buffer.
       Returns: TRUE if buffer has the marker bit set.
   */
-  bool getMarker()
+  bool getMarker() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtp_buffer_get_marker(cast(GstRTPBuffer*)this._cPtr);
@@ -258,7 +255,7 @@ class RTPBuffer
       Return the total length of the packet in buffer.
       Returns: The total length of the packet in buffer.
   */
-  uint getPacketLen()
+  uint getPacketLen() nothrow
   {
     uint _retval;
     _retval = gst_rtp_buffer_get_packet_len(cast(GstRTPBuffer*)this._cPtr);
@@ -269,7 +266,7 @@ class RTPBuffer
       Check if the padding bit is set on the RTP packet in buffer.
       Returns: TRUE if buffer has the padding bit set.
   */
-  bool getPadding()
+  bool getPadding() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtp_buffer_get_padding(cast(GstRTPBuffer*)this._cPtr);
@@ -282,7 +279,7 @@ class RTPBuffer
       avoided.
       Returns: A new buffer with the data of the payload.
   */
-  gst.buffer.Buffer getPayloadBuffer()
+  gst.buffer.Buffer getPayloadBuffer() nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_rtp_buffer_get_payload_buffer(cast(GstRTPBuffer*)this._cPtr);
@@ -296,7 +293,7 @@ class RTPBuffer
       containing the payload data in rtp.
       Returns: A new #GBytes containing the payload data in rtp.
   */
-  glib.bytes.Bytes getPayload()
+  glib.bytes.Bytes getPayload() nothrow
   {
     GBytes* _cretval;
     _cretval = gst_rtp_buffer_get_payload_bytes(cast(GstRTPBuffer*)this._cPtr);
@@ -308,7 +305,7 @@ class RTPBuffer
       Get the length of the payload of the RTP packet in buffer.
       Returns: The length of the payload in buffer.
   */
-  uint getPayloadLen()
+  uint getPayloadLen() nothrow
   {
     uint _retval;
     _retval = gst_rtp_buffer_get_payload_len(cast(GstRTPBuffer*)this._cPtr);
@@ -325,7 +322,7 @@ class RTPBuffer
         len = the length in the payload
       Returns: A new buffer with the specified data of the payload.
   */
-  gst.buffer.Buffer getPayloadSubbuffer(uint offset, uint len)
+  gst.buffer.Buffer getPayloadSubbuffer(uint offset, uint len) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_rtp_buffer_get_payload_subbuffer(cast(GstRTPBuffer*)this._cPtr, offset, len);
@@ -337,7 +334,7 @@ class RTPBuffer
       Get the payload type of the RTP packet in buffer.
       Returns: The payload type.
   */
-  ubyte getPayloadType()
+  ubyte getPayloadType() nothrow
   {
     ubyte _retval;
     _retval = gst_rtp_buffer_get_payload_type(cast(GstRTPBuffer*)this._cPtr);
@@ -348,7 +345,7 @@ class RTPBuffer
       Get the sequence number of the RTP packet in buffer.
       Returns: The sequence number in host order.
   */
-  ushort getSeq()
+  ushort getSeq() nothrow
   {
     ushort _retval;
     _retval = gst_rtp_buffer_get_seq(cast(GstRTPBuffer*)this._cPtr);
@@ -359,7 +356,7 @@ class RTPBuffer
       Get the SSRC of the RTP packet in buffer.
       Returns: the SSRC of buffer in host order.
   */
-  uint getSsrc()
+  uint getSsrc() nothrow
   {
     uint _retval;
     _retval = gst_rtp_buffer_get_ssrc(cast(GstRTPBuffer*)this._cPtr);
@@ -370,7 +367,7 @@ class RTPBuffer
       Get the timestamp of the RTP packet in buffer.
       Returns: The timestamp in host order.
   */
-  uint getTimestamp()
+  uint getTimestamp() nothrow
   {
     uint _retval;
     _retval = gst_rtp_buffer_get_timestamp(cast(GstRTPBuffer*)this._cPtr);
@@ -381,7 +378,7 @@ class RTPBuffer
       Get the version number of the RTP packet in buffer.
       Returns: The version of buffer.
   */
-  ubyte getVersion()
+  ubyte getVersion() nothrow
   {
     ubyte _retval;
     _retval = gst_rtp_buffer_get_version(cast(GstRTPBuffer*)this._cPtr);
@@ -397,7 +394,7 @@ class RTPBuffer
       Params:
         len = the new amount of padding
   */
-  void padTo(uint len)
+  void padTo(uint len) nothrow
   {
     gst_rtp_buffer_pad_to(cast(GstRTPBuffer*)this._cPtr, len);
   }
@@ -410,7 +407,7 @@ class RTPBuffer
       The RTP buffer must be mapped READWRITE only once and the underlying
       GstBuffer must be writable.
   */
-  void removeExtensionData()
+  void removeExtensionData() nothrow
   {
     gst_rtp_buffer_remove_extension_data(cast(GstRTPBuffer*)this._cPtr);
   }
@@ -422,7 +419,7 @@ class RTPBuffer
         idx = the CSRC index to set
         csrc = the CSRC in host order to set at idx
   */
-  void setCsrc(ubyte idx, uint csrc)
+  void setCsrc(ubyte idx, uint csrc) nothrow
   {
     gst_rtp_buffer_set_csrc(cast(GstRTPBuffer*)this._cPtr, idx, csrc);
   }
@@ -433,7 +430,7 @@ class RTPBuffer
       Params:
         extension = the new extension
   */
-  void setExtension(bool extension)
+  void setExtension(bool extension) nothrow
   {
     gst_rtp_buffer_set_extension(cast(GstRTPBuffer*)this._cPtr, extension);
   }
@@ -451,7 +448,7 @@ class RTPBuffer
           the extension, excluding the extension header ( therefore zero is a valid length)
       Returns: True if done.
   */
-  bool setExtensionData(ushort bits, ushort length)
+  bool setExtensionData(ushort bits, ushort length) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtp_buffer_set_extension_data(cast(GstRTPBuffer*)this._cPtr, bits, length);
@@ -464,7 +461,7 @@ class RTPBuffer
       Params:
         marker = the new marker
   */
-  void setMarker(bool marker)
+  void setMarker(bool marker) nothrow
   {
     gst_rtp_buffer_set_marker(cast(GstRTPBuffer*)this._cPtr, marker);
   }
@@ -476,7 +473,7 @@ class RTPBuffer
       Params:
         len = the new packet length
   */
-  void setPacketLen(uint len)
+  void setPacketLen(uint len) nothrow
   {
     gst_rtp_buffer_set_packet_len(cast(GstRTPBuffer*)this._cPtr, len);
   }
@@ -487,7 +484,7 @@ class RTPBuffer
       Params:
         padding = the new padding
   */
-  void setPadding(bool padding)
+  void setPadding(bool padding) nothrow
   {
     gst_rtp_buffer_set_padding(cast(GstRTPBuffer*)this._cPtr, padding);
   }
@@ -498,7 +495,7 @@ class RTPBuffer
       Params:
         payloadType = the new type
   */
-  void setPayloadType(ubyte payloadType)
+  void setPayloadType(ubyte payloadType) nothrow
   {
     gst_rtp_buffer_set_payload_type(cast(GstRTPBuffer*)this._cPtr, payloadType);
   }
@@ -509,7 +506,7 @@ class RTPBuffer
       Params:
         seq = the new sequence number
   */
-  void setSeq(ushort seq)
+  void setSeq(ushort seq) nothrow
   {
     gst_rtp_buffer_set_seq(cast(GstRTPBuffer*)this._cPtr, seq);
   }
@@ -520,7 +517,7 @@ class RTPBuffer
       Params:
         ssrc = the new SSRC
   */
-  void setSsrc(uint ssrc)
+  void setSsrc(uint ssrc) nothrow
   {
     gst_rtp_buffer_set_ssrc(cast(GstRTPBuffer*)this._cPtr, ssrc);
   }
@@ -531,7 +528,7 @@ class RTPBuffer
       Params:
         timestamp = the new timestamp
   */
-  void setTimestamp(uint timestamp)
+  void setTimestamp(uint timestamp) nothrow
   {
     gst_rtp_buffer_set_timestamp(cast(GstRTPBuffer*)this._cPtr, timestamp);
   }
@@ -542,7 +539,7 @@ class RTPBuffer
       Params:
         version_ = the new version
   */
-  void setVersion(ubyte version_)
+  void setVersion(ubyte version_) nothrow
   {
     gst_rtp_buffer_set_version(cast(GstRTPBuffer*)this._cPtr, version_);
   }
@@ -550,7 +547,7 @@ class RTPBuffer
   /**
       Unmap rtp previously mapped with [gstrtp.rtpbuffer.RTPBuffer.map].
   */
-  void unmap()
+  void unmap() nothrow
   {
     gst_rtp_buffer_unmap(cast(GstRTPBuffer*)this._cPtr);
   }
@@ -568,7 +565,7 @@ class RTPBuffer
         padLen = the amount of padding
         csrcCount = the number of CSRC entries
   */
-  static void allocateData(gst.buffer.Buffer buffer, uint payloadLen, ubyte padLen, ubyte csrcCount)
+  static void allocateData(gst.buffer.Buffer buffer, uint payloadLen, ubyte padLen, ubyte csrcCount) nothrow
   {
     gst_rtp_buffer_allocate_data(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, payloadLen, padLen, csrcCount);
   }
@@ -581,7 +578,7 @@ class RTPBuffer
         csrcCount = the number of CSRC entries
       Returns: The length of an RTP header with csrc_count CSRC entries.
   */
-  static uint calcHeaderLen(ubyte csrcCount)
+  static uint calcHeaderLen(ubyte csrcCount) nothrow
   {
     uint _retval;
     _retval = gst_rtp_buffer_calc_header_len(csrcCount);
@@ -598,7 +595,7 @@ class RTPBuffer
         csrcCount = the number of CSRC entries
       Returns: The total length of an RTP header with given parameters.
   */
-  static uint calcPacketLen(uint payloadLen, ubyte padLen, ubyte csrcCount)
+  static uint calcPacketLen(uint payloadLen, ubyte padLen, ubyte csrcCount) nothrow
   {
     uint _retval;
     _retval = gst_rtp_buffer_calc_packet_len(payloadLen, padLen, csrcCount);
@@ -615,7 +612,7 @@ class RTPBuffer
         csrcCount = the number of CSRC entries
       Returns: The length of the payload of an RTP packet  with given parameters.
   */
-  static uint calcPayloadLen(uint packetLen, ubyte padLen, ubyte csrcCount)
+  static uint calcPayloadLen(uint packetLen, ubyte padLen, ubyte csrcCount) nothrow
   {
     uint _retval;
     _retval = gst_rtp_buffer_calc_payload_len(packetLen, padLen, csrcCount);
@@ -632,7 +629,7 @@ class RTPBuffer
       Returns: a negative value if seqnum1 is bigger than seqnum2, 0 if they
         are equal or a positive value if seqnum1 is smaller than segnum2.
   */
-  static int compareSeqnum(ushort seqnum1, ushort seqnum2)
+  static int compareSeqnum(ushort seqnum1, ushort seqnum2) nothrow
   {
     int _retval;
     _retval = gst_rtp_buffer_compare_seqnum(seqnum1, seqnum2);
@@ -647,7 +644,7 @@ class RTPBuffer
       Returns: the default clock rate or -1 if the payload type is not static or
         the clock-rate is undefined.
   */
-  static uint defaultClockRate(ubyte payloadType)
+  static uint defaultClockRate(ubyte payloadType) nothrow
   {
     uint _retval;
     _retval = gst_rtp_buffer_default_clock_rate(payloadType);
@@ -669,7 +666,7 @@ class RTPBuffer
         timestamp = a new timestamp
       Returns: The extended timestamp of timestamp or 0 if the result can't go anywhere backwards.
   */
-  static ulong extTimestamp(ref ulong exttimestamp, uint timestamp)
+  static ulong extTimestamp(ref ulong exttimestamp, uint timestamp) nothrow
   {
     ulong _retval;
     _retval = gst_rtp_buffer_ext_timestamp(cast(ulong*)&exttimestamp, timestamp);
@@ -690,7 +687,7 @@ class RTPBuffer
         data = location for data
       Returns: TRUE if bytes had the requested header extension
   */
-  static bool getExtensionOnebyteHeaderFromBytes(glib.bytes.Bytes bytes, ushort bitPattern, ubyte id, uint nth, out ubyte[] data)
+  static bool getExtensionOnebyteHeaderFromBytes(glib.bytes.Bytes bytes, ushort bitPattern, ubyte id, uint nth, out ubyte[] data) nothrow
   {
     bool _retval;
     uint _size;
@@ -710,7 +707,7 @@ class RTPBuffer
         rtp = a #GstRTPBuffer
       Returns: true if buffer could be mapped.
   */
-  static bool map(gst.buffer.Buffer buffer, gst.types.MapFlags flags, out gstrtp.rtpbuffer.RTPBuffer rtp)
+  static bool map(gst.buffer.Buffer buffer, gst.types.MapFlags flags, out gstrtp.rtpbuffer.RTPBuffer rtp) nothrow
   {
     bool _retval;
     GstRTPBuffer _rtp;
@@ -731,7 +728,7 @@ class RTPBuffer
       Returns: A newly allocated buffer that can hold an RTP packet with given
         parameters.
   */
-  static gst.buffer.Buffer newAllocate(uint payloadLen, ubyte padLen, ubyte csrcCount)
+  static gst.buffer.Buffer newAllocate(uint payloadLen, ubyte padLen, ubyte csrcCount) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_rtp_buffer_new_allocate(payloadLen, padLen, csrcCount);
@@ -751,7 +748,7 @@ class RTPBuffer
         csrcCount = the number of CSRC entries
       Returns: A newly allocated buffer that can hold an RTP packet of packet_len.
   */
-  static gst.buffer.Buffer newAllocateLen(uint packetLen, ubyte padLen, ubyte csrcCount)
+  static gst.buffer.Buffer newAllocateLen(uint packetLen, ubyte padLen, ubyte csrcCount) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_rtp_buffer_new_allocate_len(packetLen, padLen, csrcCount);
@@ -769,7 +766,7 @@ class RTPBuffer
             buffer
       Returns: A newly allocated buffer with a copy of data and of size len.
   */
-  static gst.buffer.Buffer newCopyData(ubyte[] data)
+  static gst.buffer.Buffer newCopyData(ubyte[] data) nothrow
   {
     GstBuffer* _cretval;
     size_t _len;

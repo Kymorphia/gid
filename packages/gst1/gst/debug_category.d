@@ -16,11 +16,8 @@ class DebugCategory
   GstDebugCategory _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gst.debug_category.DebugCategory");
-
     _cInstance = *cast(GstDebugCategory*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class DebugCategory
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class DebugCategory
       category.
       Returns: the color of the category.
   */
-  uint getColor()
+  uint getColor() nothrow
   {
     uint _retval;
     _retval = gst_debug_category_get_color(cast(GstDebugCategory*)this._cPtr);
@@ -49,7 +46,7 @@ class DebugCategory
       Returns the description of a debug category.
       Returns: the description of the category.
   */
-  string getDescription()
+  string getDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_debug_category_get_description(cast(GstDebugCategory*)this._cPtr);
@@ -61,7 +58,7 @@ class DebugCategory
       Returns the name of a debug category.
       Returns: the name of the category.
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_debug_category_get_name(cast(GstDebugCategory*)this._cPtr);
@@ -73,7 +70,7 @@ class DebugCategory
       Returns the threshold of a #GstDebugCategory.
       Returns: the #GstDebugLevel that is used as threshold.
   */
-  gst.types.DebugLevel getThreshold()
+  gst.types.DebugLevel getThreshold() nothrow
   {
     GstDebugLevel _cretval;
     _cretval = gst_debug_category_get_threshold(cast(GstDebugCategory*)this._cPtr);
@@ -88,7 +85,7 @@ class DebugCategory
       Use this function to set the threshold back to where it was after using
       [gst.debug_category.DebugCategory.setThreshold].
   */
-  void resetThreshold()
+  void resetThreshold() nothrow
   {
     gst_debug_category_reset_threshold(cast(GstDebugCategory*)this._cPtr);
   }
@@ -104,7 +101,7 @@ class DebugCategory
       Params:
         level = the #GstDebugLevel threshold to set.
   */
-  void setThreshold(gst.types.DebugLevel level)
+  void setThreshold(gst.types.DebugLevel level) nothrow
   {
     gst_debug_category_set_threshold(cast(GstDebugCategory*)this._cPtr, level);
   }

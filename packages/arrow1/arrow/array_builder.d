@@ -17,26 +17,26 @@ class ArrayBuilder : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_array_builder_get_type != &gidSymbolNotFound ? garrow_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ArrayBuilder self()
+  override ArrayBuilder self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class ArrayBuilder : gobject.object.ObjectWrap
       Get builder for [arrow.array_builder.ArrayBuilder]
       Returns: New builder object
   */
-  static ArrayBuilderGidBuilder builder()
+  static ArrayBuilderGidBuilder builder() nothrow
   {
     return new ArrayBuilderGidBuilder;
   }
@@ -123,7 +123,7 @@ class ArrayBuilder : gobject.object.ObjectWrap
   }
 
   /** */
-  long getCapacity()
+  long getCapacity() nothrow
   {
     long _retval;
     _retval = garrow_array_builder_get_capacity(cast(GArrowArrayBuilder*)this._cPtr);
@@ -131,7 +131,7 @@ class ArrayBuilder : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.array_builder.ArrayBuilder getChild(int i)
+  arrow.array_builder.ArrayBuilder getChild(int i) nothrow
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_array_builder_get_child(cast(GArrowArrayBuilder*)this._cPtr, i);
@@ -140,7 +140,7 @@ class ArrayBuilder : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.array_builder.ArrayBuilder[] getChildren()
+  arrow.array_builder.ArrayBuilder[] getChildren() nothrow
   {
     GList* _cretval;
     _cretval = garrow_array_builder_get_children(cast(GArrowArrayBuilder*)this._cPtr);
@@ -149,7 +149,7 @@ class ArrayBuilder : gobject.object.ObjectWrap
   }
 
   /** */
-  long getLength()
+  long getLength() nothrow
   {
     long _retval;
     _retval = garrow_array_builder_get_length(cast(GArrowArrayBuilder*)this._cPtr);
@@ -157,7 +157,7 @@ class ArrayBuilder : gobject.object.ObjectWrap
   }
 
   /** */
-  long getNNulls()
+  long getNNulls() nothrow
   {
     long _retval;
     _retval = garrow_array_builder_get_n_nulls(cast(GArrowArrayBuilder*)this._cPtr);
@@ -165,7 +165,7 @@ class ArrayBuilder : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.data_type.DataType getValueDataType()
+  arrow.data_type.DataType getValueDataType() nothrow
   {
     GArrowDataType* _cretval;
     _cretval = garrow_array_builder_get_value_data_type(cast(GArrowArrayBuilder*)this._cPtr);
@@ -174,7 +174,7 @@ class ArrayBuilder : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.types.Type getValueType()
+  arrow.types.Type getValueType() nothrow
   {
     GArrowType _cretval;
     _cretval = garrow_array_builder_get_value_type(cast(GArrowArrayBuilder*)this._cPtr);
@@ -194,7 +194,7 @@ class ArrayBuilder : gobject.object.ObjectWrap
   }
 
   /** */
-  void reset()
+  void reset() nothrow
   {
     garrow_array_builder_reset(cast(GArrowArrayBuilder*)this._cPtr);
   }
@@ -216,7 +216,7 @@ class ArrayBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T arrayBuilder(void* propval)
+  T arrayBuilder(void* propval) nothrow
   {
     return setProperty("array-builder", propval);
   }
@@ -229,7 +229,7 @@ final class ArrayBuilderGidBuilder : ArrayBuilderGidBuilderImpl!ArrayBuilderGidB
       Create object from builder.
       Returns: New object
   */
-  ArrayBuilder build()
+  ArrayBuilder build() nothrow
   {
     return new ArrayBuilder(cast(void*)createGObject(ArrayBuilder._getGType), No.Take);
   }

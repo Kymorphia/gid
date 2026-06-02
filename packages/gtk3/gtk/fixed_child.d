@@ -14,11 +14,8 @@ class FixedChild
   GtkFixedChild _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.fixed_child.FixedChild");
-
     _cInstance = *cast(GtkFixedChild*)ptr;
 
     if (take)
@@ -26,44 +23,44 @@ class FixedChild
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
 
   /** */
-  @property gtk.widget.Widget widget()
+  @property gtk.widget.Widget widget() nothrow
   {
     return cToD!(gtk.widget.Widget)(cast(void*)(cast(GtkFixedChild*)this._cPtr).widget);
   }
 
   /** */
-  @property void widget(gtk.widget.Widget propval)
+  @property void widget(gtk.widget.Widget propval) nothrow
   {
     cValueFree!(gtk.widget.Widget)(cast(void*)(cast(GtkFixedChild*)this._cPtr).widget);
     dToC(propval, cast(void*)&(cast(GtkFixedChild*)this._cPtr).widget);
   }
 
   /** */
-  @property int x()
+  @property int x() nothrow
   {
     return (cast(GtkFixedChild*)this._cPtr).x;
   }
 
   /** */
-  @property void x(int propval)
+  @property void x(int propval) nothrow
   {
     (cast(GtkFixedChild*)this._cPtr).x = propval;
   }
 
   /** */
-  @property int y()
+  @property int y() nothrow
   {
     return (cast(GtkFixedChild*)this._cPtr).y;
   }
 
   /** */
-  @property void y(int propval)
+  @property void y(int propval) nothrow
   {
     (cast(GtkFixedChild*)this._cPtr).y = propval;
   }

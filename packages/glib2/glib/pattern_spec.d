@@ -30,32 +30,32 @@ class PatternSpec : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_pattern_spec_get_type != &gidSymbolNotFound ? g_pattern_spec_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PatternSpec self()
+  override PatternSpec self() nothrow
   {
     return this;
   }
@@ -67,7 +67,7 @@ class PatternSpec : gobject.boxed.Boxed
         pattern = a zero-terminated UTF-8 encoded string
       Returns: a newly-allocated #GPatternSpec
   */
-  this(string pattern)
+  this(string pattern) nothrow
   {
     GPatternSpec* _cretval;
     const(char)* _pattern = pattern.toCString(No.Alloc);
@@ -79,7 +79,7 @@ class PatternSpec : gobject.boxed.Boxed
       Copies pspec in a new #GPatternSpec.
       Returns: a copy of pspec.
   */
-  glib.pattern_spec.PatternSpec copy()
+  glib.pattern_spec.PatternSpec copy() nothrow
   {
     GPatternSpec* _cretval;
     _cretval = g_pattern_spec_copy(cast(GPatternSpec*)this._cPtr);
@@ -95,7 +95,7 @@ class PatternSpec : gobject.boxed.Boxed
         pspec2 = another #GPatternSpec
       Returns: Whether the compiled patterns are equal
   */
-  bool equal(glib.pattern_spec.PatternSpec pspec2)
+  bool equal(glib.pattern_spec.PatternSpec pspec2) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_pattern_spec_equal(cast(GPatternSpec*)this._cPtr, pspec2 ? cast(GPatternSpec*)pspec2._cPtr(No.Dup) : null);
@@ -126,7 +126,7 @@ class PatternSpec : gobject.boxed.Boxed
         stringReversed = the reverse of string or null
       Returns: true if string matches pspec
   */
-  bool match(string string_, string stringReversed = null)
+  bool match(string string_, string stringReversed = null) nothrow
   {
     bool _retval;
     size_t _stringLength;
@@ -148,7 +148,7 @@ class PatternSpec : gobject.boxed.Boxed
         string_ = the UTF-8 encoded string to match
       Returns: true if string matches pspec
   */
-  bool matchString(string string_)
+  bool matchString(string string_) nothrow
   {
     bool _retval;
     const(char)* _string_ = string_.toCString(No.Alloc);

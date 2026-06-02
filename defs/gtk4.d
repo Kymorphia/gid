@@ -70,16 +70,23 @@
    *   sortFunc = the callback delegate to use for sorting
    * Returns: a new `CustomSorter`
    */
-  this(CustomSortDelegate sortFunc)
+  this(CustomSortDelegate sortFunc) nothrow
   {
-    extern(C) int _sortFuncCallback(const(void)* a, const(void)* b, void* userData)
+    extern(C) int _sortFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
       auto _dlg = cast(CustomSortDelegate*)userData;
       auto aObj = cast(GObject*)a;
       auto bObj = cast(GObject*)b;
+      int _retval;
 
-      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(aObj, No.Take),
-        gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(bObj, No.Take));
+      try
+      {
+        _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(aObj, No.Take),
+          gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(bObj, No.Take));
+      }
+      catch (Exception e)
+        gidInvokeCallbackExceptionHandler(e, "gtk.custom_sorter.CustomSorter");
+
       return _retval;
     }
 
@@ -99,16 +106,23 @@
    * Params:
    *   sortFunc = function to sort items
    */
-  void setSortFunc(CustomSortDelegate sortFunc)
+  void setSortFunc(CustomSortDelegate sortFunc) nothrow
   {
-    extern(C) int _sortFuncCallback(const(void)* a, const(void)* b, void* userData)
+    extern(C) int _sortFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
       auto _dlg = cast(CustomSortDelegate*)userData;
       auto aObj = cast(GObject*)a;
       auto bObj = cast(GObject*)b;
+      int _retval;
 
-      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(aObj, No.Take),
-        gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(bObj, No.Take));
+      try
+      {
+        _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(aObj, No.Take),
+          gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(bObj, No.Take));
+      }
+      catch (Exception e)
+        gidInvokeCallbackExceptionHandler(e, "gtk.custom_sorter.CustomSorter.setSortFunc");
+
       return _retval;
     }
 
@@ -130,7 +144,7 @@
           request, the margin will be added in addition to the size from
           [gtk.widget.Widget.setSizeRequest] for example.
   */
-  @property void margin(int propval)
+  @property void margin(int propval) nothrow
   {
     setMarginStart(propval);
     setMarginEnd(propval);
@@ -151,7 +165,7 @@
           [gtk.widget.Widget.setSizeRequest] for example.
       Returns: Builder instance for fluent chaining
   */
-  T margin(int propval)
+  T margin(int propval) nothrow
   {
     setProperty("margin-start", propval);
     setProperty("margin-end", propval);

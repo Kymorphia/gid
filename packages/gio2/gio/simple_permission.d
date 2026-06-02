@@ -21,26 +21,26 @@ class SimplePermission : gio.permission.Permission
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_simple_permission_get_type != &gidSymbolNotFound ? g_simple_permission_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SimplePermission self()
+  override SimplePermission self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class SimplePermission : gio.permission.Permission
       Get builder for [gio.simple_permission.SimplePermission]
       Returns: New builder object
   */
-  static SimplePermissionGidBuilder builder()
+  static SimplePermissionGidBuilder builder() nothrow
   {
     return new SimplePermissionGidBuilder;
   }
@@ -62,7 +62,7 @@ class SimplePermission : gio.permission.Permission
         allowed = true if the action is allowed
       Returns: the #GSimplePermission, as a #GPermission
   */
-  this(bool allowed)
+  this(bool allowed) nothrow
   {
     GPermission* _cretval;
     _cretval = g_simple_permission_new(allowed);
@@ -82,7 +82,7 @@ final class SimplePermissionGidBuilder : SimplePermissionGidBuilderImpl!SimplePe
       Create object from builder.
       Returns: New object
   */
-  SimplePermission build()
+  SimplePermission build() nothrow
   {
     return new SimplePermission(cast(void*)createGObject(SimplePermission._getGType), Yes.Take);
   }

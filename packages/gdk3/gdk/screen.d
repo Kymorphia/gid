@@ -33,26 +33,26 @@ class Screen : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_screen_get_type != &gidSymbolNotFound ? gdk_screen_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Screen self()
+  override Screen self() nothrow
   {
     return this;
   }
@@ -61,31 +61,31 @@ class Screen : gobject.object.ObjectWrap
       Get builder for [gdk.screen.Screen]
       Returns: New builder object
   */
-  static ScreenGidBuilder builder()
+  static ScreenGidBuilder builder() nothrow
   {
     return new ScreenGidBuilder;
   }
 
   /** */
-  @property void* fontOptions()
+  @property void* fontOptions() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(void*)("font-options");
   }
 
   /** */
-  @property void fontOptions(void* propval)
+  @property void fontOptions(void* propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(void*)("font-options", propval);
   }
 
   /** */
-  @property double resolution()
+  @property double resolution() nothrow
   {
     return getResolution();
   }
 
   /** */
-  @property void resolution(double propval)
+  @property void resolution(double propval) nothrow
   {
     setResolution(propval);
   }
@@ -96,7 +96,7 @@ class Screen : gobject.object.ObjectWrap
       Returns: a #GdkScreen, or null if
             there is no default display.
   */
-  static gdk.screen.Screen getDefault()
+  static gdk.screen.Screen getDefault() nothrow
   {
     GdkScreen* _cretval;
     _cretval = gdk_screen_get_default();
@@ -112,7 +112,7 @@ class Screen : gobject.object.ObjectWrap
   
       Deprecated: Use per-monitor information
   */
-  static int height()
+  static int height() nothrow
   {
     int _retval;
     _retval = gdk_screen_height();
@@ -127,7 +127,7 @@ class Screen : gobject.object.ObjectWrap
   
       Deprecated: Use per-monitor information
   */
-  static int heightMm()
+  static int heightMm() nothrow
   {
     int _retval;
     _retval = gdk_screen_height_mm();
@@ -142,7 +142,7 @@ class Screen : gobject.object.ObjectWrap
   
       Deprecated: Use per-monitor information
   */
-  static int width()
+  static int width() nothrow
   {
     int _retval;
     _retval = gdk_screen_width();
@@ -157,7 +157,7 @@ class Screen : gobject.object.ObjectWrap
   
       Deprecated: Use per-monitor information
   */
-  static int widthMm()
+  static int widthMm() nothrow
   {
     int _retval;
     _retval = gdk_screen_width_mm();
@@ -182,7 +182,7 @@ class Screen : gobject.object.ObjectWrap
       Returns: the currently active window,
           or null.
   */
-  gdk.window.Window getActiveWindow()
+  gdk.window.Window getActiveWindow() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gdk_screen_get_active_window(cast(GdkScreen*)this._cPtr);
@@ -194,7 +194,7 @@ class Screen : gobject.object.ObjectWrap
       Gets the display to which the screen belongs.
       Returns: the display to which screen belongs
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gdk_screen_get_display(cast(GdkScreen*)this._cPtr);
@@ -207,7 +207,7 @@ class Screen : gobject.object.ObjectWrap
       Returns: the current font options, or null if no
          default font options have been set.
   */
-  cairo.font_options.FontOptions getFontOptions()
+  cairo.font_options.FontOptions getFontOptions() nothrow
   {
     const(cairo_font_options_t)* _cretval;
     _cretval = gdk_screen_get_font_options(cast(GdkScreen*)this._cPtr);
@@ -223,7 +223,7 @@ class Screen : gobject.object.ObjectWrap
   
       Deprecated: Use per-monitor information instead
   */
-  int getHeight()
+  int getHeight() nothrow
   {
     int _retval;
     _retval = gdk_screen_get_height(cast(GdkScreen*)this._cPtr);
@@ -240,7 +240,7 @@ class Screen : gobject.object.ObjectWrap
   
       Deprecated: Use per-monitor information instead
   */
-  int getHeightMm()
+  int getHeightMm() nothrow
   {
     int _retval;
     _retval = gdk_screen_get_height_mm(cast(GdkScreen*)this._cPtr);
@@ -258,7 +258,7 @@ class Screen : gobject.object.ObjectWrap
   
       Deprecated: Use [gdk.display.Display.getMonitorAtPoint] instead
   */
-  int getMonitorAtPoint(int x, int y)
+  int getMonitorAtPoint(int x, int y) nothrow
   {
     int _retval;
     _retval = gdk_screen_get_monitor_at_point(cast(GdkScreen*)this._cPtr, x, y);
@@ -277,7 +277,7 @@ class Screen : gobject.object.ObjectWrap
   
       Deprecated: Use [gdk.display.Display.getMonitorAtWindow] instead
   */
-  int getMonitorAtWindow(gdk.window.Window window)
+  int getMonitorAtWindow(gdk.window.Window window) nothrow
   {
     int _retval;
     _retval = gdk_screen_get_monitor_at_window(cast(GdkScreen*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null);
@@ -303,7 +303,7 @@ class Screen : gobject.object.ObjectWrap
   
       Deprecated: Use [gdk.monitor.MonitorWrap.getGeometry] instead
   */
-  void getMonitorGeometry(int monitorNum, out gdk.rectangle.Rectangle dest)
+  void getMonitorGeometry(int monitorNum, out gdk.rectangle.Rectangle dest) nothrow
   {
     gdk_screen_get_monitor_geometry(cast(GdkScreen*)this._cPtr, monitorNum, cast(GdkRectangle*)&dest);
   }
@@ -317,7 +317,7 @@ class Screen : gobject.object.ObjectWrap
   
       Deprecated: Use [gdk.monitor.MonitorWrap.getHeightMm] instead
   */
-  int getMonitorHeightMm(int monitorNum)
+  int getMonitorHeightMm(int monitorNum) nothrow
   {
     int _retval;
     _retval = gdk_screen_get_monitor_height_mm(cast(GdkScreen*)this._cPtr, monitorNum);
@@ -336,7 +336,7 @@ class Screen : gobject.object.ObjectWrap
   
       Deprecated: Use [gdk.monitor.MonitorWrap.getModel] instead
   */
-  string getMonitorPlugName(int monitorNum)
+  string getMonitorPlugName(int monitorNum) nothrow
   {
     char* _cretval;
     _cretval = gdk_screen_get_monitor_plug_name(cast(GdkScreen*)this._cPtr, monitorNum);
@@ -359,7 +359,7 @@ class Screen : gobject.object.ObjectWrap
   
       Deprecated: Use [gdk.monitor.MonitorWrap.getScaleFactor] instead
   */
-  int getMonitorScaleFactor(int monitorNum)
+  int getMonitorScaleFactor(int monitorNum) nothrow
   {
     int _retval;
     _retval = gdk_screen_get_monitor_scale_factor(cast(GdkScreen*)this._cPtr, monitorNum);
@@ -375,7 +375,7 @@ class Screen : gobject.object.ObjectWrap
   
       Deprecated: Use [gdk.monitor.MonitorWrap.getWidthMm] instead
   */
-  int getMonitorWidthMm(int monitorNum)
+  int getMonitorWidthMm(int monitorNum) nothrow
   {
     int _retval;
     _retval = gdk_screen_get_monitor_width_mm(cast(GdkScreen*)this._cPtr, monitorNum);
@@ -406,7 +406,7 @@ class Screen : gobject.object.ObjectWrap
   
       Deprecated: Use [gdk.monitor.MonitorWrap.getWorkarea] instead
   */
-  void getMonitorWorkarea(int monitorNum, out gdk.rectangle.Rectangle dest)
+  void getMonitorWorkarea(int monitorNum, out gdk.rectangle.Rectangle dest) nothrow
   {
     gdk_screen_get_monitor_workarea(cast(GdkScreen*)this._cPtr, monitorNum, cast(GdkRectangle*)&dest);
   }
@@ -417,7 +417,7 @@ class Screen : gobject.object.ObjectWrap
   
       Deprecated: Use [gdk.display.Display.getNMonitors] instead
   */
-  int getNMonitors()
+  int getNMonitors() nothrow
   {
     int _retval;
     _retval = gdk_screen_get_n_monitors(cast(GdkScreen*)this._cPtr);
@@ -429,7 +429,7 @@ class Screen : gobject.object.ObjectWrap
       to which it belongs. (See [gdk.screen.Screen.getDisplay])
       Returns: the index
   */
-  int getNumber()
+  int getNumber() nothrow
   {
     int _retval;
     _retval = gdk_screen_get_number(cast(GdkScreen*)this._cPtr);
@@ -449,7 +449,7 @@ class Screen : gobject.object.ObjectWrap
   
       Deprecated: Use [gdk.display.Display.getPrimaryMonitor] instead
   */
-  int getPrimaryMonitor()
+  int getPrimaryMonitor() nothrow
   {
     int _retval;
     _retval = gdk_screen_get_primary_monitor(cast(GdkScreen*)this._cPtr);
@@ -462,7 +462,7 @@ class Screen : gobject.object.ObjectWrap
       Returns: the current resolution, or -1 if no resolution
         has been set.
   */
-  double getResolution()
+  double getResolution() nothrow
   {
     double _retval;
     _retval = gdk_screen_get_resolution(cast(GdkScreen*)this._cPtr);
@@ -487,7 +487,7 @@ class Screen : gobject.object.ObjectWrap
             with an alpha channel or null if the capability is not
             available.
   */
-  gdk.visual.Visual getRgbaVisual()
+  gdk.visual.Visual getRgbaVisual() nothrow
   {
     GdkVisual* _cretval;
     _cretval = gdk_screen_get_rgba_visual(cast(GdkScreen*)this._cPtr);
@@ -499,7 +499,7 @@ class Screen : gobject.object.ObjectWrap
       Gets the root window of screen.
       Returns: the root window
   */
-  gdk.window.Window getRootWindow()
+  gdk.window.Window getRootWindow() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gdk_screen_get_root_window(cast(GdkScreen*)this._cPtr);
@@ -520,7 +520,7 @@ class Screen : gobject.object.ObjectWrap
       Returns: true if the setting existed and a value was stored
           in value, false otherwise.
   */
-  bool getSetting(string name, gobject.value.Value value)
+  bool getSetting(string name, gobject.value.Value value) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -534,7 +534,7 @@ class Screen : gobject.object.ObjectWrap
       The return value should not be freed.
       Returns: the system visual
   */
-  gdk.visual.Visual getSystemVisual()
+  gdk.visual.Visual getSystemVisual() nothrow
   {
     GdkVisual* _cretval;
     _cretval = gdk_screen_get_system_visual(cast(GdkScreen*)this._cPtr);
@@ -551,7 +551,7 @@ class Screen : gobject.object.ObjectWrap
       its elements need not be freed.
       Returns: list of toplevel windows, free with [glib.list.List.free]
   */
-  gdk.window.Window[] getToplevelWindows()
+  gdk.window.Window[] getToplevelWindows() nothrow
   {
     GList* _cretval;
     _cretval = gdk_screen_get_toplevel_windows(cast(GdkScreen*)this._cPtr);
@@ -567,7 +567,7 @@ class Screen : gobject.object.ObjectWrap
   
       Deprecated: Use per-monitor information instead
   */
-  int getWidth()
+  int getWidth() nothrow
   {
     int _retval;
     _retval = gdk_screen_get_width(cast(GdkScreen*)this._cPtr);
@@ -584,7 +584,7 @@ class Screen : gobject.object.ObjectWrap
   
       Deprecated: Use per-monitor information instead
   */
-  int getWidthMm()
+  int getWidthMm() nothrow
   {
     int _retval;
     _retval = gdk_screen_get_width_mm(cast(GdkScreen*)this._cPtr);
@@ -610,7 +610,7 @@ class Screen : gobject.object.ObjectWrap
       Returns: a
             list of #GdkWindows for the current window stack, or null.
   */
-  gdk.window.Window[] getWindowStack()
+  gdk.window.Window[] getWindowStack() nothrow
   {
     GList* _cretval;
     _cretval = gdk_screen_get_window_stack(cast(GdkScreen*)this._cPtr);
@@ -628,7 +628,7 @@ class Screen : gobject.object.ObjectWrap
       Returns: Whether windows with RGBA visuals can reasonably be
         expected to have their alpha channels drawn correctly on the screen.
   */
-  bool isComposited()
+  bool isComposited() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_screen_is_composited(cast(GdkScreen*)this._cPtr);
@@ -644,7 +644,7 @@ class Screen : gobject.object.ObjectWrap
       Call [glib.list.List.free] on the return value when you’re finished with it.
       Returns: a list of visuals; the list must be freed, but not its contents
   */
-  gdk.visual.Visual[] listVisuals()
+  gdk.visual.Visual[] listVisuals() nothrow
   {
     GList* _cretval;
     _cretval = gdk_screen_list_visuals(cast(GdkScreen*)this._cPtr);
@@ -657,7 +657,7 @@ class Screen : gobject.object.ObjectWrap
       a #GdkDisplay with this screen as the default screen.
       Returns: a newly allocated string, free with [glib.global.gfree]
   */
-  string makeDisplayName()
+  string makeDisplayName() nothrow
   {
     char* _cretval;
     _cretval = gdk_screen_make_display_name(cast(GdkScreen*)this._cPtr);
@@ -676,7 +676,7 @@ class Screen : gobject.object.ObjectWrap
         options = a #cairo_font_options_t, or null to unset any
             previously set default font options.
   */
-  void setFontOptions(cairo.font_options.FontOptions options = null)
+  void setFontOptions(cairo.font_options.FontOptions options = null) nothrow
   {
     gdk_screen_set_font_options(cast(GdkScreen*)this._cPtr, options ? cast(const(cairo_font_options_t)*)options._cPtr(No.Dup) : null);
   }
@@ -691,7 +691,7 @@ class Screen : gobject.object.ObjectWrap
         dpi = the resolution in “dots per inch”. (Physical inches aren’t actually
             involved; the terminology is conventional.)
   */
-  void setResolution(double dpi)
+  void setResolution(double dpi) nothrow
   {
     gdk_screen_set_resolution(cast(GdkScreen*)this._cPtr, dpi);
   }
@@ -712,13 +712,13 @@ class Screen : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCompositedChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCompositedChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.screen.Screen)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -727,7 +727,14 @@ class Screen : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.screen.Screen.compositedChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -753,13 +760,13 @@ class Screen : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMonitorsChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMonitorsChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.screen.Screen)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -768,7 +775,14 @@ class Screen : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.screen.Screen.monitorsChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -791,13 +805,13 @@ class Screen : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSizeChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSizeChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.screen.Screen)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -806,7 +820,14 @@ class Screen : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.screen.Screen.sizeChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -819,13 +840,13 @@ class ScreenGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T fontOptions(void* propval)
+  T fontOptions(void* propval) nothrow
   {
     return setProperty("font-options", propval);
   }
 
   /** */
-  T resolution(double propval)
+  T resolution(double propval) nothrow
   {
     return setProperty("resolution", propval);
   }
@@ -838,7 +859,7 @@ final class ScreenGidBuilder : ScreenGidBuilderImpl!ScreenGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Screen build()
+  Screen build() nothrow
   {
     return new Screen(cast(void*)createGObject(Screen._getGType), No.Take);
   }

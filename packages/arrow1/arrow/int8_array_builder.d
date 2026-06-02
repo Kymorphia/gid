@@ -15,26 +15,26 @@ class Int8ArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_int8_array_builder_get_type != &gidSymbolNotFound ? garrow_int8_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Int8ArrayBuilder self()
+  override Int8ArrayBuilder self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class Int8ArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.int8_array_builder.Int8ArrayBuilder]
       Returns: New builder object
   */
-  static Int8ArrayBuilderGidBuilder builder()
+  static Int8ArrayBuilderGidBuilder builder() nothrow
   {
     return new Int8ArrayBuilderGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowInt8ArrayBuilder* _cretval;
     _cretval = garrow_int8_array_builder_new();
@@ -124,7 +124,7 @@ final class Int8ArrayBuilderGidBuilder : Int8ArrayBuilderGidBuilderImpl!Int8Arra
       Create object from builder.
       Returns: New object
   */
-  Int8ArrayBuilder build()
+  Int8ArrayBuilder build() nothrow
   {
     return new Int8ArrayBuilder(cast(void*)createGObject(Int8ArrayBuilder._getGType), Yes.Take);
   }

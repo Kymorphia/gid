@@ -47,26 +47,26 @@ class Avatar : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_avatar_get_type != &gidSymbolNotFound ? adw_avatar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Avatar self()
+  override Avatar self() nothrow
   {
     return this;
   }
@@ -75,7 +75,7 @@ class Avatar : gtk.widget.Widget
       Get builder for [adw.avatar.Avatar]
       Returns: New builder object
   */
-  static AvatarGidBuilder builder()
+  static AvatarGidBuilder builder() nothrow
   {
     return new AvatarGidBuilder;
   }
@@ -86,7 +86,7 @@ class Avatar : gtk.widget.Widget
         
         Custom image is displayed instead of initials or icon.
   */
-  @property gdk.paintable.Paintable customImage()
+  @property gdk.paintable.Paintable customImage() nothrow
   {
     return getCustomImage();
   }
@@ -98,7 +98,7 @@ class Avatar : gtk.widget.Widget
           
           Custom image is displayed instead of initials or icon.
   */
-  @property void customImage(gdk.paintable.Paintable propval)
+  @property void customImage(gdk.paintable.Paintable propval) nothrow
   {
     setCustomImage(propval);
   }
@@ -109,7 +109,7 @@ class Avatar : gtk.widget.Widget
         
         If no name is set, `avatar-default-symbolic` will be used.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return getIconName();
   }
@@ -121,7 +121,7 @@ class Avatar : gtk.widget.Widget
           
           If no name is set, `avatar-default-symbolic` will be used.
   */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     setIconName(propval);
   }
@@ -132,7 +132,7 @@ class Avatar : gtk.widget.Widget
         
         See [adw.avatar.Avatar.iconName] for how to change the fallback icon.
   */
-  @property bool showInitials()
+  @property bool showInitials() nothrow
   {
     return getShowInitials();
   }
@@ -144,7 +144,7 @@ class Avatar : gtk.widget.Widget
           
           See [adw.avatar.Avatar.iconName] for how to change the fallback icon.
   */
-  @property void showInitials(bool propval)
+  @property void showInitials(bool propval) nothrow
   {
     setShowInitials(propval);
   }
@@ -153,7 +153,7 @@ class Avatar : gtk.widget.Widget
       Get `size` property.
       Returns: The size of the avatar.
   */
-  @property int size()
+  @property int size() nothrow
   {
     return getSize();
   }
@@ -163,7 +163,7 @@ class Avatar : gtk.widget.Widget
       Params:
         propval = The size of the avatar.
   */
-  @property void size(int propval)
+  @property void size(int propval) nothrow
   {
     setSize(propval);
   }
@@ -175,7 +175,7 @@ class Avatar : gtk.widget.Widget
         It's only used to generate the color if [adw.avatar.Avatar.showInitials] is
         `FALSE`.
   */
-  @property string text()
+  @property string text() nothrow
   {
     return getText();
   }
@@ -188,7 +188,7 @@ class Avatar : gtk.widget.Widget
           It's only used to generate the color if [adw.avatar.Avatar.showInitials] is
           `FALSE`.
   */
-  @property void text(string propval)
+  @property void text(string propval) nothrow
   {
     setText(propval);
   }
@@ -202,7 +202,7 @@ class Avatar : gtk.widget.Widget
         showInitials = whether to use initials instead of an icon as fallback
       Returns: the newly created [adw.avatar.Avatar]
   */
-  this(int size, string text, bool showInitials)
+  this(int size, string text, bool showInitials) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _text = text.toCString(No.Alloc);
@@ -219,7 +219,7 @@ class Avatar : gtk.widget.Widget
         scaleFactor = The scale factor
       Returns: the texture
   */
-  gdk.texture.Texture drawToTexture(int scaleFactor)
+  gdk.texture.Texture drawToTexture(int scaleFactor) nothrow
   {
     GdkTexture* _cretval;
     _cretval = adw_avatar_draw_to_texture(cast(AdwAvatar*)this._cPtr, scaleFactor);
@@ -231,7 +231,7 @@ class Avatar : gtk.widget.Widget
       Gets the custom image paintable.
       Returns: the custom image
   */
-  gdk.paintable.Paintable getCustomImage()
+  gdk.paintable.Paintable getCustomImage() nothrow
   {
     GdkPaintable* _cretval;
     _cretval = adw_avatar_get_custom_image(cast(AdwAvatar*)this._cPtr);
@@ -243,7 +243,7 @@ class Avatar : gtk.widget.Widget
       Gets the name of an icon to use as a fallback.
       Returns: the icon name
   */
-  string getIconName()
+  string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_avatar_get_icon_name(cast(AdwAvatar*)this._cPtr);
@@ -255,7 +255,7 @@ class Avatar : gtk.widget.Widget
       Gets whether initials are used instead of an icon on the fallback avatar.
       Returns: whether initials are used instead of an icon as fallback
   */
-  bool getShowInitials()
+  bool getShowInitials() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_avatar_get_show_initials(cast(AdwAvatar*)this._cPtr);
@@ -268,7 +268,7 @@ class Avatar : gtk.widget.Widget
       Gets the size of the avatar.
       Returns: the size of the avatar
   */
-  int getSize()
+  int getSize() nothrow
   {
     int _retval;
     _retval = adw_avatar_get_size(cast(AdwAvatar*)this._cPtr);
@@ -280,7 +280,7 @@ class Avatar : gtk.widget.Widget
       Returns: the text used to generate the fallback initials and
           color
   */
-  string getText()
+  string getText() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_avatar_get_text(cast(AdwAvatar*)this._cPtr);
@@ -296,7 +296,7 @@ class Avatar : gtk.widget.Widget
       Params:
         customImage = a custom image
   */
-  void setCustomImage(gdk.paintable.Paintable customImage = null)
+  void setCustomImage(gdk.paintable.Paintable customImage = null) nothrow
   {
     adw_avatar_set_custom_image(cast(AdwAvatar*)this._cPtr, customImage ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)customImage)._cPtr(No.Dup) : null);
   }
@@ -309,7 +309,7 @@ class Avatar : gtk.widget.Widget
       Params:
         iconName = the icon name
   */
-  void setIconName(string iconName = null)
+  void setIconName(string iconName = null) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     adw_avatar_set_icon_name(cast(AdwAvatar*)this._cPtr, _iconName);
@@ -323,7 +323,7 @@ class Avatar : gtk.widget.Widget
       Params:
         showInitials = whether to use initials instead of an icon as fallback
   */
-  void setShowInitials(bool showInitials)
+  void setShowInitials(bool showInitials) nothrow
   {
     adw_avatar_set_show_initials(cast(AdwAvatar*)this._cPtr, showInitials);
   }
@@ -334,7 +334,7 @@ class Avatar : gtk.widget.Widget
       Params:
         size = The size of the avatar
   */
-  void setSize(int size)
+  void setSize(int size) nothrow
   {
     adw_avatar_set_size(cast(AdwAvatar*)this._cPtr, size);
   }
@@ -348,7 +348,7 @@ class Avatar : gtk.widget.Widget
       Params:
         text = the text used to get the initials and color
   */
-  void setText(string text = null)
+  void setText(string text = null) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     adw_avatar_set_text(cast(AdwAvatar*)this._cPtr, _text);
@@ -368,7 +368,7 @@ class AvatarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           Custom image is displayed instead of initials or icon.
       Returns: Builder instance for fluent chaining
   */
-  T customImage(gdk.paintable.Paintable propval)
+  T customImage(gdk.paintable.Paintable propval) nothrow
   {
     return setProperty("custom-image", propval);
   }
@@ -381,7 +381,7 @@ class AvatarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           If no name is set, `avatar-default-symbolic` will be used.
       Returns: Builder instance for fluent chaining
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
@@ -394,7 +394,7 @@ class AvatarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           See [adw.avatar.Avatar.iconName] for how to change the fallback icon.
       Returns: Builder instance for fluent chaining
   */
-  T showInitials(bool propval)
+  T showInitials(bool propval) nothrow
   {
     return setProperty("show-initials", propval);
   }
@@ -405,7 +405,7 @@ class AvatarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The size of the avatar.
       Returns: Builder instance for fluent chaining
   */
-  T size(int propval)
+  T size(int propval) nothrow
   {
     return setProperty("size", propval);
   }
@@ -419,7 +419,7 @@ class AvatarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           `FALSE`.
       Returns: Builder instance for fluent chaining
   */
-  T text(string propval)
+  T text(string propval) nothrow
   {
     return setProperty("text", propval);
   }
@@ -432,7 +432,7 @@ final class AvatarGidBuilder : AvatarGidBuilderImpl!AvatarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Avatar build()
+  Avatar build() nothrow
   {
     return new Avatar(cast(void*)createGObject(Avatar._getGType), No.Take);
   }

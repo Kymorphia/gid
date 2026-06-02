@@ -13,7 +13,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libsoup-3.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // Auth
   GType function() c_soup_auth_get_type; ///

@@ -72,7 +72,7 @@ class Event : gobject.boxed.Boxed
         timestamp = the timestamp of the event
         seqnum = the sequence number of the event
   */
-  this(gst.types.EventType type = gst.types.EventType.init, ulong timestamp = ulong.init, uint seqnum = uint.init)
+  this(gst.types.EventType type = gst.types.EventType.init, ulong timestamp = ulong.init, uint seqnum = uint.init) nothrow
   {
     super(gMalloc(GstEvent.sizeof), Yes.Take);
     this.type = type;
@@ -81,32 +81,32 @@ class Event : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_event_get_type != &gidSymbolNotFound ? gst_event_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Event self()
+  override Event self() nothrow
   {
     return this;
   }
@@ -115,7 +115,7 @@ class Event : gobject.boxed.Boxed
       Get `miniObject` field.
       Returns: the parent structure
   */
-  @property gst.mini_object.MiniObject miniObject()
+  @property gst.mini_object.MiniObject miniObject() nothrow
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstEvent*)this._cPtr).miniObject);
   }
@@ -124,7 +124,7 @@ class Event : gobject.boxed.Boxed
       Get `type` field.
       Returns: the #GstEventType of the event
   */
-  @property gst.types.EventType type()
+  @property gst.types.EventType type() nothrow
   {
     return cast(gst.types.EventType)(cast(GstEvent*)this._cPtr).type;
   }
@@ -134,7 +134,7 @@ class Event : gobject.boxed.Boxed
       Params:
         propval = the #GstEventType of the event
   */
-  @property void type(gst.types.EventType propval)
+  @property void type(gst.types.EventType propval) nothrow
   {
     (cast(GstEvent*)this._cPtr).type = cast(GstEventType)propval;
   }
@@ -143,7 +143,7 @@ class Event : gobject.boxed.Boxed
       Get `timestamp` field.
       Returns: the timestamp of the event
   */
-  @property ulong timestamp()
+  @property ulong timestamp() nothrow
   {
     return (cast(GstEvent*)this._cPtr).timestamp;
   }
@@ -153,7 +153,7 @@ class Event : gobject.boxed.Boxed
       Params:
         propval = the timestamp of the event
   */
-  @property void timestamp(ulong propval)
+  @property void timestamp(ulong propval) nothrow
   {
     (cast(GstEvent*)this._cPtr).timestamp = propval;
   }
@@ -162,7 +162,7 @@ class Event : gobject.boxed.Boxed
       Get `seqnum` field.
       Returns: the sequence number of the event
   */
-  @property uint seqnum()
+  @property uint seqnum() nothrow
   {
     return (cast(GstEvent*)this._cPtr).seqnum;
   }
@@ -172,7 +172,7 @@ class Event : gobject.boxed.Boxed
       Params:
         propval = the sequence number of the event
   */
-  @property void seqnum(uint propval)
+  @property void seqnum(uint propval) nothrow
   {
     (cast(GstEvent*)this._cPtr).seqnum = propval;
   }
@@ -190,7 +190,7 @@ class Event : gobject.boxed.Boxed
         async = thread behavior
       Returns: a new #GstEvent
   */
-  static gst.event.Event newBufferSize(gst.types.Format format, long minsize, long maxsize, bool async)
+  static gst.event.Event newBufferSize(gst.types.Format format, long minsize, long maxsize, bool async) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_buffer_size(format, minsize, maxsize, async);
@@ -207,7 +207,7 @@ class Event : gobject.boxed.Boxed
         caps = a #GstCaps
       Returns: the new CAPS event.
   */
-  static gst.event.Event newCaps(gst.caps.Caps caps)
+  static gst.event.Event newCaps(gst.caps.Caps caps) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_caps(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
@@ -233,7 +233,7 @@ class Event : gobject.boxed.Boxed
               take ownership of the structure.
       Returns: the new custom event.
   */
-  static gst.event.Event newCustom(gst.types.EventType type, gst.structure.Structure structure)
+  static gst.event.Event newCustom(gst.types.EventType type, gst.structure.Structure structure) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_custom(type, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
@@ -257,7 +257,7 @@ class Event : gobject.boxed.Boxed
       The EOS event itself will not cause any state transitions of the pipeline.
       Returns: the new EOS event.
   */
-  static gst.event.Event newEos()
+  static gst.event.Event newEos() nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_eos();
@@ -282,7 +282,7 @@ class Event : gobject.boxed.Boxed
       in the pipeline so that the new media is played as soon as possible.
       Returns: a new flush start event.
   */
-  static gst.event.Event newFlushStart()
+  static gst.event.Event newFlushStart() nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_flush_start();
@@ -306,7 +306,7 @@ class Event : gobject.boxed.Boxed
         resetTime = if time should be reset
       Returns: a new flush stop event.
   */
-  static gst.event.Event newFlushStop(bool resetTime)
+  static gst.event.Event newFlushStop(bool resetTime) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_flush_stop(resetTime);
@@ -326,7 +326,7 @@ class Event : gobject.boxed.Boxed
         duration = the duration of the gap
       Returns: the new GAP event.
   */
-  static gst.event.Event newGap(gst.types.ClockTime timestamp, gst.types.ClockTime duration)
+  static gst.event.Event newGap(gst.types.ClockTime timestamp, gst.types.ClockTime duration) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_gap(timestamp, duration);
@@ -350,7 +350,7 @@ class Event : gobject.boxed.Boxed
         newFlags = A new subset of segment flags to replace in segments
       Returns: the new instant-rate-change event.
   */
-  static gst.event.Event newInstantRateChange(double rateMultiplier, gst.types.SegmentFlags newFlags)
+  static gst.event.Event newInstantRateChange(double rateMultiplier, gst.types.SegmentFlags newFlags) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_instant_rate_change(rateMultiplier, newFlags);
@@ -379,7 +379,7 @@ class Event : gobject.boxed.Boxed
              rate change should be applied.
       Returns: the new instant-rate-sync-time event.
   */
-  static gst.event.Event newInstantRateSyncTime(double rateMultiplier, gst.types.ClockTime runningTime, gst.types.ClockTime upstreamRunningTime)
+  static gst.event.Event newInstantRateSyncTime(double rateMultiplier, gst.types.ClockTime runningTime, gst.types.ClockTime upstreamRunningTime) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_instant_rate_sync_time(rateMultiplier, runningTime, upstreamRunningTime);
@@ -399,7 +399,7 @@ class Event : gobject.boxed.Boxed
         latency = the new latency value
       Returns: a new #GstEvent
   */
-  static gst.event.Event newLatency(gst.types.ClockTime latency)
+  static gst.event.Event newLatency(gst.types.ClockTime latency) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_latency(latency);
@@ -416,7 +416,7 @@ class Event : gobject.boxed.Boxed
               constructors.
       Returns: a new #GstEvent
   */
-  static gst.event.Event newNavigation(gst.structure.Structure structure)
+  static gst.event.Event newNavigation(gst.structure.Structure structure) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_navigation(structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
@@ -465,7 +465,7 @@ class Event : gobject.boxed.Boxed
           of this string will depend upon the protection scheme.
       Returns: a #GST_EVENT_PROTECTION event.
   */
-  static gst.event.Event newProtection(string systemId, gst.buffer.Buffer data, string origin)
+  static gst.event.Event newProtection(string systemId, gst.buffer.Buffer data, string origin) nothrow
   {
     GstEvent* _cretval;
     const(char)* _systemId = systemId.toCString(No.Alloc);
@@ -526,7 +526,7 @@ class Event : gobject.boxed.Boxed
         timestamp = The timestamp of the buffer
       Returns: a new QOS event.
   */
-  static gst.event.Event newQos(gst.types.QOSType type, double proportion, gst.types.ClockTimeDiff diff, gst.types.ClockTime timestamp)
+  static gst.event.Event newQos(gst.types.QOSType type, double proportion, gst.types.ClockTimeDiff diff, gst.types.ClockTime timestamp) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_qos(type, proportion, diff, timestamp);
@@ -541,7 +541,7 @@ class Event : gobject.boxed.Boxed
       or changing the topology of the pipeline.
       Returns: a new #GstEvent
   */
-  static gst.event.Event newReconfigure()
+  static gst.event.Event newReconfigure() nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_reconfigure();
@@ -592,7 +592,7 @@ class Event : gobject.boxed.Boxed
         stop = The value of the new stop position
       Returns: a new seek event.
   */
-  static gst.event.Event newSeek(double rate, gst.types.Format format, gst.types.SeekFlags flags, gst.types.SeekType startType, long start, gst.types.SeekType stopType, long stop)
+  static gst.event.Event newSeek(double rate, gst.types.Format format, gst.types.SeekFlags flags, gst.types.SeekType startType, long start, gst.types.SeekType stopType, long stop) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_seek(rate, format, flags, startType, start, stopType, stop);
@@ -637,7 +637,7 @@ class Event : gobject.boxed.Boxed
         segment = a #GstSegment
       Returns: the new SEGMENT event.
   */
-  static gst.event.Event newSegment(gst.segment.Segment segment)
+  static gst.event.Event newSegment(gst.segment.Segment segment) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_segment(cast(const(GstSegment)*)&segment);
@@ -654,7 +654,7 @@ class Event : gobject.boxed.Boxed
         position = The position of the segment being done
       Returns: a new #GstEvent
   */
-  static gst.event.Event newSegmentDone(gst.types.Format format, long position)
+  static gst.event.Event newSegmentDone(gst.types.Format format, long position) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_segment_done(format, position);
@@ -679,7 +679,7 @@ class Event : gobject.boxed.Boxed
           activate
       Returns: a new select-streams event.
   */
-  static gst.event.Event newSelectStreams(string[] streams)
+  static gst.event.Event newSelectStreams(string[] streams) nothrow
   {
     GstEvent* _cretval;
     auto _streams = gListFromD!(string)(streams);
@@ -701,7 +701,7 @@ class Event : gobject.boxed.Boxed
         msg = the #GstMessage to be posted
       Returns: a new #GstEvent
   */
-  static gst.event.Event newSinkMessage(string name, gst.message.Message msg)
+  static gst.event.Event newSinkMessage(string name, gst.message.Message msg) nothrow
   {
     GstEvent* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -733,7 +733,7 @@ class Event : gobject.boxed.Boxed
         intermediate = intermediate steps
       Returns: a new #GstEvent
   */
-  static gst.event.Event newStep(gst.types.Format format, ulong amount, double rate, bool flush, bool intermediate)
+  static gst.event.Event newStep(gst.types.Format format, ulong amount, double rate, bool flush, bool intermediate) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_step(format, amount, rate, flush, intermediate);
@@ -755,7 +755,7 @@ class Event : gobject.boxed.Boxed
         collection = Active collection for this data flow
       Returns: the new STREAM_COLLECTION event.
   */
-  static gst.event.Event newStreamCollection(gst.stream_collection.StreamCollection collection)
+  static gst.event.Event newStreamCollection(gst.stream_collection.StreamCollection collection) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_stream_collection(collection ? cast(GstStreamCollection*)collection._cPtr(No.Dup) : null);
@@ -778,7 +778,7 @@ class Event : gobject.boxed.Boxed
         groupId = the group id of the stream group which is ending
       Returns: the new stream-group-done event.
   */
-  static gst.event.Event newStreamGroupDone(uint groupId)
+  static gst.event.Event newStreamGroupDone(uint groupId) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_stream_group_done(groupId);
@@ -813,7 +813,7 @@ class Event : gobject.boxed.Boxed
         streamId = Identifier for this stream
       Returns: the new STREAM_START event.
   */
-  static gst.event.Event newStreamStart(string streamId)
+  static gst.event.Event newStreamStart(string streamId) nothrow
   {
     GstEvent* _cretval;
     const(char)* _streamId = streamId.toCString(No.Alloc);
@@ -836,7 +836,7 @@ class Event : gobject.boxed.Boxed
               of the taglist.
       Returns: a new #GstEvent
   */
-  static gst.event.Event newTag(gst.tag_list.TagList taglist)
+  static gst.event.Event newTag(gst.tag_list.TagList taglist) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_tag(taglist ? cast(GstTagList*)taglist._cPtr(Yes.Dup) : null);
@@ -853,7 +853,7 @@ class Event : gobject.boxed.Boxed
         updated = whether toc was updated or not.
       Returns: a new #GstEvent.
   */
-  static gst.event.Event newToc(gst.toc.Toc toc, bool updated)
+  static gst.event.Event newToc(gst.toc.Toc toc, bool updated) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_toc(toc ? cast(GstToc*)toc._cPtr(No.Dup) : null, updated);
@@ -870,7 +870,7 @@ class Event : gobject.boxed.Boxed
         uid = UID in the TOC to start playback from.
       Returns: a new #GstEvent.
   */
-  static gst.event.Event newTocSelect(string uid)
+  static gst.event.Event newTocSelect(string uid) nothrow
   {
     GstEvent* _cretval;
     const(char)* _uid = uid.toCString(No.Alloc);
@@ -886,7 +886,7 @@ class Event : gobject.boxed.Boxed
       Params:
         segment = a pointer to a #GstSegment
   */
-  void copySegment(gst.segment.Segment segment)
+  void copySegment(gst.segment.Segment segment) nothrow
   {
     gst_event_copy_segment(cast(GstEvent*)this._cPtr, cast(GstSegment*)&segment);
   }
@@ -905,7 +905,7 @@ class Event : gobject.boxed.Boxed
         
         MT safe.
   */
-  long getRunningTimeOffset()
+  long getRunningTimeOffset() nothrow
   {
     long _retval;
     _retval = gst_event_get_running_time_offset(cast(GstEvent*)this._cPtr);
@@ -929,7 +929,7 @@ class Event : gobject.boxed.Boxed
         
         MT safe.
   */
-  uint getSeqnum()
+  uint getSeqnum() nothrow
   {
     uint _retval;
     _retval = gst_event_get_seqnum(cast(GstEvent*)this._cPtr);
@@ -944,7 +944,7 @@ class Event : gobject.boxed.Boxed
         
         MT safe.
   */
-  gst.structure.Structure getStructure()
+  gst.structure.Structure getStructure() nothrow
   {
     const(GstStructure)* _cretval;
     _cretval = gst_event_get_structure(cast(GstEvent*)this._cPtr);
@@ -960,7 +960,7 @@ class Event : gobject.boxed.Boxed
         name = name to check
       Returns: true if name matches the name of the event structure.
   */
-  bool hasName(string name)
+  bool hasName(string name) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -976,7 +976,7 @@ class Event : gobject.boxed.Boxed
         name = name to check as a GQuark
       Returns: true if name matches the name of the event structure.
   */
-  bool hasNameId(glib.types.Quark name)
+  bool hasNameId(glib.types.Quark name) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_event_has_name_id(cast(GstEvent*)this._cPtr, name);
@@ -992,7 +992,7 @@ class Event : gobject.boxed.Boxed
         maxsize = A pointer to store the maxsize in
         async = A pointer to store the async-flag in
   */
-  void parseBufferSize(out gst.types.Format format, out long minsize, out long maxsize, out bool async)
+  void parseBufferSize(out gst.types.Format format, out long minsize, out long maxsize, out bool async) nothrow
   {
     gboolean _async;
     gst_event_parse_buffer_size(cast(GstEvent*)this._cPtr, &format, cast(long*)&minsize, cast(long*)&maxsize, &_async);
@@ -1006,7 +1006,7 @@ class Event : gobject.boxed.Boxed
       Params:
         caps = A pointer to the caps
   */
-  void parseCaps(out gst.caps.Caps caps)
+  void parseCaps(out gst.caps.Caps caps) nothrow
   {
     GstCaps* _caps;
     gst_event_parse_caps(cast(GstEvent*)this._cPtr, &_caps);
@@ -1019,7 +1019,7 @@ class Event : gobject.boxed.Boxed
       Params:
         resetTime = if time should be reset
   */
-  void parseFlushStop(out bool resetTime)
+  void parseFlushStop(out bool resetTime) nothrow
   {
     gboolean _resetTime;
     gst_event_parse_flush_stop(cast(GstEvent*)this._cPtr, &_resetTime);
@@ -1035,7 +1035,7 @@ class Event : gobject.boxed.Boxed
         duration = location where to store the duration of
               the gap, or null
   */
-  void parseGap(out gst.types.ClockTime timestamp, out gst.types.ClockTime duration)
+  void parseGap(out gst.types.ClockTime timestamp, out gst.types.ClockTime duration) nothrow
   {
     gst_event_parse_gap(cast(GstEvent*)this._cPtr, cast(GstClockTime*)&timestamp, cast(GstClockTime*)&duration);
   }
@@ -1047,13 +1047,13 @@ class Event : gobject.boxed.Boxed
       Params:
         flags = a #GstGapFlags or null
   */
-  void parseGapFlags(out gst.types.GapFlags flags)
+  void parseGapFlags(out gst.types.GapFlags flags) nothrow
   {
     gst_event_parse_gap_flags(cast(GstEvent*)this._cPtr, &flags);
   }
 
   /** */
-  bool parseGroupId(out uint groupId)
+  bool parseGroupId(out uint groupId) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_event_parse_group_id(cast(GstEvent*)this._cPtr, cast(uint*)&groupId);
@@ -1069,7 +1069,7 @@ class Event : gobject.boxed.Boxed
         newFlags = location in which to store the new
               segment flags of the instant-rate-change event, or null
   */
-  void parseInstantRateChange(out double rateMultiplier, out gst.types.SegmentFlags newFlags)
+  void parseInstantRateChange(out double rateMultiplier, out gst.types.SegmentFlags newFlags) nothrow
   {
     gst_event_parse_instant_rate_change(cast(GstEvent*)this._cPtr, cast(double*)&rateMultiplier, &newFlags);
   }
@@ -1085,7 +1085,7 @@ class Event : gobject.boxed.Boxed
         upstreamRunningTime = location in which to store the
               upstream running time of the instant-rate-sync-time event, or null
   */
-  void parseInstantRateSyncTime(out double rateMultiplier, out gst.types.ClockTime runningTime, out gst.types.ClockTime upstreamRunningTime)
+  void parseInstantRateSyncTime(out double rateMultiplier, out gst.types.ClockTime runningTime, out gst.types.ClockTime upstreamRunningTime) nothrow
   {
     gst_event_parse_instant_rate_sync_time(cast(GstEvent*)this._cPtr, cast(double*)&rateMultiplier, cast(GstClockTime*)&runningTime, cast(GstClockTime*)&upstreamRunningTime);
   }
@@ -1096,7 +1096,7 @@ class Event : gobject.boxed.Boxed
       Params:
         latency = A pointer to store the latency in.
   */
-  void parseLatency(out gst.types.ClockTime latency)
+  void parseLatency(out gst.types.ClockTime latency) nothrow
   {
     gst_event_parse_latency(cast(GstEvent*)this._cPtr, cast(GstClockTime*)&latency);
   }
@@ -1115,7 +1115,7 @@ class Event : gobject.boxed.Boxed
           indicates where the protection information carried by event was extracted
           from.
   */
-  void parseProtection(out string systemId, out gst.buffer.Buffer data, out string origin)
+  void parseProtection(out string systemId, out gst.buffer.Buffer data, out string origin) nothrow
   {
     char* _systemId;
     GstBuffer* _data;
@@ -1138,7 +1138,7 @@ class Event : gobject.boxed.Boxed
         diff = A pointer to store the diff in
         timestamp = A pointer to store the timestamp in
   */
-  void parseQos(out gst.types.QOSType type, out double proportion, out gst.types.ClockTimeDiff diff, out gst.types.ClockTime timestamp)
+  void parseQos(out gst.types.QOSType type, out double proportion, out gst.types.ClockTimeDiff diff, out gst.types.ClockTime timestamp) nothrow
   {
     gst_event_parse_qos(cast(GstEvent*)this._cPtr, &type, cast(double*)&proportion, cast(GstClockTimeDiff*)&diff, cast(GstClockTime*)&timestamp);
   }
@@ -1155,7 +1155,7 @@ class Event : gobject.boxed.Boxed
         stopType = result location for the #GstSeekType of the stop position
         stop = result location for the stop position expressed in format
   */
-  void parseSeek(out double rate, out gst.types.Format format, out gst.types.SeekFlags flags, out gst.types.SeekType startType, out long start, out gst.types.SeekType stopType, out long stop)
+  void parseSeek(out double rate, out gst.types.Format format, out gst.types.SeekFlags flags, out gst.types.SeekType startType, out long start, out gst.types.SeekType stopType, out long stop) nothrow
   {
     gst_event_parse_seek(cast(GstEvent*)this._cPtr, cast(double*)&rate, &format, &flags, &startType, cast(long*)&start, &stopType, cast(long*)&stop);
   }
@@ -1167,7 +1167,7 @@ class Event : gobject.boxed.Boxed
       Params:
         interval = interval
   */
-  void parseSeekTrickmodeInterval(out gst.types.ClockTime interval)
+  void parseSeekTrickmodeInterval(out gst.types.ClockTime interval) nothrow
   {
     gst_event_parse_seek_trickmode_interval(cast(GstEvent*)this._cPtr, cast(GstClockTime*)&interval);
   }
@@ -1180,7 +1180,7 @@ class Event : gobject.boxed.Boxed
       Params:
         segment = a pointer to a #GstSegment
   */
-  void parseSegment(out gst.segment.Segment segment)
+  void parseSegment(out gst.segment.Segment segment) nothrow
   {
     const(GstSegment)* _segment;
     gst_event_parse_segment(cast(GstEvent*)this._cPtr, &_segment);
@@ -1194,7 +1194,7 @@ class Event : gobject.boxed.Boxed
         format = Result location for the format, or null
         position = Result location for the position, or null
   */
-  void parseSegmentDone(out gst.types.Format format, out long position)
+  void parseSegmentDone(out gst.types.Format format, out long position) nothrow
   {
     gst_event_parse_segment_done(cast(GstEvent*)this._cPtr, &format, cast(long*)&position);
   }
@@ -1205,7 +1205,7 @@ class Event : gobject.boxed.Boxed
       Params:
         streams = the streams
   */
-  void parseSelectStreams(out string[] streams)
+  void parseSelectStreams(out string[] streams) nothrow
   {
     GList* _streams;
     gst_event_parse_select_streams(cast(GstEvent*)this._cPtr, &_streams);
@@ -1218,7 +1218,7 @@ class Event : gobject.boxed.Boxed
       Params:
         msg = a pointer to store the #GstMessage in.
   */
-  void parseSinkMessage(out gst.message.Message msg)
+  void parseSinkMessage(out gst.message.Message msg) nothrow
   {
     GstMessage* _msg;
     gst_event_parse_sink_message(cast(GstEvent*)this._cPtr, &_msg);
@@ -1236,7 +1236,7 @@ class Event : gobject.boxed.Boxed
         intermediate = a pointer to store the intermediate
               boolean in
   */
-  void parseStep(out gst.types.Format format, out ulong amount, out double rate, out bool flush, out bool intermediate)
+  void parseStep(out gst.types.Format format, out ulong amount, out double rate, out bool flush, out bool intermediate) nothrow
   {
     gboolean _flush;
     gboolean _intermediate;
@@ -1251,7 +1251,7 @@ class Event : gobject.boxed.Boxed
       Params:
         stream = address of variable to store the stream
   */
-  void parseStream(out gst.stream.Stream stream)
+  void parseStream(out gst.stream.Stream stream) nothrow
   {
     GstStream* _stream;
     gst_event_parse_stream(cast(GstEvent*)this._cPtr, &_stream);
@@ -1264,7 +1264,7 @@ class Event : gobject.boxed.Boxed
       Params:
         collection = pointer to store the collection.
   */
-  void parseStreamCollection(out gst.stream_collection.StreamCollection collection)
+  void parseStreamCollection(out gst.stream_collection.StreamCollection collection) nothrow
   {
     GstStreamCollection* _collection;
     gst_event_parse_stream_collection(cast(GstEvent*)this._cPtr, &_collection);
@@ -1272,7 +1272,7 @@ class Event : gobject.boxed.Boxed
   }
 
   /** */
-  void parseStreamFlags(out gst.types.StreamFlags flags)
+  void parseStreamFlags(out gst.types.StreamFlags flags) nothrow
   {
     gst_event_parse_stream_flags(cast(GstEvent*)this._cPtr, &flags);
   }
@@ -1284,7 +1284,7 @@ class Event : gobject.boxed.Boxed
       Params:
         groupId = address of variable to store the group id into
   */
-  void parseStreamGroupDone(out uint groupId)
+  void parseStreamGroupDone(out uint groupId) nothrow
   {
     gst_event_parse_stream_group_done(cast(GstEvent*)this._cPtr, cast(uint*)&groupId);
   }
@@ -1298,7 +1298,7 @@ class Event : gobject.boxed.Boxed
       Params:
         streamId = pointer to store the stream-id
   */
-  void parseStreamStart(out string streamId)
+  void parseStreamStart(out string streamId) nothrow
   {
     char* _streamId;
     gst_event_parse_stream_start(cast(GstEvent*)this._cPtr, &_streamId);
@@ -1314,7 +1314,7 @@ class Event : gobject.boxed.Boxed
       Params:
         taglist = pointer to metadata list
   */
-  void parseTag(out gst.tag_list.TagList taglist)
+  void parseTag(out gst.tag_list.TagList taglist) nothrow
   {
     GstTagList* _taglist;
     gst_event_parse_tag(cast(GstEvent*)this._cPtr, &_taglist);
@@ -1328,7 +1328,7 @@ class Event : gobject.boxed.Boxed
         toc = pointer to #GstToc structure.
         updated = pointer to store TOC updated flag.
   */
-  void parseToc(out gst.toc.Toc toc, out bool updated)
+  void parseToc(out gst.toc.Toc toc, out bool updated) nothrow
   {
     GstToc* _toc;
     gboolean _updated;
@@ -1343,7 +1343,7 @@ class Event : gobject.boxed.Boxed
       Params:
         uid = storage for the selection UID.
   */
-  void parseTocSelect(out string uid)
+  void parseTocSelect(out string uid) nothrow
   {
     char* _uid;
     gst_event_parse_toc_select(cast(GstEvent*)this._cPtr, &_uid);
@@ -1357,7 +1357,7 @@ class Event : gobject.boxed.Boxed
       Params:
         flags = a #GstGapFlags
   */
-  void setGapFlags(gst.types.GapFlags flags)
+  void setGapFlags(gst.types.GapFlags flags) nothrow
   {
     gst_event_set_gap_flags(cast(GstEvent*)this._cPtr, flags);
   }
@@ -1374,7 +1374,7 @@ class Event : gobject.boxed.Boxed
       Params:
         groupId = the group id to set
   */
-  void setGroupId(uint groupId)
+  void setGroupId(uint groupId) nothrow
   {
     gst_event_set_group_id(cast(GstEvent*)this._cPtr, groupId);
   }
@@ -1388,7 +1388,7 @@ class Event : gobject.boxed.Boxed
       Params:
         offset = A the new running time offset
   */
-  void setRunningTimeOffset(long offset)
+  void setRunningTimeOffset(long offset) nothrow
   {
     gst_event_set_running_time_offset(cast(GstEvent*)this._cPtr, offset);
   }
@@ -1401,7 +1401,7 @@ class Event : gobject.boxed.Boxed
       Params:
         interval = 
   */
-  void setSeekTrickmodeInterval(gst.types.ClockTime interval)
+  void setSeekTrickmodeInterval(gst.types.ClockTime interval) nothrow
   {
     gst_event_set_seek_trickmode_interval(cast(GstEvent*)this._cPtr, interval);
   }
@@ -1418,7 +1418,7 @@ class Event : gobject.boxed.Boxed
       Params:
         seqnum = A sequence number.
   */
-  void setSeqnum(uint seqnum)
+  void setSeqnum(uint seqnum) nothrow
   {
     gst_event_set_seqnum(cast(GstEvent*)this._cPtr, seqnum);
   }
@@ -1429,13 +1429,13 @@ class Event : gobject.boxed.Boxed
       Params:
         stream = the stream object to set
   */
-  void setStream(gst.stream.Stream stream)
+  void setStream(gst.stream.Stream stream) nothrow
   {
     gst_event_set_stream(cast(GstEvent*)this._cPtr, stream ? cast(GstStream*)stream._cPtr(No.Dup) : null);
   }
 
   /** */
-  void setStreamFlags(gst.types.StreamFlags flags)
+  void setStreamFlags(gst.types.StreamFlags flags) nothrow
   {
     gst_event_set_stream_flags(cast(GstEvent*)this._cPtr, flags);
   }
@@ -1450,7 +1450,7 @@ class Event : gobject.boxed.Boxed
         
         MT safe.
   */
-  gst.structure.Structure writableStructure()
+  gst.structure.Structure writableStructure() nothrow
   {
     GstStructure* _cretval;
     _cretval = gst_event_writable_structure(cast(GstEvent*)this._cPtr);

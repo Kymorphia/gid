@@ -30,32 +30,32 @@ class FontOptions : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_font_options_get_type != &gidSymbolNotFound ? cairo_gobject_font_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FontOptions self()
+  override FontOptions self() nothrow
   {
     return this;
   }
@@ -69,7 +69,7 @@ class FontOptions : gobject.boxed.Boxed
           error object is returned where all operations on the object do nothing.
           You can check for this with [cairo.font_options.FontOptions.status].
   */
-  cairo.font_options.FontOptions copy()
+  cairo.font_options.FontOptions copy() nothrow
   {
     cairo_font_options_t* _cretval;
     _cretval = cairo_font_options_copy(cast(const(cairo_font_options_t)*)this._cPtr);
@@ -86,7 +86,7 @@ class FontOptions : gobject.boxed.Boxed
         Note that this function will return false if either object is in
         error.
   */
-  cairo.types.Bool equal(cairo.font_options.FontOptions other)
+  cairo.types.Bool equal(cairo.font_options.FontOptions other) nothrow
   {
     cairo.types.Bool _retval;
     _retval = cairo_font_options_equal(cast(const(cairo_font_options_t)*)this._cPtr, other ? cast(const(cairo_font_options_t)*)other._cPtr(No.Dup) : null);
@@ -97,7 +97,7 @@ class FontOptions : gobject.boxed.Boxed
       Gets the antialiasing mode for the font options object.
       Returns: the antialiasing mode
   */
-  cairo.types.Antialias getAntialias()
+  cairo.types.Antialias getAntialias() nothrow
   {
     cairo_antialias_t _cretval;
     _cretval = cairo_font_options_get_antialias(cast(const(cairo_font_options_t)*)this._cPtr);
@@ -110,7 +110,7 @@ class FontOptions : gobject.boxed.Boxed
       See the documentation for #cairo_color_mode_t for full details.
       Returns: the color mode for the font options object
   */
-  cairo.types.ColorMode getColorMode()
+  cairo.types.ColorMode getColorMode() nothrow
   {
     cairo_color_mode_t _cretval;
     _cretval = cairo_font_options_get_color_mode(cast(const(cairo_font_options_t)*)this._cPtr);
@@ -122,7 +122,7 @@ class FontOptions : gobject.boxed.Boxed
       Gets the current OpenType color font palette for the font options object.
       Returns: the palette index
   */
-  uint getColorPalette()
+  uint getColorPalette() nothrow
   {
     uint _retval;
     _retval = cairo_font_options_get_color_palette(cast(const(cairo_font_options_t)*)this._cPtr);
@@ -142,7 +142,7 @@ class FontOptions : gobject.boxed.Boxed
         returned, [cairo.types.Status.InvalidIndex] if no custom color exists
         for the color index.
   */
-  cairo.types.Status getCustomPaletteColor(uint index, out double red, out double green, out double blue, out double alpha)
+  cairo.types.Status getCustomPaletteColor(uint index, out double red, out double green, out double blue, out double alpha) nothrow
   {
     cairo_status_t _cretval;
     _cretval = cairo_font_options_get_custom_palette_color(cast(cairo_font_options_t*)this._cPtr, index, cast(double*)&red, cast(double*)&green, cast(double*)&blue, cast(double*)&alpha);
@@ -155,7 +155,7 @@ class FontOptions : gobject.boxed.Boxed
       See the documentation for #cairo_hint_metrics_t for full details.
       Returns: the metrics hinting mode for the font options object
   */
-  cairo.types.HintMetrics getHintMetrics()
+  cairo.types.HintMetrics getHintMetrics() nothrow
   {
     cairo_hint_metrics_t _cretval;
     _cretval = cairo_font_options_get_hint_metrics(cast(const(cairo_font_options_t)*)this._cPtr);
@@ -168,7 +168,7 @@ class FontOptions : gobject.boxed.Boxed
       See the documentation for #cairo_hint_style_t for full details.
       Returns: the hint style for the font options object
   */
-  cairo.types.HintStyle getHintStyle()
+  cairo.types.HintStyle getHintStyle() nothrow
   {
     cairo_hint_style_t _cretval;
     _cretval = cairo_font_options_get_hint_style(cast(const(cairo_font_options_t)*)this._cPtr);
@@ -181,7 +181,7 @@ class FontOptions : gobject.boxed.Boxed
       See the documentation for #cairo_subpixel_order_t for full details.
       Returns: the subpixel order for the font options object
   */
-  cairo.types.SubpixelOrder getSubpixelOrder()
+  cairo.types.SubpixelOrder getSubpixelOrder() nothrow
   {
     cairo_subpixel_order_t _cretval;
     _cretval = cairo_font_options_get_subpixel_order(cast(const(cairo_font_options_t)*)this._cPtr);
@@ -199,7 +199,7 @@ class FontOptions : gobject.boxed.Boxed
           the font variations in this object is modified with
           [cairo.font_options.FontOptions.setVariations].
   */
-  string getVariations()
+  string getVariations() nothrow
   {
     const(char)* _cretval;
     _cretval = cairo_font_options_get_variations(cast(cairo_font_options_t*)this._cPtr);
@@ -215,7 +215,7 @@ class FontOptions : gobject.boxed.Boxed
           The return value can be cast to a 32-bit type if a
           32-bit hash value is needed.
   */
-  gulong hash()
+  gulong hash() nothrow
   {
     gulong _retval;
     _retval = cairo_font_options_hash(cast(const(cairo_font_options_t)*)this._cPtr);
@@ -231,7 +231,7 @@ class FontOptions : gobject.boxed.Boxed
       Params:
         other = another #cairo_font_options_t
   */
-  void merge(cairo.font_options.FontOptions other)
+  void merge(cairo.font_options.FontOptions other) nothrow
   {
     cairo_font_options_merge(cast(cairo_font_options_t*)this._cPtr, other ? cast(const(cairo_font_options_t)*)other._cPtr(No.Dup) : null);
   }
@@ -243,7 +243,7 @@ class FontOptions : gobject.boxed.Boxed
       Params:
         antialias = the new antialiasing mode
   */
-  void setAntialias(cairo.types.Antialias antialias)
+  void setAntialias(cairo.types.Antialias antialias) nothrow
   {
     cairo_font_options_set_antialias(cast(cairo_font_options_t*)this._cPtr, antialias);
   }
@@ -256,7 +256,7 @@ class FontOptions : gobject.boxed.Boxed
       Params:
         colorMode = the new color mode
   */
-  void setColorMode(cairo.types.ColorMode colorMode)
+  void setColorMode(cairo.types.ColorMode colorMode) nothrow
   {
     cairo_font_options_set_color_mode(cast(cairo_font_options_t*)this._cPtr, colorMode);
   }
@@ -274,7 +274,7 @@ class FontOptions : gobject.boxed.Boxed
       Params:
         paletteIndex = the palette index in the CPAL table
   */
-  void setColorPalette(uint paletteIndex)
+  void setColorPalette(uint paletteIndex) nothrow
   {
     cairo_font_options_set_color_palette(cast(cairo_font_options_t*)this._cPtr, paletteIndex);
   }
@@ -296,7 +296,7 @@ class FontOptions : gobject.boxed.Boxed
         blue = blue component of color
         alpha = alpha component of color
   */
-  void setCustomPaletteColor(uint index, double red, double green, double blue, double alpha)
+  void setCustomPaletteColor(uint index, double red, double green, double blue, double alpha) nothrow
   {
     cairo_font_options_set_custom_palette_color(cast(cairo_font_options_t*)this._cPtr, index, red, green, blue, alpha);
   }
@@ -310,7 +310,7 @@ class FontOptions : gobject.boxed.Boxed
       Params:
         hintMetrics = the new metrics hinting mode
   */
-  void setHintMetrics(cairo.types.HintMetrics hintMetrics)
+  void setHintMetrics(cairo.types.HintMetrics hintMetrics) nothrow
   {
     cairo_font_options_set_hint_metrics(cast(cairo_font_options_t*)this._cPtr, hintMetrics);
   }
@@ -324,7 +324,7 @@ class FontOptions : gobject.boxed.Boxed
       Params:
         hintStyle = the new hint style
   */
-  void setHintStyle(cairo.types.HintStyle hintStyle)
+  void setHintStyle(cairo.types.HintStyle hintStyle) nothrow
   {
     cairo_font_options_set_hint_style(cast(cairo_font_options_t*)this._cPtr, hintStyle);
   }
@@ -339,7 +339,7 @@ class FontOptions : gobject.boxed.Boxed
       Params:
         subpixelOrder = the new subpixel order
   */
-  void setSubpixelOrder(cairo.types.SubpixelOrder subpixelOrder)
+  void setSubpixelOrder(cairo.types.SubpixelOrder subpixelOrder) nothrow
   {
     cairo_font_options_set_subpixel_order(cast(cairo_font_options_t*)this._cPtr, subpixelOrder);
   }
@@ -361,7 +361,7 @@ class FontOptions : gobject.boxed.Boxed
       Params:
         variations = the new font variations, or null
   */
-  void setVariations(string variations)
+  void setVariations(string variations) nothrow
   {
     const(char)* _variations = variations.toCString(No.Alloc);
     cairo_font_options_set_variations(cast(cairo_font_options_t*)this._cPtr, _variations);
@@ -373,7 +373,7 @@ class FontOptions : gobject.boxed.Boxed
       Returns: [cairo.types.Status.Success], [cairo.types.Status.NoMemory], or
         [cairo.types.Status.NullPointer].
   */
-  cairo.types.Status status()
+  cairo.types.Status status() nothrow
   {
     cairo_status_t _cretval;
     _cretval = cairo_font_options_status(cast(cairo_font_options_t*)this._cPtr);

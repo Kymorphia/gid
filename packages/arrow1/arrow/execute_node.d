@@ -16,26 +16,26 @@ class ExecuteNode : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_execute_node_get_type != &gidSymbolNotFound ? garrow_execute_node_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ExecuteNode self()
+  override ExecuteNode self() nothrow
   {
     return this;
   }
@@ -44,19 +44,19 @@ class ExecuteNode : gobject.object.ObjectWrap
       Get builder for [arrow.execute_node.ExecuteNode]
       Returns: New builder object
   */
-  static ExecuteNodeGidBuilder builder()
+  static ExecuteNodeGidBuilder builder() nothrow
   {
     return new ExecuteNodeGidBuilder;
   }
 
   /** */
-  @property arrow.execute_node_options.ExecuteNodeOptions options()
+  @property arrow.execute_node_options.ExecuteNodeOptions options() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.execute_node_options.ExecuteNodeOptions)("options");
   }
 
   /** */
-  string getKindName()
+  string getKindName() nothrow
   {
     const(char)* _cretval;
     _cretval = garrow_execute_node_get_kind_name(cast(GArrowExecuteNode*)this._cPtr);
@@ -65,7 +65,7 @@ class ExecuteNode : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.schema.Schema getOutputSchema()
+  arrow.schema.Schema getOutputSchema() nothrow
   {
     GArrowSchema* _cretval;
     _cretval = garrow_execute_node_get_output_schema(cast(GArrowExecuteNode*)this._cPtr);
@@ -79,13 +79,13 @@ class ExecuteNodeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T node(void* propval)
+  T node(void* propval) nothrow
   {
     return setProperty("node", propval);
   }
 
   /** */
-  T options(arrow.execute_node_options.ExecuteNodeOptions propval)
+  T options(arrow.execute_node_options.ExecuteNodeOptions propval) nothrow
   {
     return setProperty("options", propval);
   }
@@ -98,7 +98,7 @@ final class ExecuteNodeGidBuilder : ExecuteNodeGidBuilderImpl!ExecuteNodeGidBuil
       Create object from builder.
       Returns: New object
   */
-  ExecuteNode build()
+  ExecuteNode build() nothrow
   {
     return new ExecuteNode(cast(void*)createGObject(ExecuteNode._getGType), No.Take);
   }

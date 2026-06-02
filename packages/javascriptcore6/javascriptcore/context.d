@@ -17,6 +17,8 @@ import javascriptcore.virtual_machine;
 
 import std.traits;
 
+import std.exception : assumeWontThrow;
+
 import gobject.c.functions;
 import javascriptcore.class_;
 
@@ -33,26 +35,26 @@ class Context : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())jsc_context_get_type != &gidSymbolNotFound ? jsc_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Context self()
+  override Context self() nothrow
   {
     return this;
   }
@@ -61,7 +63,7 @@ class Context : gobject.object.ObjectWrap
       Get builder for [javascriptcore.context.Context]
       Returns: New builder object
   */
-  static ContextGidBuilder builder()
+  static ContextGidBuilder builder() nothrow
   {
     return new ContextGidBuilder;
   }
@@ -70,7 +72,7 @@ class Context : gobject.object.ObjectWrap
       Get `virtualMachine` property.
       Returns: The #JSCVirtualMachine in which the context was created.
   */
-  @property javascriptcore.virtual_machine.VirtualMachine virtualMachine()
+  @property javascriptcore.virtual_machine.VirtualMachine virtualMachine() nothrow
   {
     return getVirtualMachine();
   }
@@ -80,7 +82,7 @@ class Context : gobject.object.ObjectWrap
   /**
   * Register a D function/delegate as a JavaScript function.
   */
-  void registerFunction(T)(string name, T callback)
+  void registerFunction(T)(string name, T callback) nothrow
   {
     auto jsFunc = Value.newFunction(this, name, callback);
     setValue(name, jsFunc);
@@ -90,7 +92,7 @@ class Context : gobject.object.ObjectWrap
   * Register with automatic name from the function symbol.
   * Only works with function pointers/aliases, not runtime delegates.
   */
-  void registerFunction(alias Func)()
+  void registerFunction(alias Func)() nothrow
   if (isFunction!Func)
   {
     string name = __traits(identifier, Func);
@@ -112,9 +114,9 @@ class Context : gobject.object.ObjectWrap
   *   className = Class name to use or empty/null to use D class name (default)
   * Returns: The registered Class (returns the existing instance if it was already registered)
   */
-  Class registerClass(alias DClass, RegisterClassMode Mode = RegisterClassMode.UdaOnly)(string className = null)
+  Class registerClass(alias DClass, RegisterClassMode Mode = RegisterClassMode.UdaOnly)(string className = null) nothrow
   {
-    extern(C) void classDestroyNotify(const(void*) data)
+    extern(C) void classDestroyNotify(const(void*) data) nothrow
     {
       auto jsObj = cast(GObject*)data;
       if (auto dObj = g_object_get_qdata(jsObj, jscObjectQuark))
@@ -125,13 +127,13 @@ class Context : gobject.object.ObjectWrap
     }
 
     auto ti = typeid(DClass);
-    if (auto existing = classRegistry.get(ti, null))
+    if (auto existing = assumeWontThrow(classRegistry.get(ti, null)))
       return existing;
 
     if (className.length == 0)
       className = __traits(identifier, DClass);
 
-    auto parent = classRegistry.get(ti.base, null);
+    auto parent = assumeWontThrow(classRegistry.get(ti.base, null));
     auto jscParent = parent ? cast(JSCClass*)parent._cPtr : null;
 
     auto jscClass = jsc_context_register_class(cast(JSCContext*)this._cPtr, className.toCString(No.Alloc), jscParent, null, &classDestroyNotify);
@@ -223,7 +225,7 @@ class Context : gobject.object.ObjectWrap
 
   private template isMethodExposable(alias Method, RegisterClassMode Mode)
   {
-    static bool compute()
+    static bool compute() nothrow
     {
       bool isValid = true;
 
@@ -278,9 +280,9 @@ class Context : gobject.object.ObjectWrap
   *   T = The class type
   * Returns: The JSC Class or null if none registered for the given D class type
   */
-  Class getClass(T)()
+  Class getClass(T)() nothrow
   {
-    return classRegistery.get(typeid(T), null);
+    return assumeWontThrow(classRegistery.get(typeid(T), null));
   }
 
   /**
@@ -290,10 +292,10 @@ class Context : gobject.object.ObjectWrap
   *   name = The name of the JSC Class that was registered
   * Returns: The JSC Class or null if not found
   */
-  Class getClass(string name)
+  Class getClass(string name) nothrow
   {
-    if (auto ti = classNameToType.get(name, null))
-      return classRegistry.get(ti, null);
+    if (auto ti = assumeWontThrow(classNameToType.get(name, null)))
+      return assumeWontThrow(classRegistry.get(ti, null));
 
     return null;
   }
@@ -304,7 +306,7 @@ class Context : gobject.object.ObjectWrap
       existing #JSCVirtualMachine.
       Returns: the newly created #JSCContext.
   */
-  this()
+  this() nothrow
   {
     JSCContext* _cretval;
     _cretval = jsc_context_new();
@@ -318,7 +320,7 @@ class Context : gobject.object.ObjectWrap
         vm = a #JSCVirtualMachine
       Returns: the newly created #JSCContext.
   */
-  static javascriptcore.context.Context newWithVirtualMachine(javascriptcore.virtual_machine.VirtualMachine vm)
+  static javascriptcore.context.Context newWithVirtualMachine(javascriptcore.virtual_machine.VirtualMachine vm) nothrow
   {
     JSCContext* _cretval;
     _cretval = jsc_context_new_with_virtual_machine(vm ? cast(JSCVirtualMachine*)vm._cPtr(No.Dup) : null);
@@ -331,7 +333,7 @@ class Context : gobject.object.ObjectWrap
       called within a function or method callback, otherwise null will be returned.
       Returns: the #JSCContext that is currently executing.
   */
-  static javascriptcore.context.Context getCurrent()
+  static javascriptcore.context.Context getCurrent() nothrow
   {
     JSCContext* _cretval;
     _cretval = jsc_context_get_current();
@@ -353,7 +355,7 @@ class Context : gobject.object.ObjectWrap
         exception = return location for a #JSCException, or null to ignore
       Returns: a #JSCCheckSyntaxResult
   */
-  javascriptcore.types.CheckSyntaxResult checkSyntax(string code, javascriptcore.types.CheckSyntaxMode mode, string uri, uint lineNumber, out javascriptcore.exception.ExceptionWrap exception)
+  javascriptcore.types.CheckSyntaxResult checkSyntax(string code, javascriptcore.types.CheckSyntaxMode mode, string uri, uint lineNumber, out javascriptcore.exception.ExceptionWrap exception) nothrow
   {
     JSCCheckSyntaxResult _cretval;
     ptrdiff_t _length;
@@ -372,7 +374,7 @@ class Context : gobject.object.ObjectWrap
   /**
       Clear the uncaught exception in context if any.
   */
-  void clearException()
+  void clearException() nothrow
   {
     jsc_context_clear_exception(cast(JSCContext*)this._cPtr);
   }
@@ -384,7 +386,7 @@ class Context : gobject.object.ObjectWrap
         code = a JavaScript script to evaluate
       Returns: a #JSCValue representing the last value generated by the script.
   */
-  javascriptcore.value.Value evaluate(string code)
+  javascriptcore.value.Value evaluate(string code) nothrow
   {
     JSCValue* _cretval;
     ptrdiff_t _length;
@@ -413,7 +415,7 @@ class Context : gobject.object.ObjectWrap
         object = return location for a #JSCValue.
       Returns: a #JSCValue representing the last value generated by the script.
   */
-  javascriptcore.value.Value evaluateInObject(string code, void* objectInstance, javascriptcore.class_.Class objectClass, string uri, uint lineNumber, out javascriptcore.value.Value object)
+  javascriptcore.value.Value evaluateInObject(string code, void* objectInstance, javascriptcore.class_.Class objectClass, string uri, uint lineNumber, out javascriptcore.value.Value object) nothrow
   {
     JSCValue* _cretval;
     ptrdiff_t _length;
@@ -440,7 +442,7 @@ class Context : gobject.object.ObjectWrap
         lineNumber = the starting line number
       Returns: a #JSCValue representing the last value generated by the script.
   */
-  javascriptcore.value.Value evaluateWithSourceUri(string code, string uri, uint lineNumber)
+  javascriptcore.value.Value evaluateWithSourceUri(string code, string uri, uint lineNumber) nothrow
   {
     JSCValue* _cretval;
     ptrdiff_t _length;
@@ -459,7 +461,7 @@ class Context : gobject.object.ObjectWrap
       Returns: a #JSCException or null if there isn't any
            unhandled exception in the #JSCContext.
   */
-  javascriptcore.exception.ExceptionWrap getException()
+  javascriptcore.exception.ExceptionWrap getException() nothrow
   {
     JSCException* _cretval;
     _cretval = jsc_context_get_exception(cast(JSCContext*)this._cPtr);
@@ -471,7 +473,7 @@ class Context : gobject.object.ObjectWrap
       Get a #JSCValue referencing the context global object
       Returns: a #JSCValue
   */
-  javascriptcore.value.Value getGlobalObject()
+  javascriptcore.value.Value getGlobalObject() nothrow
   {
     JSCValue* _cretval;
     _cretval = jsc_context_get_global_object(cast(JSCContext*)this._cPtr);
@@ -486,7 +488,7 @@ class Context : gobject.object.ObjectWrap
         name = the value name
       Returns: a #JSCValue
   */
-  javascriptcore.value.Value getValue(string name)
+  javascriptcore.value.Value getValue(string name) nothrow
   {
     JSCValue* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -499,7 +501,7 @@ class Context : gobject.object.ObjectWrap
       Get the #JSCVirtualMachine where context was created.
       Returns: the #JSCVirtualMachine where the #JSCContext was created.
   */
-  javascriptcore.virtual_machine.VirtualMachine getVirtualMachine()
+  javascriptcore.virtual_machine.VirtualMachine getVirtualMachine() nothrow
   {
     JSCVirtualMachine* _cretval;
     _cretval = jsc_context_get_virtual_machine(cast(JSCContext*)this._cPtr);
@@ -511,7 +513,7 @@ class Context : gobject.object.ObjectWrap
       Remove the last #JSCExceptionHandler previously pushed to context with
       [javascriptcore.context.Context.pushExceptionHandler].
   */
-  void popExceptionHandler()
+  void popExceptionHandler() nothrow
   {
     jsc_context_pop_exception_handler(cast(JSCContext*)this._cPtr);
   }
@@ -529,13 +531,20 @@ class Context : gobject.object.ObjectWrap
       Params:
         handler = a #JSCExceptionHandler
   */
-  void pushExceptionHandler(javascriptcore.types.ExceptionHandler handler)
+  void pushExceptionHandler(javascriptcore.types.ExceptionHandler handler) nothrow
   {
-    extern(C) void _handlerCallback(JSCContext* context, JSCException* exception, void* userData)
+    extern(C) void _handlerCallback(JSCContext* context, JSCException* exception, void* userData) nothrow
     {
       auto _dlg = cast(javascriptcore.types.ExceptionHandler*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(javascriptcore.context.Context)(cast(void*)context, No.Take), gobject.object.ObjectWrap._getDObject!(javascriptcore.exception.ExceptionWrap)(cast(void*)exception, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(javascriptcore.context.Context)(cast(void*)context, No.Take), gobject.object.ObjectWrap._getDObject!(javascriptcore.exception.ExceptionWrap)(cast(void*)exception, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "javascriptcore.types.ExceptionHandler");
+      }
     }
     auto _handlerCB = handler ? &_handlerCallback : null;
     auto _handler = handler ? freezeDelegate(cast(void*)&handler) : null;
@@ -558,14 +567,21 @@ class Context : gobject.object.ObjectWrap
         destroyNotify = a destroy notifier for class instances
       Returns: a #JSCClass
   */
-  javascriptcore.class_.Class registerClass(string name, javascriptcore.class_.Class parentClass, javascriptcore.types.ClassVTable vtable, glib.types.DestroyNotify destroyNotify = null)
+  javascriptcore.class_.Class registerClass(string name, javascriptcore.class_.Class parentClass, javascriptcore.types.ClassVTable vtable, glib.types.DestroyNotify destroyNotify = null) nothrow
   {
-    extern(C) void _destroyNotifyCallback(void* data)
+    extern(C) void _destroyNotifyCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
     }
     auto _destroyNotifyCB = destroyNotify ? &_destroyNotifyCallback : null;
     JSCClass* _cretval;
@@ -582,7 +598,7 @@ class Context : gobject.object.ObjectWrap
         name = the value name
         value = a #JSCValue
   */
-  void setValue(string name, javascriptcore.value.Value value)
+  void setValue(string name, javascriptcore.value.Value value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     jsc_context_set_value(cast(JSCContext*)this._cPtr, _name, value ? cast(JSCValue*)value._cPtr(No.Dup) : null);
@@ -595,7 +611,7 @@ class Context : gobject.object.ObjectWrap
       Params:
         errorMessage = an error message
   */
-  void throw_(string errorMessage)
+  void throw_(string errorMessage) nothrow
   {
     const(char)* _errorMessage = errorMessage.toCString(No.Alloc);
     jsc_context_throw(cast(JSCContext*)this._cPtr, _errorMessage);
@@ -607,7 +623,7 @@ class Context : gobject.object.ObjectWrap
       Params:
         exception = a #JSCException
   */
-  void throwException(javascriptcore.exception.ExceptionWrap exception)
+  void throwException(javascriptcore.exception.ExceptionWrap exception) nothrow
   {
     jsc_context_throw_exception(cast(JSCContext*)this._cPtr, exception ? cast(JSCException*)exception._cPtr(No.Dup) : null);
   }
@@ -620,7 +636,7 @@ class Context : gobject.object.ObjectWrap
         errorName = the error name
         errorMessage = an error message
   */
-  void throwWithName(string errorName, string errorMessage)
+  void throwWithName(string errorName, string errorMessage) nothrow
   {
     const(char)* _errorName = errorName.toCString(No.Alloc);
     const(char)* _errorMessage = errorMessage.toCString(No.Alloc);
@@ -638,7 +654,7 @@ class ContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The #JSCVirtualMachine in which the context was created.
       Returns: Builder instance for fluent chaining
   */
-  T virtualMachine(javascriptcore.virtual_machine.VirtualMachine propval)
+  T virtualMachine(javascriptcore.virtual_machine.VirtualMachine propval) nothrow
   {
     return setProperty("virtual-machine", propval);
   }
@@ -651,7 +667,7 @@ final class ContextGidBuilder : ContextGidBuilderImpl!ContextGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Context build()
+  Context build() nothrow
   {
     return new Context(cast(void*)createGObject(Context._getGType), Yes.Take);
   }

@@ -15,26 +15,26 @@ class Time64Scalar : arrow.scalar.Scalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_time64_scalar_get_type != &gidSymbolNotFound ? garrow_time64_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Time64Scalar self()
+  override Time64Scalar self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class Time64Scalar : arrow.scalar.Scalar
       Get builder for [arrow.time64_scalar.Time64Scalar]
       Returns: New builder object
   */
-  static Time64ScalarGidBuilder builder()
+  static Time64ScalarGidBuilder builder() nothrow
   {
     return new Time64ScalarGidBuilder;
   }
 
   /** */
-  this(arrow.time64_data_type.Time64DataType dataType, long value)
+  this(arrow.time64_data_type.Time64DataType dataType, long value) nothrow
   {
     GArrowTime64Scalar* _cretval;
     _cretval = garrow_time64_scalar_new(dataType ? cast(GArrowTime64DataType*)dataType._cPtr(No.Dup) : null, value);
@@ -57,7 +57,7 @@ class Time64Scalar : arrow.scalar.Scalar
   }
 
   /** */
-  long getValue()
+  long getValue() nothrow
   {
     long _retval;
     _retval = garrow_time64_scalar_get_value(cast(GArrowTime64Scalar*)this._cPtr);
@@ -77,7 +77,7 @@ final class Time64ScalarGidBuilder : Time64ScalarGidBuilderImpl!Time64ScalarGidB
       Create object from builder.
       Returns: New object
   */
-  Time64Scalar build()
+  Time64Scalar build() nothrow
   {
     return new Time64Scalar(cast(void*)createGObject(Time64Scalar._getGType), Yes.Take);
   }

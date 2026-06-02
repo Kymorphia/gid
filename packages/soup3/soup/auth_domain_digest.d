@@ -21,26 +21,26 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_auth_domain_digest_get_type != &gidSymbolNotFound ? soup_auth_domain_digest_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AuthDomainDigest self()
+  override AuthDomainDigest self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
       Get builder for [soup.auth_domain_digest.AuthDomainDigest]
       Returns: New builder object
   */
-  static AuthDomainDigestGidBuilder builder()
+  static AuthDomainDigestGidBuilder builder() nothrow
   {
     return new AuthDomainDigestGidBuilder;
   }
@@ -58,7 +58,7 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
       Get `authCallback` property.
       Returns: The [soup.types.AuthDomainDigestAuthCallback].
   */
-  @property soup.types.AuthDomainDigestAuthCallback authCallback()
+  @property soup.types.AuthDomainDigestAuthCallback authCallback() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(soup.types.AuthDomainDigestAuthCallback)("auth-callback");
   }
@@ -68,7 +68,7 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
       Params:
         propval = The [soup.types.AuthDomainDigestAuthCallback].
   */
-  @property void authCallback(soup.types.AuthDomainDigestAuthCallback propval)
+  @property void authCallback(soup.types.AuthDomainDigestAuthCallback propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(soup.types.AuthDomainDigestAuthCallback)("auth-callback", propval);
   }
@@ -77,7 +77,7 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
       Get `authData` property.
       Returns: The data to pass to the [soup.types.AuthDomainDigestAuthCallback].
   */
-  @property void* authData()
+  @property void* authData() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(void*)("auth-data");
   }
@@ -87,7 +87,7 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
       Params:
         propval = The data to pass to the [soup.types.AuthDomainDigestAuthCallback].
   */
-  @property void authData(void* propval)
+  @property void authData(void* propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(void*)("auth-data", propval);
   }
@@ -115,7 +115,7 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
         password = the password for username in realm
       Returns: the encoded password
   */
-  static string encodePassword(string username, string realm, string password)
+  static string encodePassword(string username, string realm, string password) nothrow
   {
     char* _cretval;
     const(char)* _username = username.toCString(No.Alloc);
@@ -142,15 +142,22 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
       Params:
         callback = the callback
   */
-  void setAuthCallback(soup.types.AuthDomainDigestAuthCallback callback)
+  void setAuthCallback(soup.types.AuthDomainDigestAuthCallback callback) nothrow
   {
-    extern(C) char* _callbackCallback(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, void* userData)
+    extern(C) char* _callbackCallback(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, void* userData) nothrow
     {
       string _dretval;
       auto _dlg = cast(soup.types.AuthDomainDigestAuthCallback*)userData;
       string _username = username.fromCString(No.Free);
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.auth_domain_digest.AuthDomainDigest)(cast(void*)domain, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.auth_domain_digest.AuthDomainDigest)(cast(void*)domain, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.types.AuthDomainDigestAuthCallback");
+      }
       auto _retval = _dretval.toCString(Yes.Alloc);
 
       return _retval;
@@ -172,7 +179,7 @@ class AuthDomainDigestGidBuilderImpl(T) : soup.auth_domain.AuthDomainGidBuilderI
         propval = The [soup.types.AuthDomainDigestAuthCallback].
       Returns: Builder instance for fluent chaining
   */
-  T authCallback(soup.types.AuthDomainDigestAuthCallback propval)
+  T authCallback(soup.types.AuthDomainDigestAuthCallback propval) nothrow
   {
     return setProperty("auth-callback", propval);
   }
@@ -183,7 +190,7 @@ class AuthDomainDigestGidBuilderImpl(T) : soup.auth_domain.AuthDomainGidBuilderI
         propval = The data to pass to the [soup.types.AuthDomainDigestAuthCallback].
       Returns: Builder instance for fluent chaining
   */
-  T authData(void* propval)
+  T authData(void* propval) nothrow
   {
     return setProperty("auth-data", propval);
   }
@@ -196,7 +203,7 @@ final class AuthDomainDigestGidBuilder : AuthDomainDigestGidBuilderImpl!AuthDoma
       Create object from builder.
       Returns: New object
   */
-  AuthDomainDigest build()
+  AuthDomainDigest build() nothrow
   {
     return new AuthDomainDigest(cast(void*)createGObject(AuthDomainDigest._getGType), Yes.Take);
   }

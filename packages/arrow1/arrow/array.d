@@ -29,26 +29,26 @@ class Array : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_array_get_type != &gidSymbolNotFound ? garrow_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Array self()
+  override Array self() nothrow
   {
     return this;
   }
@@ -57,37 +57,37 @@ class Array : gobject.object.ObjectWrap
       Get builder for [arrow.array.Array]
       Returns: New builder object
   */
-  static ArrayGidBuilder builder()
+  static ArrayGidBuilder builder() nothrow
   {
     return new ArrayGidBuilder;
   }
 
   /** */
-  @property arrow.buffer.Buffer buffer1()
+  @property arrow.buffer.Buffer buffer1() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.buffer.Buffer)("buffer1");
   }
 
   /** */
-  @property arrow.buffer.Buffer buffer2()
+  @property arrow.buffer.Buffer buffer2() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.buffer.Buffer)("buffer2");
   }
 
   /** */
-  @property arrow.buffer.Buffer nullBitmap()
+  @property arrow.buffer.Buffer nullBitmap() nothrow
   {
     return getNullBitmap();
   }
 
   /** */
-  @property arrow.array.Array parent()
+  @property arrow.array.Array parent() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.array.Array)("parent");
   }
 
   /** */
-  @property arrow.data_type.DataType valueDataType()
+  @property arrow.data_type.DataType valueDataType() nothrow
   {
     return getValueDataType();
   }
@@ -166,7 +166,7 @@ class Array : gobject.object.ObjectWrap
   }
 
   /** */
-  string diffUnified(arrow.array.Array otherArray)
+  string diffUnified(arrow.array.Array otherArray) nothrow
   {
     char* _cretval;
     _cretval = garrow_array_diff_unified(cast(GArrowArray*)this._cPtr, otherArray ? cast(GArrowArray*)otherArray._cPtr(No.Dup) : null);
@@ -175,7 +175,7 @@ class Array : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equal(arrow.array.Array otherArray)
+  bool equal(arrow.array.Array otherArray) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_array_equal(cast(GArrowArray*)this._cPtr, otherArray ? cast(GArrowArray*)otherArray._cPtr(No.Dup) : null);
@@ -183,7 +183,7 @@ class Array : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equalApprox(arrow.array.Array otherArray)
+  bool equalApprox(arrow.array.Array otherArray) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_array_equal_approx(cast(GArrowArray*)this._cPtr, otherArray ? cast(GArrowArray*)otherArray._cPtr(No.Dup) : null);
@@ -191,7 +191,7 @@ class Array : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equalOptions(arrow.array.Array otherArray, arrow.equal_options.EqualOptions options = null)
+  bool equalOptions(arrow.array.Array otherArray, arrow.equal_options.EqualOptions options = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_array_equal_options(cast(GArrowArray*)this._cPtr, otherArray ? cast(GArrowArray*)otherArray._cPtr(No.Dup) : null, options ? cast(GArrowEqualOptions*)options._cPtr(No.Dup) : null);
@@ -199,7 +199,7 @@ class Array : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equalRange(long startIndex, arrow.array.Array otherArray, long otherStartIndex, long endIndex, arrow.equal_options.EqualOptions options = null)
+  bool equalRange(long startIndex, arrow.array.Array otherArray, long otherStartIndex, long endIndex, arrow.equal_options.EqualOptions options = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_array_equal_range(cast(GArrowArray*)this._cPtr, startIndex, otherArray ? cast(GArrowArray*)otherArray._cPtr(No.Dup) : null, otherStartIndex, endIndex, options ? cast(GArrowEqualOptions*)options._cPtr(No.Dup) : null);
@@ -230,7 +230,7 @@ class Array : gobject.object.ObjectWrap
   }
 
   /** */
-  long getLength()
+  long getLength() nothrow
   {
     long _retval;
     _retval = garrow_array_get_length(cast(GArrowArray*)this._cPtr);
@@ -238,7 +238,7 @@ class Array : gobject.object.ObjectWrap
   }
 
   /** */
-  long getNNulls()
+  long getNNulls() nothrow
   {
     long _retval;
     _retval = garrow_array_get_n_nulls(cast(GArrowArray*)this._cPtr);
@@ -246,7 +246,7 @@ class Array : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.buffer.Buffer getNullBitmap()
+  arrow.buffer.Buffer getNullBitmap() nothrow
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_array_get_null_bitmap(cast(GArrowArray*)this._cPtr);
@@ -255,7 +255,7 @@ class Array : gobject.object.ObjectWrap
   }
 
   /** */
-  long getOffset()
+  long getOffset() nothrow
   {
     long _retval;
     _retval = garrow_array_get_offset(cast(GArrowArray*)this._cPtr);
@@ -263,7 +263,7 @@ class Array : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.data_type.DataType getValueDataType()
+  arrow.data_type.DataType getValueDataType() nothrow
   {
     GArrowDataType* _cretval;
     _cretval = garrow_array_get_value_data_type(cast(GArrowArray*)this._cPtr);
@@ -272,7 +272,7 @@ class Array : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.types.Type getValueType()
+  arrow.types.Type getValueType() nothrow
   {
     GArrowType _cretval;
     _cretval = garrow_array_get_value_type(cast(GArrowArray*)this._cPtr);
@@ -305,7 +305,7 @@ class Array : gobject.object.ObjectWrap
   }
 
   /** */
-  bool isNull(long i)
+  bool isNull(long i) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_array_is_null(cast(GArrowArray*)this._cPtr, i);
@@ -313,7 +313,7 @@ class Array : gobject.object.ObjectWrap
   }
 
   /** */
-  bool isValid(long i)
+  bool isValid(long i) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_array_is_valid(cast(GArrowArray*)this._cPtr, i);
@@ -333,7 +333,7 @@ class Array : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.array.Array slice(long offset, long length)
+  arrow.array.Array slice(long offset, long length) nothrow
   {
     GArrowArray* _cretval;
     _cretval = garrow_array_slice(cast(GArrowArray*)this._cPtr, offset, length);
@@ -431,37 +431,37 @@ class ArrayGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T array(void* propval)
+  T array(void* propval) nothrow
   {
     return setProperty("array", propval);
   }
 
   /** */
-  T buffer1(arrow.buffer.Buffer propval)
+  T buffer1(arrow.buffer.Buffer propval) nothrow
   {
     return setProperty("buffer1", propval);
   }
 
   /** */
-  T buffer2(arrow.buffer.Buffer propval)
+  T buffer2(arrow.buffer.Buffer propval) nothrow
   {
     return setProperty("buffer2", propval);
   }
 
   /** */
-  T nullBitmap(arrow.buffer.Buffer propval)
+  T nullBitmap(arrow.buffer.Buffer propval) nothrow
   {
     return setProperty("null-bitmap", propval);
   }
 
   /** */
-  T parent(arrow.array.Array propval)
+  T parent(arrow.array.Array propval) nothrow
   {
     return setProperty("parent", propval);
   }
 
   /** */
-  T valueDataType(arrow.data_type.DataType propval)
+  T valueDataType(arrow.data_type.DataType propval) nothrow
   {
     return setProperty("value-data-type", propval);
   }
@@ -474,7 +474,7 @@ final class ArrayGidBuilder : ArrayGidBuilderImpl!ArrayGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Array build()
+  Array build() nothrow
   {
     return new Array(cast(void*)createGObject(Array._getGType), No.Take);
   }

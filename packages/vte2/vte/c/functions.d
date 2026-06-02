@@ -16,7 +16,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libvte-2.91.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // EventContext
   GdkEvent* function(const(VteEventContext)* context) c_vte_event_context_get_event; ///

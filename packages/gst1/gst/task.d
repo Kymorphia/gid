@@ -57,26 +57,26 @@ class Task : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_task_get_type != &gidSymbolNotFound ? gst_task_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Task self()
+  override Task self() nothrow
   {
     return this;
   }
@@ -85,7 +85,7 @@ class Task : gst.object.ObjectWrap
       Get builder for [gst.task.Task]
       Returns: New builder object
   */
-  static TaskGidBuilder builder()
+  static TaskGidBuilder builder() nothrow
   {
     return new TaskGidBuilder;
   }
@@ -111,13 +111,20 @@ class Task : gst.object.ObjectWrap
         
         MT safe.
   */
-  this(gst.types.TaskFunction func)
+  this(gst.types.TaskFunction func) nothrow
   {
-    extern(C) void _funcCallback(void* userData)
+    extern(C) void _funcCallback(void* userData) nothrow
     {
       auto _dlg = cast(gst.types.TaskFunction*)userData;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.TaskFunction");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     GstTask* _cretval;
@@ -133,7 +140,7 @@ class Task : gst.object.ObjectWrap
       
       MT safe.
   */
-  static void cleanupAll()
+  static void cleanupAll() nothrow
   {
     gst_task_cleanup_all();
   }
@@ -146,7 +153,7 @@ class Task : gst.object.ObjectWrap
       Returns: the #GstTaskPool used by task. [gst.object.ObjectWrap.unref]
         after usage.
   */
-  gst.task_pool.TaskPool getPool()
+  gst.task_pool.TaskPool getPool() nothrow
   {
     GstTaskPool* _cretval;
     _cretval = gst_task_get_pool(cast(GstTask*)this._cPtr);
@@ -160,7 +167,7 @@ class Task : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.types.TaskState getState()
+  gst.types.TaskState getState() nothrow
   {
     GstTaskState _cretval;
     _cretval = gst_task_get_state(cast(GstTask*)this._cPtr);
@@ -181,7 +188,7 @@ class Task : gst.object.ObjectWrap
         
         MT safe.
   */
-  bool join()
+  bool join() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_task_join(cast(GstTask*)this._cPtr);
@@ -197,7 +204,7 @@ class Task : gst.object.ObjectWrap
         
         MT safe.
   */
-  bool pause()
+  bool pause() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_task_pause(cast(GstTask*)this._cPtr);
@@ -211,7 +218,7 @@ class Task : gst.object.ObjectWrap
         
         MT safe.
   */
-  bool resume()
+  bool resume() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_task_resume(cast(GstTask*)this._cPtr);
@@ -226,13 +233,20 @@ class Task : gst.object.ObjectWrap
       Params:
         enterFunc = a #GstTaskThreadFunc
   */
-  void setEnterCallback(gst.types.TaskThreadFunc enterFunc)
+  void setEnterCallback(gst.types.TaskThreadFunc enterFunc) nothrow
   {
-    extern(C) void _enterFuncCallback(GstTask* task, GThread* thread, void* userData)
+    extern(C) void _enterFuncCallback(GstTask* task, GThread* thread, void* userData) nothrow
     {
       auto _dlg = cast(gst.types.TaskThreadFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.task.Task)(cast(void*)task, No.Take), thread ? new glib.thread.Thread(cast(void*)thread, No.Take) : null);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.task.Task)(cast(void*)task, No.Take), thread ? new glib.thread.Thread(cast(void*)thread, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.TaskThreadFunc");
+      }
     }
     auto _enterFuncCB = enterFunc ? &_enterFuncCallback : null;
     auto _enterFunc = enterFunc ? freezeDelegate(cast(void*)&enterFunc) : null;
@@ -248,13 +262,20 @@ class Task : gst.object.ObjectWrap
       Params:
         leaveFunc = a #GstTaskThreadFunc
   */
-  void setLeaveCallback(gst.types.TaskThreadFunc leaveFunc)
+  void setLeaveCallback(gst.types.TaskThreadFunc leaveFunc) nothrow
   {
-    extern(C) void _leaveFuncCallback(GstTask* task, GThread* thread, void* userData)
+    extern(C) void _leaveFuncCallback(GstTask* task, GThread* thread, void* userData) nothrow
     {
       auto _dlg = cast(gst.types.TaskThreadFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.task.Task)(cast(void*)task, No.Take), thread ? new glib.thread.Thread(cast(void*)thread, No.Take) : null);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.task.Task)(cast(void*)task, No.Take), thread ? new glib.thread.Thread(cast(void*)thread, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.TaskThreadFunc");
+      }
     }
     auto _leaveFuncCB = leaveFunc ? &_leaveFuncCallback : null;
     auto _leaveFunc = leaveFunc ? freezeDelegate(cast(void*)&leaveFunc) : null;
@@ -271,7 +292,7 @@ class Task : gst.object.ObjectWrap
       Params:
         pool = a #GstTaskPool
   */
-  void setPool(gst.task_pool.TaskPool pool)
+  void setPool(gst.task_pool.TaskPool pool) nothrow
   {
     gst_task_set_pool(cast(GstTask*)this._cPtr, pool ? cast(GstTaskPool*)pool._cPtr(No.Dup) : null);
   }
@@ -289,7 +310,7 @@ class Task : gst.object.ObjectWrap
         state = the new task state
       Returns: true if the state could be changed.
   */
-  bool setState(gst.types.TaskState state)
+  bool setState(gst.types.TaskState state) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_task_set_state(cast(GstTask*)this._cPtr, state);
@@ -303,7 +324,7 @@ class Task : gst.object.ObjectWrap
         
         MT safe.
   */
-  bool start()
+  bool start() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_task_start(cast(GstTask*)this._cPtr);
@@ -318,7 +339,7 @@ class Task : gst.object.ObjectWrap
         
         MT safe.
   */
-  bool stop()
+  bool stop() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_task_stop(cast(GstTask*)this._cPtr);
@@ -338,7 +359,7 @@ final class TaskGidBuilder : TaskGidBuilderImpl!TaskGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Task build()
+  Task build() nothrow
   {
     return new Task(cast(void*)createGObject(Task._getGType), Yes.Take);
   }

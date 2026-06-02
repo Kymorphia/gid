@@ -34,26 +34,26 @@ class NativeDialog : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_native_dialog_get_type != &gidSymbolNotFound ? gtk_native_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NativeDialog self()
+  override NativeDialog self() nothrow
   {
     return this;
   }
@@ -62,7 +62,7 @@ class NativeDialog : gobject.object.ObjectWrap
       Get builder for [gtk.native_dialog.NativeDialog]
       Returns: New builder object
   */
-  static NativeDialogGidBuilder builder()
+  static NativeDialogGidBuilder builder() nothrow
   {
     return new NativeDialogGidBuilder;
   }
@@ -71,7 +71,7 @@ class NativeDialog : gobject.object.ObjectWrap
       Get `modal` property.
       Returns: Whether the window should be modal with respect to its transient parent.
   */
-  @property bool modal()
+  @property bool modal() nothrow
   {
     return getModal();
   }
@@ -81,7 +81,7 @@ class NativeDialog : gobject.object.ObjectWrap
       Params:
         propval = Whether the window should be modal with respect to its transient parent.
   */
-  @property void modal(bool propval)
+  @property void modal(bool propval) nothrow
   {
     setModal(propval);
   }
@@ -90,7 +90,7 @@ class NativeDialog : gobject.object.ObjectWrap
       Get `title` property.
       Returns: The title of the dialog window
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -100,7 +100,7 @@ class NativeDialog : gobject.object.ObjectWrap
       Params:
         propval = The title of the dialog window
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -109,7 +109,7 @@ class NativeDialog : gobject.object.ObjectWrap
       Get `transientFor` property.
       Returns: The transient parent of the dialog, or null for none.
   */
-  @property gtk.window.Window transientFor()
+  @property gtk.window.Window transientFor() nothrow
   {
     return getTransientFor();
   }
@@ -119,7 +119,7 @@ class NativeDialog : gobject.object.ObjectWrap
       Params:
         propval = The transient parent of the dialog, or null for none.
   */
-  @property void transientFor(gtk.window.Window propval)
+  @property void transientFor(gtk.window.Window propval) nothrow
   {
     setTransientFor(propval);
   }
@@ -128,7 +128,7 @@ class NativeDialog : gobject.object.ObjectWrap
       Get `visible` property.
       Returns: Whether the window is currently visible.
   */
-  @property bool visible()
+  @property bool visible() nothrow
   {
     return getVisible();
   }
@@ -138,7 +138,7 @@ class NativeDialog : gobject.object.ObjectWrap
       Params:
         propval = Whether the window is currently visible.
   */
-  @property void visible(bool propval)
+  @property void visible(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("visible", propval);
   }
@@ -156,7 +156,7 @@ class NativeDialog : gobject.object.ObjectWrap
       to destroying a [gtk.window.Window]) because there is no reference from the
       windowing system to the [gtk.native_dialog.NativeDialog].
   */
-  void destroy()
+  void destroy() nothrow
   {
     gtk_native_dialog_destroy(cast(GtkNativeDialog*)this._cPtr);
   }
@@ -165,7 +165,7 @@ class NativeDialog : gobject.object.ObjectWrap
       Returns whether the dialog is modal.
       Returns: true if the dialog is set to be modal
   */
-  bool getModal()
+  bool getModal() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_native_dialog_get_modal(cast(GtkNativeDialog*)this._cPtr);
@@ -178,7 +178,7 @@ class NativeDialog : gobject.object.ObjectWrap
            been set explicitly. The returned string is owned by the widget
            and must not be modified or freed.
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_native_dialog_get_title(cast(GtkNativeDialog*)this._cPtr);
@@ -191,7 +191,7 @@ class NativeDialog : gobject.object.ObjectWrap
       Returns: the transient parent for this window,
           or null if no transient parent has been set.
   */
-  gtk.window.Window getTransientFor()
+  gtk.window.Window getTransientFor() nothrow
   {
     GtkWindow* _cretval;
     _cretval = gtk_native_dialog_get_transient_for(cast(GtkNativeDialog*)this._cPtr);
@@ -203,7 +203,7 @@ class NativeDialog : gobject.object.ObjectWrap
       Determines whether the dialog is visible.
       Returns: true if the dialog is visible
   */
-  bool getVisible()
+  bool getVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_native_dialog_get_visible(cast(GtkNativeDialog*)this._cPtr);
@@ -219,7 +219,7 @@ class NativeDialog : gobject.object.ObjectWrap
       
       If the dialog is not visible this does nothing.
   */
-  void hide()
+  void hide() nothrow
   {
     gtk_native_dialog_hide(cast(GtkNativeDialog*)this._cPtr);
   }
@@ -236,7 +236,7 @@ class NativeDialog : gobject.object.ObjectWrap
       Params:
         modal = whether the window is modal
   */
-  void setModal(bool modal)
+  void setModal(bool modal) nothrow
   {
     gtk_native_dialog_set_modal(cast(GtkNativeDialog*)this._cPtr, modal);
   }
@@ -247,7 +247,7 @@ class NativeDialog : gobject.object.ObjectWrap
       Params:
         title = title of the dialog
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_native_dialog_set_title(cast(GtkNativeDialog*)this._cPtr, _title);
@@ -265,7 +265,7 @@ class NativeDialog : gobject.object.ObjectWrap
       Params:
         parent = parent window
   */
-  void setTransientFor(gtk.window.Window parent = null)
+  void setTransientFor(gtk.window.Window parent = null) nothrow
   {
     gtk_native_dialog_set_transient_for(cast(GtkNativeDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
   }
@@ -279,7 +279,7 @@ class NativeDialog : gobject.object.ObjectWrap
       
       Multiple calls while the dialog is visible will be ignored.
   */
-  void show()
+  void show() nothrow
   {
     gtk_native_dialog_show(cast(GtkNativeDialog*)this._cPtr);
   }
@@ -306,14 +306,14 @@ class NativeDialog : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectResponse(T)(T callback, Flag!"After" after = No.After)
+  gulong connectResponse(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.native_dialog.NativeDialog)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -325,7 +325,14 @@ class NativeDialog : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.native_dialog.NativeDialog.response");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -343,7 +350,7 @@ class NativeDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether the window should be modal with respect to its transient parent.
       Returns: Builder instance for fluent chaining
   */
-  T modal(bool propval)
+  T modal(bool propval) nothrow
   {
     return setProperty("modal", propval);
   }
@@ -354,7 +361,7 @@ class NativeDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The title of the dialog window
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -365,7 +372,7 @@ class NativeDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The transient parent of the dialog, or null for none.
       Returns: Builder instance for fluent chaining
   */
-  T transientFor(gtk.window.Window propval)
+  T transientFor(gtk.window.Window propval) nothrow
   {
     return setProperty("transient-for", propval);
   }
@@ -376,7 +383,7 @@ class NativeDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether the window is currently visible.
       Returns: Builder instance for fluent chaining
   */
-  T visible(bool propval)
+  T visible(bool propval) nothrow
   {
     return setProperty("visible", propval);
   }
@@ -389,7 +396,7 @@ final class NativeDialogGidBuilder : NativeDialogGidBuilderImpl!NativeDialogGidB
       Create object from builder.
       Returns: New object
   */
-  NativeDialog build()
+  NativeDialog build() nothrow
   {
     return new NativeDialog(cast(void*)createGObject(NativeDialog._getGType), No.Take);
   }

@@ -26,26 +26,26 @@ class VSeparator : gtk.separator.Separator
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_vseparator_get_type != &gidSymbolNotFound ? gtk_vseparator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VSeparator self()
+  override VSeparator self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class VSeparator : gtk.separator.Separator
       Get builder for [gtk.vseparator.VSeparator]
       Returns: New builder object
   */
-  static VSeparatorGidBuilder builder()
+  static VSeparatorGidBuilder builder() nothrow
   {
     return new VSeparatorGidBuilder;
   }
@@ -65,7 +65,7 @@ class VSeparator : gtk.separator.Separator
   
       Deprecated: Use [gtk.separator.Separator.new_] with [gtk.types.Orientation.Vertical] instead
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_vseparator_new();
@@ -86,7 +86,7 @@ final class VSeparatorGidBuilder : VSeparatorGidBuilderImpl!VSeparatorGidBuilder
       Create object from builder.
       Returns: New object
   */
-  VSeparator build()
+  VSeparator build() nothrow
   {
     return new VSeparator(cast(void*)createGObject(VSeparator._getGType), No.Take);
   }

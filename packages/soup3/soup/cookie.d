@@ -40,32 +40,32 @@ class Cookie : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_cookie_get_type != &gidSymbolNotFound ? soup_cookie_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Cookie self()
+  override Cookie self() nothrow
   {
     return this;
   }
@@ -101,7 +101,7 @@ class Cookie : gobject.boxed.Boxed
         maxAge = max age of the cookie, or -1 for a session cookie
       Returns: a new #SoupCookie.
   */
-  this(string name, string value, string domain, string path, int maxAge)
+  this(string name, string value, string domain, string path, int maxAge) nothrow
   {
     SoupCookie* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -123,7 +123,7 @@ class Cookie : gobject.boxed.Boxed
         uri = a #GUri
       Returns: true if cookie should be sent to uri, false if not
   */
-  bool appliesToUri(glib.uri.Uri uri)
+  bool appliesToUri(glib.uri.Uri uri) nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_cookie_applies_to_uri(cast(SoupCookie*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null);
@@ -134,7 +134,7 @@ class Cookie : gobject.boxed.Boxed
       Copies cookie.
       Returns: a copy of cookie
   */
-  soup.cookie.Cookie copy()
+  soup.cookie.Cookie copy() nothrow
   {
     SoupCookie* _cretval;
     _cretval = soup_cookie_copy(cast(SoupCookie*)this._cPtr);
@@ -152,7 +152,7 @@ class Cookie : gobject.boxed.Boxed
         host = a URI
       Returns: true if the domains match, false otherwise
   */
-  bool domainMatches(string host)
+  bool domainMatches(string host) nothrow
   {
     bool _retval;
     const(char)* _host = host.toCString(No.Alloc);
@@ -170,7 +170,7 @@ class Cookie : gobject.boxed.Boxed
         cookie2 = a #SoupCookie
       Returns: whether the cookies are equal.
   */
-  bool equal(soup.cookie.Cookie cookie2)
+  bool equal(soup.cookie.Cookie cookie2) nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_cookie_equal(cast(SoupCookie*)this._cPtr, cookie2 ? cast(SoupCookie*)cookie2._cPtr(No.Dup) : null);
@@ -181,7 +181,7 @@ class Cookie : gobject.boxed.Boxed
       Gets cookie's domain.
       Returns: cookie's domain
   */
-  string getDomain()
+  string getDomain() nothrow
   {
     const(char)* _cretval;
     _cretval = soup_cookie_get_domain(cast(SoupCookie*)this._cPtr);
@@ -194,7 +194,7 @@ class Cookie : gobject.boxed.Boxed
       Returns: cookie's expiration time, which is
           owned by cookie and should not be modified or freed.
   */
-  glib.date_time.DateTime getExpires()
+  glib.date_time.DateTime getExpires() nothrow
   {
     GDateTime* _cretval;
     _cretval = soup_cookie_get_expires(cast(SoupCookie*)this._cPtr);
@@ -206,7 +206,7 @@ class Cookie : gobject.boxed.Boxed
       Gets cookie's HttpOnly attribute.
       Returns: cookie's HttpOnly attribute
   */
-  bool getHttpOnly()
+  bool getHttpOnly() nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_cookie_get_http_only(cast(SoupCookie*)this._cPtr);
@@ -217,7 +217,7 @@ class Cookie : gobject.boxed.Boxed
       Gets cookie's name.
       Returns: cookie's name
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = soup_cookie_get_name(cast(SoupCookie*)this._cPtr);
@@ -229,7 +229,7 @@ class Cookie : gobject.boxed.Boxed
       Gets cookie's path.
       Returns: cookie's path
   */
-  string getPath()
+  string getPath() nothrow
   {
     const(char)* _cretval;
     _cretval = soup_cookie_get_path(cast(SoupCookie*)this._cPtr);
@@ -241,7 +241,7 @@ class Cookie : gobject.boxed.Boxed
       Returns the same-site policy for this cookie.
       Returns: a #SoupSameSitePolicy
   */
-  soup.types.SameSitePolicy getSameSitePolicy()
+  soup.types.SameSitePolicy getSameSitePolicy() nothrow
   {
     SoupSameSitePolicy _cretval;
     _cretval = soup_cookie_get_same_site_policy(cast(SoupCookie*)this._cPtr);
@@ -253,7 +253,7 @@ class Cookie : gobject.boxed.Boxed
       Gets cookie's secure attribute.
       Returns: cookie's secure attribute
   */
-  bool getSecure()
+  bool getSecure() nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_cookie_get_secure(cast(SoupCookie*)this._cPtr);
@@ -264,7 +264,7 @@ class Cookie : gobject.boxed.Boxed
       Gets cookie's value.
       Returns: cookie's value
   */
-  string getValue()
+  string getValue() nothrow
   {
     const(char)* _cretval;
     _cretval = soup_cookie_get_value(cast(SoupCookie*)this._cPtr);
@@ -278,7 +278,7 @@ class Cookie : gobject.boxed.Boxed
       Params:
         domain = the new domain
   */
-  void setDomain(string domain)
+  void setDomain(string domain) nothrow
   {
     const(char)* _domain = domain.toCString(No.Alloc);
     soup_cookie_set_domain(cast(SoupCookie*)this._cPtr, _domain);
@@ -295,7 +295,7 @@ class Cookie : gobject.boxed.Boxed
       Params:
         expires = the new expiration time, or null
   */
-  void setExpires(glib.date_time.DateTime expires)
+  void setExpires(glib.date_time.DateTime expires) nothrow
   {
     soup_cookie_set_expires(cast(SoupCookie*)this._cPtr, expires ? cast(GDateTime*)expires._cPtr(No.Dup) : null);
   }
@@ -309,7 +309,7 @@ class Cookie : gobject.boxed.Boxed
       Params:
         httpOnly = the new value for the HttpOnly attribute
   */
-  void setHttpOnly(bool httpOnly)
+  void setHttpOnly(bool httpOnly) nothrow
   {
     soup_cookie_set_http_only(cast(SoupCookie*)this._cPtr, httpOnly);
   }
@@ -330,7 +330,7 @@ class Cookie : gobject.boxed.Boxed
       Params:
         maxAge = the new max age
   */
-  void setMaxAge(int maxAge)
+  void setMaxAge(int maxAge) nothrow
   {
     soup_cookie_set_max_age(cast(SoupCookie*)this._cPtr, maxAge);
   }
@@ -341,7 +341,7 @@ class Cookie : gobject.boxed.Boxed
       Params:
         name = the new name
   */
-  void setName(string name)
+  void setName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     soup_cookie_set_name(cast(SoupCookie*)this._cPtr, _name);
@@ -353,7 +353,7 @@ class Cookie : gobject.boxed.Boxed
       Params:
         path = the new path
   */
-  void setPath(string path)
+  void setPath(string path) nothrow
   {
     const(char)* _path = path.toCString(No.Alloc);
     soup_cookie_set_path(cast(SoupCookie*)this._cPtr, _path);
@@ -367,7 +367,7 @@ class Cookie : gobject.boxed.Boxed
       Params:
         policy = a #SoupSameSitePolicy
   */
-  void setSameSitePolicy(soup.types.SameSitePolicy policy)
+  void setSameSitePolicy(soup.types.SameSitePolicy policy) nothrow
   {
     soup_cookie_set_same_site_policy(cast(SoupCookie*)this._cPtr, policy);
   }
@@ -381,7 +381,7 @@ class Cookie : gobject.boxed.Boxed
       Params:
         secure = the new value for the secure attribute
   */
-  void setSecure(bool secure)
+  void setSecure(bool secure) nothrow
   {
     soup_cookie_set_secure(cast(SoupCookie*)this._cPtr, secure);
   }
@@ -392,7 +392,7 @@ class Cookie : gobject.boxed.Boxed
       Params:
         value = the new value
   */
-  void setValue(string value)
+  void setValue(string value) nothrow
   {
     const(char)* _value = value.toCString(No.Alloc);
     soup_cookie_set_value(cast(SoupCookie*)this._cPtr, _value);
@@ -403,7 +403,7 @@ class Cookie : gobject.boxed.Boxed
       returning a cookie from a [soup.session.Session] to a server).
       Returns: the header
   */
-  string toCookieHeader()
+  string toCookieHeader() nothrow
   {
     char* _cretval;
     _cretval = soup_cookie_to_cookie_header(cast(SoupCookie*)this._cPtr);
@@ -417,7 +417,7 @@ class Cookie : gobject.boxed.Boxed
       i.e. for sending a cookie from a [soup.server.Server] to a client.
       Returns: the header
   */
-  string toSetCookieHeader()
+  string toSetCookieHeader() nothrow
   {
     char* _cretval;
     _cretval = soup_cookie_to_set_cookie_header(cast(SoupCookie*)this._cPtr);
@@ -447,7 +447,7 @@ class Cookie : gobject.boxed.Boxed
           not be parsed, or contained an illegal "domain" attribute for a
           cookie originating from origin.
   */
-  static soup.cookie.Cookie parse(string header, glib.uri.Uri origin = null)
+  static soup.cookie.Cookie parse(string header, glib.uri.Uri origin = null) nothrow
   {
     SoupCookie* _cretval;
     const(char)* _header = header.toCString(No.Alloc);

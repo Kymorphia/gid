@@ -44,26 +44,26 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_page_setup_unix_dialog_get_type != &gidSymbolNotFound ? gtk_page_setup_unix_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PageSetupUnixDialog self()
+  override PageSetupUnixDialog self() nothrow
   {
     return this;
   }
@@ -72,7 +72,7 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
       Get builder for [gtk.page_setup_unix_dialog.PageSetupUnixDialog]
       Returns: New builder object
   */
-  static PageSetupUnixDialogGidBuilder builder()
+  static PageSetupUnixDialogGidBuilder builder() nothrow
   {
     return new PageSetupUnixDialogGidBuilder;
   }
@@ -85,7 +85,7 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
         parent = transient parent of the dialog
       Returns: the new [gtk.page_setup_unix_dialog.PageSetupUnixDialog]
   */
-  this(string title = null, gtk.window.Window parent = null)
+  this(string title = null, gtk.window.Window parent = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -97,7 +97,7 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
       Gets the currently selected page setup from the dialog.
       Returns: the current page setup
   */
-  gtk.page_setup.PageSetup getPageSetup()
+  gtk.page_setup.PageSetup getPageSetup() nothrow
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_page_setup_unix_dialog_get_page_setup(cast(GtkPageSetupUnixDialog*)this._cPtr);
@@ -109,7 +109,7 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
       Gets the current print settings from the dialog.
       Returns: the current print settings
   */
-  gtk.print_settings.PrintSettings getPrintSettings()
+  gtk.print_settings.PrintSettings getPrintSettings() nothrow
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_page_setup_unix_dialog_get_print_settings(cast(GtkPageSetupUnixDialog*)this._cPtr);
@@ -124,7 +124,7 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
       Params:
         pageSetup = a [gtk.page_setup.PageSetup]
   */
-  void setPageSetup(gtk.page_setup.PageSetup pageSetup)
+  void setPageSetup(gtk.page_setup.PageSetup pageSetup) nothrow
   {
     gtk_page_setup_unix_dialog_set_page_setup(cast(GtkPageSetupUnixDialog*)this._cPtr, pageSetup ? cast(GtkPageSetup*)pageSetup._cPtr(No.Dup) : null);
   }
@@ -136,7 +136,7 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
       Params:
         printSettings = a [gtk.print_settings.PrintSettings]
   */
-  void setPrintSettings(gtk.print_settings.PrintSettings printSettings = null)
+  void setPrintSettings(gtk.print_settings.PrintSettings printSettings = null) nothrow
   {
     gtk_page_setup_unix_dialog_set_print_settings(cast(GtkPageSetupUnixDialog*)this._cPtr, printSettings ? cast(GtkPrintSettings*)printSettings._cPtr(No.Dup) : null);
   }
@@ -155,7 +155,7 @@ final class PageSetupUnixDialogGidBuilder : PageSetupUnixDialogGidBuilderImpl!Pa
       Create object from builder.
       Returns: New object
   */
-  PageSetupUnixDialog build()
+  PageSetupUnixDialog build() nothrow
   {
     return new PageSetupUnixDialog(cast(void*)createGObject(PageSetupUnixDialog._getGType), No.Take);
   }

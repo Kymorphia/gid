@@ -70,26 +70,26 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_flow_box_get_type != &gidSymbolNotFound ? gtk_flow_box_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FlowBox self()
+  override FlowBox self() nothrow
   {
     return this;
   }
@@ -98,7 +98,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Get builder for [gtk.flow_box.FlowBox]
       Returns: New builder object
   */
-  static FlowBoxGidBuilder builder()
+  static FlowBoxGidBuilder builder() nothrow
   {
     return new FlowBoxGidBuilder;
   }
@@ -108,7 +108,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Returns: Determines whether children can be activated with a single
         click, or require a double-click.
   */
-  @property bool activateOnSingleClick()
+  @property bool activateOnSingleClick() nothrow
   {
     return getActivateOnSingleClick();
   }
@@ -119,7 +119,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
         propval = Determines whether children can be activated with a single
           click, or require a double-click.
   */
-  @property void activateOnSingleClick(bool propval)
+  @property void activateOnSingleClick(bool propval) nothrow
   {
     setActivateOnSingleClick(propval);
   }
@@ -128,7 +128,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Get `columnSpacing` property.
       Returns: The amount of horizontal space between two children.
   */
-  @property uint columnSpacing()
+  @property uint columnSpacing() nothrow
   {
     return getColumnSpacing();
   }
@@ -138,7 +138,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Params:
         propval = The amount of horizontal space between two children.
   */
-  @property void columnSpacing(uint propval)
+  @property void columnSpacing(uint propval) nothrow
   {
     setColumnSpacing(propval);
   }
@@ -148,7 +148,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Returns: Determines whether all children should be allocated the
         same size.
   */
-  @property bool homogeneous()
+  @property bool homogeneous() nothrow
   {
     return getHomogeneous();
   }
@@ -159,7 +159,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
         propval = Determines whether all children should be allocated the
           same size.
   */
-  @property void homogeneous(bool propval)
+  @property void homogeneous(bool propval) nothrow
   {
     setHomogeneous(propval);
   }
@@ -169,7 +169,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Returns: The maximum amount of children to request space for consecutively
         in the given orientation.
   */
-  @property uint maxChildrenPerLine()
+  @property uint maxChildrenPerLine() nothrow
   {
     return getMaxChildrenPerLine();
   }
@@ -180,7 +180,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
         propval = The maximum amount of children to request space for consecutively
           in the given orientation.
   */
-  @property void maxChildrenPerLine(uint propval)
+  @property void maxChildrenPerLine(uint propval) nothrow
   {
     setMaxChildrenPerLine(propval);
   }
@@ -194,7 +194,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
         that a reasonably small height will be requested
         for the overall minimum width of the box.
   */
-  @property uint minChildrenPerLine()
+  @property uint minChildrenPerLine() nothrow
   {
     return getMinChildrenPerLine();
   }
@@ -209,7 +209,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
           that a reasonably small height will be requested
           for the overall minimum width of the box.
   */
-  @property void minChildrenPerLine(uint propval)
+  @property void minChildrenPerLine(uint propval) nothrow
   {
     setMinChildrenPerLine(propval);
   }
@@ -218,7 +218,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Get `rowSpacing` property.
       Returns: The amount of vertical space between two children.
   */
-  @property uint rowSpacing()
+  @property uint rowSpacing() nothrow
   {
     return getRowSpacing();
   }
@@ -228,7 +228,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Params:
         propval = The amount of vertical space between two children.
   */
-  @property void rowSpacing(uint propval)
+  @property void rowSpacing(uint propval) nothrow
   {
     setRowSpacing(propval);
   }
@@ -237,7 +237,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Get `selectionMode` property.
       Returns: The selection mode used by the flow  box.
   */
-  @property gtk.types.SelectionMode selectionMode()
+  @property gtk.types.SelectionMode selectionMode() nothrow
   {
     return getSelectionMode();
   }
@@ -247,7 +247,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Params:
         propval = The selection mode used by the flow  box.
   */
-  @property void selectionMode(gtk.types.SelectionMode propval)
+  @property void selectionMode(gtk.types.SelectionMode propval) nothrow
   {
     setSelectionMode(propval);
   }
@@ -258,7 +258,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Creates a GtkFlowBox.
       Returns: a new #GtkFlowBox container
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_flow_box_new();
@@ -287,14 +287,21 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
         model = the #GListModel to be bound to box
         createWidgetFunc = a function that creates widgets for items
   */
-  void bindModel(gio.list_model.ListModel model, gtk.types.FlowBoxCreateWidgetFunc createWidgetFunc)
+  void bindModel(gio.list_model.ListModel model, gtk.types.FlowBoxCreateWidgetFunc createWidgetFunc) nothrow
   {
-    extern(C) GtkWidget* _createWidgetFuncCallback(GObject* item, void* userData)
+    extern(C) GtkWidget* _createWidgetFuncCallback(GObject* item, void* userData) nothrow
     {
       gtk.widget.Widget _dretval;
       auto _dlg = cast(gtk.types.FlowBoxCreateWidgetFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.FlowBoxCreateWidgetFunc");
+      }
       auto _retval = cast(GtkWidget*)_dretval._cPtr(Yes.Dup);
 
       return _retval;
@@ -310,7 +317,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Returns: true if children are activated on single click,
             false otherwise
   */
-  bool getActivateOnSingleClick()
+  bool getActivateOnSingleClick() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_flow_box_get_activate_on_single_click(cast(GtkFlowBox*)this._cPtr);
@@ -326,7 +333,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
             always be a #GtkFlowBoxChild or null in case no child widget
             with the given index exists.
   */
-  gtk.flow_box_child.FlowBoxChild getChildAtIndex(int idx)
+  gtk.flow_box_child.FlowBoxChild getChildAtIndex(int idx) nothrow
   {
     GtkFlowBoxChild* _cretval;
     _cretval = gtk_flow_box_get_child_at_index(cast(GtkFlowBox*)this._cPtr, idx);
@@ -344,7 +351,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
             always be a #GtkFlowBoxChild or null in case no child widget
             exists for the given x and y coordinates.
   */
-  gtk.flow_box_child.FlowBoxChild getChildAtPos(int x, int y)
+  gtk.flow_box_child.FlowBoxChild getChildAtPos(int x, int y) nothrow
   {
     GtkFlowBoxChild* _cretval;
     _cretval = gtk_flow_box_get_child_at_pos(cast(GtkFlowBox*)this._cPtr, x, y);
@@ -356,7 +363,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Gets the horizontal spacing.
       Returns: the horizontal spacing
   */
-  uint getColumnSpacing()
+  uint getColumnSpacing() nothrow
   {
     uint _retval;
     _retval = gtk_flow_box_get_column_spacing(cast(GtkFlowBox*)this._cPtr);
@@ -368,7 +375,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       same size). See [gtk.box.Box.setHomogeneous].
       Returns: true if the box is homogeneous.
   */
-  bool getHomogeneous()
+  bool getHomogeneous() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_flow_box_get_homogeneous(cast(GtkFlowBox*)this._cPtr);
@@ -379,7 +386,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Gets the maximum number of children per line.
       Returns: the maximum number of children per line
   */
-  uint getMaxChildrenPerLine()
+  uint getMaxChildrenPerLine() nothrow
   {
     uint _retval;
     _retval = gtk_flow_box_get_max_children_per_line(cast(GtkFlowBox*)this._cPtr);
@@ -390,7 +397,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Gets the minimum number of children per line.
       Returns: the minimum number of children per line
   */
-  uint getMinChildrenPerLine()
+  uint getMinChildrenPerLine() nothrow
   {
     uint _retval;
     _retval = gtk_flow_box_get_min_children_per_line(cast(GtkFlowBox*)this._cPtr);
@@ -401,7 +408,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Gets the vertical spacing.
       Returns: the vertical spacing
   */
-  uint getRowSpacing()
+  uint getRowSpacing() nothrow
   {
     uint _retval;
     _retval = gtk_flow_box_get_row_spacing(cast(GtkFlowBox*)this._cPtr);
@@ -413,7 +420,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Returns: A #GList containing the #GtkWidget for each selected child.
             Free with [glib.list.List.free] when done.
   */
-  gtk.flow_box_child.FlowBoxChild[] getSelectedChildren()
+  gtk.flow_box_child.FlowBoxChild[] getSelectedChildren() nothrow
   {
     GList* _cretval;
     _cretval = gtk_flow_box_get_selected_children(cast(GtkFlowBox*)this._cPtr);
@@ -425,7 +432,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Gets the selection mode of box.
       Returns: the #GtkSelectionMode
   */
-  gtk.types.SelectionMode getSelectionMode()
+  gtk.types.SelectionMode getSelectionMode() nothrow
   {
     GtkSelectionMode _cretval;
     _cretval = gtk_flow_box_get_selection_mode(cast(GtkFlowBox*)this._cPtr);
@@ -447,7 +454,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
         widget = the #GtkWidget to add
         position = the position to insert child in
   */
-  void insert(gtk.widget.Widget widget, int position)
+  void insert(gtk.widget.Widget widget, int position) nothrow
   {
     gtk_flow_box_insert(cast(GtkFlowBox*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, position);
   }
@@ -461,7 +468,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       filter function just looked for a specific search
       term, and the entry with the string has changed.
   */
-  void invalidateFilter()
+  void invalidateFilter() nothrow
   {
     gtk_flow_box_invalidate_filter(cast(GtkFlowBox*)this._cPtr);
   }
@@ -472,7 +479,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Call this when the result of the sort function on
       box is changed due to an external factor.
   */
-  void invalidateSort()
+  void invalidateSort() nothrow
   {
     gtk_flow_box_invalidate_sort(cast(GtkFlowBox*)this._cPtr);
   }
@@ -481,7 +488,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Select all children of box, if the selection
       mode allows it.
   */
-  void selectAll()
+  void selectAll() nothrow
   {
     gtk_flow_box_select_all(cast(GtkFlowBox*)this._cPtr);
   }
@@ -493,7 +500,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Params:
         child = a child of box
   */
-  void selectChild(gtk.flow_box_child.FlowBoxChild child)
+  void selectChild(gtk.flow_box_child.FlowBoxChild child) nothrow
   {
     gtk_flow_box_select_child(cast(GtkFlowBox*)this._cPtr, child ? cast(GtkFlowBoxChild*)child._cPtr(No.Dup) : null);
   }
@@ -507,13 +514,20 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Params:
         func = the function to call for each selected child
   */
-  void selectedForeach(gtk.types.FlowBoxForeachFunc func)
+  void selectedForeach(gtk.types.FlowBoxForeachFunc func) nothrow
   {
-    extern(C) void _funcCallback(GtkFlowBox* box, GtkFlowBoxChild* child, void* userData)
+    extern(C) void _funcCallback(GtkFlowBox* box, GtkFlowBoxChild* child, void* userData) nothrow
     {
       auto _dlg = cast(gtk.types.FlowBoxForeachFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.flow_box.FlowBox)(cast(void*)box, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.flow_box.FlowBox)(cast(void*)box, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.FlowBoxForeachFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -527,7 +541,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Params:
         single = true to emit child-activated on a single click
   */
-  void setActivateOnSingleClick(bool single)
+  void setActivateOnSingleClick(bool single) nothrow
   {
     gtk_flow_box_set_activate_on_single_click(cast(GtkFlowBox*)this._cPtr, single);
   }
@@ -539,7 +553,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Params:
         spacing = the spacing to use
   */
-  void setColumnSpacing(uint spacing)
+  void setColumnSpacing(uint spacing) nothrow
   {
     gtk_flow_box_set_column_spacing(cast(GtkFlowBox*)this._cPtr, spacing);
   }
@@ -561,14 +575,21 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
         filterFunc = callback that
               lets you filter which children to show
   */
-  void setFilterFunc(gtk.types.FlowBoxFilterFunc filterFunc = null)
+  void setFilterFunc(gtk.types.FlowBoxFilterFunc filterFunc = null) nothrow
   {
-    extern(C) gboolean _filterFuncCallback(GtkFlowBoxChild* child, void* userData)
+    extern(C) gboolean _filterFuncCallback(GtkFlowBoxChild* child, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.FlowBoxFilterFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.FlowBoxFilterFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -595,7 +616,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
         adjustment = an adjustment which should be adjusted
              when the focus is moved among the descendents of container
   */
-  void setHadjustment(gtk.adjustment.Adjustment adjustment)
+  void setHadjustment(gtk.adjustment.Adjustment adjustment) nothrow
   {
     gtk_flow_box_set_hadjustment(cast(GtkFlowBox*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
@@ -609,7 +630,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
         homogeneous = true to create equal allotments,
             false for variable allotments
   */
-  void setHomogeneous(bool homogeneous)
+  void setHomogeneous(bool homogeneous) nothrow
   {
     gtk_flow_box_set_homogeneous(cast(GtkFlowBox*)this._cPtr, homogeneous);
   }
@@ -625,7 +646,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Params:
         nChildren = the maximum number of children per line
   */
-  void setMaxChildrenPerLine(uint nChildren)
+  void setMaxChildrenPerLine(uint nChildren) nothrow
   {
     gtk_flow_box_set_max_children_per_line(cast(GtkFlowBox*)this._cPtr, nChildren);
   }
@@ -637,7 +658,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Params:
         nChildren = the minimum number of children per line
   */
-  void setMinChildrenPerLine(uint nChildren)
+  void setMinChildrenPerLine(uint nChildren) nothrow
   {
     gtk_flow_box_set_min_children_per_line(cast(GtkFlowBox*)this._cPtr, nChildren);
   }
@@ -649,7 +670,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Params:
         spacing = the spacing to use
   */
-  void setRowSpacing(uint spacing)
+  void setRowSpacing(uint spacing) nothrow
   {
     gtk_flow_box_set_row_spacing(cast(GtkFlowBox*)this._cPtr, spacing);
   }
@@ -661,7 +682,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Params:
         mode = the new selection mode
   */
-  void setSelectionMode(gtk.types.SelectionMode mode)
+  void setSelectionMode(gtk.types.SelectionMode mode) nothrow
   {
     gtk_flow_box_set_selection_mode(cast(GtkFlowBox*)this._cPtr, mode);
   }
@@ -682,13 +703,21 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Params:
         sortFunc = the sort function
   */
-  void setSortFunc(gtk.types.FlowBoxSortFunc sortFunc = null)
+  void setSortFunc(gtk.types.FlowBoxSortFunc sortFunc = null) nothrow
   {
-    extern(C) int _sortFuncCallback(GtkFlowBoxChild* child1, GtkFlowBoxChild* child2, void* userData)
+    extern(C) int _sortFuncCallback(GtkFlowBoxChild* child1, GtkFlowBoxChild* child2, void* userData) nothrow
     {
+      int _retval;
       auto _dlg = cast(gtk.types.FlowBoxSortFunc*)userData;
 
-      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child1, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child2, No.Take));
+      try
+      {
+        _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child1, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child2, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.FlowBoxSortFunc");
+      }
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
@@ -713,7 +742,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
         adjustment = an adjustment which should be adjusted
              when the focus is moved among the descendents of container
   */
-  void setVadjustment(gtk.adjustment.Adjustment adjustment)
+  void setVadjustment(gtk.adjustment.Adjustment adjustment) nothrow
   {
     gtk_flow_box_set_vadjustment(cast(GtkFlowBox*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
@@ -722,7 +751,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Unselect all children of box, if the selection
       mode allows it.
   */
-  void unselectAll()
+  void unselectAll() nothrow
   {
     gtk_flow_box_unselect_all(cast(GtkFlowBox*)this._cPtr);
   }
@@ -734,7 +763,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       Params:
         child = a child of box
   */
-  void unselectChild(gtk.flow_box_child.FlowBoxChild child)
+  void unselectChild(gtk.flow_box_child.FlowBoxChild child) nothrow
   {
     gtk_flow_box_unselect_child(cast(GtkFlowBox*)this._cPtr, child ? cast(GtkFlowBoxChild*)child._cPtr(No.Dup) : null);
   }
@@ -756,13 +785,13 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivateCursorChild(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivateCursorChild(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.flow_box.FlowBox)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -771,7 +800,14 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.flow_box.FlowBox.activateCursorChild");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -796,14 +832,14 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChildActivated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChildActivated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.flow_box_child.FlowBoxChild)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.flow_box.FlowBox)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -815,7 +851,14 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.flow_box.FlowBox.childActivated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -857,7 +900,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.MovementStep)))
@@ -865,11 +908,12 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.flow_box.FlowBox)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -880,7 +924,14 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.flow_box.FlowBox.moveCursor");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -909,13 +960,13 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectAll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.flow_box.FlowBox)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -924,7 +975,14 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.flow_box.FlowBox.selectAll");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -951,13 +1009,13 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectedChildrenChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectedChildrenChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.flow_box.FlowBox)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -966,7 +1024,14 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.flow_box.FlowBox.selectedChildrenChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -992,13 +1057,13 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectToggleCursorChild(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToggleCursorChild(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.flow_box.FlowBox)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1007,7 +1072,14 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.flow_box.FlowBox.toggleCursorChild");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1034,13 +1106,13 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.flow_box.FlowBox)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1049,7 +1121,14 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.flow_box.FlowBox.unselectAll");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1070,7 +1149,7 @@ class FlowBoxGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.or
           click, or require a double-click.
       Returns: Builder instance for fluent chaining
   */
-  T activateOnSingleClick(bool propval)
+  T activateOnSingleClick(bool propval) nothrow
   {
     return setProperty("activate-on-single-click", propval);
   }
@@ -1081,7 +1160,7 @@ class FlowBoxGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.or
         propval = The amount of horizontal space between two children.
       Returns: Builder instance for fluent chaining
   */
-  T columnSpacing(uint propval)
+  T columnSpacing(uint propval) nothrow
   {
     return setProperty("column-spacing", propval);
   }
@@ -1093,7 +1172,7 @@ class FlowBoxGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.or
           same size.
       Returns: Builder instance for fluent chaining
   */
-  T homogeneous(bool propval)
+  T homogeneous(bool propval) nothrow
   {
     return setProperty("homogeneous", propval);
   }
@@ -1105,7 +1184,7 @@ class FlowBoxGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.or
           in the given orientation.
       Returns: Builder instance for fluent chaining
   */
-  T maxChildrenPerLine(uint propval)
+  T maxChildrenPerLine(uint propval) nothrow
   {
     return setProperty("max-children-per-line", propval);
   }
@@ -1121,7 +1200,7 @@ class FlowBoxGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.or
           for the overall minimum width of the box.
       Returns: Builder instance for fluent chaining
   */
-  T minChildrenPerLine(uint propval)
+  T minChildrenPerLine(uint propval) nothrow
   {
     return setProperty("min-children-per-line", propval);
   }
@@ -1132,7 +1211,7 @@ class FlowBoxGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.or
         propval = The amount of vertical space between two children.
       Returns: Builder instance for fluent chaining
   */
-  T rowSpacing(uint propval)
+  T rowSpacing(uint propval) nothrow
   {
     return setProperty("row-spacing", propval);
   }
@@ -1143,7 +1222,7 @@ class FlowBoxGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.or
         propval = The selection mode used by the flow  box.
       Returns: Builder instance for fluent chaining
   */
-  T selectionMode(gtk.types.SelectionMode propval)
+  T selectionMode(gtk.types.SelectionMode propval) nothrow
   {
     return setProperty("selection-mode", propval);
   }
@@ -1156,7 +1235,7 @@ final class FlowBoxGidBuilder : FlowBoxGidBuilderImpl!FlowBoxGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FlowBox build()
+  FlowBox build() nothrow
   {
     return new FlowBox(cast(void*)createGObject(FlowBox._getGType), No.Take);
   }

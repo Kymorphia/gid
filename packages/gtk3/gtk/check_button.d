@@ -51,26 +51,26 @@ class CheckButton : gtk.toggle_button.ToggleButton
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_check_button_get_type != &gidSymbolNotFound ? gtk_check_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CheckButton self()
+  override CheckButton self() nothrow
   {
     return this;
   }
@@ -79,7 +79,7 @@ class CheckButton : gtk.toggle_button.ToggleButton
       Get builder for [gtk.check_button.CheckButton]
       Returns: New builder object
   */
-  static CheckButtonGidBuilder builder()
+  static CheckButtonGidBuilder builder() nothrow
   {
     return new CheckButtonGidBuilder;
   }
@@ -88,7 +88,7 @@ class CheckButton : gtk.toggle_button.ToggleButton
       Creates a new #GtkCheckButton.
       Returns: a #GtkWidget.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_check_button_new();
@@ -102,7 +102,7 @@ class CheckButton : gtk.toggle_button.ToggleButton
         label = the text for the check button.
       Returns: a #GtkWidget.
   */
-  static gtk.check_button.CheckButton newWithLabel(string label)
+  static gtk.check_button.CheckButton newWithLabel(string label) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -121,7 +121,7 @@ class CheckButton : gtk.toggle_button.ToggleButton
             mnemonic character
       Returns: a new #GtkCheckButton
   */
-  static gtk.check_button.CheckButton newWithMnemonic(string label)
+  static gtk.check_button.CheckButton newWithMnemonic(string label) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -144,7 +144,7 @@ final class CheckButtonGidBuilder : CheckButtonGidBuilderImpl!CheckButtonGidBuil
       Create object from builder.
       Returns: New object
   */
-  CheckButton build()
+  CheckButton build() nothrow
   {
     return new CheckButton(cast(void*)createGObject(CheckButton._getGType), No.Take);
   }

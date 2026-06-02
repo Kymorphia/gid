@@ -17,18 +17,15 @@ class Atom
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.atom.Atom");
-
     _cInstancePtr = cast(GdkAtom)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -39,7 +36,7 @@ class Atom
           corresponding to atom. When you are done with the
           return value, you should free it using [glib.global.gfree].
   */
-  string name()
+  string name() nothrow
   {
     char* _cretval;
     _cretval = gdk_atom_name(cast(GdkAtom)this._cPtr);
@@ -58,7 +55,7 @@ class Atom
             existance of an atom is as expensive as creating it.
       Returns: the atom corresponding to atom_name.
   */
-  static gdk.atom.Atom intern(string atomName, bool onlyIfExists)
+  static gdk.atom.Atom intern(string atomName, bool onlyIfExists) nothrow
   {
     GdkAtom _cretval;
     const(char)* _atomName = atomName.toCString(No.Alloc);
@@ -83,7 +80,7 @@ class Atom
         atomName = a static string
       Returns: the atom corresponding to atom_name
   */
-  static gdk.atom.Atom internStaticString(string atomName)
+  static gdk.atom.Atom internStaticString(string atomName) nothrow
   {
     GdkAtom _cretval;
     const(char)* _atomName = atomName.toCString(No.Alloc);

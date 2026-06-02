@@ -23,7 +23,7 @@ interface FontMap
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_cairo_font_map_get_type != &gidSymbolNotFound ? pango_cairo_font_map_get_type() : cast(GType)0;
@@ -49,7 +49,7 @@ interface FontMap
          for the current thread. This object is owned by Pango and must
          not be freed.
   */
-  static pango.font_map.FontMap getDefault()
+  static pango.font_map.FontMap getDefault() nothrow
   {
     PangoFontMap* _cretval;
     _cretval = pango_cairo_font_map_get_default();
@@ -79,7 +79,7 @@ interface FontMap
       Returns: the newly allocated [pango.font_map.FontMap],
           which should be freed with [gobject.object.ObjectWrap.unref].
   */
-  static pango.font_map.FontMap new_()
+  static pango.font_map.FontMap new_() nothrow
   {
     PangoFontMap* _cretval;
     _cretval = pango_cairo_font_map_new();
@@ -101,7 +101,7 @@ interface FontMap
           [gobject.object.ObjectWrap.unref], or null if the requested cairo font backend
           is not supported / compiled in.
   */
-  static pango.font_map.FontMap newForFontType(cairo.types.FontType fonttype)
+  static pango.font_map.FontMap newForFontType(cairo.types.FontType fonttype) nothrow
   {
     PangoFontMap* _cretval;
     _cretval = pango_cairo_font_map_new_for_font_type(fonttype);

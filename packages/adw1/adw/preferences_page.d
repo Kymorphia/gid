@@ -39,26 +39,26 @@ class PreferencesPage : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_preferences_page_get_type != &gidSymbolNotFound ? adw_preferences_page_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PreferencesPage self()
+  override PreferencesPage self() nothrow
   {
     return this;
   }
@@ -67,7 +67,7 @@ class PreferencesPage : gtk.widget.Widget
       Get builder for [adw.preferences_page.PreferencesPage]
       Returns: New builder object
   */
-  static PreferencesPageGidBuilder builder()
+  static PreferencesPageGidBuilder builder() nothrow
   {
     return new PreferencesPageGidBuilder;
   }
@@ -76,7 +76,7 @@ class PreferencesPage : gtk.widget.Widget
       Get `description` property.
       Returns: The description to be displayed at the top of the page.
   */
-  @property string description()
+  @property string description() nothrow
   {
     return getDescription();
   }
@@ -86,7 +86,7 @@ class PreferencesPage : gtk.widget.Widget
       Params:
         propval = The description to be displayed at the top of the page.
   */
-  @property void description(string propval)
+  @property void description(string propval) nothrow
   {
     setDescription(propval);
   }
@@ -95,7 +95,7 @@ class PreferencesPage : gtk.widget.Widget
       Get `iconName` property.
       Returns: The icon name for this page.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return getIconName();
   }
@@ -105,7 +105,7 @@ class PreferencesPage : gtk.widget.Widget
       Params:
         propval = The icon name for this page.
   */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     setIconName(propval);
   }
@@ -114,7 +114,7 @@ class PreferencesPage : gtk.widget.Widget
       Get `name` property.
       Returns: The name of this page.
   */
-  override @property string name()
+  override @property string name() nothrow
   {
     return getName();
   }
@@ -124,7 +124,7 @@ class PreferencesPage : gtk.widget.Widget
       Params:
         propval = The name of this page.
   */
-  override @property void name(string propval)
+  override @property void name(string propval) nothrow
   {
     setName(propval);
   }
@@ -133,7 +133,7 @@ class PreferencesPage : gtk.widget.Widget
       Get `title` property.
       Returns: The title for this page.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -143,7 +143,7 @@ class PreferencesPage : gtk.widget.Widget
       Params:
         propval = The title for this page.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -152,7 +152,7 @@ class PreferencesPage : gtk.widget.Widget
       Get `useUnderline` property.
       Returns: Whether an embedded underline in the title indicates a mnemonic.
   */
-  @property bool useUnderline()
+  @property bool useUnderline() nothrow
   {
     return getUseUnderline();
   }
@@ -162,7 +162,7 @@ class PreferencesPage : gtk.widget.Widget
       Params:
         propval = Whether an embedded underline in the title indicates a mnemonic.
   */
-  @property void useUnderline(bool propval)
+  @property void useUnderline(bool propval) nothrow
   {
     setUseUnderline(propval);
   }
@@ -171,7 +171,7 @@ class PreferencesPage : gtk.widget.Widget
       Creates a new [adw.preferences_page.PreferencesPage].
       Returns: the newly created [adw.preferences_page.PreferencesPage]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_preferences_page_new();
@@ -184,7 +184,7 @@ class PreferencesPage : gtk.widget.Widget
       Params:
         group = the group to add
   */
-  void add(adw.preferences_group.PreferencesGroup group)
+  void add(adw.preferences_group.PreferencesGroup group) nothrow
   {
     adw_preferences_page_add(cast(AdwPreferencesPage*)this._cPtr, group ? cast(AdwPreferencesGroup*)group._cPtr(No.Dup) : null);
   }
@@ -193,7 +193,7 @@ class PreferencesPage : gtk.widget.Widget
       Gets the description of self.
       Returns: the description of self.
   */
-  string getDescription()
+  string getDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_preferences_page_get_description(cast(AdwPreferencesPage*)this._cPtr);
@@ -205,7 +205,7 @@ class PreferencesPage : gtk.widget.Widget
       Gets the icon name for self.
       Returns: the icon name for self
   */
-  string getIconName()
+  string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_preferences_page_get_icon_name(cast(AdwPreferencesPage*)this._cPtr);
@@ -217,7 +217,7 @@ class PreferencesPage : gtk.widget.Widget
       Gets the name of self.
       Returns: the name of self
   */
-  override string getName()
+  override string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_preferences_page_get_name(cast(AdwPreferencesPage*)this._cPtr);
@@ -229,7 +229,7 @@ class PreferencesPage : gtk.widget.Widget
       Gets the title of self.
       Returns: the title of self.
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_preferences_page_get_title(cast(AdwPreferencesPage*)this._cPtr);
@@ -241,7 +241,7 @@ class PreferencesPage : gtk.widget.Widget
       Gets whether an embedded underline in the title indicates a mnemonic.
       Returns: whether an embedded underline in the title indicates a mnemonic
   */
-  bool getUseUnderline()
+  bool getUseUnderline() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_preferences_page_get_use_underline(cast(AdwPreferencesPage*)this._cPtr);
@@ -254,7 +254,7 @@ class PreferencesPage : gtk.widget.Widget
       Params:
         group = the group to remove
   */
-  void remove(adw.preferences_group.PreferencesGroup group)
+  void remove(adw.preferences_group.PreferencesGroup group) nothrow
   {
     adw_preferences_page_remove(cast(AdwPreferencesPage*)this._cPtr, group ? cast(AdwPreferencesGroup*)group._cPtr(No.Dup) : null);
   }
@@ -262,7 +262,7 @@ class PreferencesPage : gtk.widget.Widget
   /**
       Scrolls the scrolled window of self to the top.
   */
-  void scrollToTop()
+  void scrollToTop() nothrow
   {
     adw_preferences_page_scroll_to_top(cast(AdwPreferencesPage*)this._cPtr);
   }
@@ -275,7 +275,7 @@ class PreferencesPage : gtk.widget.Widget
       Params:
         description = the description
   */
-  void setDescription(string description)
+  void setDescription(string description) nothrow
   {
     const(char)* _description = description.toCString(No.Alloc);
     adw_preferences_page_set_description(cast(AdwPreferencesPage*)this._cPtr, _description);
@@ -287,7 +287,7 @@ class PreferencesPage : gtk.widget.Widget
       Params:
         iconName = the icon name
   */
-  void setIconName(string iconName = null)
+  void setIconName(string iconName = null) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     adw_preferences_page_set_icon_name(cast(AdwPreferencesPage*)this._cPtr, _iconName);
@@ -299,7 +299,7 @@ class PreferencesPage : gtk.widget.Widget
       Params:
         name = the name
   */
-  override void setName(string name = null)
+  override void setName(string name = null) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     adw_preferences_page_set_name(cast(AdwPreferencesPage*)this._cPtr, _name);
@@ -311,7 +311,7 @@ class PreferencesPage : gtk.widget.Widget
       Params:
         title = the title
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     adw_preferences_page_set_title(cast(AdwPreferencesPage*)this._cPtr, _title);
@@ -323,7 +323,7 @@ class PreferencesPage : gtk.widget.Widget
       Params:
         useUnderline = `TRUE` if underlines in the text indicate mnemonics
   */
-  void setUseUnderline(bool useUnderline)
+  void setUseUnderline(bool useUnderline) nothrow
   {
     adw_preferences_page_set_use_underline(cast(AdwPreferencesPage*)this._cPtr, useUnderline);
   }
@@ -340,7 +340,7 @@ class PreferencesPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The description to be displayed at the top of the page.
       Returns: Builder instance for fluent chaining
   */
-  T description(string propval)
+  T description(string propval) nothrow
   {
     return setProperty("description", propval);
   }
@@ -351,7 +351,7 @@ class PreferencesPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The icon name for this page.
       Returns: Builder instance for fluent chaining
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
@@ -362,7 +362,7 @@ class PreferencesPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The name of this page.
       Returns: Builder instance for fluent chaining
   */
-  override T name(string propval)
+  override T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -373,7 +373,7 @@ class PreferencesPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The title for this page.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -384,7 +384,7 @@ class PreferencesPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether an embedded underline in the title indicates a mnemonic.
       Returns: Builder instance for fluent chaining
   */
-  T useUnderline(bool propval)
+  T useUnderline(bool propval) nothrow
   {
     return setProperty("use-underline", propval);
   }
@@ -397,7 +397,7 @@ final class PreferencesPageGidBuilder : PreferencesPageGidBuilderImpl!Preference
       Create object from builder.
       Returns: New object
   */
-  PreferencesPage build()
+  PreferencesPage build() nothrow
   {
     return new PreferencesPage(cast(void*)createGObject(PreferencesPage._getGType), No.Take);
   }

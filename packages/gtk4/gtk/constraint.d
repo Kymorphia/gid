@@ -31,26 +31,26 @@ class Constraint : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_constraint_get_type != &gidSymbolNotFound ? gtk_constraint_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Constraint self()
+  override Constraint self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class Constraint : gobject.object.ObjectWrap
       Get builder for [gtk.constraint.Constraint]
       Returns: New builder object
   */
-  static ConstraintGidBuilder builder()
+  static ConstraintGidBuilder builder() nothrow
   {
     return new ConstraintGidBuilder;
   }
@@ -68,7 +68,7 @@ class Constraint : gobject.object.ObjectWrap
       Get `constant` property.
       Returns: The constant value to be added to the [gtk.constraint.Constraint.sourceAttribute].
   */
-  @property double constant()
+  @property double constant() nothrow
   {
     return getConstant();
   }
@@ -78,7 +78,7 @@ class Constraint : gobject.object.ObjectWrap
       Returns: The multiplication factor to be applied to
         the [gtk.constraint.Constraint.sourceAttribute].
   */
-  @property double multiplier()
+  @property double multiplier() nothrow
   {
     return getMultiplier();
   }
@@ -87,7 +87,7 @@ class Constraint : gobject.object.ObjectWrap
       Get `relation` property.
       Returns: The order relation between the terms of the constraint.
   */
-  @property gtk.types.ConstraintRelation relation()
+  @property gtk.types.ConstraintRelation relation() nothrow
   {
     return getRelation();
   }
@@ -100,7 +100,7 @@ class Constraint : gobject.object.ObjectWrap
         property of the target using the [gtk.constraint.Constraint.sourceAttribute]
         property of the source.
   */
-  @property gtk.constraint_target.ConstraintTarget source()
+  @property gtk.constraint_target.ConstraintTarget source() nothrow
   {
     return getSource();
   }
@@ -110,7 +110,7 @@ class Constraint : gobject.object.ObjectWrap
       Returns: The attribute of the [gtk.constraint.Constraint.source] read by the
         constraint.
   */
-  @property gtk.types.ConstraintAttribute sourceAttribute()
+  @property gtk.types.ConstraintAttribute sourceAttribute() nothrow
   {
     return getSourceAttribute();
   }
@@ -123,7 +123,7 @@ class Constraint : gobject.object.ObjectWrap
         of the [gtk.types.ConstraintStrength] enumeration, or any positive integer
         value.
   */
-  @property int strength()
+  @property int strength() nothrow
   {
     return getStrength();
   }
@@ -136,7 +136,7 @@ class Constraint : gobject.object.ObjectWrap
         property of the target using the [gtk.constraint.Constraint.sourceAttribute]
         property of the source widget.
   */
-  @property gtk.constraint_target.ConstraintTarget target()
+  @property gtk.constraint_target.ConstraintTarget target() nothrow
   {
     return getTarget();
   }
@@ -145,7 +145,7 @@ class Constraint : gobject.object.ObjectWrap
       Get `targetAttribute` property.
       Returns: The attribute of the [gtk.constraint.Constraint.target] set by the constraint.
   */
-  @property gtk.types.ConstraintAttribute targetAttribute()
+  @property gtk.types.ConstraintAttribute targetAttribute() nothrow
   {
     return getTargetAttribute();
   }
@@ -165,7 +165,7 @@ class Constraint : gobject.object.ObjectWrap
         strength = the strength of the constraint
       Returns: the newly created constraint
   */
-  this(gtk.constraint_target.ConstraintTarget target, gtk.types.ConstraintAttribute targetAttribute, gtk.types.ConstraintRelation relation, gtk.constraint_target.ConstraintTarget source, gtk.types.ConstraintAttribute sourceAttribute, double multiplier, double constant, int strength)
+  this(gtk.constraint_target.ConstraintTarget target, gtk.types.ConstraintAttribute targetAttribute, gtk.types.ConstraintRelation relation, gtk.constraint_target.ConstraintTarget source, gtk.types.ConstraintAttribute sourceAttribute, double multiplier, double constant, int strength) nothrow
   {
     GtkConstraint* _cretval;
     _cretval = gtk_constraint_new(target ? cast(GtkConstraintTarget*)(cast(gobject.object.ObjectWrap)target)._cPtr(No.Dup) : null, targetAttribute, relation, source ? cast(GtkConstraintTarget*)(cast(gobject.object.ObjectWrap)source)._cPtr(No.Dup) : null, sourceAttribute, multiplier, constant, strength);
@@ -184,7 +184,7 @@ class Constraint : gobject.object.ObjectWrap
         strength = the strength of the constraint
       Returns: the newly created constraint
   */
-  static gtk.constraint.Constraint newConstant(gtk.constraint_target.ConstraintTarget target, gtk.types.ConstraintAttribute targetAttribute, gtk.types.ConstraintRelation relation, double constant, int strength)
+  static gtk.constraint.Constraint newConstant(gtk.constraint_target.ConstraintTarget target, gtk.types.ConstraintAttribute targetAttribute, gtk.types.ConstraintRelation relation, double constant, int strength) nothrow
   {
     GtkConstraint* _cretval;
     _cretval = gtk_constraint_new_constant(target ? cast(GtkConstraintTarget*)(cast(gobject.object.ObjectWrap)target)._cPtr(No.Dup) : null, targetAttribute, relation, constant, strength);
@@ -196,7 +196,7 @@ class Constraint : gobject.object.ObjectWrap
       Retrieves the constant factor added to the source attributes' value.
       Returns: a constant factor
   */
-  double getConstant()
+  double getConstant() nothrow
   {
     double _retval;
     _retval = gtk_constraint_get_constant(cast(GtkConstraint*)this._cPtr);
@@ -208,7 +208,7 @@ class Constraint : gobject.object.ObjectWrap
       attribute's value.
       Returns: a multiplication factor
   */
-  double getMultiplier()
+  double getMultiplier() nothrow
   {
     double _retval;
     _retval = gtk_constraint_get_multiplier(cast(GtkConstraint*)this._cPtr);
@@ -219,7 +219,7 @@ class Constraint : gobject.object.ObjectWrap
       The order relation between the terms of the constraint.
       Returns: a relation type
   */
-  gtk.types.ConstraintRelation getRelation()
+  gtk.types.ConstraintRelation getRelation() nothrow
   {
     GtkConstraintRelation _cretval;
     _cretval = gtk_constraint_get_relation(cast(GtkConstraint*)this._cPtr);
@@ -235,7 +235,7 @@ class Constraint : gobject.object.ObjectWrap
       the widget using the [gtk.constraint_layout.ConstraintLayout] as the source.
       Returns: the source of the constraint
   */
-  gtk.constraint_target.ConstraintTarget getSource()
+  gtk.constraint_target.ConstraintTarget getSource() nothrow
   {
     GtkConstraintTarget* _cretval;
     _cretval = gtk_constraint_get_source(cast(GtkConstraint*)this._cPtr);
@@ -247,7 +247,7 @@ class Constraint : gobject.object.ObjectWrap
       Retrieves the attribute of the source to be read by the constraint.
       Returns: the source's attribute
   */
-  gtk.types.ConstraintAttribute getSourceAttribute()
+  gtk.types.ConstraintAttribute getSourceAttribute() nothrow
   {
     GtkConstraintAttribute _cretval;
     _cretval = gtk_constraint_get_source_attribute(cast(GtkConstraint*)this._cPtr);
@@ -259,7 +259,7 @@ class Constraint : gobject.object.ObjectWrap
       Retrieves the strength of the constraint.
       Returns: the strength value
   */
-  int getStrength()
+  int getStrength() nothrow
   {
     int _retval;
     _retval = gtk_constraint_get_strength(cast(GtkConstraint*)this._cPtr);
@@ -274,7 +274,7 @@ class Constraint : gobject.object.ObjectWrap
       the widget using the [gtk.constraint_layout.ConstraintLayout] as the target.
       Returns: a [gtk.constraint_target.ConstraintTarget]
   */
-  gtk.constraint_target.ConstraintTarget getTarget()
+  gtk.constraint_target.ConstraintTarget getTarget() nothrow
   {
     GtkConstraintTarget* _cretval;
     _cretval = gtk_constraint_get_target(cast(GtkConstraint*)this._cPtr);
@@ -286,7 +286,7 @@ class Constraint : gobject.object.ObjectWrap
       Retrieves the attribute of the target to be set by the constraint.
       Returns: the target's attribute
   */
-  gtk.types.ConstraintAttribute getTargetAttribute()
+  gtk.types.ConstraintAttribute getTargetAttribute() nothrow
   {
     GtkConstraintAttribute _cretval;
     _cretval = gtk_constraint_get_target_attribute(cast(GtkConstraint*)this._cPtr);
@@ -299,7 +299,7 @@ class Constraint : gobject.object.ObjectWrap
       and it is contributing to the layout.
       Returns: `TRUE` if the constraint is attached
   */
-  bool isAttached()
+  bool isAttached() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_constraint_is_attached(cast(GtkConstraint*)this._cPtr);
@@ -311,7 +311,7 @@ class Constraint : gobject.object.ObjectWrap
       on the [gtk.constraint.Constraint.target] and a constant value.
       Returns: `TRUE` if the constraint is a constant relation
   */
-  bool isConstant()
+  bool isConstant() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_constraint_is_constant(cast(GtkConstraint*)this._cPtr);
@@ -323,7 +323,7 @@ class Constraint : gobject.object.ObjectWrap
       constraint layout.
       Returns: true if the constraint is required
   */
-  bool isRequired()
+  bool isRequired() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_constraint_is_required(cast(GtkConstraint*)this._cPtr);
@@ -341,7 +341,7 @@ class ConstraintGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The constant value to be added to the [gtk.constraint.Constraint.sourceAttribute].
       Returns: Builder instance for fluent chaining
   */
-  T constant(double propval)
+  T constant(double propval) nothrow
   {
     return setProperty("constant", propval);
   }
@@ -353,7 +353,7 @@ class ConstraintGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           the [gtk.constraint.Constraint.sourceAttribute].
       Returns: Builder instance for fluent chaining
   */
-  T multiplier(double propval)
+  T multiplier(double propval) nothrow
   {
     return setProperty("multiplier", propval);
   }
@@ -364,7 +364,7 @@ class ConstraintGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The order relation between the terms of the constraint.
       Returns: Builder instance for fluent chaining
   */
-  T relation(gtk.types.ConstraintRelation propval)
+  T relation(gtk.types.ConstraintRelation propval) nothrow
   {
     return setProperty("relation", propval);
   }
@@ -379,7 +379,7 @@ class ConstraintGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           property of the source.
       Returns: Builder instance for fluent chaining
   */
-  T source(gtk.constraint_target.ConstraintTarget propval)
+  T source(gtk.constraint_target.ConstraintTarget propval) nothrow
   {
     return setProperty("source", propval);
   }
@@ -391,7 +391,7 @@ class ConstraintGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           constraint.
       Returns: Builder instance for fluent chaining
   */
-  T sourceAttribute(gtk.types.ConstraintAttribute propval)
+  T sourceAttribute(gtk.types.ConstraintAttribute propval) nothrow
   {
     return setProperty("source-attribute", propval);
   }
@@ -406,7 +406,7 @@ class ConstraintGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           value.
       Returns: Builder instance for fluent chaining
   */
-  T strength(int propval)
+  T strength(int propval) nothrow
   {
     return setProperty("strength", propval);
   }
@@ -421,7 +421,7 @@ class ConstraintGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           property of the source widget.
       Returns: Builder instance for fluent chaining
   */
-  T target(gtk.constraint_target.ConstraintTarget propval)
+  T target(gtk.constraint_target.ConstraintTarget propval) nothrow
   {
     return setProperty("target", propval);
   }
@@ -432,7 +432,7 @@ class ConstraintGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The attribute of the [gtk.constraint.Constraint.target] set by the constraint.
       Returns: Builder instance for fluent chaining
   */
-  T targetAttribute(gtk.types.ConstraintAttribute propval)
+  T targetAttribute(gtk.types.ConstraintAttribute propval) nothrow
   {
     return setProperty("target-attribute", propval);
   }
@@ -445,7 +445,7 @@ final class ConstraintGidBuilder : ConstraintGidBuilderImpl!ConstraintGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Constraint build()
+  Constraint build() nothrow
   {
     return new Constraint(cast(void*)createGObject(Constraint._getGType), Yes.Take);
   }

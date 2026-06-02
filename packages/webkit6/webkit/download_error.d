@@ -17,7 +17,7 @@ struct DownloadError
       Gets the quark for the domain of download errors.
       Returns: download error domain.
   */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = webkit_download_error_quark();
@@ -27,12 +27,12 @@ struct DownloadError
 
 class DownloadException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(webkit.download_error.DownloadError.quark, cast(int)code, msg);
   }

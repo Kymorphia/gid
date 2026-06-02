@@ -23,39 +23,39 @@ class TreeIter : gobject.boxed.Boxed
       Params:
         stamp = a unique stamp to catch invalid iterators
   */
-  this(int stamp = int.init)
+  this(int stamp = int.init) nothrow
   {
     super(gMalloc(GtkTreeIter.sizeof), Yes.Take);
     this.stamp = stamp;
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_iter_get_type != &gidSymbolNotFound ? gtk_tree_iter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TreeIter self()
+  override TreeIter self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class TreeIter : gobject.boxed.Boxed
       Get `stamp` field.
       Returns: a unique stamp to catch invalid iterators
   */
-  @property int stamp()
+  @property int stamp() nothrow
   {
     return (cast(GtkTreeIter*)this._cPtr).stamp;
   }
@@ -74,7 +74,7 @@ class TreeIter : gobject.boxed.Boxed
       Params:
         propval = a unique stamp to catch invalid iterators
   */
-  @property void stamp(int propval)
+  @property void stamp(int propval) nothrow
   {
     (cast(GtkTreeIter*)this._cPtr).stamp = propval;
   }
@@ -88,7 +88,7 @@ class TreeIter : gobject.boxed.Boxed
       You must free this iter with [gtk.tree_iter.TreeIter.free].
       Returns: a newly-allocated copy of iter
   */
-  gtk.tree_iter.TreeIter copy()
+  gtk.tree_iter.TreeIter copy() nothrow
   {
     GtkTreeIter* _cretval;
     _cretval = gtk_tree_iter_copy(cast(GtkTreeIter*)this._cPtr);

@@ -20,32 +20,32 @@ class Item : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_item_get_type != &gidSymbolNotFound ? pango_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Item self()
+  override Item self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class Item : gobject.boxed.Boxed
       Get `offset` field.
       Returns: byte offset of the start of this item in text.
   */
-  @property int offset()
+  @property int offset() nothrow
   {
     return (cast(PangoItem*)this._cPtr).offset;
   }
@@ -64,7 +64,7 @@ class Item : gobject.boxed.Boxed
       Params:
         propval = byte offset of the start of this item in text.
   */
-  @property void offset(int propval)
+  @property void offset(int propval) nothrow
   {
     (cast(PangoItem*)this._cPtr).offset = propval;
   }
@@ -73,7 +73,7 @@ class Item : gobject.boxed.Boxed
       Get `length` field.
       Returns: length of this item in bytes.
   */
-  @property int length()
+  @property int length() nothrow
   {
     return (cast(PangoItem*)this._cPtr).length;
   }
@@ -83,7 +83,7 @@ class Item : gobject.boxed.Boxed
       Params:
         propval = length of this item in bytes.
   */
-  @property void length(int propval)
+  @property void length(int propval) nothrow
   {
     (cast(PangoItem*)this._cPtr).length = propval;
   }
@@ -92,7 +92,7 @@ class Item : gobject.boxed.Boxed
       Get `numChars` field.
       Returns: number of Unicode characters in the item.
   */
-  @property int numChars()
+  @property int numChars() nothrow
   {
     return (cast(PangoItem*)this._cPtr).numChars;
   }
@@ -102,7 +102,7 @@ class Item : gobject.boxed.Boxed
       Params:
         propval = number of Unicode characters in the item.
   */
-  @property void numChars(int propval)
+  @property void numChars(int propval) nothrow
   {
     (cast(PangoItem*)this._cPtr).numChars = propval;
   }
@@ -111,7 +111,7 @@ class Item : gobject.boxed.Boxed
       Get `analysis` field.
       Returns: analysis results for the item.
   */
-  @property pango.analysis.Analysis analysis()
+  @property pango.analysis.Analysis analysis() nothrow
   {
     return new pango.analysis.Analysis(cast(PangoAnalysis*)&(cast(PangoItem*)this._cPtr).analysis, No.Take);
   }
@@ -121,7 +121,7 @@ class Item : gobject.boxed.Boxed
       Returns: the newly allocated [pango.item.Item], which should
           be freed with [pango.item.Item.free].
   */
-  this()
+  this() nothrow
   {
     PangoItem* _cretval;
     _cretval = pango_item_new();
@@ -144,7 +144,7 @@ class Item : gobject.boxed.Boxed
       Params:
         iter = a [pango.attr_iterator.AttrIterator]
   */
-  void applyAttrs(pango.attr_iterator.AttrIterator iter)
+  void applyAttrs(pango.attr_iterator.AttrIterator iter) nothrow
   {
     pango_item_apply_attrs(cast(PangoItem*)this._cPtr, iter ? cast(PangoAttrIterator*)iter._cPtr(No.Dup) : null);
   }
@@ -153,7 +153,7 @@ class Item : gobject.boxed.Boxed
       Copy an existing [pango.item.Item] structure.
       Returns: the newly allocated [pango.item.Item]
   */
-  pango.item.Item copy()
+  pango.item.Item copy() nothrow
   {
     PangoItem* _cretval;
     _cretval = pango_item_copy(cast(PangoItem*)this._cPtr);
@@ -182,7 +182,7 @@ class Item : gobject.boxed.Boxed
       Returns: new item representing text before split_index, which
           should be freed with [pango.item.Item.free].
   */
-  pango.item.Item split(int splitIndex, int splitOffset)
+  pango.item.Item split(int splitIndex, int splitOffset) nothrow
   {
     PangoItem* _cretval;
     _cretval = pango_item_split(cast(PangoItem*)this._cPtr, splitIndex, splitOffset);

@@ -67,7 +67,7 @@ class Closure : gobject.boxed.Boxed
         isInvalid = Indicates whether the closure has been invalidated by
             [gobject.closure.Closure.invalidate]
   */
-  this(uint inMarshal = uint.init, uint isInvalid = uint.init)
+  this(uint inMarshal = uint.init, uint isInvalid = uint.init) nothrow
   {
     super(gMalloc(GClosure.sizeof), Yes.Take);
     this.inMarshal = inMarshal;
@@ -75,32 +75,32 @@ class Closure : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_closure_get_type != &gidSymbolNotFound ? g_closure_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Closure self()
+  override Closure self() nothrow
   {
     return this;
   }
@@ -110,7 +110,7 @@ class Closure : gobject.boxed.Boxed
       Returns: Indicates whether the closure is currently being invoked with
           [gobject.closure.Closure.invoke]
   */
-  @property uint inMarshal()
+  @property uint inMarshal() nothrow
   {
     return (cast(GClosure*)this._cPtr).inMarshal;
   }
@@ -121,7 +121,7 @@ class Closure : gobject.boxed.Boxed
         propval = Indicates whether the closure is currently being invoked with
             [gobject.closure.Closure.invoke]
   */
-  @property void inMarshal(uint propval)
+  @property void inMarshal(uint propval) nothrow
   {
     (cast(GClosure*)this._cPtr).inMarshal = propval;
   }
@@ -131,7 +131,7 @@ class Closure : gobject.boxed.Boxed
       Returns: Indicates whether the closure has been invalidated by
           [gobject.closure.Closure.invalidate]
   */
-  @property uint isInvalid()
+  @property uint isInvalid() nothrow
   {
     return (cast(GClosure*)this._cPtr).isInvalid;
   }
@@ -142,7 +142,7 @@ class Closure : gobject.boxed.Boxed
         propval = Indicates whether the closure has been invalidated by
             [gobject.closure.Closure.invalidate]
   */
-  @property void isInvalid(uint propval)
+  @property void isInvalid(uint propval) nothrow
   {
     (cast(GClosure*)this._cPtr).isInvalid = propval;
   }
@@ -151,7 +151,7 @@ class Closure : gobject.boxed.Boxed
   alias MarshalFuncType = extern(C) void function(GClosure* closure, GValue* returnValue, uint nParamValues, const(GValue)* paramValues, void* invocationHint, void* marshalData);
 
   /** */
-  @property MarshalFuncType marshal()
+  @property MarshalFuncType marshal() nothrow
   {
     return (cast(GClosure*)this._cPtr).marshal;
   }
@@ -169,7 +169,7 @@ class Closure : gobject.boxed.Boxed
            allocated #GClosure
       Returns: a newly allocated #GClosure
   */
-  static gobject.closure.Closure newObject(uint sizeofClosure, gobject.object.ObjectWrap object)
+  static gobject.closure.Closure newObject(uint sizeofClosure, gobject.object.ObjectWrap object) nothrow
   {
     GClosure* _cretval;
     _cretval = g_closure_new_object(sizeofClosure, object ? cast(GObject*)object._cPtr(No.Dup) : null);
@@ -222,7 +222,7 @@ class Closure : gobject.boxed.Boxed
         data = data to store in the data field of the newly allocated #GClosure
       Returns: a floating reference to a new #GClosure
   */
-  static gobject.closure.Closure newSimple(uint sizeofClosure, void* data = null)
+  static gobject.closure.Closure newSimple(uint sizeofClosure, void* data = null) nothrow
   {
     GClosure* _cretval;
     _cretval = g_closure_new_simple(sizeofClosure, data);
@@ -247,7 +247,7 @@ class Closure : gobject.boxed.Boxed
       reference count of a closure drops to zero (unless it has already
       been invalidated before).
   */
-  void invalidate()
+  void invalidate() nothrow
   {
     g_closure_invalidate(cast(GClosure*)this._cPtr);
   }
@@ -264,7 +264,7 @@ class Closure : gobject.boxed.Boxed
                          invoke the callback of closure
         invocationHint = a context-dependent invocation hint
   */
-  void invoke(out gobject.value.Value returnValue, gobject.value.Value[] paramValues, void* invocationHint = null)
+  void invoke(out gobject.value.Value returnValue, gobject.value.Value[] paramValues, void* invocationHint = null) nothrow
   {
     GValue _returnValue;
     uint _nParamValues;
@@ -329,7 +329,7 @@ class Closure : gobject.boxed.Boxed
       (if it hasn't been called on closure yet) just like [gobject.closure.Closure.unref],
       [gobject.closure.Closure.ref_] should be called prior to this function.
   */
-  void sink()
+  void sink() nothrow
   {
     g_closure_sink(cast(GClosure*)this._cPtr);
   }

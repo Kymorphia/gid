@@ -47,26 +47,26 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_string_list_get_type != &gidSymbolNotFound ? gtk_string_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StringList self()
+  override StringList self() nothrow
   {
     return this;
   }
@@ -75,7 +75,7 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
       Get builder for [gtk.string_list.StringList]
       Returns: New builder object
   */
-  static StringListGidBuilder builder()
+  static StringListGidBuilder builder() nothrow
   {
     return new StringListGidBuilder;
   }
@@ -84,7 +84,7 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
-  @property gobject.types.GType itemType()
+  @property gobject.types.GType itemType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
   }
@@ -93,7 +93,7 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
       Get `nItems` property.
       Returns: The number of items. See [gio.list_model.ListModel.getNItems].
   */
-  @property uint nItems()
+  @property uint nItems() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
@@ -108,7 +108,7 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
         strings = The strings to put in the model
       Returns: a new [gtk.string_list.StringList]
   */
-  this(string[] strings = null)
+  this(string[] strings = null) nothrow
   {
     GtkStringList* _cretval;
     char*[] _tmpstrings;
@@ -130,7 +130,7 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
       Params:
         string_ = the string to insert
   */
-  void append(string string_)
+  void append(string string_) nothrow
   {
     const(char)* _string_ = string_.toCString(No.Alloc);
     gtk_string_list_append(cast(GtkStringList*)this._cPtr, _string_);
@@ -148,7 +148,7 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
         position = the position to get the string for
       Returns: the string at the given position
   */
-  string getString(uint position)
+  string getString(uint position) nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_string_list_get_string(cast(GtkStringList*)this._cPtr, position);
@@ -165,7 +165,7 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
       Params:
         position = the position of the string that is to be removed
   */
-  void remove(uint position)
+  void remove(uint position) nothrow
   {
     gtk_string_list_remove(cast(GtkStringList*)this._cPtr, position);
   }
@@ -189,7 +189,7 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
         nRemovals = the number of strings to remove
         additions = The strings to add
   */
-  void splice(uint position, uint nRemovals, string[] additions = null)
+  void splice(uint position, uint nRemovals, string[] additions = null) nothrow
   {
     char*[] _tmpadditions;
     foreach (s; additions)
@@ -214,7 +214,7 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
       Params:
         string_ = the string to insert
   */
-  void take(string string_)
+  void take(string string_) nothrow
   {
     char* _string_ = string_.toCString(Yes.Alloc);
     gtk_string_list_take(cast(GtkStringList*)this._cPtr, _string_);
@@ -236,7 +236,7 @@ final class StringListGidBuilder : StringListGidBuilderImpl!StringListGidBuilder
       Create object from builder.
       Returns: New object
   */
-  StringList build()
+  StringList build() nothrow
   {
     return new StringList(cast(void*)createGObject(StringList._getGType), Yes.Take);
   }

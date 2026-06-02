@@ -109,26 +109,26 @@ class HeaderBar : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_header_bar_get_type != &gidSymbolNotFound ? adw_header_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HeaderBar self()
+  override HeaderBar self() nothrow
   {
     return this;
   }
@@ -137,7 +137,7 @@ class HeaderBar : gtk.widget.Widget
       Get builder for [adw.header_bar.HeaderBar]
       Returns: New builder object
   */
-  static HeaderBarGidBuilder builder()
+  static HeaderBarGidBuilder builder() nothrow
   {
     return new HeaderBarGidBuilder;
   }
@@ -146,7 +146,7 @@ class HeaderBar : gtk.widget.Widget
       Get `centeringPolicy` property.
       Returns: The policy for aligning the center widget.
   */
-  @property adw.types.CenteringPolicy centeringPolicy()
+  @property adw.types.CenteringPolicy centeringPolicy() nothrow
   {
     return getCenteringPolicy();
   }
@@ -156,7 +156,7 @@ class HeaderBar : gtk.widget.Widget
       Params:
         propval = The policy for aligning the center widget.
   */
-  @property void centeringPolicy(adw.types.CenteringPolicy propval)
+  @property void centeringPolicy(adw.types.CenteringPolicy propval) nothrow
   {
     setCenteringPolicy(propval);
   }
@@ -176,7 +176,7 @@ class HeaderBar : gtk.widget.Widget
         For example, “icon:minimize,maximize,close” specifies an icon at the start,
         and minimize, maximize and close buttons at the end.
   */
-  @property string decorationLayout()
+  @property string decorationLayout() nothrow
   {
     return getDecorationLayout();
   }
@@ -197,7 +197,7 @@ class HeaderBar : gtk.widget.Widget
           For example, “icon:minimize,maximize,close” specifies an icon at the start,
           and minimize, maximize and close buttons at the end.
   */
-  @property void decorationLayout(string propval)
+  @property void decorationLayout(string propval) nothrow
   {
     setDecorationLayout(propval);
   }
@@ -209,7 +209,7 @@ class HeaderBar : gtk.widget.Widget
         The back button will never be shown unless the header bar is placed inside an
         [adw.navigation_view.NavigationView]. Usually, there is no reason to set this to `FALSE`.
   */
-  @property bool showBackButton()
+  @property bool showBackButton() nothrow
   {
     return getShowBackButton();
   }
@@ -222,7 +222,7 @@ class HeaderBar : gtk.widget.Widget
           The back button will never be shown unless the header bar is placed inside an
           [adw.navigation_view.NavigationView]. Usually, there is no reason to set this to `FALSE`.
   */
-  @property void showBackButton(bool propval)
+  @property void showBackButton(bool propval) nothrow
   {
     setShowBackButton(propval);
   }
@@ -238,7 +238,7 @@ class HeaderBar : gtk.widget.Widget
         window (e.g. a close button will not be shown if the window can't be
         closed).
   */
-  @property bool showEndTitleButtons()
+  @property bool showEndTitleButtons() nothrow
   {
     return getShowEndTitleButtons();
   }
@@ -255,7 +255,7 @@ class HeaderBar : gtk.widget.Widget
           window (e.g. a close button will not be shown if the window can't be
           closed).
   */
-  @property void showEndTitleButtons(bool propval)
+  @property void showEndTitleButtons(bool propval) nothrow
   {
     setShowEndTitleButtons(propval);
   }
@@ -271,7 +271,7 @@ class HeaderBar : gtk.widget.Widget
         window (e.g. a close button will not be shown if the window can't be
         closed).
   */
-  @property bool showStartTitleButtons()
+  @property bool showStartTitleButtons() nothrow
   {
     return getShowStartTitleButtons();
   }
@@ -288,7 +288,7 @@ class HeaderBar : gtk.widget.Widget
           window (e.g. a close button will not be shown if the window can't be
           closed).
   */
-  @property void showStartTitleButtons(bool propval)
+  @property void showStartTitleButtons(bool propval) nothrow
   {
     setShowStartTitleButtons(propval);
   }
@@ -297,7 +297,7 @@ class HeaderBar : gtk.widget.Widget
       Get `showTitle` property.
       Returns: Whether the title widget should be shown.
   */
-  @property bool showTitle()
+  @property bool showTitle() nothrow
   {
     return getShowTitle();
   }
@@ -307,7 +307,7 @@ class HeaderBar : gtk.widget.Widget
       Params:
         propval = Whether the title widget should be shown.
   */
-  @property void showTitle(bool propval)
+  @property void showTitle(bool propval) nothrow
   {
     setShowTitle(propval);
   }
@@ -331,7 +331,7 @@ class HeaderBar : gtk.widget.Widget
         </object>
         ```
   */
-  @property gtk.widget.Widget titleWidget()
+  @property gtk.widget.Widget titleWidget() nothrow
   {
     return getTitleWidget();
   }
@@ -356,7 +356,7 @@ class HeaderBar : gtk.widget.Widget
           </object>
           ```
   */
-  @property void titleWidget(gtk.widget.Widget propval)
+  @property void titleWidget(gtk.widget.Widget propval) nothrow
   {
     setTitleWidget(propval);
   }
@@ -365,7 +365,7 @@ class HeaderBar : gtk.widget.Widget
       Creates a new [adw.header_bar.HeaderBar].
       Returns: the newly created [adw.header_bar.HeaderBar].
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_header_bar_new();
@@ -376,7 +376,7 @@ class HeaderBar : gtk.widget.Widget
       Gets the policy for aligning the center widget.
       Returns: the centering policy
   */
-  adw.types.CenteringPolicy getCenteringPolicy()
+  adw.types.CenteringPolicy getCenteringPolicy() nothrow
   {
     AdwCenteringPolicy _cretval;
     _cretval = adw_header_bar_get_centering_policy(cast(AdwHeaderBar*)this._cPtr);
@@ -388,7 +388,7 @@ class HeaderBar : gtk.widget.Widget
       Gets the decoration layout for self.
       Returns: the decoration layout
   */
-  string getDecorationLayout()
+  string getDecorationLayout() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_header_bar_get_decoration_layout(cast(AdwHeaderBar*)this._cPtr);
@@ -400,7 +400,7 @@ class HeaderBar : gtk.widget.Widget
       Gets whether self can show the back button.
       Returns: whether to show the back button
   */
-  bool getShowBackButton()
+  bool getShowBackButton() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_header_bar_get_show_back_button(cast(AdwHeaderBar*)this._cPtr);
@@ -411,7 +411,7 @@ class HeaderBar : gtk.widget.Widget
       Gets whether to show title buttons at the end of self.
       Returns: `TRUE` if title buttons at the end are shown
   */
-  bool getShowEndTitleButtons()
+  bool getShowEndTitleButtons() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_header_bar_get_show_end_title_buttons(cast(AdwHeaderBar*)this._cPtr);
@@ -422,7 +422,7 @@ class HeaderBar : gtk.widget.Widget
       Gets whether to show title buttons at the start of self.
       Returns: `TRUE` if title buttons at the start are shown
   */
-  bool getShowStartTitleButtons()
+  bool getShowStartTitleButtons() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_header_bar_get_show_start_title_buttons(cast(AdwHeaderBar*)this._cPtr);
@@ -433,7 +433,7 @@ class HeaderBar : gtk.widget.Widget
       Gets whether the title widget should be shown.
       Returns: whether the title widget should be shown.
   */
-  bool getShowTitle()
+  bool getShowTitle() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_header_bar_get_show_title(cast(AdwHeaderBar*)this._cPtr);
@@ -444,7 +444,7 @@ class HeaderBar : gtk.widget.Widget
       Gets the title widget widget of self.
       Returns: the title widget
   */
-  gtk.widget.Widget getTitleWidget()
+  gtk.widget.Widget getTitleWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_header_bar_get_title_widget(cast(AdwHeaderBar*)this._cPtr);
@@ -458,7 +458,7 @@ class HeaderBar : gtk.widget.Widget
       Params:
         child = the widget to be added to self
   */
-  void packEnd(gtk.widget.Widget child)
+  void packEnd(gtk.widget.Widget child) nothrow
   {
     adw_header_bar_pack_end(cast(AdwHeaderBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -469,7 +469,7 @@ class HeaderBar : gtk.widget.Widget
       Params:
         child = the widget to be added to self
   */
-  void packStart(gtk.widget.Widget child)
+  void packStart(gtk.widget.Widget child) nothrow
   {
     adw_header_bar_pack_start(cast(AdwHeaderBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -483,7 +483,7 @@ class HeaderBar : gtk.widget.Widget
       Params:
         child = the child to remove
   */
-  void remove(gtk.widget.Widget child)
+  void remove(gtk.widget.Widget child) nothrow
   {
     adw_header_bar_remove(cast(AdwHeaderBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -494,7 +494,7 @@ class HeaderBar : gtk.widget.Widget
       Params:
         centeringPolicy = the centering policy
   */
-  void setCenteringPolicy(adw.types.CenteringPolicy centeringPolicy)
+  void setCenteringPolicy(adw.types.CenteringPolicy centeringPolicy) nothrow
   {
     adw_header_bar_set_centering_policy(cast(AdwHeaderBar*)this._cPtr, centeringPolicy);
   }
@@ -516,7 +516,7 @@ class HeaderBar : gtk.widget.Widget
       Params:
         layout = a decoration layout
   */
-  void setDecorationLayout(string layout = null)
+  void setDecorationLayout(string layout = null) nothrow
   {
     const(char)* _layout = layout.toCString(No.Alloc);
     adw_header_bar_set_decoration_layout(cast(AdwHeaderBar*)this._cPtr, _layout);
@@ -531,7 +531,7 @@ class HeaderBar : gtk.widget.Widget
       Params:
         showBackButton = whether to show the back button
   */
-  void setShowBackButton(bool showBackButton)
+  void setShowBackButton(bool showBackButton) nothrow
   {
     adw_header_bar_set_show_back_button(cast(AdwHeaderBar*)this._cPtr, showBackButton);
   }
@@ -548,7 +548,7 @@ class HeaderBar : gtk.widget.Widget
       Params:
         setting = `TRUE` to show standard title buttons
   */
-  void setShowEndTitleButtons(bool setting)
+  void setShowEndTitleButtons(bool setting) nothrow
   {
     adw_header_bar_set_show_end_title_buttons(cast(AdwHeaderBar*)this._cPtr, setting);
   }
@@ -565,7 +565,7 @@ class HeaderBar : gtk.widget.Widget
       Params:
         setting = `TRUE` to show standard title buttons
   */
-  void setShowStartTitleButtons(bool setting)
+  void setShowStartTitleButtons(bool setting) nothrow
   {
     adw_header_bar_set_show_start_title_buttons(cast(AdwHeaderBar*)this._cPtr, setting);
   }
@@ -576,7 +576,7 @@ class HeaderBar : gtk.widget.Widget
       Params:
         showTitle = whether the title widget is visible
   */
-  void setShowTitle(bool showTitle)
+  void setShowTitle(bool showTitle) nothrow
   {
     adw_header_bar_set_show_title(cast(AdwHeaderBar*)this._cPtr, showTitle);
   }
@@ -602,7 +602,7 @@ class HeaderBar : gtk.widget.Widget
       Params:
         titleWidget = a widget to use for a title
   */
-  void setTitleWidget(gtk.widget.Widget titleWidget = null)
+  void setTitleWidget(gtk.widget.Widget titleWidget = null) nothrow
   {
     adw_header_bar_set_title_widget(cast(AdwHeaderBar*)this._cPtr, titleWidget ? cast(GtkWidget*)titleWidget._cPtr(No.Dup) : null);
   }
@@ -619,7 +619,7 @@ class HeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The policy for aligning the center widget.
       Returns: Builder instance for fluent chaining
   */
-  T centeringPolicy(adw.types.CenteringPolicy propval)
+  T centeringPolicy(adw.types.CenteringPolicy propval) nothrow
   {
     return setProperty("centering-policy", propval);
   }
@@ -641,7 +641,7 @@ class HeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           and minimize, maximize and close buttons at the end.
       Returns: Builder instance for fluent chaining
   */
-  T decorationLayout(string propval)
+  T decorationLayout(string propval) nothrow
   {
     return setProperty("decoration-layout", propval);
   }
@@ -655,7 +655,7 @@ class HeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           [adw.navigation_view.NavigationView]. Usually, there is no reason to set this to `FALSE`.
       Returns: Builder instance for fluent chaining
   */
-  T showBackButton(bool propval)
+  T showBackButton(bool propval) nothrow
   {
     return setProperty("show-back-button", propval);
   }
@@ -673,7 +673,7 @@ class HeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           closed).
       Returns: Builder instance for fluent chaining
   */
-  T showEndTitleButtons(bool propval)
+  T showEndTitleButtons(bool propval) nothrow
   {
     return setProperty("show-end-title-buttons", propval);
   }
@@ -691,7 +691,7 @@ class HeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           closed).
       Returns: Builder instance for fluent chaining
   */
-  T showStartTitleButtons(bool propval)
+  T showStartTitleButtons(bool propval) nothrow
   {
     return setProperty("show-start-title-buttons", propval);
   }
@@ -702,7 +702,7 @@ class HeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether the title widget should be shown.
       Returns: Builder instance for fluent chaining
   */
-  T showTitle(bool propval)
+  T showTitle(bool propval) nothrow
   {
     return setProperty("show-title", propval);
   }
@@ -728,7 +728,7 @@ class HeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           ```
       Returns: Builder instance for fluent chaining
   */
-  T titleWidget(gtk.widget.Widget propval)
+  T titleWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("title-widget", propval);
   }
@@ -741,7 +741,7 @@ final class HeaderBarGidBuilder : HeaderBarGidBuilderImpl!HeaderBarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  HeaderBar build()
+  HeaderBar build() nothrow
   {
     return new HeaderBar(cast(void*)createGObject(HeaderBar._getGType), No.Take);
   }

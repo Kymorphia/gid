@@ -25,32 +25,32 @@ class VideoInfo : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_info_get_type != &gidSymbolNotFound ? gst_video_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VideoInfo self()
+  override VideoInfo self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class VideoInfo : gobject.boxed.Boxed
       Get `finfo` field.
       Returns: the format info of the video
   */
-  @property gstvideo.video_format_info.VideoFormatInfo finfo()
+  @property gstvideo.video_format_info.VideoFormatInfo finfo() nothrow
   {
     return new gstvideo.video_format_info.VideoFormatInfo(cast(GstVideoFormatInfo*)(cast(GstVideoInfo*)this._cPtr).finfo, No.Take);
   }
@@ -68,7 +68,7 @@ class VideoInfo : gobject.boxed.Boxed
       Get `interlaceMode` field.
       Returns: the interlace mode
   */
-  @property gstvideo.types.VideoInterlaceMode interlaceMode()
+  @property gstvideo.types.VideoInterlaceMode interlaceMode() nothrow
   {
     return cast(gstvideo.types.VideoInterlaceMode)(cast(GstVideoInfo*)this._cPtr).interlaceMode;
   }
@@ -78,7 +78,7 @@ class VideoInfo : gobject.boxed.Boxed
       Params:
         propval = the interlace mode
   */
-  @property void interlaceMode(gstvideo.types.VideoInterlaceMode propval)
+  @property void interlaceMode(gstvideo.types.VideoInterlaceMode propval) nothrow
   {
     (cast(GstVideoInfo*)this._cPtr).interlaceMode = cast(GstVideoInterlaceMode)propval;
   }
@@ -87,7 +87,7 @@ class VideoInfo : gobject.boxed.Boxed
       Get `flags` field.
       Returns: additional video flags
   */
-  @property gstvideo.types.VideoFlags flags()
+  @property gstvideo.types.VideoFlags flags() nothrow
   {
     return cast(gstvideo.types.VideoFlags)(cast(GstVideoInfo*)this._cPtr).flags;
   }
@@ -97,7 +97,7 @@ class VideoInfo : gobject.boxed.Boxed
       Params:
         propval = additional video flags
   */
-  @property void flags(gstvideo.types.VideoFlags propval)
+  @property void flags(gstvideo.types.VideoFlags propval) nothrow
   {
     (cast(GstVideoInfo*)this._cPtr).flags = cast(GstVideoFlags)propval;
   }
@@ -106,7 +106,7 @@ class VideoInfo : gobject.boxed.Boxed
       Get `width` field.
       Returns: the width of the video
   */
-  @property int width()
+  @property int width() nothrow
   {
     return (cast(GstVideoInfo*)this._cPtr).width;
   }
@@ -116,7 +116,7 @@ class VideoInfo : gobject.boxed.Boxed
       Params:
         propval = the width of the video
   */
-  @property void width(int propval)
+  @property void width(int propval) nothrow
   {
     (cast(GstVideoInfo*)this._cPtr).width = propval;
   }
@@ -125,7 +125,7 @@ class VideoInfo : gobject.boxed.Boxed
       Get `height` field.
       Returns: the height of the video
   */
-  @property int height()
+  @property int height() nothrow
   {
     return (cast(GstVideoInfo*)this._cPtr).height;
   }
@@ -135,7 +135,7 @@ class VideoInfo : gobject.boxed.Boxed
       Params:
         propval = the height of the video
   */
-  @property void height(int propval)
+  @property void height(int propval) nothrow
   {
     (cast(GstVideoInfo*)this._cPtr).height = propval;
   }
@@ -144,7 +144,7 @@ class VideoInfo : gobject.boxed.Boxed
       Get `size` field.
       Returns: the default size of one frame
   */
-  @property size_t size()
+  @property size_t size() nothrow
   {
     return (cast(GstVideoInfo*)this._cPtr).size;
   }
@@ -154,7 +154,7 @@ class VideoInfo : gobject.boxed.Boxed
       Params:
         propval = the default size of one frame
   */
-  @property void size(size_t propval)
+  @property void size(size_t propval) nothrow
   {
     (cast(GstVideoInfo*)this._cPtr).size = propval;
   }
@@ -163,7 +163,7 @@ class VideoInfo : gobject.boxed.Boxed
       Get `views` field.
       Returns: the number of views for multiview video
   */
-  @property int views()
+  @property int views() nothrow
   {
     return (cast(GstVideoInfo*)this._cPtr).views;
   }
@@ -173,7 +173,7 @@ class VideoInfo : gobject.boxed.Boxed
       Params:
         propval = the number of views for multiview video
   */
-  @property void views(int propval)
+  @property void views(int propval) nothrow
   {
     (cast(GstVideoInfo*)this._cPtr).views = propval;
   }
@@ -182,7 +182,7 @@ class VideoInfo : gobject.boxed.Boxed
       Get `chromaSite` field.
       Returns: a #GstVideoChromaSite.
   */
-  @property gstvideo.types.VideoChromaSite chromaSite()
+  @property gstvideo.types.VideoChromaSite chromaSite() nothrow
   {
     return cast(gstvideo.types.VideoChromaSite)(cast(GstVideoInfo*)this._cPtr).chromaSite;
   }
@@ -192,7 +192,7 @@ class VideoInfo : gobject.boxed.Boxed
       Params:
         propval = a #GstVideoChromaSite.
   */
-  @property void chromaSite(gstvideo.types.VideoChromaSite propval)
+  @property void chromaSite(gstvideo.types.VideoChromaSite propval) nothrow
   {
     (cast(GstVideoInfo*)this._cPtr).chromaSite = cast(GstVideoChromaSite)propval;
   }
@@ -201,7 +201,7 @@ class VideoInfo : gobject.boxed.Boxed
       Get `colorimetry` field.
       Returns: the colorimetry info
   */
-  @property gstvideo.video_colorimetry.VideoColorimetry colorimetry()
+  @property gstvideo.video_colorimetry.VideoColorimetry colorimetry() nothrow
   {
     return cToD!(gstvideo.video_colorimetry.VideoColorimetry)(cast(void*)&(cast(GstVideoInfo*)this._cPtr).colorimetry);
   }
@@ -211,7 +211,7 @@ class VideoInfo : gobject.boxed.Boxed
       Params:
         propval = the colorimetry info
   */
-  @property void colorimetry(gstvideo.video_colorimetry.VideoColorimetry propval)
+  @property void colorimetry(gstvideo.video_colorimetry.VideoColorimetry propval) nothrow
   {
     (cast(GstVideoInfo*)this._cPtr).colorimetry = cast(GstVideoColorimetry)propval;
   }
@@ -220,7 +220,7 @@ class VideoInfo : gobject.boxed.Boxed
       Get `parN` field.
       Returns: the pixel-aspect-ratio numerator
   */
-  @property int parN()
+  @property int parN() nothrow
   {
     return (cast(GstVideoInfo*)this._cPtr).parN;
   }
@@ -230,7 +230,7 @@ class VideoInfo : gobject.boxed.Boxed
       Params:
         propval = the pixel-aspect-ratio numerator
   */
-  @property void parN(int propval)
+  @property void parN(int propval) nothrow
   {
     (cast(GstVideoInfo*)this._cPtr).parN = propval;
   }
@@ -239,7 +239,7 @@ class VideoInfo : gobject.boxed.Boxed
       Get `parD` field.
       Returns: the pixel-aspect-ratio denominator
   */
-  @property int parD()
+  @property int parD() nothrow
   {
     return (cast(GstVideoInfo*)this._cPtr).parD;
   }
@@ -249,7 +249,7 @@ class VideoInfo : gobject.boxed.Boxed
       Params:
         propval = the pixel-aspect-ratio denominator
   */
-  @property void parD(int propval)
+  @property void parD(int propval) nothrow
   {
     (cast(GstVideoInfo*)this._cPtr).parD = propval;
   }
@@ -258,7 +258,7 @@ class VideoInfo : gobject.boxed.Boxed
       Get `fpsN` field.
       Returns: the framerate numerator
   */
-  @property int fpsN()
+  @property int fpsN() nothrow
   {
     return (cast(GstVideoInfo*)this._cPtr).fpsN;
   }
@@ -268,7 +268,7 @@ class VideoInfo : gobject.boxed.Boxed
       Params:
         propval = the framerate numerator
   */
-  @property void fpsN(int propval)
+  @property void fpsN(int propval) nothrow
   {
     (cast(GstVideoInfo*)this._cPtr).fpsN = propval;
   }
@@ -277,7 +277,7 @@ class VideoInfo : gobject.boxed.Boxed
       Get `fpsD` field.
       Returns: the framerate denominator
   */
-  @property int fpsD()
+  @property int fpsD() nothrow
   {
     return (cast(GstVideoInfo*)this._cPtr).fpsD;
   }
@@ -287,7 +287,7 @@ class VideoInfo : gobject.boxed.Boxed
       Params:
         propval = the framerate denominator
   */
-  @property void fpsD(int propval)
+  @property void fpsD(int propval) nothrow
   {
     (cast(GstVideoInfo*)this._cPtr).fpsD = propval;
   }
@@ -297,7 +297,7 @@ class VideoInfo : gobject.boxed.Boxed
       [gstvideo.video_info.VideoInfo.init_].
       Returns: a new #GstVideoInfo. free with [gstvideo.video_info.VideoInfo.free].
   */
-  this()
+  this() nothrow
   {
     GstVideoInfo* _cretval;
     _cretval = gst_video_info_new();
@@ -311,7 +311,7 @@ class VideoInfo : gobject.boxed.Boxed
         caps = a #GstCaps
       Returns: A #GstVideoInfo, or null if caps couldn't be parsed
   */
-  static gstvideo.video_info.VideoInfo newFromCaps(gst.caps.Caps caps)
+  static gstvideo.video_info.VideoInfo newFromCaps(gst.caps.Caps caps) nothrow
   {
     GstVideoInfo* _cretval;
     _cretval = gst_video_info_new_from_caps(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
@@ -331,7 +331,7 @@ class VideoInfo : gobject.boxed.Boxed
       Returns: false if alignment could not be applied, e.g. because the
           size of a frame can't be represented as a 32 bit integer (Since: 1.12)
   */
-  bool align_(gstvideo.video_alignment.VideoAlignment align_)
+  bool align_(gstvideo.video_alignment.VideoAlignment align_) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_info_align(cast(GstVideoInfo*)this._cPtr, cast(GstVideoAlignment*)&align_);
@@ -355,7 +355,7 @@ class VideoInfo : gobject.boxed.Boxed
       Returns: false if alignment could not be applied, e.g. because the
           size of a frame can't be represented as a 32 bit integer
   */
-  bool alignFull(gstvideo.video_alignment.VideoAlignment align_, out size_t planeSize)
+  bool alignFull(gstvideo.video_alignment.VideoAlignment align_, out size_t planeSize) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_info_align_full(cast(GstVideoInfo*)this._cPtr, cast(GstVideoAlignment*)&align_, cast(size_t*)&planeSize);
@@ -375,7 +375,7 @@ class VideoInfo : gobject.boxed.Boxed
         destValue = pointer to destination value
       Returns: TRUE if the conversion was successful.
   */
-  bool convert(gst.types.Format srcFormat, long srcValue, gst.types.Format destFormat, out long destValue)
+  bool convert(gst.types.Format srcFormat, long srcValue, gst.types.Format destFormat, out long destValue) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_info_convert(cast(const(GstVideoInfo)*)this._cPtr, srcFormat, srcValue, destFormat, cast(long*)&destValue);
@@ -386,7 +386,7 @@ class VideoInfo : gobject.boxed.Boxed
       Copy a GstVideoInfo structure.
       Returns: a new #GstVideoInfo. free with gst_video_info_free.
   */
-  gstvideo.video_info.VideoInfo copy()
+  gstvideo.video_info.VideoInfo copy() nothrow
   {
     GstVideoInfo* _cretval;
     _cretval = gst_video_info_copy(cast(const(GstVideoInfo)*)this._cPtr);
@@ -401,7 +401,7 @@ class VideoInfo : gobject.boxed.Boxed
         other = a #GstVideoInfo
       Returns: true if info and other are equal, else false.
   */
-  bool isEqual(gstvideo.video_info.VideoInfo other)
+  bool isEqual(gstvideo.video_info.VideoInfo other) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_info_is_equal(cast(const(GstVideoInfo)*)this._cPtr, other ? cast(const(GstVideoInfo)*)other._cPtr(No.Dup) : null);
@@ -422,7 +422,7 @@ class VideoInfo : gobject.boxed.Boxed
       Returns: false if the returned video info is invalid, e.g. because the
           size of a frame can't be represented as a 32 bit integer (Since: 1.12)
   */
-  bool setFormat(gstvideo.types.VideoFormat format, uint width, uint height)
+  bool setFormat(gstvideo.types.VideoFormat format, uint width, uint height) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_info_set_format(cast(GstVideoInfo*)this._cPtr, format, width, height);
@@ -441,7 +441,7 @@ class VideoInfo : gobject.boxed.Boxed
       Returns: false if the returned video info is invalid, e.g. because the
           size of a frame can't be represented as a 32 bit integer.
   */
-  bool setInterlacedFormat(gstvideo.types.VideoFormat format, gstvideo.types.VideoInterlaceMode mode, uint width, uint height)
+  bool setInterlacedFormat(gstvideo.types.VideoFormat format, gstvideo.types.VideoInterlaceMode mode, uint width, uint height) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_info_set_interlaced_format(cast(GstVideoInfo*)this._cPtr, format, mode, width, height);
@@ -452,7 +452,7 @@ class VideoInfo : gobject.boxed.Boxed
       Convert the values of info into a #GstCaps.
       Returns: a new #GstCaps containing the info of info.
   */
-  gst.caps.Caps toCaps()
+  gst.caps.Caps toCaps() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_video_info_to_caps(cast(const(GstVideoInfo)*)this._cPtr);
@@ -468,7 +468,7 @@ class VideoInfo : gobject.boxed.Boxed
         caps = a #GstCaps
       Returns: TRUE if caps could be parsed
   */
-  static bool fromCaps(out gstvideo.video_info.VideoInfo info, gst.caps.Caps caps)
+  static bool fromCaps(out gstvideo.video_info.VideoInfo info, gst.caps.Caps caps) nothrow
   {
     bool _retval;
     GstVideoInfo _info;
@@ -483,7 +483,7 @@ class VideoInfo : gobject.boxed.Boxed
       Params:
         info = a #GstVideoInfo
   */
-  static void init_(out gstvideo.video_info.VideoInfo info)
+  static void init_(out gstvideo.video_info.VideoInfo info) nothrow
   {
     GstVideoInfo _info;
     gst_video_info_init(&_info);

@@ -17,7 +17,7 @@ struct SessionError
       Registers error quark for SoupSession if needed.
       Returns: Error quark for SoupSession.
   */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = soup_session_error_quark();
@@ -27,12 +27,12 @@ struct SessionError
 
 class SessionException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(soup.session_error.SessionError.quark, cast(int)code, msg);
   }

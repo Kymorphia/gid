@@ -18,11 +18,8 @@ class StrokeNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.stroke_node.StrokeNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -38,7 +35,7 @@ class StrokeNode : gsk.render_node.RenderNode
         stroke = The stroke attributes to use
       Returns: A new #GskRenderNode
   */
-  this(gsk.render_node.RenderNode child, gsk.path.Path path, gsk.stroke.Stroke stroke)
+  this(gsk.render_node.RenderNode child, gsk.path.Path path, gsk.stroke.Stroke stroke) nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_stroke_node_new(child ? cast(GskRenderNode*)child._cPtr(No.Dup) : null, path ? cast(GskPath*)path._cPtr(No.Dup) : null, stroke ? cast(const(GskStroke)*)stroke._cPtr(No.Dup) : null);
@@ -49,7 +46,7 @@ class StrokeNode : gsk.render_node.RenderNode
       Gets the child node that is getting drawn by the given node.
       Returns: The child that is getting drawn
   */
-  gsk.render_node.RenderNode getChild()
+  gsk.render_node.RenderNode getChild() nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_stroke_node_get_child(cast(const(GskRenderNode)*)this._cPtr);
@@ -62,7 +59,7 @@ class StrokeNode : gsk.render_node.RenderNode
       the node.
       Returns: a #GskPath
   */
-  gsk.path.Path getPath()
+  gsk.path.Path getPath() nothrow
   {
     GskPath* _cretval;
     _cretval = gsk_stroke_node_get_path(cast(const(GskRenderNode)*)this._cPtr);
@@ -74,7 +71,7 @@ class StrokeNode : gsk.render_node.RenderNode
       Retrieves the stroke attributes used in this node.
       Returns: a #GskStroke
   */
-  gsk.stroke.Stroke getStroke()
+  gsk.stroke.Stroke getStroke() nothrow
   {
     const(GskStroke)* _cretval;
     _cretval = gsk_stroke_node_get_stroke(cast(const(GskRenderNode)*)this._cPtr);

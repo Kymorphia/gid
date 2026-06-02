@@ -26,7 +26,7 @@ template TlsBackendT()
       Returns: the #GType of backend's #GTlsCertificate
           implementation.
   */
-  override gobject.types.GType getCertificateType()
+  override gobject.types.GType getCertificateType() nothrow
   {
     gobject.types.GType _retval;
     _retval = g_tls_backend_get_certificate_type(cast(GTlsBackend*)this._cPtr);
@@ -38,7 +38,7 @@ template TlsBackendT()
       Returns: the #GType of backend's #GTlsClientConnection
           implementation.
   */
-  override gobject.types.GType getClientConnectionType()
+  override gobject.types.GType getClientConnectionType() nothrow
   {
     gobject.types.GType _retval;
     _retval = g_tls_backend_get_client_connection_type(cast(GTlsBackend*)this._cPtr);
@@ -50,7 +50,7 @@ template TlsBackendT()
       Returns: the default database, which should be
                       unreffed when done.
   */
-  override gio.tls_database.TlsDatabase getDefaultDatabase()
+  override gio.tls_database.TlsDatabase getDefaultDatabase() nothrow
   {
     GTlsDatabase* _cretval;
     _cretval = g_tls_backend_get_default_database(cast(GTlsBackend*)this._cPtr);
@@ -63,7 +63,7 @@ template TlsBackendT()
       Returns: the #GType of backend’s #GDtlsClientConnection
           implementation, or `G_TYPE_INVALID` if this backend doesn’t support DTLS.
   */
-  override gobject.types.GType getDtlsClientConnectionType()
+  override gobject.types.GType getDtlsClientConnectionType() nothrow
   {
     gobject.types.GType _retval;
     _retval = g_tls_backend_get_dtls_client_connection_type(cast(GTlsBackend*)this._cPtr);
@@ -75,7 +75,7 @@ template TlsBackendT()
       Returns: the #GType of backend’s #GDtlsServerConnection
           implementation, or `G_TYPE_INVALID` if this backend doesn’t support DTLS.
   */
-  override gobject.types.GType getDtlsServerConnectionType()
+  override gobject.types.GType getDtlsServerConnectionType() nothrow
   {
     gobject.types.GType _retval;
     _retval = g_tls_backend_get_dtls_server_connection_type(cast(GTlsBackend*)this._cPtr);
@@ -86,7 +86,7 @@ template TlsBackendT()
       Gets the #GType of backend's #GTlsFileDatabase implementation.
       Returns: the #GType of backend's #GTlsFileDatabase implementation.
   */
-  override gobject.types.GType getFileDatabaseType()
+  override gobject.types.GType getFileDatabaseType() nothrow
   {
     gobject.types.GType _retval;
     _retval = g_tls_backend_get_file_database_type(cast(GTlsBackend*)this._cPtr);
@@ -98,7 +98,7 @@ template TlsBackendT()
       Returns: the #GType of backend's #GTlsServerConnection
           implementation.
   */
-  override gobject.types.GType getServerConnectionType()
+  override gobject.types.GType getServerConnectionType() nothrow
   {
     gobject.types.GType _retval;
     _retval = g_tls_backend_get_server_connection_type(cast(GTlsBackend*)this._cPtr);
@@ -118,7 +118,7 @@ template TlsBackendT()
       Params:
         database = the #GTlsDatabase
   */
-  override void setDefaultDatabase(gio.tls_database.TlsDatabase database = null)
+  override void setDefaultDatabase(gio.tls_database.TlsDatabase database = null) nothrow
   {
     g_tls_backend_set_default_database(cast(GTlsBackend*)this._cPtr, database ? cast(GTlsDatabase*)database._cPtr(No.Dup) : null);
   }
@@ -128,7 +128,7 @@ template TlsBackendT()
       support is available, and vice-versa.
       Returns: whether DTLS is supported
   */
-  override bool supportsDtls()
+  override bool supportsDtls() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_tls_backend_supports_dtls(cast(GTlsBackend*)this._cPtr);
@@ -140,7 +140,7 @@ template TlsBackendT()
       #GTlsBackend, it means no "real" TLS backend is available.
       Returns: whether or not TLS is supported
   */
-  override bool supportsTls()
+  override bool supportsTls() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_tls_backend_supports_tls(cast(GTlsBackend*)this._cPtr);

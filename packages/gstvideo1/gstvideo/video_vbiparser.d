@@ -16,32 +16,32 @@ class VideoVBIParser : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_vbi_parser_get_type != &gidSymbolNotFound ? gst_video_vbi_parser_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VideoVBIParser self()
+  override VideoVBIParser self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class VideoVBIParser : gobject.boxed.Boxed
       Returns: The new #GstVideoVBIParser or null if the format and/or pixel_width
         is not supported.
   */
-  this(gstvideo.types.VideoFormat format, uint pixelWidth)
+  this(gstvideo.types.VideoFormat format, uint pixelWidth) nothrow
   {
     GstVideoVBIParser* _cretval;
     _cretval = gst_video_vbi_parser_new(format, pixelWidth);
@@ -63,7 +63,7 @@ class VideoVBIParser : gobject.boxed.Boxed
   }
 
   /** */
-  gstvideo.video_vbiparser.VideoVBIParser copy()
+  gstvideo.video_vbiparser.VideoVBIParser copy() nothrow
   {
     GstVideoVBIParser* _cretval;
     _cretval = gst_video_vbi_parser_copy(cast(const(GstVideoVBIParser)*)this._cPtr);
@@ -80,7 +80,7 @@ class VideoVBIParser : gobject.boxed.Boxed
         anc was filled. [gstvideo.types.VideoVBIParserResult.Done] if there wasn't any
         data.
   */
-  gstvideo.types.VideoVBIParserResult getAncillary(out gstvideo.types.VideoAncillary anc)
+  gstvideo.types.VideoVBIParserResult getAncillary(out gstvideo.types.VideoAncillary anc) nothrow
   {
     GstVideoVBIParserResult _cretval;
     _cretval = gst_video_vbi_parser_get_ancillary(cast(GstVideoVBIParser*)this._cPtr, &anc);

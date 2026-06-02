@@ -26,7 +26,7 @@ template FileDescriptorBasedT()
       Gets the underlying file descriptor.
       Returns: The file descriptor
   */
-  override int getFd()
+  override int getFd() nothrow
   {
     int _retval;
     _retval = g_file_descriptor_based_get_fd(cast(GFileDescriptorBased*)this._cPtr);

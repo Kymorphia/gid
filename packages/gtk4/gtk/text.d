@@ -94,26 +94,26 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_get_type != &gidSymbolNotFound ? gtk_text_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Text self()
+  override Text self() nothrow
   {
     return this;
   }
@@ -122,7 +122,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Get builder for [gtk.text.Text]
       Returns: New builder object
   */
-  static TextGidBuilder builder()
+  static TextGidBuilder builder() nothrow
   {
     return new TextGidBuilder;
   }
@@ -131,7 +131,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Get `activatesDefault` property.
       Returns: Whether to activate the default widget when Enter is pressed.
   */
-  @property bool activatesDefault()
+  @property bool activatesDefault() nothrow
   {
     return getActivatesDefault();
   }
@@ -141,7 +141,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         propval = Whether to activate the default widget when Enter is pressed.
   */
-  @property void activatesDefault(bool propval)
+  @property void activatesDefault(bool propval) nothrow
   {
     setActivatesDefault(propval);
   }
@@ -155,7 +155,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         The [pango.attribute.Attribute]'s @start_index and @end_index must refer to the
         [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
   */
-  @property pango.attr_list.AttrList attributes()
+  @property pango.attr_list.AttrList attributes() nothrow
   {
     return getAttributes();
   }
@@ -170,7 +170,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
           The [pango.attribute.Attribute]'s @start_index and @end_index must refer to the
           [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
   */
-  @property void attributes(pango.attr_list.AttrList propval)
+  @property void attributes(pango.attr_list.AttrList propval) nothrow
   {
     setAttributes(propval);
   }
@@ -179,7 +179,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Get `buffer` property.
       Returns: The [gtk.entry_buffer.EntryBuffer] object which stores the text.
   */
-  @property gtk.entry_buffer.EntryBuffer buffer()
+  @property gtk.entry_buffer.EntryBuffer buffer() nothrow
   {
     return getBuffer();
   }
@@ -189,7 +189,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         propval = The [gtk.entry_buffer.EntryBuffer] object which stores the text.
   */
-  @property void buffer(gtk.entry_buffer.EntryBuffer propval)
+  @property void buffer(gtk.entry_buffer.EntryBuffer propval) nothrow
   {
     setBuffer(propval);
   }
@@ -198,7 +198,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Get `enableEmojiCompletion` property.
       Returns: Whether to suggest Emoji replacements.
   */
-  @property bool enableEmojiCompletion()
+  @property bool enableEmojiCompletion() nothrow
   {
     return getEnableEmojiCompletion();
   }
@@ -208,7 +208,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         propval = Whether to suggest Emoji replacements.
   */
-  @property void enableEmojiCompletion(bool propval)
+  @property void enableEmojiCompletion(bool propval) nothrow
   {
     setEnableEmojiCompletion(propval);
   }
@@ -218,7 +218,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Returns: A menu model whose contents will be appended to
         the context menu.
   */
-  @property gio.menu_model.MenuModel extraMenu()
+  @property gio.menu_model.MenuModel extraMenu() nothrow
   {
     return getExtraMenu();
   }
@@ -229,7 +229,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         propval = A menu model whose contents will be appended to
           the context menu.
   */
-  @property void extraMenu(gio.menu_model.MenuModel propval)
+  @property void extraMenu(gio.menu_model.MenuModel propval) nothrow
   {
     setExtraMenu(propval);
   }
@@ -244,7 +244,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         IM module setting. See the [gtk.settings.Settings.gtkImModule]
         property.
   */
-  @property string imModule()
+  @property string imModule() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("im-module");
   }
@@ -260,7 +260,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
           IM module setting. See the [gtk.settings.Settings.gtkImModule]
           property.
   */
-  @property void imModule(string propval)
+  @property void imModule(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("im-module", propval);
   }
@@ -270,7 +270,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Returns: Additional hints that allow input methods to fine-tune
         their behaviour.
   */
-  @property gtk.types.InputHints inputHints()
+  @property gtk.types.InputHints inputHints() nothrow
   {
     return getInputHints();
   }
@@ -281,7 +281,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         propval = Additional hints that allow input methods to fine-tune
           their behaviour.
   */
-  @property void inputHints(gtk.types.InputHints propval)
+  @property void inputHints(gtk.types.InputHints propval) nothrow
   {
     setInputHints(propval);
   }
@@ -297,7 +297,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         [gtk.types.InputPurpose.Pin] is independent from setting
         [gtk.text.Text.visibility].
   */
-  @property gtk.types.InputPurpose inputPurpose()
+  @property gtk.types.InputPurpose inputPurpose() nothrow
   {
     return getInputPurpose();
   }
@@ -314,7 +314,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
           [gtk.types.InputPurpose.Pin] is independent from setting
           [gtk.text.Text.visibility].
   */
-  @property void inputPurpose(gtk.types.InputPurpose propval)
+  @property void inputPurpose(gtk.types.InputPurpose propval) nothrow
   {
     setInputPurpose(propval);
   }
@@ -323,7 +323,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Get `invisibleChar` property.
       Returns: The character to used when masking contents (in “password mode”).
   */
-  @property uint invisibleChar()
+  @property uint invisibleChar() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("invisible-char");
   }
@@ -333,7 +333,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         propval = The character to used when masking contents (in “password mode”).
   */
-  @property void invisibleChar(uint propval)
+  @property void invisibleChar(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("invisible-char", propval);
   }
@@ -342,7 +342,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Get `invisibleCharSet` property.
       Returns: Whether the invisible char has been set for the [gtk.text.Text].
   */
-  @property bool invisibleCharSet()
+  @property bool invisibleCharSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("invisible-char-set");
   }
@@ -352,7 +352,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         propval = Whether the invisible char has been set for the [gtk.text.Text].
   */
-  @property void invisibleCharSet(bool propval)
+  @property void invisibleCharSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("invisible-char-set", propval);
   }
@@ -363,7 +363,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         
         Zero indicates no limit.
   */
-  @property int maxLength()
+  @property int maxLength() nothrow
   {
     return getMaxLength();
   }
@@ -375,7 +375,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
           
           Zero indicates no limit.
   */
-  @property void maxLength(int propval)
+  @property void maxLength(int propval) nothrow
   {
     setMaxLength(propval);
   }
@@ -384,7 +384,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Get `overwriteMode` property.
       Returns: If text is overwritten when typing in the [gtk.text.Text].
   */
-  @property bool overwriteMode()
+  @property bool overwriteMode() nothrow
   {
     return getOverwriteMode();
   }
@@ -394,7 +394,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         propval = If text is overwritten when typing in the [gtk.text.Text].
   */
-  @property void overwriteMode(bool propval)
+  @property void overwriteMode(bool propval) nothrow
   {
     setOverwriteMode(propval);
   }
@@ -404,7 +404,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Returns: The text that will be displayed in the [gtk.text.Text] when it is empty
         and unfocused.
   */
-  @property string placeholderText()
+  @property string placeholderText() nothrow
   {
     return getPlaceholderText();
   }
@@ -415,7 +415,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         propval = The text that will be displayed in the [gtk.text.Text] when it is empty
           and unfocused.
   */
-  @property void placeholderText(string propval)
+  @property void placeholderText(string propval) nothrow
   {
     setPlaceholderText(propval);
   }
@@ -424,7 +424,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Get `propagateTextWidth` property.
       Returns: Whether the widget should grow and shrink with the content.
   */
-  @property bool propagateTextWidth()
+  @property bool propagateTextWidth() nothrow
   {
     return getPropagateTextWidth();
   }
@@ -434,7 +434,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         propval = Whether the widget should grow and shrink with the content.
   */
-  @property void propagateTextWidth(bool propval)
+  @property void propagateTextWidth(bool propval) nothrow
   {
     setPropagateTextWidth(propval);
   }
@@ -443,7 +443,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Get `scrollOffset` property.
       Returns: Number of pixels scrolled of the screen to the left.
   */
-  @property int scrollOffset()
+  @property int scrollOffset() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("scroll-offset");
   }
@@ -452,7 +452,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Get `tabs` property.
       Returns: A list of tabstops to apply to the text of the [gtk.text.Text].
   */
-  @property pango.tab_array.TabArray tabs()
+  @property pango.tab_array.TabArray tabs() nothrow
   {
     return getTabs();
   }
@@ -462,7 +462,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         propval = A list of tabstops to apply to the text of the [gtk.text.Text].
   */
-  @property void tabs(pango.tab_array.TabArray propval)
+  @property void tabs(pango.tab_array.TabArray propval) nothrow
   {
     setTabs(propval);
   }
@@ -471,7 +471,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Get `truncateMultiline` property.
       Returns: When true, pasted multi-line text is truncated to the first line.
   */
-  @property bool truncateMultiline()
+  @property bool truncateMultiline() nothrow
   {
     return getTruncateMultiline();
   }
@@ -481,7 +481,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         propval = When true, pasted multi-line text is truncated to the first line.
   */
-  @property void truncateMultiline(bool propval)
+  @property void truncateMultiline(bool propval) nothrow
   {
     setTruncateMultiline(propval);
   }
@@ -490,7 +490,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Get `visibility` property.
       Returns: If false, the text is masked with the “invisible char”.
   */
-  @property bool visibility()
+  @property bool visibility() nothrow
   {
     return getVisibility();
   }
@@ -500,7 +500,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         propval = If false, the text is masked with the “invisible char”.
   */
-  @property void visibility(bool propval)
+  @property void visibility(bool propval) nothrow
   {
     setVisibility(propval);
   }
@@ -512,7 +512,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Creates a new [gtk.text.Text].
       Returns: a new [gtk.text.Text].
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_text_new();
@@ -526,7 +526,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         buffer = The buffer to use for the new [gtk.text.Text].
       Returns: a new [gtk.text.Text]
   */
-  static gtk.text.Text newWithBuffer(gtk.entry_buffer.EntryBuffer buffer)
+  static gtk.text.Text newWithBuffer(gtk.entry_buffer.EntryBuffer buffer) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_text_new_with_buffer(buffer ? cast(GtkEntryBuffer*)buffer._cPtr(No.Dup) : null);
@@ -551,7 +551,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         strong = location to store the strong cursor position
         weak = location to store the weak cursor position
   */
-  void computeCursorExtents(size_t position, out graphene.rect.Rect strong, out graphene.rect.Rect weak)
+  void computeCursorExtents(size_t position, out graphene.rect.Rect strong, out graphene.rect.Rect weak) nothrow
   {
     graphene_rect_t _strong;
     graphene_rect_t _weak;
@@ -567,7 +567,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       See [gtk.text.Text.setActivatesDefault].
       Returns: true if the [gtk.text.Text] will activate the default widget
   */
-  bool getActivatesDefault()
+  bool getActivatesDefault() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_get_activates_default(cast(GtkText*)this._cPtr);
@@ -580,7 +580,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       See [gtk.text.Text.setAttributes].
       Returns: the attribute list
   */
-  pango.attr_list.AttrList getAttributes()
+  pango.attr_list.AttrList getAttributes() nothrow
   {
     PangoAttrList* _cretval;
     _cretval = gtk_text_get_attributes(cast(GtkText*)this._cPtr);
@@ -593,7 +593,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       this widget.
       Returns: A [gtk.entry_buffer.EntryBuffer] object.
   */
-  gtk.entry_buffer.EntryBuffer getBuffer()
+  gtk.entry_buffer.EntryBuffer getBuffer() nothrow
   {
     GtkEntryBuffer* _cretval;
     _cretval = gtk_text_get_buffer(cast(GtkText*)this._cPtr);
@@ -606,7 +606,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       [gtk.text.Text] widget.
       Returns: true if Emoji completion is enabled
   */
-  bool getEnableEmojiCompletion()
+  bool getEnableEmojiCompletion() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_get_enable_emoji_completion(cast(GtkText*)this._cPtr);
@@ -619,7 +619,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       See [gtk.text.Text.setExtraMenu].
       Returns: the menu model
   */
-  gio.menu_model.MenuModel getExtraMenu()
+  gio.menu_model.MenuModel getExtraMenu() nothrow
   {
     GMenuModel* _cretval;
     _cretval = gtk_text_get_extra_menu(cast(GtkText*)this._cPtr);
@@ -631,7 +631,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Gets the input hints of the [gtk.text.Text].
       Returns: 
   */
-  gtk.types.InputHints getInputHints()
+  gtk.types.InputHints getInputHints() nothrow
   {
     GtkInputHints _cretval;
     _cretval = gtk_text_get_input_hints(cast(GtkText*)this._cPtr);
@@ -643,7 +643,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Gets the input purpose of the [gtk.text.Text].
       Returns: 
   */
-  gtk.types.InputPurpose getInputPurpose()
+  gtk.types.InputPurpose getInputPurpose() nothrow
   {
     GtkInputPurpose _cretval;
     _cretval = gtk_text_get_input_purpose(cast(GtkText*)this._cPtr);
@@ -660,7 +660,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Returns: the current invisible char, or 0, if text does not
           show invisible text at all.
   */
-  dchar getInvisibleChar()
+  dchar getInvisibleChar() nothrow
   {
     dchar _retval;
     _retval = gtk_text_get_invisible_char(cast(GtkText*)this._cPtr);
@@ -677,7 +677,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Returns: the maximum allowed number of characters
           in [gtk.text.Text], or 0 if there is no maximum.
   */
-  int getMaxLength()
+  int getMaxLength() nothrow
   {
     int _retval;
     _retval = gtk_text_get_max_length(cast(GtkText*)this._cPtr);
@@ -690,7 +690,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       See [gtk.text.Text.setOverwriteMode].
       Returns: whether the text is overwritten when typing
   */
-  bool getOverwriteMode()
+  bool getOverwriteMode() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_get_overwrite_mode(cast(GtkText*)this._cPtr);
@@ -704,7 +704,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       If no placeholder text has been set, null will be returned.
       Returns: the placeholder text
   */
-  string getPlaceholderText()
+  string getPlaceholderText() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_text_get_placeholder_text(cast(GtkText*)this._cPtr);
@@ -717,7 +717,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       with the content.
       Returns: true if self will propagate the text width
   */
-  bool getPropagateTextWidth()
+  bool getPropagateTextWidth() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_get_propagate_text_width(cast(GtkText*)this._cPtr);
@@ -730,7 +730,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       See [gtk.text.Text.setTabs].
       Returns: the tabstops
   */
-  pango.tab_array.TabArray getTabs()
+  pango.tab_array.TabArray getTabs() nothrow
   {
     PangoTabArray* _cretval;
     _cretval = gtk_text_get_tabs(cast(GtkText*)this._cPtr);
@@ -746,7 +746,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Returns: the current number of characters
           in [gtk.text.Text], or 0 if there are none.
   */
-  ushort getTextLength()
+  ushort getTextLength() nothrow
   {
     ushort _retval;
     _retval = gtk_text_get_text_length(cast(GtkText*)this._cPtr);
@@ -758,7 +758,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       that is pasted into the widget
       Returns: true if self will truncate multi-line text
   */
-  bool getTruncateMultiline()
+  bool getTruncateMultiline() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_get_truncate_multiline(cast(GtkText*)this._cPtr);
@@ -769,7 +769,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Retrieves whether the text in self is visible.
       Returns: true if the text is currently visible
   */
-  bool getVisibility()
+  bool getVisibility() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_get_visibility(cast(GtkText*)this._cPtr);
@@ -786,7 +786,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       such as search-as-you-type entries.
       Returns: true if focus is now inside self
   */
-  bool grabFocusWithoutSelecting()
+  bool grabFocusWithoutSelecting() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_grab_focus_without_selecting(cast(GtkText*)this._cPtr);
@@ -804,7 +804,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         activates = true to activate window’s default widget on Enter keypress
   */
-  void setActivatesDefault(bool activates)
+  void setActivatesDefault(bool activates) nothrow
   {
     gtk_text_set_activates_default(cast(GtkText*)this._cPtr, activates);
   }
@@ -815,7 +815,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         attrs = a [pango.attr_list.AttrList]
   */
-  void setAttributes(pango.attr_list.AttrList attrs = null)
+  void setAttributes(pango.attr_list.AttrList attrs = null) nothrow
   {
     gtk_text_set_attributes(cast(GtkText*)this._cPtr, attrs ? cast(PangoAttrList*)attrs._cPtr(No.Dup) : null);
   }
@@ -827,7 +827,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         buffer = a [gtk.entry_buffer.EntryBuffer]
   */
-  void setBuffer(gtk.entry_buffer.EntryBuffer buffer)
+  void setBuffer(gtk.entry_buffer.EntryBuffer buffer) nothrow
   {
     gtk_text_set_buffer(cast(GtkText*)this._cPtr, buffer ? cast(GtkEntryBuffer*)buffer._cPtr(No.Dup) : null);
   }
@@ -842,7 +842,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         enableEmojiCompletion = true to enable Emoji completion
   */
-  void setEnableEmojiCompletion(bool enableEmojiCompletion)
+  void setEnableEmojiCompletion(bool enableEmojiCompletion) nothrow
   {
     gtk_text_set_enable_emoji_completion(cast(GtkText*)this._cPtr, enableEmojiCompletion);
   }
@@ -854,7 +854,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         model = a [gio.menu_model.MenuModel]
   */
-  void setExtraMenu(gio.menu_model.MenuModel model = null)
+  void setExtraMenu(gio.menu_model.MenuModel model = null) nothrow
   {
     gtk_text_set_extra_menu(cast(GtkText*)this._cPtr, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
   }
@@ -866,7 +866,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         hints = the hints
   */
-  void setInputHints(gtk.types.InputHints hints)
+  void setInputHints(gtk.types.InputHints hints) nothrow
   {
     gtk_text_set_input_hints(cast(GtkText*)this._cPtr, hints);
   }
@@ -880,7 +880,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         purpose = the purpose
   */
-  void setInputPurpose(gtk.types.InputPurpose purpose)
+  void setInputPurpose(gtk.types.InputPurpose purpose) nothrow
   {
     gtk_text_set_input_purpose(cast(GtkText*)this._cPtr, purpose);
   }
@@ -896,7 +896,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         ch = a Unicode character
   */
-  void setInvisibleChar(dchar ch)
+  void setInvisibleChar(dchar ch) nothrow
   {
     gtk_text_set_invisible_char(cast(GtkText*)this._cPtr, ch);
   }
@@ -915,7 +915,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
             (other than the maximum length of entries.) The value passed
             in will be clamped to the range 0-65536.
   */
-  void setMaxLength(int length)
+  void setMaxLength(int length) nothrow
   {
     gtk_text_set_max_length(cast(GtkText*)this._cPtr, length);
   }
@@ -927,7 +927,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         overwrite = new value
   */
-  void setOverwriteMode(bool overwrite)
+  void setOverwriteMode(bool overwrite) nothrow
   {
     gtk_text_set_overwrite_mode(cast(GtkText*)this._cPtr, overwrite);
   }
@@ -942,7 +942,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         text = a string to be displayed when self
             is empty and unfocused
   */
-  void setPlaceholderText(string text = null)
+  void setPlaceholderText(string text = null) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_text_set_placeholder_text(cast(GtkText*)this._cPtr, _text);
@@ -954,7 +954,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         propagateTextWidth = true to propagate the text width
   */
-  void setPropagateTextWidth(bool propagateTextWidth)
+  void setPropagateTextWidth(bool propagateTextWidth) nothrow
   {
     gtk_text_set_propagate_text_width(cast(GtkText*)this._cPtr, propagateTextWidth);
   }
@@ -965,7 +965,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         tabs = a [pango.tab_array.TabArray]
   */
-  void setTabs(pango.tab_array.TabArray tabs = null)
+  void setTabs(pango.tab_array.TabArray tabs = null) nothrow
   {
     gtk_text_set_tabs(cast(GtkText*)this._cPtr, tabs ? cast(PangoTabArray*)tabs._cPtr(No.Dup) : null);
   }
@@ -977,7 +977,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         truncateMultiline = true to truncate multi-line text
   */
-  void setTruncateMultiline(bool truncateMultiline)
+  void setTruncateMultiline(bool truncateMultiline) nothrow
   {
     gtk_text_set_truncate_multiline(cast(GtkText*)this._cPtr, truncateMultiline);
   }
@@ -1002,7 +1002,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         visible = true if the contents of the [gtk.text.Text] are displayed
             as plaintext
   */
-  void setVisibility(bool visible)
+  void setVisibility(bool visible) nothrow
   {
     gtk_text_set_visibility(cast(GtkText*)this._cPtr, visible);
   }
@@ -1013,7 +1013,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       After calling this, the default invisible
       char is used again.
   */
-  void unsetInvisibleChar()
+  void unsetInvisibleChar() nothrow
   {
     gtk_text_unset_invisible_char(cast(GtkText*)this._cPtr);
   }
@@ -1036,13 +1036,13 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text.Text)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1051,7 +1051,14 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text.Text.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1078,13 +1085,13 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectBackspace(T)(T callback, Flag!"After" after = No.After)
+  gulong connectBackspace(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text.Text)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1093,7 +1100,14 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text.Text.backspace");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1121,13 +1135,13 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text.Text)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1136,7 +1150,14 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text.Text.copyClipboard");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1164,13 +1185,13 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCutClipboard(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCutClipboard(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text.Text)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1179,7 +1200,14 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text.Text.cutClipboard");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1215,7 +1243,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeleteFromCursor(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeleteFromCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.DeleteType)))
@@ -1223,7 +1251,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.text.Text)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1238,7 +1266,14 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text.Text.deleteFromCursor");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1267,14 +1302,14 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInsertAtCursor(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInsertAtCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text.Text)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1286,7 +1321,14 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text.Text.insertAtCursor");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1314,13 +1356,13 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInsertEmoji(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInsertEmoji(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text.Text)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1329,7 +1371,14 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text.Text.insertEmoji");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1376,7 +1425,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.MovementStep)))
@@ -1385,7 +1434,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.text.Text)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1403,7 +1452,14 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text.Text.moveCursor");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1430,13 +1486,13 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPasteClipboard(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPasteClipboard(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text.Text)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1445,7 +1501,14 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text.Text.pasteClipboard");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1473,14 +1536,14 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text.Text)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1492,7 +1555,14 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text.Text.preeditChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1518,13 +1588,13 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectToggleOverwrite(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToggleOverwrite(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text.Text)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1533,7 +1603,14 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text.Text.toggleOverwrite");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1554,7 +1631,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
         propval = Whether to activate the default widget when Enter is pressed.
       Returns: Builder instance for fluent chaining
   */
-  T activatesDefault(bool propval)
+  T activatesDefault(bool propval) nothrow
   {
     return setProperty("activates-default", propval);
   }
@@ -1570,7 +1647,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
           [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
       Returns: Builder instance for fluent chaining
   */
-  T attributes(pango.attr_list.AttrList propval)
+  T attributes(pango.attr_list.AttrList propval) nothrow
   {
     return setProperty("attributes", propval);
   }
@@ -1581,7 +1658,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
         propval = The [gtk.entry_buffer.EntryBuffer] object which stores the text.
       Returns: Builder instance for fluent chaining
   */
-  T buffer(gtk.entry_buffer.EntryBuffer propval)
+  T buffer(gtk.entry_buffer.EntryBuffer propval) nothrow
   {
     return setProperty("buffer", propval);
   }
@@ -1592,7 +1669,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
         propval = Whether to suggest Emoji replacements.
       Returns: Builder instance for fluent chaining
   */
-  T enableEmojiCompletion(bool propval)
+  T enableEmojiCompletion(bool propval) nothrow
   {
     return setProperty("enable-emoji-completion", propval);
   }
@@ -1604,7 +1681,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
           the context menu.
       Returns: Builder instance for fluent chaining
   */
-  T extraMenu(gio.menu_model.MenuModel propval)
+  T extraMenu(gio.menu_model.MenuModel propval) nothrow
   {
     return setProperty("extra-menu", propval);
   }
@@ -1621,7 +1698,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
           property.
       Returns: Builder instance for fluent chaining
   */
-  T imModule(string propval)
+  T imModule(string propval) nothrow
   {
     return setProperty("im-module", propval);
   }
@@ -1633,7 +1710,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
           their behaviour.
       Returns: Builder instance for fluent chaining
   */
-  T inputHints(gtk.types.InputHints propval)
+  T inputHints(gtk.types.InputHints propval) nothrow
   {
     return setProperty("input-hints", propval);
   }
@@ -1651,7 +1728,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
           [gtk.text.Text.visibility].
       Returns: Builder instance for fluent chaining
   */
-  T inputPurpose(gtk.types.InputPurpose propval)
+  T inputPurpose(gtk.types.InputPurpose propval) nothrow
   {
     return setProperty("input-purpose", propval);
   }
@@ -1662,7 +1739,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
         propval = The character to used when masking contents (in “password mode”).
       Returns: Builder instance for fluent chaining
   */
-  T invisibleChar(uint propval)
+  T invisibleChar(uint propval) nothrow
   {
     return setProperty("invisible-char", propval);
   }
@@ -1673,7 +1750,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
         propval = Whether the invisible char has been set for the [gtk.text.Text].
       Returns: Builder instance for fluent chaining
   */
-  T invisibleCharSet(bool propval)
+  T invisibleCharSet(bool propval) nothrow
   {
     return setProperty("invisible-char-set", propval);
   }
@@ -1686,7 +1763,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
           Zero indicates no limit.
       Returns: Builder instance for fluent chaining
   */
-  T maxLength(int propval)
+  T maxLength(int propval) nothrow
   {
     return setProperty("max-length", propval);
   }
@@ -1697,7 +1774,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
         propval = If text is overwritten when typing in the [gtk.text.Text].
       Returns: Builder instance for fluent chaining
   */
-  T overwriteMode(bool propval)
+  T overwriteMode(bool propval) nothrow
   {
     return setProperty("overwrite-mode", propval);
   }
@@ -1709,7 +1786,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
           and unfocused.
       Returns: Builder instance for fluent chaining
   */
-  T placeholderText(string propval)
+  T placeholderText(string propval) nothrow
   {
     return setProperty("placeholder-text", propval);
   }
@@ -1720,7 +1797,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
         propval = Whether the widget should grow and shrink with the content.
       Returns: Builder instance for fluent chaining
   */
-  T propagateTextWidth(bool propval)
+  T propagateTextWidth(bool propval) nothrow
   {
     return setProperty("propagate-text-width", propval);
   }
@@ -1731,7 +1808,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
         propval = A list of tabstops to apply to the text of the [gtk.text.Text].
       Returns: Builder instance for fluent chaining
   */
-  T tabs(pango.tab_array.TabArray propval)
+  T tabs(pango.tab_array.TabArray propval) nothrow
   {
     return setProperty("tabs", propval);
   }
@@ -1742,7 +1819,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
         propval = When true, pasted multi-line text is truncated to the first line.
       Returns: Builder instance for fluent chaining
   */
-  T truncateMultiline(bool propval)
+  T truncateMultiline(bool propval) nothrow
   {
     return setProperty("truncate-multiline", propval);
   }
@@ -1753,7 +1830,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
         propval = If false, the text is masked with the “invisible char”.
       Returns: Builder instance for fluent chaining
   */
-  T visibility(bool propval)
+  T visibility(bool propval) nothrow
   {
     return setProperty("visibility", propval);
   }
@@ -1766,7 +1843,7 @@ final class TextGidBuilder : TextGidBuilderImpl!TextGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Text build()
+  Text build() nothrow
   {
     return new Text(cast(void*)createGObject(Text._getGType), No.Take);
   }

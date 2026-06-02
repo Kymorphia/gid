@@ -22,26 +22,26 @@ class CookieJarText : soup.cookie_jar.CookieJar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_cookie_jar_text_get_type != &gidSymbolNotFound ? soup_cookie_jar_text_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CookieJarText self()
+  override CookieJarText self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class CookieJarText : soup.cookie_jar.CookieJar
       Get builder for [soup.cookie_jar_text.CookieJarText]
       Returns: New builder object
   */
-  static CookieJarTextGidBuilder builder()
+  static CookieJarTextGidBuilder builder() nothrow
   {
     return new CookieJarTextGidBuilder;
   }
@@ -59,7 +59,7 @@ class CookieJarText : soup.cookie_jar.CookieJar
       Get `filename` property.
       Returns: Cookie-storage filename.
   */
-  @property string filename()
+  @property string filename() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("filename");
   }
@@ -78,7 +78,7 @@ class CookieJarText : soup.cookie_jar.CookieJar
         readOnly = true if filename is read-only
       Returns: the new #SoupCookieJar
   */
-  this(string filename, bool readOnly)
+  this(string filename, bool readOnly) nothrow
   {
     SoupCookieJar* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -98,7 +98,7 @@ class CookieJarTextGidBuilderImpl(T) : soup.cookie_jar.CookieJarGidBuilderImpl!T
         propval = Cookie-storage filename.
       Returns: Builder instance for fluent chaining
   */
-  T filename(string propval)
+  T filename(string propval) nothrow
   {
     return setProperty("filename", propval);
   }
@@ -111,7 +111,7 @@ final class CookieJarTextGidBuilder : CookieJarTextGidBuilderImpl!CookieJarTextG
       Create object from builder.
       Returns: New object
   */
-  CookieJarText build()
+  CookieJarText build() nothrow
   {
     return new CookieJarText(cast(void*)createGObject(CookieJarText._getGType), Yes.Take);
   }

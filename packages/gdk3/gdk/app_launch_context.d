@@ -39,26 +39,26 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_app_launch_context_get_type != &gidSymbolNotFound ? gdk_app_launch_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AppLaunchContext self()
+  override AppLaunchContext self() nothrow
   {
     return this;
   }
@@ -67,13 +67,13 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
       Get builder for [gdk.app_launch_context.AppLaunchContext]
       Returns: New builder object
   */
-  static AppLaunchContextGidBuilder builder()
+  static AppLaunchContextGidBuilder builder() nothrow
   {
     return new AppLaunchContextGidBuilder;
   }
 
   /** */
-  @property gdk.display.Display display()
+  @property gdk.display.Display display() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.display.Display)("display");
   }
@@ -84,7 +84,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   
       Deprecated: Use [gdk.display.Display.getAppLaunchContext] instead
   */
-  this()
+  this() nothrow
   {
     GdkAppLaunchContext* _cretval;
     _cretval = gdk_app_launch_context_new();
@@ -104,7 +104,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
       Params:
         desktop = the number of a workspace, or -1
   */
-  void setDesktop(int desktop)
+  void setDesktop(int desktop) nothrow
   {
     gdk_app_launch_context_set_desktop(cast(GdkAppLaunchContext*)this._cPtr, desktop);
   }
@@ -118,7 +118,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   
       Deprecated: Use [gdk.display.Display.getAppLaunchContext] instead
   */
-  void setDisplay(gdk.display.Display display)
+  void setDisplay(gdk.display.Display display) nothrow
   {
     gdk_app_launch_context_set_display(cast(GdkAppLaunchContext*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
   }
@@ -135,7 +135,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
       Params:
         icon = a #GIcon, or null
   */
-  void setIcon(gio.icon.Icon icon = null)
+  void setIcon(gio.icon.Icon icon = null) nothrow
   {
     gdk_app_launch_context_set_icon(cast(GdkAppLaunchContext*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
@@ -153,7 +153,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
       Params:
         iconName = an icon name, or null
   */
-  void setIconName(string iconName = null)
+  void setIconName(string iconName = null) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gdk_app_launch_context_set_icon_name(cast(GdkAppLaunchContext*)this._cPtr, _iconName);
@@ -173,7 +173,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
       Params:
         screen = a #GdkScreen
   */
-  void setScreen(gdk.screen.Screen screen)
+  void setScreen(gdk.screen.Screen screen) nothrow
   {
     gdk_app_launch_context_set_screen(cast(GdkAppLaunchContext*)this._cPtr, screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
   }
@@ -190,7 +190,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
       Params:
         timestamp = a timestamp
   */
-  void setTimestamp(uint timestamp)
+  void setTimestamp(uint timestamp) nothrow
   {
     gdk_app_launch_context_set_timestamp(cast(GdkAppLaunchContext*)this._cPtr, timestamp);
   }
@@ -201,7 +201,7 @@ class AppLaunchContextGidBuilderImpl(T) : gio.app_launch_context.AppLaunchContex
 {
 
   /** */
-  T display(gdk.display.Display propval)
+  T display(gdk.display.Display propval) nothrow
   {
     return setProperty("display", propval);
   }
@@ -214,7 +214,7 @@ final class AppLaunchContextGidBuilder : AppLaunchContextGidBuilderImpl!AppLaunc
       Create object from builder.
       Returns: New object
   */
-  AppLaunchContext build()
+  AppLaunchContext build() nothrow
   {
     return new AppLaunchContext(cast(void*)createGObject(AppLaunchContext._getGType), Yes.Take);
   }

@@ -42,26 +42,26 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_directory_list_get_type != &gidSymbolNotFound ? gtk_directory_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DirectoryList self()
+  override DirectoryList self() nothrow
   {
     return this;
   }
@@ -70,7 +70,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get builder for [gtk.directory_list.DirectoryList]
       Returns: New builder object
   */
-  static DirectoryListGidBuilder builder()
+  static DirectoryListGidBuilder builder() nothrow
   {
     return new DirectoryListGidBuilder;
   }
@@ -79,7 +79,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `attributes` property.
       Returns: The attributes to query.
   */
-  @property string attributes()
+  @property string attributes() nothrow
   {
     return getAttributes();
   }
@@ -89,7 +89,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Params:
         propval = The attributes to query.
   */
-  @property void attributes(string propval)
+  @property void attributes(string propval) nothrow
   {
     setAttributes(propval);
   }
@@ -98,7 +98,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `error` property.
       Returns: Error encountered while loading files.
   */
-  @property glib.error.ErrorWrap error()
+  @property glib.error.ErrorWrap error() nothrow
   {
     return getError();
   }
@@ -107,7 +107,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `file` property.
       Returns: File to query.
   */
-  @property gio.file.File file()
+  @property gio.file.File file() nothrow
   {
     return getFile();
   }
@@ -117,7 +117,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Params:
         propval = File to query.
   */
-  @property void file(gio.file.File propval)
+  @property void file(gio.file.File propval) nothrow
   {
     setFile(propval);
   }
@@ -126,7 +126,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `ioPriority` property.
       Returns: Priority used when loading.
   */
-  @property int ioPriority()
+  @property int ioPriority() nothrow
   {
     return getIoPriority();
   }
@@ -136,7 +136,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Params:
         propval = Priority used when loading.
   */
-  @property void ioPriority(int propval)
+  @property void ioPriority(int propval) nothrow
   {
     setIoPriority(propval);
   }
@@ -145,7 +145,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
-  @property gobject.types.GType itemType()
+  @property gobject.types.GType itemType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
   }
@@ -154,7 +154,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `loading` property.
       Returns: true if files are being loaded.
   */
-  @property bool loading()
+  @property bool loading() nothrow
   {
     return isLoading();
   }
@@ -163,7 +163,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `monitored` property.
       Returns: true if the directory is monitored for changed.
   */
-  @property bool monitored()
+  @property bool monitored() nothrow
   {
     return getMonitored();
   }
@@ -173,7 +173,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Params:
         propval = true if the directory is monitored for changed.
   */
-  @property void monitored(bool propval)
+  @property void monitored(bool propval) nothrow
   {
     setMonitored(propval);
   }
@@ -182,7 +182,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `nItems` property.
       Returns: The number of items. See [gio.list_model.ListModel.getNItems].
   */
-  @property uint nItems()
+  @property uint nItems() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
@@ -200,7 +200,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
         file = The file to query
       Returns: a new [gtk.directory_list.DirectoryList]
   */
-  this(string attributes = null, gio.file.File file = null)
+  this(string attributes = null, gio.file.File file = null) nothrow
   {
     GtkDirectoryList* _cretval;
     const(char)* _attributes = attributes.toCString(No.Alloc);
@@ -212,7 +212,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Gets the attributes queried on the children.
       Returns: The queried attributes
   */
-  string getAttributes()
+  string getAttributes() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_directory_list_get_attributes(cast(GtkDirectoryList*)this._cPtr);
@@ -232,7 +232,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Returns: The loading error or null if
           loading finished successfully
   */
-  glib.error.ErrorWrap getError()
+  glib.error.ErrorWrap getError() nothrow
   {
     const(GError)* _cretval;
     _cretval = gtk_directory_list_get_error(cast(GtkDirectoryList*)this._cPtr);
@@ -244,7 +244,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Gets the file whose children are currently enumerated.
       Returns: The file whose children are enumerated
   */
-  gio.file.File getFile()
+  gio.file.File getFile() nothrow
   {
     GFile* _cretval;
     _cretval = gtk_directory_list_get_file(cast(GtkDirectoryList*)this._cPtr);
@@ -256,7 +256,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Gets the IO priority set via [gtk.directory_list.DirectoryList.setIoPriority].
       Returns: The IO priority.
   */
-  int getIoPriority()
+  int getIoPriority() nothrow
   {
     int _retval;
     _retval = gtk_directory_list_get_io_priority(cast(GtkDirectoryList*)this._cPtr);
@@ -268,7 +268,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       the directory for changes.
       Returns: true if the directory is monitored
   */
-  bool getMonitored()
+  bool getMonitored() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_directory_list_get_monitored(cast(GtkDirectoryList*)this._cPtr);
@@ -284,7 +284,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       in between runs.
       Returns: true if self is loading
   */
-  bool isLoading()
+  bool isLoading() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_directory_list_is_loading(cast(GtkDirectoryList*)this._cPtr);
@@ -300,7 +300,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Params:
         attributes = the attributes to enumerate
   */
-  void setAttributes(string attributes = null)
+  void setAttributes(string attributes = null) nothrow
   {
     const(char)* _attributes = attributes.toCString(No.Alloc);
     gtk_directory_list_set_attributes(cast(GtkDirectoryList*)this._cPtr, _attributes);
@@ -314,7 +314,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Params:
         file = the [gio.file.File] to be enumerated
   */
-  void setFile(gio.file.File file = null)
+  void setFile(gio.file.File file = null) nothrow
   {
     gtk_directory_list_set_file(cast(GtkDirectoryList*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
   }
@@ -333,7 +333,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Params:
         ioPriority = IO priority to use
   */
-  void setIoPriority(int ioPriority)
+  void setIoPriority(int ioPriority) nothrow
   {
     gtk_directory_list_set_io_priority(cast(GtkDirectoryList*)this._cPtr, ioPriority);
   }
@@ -354,7 +354,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
       Params:
         monitored = true to monitor the directory for changes
   */
-  void setMonitored(bool monitored)
+  void setMonitored(bool monitored) nothrow
   {
     gtk_directory_list_set_monitored(cast(GtkDirectoryList*)this._cPtr, monitored);
   }
@@ -372,7 +372,7 @@ class DirectoryListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The attributes to query.
       Returns: Builder instance for fluent chaining
   */
-  T attributes(string propval)
+  T attributes(string propval) nothrow
   {
     return setProperty("attributes", propval);
   }
@@ -383,7 +383,7 @@ class DirectoryListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = File to query.
       Returns: Builder instance for fluent chaining
   */
-  T file(gio.file.File propval)
+  T file(gio.file.File propval) nothrow
   {
     return setProperty("file", propval);
   }
@@ -394,7 +394,7 @@ class DirectoryListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Priority used when loading.
       Returns: Builder instance for fluent chaining
   */
-  T ioPriority(int propval)
+  T ioPriority(int propval) nothrow
   {
     return setProperty("io-priority", propval);
   }
@@ -405,7 +405,7 @@ class DirectoryListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = true if the directory is monitored for changed.
       Returns: Builder instance for fluent chaining
   */
-  T monitored(bool propval)
+  T monitored(bool propval) nothrow
   {
     return setProperty("monitored", propval);
   }
@@ -418,7 +418,7 @@ final class DirectoryListGidBuilder : DirectoryListGidBuilderImpl!DirectoryListG
       Create object from builder.
       Returns: New object
   */
-  DirectoryList build()
+  DirectoryList build() nothrow
   {
     return new DirectoryList(cast(void*)createGObject(DirectoryList._getGType), Yes.Take);
   }

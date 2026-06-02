@@ -30,25 +30,25 @@ template ActionableT()
 {
 
   /** */
-  @property string actionName()
+  @property string actionName() nothrow
   {
     return getActionName();
   }
 
   /** */
-  @property void actionName(string propval)
+  @property void actionName(string propval) nothrow
   {
     setActionName(propval);
   }
 
   /** */
-  @property glib.variant.Variant actionTarget()
+  @property glib.variant.Variant actionTarget() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(glib.variant.Variant)("action-target");
   }
 
   /** */
-  @property void actionTarget(glib.variant.Variant propval)
+  @property void actionTarget(glib.variant.Variant propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(glib.variant.Variant)("action-target", propval);
   }
@@ -57,7 +57,7 @@ template ActionableT()
       Gets the action name for actionable.
       Returns: the action name
   */
-  override string getActionName()
+  override string getActionName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_actionable_get_action_name(cast(GtkActionable*)this._cPtr);
@@ -69,7 +69,7 @@ template ActionableT()
       Gets the current target value of actionable.
       Returns: the current target value
   */
-  override glib.variant.Variant getActionTargetValue()
+  override glib.variant.Variant getActionTargetValue() nothrow
   {
     GVariant* _cretval;
     _cretval = gtk_actionable_get_action_target_value(cast(GtkActionable*)this._cPtr);
@@ -95,7 +95,7 @@ template ActionableT()
       Params:
         actionName = an action name
   */
-  override void setActionName(string actionName = null)
+  override void setActionName(string actionName = null) nothrow
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     gtk_actionable_set_action_name(cast(GtkActionable*)this._cPtr, _actionName);
@@ -124,7 +124,7 @@ template ActionableT()
       Params:
         targetValue = a [glib.variant.Variant] to set as the target value
   */
-  override void setActionTargetValue(glib.variant.Variant targetValue = null)
+  override void setActionTargetValue(glib.variant.Variant targetValue = null) nothrow
   {
     gtk_actionable_set_action_target_value(cast(GtkActionable*)this._cPtr, targetValue ? cast(GVariant*)targetValue._cPtr(No.Dup) : null);
   }
@@ -139,7 +139,7 @@ template ActionableT()
       Params:
         detailedActionName = the detailed action name
   */
-  override void setDetailedActionName(string detailedActionName)
+  override void setDetailedActionName(string detailedActionName) nothrow
   {
     const(char)* _detailedActionName = detailedActionName.toCString(No.Alloc);
     gtk_actionable_set_detailed_action_name(cast(GtkActionable*)this._cPtr, _detailedActionName);
@@ -151,13 +151,13 @@ template ActionableGidBuilderT()
 {
 
   /** */
-  T actionName(string propval)
+  T actionName(string propval) nothrow
   {
     return setProperty("action-name", propval);
   }
 
   /** */
-  T actionTarget(glib.variant.Variant propval)
+  T actionTarget(glib.variant.Variant propval) nothrow
   {
     return setProperty("action-target", propval);
   }

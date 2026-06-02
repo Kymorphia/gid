@@ -20,26 +20,26 @@ class ParamList : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_param_list_get_type != &gidSymbolNotFound ? g_mime_param_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ParamList self()
+  override ParamList self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class ParamList : gobject.object.ObjectWrap
       Get builder for [gmime.param_list.ParamList]
       Returns: New builder object
   */
-  static ParamListGidBuilder builder()
+  static ParamListGidBuilder builder() nothrow
   {
     return new ParamListGidBuilder;
   }
@@ -57,7 +57,7 @@ class ParamList : gobject.object.ObjectWrap
       Creates a new Content-Type or Content-Disposition parameter list.
       Returns: a new #GMimeParamList.
   */
-  this()
+  this() nothrow
   {
     GMimeParamList* _cretval;
     _cretval = g_mime_param_list_new();
@@ -72,7 +72,7 @@ class ParamList : gobject.object.ObjectWrap
         str = a string to parse
       Returns: a new #GMimeParamList.
   */
-  static gmime.param_list.ParamList parse(gmime.parser_options.ParserOptions options, string str)
+  static gmime.param_list.ParamList parse(gmime.parser_options.ParserOptions options, string str) nothrow
   {
     GMimeParamList* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -84,7 +84,7 @@ class ParamList : gobject.object.ObjectWrap
   /**
       Clears the list of parameters.
   */
-  void clear()
+  void clear() nothrow
   {
     g_mime_param_list_clear(cast(GMimeParamList*)this._cPtr);
   }
@@ -97,7 +97,7 @@ class ParamList : gobject.object.ObjectWrap
         fold = true if the parameter list should be folded; otherwise, false
         str = the output string buffer
   */
-  void encode(gmime.format_options.FormatOptions options, bool fold, out glib.string_.String str)
+  void encode(gmime.format_options.FormatOptions options, bool fold, out glib.string_.String str) nothrow
   {
     GString _str;
     g_mime_param_list_encode(cast(GMimeParamList*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, fold, &_str);
@@ -111,7 +111,7 @@ class ParamList : gobject.object.ObjectWrap
         name = the name of the parameter
       Returns: the requested #GMimeParam.
   */
-  gmime.param.Param getParameter(string name)
+  gmime.param.Param getParameter(string name) nothrow
   {
     GMimeParam* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -127,7 +127,7 @@ class ParamList : gobject.object.ObjectWrap
         index = the index of the requested parameter
       Returns: the #GMimeParam at the specified index.
   */
-  gmime.param.Param getParameterAt(int index)
+  gmime.param.Param getParameterAt(int index) nothrow
   {
     GMimeParam* _cretval;
     _cretval = g_mime_param_list_get_parameter_at(cast(GMimeParamList*)this._cPtr, index);
@@ -139,7 +139,7 @@ class ParamList : gobject.object.ObjectWrap
       Gets the length of the list.
       Returns: the number of #GMimeParam items in the list.
   */
-  int length()
+  int length() nothrow
   {
     int _retval;
     _retval = g_mime_param_list_length(cast(GMimeParamList*)this._cPtr);
@@ -153,7 +153,7 @@ class ParamList : gobject.object.ObjectWrap
         name = the name of the parameter
       Returns: true if the specified parameter was removed or false otherwise.
   */
-  bool remove(string name)
+  bool remove(string name) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -168,7 +168,7 @@ class ParamList : gobject.object.ObjectWrap
         index = index of the param to remove
       Returns: true if a #GMimeParam was removed or false otherwise.
   */
-  bool removeAt(int index)
+  bool removeAt(int index) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_param_list_remove_at(cast(GMimeParamList*)this._cPtr, index);
@@ -182,7 +182,7 @@ class ParamList : gobject.object.ObjectWrap
         name = The name of the parameter
         value = The parameter value
   */
-  void setParameter(string name, string value)
+  void setParameter(string name, string value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -202,7 +202,7 @@ final class ParamListGidBuilder : ParamListGidBuilderImpl!ParamListGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ParamList build()
+  ParamList build() nothrow
   {
     return new ParamList(cast(void*)createGObject(ParamList._getGType), Yes.Take);
   }

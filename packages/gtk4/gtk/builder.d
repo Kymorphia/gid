@@ -360,26 +360,26 @@ class Builder : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_builder_get_type != &gidSymbolNotFound ? gtk_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Builder self()
+  override Builder self() nothrow
   {
     return this;
   }
@@ -388,7 +388,7 @@ class Builder : gobject.object.ObjectWrap
       Get builder for [gtk.builder.Builder]
       Returns: New builder object
   */
-  static BuilderGidBuilder builder()
+  static BuilderGidBuilder builder() nothrow
   {
     return new BuilderGidBuilder;
   }
@@ -397,7 +397,7 @@ class Builder : gobject.object.ObjectWrap
       Get `currentObject` property.
       Returns: The object the builder is evaluating for.
   */
-  @property gobject.object.ObjectWrap currentObject()
+  @property gobject.object.ObjectWrap currentObject() nothrow
   {
     return getCurrentObject();
   }
@@ -407,7 +407,7 @@ class Builder : gobject.object.ObjectWrap
       Params:
         propval = The object the builder is evaluating for.
   */
-  @property void currentObject(gobject.object.ObjectWrap propval)
+  @property void currentObject(gobject.object.ObjectWrap propval) nothrow
   {
     setCurrentObject(propval);
   }
@@ -416,7 +416,7 @@ class Builder : gobject.object.ObjectWrap
       Get `scope_` property.
       Returns: The scope the builder is operating in
   */
-  @property gtk.builder_scope.BuilderScope scope_()
+  @property gtk.builder_scope.BuilderScope scope_() nothrow
   {
     return getScope();
   }
@@ -426,7 +426,7 @@ class Builder : gobject.object.ObjectWrap
       Params:
         propval = The scope the builder is operating in
   */
-  @property void scope_(gtk.builder_scope.BuilderScope propval)
+  @property void scope_(gtk.builder_scope.BuilderScope propval) nothrow
   {
     setScope(propval);
   }
@@ -439,7 +439,7 @@ class Builder : gobject.object.ObjectWrap
         If the translation domain is null, [gtk.builder.Builder] uses gettext(),
         otherwise [glib.global.dgettext].
   */
-  @property string translationDomain()
+  @property string translationDomain() nothrow
   {
     return getTranslationDomain();
   }
@@ -453,7 +453,7 @@ class Builder : gobject.object.ObjectWrap
           If the translation domain is null, [gtk.builder.Builder] uses gettext(),
           otherwise [glib.global.dgettext].
   */
-  @property void translationDomain(string propval)
+  @property void translationDomain(string propval) nothrow
   {
     setTranslationDomain(propval);
   }
@@ -467,7 +467,7 @@ class Builder : gobject.object.ObjectWrap
       descriptions into a single builder.
       Returns: a new (empty) [gtk.builder.Builder] object
   */
-  this()
+  this() nothrow
   {
     GtkBuilder* _cretval;
     _cretval = gtk_builder_new();
@@ -485,7 +485,7 @@ class Builder : gobject.object.ObjectWrap
         filename = filename of user interface description file
       Returns: a [gtk.builder.Builder] containing the described interface
   */
-  static gtk.builder.Builder newFromFile(string filename)
+  static gtk.builder.Builder newFromFile(string filename) nothrow
   {
     GtkBuilder* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -504,7 +504,7 @@ class Builder : gobject.object.ObjectWrap
         resourcePath = a [gio.resource.Resource] resource path
       Returns: a [gtk.builder.Builder] containing the described interface
   */
-  static gtk.builder.Builder newFromResource(string resourcePath)
+  static gtk.builder.Builder newFromResource(string resourcePath) nothrow
   {
     GtkBuilder* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
@@ -527,7 +527,7 @@ class Builder : gobject.object.ObjectWrap
         string_ = a user interface (XML) description
       Returns: a [gtk.builder.Builder] containing the interface described by string
   */
-  static gtk.builder.Builder newFromString(string string_)
+  static gtk.builder.Builder newFromString(string string_) nothrow
   {
     GtkBuilder* _cretval;
     ptrdiff_t _length;
@@ -798,7 +798,7 @@ class Builder : gobject.object.ObjectWrap
         name = the name of the object exposed to the builder
         object = the object to expose
   */
-  void exposeObject(string name, gobject.object.ObjectWrap object)
+  void exposeObject(string name, gobject.object.ObjectWrap object) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_builder_expose_object(cast(GtkBuilder*)this._cPtr, _name, object ? cast(GObject*)object._cPtr(No.Dup) : null);
@@ -837,7 +837,7 @@ class Builder : gobject.object.ObjectWrap
       Gets the current object set via [gtk.builder.Builder.setCurrentObject].
       Returns: the current object
   */
-  gobject.object.ObjectWrap getCurrentObject()
+  gobject.object.ObjectWrap getCurrentObject() nothrow
   {
     GObject* _cretval;
     _cretval = gtk_builder_get_current_object(cast(GtkBuilder*)this._cPtr);
@@ -855,7 +855,7 @@ class Builder : gobject.object.ObjectWrap
         name = name of object to get
       Returns: the object named name
   */
-  gobject.object.ObjectWrap getObject(string name)
+  gobject.object.ObjectWrap getObject(string name) nothrow
   {
     GObject* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -874,7 +874,7 @@ class Builder : gobject.object.ObjectWrap
           constructed by the `GtkBuilder instance`. It should be
           freed by [glib.slist.SList.free]
   */
-  gobject.object.ObjectWrap[] getObjects()
+  gobject.object.ObjectWrap[] getObjects() nothrow
   {
     GSList* _cretval;
     _cretval = gtk_builder_get_objects(cast(GtkBuilder*)this._cPtr);
@@ -886,7 +886,7 @@ class Builder : gobject.object.ObjectWrap
       Gets the scope in use that was set via [gtk.builder.Builder.setScope].
       Returns: the current scope
   */
-  gtk.builder_scope.BuilderScope getScope()
+  gtk.builder_scope.BuilderScope getScope() nothrow
   {
     GtkBuilderScope* _cretval;
     _cretval = gtk_builder_get_scope(cast(GtkBuilder*)this._cPtr);
@@ -898,7 +898,7 @@ class Builder : gobject.object.ObjectWrap
       Gets the translation domain of builder.
       Returns: the translation domain
   */
-  string getTranslationDomain()
+  string getTranslationDomain() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_builder_get_translation_domain(cast(GtkBuilder*)this._cPtr);
@@ -918,7 +918,7 @@ class Builder : gobject.object.ObjectWrap
       Returns: the `GType` found for type_name or `G_TYPE_INVALID`
           if no type was found
   */
-  gobject.types.GType getTypeFromName(string typeName)
+  gobject.types.GType getTypeFromName(string typeName) nothrow
   {
     gobject.types.GType _retval;
     const(char)* _typeName = typeName.toCString(No.Alloc);
@@ -940,7 +940,7 @@ class Builder : gobject.object.ObjectWrap
       Params:
         currentObject = the new current object
   */
-  void setCurrentObject(gobject.object.ObjectWrap currentObject = null)
+  void setCurrentObject(gobject.object.ObjectWrap currentObject = null) nothrow
   {
     gtk_builder_set_current_object(cast(GtkBuilder*)this._cPtr, currentObject ? cast(GObject*)currentObject._cPtr(No.Dup) : null);
   }
@@ -953,7 +953,7 @@ class Builder : gobject.object.ObjectWrap
       Params:
         scope_ = the scope to use
   */
-  void setScope(gtk.builder_scope.BuilderScope scope_ = null)
+  void setScope(gtk.builder_scope.BuilderScope scope_ = null) nothrow
   {
     gtk_builder_set_scope(cast(GtkBuilder*)this._cPtr, scope_ ? cast(GtkBuilderScope*)(cast(gobject.object.ObjectWrap)scope_)._cPtr(No.Dup) : null);
   }
@@ -964,7 +964,7 @@ class Builder : gobject.object.ObjectWrap
       Params:
         domain = the translation domain
   */
-  void setTranslationDomain(string domain = null)
+  void setTranslationDomain(string domain = null) nothrow
   {
     const(char)* _domain = domain.toCString(No.Alloc);
     gtk_builder_set_translation_domain(cast(GtkBuilder*)this._cPtr, _domain);
@@ -1046,7 +1046,7 @@ class BuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The object the builder is evaluating for.
       Returns: Builder instance for fluent chaining
   */
-  T currentObject(gobject.object.ObjectWrap propval)
+  T currentObject(gobject.object.ObjectWrap propval) nothrow
   {
     return setProperty("current-object", propval);
   }
@@ -1057,7 +1057,7 @@ class BuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The scope the builder is operating in
       Returns: Builder instance for fluent chaining
   */
-  T scope_(gtk.builder_scope.BuilderScope propval)
+  T scope_(gtk.builder_scope.BuilderScope propval) nothrow
   {
     return setProperty("scope", propval);
   }
@@ -1072,7 +1072,7 @@ class BuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           otherwise [glib.global.dgettext].
       Returns: Builder instance for fluent chaining
   */
-  T translationDomain(string propval)
+  T translationDomain(string propval) nothrow
   {
     return setProperty("translation-domain", propval);
   }
@@ -1085,7 +1085,7 @@ final class BuilderGidBuilder : BuilderGidBuilderImpl!BuilderGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Builder build()
+  Builder build() nothrow
   {
     return new Builder(cast(void*)createGObject(Builder._getGType), Yes.Take);
   }

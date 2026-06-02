@@ -28,26 +28,26 @@ class MediaKeySystemPermissionRequest : gobject.object.ObjectWrap, webkit.permis
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_media_key_system_permission_request_get_type != &gidSymbolNotFound ? webkit_media_key_system_permission_request_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MediaKeySystemPermissionRequest self()
+  override MediaKeySystemPermissionRequest self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class MediaKeySystemPermissionRequest : gobject.object.ObjectWrap, webkit.permis
       Get builder for [webkit.media_key_system_permission_request.MediaKeySystemPermissionRequest]
       Returns: New builder object
   */
-  static MediaKeySystemPermissionRequestGidBuilder builder()
+  static MediaKeySystemPermissionRequestGidBuilder builder() nothrow
   {
     return new MediaKeySystemPermissionRequestGidBuilder;
   }
@@ -78,7 +78,7 @@ final class MediaKeySystemPermissionRequestGidBuilder : MediaKeySystemPermission
       Create object from builder.
       Returns: New object
   */
-  MediaKeySystemPermissionRequest build()
+  MediaKeySystemPermissionRequest build() nothrow
   {
     return new MediaKeySystemPermissionRequest(cast(void*)createGObject(MediaKeySystemPermissionRequest._getGType), No.Take);
   }

@@ -28,26 +28,26 @@ class Table : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_table_get_type != &gidSymbolNotFound ? garrow_table_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Table self()
+  override Table self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class Table : gobject.object.ObjectWrap
       Get builder for [arrow.table.Table]
       Returns: New builder object
   */
-  static TableGidBuilder builder()
+  static TableGidBuilder builder() nothrow
   {
     return new TableGidBuilder;
   }
@@ -163,7 +163,7 @@ class Table : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equal(arrow.table.Table otherTable)
+  bool equal(arrow.table.Table otherTable) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_table_equal(cast(GArrowTable*)this._cPtr, otherTable ? cast(GArrowTable*)otherTable._cPtr(No.Dup) : null);
@@ -171,7 +171,7 @@ class Table : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equalMetadata(arrow.table.Table otherTable, bool checkMetadata)
+  bool equalMetadata(arrow.table.Table otherTable, bool checkMetadata) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_table_equal_metadata(cast(GArrowTable*)this._cPtr, otherTable ? cast(GArrowTable*)otherTable._cPtr(No.Dup) : null, checkMetadata);
@@ -203,7 +203,7 @@ class Table : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.chunked_array.ChunkedArray getColumnData(int i)
+  arrow.chunked_array.ChunkedArray getColumnData(int i) nothrow
   {
     GArrowChunkedArray* _cretval;
     _cretval = garrow_table_get_column_data(cast(GArrowTable*)this._cPtr, i);
@@ -212,7 +212,7 @@ class Table : gobject.object.ObjectWrap
   }
 
   /** */
-  uint getNColumns()
+  uint getNColumns() nothrow
   {
     uint _retval;
     _retval = garrow_table_get_n_columns(cast(GArrowTable*)this._cPtr);
@@ -220,7 +220,7 @@ class Table : gobject.object.ObjectWrap
   }
 
   /** */
-  ulong getNRows()
+  ulong getNRows() nothrow
   {
     ulong _retval;
     _retval = garrow_table_get_n_rows(cast(GArrowTable*)this._cPtr);
@@ -228,7 +228,7 @@ class Table : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.schema.Schema getSchema()
+  arrow.schema.Schema getSchema() nothrow
   {
     GArrowSchema* _cretval;
     _cretval = garrow_table_get_schema(cast(GArrowTable*)this._cPtr);
@@ -261,7 +261,7 @@ class Table : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.table.Table slice(long offset, long length)
+  arrow.table.Table slice(long offset, long length) nothrow
   {
     GArrowTable* _cretval;
     _cretval = garrow_table_slice(cast(GArrowTable*)this._cPtr, offset, length);
@@ -342,7 +342,7 @@ class TableGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T table(void* propval)
+  T table(void* propval) nothrow
   {
     return setProperty("table", propval);
   }
@@ -355,7 +355,7 @@ final class TableGidBuilder : TableGidBuilderImpl!TableGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Table build()
+  Table build() nothrow
   {
     return new Table(cast(void*)createGObject(Table._getGType), No.Take);
   }

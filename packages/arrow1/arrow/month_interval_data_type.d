@@ -14,26 +14,26 @@ class MonthIntervalDataType : arrow.interval_data_type.IntervalDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_month_interval_data_type_get_type != &gidSymbolNotFound ? garrow_month_interval_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MonthIntervalDataType self()
+  override MonthIntervalDataType self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class MonthIntervalDataType : arrow.interval_data_type.IntervalDataType
       Get builder for [arrow.month_interval_data_type.MonthIntervalDataType]
       Returns: New builder object
   */
-  static MonthIntervalDataTypeGidBuilder builder()
+  static MonthIntervalDataTypeGidBuilder builder() nothrow
   {
     return new MonthIntervalDataTypeGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowMonthIntervalDataType* _cretval;
     _cretval = garrow_month_interval_data_type_new();
@@ -68,7 +68,7 @@ final class MonthIntervalDataTypeGidBuilder : MonthIntervalDataTypeGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  MonthIntervalDataType build()
+  MonthIntervalDataType build() nothrow
   {
     return new MonthIntervalDataType(cast(void*)createGObject(MonthIntervalDataType._getGType), Yes.Take);
   }

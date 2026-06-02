@@ -16,26 +16,26 @@ class Row : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_row_get_type != &gidSymbolNotFound ? gda_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Row self()
+  override Row self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class Row : gobject.object.ObjectWrap
       Get builder for [gda.row.Row]
       Returns: New builder object
   */
-  static RowGidBuilder builder()
+  static RowGidBuilder builder() nothrow
   {
     return new RowGidBuilder;
   }
 
   /** */
-  @property void nbValues(int propval)
+  @property void nbValues(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("nb-values", propval);
   }
@@ -62,7 +62,7 @@ class Row : gobject.object.ObjectWrap
         count = number of #GValue in the new #GdaRow.
       Returns: a newly allocated #GdaRow object.
   */
-  this(int count)
+  this(int count) nothrow
   {
     GdaRow* _cretval;
     _cretval = gda_row_new(count);
@@ -70,7 +70,7 @@ class Row : gobject.object.ObjectWrap
   }
 
   /** */
-  int getLength()
+  int getLength() nothrow
   {
     int _retval;
     _retval = gda_row_get_length(cast(GdaRow*)this._cPtr);
@@ -87,7 +87,7 @@ class Row : gobject.object.ObjectWrap
         num = field index.
       Returns: a pointer to the #GValue in the position num of row.
   */
-  gobject.value.Value getValue(int num)
+  gobject.value.Value getValue(int num) nothrow
   {
     GValue* _cretval;
     _cretval = gda_row_get_value(cast(GdaRow*)this._cPtr, num);
@@ -102,7 +102,7 @@ class Row : gobject.object.ObjectWrap
       Params:
         value = a #GValue belonging to row (obtained with [gda.row.Row.getValue]).
   */
-  void invalidateValue(gobject.value.Value value)
+  void invalidateValue(gobject.value.Value value) nothrow
   {
     gda_row_invalidate_value(cast(GdaRow*)this._cPtr, value ? cast(GValue*)value._cPtr(No.Dup) : null);
   }
@@ -115,7 +115,7 @@ class Row : gobject.object.ObjectWrap
         value = a #GValue belonging to row (obtained with [gda.row.Row.getValue]).
         error = the error which lead to the invalidation
   */
-  void invalidateValueE(gobject.value.Value value, glib.error.ErrorWrap error = null)
+  void invalidateValueE(gobject.value.Value value, glib.error.ErrorWrap error = null) nothrow
   {
     gda_row_invalidate_value_e(cast(GdaRow*)this._cPtr, value ? cast(GValue*)value._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null);
   }
@@ -129,7 +129,7 @@ class Row : gobject.object.ObjectWrap
         value = a #GValue belonging to row (obtained with [gda.row.Row.getValue]).
       Returns: true if value is valid
   */
-  bool valueIsValid(gobject.value.Value value)
+  bool valueIsValid(gobject.value.Value value) nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_row_value_is_valid(cast(GdaRow*)this._cPtr, value ? cast(GValue*)value._cPtr(No.Dup) : null);
@@ -162,7 +162,7 @@ class RowGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T nbValues(int propval)
+  T nbValues(int propval) nothrow
   {
     return setProperty("nb-values", propval);
   }
@@ -175,7 +175,7 @@ final class RowGidBuilder : RowGidBuilderImpl!RowGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Row build()
+  Row build() nothrow
   {
     return new Row(cast(void*)createGObject(Row._getGType), Yes.Take);
   }

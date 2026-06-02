@@ -60,26 +60,26 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_file_chooser_button_get_type != &gidSymbolNotFound ? gtk_file_chooser_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileChooserButton self()
+  override FileChooserButton self() nothrow
   {
     return this;
   }
@@ -88,7 +88,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
       Get builder for [gtk.file_chooser_button.FileChooserButton]
       Returns: New builder object
   */
-  static FileChooserButtonGidBuilder builder()
+  static FileChooserButtonGidBuilder builder() nothrow
   {
     return new FileChooserButtonGidBuilder;
   }
@@ -97,7 +97,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
       Get `title` property.
       Returns: Title to put on the #GtkFileChooserDialog associated with the button.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -107,7 +107,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
       Params:
         propval = Title to put on the #GtkFileChooserDialog associated with the button.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -116,7 +116,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
       Get `widthChars` property.
       Returns: The width of the entry and label inside the button, in characters.
   */
-  @property int widthChars()
+  @property int widthChars() nothrow
   {
     return getWidthChars();
   }
@@ -126,7 +126,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
       Params:
         propval = The width of the entry and label inside the button, in characters.
   */
-  @property void widthChars(int propval)
+  @property void widthChars(int propval) nothrow
   {
     setWidthChars(propval);
   }
@@ -141,7 +141,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
         action = the open mode for the widget.
       Returns: a new button widget.
   */
-  this(string title, gtk.types.FileChooserAction action)
+  this(string title, gtk.types.FileChooserAction action) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -165,7 +165,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
         dialog = the widget to use as dialog
       Returns: a new button widget.
   */
-  static gtk.file_chooser_button.FileChooserButton newWithDialog(gtk.dialog.Dialog dialog)
+  static gtk.file_chooser_button.FileChooserButton newWithDialog(gtk.dialog.Dialog dialog) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_file_chooser_button_new_with_dialog(dialog ? cast(GtkWidget*)dialog._cPtr(No.Dup) : null);
@@ -181,7 +181,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   
       Deprecated: Use [gtk.widget.Widget.getFocusOnClick] instead
   */
-  override bool getFocusOnClick()
+  override bool getFocusOnClick() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_file_chooser_button_get_focus_on_click(cast(GtkFileChooserButton*)this._cPtr);
@@ -193,7 +193,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
       should not be modified or freed.
       Returns: a pointer to the browse dialog’s title.
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_file_chooser_button_get_title(cast(GtkFileChooserButton*)this._cPtr);
@@ -205,7 +205,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
       Retrieves the width in characters of the button widget’s entry and/or label.
       Returns: an integer width (in characters) that the button will use to size itself.
   */
-  int getWidthChars()
+  int getWidthChars() nothrow
   {
     int _retval;
     _retval = gtk_file_chooser_button_get_width_chars(cast(GtkFileChooserButton*)this._cPtr);
@@ -223,7 +223,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   
       Deprecated: Use [gtk.widget.Widget.setFocusOnClick] instead
   */
-  override void setFocusOnClick(bool focusOnClick)
+  override void setFocusOnClick(bool focusOnClick) nothrow
   {
     gtk_file_chooser_button_set_focus_on_click(cast(GtkFileChooserButton*)this._cPtr, focusOnClick);
   }
@@ -234,7 +234,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
       Params:
         title = the new browse dialog title.
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_file_chooser_button_set_title(cast(GtkFileChooserButton*)this._cPtr, _title);
@@ -246,7 +246,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
       Params:
         nChars = the new width, in characters.
   */
-  void setWidthChars(int nChars)
+  void setWidthChars(int nChars) nothrow
   {
     gtk_file_chooser_button_set_width_chars(cast(GtkFileChooserButton*)this._cPtr, nChars);
   }
@@ -269,13 +269,13 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFileSet(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFileSet(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser_button.FileChooserButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -284,7 +284,14 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.file_chooser_button.FileChooserButton.fileSet");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -304,7 +311,7 @@ class FileChooserButtonGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T, gtk.file
         propval = Instance of the #GtkFileChooserDialog associated with the button.
       Returns: Builder instance for fluent chaining
   */
-  T dialog(gtk.file_chooser.FileChooser propval)
+  T dialog(gtk.file_chooser.FileChooser propval) nothrow
   {
     return setProperty("dialog", propval);
   }
@@ -315,7 +322,7 @@ class FileChooserButtonGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T, gtk.file
         propval = Title to put on the #GtkFileChooserDialog associated with the button.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -326,7 +333,7 @@ class FileChooserButtonGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T, gtk.file
         propval = The width of the entry and label inside the button, in characters.
       Returns: Builder instance for fluent chaining
   */
-  T widthChars(int propval)
+  T widthChars(int propval) nothrow
   {
     return setProperty("width-chars", propval);
   }
@@ -339,7 +346,7 @@ final class FileChooserButtonGidBuilder : FileChooserButtonGidBuilderImpl!FileCh
       Create object from builder.
       Returns: New object
   */
-  FileChooserButton build()
+  FileChooserButton build() nothrow
   {
     return new FileChooserButton(cast(void*)createGObject(FileChooserButton._getGType), No.Take);
   }

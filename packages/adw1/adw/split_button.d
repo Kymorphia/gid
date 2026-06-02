@@ -64,26 +64,26 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_split_button_get_type != &gidSymbolNotFound ? adw_split_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SplitButton self()
+  override SplitButton self() nothrow
   {
     return this;
   }
@@ -92,7 +92,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Get builder for [adw.split_button.SplitButton]
       Returns: New builder object
   */
-  static SplitButtonGidBuilder builder()
+  static SplitButtonGidBuilder builder() nothrow
   {
     return new SplitButtonGidBuilder;
   }
@@ -106,7 +106,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
         See [gtk.button.Button.canShrink] and
         [gtk.menu_button.MenuButton.canShrink].
   */
-  @property bool canShrink()
+  @property bool canShrink() nothrow
   {
     return getCanShrink();
   }
@@ -121,7 +121,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
           See [gtk.button.Button.canShrink] and
           [gtk.menu_button.MenuButton.canShrink].
   */
-  @property void canShrink(bool propval)
+  @property void canShrink(bool propval) nothrow
   {
     setCanShrink(propval);
   }
@@ -133,7 +133,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
         Setting the child widget will set [adw.split_button.SplitButton.label] and
         [adw.split_button.SplitButton.iconName] to `NULL`.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -146,7 +146,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
           Setting the child widget will set [adw.split_button.SplitButton.label] and
           [adw.split_button.SplitButton.iconName] to `NULL`.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -162,7 +162,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
         
         If you pass [gtk.types.ArrowType.None], it's equivalent to [gtk.types.ArrowType.Down].
   */
-  @property gtk.types.ArrowType direction()
+  @property gtk.types.ArrowType direction() nothrow
   {
     return getDirection();
   }
@@ -179,7 +179,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
           
           If you pass [gtk.types.ArrowType.None], it's equivalent to [gtk.types.ArrowType.Down].
   */
-  @property void direction(gtk.types.ArrowType propval)
+  @property void direction(gtk.types.ArrowType propval) nothrow
   {
     setDirection(propval);
   }
@@ -190,7 +190,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
         
         The tooltip can be marked up with the Pango text markup language.
   */
-  @property string dropdownTooltip()
+  @property string dropdownTooltip() nothrow
   {
     return getDropdownTooltip();
   }
@@ -202,7 +202,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
           
           The tooltip can be marked up with the Pango text markup language.
   */
-  @property void dropdownTooltip(string propval)
+  @property void dropdownTooltip(string propval) nothrow
   {
     setDropdownTooltip(propval);
   }
@@ -214,7 +214,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
         Setting the icon name will set [adw.split_button.SplitButton.label] and
         [adw.split_button.SplitButton.child] to `NULL`.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return getIconName();
   }
@@ -227,7 +227,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
           Setting the icon name will set [adw.split_button.SplitButton.label] and
           [adw.split_button.SplitButton.child] to `NULL`.
   */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     setIconName(propval);
   }
@@ -239,7 +239,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
         Setting the label will set [adw.split_button.SplitButton.iconName] and
         [adw.split_button.SplitButton.child] to `NULL`.
   */
-  @property string label()
+  @property string label() nothrow
   {
     return getLabel();
   }
@@ -252,7 +252,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
           Setting the label will set [adw.split_button.SplitButton.iconName] and
           [adw.split_button.SplitButton.child] to `NULL`.
   */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     setLabel(propval);
   }
@@ -270,7 +270,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
         If [adw.split_button.SplitButton.popover] is already set, it will be dissociated
         from the button, and the property is set to `NULL`.
   */
-  @property gio.menu_model.MenuModel menuModel()
+  @property gio.menu_model.MenuModel menuModel() nothrow
   {
     return getMenuModel();
   }
@@ -289,7 +289,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
           If [adw.split_button.SplitButton.popover] is already set, it will be dissociated
           from the button, and the property is set to `NULL`.
   */
-  @property void menuModel(gio.menu_model.MenuModel propval)
+  @property void menuModel(gio.menu_model.MenuModel propval) nothrow
   {
     setMenuModel(propval);
   }
@@ -303,7 +303,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
         If [adw.split_button.SplitButton.menuModel] is set, the menu model is dissociated
         from the button, and the property is set to `NULL`.
   */
-  @property gtk.popover.Popover popover()
+  @property gtk.popover.Popover popover() nothrow
   {
     return getPopover();
   }
@@ -318,7 +318,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
           If [adw.split_button.SplitButton.menuModel] is set, the menu model is dissociated
           from the button, and the property is set to `NULL`.
   */
-  @property void popover(gtk.popover.Popover propval)
+  @property void popover(gtk.popover.Popover propval) nothrow
   {
     setPopover(propval);
   }
@@ -329,7 +329,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
         
         See [adw.split_button.SplitButton.label].
   */
-  @property bool useUnderline()
+  @property bool useUnderline() nothrow
   {
     return getUseUnderline();
   }
@@ -341,7 +341,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
           
           See [adw.split_button.SplitButton.label].
   */
-  @property void useUnderline(bool propval)
+  @property void useUnderline(bool propval) nothrow
   {
     setUseUnderline(propval);
   }
@@ -352,7 +352,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Creates a new [adw.split_button.SplitButton].
       Returns: the newly created [adw.split_button.SplitButton]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_split_button_new();
@@ -363,7 +363,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       gets whether the button can be smaller than the natural size of its contents.
       Returns: whether the button can shrink
   */
-  bool getCanShrink()
+  bool getCanShrink() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_split_button_get_can_shrink(cast(AdwSplitButton*)this._cPtr);
@@ -374,7 +374,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Gets the child widget.
       Returns: the child widget
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_split_button_get_child(cast(AdwSplitButton*)this._cPtr);
@@ -388,7 +388,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Gets the direction in which the popup will be popped up.
       Returns: the direction
   */
-  gtk.types.ArrowType getDirection()
+  gtk.types.ArrowType getDirection() nothrow
   {
     GtkArrowType _cretval;
     _cretval = adw_split_button_get_direction(cast(AdwSplitButton*)this._cPtr);
@@ -400,7 +400,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Gets the tooltip of the dropdown button of self.
       Returns: the dropdown tooltip of self
   */
-  string getDropdownTooltip()
+  string getDropdownTooltip() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_split_button_get_dropdown_tooltip(cast(AdwSplitButton*)this._cPtr);
@@ -412,7 +412,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Gets the name of the icon used to automatically populate the button.
       Returns: the icon name
   */
-  string getIconName()
+  string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_split_button_get_icon_name(cast(AdwSplitButton*)this._cPtr);
@@ -424,7 +424,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Gets the label for self.
       Returns: the label for self
   */
-  string getLabel()
+  string getLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_split_button_get_label(cast(AdwSplitButton*)this._cPtr);
@@ -436,7 +436,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Gets the menu model from which the popup will be created.
       Returns: the menu model
   */
-  gio.menu_model.MenuModel getMenuModel()
+  gio.menu_model.MenuModel getMenuModel() nothrow
   {
     GMenuModel* _cretval;
     _cretval = adw_split_button_get_menu_model(cast(AdwSplitButton*)this._cPtr);
@@ -448,7 +448,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Gets the popover that will be popped up when the dropdown is clicked.
       Returns: the popover
   */
-  gtk.popover.Popover getPopover()
+  gtk.popover.Popover getPopover() nothrow
   {
     GtkPopover* _cretval;
     _cretval = adw_split_button_get_popover(cast(AdwSplitButton*)this._cPtr);
@@ -460,7 +460,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Gets whether an underline in the text indicates a mnemonic.
       Returns: whether an underline in the text indicates a mnemonic
   */
-  bool getUseUnderline()
+  bool getUseUnderline() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_split_button_get_use_underline(cast(AdwSplitButton*)this._cPtr);
@@ -470,7 +470,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Dismisses the menu.
   */
-  void popdown()
+  void popdown() nothrow
   {
     adw_split_button_popdown(cast(AdwSplitButton*)this._cPtr);
   }
@@ -478,7 +478,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Pops up the menu.
   */
-  void popup()
+  void popup() nothrow
   {
     adw_split_button_popup(cast(AdwSplitButton*)this._cPtr);
   }
@@ -494,7 +494,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         canShrink = whether the button can shrink
   */
-  void setCanShrink(bool canShrink)
+  void setCanShrink(bool canShrink) nothrow
   {
     adw_split_button_set_can_shrink(cast(AdwSplitButton*)this._cPtr, canShrink);
   }
@@ -508,7 +508,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         child = the new child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     adw_split_button_set_child(cast(AdwSplitButton*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -528,7 +528,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         direction = the direction
   */
-  void setDirection(gtk.types.ArrowType direction)
+  void setDirection(gtk.types.ArrowType direction) nothrow
   {
     adw_split_button_set_direction(cast(AdwSplitButton*)this._cPtr, direction);
   }
@@ -541,7 +541,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         tooltip = the dropdown tooltip of self
   */
-  void setDropdownTooltip(string tooltip)
+  void setDropdownTooltip(string tooltip) nothrow
   {
     const(char)* _tooltip = tooltip.toCString(No.Alloc);
     adw_split_button_set_dropdown_tooltip(cast(AdwSplitButton*)this._cPtr, _tooltip);
@@ -556,7 +556,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         iconName = the icon name to set
   */
-  void setIconName(string iconName)
+  void setIconName(string iconName) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     adw_split_button_set_icon_name(cast(AdwSplitButton*)this._cPtr, _iconName);
@@ -571,7 +571,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         label = the label to set
   */
-  void setLabel(string label)
+  void setLabel(string label) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     adw_split_button_set_label(cast(AdwSplitButton*)this._cPtr, _label);
@@ -592,7 +592,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         menuModel = the menu model
   */
-  void setMenuModel(gio.menu_model.MenuModel menuModel = null)
+  void setMenuModel(gio.menu_model.MenuModel menuModel = null) nothrow
   {
     adw_split_button_set_menu_model(cast(AdwSplitButton*)this._cPtr, menuModel ? cast(GMenuModel*)menuModel._cPtr(No.Dup) : null);
   }
@@ -608,7 +608,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         popover = the popover
   */
-  void setPopover(gtk.popover.Popover popover = null)
+  void setPopover(gtk.popover.Popover popover = null) nothrow
   {
     adw_split_button_set_popover(cast(AdwSplitButton*)this._cPtr, popover ? cast(GtkPopover*)popover._cPtr(No.Dup) : null);
   }
@@ -621,7 +621,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         useUnderline = whether an underline in the text indicates a mnemonic
   */
-  void setUseUnderline(bool useUnderline)
+  void setUseUnderline(bool useUnderline) nothrow
   {
     adw_split_button_set_use_underline(cast(AdwSplitButton*)this._cPtr, useUnderline);
   }
@@ -644,13 +644,13 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.split_button.SplitButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -659,7 +659,14 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.split_button.SplitButton.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -681,13 +688,13 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClicked(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClicked(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.split_button.SplitButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -696,7 +703,14 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.split_button.SplitButton.clicked");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -721,7 +735,7 @@ class SplitButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acti
           [gtk.menu_button.MenuButton.canShrink].
       Returns: Builder instance for fluent chaining
   */
-  T canShrink(bool propval)
+  T canShrink(bool propval) nothrow
   {
     return setProperty("can-shrink", propval);
   }
@@ -735,7 +749,7 @@ class SplitButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acti
           [adw.split_button.SplitButton.iconName] to `NULL`.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -753,7 +767,7 @@ class SplitButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acti
           If you pass [gtk.types.ArrowType.None], it's equivalent to [gtk.types.ArrowType.Down].
       Returns: Builder instance for fluent chaining
   */
-  T direction(gtk.types.ArrowType propval)
+  T direction(gtk.types.ArrowType propval) nothrow
   {
     return setProperty("direction", propval);
   }
@@ -766,7 +780,7 @@ class SplitButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acti
           The tooltip can be marked up with the Pango text markup language.
       Returns: Builder instance for fluent chaining
   */
-  T dropdownTooltip(string propval)
+  T dropdownTooltip(string propval) nothrow
   {
     return setProperty("dropdown-tooltip", propval);
   }
@@ -780,7 +794,7 @@ class SplitButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acti
           [adw.split_button.SplitButton.child] to `NULL`.
       Returns: Builder instance for fluent chaining
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
@@ -794,7 +808,7 @@ class SplitButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acti
           [adw.split_button.SplitButton.child] to `NULL`.
       Returns: Builder instance for fluent chaining
   */
-  T label(string propval)
+  T label(string propval) nothrow
   {
     return setProperty("label", propval);
   }
@@ -814,7 +828,7 @@ class SplitButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acti
           from the button, and the property is set to `NULL`.
       Returns: Builder instance for fluent chaining
   */
-  T menuModel(gio.menu_model.MenuModel propval)
+  T menuModel(gio.menu_model.MenuModel propval) nothrow
   {
     return setProperty("menu-model", propval);
   }
@@ -830,7 +844,7 @@ class SplitButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acti
           from the button, and the property is set to `NULL`.
       Returns: Builder instance for fluent chaining
   */
-  T popover(gtk.popover.Popover propval)
+  T popover(gtk.popover.Popover propval) nothrow
   {
     return setProperty("popover", propval);
   }
@@ -843,7 +857,7 @@ class SplitButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acti
           See [adw.split_button.SplitButton.label].
       Returns: Builder instance for fluent chaining
   */
-  T useUnderline(bool propval)
+  T useUnderline(bool propval) nothrow
   {
     return setProperty("use-underline", propval);
   }
@@ -856,7 +870,7 @@ final class SplitButtonGidBuilder : SplitButtonGidBuilderImpl!SplitButtonGidBuil
       Create object from builder.
       Returns: New object
   */
-  SplitButton build()
+  SplitButton build() nothrow
   {
     return new SplitButton(cast(void*)createGObject(SplitButton._getGType), No.Take);
   }

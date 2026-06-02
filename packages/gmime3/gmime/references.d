@@ -17,32 +17,32 @@ class References : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_references_get_type != &gidSymbolNotFound ? g_mime_references_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override References self()
+  override References self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class References : gobject.boxed.Boxed
       Creates a new #GMimeReferences.
       Returns: a new #GMimeReferences.
   */
-  this()
+  this() nothrow
   {
     GMimeReferences* _cretval;
     _cretval = g_mime_references_new();
@@ -64,7 +64,7 @@ class References : gobject.boxed.Boxed
       Params:
         msgid = a message-id string
   */
-  void append(string msgid)
+  void append(string msgid) nothrow
   {
     const(char)* _msgid = msgid.toCString(No.Alloc);
     g_mime_references_append(cast(GMimeReferences*)this._cPtr, _msgid);
@@ -73,7 +73,7 @@ class References : gobject.boxed.Boxed
   /**
       Clears the #GMimeReferences list.
   */
-  void clear()
+  void clear() nothrow
   {
     g_mime_references_clear(cast(GMimeReferences*)this._cPtr);
   }
@@ -83,7 +83,7 @@ class References : gobject.boxed.Boxed
       Returns: a new #GMimeReferences list that contains
         an identical list of items as refs.
   */
-  gmime.references.References copy()
+  gmime.references.References copy() nothrow
   {
     GMimeReferences* _cretval;
     _cretval = g_mime_references_copy(cast(GMimeReferences*)this._cPtr);
@@ -98,7 +98,7 @@ class References : gobject.boxed.Boxed
         index = the index of the message id
       Returns: the Message-Id reference from the #GMimeReferences.
   */
-  string getMessageId(int index)
+  string getMessageId(int index) nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_references_get_message_id(cast(GMimeReferences*)this._cPtr, index);
@@ -110,7 +110,7 @@ class References : gobject.boxed.Boxed
       Gets the length of the #GMimeReferences list.
       Returns: the number of message ids in the list.
   */
-  int length()
+  int length() nothrow
   {
     int _retval;
     _retval = g_mime_references_length(cast(GMimeReferences*)this._cPtr);
@@ -124,7 +124,7 @@ class References : gobject.boxed.Boxed
         index = the index of the message id
         msgid = the message id
   */
-  void setMessageId(int index, string msgid)
+  void setMessageId(int index, string msgid) nothrow
   {
     const(char)* _msgid = msgid.toCString(No.Alloc);
     g_mime_references_set_message_id(cast(GMimeReferences*)this._cPtr, index, _msgid);
@@ -139,7 +139,7 @@ class References : gobject.boxed.Boxed
         text = string containing a list of msg-ids
       Returns: a new #GMimeReferences containing the parsed message ids.
   */
-  static gmime.references.References parse(gmime.parser_options.ParserOptions options, string text)
+  static gmime.references.References parse(gmime.parser_options.ParserOptions options, string text) nothrow
   {
     GMimeReferences* _cretval;
     const(char)* _text = text.toCString(No.Alloc);

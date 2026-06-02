@@ -8,12 +8,12 @@ import gio.converter_mixin;
 /// Proxy object for [gio.converter.Converter] interface when a GObject has no applicable D binding
 class ConverterIfaceProxy : IfaceProxy, gio.converter.Converter
 {
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
-  override TypeInfo_Interface getIface()
+  override TypeInfo_Interface getIface() nothrow
   {
     return typeid(gio.converter.Converter);
   }

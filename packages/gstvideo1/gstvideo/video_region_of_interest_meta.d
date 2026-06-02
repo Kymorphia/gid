@@ -19,11 +19,8 @@ class VideoRegionOfInterestMeta
   GstVideoRegionOfInterestMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta");
-
     _cInstance = *cast(GstVideoRegionOfInterestMeta*)ptr;
 
     if (take)
@@ -31,7 +28,7 @@ class VideoRegionOfInterestMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -40,7 +37,7 @@ class VideoRegionOfInterestMeta
       Get `meta` field.
       Returns: parent #GstMeta
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoRegionOfInterestMeta*)this._cPtr).meta, No.Take);
   }
@@ -49,7 +46,7 @@ class VideoRegionOfInterestMeta
       Get `roiType` field.
       Returns: GQuark describing the semantic of the Roi (f.i. a face, a pedestrian)
   */
-  @property glib.types.Quark roiType()
+  @property glib.types.Quark roiType() nothrow
   {
     return (cast(GstVideoRegionOfInterestMeta*)this._cPtr).roiType;
   }
@@ -59,7 +56,7 @@ class VideoRegionOfInterestMeta
       Params:
         propval = GQuark describing the semantic of the Roi (f.i. a face, a pedestrian)
   */
-  @property void roiType(glib.types.Quark propval)
+  @property void roiType(glib.types.Quark propval) nothrow
   {
     (cast(GstVideoRegionOfInterestMeta*)this._cPtr).roiType = propval;
   }
@@ -68,7 +65,7 @@ class VideoRegionOfInterestMeta
       Get `id` field.
       Returns: identifier of this particular ROI
   */
-  @property int id()
+  @property int id() nothrow
   {
     return (cast(GstVideoRegionOfInterestMeta*)this._cPtr).id;
   }
@@ -78,7 +75,7 @@ class VideoRegionOfInterestMeta
       Params:
         propval = identifier of this particular ROI
   */
-  @property void id(int propval)
+  @property void id(int propval) nothrow
   {
     (cast(GstVideoRegionOfInterestMeta*)this._cPtr).id = propval;
   }
@@ -87,7 +84,7 @@ class VideoRegionOfInterestMeta
       Get `parentId` field.
       Returns: identifier of its parent ROI, used f.i. for ROI hierarchisation.
   */
-  @property int parentId()
+  @property int parentId() nothrow
   {
     return (cast(GstVideoRegionOfInterestMeta*)this._cPtr).parentId;
   }
@@ -97,7 +94,7 @@ class VideoRegionOfInterestMeta
       Params:
         propval = identifier of its parent ROI, used f.i. for ROI hierarchisation.
   */
-  @property void parentId(int propval)
+  @property void parentId(int propval) nothrow
   {
     (cast(GstVideoRegionOfInterestMeta*)this._cPtr).parentId = propval;
   }
@@ -106,7 +103,7 @@ class VideoRegionOfInterestMeta
       Get `x` field.
       Returns: x component of upper-left corner
   */
-  @property uint x()
+  @property uint x() nothrow
   {
     return (cast(GstVideoRegionOfInterestMeta*)this._cPtr).x;
   }
@@ -116,7 +113,7 @@ class VideoRegionOfInterestMeta
       Params:
         propval = x component of upper-left corner
   */
-  @property void x(uint propval)
+  @property void x(uint propval) nothrow
   {
     (cast(GstVideoRegionOfInterestMeta*)this._cPtr).x = propval;
   }
@@ -125,7 +122,7 @@ class VideoRegionOfInterestMeta
       Get `y` field.
       Returns: y component of upper-left corner
   */
-  @property uint y()
+  @property uint y() nothrow
   {
     return (cast(GstVideoRegionOfInterestMeta*)this._cPtr).y;
   }
@@ -135,7 +132,7 @@ class VideoRegionOfInterestMeta
       Params:
         propval = y component of upper-left corner
   */
-  @property void y(uint propval)
+  @property void y(uint propval) nothrow
   {
     (cast(GstVideoRegionOfInterestMeta*)this._cPtr).y = propval;
   }
@@ -144,7 +141,7 @@ class VideoRegionOfInterestMeta
       Get `w` field.
       Returns: bounding box width
   */
-  @property uint w()
+  @property uint w() nothrow
   {
     return (cast(GstVideoRegionOfInterestMeta*)this._cPtr).w;
   }
@@ -154,7 +151,7 @@ class VideoRegionOfInterestMeta
       Params:
         propval = bounding box width
   */
-  @property void w(uint propval)
+  @property void w(uint propval) nothrow
   {
     (cast(GstVideoRegionOfInterestMeta*)this._cPtr).w = propval;
   }
@@ -163,7 +160,7 @@ class VideoRegionOfInterestMeta
       Get `h` field.
       Returns: bounding box height
   */
-  @property uint h()
+  @property uint h() nothrow
   {
     return (cast(GstVideoRegionOfInterestMeta*)this._cPtr).h;
   }
@@ -173,7 +170,7 @@ class VideoRegionOfInterestMeta
       Params:
         propval = bounding box height
   */
-  @property void h(uint propval)
+  @property void h(uint propval) nothrow
   {
     (cast(GstVideoRegionOfInterestMeta*)this._cPtr).h = propval;
   }
@@ -192,7 +189,7 @@ class VideoRegionOfInterestMeta
       Params:
         s = a #GstStructure
   */
-  void addParam(gst.structure.Structure s)
+  void addParam(gst.structure.Structure s) nothrow
   {
     gst_video_region_of_interest_meta_add_param(cast(GstVideoRegionOfInterestMeta*)this._cPtr, s ? cast(GstStructure*)s._cPtr(Yes.Dup) : null);
   }
@@ -207,7 +204,7 @@ class VideoRegionOfInterestMeta
   
       Version: See also: gst_video_region_of_interest_meta_add_param()
   */
-  gst.structure.Structure getParam(string name)
+  gst.structure.Structure getParam(string name) nothrow
   {
     GstStructure* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -217,7 +214,7 @@ class VideoRegionOfInterestMeta
   }
 
   /** */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_region_of_interest_meta_get_info();

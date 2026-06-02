@@ -49,11 +49,8 @@ class EventButton
   GdkEventButton _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.event_button.EventButton");
-
     _cInstance = *cast(GdkEventButton*)ptr;
 
     if (take)
@@ -61,7 +58,7 @@ class EventButton
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -71,7 +68,7 @@ class EventButton
       Returns: the type of the event ([gdk.types.EventType.ButtonPress], [gdk.types.EventType._2buttonPress],
           [gdk.types.EventType._3buttonPress] or [gdk.types.EventType.ButtonRelease]).
   */
-  @property gdk.types.EventType type()
+  @property gdk.types.EventType type() nothrow
   {
     return cast(gdk.types.EventType)(cast(GdkEventButton*)this._cPtr).type;
   }
@@ -82,7 +79,7 @@ class EventButton
         propval = the type of the event ([gdk.types.EventType.ButtonPress], [gdk.types.EventType._2buttonPress],
             [gdk.types.EventType._3buttonPress] or [gdk.types.EventType.ButtonRelease]).
   */
-  @property void type(gdk.types.EventType propval)
+  @property void type(gdk.types.EventType propval) nothrow
   {
     (cast(GdkEventButton*)this._cPtr).type = cast(GdkEventType)propval;
   }
@@ -91,7 +88,7 @@ class EventButton
       Get `window` field.
       Returns: the window which received the event.
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventButton*)this._cPtr).window);
   }
@@ -101,7 +98,7 @@ class EventButton
       Params:
         propval = the window which received the event.
   */
-  @property void window(gdk.window.Window propval)
+  @property void window(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventButton*)this._cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventButton*)this._cPtr).window);
@@ -111,7 +108,7 @@ class EventButton
       Get `sendEvent` field.
       Returns: true if the event was sent explicitly.
   */
-  @property byte sendEvent()
+  @property byte sendEvent() nothrow
   {
     return (cast(GdkEventButton*)this._cPtr).sendEvent;
   }
@@ -121,7 +118,7 @@ class EventButton
       Params:
         propval = true if the event was sent explicitly.
   */
-  @property void sendEvent(byte propval)
+  @property void sendEvent(byte propval) nothrow
   {
     (cast(GdkEventButton*)this._cPtr).sendEvent = propval;
   }
@@ -130,7 +127,7 @@ class EventButton
       Get `time` field.
       Returns: the time of the event in milliseconds.
   */
-  @property uint time()
+  @property uint time() nothrow
   {
     return (cast(GdkEventButton*)this._cPtr).time;
   }
@@ -140,7 +137,7 @@ class EventButton
       Params:
         propval = the time of the event in milliseconds.
   */
-  @property void time(uint propval)
+  @property void time(uint propval) nothrow
   {
     (cast(GdkEventButton*)this._cPtr).time = propval;
   }
@@ -149,7 +146,7 @@ class EventButton
       Get `x` field.
       Returns: the x coordinate of the pointer relative to the window.
   */
-  @property double x()
+  @property double x() nothrow
   {
     return (cast(GdkEventButton*)this._cPtr).x;
   }
@@ -159,7 +156,7 @@ class EventButton
       Params:
         propval = the x coordinate of the pointer relative to the window.
   */
-  @property void x(double propval)
+  @property void x(double propval) nothrow
   {
     (cast(GdkEventButton*)this._cPtr).x = propval;
   }
@@ -168,7 +165,7 @@ class EventButton
       Get `y` field.
       Returns: the y coordinate of the pointer relative to the window.
   */
-  @property double y()
+  @property double y() nothrow
   {
     return (cast(GdkEventButton*)this._cPtr).y;
   }
@@ -178,7 +175,7 @@ class EventButton
       Params:
         propval = the y coordinate of the pointer relative to the window.
   */
-  @property void y(double propval)
+  @property void y(double propval) nothrow
   {
     (cast(GdkEventButton*)this._cPtr).y = propval;
   }
@@ -189,7 +186,7 @@ class EventButton
           the modifier keys (e.g. Control, Shift and Alt) and the pointer
           buttons. See #GdkModifierType.
   */
-  @property gdk.types.ModifierType state()
+  @property gdk.types.ModifierType state() nothrow
   {
     return cast(gdk.types.ModifierType)(cast(GdkEventButton*)this._cPtr).state;
   }
@@ -201,7 +198,7 @@ class EventButton
             the modifier keys (e.g. Control, Shift and Alt) and the pointer
             buttons. See #GdkModifierType.
   */
-  @property void state(gdk.types.ModifierType propval)
+  @property void state(gdk.types.ModifierType propval) nothrow
   {
     (cast(GdkEventButton*)this._cPtr).state = cast(GdkModifierType)propval;
   }
@@ -213,7 +210,7 @@ class EventButton
           and 3 is the right button. On 2-button mice, the middle button can
           often be simulated by pressing both mouse buttons together.
   */
-  @property uint button()
+  @property uint button() nothrow
   {
     return (cast(GdkEventButton*)this._cPtr).button;
   }
@@ -226,7 +223,7 @@ class EventButton
             and 3 is the right button. On 2-button mice, the middle button can
             often be simulated by pressing both mouse buttons together.
   */
-  @property void button(uint propval)
+  @property void button(uint propval) nothrow
   {
     (cast(GdkEventButton*)this._cPtr).button = propval;
   }
@@ -236,7 +233,7 @@ class EventButton
       Returns: the master device that the event originated from. Use
         [gdk.event.Event.getSourceDevice] to get the slave device.
   */
-  @property gdk.device.Device device()
+  @property gdk.device.Device device() nothrow
   {
     return cToD!(gdk.device.Device)(cast(void*)(cast(GdkEventButton*)this._cPtr).device);
   }
@@ -247,7 +244,7 @@ class EventButton
         propval = the master device that the event originated from. Use
           [gdk.event.Event.getSourceDevice] to get the slave device.
   */
-  @property void device(gdk.device.Device propval)
+  @property void device(gdk.device.Device propval) nothrow
   {
     cValueFree!(gdk.device.Device)(cast(void*)(cast(GdkEventButton*)this._cPtr).device);
     dToC(propval, cast(void*)&(cast(GdkEventButton*)this._cPtr).device);
@@ -258,7 +255,7 @@ class EventButton
       Returns: the x coordinate of the pointer relative to the root of the
           screen.
   */
-  @property double xRoot()
+  @property double xRoot() nothrow
   {
     return (cast(GdkEventButton*)this._cPtr).xRoot;
   }
@@ -269,7 +266,7 @@ class EventButton
         propval = the x coordinate of the pointer relative to the root of the
             screen.
   */
-  @property void xRoot(double propval)
+  @property void xRoot(double propval) nothrow
   {
     (cast(GdkEventButton*)this._cPtr).xRoot = propval;
   }
@@ -279,7 +276,7 @@ class EventButton
       Returns: the y coordinate of the pointer relative to the root of the
           screen.
   */
-  @property double yRoot()
+  @property double yRoot() nothrow
   {
     return (cast(GdkEventButton*)this._cPtr).yRoot;
   }
@@ -290,7 +287,7 @@ class EventButton
         propval = the y coordinate of the pointer relative to the root of the
             screen.
   */
-  @property void yRoot(double propval)
+  @property void yRoot(double propval) nothrow
   {
     (cast(GdkEventButton*)this._cPtr).yRoot = propval;
   }

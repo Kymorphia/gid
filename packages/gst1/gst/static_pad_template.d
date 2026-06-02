@@ -19,11 +19,8 @@ class StaticPadTemplate
   GstStaticPadTemplate _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gst.static_pad_template.StaticPadTemplate");
-
     _cInstance = *cast(GstStaticPadTemplate*)ptr;
 
     if (take)
@@ -31,7 +28,7 @@ class StaticPadTemplate
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -40,7 +37,7 @@ class StaticPadTemplate
       Get `nameTemplate` field.
       Returns: the name of the template
   */
-  @property string nameTemplate()
+  @property string nameTemplate() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstStaticPadTemplate*)this._cPtr).nameTemplate);
   }
@@ -50,7 +47,7 @@ class StaticPadTemplate
       Params:
         propval = the name of the template
   */
-  @property void nameTemplate(string propval)
+  @property void nameTemplate(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstStaticPadTemplate*)this._cPtr).nameTemplate);
     dToC(propval, cast(void*)&(cast(GstStaticPadTemplate*)this._cPtr).nameTemplate);
@@ -60,7 +57,7 @@ class StaticPadTemplate
       Get `direction` field.
       Returns: the direction of the template
   */
-  @property gst.types.PadDirection direction()
+  @property gst.types.PadDirection direction() nothrow
   {
     return cast(gst.types.PadDirection)(cast(GstStaticPadTemplate*)this._cPtr).direction;
   }
@@ -70,7 +67,7 @@ class StaticPadTemplate
       Params:
         propval = the direction of the template
   */
-  @property void direction(gst.types.PadDirection propval)
+  @property void direction(gst.types.PadDirection propval) nothrow
   {
     (cast(GstStaticPadTemplate*)this._cPtr).direction = cast(GstPadDirection)propval;
   }
@@ -79,7 +76,7 @@ class StaticPadTemplate
       Get `presence` field.
       Returns: the presence of the template
   */
-  @property gst.types.PadPresence presence()
+  @property gst.types.PadPresence presence() nothrow
   {
     return cast(gst.types.PadPresence)(cast(GstStaticPadTemplate*)this._cPtr).presence;
   }
@@ -89,7 +86,7 @@ class StaticPadTemplate
       Params:
         propval = the presence of the template
   */
-  @property void presence(gst.types.PadPresence propval)
+  @property void presence(gst.types.PadPresence propval) nothrow
   {
     (cast(GstStaticPadTemplate*)this._cPtr).presence = cast(GstPadPresence)propval;
   }
@@ -98,7 +95,7 @@ class StaticPadTemplate
       Get `staticCaps` field.
       Returns: the caps of the template.
   */
-  @property gst.static_caps.StaticCaps staticCaps()
+  @property gst.static_caps.StaticCaps staticCaps() nothrow
   {
     return new gst.static_caps.StaticCaps(cast(GstStaticCaps*)&(cast(GstStaticPadTemplate*)this._cPtr).staticCaps, No.Take);
   }
@@ -107,7 +104,7 @@ class StaticPadTemplate
       Converts a #GstStaticPadTemplate into a #GstPadTemplate.
       Returns: a new #GstPadTemplate.
   */
-  gst.pad_template.PadTemplate get()
+  gst.pad_template.PadTemplate get() nothrow
   {
     GstPadTemplate* _cretval;
     _cretval = gst_static_pad_template_get(cast(GstStaticPadTemplate*)this._cPtr);
@@ -122,7 +119,7 @@ class StaticPadTemplate
         ref to the returned caps, use gst_caps_make_writable()
         on the returned caps to modify it.
   */
-  gst.caps.Caps getCaps()
+  gst.caps.Caps getCaps() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_static_pad_template_get_caps(cast(GstStaticPadTemplate*)this._cPtr);

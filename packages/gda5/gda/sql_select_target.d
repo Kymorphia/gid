@@ -22,11 +22,8 @@ class SqlSelectTarget
   GdaSqlSelectTarget _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.sql_select_target.SqlSelectTarget");
-
     _cInstance = *cast(GdaSqlSelectTarget*)ptr;
 
     if (take)
@@ -34,7 +31,7 @@ class SqlSelectTarget
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -43,7 +40,7 @@ class SqlSelectTarget
       Get `expr` field.
       Returns: expression
   */
-  @property gda.sql_expr.SqlExpr expr()
+  @property gda.sql_expr.SqlExpr expr() nothrow
   {
     return cToD!(gda.sql_expr.SqlExpr)(cast(void*)(cast(GdaSqlSelectTarget*)this._cPtr).expr);
   }
@@ -53,7 +50,7 @@ class SqlSelectTarget
       Params:
         propval = expression
   */
-  @property void expr(gda.sql_expr.SqlExpr propval)
+  @property void expr(gda.sql_expr.SqlExpr propval) nothrow
   {
     cValueFree!(gda.sql_expr.SqlExpr)(cast(void*)(cast(GdaSqlSelectTarget*)this._cPtr).expr);
     dToC(propval, cast(void*)&(cast(GdaSqlSelectTarget*)this._cPtr).expr);
@@ -63,7 +60,7 @@ class SqlSelectTarget
       Get `tableName` field.
       Returns: table name part of @expr if @expr represents a table
   */
-  @property string tableName()
+  @property string tableName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaSqlSelectTarget*)this._cPtr).tableName);
   }
@@ -73,7 +70,7 @@ class SqlSelectTarget
       Params:
         propval = table name part of @expr if @expr represents a table
   */
-  @property void tableName(string propval)
+  @property void tableName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaSqlSelectTarget*)this._cPtr).tableName);
     dToC(propval, cast(void*)&(cast(GdaSqlSelectTarget*)this._cPtr).tableName);
@@ -83,7 +80,7 @@ class SqlSelectTarget
       Get `as` field.
       Returns: alias
   */
-  @property string as()
+  @property string as() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaSqlSelectTarget*)this._cPtr).as);
   }
@@ -93,14 +90,14 @@ class SqlSelectTarget
       Params:
         propval = alias
   */
-  @property void as(string propval)
+  @property void as(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaSqlSelectTarget*)this._cPtr).as);
     dToC(propval, cast(void*)&(cast(GdaSqlSelectTarget*)this._cPtr).as);
   }
 
   /** */
-  @property gda.meta_db_object.MetaDbObject validityMetaObject()
+  @property gda.meta_db_object.MetaDbObject validityMetaObject() nothrow
   {
     return new gda.meta_db_object.MetaDbObject(cast(GdaMetaDbObject*)(cast(GdaSqlSelectTarget*)this._cPtr).validityMetaObject, No.Take);
   }
@@ -110,7 +107,7 @@ class SqlSelectTarget
       after the FROM clause.
       Returns: a new string with the description of the expression or "null" in case field is invalid.
   */
-  string serialize()
+  string serialize() nothrow
   {
     char* _cretval;
     _cretval = gda_sql_select_target_serialize(cast(GdaSqlSelectTarget*)this._cPtr);
@@ -125,7 +122,7 @@ class SqlSelectTarget
       Params:
         alias_ = a #GValue holding the alias string to take from
   */
-  void takeAlias(gobject.value.Value alias_)
+  void takeAlias(gobject.value.Value alias_) nothrow
   {
     gda_sql_select_target_take_alias(cast(GdaSqlSelectTarget*)this._cPtr, alias_ ? cast(GValue*)alias_._cPtr(Yes.Dup) : null);
   }
@@ -137,7 +134,7 @@ class SqlSelectTarget
       Params:
         stmt = a #GdaSqlStatement to take
   */
-  void takeSelect(gda.sql_statement.SqlStatement stmt)
+  void takeSelect(gda.sql_statement.SqlStatement stmt) nothrow
   {
     gda_sql_select_target_take_select(cast(GdaSqlSelectTarget*)this._cPtr, stmt ? cast(GdaSqlStatement*)stmt._cPtr(Yes.Dup) : null);
   }
@@ -150,7 +147,7 @@ class SqlSelectTarget
       Params:
         value = a #GValue to take from
   */
-  void takeTableName(gobject.value.Value value)
+  void takeTableName(gobject.value.Value value) nothrow
   {
     gda_sql_select_target_take_table_name(cast(GdaSqlSelectTarget*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }

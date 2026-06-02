@@ -29,26 +29,26 @@ class URISchemeResponse : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_uri_scheme_response_get_type != &gidSymbolNotFound ? webkit_uri_scheme_response_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override URISchemeResponse self()
+  override URISchemeResponse self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class URISchemeResponse : gobject.object.ObjectWrap
       Get builder for [webkit.urischeme_response.URISchemeResponse]
       Returns: New builder object
   */
-  static URISchemeResponseGidBuilder builder()
+  static URISchemeResponseGidBuilder builder() nothrow
   {
     return new URISchemeResponseGidBuilder;
   }
@@ -70,7 +70,7 @@ class URISchemeResponse : gobject.object.ObjectWrap
         streamLength = the length of the stream or -1 if not known
       Returns: the newly created #WebKitURISchemeResponse.
   */
-  this(gio.input_stream.InputStream inputStream, long streamLength)
+  this(gio.input_stream.InputStream inputStream, long streamLength) nothrow
   {
     WebKitURISchemeResponse* _cretval;
     _cretval = webkit_uri_scheme_response_new(inputStream ? cast(GInputStream*)inputStream._cPtr(No.Dup) : null, streamLength);
@@ -83,7 +83,7 @@ class URISchemeResponse : gobject.object.ObjectWrap
       Params:
         contentType = the content type of the stream
   */
-  void setContentType(string contentType)
+  void setContentType(string contentType) nothrow
   {
     const(char)* _contentType = contentType.toCString(No.Alloc);
     webkit_uri_scheme_response_set_content_type(cast(WebKitURISchemeResponse*)this._cPtr, _contentType);
@@ -98,7 +98,7 @@ class URISchemeResponse : gobject.object.ObjectWrap
       Params:
         headers = the HTTP headers to be set
   */
-  void setHttpHeaders(soup.message_headers.MessageHeaders headers)
+  void setHttpHeaders(soup.message_headers.MessageHeaders headers) nothrow
   {
     webkit_uri_scheme_response_set_http_headers(cast(WebKitURISchemeResponse*)this._cPtr, headers ? cast(SoupMessageHeaders*)headers._cPtr(Yes.Dup) : null);
   }
@@ -112,7 +112,7 @@ class URISchemeResponse : gobject.object.ObjectWrap
         statusCode = the HTTP status code to be returned
         reasonPhrase = a reason phrase
   */
-  void setStatus(uint statusCode, string reasonPhrase = null)
+  void setStatus(uint statusCode, string reasonPhrase = null) nothrow
   {
     const(char)* _reasonPhrase = reasonPhrase.toCString(No.Alloc);
     webkit_uri_scheme_response_set_status(cast(WebKitURISchemeResponse*)this._cPtr, statusCode, _reasonPhrase);
@@ -129,7 +129,7 @@ class URISchemeResponseGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
         propval = The input stream to read from.
       Returns: Builder instance for fluent chaining
   */
-  T stream(gio.input_stream.InputStream propval)
+  T stream(gio.input_stream.InputStream propval) nothrow
   {
     return setProperty("stream", propval);
   }
@@ -140,7 +140,7 @@ class URISchemeResponseGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
         propval = The input stream length in bytes, `-1` for unknown length.
       Returns: Builder instance for fluent chaining
   */
-  T streamLength(long propval)
+  T streamLength(long propval) nothrow
   {
     return setProperty("stream-length", propval);
   }
@@ -153,7 +153,7 @@ final class URISchemeResponseGidBuilder : URISchemeResponseGidBuilderImpl!URISch
       Create object from builder.
       Returns: New object
   */
-  URISchemeResponse build()
+  URISchemeResponse build() nothrow
   {
     return new URISchemeResponse(cast(void*)createGObject(URISchemeResponse._getGType), Yes.Take);
   }

@@ -106,26 +106,26 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_application_window_get_type != &gidSymbolNotFound ? gtk_application_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ApplicationWindow self()
+  override ApplicationWindow self() nothrow
   {
     return this;
   }
@@ -134,7 +134,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
       Get builder for [gtk.application_window.ApplicationWindow]
       Returns: New builder object
   */
-  static ApplicationWindowGidBuilder builder()
+  static ApplicationWindowGidBuilder builder() nothrow
   {
     return new ApplicationWindowGidBuilder;
   }
@@ -149,7 +149,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
         If false, the window will not display a menubar, regardless
         of whether the desktop shell is showing it or not.
   */
-  @property bool showMenubar()
+  @property bool showMenubar() nothrow
   {
     return getShowMenubar();
   }
@@ -165,7 +165,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
           If false, the window will not display a menubar, regardless
           of whether the desktop shell is showing it or not.
   */
-  @property void showMenubar(bool propval)
+  @property void showMenubar(bool propval) nothrow
   {
     setShowMenubar(propval);
   }
@@ -181,7 +181,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
         application = a [gtk.application.Application]
       Returns: a newly created [gtk.application_window.ApplicationWindow]
   */
-  this(gtk.application.Application application)
+  this(gtk.application.Application application) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_application_window_new(application ? cast(GtkApplication*)application._cPtr(No.Dup) : null);
@@ -195,7 +195,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
       Returns: the help overlay associated
           with window
   */
-  gtk.shortcuts_window.ShortcutsWindow getHelpOverlay()
+  gtk.shortcuts_window.ShortcutsWindow getHelpOverlay() nothrow
   {
     GtkShortcutsWindow* _cretval;
     _cretval = gtk_application_window_get_help_overlay(cast(GtkApplicationWindow*)this._cPtr);
@@ -210,7 +210,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
       Returns: the unique ID for window, or `0` if the window
           has not yet been added to a [gtk.application.Application]
   */
-  uint getId()
+  uint getId() nothrow
   {
     uint _retval;
     _retval = gtk_application_window_get_id(cast(GtkApplicationWindow*)this._cPtr);
@@ -222,7 +222,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
       and menubar as needed.
       Returns: true if window will display a menubar when needed
   */
-  bool getShowMenubar()
+  bool getShowMenubar() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_application_window_get_show_menubar(cast(GtkApplicationWindow*)this._cPtr);
@@ -240,7 +240,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
       Params:
         helpOverlay = a [gtk.shortcuts_window.ShortcutsWindow]
   */
-  void setHelpOverlay(gtk.shortcuts_window.ShortcutsWindow helpOverlay = null)
+  void setHelpOverlay(gtk.shortcuts_window.ShortcutsWindow helpOverlay = null) nothrow
   {
     gtk_application_window_set_help_overlay(cast(GtkApplicationWindow*)this._cPtr, helpOverlay ? cast(GtkShortcutsWindow*)helpOverlay._cPtr(No.Dup) : null);
   }
@@ -252,7 +252,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
       Params:
         showMenubar = whether to show a menubar when needed
   */
-  void setShowMenubar(bool showMenubar)
+  void setShowMenubar(bool showMenubar) nothrow
   {
     gtk_application_window_set_show_menubar(cast(GtkApplicationWindow*)this._cPtr, showMenubar);
   }
@@ -277,7 +277,7 @@ class ApplicationWindowGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T, gi
           of whether the desktop shell is showing it or not.
       Returns: Builder instance for fluent chaining
   */
-  T showMenubar(bool propval)
+  T showMenubar(bool propval) nothrow
   {
     return setProperty("show-menubar", propval);
   }
@@ -290,7 +290,7 @@ final class ApplicationWindowGidBuilder : ApplicationWindowGidBuilderImpl!Applic
       Create object from builder.
       Returns: New object
   */
-  ApplicationWindow build()
+  ApplicationWindow build() nothrow
   {
     return new ApplicationWindow(cast(void*)createGObject(ApplicationWindow._getGType), No.Take);
   }

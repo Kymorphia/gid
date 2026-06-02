@@ -16,26 +16,26 @@ class BaseListScalar : arrow.scalar.Scalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_base_list_scalar_get_type != &gidSymbolNotFound ? garrow_base_list_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BaseListScalar self()
+  override BaseListScalar self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class BaseListScalar : arrow.scalar.Scalar
       Get builder for [arrow.base_list_scalar.BaseListScalar]
       Returns: New builder object
   */
-  static BaseListScalarGidBuilder builder()
+  static BaseListScalarGidBuilder builder() nothrow
   {
     return new BaseListScalarGidBuilder;
   }
 
   /** */
-  arrow.array.Array getValue()
+  arrow.array.Array getValue() nothrow
   {
     GArrowArray* _cretval;
     _cretval = garrow_base_list_scalar_get_value(cast(GArrowBaseListScalar*)this._cPtr);
@@ -69,7 +69,7 @@ class BaseListScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
         propval = The value of the scalar.
       Returns: Builder instance for fluent chaining
   */
-  T value(arrow.array.Array propval)
+  T value(arrow.array.Array propval) nothrow
   {
     return setProperty("value", propval);
   }
@@ -82,7 +82,7 @@ final class BaseListScalarGidBuilder : BaseListScalarGidBuilderImpl!BaseListScal
       Create object from builder.
       Returns: New object
   */
-  BaseListScalar build()
+  BaseListScalar build() nothrow
   {
     return new BaseListScalar(cast(void*)createGObject(BaseListScalar._getGType), No.Take);
   }

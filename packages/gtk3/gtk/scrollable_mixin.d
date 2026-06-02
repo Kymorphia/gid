@@ -49,7 +49,7 @@ template ScrollableT()
       Returns: Horizontal #GtkAdjustment of the scrollable widget. This adjustment is
         shared between the scrollable widget and its parent.
   */
-  @property gtk.adjustment.Adjustment hadjustment()
+  @property gtk.adjustment.Adjustment hadjustment() nothrow
   {
     return getHadjustment();
   }
@@ -60,7 +60,7 @@ template ScrollableT()
         propval = Horizontal #GtkAdjustment of the scrollable widget. This adjustment is
           shared between the scrollable widget and its parent.
   */
-  @property void hadjustment(gtk.adjustment.Adjustment propval)
+  @property void hadjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     setHadjustment(propval);
   }
@@ -70,7 +70,7 @@ template ScrollableT()
       Returns: Determines whether horizontal scrolling should start once the scrollable
         widget is allocated less than its minimum width or less than its natural width.
   */
-  @property gtk.types.ScrollablePolicy hscrollPolicy()
+  @property gtk.types.ScrollablePolicy hscrollPolicy() nothrow
   {
     return getHscrollPolicy();
   }
@@ -81,7 +81,7 @@ template ScrollableT()
         propval = Determines whether horizontal scrolling should start once the scrollable
           widget is allocated less than its minimum width or less than its natural width.
   */
-  @property void hscrollPolicy(gtk.types.ScrollablePolicy propval)
+  @property void hscrollPolicy(gtk.types.ScrollablePolicy propval) nothrow
   {
     setHscrollPolicy(propval);
   }
@@ -91,7 +91,7 @@ template ScrollableT()
       Returns: Verical #GtkAdjustment of the scrollable widget. This adjustment is shared
         between the scrollable widget and its parent.
   */
-  @property gtk.adjustment.Adjustment vadjustment()
+  @property gtk.adjustment.Adjustment vadjustment() nothrow
   {
     return getVadjustment();
   }
@@ -102,7 +102,7 @@ template ScrollableT()
         propval = Verical #GtkAdjustment of the scrollable widget. This adjustment is shared
           between the scrollable widget and its parent.
   */
-  @property void vadjustment(gtk.adjustment.Adjustment propval)
+  @property void vadjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     setVadjustment(propval);
   }
@@ -112,7 +112,7 @@ template ScrollableT()
       Returns: Determines whether vertical scrolling should start once the scrollable
         widget is allocated less than its minimum height or less than its natural height.
   */
-  @property gtk.types.ScrollablePolicy vscrollPolicy()
+  @property gtk.types.ScrollablePolicy vscrollPolicy() nothrow
   {
     return getVscrollPolicy();
   }
@@ -123,7 +123,7 @@ template ScrollableT()
         propval = Determines whether vertical scrolling should start once the scrollable
           widget is allocated less than its minimum height or less than its natural height.
   */
-  @property void vscrollPolicy(gtk.types.ScrollablePolicy propval)
+  @property void vscrollPolicy(gtk.types.ScrollablePolicy propval) nothrow
   {
     setVscrollPolicy(propval);
   }
@@ -139,7 +139,7 @@ template ScrollableT()
         border = return location for the results
       Returns: true if border has been set
   */
-  override bool getBorder(out gtk.border.Border border)
+  override bool getBorder(out gtk.border.Border border) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_scrollable_get_border(cast(GtkScrollable*)this._cPtr, cast(GtkBorder*)&border);
@@ -150,7 +150,7 @@ template ScrollableT()
       Retrieves the #GtkAdjustment used for horizontal scrolling.
       Returns: horizontal #GtkAdjustment.
   */
-  override gtk.adjustment.Adjustment getHadjustment()
+  override gtk.adjustment.Adjustment getHadjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrollable_get_hadjustment(cast(GtkScrollable*)this._cPtr);
@@ -162,7 +162,7 @@ template ScrollableT()
       Gets the horizontal #GtkScrollablePolicy.
       Returns: The horizontal #GtkScrollablePolicy.
   */
-  override gtk.types.ScrollablePolicy getHscrollPolicy()
+  override gtk.types.ScrollablePolicy getHscrollPolicy() nothrow
   {
     GtkScrollablePolicy _cretval;
     _cretval = gtk_scrollable_get_hscroll_policy(cast(GtkScrollable*)this._cPtr);
@@ -174,7 +174,7 @@ template ScrollableT()
       Retrieves the #GtkAdjustment used for vertical scrolling.
       Returns: vertical #GtkAdjustment.
   */
-  override gtk.adjustment.Adjustment getVadjustment()
+  override gtk.adjustment.Adjustment getVadjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrollable_get_vadjustment(cast(GtkScrollable*)this._cPtr);
@@ -186,7 +186,7 @@ template ScrollableT()
       Gets the vertical #GtkScrollablePolicy.
       Returns: The vertical #GtkScrollablePolicy.
   */
-  override gtk.types.ScrollablePolicy getVscrollPolicy()
+  override gtk.types.ScrollablePolicy getVscrollPolicy() nothrow
   {
     GtkScrollablePolicy _cretval;
     _cretval = gtk_scrollable_get_vscroll_policy(cast(GtkScrollable*)this._cPtr);
@@ -200,7 +200,7 @@ template ScrollableT()
       Params:
         hadjustment = a #GtkAdjustment
   */
-  override void setHadjustment(gtk.adjustment.Adjustment hadjustment = null)
+  override void setHadjustment(gtk.adjustment.Adjustment hadjustment = null) nothrow
   {
     gtk_scrollable_set_hadjustment(cast(GtkScrollable*)this._cPtr, hadjustment ? cast(GtkAdjustment*)hadjustment._cPtr(No.Dup) : null);
   }
@@ -213,7 +213,7 @@ template ScrollableT()
       Params:
         policy = the horizontal #GtkScrollablePolicy
   */
-  override void setHscrollPolicy(gtk.types.ScrollablePolicy policy)
+  override void setHscrollPolicy(gtk.types.ScrollablePolicy policy) nothrow
   {
     gtk_scrollable_set_hscroll_policy(cast(GtkScrollable*)this._cPtr, policy);
   }
@@ -224,7 +224,7 @@ template ScrollableT()
       Params:
         vadjustment = a #GtkAdjustment
   */
-  override void setVadjustment(gtk.adjustment.Adjustment vadjustment = null)
+  override void setVadjustment(gtk.adjustment.Adjustment vadjustment = null) nothrow
   {
     gtk_scrollable_set_vadjustment(cast(GtkScrollable*)this._cPtr, vadjustment ? cast(GtkAdjustment*)vadjustment._cPtr(No.Dup) : null);
   }
@@ -237,7 +237,7 @@ template ScrollableT()
       Params:
         policy = the vertical #GtkScrollablePolicy
   */
-  override void setVscrollPolicy(gtk.types.ScrollablePolicy policy)
+  override void setVscrollPolicy(gtk.types.ScrollablePolicy policy) nothrow
   {
     gtk_scrollable_set_vscroll_policy(cast(GtkScrollable*)this._cPtr, policy);
   }
@@ -254,7 +254,7 @@ template ScrollableGidBuilderT()
           shared between the scrollable widget and its parent.
       Returns: Builder instance for fluent chaining
   */
-  T hadjustment(gtk.adjustment.Adjustment propval)
+  T hadjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     return setProperty("hadjustment", propval);
   }
@@ -266,7 +266,7 @@ template ScrollableGidBuilderT()
           widget is allocated less than its minimum width or less than its natural width.
       Returns: Builder instance for fluent chaining
   */
-  T hscrollPolicy(gtk.types.ScrollablePolicy propval)
+  T hscrollPolicy(gtk.types.ScrollablePolicy propval) nothrow
   {
     return setProperty("hscroll-policy", propval);
   }
@@ -278,7 +278,7 @@ template ScrollableGidBuilderT()
           between the scrollable widget and its parent.
       Returns: Builder instance for fluent chaining
   */
-  T vadjustment(gtk.adjustment.Adjustment propval)
+  T vadjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     return setProperty("vadjustment", propval);
   }
@@ -290,7 +290,7 @@ template ScrollableGidBuilderT()
           widget is allocated less than its minimum height or less than its natural height.
       Returns: Builder instance for fluent chaining
   */
-  T vscrollPolicy(gtk.types.ScrollablePolicy propval)
+  T vscrollPolicy(gtk.types.ScrollablePolicy propval) nothrow
   {
     return setProperty("vscroll-policy", propval);
   }

@@ -20,26 +20,26 @@ class WebViewBase : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_web_view_base_get_type != &gidSymbolNotFound ? webkit_web_view_base_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WebViewBase self()
+  override WebViewBase self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class WebViewBase : gtk.widget.Widget
       Get builder for [webkit.web_view_base.WebViewBase]
       Returns: New builder object
   */
-  static WebViewBaseGidBuilder builder()
+  static WebViewBaseGidBuilder builder() nothrow
   {
     return new WebViewBaseGidBuilder;
   }
@@ -67,7 +67,7 @@ final class WebViewBaseGidBuilder : WebViewBaseGidBuilderImpl!WebViewBaseGidBuil
       Create object from builder.
       Returns: New object
   */
-  WebViewBase build()
+  WebViewBase build() nothrow
   {
     return new WebViewBase(cast(void*)createGObject(WebViewBase._getGType), No.Take);
   }

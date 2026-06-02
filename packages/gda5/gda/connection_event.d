@@ -14,26 +14,26 @@ class ConnectionEvent : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_connection_event_get_type != &gidSymbolNotFound ? gda_connection_event_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ConnectionEvent self()
+  override ConnectionEvent self() nothrow
   {
     return this;
   }
@@ -42,25 +42,25 @@ class ConnectionEvent : gobject.object.ObjectWrap
       Get builder for [gda.connection_event.ConnectionEvent]
       Returns: New builder object
   */
-  static ConnectionEventGidBuilder builder()
+  static ConnectionEventGidBuilder builder() nothrow
   {
     return new ConnectionEventGidBuilder;
   }
 
   /** */
-  @property int type()
+  @property int type() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("type");
   }
 
   /** */
-  @property void type(int propval)
+  @property void type(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("type", propval);
   }
 
   /** */
-  glong getCode()
+  glong getCode() nothrow
   {
     glong _retval;
     _retval = gda_connection_event_get_code(cast(GdaConnectionEvent*)this._cPtr);
@@ -72,7 +72,7 @@ class ConnectionEvent : gobject.object.ObjectWrap
       the the description is the SQL of the command.
       Returns: event's description.
   */
-  string getDescription()
+  string getDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = gda_connection_event_get_description(cast(GdaConnectionEvent*)this._cPtr);
@@ -84,7 +84,7 @@ class ConnectionEvent : gobject.object.ObjectWrap
       Get event's severity (from a simple notice to a fatal event)
       Returns: the event type
   */
-  gda.types.ConnectionEventType getEventType()
+  gda.types.ConnectionEventType getEventType() nothrow
   {
     GdaConnectionEventType _cretval;
     _cretval = gda_connection_event_get_event_type(cast(GdaConnectionEvent*)this._cPtr);
@@ -96,7 +96,7 @@ class ConnectionEvent : gobject.object.ObjectWrap
       Retrieve the code associated to event.
       Returns: the #GdaConnectionEventCode event's code
   */
-  gda.types.ConnectionEventCode getGdaCode()
+  gda.types.ConnectionEventCode getGdaCode() nothrow
   {
     GdaConnectionEventCode _cretval;
     _cretval = gda_connection_event_get_gda_code(cast(GdaConnectionEvent*)this._cPtr);
@@ -105,7 +105,7 @@ class ConnectionEvent : gobject.object.ObjectWrap
   }
 
   /** */
-  string getSource()
+  string getSource() nothrow
   {
     const(char)* _cretval;
     _cretval = gda_connection_event_get_source(cast(GdaConnectionEvent*)this._cPtr);
@@ -119,7 +119,7 @@ class ConnectionEvent : gobject.object.ObjectWrap
       and the "HY000" (general error) value means an error but no better error code available.
       Returns: event's SQL state.
   */
-  string getSqlstate()
+  string getSqlstate() nothrow
   {
     const(char)* _cretval;
     _cretval = gda_connection_event_get_sqlstate(cast(GdaConnectionEvent*)this._cPtr);
@@ -137,7 +137,7 @@ class ConnectionEvent : gobject.object.ObjectWrap
       Params:
         code = a code.
   */
-  void setCode(glong code)
+  void setCode(glong code) nothrow
   {
     gda_connection_event_set_code(cast(GdaConnectionEvent*)this._cPtr, code);
   }
@@ -148,7 +148,7 @@ class ConnectionEvent : gobject.object.ObjectWrap
       Params:
         description = a description, or null (to unset current description if any)
   */
-  void setDescription(string description = null)
+  void setDescription(string description = null) nothrow
   {
     const(char)* _description = description.toCString(No.Alloc);
     gda_connection_event_set_description(cast(GdaConnectionEvent*)this._cPtr, _description);
@@ -161,7 +161,7 @@ class ConnectionEvent : gobject.object.ObjectWrap
       Params:
         type = the severity of the event
   */
-  void setEventType(gda.types.ConnectionEventType type)
+  void setEventType(gda.types.ConnectionEventType type) nothrow
   {
     gda_connection_event_set_event_type(cast(GdaConnectionEvent*)this._cPtr, type);
   }
@@ -176,7 +176,7 @@ class ConnectionEvent : gobject.object.ObjectWrap
       Params:
         code = a code
   */
-  void setGdaCode(gda.types.ConnectionEventCode code)
+  void setGdaCode(gda.types.ConnectionEventCode code) nothrow
   {
     gda_connection_event_set_gda_code(cast(GdaConnectionEvent*)this._cPtr, code);
   }
@@ -187,7 +187,7 @@ class ConnectionEvent : gobject.object.ObjectWrap
       Params:
         source = a source.
   */
-  void setSource(string source)
+  void setSource(string source) nothrow
   {
     const(char)* _source = source.toCString(No.Alloc);
     gda_connection_event_set_source(cast(GdaConnectionEvent*)this._cPtr, _source);
@@ -201,7 +201,7 @@ class ConnectionEvent : gobject.object.ObjectWrap
       Params:
         sqlstate = SQL state.
   */
-  void setSqlstate(string sqlstate)
+  void setSqlstate(string sqlstate) nothrow
   {
     const(char)* _sqlstate = sqlstate.toCString(No.Alloc);
     gda_connection_event_set_sqlstate(cast(GdaConnectionEvent*)this._cPtr, _sqlstate);
@@ -213,7 +213,7 @@ class ConnectionEventGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 {
 
   /** */
-  T type(int propval)
+  T type(int propval) nothrow
   {
     return setProperty("type", propval);
   }
@@ -226,7 +226,7 @@ final class ConnectionEventGidBuilder : ConnectionEventGidBuilderImpl!Connection
       Create object from builder.
       Returns: New object
   */
-  ConnectionEvent build()
+  ConnectionEvent build() nothrow
   {
     return new ConnectionEvent(cast(void*)createGObject(ConnectionEvent._getGType), No.Take);
   }

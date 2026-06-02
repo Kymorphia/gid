@@ -59,26 +59,26 @@ class Bus : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_bus_get_type != &gidSymbolNotFound ? gst_bus_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Bus self()
+  override Bus self() nothrow
   {
     return this;
   }
@@ -87,7 +87,7 @@ class Bus : gst.object.ObjectWrap
       Get builder for [gst.bus.Bus]
       Returns: New builder object
   */
-  static BusGidBuilder builder()
+  static BusGidBuilder builder() nothrow
   {
     return new BusGidBuilder;
   }
@@ -96,7 +96,7 @@ class Bus : gst.object.ObjectWrap
       Creates a new #GstBus instance.
       Returns: a new #GstBus instance
   */
-  this()
+  this() nothrow
   {
     GstBus* _cretval;
     _cretval = gst_bus_new();
@@ -117,7 +117,7 @@ class Bus : gst.object.ObjectWrap
       responsible for calling [gst.bus.Bus.removeSignalWatch] as many times as this
       function is called.
   */
-  void addSignalWatch()
+  void addSignalWatch() nothrow
   {
     gst_bus_add_signal_watch(cast(GstBus*)this._cPtr);
   }
@@ -142,7 +142,7 @@ class Bus : gst.object.ObjectWrap
       Params:
         priority = The priority of the watch.
   */
-  void addSignalWatchFull(int priority)
+  void addSignalWatchFull(int priority) nothrow
   {
     gst_bus_add_signal_watch_full(cast(GstBus*)this._cPtr, priority);
   }
@@ -175,14 +175,21 @@ class Bus : gst.object.ObjectWrap
         func = A function to call when a message is received.
       Returns: The event source id or 0 if bus already got an event source.
   */
-  uint addWatch(int priority, gst.types.BusFunc func)
+  uint addWatch(int priority, gst.types.BusFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(GstBus* bus, GstMessage* message, void* userData)
+    extern(C) gboolean _funcCallback(GstBus* bus, GstMessage* message, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gst.types.BusFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), message ? new gst.message.Message(cast(void*)message, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), message ? new gst.message.Message(cast(void*)message, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.BusFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -204,7 +211,7 @@ class Bus : gst.object.ObjectWrap
         data = user data
       Returns: true
   */
-  bool asyncSignalFunc(gst.message.Message message, void* data = null)
+  bool asyncSignalFunc(gst.message.Message message, void* data = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bus_async_signal_func(cast(GstBus*)this._cPtr, message ? cast(GstMessage*)message._cPtr(No.Dup) : null, data);
@@ -220,7 +227,7 @@ class Bus : gst.object.ObjectWrap
       any signal watch added with #gst_bus_add_signal_watch.
       Returns: a #GSource that can be added to a #GMainLoop.
   */
-  glib.source.Source createWatch()
+  glib.source.Source createWatch() nothrow
   {
     GSource* _cretval;
     _cretval = gst_bus_create_watch(cast(GstBus*)this._cPtr);
@@ -239,7 +246,7 @@ class Bus : gst.object.ObjectWrap
       the same as [gst.object.ObjectWrap.ref_] that which calls enable should also call
       disable.
   */
-  void disableSyncMessageEmission()
+  void disableSyncMessageEmission() nothrow
   {
     gst_bus_disable_sync_message_emission(cast(GstBus*)this._cPtr);
   }
@@ -261,7 +268,7 @@ class Bus : gst.object.ObjectWrap
       comes from the thread of whatever object posted the message; the "message"
       signal is marshalled to the main thread via the #GMainLoop.
   */
-  void enableSyncMessageEmission()
+  void enableSyncMessageEmission() nothrow
   {
     gst_bus_enable_sync_message_emission(cast(GstBus*)this._cPtr);
   }
@@ -279,7 +286,7 @@ class Bus : gst.object.ObjectWrap
       Params:
         fd = A GPollFD to fill
   */
-  void getPollfd(out glib.types.PollFD fd)
+  void getPollfd(out glib.types.PollFD fd) nothrow
   {
     gst_bus_get_pollfd(cast(GstBus*)this._cPtr, &fd);
   }
@@ -290,7 +297,7 @@ class Bus : gst.object.ObjectWrap
       Returns: true if there are messages on the bus to be handled, false
         otherwise.
   */
-  bool havePending()
+  bool havePending() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bus_have_pending(cast(GstBus*)this._cPtr);
@@ -303,7 +310,7 @@ class Bus : gst.object.ObjectWrap
       Returns: the #GstMessage that is on the
             bus, or null if the bus is empty.
   */
-  gst.message.Message peek()
+  gst.message.Message peek() nothrow
   {
     GstMessage* _cretval;
     _cretval = gst_bus_peek(cast(GstBus*)this._cPtr);
@@ -354,7 +361,7 @@ class Bus : gst.object.ObjectWrap
       Returns: the message that was received,
             or null if the poll timed out.
   */
-  gst.message.Message poll(gst.types.MessageType events, gst.types.ClockTime timeout)
+  gst.message.Message poll(gst.types.MessageType events, gst.types.ClockTime timeout) nothrow
   {
     GstMessage* _cretval;
     _cretval = gst_bus_poll(cast(GstBus*)this._cPtr, events, timeout);
@@ -367,7 +374,7 @@ class Bus : gst.object.ObjectWrap
       Returns: the #GstMessage that is on the
             bus, or null if the bus is empty.
   */
-  gst.message.Message pop()
+  gst.message.Message pop() nothrow
   {
     GstMessage* _cretval;
     _cretval = gst_bus_pop(cast(GstBus*)this._cPtr);
@@ -388,7 +395,7 @@ class Bus : gst.object.ObjectWrap
             type that is on the bus, or null if the bus is empty or there
             is no message matching type.
   */
-  gst.message.Message popFiltered(gst.types.MessageType types)
+  gst.message.Message popFiltered(gst.types.MessageType types) nothrow
   {
     GstMessage* _cretval;
     _cretval = gst_bus_pop_filtered(cast(GstBus*)this._cPtr, types);
@@ -404,7 +411,7 @@ class Bus : gst.object.ObjectWrap
         message = the #GstMessage to post
       Returns: true if the message could be posted, false if the bus is flushing.
   */
-  bool post(gst.message.Message message)
+  bool post(gst.message.Message message) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bus_post(cast(GstBus*)this._cPtr, message ? cast(GstMessage*)message._cPtr(Yes.Dup) : null);
@@ -414,7 +421,7 @@ class Bus : gst.object.ObjectWrap
   /**
       Removes a signal watch previously added with [gst.bus.Bus.addSignalWatch].
   */
-  void removeSignalWatch()
+  void removeSignalWatch() nothrow
   {
     gst_bus_remove_signal_watch(cast(GstBus*)this._cPtr);
   }
@@ -423,7 +430,7 @@ class Bus : gst.object.ObjectWrap
       Removes an installed bus watch from bus.
       Returns: true on success or false if bus has no event source.
   */
-  bool removeWatch()
+  bool removeWatch() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bus_remove_watch(cast(GstBus*)this._cPtr);
@@ -438,7 +445,7 @@ class Bus : gst.object.ObjectWrap
       Params:
         flushing = whether or not to flush the bus
   */
-  void setFlushing(bool flushing)
+  void setFlushing(bool flushing) nothrow
   {
     gst_bus_set_flushing(cast(GstBus*)this._cPtr, flushing);
   }
@@ -457,14 +464,21 @@ class Bus : gst.object.ObjectWrap
       Params:
         func = The handler function to install
   */
-  void setSyncHandler(gst.types.BusSyncHandler func = null)
+  void setSyncHandler(gst.types.BusSyncHandler func = null) nothrow
   {
-    extern(C) GstBusSyncReply _funcCallback(GstBus* bus, GstMessage* message, void* userData)
+    extern(C) GstBusSyncReply _funcCallback(GstBus* bus, GstMessage* message, void* userData) nothrow
     {
       gst.types.BusSyncReply _dretval;
       auto _dlg = cast(gst.types.BusSyncHandler*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), message ? new gst.message.Message(cast(void*)message, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), message ? new gst.message.Message(cast(void*)message, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.BusSyncHandler");
+      }
       auto _retval = cast(GstBusSyncReply)_dretval;
 
       return _retval;
@@ -484,7 +498,7 @@ class Bus : gst.object.ObjectWrap
         data = user data
       Returns: [gst.types.BusSyncReply.Pass]
   */
-  gst.types.BusSyncReply syncSignalHandler(gst.message.Message message, void* data = null)
+  gst.types.BusSyncReply syncSignalHandler(gst.message.Message message, void* data = null) nothrow
   {
     GstBusSyncReply _cretval;
     _cretval = gst_bus_sync_signal_handler(cast(GstBus*)this._cPtr, message ? cast(GstMessage*)message._cPtr(No.Dup) : null, data);
@@ -505,7 +519,7 @@ class Bus : gst.object.ObjectWrap
             bus after the specified timeout or null if the bus is empty
             after the timeout expired.
   */
-  gst.message.Message timedPop(gst.types.ClockTime timeout)
+  gst.message.Message timedPop(gst.types.ClockTime timeout) nothrow
   {
     GstMessage* _cretval;
     _cretval = gst_bus_timed_pop(cast(GstBus*)this._cPtr, timeout);
@@ -529,7 +543,7 @@ class Bus : gst.object.ObjectWrap
             filter in types, or null if no matching message was found on
             the bus until the timeout expired.
   */
-  gst.message.Message timedPopFiltered(gst.types.ClockTime timeout, gst.types.MessageType types)
+  gst.message.Message timedPopFiltered(gst.types.ClockTime timeout, gst.types.MessageType types) nothrow
   {
     GstMessage* _cretval;
     _cretval = gst_bus_timed_pop_filtered(cast(GstBus*)this._cPtr, timeout, types);
@@ -557,14 +571,14 @@ class Bus : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMessage(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectMessage(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gst.message.Message)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gst.bus.Bus)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -576,7 +590,14 @@ class Bus : gst.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.bus.Bus.message");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -605,14 +626,14 @@ class Bus : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSyncMessage(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectSyncMessage(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gst.message.Message)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gst.bus.Bus)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -624,7 +645,14 @@ class Bus : gst.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.bus.Bus.syncMessage");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -647,7 +675,7 @@ class BusGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
           in #GstBin.
       Returns: Builder instance for fluent chaining
   */
-  T enableAsync(bool propval)
+  T enableAsync(bool propval) nothrow
   {
     return setProperty("enable-async", propval);
   }
@@ -660,7 +688,7 @@ final class BusGidBuilder : BusGidBuilderImpl!BusGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Bus build()
+  Bus build() nothrow
   {
     return new Bus(cast(void*)createGObject(Bus._getGType), Yes.Take);
   }

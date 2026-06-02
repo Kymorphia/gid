@@ -36,26 +36,26 @@ class Spinner : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_spinner_get_type != &gidSymbolNotFound ? gtk_spinner_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Spinner self()
+  override Spinner self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class Spinner : gtk.widget.Widget
       Get builder for [gtk.spinner.Spinner]
       Returns: New builder object
   */
-  static SpinnerGidBuilder builder()
+  static SpinnerGidBuilder builder() nothrow
   {
     return new SpinnerGidBuilder;
   }
@@ -73,7 +73,7 @@ class Spinner : gtk.widget.Widget
       Get `spinning` property.
       Returns: Whether the spinner is spinning
   */
-  @property bool spinning()
+  @property bool spinning() nothrow
   {
     return getSpinning();
   }
@@ -83,7 +83,7 @@ class Spinner : gtk.widget.Widget
       Params:
         propval = Whether the spinner is spinning
   */
-  @property void spinning(bool propval)
+  @property void spinning(bool propval) nothrow
   {
     setSpinning(propval);
   }
@@ -92,7 +92,7 @@ class Spinner : gtk.widget.Widget
       Returns a new spinner widget. Not yet started.
       Returns: a new [gtk.spinner.Spinner]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_spinner_new();
@@ -103,7 +103,7 @@ class Spinner : gtk.widget.Widget
       Returns whether the spinner is spinning.
       Returns: true if the spinner is active
   */
-  bool getSpinning()
+  bool getSpinning() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_spinner_get_spinning(cast(GtkSpinner*)this._cPtr);
@@ -116,7 +116,7 @@ class Spinner : gtk.widget.Widget
       Params:
         spinning = whether the spinner should be spinning
   */
-  void setSpinning(bool spinning)
+  void setSpinning(bool spinning) nothrow
   {
     gtk_spinner_set_spinning(cast(GtkSpinner*)this._cPtr, spinning);
   }
@@ -124,7 +124,7 @@ class Spinner : gtk.widget.Widget
   /**
       Starts the animation of the spinner.
   */
-  void start()
+  void start() nothrow
   {
     gtk_spinner_start(cast(GtkSpinner*)this._cPtr);
   }
@@ -132,7 +132,7 @@ class Spinner : gtk.widget.Widget
   /**
       Stops the animation of the spinner.
   */
-  void stop()
+  void stop() nothrow
   {
     gtk_spinner_stop(cast(GtkSpinner*)this._cPtr);
   }
@@ -149,7 +149,7 @@ class SpinnerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether the spinner is spinning
       Returns: Builder instance for fluent chaining
   */
-  T spinning(bool propval)
+  T spinning(bool propval) nothrow
   {
     return setProperty("spinning", propval);
   }
@@ -162,7 +162,7 @@ final class SpinnerGidBuilder : SpinnerGidBuilderImpl!SpinnerGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Spinner build()
+  Spinner build() nothrow
   {
     return new Spinner(cast(void*)createGObject(Spinner._getGType), No.Take);
   }

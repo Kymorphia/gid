@@ -93,26 +93,26 @@ class HeaderBar : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_header_bar_get_type != &gidSymbolNotFound ? gtk_header_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HeaderBar self()
+  override HeaderBar self() nothrow
   {
     return this;
   }
@@ -121,7 +121,7 @@ class HeaderBar : gtk.widget.Widget
       Get builder for [gtk.header_bar.HeaderBar]
       Returns: New builder object
   */
-  static HeaderBarGidBuilder builder()
+  static HeaderBarGidBuilder builder() nothrow
   {
     return new HeaderBarGidBuilder;
   }
@@ -133,7 +133,7 @@ class HeaderBar : gtk.widget.Widget
         If this property is not set, the
         [gtk.settings.Settings.gtkDecorationLayout] setting is used.
   */
-  @property string decorationLayout()
+  @property string decorationLayout() nothrow
   {
     return getDecorationLayout();
   }
@@ -146,7 +146,7 @@ class HeaderBar : gtk.widget.Widget
           If this property is not set, the
           [gtk.settings.Settings.gtkDecorationLayout] setting is used.
   */
-  @property void decorationLayout(string propval)
+  @property void decorationLayout(string propval) nothrow
   {
     setDecorationLayout(propval);
   }
@@ -160,7 +160,7 @@ class HeaderBar : gtk.widget.Widget
         and by the state of the window (e.g. a close button will not
         be shown if the window can't be closed).
   */
-  @property bool showTitleButtons()
+  @property bool showTitleButtons() nothrow
   {
     return getShowTitleButtons();
   }
@@ -175,19 +175,19 @@ class HeaderBar : gtk.widget.Widget
           and by the state of the window (e.g. a close button will not
           be shown if the window can't be closed).
   */
-  @property void showTitleButtons(bool propval)
+  @property void showTitleButtons(bool propval) nothrow
   {
     setShowTitleButtons(propval);
   }
 
   /** */
-  @property gtk.widget.Widget titleWidget()
+  @property gtk.widget.Widget titleWidget() nothrow
   {
     return getTitleWidget();
   }
 
   /** */
-  @property void titleWidget(gtk.widget.Widget propval)
+  @property void titleWidget(gtk.widget.Widget propval) nothrow
   {
     setTitleWidget(propval);
   }
@@ -196,7 +196,7 @@ class HeaderBar : gtk.widget.Widget
       Creates a new [gtk.header_bar.HeaderBar] widget.
       Returns: a new [gtk.header_bar.HeaderBar]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_header_bar_new();
@@ -207,7 +207,7 @@ class HeaderBar : gtk.widget.Widget
       Gets the decoration layout of the [gtk.header_bar.HeaderBar].
       Returns: the decoration layout
   */
-  string getDecorationLayout()
+  string getDecorationLayout() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_header_bar_get_decoration_layout(cast(GtkHeaderBar*)this._cPtr);
@@ -220,7 +220,7 @@ class HeaderBar : gtk.widget.Widget
       title buttons.
       Returns: true if title buttons are shown
   */
-  bool getShowTitleButtons()
+  bool getShowTitleButtons() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_header_bar_get_show_title_buttons(cast(GtkHeaderBar*)this._cPtr);
@@ -233,7 +233,7 @@ class HeaderBar : gtk.widget.Widget
       See [gtk.header_bar.HeaderBar.setTitleWidget].
       Returns: the title widget of the header
   */
-  gtk.widget.Widget getTitleWidget()
+  gtk.widget.Widget getTitleWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_header_bar_get_title_widget(cast(GtkHeaderBar*)this._cPtr);
@@ -248,7 +248,7 @@ class HeaderBar : gtk.widget.Widget
       Params:
         child = the [gtk.widget.Widget] to be added to bar
   */
-  void packEnd(gtk.widget.Widget child)
+  void packEnd(gtk.widget.Widget child) nothrow
   {
     gtk_header_bar_pack_end(cast(GtkHeaderBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -260,7 +260,7 @@ class HeaderBar : gtk.widget.Widget
       Params:
         child = the [gtk.widget.Widget] to be added to bar
   */
-  void packStart(gtk.widget.Widget child)
+  void packStart(gtk.widget.Widget child) nothrow
   {
     gtk_header_bar_pack_start(cast(GtkHeaderBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -276,7 +276,7 @@ class HeaderBar : gtk.widget.Widget
       Params:
         child = the child to remove
   */
-  void remove(gtk.widget.Widget child)
+  void remove(gtk.widget.Widget child) nothrow
   {
     gtk_header_bar_remove(cast(GtkHeaderBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -303,7 +303,7 @@ class HeaderBar : gtk.widget.Widget
       Params:
         layout = a decoration layout, or null to unset the layout
   */
-  void setDecorationLayout(string layout = null)
+  void setDecorationLayout(string layout = null) nothrow
   {
     const(char)* _layout = layout.toCString(No.Alloc);
     gtk_header_bar_set_decoration_layout(cast(GtkHeaderBar*)this._cPtr, _layout);
@@ -316,7 +316,7 @@ class HeaderBar : gtk.widget.Widget
       Params:
         setting = true to show standard title buttons
   */
-  void setShowTitleButtons(bool setting)
+  void setShowTitleButtons(bool setting) nothrow
   {
     gtk_header_bar_set_show_title_buttons(cast(GtkHeaderBar*)this._cPtr, setting);
   }
@@ -337,7 +337,7 @@ class HeaderBar : gtk.widget.Widget
       Params:
         titleWidget = a widget to use for a title
   */
-  void setTitleWidget(gtk.widget.Widget titleWidget = null)
+  void setTitleWidget(gtk.widget.Widget titleWidget = null) nothrow
   {
     gtk_header_bar_set_title_widget(cast(GtkHeaderBar*)this._cPtr, titleWidget ? cast(GtkWidget*)titleWidget._cPtr(No.Dup) : null);
   }
@@ -357,7 +357,7 @@ class HeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           [gtk.settings.Settings.gtkDecorationLayout] setting is used.
       Returns: Builder instance for fluent chaining
   */
-  T decorationLayout(string propval)
+  T decorationLayout(string propval) nothrow
   {
     return setProperty("decoration-layout", propval);
   }
@@ -373,13 +373,13 @@ class HeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           be shown if the window can't be closed).
       Returns: Builder instance for fluent chaining
   */
-  T showTitleButtons(bool propval)
+  T showTitleButtons(bool propval) nothrow
   {
     return setProperty("show-title-buttons", propval);
   }
 
   /** */
-  T titleWidget(gtk.widget.Widget propval)
+  T titleWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("title-widget", propval);
   }
@@ -392,7 +392,7 @@ final class HeaderBarGidBuilder : HeaderBarGidBuilderImpl!HeaderBarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  HeaderBar build()
+  HeaderBar build() nothrow
   {
     return new HeaderBar(cast(void*)createGObject(HeaderBar._getGType), No.Take);
   }

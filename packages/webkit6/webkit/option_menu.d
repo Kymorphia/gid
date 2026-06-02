@@ -23,26 +23,26 @@ class OptionMenu : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_option_menu_get_type != &gidSymbolNotFound ? webkit_option_menu_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override OptionMenu self()
+  override OptionMenu self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class OptionMenu : gobject.object.ObjectWrap
       Get builder for [webkit.option_menu.OptionMenu]
       Returns: New builder object
   */
-  static OptionMenuGidBuilder builder()
+  static OptionMenuGidBuilder builder() nothrow
   {
     return new OptionMenuGidBuilder;
   }
@@ -67,7 +67,7 @@ class OptionMenu : gobject.object.ObjectWrap
       Params:
         index = the index of the item
   */
-  void activateItem(uint index)
+  void activateItem(uint index) nothrow
   {
     webkit_option_menu_activate_item(cast(WebKitOptionMenu*)this._cPtr, index);
   }
@@ -81,7 +81,7 @@ class OptionMenu : gobject.object.ObjectWrap
       nor [webkit.option_menu.OptionMenu.activateItem] have been called, the element value remains
       unchanged.
   */
-  void close()
+  void close() nothrow
   {
     webkit_option_menu_close(cast(WebKitOptionMenu*)this._cPtr);
   }
@@ -92,7 +92,7 @@ class OptionMenu : gobject.object.ObjectWrap
       null is returned.
       Returns: the menu event or null.
   */
-  gdk.event.Event getEvent()
+  gdk.event.Event getEvent() nothrow
   {
     GdkEvent* _cretval;
     _cretval = webkit_option_menu_get_event(cast(WebKitOptionMenu*)this._cPtr);
@@ -107,7 +107,7 @@ class OptionMenu : gobject.object.ObjectWrap
         index = the index of the item
       Returns: a #WebKitOptionMenuItem of menu.
   */
-  webkit.option_menu_item.OptionMenuItem getItem(uint index)
+  webkit.option_menu_item.OptionMenuItem getItem(uint index) nothrow
   {
     WebKitOptionMenuItem* _cretval;
     _cretval = webkit_option_menu_get_item(cast(WebKitOptionMenu*)this._cPtr, index);
@@ -119,7 +119,7 @@ class OptionMenu : gobject.object.ObjectWrap
       Gets the length of the menu.
       Returns: the number of #WebKitOptionMenuItem<!-- -->s in menu
   */
-  uint getNItems()
+  uint getNItems() nothrow
   {
     uint _retval;
     _retval = webkit_option_menu_get_n_items(cast(WebKitOptionMenu*)this._cPtr);
@@ -137,7 +137,7 @@ class OptionMenu : gobject.object.ObjectWrap
       Params:
         index = the index of the item
   */
-  void selectItem(uint index)
+  void selectItem(uint index) nothrow
   {
     webkit_option_menu_select_item(cast(WebKitOptionMenu*)this._cPtr, index);
   }
@@ -159,13 +159,13 @@ class OptionMenu : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClose(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClose(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.option_menu.OptionMenu)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -174,7 +174,14 @@ class OptionMenu : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.option_menu.OptionMenu.close");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -194,7 +201,7 @@ final class OptionMenuGidBuilder : OptionMenuGidBuilderImpl!OptionMenuGidBuilder
       Create object from builder.
       Returns: New object
   */
-  OptionMenu build()
+  OptionMenu build() nothrow
   {
     return new OptionMenu(cast(void*)createGObject(OptionMenu._getGType), No.Take);
   }

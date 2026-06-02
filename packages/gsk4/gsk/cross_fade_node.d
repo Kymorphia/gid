@@ -15,11 +15,8 @@ class CrossFadeNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.cross_fade_node.CrossFadeNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -33,7 +30,7 @@ class CrossFadeNode : gsk.render_node.RenderNode
               be clamped to the range [0 ... 1]
       Returns: A new [gsk.render_node.RenderNode]
   */
-  this(gsk.render_node.RenderNode start, gsk.render_node.RenderNode end, float progress)
+  this(gsk.render_node.RenderNode start, gsk.render_node.RenderNode end, float progress) nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_cross_fade_node_new(start ? cast(GskRenderNode*)start._cPtr(No.Dup) : null, end ? cast(GskRenderNode*)end._cPtr(No.Dup) : null, progress);
@@ -44,7 +41,7 @@ class CrossFadeNode : gsk.render_node.RenderNode
       Retrieves the child [gsk.render_node.RenderNode] at the end of the cross-fade.
       Returns: a [gsk.render_node.RenderNode]
   */
-  gsk.render_node.RenderNode getEndChild()
+  gsk.render_node.RenderNode getEndChild() nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_cross_fade_node_get_end_child(cast(const(GskRenderNode)*)this._cPtr);
@@ -56,7 +53,7 @@ class CrossFadeNode : gsk.render_node.RenderNode
       Retrieves the progress value of the cross fade.
       Returns: the progress value, between 0 and 1
   */
-  float getProgress()
+  float getProgress() nothrow
   {
     float _retval;
     _retval = gsk_cross_fade_node_get_progress(cast(const(GskRenderNode)*)this._cPtr);
@@ -67,7 +64,7 @@ class CrossFadeNode : gsk.render_node.RenderNode
       Retrieves the child [gsk.render_node.RenderNode] at the beginning of the cross-fade.
       Returns: a [gsk.render_node.RenderNode]
   */
-  gsk.render_node.RenderNode getStartChild()
+  gsk.render_node.RenderNode getStartChild() nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_cross_fade_node_get_start_child(cast(const(GskRenderNode)*)this._cPtr);

@@ -22,26 +22,26 @@ class RadioAction : gtk.toggle_action.ToggleAction
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_radio_action_get_type != &gidSymbolNotFound ? gtk_radio_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RadioAction self()
+  override RadioAction self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
       Get builder for [gtk.radio_action.RadioAction]
       Returns: New builder object
   */
-  static RadioActionGidBuilder builder()
+  static RadioActionGidBuilder builder() nothrow
   {
     return new RadioActionGidBuilder;
   }
@@ -60,7 +60,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
       Returns: The value property of the currently active member of the group to which
         this action belongs.
   */
-  @property int currentValue()
+  @property int currentValue() nothrow
   {
     return getCurrentValue();
   }
@@ -71,7 +71,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
         propval = The value property of the currently active member of the group to which
           this action belongs.
   */
-  @property void currentValue(int propval)
+  @property void currentValue(int propval) nothrow
   {
     setCurrentValue(propval);
   }
@@ -81,7 +81,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
       Params:
         propval = Sets a new group for a radio action.
   */
-  @property void group(gtk.radio_action.RadioAction propval)
+  @property void group(gtk.radio_action.RadioAction propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.radio_action.RadioAction)("group", propval);
   }
@@ -94,7 +94,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
         See [gtk.radio_action.RadioAction.getCurrentValue] and #GtkRadioActionEntry
         for convenient ways to get and set this property.
   */
-  @property int value()
+  @property int value() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("value");
   }
@@ -108,7 +108,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
           See [gtk.radio_action.RadioAction.getCurrentValue] and #GtkRadioActionEntry
           for convenient ways to get and set this property.
   */
-  @property void value(int propval)
+  @property void value(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("value", propval);
   }
@@ -129,7 +129,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
             return if this action is selected.
       Returns: a new #GtkRadioAction
   */
-  this(string name, string label, string tooltip, string stockId, int value)
+  this(string name, string label, string tooltip, string stockId, int value) nothrow
   {
     GtkRadioAction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -145,7 +145,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
       the group to which action belongs.
       Returns: The value of the currently active group member
   */
-  int getCurrentValue()
+  int getCurrentValue() nothrow
   {
     int _retval;
     _retval = gtk_radio_action_get_current_value(cast(GtkRadioAction*)this._cPtr);
@@ -172,7 +172,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
       ```
       Returns: the list representing the radio group for this object
   */
-  gtk.radio_action.RadioAction[] getGroup()
+  gtk.radio_action.RadioAction[] getGroup() nothrow
   {
     GSList* _cretval;
     _cretval = gtk_radio_action_get_group(cast(GtkRadioAction*)this._cPtr);
@@ -204,7 +204,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
         groupSource = a radio action object whos group we are
             joining, or null to remove the radio action from its group
   */
-  void joinGroup(gtk.radio_action.RadioAction groupSource = null)
+  void joinGroup(gtk.radio_action.RadioAction groupSource = null) nothrow
   {
     gtk_radio_action_join_group(cast(GtkRadioAction*)this._cPtr, groupSource ? cast(GtkRadioAction*)groupSource._cPtr(No.Dup) : null);
   }
@@ -216,7 +216,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
       Params:
         currentValue = the new value
   */
-  void setCurrentValue(int currentValue)
+  void setCurrentValue(int currentValue) nothrow
   {
     gtk_radio_action_set_current_value(cast(GtkRadioAction*)this._cPtr, currentValue);
   }
@@ -227,7 +227,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
       Params:
         group = a list representing a radio group, or null
   */
-  void setGroup(gtk.radio_action.RadioAction[] group = null)
+  void setGroup(gtk.radio_action.RadioAction[] group = null) nothrow
   {
     auto _group = gSListFromD!(gtk.radio_action.RadioAction)(group);
     scope(exit) containerFree!(GSList*, gtk.radio_action.RadioAction, GidOwnership.None)(_group);
@@ -253,14 +253,14 @@ class RadioAction : gtk.toggle_action.ToggleAction
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.radio_action.RadioAction)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.radio_action.RadioAction)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -272,7 +272,14 @@ class RadioAction : gtk.toggle_action.ToggleAction
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.radio_action.RadioAction.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -292,7 +299,7 @@ class RadioActionGidBuilderImpl(T) : gtk.toggle_action.ToggleActionGidBuilderImp
           this action belongs.
       Returns: Builder instance for fluent chaining
   */
-  T currentValue(int propval)
+  T currentValue(int propval) nothrow
   {
     return setProperty("current-value", propval);
   }
@@ -303,7 +310,7 @@ class RadioActionGidBuilderImpl(T) : gtk.toggle_action.ToggleActionGidBuilderImp
         propval = Sets a new group for a radio action.
       Returns: Builder instance for fluent chaining
   */
-  T group(gtk.radio_action.RadioAction propval)
+  T group(gtk.radio_action.RadioAction propval) nothrow
   {
     return setProperty("group", propval);
   }
@@ -318,7 +325,7 @@ class RadioActionGidBuilderImpl(T) : gtk.toggle_action.ToggleActionGidBuilderImp
           for convenient ways to get and set this property.
       Returns: Builder instance for fluent chaining
   */
-  T value(int propval)
+  T value(int propval) nothrow
   {
     return setProperty("value", propval);
   }
@@ -331,7 +338,7 @@ final class RadioActionGidBuilder : RadioActionGidBuilderImpl!RadioActionGidBuil
       Create object from builder.
       Returns: New object
   */
-  RadioAction build()
+  RadioAction build() nothrow
   {
     return new RadioAction(cast(void*)createGObject(RadioAction._getGType), Yes.Take);
   }

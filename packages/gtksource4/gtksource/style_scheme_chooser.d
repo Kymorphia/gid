@@ -16,7 +16,7 @@ interface StyleSchemeChooser
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_style_scheme_chooser_get_type != &gidSymbolNotFound ? gtk_source_style_scheme_chooser_get_type() : cast(GType)0;
@@ -28,7 +28,7 @@ interface StyleSchemeChooser
         scheme. The property can be set to change
         the current selection programmatically.
   */
-  @property gtksource.style_scheme.StyleScheme styleScheme();
+  @property gtksource.style_scheme.StyleScheme styleScheme() nothrow;
 
   /**
       Set `styleScheme` property.
@@ -37,7 +37,7 @@ interface StyleSchemeChooser
           scheme. The property can be set to change
           the current selection programmatically.
   */
-  @property void styleScheme(gtksource.style_scheme.StyleScheme propval);
+  @property void styleScheme(gtksource.style_scheme.StyleScheme propval) nothrow;
 
   /**
       Gets the currently-selected scheme.
@@ -66,5 +66,5 @@ interface StyleSchemeChooserGidBuilderImpl(T)
           the current selection programmatically.
       Returns: Builder instance for fluent chaining
   */
-  T styleScheme(gtksource.style_scheme.StyleScheme propval);
+  T styleScheme(gtksource.style_scheme.StyleScheme propval) nothrow;
 }

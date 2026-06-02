@@ -15,26 +15,26 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_resizable_buffer_get_type != &gidSymbolNotFound ? garrow_resizable_buffer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ResizableBuffer self()
+  override ResizableBuffer self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
       Get builder for [arrow.resizable_buffer.ResizableBuffer]
       Returns: New builder object
   */
-  static ResizableBufferGidBuilder builder()
+  static ResizableBufferGidBuilder builder() nothrow
   {
     return new ResizableBufferGidBuilder;
   }
@@ -94,7 +94,7 @@ final class ResizableBufferGidBuilder : ResizableBufferGidBuilderImpl!ResizableB
       Create object from builder.
       Returns: New object
   */
-  ResizableBuffer build()
+  ResizableBuffer build() nothrow
   {
     return new ResizableBuffer(cast(void*)createGObject(ResizableBuffer._getGType), Yes.Take);
   }

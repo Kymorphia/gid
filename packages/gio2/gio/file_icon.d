@@ -24,26 +24,26 @@ class FileIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loa
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_file_icon_get_type != &gidSymbolNotFound ? g_file_icon_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileIcon self()
+  override FileIcon self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class FileIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loa
       Get builder for [gio.file_icon.FileIcon]
       Returns: New builder object
   */
-  static FileIconGidBuilder builder()
+  static FileIconGidBuilder builder() nothrow
   {
     return new FileIconGidBuilder;
   }
@@ -61,7 +61,7 @@ class FileIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loa
       Get `file` property.
       Returns: The file containing the icon.
   */
-  @property gio.file.File file()
+  @property gio.file.File file() nothrow
   {
     return getFile();
   }
@@ -77,7 +77,7 @@ class FileIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loa
       Returns: a #GIcon for the given
           file, or null on error.
   */
-  this(gio.file.File file)
+  this(gio.file.File file) nothrow
   {
     GIcon* _cretval;
     _cretval = g_file_icon_new(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
@@ -88,7 +88,7 @@ class FileIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loa
       Gets the #GFile associated with the given icon.
       Returns: a #GFile.
   */
-  gio.file.File getFile()
+  gio.file.File getFile() nothrow
   {
     GFile* _cretval;
     _cretval = g_file_icon_get_file(cast(GFileIcon*)this._cPtr);
@@ -110,7 +110,7 @@ class FileIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio
         propval = The file containing the icon.
       Returns: Builder instance for fluent chaining
   */
-  T file(gio.file.File propval)
+  T file(gio.file.File propval) nothrow
   {
     return setProperty("file", propval);
   }
@@ -123,7 +123,7 @@ final class FileIconGidBuilder : FileIconGidBuilderImpl!FileIconGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FileIcon build()
+  FileIcon build() nothrow
   {
     return new FileIcon(cast(void*)createGObject(FileIcon._getGType), Yes.Take);
   }

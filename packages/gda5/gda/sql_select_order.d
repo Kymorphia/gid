@@ -16,11 +16,8 @@ class SqlSelectOrder
   GdaSqlSelectOrder _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.sql_select_order.SqlSelectOrder");
-
     _cInstance = *cast(GdaSqlSelectOrder*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class SqlSelectOrder
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class SqlSelectOrder
       Get `expr` field.
       Returns: expression to order on
   */
-  @property gda.sql_expr.SqlExpr expr()
+  @property gda.sql_expr.SqlExpr expr() nothrow
   {
     return cToD!(gda.sql_expr.SqlExpr)(cast(void*)(cast(GdaSqlSelectOrder*)this._cPtr).expr);
   }
@@ -47,7 +44,7 @@ class SqlSelectOrder
       Params:
         propval = expression to order on
   */
-  @property void expr(gda.sql_expr.SqlExpr propval)
+  @property void expr(gda.sql_expr.SqlExpr propval) nothrow
   {
     cValueFree!(gda.sql_expr.SqlExpr)(cast(void*)(cast(GdaSqlSelectOrder*)this._cPtr).expr);
     dToC(propval, cast(void*)&(cast(GdaSqlSelectOrder*)this._cPtr).expr);
@@ -57,7 +54,7 @@ class SqlSelectOrder
       Get `asc` field.
       Returns: TRUE is ordering is ascending
   */
-  @property bool asc()
+  @property bool asc() nothrow
   {
     return cast(bool)(cast(GdaSqlSelectOrder*)this._cPtr).asc;
   }
@@ -67,7 +64,7 @@ class SqlSelectOrder
       Params:
         propval = TRUE is ordering is ascending
   */
-  @property void asc(bool propval)
+  @property void asc(bool propval) nothrow
   {
     (cast(GdaSqlSelectOrder*)this._cPtr).asc = propval;
   }
@@ -76,7 +73,7 @@ class SqlSelectOrder
       Get `collationName` field.
       Returns: name of the collation to use for ordering
   */
-  @property string collationName()
+  @property string collationName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaSqlSelectOrder*)this._cPtr).collationName);
   }
@@ -86,7 +83,7 @@ class SqlSelectOrder
       Params:
         propval = name of the collation to use for ordering
   */
-  @property void collationName(string propval)
+  @property void collationName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaSqlSelectOrder*)this._cPtr).collationName);
     dToC(propval, cast(void*)&(cast(GdaSqlSelectOrder*)this._cPtr).collationName);
@@ -96,7 +93,7 @@ class SqlSelectOrder
       Creates a new string description of the ORDER BY clause used in a SELECT statement.
       Returns: a new string with the description of the ORDER BY or "null" in case order is invalid.
   */
-  string serialize()
+  string serialize() nothrow
   {
     char* _cretval;
     _cretval = gda_sql_select_order_serialize(cast(GdaSqlSelectOrder*)this._cPtr);

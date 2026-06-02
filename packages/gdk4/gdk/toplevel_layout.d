@@ -25,32 +25,32 @@ class ToplevelLayout : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_toplevel_layout_get_type != &gidSymbolNotFound ? gdk_toplevel_layout_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ToplevelLayout self()
+  override ToplevelLayout self() nothrow
   {
     return this;
   }
@@ -65,7 +65,7 @@ class ToplevelLayout : gobject.boxed.Boxed
       ”device pixels” (see [gdk.surface.Surface.getScaleFactor]).
       Returns: newly created instance of [gdk.toplevel_layout.ToplevelLayout]
   */
-  this()
+  this() nothrow
   {
     GdkToplevelLayout* _cretval;
     _cretval = gdk_toplevel_layout_new();
@@ -76,7 +76,7 @@ class ToplevelLayout : gobject.boxed.Boxed
       Create a new [gdk.toplevel_layout.ToplevelLayout] and copy the contents of layout into it.
       Returns: a copy of layout.
   */
-  gdk.toplevel_layout.ToplevelLayout copy()
+  gdk.toplevel_layout.ToplevelLayout copy() nothrow
   {
     GdkToplevelLayout* _cretval;
     _cretval = gdk_toplevel_layout_copy(cast(GdkToplevelLayout*)this._cPtr);
@@ -92,7 +92,7 @@ class ToplevelLayout : gobject.boxed.Boxed
       Returns: true if layout and other have identical layout properties,
           otherwise false.
   */
-  bool equal(gdk.toplevel_layout.ToplevelLayout other)
+  bool equal(gdk.toplevel_layout.ToplevelLayout other) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_toplevel_layout_equal(cast(GdkToplevelLayout*)this._cPtr, other ? cast(GdkToplevelLayout*)other._cPtr(No.Dup) : null);
@@ -108,7 +108,7 @@ class ToplevelLayout : gobject.boxed.Boxed
         fullscreen = location to store whether the toplevel should be fullscreen
       Returns: whether the layout specifies the fullscreen state for the toplevel
   */
-  bool getFullscreen(out bool fullscreen)
+  bool getFullscreen(out bool fullscreen) nothrow
   {
     bool _retval;
     gboolean _fullscreen;
@@ -122,7 +122,7 @@ class ToplevelLayout : gobject.boxed.Boxed
       the surface on.
       Returns: the monitor on which layout fullscreens
   */
-  gdk.monitor.MonitorWrap getFullscreenMonitor()
+  gdk.monitor.MonitorWrap getFullscreenMonitor() nothrow
   {
     GdkMonitor* _cretval;
     _cretval = gdk_toplevel_layout_get_fullscreen_monitor(cast(GdkToplevelLayout*)this._cPtr);
@@ -139,7 +139,7 @@ class ToplevelLayout : gobject.boxed.Boxed
         maximized = set to true if the toplevel should be maximized
       Returns: whether the layout specifies the maximized state for the toplevel
   */
-  bool getMaximized(out bool maximized)
+  bool getMaximized(out bool maximized) nothrow
   {
     bool _retval;
     gboolean _maximized;
@@ -153,7 +153,7 @@ class ToplevelLayout : gobject.boxed.Boxed
       to resize the surface.
       Returns: true if the layout is resizable
   */
-  bool getResizable()
+  bool getResizable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_toplevel_layout_get_resizable(cast(GdkToplevelLayout*)this._cPtr);
@@ -168,7 +168,7 @@ class ToplevelLayout : gobject.boxed.Boxed
         fullscreen = true to fullscreen the surface
         monitor = the monitor to fullscreen on
   */
-  void setFullscreen(bool fullscreen, gdk.monitor.MonitorWrap monitor = null)
+  void setFullscreen(bool fullscreen, gdk.monitor.MonitorWrap monitor = null) nothrow
   {
     gdk_toplevel_layout_set_fullscreen(cast(GdkToplevelLayout*)this._cPtr, fullscreen, monitor ? cast(GdkMonitor*)monitor._cPtr(No.Dup) : null);
   }
@@ -180,7 +180,7 @@ class ToplevelLayout : gobject.boxed.Boxed
       Params:
         maximized = true to maximize
   */
-  void setMaximized(bool maximized)
+  void setMaximized(bool maximized) nothrow
   {
     gdk_toplevel_layout_set_maximized(cast(GdkToplevelLayout*)this._cPtr, maximized);
   }
@@ -192,7 +192,7 @@ class ToplevelLayout : gobject.boxed.Boxed
       Params:
         resizable = true to allow resizing
   */
-  void setResizable(bool resizable)
+  void setResizable(bool resizable) nothrow
   {
     gdk_toplevel_layout_set_resizable(cast(GdkToplevelLayout*)this._cPtr, resizable);
   }

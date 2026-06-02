@@ -22,7 +22,7 @@ struct Format
       Returns: The format with nick or GST_FORMAT_UNDEFINED
         if the format was not registered.
   */
-  static gst.types.Format getByNick(string nick)
+  static gst.types.Format getByNick(string nick) nothrow
   {
     GstFormat _cretval;
     const(char)* _nick = nick.toCString(No.Alloc);
@@ -41,7 +41,7 @@ struct Format
         
         MT safe.
   */
-  static gst.format_definition.FormatDefinition getDetails(gst.types.Format format)
+  static gst.format_definition.FormatDefinition getDetails(gst.types.Format format) nothrow
   {
     const(GstFormatDefinition)* _cretval;
     _cretval = gst_format_get_details(format);
@@ -57,7 +57,7 @@ struct Format
       Returns: a reference to the static name of the format
         or null if the format is unknown.
   */
-  static string getName(gst.types.Format format)
+  static string getName(gst.types.Format format) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_format_get_name(format);
@@ -70,7 +70,7 @@ struct Format
       only.
       Returns: a GstIterator of #GstFormatDefinition.
   */
-  static gst.iterator.Iterator iterateDefinitions()
+  static gst.iterator.Iterator iterateDefinitions() nothrow
   {
     GstIterator* _cretval;
     _cretval = gst_format_iterate_definitions();
@@ -90,7 +90,7 @@ struct Format
         
         MT safe.
   */
-  static gst.types.Format register(string nick, string description)
+  static gst.types.Format register(string nick, string description) nothrow
   {
     GstFormat _cretval;
     const(char)* _nick = nick.toCString(No.Alloc);
@@ -108,7 +108,7 @@ struct Format
       Returns: the quark associated with the format or 0 if the format
         is unknown.
   */
-  static glib.types.Quark toQuark(gst.types.Format format)
+  static glib.types.Quark toQuark(gst.types.Format format) nothrow
   {
     glib.types.Quark _retval;
     _retval = gst_format_to_quark(format);

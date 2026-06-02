@@ -17,26 +17,26 @@ class ListArray : arrow.array.Array
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_list_array_get_type != &gidSymbolNotFound ? garrow_list_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ListArray self()
+  override ListArray self() nothrow
   {
     return this;
   }
@@ -45,19 +45,19 @@ class ListArray : arrow.array.Array
       Get builder for [arrow.list_array.ListArray]
       Returns: New builder object
   */
-  static ListArrayGidBuilder builder()
+  static ListArrayGidBuilder builder() nothrow
   {
     return new ListArrayGidBuilder;
   }
 
   /** */
-  @property arrow.array.Array rawValues()
+  @property arrow.array.Array rawValues() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.array.Array)("raw-values");
   }
 
   /** */
-  this(arrow.data_type.DataType dataType, long length, arrow.buffer.Buffer valueOffsets, arrow.array.Array values, arrow.buffer.Buffer nullBitmap, long nNulls)
+  this(arrow.data_type.DataType dataType, long length, arrow.buffer.Buffer valueOffsets, arrow.array.Array values, arrow.buffer.Buffer nullBitmap, long nNulls) nothrow
   {
     GArrowListArray* _cretval;
     _cretval = garrow_list_array_new(dataType ? cast(GArrowDataType*)dataType._cPtr(No.Dup) : null, length, valueOffsets ? cast(GArrowBuffer*)valueOffsets._cPtr(No.Dup) : null, values ? cast(GArrowArray*)values._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
@@ -65,7 +65,7 @@ class ListArray : arrow.array.Array
   }
 
   /** */
-  arrow.array.Array getValue(long i)
+  arrow.array.Array getValue(long i) nothrow
   {
     GArrowArray* _cretval;
     _cretval = garrow_list_array_get_value(cast(GArrowListArray*)this._cPtr, i);
@@ -74,7 +74,7 @@ class ListArray : arrow.array.Array
   }
 
   /** */
-  int getValueLength(long i)
+  int getValueLength(long i) nothrow
   {
     int _retval;
     _retval = garrow_list_array_get_value_length(cast(GArrowListArray*)this._cPtr, i);
@@ -82,7 +82,7 @@ class ListArray : arrow.array.Array
   }
 
   /** */
-  int getValueOffset(long i)
+  int getValueOffset(long i) nothrow
   {
     int _retval;
     _retval = garrow_list_array_get_value_offset(cast(GArrowListArray*)this._cPtr, i);
@@ -90,7 +90,7 @@ class ListArray : arrow.array.Array
   }
 
   /** */
-  int[] getValueOffsets()
+  int[] getValueOffsets() nothrow
   {
     const(int)* _cretval;
     long _cretlength;
@@ -107,7 +107,7 @@ class ListArray : arrow.array.Array
   alias getValueType = arrow.array.Array.getValueType;
 
   /** */
-  arrow.data_type.DataType getValueType()
+  arrow.data_type.DataType getValueType() nothrow
   {
     GArrowDataType* _cretval;
     _cretval = garrow_list_array_get_value_type(cast(GArrowListArray*)this._cPtr);
@@ -116,7 +116,7 @@ class ListArray : arrow.array.Array
   }
 
   /** */
-  arrow.array.Array getValues()
+  arrow.array.Array getValues() nothrow
   {
     GArrowArray* _cretval;
     _cretval = garrow_list_array_get_values(cast(GArrowListArray*)this._cPtr);
@@ -130,7 +130,7 @@ class ListArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
 {
 
   /** */
-  T rawValues(arrow.array.Array propval)
+  T rawValues(arrow.array.Array propval) nothrow
   {
     return setProperty("raw-values", propval);
   }
@@ -143,7 +143,7 @@ final class ListArrayGidBuilder : ListArrayGidBuilderImpl!ListArrayGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ListArray build()
+  ListArray build() nothrow
   {
     return new ListArray(cast(void*)createGObject(ListArray._getGType), Yes.Take);
   }

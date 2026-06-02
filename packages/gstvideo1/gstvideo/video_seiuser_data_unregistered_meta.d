@@ -17,11 +17,8 @@ class VideoSEIUserDataUnregisteredMeta
   GstVideoSEIUserDataUnregisteredMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta");
-
     _cInstance = *cast(GstVideoSEIUserDataUnregisteredMeta*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class VideoSEIUserDataUnregisteredMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class VideoSEIUserDataUnregisteredMeta
       Get `meta` field.
       Returns: parent #GstMeta
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoSEIUserDataUnregisteredMeta*)this._cPtr).meta, No.Take);
   }
@@ -47,7 +44,7 @@ class VideoSEIUserDataUnregisteredMeta
       Get `size` field.
       Returns: Size of the data buffer
   */
-  @property size_t size()
+  @property size_t size() nothrow
   {
     return (cast(GstVideoSEIUserDataUnregisteredMeta*)this._cPtr).size;
   }
@@ -57,13 +54,13 @@ class VideoSEIUserDataUnregisteredMeta
       Params:
         propval = Size of the data buffer
   */
-  @property void size(size_t propval)
+  @property void size(size_t propval) nothrow
   {
     (cast(GstVideoSEIUserDataUnregisteredMeta*)this._cPtr).size = propval;
   }
 
   /** */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_sei_user_data_unregistered_meta_get_info();

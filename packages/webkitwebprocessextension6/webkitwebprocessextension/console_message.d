@@ -13,32 +13,32 @@ class ConsoleMessage : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_console_message_get_type != &gidSymbolNotFound ? webkit_console_message_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ConsoleMessage self()
+  override ConsoleMessage self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class ConsoleMessage : gobject.boxed.Boxed
       Make a copy of console_message.
       Returns: A copy of passed in #WebKitConsoleMessage
   */
-  webkitwebprocessextension.console_message.ConsoleMessage copy()
+  webkitwebprocessextension.console_message.ConsoleMessage copy() nothrow
   {
     WebKitConsoleMessage* _cretval;
     _cretval = webkit_console_message_copy(cast(WebKitConsoleMessage*)this._cPtr);
@@ -59,7 +59,7 @@ class ConsoleMessage : gobject.boxed.Boxed
       Gets the log level of a #WebKitConsoleMessage
       Returns: a #WebKitConsoleMessageLevel indicating the log level of console_message
   */
-  webkitwebprocessextension.types.ConsoleMessageLevel getLevel()
+  webkitwebprocessextension.types.ConsoleMessageLevel getLevel() nothrow
   {
     WebKitConsoleMessageLevel _cretval;
     _cretval = webkit_console_message_get_level(cast(WebKitConsoleMessage*)this._cPtr);
@@ -71,7 +71,7 @@ class ConsoleMessage : gobject.boxed.Boxed
       Gets the line number of a #WebKitConsoleMessage
       Returns: the line number of console_message
   */
-  uint getLine()
+  uint getLine() nothrow
   {
     uint _retval;
     _retval = webkit_console_message_get_line(cast(WebKitConsoleMessage*)this._cPtr);
@@ -82,7 +82,7 @@ class ConsoleMessage : gobject.boxed.Boxed
       Gets the source of a #WebKitConsoleMessage
       Returns: a #WebKitConsoleMessageSource indicating the source of console_message
   */
-  webkitwebprocessextension.types.ConsoleMessageSource getSource()
+  webkitwebprocessextension.types.ConsoleMessageSource getSource() nothrow
   {
     WebKitConsoleMessageSource _cretval;
     _cretval = webkit_console_message_get_source(cast(WebKitConsoleMessage*)this._cPtr);
@@ -94,7 +94,7 @@ class ConsoleMessage : gobject.boxed.Boxed
       Gets the source identifier of a #WebKitConsoleMessage
       Returns: the source identifier of console_message
   */
-  string getSourceId()
+  string getSourceId() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_console_message_get_source_id(cast(WebKitConsoleMessage*)this._cPtr);
@@ -106,7 +106,7 @@ class ConsoleMessage : gobject.boxed.Boxed
       Gets the text message of a #WebKitConsoleMessage
       Returns: the text message of console_message
   */
-  string getText()
+  string getText() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_console_message_get_text(cast(WebKitConsoleMessage*)this._cPtr);

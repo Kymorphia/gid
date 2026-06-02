@@ -28,32 +28,32 @@ class Value : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())secret_value_get_type != &gidSymbolNotFound ? secret_value_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Value self()
+  override Value self() nothrow
   {
     return this;
   }
@@ -71,7 +71,7 @@ class Value : gobject.boxed.Boxed
         contentType = the content type of the data
       Returns: the new #SecretValue
   */
-  this(string secret, string contentType)
+  this(string secret, string contentType) nothrow
   {
     SecretValue* _cretval;
     ptrdiff_t _length;
@@ -99,14 +99,21 @@ class Value : gobject.boxed.Boxed
         destroy = function to call to free the secret data
       Returns: the new #SecretValue
   */
-  static secret.value.Value newFull(string secretData, string contentType, glib.types.DestroyNotify destroy)
+  static secret.value.Value newFull(string secretData, string contentType, glib.types.DestroyNotify destroy) nothrow
   {
-    extern(C) void _destroyCallback(void* data)
+    extern(C) void _destroyCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
     SecretValue* _cretval;
@@ -129,7 +136,7 @@ class Value : gobject.boxed.Boxed
       [secret.value.Value.newFull].
       Returns: the secret data
   */
-  ubyte[] get()
+  ubyte[] get() nothrow
   {
     const(ubyte)* _cretval;
     size_t _cretlength;
@@ -148,7 +155,7 @@ class Value : gobject.boxed.Boxed
       `text/plain`.
       Returns: the content type
   */
-  string getContentType()
+  string getContentType() nothrow
   {
     const(char)* _cretval;
     _cretval = secret_value_get_content_type(cast(SecretValue*)this._cPtr);
@@ -163,7 +170,7 @@ class Value : gobject.boxed.Boxed
       The content type must be `text/plain`.
       Returns: the content type
   */
-  string getText()
+  string getText() nothrow
   {
     const(char)* _cretval;
     _cretval = secret_value_get_text(cast(SecretValue*)this._cPtr);
@@ -180,7 +187,7 @@ class Value : gobject.boxed.Boxed
       Returns: a new password string stored in nonpageable memory
           which must be freed with `funcpassword_free` when done
   */
-  string unrefToPassword(ref size_t length)
+  string unrefToPassword(ref size_t length) nothrow
   {
     char* _cretval;
     _cretval = secret_value_unref_to_password(cast(SecretValue*)this._cPtr, cast(size_t*)&length);

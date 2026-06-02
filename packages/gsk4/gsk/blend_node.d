@@ -15,11 +15,8 @@ class BlendNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.blend_node.BlendNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -33,7 +30,7 @@ class BlendNode : gsk.render_node.RenderNode
         blendMode = The blend mode to use
       Returns: A new [gsk.render_node.RenderNode]
   */
-  this(gsk.render_node.RenderNode bottom, gsk.render_node.RenderNode top, gsk.types.BlendMode blendMode)
+  this(gsk.render_node.RenderNode bottom, gsk.render_node.RenderNode top, gsk.types.BlendMode blendMode) nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_blend_node_new(bottom ? cast(GskRenderNode*)bottom._cPtr(No.Dup) : null, top ? cast(GskRenderNode*)top._cPtr(No.Dup) : null, blendMode);
@@ -44,7 +41,7 @@ class BlendNode : gsk.render_node.RenderNode
       Retrieves the blend mode used by node.
       Returns: the blend mode
   */
-  gsk.types.BlendMode getBlendMode()
+  gsk.types.BlendMode getBlendMode() nothrow
   {
     GskBlendMode _cretval;
     _cretval = gsk_blend_node_get_blend_mode(cast(const(GskRenderNode)*)this._cPtr);
@@ -56,7 +53,7 @@ class BlendNode : gsk.render_node.RenderNode
       Retrieves the bottom [gsk.render_node.RenderNode] child of the node.
       Returns: the bottom child node
   */
-  gsk.render_node.RenderNode getBottomChild()
+  gsk.render_node.RenderNode getBottomChild() nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_blend_node_get_bottom_child(cast(const(GskRenderNode)*)this._cPtr);
@@ -68,7 +65,7 @@ class BlendNode : gsk.render_node.RenderNode
       Retrieves the top [gsk.render_node.RenderNode] child of the node.
       Returns: the top child node
   */
-  gsk.render_node.RenderNode getTopChild()
+  gsk.render_node.RenderNode getTopChild() nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_blend_node_get_top_child(cast(const(GskRenderNode)*)this._cPtr);

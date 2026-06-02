@@ -31,26 +31,26 @@ class EventController : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_event_controller_get_type != &gidSymbolNotFound ? gtk_event_controller_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EventController self()
+  override EventController self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class EventController : gobject.object.ObjectWrap
       Get builder for [gtk.event_controller.EventController]
       Returns: New builder object
   */
-  static EventControllerGidBuilder builder()
+  static EventControllerGidBuilder builder() nothrow
   {
     return new EventControllerGidBuilder;
   }
@@ -68,7 +68,7 @@ class EventController : gobject.object.ObjectWrap
       Get `name` property.
       Returns: The name for this controller, typically used for debugging purposes.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return getName();
   }
@@ -78,7 +78,7 @@ class EventController : gobject.object.ObjectWrap
       Params:
         propval = The name for this controller, typically used for debugging purposes.
   */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     setName(propval);
   }
@@ -87,7 +87,7 @@ class EventController : gobject.object.ObjectWrap
       Get `propagationLimit` property.
       Returns: The limit for which events this controller will handle.
   */
-  @property gtk.types.PropagationLimit propagationLimit()
+  @property gtk.types.PropagationLimit propagationLimit() nothrow
   {
     return getPropagationLimit();
   }
@@ -97,7 +97,7 @@ class EventController : gobject.object.ObjectWrap
       Params:
         propval = The limit for which events this controller will handle.
   */
-  @property void propagationLimit(gtk.types.PropagationLimit propval)
+  @property void propagationLimit(gtk.types.PropagationLimit propval) nothrow
   {
     setPropagationLimit(propval);
   }
@@ -106,7 +106,7 @@ class EventController : gobject.object.ObjectWrap
       Get `propagationPhase` property.
       Returns: The propagation phase at which this controller will handle events.
   */
-  @property gtk.types.PropagationPhase propagationPhase()
+  @property gtk.types.PropagationPhase propagationPhase() nothrow
   {
     return getPropagationPhase();
   }
@@ -116,7 +116,7 @@ class EventController : gobject.object.ObjectWrap
       Params:
         propval = The propagation phase at which this controller will handle events.
   */
-  @property void propagationPhase(gtk.types.PropagationPhase propval)
+  @property void propagationPhase(gtk.types.PropagationPhase propval) nothrow
   {
     setPropagationPhase(propval);
   }
@@ -125,7 +125,7 @@ class EventController : gobject.object.ObjectWrap
       Get `widget` property.
       Returns: The widget receiving the `GdkEvents` that the controller will handle.
   */
-  @property gtk.widget.Widget widget()
+  @property gtk.widget.Widget widget() nothrow
   {
     return getWidget();
   }
@@ -137,7 +137,7 @@ class EventController : gobject.object.ObjectWrap
       Returns: the event that is currently
           handled by controller
   */
-  gdk.event.Event getCurrentEvent()
+  gdk.event.Event getCurrentEvent() nothrow
   {
     GdkEvent* _cretval;
     _cretval = gtk_event_controller_get_current_event(cast(GtkEventController*)this._cPtr);
@@ -153,7 +153,7 @@ class EventController : gobject.object.ObjectWrap
       Returns: device of the event is
           currently handled by controller
   */
-  gdk.device.Device getCurrentEventDevice()
+  gdk.device.Device getCurrentEventDevice() nothrow
   {
     GdkDevice* _cretval;
     _cretval = gtk_event_controller_get_current_event_device(cast(GtkEventController*)this._cPtr);
@@ -168,7 +168,7 @@ class EventController : gobject.object.ObjectWrap
       At other times, 0 is returned.
       Returns: modifier state of the event is currently handled by controller
   */
-  gdk.types.ModifierType getCurrentEventState()
+  gdk.types.ModifierType getCurrentEventState() nothrow
   {
     GdkModifierType _cretval;
     _cretval = gtk_event_controller_get_current_event_state(cast(GtkEventController*)this._cPtr);
@@ -183,7 +183,7 @@ class EventController : gobject.object.ObjectWrap
       At other times, 0 is returned.
       Returns: timestamp of the event is currently handled by controller
   */
-  uint getCurrentEventTime()
+  uint getCurrentEventTime() nothrow
   {
     uint _retval;
     _retval = gtk_event_controller_get_current_event_time(cast(GtkEventController*)this._cPtr);
@@ -194,7 +194,7 @@ class EventController : gobject.object.ObjectWrap
       Gets the name of controller.
       Returns: The controller name
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_event_controller_get_name(cast(GtkEventController*)this._cPtr);
@@ -206,7 +206,7 @@ class EventController : gobject.object.ObjectWrap
       Gets the propagation limit of the event controller.
       Returns: the propagation limit
   */
-  gtk.types.PropagationLimit getPropagationLimit()
+  gtk.types.PropagationLimit getPropagationLimit() nothrow
   {
     GtkPropagationLimit _cretval;
     _cretval = gtk_event_controller_get_propagation_limit(cast(GtkEventController*)this._cPtr);
@@ -218,7 +218,7 @@ class EventController : gobject.object.ObjectWrap
       Gets the propagation phase at which controller handles events.
       Returns: the propagation phase
   */
-  gtk.types.PropagationPhase getPropagationPhase()
+  gtk.types.PropagationPhase getPropagationPhase() nothrow
   {
     GtkPropagationPhase _cretval;
     _cretval = gtk_event_controller_get_propagation_phase(cast(GtkEventController*)this._cPtr);
@@ -230,7 +230,7 @@ class EventController : gobject.object.ObjectWrap
       Returns the [gtk.widget.Widget] this controller relates to.
       Returns: a [gtk.widget.Widget]
   */
-  gtk.widget.Widget getWidget()
+  gtk.widget.Widget getWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_event_controller_get_widget(cast(GtkEventController*)this._cPtr);
@@ -241,7 +241,7 @@ class EventController : gobject.object.ObjectWrap
   /**
       Resets the controller to a clean state.
   */
-  void reset()
+  void reset() nothrow
   {
     gtk_event_controller_reset(cast(GtkEventController*)this._cPtr);
   }
@@ -252,7 +252,7 @@ class EventController : gobject.object.ObjectWrap
       Params:
         name = a name for controller
   */
-  void setName(string name = null)
+  void setName(string name = null) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_event_controller_set_name(cast(GtkEventController*)this._cPtr, _name);
@@ -268,7 +268,7 @@ class EventController : gobject.object.ObjectWrap
       Params:
         limit = the propagation limit
   */
-  void setPropagationLimit(gtk.types.PropagationLimit limit)
+  void setPropagationLimit(gtk.types.PropagationLimit limit) nothrow
   {
     gtk_event_controller_set_propagation_limit(cast(GtkEventController*)this._cPtr, limit);
   }
@@ -282,7 +282,7 @@ class EventController : gobject.object.ObjectWrap
       Params:
         phase = a propagation phase
   */
-  void setPropagationPhase(gtk.types.PropagationPhase phase)
+  void setPropagationPhase(gtk.types.PropagationPhase phase) nothrow
   {
     gtk_event_controller_set_propagation_phase(cast(GtkEventController*)this._cPtr, phase);
   }
@@ -293,7 +293,7 @@ class EventController : gobject.object.ObjectWrap
       Params:
         name = a name for controller, must be a static string
   */
-  void setStaticName(string name = null)
+  void setStaticName(string name = null) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_event_controller_set_static_name(cast(GtkEventController*)this._cPtr, _name);
@@ -310,7 +310,7 @@ class EventControllerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The name for this controller, typically used for debugging purposes.
       Returns: Builder instance for fluent chaining
   */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -321,7 +321,7 @@ class EventControllerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The limit for which events this controller will handle.
       Returns: Builder instance for fluent chaining
   */
-  T propagationLimit(gtk.types.PropagationLimit propval)
+  T propagationLimit(gtk.types.PropagationLimit propval) nothrow
   {
     return setProperty("propagation-limit", propval);
   }
@@ -332,7 +332,7 @@ class EventControllerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The propagation phase at which this controller will handle events.
       Returns: Builder instance for fluent chaining
   */
-  T propagationPhase(gtk.types.PropagationPhase propval)
+  T propagationPhase(gtk.types.PropagationPhase propval) nothrow
   {
     return setProperty("propagation-phase", propval);
   }
@@ -345,7 +345,7 @@ final class EventControllerGidBuilder : EventControllerGidBuilderImpl!EventContr
       Create object from builder.
       Returns: New object
   */
-  EventController build()
+  EventController build() nothrow
   {
     return new EventController(cast(void*)createGObject(EventController._getGType), No.Take);
   }

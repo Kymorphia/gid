@@ -36,7 +36,7 @@ import harfbuzz.variation;
       featureType = The #hb_aat_layout_feature_type_t of the requested feature type
     Returns: Name identifier of the requested feature type
 */
-harfbuzz.types.OtNameId aatLayoutFeatureTypeGetNameId(harfbuzz.face.Face face, harfbuzz.types.AatLayoutFeatureType featureType)
+harfbuzz.types.OtNameId aatLayoutFeatureTypeGetNameId(harfbuzz.face.Face face, harfbuzz.types.AatLayoutFeatureType featureType) nothrow
 {
   harfbuzz.types.OtNameId _retval;
   _retval = hb_aat_layout_feature_type_get_name_id(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, featureType);
@@ -58,7 +58,7 @@ harfbuzz.types.OtNameId aatLayoutFeatureTypeGetNameId(harfbuzz.face.Face face, h
       defaultIndex = The index of the feature's default selector, if any
     Returns: Number of all available feature selectors
 */
-uint aatLayoutFeatureTypeGetSelectorInfos(harfbuzz.face.Face face, harfbuzz.types.AatLayoutFeatureType featureType, uint startOffset, ref harfbuzz.types.AatLayoutFeatureSelectorInfo[] selectors, out uint defaultIndex)
+uint aatLayoutFeatureTypeGetSelectorInfos(harfbuzz.face.Face face, harfbuzz.types.AatLayoutFeatureType featureType, uint startOffset, ref harfbuzz.types.AatLayoutFeatureSelectorInfo[] selectors, out uint defaultIndex) nothrow
 {
   uint _retval;
   uint _selectorCount;
@@ -76,7 +76,7 @@ uint aatLayoutFeatureTypeGetSelectorInfos(harfbuzz.face.Face face, harfbuzz.type
       features = Array of feature types found
     Returns: Number of all available feature types.
 */
-uint aatLayoutGetFeatureTypes(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.types.AatLayoutFeatureType[] features)
+uint aatLayoutGetFeatureTypes(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.types.AatLayoutFeatureType[] features) nothrow
 {
   uint _retval;
   uint _featureCount;
@@ -95,7 +95,7 @@ uint aatLayoutGetFeatureTypes(harfbuzz.face.Face face, uint startOffset, ref har
       face = #hb_face_t to work upon
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool aatLayoutHasPositioning(harfbuzz.face.Face face)
+harfbuzz.types.Bool aatLayoutHasPositioning(harfbuzz.face.Face face) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_aat_layout_has_positioning(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
@@ -112,7 +112,7 @@ harfbuzz.types.Bool aatLayoutHasPositioning(harfbuzz.face.Face face)
       face = #hb_face_t to work upon
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool aatLayoutHasSubstitution(harfbuzz.face.Face face)
+harfbuzz.types.Bool aatLayoutHasSubstitution(harfbuzz.face.Face face) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_aat_layout_has_substitution(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
@@ -127,7 +127,7 @@ harfbuzz.types.Bool aatLayoutHasSubstitution(harfbuzz.face.Face face)
       face = #hb_face_t to work upon
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool aatLayoutHasTracking(harfbuzz.face.Face face)
+harfbuzz.types.Bool aatLayoutHasTracking(harfbuzz.face.Face face) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_aat_layout_has_tracking(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
@@ -141,7 +141,7 @@ harfbuzz.types.Bool aatLayoutHasTracking(harfbuzz.face.Face face)
       blob = A blob.
     Returns: The new blob, or nullptr if allocation failed
 */
-harfbuzz.blob.Blob blobCopyWritableOrFail(harfbuzz.blob.Blob blob)
+harfbuzz.blob.Blob blobCopyWritableOrFail(harfbuzz.blob.Blob blob) nothrow
 {
   hb_blob_t* _cretval;
   _cretval = hb_blob_copy_writable_or_fail(blob ? cast(hb_blob_t*)blob._cPtr(No.Dup) : null);
@@ -158,7 +158,7 @@ harfbuzz.blob.Blob blobCopyWritableOrFail(harfbuzz.blob.Blob blob)
     Returns: An #hb_blob_t pointer with the content of the file,
       or [harfbuzz.global.blobGetEmpty] if failed.
 */
-harfbuzz.blob.Blob blobCreateFromFile(string fileName)
+harfbuzz.blob.Blob blobCreateFromFile(string fileName) nothrow
 {
   hb_blob_t* _cretval;
   const(char)* _fileName = fileName.toCString(No.Alloc);
@@ -176,7 +176,7 @@ harfbuzz.blob.Blob blobCreateFromFile(string fileName)
     Returns: An #hb_blob_t pointer with the content of the file,
       or `NULL` if failed.
 */
-harfbuzz.blob.Blob blobCreateFromFileOrFail(string fileName)
+harfbuzz.blob.Blob blobCreateFromFileOrFail(string fileName) nothrow
 {
   hb_blob_t* _cretval;
   const(char)* _fileName = fileName.toCString(No.Alloc);
@@ -202,7 +202,7 @@ harfbuzz.blob.Blob blobCreateFromFileOrFail(string fileName)
       length is zero or offset is beyond the end of parent's data.  Destroy
       with [harfbuzz.global.blobDestroy].
 */
-harfbuzz.blob.Blob blobCreateSubBlob(harfbuzz.blob.Blob parent, uint offset, uint length)
+harfbuzz.blob.Blob blobCreateSubBlob(harfbuzz.blob.Blob parent, uint offset, uint length) nothrow
 {
   hb_blob_t* _cretval;
   _cretval = hb_blob_create_sub_blob(parent ? cast(hb_blob_t*)parent._cPtr(No.Dup) : null, offset, length);
@@ -217,7 +217,7 @@ harfbuzz.blob.Blob blobCreateSubBlob(harfbuzz.blob.Blob parent, uint offset, uin
       blob = a blob.
     Returns: the byte data of blob.
 */
-string blobGetData(harfbuzz.blob.Blob blob)
+string blobGetData(harfbuzz.blob.Blob blob) nothrow
 {
   const(char)* _cretval;
   uint _cretlength;
@@ -243,7 +243,7 @@ string blobGetData(harfbuzz.blob.Blob blob)
     Returns: Writable blob data,
       or `NULL` if failed.
 */
-string blobGetDataWritable(harfbuzz.blob.Blob blob)
+string blobGetDataWritable(harfbuzz.blob.Blob blob) nothrow
 {
   char* _cretval;
   uint _cretlength;
@@ -263,7 +263,7 @@ string blobGetDataWritable(harfbuzz.blob.Blob blob)
     See TODO:link object types for more information.
     Returns: The empty blob.
 */
-harfbuzz.blob.Blob blobGetEmpty()
+harfbuzz.blob.Blob blobGetEmpty() nothrow
 {
   hb_blob_t* _cretval;
   _cretval = hb_blob_get_empty();
@@ -278,7 +278,7 @@ harfbuzz.blob.Blob blobGetEmpty()
       blob = a blob.
     Returns: the length of blob data in bytes.
 */
-uint blobGetLength(harfbuzz.blob.Blob blob)
+uint blobGetLength(harfbuzz.blob.Blob blob) nothrow
 {
   uint _retval;
   _retval = hb_blob_get_length(blob ? cast(hb_blob_t*)blob._cPtr(No.Dup) : null);
@@ -292,7 +292,7 @@ uint blobGetLength(harfbuzz.blob.Blob blob)
       blob = a blob.
     Returns: `true` if blob is immutable, `false` otherwise
 */
-harfbuzz.types.Bool blobIsImmutable(harfbuzz.blob.Blob blob)
+harfbuzz.types.Bool blobIsImmutable(harfbuzz.blob.Blob blob) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_blob_is_immutable(blob ? cast(hb_blob_t*)blob._cPtr(No.Dup) : null);
@@ -305,7 +305,7 @@ harfbuzz.types.Bool blobIsImmutable(harfbuzz.blob.Blob blob)
     Params:
       blob = a blob
 */
-void blobMakeImmutable(harfbuzz.blob.Blob blob)
+void blobMakeImmutable(harfbuzz.blob.Blob blob) nothrow
 {
   hb_blob_make_immutable(blob ? cast(hb_blob_t*)blob._cPtr(No.Dup) : null);
 }
@@ -325,7 +325,7 @@ void blobMakeImmutable(harfbuzz.blob.Blob blob)
       codepoint = A Unicode code point.
       cluster = The cluster value of codepoint.
 */
-void bufferAdd(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codepoint codepoint, uint cluster)
+void bufferAdd(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codepoint codepoint, uint cluster) nothrow
 {
   hb_buffer_add(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, codepoint, cluster);
 }
@@ -353,7 +353,7 @@ void bufferAdd(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codepoint codepoint
       itemLength = the number of code points to add to the buffer, or -1 for the
                       end of text (assuming it is `NULL` terminated).
 */
-void bufferAddCodepoints(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codepoint[] text, uint itemOffset, int itemLength)
+void bufferAddCodepoints(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codepoint[] text, uint itemOffset, int itemLength) nothrow
 {
   int _textLength;
   if (text)
@@ -377,7 +377,7 @@ void bufferAddCodepoints(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codepoint
       itemLength = the number of characters to add to the buffer, or -1 for the
                       end of text (assuming it is `NULL` terminated)
 */
-void bufferAddLatin1(harfbuzz.buffer.Buffer buffer, ubyte[] text, uint itemOffset, int itemLength)
+void bufferAddLatin1(harfbuzz.buffer.Buffer buffer, ubyte[] text, uint itemOffset, int itemLength) nothrow
 {
   int _textLength;
   if (text)
@@ -400,7 +400,7 @@ void bufferAddLatin1(harfbuzz.buffer.Buffer buffer, ubyte[] text, uint itemOffse
       itemLength = The number of characters to add to the buffer, or -1 for the
                       end of text (assuming it is `NULL` terminated)
 */
-void bufferAddUtf16(harfbuzz.buffer.Buffer buffer, ushort[] text, uint itemOffset, int itemLength)
+void bufferAddUtf16(harfbuzz.buffer.Buffer buffer, ushort[] text, uint itemOffset, int itemLength) nothrow
 {
   int _textLength;
   if (text)
@@ -423,7 +423,7 @@ void bufferAddUtf16(harfbuzz.buffer.Buffer buffer, ushort[] text, uint itemOffse
       itemLength = The number of characters to add to the buffer, or -1 for the
                       end of text (assuming it is `NULL` terminated)
 */
-void bufferAddUtf32(harfbuzz.buffer.Buffer buffer, uint[] text, uint itemOffset, int itemLength)
+void bufferAddUtf32(harfbuzz.buffer.Buffer buffer, uint[] text, uint itemOffset, int itemLength) nothrow
 {
   int _textLength;
   if (text)
@@ -447,7 +447,7 @@ void bufferAddUtf32(harfbuzz.buffer.Buffer buffer, uint[] text, uint itemOffset,
       itemLength = The number of characters to add to the buffer, or -1 for the
                       end of text (assuming it is `NULL` terminated).
 */
-void bufferAddUtf8(harfbuzz.buffer.Buffer buffer, ubyte[] text, uint itemOffset, int itemLength)
+void bufferAddUtf8(harfbuzz.buffer.Buffer buffer, ubyte[] text, uint itemOffset, int itemLength) nothrow
 {
   int _textLength;
   if (text)
@@ -464,7 +464,7 @@ void bufferAddUtf8(harfbuzz.buffer.Buffer buffer, ubyte[] text, uint itemOffset,
       buffer = An #hb_buffer_t
     Returns: `true` if buffer memory allocation succeeded, `false` otherwise.
 */
-harfbuzz.types.Bool bufferAllocationSuccessful(harfbuzz.buffer.Buffer buffer)
+harfbuzz.types.Bool bufferAllocationSuccessful(harfbuzz.buffer.Buffer buffer) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_buffer_allocation_successful(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null);
@@ -480,7 +480,7 @@ harfbuzz.types.Bool bufferAllocationSuccessful(harfbuzz.buffer.Buffer buffer)
       start = start index into source buffer to copy.  Use 0 to copy from start of buffer.
       end = end index into source buffer to copy.  Use HB_FEATURE_GLOBAL_END to copy to end of buffer.
 */
-void bufferAppend(harfbuzz.buffer.Buffer buffer, harfbuzz.buffer.Buffer source, uint start, uint end)
+void bufferAppend(harfbuzz.buffer.Buffer buffer, harfbuzz.buffer.Buffer source, uint start, uint end) nothrow
 {
   hb_buffer_append(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, source ? cast(const(hb_buffer_t)*)source._cPtr(No.Dup) : null, start, end);
 }
@@ -492,7 +492,7 @@ void bufferAppend(harfbuzz.buffer.Buffer buffer, harfbuzz.buffer.Buffer source, 
     Params:
       buffer = An #hb_buffer_t
 */
-void bufferClearContents(harfbuzz.buffer.Buffer buffer)
+void bufferClearContents(harfbuzz.buffer.Buffer buffer) nothrow
 {
   hb_buffer_clear_contents(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null);
 }
@@ -505,7 +505,7 @@ void bufferClearContents(harfbuzz.buffer.Buffer buffer)
       be allocated, a special #hb_buffer_t object will be returned on which
       [harfbuzz.global.bufferAllocationSuccessful] returns `false`.
 */
-harfbuzz.buffer.Buffer bufferCreate()
+harfbuzz.buffer.Buffer bufferCreate() nothrow
 {
   hb_buffer_t* _cretval;
   _cretval = hb_buffer_create();
@@ -521,7 +521,7 @@ harfbuzz.buffer.Buffer bufferCreate()
       src = An #hb_buffer_t
     Returns: A newly allocated #hb_buffer_t, similar to [harfbuzz.global.bufferCreate].
 */
-harfbuzz.buffer.Buffer bufferCreateSimilar(harfbuzz.buffer.Buffer src)
+harfbuzz.buffer.Buffer bufferCreateSimilar(harfbuzz.buffer.Buffer src) nothrow
 {
   hb_buffer_t* _cretval;
   _cretval = hb_buffer_create_similar(src ? cast(const(hb_buffer_t)*)src._cPtr(No.Dup) : null);
@@ -543,7 +543,7 @@ harfbuzz.buffer.Buffer bufferCreateSimilar(harfbuzz.buffer.Buffer src)
     Returns: `true` if parse was successful, `false` if an error
       occurred.
 */
-harfbuzz.types.Bool bufferDeserializeGlyphs(harfbuzz.buffer.Buffer buffer, string buf, out string endPtr, harfbuzz.font.Font font, harfbuzz.types.BufferSerializeFormat format)
+harfbuzz.types.Bool bufferDeserializeGlyphs(harfbuzz.buffer.Buffer buffer, string buf, out string endPtr, harfbuzz.font.Font font, harfbuzz.types.BufferSerializeFormat format) nothrow
 {
   harfbuzz.types.Bool _retval;
   int _bufLen;
@@ -570,7 +570,7 @@ harfbuzz.types.Bool bufferDeserializeGlyphs(harfbuzz.buffer.Buffer buffer, strin
     Returns: `true` if parse was successful, `false` if an error
       occurred.
 */
-harfbuzz.types.Bool bufferDeserializeUnicode(harfbuzz.buffer.Buffer buffer, string buf, out string endPtr, harfbuzz.types.BufferSerializeFormat format)
+harfbuzz.types.Bool bufferDeserializeUnicode(harfbuzz.buffer.Buffer buffer, string buf, out string endPtr, harfbuzz.types.BufferSerializeFormat format) nothrow
 {
   harfbuzz.types.Bool _retval;
   int _bufLen;
@@ -596,7 +596,7 @@ harfbuzz.types.Bool bufferDeserializeUnicode(harfbuzz.buffer.Buffer buffer, stri
       positionFuzz = allowed absolute difference in position values.
     Returns: 
 */
-harfbuzz.types.BufferDiffFlags bufferDiff(harfbuzz.buffer.Buffer buffer, harfbuzz.buffer.Buffer reference, harfbuzz.types.Codepoint dottedcircleGlyph, uint positionFuzz)
+harfbuzz.types.BufferDiffFlags bufferDiff(harfbuzz.buffer.Buffer buffer, harfbuzz.buffer.Buffer reference, harfbuzz.types.Codepoint dottedcircleGlyph, uint positionFuzz) nothrow
 {
   hb_buffer_diff_flags_t _cretval;
   _cretval = hb_buffer_diff(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, reference ? cast(hb_buffer_t*)reference._cPtr(No.Dup) : null, dottedcircleGlyph, positionFuzz);
@@ -613,7 +613,7 @@ harfbuzz.types.BufferDiffFlags bufferDiff(harfbuzz.buffer.Buffer buffer, harfbuz
       buffer = An #hb_buffer_t
     Returns: The cluster level of buffer
 */
-harfbuzz.types.BufferClusterLevel bufferGetClusterLevel(harfbuzz.buffer.Buffer buffer)
+harfbuzz.types.BufferClusterLevel bufferGetClusterLevel(harfbuzz.buffer.Buffer buffer) nothrow
 {
   hb_buffer_cluster_level_t _cretval;
   _cretval = hb_buffer_get_cluster_level(buffer ? cast(const(hb_buffer_t)*)buffer._cPtr(No.Dup) : null);
@@ -629,7 +629,7 @@ harfbuzz.types.BufferClusterLevel bufferGetClusterLevel(harfbuzz.buffer.Buffer b
       buffer = An #hb_buffer_t
     Returns: The type of buffer contents
 */
-harfbuzz.types.BufferContentType bufferGetContentType(harfbuzz.buffer.Buffer buffer)
+harfbuzz.types.BufferContentType bufferGetContentType(harfbuzz.buffer.Buffer buffer) nothrow
 {
   hb_buffer_content_type_t _cretval;
   _cretval = hb_buffer_get_content_type(buffer ? cast(const(hb_buffer_t)*)buffer._cPtr(No.Dup) : null);
@@ -644,7 +644,7 @@ harfbuzz.types.BufferContentType bufferGetContentType(harfbuzz.buffer.Buffer buf
       buffer = An #hb_buffer_t
     Returns: The direction of the buffer.
 */
-harfbuzz.types.Direction bufferGetDirection(harfbuzz.buffer.Buffer buffer)
+harfbuzz.types.Direction bufferGetDirection(harfbuzz.buffer.Buffer buffer) nothrow
 {
   hb_direction_t _cretval;
   _cretval = hb_buffer_get_direction(buffer ? cast(const(hb_buffer_t)*)buffer._cPtr(No.Dup) : null);
@@ -656,7 +656,7 @@ harfbuzz.types.Direction bufferGetDirection(harfbuzz.buffer.Buffer buffer)
     Fetches an empty #hb_buffer_t.
     Returns: The empty buffer
 */
-harfbuzz.buffer.Buffer bufferGetEmpty()
+harfbuzz.buffer.Buffer bufferGetEmpty() nothrow
 {
   hb_buffer_t* _cretval;
   _cretval = hb_buffer_get_empty();
@@ -671,7 +671,7 @@ harfbuzz.buffer.Buffer bufferGetEmpty()
       buffer = An #hb_buffer_t
     Returns: The buffer flags
 */
-harfbuzz.types.BufferFlags bufferGetFlags(harfbuzz.buffer.Buffer buffer)
+harfbuzz.types.BufferFlags bufferGetFlags(harfbuzz.buffer.Buffer buffer) nothrow
 {
   hb_buffer_flags_t _cretval;
   _cretval = hb_buffer_get_flags(buffer ? cast(const(hb_buffer_t)*)buffer._cPtr(No.Dup) : null);
@@ -688,7 +688,7 @@ harfbuzz.types.BufferFlags bufferGetFlags(harfbuzz.buffer.Buffer buffer)
     Returns: The buffer glyph information array.
       The value valid as long as buffer has not been modified.
 */
-harfbuzz.glyph_info.GlyphInfo[] bufferGetGlyphInfos(harfbuzz.buffer.Buffer buffer)
+harfbuzz.glyph_info.GlyphInfo[] bufferGetGlyphInfos(harfbuzz.buffer.Buffer buffer) nothrow
 {
   hb_glyph_info_t* _cretval;
   uint _cretlength;
@@ -718,7 +718,7 @@ harfbuzz.glyph_info.GlyphInfo[] bufferGetGlyphInfos(harfbuzz.buffer.Buffer buffe
     Returns: The buffer glyph position array.
       The value valid as long as buffer has not been modified.
 */
-harfbuzz.glyph_position.GlyphPosition[] bufferGetGlyphPositions(harfbuzz.buffer.Buffer buffer)
+harfbuzz.glyph_position.GlyphPosition[] bufferGetGlyphPositions(harfbuzz.buffer.Buffer buffer) nothrow
 {
   hb_glyph_position_t* _cretval;
   uint _cretlength;
@@ -741,7 +741,7 @@ harfbuzz.glyph_position.GlyphPosition[] bufferGetGlyphPositions(harfbuzz.buffer.
       buffer = An #hb_buffer_t
     Returns: The buffer invisible #hb_codepoint_t
 */
-harfbuzz.types.Codepoint bufferGetInvisibleGlyph(harfbuzz.buffer.Buffer buffer)
+harfbuzz.types.Codepoint bufferGetInvisibleGlyph(harfbuzz.buffer.Buffer buffer) nothrow
 {
   harfbuzz.types.Codepoint _retval;
   _retval = hb_buffer_get_invisible_glyph(buffer ? cast(const(hb_buffer_t)*)buffer._cPtr(No.Dup) : null);
@@ -755,7 +755,7 @@ harfbuzz.types.Codepoint bufferGetInvisibleGlyph(harfbuzz.buffer.Buffer buffer)
       buffer = An #hb_buffer_t
     Returns: The #hb_language_t of the buffer. Must not be freed by the caller.
 */
-harfbuzz.types.Language bufferGetLanguage(harfbuzz.buffer.Buffer buffer)
+harfbuzz.types.Language bufferGetLanguage(harfbuzz.buffer.Buffer buffer) nothrow
 {
   auto _retval = hb_buffer_get_language(buffer ? cast(const(hb_buffer_t)*)buffer._cPtr(No.Dup) : null);
   return _retval;
@@ -769,7 +769,7 @@ harfbuzz.types.Language bufferGetLanguage(harfbuzz.buffer.Buffer buffer)
     Returns: The buffer length.
       The value valid as long as buffer has not been modified.
 */
-uint bufferGetLength(harfbuzz.buffer.Buffer buffer)
+uint bufferGetLength(harfbuzz.buffer.Buffer buffer) nothrow
 {
   uint _retval;
   _retval = hb_buffer_get_length(buffer ? cast(const(hb_buffer_t)*)buffer._cPtr(No.Dup) : null);
@@ -783,7 +783,7 @@ uint bufferGetLength(harfbuzz.buffer.Buffer buffer)
       buffer = An #hb_buffer_t
     Returns: The buffer not-found #hb_codepoint_t
 */
-harfbuzz.types.Codepoint bufferGetNotFoundGlyph(harfbuzz.buffer.Buffer buffer)
+harfbuzz.types.Codepoint bufferGetNotFoundGlyph(harfbuzz.buffer.Buffer buffer) nothrow
 {
   harfbuzz.types.Codepoint _retval;
   _retval = hb_buffer_get_not_found_glyph(buffer ? cast(const(hb_buffer_t)*)buffer._cPtr(No.Dup) : null);
@@ -798,7 +798,7 @@ harfbuzz.types.Codepoint bufferGetNotFoundGlyph(harfbuzz.buffer.Buffer buffer)
       buffer = An #hb_buffer_t
     Returns: The buffer replacement #hb_codepoint_t
 */
-harfbuzz.types.Codepoint bufferGetReplacementCodepoint(harfbuzz.buffer.Buffer buffer)
+harfbuzz.types.Codepoint bufferGetReplacementCodepoint(harfbuzz.buffer.Buffer buffer) nothrow
 {
   harfbuzz.types.Codepoint _retval;
   _retval = hb_buffer_get_replacement_codepoint(buffer ? cast(const(hb_buffer_t)*)buffer._cPtr(No.Dup) : null);
@@ -812,7 +812,7 @@ harfbuzz.types.Codepoint bufferGetReplacementCodepoint(harfbuzz.buffer.Buffer bu
       buffer = An #hb_buffer_t
     Returns: The #hb_script_t of the buffer
 */
-harfbuzz.types.Script bufferGetScript(harfbuzz.buffer.Buffer buffer)
+harfbuzz.types.Script bufferGetScript(harfbuzz.buffer.Buffer buffer) nothrow
 {
   hb_script_t _cretval;
   _cretval = hb_buffer_get_script(buffer ? cast(const(hb_buffer_t)*)buffer._cPtr(No.Dup) : null);
@@ -827,7 +827,7 @@ harfbuzz.types.Script bufferGetScript(harfbuzz.buffer.Buffer buffer)
       buffer = An #hb_buffer_t
       props = The output #hb_segment_properties_t
 */
-void bufferGetSegmentProperties(harfbuzz.buffer.Buffer buffer, out harfbuzz.segment_properties.SegmentProperties props)
+void bufferGetSegmentProperties(harfbuzz.buffer.Buffer buffer, out harfbuzz.segment_properties.SegmentProperties props) nothrow
 {
   hb_segment_properties_t _props;
   hb_buffer_get_segment_properties(buffer ? cast(const(hb_buffer_t)*)buffer._cPtr(No.Dup) : null, &_props);
@@ -841,7 +841,7 @@ void bufferGetSegmentProperties(harfbuzz.buffer.Buffer buffer, out harfbuzz.segm
       buffer = An #hb_buffer_t
     Returns: The Unicode-functions structure
 */
-harfbuzz.unicode_funcs.UnicodeFuncs bufferGetUnicodeFuncs(harfbuzz.buffer.Buffer buffer)
+harfbuzz.unicode_funcs.UnicodeFuncs bufferGetUnicodeFuncs(harfbuzz.buffer.Buffer buffer) nothrow
 {
   hb_unicode_funcs_t* _cretval;
   _cretval = hb_buffer_get_unicode_funcs(buffer ? cast(const(hb_buffer_t)*)buffer._cPtr(No.Dup) : null);
@@ -875,7 +875,7 @@ harfbuzz.unicode_funcs.UnicodeFuncs bufferGetUnicodeFuncs(harfbuzz.buffer.Buffer
     Params:
       buffer = An #hb_buffer_t
 */
-void bufferGuessSegmentProperties(harfbuzz.buffer.Buffer buffer)
+void bufferGuessSegmentProperties(harfbuzz.buffer.Buffer buffer) nothrow
 {
   hb_buffer_guess_segment_properties(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null);
 }
@@ -889,7 +889,7 @@ void bufferGuessSegmentProperties(harfbuzz.buffer.Buffer buffer)
       buffer = an #hb_buffer_t.
     Returns: `true` if the buffer has position array, `false` otherwise.
 */
-harfbuzz.types.Bool bufferHasPositions(harfbuzz.buffer.Buffer buffer)
+harfbuzz.types.Bool bufferHasPositions(harfbuzz.buffer.Buffer buffer) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_buffer_has_positions(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null);
@@ -905,7 +905,7 @@ harfbuzz.types.Bool bufferHasPositions(harfbuzz.buffer.Buffer buffer)
     Params:
       buffer = An #hb_buffer_t
 */
-void bufferNormalizeGlyphs(harfbuzz.buffer.Buffer buffer)
+void bufferNormalizeGlyphs(harfbuzz.buffer.Buffer buffer) nothrow
 {
   hb_buffer_normalize_glyphs(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null);
 }
@@ -918,7 +918,7 @@ void bufferNormalizeGlyphs(harfbuzz.buffer.Buffer buffer)
       size = Number of items to pre allocate.
     Returns: `true` if buffer memory allocation succeeded, `false` otherwise
 */
-harfbuzz.types.Bool bufferPreAllocate(harfbuzz.buffer.Buffer buffer, uint size)
+harfbuzz.types.Bool bufferPreAllocate(harfbuzz.buffer.Buffer buffer, uint size) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_buffer_pre_allocate(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, size);
@@ -932,7 +932,7 @@ harfbuzz.types.Bool bufferPreAllocate(harfbuzz.buffer.Buffer buffer, uint size)
     Params:
       buffer = An #hb_buffer_t
 */
-void bufferReset(harfbuzz.buffer.Buffer buffer)
+void bufferReset(harfbuzz.buffer.Buffer buffer) nothrow
 {
   hb_buffer_reset(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null);
 }
@@ -943,7 +943,7 @@ void bufferReset(harfbuzz.buffer.Buffer buffer)
     Params:
       buffer = An #hb_buffer_t
 */
-void bufferReverse(harfbuzz.buffer.Buffer buffer)
+void bufferReverse(harfbuzz.buffer.Buffer buffer) nothrow
 {
   hb_buffer_reverse(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null);
 }
@@ -956,7 +956,7 @@ void bufferReverse(harfbuzz.buffer.Buffer buffer)
     Params:
       buffer = An #hb_buffer_t
 */
-void bufferReverseClusters(harfbuzz.buffer.Buffer buffer)
+void bufferReverseClusters(harfbuzz.buffer.Buffer buffer) nothrow
 {
   hb_buffer_reverse_clusters(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null);
 }
@@ -969,7 +969,7 @@ void bufferReverseClusters(harfbuzz.buffer.Buffer buffer)
       start = start index
       end = end index
 */
-void bufferReverseRange(harfbuzz.buffer.Buffer buffer, uint start, uint end)
+void bufferReverseRange(harfbuzz.buffer.Buffer buffer, uint start, uint end) nothrow
 {
   hb_buffer_reverse_range(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, start, end);
 }
@@ -983,7 +983,7 @@ void bufferReverseRange(harfbuzz.buffer.Buffer buffer, uint start, uint end)
       str = a string to parse
     Returns: The parsed #hb_buffer_serialize_format_t.
 */
-harfbuzz.types.BufferSerializeFormat bufferSerializeFormatFromString(ubyte[] str)
+harfbuzz.types.BufferSerializeFormat bufferSerializeFormatFromString(ubyte[] str) nothrow
 {
   hb_buffer_serialize_format_t _cretval;
   int _len;
@@ -1004,7 +1004,7 @@ harfbuzz.types.BufferSerializeFormat bufferSerializeFormatFromString(ubyte[] str
       format = an #hb_buffer_serialize_format_t to convert.
     Returns: A `NULL` terminated string corresponding to format. Should not be freed.
 */
-string bufferSerializeFormatToString(harfbuzz.types.BufferSerializeFormat format)
+string bufferSerializeFormatToString(harfbuzz.types.BufferSerializeFormat format) nothrow
 {
   const(char)* _cretval;
   _cretval = hb_buffer_serialize_format_to_string(format);
@@ -1016,7 +1016,7 @@ string bufferSerializeFormatToString(harfbuzz.types.BufferSerializeFormat format
     Returns a list of supported buffer serialization formats.
     Returns: A string array of buffer serialization formats. Should not be freed.
 */
-string[] bufferSerializeListFormats()
+string[] bufferSerializeListFormats() nothrow
 {
   const(char*)* _cretval;
   _cretval = hb_buffer_serialize_list_formats();
@@ -1043,7 +1043,7 @@ string[] bufferSerializeListFormats()
       buffer = An #hb_buffer_t
       clusterLevel = The cluster level to set on the buffer
 */
-void bufferSetClusterLevel(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferClusterLevel clusterLevel)
+void bufferSetClusterLevel(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferClusterLevel clusterLevel) nothrow
 {
   hb_buffer_set_cluster_level(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, clusterLevel);
 }
@@ -1082,7 +1082,7 @@ void bufferSetClusterLevel(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferC
       buffer = An #hb_buffer_t
       contentType = The type of buffer contents to set
 */
-void bufferSetContentType(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferContentType contentType)
+void bufferSetContentType(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferContentType contentType) nothrow
 {
   hb_buffer_set_content_type(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, contentType);
 }
@@ -1100,7 +1100,7 @@ void bufferSetContentType(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferCo
       buffer = An #hb_buffer_t
       direction = the #hb_direction_t of the buffer
 */
-void bufferSetDirection(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Direction direction)
+void bufferSetDirection(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Direction direction) nothrow
 {
   hb_buffer_set_direction(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, direction);
 }
@@ -1112,7 +1112,7 @@ void bufferSetDirection(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Direction 
       buffer = An #hb_buffer_t
       flags = The buffer flags to set
 */
-void bufferSetFlags(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferFlags flags)
+void bufferSetFlags(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferFlags flags) nothrow
 {
   hb_buffer_set_flags(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, flags);
 }
@@ -1127,7 +1127,7 @@ void bufferSetFlags(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferFlags fl
       buffer = An #hb_buffer_t
       invisible = the invisible #hb_codepoint_t
 */
-void bufferSetInvisibleGlyph(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codepoint invisible)
+void bufferSetInvisibleGlyph(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codepoint invisible) nothrow
 {
   hb_buffer_set_invisible_glyph(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, invisible);
 }
@@ -1147,7 +1147,7 @@ void bufferSetInvisibleGlyph(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codep
       buffer = An #hb_buffer_t
       language = An hb_language_t to set
 */
-void bufferSetLanguage(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Language language)
+void bufferSetLanguage(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Language language) nothrow
 {
   hb_buffer_set_language(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, language);
 }
@@ -1161,7 +1161,7 @@ void bufferSetLanguage(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Language la
       length = The new length of buffer
     Returns: `true` if buffer memory allocation succeeded, `false` otherwise.
 */
-harfbuzz.types.Bool bufferSetLength(harfbuzz.buffer.Buffer buffer, uint length)
+harfbuzz.types.Bool bufferSetLength(harfbuzz.buffer.Buffer buffer, uint length) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_buffer_set_length(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, length);
@@ -1175,15 +1175,22 @@ harfbuzz.types.Bool bufferSetLength(harfbuzz.buffer.Buffer buffer, uint length)
       buffer = An #hb_buffer_t
       func = Callback function
 */
-void bufferSetMessageFunc(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferMessageFunc func)
+void bufferSetMessageFunc(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferMessageFunc func) nothrow
 {
-  extern(C) hb_bool_t _funcCallback(hb_buffer_t* buffer, hb_font_t* font, const(char)* message, void* userData)
+  extern(C) hb_bool_t _funcCallback(hb_buffer_t* buffer, hb_font_t* font, const(char)* message, void* userData) nothrow
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.BufferMessageFunc*)userData;
     string _message = message.fromCString(No.Free);
 
-    _dretval = (*_dlg)(buffer ? new harfbuzz.buffer.Buffer(cast(void*)buffer, No.Take) : null, font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, _message);
+    try
+    {
+      _dretval = (*_dlg)(buffer ? new harfbuzz.buffer.Buffer(cast(void*)buffer, No.Take) : null, font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, _message);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.BufferMessageFunc");
+    }
     auto _retval = cast(hb_bool_t)_dretval;
 
     return _retval;
@@ -1205,7 +1212,7 @@ void bufferSetMessageFunc(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferMe
       buffer = An #hb_buffer_t
       notFound = the not-found #hb_codepoint_t
 */
-void bufferSetNotFoundGlyph(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codepoint notFound)
+void bufferSetNotFoundGlyph(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codepoint notFound) nothrow
 {
   hb_buffer_set_not_found_glyph(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, notFound);
 }
@@ -1220,7 +1227,7 @@ void bufferSetNotFoundGlyph(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codepo
       buffer = An #hb_buffer_t
       replacement = the replacement #hb_codepoint_t
 */
-void bufferSetReplacementCodepoint(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codepoint replacement)
+void bufferSetReplacementCodepoint(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codepoint replacement) nothrow
 {
   hb_buffer_set_replacement_codepoint(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, replacement);
 }
@@ -1240,7 +1247,7 @@ void bufferSetReplacementCodepoint(harfbuzz.buffer.Buffer buffer, harfbuzz.types
       buffer = An #hb_buffer_t
       script = An #hb_script_t to set.
 */
-void bufferSetScript(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Script script)
+void bufferSetScript(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Script script) nothrow
 {
   hb_buffer_set_script(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, script);
 }
@@ -1254,7 +1261,7 @@ void bufferSetScript(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Script script
       buffer = An #hb_buffer_t
       props = An #hb_segment_properties_t to use
 */
-void bufferSetSegmentProperties(harfbuzz.buffer.Buffer buffer, harfbuzz.segment_properties.SegmentProperties props)
+void bufferSetSegmentProperties(harfbuzz.buffer.Buffer buffer, harfbuzz.segment_properties.SegmentProperties props) nothrow
 {
   hb_buffer_set_segment_properties(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, props ? cast(const(hb_segment_properties_t)*)props._cPtr(No.Dup) : null);
 }
@@ -1267,7 +1274,7 @@ void bufferSetSegmentProperties(harfbuzz.buffer.Buffer buffer, harfbuzz.segment_
       buffer = An #hb_buffer_t
       unicodeFuncs = The Unicode-functions structure
 */
-void bufferSetUnicodeFuncs(harfbuzz.buffer.Buffer buffer, harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncs)
+void bufferSetUnicodeFuncs(harfbuzz.buffer.Buffer buffer, harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncs) nothrow
 {
   hb_buffer_set_unicode_funcs(buffer ? cast(hb_buffer_t*)buffer._cPtr(No.Dup) : null, unicodeFuncs ? cast(hb_unicode_funcs_t*)unicodeFuncs._cPtr(No.Dup) : null);
 }
@@ -1279,7 +1286,7 @@ void bufferSetUnicodeFuncs(harfbuzz.buffer.Buffer buffer, harfbuzz.unicode_funcs
       color = an #hb_color_t we are interested in its channels.
     Returns: Alpha channel value
 */
-ubyte colorGetAlpha(harfbuzz.types.Color color)
+ubyte colorGetAlpha(harfbuzz.types.Color color) nothrow
 {
   ubyte _retval;
   _retval = hb_color_get_alpha(color);
@@ -1293,7 +1300,7 @@ ubyte colorGetAlpha(harfbuzz.types.Color color)
       color = an #hb_color_t we are interested in its channels.
     Returns: Blue channel value
 */
-ubyte colorGetBlue(harfbuzz.types.Color color)
+ubyte colorGetBlue(harfbuzz.types.Color color) nothrow
 {
   ubyte _retval;
   _retval = hb_color_get_blue(color);
@@ -1307,7 +1314,7 @@ ubyte colorGetBlue(harfbuzz.types.Color color)
       color = an #hb_color_t we are interested in its channels.
     Returns: Green channel value
 */
-ubyte colorGetGreen(harfbuzz.types.Color color)
+ubyte colorGetGreen(harfbuzz.types.Color color) nothrow
 {
   ubyte _retval;
   _retval = hb_color_get_green(color);
@@ -1321,7 +1328,7 @@ ubyte colorGetGreen(harfbuzz.types.Color color)
       color = an #hb_color_t we are interested in its channels.
     Returns: Red channel value
 */
-ubyte colorGetRed(harfbuzz.types.Color color)
+ubyte colorGetRed(harfbuzz.types.Color color) nothrow
 {
   ubyte _retval;
   _retval = hb_color_get_red(color);
@@ -1341,7 +1348,7 @@ ubyte colorGetRed(harfbuzz.types.Color color)
       colorStops = Array of #hb_color_stop_t to populate
     Returns: the total number of color stops in color_line
 */
-uint colorLineGetColorStops(harfbuzz.color_line.ColorLine colorLine, uint start, ref harfbuzz.types.ColorStop[] colorStops)
+uint colorLineGetColorStops(harfbuzz.color_line.ColorLine colorLine, uint start, ref harfbuzz.types.ColorStop[] colorStops) nothrow
 {
   uint _retval;
   uint _count;
@@ -1357,7 +1364,7 @@ uint colorLineGetColorStops(harfbuzz.color_line.ColorLine colorLine, uint start,
       colorLine = a #hb_color_line_t object
     Returns: the extend mode of color_line
 */
-harfbuzz.types.PaintExtend colorLineGetExtend(harfbuzz.color_line.ColorLine colorLine)
+harfbuzz.types.PaintExtend colorLineGetExtend(harfbuzz.color_line.ColorLine colorLine) nothrow
 {
   hb_paint_extend_t _cretval;
   _cretval = hb_color_line_get_extend(colorLine ? cast(hb_color_line_t*)colorLine._cPtr(No.Dup) : null);
@@ -1377,7 +1384,7 @@ harfbuzz.types.PaintExtend colorLineGetExtend(harfbuzz.color_line.ColorLine colo
       str = String to convert
     Returns: The #hb_direction_t matching str
 */
-harfbuzz.types.Direction directionFromString(ubyte[] str)
+harfbuzz.types.Direction directionFromString(ubyte[] str) nothrow
 {
   hb_direction_t _cretval;
   int _len;
@@ -1397,7 +1404,7 @@ harfbuzz.types.Direction directionFromString(ubyte[] str)
       direction = The #hb_direction_t to convert
     Returns: The string corresponding to direction
 */
-string directionToString(harfbuzz.types.Direction direction)
+string directionToString(harfbuzz.types.Direction direction) nothrow
 {
   const(char)* _cretval;
   _cretval = hb_direction_to_string(direction);
@@ -1413,7 +1420,7 @@ string directionToString(harfbuzz.types.Direction direction)
       drawData = associated draw data passed by the caller
       st = current draw state
 */
-void drawClosePath(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.draw_state.DrawState st)
+void drawClosePath(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.draw_state.DrawState st) nothrow
 {
   hb_draw_close_path(dfuncs ? cast(hb_draw_funcs_t*)dfuncs._cPtr(No.Dup) : null, drawData, st ? cast(hb_draw_state_t*)st._cPtr(No.Dup) : null);
 }
@@ -1432,7 +1439,7 @@ void drawClosePath(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuz
       toX = X component of target point
       toY = Y component of target point
 */
-void drawCubicTo(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.draw_state.DrawState st, float control1X, float control1Y, float control2X, float control2Y, float toX, float toY)
+void drawCubicTo(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.draw_state.DrawState st, float control1X, float control1Y, float control2X, float control2Y, float toX, float toY) nothrow
 {
   hb_draw_cubic_to(dfuncs ? cast(hb_draw_funcs_t*)dfuncs._cPtr(No.Dup) : null, drawData, st ? cast(hb_draw_state_t*)st._cPtr(No.Dup) : null, control1X, control1Y, control2X, control2Y, toX, toY);
 }
@@ -1445,7 +1452,7 @@ void drawCubicTo(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.
       memory cannot be allocated, a special singleton #hb_draw_funcs_t object will
       be returned.
 */
-harfbuzz.draw_funcs.DrawFuncs drawFuncsCreate()
+harfbuzz.draw_funcs.DrawFuncs drawFuncsCreate() nothrow
 {
   hb_draw_funcs_t* _cretval;
   _cretval = hb_draw_funcs_create();
@@ -1457,7 +1464,7 @@ harfbuzz.draw_funcs.DrawFuncs drawFuncsCreate()
     Fetches the singleton empty draw-functions structure.
     Returns: The empty draw-functions structure
 */
-harfbuzz.draw_funcs.DrawFuncs drawFuncsGetEmpty()
+harfbuzz.draw_funcs.DrawFuncs drawFuncsGetEmpty() nothrow
 {
   hb_draw_funcs_t* _cretval;
   _cretval = hb_draw_funcs_get_empty();
@@ -1472,7 +1479,7 @@ harfbuzz.draw_funcs.DrawFuncs drawFuncsGetEmpty()
       dfuncs = draw functions
     Returns: `true` if dfuncs is immutable, `false` otherwise
 */
-harfbuzz.types.Bool drawFuncsIsImmutable(harfbuzz.draw_funcs.DrawFuncs dfuncs)
+harfbuzz.types.Bool drawFuncsIsImmutable(harfbuzz.draw_funcs.DrawFuncs dfuncs) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_draw_funcs_is_immutable(dfuncs ? cast(hb_draw_funcs_t*)dfuncs._cPtr(No.Dup) : null);
@@ -1485,7 +1492,7 @@ harfbuzz.types.Bool drawFuncsIsImmutable(harfbuzz.draw_funcs.DrawFuncs dfuncs)
     Params:
       dfuncs = draw functions
 */
-void drawFuncsMakeImmutable(harfbuzz.draw_funcs.DrawFuncs dfuncs)
+void drawFuncsMakeImmutable(harfbuzz.draw_funcs.DrawFuncs dfuncs) nothrow
 {
   hb_draw_funcs_make_immutable(dfuncs ? cast(hb_draw_funcs_t*)dfuncs._cPtr(No.Dup) : null);
 }
@@ -1497,13 +1504,20 @@ void drawFuncsMakeImmutable(harfbuzz.draw_funcs.DrawFuncs dfuncs)
       dfuncs = draw functions object
       func = close-path callback
 */
-void drawFuncsSetClosePathFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.types.DrawClosePathFunc func)
+void drawFuncsSetClosePathFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.types.DrawClosePathFunc func) nothrow
 {
-  extern(C) void _funcCallback(hb_draw_funcs_t* dfuncs, void* drawData, hb_draw_state_t* st, void* userData)
+  extern(C) void _funcCallback(hb_draw_funcs_t* dfuncs, void* drawData, hb_draw_state_t* st, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.DrawClosePathFunc*)userData;
 
-    (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null);
+    try
+    {
+      (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.DrawClosePathFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -1518,13 +1532,20 @@ void drawFuncsSetClosePathFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.ty
       dfuncs = draw functions
       func = cubic-to callback
 */
-void drawFuncsSetCubicToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.types.DrawCubicToFunc func)
+void drawFuncsSetCubicToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.types.DrawCubicToFunc func) nothrow
 {
-  extern(C) void _funcCallback(hb_draw_funcs_t* dfuncs, void* drawData, hb_draw_state_t* st, float control1X, float control1Y, float control2X, float control2Y, float toX, float toY, void* userData)
+  extern(C) void _funcCallback(hb_draw_funcs_t* dfuncs, void* drawData, hb_draw_state_t* st, float control1X, float control1Y, float control2X, float control2Y, float toX, float toY, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.DrawCubicToFunc*)userData;
 
-    (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null, control1X, control1Y, control2X, control2Y, toX, toY);
+    try
+    {
+      (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null, control1X, control1Y, control2X, control2Y, toX, toY);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.DrawCubicToFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -1539,13 +1560,20 @@ void drawFuncsSetCubicToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.type
       dfuncs = draw functions object
       func = line-to callback
 */
-void drawFuncsSetLineToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.types.DrawLineToFunc func)
+void drawFuncsSetLineToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.types.DrawLineToFunc func) nothrow
 {
-  extern(C) void _funcCallback(hb_draw_funcs_t* dfuncs, void* drawData, hb_draw_state_t* st, float toX, float toY, void* userData)
+  extern(C) void _funcCallback(hb_draw_funcs_t* dfuncs, void* drawData, hb_draw_state_t* st, float toX, float toY, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.DrawLineToFunc*)userData;
 
-    (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null, toX, toY);
+    try
+    {
+      (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null, toX, toY);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.DrawLineToFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -1560,13 +1588,20 @@ void drawFuncsSetLineToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.types
       dfuncs = draw functions object
       func = move-to callback
 */
-void drawFuncsSetMoveToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.types.DrawMoveToFunc func)
+void drawFuncsSetMoveToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.types.DrawMoveToFunc func) nothrow
 {
-  extern(C) void _funcCallback(hb_draw_funcs_t* dfuncs, void* drawData, hb_draw_state_t* st, float toX, float toY, void* userData)
+  extern(C) void _funcCallback(hb_draw_funcs_t* dfuncs, void* drawData, hb_draw_state_t* st, float toX, float toY, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.DrawMoveToFunc*)userData;
 
-    (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null, toX, toY);
+    try
+    {
+      (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null, toX, toY);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.DrawMoveToFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -1581,13 +1616,20 @@ void drawFuncsSetMoveToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.types
       dfuncs = draw functions object
       func = quadratic-to callback
 */
-void drawFuncsSetQuadraticToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.types.DrawQuadraticToFunc func)
+void drawFuncsSetQuadraticToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.types.DrawQuadraticToFunc func) nothrow
 {
-  extern(C) void _funcCallback(hb_draw_funcs_t* dfuncs, void* drawData, hb_draw_state_t* st, float controlX, float controlY, float toX, float toY, void* userData)
+  extern(C) void _funcCallback(hb_draw_funcs_t* dfuncs, void* drawData, hb_draw_state_t* st, float controlX, float controlY, float toX, float toY, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.DrawQuadraticToFunc*)userData;
 
-    (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null, controlX, controlY, toX, toY);
+    try
+    {
+      (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null, controlX, controlY, toX, toY);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.DrawQuadraticToFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -1605,7 +1647,7 @@ void drawFuncsSetQuadraticToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.
       toX = X component of target point
       toY = Y component of target point
 */
-void drawLineTo(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.draw_state.DrawState st, float toX, float toY)
+void drawLineTo(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.draw_state.DrawState st, float toX, float toY) nothrow
 {
   hb_draw_line_to(dfuncs ? cast(hb_draw_funcs_t*)dfuncs._cPtr(No.Dup) : null, drawData, st ? cast(hb_draw_state_t*)st._cPtr(No.Dup) : null, toX, toY);
 }
@@ -1620,7 +1662,7 @@ void drawLineTo(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.d
       toX = X component of target point
       toY = Y component of target point
 */
-void drawMoveTo(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.draw_state.DrawState st, float toX, float toY)
+void drawMoveTo(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.draw_state.DrawState st, float toX, float toY) nothrow
 {
   hb_draw_move_to(dfuncs ? cast(hb_draw_funcs_t*)dfuncs._cPtr(No.Dup) : null, drawData, st ? cast(hb_draw_state_t*)st._cPtr(No.Dup) : null, toX, toY);
 }
@@ -1637,7 +1679,7 @@ void drawMoveTo(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.d
       toX = X component of target point
       toY = Y component of target point
 */
-void drawQuadraticTo(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.draw_state.DrawState st, float controlX, float controlY, float toX, float toY)
+void drawQuadraticTo(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.draw_state.DrawState st, float controlX, float controlY, float toX, float toY) nothrow
 {
   hb_draw_quadratic_to(dfuncs ? cast(hb_draw_funcs_t*)dfuncs._cPtr(No.Dup) : null, drawData, st ? cast(hb_draw_state_t*)st._cPtr(No.Dup) : null, controlX, controlY, toX, toY);
 }
@@ -1652,7 +1694,7 @@ void drawQuadraticTo(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfb
       blob = The blob containing the table data to add
     Returns: 
 */
-harfbuzz.types.Bool faceBuilderAddTable(harfbuzz.face.Face face, harfbuzz.types.Tag tag, harfbuzz.blob.Blob blob)
+harfbuzz.types.Bool faceBuilderAddTable(harfbuzz.face.Face face, harfbuzz.types.Tag tag, harfbuzz.blob.Blob blob) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_face_builder_add_table(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, tag, blob ? cast(hb_blob_t*)blob._cPtr(No.Dup) : null);
@@ -1665,7 +1707,7 @@ harfbuzz.types.Bool faceBuilderAddTable(harfbuzz.face.Face face, harfbuzz.types.
     font file by calling [harfbuzz.global.faceReferenceBlob].
     Returns: New face.
 */
-harfbuzz.face.Face faceBuilderCreate()
+harfbuzz.face.Face faceBuilderCreate() nothrow
 {
   hb_face_t* _cretval;
   _cretval = hb_face_builder_create();
@@ -1683,7 +1725,7 @@ harfbuzz.face.Face faceBuilderCreate()
       tags = ordered list of table tags terminated by
           `HB_TAG_NONE`
 */
-void faceBuilderSortTables(harfbuzz.face.Face face, harfbuzz.types.Tag[] tags)
+void faceBuilderSortTables(harfbuzz.face.Face face, harfbuzz.types.Tag[] tags) nothrow
 {
   auto _tags = tags.ptr ? cast(const(hb_tag_t)*)(tags ~ hb_tag_t.init).ptr : [hb_tag_t.init].ptr;
   hb_face_builder_sort_tables(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, _tags);
@@ -1696,7 +1738,7 @@ void faceBuilderSortTables(harfbuzz.face.Face face, harfbuzz.types.Tag[] tags)
       blob = a blob.
     Returns: Number of faces in blob
 */
-uint faceCount(harfbuzz.blob.Blob blob)
+uint faceCount(harfbuzz.blob.Blob blob) nothrow
 {
   uint _retval;
   _retval = hb_face_count(blob ? cast(hb_blob_t*)blob._cPtr(No.Dup) : null);
@@ -1724,7 +1766,7 @@ uint faceCount(harfbuzz.blob.Blob blob)
       index = The index of the face within blob
     Returns: The new face object
 */
-harfbuzz.face.Face faceCreate(harfbuzz.blob.Blob blob, uint index)
+harfbuzz.face.Face faceCreate(harfbuzz.blob.Blob blob, uint index) nothrow
 {
   hb_face_t* _cretval;
   _cretval = hb_face_create(blob ? cast(hb_blob_t*)blob._cPtr(No.Dup) : null, index);
@@ -1745,14 +1787,21 @@ harfbuzz.face.Face faceCreate(harfbuzz.blob.Blob blob, uint index)
       referenceTableFunc = Table-referencing function
     Returns: The new face object
 */
-harfbuzz.face.Face faceCreateForTables(harfbuzz.types.ReferenceTableFunc referenceTableFunc)
+harfbuzz.face.Face faceCreateForTables(harfbuzz.types.ReferenceTableFunc referenceTableFunc) nothrow
 {
-  extern(C) hb_blob_t* _referenceTableFuncCallback(hb_face_t* face, hb_tag_t tag, void* userData)
+  extern(C) hb_blob_t* _referenceTableFuncCallback(hb_face_t* face, hb_tag_t tag, void* userData) nothrow
   {
     harfbuzz.blob.Blob _dretval;
     auto _dlg = cast(harfbuzz.types.ReferenceTableFunc*)userData;
 
-    _dretval = (*_dlg)(face ? new harfbuzz.face.Face(cast(void*)face, No.Take) : null, tag);
+    try
+    {
+      _dretval = (*_dlg)(face ? new harfbuzz.face.Face(cast(void*)face, No.Take) : null, tag);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.ReferenceTableFunc");
+    }
     auto _retval = cast(hb_blob_t*)_dretval._cPtr(Yes.Dup);
 
     return _retval;
@@ -1770,7 +1819,7 @@ harfbuzz.face.Face faceCreateForTables(harfbuzz.types.ReferenceTableFunc referen
     Fetches the singleton empty face object.
     Returns: The empty face object
 */
-harfbuzz.face.Face faceGetEmpty()
+harfbuzz.face.Face faceGetEmpty() nothrow
 {
   hb_face_t* _cretval;
   _cretval = hb_face_get_empty();
@@ -1785,7 +1834,7 @@ harfbuzz.face.Face faceGetEmpty()
       face = A face object
     Returns: The glyph-count value of face
 */
-uint faceGetGlyphCount(harfbuzz.face.Face face)
+uint faceGetGlyphCount(harfbuzz.face.Face face) nothrow
 {
   uint _retval;
   _retval = hb_face_get_glyph_count(face ? cast(const(hb_face_t)*)face._cPtr(No.Dup) : null);
@@ -1801,7 +1850,7 @@ uint faceGetGlyphCount(harfbuzz.face.Face face)
       face = A face object
     Returns: The index of face.
 */
-uint faceGetIndex(harfbuzz.face.Face face)
+uint faceGetIndex(harfbuzz.face.Face face) nothrow
 {
   uint _retval;
   _retval = hb_face_get_index(face ? cast(const(hb_face_t)*)face._cPtr(No.Dup) : null);
@@ -1818,7 +1867,7 @@ uint faceGetIndex(harfbuzz.face.Face face)
       tableTags = The array of table tags found
     Returns: Total number of tables, or zero if it is not possible to list
 */
-uint faceGetTableTags(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.types.Tag[] tableTags)
+uint faceGetTableTags(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.types.Tag[] tableTags) nothrow
 {
   uint _retval;
   uint _tableCount;
@@ -1837,7 +1886,7 @@ uint faceGetTableTags(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.ty
       face = A face object
     Returns: The upem value of face
 */
-uint faceGetUpem(harfbuzz.face.Face face)
+uint faceGetUpem(harfbuzz.face.Face face) nothrow
 {
   uint _retval;
   _retval = hb_face_get_upem(face ? cast(const(hb_face_t)*)face._cPtr(No.Dup) : null);
@@ -1851,7 +1900,7 @@ uint faceGetUpem(harfbuzz.face.Face face)
       face = A face object
     Returns: `true` is face is immutable, `false` otherwise
 */
-harfbuzz.types.Bool faceIsImmutable(harfbuzz.face.Face face)
+harfbuzz.types.Bool faceIsImmutable(harfbuzz.face.Face face) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_face_is_immutable(face ? cast(const(hb_face_t)*)face._cPtr(No.Dup) : null);
@@ -1864,7 +1913,7 @@ harfbuzz.types.Bool faceIsImmutable(harfbuzz.face.Face face)
     Params:
       face = A face object
 */
-void faceMakeImmutable(harfbuzz.face.Face face)
+void faceMakeImmutable(harfbuzz.face.Face face) nothrow
 {
   hb_face_make_immutable(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
 }
@@ -1878,7 +1927,7 @@ void faceMakeImmutable(harfbuzz.face.Face face)
       face = A face object
     Returns: A pointer to the blob for face
 */
-harfbuzz.blob.Blob faceReferenceBlob(harfbuzz.face.Face face)
+harfbuzz.blob.Blob faceReferenceBlob(harfbuzz.face.Face face) nothrow
 {
   hb_blob_t* _cretval;
   _cretval = hb_face_reference_blob(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
@@ -1895,7 +1944,7 @@ harfbuzz.blob.Blob faceReferenceBlob(harfbuzz.face.Face face)
       tag = The #hb_tag_t of the table to query
     Returns: A pointer to the tag table within face
 */
-harfbuzz.blob.Blob faceReferenceTable(harfbuzz.face.Face face, harfbuzz.types.Tag tag)
+harfbuzz.blob.Blob faceReferenceTable(harfbuzz.face.Face face, harfbuzz.types.Tag tag) nothrow
 {
   hb_blob_t* _cretval;
   _cretval = hb_face_reference_table(face ? cast(const(hb_face_t)*)face._cPtr(No.Dup) : null, tag);
@@ -1912,7 +1961,7 @@ harfbuzz.blob.Blob faceReferenceTable(harfbuzz.face.Face face, harfbuzz.types.Ta
       face = A face object
       glyphCount = The glyph-count value to assign
 */
-void faceSetGlyphCount(harfbuzz.face.Face face, uint glyphCount)
+void faceSetGlyphCount(harfbuzz.face.Face face, uint glyphCount) nothrow
 {
   hb_face_set_glyph_count(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, glyphCount);
 }
@@ -1928,7 +1977,7 @@ void faceSetGlyphCount(harfbuzz.face.Face face, uint glyphCount)
       face = A face object
       index = The index to assign
 */
-void faceSetIndex(harfbuzz.face.Face face, uint index)
+void faceSetIndex(harfbuzz.face.Face face, uint index) nothrow
 {
   hb_face_set_index(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, index);
 }
@@ -1942,7 +1991,7 @@ void faceSetIndex(harfbuzz.face.Face face, uint index)
       face = A face object
       upem = The units-per-em value to assign
 */
-void faceSetUpem(harfbuzz.face.Face face, uint upem)
+void faceSetUpem(harfbuzz.face.Face face, uint upem) nothrow
 {
   hb_face_set_upem(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, upem);
 }
@@ -1991,7 +2040,7 @@ void faceSetUpem(harfbuzz.face.Face face, uint upem)
       feature = the #hb_feature_t to initialize with the parsed values
     Returns: `true` if str is successfully parsed, `false` otherwise
 */
-harfbuzz.types.Bool featureFromString(ubyte[] str, out harfbuzz.feature.Feature feature)
+harfbuzz.types.Bool featureFromString(ubyte[] str, out harfbuzz.feature.Feature feature) nothrow
 {
   harfbuzz.types.Bool _retval;
   int _len;
@@ -2019,7 +2068,7 @@ harfbuzz.types.Bool featureFromString(ubyte[] str, out harfbuzz.feature.Feature 
       y = Input = The original Y coordinate
             Output = The Y coordinate plus the Y-coordinate of the origin
 */
-void fontAddGlyphOriginForDirection(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, ref harfbuzz.types.Position x, ref harfbuzz.types.Position y)
+void fontAddGlyphOriginForDirection(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, ref harfbuzz.types.Position x, ref harfbuzz.types.Position y) nothrow
 {
   hb_font_add_glyph_origin_for_direction(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
 }
@@ -2032,7 +2081,7 @@ void fontAddGlyphOriginForDirection(harfbuzz.font.Font font, harfbuzz.types.Code
     Params:
       font = #hb_font_t to work upon
 */
-void fontChanged(harfbuzz.font.Font font)
+void fontChanged(harfbuzz.font.Font font) nothrow
 {
   hb_font_changed(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null);
 }
@@ -2051,7 +2100,7 @@ void fontChanged(harfbuzz.font.Font font)
       face = a face.
     Returns: The new font object
 */
-harfbuzz.font.Font fontCreate(harfbuzz.face.Face face)
+harfbuzz.font.Font fontCreate(harfbuzz.face.Face face) nothrow
 {
   hb_font_t* _cretval;
   _cretval = hb_font_create(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
@@ -2067,7 +2116,7 @@ harfbuzz.font.Font fontCreate(harfbuzz.face.Face face)
       parent = The parent font object
     Returns: The new sub-font font object
 */
-harfbuzz.font.Font fontCreateSubFont(harfbuzz.font.Font parent)
+harfbuzz.font.Font fontCreateSubFont(harfbuzz.font.Font parent) nothrow
 {
   hb_font_t* _cretval;
   _cretval = hb_font_create_sub_font(parent ? cast(hb_font_t*)parent._cPtr(No.Dup) : null);
@@ -2087,7 +2136,7 @@ harfbuzz.font.Font fontCreateSubFont(harfbuzz.font.Font parent)
       dfuncs = #hb_draw_funcs_t to draw to
       drawData = User data to pass to draw callbacks
 */
-void fontDrawGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData = null)
+void fontDrawGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData = null) nothrow
 {
   hb_font_draw_glyph(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, dfuncs ? cast(hb_draw_funcs_t*)dfuncs._cPtr(No.Dup) : null, drawData);
 }
@@ -2096,7 +2145,7 @@ void fontDrawGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harf
     Creates a new #hb_font_funcs_t structure of font functions.
     Returns: The font-functions structure
 */
-harfbuzz.font_funcs.FontFuncs fontFuncsCreate()
+harfbuzz.font_funcs.FontFuncs fontFuncsCreate() nothrow
 {
   hb_font_funcs_t* _cretval;
   _cretval = hb_font_funcs_create();
@@ -2108,7 +2157,7 @@ harfbuzz.font_funcs.FontFuncs fontFuncsCreate()
     Fetches an empty font-functions structure.
     Returns: The font-functions structure
 */
-harfbuzz.font_funcs.FontFuncs fontFuncsGetEmpty()
+harfbuzz.font_funcs.FontFuncs fontFuncsGetEmpty() nothrow
 {
   hb_font_funcs_t* _cretval;
   _cretval = hb_font_funcs_get_empty();
@@ -2123,7 +2172,7 @@ harfbuzz.font_funcs.FontFuncs fontFuncsGetEmpty()
       ffuncs = The font-functions structure
     Returns: `true` if ffuncs is immutable, `false` otherwise
 */
-harfbuzz.types.Bool fontFuncsIsImmutable(harfbuzz.font_funcs.FontFuncs ffuncs)
+harfbuzz.types.Bool fontFuncsIsImmutable(harfbuzz.font_funcs.FontFuncs ffuncs) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_font_funcs_is_immutable(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null);
@@ -2136,7 +2185,7 @@ harfbuzz.types.Bool fontFuncsIsImmutable(harfbuzz.font_funcs.FontFuncs ffuncs)
     Params:
       ffuncs = The font-functions structure
 */
-void fontFuncsMakeImmutable(harfbuzz.font_funcs.FontFuncs ffuncs)
+void fontFuncsMakeImmutable(harfbuzz.font_funcs.FontFuncs ffuncs) nothrow
 {
   hb_font_funcs_make_immutable(ffuncs ? cast(hb_font_funcs_t*)ffuncs._cPtr(No.Dup) : null);
 }
@@ -2148,13 +2197,20 @@ void fontFuncsMakeImmutable(harfbuzz.font_funcs.FontFuncs ffuncs)
       ffuncs = A font-function structure
       func = The callback function to assign
 */
-void fontFuncsSetDrawGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontDrawGlyphFunc func)
+void fontFuncsSetDrawGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontDrawGlyphFunc func) nothrow
 {
-  extern(C) void _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_draw_funcs_t* drawFuncs, void* drawData, void* userData)
+  extern(C) void _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_draw_funcs_t* drawFuncs, void* drawData, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.FontDrawGlyphFunc*)userData;
 
-    (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, drawFuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)drawFuncs, No.Take) : null, drawData);
+    try
+    {
+      (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, drawFuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)drawFuncs, No.Take) : null, drawData);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontDrawGlyphFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -2169,14 +2225,21 @@ void fontFuncsSetDrawGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.ty
       ffuncs = A font-function structure
       func = The callback function to assign
 */
-void fontFuncsSetFontHExtentsFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetFontHExtentsFunc func)
+void fontFuncsSetFontHExtentsFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetFontHExtentsFunc func) nothrow
 {
-  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_font_extents_t* extents, void* userData)
+  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_font_extents_t* extents, void* userData) nothrow
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetFontHExtentsFunc*)userData;
 
-    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, *cast(harfbuzz.types.FontExtents*)extents);
+    try
+    {
+      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, *cast(harfbuzz.types.FontExtents*)extents);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetFontExtentsFunc");
+    }
     auto _retval = cast(hb_bool_t)_dretval;
 
     return _retval;
@@ -2194,14 +2257,21 @@ void fontFuncsSetFontHExtentsFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
       ffuncs = A font-function structure
       func = The callback function to assign
 */
-void fontFuncsSetFontVExtentsFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetFontVExtentsFunc func)
+void fontFuncsSetFontVExtentsFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetFontVExtentsFunc func) nothrow
 {
-  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_font_extents_t* extents, void* userData)
+  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_font_extents_t* extents, void* userData) nothrow
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetFontVExtentsFunc*)userData;
 
-    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, *cast(harfbuzz.types.FontExtents*)extents);
+    try
+    {
+      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, *cast(harfbuzz.types.FontExtents*)extents);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetFontExtentsFunc");
+    }
     auto _retval = cast(hb_bool_t)_dretval;
 
     return _retval;
@@ -2219,14 +2289,21 @@ void fontFuncsSetFontVExtentsFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
       ffuncs = A font-function structure
       func = The callback function to assign
 */
-void fontFuncsSetGlyphContourPointFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphContourPointFunc func)
+void fontFuncsSetGlyphContourPointFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphContourPointFunc func) nothrow
 {
-  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, uint pointIndex, hb_position_t* x, hb_position_t* y, void* userData)
+  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, uint pointIndex, hb_position_t* x, hb_position_t* y, void* userData) nothrow
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphContourPointFunc*)userData;
 
-    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, pointIndex, *x, *y);
+    try
+    {
+      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, pointIndex, *x, *y);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphContourPointFunc");
+    }
     auto _retval = cast(hb_bool_t)_dretval;
 
     return _retval;
@@ -2244,14 +2321,21 @@ void fontFuncsSetGlyphContourPointFunc(harfbuzz.font_funcs.FontFuncs ffuncs, har
       ffuncs = A font-function structure
       func = The callback function to assign
 */
-void fontFuncsSetGlyphExtentsFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphExtentsFunc func)
+void fontFuncsSetGlyphExtentsFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphExtentsFunc func) nothrow
 {
-  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_glyph_extents_t* extents, void* userData)
+  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_glyph_extents_t* extents, void* userData) nothrow
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphExtentsFunc*)userData;
 
-    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, *cast(harfbuzz.types.GlyphExtents*)extents);
+    try
+    {
+      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, *cast(harfbuzz.types.GlyphExtents*)extents);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphExtentsFunc");
+    }
     auto _retval = cast(hb_bool_t)_dretval;
 
     return _retval;
@@ -2269,9 +2353,9 @@ void fontFuncsSetGlyphExtentsFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
       ffuncs = A font-function structure
       func = The callback function to assign
 */
-void fontFuncsSetGlyphFromNameFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphFromNameFunc func)
+void fontFuncsSetGlyphFromNameFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphFromNameFunc func) nothrow
 {
-  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, const(char)* name, int len, hb_codepoint_t* glyph, void* userData)
+  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, const(char)* name, int len, hb_codepoint_t* glyph, void* userData) nothrow
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphFromNameFunc*)userData;
@@ -2279,7 +2363,14 @@ void fontFuncsSetGlyphFromNameFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuz
     _name.length = len;
     _name[0 .. len] = name[0 .. len];
 
-    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, _name, *glyph);
+    try
+    {
+      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, _name, *glyph);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphFromNameFunc");
+    }
     auto _retval = cast(hb_bool_t)_dretval;
 
     return _retval;
@@ -2298,14 +2389,21 @@ void fontFuncsSetGlyphFromNameFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuz
       ffuncs = The font-functions structure
       func = callback function
 */
-void fontFuncsSetGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphFunc func)
+void fontFuncsSetGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphFunc func) nothrow
 {
-  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t unicode, hb_codepoint_t variationSelector, hb_codepoint_t* glyph, void* userData)
+  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t unicode, hb_codepoint_t variationSelector, hb_codepoint_t* glyph, void* userData) nothrow
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphFunc*)userData;
 
-    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, unicode, variationSelector, *glyph);
+    try
+    {
+      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, unicode, variationSelector, *glyph);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphFunc");
+    }
     auto _retval = cast(hb_bool_t)_dretval;
 
     return _retval;
@@ -2323,14 +2421,21 @@ void fontFuncsSetGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.
       ffuncs = A font-function structure
       func = The callback function to assign
 */
-void fontFuncsSetGlyphHAdvanceFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphHAdvanceFunc func)
+void fontFuncsSetGlyphHAdvanceFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphHAdvanceFunc func) nothrow
 {
-  extern(C) hb_position_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, void* userData)
+  extern(C) hb_position_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, void* userData) nothrow
   {
     harfbuzz.types.Position _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphHAdvanceFunc*)userData;
 
-    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph);
+    try
+    {
+      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphAdvanceFunc");
+    }
     auto _retval = cast(hb_position_t)_dretval;
 
     return _retval;
@@ -2348,14 +2453,21 @@ void fontFuncsSetGlyphHAdvanceFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuz
       ffuncs = A font-function structure
       func = The callback function to assign
 */
-void fontFuncsSetGlyphHKerningFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphHKerningFunc func)
+void fontFuncsSetGlyphHKerningFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphHKerningFunc func) nothrow
 {
-  extern(C) hb_position_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t firstGlyph, hb_codepoint_t secondGlyph, void* userData)
+  extern(C) hb_position_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t firstGlyph, hb_codepoint_t secondGlyph, void* userData) nothrow
   {
     harfbuzz.types.Position _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphHKerningFunc*)userData;
 
-    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, firstGlyph, secondGlyph);
+    try
+    {
+      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, firstGlyph, secondGlyph);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphKerningFunc");
+    }
     auto _retval = cast(hb_position_t)_dretval;
 
     return _retval;
@@ -2373,14 +2485,21 @@ void fontFuncsSetGlyphHKerningFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuz
       ffuncs = A font-function structure
       func = The callback function to assign
 */
-void fontFuncsSetGlyphHOriginFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphHOriginFunc func)
+void fontFuncsSetGlyphHOriginFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphHOriginFunc func) nothrow
 {
-  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_position_t* x, hb_position_t* y, void* userData)
+  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_position_t* x, hb_position_t* y, void* userData) nothrow
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphHOriginFunc*)userData;
 
-    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, *x, *y);
+    try
+    {
+      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, *x, *y);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphOriginFunc");
+    }
     auto _retval = cast(hb_bool_t)_dretval;
 
     return _retval;
@@ -2398,15 +2517,22 @@ void fontFuncsSetGlyphHOriginFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
       ffuncs = A font-function structure
       func = The callback function to assign
 */
-void fontFuncsSetGlyphNameFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphNameFunc func)
+void fontFuncsSetGlyphNameFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphNameFunc func) nothrow
 {
-  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, char* name, uint size, void* userData)
+  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, char* name, uint size, void* userData) nothrow
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphNameFunc*)userData;
     char[] _name;
 
-    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, _name);
+    try
+    {
+      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, _name);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphNameFunc");
+    }
     auto _retval = cast(hb_bool_t)_dretval;
     size = cast(uint)_name.length;
     name = arrayDtoC!(char, Yes.Alloc, No.ZeroTerm)(_name);
@@ -2429,13 +2555,20 @@ void fontFuncsSetGlyphNameFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.ty
 
     Deprecated: Use [harfbuzz.global.fontFuncsSetDrawGlyphFunc] instead
 */
-void fontFuncsSetGlyphShapeFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphShapeFunc func)
+void fontFuncsSetGlyphShapeFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphShapeFunc func) nothrow
 {
-  extern(C) void _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_draw_funcs_t* drawFuncs, void* drawData, void* userData)
+  extern(C) void _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_draw_funcs_t* drawFuncs, void* drawData, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.FontGetGlyphShapeFunc*)userData;
 
-    (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, drawFuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)drawFuncs, No.Take) : null, drawData);
+    try
+    {
+      (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, drawFuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)drawFuncs, No.Take) : null, drawData);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphShapeFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -2450,14 +2583,21 @@ void fontFuncsSetGlyphShapeFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.t
       ffuncs = A font-function structure
       func = The callback function to assign
 */
-void fontFuncsSetGlyphVAdvanceFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphVAdvanceFunc func)
+void fontFuncsSetGlyphVAdvanceFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphVAdvanceFunc func) nothrow
 {
-  extern(C) hb_position_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, void* userData)
+  extern(C) hb_position_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, void* userData) nothrow
   {
     harfbuzz.types.Position _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphVAdvanceFunc*)userData;
 
-    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph);
+    try
+    {
+      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphAdvanceFunc");
+    }
     auto _retval = cast(hb_position_t)_dretval;
 
     return _retval;
@@ -2475,14 +2615,21 @@ void fontFuncsSetGlyphVAdvanceFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuz
       ffuncs = A font-function structure
       func = The callback function to assign
 */
-void fontFuncsSetGlyphVKerningFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphVKerningFunc func)
+void fontFuncsSetGlyphVKerningFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphVKerningFunc func) nothrow
 {
-  extern(C) hb_position_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t firstGlyph, hb_codepoint_t secondGlyph, void* userData)
+  extern(C) hb_position_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t firstGlyph, hb_codepoint_t secondGlyph, void* userData) nothrow
   {
     harfbuzz.types.Position _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphVKerningFunc*)userData;
 
-    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, firstGlyph, secondGlyph);
+    try
+    {
+      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, firstGlyph, secondGlyph);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphKerningFunc");
+    }
     auto _retval = cast(hb_position_t)_dretval;
 
     return _retval;
@@ -2500,14 +2647,21 @@ void fontFuncsSetGlyphVKerningFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuz
       ffuncs = A font-function structure
       func = The callback function to assign
 */
-void fontFuncsSetGlyphVOriginFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphVOriginFunc func)
+void fontFuncsSetGlyphVOriginFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetGlyphVOriginFunc func) nothrow
 {
-  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_position_t* x, hb_position_t* y, void* userData)
+  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_position_t* x, hb_position_t* y, void* userData) nothrow
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetGlyphVOriginFunc*)userData;
 
-    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, *x, *y);
+    try
+    {
+      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, *x, *y);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetGlyphOriginFunc");
+    }
     auto _retval = cast(hb_bool_t)_dretval;
 
     return _retval;
@@ -2525,14 +2679,21 @@ void fontFuncsSetGlyphVOriginFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
       ffuncs = A font-function structure
       func = The callback function to assign
 */
-void fontFuncsSetNominalGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetNominalGlyphFunc func)
+void fontFuncsSetNominalGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetNominalGlyphFunc func) nothrow
 {
-  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t unicode, hb_codepoint_t* glyph, void* userData)
+  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t unicode, hb_codepoint_t* glyph, void* userData) nothrow
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetNominalGlyphFunc*)userData;
 
-    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, unicode, *glyph);
+    try
+    {
+      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, unicode, *glyph);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetNominalGlyphFunc");
+    }
     auto _retval = cast(hb_bool_t)_dretval;
 
     return _retval;
@@ -2550,13 +2711,20 @@ void fontFuncsSetNominalGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
       ffuncs = A font-function structure
       func = The callback function to assign
 */
-void fontFuncsSetPaintGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontPaintGlyphFunc func)
+void fontFuncsSetPaintGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontPaintGlyphFunc func) nothrow
 {
-  extern(C) void _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_paint_funcs_t* paintFuncs, void* paintData, uint paletteIndex, hb_color_t foreground, void* userData)
+  extern(C) void _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_paint_funcs_t* paintFuncs, void* paintData, uint paletteIndex, hb_color_t foreground, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.FontPaintGlyphFunc*)userData;
 
-    (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, paintFuncs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)paintFuncs, No.Take) : null, paintData, paletteIndex, foreground);
+    try
+    {
+      (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, paintFuncs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)paintFuncs, No.Take) : null, paintData, paletteIndex, foreground);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontPaintGlyphFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -2571,14 +2739,21 @@ void fontFuncsSetPaintGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.t
       ffuncs = A font-function structure
       func = The callback function to assign
 */
-void fontFuncsSetVariationGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetVariationGlyphFunc func)
+void fontFuncsSetVariationGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.FontGetVariationGlyphFunc func) nothrow
 {
-  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t unicode, hb_codepoint_t variationSelector, hb_codepoint_t* glyph, void* userData)
+  extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t unicode, hb_codepoint_t variationSelector, hb_codepoint_t* glyph, void* userData) nothrow
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.FontGetVariationGlyphFunc*)userData;
 
-    _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, unicode, variationSelector, *glyph);
+    try
+    {
+      _dretval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, unicode, variationSelector, *glyph);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.FontGetVariationGlyphFunc");
+    }
     auto _retval = cast(hb_bool_t)_dretval;
 
     return _retval;
@@ -2593,7 +2768,7 @@ void fontFuncsSetVariationGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbu
     Fetches the empty font object.
     Returns: The empty font object
 */
-harfbuzz.font.Font fontGetEmpty()
+harfbuzz.font.Font fontGetEmpty() nothrow
 {
   hb_font_t* _cretval;
   _cretval = hb_font_get_empty();
@@ -2613,7 +2788,7 @@ harfbuzz.font.Font fontGetEmpty()
       direction = The direction of the text segment
       extents = The #hb_font_extents_t retrieved
 */
-void fontGetExtentsForDirection(harfbuzz.font.Font font, harfbuzz.types.Direction direction, out harfbuzz.types.FontExtents extents)
+void fontGetExtentsForDirection(harfbuzz.font.Font font, harfbuzz.types.Direction direction, out harfbuzz.types.FontExtents extents) nothrow
 {
   hb_font_get_extents_for_direction(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, direction, &extents);
 }
@@ -2625,7 +2800,7 @@ void fontGetExtentsForDirection(harfbuzz.font.Font font, harfbuzz.types.Directio
       font = #hb_font_t to work upon
     Returns: The #hb_face_t value
 */
-harfbuzz.face.Face fontGetFace(harfbuzz.font.Font font)
+harfbuzz.face.Face fontGetFace(harfbuzz.font.Font font) nothrow
 {
   hb_face_t* _cretval;
   _cretval = hb_font_get_face(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null);
@@ -2647,7 +2822,7 @@ harfbuzz.face.Face fontGetFace(harfbuzz.font.Font font)
       glyph = The glyph ID retrieved
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool fontGetGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoint unicode, harfbuzz.types.Codepoint variationSelector, out harfbuzz.types.Codepoint glyph)
+harfbuzz.types.Bool fontGetGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoint unicode, harfbuzz.types.Codepoint variationSelector, out harfbuzz.types.Codepoint glyph) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_font_get_glyph(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, unicode, variationSelector, cast(hb_codepoint_t*)&glyph);
@@ -2668,7 +2843,7 @@ harfbuzz.types.Bool fontGetGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoi
       x = The horizontal advance retrieved
       y = The vertical advance retrieved
 */
-void fontGetGlyphAdvanceForDirection(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, out harfbuzz.types.Position x, out harfbuzz.types.Position y)
+void fontGetGlyphAdvanceForDirection(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, out harfbuzz.types.Position x, out harfbuzz.types.Position y) nothrow
 {
   hb_font_get_glyph_advance_for_direction(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
 }
@@ -2685,7 +2860,7 @@ void fontGetGlyphAdvanceForDirection(harfbuzz.font.Font font, harfbuzz.types.Cod
       y = The Y value retrieved for the contour point
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool fontGetGlyphContourPoint(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, uint pointIndex, out harfbuzz.types.Position x, out harfbuzz.types.Position y)
+harfbuzz.types.Bool fontGetGlyphContourPoint(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, uint pointIndex, out harfbuzz.types.Position x, out harfbuzz.types.Position y) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_font_get_glyph_contour_point(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, pointIndex, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
@@ -2709,7 +2884,7 @@ harfbuzz.types.Bool fontGetGlyphContourPoint(harfbuzz.font.Font font, harfbuzz.t
       y = The Y value retrieved for the contour point
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool fontGetGlyphContourPointForOrigin(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, uint pointIndex, harfbuzz.types.Direction direction, out harfbuzz.types.Position x, out harfbuzz.types.Position y)
+harfbuzz.types.Bool fontGetGlyphContourPointForOrigin(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, uint pointIndex, harfbuzz.types.Direction direction, out harfbuzz.types.Position x, out harfbuzz.types.Position y) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_font_get_glyph_contour_point_for_origin(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, pointIndex, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
@@ -2726,7 +2901,7 @@ harfbuzz.types.Bool fontGetGlyphContourPointForOrigin(harfbuzz.font.Font font, h
       extents = The #hb_glyph_extents_t retrieved
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool fontGetGlyphExtents(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, out harfbuzz.types.GlyphExtents extents)
+harfbuzz.types.Bool fontGetGlyphExtents(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, out harfbuzz.types.GlyphExtents extents) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_font_get_glyph_extents(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, &extents);
@@ -2748,7 +2923,7 @@ harfbuzz.types.Bool fontGetGlyphExtents(harfbuzz.font.Font font, harfbuzz.types.
       extents = The #hb_glyph_extents_t retrieved
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool fontGetGlyphExtentsForOrigin(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, out harfbuzz.types.GlyphExtents extents)
+harfbuzz.types.Bool fontGetGlyphExtentsForOrigin(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, out harfbuzz.types.GlyphExtents extents) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_font_get_glyph_extents_for_origin(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, direction, &extents);
@@ -2766,7 +2941,7 @@ harfbuzz.types.Bool fontGetGlyphExtentsForOrigin(harfbuzz.font.Font font, harfbu
       glyph = The glyph ID retrieved
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool fontGetGlyphFromName(harfbuzz.font.Font font, string name, out harfbuzz.types.Codepoint glyph)
+harfbuzz.types.Bool fontGetGlyphFromName(harfbuzz.font.Font font, string name, out harfbuzz.types.Codepoint glyph) nothrow
 {
   harfbuzz.types.Bool _retval;
   int _len;
@@ -2787,7 +2962,7 @@ harfbuzz.types.Bool fontGetGlyphFromName(harfbuzz.font.Font font, string name, o
       glyph = The glyph ID to query
     Returns: The advance of glyph within font
 */
-harfbuzz.types.Position fontGetGlyphHAdvance(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph)
+harfbuzz.types.Position fontGetGlyphHAdvance(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph) nothrow
 {
   harfbuzz.types.Position _retval;
   _retval = hb_font_get_glyph_h_advance(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph);
@@ -2807,7 +2982,7 @@ harfbuzz.types.Position fontGetGlyphHAdvance(harfbuzz.font.Font font, harfbuzz.t
       rightGlyph = The glyph ID of the right glyph in the glyph pair
     Returns: The kerning adjustment value
 */
-harfbuzz.types.Position fontGetGlyphHKerning(harfbuzz.font.Font font, harfbuzz.types.Codepoint leftGlyph, harfbuzz.types.Codepoint rightGlyph)
+harfbuzz.types.Position fontGetGlyphHKerning(harfbuzz.font.Font font, harfbuzz.types.Codepoint leftGlyph, harfbuzz.types.Codepoint rightGlyph) nothrow
 {
   harfbuzz.types.Position _retval;
   _retval = hb_font_get_glyph_h_kerning(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, leftGlyph, rightGlyph);
@@ -2825,7 +3000,7 @@ harfbuzz.types.Position fontGetGlyphHKerning(harfbuzz.font.Font font, harfbuzz.t
       y = The Y coordinate of the origin
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool fontGetGlyphHOrigin(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, out harfbuzz.types.Position x, out harfbuzz.types.Position y)
+harfbuzz.types.Bool fontGetGlyphHOrigin(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, out harfbuzz.types.Position x, out harfbuzz.types.Position y) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_font_get_glyph_h_origin(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
@@ -2846,7 +3021,7 @@ harfbuzz.types.Bool fontGetGlyphHOrigin(harfbuzz.font.Font font, harfbuzz.types.
       x = The horizontal kerning-adjustment value retrieved
       y = The vertical kerning-adjustment value retrieved
 */
-void fontGetGlyphKerningForDirection(harfbuzz.font.Font font, harfbuzz.types.Codepoint firstGlyph, harfbuzz.types.Codepoint secondGlyph, harfbuzz.types.Direction direction, out harfbuzz.types.Position x, out harfbuzz.types.Position y)
+void fontGetGlyphKerningForDirection(harfbuzz.font.Font font, harfbuzz.types.Codepoint firstGlyph, harfbuzz.types.Codepoint secondGlyph, harfbuzz.types.Direction direction, out harfbuzz.types.Position x, out harfbuzz.types.Position y) nothrow
 {
   hb_font_get_glyph_kerning_for_direction(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, firstGlyph, secondGlyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
 }
@@ -2865,7 +3040,7 @@ void fontGetGlyphKerningForDirection(harfbuzz.font.Font font, harfbuzz.types.Cod
       x = The X coordinate retrieved for the origin
       y = The Y coordinate retrieved for the origin
 */
-void fontGetGlyphOriginForDirection(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, out harfbuzz.types.Position x, out harfbuzz.types.Position y)
+void fontGetGlyphOriginForDirection(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, out harfbuzz.types.Position x, out harfbuzz.types.Position y) nothrow
 {
   hb_font_get_glyph_origin_for_direction(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
 }
@@ -2883,7 +3058,7 @@ void fontGetGlyphOriginForDirection(harfbuzz.font.Font font, harfbuzz.types.Code
 
     Deprecated: Use [harfbuzz.global.fontDrawGlyph] instead
 */
-void fontGetGlyphShape(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData = null)
+void fontGetGlyphShape(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData = null) nothrow
 {
   hb_font_get_glyph_shape(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, dfuncs ? cast(hb_draw_funcs_t*)dfuncs._cPtr(No.Dup) : null, drawData);
 }
@@ -2897,7 +3072,7 @@ void fontGetGlyphShape(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, 
       glyph = The glyph ID to query
     Returns: The advance of glyph within font
 */
-harfbuzz.types.Position fontGetGlyphVAdvance(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph)
+harfbuzz.types.Position fontGetGlyphVAdvance(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph) nothrow
 {
   harfbuzz.types.Position _retval;
   _retval = hb_font_get_glyph_v_advance(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph);
@@ -2917,7 +3092,7 @@ harfbuzz.types.Position fontGetGlyphVAdvance(harfbuzz.font.Font font, harfbuzz.t
       bottomGlyph = The glyph ID of the bottom glyph in the glyph pair
     Returns: The kerning adjustment value
 */
-harfbuzz.types.Position fontGetGlyphVKerning(harfbuzz.font.Font font, harfbuzz.types.Codepoint topGlyph, harfbuzz.types.Codepoint bottomGlyph)
+harfbuzz.types.Position fontGetGlyphVKerning(harfbuzz.font.Font font, harfbuzz.types.Codepoint topGlyph, harfbuzz.types.Codepoint bottomGlyph) nothrow
 {
   harfbuzz.types.Position _retval;
   _retval = hb_font_get_glyph_v_kerning(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, topGlyph, bottomGlyph);
@@ -2935,7 +3110,7 @@ harfbuzz.types.Position fontGetGlyphVKerning(harfbuzz.font.Font font, harfbuzz.t
       y = The Y coordinate of the origin
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool fontGetGlyphVOrigin(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, out harfbuzz.types.Position x, out harfbuzz.types.Position y)
+harfbuzz.types.Bool fontGetGlyphVOrigin(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, out harfbuzz.types.Position x, out harfbuzz.types.Position y) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_font_get_glyph_v_origin(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
@@ -2951,7 +3126,7 @@ harfbuzz.types.Bool fontGetGlyphVOrigin(harfbuzz.font.Font font, harfbuzz.types.
       extents = The font extents retrieved
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool fontGetHExtents(harfbuzz.font.Font font, out harfbuzz.types.FontExtents extents)
+harfbuzz.types.Bool fontGetHExtents(harfbuzz.font.Font font, out harfbuzz.types.FontExtents extents) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_font_get_h_extents(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, &extents);
@@ -2972,7 +3147,7 @@ harfbuzz.types.Bool fontGetHExtents(harfbuzz.font.Font font, out harfbuzz.types.
       glyph = The glyph ID retrieved
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool fontGetNominalGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoint unicode, out harfbuzz.types.Codepoint glyph)
+harfbuzz.types.Bool fontGetNominalGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoint unicode, out harfbuzz.types.Codepoint glyph) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_font_get_nominal_glyph(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, unicode, cast(hb_codepoint_t*)&glyph);
@@ -2986,7 +3161,7 @@ harfbuzz.types.Bool fontGetNominalGlyph(harfbuzz.font.Font font, harfbuzz.types.
       font = #hb_font_t to work upon
     Returns: The parent font object
 */
-harfbuzz.font.Font fontGetParent(harfbuzz.font.Font font)
+harfbuzz.font.Font fontGetParent(harfbuzz.font.Font font) nothrow
 {
   hb_font_t* _cretval;
   _cretval = hb_font_get_parent(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null);
@@ -3002,7 +3177,7 @@ harfbuzz.font.Font fontGetParent(harfbuzz.font.Font font)
       xPpem = Horizontal ppem value
       yPpem = Vertical ppem value
 */
-void fontGetPpem(harfbuzz.font.Font font, out uint xPpem, out uint yPpem)
+void fontGetPpem(harfbuzz.font.Font font, out uint xPpem, out uint yPpem) nothrow
 {
   hb_font_get_ppem(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, cast(uint*)&xPpem, cast(uint*)&yPpem);
 }
@@ -3015,7 +3190,7 @@ void fontGetPpem(harfbuzz.font.Font font, out uint xPpem, out uint yPpem)
       font = #hb_font_t to work upon
     Returns: Point size.  A value of zero means "not set."
 */
-float fontGetPtem(harfbuzz.font.Font font)
+float fontGetPtem(harfbuzz.font.Font font) nothrow
 {
   float _retval;
   _retval = hb_font_get_ptem(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null);
@@ -3030,7 +3205,7 @@ float fontGetPtem(harfbuzz.font.Font font)
       xScale = Horizontal scale value
       yScale = Vertical scale value
 */
-void fontGetScale(harfbuzz.font.Font font, out int xScale, out int yScale)
+void fontGetScale(harfbuzz.font.Font font, out int xScale, out int yScale) nothrow
 {
   hb_font_get_scale(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, cast(int*)&xScale, cast(int*)&yScale);
 }
@@ -3044,7 +3219,7 @@ void fontGetScale(harfbuzz.font.Font font, out int xScale, out int yScale)
       font = #hb_font_t to work upon
     Returns: serial number
 */
-uint fontGetSerial(harfbuzz.font.Font font)
+uint fontGetSerial(harfbuzz.font.Font font) nothrow
 {
   uint _retval;
   _retval = hb_font_get_serial(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null);
@@ -3060,7 +3235,7 @@ uint fontGetSerial(harfbuzz.font.Font font)
       yEmbolden = return location for vertical value
       inPlace = return location for in-place value
 */
-void fontGetSyntheticBold(harfbuzz.font.Font font, out float xEmbolden, out float yEmbolden, out harfbuzz.types.Bool inPlace)
+void fontGetSyntheticBold(harfbuzz.font.Font font, out float xEmbolden, out float yEmbolden, out harfbuzz.types.Bool inPlace) nothrow
 {
   hb_font_get_synthetic_bold(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, cast(float*)&xEmbolden, cast(float*)&yEmbolden, cast(hb_bool_t*)&inPlace);
 }
@@ -3072,7 +3247,7 @@ void fontGetSyntheticBold(harfbuzz.font.Font font, out float xEmbolden, out floa
       font = #hb_font_t to work upon
     Returns: Synthetic slant.  By default is zero.
 */
-float fontGetSyntheticSlant(harfbuzz.font.Font font)
+float fontGetSyntheticSlant(harfbuzz.font.Font font) nothrow
 {
   float _retval;
   _retval = hb_font_get_synthetic_slant(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null);
@@ -3088,7 +3263,7 @@ float fontGetSyntheticSlant(harfbuzz.font.Font font)
       extents = The font extents retrieved
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool fontGetVExtents(harfbuzz.font.Font font, out harfbuzz.types.FontExtents extents)
+harfbuzz.types.Bool fontGetVExtents(harfbuzz.font.Font font, out harfbuzz.types.FontExtents extents) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_font_get_v_extents(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, &extents);
@@ -3110,7 +3285,7 @@ harfbuzz.types.Bool fontGetVExtents(harfbuzz.font.Font font, out harfbuzz.types.
       font = #hb_font_t to work upon
     Returns: coordinates array
 */
-float[] fontGetVarCoordsDesign(harfbuzz.font.Font font)
+float[] fontGetVarCoordsDesign(harfbuzz.font.Font font) nothrow
 {
   const(float)* _cretval;
   uint _cretlength;
@@ -3138,7 +3313,7 @@ float[] fontGetVarCoordsDesign(harfbuzz.font.Font font)
       font = #hb_font_t to work upon
     Returns: coordinates array
 */
-int[] fontGetVarCoordsNormalized(harfbuzz.font.Font font)
+int[] fontGetVarCoordsNormalized(harfbuzz.font.Font font) nothrow
 {
   const(int)* _cretval;
   uint _cretlength;
@@ -3159,7 +3334,7 @@ int[] fontGetVarCoordsNormalized(harfbuzz.font.Font font)
       font = a font.
     Returns: Named-instance index or [harfbuzz.types.FONT_NO_VAR_NAMED_INSTANCE].
 */
-uint fontGetVarNamedInstance(harfbuzz.font.Font font)
+uint fontGetVarNamedInstance(harfbuzz.font.Font font) nothrow
 {
   uint _retval;
   _retval = hb_font_get_var_named_instance(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null);
@@ -3178,7 +3353,7 @@ uint fontGetVarNamedInstance(harfbuzz.font.Font font)
       glyph = The glyph ID retrieved
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool fontGetVariationGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoint unicode, harfbuzz.types.Codepoint variationSelector, out harfbuzz.types.Codepoint glyph)
+harfbuzz.types.Bool fontGetVariationGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoint unicode, harfbuzz.types.Codepoint variationSelector, out harfbuzz.types.Codepoint glyph) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_font_get_variation_glyph(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, unicode, variationSelector, cast(hb_codepoint_t*)&glyph);
@@ -3197,7 +3372,7 @@ harfbuzz.types.Bool fontGetVariationGlyph(harfbuzz.font.Font font, harfbuzz.type
       glyph = The glyph ID corresponding to the string requested
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool fontGlyphFromString(harfbuzz.font.Font font, ubyte[] s, out harfbuzz.types.Codepoint glyph)
+harfbuzz.types.Bool fontGlyphFromString(harfbuzz.font.Font font, ubyte[] s, out harfbuzz.types.Codepoint glyph) nothrow
 {
   harfbuzz.types.Bool _retval;
   int _len;
@@ -3216,7 +3391,7 @@ harfbuzz.types.Bool fontGlyphFromString(harfbuzz.font.Font font, ubyte[] s, out 
       font = #hb_font_t to work upon
     Returns: `true` if font is immutable, `false` otherwise
 */
-harfbuzz.types.Bool fontIsImmutable(harfbuzz.font.Font font)
+harfbuzz.types.Bool fontIsImmutable(harfbuzz.font.Font font) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_font_is_immutable(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null);
@@ -3229,7 +3404,7 @@ harfbuzz.types.Bool fontIsImmutable(harfbuzz.font.Font font)
     Params:
       font = #hb_font_t to work upon
 */
-void fontMakeImmutable(harfbuzz.font.Font font)
+void fontMakeImmutable(harfbuzz.font.Font font) nothrow
 {
   hb_font_make_immutable(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null);
 }
@@ -3253,7 +3428,7 @@ void fontMakeImmutable(harfbuzz.font.Font font)
       paletteIndex = The index of the font's color palette to use
       foreground = The foreground color, unpremultipled
 */
-void fontPaintGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.paint_funcs.PaintFuncs pfuncs, void* paintData, uint paletteIndex, harfbuzz.types.Color foreground)
+void fontPaintGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.paint_funcs.PaintFuncs pfuncs, void* paintData, uint paletteIndex, harfbuzz.types.Color foreground) nothrow
 {
   hb_font_paint_glyph(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, pfuncs ? cast(hb_paint_funcs_t*)pfuncs._cPtr(No.Dup) : null, paintData, paletteIndex, foreground);
 }
@@ -3265,7 +3440,7 @@ void fontPaintGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, har
       font = #hb_font_t to work upon
       face = The #hb_face_t to assign
 */
-void fontSetFace(harfbuzz.font.Font font, harfbuzz.face.Face face)
+void fontSetFace(harfbuzz.font.Font font, harfbuzz.face.Face face) nothrow
 {
   hb_font_set_face(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
 }
@@ -3277,7 +3452,7 @@ void fontSetFace(harfbuzz.font.Font font, harfbuzz.face.Face face)
       font = #hb_font_t to work upon
       parent = The parent font object to assign
 */
-void fontSetParent(harfbuzz.font.Font font, harfbuzz.font.Font parent)
+void fontSetParent(harfbuzz.font.Font font, harfbuzz.font.Font parent) nothrow
 {
   hb_font_set_parent(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, parent ? cast(hb_font_t*)parent._cPtr(No.Dup) : null);
 }
@@ -3294,7 +3469,7 @@ void fontSetParent(harfbuzz.font.Font font, harfbuzz.font.Font parent)
       xPpem = Horizontal ppem value to assign
       yPpem = Vertical ppem value to assign
 */
-void fontSetPpem(harfbuzz.font.Font font, uint xPpem, uint yPpem)
+void fontSetPpem(harfbuzz.font.Font font, uint xPpem, uint yPpem) nothrow
 {
   hb_font_set_ppem(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, xPpem, yPpem);
 }
@@ -3309,7 +3484,7 @@ void fontSetPpem(harfbuzz.font.Font font, uint xPpem, uint yPpem)
       font = #hb_font_t to work upon
       ptem = font size in points.
 */
-void fontSetPtem(harfbuzz.font.Font font, float ptem)
+void fontSetPtem(harfbuzz.font.Font font, float ptem) nothrow
 {
   hb_font_set_ptem(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, ptem);
 }
@@ -3347,7 +3522,7 @@ void fontSetPtem(harfbuzz.font.Font font, float ptem)
       xScale = Horizontal scale value to assign
       yScale = Vertical scale value to assign
 */
-void fontSetScale(harfbuzz.font.Font font, int xScale, int yScale)
+void fontSetScale(harfbuzz.font.Font font, int xScale, int yScale) nothrow
 {
   hb_font_set_scale(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, xScale, yScale);
 }
@@ -3375,7 +3550,7 @@ void fontSetScale(harfbuzz.font.Font font, int xScale, int yScale)
       yEmbolden = the amount to embolden vertically
       inPlace = whether to embolden glyphs in-place
 */
-void fontSetSyntheticBold(harfbuzz.font.Font font, float xEmbolden, float yEmbolden, harfbuzz.types.Bool inPlace)
+void fontSetSyntheticBold(harfbuzz.font.Font font, float xEmbolden, float yEmbolden, harfbuzz.types.Bool inPlace) nothrow
 {
   hb_font_set_synthetic_bold(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, xEmbolden, yEmbolden, inPlace);
 }
@@ -3398,7 +3573,7 @@ void fontSetSyntheticBold(harfbuzz.font.Font font, float xEmbolden, float yEmbol
       font = #hb_font_t to work upon
       slant = synthetic slant value.
 */
-void fontSetSyntheticSlant(harfbuzz.font.Font font, float slant)
+void fontSetSyntheticSlant(harfbuzz.font.Font font, float slant) nothrow
 {
   hb_font_set_synthetic_slant(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, slant);
 }
@@ -3415,7 +3590,7 @@ void fontSetSyntheticSlant(harfbuzz.font.Font font, float slant)
       font = #hb_font_t to work upon
       coords = Array of variation coordinates to apply
 */
-void fontSetVarCoordsDesign(harfbuzz.font.Font font, float[] coords)
+void fontSetVarCoordsDesign(harfbuzz.font.Font font, float[] coords) nothrow
 {
   uint _coordsLength;
   if (coords)
@@ -3439,7 +3614,7 @@ void fontSetVarCoordsDesign(harfbuzz.font.Font font, float[] coords)
       font = #hb_font_t to work upon
       coords = Array of variation coordinates to apply
 */
-void fontSetVarCoordsNormalized(harfbuzz.font.Font font, int[] coords)
+void fontSetVarCoordsNormalized(harfbuzz.font.Font font, int[] coords) nothrow
 {
   uint _coordsLength;
   if (coords)
@@ -3456,7 +3631,7 @@ void fontSetVarCoordsNormalized(harfbuzz.font.Font font, int[] coords)
       font = a font.
       instanceIndex = named instance index.
 */
-void fontSetVarNamedInstance(harfbuzz.font.Font font, uint instanceIndex)
+void fontSetVarNamedInstance(harfbuzz.font.Font font, uint instanceIndex) nothrow
 {
   hb_font_set_var_named_instance(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, instanceIndex);
 }
@@ -3473,7 +3648,7 @@ void fontSetVarNamedInstance(harfbuzz.font.Font font, uint instanceIndex)
       tag = The #hb_tag_t tag of the variation-axis name
       value = The value of the variation axis
 */
-void fontSetVariation(harfbuzz.font.Font font, harfbuzz.types.Tag tag, float value)
+void fontSetVariation(harfbuzz.font.Font font, harfbuzz.types.Tag tag, float value) nothrow
 {
   hb_font_set_variation(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, tag, value);
 }
@@ -3489,7 +3664,7 @@ void fontSetVariation(harfbuzz.font.Font font, harfbuzz.types.Tag tag, float val
       font = #hb_font_t to work upon
       variations = Array of variation settings to apply
 */
-void fontSetVariations(harfbuzz.font.Font font, harfbuzz.variation.Variation[] variations)
+void fontSetVariations(harfbuzz.font.Font font, harfbuzz.variation.Variation[] variations) nothrow
 {
   uint _variationsLength;
   if (variations)
@@ -3515,7 +3690,7 @@ void fontSetVariations(harfbuzz.font.Font font, harfbuzz.variation.Variation[] v
       y = Input = The original Y coordinate
             Output = The Y coordinate minus the Y-coordinate of the origin
 */
-void fontSubtractGlyphOriginForDirection(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, ref harfbuzz.types.Position x, ref harfbuzz.types.Position y)
+void fontSubtractGlyphOriginForDirection(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, ref harfbuzz.types.Position x, ref harfbuzz.types.Position y) nothrow
 {
   hb_font_subtract_glyph_origin_for_direction(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
 }
@@ -3540,7 +3715,7 @@ void fontSubtractGlyphOriginForDirection(harfbuzz.font.Font font, harfbuzz.types
       ftFace = FT_Face to work upon
     Returns: the new #hb_face_t face object
 */
-harfbuzz.face.Face ftFaceCreateCached(freetype2.types.Face ftFace)
+harfbuzz.face.Face ftFaceCreateCached(freetype2.types.Face ftFace) nothrow
 {
   hb_face_t* _cretval;
   _cretval = hb_ft_face_create_cached(ftFace);
@@ -3567,7 +3742,7 @@ harfbuzz.face.Face ftFaceCreateCached(freetype2.types.Face ftFace)
       ftFace = FT_Face to work upon
     Returns: the new #hb_face_t face object
 */
-harfbuzz.face.Face ftFaceCreateReferenced(freetype2.types.Face ftFace)
+harfbuzz.face.Face ftFaceCreateReferenced(freetype2.types.Face ftFace) nothrow
 {
   hb_face_t* _cretval;
   _cretval = hb_ft_face_create_referenced(ftFace);
@@ -3583,7 +3758,7 @@ harfbuzz.face.Face ftFaceCreateReferenced(freetype2.types.Face ftFace)
     Params:
       font = #hb_font_t to work upon
 */
-void ftFontChanged(harfbuzz.font.Font font)
+void ftFontChanged(harfbuzz.font.Font font) nothrow
 {
   hb_ft_font_changed(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null);
 }
@@ -3606,7 +3781,7 @@ void ftFontChanged(harfbuzz.font.Font font)
       ftFace = FT_Face to work upon
     Returns: the new #hb_font_t font object
 */
-harfbuzz.font.Font ftFontCreateReferenced(freetype2.types.Face ftFace)
+harfbuzz.font.Font ftFontCreateReferenced(freetype2.types.Face ftFace) nothrow
 {
   hb_font_t* _cretval;
   _cretval = hb_ft_font_create_referenced(ftFace);
@@ -3627,7 +3802,7 @@ harfbuzz.font.Font ftFontCreateReferenced(freetype2.types.Face ftFace)
       font = #hb_font_t to work upon
     Returns: FT_Load_Glyph flags found, or 0
 */
-int ftFontGetLoadFlags(harfbuzz.font.Font font)
+int ftFontGetLoadFlags(harfbuzz.font.Font font) nothrow
 {
   int _retval;
   _retval = hb_ft_font_get_load_flags(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null);
@@ -3658,7 +3833,7 @@ int ftFontGetLoadFlags(harfbuzz.font.Font font)
     Params:
       font = #hb_font_t to work upon
 */
-void ftFontSetFuncs(harfbuzz.font.Font font)
+void ftFontSetFuncs(harfbuzz.font.Font font) nothrow
 {
   hb_ft_font_set_funcs(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null);
 }
@@ -3676,7 +3851,7 @@ void ftFontSetFuncs(harfbuzz.font.Font font)
       font = #hb_font_t to work upon
       loadFlags = The FreeType load flags to set
 */
-void ftFontSetLoadFlags(harfbuzz.font.Font font, int loadFlags)
+void ftFontSetLoadFlags(harfbuzz.font.Font font, int loadFlags) nothrow
 {
   hb_ft_font_set_load_flags(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, loadFlags);
 }
@@ -3692,7 +3867,7 @@ void ftFontSetLoadFlags(harfbuzz.font.Font font, int loadFlags)
       font = #hb_font_t to work upon
     Returns: true if changed, false otherwise
 */
-harfbuzz.types.Bool ftHbFontChanged(harfbuzz.font.Font font)
+harfbuzz.types.Bool ftHbFontChanged(harfbuzz.font.Font font) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ft_hb_font_changed(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null);
@@ -3707,7 +3882,7 @@ harfbuzz.types.Bool ftHbFontChanged(harfbuzz.font.Font font)
       gbytes = the GBytes structure to work upon
     Returns: the new #hb_blob_t blob object
 */
-harfbuzz.blob.Blob glibBlobCreate(glib.bytes.Bytes gbytes)
+harfbuzz.blob.Blob glibBlobCreate(glib.bytes.Bytes gbytes) nothrow
 {
   hb_blob_t* _cretval;
   _cretval = hb_glib_blob_create(gbytes ? cast(GBytes*)gbytes._cPtr(No.Dup) : null);
@@ -3720,7 +3895,7 @@ harfbuzz.blob.Blob glibBlobCreate(glib.bytes.Bytes gbytes)
     with the appropriate GLib function for each method.
     Returns: a pointer to the #hb_unicode_funcs_t Unicode-functions structure
 */
-harfbuzz.unicode_funcs.UnicodeFuncs glibGetUnicodeFuncs()
+harfbuzz.unicode_funcs.UnicodeFuncs glibGetUnicodeFuncs() nothrow
 {
   hb_unicode_funcs_t* _cretval;
   _cretval = hb_glib_get_unicode_funcs();
@@ -3736,7 +3911,7 @@ harfbuzz.unicode_funcs.UnicodeFuncs glibGetUnicodeFuncs()
       script = The #hb_script_t to query
     Returns: the GUnicodeScript identifier found
 */
-glib.types.UnicodeScript glibScriptFromScript(harfbuzz.types.Script script)
+glib.types.UnicodeScript glibScriptFromScript(harfbuzz.types.Script script) nothrow
 {
   GUnicodeScript _cretval;
   _cretval = hb_glib_script_from_script(script);
@@ -3752,7 +3927,7 @@ glib.types.UnicodeScript glibScriptFromScript(harfbuzz.types.Script script)
       script = The GUnicodeScript identifier to query
     Returns: the #hb_script_t script found
 */
-harfbuzz.types.Script glibScriptToScript(glib.types.UnicodeScript script)
+harfbuzz.types.Script glibScriptToScript(glib.types.UnicodeScript script) nothrow
 {
   hb_script_t _cretval;
   _cretval = hb_glib_script_to_script(script);
@@ -3767,7 +3942,7 @@ harfbuzz.types.Script glibScriptToScript(glib.types.UnicodeScript script)
       info = a #hb_glyph_info_t
     Returns: The #hb_glyph_flags_t encoded within info
 */
-harfbuzz.types.GlyphFlags glyphInfoGetGlyphFlags(harfbuzz.glyph_info.GlyphInfo info)
+harfbuzz.types.GlyphFlags glyphInfoGetGlyphFlags(harfbuzz.glyph_info.GlyphInfo info) nothrow
 {
   hb_glyph_flags_t _cretval;
   _cretval = hb_glyph_info_get_glyph_flags(info ? cast(const(hb_glyph_info_t)*)info._cPtr(No.Dup) : null);
@@ -3784,7 +3959,7 @@ harfbuzz.types.GlyphFlags glyphInfoGetGlyphFlags(harfbuzz.glyph_info.GlyphInfo i
               a BCP 47 language tag
     Returns: The #hb_language_t corresponding to the BCP 47 language tag.
 */
-harfbuzz.types.Language languageFromString(ubyte[] str)
+harfbuzz.types.Language languageFromString(ubyte[] str) nothrow
 {
   int _len;
   if (str)
@@ -3807,7 +3982,7 @@ harfbuzz.types.Language languageFromString(ubyte[] str)
     Returns: The default language of the locale as
       an #hb_language_t
 */
-harfbuzz.types.Language languageGetDefault()
+harfbuzz.types.Language languageGetDefault() nothrow
 {
   auto _retval = hb_language_get_default();
   return _retval;
@@ -3823,7 +3998,7 @@ harfbuzz.types.Language languageGetDefault()
       specific = Another #hb_language_t
     Returns: `true` if languages match, `false` otherwise.
 */
-harfbuzz.types.Bool languageMatches(harfbuzz.types.Language language, harfbuzz.types.Language specific)
+harfbuzz.types.Bool languageMatches(harfbuzz.types.Language language, harfbuzz.types.Language specific) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_language_matches(language, specific);
@@ -3838,7 +4013,7 @@ harfbuzz.types.Bool languageMatches(harfbuzz.types.Language language, harfbuzz.t
     Returns: A `NULL`-terminated string representing the language. Must not be freed by
       the caller.
 */
-string languageToString(harfbuzz.types.Language language)
+string languageToString(harfbuzz.types.Language language) nothrow
 {
   const(char)* _cretval;
   _cretval = hb_language_to_string(language);
@@ -3853,7 +4028,7 @@ string languageToString(harfbuzz.types.Language language)
       map = A map
     Returns: `true` if allocation succeeded, `false` otherwise
 */
-harfbuzz.types.Bool mapAllocationSuccessful(harfbuzz.map.Map map)
+harfbuzz.types.Bool mapAllocationSuccessful(harfbuzz.map.Map map) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_map_allocation_successful(map ? cast(const(hb_map_t)*)map._cPtr(No.Dup) : null);
@@ -3866,7 +4041,7 @@ harfbuzz.types.Bool mapAllocationSuccessful(harfbuzz.map.Map map)
     Params:
       map = A map
 */
-void mapClear(harfbuzz.map.Map map)
+void mapClear(harfbuzz.map.Map map) nothrow
 {
   hb_map_clear(map ? cast(hb_map_t*)map._cPtr(No.Dup) : null);
 }
@@ -3878,7 +4053,7 @@ void mapClear(harfbuzz.map.Map map)
       map = A map
     Returns: Newly-allocated map.
 */
-harfbuzz.map.Map mapCopy(harfbuzz.map.Map map)
+harfbuzz.map.Map mapCopy(harfbuzz.map.Map map) nothrow
 {
   hb_map_t* _cretval;
   _cretval = hb_map_copy(map ? cast(const(hb_map_t)*)map._cPtr(No.Dup) : null);
@@ -3890,7 +4065,7 @@ harfbuzz.map.Map mapCopy(harfbuzz.map.Map map)
     Creates a new, initially empty map.
     Returns: The new #hb_map_t
 */
-harfbuzz.map.Map mapCreate()
+harfbuzz.map.Map mapCreate() nothrow
 {
   hb_map_t* _cretval;
   _cretval = hb_map_create();
@@ -3905,7 +4080,7 @@ harfbuzz.map.Map mapCreate()
       map = A map
       key = The key to delete
 */
-void mapDel(harfbuzz.map.Map map, harfbuzz.types.Codepoint key)
+void mapDel(harfbuzz.map.Map map, harfbuzz.types.Codepoint key) nothrow
 {
   hb_map_del(map ? cast(hb_map_t*)map._cPtr(No.Dup) : null, key);
 }
@@ -3918,7 +4093,7 @@ void mapDel(harfbuzz.map.Map map, harfbuzz.types.Codepoint key)
       key = The key to query
     Returns: 
 */
-harfbuzz.types.Codepoint mapGet(harfbuzz.map.Map map, harfbuzz.types.Codepoint key)
+harfbuzz.types.Codepoint mapGet(harfbuzz.map.Map map, harfbuzz.types.Codepoint key) nothrow
 {
   harfbuzz.types.Codepoint _retval;
   _retval = hb_map_get(map ? cast(const(hb_map_t)*)map._cPtr(No.Dup) : null, key);
@@ -3929,7 +4104,7 @@ harfbuzz.types.Codepoint mapGet(harfbuzz.map.Map map, harfbuzz.types.Codepoint k
     Fetches the singleton empty #hb_map_t.
     Returns: The empty #hb_map_t
 */
-harfbuzz.map.Map mapGetEmpty()
+harfbuzz.map.Map mapGetEmpty() nothrow
 {
   hb_map_t* _cretval;
   _cretval = hb_map_get_empty();
@@ -3944,7 +4119,7 @@ harfbuzz.map.Map mapGetEmpty()
       map = A map
     Returns: The population of map
 */
-uint mapGetPopulation(harfbuzz.map.Map map)
+uint mapGetPopulation(harfbuzz.map.Map map) nothrow
 {
   uint _retval;
   _retval = hb_map_get_population(map ? cast(const(hb_map_t)*)map._cPtr(No.Dup) : null);
@@ -3959,7 +4134,7 @@ uint mapGetPopulation(harfbuzz.map.Map map)
       key = The key to query
     Returns: `true` if key is found in map, `false` otherwise
 */
-harfbuzz.types.Bool mapHas(harfbuzz.map.Map map, harfbuzz.types.Codepoint key)
+harfbuzz.types.Bool mapHas(harfbuzz.map.Map map, harfbuzz.types.Codepoint key) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_map_has(map ? cast(const(hb_map_t)*)map._cPtr(No.Dup) : null, key);
@@ -3973,7 +4148,7 @@ harfbuzz.types.Bool mapHas(harfbuzz.map.Map map, harfbuzz.types.Codepoint key)
       map = A map
     Returns: A hash of map.
 */
-uint mapHash(harfbuzz.map.Map map)
+uint mapHash(harfbuzz.map.Map map) nothrow
 {
   uint _retval;
   _retval = hb_map_hash(map ? cast(const(hb_map_t)*)map._cPtr(No.Dup) : null);
@@ -3987,7 +4162,7 @@ uint mapHash(harfbuzz.map.Map map)
       map = A map
     Returns: `true` if map is empty
 */
-harfbuzz.types.Bool mapIsEmpty(harfbuzz.map.Map map)
+harfbuzz.types.Bool mapIsEmpty(harfbuzz.map.Map map) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_map_is_empty(map ? cast(const(hb_map_t)*)map._cPtr(No.Dup) : null);
@@ -4003,7 +4178,7 @@ harfbuzz.types.Bool mapIsEmpty(harfbuzz.map.Map map)
       other = Another map
     Returns: `true` if the two maps are equal, `false` otherwise.
 */
-harfbuzz.types.Bool mapIsEqual(harfbuzz.map.Map map, harfbuzz.map.Map other)
+harfbuzz.types.Bool mapIsEqual(harfbuzz.map.Map map, harfbuzz.map.Map other) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_map_is_equal(map ? cast(const(hb_map_t)*)map._cPtr(No.Dup) : null, other ? cast(const(hb_map_t)*)other._cPtr(No.Dup) : null);
@@ -4017,7 +4192,7 @@ harfbuzz.types.Bool mapIsEqual(harfbuzz.map.Map map, harfbuzz.map.Map other)
       map = A map
       keys = A set
 */
-void mapKeys(harfbuzz.map.Map map, harfbuzz.set.Set keys)
+void mapKeys(harfbuzz.map.Map map, harfbuzz.set.Set keys) nothrow
 {
   hb_map_keys(map ? cast(const(hb_map_t)*)map._cPtr(No.Dup) : null, keys ? cast(hb_set_t*)keys._cPtr(No.Dup) : null);
 }
@@ -4038,7 +4213,7 @@ void mapKeys(harfbuzz.map.Map map, harfbuzz.set.Set keys)
       value = Value retrieved
     Returns: `true` if there was a next value, `false` otherwise
 */
-harfbuzz.types.Bool mapNext(harfbuzz.map.Map map, ref int idx, out harfbuzz.types.Codepoint key, out harfbuzz.types.Codepoint value)
+harfbuzz.types.Bool mapNext(harfbuzz.map.Map map, ref int idx, out harfbuzz.types.Codepoint key, out harfbuzz.types.Codepoint value) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_map_next(map ? cast(const(hb_map_t)*)map._cPtr(No.Dup) : null, cast(int*)&idx, cast(hb_codepoint_t*)&key, cast(hb_codepoint_t*)&value);
@@ -4053,7 +4228,7 @@ harfbuzz.types.Bool mapNext(harfbuzz.map.Map map, ref int idx, out harfbuzz.type
       key = The key to store in the map
       value = The value to store for key
 */
-void mapSet(harfbuzz.map.Map map, harfbuzz.types.Codepoint key, harfbuzz.types.Codepoint value)
+void mapSet(harfbuzz.map.Map map, harfbuzz.types.Codepoint key, harfbuzz.types.Codepoint value) nothrow
 {
   hb_map_set(map ? cast(hb_map_t*)map._cPtr(No.Dup) : null, key, value);
 }
@@ -4065,7 +4240,7 @@ void mapSet(harfbuzz.map.Map map, harfbuzz.types.Codepoint key, harfbuzz.types.C
       map = A map
       other = Another map
 */
-void mapUpdate(harfbuzz.map.Map map, harfbuzz.map.Map other)
+void mapUpdate(harfbuzz.map.Map map, harfbuzz.map.Map other) nothrow
 {
   hb_map_update(map ? cast(hb_map_t*)map._cPtr(No.Dup) : null, other ? cast(const(hb_map_t)*)other._cPtr(No.Dup) : null);
 }
@@ -4077,7 +4252,7 @@ void mapUpdate(harfbuzz.map.Map map, harfbuzz.map.Map other)
       map = A map
       values = A set
 */
-void mapValues(harfbuzz.map.Map map, harfbuzz.set.Set values)
+void mapValues(harfbuzz.map.Map map, harfbuzz.set.Set values) nothrow
 {
   hb_map_values(map ? cast(const(hb_map_t)*)map._cPtr(No.Dup) : null, values ? cast(hb_set_t*)values._cPtr(No.Dup) : null);
 }
@@ -4093,7 +4268,7 @@ void mapValues(harfbuzz.map.Map map, harfbuzz.set.Set values)
       layers = The array of layers found
     Returns: Total number of layers available for the glyph index queried
 */
-uint otColorGlyphGetLayers(harfbuzz.face.Face face, harfbuzz.types.Codepoint glyph, uint startOffset, ref harfbuzz.types.OtColorLayer[] layers)
+uint otColorGlyphGetLayers(harfbuzz.face.Face face, harfbuzz.types.Codepoint glyph, uint startOffset, ref harfbuzz.types.OtColorLayer[] layers) nothrow
 {
   uint _retval;
   uint _layerCount;
@@ -4111,7 +4286,7 @@ uint otColorGlyphGetLayers(harfbuzz.face.Face face, harfbuzz.types.Codepoint gly
       glyph = The glyph index to query
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool otColorGlyphHasPaint(harfbuzz.face.Face face, harfbuzz.types.Codepoint glyph)
+harfbuzz.types.Bool otColorGlyphHasPaint(harfbuzz.face.Face face, harfbuzz.types.Codepoint glyph) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_color_glyph_has_paint(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, glyph);
@@ -4130,7 +4305,7 @@ harfbuzz.types.Bool otColorGlyphHasPaint(harfbuzz.face.Face face, harfbuzz.types
       glyph = a glyph index
     Returns: An #hb_blob_t containing the PNG image for the glyph, if available
 */
-harfbuzz.blob.Blob otColorGlyphReferencePng(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph)
+harfbuzz.blob.Blob otColorGlyphReferencePng(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph) nothrow
 {
   hb_blob_t* _cretval;
   _cretval = hb_ot_color_glyph_reference_png(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph);
@@ -4148,7 +4323,7 @@ harfbuzz.blob.Blob otColorGlyphReferencePng(harfbuzz.font.Font font, harfbuzz.ty
       glyph = a svg glyph index
     Returns: An #hb_blob_t containing the SVG document of the glyph, if available
 */
-harfbuzz.blob.Blob otColorGlyphReferenceSvg(harfbuzz.face.Face face, harfbuzz.types.Codepoint glyph)
+harfbuzz.blob.Blob otColorGlyphReferenceSvg(harfbuzz.face.Face face, harfbuzz.types.Codepoint glyph) nothrow
 {
   hb_blob_t* _cretval;
   _cretval = hb_ot_color_glyph_reference_svg(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, glyph);
@@ -4164,7 +4339,7 @@ harfbuzz.blob.Blob otColorGlyphReferenceSvg(harfbuzz.face.Face face, harfbuzz.ty
       face = #hb_face_t to work upon
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool otColorHasLayers(harfbuzz.face.Face face)
+harfbuzz.types.Bool otColorHasLayers(harfbuzz.face.Face face) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_color_has_layers(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
@@ -4179,7 +4354,7 @@ harfbuzz.types.Bool otColorHasLayers(harfbuzz.face.Face face)
       face = #hb_face_t to work upon
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool otColorHasPaint(harfbuzz.face.Face face)
+harfbuzz.types.Bool otColorHasPaint(harfbuzz.face.Face face) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_color_has_paint(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
@@ -4193,7 +4368,7 @@ harfbuzz.types.Bool otColorHasPaint(harfbuzz.face.Face face)
       face = #hb_face_t to work upon
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool otColorHasPalettes(harfbuzz.face.Face face)
+harfbuzz.types.Bool otColorHasPalettes(harfbuzz.face.Face face) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_color_has_palettes(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
@@ -4207,7 +4382,7 @@ harfbuzz.types.Bool otColorHasPalettes(harfbuzz.face.Face face)
       face = #hb_face_t to work upon
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool otColorHasPng(harfbuzz.face.Face face)
+harfbuzz.types.Bool otColorHasPng(harfbuzz.face.Face face) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_color_has_png(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
@@ -4221,7 +4396,7 @@ harfbuzz.types.Bool otColorHasPng(harfbuzz.face.Face face)
       face = #hb_face_t to work upon.
     Returns: `true` if data found, `false` otherwise.
 */
-harfbuzz.types.Bool otColorHasSvg(harfbuzz.face.Face face)
+harfbuzz.types.Bool otColorHasSvg(harfbuzz.face.Face face) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_color_has_svg(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
@@ -4240,7 +4415,7 @@ harfbuzz.types.Bool otColorHasSvg(harfbuzz.face.Face face)
       colorIndex = The index of the color
     Returns: the Name ID found for the color.
 */
-harfbuzz.types.OtNameId otColorPaletteColorGetNameId(harfbuzz.face.Face face, uint colorIndex)
+harfbuzz.types.OtNameId otColorPaletteColorGetNameId(harfbuzz.face.Face face, uint colorIndex) nothrow
 {
   harfbuzz.types.OtNameId _retval;
   _retval = hb_ot_color_palette_color_get_name_id(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, colorIndex);
@@ -4267,7 +4442,7 @@ harfbuzz.types.OtNameId otColorPaletteColorGetNameId(harfbuzz.face.Face face, ui
       colors = The array of #hb_color_t records found
     Returns: the total number of colors in the palette
 */
-uint otColorPaletteGetColors(harfbuzz.face.Face face, uint paletteIndex, uint startOffset, ref harfbuzz.types.Color[] colors)
+uint otColorPaletteGetColors(harfbuzz.face.Face face, uint paletteIndex, uint startOffset, ref harfbuzz.types.Color[] colors) nothrow
 {
   uint _retval;
   uint _colorCount;
@@ -4283,7 +4458,7 @@ uint otColorPaletteGetColors(harfbuzz.face.Face face, uint paletteIndex, uint st
       face = #hb_face_t to work upon
     Returns: the number of palettes found
 */
-uint otColorPaletteGetCount(harfbuzz.face.Face face)
+uint otColorPaletteGetCount(harfbuzz.face.Face face) nothrow
 {
   uint _retval;
   _retval = hb_ot_color_palette_get_count(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
@@ -4298,7 +4473,7 @@ uint otColorPaletteGetCount(harfbuzz.face.Face face)
       paletteIndex = The index of the color palette
     Returns: the #hb_ot_color_palette_flags_t of the requested color palette
 */
-harfbuzz.types.OtColorPaletteFlags otColorPaletteGetFlags(harfbuzz.face.Face face, uint paletteIndex)
+harfbuzz.types.OtColorPaletteFlags otColorPaletteGetFlags(harfbuzz.face.Face face, uint paletteIndex) nothrow
 {
   hb_ot_color_palette_flags_t _cretval;
   _cretval = hb_ot_color_palette_get_flags(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, paletteIndex);
@@ -4319,7 +4494,7 @@ harfbuzz.types.OtColorPaletteFlags otColorPaletteGetFlags(harfbuzz.face.Face fac
     Returns: the Named ID found for the palette.
       If the requested palette has no name the result is #HB_OT_NAME_ID_INVALID.
 */
-harfbuzz.types.OtNameId otColorPaletteGetNameId(harfbuzz.face.Face face, uint paletteIndex)
+harfbuzz.types.OtNameId otColorPaletteGetNameId(harfbuzz.face.Face face, uint paletteIndex) nothrow
 {
   harfbuzz.types.OtNameId _retval;
   _retval = hb_ot_color_palette_get_name_id(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, paletteIndex);
@@ -4332,7 +4507,7 @@ harfbuzz.types.OtNameId otColorPaletteGetNameId(harfbuzz.face.Face face, uint pa
     Params:
       font = #hb_font_t to work upon
 */
-void otFontSetFuncs(harfbuzz.font.Font font)
+void otFontSetFuncs(harfbuzz.font.Font font) nothrow
 {
   hb_ot_font_set_funcs(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null);
 }
@@ -4351,7 +4526,7 @@ void otFontSetFuncs(harfbuzz.font.Font font)
                       glyph variants.
     Returns: Number of total sample characters in the cvXX feature.
 */
-uint otLayoutFeatureGetCharacters(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint featureIndex, uint startOffset, ref harfbuzz.types.Codepoint[] characters)
+uint otLayoutFeatureGetCharacters(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint featureIndex, uint startOffset, ref harfbuzz.types.Codepoint[] characters) nothrow
 {
   uint _retval;
   uint _charCount;
@@ -4373,7 +4548,7 @@ uint otLayoutFeatureGetCharacters(harfbuzz.face.Face face, harfbuzz.types.Tag ta
       lookupIndexes = The array of lookup indexes found for the query
     Returns: Total number of lookups.
 */
-uint otLayoutFeatureGetLookups(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint featureIndex, uint startOffset, ref uint[] lookupIndexes)
+uint otLayoutFeatureGetLookups(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint featureIndex, uint startOffset, ref uint[] lookupIndexes) nothrow
 {
   uint _retval;
   uint _lookupCount;
@@ -4403,7 +4578,7 @@ uint otLayoutFeatureGetLookups(harfbuzz.face.Face face, harfbuzz.types.Tag table
                          parameters. (Must be zero if numParameters is zero.)
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool otLayoutFeatureGetNameIds(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint featureIndex, out harfbuzz.types.OtNameId labelId, out harfbuzz.types.OtNameId tooltipId, out harfbuzz.types.OtNameId sampleId, out uint numNamedParameters, out harfbuzz.types.OtNameId firstParamId)
+harfbuzz.types.Bool otLayoutFeatureGetNameIds(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint featureIndex, out harfbuzz.types.OtNameId labelId, out harfbuzz.types.OtNameId tooltipId, out harfbuzz.types.OtNameId sampleId, out uint numNamedParameters, out harfbuzz.types.OtNameId firstParamId) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_layout_feature_get_name_ids(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, tableTag, featureIndex, cast(hb_ot_name_id_t*)&labelId, cast(hb_ot_name_id_t*)&tooltipId, cast(hb_ot_name_id_t*)&sampleId, cast(uint*)&numNamedParameters, cast(hb_ot_name_id_t*)&firstParamId);
@@ -4424,7 +4599,7 @@ harfbuzz.types.Bool otLayoutFeatureGetNameIds(harfbuzz.face.Face face, harfbuzz.
       lookupIndexes = The array of lookups found for the query
     Returns: Total number of lookups.
 */
-uint otLayoutFeatureWithVariationsGetLookups(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint featureIndex, uint variationsIndex, uint startOffset, ref uint[] lookupIndexes)
+uint otLayoutFeatureWithVariationsGetLookups(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint featureIndex, uint variationsIndex, uint startOffset, ref uint[] lookupIndexes) nothrow
 {
   uint _retval;
   uint _lookupCount;
@@ -4446,7 +4621,7 @@ uint otLayoutFeatureWithVariationsGetLookups(harfbuzz.face.Face face, harfbuzz.t
       pointArray = The array of attachment points found for the query
     Returns: Total number of attachment points for glyph.
 */
-uint otLayoutGetAttachPoints(harfbuzz.face.Face face, harfbuzz.types.Codepoint glyph, uint startOffset, ref uint[] pointArray)
+uint otLayoutGetAttachPoints(harfbuzz.face.Face face, harfbuzz.types.Codepoint glyph, uint startOffset, ref uint[] pointArray) nothrow
 {
   uint _retval;
   uint _pointCount;
@@ -4467,7 +4642,7 @@ uint otLayoutGetAttachPoints(harfbuzz.face.Face face, harfbuzz.types.Codepoint g
       coord = baseline value if found.
     Returns: `true` if found baseline value in the font.
 */
-harfbuzz.types.Bool otLayoutGetBaseline(harfbuzz.font.Font font, harfbuzz.types.OtLayoutBaselineTag baselineTag, harfbuzz.types.Direction direction, harfbuzz.types.Tag scriptTag, harfbuzz.types.Tag languageTag, out harfbuzz.types.Position coord)
+harfbuzz.types.Bool otLayoutGetBaseline(harfbuzz.font.Font font, harfbuzz.types.OtLayoutBaselineTag baselineTag, harfbuzz.types.Direction direction, harfbuzz.types.Tag scriptTag, harfbuzz.types.Tag languageTag, out harfbuzz.types.Position coord) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_layout_get_baseline(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, baselineTag, direction, scriptTag, languageTag, cast(hb_position_t*)&coord);
@@ -4489,7 +4664,7 @@ harfbuzz.types.Bool otLayoutGetBaseline(harfbuzz.font.Font font, harfbuzz.types.
       coord = baseline value if found.
     Returns: `true` if found baseline value in the font.
 */
-harfbuzz.types.Bool otLayoutGetBaseline2(harfbuzz.font.Font font, harfbuzz.types.OtLayoutBaselineTag baselineTag, harfbuzz.types.Direction direction, harfbuzz.types.Script script, harfbuzz.types.Language language, out harfbuzz.types.Position coord)
+harfbuzz.types.Bool otLayoutGetBaseline2(harfbuzz.font.Font font, harfbuzz.types.OtLayoutBaselineTag baselineTag, harfbuzz.types.Direction direction, harfbuzz.types.Script script, harfbuzz.types.Language language, out harfbuzz.types.Position coord) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_layout_get_baseline2(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, baselineTag, direction, script, language, cast(hb_position_t*)&coord);
@@ -4508,7 +4683,7 @@ harfbuzz.types.Bool otLayoutGetBaseline2(harfbuzz.font.Font font, harfbuzz.types
       languageTag = language tag, currently unused.
       coord = baseline value if found.
 */
-void otLayoutGetBaselineWithFallback(harfbuzz.font.Font font, harfbuzz.types.OtLayoutBaselineTag baselineTag, harfbuzz.types.Direction direction, harfbuzz.types.Tag scriptTag, harfbuzz.types.Tag languageTag, out harfbuzz.types.Position coord)
+void otLayoutGetBaselineWithFallback(harfbuzz.font.Font font, harfbuzz.types.OtLayoutBaselineTag baselineTag, harfbuzz.types.Direction direction, harfbuzz.types.Tag scriptTag, harfbuzz.types.Tag languageTag, out harfbuzz.types.Position coord) nothrow
 {
   hb_ot_layout_get_baseline_with_fallback(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, baselineTag, direction, scriptTag, languageTag, cast(hb_position_t*)&coord);
 }
@@ -4528,7 +4703,7 @@ void otLayoutGetBaselineWithFallback(harfbuzz.font.Font font, harfbuzz.types.OtL
       language = language, currently unused.
       coord = baseline value if found.
 */
-void otLayoutGetBaselineWithFallback2(harfbuzz.font.Font font, harfbuzz.types.OtLayoutBaselineTag baselineTag, harfbuzz.types.Direction direction, harfbuzz.types.Script script, harfbuzz.types.Language language, out harfbuzz.types.Position coord)
+void otLayoutGetBaselineWithFallback2(harfbuzz.font.Font font, harfbuzz.types.OtLayoutBaselineTag baselineTag, harfbuzz.types.Direction direction, harfbuzz.types.Script script, harfbuzz.types.Language language, out harfbuzz.types.Position coord) nothrow
 {
   hb_ot_layout_get_baseline_with_fallback2(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, baselineTag, direction, script, language, cast(hb_position_t*)&coord);
 }
@@ -4551,7 +4726,7 @@ void otLayoutGetBaselineWithFallback2(harfbuzz.font.Font font, harfbuzz.types.Ot
       extents = font extents if found.
     Returns: `true` if found script/language-specific font extents.
 */
-harfbuzz.types.Bool otLayoutGetFontExtents(harfbuzz.font.Font font, harfbuzz.types.Direction direction, harfbuzz.types.Tag scriptTag, harfbuzz.types.Tag languageTag, out harfbuzz.types.FontExtents extents)
+harfbuzz.types.Bool otLayoutGetFontExtents(harfbuzz.font.Font font, harfbuzz.types.Direction direction, harfbuzz.types.Tag scriptTag, harfbuzz.types.Tag languageTag, out harfbuzz.types.FontExtents extents) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_layout_get_font_extents(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, direction, scriptTag, languageTag, &extents);
@@ -4579,7 +4754,7 @@ harfbuzz.types.Bool otLayoutGetFontExtents(harfbuzz.font.Font font, harfbuzz.typ
       extents = font extents if found.
     Returns: `true` if found script/language-specific font extents.
 */
-harfbuzz.types.Bool otLayoutGetFontExtents2(harfbuzz.font.Font font, harfbuzz.types.Direction direction, harfbuzz.types.Script script, harfbuzz.types.Language language, out harfbuzz.types.FontExtents extents)
+harfbuzz.types.Bool otLayoutGetFontExtents2(harfbuzz.font.Font font, harfbuzz.types.Direction direction, harfbuzz.types.Script script, harfbuzz.types.Language language, out harfbuzz.types.FontExtents extents) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_layout_get_font_extents2(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, direction, script, language, &extents);
@@ -4595,7 +4770,7 @@ harfbuzz.types.Bool otLayoutGetFontExtents2(harfbuzz.font.Font font, harfbuzz.ty
     Returns: The #hb_ot_layout_glyph_class_t glyph class of the given code
       point in the GDEF table of the face.
 */
-harfbuzz.types.OtLayoutGlyphClass otLayoutGetGlyphClass(harfbuzz.face.Face face, harfbuzz.types.Codepoint glyph)
+harfbuzz.types.OtLayoutGlyphClass otLayoutGetGlyphClass(harfbuzz.face.Face face, harfbuzz.types.Codepoint glyph) nothrow
 {
   hb_ot_layout_glyph_class_t _cretval;
   _cretval = hb_ot_layout_get_glyph_class(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, glyph);
@@ -4610,7 +4785,7 @@ harfbuzz.types.OtLayoutGlyphClass otLayoutGetGlyphClass(harfbuzz.face.Face face,
       script = a script tag.
     Returns: dominant baseline tag for the script.
 */
-harfbuzz.types.OtLayoutBaselineTag otLayoutGetHorizontalBaselineTagForScript(harfbuzz.types.Script script)
+harfbuzz.types.OtLayoutBaselineTag otLayoutGetHorizontalBaselineTagForScript(harfbuzz.types.Script script) nothrow
 {
   hb_ot_layout_baseline_tag_t _cretval;
   _cretval = hb_ot_layout_get_horizontal_baseline_tag_for_script(script);
@@ -4637,7 +4812,7 @@ harfbuzz.types.OtLayoutBaselineTag otLayoutGetHorizontalBaselineTagForScript(har
       caretArray = The array of caret positions found for the query
     Returns: Total number of ligature caret positions for glyph.
 */
-uint otLayoutGetLigatureCarets(harfbuzz.font.Font font, harfbuzz.types.Direction direction, harfbuzz.types.Codepoint glyph, uint startOffset, ref harfbuzz.types.Position[] caretArray)
+uint otLayoutGetLigatureCarets(harfbuzz.font.Font font, harfbuzz.types.Direction direction, harfbuzz.types.Codepoint glyph, uint startOffset, ref harfbuzz.types.Position[] caretArray) nothrow
 {
   uint _retval;
   uint _caretCount;
@@ -4665,7 +4840,7 @@ uint otLayoutGetLigatureCarets(harfbuzz.font.Font font, harfbuzz.types.Direction
       rangeEnd = The maximum size of the recommended size range for the face
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool otLayoutGetSizeParams(harfbuzz.face.Face face, out uint designSize, out uint subfamilyId, out harfbuzz.types.OtNameId subfamilyNameId, out uint rangeStart, out uint rangeEnd)
+harfbuzz.types.Bool otLayoutGetSizeParams(harfbuzz.face.Face face, out uint designSize, out uint subfamilyId, out harfbuzz.types.OtNameId subfamilyNameId, out uint rangeStart, out uint rangeEnd) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_layout_get_size_params(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, cast(uint*)&designSize, cast(uint*)&subfamilyId, cast(hb_ot_name_id_t*)&subfamilyNameId, cast(uint*)&rangeStart, cast(uint*)&rangeEnd);
@@ -4679,7 +4854,7 @@ harfbuzz.types.Bool otLayoutGetSizeParams(harfbuzz.face.Face face, out uint desi
       face = #hb_face_t to work upon
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool otLayoutHasGlyphClasses(harfbuzz.face.Face face)
+harfbuzz.types.Bool otLayoutHasGlyphClasses(harfbuzz.face.Face face) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_layout_has_glyph_classes(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
@@ -4693,7 +4868,7 @@ harfbuzz.types.Bool otLayoutHasGlyphClasses(harfbuzz.face.Face face)
       face = #hb_face_t to work upon
     Returns: `true` if the face has GPOS data, `false` otherwise
 */
-harfbuzz.types.Bool otLayoutHasPositioning(harfbuzz.face.Face face)
+harfbuzz.types.Bool otLayoutHasPositioning(harfbuzz.face.Face face) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_layout_has_positioning(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
@@ -4707,7 +4882,7 @@ harfbuzz.types.Bool otLayoutHasPositioning(harfbuzz.face.Face face)
       face = #hb_face_t to work upon
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool otLayoutHasSubstitution(harfbuzz.face.Face face)
+harfbuzz.types.Bool otLayoutHasSubstitution(harfbuzz.face.Face face) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_layout_has_substitution(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
@@ -4727,7 +4902,7 @@ harfbuzz.types.Bool otLayoutHasSubstitution(harfbuzz.face.Face face)
       featureIndex = The index of the requested feature
     Returns: `true` if the feature is found, `false` otherwise
 */
-harfbuzz.types.Bool otLayoutLanguageFindFeature(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, uint languageIndex, harfbuzz.types.Tag featureTag, out uint featureIndex)
+harfbuzz.types.Bool otLayoutLanguageFindFeature(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, uint languageIndex, harfbuzz.types.Tag featureTag, out uint featureIndex) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_layout_language_find_feature(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, tableTag, scriptIndex, languageIndex, featureTag, cast(uint*)&featureIndex);
@@ -4748,7 +4923,7 @@ harfbuzz.types.Bool otLayoutLanguageFindFeature(harfbuzz.face.Face face, harfbuz
       featureIndexes = The array of feature indexes found for the query
     Returns: Total number of features.
 */
-uint otLayoutLanguageGetFeatureIndexes(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, uint languageIndex, uint startOffset, ref uint[] featureIndexes)
+uint otLayoutLanguageGetFeatureIndexes(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, uint languageIndex, uint startOffset, ref uint[] featureIndexes) nothrow
 {
   uint _retval;
   uint _featureCount;
@@ -4771,7 +4946,7 @@ uint otLayoutLanguageGetFeatureIndexes(harfbuzz.face.Face face, harfbuzz.types.T
       featureTags = The array of #hb_tag_t feature tags found for the query
     Returns: Total number of feature tags.
 */
-uint otLayoutLanguageGetFeatureTags(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, uint languageIndex, uint startOffset, ref harfbuzz.types.Tag[] featureTags)
+uint otLayoutLanguageGetFeatureTags(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, uint languageIndex, uint startOffset, ref harfbuzz.types.Tag[] featureTags) nothrow
 {
   uint _retval;
   uint _featureCount;
@@ -4793,7 +4968,7 @@ uint otLayoutLanguageGetFeatureTags(harfbuzz.face.Face face, harfbuzz.types.Tag 
       featureTag = The #hb_tag_t of the requested feature
     Returns: `true` if the feature is found, `false` otherwise
 */
-harfbuzz.types.Bool otLayoutLanguageGetRequiredFeature(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, uint languageIndex, out uint featureIndex, out harfbuzz.types.Tag featureTag)
+harfbuzz.types.Bool otLayoutLanguageGetRequiredFeature(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, uint languageIndex, out uint featureIndex, out harfbuzz.types.Tag featureTag) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_layout_language_get_required_feature(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, tableTag, scriptIndex, languageIndex, cast(uint*)&featureIndex, cast(hb_tag_t*)&featureTag);
@@ -4812,7 +4987,7 @@ harfbuzz.types.Bool otLayoutLanguageGetRequiredFeature(harfbuzz.face.Face face, 
       featureIndex = The index of the requested feature
     Returns: `true` if the feature is found, `false` otherwise
 */
-harfbuzz.types.Bool otLayoutLanguageGetRequiredFeatureIndex(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, uint languageIndex, out uint featureIndex)
+harfbuzz.types.Bool otLayoutLanguageGetRequiredFeatureIndex(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, uint languageIndex, out uint featureIndex) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_layout_language_get_required_feature_index(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, tableTag, scriptIndex, languageIndex, cast(uint*)&featureIndex);
@@ -4831,7 +5006,7 @@ harfbuzz.types.Bool otLayoutLanguageGetRequiredFeatureIndex(harfbuzz.face.Face f
                            Alternate glyphs associated with the glyph id.
     Returns: Total number of alternates found in the specific lookup index for the given glyph id.
 */
-uint otLayoutLookupGetGlyphAlternates(harfbuzz.face.Face face, uint lookupIndex, harfbuzz.types.Codepoint glyph, uint startOffset, ref harfbuzz.types.Codepoint[] alternateGlyphs)
+uint otLayoutLookupGetGlyphAlternates(harfbuzz.face.Face face, uint lookupIndex, harfbuzz.types.Codepoint glyph, uint startOffset, ref harfbuzz.types.Codepoint[] alternateGlyphs) nothrow
 {
   uint _retval;
   uint _alternateCount;
@@ -4851,7 +5026,7 @@ uint otLayoutLookupGetGlyphAlternates(harfbuzz.face.Face face, uint lookupIndex,
       glyph = a glyph id.
     Returns: Adjustment value. Negative values mean the glyph will stick out of the margin.
 */
-harfbuzz.types.Position otLayoutLookupGetOpticalBound(harfbuzz.font.Font font, uint lookupIndex, harfbuzz.types.Direction direction, harfbuzz.types.Codepoint glyph)
+harfbuzz.types.Position otLayoutLookupGetOpticalBound(harfbuzz.font.Font font, uint lookupIndex, harfbuzz.types.Direction direction, harfbuzz.types.Codepoint glyph) nothrow
 {
   harfbuzz.types.Position _retval;
   _retval = hb_ot_layout_lookup_get_optical_bound(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, lookupIndex, direction, glyph);
@@ -4870,7 +5045,7 @@ harfbuzz.types.Position otLayoutLookupGetOpticalBound(harfbuzz.font.Font font, u
         in substitutions
     Returns: `true` if a substitution would be triggered, `false` otherwise
 */
-harfbuzz.types.Bool otLayoutLookupWouldSubstitute(harfbuzz.face.Face face, uint lookupIndex, harfbuzz.types.Codepoint[] glyphs, harfbuzz.types.Bool zeroContext)
+harfbuzz.types.Bool otLayoutLookupWouldSubstitute(harfbuzz.face.Face face, uint lookupIndex, harfbuzz.types.Codepoint[] glyphs, harfbuzz.types.Bool zeroContext) nothrow
 {
   harfbuzz.types.Bool _retval;
   uint _glyphsLength;
@@ -4894,7 +5069,7 @@ harfbuzz.types.Bool otLayoutLookupWouldSubstitute(harfbuzz.face.Face face, uint 
       languageIndex = The index of the requested language
     Returns: `true` if the language tag is found, `false` otherwise
 */
-harfbuzz.types.Bool otLayoutScriptFindLanguage(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, harfbuzz.types.Tag languageTag, out uint languageIndex)
+harfbuzz.types.Bool otLayoutScriptFindLanguage(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, harfbuzz.types.Tag languageTag, out uint languageIndex) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_layout_script_find_language(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, tableTag, scriptIndex, languageTag, cast(uint*)&languageIndex);
@@ -4913,7 +5088,7 @@ harfbuzz.types.Bool otLayoutScriptFindLanguage(harfbuzz.face.Face face, harfbuzz
       languageTags = Array of language tags found in the table
     Returns: Total number of language tags.
 */
-uint otLayoutScriptGetLanguageTags(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, uint startOffset, ref harfbuzz.types.Tag[] languageTags)
+uint otLayoutScriptGetLanguageTags(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, uint startOffset, ref harfbuzz.types.Tag[] languageTags) nothrow
 {
   uint _retval;
   uint _languageCount;
@@ -4938,7 +5113,7 @@ uint otLayoutScriptGetLanguageTags(harfbuzz.face.Face face, harfbuzz.types.Tag t
       languageIndex = The index of the requested language
     Returns: `true` if one of the given language tags is found, `false` otherwise
 */
-harfbuzz.types.Bool otLayoutScriptSelectLanguage(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, harfbuzz.types.Tag[] languageTags, out uint languageIndex)
+harfbuzz.types.Bool otLayoutScriptSelectLanguage(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, harfbuzz.types.Tag[] languageTags, out uint languageIndex) nothrow
 {
   harfbuzz.types.Bool _retval;
   uint _languageCount;
@@ -4968,7 +5143,7 @@ harfbuzz.types.Bool otLayoutScriptSelectLanguage(harfbuzz.face.Face face, harfbu
       chosenLanguage = #hb_tag_t of the chosen language
     Returns: `true` if one of the given language tags is found, `false` otherwise
 */
-harfbuzz.types.Bool otLayoutScriptSelectLanguage2(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, harfbuzz.types.Tag[] languageTags, out uint languageIndex, out harfbuzz.types.Tag chosenLanguage)
+harfbuzz.types.Bool otLayoutScriptSelectLanguage2(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, harfbuzz.types.Tag[] languageTags, out uint languageIndex, out harfbuzz.types.Tag chosenLanguage) nothrow
 {
   harfbuzz.types.Bool _retval;
   uint _languageCount;
@@ -4991,7 +5166,7 @@ harfbuzz.types.Bool otLayoutScriptSelectLanguage2(harfbuzz.face.Face face, harfb
       variationsIndex = The array of feature variations found for the query
     Returns: `true` if feature variations were found, `false` otherwise.
 */
-harfbuzz.types.Bool otLayoutTableFindFeatureVariations(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, int[] coords, out uint variationsIndex)
+harfbuzz.types.Bool otLayoutTableFindFeatureVariations(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, int[] coords, out uint variationsIndex) nothrow
 {
   harfbuzz.types.Bool _retval;
   uint _numCoords;
@@ -5014,7 +5189,7 @@ harfbuzz.types.Bool otLayoutTableFindFeatureVariations(harfbuzz.face.Face face, 
       scriptIndex = The index of the requested script tag
     Returns: `true` if the script is found, `false` otherwise
 */
-harfbuzz.types.Bool otLayoutTableFindScript(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, harfbuzz.types.Tag scriptTag, out uint scriptIndex)
+harfbuzz.types.Bool otLayoutTableFindScript(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, harfbuzz.types.Tag scriptTag, out uint scriptIndex) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_layout_table_find_script(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, tableTag, scriptTag, cast(uint*)&scriptIndex);
@@ -5033,7 +5208,7 @@ harfbuzz.types.Bool otLayoutTableFindScript(harfbuzz.face.Face face, harfbuzz.ty
       featureTags = Array of feature tags found in the table
     Returns: Total number of feature tags.
 */
-uint otLayoutTableGetFeatureTags(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint startOffset, ref harfbuzz.types.Tag[] featureTags)
+uint otLayoutTableGetFeatureTags(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint startOffset, ref harfbuzz.types.Tag[] featureTags) nothrow
 {
   uint _retval;
   uint _featureCount;
@@ -5051,7 +5226,7 @@ uint otLayoutTableGetFeatureTags(harfbuzz.face.Face face, harfbuzz.types.Tag tab
       tableTag = #HB_OT_TAG_GSUB or #HB_OT_TAG_GPOS
     Returns: Total number of lookups.
 */
-uint otLayoutTableGetLookupCount(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag)
+uint otLayoutTableGetLookupCount(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag) nothrow
 {
   uint _retval;
   _retval = hb_ot_layout_table_get_lookup_count(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, tableTag);
@@ -5069,7 +5244,7 @@ uint otLayoutTableGetLookupCount(harfbuzz.face.Face face, harfbuzz.types.Tag tab
       scriptTags = The array of #hb_tag_t script tags found for the query
     Returns: Total number of script tags.
 */
-uint otLayoutTableGetScriptTags(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint startOffset, ref harfbuzz.types.Tag[] scriptTags)
+uint otLayoutTableGetScriptTags(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint startOffset, ref harfbuzz.types.Tag[] scriptTags) nothrow
 {
   uint _retval;
   uint _scriptCount;
@@ -5095,7 +5270,7 @@ uint otLayoutTableGetScriptTags(harfbuzz.face.Face face, harfbuzz.types.Tag tabl
     Returns: `true` if one of the requested scripts is selected, `false` if a fallback
       script is selected or if no scripts are selected.
 */
-harfbuzz.types.Bool otLayoutTableSelectScript(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, harfbuzz.types.Tag[] scriptTags, out uint scriptIndex, out harfbuzz.types.Tag chosenScript)
+harfbuzz.types.Bool otLayoutTableSelectScript(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, harfbuzz.types.Tag[] scriptTags, out uint scriptIndex, out harfbuzz.types.Tag chosenScript) nothrow
 {
   harfbuzz.types.Bool _retval;
   uint _scriptCount;
@@ -5121,7 +5296,7 @@ harfbuzz.types.Bool otLayoutTableSelectScript(harfbuzz.face.Face face, harfbuzz.
       constant = #hb_ot_math_constant_t the constant to retrieve
     Returns: the requested constant or zero
 */
-harfbuzz.types.Position otMathGetConstant(harfbuzz.font.Font font, harfbuzz.types.OtMathConstant constant)
+harfbuzz.types.Position otMathGetConstant(harfbuzz.font.Font font, harfbuzz.types.OtMathConstant constant) nothrow
 {
   harfbuzz.types.Position _retval;
   _retval = hb_ot_math_get_constant(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, constant);
@@ -5148,7 +5323,7 @@ harfbuzz.types.Position otMathGetConstant(harfbuzz.font.Font font, harfbuzz.type
       italicsCorrection = italics correction of the glyph assembly
     Returns: the total number of parts in the glyph assembly
 */
-uint otMathGetGlyphAssembly(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, uint startOffset, ref harfbuzz.types.OtMathGlyphPart[] parts, out harfbuzz.types.Position italicsCorrection)
+uint otMathGetGlyphAssembly(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, uint startOffset, ref harfbuzz.types.OtMathGlyphPart[] parts, out harfbuzz.types.Position italicsCorrection) nothrow
 {
   uint _retval;
   uint _partsCount;
@@ -5166,7 +5341,7 @@ uint otMathGetGlyphAssembly(harfbuzz.font.Font font, harfbuzz.types.Codepoint gl
       glyph = The glyph index from which to retrieve the value
     Returns: the italics correction of the glyph or zero
 */
-harfbuzz.types.Position otMathGetGlyphItalicsCorrection(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph)
+harfbuzz.types.Position otMathGetGlyphItalicsCorrection(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph) nothrow
 {
   harfbuzz.types.Position _retval;
   _retval = hb_ot_math_get_glyph_italics_correction(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph);
@@ -5189,7 +5364,7 @@ harfbuzz.types.Position otMathGetGlyphItalicsCorrection(harfbuzz.font.Font font,
       correctionHeight = the correction height to use to determine the kerning.
     Returns: requested kerning value or zero
 */
-harfbuzz.types.Position otMathGetGlyphKerning(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.OtMathKern kern, harfbuzz.types.Position correctionHeight)
+harfbuzz.types.Position otMathGetGlyphKerning(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.OtMathKern kern, harfbuzz.types.Position correctionHeight) nothrow
 {
   harfbuzz.types.Position _retval;
   _retval = hb_ot_math_get_glyph_kerning(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph, kern, correctionHeight);
@@ -5220,7 +5395,7 @@ harfbuzz.types.Position otMathGetGlyphKerning(harfbuzz.font.Font font, harfbuzz.
       kernEntries = array of kern entries returned
     Returns: the total number of kern values available or zero
 */
-uint otMathGetGlyphKernings(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.OtMathKern kern, uint startOffset, ref harfbuzz.types.OtMathKernEntry[] kernEntries)
+uint otMathGetGlyphKernings(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.OtMathKern kern, uint startOffset, ref harfbuzz.types.OtMathKernEntry[] kernEntries) nothrow
 {
   uint _retval;
   uint _entriesCount;
@@ -5245,7 +5420,7 @@ uint otMathGetGlyphKernings(harfbuzz.font.Font font, harfbuzz.types.Codepoint gl
     Returns: the top accent attachment of the glyph or 0.5 * the advance
                     width of glyph
 */
-harfbuzz.types.Position otMathGetGlyphTopAccentAttachment(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph)
+harfbuzz.types.Position otMathGetGlyphTopAccentAttachment(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph) nothrow
 {
   harfbuzz.types.Position _retval;
   _retval = hb_ot_math_get_glyph_top_accent_attachment(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, glyph);
@@ -5270,7 +5445,7 @@ harfbuzz.types.Position otMathGetGlyphTopAccentAttachment(harfbuzz.font.Font fon
       variants = array of variants returned
     Returns: the total number of size variants available or zero
 */
-uint otMathGetGlyphVariants(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, uint startOffset, ref harfbuzz.types.OtMathGlyphVariant[] variants)
+uint otMathGetGlyphVariants(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, uint startOffset, ref harfbuzz.types.OtMathGlyphVariant[] variants) nothrow
 {
   uint _retval;
   uint _variantsCount;
@@ -5294,7 +5469,7 @@ uint otMathGetGlyphVariants(harfbuzz.font.Font font, harfbuzz.types.Codepoint gl
       direction = direction of the stretching (horizontal or vertical)
     Returns: requested minimum connector overlap or zero
 */
-harfbuzz.types.Position otMathGetMinConnectorOverlap(harfbuzz.font.Font font, harfbuzz.types.Direction direction)
+harfbuzz.types.Position otMathGetMinConnectorOverlap(harfbuzz.font.Font font, harfbuzz.types.Direction direction) nothrow
 {
   harfbuzz.types.Position _retval;
   _retval = hb_ot_math_get_min_connector_overlap(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, direction);
@@ -5308,7 +5483,7 @@ harfbuzz.types.Position otMathGetMinConnectorOverlap(harfbuzz.font.Font font, ha
       face = #hb_face_t to test
     Returns: `true` if the table is found, `false` otherwise
 */
-harfbuzz.types.Bool otMathHasData(harfbuzz.face.Face face)
+harfbuzz.types.Bool otMathHasData(harfbuzz.face.Face face) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_math_has_data(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
@@ -5323,7 +5498,7 @@ harfbuzz.types.Bool otMathHasData(harfbuzz.face.Face face)
       glyph = The glyph index to test
     Returns: `true` if the glyph is an extended shape, `false` otherwise
 */
-harfbuzz.types.Bool otMathIsGlyphExtendedShape(harfbuzz.face.Face face, harfbuzz.types.Codepoint glyph)
+harfbuzz.types.Bool otMathIsGlyphExtendedShape(harfbuzz.face.Face face, harfbuzz.types.Codepoint glyph) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_math_is_glyph_extended_shape(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, glyph);
@@ -5338,7 +5513,7 @@ harfbuzz.types.Bool otMathIsGlyphExtendedShape(harfbuzz.face.Face face, harfbuzz
       metaTag = tag of metadata you like to have.
     Returns: A blob containing the blob.
 */
-harfbuzz.blob.Blob otMetaReferenceEntry(harfbuzz.face.Face face, harfbuzz.types.OtMetaTag metaTag)
+harfbuzz.blob.Blob otMetaReferenceEntry(harfbuzz.face.Face face, harfbuzz.types.OtMetaTag metaTag) nothrow
 {
   hb_blob_t* _cretval;
   _cretval = hb_ot_meta_reference_entry(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, metaTag);
@@ -5355,7 +5530,7 @@ harfbuzz.blob.Blob otMetaReferenceEntry(harfbuzz.face.Face face, harfbuzz.types.
       position = result of metrics value from the font.
     Returns: Whether found the requested metrics in the font.
 */
-harfbuzz.types.Bool otMetricsGetPosition(harfbuzz.font.Font font, harfbuzz.types.OtMetricsTag metricsTag, out harfbuzz.types.Position position)
+harfbuzz.types.Bool otMetricsGetPosition(harfbuzz.font.Font font, harfbuzz.types.OtMetricsTag metricsTag, out harfbuzz.types.Position position) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_metrics_get_position(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, metricsTag, cast(hb_position_t*)&position);
@@ -5371,7 +5546,7 @@ harfbuzz.types.Bool otMetricsGetPosition(harfbuzz.font.Font font, harfbuzz.types
       metricsTag = tag of metrics value you like to fetch.
       position = result of metrics value from the font.
 */
-void otMetricsGetPositionWithFallback(harfbuzz.font.Font font, harfbuzz.types.OtMetricsTag metricsTag, out harfbuzz.types.Position position)
+void otMetricsGetPositionWithFallback(harfbuzz.font.Font font, harfbuzz.types.OtMetricsTag metricsTag, out harfbuzz.types.Position position) nothrow
 {
   hb_ot_metrics_get_position_with_fallback(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, metricsTag, cast(hb_position_t*)&position);
 }
@@ -5385,7 +5560,7 @@ void otMetricsGetPositionWithFallback(harfbuzz.font.Font font, harfbuzz.types.Ot
       metricsTag = tag of metrics value you like to fetch.
     Returns: The requested metric value.
 */
-float otMetricsGetVariation(harfbuzz.font.Font font, harfbuzz.types.OtMetricsTag metricsTag)
+float otMetricsGetVariation(harfbuzz.font.Font font, harfbuzz.types.OtMetricsTag metricsTag) nothrow
 {
   float _retval;
   _retval = hb_ot_metrics_get_variation(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, metricsTag);
@@ -5401,7 +5576,7 @@ float otMetricsGetVariation(harfbuzz.font.Font font, harfbuzz.types.OtMetricsTag
       metricsTag = tag of metrics value you like to fetch.
     Returns: The requested metric value.
 */
-harfbuzz.types.Position otMetricsGetXVariation(harfbuzz.font.Font font, harfbuzz.types.OtMetricsTag metricsTag)
+harfbuzz.types.Position otMetricsGetXVariation(harfbuzz.font.Font font, harfbuzz.types.OtMetricsTag metricsTag) nothrow
 {
   harfbuzz.types.Position _retval;
   _retval = hb_ot_metrics_get_x_variation(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, metricsTag);
@@ -5417,7 +5592,7 @@ harfbuzz.types.Position otMetricsGetXVariation(harfbuzz.font.Font font, harfbuzz
       metricsTag = tag of metrics value you like to fetch.
     Returns: The requested metric value.
 */
-harfbuzz.types.Position otMetricsGetYVariation(harfbuzz.font.Font font, harfbuzz.types.OtMetricsTag metricsTag)
+harfbuzz.types.Position otMetricsGetYVariation(harfbuzz.font.Font font, harfbuzz.types.OtMetricsTag metricsTag) nothrow
 {
   harfbuzz.types.Position _retval;
   _retval = hb_ot_metrics_get_y_variation(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, metricsTag);
@@ -5433,7 +5608,7 @@ harfbuzz.types.Position otMetricsGetYVariation(harfbuzz.font.Font font, harfbuzz
 
     Deprecated: use [harfbuzz.global.otTagsFromScriptAndLanguage] instead
 */
-harfbuzz.types.Tag otTagFromLanguage(harfbuzz.types.Language language)
+harfbuzz.types.Tag otTagFromLanguage(harfbuzz.types.Language language) nothrow
 {
   harfbuzz.types.Tag _retval;
   _retval = hb_ot_tag_from_language(language);
@@ -5447,7 +5622,7 @@ harfbuzz.types.Tag otTagFromLanguage(harfbuzz.types.Language language)
       tag = an language tag
     Returns: The #hb_language_t corresponding to tag.
 */
-harfbuzz.types.Language otTagToLanguage(harfbuzz.types.Tag tag)
+harfbuzz.types.Language otTagToLanguage(harfbuzz.types.Tag tag) nothrow
 {
   auto _retval = hb_ot_tag_to_language(tag);
   return _retval;
@@ -5460,7 +5635,7 @@ harfbuzz.types.Language otTagToLanguage(harfbuzz.types.Tag tag)
       tag = a script tag
     Returns: The #hb_script_t corresponding to tag.
 */
-harfbuzz.types.Script otTagToScript(harfbuzz.types.Tag tag)
+harfbuzz.types.Script otTagToScript(harfbuzz.types.Tag tag) nothrow
 {
   hb_script_t _cretval;
   _cretval = hb_ot_tag_to_script(tag);
@@ -5478,7 +5653,7 @@ harfbuzz.types.Script otTagToScript(harfbuzz.types.Tag tag)
 
     Deprecated: use [harfbuzz.global.otTagsFromScriptAndLanguage] instead
 */
-void otTagsFromScript(harfbuzz.types.Script script, out harfbuzz.types.Tag scriptTag1, out harfbuzz.types.Tag scriptTag2)
+void otTagsFromScript(harfbuzz.types.Script script, out harfbuzz.types.Tag scriptTag1, out harfbuzz.types.Tag scriptTag2) nothrow
 {
   hb_ot_tags_from_script(script, cast(hb_tag_t*)&scriptTag1, cast(hb_tag_t*)&scriptTag2);
 }
@@ -5498,7 +5673,7 @@ void otTagsFromScript(harfbuzz.types.Script script, out harfbuzz.types.Tag scrip
       languageTags = array of size at least language_count to store
         the language tag results
 */
-void otTagsFromScriptAndLanguage(harfbuzz.types.Script script, harfbuzz.types.Language language, ref uint scriptCount, out harfbuzz.types.Tag scriptTags, ref uint languageCount, out harfbuzz.types.Tag languageTags)
+void otTagsFromScriptAndLanguage(harfbuzz.types.Script script, harfbuzz.types.Language language, ref uint scriptCount, out harfbuzz.types.Tag scriptTags, ref uint languageCount, out harfbuzz.types.Tag languageTags) nothrow
 {
   hb_ot_tags_from_script_and_language(script, language, cast(uint*)&scriptCount, cast(hb_tag_t*)&scriptTags, cast(uint*)&languageCount, cast(hb_tag_t*)&languageTags);
 }
@@ -5514,7 +5689,7 @@ void otTagsFromScriptAndLanguage(harfbuzz.types.Script script, harfbuzz.types.La
       language = the #hb_language_t corresponding to script_tag and
         language_tag.
 */
-void otTagsToScriptAndLanguage(harfbuzz.types.Tag scriptTag, harfbuzz.types.Tag languageTag, out harfbuzz.types.Script script, out harfbuzz.types.Language language)
+void otTagsToScriptAndLanguage(harfbuzz.types.Tag scriptTag, harfbuzz.types.Tag languageTag, out harfbuzz.types.Script script, out harfbuzz.types.Language language) nothrow
 {
   hb_ot_tags_to_script_and_language(scriptTag, languageTag, &script, &language);
 }
@@ -5529,7 +5704,7 @@ void otTagsToScriptAndLanguage(harfbuzz.types.Tag scriptTag, harfbuzz.types.Tag 
       axisInfo = The #hb_ot_var_axis_info_t of the axis tag queried
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool otVarFindAxisInfo(harfbuzz.face.Face face, harfbuzz.types.Tag axisTag, out harfbuzz.types.OtVarAxisInfo axisInfo)
+harfbuzz.types.Bool otVarFindAxisInfo(harfbuzz.face.Face face, harfbuzz.types.Tag axisTag, out harfbuzz.types.OtVarAxisInfo axisInfo) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_var_find_axis_info(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, axisTag, &axisInfo);
@@ -5548,7 +5723,7 @@ harfbuzz.types.Bool otVarFindAxisInfo(harfbuzz.face.Face face, harfbuzz.types.Ta
 
     Deprecated: use [harfbuzz.global.otVarGetAxisInfos] instead
 */
-uint otVarGetAxes(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.types.OtVarAxis[] axesArray)
+uint otVarGetAxes(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.types.OtVarAxis[] axesArray) nothrow
 {
   uint _retval;
   uint _axesCount;
@@ -5564,7 +5739,7 @@ uint otVarGetAxes(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.types.
       face = The #hb_face_t to work on
     Returns: the number of variation axes defined
 */
-uint otVarGetAxisCount(harfbuzz.face.Face face)
+uint otVarGetAxisCount(harfbuzz.face.Face face) nothrow
 {
   uint _retval;
   _retval = hb_ot_var_get_axis_count(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
@@ -5581,7 +5756,7 @@ uint otVarGetAxisCount(harfbuzz.face.Face face)
       axesArray = The array of variation axes found
     Returns: the number of variation axes in the face
 */
-uint otVarGetAxisInfos(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.types.OtVarAxisInfo[] axesArray)
+uint otVarGetAxisInfos(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.types.OtVarAxisInfo[] axesArray) nothrow
 {
   uint _retval;
   uint _axesCount;
@@ -5597,7 +5772,7 @@ uint otVarGetAxisInfos(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.t
       face = The #hb_face_t to work on
     Returns: the number of named instances defined
 */
-uint otVarGetNamedInstanceCount(harfbuzz.face.Face face)
+uint otVarGetNamedInstanceCount(harfbuzz.face.Face face) nothrow
 {
   uint _retval;
   _retval = hb_ot_var_get_named_instance_count(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
@@ -5611,7 +5786,7 @@ uint otVarGetNamedInstanceCount(harfbuzz.face.Face face)
       face = The #hb_face_t to work on
     Returns: `true` if data found, `false` otherwise
 */
-harfbuzz.types.Bool otVarHasData(harfbuzz.face.Face face)
+harfbuzz.types.Bool otVarHasData(harfbuzz.face.Face face) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_ot_var_has_data(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null);
@@ -5628,7 +5803,7 @@ harfbuzz.types.Bool otVarHasData(harfbuzz.face.Face face)
       coords = The array of coordinates found for the query
     Returns: the number of variation axes in the face
 */
-uint otVarNamedInstanceGetDesignCoords(harfbuzz.face.Face face, uint instanceIndex, ref float[] coords)
+uint otVarNamedInstanceGetDesignCoords(harfbuzz.face.Face face, uint instanceIndex, ref float[] coords) nothrow
 {
   uint _retval;
   uint _coordsLength;
@@ -5646,7 +5821,7 @@ uint otVarNamedInstanceGetDesignCoords(harfbuzz.face.Face face, uint instanceInd
       instanceIndex = The index of the named instance to query
     Returns: the Name ID found for the PostScript name
 */
-harfbuzz.types.OtNameId otVarNamedInstanceGetPostscriptNameId(harfbuzz.face.Face face, uint instanceIndex)
+harfbuzz.types.OtNameId otVarNamedInstanceGetPostscriptNameId(harfbuzz.face.Face face, uint instanceIndex) nothrow
 {
   harfbuzz.types.OtNameId _retval;
   _retval = hb_ot_var_named_instance_get_postscript_name_id(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, instanceIndex);
@@ -5662,7 +5837,7 @@ harfbuzz.types.OtNameId otVarNamedInstanceGetPostscriptNameId(harfbuzz.face.Face
       instanceIndex = The index of the named instance to query
     Returns: the Name ID found for the Subfamily name
 */
-harfbuzz.types.OtNameId otVarNamedInstanceGetSubfamilyNameId(harfbuzz.face.Face face, uint instanceIndex)
+harfbuzz.types.OtNameId otVarNamedInstanceGetSubfamilyNameId(harfbuzz.face.Face face, uint instanceIndex) nothrow
 {
   harfbuzz.types.OtNameId _retval;
   _retval = hb_ot_var_named_instance_get_subfamily_name_id(face ? cast(hb_face_t*)face._cPtr(No.Dup) : null, instanceIndex);
@@ -5685,7 +5860,7 @@ harfbuzz.types.OtNameId otVarNamedInstanceGetSubfamilyNameId(harfbuzz.face.Face 
       designCoords = The design-space coordinates to normalize
       normalizedCoords = The normalized coordinates
 */
-void otVarNormalizeCoords(harfbuzz.face.Face face, float[] designCoords, out int normalizedCoords)
+void otVarNormalizeCoords(harfbuzz.face.Face face, float[] designCoords, out int normalizedCoords) nothrow
 {
   uint _coordsLength;
   if (designCoords)
@@ -5704,7 +5879,7 @@ void otVarNormalizeCoords(harfbuzz.face.Face face, float[] designCoords, out int
       isForeground = whether the color is the foreground
       color = The color to use
 */
-void paintColor(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.Bool isForeground, harfbuzz.types.Color color)
+void paintColor(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.Bool isForeground, harfbuzz.types.Color color) nothrow
 {
   hb_paint_color(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, isForeground, color);
 }
@@ -5719,7 +5894,7 @@ void paintColor(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz
       font = the font
     Returns: 
 */
-harfbuzz.types.Bool paintColorGlyph(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.Codepoint glyph, harfbuzz.font.Font font)
+harfbuzz.types.Bool paintColorGlyph(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.Codepoint glyph, harfbuzz.font.Font font) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_paint_color_glyph(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, glyph, font ? cast(hb_font_t*)font._cPtr(No.Dup) : null);
@@ -5736,7 +5911,7 @@ harfbuzz.types.Bool paintColorGlyph(harfbuzz.paint_funcs.PaintFuncs funcs, void*
       color = fetched color
     Returns: `true` if found, `false` otherwise
 */
-harfbuzz.types.Bool paintCustomPaletteColor(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, uint colorIndex, out harfbuzz.types.Color color)
+harfbuzz.types.Bool paintCustomPaletteColor(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, uint colorIndex, out harfbuzz.types.Color color) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_paint_custom_palette_color(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, colorIndex, cast(hb_color_t*)&color);
@@ -5752,7 +5927,7 @@ harfbuzz.types.Bool paintCustomPaletteColor(harfbuzz.paint_funcs.PaintFuncs func
     object will be returned.
     Returns: the paint-functions structure
 */
-harfbuzz.paint_funcs.PaintFuncs paintFuncsCreate()
+harfbuzz.paint_funcs.PaintFuncs paintFuncsCreate() nothrow
 {
   hb_paint_funcs_t* _cretval;
   _cretval = hb_paint_funcs_create();
@@ -5764,7 +5939,7 @@ harfbuzz.paint_funcs.PaintFuncs paintFuncsCreate()
     Fetches the singleton empty paint-functions structure.
     Returns: The empty paint-functions structure
 */
-harfbuzz.paint_funcs.PaintFuncs paintFuncsGetEmpty()
+harfbuzz.paint_funcs.PaintFuncs paintFuncsGetEmpty() nothrow
 {
   hb_paint_funcs_t* _cretval;
   _cretval = hb_paint_funcs_get_empty();
@@ -5779,7 +5954,7 @@ harfbuzz.paint_funcs.PaintFuncs paintFuncsGetEmpty()
       funcs = The paint-functions structure
     Returns: `true` if funcs is immutable, `false` otherwise
 */
-harfbuzz.types.Bool paintFuncsIsImmutable(harfbuzz.paint_funcs.PaintFuncs funcs)
+harfbuzz.types.Bool paintFuncsIsImmutable(harfbuzz.paint_funcs.PaintFuncs funcs) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_paint_funcs_is_immutable(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null);
@@ -5795,7 +5970,7 @@ harfbuzz.types.Bool paintFuncsIsImmutable(harfbuzz.paint_funcs.PaintFuncs funcs)
     Params:
       funcs = The paint-functions structure
 */
-void paintFuncsMakeImmutable(harfbuzz.paint_funcs.PaintFuncs funcs)
+void paintFuncsMakeImmutable(harfbuzz.paint_funcs.PaintFuncs funcs) nothrow
 {
   hb_paint_funcs_make_immutable(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null);
 }
@@ -5807,13 +5982,20 @@ void paintFuncsMakeImmutable(harfbuzz.paint_funcs.PaintFuncs funcs)
       funcs = A paint functions struct
       func = The paint-color callback
 */
-void paintFuncsSetColorFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintColorFunc func)
+void paintFuncsSetColorFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintColorFunc func) nothrow
 {
-  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_bool_t isForeground, hb_color_t color, void* userData)
+  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_bool_t isForeground, hb_color_t color, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintColorFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, isForeground, color);
+    try
+    {
+      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, isForeground, color);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintColorFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -5828,14 +6010,21 @@ void paintFuncsSetColorFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.type
       funcs = A paint functions struct
       func = The color-glyph callback
 */
-void paintFuncsSetColorGlyphFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintColorGlyphFunc func)
+void paintFuncsSetColorGlyphFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintColorGlyphFunc func) nothrow
 {
-  extern(C) hb_bool_t _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_codepoint_t glyph, hb_font_t* font, void* userData)
+  extern(C) hb_bool_t _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_codepoint_t glyph, hb_font_t* font, void* userData) nothrow
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.PaintColorGlyphFunc*)userData;
 
-    _dretval = (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, glyph, font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null);
+    try
+    {
+      _dretval = (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, glyph, font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintColorGlyphFunc");
+    }
     auto _retval = cast(hb_bool_t)_dretval;
 
     return _retval;
@@ -5853,14 +6042,21 @@ void paintFuncsSetColorGlyphFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz
       funcs = A paint functions struct
       func = The custom-palette-color callback
 */
-void paintFuncsSetCustomPaletteColorFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintCustomPaletteColorFunc func)
+void paintFuncsSetCustomPaletteColorFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintCustomPaletteColorFunc func) nothrow
 {
-  extern(C) hb_bool_t _funcCallback(hb_paint_funcs_t* funcs, void* paintData, uint colorIndex, hb_color_t* color, void* userData)
+  extern(C) hb_bool_t _funcCallback(hb_paint_funcs_t* funcs, void* paintData, uint colorIndex, hb_color_t* color, void* userData) nothrow
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.PaintCustomPaletteColorFunc*)userData;
 
-    _dretval = (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorIndex, *color);
+    try
+    {
+      _dretval = (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorIndex, *color);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintCustomPaletteColorFunc");
+    }
     auto _retval = cast(hb_bool_t)_dretval;
 
     return _retval;
@@ -5878,14 +6074,21 @@ void paintFuncsSetCustomPaletteColorFunc(harfbuzz.paint_funcs.PaintFuncs funcs, 
       funcs = A paint functions struct
       func = The paint-image callback
 */
-void paintFuncsSetImageFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintImageFunc func)
+void paintFuncsSetImageFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintImageFunc func) nothrow
 {
-  extern(C) hb_bool_t _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_blob_t* image, uint width, uint height, hb_tag_t format, float slant, hb_glyph_extents_t* extents, void* userData)
+  extern(C) hb_bool_t _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_blob_t* image, uint width, uint height, hb_tag_t format, float slant, hb_glyph_extents_t* extents, void* userData) nothrow
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.PaintImageFunc*)userData;
 
-    _dretval = (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, image ? new harfbuzz.blob.Blob(cast(void*)image, No.Take) : null, width, height, format, slant, *cast(harfbuzz.types.GlyphExtents*)extents);
+    try
+    {
+      _dretval = (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, image ? new harfbuzz.blob.Blob(cast(void*)image, No.Take) : null, width, height, format, slant, *cast(harfbuzz.types.GlyphExtents*)extents);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintImageFunc");
+    }
     auto _retval = cast(hb_bool_t)_dretval;
 
     return _retval;
@@ -5903,13 +6106,20 @@ void paintFuncsSetImageFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.type
       funcs = A paint functions struct
       func = The linear-gradient callback
 */
-void paintFuncsSetLinearGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintLinearGradientFunc func)
+void paintFuncsSetLinearGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintLinearGradientFunc func) nothrow
 {
-  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_color_line_t* colorLine, float x0, float y0, float x1, float y1, float x2, float y2, void* userData)
+  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_color_line_t* colorLine, float x0, float y0, float x1, float y1, float x2, float y2, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintLinearGradientFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, x1, y1, x2, y2);
+    try
+    {
+      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, x1, y1, x2, y2);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintLinearGradientFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -5924,13 +6134,20 @@ void paintFuncsSetLinearGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harf
       funcs = A paint functions struct
       func = The pop-clip callback
 */
-void paintFuncsSetPopClipFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintPopClipFunc func)
+void paintFuncsSetPopClipFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintPopClipFunc func) nothrow
 {
-  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, void* userData)
+  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintPopClipFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData);
+    try
+    {
+      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintPopClipFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -5945,13 +6162,20 @@ void paintFuncsSetPopClipFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.ty
       funcs = A paint functions struct
       func = The pop-group callback
 */
-void paintFuncsSetPopGroupFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintPopGroupFunc func)
+void paintFuncsSetPopGroupFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintPopGroupFunc func) nothrow
 {
-  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_paint_composite_mode_t mode, void* userData)
+  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_paint_composite_mode_t mode, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintPopGroupFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, mode);
+    try
+    {
+      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, mode);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintPopGroupFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -5966,13 +6190,20 @@ void paintFuncsSetPopGroupFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.t
       funcs = A paint functions struct
       func = The pop-transform callback
 */
-void paintFuncsSetPopTransformFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintPopTransformFunc func)
+void paintFuncsSetPopTransformFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintPopTransformFunc func) nothrow
 {
-  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, void* userData)
+  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintPopTransformFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData);
+    try
+    {
+      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintPopTransformFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -5987,13 +6218,20 @@ void paintFuncsSetPopTransformFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbu
       funcs = A paint functions struct
       func = The push-clip-glyph callback
 */
-void paintFuncsSetPushClipGlyphFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintPushClipGlyphFunc func)
+void paintFuncsSetPushClipGlyphFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintPushClipGlyphFunc func) nothrow
 {
-  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_codepoint_t glyph, hb_font_t* font, void* userData)
+  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_codepoint_t glyph, hb_font_t* font, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintPushClipGlyphFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, glyph, font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null);
+    try
+    {
+      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, glyph, font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintPushClipGlyphFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -6008,13 +6246,20 @@ void paintFuncsSetPushClipGlyphFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfb
       funcs = A paint functions struct
       func = The push-clip-rectangle callback
 */
-void paintFuncsSetPushClipRectangleFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintPushClipRectangleFunc func)
+void paintFuncsSetPushClipRectangleFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintPushClipRectangleFunc func) nothrow
 {
-  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, float xmin, float ymin, float xmax, float ymax, void* userData)
+  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, float xmin, float ymin, float xmax, float ymax, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintPushClipRectangleFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, xmin, ymin, xmax, ymax);
+    try
+    {
+      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, xmin, ymin, xmax, ymax);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintPushClipRectangleFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -6029,13 +6274,20 @@ void paintFuncsSetPushClipRectangleFunc(harfbuzz.paint_funcs.PaintFuncs funcs, h
       funcs = A paint functions struct
       func = The push-group callback
 */
-void paintFuncsSetPushGroupFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintPushGroupFunc func)
+void paintFuncsSetPushGroupFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintPushGroupFunc func) nothrow
 {
-  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, void* userData)
+  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintPushGroupFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData);
+    try
+    {
+      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintPushGroupFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -6050,13 +6302,20 @@ void paintFuncsSetPushGroupFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.
       funcs = A paint functions struct
       func = The push-transform callback
 */
-void paintFuncsSetPushTransformFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintPushTransformFunc func)
+void paintFuncsSetPushTransformFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintPushTransformFunc func) nothrow
 {
-  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, float xx, float yx, float xy, float yy, float dx, float dy, void* userData)
+  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, float xx, float yx, float xy, float yy, float dx, float dy, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintPushTransformFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, xx, yx, xy, yy, dx, dy);
+    try
+    {
+      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, xx, yx, xy, yy, dx, dy);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintPushTransformFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -6071,13 +6330,20 @@ void paintFuncsSetPushTransformFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfb
       funcs = A paint functions struct
       func = The radial-gradient callback
 */
-void paintFuncsSetRadialGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintRadialGradientFunc func)
+void paintFuncsSetRadialGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintRadialGradientFunc func) nothrow
 {
-  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_color_line_t* colorLine, float x0, float y0, float r0, float x1, float y1, float r1, void* userData)
+  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_color_line_t* colorLine, float x0, float y0, float r0, float x1, float y1, float r1, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintRadialGradientFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, r0, x1, y1, r1);
+    try
+    {
+      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, r0, x1, y1, r1);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintRadialGradientFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -6092,13 +6358,20 @@ void paintFuncsSetRadialGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harf
       funcs = A paint functions struct
       func = The sweep-gradient callback
 */
-void paintFuncsSetSweepGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintSweepGradientFunc func)
+void paintFuncsSetSweepGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.types.PaintSweepGradientFunc func) nothrow
 {
-  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_color_line_t* colorLine, float x0, float y0, float startAngle, float endAngle, void* userData)
+  extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_color_line_t* colorLine, float x0, float y0, float startAngle, float endAngle, void* userData) nothrow
   {
     auto _dlg = cast(harfbuzz.types.PaintSweepGradientFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, startAngle, endAngle);
+    try
+    {
+      (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, startAngle, endAngle);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.PaintSweepGradientFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -6119,7 +6392,7 @@ void paintFuncsSetSweepGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfb
       slant = the synthetic slant ratio to be applied to the image during rendering
       extents = the extents of the glyph
 */
-void paintImage(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.blob.Blob image, uint width, uint height, harfbuzz.types.Tag format, float slant, harfbuzz.types.GlyphExtents extents)
+void paintImage(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.blob.Blob image, uint width, uint height, harfbuzz.types.Tag format, float slant, harfbuzz.types.GlyphExtents extents) nothrow
 {
   hb_paint_image(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, image ? cast(hb_blob_t*)image._cPtr(No.Dup) : null, width, height, format, slant, &extents);
 }
@@ -6138,7 +6411,7 @@ void paintImage(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz
       x2 = X coordinate of the third point
       y2 = Y coordinate of the third point
 */
-void paintLinearGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float x1, float y1, float x2, float y2)
+void paintLinearGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float x1, float y1, float x2, float y2) nothrow
 {
   hb_paint_linear_gradient(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, colorLine ? cast(hb_color_line_t*)colorLine._cPtr(No.Dup) : null, x0, y0, x1, y1, x2, y2);
 }
@@ -6150,7 +6423,7 @@ void paintLinearGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData,
       funcs = paint functions
       paintData = associated data passed by the caller
 */
-void paintPopClip(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData = null)
+void paintPopClip(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData = null) nothrow
 {
   hb_paint_pop_clip(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData);
 }
@@ -6163,7 +6436,7 @@ void paintPopClip(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData = null)
       paintData = associated data passed by the caller
       mode = the compositing mode to use
 */
-void paintPopGroup(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.PaintCompositeMode mode)
+void paintPopGroup(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.PaintCompositeMode mode) nothrow
 {
   hb_paint_pop_group(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, mode);
 }
@@ -6175,7 +6448,7 @@ void paintPopGroup(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfb
       funcs = paint functions
       paintData = associated data passed by the caller
 */
-void paintPopTransform(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData = null)
+void paintPopTransform(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData = null) nothrow
 {
   hb_paint_pop_transform(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData);
 }
@@ -6189,7 +6462,7 @@ void paintPopTransform(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData = 
       glyph = the glyph ID
       font = the font
 */
-void paintPushClipGlyph(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.Codepoint glyph, harfbuzz.font.Font font)
+void paintPushClipGlyph(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.Codepoint glyph, harfbuzz.font.Font font) nothrow
 {
   hb_paint_push_clip_glyph(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, glyph, font ? cast(hb_font_t*)font._cPtr(No.Dup) : null);
 }
@@ -6205,7 +6478,7 @@ void paintPushClipGlyph(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, 
       xmax = max X for the rectangle
       ymax = max Y for the rectangle
 */
-void paintPushClipRectangle(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, float xmin, float ymin, float xmax, float ymax)
+void paintPushClipRectangle(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, float xmin, float ymin, float xmax, float ymax) nothrow
 {
   hb_paint_push_clip_rectangle(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, xmin, ymin, xmax, ymax);
 }
@@ -6217,7 +6490,7 @@ void paintPushClipRectangle(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintDa
       funcs = paint functions
       paintData = associated data passed by the caller
 */
-void paintPushGroup(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData = null)
+void paintPushGroup(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData = null) nothrow
 {
   hb_paint_push_group(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData);
 }
@@ -6235,7 +6508,7 @@ void paintPushGroup(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData = nul
       dx = dx component of the transform matrix
       dy = dy component of the transform matrix
 */
-void paintPushTransform(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, float xx, float yx, float xy, float yy, float dx, float dy)
+void paintPushTransform(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, float xx, float yx, float xy, float yy, float dx, float dy) nothrow
 {
   hb_paint_push_transform(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, xx, yx, xy, yy, dx, dy);
 }
@@ -6254,7 +6527,7 @@ void paintPushTransform(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, 
       y1 = Y coordinate of the second circle's center
       r1 = radius of the second circle
 */
-void paintRadialGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float r0, float x1, float y1, float r1)
+void paintRadialGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float r0, float x1, float y1, float r1) nothrow
 {
   hb_paint_radial_gradient(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, colorLine ? cast(hb_color_line_t*)colorLine._cPtr(No.Dup) : null, x0, y0, r0, x1, y1, r1);
 }
@@ -6271,7 +6544,7 @@ void paintRadialGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData,
       startAngle = the start angle
       endAngle = the end angle
 */
-void paintSweepGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float startAngle, float endAngle)
+void paintSweepGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float startAngle, float endAngle) nothrow
 {
   hb_paint_sweep_gradient(funcs ? cast(hb_paint_funcs_t*)funcs._cPtr(No.Dup) : null, paintData, colorLine ? cast(hb_color_line_t*)colorLine._cPtr(No.Dup) : null, x0, y0, startAngle, endAngle);
 }
@@ -6283,7 +6556,7 @@ void paintSweepGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, 
       tag = an #hb_tag_t representing an ISO 15924 tag.
     Returns: An #hb_script_t corresponding to the ISO 15924 tag.
 */
-harfbuzz.types.Script scriptFromIso15924Tag(harfbuzz.types.Tag tag)
+harfbuzz.types.Script scriptFromIso15924Tag(harfbuzz.types.Tag tag) nothrow
 {
   hb_script_t _cretval;
   _cretval = hb_script_from_iso15924_tag(tag);
@@ -6301,7 +6574,7 @@ harfbuzz.types.Script scriptFromIso15924Tag(harfbuzz.types.Tag tag)
               ISO 15924 tag.
     Returns: An #hb_script_t corresponding to the ISO 15924 tag.
 */
-harfbuzz.types.Script scriptFromString(ubyte[] str)
+harfbuzz.types.Script scriptFromString(ubyte[] str) nothrow
 {
   hb_script_t _cretval;
   int _len;
@@ -6326,7 +6599,7 @@ harfbuzz.types.Script scriptFromString(ubyte[] str)
       script = The #hb_script_t to query
     Returns: The horizontal #hb_direction_t of script
 */
-harfbuzz.types.Direction scriptGetHorizontalDirection(harfbuzz.types.Script script)
+harfbuzz.types.Direction scriptGetHorizontalDirection(harfbuzz.types.Script script) nothrow
 {
   hb_direction_t _cretval;
   _cretval = hb_script_get_horizontal_direction(script);
@@ -6341,7 +6614,7 @@ harfbuzz.types.Direction scriptGetHorizontalDirection(harfbuzz.types.Script scri
       script = an #hb_script_t to convert.
     Returns: An #hb_tag_t representing an ISO 15924 script tag.
 */
-harfbuzz.types.Tag scriptToIso15924Tag(harfbuzz.types.Script script)
+harfbuzz.types.Tag scriptToIso15924Tag(harfbuzz.types.Script script) nothrow
 {
   harfbuzz.types.Tag _retval;
   _retval = hb_script_to_iso15924_tag(script);
@@ -6356,7 +6629,7 @@ harfbuzz.types.Tag scriptToIso15924Tag(harfbuzz.types.Script script)
       b = second #hb_segment_properties_t to compare.
     Returns: `true` if all properties of `a` equal those of `b`, `false` otherwise.
 */
-harfbuzz.types.Bool segmentPropertiesEqual(harfbuzz.segment_properties.SegmentProperties a, harfbuzz.segment_properties.SegmentProperties b)
+harfbuzz.types.Bool segmentPropertiesEqual(harfbuzz.segment_properties.SegmentProperties a, harfbuzz.segment_properties.SegmentProperties b) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_segment_properties_equal(a ? cast(const(hb_segment_properties_t)*)a._cPtr(No.Dup) : null, b ? cast(const(hb_segment_properties_t)*)b._cPtr(No.Dup) : null);
@@ -6370,7 +6643,7 @@ harfbuzz.types.Bool segmentPropertiesEqual(harfbuzz.segment_properties.SegmentPr
       p = #hb_segment_properties_t to hash.
     Returns: A hash of `p`.
 */
-uint segmentPropertiesHash(harfbuzz.segment_properties.SegmentProperties p)
+uint segmentPropertiesHash(harfbuzz.segment_properties.SegmentProperties p) nothrow
 {
   uint _retval;
   _retval = hb_segment_properties_hash(p ? cast(const(hb_segment_properties_t)*)p._cPtr(No.Dup) : null);
@@ -6393,7 +6666,7 @@ uint segmentPropertiesHash(harfbuzz.segment_properties.SegmentProperties p)
       p = #hb_segment_properties_t to fill in.
       src = #hb_segment_properties_t to fill in from.
 */
-void segmentPropertiesOverlay(harfbuzz.segment_properties.SegmentProperties p, harfbuzz.segment_properties.SegmentProperties src)
+void segmentPropertiesOverlay(harfbuzz.segment_properties.SegmentProperties p, harfbuzz.segment_properties.SegmentProperties src) nothrow
 {
   hb_segment_properties_overlay(p ? cast(hb_segment_properties_t*)p._cPtr(No.Dup) : null, src ? cast(const(hb_segment_properties_t)*)src._cPtr(No.Dup) : null);
 }
@@ -6405,7 +6678,7 @@ void segmentPropertiesOverlay(harfbuzz.segment_properties.SegmentProperties p, h
       set = A set
       codepoint = The element to add to set
 */
-void setAdd(harfbuzz.set.Set set, harfbuzz.types.Codepoint codepoint)
+void setAdd(harfbuzz.set.Set set, harfbuzz.types.Codepoint codepoint) nothrow
 {
   hb_set_add(set ? cast(hb_set_t*)set._cPtr(No.Dup) : null, codepoint);
 }
@@ -6419,7 +6692,7 @@ void setAdd(harfbuzz.set.Set set, harfbuzz.types.Codepoint codepoint)
       first = The first element to add to set
       last = The final element to add to set
 */
-void setAddRange(harfbuzz.set.Set set, harfbuzz.types.Codepoint first, harfbuzz.types.Codepoint last)
+void setAddRange(harfbuzz.set.Set set, harfbuzz.types.Codepoint first, harfbuzz.types.Codepoint last) nothrow
 {
   hb_set_add_range(set ? cast(hb_set_t*)set._cPtr(No.Dup) : null, first, last);
 }
@@ -6433,7 +6706,7 @@ void setAddRange(harfbuzz.set.Set set, harfbuzz.types.Codepoint first, harfbuzz.
       set = A set
       sortedCodepoints = Array of codepoints to add
 */
-void setAddSortedArray(harfbuzz.set.Set set, harfbuzz.types.Codepoint[] sortedCodepoints)
+void setAddSortedArray(harfbuzz.set.Set set, harfbuzz.types.Codepoint[] sortedCodepoints) nothrow
 {
   uint _numCodepoints;
   if (sortedCodepoints)
@@ -6450,7 +6723,7 @@ void setAddSortedArray(harfbuzz.set.Set set, harfbuzz.types.Codepoint[] sortedCo
       set = A set
     Returns: `true` if allocation succeeded, `false` otherwise
 */
-harfbuzz.types.Bool setAllocationSuccessful(harfbuzz.set.Set set)
+harfbuzz.types.Bool setAllocationSuccessful(harfbuzz.set.Set set) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_set_allocation_successful(set ? cast(const(hb_set_t)*)set._cPtr(No.Dup) : null);
@@ -6463,7 +6736,7 @@ harfbuzz.types.Bool setAllocationSuccessful(harfbuzz.set.Set set)
     Params:
       set = A set
 */
-void setClear(harfbuzz.set.Set set)
+void setClear(harfbuzz.set.Set set) nothrow
 {
   hb_set_clear(set ? cast(hb_set_t*)set._cPtr(No.Dup) : null);
 }
@@ -6475,7 +6748,7 @@ void setClear(harfbuzz.set.Set set)
       set = A set
     Returns: Newly-allocated set.
 */
-harfbuzz.set.Set setCopy(harfbuzz.set.Set set)
+harfbuzz.set.Set setCopy(harfbuzz.set.Set set) nothrow
 {
   hb_set_t* _cretval;
   _cretval = hb_set_copy(set ? cast(const(hb_set_t)*)set._cPtr(No.Dup) : null);
@@ -6487,7 +6760,7 @@ harfbuzz.set.Set setCopy(harfbuzz.set.Set set)
     Creates a new, initially empty set.
     Returns: The new #hb_set_t
 */
-harfbuzz.set.Set setCreate()
+harfbuzz.set.Set setCreate() nothrow
 {
   hb_set_t* _cretval;
   _cretval = hb_set_create();
@@ -6502,7 +6775,7 @@ harfbuzz.set.Set setCreate()
       set = A set
       codepoint = Removes codepoint from set
 */
-void setDel(harfbuzz.set.Set set, harfbuzz.types.Codepoint codepoint)
+void setDel(harfbuzz.set.Set set, harfbuzz.types.Codepoint codepoint) nothrow
 {
   hb_set_del(set ? cast(hb_set_t*)set._cPtr(No.Dup) : null, codepoint);
 }
@@ -6519,7 +6792,7 @@ void setDel(harfbuzz.set.Set set, harfbuzz.types.Codepoint codepoint)
       first = The first element to remove from set
       last = The final element to remove from set
 */
-void setDelRange(harfbuzz.set.Set set, harfbuzz.types.Codepoint first, harfbuzz.types.Codepoint last)
+void setDelRange(harfbuzz.set.Set set, harfbuzz.types.Codepoint first, harfbuzz.types.Codepoint last) nothrow
 {
   hb_set_del_range(set ? cast(hb_set_t*)set._cPtr(No.Dup) : null, first, last);
 }
@@ -6528,7 +6801,7 @@ void setDelRange(harfbuzz.set.Set set, harfbuzz.types.Codepoint first, harfbuzz.
     Fetches the singleton empty #hb_set_t.
     Returns: The empty #hb_set_t
 */
-harfbuzz.set.Set setGetEmpty()
+harfbuzz.set.Set setGetEmpty() nothrow
 {
   hb_set_t* _cretval;
   _cretval = hb_set_get_empty();
@@ -6543,7 +6816,7 @@ harfbuzz.set.Set setGetEmpty()
       set = A set
     Returns: maximum of set, or #HB_SET_VALUE_INVALID if set is empty.
 */
-harfbuzz.types.Codepoint setGetMax(harfbuzz.set.Set set)
+harfbuzz.types.Codepoint setGetMax(harfbuzz.set.Set set) nothrow
 {
   harfbuzz.types.Codepoint _retval;
   _retval = hb_set_get_max(set ? cast(const(hb_set_t)*)set._cPtr(No.Dup) : null);
@@ -6557,7 +6830,7 @@ harfbuzz.types.Codepoint setGetMax(harfbuzz.set.Set set)
       set = A set
     Returns: minimum of set, or #HB_SET_VALUE_INVALID if set is empty.
 */
-harfbuzz.types.Codepoint setGetMin(harfbuzz.set.Set set)
+harfbuzz.types.Codepoint setGetMin(harfbuzz.set.Set set) nothrow
 {
   harfbuzz.types.Codepoint _retval;
   _retval = hb_set_get_min(set ? cast(const(hb_set_t)*)set._cPtr(No.Dup) : null);
@@ -6571,7 +6844,7 @@ harfbuzz.types.Codepoint setGetMin(harfbuzz.set.Set set)
       set = A set
     Returns: The population of set
 */
-uint setGetPopulation(harfbuzz.set.Set set)
+uint setGetPopulation(harfbuzz.set.Set set) nothrow
 {
   uint _retval;
   _retval = hb_set_get_population(set ? cast(const(hb_set_t)*)set._cPtr(No.Dup) : null);
@@ -6586,7 +6859,7 @@ uint setGetPopulation(harfbuzz.set.Set set)
       codepoint = The element to query
     Returns: `true` if codepoint is in set, `false` otherwise
 */
-harfbuzz.types.Bool setHas(harfbuzz.set.Set set, harfbuzz.types.Codepoint codepoint)
+harfbuzz.types.Bool setHas(harfbuzz.set.Set set, harfbuzz.types.Codepoint codepoint) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_set_has(set ? cast(const(hb_set_t)*)set._cPtr(No.Dup) : null, codepoint);
@@ -6600,7 +6873,7 @@ harfbuzz.types.Bool setHas(harfbuzz.set.Set set, harfbuzz.types.Codepoint codepo
       set = A set
     Returns: A hash of set.
 */
-uint setHash(harfbuzz.set.Set set)
+uint setHash(harfbuzz.set.Set set) nothrow
 {
   uint _retval;
   _retval = hb_set_hash(set ? cast(const(hb_set_t)*)set._cPtr(No.Dup) : null);
@@ -6614,7 +6887,7 @@ uint setHash(harfbuzz.set.Set set)
       set = A set
       other = Another set
 */
-void setIntersect(harfbuzz.set.Set set, harfbuzz.set.Set other)
+void setIntersect(harfbuzz.set.Set set, harfbuzz.set.Set other) nothrow
 {
   hb_set_intersect(set ? cast(hb_set_t*)set._cPtr(No.Dup) : null, other ? cast(const(hb_set_t)*)other._cPtr(No.Dup) : null);
 }
@@ -6625,7 +6898,7 @@ void setIntersect(harfbuzz.set.Set set, harfbuzz.set.Set other)
     Params:
       set = A set
 */
-void setInvert(harfbuzz.set.Set set)
+void setInvert(harfbuzz.set.Set set) nothrow
 {
   hb_set_invert(set ? cast(hb_set_t*)set._cPtr(No.Dup) : null);
 }
@@ -6637,7 +6910,7 @@ void setInvert(harfbuzz.set.Set set)
       set = a set.
     Returns: `true` if set is empty
 */
-harfbuzz.types.Bool setIsEmpty(harfbuzz.set.Set set)
+harfbuzz.types.Bool setIsEmpty(harfbuzz.set.Set set) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_set_is_empty(set ? cast(const(hb_set_t)*)set._cPtr(No.Dup) : null);
@@ -6653,7 +6926,7 @@ harfbuzz.types.Bool setIsEmpty(harfbuzz.set.Set set)
       other = Another set
     Returns: `true` if the two sets are equal, `false` otherwise.
 */
-harfbuzz.types.Bool setIsEqual(harfbuzz.set.Set set, harfbuzz.set.Set other)
+harfbuzz.types.Bool setIsEqual(harfbuzz.set.Set set, harfbuzz.set.Set other) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_set_is_equal(set ? cast(const(hb_set_t)*)set._cPtr(No.Dup) : null, other ? cast(const(hb_set_t)*)other._cPtr(No.Dup) : null);
@@ -6667,7 +6940,7 @@ harfbuzz.types.Bool setIsEqual(harfbuzz.set.Set set, harfbuzz.set.Set other)
       set = A set
     Returns: `true` if the set is inverted, `false` otherwise
 */
-harfbuzz.types.Bool setIsInverted(harfbuzz.set.Set set)
+harfbuzz.types.Bool setIsInverted(harfbuzz.set.Set set) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_set_is_inverted(set ? cast(const(hb_set_t)*)set._cPtr(No.Dup) : null);
@@ -6682,7 +6955,7 @@ harfbuzz.types.Bool setIsInverted(harfbuzz.set.Set set)
       largerSet = Another set
     Returns: `true` if the set is a subset of (or equal to) larger_set, `false` otherwise.
 */
-harfbuzz.types.Bool setIsSubset(harfbuzz.set.Set set, harfbuzz.set.Set largerSet)
+harfbuzz.types.Bool setIsSubset(harfbuzz.set.Set set, harfbuzz.set.Set largerSet) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_set_is_subset(set ? cast(const(hb_set_t)*)set._cPtr(No.Dup) : null, largerSet ? cast(const(hb_set_t)*)largerSet._cPtr(No.Dup) : null);
@@ -6700,7 +6973,7 @@ harfbuzz.types.Bool setIsSubset(harfbuzz.set.Set set, harfbuzz.set.Set largerSet
                     Output = Code point retrieved
     Returns: `true` if there was a next value, `false` otherwise
 */
-harfbuzz.types.Bool setNext(harfbuzz.set.Set set, ref harfbuzz.types.Codepoint codepoint)
+harfbuzz.types.Bool setNext(harfbuzz.set.Set set, ref harfbuzz.types.Codepoint codepoint) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_set_next(set ? cast(const(hb_set_t)*)set._cPtr(No.Dup) : null, cast(hb_codepoint_t*)&codepoint);
@@ -6719,7 +6992,7 @@ harfbuzz.types.Bool setNext(harfbuzz.set.Set set, ref harfbuzz.types.Codepoint c
       out_ = An array of codepoints to write to.
     Returns: the number of values written.
 */
-uint setNextMany(harfbuzz.set.Set set, harfbuzz.types.Codepoint codepoint, harfbuzz.types.Codepoint[] out_)
+uint setNextMany(harfbuzz.set.Set set, harfbuzz.types.Codepoint codepoint, harfbuzz.types.Codepoint[] out_) nothrow
 {
   uint _retval;
   uint _size;
@@ -6744,7 +7017,7 @@ uint setNextMany(harfbuzz.set.Set set, harfbuzz.types.Codepoint codepoint, harfb
                 Output = The last code point in the range
     Returns: `true` if there was a next range, `false` otherwise
 */
-harfbuzz.types.Bool setNextRange(harfbuzz.set.Set set, out harfbuzz.types.Codepoint first, ref harfbuzz.types.Codepoint last)
+harfbuzz.types.Bool setNextRange(harfbuzz.set.Set set, out harfbuzz.types.Codepoint first, ref harfbuzz.types.Codepoint last) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_set_next_range(set ? cast(const(hb_set_t)*)set._cPtr(No.Dup) : null, cast(hb_codepoint_t*)&first, cast(hb_codepoint_t*)&last);
@@ -6762,7 +7035,7 @@ harfbuzz.types.Bool setNextRange(harfbuzz.set.Set set, out harfbuzz.types.Codepo
                     Output = Code point retrieved
     Returns: `true` if there was a previous value, `false` otherwise
 */
-harfbuzz.types.Bool setPrevious(harfbuzz.set.Set set, ref harfbuzz.types.Codepoint codepoint)
+harfbuzz.types.Bool setPrevious(harfbuzz.set.Set set, ref harfbuzz.types.Codepoint codepoint) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_set_previous(set ? cast(const(hb_set_t)*)set._cPtr(No.Dup) : null, cast(hb_codepoint_t*)&codepoint);
@@ -6782,7 +7055,7 @@ harfbuzz.types.Bool setPrevious(harfbuzz.set.Set set, ref harfbuzz.types.Codepoi
       last = The last code point in the range
     Returns: `true` if there was a previous range, `false` otherwise
 */
-harfbuzz.types.Bool setPreviousRange(harfbuzz.set.Set set, ref harfbuzz.types.Codepoint first, out harfbuzz.types.Codepoint last)
+harfbuzz.types.Bool setPreviousRange(harfbuzz.set.Set set, ref harfbuzz.types.Codepoint first, out harfbuzz.types.Codepoint last) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_set_previous_range(set ? cast(const(hb_set_t)*)set._cPtr(No.Dup) : null, cast(hb_codepoint_t*)&first, cast(hb_codepoint_t*)&last);
@@ -6796,7 +7069,7 @@ harfbuzz.types.Bool setPreviousRange(harfbuzz.set.Set set, ref harfbuzz.types.Co
       set = A set
       other = Another set
 */
-void setSet(harfbuzz.set.Set set, harfbuzz.set.Set other)
+void setSet(harfbuzz.set.Set set, harfbuzz.set.Set other) nothrow
 {
   hb_set_set(set ? cast(hb_set_t*)set._cPtr(No.Dup) : null, other ? cast(const(hb_set_t)*)other._cPtr(No.Dup) : null);
 }
@@ -6808,7 +7081,7 @@ void setSet(harfbuzz.set.Set set, harfbuzz.set.Set other)
       set = A set
       other = Another set
 */
-void setSubtract(harfbuzz.set.Set set, harfbuzz.set.Set other)
+void setSubtract(harfbuzz.set.Set set, harfbuzz.set.Set other) nothrow
 {
   hb_set_subtract(set ? cast(hb_set_t*)set._cPtr(No.Dup) : null, other ? cast(const(hb_set_t)*)other._cPtr(No.Dup) : null);
 }
@@ -6821,7 +7094,7 @@ void setSubtract(harfbuzz.set.Set set, harfbuzz.set.Set other)
       set = A set
       other = Another set
 */
-void setSymmetricDifference(harfbuzz.set.Set set, harfbuzz.set.Set other)
+void setSymmetricDifference(harfbuzz.set.Set set, harfbuzz.set.Set other) nothrow
 {
   hb_set_symmetric_difference(set ? cast(hb_set_t*)set._cPtr(No.Dup) : null, other ? cast(const(hb_set_t)*)other._cPtr(No.Dup) : null);
 }
@@ -6833,7 +7106,7 @@ void setSymmetricDifference(harfbuzz.set.Set set, harfbuzz.set.Set other)
       set = A set
       other = Another set
 */
-void setUnion(harfbuzz.set.Set set, harfbuzz.set.Set other)
+void setUnion(harfbuzz.set.Set set, harfbuzz.set.Set other) nothrow
 {
   hb_set_union(set ? cast(hb_set_t*)set._cPtr(No.Dup) : null, other ? cast(const(hb_set_t)*)other._cPtr(No.Dup) : null);
 }
@@ -6851,7 +7124,7 @@ void setUnion(harfbuzz.set.Set set, harfbuzz.set.Set other)
       features = an array of user
            specified #hb_feature_t or `NULL`
 */
-void shape(harfbuzz.font.Font font, harfbuzz.buffer.Buffer buffer, harfbuzz.feature.Feature[] features = null)
+void shape(harfbuzz.font.Font font, harfbuzz.buffer.Buffer buffer, harfbuzz.feature.Feature[] features = null) nothrow
 {
   uint _numFeatures;
   if (features)
@@ -6875,7 +7148,7 @@ void shape(harfbuzz.font.Font font, harfbuzz.buffer.Buffer buffer, harfbuzz.feat
            array of shapers to use or `NULL`
     Returns: false if all shapers failed, true otherwise
 */
-harfbuzz.types.Bool shapeFull(harfbuzz.font.Font font, harfbuzz.buffer.Buffer buffer, harfbuzz.feature.Feature[] features = null, string[] shaperList = null)
+harfbuzz.types.Bool shapeFull(harfbuzz.font.Font font, harfbuzz.buffer.Buffer buffer, harfbuzz.feature.Feature[] features = null, string[] shaperList = null) nothrow
 {
   harfbuzz.types.Bool _retval;
   uint _numFeatures;
@@ -6922,7 +7195,7 @@ harfbuzz.types.Bool shapeFull(harfbuzz.font.Font font, harfbuzz.buffer.Buffer bu
       
       XSince: EXPERIMENTAL
 */
-harfbuzz.types.Bool shapeJustify(harfbuzz.font.Font font, harfbuzz.buffer.Buffer buffer, harfbuzz.feature.Feature[] features, string[] shaperList, float minTargetAdvance, float maxTargetAdvance, ref float advance, out harfbuzz.types.Tag varTag, out float varValue)
+harfbuzz.types.Bool shapeJustify(harfbuzz.font.Font font, harfbuzz.buffer.Buffer buffer, harfbuzz.feature.Feature[] features, string[] shaperList, float minTargetAdvance, float maxTargetAdvance, ref float advance, out harfbuzz.types.Tag varTag, out float varValue) nothrow
 {
   harfbuzz.types.Bool _retval;
   uint _numFeatures;
@@ -6945,7 +7218,7 @@ harfbuzz.types.Bool shapeJustify(harfbuzz.font.Font font, harfbuzz.buffer.Buffer
     Returns: an array of
          constant strings
 */
-string[] shapeListShapers()
+string[] shapeListShapers() nothrow
 {
   const(char*)* _cretval;
   _cretval = hb_shape_list_shapers();
@@ -6974,7 +7247,7 @@ string[] shapeListShapers()
       shaperList = List of shapers to try
     Returns: The shaping plan
 */
-harfbuzz.shape_plan.ShapePlan shapePlanCreate(harfbuzz.face.Face face, harfbuzz.segment_properties.SegmentProperties props, harfbuzz.feature.Feature[] userFeatures, string[] shaperList)
+harfbuzz.shape_plan.ShapePlan shapePlanCreate(harfbuzz.face.Face face, harfbuzz.segment_properties.SegmentProperties props, harfbuzz.feature.Feature[] userFeatures, string[] shaperList) nothrow
 {
   hb_shape_plan_t* _cretval;
   uint _numUserFeatures;
@@ -7006,7 +7279,7 @@ harfbuzz.shape_plan.ShapePlan shapePlanCreate(harfbuzz.face.Face face, harfbuzz.
       shaperList = List of shapers to try
     Returns: The shaping plan
 */
-harfbuzz.shape_plan.ShapePlan shapePlanCreate2(harfbuzz.face.Face face, harfbuzz.segment_properties.SegmentProperties props, harfbuzz.feature.Feature[] userFeatures, int[] coords, string[] shaperList)
+harfbuzz.shape_plan.ShapePlan shapePlanCreate2(harfbuzz.face.Face face, harfbuzz.segment_properties.SegmentProperties props, harfbuzz.feature.Feature[] userFeatures, int[] coords, string[] shaperList) nothrow
 {
   hb_shape_plan_t* _cretval;
   uint _numUserFeatures;
@@ -7041,7 +7314,7 @@ harfbuzz.shape_plan.ShapePlan shapePlanCreate2(harfbuzz.face.Face face, harfbuzz
       shaperList = List of shapers to try
     Returns: The shaping plan
 */
-harfbuzz.shape_plan.ShapePlan shapePlanCreateCached(harfbuzz.face.Face face, harfbuzz.segment_properties.SegmentProperties props, harfbuzz.feature.Feature[] userFeatures, string[] shaperList)
+harfbuzz.shape_plan.ShapePlan shapePlanCreateCached(harfbuzz.face.Face face, harfbuzz.segment_properties.SegmentProperties props, harfbuzz.feature.Feature[] userFeatures, string[] shaperList) nothrow
 {
   hb_shape_plan_t* _cretval;
   uint _numUserFeatures;
@@ -7074,7 +7347,7 @@ harfbuzz.shape_plan.ShapePlan shapePlanCreateCached(harfbuzz.face.Face face, har
       shaperList = List of shapers to try
     Returns: The shaping plan
 */
-harfbuzz.shape_plan.ShapePlan shapePlanCreateCached2(harfbuzz.face.Face face, harfbuzz.segment_properties.SegmentProperties props, harfbuzz.feature.Feature[] userFeatures, int[] coords, string[] shaperList)
+harfbuzz.shape_plan.ShapePlan shapePlanCreateCached2(harfbuzz.face.Face face, harfbuzz.segment_properties.SegmentProperties props, harfbuzz.feature.Feature[] userFeatures, int[] coords, string[] shaperList) nothrow
 {
   hb_shape_plan_t* _cretval;
   uint _numUserFeatures;
@@ -7109,7 +7382,7 @@ harfbuzz.shape_plan.ShapePlan shapePlanCreateCached2(harfbuzz.face.Face face, ha
       features = Features to enable
     Returns: `true` if success, `false` otherwise.
 */
-harfbuzz.types.Bool shapePlanExecute(harfbuzz.shape_plan.ShapePlan shapePlan, harfbuzz.font.Font font, harfbuzz.buffer.Buffer buffer, harfbuzz.feature.Feature[] features)
+harfbuzz.types.Bool shapePlanExecute(harfbuzz.shape_plan.ShapePlan shapePlan, harfbuzz.font.Font font, harfbuzz.buffer.Buffer buffer, harfbuzz.feature.Feature[] features) nothrow
 {
   harfbuzz.types.Bool _retval;
   uint _numFeatures;
@@ -7125,7 +7398,7 @@ harfbuzz.types.Bool shapePlanExecute(harfbuzz.shape_plan.ShapePlan shapePlan, ha
     Fetches the singleton empty shaping plan.
     Returns: The empty shaping plan
 */
-harfbuzz.shape_plan.ShapePlan shapePlanGetEmpty()
+harfbuzz.shape_plan.ShapePlan shapePlanGetEmpty() nothrow
 {
   hb_shape_plan_t* _cretval;
   _cretval = hb_shape_plan_get_empty();
@@ -7140,7 +7413,7 @@ harfbuzz.shape_plan.ShapePlan shapePlanGetEmpty()
       shapePlan = A shaping plan
     Returns: The shaper
 */
-string shapePlanGetShaper(harfbuzz.shape_plan.ShapePlan shapePlan)
+string shapePlanGetShaper(harfbuzz.shape_plan.ShapePlan shapePlan) nothrow
 {
   const(char)* _cretval;
   _cretval = hb_shape_plan_get_shaper(shapePlan ? cast(hb_shape_plan_t*)shapePlan._cPtr(No.Dup) : null);
@@ -7158,7 +7431,7 @@ string shapePlanGetShaper(harfbuzz.shape_plan.ShapePlan shapePlan)
       styleTag = a style tag.
     Returns: Corresponding axis or default value to a style tag.
 */
-float styleGetValue(harfbuzz.font.Font font, harfbuzz.types.StyleTag styleTag)
+float styleGetValue(harfbuzz.font.Font font, harfbuzz.types.StyleTag styleTag) nothrow
 {
   float _retval;
   _retval = hb_style_get_value(font ? cast(hb_font_t*)font._cPtr(No.Dup) : null, styleTag);
@@ -7175,7 +7448,7 @@ float styleGetValue(harfbuzz.font.Font font, harfbuzz.types.StyleTag styleTag)
       str = String to convert
     Returns: The #hb_tag_t corresponding to str
 */
-harfbuzz.types.Tag tagFromString(ubyte[] str)
+harfbuzz.types.Tag tagFromString(ubyte[] str) nothrow
 {
   harfbuzz.types.Tag _retval;
   int _len;
@@ -7196,7 +7469,7 @@ harfbuzz.types.Tag tagFromString(ubyte[] str)
       unicode = The code point to query
     Returns: The #hb_unicode_combining_class_t of unicode
 */
-harfbuzz.types.UnicodeCombiningClass unicodeCombiningClass(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint unicode)
+harfbuzz.types.UnicodeCombiningClass unicodeCombiningClass(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint unicode) nothrow
 {
   hb_unicode_combining_class_t _cretval;
   _cretval = hb_unicode_combining_class(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs._cPtr(No.Dup) : null, unicode);
@@ -7218,7 +7491,7 @@ harfbuzz.types.UnicodeCombiningClass unicodeCombiningClass(harfbuzz.unicode_func
       ab = The composition of `a`, `b`
     Returns: `true` if `a` and `b` composed, `false` otherwise
 */
-harfbuzz.types.Bool unicodeCompose(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint a, harfbuzz.types.Codepoint b, out harfbuzz.types.Codepoint ab)
+harfbuzz.types.Bool unicodeCompose(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint a, harfbuzz.types.Codepoint b, out harfbuzz.types.Codepoint ab) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_unicode_compose(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs._cPtr(No.Dup) : null, a, b, cast(hb_codepoint_t*)&ab);
@@ -7238,7 +7511,7 @@ harfbuzz.types.Bool unicodeCompose(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, h
       b = The second code point of the decomposition of `a`b
     Returns: `true` if `a`b was decomposed, `false` otherwise
 */
-harfbuzz.types.Bool unicodeDecompose(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint ab, out harfbuzz.types.Codepoint a, out harfbuzz.types.Codepoint b)
+harfbuzz.types.Bool unicodeDecompose(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint ab, out harfbuzz.types.Codepoint a, out harfbuzz.types.Codepoint b) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_unicode_decompose(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs._cPtr(No.Dup) : null, ab, cast(hb_codepoint_t*)&a, cast(hb_codepoint_t*)&b);
@@ -7255,7 +7528,7 @@ harfbuzz.types.Bool unicodeDecompose(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs,
       decomposed = Compatibility decomposition of `u`
     Returns: length of decomposed.
 */
-uint unicodeDecomposeCompatibility(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint u, out harfbuzz.types.Codepoint decomposed)
+uint unicodeDecomposeCompatibility(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint u, out harfbuzz.types.Codepoint decomposed) nothrow
 {
   uint _retval;
   _retval = hb_unicode_decompose_compatibility(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs._cPtr(No.Dup) : null, u, cast(hb_codepoint_t*)&decomposed);
@@ -7270,7 +7543,7 @@ uint unicodeDecomposeCompatibility(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, h
       unicode = The code point to query
     Returns: 
 */
-uint unicodeEastasianWidth(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint unicode)
+uint unicodeEastasianWidth(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint unicode) nothrow
 {
   uint _retval;
   _retval = hb_unicode_eastasian_width(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs._cPtr(No.Dup) : null, unicode);
@@ -7284,7 +7557,7 @@ uint unicodeEastasianWidth(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.
       parent = Parent Unicode-functions structure
     Returns: The Unicode-functions structure
 */
-harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncsCreate(harfbuzz.unicode_funcs.UnicodeFuncs parent = null)
+harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncsCreate(harfbuzz.unicode_funcs.UnicodeFuncs parent = null) nothrow
 {
   hb_unicode_funcs_t* _cretval;
   _cretval = hb_unicode_funcs_create(parent ? cast(hb_unicode_funcs_t*)parent._cPtr(No.Dup) : null);
@@ -7297,7 +7570,7 @@ harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncsCreate(harfbuzz.unicode_funcs.Un
     when no functions are explicitly set on #hb_buffer_t.
     Returns: a pointer to the #hb_unicode_funcs_t Unicode-functions structure
 */
-harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncsGetDefault()
+harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncsGetDefault() nothrow
 {
   hb_unicode_funcs_t* _cretval;
   _cretval = hb_unicode_funcs_get_default();
@@ -7309,7 +7582,7 @@ harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncsGetDefault()
     Fetches the singleton empty Unicode-functions structure.
     Returns: The empty Unicode-functions structure
 */
-harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncsGetEmpty()
+harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncsGetEmpty() nothrow
 {
   hb_unicode_funcs_t* _cretval;
   _cretval = hb_unicode_funcs_get_empty();
@@ -7325,7 +7598,7 @@ harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncsGetEmpty()
       ufuncs = The Unicode-functions structure
     Returns: The parent Unicode-functions structure
 */
-harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncsGetParent(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs)
+harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncsGetParent(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs) nothrow
 {
   hb_unicode_funcs_t* _cretval;
   _cretval = hb_unicode_funcs_get_parent(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs._cPtr(No.Dup) : null);
@@ -7341,7 +7614,7 @@ harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncsGetParent(harfbuzz.unicode_funcs
       ufuncs = The Unicode-functions structure
     Returns: `true` if ufuncs is immutable, `false` otherwise
 */
-harfbuzz.types.Bool unicodeFuncsIsImmutable(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs)
+harfbuzz.types.Bool unicodeFuncsIsImmutable(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs) nothrow
 {
   harfbuzz.types.Bool _retval;
   _retval = hb_unicode_funcs_is_immutable(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs._cPtr(No.Dup) : null);
@@ -7355,7 +7628,7 @@ harfbuzz.types.Bool unicodeFuncsIsImmutable(harfbuzz.unicode_funcs.UnicodeFuncs 
     Params:
       ufuncs = The Unicode-functions structure
 */
-void unicodeFuncsMakeImmutable(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs)
+void unicodeFuncsMakeImmutable(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs) nothrow
 {
   hb_unicode_funcs_make_immutable(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs._cPtr(No.Dup) : null);
 }
@@ -7367,14 +7640,21 @@ void unicodeFuncsMakeImmutable(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs)
       ufuncs = A Unicode-functions structure
       func = The callback function to assign
 */
-void unicodeFuncsSetCombiningClassFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.UnicodeCombiningClassFunc func)
+void unicodeFuncsSetCombiningClassFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.UnicodeCombiningClassFunc func) nothrow
 {
-  extern(C) hb_unicode_combining_class_t _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t unicode, void* userData)
+  extern(C) hb_unicode_combining_class_t _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t unicode, void* userData) nothrow
   {
     harfbuzz.types.UnicodeCombiningClass _dretval;
     auto _dlg = cast(harfbuzz.types.UnicodeCombiningClassFunc*)userData;
 
-    _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
+    try
+    {
+      _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.UnicodeCombiningClassFunc");
+    }
     auto _retval = cast(hb_unicode_combining_class_t)_dretval;
 
     return _retval;
@@ -7392,14 +7672,21 @@ void unicodeFuncsSetCombiningClassFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufunc
       ufuncs = A Unicode-functions structure
       func = The callback function to assign
 */
-void unicodeFuncsSetComposeFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.UnicodeComposeFunc func)
+void unicodeFuncsSetComposeFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.UnicodeComposeFunc func) nothrow
 {
-  extern(C) hb_bool_t _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t a, hb_codepoint_t b, hb_codepoint_t* ab, void* userData)
+  extern(C) hb_bool_t _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t a, hb_codepoint_t b, hb_codepoint_t* ab, void* userData) nothrow
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.UnicodeComposeFunc*)userData;
 
-    _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, a, b, *ab);
+    try
+    {
+      _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, a, b, *ab);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.UnicodeComposeFunc");
+    }
     auto _retval = cast(hb_bool_t)_dretval;
 
     return _retval;
@@ -7417,14 +7704,21 @@ void unicodeFuncsSetComposeFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harf
       ufuncs = A Unicode-functions structure
       func = The callback function to assign
 */
-void unicodeFuncsSetDecomposeFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.UnicodeDecomposeFunc func)
+void unicodeFuncsSetDecomposeFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.UnicodeDecomposeFunc func) nothrow
 {
-  extern(C) hb_bool_t _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t ab, hb_codepoint_t* a, hb_codepoint_t* b, void* userData)
+  extern(C) hb_bool_t _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t ab, hb_codepoint_t* a, hb_codepoint_t* b, void* userData) nothrow
   {
     harfbuzz.types.Bool _dretval;
     auto _dlg = cast(harfbuzz.types.UnicodeDecomposeFunc*)userData;
 
-    _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, ab, *a, *b);
+    try
+    {
+      _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, ab, *a, *b);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.UnicodeDecomposeFunc");
+    }
     auto _retval = cast(hb_bool_t)_dretval;
 
     return _retval;
@@ -7442,13 +7736,21 @@ void unicodeFuncsSetDecomposeFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, ha
       ufuncs = a Unicode-function structure
       func = The callback function to assign
 */
-void unicodeFuncsSetEastasianWidthFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.UnicodeEastasianWidthFunc func)
+void unicodeFuncsSetEastasianWidthFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.UnicodeEastasianWidthFunc func) nothrow
 {
-  extern(C) uint _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t unicode, void* userData)
+  extern(C) uint _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t unicode, void* userData) nothrow
   {
+    uint _retval;
     auto _dlg = cast(harfbuzz.types.UnicodeEastasianWidthFunc*)userData;
 
-    uint _retval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
+    try
+    {
+      _retval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.UnicodeEastasianWidthFunc");
+    }
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
@@ -7464,14 +7766,21 @@ void unicodeFuncsSetEastasianWidthFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufunc
       ufuncs = A Unicode-functions structure
       func = The callback function to assign
 */
-void unicodeFuncsSetGeneralCategoryFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.UnicodeGeneralCategoryFunc func)
+void unicodeFuncsSetGeneralCategoryFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.UnicodeGeneralCategoryFunc func) nothrow
 {
-  extern(C) hb_unicode_general_category_t _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t unicode, void* userData)
+  extern(C) hb_unicode_general_category_t _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t unicode, void* userData) nothrow
   {
     harfbuzz.types.UnicodeGeneralCategory _dretval;
     auto _dlg = cast(harfbuzz.types.UnicodeGeneralCategoryFunc*)userData;
 
-    _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
+    try
+    {
+      _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.UnicodeGeneralCategoryFunc");
+    }
     auto _retval = cast(hb_unicode_general_category_t)_dretval;
 
     return _retval;
@@ -7489,14 +7798,21 @@ void unicodeFuncsSetGeneralCategoryFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufun
       ufuncs = A Unicode-functions structure
       func = The callback function to assign
 */
-void unicodeFuncsSetMirroringFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.UnicodeMirroringFunc func)
+void unicodeFuncsSetMirroringFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.UnicodeMirroringFunc func) nothrow
 {
-  extern(C) hb_codepoint_t _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t unicode, void* userData)
+  extern(C) hb_codepoint_t _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t unicode, void* userData) nothrow
   {
     harfbuzz.types.Codepoint _dretval;
     auto _dlg = cast(harfbuzz.types.UnicodeMirroringFunc*)userData;
 
-    _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
+    try
+    {
+      _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.UnicodeMirroringFunc");
+    }
     auto _retval = cast(hb_codepoint_t)_dretval;
 
     return _retval;
@@ -7514,14 +7830,21 @@ void unicodeFuncsSetMirroringFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, ha
       ufuncs = A Unicode-functions structure
       func = The callback function to assign
 */
-void unicodeFuncsSetScriptFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.UnicodeScriptFunc func)
+void unicodeFuncsSetScriptFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.UnicodeScriptFunc func) nothrow
 {
-  extern(C) hb_script_t _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t unicode, void* userData)
+  extern(C) hb_script_t _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t unicode, void* userData) nothrow
   {
     harfbuzz.types.Script _dretval;
     auto _dlg = cast(harfbuzz.types.UnicodeScriptFunc*)userData;
 
-    _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
+    try
+    {
+      _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "harfbuzz.types.UnicodeScriptFunc");
+    }
     auto _retval = cast(hb_script_t)_dretval;
 
     return _retval;
@@ -7541,7 +7864,7 @@ void unicodeFuncsSetScriptFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfb
       unicode = The code point to query
     Returns: The #hb_unicode_general_category_t of unicode
 */
-harfbuzz.types.UnicodeGeneralCategory unicodeGeneralCategory(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint unicode)
+harfbuzz.types.UnicodeGeneralCategory unicodeGeneralCategory(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint unicode) nothrow
 {
   hb_unicode_general_category_t _cretval;
   _cretval = hb_unicode_general_category(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs._cPtr(No.Dup) : null, unicode);
@@ -7558,7 +7881,7 @@ harfbuzz.types.UnicodeGeneralCategory unicodeGeneralCategory(harfbuzz.unicode_fu
       unicode = The code point to query
     Returns: The #hb_codepoint_t of the Mirroring Glyph for unicode
 */
-harfbuzz.types.Codepoint unicodeMirroring(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint unicode)
+harfbuzz.types.Codepoint unicodeMirroring(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint unicode) nothrow
 {
   harfbuzz.types.Codepoint _retval;
   _retval = hb_unicode_mirroring(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs._cPtr(No.Dup) : null, unicode);
@@ -7574,7 +7897,7 @@ harfbuzz.types.Codepoint unicodeMirroring(harfbuzz.unicode_funcs.UnicodeFuncs uf
       unicode = The code point to query
     Returns: The #hb_script_t of unicode
 */
-harfbuzz.types.Script unicodeScript(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint unicode)
+harfbuzz.types.Script unicodeScript(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint unicode) nothrow
 {
   hb_script_t _cretval;
   _cretval = hb_unicode_script(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs._cPtr(No.Dup) : null, unicode);
@@ -7597,7 +7920,7 @@ harfbuzz.types.Script unicodeScript(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, 
       variation = the #hb_variation_t to initialize with the parsed values
     Returns: `true` if str is successfully parsed, `false` otherwise
 */
-harfbuzz.types.Bool variationFromString(ubyte[] str, out harfbuzz.variation.Variation variation)
+harfbuzz.types.Bool variationFromString(ubyte[] str, out harfbuzz.variation.Variation variation) nothrow
 {
   harfbuzz.types.Bool _retval;
   int _len;

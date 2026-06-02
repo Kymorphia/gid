@@ -26,26 +26,26 @@ class MonitorWrap : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_monitor_get_type != &gidSymbolNotFound ? gdk_monitor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MonitorWrap self()
+  override MonitorWrap self() nothrow
   {
     return this;
   }
@@ -54,67 +54,67 @@ class MonitorWrap : gobject.object.ObjectWrap
       Get builder for [gdk.monitor.MonitorWrap]
       Returns: New builder object
   */
-  static MonitorWrapGidBuilder builder()
+  static MonitorWrapGidBuilder builder() nothrow
   {
     return new MonitorWrapGidBuilder;
   }
 
   /** */
-  @property gdk.display.Display display()
+  @property gdk.display.Display display() nothrow
   {
     return getDisplay();
   }
 
   /** */
-  @property gdk.rectangle.Rectangle geometry()
+  @property gdk.rectangle.Rectangle geometry() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.rectangle.Rectangle)("geometry");
   }
 
   /** */
-  @property int heightMm()
+  @property int heightMm() nothrow
   {
     return getHeightMm();
   }
 
   /** */
-  @property string manufacturer()
+  @property string manufacturer() nothrow
   {
     return getManufacturer();
   }
 
   /** */
-  @property string model()
+  @property string model() nothrow
   {
     return getModel();
   }
 
   /** */
-  @property int refreshRate()
+  @property int refreshRate() nothrow
   {
     return getRefreshRate();
   }
 
   /** */
-  @property int scaleFactor()
+  @property int scaleFactor() nothrow
   {
     return getScaleFactor();
   }
 
   /** */
-  @property gdk.types.SubpixelLayout subpixelLayout()
+  @property gdk.types.SubpixelLayout subpixelLayout() nothrow
   {
     return getSubpixelLayout();
   }
 
   /** */
-  @property int widthMm()
+  @property int widthMm() nothrow
   {
     return getWidthMm();
   }
 
   /** */
-  @property gdk.rectangle.Rectangle workarea()
+  @property gdk.rectangle.Rectangle workarea() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.rectangle.Rectangle)("workarea");
   }
@@ -123,7 +123,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Gets the display that this monitor belongs to.
       Returns: the display
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gdk_monitor_get_display(cast(GdkMonitor*)this._cPtr);
@@ -139,7 +139,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Params:
         geometry = a #GdkRectangle to be filled with the monitor geometry
   */
-  void getGeometry(out gdk.rectangle.Rectangle geometry)
+  void getGeometry(out gdk.rectangle.Rectangle geometry) nothrow
   {
     gdk_monitor_get_geometry(cast(GdkMonitor*)this._cPtr, cast(GdkRectangle*)&geometry);
   }
@@ -148,7 +148,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Gets the height in millimeters of the monitor.
       Returns: the physical height of the monitor
   */
-  int getHeightMm()
+  int getHeightMm() nothrow
   {
     int _retval;
     _retval = gdk_monitor_get_height_mm(cast(GdkMonitor*)this._cPtr);
@@ -164,7 +164,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       PNP ID registry is located at https://uefi.org/pnp_id_list
       Returns: the name of the manufacturer, or null
   */
-  string getManufacturer()
+  string getManufacturer() nothrow
   {
     const(char)* _cretval;
     _cretval = gdk_monitor_get_manufacturer(cast(GdkMonitor*)this._cPtr);
@@ -176,7 +176,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Gets the a string identifying the monitor model, if available.
       Returns: the monitor model, or null
   */
-  string getModel()
+  string getModel() nothrow
   {
     const(char)* _cretval;
     _cretval = gdk_monitor_get_model(cast(GdkMonitor*)this._cPtr);
@@ -191,7 +191,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       is returned as 60000.
       Returns: the refresh rate in milli-Hertz, or 0
   */
-  int getRefreshRate()
+  int getRefreshRate() nothrow
   {
     int _retval;
     _retval = gdk_monitor_get_refresh_rate(cast(GdkMonitor*)this._cPtr);
@@ -208,7 +208,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       where it is better to use [gdk.window.Window.getScaleFactor] instead.
       Returns: the scale factor
   */
-  int getScaleFactor()
+  int getScaleFactor() nothrow
   {
     int _retval;
     _retval = gdk_monitor_get_scale_factor(cast(GdkMonitor*)this._cPtr);
@@ -220,7 +220,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       primaries for each pixel in this monitor, if available.
       Returns: the subpixel layout
   */
-  gdk.types.SubpixelLayout getSubpixelLayout()
+  gdk.types.SubpixelLayout getSubpixelLayout() nothrow
   {
     GdkSubpixelLayout _cretval;
     _cretval = gdk_monitor_get_subpixel_layout(cast(GdkMonitor*)this._cPtr);
@@ -232,7 +232,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Gets the width in millimeters of the monitor.
       Returns: the physical width of the monitor
   */
-  int getWidthMm()
+  int getWidthMm() nothrow
   {
     int _retval;
     _retval = gdk_monitor_get_width_mm(cast(GdkMonitor*)this._cPtr);
@@ -257,7 +257,7 @@ class MonitorWrap : gobject.object.ObjectWrap
         workarea = a #GdkRectangle to be filled with
               the monitor workarea
   */
-  void getWorkarea(out gdk.rectangle.Rectangle workarea)
+  void getWorkarea(out gdk.rectangle.Rectangle workarea) nothrow
   {
     gdk_monitor_get_workarea(cast(GdkMonitor*)this._cPtr, cast(GdkRectangle*)&workarea);
   }
@@ -267,7 +267,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       (see [gdk.display.Display.getPrimaryMonitor]).
       Returns: true if monitor is primary
   */
-  bool isPrimary()
+  bool isPrimary() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_monitor_is_primary(cast(GdkMonitor*)this._cPtr);
@@ -289,13 +289,13 @@ class MonitorWrap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInvalidate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInvalidate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.monitor.MonitorWrap)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -304,7 +304,14 @@ class MonitorWrap : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.monitor.MonitorWrap.invalidate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -317,7 +324,7 @@ class MonitorWrapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T display(gdk.display.Display propval)
+  T display(gdk.display.Display propval) nothrow
   {
     return setProperty("display", propval);
   }
@@ -330,7 +337,7 @@ final class MonitorWrapGidBuilder : MonitorWrapGidBuilderImpl!MonitorWrapGidBuil
       Create object from builder.
       Returns: New object
   */
-  MonitorWrap build()
+  MonitorWrap build() nothrow
   {
     return new MonitorWrap(cast(void*)createGObject(MonitorWrap._getGType), No.Take);
   }

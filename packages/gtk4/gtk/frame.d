@@ -68,26 +68,26 @@ class Frame : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_frame_get_type != &gidSymbolNotFound ? gtk_frame_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Frame self()
+  override Frame self() nothrow
   {
     return this;
   }
@@ -96,7 +96,7 @@ class Frame : gtk.widget.Widget
       Get builder for [gtk.frame.Frame]
       Returns: New builder object
   */
-  static FrameGidBuilder builder()
+  static FrameGidBuilder builder() nothrow
   {
     return new FrameGidBuilder;
   }
@@ -105,7 +105,7 @@ class Frame : gtk.widget.Widget
       Get `child` property.
       Returns: The child widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -115,7 +115,7 @@ class Frame : gtk.widget.Widget
       Params:
         propval = The child widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -124,7 +124,7 @@ class Frame : gtk.widget.Widget
       Get `label` property.
       Returns: Text of the frame's label.
   */
-  @property string label()
+  @property string label() nothrow
   {
     return getLabel();
   }
@@ -134,7 +134,7 @@ class Frame : gtk.widget.Widget
       Params:
         propval = Text of the frame's label.
   */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     setLabel(propval);
   }
@@ -143,7 +143,7 @@ class Frame : gtk.widget.Widget
       Get `labelWidget` property.
       Returns: Widget to display in place of the usual frame label.
   */
-  @property gtk.widget.Widget labelWidget()
+  @property gtk.widget.Widget labelWidget() nothrow
   {
     return getLabelWidget();
   }
@@ -153,7 +153,7 @@ class Frame : gtk.widget.Widget
       Params:
         propval = Widget to display in place of the usual frame label.
   */
-  @property void labelWidget(gtk.widget.Widget propval)
+  @property void labelWidget(gtk.widget.Widget propval) nothrow
   {
     setLabelWidget(propval);
   }
@@ -162,7 +162,7 @@ class Frame : gtk.widget.Widget
       Get `labelXalign` property.
       Returns: The horizontal alignment of the label.
   */
-  @property float labelXalign()
+  @property float labelXalign() nothrow
   {
     return getLabelAlign();
   }
@@ -172,7 +172,7 @@ class Frame : gtk.widget.Widget
       Params:
         propval = The horizontal alignment of the label.
   */
-  @property void labelXalign(float propval)
+  @property void labelXalign(float propval) nothrow
   {
     setLabelAlign(propval);
   }
@@ -186,7 +186,7 @@ class Frame : gtk.widget.Widget
         label = the text to use as the label of the frame
       Returns: a new [gtk.frame.Frame] widget
   */
-  this(string label = null)
+  this(string label = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -198,7 +198,7 @@ class Frame : gtk.widget.Widget
       Gets the child widget of frame.
       Returns: the child widget of frame
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_frame_get_child(cast(GtkFrame*)this._cPtr);
@@ -215,7 +215,7 @@ class Frame : gtk.widget.Widget
            was no label widget or the label widget was not a [gtk.label.Label].
            This string is owned by GTK and must not be modified or freed.
   */
-  string getLabel()
+  string getLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_frame_get_label(cast(GtkFrame*)this._cPtr);
@@ -227,7 +227,7 @@ class Frame : gtk.widget.Widget
       Retrieves the X alignment of the frame’s label.
       Returns: the frames X alignment
   */
-  float getLabelAlign()
+  float getLabelAlign() nothrow
   {
     float _retval;
     _retval = gtk_frame_get_label_align(cast(GtkFrame*)this._cPtr);
@@ -238,7 +238,7 @@ class Frame : gtk.widget.Widget
       Retrieves the label widget for the frame.
       Returns: the label widget
   */
-  gtk.widget.Widget getLabelWidget()
+  gtk.widget.Widget getLabelWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_frame_get_label_widget(cast(GtkFrame*)this._cPtr);
@@ -252,7 +252,7 @@ class Frame : gtk.widget.Widget
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     gtk_frame_set_child(cast(GtkFrame*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -264,7 +264,7 @@ class Frame : gtk.widget.Widget
       Params:
         label = the text to use as the label of the frame
   */
-  void setLabel(string label = null)
+  void setLabel(string label = null) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_frame_set_label(cast(GtkFrame*)this._cPtr, _label);
@@ -280,7 +280,7 @@ class Frame : gtk.widget.Widget
             of the widget. A value of 0.0 represents left alignment;
             1.0 represents right alignment.
   */
-  void setLabelAlign(float xalign)
+  void setLabelAlign(float xalign) nothrow
   {
     gtk_frame_set_label_align(cast(GtkFrame*)this._cPtr, xalign);
   }
@@ -294,7 +294,7 @@ class Frame : gtk.widget.Widget
       Params:
         labelWidget = the new label widget
   */
-  void setLabelWidget(gtk.widget.Widget labelWidget = null)
+  void setLabelWidget(gtk.widget.Widget labelWidget = null) nothrow
   {
     gtk_frame_set_label_widget(cast(GtkFrame*)this._cPtr, labelWidget ? cast(GtkWidget*)labelWidget._cPtr(No.Dup) : null);
   }
@@ -311,7 +311,7 @@ class FrameGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The child widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -322,7 +322,7 @@ class FrameGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Text of the frame's label.
       Returns: Builder instance for fluent chaining
   */
-  T label(string propval)
+  T label(string propval) nothrow
   {
     return setProperty("label", propval);
   }
@@ -333,7 +333,7 @@ class FrameGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Widget to display in place of the usual frame label.
       Returns: Builder instance for fluent chaining
   */
-  T labelWidget(gtk.widget.Widget propval)
+  T labelWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("label-widget", propval);
   }
@@ -344,7 +344,7 @@ class FrameGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The horizontal alignment of the label.
       Returns: Builder instance for fluent chaining
   */
-  T labelXalign(float propval)
+  T labelXalign(float propval) nothrow
   {
     return setProperty("label-xalign", propval);
   }
@@ -357,7 +357,7 @@ final class FrameGidBuilder : FrameGidBuilderImpl!FrameGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Frame build()
+  Frame build() nothrow
   {
     return new Frame(cast(void*)createGObject(Frame._getGType), No.Take);
   }

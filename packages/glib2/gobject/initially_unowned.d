@@ -19,26 +19,26 @@ class InitiallyUnowned : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_initially_unowned_get_type != &gidSymbolNotFound ? g_initially_unowned_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override InitiallyUnowned self()
+  override InitiallyUnowned self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class InitiallyUnowned : gobject.object.ObjectWrap
       Get builder for [gobject.initially_unowned.InitiallyUnowned]
       Returns: New builder object
   */
-  static InitiallyUnownedGidBuilder builder()
+  static InitiallyUnownedGidBuilder builder() nothrow
   {
     return new InitiallyUnownedGidBuilder;
   }
@@ -65,7 +65,7 @@ final class InitiallyUnownedGidBuilder : InitiallyUnownedGidBuilderImpl!Initiall
       Create object from builder.
       Returns: New object
   */
-  InitiallyUnowned build()
+  InitiallyUnowned build() nothrow
   {
     return new InitiallyUnowned(cast(void*)createGObject(InitiallyUnowned._getGType), No.Take);
   }

@@ -43,7 +43,7 @@ interface Navigation
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_navigation_get_type != &gidSymbolNotFound ? gst_navigation_get_type() : cast(GType)0;
@@ -60,7 +60,7 @@ interface Navigation
               navigation event.
       Returns: A boolean indicating success.
   */
-  static bool eventGetCoordinates(gst.event.Event event, out double x, out double y)
+  static bool eventGetCoordinates(gst.event.Event event, out double x, out double y) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_navigation_event_get_coordinates(event ? cast(GstEvent*)event._cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
@@ -75,7 +75,7 @@ interface Navigation
         event = A #GstEvent to inspect.
       Returns: 
   */
-  static gstvideo.types.NavigationEventType eventGetType(gst.event.Event event)
+  static gstvideo.types.NavigationEventType eventGetType(gst.event.Event event) nothrow
   {
     GstNavigationEventType _cretval;
     _cretval = gst_navigation_event_get_type(event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
@@ -90,7 +90,7 @@ interface Navigation
         command = The navigation command to use.
       Returns: a new #GstEvent
   */
-  static gst.event.Event eventNewCommand(gstvideo.types.NavigationCommand command)
+  static gst.event.Event eventNewCommand(gstvideo.types.NavigationCommand command) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_navigation_event_new_command(command);
@@ -107,7 +107,7 @@ interface Navigation
           Shift and Alt).
       Returns: a new #GstEvent
   */
-  static gst.event.Event eventNewKeyPress(string key, gstvideo.types.NavigationModifierType state)
+  static gst.event.Event eventNewKeyPress(string key, gstvideo.types.NavigationModifierType state) nothrow
   {
     GstEvent* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -125,7 +125,7 @@ interface Navigation
           Shift and Alt).
       Returns: a new #GstEvent
   */
-  static gst.event.Event eventNewKeyRelease(string key, gstvideo.types.NavigationModifierType state)
+  static gst.event.Event eventNewKeyRelease(string key, gstvideo.types.NavigationModifierType state) nothrow
   {
     GstEvent* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -145,7 +145,7 @@ interface Navigation
           Shift and Alt).
       Returns: a new #GstEvent
   */
-  static gst.event.Event eventNewMouseButtonPress(int button, double x, double y, gstvideo.types.NavigationModifierType state)
+  static gst.event.Event eventNewMouseButtonPress(int button, double x, double y, gstvideo.types.NavigationModifierType state) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_navigation_event_new_mouse_button_press(button, x, y, state);
@@ -164,7 +164,7 @@ interface Navigation
           Shift and Alt).
       Returns: a new #GstEvent
   */
-  static gst.event.Event eventNewMouseButtonRelease(int button, double x, double y, gstvideo.types.NavigationModifierType state)
+  static gst.event.Event eventNewMouseButtonRelease(int button, double x, double y, gstvideo.types.NavigationModifierType state) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_navigation_event_new_mouse_button_release(button, x, y, state);
@@ -182,7 +182,7 @@ interface Navigation
           Shift and Alt).
       Returns: a new #GstEvent
   */
-  static gst.event.Event eventNewMouseMove(double x, double y, gstvideo.types.NavigationModifierType state)
+  static gst.event.Event eventNewMouseMove(double x, double y, gstvideo.types.NavigationModifierType state) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_navigation_event_new_mouse_move(x, y, state);
@@ -202,7 +202,7 @@ interface Navigation
           Shift and Alt).
       Returns: a new #GstEvent
   */
-  static gst.event.Event eventNewMouseScroll(double x, double y, double deltaX, double deltaY, gstvideo.types.NavigationModifierType state)
+  static gst.event.Event eventNewMouseScroll(double x, double y, double deltaX, double deltaY, gstvideo.types.NavigationModifierType state) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_navigation_event_new_mouse_scroll(x, y, deltaX, deltaY, state);
@@ -221,7 +221,7 @@ interface Navigation
           Shift and Alt).
       Returns: a new #GstEvent
   */
-  static gst.event.Event eventNewTouchCancel(gstvideo.types.NavigationModifierType state)
+  static gst.event.Event eventNewTouchCancel(gstvideo.types.NavigationModifierType state) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_navigation_event_new_touch_cancel(state);
@@ -244,7 +244,7 @@ interface Navigation
           Shift and Alt).
       Returns: a new #GstEvent
   */
-  static gst.event.Event eventNewTouchDown(uint identifier, double x, double y, double pressure, gstvideo.types.NavigationModifierType state)
+  static gst.event.Event eventNewTouchDown(uint identifier, double x, double y, double pressure, gstvideo.types.NavigationModifierType state) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_navigation_event_new_touch_down(identifier, x, y, pressure, state);
@@ -262,7 +262,7 @@ interface Navigation
           Shift and Alt).
       Returns: a new #GstEvent
   */
-  static gst.event.Event eventNewTouchFrame(gstvideo.types.NavigationModifierType state)
+  static gst.event.Event eventNewTouchFrame(gstvideo.types.NavigationModifierType state) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_navigation_event_new_touch_frame(state);
@@ -284,7 +284,7 @@ interface Navigation
           Shift and Alt).
       Returns: a new #GstEvent
   */
-  static gst.event.Event eventNewTouchMotion(uint identifier, double x, double y, double pressure, gstvideo.types.NavigationModifierType state)
+  static gst.event.Event eventNewTouchMotion(uint identifier, double x, double y, double pressure, gstvideo.types.NavigationModifierType state) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_navigation_event_new_touch_motion(identifier, x, y, pressure, state);
@@ -305,7 +305,7 @@ interface Navigation
           Shift and Alt).
       Returns: a new #GstEvent
   */
-  static gst.event.Event eventNewTouchUp(uint identifier, double x, double y, gstvideo.types.NavigationModifierType state)
+  static gst.event.Event eventNewTouchUp(uint identifier, double x, double y, gstvideo.types.NavigationModifierType state) nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_navigation_event_new_touch_up(identifier, x, y, state);
@@ -323,7 +323,7 @@ interface Navigation
               type of the navigation event.
       Returns: TRUE if the navigation command could be extracted, otherwise FALSE.
   */
-  static bool eventParseCommand(gst.event.Event event, out gstvideo.types.NavigationCommand command)
+  static bool eventParseCommand(gst.event.Event event, out gstvideo.types.NavigationCommand command) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_navigation_event_parse_command(event ? cast(GstEvent*)event._cPtr(No.Dup) : null, &command);
@@ -343,7 +343,7 @@ interface Navigation
               event, and valid only until the event is unreffed.
       Returns: 
   */
-  static bool eventParseKeyEvent(gst.event.Event event, out string key)
+  static bool eventParseKeyEvent(gst.event.Event event, out string key) nothrow
   {
     bool _retval;
     char* _key;
@@ -353,7 +353,7 @@ interface Navigation
   }
 
   /** */
-  static bool eventParseModifierState(gst.event.Event event, out gstvideo.types.NavigationModifierType state)
+  static bool eventParseModifierState(gst.event.Event event, out gstvideo.types.NavigationModifierType state) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_navigation_event_parse_modifier_state(event ? cast(GstEvent*)event._cPtr(No.Dup) : null, &state);
@@ -376,7 +376,7 @@ interface Navigation
       Returns: TRUE if the button number and both coordinates could be extracted,
             otherwise FALSE.
   */
-  static bool eventParseMouseButtonEvent(gst.event.Event event, out int button, out double x, out double y)
+  static bool eventParseMouseButtonEvent(gst.event.Event event, out int button, out double x, out double y) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_navigation_event_parse_mouse_button_event(event ? cast(GstEvent*)event._cPtr(No.Dup) : null, cast(int*)&button, cast(double*)&x, cast(double*)&y);
@@ -395,7 +395,7 @@ interface Navigation
               mouse movement.
       Returns: TRUE if both coordinates could be extracted, otherwise FALSE.
   */
-  static bool eventParseMouseMoveEvent(gst.event.Event event, out double x, out double y)
+  static bool eventParseMouseMoveEvent(gst.event.Event event, out double x, out double y) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_navigation_event_parse_mouse_move_event(event ? cast(GstEvent*)event._cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
@@ -418,7 +418,7 @@ interface Navigation
               mouse movement.
       Returns: TRUE if all coordinates could be extracted, otherwise FALSE.
   */
-  static bool eventParseMouseScrollEvent(gst.event.Event event, out double x, out double y, out double deltaX, out double deltaY)
+  static bool eventParseMouseScrollEvent(gst.event.Event event, out double x, out double y, out double deltaX, out double deltaY) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_navigation_event_parse_mouse_scroll_event(event ? cast(GstEvent*)event._cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y, cast(double*)&deltaX, cast(double*)&deltaY);
@@ -443,7 +443,7 @@ interface Navigation
               data is not available, NaN will be set instead.
       Returns: TRUE if all details could be extracted, otherwise FALSE.
   */
-  static bool eventParseTouchEvent(gst.event.Event event, out uint identifier, out double x, out double y, out double pressure)
+  static bool eventParseTouchEvent(gst.event.Event event, out uint identifier, out double x, out double y, out double pressure) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_navigation_event_parse_touch_event(event ? cast(GstEvent*)event._cPtr(No.Dup) : null, cast(uint*)&identifier, cast(double*)&x, cast(double*)&y, cast(double*)&pressure);
@@ -463,7 +463,7 @@ interface Navigation
               coordinate of the touch event.
       Returns: TRUE if all details could be extracted, otherwise FALSE.
   */
-  static bool eventParseTouchUpEvent(gst.event.Event event, out uint identifier, out double x, out double y)
+  static bool eventParseTouchUpEvent(gst.event.Event event, out uint identifier, out double x, out double y) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_navigation_event_parse_touch_up_event(event ? cast(GstEvent*)event._cPtr(No.Dup) : null, cast(uint*)&identifier, cast(double*)&x, cast(double*)&y);
@@ -480,7 +480,7 @@ interface Navigation
         y = The y coordinate to set.
       Returns: A boolean indicating success.
   */
-  static bool eventSetCoordinates(gst.event.Event event, double x, double y)
+  static bool eventSetCoordinates(gst.event.Event event, double x, double y) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_navigation_event_set_coordinates(event ? cast(GstEvent*)event._cPtr(No.Dup) : null, x, y);
@@ -497,7 +497,7 @@ interface Navigation
         #GST_NAVIGATION_MESSAGE_INVALID if the message is not a #GstNavigation
         notification.
   */
-  static gstvideo.types.NavigationMessageType messageGetType(gst.message.Message message)
+  static gstvideo.types.NavigationMessageType messageGetType(gst.message.Message message) nothrow
   {
     GstNavigationMessageType _cretval;
     _cretval = gst_navigation_message_get_type(message ? cast(GstMessage*)message._cPtr(No.Dup) : null);
@@ -517,7 +517,7 @@ interface Navigation
         nAngles = The number of viewing angles now available.
       Returns: The new #GstMessage.
   */
-  static gst.message.Message messageNewAnglesChanged(gst.object.ObjectWrap src, uint curAngle, uint nAngles)
+  static gst.message.Message messageNewAnglesChanged(gst.object.ObjectWrap src, uint curAngle, uint nAngles) nothrow
   {
     GstMessage* _cretval;
     _cretval = gst_navigation_message_new_angles_changed(src ? cast(GstObject*)src._cPtr(No.Dup) : null, curAngle, nAngles);
@@ -533,7 +533,7 @@ interface Navigation
         src = A #GstObject to set as source of the new message.
       Returns: The new #GstMessage.
   */
-  static gst.message.Message messageNewCommandsChanged(gst.object.ObjectWrap src)
+  static gst.message.Message messageNewCommandsChanged(gst.object.ObjectWrap src) nothrow
   {
     GstMessage* _cretval;
     _cretval = gst_navigation_message_new_commands_changed(src ? cast(GstObject*)src._cPtr(No.Dup) : null);
@@ -550,7 +550,7 @@ interface Navigation
         event = A navigation #GstEvent
       Returns: The new #GstMessage.
   */
-  static gst.message.Message messageNewEvent(gst.object.ObjectWrap src, gst.event.Event event)
+  static gst.message.Message messageNewEvent(gst.object.ObjectWrap src, gst.event.Event event) nothrow
   {
     GstMessage* _cretval;
     _cretval = gst_navigation_message_new_event(src ? cast(GstObject*)src._cPtr(No.Dup) : null, event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
@@ -568,7 +568,7 @@ interface Navigation
           false if it over a non-clickable area.
       Returns: The new #GstMessage.
   */
-  static gst.message.Message messageNewMouseOver(gst.object.ObjectWrap src, bool active)
+  static gst.message.Message messageNewMouseOver(gst.object.ObjectWrap src, bool active) nothrow
   {
     GstMessage* _cretval;
     _cretval = gst_navigation_message_new_mouse_over(src ? cast(GstObject*)src._cPtr(No.Dup) : null, active);
@@ -588,7 +588,7 @@ interface Navigation
               count, or NULL.
       Returns: true if the message could be successfully parsed. false if not.
   */
-  static bool messageParseAnglesChanged(gst.message.Message message, out uint curAngle, out uint nAngles)
+  static bool messageParseAnglesChanged(gst.message.Message message, out uint curAngle, out uint nAngles) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_navigation_message_parse_angles_changed(message ? cast(GstMessage*)message._cPtr(No.Dup) : null, cast(uint*)&curAngle, cast(uint*)&nAngles);
@@ -606,7 +606,7 @@ interface Navigation
               the contained navigation event.
       Returns: true if the message could be successfully parsed. false if not.
   */
-  static bool messageParseEvent(gst.message.Message message, out gst.event.Event event)
+  static bool messageParseEvent(gst.message.Message message, out gst.event.Event event) nothrow
   {
     bool _retval;
     GstEvent* _event;
@@ -626,7 +626,7 @@ interface Navigation
               active/inactive state, or NULL.
       Returns: true if the message could be successfully parsed. false if not.
   */
-  static bool messageParseMouseOver(gst.message.Message message, out bool active)
+  static bool messageParseMouseOver(gst.message.Message message, out bool active) nothrow
   {
     bool _retval;
     gboolean _active;
@@ -644,7 +644,7 @@ interface Navigation
       Returns: The #GstNavigationQueryType of the query, or
         #GST_NAVIGATION_QUERY_INVALID
   */
-  static gstvideo.types.NavigationQueryType queryGetType(gst.query.Query query)
+  static gstvideo.types.NavigationQueryType queryGetType(gst.query.Query query) nothrow
   {
     GstNavigationQueryType _cretval;
     _cretval = gst_navigation_query_get_type(query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
@@ -658,7 +658,7 @@ interface Navigation
       greater than one in a multiangle video.
       Returns: The new query.
   */
-  static gst.query.Query queryNewAngles()
+  static gst.query.Query queryNewAngles() nothrow
   {
     GstQuery* _cretval;
     _cretval = gst_navigation_query_new_angles();
@@ -671,7 +671,7 @@ interface Navigation
       query the pipeline for the set of currently available commands.
       Returns: The new query.
   */
-  static gst.query.Query queryNewCommands()
+  static gst.query.Query queryNewCommands() nothrow
   {
     GstQuery* _cretval;
     _cretval = gst_navigation_query_new_commands();
@@ -692,7 +692,7 @@ interface Navigation
               number of angles value from the query, or NULL
       Returns: true if the query could be successfully parsed. false if not.
   */
-  static bool queryParseAngles(gst.query.Query query, out uint curAngle, out uint nAngles)
+  static bool queryParseAngles(gst.query.Query query, out uint curAngle, out uint nAngles) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_navigation_query_parse_angles(query ? cast(GstQuery*)query._cPtr(No.Dup) : null, cast(uint*)&curAngle, cast(uint*)&nAngles);
@@ -707,7 +707,7 @@ interface Navigation
         nCmds = the number of commands in this query.
       Returns: true if the query could be successfully parsed. false if not.
   */
-  static bool queryParseCommandsLength(gst.query.Query query, out uint nCmds)
+  static bool queryParseCommandsLength(gst.query.Query query, out uint nCmds) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_navigation_query_parse_commands_length(query ? cast(GstQuery*)query._cPtr(No.Dup) : null, cast(uint*)&nCmds);
@@ -725,7 +725,7 @@ interface Navigation
         cmd = a pointer to store the nth command into.
       Returns: true if the query could be successfully parsed. false if not.
   */
-  static bool queryParseCommandsNth(gst.query.Query query, uint nth, out gstvideo.types.NavigationCommand cmd)
+  static bool queryParseCommandsNth(gst.query.Query query, uint nth, out gstvideo.types.NavigationCommand cmd) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_navigation_query_parse_commands_nth(query ? cast(GstQuery*)query._cPtr(No.Dup) : null, nth, &cmd);
@@ -740,7 +740,7 @@ interface Navigation
         curAngle = the current viewing angle to set.
         nAngles = the number of viewing angles to set.
   */
-  static void querySetAngles(gst.query.Query query, uint curAngle, uint nAngles)
+  static void querySetAngles(gst.query.Query query, uint curAngle, uint nAngles) nothrow
   {
     gst_navigation_query_set_angles(query ? cast(GstQuery*)query._cPtr(No.Dup) : null, curAngle, nAngles);
   }
@@ -754,7 +754,7 @@ interface Navigation
         cmds = An array containing n_cmds
               GstNavigationCommand values.
   */
-  static void querySetCommandsv(gst.query.Query query, gstvideo.types.NavigationCommand[] cmds)
+  static void querySetCommandsv(gst.query.Query query, gstvideo.types.NavigationCommand[] cmds) nothrow
   {
     int _nCmds;
     if (cmds)

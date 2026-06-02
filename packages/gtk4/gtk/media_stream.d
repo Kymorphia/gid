@@ -36,26 +36,26 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_media_stream_get_type != &gidSymbolNotFound ? gtk_media_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MediaStream self()
+  override MediaStream self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Get builder for [gtk.media_stream.MediaStream]
       Returns: New builder object
   */
-  static MediaStreamGidBuilder builder()
+  static MediaStreamGidBuilder builder() nothrow
   {
     return new MediaStreamGidBuilder;
   }
@@ -73,7 +73,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Get `duration` property.
       Returns: The stream's duration in microseconds or 0 if unknown.
   */
-  @property long duration()
+  @property long duration() nothrow
   {
     return getDuration();
   }
@@ -82,7 +82,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Get `loop` property.
       Returns: Try to restart the media from the beginning once it ended.
   */
-  @property bool loop()
+  @property bool loop() nothrow
   {
     return getLoop();
   }
@@ -92,7 +92,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Params:
         propval = Try to restart the media from the beginning once it ended.
   */
-  @property void loop(bool propval)
+  @property void loop(bool propval) nothrow
   {
     setLoop(propval);
   }
@@ -101,7 +101,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Get `muted` property.
       Returns: Whether the audio stream should be muted.
   */
-  @property bool muted()
+  @property bool muted() nothrow
   {
     return getMuted();
   }
@@ -111,7 +111,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Params:
         propval = Whether the audio stream should be muted.
   */
-  @property void muted(bool propval)
+  @property void muted(bool propval) nothrow
   {
     setMuted(propval);
   }
@@ -120,7 +120,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Get `playing` property.
       Returns: Whether the stream is currently playing.
   */
-  @property bool playing()
+  @property bool playing() nothrow
   {
     return getPlaying();
   }
@@ -130,7 +130,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Params:
         propval = Whether the stream is currently playing.
   */
-  @property void playing(bool propval)
+  @property void playing(bool propval) nothrow
   {
     setPlaying(propval);
   }
@@ -139,7 +139,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Get `seekable` property.
       Returns: Set unless the stream is known to not support seeking.
   */
-  @property bool seekable()
+  @property bool seekable() nothrow
   {
     return isSeekable();
   }
@@ -148,7 +148,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Get `seeking` property.
       Returns: Set while a seek is in progress.
   */
-  @property bool seeking()
+  @property bool seeking() nothrow
   {
     return isSeeking();
   }
@@ -157,7 +157,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Get `timestamp` property.
       Returns: The current presentation timestamp in microseconds.
   */
-  @property long timestamp()
+  @property long timestamp() nothrow
   {
     return getTimestamp();
   }
@@ -166,7 +166,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Get `volume` property.
       Returns: Volume of the audio stream.
   */
-  @property double volume()
+  @property double volume() nothrow
   {
     return getVolume();
   }
@@ -176,7 +176,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Params:
         propval = Volume of the audio stream.
   */
-  @property void volume(double propval)
+  @property void volume(double propval) nothrow
   {
     setVolume(propval);
   }
@@ -200,7 +200,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Params:
         error = the [glib.error.ErrorWrap] to set
   */
-  void gerror(glib.error.ErrorWrap error)
+  void gerror(glib.error.ErrorWrap error) nothrow
   {
     gtk_media_stream_gerror(cast(GtkMediaStream*)this._cPtr, error ? cast(GError*)error._cPtr : null);
   }
@@ -211,7 +211,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       If the duration is not known, 0 will be returned.
       Returns: the duration of the stream or 0 if not known.
   */
-  long getDuration()
+  long getDuration() nothrow
   {
     long _retval;
     _retval = gtk_media_stream_get_duration(cast(GtkMediaStream*)this._cPtr);
@@ -222,7 +222,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Returns whether the streams playback is finished.
       Returns: true if playback is finished
   */
-  bool getEnded()
+  bool getEnded() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_media_stream_get_ended(cast(GtkMediaStream*)this._cPtr);
@@ -247,7 +247,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Returns: null if not in an
           error state or the [glib.error.ErrorWrap] of the stream
   */
-  glib.error.ErrorWrap getError()
+  glib.error.ErrorWrap getError() nothrow
   {
     const(GError)* _cretval;
     _cretval = gtk_media_stream_get_error(cast(GtkMediaStream*)this._cPtr);
@@ -261,7 +261,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       See [gtk.media_stream.MediaStream.setLoop] for details.
       Returns: true if the stream should loop
   */
-  bool getLoop()
+  bool getLoop() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_media_stream_get_loop(cast(GtkMediaStream*)this._cPtr);
@@ -274,7 +274,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       See [gtk.media_stream.MediaStream.setMuted] for details.
       Returns: true if the stream is muted
   */
-  bool getMuted()
+  bool getMuted() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_media_stream_get_muted(cast(GtkMediaStream*)this._cPtr);
@@ -285,7 +285,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Return whether the stream is currently playing.
       Returns: true if the stream is playing
   */
-  bool getPlaying()
+  bool getPlaying() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_media_stream_get_playing(cast(GtkMediaStream*)this._cPtr);
@@ -296,7 +296,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Returns the current presentation timestamp in microseconds.
       Returns: the timestamp in microseconds
   */
-  long getTimestamp()
+  long getTimestamp() nothrow
   {
     long _retval;
     _retval = gtk_media_stream_get_timestamp(cast(GtkMediaStream*)this._cPtr);
@@ -309,7 +309,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       See [gtk.media_stream.MediaStream.setVolume] for details.
       Returns: volume of the stream from 0.0 to 1.0
   */
-  double getVolume()
+  double getVolume() nothrow
   {
     double _retval;
     _retval = gtk_media_stream_get_volume(cast(GtkMediaStream*)this._cPtr);
@@ -320,7 +320,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Returns whether the stream has audio.
       Returns: true if the stream has audio
   */
-  bool hasAudio()
+  bool hasAudio() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_media_stream_has_audio(cast(GtkMediaStream*)this._cPtr);
@@ -331,7 +331,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Returns whether the stream has video.
       Returns: true if the stream has video
   */
-  bool hasVideo()
+  bool hasVideo() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_media_stream_has_video(cast(GtkMediaStream*)this._cPtr);
@@ -344,7 +344,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       At this point the existence of audio and video is known.
       Returns: true if the stream is prepared
   */
-  bool isPrepared()
+  bool isPrepared() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_media_stream_is_prepared(cast(GtkMediaStream*)this._cPtr);
@@ -363,7 +363,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       stream, though it will not do anything.
       Returns: true if the stream may support seeking
   */
-  bool isSeekable()
+  bool isSeekable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_media_stream_is_seekable(cast(GtkMediaStream*)this._cPtr);
@@ -374,7 +374,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Checks if there is currently a seek operation going on.
       Returns: true if a seek operation is ongoing.
   */
-  bool isSeeking()
+  bool isSeeking() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_media_stream_is_seeking(cast(GtkMediaStream*)this._cPtr);
@@ -386,7 +386,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       
       If the stream is not playing, do nothing.
   */
-  void pause()
+  void pause() nothrow
   {
     gtk_media_stream_pause(cast(GtkMediaStream*)this._cPtr);
   }
@@ -396,7 +396,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       
       If the stream is in error or already playing, do nothing.
   */
-  void play()
+  void play() nothrow
   {
     gtk_media_stream_play(cast(GtkMediaStream*)this._cPtr);
   }
@@ -422,7 +422,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Params:
         surface = a [gdk.surface.Surface]
   */
-  void realize(gdk.surface.Surface surface)
+  void realize(gdk.surface.Surface surface) nothrow
   {
     gtk_media_stream_realize(cast(GtkMediaStream*)this._cPtr, surface ? cast(GdkSurface*)surface._cPtr(No.Dup) : null);
   }
@@ -443,7 +443,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Params:
         timestamp = timestamp to seek to.
   */
-  void seek(long timestamp)
+  void seek(long timestamp) nothrow
   {
     gtk_media_stream_seek(cast(GtkMediaStream*)this._cPtr, timestamp);
   }
@@ -457,7 +457,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       See [gtk.media_stream.MediaStream.seekSuccess] for the other way of
       ending a seek.
   */
-  void seekFailed()
+  void seekFailed() nothrow
   {
     gtk_media_stream_seek_failed(cast(GtkMediaStream*)this._cPtr);
   }
@@ -471,7 +471,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       See [gtk.media_stream.MediaStream.seekFailed] for the other way of
       ending a seek.
   */
-  void seekSuccess()
+  void seekSuccess() nothrow
   {
     gtk_media_stream_seek_success(cast(GtkMediaStream*)this._cPtr);
   }
@@ -489,7 +489,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Params:
         loop = true if the stream should loop
   */
-  void setLoop(bool loop)
+  void setLoop(bool loop) nothrow
   {
     gtk_media_stream_set_loop(cast(GtkMediaStream*)this._cPtr, loop);
   }
@@ -507,7 +507,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Params:
         muted = true if the stream should be muted
   */
-  void setMuted(bool muted)
+  void setMuted(bool muted) nothrow
   {
     gtk_media_stream_set_muted(cast(GtkMediaStream*)this._cPtr, muted);
   }
@@ -518,7 +518,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Params:
         playing = whether to start or pause playback
   */
-  void setPlaying(bool playing)
+  void setPlaying(bool playing) nothrow
   {
     gtk_media_stream_set_playing(cast(GtkMediaStream*)this._cPtr, playing);
   }
@@ -539,7 +539,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Params:
         volume = New volume of the stream from 0.0 to 1.0
   */
-  void setVolume(double volume)
+  void setVolume(double volume) nothrow
   {
     gtk_media_stream_set_volume(cast(GtkMediaStream*)this._cPtr, volume);
   }
@@ -552,7 +552,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       
       The media stream must be prepared when this function is called.
   */
-  void streamEnded()
+  void streamEnded() nothrow
   {
     gtk_media_stream_stream_ended(cast(GtkMediaStream*)this._cPtr);
   }
@@ -575,7 +575,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
         seekable = true if the stream should advertise seekability
         duration = The duration of the stream or 0 if unknown
   */
-  void streamPrepared(bool hasAudio, bool hasVideo, bool seekable, long duration)
+  void streamPrepared(bool hasAudio, bool hasVideo, bool seekable, long duration) nothrow
   {
     gtk_media_stream_stream_prepared(cast(GtkMediaStream*)this._cPtr, hasAudio, hasVideo, seekable, duration);
   }
@@ -587,7 +587,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       
       This function will also reset any error state the stream was in.
   */
-  void streamUnprepared()
+  void streamUnprepared() nothrow
   {
     gtk_media_stream_stream_unprepared(cast(GtkMediaStream*)this._cPtr);
   }
@@ -601,7 +601,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Params:
         surface = the [gdk.surface.Surface] the stream was realized with
   */
-  void unrealize(gdk.surface.Surface surface)
+  void unrealize(gdk.surface.Surface surface) nothrow
   {
     gtk_media_stream_unrealize(cast(GtkMediaStream*)this._cPtr, surface ? cast(GdkSurface*)surface._cPtr(No.Dup) : null);
   }
@@ -618,7 +618,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Params:
         timestamp = the new timestamp
   */
-  void update(long timestamp)
+  void update(long timestamp) nothrow
   {
     gtk_media_stream_update(cast(GtkMediaStream*)this._cPtr, timestamp);
   }
@@ -636,7 +636,7 @@ class MediaStreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
         propval = Try to restart the media from the beginning once it ended.
       Returns: Builder instance for fluent chaining
   */
-  T loop(bool propval)
+  T loop(bool propval) nothrow
   {
     return setProperty("loop", propval);
   }
@@ -647,7 +647,7 @@ class MediaStreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
         propval = Whether the audio stream should be muted.
       Returns: Builder instance for fluent chaining
   */
-  T muted(bool propval)
+  T muted(bool propval) nothrow
   {
     return setProperty("muted", propval);
   }
@@ -658,7 +658,7 @@ class MediaStreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
         propval = Whether the stream is currently playing.
       Returns: Builder instance for fluent chaining
   */
-  T playing(bool propval)
+  T playing(bool propval) nothrow
   {
     return setProperty("playing", propval);
   }
@@ -669,7 +669,7 @@ class MediaStreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
         propval = Volume of the audio stream.
       Returns: Builder instance for fluent chaining
   */
-  T volume(double propval)
+  T volume(double propval) nothrow
   {
     return setProperty("volume", propval);
   }
@@ -682,7 +682,7 @@ final class MediaStreamGidBuilder : MediaStreamGidBuilderImpl!MediaStreamGidBuil
       Create object from builder.
       Returns: New object
   */
-  MediaStream build()
+  MediaStream build() nothrow
   {
     return new MediaStream(cast(void*)createGObject(MediaStream._getGType), No.Take);
   }

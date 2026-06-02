@@ -21,7 +21,7 @@ struct Gravity
       Returns: the gravity of matrix, which will never be
         [pango.types.Gravity.Auto], or [pango.types.Gravity.South] if matrix is null
   */
-  static pango.types.Gravity getForMatrix(pango.matrix.Matrix matrix)
+  static pango.types.Gravity getForMatrix(pango.matrix.Matrix matrix) nothrow
   {
     PangoGravity _cretval;
     _cretval = pango_gravity_get_for_matrix(cast(const(PangoMatrix)*)&matrix);
@@ -45,7 +45,7 @@ struct Gravity
       Returns: resolved gravity suitable to use for a run of text
         with script
   */
-  static pango.types.Gravity getForScript(pango.types.Script script, pango.types.Gravity baseGravity, pango.types.GravityHint hint)
+  static pango.types.Gravity getForScript(pango.types.Script script, pango.types.Gravity baseGravity, pango.types.GravityHint hint) nothrow
   {
     PangoGravity _cretval;
     _cretval = pango_gravity_get_for_script(script, baseGravity, hint);
@@ -78,7 +78,7 @@ struct Gravity
       Returns: resolved gravity suitable to use for a run of text
         with script and wide.
   */
-  static pango.types.Gravity getForScriptAndWidth(pango.types.Script script, bool wide, pango.types.Gravity baseGravity, pango.types.GravityHint hint)
+  static pango.types.Gravity getForScriptAndWidth(pango.types.Script script, bool wide, pango.types.Gravity baseGravity, pango.types.GravityHint hint) nothrow
   {
     PangoGravity _cretval;
     _cretval = pango_gravity_get_for_script_and_width(script, wide, baseGravity, hint);
@@ -97,7 +97,7 @@ struct Gravity
         gravity = gravity to query, should not be [pango.types.Gravity.Auto]
       Returns: the rotation value corresponding to gravity.
   */
-  static double toRotation(pango.types.Gravity gravity)
+  static double toRotation(pango.types.Gravity gravity) nothrow
   {
     double _retval;
     _retval = pango_gravity_to_rotation(gravity);

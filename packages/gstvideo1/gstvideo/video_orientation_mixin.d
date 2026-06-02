@@ -25,7 +25,7 @@ template VideoOrientationT()
         center = return location for the result
       Returns: true in case the element supports centering
   */
-  override bool getHcenter(out int center)
+  override bool getHcenter(out int center) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_orientation_get_hcenter(cast(GstVideoOrientation*)this._cPtr, cast(int*)&center);
@@ -39,7 +39,7 @@ template VideoOrientationT()
         flip = return location for the result
       Returns: true in case the element supports flipping
   */
-  override bool getHflip(out bool flip)
+  override bool getHflip(out bool flip) nothrow
   {
     bool _retval;
     gboolean _flip;
@@ -55,7 +55,7 @@ template VideoOrientationT()
         center = return location for the result
       Returns: true in case the element supports centering
   */
-  override bool getVcenter(out int center)
+  override bool getVcenter(out int center) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_orientation_get_vcenter(cast(GstVideoOrientation*)this._cPtr, cast(int*)&center);
@@ -69,7 +69,7 @@ template VideoOrientationT()
         flip = return location for the result
       Returns: true in case the element supports flipping
   */
-  override bool getVflip(out bool flip)
+  override bool getVflip(out bool flip) nothrow
   {
     bool _retval;
     gboolean _flip;
@@ -85,7 +85,7 @@ template VideoOrientationT()
         center = centering offset
       Returns: true in case the element supports centering
   */
-  override bool setHcenter(int center)
+  override bool setHcenter(int center) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_orientation_set_hcenter(cast(GstVideoOrientation*)this._cPtr, center);
@@ -99,7 +99,7 @@ template VideoOrientationT()
         flip = use flipping
       Returns: true in case the element supports flipping
   */
-  override bool setHflip(bool flip)
+  override bool setHflip(bool flip) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_orientation_set_hflip(cast(GstVideoOrientation*)this._cPtr, flip);
@@ -113,7 +113,7 @@ template VideoOrientationT()
         center = centering offset
       Returns: true in case the element supports centering
   */
-  override bool setVcenter(int center)
+  override bool setVcenter(int center) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_orientation_set_vcenter(cast(GstVideoOrientation*)this._cPtr, center);
@@ -127,7 +127,7 @@ template VideoOrientationT()
         flip = use flipping
       Returns: true in case the element supports flipping
   */
-  override bool setVflip(bool flip)
+  override bool setVflip(bool flip) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_orientation_set_vflip(cast(GstVideoOrientation*)this._cPtr, flip);

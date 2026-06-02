@@ -36,26 +36,26 @@ class Workspace : adw.application_window.ApplicationWindow
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_workspace_get_type != &gidSymbolNotFound ? panel_workspace_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Workspace self()
+  override Workspace self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class Workspace : adw.application_window.ApplicationWindow
       Get builder for [panel.workspace.Workspace]
       Returns: New builder object
   */
-  static WorkspaceGidBuilder builder()
+  static WorkspaceGidBuilder builder() nothrow
   {
     return new WorkspaceGidBuilder;
   }
@@ -76,7 +76,7 @@ class Workspace : adw.application_window.ApplicationWindow
         This is generally used by applications to help destinguish between
         types of workspaces, particularly when saving session state.
   */
-  @property string id()
+  @property string id() nothrow
   {
     return getId();
   }
@@ -89,7 +89,7 @@ class Workspace : adw.application_window.ApplicationWindow
           This is generally used by applications to help destinguish between
           types of workspaces, particularly when saving session state.
   */
-  @property void id(string propval)
+  @property void id(string propval) nothrow
   {
     setId(propval);
   }
@@ -101,7 +101,7 @@ class Workspace : adw.application_window.ApplicationWindow
         widget = a #GtkWidget
       Returns: a #PanelWorkspace or null
   */
-  static panel.workspace.Workspace findFromWidget(gtk.widget.Widget widget)
+  static panel.workspace.Workspace findFromWidget(gtk.widget.Widget widget) nothrow
   {
     PanelWorkspace* _cretval;
     _cretval = panel_workspace_find_from_widget(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
@@ -110,7 +110,7 @@ class Workspace : adw.application_window.ApplicationWindow
   }
 
   /** */
-  override void actionSetEnabled(string actionName, bool enabled)
+  override void actionSetEnabled(string actionName, bool enabled) nothrow
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     panel_workspace_action_set_enabled(cast(PanelWorkspace*)this._cPtr, _actionName, enabled);
@@ -119,7 +119,7 @@ class Workspace : adw.application_window.ApplicationWindow
   alias getId = gtk.application_window.ApplicationWindow.getId;
 
   /** */
-  string getId()
+  string getId() nothrow
   {
     const(char)* _cretval;
     _cretval = panel_workspace_get_id(cast(PanelWorkspace*)this._cPtr);
@@ -131,7 +131,7 @@ class Workspace : adw.application_window.ApplicationWindow
       Gets the #PanelWorkbench self is a part of.
       Returns: a #PanelWorkbench, or null
   */
-  panel.workbench.Workbench getWorkbench()
+  panel.workbench.Workbench getWorkbench() nothrow
   {
     PanelWorkbench* _cretval;
     _cretval = panel_workspace_get_workbench(cast(PanelWorkspace*)this._cPtr);
@@ -151,7 +151,7 @@ class Workspace : adw.application_window.ApplicationWindow
         reason = the reason for the inhibit
       Returns: a #PanelInhibitor or null
   */
-  panel.inhibitor.Inhibitor inhibit(gtk.types.ApplicationInhibitFlags flags, string reason)
+  panel.inhibitor.Inhibitor inhibit(gtk.types.ApplicationInhibitFlags flags, string reason) nothrow
   {
     PanelInhibitor* _cretval;
     const(char)* _reason = reason.toCString(No.Alloc);
@@ -161,7 +161,7 @@ class Workspace : adw.application_window.ApplicationWindow
   }
 
   /** */
-  void setId(string id)
+  void setId(string id) nothrow
   {
     const(char)* _id = id.toCString(No.Alloc);
     panel_workspace_set_id(cast(PanelWorkspace*)this._cPtr, _id);
@@ -182,7 +182,7 @@ class WorkspaceGidBuilderImpl(T) : adw.application_window.ApplicationWindowGidBu
           types of workspaces, particularly when saving session state.
       Returns: Builder instance for fluent chaining
   */
-  T id(string propval)
+  T id(string propval) nothrow
   {
     return setProperty("id", propval);
   }
@@ -195,7 +195,7 @@ final class WorkspaceGidBuilder : WorkspaceGidBuilderImpl!WorkspaceGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Workspace build()
+  Workspace build() nothrow
   {
     return new Workspace(cast(void*)createGObject(Workspace._getGType), No.Take);
   }

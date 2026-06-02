@@ -12,7 +12,7 @@ struct GLAPI
   alias Enum = gstgl.types.GLAPI; ///
 
   /** */
-  static gstgl.types.GLAPI fromString(string apiS)
+  static gstgl.types.GLAPI fromString(string apiS) nothrow
   {
     GstGLAPI _cretval;
     const(char)* _apiS = apiS.toCString(No.Alloc);
@@ -22,7 +22,7 @@ struct GLAPI
   }
 
   /** */
-  static string toString_(gstgl.types.GLAPI api)
+  static string toString_(gstgl.types.GLAPI api) nothrow
   {
     char* _cretval;
     _cretval = gst_gl_api_to_string(api);

@@ -49,26 +49,26 @@ class MenuToolButton : gtk.tool_button.ToolButton
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_menu_tool_button_get_type != &gidSymbolNotFound ? gtk_menu_tool_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MenuToolButton self()
+  override MenuToolButton self() nothrow
   {
     return this;
   }
@@ -77,19 +77,19 @@ class MenuToolButton : gtk.tool_button.ToolButton
       Get builder for [gtk.menu_tool_button.MenuToolButton]
       Returns: New builder object
   */
-  static MenuToolButtonGidBuilder builder()
+  static MenuToolButtonGidBuilder builder() nothrow
   {
     return new MenuToolButtonGidBuilder;
   }
 
   /** */
-  @property gtk.menu.Menu menu()
+  @property gtk.menu.Menu menu() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.menu.Menu)("menu");
   }
 
   /** */
-  @property void menu(gtk.menu.Menu propval)
+  @property void menu(gtk.menu.Menu propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.menu.Menu)("menu", propval);
   }
@@ -103,7 +103,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
         label = a string that will be used as label, or null
       Returns: the new #GtkMenuToolButton
   */
-  this(gtk.widget.Widget iconWidget = null, string label = null)
+  this(gtk.widget.Widget iconWidget = null, string label = null) nothrow
   {
     GtkToolItem* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -122,7 +122,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
   
       Deprecated: Use [gtk.menu_tool_button.MenuToolButton.new_] instead.
   */
-  static gtk.menu_tool_button.MenuToolButton newFromStock(string stockId)
+  static gtk.menu_tool_button.MenuToolButton newFromStock(string stockId) nothrow
   {
     GtkToolItem* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
@@ -136,7 +136,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
       Returns: the #GtkMenu associated
             with #GtkMenuToolButton
   */
-  gtk.widget.Widget getMenu()
+  gtk.widget.Widget getMenu() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_tool_button_get_menu(cast(GtkMenuToolButton*)this._cPtr);
@@ -152,7 +152,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
       Params:
         markup = markup text to be used as tooltip text for button’s arrow button
   */
-  void setArrowTooltipMarkup(string markup)
+  void setArrowTooltipMarkup(string markup) nothrow
   {
     const(char)* _markup = markup.toCString(No.Alloc);
     gtk_menu_tool_button_set_arrow_tooltip_markup(cast(GtkMenuToolButton*)this._cPtr, _markup);
@@ -166,7 +166,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
       Params:
         text = text to be used as tooltip text for button’s arrow button
   */
-  void setArrowTooltipText(string text)
+  void setArrowTooltipText(string text) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_menu_tool_button_set_arrow_tooltip_text(cast(GtkMenuToolButton*)this._cPtr, _text);
@@ -179,7 +179,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
       Params:
         menu = the #GtkMenu associated with #GtkMenuToolButton
   */
-  void setMenu(gtk.widget.Widget menu)
+  void setMenu(gtk.widget.Widget menu) nothrow
   {
     gtk_menu_tool_button_set_menu(cast(GtkMenuToolButton*)this._cPtr, menu ? cast(GtkWidget*)menu._cPtr(No.Dup) : null);
   }
@@ -206,13 +206,13 @@ class MenuToolButton : gtk.tool_button.ToolButton
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectShowMenu(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowMenu(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.menu_tool_button.MenuToolButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -221,7 +221,14 @@ class MenuToolButton : gtk.tool_button.ToolButton
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.menu_tool_button.MenuToolButton.showMenu");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -235,7 +242,7 @@ class MenuToolButtonGidBuilderImpl(T) : gtk.tool_button.ToolButtonGidBuilderImpl
 
 
   /** */
-  T menu(gtk.menu.Menu propval)
+  T menu(gtk.menu.Menu propval) nothrow
   {
     return setProperty("menu", propval);
   }
@@ -248,7 +255,7 @@ final class MenuToolButtonGidBuilder : MenuToolButtonGidBuilderImpl!MenuToolButt
       Create object from builder.
       Returns: New object
   */
-  MenuToolButton build()
+  MenuToolButton build() nothrow
   {
     return new MenuToolButton(cast(void*)createGObject(MenuToolButton._getGType), No.Take);
   }

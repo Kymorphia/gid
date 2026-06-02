@@ -100,26 +100,26 @@ class ToggleButton : gtk.button.Button
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_toggle_button_get_type != &gidSymbolNotFound ? gtk_toggle_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ToggleButton self()
+  override ToggleButton self() nothrow
   {
     return this;
   }
@@ -128,7 +128,7 @@ class ToggleButton : gtk.button.Button
       Get builder for [gtk.toggle_button.ToggleButton]
       Returns: New builder object
   */
-  static ToggleButtonGidBuilder builder()
+  static ToggleButtonGidBuilder builder() nothrow
   {
     return new ToggleButtonGidBuilder;
   }
@@ -137,7 +137,7 @@ class ToggleButton : gtk.button.Button
       Get `active` property.
       Returns: If the toggle button should be pressed in.
   */
-  @property bool active()
+  @property bool active() nothrow
   {
     return getActive();
   }
@@ -147,7 +147,7 @@ class ToggleButton : gtk.button.Button
       Params:
         propval = If the toggle button should be pressed in.
   */
-  @property void active(bool propval)
+  @property void active(bool propval) nothrow
   {
     setActive(propval);
   }
@@ -157,7 +157,7 @@ class ToggleButton : gtk.button.Button
       Params:
         propval = The toggle button whose group this widget belongs to.
   */
-  @property void group(gtk.toggle_button.ToggleButton propval)
+  @property void group(gtk.toggle_button.ToggleButton propval) nothrow
   {
     setGroup(propval);
   }
@@ -168,7 +168,7 @@ class ToggleButton : gtk.button.Button
       A widget should be packed into the button, as in [gtk.button.Button.new_].
       Returns: a new toggle button.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_toggle_button_new();
@@ -182,7 +182,7 @@ class ToggleButton : gtk.button.Button
         label = a string containing the message to be placed in the toggle button.
       Returns: a new toggle button.
   */
-  static gtk.toggle_button.ToggleButton newWithLabel(string label)
+  static gtk.toggle_button.ToggleButton newWithLabel(string label) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -202,7 +202,7 @@ class ToggleButton : gtk.button.Button
             mnemonic character
       Returns: a new [gtk.toggle_button.ToggleButton]
   */
-  static gtk.toggle_button.ToggleButton newWithMnemonic(string label)
+  static gtk.toggle_button.ToggleButton newWithMnemonic(string label) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -218,7 +218,7 @@ class ToggleButton : gtk.button.Button
       if it is raised.
       Returns: whether the button is pressed
   */
-  bool getActive()
+  bool getActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_toggle_button_get_active(cast(GtkToggleButton*)this._cPtr);
@@ -237,7 +237,7 @@ class ToggleButton : gtk.button.Button
       Params:
         isActive = true or false.
   */
-  void setActive(bool isActive)
+  void setActive(bool isActive) nothrow
   {
     gtk_toggle_button_set_active(cast(GtkToggleButton*)this._cPtr, isActive);
   }
@@ -259,7 +259,7 @@ class ToggleButton : gtk.button.Button
         group = another [gtk.toggle_button.ToggleButton] to
             form a group with
   */
-  void setGroup(gtk.toggle_button.ToggleButton group = null)
+  void setGroup(gtk.toggle_button.ToggleButton group = null) nothrow
   {
     gtk_toggle_button_set_group(cast(GtkToggleButton*)this._cPtr, group ? cast(GtkToggleButton*)group._cPtr(No.Dup) : null);
   }
@@ -269,7 +269,7 @@ class ToggleButton : gtk.button.Button
   
       Deprecated: There is no good reason for an application ever to call this function.
   */
-  void toggled()
+  void toggled() nothrow
   {
     gtk_toggle_button_toggled(cast(GtkToggleButton*)this._cPtr);
   }
@@ -289,13 +289,13 @@ class ToggleButton : gtk.button.Button
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectToggled(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToggled(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.toggle_button.ToggleButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -304,7 +304,14 @@ class ToggleButton : gtk.button.Button
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.toggle_button.ToggleButton.toggled");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -323,7 +330,7 @@ class ToggleButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
         propval = If the toggle button should be pressed in.
       Returns: Builder instance for fluent chaining
   */
-  T active(bool propval)
+  T active(bool propval) nothrow
   {
     return setProperty("active", propval);
   }
@@ -334,7 +341,7 @@ class ToggleButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
         propval = The toggle button whose group this widget belongs to.
       Returns: Builder instance for fluent chaining
   */
-  T group(gtk.toggle_button.ToggleButton propval)
+  T group(gtk.toggle_button.ToggleButton propval) nothrow
   {
     return setProperty("group", propval);
   }
@@ -347,7 +354,7 @@ final class ToggleButtonGidBuilder : ToggleButtonGidBuilderImpl!ToggleButtonGidB
       Create object from builder.
       Returns: New object
   */
-  ToggleButton build()
+  ToggleButton build() nothrow
   {
     return new ToggleButton(cast(void*)createGObject(ToggleButton._getGType), No.Take);
   }

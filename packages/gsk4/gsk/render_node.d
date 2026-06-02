@@ -31,25 +31,23 @@ class RenderNode
   GskRenderNode* _cInstancePtr;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.render_node.RenderNode");
-
     _cInstancePtr = cast(GskRenderNode*)ptr;
 
-    if (!take)
+    if (!take && ptr)
       gsk_render_node_ref(_cInstancePtr);
   }
 
-  ~this()
+  ~this() nothrow
   {
-    gsk_render_node_unref(_cInstancePtr);
+    if (_cInstancePtr)
+      gsk_render_node_unref(_cInstancePtr);
   }
 
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     if (dup)
       gsk_render_node_ref(_cInstancePtr);
@@ -67,13 +65,20 @@ class RenderNode
         errorFunc = Callback on parsing errors
       Returns: a new [gsk.render_node.RenderNode]
   */
-  static gsk.render_node.RenderNode deserialize(glib.bytes.Bytes bytes, gsk.types.ParseErrorFunc errorFunc = null)
+  static gsk.render_node.RenderNode deserialize(glib.bytes.Bytes bytes, gsk.types.ParseErrorFunc errorFunc = null) nothrow
   {
-    extern(C) void _errorFuncCallback(const(GskParseLocation)* start, const(GskParseLocation)* end, const(GError)* error, void* userData)
+    extern(C) void _errorFuncCallback(const(GskParseLocation)* start, const(GskParseLocation)* end, const(GError)* error, void* userData) nothrow
     {
       auto _dlg = cast(gsk.types.ParseErrorFunc*)userData;
 
-      (*_dlg)(*cast(gsk.types.ParseLocation*)start, *cast(gsk.types.ParseLocation*)end, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
+      try
+      {
+        (*_dlg)(*cast(gsk.types.ParseLocation*)start, *cast(gsk.types.ParseLocation*)end, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gsk.types.ParseErrorFunc");
+      }
     }
     auto _errorFuncCB = errorFunc ? &_errorFuncCallback : null;
     GskRenderNode* _cretval;
@@ -96,7 +101,7 @@ class RenderNode
       Params:
         cr = cairo context to draw to
   */
-  void draw(cairo.context.Context cr)
+  void draw(cairo.context.Context cr) nothrow
   {
     gsk_render_node_draw(cast(GskRenderNode*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null);
   }
@@ -109,7 +114,7 @@ class RenderNode
       Params:
         bounds = return location for the boundaries
   */
-  void getBounds(out graphene.rect.Rect bounds)
+  void getBounds(out graphene.rect.Rect bounds) nothrow
   {
     graphene_rect_t _bounds;
     gsk_render_node_get_bounds(cast(GskRenderNode*)this._cPtr, &_bounds);
@@ -120,7 +125,7 @@ class RenderNode
       Returns the type of the node.
       Returns: the type of the [gsk.render_node.RenderNode]
   */
-  gsk.types.RenderNodeType getNodeType()
+  gsk.types.RenderNodeType getNodeType() nothrow
   {
     GskRenderNodeType _cretval;
     _cretval = gsk_render_node_get_node_type(cast(const(GskRenderNode)*)this._cPtr);
@@ -140,7 +145,7 @@ class RenderNode
       The format is not meant as a permanent storage format.
       Returns: a [glib.bytes.Bytes] representing the node.
   */
-  glib.bytes.Bytes serialize()
+  glib.bytes.Bytes serialize() nothrow
   {
     GBytes* _cretval;
     _cretval = gsk_render_node_serialize(cast(GskRenderNode*)this._cPtr);

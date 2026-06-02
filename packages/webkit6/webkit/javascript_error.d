@@ -17,7 +17,7 @@ struct JavascriptError
       Gets the quark for the domain of JavaScript errors.
       Returns: JavaScript error domain.
   */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = webkit_javascript_error_quark();
@@ -27,12 +27,12 @@ struct JavascriptError
 
 class JavascriptException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(webkit.javascript_error.JavascriptError.quark, cast(int)code, msg);
   }

@@ -29,7 +29,7 @@ template CellEditableT()
       Get `editingCanceled` property.
       Returns: Indicates whether editing on the cell has been canceled.
   */
-  @property bool editingCanceled()
+  @property bool editingCanceled() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("editing-canceled");
   }
@@ -39,7 +39,7 @@ template CellEditableT()
       Params:
         propval = Indicates whether editing on the cell has been canceled.
   */
-  @property void editingCanceled(bool propval)
+  @property void editingCanceled(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("editing-canceled", propval);
   }
@@ -47,7 +47,7 @@ template CellEditableT()
   /**
       Emits the `GtkCellEditable::editing-done` signal.
   */
-  override void editingDone()
+  override void editingDone() nothrow
   {
     gtk_cell_editable_editing_done(cast(GtkCellEditable*)this._cPtr);
   }
@@ -55,7 +55,7 @@ template CellEditableT()
   /**
       Emits the `GtkCellEditable::remove-widget` signal.
   */
-  override void removeWidget()
+  override void removeWidget() nothrow
   {
     gtk_cell_editable_remove_widget(cast(GtkCellEditable*)this._cPtr);
   }
@@ -76,7 +76,7 @@ template CellEditableT()
         event = The [gdk.event.Event] that began the editing process, or
             null if editing was initiated programmatically
   */
-  override void startEditing(gdk.event.Event event = null)
+  override void startEditing(gdk.event.Event event = null) nothrow
   {
     gtk_cell_editable_start_editing(cast(GtkCellEditable*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
   }
@@ -106,13 +106,13 @@ template CellEditableT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEditingDone(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEditingDone(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.cell_editable.CellEditable)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -121,7 +121,14 @@ template CellEditableT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.cell_editable.CellEditable.editingDone");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -154,13 +161,13 @@ template CellEditableT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRemoveWidget(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRemoveWidget(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.cell_editable.CellEditable)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -169,7 +176,14 @@ template CellEditableT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.cell_editable.CellEditable.removeWidget");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -187,7 +201,7 @@ template CellEditableGidBuilderT()
         propval = Indicates whether editing on the cell has been canceled.
       Returns: Builder instance for fluent chaining
   */
-  T editingCanceled(bool propval)
+  T editingCanceled(bool propval) nothrow
   {
     return setProperty("editing-canceled", propval);
   }

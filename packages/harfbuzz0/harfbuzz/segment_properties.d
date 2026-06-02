@@ -22,7 +22,7 @@ class SegmentProperties : gobject.boxed.Boxed
         direction = the #hb_direction_t of the buffer, see [harfbuzz.global.bufferSetDirection].
         script = the #hb_script_t of the buffer, see [harfbuzz.global.bufferSetScript].
   */
-  this(harfbuzz.types.Direction direction = harfbuzz.types.Direction.init, harfbuzz.types.Script script = harfbuzz.types.Script.init)
+  this(harfbuzz.types.Direction direction = harfbuzz.types.Direction.init, harfbuzz.types.Script script = harfbuzz.types.Script.init) nothrow
   {
     super(gMalloc(hb_segment_properties_t.sizeof), Yes.Take);
     this.direction = direction;
@@ -30,32 +30,32 @@ class SegmentProperties : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())hb_gobject_segment_properties_get_type != &gidSymbolNotFound ? hb_gobject_segment_properties_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SegmentProperties self()
+  override SegmentProperties self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class SegmentProperties : gobject.boxed.Boxed
       Get `direction` field.
       Returns: the #hb_direction_t of the buffer, see [harfbuzz.global.bufferSetDirection].
   */
-  @property harfbuzz.types.Direction direction()
+  @property harfbuzz.types.Direction direction() nothrow
   {
     return cast(harfbuzz.types.Direction)(cast(hb_segment_properties_t*)this._cPtr).direction;
   }
@@ -74,7 +74,7 @@ class SegmentProperties : gobject.boxed.Boxed
       Params:
         propval = the #hb_direction_t of the buffer, see [harfbuzz.global.bufferSetDirection].
   */
-  @property void direction(harfbuzz.types.Direction propval)
+  @property void direction(harfbuzz.types.Direction propval) nothrow
   {
     (cast(hb_segment_properties_t*)this._cPtr).direction = cast(hb_direction_t)propval;
   }
@@ -83,7 +83,7 @@ class SegmentProperties : gobject.boxed.Boxed
       Get `script` field.
       Returns: the #hb_script_t of the buffer, see [harfbuzz.global.bufferSetScript].
   */
-  @property harfbuzz.types.Script script()
+  @property harfbuzz.types.Script script() nothrow
   {
     return cast(harfbuzz.types.Script)(cast(hb_segment_properties_t*)this._cPtr).script;
   }
@@ -93,7 +93,7 @@ class SegmentProperties : gobject.boxed.Boxed
       Params:
         propval = the #hb_script_t of the buffer, see [harfbuzz.global.bufferSetScript].
   */
-  @property void script(harfbuzz.types.Script propval)
+  @property void script(harfbuzz.types.Script propval) nothrow
   {
     (cast(hb_segment_properties_t*)this._cPtr).script = cast(hb_script_t)propval;
   }
@@ -102,7 +102,7 @@ class SegmentProperties : gobject.boxed.Boxed
       Get `language` field.
       Returns: the #hb_language_t of the buffer, see [harfbuzz.global.bufferSetLanguage].
   */
-  @property harfbuzz.types.Language language()
+  @property harfbuzz.types.Language language() nothrow
   {
     return (cast(hb_segment_properties_t*)this._cPtr).language;
   }

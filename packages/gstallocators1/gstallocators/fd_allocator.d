@@ -17,26 +17,26 @@ class FdAllocator : gst.allocator.Allocator
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_fd_allocator_get_type != &gidSymbolNotFound ? gst_fd_allocator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FdAllocator self()
+  override FdAllocator self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class FdAllocator : gst.allocator.Allocator
       Get builder for [gstallocators.fd_allocator.FdAllocator]
       Returns: New builder object
   */
-  static FdAllocatorGidBuilder builder()
+  static FdAllocatorGidBuilder builder() nothrow
   {
     return new FdAllocatorGidBuilder;
   }
@@ -55,7 +55,7 @@ class FdAllocator : gst.allocator.Allocator
       Returns: a new fd allocator. Use [gst.object.ObjectWrap.unref] to
         release the allocator after usage
   */
-  this()
+  this() nothrow
   {
     GstAllocator* _cretval;
     _cretval = gst_fd_allocator_new();
@@ -75,7 +75,7 @@ class FdAllocator : gst.allocator.Allocator
         the `GST_FD_MEMORY_FLAG_DONT_CLOSE` flag is specified.
         The memory is only mmapped on [gst.buffer.Buffer.map] request.
   */
-  static gst.memory.Memory alloc(gst.allocator.Allocator allocator, int fd, size_t size, gstallocators.types.FdMemoryFlags flags)
+  static gst.memory.Memory alloc(gst.allocator.Allocator allocator, int fd, size_t size, gstallocators.types.FdMemoryFlags flags) nothrow
   {
     GstMemory* _cretval;
     _cretval = gst_fd_allocator_alloc(allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, fd, size, flags);
@@ -96,7 +96,7 @@ final class FdAllocatorGidBuilder : FdAllocatorGidBuilderImpl!FdAllocatorGidBuil
       Create object from builder.
       Returns: New object
   */
-  FdAllocator build()
+  FdAllocator build() nothrow
   {
     return new FdAllocator(cast(void*)createGObject(FdAllocator._getGType), Yes.Take);
   }

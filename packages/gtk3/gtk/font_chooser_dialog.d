@@ -30,26 +30,26 @@ class FontChooserDialog : gtk.dialog.Dialog, gtk.font_chooser.FontChooser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_font_chooser_dialog_get_type != &gidSymbolNotFound ? gtk_font_chooser_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FontChooserDialog self()
+  override FontChooserDialog self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class FontChooserDialog : gtk.dialog.Dialog, gtk.font_chooser.FontChooser
       Get builder for [gtk.font_chooser_dialog.FontChooserDialog]
       Returns: New builder object
   */
-  static FontChooserDialogGidBuilder builder()
+  static FontChooserDialogGidBuilder builder() nothrow
   {
     return new FontChooserDialogGidBuilder;
   }
@@ -73,7 +73,7 @@ class FontChooserDialog : gtk.dialog.Dialog, gtk.font_chooser.FontChooser
         parent = Transient parent of the dialog, or null
       Returns: a new #GtkFontChooserDialog
   */
-  this(string title = null, gtk.window.Window parent = null)
+  this(string title = null, gtk.window.Window parent = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -96,7 +96,7 @@ final class FontChooserDialogGidBuilder : FontChooserDialogGidBuilderImpl!FontCh
       Create object from builder.
       Returns: New object
   */
-  FontChooserDialog build()
+  FontChooserDialog build() nothrow
   {
     return new FontChooserDialog(cast(void*)createGObject(FontChooserDialog._getGType), No.Take);
   }

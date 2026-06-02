@@ -16,11 +16,8 @@ class EventConfigure
   GdkEventConfigure _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.event_configure.EventConfigure");
-
     _cInstance = *cast(GdkEventConfigure*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class EventConfigure
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class EventConfigure
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.Configure]).
   */
-  @property gdk.types.EventType type()
+  @property gdk.types.EventType type() nothrow
   {
     return cast(gdk.types.EventType)(cast(GdkEventConfigure*)this._cPtr).type;
   }
@@ -47,7 +44,7 @@ class EventConfigure
       Params:
         propval = the type of the event ([gdk.types.EventType.Configure]).
   */
-  @property void type(gdk.types.EventType propval)
+  @property void type(gdk.types.EventType propval) nothrow
   {
     (cast(GdkEventConfigure*)this._cPtr).type = cast(GdkEventType)propval;
   }
@@ -56,7 +53,7 @@ class EventConfigure
       Get `window` field.
       Returns: the window which received the event.
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventConfigure*)this._cPtr).window);
   }
@@ -66,7 +63,7 @@ class EventConfigure
       Params:
         propval = the window which received the event.
   */
-  @property void window(gdk.window.Window propval)
+  @property void window(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventConfigure*)this._cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventConfigure*)this._cPtr).window);
@@ -76,7 +73,7 @@ class EventConfigure
       Get `sendEvent` field.
       Returns: true if the event was sent explicitly.
   */
-  @property byte sendEvent()
+  @property byte sendEvent() nothrow
   {
     return (cast(GdkEventConfigure*)this._cPtr).sendEvent;
   }
@@ -86,7 +83,7 @@ class EventConfigure
       Params:
         propval = true if the event was sent explicitly.
   */
-  @property void sendEvent(byte propval)
+  @property void sendEvent(byte propval) nothrow
   {
     (cast(GdkEventConfigure*)this._cPtr).sendEvent = propval;
   }
@@ -95,7 +92,7 @@ class EventConfigure
       Get `x` field.
       Returns: the new x coordinate of the window, relative to its parent.
   */
-  @property int x()
+  @property int x() nothrow
   {
     return (cast(GdkEventConfigure*)this._cPtr).x;
   }
@@ -105,7 +102,7 @@ class EventConfigure
       Params:
         propval = the new x coordinate of the window, relative to its parent.
   */
-  @property void x(int propval)
+  @property void x(int propval) nothrow
   {
     (cast(GdkEventConfigure*)this._cPtr).x = propval;
   }
@@ -114,7 +111,7 @@ class EventConfigure
       Get `y` field.
       Returns: the new y coordinate of the window, relative to its parent.
   */
-  @property int y()
+  @property int y() nothrow
   {
     return (cast(GdkEventConfigure*)this._cPtr).y;
   }
@@ -124,7 +121,7 @@ class EventConfigure
       Params:
         propval = the new y coordinate of the window, relative to its parent.
   */
-  @property void y(int propval)
+  @property void y(int propval) nothrow
   {
     (cast(GdkEventConfigure*)this._cPtr).y = propval;
   }
@@ -133,7 +130,7 @@ class EventConfigure
       Get `width` field.
       Returns: the new width of the window.
   */
-  @property int width()
+  @property int width() nothrow
   {
     return (cast(GdkEventConfigure*)this._cPtr).width;
   }
@@ -143,7 +140,7 @@ class EventConfigure
       Params:
         propval = the new width of the window.
   */
-  @property void width(int propval)
+  @property void width(int propval) nothrow
   {
     (cast(GdkEventConfigure*)this._cPtr).width = propval;
   }
@@ -152,7 +149,7 @@ class EventConfigure
       Get `height` field.
       Returns: the new height of the window.
   */
-  @property int height()
+  @property int height() nothrow
   {
     return (cast(GdkEventConfigure*)this._cPtr).height;
   }
@@ -162,7 +159,7 @@ class EventConfigure
       Params:
         propval = the new height of the window.
   */
-  @property void height(int propval)
+  @property void height(int propval) nothrow
   {
     (cast(GdkEventConfigure*)this._cPtr).height = propval;
   }

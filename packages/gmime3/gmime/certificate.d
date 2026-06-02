@@ -16,26 +16,26 @@ class Certificate : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_certificate_get_type != &gidSymbolNotFound ? g_mime_certificate_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Certificate self()
+  override Certificate self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class Certificate : gobject.object.ObjectWrap
       Get builder for [gmime.certificate.Certificate]
       Returns: New builder object
   */
-  static CertificateGidBuilder builder()
+  static CertificateGidBuilder builder() nothrow
   {
     return new CertificateGidBuilder;
   }
@@ -53,7 +53,7 @@ class Certificate : gobject.object.ObjectWrap
       Creates a new #GMimeCertificate object.
       Returns: a new #GMimeCertificate object.
   */
-  this()
+  this() nothrow
   {
     GMimeCertificate* _cretval;
     _cretval = g_mime_certificate_new();
@@ -64,7 +64,7 @@ class Certificate : gobject.object.ObjectWrap
       Get the creation date of the certificate's key.
       Returns: the creation date of the certificate's key or %-1 if unknown.
   */
-  long getCreated()
+  long getCreated() nothrow
   {
     long _retval;
     _retval = g_mime_certificate_get_created(cast(GMimeCertificate*)this._cPtr);
@@ -76,7 +76,7 @@ class Certificate : gobject.object.ObjectWrap
       UNIX epoch, represented as a 64-bit signed integer.
       Returns: the creation date of the certificate's key or %-1 if unknown.
   */
-  long getCreated64()
+  long getCreated64() nothrow
   {
     long _retval;
     _retval = g_mime_certificate_get_created64(cast(GMimeCertificate*)this._cPtr);
@@ -88,7 +88,7 @@ class Certificate : gobject.object.ObjectWrap
       Returns: the digest algorithm used by the certificate or
         #GMIME_DIGEST_ALGO_DEFAULT if unspecified.
   */
-  gmime.types.DigestAlgo getDigestAlgo()
+  gmime.types.DigestAlgo getDigestAlgo() nothrow
   {
     GMimeDigestAlgo _cretval;
     _cretval = g_mime_certificate_get_digest_algo(cast(GMimeCertificate*)this._cPtr);
@@ -105,7 +105,7 @@ class Certificate : gobject.object.ObjectWrap
       address will be returned.
       Returns: the relevant e-mail address, or null if unspecified.
   */
-  string getEmail()
+  string getEmail() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_certificate_get_email(cast(GMimeCertificate*)this._cPtr);
@@ -117,7 +117,7 @@ class Certificate : gobject.object.ObjectWrap
       Get the expiration date of the certificate's key. A value of `0` means the certificate never expires.
       Returns: the expiration date of the certificate's key or %-1 if unknown.
   */
-  long getExpires()
+  long getExpires() nothrow
   {
     long _retval;
     _retval = g_mime_certificate_get_expires(cast(GMimeCertificate*)this._cPtr);
@@ -130,7 +130,7 @@ class Certificate : gobject.object.ObjectWrap
       `0` means the certificate never expires.
       Returns: the expiration date of the certificate's key or %-1 if unknown.
   */
-  long getExpires64()
+  long getExpires64() nothrow
   {
     long _retval;
     _retval = g_mime_certificate_get_expires64(cast(GMimeCertificate*)this._cPtr);
@@ -141,7 +141,7 @@ class Certificate : gobject.object.ObjectWrap
       Get the certificate's key fingerprint.
       Returns: the certificate's key fingerprint or null if unspecified.
   */
-  string getFingerprint()
+  string getFingerprint() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_certificate_get_fingerprint(cast(GMimeCertificate*)this._cPtr);
@@ -155,7 +155,7 @@ class Certificate : gobject.object.ObjectWrap
       with the certificate.
       Returns: the identity validity of the certificate.
   */
-  gmime.types.Validity getIdValidity()
+  gmime.types.Validity getIdValidity() nothrow
   {
     GMimeValidity _cretval;
     _cretval = g_mime_certificate_get_id_validity(cast(GMimeCertificate*)this._cPtr);
@@ -167,7 +167,7 @@ class Certificate : gobject.object.ObjectWrap
       Get the certificate's issuer name.
       Returns: the certificate's issuer name or null if unspecified.
   */
-  string getIssuerName()
+  string getIssuerName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_certificate_get_issuer_name(cast(GMimeCertificate*)this._cPtr);
@@ -179,7 +179,7 @@ class Certificate : gobject.object.ObjectWrap
       Get the certificate's issuer serial.
       Returns: the certificate's issuer serial or null if unspecified.
   */
-  string getIssuerSerial()
+  string getIssuerSerial() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_certificate_get_issuer_serial(cast(GMimeCertificate*)this._cPtr);
@@ -191,7 +191,7 @@ class Certificate : gobject.object.ObjectWrap
       Get the certificate's key id.
       Returns: the certificate's key id or null if unspecified.
   */
-  string getKeyId()
+  string getKeyId() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_certificate_get_key_id(cast(GMimeCertificate*)this._cPtr);
@@ -209,7 +209,7 @@ class Certificate : gobject.object.ObjectWrap
       will be returned.
       Returns: the the relevant name or null if unspecified.
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_certificate_get_name(cast(GMimeCertificate*)this._cPtr);
@@ -222,7 +222,7 @@ class Certificate : gobject.object.ObjectWrap
       Returns: the public-key algorithm used by the certificate or
         #GMIME_PUBKEY_ALGO_DEFAULT if unspecified.
   */
-  gmime.types.PubKeyAlgo getPubkeyAlgo()
+  gmime.types.PubKeyAlgo getPubkeyAlgo() nothrow
   {
     GMimePubKeyAlgo _cretval;
     _cretval = g_mime_certificate_get_pubkey_algo(cast(GMimeCertificate*)this._cPtr);
@@ -234,7 +234,7 @@ class Certificate : gobject.object.ObjectWrap
       Get the certificate trust.
       Returns: the certificate trust.
   */
-  gmime.types.Trust getTrust()
+  gmime.types.Trust getTrust() nothrow
   {
     GMimeTrust _cretval;
     _cretval = g_mime_certificate_get_trust(cast(GMimeCertificate*)this._cPtr);
@@ -250,7 +250,7 @@ class Certificate : gobject.object.ObjectWrap
       User ID will be returned.
       Returns: the relevant User ID or null if unspecified.
   */
-  string getUserId()
+  string getUserId() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_certificate_get_user_id(cast(GMimeCertificate*)this._cPtr);
@@ -264,7 +264,7 @@ class Certificate : gobject.object.ObjectWrap
       Params:
         created = creation date
   */
-  void setCreated(long created)
+  void setCreated(long created) nothrow
   {
     g_mime_certificate_set_created(cast(GMimeCertificate*)this._cPtr, created);
   }
@@ -275,7 +275,7 @@ class Certificate : gobject.object.ObjectWrap
       Params:
         algo = a #GMimeDigestAlgo
   */
-  void setDigestAlgo(gmime.types.DigestAlgo algo)
+  void setDigestAlgo(gmime.types.DigestAlgo algo) nothrow
   {
     g_mime_certificate_set_digest_algo(cast(GMimeCertificate*)this._cPtr, algo);
   }
@@ -287,7 +287,7 @@ class Certificate : gobject.object.ObjectWrap
       Params:
         email = certificate's email
   */
-  void setEmail(string email)
+  void setEmail(string email) nothrow
   {
     const(char)* _email = email.toCString(No.Alloc);
     g_mime_certificate_set_email(cast(GMimeCertificate*)this._cPtr, _email);
@@ -299,7 +299,7 @@ class Certificate : gobject.object.ObjectWrap
       Params:
         expires = expiration date
   */
-  void setExpires(long expires)
+  void setExpires(long expires) nothrow
   {
     g_mime_certificate_set_expires(cast(GMimeCertificate*)this._cPtr, expires);
   }
@@ -310,7 +310,7 @@ class Certificate : gobject.object.ObjectWrap
       Params:
         fingerprint = fingerprint string
   */
-  void setFingerprint(string fingerprint)
+  void setFingerprint(string fingerprint) nothrow
   {
     const(char)* _fingerprint = fingerprint.toCString(No.Alloc);
     g_mime_certificate_set_fingerprint(cast(GMimeCertificate*)this._cPtr, _fingerprint);
@@ -322,7 +322,7 @@ class Certificate : gobject.object.ObjectWrap
       Params:
         validity = a #GMimeValidity representing the validity of the certificate's identity information.
   */
-  void setIdValidity(gmime.types.Validity validity)
+  void setIdValidity(gmime.types.Validity validity) nothrow
   {
     g_mime_certificate_set_id_validity(cast(GMimeCertificate*)this._cPtr, validity);
   }
@@ -333,7 +333,7 @@ class Certificate : gobject.object.ObjectWrap
       Params:
         issuerName = certificate's issuer name
   */
-  void setIssuerName(string issuerName)
+  void setIssuerName(string issuerName) nothrow
   {
     const(char)* _issuerName = issuerName.toCString(No.Alloc);
     g_mime_certificate_set_issuer_name(cast(GMimeCertificate*)this._cPtr, _issuerName);
@@ -345,7 +345,7 @@ class Certificate : gobject.object.ObjectWrap
       Params:
         issuerSerial = certificate's issuer serial
   */
-  void setIssuerSerial(string issuerSerial)
+  void setIssuerSerial(string issuerSerial) nothrow
   {
     const(char)* _issuerSerial = issuerSerial.toCString(No.Alloc);
     g_mime_certificate_set_issuer_serial(cast(GMimeCertificate*)this._cPtr, _issuerSerial);
@@ -357,7 +357,7 @@ class Certificate : gobject.object.ObjectWrap
       Params:
         keyId = key id
   */
-  void setKeyId(string keyId)
+  void setKeyId(string keyId) nothrow
   {
     const(char)* _keyId = keyId.toCString(No.Alloc);
     g_mime_certificate_set_key_id(cast(GMimeCertificate*)this._cPtr, _keyId);
@@ -371,7 +371,7 @@ class Certificate : gobject.object.ObjectWrap
       Params:
         name = certificate's name
   */
-  void setName(string name)
+  void setName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     g_mime_certificate_set_name(cast(GMimeCertificate*)this._cPtr, _name);
@@ -383,7 +383,7 @@ class Certificate : gobject.object.ObjectWrap
       Params:
         algo = a #GMimePubKeyAlgo
   */
-  void setPubkeyAlgo(gmime.types.PubKeyAlgo algo)
+  void setPubkeyAlgo(gmime.types.PubKeyAlgo algo) nothrow
   {
     g_mime_certificate_set_pubkey_algo(cast(GMimeCertificate*)this._cPtr, algo);
   }
@@ -394,7 +394,7 @@ class Certificate : gobject.object.ObjectWrap
       Params:
         trust = a #GMimeTrust value
   */
-  void setTrust(gmime.types.Trust trust)
+  void setTrust(gmime.types.Trust trust) nothrow
   {
     g_mime_certificate_set_trust(cast(GMimeCertificate*)this._cPtr, trust);
   }
@@ -407,7 +407,7 @@ class Certificate : gobject.object.ObjectWrap
       Params:
         userId = the full User ID for a certificate
   */
-  void setUserId(string userId)
+  void setUserId(string userId) nothrow
   {
     const(char)* _userId = userId.toCString(No.Alloc);
     g_mime_certificate_set_user_id(cast(GMimeCertificate*)this._cPtr, _userId);
@@ -426,7 +426,7 @@ final class CertificateGidBuilder : CertificateGidBuilderImpl!CertificateGidBuil
       Create object from builder.
       Returns: New object
   */
-  Certificate build()
+  Certificate build() nothrow
   {
     return new Certificate(cast(void*)createGObject(Certificate._getGType), Yes.Take);
   }

@@ -19,26 +19,26 @@ class MetaStruct : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_meta_struct_get_type != &gidSymbolNotFound ? gda_meta_struct_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MetaStruct self()
+  override MetaStruct self() nothrow
   {
     return this;
   }
@@ -47,19 +47,19 @@ class MetaStruct : gobject.object.ObjectWrap
       Get builder for [gda.meta_struct.MetaStruct]
       Returns: New builder object
   */
-  static MetaStructGidBuilder builder()
+  static MetaStructGidBuilder builder() nothrow
   {
     return new MetaStructGidBuilder;
   }
 
   /** */
-  @property uint features()
+  @property uint features() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("features");
   }
 
   /** */
-  @property gda.meta_store.MetaStore metaStore()
+  @property gda.meta_store.MetaStore metaStore() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.meta_store.MetaStore)("meta-store");
   }
@@ -74,7 +74,7 @@ class MetaStruct : gobject.object.ObjectWrap
         features = the kind of extra information the new #GdaMetaStruct object will compute
       Returns: the newly created #GdaMetaStruct object
   */
-  this(gda.meta_store.MetaStore store, gda.types.MetaStructFeature features)
+  this(gda.meta_store.MetaStore store, gda.types.MetaStructFeature features) nothrow
   {
     GdaMetaStruct* _cretval;
     _cretval = gda_meta_struct_new(store ? cast(GdaMetaStore*)store._cPtr(No.Dup) : null, features);
@@ -82,7 +82,7 @@ class MetaStruct : gobject.object.ObjectWrap
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_meta_struct_error_quark();
@@ -244,7 +244,7 @@ class MetaStruct : gobject.object.ObjectWrap
         name = the object's name (as a G_TYPE_STRING GValue), not null
       Returns: the #GdaMetaDbObject or null if not found
   */
-  gda.meta_db_object.MetaDbObject getDbObject(gobject.value.Value catalog, gobject.value.Value schema, gobject.value.Value name)
+  gda.meta_db_object.MetaDbObject getDbObject(gobject.value.Value catalog, gobject.value.Value schema, gobject.value.Value name) nothrow
   {
     GdaMetaDbObject* _cretval;
     _cretval = gda_meta_struct_get_db_object(cast(GdaMetaStruct*)this._cPtr, catalog ? cast(const(GValue)*)catalog._cPtr(No.Dup) : null, schema ? cast(const(GValue)*)schema._cPtr(No.Dup) : null, name ? cast(const(GValue)*)name._cPtr(No.Dup) : null);
@@ -300,13 +300,13 @@ class MetaStructGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T features(uint propval)
+  T features(uint propval) nothrow
   {
     return setProperty("features", propval);
   }
 
   /** */
-  T metaStore(gda.meta_store.MetaStore propval)
+  T metaStore(gda.meta_store.MetaStore propval) nothrow
   {
     return setProperty("meta-store", propval);
   }
@@ -319,7 +319,7 @@ final class MetaStructGidBuilder : MetaStructGidBuilderImpl!MetaStructGidBuilder
       Create object from builder.
       Returns: New object
   */
-  MetaStruct build()
+  MetaStruct build() nothrow
   {
     return new MetaStruct(cast(void*)createGObject(MetaStruct._getGType), Yes.Take);
   }
@@ -327,12 +327,12 @@ final class MetaStructGidBuilder : MetaStructGidBuilderImpl!MetaStructGidBuilder
 
 class MetaStructException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.meta_struct.MetaStruct.errorQuark, cast(int)code, msg);
   }

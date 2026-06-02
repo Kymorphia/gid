@@ -34,7 +34,7 @@ template ImageT()
       Get a textual description of this image.
       Returns: a string representing the image description
   */
-  override string getImageDescription()
+  override string getImageDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = atk_image_get_image_description(cast(AtkImage*)this._cPtr);
@@ -48,7 +48,7 @@ template ImageT()
           `LC_MESSAGES` locale used by the image description, or
           null if the image does not specify a locale.
   */
-  override string getImageLocale()
+  override string getImageLocale() nothrow
   {
     const(char)* _cretval;
     _cretval = atk_image_get_image_locale(cast(AtkImage*)this._cPtr);
@@ -69,7 +69,7 @@ template ImageT()
         coordType = specifies whether the coordinates are relative to the screen
           or to the components top level window
   */
-  override void getImagePosition(out int x, out int y, atk.types.CoordType coordType)
+  override void getImagePosition(out int x, out int y, atk.types.CoordType coordType) nothrow
   {
     atk_image_get_image_position(cast(AtkImage*)this._cPtr, cast(int*)&x, cast(int*)&y, coordType);
   }
@@ -86,7 +86,7 @@ template ImageT()
         width = filled with the image width, or -1 if the value cannot be obtained.
         height = filled with the image height, or -1 if the value cannot be obtained.
   */
-  override void getImageSize(out int width, out int height)
+  override void getImageSize(out int width, out int height) nothrow
   {
     atk_image_get_image_size(cast(AtkImage*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
@@ -99,7 +99,7 @@ template ImageT()
       Returns: boolean TRUE, or FALSE if operation could
         not be completed.
   */
-  override bool setImageDescription(string description)
+  override bool setImageDescription(string description) nothrow
   {
     bool _retval;
     const(char)* _description = description.toCString(No.Alloc);

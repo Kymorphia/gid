@@ -112,7 +112,7 @@ template AppInfoT()
       See [gio.app_info.AppInfo.delete_].
       Returns: true if appinfo can be deleted
   */
-  override bool canDelete()
+  override bool canDelete() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_app_info_can_delete(cast(GAppInfo*)this._cPtr);
@@ -124,7 +124,7 @@ template AppInfoT()
       Returns: true if it is possible to remove supported
             content types from a given appinfo, false if not.
   */
-  override bool canRemoveSupportsType()
+  override bool canRemoveSupportsType() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_app_info_can_remove_supports_type(cast(GAppInfo*)this._cPtr);
@@ -139,7 +139,7 @@ template AppInfoT()
       See [gio.app_info.AppInfo.canDelete].
       Returns: true if appinfo has been deleted
   */
-  override bool delete_()
+  override bool delete_() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_app_info_delete(cast(GAppInfo*)this._cPtr);
@@ -150,7 +150,7 @@ template AppInfoT()
       Creates a duplicate of a #GAppInfo.
       Returns: a duplicate of appinfo.
   */
-  override gio.app_info.AppInfo dup()
+  override gio.app_info.AppInfo dup() nothrow
   {
     GAppInfo* _cretval;
     _cretval = g_app_info_dup(cast(GAppInfo*)this._cPtr);
@@ -169,7 +169,7 @@ template AppInfoT()
         appinfo2 = the second #GAppInfo.
       Returns: true if appinfo1 is equal to appinfo2. false otherwise.
   */
-  override bool equal(gio.app_info.AppInfo appinfo2)
+  override bool equal(gio.app_info.AppInfo appinfo2) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_app_info_equal(cast(GAppInfo*)this._cPtr, appinfo2 ? cast(GAppInfo*)(cast(gobject.object.ObjectWrap)appinfo2)._cPtr(No.Dup) : null);
@@ -182,7 +182,7 @@ template AppInfoT()
       Returns: a string containing the appinfo's commandline,
             or null if this information is not available
   */
-  override string getCommandline()
+  override string getCommandline() nothrow
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_commandline(cast(GAppInfo*)this._cPtr);
@@ -195,7 +195,7 @@ template AppInfoT()
       Returns: a string containing a description of the
         application appinfo, or null if none.
   */
-  override string getDescription()
+  override string getDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_description(cast(GAppInfo*)this._cPtr);
@@ -209,7 +209,7 @@ template AppInfoT()
       Returns: the display name of the application for appinfo, or the name if
         no display name is available.
   */
-  override string getDisplayName()
+  override string getDisplayName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_display_name(cast(GAppInfo*)this._cPtr);
@@ -226,7 +226,7 @@ template AppInfoT()
       Returns: a string containing the appinfo's application
         binaries name
   */
-  override string getExecutable()
+  override string getExecutable() nothrow
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_executable(cast(GAppInfo*)this._cPtr);
@@ -239,7 +239,7 @@ template AppInfoT()
       Returns: the default #GIcon for appinfo or null
         if there is no default icon.
   */
-  override gio.icon.Icon getIcon()
+  override gio.icon.Icon getIcon() nothrow
   {
     GIcon* _cretval;
     _cretval = g_app_info_get_icon(cast(GAppInfo*)this._cPtr);
@@ -257,7 +257,7 @@ template AppInfoT()
       the appinfo has been constructed.
       Returns: a string containing the application's ID.
   */
-  override string getId()
+  override string getId() nothrow
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_id(cast(GAppInfo*)this._cPtr);
@@ -269,7 +269,7 @@ template AppInfoT()
       Gets the installed name of the application.
       Returns: the name of the application for appinfo.
   */
-  override string getName()
+  override string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_app_info_get_name(cast(GAppInfo*)this._cPtr);
@@ -286,7 +286,7 @@ template AppInfoT()
       the application.
       Returns: a list of content types.
   */
-  override string[] getSupportedTypes()
+  override string[] getSupportedTypes() nothrow
   {
     const(char*)* _cretval;
     _cretval = g_app_info_get_supported_types(cast(GAppInfo*)this._cPtr);
@@ -397,14 +397,21 @@ template AppInfoT()
         cancellable = a #GCancellable
         callback = a #GAsyncReadyCallback to call when the request is done
   */
-  override void launchUrisAsync(string[] uris = null, gio.app_launch_context.AppLaunchContext context = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  override void launchUrisAsync(string[] uris = null, gio.app_launch_context.AppLaunchContext context = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _uris = gListFromD!(string)(uris);
@@ -516,7 +523,7 @@ template AppInfoT()
       list available applications.
       Returns: true if the appinfo should be shown, false otherwise.
   */
-  override bool shouldShow()
+  override bool shouldShow() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_app_info_should_show(cast(GAppInfo*)this._cPtr);
@@ -527,7 +534,7 @@ template AppInfoT()
       Checks if the application accepts files as arguments.
       Returns: true if the appinfo supports files.
   */
-  override bool supportsFiles()
+  override bool supportsFiles() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_app_info_supports_files(cast(GAppInfo*)this._cPtr);
@@ -538,7 +545,7 @@ template AppInfoT()
       Checks if the application supports reading files and directories from URIs.
       Returns: true if the appinfo supports URIs.
   */
-  override bool supportsUris()
+  override bool supportsUris() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_app_info_supports_uris(cast(GAppInfo*)this._cPtr);

@@ -14,26 +14,26 @@ class MockFileSystem : arrow.file_system.FileSystem
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_mock_file_system_get_type != &gidSymbolNotFound ? garrow_mock_file_system_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MockFileSystem self()
+  override MockFileSystem self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class MockFileSystem : arrow.file_system.FileSystem
       Get builder for [arrow.mock_file_system.MockFileSystem]
       Returns: New builder object
   */
-  static MockFileSystemGidBuilder builder()
+  static MockFileSystemGidBuilder builder() nothrow
   {
     return new MockFileSystemGidBuilder;
   }
@@ -60,7 +60,7 @@ final class MockFileSystemGidBuilder : MockFileSystemGidBuilderImpl!MockFileSyst
       Create object from builder.
       Returns: New object
   */
-  MockFileSystem build()
+  MockFileSystem build() nothrow
   {
     return new MockFileSystem(cast(void*)createGObject(MockFileSystem._getGType), No.Take);
   }

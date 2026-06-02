@@ -44,26 +44,26 @@ class FontChooserWidget : gtk.widget.Widget, gtk.font_chooser.FontChooser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_font_chooser_widget_get_type != &gidSymbolNotFound ? gtk_font_chooser_widget_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FontChooserWidget self()
+  override FontChooserWidget self() nothrow
   {
     return this;
   }
@@ -72,7 +72,7 @@ class FontChooserWidget : gtk.widget.Widget, gtk.font_chooser.FontChooser
       Get builder for [gtk.font_chooser_widget.FontChooserWidget]
       Returns: New builder object
   */
-  static FontChooserWidgetGidBuilder builder()
+  static FontChooserWidgetGidBuilder builder() nothrow
   {
     return new FontChooserWidgetGidBuilder;
   }
@@ -86,7 +86,7 @@ class FontChooserWidget : gtk.widget.Widget, gtk.font_chooser.FontChooser
         The action will be enabled or disabled depending on whether
         the selected font has any features or axes.
   */
-  @property gio.action.Action tweakAction()
+  @property gio.action.Action tweakAction() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.action.Action)("tweak-action");
   }
@@ -99,7 +99,7 @@ class FontChooserWidget : gtk.widget.Widget, gtk.font_chooser.FontChooser
   
       Deprecated: Direct use of [gtk.font_chooser_widget.FontChooserWidget] is deprecated.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_chooser_widget_new();
@@ -121,7 +121,7 @@ final class FontChooserWidgetGidBuilder : FontChooserWidgetGidBuilderImpl!FontCh
       Create object from builder.
       Returns: New object
   */
-  FontChooserWidget build()
+  FontChooserWidget build() nothrow
   {
     return new FontChooserWidget(cast(void*)createGObject(FontChooserWidget._getGType), No.Take);
   }

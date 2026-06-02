@@ -60,32 +60,32 @@ class PathBuilder : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_path_builder_get_type != &gidSymbolNotFound ? gsk_path_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PathBuilder self()
+  override PathBuilder self() nothrow
   {
     return this;
   }
@@ -97,7 +97,7 @@ class PathBuilder : gobject.boxed.Boxed
       Use addition functions to add types to it.
       Returns: a new [gsk.path_builder.PathBuilder]
   */
-  this()
+  this() nothrow
   {
     GskPathBuilder* _cretval;
     _cretval = gsk_path_builder_new();
@@ -113,7 +113,7 @@ class PathBuilder : gobject.boxed.Boxed
       Params:
         path = 
   */
-  void addCairoPath(cairo.path.Path path)
+  void addCairoPath(cairo.path.Path path) nothrow
   {
     gsk_path_builder_add_cairo_path(cast(GskPathBuilder*)this._cPtr, path ? cast(const(cairo_path_t)*)path._cPtr(No.Dup) : null);
   }
@@ -129,7 +129,7 @@ class PathBuilder : gobject.boxed.Boxed
         center = the center of the circle
         radius = the radius of the circle
   */
-  void addCircle(graphene.point.Point center, float radius)
+  void addCircle(graphene.point.Point center, float radius) nothrow
   {
     gsk_path_builder_add_circle(cast(GskPathBuilder*)this._cPtr, cast(const(graphene_point_t)*)&center, radius);
   }
@@ -140,7 +140,7 @@ class PathBuilder : gobject.boxed.Boxed
       Params:
         layout = the pango layout to add
   */
-  void addLayout(pango.layout.Layout layout)
+  void addLayout(pango.layout.Layout layout) nothrow
   {
     gsk_path_builder_add_layout(cast(GskPathBuilder*)this._cPtr, layout ? cast(PangoLayout*)layout._cPtr(No.Dup) : null);
   }
@@ -151,7 +151,7 @@ class PathBuilder : gobject.boxed.Boxed
       Params:
         path = the path to append
   */
-  void addPath(gsk.path.Path path)
+  void addPath(gsk.path.Path path) nothrow
   {
     gsk_path_builder_add_path(cast(GskPathBuilder*)this._cPtr, path ? cast(GskPath*)path._cPtr(No.Dup) : null);
   }
@@ -167,7 +167,7 @@ class PathBuilder : gobject.boxed.Boxed
       Params:
         rect = The rectangle to create a path for
   */
-  void addRect(graphene.rect.Rect rect)
+  void addRect(graphene.rect.Rect rect) nothrow
   {
     gsk_path_builder_add_rect(cast(GskPathBuilder*)this._cPtr, rect ? cast(const(graphene_rect_t)*)rect._cPtr(No.Dup) : null);
   }
@@ -178,7 +178,7 @@ class PathBuilder : gobject.boxed.Boxed
       Params:
         path = the path to append
   */
-  void addReversePath(gsk.path.Path path)
+  void addReversePath(gsk.path.Path path) nothrow
   {
     gsk_path_builder_add_reverse_path(cast(GskPathBuilder*)this._cPtr, path ? cast(GskPath*)path._cPtr(No.Dup) : null);
   }
@@ -191,7 +191,7 @@ class PathBuilder : gobject.boxed.Boxed
       Params:
         rect = the rounded rect
   */
-  void addRoundedRect(gsk.rounded_rect.RoundedRect rect)
+  void addRoundedRect(gsk.rounded_rect.RoundedRect rect) nothrow
   {
     gsk_path_builder_add_rounded_rect(cast(GskPathBuilder*)this._cPtr, rect ? cast(const(GskRoundedRect)*)rect._cPtr : null);
   }
@@ -212,7 +212,7 @@ class PathBuilder : gobject.boxed.Boxed
         start = the point on path to start at
         end = the point on path to end at
   */
-  void addSegment(gsk.path.Path path, gsk.path_point.PathPoint start, gsk.path_point.PathPoint end)
+  void addSegment(gsk.path.Path path, gsk.path_point.PathPoint start, gsk.path_point.PathPoint end) nothrow
   {
     gsk_path_builder_add_segment(cast(GskPathBuilder*)this._cPtr, path ? cast(GskPath*)path._cPtr(No.Dup) : null, start ? cast(const(GskPathPoint)*)start._cPtr(No.Dup) : null, end ? cast(const(GskPathPoint)*)end._cPtr(No.Dup) : null);
   }
@@ -239,7 +239,7 @@ class PathBuilder : gobject.boxed.Boxed
         x2 = x coordinate of second control point
         y2 = y coordinate of second control point
   */
-  void arcTo(float x1, float y1, float x2, float y2)
+  void arcTo(float x1, float y1, float x2, float y2) nothrow
   {
     gsk_path_builder_arc_to(cast(GskPathBuilder*)this._cPtr, x1, y1, x2, y2);
   }
@@ -253,7 +253,7 @@ class PathBuilder : gobject.boxed.Boxed
       start and end point are considered connected, so they will be
       joined via the line join, and not ended with line caps.
   */
-  void close()
+  void close() nothrow
   {
     gsk_path_builder_close(cast(GskPathBuilder*)this._cPtr);
   }
@@ -283,7 +283,7 @@ class PathBuilder : gobject.boxed.Boxed
         y2 = y coordinate of the end of the curve
         weight = weight of the control point, must be greater than zero
   */
-  void conicTo(float x1, float y1, float x2, float y2, float weight)
+  void conicTo(float x1, float y1, float x2, float y2, float weight) nothrow
   {
     gsk_path_builder_conic_to(cast(GskPathBuilder*)this._cPtr, x1, y1, x2, y2, weight);
   }
@@ -308,7 +308,7 @@ class PathBuilder : gobject.boxed.Boxed
         x3 = x coordinate of the end of the curve
         y3 = y coordinate of the end of the curve
   */
-  void cubicTo(float x1, float y1, float x2, float y2, float x3, float y3)
+  void cubicTo(float x1, float y1, float x2, float y2, float x3, float y3) nothrow
   {
     gsk_path_builder_cubic_to(cast(GskPathBuilder*)this._cPtr, x1, y1, x2, y2, x3, y3);
   }
@@ -324,7 +324,7 @@ class PathBuilder : gobject.boxed.Boxed
       out without a current point.
       Returns: The current point
   */
-  graphene.point.Point getCurrentPoint()
+  graphene.point.Point getCurrentPoint() nothrow
   {
     const(graphene_point_t)* _cretval;
     _cretval = gsk_path_builder_get_current_point(cast(GskPathBuilder*)this._cPtr);
@@ -352,7 +352,7 @@ class PathBuilder : gobject.boxed.Boxed
         y2 = Y coordinate of second control point
         radius = Radius of the circle
   */
-  void htmlArcTo(float x1, float y1, float x2, float y2, float radius)
+  void htmlArcTo(float x1, float y1, float x2, float y2, float radius) nothrow
   {
     gsk_path_builder_html_arc_to(cast(GskPathBuilder*)this._cPtr, x1, y1, x2, y2, radius);
   }
@@ -370,7 +370,7 @@ class PathBuilder : gobject.boxed.Boxed
         x = x coordinate
         y = y coordinate
   */
-  void lineTo(float x, float y)
+  void lineTo(float x, float y) nothrow
   {
     gsk_path_builder_line_to(cast(GskPathBuilder*)this._cPtr, x, y);
   }
@@ -386,7 +386,7 @@ class PathBuilder : gobject.boxed.Boxed
         x = x coordinate
         y = y coordinate
   */
-  void moveTo(float x, float y)
+  void moveTo(float x, float y) nothrow
   {
     gsk_path_builder_move_to(cast(GskPathBuilder*)this._cPtr, x, y);
   }
@@ -408,7 +408,7 @@ class PathBuilder : gobject.boxed.Boxed
         x2 = x coordinate of the end of the curve
         y2 = y coordinate of the end of the curve
   */
-  void quadTo(float x1, float y1, float x2, float y2)
+  void quadTo(float x1, float y1, float x2, float y2) nothrow
   {
     gsk_path_builder_quad_to(cast(GskPathBuilder*)this._cPtr, x1, y1, x2, y2);
   }
@@ -427,7 +427,7 @@ class PathBuilder : gobject.boxed.Boxed
         x2 = x coordinate of second control point
         y2 = y coordinate of second control point
   */
-  void relArcTo(float x1, float y1, float x2, float y2)
+  void relArcTo(float x1, float y1, float x2, float y2) nothrow
   {
     gsk_path_builder_rel_arc_to(cast(GskPathBuilder*)this._cPtr, x1, y1, x2, y2);
   }
@@ -448,7 +448,7 @@ class PathBuilder : gobject.boxed.Boxed
         y2 = y offset of the end of the curve
         weight = weight of the curve, must be greater than zero
   */
-  void relConicTo(float x1, float y1, float x2, float y2, float weight)
+  void relConicTo(float x1, float y1, float x2, float y2, float weight) nothrow
   {
     gsk_path_builder_rel_conic_to(cast(GskPathBuilder*)this._cPtr, x1, y1, x2, y2, weight);
   }
@@ -470,7 +470,7 @@ class PathBuilder : gobject.boxed.Boxed
         x3 = x offset of the end of the curve
         y3 = y offset of the end of the curve
   */
-  void relCubicTo(float x1, float y1, float x2, float y2, float x3, float y3)
+  void relCubicTo(float x1, float y1, float x2, float y2, float x3, float y3) nothrow
   {
     gsk_path_builder_rel_cubic_to(cast(GskPathBuilder*)this._cPtr, x1, y1, x2, y2, x3, y3);
   }
@@ -489,7 +489,7 @@ class PathBuilder : gobject.boxed.Boxed
         y2 = Y coordinate of second control point
         radius = Radius of the circle
   */
-  void relHtmlArcTo(float x1, float y1, float x2, float y2, float radius)
+  void relHtmlArcTo(float x1, float y1, float x2, float y2, float radius) nothrow
   {
     gsk_path_builder_rel_html_arc_to(cast(GskPathBuilder*)this._cPtr, x1, y1, x2, y2, radius);
   }
@@ -504,7 +504,7 @@ class PathBuilder : gobject.boxed.Boxed
         x = x offset
         y = y offset
   */
-  void relLineTo(float x, float y)
+  void relLineTo(float x, float y) nothrow
   {
     gsk_path_builder_rel_line_to(cast(GskPathBuilder*)this._cPtr, x, y);
   }
@@ -519,7 +519,7 @@ class PathBuilder : gobject.boxed.Boxed
         x = x offset
         y = y offset
   */
-  void relMoveTo(float x, float y)
+  void relMoveTo(float x, float y) nothrow
   {
     gsk_path_builder_rel_move_to(cast(GskPathBuilder*)this._cPtr, x, y);
   }
@@ -538,7 +538,7 @@ class PathBuilder : gobject.boxed.Boxed
         x2 = x offset of the end of the curve
         y2 = y offset of the end of the curve
   */
-  void relQuadTo(float x1, float y1, float x2, float y2)
+  void relQuadTo(float x1, float y1, float x2, float y2) nothrow
   {
     gsk_path_builder_rel_quad_to(cast(GskPathBuilder*)this._cPtr, x1, y1, x2, y2);
   }
@@ -559,7 +559,7 @@ class PathBuilder : gobject.boxed.Boxed
         x = the X coordinate of the endpoint
         y = the Y coordinate of the endpoint
   */
-  void relSvgArcTo(float rx, float ry, float xAxisRotation, bool largeArc, bool positiveSweep, float x, float y)
+  void relSvgArcTo(float rx, float ry, float xAxisRotation, bool largeArc, bool positiveSweep, float x, float y) nothrow
   {
     gsk_path_builder_rel_svg_arc_to(cast(GskPathBuilder*)this._cPtr, rx, ry, xAxisRotation, largeArc, positiveSweep, x, y);
   }
@@ -582,7 +582,7 @@ class PathBuilder : gobject.boxed.Boxed
         x = the X coordinate of the endpoint
         y = the Y coordinate of the endpoint
   */
-  void svgArcTo(float rx, float ry, float xAxisRotation, bool largeArc, bool positiveSweep, float x, float y)
+  void svgArcTo(float rx, float ry, float xAxisRotation, bool largeArc, bool positiveSweep, float x, float y) nothrow
   {
     gsk_path_builder_svg_arc_to(cast(GskPathBuilder*)this._cPtr, rx, ry, xAxisRotation, largeArc, positiveSweep, x, y);
   }
@@ -599,7 +599,7 @@ class PathBuilder : gobject.boxed.Boxed
       Returns: the newly created [gsk.path.Path]
           with all the contours added to the builder
   */
-  gsk.path.Path toPath()
+  gsk.path.Path toPath() nothrow
   {
     GskPath* _cretval;
     _cretval = gsk_path_builder_to_path(cast(GskPathBuilder*)this._cPtr);

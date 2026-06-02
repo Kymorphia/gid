@@ -16,26 +16,26 @@ class UInt16Array : arrow.numeric_array.NumericArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_uint16_array_get_type != &gidSymbolNotFound ? garrow_uint16_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UInt16Array self()
+  override UInt16Array self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class UInt16Array : arrow.numeric_array.NumericArray
       Get builder for [arrow.uint16_array.UInt16Array]
       Returns: New builder object
   */
-  static UInt16ArrayGidBuilder builder()
+  static UInt16ArrayGidBuilder builder() nothrow
   {
     return new UInt16ArrayGidBuilder;
   }
 
   /** */
-  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
+  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls) nothrow
   {
     GArrowUInt16Array* _cretval;
     _cretval = garrow_uint16_array_new(length, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
@@ -58,7 +58,7 @@ class UInt16Array : arrow.numeric_array.NumericArray
   }
 
   /** */
-  ushort getValue(long i)
+  ushort getValue(long i) nothrow
   {
     ushort _retval;
     _retval = garrow_uint16_array_get_value(cast(GArrowUInt16Array*)this._cPtr, i);
@@ -66,7 +66,7 @@ class UInt16Array : arrow.numeric_array.NumericArray
   }
 
   /** */
-  ushort[] getValues()
+  ushort[] getValues() nothrow
   {
     const(ushort)* _cretval;
     long _cretlength;
@@ -104,7 +104,7 @@ final class UInt16ArrayGidBuilder : UInt16ArrayGidBuilderImpl!UInt16ArrayGidBuil
       Create object from builder.
       Returns: New object
   */
-  UInt16Array build()
+  UInt16Array build() nothrow
   {
     return new UInt16Array(cast(void*)createGObject(UInt16Array._getGType), Yes.Take);
   }

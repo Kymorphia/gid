@@ -35,26 +35,26 @@ class HitTestResult : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_hit_test_result_get_type != &gidSymbolNotFound ? webkit_hit_test_result_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HitTestResult self()
+  override HitTestResult self() nothrow
   {
     return this;
   }
@@ -63,7 +63,7 @@ class HitTestResult : gobject.object.ObjectWrap
       Get builder for [webkitwebprocessextension.hit_test_result.HitTestResult]
       Returns: New builder object
   */
-  static HitTestResultGidBuilder builder()
+  static HitTestResultGidBuilder builder() nothrow
   {
     return new HitTestResultGidBuilder;
   }
@@ -73,7 +73,7 @@ class HitTestResult : gobject.object.ObjectWrap
       Returns: Bitmask of #WebKitHitTestResultContext flags representing
         the context of the #WebKitHitTestResult.
   */
-  @property uint context()
+  @property uint context() nothrow
   {
     return getContext();
   }
@@ -83,7 +83,7 @@ class HitTestResult : gobject.object.ObjectWrap
       Returns: The URI of the image if flag [webkit.types.HitTestResultContext.Image]
         is present in #WebKitHitTestResult:context
   */
-  @property string imageUri()
+  @property string imageUri() nothrow
   {
     return getImageUri();
   }
@@ -93,7 +93,7 @@ class HitTestResult : gobject.object.ObjectWrap
       Returns: The label of the link if flag [webkit.types.HitTestResultContext.Link]
         is present in #WebKitHitTestResult:context
   */
-  @property string linkLabel()
+  @property string linkLabel() nothrow
   {
     return getLinkLabel();
   }
@@ -103,7 +103,7 @@ class HitTestResult : gobject.object.ObjectWrap
       Returns: The title of the link if flag [webkit.types.HitTestResultContext.Link]
         is present in #WebKitHitTestResult:context
   */
-  @property string linkTitle()
+  @property string linkTitle() nothrow
   {
     return getLinkTitle();
   }
@@ -113,7 +113,7 @@ class HitTestResult : gobject.object.ObjectWrap
       Returns: The URI of the link if flag [webkit.types.HitTestResultContext.Link]
         is present in #WebKitHitTestResult:context
   */
-  @property string linkUri()
+  @property string linkUri() nothrow
   {
     return getLinkUri();
   }
@@ -123,7 +123,7 @@ class HitTestResult : gobject.object.ObjectWrap
       Returns: The URI of the media if flag [webkit.types.HitTestResultContext.Media]
         is present in #WebKitHitTestResult:context
   */
-  @property string mediaUri()
+  @property string mediaUri() nothrow
   {
     return getMediaUri();
   }
@@ -134,7 +134,7 @@ class HitTestResult : gobject.object.ObjectWrap
       Returns: true if there's an editable element at the coordinates of the hit_test_result,
            or false otherwise
   */
-  bool contextIsEditable()
+  bool contextIsEditable() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_hit_test_result_context_is_editable(cast(WebKitHitTestResult*)this._cPtr);
@@ -147,7 +147,7 @@ class HitTestResult : gobject.object.ObjectWrap
       Returns: true if there's an image element in the coordinates of the Hit Test,
            or false otherwise
   */
-  bool contextIsImage()
+  bool contextIsImage() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_hit_test_result_context_is_image(cast(WebKitHitTestResult*)this._cPtr);
@@ -160,7 +160,7 @@ class HitTestResult : gobject.object.ObjectWrap
       Returns: true if there's a link element in the coordinates of the Hit Test,
            or false otherwise
   */
-  bool contextIsLink()
+  bool contextIsLink() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_hit_test_result_context_is_link(cast(WebKitHitTestResult*)this._cPtr);
@@ -173,7 +173,7 @@ class HitTestResult : gobject.object.ObjectWrap
       Returns: true if there's a media element in the coordinates of the Hit Test,
            or false otherwise
   */
-  bool contextIsMedia()
+  bool contextIsMedia() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_hit_test_result_context_is_media(cast(WebKitHitTestResult*)this._cPtr);
@@ -186,7 +186,7 @@ class HitTestResult : gobject.object.ObjectWrap
       Returns: true if there's a scrollbar element at the coordinates of the hit_test_result,
            or false otherwise
   */
-  bool contextIsScrollbar()
+  bool contextIsScrollbar() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_hit_test_result_context_is_scrollbar(cast(WebKitHitTestResult*)this._cPtr);
@@ -199,7 +199,7 @@ class HitTestResult : gobject.object.ObjectWrap
       Returns: true if there's a selected element at the coordinates of the hit_test_result,
            or false otherwise
   */
-  bool contextIsSelection()
+  bool contextIsSelection() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_hit_test_result_context_is_selection(cast(WebKitHitTestResult*)this._cPtr);
@@ -210,7 +210,7 @@ class HitTestResult : gobject.object.ObjectWrap
       Gets the value of the #WebKitHitTestResult:context property.
       Returns: a bitmask of #WebKitHitTestResultContext flags
   */
-  uint getContext()
+  uint getContext() nothrow
   {
     uint _retval;
     _retval = webkit_hit_test_result_get_context(cast(WebKitHitTestResult*)this._cPtr);
@@ -222,7 +222,7 @@ class HitTestResult : gobject.object.ObjectWrap
       Returns: the URI of the image element in the coordinates of the Hit Test,
            or null if there isn't an image element in hit_test_result context
   */
-  string getImageUri()
+  string getImageUri() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_hit_test_result_get_image_uri(cast(WebKitHitTestResult*)this._cPtr);
@@ -236,7 +236,7 @@ class HitTestResult : gobject.object.ObjectWrap
            or null if there isn't a link element in hit_test_result context or the
            link element doesn't have a label
   */
-  string getLinkLabel()
+  string getLinkLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_hit_test_result_get_link_label(cast(WebKitHitTestResult*)this._cPtr);
@@ -250,7 +250,7 @@ class HitTestResult : gobject.object.ObjectWrap
            or null if there isn't a link element in hit_test_result context or the
            link element doesn't have a title
   */
-  string getLinkTitle()
+  string getLinkTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_hit_test_result_get_link_title(cast(WebKitHitTestResult*)this._cPtr);
@@ -263,7 +263,7 @@ class HitTestResult : gobject.object.ObjectWrap
       Returns: the URI of the link element in the coordinates of the Hit Test,
            or null if there isn't a link element in hit_test_result context
   */
-  string getLinkUri()
+  string getLinkUri() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_hit_test_result_get_link_uri(cast(WebKitHitTestResult*)this._cPtr);
@@ -276,7 +276,7 @@ class HitTestResult : gobject.object.ObjectWrap
       Returns: the URI of the media element in the coordinates of the Hit Test,
            or null if there isn't a media element in hit_test_result context
   */
-  string getMediaUri()
+  string getMediaUri() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_hit_test_result_get_media_uri(cast(WebKitHitTestResult*)this._cPtr);
@@ -296,7 +296,7 @@ class HitTestResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           the context of the #WebKitHitTestResult.
       Returns: Builder instance for fluent chaining
   */
-  T context(uint propval)
+  T context(uint propval) nothrow
   {
     return setProperty("context", propval);
   }
@@ -308,7 +308,7 @@ class HitTestResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           is present in #WebKitHitTestResult:context
       Returns: Builder instance for fluent chaining
   */
-  T imageUri(string propval)
+  T imageUri(string propval) nothrow
   {
     return setProperty("image-uri", propval);
   }
@@ -320,7 +320,7 @@ class HitTestResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           is present in #WebKitHitTestResult:context
       Returns: Builder instance for fluent chaining
   */
-  T linkLabel(string propval)
+  T linkLabel(string propval) nothrow
   {
     return setProperty("link-label", propval);
   }
@@ -332,7 +332,7 @@ class HitTestResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           is present in #WebKitHitTestResult:context
       Returns: Builder instance for fluent chaining
   */
-  T linkTitle(string propval)
+  T linkTitle(string propval) nothrow
   {
     return setProperty("link-title", propval);
   }
@@ -344,7 +344,7 @@ class HitTestResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           is present in #WebKitHitTestResult:context
       Returns: Builder instance for fluent chaining
   */
-  T linkUri(string propval)
+  T linkUri(string propval) nothrow
   {
     return setProperty("link-uri", propval);
   }
@@ -356,7 +356,7 @@ class HitTestResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           is present in #WebKitHitTestResult:context
       Returns: Builder instance for fluent chaining
   */
-  T mediaUri(string propval)
+  T mediaUri(string propval) nothrow
   {
     return setProperty("media-uri", propval);
   }
@@ -369,7 +369,7 @@ final class HitTestResultGidBuilder : HitTestResultGidBuilderImpl!HitTestResultG
       Create object from builder.
       Returns: New object
   */
-  HitTestResult build()
+  HitTestResult build() nothrow
   {
     return new HitTestResult(cast(void*)createGObject(HitTestResult._getGType), No.Take);
   }

@@ -31,26 +31,26 @@ class PrintSettings : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_print_settings_get_type != &gidSymbolNotFound ? gtk_print_settings_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PrintSettings self()
+  override PrintSettings self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Get builder for [gtk.print_settings.PrintSettings]
       Returns: New builder object
   */
-  static PrintSettingsGidBuilder builder()
+  static PrintSettingsGidBuilder builder() nothrow
   {
     return new PrintSettingsGidBuilder;
   }
@@ -68,7 +68,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Creates a new #GtkPrintSettings object.
       Returns: a new #GtkPrintSettings object
   */
-  this()
+  this() nothrow
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_settings_new();
@@ -106,7 +106,7 @@ class PrintSettings : gobject.object.ObjectWrap
         variant = an a{sv} #GVariant
       Returns: a new #GtkPrintSettings object
   */
-  static gtk.print_settings.PrintSettings newFromGvariant(glib.variant.Variant variant)
+  static gtk.print_settings.PrintSettings newFromGvariant(glib.variant.Variant variant) nothrow
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_settings_new_from_gvariant(variant ? cast(GVariant*)variant._cPtr(No.Dup) : null);
@@ -143,7 +143,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Copies a #GtkPrintSettings object.
       Returns: a newly allocated copy of other
   */
-  gtk.print_settings.PrintSettings copy()
+  gtk.print_settings.PrintSettings copy() nothrow
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_settings_copy(cast(GtkPrintSettings*)this._cPtr);
@@ -157,15 +157,22 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         func = the function to call
   */
-  void foreach_(gtk.types.PrintSettingsFunc func)
+  void foreach_(gtk.types.PrintSettingsFunc func) nothrow
   {
-    extern(C) void _funcCallback(const(char)* key, const(char)* value, void* userData)
+    extern(C) void _funcCallback(const(char)* key, const(char)* value, void* userData) nothrow
     {
       auto _dlg = cast(gtk.types.PrintSettingsFunc*)userData;
       string _key = key.fromCString(No.Free);
       string _value = value.fromCString(No.Free);
 
-      (*_dlg)(_key, _value);
+      try
+      {
+        (*_dlg)(_key, _value);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.PrintSettingsFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -179,7 +186,7 @@ class PrintSettings : gobject.object.ObjectWrap
         key = a key
       Returns: the string value for key
   */
-  string get(string key)
+  string get(string key) nothrow
   {
     const(char)* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -199,7 +206,7 @@ class PrintSettings : gobject.object.ObjectWrap
         key = a key
       Returns: true, if key maps to a true value.
   */
-  bool getBool(string key)
+  bool getBool(string key) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -211,7 +218,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Gets the value of [gtk.types.PRINT_SETTINGS_COLLATE].
       Returns: whether to collate the printed pages
   */
-  bool getCollate()
+  bool getCollate() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_print_settings_get_collate(cast(GtkPrintSettings*)this._cPtr);
@@ -222,7 +229,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Gets the value of [gtk.types.PRINT_SETTINGS_DEFAULT_SOURCE].
       Returns: the default source
   */
-  string getDefaultSource()
+  string getDefaultSource() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_default_source(cast(GtkPrintSettings*)this._cPtr);
@@ -234,7 +241,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Gets the value of [gtk.types.PRINT_SETTINGS_DITHER].
       Returns: the dithering that is used
   */
-  string getDither()
+  string getDither() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_dither(cast(GtkPrintSettings*)this._cPtr);
@@ -249,7 +256,7 @@ class PrintSettings : gobject.object.ObjectWrap
         key = a key
       Returns: the double value of key
   */
-  double getDouble(string key)
+  double getDouble(string key) nothrow
   {
     double _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -269,7 +276,7 @@ class PrintSettings : gobject.object.ObjectWrap
         def = the default value
       Returns: the floating point number associated with key
   */
-  double getDoubleWithDefault(string key, double def)
+  double getDoubleWithDefault(string key, double def) nothrow
   {
     double _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -281,7 +288,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Gets the value of [gtk.types.PRINT_SETTINGS_DUPLEX].
       Returns: whether to print the output in duplex.
   */
-  gtk.types.PrintDuplex getDuplex()
+  gtk.types.PrintDuplex getDuplex() nothrow
   {
     GtkPrintDuplex _cretval;
     _cretval = gtk_print_settings_get_duplex(cast(GtkPrintSettings*)this._cPtr);
@@ -293,7 +300,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Gets the value of [gtk.types.PRINT_SETTINGS_FINISHINGS].
       Returns: the finishings
   */
-  string getFinishings()
+  string getFinishings() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_finishings(cast(GtkPrintSettings*)this._cPtr);
@@ -308,7 +315,7 @@ class PrintSettings : gobject.object.ObjectWrap
         key = a key
       Returns: the integer value of key
   */
-  int getInt(string key)
+  int getInt(string key) nothrow
   {
     int _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -325,7 +332,7 @@ class PrintSettings : gobject.object.ObjectWrap
         def = the default value
       Returns: the integer value of key
   */
-  int getIntWithDefault(string key, int def)
+  int getIntWithDefault(string key, int def) nothrow
   {
     int _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -342,7 +349,7 @@ class PrintSettings : gobject.object.ObjectWrap
         unit = the unit of the return value
       Returns: the length value of key, converted to unit
   */
-  double getLength(string key, gtk.types.Unit unit)
+  double getLength(string key, gtk.types.Unit unit) nothrow
   {
     double _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -356,7 +363,7 @@ class PrintSettings : gobject.object.ObjectWrap
       The set of media types is defined in PWG 5101.1-2002 PWG.
       Returns: the media type
   */
-  string getMediaType()
+  string getMediaType() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_media_type(cast(GtkPrintSettings*)this._cPtr);
@@ -368,7 +375,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Gets the value of [gtk.types.PRINT_SETTINGS_N_COPIES].
       Returns: the number of copies to print
   */
-  int getNCopies()
+  int getNCopies() nothrow
   {
     int _retval;
     _retval = gtk_print_settings_get_n_copies(cast(GtkPrintSettings*)this._cPtr);
@@ -379,7 +386,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Gets the value of [gtk.types.PRINT_SETTINGS_NUMBER_UP].
       Returns: the number of pages per sheet
   */
-  int getNumberUp()
+  int getNumberUp() nothrow
   {
     int _retval;
     _retval = gtk_print_settings_get_number_up(cast(GtkPrintSettings*)this._cPtr);
@@ -390,7 +397,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Gets the value of [gtk.types.PRINT_SETTINGS_NUMBER_UP_LAYOUT].
       Returns: layout of page in number-up mode
   */
-  gtk.types.NumberUpLayout getNumberUpLayout()
+  gtk.types.NumberUpLayout getNumberUpLayout() nothrow
   {
     GtkNumberUpLayout _cretval;
     _cretval = gtk_print_settings_get_number_up_layout(cast(GtkPrintSettings*)this._cPtr);
@@ -403,7 +410,7 @@ class PrintSettings : gobject.object.ObjectWrap
       converted to a #GtkPageOrientation.
       Returns: the orientation
   */
-  gtk.types.PageOrientation getOrientation()
+  gtk.types.PageOrientation getOrientation() nothrow
   {
     GtkPageOrientation _cretval;
     _cretval = gtk_print_settings_get_orientation(cast(GtkPrintSettings*)this._cPtr);
@@ -415,7 +422,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Gets the value of [gtk.types.PRINT_SETTINGS_OUTPUT_BIN].
       Returns: the output bin
   */
-  string getOutputBin()
+  string getOutputBin() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_output_bin(cast(GtkPrintSettings*)this._cPtr);
@@ -429,7 +436,7 @@ class PrintSettings : gobject.object.ObjectWrap
             of #GtkPageRanges.  Use [glib.global.gfree] to free the array when
             it is no longer needed.
   */
-  gtk.types.PageRange[] getPageRanges()
+  gtk.types.PageRange[] getPageRanges() nothrow
   {
     GtkPageRange* _cretval;
     int _cretlength;
@@ -450,7 +457,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Gets the value of [gtk.types.PRINT_SETTINGS_PAGE_SET].
       Returns: the set of pages to print
   */
-  gtk.types.PageSet getPageSet()
+  gtk.types.PageSet getPageSet() nothrow
   {
     GtkPageSet _cretval;
     _cretval = gtk_print_settings_get_page_set(cast(GtkPrintSettings*)this._cPtr);
@@ -466,7 +473,7 @@ class PrintSettings : gobject.object.ObjectWrap
         unit = the unit for the return value
       Returns: the paper height, in units of unit
   */
-  double getPaperHeight(gtk.types.Unit unit)
+  double getPaperHeight(gtk.types.Unit unit) nothrow
   {
     double _retval;
     _retval = gtk_print_settings_get_paper_height(cast(GtkPrintSettings*)this._cPtr, unit);
@@ -478,7 +485,7 @@ class PrintSettings : gobject.object.ObjectWrap
       converted to a #GtkPaperSize.
       Returns: the paper size
   */
-  gtk.paper_size.PaperSize getPaperSize()
+  gtk.paper_size.PaperSize getPaperSize() nothrow
   {
     GtkPaperSize* _cretval;
     _cretval = gtk_print_settings_get_paper_size(cast(GtkPrintSettings*)this._cPtr);
@@ -494,7 +501,7 @@ class PrintSettings : gobject.object.ObjectWrap
         unit = the unit for the return value
       Returns: the paper width, in units of unit
   */
-  double getPaperWidth(gtk.types.Unit unit)
+  double getPaperWidth(gtk.types.Unit unit) nothrow
   {
     double _retval;
     _retval = gtk_print_settings_get_paper_width(cast(GtkPrintSettings*)this._cPtr, unit);
@@ -505,7 +512,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Gets the value of [gtk.types.PRINT_SETTINGS_PRINT_PAGES].
       Returns: which pages to print
   */
-  gtk.types.PrintPages getPrintPages()
+  gtk.types.PrintPages getPrintPages() nothrow
   {
     GtkPrintPages _cretval;
     _cretval = gtk_print_settings_get_print_pages(cast(GtkPrintSettings*)this._cPtr);
@@ -518,7 +525,7 @@ class PrintSettings : gobject.object.ObjectWrap
       [gtk.types.PRINT_SETTINGS_PRINTER].
       Returns: the printer name
   */
-  string getPrinter()
+  string getPrinter() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_print_settings_get_printer(cast(GtkPrintSettings*)this._cPtr);
@@ -530,7 +537,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Gets the value of [gtk.types.PRINT_SETTINGS_PRINTER_LPI].
       Returns: the resolution in lpi (lines per inch)
   */
-  double getPrinterLpi()
+  double getPrinterLpi() nothrow
   {
     double _retval;
     _retval = gtk_print_settings_get_printer_lpi(cast(GtkPrintSettings*)this._cPtr);
@@ -541,7 +548,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Gets the value of [gtk.types.PRINT_SETTINGS_QUALITY].
       Returns: the print quality
   */
-  gtk.types.PrintQuality getQuality()
+  gtk.types.PrintQuality getQuality() nothrow
   {
     GtkPrintQuality _cretval;
     _cretval = gtk_print_settings_get_quality(cast(GtkPrintSettings*)this._cPtr);
@@ -553,7 +560,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Gets the value of [gtk.types.PRINT_SETTINGS_RESOLUTION].
       Returns: the resolution in dpi
   */
-  int getResolution()
+  int getResolution() nothrow
   {
     int _retval;
     _retval = gtk_print_settings_get_resolution(cast(GtkPrintSettings*)this._cPtr);
@@ -564,7 +571,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Gets the value of [gtk.types.PRINT_SETTINGS_RESOLUTION_X].
       Returns: the horizontal resolution in dpi
   */
-  int getResolutionX()
+  int getResolutionX() nothrow
   {
     int _retval;
     _retval = gtk_print_settings_get_resolution_x(cast(GtkPrintSettings*)this._cPtr);
@@ -575,7 +582,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Gets the value of [gtk.types.PRINT_SETTINGS_RESOLUTION_Y].
       Returns: the vertical resolution in dpi
   */
-  int getResolutionY()
+  int getResolutionY() nothrow
   {
     int _retval;
     _retval = gtk_print_settings_get_resolution_y(cast(GtkPrintSettings*)this._cPtr);
@@ -586,7 +593,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Gets the value of [gtk.types.PRINT_SETTINGS_REVERSE].
       Returns: whether to reverse the order of the printed pages
   */
-  bool getReverse()
+  bool getReverse() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_print_settings_get_reverse(cast(GtkPrintSettings*)this._cPtr);
@@ -597,7 +604,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Gets the value of [gtk.types.PRINT_SETTINGS_SCALE].
       Returns: the scale in percent
   */
-  double getScale()
+  double getScale() nothrow
   {
     double _retval;
     _retval = gtk_print_settings_get_scale(cast(GtkPrintSettings*)this._cPtr);
@@ -608,7 +615,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Gets the value of [gtk.types.PRINT_SETTINGS_USE_COLOR].
       Returns: whether to use color
   */
-  bool getUseColor()
+  bool getUseColor() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_print_settings_get_use_color(cast(GtkPrintSettings*)this._cPtr);
@@ -622,7 +629,7 @@ class PrintSettings : gobject.object.ObjectWrap
         key = a key
       Returns: true, if key has a value
   */
-  bool hasKey(string key)
+  bool hasKey(string key) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -681,7 +688,7 @@ class PrintSettings : gobject.object.ObjectWrap
         key = a key
         value = a string value, or null
   */
-  void set(string key, string value = null)
+  void set(string key, string value = null) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -695,7 +702,7 @@ class PrintSettings : gobject.object.ObjectWrap
         key = a key
         value = a boolean
   */
-  void setBool(string key, bool value)
+  void setBool(string key, bool value) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     gtk_print_settings_set_bool(cast(GtkPrintSettings*)this._cPtr, _key, value);
@@ -707,7 +714,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         collate = whether to collate the output
   */
-  void setCollate(bool collate)
+  void setCollate(bool collate) nothrow
   {
     gtk_print_settings_set_collate(cast(GtkPrintSettings*)this._cPtr, collate);
   }
@@ -718,7 +725,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         defaultSource = the default source
   */
-  void setDefaultSource(string defaultSource)
+  void setDefaultSource(string defaultSource) nothrow
   {
     const(char)* _defaultSource = defaultSource.toCString(No.Alloc);
     gtk_print_settings_set_default_source(cast(GtkPrintSettings*)this._cPtr, _defaultSource);
@@ -730,7 +737,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         dither = the dithering that is used
   */
-  void setDither(string dither)
+  void setDither(string dither) nothrow
   {
     const(char)* _dither = dither.toCString(No.Alloc);
     gtk_print_settings_set_dither(cast(GtkPrintSettings*)this._cPtr, _dither);
@@ -743,7 +750,7 @@ class PrintSettings : gobject.object.ObjectWrap
         key = a key
         value = a double value
   */
-  void setDouble(string key, double value)
+  void setDouble(string key, double value) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     gtk_print_settings_set_double(cast(GtkPrintSettings*)this._cPtr, _key, value);
@@ -755,7 +762,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         duplex = a #GtkPrintDuplex value
   */
-  void setDuplex(gtk.types.PrintDuplex duplex)
+  void setDuplex(gtk.types.PrintDuplex duplex) nothrow
   {
     gtk_print_settings_set_duplex(cast(GtkPrintSettings*)this._cPtr, duplex);
   }
@@ -766,7 +773,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         finishings = the finishings
   */
-  void setFinishings(string finishings)
+  void setFinishings(string finishings) nothrow
   {
     const(char)* _finishings = finishings.toCString(No.Alloc);
     gtk_print_settings_set_finishings(cast(GtkPrintSettings*)this._cPtr, _finishings);
@@ -779,7 +786,7 @@ class PrintSettings : gobject.object.ObjectWrap
         key = a key
         value = an integer
   */
-  void setInt(string key, int value)
+  void setInt(string key, int value) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     gtk_print_settings_set_int(cast(GtkPrintSettings*)this._cPtr, _key, value);
@@ -793,7 +800,7 @@ class PrintSettings : gobject.object.ObjectWrap
         value = a length
         unit = the unit of length
   */
-  void setLength(string key, double value, gtk.types.Unit unit)
+  void setLength(string key, double value, gtk.types.Unit unit) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     gtk_print_settings_set_length(cast(GtkPrintSettings*)this._cPtr, _key, value, unit);
@@ -807,7 +814,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         mediaType = the media type
   */
-  void setMediaType(string mediaType)
+  void setMediaType(string mediaType) nothrow
   {
     const(char)* _mediaType = mediaType.toCString(No.Alloc);
     gtk_print_settings_set_media_type(cast(GtkPrintSettings*)this._cPtr, _mediaType);
@@ -819,7 +826,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         numCopies = the number of copies
   */
-  void setNCopies(int numCopies)
+  void setNCopies(int numCopies) nothrow
   {
     gtk_print_settings_set_n_copies(cast(GtkPrintSettings*)this._cPtr, numCopies);
   }
@@ -830,7 +837,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         numberUp = the number of pages per sheet
   */
-  void setNumberUp(int numberUp)
+  void setNumberUp(int numberUp) nothrow
   {
     gtk_print_settings_set_number_up(cast(GtkPrintSettings*)this._cPtr, numberUp);
   }
@@ -841,7 +848,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         numberUpLayout = a #GtkNumberUpLayout value
   */
-  void setNumberUpLayout(gtk.types.NumberUpLayout numberUpLayout)
+  void setNumberUpLayout(gtk.types.NumberUpLayout numberUpLayout) nothrow
   {
     gtk_print_settings_set_number_up_layout(cast(GtkPrintSettings*)this._cPtr, numberUpLayout);
   }
@@ -852,7 +859,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         orientation = a page orientation
   */
-  void setOrientation(gtk.types.PageOrientation orientation)
+  void setOrientation(gtk.types.PageOrientation orientation) nothrow
   {
     gtk_print_settings_set_orientation(cast(GtkPrintSettings*)this._cPtr, orientation);
   }
@@ -863,7 +870,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         outputBin = the output bin
   */
-  void setOutputBin(string outputBin)
+  void setOutputBin(string outputBin) nothrow
   {
     const(char)* _outputBin = outputBin.toCString(No.Alloc);
     gtk_print_settings_set_output_bin(cast(GtkPrintSettings*)this._cPtr, _outputBin);
@@ -875,7 +882,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         pageRanges = an array of #GtkPageRanges
   */
-  void setPageRanges(gtk.types.PageRange[] pageRanges)
+  void setPageRanges(gtk.types.PageRange[] pageRanges) nothrow
   {
     int _numRanges;
     if (pageRanges)
@@ -891,7 +898,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         pageSet = a #GtkPageSet value
   */
-  void setPageSet(gtk.types.PageSet pageSet)
+  void setPageSet(gtk.types.PageSet pageSet) nothrow
   {
     gtk_print_settings_set_page_set(cast(GtkPrintSettings*)this._cPtr, pageSet);
   }
@@ -903,7 +910,7 @@ class PrintSettings : gobject.object.ObjectWrap
         height = the paper height
         unit = the units of height
   */
-  void setPaperHeight(double height, gtk.types.Unit unit)
+  void setPaperHeight(double height, gtk.types.Unit unit) nothrow
   {
     gtk_print_settings_set_paper_height(cast(GtkPrintSettings*)this._cPtr, height, unit);
   }
@@ -916,7 +923,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         paperSize = a paper size
   */
-  void setPaperSize(gtk.paper_size.PaperSize paperSize)
+  void setPaperSize(gtk.paper_size.PaperSize paperSize) nothrow
   {
     gtk_print_settings_set_paper_size(cast(GtkPrintSettings*)this._cPtr, paperSize ? cast(GtkPaperSize*)paperSize._cPtr(No.Dup) : null);
   }
@@ -928,7 +935,7 @@ class PrintSettings : gobject.object.ObjectWrap
         width = the paper width
         unit = the units of width
   */
-  void setPaperWidth(double width, gtk.types.Unit unit)
+  void setPaperWidth(double width, gtk.types.Unit unit) nothrow
   {
     gtk_print_settings_set_paper_width(cast(GtkPrintSettings*)this._cPtr, width, unit);
   }
@@ -939,7 +946,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         pages = a #GtkPrintPages value
   */
-  void setPrintPages(gtk.types.PrintPages pages)
+  void setPrintPages(gtk.types.PrintPages pages) nothrow
   {
     gtk_print_settings_set_print_pages(cast(GtkPrintSettings*)this._cPtr, pages);
   }
@@ -951,7 +958,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         printer = the printer name
   */
-  void setPrinter(string printer)
+  void setPrinter(string printer) nothrow
   {
     const(char)* _printer = printer.toCString(No.Alloc);
     gtk_print_settings_set_printer(cast(GtkPrintSettings*)this._cPtr, _printer);
@@ -963,7 +970,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         lpi = the resolution in lpi (lines per inch)
   */
-  void setPrinterLpi(double lpi)
+  void setPrinterLpi(double lpi) nothrow
   {
     gtk_print_settings_set_printer_lpi(cast(GtkPrintSettings*)this._cPtr, lpi);
   }
@@ -974,7 +981,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         quality = a #GtkPrintQuality value
   */
-  void setQuality(gtk.types.PrintQuality quality)
+  void setQuality(gtk.types.PrintQuality quality) nothrow
   {
     gtk_print_settings_set_quality(cast(GtkPrintSettings*)this._cPtr, quality);
   }
@@ -987,7 +994,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         resolution = the resolution in dpi
   */
-  void setResolution(int resolution)
+  void setResolution(int resolution) nothrow
   {
     gtk_print_settings_set_resolution(cast(GtkPrintSettings*)this._cPtr, resolution);
   }
@@ -1001,7 +1008,7 @@ class PrintSettings : gobject.object.ObjectWrap
         resolutionX = the horizontal resolution in dpi
         resolutionY = the vertical resolution in dpi
   */
-  void setResolutionXy(int resolutionX, int resolutionY)
+  void setResolutionXy(int resolutionX, int resolutionY) nothrow
   {
     gtk_print_settings_set_resolution_xy(cast(GtkPrintSettings*)this._cPtr, resolutionX, resolutionY);
   }
@@ -1012,7 +1019,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         reverse = whether to reverse the output
   */
-  void setReverse(bool reverse)
+  void setReverse(bool reverse) nothrow
   {
     gtk_print_settings_set_reverse(cast(GtkPrintSettings*)this._cPtr, reverse);
   }
@@ -1023,7 +1030,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         scale = the scale in percent
   */
-  void setScale(double scale)
+  void setScale(double scale) nothrow
   {
     gtk_print_settings_set_scale(cast(GtkPrintSettings*)this._cPtr, scale);
   }
@@ -1034,7 +1041,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         useColor = whether to use color
   */
-  void setUseColor(bool useColor)
+  void setUseColor(bool useColor) nothrow
   {
     gtk_print_settings_set_use_color(cast(GtkPrintSettings*)this._cPtr, useColor);
   }
@@ -1064,7 +1071,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Serialize print settings to an a{sv} variant.
       Returns: a new, floating, #GVariant
   */
-  glib.variant.Variant toGvariant()
+  glib.variant.Variant toGvariant() nothrow
   {
     GVariant* _cretval;
     _cretval = gtk_print_settings_to_gvariant(cast(GtkPrintSettings*)this._cPtr);
@@ -1080,7 +1087,7 @@ class PrintSettings : gobject.object.ObjectWrap
         groupName = the group to add the settings to in key_file, or
               null to use the default “Print Settings”
   */
-  void toKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
+  void toKeyFile(glib.key_file.KeyFile keyFile, string groupName = null) nothrow
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     gtk_print_settings_to_key_file(cast(GtkPrintSettings*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName);
@@ -1093,7 +1100,7 @@ class PrintSettings : gobject.object.ObjectWrap
       Params:
         key = a key
   */
-  void unset(string key)
+  void unset(string key) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     gtk_print_settings_unset(cast(GtkPrintSettings*)this._cPtr, _key);
@@ -1112,7 +1119,7 @@ final class PrintSettingsGidBuilder : PrintSettingsGidBuilderImpl!PrintSettingsG
       Create object from builder.
       Returns: New object
   */
-  PrintSettings build()
+  PrintSettings build() nothrow
   {
     return new PrintSettings(cast(void*)createGObject(PrintSettings._getGType), Yes.Take);
   }

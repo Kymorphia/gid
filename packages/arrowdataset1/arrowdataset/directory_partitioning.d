@@ -18,26 +18,26 @@ class DirectoryPartitioning : arrowdataset.key_value_partitioning.KeyValuePartit
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_directory_partitioning_get_type != &gidSymbolNotFound ? gadataset_directory_partitioning_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DirectoryPartitioning self()
+  override DirectoryPartitioning self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class DirectoryPartitioning : arrowdataset.key_value_partitioning.KeyValuePartit
       Get builder for [arrowdataset.directory_partitioning.DirectoryPartitioning]
       Returns: New builder object
   */
-  static DirectoryPartitioningGidBuilder builder()
+  static DirectoryPartitioningGidBuilder builder() nothrow
   {
     return new DirectoryPartitioningGidBuilder;
   }
@@ -77,7 +77,7 @@ final class DirectoryPartitioningGidBuilder : DirectoryPartitioningGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  DirectoryPartitioning build()
+  DirectoryPartitioning build() nothrow
   {
     return new DirectoryPartitioning(cast(void*)createGObject(DirectoryPartitioning._getGType), Yes.Take);
   }

@@ -22,11 +22,8 @@ class MetaDbObject
   GdaMetaDbObject _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.meta_db_object.MetaDbObject");
-
     _cInstance = *cast(GdaMetaDbObject*)ptr;
 
     if (take)
@@ -34,7 +31,7 @@ class MetaDbObject
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -43,7 +40,7 @@ class MetaDbObject
       Get `objType` field.
       Returns: the type of object (table, view)
   */
-  @property gda.types.MetaDbObjectType objType()
+  @property gda.types.MetaDbObjectType objType() nothrow
   {
     return cast(gda.types.MetaDbObjectType)(cast(GdaMetaDbObject*)this._cPtr).objType;
   }
@@ -53,7 +50,7 @@ class MetaDbObject
       Params:
         propval = the type of object (table, view)
   */
-  @property void objType(gda.types.MetaDbObjectType propval)
+  @property void objType(gda.types.MetaDbObjectType propval) nothrow
   {
     (cast(GdaMetaDbObject*)this._cPtr).objType = cast(GdaMetaDbObjectType)propval;
   }
@@ -62,7 +59,7 @@ class MetaDbObject
       Get `outdated` field.
       Returns: set to true if the information in this #GdaMetaDbObject may be outdated because the #GdaMetaStore has been updated
   */
-  @property bool outdated()
+  @property bool outdated() nothrow
   {
     return cast(bool)(cast(GdaMetaDbObject*)this._cPtr).outdated;
   }
@@ -72,7 +69,7 @@ class MetaDbObject
       Params:
         propval = set to true if the information in this #GdaMetaDbObject may be outdated because the #GdaMetaStore has been updated
   */
-  @property void outdated(bool propval)
+  @property void outdated(bool propval) nothrow
   {
     (cast(GdaMetaDbObject*)this._cPtr).outdated = propval;
   }
@@ -81,7 +78,7 @@ class MetaDbObject
       Get `objCatalog` field.
       Returns: the catalog the object is in
   */
-  @property string objCatalog()
+  @property string objCatalog() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaMetaDbObject*)this._cPtr).objCatalog);
   }
@@ -91,7 +88,7 @@ class MetaDbObject
       Params:
         propval = the catalog the object is in
   */
-  @property void objCatalog(string propval)
+  @property void objCatalog(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaMetaDbObject*)this._cPtr).objCatalog);
     dToC(propval, cast(void*)&(cast(GdaMetaDbObject*)this._cPtr).objCatalog);
@@ -101,7 +98,7 @@ class MetaDbObject
       Get `objSchema` field.
       Returns: the schema the object is in
   */
-  @property string objSchema()
+  @property string objSchema() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaMetaDbObject*)this._cPtr).objSchema);
   }
@@ -111,7 +108,7 @@ class MetaDbObject
       Params:
         propval = the schema the object is in
   */
-  @property void objSchema(string propval)
+  @property void objSchema(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaMetaDbObject*)this._cPtr).objSchema);
     dToC(propval, cast(void*)&(cast(GdaMetaDbObject*)this._cPtr).objSchema);
@@ -121,7 +118,7 @@ class MetaDbObject
       Get `objName` field.
       Returns: the object's name
   */
-  @property string objName()
+  @property string objName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaMetaDbObject*)this._cPtr).objName);
   }
@@ -131,7 +128,7 @@ class MetaDbObject
       Params:
         propval = the object's name
   */
-  @property void objName(string propval)
+  @property void objName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaMetaDbObject*)this._cPtr).objName);
     dToC(propval, cast(void*)&(cast(GdaMetaDbObject*)this._cPtr).objName);
@@ -141,7 +138,7 @@ class MetaDbObject
       Get `objShortName` field.
       Returns: the shortest way to name the object
   */
-  @property string objShortName()
+  @property string objShortName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaMetaDbObject*)this._cPtr).objShortName);
   }
@@ -151,7 +148,7 @@ class MetaDbObject
       Params:
         propval = the shortest way to name the object
   */
-  @property void objShortName(string propval)
+  @property void objShortName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaMetaDbObject*)this._cPtr).objShortName);
     dToC(propval, cast(void*)&(cast(GdaMetaDbObject*)this._cPtr).objShortName);
@@ -161,7 +158,7 @@ class MetaDbObject
       Get `objFullName` field.
       Returns: the full name of the object (in the &lt;schema&gt;.&lt;nameagt; notation
   */
-  @property string objFullName()
+  @property string objFullName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaMetaDbObject*)this._cPtr).objFullName);
   }
@@ -171,7 +168,7 @@ class MetaDbObject
       Params:
         propval = the full name of the object (in the &lt;schema&gt;.&lt;nameagt; notation
   */
-  @property void objFullName(string propval)
+  @property void objFullName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaMetaDbObject*)this._cPtr).objFullName);
     dToC(propval, cast(void*)&(cast(GdaMetaDbObject*)this._cPtr).objFullName);
@@ -181,7 +178,7 @@ class MetaDbObject
       Get `objOwner` field.
       Returns: object's owner
   */
-  @property string objOwner()
+  @property string objOwner() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaMetaDbObject*)this._cPtr).objOwner);
   }
@@ -191,7 +188,7 @@ class MetaDbObject
       Params:
         propval = object's owner
   */
-  @property void objOwner(string propval)
+  @property void objOwner(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaMetaDbObject*)this._cPtr).objOwner);
     dToC(propval, cast(void*)&(cast(GdaMetaDbObject*)this._cPtr).objOwner);

@@ -20,26 +20,26 @@ class VideoAggregatorConvertPad : gstvideo.video_aggregator_pad.VideoAggregatorP
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_aggregator_convert_pad_get_type != &gidSymbolNotFound ? gst_video_aggregator_convert_pad_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VideoAggregatorConvertPad self()
+  override VideoAggregatorConvertPad self() nothrow
   {
     return this;
   }
@@ -48,19 +48,19 @@ class VideoAggregatorConvertPad : gstvideo.video_aggregator_pad.VideoAggregatorP
       Get builder for [gstvideo.video_aggregator_convert_pad.VideoAggregatorConvertPad]
       Returns: New builder object
   */
-  static VideoAggregatorConvertPadGidBuilder builder()
+  static VideoAggregatorConvertPadGidBuilder builder() nothrow
   {
     return new VideoAggregatorConvertPadGidBuilder;
   }
 
   /** */
-  @property gst.structure.Structure converterConfig()
+  @property gst.structure.Structure converterConfig() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gst.structure.Structure)("converter-config");
   }
 
   /** */
-  @property void converterConfig(gst.structure.Structure propval)
+  @property void converterConfig(gst.structure.Structure propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gst.structure.Structure)("converter-config", propval);
   }
@@ -69,7 +69,7 @@ class VideoAggregatorConvertPad : gstvideo.video_aggregator_pad.VideoAggregatorP
       Requests the pad to check and update the converter before the next usage to
       update for any changes that have happened.
   */
-  void updateConversionInfo()
+  void updateConversionInfo() nothrow
   {
     gst_video_aggregator_convert_pad_update_conversion_info(cast(GstVideoAggregatorConvertPad*)this._cPtr);
   }
@@ -80,7 +80,7 @@ class VideoAggregatorConvertPadGidBuilderImpl(T) : gstvideo.video_aggregator_pad
 {
 
   /** */
-  T converterConfig(gst.structure.Structure propval)
+  T converterConfig(gst.structure.Structure propval) nothrow
   {
     return setProperty("converter-config", propval);
   }
@@ -93,7 +93,7 @@ final class VideoAggregatorConvertPadGidBuilder : VideoAggregatorConvertPadGidBu
       Create object from builder.
       Returns: New object
   */
-  VideoAggregatorConvertPad build()
+  VideoAggregatorConvertPad build() nothrow
   {
     return new VideoAggregatorConvertPad(cast(void*)createGObject(VideoAggregatorConvertPad._getGType), No.Take);
   }

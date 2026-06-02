@@ -14,7 +14,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgtk-4.so.1"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // ATContext
   GType function() c_gtk_at_context_get_type; ///

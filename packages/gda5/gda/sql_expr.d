@@ -33,32 +33,32 @@ class SqlExpr : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_sql_expr_get_type != &gidSymbolNotFound ? gda_sql_expr_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SqlExpr self()
+  override SqlExpr self() nothrow
   {
     return this;
   }
@@ -67,7 +67,7 @@ class SqlExpr : gobject.boxed.Boxed
       Get `value` field.
       Returns: a #GValue, or null. Please see specific note about this field.
   */
-  @property gobject.value.Value value()
+  @property gobject.value.Value value() nothrow
   {
     return cToD!(gobject.value.Value)(cast(void*)(cast(GdaSqlExpr*)this._cPtr).value);
   }
@@ -77,7 +77,7 @@ class SqlExpr : gobject.boxed.Boxed
       Params:
         propval = a #GValue, or null. Please see specific note about this field.
   */
-  @property void value(gobject.value.Value propval)
+  @property void value(gobject.value.Value propval) nothrow
   {
     cValueFree!(gobject.value.Value)(cast(void*)(cast(GdaSqlExpr*)this._cPtr).value);
     dToC(propval, cast(void*)&(cast(GdaSqlExpr*)this._cPtr).value);
@@ -87,7 +87,7 @@ class SqlExpr : gobject.boxed.Boxed
       Get `paramSpec` field.
       Returns: a #GdaSqlParamSpec, or null if this is not a variable
   */
-  @property gda.sql_param_spec.SqlParamSpec paramSpec()
+  @property gda.sql_param_spec.SqlParamSpec paramSpec() nothrow
   {
     return new gda.sql_param_spec.SqlParamSpec(cast(GdaSqlParamSpec*)(cast(GdaSqlExpr*)this._cPtr).paramSpec, No.Take);
   }
@@ -96,7 +96,7 @@ class SqlExpr : gobject.boxed.Boxed
       Get `func` field.
       Returns: not null if expression is a function or aggregate
   */
-  @property gda.sql_function.SqlFunction func()
+  @property gda.sql_function.SqlFunction func() nothrow
   {
     return new gda.sql_function.SqlFunction(cast(GdaSqlFunction*)(cast(GdaSqlExpr*)this._cPtr).func, No.Take);
   }
@@ -105,7 +105,7 @@ class SqlExpr : gobject.boxed.Boxed
       Get `cond` field.
       Returns: not null if expression is a condition or an operation
   */
-  @property gda.sql_operation.SqlOperation cond()
+  @property gda.sql_operation.SqlOperation cond() nothrow
   {
     return new gda.sql_operation.SqlOperation(cast(GdaSqlOperation*)(cast(GdaSqlExpr*)this._cPtr).cond, No.Take);
   }
@@ -114,7 +114,7 @@ class SqlExpr : gobject.boxed.Boxed
       Get `caseS` field.
       Returns: not null if expression is a CASE WHEN ... expression
   */
-  @property gda.sql_case.SqlCase caseS()
+  @property gda.sql_case.SqlCase caseS() nothrow
   {
     return new gda.sql_case.SqlCase(cast(GdaSqlCase*)(cast(GdaSqlExpr*)this._cPtr).caseS, No.Take);
   }
@@ -123,7 +123,7 @@ class SqlExpr : gobject.boxed.Boxed
       Get `castAs` field.
       Returns: not null if expression must be cast to another data type
   */
-  @property string castAs()
+  @property string castAs() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaSqlExpr*)this._cPtr).castAs);
   }
@@ -133,7 +133,7 @@ class SqlExpr : gobject.boxed.Boxed
       Params:
         propval = not null if expression must be cast to another data type
   */
-  @property void castAs(string propval)
+  @property void castAs(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaSqlExpr*)this._cPtr).castAs);
     dToC(propval, cast(void*)&(cast(GdaSqlExpr*)this._cPtr).castAs);
@@ -143,7 +143,7 @@ class SqlExpr : gobject.boxed.Boxed
       Get `valueIsIdent` field.
       Returns: Please see specific note about the @value field
   */
-  @property bool valueIsIdent()
+  @property bool valueIsIdent() nothrow
   {
     return cast(bool)(cast(GdaSqlExpr*)this._cPtr).valueIsIdent;
   }
@@ -153,7 +153,7 @@ class SqlExpr : gobject.boxed.Boxed
       Params:
         propval = Please see specific note about the @value field
   */
-  @property void valueIsIdent(bool propval)
+  @property void valueIsIdent(bool propval) nothrow
   {
     (cast(GdaSqlExpr*)this._cPtr).valueIsIdent = propval;
   }
@@ -163,7 +163,7 @@ class SqlExpr : gobject.boxed.Boxed
       using [glib.global.gfree];
       Returns: a new string with the SQL expression or "null" in case expr is invalid.
   */
-  string serialize()
+  string serialize() nothrow
   {
     char* _cretval;
     _cretval = gda_sql_expr_serialize(cast(GdaSqlExpr*)this._cPtr);
@@ -178,7 +178,7 @@ class SqlExpr : gobject.boxed.Boxed
       Params:
         stmt = a #GdaSqlStatement holding the #GdaSqlStatementSelect to take from
   */
-  void takeSelect(gda.sql_statement.SqlStatement stmt)
+  void takeSelect(gda.sql_statement.SqlStatement stmt) nothrow
   {
     gda_sql_expr_take_select(cast(GdaSqlExpr*)this._cPtr, stmt ? cast(GdaSqlStatement*)stmt._cPtr(Yes.Dup) : null);
   }

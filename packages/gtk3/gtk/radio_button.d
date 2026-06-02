@@ -109,26 +109,26 @@ class RadioButton : gtk.check_button.CheckButton
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_radio_button_get_type != &gidSymbolNotFound ? gtk_radio_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RadioButton self()
+  override RadioButton self() nothrow
   {
     return this;
   }
@@ -137,7 +137,7 @@ class RadioButton : gtk.check_button.CheckButton
       Get builder for [gtk.radio_button.RadioButton]
       Returns: New builder object
   */
-  static RadioButtonGidBuilder builder()
+  static RadioButtonGidBuilder builder() nothrow
   {
     return new RadioButtonGidBuilder;
   }
@@ -147,7 +147,7 @@ class RadioButton : gtk.check_button.CheckButton
       Params:
         propval = Sets a new group for a radio button.
   */
-  @property void group(gtk.radio_button.RadioButton propval)
+  @property void group(gtk.radio_button.RadioButton propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.radio_button.RadioButton)("group", propval);
   }
@@ -161,7 +161,7 @@ class RadioButton : gtk.check_button.CheckButton
                   radio button group, or null if you are creating a new group.
       Returns: a new radio button
   */
-  this(gtk.radio_button.RadioButton[] group = null)
+  this(gtk.radio_button.RadioButton[] group = null) nothrow
   {
     GtkWidget* _cretval;
     auto _group = gSListFromD!(gtk.radio_button.RadioButton)(group);
@@ -179,7 +179,7 @@ class RadioButton : gtk.check_button.CheckButton
         radioGroupMember = an existing #GtkRadioButton.
       Returns: a new radio button.
   */
-  static gtk.radio_button.RadioButton newFromWidget(gtk.radio_button.RadioButton radioGroupMember = null)
+  static gtk.radio_button.RadioButton newFromWidget(gtk.radio_button.RadioButton radioGroupMember = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_radio_button_new_from_widget(radioGroupMember ? cast(GtkRadioButton*)radioGroupMember._cPtr(No.Dup) : null);
@@ -196,7 +196,7 @@ class RadioButton : gtk.check_button.CheckButton
         label = the text label to display next to the radio button.
       Returns: a new radio button.
   */
-  static gtk.radio_button.RadioButton newWithLabel(gtk.radio_button.RadioButton[] group, string label)
+  static gtk.radio_button.RadioButton newWithLabel(gtk.radio_button.RadioButton[] group, string label) nothrow
   {
     GtkWidget* _cretval;
     auto _group = gSListFromD!(gtk.radio_button.RadioButton)(group);
@@ -216,7 +216,7 @@ class RadioButton : gtk.check_button.CheckButton
         label = a text string to display next to the radio button.
       Returns: a new radio button.
   */
-  static gtk.radio_button.RadioButton newWithLabelFromWidget(gtk.radio_button.RadioButton radioGroupMember, string label)
+  static gtk.radio_button.RadioButton newWithLabelFromWidget(gtk.radio_button.RadioButton radioGroupMember, string label) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -238,7 +238,7 @@ class RadioButton : gtk.check_button.CheckButton
                   mnemonic character
       Returns: a new #GtkRadioButton
   */
-  static gtk.radio_button.RadioButton newWithMnemonic(gtk.radio_button.RadioButton[] group, string label)
+  static gtk.radio_button.RadioButton newWithMnemonic(gtk.radio_button.RadioButton[] group, string label) nothrow
   {
     GtkWidget* _cretval;
     auto _group = gSListFromD!(gtk.radio_button.RadioButton)(group);
@@ -260,7 +260,7 @@ class RadioButton : gtk.check_button.CheckButton
                   mnemonic character
       Returns: a new #GtkRadioButton
   */
-  static gtk.radio_button.RadioButton newWithMnemonicFromWidget(gtk.radio_button.RadioButton radioGroupMember, string label)
+  static gtk.radio_button.RadioButton newWithMnemonicFromWidget(gtk.radio_button.RadioButton radioGroupMember, string label) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -276,7 +276,7 @@ class RadioButton : gtk.check_button.CheckButton
         as radio_button. The returned list is owned by the radio button
         and must not be modified or freed.
   */
-  gtk.radio_button.RadioButton[] getGroup()
+  gtk.radio_button.RadioButton[] getGroup() nothrow
   {
     GSList* _cretval;
     _cretval = gtk_radio_button_get_group(cast(GtkRadioButton*)this._cPtr);
@@ -308,7 +308,7 @@ class RadioButton : gtk.check_button.CheckButton
         groupSource = a radio button object whos group we are
             joining, or null to remove the radio button from its group
   */
-  void joinGroup(gtk.radio_button.RadioButton groupSource = null)
+  void joinGroup(gtk.radio_button.RadioButton groupSource = null) nothrow
   {
     gtk_radio_button_join_group(cast(GtkRadioButton*)this._cPtr, groupSource ? cast(GtkRadioButton*)groupSource._cPtr(No.Dup) : null);
   }
@@ -323,7 +323,7 @@ class RadioButton : gtk.check_button.CheckButton
         group = an existing radio
               button group, such as one returned from [gtk.radio_button.RadioButton.getGroup], or null.
   */
-  void setGroup(gtk.radio_button.RadioButton[] group = null)
+  void setGroup(gtk.radio_button.RadioButton[] group = null) nothrow
   {
     auto _group = gSListFromD!(gtk.radio_button.RadioButton)(group);
     scope(exit) containerFree!(GSList*, gtk.radio_button.RadioButton, GidOwnership.None)(_group);
@@ -350,13 +350,13 @@ class RadioButton : gtk.check_button.CheckButton
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGroupChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGroupChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.radio_button.RadioButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -365,7 +365,14 @@ class RadioButton : gtk.check_button.CheckButton
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.radio_button.RadioButton.groupChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -384,7 +391,7 @@ class RadioButtonGidBuilderImpl(T) : gtk.check_button.CheckButtonGidBuilderImpl!
         propval = Sets a new group for a radio button.
       Returns: Builder instance for fluent chaining
   */
-  T group(gtk.radio_button.RadioButton propval)
+  T group(gtk.radio_button.RadioButton propval) nothrow
   {
     return setProperty("group", propval);
   }
@@ -397,7 +404,7 @@ final class RadioButtonGidBuilder : RadioButtonGidBuilderImpl!RadioButtonGidBuil
       Create object from builder.
       Returns: New object
   */
-  RadioButton build()
+  RadioButton build() nothrow
   {
     return new RadioButton(cast(void*)createGObject(RadioButton._getGType), No.Take);
   }

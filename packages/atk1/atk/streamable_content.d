@@ -34,7 +34,7 @@ interface StreamableContent
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_streamable_content_get_type != &gidSymbolNotFound ? atk_streamable_content_get_type() : cast(GType)0;

@@ -27,7 +27,7 @@ template DBusInterfaceT()
       Returns: A #GDBusObject or null. The returned
         reference should be freed with [gobject.object.ObjectWrap.unref].
   */
-  override gio.dbus_object.DBusObject getObject()
+  override gio.dbus_object.DBusObject getObject() nothrow
   {
     GDBusObject* _cretval;
     _cretval = g_dbus_interface_dup_object(cast(GDBusInterface*)this._cPtr);
@@ -40,7 +40,7 @@ template DBusInterfaceT()
       implemented by interface_.
       Returns: A #GDBusInterfaceInfo. Do not free.
   */
-  override gio.dbus_interface_info.DBusInterfaceInfo getInfo()
+  override gio.dbus_interface_info.DBusInterfaceInfo getInfo() nothrow
   {
     GDBusInterfaceInfo* _cretval;
     _cretval = g_dbus_interface_get_info(cast(GDBusInterface*)this._cPtr);
@@ -56,7 +56,7 @@ template DBusInterfaceT()
       Params:
         object = A #GDBusObject or null.
   */
-  override void setObject(gio.dbus_object.DBusObject object = null)
+  override void setObject(gio.dbus_object.DBusObject object = null) nothrow
   {
     g_dbus_interface_set_object(cast(GDBusInterface*)this._cPtr, object ? cast(GDBusObject*)(cast(gobject.object.ObjectWrap)object)._cPtr(No.Dup) : null);
   }

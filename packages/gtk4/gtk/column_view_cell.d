@@ -32,26 +32,26 @@ class ColumnViewCell : gtk.list_item.ListItem
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_column_view_cell_get_type != &gidSymbolNotFound ? gtk_column_view_cell_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ColumnViewCell self()
+  override ColumnViewCell self() nothrow
   {
     return this;
   }
@@ -60,7 +60,7 @@ class ColumnViewCell : gtk.list_item.ListItem
       Get builder for [gtk.column_view_cell.ColumnViewCell]
       Returns: New builder object
   */
-  static ColumnViewCellGidBuilder builder()
+  static ColumnViewCellGidBuilder builder() nothrow
   {
     return new ColumnViewCellGidBuilder;
   }
@@ -69,7 +69,7 @@ class ColumnViewCell : gtk.list_item.ListItem
       Get `child` property.
       Returns: Widget used for display.
   */
-  override @property gtk.widget.Widget child()
+  override @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -79,7 +79,7 @@ class ColumnViewCell : gtk.list_item.ListItem
       Params:
         propval = Widget used for display.
   */
-  override @property void child(gtk.widget.Widget propval)
+  override @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -88,7 +88,7 @@ class ColumnViewCell : gtk.list_item.ListItem
       Get `focusable` property.
       Returns: If the item can be focused with the keyboard.
   */
-  override @property bool focusable()
+  override @property bool focusable() nothrow
   {
     return getFocusable();
   }
@@ -98,7 +98,7 @@ class ColumnViewCell : gtk.list_item.ListItem
       Params:
         propval = If the item can be focused with the keyboard.
   */
-  override @property void focusable(bool propval)
+  override @property void focusable(bool propval) nothrow
   {
     setFocusable(propval);
   }
@@ -107,7 +107,7 @@ class ColumnViewCell : gtk.list_item.ListItem
       Get `item` property.
       Returns: Displayed item.
   */
-  override @property gobject.object.ObjectWrap item()
+  override @property gobject.object.ObjectWrap item() nothrow
   {
     return getItem();
   }
@@ -116,7 +116,7 @@ class ColumnViewCell : gtk.list_item.ListItem
       Get `position` property.
       Returns: Position of the item.
   */
-  override @property uint position()
+  override @property uint position() nothrow
   {
     return getPosition();
   }
@@ -125,7 +125,7 @@ class ColumnViewCell : gtk.list_item.ListItem
       Get `selected` property.
       Returns: If the item is currently selected.
   */
-  override @property bool selected()
+  override @property bool selected() nothrow
   {
     return getSelected();
   }
@@ -135,7 +135,7 @@ class ColumnViewCell : gtk.list_item.ListItem
       null if none was set.
       Returns: The child
   */
-  override gtk.widget.Widget getChild()
+  override gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_column_view_cell_get_child(cast(GtkColumnViewCell*)this._cPtr);
@@ -148,7 +148,7 @@ class ColumnViewCell : gtk.list_item.ListItem
       [gtk.column_view_cell.ColumnViewCell.setFocusable].
       Returns: true if the item is focusable
   */
-  override bool getFocusable()
+  override bool getFocusable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_column_view_cell_get_focusable(cast(GtkColumnViewCell*)this._cPtr);
@@ -161,7 +161,7 @@ class ColumnViewCell : gtk.list_item.ListItem
       If self is unbound, this function returns null.
       Returns: The item displayed
   */
-  override gobject.object.ObjectWrap getItem()
+  override gobject.object.ObjectWrap getItem() nothrow
   {
     GObject* _cretval;
     _cretval = gtk_column_view_cell_get_item(cast(GtkColumnViewCell*)this._cPtr);
@@ -175,7 +175,7 @@ class ColumnViewCell : gtk.list_item.ListItem
       If self is unbound, [gtk.types.INVALID_LIST_POSITION] is returned.
       Returns: The position of this item
   */
-  override uint getPosition()
+  override uint getPosition() nothrow
   {
     uint _retval;
     _retval = gtk_column_view_cell_get_position(cast(GtkColumnViewCell*)this._cPtr);
@@ -189,7 +189,7 @@ class ColumnViewCell : gtk.list_item.ListItem
       and cannot be set otherwise.
       Returns: true if the item is selected.
   */
-  override bool getSelected()
+  override bool getSelected() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_column_view_cell_get_selected(cast(GtkColumnViewCell*)this._cPtr);
@@ -206,7 +206,7 @@ class ColumnViewCell : gtk.list_item.ListItem
       Params:
         child = The list item's child or null to unset
   */
-  override void setChild(gtk.widget.Widget child = null)
+  override void setChild(gtk.widget.Widget child = null) nothrow
   {
     gtk_column_view_cell_set_child(cast(GtkColumnViewCell*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -225,7 +225,7 @@ class ColumnViewCell : gtk.list_item.ListItem
       Params:
         focusable = if the item should be focusable
   */
-  override void setFocusable(bool focusable)
+  override void setFocusable(bool focusable) nothrow
   {
     gtk_column_view_cell_set_focusable(cast(GtkColumnViewCell*)this._cPtr, focusable);
   }
@@ -241,7 +241,7 @@ class ColumnViewCellGidBuilderImpl(T) : gtk.list_item.ListItemGidBuilderImpl!T
         propval = Widget used for display.
       Returns: Builder instance for fluent chaining
   */
-  override T child(gtk.widget.Widget propval)
+  override T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -252,7 +252,7 @@ class ColumnViewCellGidBuilderImpl(T) : gtk.list_item.ListItemGidBuilderImpl!T
         propval = If the item can be focused with the keyboard.
       Returns: Builder instance for fluent chaining
   */
-  override T focusable(bool propval)
+  override T focusable(bool propval) nothrow
   {
     return setProperty("focusable", propval);
   }
@@ -265,7 +265,7 @@ final class ColumnViewCellGidBuilder : ColumnViewCellGidBuilderImpl!ColumnViewCe
       Create object from builder.
       Returns: New object
   */
-  ColumnViewCell build()
+  ColumnViewCell build() nothrow
   {
     return new ColumnViewCell(cast(void*)createGObject(ColumnViewCell._getGType), No.Take);
   }

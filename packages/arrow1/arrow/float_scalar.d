@@ -14,26 +14,26 @@ class FloatScalar : arrow.scalar.Scalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_float_scalar_get_type != &gidSymbolNotFound ? garrow_float_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FloatScalar self()
+  override FloatScalar self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class FloatScalar : arrow.scalar.Scalar
       Get builder for [arrow.float_scalar.FloatScalar]
       Returns: New builder object
   */
-  static FloatScalarGidBuilder builder()
+  static FloatScalarGidBuilder builder() nothrow
   {
     return new FloatScalarGidBuilder;
   }
 
   /** */
-  this(float value)
+  this(float value) nothrow
   {
     GArrowFloatScalar* _cretval;
     _cretval = garrow_float_scalar_new(value);
@@ -56,7 +56,7 @@ class FloatScalar : arrow.scalar.Scalar
   }
 
   /** */
-  float getValue()
+  float getValue() nothrow
   {
     float _retval;
     _retval = garrow_float_scalar_get_value(cast(GArrowFloatScalar*)this._cPtr);
@@ -76,7 +76,7 @@ final class FloatScalarGidBuilder : FloatScalarGidBuilderImpl!FloatScalarGidBuil
       Create object from builder.
       Returns: New object
   */
-  FloatScalar build()
+  FloatScalar build() nothrow
   {
     return new FloatScalar(cast(void*)createGObject(FloatScalar._getGType), Yes.Take);
   }

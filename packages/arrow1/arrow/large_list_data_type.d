@@ -16,26 +16,26 @@ class LargeListDataType : arrow.data_type.DataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_large_list_data_type_get_type != &gidSymbolNotFound ? garrow_large_list_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LargeListDataType self()
+  override LargeListDataType self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class LargeListDataType : arrow.data_type.DataType
       Get builder for [arrow.large_list_data_type.LargeListDataType]
       Returns: New builder object
   */
-  static LargeListDataTypeGidBuilder builder()
+  static LargeListDataTypeGidBuilder builder() nothrow
   {
     return new LargeListDataTypeGidBuilder;
   }
 
   /** */
-  this(arrow.field.Field field)
+  this(arrow.field.Field field) nothrow
   {
     GArrowLargeListDataType* _cretval;
     _cretval = garrow_large_list_data_type_new(field ? cast(GArrowField*)field._cPtr(No.Dup) : null);
@@ -58,7 +58,7 @@ class LargeListDataType : arrow.data_type.DataType
   }
 
   /** */
-  arrow.field.Field getField()
+  arrow.field.Field getField() nothrow
   {
     GArrowField* _cretval;
     _cretval = garrow_large_list_data_type_get_field(cast(GArrowLargeListDataType*)this._cPtr);
@@ -79,7 +79,7 @@ final class LargeListDataTypeGidBuilder : LargeListDataTypeGidBuilderImpl!LargeL
       Create object from builder.
       Returns: New object
   */
-  LargeListDataType build()
+  LargeListDataType build() nothrow
   {
     return new LargeListDataType(cast(void*)createGObject(LargeListDataType._getGType), Yes.Take);
   }

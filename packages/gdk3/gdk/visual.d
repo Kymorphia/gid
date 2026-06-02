@@ -18,26 +18,26 @@ class Visual : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_visual_get_type != &gidSymbolNotFound ? gdk_visual_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Visual self()
+  override Visual self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class Visual : gobject.object.ObjectWrap
       Get builder for [gdk.visual.Visual]
       Returns: New builder object
   */
-  static VisualGidBuilder builder()
+  static VisualGidBuilder builder() nothrow
   {
     return new VisualGidBuilder;
   }
@@ -59,7 +59,7 @@ class Visual : gobject.object.ObjectWrap
       Deprecated: Visual selection should be done using
             [gdk.screen.Screen.getSystemVisual] and [gdk.screen.Screen.getRgbaVisual]
   */
-  static gdk.visual.Visual getBest()
+  static gdk.visual.Visual getBest() nothrow
   {
     GdkVisual* _cretval;
     _cretval = gdk_visual_get_best();
@@ -76,7 +76,7 @@ class Visual : gobject.object.ObjectWrap
       Deprecated: Visual selection should be done using
             [gdk.screen.Screen.getSystemVisual] and [gdk.screen.Screen.getRgbaVisual]
   */
-  static int getBestDepth()
+  static int getBestDepth() nothrow
   {
     int _retval;
     _retval = gdk_visual_get_best_depth();
@@ -90,7 +90,7 @@ class Visual : gobject.object.ObjectWrap
       Deprecated: Visual selection should be done using
             [gdk.screen.Screen.getSystemVisual] and [gdk.screen.Screen.getRgbaVisual]
   */
-  static gdk.types.VisualType getBestType()
+  static gdk.types.VisualType getBestType() nothrow
   {
     GdkVisualType _cretval;
     _cretval = gdk_visual_get_best_type();
@@ -111,7 +111,7 @@ class Visual : gobject.object.ObjectWrap
       Deprecated: Visual selection should be done using
             [gdk.screen.Screen.getSystemVisual] and [gdk.screen.Screen.getRgbaVisual]
   */
-  static gdk.visual.Visual getBestWithBoth(int depth, gdk.types.VisualType visualType)
+  static gdk.visual.Visual getBestWithBoth(int depth, gdk.types.VisualType visualType) nothrow
   {
     GdkVisual* _cretval;
     _cretval = gdk_visual_get_best_with_both(depth, visualType);
@@ -132,7 +132,7 @@ class Visual : gobject.object.ObjectWrap
       Deprecated: Visual selection should be done using
             [gdk.screen.Screen.getSystemVisual] and [gdk.screen.Screen.getRgbaVisual]
   */
-  static gdk.visual.Visual getBestWithDepth(int depth)
+  static gdk.visual.Visual getBestWithDepth(int depth) nothrow
   {
     GdkVisual* _cretval;
     _cretval = gdk_visual_get_best_with_depth(depth);
@@ -153,7 +153,7 @@ class Visual : gobject.object.ObjectWrap
       Deprecated: Visual selection should be done using
             [gdk.screen.Screen.getSystemVisual] and [gdk.screen.Screen.getRgbaVisual]
   */
-  static gdk.visual.Visual getBestWithType(gdk.types.VisualType visualType)
+  static gdk.visual.Visual getBestWithType(gdk.types.VisualType visualType) nothrow
   {
     GdkVisual* _cretval;
     _cretval = gdk_visual_get_best_with_type(visualType);
@@ -169,7 +169,7 @@ class Visual : gobject.object.ObjectWrap
   
       Deprecated: Use gdk_screen_get_system_visual (gdk_screen_get_default ()).
   */
-  static gdk.visual.Visual getSystem()
+  static gdk.visual.Visual getSystem() nothrow
   {
     GdkVisual* _cretval;
     _cretval = gdk_visual_get_system();
@@ -186,7 +186,7 @@ class Visual : gobject.object.ObjectWrap
       Deprecated: Use [gdk.visual.Visual.getRedPixelDetails] and its variants to
             learn about the pixel layout of TrueColor and DirectColor visuals
   */
-  int getBitsPerRgb()
+  int getBitsPerRgb() nothrow
   {
     int _retval;
     _retval = gdk_visual_get_bits_per_rgb(cast(GdkVisual*)this._cPtr);
@@ -205,7 +205,7 @@ class Visual : gobject.object.ObjectWrap
         shift = A pointer to a #gint to be filled in, or null
         precision = A pointer to a #gint to be filled in, or null
   */
-  void getBluePixelDetails(out uint mask, out int shift, out int precision)
+  void getBluePixelDetails(out uint mask, out int shift, out int precision) nothrow
   {
     gdk_visual_get_blue_pixel_details(cast(GdkVisual*)this._cPtr, cast(uint*)&mask, cast(int*)&shift, cast(int*)&precision);
   }
@@ -220,7 +220,7 @@ class Visual : gobject.object.ObjectWrap
   
       Deprecated: This information is not useful
   */
-  gdk.types.ByteOrder getByteOrder()
+  gdk.types.ByteOrder getByteOrder() nothrow
   {
     GdkByteOrder _cretval;
     _cretval = gdk_visual_get_byte_order(cast(GdkVisual*)this._cPtr);
@@ -237,7 +237,7 @@ class Visual : gobject.object.ObjectWrap
       Deprecated: This information is not useful, since GDK does not
             provide APIs to operate on colormaps.
   */
-  int getColormapSize()
+  int getColormapSize() nothrow
   {
     int _retval;
     _retval = gdk_visual_get_colormap_size(cast(GdkVisual*)this._cPtr);
@@ -248,7 +248,7 @@ class Visual : gobject.object.ObjectWrap
       Returns the bit depth of this visual.
       Returns: The bit depth of this visual.
   */
-  int getDepth()
+  int getDepth() nothrow
   {
     int _retval;
     _retval = gdk_visual_get_depth(cast(GdkVisual*)this._cPtr);
@@ -267,7 +267,7 @@ class Visual : gobject.object.ObjectWrap
         shift = A pointer to a #gint to be filled in, or null
         precision = A pointer to a #gint to be filled in, or null
   */
-  void getGreenPixelDetails(out uint mask, out int shift, out int precision)
+  void getGreenPixelDetails(out uint mask, out int shift, out int precision) nothrow
   {
     gdk_visual_get_green_pixel_details(cast(GdkVisual*)this._cPtr, cast(uint*)&mask, cast(int*)&shift, cast(int*)&precision);
   }
@@ -284,7 +284,7 @@ class Visual : gobject.object.ObjectWrap
         shift = A pointer to a #gint to be filled in, or null
         precision = A pointer to a #gint to be filled in, or null
   */
-  void getRedPixelDetails(out uint mask, out int shift, out int precision)
+  void getRedPixelDetails(out uint mask, out int shift, out int precision) nothrow
   {
     gdk_visual_get_red_pixel_details(cast(GdkVisual*)this._cPtr, cast(uint*)&mask, cast(int*)&shift, cast(int*)&precision);
   }
@@ -293,7 +293,7 @@ class Visual : gobject.object.ObjectWrap
       Gets the screen to which this visual belongs
       Returns: the screen to which this visual belongs.
   */
-  gdk.screen.Screen getScreen()
+  gdk.screen.Screen getScreen() nothrow
   {
     GdkScreen* _cretval;
     _cretval = gdk_visual_get_screen(cast(GdkVisual*)this._cPtr);
@@ -305,7 +305,7 @@ class Visual : gobject.object.ObjectWrap
       Returns the type of visual this is (PseudoColor, TrueColor, etc).
       Returns: A #GdkVisualType stating the type of visual.
   */
-  gdk.types.VisualType getVisualType()
+  gdk.types.VisualType getVisualType() nothrow
   {
     GdkVisualType _cretval;
     _cretval = gdk_visual_get_visual_type(cast(GdkVisual*)this._cPtr);
@@ -326,7 +326,7 @@ final class VisualGidBuilder : VisualGidBuilderImpl!VisualGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Visual build()
+  Visual build() nothrow
   {
     return new Visual(cast(void*)createGObject(Visual._getGType), No.Take);
   }

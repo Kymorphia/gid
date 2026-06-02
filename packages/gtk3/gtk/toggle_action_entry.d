@@ -16,11 +16,8 @@ class ToggleActionEntry
   GtkToggleActionEntry _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.toggle_action_entry.ToggleActionEntry");
-
     _cInstance = *cast(GtkToggleActionEntry*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class ToggleActionEntry
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class ToggleActionEntry
       Get `name` field.
       Returns: The name of the action.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).name);
   }
@@ -47,7 +44,7 @@ class ToggleActionEntry
       Params:
         propval = The name of the action.
   */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).name);
     dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)this._cPtr).name);
@@ -58,7 +55,7 @@ class ToggleActionEntry
       Returns: The stock id for the action, or the name of an icon from the
          icon theme.
   */
-  @property string stockId()
+  @property string stockId() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).stockId);
   }
@@ -69,7 +66,7 @@ class ToggleActionEntry
         propval = The stock id for the action, or the name of an icon from the
            icon theme.
   */
-  @property void stockId(string propval)
+  @property void stockId(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).stockId);
     dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)this._cPtr).stockId);
@@ -80,7 +77,7 @@ class ToggleActionEntry
       Returns: The label for the action. This field should typically be marked
          for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
   */
-  @property string label()
+  @property string label() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).label);
   }
@@ -91,7 +88,7 @@ class ToggleActionEntry
         propval = The label for the action. This field should typically be marked
            for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
   */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).label);
     dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)this._cPtr).label);
@@ -102,7 +99,7 @@ class ToggleActionEntry
       Returns: The accelerator for the action, in the format understood by
          [gtk.global.acceleratorParse].
   */
-  @property string accelerator()
+  @property string accelerator() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).accelerator);
   }
@@ -113,7 +110,7 @@ class ToggleActionEntry
         propval = The accelerator for the action, in the format understood by
            [gtk.global.acceleratorParse].
   */
-  @property void accelerator(string propval)
+  @property void accelerator(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).accelerator);
     dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)this._cPtr).accelerator);
@@ -124,7 +121,7 @@ class ToggleActionEntry
       Returns: The tooltip for the action. This field should typically be
          marked for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
   */
-  @property string tooltip()
+  @property string tooltip() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).tooltip);
   }
@@ -135,7 +132,7 @@ class ToggleActionEntry
         propval = The tooltip for the action. This field should typically be
            marked for translation, see [gtk.action_group.ActionGroup.setTranslationDomain].
   */
-  @property void tooltip(string propval)
+  @property void tooltip(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).tooltip);
     dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)this._cPtr).tooltip);
@@ -145,7 +142,7 @@ class ToggleActionEntry
       Get `callback` field.
       Returns: The function to call when the action is activated.
   */
-  @property GCallback callback()
+  @property GCallback callback() nothrow
   {
     return (cast(GtkToggleActionEntry*)this._cPtr).callback;
   }
@@ -156,7 +153,7 @@ class ToggleActionEntry
         propval = The function to call when the action is activated.
   */
 
-  @property void callback(GCallback propval)
+  @property void callback(GCallback propval) nothrow
   {
     (cast(GtkToggleActionEntry*)this._cPtr).callback = propval;
   }
@@ -165,7 +162,7 @@ class ToggleActionEntry
       Get `isActive` field.
       Returns: The initial state of the toggle action.
   */
-  @property bool isActive()
+  @property bool isActive() nothrow
   {
     return cast(bool)(cast(GtkToggleActionEntry*)this._cPtr).isActive;
   }
@@ -175,7 +172,7 @@ class ToggleActionEntry
       Params:
         propval = The initial state of the toggle action.
   */
-  @property void isActive(bool propval)
+  @property void isActive(bool propval) nothrow
   {
     (cast(GtkToggleActionEntry*)this._cPtr).isActive = propval;
   }

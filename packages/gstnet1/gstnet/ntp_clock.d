@@ -15,26 +15,26 @@ class NtpClock : gstnet.net_client_clock.NetClientClock
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_ntp_clock_get_type != &gidSymbolNotFound ? gst_ntp_clock_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NtpClock self()
+  override NtpClock self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class NtpClock : gstnet.net_client_clock.NetClientClock
       Get builder for [gstnet.ntp_clock.NtpClock]
       Returns: New builder object
   */
-  static NtpClockGidBuilder builder()
+  static NtpClockGidBuilder builder() nothrow
   {
     return new NtpClockGidBuilder;
   }
@@ -60,7 +60,7 @@ class NtpClock : gstnet.net_client_clock.NetClientClock
       Returns: a new #GstClock that receives a time from the remote
         clock.
   */
-  this(string name, string remoteAddress, int remotePort, gst.types.ClockTime baseTime)
+  this(string name, string remoteAddress, int remotePort, gst.types.ClockTime baseTime) nothrow
   {
     GstClock* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -82,7 +82,7 @@ final class NtpClockGidBuilder : NtpClockGidBuilderImpl!NtpClockGidBuilder
       Create object from builder.
       Returns: New object
   */
-  NtpClock build()
+  NtpClock build() nothrow
   {
     return new NtpClock(cast(void*)createGObject(NtpClock._getGType), Yes.Take);
   }

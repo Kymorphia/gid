@@ -37,7 +37,7 @@ template TlsClientConnectionT()
         certificate we expect, which is useful for servers that serve
         virtual hosts.
   */
-  @property gio.socket_connectable.SocketConnectable serverIdentity()
+  @property gio.socket_connectable.SocketConnectable serverIdentity() nothrow
   {
     return getServerIdentity();
   }
@@ -60,7 +60,7 @@ template TlsClientConnectionT()
           certificate we expect, which is useful for servers that serve
           virtual hosts.
   */
-  @property void serverIdentity(gio.socket_connectable.SocketConnectable propval)
+  @property void serverIdentity(gio.socket_connectable.SocketConnectable propval) nothrow
   {
     setServerIdentity(propval);
   }
@@ -72,7 +72,7 @@ template TlsClientConnectionT()
   
       Deprecated: SSL 3.0 is insecure.
   */
-  @property bool useSsl3()
+  @property bool useSsl3() nothrow
   {
     return getUseSsl3();
   }
@@ -85,7 +85,7 @@ template TlsClientConnectionT()
   
       Deprecated: SSL 3.0 is insecure.
   */
-  @property void useSsl3(bool propval)
+  @property void useSsl3(bool propval) nothrow
   {
     setUseSsl3(propval);
   }
@@ -111,7 +111,7 @@ template TlsClientConnectionT()
   
       Deprecated: Do not attempt to ignore validation errors.
   */
-  @property gio.types.TlsCertificateFlags validationFlags()
+  @property gio.types.TlsCertificateFlags validationFlags() nothrow
   {
     return getValidationFlags();
   }
@@ -138,7 +138,7 @@ template TlsClientConnectionT()
   
       Deprecated: Do not attempt to ignore validation errors.
   */
-  @property void validationFlags(gio.types.TlsCertificateFlags propval)
+  @property void validationFlags(gio.types.TlsCertificateFlags propval) nothrow
   {
     setValidationFlags(propval);
   }
@@ -177,7 +177,7 @@ template TlsClientConnectionT()
       Params:
         source = a #GTlsClientConnection
   */
-  override void copySessionState(gio.tls_client_connection.TlsClientConnection source)
+  override void copySessionState(gio.tls_client_connection.TlsClientConnection source) nothrow
   {
     g_tls_client_connection_copy_session_state(cast(GTlsClientConnection*)this._cPtr, source ? cast(GTlsClientConnection*)(cast(gobject.object.ObjectWrap)source)._cPtr(No.Dup) : null);
   }
@@ -188,7 +188,7 @@ template TlsClientConnectionT()
         expected server identity, or null if the expected identity is not
         known.
   */
-  override gio.socket_connectable.SocketConnectable getServerIdentity()
+  override gio.socket_connectable.SocketConnectable getServerIdentity() nothrow
   {
     GSocketConnectable* _cretval;
     _cretval = g_tls_client_connection_get_server_identity(cast(GTlsClientConnection*)this._cPtr);
@@ -203,7 +203,7 @@ template TlsClientConnectionT()
   
       Deprecated: SSL 3.0 is insecure.
   */
-  override bool getUseSsl3()
+  override bool getUseSsl3() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_tls_client_connection_get_use_ssl3(cast(GTlsClientConnection*)this._cPtr);
@@ -220,7 +220,7 @@ template TlsClientConnectionT()
   
       Deprecated: Do not attempt to ignore validation errors.
   */
-  override gio.types.TlsCertificateFlags getValidationFlags()
+  override gio.types.TlsCertificateFlags getValidationFlags() nothrow
   {
     GTlsCertificateFlags _cretval;
     _cretval = g_tls_client_connection_get_validation_flags(cast(GTlsClientConnection*)this._cPtr);
@@ -237,7 +237,7 @@ template TlsClientConnectionT()
       Params:
         identity = a #GSocketConnectable describing the expected server identity
   */
-  override void setServerIdentity(gio.socket_connectable.SocketConnectable identity)
+  override void setServerIdentity(gio.socket_connectable.SocketConnectable identity) nothrow
   {
     g_tls_client_connection_set_server_identity(cast(GTlsClientConnection*)this._cPtr, identity ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)identity)._cPtr(No.Dup) : null);
   }
@@ -259,7 +259,7 @@ template TlsClientConnectionT()
   
       Deprecated: SSL 3.0 is insecure.
   */
-  override void setUseSsl3(bool useSsl3)
+  override void setUseSsl3(bool useSsl3) nothrow
   {
     g_tls_client_connection_set_use_ssl3(cast(GTlsClientConnection*)this._cPtr, useSsl3);
   }
@@ -278,7 +278,7 @@ template TlsClientConnectionT()
   
       Deprecated: Do not attempt to ignore validation errors.
   */
-  override void setValidationFlags(gio.types.TlsCertificateFlags flags)
+  override void setValidationFlags(gio.types.TlsCertificateFlags flags) nothrow
   {
     g_tls_client_connection_set_validation_flags(cast(GTlsClientConnection*)this._cPtr, flags);
   }
@@ -307,7 +307,7 @@ template TlsClientConnectionGidBuilderT()
           virtual hosts.
       Returns: Builder instance for fluent chaining
   */
-  T serverIdentity(gio.socket_connectable.SocketConnectable propval)
+  T serverIdentity(gio.socket_connectable.SocketConnectable propval) nothrow
   {
     return setProperty("server-identity", propval);
   }
@@ -321,7 +321,7 @@ template TlsClientConnectionGidBuilderT()
   
       Deprecated: SSL 3.0 is insecure.
   */
-  T useSsl3(bool propval)
+  T useSsl3(bool propval) nothrow
   {
     return setProperty("use-ssl3", propval);
   }
@@ -349,7 +349,7 @@ template TlsClientConnectionGidBuilderT()
   
       Deprecated: Do not attempt to ignore validation errors.
   */
-  T validationFlags(gio.types.TlsCertificateFlags propval)
+  T validationFlags(gio.types.TlsCertificateFlags propval) nothrow
   {
     return setProperty("validation-flags", propval);
   }

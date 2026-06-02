@@ -50,26 +50,26 @@ class WebContext : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_web_context_get_type != &gidSymbolNotFound ? webkit_web_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WebContext self()
+  override WebContext self() nothrow
   {
     return this;
   }
@@ -78,7 +78,7 @@ class WebContext : gobject.object.ObjectWrap
       Get builder for [webkit.web_context.WebContext]
       Returns: New builder object
   */
-  static WebContextGidBuilder builder()
+  static WebContextGidBuilder builder() nothrow
   {
     return new WebContextGidBuilder;
   }
@@ -94,7 +94,7 @@ class WebContext : gobject.object.ObjectWrap
         The expected values for this property are defined in the IANA timezone database. See this
         wikipedia page for instance, https://en.wikipedia.org/wiki/List_of_tz_database_time_zones.
   */
-  @property string timeZoneOverride()
+  @property string timeZoneOverride() nothrow
   {
     return getTimeZoneOverride();
   }
@@ -103,7 +103,7 @@ class WebContext : gobject.object.ObjectWrap
       Create a new #WebKitWebContext.
       Returns: a newly created #WebKitWebContext
   */
-  this()
+  this() nothrow
   {
     WebKitWebContext* _cretval;
     _cretval = webkit_web_context_new();
@@ -114,7 +114,7 @@ class WebContext : gobject.object.ObjectWrap
       Gets the default web context.
       Returns: a #WebKitWebContext
   */
-  static webkit.web_context.WebContext getDefault()
+  static webkit.web_context.WebContext getDefault() nothrow
   {
     WebKitWebContext* _cretval;
     _cretval = webkit_web_context_get_default();
@@ -138,7 +138,7 @@ class WebContext : gobject.object.ObjectWrap
         path = an absolute path to mount in the sandbox
         readOnly = if true the path will be read-only
   */
-  void addPathToSandbox(string path, bool readOnly)
+  void addPathToSandbox(string path, bool readOnly) nothrow
   {
     const(char)* _path = path.toCString(No.Alloc);
     webkit_web_context_add_path_to_sandbox(cast(WebKitWebContext*)this._cPtr, _path, readOnly);
@@ -152,7 +152,7 @@ class WebContext : gobject.object.ObjectWrap
       [webkit.web_context.WebContext.setCacheModel].
       Returns: the current #WebKitCacheModel
   */
-  webkit.types.CacheModel getCacheModel()
+  webkit.types.CacheModel getCacheModel() nothrow
   {
     WebKitCacheModel _cretval;
     _cretval = webkit_web_context_get_cache_model(cast(WebKitWebContext*)this._cPtr);
@@ -164,7 +164,7 @@ class WebContext : gobject.object.ObjectWrap
       Get the #WebKitGeolocationManager of context.
       Returns: the #WebKitGeolocationManager of context.
   */
-  webkit.geolocation_manager.GeolocationManager getGeolocationManager()
+  webkit.geolocation_manager.GeolocationManager getGeolocationManager() nothrow
   {
     WebKitGeolocationManager* _cretval;
     _cretval = webkit_web_context_get_geolocation_manager(cast(WebKitWebContext*)this._cPtr);
@@ -176,7 +176,7 @@ class WebContext : gobject.object.ObjectWrap
       Get the #WebKitNetworkSession used for automation sessions started in context.
       Returns: a #WebKitNetworkSession, or null if automation is not enabled
   */
-  webkit.network_session.NetworkSession getNetworkSessionForAutomation()
+  webkit.network_session.NetworkSession getNetworkSessionForAutomation() nothrow
   {
     WebKitNetworkSession* _cretval;
     _cretval = webkit_web_context_get_network_session_for_automation(cast(WebKitWebContext*)this._cPtr);
@@ -188,7 +188,7 @@ class WebContext : gobject.object.ObjectWrap
       Get the #WebKitSecurityManager of context.
       Returns: the #WebKitSecurityManager of context.
   */
-  webkit.security_manager.SecurityManager getSecurityManager()
+  webkit.security_manager.SecurityManager getSecurityManager() nothrow
   {
     WebKitSecurityManager* _cretval;
     _cretval = webkit_web_context_get_security_manager(cast(WebKitWebContext*)this._cPtr);
@@ -200,7 +200,7 @@ class WebContext : gobject.object.ObjectWrap
       Get whether spell checking feature is currently enabled.
       Returns: true If spell checking is enabled, or false otherwise.
   */
-  bool getSpellCheckingEnabled()
+  bool getSpellCheckingEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_context_get_spell_checking_enabled(cast(WebKitWebContext*)this._cPtr);
@@ -218,7 +218,7 @@ class WebContext : gobject.object.ObjectWrap
       Returns: A null-terminated
            array of languages if available, or null otherwise.
   */
-  string[] getSpellCheckingLanguages()
+  string[] getSpellCheckingLanguages() nothrow
   {
     const(char*)* _cretval;
     _cretval = webkit_web_context_get_spell_checking_languages(cast(WebKitWebContext*)this._cPtr);
@@ -240,7 +240,7 @@ class WebContext : gobject.object.ObjectWrap
       Get the #WebKitWebContext:time-zone-override property.
       Returns: 
   */
-  string getTimeZoneOverride()
+  string getTimeZoneOverride() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_web_context_get_time_zone_override(cast(WebKitWebContext*)this._cPtr);
@@ -270,7 +270,7 @@ class WebContext : gobject.object.ObjectWrap
         allowedOrigins = a #GList of security origins
         disallowedOrigins = a #GList of security origins
   */
-  void initializeNotificationPermissions(webkit.security_origin.SecurityOrigin[] allowedOrigins, webkit.security_origin.SecurityOrigin[] disallowedOrigins)
+  void initializeNotificationPermissions(webkit.security_origin.SecurityOrigin[] allowedOrigins, webkit.security_origin.SecurityOrigin[] disallowedOrigins) nothrow
   {
     auto _allowedOrigins = gListFromD!(webkit.security_origin.SecurityOrigin)(allowedOrigins);
     scope(exit) containerFree!(GList*, webkit.security_origin.SecurityOrigin, GidOwnership.None)(_allowedOrigins);
@@ -285,7 +285,7 @@ class WebContext : gobject.object.ObjectWrap
       See also [webkit.web_context.WebContext.setAutomationAllowed].
       Returns: true if automation is allowed or false otherwise.
   */
-  bool isAutomationAllowed()
+  bool isAutomationAllowed() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_context_is_automation_allowed(cast(WebKitWebContext*)this._cPtr);
@@ -335,13 +335,20 @@ class WebContext : gobject.object.ObjectWrap
         scheme = the network scheme to register
         callback = a #WebKitURISchemeRequestCallback
   */
-  void registerUriScheme(string scheme, webkit.types.URISchemeRequestCallback callback)
+  void registerUriScheme(string scheme, webkit.types.URISchemeRequestCallback callback) nothrow
   {
-    extern(C) void _callbackCallback(WebKitURISchemeRequest* request, void* userData)
+    extern(C) void _callbackCallback(WebKitURISchemeRequest* request, void* userData) nothrow
     {
       auto _dlg = cast(webkit.types.URISchemeRequestCallback*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(webkit.urischeme_request.URISchemeRequest)(cast(void*)request, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(webkit.urischeme_request.URISchemeRequest)(cast(void*)request, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.types.URISchemeRequestCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -358,7 +365,7 @@ class WebContext : gobject.object.ObjectWrap
       Params:
         message = a #WebKitUserMessage
   */
-  void sendMessageToAllExtensions(webkit.user_message.UserMessage message)
+  void sendMessageToAllExtensions(webkit.user_message.UserMessage message) nothrow
   {
     webkit_web_context_send_message_to_all_extensions(cast(WebKitWebContext*)this._cPtr, message ? cast(WebKitUserMessage*)message._cPtr(No.Dup) : null);
   }
@@ -378,7 +385,7 @@ class WebContext : gobject.object.ObjectWrap
       Params:
         allowed = value to set
   */
-  void setAutomationAllowed(bool allowed)
+  void setAutomationAllowed(bool allowed) nothrow
   {
     webkit_web_context_set_automation_allowed(cast(WebKitWebContext*)this._cPtr, allowed);
   }
@@ -408,7 +415,7 @@ class WebContext : gobject.object.ObjectWrap
       Params:
         cacheModel = a #WebKitCacheModel
   */
-  void setCacheModel(webkit.types.CacheModel cacheModel)
+  void setCacheModel(webkit.types.CacheModel cacheModel) nothrow
   {
     webkit_web_context_set_cache_model(cast(WebKitWebContext*)this._cPtr, cacheModel);
   }
@@ -428,7 +435,7 @@ class WebContext : gobject.object.ObjectWrap
       Params:
         languages = a null-terminated list of language identifiers
   */
-  void setPreferredLanguages(string[] languages = null)
+  void setPreferredLanguages(string[] languages = null) nothrow
   {
     const(char)*[] _tmplanguages;
     foreach (s; languages)
@@ -445,7 +452,7 @@ class WebContext : gobject.object.ObjectWrap
       Params:
         enabled = Value to be set
   */
-  void setSpellCheckingEnabled(bool enabled)
+  void setSpellCheckingEnabled(bool enabled) nothrow
   {
     webkit_web_context_set_spell_checking_enabled(cast(WebKitWebContext*)this._cPtr, enabled);
   }
@@ -466,7 +473,7 @@ class WebContext : gobject.object.ObjectWrap
       Params:
         languages = a null-terminated list of spell checking languages
   */
-  void setSpellCheckingLanguages(string[] languages)
+  void setSpellCheckingLanguages(string[] languages) nothrow
   {
     char*[] _tmplanguages;
     foreach (s; languages)
@@ -491,7 +498,7 @@ class WebContext : gobject.object.ObjectWrap
       Params:
         directory = the directory to add
   */
-  void setWebProcessExtensionsDirectory(string directory)
+  void setWebProcessExtensionsDirectory(string directory) nothrow
   {
     const(char)* _directory = directory.toCString(No.Alloc);
     webkit_web_context_set_web_process_extensions_directory(cast(WebKitWebContext*)this._cPtr, _directory);
@@ -510,7 +517,7 @@ class WebContext : gobject.object.ObjectWrap
       Params:
         userData = a #GVariant
   */
-  void setWebProcessExtensionsInitializationUserData(glib.variant.Variant userData)
+  void setWebProcessExtensionsInitializationUserData(glib.variant.Variant userData) nothrow
   {
     webkit_web_context_set_web_process_extensions_initialization_user_data(cast(WebKitWebContext*)this._cPtr, userData ? cast(GVariant*)userData._cPtr(No.Dup) : null);
   }
@@ -534,14 +541,14 @@ class WebContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAutomationStarted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAutomationStarted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.automation_session.AutomationSession)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_context.WebContext)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -553,7 +560,14 @@ class WebContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_context.WebContext.automationStarted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -582,13 +596,13 @@ class WebContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInitializeNotificationPermissions(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInitializeNotificationPermissions(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_context.WebContext)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -597,7 +611,14 @@ class WebContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_context.WebContext.initializeNotificationPermissions");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -622,13 +643,13 @@ class WebContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInitializeWebProcessExtensions(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInitializeWebProcessExtensions(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_context.WebContext)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -637,7 +658,14 @@ class WebContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_context.WebContext.initializeWebProcessExtensions");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -667,18 +695,19 @@ class WebContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUserMessageReceived(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUserMessageReceived(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.user_message.UserMessage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_context.WebContext)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -686,7 +715,14 @@ class WebContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_context.WebContext.userMessageReceived");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -706,7 +742,7 @@ class WebContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The #WebKitMemoryPressureSettings applied to the web processes created by this context.
       Returns: Builder instance for fluent chaining
   */
-  T memoryPressureSettings(webkit.memory_pressure_settings.MemoryPressureSettings propval)
+  T memoryPressureSettings(webkit.memory_pressure_settings.MemoryPressureSettings propval) nothrow
   {
     return setProperty("memory-pressure-settings", propval);
   }
@@ -724,7 +760,7 @@ class WebContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           wikipedia page for instance, https://en.wikipedia.org/wiki/List_of_tz_database_time_zones.
       Returns: Builder instance for fluent chaining
   */
-  T timeZoneOverride(string propval)
+  T timeZoneOverride(string propval) nothrow
   {
     return setProperty("time-zone-override", propval);
   }
@@ -737,7 +773,7 @@ final class WebContextGidBuilder : WebContextGidBuilderImpl!WebContextGidBuilder
       Create object from builder.
       Returns: New object
   */
-  WebContext build()
+  WebContext build() nothrow
   {
     return new WebContext(cast(void*)createGObject(WebContext._getGType), Yes.Take);
   }

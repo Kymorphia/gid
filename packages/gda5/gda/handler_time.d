@@ -19,26 +19,26 @@ class HandlerTime : gobject.object.ObjectWrap, gda.data_handler.DataHandler
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_handler_time_get_type != &gidSymbolNotFound ? gda_handler_time_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HandlerTime self()
+  override HandlerTime self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class HandlerTime : gobject.object.ObjectWrap, gda.data_handler.DataHandler
       Get builder for [gda.handler_time.HandlerTime]
       Returns: New builder object
   */
-  static HandlerTimeGidBuilder builder()
+  static HandlerTimeGidBuilder builder() nothrow
   {
     return new HandlerTimeGidBuilder;
   }
@@ -58,7 +58,7 @@ class HandlerTime : gobject.object.ObjectWrap, gda.data_handler.DataHandler
       Creates a data handler for time values
       Returns: the new object
   */
-  static gda.data_handler.DataHandler new_()
+  static gda.data_handler.DataHandler new_() nothrow
   {
     GdaDataHandler* _cretval;
     _cretval = gda_handler_time_new();
@@ -71,7 +71,7 @@ class HandlerTime : gobject.object.ObjectWrap, gda.data_handler.DataHandler
       instead of the current user locale.
       Returns: the new object
   */
-  static gda.data_handler.DataHandler newNoLocale()
+  static gda.data_handler.DataHandler newNoLocale() nothrow
   {
     GdaDataHandler* _cretval;
     _cretval = gda_handler_time_new_no_locale();
@@ -87,7 +87,7 @@ class HandlerTime : gobject.object.ObjectWrap, gda.data_handler.DataHandler
         type = the type of data being handled
       Returns: a new string
   */
-  string getFormat(gobject.types.GType type)
+  string getFormat(gobject.types.GType type) nothrow
   {
     char* _cretval;
     _cretval = gda_handler_time_get_format(cast(GdaHandlerTime*)this._cPtr, type);
@@ -96,7 +96,7 @@ class HandlerTime : gobject.object.ObjectWrap, gda.data_handler.DataHandler
   }
 
   /** */
-  string getNoLocaleStrFromValue(gobject.value.Value value)
+  string getNoLocaleStrFromValue(gobject.value.Value value) nothrow
   {
     char* _cretval;
     _cretval = gda_handler_time_get_no_locale_str_from_value(cast(GdaHandlerTime*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -119,7 +119,7 @@ class HandlerTime : gobject.object.ObjectWrap, gda.data_handler.DataHandler
         separator = separator character used between year, month and day
         twodigitsYears = TRUE if year part of date must be rendered on 2 digits
   */
-  void setSqlSpec(glib.types.DateDMY first, glib.types.DateDMY sec, glib.types.DateDMY third, char separator, bool twodigitsYears)
+  void setSqlSpec(glib.types.DateDMY first, glib.types.DateDMY sec, glib.types.DateDMY third, char separator, bool twodigitsYears) nothrow
   {
     gda_handler_time_set_sql_spec(cast(GdaHandlerTime*)this._cPtr, first, sec, third, separator, twodigitsYears);
   }
@@ -140,7 +140,7 @@ class HandlerTime : gobject.object.ObjectWrap, gda.data_handler.DataHandler
         separator = separator character used between year, month and day
         twodigitsYears = TRUE if year part of date must be rendered on 2 digits
   */
-  void setStrSpec(glib.types.DateDMY first, glib.types.DateDMY sec, glib.types.DateDMY third, char separator, bool twodigitsYears)
+  void setStrSpec(glib.types.DateDMY first, glib.types.DateDMY sec, glib.types.DateDMY third, char separator, bool twodigitsYears) nothrow
   {
     gda_handler_time_set_str_spec(cast(GdaHandlerTime*)this._cPtr, first, sec, third, separator, twodigitsYears);
   }
@@ -160,7 +160,7 @@ final class HandlerTimeGidBuilder : HandlerTimeGidBuilderImpl!HandlerTimeGidBuil
       Create object from builder.
       Returns: New object
   */
-  HandlerTime build()
+  HandlerTime build() nothrow
   {
     return new HandlerTime(cast(void*)createGObject(HandlerTime._getGType), No.Take);
   }

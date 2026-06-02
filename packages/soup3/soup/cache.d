@@ -18,26 +18,26 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_cache_get_type != &gidSymbolNotFound ? soup_cache_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Cache self()
+  override Cache self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Get builder for [soup.cache.Cache]
       Returns: New builder object
   */
-  static CacheGidBuilder builder()
+  static CacheGidBuilder builder() nothrow
   {
     return new CacheGidBuilder;
   }
@@ -55,7 +55,7 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Get `cacheDir` property.
       Returns: The directory to store the cache files.
   */
-  @property string cacheDir()
+  @property string cacheDir() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("cache-dir");
   }
@@ -64,7 +64,7 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Get `cacheType` property.
       Returns: Whether the cache is private or shared.
   */
-  @property soup.types.CacheType cacheType()
+  @property soup.types.CacheType cacheType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(soup.types.CacheType)("cache-type");
   }
@@ -82,7 +82,7 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
         cacheType = the #SoupCacheType of the cache
       Returns: a new #SoupCache
   */
-  this(string cacheDir, soup.types.CacheType cacheType)
+  this(string cacheDir, soup.types.CacheType cacheType) nothrow
   {
     SoupCache* _cretval;
     const(char)* _cacheDir = cacheDir.toCString(No.Alloc);
@@ -95,7 +95,7 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       
       This is not thread safe and must be called only from the thread that created the #SoupCache
   */
-  void clear()
+  void clear() nothrow
   {
     soup_cache_clear(cast(SoupCache*)this._cPtr);
   }
@@ -111,7 +111,7 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       
       This is not thread safe and must be called only from the thread that created the #SoupCache
   */
-  void dump()
+  void dump() nothrow
   {
     soup_cache_dump(cast(SoupCache*)this._cPtr);
   }
@@ -125,7 +125,7 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       
       Contrast with [soup.cache.Cache.dump], which writes out the cache index file.
   */
-  void flush()
+  void flush() nothrow
   {
     soup_cache_flush(cast(SoupCache*)this._cPtr);
   }
@@ -134,7 +134,7 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Gets the maximum size of the cache.
       Returns: the maximum size of the cache, in bytes.
   */
-  uint getMaxSize()
+  uint getMaxSize() nothrow
   {
     uint _retval;
     _retval = soup_cache_get_max_size(cast(SoupCache*)this._cPtr);
@@ -146,7 +146,7 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       
       This is not thread safe and must be called only from the thread that created the #SoupCache
   */
-  void load()
+  void load() nothrow
   {
     soup_cache_load(cast(SoupCache*)this._cPtr);
   }
@@ -157,7 +157,7 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Params:
         maxSize = the maximum size of the cache, in bytes
   */
-  void setMaxSize(uint maxSize)
+  void setMaxSize(uint maxSize) nothrow
   {
     soup_cache_set_max_size(cast(SoupCache*)this._cPtr, maxSize);
   }
@@ -175,7 +175,7 @@ class CacheGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.s
         propval = The directory to store the cache files.
       Returns: Builder instance for fluent chaining
   */
-  T cacheDir(string propval)
+  T cacheDir(string propval) nothrow
   {
     return setProperty("cache-dir", propval);
   }
@@ -186,7 +186,7 @@ class CacheGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.s
         propval = Whether the cache is private or shared.
       Returns: Builder instance for fluent chaining
   */
-  T cacheType(soup.types.CacheType propval)
+  T cacheType(soup.types.CacheType propval) nothrow
   {
     return setProperty("cache-type", propval);
   }
@@ -199,7 +199,7 @@ final class CacheGidBuilder : CacheGidBuilderImpl!CacheGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Cache build()
+  Cache build() nothrow
   {
     return new Cache(cast(void*)createGObject(Cache._getGType), Yes.Take);
   }

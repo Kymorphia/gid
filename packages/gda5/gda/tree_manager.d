@@ -18,26 +18,26 @@ class TreeManager : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_tree_manager_get_type != &gidSymbolNotFound ? gda_tree_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TreeManager self()
+  override TreeManager self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class TreeManager : gobject.object.ObjectWrap
       Get builder for [gda.tree_manager.TreeManager]
       Returns: New builder object
   */
-  static TreeManagerGidBuilder builder()
+  static TreeManagerGidBuilder builder() nothrow
   {
     return new TreeManagerGidBuilder;
   }
@@ -56,7 +56,7 @@ class TreeManager : gobject.object.ObjectWrap
       Returns: This property specifies the function which needs to be called when the list of #GdaTreeNode nodes
         managed has to be updated
   */
-  @property void* func()
+  @property void* func() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(void*)("func");
   }
@@ -67,7 +67,7 @@ class TreeManager : gobject.object.ObjectWrap
         propval = This property specifies the function which needs to be called when the list of #GdaTreeNode nodes
           managed has to be updated
   */
-  @property void func(void* propval)
+  @property void func(void* propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(void*)("func", propval);
   }
@@ -81,7 +81,7 @@ class TreeManager : gobject.object.ObjectWrap
         This property can typically set to FALSE if the process of creating children nodes is lenghty
         and needs to be postponed while an event occurs.
   */
-  @property bool recursive()
+  @property bool recursive() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("recursive");
   }
@@ -96,13 +96,13 @@ class TreeManager : gobject.object.ObjectWrap
           This property can typically set to FALSE if the process of creating children nodes is lenghty
           and needs to be postponed while an event occurs.
   */
-  @property void recursive(bool propval)
+  @property void recursive(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("recursive", propval);
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_tree_manager_error_quark();
@@ -121,7 +121,7 @@ class TreeManager : gobject.object.ObjectWrap
       Params:
         sub = a #GdaTreeManager object to add
   */
-  void addManager(gda.tree_manager.TreeManager sub)
+  void addManager(gda.tree_manager.TreeManager sub) nothrow
   {
     gda_tree_manager_add_manager(cast(GdaTreeManager*)this._cPtr, sub ? cast(GdaTreeManager*)sub._cPtr(No.Dup) : null);
   }
@@ -136,7 +136,7 @@ class TreeManager : gobject.object.ObjectWrap
         attribute = an attribute name
         value = the attribute's value, or null
   */
-  void addNewNodeAttribute(string attribute, gobject.value.Value value = null)
+  void addNewNodeAttribute(string attribute, gobject.value.Value value = null) nothrow
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
     gda_tree_manager_add_new_node_attribute(cast(GdaTreeManager*)this._cPtr, _attribute, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -154,7 +154,7 @@ class TreeManager : gobject.object.ObjectWrap
         name = name given to the new node, or null
       Returns: a new #GdaTreeNode
   */
-  gda.tree_node.TreeNode createNode(gda.tree_node.TreeNode parent = null, string name = null)
+  gda.tree_node.TreeNode createNode(gda.tree_node.TreeNode parent = null, string name = null) nothrow
   {
     GdaTreeNode* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -167,7 +167,7 @@ class TreeManager : gobject.object.ObjectWrap
       Get the list of sub managers which have already been added using [gda.tree_manager.TreeManager.addManager]
       Returns: a list of #GdaTreeMenager which should not be modified.
   */
-  gda.tree_manager.TreeManager[] getManagers()
+  gda.tree_manager.TreeManager[] getManagers() nothrow
   {
     const(GSList)* _cretval;
     _cretval = gda_tree_manager_get_managers(cast(GdaTreeManager*)this._cPtr);
@@ -187,7 +187,7 @@ class TreeManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           managed has to be updated
       Returns: Builder instance for fluent chaining
   */
-  T func(void* propval)
+  T func(void* propval) nothrow
   {
     return setProperty("func", propval);
   }
@@ -203,7 +203,7 @@ class TreeManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           and needs to be postponed while an event occurs.
       Returns: Builder instance for fluent chaining
   */
-  T recursive(bool propval)
+  T recursive(bool propval) nothrow
   {
     return setProperty("recursive", propval);
   }
@@ -216,7 +216,7 @@ final class TreeManagerGidBuilder : TreeManagerGidBuilderImpl!TreeManagerGidBuil
       Create object from builder.
       Returns: New object
   */
-  TreeManager build()
+  TreeManager build() nothrow
   {
     return new TreeManager(cast(void*)createGObject(TreeManager._getGType), No.Take);
   }
@@ -224,12 +224,12 @@ final class TreeManagerGidBuilder : TreeManagerGidBuilderImpl!TreeManagerGidBuil
 
 class TreeManagerException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.tree_manager.TreeManager.errorQuark, cast(int)code, msg);
   }

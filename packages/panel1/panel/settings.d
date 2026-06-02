@@ -21,26 +21,26 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_settings_get_type != &gidSymbolNotFound ? panel_settings_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Settings self()
+  override Settings self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
       Get builder for [panel.settings.Settings]
       Returns: New builder object
   */
-  static SettingsGidBuilder builder()
+  static SettingsGidBuilder builder() nothrow
   {
     return new SettingsGidBuilder;
   }
@@ -60,37 +60,37 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
         
         This might be a unique "project-id" for example, in an IDE.
   */
-  @property string identifier()
+  @property string identifier() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("identifier");
   }
 
   /** */
-  @property string path()
+  @property string path() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("path");
   }
 
   /** */
-  @property string pathPrefix()
+  @property string pathPrefix() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("path-prefix");
   }
 
   /** */
-  @property string pathSuffix()
+  @property string pathSuffix() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("path-suffix");
   }
 
   /** */
-  @property string schemaId()
+  @property string schemaId() nothrow
   {
     return getSchemaId();
   }
 
   /** */
-  @property string schemaIdPrefix()
+  @property string schemaIdPrefix() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("schema-id-prefix");
   }
@@ -98,7 +98,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   mixin ActionGroupT!();
 
   /** */
-  this(string identifier, string schemaId)
+  this(string identifier, string schemaId) nothrow
   {
     PanelSettings* _cretval;
     const(char)* _identifier = identifier.toCString(No.Alloc);
@@ -108,7 +108,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /** */
-  static panel.settings.Settings newRelocatable(string identifier, string schemaId, string schemaIdPrefix, string pathPrefix, string pathSuffix)
+  static panel.settings.Settings newRelocatable(string identifier, string schemaId, string schemaIdPrefix, string pathPrefix, string pathSuffix) nothrow
   {
     PanelSettings* _cretval;
     const(char)* _identifier = identifier.toCString(No.Alloc);
@@ -122,7 +122,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /** */
-  static panel.settings.Settings newWithPath(string identifier, string schemaId, string path)
+  static panel.settings.Settings newWithPath(string identifier, string schemaId, string path) nothrow
   {
     PanelSettings* _cretval;
     const(char)* _identifier = identifier.toCString(No.Alloc);
@@ -134,7 +134,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /** */
-  static string resolveSchemaPath(string schemaIdPrefix, string schemaId, string identifier, string pathPrefix, string pathSuffix)
+  static string resolveSchemaPath(string schemaIdPrefix, string schemaId, string identifier, string pathPrefix, string pathSuffix) nothrow
   {
     char* _cretval;
     const(char)* _schemaIdPrefix = schemaIdPrefix.toCString(No.Alloc);
@@ -148,7 +148,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /** */
-  void bind(string key, void* object, string property, gio.types.SettingsBindFlags flags)
+  void bind(string key, void* object, string property, gio.types.SettingsBindFlags flags) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _property = property.toCString(No.Alloc);
@@ -169,25 +169,39 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
         getMapping = variant to value mapping
         setMapping = value to variant mapping
   */
-  void bindWithMapping(string key, void* object, string property, gio.types.SettingsBindFlags flags, gio.types.SettingsBindGetMapping getMapping = null, gio.types.SettingsBindSetMapping setMapping = null)
+  void bindWithMapping(string key, void* object, string property, gio.types.SettingsBindFlags flags, gio.types.SettingsBindGetMapping getMapping = null, gio.types.SettingsBindSetMapping setMapping = null) nothrow
   {
-    extern(C) gboolean _getMappingCallback(GValue* value, GVariant* variant, void* userData)
+    extern(C) gboolean _getMappingCallback(GValue* value, GVariant* variant, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gio.types.SettingsBindGetMapping*)userData;
 
-      _dretval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, variant ? new glib.variant.Variant(cast(void*)variant, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, variant ? new glib.variant.Variant(cast(void*)variant, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.SettingsBindGetMapping");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
     }
     auto _getMappingCB = getMapping ? &_getMappingCallback : null;
-    extern(C) GVariant* _setMappingCallback(const(GValue)* value, const(GVariantType)* expectedType, void* userData)
+    extern(C) GVariant* _setMappingCallback(const(GValue)* value, const(GVariantType)* expectedType, void* userData) nothrow
     {
       glib.variant.Variant _dretval;
       auto _dlg = cast(gio.types.SettingsBindSetMapping*)userData;
 
-      _dretval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, expectedType ? new glib.variant_type.VariantType(cast(void*)expectedType, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, expectedType ? new glib.variant_type.VariantType(cast(void*)expectedType, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.SettingsBindSetMapping");
+      }
       auto _retval = cast(GVariant*)_dretval._cPtr(Yes.Dup);
 
       return _retval;
@@ -201,7 +215,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /** */
-  bool getBoolean(string key)
+  bool getBoolean(string key) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -210,7 +224,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /** */
-  glib.variant.Variant getDefaultValue(string key)
+  glib.variant.Variant getDefaultValue(string key) nothrow
   {
     GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -220,7 +234,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /** */
-  double getDouble(string key)
+  double getDouble(string key) nothrow
   {
     double _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -229,7 +243,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /** */
-  int getInt(string key)
+  int getInt(string key) nothrow
   {
     int _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -238,7 +252,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /** */
-  string getSchemaId()
+  string getSchemaId() nothrow
   {
     const(char)* _cretval;
     _cretval = panel_settings_get_schema_id(cast(PanelSettings*)this._cPtr);
@@ -247,7 +261,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /** */
-  string getString(string key)
+  string getString(string key) nothrow
   {
     char* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -257,7 +271,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /** */
-  uint getUint(string key)
+  uint getUint(string key) nothrow
   {
     uint _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -266,7 +280,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /** */
-  glib.variant.Variant getUserValue(string key)
+  glib.variant.Variant getUserValue(string key) nothrow
   {
     GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -276,7 +290,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /** */
-  glib.variant.Variant getValue(string key)
+  glib.variant.Variant getValue(string key) nothrow
   {
     GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -286,28 +300,28 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /** */
-  void setBoolean(string key, bool val)
+  void setBoolean(string key, bool val) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     panel_settings_set_boolean(cast(PanelSettings*)this._cPtr, _key, val);
   }
 
   /** */
-  void setDouble(string key, double val)
+  void setDouble(string key, double val) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     panel_settings_set_double(cast(PanelSettings*)this._cPtr, _key, val);
   }
 
   /** */
-  void setInt(string key, int val)
+  void setInt(string key, int val) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     panel_settings_set_int(cast(PanelSettings*)this._cPtr, _key, val);
   }
 
   /** */
-  void setString(string key, string val)
+  void setString(string key, string val) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _val = val.toCString(No.Alloc);
@@ -315,21 +329,21 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /** */
-  void setUint(string key, uint val)
+  void setUint(string key, uint val) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     panel_settings_set_uint(cast(PanelSettings*)this._cPtr, _key, val);
   }
 
   /** */
-  void setValue(string key, glib.variant.Variant value)
+  void setValue(string key, glib.variant.Variant value) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     panel_settings_set_value(cast(PanelSettings*)this._cPtr, _key, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
   }
 
   /** */
-  void unbind(string property)
+  void unbind(string property) nothrow
   {
     const(char)* _property = property.toCString(No.Alloc);
     panel_settings_unbind(cast(PanelSettings*)this._cPtr, _property);
@@ -353,14 +367,14 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : panel.settings.Settings)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -372,7 +386,14 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "panel.settings.Settings.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -394,37 +415,37 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio
           This might be a unique "project-id" for example, in an IDE.
       Returns: Builder instance for fluent chaining
   */
-  T identifier(string propval)
+  T identifier(string propval) nothrow
   {
     return setProperty("identifier", propval);
   }
 
   /** */
-  T path(string propval)
+  T path(string propval) nothrow
   {
     return setProperty("path", propval);
   }
 
   /** */
-  T pathPrefix(string propval)
+  T pathPrefix(string propval) nothrow
   {
     return setProperty("path-prefix", propval);
   }
 
   /** */
-  T pathSuffix(string propval)
+  T pathSuffix(string propval) nothrow
   {
     return setProperty("path-suffix", propval);
   }
 
   /** */
-  T schemaId(string propval)
+  T schemaId(string propval) nothrow
   {
     return setProperty("schema-id", propval);
   }
 
   /** */
-  T schemaIdPrefix(string propval)
+  T schemaIdPrefix(string propval) nothrow
   {
     return setProperty("schema-id-prefix", propval);
   }
@@ -437,7 +458,7 @@ final class SettingsGidBuilder : SettingsGidBuilderImpl!SettingsGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Settings build()
+  Settings build() nothrow
   {
     return new Settings(cast(void*)createGObject(Settings._getGType), Yes.Take);
   }

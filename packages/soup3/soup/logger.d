@@ -76,26 +76,26 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_logger_get_type != &gidSymbolNotFound ? soup_logger_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Logger self()
+  override Logger self() nothrow
   {
     return this;
   }
@@ -104,7 +104,7 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Get builder for [soup.logger.Logger]
       Returns: New builder object
   */
-  static LoggerGidBuilder builder()
+  static LoggerGidBuilder builder() nothrow
   {
     return new LoggerGidBuilder;
   }
@@ -113,7 +113,7 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Get `level` property.
       Returns: The level of logging output.
   */
-  @property soup.types.LoggerLogLevel level()
+  @property soup.types.LoggerLogLevel level() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(soup.types.LoggerLogLevel)("level");
   }
@@ -123,7 +123,7 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Params:
         propval = The level of logging output.
   */
-  @property void level(soup.types.LoggerLogLevel propval)
+  @property void level(soup.types.LoggerLogLevel propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(soup.types.LoggerLogLevel)("level", propval);
   }
@@ -134,7 +134,7 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
         the maximum number of bytes of the body that will be logged.
         (-1 means "no limit".)
   */
-  @property int maxBodySize()
+  @property int maxBodySize() nothrow
   {
     return getMaxBodySize();
   }
@@ -146,7 +146,7 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
           the maximum number of bytes of the body that will be logged.
           (-1 means "no limit".)
   */
-  @property void maxBodySize(int propval)
+  @property void maxBodySize(int propval) nothrow
   {
     setMaxBodySize(propval);
   }
@@ -164,7 +164,7 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
         level = the debug level
       Returns: a new #SoupLogger
   */
-  this(soup.types.LoggerLogLevel level)
+  this(soup.types.LoggerLogLevel level) nothrow
   {
     SoupLogger* _cretval;
     _cretval = soup_logger_new(level);
@@ -175,7 +175,7 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Get the maximum body size for logger.
       Returns: the maximum body size, or -1 if unlimited
   */
-  int getMaxBodySize()
+  int getMaxBodySize() nothrow
   {
     int _retval;
     _retval = soup_logger_get_max_body_size(cast(SoupLogger*)this._cPtr);
@@ -188,7 +188,7 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Params:
         maxBodySize = the maximum body size to log
   */
-  void setMaxBodySize(int maxBodySize)
+  void setMaxBodySize(int maxBodySize) nothrow
   {
     soup_logger_set_max_body_size(cast(SoupLogger*)this._cPtr, maxBodySize);
   }
@@ -200,14 +200,21 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Params:
         printer = the callback for printing logging output
   */
-  void setPrinter(soup.types.LoggerPrinter printer)
+  void setPrinter(soup.types.LoggerPrinter printer) nothrow
   {
-    extern(C) void _printerCallback(SoupLogger* logger, SoupLoggerLogLevel level, char direction, const(char)* data, void* userData)
+    extern(C) void _printerCallback(SoupLogger* logger, SoupLoggerLogLevel level, char direction, const(char)* data, void* userData) nothrow
     {
       auto _dlg = cast(soup.types.LoggerPrinter*)userData;
       string _data = data.fromCString(No.Free);
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), level, direction, _data);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), level, direction, _data);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.types.LoggerPrinter");
+      }
     }
     auto _printerCB = printer ? &_printerCallback : null;
     auto _printer = printer ? freezeDelegate(cast(void*)&printer) : null;
@@ -226,14 +233,21 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Params:
         requestFilter = the callback for request debugging
   */
-  void setRequestFilter(soup.types.LoggerFilter requestFilter)
+  void setRequestFilter(soup.types.LoggerFilter requestFilter) nothrow
   {
-    extern(C) SoupLoggerLogLevel _requestFilterCallback(SoupLogger* logger, SoupMessage* msg, void* userData)
+    extern(C) SoupLoggerLogLevel _requestFilterCallback(SoupLogger* logger, SoupMessage* msg, void* userData) nothrow
     {
       soup.types.LoggerLogLevel _dretval;
       auto _dlg = cast(soup.types.LoggerFilter*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), gobject.object.ObjectWrap._getDObject!(soup.message.Message)(cast(void*)msg, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), gobject.object.ObjectWrap._getDObject!(soup.message.Message)(cast(void*)msg, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.types.LoggerFilter");
+      }
       auto _retval = cast(SoupLoggerLogLevel)_dretval;
 
       return _retval;
@@ -255,14 +269,21 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Params:
         responseFilter = the callback for response debugging
   */
-  void setResponseFilter(soup.types.LoggerFilter responseFilter)
+  void setResponseFilter(soup.types.LoggerFilter responseFilter) nothrow
   {
-    extern(C) SoupLoggerLogLevel _responseFilterCallback(SoupLogger* logger, SoupMessage* msg, void* userData)
+    extern(C) SoupLoggerLogLevel _responseFilterCallback(SoupLogger* logger, SoupMessage* msg, void* userData) nothrow
     {
       soup.types.LoggerLogLevel _dretval;
       auto _dlg = cast(soup.types.LoggerFilter*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), gobject.object.ObjectWrap._getDObject!(soup.message.Message)(cast(void*)msg, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), gobject.object.ObjectWrap._getDObject!(soup.message.Message)(cast(void*)msg, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.types.LoggerFilter");
+      }
       auto _retval = cast(SoupLoggerLogLevel)_dretval;
 
       return _retval;
@@ -286,7 +307,7 @@ class LoggerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.
         propval = The level of logging output.
       Returns: Builder instance for fluent chaining
   */
-  T level(soup.types.LoggerLogLevel propval)
+  T level(soup.types.LoggerLogLevel propval) nothrow
   {
     return setProperty("level", propval);
   }
@@ -299,7 +320,7 @@ class LoggerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.
           (-1 means "no limit".)
       Returns: Builder instance for fluent chaining
   */
-  T maxBodySize(int propval)
+  T maxBodySize(int propval) nothrow
   {
     return setProperty("max-body-size", propval);
   }
@@ -312,7 +333,7 @@ final class LoggerGidBuilder : LoggerGidBuilderImpl!LoggerGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Logger build()
+  Logger build() nothrow
   {
     return new Logger(cast(void*)createGObject(Logger._getGType), Yes.Take);
   }

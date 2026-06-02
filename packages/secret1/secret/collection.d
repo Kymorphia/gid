@@ -41,26 +41,26 @@ class Collection : gio.dbus_proxy.DBusProxy
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())secret_collection_get_type != &gidSymbolNotFound ? secret_collection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Collection self()
+  override Collection self() nothrow
   {
     return this;
   }
@@ -69,7 +69,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       Get builder for [secret.collection.Collection]
       Returns: New builder object
   */
-  static CollectionGidBuilder builder()
+  static CollectionGidBuilder builder() nothrow
   {
     return new CollectionGidBuilder;
   }
@@ -79,7 +79,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       Returns: The date and time (in seconds since the UNIX epoch) that this
         collection was created.
   */
-  @property ulong created()
+  @property ulong created() nothrow
   {
     return getCreated();
   }
@@ -90,7 +90,7 @@ class Collection : gio.dbus_proxy.DBusProxy
         propval = The date and time (in seconds since the UNIX epoch) that this
           collection was created.
   */
-  @property void created(ulong propval)
+  @property void created(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("created", propval);
   }
@@ -100,7 +100,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       Returns: A set of flags describing which parts of the secret collection have
         been initialized.
   */
-  @property secret.types.CollectionFlags flags()
+  @property secret.types.CollectionFlags flags() nothrow
   {
     return getFlags();
   }
@@ -113,7 +113,7 @@ class Collection : gio.dbus_proxy.DBusProxy
         set asynchronously. To properly track the changing of the label use the
         [secret.collection.Collection.setLabel] function.
   */
-  @property string label()
+  @property string label() nothrow
   {
     return getLabel();
   }
@@ -127,7 +127,7 @@ class Collection : gio.dbus_proxy.DBusProxy
           set asynchronously. To properly track the changing of the label use the
           [secret.collection.Collection.setLabel] function.
   */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("label", propval);
   }
@@ -139,7 +139,7 @@ class Collection : gio.dbus_proxy.DBusProxy
         To lock or unlock a collection use the [secret.service.Service.lock] or
         [secret.service.Service.unlock] functions.
   */
-  @property bool locked()
+  @property bool locked() nothrow
   {
     return getLocked();
   }
@@ -149,7 +149,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       Returns: The date and time (in seconds since the UNIX epoch) that this
         collection was last modified.
   */
-  @property ulong modified()
+  @property ulong modified() nothrow
   {
     return getModified();
   }
@@ -160,7 +160,7 @@ class Collection : gio.dbus_proxy.DBusProxy
         propval = The date and time (in seconds since the UNIX epoch) that this
           collection was last modified.
   */
-  @property void modified(ulong propval)
+  @property void modified(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("modified", propval);
   }
@@ -170,7 +170,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       Returns: The [secret.service.Service] object that this collection is associated with and
         uses to interact with the actual D-Bus Secret Service.
   */
-  @property secret.service.Service service()
+  @property secret.service.Service service() nothrow
   {
     return getService();
   }
@@ -199,14 +199,21 @@ class Collection : gio.dbus_proxy.DBusProxy
         cancellable = optional cancellation object
         callback = called when the operation completes
   */
-  static void create(secret.service.Service service, string label, string alias_, secret.types.CollectionCreateFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  static void create(secret.service.Service service, string label, string alias_, secret.types.CollectionCreateFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _label = label.toCString(No.Alloc);
@@ -290,14 +297,21 @@ class Collection : gio.dbus_proxy.DBusProxy
         cancellable = optional cancellation object
         callback = called when the operation completes
   */
-  static void forAlias(secret.service.Service service, string alias_, secret.types.CollectionFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  static void forAlias(secret.service.Service service, string alias_, secret.types.CollectionFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _alias_ = alias_.toCString(No.Alloc);
@@ -365,14 +379,21 @@ class Collection : gio.dbus_proxy.DBusProxy
         cancellable = optional cancellation object
         callback = called when the operation completes
   */
-  void delete_(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void delete_(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -426,7 +447,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       1970.
       Returns: the created date and time
   */
-  ulong getCreated()
+  ulong getCreated() nothrow
   {
     ulong _retval;
     _retval = secret_collection_get_created(cast(SecretCollection*)this._cPtr);
@@ -443,7 +464,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       the flags.
       Returns: the flags for features initialized
   */
-  secret.types.CollectionFlags getFlags()
+  secret.types.CollectionFlags getFlags() nothrow
   {
     SecretCollectionFlags _cretval;
     _cretval = secret_collection_get_flags(cast(SecretCollection*)this._cPtr);
@@ -457,7 +478,7 @@ class Collection : gio.dbus_proxy.DBusProxy
           done, the list should be freed with [glib.list.List.free], and each item
           should be released with [gobject.object.ObjectWrap.unref]
   */
-  secret.item.Item[] getItems()
+  secret.item.Item[] getItems() nothrow
   {
     GList* _cretval;
     _cretval = secret_collection_get_items(cast(SecretCollection*)this._cPtr);
@@ -470,7 +491,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       Returns: the label, which should be freed with
           `funcGLib.free`
   */
-  string getLabel()
+  string getLabel() nothrow
   {
     char* _cretval;
     _cretval = secret_collection_get_label(cast(SecretCollection*)this._cPtr);
@@ -485,7 +506,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       collection.
       Returns: whether the collection is locked or not
   */
-  bool getLocked()
+  bool getLocked() nothrow
   {
     bool _retval;
     _retval = cast(bool)secret_collection_get_locked(cast(SecretCollection*)this._cPtr);
@@ -499,7 +520,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       1970.
       Returns: the modified date and time
   */
-  ulong getModified()
+  ulong getModified() nothrow
   {
     ulong _retval;
     _retval = secret_collection_get_modified(cast(SecretCollection*)this._cPtr);
@@ -510,7 +531,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       Get the Secret Service object that this collection was created with.
       Returns: the Secret Service object
   */
-  secret.service.Service getService()
+  secret.service.Service getService() nothrow
   {
     SecretService* _cretval;
     _cretval = secret_collection_get_service(cast(SecretCollection*)this._cPtr);
@@ -533,14 +554,21 @@ class Collection : gio.dbus_proxy.DBusProxy
         cancellable = optional cancellation object
         callback = called when the operation completes
   */
-  void loadItems(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void loadItems(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -599,7 +627,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       Calling this method is not normally necessary, as the secret service
       will notify the client when properties change.
   */
-  void refresh()
+  void refresh() nothrow
   {
     secret_collection_refresh(cast(SecretCollection*)this._cPtr);
   }
@@ -628,14 +656,21 @@ class Collection : gio.dbus_proxy.DBusProxy
         cancellable = optional cancellation object
         callback = called when the operation completes
   */
-  void search(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void search(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _attributes = gHashTableFromD!(string, string)(attributes);
@@ -712,14 +747,21 @@ class Collection : gio.dbus_proxy.DBusProxy
         cancellable = optional cancellation object
         callback = called when the operation completes
   */
-  void setLabel(string label, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void setLabel(string label, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _label = label.toCString(No.Alloc);
@@ -781,7 +823,7 @@ class CollectionGidBuilderImpl(T) : gio.dbus_proxy.DBusProxyGidBuilderImpl!T
           collection was created.
       Returns: Builder instance for fluent chaining
   */
-  T created(ulong propval)
+  T created(ulong propval) nothrow
   {
     return setProperty("created", propval);
   }
@@ -793,7 +835,7 @@ class CollectionGidBuilderImpl(T) : gio.dbus_proxy.DBusProxyGidBuilderImpl!T
           been initialized.
       Returns: Builder instance for fluent chaining
   */
-  T flags(secret.types.CollectionFlags propval)
+  T flags(secret.types.CollectionFlags propval) nothrow
   {
     return setProperty("flags", propval);
   }
@@ -808,7 +850,7 @@ class CollectionGidBuilderImpl(T) : gio.dbus_proxy.DBusProxyGidBuilderImpl!T
           [secret.collection.Collection.setLabel] function.
       Returns: Builder instance for fluent chaining
   */
-  T label(string propval)
+  T label(string propval) nothrow
   {
     return setProperty("label", propval);
   }
@@ -820,7 +862,7 @@ class CollectionGidBuilderImpl(T) : gio.dbus_proxy.DBusProxyGidBuilderImpl!T
           collection was last modified.
       Returns: Builder instance for fluent chaining
   */
-  T modified(ulong propval)
+  T modified(ulong propval) nothrow
   {
     return setProperty("modified", propval);
   }
@@ -832,7 +874,7 @@ class CollectionGidBuilderImpl(T) : gio.dbus_proxy.DBusProxyGidBuilderImpl!T
           uses to interact with the actual D-Bus Secret Service.
       Returns: Builder instance for fluent chaining
   */
-  T service(secret.service.Service propval)
+  T service(secret.service.Service propval) nothrow
   {
     return setProperty("service", propval);
   }
@@ -845,7 +887,7 @@ final class CollectionGidBuilder : CollectionGidBuilderImpl!CollectionGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Collection build()
+  Collection build() nothrow
   {
     return new Collection(cast(void*)createGObject(Collection._getGType), No.Take);
   }

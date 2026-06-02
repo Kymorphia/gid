@@ -20,26 +20,26 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_tab_page_get_type != &gidSymbolNotFound ? adw_tab_page_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TabPage self()
+  override TabPage self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Get builder for [adw.tab_page.TabPage]
       Returns: New builder object
   */
-  static TabPageGidBuilder builder()
+  static TabPageGidBuilder builder() nothrow
   {
     return new TabPageGidBuilder;
   }
@@ -57,7 +57,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Get `child` property.
       Returns: The child of the page.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -72,7 +72,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
         [adw.tab_bar.TabBar] also won't show the icon if the page is pinned and
         [propertyTabPage:indicator-icon] is set.
   */
-  @property gio.icon.Icon icon()
+  @property gio.icon.Icon icon() nothrow
   {
     return getIcon();
   }
@@ -88,7 +88,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
           [adw.tab_bar.TabBar] also won't show the icon if the page is pinned and
           [propertyTabPage:indicator-icon] is set.
   */
-  @property void icon(gio.icon.Icon propval)
+  @property void icon(gio.icon.Icon propval) nothrow
   {
     setIcon(propval);
   }
@@ -102,7 +102,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
         
         If [adw.tab_page.TabPage.indicatorIcon] is not set, does nothing.
   */
-  @property bool indicatorActivatable()
+  @property bool indicatorActivatable() nothrow
   {
     return getIndicatorActivatable();
   }
@@ -117,7 +117,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
           
           If [adw.tab_page.TabPage.indicatorIcon] is not set, does nothing.
   */
-  @property void indicatorActivatable(bool propval)
+  @property void indicatorActivatable(bool propval) nothrow
   {
     setIndicatorActivatable(propval);
   }
@@ -142,7 +142,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
         If [adw.tab_page.TabPage.indicatorActivatable] is set to `TRUE`, the
         indicator icon can act as a button.
   */
-  @property gio.icon.Icon indicatorIcon()
+  @property gio.icon.Icon indicatorIcon() nothrow
   {
     return getIndicatorIcon();
   }
@@ -168,7 +168,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
           If [adw.tab_page.TabPage.indicatorActivatable] is set to `TRUE`, the
           indicator icon can act as a button.
   */
-  @property void indicatorIcon(gio.icon.Icon propval)
+  @property void indicatorIcon(gio.icon.Icon propval) nothrow
   {
     setIndicatorIcon(propval);
   }
@@ -181,7 +181,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
         
         See [adw.tab_page.TabPage.indicatorIcon].
   */
-  @property string indicatorTooltip()
+  @property string indicatorTooltip() nothrow
   {
     return getIndicatorTooltip();
   }
@@ -195,7 +195,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
           
           See [adw.tab_page.TabPage.indicatorIcon].
   */
-  @property void indicatorTooltip(string propval)
+  @property void indicatorTooltip(string propval) nothrow
   {
     setIndicatorTooltip(propval);
   }
@@ -209,7 +209,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
         
         Keywords allow to include e.g. page URLs into tab search in a web browser.
   */
-  @property string keyword()
+  @property string keyword() nothrow
   {
     return getKeyword();
   }
@@ -224,7 +224,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
           
           Keywords allow to include e.g. page URLs into tab search in a web browser.
   */
-  @property void keyword(string propval)
+  @property void keyword(string propval) nothrow
   {
     setKeyword(propval);
   }
@@ -241,7 +241,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
         [adw.tab_page.TabPage.invalidateThumbnail] or
         [adw.tab_view.TabView.invalidateThumbnails] is called.
   */
-  @property bool liveThumbnail()
+  @property bool liveThumbnail() nothrow
   {
     return getLiveThumbnail();
   }
@@ -259,7 +259,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
           [adw.tab_page.TabPage.invalidateThumbnail] or
           [adw.tab_view.TabView.invalidateThumbnails] is called.
   */
-  @property void liveThumbnail(bool propval)
+  @property void liveThumbnail(bool propval) nothrow
   {
     setLiveThumbnail(propval);
   }
@@ -274,7 +274,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
         If the page is pinned and [adw.tab_page.TabPage.indicatorIcon] is set,
         loading status will not be visible with [adw.tab_bar.TabBar].
   */
-  @property bool loading()
+  @property bool loading() nothrow
   {
     return getLoading();
   }
@@ -290,7 +290,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
           If the page is pinned and [adw.tab_page.TabPage.indicatorIcon] is set,
           loading status will not be visible with [adw.tab_bar.TabBar].
   */
-  @property void loading(bool propval)
+  @property void loading(bool propval) nothrow
   {
     setLoading(propval);
   }
@@ -309,7 +309,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
         [adw.tab_button.TabButton] will display a dot if any of the pages that aren't
         selected have this property set to `TRUE`.
   */
-  @property bool needsAttention()
+  @property bool needsAttention() nothrow
   {
     return getNeedsAttention();
   }
@@ -329,7 +329,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
           [adw.tab_button.TabButton] will display a dot if any of the pages that aren't
           selected have this property set to `TRUE`.
   */
-  @property void needsAttention(bool propval)
+  @property void needsAttention(bool propval) nothrow
   {
     setNeedsAttention(propval);
   }
@@ -340,7 +340,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
         
         See [adw.tab_view.TabView.addPage] and [adw.tab_view.TabView.closePage].
   */
-  @property adw.tab_page.TabPage parent()
+  @property adw.tab_page.TabPage parent() nothrow
   {
     return getParent();
   }
@@ -351,7 +351,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
         
         See [adw.tab_view.TabView.setPagePinned].
   */
-  @property bool pinned()
+  @property bool pinned() nothrow
   {
     return getPinned();
   }
@@ -360,7 +360,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Get `selected` property.
       Returns: Whether the page is selected.
   */
-  @property bool selected()
+  @property bool selected() nothrow
   {
     return getSelected();
   }
@@ -378,7 +378,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
         
         The default horizontal alignment is 0.
   */
-  @property float thumbnailXalign()
+  @property float thumbnailXalign() nothrow
   {
     return getThumbnailXalign();
   }
@@ -397,7 +397,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
           
           The default horizontal alignment is 0.
   */
-  @property void thumbnailXalign(float propval)
+  @property void thumbnailXalign(float propval) nothrow
   {
     setThumbnailXalign(propval);
   }
@@ -415,7 +415,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
         
         The default vertical alignment is 0.
   */
-  @property float thumbnailYalign()
+  @property float thumbnailYalign() nothrow
   {
     return getThumbnailYalign();
   }
@@ -434,7 +434,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
           
           The default vertical alignment is 0.
   */
-  @property void thumbnailYalign(float propval)
+  @property void thumbnailYalign(float propval) nothrow
   {
     setThumbnailYalign(propval);
   }
@@ -450,7 +450,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
         or inside the card otherwise, and will use it as a tooltip unless
         [adw.tab_page.TabPage.tooltip] is set.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -467,7 +467,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
           or inside the card otherwise, and will use it as a tooltip unless
           [adw.tab_page.TabPage.tooltip] is set.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -481,7 +481,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
         If not set, [adw.tab_bar.TabBar] and [adw.tab_overview.TabOverview] will use
         [adw.tab_page.TabPage.title] as a tooltip instead.
   */
-  @property string tooltip()
+  @property string tooltip() nothrow
   {
     return getTooltip();
   }
@@ -496,7 +496,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
           If not set, [adw.tab_bar.TabBar] and [adw.tab_overview.TabOverview] will use
           [adw.tab_page.TabPage.title] as a tooltip instead.
   */
-  @property void tooltip(string propval)
+  @property void tooltip(string propval) nothrow
   {
     setTooltip(propval);
   }
@@ -507,7 +507,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Gets the child of self.
       Returns: the child of self
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_tab_page_get_child(cast(AdwTabPage*)this._cPtr);
@@ -519,7 +519,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Gets the icon of self.
       Returns: the icon of self
   */
-  gio.icon.Icon getIcon()
+  gio.icon.Icon getIcon() nothrow
   {
     GIcon* _cretval;
     _cretval = adw_tab_page_get_icon(cast(AdwTabPage*)this._cPtr);
@@ -531,7 +531,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Gets whether the indicator of self is activatable.
       Returns: whether the indicator is activatable
   */
-  bool getIndicatorActivatable()
+  bool getIndicatorActivatable() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_page_get_indicator_activatable(cast(AdwTabPage*)this._cPtr);
@@ -542,7 +542,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Gets the indicator icon of self.
       Returns: the indicator icon of self
   */
-  gio.icon.Icon getIndicatorIcon()
+  gio.icon.Icon getIndicatorIcon() nothrow
   {
     GIcon* _cretval;
     _cretval = adw_tab_page_get_indicator_icon(cast(AdwTabPage*)this._cPtr);
@@ -554,7 +554,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Gets the tooltip of the indicator icon of self.
       Returns: the indicator tooltip of self
   */
-  string getIndicatorTooltip()
+  string getIndicatorTooltip() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_tab_page_get_indicator_tooltip(cast(AdwTabPage*)this._cPtr);
@@ -566,7 +566,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Gets the search keyword of self.
       Returns: the search keyword of self
   */
-  string getKeyword()
+  string getKeyword() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_tab_page_get_keyword(cast(AdwTabPage*)this._cPtr);
@@ -578,7 +578,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Gets whether to live thumbnail is enabled self.
       Returns: whether live thumbnail is enabled
   */
-  bool getLiveThumbnail()
+  bool getLiveThumbnail() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_page_get_live_thumbnail(cast(AdwTabPage*)this._cPtr);
@@ -589,7 +589,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Gets whether self is loading.
       Returns: whether self is loading
   */
-  bool getLoading()
+  bool getLoading() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_page_get_loading(cast(AdwTabPage*)this._cPtr);
@@ -600,7 +600,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Gets whether self needs attention.
       Returns: whether self needs attention
   */
-  bool getNeedsAttention()
+  bool getNeedsAttention() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_page_get_needs_attention(cast(AdwTabPage*)this._cPtr);
@@ -613,7 +613,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       See [adw.tab_view.TabView.addPage] and [adw.tab_view.TabView.closePage].
       Returns: the parent page
   */
-  adw.tab_page.TabPage getParent()
+  adw.tab_page.TabPage getParent() nothrow
   {
     AdwTabPage* _cretval;
     _cretval = adw_tab_page_get_parent(cast(AdwTabPage*)this._cPtr);
@@ -627,7 +627,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       See [adw.tab_view.TabView.setPagePinned].
       Returns: whether self is pinned
   */
-  bool getPinned()
+  bool getPinned() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_page_get_pinned(cast(AdwTabPage*)this._cPtr);
@@ -638,7 +638,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Gets whether self is selected.
       Returns: whether self is selected
   */
-  bool getSelected()
+  bool getSelected() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_page_get_selected(cast(AdwTabPage*)this._cPtr);
@@ -649,7 +649,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Gets the horizontal alignment of the thumbnail for self.
       Returns: the horizontal alignment
   */
-  float getThumbnailXalign()
+  float getThumbnailXalign() nothrow
   {
     float _retval;
     _retval = adw_tab_page_get_thumbnail_xalign(cast(AdwTabPage*)this._cPtr);
@@ -660,7 +660,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Gets the vertical alignment of the thumbnail for self.
       Returns: the vertical alignment
   */
-  float getThumbnailYalign()
+  float getThumbnailYalign() nothrow
   {
     float _retval;
     _retval = adw_tab_page_get_thumbnail_yalign(cast(AdwTabPage*)this._cPtr);
@@ -671,7 +671,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Gets the title of self.
       Returns: the title of self
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_tab_page_get_title(cast(AdwTabPage*)this._cPtr);
@@ -683,7 +683,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Gets the tooltip of self.
       Returns: the tooltip of self
   */
-  string getTooltip()
+  string getTooltip() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_tab_page_get_tooltip(cast(AdwTabPage*)this._cPtr);
@@ -701,7 +701,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       
       See also [adw.tab_view.TabView.invalidateThumbnails].
   */
-  void invalidateThumbnail()
+  void invalidateThumbnail() nothrow
   {
     adw_tab_page_invalidate_thumbnail(cast(AdwTabPage*)this._cPtr);
   }
@@ -718,7 +718,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         icon = the icon of self
   */
-  void setIcon(gio.icon.Icon icon = null)
+  void setIcon(gio.icon.Icon icon = null) nothrow
   {
     adw_tab_page_set_icon(cast(AdwTabPage*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
@@ -734,7 +734,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         activatable = whether the indicator is activatable
   */
-  void setIndicatorActivatable(bool activatable)
+  void setIndicatorActivatable(bool activatable) nothrow
   {
     adw_tab_page_set_indicator_activatable(cast(AdwTabPage*)this._cPtr, activatable);
   }
@@ -761,7 +761,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         indicatorIcon = the indicator icon of self
   */
-  void setIndicatorIcon(gio.icon.Icon indicatorIcon = null)
+  void setIndicatorIcon(gio.icon.Icon indicatorIcon = null) nothrow
   {
     adw_tab_page_set_indicator_icon(cast(AdwTabPage*)this._cPtr, indicatorIcon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)indicatorIcon)._cPtr(No.Dup) : null);
   }
@@ -776,7 +776,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         tooltip = the indicator tooltip of self
   */
-  void setIndicatorTooltip(string tooltip)
+  void setIndicatorTooltip(string tooltip) nothrow
   {
     const(char)* _tooltip = tooltip.toCString(No.Alloc);
     adw_tab_page_set_indicator_tooltip(cast(AdwTabPage*)this._cPtr, _tooltip);
@@ -793,7 +793,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         keyword = the search keyword
   */
-  void setKeyword(string keyword)
+  void setKeyword(string keyword) nothrow
   {
     const(char)* _keyword = keyword.toCString(No.Alloc);
     adw_tab_page_set_keyword(cast(AdwTabPage*)this._cPtr, _keyword);
@@ -813,7 +813,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         liveThumbnail = whether to enable live thumbnail
   */
-  void setLiveThumbnail(bool liveThumbnail)
+  void setLiveThumbnail(bool liveThumbnail) nothrow
   {
     adw_tab_page_set_live_thumbnail(cast(AdwTabPage*)this._cPtr, liveThumbnail);
   }
@@ -830,7 +830,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         loading = whether self is loading
   */
-  void setLoading(bool loading)
+  void setLoading(bool loading) nothrow
   {
     adw_tab_page_set_loading(cast(AdwTabPage*)this._cPtr, loading);
   }
@@ -851,7 +851,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         needsAttention = whether self needs attention
   */
-  void setNeedsAttention(bool needsAttention)
+  void setNeedsAttention(bool needsAttention) nothrow
   {
     adw_tab_page_set_needs_attention(cast(AdwTabPage*)this._cPtr, needsAttention);
   }
@@ -871,7 +871,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         xalign = the new value
   */
-  void setThumbnailXalign(float xalign)
+  void setThumbnailXalign(float xalign) nothrow
   {
     adw_tab_page_set_thumbnail_xalign(cast(AdwTabPage*)this._cPtr, xalign);
   }
@@ -891,7 +891,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         yalign = the new value
   */
-  void setThumbnailYalign(float yalign)
+  void setThumbnailYalign(float yalign) nothrow
   {
     adw_tab_page_set_thumbnail_yalign(cast(AdwTabPage*)this._cPtr, yalign);
   }
@@ -909,7 +909,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         title = the title of self
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     adw_tab_page_set_title(cast(AdwTabPage*)this._cPtr, _title);
@@ -926,7 +926,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         tooltip = the tooltip of self
   */
-  void setTooltip(string tooltip)
+  void setTooltip(string tooltip) nothrow
   {
     const(char)* _tooltip = tooltip.toCString(No.Alloc);
     adw_tab_page_set_tooltip(cast(AdwTabPage*)this._cPtr, _tooltip);
@@ -945,7 +945,7 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
         propval = The child of the page.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -962,7 +962,7 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
           [propertyTabPage:indicator-icon] is set.
       Returns: Builder instance for fluent chaining
   */
-  T icon(gio.icon.Icon propval)
+  T icon(gio.icon.Icon propval) nothrow
   {
     return setProperty("icon", propval);
   }
@@ -978,7 +978,7 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
           If [adw.tab_page.TabPage.indicatorIcon] is not set, does nothing.
       Returns: Builder instance for fluent chaining
   */
-  T indicatorActivatable(bool propval)
+  T indicatorActivatable(bool propval) nothrow
   {
     return setProperty("indicator-activatable", propval);
   }
@@ -1005,7 +1005,7 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
           indicator icon can act as a button.
       Returns: Builder instance for fluent chaining
   */
-  T indicatorIcon(gio.icon.Icon propval)
+  T indicatorIcon(gio.icon.Icon propval) nothrow
   {
     return setProperty("indicator-icon", propval);
   }
@@ -1020,7 +1020,7 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
           See [adw.tab_page.TabPage.indicatorIcon].
       Returns: Builder instance for fluent chaining
   */
-  T indicatorTooltip(string propval)
+  T indicatorTooltip(string propval) nothrow
   {
     return setProperty("indicator-tooltip", propval);
   }
@@ -1036,7 +1036,7 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
           Keywords allow to include e.g. page URLs into tab search in a web browser.
       Returns: Builder instance for fluent chaining
   */
-  T keyword(string propval)
+  T keyword(string propval) nothrow
   {
     return setProperty("keyword", propval);
   }
@@ -1055,7 +1055,7 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
           [adw.tab_view.TabView.invalidateThumbnails] is called.
       Returns: Builder instance for fluent chaining
   */
-  T liveThumbnail(bool propval)
+  T liveThumbnail(bool propval) nothrow
   {
     return setProperty("live-thumbnail", propval);
   }
@@ -1072,7 +1072,7 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
           loading status will not be visible with [adw.tab_bar.TabBar].
       Returns: Builder instance for fluent chaining
   */
-  T loading(bool propval)
+  T loading(bool propval) nothrow
   {
     return setProperty("loading", propval);
   }
@@ -1093,7 +1093,7 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
           selected have this property set to `TRUE`.
       Returns: Builder instance for fluent chaining
   */
-  T needsAttention(bool propval)
+  T needsAttention(bool propval) nothrow
   {
     return setProperty("needs-attention", propval);
   }
@@ -1106,7 +1106,7 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
           See [adw.tab_view.TabView.addPage] and [adw.tab_view.TabView.closePage].
       Returns: Builder instance for fluent chaining
   */
-  T parent(adw.tab_page.TabPage propval)
+  T parent(adw.tab_page.TabPage propval) nothrow
   {
     return setProperty("parent", propval);
   }
@@ -1126,7 +1126,7 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
           The default horizontal alignment is 0.
       Returns: Builder instance for fluent chaining
   */
-  T thumbnailXalign(float propval)
+  T thumbnailXalign(float propval) nothrow
   {
     return setProperty("thumbnail-xalign", propval);
   }
@@ -1146,7 +1146,7 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
           The default vertical alignment is 0.
       Returns: Builder instance for fluent chaining
   */
-  T thumbnailYalign(float propval)
+  T thumbnailYalign(float propval) nothrow
   {
     return setProperty("thumbnail-yalign", propval);
   }
@@ -1164,7 +1164,7 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
           [adw.tab_page.TabPage.tooltip] is set.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -1180,7 +1180,7 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
           [adw.tab_page.TabPage.title] as a tooltip instead.
       Returns: Builder instance for fluent chaining
   */
-  T tooltip(string propval)
+  T tooltip(string propval) nothrow
   {
     return setProperty("tooltip", propval);
   }
@@ -1193,7 +1193,7 @@ final class TabPageGidBuilder : TabPageGidBuilderImpl!TabPageGidBuilder
       Create object from builder.
       Returns: New object
   */
-  TabPage build()
+  TabPage build() nothrow
   {
     return new TabPage(cast(void*)createGObject(TabPage._getGType), No.Take);
   }

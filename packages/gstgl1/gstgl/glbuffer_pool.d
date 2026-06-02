@@ -25,26 +25,26 @@ class GLBufferPool : gst.buffer_pool.BufferPool
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_buffer_pool_get_type != &gidSymbolNotFound ? gst_gl_buffer_pool_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLBufferPool self()
+  override GLBufferPool self() nothrow
   {
     return this;
   }
@@ -53,13 +53,13 @@ class GLBufferPool : gst.buffer_pool.BufferPool
       Get builder for [gstgl.glbuffer_pool.GLBufferPool]
       Returns: New builder object
   */
-  static GLBufferPoolGidBuilder builder()
+  static GLBufferPoolGidBuilder builder() nothrow
   {
     return new GLBufferPoolGidBuilder;
   }
 
   /** */
-  this(gstgl.glcontext.GLContext context)
+  this(gstgl.glcontext.GLContext context) nothrow
   {
     GstBufferPool* _cretval;
     _cretval = gst_gl_buffer_pool_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
@@ -73,7 +73,7 @@ class GLBufferPool : gst.buffer_pool.BufferPool
       #GstGLAllocationParams which may or may not contain the same information.
       Returns: a copy of the #GstGLAllocationParams being used by the pool
   */
-  gstgl.glallocation_params.GLAllocationParams getGlAllocationParams()
+  gstgl.glallocation_params.GLAllocationParams getGlAllocationParams() nothrow
   {
     GstGLAllocationParams* _cretval;
     _cretval = gst_gl_buffer_pool_get_gl_allocation_params(cast(GstGLBufferPool*)this._cPtr);
@@ -94,7 +94,7 @@ final class GLBufferPoolGidBuilder : GLBufferPoolGidBuilderImpl!GLBufferPoolGidB
       Create object from builder.
       Returns: New object
   */
-  GLBufferPool build()
+  GLBufferPool build() nothrow
   {
     return new GLBufferPool(cast(void*)createGObject(GLBufferPool._getGType), No.Take);
   }

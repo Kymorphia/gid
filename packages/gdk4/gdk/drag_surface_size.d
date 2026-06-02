@@ -17,18 +17,15 @@ class DragSurfaceSize
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.drag_surface_size.DragSurfaceSize");
-
     _cInstancePtr = cast(GdkDragSurfaceSize*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -40,7 +37,7 @@ class DragSurfaceSize
         width = the width
         height = the height
   */
-  void setSize(int width, int height)
+  void setSize(int width, int height) nothrow
   {
     gdk_drag_surface_size_set_size(cast(GdkDragSurfaceSize*)this._cPtr, width, height);
   }

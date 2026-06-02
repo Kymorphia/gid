@@ -117,26 +117,26 @@ class Notebook : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_notebook_get_type != &gidSymbolNotFound ? gtk_notebook_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Notebook self()
+  override Notebook self() nothrow
   {
     return this;
   }
@@ -145,7 +145,7 @@ class Notebook : gtk.widget.Widget
       Get builder for [gtk.notebook.Notebook]
       Returns: New builder object
   */
-  static NotebookGidBuilder builder()
+  static NotebookGidBuilder builder() nothrow
   {
     return new NotebookGidBuilder;
   }
@@ -154,7 +154,7 @@ class Notebook : gtk.widget.Widget
       Get `enablePopup` property.
       Returns: If true, pressing the right mouse button on the notebook shows a page switching menu.
   */
-  @property bool enablePopup()
+  @property bool enablePopup() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("enable-popup");
   }
@@ -164,7 +164,7 @@ class Notebook : gtk.widget.Widget
       Params:
         propval = If true, pressing the right mouse button on the notebook shows a page switching menu.
   */
-  @property void enablePopup(bool propval)
+  @property void enablePopup(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("enable-popup", propval);
   }
@@ -173,7 +173,7 @@ class Notebook : gtk.widget.Widget
       Get `groupName` property.
       Returns: Group name for tab drag and drop.
   */
-  @property string groupName()
+  @property string groupName() nothrow
   {
     return getGroupName();
   }
@@ -183,7 +183,7 @@ class Notebook : gtk.widget.Widget
       Params:
         propval = Group name for tab drag and drop.
   */
-  @property void groupName(string propval)
+  @property void groupName(string propval) nothrow
   {
     setGroupName(propval);
   }
@@ -192,7 +192,7 @@ class Notebook : gtk.widget.Widget
       Get `page` property.
       Returns: The index of the current page.
   */
-  @property int page()
+  @property int page() nothrow
   {
     return getCurrentPage();
   }
@@ -202,7 +202,7 @@ class Notebook : gtk.widget.Widget
       Params:
         propval = The index of the current page.
   */
-  @property void page(int propval)
+  @property void page(int propval) nothrow
   {
     setCurrentPage(propval);
   }
@@ -211,7 +211,7 @@ class Notebook : gtk.widget.Widget
       Get `pages` property.
       Returns: A selection model with the pages.
   */
-  @property gio.list_model.ListModel pages()
+  @property gio.list_model.ListModel pages() nothrow
   {
     return getPages();
   }
@@ -220,7 +220,7 @@ class Notebook : gtk.widget.Widget
       Get `scrollable` property.
       Returns: If true, scroll arrows are added if there are too many pages to fit.
   */
-  @property bool scrollable()
+  @property bool scrollable() nothrow
   {
     return getScrollable();
   }
@@ -230,7 +230,7 @@ class Notebook : gtk.widget.Widget
       Params:
         propval = If true, scroll arrows are added if there are too many pages to fit.
   */
-  @property void scrollable(bool propval)
+  @property void scrollable(bool propval) nothrow
   {
     setScrollable(propval);
   }
@@ -239,7 +239,7 @@ class Notebook : gtk.widget.Widget
       Get `showBorder` property.
       Returns: Whether the border should be shown.
   */
-  @property bool showBorder()
+  @property bool showBorder() nothrow
   {
     return getShowBorder();
   }
@@ -249,7 +249,7 @@ class Notebook : gtk.widget.Widget
       Params:
         propval = Whether the border should be shown.
   */
-  @property void showBorder(bool propval)
+  @property void showBorder(bool propval) nothrow
   {
     setShowBorder(propval);
   }
@@ -258,7 +258,7 @@ class Notebook : gtk.widget.Widget
       Get `showTabs` property.
       Returns: Whether tabs should be shown.
   */
-  @property bool showTabs()
+  @property bool showTabs() nothrow
   {
     return getShowTabs();
   }
@@ -268,7 +268,7 @@ class Notebook : gtk.widget.Widget
       Params:
         propval = Whether tabs should be shown.
   */
-  @property void showTabs(bool propval)
+  @property void showTabs(bool propval) nothrow
   {
     setShowTabs(propval);
   }
@@ -277,7 +277,7 @@ class Notebook : gtk.widget.Widget
       Get `tabPos` property.
       Returns: Which side of the notebook holds the tabs.
   */
-  @property gtk.types.PositionType tabPos()
+  @property gtk.types.PositionType tabPos() nothrow
   {
     return getTabPos();
   }
@@ -287,7 +287,7 @@ class Notebook : gtk.widget.Widget
       Params:
         propval = Which side of the notebook holds the tabs.
   */
-  @property void tabPos(gtk.types.PositionType propval)
+  @property void tabPos(gtk.types.PositionType propval) nothrow
   {
     setTabPos(propval);
   }
@@ -296,7 +296,7 @@ class Notebook : gtk.widget.Widget
       Creates a new [gtk.notebook.Notebook] widget with no pages.
       Returns: the newly created [gtk.notebook.Notebook]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_new();
@@ -313,7 +313,7 @@ class Notebook : gtk.widget.Widget
       Returns: the index (starting from 0) of the appended
           page in the notebook, or -1 if function fails
   */
-  int appendPage(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null)
+  int appendPage(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null) nothrow
   {
     int _retval;
     _retval = gtk_notebook_append_page(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel._cPtr(No.Dup) : null);
@@ -337,7 +337,7 @@ class Notebook : gtk.widget.Widget
       Returns: the index (starting from 0) of the appended
           page in the notebook, or -1 if function fails
   */
-  int appendPageMenu(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null, gtk.widget.Widget menuLabel = null)
+  int appendPageMenu(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null, gtk.widget.Widget menuLabel = null) nothrow
   {
     int _retval;
     _retval = gtk_notebook_append_page_menu(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel._cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel._cPtr(No.Dup) : null);
@@ -355,7 +355,7 @@ class Notebook : gtk.widget.Widget
       Params:
         child = a child
   */
-  void detachTab(gtk.widget.Widget child)
+  void detachTab(gtk.widget.Widget child) nothrow
   {
     gtk_notebook_detach_tab(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -371,7 +371,7 @@ class Notebook : gtk.widget.Widget
           with the given pack_type or null when this action
           widget has not been set
   */
-  gtk.widget.Widget getActionWidget(gtk.types.PackType packType)
+  gtk.widget.Widget getActionWidget(gtk.types.PackType packType) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_get_action_widget(cast(GtkNotebook*)this._cPtr, packType);
@@ -385,7 +385,7 @@ class Notebook : gtk.widget.Widget
           page in the notebook. If the notebook has no pages,
           then -1 will be returned.
   */
-  int getCurrentPage()
+  int getCurrentPage() nothrow
   {
     int _retval;
     _retval = gtk_notebook_get_current_page(cast(GtkNotebook*)this._cPtr);
@@ -397,7 +397,7 @@ class Notebook : gtk.widget.Widget
       Returns: the group name,
           or null if none is set
   */
-  string getGroupName()
+  string getGroupName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_notebook_get_group_name(cast(GtkNotebook*)this._cPtr);
@@ -414,7 +414,7 @@ class Notebook : gtk.widget.Widget
           if the notebook page does not have a menu label other than
           the default (the tab label).
   */
-  gtk.widget.Widget getMenuLabel(gtk.widget.Widget child)
+  gtk.widget.Widget getMenuLabel(gtk.widget.Widget child) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_get_menu_label(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -433,7 +433,7 @@ class Notebook : gtk.widget.Widget
           menu label, or the menu label widget is not a [gtk.label.Label].
           The string is owned by the widget and must not be freed.
   */
-  string getMenuLabelText(gtk.widget.Widget child)
+  string getMenuLabelText(gtk.widget.Widget child) nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_notebook_get_menu_label_text(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -445,7 +445,7 @@ class Notebook : gtk.widget.Widget
       Gets the number of pages in a notebook.
       Returns: the number of pages in the notebook
   */
-  int getNPages()
+  int getNPages() nothrow
   {
     int _retval;
     _retval = gtk_notebook_get_n_pages(cast(GtkNotebook*)this._cPtr);
@@ -461,7 +461,7 @@ class Notebook : gtk.widget.Widget
       Returns: the child widget, or null if page_num
         is out of bounds
   */
-  gtk.widget.Widget getNthPage(int pageNum)
+  gtk.widget.Widget getNthPage(int pageNum) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_get_nth_page(cast(GtkNotebook*)this._cPtr, pageNum);
@@ -476,7 +476,7 @@ class Notebook : gtk.widget.Widget
         child = a child of notebook
       Returns: the [gtk.notebook_page.NotebookPage] for child
   */
-  gtk.notebook_page.NotebookPage getPage(gtk.widget.Widget child)
+  gtk.notebook_page.NotebookPage getPage(gtk.widget.Widget child) nothrow
   {
     GtkNotebookPage* _cretval;
     _cretval = gtk_notebook_get_page(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -493,7 +493,7 @@ class Notebook : gtk.widget.Widget
       Returns: a
           [gio.list_model.ListModel] for the notebook's children
   */
-  gio.list_model.ListModel getPages()
+  gio.list_model.ListModel getPages() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_notebook_get_pages(cast(GtkNotebook*)this._cPtr);
@@ -505,7 +505,7 @@ class Notebook : gtk.widget.Widget
       Returns whether the tab label area has arrows for scrolling.
       Returns: true if arrows for scrolling are present
   */
-  bool getScrollable()
+  bool getScrollable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_notebook_get_scrollable(cast(GtkNotebook*)this._cPtr);
@@ -516,7 +516,7 @@ class Notebook : gtk.widget.Widget
       Returns whether a bevel will be drawn around the notebook pages.
       Returns: true if the bevel is drawn
   */
-  bool getShowBorder()
+  bool getShowBorder() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_notebook_get_show_border(cast(GtkNotebook*)this._cPtr);
@@ -527,7 +527,7 @@ class Notebook : gtk.widget.Widget
       Returns whether the tabs of the notebook are shown.
       Returns: true if the tabs are shown
   */
-  bool getShowTabs()
+  bool getShowTabs() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_notebook_get_show_tabs(cast(GtkNotebook*)this._cPtr);
@@ -541,7 +541,7 @@ class Notebook : gtk.widget.Widget
         child = a child [gtk.widget.Widget]
       Returns: true if the tab is detachable.
   */
-  bool getTabDetachable(gtk.widget.Widget child)
+  bool getTabDetachable(gtk.widget.Widget child) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_notebook_get_tab_detachable(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -558,7 +558,7 @@ class Notebook : gtk.widget.Widget
         child = the page
       Returns: the tab label
   */
-  gtk.widget.Widget getTabLabel(gtk.widget.Widget child)
+  gtk.widget.Widget getTabLabel(gtk.widget.Widget child) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_get_tab_label(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -576,7 +576,7 @@ class Notebook : gtk.widget.Widget
           the tab label widget is not a [gtk.label.Label]. The string is owned
           by the widget and must not be freed.
   */
-  string getTabLabelText(gtk.widget.Widget child)
+  string getTabLabelText(gtk.widget.Widget child) nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_notebook_get_tab_label_text(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -588,7 +588,7 @@ class Notebook : gtk.widget.Widget
       Gets the edge at which the tabs are drawn.
       Returns: the edge at which the tabs are drawn
   */
-  gtk.types.PositionType getTabPos()
+  gtk.types.PositionType getTabPos() nothrow
   {
     GtkPositionType _cretval;
     _cretval = gtk_notebook_get_tab_pos(cast(GtkNotebook*)this._cPtr);
@@ -603,7 +603,7 @@ class Notebook : gtk.widget.Widget
         child = a child [gtk.widget.Widget]
       Returns: true if the tab is reorderable.
   */
-  bool getTabReorderable(gtk.widget.Widget child)
+  bool getTabReorderable(gtk.widget.Widget child) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_notebook_get_tab_reorderable(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -622,7 +622,7 @@ class Notebook : gtk.widget.Widget
       Returns: the index (starting from 0) of the inserted
           page in the notebook, or -1 if function fails
   */
-  int insertPage(gtk.widget.Widget child, gtk.widget.Widget tabLabel, int position)
+  int insertPage(gtk.widget.Widget child, gtk.widget.Widget tabLabel, int position) nothrow
   {
     int _retval;
     _retval = gtk_notebook_insert_page(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel._cPtr(No.Dup) : null, position);
@@ -648,7 +648,7 @@ class Notebook : gtk.widget.Widget
       Returns: the index (starting from 0) of the inserted
           page in the notebook
   */
-  int insertPageMenu(gtk.widget.Widget child, gtk.widget.Widget tabLabel, gtk.widget.Widget menuLabel, int position)
+  int insertPageMenu(gtk.widget.Widget child, gtk.widget.Widget tabLabel, gtk.widget.Widget menuLabel, int position) nothrow
   {
     int _retval;
     _retval = gtk_notebook_insert_page_menu(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel._cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel._cPtr(No.Dup) : null, position);
@@ -660,7 +660,7 @@ class Notebook : gtk.widget.Widget
       
       Nothing happens if the current page is the last page.
   */
-  void nextPage()
+  void nextPage() nothrow
   {
     gtk_notebook_next_page(cast(GtkNotebook*)this._cPtr);
   }
@@ -674,7 +674,7 @@ class Notebook : gtk.widget.Widget
       Returns: the index of the page containing child, or
           -1 if child is not in the notebook
   */
-  int pageNum(gtk.widget.Widget child)
+  int pageNum(gtk.widget.Widget child) nothrow
   {
     int _retval;
     _retval = gtk_notebook_page_num(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -684,7 +684,7 @@ class Notebook : gtk.widget.Widget
   /**
       Disables the popup menu.
   */
-  void popupDisable()
+  void popupDisable() nothrow
   {
     gtk_notebook_popup_disable(cast(GtkNotebook*)this._cPtr);
   }
@@ -695,7 +695,7 @@ class Notebook : gtk.widget.Widget
       If the user clicks with the right mouse button on the tab labels,
       a menu with all the pages will be popped up.
   */
-  void popupEnable()
+  void popupEnable() nothrow
   {
     gtk_notebook_popup_enable(cast(GtkNotebook*)this._cPtr);
   }
@@ -710,7 +710,7 @@ class Notebook : gtk.widget.Widget
       Returns: the index (starting from 0) of the prepended
           page in the notebook, or -1 if function fails
   */
-  int prependPage(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null)
+  int prependPage(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null) nothrow
   {
     int _retval;
     _retval = gtk_notebook_prepend_page(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel._cPtr(No.Dup) : null);
@@ -734,7 +734,7 @@ class Notebook : gtk.widget.Widget
       Returns: the index (starting from 0) of the prepended
           page in the notebook, or -1 if function fails
   */
-  int prependPageMenu(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null, gtk.widget.Widget menuLabel = null)
+  int prependPageMenu(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null, gtk.widget.Widget menuLabel = null) nothrow
   {
     int _retval;
     _retval = gtk_notebook_prepend_page_menu(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel._cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel._cPtr(No.Dup) : null);
@@ -746,7 +746,7 @@ class Notebook : gtk.widget.Widget
       
       Nothing happens if the current page is the first page.
   */
-  void prevPage()
+  void prevPage() nothrow
   {
     gtk_notebook_prev_page(cast(GtkNotebook*)this._cPtr);
   }
@@ -759,7 +759,7 @@ class Notebook : gtk.widget.Widget
         pageNum = the index of a notebook page, starting
             from 0. If -1, the last page will be removed.
   */
-  void removePage(int pageNum)
+  void removePage(int pageNum) nothrow
   {
     gtk_notebook_remove_page(cast(GtkNotebook*)this._cPtr, pageNum);
   }
@@ -775,7 +775,7 @@ class Notebook : gtk.widget.Widget
         child = the child to move
         position = the new position, or -1 to move to the end
   */
-  void reorderChild(gtk.widget.Widget child, int position)
+  void reorderChild(gtk.widget.Widget child, int position) nothrow
   {
     gtk_notebook_reorder_child(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, position);
   }
@@ -791,7 +791,7 @@ class Notebook : gtk.widget.Widget
         widget = a [gtk.widget.Widget]
         packType = pack type of the action widget
   */
-  void setActionWidget(gtk.widget.Widget widget, gtk.types.PackType packType)
+  void setActionWidget(gtk.widget.Widget widget, gtk.types.PackType packType) nothrow
   {
     gtk_notebook_set_action_widget(cast(GtkNotebook*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, packType);
   }
@@ -810,7 +810,7 @@ class Notebook : gtk.widget.Widget
             than the number of pages in the notebook, nothing
             will be done.
   */
-  void setCurrentPage(int pageNum)
+  void setCurrentPage(int pageNum) nothrow
   {
     gtk_notebook_set_current_page(cast(GtkNotebook*)this._cPtr, pageNum);
   }
@@ -826,7 +826,7 @@ class Notebook : gtk.widget.Widget
         groupName = the name of the notebook group,
             or null to unset it
   */
-  void setGroupName(string groupName = null)
+  void setGroupName(string groupName = null) nothrow
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     gtk_notebook_set_group_name(cast(GtkNotebook*)this._cPtr, _groupName);
@@ -839,7 +839,7 @@ class Notebook : gtk.widget.Widget
         child = the child widget
         menuLabel = the menu label, or null for default
   */
-  void setMenuLabel(gtk.widget.Widget child, gtk.widget.Widget menuLabel = null)
+  void setMenuLabel(gtk.widget.Widget child, gtk.widget.Widget menuLabel = null) nothrow
   {
     gtk_notebook_set_menu_label(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel._cPtr(No.Dup) : null);
   }
@@ -851,7 +851,7 @@ class Notebook : gtk.widget.Widget
         child = the child widget
         menuText = the label text
   */
-  void setMenuLabelText(gtk.widget.Widget child, string menuText)
+  void setMenuLabelText(gtk.widget.Widget child, string menuText) nothrow
   {
     const(char)* _menuText = menuText.toCString(No.Alloc);
     gtk_notebook_set_menu_label_text(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _menuText);
@@ -864,7 +864,7 @@ class Notebook : gtk.widget.Widget
       Params:
         scrollable = true if scroll arrows should be added
   */
-  void setScrollable(bool scrollable)
+  void setScrollable(bool scrollable) nothrow
   {
     gtk_notebook_set_scrollable(cast(GtkNotebook*)this._cPtr, scrollable);
   }
@@ -877,7 +877,7 @@ class Notebook : gtk.widget.Widget
       Params:
         showBorder = true if a bevel should be drawn around the notebook
   */
-  void setShowBorder(bool showBorder)
+  void setShowBorder(bool showBorder) nothrow
   {
     gtk_notebook_set_show_border(cast(GtkNotebook*)this._cPtr, showBorder);
   }
@@ -888,7 +888,7 @@ class Notebook : gtk.widget.Widget
       Params:
         showTabs = true if the tabs should be shown
   */
-  void setShowTabs(bool showTabs)
+  void setShowTabs(bool showTabs) nothrow
   {
     gtk_notebook_set_show_tabs(cast(GtkNotebook*)this._cPtr, showTabs);
   }
@@ -944,7 +944,7 @@ class Notebook : gtk.widget.Widget
         child = a child [gtk.widget.Widget]
         detachable = whether the tab is detachable or not
   */
-  void setTabDetachable(gtk.widget.Widget child, bool detachable)
+  void setTabDetachable(gtk.widget.Widget child, bool detachable) nothrow
   {
     gtk_notebook_set_tab_detachable(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, detachable);
   }
@@ -960,7 +960,7 @@ class Notebook : gtk.widget.Widget
         tabLabel = the tab label widget to use, or null
             for default tab label
   */
-  void setTabLabel(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null)
+  void setTabLabel(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null) nothrow
   {
     gtk_notebook_set_tab_label(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel._cPtr(No.Dup) : null);
   }
@@ -973,7 +973,7 @@ class Notebook : gtk.widget.Widget
         child = the page
         tabText = the label text
   */
-  void setTabLabelText(gtk.widget.Widget child, string tabText)
+  void setTabLabelText(gtk.widget.Widget child, string tabText) nothrow
   {
     const(char)* _tabText = tabText.toCString(No.Alloc);
     gtk_notebook_set_tab_label_text(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _tabText);
@@ -985,7 +985,7 @@ class Notebook : gtk.widget.Widget
       Params:
         pos = the edge to draw the tabs at
   */
-  void setTabPos(gtk.types.PositionType pos)
+  void setTabPos(gtk.types.PositionType pos) nothrow
   {
     gtk_notebook_set_tab_pos(cast(GtkNotebook*)this._cPtr, pos);
   }
@@ -998,7 +998,7 @@ class Notebook : gtk.widget.Widget
         child = a child [gtk.widget.Widget]
         reorderable = whether the tab is reorderable or not
   */
-  void setTabReorderable(gtk.widget.Widget child, bool reorderable)
+  void setTabReorderable(gtk.widget.Widget child, bool reorderable) nothrow
   {
     gtk_notebook_set_tab_reorderable(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, reorderable);
   }
@@ -1021,18 +1021,19 @@ class Notebook : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChangeCurrentPage(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChangeCurrentPage(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.notebook.Notebook)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1040,7 +1041,14 @@ class Notebook : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.notebook.Notebook.changeCurrentPage");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1075,18 +1083,19 @@ class Notebook : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCreateWindow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCreateWindow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T : gtk.notebook.Notebook)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.notebook.Notebook)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gtk.notebook.Notebook _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1094,7 +1103,14 @@ class Notebook : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.notebook.Notebook.createWindow");
+      }
 
       setVal!(gtk.notebook.Notebook)(_returnValue, _retval);
     }
@@ -1121,18 +1137,19 @@ class Notebook : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFocusTab(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFocusTab(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.NotebookTab)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.notebook.Notebook)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1140,7 +1157,14 @@ class Notebook : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.notebook.Notebook.focusTab");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1166,14 +1190,14 @@ class Notebook : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveFocusOut(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveFocusOut(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.DirectionType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.notebook.Notebook)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1185,7 +1209,14 @@ class Notebook : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.notebook.Notebook.moveFocusOut");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1212,7 +1243,7 @@ class Notebook : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPageAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPageAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -1220,7 +1251,7 @@ class Notebook : gtk.widget.Widget
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.notebook.Notebook)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1235,7 +1266,14 @@ class Notebook : gtk.widget.Widget
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.notebook.Notebook.pageAdded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1262,7 +1300,7 @@ class Notebook : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPageRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPageRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -1270,7 +1308,7 @@ class Notebook : gtk.widget.Widget
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.notebook.Notebook)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1285,7 +1323,14 @@ class Notebook : gtk.widget.Widget
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.notebook.Notebook.pageRemoved");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1312,7 +1357,7 @@ class Notebook : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPageReordered(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPageReordered(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -1320,7 +1365,7 @@ class Notebook : gtk.widget.Widget
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.notebook.Notebook)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1335,7 +1380,14 @@ class Notebook : gtk.widget.Widget
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.notebook.Notebook.pageReordered");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1362,7 +1414,7 @@ class Notebook : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectReorderTab(T)(T callback, Flag!"After" after = No.After)
+  gulong connectReorderTab(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.DirectionType)))
@@ -1370,11 +1422,12 @@ class Notebook : gtk.widget.Widget
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.notebook.Notebook)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1385,7 +1438,14 @@ class Notebook : gtk.widget.Widget
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.notebook.Notebook.reorderTab");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1412,18 +1472,19 @@ class Notebook : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectPage(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectPage(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.notebook.Notebook)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1431,7 +1492,14 @@ class Notebook : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.notebook.Notebook.selectPage");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1459,7 +1527,7 @@ class Notebook : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSwitchPage(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSwitchPage(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -1467,7 +1535,7 @@ class Notebook : gtk.widget.Widget
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.notebook.Notebook)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1482,7 +1550,14 @@ class Notebook : gtk.widget.Widget
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.notebook.Notebook.switchPage");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1501,7 +1576,7 @@ class NotebookGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = If true, pressing the right mouse button on the notebook shows a page switching menu.
       Returns: Builder instance for fluent chaining
   */
-  T enablePopup(bool propval)
+  T enablePopup(bool propval) nothrow
   {
     return setProperty("enable-popup", propval);
   }
@@ -1512,7 +1587,7 @@ class NotebookGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Group name for tab drag and drop.
       Returns: Builder instance for fluent chaining
   */
-  T groupName(string propval)
+  T groupName(string propval) nothrow
   {
     return setProperty("group-name", propval);
   }
@@ -1523,7 +1598,7 @@ class NotebookGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The index of the current page.
       Returns: Builder instance for fluent chaining
   */
-  T page(int propval)
+  T page(int propval) nothrow
   {
     return setProperty("page", propval);
   }
@@ -1534,7 +1609,7 @@ class NotebookGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = If true, scroll arrows are added if there are too many pages to fit.
       Returns: Builder instance for fluent chaining
   */
-  T scrollable(bool propval)
+  T scrollable(bool propval) nothrow
   {
     return setProperty("scrollable", propval);
   }
@@ -1545,7 +1620,7 @@ class NotebookGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether the border should be shown.
       Returns: Builder instance for fluent chaining
   */
-  T showBorder(bool propval)
+  T showBorder(bool propval) nothrow
   {
     return setProperty("show-border", propval);
   }
@@ -1556,7 +1631,7 @@ class NotebookGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether tabs should be shown.
       Returns: Builder instance for fluent chaining
   */
-  T showTabs(bool propval)
+  T showTabs(bool propval) nothrow
   {
     return setProperty("show-tabs", propval);
   }
@@ -1567,7 +1642,7 @@ class NotebookGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Which side of the notebook holds the tabs.
       Returns: Builder instance for fluent chaining
   */
-  T tabPos(gtk.types.PositionType propval)
+  T tabPos(gtk.types.PositionType propval) nothrow
   {
     return setProperty("tab-pos", propval);
   }
@@ -1580,7 +1655,7 @@ final class NotebookGidBuilder : NotebookGidBuilderImpl!NotebookGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Notebook build()
+  Notebook build() nothrow
   {
     return new Notebook(cast(void*)createGObject(Notebook._getGType), No.Take);
   }

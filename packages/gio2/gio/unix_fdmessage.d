@@ -31,26 +31,26 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_unix_fd_message_get_type != &gidSymbolNotFound ? g_unix_fd_message_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UnixFDMessage self()
+  override UnixFDMessage self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
       Get builder for [gio.unix_fdmessage.UnixFDMessage]
       Returns: New builder object
   */
-  static UnixFDMessageGidBuilder builder()
+  static UnixFDMessageGidBuilder builder() nothrow
   {
     return new UnixFDMessageGidBuilder;
   }
@@ -68,7 +68,7 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
       Get `fdList` property.
       Returns: The [gio.unix_fdlist.UnixFDList] object to send with the message.
   */
-  @property gio.unix_fdlist.UnixFDList fdList()
+  @property gio.unix_fdlist.UnixFDList fdList() nothrow
   {
     return getFdList();
   }
@@ -78,7 +78,7 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
       list.
       Returns: a new #GUnixFDMessage
   */
-  this()
+  this() nothrow
   {
     GSocketControlMessage* _cretval;
     _cretval = g_unix_fd_message_new();
@@ -92,7 +92,7 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
         fdList = a #GUnixFDList
       Returns: a new #GUnixFDMessage
   */
-  static gio.unix_fdmessage.UnixFDMessage newWithFdList(gio.unix_fdlist.UnixFDList fdList)
+  static gio.unix_fdmessage.UnixFDMessage newWithFdList(gio.unix_fdlist.UnixFDList fdList) nothrow
   {
     GSocketControlMessage* _cretval;
     _cretval = g_unix_fd_message_new_with_fd_list(fdList ? cast(GUnixFDList*)fdList._cPtr(No.Dup) : null);
@@ -131,7 +131,7 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
       the lifetime of message.
       Returns: the #GUnixFDList from message
   */
-  gio.unix_fdlist.UnixFDList getFdList()
+  gio.unix_fdlist.UnixFDList getFdList() nothrow
   {
     GUnixFDList* _cretval;
     _cretval = g_unix_fd_message_get_fd_list(cast(GUnixFDMessage*)this._cPtr);
@@ -160,7 +160,7 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
       Returns: an array of file
             descriptors
   */
-  int[] stealFds()
+  int[] stealFds() nothrow
   {
     int* _cretval;
     int _cretlength;
@@ -186,7 +186,7 @@ class UnixFDMessageGidBuilderImpl(T) : gio.socket_control_message.SocketControlM
         propval = The [gio.unix_fdlist.UnixFDList] object to send with the message.
       Returns: Builder instance for fluent chaining
   */
-  T fdList(gio.unix_fdlist.UnixFDList propval)
+  T fdList(gio.unix_fdlist.UnixFDList propval) nothrow
   {
     return setProperty("fd-list", propval);
   }
@@ -199,7 +199,7 @@ final class UnixFDMessageGidBuilder : UnixFDMessageGidBuilderImpl!UnixFDMessageG
       Create object from builder.
       Returns: New object
   */
-  UnixFDMessage build()
+  UnixFDMessage build() nothrow
   {
     return new UnixFDMessage(cast(void*)createGObject(UnixFDMessage._getGType), Yes.Take);
   }

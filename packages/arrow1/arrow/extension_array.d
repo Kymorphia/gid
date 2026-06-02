@@ -15,26 +15,26 @@ class ExtensionArray : arrow.array.Array
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_extension_array_get_type != &gidSymbolNotFound ? garrow_extension_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ExtensionArray self()
+  override ExtensionArray self() nothrow
   {
     return this;
   }
@@ -43,19 +43,19 @@ class ExtensionArray : arrow.array.Array
       Get builder for [arrow.extension_array.ExtensionArray]
       Returns: New builder object
   */
-  static ExtensionArrayGidBuilder builder()
+  static ExtensionArrayGidBuilder builder() nothrow
   {
     return new ExtensionArrayGidBuilder;
   }
 
   /** */
-  @property arrow.array.Array storage()
+  @property arrow.array.Array storage() nothrow
   {
     return getStorage();
   }
 
   /** */
-  arrow.array.Array getStorage()
+  arrow.array.Array getStorage() nothrow
   {
     GArrowArray* _cretval;
     _cretval = garrow_extension_array_get_storage(cast(GArrowExtensionArray*)this._cPtr);
@@ -69,7 +69,7 @@ class ExtensionArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
 {
 
   /** */
-  T storage(arrow.array.Array propval)
+  T storage(arrow.array.Array propval) nothrow
   {
     return setProperty("storage", propval);
   }
@@ -82,7 +82,7 @@ final class ExtensionArrayGidBuilder : ExtensionArrayGidBuilderImpl!ExtensionArr
       Create object from builder.
       Returns: New object
   */
-  ExtensionArray build()
+  ExtensionArray build() nothrow
   {
     return new ExtensionArray(cast(void*)createGObject(ExtensionArray._getGType), No.Take);
   }

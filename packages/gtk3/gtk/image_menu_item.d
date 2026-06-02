@@ -87,26 +87,26 @@ class ImageMenuItem : gtk.menu_item.MenuItem
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_image_menu_item_get_type != &gidSymbolNotFound ? gtk_image_menu_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ImageMenuItem self()
+  override ImageMenuItem self() nothrow
   {
     return this;
   }
@@ -115,7 +115,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
       Get builder for [gtk.image_menu_item.ImageMenuItem]
       Returns: New builder object
   */
-  static ImageMenuItemGidBuilder builder()
+  static ImageMenuItemGidBuilder builder() nothrow
   {
     return new ImageMenuItemGidBuilder;
   }
@@ -127,7 +127,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   
       Deprecated: Use [gtk.widget.Widget.addAccelerator] instead
   */
-  @property void accelGroup(gtk.accel_group.AccelGroup propval)
+  @property void accelGroup(gtk.accel_group.AccelGroup propval) nothrow
   {
     setAccelGroup(propval);
   }
@@ -142,7 +142,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
       Deprecated: Use a #GtkMenuItem containing a #GtkBox with
           a #GtkAccelLabel and a #GtkImage instead
   */
-  @property bool alwaysShowImage()
+  @property bool alwaysShowImage() nothrow
   {
     return getAlwaysShowImage();
   }
@@ -158,7 +158,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
       Deprecated: Use a #GtkMenuItem containing a #GtkBox with
           a #GtkAccelLabel and a #GtkImage instead
   */
-  @property void alwaysShowImage(bool propval)
+  @property void alwaysShowImage(bool propval) nothrow
   {
     setAlwaysShowImage(propval);
   }
@@ -170,7 +170,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
       Deprecated: Use a #GtkMenuItem containing a #GtkBox with
           a #GtkAccelLabel and a #GtkImage instead
   */
-  @property gtk.widget.Widget image()
+  @property gtk.widget.Widget image() nothrow
   {
     return getImage();
   }
@@ -183,7 +183,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
       Deprecated: Use a #GtkMenuItem containing a #GtkBox with
           a #GtkAccelLabel and a #GtkImage instead
   */
-  @property void image(gtk.widget.Widget propval)
+  @property void image(gtk.widget.Widget propval) nothrow
   {
     setImage(propval);
   }
@@ -195,7 +195,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   
       Deprecated: Use a named icon from the #GtkIconTheme instead
   */
-  @property bool useStock()
+  @property bool useStock() nothrow
   {
     return getUseStock();
   }
@@ -208,7 +208,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   
       Deprecated: Use a named icon from the #GtkIconTheme instead
   */
-  @property void useStock(bool propval)
+  @property void useStock(bool propval) nothrow
   {
     setUseStock(propval);
   }
@@ -219,7 +219,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   
       Deprecated: Use [gtk.menu_item.MenuItem.new_] instead.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_menu_item_new();
@@ -245,7 +245,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   
       Deprecated: Use [gtk.menu_item.MenuItem.newWithMnemonic] instead.
   */
-  static gtk.image_menu_item.ImageMenuItem newFromStock(string stockId, gtk.accel_group.AccelGroup accelGroup = null)
+  static gtk.image_menu_item.ImageMenuItem newFromStock(string stockId, gtk.accel_group.AccelGroup accelGroup = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
@@ -263,7 +263,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   
       Deprecated: Use [gtk.menu_item.MenuItem.newWithLabel] instead.
   */
-  static gtk.image_menu_item.ImageMenuItem newWithLabel(string label)
+  static gtk.image_menu_item.ImageMenuItem newWithLabel(string label) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -284,7 +284,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   
       Deprecated: Use [gtk.menu_item.MenuItem.newWithMnemonic] instead.
   */
-  static gtk.image_menu_item.ImageMenuItem newWithMnemonic(string label)
+  static gtk.image_menu_item.ImageMenuItem newWithMnemonic(string label) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -298,7 +298,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
       setting and always show the image, if available.
       Returns: true if the menu item will always show the image
   */
-  bool getAlwaysShowImage()
+  bool getAlwaysShowImage() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_image_menu_item_get_always_show_image(cast(GtkImageMenuItem*)this._cPtr);
@@ -310,7 +310,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
       See [gtk.image_menu_item.ImageMenuItem.setImage].
       Returns: the widget set as image of image_menu_item
   */
-  gtk.widget.Widget getImage()
+  gtk.widget.Widget getImage() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_menu_item_get_image(cast(GtkImageMenuItem*)this._cPtr);
@@ -324,7 +324,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
       Returns: true if the label set in the menuitem is used as a
             stock id to select the stock item for the item
   */
-  bool getUseStock()
+  bool getUseStock() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_image_menu_item_get_use_stock(cast(GtkImageMenuItem*)this._cPtr);
@@ -343,7 +343,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
       Params:
         accelGroup = the #GtkAccelGroup
   */
-  void setAccelGroup(gtk.accel_group.AccelGroup accelGroup)
+  void setAccelGroup(gtk.accel_group.AccelGroup accelGroup) nothrow
   {
     gtk_image_menu_item_set_accel_group(cast(GtkImageMenuItem*)this._cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup._cPtr(No.Dup) : null);
   }
@@ -358,7 +358,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
       Params:
         alwaysShow = true if the menuitem should always show the image
   */
-  void setAlwaysShowImage(bool alwaysShow)
+  void setAlwaysShowImage(bool alwaysShow) nothrow
   {
     gtk_image_menu_item_set_always_show_image(cast(GtkImageMenuItem*)this._cPtr, alwaysShow);
   }
@@ -371,7 +371,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
       Params:
         image = a widget to set as the image for the menu item.
   */
-  void setImage(gtk.widget.Widget image = null)
+  void setImage(gtk.widget.Widget image = null) nothrow
   {
     gtk_image_menu_item_set_image(cast(GtkImageMenuItem*)this._cPtr, image ? cast(GtkWidget*)image._cPtr(No.Dup) : null);
   }
@@ -383,7 +383,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
       Params:
         useStock = true if the menuitem should use a stock item
   */
-  void setUseStock(bool useStock)
+  void setUseStock(bool useStock) nothrow
   {
     gtk_image_menu_item_set_use_stock(cast(GtkImageMenuItem*)this._cPtr, useStock);
   }
@@ -402,7 +402,7 @@ class ImageMenuItemGidBuilderImpl(T) : gtk.menu_item.MenuItemGidBuilderImpl!T
   
       Deprecated: Use [gtk.widget.Widget.addAccelerator] instead
   */
-  T accelGroup(gtk.accel_group.AccelGroup propval)
+  T accelGroup(gtk.accel_group.AccelGroup propval) nothrow
   {
     return setProperty("accel-group", propval);
   }
@@ -419,7 +419,7 @@ class ImageMenuItemGidBuilderImpl(T) : gtk.menu_item.MenuItemGidBuilderImpl!T
       Deprecated: Use a #GtkMenuItem containing a #GtkBox with
           a #GtkAccelLabel and a #GtkImage instead
   */
-  T alwaysShowImage(bool propval)
+  T alwaysShowImage(bool propval) nothrow
   {
     return setProperty("always-show-image", propval);
   }
@@ -433,7 +433,7 @@ class ImageMenuItemGidBuilderImpl(T) : gtk.menu_item.MenuItemGidBuilderImpl!T
       Deprecated: Use a #GtkMenuItem containing a #GtkBox with
           a #GtkAccelLabel and a #GtkImage instead
   */
-  T image(gtk.widget.Widget propval)
+  T image(gtk.widget.Widget propval) nothrow
   {
     return setProperty("image", propval);
   }
@@ -447,7 +447,7 @@ class ImageMenuItemGidBuilderImpl(T) : gtk.menu_item.MenuItemGidBuilderImpl!T
   
       Deprecated: Use a named icon from the #GtkIconTheme instead
   */
-  T useStock(bool propval)
+  T useStock(bool propval) nothrow
   {
     return setProperty("use-stock", propval);
   }
@@ -460,7 +460,7 @@ final class ImageMenuItemGidBuilder : ImageMenuItemGidBuilderImpl!ImageMenuItemG
       Create object from builder.
       Returns: New object
   */
-  ImageMenuItem build()
+  ImageMenuItem build() nothrow
   {
     return new ImageMenuItem(cast(void*)createGObject(ImageMenuItem._getGType), No.Take);
   }

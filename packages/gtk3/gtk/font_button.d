@@ -34,26 +34,26 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_font_button_get_type != &gidSymbolNotFound ? gtk_font_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FontButton self()
+  override FontButton self() nothrow
   {
     return this;
   }
@@ -62,7 +62,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       Get builder for [gtk.font_button.FontButton]
       Returns: New builder object
   */
-  static FontButtonGidBuilder builder()
+  static FontButtonGidBuilder builder() nothrow
   {
     return new FontButtonGidBuilder;
   }
@@ -73,7 +73,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
   
       Deprecated: Use the #GtkFontChooser::font property instead
   */
-  @property string fontName()
+  @property string fontName() nothrow
   {
     return getFontName();
   }
@@ -85,7 +85,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
   
       Deprecated: Use the #GtkFontChooser::font property instead
   */
-  @property void fontName(string propval)
+  @property void fontName(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("font-name", propval);
   }
@@ -96,7 +96,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
         in the label. For a more WYSIWYG way to show the selected size, see the
         ::use-size property.
   */
-  @property bool showSize()
+  @property bool showSize() nothrow
   {
     return getShowSize();
   }
@@ -108,7 +108,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
           in the label. For a more WYSIWYG way to show the selected size, see the
           ::use-size property.
   */
-  @property void showSize(bool propval)
+  @property void showSize(bool propval) nothrow
   {
     setShowSize(propval);
   }
@@ -119,7 +119,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
         will be shown in the label. For a more WYSIWYG way to show the selected
         style, see the ::use-font property.
   */
-  @property bool showStyle()
+  @property bool showStyle() nothrow
   {
     return getShowStyle();
   }
@@ -131,7 +131,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
           will be shown in the label. For a more WYSIWYG way to show the selected
           style, see the ::use-font property.
   */
-  @property void showStyle(bool propval)
+  @property void showStyle(bool propval) nothrow
   {
     setShowStyle(propval);
   }
@@ -140,7 +140,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       Get `title` property.
       Returns: The title of the font chooser dialog.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -150,7 +150,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       Params:
         propval = The title of the font chooser dialog.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -160,7 +160,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       Returns: If this property is set to true, the label will be drawn
         in the selected font.
   */
-  @property bool useFont()
+  @property bool useFont() nothrow
   {
     return getUseFont();
   }
@@ -171,7 +171,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
         propval = If this property is set to true, the label will be drawn
           in the selected font.
   */
-  @property void useFont(bool propval)
+  @property void useFont(bool propval) nothrow
   {
     setUseFont(propval);
   }
@@ -181,7 +181,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       Returns: If this property is set to true, the label will be drawn
         with the selected font size.
   */
-  @property bool useSize()
+  @property bool useSize() nothrow
   {
     return getUseSize();
   }
@@ -192,7 +192,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
         propval = If this property is set to true, the label will be drawn
           with the selected font size.
   */
-  @property void useSize(bool propval)
+  @property void useSize(bool propval) nothrow
   {
     setUseSize(propval);
   }
@@ -203,7 +203,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       Creates a new font picker widget.
       Returns: a new font picker widget.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_button_new();
@@ -217,7 +217,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
         fontname = Name of font to display in font chooser dialog
       Returns: a new font picker widget.
   */
-  static gtk.font_button.FontButton newWithFont(string fontname)
+  static gtk.font_button.FontButton newWithFont(string fontname) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _fontname = fontname.toCString(No.Alloc);
@@ -237,7 +237,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
   
       Deprecated: Use [gtk.font_chooser.FontChooser.getFont] instead
   */
-  string getFontName()
+  string getFontName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_font_button_get_font_name(cast(GtkFontButton*)this._cPtr);
@@ -249,7 +249,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       Returns whether the font size will be shown in the label.
       Returns: whether the font size will be shown in the label.
   */
-  bool getShowSize()
+  bool getShowSize() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_font_button_get_show_size(cast(GtkFontButton*)this._cPtr);
@@ -260,7 +260,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       Returns whether the name of the font style will be shown in the label.
       Returns: whether the font style will be shown in the label.
   */
-  bool getShowStyle()
+  bool getShowStyle() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_font_button_get_show_style(cast(GtkFontButton*)this._cPtr);
@@ -271,7 +271,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       Retrieves the title of the font chooser dialog.
       Returns: an internal copy of the title string which must not be freed.
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_font_button_get_title(cast(GtkFontButton*)this._cPtr);
@@ -283,7 +283,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       Returns whether the selected font is used in the label.
       Returns: whether the selected font is used in the label.
   */
-  bool getUseFont()
+  bool getUseFont() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_font_button_get_use_font(cast(GtkFontButton*)this._cPtr);
@@ -294,7 +294,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       Returns whether the selected size is used in the label.
       Returns: whether the selected size is used in the label.
   */
-  bool getUseSize()
+  bool getUseSize() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_font_button_get_use_size(cast(GtkFontButton*)this._cPtr);
@@ -310,7 +310,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
   
       Deprecated: Use [gtk.font_chooser.FontChooser.setFont] instead
   */
-  bool setFontName(string fontname)
+  bool setFontName(string fontname) nothrow
   {
     bool _retval;
     const(char)* _fontname = fontname.toCString(No.Alloc);
@@ -324,7 +324,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       Params:
         showSize = true if font size should be displayed in dialog.
   */
-  void setShowSize(bool showSize)
+  void setShowSize(bool showSize) nothrow
   {
     gtk_font_button_set_show_size(cast(GtkFontButton*)this._cPtr, showSize);
   }
@@ -335,7 +335,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       Params:
         showStyle = true if font style should be displayed in label.
   */
-  void setShowStyle(bool showStyle)
+  void setShowStyle(bool showStyle) nothrow
   {
     gtk_font_button_set_show_style(cast(GtkFontButton*)this._cPtr, showStyle);
   }
@@ -346,7 +346,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       Params:
         title = a string containing the font chooser dialog title
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_font_button_set_title(cast(GtkFontButton*)this._cPtr, _title);
@@ -358,7 +358,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       Params:
         useFont = If true, font name will be written using font chosen.
   */
-  void setUseFont(bool useFont)
+  void setUseFont(bool useFont) nothrow
   {
     gtk_font_button_set_use_font(cast(GtkFontButton*)this._cPtr, useFont);
   }
@@ -369,7 +369,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       Params:
         useSize = If true, font name will be written using the selected size.
   */
-  void setUseSize(bool useSize)
+  void setUseSize(bool useSize) nothrow
   {
     gtk_font_button_set_use_size(cast(GtkFontButton*)this._cPtr, useSize);
   }
@@ -395,13 +395,13 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFontSet(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFontSet(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.font_button.FontButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -410,7 +410,14 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.font_button.FontButton.fontSet");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -432,7 +439,7 @@ class FontButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtk.font_
   
       Deprecated: Use the #GtkFontChooser::font property instead
   */
-  T fontName(string propval)
+  T fontName(string propval) nothrow
   {
     return setProperty("font-name", propval);
   }
@@ -445,7 +452,7 @@ class FontButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtk.font_
           ::use-size property.
       Returns: Builder instance for fluent chaining
   */
-  T showSize(bool propval)
+  T showSize(bool propval) nothrow
   {
     return setProperty("show-size", propval);
   }
@@ -458,7 +465,7 @@ class FontButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtk.font_
           style, see the ::use-font property.
       Returns: Builder instance for fluent chaining
   */
-  T showStyle(bool propval)
+  T showStyle(bool propval) nothrow
   {
     return setProperty("show-style", propval);
   }
@@ -469,7 +476,7 @@ class FontButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtk.font_
         propval = The title of the font chooser dialog.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -481,7 +488,7 @@ class FontButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtk.font_
           in the selected font.
       Returns: Builder instance for fluent chaining
   */
-  T useFont(bool propval)
+  T useFont(bool propval) nothrow
   {
     return setProperty("use-font", propval);
   }
@@ -493,7 +500,7 @@ class FontButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtk.font_
           with the selected font size.
       Returns: Builder instance for fluent chaining
   */
-  T useSize(bool propval)
+  T useSize(bool propval) nothrow
   {
     return setProperty("use-size", propval);
   }
@@ -506,7 +513,7 @@ final class FontButtonGidBuilder : FontButtonGidBuilderImpl!FontButtonGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FontButton build()
+  FontButton build() nothrow
   {
     return new FontButton(cast(void*)createGObject(FontButton._getGType), No.Take);
   }

@@ -18,32 +18,32 @@ class SettingsSchemaKey : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_settings_schema_key_get_type != &gidSymbolNotFound ? g_settings_schema_key_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SettingsSchemaKey self()
+  override SettingsSchemaKey self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class SettingsSchemaKey : gobject.boxed.Boxed
       administrator defaults and lockdown are not visible via this API.
       Returns: the default value for the key
   */
-  glib.variant.Variant getDefaultValue()
+  glib.variant.Variant getDefaultValue() nothrow
   {
     GVariant* _cretval;
     _cretval = g_settings_schema_key_get_default_value(cast(GSettingsSchemaKey*)this._cPtr);
@@ -80,7 +80,7 @@ class SettingsSchemaKey : gobject.boxed.Boxed
       directory.
       Returns: the description for key, or null
   */
-  string getDescription()
+  string getDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_key_get_description(cast(GSettingsSchemaKey*)this._cPtr);
@@ -92,7 +92,7 @@ class SettingsSchemaKey : gobject.boxed.Boxed
       Gets the name of key.
       Returns: the name of key.
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_key_get_name(cast(GSettingsSchemaKey*)this._cPtr);
@@ -139,7 +139,7 @@ class SettingsSchemaKey : gobject.boxed.Boxed
       no longer needed.
       Returns: a #GVariant describing the range
   */
-  glib.variant.Variant getRange()
+  glib.variant.Variant getRange() nothrow
   {
     GVariant* _cretval;
     _cretval = g_settings_schema_key_get_range(cast(GSettingsSchemaKey*)this._cPtr);
@@ -163,7 +163,7 @@ class SettingsSchemaKey : gobject.boxed.Boxed
       directory.
       Returns: the summary for key, or null
   */
-  string getSummary()
+  string getSummary() nothrow
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_key_get_summary(cast(GSettingsSchemaKey*)this._cPtr);
@@ -175,7 +175,7 @@ class SettingsSchemaKey : gobject.boxed.Boxed
       Gets the #GVariantType of key.
       Returns: the type of key
   */
-  glib.variant_type.VariantType getValueType()
+  glib.variant_type.VariantType getValueType() nothrow
   {
     const(GVariantType)* _cretval;
     _cretval = g_settings_schema_key_get_value_type(cast(GSettingsSchemaKey*)this._cPtr);
@@ -194,7 +194,7 @@ class SettingsSchemaKey : gobject.boxed.Boxed
         value = the value to check
       Returns: true if value is valid for key
   */
-  bool rangeCheck(glib.variant.Variant value)
+  bool rangeCheck(glib.variant.Variant value) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_settings_schema_key_range_check(cast(GSettingsSchemaKey*)this._cPtr, value ? cast(GVariant*)value._cPtr(No.Dup) : null);

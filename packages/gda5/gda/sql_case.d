@@ -16,11 +16,8 @@ class SqlCase
   GdaSqlCase _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.sql_case.SqlCase");
-
     _cInstance = *cast(GdaSqlCase*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class SqlCase
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class SqlCase
       Get `baseExpr` field.
       Returns: expression to test
   */
-  @property gda.sql_expr.SqlExpr baseExpr()
+  @property gda.sql_expr.SqlExpr baseExpr() nothrow
   {
     return cToD!(gda.sql_expr.SqlExpr)(cast(void*)(cast(GdaSqlCase*)this._cPtr).baseExpr);
   }
@@ -47,7 +44,7 @@ class SqlCase
       Params:
         propval = expression to test
   */
-  @property void baseExpr(gda.sql_expr.SqlExpr propval)
+  @property void baseExpr(gda.sql_expr.SqlExpr propval) nothrow
   {
     cValueFree!(gda.sql_expr.SqlExpr)(cast(void*)(cast(GdaSqlCase*)this._cPtr).baseExpr);
     dToC(propval, cast(void*)&(cast(GdaSqlCase*)this._cPtr).baseExpr);
@@ -57,7 +54,7 @@ class SqlCase
       Get `elseExpr` field.
       Returns: default expression for the CASE
   */
-  @property gda.sql_expr.SqlExpr elseExpr()
+  @property gda.sql_expr.SqlExpr elseExpr() nothrow
   {
     return cToD!(gda.sql_expr.SqlExpr)(cast(void*)(cast(GdaSqlCase*)this._cPtr).elseExpr);
   }
@@ -67,7 +64,7 @@ class SqlCase
       Params:
         propval = default expression for the CASE
   */
-  @property void elseExpr(gda.sql_expr.SqlExpr propval)
+  @property void elseExpr(gda.sql_expr.SqlExpr propval) nothrow
   {
     cValueFree!(gda.sql_expr.SqlExpr)(cast(void*)(cast(GdaSqlCase*)this._cPtr).elseExpr);
     dToC(propval, cast(void*)&(cast(GdaSqlCase*)this._cPtr).elseExpr);
@@ -78,7 +75,7 @@ class SqlCase
       using [glib.global.gfree];
       Returns: a new string with the description of the CASE clause or "null" in case sc is invalid.
   */
-  string serialize()
+  string serialize() nothrow
   {
     char* _cretval;
     _cretval = gda_sql_case_serialize(cast(GdaSqlCase*)this._cPtr);

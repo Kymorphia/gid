@@ -15,26 +15,26 @@ class ByteArrayStatistics : parquet.statistics.Statistics
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_byte_array_statistics_get_type != &gidSymbolNotFound ? gparquet_byte_array_statistics_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ByteArrayStatistics self()
+  override ByteArrayStatistics self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class ByteArrayStatistics : parquet.statistics.Statistics
       Get builder for [parquet.byte_array_statistics.ByteArrayStatistics]
       Returns: New builder object
   */
-  static ByteArrayStatisticsGidBuilder builder()
+  static ByteArrayStatisticsGidBuilder builder() nothrow
   {
     return new ByteArrayStatisticsGidBuilder;
   }
 
   /** */
-  glib.bytes.Bytes getMax()
+  glib.bytes.Bytes getMax() nothrow
   {
     GBytes* _cretval;
     _cretval = gparquet_byte_array_statistics_get_max(cast(GParquetByteArrayStatistics*)this._cPtr);
@@ -58,7 +58,7 @@ class ByteArrayStatistics : parquet.statistics.Statistics
   }
 
   /** */
-  glib.bytes.Bytes getMin()
+  glib.bytes.Bytes getMin() nothrow
   {
     GBytes* _cretval;
     _cretval = gparquet_byte_array_statistics_get_min(cast(GParquetByteArrayStatistics*)this._cPtr);
@@ -79,7 +79,7 @@ final class ByteArrayStatisticsGidBuilder : ByteArrayStatisticsGidBuilderImpl!By
       Create object from builder.
       Returns: New object
   */
-  ByteArrayStatistics build()
+  ByteArrayStatistics build() nothrow
   {
     return new ByteArrayStatistics(cast(void*)createGObject(ByteArrayStatistics._getGType), No.Take);
   }

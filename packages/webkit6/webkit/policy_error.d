@@ -17,7 +17,7 @@ struct PolicyError
       Gets the quark for the domain of policy errors.
       Returns: policy error domain.
   */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = webkit_policy_error_quark();
@@ -27,12 +27,12 @@ struct PolicyError
 
 class PolicyException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(webkit.policy_error.PolicyError.quark, cast(int)code, msg);
   }

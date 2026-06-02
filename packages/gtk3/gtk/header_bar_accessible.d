@@ -16,26 +16,26 @@ class HeaderBarAccessible : gtk.container_accessible.ContainerAccessible
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_header_bar_accessible_get_type != &gidSymbolNotFound ? gtk_header_bar_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HeaderBarAccessible self()
+  override HeaderBarAccessible self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class HeaderBarAccessible : gtk.container_accessible.ContainerAccessible
       Get builder for [gtk.header_bar_accessible.HeaderBarAccessible]
       Returns: New builder object
   */
-  static HeaderBarAccessibleGidBuilder builder()
+  static HeaderBarAccessibleGidBuilder builder() nothrow
   {
     return new HeaderBarAccessibleGidBuilder;
   }
@@ -63,7 +63,7 @@ final class HeaderBarAccessibleGidBuilder : HeaderBarAccessibleGidBuilderImpl!He
       Create object from builder.
       Returns: New object
   */
-  HeaderBarAccessible build()
+  HeaderBarAccessible build() nothrow
   {
     return new HeaderBarAccessible(cast(void*)createGObject(HeaderBarAccessible._getGType), No.Take);
   }

@@ -21,26 +21,26 @@ class SelectionFilterModel : gobject.object.ObjectWrap, gio.list_model.ListModel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_selection_filter_model_get_type != &gidSymbolNotFound ? gtk_selection_filter_model_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SelectionFilterModel self()
+  override SelectionFilterModel self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class SelectionFilterModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get builder for [gtk.selection_filter_model.SelectionFilterModel]
       Returns: New builder object
   */
-  static SelectionFilterModelGidBuilder builder()
+  static SelectionFilterModelGidBuilder builder() nothrow
   {
     return new SelectionFilterModelGidBuilder;
   }
@@ -58,7 +58,7 @@ class SelectionFilterModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
-  @property gobject.types.GType itemType()
+  @property gobject.types.GType itemType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
   }
@@ -67,7 +67,7 @@ class SelectionFilterModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `model` property.
       Returns: The model being filtered.
   */
-  @property gtk.selection_model.SelectionModel model()
+  @property gtk.selection_model.SelectionModel model() nothrow
   {
     return getModel();
   }
@@ -77,7 +77,7 @@ class SelectionFilterModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       Params:
         propval = The model being filtered.
   */
-  @property void model(gtk.selection_model.SelectionModel propval)
+  @property void model(gtk.selection_model.SelectionModel propval) nothrow
   {
     setModel(propval);
   }
@@ -86,7 +86,7 @@ class SelectionFilterModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `nItems` property.
       Returns: The number of items. See [gio.list_model.ListModel.getNItems].
   */
-  @property uint nItems()
+  @property uint nItems() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
@@ -101,7 +101,7 @@ class SelectionFilterModel : gobject.object.ObjectWrap, gio.list_model.ListModel
         model = the selection model to filter
       Returns: a new [gtk.selection_filter_model.SelectionFilterModel]
   */
-  this(gtk.selection_model.SelectionModel model = null)
+  this(gtk.selection_model.SelectionModel model = null) nothrow
   {
     GtkSelectionFilterModel* _cretval;
     _cretval = gtk_selection_filter_model_new(model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
@@ -112,7 +112,7 @@ class SelectionFilterModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       Gets the model currently filtered or null if none.
       Returns: The model that gets filtered
   */
-  gtk.selection_model.SelectionModel getModel()
+  gtk.selection_model.SelectionModel getModel() nothrow
   {
     GtkSelectionModel* _cretval;
     _cretval = gtk_selection_filter_model_get_model(cast(GtkSelectionFilterModel*)this._cPtr);
@@ -131,7 +131,7 @@ class SelectionFilterModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       Params:
         model = The model to be filtered
   */
-  void setModel(gtk.selection_model.SelectionModel model = null)
+  void setModel(gtk.selection_model.SelectionModel model = null) nothrow
   {
     gtk_selection_filter_model_set_model(cast(GtkSelectionFilterModel*)this._cPtr, model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
@@ -149,7 +149,7 @@ class SelectionFilterModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilde
         propval = The model being filtered.
       Returns: Builder instance for fluent chaining
   */
-  T model(gtk.selection_model.SelectionModel propval)
+  T model(gtk.selection_model.SelectionModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -162,7 +162,7 @@ final class SelectionFilterModelGidBuilder : SelectionFilterModelGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  SelectionFilterModel build()
+  SelectionFilterModel build() nothrow
   {
     return new SelectionFilterModel(cast(void*)createGObject(SelectionFilterModel._getGType), Yes.Take);
   }

@@ -15,26 +15,26 @@ class WriteOptions : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_write_options_get_type != &gidSymbolNotFound ? garrow_write_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WriteOptions self()
+  override WriteOptions self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class WriteOptions : gobject.object.ObjectWrap
       Get builder for [arrow.write_options.WriteOptions]
       Returns: New builder object
   */
-  static WriteOptionsGidBuilder builder()
+  static WriteOptionsGidBuilder builder() nothrow
   {
     return new WriteOptionsGidBuilder;
   }
@@ -53,7 +53,7 @@ class WriteOptions : gobject.object.ObjectWrap
       Returns: Write padding after memory buffers to this multiple of
         bytes. Generally 8 or 64.
   */
-  @property int alignment()
+  @property int alignment() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("alignment");
   }
@@ -64,7 +64,7 @@ class WriteOptions : gobject.object.ObjectWrap
         propval = Write padding after memory buffers to this multiple of
           bytes. Generally 8 or 64.
   */
-  @property void alignment(int propval)
+  @property void alignment(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("alignment", propval);
   }
@@ -74,7 +74,7 @@ class WriteOptions : gobject.object.ObjectWrap
       Returns: Whether to allow field lengths that don't fit in a signed 32-bit
         int. Some implementations may not be able to parse such streams.
   */
-  @property bool allow64bit()
+  @property bool allow64bit() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("allow-64bit");
   }
@@ -85,7 +85,7 @@ class WriteOptions : gobject.object.ObjectWrap
         propval = Whether to allow field lengths that don't fit in a signed 32-bit
           int. Some implementations may not be able to parse such streams.
   */
-  @property void allow64bit(bool propval)
+  @property void allow64bit(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("allow-64bit", propval);
   }
@@ -98,7 +98,7 @@ class WriteOptions : gobject.object.ObjectWrap
         
         May only be UNCOMPRESSED, LZ4_FRAME and ZSTD.
   */
-  @property arrow.codec.Codec codec()
+  @property arrow.codec.Codec codec() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.codec.Codec)("codec");
   }
@@ -112,7 +112,7 @@ class WriteOptions : gobject.object.ObjectWrap
           
           May only be UNCOMPRESSED, LZ4_FRAME and ZSTD.
   */
-  @property void codec(arrow.codec.Codec propval)
+  @property void codec(arrow.codec.Codec propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(arrow.codec.Codec)("codec", propval);
   }
@@ -121,7 +121,7 @@ class WriteOptions : gobject.object.ObjectWrap
       Get `maxRecursionDepth` property.
       Returns: The maximum permitted schema nesting depth.
   */
-  @property int maxRecursionDepth()
+  @property int maxRecursionDepth() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("max-recursion-depth");
   }
@@ -131,7 +131,7 @@ class WriteOptions : gobject.object.ObjectWrap
       Params:
         propval = The maximum permitted schema nesting depth.
   */
-  @property void maxRecursionDepth(int propval)
+  @property void maxRecursionDepth(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("max-recursion-depth", propval);
   }
@@ -140,7 +140,7 @@ class WriteOptions : gobject.object.ObjectWrap
       Get `useThreads` property.
       Returns: Whether to use the global CPU thread pool.
   */
-  @property bool useThreads()
+  @property bool useThreads() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("use-threads");
   }
@@ -150,7 +150,7 @@ class WriteOptions : gobject.object.ObjectWrap
       Params:
         propval = Whether to use the global CPU thread pool.
   */
-  @property void useThreads(bool propval)
+  @property void useThreads(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("use-threads", propval);
   }
@@ -160,7 +160,7 @@ class WriteOptions : gobject.object.ObjectWrap
       Returns: Whether to write the pre-0.15.0 encapsulated IPC message format
         consisting of a 4-byte prefix instead of 8 byte.
   */
-  @property bool writeLegacyIpcFormat()
+  @property bool writeLegacyIpcFormat() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("write-legacy-ipc-format");
   }
@@ -171,13 +171,13 @@ class WriteOptions : gobject.object.ObjectWrap
         propval = Whether to write the pre-0.15.0 encapsulated IPC message format
           consisting of a 4-byte prefix instead of 8 byte.
   */
-  @property void writeLegacyIpcFormat(bool propval)
+  @property void writeLegacyIpcFormat(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("write-legacy-ipc-format", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowWriteOptions* _cretval;
     _cretval = garrow_write_options_new();
@@ -196,7 +196,7 @@ class WriteOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           bytes. Generally 8 or 64.
       Returns: Builder instance for fluent chaining
   */
-  T alignment(int propval)
+  T alignment(int propval) nothrow
   {
     return setProperty("alignment", propval);
   }
@@ -208,7 +208,7 @@ class WriteOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           int. Some implementations may not be able to parse such streams.
       Returns: Builder instance for fluent chaining
   */
-  T allow64bit(bool propval)
+  T allow64bit(bool propval) nothrow
   {
     return setProperty("allow-64bit", propval);
   }
@@ -223,7 +223,7 @@ class WriteOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           May only be UNCOMPRESSED, LZ4_FRAME and ZSTD.
       Returns: Builder instance for fluent chaining
   */
-  T codec(arrow.codec.Codec propval)
+  T codec(arrow.codec.Codec propval) nothrow
   {
     return setProperty("codec", propval);
   }
@@ -234,7 +234,7 @@ class WriteOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The maximum permitted schema nesting depth.
       Returns: Builder instance for fluent chaining
   */
-  T maxRecursionDepth(int propval)
+  T maxRecursionDepth(int propval) nothrow
   {
     return setProperty("max-recursion-depth", propval);
   }
@@ -245,7 +245,7 @@ class WriteOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether to use the global CPU thread pool.
       Returns: Builder instance for fluent chaining
   */
-  T useThreads(bool propval)
+  T useThreads(bool propval) nothrow
   {
     return setProperty("use-threads", propval);
   }
@@ -257,7 +257,7 @@ class WriteOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           consisting of a 4-byte prefix instead of 8 byte.
       Returns: Builder instance for fluent chaining
   */
-  T writeLegacyIpcFormat(bool propval)
+  T writeLegacyIpcFormat(bool propval) nothrow
   {
     return setProperty("write-legacy-ipc-format", propval);
   }
@@ -270,7 +270,7 @@ final class WriteOptionsGidBuilder : WriteOptionsGidBuilderImpl!WriteOptionsGidB
       Create object from builder.
       Returns: New object
   */
-  WriteOptions build()
+  WriteOptions build() nothrow
   {
     return new WriteOptions(cast(void*)createGObject(WriteOptions._getGType), Yes.Take);
   }

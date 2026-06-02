@@ -20,26 +20,26 @@ class BooleanCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessibl
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_boolean_cell_accessible_get_type != &gidSymbolNotFound ? gtk_boolean_cell_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BooleanCellAccessible self()
+  override BooleanCellAccessible self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class BooleanCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessibl
       Get builder for [gtk.boolean_cell_accessible.BooleanCellAccessible]
       Returns: New builder object
   */
-  static BooleanCellAccessibleGidBuilder builder()
+  static BooleanCellAccessibleGidBuilder builder() nothrow
   {
     return new BooleanCellAccessibleGidBuilder;
   }
@@ -67,7 +67,7 @@ final class BooleanCellAccessibleGidBuilder : BooleanCellAccessibleGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  BooleanCellAccessible build()
+  BooleanCellAccessible build() nothrow
   {
     return new BooleanCellAccessible(cast(void*)createGObject(BooleanCellAccessible._getGType), No.Take);
   }

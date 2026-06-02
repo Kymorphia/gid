@@ -29,26 +29,26 @@ class VolumeButton : gtk.scale_button.ScaleButton
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_volume_button_get_type != &gidSymbolNotFound ? gtk_volume_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VolumeButton self()
+  override VolumeButton self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class VolumeButton : gtk.scale_button.ScaleButton
       Get builder for [gtk.volume_button.VolumeButton]
       Returns: New builder object
   */
-  static VolumeButtonGidBuilder builder()
+  static VolumeButtonGidBuilder builder() nothrow
   {
     return new VolumeButtonGidBuilder;
   }
@@ -69,7 +69,7 @@ class VolumeButton : gtk.scale_button.ScaleButton
         theme, then the normal (potentially colorful) icons will
         be used.
   */
-  @property bool useSymbolic()
+  @property bool useSymbolic() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("use-symbolic");
   }
@@ -82,7 +82,7 @@ class VolumeButton : gtk.scale_button.ScaleButton
           theme, then the normal (potentially colorful) icons will
           be used.
   */
-  @property void useSymbolic(bool propval)
+  @property void useSymbolic(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("use-symbolic", propval);
   }
@@ -93,7 +93,7 @@ class VolumeButton : gtk.scale_button.ScaleButton
       the functions from #GtkScaleButton.
       Returns: a new #GtkVolumeButton
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_volume_button_new();
@@ -115,7 +115,7 @@ class VolumeButtonGidBuilderImpl(T) : gtk.scale_button.ScaleButtonGidBuilderImpl
           be used.
       Returns: Builder instance for fluent chaining
   */
-  T useSymbolic(bool propval)
+  T useSymbolic(bool propval) nothrow
   {
     return setProperty("use-symbolic", propval);
   }
@@ -128,7 +128,7 @@ final class VolumeButtonGidBuilder : VolumeButtonGidBuilderImpl!VolumeButtonGidB
       Create object from builder.
       Returns: New object
   */
-  VolumeButton build()
+  VolumeButton build() nothrow
   {
     return new VolumeButton(cast(void*)createGObject(VolumeButton._getGType), No.Take);
   }

@@ -14,26 +14,26 @@ class HDFSFileSystem : arrow.file_system.FileSystem
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_hdfs_file_system_get_type != &gidSymbolNotFound ? garrow_hdfs_file_system_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HDFSFileSystem self()
+  override HDFSFileSystem self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class HDFSFileSystem : arrow.file_system.FileSystem
       Get builder for [arrow.hdfsfile_system.HDFSFileSystem]
       Returns: New builder object
   */
-  static HDFSFileSystemGidBuilder builder()
+  static HDFSFileSystemGidBuilder builder() nothrow
   {
     return new HDFSFileSystemGidBuilder;
   }
@@ -60,7 +60,7 @@ final class HDFSFileSystemGidBuilder : HDFSFileSystemGidBuilderImpl!HDFSFileSyst
       Create object from builder.
       Returns: New object
   */
-  HDFSFileSystem build()
+  HDFSFileSystem build() nothrow
   {
     return new HDFSFileSystem(cast(void*)createGObject(HDFSFileSystem._getGType), No.Take);
   }

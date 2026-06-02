@@ -34,26 +34,26 @@ class Filter : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_filter_get_type != &gidSymbolNotFound ? gtk_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Filter self()
+  override Filter self() nothrow
   {
     return this;
   }
@@ -62,7 +62,7 @@ class Filter : gobject.object.ObjectWrap
       Get builder for [gtk.filter.Filter]
       Returns: New builder object
   */
-  static FilterGidBuilder builder()
+  static FilterGidBuilder builder() nothrow
   {
     return new FilterGidBuilder;
   }
@@ -84,7 +84,7 @@ class Filter : gobject.object.ObjectWrap
       Params:
         change = How the filter changed
   */
-  void changed(gtk.types.FilterChange change)
+  void changed(gtk.types.FilterChange change) nothrow
   {
     gtk_filter_changed(cast(GtkFilter*)this._cPtr, change);
   }
@@ -101,7 +101,7 @@ class Filter : gobject.object.ObjectWrap
       choose to omit implementing it, but [gtk.filter_list_model.FilterListModel] uses it.
       Returns: the strictness of self
   */
-  gtk.types.FilterMatch getStrictness()
+  gtk.types.FilterMatch getStrictness() nothrow
   {
     GtkFilterMatch _cretval;
     _cretval = gtk_filter_get_strictness(cast(GtkFilter*)this._cPtr);
@@ -117,7 +117,7 @@ class Filter : gobject.object.ObjectWrap
       Returns: true if the filter matches the item and a filter model should
           keep it, false if not.
   */
-  bool match(gobject.object.ObjectWrap item)
+  bool match(gobject.object.ObjectWrap item) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_filter_match(cast(GtkFilter*)this._cPtr, item ? cast(GObject*)item._cPtr(No.Dup) : null);
@@ -150,14 +150,14 @@ class Filter : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.FilterChange)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.filter.Filter)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -169,7 +169,14 @@ class Filter : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.filter.Filter.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -189,7 +196,7 @@ final class FilterGidBuilder : FilterGidBuilderImpl!FilterGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Filter build()
+  Filter build() nothrow
   {
     return new Filter(cast(void*)createGObject(Filter._getGType), No.Take);
   }

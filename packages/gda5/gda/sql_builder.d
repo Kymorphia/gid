@@ -20,26 +20,26 @@ class SqlBuilder : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_sql_builder_get_type != &gidSymbolNotFound ? gda_sql_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SqlBuilder self()
+  override SqlBuilder self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class SqlBuilder : gobject.object.ObjectWrap
       Get builder for [gda.sql_builder.SqlBuilder]
       Returns: New builder object
   */
-  static SqlBuilderGidBuilder builder()
+  static SqlBuilderGidBuilder builder() nothrow
   {
     return new SqlBuilderGidBuilder;
   }
@@ -62,7 +62,7 @@ class SqlBuilder : gobject.object.ObjectWrap
       Returns: the newly created object, or null if an error occurred (such as unsupported
         statement type)
   */
-  this(gda.types.SqlStatementType stmtType)
+  this(gda.types.SqlStatementType stmtType) nothrow
   {
     GdaSqlBuilder* _cretval;
     _cretval = gda_sql_builder_new(stmtType);
@@ -70,7 +70,7 @@ class SqlBuilder : gobject.object.ObjectWrap
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_sql_builder_error_quark();
@@ -89,7 +89,7 @@ class SqlBuilder : gobject.object.ObjectWrap
         thenArray = an array containing each THEN expression ID, having at least args_size elements
       Returns: the ID of the new expression, or `0` if there was an error
   */
-  gda.types.SqlBuilderId addCase(gda.types.SqlBuilderId testExpr, gda.types.SqlBuilderId elseExpr, gda.types.SqlBuilderId[] whenArray, gda.types.SqlBuilderId[] thenArray)
+  gda.types.SqlBuilderId addCase(gda.types.SqlBuilderId testExpr, gda.types.SqlBuilderId elseExpr, gda.types.SqlBuilderId[] whenArray, gda.types.SqlBuilderId[] thenArray) nothrow
   {
     gda.types.SqlBuilderId _retval;
     int _argsSize;
@@ -115,7 +115,7 @@ class SqlBuilder : gobject.object.ObjectWrap
         op3 = the ID of the 3rd argument (may be `0` if op needs only one or two operand)
       Returns: the ID of the new expression, or `0` if there was an error
   */
-  gda.types.SqlBuilderId addCond(gda.types.SqlOperatorType op, gda.types.SqlBuilderId op1, gda.types.SqlBuilderId op2, gda.types.SqlBuilderId op3)
+  gda.types.SqlBuilderId addCond(gda.types.SqlOperatorType op, gda.types.SqlBuilderId op1, gda.types.SqlBuilderId op2, gda.types.SqlBuilderId op3) nothrow
   {
     gda.types.SqlBuilderId _retval;
     _retval = gda_sql_builder_add_cond(cast(GdaSqlBuilder*)this._cPtr, op, op1, op2, op3);
@@ -134,7 +134,7 @@ class SqlBuilder : gobject.object.ObjectWrap
         opIds = an array of ID for the arguments (not `0`)
       Returns: the ID of the new expression, or `0` if there was an error
   */
-  gda.types.SqlBuilderId addCondV(gda.types.SqlOperatorType op, gda.types.SqlBuilderId[] opIds)
+  gda.types.SqlBuilderId addCondV(gda.types.SqlOperatorType op, gda.types.SqlBuilderId[] opIds) nothrow
   {
     gda.types.SqlBuilderId _retval;
     int _opIdsSize;
@@ -160,7 +160,7 @@ class SqlBuilder : gobject.object.ObjectWrap
         value = value to set the expression to, or null or a GDA_TYPE_NULL value to represent an SQL NULL
       Returns: the ID of the new expression, or `0` if there was an error
   */
-  gda.types.SqlBuilderId addExprValue(gda.data_handler.DataHandler dh = null, gobject.value.Value value = null)
+  gda.types.SqlBuilderId addExprValue(gda.data_handler.DataHandler dh = null, gobject.value.Value value = null) nothrow
   {
     gda.types.SqlBuilderId _retval;
     _retval = gda_sql_builder_add_expr_value(cast(GdaSqlBuilder*)this._cPtr, dh ? cast(GdaDataHandler*)(cast(gobject.object.ObjectWrap)dh)._cPtr(No.Dup) : null, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -182,7 +182,7 @@ class SqlBuilder : gobject.object.ObjectWrap
         tableName = a table name, or null
       Returns: the ID of the new expression, or `0` if there was an error
   */
-  gda.types.SqlBuilderId addFieldId(string fieldName, string tableName = null)
+  gda.types.SqlBuilderId addFieldId(string fieldName, string tableName = null) nothrow
   {
     gda.types.SqlBuilderId _retval;
     const(char)* _fieldName = fieldName.toCString(No.Alloc);
@@ -201,7 +201,7 @@ class SqlBuilder : gobject.object.ObjectWrap
         fieldName = a field name
         value = value to set the field to, or null or a GDA_TYPE_NULL value to represent an SQL NULL
   */
-  void addFieldValueAsGvalue(string fieldName, gobject.value.Value value = null)
+  void addFieldValueAsGvalue(string fieldName, gobject.value.Value value = null) nothrow
   {
     const(char)* _fieldName = fieldName.toCString(No.Alloc);
     gda_sql_builder_add_field_value_as_gvalue(cast(GdaSqlBuilder*)this._cPtr, _fieldName, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -227,7 +227,7 @@ class SqlBuilder : gobject.object.ObjectWrap
         fieldId = the ID of the field's name or definition
         valueId = the ID of the value to set the field to, or `0`
   */
-  void addFieldValueId(gda.types.SqlBuilderId fieldId, gda.types.SqlBuilderId valueId)
+  void addFieldValueId(gda.types.SqlBuilderId fieldId, gda.types.SqlBuilderId valueId) nothrow
   {
     gda_sql_builder_add_field_value_id(cast(GdaSqlBuilder*)this._cPtr, fieldId, valueId);
   }
@@ -240,7 +240,7 @@ class SqlBuilder : gobject.object.ObjectWrap
         args = an array of IDs representing the function's arguments
       Returns: the ID of the new expression, or `0` if there was an error
   */
-  gda.types.SqlBuilderId addFunction(string funcName, gda.types.SqlBuilderId[] args)
+  gda.types.SqlBuilderId addFunction(string funcName, gda.types.SqlBuilderId[] args) nothrow
   {
     gda.types.SqlBuilderId _retval;
     const(char)* _funcName = funcName.toCString(No.Alloc);
@@ -280,7 +280,7 @@ class SqlBuilder : gobject.object.ObjectWrap
         str = a string
       Returns: the ID of the new expression, or `0` if there was an error
   */
-  gda.types.SqlBuilderId addId(string str)
+  gda.types.SqlBuilderId addId(string str) nothrow
   {
     gda.types.SqlBuilderId _retval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -309,7 +309,7 @@ class SqlBuilder : gobject.object.ObjectWrap
         nullok = TRUE if the parameter can be set to null
       Returns: the ID of the new expression, or `0` if there was an error
   */
-  gda.types.SqlBuilderId addParam(string paramName, gobject.types.GType type, bool nullok)
+  gda.types.SqlBuilderId addParam(string paramName, gobject.types.GType type, bool nullok) nothrow
   {
     gda.types.SqlBuilderId _retval;
     const(char)* _paramName = paramName.toCString(No.Alloc);
@@ -323,7 +323,7 @@ class SqlBuilder : gobject.object.ObjectWrap
       Params:
         subselect = a #GdaSqlBuilder, which has to be a SELECT or compound SELECT. This will be copied.
   */
-  void compoundAddSubSelectFromBuilder(gda.sql_builder.SqlBuilder subselect)
+  void compoundAddSubSelectFromBuilder(gda.sql_builder.SqlBuilder subselect) nothrow
   {
     gda_sql_builder_compound_add_sub_select_from_builder(cast(GdaSqlBuilder*)this._cPtr, subselect ? cast(GdaSqlBuilder*)subselect._cPtr(No.Dup) : null);
   }
@@ -334,7 +334,7 @@ class SqlBuilder : gobject.object.ObjectWrap
       Params:
         compoundType = a type of compound
   */
-  void compoundSetType(gda.types.SqlStatementCompoundType compoundType)
+  void compoundSetType(gda.types.SqlStatementCompoundType compoundType) nothrow
   {
     gda_sql_builder_compound_set_type(cast(GdaSqlBuilder*)this._cPtr, compoundType);
   }
@@ -363,7 +363,7 @@ class SqlBuilder : gobject.object.ObjectWrap
         exprId = a #GdaSqlBuilderId of the expression in query
       Returns: the ID of the new expression, or `0` if there was an error
   */
-  gda.types.SqlBuilderId importExpressionFromBuilder(gda.sql_builder.SqlBuilder query, gda.types.SqlBuilderId exprId)
+  gda.types.SqlBuilderId importExpressionFromBuilder(gda.sql_builder.SqlBuilder query, gda.types.SqlBuilderId exprId) nothrow
   {
     gda.types.SqlBuilderId _retval;
     _retval = gda_sql_builder_import_expression_from_builder(cast(GdaSqlBuilder*)this._cPtr, query ? cast(GdaSqlBuilder*)query._cPtr(No.Dup) : null, exprId);
@@ -378,7 +378,7 @@ class SqlBuilder : gobject.object.ObjectWrap
         joinId = the ID of the join to modify (not `0`)
         fieldName = the name of the field to use in the join condition (not null)
   */
-  void joinAddField(gda.types.SqlBuilderId joinId, string fieldName)
+  void joinAddField(gda.types.SqlBuilderId joinId, string fieldName) nothrow
   {
     const(char)* _fieldName = fieldName.toCString(No.Alloc);
     gda_sql_builder_join_add_field(cast(GdaSqlBuilder*)this._cPtr, joinId, _fieldName);
@@ -397,7 +397,7 @@ class SqlBuilder : gobject.object.ObjectWrap
         alias_ = an alias (eg. for the "AS" clause), or null
       Returns: the ID of the added field, or `0` if there was an error
   */
-  gda.types.SqlBuilderId selectAddField(string fieldName, string tableName = null, string alias_ = null)
+  gda.types.SqlBuilderId selectAddField(string fieldName, string tableName = null, string alias_ = null) nothrow
   {
     gda.types.SqlBuilderId _retval;
     const(char)* _fieldName = fieldName.toCString(No.Alloc);
@@ -415,7 +415,7 @@ class SqlBuilder : gobject.object.ObjectWrap
         alias_ = the alias to give to the target, or null
       Returns: the ID of the new target, or `0` if there was an error
   */
-  gda.types.SqlBuilderId selectAddTarget(string tableName, string alias_ = null)
+  gda.types.SqlBuilderId selectAddTarget(string tableName, string alias_ = null) nothrow
   {
     gda.types.SqlBuilderId _retval;
     const(char)* _tableName = tableName.toCString(No.Alloc);
@@ -434,7 +434,7 @@ class SqlBuilder : gobject.object.ObjectWrap
         alias_ = the alias to give to the target, or null
       Returns: the ID of the new (or existing) target, or `0` if there was an error
   */
-  gda.types.SqlBuilderId selectAddTargetId(gda.types.SqlBuilderId tableId, string alias_ = null)
+  gda.types.SqlBuilderId selectAddTargetId(gda.types.SqlBuilderId tableId, string alias_ = null) nothrow
   {
     gda.types.SqlBuilderId _retval;
     const(char)* _alias_ = alias_.toCString(No.Alloc);
@@ -450,7 +450,7 @@ class SqlBuilder : gobject.object.ObjectWrap
       Params:
         exprId = the ID of the expression to set use in the GROUP BY clause, or 0 to unset any previous GROUP BY clause
   */
-  void selectGroupBy(gda.types.SqlBuilderId exprId)
+  void selectGroupBy(gda.types.SqlBuilderId exprId) nothrow
   {
     gda_sql_builder_select_group_by(cast(GdaSqlBuilder*)this._cPtr, exprId);
   }
@@ -463,7 +463,7 @@ class SqlBuilder : gobject.object.ObjectWrap
         asc = true for an ascending sorting
         collationName = name of the collation to use when sorting, or null
   */
-  void selectOrderBy(gda.types.SqlBuilderId exprId, bool asc, string collationName = null)
+  void selectOrderBy(gda.types.SqlBuilderId exprId, bool asc, string collationName = null) nothrow
   {
     const(char)* _collationName = collationName.toCString(No.Alloc);
     gda_sql_builder_select_order_by(cast(GdaSqlBuilder*)this._cPtr, exprId, asc, _collationName);
@@ -482,7 +482,7 @@ class SqlBuilder : gobject.object.ObjectWrap
         exprId = the ID of the DISTINCT ON expression, or `0` if no expression is to be used. It is ignored
                     if distinct is false.
   */
-  void selectSetDistinct(bool distinct, gda.types.SqlBuilderId exprId)
+  void selectSetDistinct(bool distinct, gda.types.SqlBuilderId exprId) nothrow
   {
     gda_sql_builder_select_set_distinct(cast(GdaSqlBuilder*)this._cPtr, distinct, exprId);
   }
@@ -495,7 +495,7 @@ class SqlBuilder : gobject.object.ObjectWrap
       Params:
         condId = the ID of the expression to set as HAVING condition, or 0 to unset any previous HAVING condition
   */
-  void selectSetHaving(gda.types.SqlBuilderId condId)
+  void selectSetHaving(gda.types.SqlBuilderId condId) nothrow
   {
     gda_sql_builder_select_set_having(cast(GdaSqlBuilder*)this._cPtr, condId);
   }
@@ -513,7 +513,7 @@ class SqlBuilder : gobject.object.ObjectWrap
         limitCountExprId = the ID of the LIMIT expression, or `0`
         limitOffsetExprId = the ID of the OFFSET expression, or `0`
   */
-  void selectSetLimit(gda.types.SqlBuilderId limitCountExprId, gda.types.SqlBuilderId limitOffsetExprId)
+  void selectSetLimit(gda.types.SqlBuilderId limitCountExprId, gda.types.SqlBuilderId limitOffsetExprId) nothrow
   {
     gda_sql_builder_select_set_limit(cast(GdaSqlBuilder*)this._cPtr, limitCountExprId, limitOffsetExprId);
   }
@@ -526,7 +526,7 @@ class SqlBuilder : gobject.object.ObjectWrap
       Params:
         tableName = a table name
   */
-  void setTable(string tableName)
+  void setTable(string tableName) nothrow
   {
     const(char)* _tableName = tableName.toCString(No.Alloc);
     gda_sql_builder_set_table(cast(GdaSqlBuilder*)this._cPtr, _tableName);
@@ -540,7 +540,7 @@ class SqlBuilder : gobject.object.ObjectWrap
       Params:
         condId = the ID of the expression to set as WHERE condition, or 0 to unset any previous WHERE condition
   */
-  void setWhere(gda.types.SqlBuilderId condId)
+  void setWhere(gda.types.SqlBuilderId condId) nothrow
   {
     gda_sql_builder_set_where(cast(GdaSqlBuilder*)this._cPtr, condId);
   }
@@ -558,7 +558,7 @@ final class SqlBuilderGidBuilder : SqlBuilderGidBuilderImpl!SqlBuilderGidBuilder
       Create object from builder.
       Returns: New object
   */
-  SqlBuilder build()
+  SqlBuilder build() nothrow
   {
     return new SqlBuilder(cast(void*)createGObject(SqlBuilder._getGType), Yes.Take);
   }
@@ -566,12 +566,12 @@ final class SqlBuilderGidBuilder : SqlBuilderGidBuilderImpl!SqlBuilderGidBuilder
 
 class SqlBuilderException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.sql_builder.SqlBuilder.errorQuark, cast(int)code, msg);
   }

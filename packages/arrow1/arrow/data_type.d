@@ -15,26 +15,26 @@ class DataType : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_data_type_get_type != &gidSymbolNotFound ? garrow_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DataType self()
+  override DataType self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class DataType : gobject.object.ObjectWrap
       Get builder for [arrow.data_type.DataType]
       Returns: New builder object
   */
-  static DataTypeGidBuilder builder()
+  static DataTypeGidBuilder builder() nothrow
   {
     return new DataTypeGidBuilder;
   }
@@ -61,7 +61,7 @@ class DataType : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equal(arrow.data_type.DataType otherDataType)
+  bool equal(arrow.data_type.DataType otherDataType) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_data_type_equal(cast(GArrowDataType*)this._cPtr, otherDataType ? cast(GArrowDataType*)otherDataType._cPtr(No.Dup) : null);
@@ -79,7 +79,7 @@ class DataType : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.types.Type getId()
+  arrow.types.Type getId() nothrow
   {
     GArrowType _cretval;
     _cretval = garrow_data_type_get_id(cast(GArrowDataType*)this._cPtr);
@@ -88,7 +88,7 @@ class DataType : gobject.object.ObjectWrap
   }
 
   /** */
-  string getName()
+  string getName() nothrow
   {
     char* _cretval;
     _cretval = garrow_data_type_get_name(cast(GArrowDataType*)this._cPtr);
@@ -97,7 +97,7 @@ class DataType : gobject.object.ObjectWrap
   }
 
   /** */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = garrow_data_type_to_string(cast(GArrowDataType*)this._cPtr);
@@ -111,7 +111,7 @@ class DataTypeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T dataType(void* propval)
+  T dataType(void* propval) nothrow
   {
     return setProperty("data-type", propval);
   }
@@ -124,7 +124,7 @@ final class DataTypeGidBuilder : DataTypeGidBuilderImpl!DataTypeGidBuilder
       Create object from builder.
       Returns: New object
   */
-  DataType build()
+  DataType build() nothrow
   {
     return new DataType(cast(void*)createGObject(DataType._getGType), No.Take);
   }

@@ -16,26 +16,26 @@ class StreamChunk : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_stream_chunk_get_type != &gidSymbolNotFound ? gaflight_stream_chunk_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StreamChunk self()
+  override StreamChunk self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class StreamChunk : gobject.object.ObjectWrap
       Get builder for [arrowflight.stream_chunk.StreamChunk]
       Returns: New builder object
   */
-  static StreamChunkGidBuilder builder()
+  static StreamChunkGidBuilder builder() nothrow
   {
     return new StreamChunkGidBuilder;
   }
@@ -52,7 +52,7 @@ class StreamChunk : gobject.object.ObjectWrap
   alias getData = gobject.object.ObjectWrap.getData;
 
   /** */
-  arrow.record_batch.RecordBatch getData()
+  arrow.record_batch.RecordBatch getData() nothrow
   {
     GArrowRecordBatch* _cretval;
     _cretval = gaflight_stream_chunk_get_data(cast(GAFlightStreamChunk*)this._cPtr);
@@ -61,7 +61,7 @@ class StreamChunk : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.buffer.Buffer getMetadata()
+  arrow.buffer.Buffer getMetadata() nothrow
   {
     GArrowBuffer* _cretval;
     _cretval = gaflight_stream_chunk_get_metadata(cast(GAFlightStreamChunk*)this._cPtr);
@@ -75,7 +75,7 @@ class StreamChunkGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T chunk(void* propval)
+  T chunk(void* propval) nothrow
   {
     return setProperty("chunk", propval);
   }
@@ -88,7 +88,7 @@ final class StreamChunkGidBuilder : StreamChunkGidBuilderImpl!StreamChunkGidBuil
       Create object from builder.
       Returns: New object
   */
-  StreamChunk build()
+  StreamChunk build() nothrow
   {
     return new StreamChunk(cast(void*)createGObject(StreamChunk._getGType), No.Take);
   }

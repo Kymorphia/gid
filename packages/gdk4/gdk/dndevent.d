@@ -17,11 +17,8 @@ class DNDEvent : gdk.event.Event
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.dndevent.DNDEvent");
-
     super(cast(GdkEvent*)ptr, take);
   }
 
@@ -29,7 +26,7 @@ class DNDEvent : gdk.event.Event
       Gets the [gdk.drop.Drop] object from a DND event.
       Returns: the drop
   */
-  gdk.drop.Drop getDrop()
+  gdk.drop.Drop getDrop() nothrow
   {
     GdkDrop* _cretval;
     _cretval = gdk_dnd_event_get_drop(cast(GdkEvent*)this._cPtr);

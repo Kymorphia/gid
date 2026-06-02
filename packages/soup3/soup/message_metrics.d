@@ -28,32 +28,32 @@ class MessageMetrics : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_message_metrics_get_type != &gidSymbolNotFound ? soup_message_metrics_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MessageMetrics self()
+  override MessageMetrics self() nothrow
   {
     return this;
   }
@@ -62,7 +62,7 @@ class MessageMetrics : gobject.boxed.Boxed
       Copies metrics.
       Returns: a copy of metrics
   */
-  soup.message_metrics.MessageMetrics copy()
+  soup.message_metrics.MessageMetrics copy() nothrow
   {
     SoupMessageMetrics* _cretval;
     _cretval = soup_message_metrics_copy(cast(SoupMessageMetrics*)this._cPtr);
@@ -80,7 +80,7 @@ class MessageMetrics : gobject.boxed.Boxed
       cache).
       Returns: the connection end time
   */
-  ulong getConnectEnd()
+  ulong getConnectEnd() nothrow
   {
     ulong _retval;
     _retval = soup_message_metrics_get_connect_end(cast(SoupMessageMetrics*)this._cPtr);
@@ -96,7 +96,7 @@ class MessageMetrics : gobject.boxed.Boxed
       cache).
       Returns: the connection start time
   */
-  ulong getConnectStart()
+  ulong getConnectStart() nothrow
   {
     ulong _retval;
     _retval = soup_message_metrics_get_connect_start(cast(SoupMessageMetrics*)this._cPtr);
@@ -112,7 +112,7 @@ class MessageMetrics : gobject.boxed.Boxed
       cache).
       Returns: the domain lookup end time
   */
-  ulong getDnsEnd()
+  ulong getDnsEnd() nothrow
   {
     ulong _retval;
     _retval = soup_message_metrics_get_dns_end(cast(SoupMessageMetrics*)this._cPtr);
@@ -128,7 +128,7 @@ class MessageMetrics : gobject.boxed.Boxed
       cache).
       Returns: the domain lookup start time
   */
-  ulong getDnsStart()
+  ulong getDnsStart() nothrow
   {
     ulong _retval;
     _retval = soup_message_metrics_get_dns_start(cast(SoupMessageMetrics*)this._cPtr);
@@ -140,7 +140,7 @@ class MessageMetrics : gobject.boxed.Boxed
       fetch a resource either from a remote server or local disk cache.
       Returns: the fetch start time
   */
-  ulong getFetchStart()
+  ulong getFetchStart() nothrow
   {
     ulong _retval;
     _retval = soup_message_metrics_get_fetch_start(cast(SoupMessageMetrics*)this._cPtr);
@@ -157,7 +157,7 @@ class MessageMetrics : gobject.boxed.Boxed
       intermediate value if called before.
       Returns: the request body bytes sent
   */
-  ulong getRequestBodyBytesSent()
+  ulong getRequestBodyBytesSent() nothrow
   {
     ulong _retval;
     _retval = soup_message_metrics_get_request_body_bytes_sent(cast(SoupMessageMetrics*)this._cPtr);
@@ -172,7 +172,7 @@ class MessageMetrics : gobject.boxed.Boxed
       emitted, but you might get an intermediate value if called before.
       Returns: the request body size
   */
-  ulong getRequestBodySize()
+  ulong getRequestBodySize() nothrow
   {
     ulong _retval;
     _retval = soup_message_metrics_get_request_body_size(cast(SoupMessageMetrics*)this._cPtr);
@@ -186,7 +186,7 @@ class MessageMetrics : gobject.boxed.Boxed
       is emitted, but you might get an intermediate value if called before.
       Returns: the request headers bytes sent
   */
-  ulong getRequestHeaderBytesSent()
+  ulong getRequestHeaderBytesSent() nothrow
   {
     ulong _retval;
     _retval = soup_message_metrics_get_request_header_bytes_sent(cast(SoupMessageMetrics*)this._cPtr);
@@ -198,7 +198,7 @@ class MessageMetrics : gobject.boxed.Boxed
       request of the resource from the server or the local disk cache.
       Returns: the request start time
   */
-  ulong getRequestStart()
+  ulong getRequestStart() nothrow
   {
     ulong _retval;
     _retval = soup_message_metrics_get_request_start(cast(SoupMessageMetrics*)this._cPtr);
@@ -213,7 +213,7 @@ class MessageMetrics : gobject.boxed.Boxed
       resources loaded from the disk cache this value is always 0.
       Returns: the response body bytes received
   */
-  ulong getResponseBodyBytesReceived()
+  ulong getResponseBodyBytesReceived() nothrow
   {
     ulong _retval;
     _retval = soup_message_metrics_get_response_body_bytes_received(cast(SoupMessageMetrics*)this._cPtr);
@@ -230,7 +230,7 @@ class MessageMetrics : gobject.boxed.Boxed
       might get an intermediate value if called before.
       Returns: the response body size
   */
-  ulong getResponseBodySize()
+  ulong getResponseBodySize() nothrow
   {
     ulong _retval;
     _retval = soup_message_metrics_get_response_body_size(cast(SoupMessageMetrics*)this._cPtr);
@@ -245,7 +245,7 @@ class MessageMetrics : gobject.boxed.Boxed
       fetch is aborted.
       Returns: the response end time
   */
-  ulong getResponseEnd()
+  ulong getResponseEnd() nothrow
   {
     ulong _retval;
     _retval = soup_message_metrics_get_response_end(cast(SoupMessageMetrics*)this._cPtr);
@@ -260,7 +260,7 @@ class MessageMetrics : gobject.boxed.Boxed
       For resources loaded from the disk cache this value is always 0.
       Returns: the response headers bytes received
   */
-  ulong getResponseHeaderBytesReceived()
+  ulong getResponseHeaderBytesReceived() nothrow
   {
     ulong _retval;
     _retval = soup_message_metrics_get_response_header_bytes_received(cast(SoupMessageMetrics*)this._cPtr);
@@ -272,7 +272,7 @@ class MessageMetrics : gobject.boxed.Boxed
       bytes of the response from the server or the local disk cache.
       Returns: the response start time
   */
-  ulong getResponseStart()
+  ulong getResponseStart() nothrow
   {
     ulong _retval;
     _retval = soup_message_metrics_get_response_start(cast(SoupMessageMetrics*)this._cPtr);
@@ -288,7 +288,7 @@ class MessageMetrics : gobject.boxed.Boxed
       loaded from the local disk cache).
       Returns: the tls start time
   */
-  ulong getTlsStart()
+  ulong getTlsStart() nothrow
   {
     ulong _retval;
     _retval = soup_message_metrics_get_tls_start(cast(SoupMessageMetrics*)this._cPtr);

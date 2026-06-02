@@ -37,26 +37,26 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_layout_get_type != &gidSymbolNotFound ? gtk_layout_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Layout self()
+  override Layout self() nothrow
   {
     return this;
   }
@@ -65,31 +65,31 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
       Get builder for [gtk.layout.Layout]
       Returns: New builder object
   */
-  static LayoutGidBuilder builder()
+  static LayoutGidBuilder builder() nothrow
   {
     return new LayoutGidBuilder;
   }
 
   /** */
-  @property uint height()
+  @property uint height() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("height");
   }
 
   /** */
-  @property void height(uint propval)
+  @property void height(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("height", propval);
   }
 
   /** */
-  @property uint width()
+  @property uint width() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("width");
   }
 
   /** */
-  @property void width(uint propval)
+  @property void width(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("width", propval);
   }
@@ -106,7 +106,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
         vadjustment = vertical scroll adjustment, or null
       Returns: a new #GtkLayout
   */
-  this(gtk.adjustment.Adjustment hadjustment = null, gtk.adjustment.Adjustment vadjustment = null)
+  this(gtk.adjustment.Adjustment hadjustment = null, gtk.adjustment.Adjustment vadjustment = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_layout_new(hadjustment ? cast(GtkAdjustment*)hadjustment._cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment._cPtr(No.Dup) : null);
@@ -117,7 +117,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
       Retrieve the bin window of the layout used for drawing operations.
       Returns: a #GdkWindow
   */
-  gdk.window.Window getBinWindow()
+  gdk.window.Window getBinWindow() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gtk_layout_get_bin_window(cast(GtkLayout*)this._cPtr);
@@ -136,7 +136,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   
       Deprecated: Use [gtk.scrollable.Scrollable.getHadjustment]
   */
-  gtk.adjustment.Adjustment getHadjustment()
+  gtk.adjustment.Adjustment getHadjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_layout_get_hadjustment(cast(GtkLayout*)this._cPtr);
@@ -155,7 +155,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
         height = location to store the height set on
               layout, or null
   */
-  void getSize(out uint width, out uint height)
+  void getSize(out uint width, out uint height) nothrow
   {
     gtk_layout_get_size(cast(GtkLayout*)this._cPtr, cast(uint*)&width, cast(uint*)&height);
   }
@@ -171,7 +171,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   
       Deprecated: Use [gtk.scrollable.Scrollable.getVadjustment]
   */
-  gtk.adjustment.Adjustment getVadjustment()
+  gtk.adjustment.Adjustment getVadjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_layout_get_vadjustment(cast(GtkLayout*)this._cPtr);
@@ -187,7 +187,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
         x = X position to move to
         y = Y position to move to
   */
-  void move(gtk.widget.Widget childWidget, int x, int y)
+  void move(gtk.widget.Widget childWidget, int x, int y) nothrow
   {
     gtk_layout_move(cast(GtkLayout*)this._cPtr, childWidget ? cast(GtkWidget*)childWidget._cPtr(No.Dup) : null, x, y);
   }
@@ -201,7 +201,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
         x = X position of child widget
         y = Y position of child widget
   */
-  void put(gtk.widget.Widget childWidget, int x, int y)
+  void put(gtk.widget.Widget childWidget, int x, int y) nothrow
   {
     gtk_layout_put(cast(GtkLayout*)this._cPtr, childWidget ? cast(GtkWidget*)childWidget._cPtr(No.Dup) : null, x, y);
   }
@@ -216,7 +216,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   
       Deprecated: Use [gtk.scrollable.Scrollable.setHadjustment]
   */
-  void setHadjustment(gtk.adjustment.Adjustment adjustment = null)
+  void setHadjustment(gtk.adjustment.Adjustment adjustment = null) nothrow
   {
     gtk_layout_set_hadjustment(cast(GtkLayout*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
@@ -228,7 +228,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
         width = width of entire scrollable area
         height = height of entire scrollable area
   */
-  void setSize(uint width, uint height)
+  void setSize(uint width, uint height) nothrow
   {
     gtk_layout_set_size(cast(GtkLayout*)this._cPtr, width, height);
   }
@@ -243,7 +243,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   
       Deprecated: Use [gtk.scrollable.Scrollable.setVadjustment]
   */
-  void setVadjustment(gtk.adjustment.Adjustment adjustment = null)
+  void setVadjustment(gtk.adjustment.Adjustment adjustment = null) nothrow
   {
     gtk_layout_set_vadjustment(cast(GtkLayout*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
@@ -256,13 +256,13 @@ class LayoutGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.scr
   mixin ScrollableGidBuilderT!();
 
   /** */
-  T height(uint propval)
+  T height(uint propval) nothrow
   {
     return setProperty("height", propval);
   }
 
   /** */
-  T width(uint propval)
+  T width(uint propval) nothrow
   {
     return setProperty("width", propval);
   }
@@ -275,7 +275,7 @@ final class LayoutGidBuilder : LayoutGidBuilderImpl!LayoutGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Layout build()
+  Layout build() nothrow
   {
     return new Layout(cast(void*)createGObject(Layout._getGType), No.Take);
   }

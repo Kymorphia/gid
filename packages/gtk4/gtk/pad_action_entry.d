@@ -15,11 +15,8 @@ class PadActionEntry
   GtkPadActionEntry _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.pad_action_entry.PadActionEntry");
-
     _cInstance = *cast(GtkPadActionEntry*)ptr;
 
     if (take)
@@ -27,7 +24,7 @@ class PadActionEntry
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -36,7 +33,7 @@ class PadActionEntry
       Get `type` field.
       Returns: the type of pad feature that will trigger this action entry.
   */
-  @property gtk.types.PadActionType type()
+  @property gtk.types.PadActionType type() nothrow
   {
     return cast(gtk.types.PadActionType)(cast(GtkPadActionEntry*)this._cPtr).type;
   }
@@ -46,7 +43,7 @@ class PadActionEntry
       Params:
         propval = the type of pad feature that will trigger this action entry.
   */
-  @property void type(gtk.types.PadActionType propval)
+  @property void type(gtk.types.PadActionType propval) nothrow
   {
     (cast(GtkPadActionEntry*)this._cPtr).type = cast(GtkPadActionType)propval;
   }
@@ -56,7 +53,7 @@ class PadActionEntry
       Returns: the 0-indexed button/ring/strip number that will trigger this action
           entry.
   */
-  @property int index()
+  @property int index() nothrow
   {
     return (cast(GtkPadActionEntry*)this._cPtr).index;
   }
@@ -67,7 +64,7 @@ class PadActionEntry
         propval = the 0-indexed button/ring/strip number that will trigger this action
             entry.
   */
-  @property void index(int propval)
+  @property void index(int propval) nothrow
   {
     (cast(GtkPadActionEntry*)this._cPtr).index = propval;
   }
@@ -76,7 +73,7 @@ class PadActionEntry
       Get `mode` field.
       Returns: the mode that will trigger this action entry, or -1 for all modes.
   */
-  @property int mode()
+  @property int mode() nothrow
   {
     return (cast(GtkPadActionEntry*)this._cPtr).mode;
   }
@@ -86,7 +83,7 @@ class PadActionEntry
       Params:
         propval = the mode that will trigger this action entry, or -1 for all modes.
   */
-  @property void mode(int propval)
+  @property void mode(int propval) nothrow
   {
     (cast(GtkPadActionEntry*)this._cPtr).mode = propval;
   }
@@ -96,7 +93,7 @@ class PadActionEntry
       Returns: Human readable description of this action entry, this string should
           be deemed user-visible.
   */
-  @property string label()
+  @property string label() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkPadActionEntry*)this._cPtr).label);
   }
@@ -107,7 +104,7 @@ class PadActionEntry
         propval = Human readable description of this action entry, this string should
             be deemed user-visible.
   */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkPadActionEntry*)this._cPtr).label);
     dToC(propval, cast(void*)&(cast(GtkPadActionEntry*)this._cPtr).label);
@@ -117,7 +114,7 @@ class PadActionEntry
       Get `actionName` field.
       Returns: action name that will be activated in the [gio.action_group.ActionGroup].
   */
-  @property string actionName()
+  @property string actionName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkPadActionEntry*)this._cPtr).actionName);
   }
@@ -127,7 +124,7 @@ class PadActionEntry
       Params:
         propval = action name that will be activated in the [gio.action_group.ActionGroup].
   */
-  @property void actionName(string propval)
+  @property void actionName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkPadActionEntry*)this._cPtr).actionName);
     dToC(propval, cast(void*)&(cast(GtkPadActionEntry*)this._cPtr).actionName);

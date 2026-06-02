@@ -124,32 +124,32 @@ class Structure : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_structure_get_type != &gidSymbolNotFound ? gst_structure_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Structure self()
+  override Structure self() nothrow
   {
     return this;
   }
@@ -158,7 +158,7 @@ class Structure : gobject.boxed.Boxed
       Get `type` field.
       Returns: the GType of a structure
   */
-  @property gobject.types.GType type()
+  @property gobject.types.GType type() nothrow
   {
     return (cast(GstStructure*)this._cPtr).type;
   }
@@ -168,7 +168,7 @@ class Structure : gobject.boxed.Boxed
       Params:
         propval = the GType of a structure
   */
-  @property void type(gobject.types.GType propval)
+  @property void type(gobject.types.GType propval) nothrow
   {
     (cast(GstStructure*)this._cPtr).type = propval;
   }
@@ -187,7 +187,7 @@ class Structure : gobject.boxed.Boxed
             when the string could not be parsed. Free with
             [gst.structure.Structure.free] after use.
   */
-  static gst.structure.Structure fromString(string string_, out string end)
+  static gst.structure.Structure fromString(string string_, out string end) nothrow
   {
     GstStructure* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
@@ -209,7 +209,7 @@ class Structure : gobject.boxed.Boxed
         name = name of new structure
       Returns: a new, empty #GstStructure
   */
-  static gst.structure.Structure newEmpty(string name)
+  static gst.structure.Structure newEmpty(string name) nothrow
   {
     GstStructure* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -236,7 +236,7 @@ class Structure : gobject.boxed.Boxed
             when the string could not be parsed. Free with
             [gst.structure.Structure.free] after use.
   */
-  static gst.structure.Structure newFromString(string string_)
+  static gst.structure.Structure newFromString(string string_) nothrow
   {
     GstStructure* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
@@ -254,7 +254,7 @@ class Structure : gobject.boxed.Boxed
         quark = name of new structure
       Returns: a new, empty #GstStructure
   */
-  static gst.structure.Structure newIdEmpty(glib.types.Quark quark)
+  static gst.structure.Structure newIdEmpty(glib.types.Quark quark) nothrow
   {
     GstStructure* _cretval;
     _cretval = gst_structure_new_id_empty(quark);
@@ -270,7 +270,7 @@ class Structure : gobject.boxed.Boxed
         struct2 = a #GstStructure
       Returns: true if intersection would not be empty
   */
-  bool canIntersect(gst.structure.Structure struct2)
+  bool canIntersect(gst.structure.Structure struct2) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_structure_can_intersect(cast(const(GstStructure)*)this._cPtr, struct2 ? cast(const(GstStructure)*)struct2._cPtr(No.Dup) : null);
@@ -283,7 +283,7 @@ class Structure : gobject.boxed.Boxed
       Free-function: gst_structure_free
       Returns: a new #GstStructure.
   */
-  gst.structure.Structure copy()
+  gst.structure.Structure copy() nothrow
   {
     GstStructure* _cretval;
     _cretval = gst_structure_copy(cast(const(GstStructure)*)this._cPtr);
@@ -301,14 +301,21 @@ class Structure : gobject.boxed.Boxed
       Params:
         func = a function to call for each field
   */
-  void filterAndMapInPlace(gst.types.StructureFilterMapFunc func)
+  void filterAndMapInPlace(gst.types.StructureFilterMapFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(GQuark fieldId, GValue* value, void* userData)
+    extern(C) gboolean _funcCallback(GQuark fieldId, GValue* value, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gst.types.StructureFilterMapFunc*)userData;
 
-      _dretval = (*_dlg)(fieldId, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(fieldId, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.StructureFilterMapFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -322,7 +329,7 @@ class Structure : gobject.boxed.Boxed
       Fixate all values in structure using [gst.global.valueFixate].
       structure will be modified in-place and should be writable.
   */
-  void fixate()
+  void fixate() nothrow
   {
     gst_structure_fixate(cast(GstStructure*)this._cPtr);
   }
@@ -334,7 +341,7 @@ class Structure : gobject.boxed.Boxed
         fieldName = a field in structure
       Returns: true if the structure field could be fixated
   */
-  bool fixateField(string fieldName)
+  bool fixateField(string fieldName) nothrow
   {
     bool _retval;
     const(char)* _fieldName = fieldName.toCString(No.Alloc);
@@ -351,7 +358,7 @@ class Structure : gobject.boxed.Boxed
         target = the target value of the fixation
       Returns: true if the structure could be fixated
   */
-  bool fixateFieldBoolean(string fieldName, bool target)
+  bool fixateFieldBoolean(string fieldName, bool target) nothrow
   {
     bool _retval;
     const(char)* _fieldName = fieldName.toCString(No.Alloc);
@@ -368,7 +375,7 @@ class Structure : gobject.boxed.Boxed
         target = the target value of the fixation
       Returns: true if the structure could be fixated
   */
-  bool fixateFieldNearestDouble(string fieldName, double target)
+  bool fixateFieldNearestDouble(string fieldName, double target) nothrow
   {
     bool _retval;
     const(char)* _fieldName = fieldName.toCString(No.Alloc);
@@ -387,7 +394,7 @@ class Structure : gobject.boxed.Boxed
         targetDenominator = The denominator of the target value of the fixation
       Returns: true if the structure could be fixated
   */
-  bool fixateFieldNearestFraction(string fieldName, int targetNumerator, int targetDenominator)
+  bool fixateFieldNearestFraction(string fieldName, int targetNumerator, int targetDenominator) nothrow
   {
     bool _retval;
     const(char)* _fieldName = fieldName.toCString(No.Alloc);
@@ -404,7 +411,7 @@ class Structure : gobject.boxed.Boxed
         target = the target value of the fixation
       Returns: true if the structure could be fixated
   */
-  bool fixateFieldNearestInt(string fieldName, int target)
+  bool fixateFieldNearestInt(string fieldName, int target) nothrow
   {
     bool _retval;
     const(char)* _fieldName = fieldName.toCString(No.Alloc);
@@ -421,7 +428,7 @@ class Structure : gobject.boxed.Boxed
         target = the target value of the fixation
       Returns: true if the structure could be fixated
   */
-  bool fixateFieldString(string fieldName, string target)
+  bool fixateFieldString(string fieldName, string target) nothrow
   {
     bool _retval;
     const(char)* _fieldName = fieldName.toCString(No.Alloc);
@@ -440,14 +447,21 @@ class Structure : gobject.boxed.Boxed
       Returns: true if the supplied function returns true For each of the fields,
         false otherwise.
   */
-  bool foreach_(gst.types.StructureForeachFunc func)
+  bool foreach_(gst.types.StructureForeachFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(GQuark fieldId, const(GValue)* value, void* userData)
+    extern(C) gboolean _funcCallback(GQuark fieldId, const(GValue)* value, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gst.types.StructureForeachFunc*)userData;
 
-      _dretval = (*_dlg)(fieldId, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(fieldId, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.StructureForeachFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -472,7 +486,7 @@ class Structure : gobject.boxed.Boxed
         with fieldname or the existing field did not contain a `GST_TYPE_ARRAY`,
         this function returns false.
   */
-  bool getArray(string fieldname, out gobject.value_array.ValueArray array)
+  bool getArray(string fieldname, out gobject.value_array.ValueArray array) nothrow
   {
     bool _retval;
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
@@ -494,7 +508,7 @@ class Structure : gobject.boxed.Boxed
         with fieldname or the existing field did not contain a boolean, this
         function returns false.
   */
-  bool getBoolean(string fieldname, out bool value)
+  bool getBoolean(string fieldname, out bool value) nothrow
   {
     bool _retval;
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
@@ -516,7 +530,7 @@ class Structure : gobject.boxed.Boxed
         with fieldname or the existing field did not contain a #GstClockTime, this
         function returns false.
   */
-  bool getClockTime(string fieldname, out gst.types.ClockTime value)
+  bool getClockTime(string fieldname, out gst.types.ClockTime value) nothrow
   {
     bool _retval;
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
@@ -541,7 +555,7 @@ class Structure : gobject.boxed.Boxed
         with fieldname or the existing field did not contain a data, this function
         returns false.
   */
-  bool getDate(string fieldname, out glib.date.Date value)
+  bool getDate(string fieldname, out glib.date.Date value) nothrow
   {
     bool _retval;
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
@@ -568,7 +582,7 @@ class Structure : gobject.boxed.Boxed
         with fieldname or the existing field did not contain a data, this function
         returns false.
   */
-  bool getDateTime(string fieldname, out gst.date_time.DateTime value)
+  bool getDateTime(string fieldname, out gst.date_time.DateTime value) nothrow
   {
     bool _retval;
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
@@ -590,7 +604,7 @@ class Structure : gobject.boxed.Boxed
         with fieldname or the existing field did not contain a double, this
         function returns false.
   */
-  bool getDouble(string fieldname, out double value)
+  bool getDouble(string fieldname, out double value) nothrow
   {
     bool _retval;
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
@@ -611,7 +625,7 @@ class Structure : gobject.boxed.Boxed
         with fieldname or the existing field did not contain an enum of the given
         type, this function returns false.
   */
-  bool getEnum(string fieldname, gobject.types.GType enumtype, out int value)
+  bool getEnum(string fieldname, gobject.types.GType enumtype, out int value) nothrow
   {
     bool _retval;
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
@@ -628,7 +642,7 @@ class Structure : gobject.boxed.Boxed
         fieldname = the name of the field
       Returns: the #GValue of the field
   */
-  gobject.types.GType getFieldType(string fieldname)
+  gobject.types.GType getFieldType(string fieldname) nothrow
   {
     gobject.types.GType _retval;
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
@@ -649,7 +663,7 @@ class Structure : gobject.boxed.Boxed
         with fieldname or the existing field did not contain flags or
         did not contain flags of the given type, this function returns false.
   */
-  bool getFlags(string fieldname, gobject.types.GType flagsType, out uint value)
+  bool getFlags(string fieldname, gobject.types.GType flagsType, out uint value) nothrow
   {
     bool _retval;
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
@@ -669,7 +683,7 @@ class Structure : gobject.boxed.Boxed
         with fieldname or the existing field did not contain a GstFlagSet, this
         function returns false.
   */
-  bool getFlagset(string fieldname, out uint valueFlags, out uint valueMask)
+  bool getFlagset(string fieldname, out uint valueFlags, out uint valueMask) nothrow
   {
     bool _retval;
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
@@ -690,7 +704,7 @@ class Structure : gobject.boxed.Boxed
         with fieldname or the existing field did not contain a GstFraction, this
         function returns false.
   */
-  bool getFraction(string fieldname, out int valueNumerator, out int valueDenominator)
+  bool getFraction(string fieldname, out int valueNumerator, out int valueDenominator) nothrow
   {
     bool _retval;
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
@@ -710,7 +724,7 @@ class Structure : gobject.boxed.Boxed
         with fieldname or the existing field did not contain an int, this function
         returns false.
   */
-  bool getInt(string fieldname, out int value)
+  bool getInt(string fieldname, out int value) nothrow
   {
     bool _retval;
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
@@ -730,7 +744,7 @@ class Structure : gobject.boxed.Boxed
         with fieldname or the existing field did not contain a #gint64, this function
         returns false.
   */
-  bool getInt64(string fieldname, out long value)
+  bool getInt64(string fieldname, out long value) nothrow
   {
     bool _retval;
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
@@ -751,7 +765,7 @@ class Structure : gobject.boxed.Boxed
         with fieldname or the existing field did not contain a `GST_TYPE_LIST`, this
         function returns false.
   */
-  bool getList(string fieldname, out gobject.value_array.ValueArray array)
+  bool getList(string fieldname, out gobject.value_array.ValueArray array) nothrow
   {
     bool _retval;
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
@@ -765,7 +779,7 @@ class Structure : gobject.boxed.Boxed
       Get the name of structure as a string.
       Returns: the name of the structure.
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_structure_get_name(cast(const(GstStructure)*)this._cPtr);
@@ -777,7 +791,7 @@ class Structure : gobject.boxed.Boxed
       Get the name of structure as a GQuark.
       Returns: the quark representing the name of the structure.
   */
-  glib.types.Quark getNameId()
+  glib.types.Quark getNameId() nothrow
   {
     glib.types.Quark _retval;
     _retval = gst_structure_get_name_id(cast(const(GstStructure)*)this._cPtr);
@@ -797,7 +811,7 @@ class Structure : gobject.boxed.Boxed
       Returns: a pointer to the string or null when the
         field did not exist or did not contain a string.
   */
-  string getString(string fieldname)
+  string getString(string fieldname) nothrow
   {
     const(char)* _cretval;
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
@@ -818,7 +832,7 @@ class Structure : gobject.boxed.Boxed
         with fieldname or the existing field did not contain a uint, this function
         returns false.
   */
-  bool getUint(string fieldname, out uint value)
+  bool getUint(string fieldname, out uint value) nothrow
   {
     bool _retval;
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
@@ -838,7 +852,7 @@ class Structure : gobject.boxed.Boxed
         with fieldname or the existing field did not contain a #guint64, this function
         returns false.
   */
-  bool getUint64(string fieldname, out ulong value)
+  bool getUint64(string fieldname, out ulong value) nothrow
   {
     bool _retval;
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
@@ -854,7 +868,7 @@ class Structure : gobject.boxed.Boxed
       Returns: the #GValue corresponding to the field with the given
         name.
   */
-  gobject.value.Value getValue(string fieldname)
+  gobject.value.Value getValue(string fieldname) nothrow
   {
     const(GValue)* _cretval;
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
@@ -870,7 +884,7 @@ class Structure : gobject.boxed.Boxed
         fieldname = the name of a field
       Returns: true if the structure contains a field with the given name
   */
-  bool hasField(string fieldname)
+  bool hasField(string fieldname) nothrow
   {
     bool _retval;
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
@@ -886,7 +900,7 @@ class Structure : gobject.boxed.Boxed
         type = the type of a value
       Returns: true if the structure contains a field with the given name and type
   */
-  bool hasFieldTyped(string fieldname, gobject.types.GType type)
+  bool hasFieldTyped(string fieldname, gobject.types.GType type) nothrow
   {
     bool _retval;
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
@@ -901,7 +915,7 @@ class Structure : gobject.boxed.Boxed
         name = structure name to check for
       Returns: true if name matches the name of the structure.
   */
-  bool hasName(string name)
+  bool hasName(string name) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -917,7 +931,7 @@ class Structure : gobject.boxed.Boxed
       Returns: the #GValue corresponding to the field with the given
         name identifier.
   */
-  gobject.value.Value idGetValue(glib.types.Quark field)
+  gobject.value.Value idGetValue(glib.types.Quark field) nothrow
   {
     const(GValue)* _cretval;
     _cretval = gst_structure_id_get_value(cast(const(GstStructure)*)this._cPtr, field);
@@ -932,7 +946,7 @@ class Structure : gobject.boxed.Boxed
         field = #GQuark of the field name
       Returns: true if the structure contains a field with the given name
   */
-  bool idHasField(glib.types.Quark field)
+  bool idHasField(glib.types.Quark field) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_structure_id_has_field(cast(const(GstStructure)*)this._cPtr, field);
@@ -947,7 +961,7 @@ class Structure : gobject.boxed.Boxed
         type = the type of a value
       Returns: true if the structure contains a field with the given name and type
   */
-  bool idHasFieldTyped(glib.types.Quark field, gobject.types.GType type)
+  bool idHasFieldTyped(glib.types.Quark field, gobject.types.GType type) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_structure_id_has_field_typed(cast(const(GstStructure)*)this._cPtr, field, type);
@@ -963,7 +977,7 @@ class Structure : gobject.boxed.Boxed
         field = a #GQuark representing a field
         value = the new value of the field
   */
-  void idSetValue(glib.types.Quark field, gobject.value.Value value)
+  void idSetValue(glib.types.Quark field, gobject.value.Value value) nothrow
   {
     gst_structure_id_set_value(cast(GstStructure*)this._cPtr, field, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
@@ -977,7 +991,7 @@ class Structure : gobject.boxed.Boxed
         field = a #GQuark representing a field
         value = the new value of the field
   */
-  void idTakeValue(glib.types.Quark field, gobject.value.Value value)
+  void idTakeValue(glib.types.Quark field, gobject.value.Value value) nothrow
   {
     gst_structure_id_take_value(cast(GstStructure*)this._cPtr, field, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }
@@ -989,7 +1003,7 @@ class Structure : gobject.boxed.Boxed
         struct2 = a #GstStructure
       Returns: Intersection of struct1 and struct2
   */
-  gst.structure.Structure intersect(gst.structure.Structure struct2)
+  gst.structure.Structure intersect(gst.structure.Structure struct2) nothrow
   {
     GstStructure* _cretval;
     _cretval = gst_structure_intersect(cast(const(GstStructure)*)this._cPtr, struct2 ? cast(const(GstStructure)*)struct2._cPtr(No.Dup) : null);
@@ -1004,7 +1018,7 @@ class Structure : gobject.boxed.Boxed
         structure2 = a #GstStructure.
       Returns: true if the two structures have the same name and field.
   */
-  bool isEqual(gst.structure.Structure structure2)
+  bool isEqual(gst.structure.Structure structure2) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_structure_is_equal(cast(const(GstStructure)*)this._cPtr, structure2 ? cast(const(GstStructure)*)structure2._cPtr(No.Dup) : null);
@@ -1020,7 +1034,7 @@ class Structure : gobject.boxed.Boxed
         superset = a potentially greater #GstStructure
       Returns: true if subset is a subset of superset
   */
-  bool isSubset(gst.structure.Structure superset)
+  bool isSubset(gst.structure.Structure superset) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_structure_is_subset(cast(const(GstStructure)*)this._cPtr, superset ? cast(const(GstStructure)*)superset._cPtr(No.Dup) : null);
@@ -1037,14 +1051,21 @@ class Structure : gobject.boxed.Boxed
       Returns: true if the supplied function returns true For each of the fields,
         false otherwise.
   */
-  bool mapInPlace(gst.types.StructureMapFunc func)
+  bool mapInPlace(gst.types.StructureMapFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(GQuark fieldId, GValue* value, void* userData)
+    extern(C) gboolean _funcCallback(GQuark fieldId, GValue* value, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gst.types.StructureMapFunc*)userData;
 
-      _dretval = (*_dlg)(fieldId, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(fieldId, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.StructureMapFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -1060,7 +1081,7 @@ class Structure : gobject.boxed.Boxed
       Get the number of fields in the structure.
       Returns: the number of fields in the structure
   */
-  int nFields()
+  int nFields() nothrow
   {
     int _retval;
     _retval = gst_structure_n_fields(cast(const(GstStructure)*)this._cPtr);
@@ -1074,7 +1095,7 @@ class Structure : gobject.boxed.Boxed
         index = the index to get the name of
       Returns: the name of the given field number
   */
-  string nthFieldName(uint index)
+  string nthFieldName(uint index) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_structure_nth_field_name(cast(const(GstStructure)*)this._cPtr, index);
@@ -1085,7 +1106,7 @@ class Structure : gobject.boxed.Boxed
   /**
       Removes all fields in a GstStructure.
   */
-  void removeAllFields()
+  void removeAllFields() nothrow
   {
     gst_structure_remove_all_fields(cast(GstStructure*)this._cPtr);
   }
@@ -1097,7 +1118,7 @@ class Structure : gobject.boxed.Boxed
       Params:
         fieldname = the name of the field to remove
   */
-  void removeField(string fieldname)
+  void removeField(string fieldname) nothrow
   {
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
     gst_structure_remove_field(cast(GstStructure*)this._cPtr, _fieldname);
@@ -1124,7 +1145,7 @@ class Structure : gobject.boxed.Boxed
   
       Deprecated: Use [gst.structure.Structure.serializeFull] instead.
   */
-  string serialize(gst.types.SerializeFlags flags)
+  string serialize(gst.types.SerializeFlags flags) nothrow
   {
     char* _cretval;
     _cretval = gst_structure_serialize(cast(const(GstStructure)*)this._cPtr, flags);
@@ -1141,7 +1162,7 @@ class Structure : gobject.boxed.Boxed
       Returns: a pointer to string allocated by [glib.global.gmalloc].
             [glib.global.gfree] after usage.
   */
-  string serializeFull(gst.types.SerializeFlags flags)
+  string serializeFull(gst.types.SerializeFlags flags) nothrow
   {
     char* _cretval;
     _cretval = gst_structure_serialize_full(cast(const(GstStructure)*)this._cPtr, flags);
@@ -1159,7 +1180,7 @@ class Structure : gobject.boxed.Boxed
         fieldname = the name of a field
         array = a pointer to a #GValueArray
   */
-  void setArray(string fieldname, gobject.value_array.ValueArray array)
+  void setArray(string fieldname, gobject.value_array.ValueArray array) nothrow
   {
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
     gst_structure_set_array(cast(GstStructure*)this._cPtr, _fieldname, array ? cast(const(GValueArray)*)array._cPtr(No.Dup) : null);
@@ -1175,7 +1196,7 @@ class Structure : gobject.boxed.Boxed
         fieldname = the name of a field
         array = a pointer to a #GValueArray
   */
-  void setList(string fieldname, gobject.value_array.ValueArray array)
+  void setList(string fieldname, gobject.value_array.ValueArray array) nothrow
   {
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
     gst_structure_set_list(cast(GstStructure*)this._cPtr, _fieldname, array ? cast(const(GValueArray)*)array._cPtr(No.Dup) : null);
@@ -1189,7 +1210,7 @@ class Structure : gobject.boxed.Boxed
       Params:
         name = the new name of the structure
   */
-  void setName(string name)
+  void setName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gst_structure_set_name(cast(GstStructure*)this._cPtr, _name);
@@ -1204,7 +1225,7 @@ class Structure : gobject.boxed.Boxed
         fieldname = the name of the field to set
         value = the new value of the field
   */
-  void setValue(string fieldname, gobject.value.Value value)
+  void setValue(string fieldname, gobject.value.Value value) nothrow
   {
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
     gst_structure_set_value(cast(GstStructure*)this._cPtr, _fieldname, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -1219,7 +1240,7 @@ class Structure : gobject.boxed.Boxed
         fieldname = the name of the field to set
         value = the new value of the field
   */
-  void takeValue(string fieldname, gobject.value.Value value)
+  void takeValue(string fieldname, gobject.value.Value value) nothrow
   {
     const(char)* _fieldname = fieldname.toCString(No.Alloc);
     gst_structure_take_value(cast(GstStructure*)this._cPtr, _fieldname, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
@@ -1241,7 +1262,7 @@ class Structure : gobject.boxed.Boxed
       Returns: a pointer to string allocated by [glib.global.gmalloc].
             [glib.global.gfree] after usage.
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gst_structure_to_string(cast(const(GstStructure)*)this._cPtr);
@@ -1265,7 +1286,7 @@ class Structure : gobject.boxed.Boxed
         newstr = a new #GstStructure
       Returns: true if newstr was different from oldstr_ptr
   */
-  static bool take(gst.structure.Structure oldstrPtr = null, gst.structure.Structure newstr = null)
+  static bool take(gst.structure.Structure oldstrPtr = null, gst.structure.Structure newstr = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_structure_take(oldstrPtr ? cast(GstStructure**)oldstrPtr._cPtr(No.Dup) : null, newstr ? cast(GstStructure*)newstr._cPtr(Yes.Dup) : null);

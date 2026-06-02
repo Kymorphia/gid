@@ -27,26 +27,26 @@ class DmabufTexture : gdk.texture.Texture
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_dmabuf_texture_get_type != &gidSymbolNotFound ? gdk_dmabuf_texture_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DmabufTexture self()
+  override DmabufTexture self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class DmabufTexture : gdk.texture.Texture
       Get builder for [gdk.dmabuf_texture.DmabufTexture]
       Returns: New builder object
   */
-  static DmabufTextureGidBuilder builder()
+  static DmabufTextureGidBuilder builder() nothrow
   {
     return new DmabufTextureGidBuilder;
   }
@@ -74,7 +74,7 @@ final class DmabufTextureGidBuilder : DmabufTextureGidBuilderImpl!DmabufTextureG
       Create object from builder.
       Returns: New object
   */
-  DmabufTexture build()
+  DmabufTexture build() nothrow
   {
     return new DmabufTexture(cast(void*)createGObject(DmabufTexture._getGType), No.Take);
   }

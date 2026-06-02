@@ -14,26 +14,26 @@ class GCSFileSystem : arrow.file_system.FileSystem
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_gcs_file_system_get_type != &gidSymbolNotFound ? garrow_gcs_file_system_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GCSFileSystem self()
+  override GCSFileSystem self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class GCSFileSystem : arrow.file_system.FileSystem
       Get builder for [arrow.gcsfile_system.GCSFileSystem]
       Returns: New builder object
   */
-  static GCSFileSystemGidBuilder builder()
+  static GCSFileSystemGidBuilder builder() nothrow
   {
     return new GCSFileSystemGidBuilder;
   }
@@ -60,7 +60,7 @@ final class GCSFileSystemGidBuilder : GCSFileSystemGidBuilderImpl!GCSFileSystemG
       Create object from builder.
       Returns: New object
   */
-  GCSFileSystem build()
+  GCSFileSystem build() nothrow
   {
     return new GCSFileSystem(cast(void*)createGObject(GCSFileSystem._getGType), No.Take);
   }

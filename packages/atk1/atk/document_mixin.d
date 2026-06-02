@@ -35,7 +35,7 @@ template DocumentT()
            attribute for this document, or null if a value for
            attribute_name has not been specified for this document.
   */
-  override string getAttributeValue(string attributeName)
+  override string getAttributeValue(string attributeName) nothrow
   {
     const(char)* _cretval;
     const(char)* _attributeName = attributeName.toCString(No.Alloc);
@@ -49,7 +49,7 @@ template DocumentT()
       Returns: the current page number inside document, or -1 if
           not implemented, not know by the implementor, or irrelevant.
   */
-  override int getCurrentPageNumber()
+  override int getCurrentPageNumber() nothrow
   {
     int _retval;
     _retval = atk_document_get_current_page_number(cast(AtkDocument*)this._cPtr);
@@ -66,7 +66,7 @@ template DocumentT()
         the document. Use it directly, or one of its children, as an
         instance of the DOM.
   */
-  override void* getDocument()
+  override void* getDocument() nothrow
   {
     auto _retval = atk_document_get_document(cast(AtkDocument*)this._cPtr);
     return _retval;
@@ -79,7 +79,7 @@ template DocumentT()
       Deprecated: Since 2.12. Please use [atk.document.Document.getAttributes] to
         ask for the document type if it applies.
   */
-  override string getDocumentType()
+  override string getDocumentType() nothrow
   {
     const(char)* _cretval;
     _cretval = atk_document_get_document_type(cast(AtkDocument*)this._cPtr);
@@ -99,7 +99,7 @@ template DocumentT()
   
       Deprecated: Please use [atk.object.ObjectWrap.getObjectLocale] instead.
   */
-  override string getLocale()
+  override string getLocale() nothrow
   {
     const(char)* _cretval;
     _cretval = atk_document_get_locale(cast(AtkDocument*)this._cPtr);
@@ -112,7 +112,7 @@ template DocumentT()
       Returns: total page count of document, or -1 if not implemented,
           not know by the implementor or irrelevant.
   */
-  override int getPageCount()
+  override int getPageCount() nothrow
   {
     int _retval;
     _retval = atk_document_get_page_count(cast(AtkDocument*)this._cPtr);
@@ -130,7 +130,7 @@ template DocumentT()
           with attribute_name for this document, and false if if the
           document does not allow the attribute to be modified
   */
-  override bool setAttributeValue(string attributeName, string attributeValue)
+  override bool setAttributeValue(string attributeName, string attributeValue) nothrow
   {
     bool _retval;
     const(char)* _attributeName = attributeName.toCString(No.Alloc);
@@ -161,7 +161,7 @@ template DocumentT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDocumentAttributeChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDocumentAttributeChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -169,7 +169,7 @@ template DocumentT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.document.Document)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -184,7 +184,14 @@ template DocumentT()
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.document.Document.documentAttributeChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -214,13 +221,13 @@ template DocumentT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLoadComplete(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLoadComplete(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.document.Document)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -229,7 +236,14 @@ template DocumentT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.document.Document.loadComplete");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -256,13 +270,13 @@ template DocumentT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLoadStopped(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLoadStopped(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.document.Document)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -271,7 +285,14 @@ template DocumentT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.document.Document.loadStopped");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -298,14 +319,14 @@ template DocumentT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPageChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPageChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.document.Document)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -317,7 +338,14 @@ template DocumentT()
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.document.Document.pageChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -343,13 +371,13 @@ template DocumentT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectReload(T)(T callback, Flag!"After" after = No.After)
+  gulong connectReload(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.document.Document)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -358,7 +386,14 @@ template DocumentT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.document.Document.reload");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

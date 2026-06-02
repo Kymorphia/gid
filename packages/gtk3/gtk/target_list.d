@@ -20,32 +20,32 @@ class TargetList : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_target_list_get_type != &gidSymbolNotFound ? gtk_target_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TargetList self()
+  override TargetList self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class TargetList : gobject.boxed.Boxed
             of #GtkTargetEntry
       Returns: the new #GtkTargetList.
   */
-  this(gtk.target_entry.TargetEntry[] targets = null)
+  this(gtk.target_entry.TargetEntry[] targets = null) nothrow
   {
     GtkTargetList* _cretval;
     uint _ntargets;
@@ -82,7 +82,7 @@ class TargetList : gobject.boxed.Boxed
         flags = the flags for this target
         info = an ID that will be passed back to the application
   */
-  void add(gdk.atom.Atom target, uint flags, uint info)
+  void add(gdk.atom.Atom target, uint flags, uint info) nothrow
   {
     gtk_target_list_add(cast(GtkTargetList*)this._cPtr, target ? cast(GdkAtom)target._cPtr : null, flags, info);
   }
@@ -96,7 +96,7 @@ class TargetList : gobject.boxed.Boxed
         writable = whether to add only targets for which GTK+ knows
             how to convert a pixbuf into the format
   */
-  void addImageTargets(uint info, bool writable)
+  void addImageTargets(uint info, bool writable) nothrow
   {
     gtk_target_list_add_image_targets(cast(GtkTargetList*)this._cPtr, info, writable);
   }
@@ -113,7 +113,7 @@ class TargetList : gobject.boxed.Boxed
                            will be added, serializable formats otherwise.
         buffer = a #GtkTextBuffer.
   */
-  void addRichTextTargets(uint info, bool deserializable, gtk.text_buffer.TextBuffer buffer)
+  void addRichTextTargets(uint info, bool deserializable, gtk.text_buffer.TextBuffer buffer) nothrow
   {
     gtk_target_list_add_rich_text_targets(cast(GtkTargetList*)this._cPtr, info, deserializable, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
   }
@@ -124,7 +124,7 @@ class TargetList : gobject.boxed.Boxed
       Params:
         targets = the table of #GtkTargetEntry
   */
-  void addTable(gtk.target_entry.TargetEntry[] targets)
+  void addTable(gtk.target_entry.TargetEntry[] targets) nothrow
   {
     uint _ntargets;
     if (targets)
@@ -145,7 +145,7 @@ class TargetList : gobject.boxed.Boxed
       Params:
         info = an ID that will be passed back to the application
   */
-  void addTextTargets(uint info)
+  void addTextTargets(uint info) nothrow
   {
     gtk_target_list_add_text_targets(cast(GtkTargetList*)this._cPtr, info);
   }
@@ -161,7 +161,7 @@ class TargetList : gobject.boxed.Boxed
       Params:
         info = an ID that will be passed back to the application
   */
-  void addUriTargets(uint info)
+  void addUriTargets(uint info) nothrow
   {
     gtk_target_list_add_uri_targets(cast(GtkTargetList*)this._cPtr, info);
   }
@@ -175,7 +175,7 @@ class TargetList : gobject.boxed.Boxed
                  application info for target, or null
       Returns: true if the target was found, otherwise false
   */
-  bool find(gdk.atom.Atom target, out uint info)
+  bool find(gdk.atom.Atom target, out uint info) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_target_list_find(cast(GtkTargetList*)this._cPtr, target ? cast(GdkAtom)target._cPtr : null, cast(uint*)&info);
@@ -188,7 +188,7 @@ class TargetList : gobject.boxed.Boxed
       Params:
         target = the interned atom representing the target
   */
-  void remove(gdk.atom.Atom target)
+  void remove(gdk.atom.Atom target) nothrow
   {
     gtk_target_list_remove(cast(GtkTargetList*)this._cPtr, target ? cast(GdkAtom)target._cPtr : null);
   }

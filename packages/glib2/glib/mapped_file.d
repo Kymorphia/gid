@@ -19,32 +19,32 @@ class MappedFile : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mapped_file_get_type != &gidSymbolNotFound ? g_mapped_file_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MappedFile self()
+  override MappedFile self() nothrow
   {
     return this;
   }
@@ -124,7 +124,7 @@ class MappedFile : gobject.boxed.Boxed
       Returns: A newly allocated #GBytes referencing data
             from file
   */
-  glib.bytes.Bytes getBytes()
+  glib.bytes.Bytes getBytes() nothrow
   {
     GBytes* _cretval;
     _cretval = g_mapped_file_get_bytes(cast(GMappedFile*)this._cPtr);
@@ -141,7 +141,7 @@ class MappedFile : gobject.boxed.Boxed
       If the file is empty then null is returned.
       Returns: the contents of file, or null.
   */
-  string getContents()
+  string getContents() nothrow
   {
     char* _cretval;
     _cretval = g_mapped_file_get_contents(cast(GMappedFile*)this._cPtr);
@@ -153,7 +153,7 @@ class MappedFile : gobject.boxed.Boxed
       Returns the length of the contents of a #GMappedFile.
       Returns: the length of the contents of file.
   */
-  size_t getLength()
+  size_t getLength() nothrow
   {
     size_t _retval;
     _retval = g_mapped_file_get_length(cast(GMappedFile*)this._cPtr);

@@ -24,7 +24,7 @@ template DataHandlerT()
         type = a #GType
       Returns: true if the gda type can be handled
   */
-  override bool acceptsGType(gobject.types.GType type)
+  override bool acceptsGType(gobject.types.GType type) nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_data_handler_accepts_g_type(cast(GdaDataHandler*)this._cPtr, type);
@@ -35,7 +35,7 @@ template DataHandlerT()
       Get a short description of the GdaDataHandler
       Returns: the description
   */
-  override string getDescr()
+  override string getDescr() nothrow
   {
     const(char)* _cretval;
     _cretval = gda_data_handler_get_descr(cast(GdaDataHandler*)this._cPtr);
@@ -51,7 +51,7 @@ template DataHandlerT()
         type = a #GType
       Returns: the new #GValue, or null if no such value can be created.
   */
-  override gobject.value.Value getSaneInitValue(gobject.types.GType type)
+  override gobject.value.Value getSaneInitValue(gobject.types.GType type) nothrow
   {
     GValue* _cretval;
     _cretval = gda_data_handler_get_sane_init_value(cast(GdaDataHandler*)this._cPtr, type);
@@ -73,7 +73,7 @@ template DataHandlerT()
         value = the value to be converted to a string, or null
       Returns: the new string, or null if an error occurred
   */
-  override string getSqlFromValue(gobject.value.Value value = null)
+  override string getSqlFromValue(gobject.value.Value value = null) nothrow
   {
     char* _cretval;
     _cretval = gda_data_handler_get_sql_from_value(cast(GdaDataHandler*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -92,7 +92,7 @@ template DataHandlerT()
         value = the value to be converted to a string, or null
       Returns: the new string, or null if an error occurred
   */
-  override string getStrFromValue(gobject.value.Value value = null)
+  override string getStrFromValue(gobject.value.Value value = null) nothrow
   {
     char* _cretval;
     _cretval = gda_data_handler_get_str_from_value(cast(GdaDataHandler*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -114,7 +114,7 @@ template DataHandlerT()
         type = a GType
       Returns: the new #GValue or null on error
   */
-  override gobject.value.Value getValueFromSql(string sql, gobject.types.GType type)
+  override gobject.value.Value getValueFromSql(string sql, gobject.types.GType type) nothrow
   {
     GValue* _cretval;
     const(char)* _sql = sql.toCString(No.Alloc);
@@ -139,7 +139,7 @@ template DataHandlerT()
         type = a GType
       Returns: the new #GValue or null on error
   */
-  override gobject.value.Value getValueFromStr(string str, gobject.types.GType type)
+  override gobject.value.Value getValueFromStr(string str, gobject.types.GType type) nothrow
   {
     GValue* _cretval;
     const(char)* _str = str.toCString(No.Alloc);

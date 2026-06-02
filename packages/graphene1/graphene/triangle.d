@@ -22,38 +22,38 @@ class Triangle : gobject.boxed.Boxed
   /**
       Create a `triangle.Triangle` boxed type.
   */
-  this()
+  this() nothrow
   {
     super(gMalloc(graphene_triangle_t.sizeof), Yes.Take);
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())graphene_triangle_get_type != &gidSymbolNotFound ? graphene_triangle_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Triangle self()
+  override Triangle self() nothrow
   {
     return this;
   }
@@ -66,7 +66,7 @@ class Triangle : gobject.boxed.Boxed
           structure. Use [graphene.triangle.Triangle.free] to free the resources
           allocated by this function
   */
-  static graphene.triangle.Triangle alloc()
+  static graphene.triangle.Triangle alloc() nothrow
   {
     graphene_triangle_t* _cretval;
     _cretval = graphene_triangle_alloc();
@@ -81,7 +81,7 @@ class Triangle : gobject.boxed.Boxed
         p = a #graphene_point3d_t
       Returns: `true` if the point is inside the triangle
   */
-  bool containsPoint(graphene.point3_d.Point3D p)
+  bool containsPoint(graphene.point3_d.Point3D p) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_triangle_contains_point(cast(const(graphene_triangle_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&p);
@@ -95,7 +95,7 @@ class Triangle : gobject.boxed.Boxed
         b = a #graphene_triangle_t
       Returns: `true` if the triangles are equal
   */
-  bool equal(graphene.triangle.Triangle b)
+  bool equal(graphene.triangle.Triangle b) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_triangle_equal(cast(const(graphene_triangle_t)*)this._cPtr, b ? cast(const(graphene_triangle_t)*)b._cPtr(No.Dup) : null);
@@ -106,7 +106,7 @@ class Triangle : gobject.boxed.Boxed
       Computes the area of the given #graphene_triangle_t.
       Returns: the area of the triangle
   */
-  float getArea()
+  float getArea() nothrow
   {
     float _retval;
     _retval = graphene_triangle_get_area(cast(const(graphene_triangle_t)*)this._cPtr);
@@ -137,7 +137,7 @@ class Triangle : gobject.boxed.Boxed
             with the barycentric coordinates
       Returns: `true` if the barycentric coordinates are valid
   */
-  bool getBarycoords(graphene.point3_d.Point3D p, out graphene.vec2.Vec2 res)
+  bool getBarycoords(graphene.point3_d.Point3D p, out graphene.vec2.Vec2 res) nothrow
   {
     bool _retval;
     graphene_vec2_t _res;
@@ -152,7 +152,7 @@ class Triangle : gobject.boxed.Boxed
       Params:
         res = return location for the box
   */
-  void getBoundingBox(out graphene.box.Box res)
+  void getBoundingBox(out graphene.box.Box res) nothrow
   {
     graphene_box_t _res;
     graphene_triangle_get_bounding_box(cast(const(graphene_triangle_t)*)this._cPtr, &_res);
@@ -169,7 +169,7 @@ class Triangle : gobject.boxed.Boxed
         res = return location for the coordinates of
             the midpoint
   */
-  void getMidpoint(out graphene.point3_d.Point3D res)
+  void getMidpoint(out graphene.point3_d.Point3D res) nothrow
   {
     graphene_triangle_get_midpoint(cast(const(graphene_triangle_t)*)this._cPtr, cast(graphene_point3d_t*)&res);
   }
@@ -180,7 +180,7 @@ class Triangle : gobject.boxed.Boxed
       Params:
         res = return location for the normal vector
   */
-  void getNormal(out graphene.vec3.Vec3 res)
+  void getNormal(out graphene.vec3.Vec3 res) nothrow
   {
     graphene_vec3_t _res;
     graphene_triangle_get_normal(cast(const(graphene_triangle_t)*)this._cPtr, &_res);
@@ -193,7 +193,7 @@ class Triangle : gobject.boxed.Boxed
       Params:
         res = return location for the plane
   */
-  void getPlane(out graphene.plane.Plane res)
+  void getPlane(out graphene.plane.Plane res) nothrow
   {
     graphene_plane_t _res;
     graphene_triangle_get_plane(cast(const(graphene_triangle_t)*)this._cPtr, &_res);
@@ -212,7 +212,7 @@ class Triangle : gobject.boxed.Boxed
         c = return location for the coordinates
             of the third vertex
   */
-  void getPoints(out graphene.point3_d.Point3D a, out graphene.point3_d.Point3D b, out graphene.point3_d.Point3D c)
+  void getPoints(out graphene.point3_d.Point3D a, out graphene.point3_d.Point3D b, out graphene.point3_d.Point3D c) nothrow
   {
     graphene_triangle_get_points(cast(const(graphene_triangle_t)*)this._cPtr, cast(graphene_point3d_t*)&a, cast(graphene_point3d_t*)&b, cast(graphene_point3d_t*)&c);
   }
@@ -240,7 +240,7 @@ class Triangle : gobject.boxed.Boxed
             of the given point `p`
       Returns: `true` if the coordinates are valid
   */
-  bool getUv(graphene.point3_d.Point3D p, graphene.vec2.Vec2 uvA, graphene.vec2.Vec2 uvB, graphene.vec2.Vec2 uvC, out graphene.vec2.Vec2 res)
+  bool getUv(graphene.point3_d.Point3D p, graphene.vec2.Vec2 uvA, graphene.vec2.Vec2 uvB, graphene.vec2.Vec2 uvC, out graphene.vec2.Vec2 res) nothrow
   {
     bool _retval;
     graphene_vec2_t _res;
@@ -257,7 +257,7 @@ class Triangle : gobject.boxed.Boxed
         b = return location for the second vertex
         c = return location for the third vertex
   */
-  void getVertices(out graphene.vec3.Vec3 a, out graphene.vec3.Vec3 b, out graphene.vec3.Vec3 c)
+  void getVertices(out graphene.vec3.Vec3 a, out graphene.vec3.Vec3 b, out graphene.vec3.Vec3 c) nothrow
   {
     graphene_vec3_t _a;
     graphene_vec3_t _b;
@@ -279,7 +279,7 @@ class Triangle : gobject.boxed.Boxed
         c = an array of 3 floating point values
       Returns: the initialized #graphene_triangle_t
   */
-  graphene.triangle.Triangle initFromFloat(float[] a, float[] b, float[] c)
+  graphene.triangle.Triangle initFromFloat(float[] a, float[] b, float[] c) nothrow
   {
     graphene_triangle_t* _cretval;
     assert(!a || a.length == 3);
@@ -302,7 +302,7 @@ class Triangle : gobject.boxed.Boxed
         c = a #graphene_point3d_t
       Returns: the initialized #graphene_triangle_t
   */
-  graphene.triangle.Triangle initFromPoint3d(graphene.point3_d.Point3D a, graphene.point3_d.Point3D b, graphene.point3_d.Point3D c)
+  graphene.triangle.Triangle initFromPoint3d(graphene.point3_d.Point3D a, graphene.point3_d.Point3D b, graphene.point3_d.Point3D c) nothrow
   {
     graphene_triangle_t* _cretval;
     _cretval = graphene_triangle_init_from_point3d(cast(graphene_triangle_t*)this._cPtr, cast(const(graphene_point3d_t)*)&a, cast(const(graphene_point3d_t)*)&b, cast(const(graphene_point3d_t)*)&c);
@@ -319,7 +319,7 @@ class Triangle : gobject.boxed.Boxed
         c = a #graphene_vec3_t
       Returns: the initialized #graphene_triangle_t
   */
-  graphene.triangle.Triangle initFromVec3(graphene.vec3.Vec3 a = null, graphene.vec3.Vec3 b = null, graphene.vec3.Vec3 c = null)
+  graphene.triangle.Triangle initFromVec3(graphene.vec3.Vec3 a = null, graphene.vec3.Vec3 b = null, graphene.vec3.Vec3 c = null) nothrow
   {
     graphene_triangle_t* _cretval;
     _cretval = graphene_triangle_init_from_vec3(cast(graphene_triangle_t*)this._cPtr, a ? cast(const(graphene_vec3_t)*)a._cPtr(No.Dup) : null, b ? cast(const(graphene_vec3_t)*)b._cPtr(No.Dup) : null, c ? cast(const(graphene_vec3_t)*)c._cPtr(No.Dup) : null);

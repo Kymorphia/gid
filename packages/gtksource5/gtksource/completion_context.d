@@ -40,26 +40,26 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_context_get_type != &gidSymbolNotFound ? gtk_source_completion_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CompletionContext self()
+  override CompletionContext self() nothrow
   {
     return this;
   }
@@ -68,7 +68,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get builder for [gtksource.completion_context.CompletionContext]
       Returns: New builder object
   */
-  static CompletionContextGidBuilder builder()
+  static CompletionContextGidBuilder builder() nothrow
   {
     return new CompletionContextGidBuilder;
   }
@@ -78,7 +78,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
       Returns: The "busy" property is true while the completion context is
         populating completion proposals.
   */
-  @property bool busy()
+  @property bool busy() nothrow
   {
     return getBusy();
   }
@@ -87,7 +87,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `completion` property.
       Returns: The "completion" is the #GtkSourceCompletion that was used to create the context.
   */
-  @property gtksource.completion.Completion completion()
+  @property gtksource.completion.Completion completion() nothrow
   {
     return getCompletion();
   }
@@ -99,7 +99,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
         It will be notified when the first result is added or the last
         result is removed.
   */
-  @property bool empty()
+  @property bool empty() nothrow
   {
     return getEmpty();
   }
@@ -110,7 +110,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
       Gets the mode for which the context was activated.
       Returns: 
   */
-  gtksource.types.CompletionActivation getActivation()
+  gtksource.types.CompletionActivation getActivation() nothrow
   {
     GtkSourceCompletionActivation _cretval;
     _cretval = gtk_source_completion_context_get_activation(cast(GtkSourceCompletionContext*)this._cPtr);
@@ -134,7 +134,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
         end = a #GtkTextIter
       Returns: true if the marks are still valid and begin or end was set.
   */
-  bool getBounds(out gtk.text_iter.TextIter begin, out gtk.text_iter.TextIter end)
+  bool getBounds(out gtk.text_iter.TextIter begin, out gtk.text_iter.TextIter end) nothrow
   {
     bool _retval;
     GtkTextIter _begin;
@@ -152,7 +152,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
       property.
       Returns: a #GtkTextBuffer or null
   */
-  gtksource.buffer.Buffer getBuffer()
+  gtksource.buffer.Buffer getBuffer() nothrow
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_completion_context_get_buffer(cast(GtkSourceCompletionContext*)this._cPtr);
@@ -166,7 +166,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
       #GtkSourceCompletionProvider's.
       Returns: true if the context is busy
   */
-  bool getBusy()
+  bool getBusy() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_completion_context_get_busy(cast(GtkSourceCompletionContext*)this._cPtr);
@@ -177,7 +177,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
       Gets the #GtkSourceCompletion that created the context.
       Returns: an #GtkSourceCompletion or null
   */
-  gtksource.completion.Completion getCompletion()
+  gtksource.completion.Completion getCompletion() nothrow
   {
     GtkSourceCompletion* _cretval;
     _cretval = gtk_source_completion_context_get_completion(cast(GtkSourceCompletionContext*)this._cPtr);
@@ -191,7 +191,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
       Out of convenience, this function will return true if self is null.
       Returns: true if there are no proposals in the context
   */
-  bool getEmpty()
+  bool getEmpty() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_completion_context_get_empty(cast(GtkSourceCompletionContext*)this._cPtr);
@@ -202,7 +202,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
       Gets the language of the underlying buffer, if any.
       Returns: a #GtkSourceLanguage or null
   */
-  gtksource.language.Language getLanguage()
+  gtksource.language.Language getLanguage() nothrow
   {
     GtkSourceLanguage* _cretval;
     _cretval = gtk_source_completion_context_get_language(cast(GtkSourceCompletionContext*)this._cPtr);
@@ -220,7 +220,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
         provider = a #GtkSourceCompletionProvider
       Returns: a #GListModel or null
   */
-  gio.list_model.ListModel getProposalsForProvider(gtksource.completion_provider.CompletionProvider provider)
+  gio.list_model.ListModel getProposalsForProvider(gtksource.completion_provider.CompletionProvider provider) nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_source_completion_context_get_proposals_for_provider(cast(GtkSourceCompletionContext*)this._cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null);
@@ -232,7 +232,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
       Gets the text view for the context.
       Returns: a #GtkSourceView or null
   */
-  gtksource.view.View getView()
+  gtksource.view.View getView() nothrow
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_completion_context_get_view(cast(GtkSourceCompletionContext*)this._cPtr);
@@ -244,7 +244,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
       Gets the word that is being completed up to the position of the insert mark.
       Returns: a string containing the current word
   */
-  string getWord()
+  string getWord() nothrow
   {
     char* _cretval;
     _cretval = gtk_source_completion_context_get_word(cast(GtkSourceCompletionContext*)this._cPtr);
@@ -256,7 +256,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
       Gets the providers that are associated with the context.
       Returns: a #GListModel of #GtkSourceCompletionProvider
   */
-  gio.list_model.ListModel listProviders()
+  gio.list_model.ListModel listProviders() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_source_completion_context_list_providers(cast(GtkSourceCompletionContext*)this._cPtr);
@@ -276,7 +276,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
         provider = an #GtkSourceCompletionProvider
         results = a #GListModel or null
   */
-  void setProposalsForProvider(gtksource.completion_provider.CompletionProvider provider, gio.list_model.ListModel results = null)
+  void setProposalsForProvider(gtksource.completion_provider.CompletionProvider provider, gio.list_model.ListModel results = null) nothrow
   {
     gtk_source_completion_context_set_proposals_for_provider(cast(GtkSourceCompletionContext*)this._cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null, results ? cast(GListModel*)(cast(gobject.object.ObjectWrap)results)._cPtr(No.Dup) : null);
   }
@@ -304,7 +304,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectProviderModelChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectProviderModelChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.completion_provider.CompletionProvider)))
@@ -312,7 +312,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtksource.completion_context.CompletionContext)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -327,7 +327,14 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.completion_context.CompletionContext.providerModelChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -347,7 +354,7 @@ class CompletionContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
         propval = The "completion" is the #GtkSourceCompletion that was used to create the context.
       Returns: Builder instance for fluent chaining
   */
-  T completion(gtksource.completion.Completion propval)
+  T completion(gtksource.completion.Completion propval) nothrow
   {
     return setProperty("completion", propval);
   }
@@ -360,7 +367,7 @@ final class CompletionContextGidBuilder : CompletionContextGidBuilderImpl!Comple
       Create object from builder.
       Returns: New object
   */
-  CompletionContext build()
+  CompletionContext build() nothrow
   {
     return new CompletionContext(cast(void*)createGObject(CompletionContext._getGType), No.Take);
   }

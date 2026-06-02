@@ -17,11 +17,8 @@ class StaticResource
   GStaticResource _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gio.static_resource.StaticResource");
-
     _cInstance = *cast(GStaticResource*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class StaticResource
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -41,7 +38,7 @@ class StaticResource
       [glib-compile-resources][glib-compile-resources]
       and is not typically used by other code.
   */
-  void fini()
+  void fini() nothrow
   {
     g_static_resource_fini(cast(GStaticResource*)this._cPtr);
   }
@@ -54,7 +51,7 @@ class StaticResource
       and is not typically used by other code.
       Returns: a #GResource
   */
-  gio.resource.Resource getResource()
+  gio.resource.Resource getResource() nothrow
   {
     GResource* _cretval;
     _cretval = g_static_resource_get_resource(cast(GStaticResource*)this._cPtr);
@@ -70,7 +67,7 @@ class StaticResource
       [glib-compile-resources][glib-compile-resources]
       and is not typically used by other code.
   */
-  void init_()
+  void init_() nothrow
   {
     g_static_resource_init(cast(GStaticResource*)this._cPtr);
   }

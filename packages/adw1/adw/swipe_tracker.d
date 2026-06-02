@@ -30,26 +30,26 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_swipe_tracker_get_type != &gidSymbolNotFound ? adw_swipe_tracker_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SwipeTracker self()
+  override SwipeTracker self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Get builder for [adw.swipe_tracker.SwipeTracker]
       Returns: New builder object
   */
-  static SwipeTrackerGidBuilder builder()
+  static SwipeTrackerGidBuilder builder() nothrow
   {
     return new SwipeTrackerGidBuilder;
   }
@@ -70,7 +70,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
         If the value is `FALSE`, each swipe can only move to the adjacent snap
         points.
   */
-  @property bool allowLongSwipes()
+  @property bool allowLongSwipes() nothrow
   {
     return getAllowLongSwipes();
   }
@@ -83,7 +83,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
           If the value is `FALSE`, each swipe can only move to the adjacent snap
           points.
   */
-  @property void allowLongSwipes(bool propval)
+  @property void allowLongSwipes(bool propval) nothrow
   {
     setAllowLongSwipes(propval);
   }
@@ -92,7 +92,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Get `allowMouseDrag` property.
       Returns: Whether to allow dragging with mouse pointer.
   */
-  @property bool allowMouseDrag()
+  @property bool allowMouseDrag() nothrow
   {
     return getAllowMouseDrag();
   }
@@ -102,7 +102,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Params:
         propval = Whether to allow dragging with mouse pointer.
   */
-  @property void allowMouseDrag(bool propval)
+  @property void allowMouseDrag(bool propval) nothrow
   {
     setAllowMouseDrag(propval);
   }
@@ -113,7 +113,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
         
         This will make dragging the window impossible.
   */
-  @property bool allowWindowHandle()
+  @property bool allowWindowHandle() nothrow
   {
     return getAllowWindowHandle();
   }
@@ -125,7 +125,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
           
           This will make dragging the window impossible.
   */
-  @property void allowWindowHandle(bool propval)
+  @property void allowWindowHandle(bool propval) nothrow
   {
     setAllowWindowHandle(propval);
   }
@@ -137,7 +137,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
         When it's not enabled, no events will be processed. Usually widgets will
         want to expose this via a property.
   */
-  @property bool enabled()
+  @property bool enabled() nothrow
   {
     return getEnabled();
   }
@@ -150,7 +150,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
           When it's not enabled, no events will be processed. Usually widgets will
           want to expose this via a property.
   */
-  @property void enabled(bool propval)
+  @property void enabled(bool propval) nothrow
   {
     setEnabled(propval);
   }
@@ -159,7 +159,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Get `lowerOvershoot` property.
       Returns: Whether to allow swiping past the first available snap point.
   */
-  @property bool lowerOvershoot()
+  @property bool lowerOvershoot() nothrow
   {
     return getLowerOvershoot();
   }
@@ -169,7 +169,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Params:
         propval = Whether to allow swiping past the first available snap point.
   */
-  @property void lowerOvershoot(bool propval)
+  @property void lowerOvershoot(bool propval) nothrow
   {
     setLowerOvershoot(propval);
   }
@@ -181,7 +181,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
         If the swipe tracker is horizontal, it can be used for supporting RTL text
         direction.
   */
-  @property bool reversed()
+  @property bool reversed() nothrow
   {
     return getReversed();
   }
@@ -194,7 +194,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
           If the swipe tracker is horizontal, it can be used for supporting RTL text
           direction.
   */
-  @property void reversed(bool propval)
+  @property void reversed(bool propval) nothrow
   {
     setReversed(propval);
   }
@@ -203,7 +203,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Get `swipeable` property.
       Returns: The widget the swipe tracker is attached to.
   */
-  @property adw.swipeable.Swipeable swipeable()
+  @property adw.swipeable.Swipeable swipeable() nothrow
   {
     return getSwipeable();
   }
@@ -212,7 +212,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Get `upperOvershoot` property.
       Returns: Whether to allow swiping past the last available snap point.
   */
-  @property bool upperOvershoot()
+  @property bool upperOvershoot() nothrow
   {
     return getUpperOvershoot();
   }
@@ -222,7 +222,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Params:
         propval = Whether to allow swiping past the last available snap point.
   */
-  @property void upperOvershoot(bool propval)
+  @property void upperOvershoot(bool propval) nothrow
   {
     setUpperOvershoot(propval);
   }
@@ -236,7 +236,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
         swipeable = a widget to add the tracker on
       Returns: the newly created [adw.swipe_tracker.SwipeTracker]
   */
-  this(adw.swipeable.Swipeable swipeable)
+  this(adw.swipeable.Swipeable swipeable) nothrow
   {
     AdwSwipeTracker* _cretval;
     _cretval = adw_swipe_tracker_new(swipeable ? cast(AdwSwipeable*)(cast(gobject.object.ObjectWrap)swipeable)._cPtr(No.Dup) : null);
@@ -247,7 +247,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Gets whether to allow swiping for more than one snap point at a time.
       Returns: whether long swipes are allowed
   */
-  bool getAllowLongSwipes()
+  bool getAllowLongSwipes() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_swipe_tracker_get_allow_long_swipes(cast(AdwSwipeTracker*)this._cPtr);
@@ -258,7 +258,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Gets whether self can be dragged with mouse pointer.
       Returns: whether mouse dragging is allowed
   */
-  bool getAllowMouseDrag()
+  bool getAllowMouseDrag() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_swipe_tracker_get_allow_mouse_drag(cast(AdwSwipeTracker*)this._cPtr);
@@ -269,7 +269,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Gets whether to allow touchscreen swiping from [gtk.window_handle.WindowHandle].
       Returns: whether swiping from window handles is allowed
   */
-  bool getAllowWindowHandle()
+  bool getAllowWindowHandle() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_swipe_tracker_get_allow_window_handle(cast(AdwSwipeTracker*)this._cPtr);
@@ -280,7 +280,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Gets whether self is enabled.
       Returns: whether self is enabled
   */
-  bool getEnabled()
+  bool getEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_swipe_tracker_get_enabled(cast(AdwSwipeTracker*)this._cPtr);
@@ -291,7 +291,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Gets whether to allow swiping past the first available snap point.
       Returns: whether to allow swiping past the first available snap point
   */
-  bool getLowerOvershoot()
+  bool getLowerOvershoot() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_swipe_tracker_get_lower_overshoot(cast(AdwSwipeTracker*)this._cPtr);
@@ -302,7 +302,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Gets whether self is reversing the swipe direction.
       Returns: whether the direction is reversed
   */
-  bool getReversed()
+  bool getReversed() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_swipe_tracker_get_reversed(cast(AdwSwipeTracker*)this._cPtr);
@@ -313,7 +313,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Get the widget self is attached to.
       Returns: the swipeable widget
   */
-  adw.swipeable.Swipeable getSwipeable()
+  adw.swipeable.Swipeable getSwipeable() nothrow
   {
     AdwSwipeable* _cretval;
     _cretval = adw_swipe_tracker_get_swipeable(cast(AdwSwipeTracker*)this._cPtr);
@@ -325,7 +325,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Gets whether to allow swiping past the last available snap point.
       Returns: whether to allow swiping past the last available snap point
   */
-  bool getUpperOvershoot()
+  bool getUpperOvershoot() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_swipe_tracker_get_upper_overshoot(cast(AdwSwipeTracker*)this._cPtr);
@@ -341,7 +341,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Params:
         allowLongSwipes = whether to allow long swipes
   */
-  void setAllowLongSwipes(bool allowLongSwipes)
+  void setAllowLongSwipes(bool allowLongSwipes) nothrow
   {
     adw_swipe_tracker_set_allow_long_swipes(cast(AdwSwipeTracker*)this._cPtr, allowLongSwipes);
   }
@@ -352,7 +352,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Params:
         allowMouseDrag = whether to allow mouse dragging
   */
-  void setAllowMouseDrag(bool allowMouseDrag)
+  void setAllowMouseDrag(bool allowMouseDrag) nothrow
   {
     adw_swipe_tracker_set_allow_mouse_drag(cast(AdwSwipeTracker*)this._cPtr, allowMouseDrag);
   }
@@ -365,7 +365,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Params:
         allowWindowHandle = whether to allow swiping from window handles
   */
-  void setAllowWindowHandle(bool allowWindowHandle)
+  void setAllowWindowHandle(bool allowWindowHandle) nothrow
   {
     adw_swipe_tracker_set_allow_window_handle(cast(AdwSwipeTracker*)this._cPtr, allowWindowHandle);
   }
@@ -379,7 +379,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Params:
         enabled = whether self is enabled
   */
-  void setEnabled(bool enabled)
+  void setEnabled(bool enabled) nothrow
   {
     adw_swipe_tracker_set_enabled(cast(AdwSwipeTracker*)this._cPtr, enabled);
   }
@@ -390,7 +390,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Params:
         overshoot = whether to allow swiping past the first available snap point
   */
-  void setLowerOvershoot(bool overshoot)
+  void setLowerOvershoot(bool overshoot) nothrow
   {
     adw_swipe_tracker_set_lower_overshoot(cast(AdwSwipeTracker*)this._cPtr, overshoot);
   }
@@ -404,7 +404,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Params:
         reversed = whether to reverse the swipe direction
   */
-  void setReversed(bool reversed)
+  void setReversed(bool reversed) nothrow
   {
     adw_swipe_tracker_set_reversed(cast(AdwSwipeTracker*)this._cPtr, reversed);
   }
@@ -415,7 +415,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Params:
         overshoot = whether to allow swiping past the last available snap point
   */
-  void setUpperOvershoot(bool overshoot)
+  void setUpperOvershoot(bool overshoot) nothrow
   {
     adw_swipe_tracker_set_upper_overshoot(cast(AdwSwipeTracker*)this._cPtr, overshoot);
   }
@@ -429,7 +429,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Params:
         delta = the position delta
   */
-  void shiftPosition(double delta)
+  void shiftPosition(double delta) nothrow
   {
     adw_swipe_tracker_shift_position(cast(AdwSwipeTracker*)this._cPtr, delta);
   }
@@ -450,13 +450,13 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectBeginSwipe(T)(T callback, Flag!"After" after = No.After)
+  gulong connectBeginSwipe(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.swipe_tracker.SwipeTracker)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -465,7 +465,14 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.swipe_tracker.SwipeTracker.beginSwipe");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -496,7 +503,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEndSwipe(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEndSwipe(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -504,7 +511,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : adw.swipe_tracker.SwipeTracker)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -519,7 +526,14 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.swipe_tracker.SwipeTracker.endSwipe");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -546,14 +560,14 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPrepare(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPrepare(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == adw.types.NavigationDirection)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : adw.swipe_tracker.SwipeTracker)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -565,7 +579,14 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.swipe_tracker.SwipeTracker.prepare");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -589,14 +610,14 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUpdateSwipe(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUpdateSwipe(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : adw.swipe_tracker.SwipeTracker)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -608,7 +629,14 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.swipe_tracker.SwipeTracker.updateSwipe");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -631,7 +659,7 @@ class SwipeTrackerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
           points.
       Returns: Builder instance for fluent chaining
   */
-  T allowLongSwipes(bool propval)
+  T allowLongSwipes(bool propval) nothrow
   {
     return setProperty("allow-long-swipes", propval);
   }
@@ -642,7 +670,7 @@ class SwipeTrackerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
         propval = Whether to allow dragging with mouse pointer.
       Returns: Builder instance for fluent chaining
   */
-  T allowMouseDrag(bool propval)
+  T allowMouseDrag(bool propval) nothrow
   {
     return setProperty("allow-mouse-drag", propval);
   }
@@ -655,7 +683,7 @@ class SwipeTrackerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
           This will make dragging the window impossible.
       Returns: Builder instance for fluent chaining
   */
-  T allowWindowHandle(bool propval)
+  T allowWindowHandle(bool propval) nothrow
   {
     return setProperty("allow-window-handle", propval);
   }
@@ -669,7 +697,7 @@ class SwipeTrackerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
           want to expose this via a property.
       Returns: Builder instance for fluent chaining
   */
-  T enabled(bool propval)
+  T enabled(bool propval) nothrow
   {
     return setProperty("enabled", propval);
   }
@@ -680,7 +708,7 @@ class SwipeTrackerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
         propval = Whether to allow swiping past the first available snap point.
       Returns: Builder instance for fluent chaining
   */
-  T lowerOvershoot(bool propval)
+  T lowerOvershoot(bool propval) nothrow
   {
     return setProperty("lower-overshoot", propval);
   }
@@ -694,7 +722,7 @@ class SwipeTrackerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
           direction.
       Returns: Builder instance for fluent chaining
   */
-  T reversed(bool propval)
+  T reversed(bool propval) nothrow
   {
     return setProperty("reversed", propval);
   }
@@ -705,7 +733,7 @@ class SwipeTrackerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
         propval = The widget the swipe tracker is attached to.
       Returns: Builder instance for fluent chaining
   */
-  T swipeable(adw.swipeable.Swipeable propval)
+  T swipeable(adw.swipeable.Swipeable propval) nothrow
   {
     return setProperty("swipeable", propval);
   }
@@ -716,7 +744,7 @@ class SwipeTrackerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
         propval = Whether to allow swiping past the last available snap point.
       Returns: Builder instance for fluent chaining
   */
-  T upperOvershoot(bool propval)
+  T upperOvershoot(bool propval) nothrow
   {
     return setProperty("upper-overshoot", propval);
   }
@@ -729,7 +757,7 @@ final class SwipeTrackerGidBuilder : SwipeTrackerGidBuilderImpl!SwipeTrackerGidB
       Create object from builder.
       Returns: New object
   */
-  SwipeTracker build()
+  SwipeTracker build() nothrow
   {
     return new SwipeTracker(cast(void*)createGObject(SwipeTracker._getGType), Yes.Take);
   }

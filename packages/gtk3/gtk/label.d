@@ -203,26 +203,26 @@ class Label : gtk.misc.Misc
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_label_get_type != &gidSymbolNotFound ? gtk_label_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Label self()
+  override Label self() nothrow
   {
     return this;
   }
@@ -231,7 +231,7 @@ class Label : gtk.misc.Misc
       Get builder for [gtk.label.Label]
       Returns: New builder object
   */
-  static LabelGidBuilder builder()
+  static LabelGidBuilder builder() nothrow
   {
     return new LabelGidBuilder;
   }
@@ -243,7 +243,7 @@ class Label : gtk.misc.Misc
         from bottom to top, an angle of 270, from top to bottom. Ignored
         if the label is selectable.
   */
-  @property double angle()
+  @property double angle() nothrow
   {
     return getAngle();
   }
@@ -256,25 +256,25 @@ class Label : gtk.misc.Misc
           from bottom to top, an angle of 270, from top to bottom. Ignored
           if the label is selectable.
   */
-  @property void angle(double propval)
+  @property void angle(double propval) nothrow
   {
     setAngle(propval);
   }
 
   /** */
-  @property pango.attr_list.AttrList attributes()
+  @property pango.attr_list.AttrList attributes() nothrow
   {
     return getAttributes();
   }
 
   /** */
-  @property void attributes(pango.attr_list.AttrList propval)
+  @property void attributes(pango.attr_list.AttrList propval) nothrow
   {
     setAttributes(propval);
   }
 
   /** */
-  @property int cursorPosition()
+  @property int cursorPosition() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("cursor-position");
   }
@@ -293,7 +293,7 @@ class Label : gtk.misc.Misc
         to set a label's width are [gtk.widget.Widget.setSizeRequest] and
         [gtk.label.Label.setWidthChars].
   */
-  @property pango.types.EllipsizeMode ellipsize()
+  @property pango.types.EllipsizeMode ellipsize() nothrow
   {
     return getEllipsize();
   }
@@ -313,19 +313,19 @@ class Label : gtk.misc.Misc
           to set a label's width are [gtk.widget.Widget.setSizeRequest] and
           [gtk.label.Label.setWidthChars].
   */
-  @property void ellipsize(pango.types.EllipsizeMode propval)
+  @property void ellipsize(pango.types.EllipsizeMode propval) nothrow
   {
     setEllipsize(propval);
   }
 
   /** */
-  @property gtk.types.Justification justify()
+  @property gtk.types.Justification justify() nothrow
   {
     return getJustify();
   }
 
   /** */
-  @property void justify(gtk.types.Justification propval)
+  @property void justify(gtk.types.Justification propval) nothrow
   {
     setJustify(propval);
   }
@@ -344,7 +344,7 @@ class Label : gtk.misc.Misc
         set the #GtkLabel:use-underline property to true in order for the label
         to display them.
   */
-  @property string label()
+  @property string label() nothrow
   {
     return getLabel();
   }
@@ -364,7 +364,7 @@ class Label : gtk.misc.Misc
           set the #GtkLabel:use-underline property to true in order for the label
           to display them.
   */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     setLabel(propval);
   }
@@ -376,7 +376,7 @@ class Label : gtk.misc.Misc
         label is not wrapping or ellipsized. Set this property to
         -1 if you don't want to limit the number of lines.
   */
-  @property int lines()
+  @property int lines() nothrow
   {
     return getLines();
   }
@@ -389,7 +389,7 @@ class Label : gtk.misc.Misc
           label is not wrapping or ellipsized. Set this property to
           -1 if you don't want to limit the number of lines.
   */
-  @property void lines(int propval)
+  @property void lines(int propval) nothrow
   {
     setLines(propval);
   }
@@ -403,7 +403,7 @@ class Label : gtk.misc.Misc
         for details of how #GtkLabel:width-chars and #GtkLabel:max-width-chars
         determine the width of ellipsized and wrapped labels.
   */
-  @property int maxWidthChars()
+  @property int maxWidthChars() nothrow
   {
     return getMaxWidthChars();
   }
@@ -418,49 +418,49 @@ class Label : gtk.misc.Misc
           for details of how #GtkLabel:width-chars and #GtkLabel:max-width-chars
           determine the width of ellipsized and wrapped labels.
   */
-  @property void maxWidthChars(int propval)
+  @property void maxWidthChars(int propval) nothrow
   {
     setMaxWidthChars(propval);
   }
 
   /** */
-  @property uint mnemonicKeyval()
+  @property uint mnemonicKeyval() nothrow
   {
     return getMnemonicKeyval();
   }
 
   /** */
-  @property gtk.widget.Widget mnemonicWidget()
+  @property gtk.widget.Widget mnemonicWidget() nothrow
   {
     return getMnemonicWidget();
   }
 
   /** */
-  @property void mnemonicWidget(gtk.widget.Widget propval)
+  @property void mnemonicWidget(gtk.widget.Widget propval) nothrow
   {
     setMnemonicWidget(propval);
   }
 
   /** */
-  @property void pattern(string propval)
+  @property void pattern(string propval) nothrow
   {
     setPattern(propval);
   }
 
   /** */
-  @property bool selectable()
+  @property bool selectable() nothrow
   {
     return getSelectable();
   }
 
   /** */
-  @property void selectable(bool propval)
+  @property void selectable(bool propval) nothrow
   {
     setSelectable(propval);
   }
 
   /** */
-  @property int selectionBound()
+  @property int selectionBound() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("selection-bound");
   }
@@ -473,7 +473,7 @@ class Label : gtk.misc.Misc
         advantage in situations where resizing the label because of text
         changes would be distracting, e.g. in a statusbar.
   */
-  @property bool singleLineMode()
+  @property bool singleLineMode() nothrow
   {
     return getSingleLineMode();
   }
@@ -487,7 +487,7 @@ class Label : gtk.misc.Misc
           advantage in situations where resizing the label because of text
           changes would be distracting, e.g. in a statusbar.
   */
-  @property void singleLineMode(bool propval)
+  @property void singleLineMode(bool propval) nothrow
   {
     setSingleLineMode(propval);
   }
@@ -498,7 +498,7 @@ class Label : gtk.misc.Misc
         have been visited. It will then apply the #GTK_STATE_FLAG_VISITED
         when rendering this link, in addition to #GTK_STATE_FLAG_LINK.
   */
-  @property bool trackVisitedLinks()
+  @property bool trackVisitedLinks() nothrow
   {
     return getTrackVisitedLinks();
   }
@@ -510,31 +510,31 @@ class Label : gtk.misc.Misc
           have been visited. It will then apply the #GTK_STATE_FLAG_VISITED
           when rendering this link, in addition to #GTK_STATE_FLAG_LINK.
   */
-  @property void trackVisitedLinks(bool propval)
+  @property void trackVisitedLinks(bool propval) nothrow
   {
     setTrackVisitedLinks(propval);
   }
 
   /** */
-  @property bool useMarkup()
+  @property bool useMarkup() nothrow
   {
     return getUseMarkup();
   }
 
   /** */
-  @property void useMarkup(bool propval)
+  @property void useMarkup(bool propval) nothrow
   {
     setUseMarkup(propval);
   }
 
   /** */
-  @property bool useUnderline()
+  @property bool useUnderline() nothrow
   {
     return getUseUnderline();
   }
 
   /** */
-  @property void useUnderline(bool propval)
+  @property void useUnderline(bool propval) nothrow
   {
     setUseUnderline(propval);
   }
@@ -548,7 +548,7 @@ class Label : gtk.misc.Misc
         for details of how #GtkLabel:width-chars and #GtkLabel:max-width-chars
         determine the width of ellipsized and wrapped labels.
   */
-  @property int widthChars()
+  @property int widthChars() nothrow
   {
     return getWidthChars();
   }
@@ -563,19 +563,19 @@ class Label : gtk.misc.Misc
           for details of how #GtkLabel:width-chars and #GtkLabel:max-width-chars
           determine the width of ellipsized and wrapped labels.
   */
-  @property void widthChars(int propval)
+  @property void widthChars(int propval) nothrow
   {
     setWidthChars(propval);
   }
 
   /** */
-  @property bool wrap()
+  @property bool wrap() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("wrap");
   }
 
   /** */
-  @property void wrap(bool propval)
+  @property void wrap(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("wrap", propval);
   }
@@ -586,7 +586,7 @@ class Label : gtk.misc.Misc
         how the line wrapping is done. The default is [pango.types.WrapMode.Word], which
         means wrap on word boundaries.
   */
-  @property pango.types.WrapMode wrapMode()
+  @property pango.types.WrapMode wrapMode() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(pango.types.WrapMode)("wrap-mode");
   }
@@ -598,7 +598,7 @@ class Label : gtk.misc.Misc
           how the line wrapping is done. The default is [pango.types.WrapMode.Word], which
           means wrap on word boundaries.
   */
-  @property void wrapMode(pango.types.WrapMode propval)
+  @property void wrapMode(pango.types.WrapMode propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(pango.types.WrapMode)("wrap-mode", propval);
   }
@@ -610,7 +610,7 @@ class Label : gtk.misc.Misc
         which determines how the labels size allocation is positioned in the
         space available for the label.
   */
-  override @property float xalign()
+  override @property float xalign() nothrow
   {
     return getXalign();
   }
@@ -623,7 +623,7 @@ class Label : gtk.misc.Misc
           which determines how the labels size allocation is positioned in the
           space available for the label.
   */
-  override @property void xalign(float propval)
+  override @property void xalign(float propval) nothrow
   {
     setXalign(propval);
   }
@@ -635,7 +635,7 @@ class Label : gtk.misc.Misc
         which determines how the labels size allocation is positioned in the
         space available for the label.
   */
-  override @property float yalign()
+  override @property float yalign() nothrow
   {
     return getYalign();
   }
@@ -648,7 +648,7 @@ class Label : gtk.misc.Misc
           which determines how the labels size allocation is positioned in the
           space available for the label.
   */
-  override @property void yalign(float propval)
+  override @property void yalign(float propval) nothrow
   {
     setYalign(propval);
   }
@@ -661,7 +661,7 @@ class Label : gtk.misc.Misc
         str = The text of the label
       Returns: the new #GtkLabel
   */
-  this(string str = null)
+  this(string str = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -690,7 +690,7 @@ class Label : gtk.misc.Misc
                 mnemonic character
       Returns: the new #GtkLabel
   */
-  static gtk.label.Label newWithMnemonic(string str = null)
+  static gtk.label.Label newWithMnemonic(string str = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -704,7 +704,7 @@ class Label : gtk.misc.Misc
       [gtk.label.Label.setAngle].
       Returns: the angle of rotation for the label
   */
-  double getAngle()
+  double getAngle() nothrow
   {
     double _retval;
     _retval = gtk_label_get_angle(cast(GtkLabel*)this._cPtr);
@@ -721,7 +721,7 @@ class Label : gtk.misc.Misc
       Returns: the attribute list, or null
             if none was set.
   */
-  pango.attr_list.AttrList getAttributes()
+  pango.attr_list.AttrList getAttributes() nothrow
   {
     PangoAttrList* _cretval;
     _cretval = gtk_label_get_attributes(cast(GtkLabel*)this._cPtr);
@@ -740,7 +740,7 @@ class Label : gtk.misc.Misc
       Returns: the currently active URI. The string is owned by GTK+ and must
           not be freed or modified.
   */
-  string getCurrentUri()
+  string getCurrentUri() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_label_get_current_uri(cast(GtkLabel*)this._cPtr);
@@ -752,7 +752,7 @@ class Label : gtk.misc.Misc
       Returns the ellipsizing position of the label. See [gtk.label.Label.setEllipsize].
       Returns: #PangoEllipsizeMode
   */
-  pango.types.EllipsizeMode getEllipsize()
+  pango.types.EllipsizeMode getEllipsize() nothrow
   {
     PangoEllipsizeMode _cretval;
     _cretval = gtk_label_get_ellipsize(cast(GtkLabel*)this._cPtr);
@@ -764,7 +764,7 @@ class Label : gtk.misc.Misc
       Returns the justification of the label. See [gtk.label.Label.setJustify].
       Returns: #GtkJustification
   */
-  gtk.types.Justification getJustify()
+  gtk.types.Justification getJustify() nothrow
   {
     GtkJustification _cretval;
     _cretval = gtk_label_get_justify(cast(GtkLabel*)this._cPtr);
@@ -779,7 +779,7 @@ class Label : gtk.misc.Misc
       Returns: the text of the label widget. This string is
           owned by the widget and must not be modified or freed.
   */
-  string getLabel()
+  string getLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_label_get_label(cast(GtkLabel*)this._cPtr);
@@ -796,7 +796,7 @@ class Label : gtk.misc.Misc
       any time, so it should be considered read-only.
       Returns: the #PangoLayout for this label
   */
-  pango.layout.Layout getLayout()
+  pango.layout.Layout getLayout() nothrow
   {
     PangoLayout* _cretval;
     _cretval = gtk_label_get_layout(cast(GtkLabel*)this._cPtr);
@@ -819,7 +819,7 @@ class Label : gtk.misc.Misc
         x = location to store X offset of layout, or null
         y = location to store Y offset of layout, or null
   */
-  void getLayoutOffsets(out int x, out int y)
+  void getLayoutOffsets(out int x, out int y) nothrow
   {
     gtk_label_get_layout_offsets(cast(GtkLabel*)this._cPtr, cast(int*)&x, cast(int*)&y);
   }
@@ -829,7 +829,7 @@ class Label : gtk.misc.Misc
       See [gtk.label.Label.setLineWrap].
       Returns: true if the lines of the label are automatically wrapped.
   */
-  bool getLineWrap()
+  bool getLineWrap() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_label_get_line_wrap(cast(GtkLabel*)this._cPtr);
@@ -840,7 +840,7 @@ class Label : gtk.misc.Misc
       Returns line wrap mode used by the label. See [gtk.label.Label.setLineWrapMode].
       Returns: true if the lines of the label are automatically wrapped.
   */
-  pango.types.WrapMode getLineWrapMode()
+  pango.types.WrapMode getLineWrapMode() nothrow
   {
     PangoWrapMode _cretval;
     _cretval = gtk_label_get_line_wrap_mode(cast(GtkLabel*)this._cPtr);
@@ -853,7 +853,7 @@ class Label : gtk.misc.Misc
       label should be limited. See [gtk.label.Label.setLines].
       Returns: The number of lines
   */
-  int getLines()
+  int getLines() nothrow
   {
     int _retval;
     _retval = gtk_label_get_lines(cast(GtkLabel*)this._cPtr);
@@ -865,7 +865,7 @@ class Label : gtk.misc.Misc
       [gtk.label.Label.setWidthChars].
       Returns: the maximum width of the label in characters.
   */
-  int getMaxWidthChars()
+  int getMaxWidthChars() nothrow
   {
     int _retval;
     _retval = gtk_label_get_max_width_chars(cast(GtkLabel*)this._cPtr);
@@ -878,7 +878,7 @@ class Label : gtk.misc.Misc
       mnemonic set up it returns #GDK_KEY_VoidSymbol.
       Returns: GDK keyval usable for accelerators, or #GDK_KEY_VoidSymbol
   */
-  uint getMnemonicKeyval()
+  uint getMnemonicKeyval() nothrow
   {
     uint _retval;
     _retval = gtk_label_get_mnemonic_keyval(cast(GtkLabel*)this._cPtr);
@@ -891,7 +891,7 @@ class Label : gtk.misc.Misc
       Returns: the target of the label’s mnemonic,
             or null if none has been set and the default algorithm will be used.
   */
-  gtk.widget.Widget getMnemonicWidget()
+  gtk.widget.Widget getMnemonicWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_label_get_mnemonic_widget(cast(GtkLabel*)this._cPtr);
@@ -903,7 +903,7 @@ class Label : gtk.misc.Misc
       Gets the value set by [gtk.label.Label.setSelectable].
       Returns: true if the user can copy text from the label
   */
-  bool getSelectable()
+  bool getSelectable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_label_get_selectable(cast(GtkLabel*)this._cPtr);
@@ -919,7 +919,7 @@ class Label : gtk.misc.Misc
         end = return location for end of selection, as a character offset
       Returns: true if selection is non-empty
   */
-  bool getSelectionBounds(out int start, out int end)
+  bool getSelectionBounds(out int start, out int end) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_label_get_selection_bounds(cast(GtkLabel*)this._cPtr, cast(int*)&start, cast(int*)&end);
@@ -930,7 +930,7 @@ class Label : gtk.misc.Misc
       Returns whether the label is in single line mode.
       Returns: true when the label is in single line mode.
   */
-  bool getSingleLineMode()
+  bool getSingleLineMode() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_label_get_single_line_mode(cast(GtkLabel*)this._cPtr);
@@ -944,7 +944,7 @@ class Label : gtk.misc.Misc
       Returns: the text in the label widget. This is the internal
           string used by the label, and must not be modified.
   */
-  string getText()
+  string getText() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_label_get_text(cast(GtkLabel*)this._cPtr);
@@ -957,7 +957,7 @@ class Label : gtk.misc.Misc
       of clicked links.
       Returns: true if clicked links are remembered
   */
-  bool getTrackVisitedLinks()
+  bool getTrackVisitedLinks() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_label_get_track_visited_links(cast(GtkLabel*)this._cPtr);
@@ -970,7 +970,7 @@ class Label : gtk.misc.Misc
       See gtk_label_set_use_markup ().
       Returns: true if the label’s text will be parsed for markup.
   */
-  bool getUseMarkup()
+  bool getUseMarkup() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_label_get_use_markup(cast(GtkLabel*)this._cPtr);
@@ -983,7 +983,7 @@ class Label : gtk.misc.Misc
       Returns: true whether an embedded underline in the label indicates
                       the mnemonic accelerator keys.
   */
-  bool getUseUnderline()
+  bool getUseUnderline() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_label_get_use_underline(cast(GtkLabel*)this._cPtr);
@@ -995,7 +995,7 @@ class Label : gtk.misc.Misc
       [gtk.label.Label.setWidthChars].
       Returns: the width of the label in characters.
   */
-  int getWidthChars()
+  int getWidthChars() nothrow
   {
     int _retval;
     _retval = gtk_label_get_width_chars(cast(GtkLabel*)this._cPtr);
@@ -1006,7 +1006,7 @@ class Label : gtk.misc.Misc
       Gets the #GtkLabel:xalign property for label.
       Returns: the xalign property
   */
-  float getXalign()
+  float getXalign() nothrow
   {
     float _retval;
     _retval = gtk_label_get_xalign(cast(GtkLabel*)this._cPtr);
@@ -1017,7 +1017,7 @@ class Label : gtk.misc.Misc
       Gets the #GtkLabel:yalign property for label.
       Returns: the yalign property
   */
-  float getYalign()
+  float getYalign() nothrow
   {
     float _retval;
     _retval = gtk_label_get_yalign(cast(GtkLabel*)this._cPtr);
@@ -1034,7 +1034,7 @@ class Label : gtk.misc.Misc
         startOffset = start offset (in characters not bytes)
         endOffset = end offset (in characters not bytes)
   */
-  void selectRegion(int startOffset, int endOffset)
+  void selectRegion(int startOffset, int endOffset) nothrow
   {
     gtk_label_select_region(cast(GtkLabel*)this._cPtr, startOffset, endOffset);
   }
@@ -1049,7 +1049,7 @@ class Label : gtk.misc.Misc
         angle = the angle that the baseline of the label makes with
             the horizontal, in degrees, measured counterclockwise
   */
-  void setAngle(double angle)
+  void setAngle(double angle) nothrow
   {
     gtk_label_set_angle(cast(GtkLabel*)this._cPtr, angle);
   }
@@ -1068,7 +1068,7 @@ class Label : gtk.misc.Misc
       Params:
         attrs = a #PangoAttrList, or null
   */
-  void setAttributes(pango.attr_list.AttrList attrs = null)
+  void setAttributes(pango.attr_list.AttrList attrs = null) nothrow
   {
     gtk_label_set_attributes(cast(GtkLabel*)this._cPtr, attrs ? cast(PangoAttrList*)attrs._cPtr(No.Dup) : null);
   }
@@ -1080,7 +1080,7 @@ class Label : gtk.misc.Misc
       Params:
         mode = a #PangoEllipsizeMode
   */
-  void setEllipsize(pango.types.EllipsizeMode mode)
+  void setEllipsize(pango.types.EllipsizeMode mode) nothrow
   {
     gtk_label_set_ellipsize(cast(GtkLabel*)this._cPtr, mode);
   }
@@ -1096,7 +1096,7 @@ class Label : gtk.misc.Misc
       Params:
         jtype = a #GtkJustification
   */
-  void setJustify(gtk.types.Justification jtype)
+  void setJustify(gtk.types.Justification jtype) nothrow
   {
     gtk_label_set_justify(cast(GtkLabel*)this._cPtr, jtype);
   }
@@ -1110,7 +1110,7 @@ class Label : gtk.misc.Misc
       Params:
         str = the new text to set for the label
   */
-  void setLabel(string str)
+  void setLabel(string str) nothrow
   {
     const(char)* _str = str.toCString(No.Alloc);
     gtk_label_set_label(cast(GtkLabel*)this._cPtr, _str);
@@ -1130,7 +1130,7 @@ class Label : gtk.misc.Misc
       Params:
         wrap = the setting
   */
-  void setLineWrap(bool wrap)
+  void setLineWrap(bool wrap) nothrow
   {
     gtk_label_set_line_wrap(cast(GtkLabel*)this._cPtr, wrap);
   }
@@ -1143,7 +1143,7 @@ class Label : gtk.misc.Misc
       Params:
         wrapMode = the line wrapping mode
   */
-  void setLineWrapMode(pango.types.WrapMode wrapMode)
+  void setLineWrapMode(pango.types.WrapMode wrapMode) nothrow
   {
     gtk_label_set_line_wrap_mode(cast(GtkLabel*)this._cPtr, wrapMode);
   }
@@ -1157,7 +1157,7 @@ class Label : gtk.misc.Misc
       Params:
         lines = the desired number of lines, or -1
   */
-  void setLines(int lines)
+  void setLines(int lines) nothrow
   {
     gtk_label_set_lines(cast(GtkLabel*)this._cPtr, lines);
   }
@@ -1193,7 +1193,7 @@ class Label : gtk.misc.Misc
       Params:
         str = a markup string (see [Pango markup format][PangoMarkupFormat])
   */
-  void setMarkup(string str)
+  void setMarkup(string str) nothrow
   {
     const(char)* _str = str.toCString(No.Alloc);
     gtk_label_set_markup(cast(GtkLabel*)this._cPtr, _str);
@@ -1213,7 +1213,7 @@ class Label : gtk.misc.Misc
         str = a markup string (see
               [Pango markup format][PangoMarkupFormat])
   */
-  void setMarkupWithMnemonic(string str)
+  void setMarkupWithMnemonic(string str) nothrow
   {
     const(char)* _str = str.toCString(No.Alloc);
     gtk_label_set_markup_with_mnemonic(cast(GtkLabel*)this._cPtr, _str);
@@ -1225,7 +1225,7 @@ class Label : gtk.misc.Misc
       Params:
         nChars = the new desired maximum width, in characters.
   */
-  void setMaxWidthChars(int nChars)
+  void setMaxWidthChars(int nChars) nothrow
   {
     gtk_label_set_max_width_chars(cast(GtkLabel*)this._cPtr, nChars);
   }
@@ -1249,7 +1249,7 @@ class Label : gtk.misc.Misc
       Params:
         widget = the target #GtkWidget, or null to unset
   */
-  void setMnemonicWidget(gtk.widget.Widget widget = null)
+  void setMnemonicWidget(gtk.widget.Widget widget = null) nothrow
   {
     gtk_label_set_mnemonic_widget(cast(GtkLabel*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -1263,7 +1263,7 @@ class Label : gtk.misc.Misc
       Params:
         pattern = The pattern as described above.
   */
-  void setPattern(string pattern)
+  void setPattern(string pattern) nothrow
   {
     const(char)* _pattern = pattern.toCString(No.Alloc);
     gtk_label_set_pattern(cast(GtkLabel*)this._cPtr, _pattern);
@@ -1276,7 +1276,7 @@ class Label : gtk.misc.Misc
       Params:
         setting = true to allow selecting text in the label
   */
-  void setSelectable(bool setting)
+  void setSelectable(bool setting) nothrow
   {
     gtk_label_set_selectable(cast(GtkLabel*)this._cPtr, setting);
   }
@@ -1287,7 +1287,7 @@ class Label : gtk.misc.Misc
       Params:
         singleLineMode = true if the label should be in single line mode
   */
-  void setSingleLineMode(bool singleLineMode)
+  void setSingleLineMode(bool singleLineMode) nothrow
   {
     gtk_label_set_single_line_mode(cast(GtkLabel*)this._cPtr, singleLineMode);
   }
@@ -1307,7 +1307,7 @@ class Label : gtk.misc.Misc
       Params:
         str = The text you want to set
   */
-  void setText(string str)
+  void setText(string str) nothrow
   {
     const(char)* _str = str.toCString(No.Alloc);
     gtk_label_set_text(cast(GtkLabel*)this._cPtr, _str);
@@ -1323,7 +1323,7 @@ class Label : gtk.misc.Misc
       Params:
         str = a string
   */
-  void setTextWithMnemonic(string str)
+  void setTextWithMnemonic(string str) nothrow
   {
     const(char)* _str = str.toCString(No.Alloc);
     gtk_label_set_text_with_mnemonic(cast(GtkLabel*)this._cPtr, _str);
@@ -1336,7 +1336,7 @@ class Label : gtk.misc.Misc
       Params:
         trackLinks = true to track visited links
   */
-  void setTrackVisitedLinks(bool trackLinks)
+  void setTrackVisitedLinks(bool trackLinks) nothrow
   {
     gtk_label_set_track_visited_links(cast(GtkLabel*)this._cPtr, trackLinks);
   }
@@ -1349,7 +1349,7 @@ class Label : gtk.misc.Misc
       Params:
         setting = true if the label’s text should be parsed for markup.
   */
-  void setUseMarkup(bool setting)
+  void setUseMarkup(bool setting) nothrow
   {
     gtk_label_set_use_markup(cast(GtkLabel*)this._cPtr, setting);
   }
@@ -1361,7 +1361,7 @@ class Label : gtk.misc.Misc
       Params:
         setting = true if underlines in the text indicate mnemonics
   */
-  void setUseUnderline(bool setting)
+  void setUseUnderline(bool setting) nothrow
   {
     gtk_label_set_use_underline(cast(GtkLabel*)this._cPtr, setting);
   }
@@ -1372,7 +1372,7 @@ class Label : gtk.misc.Misc
       Params:
         nChars = the new desired width, in characters.
   */
-  void setWidthChars(int nChars)
+  void setWidthChars(int nChars) nothrow
   {
     gtk_label_set_width_chars(cast(GtkLabel*)this._cPtr, nChars);
   }
@@ -1383,7 +1383,7 @@ class Label : gtk.misc.Misc
       Params:
         xalign = the new xalign value, between 0 and 1
   */
-  void setXalign(float xalign)
+  void setXalign(float xalign) nothrow
   {
     gtk_label_set_xalign(cast(GtkLabel*)this._cPtr, xalign);
   }
@@ -1394,7 +1394,7 @@ class Label : gtk.misc.Misc
       Params:
         yalign = the new yalign value, between 0 and 1
   */
-  void setYalign(float yalign)
+  void setYalign(float yalign) nothrow
   {
     gtk_label_set_yalign(cast(GtkLabel*)this._cPtr, yalign);
   }
@@ -1420,13 +1420,13 @@ class Label : gtk.misc.Misc
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivateCurrentLink(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivateCurrentLink(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.label.Label)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1435,7 +1435,14 @@ class Label : gtk.misc.Misc
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.label.Label.activateCurrentLink");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1462,18 +1469,19 @@ class Label : gtk.misc.Misc
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivateLink(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivateLink(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.label.Label)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1481,7 +1489,14 @@ class Label : gtk.misc.Misc
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.label.Label.activateLink");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1509,13 +1524,13 @@ class Label : gtk.misc.Misc
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.label.Label)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1524,7 +1539,14 @@ class Label : gtk.misc.Misc
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.label.Label.copyClipboard");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1568,7 +1590,7 @@ class Label : gtk.misc.Misc
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.MovementStep)))
@@ -1577,7 +1599,7 @@ class Label : gtk.misc.Misc
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.label.Label)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1595,7 +1617,14 @@ class Label : gtk.misc.Misc
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.label.Label.moveCursor");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1624,14 +1653,14 @@ class Label : gtk.misc.Misc
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPopulatePopup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPopulatePopup(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.menu.Menu)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.label.Label)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1643,7 +1672,14 @@ class Label : gtk.misc.Misc
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.label.Label.populatePopup");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1665,13 +1701,13 @@ class LabelGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
           if the label is selectable.
       Returns: Builder instance for fluent chaining
   */
-  T angle(double propval)
+  T angle(double propval) nothrow
   {
     return setProperty("angle", propval);
   }
 
   /** */
-  T attributes(pango.attr_list.AttrList propval)
+  T attributes(pango.attr_list.AttrList propval) nothrow
   {
     return setProperty("attributes", propval);
   }
@@ -1692,13 +1728,13 @@ class LabelGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
           [gtk.label.Label.setWidthChars].
       Returns: Builder instance for fluent chaining
   */
-  T ellipsize(pango.types.EllipsizeMode propval)
+  T ellipsize(pango.types.EllipsizeMode propval) nothrow
   {
     return setProperty("ellipsize", propval);
   }
 
   /** */
-  T justify(gtk.types.Justification propval)
+  T justify(gtk.types.Justification propval) nothrow
   {
     return setProperty("justify", propval);
   }
@@ -1719,7 +1755,7 @@ class LabelGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
           to display them.
       Returns: Builder instance for fluent chaining
   */
-  T label(string propval)
+  T label(string propval) nothrow
   {
     return setProperty("label", propval);
   }
@@ -1733,7 +1769,7 @@ class LabelGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
           -1 if you don't want to limit the number of lines.
       Returns: Builder instance for fluent chaining
   */
-  T lines(int propval)
+  T lines(int propval) nothrow
   {
     return setProperty("lines", propval);
   }
@@ -1749,25 +1785,25 @@ class LabelGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
           determine the width of ellipsized and wrapped labels.
       Returns: Builder instance for fluent chaining
   */
-  T maxWidthChars(int propval)
+  T maxWidthChars(int propval) nothrow
   {
     return setProperty("max-width-chars", propval);
   }
 
   /** */
-  T mnemonicWidget(gtk.widget.Widget propval)
+  T mnemonicWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("mnemonic-widget", propval);
   }
 
   /** */
-  T pattern(string propval)
+  T pattern(string propval) nothrow
   {
     return setProperty("pattern", propval);
   }
 
   /** */
-  T selectable(bool propval)
+  T selectable(bool propval) nothrow
   {
     return setProperty("selectable", propval);
   }
@@ -1782,7 +1818,7 @@ class LabelGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
           changes would be distracting, e.g. in a statusbar.
       Returns: Builder instance for fluent chaining
   */
-  T singleLineMode(bool propval)
+  T singleLineMode(bool propval) nothrow
   {
     return setProperty("single-line-mode", propval);
   }
@@ -1795,19 +1831,19 @@ class LabelGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
           when rendering this link, in addition to #GTK_STATE_FLAG_LINK.
       Returns: Builder instance for fluent chaining
   */
-  T trackVisitedLinks(bool propval)
+  T trackVisitedLinks(bool propval) nothrow
   {
     return setProperty("track-visited-links", propval);
   }
 
   /** */
-  T useMarkup(bool propval)
+  T useMarkup(bool propval) nothrow
   {
     return setProperty("use-markup", propval);
   }
 
   /** */
-  T useUnderline(bool propval)
+  T useUnderline(bool propval) nothrow
   {
     return setProperty("use-underline", propval);
   }
@@ -1823,13 +1859,13 @@ class LabelGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
           determine the width of ellipsized and wrapped labels.
       Returns: Builder instance for fluent chaining
   */
-  T widthChars(int propval)
+  T widthChars(int propval) nothrow
   {
     return setProperty("width-chars", propval);
   }
 
   /** */
-  T wrap(bool propval)
+  T wrap(bool propval) nothrow
   {
     return setProperty("wrap", propval);
   }
@@ -1842,7 +1878,7 @@ class LabelGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
           means wrap on word boundaries.
       Returns: Builder instance for fluent chaining
   */
-  T wrapMode(pango.types.WrapMode propval)
+  T wrapMode(pango.types.WrapMode propval) nothrow
   {
     return setProperty("wrap-mode", propval);
   }
@@ -1856,7 +1892,7 @@ class LabelGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
           space available for the label.
       Returns: Builder instance for fluent chaining
   */
-  override T xalign(float propval)
+  override T xalign(float propval) nothrow
   {
     return setProperty("xalign", propval);
   }
@@ -1870,7 +1906,7 @@ class LabelGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
           space available for the label.
       Returns: Builder instance for fluent chaining
   */
-  override T yalign(float propval)
+  override T yalign(float propval) nothrow
   {
     return setProperty("yalign", propval);
   }
@@ -1883,7 +1919,7 @@ final class LabelGidBuilder : LabelGidBuilderImpl!LabelGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Label build()
+  Label build() nothrow
   {
     return new Label(cast(void*)createGObject(Label._getGType), No.Take);
   }

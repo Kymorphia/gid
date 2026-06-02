@@ -20,7 +20,7 @@ import gmime.types;
       micro = Minimum micro version
     Returns: true if the requirement is met or false otherwise.
 */
-bool checkVersion(uint major, uint minor, uint micro)
+bool checkVersion(uint major, uint minor, uint micro) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_mime_check_version(major, minor, micro);
@@ -36,7 +36,7 @@ bool checkVersion(uint major, uint minor, uint micro)
     Returns: the #GMimeContentEncoding specified by str or
       #GMIME_CONTENT_ENCODING_DEFAULT on error.
 */
-gmime.types.ContentEncoding contentEncodingFromString(string str)
+gmime.types.ContentEncoding contentEncodingFromString(string str) nothrow
 {
   GMimeContentEncoding _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -57,7 +57,7 @@ gmime.types.ContentEncoding contentEncodingFromString(string str)
       #GMIME_CONTENT_ENCODING_QUOTEDPRINTABLE and
       #GMIME_CONTENT_ENCODING_UUENCODE.
 */
-string contentEncodingToString(gmime.types.ContentEncoding encoding)
+string contentEncodingToString(gmime.types.ContentEncoding encoding) nothrow
 {
   const(char)* _cretval;
   _cretval = g_mime_content_encoding_to_string(encoding);
@@ -72,7 +72,7 @@ string contentEncodingToString(gmime.types.ContentEncoding encoding)
       str = string in locale charset
     Returns: a new string buffer containing str converted to UTF-8.
 */
-string iconvLocaleToUtf8(string str)
+string iconvLocaleToUtf8(string str) nothrow
 {
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -91,7 +91,7 @@ string iconvLocaleToUtf8(string str)
     Returns: a new string buffer containing the first `n` bytes of
       str converted to UTF-8.
 */
-string iconvLocaleToUtf8Length(string str, size_t n)
+string iconvLocaleToUtf8Length(string str, size_t n) nothrow
 {
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -109,7 +109,7 @@ string iconvLocaleToUtf8Length(string str, size_t n)
     Returns: a new string buffer containing str converted to the
       user's locale charset.
 */
-string iconvUtf8ToLocale(string str)
+string iconvUtf8ToLocale(string str) nothrow
 {
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -128,7 +128,7 @@ string iconvUtf8ToLocale(string str)
     Returns: a new string buffer containing the first `n` bytes of
       str converted to the user's locale charset.
 */
-string iconvUtf8ToLocaleLength(string str, size_t n)
+string iconvUtf8ToLocaleLength(string str, size_t n) nothrow
 {
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -140,7 +140,7 @@ string iconvUtf8ToLocaleLength(string str, size_t n)
 /**
     Initializes GMime.
 */
-void init_()
+void init_() nothrow
 {
   g_mime_init();
 }
@@ -149,7 +149,7 @@ void init_()
     Gets the user's locale charset (or iso-8859-1 by default).
     Returns: the user's locale charset (or iso-8859-1 by default).
 */
-string localeCharset()
+string localeCharset() nothrow
 {
   const(char)* _cretval;
   _cretval = g_mime_locale_charset();
@@ -161,7 +161,7 @@ string localeCharset()
     Gets the user's locale language code (or null by default).
     Returns: the user's locale language code (or null by default).
 */
-string localeLanguage()
+string localeLanguage() nothrow
 {
   const(char)* _cretval;
   _cretval = g_mime_locale_language();
@@ -172,7 +172,7 @@ string localeLanguage()
 /**
     Frees internally allocated tables created in [gmime.global.init_].
 */
-void shutdown()
+void shutdown() nothrow
 {
   g_mime_shutdown();
 }
@@ -187,7 +187,7 @@ void shutdown()
       encoding type for the specified block of text. ("best" in this
       particular case means smallest output size)
 */
-gmime.types.ContentEncoding utilsBestEncoding(ubyte[] text)
+gmime.types.ContentEncoding utilsBestEncoding(ubyte[] text) nothrow
 {
   GMimeContentEncoding _cretval;
   size_t _len;
@@ -213,7 +213,7 @@ gmime.types.ContentEncoding utilsBestEncoding(ubyte[] text)
           unknown 8bit/multibyte character set
     Returns: a UTF-8 string representation of text.
 */
-string utilsDecode8bit(gmime.parser_options.ParserOptions options, ubyte[] text)
+string utilsDecode8bit(gmime.parser_options.ParserOptions options, ubyte[] text) nothrow
 {
   char* _cretval;
   size_t _len;
@@ -233,7 +233,7 @@ string utilsDecode8bit(gmime.parser_options.ParserOptions options, ubyte[] text)
       messageId = string containing a message-id
     Returns: the addr-spec portion of the msg-id.
 */
-string utilsDecodeMessageId(string messageId)
+string utilsDecodeMessageId(string messageId) nothrow
 {
   char* _cretval;
   const(char)* _messageId = messageId.toCString(No.Alloc);
@@ -250,7 +250,7 @@ string utilsDecodeMessageId(string messageId)
     Returns: a unique string in an addr-spec format suitable for use as
       a Message-Id.
 */
-string utilsGenerateMessageId(string fqdn)
+string utilsGenerateMessageId(string fqdn) nothrow
 {
   char* _cretval;
   const(char)* _fqdn = fqdn.toCString(No.Alloc);
@@ -267,7 +267,7 @@ string utilsGenerateMessageId(string fqdn)
     Returns: the #GDateTime representation of the date
       string specified by str or null on error.
 */
-glib.date_time.DateTime utilsHeaderDecodeDate(string str)
+glib.date_time.DateTime utilsHeaderDecodeDate(string str) nothrow
 {
   GDateTime* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -285,7 +285,7 @@ glib.date_time.DateTime utilsHeaderDecodeDate(string str)
     Returns: a newly allocated UTF-8 string representing the the decoded
       header.
 */
-string utilsHeaderDecodePhrase(gmime.parser_options.ParserOptions options, string phrase)
+string utilsHeaderDecodePhrase(gmime.parser_options.ParserOptions options, string phrase) nothrow
 {
   char* _cretval;
   const(char)* _phrase = phrase.toCString(No.Alloc);
@@ -303,7 +303,7 @@ string utilsHeaderDecodePhrase(gmime.parser_options.ParserOptions options, strin
     Returns: a newly allocated UTF-8 string representing the the decoded
       header.
 */
-string utilsHeaderDecodeText(gmime.parser_options.ParserOptions options, string text)
+string utilsHeaderDecodeText(gmime.parser_options.ParserOptions options, string text) nothrow
 {
   char* _cretval;
   const(char)* _text = text.toCString(No.Alloc);
@@ -322,7 +322,7 @@ string utilsHeaderDecodeText(gmime.parser_options.ParserOptions options, string 
     Returns: the encoded 'phrase'. Useful for encoding internet
       addresses.
 */
-string utilsHeaderEncodePhrase(gmime.format_options.FormatOptions options, string phrase, string charset = null)
+string utilsHeaderEncodePhrase(gmime.format_options.FormatOptions options, string phrase, string charset = null) nothrow
 {
   char* _cretval;
   const(char)* _phrase = phrase.toCString(No.Alloc);
@@ -342,7 +342,7 @@ string utilsHeaderEncodePhrase(gmime.format_options.FormatOptions options, strin
     Returns: the encoded header. Useful for encoding
       headers like "Subject".
 */
-string utilsHeaderEncodeText(gmime.format_options.FormatOptions options, string text, string charset = null)
+string utilsHeaderEncodeText(gmime.format_options.FormatOptions options, string text, string charset = null) nothrow
 {
   char* _cretval;
   const(char)* _text = text.toCString(No.Alloc);
@@ -360,7 +360,7 @@ string utilsHeaderEncodeText(gmime.format_options.FormatOptions options, string 
       date = a #GDateTime
     Returns: a valid string representation of the date.
 */
-string utilsHeaderFormatDate(glib.date_time.DateTime date)
+string utilsHeaderFormatDate(glib.date_time.DateTime date) nothrow
 {
   char* _cretval;
   _cretval = g_mime_utils_header_format_date(date ? cast(GDateTime*)date._cPtr(No.Dup) : null);
@@ -375,7 +375,7 @@ string utilsHeaderFormatDate(glib.date_time.DateTime date)
       value = raw header value
     Returns: an allocated string containing the unfolded header value.
 */
-string utilsHeaderUnfold(string value)
+string utilsHeaderUnfold(string value) nothrow
 {
   char* _cretval;
   const(char)* _value = value.toCString(No.Alloc);
@@ -394,7 +394,7 @@ string utilsHeaderUnfold(string value)
       based on whether or not the input string contains any 'specials'
       as defined by rfc2822.
 */
-string utilsQuoteString(string str)
+string utilsQuoteString(string str) nothrow
 {
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -412,7 +412,7 @@ string utilsQuoteString(string str)
       header = header field and value string
     Returns: an allocated string containing the folded header.
 */
-string utilsStructuredHeaderFold(gmime.parser_options.ParserOptions options, gmime.format_options.FormatOptions format, string header)
+string utilsStructuredHeaderFold(gmime.parser_options.ParserOptions options, gmime.format_options.FormatOptions format, string header) nothrow
 {
   char* _cretval;
   const(char)* _header = header.toCString(No.Alloc);
@@ -430,7 +430,7 @@ string utilsStructuredHeaderFold(gmime.parser_options.ParserOptions options, gmi
     Returns: true if the text contains 8bit characters or false
       otherwise.
 */
-bool utilsTextIs8bit(ubyte[] text)
+bool utilsTextIs8bit(ubyte[] text) nothrow
 {
   bool _retval;
   size_t _len;
@@ -448,7 +448,7 @@ bool utilsTextIs8bit(ubyte[] text)
     Params:
       str = input string
 */
-void utilsUnquoteString(string str)
+void utilsUnquoteString(string str) nothrow
 {
   char* _str = str.toCString(No.Alloc);
   g_mime_utils_unquote_string(_str);
@@ -463,7 +463,7 @@ void utilsUnquoteString(string str)
       header = header field and value string
     Returns: an allocated string containing the folded header.
 */
-string utilsUnstructuredHeaderFold(gmime.parser_options.ParserOptions options, gmime.format_options.FormatOptions format, string header)
+string utilsUnstructuredHeaderFold(gmime.parser_options.ParserOptions options, gmime.format_options.FormatOptions format, string header) nothrow
 {
   char* _cretval;
   const(char)* _header = header.toCString(No.Alloc);
@@ -491,7 +491,7 @@ string utilsUnstructuredHeaderFold(gmime.parser_options.ParserOptions options, g
       crc = crc state
     Returns: the number of bytes decoded.
 */
-size_t ydecodeStep(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint pcrc, ref uint crc)
+size_t ydecodeStep(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint pcrc, ref uint crc) nothrow
 {
   size_t _retval;
   size_t _inlen;
@@ -521,7 +521,7 @@ size_t ydecodeStep(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint pc
       crc = crc state
     Returns: the number of bytes encoded.
 */
-size_t yencodeClose(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint pcrc, ref uint crc)
+size_t yencodeClose(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint pcrc, ref uint crc) nothrow
 {
   size_t _retval;
   size_t _inlen;
@@ -552,7 +552,7 @@ size_t yencodeClose(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint p
       crc = crc state
     Returns: the number of bytes encoded.
 */
-size_t yencodeStep(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint pcrc, ref uint crc)
+size_t yencodeStep(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint pcrc, ref uint crc) nothrow
 {
   size_t _retval;
   size_t _inlen;

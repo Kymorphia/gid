@@ -17,11 +17,8 @@ class SDPOrigin
   GstSDPOrigin _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstsdp.sdporigin.SDPOrigin");
-
     _cInstance = *cast(GstSDPOrigin*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class SDPOrigin
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class SDPOrigin
       Returns: the user's login on the originating host, or it is "-"
            if the originating host does not support the concept of user ids.
   */
-  @property string username()
+  @property string username() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).username);
   }
@@ -50,7 +47,7 @@ class SDPOrigin
         propval = the user's login on the originating host, or it is "-"
              if the originating host does not support the concept of user ids.
   */
-  @property void username(string propval)
+  @property void username(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).username);
     dToC(propval, cast(void*)&(cast(GstSDPOrigin*)this._cPtr).username);
@@ -62,7 +59,7 @@ class SDPOrigin
            @nettype, @addrtype and @addr form a globally unique identifier for the
            session.
   */
-  @property string sessId()
+  @property string sessId() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).sessId);
   }
@@ -74,7 +71,7 @@ class SDPOrigin
              @nettype, @addrtype and @addr form a globally unique identifier for the
              session.
   */
-  @property void sessId(string propval)
+  @property void sessId(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).sessId);
     dToC(propval, cast(void*)&(cast(GstSDPOrigin*)this._cPtr).sessId);
@@ -84,7 +81,7 @@ class SDPOrigin
       Get `sessVersion` field.
       Returns: a version number for this announcement
   */
-  @property string sessVersion()
+  @property string sessVersion() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).sessVersion);
   }
@@ -94,7 +91,7 @@ class SDPOrigin
       Params:
         propval = a version number for this announcement
   */
-  @property void sessVersion(string propval)
+  @property void sessVersion(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).sessVersion);
     dToC(propval, cast(void*)&(cast(GstSDPOrigin*)this._cPtr).sessVersion);
@@ -105,7 +102,7 @@ class SDPOrigin
       Returns: the type of network. "IN" is defined to have the meaning
            "Internet".
   */
-  @property string nettype()
+  @property string nettype() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).nettype);
   }
@@ -116,7 +113,7 @@ class SDPOrigin
         propval = the type of network. "IN" is defined to have the meaning
              "Internet".
   */
-  @property void nettype(string propval)
+  @property void nettype(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).nettype);
     dToC(propval, cast(void*)&(cast(GstSDPOrigin*)this._cPtr).nettype);
@@ -126,7 +123,7 @@ class SDPOrigin
       Get `addrtype` field.
       Returns: the type of @addr.
   */
-  @property string addrtype()
+  @property string addrtype() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).addrtype);
   }
@@ -136,7 +133,7 @@ class SDPOrigin
       Params:
         propval = the type of @addr.
   */
-  @property void addrtype(string propval)
+  @property void addrtype(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).addrtype);
     dToC(propval, cast(void*)&(cast(GstSDPOrigin*)this._cPtr).addrtype);
@@ -147,7 +144,7 @@ class SDPOrigin
       Returns: the globally unique address of the machine from which the session was
             created.
   */
-  @property string addr()
+  @property string addr() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).addr);
   }
@@ -158,7 +155,7 @@ class SDPOrigin
         propval = the globally unique address of the machine from which the session was
               created.
   */
-  @property void addr(string propval)
+  @property void addr(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).addr);
     dToC(propval, cast(void*)&(cast(GstSDPOrigin*)this._cPtr).addr);

@@ -46,7 +46,7 @@ interface Scrollable
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scrollable_get_type != &gidSymbolNotFound ? gtk_scrollable_get_type() : cast(GType)0;
@@ -58,7 +58,7 @@ interface Scrollable
         
         This adjustment is shared between the scrollable widget and its parent.
   */
-  @property gtk.adjustment.Adjustment hadjustment();
+  @property gtk.adjustment.Adjustment hadjustment() nothrow;
 
   /**
       Set `hadjustment` property.
@@ -67,20 +67,20 @@ interface Scrollable
           
           This adjustment is shared between the scrollable widget and its parent.
   */
-  @property void hadjustment(gtk.adjustment.Adjustment propval);
+  @property void hadjustment(gtk.adjustment.Adjustment propval) nothrow;
 
   /**
       Get `hscrollPolicy` property.
       Returns: Determines when horizontal scrolling should start.
   */
-  @property gtk.types.ScrollablePolicy hscrollPolicy();
+  @property gtk.types.ScrollablePolicy hscrollPolicy() nothrow;
 
   /**
       Set `hscrollPolicy` property.
       Params:
         propval = Determines when horizontal scrolling should start.
   */
-  @property void hscrollPolicy(gtk.types.ScrollablePolicy propval);
+  @property void hscrollPolicy(gtk.types.ScrollablePolicy propval) nothrow;
 
   /**
       Get `vadjustment` property.
@@ -88,7 +88,7 @@ interface Scrollable
         
         This adjustment is shared between the scrollable widget and its parent.
   */
-  @property gtk.adjustment.Adjustment vadjustment();
+  @property gtk.adjustment.Adjustment vadjustment() nothrow;
 
   /**
       Set `vadjustment` property.
@@ -97,20 +97,20 @@ interface Scrollable
           
           This adjustment is shared between the scrollable widget and its parent.
   */
-  @property void vadjustment(gtk.adjustment.Adjustment propval);
+  @property void vadjustment(gtk.adjustment.Adjustment propval) nothrow;
 
   /**
       Get `vscrollPolicy` property.
       Returns: Determines when vertical scrolling should start.
   */
-  @property gtk.types.ScrollablePolicy vscrollPolicy();
+  @property gtk.types.ScrollablePolicy vscrollPolicy() nothrow;
 
   /**
       Set `vscrollPolicy` property.
       Params:
         propval = Determines when vertical scrolling should start.
   */
-  @property void vscrollPolicy(gtk.types.ScrollablePolicy propval);
+  @property void vscrollPolicy(gtk.types.ScrollablePolicy propval) nothrow;
 
   /**
       Returns the size of a non-scrolling border around the
@@ -201,7 +201,7 @@ interface ScrollableGidBuilderImpl(T)
           This adjustment is shared between the scrollable widget and its parent.
       Returns: Builder instance for fluent chaining
   */
-  T hadjustment(gtk.adjustment.Adjustment propval);
+  T hadjustment(gtk.adjustment.Adjustment propval) nothrow;
 
   /**
       Set `hscrollPolicy` property.
@@ -209,7 +209,7 @@ interface ScrollableGidBuilderImpl(T)
         propval = Determines when horizontal scrolling should start.
       Returns: Builder instance for fluent chaining
   */
-  T hscrollPolicy(gtk.types.ScrollablePolicy propval);
+  T hscrollPolicy(gtk.types.ScrollablePolicy propval) nothrow;
 
   /**
       Set `vadjustment` property.
@@ -219,7 +219,7 @@ interface ScrollableGidBuilderImpl(T)
           This adjustment is shared between the scrollable widget and its parent.
       Returns: Builder instance for fluent chaining
   */
-  T vadjustment(gtk.adjustment.Adjustment propval);
+  T vadjustment(gtk.adjustment.Adjustment propval) nothrow;
 
   /**
       Set `vscrollPolicy` property.
@@ -227,5 +227,5 @@ interface ScrollableGidBuilderImpl(T)
         propval = Determines when vertical scrolling should start.
       Returns: Builder instance for fluent chaining
   */
-  T vscrollPolicy(gtk.types.ScrollablePolicy propval);
+  T vscrollPolicy(gtk.types.ScrollablePolicy propval) nothrow;
 }

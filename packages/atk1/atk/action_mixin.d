@@ -41,7 +41,7 @@ template ActionT()
         i = the action index corresponding to the action to be performed
       Returns: true if success, false otherwise
   */
-  override bool doAction(int i)
+  override bool doAction(int i) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_action_do_action(cast(AtkAction*)this._cPtr, i);
@@ -56,7 +56,7 @@ template ActionT()
       Returns: a description string, or null if action does
         not implement this interface.
   */
-  override string getDescription(int i)
+  override string getDescription(int i) nothrow
   {
     const(char)* _cretval;
     _cretval = atk_action_get_description(cast(AtkAction*)this._cPtr, i);
@@ -93,7 +93,7 @@ template ActionT()
       Returns: the keybinding which can be used to activate
         this action, or null if there is no keybinding for this action.
   */
-  override string getKeybinding(int i)
+  override string getKeybinding(int i) nothrow
   {
     const(char)* _cretval;
     _cretval = atk_action_get_keybinding(cast(AtkAction*)this._cPtr, i);
@@ -109,7 +109,7 @@ template ActionT()
       Returns: a name string, or null if action does not
         implement this interface.
   */
-  override string getLocalizedName(int i)
+  override string getLocalizedName(int i) nothrow
   {
     const(char)* _cretval;
     _cretval = atk_action_get_localized_name(cast(AtkAction*)this._cPtr, i);
@@ -124,7 +124,7 @@ template ActionT()
       Returns: a the number of actions, or 0 if action does not
         implement this interface.
   */
-  override int getNActions()
+  override int getNActions() nothrow
   {
     int _retval;
     _retval = atk_action_get_n_actions(cast(AtkAction*)this._cPtr);
@@ -152,7 +152,7 @@ template ActionT()
       Returns: a name string, or null if action does not
         implement this interface.
   */
-  override string getName(int i)
+  override string getName(int i) nothrow
   {
     const(char)* _cretval;
     _cretval = atk_action_get_name(cast(AtkAction*)this._cPtr, i);
@@ -168,7 +168,7 @@ template ActionT()
         desc = the description to be assigned to this action
       Returns: a gboolean representing if the description was successfully set;
   */
-  override bool setDescription(int i, string desc)
+  override bool setDescription(int i, string desc) nothrow
   {
     bool _retval;
     const(char)* _desc = desc.toCString(No.Alloc);

@@ -154,26 +154,26 @@ class BaseParse : gst.element.Element
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_base_parse_get_type != &gidSymbolNotFound ? gst_base_parse_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BaseParse self()
+  override BaseParse self() nothrow
   {
     return this;
   }
@@ -182,7 +182,7 @@ class BaseParse : gst.element.Element
       Get builder for [gstbase.base_parse.BaseParse]
       Returns: New builder object
   */
-  static BaseParseGidBuilder builder()
+  static BaseParseGidBuilder builder() nothrow
   {
     return new BaseParseGidBuilder;
   }
@@ -196,7 +196,7 @@ class BaseParse : gst.element.Element
         If set to false, decision of whether to parse the data or not is up to
         the implementation (standard behaviour).
   */
-  @property bool disablePassthrough()
+  @property bool disablePassthrough() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("disable-passthrough");
   }
@@ -211,7 +211,7 @@ class BaseParse : gst.element.Element
           If set to false, decision of whether to parse the data or not is up to
           the implementation (standard behaviour).
   */
-  @property void disablePassthrough(bool propval)
+  @property void disablePassthrough(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("disable-passthrough", propval);
   }
@@ -229,7 +229,7 @@ class BaseParse : gst.element.Element
         force = add entry disregarding sanity checks
       Returns: #gboolean indicating whether entry was added
   */
-  bool addIndexEntry(ulong offset, gst.types.ClockTime ts, bool key, bool force)
+  bool addIndexEntry(ulong offset, gst.types.ClockTime ts, bool key, bool force) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_base_parse_add_index_entry(cast(GstBaseParse*)this._cPtr, offset, ts, key, force);
@@ -246,7 +246,7 @@ class BaseParse : gst.element.Element
         destValue = Pointer where the conversion result will be put.
       Returns: true if conversion was successful.
   */
-  bool convertDefault(gst.types.Format srcFormat, long srcValue, gst.types.Format destFormat, out long destValue)
+  bool convertDefault(gst.types.Format srcFormat, long srcValue, gst.types.Format destFormat, out long destValue) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_base_parse_convert_default(cast(GstBaseParse*)this._cPtr, srcFormat, srcValue, destFormat, cast(long*)&destValue);
@@ -258,7 +258,7 @@ class BaseParse : gst.element.Element
       match the current adapter size and calls chain method until the adapter
       is emptied or chain returns with error.
   */
-  void drain()
+  void drain() nothrow
   {
     gst_base_parse_drain(cast(GstBaseParse*)this._cPtr);
   }
@@ -284,7 +284,7 @@ class BaseParse : gst.element.Element
         size = consumed input data represented by frame
       Returns: a #GstFlowReturn that should be escalated to caller (of caller)
   */
-  gst.types.FlowReturn finishFrame(gstbase.base_parse_frame.BaseParseFrame frame, int size)
+  gst.types.FlowReturn finishFrame(gstbase.base_parse_frame.BaseParseFrame frame, int size) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_base_parse_finish_frame(cast(GstBaseParse*)this._cPtr, frame ? cast(GstBaseParseFrame*)frame._cPtr(No.Dup) : null, size);
@@ -305,7 +305,7 @@ class BaseParse : gst.element.Element
               previously-set tags
         mode = the #GstTagMergeMode to use, usually #GST_TAG_MERGE_REPLACE
   */
-  void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode)
+  void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode) nothrow
   {
     gst_base_parse_merge_tags(cast(GstBaseParse*)this._cPtr, tags ? cast(GstTagList*)tags._cPtr(No.Dup) : null, mode);
   }
@@ -321,7 +321,7 @@ class BaseParse : gst.element.Element
         frame = a #GstBaseParseFrame
       Returns: #GstFlowReturn
   */
-  gst.types.FlowReturn pushFrame(gstbase.base_parse_frame.BaseParseFrame frame)
+  gst.types.FlowReturn pushFrame(gstbase.base_parse_frame.BaseParseFrame frame) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_base_parse_push_frame(cast(GstBaseParse*)this._cPtr, frame ? cast(GstBaseParseFrame*)frame._cPtr(No.Dup) : null);
@@ -341,7 +341,7 @@ class BaseParse : gst.element.Element
       Params:
         bitrate = average bitrate in bits/second
   */
-  void setAverageBitrate(uint bitrate)
+  void setAverageBitrate(uint bitrate) nothrow
   {
     gst_base_parse_set_average_bitrate(cast(GstBaseParse*)this._cPtr, bitrate);
   }
@@ -358,7 +358,7 @@ class BaseParse : gst.element.Element
         duration = duration value.
         interval = how often to update the duration estimate based on bitrate, or 0.
   */
-  void setDuration(gst.types.Format fmt, long duration, int interval)
+  void setDuration(gst.types.Format fmt, long duration, int interval) nothrow
   {
     gst_base_parse_set_duration(cast(GstBaseParse*)this._cPtr, fmt, duration, interval);
   }
@@ -376,7 +376,7 @@ class BaseParse : gst.element.Element
         leadIn = frames needed before a segment for subsequent decode
         leadOut = frames needed after a segment
   */
-  void setFrameRate(uint fpsNum, uint fpsDen, uint leadIn, uint leadOut)
+  void setFrameRate(uint fpsNum, uint fpsDen, uint leadIn, uint leadOut) nothrow
   {
     gst_base_parse_set_frame_rate(cast(GstBaseParse*)this._cPtr, fpsNum, fpsDen, leadIn, leadOut);
   }
@@ -389,7 +389,7 @@ class BaseParse : gst.element.Element
       Params:
         hasTiming = whether frames carry timing information
   */
-  void setHasTimingInfo(bool hasTiming)
+  void setHasTimingInfo(bool hasTiming) nothrow
   {
     gst_base_parse_set_has_timing_info(cast(GstBaseParse*)this._cPtr, hasTiming);
   }
@@ -403,7 +403,7 @@ class BaseParse : gst.element.Element
       Params:
         inferTs = true if parser should infer DTS/PTS from each other
   */
-  void setInferTs(bool inferTs)
+  void setInferTs(bool inferTs) nothrow
   {
     gst_base_parse_set_infer_ts(cast(GstBaseParse*)this._cPtr, inferTs);
   }
@@ -421,7 +421,7 @@ class BaseParse : gst.element.Element
         minLatency = minimum parse latency
         maxLatency = maximum parse latency
   */
-  void setLatency(gst.types.ClockTime minLatency, gst.types.ClockTime maxLatency)
+  void setLatency(gst.types.ClockTime minLatency, gst.types.ClockTime maxLatency) nothrow
   {
     gst_base_parse_set_latency(cast(GstBaseParse*)this._cPtr, minLatency, maxLatency);
   }
@@ -434,7 +434,7 @@ class BaseParse : gst.element.Element
         minSize = Minimum size in bytes of the data that this base class should
                 give to subclass.
   */
-  void setMinFrameSize(uint minSize)
+  void setMinFrameSize(uint minSize) nothrow
   {
     gst_base_parse_set_min_frame_size(cast(GstBaseParse*)this._cPtr, minSize);
   }
@@ -451,7 +451,7 @@ class BaseParse : gst.element.Element
       Params:
         passthrough = true if parser should run in passthrough mode
   */
-  void setPassthrough(bool passthrough)
+  void setPassthrough(bool passthrough) nothrow
   {
     gst_base_parse_set_passthrough(cast(GstBaseParse*)this._cPtr, passthrough);
   }
@@ -465,7 +465,7 @@ class BaseParse : gst.element.Element
       Params:
         ptsInterpolate = true if parser should interpolate PTS timestamps
   */
-  void setPtsInterpolation(bool ptsInterpolate)
+  void setPtsInterpolation(bool ptsInterpolate) nothrow
   {
     gst_base_parse_set_pts_interpolation(cast(GstBaseParse*)this._cPtr, ptsInterpolate);
   }
@@ -478,7 +478,7 @@ class BaseParse : gst.element.Element
       Params:
         syncable = set if frame starts can be identified
   */
-  void setSyncable(bool syncable)
+  void setSyncable(bool syncable) nothrow
   {
     gst_base_parse_set_syncable(cast(GstBaseParse*)this._cPtr, syncable);
   }
@@ -496,7 +496,7 @@ class BaseParse : gst.element.Element
       Params:
         offset = offset into current buffer
   */
-  void setTsAtOffset(size_t offset)
+  void setTsAtOffset(size_t offset) nothrow
   {
     gst_base_parse_set_ts_at_offset(cast(GstBaseParse*)this._cPtr, offset);
   }
@@ -517,7 +517,7 @@ class BaseParseGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           the implementation (standard behaviour).
       Returns: Builder instance for fluent chaining
   */
-  T disablePassthrough(bool propval)
+  T disablePassthrough(bool propval) nothrow
   {
     return setProperty("disable-passthrough", propval);
   }
@@ -530,7 +530,7 @@ final class BaseParseGidBuilder : BaseParseGidBuilderImpl!BaseParseGidBuilder
       Create object from builder.
       Returns: New object
   */
-  BaseParse build()
+  BaseParse build() nothrow
   {
     return new BaseParse(cast(void*)createGObject(BaseParse._getGType), No.Take);
   }

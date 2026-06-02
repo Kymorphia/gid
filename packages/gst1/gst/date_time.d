@@ -23,32 +23,32 @@ class DateTime : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_date_time_get_type != &gidSymbolNotFound ? gst_date_time_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DateTime self()
+  override DateTime self() nothrow
   {
     return this;
   }
@@ -80,7 +80,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the newly created #GstDateTime,
         or null on error.
   */
-  this(float tzoffset, int year, int month, int day, int hour, int minute, double seconds)
+  this(float tzoffset, int year, int month, int day, int hour, int minute, double seconds) nothrow
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new(tzoffset, year, month, day, hour, minute, seconds);
@@ -95,7 +95,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: a newly created #GstDateTime,
         or null if dt is null.
   */
-  static gst.date_time.DateTime newFromGDateTime(glib.date_time.DateTime dt = null)
+  static gst.date_time.DateTime newFromGDateTime(glib.date_time.DateTime dt = null) nothrow
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new_from_g_date_time(dt ? cast(GDateTime*)dt._cPtr(Yes.Dup) : null);
@@ -118,7 +118,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: a newly created #GstDateTime,
         or null on error
   */
-  static gst.date_time.DateTime newFromIso8601String(string string_)
+  static gst.date_time.DateTime newFromIso8601String(string string_) nothrow
   {
     GstDateTime* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
@@ -136,7 +136,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the newly created #GstDateTime,
         or null on error.
   */
-  static gst.date_time.DateTime newFromUnixEpochLocalTime(long secs)
+  static gst.date_time.DateTime newFromUnixEpochLocalTime(long secs) nothrow
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new_from_unix_epoch_local_time(secs);
@@ -153,7 +153,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: a newly created #GstDateTime, or null
         on error.
   */
-  static gst.date_time.DateTime newFromUnixEpochLocalTimeUsecs(long usecs)
+  static gst.date_time.DateTime newFromUnixEpochLocalTimeUsecs(long usecs) nothrow
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new_from_unix_epoch_local_time_usecs(usecs);
@@ -170,7 +170,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the newly created #GstDateTime,
         or null on error.
   */
-  static gst.date_time.DateTime newFromUnixEpochUtc(long secs)
+  static gst.date_time.DateTime newFromUnixEpochUtc(long secs) nothrow
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new_from_unix_epoch_utc(secs);
@@ -187,7 +187,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: a newly created #GstDateTime, or null
         on error.
   */
-  static gst.date_time.DateTime newFromUnixEpochUtcUsecs(long usecs)
+  static gst.date_time.DateTime newFromUnixEpochUtcUsecs(long usecs) nothrow
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new_from_unix_epoch_utc_usecs(usecs);
@@ -222,7 +222,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the newly created #GstDateTime,
         or null on error.
   */
-  static gst.date_time.DateTime newLocalTime(int year, int month, int day, int hour, int minute, double seconds)
+  static gst.date_time.DateTime newLocalTime(int year, int month, int day, int hour, int minute, double seconds) nothrow
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new_local_time(year, month, day, hour, minute, seconds);
@@ -235,7 +235,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the newly created #GstDateTime which should
             be freed with [gst.date_time.DateTime.unref], or null on error.
   */
-  static gst.date_time.DateTime newNowLocalTime()
+  static gst.date_time.DateTime newNowLocalTime() nothrow
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new_now_local_time();
@@ -249,7 +249,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the newly created #GstDateTime which should
           be freed with [gst.date_time.DateTime.unref], or null on error.
   */
-  static gst.date_time.DateTime newNowUtc()
+  static gst.date_time.DateTime newNowUtc() nothrow
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new_now_utc();
@@ -268,7 +268,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the newly created #GstDateTime,
         or null on error.
   */
-  static gst.date_time.DateTime newY(int year)
+  static gst.date_time.DateTime newY(int year) nothrow
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new_y(year);
@@ -291,7 +291,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the newly created #GstDateTime,
         or null on error.
   */
-  static gst.date_time.DateTime newYm(int year, int month)
+  static gst.date_time.DateTime newYm(int year, int month) nothrow
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new_ym(year, month);
@@ -318,7 +318,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the newly created #GstDateTime,
         or null on error.
   */
-  static gst.date_time.DateTime newYmd(int year, int month, int day)
+  static gst.date_time.DateTime newYmd(int year, int month, int day) nothrow
   {
     GstDateTime* _cretval;
     _cretval = gst_date_time_new_ymd(year, month, day);
@@ -330,7 +330,7 @@ class DateTime : gobject.boxed.Boxed
       Returns the day of the month of this #GstDateTime.
       Returns: The day of this #GstDateTime, or -1 if none is set.
   */
-  int getDay()
+  int getDay() nothrow
   {
     int _retval;
     _retval = gst_date_time_get_day(cast(const(GstDateTime)*)this._cPtr);
@@ -342,7 +342,7 @@ class DateTime : gobject.boxed.Boxed
       calendar. The return is in the range of 0 to 23.
       Returns: the hour of the day, or -1 if none is set.
   */
-  int getHour()
+  int getHour() nothrow
   {
     int _retval;
     _retval = gst_date_time_get_hour(cast(const(GstDateTime)*)this._cPtr);
@@ -354,7 +354,7 @@ class DateTime : gobject.boxed.Boxed
       datetime in the gregorian calendar.
       Returns: the microsecond of the second, or -1 if none is set.
   */
-  int getMicrosecond()
+  int getMicrosecond() nothrow
   {
     int _retval;
     _retval = gst_date_time_get_microsecond(cast(const(GstDateTime)*)this._cPtr);
@@ -366,7 +366,7 @@ class DateTime : gobject.boxed.Boxed
       calendar.
       Returns: the minute of the hour, or -1 if none is set.
   */
-  int getMinute()
+  int getMinute() nothrow
   {
     int _retval;
     _retval = gst_date_time_get_minute(cast(const(GstDateTime)*)this._cPtr);
@@ -377,7 +377,7 @@ class DateTime : gobject.boxed.Boxed
       Returns the month of this #GstDateTime. January is 1, February is 2, etc..
       Returns: The month of this #GstDateTime, or -1 if none is set.
   */
-  int getMonth()
+  int getMonth() nothrow
   {
     int _retval;
     _retval = gst_date_time_get_month(cast(const(GstDateTime)*)this._cPtr);
@@ -389,7 +389,7 @@ class DateTime : gobject.boxed.Boxed
       calendar.
       Returns: the second represented by datetime, or -1 if none is set.
   */
-  int getSecond()
+  int getSecond() nothrow
   {
     int _retval;
     _retval = gst_date_time_get_second(cast(const(GstDateTime)*)this._cPtr);
@@ -403,7 +403,7 @@ class DateTime : gobject.boxed.Boxed
       If datetime represents UTC time, then the offset is zero.
       Returns: the offset from UTC in hours, or `G_MAXFLOAT` if none is set.
   */
-  float getTimeZoneOffset()
+  float getTimeZoneOffset() nothrow
   {
     float _retval;
     _retval = gst_date_time_get_time_zone_offset(cast(const(GstDateTime)*)this._cPtr);
@@ -415,7 +415,7 @@ class DateTime : gobject.boxed.Boxed
       Call [gst.date_time.DateTime.hasYear] before, to avoid warnings.
       Returns: The year of this #GstDateTime
   */
-  int getYear()
+  int getYear() nothrow
   {
     int _retval;
     _retval = gst_date_time_get_year(cast(const(GstDateTime)*)this._cPtr);
@@ -423,7 +423,7 @@ class DateTime : gobject.boxed.Boxed
   }
 
   /** */
-  bool hasDay()
+  bool hasDay() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_date_time_has_day(cast(const(GstDateTime)*)this._cPtr);
@@ -431,7 +431,7 @@ class DateTime : gobject.boxed.Boxed
   }
 
   /** */
-  bool hasMonth()
+  bool hasMonth() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_date_time_has_month(cast(const(GstDateTime)*)this._cPtr);
@@ -439,7 +439,7 @@ class DateTime : gobject.boxed.Boxed
   }
 
   /** */
-  bool hasSecond()
+  bool hasSecond() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_date_time_has_second(cast(const(GstDateTime)*)this._cPtr);
@@ -447,7 +447,7 @@ class DateTime : gobject.boxed.Boxed
   }
 
   /** */
-  bool hasTime()
+  bool hasTime() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_date_time_has_time(cast(const(GstDateTime)*)this._cPtr);
@@ -455,7 +455,7 @@ class DateTime : gobject.boxed.Boxed
   }
 
   /** */
-  bool hasYear()
+  bool hasYear() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_date_time_has_year(cast(const(GstDateTime)*)this._cPtr);
@@ -468,7 +468,7 @@ class DateTime : gobject.boxed.Boxed
         null on error or if datetime does not have a year, month, day, hour,
         minute and second.
   */
-  glib.date_time.DateTime toGDateTime()
+  glib.date_time.DateTime toGDateTime() nothrow
   {
     GDateTime* _cretval;
     _cretval = gst_date_time_to_g_date_time(cast(GstDateTime*)this._cPtr);
@@ -484,7 +484,7 @@ class DateTime : gobject.boxed.Boxed
             to ISO 8601 and only including the datetime fields that are
             valid, or null in case there was an error.
   */
-  string toIso8601String()
+  string toIso8601String() nothrow
   {
     char* _cretval;
     _cretval = gst_date_time_to_iso8601_string(cast(GstDateTime*)this._cPtr);

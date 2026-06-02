@@ -20,18 +20,15 @@ class IOSchedulerJob
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gio.ioscheduler_job.IOSchedulerJob");
-
     _cInstancePtr = cast(GIOSchedulerJob*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -47,14 +44,21 @@ class IOSchedulerJob
   
       Deprecated: Use [glib.main_context.MainContext.invoke].
   */
-  bool sendToMainloop(glib.types.SourceFunc func)
+  bool sendToMainloop(glib.types.SourceFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(void* userData)
+    extern(C) gboolean _funcCallback(void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-      _dretval = (*_dlg)();
+      try
+      {
+        _dretval = (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.SourceFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -83,14 +87,21 @@ class IOSchedulerJob
   
       Deprecated: Use [glib.main_context.MainContext.invoke].
   */
-  void sendToMainloopAsync(glib.types.SourceFunc func)
+  void sendToMainloopAsync(glib.types.SourceFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(void* userData)
+    extern(C) gboolean _funcCallback(void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-      _dretval = (*_dlg)();
+      try
+      {
+        _dretval = (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.SourceFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;

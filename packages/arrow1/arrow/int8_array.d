@@ -16,26 +16,26 @@ class Int8Array : arrow.numeric_array.NumericArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_int8_array_get_type != &gidSymbolNotFound ? garrow_int8_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Int8Array self()
+  override Int8Array self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class Int8Array : arrow.numeric_array.NumericArray
       Get builder for [arrow.int8_array.Int8Array]
       Returns: New builder object
   */
-  static Int8ArrayGidBuilder builder()
+  static Int8ArrayGidBuilder builder() nothrow
   {
     return new Int8ArrayGidBuilder;
   }
 
   /** */
-  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
+  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls) nothrow
   {
     GArrowInt8Array* _cretval;
     _cretval = garrow_int8_array_new(length, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
@@ -58,7 +58,7 @@ class Int8Array : arrow.numeric_array.NumericArray
   }
 
   /** */
-  byte getValue(long i)
+  byte getValue(long i) nothrow
   {
     byte _retval;
     _retval = garrow_int8_array_get_value(cast(GArrowInt8Array*)this._cPtr, i);
@@ -66,7 +66,7 @@ class Int8Array : arrow.numeric_array.NumericArray
   }
 
   /** */
-  byte[] getValues()
+  byte[] getValues() nothrow
   {
     const(byte)* _cretval;
     long _cretlength;
@@ -104,7 +104,7 @@ final class Int8ArrayGidBuilder : Int8ArrayGidBuilderImpl!Int8ArrayGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Int8Array build()
+  Int8Array build() nothrow
   {
     return new Int8Array(cast(void*)createGObject(Int8Array._getGType), Yes.Take);
   }

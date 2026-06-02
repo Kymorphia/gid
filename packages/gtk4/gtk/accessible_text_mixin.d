@@ -29,7 +29,7 @@ template AccessibleTextT()
       function every time the caret has moved, in order to notify assistive
       technologies.
   */
-  override void updateCaretPosition()
+  override void updateCaretPosition() nothrow
   {
     gtk_accessible_text_update_caret_position(cast(GtkAccessibleText*)this._cPtr);
   }
@@ -50,7 +50,7 @@ template AccessibleTextT()
         start = the starting offset of the change, in characters
         end = the end offset of the change, in characters
   */
-  override void updateContents(gtk.types.AccessibleTextContentChange change, uint start, uint end)
+  override void updateContents(gtk.types.AccessibleTextContentChange change, uint start, uint end) nothrow
   {
     gtk_accessible_text_update_contents(cast(GtkAccessibleText*)this._cPtr, change, start, end);
   }
@@ -62,7 +62,7 @@ template AccessibleTextT()
       function every time the selection has moved, in order to notify assistive
       technologies.
   */
-  override void updateSelectionBound()
+  override void updateSelectionBound() nothrow
   {
     gtk_accessible_text_update_selection_bound(cast(GtkAccessibleText*)this._cPtr);
   }

@@ -53,7 +53,7 @@ template ActionT()
         If the action is disabled then calls to [gio.action.Action.activate] and
         [gio.action.Action.changeState] have no effect.
   */
-  @property bool enabled()
+  @property bool enabled() nothrow
   {
     return getEnabled();
   }
@@ -63,7 +63,7 @@ template ActionT()
       Returns: The name of the action.  This is mostly meaningful for identifying
         the action once it has been added to a #GActionGroup. It is immutable.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return getName();
   }
@@ -74,7 +74,7 @@ template ActionT()
         action. This is immutable, and may be null if no parameter is needed when
         activating the action.
   */
-  @property glib.variant_type.VariantType parameterType()
+  @property glib.variant_type.VariantType parameterType() nothrow
   {
     return getParameterType();
   }
@@ -83,7 +83,7 @@ template ActionT()
       Get `state` property.
       Returns: The state of the action, or null if the action is stateless.
   */
-  @property glib.variant.Variant state()
+  @property glib.variant.Variant state() nothrow
   {
     return getState();
   }
@@ -93,7 +93,7 @@ template ActionT()
       Returns: The #GVariantType of the state that the action has, or null if the
         action is stateless. This is immutable.
   */
-  @property glib.variant_type.VariantType stateType()
+  @property glib.variant_type.VariantType stateType() nothrow
   {
     return getStateType();
   }
@@ -113,7 +113,7 @@ template ActionT()
       Params:
         parameter = the parameter to the activation
   */
-  override void activate(glib.variant.Variant parameter = null)
+  override void activate(glib.variant.Variant parameter = null) nothrow
   {
     g_action_activate(cast(GAction*)this._cPtr, parameter ? cast(GVariant*)parameter._cPtr(No.Dup) : null);
   }
@@ -133,7 +133,7 @@ template ActionT()
       Params:
         value = the new state
   */
-  override void changeState(glib.variant.Variant value)
+  override void changeState(glib.variant.Variant value) nothrow
   {
     g_action_change_state(cast(GAction*)this._cPtr, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
   }
@@ -145,7 +145,7 @@ template ActionT()
       have its state changed from outside callers.
       Returns: whether the action is enabled
   */
-  override bool getEnabled()
+  override bool getEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_action_get_enabled(cast(GAction*)this._cPtr);
@@ -156,7 +156,7 @@ template ActionT()
       Queries the name of action.
       Returns: the name of the action
   */
-  override string getName()
+  override string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_action_get_name(cast(GAction*)this._cPtr);
@@ -175,7 +175,7 @@ template ActionT()
       #GVariant, but null instead.
       Returns: the parameter type
   */
-  override glib.variant_type.VariantType getParameterType()
+  override glib.variant_type.VariantType getParameterType() nothrow
   {
     const(GVariantType)* _cretval;
     _cretval = g_action_get_parameter_type(cast(GAction*)this._cPtr);
@@ -194,7 +194,7 @@ template ActionT()
       [glib.variant.Variant.unref] when it is no longer required.
       Returns: the current state of the action
   */
-  override glib.variant.Variant getState()
+  override glib.variant.Variant getState() nothrow
   {
     GVariant* _cretval;
     _cretval = g_action_get_state(cast(GAction*)this._cPtr);
@@ -223,7 +223,7 @@ template ActionT()
       [glib.variant.Variant.unref] when it is no longer required.
       Returns: the state range hint
   */
-  override glib.variant.Variant getStateHint()
+  override glib.variant.Variant getStateHint() nothrow
   {
     GVariant* _cretval;
     _cretval = g_action_get_state_hint(cast(GAction*)this._cPtr);
@@ -246,7 +246,7 @@ template ActionT()
       will return null and you must not call [gio.action.Action.changeState].
       Returns: the state type, if the action is stateful
   */
-  override glib.variant_type.VariantType getStateType()
+  override glib.variant_type.VariantType getStateType() nothrow
   {
     const(GVariantType)* _cretval;
     _cretval = g_action_get_state_type(cast(GAction*)this._cPtr);

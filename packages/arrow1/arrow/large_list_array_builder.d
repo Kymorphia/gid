@@ -17,26 +17,26 @@ class LargeListArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_large_list_array_builder_get_type != &gidSymbolNotFound ? garrow_large_list_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LargeListArrayBuilder self()
+  override LargeListArrayBuilder self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class LargeListArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.large_list_array_builder.LargeListArrayBuilder]
       Returns: New builder object
   */
-  static LargeListArrayBuilderGidBuilder builder()
+  static LargeListArrayBuilderGidBuilder builder() nothrow
   {
     return new LargeListArrayBuilderGidBuilder;
   }
@@ -73,7 +73,7 @@ class LargeListArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /** */
-  arrow.array_builder.ArrayBuilder getValueBuilder()
+  arrow.array_builder.ArrayBuilder getValueBuilder() nothrow
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_large_list_array_builder_get_value_builder(cast(GArrowLargeListArrayBuilder*)this._cPtr);
@@ -94,7 +94,7 @@ final class LargeListArrayBuilderGidBuilder : LargeListArrayBuilderGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  LargeListArrayBuilder build()
+  LargeListArrayBuilder build() nothrow
   {
     return new LargeListArrayBuilder(cast(void*)createGObject(LargeListArrayBuilder._getGType), Yes.Take);
   }

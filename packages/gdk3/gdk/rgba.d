@@ -35,23 +35,22 @@ struct RGBA
   double alpha;
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_rgba_get_type != &gidSymbolNotFound ? gdk_rgba_get_type() : cast(GType)0;
   }
 
   /** */
-  @property GType _gType()
+  @property GType _gType() nothrow
   {
     return _getGType();
   }
 
-  void* boxCopy()
+  void* boxCopy() nothrow
   {
     import gobject.c.functions : g_boxed_copy;
-    return g_boxed_copy(_gType,
-        cast(void*)&this);
+    return g_boxed_copy(_gType, cast(void*)&this);
   }
 
   /**
@@ -60,7 +59,7 @@ struct RGBA
       The result must be freed through [gdk.rgba.RGBA.free].
       Returns: A newly allocated #GdkRGBA, with the same contents as rgba
   */
-  gdk.rgba.RGBA copy()
+  gdk.rgba.RGBA copy() nothrow
   {
     GdkRGBA* _cretval;
     _cretval = gdk_rgba_copy(cast(const(GdkRGBA)*)&this);
@@ -77,7 +76,7 @@ struct RGBA
         p2 = another #GdkRGBA pointer
       Returns: true if the two colors compare equal
   */
-  bool equal(gdk.rgba.RGBA p2)
+  bool equal(gdk.rgba.RGBA p2) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_rgba_equal(cast(GdkRGBA*)&this, cast(GdkRGBA*)&p2);
@@ -89,7 +88,7 @@ struct RGBA
       table that stores #GdkRGBAs.
       Returns: The hash value for `p`
   */
-  uint hash()
+  uint hash() nothrow
   {
     uint _retval;
     _retval = gdk_rgba_hash(cast(GdkRGBA*)&this);
@@ -117,7 +116,7 @@ struct RGBA
         spec = the string specifying the color
       Returns: true if the parsing succeeded
   */
-  bool parse(string spec)
+  bool parse(string spec) nothrow
   {
     bool _retval;
     const(char)* _spec = spec.toCString(No.Alloc);
@@ -143,7 +142,7 @@ struct RGBA
       different representation.
       Returns: A newly allocated text string
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gdk_rgba_to_string(cast(const(GdkRGBA)*)&this);

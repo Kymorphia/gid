@@ -20,26 +20,26 @@ class VButtonBox : gtk.button_box.ButtonBox
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_vbutton_box_get_type != &gidSymbolNotFound ? gtk_vbutton_box_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VButtonBox self()
+  override VButtonBox self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class VButtonBox : gtk.button_box.ButtonBox
       Get builder for [gtk.vbutton_box.VButtonBox]
       Returns: New builder object
   */
-  static VButtonBoxGidBuilder builder()
+  static VButtonBoxGidBuilder builder() nothrow
   {
     return new VButtonBoxGidBuilder;
   }
@@ -59,7 +59,7 @@ class VButtonBox : gtk.button_box.ButtonBox
   
       Deprecated: Use [gtk.button_box.ButtonBox.new_] with [gtk.types.Orientation.Vertical] instead
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_vbutton_box_new();
@@ -80,7 +80,7 @@ final class VButtonBoxGidBuilder : VButtonBoxGidBuilderImpl!VButtonBoxGidBuilder
       Create object from builder.
       Returns: New object
   */
-  VButtonBox build()
+  VButtonBox build() nothrow
   {
     return new VButtonBox(cast(void*)createGObject(VButtonBox._getGType), No.Take);
   }

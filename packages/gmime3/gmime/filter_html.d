@@ -16,26 +16,26 @@ class FilterHTML : gmime.filter.Filter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_filter_html_get_type != &gidSymbolNotFound ? g_mime_filter_html_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FilterHTML self()
+  override FilterHTML self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class FilterHTML : gmime.filter.Filter
       Get builder for [gmime.filter_html.FilterHTML]
       Returns: New builder object
   */
-  static FilterHTMLGidBuilder builder()
+  static FilterHTMLGidBuilder builder() nothrow
   {
     return new FilterHTMLGidBuilder;
   }
@@ -58,7 +58,7 @@ class FilterHTML : gmime.filter.Filter
         colour = citation colour
       Returns: a new html filter.
   */
-  this(uint flags, uint colour)
+  this(uint flags, uint colour) nothrow
   {
     GMimeFilter* _cretval;
     _cretval = g_mime_filter_html_new(flags, colour);
@@ -78,7 +78,7 @@ final class FilterHTMLGidBuilder : FilterHTMLGidBuilderImpl!FilterHTMLGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FilterHTML build()
+  FilterHTML build() nothrow
   {
     return new FilterHTML(cast(void*)createGObject(FilterHTML._getGType), Yes.Take);
   }

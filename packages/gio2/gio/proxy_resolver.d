@@ -27,7 +27,7 @@ interface ProxyResolver
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_proxy_resolver_get_type != &gidSymbolNotFound ? g_proxy_resolver_get_type() : cast(GType)0;
@@ -38,7 +38,7 @@ interface ProxyResolver
       Returns: the default #GProxyResolver, which
             will be a dummy object if no proxy resolver is available
   */
-  static gio.proxy_resolver.ProxyResolver getDefault()
+  static gio.proxy_resolver.ProxyResolver getDefault() nothrow
   {
     GProxyResolver* _cretval;
     _cretval = g_proxy_resolver_get_default();

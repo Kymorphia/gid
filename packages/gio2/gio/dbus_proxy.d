@@ -75,26 +75,26 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_proxy_get_type != &gidSymbolNotFound ? g_dbus_proxy_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DBusProxy self()
+  override DBusProxy self() nothrow
   {
     return this;
   }
@@ -103,7 +103,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       Get builder for [gio.dbus_proxy.DBusProxy]
       Returns: New builder object
   */
-  static DBusProxyGidBuilder builder()
+  static DBusProxyGidBuilder builder() nothrow
   {
     return new DBusProxyGidBuilder;
   }
@@ -112,7 +112,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       Get `gConnection` property.
       Returns: The #GDBusConnection the proxy is for.
   */
-  @property gio.dbus_connection.DBusConnection gConnection()
+  @property gio.dbus_connection.DBusConnection gConnection() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.dbus_connection.DBusConnection)("g-connection");
   }
@@ -128,7 +128,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
         the default timeout (typically 25 seconds) is used. If set to
         `G_MAXINT`, then no timeout is used.
   */
-  @property int gDefaultTimeout()
+  @property int gDefaultTimeout() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("g-default-timeout");
   }
@@ -145,7 +145,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
           the default timeout (typically 25 seconds) is used. If set to
           `G_MAXINT`, then no timeout is used.
   */
-  @property void gDefaultTimeout(int propval)
+  @property void gDefaultTimeout(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("g-default-timeout", propval);
   }
@@ -154,7 +154,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       Get `gFlags` property.
       Returns: Flags from the #GDBusProxyFlags enumeration.
   */
-  @property gio.types.DBusProxyFlags gFlags()
+  @property gio.types.DBusProxyFlags gFlags() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.types.DBusProxyFlags)("g-flags");
   }
@@ -186,7 +186,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
         #GDBusInterfaceInfo, since extending a D-Bus interface on the
         service-side is not considered an ABI break.
   */
-  @property gio.dbus_interface_info.DBusInterfaceInfo gInterfaceInfo()
+  @property gio.dbus_interface_info.DBusInterfaceInfo gInterfaceInfo() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.dbus_interface_info.DBusInterfaceInfo)("g-interface-info");
   }
@@ -219,7 +219,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
           #GDBusInterfaceInfo, since extending a D-Bus interface on the
           service-side is not considered an ABI break.
   */
-  @property void gInterfaceInfo(gio.dbus_interface_info.DBusInterfaceInfo propval)
+  @property void gInterfaceInfo(gio.dbus_interface_info.DBusInterfaceInfo propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gio.dbus_interface_info.DBusInterfaceInfo)("g-interface-info", propval);
   }
@@ -228,7 +228,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       Get `gInterfaceName` property.
       Returns: The D-Bus interface name the proxy is for.
   */
-  @property string gInterfaceName()
+  @property string gInterfaceName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("g-interface-name");
   }
@@ -237,7 +237,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       Get `gName` property.
       Returns: The well-known or unique name that the proxy is for.
   */
-  @property string gName()
+  @property string gName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("g-name");
   }
@@ -248,7 +248,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
         currently owns that name. You may connect to #GObject::notify signal to
         track changes to this property.
   */
-  @property string gNameOwner()
+  @property string gNameOwner() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("g-name-owner");
   }
@@ -257,7 +257,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       Get `gObjectPath` property.
       Returns: The object path the proxy is for.
   */
-  @property string gObjectPath()
+  @property string gObjectPath() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("g-object-path");
   }
@@ -427,14 +427,21 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
         cancellable = A #GCancellable or null.
         callback = Callback function to invoke when the proxy is ready.
   */
-  static void new_(gio.dbus_connection.DBusConnection connection, gio.types.DBusProxyFlags flags, gio.dbus_interface_info.DBusInterfaceInfo info, string name, string objectPath, string interfaceName, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  static void new_(gio.dbus_connection.DBusConnection connection, gio.types.DBusProxyFlags flags, gio.dbus_interface_info.DBusInterfaceInfo info, string name, string objectPath, string interfaceName, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _name = name.toCString(No.Alloc);
@@ -459,14 +466,21 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
         cancellable = A #GCancellable or null.
         callback = Callback function to invoke when the proxy is ready.
   */
-  static void newForBus(gio.types.BusType busType, gio.types.DBusProxyFlags flags, gio.dbus_interface_info.DBusInterfaceInfo info, string name, string objectPath, string interfaceName, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  static void newForBus(gio.types.BusType busType, gio.types.DBusProxyFlags flags, gio.dbus_interface_info.DBusInterfaceInfo info, string name, string objectPath, string interfaceName, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _name = name.toCString(No.Alloc);
@@ -530,14 +544,21 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
         callback = A #GAsyncReadyCallback to call when the request is satisfied or null if you don't
           care about the result of the method invocation.
   */
-  void call(string methodName, glib.variant.Variant parameters, gio.types.DBusCallFlags flags, int timeoutMsec, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void call(string methodName, glib.variant.Variant parameters, gio.types.DBusCallFlags flags, int timeoutMsec, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _methodName = methodName.toCString(No.Alloc);
@@ -641,14 +662,21 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
         callback = A #GAsyncReadyCallback to call when the request is satisfied or null if you don't
           care about the result of the method invocation.
   */
-  void callWithUnixFdList(string methodName, glib.variant.Variant parameters, gio.types.DBusCallFlags flags, int timeoutMsec, gio.unix_fdlist.UnixFDList fdList = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void callWithUnixFdList(string methodName, glib.variant.Variant parameters, gio.types.DBusCallFlags flags, int timeoutMsec, gio.unix_fdlist.UnixFDList fdList = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _methodName = methodName.toCString(No.Alloc);
@@ -726,7 +754,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
            that holds the value for property_name or null if the value is not in
            the cache. The returned reference must be freed with [glib.variant.Variant.unref].
   */
-  glib.variant.Variant getCachedProperty(string propertyName)
+  glib.variant.Variant getCachedProperty(string propertyName) nothrow
   {
     GVariant* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
@@ -742,7 +770,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
                  proxy has no cached properties. Free the returned array with
                  [glib.global.strfreev].
   */
-  string[] getCachedPropertyNames()
+  string[] getCachedPropertyNames() nothrow
   {
     char** _cretval;
     _cretval = g_dbus_proxy_get_cached_property_names(cast(GDBusProxy*)this._cPtr);
@@ -765,7 +793,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       Gets the connection proxy is for.
       Returns: A #GDBusConnection owned by proxy. Do not free.
   */
-  gio.dbus_connection.DBusConnection getConnection()
+  gio.dbus_connection.DBusConnection getConnection() nothrow
   {
     GDBusConnection* _cretval;
     _cretval = g_dbus_proxy_get_connection(cast(GDBusProxy*)this._cPtr);
@@ -781,7 +809,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       See the #GDBusProxy:g-default-timeout property for more details.
       Returns: Timeout to use for proxy.
   */
-  int getDefaultTimeout()
+  int getDefaultTimeout() nothrow
   {
     int _retval;
     _retval = g_dbus_proxy_get_default_timeout(cast(GDBusProxy*)this._cPtr);
@@ -792,7 +820,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       Gets the flags that proxy was constructed with.
       Returns: Flags from the #GDBusProxyFlags enumeration.
   */
-  gio.types.DBusProxyFlags getFlags()
+  gio.types.DBusProxyFlags getFlags() nothrow
   {
     GDBusProxyFlags _cretval;
     _cretval = g_dbus_proxy_get_flags(cast(GDBusProxy*)this._cPtr);
@@ -807,7 +835,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       Returns: A #GDBusInterfaceInfo or null.
            Do not unref the returned object, it is owned by proxy.
   */
-  gio.dbus_interface_info.DBusInterfaceInfo getInterfaceInfo()
+  gio.dbus_interface_info.DBusInterfaceInfo getInterfaceInfo() nothrow
   {
     GDBusInterfaceInfo* _cretval;
     _cretval = g_dbus_proxy_get_interface_info(cast(GDBusProxy*)this._cPtr);
@@ -819,7 +847,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       Gets the D-Bus interface name proxy is for.
       Returns: A string owned by proxy. Do not free.
   */
-  string getInterfaceName()
+  string getInterfaceName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_proxy_get_interface_name(cast(GDBusProxy*)this._cPtr);
@@ -835,7 +863,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       pattern.
       Returns: A string owned by proxy. Do not free.
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_proxy_get_name(cast(GDBusProxy*)this._cPtr);
@@ -851,7 +879,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       Returns: The name owner or null if no name
            owner exists. Free with [glib.global.gfree].
   */
-  string getNameOwner()
+  string getNameOwner() nothrow
   {
     char* _cretval;
     _cretval = g_dbus_proxy_get_name_owner(cast(GDBusProxy*)this._cPtr);
@@ -863,7 +891,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       Gets the object path proxy is for.
       Returns: A string owned by proxy. Do not free.
   */
-  string getObjectPath()
+  string getObjectPath() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_proxy_get_object_path(cast(GDBusProxy*)this._cPtr);
@@ -910,7 +938,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
         propertyName = Property name.
         value = Value for the property or null to remove it from the cache.
   */
-  void setCachedProperty(string propertyName, glib.variant.Variant value = null)
+  void setCachedProperty(string propertyName, glib.variant.Variant value = null) nothrow
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
     g_dbus_proxy_set_cached_property(cast(GDBusProxy*)this._cPtr, _propertyName, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
@@ -926,7 +954,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       Params:
         timeoutMsec = Timeout in milliseconds.
   */
-  void setDefaultTimeout(int timeoutMsec)
+  void setDefaultTimeout(int timeoutMsec) nothrow
   {
     g_dbus_proxy_set_default_timeout(cast(GDBusProxy*)this._cPtr, timeoutMsec);
   }
@@ -940,7 +968,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
         info = Minimum interface this proxy conforms to
              or null to unset.
   */
-  void setInterfaceInfo(gio.dbus_interface_info.DBusInterfaceInfo info = null)
+  void setInterfaceInfo(gio.dbus_interface_info.DBusInterfaceInfo info = null) nothrow
   {
     g_dbus_proxy_set_interface_info(cast(GDBusProxy*)this._cPtr, info ? cast(GDBusInterfaceInfo*)info._cPtr(No.Dup) : null);
   }
@@ -975,7 +1003,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGPropertiesChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGPropertiesChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.variant.Variant)))
@@ -983,7 +1011,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.dbus_proxy.DBusProxy)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -998,7 +1026,14 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.dbus_proxy.DBusProxy.gPropertiesChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1031,7 +1066,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGSignal(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectGSignal(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -1040,7 +1075,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gio.dbus_proxy.DBusProxy)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1058,7 +1093,14 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.dbus_proxy.DBusProxy.gSignal");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1083,7 +1125,7 @@ class DBusProxyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gi
           of this property.
       Returns: Builder instance for fluent chaining
   */
-  T gBusType(gio.types.BusType propval)
+  T gBusType(gio.types.BusType propval) nothrow
   {
     return setProperty("g-bus-type", propval);
   }
@@ -1094,7 +1136,7 @@ class DBusProxyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gi
         propval = The #GDBusConnection the proxy is for.
       Returns: Builder instance for fluent chaining
   */
-  T gConnection(gio.dbus_connection.DBusConnection propval)
+  T gConnection(gio.dbus_connection.DBusConnection propval) nothrow
   {
     return setProperty("g-connection", propval);
   }
@@ -1112,7 +1154,7 @@ class DBusProxyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gi
           `G_MAXINT`, then no timeout is used.
       Returns: Builder instance for fluent chaining
   */
-  T gDefaultTimeout(int propval)
+  T gDefaultTimeout(int propval) nothrow
   {
     return setProperty("g-default-timeout", propval);
   }
@@ -1123,7 +1165,7 @@ class DBusProxyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gi
         propval = Flags from the #GDBusProxyFlags enumeration.
       Returns: Builder instance for fluent chaining
   */
-  T gFlags(gio.types.DBusProxyFlags propval)
+  T gFlags(gio.types.DBusProxyFlags propval) nothrow
   {
     return setProperty("g-flags", propval);
   }
@@ -1157,7 +1199,7 @@ class DBusProxyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gi
           service-side is not considered an ABI break.
       Returns: Builder instance for fluent chaining
   */
-  T gInterfaceInfo(gio.dbus_interface_info.DBusInterfaceInfo propval)
+  T gInterfaceInfo(gio.dbus_interface_info.DBusInterfaceInfo propval) nothrow
   {
     return setProperty("g-interface-info", propval);
   }
@@ -1168,7 +1210,7 @@ class DBusProxyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gi
         propval = The D-Bus interface name the proxy is for.
       Returns: Builder instance for fluent chaining
   */
-  T gInterfaceName(string propval)
+  T gInterfaceName(string propval) nothrow
   {
     return setProperty("g-interface-name", propval);
   }
@@ -1179,7 +1221,7 @@ class DBusProxyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gi
         propval = The well-known or unique name that the proxy is for.
       Returns: Builder instance for fluent chaining
   */
-  T gName(string propval)
+  T gName(string propval) nothrow
   {
     return setProperty("g-name", propval);
   }
@@ -1190,7 +1232,7 @@ class DBusProxyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gi
         propval = The object path the proxy is for.
       Returns: Builder instance for fluent chaining
   */
-  T gObjectPath(string propval)
+  T gObjectPath(string propval) nothrow
   {
     return setProperty("g-object-path", propval);
   }
@@ -1203,7 +1245,7 @@ final class DBusProxyGidBuilder : DBusProxyGidBuilderImpl!DBusProxyGidBuilder
       Create object from builder.
       Returns: New object
   */
-  DBusProxy build()
+  DBusProxy build() nothrow
   {
     return new DBusProxy(cast(void*)createGObject(DBusProxy._getGType), No.Take);
   }

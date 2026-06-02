@@ -13,7 +13,7 @@ class VariantType : Boxed
    *   T = One or more D types to create a VariantType for
    * Returns: New variant type
    */
-  static VariantType create(T...)()
+  static VariantType create(T...)() nothrow
   {
     return new VariantType(getStr!T);
   }
@@ -24,7 +24,7 @@ class VariantType : Boxed
    *   T = One or more D types to create a VariantType for
    * Returns: Variant type string which can be used with VariantType
    */
-  static string getStr(T...)()
+  static string getStr(T...)() nothrow
   {
     char[] typeStr;
 

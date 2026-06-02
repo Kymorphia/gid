@@ -18,11 +18,8 @@ class TargetPair
   GtkTargetPair _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.target_pair.TargetPair");
-
     _cInstance = *cast(GtkTargetPair*)ptr;
 
     if (take)
@@ -30,7 +27,7 @@ class TargetPair
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class TargetPair
       Get `target` field.
       Returns: #GdkAtom representation of the target type
   */
-  @property gdk.atom.Atom target()
+  @property gdk.atom.Atom target() nothrow
   {
     return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GtkTargetPair*)this._cPtr).target, No.Take);
   }
@@ -48,7 +45,7 @@ class TargetPair
       Get `flags` field.
       Returns: #GtkTargetFlags for DND
   */
-  @property uint flags()
+  @property uint flags() nothrow
   {
     return (cast(GtkTargetPair*)this._cPtr).flags;
   }
@@ -58,7 +55,7 @@ class TargetPair
       Params:
         propval = #GtkTargetFlags for DND
   */
-  @property void flags(uint propval)
+  @property void flags(uint propval) nothrow
   {
     (cast(GtkTargetPair*)this._cPtr).flags = propval;
   }
@@ -70,7 +67,7 @@ class TargetPair
             signal. It allows the application to identify the target
             type without extensive string compares.
   */
-  @property uint info()
+  @property uint info() nothrow
   {
     return (cast(GtkTargetPair*)this._cPtr).info;
   }
@@ -83,7 +80,7 @@ class TargetPair
               signal. It allows the application to identify the target
               type without extensive string compares.
   */
-  @property void info(uint propval)
+  @property void info(uint propval) nothrow
   {
     (cast(GtkTargetPair*)this._cPtr).info = propval;
   }

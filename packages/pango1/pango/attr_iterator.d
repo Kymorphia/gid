@@ -24,32 +24,32 @@ class AttrIterator : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_attr_iterator_get_type != &gidSymbolNotFound ? pango_attr_iterator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AttrIterator self()
+  override AttrIterator self() nothrow
   {
     return this;
   }
@@ -60,7 +60,7 @@ class AttrIterator : gobject.boxed.Boxed
           [pango.attr_iterator.AttrIterator], which should be freed with
           [pango.attr_iterator.AttrIterator.destroy]
   */
-  pango.attr_iterator.AttrIterator copy()
+  pango.attr_iterator.AttrIterator copy() nothrow
   {
     PangoAttrIterator* _cretval;
     _cretval = pango_attr_iterator_copy(cast(PangoAttrIterator*)this._cPtr);
@@ -71,7 +71,7 @@ class AttrIterator : gobject.boxed.Boxed
   /**
       Destroy a [pango.attr_iterator.AttrIterator] and free all associated memory.
   */
-  void destroy()
+  void destroy() nothrow
   {
     pango_attr_iterator_destroy(cast(PangoAttrIterator*)this._cPtr);
   }
@@ -90,7 +90,7 @@ class AttrIterator : gobject.boxed.Boxed
           attribute of the given type, or null if no attribute
           of that type applies to the current location.
   */
-  pango.attribute.Attribute get(pango.types.AttrType type)
+  pango.attribute.Attribute get(pango.types.AttrType type) nothrow
   {
     PangoAttribute* _cretval;
     _cretval = pango_attr_iterator_get(cast(PangoAttrIterator*)this._cPtr, type);
@@ -105,7 +105,7 @@ class AttrIterator : gobject.boxed.Boxed
           this value, call [pango.attribute.Attribute.destroy] on each
           value and [glib.slist.SList.free] on the list.
   */
-  pango.attribute.Attribute[] getAttrs()
+  pango.attribute.Attribute[] getAttrs() nothrow
   {
     GSList* _cretval;
     _cretval = pango_attr_iterator_get_attrs(cast(PangoAttrIterator*)this._cPtr);
@@ -133,7 +133,7 @@ class AttrIterator : gobject.boxed.Boxed
             order to free this value, you must call
             [pango.attribute.Attribute.destroy] on each member.
   */
-  void getFont(pango.font_description.FontDescription desc, out pango.language.Language language, out pango.attribute.Attribute[] extraAttrs)
+  void getFont(pango.font_description.FontDescription desc, out pango.language.Language language, out pango.attribute.Attribute[] extraAttrs) nothrow
   {
     PangoLanguage* _language;
     GSList* _extraAttrs;
@@ -147,7 +147,7 @@ class AttrIterator : gobject.boxed.Boxed
       Returns: false if the iterator is at the end
           of the list, otherwise true
   */
-  bool next()
+  bool next() nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_attr_iterator_next(cast(PangoAttrIterator*)this._cPtr);
@@ -166,7 +166,7 @@ class AttrIterator : gobject.boxed.Boxed
         start = location to store the start of the range
         end = location to store the end of the range
   */
-  void range(out int start, out int end)
+  void range(out int start, out int end) nothrow
   {
     pango_attr_iterator_range(cast(PangoAttrIterator*)this._cPtr, cast(int*)&start, cast(int*)&end);
   }

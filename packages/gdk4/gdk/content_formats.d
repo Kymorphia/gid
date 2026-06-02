@@ -48,32 +48,32 @@ class ContentFormats : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_content_formats_get_type != &gidSymbolNotFound ? gdk_content_formats_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ContentFormats self()
+  override ContentFormats self() nothrow
   {
     return this;
   }
@@ -90,7 +90,7 @@ class ContentFormats : gobject.boxed.Boxed
             array of mime types
       Returns: the new [gdk.content_formats.ContentFormats].
   */
-  this(string[] mimeTypes = null)
+  this(string[] mimeTypes = null) nothrow
   {
     GdkContentFormats* _cretval;
     uint _nMimeTypes;
@@ -113,7 +113,7 @@ class ContentFormats : gobject.boxed.Boxed
         type = a `GType`
       Returns: a new [gdk.content_formats.ContentFormats]
   */
-  static gdk.content_formats.ContentFormats newForGtype(gobject.types.GType type)
+  static gdk.content_formats.ContentFormats newForGtype(gobject.types.GType type) nothrow
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_content_formats_new_for_gtype(type);
@@ -128,7 +128,7 @@ class ContentFormats : gobject.boxed.Boxed
         type = the `GType` to search for
       Returns: true if the `GType` was found
   */
-  bool containGtype(gobject.types.GType type)
+  bool containGtype(gobject.types.GType type) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_content_formats_contain_gtype(cast(const(GdkContentFormats)*)this._cPtr, type);
@@ -142,7 +142,7 @@ class ContentFormats : gobject.boxed.Boxed
         mimeType = the mime type to search for
       Returns: true if the mime_type was found
   */
-  bool containMimeType(string mimeType)
+  bool containMimeType(string mimeType) nothrow
   {
     bool _retval;
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
@@ -157,7 +157,7 @@ class ContentFormats : gobject.boxed.Boxed
       they are empty. In that case null will be returned.
       Returns: `G_TYPE_INVALID`-terminated array of types included in formats
   */
-  gobject.types.GType[] getGtypes()
+  gobject.types.GType[] getGtypes() nothrow
   {
     const(GType)* _cretval;
     size_t _cretlength;
@@ -179,7 +179,7 @@ class ContentFormats : gobject.boxed.Boxed
       Returns: null-terminated array of interned strings of mime types included
           in formats
   */
-  string[] getMimeTypes()
+  string[] getMimeTypes() nothrow
   {
     const(char*)* _cretval;
     size_t _cretlength;
@@ -202,7 +202,7 @@ class ContentFormats : gobject.boxed.Boxed
         second = the [gdk.content_formats.ContentFormats] to intersect with
       Returns: true if a matching format was found.
   */
-  bool match(gdk.content_formats.ContentFormats second)
+  bool match(gdk.content_formats.ContentFormats second) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_content_formats_match(cast(const(GdkContentFormats)*)this._cPtr, second ? cast(const(GdkContentFormats)*)second._cPtr(No.Dup) : null);
@@ -219,7 +219,7 @@ class ContentFormats : gobject.boxed.Boxed
         second = the [gdk.content_formats.ContentFormats] to intersect with
       Returns: The first common `GType` or `G_TYPE_INVALID` if none.
   */
-  gobject.types.GType matchGtype(gdk.content_formats.ContentFormats second)
+  gobject.types.GType matchGtype(gdk.content_formats.ContentFormats second) nothrow
   {
     gobject.types.GType _retval;
     _retval = gdk_content_formats_match_gtype(cast(const(GdkContentFormats)*)this._cPtr, second ? cast(const(GdkContentFormats)*)second._cPtr(No.Dup) : null);
@@ -236,7 +236,7 @@ class ContentFormats : gobject.boxed.Boxed
         second = the [gdk.content_formats.ContentFormats] to intersect with
       Returns: The first common mime type or null if none
   */
-  string matchMimeType(gdk.content_formats.ContentFormats second)
+  string matchMimeType(gdk.content_formats.ContentFormats second) nothrow
   {
     const(char)* _cretval;
     _cretval = gdk_content_formats_match_mime_type(cast(const(GdkContentFormats)*)this._cPtr, second ? cast(const(GdkContentFormats)*)second._cPtr(No.Dup) : null);
@@ -253,7 +253,7 @@ class ContentFormats : gobject.boxed.Boxed
       Params:
         string_ = a [glib.string_.String] to print into
   */
-  void print(glib.string_.String string_)
+  void print(glib.string_.String string_) nothrow
   {
     gdk_content_formats_print(cast(GdkContentFormats*)this._cPtr, string_ ? cast(GString*)string_._cPtr(No.Dup) : null);
   }
@@ -267,7 +267,7 @@ class ContentFormats : gobject.boxed.Boxed
       to help when debugging.
       Returns: a new string
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gdk_content_formats_to_string(cast(GdkContentFormats*)this._cPtr);
@@ -283,7 +283,7 @@ class ContentFormats : gobject.boxed.Boxed
         second = the [gdk.content_formats.ContentFormats] to merge from
       Returns: a new [gdk.content_formats.ContentFormats]
   */
-  gdk.content_formats.ContentFormats union_(gdk.content_formats.ContentFormats second)
+  gdk.content_formats.ContentFormats union_(gdk.content_formats.ContentFormats second) nothrow
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_content_formats_union(cast(GdkContentFormats*)this._cPtr, second ? cast(const(GdkContentFormats)*)second._cPtr(No.Dup) : null);
@@ -296,7 +296,7 @@ class ContentFormats : gobject.boxed.Boxed
       registered.
       Returns: a new [gdk.content_formats.ContentFormats]
   */
-  gdk.content_formats.ContentFormats unionDeserializeGtypes()
+  gdk.content_formats.ContentFormats unionDeserializeGtypes() nothrow
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_content_formats_union_deserialize_gtypes(cast(GdkContentFormats*)this._cPtr);
@@ -309,7 +309,7 @@ class ContentFormats : gobject.boxed.Boxed
       registered.
       Returns: a new [gdk.content_formats.ContentFormats]
   */
-  gdk.content_formats.ContentFormats unionDeserializeMimeTypes()
+  gdk.content_formats.ContentFormats unionDeserializeMimeTypes() nothrow
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_content_formats_union_deserialize_mime_types(cast(GdkContentFormats*)this._cPtr);
@@ -322,7 +322,7 @@ class ContentFormats : gobject.boxed.Boxed
       registered.
       Returns: a new [gdk.content_formats.ContentFormats]
   */
-  gdk.content_formats.ContentFormats unionSerializeGtypes()
+  gdk.content_formats.ContentFormats unionSerializeGtypes() nothrow
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_content_formats_union_serialize_gtypes(cast(GdkContentFormats*)this._cPtr);
@@ -335,7 +335,7 @@ class ContentFormats : gobject.boxed.Boxed
       registered.
       Returns: a new [gdk.content_formats.ContentFormats]
   */
-  gdk.content_formats.ContentFormats unionSerializeMimeTypes()
+  gdk.content_formats.ContentFormats unionSerializeMimeTypes() nothrow
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_content_formats_union_serialize_mime_types(cast(GdkContentFormats*)this._cPtr);
@@ -357,7 +357,7 @@ class ContentFormats : gobject.boxed.Boxed
         string_ = the string to parse
       Returns: the content formats if string is valid
   */
-  static gdk.content_formats.ContentFormats parse(string string_)
+  static gdk.content_formats.ContentFormats parse(string string_) nothrow
   {
     GdkContentFormats* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);

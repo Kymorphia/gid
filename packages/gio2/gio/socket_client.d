@@ -37,26 +37,26 @@ class SocketClient : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_socket_client_get_type != &gidSymbolNotFound ? g_socket_client_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SocketClient self()
+  override SocketClient self() nothrow
   {
     return this;
   }
@@ -65,7 +65,7 @@ class SocketClient : gobject.object.ObjectWrap
       Get builder for [gio.socket_client.SocketClient]
       Returns: New builder object
   */
-  static SocketClientGidBuilder builder()
+  static SocketClientGidBuilder builder() nothrow
   {
     return new SocketClientGidBuilder;
   }
@@ -74,7 +74,7 @@ class SocketClient : gobject.object.ObjectWrap
       Get `enableProxy` property.
       Returns: Enable proxy support.
   */
-  @property bool enableProxy()
+  @property bool enableProxy() nothrow
   {
     return getEnableProxy();
   }
@@ -84,7 +84,7 @@ class SocketClient : gobject.object.ObjectWrap
       Params:
         propval = Enable proxy support.
   */
-  @property void enableProxy(bool propval)
+  @property void enableProxy(bool propval) nothrow
   {
     setEnableProxy(propval);
   }
@@ -93,7 +93,7 @@ class SocketClient : gobject.object.ObjectWrap
       Get `family` property.
       Returns: The address family to use for socket construction.
   */
-  @property gio.types.SocketFamily family()
+  @property gio.types.SocketFamily family() nothrow
   {
     return getFamily();
   }
@@ -103,7 +103,7 @@ class SocketClient : gobject.object.ObjectWrap
       Params:
         propval = The address family to use for socket construction.
   */
-  @property void family(gio.types.SocketFamily propval)
+  @property void family(gio.types.SocketFamily propval) nothrow
   {
     setFamily(propval);
   }
@@ -112,7 +112,7 @@ class SocketClient : gobject.object.ObjectWrap
       Get `localAddress` property.
       Returns: The local address constructed sockets will be bound to.
   */
-  @property gio.socket_address.SocketAddress localAddress()
+  @property gio.socket_address.SocketAddress localAddress() nothrow
   {
     return getLocalAddress();
   }
@@ -122,7 +122,7 @@ class SocketClient : gobject.object.ObjectWrap
       Params:
         propval = The local address constructed sockets will be bound to.
   */
-  @property void localAddress(gio.socket_address.SocketAddress propval)
+  @property void localAddress(gio.socket_address.SocketAddress propval) nothrow
   {
     setLocalAddress(propval);
   }
@@ -131,7 +131,7 @@ class SocketClient : gobject.object.ObjectWrap
       Get `protocol` property.
       Returns: The protocol to use for socket construction, or `0` for default.
   */
-  @property gio.types.SocketProtocol protocol()
+  @property gio.types.SocketProtocol protocol() nothrow
   {
     return getProtocol();
   }
@@ -141,7 +141,7 @@ class SocketClient : gobject.object.ObjectWrap
       Params:
         propval = The protocol to use for socket construction, or `0` for default.
   */
-  @property void protocol(gio.types.SocketProtocol propval)
+  @property void protocol(gio.types.SocketProtocol propval) nothrow
   {
     setProtocol(propval);
   }
@@ -150,7 +150,7 @@ class SocketClient : gobject.object.ObjectWrap
       Get `proxyResolver` property.
       Returns: The proxy resolver to use
   */
-  @property gio.proxy_resolver.ProxyResolver proxyResolver()
+  @property gio.proxy_resolver.ProxyResolver proxyResolver() nothrow
   {
     return getProxyResolver();
   }
@@ -160,7 +160,7 @@ class SocketClient : gobject.object.ObjectWrap
       Params:
         propval = The proxy resolver to use
   */
-  @property void proxyResolver(gio.proxy_resolver.ProxyResolver propval)
+  @property void proxyResolver(gio.proxy_resolver.ProxyResolver propval) nothrow
   {
     setProxyResolver(propval);
   }
@@ -169,7 +169,7 @@ class SocketClient : gobject.object.ObjectWrap
       Get `timeout` property.
       Returns: The I/O timeout for sockets, in seconds, or `0` for none.
   */
-  @property uint timeout()
+  @property uint timeout() nothrow
   {
     return getTimeout();
   }
@@ -179,7 +179,7 @@ class SocketClient : gobject.object.ObjectWrap
       Params:
         propval = The I/O timeout for sockets, in seconds, or `0` for none.
   */
-  @property void timeout(uint propval)
+  @property void timeout(uint propval) nothrow
   {
     setTimeout(propval);
   }
@@ -188,7 +188,7 @@ class SocketClient : gobject.object.ObjectWrap
       Get `tls` property.
       Returns: Whether to create TLS connections.
   */
-  @property bool tls()
+  @property bool tls() nothrow
   {
     return getTls();
   }
@@ -198,7 +198,7 @@ class SocketClient : gobject.object.ObjectWrap
       Params:
         propval = Whether to create TLS connections.
   */
-  @property void tls(bool propval)
+  @property void tls(bool propval) nothrow
   {
     setTls(propval);
   }
@@ -224,7 +224,7 @@ class SocketClient : gobject.object.ObjectWrap
   
       Deprecated: Do not attempt to ignore validation errors.
   */
-  @property gio.types.TlsCertificateFlags tlsValidationFlags()
+  @property gio.types.TlsCertificateFlags tlsValidationFlags() nothrow
   {
     return getTlsValidationFlags();
   }
@@ -251,7 +251,7 @@ class SocketClient : gobject.object.ObjectWrap
   
       Deprecated: Do not attempt to ignore validation errors.
   */
-  @property void tlsValidationFlags(gio.types.TlsCertificateFlags propval)
+  @property void tlsValidationFlags(gio.types.TlsCertificateFlags propval) nothrow
   {
     setTlsValidationFlags(propval);
   }
@@ -260,7 +260,7 @@ class SocketClient : gobject.object.ObjectWrap
       Get `type` property.
       Returns: The type to use for socket construction.
   */
-  @property gio.types.SocketType type()
+  @property gio.types.SocketType type() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.types.SocketType)("type");
   }
@@ -270,7 +270,7 @@ class SocketClient : gobject.object.ObjectWrap
       Params:
         propval = The type to use for socket construction.
   */
-  @property void type(gio.types.SocketType propval)
+  @property void type(gio.types.SocketType propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gio.types.SocketType)("type", propval);
   }
@@ -280,7 +280,7 @@ class SocketClient : gobject.object.ObjectWrap
       Returns: a #GSocketClient.
             Free the returned object with [gobject.object.ObjectWrap.unref].
   */
-  this()
+  this() nothrow
   {
     GSocketClient* _cretval;
     _cretval = g_socket_client_new();
@@ -311,7 +311,7 @@ class SocketClient : gobject.object.ObjectWrap
       Params:
         protocol = The proxy protocol
   */
-  void addApplicationProxy(string protocol)
+  void addApplicationProxy(string protocol) nothrow
   {
     const(char)* _protocol = protocol.toCString(No.Alloc);
     g_socket_client_add_application_proxy(cast(GSocketClient*)this._cPtr, _protocol);
@@ -375,14 +375,21 @@ class SocketClient : gobject.object.ObjectWrap
         cancellable = a #GCancellable, or null
         callback = a #GAsyncReadyCallback
   */
-  void connectAsync(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void connectAsync(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -472,14 +479,21 @@ class SocketClient : gobject.object.ObjectWrap
         cancellable = a #GCancellable, or null
         callback = a #GAsyncReadyCallback
   */
-  void connectToHostAsync(string hostAndPort, ushort defaultPort, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void connectToHostAsync(string hostAndPort, ushort defaultPort, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _hostAndPort = hostAndPort.toCString(No.Alloc);
@@ -552,14 +566,21 @@ class SocketClient : gobject.object.ObjectWrap
         cancellable = a #GCancellable, or null
         callback = a #GAsyncReadyCallback
   */
-  void connectToServiceAsync(string domain, string service, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void connectToServiceAsync(string domain, string service, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _domain = domain.toCString(No.Alloc);
@@ -642,14 +663,21 @@ class SocketClient : gobject.object.ObjectWrap
         cancellable = a #GCancellable, or null
         callback = a #GAsyncReadyCallback
   */
-  void connectToUriAsync(string uri, ushort defaultPort, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void connectToUriAsync(string uri, ushort defaultPort, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -680,7 +708,7 @@ class SocketClient : gobject.object.ObjectWrap
       Gets the proxy enable state; see [gio.socket_client.SocketClient.setEnableProxy]
       Returns: whether proxying is enabled
   */
-  bool getEnableProxy()
+  bool getEnableProxy() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_socket_client_get_enable_proxy(cast(GSocketClient*)this._cPtr);
@@ -693,7 +721,7 @@ class SocketClient : gobject.object.ObjectWrap
       See [gio.socket_client.SocketClient.setFamily] for details.
       Returns: a #GSocketFamily
   */
-  gio.types.SocketFamily getFamily()
+  gio.types.SocketFamily getFamily() nothrow
   {
     GSocketFamily _cretval;
     _cretval = g_socket_client_get_family(cast(GSocketClient*)this._cPtr);
@@ -707,7 +735,7 @@ class SocketClient : gobject.object.ObjectWrap
       See [gio.socket_client.SocketClient.setLocalAddress] for details.
       Returns: a #GSocketAddress or null. Do not free.
   */
-  gio.socket_address.SocketAddress getLocalAddress()
+  gio.socket_address.SocketAddress getLocalAddress() nothrow
   {
     GSocketAddress* _cretval;
     _cretval = g_socket_client_get_local_address(cast(GSocketClient*)this._cPtr);
@@ -721,7 +749,7 @@ class SocketClient : gobject.object.ObjectWrap
       See [gio.socket_client.SocketClient.setProtocol] for details.
       Returns: a #GSocketProtocol
   */
-  gio.types.SocketProtocol getProtocol()
+  gio.types.SocketProtocol getProtocol() nothrow
   {
     GSocketProtocol _cretval;
     _cretval = g_socket_client_get_protocol(cast(GSocketClient*)this._cPtr);
@@ -736,7 +764,7 @@ class SocketClient : gobject.object.ObjectWrap
       Returns: The #GProxyResolver being used by
           client.
   */
-  gio.proxy_resolver.ProxyResolver getProxyResolver()
+  gio.proxy_resolver.ProxyResolver getProxyResolver() nothrow
   {
     GProxyResolver* _cretval;
     _cretval = g_socket_client_get_proxy_resolver(cast(GSocketClient*)this._cPtr);
@@ -750,7 +778,7 @@ class SocketClient : gobject.object.ObjectWrap
       See [gio.socket_client.SocketClient.setSocketType] for details.
       Returns: a #GSocketFamily
   */
-  gio.types.SocketType getSocketType()
+  gio.types.SocketType getSocketType() nothrow
   {
     GSocketType _cretval;
     _cretval = g_socket_client_get_socket_type(cast(GSocketClient*)this._cPtr);
@@ -764,7 +792,7 @@ class SocketClient : gobject.object.ObjectWrap
       See [gio.socket_client.SocketClient.setTimeout] for details.
       Returns: the timeout in seconds
   */
-  uint getTimeout()
+  uint getTimeout() nothrow
   {
     uint _retval;
     _retval = g_socket_client_get_timeout(cast(GSocketClient*)this._cPtr);
@@ -776,7 +804,7 @@ class SocketClient : gobject.object.ObjectWrap
       [gio.socket_client.SocketClient.setTls] for details.
       Returns: whether client uses TLS
   */
-  bool getTls()
+  bool getTls() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_socket_client_get_tls(cast(GSocketClient*)this._cPtr);
@@ -794,7 +822,7 @@ class SocketClient : gobject.object.ObjectWrap
   
       Deprecated: Do not attempt to ignore validation errors.
   */
-  gio.types.TlsCertificateFlags getTlsValidationFlags()
+  gio.types.TlsCertificateFlags getTlsValidationFlags() nothrow
   {
     GTlsCertificateFlags _cretval;
     _cretval = g_socket_client_get_tls_validation_flags(cast(GSocketClient*)this._cPtr);
@@ -813,7 +841,7 @@ class SocketClient : gobject.object.ObjectWrap
       Params:
         enable = whether to enable proxies
   */
-  void setEnableProxy(bool enable)
+  void setEnableProxy(bool enable) nothrow
   {
     g_socket_client_set_enable_proxy(cast(GSocketClient*)this._cPtr, enable);
   }
@@ -831,7 +859,7 @@ class SocketClient : gobject.object.ObjectWrap
       Params:
         family = a #GSocketFamily
   */
-  void setFamily(gio.types.SocketFamily family)
+  void setFamily(gio.types.SocketFamily family) nothrow
   {
     g_socket_client_set_family(cast(GSocketClient*)this._cPtr, family);
   }
@@ -848,7 +876,7 @@ class SocketClient : gobject.object.ObjectWrap
       Params:
         address = a #GSocketAddress, or null
   */
-  void setLocalAddress(gio.socket_address.SocketAddress address = null)
+  void setLocalAddress(gio.socket_address.SocketAddress address = null) nothrow
   {
     g_socket_client_set_local_address(cast(GSocketClient*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null);
   }
@@ -864,7 +892,7 @@ class SocketClient : gobject.object.ObjectWrap
       Params:
         protocol = a #GSocketProtocol
   */
-  void setProtocol(gio.types.SocketProtocol protocol)
+  void setProtocol(gio.types.SocketProtocol protocol) nothrow
   {
     g_socket_client_set_protocol(cast(GSocketClient*)this._cPtr, protocol);
   }
@@ -882,7 +910,7 @@ class SocketClient : gobject.object.ObjectWrap
         proxyResolver = a #GProxyResolver, or null for the
             default.
   */
-  void setProxyResolver(gio.proxy_resolver.ProxyResolver proxyResolver = null)
+  void setProxyResolver(gio.proxy_resolver.ProxyResolver proxyResolver = null) nothrow
   {
     g_socket_client_set_proxy_resolver(cast(GSocketClient*)this._cPtr, proxyResolver ? cast(GProxyResolver*)(cast(gobject.object.ObjectWrap)proxyResolver)._cPtr(No.Dup) : null);
   }
@@ -898,7 +926,7 @@ class SocketClient : gobject.object.ObjectWrap
       Params:
         type = a #GSocketType
   */
-  void setSocketType(gio.types.SocketType type)
+  void setSocketType(gio.types.SocketType type) nothrow
   {
     g_socket_client_set_socket_type(cast(GSocketClient*)this._cPtr, type);
   }
@@ -914,7 +942,7 @@ class SocketClient : gobject.object.ObjectWrap
       Params:
         timeout = the timeout
   */
-  void setTimeout(uint timeout)
+  void setTimeout(uint timeout) nothrow
   {
     g_socket_client_set_timeout(cast(GSocketClient*)this._cPtr, timeout);
   }
@@ -942,7 +970,7 @@ class SocketClient : gobject.object.ObjectWrap
       Params:
         tls = whether to use TLS
   */
-  void setTls(bool tls)
+  void setTls(bool tls) nothrow
   {
     g_socket_client_set_tls(cast(GSocketClient*)this._cPtr, tls);
   }
@@ -960,7 +988,7 @@ class SocketClient : gobject.object.ObjectWrap
   
       Deprecated: Do not attempt to ignore validation errors.
   */
-  void setTlsValidationFlags(gio.types.TlsCertificateFlags flags)
+  void setTlsValidationFlags(gio.types.TlsCertificateFlags flags) nothrow
   {
     g_socket_client_set_tls_validation_flags(cast(GSocketClient*)this._cPtr, flags);
   }
@@ -1034,7 +1062,7 @@ class SocketClient : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gio.types.SocketClientEvent)))
@@ -1043,7 +1071,7 @@ class SocketClient : gobject.object.ObjectWrap
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gio.socket_client.SocketClient)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1061,7 +1089,14 @@ class SocketClient : gobject.object.ObjectWrap
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.socket_client.SocketClient.event");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1079,7 +1114,7 @@ class SocketClientGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Enable proxy support.
       Returns: Builder instance for fluent chaining
   */
-  T enableProxy(bool propval)
+  T enableProxy(bool propval) nothrow
   {
     return setProperty("enable-proxy", propval);
   }
@@ -1090,7 +1125,7 @@ class SocketClientGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The address family to use for socket construction.
       Returns: Builder instance for fluent chaining
   */
-  T family(gio.types.SocketFamily propval)
+  T family(gio.types.SocketFamily propval) nothrow
   {
     return setProperty("family", propval);
   }
@@ -1101,7 +1136,7 @@ class SocketClientGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The local address constructed sockets will be bound to.
       Returns: Builder instance for fluent chaining
   */
-  T localAddress(gio.socket_address.SocketAddress propval)
+  T localAddress(gio.socket_address.SocketAddress propval) nothrow
   {
     return setProperty("local-address", propval);
   }
@@ -1112,7 +1147,7 @@ class SocketClientGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The protocol to use for socket construction, or `0` for default.
       Returns: Builder instance for fluent chaining
   */
-  T protocol(gio.types.SocketProtocol propval)
+  T protocol(gio.types.SocketProtocol propval) nothrow
   {
     return setProperty("protocol", propval);
   }
@@ -1123,7 +1158,7 @@ class SocketClientGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The proxy resolver to use
       Returns: Builder instance for fluent chaining
   */
-  T proxyResolver(gio.proxy_resolver.ProxyResolver propval)
+  T proxyResolver(gio.proxy_resolver.ProxyResolver propval) nothrow
   {
     return setProperty("proxy-resolver", propval);
   }
@@ -1134,7 +1169,7 @@ class SocketClientGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The I/O timeout for sockets, in seconds, or `0` for none.
       Returns: Builder instance for fluent chaining
   */
-  T timeout(uint propval)
+  T timeout(uint propval) nothrow
   {
     return setProperty("timeout", propval);
   }
@@ -1145,7 +1180,7 @@ class SocketClientGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether to create TLS connections.
       Returns: Builder instance for fluent chaining
   */
-  T tls(bool propval)
+  T tls(bool propval) nothrow
   {
     return setProperty("tls", propval);
   }
@@ -1173,7 +1208,7 @@ class SocketClientGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   
       Deprecated: Do not attempt to ignore validation errors.
   */
-  T tlsValidationFlags(gio.types.TlsCertificateFlags propval)
+  T tlsValidationFlags(gio.types.TlsCertificateFlags propval) nothrow
   {
     return setProperty("tls-validation-flags", propval);
   }
@@ -1184,7 +1219,7 @@ class SocketClientGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The type to use for socket construction.
       Returns: Builder instance for fluent chaining
   */
-  T type(gio.types.SocketType propval)
+  T type(gio.types.SocketType propval) nothrow
   {
     return setProperty("type", propval);
   }
@@ -1197,7 +1232,7 @@ final class SocketClientGidBuilder : SocketClientGidBuilderImpl!SocketClientGidB
       Create object from builder.
       Returns: New object
   */
-  SocketClient build()
+  SocketClient build() nothrow
   {
     return new SocketClient(cast(void*)createGObject(SocketClient._getGType), Yes.Take);
   }

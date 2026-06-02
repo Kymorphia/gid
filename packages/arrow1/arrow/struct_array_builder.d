@@ -17,26 +17,26 @@ class StructArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_struct_array_builder_get_type != &gidSymbolNotFound ? garrow_struct_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StructArrayBuilder self()
+  override StructArrayBuilder self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class StructArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.struct_array_builder.StructArrayBuilder]
       Returns: New builder object
   */
-  static StructArrayBuilderGidBuilder builder()
+  static StructArrayBuilderGidBuilder builder() nothrow
   {
     return new StructArrayBuilderGidBuilder;
   }
@@ -84,7 +84,7 @@ class StructArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /** */
-  arrow.array_builder.ArrayBuilder getFieldBuilder(int i)
+  arrow.array_builder.ArrayBuilder getFieldBuilder(int i) nothrow
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_struct_array_builder_get_field_builder(cast(GArrowStructArrayBuilder*)this._cPtr, i);
@@ -93,7 +93,7 @@ class StructArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /** */
-  arrow.array_builder.ArrayBuilder[] getFieldBuilders()
+  arrow.array_builder.ArrayBuilder[] getFieldBuilders() nothrow
   {
     GList* _cretval;
     _cretval = garrow_struct_array_builder_get_field_builders(cast(GArrowStructArrayBuilder*)this._cPtr);
@@ -114,7 +114,7 @@ final class StructArrayBuilderGidBuilder : StructArrayBuilderGidBuilderImpl!Stru
       Create object from builder.
       Returns: New object
   */
-  StructArrayBuilder build()
+  StructArrayBuilder build() nothrow
   {
     return new StructArrayBuilder(cast(void*)createGObject(StructArrayBuilder._getGType), Yes.Take);
   }

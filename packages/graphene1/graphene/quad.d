@@ -22,38 +22,38 @@ class Quad : gobject.boxed.Boxed
   /**
       Create a `quad.Quad` boxed type.
   */
-  this()
+  this() nothrow
   {
     super(gMalloc(graphene_quad_t.sizeof), Yes.Take);
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())graphene_quad_get_type != &gidSymbolNotFound ? graphene_quad_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Quad self()
+  override Quad self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class Quad : gobject.boxed.Boxed
       The contents of the returned instance are undefined.
       Returns: the newly created #graphene_quad_t instance
   */
-  static graphene.quad.Quad alloc()
+  static graphene.quad.Quad alloc() nothrow
   {
     graphene_quad_t* _cretval;
     _cretval = graphene_quad_alloc();
@@ -78,7 +78,7 @@ class Quad : gobject.boxed.Boxed
       Params:
         r = return location for a #graphene_rect_t
   */
-  void bounds(out graphene.rect.Rect r)
+  void bounds(out graphene.rect.Rect r) nothrow
   {
     graphene_rect_t _r;
     graphene_quad_bounds(cast(const(graphene_quad_t)*)this._cPtr, &_r);
@@ -92,7 +92,7 @@ class Quad : gobject.boxed.Boxed
         p = a #graphene_point_t
       Returns: `true` if the point is inside the #graphene_quad_t
   */
-  bool contains(graphene.point.Point p)
+  bool contains(graphene.point.Point p) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_quad_contains(cast(const(graphene_quad_t)*)this._cPtr, cast(const(graphene_point_t)*)&p);
@@ -106,7 +106,7 @@ class Quad : gobject.boxed.Boxed
         index = the index of the point to retrieve
       Returns: a #graphene_point_t
   */
-  graphene.point.Point getPoint(uint index)
+  graphene.point.Point getPoint(uint index) nothrow
   {
     const(graphene_point_t)* _cretval;
     _cretval = graphene_quad_get_point(cast(const(graphene_quad_t)*)this._cPtr, index);
@@ -126,7 +126,7 @@ class Quad : gobject.boxed.Boxed
         p4 = the fourth point of the quadrilateral
       Returns: the initialized #graphene_quad_t
   */
-  graphene.quad.Quad init_(graphene.point.Point p1, graphene.point.Point p2, graphene.point.Point p3, graphene.point.Point p4)
+  graphene.quad.Quad init_(graphene.point.Point p1, graphene.point.Point p2, graphene.point.Point p3, graphene.point.Point p4) nothrow
   {
     graphene_quad_t* _cretval;
     _cretval = graphene_quad_init(cast(graphene_quad_t*)this._cPtr, cast(const(graphene_point_t)*)&p1, cast(const(graphene_point_t)*)&p2, cast(const(graphene_point_t)*)&p3, cast(const(graphene_point_t)*)&p4);
@@ -141,7 +141,7 @@ class Quad : gobject.boxed.Boxed
         points = an array of 4 #graphene_point_t
       Returns: the initialized #graphene_quad_t
   */
-  graphene.quad.Quad initFromPoints(graphene.point.Point[] points)
+  graphene.quad.Quad initFromPoints(graphene.point.Point[] points) nothrow
   {
     graphene_quad_t* _cretval;
     assert(!points || points.length == 4);
@@ -159,7 +159,7 @@ class Quad : gobject.boxed.Boxed
         r = a #graphene_rect_t
       Returns: the initialized #graphene_quad_t
   */
-  graphene.quad.Quad initFromRect(graphene.rect.Rect r)
+  graphene.quad.Quad initFromRect(graphene.rect.Rect r) nothrow
   {
     graphene_quad_t* _cretval;
     _cretval = graphene_quad_init_from_rect(cast(graphene_quad_t*)this._cPtr, r ? cast(const(graphene_rect_t)*)r._cPtr(No.Dup) : null);

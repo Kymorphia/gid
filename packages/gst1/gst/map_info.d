@@ -21,11 +21,8 @@ class MapInfo
   GstMapInfo _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gst.map_info.MapInfo");
-
     _cInstance = *cast(GstMapInfo*)ptr;
 
     if (take)
@@ -33,7 +30,7 @@ class MapInfo
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -42,7 +39,7 @@ class MapInfo
       Get `memory` field.
       Returns: a pointer to the mapped memory
   */
-  @property gst.memory.Memory memory()
+  @property gst.memory.Memory memory() nothrow
   {
     return cToD!(gst.memory.Memory)(cast(void*)(cast(GstMapInfo*)this._cPtr).memory);
   }
@@ -52,7 +49,7 @@ class MapInfo
       Params:
         propval = a pointer to the mapped memory
   */
-  @property void memory(gst.memory.Memory propval)
+  @property void memory(gst.memory.Memory propval) nothrow
   {
     cValueFree!(gst.memory.Memory)(cast(void*)(cast(GstMapInfo*)this._cPtr).memory);
     dToC(propval, cast(void*)&(cast(GstMapInfo*)this._cPtr).memory);
@@ -62,7 +59,7 @@ class MapInfo
       Get `flags` field.
       Returns: flags used when mapping the memory
   */
-  @property gst.types.MapFlags flags()
+  @property gst.types.MapFlags flags() nothrow
   {
     return cast(gst.types.MapFlags)(cast(GstMapInfo*)this._cPtr).flags;
   }
@@ -72,7 +69,7 @@ class MapInfo
       Params:
         propval = flags used when mapping the memory
   */
-  @property void flags(gst.types.MapFlags propval)
+  @property void flags(gst.types.MapFlags propval) nothrow
   {
     (cast(GstMapInfo*)this._cPtr).flags = cast(GstMapFlags)propval;
   }
@@ -81,7 +78,7 @@ class MapInfo
       Get `size` field.
       Returns: the valid size in @data
   */
-  @property size_t size()
+  @property size_t size() nothrow
   {
     return (cast(GstMapInfo*)this._cPtr).size;
   }
@@ -91,7 +88,7 @@ class MapInfo
       Params:
         propval = the valid size in @data
   */
-  @property void size(size_t propval)
+  @property void size(size_t propval) nothrow
   {
     (cast(GstMapInfo*)this._cPtr).size = propval;
   }
@@ -100,7 +97,7 @@ class MapInfo
       Get `maxsize` field.
       Returns: the maximum bytes in @data
   */
-  @property size_t maxsize()
+  @property size_t maxsize() nothrow
   {
     return (cast(GstMapInfo*)this._cPtr).maxsize;
   }
@@ -110,7 +107,7 @@ class MapInfo
       Params:
         propval = the maximum bytes in @data
   */
-  @property void maxsize(size_t propval)
+  @property void maxsize(size_t propval) nothrow
   {
     (cast(GstMapInfo*)this._cPtr).maxsize = propval;
   }

@@ -52,26 +52,26 @@ class ColorChooserDialog : gtk.dialog.Dialog, gtk.color_chooser.ColorChooser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_color_chooser_dialog_get_type != &gidSymbolNotFound ? gtk_color_chooser_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ColorChooserDialog self()
+  override ColorChooserDialog self() nothrow
   {
     return this;
   }
@@ -80,19 +80,19 @@ class ColorChooserDialog : gtk.dialog.Dialog, gtk.color_chooser.ColorChooser
       Get builder for [gtk.color_chooser_dialog.ColorChooserDialog]
       Returns: New builder object
   */
-  static ColorChooserDialogGidBuilder builder()
+  static ColorChooserDialogGidBuilder builder() nothrow
   {
     return new ColorChooserDialogGidBuilder;
   }
 
   /** */
-  @property bool showEditor()
+  @property bool showEditor() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("show-editor");
   }
 
   /** */
-  @property void showEditor(bool propval)
+  @property void showEditor(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("show-editor", propval);
   }
@@ -109,7 +109,7 @@ class ColorChooserDialog : gtk.dialog.Dialog, gtk.color_chooser.ColorChooser
   
       Deprecated: Use [gtk.color_dialog.ColorDialog] instead
   */
-  this(string title = null, gtk.window.Window parent = null)
+  this(string title = null, gtk.window.Window parent = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -125,7 +125,7 @@ class ColorChooserDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T, g
   mixin ColorChooserGidBuilderT!();
 
   /** */
-  T showEditor(bool propval)
+  T showEditor(bool propval) nothrow
   {
     return setProperty("show-editor", propval);
   }
@@ -138,7 +138,7 @@ final class ColorChooserDialogGidBuilder : ColorChooserDialogGidBuilderImpl!Colo
       Create object from builder.
       Returns: New object
   */
-  ColorChooserDialog build()
+  ColorChooserDialog build() nothrow
   {
     return new ColorChooserDialog(cast(void*)createGObject(ColorChooserDialog._getGType), No.Take);
   }

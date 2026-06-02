@@ -62,26 +62,26 @@ class ToastOverlay : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_toast_overlay_get_type != &gidSymbolNotFound ? adw_toast_overlay_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ToastOverlay self()
+  override ToastOverlay self() nothrow
   {
     return this;
   }
@@ -90,7 +90,7 @@ class ToastOverlay : gtk.widget.Widget
       Get builder for [adw.toast_overlay.ToastOverlay]
       Returns: New builder object
   */
-  static ToastOverlayGidBuilder builder()
+  static ToastOverlayGidBuilder builder() nothrow
   {
     return new ToastOverlayGidBuilder;
   }
@@ -99,7 +99,7 @@ class ToastOverlay : gtk.widget.Widget
       Get `child` property.
       Returns: The child widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -109,7 +109,7 @@ class ToastOverlay : gtk.widget.Widget
       Params:
         propval = The child widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -118,7 +118,7 @@ class ToastOverlay : gtk.widget.Widget
       Creates a new [adw.toast_overlay.ToastOverlay].
       Returns: the new created [adw.toast_overlay.ToastOverlay]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_toast_overlay_new();
@@ -140,7 +140,7 @@ class ToastOverlay : gtk.widget.Widget
       Params:
         toast = a toast
   */
-  void addToast(adw.toast.Toast toast)
+  void addToast(adw.toast.Toast toast) nothrow
   {
     adw_toast_overlay_add_toast(cast(AdwToastOverlay*)this._cPtr, toast ? cast(AdwToast*)toast._cPtr(Yes.Dup) : null);
   }
@@ -149,7 +149,7 @@ class ToastOverlay : gtk.widget.Widget
       Gets the child widget of self.
       Returns: the child widget of self
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_toast_overlay_get_child(cast(AdwToastOverlay*)this._cPtr);
@@ -163,7 +163,7 @@ class ToastOverlay : gtk.widget.Widget
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     adw_toast_overlay_set_child(cast(AdwToastOverlay*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -180,7 +180,7 @@ class ToastOverlayGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The child widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -193,7 +193,7 @@ final class ToastOverlayGidBuilder : ToastOverlayGidBuilderImpl!ToastOverlayGidB
       Create object from builder.
       Returns: New object
   */
-  ToastOverlay build()
+  ToastOverlay build() nothrow
   {
     return new ToastOverlay(cast(void*)createGObject(ToastOverlay._getGType), No.Take);
   }

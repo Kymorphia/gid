@@ -19,7 +19,7 @@ struct EventType
         type = a #GstEventType
       Returns: a #GstEventTypeFlags.
   */
-  static gst.types.EventTypeFlags getFlags(gst.types.EventType type)
+  static gst.types.EventTypeFlags getFlags(gst.types.EventType type) nothrow
   {
     GstEventTypeFlags _cretval;
     _cretval = gst_event_type_get_flags(type);
@@ -34,7 +34,7 @@ struct EventType
         type = the event type
       Returns: a reference to the static name of the event.
   */
-  static string getName(gst.types.EventType type)
+  static string getName(gst.types.EventType type) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_event_type_get_name(type);
@@ -49,7 +49,7 @@ struct EventType
         type = the event type
       Returns: the quark associated with the event type
   */
-  static glib.types.Quark toQuark(gst.types.EventType type)
+  static glib.types.Quark toQuark(gst.types.EventType type) nothrow
   {
     glib.types.Quark _retval;
     _retval = gst_event_type_to_quark(type);
@@ -65,7 +65,7 @@ struct EventType
         type = a #GstEventType
       Returns: an unsigned integer
   */
-  static uint toStickyOrdering(gst.types.EventType type)
+  static uint toStickyOrdering(gst.types.EventType type) nothrow
   {
     uint _retval;
     _retval = gst_event_type_to_sticky_ordering(type);

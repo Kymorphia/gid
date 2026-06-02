@@ -17,11 +17,8 @@ class VideoCropMeta
   GstVideoCropMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_crop_meta.VideoCropMeta");
-
     _cInstance = *cast(GstVideoCropMeta*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class VideoCropMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class VideoCropMeta
       Get `meta` field.
       Returns: parent #GstMeta
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoCropMeta*)this._cPtr).meta, No.Take);
   }
@@ -47,7 +44,7 @@ class VideoCropMeta
       Get `x` field.
       Returns: the horizontal offset
   */
-  @property uint x()
+  @property uint x() nothrow
   {
     return (cast(GstVideoCropMeta*)this._cPtr).x;
   }
@@ -57,7 +54,7 @@ class VideoCropMeta
       Params:
         propval = the horizontal offset
   */
-  @property void x(uint propval)
+  @property void x(uint propval) nothrow
   {
     (cast(GstVideoCropMeta*)this._cPtr).x = propval;
   }
@@ -66,7 +63,7 @@ class VideoCropMeta
       Get `y` field.
       Returns: the vertical offset
   */
-  @property uint y()
+  @property uint y() nothrow
   {
     return (cast(GstVideoCropMeta*)this._cPtr).y;
   }
@@ -76,7 +73,7 @@ class VideoCropMeta
       Params:
         propval = the vertical offset
   */
-  @property void y(uint propval)
+  @property void y(uint propval) nothrow
   {
     (cast(GstVideoCropMeta*)this._cPtr).y = propval;
   }
@@ -85,7 +82,7 @@ class VideoCropMeta
       Get `width` field.
       Returns: the cropped width
   */
-  @property uint width()
+  @property uint width() nothrow
   {
     return (cast(GstVideoCropMeta*)this._cPtr).width;
   }
@@ -95,7 +92,7 @@ class VideoCropMeta
       Params:
         propval = the cropped width
   */
-  @property void width(uint propval)
+  @property void width(uint propval) nothrow
   {
     (cast(GstVideoCropMeta*)this._cPtr).width = propval;
   }
@@ -104,7 +101,7 @@ class VideoCropMeta
       Get `height` field.
       Returns: the cropped height
   */
-  @property uint height()
+  @property uint height() nothrow
   {
     return (cast(GstVideoCropMeta*)this._cPtr).height;
   }
@@ -114,13 +111,13 @@ class VideoCropMeta
       Params:
         propval = the cropped height
   */
-  @property void height(uint propval)
+  @property void height(uint propval) nothrow
   {
     (cast(GstVideoCropMeta*)this._cPtr).height = propval;
   }
 
   /** */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_crop_meta_get_info();

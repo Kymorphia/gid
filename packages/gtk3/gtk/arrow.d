@@ -40,26 +40,26 @@ class Arrow : gtk.misc.Misc
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_arrow_get_type != &gidSymbolNotFound ? gtk_arrow_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Arrow self()
+  override Arrow self() nothrow
   {
     return this;
   }
@@ -68,31 +68,31 @@ class Arrow : gtk.misc.Misc
       Get builder for [gtk.arrow.Arrow]
       Returns: New builder object
   */
-  static ArrowGidBuilder builder()
+  static ArrowGidBuilder builder() nothrow
   {
     return new ArrowGidBuilder;
   }
 
   /** */
-  @property gtk.types.ArrowType arrowType()
+  @property gtk.types.ArrowType arrowType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.ArrowType)("arrow-type");
   }
 
   /** */
-  @property void arrowType(gtk.types.ArrowType propval)
+  @property void arrowType(gtk.types.ArrowType propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.ArrowType)("arrow-type", propval);
   }
 
   /** */
-  @property gtk.types.ShadowType shadowType()
+  @property gtk.types.ShadowType shadowType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.ShadowType)("shadow-type");
   }
 
   /** */
-  @property void shadowType(gtk.types.ShadowType propval)
+  @property void shadowType(gtk.types.ShadowType propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.ShadowType)("shadow-type", propval);
   }
@@ -107,7 +107,7 @@ class Arrow : gtk.misc.Misc
   
       Deprecated: Use a #GtkImage with a suitable icon.
   */
-  this(gtk.types.ArrowType arrowType, gtk.types.ShadowType shadowType)
+  this(gtk.types.ArrowType arrowType, gtk.types.ShadowType shadowType) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_arrow_new(arrowType, shadowType);
@@ -123,7 +123,7 @@ class Arrow : gtk.misc.Misc
   
       Deprecated: Use a #GtkImage with a suitable icon.
   */
-  void set(gtk.types.ArrowType arrowType, gtk.types.ShadowType shadowType)
+  void set(gtk.types.ArrowType arrowType, gtk.types.ShadowType shadowType) nothrow
   {
     gtk_arrow_set(cast(GtkArrow*)this._cPtr, arrowType, shadowType);
   }
@@ -135,13 +135,13 @@ class ArrowGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
 
 
   /** */
-  T arrowType(gtk.types.ArrowType propval)
+  T arrowType(gtk.types.ArrowType propval) nothrow
   {
     return setProperty("arrow-type", propval);
   }
 
   /** */
-  T shadowType(gtk.types.ShadowType propval)
+  T shadowType(gtk.types.ShadowType propval) nothrow
   {
     return setProperty("shadow-type", propval);
   }
@@ -154,7 +154,7 @@ final class ArrowGidBuilder : ArrowGidBuilderImpl!ArrowGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Arrow build()
+  Arrow build() nothrow
   {
     return new Arrow(cast(void*)createGObject(Arrow._getGType), No.Take);
   }

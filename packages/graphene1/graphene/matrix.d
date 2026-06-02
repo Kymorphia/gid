@@ -31,38 +31,38 @@ class Matrix : gobject.boxed.Boxed
   /**
       Create a `matrix.Matrix` boxed type.
   */
-  this()
+  this() nothrow
   {
     super(gMalloc(graphene_matrix_t.sizeof), Yes.Take);
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())graphene_matrix_get_type != &gidSymbolNotFound ? graphene_matrix_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Matrix self()
+  override Matrix self() nothrow
   {
     return this;
   }
@@ -71,7 +71,7 @@ class Matrix : gobject.boxed.Boxed
       Allocates a new #graphene_matrix_t.
       Returns: the newly allocated matrix
   */
-  static graphene.matrix.Matrix alloc()
+  static graphene.matrix.Matrix alloc() nothrow
   {
     graphene_matrix_t* _cretval;
     _cretval = graphene_matrix_alloc();
@@ -96,7 +96,7 @@ class Matrix : gobject.boxed.Boxed
         perspective = the perspective vector
       Returns: `true` if the matrix could be decomposed
   */
-  bool decompose(out graphene.vec3.Vec3 translate, out graphene.vec3.Vec3 scale, out graphene.quaternion.Quaternion rotate, out graphene.vec3.Vec3 shear, out graphene.vec4.Vec4 perspective)
+  bool decompose(out graphene.vec3.Vec3 translate, out graphene.vec3.Vec3 scale, out graphene.quaternion.Quaternion rotate, out graphene.vec3.Vec3 shear, out graphene.vec4.Vec4 perspective) nothrow
   {
     bool _retval;
     graphene_vec3_t _translate;
@@ -115,7 +115,7 @@ class Matrix : gobject.boxed.Boxed
       Computes the determinant of the given matrix.
       Returns: the value of the determinant
   */
-  float determinant()
+  float determinant() nothrow
   {
     float _retval;
     _retval = graphene_matrix_determinant(cast(const(graphene_matrix_t)*)this._cPtr);
@@ -129,7 +129,7 @@ class Matrix : gobject.boxed.Boxed
         b = a #graphene_matrix_t
       Returns: `true` if the two matrices are equal, and `false` otherwise
   */
-  bool equal(graphene.matrix.Matrix b)
+  bool equal(graphene.matrix.Matrix b) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_matrix_equal(cast(const(graphene_matrix_t)*)this._cPtr, b ? cast(const(graphene_matrix_t)*)b._cPtr(No.Dup) : null);
@@ -165,7 +165,7 @@ class Matrix : gobject.boxed.Boxed
         b = a #graphene_matrix_t
       Returns: `true` if the matrices are equal. and `false` otherwise
   */
-  bool equalFast(graphene.matrix.Matrix b)
+  bool equalFast(graphene.matrix.Matrix b) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_matrix_equal_fast(cast(const(graphene_matrix_t)*)this._cPtr, b ? cast(const(graphene_matrix_t)*)b._cPtr(No.Dup) : null);
@@ -180,7 +180,7 @@ class Matrix : gobject.boxed.Boxed
         res = return location for the #graphene_vec4_t
             that is used to store the row vector
   */
-  void getRow(uint index, out graphene.vec4.Vec4 res)
+  void getRow(uint index, out graphene.vec4.Vec4 res) nothrow
   {
     graphene_vec4_t _res;
     graphene_matrix_get_row(cast(const(graphene_matrix_t)*)this._cPtr, index, &_res);
@@ -195,7 +195,7 @@ class Matrix : gobject.boxed.Boxed
         col = the column index
       Returns: the value at the given indices
   */
-  float getValue(uint row, uint col)
+  float getValue(uint row, uint col) nothrow
   {
     float _retval;
     _retval = graphene_matrix_get_value(cast(const(graphene_matrix_t)*)this._cPtr, row, col);
@@ -206,7 +206,7 @@ class Matrix : gobject.boxed.Boxed
       Retrieves the scaling factor on the X axis in `m`.
       Returns: the value of the scaling factor
   */
-  float getXScale()
+  float getXScale() nothrow
   {
     float _retval;
     _retval = graphene_matrix_get_x_scale(cast(const(graphene_matrix_t)*)this._cPtr);
@@ -217,7 +217,7 @@ class Matrix : gobject.boxed.Boxed
       Retrieves the translation component on the X axis from `m`.
       Returns: the translation component
   */
-  float getXTranslation()
+  float getXTranslation() nothrow
   {
     float _retval;
     _retval = graphene_matrix_get_x_translation(cast(const(graphene_matrix_t)*)this._cPtr);
@@ -228,7 +228,7 @@ class Matrix : gobject.boxed.Boxed
       Retrieves the scaling factor on the Y axis in `m`.
       Returns: the value of the scaling factor
   */
-  float getYScale()
+  float getYScale() nothrow
   {
     float _retval;
     _retval = graphene_matrix_get_y_scale(cast(const(graphene_matrix_t)*)this._cPtr);
@@ -239,7 +239,7 @@ class Matrix : gobject.boxed.Boxed
       Retrieves the translation component on the Y axis from `m`.
       Returns: the translation component
   */
-  float getYTranslation()
+  float getYTranslation() nothrow
   {
     float _retval;
     _retval = graphene_matrix_get_y_translation(cast(const(graphene_matrix_t)*)this._cPtr);
@@ -250,7 +250,7 @@ class Matrix : gobject.boxed.Boxed
       Retrieves the scaling factor on the Z axis in `m`.
       Returns: the value of the scaling factor
   */
-  float getZScale()
+  float getZScale() nothrow
   {
     float _retval;
     _retval = graphene_matrix_get_z_scale(cast(const(graphene_matrix_t)*)this._cPtr);
@@ -261,7 +261,7 @@ class Matrix : gobject.boxed.Boxed
       Retrieves the translation component on the Z axis from `m`.
       Returns: the translation component
   */
-  float getZTranslation()
+  float getZTranslation() nothrow
   {
     float _retval;
     _retval = graphene_matrix_get_z_translation(cast(const(graphene_matrix_t)*)this._cPtr);
@@ -292,7 +292,7 @@ class Matrix : gobject.boxed.Boxed
         y0 = the y0 member
       Returns: the initialized matrix
   */
-  graphene.matrix.Matrix initFrom2d(double xx, double yx, double xy, double yy, double x0, double y0)
+  graphene.matrix.Matrix initFrom2d(double xx, double yx, double xy, double yy, double x0, double y0) nothrow
   {
     graphene_matrix_t* _cretval;
     _cretval = graphene_matrix_init_from_2d(cast(graphene_matrix_t*)this._cPtr, xx, yx, xy, yy, x0, y0);
@@ -309,7 +309,7 @@ class Matrix : gobject.boxed.Boxed
             point values
       Returns: the initialized matrix
   */
-  graphene.matrix.Matrix initFromFloat(float[] v)
+  graphene.matrix.Matrix initFromFloat(float[] v) nothrow
   {
     graphene_matrix_t* _cretval;
     assert(!v || v.length == 16);
@@ -327,7 +327,7 @@ class Matrix : gobject.boxed.Boxed
         src = a #graphene_matrix_t
       Returns: the initialized matrix
   */
-  graphene.matrix.Matrix initFromMatrix(graphene.matrix.Matrix src)
+  graphene.matrix.Matrix initFromMatrix(graphene.matrix.Matrix src) nothrow
   {
     graphene_matrix_t* _cretval;
     _cretval = graphene_matrix_init_from_matrix(cast(graphene_matrix_t*)this._cPtr, src ? cast(const(graphene_matrix_t)*)src._cPtr(No.Dup) : null);
@@ -346,7 +346,7 @@ class Matrix : gobject.boxed.Boxed
         v3 = the fourth row vector
       Returns: the initialized matrix
   */
-  graphene.matrix.Matrix initFromVec4(graphene.vec4.Vec4 v0, graphene.vec4.Vec4 v1, graphene.vec4.Vec4 v2, graphene.vec4.Vec4 v3)
+  graphene.matrix.Matrix initFromVec4(graphene.vec4.Vec4 v0, graphene.vec4.Vec4 v1, graphene.vec4.Vec4 v2, graphene.vec4.Vec4 v3) nothrow
   {
     graphene_matrix_t* _cretval;
     _cretval = graphene_matrix_init_from_vec4(cast(graphene_matrix_t*)this._cPtr, v0 ? cast(const(graphene_vec4_t)*)v0._cPtr(No.Dup) : null, v1 ? cast(const(graphene_vec4_t)*)v1._cPtr(No.Dup) : null, v2 ? cast(const(graphene_vec4_t)*)v2._cPtr(No.Dup) : null, v3 ? cast(const(graphene_vec4_t)*)v3._cPtr(No.Dup) : null);
@@ -368,7 +368,7 @@ class Matrix : gobject.boxed.Boxed
         zFar = distance of the far clipping plane
       Returns: the initialized matrix
   */
-  graphene.matrix.Matrix initFrustum(float left, float right, float bottom, float top, float zNear, float zFar)
+  graphene.matrix.Matrix initFrustum(float left, float right, float bottom, float top, float zNear, float zFar) nothrow
   {
     graphene_matrix_t* _cretval;
     _cretval = graphene_matrix_init_frustum(cast(graphene_matrix_t*)this._cPtr, left, right, bottom, top, zNear, zFar);
@@ -380,7 +380,7 @@ class Matrix : gobject.boxed.Boxed
       Initializes a #graphene_matrix_t with the identity matrix.
       Returns: the initialized matrix
   */
-  graphene.matrix.Matrix initIdentity()
+  graphene.matrix.Matrix initIdentity() nothrow
   {
     graphene_matrix_t* _cretval;
     _cretval = graphene_matrix_init_identity(cast(graphene_matrix_t*)this._cPtr);
@@ -413,7 +413,7 @@ class Matrix : gobject.boxed.Boxed
             this is the [graphene.vec3.Vec3.yAxis] vector
       Returns: the initialized matrix
   */
-  graphene.matrix.Matrix initLookAt(graphene.vec3.Vec3 eye, graphene.vec3.Vec3 center, graphene.vec3.Vec3 up)
+  graphene.matrix.Matrix initLookAt(graphene.vec3.Vec3 eye, graphene.vec3.Vec3 center, graphene.vec3.Vec3 up) nothrow
   {
     graphene_matrix_t* _cretval;
     _cretval = graphene_matrix_init_look_at(cast(graphene_matrix_t*)this._cPtr, eye ? cast(const(graphene_vec3_t)*)eye._cPtr(No.Dup) : null, center ? cast(const(graphene_vec3_t)*)center._cPtr(No.Dup) : null, up ? cast(const(graphene_vec3_t)*)up._cPtr(No.Dup) : null);
@@ -433,7 +433,7 @@ class Matrix : gobject.boxed.Boxed
         zFar = the distance of the far clipping plane
       Returns: the initialized matrix
   */
-  graphene.matrix.Matrix initOrtho(float left, float right, float top, float bottom, float zNear, float zFar)
+  graphene.matrix.Matrix initOrtho(float left, float right, float top, float bottom, float zNear, float zFar) nothrow
   {
     graphene_matrix_t* _cretval;
     _cretval = graphene_matrix_init_ortho(cast(graphene_matrix_t*)this._cPtr, left, right, top, bottom, zNear, zFar);
@@ -451,7 +451,7 @@ class Matrix : gobject.boxed.Boxed
         zFar = the far Z plane
       Returns: the initialized matrix
   */
-  graphene.matrix.Matrix initPerspective(float fovy, float aspect, float zNear, float zFar)
+  graphene.matrix.Matrix initPerspective(float fovy, float aspect, float zNear, float zFar) nothrow
   {
     graphene_matrix_t* _cretval;
     _cretval = graphene_matrix_init_perspective(cast(graphene_matrix_t*)this._cPtr, fovy, aspect, zNear, zFar);
@@ -468,7 +468,7 @@ class Matrix : gobject.boxed.Boxed
         axis = the axis vector as a #graphene_vec3_t
       Returns: the initialized matrix
   */
-  graphene.matrix.Matrix initRotate(float angle, graphene.vec3.Vec3 axis)
+  graphene.matrix.Matrix initRotate(float angle, graphene.vec3.Vec3 axis) nothrow
   {
     graphene_matrix_t* _cretval;
     _cretval = graphene_matrix_init_rotate(cast(graphene_matrix_t*)this._cPtr, angle, axis ? cast(const(graphene_vec3_t)*)axis._cPtr(No.Dup) : null);
@@ -485,7 +485,7 @@ class Matrix : gobject.boxed.Boxed
         z = the scale factor on the Z axis
       Returns: the initialized matrix
   */
-  graphene.matrix.Matrix initScale(float x, float y, float z)
+  graphene.matrix.Matrix initScale(float x, float y, float z) nothrow
   {
     graphene_matrix_t* _cretval;
     _cretval = graphene_matrix_init_scale(cast(graphene_matrix_t*)this._cPtr, x, y, z);
@@ -502,7 +502,7 @@ class Matrix : gobject.boxed.Boxed
         ySkew = skew factor, in radians, on the Y axis
       Returns: the initialized matrix
   */
-  graphene.matrix.Matrix initSkew(float xSkew, float ySkew)
+  graphene.matrix.Matrix initSkew(float xSkew, float ySkew) nothrow
   {
     graphene_matrix_t* _cretval;
     _cretval = graphene_matrix_init_skew(cast(graphene_matrix_t*)this._cPtr, xSkew, ySkew);
@@ -518,7 +518,7 @@ class Matrix : gobject.boxed.Boxed
         p = the translation coordinates
       Returns: the initialized matrix
   */
-  graphene.matrix.Matrix initTranslate(graphene.point3_d.Point3D p)
+  graphene.matrix.Matrix initTranslate(graphene.point3_d.Point3D p) nothrow
   {
     graphene_matrix_t* _cretval;
     _cretval = graphene_matrix_init_translate(cast(graphene_matrix_t*)this._cPtr, cast(const(graphene_point3d_t)*)&p);
@@ -540,7 +540,7 @@ class Matrix : gobject.boxed.Boxed
         res = return location for the
             interpolated matrix
   */
-  void interpolate(graphene.matrix.Matrix b, double factor, out graphene.matrix.Matrix res)
+  void interpolate(graphene.matrix.Matrix b, double factor, out graphene.matrix.Matrix res) nothrow
   {
     graphene_matrix_t _res;
     graphene_matrix_interpolate(cast(const(graphene_matrix_t)*)this._cPtr, b ? cast(const(graphene_matrix_t)*)b._cPtr(No.Dup) : null, factor, &_res);
@@ -555,7 +555,7 @@ class Matrix : gobject.boxed.Boxed
             inverse matrix
       Returns: `true` if the matrix is invertible
   */
-  bool inverse(out graphene.matrix.Matrix res)
+  bool inverse(out graphene.matrix.Matrix res) nothrow
   {
     bool _retval;
     graphene_matrix_t _res;
@@ -570,7 +570,7 @@ class Matrix : gobject.boxed.Boxed
       Returns: `true` if the matrix is compatible with an affine
           transformation matrix
   */
-  bool is2d()
+  bool is2d() nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_matrix_is_2d(cast(const(graphene_matrix_t)*)this._cPtr);
@@ -581,7 +581,7 @@ class Matrix : gobject.boxed.Boxed
       Checks whether a #graphene_matrix_t has a visible back face.
       Returns: `true` if the back face of the matrix is visible
   */
-  bool isBackfaceVisible()
+  bool isBackfaceVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_matrix_is_backface_visible(cast(const(graphene_matrix_t)*)this._cPtr);
@@ -592,7 +592,7 @@ class Matrix : gobject.boxed.Boxed
       Checks whether the given #graphene_matrix_t is the identity matrix.
       Returns: `true` if the matrix is the identity matrix
   */
-  bool isIdentity()
+  bool isIdentity() nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_matrix_is_identity(cast(const(graphene_matrix_t)*)this._cPtr);
@@ -603,7 +603,7 @@ class Matrix : gobject.boxed.Boxed
       Checks whether a matrix is singular.
       Returns: `true` if the matrix is singular
   */
-  bool isSingular()
+  bool isSingular() nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_matrix_is_singular(cast(const(graphene_matrix_t)*)this._cPtr);
@@ -621,7 +621,7 @@ class Matrix : gobject.boxed.Boxed
         res = return location for the matrix
             result
   */
-  void multiply(graphene.matrix.Matrix b, out graphene.matrix.Matrix res)
+  void multiply(graphene.matrix.Matrix b, out graphene.matrix.Matrix res) nothrow
   {
     graphene_matrix_t _res;
     graphene_matrix_multiply(cast(const(graphene_matrix_t)*)this._cPtr, b ? cast(const(graphene_matrix_t)*)b._cPtr(No.Dup) : null, &_res);
@@ -639,7 +639,7 @@ class Matrix : gobject.boxed.Boxed
       Returns: `true` if the two matrices are near each other, and
           `false` otherwise
   */
-  bool near(graphene.matrix.Matrix b, float epsilon)
+  bool near(graphene.matrix.Matrix b, float epsilon) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_matrix_near(cast(const(graphene_matrix_t)*)this._cPtr, b ? cast(const(graphene_matrix_t)*)b._cPtr(No.Dup) : null, epsilon);
@@ -652,7 +652,7 @@ class Matrix : gobject.boxed.Boxed
       Params:
         res = return location for the normalized matrix
   */
-  void normalize(out graphene.matrix.Matrix res)
+  void normalize(out graphene.matrix.Matrix res) nothrow
   {
     graphene_matrix_t _res;
     graphene_matrix_normalize(cast(const(graphene_matrix_t)*)this._cPtr, &_res);
@@ -667,7 +667,7 @@ class Matrix : gobject.boxed.Boxed
         res = return location for the
             perspective matrix
   */
-  void perspective(float depth, out graphene.matrix.Matrix res)
+  void perspective(float depth, out graphene.matrix.Matrix res) nothrow
   {
     graphene_matrix_t _res;
     graphene_matrix_perspective(cast(const(graphene_matrix_t)*)this._cPtr, depth, &_res);
@@ -680,7 +680,7 @@ class Matrix : gobject.boxed.Boxed
       This function is only useful for debugging; there are no guarantees
       made on the format of the output.
   */
-  void print()
+  void print() nothrow
   {
     graphene_matrix_print(cast(const(graphene_matrix_t)*)this._cPtr);
   }
@@ -693,7 +693,7 @@ class Matrix : gobject.boxed.Boxed
         res = return location for the projected
             point
   */
-  void projectPoint(graphene.point.Point p, out graphene.point.Point res)
+  void projectPoint(graphene.point.Point p, out graphene.point.Point res) nothrow
   {
     graphene_matrix_project_point(cast(const(graphene_matrix_t)*)this._cPtr, cast(const(graphene_point_t)*)&p, cast(graphene_point_t*)&res);
   }
@@ -708,7 +708,7 @@ class Matrix : gobject.boxed.Boxed
         res = return location for the projected
             rectangle
   */
-  void projectRect(graphene.rect.Rect r, out graphene.quad.Quad res)
+  void projectRect(graphene.rect.Rect r, out graphene.quad.Quad res) nothrow
   {
     graphene_quad_t _res;
     graphene_matrix_project_rect(cast(const(graphene_matrix_t)*)this._cPtr, r ? cast(const(graphene_rect_t)*)r._cPtr(No.Dup) : null, &_res);
@@ -726,7 +726,7 @@ class Matrix : gobject.boxed.Boxed
         res = return location for the projected
             rectangle
   */
-  void projectRectBounds(graphene.rect.Rect r, out graphene.rect.Rect res)
+  void projectRectBounds(graphene.rect.Rect r, out graphene.rect.Rect res) nothrow
   {
     graphene_rect_t _res;
     graphene_matrix_project_rect_bounds(cast(const(graphene_matrix_t)*)this._cPtr, r ? cast(const(graphene_rect_t)*)r._cPtr(No.Dup) : null, &_res);
@@ -744,7 +744,7 @@ class Matrix : gobject.boxed.Boxed
         angle = the rotation angle, in degrees
         axis = the rotation axis, as a #graphene_vec3_t
   */
-  void rotate(float angle, graphene.vec3.Vec3 axis)
+  void rotate(float angle, graphene.vec3.Vec3 axis) nothrow
   {
     graphene_matrix_rotate(cast(graphene_matrix_t*)this._cPtr, angle, axis ? cast(const(graphene_vec3_t)*)axis._cPtr(No.Dup) : null);
   }
@@ -756,7 +756,7 @@ class Matrix : gobject.boxed.Boxed
       Params:
         e = a rotation described by a #graphene_euler_t
   */
-  void rotateEuler(graphene.euler.Euler e)
+  void rotateEuler(graphene.euler.Euler e) nothrow
   {
     graphene_matrix_rotate_euler(cast(graphene_matrix_t*)this._cPtr, e ? cast(const(graphene_euler_t)*)e._cPtr(No.Dup) : null);
   }
@@ -771,7 +771,7 @@ class Matrix : gobject.boxed.Boxed
       Params:
         q = a rotation described by a #graphene_quaternion_t
   */
-  void rotateQuaternion(graphene.quaternion.Quaternion q)
+  void rotateQuaternion(graphene.quaternion.Quaternion q) nothrow
   {
     graphene_matrix_rotate_quaternion(cast(graphene_matrix_t*)this._cPtr, cast(const(graphene_quaternion_t)*)&q);
   }
@@ -785,7 +785,7 @@ class Matrix : gobject.boxed.Boxed
       Params:
         angle = the rotation angle, in degrees
   */
-  void rotateX(float angle)
+  void rotateX(float angle) nothrow
   {
     graphene_matrix_rotate_x(cast(graphene_matrix_t*)this._cPtr, angle);
   }
@@ -799,7 +799,7 @@ class Matrix : gobject.boxed.Boxed
       Params:
         angle = the rotation angle, in degrees
   */
-  void rotateY(float angle)
+  void rotateY(float angle) nothrow
   {
     graphene_matrix_rotate_y(cast(graphene_matrix_t*)this._cPtr, angle);
   }
@@ -813,7 +813,7 @@ class Matrix : gobject.boxed.Boxed
       Params:
         angle = the rotation angle, in degrees
   */
-  void rotateZ(float angle)
+  void rotateZ(float angle) nothrow
   {
     graphene_matrix_rotate_z(cast(graphene_matrix_t*)this._cPtr, angle);
   }
@@ -830,7 +830,7 @@ class Matrix : gobject.boxed.Boxed
         factorY = scaling factor on the Y axis
         factorZ = scaling factor on the Z axis
   */
-  void scale(float factorX, float factorY, float factorZ)
+  void scale(float factorX, float factorY, float factorZ) nothrow
   {
     graphene_matrix_scale(cast(graphene_matrix_t*)this._cPtr, factorX, factorY, factorZ);
   }
@@ -841,7 +841,7 @@ class Matrix : gobject.boxed.Boxed
       Params:
         factor = skew factor
   */
-  void skewXy(float factor)
+  void skewXy(float factor) nothrow
   {
     graphene_matrix_skew_xy(cast(graphene_matrix_t*)this._cPtr, factor);
   }
@@ -852,7 +852,7 @@ class Matrix : gobject.boxed.Boxed
       Params:
         factor = skew factor
   */
-  void skewXz(float factor)
+  void skewXz(float factor) nothrow
   {
     graphene_matrix_skew_xz(cast(graphene_matrix_t*)this._cPtr, factor);
   }
@@ -863,7 +863,7 @@ class Matrix : gobject.boxed.Boxed
       Params:
         factor = skew factor
   */
-  void skewYz(float factor)
+  void skewYz(float factor) nothrow
   {
     graphene_matrix_skew_yz(cast(graphene_matrix_t*)this._cPtr, factor);
   }
@@ -893,7 +893,7 @@ class Matrix : gobject.boxed.Boxed
       Returns: `true` if the matrix is compatible with an affine
           transformation matrix
   */
-  bool to2d(out double xx, out double yx, out double xy, out double yy, out double x0, out double y0)
+  bool to2d(out double xx, out double yx, out double xy, out double yy, out double x0, out double y0) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_matrix_to_2d(cast(const(graphene_matrix_t)*)this._cPtr, cast(double*)&xx, cast(double*)&yx, cast(double*)&xy, cast(double*)&yy, cast(double*)&x0, cast(double*)&y0);
@@ -909,7 +909,7 @@ class Matrix : gobject.boxed.Boxed
             for an array of floating point values. The array must be capable
             of holding at least 16 values.
   */
-  void toFloat(ref float[] v)
+  void toFloat(ref float[] v) nothrow
   {
     graphene_matrix_to_float(cast(const(graphene_matrix_t)*)this._cPtr, v.ptr);
   }
@@ -927,7 +927,7 @@ class Matrix : gobject.boxed.Boxed
         res = return location for the bounds
             of the transformed rectangle
   */
-  void transformBounds(graphene.rect.Rect r, out graphene.rect.Rect res)
+  void transformBounds(graphene.rect.Rect r, out graphene.rect.Rect res) nothrow
   {
     graphene_rect_t _res;
     graphene_matrix_transform_bounds(cast(const(graphene_matrix_t)*)this._cPtr, r ? cast(const(graphene_rect_t)*)r._cPtr(No.Dup) : null, &_res);
@@ -945,7 +945,7 @@ class Matrix : gobject.boxed.Boxed
         res = return location for the bounds
             of the transformed box
   */
-  void transformBox(graphene.box.Box b, out graphene.box.Box res)
+  void transformBox(graphene.box.Box b, out graphene.box.Box res) nothrow
   {
     graphene_box_t _res;
     graphene_matrix_transform_box(cast(const(graphene_matrix_t)*)this._cPtr, b ? cast(const(graphene_box_t)*)b._cPtr(No.Dup) : null, &_res);
@@ -966,7 +966,7 @@ class Matrix : gobject.boxed.Boxed
         res = return location for the
             transformed #graphene_point_t
   */
-  void transformPoint(graphene.point.Point p, out graphene.point.Point res)
+  void transformPoint(graphene.point.Point p, out graphene.point.Point res) nothrow
   {
     graphene_matrix_transform_point(cast(const(graphene_matrix_t)*)this._cPtr, cast(const(graphene_point_t)*)&p, cast(graphene_point_t*)&res);
   }
@@ -984,7 +984,7 @@ class Matrix : gobject.boxed.Boxed
         p = a #graphene_point3d_t
         res = return location for the result
   */
-  void transformPoint3d(graphene.point3_d.Point3D p, out graphene.point3_d.Point3D res)
+  void transformPoint3d(graphene.point3_d.Point3D p, out graphene.point3_d.Point3D res) nothrow
   {
     graphene_matrix_transform_point3d(cast(const(graphene_matrix_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&p, cast(graphene_point3d_t*)&res);
   }
@@ -997,7 +997,7 @@ class Matrix : gobject.boxed.Boxed
         res = return location for the
             transformed ray
   */
-  void transformRay(graphene.ray.Ray r, out graphene.ray.Ray res)
+  void transformRay(graphene.ray.Ray r, out graphene.ray.Ray res) nothrow
   {
     graphene_ray_t _res;
     graphene_matrix_transform_ray(cast(const(graphene_matrix_t)*)this._cPtr, r ? cast(const(graphene_ray_t)*)r._cPtr(No.Dup) : null, &_res);
@@ -1016,7 +1016,7 @@ class Matrix : gobject.boxed.Boxed
         res = return location for the
             transformed quad
   */
-  void transformRect(graphene.rect.Rect r, out graphene.quad.Quad res)
+  void transformRect(graphene.rect.Rect r, out graphene.quad.Quad res) nothrow
   {
     graphene_quad_t _res;
     graphene_matrix_transform_rect(cast(const(graphene_matrix_t)*)this._cPtr, r ? cast(const(graphene_rect_t)*)r._cPtr(No.Dup) : null, &_res);
@@ -1032,7 +1032,7 @@ class Matrix : gobject.boxed.Boxed
         res = return location for the bounds
             of the transformed sphere
   */
-  void transformSphere(graphene.sphere.Sphere s, out graphene.sphere.Sphere res)
+  void transformSphere(graphene.sphere.Sphere s, out graphene.sphere.Sphere res) nothrow
   {
     graphene_sphere_t _res;
     graphene_matrix_transform_sphere(cast(const(graphene_matrix_t)*)this._cPtr, s ? cast(const(graphene_sphere_t)*)s._cPtr(No.Dup) : null, &_res);
@@ -1052,7 +1052,7 @@ class Matrix : gobject.boxed.Boxed
         v = a #graphene_vec3_t
         res = return location for a #graphene_vec3_t
   */
-  void transformVec3(graphene.vec3.Vec3 v, out graphene.vec3.Vec3 res)
+  void transformVec3(graphene.vec3.Vec3 v, out graphene.vec3.Vec3 res) nothrow
   {
     graphene_vec3_t _res;
     graphene_matrix_transform_vec3(cast(const(graphene_matrix_t)*)this._cPtr, v ? cast(const(graphene_vec3_t)*)v._cPtr(No.Dup) : null, &_res);
@@ -1068,7 +1068,7 @@ class Matrix : gobject.boxed.Boxed
         v = a #graphene_vec4_t
         res = return location for a #graphene_vec4_t
   */
-  void transformVec4(graphene.vec4.Vec4 v, out graphene.vec4.Vec4 res)
+  void transformVec4(graphene.vec4.Vec4 v, out graphene.vec4.Vec4 res) nothrow
   {
     graphene_vec4_t _res;
     graphene_matrix_transform_vec4(cast(const(graphene_matrix_t)*)this._cPtr, v ? cast(const(graphene_vec4_t)*)v._cPtr(No.Dup) : null, &_res);
@@ -1085,7 +1085,7 @@ class Matrix : gobject.boxed.Boxed
       Params:
         pos = a #graphene_point3d_t
   */
-  void translate(graphene.point3_d.Point3D pos)
+  void translate(graphene.point3_d.Point3D pos) nothrow
   {
     graphene_matrix_translate(cast(graphene_matrix_t*)this._cPtr, cast(const(graphene_point3d_t)*)&pos);
   }
@@ -1097,7 +1097,7 @@ class Matrix : gobject.boxed.Boxed
         res = return location for the
             transposed matrix
   */
-  void transpose(out graphene.matrix.Matrix res)
+  void transpose(out graphene.matrix.Matrix res) nothrow
   {
     graphene_matrix_t _res;
     graphene_matrix_transpose(cast(const(graphene_matrix_t)*)this._cPtr, &_res);
@@ -1115,7 +1115,7 @@ class Matrix : gobject.boxed.Boxed
         res = return location for the unprojected
             point
   */
-  void unprojectPoint3d(graphene.matrix.Matrix modelview, graphene.point3_d.Point3D point, out graphene.point3_d.Point3D res)
+  void unprojectPoint3d(graphene.matrix.Matrix modelview, graphene.point3_d.Point3D point, out graphene.point3_d.Point3D res) nothrow
   {
     graphene_matrix_unproject_point3d(cast(const(graphene_matrix_t)*)this._cPtr, modelview ? cast(const(graphene_matrix_t)*)modelview._cPtr(No.Dup) : null, cast(const(graphene_point3d_t)*)&point, cast(graphene_point3d_t*)&res);
   }
@@ -1130,7 +1130,7 @@ class Matrix : gobject.boxed.Boxed
         res = return location for the
             untransformed rectangle
   */
-  void untransformBounds(graphene.rect.Rect r, graphene.rect.Rect bounds, out graphene.rect.Rect res)
+  void untransformBounds(graphene.rect.Rect r, graphene.rect.Rect bounds, out graphene.rect.Rect res) nothrow
   {
     graphene_rect_t _res;
     graphene_matrix_untransform_bounds(cast(const(graphene_matrix_t)*)this._cPtr, r ? cast(const(graphene_rect_t)*)r._cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, &_res);
@@ -1148,7 +1148,7 @@ class Matrix : gobject.boxed.Boxed
             untransformed point
       Returns: `true` if the point was successfully untransformed
   */
-  bool untransformPoint(graphene.point.Point p, graphene.rect.Rect bounds, out graphene.point.Point res)
+  bool untransformPoint(graphene.point.Point p, graphene.rect.Rect bounds, out graphene.point.Point res) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_matrix_untransform_point(cast(const(graphene_matrix_t)*)this._cPtr, cast(const(graphene_point_t)*)&p, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, cast(graphene_point_t*)&res);

@@ -27,26 +27,26 @@ class HPaned : gtk.paned.Paned
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_hpaned_get_type != &gidSymbolNotFound ? gtk_hpaned_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HPaned self()
+  override HPaned self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class HPaned : gtk.paned.Paned
       Get builder for [gtk.hpaned.HPaned]
       Returns: New builder object
   */
-  static HPanedGidBuilder builder()
+  static HPanedGidBuilder builder() nothrow
   {
     return new HPanedGidBuilder;
   }
@@ -66,7 +66,7 @@ class HPaned : gtk.paned.Paned
   
       Deprecated: Use [gtk.paned.Paned.new_] with [gtk.types.Orientation.Horizontal] instead
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_hpaned_new();
@@ -87,7 +87,7 @@ final class HPanedGidBuilder : HPanedGidBuilderImpl!HPanedGidBuilder
       Create object from builder.
       Returns: New object
   */
-  HPaned build()
+  HPaned build() nothrow
   {
     return new HPaned(cast(void*)createGObject(HPaned._getGType), No.Take);
   }

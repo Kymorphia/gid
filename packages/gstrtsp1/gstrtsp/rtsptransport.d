@@ -16,11 +16,8 @@ class RTSPTransport
   GstRTSPTransport _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstrtsp.rtsptransport.RTSPTransport");
-
     _cInstance = *cast(GstRTSPTransport*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class RTSPTransport
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class RTSPTransport
       Get `trans` field.
       Returns: the transport mode
   */
-  @property gstrtsp.types.RTSPTransMode trans()
+  @property gstrtsp.types.RTSPTransMode trans() nothrow
   {
     return cast(gstrtsp.types.RTSPTransMode)(cast(GstRTSPTransport*)this._cPtr).trans;
   }
@@ -47,7 +44,7 @@ class RTSPTransport
       Params:
         propval = the transport mode
   */
-  @property void trans(gstrtsp.types.RTSPTransMode propval)
+  @property void trans(gstrtsp.types.RTSPTransMode propval) nothrow
   {
     (cast(GstRTSPTransport*)this._cPtr).trans = cast(GstRTSPTransMode)propval;
   }
@@ -56,7 +53,7 @@ class RTSPTransport
       Get `profile` field.
       Returns: the tansport profile
   */
-  @property gstrtsp.types.RTSPProfile profile()
+  @property gstrtsp.types.RTSPProfile profile() nothrow
   {
     return cast(gstrtsp.types.RTSPProfile)(cast(GstRTSPTransport*)this._cPtr).profile;
   }
@@ -66,7 +63,7 @@ class RTSPTransport
       Params:
         propval = the tansport profile
   */
-  @property void profile(gstrtsp.types.RTSPProfile propval)
+  @property void profile(gstrtsp.types.RTSPProfile propval) nothrow
   {
     (cast(GstRTSPTransport*)this._cPtr).profile = cast(GstRTSPProfile)propval;
   }
@@ -75,7 +72,7 @@ class RTSPTransport
       Get `lowerTransport` field.
       Returns: the lower transport
   */
-  @property gstrtsp.types.RTSPLowerTrans lowerTransport()
+  @property gstrtsp.types.RTSPLowerTrans lowerTransport() nothrow
   {
     return cast(gstrtsp.types.RTSPLowerTrans)(cast(GstRTSPTransport*)this._cPtr).lowerTransport;
   }
@@ -85,7 +82,7 @@ class RTSPTransport
       Params:
         propval = the lower transport
   */
-  @property void lowerTransport(gstrtsp.types.RTSPLowerTrans propval)
+  @property void lowerTransport(gstrtsp.types.RTSPLowerTrans propval) nothrow
   {
     (cast(GstRTSPTransport*)this._cPtr).lowerTransport = cast(GstRTSPLowerTrans)propval;
   }
@@ -94,7 +91,7 @@ class RTSPTransport
       Get `destination` field.
       Returns: the destination ip/hostname
   */
-  @property string destination()
+  @property string destination() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstRTSPTransport*)this._cPtr).destination);
   }
@@ -104,7 +101,7 @@ class RTSPTransport
       Params:
         propval = the destination ip/hostname
   */
-  @property void destination(string propval)
+  @property void destination(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPTransport*)this._cPtr).destination);
     dToC(propval, cast(void*)&(cast(GstRTSPTransport*)this._cPtr).destination);
@@ -114,7 +111,7 @@ class RTSPTransport
       Get `source` field.
       Returns: the source ip/hostname
   */
-  @property string source()
+  @property string source() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstRTSPTransport*)this._cPtr).source);
   }
@@ -124,7 +121,7 @@ class RTSPTransport
       Params:
         propval = the source ip/hostname
   */
-  @property void source(string propval)
+  @property void source(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstRTSPTransport*)this._cPtr).source);
     dToC(propval, cast(void*)&(cast(GstRTSPTransport*)this._cPtr).source);
@@ -134,7 +131,7 @@ class RTSPTransport
       Get `layers` field.
       Returns: the number of layers
   */
-  @property uint layers()
+  @property uint layers() nothrow
   {
     return (cast(GstRTSPTransport*)this._cPtr).layers;
   }
@@ -144,7 +141,7 @@ class RTSPTransport
       Params:
         propval = the number of layers
   */
-  @property void layers(uint propval)
+  @property void layers(uint propval) nothrow
   {
     (cast(GstRTSPTransport*)this._cPtr).layers = propval;
   }
@@ -153,7 +150,7 @@ class RTSPTransport
       Get `modePlay` field.
       Returns: if play mode was selected
   */
-  @property bool modePlay()
+  @property bool modePlay() nothrow
   {
     return cast(bool)(cast(GstRTSPTransport*)this._cPtr).modePlay;
   }
@@ -163,7 +160,7 @@ class RTSPTransport
       Params:
         propval = if play mode was selected
   */
-  @property void modePlay(bool propval)
+  @property void modePlay(bool propval) nothrow
   {
     (cast(GstRTSPTransport*)this._cPtr).modePlay = propval;
   }
@@ -172,7 +169,7 @@ class RTSPTransport
       Get `modeRecord` field.
       Returns: if record mode was selected
   */
-  @property bool modeRecord()
+  @property bool modeRecord() nothrow
   {
     return cast(bool)(cast(GstRTSPTransport*)this._cPtr).modeRecord;
   }
@@ -182,7 +179,7 @@ class RTSPTransport
       Params:
         propval = if record mode was selected
   */
-  @property void modeRecord(bool propval)
+  @property void modeRecord(bool propval) nothrow
   {
     (cast(GstRTSPTransport*)this._cPtr).modeRecord = propval;
   }
@@ -191,7 +188,7 @@ class RTSPTransport
       Get `append` field.
       Returns: is append mode was selected
   */
-  @property bool append()
+  @property bool append() nothrow
   {
     return cast(bool)(cast(GstRTSPTransport*)this._cPtr).append;
   }
@@ -201,7 +198,7 @@ class RTSPTransport
       Params:
         propval = is append mode was selected
   */
-  @property void append(bool propval)
+  @property void append(bool propval) nothrow
   {
     (cast(GstRTSPTransport*)this._cPtr).append = propval;
   }
@@ -210,7 +207,7 @@ class RTSPTransport
       Get `interleaved` field.
       Returns: the interleave range
   */
-  @property gstrtsp.rtsprange.RTSPRange interleaved()
+  @property gstrtsp.rtsprange.RTSPRange interleaved() nothrow
   {
     return cToD!(gstrtsp.rtsprange.RTSPRange)(cast(void*)&(cast(GstRTSPTransport*)this._cPtr).interleaved);
   }
@@ -220,7 +217,7 @@ class RTSPTransport
       Params:
         propval = the interleave range
   */
-  @property void interleaved(gstrtsp.rtsprange.RTSPRange propval)
+  @property void interleaved(gstrtsp.rtsprange.RTSPRange propval) nothrow
   {
     (cast(GstRTSPTransport*)this._cPtr).interleaved = cast(GstRTSPRange)propval;
   }
@@ -229,7 +226,7 @@ class RTSPTransport
       Get `ttl` field.
       Returns: the time to live for multicast UDP
   */
-  @property uint ttl()
+  @property uint ttl() nothrow
   {
     return (cast(GstRTSPTransport*)this._cPtr).ttl;
   }
@@ -239,7 +236,7 @@ class RTSPTransport
       Params:
         propval = the time to live for multicast UDP
   */
-  @property void ttl(uint propval)
+  @property void ttl(uint propval) nothrow
   {
     (cast(GstRTSPTransport*)this._cPtr).ttl = propval;
   }
@@ -248,7 +245,7 @@ class RTSPTransport
       Get `port` field.
       Returns: the port pair for multicast sessions
   */
-  @property gstrtsp.rtsprange.RTSPRange port()
+  @property gstrtsp.rtsprange.RTSPRange port() nothrow
   {
     return cToD!(gstrtsp.rtsprange.RTSPRange)(cast(void*)&(cast(GstRTSPTransport*)this._cPtr).port);
   }
@@ -258,7 +255,7 @@ class RTSPTransport
       Params:
         propval = the port pair for multicast sessions
   */
-  @property void port(gstrtsp.rtsprange.RTSPRange propval)
+  @property void port(gstrtsp.rtsprange.RTSPRange propval) nothrow
   {
     (cast(GstRTSPTransport*)this._cPtr).port = cast(GstRTSPRange)propval;
   }
@@ -269,7 +266,7 @@ class RTSPTransport
           based transports, applications can use this field to store the
           sender and receiver ports of the client.
   */
-  @property gstrtsp.rtsprange.RTSPRange clientPort()
+  @property gstrtsp.rtsprange.RTSPRange clientPort() nothrow
   {
     return cToD!(gstrtsp.rtsprange.RTSPRange)(cast(void*)&(cast(GstRTSPTransport*)this._cPtr).clientPort);
   }
@@ -281,7 +278,7 @@ class RTSPTransport
             based transports, applications can use this field to store the
             sender and receiver ports of the client.
   */
-  @property void clientPort(gstrtsp.rtsprange.RTSPRange propval)
+  @property void clientPort(gstrtsp.rtsprange.RTSPRange propval) nothrow
   {
     (cast(GstRTSPTransport*)this._cPtr).clientPort = cast(GstRTSPRange)propval;
   }
@@ -292,7 +289,7 @@ class RTSPTransport
           based transports, applications can use this field to store the
           sender and receiver ports of the server.
   */
-  @property gstrtsp.rtsprange.RTSPRange serverPort()
+  @property gstrtsp.rtsprange.RTSPRange serverPort() nothrow
   {
     return cToD!(gstrtsp.rtsprange.RTSPRange)(cast(void*)&(cast(GstRTSPTransport*)this._cPtr).serverPort);
   }
@@ -304,7 +301,7 @@ class RTSPTransport
             based transports, applications can use this field to store the
             sender and receiver ports of the server.
   */
-  @property void serverPort(gstrtsp.rtsprange.RTSPRange propval)
+  @property void serverPort(gstrtsp.rtsprange.RTSPRange propval) nothrow
   {
     (cast(GstRTSPTransport*)this._cPtr).serverPort = cast(GstRTSPRange)propval;
   }
@@ -313,7 +310,7 @@ class RTSPTransport
       Get `ssrc` field.
       Returns: the ssrc that the sender/receiver will use
   */
-  @property uint ssrc()
+  @property uint ssrc() nothrow
   {
     return (cast(GstRTSPTransport*)this._cPtr).ssrc;
   }
@@ -323,7 +320,7 @@ class RTSPTransport
       Params:
         propval = the ssrc that the sender/receiver will use
   */
-  @property void ssrc(uint propval)
+  @property void ssrc(uint propval) nothrow
   {
     (cast(GstRTSPTransport*)this._cPtr).ssrc = propval;
   }
@@ -334,7 +331,7 @@ class RTSPTransport
       Returns: a string describing the RTSP transport
         or null when the transport is invalid.
   */
-  string asText()
+  string asText() nothrow
   {
     char* _cretval;
     _cretval = gst_rtsp_transport_as_text(cast(GstRTSPTransport*)this._cPtr);
@@ -350,7 +347,7 @@ class RTSPTransport
         mediaType = media type of transport
       Returns: #GST_RTSP_OK.
   */
-  gstrtsp.types.RTSPResult getMediaType(out string mediaType)
+  gstrtsp.types.RTSPResult getMediaType(out string mediaType) nothrow
   {
     GstRTSPResult _cretval;
     char* _mediaType;
@@ -375,7 +372,7 @@ class RTSPTransport
         option = option index.
       Returns: #GST_RTSP_OK.
   */
-  static gstrtsp.types.RTSPResult getManager(gstrtsp.types.RTSPTransMode trans, out string manager, uint option)
+  static gstrtsp.types.RTSPResult getManager(gstrtsp.types.RTSPTransMode trans, out string manager, uint option) nothrow
   {
     GstRTSPResult _cretval;
     char* _manager;
@@ -398,7 +395,7 @@ class RTSPTransport
            returns the mime type for #GST_RTSP_PROFILE_AVP. Use
            [gstrtsp.rtsptransport.RTSPTransport.getMediaType] instead.
   */
-  static gstrtsp.types.RTSPResult getMime(gstrtsp.types.RTSPTransMode trans, out string mime)
+  static gstrtsp.types.RTSPResult getMime(gstrtsp.types.RTSPTransMode trans, out string mime) nothrow
   {
     GstRTSPResult _cretval;
     char* _mime;
@@ -415,7 +412,7 @@ class RTSPTransport
         transport = a #GstRTSPTransport
       Returns: #GST_RTSP_OK.
   */
-  static gstrtsp.types.RTSPResult init_(out gstrtsp.rtsptransport.RTSPTransport transport)
+  static gstrtsp.types.RTSPResult init_(out gstrtsp.rtsptransport.RTSPTransport transport) nothrow
   {
     GstRTSPResult _cretval;
     GstRTSPTransport _transport;
@@ -433,7 +430,7 @@ class RTSPTransport
         transport = location to hold the new #GstRTSPTransport
       Returns: a #GstRTSPResult.
   */
-  static gstrtsp.types.RTSPResult new_(out gstrtsp.rtsptransport.RTSPTransport transport)
+  static gstrtsp.types.RTSPResult new_(out gstrtsp.rtsptransport.RTSPTransport transport) nothrow
   {
     GstRTSPResult _cretval;
     GstRTSPTransport* _transport;
@@ -451,7 +448,7 @@ class RTSPTransport
         transport = a #GstRTSPTransport
       Returns: a #GstRTSPResult.
   */
-  static gstrtsp.types.RTSPResult parse(string str, out gstrtsp.rtsptransport.RTSPTransport transport)
+  static gstrtsp.types.RTSPResult parse(string str, out gstrtsp.rtsptransport.RTSPTransport transport) nothrow
   {
     GstRTSPResult _cretval;
     const(char)* _str = str.toCString(No.Alloc);

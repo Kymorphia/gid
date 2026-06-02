@@ -20,26 +20,26 @@ class DenseUnionArray : arrow.union_array.UnionArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_dense_union_array_get_type != &gidSymbolNotFound ? garrow_dense_union_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DenseUnionArray self()
+  override DenseUnionArray self() nothrow
   {
     return this;
   }
@@ -48,13 +48,13 @@ class DenseUnionArray : arrow.union_array.UnionArray
       Get builder for [arrow.dense_union_array.DenseUnionArray]
       Returns: New builder object
   */
-  static DenseUnionArrayGidBuilder builder()
+  static DenseUnionArrayGidBuilder builder() nothrow
   {
     return new DenseUnionArrayGidBuilder;
   }
 
   /** */
-  @property arrow.int32_array.Int32Array valueOffsets()
+  @property arrow.int32_array.Int32Array valueOffsets() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.int32_array.Int32Array)("value-offsets");
   }
@@ -87,7 +87,7 @@ class DenseUnionArray : arrow.union_array.UnionArray
   }
 
   /** */
-  int getValueOffset(long i)
+  int getValueOffset(long i) nothrow
   {
     int _retval;
     _retval = garrow_dense_union_array_get_value_offset(cast(GArrowDenseUnionArray*)this._cPtr, i);
@@ -100,7 +100,7 @@ class DenseUnionArrayGidBuilderImpl(T) : arrow.union_array.UnionArrayGidBuilderI
 {
 
   /** */
-  T valueOffsets(arrow.int32_array.Int32Array propval)
+  T valueOffsets(arrow.int32_array.Int32Array propval) nothrow
   {
     return setProperty("value-offsets", propval);
   }
@@ -113,7 +113,7 @@ final class DenseUnionArrayGidBuilder : DenseUnionArrayGidBuilderImpl!DenseUnion
       Create object from builder.
       Returns: New object
   */
-  DenseUnionArray build()
+  DenseUnionArray build() nothrow
   {
     return new DenseUnionArray(cast(void*)createGObject(DenseUnionArray._getGType), Yes.Take);
   }

@@ -25,7 +25,7 @@ interface CellEditable
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_editable_get_type != &gidSymbolNotFound ? gtk_cell_editable_get_type() : cast(GType)0;
@@ -35,14 +35,14 @@ interface CellEditable
       Get `editingCanceled` property.
       Returns: Indicates whether editing on the cell has been canceled.
   */
-  @property bool editingCanceled();
+  @property bool editingCanceled() nothrow;
 
   /**
       Set `editingCanceled` property.
       Params:
         propval = Indicates whether editing on the cell has been canceled.
   */
-  @property void editingCanceled(bool propval);
+  @property void editingCanceled(bool propval) nothrow;
 
   /**
       Emits the `GtkCellEditable::editing-done` signal.
@@ -97,7 +97,7 @@ interface CellEditable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEditingDone(T)(T callback, Flag!"After" after = No.After);
+  gulong connectEditingDone(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `RemoveWidget` signal.
@@ -125,7 +125,7 @@ interface CellEditable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRemoveWidget(T)(T callback, Flag!"After" after = No.After);
+  gulong connectRemoveWidget(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gtk.cell_editable.CellEditable]
@@ -138,5 +138,5 @@ interface CellEditableGidBuilderImpl(T)
         propval = Indicates whether editing on the cell has been canceled.
       Returns: Builder instance for fluent chaining
   */
-  T editingCanceled(bool propval);
+  T editingCanceled(bool propval) nothrow;
 }

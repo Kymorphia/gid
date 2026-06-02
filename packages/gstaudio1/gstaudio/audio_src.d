@@ -29,26 +29,26 @@ class AudioSrc : gstaudio.audio_base_src.AudioBaseSrc
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_src_get_type != &gidSymbolNotFound ? gst_audio_src_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AudioSrc self()
+  override AudioSrc self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class AudioSrc : gstaudio.audio_base_src.AudioBaseSrc
       Get builder for [gstaudio.audio_src.AudioSrc]
       Returns: New builder object
   */
-  static AudioSrcGidBuilder builder()
+  static AudioSrcGidBuilder builder() nothrow
   {
     return new AudioSrcGidBuilder;
   }
@@ -75,7 +75,7 @@ final class AudioSrcGidBuilder : AudioSrcGidBuilderImpl!AudioSrcGidBuilder
       Create object from builder.
       Returns: New object
   */
-  AudioSrc build()
+  AudioSrc build() nothrow
   {
     return new AudioSrc(cast(void*)createGObject(AudioSrc._getGType), No.Take);
   }

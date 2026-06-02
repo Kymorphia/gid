@@ -18,26 +18,26 @@ class DataModelImport : gobject.object.ObjectWrap, gda.data_model.DataModel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_data_model_import_get_type != &gidSymbolNotFound ? gda_data_model_import_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DataModelImport self()
+  override DataModelImport self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class DataModelImport : gobject.object.ObjectWrap, gda.data_model.DataModel
       Get builder for [gda.data_model_import.DataModelImport]
       Returns: New builder object
   */
-  static DataModelImportGidBuilder builder()
+  static DataModelImportGidBuilder builder() nothrow
   {
     return new DataModelImportGidBuilder;
   }
@@ -55,7 +55,7 @@ class DataModelImport : gobject.object.ObjectWrap, gda.data_model.DataModel
       Get `dataString` property.
       Returns: Data to import, as a string.
   */
-  @property string dataString()
+  @property string dataString() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("data-string");
   }
@@ -64,7 +64,7 @@ class DataModelImport : gobject.object.ObjectWrap, gda.data_model.DataModel
       Get `filename` property.
       Returns: Name of the file to import.
   */
-  @property string filename()
+  @property string filename() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("filename");
   }
@@ -73,7 +73,7 @@ class DataModelImport : gobject.object.ObjectWrap, gda.data_model.DataModel
       Get `options` property.
       Returns: Data model options.
   */
-  @property gda.set.Set options()
+  @property gda.set.Set options() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.set.Set)("options");
   }
@@ -83,7 +83,7 @@ class DataModelImport : gobject.object.ObjectWrap, gda.data_model.DataModel
       Returns: Defines if the data model will be accessed randomly or through a cursor. If set to false,
         access will have to be done using a cursor.
   */
-  @property bool randomAccess()
+  @property bool randomAccess() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("random-access");
   }
@@ -94,7 +94,7 @@ class DataModelImport : gobject.object.ObjectWrap, gda.data_model.DataModel
         many or too few data per row). If set to true, an error will be reported and the import
         will stop, and if set to false, then the error will be reported but the import will not stop.
   */
-  @property bool strict()
+  @property bool strict() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("strict");
   }
@@ -106,7 +106,7 @@ class DataModelImport : gobject.object.ObjectWrap, gda.data_model.DataModel
           many or too few data per row). If set to true, an error will be reported and the import
           will stop, and if set to false, then the error will be reported but the import will not stop.
   */
-  @property void strict(bool propval)
+  @property void strict(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("strict", propval);
   }
@@ -115,7 +115,7 @@ class DataModelImport : gobject.object.ObjectWrap, gda.data_model.DataModel
       Get `xmlNode` property.
       Returns: Data to import, as a pointer to an XML node (a #xmlNodePtr).
   */
-  @property void* xmlNode()
+  @property void* xmlNode() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(void*)("xml-node");
   }
@@ -147,7 +147,7 @@ class DataModelImport : gobject.object.ObjectWrap, gda.data_model.DataModel
         options = importing options
       Returns: a pointer to the newly created #GdaDataModel.
   */
-  static gda.data_model.DataModel newFile(string filename, bool randomAccess, gda.set.Set options = null)
+  static gda.data_model.DataModel newFile(string filename, bool randomAccess, gda.set.Set options = null) nothrow
   {
     GdaDataModel* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -168,7 +168,7 @@ class DataModelImport : gobject.object.ObjectWrap, gda.data_model.DataModel
         options = importing options, see [gda.data_model_import.DataModelImport.newFile] for more information
       Returns: a pointer to the newly created #GdaDataModel.
   */
-  static gda.data_model.DataModel newMem(string data, bool randomAccess, gda.set.Set options = null)
+  static gda.data_model.DataModel newMem(string data, bool randomAccess, gda.set.Set options = null) nothrow
   {
     GdaDataModel* _cretval;
     const(char)* _data = data.toCString(No.Alloc);
@@ -185,7 +185,7 @@ class DataModelImport : gobject.object.ObjectWrap, gda.data_model.DataModel
         node = an XML node corresponding to a &lt;data-array&gt; tag
       Returns: a pointer to the newly created #GdaDataModel.
   */
-  static gda.data_model.DataModel newXmlNode(libxml2.types.NodePtr node)
+  static gda.data_model.DataModel newXmlNode(libxml2.types.NodePtr node) nothrow
   {
     GdaDataModel* _cretval;
     _cretval = gda_data_model_import_new_xml_node(node);
@@ -196,7 +196,7 @@ class DataModelImport : gobject.object.ObjectWrap, gda.data_model.DataModel
   /**
       Clears the history of errors model has to report
   */
-  void cleanErrors()
+  void cleanErrors() nothrow
   {
     gda_data_model_import_clean_errors(cast(GdaDataModelImport*)this._cPtr);
   }
@@ -214,7 +214,7 @@ class DataModelImportGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = Data to import, as a string.
       Returns: Builder instance for fluent chaining
   */
-  T dataString(string propval)
+  T dataString(string propval) nothrow
   {
     return setProperty("data-string", propval);
   }
@@ -225,7 +225,7 @@ class DataModelImportGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = Name of the file to import.
       Returns: Builder instance for fluent chaining
   */
-  T filename(string propval)
+  T filename(string propval) nothrow
   {
     return setProperty("filename", propval);
   }
@@ -236,7 +236,7 @@ class DataModelImportGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = Data model options.
       Returns: Builder instance for fluent chaining
   */
-  T options(gda.set.Set propval)
+  T options(gda.set.Set propval) nothrow
   {
     return setProperty("options", propval);
   }
@@ -248,7 +248,7 @@ class DataModelImportGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           access will have to be done using a cursor.
       Returns: Builder instance for fluent chaining
   */
-  T randomAccess(bool propval)
+  T randomAccess(bool propval) nothrow
   {
     return setProperty("random-access", propval);
   }
@@ -261,7 +261,7 @@ class DataModelImportGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           will stop, and if set to false, then the error will be reported but the import will not stop.
       Returns: Builder instance for fluent chaining
   */
-  T strict(bool propval)
+  T strict(bool propval) nothrow
   {
     return setProperty("strict", propval);
   }
@@ -272,7 +272,7 @@ class DataModelImportGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = Data to import, as a pointer to an XML node (a #xmlNodePtr).
       Returns: Builder instance for fluent chaining
   */
-  T xmlNode(void* propval)
+  T xmlNode(void* propval) nothrow
   {
     return setProperty("xml-node", propval);
   }
@@ -285,7 +285,7 @@ final class DataModelImportGidBuilder : DataModelImportGidBuilderImpl!DataModelI
       Create object from builder.
       Returns: New object
   */
-  DataModelImport build()
+  DataModelImport build() nothrow
   {
     return new DataModelImport(cast(void*)createGObject(DataModelImport._getGType), No.Take);
   }

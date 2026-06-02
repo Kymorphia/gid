@@ -54,26 +54,26 @@ class EmojiChooser : gtk.popover.Popover
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_emoji_chooser_get_type != &gidSymbolNotFound ? gtk_emoji_chooser_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EmojiChooser self()
+  override EmojiChooser self() nothrow
   {
     return this;
   }
@@ -82,7 +82,7 @@ class EmojiChooser : gtk.popover.Popover
       Get builder for [gtk.emoji_chooser.EmojiChooser]
       Returns: New builder object
   */
-  static EmojiChooserGidBuilder builder()
+  static EmojiChooserGidBuilder builder() nothrow
   {
     return new EmojiChooserGidBuilder;
   }
@@ -91,7 +91,7 @@ class EmojiChooser : gtk.popover.Popover
       Creates a new [gtk.emoji_chooser.EmojiChooser].
       Returns: a new [gtk.emoji_chooser.EmojiChooser]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_emoji_chooser_new();
@@ -115,14 +115,14 @@ class EmojiChooser : gtk.popover.Popover
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEmojiPicked(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEmojiPicked(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.emoji_chooser.EmojiChooser)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -134,7 +134,14 @@ class EmojiChooser : gtk.popover.Popover
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.emoji_chooser.EmojiChooser.emojiPicked");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -155,7 +162,7 @@ final class EmojiChooserGidBuilder : EmojiChooserGidBuilderImpl!EmojiChooserGidB
       Create object from builder.
       Returns: New object
   */
-  EmojiChooser build()
+  EmojiChooser build() nothrow
   {
     return new EmojiChooser(cast(void*)createGObject(EmojiChooser._getGType), No.Take);
   }

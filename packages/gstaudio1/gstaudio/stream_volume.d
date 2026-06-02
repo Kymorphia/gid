@@ -31,26 +31,26 @@ interface StreamVolume
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_stream_volume_get_type != &gidSymbolNotFound ? gst_stream_volume_get_type() : cast(GType)0;
   }
 
   /** */
-  @property bool mute();
+  @property bool mute() nothrow;
 
   /** */
-  @property void mute(bool propval);
+  @property void mute(bool propval) nothrow;
 
   /** */
-  @property double volume();
+  @property double volume() nothrow;
 
   /** */
-  @property void volume(double propval);
+  @property void volume(double propval) nothrow;
 
   /** */
-  static double convertVolume(gstaudio.types.StreamVolumeFormat from, gstaudio.types.StreamVolumeFormat to, double val)
+  static double convertVolume(gstaudio.types.StreamVolumeFormat from, gstaudio.types.StreamVolumeFormat to, double val) nothrow
   {
     double _retval;
     _retval = gst_stream_volume_convert_volume(from, to, val);
@@ -75,8 +75,8 @@ interface StreamVolumeGidBuilderImpl(T)
 {
 
   /** */
-  T mute(bool propval);
+  T mute(bool propval) nothrow;
 
   /** */
-  T volume(double propval);
+  T volume(double propval) nothrow;
 }

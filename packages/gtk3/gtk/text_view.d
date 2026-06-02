@@ -61,26 +61,26 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_view_get_type != &gidSymbolNotFound ? gtk_text_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TextView self()
+  override TextView self() nothrow
   {
     return this;
   }
@@ -89,19 +89,19 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Get builder for [gtk.text_view.TextView]
       Returns: New builder object
   */
-  static TextViewGidBuilder builder()
+  static TextViewGidBuilder builder() nothrow
   {
     return new TextViewGidBuilder;
   }
 
   /** */
-  @property bool acceptsTab()
+  @property bool acceptsTab() nothrow
   {
     return getAcceptsTab();
   }
 
   /** */
-  @property void acceptsTab(bool propval)
+  @property void acceptsTab(bool propval) nothrow
   {
     setAcceptsTab(propval);
   }
@@ -116,7 +116,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         
         Don't confuse this property with #GtkWidget:margin-bottom.
   */
-  @property int bottomMargin()
+  @property int bottomMargin() nothrow
   {
     return getBottomMargin();
   }
@@ -132,43 +132,43 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
           
           Don't confuse this property with #GtkWidget:margin-bottom.
   */
-  @property void bottomMargin(int propval)
+  @property void bottomMargin(int propval) nothrow
   {
     setBottomMargin(propval);
   }
 
   /** */
-  @property gtk.text_buffer.TextBuffer buffer()
+  @property gtk.text_buffer.TextBuffer buffer() nothrow
   {
     return getBuffer();
   }
 
   /** */
-  @property void buffer(gtk.text_buffer.TextBuffer propval)
+  @property void buffer(gtk.text_buffer.TextBuffer propval) nothrow
   {
     setBuffer(propval);
   }
 
   /** */
-  @property bool cursorVisible()
+  @property bool cursorVisible() nothrow
   {
     return getCursorVisible();
   }
 
   /** */
-  @property void cursorVisible(bool propval)
+  @property void cursorVisible(bool propval) nothrow
   {
     setCursorVisible(propval);
   }
 
   /** */
-  @property bool editable()
+  @property bool editable() nothrow
   {
     return getEditable();
   }
 
   /** */
-  @property void editable(bool propval)
+  @property void editable(bool propval) nothrow
   {
     setEditable(propval);
   }
@@ -182,7 +182,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         system-wide IM module setting. See the GtkSettings
         #GtkSettings:gtk-im-module property.
   */
-  @property string imModule()
+  @property string imModule() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("im-module");
   }
@@ -197,19 +197,19 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
           system-wide IM module setting. See the GtkSettings
           #GtkSettings:gtk-im-module property.
   */
-  @property void imModule(string propval)
+  @property void imModule(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("im-module", propval);
   }
 
   /** */
-  @property int indent()
+  @property int indent() nothrow
   {
     return getIndent();
   }
 
   /** */
-  @property void indent(int propval)
+  @property void indent(int propval) nothrow
   {
     setIndent(propval);
   }
@@ -219,7 +219,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns: Additional hints (beyond #GtkTextView:input-purpose) that
         allow input methods to fine-tune their behaviour.
   */
-  @property gtk.types.InputHints inputHints()
+  @property gtk.types.InputHints inputHints() nothrow
   {
     return getInputHints();
   }
@@ -230,7 +230,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         propval = Additional hints (beyond #GtkTextView:input-purpose) that
           allow input methods to fine-tune their behaviour.
   */
-  @property void inputHints(gtk.types.InputHints propval)
+  @property void inputHints(gtk.types.InputHints propval) nothrow
   {
     setInputHints(propval);
   }
@@ -242,7 +242,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         This property can be used by on-screen keyboards and other input
         methods to adjust their behaviour.
   */
-  @property gtk.types.InputPurpose inputPurpose()
+  @property gtk.types.InputPurpose inputPurpose() nothrow
   {
     return getInputPurpose();
   }
@@ -255,19 +255,19 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
           This property can be used by on-screen keyboards and other input
           methods to adjust their behaviour.
   */
-  @property void inputPurpose(gtk.types.InputPurpose propval)
+  @property void inputPurpose(gtk.types.InputPurpose propval) nothrow
   {
     setInputPurpose(propval);
   }
 
   /** */
-  @property gtk.types.Justification justification()
+  @property gtk.types.Justification justification() nothrow
   {
     return getJustification();
   }
 
   /** */
-  @property void justification(gtk.types.Justification propval)
+  @property void justification(gtk.types.Justification propval) nothrow
   {
     setJustification(propval);
   }
@@ -283,7 +283,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         
         Don't confuse this property with #GtkWidget:margin-left.
   */
-  @property int leftMargin()
+  @property int leftMargin() nothrow
   {
     return getLeftMargin();
   }
@@ -300,67 +300,67 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
           
           Don't confuse this property with #GtkWidget:margin-left.
   */
-  @property void leftMargin(int propval)
+  @property void leftMargin(int propval) nothrow
   {
     setLeftMargin(propval);
   }
 
   /** */
-  @property bool monospace()
+  @property bool monospace() nothrow
   {
     return getMonospace();
   }
 
   /** */
-  @property void monospace(bool propval)
+  @property void monospace(bool propval) nothrow
   {
     setMonospace(propval);
   }
 
   /** */
-  @property bool overwrite()
+  @property bool overwrite() nothrow
   {
     return getOverwrite();
   }
 
   /** */
-  @property void overwrite(bool propval)
+  @property void overwrite(bool propval) nothrow
   {
     setOverwrite(propval);
   }
 
   /** */
-  @property int pixelsAboveLines()
+  @property int pixelsAboveLines() nothrow
   {
     return getPixelsAboveLines();
   }
 
   /** */
-  @property void pixelsAboveLines(int propval)
+  @property void pixelsAboveLines(int propval) nothrow
   {
     setPixelsAboveLines(propval);
   }
 
   /** */
-  @property int pixelsBelowLines()
+  @property int pixelsBelowLines() nothrow
   {
     return getPixelsBelowLines();
   }
 
   /** */
-  @property void pixelsBelowLines(int propval)
+  @property void pixelsBelowLines(int propval) nothrow
   {
     setPixelsBelowLines(propval);
   }
 
   /** */
-  @property int pixelsInsideWrap()
+  @property int pixelsInsideWrap() nothrow
   {
     return getPixelsInsideWrap();
   }
 
   /** */
-  @property void pixelsInsideWrap(int propval)
+  @property void pixelsInsideWrap(int propval) nothrow
   {
     setPixelsInsideWrap(propval);
   }
@@ -370,7 +370,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns: If :populate-all is true, the #GtkTextView::populate-popup
         signal is also emitted for touch popups.
   */
-  @property bool populateAll()
+  @property bool populateAll() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("populate-all");
   }
@@ -381,7 +381,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         propval = If :populate-all is true, the #GtkTextView::populate-popup
           signal is also emitted for touch popups.
   */
-  @property void populateAll(bool propval)
+  @property void populateAll(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("populate-all", propval);
   }
@@ -397,7 +397,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         
         Don't confuse this property with #GtkWidget:margin-right.
   */
-  @property int rightMargin()
+  @property int rightMargin() nothrow
   {
     return getRightMargin();
   }
@@ -414,19 +414,19 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
           
           Don't confuse this property with #GtkWidget:margin-right.
   */
-  @property void rightMargin(int propval)
+  @property void rightMargin(int propval) nothrow
   {
     setRightMargin(propval);
   }
 
   /** */
-  @property pango.tab_array.TabArray tabs()
+  @property pango.tab_array.TabArray tabs() nothrow
   {
     return getTabs();
   }
 
   /** */
-  @property void tabs(pango.tab_array.TabArray propval)
+  @property void tabs(pango.tab_array.TabArray propval) nothrow
   {
     setTabs(propval);
   }
@@ -441,7 +441,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         
         Don't confuse this property with #GtkWidget:margin-top.
   */
-  @property int topMargin()
+  @property int topMargin() nothrow
   {
     return getTopMargin();
   }
@@ -457,19 +457,19 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
           
           Don't confuse this property with #GtkWidget:margin-top.
   */
-  @property void topMargin(int propval)
+  @property void topMargin(int propval) nothrow
   {
     setTopMargin(propval);
   }
 
   /** */
-  @property gtk.types.WrapMode wrapMode()
+  @property gtk.types.WrapMode wrapMode() nothrow
   {
     return getWrapMode();
   }
 
   /** */
-  @property void wrapMode(gtk.types.WrapMode propval)
+  @property void wrapMode(gtk.types.WrapMode propval) nothrow
   {
     setWrapMode(propval);
   }
@@ -483,7 +483,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       to specify your own buffer, consider [gtk.text_view.TextView.newWithBuffer].
       Returns: a new #GtkTextView
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_text_view_new();
@@ -502,7 +502,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         buffer = a #GtkTextBuffer
       Returns: a new #GtkTextView.
   */
-  static gtk.text_view.TextView newWithBuffer(gtk.text_buffer.TextBuffer buffer)
+  static gtk.text_view.TextView newWithBuffer(gtk.text_buffer.TextBuffer buffer) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_text_view_new_with_buffer(buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
@@ -517,7 +517,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         child = a #GtkWidget
         anchor = a #GtkTextChildAnchor in the #GtkTextBuffer for text_view
   */
-  void addChildAtAnchor(gtk.widget.Widget child, gtk.text_child_anchor.TextChildAnchor anchor)
+  void addChildAtAnchor(gtk.widget.Widget child, gtk.text_child_anchor.TextChildAnchor anchor) nothrow
   {
     gtk_text_view_add_child_at_anchor(cast(GtkTextView*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, anchor ? cast(GtkTextChildAnchor*)anchor._cPtr(No.Dup) : null);
   }
@@ -540,7 +540,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         xpos = X position of child in window coordinates
         ypos = Y position of child in window coordinates
   */
-  void addChildInWindow(gtk.widget.Widget child, gtk.types.TextWindowType whichWindow, int xpos, int ypos)
+  void addChildInWindow(gtk.widget.Widget child, gtk.types.TextWindowType whichWindow, int xpos, int ypos) nothrow
   {
     gtk_text_view_add_child_in_window(cast(GtkTextView*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, whichWindow, xpos, ypos);
   }
@@ -559,7 +559,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         iter = a #GtkTextIter
       Returns: true if iter was moved and is not on the end iterator
   */
-  bool backwardDisplayLine(gtk.text_iter.TextIter iter)
+  bool backwardDisplayLine(gtk.text_iter.TextIter iter) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_view_backward_display_line(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
@@ -580,7 +580,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         iter = a #GtkTextIter
       Returns: true if iter was moved and is not on the end iterator
   */
-  bool backwardDisplayLineStart(gtk.text_iter.TextIter iter)
+  bool backwardDisplayLineStart(gtk.text_iter.TextIter iter) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_view_backward_display_line_start(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
@@ -601,7 +601,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         windowX = window x coordinate return location or null
         windowY = window y coordinate return location or null
   */
-  void bufferToWindowCoords(gtk.types.TextWindowType win, int bufferX, int bufferY, out int windowX, out int windowY)
+  void bufferToWindowCoords(gtk.types.TextWindowType win, int bufferX, int bufferY, out int windowX, out int windowY) nothrow
   {
     gtk_text_view_buffer_to_window_coords(cast(GtkTextView*)this._cPtr, win, bufferX, bufferY, cast(int*)&windowX, cast(int*)&windowY);
   }
@@ -620,7 +620,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         iter = a #GtkTextIter
       Returns: true if iter was moved and is not on the end iterator
   */
-  bool forwardDisplayLine(gtk.text_iter.TextIter iter)
+  bool forwardDisplayLine(gtk.text_iter.TextIter iter) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_view_forward_display_line(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
@@ -641,7 +641,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         iter = a #GtkTextIter
       Returns: true if iter was moved and is not on the end iterator
   */
-  bool forwardDisplayLineEnd(gtk.text_iter.TextIter iter)
+  bool forwardDisplayLineEnd(gtk.text_iter.TextIter iter) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_view_forward_display_line_end(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
@@ -654,7 +654,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns: true if pressing the Tab key inserts a tab character,
           false if pressing the Tab key moves the keyboard focus.
   */
-  bool getAcceptsTab()
+  bool getAcceptsTab() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_view_get_accepts_tab(cast(GtkTextView*)this._cPtr);
@@ -669,7 +669,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         type = window to return size from
       Returns: width of window
   */
-  int getBorderWindowSize(gtk.types.TextWindowType type)
+  int getBorderWindowSize(gtk.types.TextWindowType type) nothrow
   {
     int _retval;
     _retval = gtk_text_view_get_border_window_size(cast(GtkTextView*)this._cPtr, type);
@@ -680,7 +680,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Gets the bottom margin for text in the text_view.
       Returns: bottom margin in pixels
   */
-  int getBottomMargin()
+  int getBottomMargin() nothrow
   {
     int _retval;
     _retval = gtk_text_view_get_bottom_margin(cast(GtkTextView*)this._cPtr);
@@ -693,7 +693,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       of this function won’t own a new reference.
       Returns: a #GtkTextBuffer
   */
-  gtk.text_buffer.TextBuffer getBuffer()
+  gtk.text_buffer.TextBuffer getBuffer() nothrow
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_text_view_get_buffer(cast(GtkTextView*)this._cPtr);
@@ -729,7 +729,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         weak = location to store the weak
               cursor position (may be null)
   */
-  void getCursorLocations(gtk.text_iter.TextIter iter, out gdk.rectangle.Rectangle strong, out gdk.rectangle.Rectangle weak)
+  void getCursorLocations(gtk.text_iter.TextIter iter, out gdk.rectangle.Rectangle strong, out gdk.rectangle.Rectangle weak) nothrow
   {
     gtk_text_view_get_cursor_locations(cast(GtkTextView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, cast(GdkRectangle*)&strong, cast(GdkRectangle*)&weak);
   }
@@ -738,7 +738,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Find out whether the cursor should be displayed.
       Returns: whether the insertion mark is visible
   */
-  bool getCursorVisible()
+  bool getCursorVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_view_get_cursor_visible(cast(GtkTextView*)this._cPtr);
@@ -756,7 +756,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       and should be freed with [gtk.text_attributes.TextAttributes.unref].
       Returns: a new #GtkTextAttributes
   */
-  gtk.text_attributes.TextAttributes getDefaultAttributes()
+  gtk.text_attributes.TextAttributes getDefaultAttributes() nothrow
   {
     GtkTextAttributes* _cretval;
     _cretval = gtk_text_view_get_default_attributes(cast(GtkTextView*)this._cPtr);
@@ -769,7 +769,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       buffer may override this setting for some ranges of text.
       Returns: whether text is editable by default
   */
-  bool getEditable()
+  bool getEditable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_view_get_editable(cast(GtkTextView*)this._cPtr);
@@ -782,7 +782,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   
       Deprecated: Use [gtk.scrollable.Scrollable.getHadjustment]
   */
-  gtk.adjustment.Adjustment getHadjustment()
+  gtk.adjustment.Adjustment getHadjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_text_view_get_hadjustment(cast(GtkTextView*)this._cPtr);
@@ -796,7 +796,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       The indentation may be negative.
       Returns: number of pixels of indentation
   */
-  int getIndent()
+  int getIndent() nothrow
   {
     int _retval;
     _retval = gtk_text_view_get_indent(cast(GtkTextView*)this._cPtr);
@@ -807,7 +807,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Gets the value of the #GtkTextView:input-hints property.
       Returns: 
   */
-  gtk.types.InputHints getInputHints()
+  gtk.types.InputHints getInputHints() nothrow
   {
     GtkInputHints _cretval;
     _cretval = gtk_text_view_get_input_hints(cast(GtkTextView*)this._cPtr);
@@ -819,7 +819,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Gets the value of the #GtkTextView:input-purpose property.
       Returns: 
   */
-  gtk.types.InputPurpose getInputPurpose()
+  gtk.types.InputPurpose getInputPurpose() nothrow
   {
     GtkInputPurpose _cretval;
     _cretval = gtk_text_view_get_input_purpose(cast(GtkTextView*)this._cPtr);
@@ -840,7 +840,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         y = y position, in buffer coordinates
       Returns: true if the position is over text
   */
-  bool getIterAtLocation(out gtk.text_iter.TextIter iter, int x, int y)
+  bool getIterAtLocation(out gtk.text_iter.TextIter iter, int x, int y) nothrow
   {
     bool _retval;
     GtkTextIter _iter;
@@ -871,7 +871,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         y = y position, in buffer coordinates
       Returns: true if the position is over text
   */
-  bool getIterAtPosition(out gtk.text_iter.TextIter iter, out int trailing, int x, int y)
+  bool getIterAtPosition(out gtk.text_iter.TextIter iter, out int trailing, int x, int y) nothrow
   {
     bool _retval;
     GtkTextIter _iter;
@@ -890,7 +890,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         iter = a #GtkTextIter
         location = bounds of the character at iter
   */
-  void getIterLocation(gtk.text_iter.TextIter iter, out gdk.rectangle.Rectangle location)
+  void getIterLocation(gtk.text_iter.TextIter iter, out gdk.rectangle.Rectangle location) nothrow
   {
     gtk_text_view_get_iter_location(cast(GtkTextView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, cast(GdkRectangle*)&location);
   }
@@ -900,7 +900,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Tags in the buffer may override the default.
       Returns: default justification
   */
-  gtk.types.Justification getJustification()
+  gtk.types.Justification getJustification() nothrow
   {
     GtkJustification _cretval;
     _cretval = gtk_text_view_get_justification(cast(GtkTextView*)this._cPtr);
@@ -913,7 +913,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Tags in the buffer may override the default.
       Returns: left margin in pixels
   */
-  int getLeftMargin()
+  int getLeftMargin() nothrow
   {
     int _retval;
     _retval = gtk_text_view_get_left_margin(cast(GtkTextView*)this._cPtr);
@@ -932,7 +932,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         y = a y coordinate
         lineTop = return location for top coordinate of the line
   */
-  void getLineAtY(out gtk.text_iter.TextIter targetIter, int y, out int lineTop)
+  void getLineAtY(out gtk.text_iter.TextIter targetIter, int y, out int lineTop) nothrow
   {
     GtkTextIter _targetIter;
     gtk_text_view_get_line_at_y(cast(GtkTextView*)this._cPtr, &_targetIter, y, cast(int*)&lineTop);
@@ -949,7 +949,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         y = return location for a y coordinate
         height = return location for a height
   */
-  void getLineYrange(gtk.text_iter.TextIter iter, out int y, out int height)
+  void getLineYrange(gtk.text_iter.TextIter iter, out int y, out int height) nothrow
   {
     gtk_text_view_get_line_yrange(cast(GtkTextView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, cast(int*)&y, cast(int*)&height);
   }
@@ -958,7 +958,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Gets the value of the #GtkTextView:monospace property.
       Returns: true if monospace fonts are desired
   */
-  bool getMonospace()
+  bool getMonospace() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_view_get_monospace(cast(GtkTextView*)this._cPtr);
@@ -969,7 +969,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns whether the #GtkTextView is in overwrite mode or not.
       Returns: whether text_view is in overwrite mode or not.
   */
-  bool getOverwrite()
+  bool getOverwrite() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_view_get_overwrite(cast(GtkTextView*)this._cPtr);
@@ -982,7 +982,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       is equal to the line space between each paragraph.
       Returns: default number of pixels above paragraphs
   */
-  int getPixelsAboveLines()
+  int getPixelsAboveLines() nothrow
   {
     int _retval;
     _retval = gtk_text_view_get_pixels_above_lines(cast(GtkTextView*)this._cPtr);
@@ -996,7 +996,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       value returned by [gtk.text_view.TextView.getPixelsAboveLines].
       Returns: default number of blank pixels below paragraphs
   */
-  int getPixelsBelowLines()
+  int getPixelsBelowLines() nothrow
   {
     int _retval;
     _retval = gtk_text_view_get_pixels_below_lines(cast(GtkTextView*)this._cPtr);
@@ -1007,7 +1007,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Gets the value set by [gtk.text_view.TextView.setPixelsInsideWrap].
       Returns: default number of pixels of blank space between wrapped lines
   */
-  int getPixelsInsideWrap()
+  int getPixelsInsideWrap() nothrow
   {
     int _retval;
     _retval = gtk_text_view_get_pixels_inside_wrap(cast(GtkTextView*)this._cPtr);
@@ -1019,7 +1019,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       in the buffer may override the default.
       Returns: right margin in pixels
   */
-  int getRightMargin()
+  int getRightMargin() nothrow
   {
     int _retval;
     _retval = gtk_text_view_get_right_margin(cast(GtkTextView*)this._cPtr);
@@ -1034,7 +1034,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns: copy of default tab array, or null if
            “standard" tabs are used; must be freed with [pango.tab_array.TabArray.free].
   */
-  pango.tab_array.TabArray getTabs()
+  pango.tab_array.TabArray getTabs() nothrow
   {
     PangoTabArray* _cretval;
     _cretval = gtk_text_view_get_tabs(cast(GtkTextView*)this._cPtr);
@@ -1046,7 +1046,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Gets the top margin for text in the text_view.
       Returns: top margin in pixels
   */
-  int getTopMargin()
+  int getTopMargin() nothrow
   {
     int _retval;
     _retval = gtk_text_view_get_top_margin(cast(GtkTextView*)this._cPtr);
@@ -1059,7 +1059,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   
       Deprecated: Use [gtk.scrollable.Scrollable.getVadjustment]
   */
-  gtk.adjustment.Adjustment getVadjustment()
+  gtk.adjustment.Adjustment getVadjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_text_view_get_vadjustment(cast(GtkTextView*)this._cPtr);
@@ -1075,7 +1075,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         visibleRect = rectangle to fill
   */
-  void getVisibleRect(out gdk.rectangle.Rectangle visibleRect)
+  void getVisibleRect(out gdk.rectangle.Rectangle visibleRect) nothrow
   {
     gtk_text_view_get_visible_rect(cast(GtkTextView*)this._cPtr, cast(GdkRectangle*)&visibleRect);
   }
@@ -1094,7 +1094,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         win = window to get
       Returns: a #GdkWindow, or null
   */
-  gdk.window.Window getWindow(gtk.types.TextWindowType win)
+  gdk.window.Window getWindow(gtk.types.TextWindowType win) nothrow
   {
     GdkWindow* _cretval;
     _cretval = gtk_text_view_get_window(cast(GtkTextView*)this._cPtr, win);
@@ -1112,7 +1112,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         window = a window type
       Returns: the window type.
   */
-  gtk.types.TextWindowType getWindowType(gdk.window.Window window)
+  gtk.types.TextWindowType getWindowType(gdk.window.Window window) nothrow
   {
     GtkTextWindowType _cretval;
     _cretval = gtk_text_view_get_window_type(cast(GtkTextView*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null);
@@ -1124,7 +1124,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Gets the line wrapping for the view.
       Returns: the line wrap setting
   */
-  gtk.types.WrapMode getWrapMode()
+  gtk.types.WrapMode getWrapMode() nothrow
   {
     GtkWrapMode _cretval;
     _cretval = gtk_text_view_get_wrap_mode(cast(GtkTextView*)this._cPtr);
@@ -1168,7 +1168,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         event = the key event
       Returns: true if the input method handled the key event.
   */
-  bool imContextFilterKeypress(gdk.event_key.EventKey event)
+  bool imContextFilterKeypress(gdk.event_key.EventKey event) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_view_im_context_filter_keypress(cast(GtkTextView*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr : null);
@@ -1183,7 +1183,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         xpos = new X position in window coordinates
         ypos = new Y position in window coordinates
   */
-  void moveChild(gtk.widget.Widget child, int xpos, int ypos)
+  void moveChild(gtk.widget.Widget child, int xpos, int ypos) nothrow
   {
     gtk_text_view_move_child(cast(GtkTextView*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, xpos, ypos);
   }
@@ -1196,7 +1196,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         mark = a #GtkTextMark
       Returns: true if the mark moved (wasn’t already onscreen)
   */
-  bool moveMarkOnscreen(gtk.text_mark.TextMark mark)
+  bool moveMarkOnscreen(gtk.text_mark.TextMark mark) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_view_move_mark_onscreen(cast(GtkTextView*)this._cPtr, mark ? cast(GtkTextMark*)mark._cPtr(No.Dup) : null);
@@ -1222,7 +1222,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
              positive moves right)
       Returns: true if iter moved and is not on the end iterator
   */
-  bool moveVisually(gtk.text_iter.TextIter iter, int count)
+  bool moveVisually(gtk.text_iter.TextIter iter, int count) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_view_move_visually(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, count);
@@ -1234,7 +1234,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       buffer, it it isn’t there already.
       Returns: true if the cursor had to be moved.
   */
-  bool placeCursorOnscreen()
+  bool placeCursorOnscreen() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_view_place_cursor_onscreen(cast(GtkTextView*)this._cPtr);
@@ -1250,7 +1250,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       (e.g. from derived classes that override the textview's
       #GtkWidget::key-press-event handler).
   */
-  void resetCursorBlink()
+  void resetCursorBlink() nothrow
   {
     gtk_text_view_reset_cursor_blink(cast(GtkTextView*)this._cPtr);
   }
@@ -1261,7 +1261,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       This can be necessary in the case where modifying the buffer
       would confuse on-going input method behavior.
   */
-  void resetImContext()
+  void resetImContext() nothrow
   {
     gtk_text_view_reset_im_context(cast(GtkTextView*)this._cPtr);
   }
@@ -1273,7 +1273,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         mark = a mark in the buffer for text_view
   */
-  void scrollMarkOnscreen(gtk.text_mark.TextMark mark)
+  void scrollMarkOnscreen(gtk.text_mark.TextMark mark) nothrow
   {
     gtk_text_view_scroll_mark_onscreen(cast(GtkTextView*)this._cPtr, mark ? cast(GtkTextMark*)mark._cPtr(No.Dup) : null);
   }
@@ -1303,7 +1303,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         yalign = vertical alignment of mark within visible area
       Returns: true if scrolling occurred
   */
-  bool scrollToIter(gtk.text_iter.TextIter iter, double withinMargin, bool useAlign, double xalign, double yalign)
+  bool scrollToIter(gtk.text_iter.TextIter iter, double withinMargin, bool useAlign, double xalign, double yalign) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_view_scroll_to_iter(cast(GtkTextView*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, withinMargin, useAlign, xalign, yalign);
@@ -1327,7 +1327,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         xalign = horizontal alignment of mark within visible area
         yalign = vertical alignment of mark within visible area
   */
-  void scrollToMark(gtk.text_mark.TextMark mark, double withinMargin, bool useAlign, double xalign, double yalign)
+  void scrollToMark(gtk.text_mark.TextMark mark, double withinMargin, bool useAlign, double xalign, double yalign) nothrow
   {
     gtk_text_view_scroll_to_mark(cast(GtkTextView*)this._cPtr, mark ? cast(GtkTextMark*)mark._cPtr(No.Dup) : null, withinMargin, useAlign, xalign, yalign);
   }
@@ -1343,7 +1343,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
              character, false, if pressing the Tab key should move the
              keyboard focus.
   */
-  void setAcceptsTab(bool acceptsTab)
+  void setAcceptsTab(bool acceptsTab) nothrow
   {
     gtk_text_view_set_accepts_tab(cast(GtkTextView*)this._cPtr, acceptsTab);
   }
@@ -1361,7 +1361,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         type = window to affect
         size = width or height of the window
   */
-  void setBorderWindowSize(gtk.types.TextWindowType type, int size)
+  void setBorderWindowSize(gtk.types.TextWindowType type, int size) nothrow
   {
     gtk_text_view_set_border_window_size(cast(GtkTextView*)this._cPtr, type, size);
   }
@@ -1375,7 +1375,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         bottomMargin = bottom margin in pixels
   */
-  void setBottomMargin(int bottomMargin)
+  void setBottomMargin(int bottomMargin) nothrow
   {
     gtk_text_view_set_bottom_margin(cast(GtkTextView*)this._cPtr, bottomMargin);
   }
@@ -1390,7 +1390,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         buffer = a #GtkTextBuffer
   */
-  void setBuffer(gtk.text_buffer.TextBuffer buffer = null)
+  void setBuffer(gtk.text_buffer.TextBuffer buffer = null) nothrow
   {
     gtk_text_view_set_buffer(cast(GtkTextView*)this._cPtr, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
   }
@@ -1406,7 +1406,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         setting = whether to show the insertion cursor
   */
-  void setCursorVisible(bool setting)
+  void setCursorVisible(bool setting) nothrow
   {
     gtk_text_view_set_cursor_visible(cast(GtkTextView*)this._cPtr, setting);
   }
@@ -1419,7 +1419,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         setting = whether it’s editable
   */
-  void setEditable(bool setting)
+  void setEditable(bool setting) nothrow
   {
     gtk_text_view_set_editable(cast(GtkTextView*)this._cPtr, setting);
   }
@@ -1431,7 +1431,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         indent = indentation in pixels
   */
-  void setIndent(int indent)
+  void setIndent(int indent) nothrow
   {
     gtk_text_view_set_indent(cast(GtkTextView*)this._cPtr, indent);
   }
@@ -1443,7 +1443,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         hints = the hints
   */
-  void setInputHints(gtk.types.InputHints hints)
+  void setInputHints(gtk.types.InputHints hints) nothrow
   {
     gtk_text_view_set_input_hints(cast(GtkTextView*)this._cPtr, hints);
   }
@@ -1456,7 +1456,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         purpose = the purpose
   */
-  void setInputPurpose(gtk.types.InputPurpose purpose)
+  void setInputPurpose(gtk.types.InputPurpose purpose) nothrow
   {
     gtk_text_view_set_input_purpose(cast(GtkTextView*)this._cPtr, purpose);
   }
@@ -1468,7 +1468,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         justification = justification
   */
-  void setJustification(gtk.types.Justification justification)
+  void setJustification(gtk.types.Justification justification) nothrow
   {
     gtk_text_view_set_justification(cast(GtkTextView*)this._cPtr, justification);
   }
@@ -1483,7 +1483,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         leftMargin = left margin in pixels
   */
-  void setLeftMargin(int leftMargin)
+  void setLeftMargin(int leftMargin) nothrow
   {
     gtk_text_view_set_left_margin(cast(GtkTextView*)this._cPtr, leftMargin);
   }
@@ -1496,7 +1496,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         monospace = true to request monospace styling
   */
-  void setMonospace(bool monospace)
+  void setMonospace(bool monospace) nothrow
   {
     gtk_text_view_set_monospace(cast(GtkTextView*)this._cPtr, monospace);
   }
@@ -1507,7 +1507,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         overwrite = true to turn on overwrite mode, false to turn it off
   */
-  void setOverwrite(bool overwrite)
+  void setOverwrite(bool overwrite) nothrow
   {
     gtk_text_view_set_overwrite(cast(GtkTextView*)this._cPtr, overwrite);
   }
@@ -1519,7 +1519,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         pixelsAboveLines = pixels above paragraphs
   */
-  void setPixelsAboveLines(int pixelsAboveLines)
+  void setPixelsAboveLines(int pixelsAboveLines) nothrow
   {
     gtk_text_view_set_pixels_above_lines(cast(GtkTextView*)this._cPtr, pixelsAboveLines);
   }
@@ -1532,7 +1532,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         pixelsBelowLines = pixels below paragraphs
   */
-  void setPixelsBelowLines(int pixelsBelowLines)
+  void setPixelsBelowLines(int pixelsBelowLines) nothrow
   {
     gtk_text_view_set_pixels_below_lines(cast(GtkTextView*)this._cPtr, pixelsBelowLines);
   }
@@ -1545,7 +1545,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         pixelsInsideWrap = default number of pixels between wrapped lines
   */
-  void setPixelsInsideWrap(int pixelsInsideWrap)
+  void setPixelsInsideWrap(int pixelsInsideWrap) nothrow
   {
     gtk_text_view_set_pixels_inside_wrap(cast(GtkTextView*)this._cPtr, pixelsInsideWrap);
   }
@@ -1560,7 +1560,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         rightMargin = right margin in pixels
   */
-  void setRightMargin(int rightMargin)
+  void setRightMargin(int rightMargin) nothrow
   {
     gtk_text_view_set_right_margin(cast(GtkTextView*)this._cPtr, rightMargin);
   }
@@ -1572,7 +1572,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         tabs = tabs as a #PangoTabArray
   */
-  void setTabs(pango.tab_array.TabArray tabs)
+  void setTabs(pango.tab_array.TabArray tabs) nothrow
   {
     gtk_text_view_set_tabs(cast(GtkTextView*)this._cPtr, tabs ? cast(PangoTabArray*)tabs._cPtr(No.Dup) : null);
   }
@@ -1586,7 +1586,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         topMargin = top margin in pixels
   */
-  void setTopMargin(int topMargin)
+  void setTopMargin(int topMargin) nothrow
   {
     gtk_text_view_set_top_margin(cast(GtkTextView*)this._cPtr, topMargin);
   }
@@ -1597,7 +1597,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         wrapMode = a #GtkWrapMode
   */
-  void setWrapMode(gtk.types.WrapMode wrapMode)
+  void setWrapMode(gtk.types.WrapMode wrapMode) nothrow
   {
     gtk_text_view_set_wrap_mode(cast(GtkTextView*)this._cPtr, wrapMode);
   }
@@ -1611,7 +1611,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         iter = a #GtkTextIter
       Returns: true if iter begins a wrapped line
   */
-  bool startsDisplayLine(gtk.text_iter.TextIter iter)
+  bool startsDisplayLine(gtk.text_iter.TextIter iter) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_view_starts_display_line(cast(GtkTextView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null);
@@ -1632,7 +1632,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         bufferX = buffer x coordinate return location or null
         bufferY = buffer y coordinate return location or null
   */
-  void windowToBufferCoords(gtk.types.TextWindowType win, int windowX, int windowY, out int bufferX, out int bufferY)
+  void windowToBufferCoords(gtk.types.TextWindowType win, int windowX, int windowY, out int bufferX, out int bufferY) nothrow
   {
     gtk_text_view_window_to_buffer_coords(cast(GtkTextView*)this._cPtr, win, windowX, windowY, cast(int*)&bufferX, cast(int*)&bufferY);
   }
@@ -1657,13 +1657,13 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectBackspace(T)(T callback, Flag!"After" after = No.After)
+  gulong connectBackspace(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1672,7 +1672,14 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_view.TextView.backspace");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1699,13 +1706,13 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1714,7 +1721,14 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_view.TextView.copyClipboard");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1741,13 +1755,13 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCutClipboard(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCutClipboard(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1756,7 +1770,14 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_view.TextView.cutClipboard");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1793,7 +1814,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeleteFromCursor(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeleteFromCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.DeleteType)))
@@ -1801,7 +1822,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.text_view.TextView)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1816,7 +1837,14 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_view.TextView.deleteFromCursor");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1849,7 +1877,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectExtendSelection(T)(T callback, Flag!"After" after = No.After)
+  gulong connectExtendSelection(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.TextExtendSelection)))
@@ -1859,11 +1887,12 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gtk.text_view.TextView)))
   && Parameters!T.length < 6)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1880,7 +1909,14 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 4)
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_view.TextView.extendSelection");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1911,14 +1947,14 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInsertAtCursor(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInsertAtCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text_view.TextView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1930,7 +1966,14 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_view.TextView.insertAtCursor");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1956,13 +1999,13 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInsertEmoji(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInsertEmoji(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1971,7 +2014,14 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_view.TextView.insertEmoji");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2017,7 +2067,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.MovementStep)))
@@ -2026,7 +2076,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.text_view.TextView)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2044,7 +2094,14 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_view.TextView.moveCursor");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2076,7 +2133,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveViewport(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveViewport(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ScrollStep)))
@@ -2084,7 +2141,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.text_view.TextView)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2099,7 +2156,14 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_view.TextView.moveViewport");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2127,13 +2191,13 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPasteClipboard(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPasteClipboard(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2142,7 +2206,14 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_view.TextView.pasteClipboard");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2179,14 +2250,14 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPopulatePopup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPopulatePopup(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text_view.TextView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2198,7 +2269,14 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_view.TextView.populatePopup");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2227,14 +2305,14 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text_view.TextView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2246,7 +2324,14 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_view.TextView.preeditChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2276,14 +2361,14 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectAll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text_view.TextView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2295,7 +2380,14 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_view.TextView.selectAll");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2323,13 +2415,13 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSetAnchor(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSetAnchor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2338,7 +2430,14 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_view.TextView.setAnchor");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2365,13 +2464,13 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectToggleCursorVisible(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToggleCursorVisible(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2380,7 +2479,14 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_view.TextView.toggleCursorVisible");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2406,13 +2512,13 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectToggleOverwrite(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToggleOverwrite(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2421,7 +2527,14 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_view.TextView.toggleOverwrite");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2436,7 +2549,7 @@ class TextViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.s
   mixin ScrollableGidBuilderT!();
 
   /** */
-  T acceptsTab(bool propval)
+  T acceptsTab(bool propval) nothrow
   {
     return setProperty("accepts-tab", propval);
   }
@@ -2453,25 +2566,25 @@ class TextViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.s
           Don't confuse this property with #GtkWidget:margin-bottom.
       Returns: Builder instance for fluent chaining
   */
-  T bottomMargin(int propval)
+  T bottomMargin(int propval) nothrow
   {
     return setProperty("bottom-margin", propval);
   }
 
   /** */
-  T buffer(gtk.text_buffer.TextBuffer propval)
+  T buffer(gtk.text_buffer.TextBuffer propval) nothrow
   {
     return setProperty("buffer", propval);
   }
 
   /** */
-  T cursorVisible(bool propval)
+  T cursorVisible(bool propval) nothrow
   {
     return setProperty("cursor-visible", propval);
   }
 
   /** */
-  T editable(bool propval)
+  T editable(bool propval) nothrow
   {
     return setProperty("editable", propval);
   }
@@ -2487,13 +2600,13 @@ class TextViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.s
           #GtkSettings:gtk-im-module property.
       Returns: Builder instance for fluent chaining
   */
-  T imModule(string propval)
+  T imModule(string propval) nothrow
   {
     return setProperty("im-module", propval);
   }
 
   /** */
-  T indent(int propval)
+  T indent(int propval) nothrow
   {
     return setProperty("indent", propval);
   }
@@ -2505,7 +2618,7 @@ class TextViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.s
           allow input methods to fine-tune their behaviour.
       Returns: Builder instance for fluent chaining
   */
-  T inputHints(gtk.types.InputHints propval)
+  T inputHints(gtk.types.InputHints propval) nothrow
   {
     return setProperty("input-hints", propval);
   }
@@ -2519,13 +2632,13 @@ class TextViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.s
           methods to adjust their behaviour.
       Returns: Builder instance for fluent chaining
   */
-  T inputPurpose(gtk.types.InputPurpose propval)
+  T inputPurpose(gtk.types.InputPurpose propval) nothrow
   {
     return setProperty("input-purpose", propval);
   }
 
   /** */
-  T justification(gtk.types.Justification propval)
+  T justification(gtk.types.Justification propval) nothrow
   {
     return setProperty("justification", propval);
   }
@@ -2543,37 +2656,37 @@ class TextViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.s
           Don't confuse this property with #GtkWidget:margin-left.
       Returns: Builder instance for fluent chaining
   */
-  T leftMargin(int propval)
+  T leftMargin(int propval) nothrow
   {
     return setProperty("left-margin", propval);
   }
 
   /** */
-  T monospace(bool propval)
+  T monospace(bool propval) nothrow
   {
     return setProperty("monospace", propval);
   }
 
   /** */
-  T overwrite(bool propval)
+  T overwrite(bool propval) nothrow
   {
     return setProperty("overwrite", propval);
   }
 
   /** */
-  T pixelsAboveLines(int propval)
+  T pixelsAboveLines(int propval) nothrow
   {
     return setProperty("pixels-above-lines", propval);
   }
 
   /** */
-  T pixelsBelowLines(int propval)
+  T pixelsBelowLines(int propval) nothrow
   {
     return setProperty("pixels-below-lines", propval);
   }
 
   /** */
-  T pixelsInsideWrap(int propval)
+  T pixelsInsideWrap(int propval) nothrow
   {
     return setProperty("pixels-inside-wrap", propval);
   }
@@ -2585,7 +2698,7 @@ class TextViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.s
           signal is also emitted for touch popups.
       Returns: Builder instance for fluent chaining
   */
-  T populateAll(bool propval)
+  T populateAll(bool propval) nothrow
   {
     return setProperty("populate-all", propval);
   }
@@ -2603,13 +2716,13 @@ class TextViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.s
           Don't confuse this property with #GtkWidget:margin-right.
       Returns: Builder instance for fluent chaining
   */
-  T rightMargin(int propval)
+  T rightMargin(int propval) nothrow
   {
     return setProperty("right-margin", propval);
   }
 
   /** */
-  T tabs(pango.tab_array.TabArray propval)
+  T tabs(pango.tab_array.TabArray propval) nothrow
   {
     return setProperty("tabs", propval);
   }
@@ -2626,13 +2739,13 @@ class TextViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.s
           Don't confuse this property with #GtkWidget:margin-top.
       Returns: Builder instance for fluent chaining
   */
-  T topMargin(int propval)
+  T topMargin(int propval) nothrow
   {
     return setProperty("top-margin", propval);
   }
 
   /** */
-  T wrapMode(gtk.types.WrapMode propval)
+  T wrapMode(gtk.types.WrapMode propval) nothrow
   {
     return setProperty("wrap-mode", propval);
   }
@@ -2645,7 +2758,7 @@ final class TextViewGidBuilder : TextViewGidBuilderImpl!TextViewGidBuilder
       Create object from builder.
       Returns: New object
   */
-  TextView build()
+  TextView build() nothrow
   {
     return new TextView(cast(void*)createGObject(TextView._getGType), No.Take);
   }

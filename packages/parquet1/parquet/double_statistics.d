@@ -14,26 +14,26 @@ class DoubleStatistics : parquet.statistics.Statistics
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_double_statistics_get_type != &gidSymbolNotFound ? gparquet_double_statistics_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DoubleStatistics self()
+  override DoubleStatistics self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class DoubleStatistics : parquet.statistics.Statistics
       Get builder for [parquet.double_statistics.DoubleStatistics]
       Returns: New builder object
   */
-  static DoubleStatisticsGidBuilder builder()
+  static DoubleStatisticsGidBuilder builder() nothrow
   {
     return new DoubleStatisticsGidBuilder;
   }
 
   /** */
-  double getMax()
+  double getMax() nothrow
   {
     double _retval;
     _retval = gparquet_double_statistics_get_max(cast(GParquetDoubleStatistics*)this._cPtr);
@@ -56,7 +56,7 @@ class DoubleStatistics : parquet.statistics.Statistics
   }
 
   /** */
-  double getMin()
+  double getMin() nothrow
   {
     double _retval;
     _retval = gparquet_double_statistics_get_min(cast(GParquetDoubleStatistics*)this._cPtr);
@@ -76,7 +76,7 @@ final class DoubleStatisticsGidBuilder : DoubleStatisticsGidBuilderImpl!DoubleSt
       Create object from builder.
       Returns: New object
   */
-  DoubleStatistics build()
+  DoubleStatistics build() nothrow
   {
     return new DoubleStatistics(cast(void*)createGObject(DoubleStatistics._getGType), No.Take);
   }

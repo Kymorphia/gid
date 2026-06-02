@@ -17,11 +17,8 @@ class Once
   GOnce _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.once.Once");
-
     _cInstance = *cast(GOnce*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class Once
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class Once
       Get `status` field.
       Returns: the status of the #GOnce
   */
-  @property glib.types.OnceStatus status()
+  @property glib.types.OnceStatus status() nothrow
   {
     return cast(glib.types.OnceStatus)(cast(GOnce*)this._cPtr).status;
   }
@@ -48,7 +45,7 @@ class Once
       Params:
         propval = the status of the #GOnce
   */
-  @property void status(glib.types.OnceStatus propval)
+  @property void status(glib.types.OnceStatus propval) nothrow
   {
     (cast(GOnce*)this._cPtr).status = cast(GOnceStatus)propval;
   }
@@ -86,7 +83,7 @@ class Once
       Returns: true if the initialization section should be entered,
             false and blocks otherwise
   */
-  static bool initEnter(ref void* location)
+  static bool initEnter(ref void* location) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_once_init_enter(cast(void*)&location);
@@ -94,7 +91,7 @@ class Once
   }
 
   /** */
-  static bool initEnterImpl(out size_t location)
+  static bool initEnterImpl(out size_t location) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_once_init_enter_impl(cast(size_t*)&location);
@@ -124,7 +121,7 @@ class Once
       Returns: true if the initialization section should be entered,
             false and blocks otherwise
   */
-  static bool initEnterPointer(void* location)
+  static bool initEnterPointer(void* location) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_once_init_enter_pointer(location);
@@ -146,7 +143,7 @@ class Once
              containing 0
         result = new non-0 value for *value_location
   */
-  static void initLeave(ref void* location, size_t result)
+  static void initLeave(ref void* location, size_t result) nothrow
   {
     g_once_init_leave(cast(void*)&location, result);
   }
@@ -166,7 +163,7 @@ class Once
              containing `NULL`
         result = new non-`NULL` value for `*location`
   */
-  static void initLeavePointer(void* location, void* result = null)
+  static void initLeavePointer(void* location, void* result = null) nothrow
   {
     g_once_init_leave_pointer(location, result);
   }

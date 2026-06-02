@@ -19,44 +19,44 @@ class SqlStatement : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_sql_statement_get_type != &gidSymbolNotFound ? gda_sql_statement_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SqlStatement self()
+  override SqlStatement self() nothrow
   {
     return this;
   }
 
   /** */
-  @property string sql()
+  @property string sql() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaSqlStatement*)this._cPtr).sql);
   }
 
   /** */
-  @property void sql(string propval)
+  @property void sql(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaSqlStatement*)this._cPtr).sql);
     dToC(propval, cast(void*)&(cast(GdaSqlStatement*)this._cPtr).sql);
@@ -66,7 +66,7 @@ class SqlStatement : gobject.boxed.Boxed
       Get `stmtType` field.
       Returns: type of statement
   */
-  @property gda.types.SqlStatementType stmtType()
+  @property gda.types.SqlStatementType stmtType() nothrow
   {
     return cast(gda.types.SqlStatementType)(cast(GdaSqlStatement*)this._cPtr).stmtType;
   }
@@ -76,19 +76,19 @@ class SqlStatement : gobject.boxed.Boxed
       Params:
         propval = type of statement
   */
-  @property void stmtType(gda.types.SqlStatementType propval)
+  @property void stmtType(gda.types.SqlStatementType propval) nothrow
   {
     (cast(GdaSqlStatement*)this._cPtr).stmtType = cast(GdaSqlStatementType)propval;
   }
 
   /** */
-  @property gda.meta_struct.MetaStruct validityMetaStruct()
+  @property gda.meta_struct.MetaStruct validityMetaStruct() nothrow
   {
     return cToD!(gda.meta_struct.MetaStruct)(cast(void*)(cast(GdaSqlStatement*)this._cPtr).validityMetaStruct);
   }
 
   /** */
-  @property void validityMetaStruct(gda.meta_struct.MetaStruct propval)
+  @property void validityMetaStruct(gda.meta_struct.MetaStruct propval) nothrow
   {
     cValueFree!(gda.meta_struct.MetaStruct)(cast(void*)(cast(GdaSqlStatement*)this._cPtr).validityMetaStruct);
     dToC(propval, cast(void*)&(cast(GdaSqlStatement*)this._cPtr).validityMetaStruct);
@@ -101,7 +101,7 @@ class SqlStatement : gobject.boxed.Boxed
         type = type of statement to create
       Returns: a new #GdaSqlStatement
   */
-  this(gda.types.SqlStatementType type)
+  this(gda.types.SqlStatementType type) nothrow
   {
     GdaSqlStatement* _cretval;
     _cretval = gda_sql_statement_new(type);
@@ -111,7 +111,7 @@ class SqlStatement : gobject.boxed.Boxed
   /**
       Cleans any data set by a previous call to [gda.sql_statement.SqlStatement.checkValidity].
   */
-  void checkClean()
+  void checkClean() nothrow
   {
     gda_sql_statement_check_clean(cast(GdaSqlStatement*)this._cPtr);
   }
@@ -193,7 +193,7 @@ class SqlStatement : gobject.boxed.Boxed
       Params:
         type = a #GdaSqlStatementCompoundType value
   */
-  void compoundSetType(gda.types.SqlStatementCompoundType type)
+  void compoundSetType(gda.types.SqlStatementCompoundType type) nothrow
   {
     gda_sql_statement_compound_set_type(cast(GdaSqlStatement*)this._cPtr, type);
   }
@@ -205,7 +205,7 @@ class SqlStatement : gobject.boxed.Boxed
       Params:
         s = a #GdaSqlStatement pointer
   */
-  void compoundTakeStmt(gda.sql_statement.SqlStatement s)
+  void compoundTakeStmt(gda.sql_statement.SqlStatement s) nothrow
   {
     gda_sql_statement_compound_take_stmt(cast(GdaSqlStatement*)this._cPtr, s ? cast(GdaSqlStatement*)s._cPtr(Yes.Dup) : null);
   }
@@ -214,7 +214,7 @@ class SqlStatement : gobject.boxed.Boxed
       Creates a copy of stmt.
       Returns: a new #GdaSqlStatement
   */
-  gda.sql_statement.SqlStatement copy()
+  gda.sql_statement.SqlStatement copy() nothrow
   {
     GdaSqlStatement* _cretval;
     _cretval = gda_sql_statement_copy(cast(GdaSqlStatement*)this._cPtr);
@@ -229,7 +229,7 @@ class SqlStatement : gobject.boxed.Boxed
       Params:
         value = a table name as a G_TYPE_STRING #GValue
   */
-  void deleteTakeTableName(gobject.value.Value value)
+  void deleteTakeTableName(gobject.value.Value value) nothrow
   {
     gda_sql_statement_delete_take_table_name(cast(GdaSqlStatement*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }
@@ -241,7 +241,7 @@ class SqlStatement : gobject.boxed.Boxed
       Params:
         value = name of the resolution conflict algorithm, as a G_TYPE_STRING #GValue
   */
-  void insertTakeOnConflict(gobject.value.Value value)
+  void insertTakeOnConflict(gobject.value.Value value) nothrow
   {
     gda_sql_statement_insert_take_on_conflict(cast(GdaSqlStatement*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }
@@ -254,7 +254,7 @@ class SqlStatement : gobject.boxed.Boxed
       Params:
         select = a SELECT or COMPOUND #GdaSqlStatement pointer
   */
-  void insertTakeSelect(gda.sql_statement.SqlStatement select)
+  void insertTakeSelect(gda.sql_statement.SqlStatement select) nothrow
   {
     gda_sql_statement_insert_take_select(cast(GdaSqlStatement*)this._cPtr, select ? cast(GdaSqlStatement*)select._cPtr(Yes.Dup) : null);
   }
@@ -266,7 +266,7 @@ class SqlStatement : gobject.boxed.Boxed
       Params:
         value = name of the table to insert into, as a G_TYPE_STRING #GValue
   */
-  void insertTakeTableName(gobject.value.Value value)
+  void insertTakeTableName(gobject.value.Value value) nothrow
   {
     gda_sql_statement_insert_take_table_name(cast(GdaSqlStatement*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }
@@ -295,7 +295,7 @@ class SqlStatement : gobject.boxed.Boxed
       Creates a string representation of stmt.
       Returns: a new string
   */
-  string serialize()
+  string serialize() nothrow
   {
     char* _cretval;
     _cretval = gda_sql_statement_serialize(cast(GdaSqlStatement*)this._cPtr);
@@ -304,7 +304,7 @@ class SqlStatement : gobject.boxed.Boxed
   }
 
   /** */
-  void transSetIsolLevel(gda.types.TransactionIsolation level)
+  void transSetIsolLevel(gda.types.TransactionIsolation level) nothrow
   {
     gda_sql_statement_trans_set_isol_level(cast(GdaSqlStatement*)this._cPtr, level);
   }
@@ -318,7 +318,7 @@ class SqlStatement : gobject.boxed.Boxed
       Params:
         value = a G_TYPE_STRING value
   */
-  void transTakeMode(gobject.value.Value value)
+  void transTakeMode(gobject.value.Value value) nothrow
   {
     gda_sql_statement_trans_take_mode(cast(GdaSqlStatement*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }
@@ -332,7 +332,7 @@ class SqlStatement : gobject.boxed.Boxed
       Params:
         value = a G_TYPE_STRING value
   */
-  void transTakeName(gobject.value.Value value)
+  void transTakeName(gobject.value.Value value) nothrow
   {
     gda_sql_statement_trans_take_name(cast(GdaSqlStatement*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }
@@ -344,7 +344,7 @@ class SqlStatement : gobject.boxed.Boxed
       Params:
         value = name of the resolution conflict algorithm, as a G_TYPE_STRING #GValue
   */
-  void updateTakeOnConflict(gobject.value.Value value)
+  void updateTakeOnConflict(gobject.value.Value value) nothrow
   {
     gda_sql_statement_update_take_on_conflict(cast(GdaSqlStatement*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }
@@ -358,7 +358,7 @@ class SqlStatement : gobject.boxed.Boxed
       Params:
         value = a table name, as a G_TYPE_STRING #GValue
   */
-  void updateTakeTableName(gobject.value.Value value)
+  void updateTakeTableName(gobject.value.Value value) nothrow
   {
     gda_sql_statement_update_take_table_name(cast(GdaSqlStatement*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }
@@ -370,7 +370,7 @@ class SqlStatement : gobject.boxed.Boxed
         type = a string representing a #GdaSqlStatementType type
       Returns: a #GdaSqlStatementType value
   */
-  static gda.types.SqlStatementType stringToType(string type)
+  static gda.types.SqlStatementType stringToType(string type) nothrow
   {
     GdaSqlStatementType _cretval;
     const(char)* _type = type.toCString(No.Alloc);
@@ -386,7 +386,7 @@ class SqlStatement : gobject.boxed.Boxed
         type = a #GdaSqlStatementType value
       Returns: a constant string
   */
-  static string typeToString(gda.types.SqlStatementType type)
+  static string typeToString(gda.types.SqlStatementType type) nothrow
   {
     const(char)* _cretval;
     _cretval = gda_sql_statement_type_to_string(type);

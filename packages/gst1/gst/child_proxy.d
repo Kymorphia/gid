@@ -32,7 +32,7 @@ interface ChildProxy
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_child_proxy_get_type != &gidSymbolNotFound ? gst_child_proxy_get_type() : cast(GType)0;
@@ -156,7 +156,7 @@ interface ChildProxy
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChildAdded(T)(T callback, Flag!"After" after = No.After);
+  gulong connectChildAdded(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `ChildRemoved` signal.
@@ -177,7 +177,7 @@ interface ChildProxy
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChildRemoved(T)(T callback, Flag!"After" after = No.After);
+  gulong connectChildRemoved(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gst.child_proxy.ChildProxy]

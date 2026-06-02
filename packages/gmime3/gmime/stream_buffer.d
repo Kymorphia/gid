@@ -16,26 +16,26 @@ class StreamBuffer : gmime.stream.Stream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_stream_buffer_get_type != &gidSymbolNotFound ? g_mime_stream_buffer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StreamBuffer self()
+  override StreamBuffer self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class StreamBuffer : gmime.stream.Stream
       Get builder for [gmime.stream_buffer.StreamBuffer]
       Returns: New builder object
   */
-  static StreamBufferGidBuilder builder()
+  static StreamBufferGidBuilder builder() nothrow
   {
     return new StreamBufferGidBuilder;
   }
@@ -57,7 +57,7 @@ class StreamBuffer : gmime.stream.Stream
         mode = buffering mode
       Returns: a new buffer stream with source source and mode mode.
   */
-  this(gmime.stream.Stream source, gmime.types.StreamBufferMode mode)
+  this(gmime.stream.Stream source, gmime.types.StreamBufferMode mode) nothrow
   {
     GMimeStream* _cretval;
     _cretval = g_mime_stream_buffer_new(source ? cast(GMimeStream*)source._cPtr(No.Dup) : null, mode);
@@ -77,7 +77,7 @@ final class StreamBufferGidBuilder : StreamBufferGidBuilderImpl!StreamBufferGidB
       Create object from builder.
       Returns: New object
   */
-  StreamBuffer build()
+  StreamBuffer build() nothrow
   {
     return new StreamBuffer(cast(void*)createGObject(StreamBuffer._getGType), Yes.Take);
   }

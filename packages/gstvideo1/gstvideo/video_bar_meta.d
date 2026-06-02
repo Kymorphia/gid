@@ -28,11 +28,8 @@ class VideoBarMeta
   GstVideoBarMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_bar_meta.VideoBarMeta");
-
     _cInstance = *cast(GstVideoBarMeta*)ptr;
 
     if (take)
@@ -40,7 +37,7 @@ class VideoBarMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -49,7 +46,7 @@ class VideoBarMeta
       Get `meta` field.
       Returns: parent #GstMeta
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoBarMeta*)this._cPtr).meta, No.Take);
   }
@@ -58,7 +55,7 @@ class VideoBarMeta
       Get `field` field.
       Returns: 0 for progressive or field 1 and 1 for field 2
   */
-  @property ubyte field()
+  @property ubyte field() nothrow
   {
     return (cast(GstVideoBarMeta*)this._cPtr).field;
   }
@@ -68,7 +65,7 @@ class VideoBarMeta
       Params:
         propval = 0 for progressive or field 1 and 1 for field 2
   */
-  @property void field(ubyte propval)
+  @property void field(ubyte propval) nothrow
   {
     (cast(GstVideoBarMeta*)this._cPtr).field = propval;
   }
@@ -77,7 +74,7 @@ class VideoBarMeta
       Get `isLetterbox` field.
       Returns: if true then bar data specifies letterbox, otherwise pillarbox
   */
-  @property bool isLetterbox()
+  @property bool isLetterbox() nothrow
   {
     return cast(bool)(cast(GstVideoBarMeta*)this._cPtr).isLetterbox;
   }
@@ -87,7 +84,7 @@ class VideoBarMeta
       Params:
         propval = if true then bar data specifies letterbox, otherwise pillarbox
   */
-  @property void isLetterbox(bool propval)
+  @property void isLetterbox(bool propval) nothrow
   {
     (cast(GstVideoBarMeta*)this._cPtr).isLetterbox = propval;
   }
@@ -99,7 +96,7 @@ class VideoBarMeta
              Otherwise, it specifies the last horizontal luminance sample of a vertical pillarbox
              bar area at the left side of the reconstructed frame
   */
-  @property uint barData1()
+  @property uint barData1() nothrow
   {
     return (cast(GstVideoBarMeta*)this._cPtr).barData1;
   }
@@ -112,7 +109,7 @@ class VideoBarMeta
                Otherwise, it specifies the last horizontal luminance sample of a vertical pillarbox
                bar area at the left side of the reconstructed frame
   */
-  @property void barData1(uint propval)
+  @property void barData1(uint propval) nothrow
   {
     (cast(GstVideoBarMeta*)this._cPtr).barData1 = propval;
   }
@@ -124,7 +121,7 @@ class VideoBarMeta
              Otherwise, it specifies the first horizontal
              luminance sample of a vertical pillarbox bar area at the right side of the reconstructed frame.
   */
-  @property uint barData2()
+  @property uint barData2() nothrow
   {
     return (cast(GstVideoBarMeta*)this._cPtr).barData2;
   }
@@ -137,13 +134,13 @@ class VideoBarMeta
                Otherwise, it specifies the first horizontal
                luminance sample of a vertical pillarbox bar area at the right side of the reconstructed frame.
   */
-  @property void barData2(uint propval)
+  @property void barData2(uint propval) nothrow
   {
     (cast(GstVideoBarMeta*)this._cPtr).barData2 = propval;
   }
 
   /** */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_bar_meta_get_info();

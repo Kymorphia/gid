@@ -28,26 +28,26 @@ class Accessible : atk.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_accessible_get_type != &gidSymbolNotFound ? gtk_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Accessible self()
+  override Accessible self() nothrow
   {
     return this;
   }
@@ -56,19 +56,19 @@ class Accessible : atk.object.ObjectWrap
       Get builder for [gtk.accessible.Accessible]
       Returns: New builder object
   */
-  static AccessibleGidBuilder builder()
+  static AccessibleGidBuilder builder() nothrow
   {
     return new AccessibleGidBuilder;
   }
 
   /** */
-  @property gtk.widget.Widget widget()
+  @property gtk.widget.Widget widget() nothrow
   {
     return getWidget();
   }
 
   /** */
-  @property void widget(gtk.widget.Widget propval)
+  @property void widget(gtk.widget.Widget propval) nothrow
   {
     setWidget(propval);
   }
@@ -79,7 +79,7 @@ class Accessible : atk.object.ObjectWrap
   
       Deprecated: Use [gtk.accessible.Accessible.setWidget] and its vfuncs.
   */
-  void connectWidgetDestroyed()
+  void connectWidgetDestroyed() nothrow
   {
     gtk_accessible_connect_widget_destroyed(cast(GtkAccessible*)this._cPtr);
   }
@@ -91,7 +91,7 @@ class Accessible : atk.object.ObjectWrap
       Returns: pointer to the #GtkWidget
             corresponding to the #GtkAccessible, or null.
   */
-  gtk.widget.Widget getWidget()
+  gtk.widget.Widget getWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_accessible_get_widget(cast(GtkAccessible*)this._cPtr);
@@ -110,7 +110,7 @@ class Accessible : atk.object.ObjectWrap
       Params:
         widget = a #GtkWidget or null to unset
   */
-  void setWidget(gtk.widget.Widget widget = null)
+  void setWidget(gtk.widget.Widget widget = null) nothrow
   {
     gtk_accessible_set_widget(cast(GtkAccessible*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -121,7 +121,7 @@ class AccessibleGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T widget(gtk.widget.Widget propval)
+  T widget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("widget", propval);
   }
@@ -134,7 +134,7 @@ final class AccessibleGidBuilder : AccessibleGidBuilderImpl!AccessibleGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Accessible build()
+  Accessible build() nothrow
   {
     return new Accessible(cast(void*)createGObject(Accessible._getGType), No.Take);
   }

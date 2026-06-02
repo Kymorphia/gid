@@ -28,7 +28,7 @@ template TableCellT()
       Returns: a GPtrArray of AtkObjects
         representing the column header cells.
   */
-  override atk.object.ObjectWrap[] getColumnHeaderCells()
+  override atk.object.ObjectWrap[] getColumnHeaderCells() nothrow
   {
     GPtrArray* _cretval;
     _cretval = atk_table_cell_get_column_header_cells(cast(AtkTableCell*)this._cPtr);
@@ -41,7 +41,7 @@ template TableCellT()
       Returns: a gint representing the number of columns occupied by this cell,
         or 0 if the cell does not implement this method.
   */
-  override int getColumnSpan()
+  override int getColumnSpan() nothrow
   {
     int _retval;
     _retval = atk_table_cell_get_column_span(cast(AtkTableCell*)this._cPtr);
@@ -56,7 +56,7 @@ template TableCellT()
         column = the column of the given cell.
       Returns: TRUE if successful; FALSE otherwise.
   */
-  override bool getPosition(out int row, out int column)
+  override bool getPosition(out int row, out int column) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_table_cell_get_position(cast(AtkTableCell*)this._cPtr, cast(int*)&row, cast(int*)&column);
@@ -77,7 +77,7 @@ template TableCellT()
         columnSpan = the number of columns occupied by this cell.
       Returns: TRUE if successful; FALSE otherwise.
   */
-  override bool getRowColumnSpan(out int row, out int column, out int rowSpan, out int columnSpan)
+  override bool getRowColumnSpan(out int row, out int column, out int rowSpan, out int columnSpan) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_table_cell_get_row_column_span(cast(AtkTableCell*)this._cPtr, cast(int*)&row, cast(int*)&column, cast(int*)&rowSpan, cast(int*)&columnSpan);
@@ -89,7 +89,7 @@ template TableCellT()
       Returns: a GPtrArray of AtkObjects
         representing the row header cells.
   */
-  override atk.object.ObjectWrap[] getRowHeaderCells()
+  override atk.object.ObjectWrap[] getRowHeaderCells() nothrow
   {
     GPtrArray* _cretval;
     _cretval = atk_table_cell_get_row_header_cells(cast(AtkTableCell*)this._cPtr);
@@ -102,7 +102,7 @@ template TableCellT()
       Returns: a gint representing the number of rows occupied by this cell,
         or 0 if the cell does not implement this method.
   */
-  override int getRowSpan()
+  override int getRowSpan() nothrow
   {
     int _retval;
     _retval = atk_table_cell_get_row_span(cast(AtkTableCell*)this._cPtr);
@@ -113,7 +113,7 @@ template TableCellT()
       Returns a reference to the accessible of the containing table.
       Returns: the atk object for the containing table.
   */
-  override atk.object.ObjectWrap getTable()
+  override atk.object.ObjectWrap getTable() nothrow
   {
     AtkObject* _cretval;
     _cretval = atk_table_cell_get_table(cast(AtkTableCell*)this._cPtr);

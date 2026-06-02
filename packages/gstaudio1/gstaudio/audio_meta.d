@@ -20,11 +20,8 @@ class AudioMeta
   GstAudioMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstaudio.audio_meta.AudioMeta");
-
     _cInstance = *cast(GstAudioMeta*)ptr;
 
     if (take)
@@ -32,7 +29,7 @@ class AudioMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -41,7 +38,7 @@ class AudioMeta
       Get `meta` field.
       Returns: parent #GstMeta
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAudioMeta*)this._cPtr).meta, No.Take);
   }
@@ -50,7 +47,7 @@ class AudioMeta
       Get `info` field.
       Returns: the audio properties of the buffer
   */
-  @property gstaudio.audio_info.AudioInfo info()
+  @property gstaudio.audio_info.AudioInfo info() nothrow
   {
     return cToD!(gstaudio.audio_info.AudioInfo)(cast(void*)&(cast(GstAudioMeta*)this._cPtr).info);
   }
@@ -59,7 +56,7 @@ class AudioMeta
       Get `samples` field.
       Returns: the number of valid samples in the buffer
   */
-  @property size_t samples()
+  @property size_t samples() nothrow
   {
     return (cast(GstAudioMeta*)this._cPtr).samples;
   }
@@ -69,13 +66,13 @@ class AudioMeta
       Params:
         propval = the number of valid samples in the buffer
   */
-  @property void samples(size_t propval)
+  @property void samples(size_t propval) nothrow
   {
     (cast(GstAudioMeta*)this._cPtr).samples = propval;
   }
 
   /** */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_audio_meta_get_info();

@@ -23,26 +23,26 @@ class Buffer : gtk.text_buffer.TextBuffer
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_buffer_get_type != &gidSymbolNotFound ? gtk_source_buffer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Buffer self()
+  override Buffer self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Get builder for [gtksource.buffer.Buffer]
       Returns: New builder object
   */
-  static BufferGidBuilder builder()
+  static BufferGidBuilder builder() nothrow
   {
     return new BufferGidBuilder;
   }
@@ -60,7 +60,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Get `highlightMatchingBrackets` property.
       Returns: Whether to highlight matching brackets in the buffer.
   */
-  @property bool highlightMatchingBrackets()
+  @property bool highlightMatchingBrackets() nothrow
   {
     return getHighlightMatchingBrackets();
   }
@@ -70,7 +70,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Params:
         propval = Whether to highlight matching brackets in the buffer.
   */
-  @property void highlightMatchingBrackets(bool propval)
+  @property void highlightMatchingBrackets(bool propval) nothrow
   {
     setHighlightMatchingBrackets(propval);
   }
@@ -79,7 +79,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Get `highlightSyntax` property.
       Returns: Whether to highlight syntax in the buffer.
   */
-  @property bool highlightSyntax()
+  @property bool highlightSyntax() nothrow
   {
     return getHighlightSyntax();
   }
@@ -89,7 +89,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Params:
         propval = Whether to highlight syntax in the buffer.
   */
-  @property void highlightSyntax(bool propval)
+  @property void highlightSyntax(bool propval) nothrow
   {
     setHighlightSyntax(propval);
   }
@@ -99,7 +99,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Returns: Whether the buffer has an implicit trailing newline. See
         [gtksource.buffer.Buffer.setImplicitTrailingNewline].
   */
-  @property bool implicitTrailingNewline()
+  @property bool implicitTrailingNewline() nothrow
   {
     return getImplicitTrailingNewline();
   }
@@ -110,19 +110,19 @@ class Buffer : gtk.text_buffer.TextBuffer
         propval = Whether the buffer has an implicit trailing newline. See
           [gtksource.buffer.Buffer.setImplicitTrailingNewline].
   */
-  @property void implicitTrailingNewline(bool propval)
+  @property void implicitTrailingNewline(bool propval) nothrow
   {
     setImplicitTrailingNewline(propval);
   }
 
   /** */
-  @property gtksource.language.Language language()
+  @property gtksource.language.Language language() nothrow
   {
     return getLanguage();
   }
 
   /** */
-  @property void language(gtksource.language.Language propval)
+  @property void language(gtksource.language.Language propval) nothrow
   {
     setLanguage(propval);
   }
@@ -132,7 +132,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Returns: Number of undo levels for the buffer. -1 means no limit. This property
         will only affect the default undo manager.
   */
-  @property int maxUndoLevels()
+  @property int maxUndoLevels() nothrow
   {
     return getMaxUndoLevels();
   }
@@ -143,7 +143,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         propval = Number of undo levels for the buffer. -1 means no limit. This property
           will only affect the default undo manager.
   */
-  @property void maxUndoLevels(int propval)
+  @property void maxUndoLevels(int propval) nothrow
   {
     setMaxUndoLevels(propval);
   }
@@ -154,7 +154,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         foreground, background, cursor color, current line color, and matching
         brackets style.
   */
-  @property gtksource.style_scheme.StyleScheme styleScheme()
+  @property gtksource.style_scheme.StyleScheme styleScheme() nothrow
   {
     return getStyleScheme();
   }
@@ -166,19 +166,19 @@ class Buffer : gtk.text_buffer.TextBuffer
           foreground, background, cursor color, current line color, and matching
           brackets style.
   */
-  @property void styleScheme(gtksource.style_scheme.StyleScheme propval)
+  @property void styleScheme(gtksource.style_scheme.StyleScheme propval) nothrow
   {
     setStyleScheme(propval);
   }
 
   /** */
-  @property gtksource.undo_manager.UndoManager undoManager()
+  @property gtksource.undo_manager.UndoManager undoManager() nothrow
   {
     return getUndoManager();
   }
 
   /** */
-  @property void undoManager(gtksource.undo_manager.UndoManager propval)
+  @property void undoManager(gtksource.undo_manager.UndoManager propval) nothrow
   {
     setUndoManager(propval);
   }
@@ -190,7 +190,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         table = a #GtkTextTagTable, or null to create a new one.
       Returns: a new source buffer.
   */
-  this(gtk.text_tag_table.TextTagTable table = null)
+  this(gtk.text_tag_table.TextTagTable table = null) nothrow
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_buffer_new(table ? cast(GtkTextTagTable*)table._cPtr(No.Dup) : null);
@@ -207,7 +207,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Returns: a new source buffer which will highlight text
         according to the highlighting patterns in language.
   */
-  static gtksource.buffer.Buffer newWithLanguage(gtksource.language.Language language)
+  static gtksource.buffer.Buffer newWithLanguage(gtksource.language.Language language) nothrow
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_buffer_new_with_language(language ? cast(GtkSourceLanguage*)language._cPtr(No.Dup) : null);
@@ -225,7 +225,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         category = category to search for, or null
       Returns: whether iter was moved.
   */
-  bool backwardIterToSourceMark(gtk.text_iter.TextIter iter, string category = null)
+  bool backwardIterToSourceMark(gtk.text_iter.TextIter iter, string category = null) nothrow
   {
     bool _retval;
     const(char)* _category = category.toCString(No.Alloc);
@@ -242,7 +242,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       You may nest [gtksource.buffer.Buffer.beginNotUndoableAction] /
       [gtksource.buffer.Buffer.endNotUndoableAction] blocks.
   */
-  void beginNotUndoableAction()
+  void beginNotUndoableAction() nothrow
   {
     gtk_source_buffer_begin_not_undoable_action(cast(GtkSourceBuffer*)this._cPtr);
   }
@@ -252,7 +252,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       (i.e. if the last operation was an undo).
       Returns: true if a redo is possible.
   */
-  bool canRedo()
+  bool canRedo() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_buffer_can_redo(cast(GtkSourceBuffer*)this._cPtr);
@@ -263,7 +263,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Determines whether a source buffer can undo the last action.
       Returns: true if it's possible to undo the last action.
   */
-  bool canUndo()
+  bool canUndo() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_buffer_can_undo(cast(GtkSourceBuffer*)this._cPtr);
@@ -278,7 +278,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         start = a #GtkTextIter.
         end = a #GtkTextIter.
   */
-  void changeCase(gtksource.types.ChangeCaseType caseType, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
+  void changeCase(gtksource.types.ChangeCaseType caseType, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end) nothrow
   {
     gtk_source_buffer_change_case(cast(GtkSourceBuffer*)this._cPtr, caseType, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
   }
@@ -304,7 +304,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         where = location to place the mark.
       Returns: a new #GtkSourceMark, owned by the buffer.
   */
-  gtksource.mark.Mark createSourceMark(string name, string category, gtk.text_iter.TextIter where)
+  gtksource.mark.Mark createSourceMark(string name, string category, gtk.text_iter.TextIter where) nothrow
   {
     GtkSourceMark* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -320,7 +320,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       function, the list of undo actions is cleared and the undo manager
       is re-enabled.
   */
-  void endNotUndoableAction()
+  void endNotUndoableAction() nothrow
   {
     gtk_source_buffer_end_not_undoable_action(cast(GtkSourceBuffer*)this._cPtr);
   }
@@ -340,7 +340,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         start = start of the area to highlight.
         end = end of the area to highlight.
   */
-  void ensureHighlight(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
+  void ensureHighlight(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end) nothrow
   {
     gtk_source_buffer_ensure_highlight(cast(GtkSourceBuffer*)this._cPtr, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null);
   }
@@ -355,7 +355,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         category = category to search for, or null
       Returns: whether iter was moved.
   */
-  bool forwardIterToSourceMark(gtk.text_iter.TextIter iter, string category = null)
+  bool forwardIterToSourceMark(gtk.text_iter.TextIter iter, string category = null) nothrow
   {
     bool _retval;
     const(char)* _category = category.toCString(No.Alloc);
@@ -374,7 +374,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         terminated array of context class names.
         Use [glib.global.strfreev] to free the array if it is no longer needed.
   */
-  string[] getContextClassesAtIter(gtk.text_iter.TextIter iter)
+  string[] getContextClassesAtIter(gtk.text_iter.TextIter iter) nothrow
   {
     char** _cretval;
     _cretval = gtk_source_buffer_get_context_classes_at_iter(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null);
@@ -399,7 +399,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Returns: true if the source buffer will highlight matching
         brackets.
   */
-  bool getHighlightMatchingBrackets()
+  bool getHighlightMatchingBrackets() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_buffer_get_highlight_matching_brackets(cast(GtkSourceBuffer*)this._cPtr);
@@ -411,7 +411,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       buffer.
       Returns: true if syntax highlighting is enabled, false otherwise.
   */
-  bool getHighlightSyntax()
+  bool getHighlightSyntax() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_buffer_get_highlight_syntax(cast(GtkSourceBuffer*)this._cPtr);
@@ -419,7 +419,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   }
 
   /** */
-  bool getImplicitTrailingNewline()
+  bool getImplicitTrailingNewline() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_buffer_get_implicit_trailing_newline(cast(GtkSourceBuffer*)this._cPtr);
@@ -433,7 +433,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Returns: the #GtkSourceLanguage associated
         with the buffer, or null.
   */
-  gtksource.language.Language getLanguage()
+  gtksource.language.Language getLanguage() nothrow
   {
     GtkSourceLanguage* _cretval;
     _cretval = gtk_source_buffer_get_language(cast(GtkSourceBuffer*)this._cPtr);
@@ -445,7 +445,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Determines the number of undo levels the buffer will track for buffer edits.
       Returns: the maximum number of possible undo levels or -1 if no limit is set.
   */
-  int getMaxUndoLevels()
+  int getMaxUndoLevels() nothrow
   {
     int _retval;
     _retval = gtk_source_buffer_get_max_undo_levels(cast(GtkSourceBuffer*)this._cPtr);
@@ -461,7 +461,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         category = category to search for, or null
       Returns: a newly allocated #GSList.
   */
-  gtksource.mark.Mark[] getSourceMarksAtIter(gtk.text_iter.TextIter iter, string category = null)
+  gtksource.mark.Mark[] getSourceMarksAtIter(gtk.text_iter.TextIter iter, string category = null) nothrow
   {
     GSList* _cretval;
     const(char)* _category = category.toCString(No.Alloc);
@@ -479,7 +479,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         category = category to search for, or null
       Returns: a newly allocated #GSList.
   */
-  gtksource.mark.Mark[] getSourceMarksAtLine(int line, string category = null)
+  gtksource.mark.Mark[] getSourceMarksAtLine(int line, string category = null) nothrow
   {
     GSList* _cretval;
     const(char)* _category = category.toCString(No.Alloc);
@@ -495,7 +495,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Returns: the #GtkSourceStyleScheme
         associated with the buffer, or null.
   */
-  gtksource.style_scheme.StyleScheme getStyleScheme()
+  gtksource.style_scheme.StyleScheme getStyleScheme() nothrow
   {
     GtkSourceStyleScheme* _cretval;
     _cretval = gtk_source_buffer_get_style_scheme(cast(GtkSourceBuffer*)this._cPtr);
@@ -510,7 +510,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Returns: the #GtkSourceUndoManager associated
         with the buffer, or null.
   */
-  gtksource.undo_manager.UndoManager getUndoManager()
+  gtksource.undo_manager.UndoManager getUndoManager() nothrow
   {
     GtkSourceUndoManager* _cretval;
     _cretval = gtk_source_buffer_get_undo_manager(cast(GtkSourceBuffer*)this._cPtr);
@@ -532,7 +532,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         contextClass = the context class.
       Returns: whether we found a context class toggle before iter
   */
-  bool iterBackwardToContextClassToggle(gtk.text_iter.TextIter iter, string contextClass)
+  bool iterBackwardToContextClassToggle(gtk.text_iter.TextIter iter, string contextClass) nothrow
   {
     bool _retval;
     const(char)* _contextClass = contextClass.toCString(No.Alloc);
@@ -554,7 +554,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         contextClass = the context class.
       Returns: whether we found a context class toggle after iter
   */
-  bool iterForwardToContextClassToggle(gtk.text_iter.TextIter iter, string contextClass)
+  bool iterForwardToContextClassToggle(gtk.text_iter.TextIter iter, string contextClass) nothrow
   {
     bool _retval;
     const(char)* _contextClass = contextClass.toCString(No.Alloc);
@@ -572,7 +572,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         contextClass = class to search for.
       Returns: whether iter has the context class.
   */
-  bool iterHasContextClass(gtk.text_iter.TextIter iter, string contextClass)
+  bool iterHasContextClass(gtk.text_iter.TextIter iter, string contextClass) nothrow
   {
     bool _retval;
     const(char)* _contextClass = contextClass.toCString(No.Alloc);
@@ -587,7 +587,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         start = a #GtkTextIter.
         end = a #GtkTextIter.
   */
-  void joinLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
+  void joinLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end) nothrow
   {
     gtk_source_buffer_join_lines(cast(GtkSourceBuffer*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
   }
@@ -598,7 +598,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       
       This function emits the #GtkSourceBuffer::redo signal.
   */
-  void redo()
+  void redo() nothrow
   {
     gtk_source_buffer_redo(cast(GtkSourceBuffer*)this._cPtr);
   }
@@ -612,7 +612,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         end = a #GtkTextIter.
         category = category to search for, or null.
   */
-  void removeSourceMarks(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, string category = null)
+  void removeSourceMarks(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, string category = null) nothrow
   {
     const(char)* _category = category.toCString(No.Alloc);
     gtk_source_buffer_remove_source_marks(cast(GtkSourceBuffer*)this._cPtr, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null, _category);
@@ -627,7 +627,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Params:
         highlight = true if you want matching brackets highlighted.
   */
-  void setHighlightMatchingBrackets(bool highlight)
+  void setHighlightMatchingBrackets(bool highlight) nothrow
   {
     gtk_source_buffer_set_highlight_matching_brackets(cast(GtkSourceBuffer*)this._cPtr, highlight);
   }
@@ -646,7 +646,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Params:
         highlight = true to enable syntax highlighting, false to disable it.
   */
-  void setHighlightSyntax(bool highlight)
+  void setHighlightSyntax(bool highlight) nothrow
   {
     gtk_source_buffer_set_highlight_syntax(cast(GtkSourceBuffer*)this._cPtr, highlight);
   }
@@ -671,7 +671,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Params:
         implicitTrailingNewline = the new value.
   */
-  void setImplicitTrailingNewline(bool implicitTrailingNewline)
+  void setImplicitTrailingNewline(bool implicitTrailingNewline) nothrow
   {
     gtk_source_buffer_set_implicit_trailing_newline(cast(GtkSourceBuffer*)this._cPtr, implicitTrailingNewline);
   }
@@ -688,7 +688,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Params:
         language = a #GtkSourceLanguage to set, or null.
   */
-  void setLanguage(gtksource.language.Language language = null)
+  void setLanguage(gtksource.language.Language language = null) nothrow
   {
     gtk_source_buffer_set_language(cast(GtkSourceBuffer*)this._cPtr, language ? cast(GtkSourceLanguage*)language._cPtr(No.Dup) : null);
   }
@@ -705,7 +705,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Params:
         maxUndoLevels = the desired maximum number of undo levels.
   */
-  void setMaxUndoLevels(int maxUndoLevels)
+  void setMaxUndoLevels(int maxUndoLevels) nothrow
   {
     gtk_source_buffer_set_max_undo_levels(cast(GtkSourceBuffer*)this._cPtr, maxUndoLevels);
   }
@@ -728,7 +728,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Params:
         scheme = a #GtkSourceStyleScheme or null.
   */
-  void setStyleScheme(gtksource.style_scheme.StyleScheme scheme = null)
+  void setStyleScheme(gtksource.style_scheme.StyleScheme scheme = null) nothrow
   {
     gtk_source_buffer_set_style_scheme(cast(GtkSourceBuffer*)this._cPtr, scheme ? cast(GtkSourceStyleScheme*)scheme._cPtr(No.Dup) : null);
   }
@@ -740,7 +740,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Params:
         manager = A #GtkSourceUndoManager or null.
   */
-  void setUndoManager(gtksource.undo_manager.UndoManager manager = null)
+  void setUndoManager(gtksource.undo_manager.UndoManager manager = null) nothrow
   {
     gtk_source_buffer_set_undo_manager(cast(GtkSourceBuffer*)this._cPtr, manager ? cast(GtkSourceUndoManager*)(cast(gobject.object.ObjectWrap)manager)._cPtr(No.Dup) : null);
   }
@@ -754,7 +754,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         flags = #GtkSourceSortFlags specifying how the sort should behave
         column = sort considering the text starting at the given column
   */
-  void sortLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtksource.types.SortFlags flags, int column)
+  void sortLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtksource.types.SortFlags flags, int column) nothrow
   {
     gtk_source_buffer_sort_lines(cast(GtkSourceBuffer*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null, flags, column);
   }
@@ -766,7 +766,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       
       This function emits the #GtkSourceBuffer::undo signal.
   */
-  void undo()
+  void undo() nothrow
   {
     gtk_source_buffer_undo(cast(GtkSourceBuffer*)this._cPtr);
   }
@@ -797,7 +797,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectBracketMatched(T)(T callback, Flag!"After" after = No.After)
+  gulong connectBracketMatched(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
@@ -805,7 +805,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtksource.buffer.Buffer)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -820,7 +820,14 @@ class Buffer : gtk.text_buffer.TextBuffer
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.buffer.Buffer.bracketMatched");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -848,7 +855,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectHighlightUpdated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectHighlightUpdated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
@@ -856,7 +863,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtksource.buffer.Buffer)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -871,7 +878,14 @@ class Buffer : gtk.text_buffer.TextBuffer
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.buffer.Buffer.highlightUpdated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -893,13 +907,13 @@ class Buffer : gtk.text_buffer.TextBuffer
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRedo(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRedo(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.buffer.Buffer)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -908,7 +922,14 @@ class Buffer : gtk.text_buffer.TextBuffer
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.buffer.Buffer.redo");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -933,14 +954,14 @@ class Buffer : gtk.text_buffer.TextBuffer
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSourceMarkUpdated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSourceMarkUpdated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_mark.TextMark)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtksource.buffer.Buffer)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -952,7 +973,14 @@ class Buffer : gtk.text_buffer.TextBuffer
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.buffer.Buffer.sourceMarkUpdated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -975,13 +1003,13 @@ class Buffer : gtk.text_buffer.TextBuffer
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUndo(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUndo(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.buffer.Buffer)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -990,7 +1018,14 @@ class Buffer : gtk.text_buffer.TextBuffer
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.buffer.Buffer.undo");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1008,7 +1043,7 @@ class BufferGidBuilderImpl(T) : gtk.text_buffer.TextBufferGidBuilderImpl!T
         propval = Whether to highlight matching brackets in the buffer.
       Returns: Builder instance for fluent chaining
   */
-  T highlightMatchingBrackets(bool propval)
+  T highlightMatchingBrackets(bool propval) nothrow
   {
     return setProperty("highlight-matching-brackets", propval);
   }
@@ -1019,7 +1054,7 @@ class BufferGidBuilderImpl(T) : gtk.text_buffer.TextBufferGidBuilderImpl!T
         propval = Whether to highlight syntax in the buffer.
       Returns: Builder instance for fluent chaining
   */
-  T highlightSyntax(bool propval)
+  T highlightSyntax(bool propval) nothrow
   {
     return setProperty("highlight-syntax", propval);
   }
@@ -1031,13 +1066,13 @@ class BufferGidBuilderImpl(T) : gtk.text_buffer.TextBufferGidBuilderImpl!T
           [gtksource.buffer.Buffer.setImplicitTrailingNewline].
       Returns: Builder instance for fluent chaining
   */
-  T implicitTrailingNewline(bool propval)
+  T implicitTrailingNewline(bool propval) nothrow
   {
     return setProperty("implicit-trailing-newline", propval);
   }
 
   /** */
-  T language(gtksource.language.Language propval)
+  T language(gtksource.language.Language propval) nothrow
   {
     return setProperty("language", propval);
   }
@@ -1049,7 +1084,7 @@ class BufferGidBuilderImpl(T) : gtk.text_buffer.TextBufferGidBuilderImpl!T
           will only affect the default undo manager.
       Returns: Builder instance for fluent chaining
   */
-  T maxUndoLevels(int propval)
+  T maxUndoLevels(int propval) nothrow
   {
     return setProperty("max-undo-levels", propval);
   }
@@ -1062,13 +1097,13 @@ class BufferGidBuilderImpl(T) : gtk.text_buffer.TextBufferGidBuilderImpl!T
           brackets style.
       Returns: Builder instance for fluent chaining
   */
-  T styleScheme(gtksource.style_scheme.StyleScheme propval)
+  T styleScheme(gtksource.style_scheme.StyleScheme propval) nothrow
   {
     return setProperty("style-scheme", propval);
   }
 
   /** */
-  T undoManager(gtksource.undo_manager.UndoManager propval)
+  T undoManager(gtksource.undo_manager.UndoManager propval) nothrow
   {
     return setProperty("undo-manager", propval);
   }
@@ -1081,7 +1116,7 @@ final class BufferGidBuilder : BufferGidBuilderImpl!BufferGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Buffer build()
+  Buffer build() nothrow
   {
     return new Buffer(cast(void*)createGObject(Buffer._getGType), Yes.Take);
   }

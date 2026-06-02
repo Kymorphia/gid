@@ -14,26 +14,26 @@ class GLMixerPad : gstgl.glbase_mixer_pad.GLBaseMixerPad
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_mixer_pad_get_type != &gidSymbolNotFound ? gst_gl_mixer_pad_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLMixerPad self()
+  override GLMixerPad self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class GLMixerPad : gstgl.glbase_mixer_pad.GLBaseMixerPad
       Get builder for [gstgl.glmixer_pad.GLMixerPad]
       Returns: New builder object
   */
-  static GLMixerPadGidBuilder builder()
+  static GLMixerPadGidBuilder builder() nothrow
   {
     return new GLMixerPadGidBuilder;
   }
@@ -60,7 +60,7 @@ final class GLMixerPadGidBuilder : GLMixerPadGidBuilderImpl!GLMixerPadGidBuilder
       Create object from builder.
       Returns: New object
   */
-  GLMixerPad build()
+  GLMixerPad build() nothrow
   {
     return new GLMixerPad(cast(void*)createGObject(GLMixerPad._getGType), No.Take);
   }

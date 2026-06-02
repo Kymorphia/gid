@@ -17,11 +17,8 @@ class VideoResampler
   GstVideoResampler _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_resampler.VideoResampler");
-
     _cInstance = *cast(GstVideoResampler*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class VideoResampler
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class VideoResampler
       Get `inSize` field.
       Returns: the input size
   */
-  @property int inSize()
+  @property int inSize() nothrow
   {
     return (cast(GstVideoResampler*)this._cPtr).inSize;
   }
@@ -48,7 +45,7 @@ class VideoResampler
       Params:
         propval = the input size
   */
-  @property void inSize(int propval)
+  @property void inSize(int propval) nothrow
   {
     (cast(GstVideoResampler*)this._cPtr).inSize = propval;
   }
@@ -57,7 +54,7 @@ class VideoResampler
       Get `outSize` field.
       Returns: the output size
   */
-  @property int outSize()
+  @property int outSize() nothrow
   {
     return (cast(GstVideoResampler*)this._cPtr).outSize;
   }
@@ -67,7 +64,7 @@ class VideoResampler
       Params:
         propval = the output size
   */
-  @property void outSize(int propval)
+  @property void outSize(int propval) nothrow
   {
     (cast(GstVideoResampler*)this._cPtr).outSize = propval;
   }
@@ -76,7 +73,7 @@ class VideoResampler
       Get `maxTaps` field.
       Returns: the maximum number of taps
   */
-  @property uint maxTaps()
+  @property uint maxTaps() nothrow
   {
     return (cast(GstVideoResampler*)this._cPtr).maxTaps;
   }
@@ -86,7 +83,7 @@ class VideoResampler
       Params:
         propval = the maximum number of taps
   */
-  @property void maxTaps(uint propval)
+  @property void maxTaps(uint propval) nothrow
   {
     (cast(GstVideoResampler*)this._cPtr).maxTaps = propval;
   }
@@ -95,7 +92,7 @@ class VideoResampler
       Get `nPhases` field.
       Returns: the number of phases
   */
-  @property uint nPhases()
+  @property uint nPhases() nothrow
   {
     return (cast(GstVideoResampler*)this._cPtr).nPhases;
   }
@@ -105,7 +102,7 @@ class VideoResampler
       Params:
         propval = the number of phases
   */
-  @property void nPhases(uint propval)
+  @property void nPhases(uint propval) nothrow
   {
     (cast(GstVideoResampler*)this._cPtr).nPhases = propval;
   }
@@ -113,13 +110,13 @@ class VideoResampler
   /**
       Clear a previously initialized #GstVideoResampler resampler.
   */
-  void clear()
+  void clear() nothrow
   {
     gst_video_resampler_clear(cast(GstVideoResampler*)this._cPtr);
   }
 
   /** */
-  bool init_(gstvideo.types.VideoResamplerMethod method, gstvideo.types.VideoResamplerFlags flags, uint nPhases, uint nTaps, double shift, uint inSize, uint outSize, gst.structure.Structure options)
+  bool init_(gstvideo.types.VideoResamplerMethod method, gstvideo.types.VideoResamplerFlags flags, uint nPhases, uint nTaps, double shift, uint inSize, uint outSize, gst.structure.Structure options) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_resampler_init(cast(GstVideoResampler*)this._cPtr, method, flags, nPhases, nTaps, shift, inSize, outSize, options ? cast(GstStructure*)options._cPtr(No.Dup) : null);

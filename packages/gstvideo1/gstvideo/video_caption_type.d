@@ -20,7 +20,7 @@ struct VideoCaptionType
         caps = Fixed #GstCaps to parse
       Returns: #GstVideoCaptionType.
   */
-  static gstvideo.types.VideoCaptionType fromCaps(gst.caps.Caps caps)
+  static gstvideo.types.VideoCaptionType fromCaps(gst.caps.Caps caps) nothrow
   {
     GstVideoCaptionType _cretval;
     _cretval = gst_video_caption_type_from_caps(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
@@ -35,7 +35,7 @@ struct VideoCaptionType
         type = #GstVideoCaptionType
       Returns: new #GstCaps
   */
-  static gst.caps.Caps toCaps(gstvideo.types.VideoCaptionType type)
+  static gst.caps.Caps toCaps(gstvideo.types.VideoCaptionType type) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_video_caption_type_to_caps(type);

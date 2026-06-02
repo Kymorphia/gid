@@ -21,7 +21,7 @@ interface TlsBackend
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_tls_backend_get_type != &gidSymbolNotFound ? g_tls_backend_get_type() : cast(GType)0;
@@ -32,7 +32,7 @@ interface TlsBackend
       Returns: a #GTlsBackend, which will be a
             dummy object if no TLS backend is available
   */
-  static gio.tls_backend.TlsBackend getDefault()
+  static gio.tls_backend.TlsBackend getDefault() nothrow
   {
     GTlsBackend* _cretval;
     _cretval = g_tls_backend_get_default();

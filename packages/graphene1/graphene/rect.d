@@ -34,7 +34,7 @@ class Rect : gobject.boxed.Boxed
         origin = the coordinates of the origin of the rectangle
         size = the size of the rectangle
   */
-  this(graphene.point.Point origin = graphene.point.Point.init, graphene.size.Size size = graphene.size.Size.init)
+  this(graphene.point.Point origin = graphene.point.Point.init, graphene.size.Size size = graphene.size.Size.init) nothrow
   {
     super(gMalloc(graphene_rect_t.sizeof), Yes.Take);
     this.origin = origin;
@@ -42,32 +42,32 @@ class Rect : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())graphene_rect_get_type != &gidSymbolNotFound ? graphene_rect_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Rect self()
+  override Rect self() nothrow
   {
     return this;
   }
@@ -76,7 +76,7 @@ class Rect : gobject.boxed.Boxed
       Get `origin` field.
       Returns: the coordinates of the origin of the rectangle
   */
-  @property graphene.point.Point origin()
+  @property graphene.point.Point origin() nothrow
   {
     return cToD!(graphene.point.Point)(cast(void*)&(cast(graphene_rect_t*)this._cPtr).origin);
   }
@@ -86,7 +86,7 @@ class Rect : gobject.boxed.Boxed
       Params:
         propval = the coordinates of the origin of the rectangle
   */
-  @property void origin(graphene.point.Point propval)
+  @property void origin(graphene.point.Point propval) nothrow
   {
     (cast(graphene_rect_t*)this._cPtr).origin = cast(graphene_point_t)propval;
   }
@@ -95,7 +95,7 @@ class Rect : gobject.boxed.Boxed
       Get `size` field.
       Returns: the size of the rectangle
   */
-  @property graphene.size.Size size()
+  @property graphene.size.Size size() nothrow
   {
     return cToD!(graphene.size.Size)(cast(void*)&(cast(graphene_rect_t*)this._cPtr).size);
   }
@@ -105,7 +105,7 @@ class Rect : gobject.boxed.Boxed
       Params:
         propval = the size of the rectangle
   */
-  @property void size(graphene.size.Size propval)
+  @property void size(graphene.size.Size propval) nothrow
   {
     (cast(graphene_rect_t*)this._cPtr).size = cast(graphene_size_t)propval;
   }
@@ -117,7 +117,7 @@ class Rect : gobject.boxed.Boxed
         p = a #graphene_point_t
       Returns: `true` if the rectangle contains the point
   */
-  bool containsPoint(graphene.point.Point p)
+  bool containsPoint(graphene.point.Point p) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_rect_contains_point(cast(const(graphene_rect_t)*)this._cPtr, cast(const(graphene_point_t)*)&p);
@@ -132,7 +132,7 @@ class Rect : gobject.boxed.Boxed
         b = a #graphene_rect_t
       Returns: `true` if the rectangle `a` fully contains `b`
   */
-  bool containsRect(graphene.rect.Rect b)
+  bool containsRect(graphene.rect.Rect b) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_rect_contains_rect(cast(const(graphene_rect_t)*)this._cPtr, b ? cast(const(graphene_rect_t)*)b._cPtr(No.Dup) : null);
@@ -146,7 +146,7 @@ class Rect : gobject.boxed.Boxed
         b = a #graphene_rect_t
       Returns: `true` if the rectangles are equal
   */
-  bool equal(graphene.rect.Rect b)
+  bool equal(graphene.rect.Rect b) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_rect_equal(cast(const(graphene_rect_t)*)this._cPtr, b ? cast(const(graphene_rect_t)*)b._cPtr(No.Dup) : null);
@@ -160,7 +160,7 @@ class Rect : gobject.boxed.Boxed
         p = a #graphene_point_t
         res = return location for the expanded rectangle
   */
-  void expand(graphene.point.Point p, out graphene.rect.Rect res)
+  void expand(graphene.point.Point p, out graphene.rect.Rect res) nothrow
   {
     graphene_rect_t _res;
     graphene_rect_expand(cast(const(graphene_rect_t)*)this._cPtr, cast(const(graphene_point_t)*)&p, &_res);
@@ -171,7 +171,7 @@ class Rect : gobject.boxed.Boxed
       Compute the area of given normalized rectangle.
       Returns: the area of the normalized rectangle
   */
-  float getArea()
+  float getArea() nothrow
   {
     float _retval;
     _retval = graphene_rect_get_area(cast(const(graphene_rect_t)*)this._cPtr);
@@ -184,7 +184,7 @@ class Rect : gobject.boxed.Boxed
       Params:
         p = return location for a #graphene_point_t
   */
-  void getBottomLeft(out graphene.point.Point p)
+  void getBottomLeft(out graphene.point.Point p) nothrow
   {
     graphene_rect_get_bottom_left(cast(const(graphene_rect_t)*)this._cPtr, cast(graphene_point_t*)&p);
   }
@@ -195,7 +195,7 @@ class Rect : gobject.boxed.Boxed
       Params:
         p = return location for a #graphene_point_t
   */
-  void getBottomRight(out graphene.point.Point p)
+  void getBottomRight(out graphene.point.Point p) nothrow
   {
     graphene_rect_get_bottom_right(cast(const(graphene_rect_t)*)this._cPtr, cast(graphene_point_t*)&p);
   }
@@ -206,7 +206,7 @@ class Rect : gobject.boxed.Boxed
       Params:
         p = return location for a #graphene_point_t
   */
-  void getCenter(out graphene.point.Point p)
+  void getCenter(out graphene.point.Point p) nothrow
   {
     graphene_rect_get_center(cast(const(graphene_rect_t)*)this._cPtr, cast(graphene_point_t*)&p);
   }
@@ -215,7 +215,7 @@ class Rect : gobject.boxed.Boxed
       Retrieves the normalized height of the given rectangle.
       Returns: the normalized height of the rectangle
   */
-  float getHeight()
+  float getHeight() nothrow
   {
     float _retval;
     _retval = graphene_rect_get_height(cast(const(graphene_rect_t)*)this._cPtr);
@@ -228,7 +228,7 @@ class Rect : gobject.boxed.Boxed
       Params:
         p = return location for a #graphene_point_t
   */
-  void getTopLeft(out graphene.point.Point p)
+  void getTopLeft(out graphene.point.Point p) nothrow
   {
     graphene_rect_get_top_left(cast(const(graphene_rect_t)*)this._cPtr, cast(graphene_point_t*)&p);
   }
@@ -239,7 +239,7 @@ class Rect : gobject.boxed.Boxed
       Params:
         p = return location for a #graphene_point_t
   */
-  void getTopRight(out graphene.point.Point p)
+  void getTopRight(out graphene.point.Point p) nothrow
   {
     graphene_rect_get_top_right(cast(const(graphene_rect_t)*)this._cPtr, cast(graphene_point_t*)&p);
   }
@@ -251,7 +251,7 @@ class Rect : gobject.boxed.Boxed
         vertices = return location for an array
            of 4 #graphene_vec2_t
   */
-  void getVertices(ref graphene.vec2.Vec2[] vertices)
+  void getVertices(ref graphene.vec2.Vec2[] vertices) nothrow
   {
     graphene_vec2_t[] _vertices;
     _vertices.length = 4;
@@ -265,7 +265,7 @@ class Rect : gobject.boxed.Boxed
       Retrieves the normalized width of the given rectangle.
       Returns: the normalized width of the rectangle
   */
-  float getWidth()
+  float getWidth() nothrow
   {
     float _retval;
     _retval = graphene_rect_get_width(cast(const(graphene_rect_t)*)this._cPtr);
@@ -277,7 +277,7 @@ class Rect : gobject.boxed.Boxed
       rectangle.
       Returns: the normalized X coordinate of the rectangle
   */
-  float getX()
+  float getX() nothrow
   {
     float _retval;
     _retval = graphene_rect_get_x(cast(const(graphene_rect_t)*)this._cPtr);
@@ -289,7 +289,7 @@ class Rect : gobject.boxed.Boxed
       rectangle.
       Returns: the normalized Y coordinate of the rectangle
   */
-  float getY()
+  float getY() nothrow
   {
     float _retval;
     _retval = graphene_rect_get_y(cast(const(graphene_rect_t)*)this._cPtr);
@@ -309,7 +309,7 @@ class Rect : gobject.boxed.Boxed
         height = the height of the graphene_rect_t.size
       Returns: the initialized rectangle
   */
-  graphene.rect.Rect init_(float x, float y, float width, float height)
+  graphene.rect.Rect init_(float x, float y, float width, float height) nothrow
   {
     graphene_rect_t* _cretval;
     _cretval = graphene_rect_init(cast(graphene_rect_t*)this._cPtr, x, y, width, height);
@@ -327,7 +327,7 @@ class Rect : gobject.boxed.Boxed
         src = a #graphene_rect_t
       Returns: the initialized rectangle
   */
-  graphene.rect.Rect initFromRect(graphene.rect.Rect src)
+  graphene.rect.Rect initFromRect(graphene.rect.Rect src) nothrow
   {
     graphene_rect_t* _cretval;
     _cretval = graphene_rect_init_from_rect(cast(graphene_rect_t*)this._cPtr, src ? cast(const(graphene_rect_t)*)src._cPtr(No.Dup) : null);
@@ -356,7 +356,7 @@ class Rect : gobject.boxed.Boxed
         dY = the vertical inset
       Returns: the inset rectangle
   */
-  graphene.rect.Rect inset(float dX, float dY)
+  graphene.rect.Rect inset(float dX, float dY) nothrow
   {
     graphene_rect_t* _cretval;
     _cretval = graphene_rect_inset(cast(graphene_rect_t*)this._cPtr, dX, dY);
@@ -385,7 +385,7 @@ class Rect : gobject.boxed.Boxed
         dY = the vertical inset
         res = return location for the inset rectangle
   */
-  void insetR(float dX, float dY, out graphene.rect.Rect res)
+  void insetR(float dX, float dY, out graphene.rect.Rect res) nothrow
   {
     graphene_rect_t _res;
     graphene_rect_inset_r(cast(const(graphene_rect_t)*)this._cPtr, dX, dY, &_res);
@@ -402,7 +402,7 @@ class Rect : gobject.boxed.Boxed
         res = return location for the
             interpolated rectangle
   */
-  void interpolate(graphene.rect.Rect b, double factor, out graphene.rect.Rect res)
+  void interpolate(graphene.rect.Rect b, double factor, out graphene.rect.Rect res) nothrow
   {
     graphene_rect_t _res;
     graphene_rect_interpolate(cast(const(graphene_rect_t)*)this._cPtr, b ? cast(const(graphene_rect_t)*)b._cPtr(No.Dup) : null, factor, &_res);
@@ -425,7 +425,7 @@ class Rect : gobject.boxed.Boxed
             a #graphene_rect_t
       Returns: `true` if the two rectangles intersect
   */
-  bool intersection(graphene.rect.Rect b, out graphene.rect.Rect res)
+  bool intersection(graphene.rect.Rect b, out graphene.rect.Rect res) nothrow
   {
     bool _retval;
     graphene_rect_t _res;
@@ -442,7 +442,7 @@ class Rect : gobject.boxed.Boxed
       the rectangle.
       Returns: the normalized rectangle
   */
-  graphene.rect.Rect normalize()
+  graphene.rect.Rect normalize() nothrow
   {
     graphene_rect_t* _cretval;
     _cretval = graphene_rect_normalize(cast(graphene_rect_t*)this._cPtr);
@@ -461,7 +461,7 @@ class Rect : gobject.boxed.Boxed
         res = the return location for the
             normalized rectangle
   */
-  void normalizeR(out graphene.rect.Rect res)
+  void normalizeR(out graphene.rect.Rect res) nothrow
   {
     graphene_rect_t _res;
     graphene_rect_normalize_r(cast(const(graphene_rect_t)*)this._cPtr, &_res);
@@ -478,7 +478,7 @@ class Rect : gobject.boxed.Boxed
         dY = the vertical offset
       Returns: the offset rectangle
   */
-  graphene.rect.Rect offset(float dX, float dY)
+  graphene.rect.Rect offset(float dX, float dY) nothrow
   {
     graphene_rect_t* _cretval;
     _cretval = graphene_rect_offset(cast(graphene_rect_t*)this._cPtr, dX, dY);
@@ -497,7 +497,7 @@ class Rect : gobject.boxed.Boxed
         res = return location for the offset
             rectangle
   */
-  void offsetR(float dX, float dY, out graphene.rect.Rect res)
+  void offsetR(float dX, float dY, out graphene.rect.Rect res) nothrow
   {
     graphene_rect_t _res;
     graphene_rect_offset_r(cast(const(graphene_rect_t)*)this._cPtr, dX, dY, &_res);
@@ -521,7 +521,7 @@ class Rect : gobject.boxed.Boxed
   
       Deprecated: Use [graphene.rect.Rect.roundExtents] instead
   */
-  void round(out graphene.rect.Rect res)
+  void round(out graphene.rect.Rect res) nothrow
   {
     graphene_rect_t _res;
     graphene_rect_round(cast(const(graphene_rect_t)*)this._cPtr, &_res);
@@ -555,7 +555,7 @@ class Rect : gobject.boxed.Boxed
         res = return location for the
             rectangle with rounded extents
   */
-  void roundExtents(out graphene.rect.Rect res)
+  void roundExtents(out graphene.rect.Rect res) nothrow
   {
     graphene_rect_t _res;
     graphene_rect_round_extents(cast(const(graphene_rect_t)*)this._cPtr, &_res);
@@ -570,7 +570,7 @@ class Rect : gobject.boxed.Boxed
   
       Deprecated: Use [graphene.rect.Rect.round] instead
   */
-  graphene.rect.Rect roundToPixel()
+  graphene.rect.Rect roundToPixel() nothrow
   {
     graphene_rect_t* _cretval;
     _cretval = graphene_rect_round_to_pixel(cast(graphene_rect_t*)this._cPtr);
@@ -588,7 +588,7 @@ class Rect : gobject.boxed.Boxed
         res = return location for the
             scaled rectangle
   */
-  void scale(float sH, float sV, out graphene.rect.Rect res)
+  void scale(float sH, float sV, out graphene.rect.Rect res) nothrow
   {
     graphene_rect_t _res;
     graphene_rect_scale(cast(const(graphene_rect_t)*)this._cPtr, sH, sV, &_res);
@@ -606,7 +606,7 @@ class Rect : gobject.boxed.Boxed
         b = a #graphene_rect_t
         res = return location for a #graphene_rect_t
   */
-  void union_(graphene.rect.Rect b, out graphene.rect.Rect res)
+  void union_(graphene.rect.Rect b, out graphene.rect.Rect res) nothrow
   {
     graphene_rect_t _res;
     graphene_rect_union(cast(const(graphene_rect_t)*)this._cPtr, b ? cast(const(graphene_rect_t)*)b._cPtr(No.Dup) : null, &_res);
@@ -619,7 +619,7 @@ class Rect : gobject.boxed.Boxed
       The contents of the returned rectangle are undefined.
       Returns: the newly allocated rectangle
   */
-  static graphene.rect.Rect alloc()
+  static graphene.rect.Rect alloc() nothrow
   {
     graphene_rect_t* _cretval;
     _cretval = graphene_rect_alloc();
@@ -632,7 +632,7 @@ class Rect : gobject.boxed.Boxed
       a size of 0, 0.
       Returns: a fixed rectangle
   */
-  static graphene.rect.Rect zero()
+  static graphene.rect.Rect zero() nothrow
   {
     const(graphene_rect_t)* _cretval;
     _cretval = graphene_rect_zero();

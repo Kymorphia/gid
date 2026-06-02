@@ -23,26 +23,26 @@ class FormSubmissionRequest : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_form_submission_request_get_type != &gidSymbolNotFound ? webkit_form_submission_request_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FormSubmissionRequest self()
+  override FormSubmissionRequest self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class FormSubmissionRequest : gobject.object.ObjectWrap
       Get builder for [webkit.form_submission_request.FormSubmissionRequest]
       Returns: New builder object
   */
-  static FormSubmissionRequestGidBuilder builder()
+  static FormSubmissionRequestGidBuilder builder() nothrow
   {
     return new FormSubmissionRequestGidBuilder;
   }
@@ -71,7 +71,7 @@ class FormSubmissionRequest : gobject.object.ObjectWrap
         fieldValues = values of the text fields in the form
       Returns: true if the form contains text fields, or false otherwise
   */
-  bool listTextFields(out string[] fieldNames, out string[] fieldValues)
+  bool listTextFields(out string[] fieldNames, out string[] fieldValues) nothrow
   {
     bool _retval;
     GPtrArray* _fieldNames;
@@ -85,7 +85,7 @@ class FormSubmissionRequest : gobject.object.ObjectWrap
   /**
       Continue the form submission.
   */
-  void submit()
+  void submit() nothrow
   {
     webkit_form_submission_request_submit(cast(WebKitFormSubmissionRequest*)this._cPtr);
   }
@@ -103,7 +103,7 @@ final class FormSubmissionRequestGidBuilder : FormSubmissionRequestGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  FormSubmissionRequest build()
+  FormSubmissionRequest build() nothrow
   {
     return new FormSubmissionRequest(cast(void*)createGObject(FormSubmissionRequest._getGType), No.Take);
   }

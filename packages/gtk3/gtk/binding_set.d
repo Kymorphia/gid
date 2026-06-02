@@ -23,11 +23,8 @@ class BindingSet
   GtkBindingSet _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.binding_set.BindingSet");
-
     _cInstance = *cast(GtkBindingSet*)ptr;
 
     if (take)
@@ -35,7 +32,7 @@ class BindingSet
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -44,7 +41,7 @@ class BindingSet
       Get `setName` field.
       Returns: unique name of this binding set
   */
-  @property string setName()
+  @property string setName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkBindingSet*)this._cPtr).setName);
   }
@@ -54,7 +51,7 @@ class BindingSet
       Params:
         propval = unique name of this binding set
   */
-  @property void setName(string propval)
+  @property void setName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkBindingSet*)this._cPtr).setName);
     dToC(propval, cast(void*)&(cast(GtkBindingSet*)this._cPtr).setName);
@@ -64,7 +61,7 @@ class BindingSet
       Get `priority` field.
       Returns: unused
   */
-  @property int priority()
+  @property int priority() nothrow
   {
     return (cast(GtkBindingSet*)this._cPtr).priority;
   }
@@ -74,7 +71,7 @@ class BindingSet
       Params:
         propval = unused
   */
-  @property void priority(int propval)
+  @property void priority(int propval) nothrow
   {
     (cast(GtkBindingSet*)this._cPtr).priority = propval;
   }
@@ -83,7 +80,7 @@ class BindingSet
       Get `entries` field.
       Returns: the key binding entries in this binding set
   */
-  @property gtk.binding_entry.BindingEntry entries()
+  @property gtk.binding_entry.BindingEntry entries() nothrow
   {
     return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingSet*)this._cPtr).entries, No.Take);
   }
@@ -92,7 +89,7 @@ class BindingSet
       Get `current` field.
       Returns: implementation detail
   */
-  @property gtk.binding_entry.BindingEntry current()
+  @property gtk.binding_entry.BindingEntry current() nothrow
   {
     return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingSet*)this._cPtr).current, No.Take);
   }
@@ -101,7 +98,7 @@ class BindingSet
       Get `parsed` field.
       Returns: whether this binding set stems from a CSS file and is reset upon theme changes
   */
-  @property uint parsed()
+  @property uint parsed() nothrow
   {
     return (cast(GtkBindingSet*)this._cPtr).parsed;
   }
@@ -111,7 +108,7 @@ class BindingSet
       Params:
         propval = whether this binding set stems from a CSS file and is reset upon theme changes
   */
-  @property void parsed(uint propval)
+  @property void parsed(uint propval) nothrow
   {
     (cast(GtkBindingSet*)this._cPtr).parsed = propval;
   }
@@ -126,7 +123,7 @@ class BindingSet
         object = object to activate when binding found
       Returns: true if a binding was found and activated
   */
-  bool activate(uint keyval, gdk.types.ModifierType modifiers, gobject.object.ObjectWrap object)
+  bool activate(uint keyval, gdk.types.ModifierType modifiers, gobject.object.ObjectWrap object) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_binding_set_activate(cast(GtkBindingSet*)this._cPtr, keyval, modifiers, object ? cast(GObject*)object._cPtr(No.Dup) : null);
@@ -144,7 +141,7 @@ class BindingSet
         pathPattern = the actual match pattern
         priority = binding priority
   */
-  void addPath(gtk.types.PathType pathType, string pathPattern, gtk.types.PathPriorityType priority)
+  void addPath(gtk.types.PathType pathType, string pathPattern, gtk.types.PathPriorityType priority) nothrow
   {
     const(char)* _pathPattern = pathPattern.toCString(No.Alloc);
     gtk_binding_set_add_path(cast(GtkBindingSet*)this._cPtr, pathType, _pathPattern, priority);
@@ -160,7 +157,7 @@ class BindingSet
         setName = unique binding set name
       Returns: null or the specified binding set
   */
-  static gtk.binding_set.BindingSet find(string setName)
+  static gtk.binding_set.BindingSet find(string setName) nothrow
   {
     GtkBindingSet* _cretval;
     const(char)* _setName = setName.toCString(No.Alloc);

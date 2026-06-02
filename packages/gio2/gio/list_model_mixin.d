@@ -97,7 +97,7 @@ template ListModelT()
   *   position = the position of the item to fetch
   * Returns: the object at position.
   */
-  T getItem(T)(uint position)
+  T getItem(T)(uint position) nothrow
   {
     auto gobj = cast(GObject*)g_list_model_get_object(cast(GListModel*)(cast(gobject.object.ObjectWrap)this)._cPtr, position);
     return gobject.object.ObjectWrap._getDObject!T(gobj, Yes.Take);
@@ -116,7 +116,7 @@ template ListModelT()
       model.
       Returns: the #GType of the items contained in list.
   */
-  override gobject.types.GType getItemType()
+  override gobject.types.GType getItemType() nothrow
   {
     gobject.types.GType _retval;
     _retval = g_list_model_get_item_type(cast(GListModel*)this._cPtr);
@@ -131,7 +131,7 @@ template ListModelT()
       position until [gio.list_model.ListModel.getItem] returns null.
       Returns: the number of items in list.
   */
-  override uint getNItems()
+  override uint getNItems() nothrow
   {
     uint _retval;
     _retval = g_list_model_get_n_items(cast(GListModel*)this._cPtr);
@@ -156,7 +156,7 @@ template ListModelT()
         position = the position of the item to fetch
       Returns: the object at position.
   */
-  override gobject.object.ObjectWrap getItem(uint position)
+  override gobject.object.ObjectWrap getItem(uint position) nothrow
   {
     GObject* _cretval;
     _cretval = g_list_model_get_object(cast(GListModel*)this._cPtr, position);
@@ -191,7 +191,7 @@ template ListModelT()
         removed = the number of items removed
         added = the number of items added
   */
-  override void itemsChanged(uint position, uint removed, uint added)
+  override void itemsChanged(uint position, uint removed, uint added) nothrow
   {
     g_list_model_items_changed(cast(GListModel*)this._cPtr, position, removed, added);
   }
@@ -222,7 +222,7 @@ template ListModelT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectItemsChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectItemsChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -231,7 +231,7 @@ template ListModelT()
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gio.list_model.ListModel)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -249,7 +249,14 @@ template ListModelT()
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.list_model.ListModel.itemsChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

@@ -19,32 +19,32 @@ class NetworkProxySettings : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_network_proxy_settings_get_type != &gidSymbolNotFound ? webkit_network_proxy_settings_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NetworkProxySettings self()
+  override NetworkProxySettings self() nothrow
   {
     return this;
   }
@@ -87,7 +87,7 @@ class NetworkProxySettings : gobject.boxed.Boxed
         ignoreHosts = an optional list of hosts/IP addresses to not use a proxy for.
       Returns: A new #WebKitNetworkProxySettings.
   */
-  this(string defaultProxyUri = null, string[] ignoreHosts = null)
+  this(string defaultProxyUri = null, string[] ignoreHosts = null) nothrow
   {
     WebKitNetworkProxySettings* _cretval;
     const(char)* _defaultProxyUri = defaultProxyUri.toCString(No.Alloc);
@@ -112,7 +112,7 @@ class NetworkProxySettings : gobject.boxed.Boxed
         scheme = the URI scheme to add a proxy for
         proxyUri = the proxy URI to use for uri_scheme
   */
-  void addProxyForScheme(string scheme, string proxyUri)
+  void addProxyForScheme(string scheme, string proxyUri) nothrow
   {
     const(char)* _scheme = scheme.toCString(No.Alloc);
     const(char)* _proxyUri = proxyUri.toCString(No.Alloc);
@@ -123,7 +123,7 @@ class NetworkProxySettings : gobject.boxed.Boxed
       Make a copy of the #WebKitNetworkProxySettings.
       Returns: A copy of passed in #WebKitNetworkProxySettings
   */
-  webkit.network_proxy_settings.NetworkProxySettings copy()
+  webkit.network_proxy_settings.NetworkProxySettings copy() nothrow
   {
     WebKitNetworkProxySettings* _cretval;
     _cretval = webkit_network_proxy_settings_copy(cast(WebKitNetworkProxySettings*)this._cPtr);

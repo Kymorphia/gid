@@ -16,26 +16,26 @@ class DictionaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_dictionary_data_type_get_type != &gidSymbolNotFound ? garrow_dictionary_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DictionaryDataType self()
+  override DictionaryDataType self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class DictionaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
       Get builder for [arrow.dictionary_data_type.DictionaryDataType]
       Returns: New builder object
   */
-  static DictionaryDataTypeGidBuilder builder()
+  static DictionaryDataTypeGidBuilder builder() nothrow
   {
     return new DictionaryDataTypeGidBuilder;
   }
 
   /** */
-  this(arrow.data_type.DataType indexDataType, arrow.data_type.DataType valueDataType, bool ordered)
+  this(arrow.data_type.DataType indexDataType, arrow.data_type.DataType valueDataType, bool ordered) nothrow
   {
     GArrowDictionaryDataType* _cretval;
     _cretval = garrow_dictionary_data_type_new(indexDataType ? cast(GArrowDataType*)indexDataType._cPtr(No.Dup) : null, valueDataType ? cast(GArrowDataType*)valueDataType._cPtr(No.Dup) : null, ordered);
@@ -58,7 +58,7 @@ class DictionaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
   }
 
   /** */
-  arrow.data_type.DataType getIndexDataType()
+  arrow.data_type.DataType getIndexDataType() nothrow
   {
     GArrowDataType* _cretval;
     _cretval = garrow_dictionary_data_type_get_index_data_type(cast(GArrowDictionaryDataType*)this._cPtr);
@@ -67,7 +67,7 @@ class DictionaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
   }
 
   /** */
-  arrow.data_type.DataType getValueDataType()
+  arrow.data_type.DataType getValueDataType() nothrow
   {
     GArrowDataType* _cretval;
     _cretval = garrow_dictionary_data_type_get_value_data_type(cast(GArrowDictionaryDataType*)this._cPtr);
@@ -76,7 +76,7 @@ class DictionaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
   }
 
   /** */
-  bool isOrdered()
+  bool isOrdered() nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_dictionary_data_type_is_ordered(cast(GArrowDictionaryDataType*)this._cPtr);
@@ -96,7 +96,7 @@ final class DictionaryDataTypeGidBuilder : DictionaryDataTypeGidBuilderImpl!Dict
       Create object from builder.
       Returns: New object
   */
-  DictionaryDataType build()
+  DictionaryDataType build() nothrow
   {
     return new DictionaryDataType(cast(void*)createGObject(DictionaryDataType._getGType), Yes.Take);
   }

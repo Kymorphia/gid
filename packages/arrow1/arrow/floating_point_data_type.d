@@ -14,26 +14,26 @@ class FloatingPointDataType : arrow.numeric_data_type.NumericDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_floating_point_data_type_get_type != &gidSymbolNotFound ? garrow_floating_point_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FloatingPointDataType self()
+  override FloatingPointDataType self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class FloatingPointDataType : arrow.numeric_data_type.NumericDataType
       Get builder for [arrow.floating_point_data_type.FloatingPointDataType]
       Returns: New builder object
   */
-  static FloatingPointDataTypeGidBuilder builder()
+  static FloatingPointDataTypeGidBuilder builder() nothrow
   {
     return new FloatingPointDataTypeGidBuilder;
   }
@@ -60,7 +60,7 @@ final class FloatingPointDataTypeGidBuilder : FloatingPointDataTypeGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  FloatingPointDataType build()
+  FloatingPointDataType build() nothrow
   {
     return new FloatingPointDataType(cast(void*)createGObject(FloatingPointDataType._getGType), No.Take);
   }

@@ -17,26 +17,26 @@ class SinkNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_sink_node_options_get_type != &gidSymbolNotFound ? garrow_sink_node_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SinkNodeOptions self()
+  override SinkNodeOptions self() nothrow
   {
     return this;
   }
@@ -45,13 +45,13 @@ class SinkNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
       Get builder for [arrow.sink_node_options.SinkNodeOptions]
       Returns: New builder object
   */
-  static SinkNodeOptionsGidBuilder builder()
+  static SinkNodeOptionsGidBuilder builder() nothrow
   {
     return new SinkNodeOptionsGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowSinkNodeOptions* _cretval;
     _cretval = garrow_sink_node_options_new();
@@ -59,7 +59,7 @@ class SinkNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   }
 
   /** */
-  arrow.record_batch_reader.RecordBatchReader getReader(arrow.schema.Schema schema)
+  arrow.record_batch_reader.RecordBatchReader getReader(arrow.schema.Schema schema) nothrow
   {
     GArrowRecordBatchReader* _cretval;
     _cretval = garrow_sink_node_options_get_reader(cast(GArrowSinkNodeOptions*)this._cPtr, schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null);
@@ -80,7 +80,7 @@ final class SinkNodeOptionsGidBuilder : SinkNodeOptionsGidBuilderImpl!SinkNodeOp
       Create object from builder.
       Returns: New object
   */
-  SinkNodeOptions build()
+  SinkNodeOptions build() nothrow
   {
     return new SinkNodeOptions(cast(void*)createGObject(SinkNodeOptions._getGType), Yes.Take);
   }

@@ -20,26 +20,26 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_proxy_address_get_type != &gidSymbolNotFound ? g_proxy_address_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ProxyAddress self()
+  override ProxyAddress self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
       Get builder for [gio.proxy_address.ProxyAddress]
       Returns: New builder object
   */
-  static ProxyAddressGidBuilder builder()
+  static ProxyAddressGidBuilder builder() nothrow
   {
     return new ProxyAddressGidBuilder;
   }
@@ -57,7 +57,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
       Get `destinationHostname` property.
       Returns: The proxy destination hostname.
   */
-  @property string destinationHostname()
+  @property string destinationHostname() nothrow
   {
     return getDestinationHostname();
   }
@@ -66,7 +66,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
       Get `destinationPort` property.
       Returns: The proxy destination port.
   */
-  @property uint destinationPort()
+  @property uint destinationPort() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("destination-port");
   }
@@ -76,7 +76,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
       Returns: The protocol being spoke to the destination host, or null if
         the #GProxyAddress doesn't know.
   */
-  @property string destinationProtocol()
+  @property string destinationProtocol() nothrow
   {
     return getDestinationProtocol();
   }
@@ -85,7 +85,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
       Get `password` property.
       Returns: The proxy password.
   */
-  @property string password()
+  @property string password() nothrow
   {
     return getPassword();
   }
@@ -94,7 +94,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
       Get `protocol` property.
       Returns: The proxy protocol.
   */
-  @property string protocol()
+  @property string protocol() nothrow
   {
     return getProtocol();
   }
@@ -104,7 +104,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
       Returns: The URI string that the proxy was constructed from (or null
         if the creator didn't specify this).
   */
-  @property string uri()
+  @property string uri() nothrow
   {
     return getUri();
   }
@@ -113,7 +113,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
       Get `username` property.
       Returns: The proxy username.
   */
-  @property string username()
+  @property string username() nothrow
   {
     return getUsername();
   }
@@ -138,7 +138,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
               (or null).
       Returns: a new #GProxyAddress
   */
-  this(gio.inet_address.InetAddress inetaddr, ushort port, string protocol, string destHostname, ushort destPort, string username = null, string password = null)
+  this(gio.inet_address.InetAddress inetaddr, ushort port, string protocol, string destHostname, ushort destPort, string username = null, string password = null) nothrow
   {
     GSocketAddress* _cretval;
     const(char)* _protocol = protocol.toCString(No.Alloc);
@@ -155,7 +155,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
       itself.
       Returns: the proxy's destination hostname
   */
-  string getDestinationHostname()
+  string getDestinationHostname() nothrow
   {
     const(char)* _cretval;
     _cretval = g_proxy_address_get_destination_hostname(cast(GProxyAddress*)this._cPtr);
@@ -169,7 +169,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
       port number of the proxy itself.
       Returns: the proxy's destination port
   */
-  ushort getDestinationPort()
+  ushort getDestinationPort() nothrow
   {
     ushort _retval;
     _retval = g_proxy_address_get_destination_port(cast(GProxyAddress*)this._cPtr);
@@ -181,7 +181,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
       server; eg, "http" or "ftp".
       Returns: the proxy's destination protocol
   */
-  string getDestinationProtocol()
+  string getDestinationProtocol() nothrow
   {
     const(char)* _cretval;
     _cretval = g_proxy_address_get_destination_protocol(cast(GProxyAddress*)this._cPtr);
@@ -193,7 +193,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
       Gets proxy's password.
       Returns: the proxy's password
   */
-  string getPassword()
+  string getPassword() nothrow
   {
     const(char)* _cretval;
     _cretval = g_proxy_address_get_password(cast(GProxyAddress*)this._cPtr);
@@ -205,7 +205,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
       Gets proxy's protocol. eg, "socks" or "http"
       Returns: the proxy's protocol
   */
-  string getProtocol()
+  string getProtocol() nothrow
   {
     const(char)* _cretval;
     _cretval = g_proxy_address_get_protocol(cast(GProxyAddress*)this._cPtr);
@@ -217,7 +217,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
       Gets the proxy URI that proxy was constructed from.
       Returns: the proxy's URI, or null if unknown
   */
-  string getUri()
+  string getUri() nothrow
   {
     const(char)* _cretval;
     _cretval = g_proxy_address_get_uri(cast(GProxyAddress*)this._cPtr);
@@ -229,7 +229,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
       Gets proxy's username.
       Returns: the proxy's username
   */
-  string getUsername()
+  string getUsername() nothrow
   {
     const(char)* _cretval;
     _cretval = g_proxy_address_get_username(cast(GProxyAddress*)this._cPtr);
@@ -249,7 +249,7 @@ class ProxyAddressGidBuilderImpl(T) : gio.inet_socket_address.InetSocketAddressG
         propval = The proxy destination hostname.
       Returns: Builder instance for fluent chaining
   */
-  T destinationHostname(string propval)
+  T destinationHostname(string propval) nothrow
   {
     return setProperty("destination-hostname", propval);
   }
@@ -260,7 +260,7 @@ class ProxyAddressGidBuilderImpl(T) : gio.inet_socket_address.InetSocketAddressG
         propval = The proxy destination port.
       Returns: Builder instance for fluent chaining
   */
-  T destinationPort(uint propval)
+  T destinationPort(uint propval) nothrow
   {
     return setProperty("destination-port", propval);
   }
@@ -272,7 +272,7 @@ class ProxyAddressGidBuilderImpl(T) : gio.inet_socket_address.InetSocketAddressG
           the #GProxyAddress doesn't know.
       Returns: Builder instance for fluent chaining
   */
-  T destinationProtocol(string propval)
+  T destinationProtocol(string propval) nothrow
   {
     return setProperty("destination-protocol", propval);
   }
@@ -283,7 +283,7 @@ class ProxyAddressGidBuilderImpl(T) : gio.inet_socket_address.InetSocketAddressG
         propval = The proxy password.
       Returns: Builder instance for fluent chaining
   */
-  T password(string propval)
+  T password(string propval) nothrow
   {
     return setProperty("password", propval);
   }
@@ -294,7 +294,7 @@ class ProxyAddressGidBuilderImpl(T) : gio.inet_socket_address.InetSocketAddressG
         propval = The proxy protocol.
       Returns: Builder instance for fluent chaining
   */
-  T protocol(string propval)
+  T protocol(string propval) nothrow
   {
     return setProperty("protocol", propval);
   }
@@ -306,7 +306,7 @@ class ProxyAddressGidBuilderImpl(T) : gio.inet_socket_address.InetSocketAddressG
           if the creator didn't specify this).
       Returns: Builder instance for fluent chaining
   */
-  T uri(string propval)
+  T uri(string propval) nothrow
   {
     return setProperty("uri", propval);
   }
@@ -317,7 +317,7 @@ class ProxyAddressGidBuilderImpl(T) : gio.inet_socket_address.InetSocketAddressG
         propval = The proxy username.
       Returns: Builder instance for fluent chaining
   */
-  T username(string propval)
+  T username(string propval) nothrow
   {
     return setProperty("username", propval);
   }
@@ -330,7 +330,7 @@ final class ProxyAddressGidBuilder : ProxyAddressGidBuilderImpl!ProxyAddressGidB
       Create object from builder.
       Returns: New object
   */
-  ProxyAddress build()
+  ProxyAddress build() nothrow
   {
     return new ProxyAddress(cast(void*)createGObject(ProxyAddress._getGType), Yes.Take);
   }

@@ -18,7 +18,7 @@ struct StateType
         name = a character string state name
       Returns: an #AtkStateType corresponding to name
   */
-  static atk.types.StateType forName(string name)
+  static atk.types.StateType forName(string name) nothrow
   {
     AtkStateType _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -34,7 +34,7 @@ struct StateType
         type = The #AtkStateType whose name is required
       Returns: the string describing the AtkStateType
   */
-  static string getName(atk.types.StateType type)
+  static string getName(atk.types.StateType type) nothrow
   {
     const(char)* _cretval;
     _cretval = atk_state_type_get_name(type);
@@ -49,7 +49,7 @@ struct StateType
         name = a character string describing the new state.
       Returns: an #AtkState value for the new state.
   */
-  static atk.types.StateType register(string name)
+  static atk.types.StateType register(string name) nothrow
   {
     AtkStateType _cretval;
     const(char)* _name = name.toCString(No.Alloc);

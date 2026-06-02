@@ -22,26 +22,26 @@ class DBusObjectProxy : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_object_proxy_get_type != &gidSymbolNotFound ? g_dbus_object_proxy_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DBusObjectProxy self()
+  override DBusObjectProxy self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class DBusObjectProxy : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
       Get builder for [gio.dbus_object_proxy.DBusObjectProxy]
       Returns: New builder object
   */
-  static DBusObjectProxyGidBuilder builder()
+  static DBusObjectProxyGidBuilder builder() nothrow
   {
     return new DBusObjectProxyGidBuilder;
   }
@@ -59,7 +59,7 @@ class DBusObjectProxy : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
       Get `gConnection` property.
       Returns: The connection of the proxy.
   */
-  @property gio.dbus_connection.DBusConnection gConnection()
+  @property gio.dbus_connection.DBusConnection gConnection() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.dbus_connection.DBusConnection)("g-connection");
   }
@@ -68,7 +68,7 @@ class DBusObjectProxy : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
       Get `gObjectPath` property.
       Returns: The object path of the proxy.
   */
-  @property string gObjectPath()
+  @property string gObjectPath() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("g-object-path");
   }
@@ -84,7 +84,7 @@ class DBusObjectProxy : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
         objectPath = the object path
       Returns: a new #GDBusObjectProxy
   */
-  this(gio.dbus_connection.DBusConnection connection, string objectPath)
+  this(gio.dbus_connection.DBusConnection connection, string objectPath) nothrow
   {
     GDBusObjectProxy* _cretval;
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
@@ -97,7 +97,7 @@ class DBusObjectProxy : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
       Returns: A #GDBusConnection. Do not free, the
           object is owned by proxy.
   */
-  gio.dbus_connection.DBusConnection getConnection()
+  gio.dbus_connection.DBusConnection getConnection() nothrow
   {
     GDBusConnection* _cretval;
     _cretval = g_dbus_object_proxy_get_connection(cast(GDBusObjectProxy*)this._cPtr);
@@ -118,7 +118,7 @@ class DBusObjectProxyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The connection of the proxy.
       Returns: Builder instance for fluent chaining
   */
-  T gConnection(gio.dbus_connection.DBusConnection propval)
+  T gConnection(gio.dbus_connection.DBusConnection propval) nothrow
   {
     return setProperty("g-connection", propval);
   }
@@ -129,7 +129,7 @@ class DBusObjectProxyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The object path of the proxy.
       Returns: Builder instance for fluent chaining
   */
-  T gObjectPath(string propval)
+  T gObjectPath(string propval) nothrow
   {
     return setProperty("g-object-path", propval);
   }
@@ -142,7 +142,7 @@ final class DBusObjectProxyGidBuilder : DBusObjectProxyGidBuilderImpl!DBusObject
       Create object from builder.
       Returns: New object
   */
-  DBusObjectProxy build()
+  DBusObjectProxy build() nothrow
   {
     return new DBusObjectProxy(cast(void*)createGObject(DBusObjectProxy._getGType), Yes.Take);
   }

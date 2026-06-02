@@ -20,26 +20,26 @@ class EventController : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_event_controller_get_type != &gidSymbolNotFound ? gtk_event_controller_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EventController self()
+  override EventController self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class EventController : gobject.object.ObjectWrap
       Get builder for [gtk.event_controller.EventController]
       Returns: New builder object
   */
-  static EventControllerGidBuilder builder()
+  static EventControllerGidBuilder builder() nothrow
   {
     return new EventControllerGidBuilder;
   }
@@ -57,7 +57,7 @@ class EventController : gobject.object.ObjectWrap
       Get `propagationPhase` property.
       Returns: The propagation phase at which this controller will handle events.
   */
-  @property gtk.types.PropagationPhase propagationPhase()
+  @property gtk.types.PropagationPhase propagationPhase() nothrow
   {
     return getPropagationPhase();
   }
@@ -67,7 +67,7 @@ class EventController : gobject.object.ObjectWrap
       Params:
         propval = The propagation phase at which this controller will handle events.
   */
-  @property void propagationPhase(gtk.types.PropagationPhase propval)
+  @property void propagationPhase(gtk.types.PropagationPhase propval) nothrow
   {
     setPropagationPhase(propval);
   }
@@ -76,7 +76,7 @@ class EventController : gobject.object.ObjectWrap
       Get `widget` property.
       Returns: The widget receiving the #GdkEvents that the controller will handle.
   */
-  @property gtk.widget.Widget widget()
+  @property gtk.widget.Widget widget() nothrow
   {
     return getWidget();
   }
@@ -85,7 +85,7 @@ class EventController : gobject.object.ObjectWrap
       Gets the propagation phase at which controller handles events.
       Returns: the propagation phase
   */
-  gtk.types.PropagationPhase getPropagationPhase()
+  gtk.types.PropagationPhase getPropagationPhase() nothrow
   {
     GtkPropagationPhase _cretval;
     _cretval = gtk_event_controller_get_propagation_phase(cast(GtkEventController*)this._cPtr);
@@ -97,7 +97,7 @@ class EventController : gobject.object.ObjectWrap
       Returns the #GtkWidget this controller relates to.
       Returns: a #GtkWidget
   */
-  gtk.widget.Widget getWidget()
+  gtk.widget.Widget getWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_event_controller_get_widget(cast(GtkEventController*)this._cPtr);
@@ -114,7 +114,7 @@ class EventController : gobject.object.ObjectWrap
       Returns: true if the event was potentially useful to trigger the
                  controller action
   */
-  bool handleEvent(gdk.event.Event event)
+  bool handleEvent(gdk.event.Event event) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_event_controller_handle_event(cast(GtkEventController*)this._cPtr, event ? cast(const(GdkEvent)*)event._cPtr(No.Dup) : null);
@@ -126,7 +126,7 @@ class EventController : gobject.object.ObjectWrap
       the controller did through #GtkEventController::handle-event
       will be dropped at this point.
   */
-  void reset()
+  void reset() nothrow
   {
     gtk_event_controller_reset(cast(GtkEventController*)this._cPtr);
   }
@@ -141,7 +141,7 @@ class EventController : gobject.object.ObjectWrap
       Params:
         phase = a propagation phase
   */
-  void setPropagationPhase(gtk.types.PropagationPhase phase)
+  void setPropagationPhase(gtk.types.PropagationPhase phase) nothrow
   {
     gtk_event_controller_set_propagation_phase(cast(GtkEventController*)this._cPtr, phase);
   }
@@ -157,7 +157,7 @@ class EventControllerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The propagation phase at which this controller will handle events.
       Returns: Builder instance for fluent chaining
   */
-  T propagationPhase(gtk.types.PropagationPhase propval)
+  T propagationPhase(gtk.types.PropagationPhase propval) nothrow
   {
     return setProperty("propagation-phase", propval);
   }
@@ -168,7 +168,7 @@ class EventControllerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The widget receiving the #GdkEvents that the controller will handle.
       Returns: Builder instance for fluent chaining
   */
-  T widget(gtk.widget.Widget propval)
+  T widget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("widget", propval);
   }
@@ -181,7 +181,7 @@ final class EventControllerGidBuilder : EventControllerGidBuilderImpl!EventContr
       Create object from builder.
       Returns: New object
   */
-  EventController build()
+  EventController build() nothrow
   {
     return new EventController(cast(void*)createGObject(EventController._getGType), No.Take);
   }

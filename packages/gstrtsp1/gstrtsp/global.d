@@ -16,7 +16,7 @@ import gstrtsp.types;
     Params:
       credentials = a null-terminated array of #GstRTSPAuthCredential
 */
-void rtspAuthCredentialsFree(gstrtsp.rtspauth_credential.RTSPAuthCredential credentials)
+void rtspAuthCredentialsFree(gstrtsp.rtspauth_credential.RTSPAuthCredential credentials) nothrow
 {
   gst_rtsp_auth_credentials_free(credentials ? cast(GstRTSPAuthCredential**)credentials._cPtr(No.Dup) : null);
 }
@@ -29,7 +29,7 @@ void rtspAuthCredentialsFree(gstrtsp.rtspauth_credential.RTSPAuthCredential cred
     Returns: a #GstRTSPHeaderField for header or #GST_RTSP_HDR_INVALID if the
       header field is unknown.
 */
-gstrtsp.types.RTSPHeaderField rtspFindHeaderField(string header)
+gstrtsp.types.RTSPHeaderField rtspFindHeaderField(string header) nothrow
 {
   GstRTSPHeaderField _cretval;
   const(char)* _header = header.toCString(No.Alloc);
@@ -46,7 +46,7 @@ gstrtsp.types.RTSPHeaderField rtspFindHeaderField(string header)
     Returns: a #GstRTSPMethod for method or #GST_RTSP_INVALID if the
       method is unknown.
 */
-gstrtsp.types.RTSPMethod rtspFindMethod(string method)
+gstrtsp.types.RTSPMethod rtspFindMethod(string method) nothrow
 {
   GstRTSPMethod _cretval;
   const(char)* _method = method.toCString(No.Alloc);
@@ -71,7 +71,7 @@ gstrtsp.types.RTSPMethod rtspFindMethod(string method)
       nonce = Nonce
     Returns: Authentication response or null if unsupported
 */
-string rtspGenerateDigestAuthResponse(string algorithm, string method, string realm, string username, string password, string uri, string nonce)
+string rtspGenerateDigestAuthResponse(string algorithm, string method, string realm, string username, string password, string uri, string nonce) nothrow
 {
   char* _cretval;
   const(char)* _algorithm = algorithm.toCString(No.Alloc);
@@ -103,7 +103,7 @@ string rtspGenerateDigestAuthResponse(string algorithm, string method, string re
       nonce = Nonce
     Returns: Authentication response or null if unsupported
 */
-string rtspGenerateDigestAuthResponseFromMd5(string algorithm, string method, string md5, string uri, string nonce)
+string rtspGenerateDigestAuthResponseFromMd5(string algorithm, string method, string md5, string uri, string nonce) nothrow
 {
   char* _cretval;
   const(char)* _algorithm = algorithm.toCString(No.Alloc);
@@ -123,7 +123,7 @@ string rtspGenerateDigestAuthResponseFromMd5(string algorithm, string method, st
       field = a #GstRTSPHeaderField
     Returns: true if multiple headers are allowed.
 */
-bool rtspHeaderAllowMultiple(gstrtsp.types.RTSPHeaderField field)
+bool rtspHeaderAllowMultiple(gstrtsp.types.RTSPHeaderField field) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_rtsp_header_allow_multiple(field);
@@ -137,7 +137,7 @@ bool rtspHeaderAllowMultiple(gstrtsp.types.RTSPHeaderField field)
       field = a #GstRTSPHeaderField
     Returns: a string representation of field.
 */
-string rtspHeaderAsText(gstrtsp.types.RTSPHeaderField field)
+string rtspHeaderAsText(gstrtsp.types.RTSPHeaderField field) nothrow
 {
   const(char)* _cretval;
   _cretval = gst_rtsp_header_as_text(field);
@@ -152,7 +152,7 @@ string rtspHeaderAsText(gstrtsp.types.RTSPHeaderField field)
       msg = a location for the new #GstRTSPMessage
     Returns: a #GstRTSPResult.
 */
-gstrtsp.types.RTSPResult rtspMessageNew(out gstrtsp.rtspmessage.RTSPMessage msg)
+gstrtsp.types.RTSPResult rtspMessageNew(out gstrtsp.rtspmessage.RTSPMessage msg) nothrow
 {
   GstRTSPResult _cretval;
   GstRTSPMessage* _msg;
@@ -171,7 +171,7 @@ gstrtsp.types.RTSPResult rtspMessageNew(out gstrtsp.rtspmessage.RTSPMessage msg)
       channel = the channel
     Returns: a #GstRTSPResult.
 */
-gstrtsp.types.RTSPResult rtspMessageNewData(out gstrtsp.rtspmessage.RTSPMessage msg, ubyte channel)
+gstrtsp.types.RTSPResult rtspMessageNewData(out gstrtsp.rtspmessage.RTSPMessage msg, ubyte channel) nothrow
 {
   GstRTSPResult _cretval;
   GstRTSPMessage* _msg;
@@ -191,7 +191,7 @@ gstrtsp.types.RTSPResult rtspMessageNewData(out gstrtsp.rtspmessage.RTSPMessage 
       uri = the uri of the request
     Returns: a #GstRTSPResult.
 */
-gstrtsp.types.RTSPResult rtspMessageNewRequest(out gstrtsp.rtspmessage.RTSPMessage msg, gstrtsp.types.RTSPMethod method, string uri)
+gstrtsp.types.RTSPResult rtspMessageNewRequest(out gstrtsp.rtspmessage.RTSPMessage msg, gstrtsp.types.RTSPMethod method, string uri) nothrow
 {
   GstRTSPResult _cretval;
   GstRTSPMessage* _msg;
@@ -218,7 +218,7 @@ gstrtsp.types.RTSPResult rtspMessageNewRequest(out gstrtsp.rtspmessage.RTSPMessa
       request = the request that triggered the response or null
     Returns: a #GstRTSPResult.
 */
-gstrtsp.types.RTSPResult rtspMessageNewResponse(out gstrtsp.rtspmessage.RTSPMessage msg, gstrtsp.types.RTSPStatusCode code, string reason = null, gstrtsp.rtspmessage.RTSPMessage request = null)
+gstrtsp.types.RTSPResult rtspMessageNewResponse(out gstrtsp.rtspmessage.RTSPMessage msg, gstrtsp.types.RTSPStatusCode code, string reason = null, gstrtsp.rtspmessage.RTSPMessage request = null) nothrow
 {
   GstRTSPResult _cretval;
   GstRTSPMessage* _msg;
@@ -236,7 +236,7 @@ gstrtsp.types.RTSPResult rtspMessageNewResponse(out gstrtsp.rtspmessage.RTSPMess
       options = one or more #GstRTSPMethod
     Returns: a new string of options. [glib.global.gfree] after usage.
 */
-string rtspOptionsAsText(gstrtsp.types.RTSPMethod options)
+string rtspOptionsAsText(gstrtsp.types.RTSPMethod options) nothrow
 {
   char* _cretval;
   _cretval = gst_rtsp_options_as_text(options);
@@ -252,7 +252,7 @@ string rtspOptionsAsText(gstrtsp.types.RTSPMethod options)
       options = a comma separated list of options
     Returns: a #GstRTSPMethod
 */
-gstrtsp.types.RTSPMethod rtspOptionsFromText(string options)
+gstrtsp.types.RTSPMethod rtspOptionsFromText(string options) nothrow
 {
   GstRTSPMethod _cretval;
   const(char)* _options = options.toCString(No.Alloc);
@@ -268,7 +268,7 @@ gstrtsp.types.RTSPMethod rtspOptionsFromText(string options)
       code = a #GstRTSPStatusCode
     Returns: a string representation of code.
 */
-string rtspStatusAsText(gstrtsp.types.RTSPStatusCode code)
+string rtspStatusAsText(gstrtsp.types.RTSPStatusCode code) nothrow
 {
   const(char)* _cretval;
   _cretval = gst_rtsp_status_as_text(code);
@@ -283,7 +283,7 @@ string rtspStatusAsText(gstrtsp.types.RTSPStatusCode code)
       result = a #GstRTSPResult
     Returns: a newly allocated string. [glib.global.gfree] after usage.
 */
-string rtspStrresult(gstrtsp.types.RTSPResult result)
+string rtspStrresult(gstrtsp.types.RTSPResult result) nothrow
 {
   char* _cretval;
   _cretval = gst_rtsp_strresult(result);

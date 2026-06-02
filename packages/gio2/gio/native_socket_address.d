@@ -21,26 +21,26 @@ class NativeSocketAddress : gio.socket_address.SocketAddress
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_native_socket_address_get_type != &gidSymbolNotFound ? g_native_socket_address_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NativeSocketAddress self()
+  override NativeSocketAddress self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class NativeSocketAddress : gio.socket_address.SocketAddress
       Get builder for [gio.native_socket_address.NativeSocketAddress]
       Returns: New builder object
   */
-  static NativeSocketAddressGidBuilder builder()
+  static NativeSocketAddressGidBuilder builder() nothrow
   {
     return new NativeSocketAddressGidBuilder;
   }
@@ -62,7 +62,7 @@ class NativeSocketAddress : gio.socket_address.SocketAddress
         len = the length of native, in bytes
       Returns: a new #GNativeSocketAddress
   */
-  this(void* native, size_t len)
+  this(void* native, size_t len) nothrow
   {
     GSocketAddress* _cretval;
     _cretval = g_native_socket_address_new(native, len);
@@ -83,7 +83,7 @@ final class NativeSocketAddressGidBuilder : NativeSocketAddressGidBuilderImpl!Na
       Create object from builder.
       Returns: New object
   */
-  NativeSocketAddress build()
+  NativeSocketAddress build() nothrow
   {
     return new NativeSocketAddress(cast(void*)createGObject(NativeSocketAddress._getGType), Yes.Take);
   }

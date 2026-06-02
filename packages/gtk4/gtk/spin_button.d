@@ -144,26 +144,26 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_spin_button_get_type != &gidSymbolNotFound ? gtk_spin_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SpinButton self()
+  override SpinButton self() nothrow
   {
     return this;
   }
@@ -172,7 +172,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Get builder for [gtk.spin_button.SpinButton]
       Returns: New builder object
   */
-  static SpinButtonGidBuilder builder()
+  static SpinButtonGidBuilder builder() nothrow
   {
     return new SpinButtonGidBuilder;
   }
@@ -183,7 +183,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
         
         See [gtk.spin_button.SpinButton.activate] for what counts as activation.
   */
-  @property bool activatesDefault()
+  @property bool activatesDefault() nothrow
   {
     return getActivatesDefault();
   }
@@ -195,7 +195,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
           
           See [gtk.spin_button.SpinButton.activate] for what counts as activation.
   */
-  @property void activatesDefault(bool propval)
+  @property void activatesDefault(bool propval) nothrow
   {
     setActivatesDefault(propval);
   }
@@ -204,7 +204,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Get `adjustment` property.
       Returns: The adjustment that holds the value of the spin button.
   */
-  @property gtk.adjustment.Adjustment adjustment()
+  @property gtk.adjustment.Adjustment adjustment() nothrow
   {
     return getAdjustment();
   }
@@ -214,7 +214,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Params:
         propval = The adjustment that holds the value of the spin button.
   */
-  @property void adjustment(gtk.adjustment.Adjustment propval)
+  @property void adjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     setAdjustment(propval);
   }
@@ -223,7 +223,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Get `climbRate` property.
       Returns: The acceleration rate when you hold down a button or key.
   */
-  @property double climbRate()
+  @property double climbRate() nothrow
   {
     return getClimbRate();
   }
@@ -233,7 +233,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Params:
         propval = The acceleration rate when you hold down a button or key.
   */
-  @property void climbRate(double propval)
+  @property void climbRate(double propval) nothrow
   {
     setClimbRate(propval);
   }
@@ -242,7 +242,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Get `digits` property.
       Returns: The number of decimal places to display.
   */
-  @property uint digits()
+  @property uint digits() nothrow
   {
     return getDigits();
   }
@@ -252,7 +252,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Params:
         propval = The number of decimal places to display.
   */
-  @property void digits(uint propval)
+  @property void digits(uint propval) nothrow
   {
     setDigits(propval);
   }
@@ -261,7 +261,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Get `numeric` property.
       Returns: Whether non-numeric characters should be ignored.
   */
-  @property bool numeric()
+  @property bool numeric() nothrow
   {
     return getNumeric();
   }
@@ -271,7 +271,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Params:
         propval = Whether non-numeric characters should be ignored.
   */
-  @property void numeric(bool propval)
+  @property void numeric(bool propval) nothrow
   {
     setNumeric(propval);
   }
@@ -281,7 +281,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Returns: Whether erroneous values are automatically changed to the spin buttons
         nearest step increment.
   */
-  @property bool snapToTicks()
+  @property bool snapToTicks() nothrow
   {
     return getSnapToTicks();
   }
@@ -292,7 +292,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
         propval = Whether erroneous values are automatically changed to the spin buttons
           nearest step increment.
   */
-  @property void snapToTicks(bool propval)
+  @property void snapToTicks(bool propval) nothrow
   {
     setSnapToTicks(propval);
   }
@@ -302,7 +302,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Returns: Whether the spin button should update always, or only when the value
         is acceptable.
   */
-  @property gtk.types.SpinButtonUpdatePolicy updatePolicy()
+  @property gtk.types.SpinButtonUpdatePolicy updatePolicy() nothrow
   {
     return getUpdatePolicy();
   }
@@ -313,7 +313,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
         propval = Whether the spin button should update always, or only when the value
           is acceptable.
   */
-  @property void updatePolicy(gtk.types.SpinButtonUpdatePolicy propval)
+  @property void updatePolicy(gtk.types.SpinButtonUpdatePolicy propval) nothrow
   {
     setUpdatePolicy(propval);
   }
@@ -322,7 +322,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Get `value` property.
       Returns: The current value.
   */
-  @property double value()
+  @property double value() nothrow
   {
     return getValue();
   }
@@ -332,7 +332,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Params:
         propval = The current value.
   */
-  @property void value(double propval)
+  @property void value(double propval) nothrow
   {
     setValue(propval);
   }
@@ -341,7 +341,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Get `wrap` property.
       Returns: Whether a spin button should wrap upon reaching its limits.
   */
-  @property bool wrap()
+  @property bool wrap() nothrow
   {
     return getWrap();
   }
@@ -351,7 +351,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Params:
         propval = Whether a spin button should wrap upon reaching its limits.
   */
-  @property void wrap(bool propval)
+  @property void wrap(bool propval) nothrow
   {
     setWrap(propval);
   }
@@ -371,7 +371,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
         digits = the number of decimal places to display
       Returns: The new [gtk.spin_button.SpinButton]
   */
-  this(gtk.adjustment.Adjustment adjustment, double climbRate, uint digits)
+  this(gtk.adjustment.Adjustment adjustment, double climbRate, uint digits) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_spin_button_new(adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null, climbRate, digits);
@@ -399,7 +399,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
         step = Increment added or subtracted by spinning the widget
       Returns: The new [gtk.spin_button.SpinButton]
   */
-  static gtk.spin_button.SpinButton newWithRange(double min, double max, double step)
+  static gtk.spin_button.SpinButton newWithRange(double min, double max, double step) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_spin_button_new_with_range(min, max, step);
@@ -419,7 +419,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
         climbRate = the new climb rate
         digits = the number of decimal places to display in the spin button
   */
-  void configure(gtk.adjustment.Adjustment adjustment, double climbRate, uint digits)
+  void configure(gtk.adjustment.Adjustment adjustment, double climbRate, uint digits) nothrow
   {
     gtk_spin_button_configure(cast(GtkSpinButton*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null, climbRate, digits);
   }
@@ -428,7 +428,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Retrieves the value set by [gtk.spin_button.SpinButton.setActivatesDefault].
       Returns: true if the spin button will activate the default widget
   */
-  bool getActivatesDefault()
+  bool getActivatesDefault() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_spin_button_get_activates_default(cast(GtkSpinButton*)this._cPtr);
@@ -439,7 +439,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Get the adjustment associated with a [gtk.spin_button.SpinButton].
       Returns: the [gtk.adjustment.Adjustment] of spin_button
   */
-  gtk.adjustment.Adjustment getAdjustment()
+  gtk.adjustment.Adjustment getAdjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_spin_button_get_adjustment(cast(GtkSpinButton*)this._cPtr);
@@ -451,7 +451,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Returns the acceleration rate for repeated changes.
       Returns: the acceleration rate
   */
-  double getClimbRate()
+  double getClimbRate() nothrow
   {
     double _retval;
     _retval = gtk_spin_button_get_climb_rate(cast(GtkSpinButton*)this._cPtr);
@@ -462,7 +462,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Fetches the precision of spin_button.
       Returns: the current precision
   */
-  uint getDigits()
+  uint getDigits() nothrow
   {
     uint _retval;
     _retval = gtk_spin_button_get_digits(cast(GtkSpinButton*)this._cPtr);
@@ -479,7 +479,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
         step = location to store step increment
         page = location to store page increment
   */
-  void getIncrements(out double step, out double page)
+  void getIncrements(out double step, out double page) nothrow
   {
     gtk_spin_button_get_increments(cast(GtkSpinButton*)this._cPtr, cast(double*)&step, cast(double*)&page);
   }
@@ -488,7 +488,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Returns whether non-numeric text can be typed into the spin button.
       Returns: true if only numeric text can be entered
   */
-  bool getNumeric()
+  bool getNumeric() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_spin_button_get_numeric(cast(GtkSpinButton*)this._cPtr);
@@ -504,7 +504,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
         min = location to store minimum allowed value
         max = location to store maximum allowed value
   */
-  void getRange(out double min, out double max)
+  void getRange(out double min, out double max) nothrow
   {
     gtk_spin_button_get_range(cast(GtkSpinButton*)this._cPtr, cast(double*)&min, cast(double*)&max);
   }
@@ -513,7 +513,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Returns whether the values are corrected to the nearest step.
       Returns: true if values are snapped to the nearest step
   */
-  bool getSnapToTicks()
+  bool getSnapToTicks() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_spin_button_get_snap_to_ticks(cast(GtkSpinButton*)this._cPtr);
@@ -526,7 +526,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       See [gtk.spin_button.SpinButton.setUpdatePolicy].
       Returns: the current update policy
   */
-  gtk.types.SpinButtonUpdatePolicy getUpdatePolicy()
+  gtk.types.SpinButtonUpdatePolicy getUpdatePolicy() nothrow
   {
     GtkSpinButtonUpdatePolicy _cretval;
     _cretval = gtk_spin_button_get_update_policy(cast(GtkSpinButton*)this._cPtr);
@@ -538,7 +538,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Get the value in the spin_button.
       Returns: the value of spin_button
   */
-  double getValue()
+  double getValue() nothrow
   {
     double _retval;
     _retval = gtk_spin_button_get_value(cast(GtkSpinButton*)this._cPtr);
@@ -549,7 +549,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Get the value spin_button represented as an integer.
       Returns: the value of spin_button
   */
-  int getValueAsInt()
+  int getValueAsInt() nothrow
   {
     int _retval;
     _retval = gtk_spin_button_get_value_as_int(cast(GtkSpinButton*)this._cPtr);
@@ -562,7 +562,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       exceeded.
       Returns: true if the spin button wraps around
   */
-  bool getWrap()
+  bool getWrap() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_spin_button_get_wrap(cast(GtkSpinButton*)this._cPtr);
@@ -578,7 +578,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Params:
         activatesDefault = true to activate window’s default widget on activation
   */
-  void setActivatesDefault(bool activatesDefault)
+  void setActivatesDefault(bool activatesDefault) nothrow
   {
     gtk_spin_button_set_activates_default(cast(GtkSpinButton*)this._cPtr, activatesDefault);
   }
@@ -589,7 +589,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Params:
         adjustment = a [gtk.adjustment.Adjustment] to replace the existing adjustment
   */
-  void setAdjustment(gtk.adjustment.Adjustment adjustment)
+  void setAdjustment(gtk.adjustment.Adjustment adjustment) nothrow
   {
     gtk_spin_button_set_adjustment(cast(GtkSpinButton*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
@@ -601,7 +601,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Params:
         climbRate = the rate of acceleration, must be >= 0
   */
-  void setClimbRate(double climbRate)
+  void setClimbRate(double climbRate) nothrow
   {
     gtk_spin_button_set_climb_rate(cast(GtkSpinButton*)this._cPtr, climbRate);
   }
@@ -615,7 +615,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
         digits = the number of digits after the decimal point to be
             displayed for the spin button’s value
   */
-  void setDigits(uint digits)
+  void setDigits(uint digits) nothrow
   {
     gtk_spin_button_set_digits(cast(GtkSpinButton*)this._cPtr, digits);
   }
@@ -630,7 +630,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
         step = increment applied for a button 1 press.
         page = increment applied for a button 2 press.
   */
-  void setIncrements(double step, double page)
+  void setIncrements(double step, double page) nothrow
   {
     gtk_spin_button_set_increments(cast(GtkSpinButton*)this._cPtr, step, page);
   }
@@ -642,7 +642,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Params:
         numeric = flag indicating if only numeric entry is allowed
   */
-  void setNumeric(bool numeric)
+  void setNumeric(bool numeric) nothrow
   {
     gtk_spin_button_set_numeric(cast(GtkSpinButton*)this._cPtr, numeric);
   }
@@ -657,7 +657,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
         min = minimum allowable value
         max = maximum allowable value
   */
-  void setRange(double min, double max)
+  void setRange(double min, double max) nothrow
   {
     gtk_spin_button_set_range(cast(GtkSpinButton*)this._cPtr, min, max);
   }
@@ -670,7 +670,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Params:
         snapToTicks = a flag indicating if invalid values should be corrected
   */
-  void setSnapToTicks(bool snapToTicks)
+  void setSnapToTicks(bool snapToTicks) nothrow
   {
     gtk_spin_button_set_snap_to_ticks(cast(GtkSpinButton*)this._cPtr, snapToTicks);
   }
@@ -684,7 +684,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Params:
         policy = a [gtk.types.SpinButtonUpdatePolicy] value
   */
-  void setUpdatePolicy(gtk.types.SpinButtonUpdatePolicy policy)
+  void setUpdatePolicy(gtk.types.SpinButtonUpdatePolicy policy) nothrow
   {
     gtk_spin_button_set_update_policy(cast(GtkSpinButton*)this._cPtr, policy);
   }
@@ -695,7 +695,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Params:
         value = the new value
   */
-  void setValue(double value)
+  void setValue(double value) nothrow
   {
     gtk_spin_button_set_value(cast(GtkSpinButton*)this._cPtr, value);
   }
@@ -708,7 +708,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       Params:
         wrap = a flag indicating if wrapping behavior is performed
   */
-  void setWrap(bool wrap)
+  void setWrap(bool wrap) nothrow
   {
     gtk_spin_button_set_wrap(cast(GtkSpinButton*)this._cPtr, wrap);
   }
@@ -721,7 +721,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
         direction = a [gtk.types.SpinType] indicating the direction to spin
         increment = step increment to apply in the specified direction
   */
-  void spin(gtk.types.SpinType direction, double increment)
+  void spin(gtk.types.SpinType direction, double increment) nothrow
   {
     gtk_spin_button_spin(cast(GtkSpinButton*)this._cPtr, direction, increment);
   }
@@ -729,7 +729,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   /**
       Manually force an update of the spin button.
   */
-  void update()
+  void update() nothrow
   {
     gtk_spin_button_update(cast(GtkSpinButton*)this._cPtr);
   }
@@ -755,13 +755,13 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.spin_button.SpinButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -770,7 +770,14 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.spin_button.SpinButton.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -802,14 +809,14 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChangeValue(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChangeValue(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ScrollType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.spin_button.SpinButton)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -821,7 +828,14 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.spin_button.SpinButton.changeValue");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -853,18 +867,19 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInput(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInput(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == int)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.out_ && is(Parameters!T[0] == double)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.spin_button.SpinButton)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      int _retval;
 
       Parameters!T[0] newValue;
 
@@ -874,7 +889,14 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.spin_button.SpinButton.input");
+      }
 
       setVal!(int)(_returnValue, _retval);
 
@@ -920,22 +942,30 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectOutput(T)(T callback, Flag!"After" after = No.After)
+  gulong connectOutput(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.spin_button.SpinButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.spin_button.SpinButton.output");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -961,13 +991,13 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.spin_button.SpinButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -976,7 +1006,14 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.spin_button.SpinButton.valueChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -999,13 +1036,13 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWrapped(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWrapped(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.spin_button.SpinButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1014,7 +1051,14 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.spin_button.SpinButton.wrapped");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1039,7 +1083,7 @@ class SpinButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acces
           See [gtk.spin_button.SpinButton.activate] for what counts as activation.
       Returns: Builder instance for fluent chaining
   */
-  T activatesDefault(bool propval)
+  T activatesDefault(bool propval) nothrow
   {
     return setProperty("activates-default", propval);
   }
@@ -1050,7 +1094,7 @@ class SpinButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acces
         propval = The adjustment that holds the value of the spin button.
       Returns: Builder instance for fluent chaining
   */
-  T adjustment(gtk.adjustment.Adjustment propval)
+  T adjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     return setProperty("adjustment", propval);
   }
@@ -1061,7 +1105,7 @@ class SpinButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acces
         propval = The acceleration rate when you hold down a button or key.
       Returns: Builder instance for fluent chaining
   */
-  T climbRate(double propval)
+  T climbRate(double propval) nothrow
   {
     return setProperty("climb-rate", propval);
   }
@@ -1072,7 +1116,7 @@ class SpinButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acces
         propval = The number of decimal places to display.
       Returns: Builder instance for fluent chaining
   */
-  T digits(uint propval)
+  T digits(uint propval) nothrow
   {
     return setProperty("digits", propval);
   }
@@ -1083,7 +1127,7 @@ class SpinButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acces
         propval = Whether non-numeric characters should be ignored.
       Returns: Builder instance for fluent chaining
   */
-  T numeric(bool propval)
+  T numeric(bool propval) nothrow
   {
     return setProperty("numeric", propval);
   }
@@ -1095,7 +1139,7 @@ class SpinButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acces
           nearest step increment.
       Returns: Builder instance for fluent chaining
   */
-  T snapToTicks(bool propval)
+  T snapToTicks(bool propval) nothrow
   {
     return setProperty("snap-to-ticks", propval);
   }
@@ -1107,7 +1151,7 @@ class SpinButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acces
           is acceptable.
       Returns: Builder instance for fluent chaining
   */
-  T updatePolicy(gtk.types.SpinButtonUpdatePolicy propval)
+  T updatePolicy(gtk.types.SpinButtonUpdatePolicy propval) nothrow
   {
     return setProperty("update-policy", propval);
   }
@@ -1118,7 +1162,7 @@ class SpinButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acces
         propval = The current value.
       Returns: Builder instance for fluent chaining
   */
-  T value(double propval)
+  T value(double propval) nothrow
   {
     return setProperty("value", propval);
   }
@@ -1129,7 +1173,7 @@ class SpinButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acces
         propval = Whether a spin button should wrap upon reaching its limits.
       Returns: Builder instance for fluent chaining
   */
-  T wrap(bool propval)
+  T wrap(bool propval) nothrow
   {
     return setProperty("wrap", propval);
   }
@@ -1142,7 +1186,7 @@ final class SpinButtonGidBuilder : SpinButtonGidBuilderImpl!SpinButtonGidBuilder
       Create object from builder.
       Returns: New object
   */
-  SpinButton build()
+  SpinButton build() nothrow
   {
     return new SpinButton(cast(void*)createGObject(SpinButton._getGType), No.Take);
   }

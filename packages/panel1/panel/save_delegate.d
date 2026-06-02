@@ -21,26 +21,26 @@ class SaveDelegate : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_save_delegate_get_type != &gidSymbolNotFound ? panel_save_delegate_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SaveDelegate self()
+  override SaveDelegate self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class SaveDelegate : gobject.object.ObjectWrap
       Get builder for [panel.save_delegate.SaveDelegate]
       Returns: New builder object
   */
-  static SaveDelegateGidBuilder builder()
+  static SaveDelegateGidBuilder builder() nothrow
   {
     return new SaveDelegateGidBuilder;
   }
@@ -63,7 +63,7 @@ class SaveDelegate : gobject.object.ObjectWrap
         Alternatively, you can use #PanelSaveDelegate:icon-name for a
         named icon.
   */
-  @property gio.icon.Icon icon()
+  @property gio.icon.Icon icon() nothrow
   {
     return getIcon();
   }
@@ -78,7 +78,7 @@ class SaveDelegate : gobject.object.ObjectWrap
           Alternatively, you can use #PanelSaveDelegate:icon-name for a
           named icon.
   */
-  @property void icon(gio.icon.Icon propval)
+  @property void icon(gio.icon.Icon propval) nothrow
   {
     setIcon(propval);
   }
@@ -92,7 +92,7 @@ class SaveDelegate : gobject.object.ObjectWrap
         You can also use #PanelSaveDelegate:icon to set a #GIcon instead of
         an icon name.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return getIconName();
   }
@@ -107,7 +107,7 @@ class SaveDelegate : gobject.object.ObjectWrap
           You can also use #PanelSaveDelegate:icon to set a #GIcon instead of
           an icon name.
   */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     setIconName(propval);
   }
@@ -117,7 +117,7 @@ class SaveDelegate : gobject.object.ObjectWrap
       Returns: The "is-draft" property indicates that the document represented by the
         delegate is a draft and might be lost of not saved.
   */
-  @property bool isDraft()
+  @property bool isDraft() nothrow
   {
     return getIsDraft();
   }
@@ -128,7 +128,7 @@ class SaveDelegate : gobject.object.ObjectWrap
         propval = The "is-draft" property indicates that the document represented by the
           delegate is a draft and might be lost of not saved.
   */
-  @property void isDraft(bool propval)
+  @property void isDraft(bool propval) nothrow
   {
     setIsDraft(propval);
   }
@@ -138,7 +138,7 @@ class SaveDelegate : gobject.object.ObjectWrap
       Returns: The "progress" property contains progress between 0.0 and 1.0 and
         should be updated by the delegate implementation as saving progresses.
   */
-  @property double progress()
+  @property double progress() nothrow
   {
     return getProgress();
   }
@@ -149,7 +149,7 @@ class SaveDelegate : gobject.object.ObjectWrap
         propval = The "progress" property contains progress between 0.0 and 1.0 and
           should be updated by the delegate implementation as saving progresses.
   */
-  @property void progress(double propval)
+  @property void progress(double propval) nothrow
   {
     setProgress(propval);
   }
@@ -160,7 +160,7 @@ class SaveDelegate : gobject.object.ObjectWrap
         not make sense to put in the title. This might include the directory
         that the file will be saved within.
   */
-  @property string subtitle()
+  @property string subtitle() nothrow
   {
     return getSubtitle();
   }
@@ -172,7 +172,7 @@ class SaveDelegate : gobject.object.ObjectWrap
           not make sense to put in the title. This might include the directory
           that the file will be saved within.
   */
-  @property void subtitle(string propval)
+  @property void subtitle(string propval) nothrow
   {
     setSubtitle(propval);
   }
@@ -183,7 +183,7 @@ class SaveDelegate : gobject.object.ObjectWrap
         Generally, this should be the base name of the document such as
         `file.txt`.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -195,7 +195,7 @@ class SaveDelegate : gobject.object.ObjectWrap
           Generally, this should be the base name of the document such as
           `file.txt`.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -204,7 +204,7 @@ class SaveDelegate : gobject.object.ObjectWrap
       Create a new #PanelSaveDelegate.
       Returns: a newly created #PanelSaveDelegate
   */
-  this()
+  this() nothrow
   {
     PanelSaveDelegate* _cretval;
     _cretval = panel_save_delegate_new();
@@ -212,13 +212,13 @@ class SaveDelegate : gobject.object.ObjectWrap
   }
 
   /** */
-  void close()
+  void close() nothrow
   {
     panel_save_delegate_close(cast(PanelSaveDelegate*)this._cPtr);
   }
 
   /** */
-  void discard()
+  void discard() nothrow
   {
     panel_save_delegate_discard(cast(PanelSaveDelegate*)this._cPtr);
   }
@@ -227,7 +227,7 @@ class SaveDelegate : gobject.object.ObjectWrap
       Gets the #GIcon for the save delegate, or null if unset.
       Returns: a #GIcon or null
   */
-  gio.icon.Icon getIcon()
+  gio.icon.Icon getIcon() nothrow
   {
     GIcon* _cretval;
     _cretval = panel_save_delegate_get_icon(cast(PanelSaveDelegate*)this._cPtr);
@@ -239,7 +239,7 @@ class SaveDelegate : gobject.object.ObjectWrap
       Gets the icon name for the save delegate.
       Returns: the icon name or null
   */
-  string getIconName()
+  string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = panel_save_delegate_get_icon_name(cast(PanelSaveDelegate*)this._cPtr);
@@ -248,7 +248,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   }
 
   /** */
-  bool getIsDraft()
+  bool getIsDraft() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_save_delegate_get_is_draft(cast(PanelSaveDelegate*)this._cPtr);
@@ -256,7 +256,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   }
 
   /** */
-  double getProgress()
+  double getProgress() nothrow
   {
     double _retval;
     _retval = panel_save_delegate_get_progress(cast(PanelSaveDelegate*)this._cPtr);
@@ -267,7 +267,7 @@ class SaveDelegate : gobject.object.ObjectWrap
       Gets the subtitle for the save delegate.
       Returns: the subtitle or null
   */
-  string getSubtitle()
+  string getSubtitle() nothrow
   {
     const(char)* _cretval;
     _cretval = panel_save_delegate_get_subtitle(cast(PanelSaveDelegate*)this._cPtr);
@@ -279,7 +279,7 @@ class SaveDelegate : gobject.object.ObjectWrap
       Gets the title for the save delegate.
       Returns: the title or null
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = panel_save_delegate_get_title(cast(PanelSaveDelegate*)this._cPtr);
@@ -288,14 +288,21 @@ class SaveDelegate : gobject.object.ObjectWrap
   }
 
   /** */
-  void saveAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void saveAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -319,7 +326,7 @@ class SaveDelegate : gobject.object.ObjectWrap
       Params:
         icon = a #GIcon or null
   */
-  void setIcon(gio.icon.Icon icon = null)
+  void setIcon(gio.icon.Icon icon = null) nothrow
   {
     panel_save_delegate_set_icon(cast(PanelSaveDelegate*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
@@ -330,20 +337,20 @@ class SaveDelegate : gobject.object.ObjectWrap
       Params:
         icon = the icon name or null
   */
-  void setIconName(string icon = null)
+  void setIconName(string icon = null) nothrow
   {
     const(char)* _icon = icon.toCString(No.Alloc);
     panel_save_delegate_set_icon_name(cast(PanelSaveDelegate*)this._cPtr, _icon);
   }
 
   /** */
-  void setIsDraft(bool isDraft)
+  void setIsDraft(bool isDraft) nothrow
   {
     panel_save_delegate_set_is_draft(cast(PanelSaveDelegate*)this._cPtr, isDraft);
   }
 
   /** */
-  void setProgress(double progress)
+  void setProgress(double progress) nothrow
   {
     panel_save_delegate_set_progress(cast(PanelSaveDelegate*)this._cPtr, progress);
   }
@@ -354,7 +361,7 @@ class SaveDelegate : gobject.object.ObjectWrap
       Params:
         subtitle = the subtitle or null
   */
-  void setSubtitle(string subtitle = null)
+  void setSubtitle(string subtitle = null) nothrow
   {
     const(char)* _subtitle = subtitle.toCString(No.Alloc);
     panel_save_delegate_set_subtitle(cast(PanelSaveDelegate*)this._cPtr, _subtitle);
@@ -366,7 +373,7 @@ class SaveDelegate : gobject.object.ObjectWrap
       Params:
         title = the title or null
   */
-  void setTitle(string title = null)
+  void setTitle(string title = null) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     panel_save_delegate_set_title(cast(PanelSaveDelegate*)this._cPtr, _title);
@@ -393,13 +400,13 @@ class SaveDelegate : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClose(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClose(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.save_delegate.SaveDelegate)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -408,7 +415,14 @@ class SaveDelegate : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "panel.save_delegate.SaveDelegate.close");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -435,13 +449,13 @@ class SaveDelegate : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDiscard(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDiscard(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.save_delegate.SaveDelegate)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -450,7 +464,14 @@ class SaveDelegate : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "panel.save_delegate.SaveDelegate.discard");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -481,18 +502,19 @@ class SaveDelegate : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSave(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSave(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.task.Task)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : panel.save_delegate.SaveDelegate)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -500,7 +522,14 @@ class SaveDelegate : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "panel.save_delegate.SaveDelegate.save");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -525,7 +554,7 @@ class SaveDelegateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           named icon.
       Returns: Builder instance for fluent chaining
   */
-  T icon(gio.icon.Icon propval)
+  T icon(gio.icon.Icon propval) nothrow
   {
     return setProperty("icon", propval);
   }
@@ -541,7 +570,7 @@ class SaveDelegateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           an icon name.
       Returns: Builder instance for fluent chaining
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
@@ -553,7 +582,7 @@ class SaveDelegateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           delegate is a draft and might be lost of not saved.
       Returns: Builder instance for fluent chaining
   */
-  T isDraft(bool propval)
+  T isDraft(bool propval) nothrow
   {
     return setProperty("is-draft", propval);
   }
@@ -565,7 +594,7 @@ class SaveDelegateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           should be updated by the delegate implementation as saving progresses.
       Returns: Builder instance for fluent chaining
   */
-  T progress(double propval)
+  T progress(double propval) nothrow
   {
     return setProperty("progress", propval);
   }
@@ -578,7 +607,7 @@ class SaveDelegateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           that the file will be saved within.
       Returns: Builder instance for fluent chaining
   */
-  T subtitle(string propval)
+  T subtitle(string propval) nothrow
   {
     return setProperty("subtitle", propval);
   }
@@ -591,7 +620,7 @@ class SaveDelegateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           `file.txt`.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -604,7 +633,7 @@ final class SaveDelegateGidBuilder : SaveDelegateGidBuilderImpl!SaveDelegateGidB
       Create object from builder.
       Returns: New object
   */
-  SaveDelegate build()
+  SaveDelegate build() nothrow
   {
     return new SaveDelegate(cast(void*)createGObject(SaveDelegate._getGType), Yes.Take);
   }

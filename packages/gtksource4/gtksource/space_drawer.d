@@ -17,26 +17,26 @@ class SpaceDrawer : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_space_drawer_get_type != &gidSymbolNotFound ? gtk_source_space_drawer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SpaceDrawer self()
+  override SpaceDrawer self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
       Get builder for [gtksource.space_drawer.SpaceDrawer]
       Returns: New builder object
   */
-  static SpaceDrawerGidBuilder builder()
+  static SpaceDrawerGidBuilder builder() nothrow
   {
     return new SpaceDrawerGidBuilder;
   }
@@ -54,7 +54,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
       Get `enableMatrix` property.
       Returns: Whether the #GtkSourceSpaceDrawer:matrix property is enabled.
   */
-  @property bool enableMatrix()
+  @property bool enableMatrix() nothrow
   {
     return getEnableMatrix();
   }
@@ -64,7 +64,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
       Params:
         propval = Whether the #GtkSourceSpaceDrawer:matrix property is enabled.
   */
-  @property void enableMatrix(bool propval)
+  @property void enableMatrix(bool propval) nothrow
   {
     setEnableMatrix(propval);
   }
@@ -85,7 +85,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
         
         By default, [gtksource.types.SpaceTypeFlags.All] is set for all locations.
   */
-  @property glib.variant.Variant matrix()
+  @property glib.variant.Variant matrix() nothrow
   {
     return getMatrix();
   }
@@ -107,7 +107,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
           
           By default, [gtksource.types.SpaceTypeFlags.All] is set for all locations.
   */
-  @property void matrix(glib.variant.Variant propval)
+  @property void matrix(glib.variant.Variant propval) nothrow
   {
     setMatrix(propval);
   }
@@ -117,7 +117,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
       settings independently of a #GtkSourceView.
       Returns: a new #GtkSourceSpaceDrawer.
   */
-  this()
+  this() nothrow
   {
     GtkSourceSpaceDrawer* _cretval;
     _cretval = gtk_source_space_drawer_new();
@@ -140,14 +140,14 @@ class SpaceDrawer : gobject.object.ObjectWrap
         key = the settings key to bind.
         flags = flags for the binding.
   */
-  void bindMatrixSetting(gio.settings.Settings settings, string key, gio.types.SettingsBindFlags flags)
+  void bindMatrixSetting(gio.settings.Settings settings, string key, gio.types.SettingsBindFlags flags) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     gtk_source_space_drawer_bind_matrix_setting(cast(GtkSourceSpaceDrawer*)this._cPtr, settings ? cast(GSettings*)settings._cPtr(No.Dup) : null, _key, flags);
   }
 
   /** */
-  bool getEnableMatrix()
+  bool getEnableMatrix() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_space_drawer_get_enable_matrix(cast(GtkSourceSpaceDrawer*)this._cPtr);
@@ -163,7 +163,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
       Returns: the #GtkSourceSpaceDrawer:matrix value as a new floating #GVariant
           instance.
   */
-  glib.variant.Variant getMatrix()
+  glib.variant.Variant getMatrix() nothrow
   {
     GVariant* _cretval;
     _cretval = gtk_source_space_drawer_get_matrix(cast(GtkSourceSpaceDrawer*)this._cPtr);
@@ -185,7 +185,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
         locations = one or several #GtkSourceSpaceLocationFlags.
       Returns: a combination of #GtkSourceSpaceTypeFlags.
   */
-  gtksource.types.SpaceTypeFlags getTypesForLocations(gtksource.types.SpaceLocationFlags locations)
+  gtksource.types.SpaceTypeFlags getTypesForLocations(gtksource.types.SpaceLocationFlags locations) nothrow
   {
     GtkSourceSpaceTypeFlags _cretval;
     _cretval = gtk_source_space_drawer_get_types_for_locations(cast(GtkSourceSpaceDrawer*)this._cPtr, locations);
@@ -199,7 +199,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
       Params:
         enableMatrix = the new value.
   */
-  void setEnableMatrix(bool enableMatrix)
+  void setEnableMatrix(bool enableMatrix) nothrow
   {
     gtk_source_space_drawer_set_enable_matrix(cast(GtkSourceSpaceDrawer*)this._cPtr, enableMatrix);
   }
@@ -216,7 +216,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
       Params:
         matrix = the new matrix value, or null.
   */
-  void setMatrix(glib.variant.Variant matrix = null)
+  void setMatrix(glib.variant.Variant matrix = null) nothrow
   {
     gtk_source_space_drawer_set_matrix(cast(GtkSourceSpaceDrawer*)this._cPtr, matrix ? cast(GVariant*)matrix._cPtr(No.Dup) : null);
   }
@@ -229,7 +229,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
         locations = one or several #GtkSourceSpaceLocationFlags.
         types = a combination of #GtkSourceSpaceTypeFlags.
   */
-  void setTypesForLocations(gtksource.types.SpaceLocationFlags locations, gtksource.types.SpaceTypeFlags types)
+  void setTypesForLocations(gtksource.types.SpaceLocationFlags locations, gtksource.types.SpaceTypeFlags types) nothrow
   {
     gtk_source_space_drawer_set_types_for_locations(cast(GtkSourceSpaceDrawer*)this._cPtr, locations, types);
   }
@@ -245,7 +245,7 @@ class SpaceDrawerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether the #GtkSourceSpaceDrawer:matrix property is enabled.
       Returns: Builder instance for fluent chaining
   */
-  T enableMatrix(bool propval)
+  T enableMatrix(bool propval) nothrow
   {
     return setProperty("enable-matrix", propval);
   }
@@ -268,7 +268,7 @@ class SpaceDrawerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           By default, [gtksource.types.SpaceTypeFlags.All] is set for all locations.
       Returns: Builder instance for fluent chaining
   */
-  T matrix(glib.variant.Variant propval)
+  T matrix(glib.variant.Variant propval) nothrow
   {
     return setProperty("matrix", propval);
   }
@@ -281,7 +281,7 @@ final class SpaceDrawerGidBuilder : SpaceDrawerGidBuilderImpl!SpaceDrawerGidBuil
       Create object from builder.
       Returns: New object
   */
-  SpaceDrawer build()
+  SpaceDrawer build() nothrow
   {
     return new SpaceDrawer(cast(void*)createGObject(SpaceDrawer._getGType), Yes.Take);
   }

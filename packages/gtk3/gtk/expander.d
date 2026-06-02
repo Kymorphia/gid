@@ -104,26 +104,26 @@ class Expander : gtk.bin.Bin
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_expander_get_type != &gidSymbolNotFound ? gtk_expander_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Expander self()
+  override Expander self() nothrow
   {
     return this;
   }
@@ -132,31 +132,31 @@ class Expander : gtk.bin.Bin
       Get builder for [gtk.expander.Expander]
       Returns: New builder object
   */
-  static ExpanderGidBuilder builder()
+  static ExpanderGidBuilder builder() nothrow
   {
     return new ExpanderGidBuilder;
   }
 
   /** */
-  @property bool expanded()
+  @property bool expanded() nothrow
   {
     return getExpanded();
   }
 
   /** */
-  @property void expanded(bool propval)
+  @property void expanded(bool propval) nothrow
   {
     setExpanded(propval);
   }
 
   /** */
-  @property string label()
+  @property string label() nothrow
   {
     return getLabel();
   }
 
   /** */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     setLabel(propval);
   }
@@ -167,7 +167,7 @@ class Expander : gtk.bin.Bin
         
         Note that this property is ignored since 3.20.
   */
-  @property bool labelFill()
+  @property bool labelFill() nothrow
   {
     return getLabelFill();
   }
@@ -179,19 +179,19 @@ class Expander : gtk.bin.Bin
           
           Note that this property is ignored since 3.20.
   */
-  @property void labelFill(bool propval)
+  @property void labelFill(bool propval) nothrow
   {
     setLabelFill(propval);
   }
 
   /** */
-  @property gtk.widget.Widget labelWidget()
+  @property gtk.widget.Widget labelWidget() nothrow
   {
     return getLabelWidget();
   }
 
   /** */
-  @property void labelWidget(gtk.widget.Widget propval)
+  @property void labelWidget(gtk.widget.Widget propval) nothrow
   {
     setLabelWidget(propval);
   }
@@ -201,7 +201,7 @@ class Expander : gtk.bin.Bin
       Returns: When this property is true, the expander will resize the toplevel
         widget containing the expander upon expanding and collapsing.
   */
-  @property bool resizeToplevel()
+  @property bool resizeToplevel() nothrow
   {
     return getResizeToplevel();
   }
@@ -212,7 +212,7 @@ class Expander : gtk.bin.Bin
         propval = When this property is true, the expander will resize the toplevel
           widget containing the expander upon expanding and collapsing.
   */
-  @property void resizeToplevel(bool propval)
+  @property void resizeToplevel(bool propval) nothrow
   {
     setResizeToplevel(propval);
   }
@@ -225,7 +225,7 @@ class Expander : gtk.bin.Bin
       Deprecated: This property is deprecated and ignored.
             Use margins on the child instead.
   */
-  @property int spacing()
+  @property int spacing() nothrow
   {
     return getSpacing();
   }
@@ -239,31 +239,31 @@ class Expander : gtk.bin.Bin
       Deprecated: This property is deprecated and ignored.
             Use margins on the child instead.
   */
-  @property void spacing(int propval)
+  @property void spacing(int propval) nothrow
   {
     setSpacing(propval);
   }
 
   /** */
-  @property bool useMarkup()
+  @property bool useMarkup() nothrow
   {
     return getUseMarkup();
   }
 
   /** */
-  @property void useMarkup(bool propval)
+  @property void useMarkup(bool propval) nothrow
   {
     setUseMarkup(propval);
   }
 
   /** */
-  @property bool useUnderline()
+  @property bool useUnderline() nothrow
   {
     return getUseUnderline();
   }
 
   /** */
-  @property void useUnderline(bool propval)
+  @property void useUnderline(bool propval) nothrow
   {
     setUseUnderline(propval);
   }
@@ -275,7 +275,7 @@ class Expander : gtk.bin.Bin
         label = the text of the label
       Returns: a new #GtkExpander widget.
   */
-  this(string label = null)
+  this(string label = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -296,7 +296,7 @@ class Expander : gtk.bin.Bin
               in front of the mnemonic character
       Returns: a new #GtkExpander widget.
   */
-  static gtk.expander.Expander newWithMnemonic(string label = null)
+  static gtk.expander.Expander newWithMnemonic(string label = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -312,7 +312,7 @@ class Expander : gtk.bin.Bin
       See [gtk.expander.Expander.setExpanded].
       Returns: the current state of the expander
   */
-  bool getExpanded()
+  bool getExpanded() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_expander_get_expanded(cast(GtkExpander*)this._cPtr);
@@ -334,7 +334,7 @@ class Expander : gtk.bin.Bin
       Returns: The text of the label widget. This string is owned
             by the widget and must not be modified or freed.
   */
-  string getLabel()
+  string getLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_expander_get_label(cast(GtkExpander*)this._cPtr);
@@ -348,7 +348,7 @@ class Expander : gtk.bin.Bin
       Returns: true if the label widget will fill all
             available horizontal space
   */
-  bool getLabelFill()
+  bool getLabelFill() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_expander_get_label_fill(cast(GtkExpander*)this._cPtr);
@@ -361,7 +361,7 @@ class Expander : gtk.bin.Bin
       Returns: the label widget,
             or null if there is none
   */
-  gtk.widget.Widget getLabelWidget()
+  gtk.widget.Widget getLabelWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_expander_get_label_widget(cast(GtkExpander*)this._cPtr);
@@ -374,7 +374,7 @@ class Expander : gtk.bin.Bin
       containing the expander upon resizing and collpasing.
       Returns: the “resize toplevel” setting.
   */
-  bool getResizeToplevel()
+  bool getResizeToplevel() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_expander_get_resize_toplevel(cast(GtkExpander*)this._cPtr);
@@ -387,7 +387,7 @@ class Expander : gtk.bin.Bin
   
       Deprecated: Use margins on the child instead.
   */
-  int getSpacing()
+  int getSpacing() nothrow
   {
     int _retval;
     _retval = gtk_expander_get_spacing(cast(GtkExpander*)this._cPtr);
@@ -400,7 +400,7 @@ class Expander : gtk.bin.Bin
       See [gtk.expander.Expander.setUseMarkup].
       Returns: true if the label’s text will be parsed for markup
   */
-  bool getUseMarkup()
+  bool getUseMarkup() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_expander_get_use_markup(cast(GtkExpander*)this._cPtr);
@@ -413,7 +413,7 @@ class Expander : gtk.bin.Bin
       Returns: true if an embedded underline in the expander
             label indicates the mnemonic accelerator keys
   */
-  bool getUseUnderline()
+  bool getUseUnderline() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_expander_get_use_underline(cast(GtkExpander*)this._cPtr);
@@ -428,7 +428,7 @@ class Expander : gtk.bin.Bin
       Params:
         expanded = whether the child widget is revealed
   */
-  void setExpanded(bool expanded)
+  void setExpanded(bool expanded) nothrow
   {
     gtk_expander_set_expanded(cast(GtkExpander*)this._cPtr, expanded);
   }
@@ -441,7 +441,7 @@ class Expander : gtk.bin.Bin
       Params:
         label = a string
   */
-  void setLabel(string label = null)
+  void setLabel(string label = null) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_expander_set_label(cast(GtkExpander*)this._cPtr, _label);
@@ -457,7 +457,7 @@ class Expander : gtk.bin.Bin
         labelFill = true if the label should should fill
               all available horizontal space
   */
-  void setLabelFill(bool labelFill)
+  void setLabelFill(bool labelFill) nothrow
   {
     gtk_expander_set_label_fill(cast(GtkExpander*)this._cPtr, labelFill);
   }
@@ -469,7 +469,7 @@ class Expander : gtk.bin.Bin
       Params:
         labelWidget = the new label widget
   */
-  void setLabelWidget(gtk.widget.Widget labelWidget = null)
+  void setLabelWidget(gtk.widget.Widget labelWidget = null) nothrow
   {
     gtk_expander_set_label_widget(cast(GtkExpander*)this._cPtr, labelWidget ? cast(GtkWidget*)labelWidget._cPtr(No.Dup) : null);
   }
@@ -481,7 +481,7 @@ class Expander : gtk.bin.Bin
       Params:
         resizeToplevel = whether to resize the toplevel
   */
-  void setResizeToplevel(bool resizeToplevel)
+  void setResizeToplevel(bool resizeToplevel) nothrow
   {
     gtk_expander_set_resize_toplevel(cast(GtkExpander*)this._cPtr, resizeToplevel);
   }
@@ -495,7 +495,7 @@ class Expander : gtk.bin.Bin
   
       Deprecated: Use margins on the child instead.
   */
-  void setSpacing(int spacing)
+  void setSpacing(int spacing) nothrow
   {
     gtk_expander_set_spacing(cast(GtkExpander*)this._cPtr, spacing);
   }
@@ -508,7 +508,7 @@ class Expander : gtk.bin.Bin
       Params:
         useMarkup = true if the label’s text should be parsed for markup
   */
-  void setUseMarkup(bool useMarkup)
+  void setUseMarkup(bool useMarkup) nothrow
   {
     gtk_expander_set_use_markup(cast(GtkExpander*)this._cPtr, useMarkup);
   }
@@ -520,7 +520,7 @@ class Expander : gtk.bin.Bin
       Params:
         useUnderline = true if underlines in the text indicate mnemonics
   */
-  void setUseUnderline(bool useUnderline)
+  void setUseUnderline(bool useUnderline) nothrow
   {
     gtk_expander_set_use_underline(cast(GtkExpander*)this._cPtr, useUnderline);
   }
@@ -540,13 +540,13 @@ class Expander : gtk.bin.Bin
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.expander.Expander)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -555,7 +555,14 @@ class Expander : gtk.bin.Bin
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.expander.Expander.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -569,13 +576,13 @@ class ExpanderGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 
 
   /** */
-  T expanded(bool propval)
+  T expanded(bool propval) nothrow
   {
     return setProperty("expanded", propval);
   }
 
   /** */
-  T label(string propval)
+  T label(string propval) nothrow
   {
     return setProperty("label", propval);
   }
@@ -588,13 +595,13 @@ class ExpanderGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
           Note that this property is ignored since 3.20.
       Returns: Builder instance for fluent chaining
   */
-  T labelFill(bool propval)
+  T labelFill(bool propval) nothrow
   {
     return setProperty("label-fill", propval);
   }
 
   /** */
-  T labelWidget(gtk.widget.Widget propval)
+  T labelWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("label-widget", propval);
   }
@@ -606,7 +613,7 @@ class ExpanderGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
           widget containing the expander upon expanding and collapsing.
       Returns: Builder instance for fluent chaining
   */
-  T resizeToplevel(bool propval)
+  T resizeToplevel(bool propval) nothrow
   {
     return setProperty("resize-toplevel", propval);
   }
@@ -621,19 +628,19 @@ class ExpanderGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
       Deprecated: This property is deprecated and ignored.
             Use margins on the child instead.
   */
-  T spacing(int propval)
+  T spacing(int propval) nothrow
   {
     return setProperty("spacing", propval);
   }
 
   /** */
-  T useMarkup(bool propval)
+  T useMarkup(bool propval) nothrow
   {
     return setProperty("use-markup", propval);
   }
 
   /** */
-  T useUnderline(bool propval)
+  T useUnderline(bool propval) nothrow
   {
     return setProperty("use-underline", propval);
   }
@@ -646,7 +653,7 @@ final class ExpanderGidBuilder : ExpanderGidBuilderImpl!ExpanderGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Expander build()
+  Expander build() nothrow
   {
     return new Expander(cast(void*)createGObject(Expander._getGType), No.Take);
   }

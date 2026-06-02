@@ -21,32 +21,32 @@ class Sample : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_sample_get_type != &gidSymbolNotFound ? gst_sample_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Sample self()
+  override Sample self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class Sample : gobject.boxed.Boxed
       Returns: the new #GstSample. gst_sample_unref()
             after usage.
   */
-  this(gst.buffer.Buffer buffer, gst.caps.Caps caps, gst.segment.Segment segment, gst.structure.Structure info = null)
+  this(gst.buffer.Buffer buffer, gst.caps.Caps caps, gst.segment.Segment segment, gst.structure.Structure info = null) nothrow
   {
     GstSample* _cretval;
     _cretval = gst_sample_new(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, cast(const(GstSegment)*)&segment, info ? cast(GstStructure*)info._cPtr(Yes.Dup) : null);
@@ -78,7 +78,7 @@ class Sample : gobject.boxed.Boxed
          sample is valid.  If you need to hold on to it for longer than
          that, take a ref to the buffer with gst_buffer_ref().
   */
-  gst.buffer.Buffer getBuffer()
+  gst.buffer.Buffer getBuffer() nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_sample_get_buffer(cast(GstSample*)this._cPtr);
@@ -93,7 +93,7 @@ class Sample : gobject.boxed.Boxed
          sample is valid.  If you need to hold on to it for longer than
          that, take a ref to the buffer list with gst_mini_object_ref ().
   */
-  gst.buffer_list.BufferList getBufferList()
+  gst.buffer_list.BufferList getBufferList() nothrow
   {
     GstBufferList* _cretval;
     _cretval = gst_sample_get_buffer_list(cast(GstSample*)this._cPtr);
@@ -108,7 +108,7 @@ class Sample : gobject.boxed.Boxed
          valid.  If you need to hold on to the caps for longer than that,
          take a ref to the caps with gst_caps_ref().
   */
-  gst.caps.Caps getCaps()
+  gst.caps.Caps getCaps() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_sample_get_caps(cast(GstSample*)this._cPtr);
@@ -121,7 +121,7 @@ class Sample : gobject.boxed.Boxed
       Returns: the extra info of sample.
          The info remains valid as long as sample is valid.
   */
-  gst.structure.Structure getInfo()
+  gst.structure.Structure getInfo() nothrow
   {
     const(GstStructure)* _cretval;
     _cretval = gst_sample_get_info(cast(GstSample*)this._cPtr);
@@ -134,7 +134,7 @@ class Sample : gobject.boxed.Boxed
       Returns: the segment of sample.
          The segment remains valid as long as sample is valid.
   */
-  gst.segment.Segment getSegment()
+  gst.segment.Segment getSegment() nothrow
   {
     GstSegment* _cretval;
     _cretval = gst_sample_get_segment(cast(GstSample*)this._cPtr);
@@ -150,7 +150,7 @@ class Sample : gobject.boxed.Boxed
       Params:
         buffer = A #GstBuffer
   */
-  void setBuffer(gst.buffer.Buffer buffer)
+  void setBuffer(gst.buffer.Buffer buffer) nothrow
   {
     gst_sample_set_buffer(cast(GstSample*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
   }
@@ -161,7 +161,7 @@ class Sample : gobject.boxed.Boxed
       Params:
         bufferList = a #GstBufferList
   */
-  void setBufferList(gst.buffer_list.BufferList bufferList)
+  void setBufferList(gst.buffer_list.BufferList bufferList) nothrow
   {
     gst_sample_set_buffer_list(cast(GstSample*)this._cPtr, bufferList ? cast(GstBufferList*)bufferList._cPtr(No.Dup) : null);
   }
@@ -172,7 +172,7 @@ class Sample : gobject.boxed.Boxed
       Params:
         caps = A #GstCaps
   */
-  void setCaps(gst.caps.Caps caps)
+  void setCaps(gst.caps.Caps caps) nothrow
   {
     gst_sample_set_caps(cast(GstSample*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
   }
@@ -185,7 +185,7 @@ class Sample : gobject.boxed.Boxed
         info = A #GstStructure
       Returns: 
   */
-  bool setInfo(gst.structure.Structure info)
+  bool setInfo(gst.structure.Structure info) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_sample_set_info(cast(GstSample*)this._cPtr, info ? cast(GstStructure*)info._cPtr(Yes.Dup) : null);
@@ -198,7 +198,7 @@ class Sample : gobject.boxed.Boxed
       Params:
         segment = A #GstSegment
   */
-  void setSegment(gst.segment.Segment segment)
+  void setSegment(gst.segment.Segment segment) nothrow
   {
     gst_sample_set_segment(cast(GstSample*)this._cPtr, cast(const(GstSegment)*)&segment);
   }

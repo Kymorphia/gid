@@ -81,26 +81,26 @@ class DBusAuthObserver : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_auth_observer_get_type != &gidSymbolNotFound ? g_dbus_auth_observer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DBusAuthObserver self()
+  override DBusAuthObserver self() nothrow
   {
     return this;
   }
@@ -109,7 +109,7 @@ class DBusAuthObserver : gobject.object.ObjectWrap
       Get builder for [gio.dbus_auth_observer.DBusAuthObserver]
       Returns: New builder object
   */
-  static DBusAuthObserverGidBuilder builder()
+  static DBusAuthObserverGidBuilder builder() nothrow
   {
     return new DBusAuthObserverGidBuilder;
   }
@@ -118,7 +118,7 @@ class DBusAuthObserver : gobject.object.ObjectWrap
       Creates a new #GDBusAuthObserver object.
       Returns: A #GDBusAuthObserver. Free with [gobject.object.ObjectWrap.unref].
   */
-  this()
+  this() nothrow
   {
     GDBusAuthObserver* _cretval;
     _cretval = g_dbus_auth_observer_new();
@@ -132,7 +132,7 @@ class DBusAuthObserver : gobject.object.ObjectWrap
         mechanism = The name of the mechanism, e.g. `DBUS_COOKIE_SHA1`.
       Returns: true if mechanism can be used to authenticate the other peer, false if not.
   */
-  bool allowMechanism(string mechanism)
+  bool allowMechanism(string mechanism) nothrow
   {
     bool _retval;
     const(char)* _mechanism = mechanism.toCString(No.Alloc);
@@ -148,7 +148,7 @@ class DBusAuthObserver : gobject.object.ObjectWrap
         credentials = Credentials received from the peer or null.
       Returns: true if the peer is authorized, false if not.
   */
-  bool authorizeAuthenticatedPeer(gio.iostream.IOStream stream, gio.credentials.Credentials credentials = null)
+  bool authorizeAuthenticatedPeer(gio.iostream.IOStream stream, gio.credentials.Credentials credentials = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_dbus_auth_observer_authorize_authenticated_peer(cast(GDBusAuthObserver*)this._cPtr, stream ? cast(GIOStream*)stream._cPtr(No.Dup) : null, credentials ? cast(GCredentials*)credentials._cPtr(No.Dup) : null);
@@ -173,18 +173,19 @@ class DBusAuthObserver : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAllowMechanism(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAllowMechanism(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.dbus_auth_observer.DBusAuthObserver)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -192,7 +193,14 @@ class DBusAuthObserver : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.dbus_auth_observer.DBusAuthObserver.allowMechanism");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -222,7 +230,7 @@ class DBusAuthObserver : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAuthorizeAuthenticatedPeer(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAuthorizeAuthenticatedPeer(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.iostream.IOStream)))
@@ -230,11 +238,12 @@ class DBusAuthObserver : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.dbus_auth_observer.DBusAuthObserver)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -245,7 +254,14 @@ class DBusAuthObserver : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.dbus_auth_observer.DBusAuthObserver.authorizeAuthenticatedPeer");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -267,7 +283,7 @@ final class DBusAuthObserverGidBuilder : DBusAuthObserverGidBuilderImpl!DBusAuth
       Create object from builder.
       Returns: New object
   */
-  DBusAuthObserver build()
+  DBusAuthObserver build() nothrow
   {
     return new DBusAuthObserver(cast(void*)createGObject(DBusAuthObserver._getGType), Yes.Take);
   }

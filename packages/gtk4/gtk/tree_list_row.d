@@ -27,26 +27,26 @@ class TreeListRow : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_list_row_get_type != &gidSymbolNotFound ? gtk_tree_list_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TreeListRow self()
+  override TreeListRow self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class TreeListRow : gobject.object.ObjectWrap
       Get builder for [gtk.tree_list_row.TreeListRow]
       Returns: New builder object
   */
-  static TreeListRowGidBuilder builder()
+  static TreeListRowGidBuilder builder() nothrow
   {
     return new TreeListRowGidBuilder;
   }
@@ -64,7 +64,7 @@ class TreeListRow : gobject.object.ObjectWrap
       Get `children` property.
       Returns: The model holding the row's children.
   */
-  @property gio.list_model.ListModel children()
+  @property gio.list_model.ListModel children() nothrow
   {
     return getChildren();
   }
@@ -73,7 +73,7 @@ class TreeListRow : gobject.object.ObjectWrap
       Get `depth` property.
       Returns: The depth in the tree of this row.
   */
-  @property uint depth()
+  @property uint depth() nothrow
   {
     return getDepth();
   }
@@ -82,7 +82,7 @@ class TreeListRow : gobject.object.ObjectWrap
       Get `expandable` property.
       Returns: If this row can ever be expanded.
   */
-  @property bool expandable()
+  @property bool expandable() nothrow
   {
     return isExpandable();
   }
@@ -91,7 +91,7 @@ class TreeListRow : gobject.object.ObjectWrap
       Get `expanded` property.
       Returns: If this row is currently expanded.
   */
-  @property bool expanded()
+  @property bool expanded() nothrow
   {
     return getExpanded();
   }
@@ -101,7 +101,7 @@ class TreeListRow : gobject.object.ObjectWrap
       Params:
         propval = If this row is currently expanded.
   */
-  @property void expanded(bool propval)
+  @property void expanded(bool propval) nothrow
   {
     setExpanded(propval);
   }
@@ -110,7 +110,7 @@ class TreeListRow : gobject.object.ObjectWrap
       Get `item` property.
       Returns: The item held in this row.
   */
-  @property gobject.object.ObjectWrap item()
+  @property gobject.object.ObjectWrap item() nothrow
   {
     return getItem();
   }
@@ -123,7 +123,7 @@ class TreeListRow : gobject.object.ObjectWrap
         position = position of the child to get
       Returns: the child in position
   */
-  gtk.tree_list_row.TreeListRow getChildRow(uint position)
+  gtk.tree_list_row.TreeListRow getChildRow(uint position) nothrow
   {
     GtkTreeListRow* _cretval;
     _cretval = gtk_tree_list_row_get_child_row(cast(GtkTreeListRow*)this._cPtr, position);
@@ -140,7 +140,7 @@ class TreeListRow : gobject.object.ObjectWrap
       [gtk.tree_list_model.TreeListModel.passthrough] is set to.
       Returns: The model containing the children
   */
-  gio.list_model.ListModel getChildren()
+  gio.list_model.ListModel getChildren() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_tree_list_row_get_children(cast(GtkTreeListRow*)this._cPtr);
@@ -159,7 +159,7 @@ class TreeListRow : gobject.object.ObjectWrap
       at which point it will forever return 0.
       Returns: The depth of this row
   */
-  uint getDepth()
+  uint getDepth() nothrow
   {
     uint _retval;
     _retval = gtk_tree_list_row_get_depth(cast(GtkTreeListRow*)this._cPtr);
@@ -170,7 +170,7 @@ class TreeListRow : gobject.object.ObjectWrap
       Gets if a row is currently expanded.
       Returns: true if the row is expanded
   */
-  bool getExpanded()
+  bool getExpanded() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_list_row_get_expanded(cast(GtkTreeListRow*)this._cPtr);
@@ -183,7 +183,7 @@ class TreeListRow : gobject.object.ObjectWrap
           of this row. This function is only marked as nullable for backwards
           compatibility reasons.
   */
-  gobject.object.ObjectWrap getItem()
+  gobject.object.ObjectWrap getItem() nothrow
   {
     GObject* _cretval;
     _cretval = gtk_tree_list_row_get_item(cast(GtkTreeListRow*)this._cPtr);
@@ -205,7 +205,7 @@ class TreeListRow : gobject.object.ObjectWrap
       it will forever return null.
       Returns: The parent of self
   */
-  gtk.tree_list_row.TreeListRow getParent()
+  gtk.tree_list_row.TreeListRow getParent() nothrow
   {
     GtkTreeListRow* _cretval;
     _cretval = gtk_tree_list_row_get_parent(cast(GtkTreeListRow*)this._cPtr);
@@ -218,7 +218,7 @@ class TreeListRow : gobject.object.ObjectWrap
       at the moment.
       Returns: The position in the model
   */
-  uint getPosition()
+  uint getPosition() nothrow
   {
     uint _retval;
     _retval = gtk_tree_list_row_get_position(cast(GtkTreeListRow*)this._cPtr);
@@ -235,7 +235,7 @@ class TreeListRow : gobject.object.ObjectWrap
       from its model at which point it will forever return false.
       Returns: true if the row is expandable
   */
-  bool isExpandable()
+  bool isExpandable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_list_row_is_expandable(cast(GtkTreeListRow*)this._cPtr);
@@ -255,7 +255,7 @@ class TreeListRow : gobject.object.ObjectWrap
       Params:
         expanded = true if the row should be expanded
   */
-  void setExpanded(bool expanded)
+  void setExpanded(bool expanded) nothrow
   {
     gtk_tree_list_row_set_expanded(cast(GtkTreeListRow*)this._cPtr, expanded);
   }
@@ -271,7 +271,7 @@ class TreeListRowGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = If this row is currently expanded.
       Returns: Builder instance for fluent chaining
   */
-  T expanded(bool propval)
+  T expanded(bool propval) nothrow
   {
     return setProperty("expanded", propval);
   }
@@ -284,7 +284,7 @@ final class TreeListRowGidBuilder : TreeListRowGidBuilderImpl!TreeListRowGidBuil
       Create object from builder.
       Returns: New object
   */
-  TreeListRow build()
+  TreeListRow build() nothrow
   {
     return new TreeListRow(cast(void*)createGObject(TreeListRow._getGType), No.Take);
   }

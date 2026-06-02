@@ -177,32 +177,32 @@ class Uri : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_uri_get_type != &gidSymbolNotFound ? g_uri_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Uri self()
+  override Uri self() nothrow
   {
     return this;
   }
@@ -217,7 +217,7 @@ class Uri : gobject.boxed.Boxed
       further parsing this information.
       Returns: uri's authentication parameters.
   */
-  string getAuthParams()
+  string getAuthParams() nothrow
   {
     const(char)* _cretval;
     _cretval = g_uri_get_auth_params(cast(GUri*)this._cPtr);
@@ -229,7 +229,7 @@ class Uri : gobject.boxed.Boxed
       Gets uri's flags set upon construction.
       Returns: uri's flags.
   */
-  glib.types.UriFlags getFlags()
+  glib.types.UriFlags getFlags() nothrow
   {
     GUriFlags _cretval;
     _cretval = g_uri_get_flags(cast(GUri*)this._cPtr);
@@ -242,7 +242,7 @@ class Uri : gobject.boxed.Boxed
       the flags with which uri was created.
       Returns: uri's fragment.
   */
-  string getFragment()
+  string getFragment() nothrow
   {
     const(char)* _cretval;
     _cretval = g_uri_get_fragment(cast(GUri*)this._cPtr);
@@ -262,7 +262,7 @@ class Uri : gobject.boxed.Boxed
       `fe80::1234%``25em1` if the string is still encoded).
       Returns: uri's host.
   */
-  string getHost()
+  string getHost() nothrow
   {
     const(char)* _cretval;
     _cretval = g_uri_get_host(cast(GUri*)this._cPtr);
@@ -276,7 +276,7 @@ class Uri : gobject.boxed.Boxed
       with `G_URI_FLAGS_HAS_PASSWORD` then this will be null.)
       Returns: uri's password.
   */
-  string getPassword()
+  string getPassword() nothrow
   {
     const(char)* _cretval;
     _cretval = g_uri_get_password(cast(GUri*)this._cPtr);
@@ -289,7 +289,7 @@ class Uri : gobject.boxed.Boxed
       flags with which uri was created.
       Returns: uri's path.
   */
-  string getPath()
+  string getPath() nothrow
   {
     const(char)* _cretval;
     _cretval = g_uri_get_path(cast(GUri*)this._cPtr);
@@ -301,7 +301,7 @@ class Uri : gobject.boxed.Boxed
       Gets uri's port.
       Returns: uri's port, or `-1` if no port was specified.
   */
-  int getPort()
+  int getPort() nothrow
   {
     int _retval;
     _retval = g_uri_get_port(cast(GUri*)this._cPtr);
@@ -316,7 +316,7 @@ class Uri : gobject.boxed.Boxed
       #GUriParamsIter or [glib.uri.Uri.parseParams] may be useful.
       Returns: uri's query.
   */
-  string getQuery()
+  string getQuery() nothrow
   {
     const(char)* _cretval;
     _cretval = g_uri_get_query(cast(GUri*)this._cPtr);
@@ -329,7 +329,7 @@ class Uri : gobject.boxed.Boxed
       regardless of the string or strings that uri was created from.
       Returns: uri's scheme.
   */
-  string getScheme()
+  string getScheme() nothrow
   {
     const(char)* _cretval;
     _cretval = g_uri_get_scheme(cast(GUri*)this._cPtr);
@@ -344,7 +344,7 @@ class Uri : gobject.boxed.Boxed
       `G_URI_FLAGS_HAS_AUTH_PARAMS`, this is the same as [glib.uri.Uri.getUserinfo].
       Returns: uri's user.
   */
-  string getUser()
+  string getUser() nothrow
   {
     const(char)* _cretval;
     _cretval = g_uri_get_user(cast(GUri*)this._cPtr);
@@ -357,7 +357,7 @@ class Uri : gobject.boxed.Boxed
       the flags with which uri was created.
       Returns: uri's userinfo.
   */
-  string getUserinfo()
+  string getUserinfo() nothrow
   {
     const(char)* _cretval;
     _cretval = g_uri_get_userinfo(cast(GUri*)this._cPtr);
@@ -405,7 +405,7 @@ class Uri : gobject.boxed.Boxed
       Returns: a string representing uri,
             which the caller must free.
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = g_uri_to_string(cast(GUri*)this._cPtr);
@@ -422,7 +422,7 @@ class Uri : gobject.boxed.Boxed
       Returns: a string representing
             uri, which the caller must free.
   */
-  string toStringPartial(glib.types.UriHideFlags flags)
+  string toStringPartial(glib.types.UriHideFlags flags) nothrow
   {
     char* _cretval;
     _cretval = g_uri_to_string_partial(cast(GUri*)this._cPtr, flags);
@@ -447,7 +447,7 @@ class Uri : gobject.boxed.Boxed
         fragment = the fragment, or null
       Returns: a new #GUri
   */
-  static glib.uri.Uri build(glib.types.UriFlags flags, string scheme, string userinfo, string host, int port, string path, string query = null, string fragment = null)
+  static glib.uri.Uri build(glib.types.UriFlags flags, string scheme, string userinfo, string host, int port, string path, string query = null, string fragment = null) nothrow
   {
     GUri* _cretval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -484,7 +484,7 @@ class Uri : gobject.boxed.Boxed
         fragment = the fragment, or null
       Returns: a new #GUri
   */
-  static glib.uri.Uri buildWithUser(glib.types.UriFlags flags, string scheme, string user, string password, string authParams, string host, int port, string path, string query = null, string fragment = null)
+  static glib.uri.Uri buildWithUser(glib.types.UriFlags flags, string scheme, string user, string password, string authParams, string host, int port, string path, string query = null, string fragment = null) nothrow
   {
     GUri* _cretval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -501,7 +501,7 @@ class Uri : gobject.boxed.Boxed
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = g_uri_error_quark();
@@ -528,7 +528,7 @@ class Uri : gobject.boxed.Boxed
       Returns: an escaped version of unescaped.
             The returned string should be freed when no longer needed.
   */
-  static string escapeBytes(ubyte[] unescaped, string reservedCharsAllowed = null)
+  static string escapeBytes(ubyte[] unescaped, string reservedCharsAllowed = null) nothrow
   {
     char* _cretval;
     size_t _length;
@@ -560,7 +560,7 @@ class Uri : gobject.boxed.Boxed
       Returns: an escaped version of unescaped. The
         returned string should be freed when no longer needed.
   */
-  static string escapeString(string unescaped, string reservedCharsAllowed, bool allowUtf8)
+  static string escapeString(string unescaped, string reservedCharsAllowed, bool allowUtf8) nothrow
   {
     char* _cretval;
     const(char)* _unescaped = unescaped.toCString(No.Alloc);
@@ -624,7 +624,7 @@ class Uri : gobject.boxed.Boxed
         fragment = the fragment, or null
       Returns: an absolute URI string
   */
-  static string join(glib.types.UriFlags flags, string scheme, string userinfo, string host, int port, string path, string query = null, string fragment = null)
+  static string join(glib.types.UriFlags flags, string scheme, string userinfo, string host, int port, string path, string query = null, string fragment = null) nothrow
   {
     char* _cretval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -664,7 +664,7 @@ class Uri : gobject.boxed.Boxed
         fragment = the fragment, or null
       Returns: an absolute URI string
   */
-  static string joinWithUser(glib.types.UriFlags flags, string scheme, string user, string password, string authParams, string host, int port, string path, string query = null, string fragment = null)
+  static string joinWithUser(glib.types.UriFlags flags, string scheme, string user, string password, string authParams, string host, int port, string path, string query = null, string fragment = null) nothrow
   {
     char* _cretval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -691,7 +691,7 @@ class Uri : gobject.boxed.Boxed
           of strings holding the individual URIs. The array should be freed
           with [glib.global.strfreev].
   */
-  static string[] listExtractUris(string uriList)
+  static string[] listExtractUris(string uriList) nothrow
   {
     char** _cretval;
     const(char)* _uriList = uriList.toCString(No.Alloc);
@@ -804,7 +804,7 @@ class Uri : gobject.boxed.Boxed
       Returns: The ‘scheme’ component of the URI, or
             null on error. The returned string should be freed when no longer needed.
   */
-  static string parseScheme(string uri)
+  static string parseScheme(string uri) nothrow
   {
     char* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -831,7 +831,7 @@ class Uri : gobject.boxed.Boxed
             null on error. The returned string is normalized to all-lowercase, and
             interned via [glib.global.internString], so it does not need to be freed.
   */
-  static string peekScheme(string uri)
+  static string peekScheme(string uri) nothrow
   {
     const(char)* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -1094,7 +1094,7 @@ class Uri : gobject.boxed.Boxed
         needed.  As a special case if null is given for escaped_string, this
         function will return null.
   */
-  static string unescapeSegment(string escapedString = null, string escapedStringEnd = null, string illegalCharacters = null)
+  static string unescapeSegment(string escapedString = null, string escapedStringEnd = null, string illegalCharacters = null) nothrow
   {
     char* _cretval;
     const(char)* _escapedString = escapedString.toCString(No.Alloc);
@@ -1121,7 +1121,7 @@ class Uri : gobject.boxed.Boxed
       Returns: an unescaped version of escaped_string.
         The returned string should be freed when no longer needed.
   */
-  static string unescapeString(string escapedString, string illegalCharacters = null)
+  static string unescapeString(string escapedString, string illegalCharacters = null) nothrow
   {
     char* _cretval;
     const(char)* _escapedString = escapedString.toCString(No.Alloc);
@@ -1134,12 +1134,12 @@ class Uri : gobject.boxed.Boxed
 
 class UriException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(glib.uri.Uri.errorQuark, cast(int)code, msg);
   }

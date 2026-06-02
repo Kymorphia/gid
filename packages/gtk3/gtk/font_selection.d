@@ -24,26 +24,26 @@ class FontSelection : gtk.box.Box
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_font_selection_get_type != &gidSymbolNotFound ? gtk_font_selection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FontSelection self()
+  override FontSelection self() nothrow
   {
     return this;
   }
@@ -52,31 +52,31 @@ class FontSelection : gtk.box.Box
       Get builder for [gtk.font_selection.FontSelection]
       Returns: New builder object
   */
-  static FontSelectionGidBuilder builder()
+  static FontSelectionGidBuilder builder() nothrow
   {
     return new FontSelectionGidBuilder;
   }
 
   /** */
-  @property string fontName()
+  @property string fontName() nothrow
   {
     return getFontName();
   }
 
   /** */
-  @property void fontName(string propval)
+  @property void fontName(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("font-name", propval);
   }
 
   /** */
-  @property string previewText()
+  @property string previewText() nothrow
   {
     return getPreviewText();
   }
 
   /** */
-  @property void previewText(string propval)
+  @property void previewText(string propval) nothrow
   {
     setPreviewText(propval);
   }
@@ -87,7 +87,7 @@ class FontSelection : gtk.box.Box
   
       Deprecated: Use #GtkFontChooserWidget instead
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_selection_new();
@@ -103,7 +103,7 @@ class FontSelection : gtk.box.Box
   
       Deprecated: Use #GtkFontChooser
   */
-  pango.font_face.FontFace getFace()
+  pango.font_face.FontFace getFace() nothrow
   {
     PangoFontFace* _cretval;
     _cretval = gtk_font_selection_get_face(cast(GtkFontSelection*)this._cPtr);
@@ -118,7 +118,7 @@ class FontSelection : gtk.box.Box
   
       Deprecated: Use #GtkFontChooser
   */
-  gtk.widget.Widget getFaceList()
+  gtk.widget.Widget getFaceList() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_selection_get_face_list(cast(GtkFontSelection*)this._cPtr);
@@ -135,7 +135,7 @@ class FontSelection : gtk.box.Box
   
       Deprecated: Use #GtkFontChooser
   */
-  pango.font_family.FontFamily getFamily()
+  pango.font_family.FontFamily getFamily() nothrow
   {
     PangoFontFamily* _cretval;
     _cretval = gtk_font_selection_get_family(cast(GtkFontSelection*)this._cPtr);
@@ -150,7 +150,7 @@ class FontSelection : gtk.box.Box
   
       Deprecated: Use #GtkFontChooser
   */
-  gtk.widget.Widget getFamilyList()
+  gtk.widget.Widget getFamilyList() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_selection_get_family_list(cast(GtkFontSelection*)this._cPtr);
@@ -172,7 +172,7 @@ class FontSelection : gtk.box.Box
   
       Deprecated: Use #GtkFontChooser
   */
-  string getFontName()
+  string getFontName() nothrow
   {
     char* _cretval;
     _cretval = gtk_font_selection_get_font_name(cast(GtkFontSelection*)this._cPtr);
@@ -186,7 +186,7 @@ class FontSelection : gtk.box.Box
   
       Deprecated: Use #GtkFontChooser
   */
-  gtk.widget.Widget getPreviewEntry()
+  gtk.widget.Widget getPreviewEntry() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_selection_get_preview_entry(cast(GtkFontSelection*)this._cPtr);
@@ -202,7 +202,7 @@ class FontSelection : gtk.box.Box
   
       Deprecated: Use #GtkFontChooser
   */
-  string getPreviewText()
+  string getPreviewText() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_font_selection_get_preview_text(cast(GtkFontSelection*)this._cPtr);
@@ -217,7 +217,7 @@ class FontSelection : gtk.box.Box
   
       Deprecated: Use #GtkFontChooser
   */
-  int getSize()
+  int getSize() nothrow
   {
     int _retval;
     _retval = gtk_font_selection_get_size(cast(GtkFontSelection*)this._cPtr);
@@ -231,7 +231,7 @@ class FontSelection : gtk.box.Box
   
       Deprecated: Use #GtkFontChooser
   */
-  gtk.widget.Widget getSizeEntry()
+  gtk.widget.Widget getSizeEntry() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_selection_get_size_entry(cast(GtkFontSelection*)this._cPtr);
@@ -245,7 +245,7 @@ class FontSelection : gtk.box.Box
   
       Deprecated: Use #GtkFontChooser
   */
-  gtk.widget.Widget getSizeList()
+  gtk.widget.Widget getSizeList() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_selection_get_size_list(cast(GtkFontSelection*)this._cPtr);
@@ -268,7 +268,7 @@ class FontSelection : gtk.box.Box
   
       Deprecated: Use #GtkFontChooser
   */
-  bool setFontName(string fontname)
+  bool setFontName(string fontname) nothrow
   {
     bool _retval;
     const(char)* _fontname = fontname.toCString(No.Alloc);
@@ -285,7 +285,7 @@ class FontSelection : gtk.box.Box
   
       Deprecated: Use #GtkFontChooser
   */
-  void setPreviewText(string text)
+  void setPreviewText(string text) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_font_selection_set_preview_text(cast(GtkFontSelection*)this._cPtr, _text);
@@ -298,13 +298,13 @@ class FontSelectionGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
 
 
   /** */
-  T fontName(string propval)
+  T fontName(string propval) nothrow
   {
     return setProperty("font-name", propval);
   }
 
   /** */
-  T previewText(string propval)
+  T previewText(string propval) nothrow
   {
     return setProperty("preview-text", propval);
   }
@@ -317,7 +317,7 @@ final class FontSelectionGidBuilder : FontSelectionGidBuilderImpl!FontSelectionG
       Create object from builder.
       Returns: New object
   */
-  FontSelection build()
+  FontSelection build() nothrow
   {
     return new FontSelection(cast(void*)createGObject(FontSelection._getGType), No.Take);
   }

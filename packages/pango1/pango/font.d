@@ -27,26 +27,26 @@ class Font : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_font_get_type != &gidSymbolNotFound ? pango_font_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Font self()
+  override Font self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class Font : gobject.object.ObjectWrap
       Get builder for [pango.font.Font]
       Returns: New builder object
   */
-  static FontGidBuilder builder()
+  static FontGidBuilder builder() nothrow
   {
     return new FontGidBuilder;
   }
@@ -93,7 +93,7 @@ class Font : gobject.object.ObjectWrap
       the font size in device units.
       Returns: a newly-allocated [pango.font_description.FontDescription] object.
   */
-  pango.font_description.FontDescription describe()
+  pango.font_description.FontDescription describe() nothrow
   {
     PangoFontDescription* _cretval;
     _cretval = pango_font_describe(cast(PangoFont*)this._cPtr);
@@ -108,7 +108,7 @@ class Font : gobject.object.ObjectWrap
       Use [pango.font.Font.describe] if you want the font size in points.
       Returns: a newly-allocated [pango.font_description.FontDescription] object.
   */
-  pango.font_description.FontDescription describeWithAbsoluteSize()
+  pango.font_description.FontDescription describeWithAbsoluteSize() nothrow
   {
     PangoFontDescription* _cretval;
     _cretval = pango_font_describe_with_absolute_size(cast(PangoFont*)this._cPtr);
@@ -124,7 +124,7 @@ class Font : gobject.object.ObjectWrap
       Returns: a newly-allocated [pango.coverage.Coverage]
           object.
   */
-  pango.coverage.Coverage getCoverage(pango.language.Language language)
+  pango.coverage.Coverage getCoverage(pango.language.Language language) nothrow
   {
     PangoCoverage* _cretval;
     _cretval = pango_font_get_coverage(cast(PangoFont*)this._cPtr, language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);
@@ -136,7 +136,7 @@ class Font : gobject.object.ObjectWrap
       Gets the [pango.font_face.FontFace] to which font belongs.
       Returns: the [pango.font_face.FontFace]
   */
-  pango.font_face.FontFace getFace()
+  pango.font_face.FontFace getFace() nothrow
   {
     PangoFontFace* _cretval;
     _cretval = pango_font_get_face(cast(PangoFont*)this._cPtr);
@@ -157,7 +157,7 @@ class Font : gobject.object.ObjectWrap
         features = Array to features in
         numFeatures = the number of used items in features
   */
-  void getFeatures(ref harfbuzz.feature.Feature[] features, ref uint numFeatures)
+  void getFeatures(ref harfbuzz.feature.Feature[] features, ref uint numFeatures) nothrow
   {
     uint _len;
     _len = cast(uint)features.length;
@@ -179,7 +179,7 @@ class Font : gobject.object.ObjectWrap
       Returns: the [pango.font_map.FontMap]
           for the font
   */
-  pango.font_map.FontMap getFontMap()
+  pango.font_map.FontMap getFontMap() nothrow
   {
     PangoFontMap* _cretval;
     _cretval = pango_font_get_font_map(cast(PangoFont*)this._cPtr);
@@ -205,7 +205,7 @@ class Font : gobject.object.ObjectWrap
         inkRect = rectangle used to store the extents of the glyph as drawn
         logicalRect = rectangle used to store the logical extents of the glyph
   */
-  void getGlyphExtents(pango.types.Glyph glyph, out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
+  void getGlyphExtents(pango.types.Glyph glyph, out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect) nothrow
   {
     pango_font_get_glyph_extents(cast(PangoFont*)this._cPtr, glyph, &inkRect, &logicalRect);
   }
@@ -221,7 +221,7 @@ class Font : gobject.object.ObjectWrap
       and its fontmap are valid.
       Returns: an array of [pango.language.Language]
   */
-  pango.language.Language[] getLanguages()
+  pango.language.Language[] getLanguages() nothrow
   {
     PangoLanguage** _cretval;
     _cretval = pango_font_get_languages(cast(PangoFont*)this._cPtr);
@@ -256,7 +256,7 @@ class Font : gobject.object.ObjectWrap
       Returns: a [pango.font_metrics.FontMetrics] object. The caller must call
           [pango.font_metrics.FontMetrics.unref] when finished using the object.
   */
-  pango.font_metrics.FontMetrics getMetrics(pango.language.Language language = null)
+  pango.font_metrics.FontMetrics getMetrics(pango.language.Language language = null) nothrow
   {
     PangoFontMetrics* _cretval;
     _cretval = pango_font_get_metrics(cast(PangoFont*)this._cPtr, language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);
@@ -273,7 +273,7 @@ class Font : gobject.object.ObjectWrap
         wc = a Unicode character
       Returns: `TRUE` if font can render wc
   */
-  bool hasChar(dchar wc)
+  bool hasChar(dchar wc) nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_font_has_char(cast(PangoFont*)this._cPtr, wc);
@@ -292,7 +292,7 @@ class Font : gobject.object.ObjectWrap
       To recreate a font from its serialized form, use [pango.font.Font.deserialize].
       Returns: a [glib.bytes.Bytes] containing the serialized form of font
   */
-  glib.bytes.Bytes serialize()
+  glib.bytes.Bytes serialize() nothrow
   {
     GBytes* _cretval;
     _cretval = pango_font_serialize(cast(PangoFont*)this._cPtr);
@@ -313,7 +313,7 @@ final class FontGidBuilder : FontGidBuilderImpl!FontGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Font build()
+  Font build() nothrow
   {
     return new Font(cast(void*)createGObject(Font._getGType), No.Take);
   }

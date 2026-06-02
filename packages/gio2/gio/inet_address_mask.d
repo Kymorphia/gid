@@ -23,26 +23,26 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_inet_address_mask_get_type != &gidSymbolNotFound ? g_inet_address_mask_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override InetAddressMask self()
+  override InetAddressMask self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
       Get builder for [gio.inet_address_mask.InetAddressMask]
       Returns: New builder object
   */
-  static InetAddressMaskGidBuilder builder()
+  static InetAddressMaskGidBuilder builder() nothrow
   {
     return new InetAddressMaskGidBuilder;
   }
@@ -60,7 +60,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
       Get `address` property.
       Returns: The base address.
   */
-  @property gio.inet_address.InetAddress address()
+  @property gio.inet_address.InetAddress address() nothrow
   {
     return getAddress();
   }
@@ -70,7 +70,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
       Params:
         propval = The base address.
   */
-  @property void address(gio.inet_address.InetAddress propval)
+  @property void address(gio.inet_address.InetAddress propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gio.inet_address.InetAddress)("address", propval);
   }
@@ -79,7 +79,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
       Get `family` property.
       Returns: The address family (IPv4 or IPv6).
   */
-  @property gio.types.SocketFamily family()
+  @property gio.types.SocketFamily family() nothrow
   {
     return getFamily();
   }
@@ -88,7 +88,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
       Get `length` property.
       Returns: The prefix length, in bytes.
   */
-  @property uint length()
+  @property uint length() nothrow
   {
     return getLength();
   }
@@ -98,7 +98,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
       Params:
         propval = The prefix length, in bytes.
   */
-  @property void length(uint propval)
+  @property void length(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("length", propval);
   }
@@ -156,7 +156,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
         mask2 = another #GInetAddressMask
       Returns: whether mask and mask2 are the same mask
   */
-  bool equal(gio.inet_address_mask.InetAddressMask mask2)
+  bool equal(gio.inet_address_mask.InetAddressMask mask2) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_inet_address_mask_equal(cast(GInetAddressMask*)this._cPtr, mask2 ? cast(GInetAddressMask*)mask2._cPtr(No.Dup) : null);
@@ -167,7 +167,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
       Gets mask's base address
       Returns: mask's base address
   */
-  gio.inet_address.InetAddress getAddress()
+  gio.inet_address.InetAddress getAddress() nothrow
   {
     GInetAddress* _cretval;
     _cretval = g_inet_address_mask_get_address(cast(GInetAddressMask*)this._cPtr);
@@ -179,7 +179,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
       Gets the #GSocketFamily of mask's address
       Returns: the #GSocketFamily of mask's address
   */
-  gio.types.SocketFamily getFamily()
+  gio.types.SocketFamily getFamily() nothrow
   {
     GSocketFamily _cretval;
     _cretval = g_inet_address_mask_get_family(cast(GInetAddressMask*)this._cPtr);
@@ -191,7 +191,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
       Gets mask's length
       Returns: mask's length
   */
-  uint getLength()
+  uint getLength() nothrow
   {
     uint _retval;
     _retval = g_inet_address_mask_get_length(cast(GInetAddressMask*)this._cPtr);
@@ -206,7 +206,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
       Returns: whether address falls within the range described by
         mask.
   */
-  bool matches(gio.inet_address.InetAddress address)
+  bool matches(gio.inet_address.InetAddress address) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_inet_address_mask_matches(cast(GInetAddressMask*)this._cPtr, address ? cast(GInetAddress*)address._cPtr(No.Dup) : null);
@@ -217,7 +217,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
       Converts mask back to its corresponding string form.
       Returns: a string corresponding to mask.
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = g_inet_address_mask_to_string(cast(GInetAddressMask*)this._cPtr);
@@ -238,7 +238,7 @@ class InetAddressMaskGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The base address.
       Returns: Builder instance for fluent chaining
   */
-  T address(gio.inet_address.InetAddress propval)
+  T address(gio.inet_address.InetAddress propval) nothrow
   {
     return setProperty("address", propval);
   }
@@ -249,7 +249,7 @@ class InetAddressMaskGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The prefix length, in bytes.
       Returns: Builder instance for fluent chaining
   */
-  T length(uint propval)
+  T length(uint propval) nothrow
   {
     return setProperty("length", propval);
   }
@@ -262,7 +262,7 @@ final class InetAddressMaskGidBuilder : InetAddressMaskGidBuilderImpl!InetAddres
       Create object from builder.
       Returns: New object
   */
-  InetAddressMask build()
+  InetAddressMask build() nothrow
   {
     return new InetAddressMask(cast(void*)createGObject(InetAddressMask._getGType), Yes.Take);
   }

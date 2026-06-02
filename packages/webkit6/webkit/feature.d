@@ -47,32 +47,32 @@ class Feature : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_feature_get_type != &gidSymbolNotFound ? webkit_feature_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Feature self()
+  override Feature self() nothrow
   {
     return this;
   }
@@ -84,7 +84,7 @@ class Feature : gobject.boxed.Boxed
       to use the category to group related features together.
       Returns: Feature category.
   */
-  string getCategory()
+  string getCategory() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_feature_get_category(cast(WebKitFeature*)this._cPtr);
@@ -101,7 +101,7 @@ class Feature : gobject.boxed.Boxed
       [webkit.settings.Settings.getFeatureEnabled].
       Returns: Whether the feature is enabled by default.
   */
-  bool getDefaultValue()
+  bool getDefaultValue() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_feature_get_default_value(cast(WebKitFeature*)this._cPtr);
@@ -121,7 +121,7 @@ class Feature : gobject.boxed.Boxed
       is returned in this case.
       Returns: Feature description.
   */
-  string getDetails()
+  string getDetails() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_feature_get_details(cast(WebKitFeature*)this._cPtr);
@@ -133,7 +133,7 @@ class Feature : gobject.boxed.Boxed
       Gets a string that uniquely identifies the feature.
       Returns: The identifier string for the feature.
   */
-  string getIdentifier()
+  string getIdentifier() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_feature_get_identifier(cast(WebKitFeature*)this._cPtr);
@@ -151,7 +151,7 @@ class Feature : gobject.boxed.Boxed
       is returned in this case.
       Returns: Short feature name.
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_feature_get_name(cast(WebKitFeature*)this._cPtr);
@@ -163,7 +163,7 @@ class Feature : gobject.boxed.Boxed
       Gets the status of the feature.
       Returns: Feature status.
   */
-  webkit.types.FeatureStatus getStatus()
+  webkit.types.FeatureStatus getStatus() nothrow
   {
     WebKitFeatureStatus _cretval;
     _cretval = webkit_feature_get_status(cast(WebKitFeature*)this._cPtr);

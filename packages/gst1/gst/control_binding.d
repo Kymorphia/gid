@@ -21,26 +21,26 @@ class ControlBinding : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_control_binding_get_type != &gidSymbolNotFound ? gst_control_binding_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ControlBinding self()
+  override ControlBinding self() nothrow
   {
     return this;
   }
@@ -49,19 +49,19 @@ class ControlBinding : gst.object.ObjectWrap
       Get builder for [gst.control_binding.ControlBinding]
       Returns: New builder object
   */
-  static ControlBindingGidBuilder builder()
+  static ControlBindingGidBuilder builder() nothrow
   {
     return new ControlBindingGidBuilder;
   }
 
   /** */
-  override @property string name()
+  override @property string name() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("name");
   }
 
   /** */
-  @property gst.object.ObjectWrap object()
+  @property gst.object.ObjectWrap object() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gst.object.ObjectWrap)("object");
   }
@@ -82,7 +82,7 @@ class ControlBinding : gst.object.ObjectWrap
         values = array to put control-values in
       Returns: true if the given array could be filled, false otherwise
   */
-  bool getGValueArray(gst.types.ClockTime timestamp, gst.types.ClockTime interval, gobject.value.Value[] values)
+  bool getGValueArray(gst.types.ClockTime timestamp, gst.types.ClockTime interval, gobject.value.Value[] values) nothrow
   {
     bool _retval;
     uint _nValues;
@@ -108,7 +108,7 @@ class ControlBinding : gst.object.ObjectWrap
       Returns: the GValue of the property at the given time,
         or null if the property isn't controlled.
   */
-  gobject.value.Value getValue(gst.types.ClockTime timestamp)
+  gobject.value.Value getValue(gst.types.ClockTime timestamp) nothrow
   {
     GValue* _cretval;
     _cretval = gst_control_binding_get_value(cast(GstControlBinding*)this._cPtr, timestamp);
@@ -120,7 +120,7 @@ class ControlBinding : gst.object.ObjectWrap
       Checks if the control binding is disabled.
       Returns: true if the binding is inactive
   */
-  bool isDisabled()
+  bool isDisabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_control_binding_is_disabled(cast(GstControlBinding*)this._cPtr);
@@ -135,7 +135,7 @@ class ControlBinding : gst.object.ObjectWrap
         disabled = boolean that specifies whether to disable the controller
           or not.
   */
-  void setDisabled(bool disabled)
+  void setDisabled(bool disabled) nothrow
   {
     gst_control_binding_set_disabled(cast(GstControlBinding*)this._cPtr, disabled);
   }
@@ -156,7 +156,7 @@ class ControlBinding : gst.object.ObjectWrap
       Returns: true if the controller value could be applied to the object
         property, false otherwise
   */
-  bool syncValues(gst.object.ObjectWrap object, gst.types.ClockTime timestamp, gst.types.ClockTime lastSync)
+  bool syncValues(gst.object.ObjectWrap object, gst.types.ClockTime timestamp, gst.types.ClockTime lastSync) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_control_binding_sync_values(cast(GstControlBinding*)this._cPtr, object ? cast(GstObject*)object._cPtr(No.Dup) : null, timestamp, lastSync);
@@ -169,13 +169,13 @@ class ControlBindingGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  override T name(string propval)
+  override T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
 
   /** */
-  T object(gst.object.ObjectWrap propval)
+  T object(gst.object.ObjectWrap propval) nothrow
   {
     return setProperty("object", propval);
   }
@@ -188,7 +188,7 @@ final class ControlBindingGidBuilder : ControlBindingGidBuilderImpl!ControlBindi
       Create object from builder.
       Returns: New object
   */
-  ControlBinding build()
+  ControlBinding build() nothrow
   {
     return new ControlBinding(cast(void*)createGObject(ControlBinding._getGType), No.Take);
   }

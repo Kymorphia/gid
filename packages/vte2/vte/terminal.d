@@ -40,26 +40,26 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())vte_terminal_get_type != &gidSymbolNotFound ? vte_terminal_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Terminal self()
+  override Terminal self() nothrow
   {
     return this;
   }
@@ -68,7 +68,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get builder for [vte.terminal.Terminal]
       Returns: New builder object
   */
-  static TerminalGidBuilder builder()
+  static TerminalGidBuilder builder() nothrow
   {
     return new TerminalGidBuilder;
   }
@@ -80,7 +80,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
       Deprecated: There's probably no reason for this feature to exist.
   */
-  @property bool allowBold()
+  @property bool allowBold() nothrow
   {
     return getAllowBold();
   }
@@ -93,7 +93,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
       Deprecated: There's probably no reason for this feature to exist.
   */
-  @property void allowBold(bool propval)
+  @property void allowBold(bool propval) nothrow
   {
     setAllowBold(propval);
   }
@@ -102,7 +102,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `allowHyperlink` property.
       Returns: Controls whether or not hyperlinks (OSC 8 escape sequence) are recognized and displayed.
   */
-  @property bool allowHyperlink()
+  @property bool allowHyperlink() nothrow
   {
     return getAllowHyperlink();
   }
@@ -112,7 +112,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = Controls whether or not hyperlinks (OSC 8 escape sequence) are recognized and displayed.
   */
-  @property void allowHyperlink(bool propval)
+  @property void allowHyperlink(bool propval) nothrow
   {
     setAllowHyperlink(propval);
   }
@@ -122,7 +122,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Returns: Controls whether or not the terminal will beep when the child outputs the
         "bl" sequence.
   */
-  @property bool audibleBell()
+  @property bool audibleBell() nothrow
   {
     return getAudibleBell();
   }
@@ -133,7 +133,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         propval = Controls whether or not the terminal will beep when the child outputs the
           "bl" sequence.
   */
-  @property void audibleBell(bool propval)
+  @property void audibleBell(bool propval) nothrow
   {
     setAudibleBell(propval);
   }
@@ -143,7 +143,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Returns: Controls what string or control sequence the terminal sends to its child
         when the user presses the backspace key.
   */
-  @property vte.types.EraseBinding backspaceBinding()
+  @property vte.types.EraseBinding backspaceBinding() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(vte.types.EraseBinding)("backspace-binding");
   }
@@ -154,7 +154,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         propval = Controls what string or control sequence the terminal sends to its child
           when the user presses the backspace key.
   */
-  @property void backspaceBinding(vte.types.EraseBinding propval)
+  @property void backspaceBinding(vte.types.EraseBinding propval) nothrow
   {
     setBackspaceBinding(propval);
   }
@@ -165,7 +165,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         of the first 8 palette colors, in addition to making them bold (legacy behavior)
         or if SGR 1 only enables bold and leaves the color intact.
   */
-  @property bool boldIsBright()
+  @property bool boldIsBright() nothrow
   {
     return getBoldIsBright();
   }
@@ -177,7 +177,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
           of the first 8 palette colors, in addition to making them bold (legacy behavior)
           or if SGR 1 only enables bold and leaves the color intact.
   */
-  @property void boldIsBright(bool propval)
+  @property void boldIsBright(bool propval) nothrow
   {
     setBoldIsBright(propval);
   }
@@ -186,7 +186,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `cellHeightScale` property.
       Returns: Scale factor for the cell height, to increase line spacing. (The font's height is not affected.)
   */
-  @property double cellHeightScale()
+  @property double cellHeightScale() nothrow
   {
     return getCellHeightScale();
   }
@@ -196,7 +196,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = Scale factor for the cell height, to increase line spacing. (The font's height is not affected.)
   */
-  @property void cellHeightScale(double propval)
+  @property void cellHeightScale(double propval) nothrow
   {
     setCellHeightScale(propval);
   }
@@ -205,7 +205,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `cellWidthScale` property.
       Returns: Scale factor for the cell width, to increase letter spacing. (The font's width is not affected.)
   */
-  @property double cellWidthScale()
+  @property double cellWidthScale() nothrow
   {
     return getCellWidthScale();
   }
@@ -215,7 +215,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = Scale factor for the cell width, to increase letter spacing. (The font's width is not affected.)
   */
-  @property void cellWidthScale(double propval)
+  @property void cellWidthScale(double propval) nothrow
   {
     setCellWidthScale(propval);
   }
@@ -230,7 +230,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         This setting only takes effect the next time the terminal is reset, either
         via escape sequence or with [vte.terminal.Terminal.reset].
   */
-  @property int cjkAmbiguousWidth()
+  @property int cjkAmbiguousWidth() nothrow
   {
     return getCjkAmbiguousWidth();
   }
@@ -246,7 +246,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
           This setting only takes effect the next time the terminal is reset, either
           via escape sequence or with [vte.terminal.Terminal.reset].
   */
-  @property void cjkAmbiguousWidth(int propval)
+  @property void cjkAmbiguousWidth(int propval) nothrow
   {
     setCjkAmbiguousWidth(propval);
   }
@@ -257,7 +257,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         #VteTerminal::context-menu-model property or [vte.terminal.Terminal.setContextMenuModel]
         takes precedence over this.
   */
-  @property gtk.menu.Menu contextMenu()
+  @property gtk.menu.Menu contextMenu() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.menu.Menu)("context-menu");
   }
@@ -269,7 +269,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
           #VteTerminal::context-menu-model property or [vte.terminal.Terminal.setContextMenuModel]
           takes precedence over this.
   */
-  @property void contextMenu(gtk.menu.Menu propval)
+  @property void contextMenu(gtk.menu.Menu propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.menu.Menu)("context-menu", propval);
   }
@@ -280,7 +280,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         generated from this model, and overrides a context menu set with the
         #VteTerminal::context-menu property or [vte.terminal.Terminal.setContextMenu].
   */
-  @property gio.menu_model.MenuModel contextMenuModel()
+  @property gio.menu_model.MenuModel contextMenuModel() nothrow
   {
     return getContextMenuModel();
   }
@@ -292,7 +292,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
           generated from this model, and overrides a context menu set with the
           #VteTerminal::context-menu property or [vte.terminal.Terminal.setContextMenu].
   */
-  @property void contextMenuModel(gio.menu_model.MenuModel propval)
+  @property void contextMenuModel(gio.menu_model.MenuModel propval) nothrow
   {
     setContextMenuModel(propval);
   }
@@ -301,7 +301,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `currentContainerName` property.
       Returns: The name of the current container, or null if unset.
   */
-  @property string currentContainerName()
+  @property string currentContainerName() nothrow
   {
     return getCurrentContainerName();
   }
@@ -311,7 +311,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Returns: The name of the runtime toolset used to set up the current
         container, or null if unset.
   */
-  @property string currentContainerRuntime()
+  @property string currentContainerRuntime() nothrow
   {
     return getCurrentContainerRuntime();
   }
@@ -320,7 +320,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `currentDirectoryUri` property.
       Returns: The current directory URI, or null if unset.
   */
-  @property string currentDirectoryUri()
+  @property string currentDirectoryUri() nothrow
   {
     return getCurrentDirectoryUri();
   }
@@ -329,7 +329,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `currentFileUri` property.
       Returns: The current file URI, or null if unset.
   */
-  @property string currentFileUri()
+  @property string currentFileUri() nothrow
   {
     return getCurrentFileUri();
   }
@@ -339,7 +339,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Returns: Sets whether or not the cursor will blink. Using [vte.types.CursorBlinkMode.System]
         will use the #GtkSettings:gtk-cursor-blink setting.
   */
-  @property vte.types.CursorBlinkMode cursorBlinkMode()
+  @property vte.types.CursorBlinkMode cursorBlinkMode() nothrow
   {
     return getCursorBlinkMode();
   }
@@ -350,7 +350,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         propval = Sets whether or not the cursor will blink. Using [vte.types.CursorBlinkMode.System]
           will use the #GtkSettings:gtk-cursor-blink setting.
   */
-  @property void cursorBlinkMode(vte.types.CursorBlinkMode propval)
+  @property void cursorBlinkMode(vte.types.CursorBlinkMode propval) nothrow
   {
     setCursorBlinkMode(propval);
   }
@@ -359,7 +359,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `cursorShape` property.
       Returns: Controls the shape of the cursor.
   */
-  @property vte.types.CursorShape cursorShape()
+  @property vte.types.CursorShape cursorShape() nothrow
   {
     return getCursorShape();
   }
@@ -369,7 +369,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = Controls the shape of the cursor.
   */
-  @property void cursorShape(vte.types.CursorShape propval)
+  @property void cursorShape(vte.types.CursorShape propval) nothrow
   {
     setCursorShape(propval);
   }
@@ -379,7 +379,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Returns: Controls what string or control sequence the terminal sends to its child
         when the user presses the delete key.
   */
-  @property vte.types.EraseBinding deleteBinding()
+  @property vte.types.EraseBinding deleteBinding() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(vte.types.EraseBinding)("delete-binding");
   }
@@ -390,7 +390,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         propval = Controls what string or control sequence the terminal sends to its child
           when the user presses the delete key.
   */
-  @property void deleteBinding(vte.types.EraseBinding propval)
+  @property void deleteBinding(vte.types.EraseBinding propval) nothrow
   {
     setDeleteBinding(propval);
   }
@@ -399,7 +399,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `enableA11y` property.
       Returns: Controls whether or not a11y is enabled for the widget.
   */
-  @property bool enableA11y()
+  @property bool enableA11y() nothrow
   {
     return getEnableA11y();
   }
@@ -409,7 +409,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = Controls whether or not a11y is enabled for the widget.
   */
-  @property void enableA11y(bool propval)
+  @property void enableA11y(bool propval) nothrow
   {
     setEnableA11y(propval);
   }
@@ -418,7 +418,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `enableBidi` property.
       Returns: Controls whether or not the terminal will perform bidirectional text rendering.
   */
-  @property bool enableBidi()
+  @property bool enableBidi() nothrow
   {
     return getEnableBidi();
   }
@@ -428,19 +428,19 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = Controls whether or not the terminal will perform bidirectional text rendering.
   */
-  @property void enableBidi(bool propval)
+  @property void enableBidi(bool propval) nothrow
   {
     setEnableBidi(propval);
   }
 
   /** */
-  @property bool enableFallbackScrolling()
+  @property bool enableFallbackScrolling() nothrow
   {
     return getEnableFallbackScrolling();
   }
 
   /** */
-  @property void enableFallbackScrolling(bool propval)
+  @property void enableFallbackScrolling(bool propval) nothrow
   {
     setEnableFallbackScrolling(propval);
   }
@@ -449,7 +449,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `enableShaping` property.
       Returns: Controls whether or not the terminal will shape Arabic text.
   */
-  @property bool enableShaping()
+  @property bool enableShaping() nothrow
   {
     return getEnableShaping();
   }
@@ -459,7 +459,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = Controls whether or not the terminal will shape Arabic text.
   */
-  @property void enableShaping(bool propval)
+  @property void enableShaping(bool propval) nothrow
   {
     setEnableShaping(propval);
   }
@@ -468,7 +468,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `enableSixel` property.
       Returns: Controls whether SIXEL image support is enabled.
   */
-  @property bool enableSixel()
+  @property bool enableSixel() nothrow
   {
     return getEnableSixel();
   }
@@ -478,7 +478,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = Controls whether SIXEL image support is enabled.
   */
-  @property void enableSixel(bool propval)
+  @property void enableSixel(bool propval) nothrow
   {
     setEnableSixel(propval);
   }
@@ -493,7 +493,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Deprecated: Instead of using this, you should use a tool like
           luit(1) when support for non-UTF-8 is required
   */
-  @property string encoding()
+  @property string encoding() nothrow
   {
     return getEncoding();
   }
@@ -509,7 +509,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Deprecated: Instead of using this, you should use a tool like
           luit(1) when support for non-UTF-8 is required
   */
-  @property void encoding(string propval)
+  @property void encoding(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("encoding", propval);
   }
@@ -522,7 +522,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         metrics, and attempt to resize itself to keep the same number of rows
         and columns.
   */
-  @property pango.font_description.FontDescription fontDesc()
+  @property pango.font_description.FontDescription fontDesc() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(pango.font_description.FontDescription)("font-desc");
   }
@@ -536,7 +536,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
           metrics, and attempt to resize itself to keep the same number of rows
           and columns.
   */
-  @property void fontDesc(pango.font_description.FontDescription propval)
+  @property void fontDesc(pango.font_description.FontDescription propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(pango.font_description.FontDescription)("font-desc", propval);
   }
@@ -550,7 +550,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         function to set a #cairo_font_options_t that has
         [cairo.types.HintMetrics.Off] set.
   */
-  @property cairo.font_options.FontOptions fontOptions()
+  @property cairo.font_options.FontOptions fontOptions() nothrow
   {
     return getFontOptions();
   }
@@ -565,7 +565,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
           function to set a #cairo_font_options_t that has
           [cairo.types.HintMetrics.Off] set.
   */
-  @property void fontOptions(cairo.font_options.FontOptions propval)
+  @property void fontOptions(cairo.font_options.FontOptions propval) nothrow
   {
     setFontOptions(propval);
   }
@@ -574,7 +574,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `fontScale` property.
       Returns: The terminal's font scale.
   */
-  @property double fontScale()
+  @property double fontScale() nothrow
   {
     return getFontScale();
   }
@@ -584,7 +584,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = The terminal's font scale.
   */
-  @property void fontScale(double propval)
+  @property void fontScale(double propval) nothrow
   {
     setFontScale(propval);
   }
@@ -593,13 +593,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `hyperlinkHoverUri` property.
       Returns: The currently hovered hyperlink URI, or null if unset.
   */
-  @property string hyperlinkHoverUri()
+  @property string hyperlinkHoverUri() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("hyperlink-hover-uri");
   }
 
   /** */
-  @property string iconTitle()
+  @property string iconTitle() nothrow
   {
     return getIconTitle();
   }
@@ -610,7 +610,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         key press and mouse button press and motion events are not sent to the
         terminal's child.
   */
-  @property bool inputEnabled()
+  @property bool inputEnabled() nothrow
   {
     return getInputEnabled();
   }
@@ -622,7 +622,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
           key press and mouse button press and motion events are not sent to the
           terminal's child.
   */
-  @property void inputEnabled(bool propval)
+  @property void inputEnabled(bool propval) nothrow
   {
     setInputEnabled(propval);
   }
@@ -633,7 +633,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         is enabled, the mouse cursor will be hidden when the user presses a key and
         shown when the user moves the mouse.
   */
-  @property bool pointerAutohide()
+  @property bool pointerAutohide() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("pointer-autohide");
   }
@@ -645,7 +645,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
           is enabled, the mouse cursor will be hidden when the user presses a key and
           shown when the user moves the mouse.
   */
-  @property void pointerAutohide(bool propval)
+  @property void pointerAutohide(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("pointer-autohide", propval);
   }
@@ -654,7 +654,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `pty` property.
       Returns: The PTY object for the terminal.
   */
-  @property vte.pty.Pty pty()
+  @property vte.pty.Pty pty() nothrow
   {
     return getPty();
   }
@@ -664,7 +664,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = The PTY object for the terminal.
   */
-  @property void pty(vte.pty.Pty propval)
+  @property void pty(vte.pty.Pty propval) nothrow
   {
     setPty(propval);
   }
@@ -674,7 +674,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Returns: Controls whether or not the terminal will rewrap its contents, including
         the scrollback buffer, whenever the terminal's width changes.
   */
-  @property bool rewrapOnResize()
+  @property bool rewrapOnResize() nothrow
   {
     return getRewrapOnResize();
   }
@@ -685,7 +685,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         propval = Controls whether or not the terminal will rewrap its contents, including
           the scrollback buffer, whenever the terminal's width changes.
   */
-  @property void rewrapOnResize(bool propval)
+  @property void rewrapOnResize(bool propval) nothrow
   {
     setRewrapOnResize(propval);
   }
@@ -695,7 +695,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Returns: Controls whether or not the terminal will forcibly scroll to the bottom of
         the viewable history when the text is inserted (e.g. by a paste).
   */
-  @property bool scrollOnInsert()
+  @property bool scrollOnInsert() nothrow
   {
     return getScrollOnInsert();
   }
@@ -706,7 +706,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         propval = Controls whether or not the terminal will forcibly scroll to the bottom of
           the viewable history when the text is inserted (e.g. by a paste).
   */
-  @property void scrollOnInsert(bool propval)
+  @property void scrollOnInsert(bool propval) nothrow
   {
     setScrollOnInsert(propval);
   }
@@ -717,7 +717,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         the viewable history when the user presses a key.  Modifier keys do not
         trigger this behavior.
   */
-  @property bool scrollOnKeystroke()
+  @property bool scrollOnKeystroke() nothrow
   {
     return getScrollOnKeystroke();
   }
@@ -729,7 +729,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
           the viewable history when the user presses a key.  Modifier keys do not
           trigger this behavior.
   */
-  @property void scrollOnKeystroke(bool propval)
+  @property void scrollOnKeystroke(bool propval) nothrow
   {
     setScrollOnKeystroke(propval);
   }
@@ -739,7 +739,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Returns: Controls whether or not the terminal will forcibly scroll to the bottom of
         the viewable history when the new data is received from the child.
   */
-  @property bool scrollOnOutput()
+  @property bool scrollOnOutput() nothrow
   {
     return getScrollOnOutput();
   }
@@ -750,7 +750,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         propval = Controls whether or not the terminal will forcibly scroll to the bottom of
           the viewable history when the new data is received from the child.
   */
-  @property void scrollOnOutput(bool propval)
+  @property void scrollOnOutput(bool propval) nothrow
   {
     setScrollOnOutput(propval);
   }
@@ -761,7 +761,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         or pixels. This can be enabled when the terminal is the child of a
         GtkScrolledWindow to fix some bugs with its kinetic scrolling.
   */
-  @property bool scrollUnitIsPixels()
+  @property bool scrollUnitIsPixels() nothrow
   {
     return getScrollUnitIsPixels();
   }
@@ -773,7 +773,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
           or pixels. This can be enabled when the terminal is the child of a
           GtkScrolledWindow to fix some bugs with its kinetic scrolling.
   */
-  @property void scrollUnitIsPixels(bool propval)
+  @property void scrollUnitIsPixels(bool propval) nothrow
   {
     setScrollUnitIsPixels(propval);
   }
@@ -787,7 +787,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         For terminal types which have an alternate screen buffer, no scrollback is
         allowed on the alternate screen buffer.
   */
-  @property uint scrollbackLines()
+  @property uint scrollbackLines() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("scrollback-lines");
   }
@@ -802,7 +802,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
           For terminal types which have an alternate screen buffer, no scrollback is
           allowed on the alternate screen buffer.
   */
-  @property void scrollbackLines(uint propval)
+  @property void scrollbackLines(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("scrollback-lines", propval);
   }
@@ -811,7 +811,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `textBlinkMode` property.
       Returns: Controls whether or not the terminal will allow blinking text.
   */
-  @property vte.types.TextBlinkMode textBlinkMode()
+  @property vte.types.TextBlinkMode textBlinkMode() nothrow
   {
     return getTextBlinkMode();
   }
@@ -821,7 +821,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = Controls whether or not the terminal will allow blinking text.
   */
-  @property void textBlinkMode(vte.types.TextBlinkMode propval)
+  @property void textBlinkMode(vte.types.TextBlinkMode propval) nothrow
   {
     setTextBlinkMode(propval);
   }
@@ -830,7 +830,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `windowTitle` property.
       Returns: The terminal's title.
   */
-  @property string windowTitle()
+  @property string windowTitle() nothrow
   {
     return getWindowTitle();
   }
@@ -843,7 +843,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         
         If null, a built-in set is used.
   */
-  @property string wordCharExceptions()
+  @property string wordCharExceptions() nothrow
   {
     return getWordCharExceptions();
   }
@@ -852,7 +852,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `xalign` property.
       Returns: The horizontal alignment of @terminal within its allocation.
   */
-  @property vte.types.Align xalign()
+  @property vte.types.Align xalign() nothrow
   {
     return getXalign();
   }
@@ -862,7 +862,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = The horizontal alignment of @terminal within its allocation.
   */
-  @property void xalign(vte.types.Align propval)
+  @property void xalign(vte.types.Align propval) nothrow
   {
     setXalign(propval);
   }
@@ -871,7 +871,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `xfill` property.
       Returns: The horizontal fillment of @terminal within its allocation.
   */
-  @property bool xfill()
+  @property bool xfill() nothrow
   {
     return getXfill();
   }
@@ -881,7 +881,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = The horizontal fillment of @terminal within its allocation.
   */
-  @property void xfill(bool propval)
+  @property void xfill(bool propval) nothrow
   {
     setXfill(propval);
   }
@@ -890,7 +890,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `yalign` property.
       Returns: The vertical alignment of @terminal within its allocation
   */
-  @property vte.types.Align yalign()
+  @property vte.types.Align yalign() nothrow
   {
     return getYalign();
   }
@@ -900,7 +900,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = The vertical alignment of @terminal within its allocation
   */
-  @property void yalign(vte.types.Align propval)
+  @property void yalign(vte.types.Align propval) nothrow
   {
     setYalign(propval);
   }
@@ -912,7 +912,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         #VteTerminal:yalign=[vte.types.Align.Start], and is ignored for
         all other yalign values.
   */
-  @property bool yfill()
+  @property bool yfill() nothrow
   {
     return getYfill();
   }
@@ -925,7 +925,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
           #VteTerminal:yalign=[vte.types.Align.Start], and is ignored for
           all other yalign values.
   */
-  @property void yfill(bool propval)
+  @property void yfill(bool propval) nothrow
   {
     setYfill(propval);
   }
@@ -936,7 +936,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Creates a new terminal widget.
       Returns: a new #VteTerminal object
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = vte_terminal_new();
@@ -950,7 +950,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Deprecated: Use [vte.terminal.Terminal.copyClipboardFormat] with [vte.types.Format.Text]
           instead.
   */
-  void copyClipboard()
+  void copyClipboard() nothrow
   {
     vte_terminal_copy_clipboard(cast(VteTerminal*)this._cPtr);
   }
@@ -969,7 +969,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         format = a #VteFormat
   */
-  void copyClipboardFormat(vte.types.Format format)
+  void copyClipboardFormat(vte.types.Format format) nothrow
   {
     vte_terminal_copy_clipboard_format(cast(VteTerminal*)this._cPtr, format);
   }
@@ -978,7 +978,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Places the selected text in the terminal in the #GDK_SELECTION_PRIMARY
       selection.
   */
-  void copyPrimary()
+  void copyPrimary() nothrow
   {
     vte_terminal_copy_primary(cast(VteTerminal*)this._cPtr);
   }
@@ -998,7 +998,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Returns: a newly allocated array of strings,
           or null if none of the regexes matched
   */
-  string[] eventCheckRegexSimple(gdk.event.Event event, vte.regex.Regex[] regexes, uint matchFlags)
+  string[] eventCheckRegexSimple(gdk.event.Event event, vte.regex.Regex[] regexes, uint matchFlags) nothrow
   {
     char** _cretval;
     size_t _cretlength;
@@ -1030,7 +1030,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         data = a string in the terminal's current encoding
   */
-  void feed(ubyte[] data = null)
+  void feed(ubyte[] data = null) nothrow
   {
     ptrdiff_t _length;
     if (data)
@@ -1047,7 +1047,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         text = data to send to the child
   */
-  void feedChild(ubyte[] text = null)
+  void feedChild(ubyte[] text = null) nothrow
   {
     ptrdiff_t _length;
     if (text)
@@ -1066,7 +1066,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Deprecated: Don't send binary data. Use [vte.terminal.Terminal.feedChild] instead to send
           UTF-8 text
   */
-  void feedChildBinary(ubyte[] data = null)
+  void feedChildBinary(ubyte[] data = null) nothrow
   {
     size_t _length;
     if (data)
@@ -1083,7 +1083,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
       Deprecated: There's probably no reason for this feature to exist.
   */
-  bool getAllowBold()
+  bool getAllowBold() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_get_allow_bold(cast(VteTerminal*)this._cPtr);
@@ -1094,7 +1094,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Checks whether or not hyperlinks (OSC 8 escape sequence) are allowed.
       Returns: true if hyperlinks are enabled, false if not
   */
-  bool getAllowHyperlink()
+  bool getAllowHyperlink() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_get_allow_hyperlink(cast(VteTerminal*)this._cPtr);
@@ -1106,7 +1106,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       "bl" sequence.
       Returns: true if audible bell is enabled, false if not
   */
-  bool getAudibleBell()
+  bool getAudibleBell() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_get_audible_bell(cast(VteTerminal*)this._cPtr);
@@ -1119,7 +1119,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       or if SGR 1 only enables bold and leaves the color intact.
       Returns: true if bold also enables bright, false if not
   */
-  bool getBoldIsBright()
+  bool getBoldIsBright() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_get_bold_is_bright(cast(VteTerminal*)this._cPtr);
@@ -1127,7 +1127,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  double getCellHeightScale()
+  double getCellHeightScale() nothrow
   {
     double _retval;
     _retval = vte_terminal_get_cell_height_scale(cast(VteTerminal*)this._cPtr);
@@ -1135,7 +1135,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  double getCellWidthScale()
+  double getCellWidthScale() nothrow
   {
     double _retval;
     _retval = vte_terminal_get_cell_width_scale(cast(VteTerminal*)this._cPtr);
@@ -1143,7 +1143,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  glong getCharHeight()
+  glong getCharHeight() nothrow
   {
     glong _retval;
     _retval = vte_terminal_get_char_height(cast(VteTerminal*)this._cPtr);
@@ -1151,7 +1151,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  glong getCharWidth()
+  glong getCharWidth() nothrow
   {
     glong _retval;
     _retval = vte_terminal_get_char_width(cast(VteTerminal*)this._cPtr);
@@ -1165,7 +1165,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       itself.)
       Returns: 1 if ambiguous-width characters are narrow, or 2 if they are wide
   */
-  int getCjkAmbiguousWidth()
+  int getCjkAmbiguousWidth() nothrow
   {
     int _retval;
     _retval = vte_terminal_get_cjk_ambiguous_width(cast(VteTerminal*)this._cPtr);
@@ -1187,13 +1187,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         color = a location to store a #GdkRGBA color
   */
-  void getColorBackgroundForDraw(out gdk.rgba.RGBA color)
+  void getColorBackgroundForDraw(out gdk.rgba.RGBA color) nothrow
   {
     vte_terminal_get_color_background_for_draw(cast(VteTerminal*)this._cPtr, cast(GdkRGBA*)&color);
   }
 
   /** */
-  glong getColumnCount()
+  glong getColumnCount() nothrow
   {
     glong _retval;
     _retval = vte_terminal_get_column_count(cast(VteTerminal*)this._cPtr);
@@ -1201,7 +1201,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  gtk.widget.Widget getContextMenu()
+  gtk.widget.Widget getContextMenu() nothrow
   {
     GtkWidget* _cretval;
     _cretval = vte_terminal_get_context_menu(cast(VteTerminal*)this._cPtr);
@@ -1210,7 +1210,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  gio.menu_model.MenuModel getContextMenuModel()
+  gio.menu_model.MenuModel getContextMenuModel() nothrow
   {
     GMenuModel* _cretval;
     _cretval = vte_terminal_get_context_menu_model(cast(VteTerminal*)this._cPtr);
@@ -1219,7 +1219,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  string getCurrentContainerName()
+  string getCurrentContainerName() nothrow
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_current_container_name(cast(VteTerminal*)this._cPtr);
@@ -1228,7 +1228,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  string getCurrentContainerRuntime()
+  string getCurrentContainerRuntime() nothrow
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_current_container_runtime(cast(VteTerminal*)this._cPtr);
@@ -1237,7 +1237,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  string getCurrentDirectoryUri()
+  string getCurrentDirectoryUri() nothrow
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_current_directory_uri(cast(VteTerminal*)this._cPtr);
@@ -1246,7 +1246,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  string getCurrentFileUri()
+  string getCurrentFileUri() nothrow
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_current_file_uri(cast(VteTerminal*)this._cPtr);
@@ -1258,7 +1258,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Returns the currently set cursor blink mode.
       Returns: cursor blink mode.
   */
-  vte.types.CursorBlinkMode getCursorBlinkMode()
+  vte.types.CursorBlinkMode getCursorBlinkMode() nothrow
   {
     VteCursorBlinkMode _cretval;
     _cretval = vte_terminal_get_cursor_blink_mode(cast(VteTerminal*)this._cPtr);
@@ -1276,7 +1276,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         column = a location to store the column, or null
         row = a location to store the row, or null
   */
-  void getCursorPosition(out glong column, out glong row)
+  void getCursorPosition(out glong column, out glong row) nothrow
   {
     vte_terminal_get_cursor_position(cast(VteTerminal*)this._cPtr, cast(glong*)&column, cast(glong*)&row);
   }
@@ -1285,7 +1285,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Returns the currently set cursor shape.
       Returns: cursor shape.
   */
-  vte.types.CursorShape getCursorShape()
+  vte.types.CursorShape getCursorShape() nothrow
   {
     VteCursorShape _cretval;
     _cretval = vte_terminal_get_cursor_shape(cast(VteTerminal*)this._cPtr);
@@ -1297,7 +1297,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Checks whether the terminal communicates with a11y backends
       Returns: true if a11y is enabled, false if not
   */
-  bool getEnableA11y()
+  bool getEnableA11y() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_get_enable_a11y(cast(VteTerminal*)this._cPtr);
@@ -1308,7 +1308,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Checks whether the terminal performs bidirectional text rendering.
       Returns: true if BiDi is enabled, false if not
   */
-  bool getEnableBidi()
+  bool getEnableBidi() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_get_enable_bidi(cast(VteTerminal*)this._cPtr);
@@ -1316,7 +1316,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  bool getEnableFallbackScrolling()
+  bool getEnableFallbackScrolling() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_get_enable_fallback_scrolling(cast(VteTerminal*)this._cPtr);
@@ -1327,7 +1327,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Checks whether the terminal shapes Arabic text.
       Returns: true if Arabic shaping is enabled, false if not
   */
-  bool getEnableShaping()
+  bool getEnableShaping() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_get_enable_shaping(cast(VteTerminal*)this._cPtr);
@@ -1335,7 +1335,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  bool getEnableSixel()
+  bool getEnableSixel() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_get_enable_sixel(cast(VteTerminal*)this._cPtr);
@@ -1349,7 +1349,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
       Deprecated: Support for non-UTF-8 is deprecated.
   */
-  string getEncoding()
+  string getEncoding() nothrow
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_encoding(cast(VteTerminal*)this._cPtr);
@@ -1365,7 +1365,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Returns: a #PangoFontDescription describing the font the
         terminal uses to render text at the default font scale of 1.0.
   */
-  pango.font_description.FontDescription getFont()
+  pango.font_description.FontDescription getFont() nothrow
   {
     const(PangoFontDescription)* _cretval;
     _cretval = vte_terminal_get_font(cast(VteTerminal*)this._cPtr);
@@ -1374,7 +1374,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  override cairo.font_options.FontOptions getFontOptions()
+  override cairo.font_options.FontOptions getFontOptions() nothrow
   {
     const(cairo_font_options_t)* _cretval;
     _cretval = vte_terminal_get_font_options(cast(VteTerminal*)this._cPtr);
@@ -1383,7 +1383,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  double getFontScale()
+  double getFontScale() nothrow
   {
     double _retval;
     _retval = vte_terminal_get_font_scale(cast(VteTerminal*)this._cPtr);
@@ -1404,7 +1404,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         minRows = the minimum number of rows to request
         minColumns = the minimum number of columns to request
   */
-  void getGeometryHints(out gdk.types.Geometry hints, int minRows, int minColumns)
+  void getGeometryHints(out gdk.types.Geometry hints, int minRows, int minColumns) nothrow
   {
     vte_terminal_get_geometry_hints(cast(VteTerminal*)this._cPtr, &hints, minRows, minColumns);
   }
@@ -1415,7 +1415,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       #GtkClipboard items.
       Returns: true if part of the text in the terminal is selected.
   */
-  bool getHasSelection()
+  bool getHasSelection() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_get_has_selection(cast(VteTerminal*)this._cPtr);
@@ -1423,7 +1423,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  string getIconTitle()
+  string getIconTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_icon_title(cast(VteTerminal*)this._cPtr);
@@ -1435,7 +1435,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Returns whether the terminal allow user input.
       Returns: 
   */
-  bool getInputEnabled()
+  bool getInputEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_get_input_enabled(cast(VteTerminal*)this._cPtr);
@@ -1449,7 +1449,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       using [vte.terminal.Terminal.setMouseAutohide].
       Returns: true if autohiding is enabled, false if not
   */
-  bool getMouseAutohide()
+  bool getMouseAutohide() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_get_mouse_autohide(cast(VteTerminal*)this._cPtr);
@@ -1460,7 +1460,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Returns the #VtePty of terminal.
       Returns: a #VtePty, or null
   */
-  vte.pty.Pty getPty()
+  vte.pty.Pty getPty() nothrow
   {
     VtePty* _cretval;
     _cretval = vte_terminal_get_pty(cast(VteTerminal*)this._cPtr);
@@ -1472,7 +1472,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Checks whether or not the terminal will rewrap its contents upon resize.
       Returns: true if rewrapping is enabled, false if not
   */
-  bool getRewrapOnResize()
+  bool getRewrapOnResize() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_get_rewrap_on_resize(cast(VteTerminal*)this._cPtr);
@@ -1480,7 +1480,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  glong getRowCount()
+  glong getRowCount() nothrow
   {
     glong _retval;
     _retval = vte_terminal_get_row_count(cast(VteTerminal*)this._cPtr);
@@ -1488,7 +1488,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  bool getScrollOnInsert()
+  bool getScrollOnInsert() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_get_scroll_on_insert(cast(VteTerminal*)this._cPtr);
@@ -1496,7 +1496,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  bool getScrollOnKeystroke()
+  bool getScrollOnKeystroke() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_get_scroll_on_keystroke(cast(VteTerminal*)this._cPtr);
@@ -1504,7 +1504,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  bool getScrollOnOutput()
+  bool getScrollOnOutput() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_get_scroll_on_output(cast(VteTerminal*)this._cPtr);
@@ -1512,7 +1512,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  bool getScrollUnitIsPixels()
+  bool getScrollUnitIsPixels() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_get_scroll_unit_is_pixels(cast(VteTerminal*)this._cPtr);
@@ -1520,7 +1520,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  glong getScrollbackLines()
+  glong getScrollbackLines() nothrow
   {
     glong _retval;
     _retval = vte_terminal_get_scrollback_lines(cast(VteTerminal*)this._cPtr);
@@ -1531,7 +1531,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Checks whether or not the terminal will allow blinking text.
       Returns: the blinking setting
   */
-  vte.types.TextBlinkMode getTextBlinkMode()
+  vte.types.TextBlinkMode getTextBlinkMode() nothrow
   {
     VteTextBlinkMode _cretval;
     _cretval = vte_terminal_get_text_blink_mode(cast(VteTerminal*)this._cPtr);
@@ -1549,7 +1549,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         format = the #VteFormat to use
       Returns: a newly allocated text string, or null.
   */
-  string getTextFormat(vte.types.Format format)
+  string getTextFormat(vte.types.Format format) nothrow
   {
     char* _cretval;
     _cretval = vte_terminal_get_text_format(cast(VteTerminal*)this._cPtr, format);
@@ -1569,7 +1569,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         length = a pointer to a #gsize to store the string length
       Returns: a newly allocated string, or null.
   */
-  string getTextRangeFormat(vte.types.Format format, glong startRow, glong startCol, glong endRow, glong endCol, out size_t length)
+  string getTextRangeFormat(vte.types.Format format, glong startRow, glong startCol, glong endRow, glong endCol, out size_t length) nothrow
   {
     char* _cretval;
     _cretval = vte_terminal_get_text_range_format(cast(VteTerminal*)this._cPtr, format, startRow, startCol, endRow, endCol, cast(size_t*)&length);
@@ -1585,7 +1585,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         format = the #VteFormat to use
       Returns: a newly allocated string containing the selected text, or null if there is no selection or the format is not supported
   */
-  string getTextSelected(vte.types.Format format)
+  string getTextSelected(vte.types.Format format) nothrow
   {
     char* _cretval;
     _cretval = vte_terminal_get_text_selected(cast(VteTerminal*)this._cPtr, format);
@@ -1601,7 +1601,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         length = a pointer to a #gsize to store the string length
       Returns: a newly allocated string containing the selected text, or null if there is no selection or the format is not supported
   */
-  string getTextSelectedFull(vte.types.Format format, out size_t length)
+  string getTextSelectedFull(vte.types.Format format, out size_t length) nothrow
   {
     char* _cretval;
     _cretval = vte_terminal_get_text_selected_full(cast(VteTerminal*)this._cPtr, format, cast(size_t*)&length);
@@ -1610,7 +1610,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  string getWindowTitle()
+  string getWindowTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_window_title(cast(VteTerminal*)this._cPtr);
@@ -1626,7 +1626,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       If null, a built-in set is used.
       Returns: a string, or null
   */
-  string getWordCharExceptions()
+  string getWordCharExceptions() nothrow
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_word_char_exceptions(cast(VteTerminal*)this._cPtr);
@@ -1635,7 +1635,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  vte.types.Align getXalign()
+  vte.types.Align getXalign() nothrow
   {
     VteAlign _cretval;
     _cretval = vte_terminal_get_xalign(cast(VteTerminal*)this._cPtr);
@@ -1644,7 +1644,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  bool getXfill()
+  bool getXfill() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_get_xfill(cast(VteTerminal*)this._cPtr);
@@ -1652,7 +1652,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  vte.types.Align getYalign()
+  vte.types.Align getYalign() nothrow
   {
     VteAlign _cretval;
     _cretval = vte_terminal_get_yalign(cast(VteTerminal*)this._cPtr);
@@ -1661,7 +1661,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  bool getYfill()
+  bool getYfill() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_get_yfill(cast(VteTerminal*)this._cPtr);
@@ -1681,7 +1681,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Returns: a newly allocated string containing the target of the hyperlink,
          or null
   */
-  string hyperlinkCheckEvent(gdk.event.Event event)
+  string hyperlinkCheckEvent(gdk.event.Event event) nothrow
   {
     char* _cretval;
     _cretval = vte_terminal_hyperlink_check_event(cast(VteTerminal*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
@@ -1699,7 +1699,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
       Deprecated: Use [vte.terminal.Terminal.matchAddRegex] instead.
   */
-  int matchAddGregex(glib.regex.Regex gregex, glib.types.RegexMatchFlags gflags)
+  int matchAddGregex(glib.regex.Regex gregex, glib.types.RegexMatchFlags gflags) nothrow
   {
     int _retval;
     _retval = vte_terminal_match_add_gregex(cast(VteTerminal*)this._cPtr, gregex ? cast(GRegex*)gregex._cPtr(No.Dup) : null, gflags);
@@ -1719,7 +1719,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         flags = PCRE2 match flags, or 0
       Returns: an integer associated with this expression
   */
-  int matchAddRegex(vte.regex.Regex regex, uint flags)
+  int matchAddRegex(vte.regex.Regex regex, uint flags) nothrow
   {
     int _retval;
     _retval = vte_terminal_match_add_regex(cast(VteTerminal*)this._cPtr, regex ? cast(VteRegex*)regex._cPtr(No.Dup) : null, flags);
@@ -1745,7 +1745,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
       Deprecated: Use [vte.terminal.Terminal.matchCheckEvent] instead.
   */
-  string matchCheck(glong column, glong row, out int tag)
+  string matchCheck(glong column, glong row, out int tag) nothrow
   {
     char* _cretval;
     _cretval = vte_terminal_match_check(cast(VteTerminal*)this._cPtr, column, row, cast(int*)&tag);
@@ -1769,7 +1769,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Returns: a newly allocated string which matches one of the previously
           set regular expressions, or null if there is no match
   */
-  string matchCheckEvent(gdk.event.Event event, out int tag)
+  string matchCheckEvent(gdk.event.Event event, out int tag) nothrow
   {
     char* _cretval;
     _cretval = vte_terminal_match_check_event(cast(VteTerminal*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, cast(int*)&tag);
@@ -1785,7 +1785,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         tag = the tag of the regex to remove
   */
-  void matchRemove(int tag)
+  void matchRemove(int tag) nothrow
   {
     vte_terminal_match_remove(cast(VteTerminal*)this._cPtr, tag);
   }
@@ -1794,7 +1794,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Clears the list of regular expressions the terminal uses to highlight text
       when the user moves the mouse cursor.
   */
-  void matchRemoveAll()
+  void matchRemoveAll() nothrow
   {
     vte_terminal_match_remove_all(cast(VteTerminal*)this._cPtr);
   }
@@ -1810,7 +1810,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
       Deprecated: Use [vte.terminal.Terminal.matchSetCursorName] instead.
   */
-  void matchSetCursor(int tag, gdk.cursor.Cursor cursor = null)
+  void matchSetCursor(int tag, gdk.cursor.Cursor cursor = null) nothrow
   {
     vte_terminal_match_set_cursor(cast(VteTerminal*)this._cPtr, tag, cursor ? cast(GdkCursor*)cursor._cPtr(No.Dup) : null);
   }
@@ -1823,7 +1823,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         tag = the tag of the regex which should use the specified cursor
         cursorName = the name of the cursor
   */
-  void matchSetCursorName(int tag, string cursorName)
+  void matchSetCursorName(int tag, string cursorName) nothrow
   {
     const(char)* _cursorName = cursorName.toCString(No.Alloc);
     vte_terminal_match_set_cursor_name(cast(VteTerminal*)this._cPtr, tag, _cursorName);
@@ -1839,7 +1839,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
       Deprecated: Use [vte.terminal.Terminal.matchSetCursorName] instead.
   */
-  void matchSetCursorType(int tag, gdk.types.CursorType cursorType)
+  void matchSetCursorType(int tag, gdk.types.CursorType cursorType) nothrow
   {
     vte_terminal_match_set_cursor_type(cast(VteTerminal*)this._cPtr, tag, cursorType);
   }
@@ -1849,7 +1849,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       terminal's child. It's called on paste menu item, or when
       user presses Shift+Insert.
   */
-  void pasteClipboard()
+  void pasteClipboard() nothrow
   {
     vte_terminal_paste_clipboard(cast(VteTerminal*)this._cPtr);
   }
@@ -1860,7 +1860,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       #GDK_SELECTION_PRIMARY selection when the user clicks with the the second
       mouse button.
   */
-  void pastePrimary()
+  void pastePrimary() nothrow
   {
     vte_terminal_paste_primary(cast(VteTerminal*)this._cPtr);
   }
@@ -1873,7 +1873,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         text = a string to paste
   */
-  void pasteText(string text)
+  void pasteText(string text) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     vte_terminal_paste_text(cast(VteTerminal*)this._cPtr, _text);
@@ -1913,7 +1913,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         clearTabstops = whether to reset tabstops
         clearHistory = whether to empty the terminal's scrollback buffer
   */
-  void reset(bool clearTabstops, bool clearHistory)
+  void reset(bool clearTabstops, bool clearHistory) nothrow
   {
     vte_terminal_reset(cast(VteTerminal*)this._cPtr, clearTabstops, clearHistory);
   }
@@ -1923,7 +1923,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       [vte.terminal.Terminal.searchSetRegex].
       Returns: true if a match was found
   */
-  bool searchFindNext()
+  bool searchFindNext() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_search_find_next(cast(VteTerminal*)this._cPtr);
@@ -1935,7 +1935,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       [vte.terminal.Terminal.searchSetRegex].
       Returns: true if a match was found
   */
-  bool searchFindPrevious()
+  bool searchFindPrevious() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_search_find_previous(cast(VteTerminal*)this._cPtr);
@@ -1943,7 +1943,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  glib.regex.Regex searchGetGregex()
+  glib.regex.Regex searchGetGregex() nothrow
   {
     GRegex* _cretval;
     _cretval = vte_terminal_search_get_gregex(cast(VteTerminal*)this._cPtr);
@@ -1952,7 +1952,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  vte.regex.Regex searchGetRegex()
+  vte.regex.Regex searchGetRegex() nothrow
   {
     VteRegex* _cretval;
     _cretval = vte_terminal_search_get_regex(cast(VteTerminal*)this._cPtr);
@@ -1961,7 +1961,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  bool searchGetWrapAround()
+  bool searchGetWrapAround() nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_terminal_search_get_wrap_around(cast(VteTerminal*)this._cPtr);
@@ -1977,7 +1977,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
       Deprecated: use [vte.terminal.Terminal.searchSetRegex] instead.
   */
-  void searchSetGregex(glib.regex.Regex gregex, glib.types.RegexMatchFlags gflags)
+  void searchSetGregex(glib.regex.Regex gregex, glib.types.RegexMatchFlags gflags) nothrow
   {
     vte_terminal_search_set_gregex(cast(VteTerminal*)this._cPtr, gregex ? cast(GRegex*)gregex._cPtr(No.Dup) : null, gflags);
   }
@@ -1992,7 +1992,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         regex = a #VteRegex, or null
         flags = PCRE2 match flags, or 0
   */
-  void searchSetRegex(vte.regex.Regex regex, uint flags)
+  void searchSetRegex(vte.regex.Regex regex, uint flags) nothrow
   {
     vte_terminal_search_set_regex(cast(VteTerminal*)this._cPtr, regex ? cast(VteRegex*)regex._cPtr(No.Dup) : null, flags);
   }
@@ -2004,7 +2004,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         wrapAround = whether search should wrap
   */
-  void searchSetWrapAround(bool wrapAround)
+  void searchSetWrapAround(bool wrapAround) nothrow
   {
     vte_terminal_search_set_wrap_around(cast(VteTerminal*)this._cPtr, wrapAround);
   }
@@ -2012,7 +2012,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Selects all text within the terminal (not including the scrollback buffer).
   */
-  void selectAll()
+  void selectAll() nothrow
   {
     vte_terminal_select_all(cast(VteTerminal*)this._cPtr);
   }
@@ -2026,7 +2026,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
       Deprecated: There's probably no reason for this feature to exist.
   */
-  void setAllowBold(bool allowBold)
+  void setAllowBold(bool allowBold) nothrow
   {
     vte_terminal_set_allow_bold(cast(VteTerminal*)this._cPtr, allowBold);
   }
@@ -2037,7 +2037,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         allowHyperlink = true if the terminal should allow hyperlinks
   */
-  void setAllowHyperlink(bool allowHyperlink)
+  void setAllowHyperlink(bool allowHyperlink) nothrow
   {
     vte_terminal_set_allow_hyperlink(cast(VteTerminal*)this._cPtr, allowHyperlink);
   }
@@ -2049,7 +2049,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         isAudible = true if the terminal should beep
   */
-  void setAudibleBell(bool isAudible)
+  void setAudibleBell(bool isAudible) nothrow
   {
     vte_terminal_set_audible_bell(cast(VteTerminal*)this._cPtr, isAudible);
   }
@@ -2062,7 +2062,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         binding = a #VteEraseBinding for the backspace key
   */
-  void setBackspaceBinding(vte.types.EraseBinding binding)
+  void setBackspaceBinding(vte.types.EraseBinding binding) nothrow
   {
     vte_terminal_set_backspace_binding(cast(VteTerminal*)this._cPtr, binding);
   }
@@ -2075,7 +2075,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         boldIsBright = true if bold should also enable bright
   */
-  void setBoldIsBright(bool boldIsBright)
+  void setBoldIsBright(bool boldIsBright) nothrow
   {
     vte_terminal_set_bold_is_bright(cast(VteTerminal*)this._cPtr, boldIsBright);
   }
@@ -2089,7 +2089,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         scale = the cell height scale
   */
-  void setCellHeightScale(double scale)
+  void setCellHeightScale(double scale) nothrow
   {
     vte_terminal_set_cell_height_scale(cast(VteTerminal*)this._cPtr, scale);
   }
@@ -2103,7 +2103,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         scale = the cell width scale
   */
-  void setCellWidthScale(double scale)
+  void setCellWidthScale(double scale) nothrow
   {
     vte_terminal_set_cell_width_scale(cast(VteTerminal*)this._cPtr, scale);
   }
@@ -2117,7 +2117,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         width = either 1 (narrow) or 2 (wide)
   */
-  void setCjkAmbiguousWidth(int width)
+  void setCjkAmbiguousWidth(int width) nothrow
   {
     vte_terminal_set_cjk_ambiguous_width(cast(VteTerminal*)this._cPtr, width);
   }
@@ -2132,7 +2132,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         setting = whether to clear the background
   */
-  void setClearBackground(bool setting)
+  void setClearBackground(bool setting) nothrow
   {
     vte_terminal_set_clear_background(cast(VteTerminal*)this._cPtr, setting);
   }
@@ -2145,7 +2145,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         background = the new background color
   */
-  void setColorBackground(gdk.rgba.RGBA background)
+  void setColorBackground(gdk.rgba.RGBA background) nothrow
   {
     vte_terminal_set_color_background(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&background);
   }
@@ -2157,7 +2157,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         bold = the new bold color or null
   */
-  void setColorBold(gdk.rgba.RGBA bold)
+  void setColorBold(gdk.rgba.RGBA bold) nothrow
   {
     vte_terminal_set_color_bold(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&bold);
   }
@@ -2170,7 +2170,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         cursorBackground = the new color to use for the text cursor, or null
   */
-  void setColorCursor(gdk.rgba.RGBA cursorBackground)
+  void setColorCursor(gdk.rgba.RGBA cursorBackground) nothrow
   {
     vte_terminal_set_color_cursor(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&cursorBackground);
   }
@@ -2183,7 +2183,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         cursorForeground = the new color to use for the text cursor, or null
   */
-  void setColorCursorForeground(gdk.rgba.RGBA cursorForeground)
+  void setColorCursorForeground(gdk.rgba.RGBA cursorForeground) nothrow
   {
     vte_terminal_set_color_cursor_foreground(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&cursorForeground);
   }
@@ -2194,7 +2194,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         foreground = the new foreground color
   */
-  void setColorForeground(gdk.rgba.RGBA foreground)
+  void setColorForeground(gdk.rgba.RGBA foreground) nothrow
   {
     vte_terminal_set_color_foreground(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&foreground);
   }
@@ -2208,7 +2208,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         highlightBackground = the new color to use for highlighted text, or null
   */
-  void setColorHighlight(gdk.rgba.RGBA highlightBackground)
+  void setColorHighlight(gdk.rgba.RGBA highlightBackground) nothrow
   {
     vte_terminal_set_color_highlight(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&highlightBackground);
   }
@@ -2222,7 +2222,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         highlightForeground = the new color to use for highlighted text, or null
   */
-  void setColorHighlightForeground(gdk.rgba.RGBA highlightForeground)
+  void setColorHighlightForeground(gdk.rgba.RGBA highlightForeground) nothrow
   {
     vte_terminal_set_color_highlight_foreground(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&highlightForeground);
   }
@@ -2243,7 +2243,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         background = the new background color, or null
         palette = the color palette
   */
-  void setColors(gdk.rgba.RGBA foreground, gdk.rgba.RGBA background, gdk.rgba.RGBA[] palette = null)
+  void setColors(gdk.rgba.RGBA foreground, gdk.rgba.RGBA background, gdk.rgba.RGBA[] palette = null) nothrow
   {
     size_t _paletteSize;
     if (palette)
@@ -2263,7 +2263,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         menu = a menu
   */
-  void setContextMenu(gtk.widget.Widget menu = null)
+  void setContextMenu(gtk.widget.Widget menu = null) nothrow
   {
     vte_terminal_set_context_menu(cast(VteTerminal*)this._cPtr, menu ? cast(GtkWidget*)menu._cPtr(No.Dup) : null);
   }
@@ -2275,7 +2275,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         model = a #GMenuModel
   */
-  void setContextMenuModel(gio.menu_model.MenuModel model = null)
+  void setContextMenuModel(gio.menu_model.MenuModel model = null) nothrow
   {
     vte_terminal_set_context_menu_model(cast(VteTerminal*)this._cPtr, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
   }
@@ -2287,7 +2287,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         mode = the #VteCursorBlinkMode to use
   */
-  void setCursorBlinkMode(vte.types.CursorBlinkMode mode)
+  void setCursorBlinkMode(vte.types.CursorBlinkMode mode) nothrow
   {
     vte_terminal_set_cursor_blink_mode(cast(VteTerminal*)this._cPtr, mode);
   }
@@ -2298,7 +2298,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         shape = the #VteCursorShape to use
   */
-  void setCursorShape(vte.types.CursorShape shape)
+  void setCursorShape(vte.types.CursorShape shape) nothrow
   {
     vte_terminal_set_cursor_shape(cast(VteTerminal*)this._cPtr, shape);
   }
@@ -2306,7 +2306,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Reset the terminal palette to reasonable compiled-in default color.
   */
-  void setDefaultColors()
+  void setDefaultColors() nothrow
   {
     vte_terminal_set_default_colors(cast(VteTerminal*)this._cPtr);
   }
@@ -2319,7 +2319,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         binding = a #VteEraseBinding for the delete key
   */
-  void setDeleteBinding(vte.types.EraseBinding binding)
+  void setDeleteBinding(vte.types.EraseBinding binding) nothrow
   {
     vte_terminal_set_delete_binding(cast(VteTerminal*)this._cPtr, binding);
   }
@@ -2330,7 +2330,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         enableA11y = true to enable a11y support
   */
-  void setEnableA11y(bool enableA11y)
+  void setEnableA11y(bool enableA11y) nothrow
   {
     vte_terminal_set_enable_a11y(cast(VteTerminal*)this._cPtr, enableA11y);
   }
@@ -2341,7 +2341,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         enableBidi = true to enable BiDi support
   */
-  void setEnableBidi(bool enableBidi)
+  void setEnableBidi(bool enableBidi) nothrow
   {
     vte_terminal_set_enable_bidi(cast(VteTerminal*)this._cPtr, enableBidi);
   }
@@ -2357,7 +2357,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         enable = whether to enable fallback scrolling
   */
-  void setEnableFallbackScrolling(bool enable)
+  void setEnableFallbackScrolling(bool enable) nothrow
   {
     vte_terminal_set_enable_fallback_scrolling(cast(VteTerminal*)this._cPtr, enable);
   }
@@ -2368,7 +2368,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         enableShaping = true to enable Arabic shaping
   */
-  void setEnableShaping(bool enableShaping)
+  void setEnableShaping(bool enableShaping) nothrow
   {
     vte_terminal_set_enable_shaping(cast(VteTerminal*)this._cPtr, enableShaping);
   }
@@ -2379,7 +2379,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         enabled = whether to enable SIXEL images
   */
-  void setEnableSixel(bool enabled)
+  void setEnableSixel(bool enabled) nothrow
   {
     vte_terminal_set_enable_sixel(cast(VteTerminal*)this._cPtr, enabled);
   }
@@ -2422,7 +2422,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         fontDesc = a #PangoFontDescription for the desired font, or null
   */
-  void setFont(pango.font_description.FontDescription fontDesc = null)
+  void setFont(pango.font_description.FontDescription fontDesc = null) nothrow
   {
     vte_terminal_set_font(cast(VteTerminal*)this._cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc._cPtr(No.Dup) : null);
   }
@@ -2438,7 +2438,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         fontOptions = the font options, or null
   */
-  override void setFontOptions(cairo.font_options.FontOptions fontOptions = null)
+  override void setFontOptions(cairo.font_options.FontOptions fontOptions = null) nothrow
   {
     vte_terminal_set_font_options(cast(VteTerminal*)this._cPtr, fontOptions ? cast(const(cairo_font_options_t)*)fontOptions._cPtr(No.Dup) : null);
   }
@@ -2449,7 +2449,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         scale = the font scale
   */
-  void setFontScale(double scale)
+  void setFontScale(double scale) nothrow
   {
     vte_terminal_set_font_scale(cast(VteTerminal*)this._cPtr, scale);
   }
@@ -2463,7 +2463,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         window = a #GtkWindow
   */
-  void setGeometryHintsForWindow(gtk.window.Window window)
+  void setGeometryHintsForWindow(gtk.window.Window window) nothrow
   {
     vte_terminal_set_geometry_hints_for_window(cast(VteTerminal*)this._cPtr, window ? cast(GtkWindow*)window._cPtr(No.Dup) : null);
   }
@@ -2476,7 +2476,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         enabled = whether to enable user input
   */
-  void setInputEnabled(bool enabled)
+  void setInputEnabled(bool enabled) nothrow
   {
     vte_terminal_set_input_enabled(cast(VteTerminal*)this._cPtr, enabled);
   }
@@ -2490,7 +2490,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         setting = whether the mouse pointer should autohide
   */
-  void setMouseAutohide(bool setting)
+  void setMouseAutohide(bool setting) nothrow
   {
     vte_terminal_set_mouse_autohide(cast(VteTerminal*)this._cPtr, setting);
   }
@@ -2502,7 +2502,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         pty = a #VtePty, or null
   */
-  void setPty(vte.pty.Pty pty = null)
+  void setPty(vte.pty.Pty pty = null) nothrow
   {
     vte_terminal_set_pty(cast(VteTerminal*)this._cPtr, pty ? cast(VtePty*)pty._cPtr(No.Dup) : null);
   }
@@ -2514,7 +2514,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         rewrap = true if the terminal should rewrap on resize
   */
-  void setRewrapOnResize(bool rewrap)
+  void setRewrapOnResize(bool rewrap) nothrow
   {
     vte_terminal_set_rewrap_on_resize(cast(VteTerminal*)this._cPtr, rewrap);
   }
@@ -2526,7 +2526,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         scroll = whether the terminal should scroll on insert
   */
-  void setScrollOnInsert(bool scroll)
+  void setScrollOnInsert(bool scroll) nothrow
   {
     vte_terminal_set_scroll_on_insert(cast(VteTerminal*)this._cPtr, scroll);
   }
@@ -2539,7 +2539,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         scroll = whether the terminal should scroll on keystrokes
   */
-  void setScrollOnKeystroke(bool scroll)
+  void setScrollOnKeystroke(bool scroll) nothrow
   {
     vte_terminal_set_scroll_on_keystroke(cast(VteTerminal*)this._cPtr, scroll);
   }
@@ -2551,7 +2551,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         scroll = whether the terminal should scroll on output
   */
-  void setScrollOnOutput(bool scroll)
+  void setScrollOnOutput(bool scroll) nothrow
   {
     vte_terminal_set_scroll_on_output(cast(VteTerminal*)this._cPtr, scroll);
   }
@@ -2565,7 +2565,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         enable = whether to use pixels as scroll unit
   */
-  void setScrollUnitIsPixels(bool enable)
+  void setScrollUnitIsPixels(bool enable) nothrow
   {
     vte_terminal_set_scroll_unit_is_pixels(cast(VteTerminal*)this._cPtr, enable);
   }
@@ -2587,7 +2587,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         lines = the length of the history buffer
   */
-  void setScrollbackLines(glong lines)
+  void setScrollbackLines(glong lines) nothrow
   {
     vte_terminal_set_scrollback_lines(cast(VteTerminal*)this._cPtr, lines);
   }
@@ -2600,7 +2600,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         columns = the desired number of columns
         rows = the desired number of rows
   */
-  void setSize(glong columns, glong rows)
+  void setSize(glong columns, glong rows) nothrow
   {
     vte_terminal_set_size(cast(VteTerminal*)this._cPtr, columns, rows);
   }
@@ -2611,7 +2611,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         textBlinkMode = the #VteTextBlinkMode to use
   */
-  void setTextBlinkMode(vte.types.TextBlinkMode textBlinkMode)
+  void setTextBlinkMode(vte.types.TextBlinkMode textBlinkMode) nothrow
   {
     vte_terminal_set_text_blink_mode(cast(VteTerminal*)this._cPtr, textBlinkMode);
   }
@@ -2631,7 +2631,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         exceptions = a string of ASCII punctuation characters, or null
   */
-  void setWordCharExceptions(string exceptions)
+  void setWordCharExceptions(string exceptions) nothrow
   {
     const(char)* _exceptions = exceptions.toCString(No.Alloc);
     vte_terminal_set_word_char_exceptions(cast(VteTerminal*)this._cPtr, _exceptions);
@@ -2646,7 +2646,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         align_ = alignment value from #VteAlign
   */
-  void setXalign(vte.types.Align align_)
+  void setXalign(vte.types.Align align_) nothrow
   {
     vte_terminal_set_xalign(cast(VteTerminal*)this._cPtr, align_);
   }
@@ -2660,7 +2660,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         fill = fillment value from #VteFill
   */
-  void setXfill(bool fill)
+  void setXfill(bool fill) nothrow
   {
     vte_terminal_set_xfill(cast(VteTerminal*)this._cPtr, fill);
   }
@@ -2671,7 +2671,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         align_ = alignment value from #VteAlign
   */
-  void setYalign(vte.types.Align align_)
+  void setYalign(vte.types.Align align_) nothrow
   {
     vte_terminal_set_yalign(cast(VteTerminal*)this._cPtr, align_);
   }
@@ -2684,7 +2684,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         fill = fillment value from #VteFill
   */
-  void setYfill(bool fill)
+  void setYfill(bool fill) nothrow
   {
     vte_terminal_set_yfill(cast(VteTerminal*)this._cPtr, fill);
   }
@@ -2709,21 +2709,35 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         cancellable = a #GCancellable, or null
         callback = a #VteTerminalSpawnAsyncCallback, or null
   */
-  void spawnAsync(vte.types.PtyFlags ptyFlags, string workingDirectory, string[] argv, string[] envv, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable = null, vte.types.TerminalSpawnAsyncCallback callback = null)
+  void spawnAsync(vte.types.PtyFlags ptyFlags, string workingDirectory, string[] argv, string[] envv, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable = null, vte.types.TerminalSpawnAsyncCallback callback = null) nothrow
   {
-    extern(C) void _childSetupCallback(void* data)
+    extern(C) void _childSetupCallback(void* data) nothrow
     {
       auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.SpawnChildSetupFunc");
+      }
     }
     auto _childSetupCB = childSetup ? &_childSetupCallback : null;
-    extern(C) void _callbackCallback(VteTerminal* terminal, GPid pid, GError* error, void* userData)
+    extern(C) void _callbackCallback(VteTerminal* terminal, GPid pid, GError* error, void* userData) nothrow
     {
       ptrThawGC(userData);
       auto _dlg = cast(vte.types.TerminalSpawnAsyncCallback*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(vte.terminal.Terminal)(cast(void*)terminal, No.Take), pid, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(vte.terminal.Terminal)(cast(void*)terminal, No.Take), pid, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.types.TerminalSpawnAsyncCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
@@ -2788,11 +2802,18 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   bool spawnSync(vte.types.PtyFlags ptyFlags, string workingDirectory, string[] argv, string[] envv, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, out glib.types.Pid childPid, gio.cancellable.Cancellable cancellable = null)
   {
-    extern(C) void _childSetupCallback(void* data)
+    extern(C) void _childSetupCallback(void* data) nothrow
     {
       auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.SpawnChildSetupFunc");
+      }
     }
     auto _childSetupCB = childSetup ? &_childSetupCallback : null;
     bool _retval;
@@ -2878,21 +2899,35 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         cancellable = a #GCancellable, or null
         callback = a #VteTerminalSpawnAsyncCallback, or null
   */
-  void spawnWithFdsAsync(vte.types.PtyFlags ptyFlags, string workingDirectory, string[] argv, string[] envv, int[] fds, int[] mapFds, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable = null, vte.types.TerminalSpawnAsyncCallback callback = null)
+  void spawnWithFdsAsync(vte.types.PtyFlags ptyFlags, string workingDirectory, string[] argv, string[] envv, int[] fds, int[] mapFds, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable = null, vte.types.TerminalSpawnAsyncCallback callback = null) nothrow
   {
-    extern(C) void _childSetupCallback(void* data)
+    extern(C) void _childSetupCallback(void* data) nothrow
     {
       auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.SpawnChildSetupFunc");
+      }
     }
     auto _childSetupCB = childSetup ? &_childSetupCallback : null;
-    extern(C) void _callbackCallback(VteTerminal* terminal, GPid pid, GError* error, void* userData)
+    extern(C) void _callbackCallback(VteTerminal* terminal, GPid pid, GError* error, void* userData) nothrow
     {
       ptrThawGC(userData);
       auto _dlg = cast(vte.types.TerminalSpawnAsyncCallback*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(vte.terminal.Terminal)(cast(void*)terminal, No.Take), pid, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(vte.terminal.Terminal)(cast(void*)terminal, No.Take), pid, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.types.TerminalSpawnAsyncCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
@@ -2927,7 +2962,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Clears the current selection.
   */
-  void unselectAll()
+  void unselectAll() nothrow
   {
     vte_terminal_unselect_all(cast(VteTerminal*)this._cPtr);
   }
@@ -2950,7 +2985,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         childPid = a #GPid
   */
-  void watchChild(glib.types.Pid childPid)
+  void watchChild(glib.types.Pid childPid) nothrow
   {
     vte_terminal_watch_child(cast(VteTerminal*)this._cPtr, childPid);
   }
@@ -3000,13 +3035,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectBell(T)(T callback, Flag!"After" after = No.After)
+  gulong connectBell(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3015,7 +3050,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.bell");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3044,7 +3086,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCharSizeChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCharSizeChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -3052,7 +3094,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : vte.terminal.Terminal)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3067,7 +3109,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.charSizeChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3092,14 +3141,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChildExited(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChildExited(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : vte.terminal.Terminal)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3111,7 +3160,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.childExited");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3136,14 +3192,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCommit(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCommit(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : vte.terminal.Terminal)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3156,7 +3212,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getStringWithLength(&_paramVals[1], size);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.commit");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3179,13 +3242,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectContentsChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectContentsChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3194,7 +3257,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.contentsChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3216,13 +3286,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3231,7 +3301,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.copyClipboard");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3253,13 +3330,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCurrentDirectoryUriChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCurrentDirectoryUriChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3268,7 +3345,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.currentDirectoryUriChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3290,13 +3374,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCurrentFileUriChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCurrentFileUriChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3305,7 +3389,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.currentFileUriChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3328,13 +3419,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCursorMoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCursorMoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3343,7 +3434,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.cursorMoved");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3365,13 +3463,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDecreaseFontSize(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDecreaseFontSize(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3380,7 +3478,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.decreaseFontSize");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3402,13 +3507,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeiconifyWindow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeiconifyWindow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3417,7 +3522,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.deiconifyWindow");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3441,13 +3553,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEncodingChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEncodingChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3456,7 +3568,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.encodingChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3480,13 +3599,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEof(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEof(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3495,7 +3614,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.eof");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3527,7 +3653,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectHyperlinkHoverUriChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectHyperlinkHoverUriChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -3535,7 +3661,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : vte.terminal.Terminal)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3550,7 +3676,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.hyperlinkHoverUriChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3574,13 +3707,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
       Deprecated: This signal is never emitted.
   */
-  gulong connectIconTitleChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectIconTitleChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3589,7 +3722,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.iconTitleChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3611,13 +3751,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectIconifyWindow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectIconifyWindow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3626,7 +3766,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.iconifyWindow");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3648,13 +3795,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectIncreaseFontSize(T)(T callback, Flag!"After" after = No.After)
+  gulong connectIncreaseFontSize(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3663,7 +3810,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.increaseFontSize");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3685,13 +3839,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLowerWindow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLowerWindow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3700,7 +3854,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.lowerWindow");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3722,13 +3883,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMaximizeWindow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMaximizeWindow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3737,7 +3898,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.maximizeWindow");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3763,7 +3931,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveWindow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveWindow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -3771,7 +3939,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : vte.terminal.Terminal)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3786,7 +3954,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.moveWindow");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3813,7 +3988,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNotificationReceived(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNotificationReceived(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -3821,7 +3996,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : vte.terminal.Terminal)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3836,7 +4011,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.notificationReceived");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3858,13 +4040,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPasteClipboard(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPasteClipboard(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3873,7 +4055,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.pasteClipboard");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3895,13 +4084,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRaiseWindow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRaiseWindow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3910,7 +4099,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.raiseWindow");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3932,13 +4128,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRefreshWindow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRefreshWindow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3947,7 +4143,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.refreshWindow");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -3973,7 +4176,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectResizeWindow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectResizeWindow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -3981,7 +4184,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : vte.terminal.Terminal)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -3996,7 +4199,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.resizeWindow");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -4018,13 +4228,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRestoreWindow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRestoreWindow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -4033,7 +4243,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.restoreWindow");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -4055,13 +4272,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -4070,7 +4287,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.selectionChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -4105,14 +4329,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSetupContextMenu(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSetupContextMenu(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == vte.event_context.EventContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : vte.terminal.Terminal)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -4124,7 +4348,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.setupContextMenu");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -4147,13 +4378,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectShellPrecmd(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShellPrecmd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -4162,7 +4393,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.shellPrecmd");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -4185,13 +4423,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectShellPreexec(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShellPreexec(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -4200,7 +4438,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.shellPreexec");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -4224,13 +4469,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
       Deprecated: This signal is never emitted.
   */
-  gulong connectTextDeleted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTextDeleted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -4239,7 +4484,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.textDeleted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -4263,13 +4515,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
       Deprecated: This signal is never emitted.
   */
-  gulong connectTextInserted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTextInserted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -4278,7 +4530,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.textInserted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -4302,13 +4561,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
       Deprecated: This signal is never emitted.
   */
-  gulong connectTextModified(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTextModified(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -4317,7 +4576,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.textModified");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -4343,14 +4609,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
       Deprecated: This signal is never emitted.
   */
-  gulong connectTextScrolled(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTextScrolled(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : vte.terminal.Terminal)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -4362,7 +4628,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.textScrolled");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -4384,13 +4657,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWindowTitleChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWindowTitleChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -4399,7 +4672,14 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "vte.terminal.Terminal.windowTitleChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -4422,7 +4702,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
   
       Deprecated: There's probably no reason for this feature to exist.
   */
-  T allowBold(bool propval)
+  T allowBold(bool propval) nothrow
   {
     return setProperty("allow-bold", propval);
   }
@@ -4433,7 +4713,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
         propval = Controls whether or not hyperlinks (OSC 8 escape sequence) are recognized and displayed.
       Returns: Builder instance for fluent chaining
   */
-  T allowHyperlink(bool propval)
+  T allowHyperlink(bool propval) nothrow
   {
     return setProperty("allow-hyperlink", propval);
   }
@@ -4445,7 +4725,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
           "bl" sequence.
       Returns: Builder instance for fluent chaining
   */
-  T audibleBell(bool propval)
+  T audibleBell(bool propval) nothrow
   {
     return setProperty("audible-bell", propval);
   }
@@ -4457,7 +4737,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
           when the user presses the backspace key.
       Returns: Builder instance for fluent chaining
   */
-  T backspaceBinding(vte.types.EraseBinding propval)
+  T backspaceBinding(vte.types.EraseBinding propval) nothrow
   {
     return setProperty("backspace-binding", propval);
   }
@@ -4470,7 +4750,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
           or if SGR 1 only enables bold and leaves the color intact.
       Returns: Builder instance for fluent chaining
   */
-  T boldIsBright(bool propval)
+  T boldIsBright(bool propval) nothrow
   {
     return setProperty("bold-is-bright", propval);
   }
@@ -4481,7 +4761,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
         propval = Scale factor for the cell height, to increase line spacing. (The font's height is not affected.)
       Returns: Builder instance for fluent chaining
   */
-  T cellHeightScale(double propval)
+  T cellHeightScale(double propval) nothrow
   {
     return setProperty("cell-height-scale", propval);
   }
@@ -4492,7 +4772,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
         propval = Scale factor for the cell width, to increase letter spacing. (The font's width is not affected.)
       Returns: Builder instance for fluent chaining
   */
-  T cellWidthScale(double propval)
+  T cellWidthScale(double propval) nothrow
   {
     return setProperty("cell-width-scale", propval);
   }
@@ -4509,7 +4789,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
           via escape sequence or with [vte.terminal.Terminal.reset].
       Returns: Builder instance for fluent chaining
   */
-  T cjkAmbiguousWidth(int propval)
+  T cjkAmbiguousWidth(int propval) nothrow
   {
     return setProperty("cjk-ambiguous-width", propval);
   }
@@ -4522,7 +4802,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
           takes precedence over this.
       Returns: Builder instance for fluent chaining
   */
-  T contextMenu(gtk.menu.Menu propval)
+  T contextMenu(gtk.menu.Menu propval) nothrow
   {
     return setProperty("context-menu", propval);
   }
@@ -4535,7 +4815,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
           #VteTerminal::context-menu property or [vte.terminal.Terminal.setContextMenu].
       Returns: Builder instance for fluent chaining
   */
-  T contextMenuModel(gio.menu_model.MenuModel propval)
+  T contextMenuModel(gio.menu_model.MenuModel propval) nothrow
   {
     return setProperty("context-menu-model", propval);
   }
@@ -4547,7 +4827,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
           will use the #GtkSettings:gtk-cursor-blink setting.
       Returns: Builder instance for fluent chaining
   */
-  T cursorBlinkMode(vte.types.CursorBlinkMode propval)
+  T cursorBlinkMode(vte.types.CursorBlinkMode propval) nothrow
   {
     return setProperty("cursor-blink-mode", propval);
   }
@@ -4558,7 +4838,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
         propval = Controls the shape of the cursor.
       Returns: Builder instance for fluent chaining
   */
-  T cursorShape(vte.types.CursorShape propval)
+  T cursorShape(vte.types.CursorShape propval) nothrow
   {
     return setProperty("cursor-shape", propval);
   }
@@ -4570,7 +4850,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
           when the user presses the delete key.
       Returns: Builder instance for fluent chaining
   */
-  T deleteBinding(vte.types.EraseBinding propval)
+  T deleteBinding(vte.types.EraseBinding propval) nothrow
   {
     return setProperty("delete-binding", propval);
   }
@@ -4581,7 +4861,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
         propval = Controls whether or not a11y is enabled for the widget.
       Returns: Builder instance for fluent chaining
   */
-  T enableA11y(bool propval)
+  T enableA11y(bool propval) nothrow
   {
     return setProperty("enable-a11y", propval);
   }
@@ -4592,13 +4872,13 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
         propval = Controls whether or not the terminal will perform bidirectional text rendering.
       Returns: Builder instance for fluent chaining
   */
-  T enableBidi(bool propval)
+  T enableBidi(bool propval) nothrow
   {
     return setProperty("enable-bidi", propval);
   }
 
   /** */
-  T enableFallbackScrolling(bool propval)
+  T enableFallbackScrolling(bool propval) nothrow
   {
     return setProperty("enable-fallback-scrolling", propval);
   }
@@ -4609,7 +4889,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
         propval = Controls whether or not the terminal will shape Arabic text.
       Returns: Builder instance for fluent chaining
   */
-  T enableShaping(bool propval)
+  T enableShaping(bool propval) nothrow
   {
     return setProperty("enable-shaping", propval);
   }
@@ -4620,7 +4900,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
         propval = Controls whether SIXEL image support is enabled.
       Returns: Builder instance for fluent chaining
   */
-  T enableSixel(bool propval)
+  T enableSixel(bool propval) nothrow
   {
     return setProperty("enable-sixel", propval);
   }
@@ -4637,7 +4917,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
       Deprecated: Instead of using this, you should use a tool like
           luit(1) when support for non-UTF-8 is required
   */
-  T encoding(string propval)
+  T encoding(string propval) nothrow
   {
     return setProperty("encoding", propval);
   }
@@ -4652,7 +4932,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
           and columns.
       Returns: Builder instance for fluent chaining
   */
-  T fontDesc(pango.font_description.FontDescription propval)
+  T fontDesc(pango.font_description.FontDescription propval) nothrow
   {
     return setProperty("font-desc", propval);
   }
@@ -4668,7 +4948,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
           [cairo.types.HintMetrics.Off] set.
       Returns: Builder instance for fluent chaining
   */
-  T fontOptions(cairo.font_options.FontOptions propval)
+  T fontOptions(cairo.font_options.FontOptions propval) nothrow
   {
     return setProperty("font-options", propval);
   }
@@ -4679,7 +4959,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
         propval = The terminal's font scale.
       Returns: Builder instance for fluent chaining
   */
-  T fontScale(double propval)
+  T fontScale(double propval) nothrow
   {
     return setProperty("font-scale", propval);
   }
@@ -4692,7 +4972,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
           terminal's child.
       Returns: Builder instance for fluent chaining
   */
-  T inputEnabled(bool propval)
+  T inputEnabled(bool propval) nothrow
   {
     return setProperty("input-enabled", propval);
   }
@@ -4705,7 +4985,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
           shown when the user moves the mouse.
       Returns: Builder instance for fluent chaining
   */
-  T pointerAutohide(bool propval)
+  T pointerAutohide(bool propval) nothrow
   {
     return setProperty("pointer-autohide", propval);
   }
@@ -4716,7 +4996,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
         propval = The PTY object for the terminal.
       Returns: Builder instance for fluent chaining
   */
-  T pty(vte.pty.Pty propval)
+  T pty(vte.pty.Pty propval) nothrow
   {
     return setProperty("pty", propval);
   }
@@ -4728,7 +5008,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
           the scrollback buffer, whenever the terminal's width changes.
       Returns: Builder instance for fluent chaining
   */
-  T rewrapOnResize(bool propval)
+  T rewrapOnResize(bool propval) nothrow
   {
     return setProperty("rewrap-on-resize", propval);
   }
@@ -4740,7 +5020,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
           the viewable history when the text is inserted (e.g. by a paste).
       Returns: Builder instance for fluent chaining
   */
-  T scrollOnInsert(bool propval)
+  T scrollOnInsert(bool propval) nothrow
   {
     return setProperty("scroll-on-insert", propval);
   }
@@ -4753,7 +5033,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
           trigger this behavior.
       Returns: Builder instance for fluent chaining
   */
-  T scrollOnKeystroke(bool propval)
+  T scrollOnKeystroke(bool propval) nothrow
   {
     return setProperty("scroll-on-keystroke", propval);
   }
@@ -4765,7 +5045,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
           the viewable history when the new data is received from the child.
       Returns: Builder instance for fluent chaining
   */
-  T scrollOnOutput(bool propval)
+  T scrollOnOutput(bool propval) nothrow
   {
     return setProperty("scroll-on-output", propval);
   }
@@ -4778,7 +5058,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
           GtkScrolledWindow to fix some bugs with its kinetic scrolling.
       Returns: Builder instance for fluent chaining
   */
-  T scrollUnitIsPixels(bool propval)
+  T scrollUnitIsPixels(bool propval) nothrow
   {
     return setProperty("scroll-unit-is-pixels", propval);
   }
@@ -4794,7 +5074,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
           allowed on the alternate screen buffer.
       Returns: Builder instance for fluent chaining
   */
-  T scrollbackLines(uint propval)
+  T scrollbackLines(uint propval) nothrow
   {
     return setProperty("scrollback-lines", propval);
   }
@@ -4805,7 +5085,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
         propval = Controls whether or not the terminal will allow blinking text.
       Returns: Builder instance for fluent chaining
   */
-  T textBlinkMode(vte.types.TextBlinkMode propval)
+  T textBlinkMode(vte.types.TextBlinkMode propval) nothrow
   {
     return setProperty("text-blink-mode", propval);
   }
@@ -4816,7 +5096,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
         propval = The horizontal alignment of @terminal within its allocation.
       Returns: Builder instance for fluent chaining
   */
-  T xalign(vte.types.Align propval)
+  T xalign(vte.types.Align propval) nothrow
   {
     return setProperty("xalign", propval);
   }
@@ -4827,7 +5107,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
         propval = The horizontal fillment of @terminal within its allocation.
       Returns: Builder instance for fluent chaining
   */
-  T xfill(bool propval)
+  T xfill(bool propval) nothrow
   {
     return setProperty("xfill", propval);
   }
@@ -4838,7 +5118,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
         propval = The vertical alignment of @terminal within its allocation
       Returns: Builder instance for fluent chaining
   */
-  T yalign(vte.types.Align propval)
+  T yalign(vte.types.Align propval) nothrow
   {
     return setProperty("yalign", propval);
   }
@@ -4852,7 +5132,7 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
           all other yalign values.
       Returns: Builder instance for fluent chaining
   */
-  T yfill(bool propval)
+  T yfill(bool propval) nothrow
   {
     return setProperty("yfill", propval);
   }
@@ -4865,7 +5145,7 @@ final class TerminalGidBuilder : TerminalGidBuilderImpl!TerminalGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Terminal build()
+  Terminal build() nothrow
   {
     return new Terminal(cast(void*)createGObject(Terminal._getGType), No.Take);
   }

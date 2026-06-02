@@ -15,11 +15,8 @@ class SqlStatementUnknown
   GdaSqlStatementUnknown _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.sql_statement_unknown.SqlStatementUnknown");
-
     _cInstance = *cast(GdaSqlStatementUnknown*)ptr;
 
     if (take)
@@ -27,7 +24,7 @@ class SqlStatementUnknown
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }

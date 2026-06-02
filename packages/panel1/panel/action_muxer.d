@@ -16,26 +16,26 @@ class ActionMuxer : gobject.object.ObjectWrap, gio.action_group.ActionGroup
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_action_muxer_get_type != &gidSymbolNotFound ? panel_action_muxer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ActionMuxer self()
+  override ActionMuxer self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class ActionMuxer : gobject.object.ObjectWrap, gio.action_group.ActionGroup
       Get builder for [panel.action_muxer.ActionMuxer]
       Returns: New builder object
   */
-  static ActionMuxerGidBuilder builder()
+  static ActionMuxerGidBuilder builder() nothrow
   {
     return new ActionMuxerGidBuilder;
   }
@@ -52,7 +52,7 @@ class ActionMuxer : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   mixin ActionGroupT!();
 
   /** */
-  this()
+  this() nothrow
   {
     PanelActionMuxer* _cretval;
     _cretval = panel_action_muxer_new();
@@ -69,7 +69,7 @@ class ActionMuxer : gobject.object.ObjectWrap, gio.action_group.ActionGroup
       Returns: a #GActionGroup matching prefix if
           found, otherwise null.
   */
-  gio.action_group.ActionGroup getActionGroup(string prefix)
+  gio.action_group.ActionGroup getActionGroup(string prefix) nothrow
   {
     GActionGroup* _cretval;
     const(char)* _prefix = prefix.toCString(No.Alloc);
@@ -79,7 +79,7 @@ class ActionMuxer : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /** */
-  void insertActionGroup(string prefix, gio.action_group.ActionGroup actionGroup)
+  void insertActionGroup(string prefix, gio.action_group.ActionGroup actionGroup) nothrow
   {
     const(char)* _prefix = prefix.toCString(No.Alloc);
     panel_action_muxer_insert_action_group(cast(PanelActionMuxer*)this._cPtr, _prefix, actionGroup ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)actionGroup)._cPtr(No.Dup) : null);
@@ -89,7 +89,7 @@ class ActionMuxer : gobject.object.ObjectWrap, gio.action_group.ActionGroup
       Gets a list of group names in the muxer.
       Returns: an array containing the names of groups within the muxer
   */
-  string[] listGroups()
+  string[] listGroups() nothrow
   {
     char** _cretval;
     _cretval = panel_action_muxer_list_groups(cast(PanelActionMuxer*)this._cPtr);
@@ -109,14 +109,14 @@ class ActionMuxer : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /** */
-  void removeActionGroup(string prefix)
+  void removeActionGroup(string prefix) nothrow
   {
     const(char)* _prefix = prefix.toCString(No.Alloc);
     panel_action_muxer_remove_action_group(cast(PanelActionMuxer*)this._cPtr, _prefix);
   }
 
   /** */
-  void removeAll()
+  void removeAll() nothrow
   {
     panel_action_muxer_remove_all(cast(PanelActionMuxer*)this._cPtr);
   }
@@ -136,7 +136,7 @@ final class ActionMuxerGidBuilder : ActionMuxerGidBuilderImpl!ActionMuxerGidBuil
       Create object from builder.
       Returns: New object
   */
-  ActionMuxer build()
+  ActionMuxer build() nothrow
   {
     return new ActionMuxer(cast(void*)createGObject(ActionMuxer._getGType), Yes.Take);
   }

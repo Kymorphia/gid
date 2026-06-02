@@ -15,26 +15,26 @@ class Decimal32DataType : arrow.decimal_data_type.DecimalDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal32_data_type_get_type != &gidSymbolNotFound ? garrow_decimal32_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Decimal32DataType self()
+  override Decimal32DataType self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class Decimal32DataType : arrow.decimal_data_type.DecimalDataType
       Get builder for [arrow.decimal32_data_type.Decimal32DataType]
       Returns: New builder object
   */
-  static Decimal32DataTypeGidBuilder builder()
+  static Decimal32DataTypeGidBuilder builder() nothrow
   {
     return new Decimal32DataTypeGidBuilder;
   }
@@ -60,7 +60,7 @@ class Decimal32DataType : arrow.decimal_data_type.DecimalDataType
   }
 
   /** */
-  static int maxPrecision()
+  static int maxPrecision() nothrow
   {
     int _retval;
     _retval = garrow_decimal32_data_type_max_precision();
@@ -80,7 +80,7 @@ final class Decimal32DataTypeGidBuilder : Decimal32DataTypeGidBuilderImpl!Decima
       Create object from builder.
       Returns: New object
   */
-  Decimal32DataType build()
+  Decimal32DataType build() nothrow
   {
     return new Decimal32DataType(cast(void*)createGObject(Decimal32DataType._getGType), Yes.Take);
   }

@@ -33,7 +33,7 @@ template RetrievableT()
       Returns: The date and time (in seconds since the UNIX epoch) that this
         item was created.
   */
-  @property ulong created()
+  @property ulong created() nothrow
   {
     return getCreated();
   }
@@ -44,7 +44,7 @@ template RetrievableT()
         propval = The date and time (in seconds since the UNIX epoch) that this
           item was created.
   */
-  @property void created(ulong propval)
+  @property void created(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("created", propval);
   }
@@ -53,7 +53,7 @@ template RetrievableT()
       Get `label` property.
       Returns: The human readable label for the item.
   */
-  @property string label()
+  @property string label() nothrow
   {
     return getLabel();
   }
@@ -63,7 +63,7 @@ template RetrievableT()
       Params:
         propval = The human readable label for the item.
   */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("label", propval);
   }
@@ -73,7 +73,7 @@ template RetrievableT()
       Returns: The date and time (in seconds since the UNIX epoch) that this
         item was last modified.
   */
-  @property ulong modified()
+  @property ulong modified() nothrow
   {
     return getModified();
   }
@@ -84,7 +84,7 @@ template RetrievableT()
         propval = The date and time (in seconds since the UNIX epoch) that this
           item was last modified.
   */
-  @property void modified(ulong propval)
+  @property void modified(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("modified", propval);
   }
@@ -101,7 +101,7 @@ template RetrievableT()
           to the attributes, which should not be modified, and
           released with [glib.hash_table.HashTable.unref]
   */
-  override string[string] getAttributes()
+  override string[string] getAttributes() nothrow
   {
     GHashTable* _cretval;
     _cretval = secret_retrievable_get_attributes(cast(SecretRetrievable*)this._cPtr);
@@ -116,7 +116,7 @@ template RetrievableT()
       1970.
       Returns: the created date and time
   */
-  override ulong getCreated()
+  override ulong getCreated() nothrow
   {
     ulong _retval;
     _retval = secret_retrievable_get_created(cast(SecretRetrievable*)this._cPtr);
@@ -127,7 +127,7 @@ template RetrievableT()
       Get the label of this item.
       Returns: the label, which should be freed with `funcGLib.free`
   */
-  override string getLabel()
+  override string getLabel() nothrow
   {
     char* _cretval;
     _cretval = secret_retrievable_get_label(cast(SecretRetrievable*)this._cPtr);
@@ -142,7 +142,7 @@ template RetrievableT()
       1970.
       Returns: the modified date and time
   */
-  override ulong getModified()
+  override ulong getModified() nothrow
   {
     ulong _retval;
     _retval = secret_retrievable_get_modified(cast(SecretRetrievable*)this._cPtr);
@@ -161,14 +161,21 @@ template RetrievableT()
         cancellable = optional cancellation object
         callback = called when the operation completes
   */
-  override void retrieveSecret(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  override void retrieveSecret(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -233,7 +240,7 @@ template RetrievableGidBuilderT()
           item was created.
       Returns: Builder instance for fluent chaining
   */
-  T created(ulong propval)
+  T created(ulong propval) nothrow
   {
     return setProperty("created", propval);
   }
@@ -244,7 +251,7 @@ template RetrievableGidBuilderT()
         propval = The human readable label for the item.
       Returns: Builder instance for fluent chaining
   */
-  T label(string propval)
+  T label(string propval) nothrow
   {
     return setProperty("label", propval);
   }
@@ -256,7 +263,7 @@ template RetrievableGidBuilderT()
           item was last modified.
       Returns: Builder instance for fluent chaining
   */
-  T modified(ulong propval)
+  T modified(ulong propval) nothrow
   {
     return setProperty("modified", propval);
   }

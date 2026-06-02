@@ -14,18 +14,15 @@ class VideoChromaResample
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_chroma_resample.VideoChromaResample");
-
     _cInstancePtr = cast(GstVideoChromaResample*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -38,7 +35,7 @@ class VideoChromaResample
         nLines = the number of input lines
         offset = the first line
   */
-  void getInfo(out uint nLines, out int offset)
+  void getInfo(out uint nLines, out int offset) nothrow
   {
     gst_video_chroma_resample_get_info(cast(GstVideoChromaResample*)this._cPtr, cast(uint*)&nLines, cast(int*)&offset);
   }

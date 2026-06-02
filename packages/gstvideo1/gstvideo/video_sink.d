@@ -21,26 +21,26 @@ class VideoSink : gstbase.base_sink.BaseSink
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_sink_get_type != &gidSymbolNotFound ? gst_video_sink_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VideoSink self()
+  override VideoSink self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class VideoSink : gstbase.base_sink.BaseSink
       Get builder for [gstvideo.video_sink.VideoSink]
       Returns: New builder object
   */
-  static VideoSinkGidBuilder builder()
+  static VideoSinkGidBuilder builder() nothrow
   {
     return new VideoSinkGidBuilder;
   }
@@ -59,7 +59,7 @@ class VideoSink : gstbase.base_sink.BaseSink
       Returns: Whether to show video frames during preroll. If set to false, video
         frames will only be rendered in PLAYING state.
   */
-  @property bool showPrerollFrame()
+  @property bool showPrerollFrame() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("show-preroll-frame");
   }
@@ -70,7 +70,7 @@ class VideoSink : gstbase.base_sink.BaseSink
         propval = Whether to show video frames during preroll. If set to false, video
           frames will only be rendered in PLAYING state.
   */
-  @property void showPrerollFrame(bool propval)
+  @property void showPrerollFrame(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("show-preroll-frame", propval);
   }
@@ -87,7 +87,7 @@ class VideoSinkGidBuilderImpl(T) : gstbase.base_sink.BaseSinkGidBuilderImpl!T
           frames will only be rendered in PLAYING state.
       Returns: Builder instance for fluent chaining
   */
-  T showPrerollFrame(bool propval)
+  T showPrerollFrame(bool propval) nothrow
   {
     return setProperty("show-preroll-frame", propval);
   }
@@ -100,7 +100,7 @@ final class VideoSinkGidBuilder : VideoSinkGidBuilderImpl!VideoSinkGidBuilder
       Create object from builder.
       Returns: New object
   */
-  VideoSink build()
+  VideoSink build() nothrow
   {
     return new VideoSink(cast(void*)createGObject(VideoSink._getGType), No.Take);
   }

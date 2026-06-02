@@ -17,32 +17,32 @@ class AccessibleList : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_accessible_list_get_type != &gidSymbolNotFound ? gtk_accessible_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AccessibleList self()
+  override AccessibleList self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class AccessibleList : gobject.boxed.Boxed
         accessibles = array of GtkAccessible
       Returns: the newly created list of accessible instances
   */
-  static gtk.accessible_list.AccessibleList newFromArray(gtk.accessible.Accessible[] accessibles)
+  static gtk.accessible_list.AccessibleList newFromArray(gtk.accessible.Accessible[] accessibles) nothrow
   {
     GtkAccessibleList* _cretval;
     size_t _nAccessibles;
@@ -79,7 +79,7 @@ class AccessibleList : gobject.boxed.Boxed
         list = a reference to a [glib.list.List] containing a list of accessible values
       Returns: the list of accessible instances
   */
-  static gtk.accessible_list.AccessibleList newFromList(gtk.accessible.Accessible[] list)
+  static gtk.accessible_list.AccessibleList newFromList(gtk.accessible.Accessible[] list) nothrow
   {
     GtkAccessibleList* _cretval;
     auto _list = gListFromD!(gtk.accessible.Accessible)(list);
@@ -93,7 +93,7 @@ class AccessibleList : gobject.boxed.Boxed
       Gets the list of objects this boxed type holds
       Returns: a shallow copy of the objects
   */
-  gtk.accessible.Accessible[] getObjects()
+  gtk.accessible.Accessible[] getObjects() nothrow
   {
     GList* _cretval;
     _cretval = gtk_accessible_list_get_objects(cast(GtkAccessibleList*)this._cPtr);

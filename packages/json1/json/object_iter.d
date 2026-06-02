@@ -26,11 +26,8 @@ class ObjectIter
   JsonObjectIter _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for json.object_iter.ObjectIter");
-
     _cInstance = *cast(JsonObjectIter*)ptr;
 
     if (take)
@@ -38,7 +35,7 @@ class ObjectIter
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -66,7 +63,7 @@ class ObjectIter
       Params:
         object = the JSON object to iterate over
   */
-  void init_(json.object.ObjectWrap object)
+  void init_(json.object.ObjectWrap object) nothrow
   {
     json_object_iter_init(cast(JsonObjectIter*)this._cPtr, object ? cast(JsonObject*)object._cPtr(No.Dup) : null);
   }
@@ -91,7 +88,7 @@ class ObjectIter
       Params:
         object = the JSON object to iterate over
   */
-  void initOrdered(json.object.ObjectWrap object)
+  void initOrdered(json.object.ObjectWrap object) nothrow
   {
     json_object_iter_init_ordered(cast(JsonObjectIter*)this._cPtr, object ? cast(JsonObject*)object._cPtr(No.Dup) : null);
   }
@@ -121,7 +118,7 @@ class ObjectIter
       Returns: `TRUE` if member_name and member_node are valid; `FALSE` if
           there are no more members
   */
-  bool next(out string memberName, out json.node.Node memberNode)
+  bool next(out string memberName, out json.node.Node memberNode) nothrow
   {
     bool _retval;
     char* _memberName;
@@ -156,7 +153,7 @@ class ObjectIter
       Returns: `TRUE `if member_name and member_node are valid; `FALSE` if the end
            of the object has been reached
   */
-  bool nextOrdered(out string memberName, out json.node.Node memberNode)
+  bool nextOrdered(out string memberName, out json.node.Node memberNode) nothrow
   {
     bool _retval;
     char* _memberName;

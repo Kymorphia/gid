@@ -14,7 +14,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgmime-3.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // ApplicationPkcs7Mime
   GType function() c_g_mime_application_pkcs7_mime_get_type; ///

@@ -75,26 +75,26 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_menu_item_get_type != &gidSymbolNotFound ? gtk_menu_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MenuItem self()
+  override MenuItem self() nothrow
   {
     return this;
   }
@@ -103,7 +103,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Get builder for [gtk.menu_item.MenuItem]
       Returns: New builder object
   */
-  static MenuItemGidBuilder builder()
+  static MenuItemGidBuilder builder() nothrow
   {
     return new MenuItemGidBuilder;
   }
@@ -114,7 +114,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
         changes of the menu item's accelerator caused by the user can be
         identified and saved to persistant storage.
   */
-  @property string accelPath()
+  @property string accelPath() nothrow
   {
     return getAccelPath();
   }
@@ -126,7 +126,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
           changes of the menu item's accelerator caused by the user can be
           identified and saved to persistant storage.
   */
-  @property void accelPath(string propval)
+  @property void accelPath(string propval) nothrow
   {
     setAccelPath(propval);
   }
@@ -135,7 +135,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Get `label` property.
       Returns: The text for the child label.
   */
-  @property string label()
+  @property string label() nothrow
   {
     return getLabel();
   }
@@ -145,7 +145,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Params:
         propval = The text for the child label.
   */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     setLabel(propval);
   }
@@ -155,7 +155,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Returns: Sets whether the menu item appears justified
         at the right side of a menu bar.
   */
-  @property bool rightJustified()
+  @property bool rightJustified() nothrow
   {
     return getRightJustified();
   }
@@ -166,7 +166,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
         propval = Sets whether the menu item appears justified
           at the right side of a menu bar.
   */
-  @property void rightJustified(bool propval)
+  @property void rightJustified(bool propval) nothrow
   {
     setRightJustified(propval);
   }
@@ -175,7 +175,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Get `submenu` property.
       Returns: The submenu attached to the menu item, or null if it has none.
   */
-  @property gtk.menu.Menu submenu()
+  @property gtk.menu.Menu submenu() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.menu.Menu)("submenu");
   }
@@ -185,7 +185,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Params:
         propval = The submenu attached to the menu item, or null if it has none.
   */
-  @property void submenu(gtk.menu.Menu propval)
+  @property void submenu(gtk.menu.Menu propval) nothrow
   {
     setSubmenu(propval);
   }
@@ -194,7 +194,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Get `useUnderline` property.
       Returns: true if underlines in the text indicate mnemonics.
   */
-  @property bool useUnderline()
+  @property bool useUnderline() nothrow
   {
     return getUseUnderline();
   }
@@ -204,7 +204,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Params:
         propval = true if underlines in the text indicate mnemonics.
   */
-  @property void useUnderline(bool propval)
+  @property void useUnderline(bool propval) nothrow
   {
     setUseUnderline(propval);
   }
@@ -216,7 +216,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Creates a new #GtkMenuItem.
       Returns: the newly created #GtkMenuItem
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_item_new();
@@ -230,7 +230,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
         label = the text for the label
       Returns: the newly created #GtkMenuItem
   */
-  static gtk.menu_item.MenuItem newWithLabel(string label)
+  static gtk.menu_item.MenuItem newWithLabel(string label) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -250,7 +250,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
               mnemonic character
       Returns: a new #GtkMenuItem
   */
-  static gtk.menu_item.MenuItem newWithMnemonic(string label)
+  static gtk.menu_item.MenuItem newWithMnemonic(string label) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -264,7 +264,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   /**
       Emits the #GtkMenuItem::activate signal on the given item
   */
-  void activate()
+  void activate() nothrow
   {
     gtk_menu_item_activate(cast(GtkMenuItem*)this._cPtr);
   }
@@ -272,7 +272,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   /**
       Emits the #GtkMenuItem::deselect signal on the given item.
   */
-  void deselect()
+  void deselect() nothrow
   {
     gtk_menu_item_deselect(cast(GtkMenuItem*)this._cPtr);
   }
@@ -284,7 +284,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Returns: the accelerator path corresponding to
             this menu item’s functionality, or null if not set
   */
-  string getAccelPath()
+  string getAccelPath() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_menu_item_get_accel_path(cast(GtkMenuItem*)this._cPtr);
@@ -297,7 +297,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Returns: The text in the menu_item label. This is the internal
           string used by the label, and must not be modified.
   */
-  string getLabel()
+  string getLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_menu_item_get_label(cast(GtkMenuItem*)this._cPtr);
@@ -312,7 +312,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Returns: true if menu_item always reserves space for the
             submenu indicator
   */
-  bool getReserveIndicator()
+  bool getReserveIndicator() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_menu_item_get_reserve_indicator(cast(GtkMenuItem*)this._cPtr);
@@ -327,7 +327,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   
       Deprecated: See [gtk.menu_item.MenuItem.setRightJustified]
   */
-  bool getRightJustified()
+  bool getRightJustified() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_menu_item_get_right_justified(cast(GtkMenuItem*)this._cPtr);
@@ -339,7 +339,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       See [gtk.menu_item.MenuItem.setSubmenu].
       Returns: submenu for this menu item, or null if none
   */
-  gtk.widget.Widget getSubmenu()
+  gtk.widget.Widget getSubmenu() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_item_get_submenu(cast(GtkMenuItem*)this._cPtr);
@@ -353,7 +353,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Returns: true if an embedded underline in the label
             indicates the mnemonic accelerator key.
   */
-  bool getUseUnderline()
+  bool getUseUnderline() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_menu_item_get_use_underline(cast(GtkMenuItem*)this._cPtr);
@@ -363,7 +363,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   /**
       Emits the #GtkMenuItem::select signal on the given item.
   */
-  void select()
+  void select() nothrow
   {
     gtk_menu_item_select(cast(GtkMenuItem*)this._cPtr);
   }
@@ -395,7 +395,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
         accelPath = accelerator path, corresponding to this menu
               item’s functionality, or null to unset the current path.
   */
-  void setAccelPath(string accelPath = null)
+  void setAccelPath(string accelPath = null) nothrow
   {
     const(char)* _accelPath = accelPath.toCString(No.Alloc);
     gtk_menu_item_set_accel_path(cast(GtkMenuItem*)this._cPtr, _accelPath);
@@ -407,7 +407,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Params:
         label = the text you want to set
   */
-  void setLabel(string label)
+  void setLabel(string label) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_menu_item_set_label(cast(GtkMenuItem*)this._cPtr, _label);
@@ -424,7 +424,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Params:
         reserve = the new value
   */
-  void setReserveIndicator(bool reserve)
+  void setReserveIndicator(bool reserve) nothrow
   {
     gtk_menu_item_set_reserve_indicator(cast(GtkMenuItem*)this._cPtr, reserve);
   }
@@ -443,7 +443,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Deprecated: If you insist on using it, use
           [gtk.widget.Widget.setHexpand] and [gtk.widget.Widget.setHalign].
   */
-  void setRightJustified(bool rightJustified)
+  void setRightJustified(bool rightJustified) nothrow
   {
     gtk_menu_item_set_right_justified(cast(GtkMenuItem*)this._cPtr, rightJustified);
   }
@@ -455,7 +455,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Params:
         submenu = the submenu, or null
   */
-  void setSubmenu(gtk.menu.Menu submenu = null)
+  void setSubmenu(gtk.menu.Menu submenu = null) nothrow
   {
     gtk_menu_item_set_submenu(cast(GtkMenuItem*)this._cPtr, submenu ? cast(GtkWidget*)submenu._cPtr(No.Dup) : null);
   }
@@ -467,7 +467,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Params:
         setting = true if underlines in the text indicate mnemonics
   */
-  void setUseUnderline(bool setting)
+  void setUseUnderline(bool setting) nothrow
   {
     gtk_menu_item_set_use_underline(cast(GtkMenuItem*)this._cPtr, setting);
   }
@@ -478,7 +478,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Params:
         allocation = the allocation to use as signal data.
   */
-  void toggleSizeAllocate(int allocation)
+  void toggleSizeAllocate(int allocation) nothrow
   {
     gtk_menu_item_toggle_size_allocate(cast(GtkMenuItem*)this._cPtr, allocation);
   }
@@ -489,7 +489,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Params:
         requisition = the requisition to use as signal data.
   */
-  void toggleSizeRequest(ref int requisition)
+  void toggleSizeRequest(ref int requisition) nothrow
   {
     gtk_menu_item_toggle_size_request(cast(GtkMenuItem*)this._cPtr, cast(int*)&requisition);
   }
@@ -509,13 +509,13 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.menu_item.MenuItem)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -524,7 +524,14 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.menu_item.MenuItem.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -548,13 +555,13 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivateItem(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivateItem(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.menu_item.MenuItem)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -563,7 +570,14 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.menu_item.MenuItem.activateItem");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -585,13 +599,13 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeselect(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeselect(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.menu_item.MenuItem)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -600,7 +614,14 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.menu_item.MenuItem.deselect");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -622,13 +643,13 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelect(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelect(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.menu_item.MenuItem)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -637,7 +658,14 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.menu_item.MenuItem.select");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -661,14 +689,14 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectToggleSizeAllocate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToggleSizeAllocate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.menu_item.MenuItem)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -680,7 +708,14 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.menu_item.MenuItem.toggleSizeAllocate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -704,14 +739,14 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectToggleSizeRequest(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToggleSizeRequest(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == void*)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.menu_item.MenuItem)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -723,7 +758,14 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.menu_item.MenuItem.toggleSizeRequest");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -746,7 +788,7 @@ class MenuItemGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.actionable.Ac
           identified and saved to persistant storage.
       Returns: Builder instance for fluent chaining
   */
-  T accelPath(string propval)
+  T accelPath(string propval) nothrow
   {
     return setProperty("accel-path", propval);
   }
@@ -757,7 +799,7 @@ class MenuItemGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.actionable.Ac
         propval = The text for the child label.
       Returns: Builder instance for fluent chaining
   */
-  T label(string propval)
+  T label(string propval) nothrow
   {
     return setProperty("label", propval);
   }
@@ -769,7 +811,7 @@ class MenuItemGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.actionable.Ac
           at the right side of a menu bar.
       Returns: Builder instance for fluent chaining
   */
-  T rightJustified(bool propval)
+  T rightJustified(bool propval) nothrow
   {
     return setProperty("right-justified", propval);
   }
@@ -780,7 +822,7 @@ class MenuItemGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.actionable.Ac
         propval = The submenu attached to the menu item, or null if it has none.
       Returns: Builder instance for fluent chaining
   */
-  T submenu(gtk.menu.Menu propval)
+  T submenu(gtk.menu.Menu propval) nothrow
   {
     return setProperty("submenu", propval);
   }
@@ -791,7 +833,7 @@ class MenuItemGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.actionable.Ac
         propval = true if underlines in the text indicate mnemonics.
       Returns: Builder instance for fluent chaining
   */
-  T useUnderline(bool propval)
+  T useUnderline(bool propval) nothrow
   {
     return setProperty("use-underline", propval);
   }
@@ -804,7 +846,7 @@ final class MenuItemGidBuilder : MenuItemGidBuilderImpl!MenuItemGidBuilder
       Create object from builder.
       Returns: New object
   */
-  MenuItem build()
+  MenuItem build() nothrow
   {
     return new MenuItem(cast(void*)createGObject(MenuItem._getGType), No.Take);
   }

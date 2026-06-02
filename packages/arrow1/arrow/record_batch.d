@@ -25,26 +25,26 @@ class RecordBatch : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_record_batch_get_type != &gidSymbolNotFound ? garrow_record_batch_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RecordBatch self()
+  override RecordBatch self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class RecordBatch : gobject.object.ObjectWrap
       Get builder for [arrow.record_batch.RecordBatch]
       Returns: New builder object
   */
-  static RecordBatchGidBuilder builder()
+  static RecordBatchGidBuilder builder() nothrow
   {
     return new RecordBatchGidBuilder;
   }
@@ -96,7 +96,7 @@ class RecordBatch : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equal(arrow.record_batch.RecordBatch otherRecordBatch)
+  bool equal(arrow.record_batch.RecordBatch otherRecordBatch) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_record_batch_equal(cast(GArrowRecordBatch*)this._cPtr, otherRecordBatch ? cast(GArrowRecordBatch*)otherRecordBatch._cPtr(No.Dup) : null);
@@ -104,7 +104,7 @@ class RecordBatch : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equalMetadata(arrow.record_batch.RecordBatch otherRecordBatch, bool checkMetadata)
+  bool equalMetadata(arrow.record_batch.RecordBatch otherRecordBatch, bool checkMetadata) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_record_batch_equal_metadata(cast(GArrowRecordBatch*)this._cPtr, otherRecordBatch ? cast(GArrowRecordBatch*)otherRecordBatch._cPtr(No.Dup) : null, checkMetadata);
@@ -135,7 +135,7 @@ class RecordBatch : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.array.Array getColumnData(int i)
+  arrow.array.Array getColumnData(int i) nothrow
   {
     GArrowArray* _cretval;
     _cretval = garrow_record_batch_get_column_data(cast(GArrowRecordBatch*)this._cPtr, i);
@@ -144,7 +144,7 @@ class RecordBatch : gobject.object.ObjectWrap
   }
 
   /** */
-  string getColumnName(int i)
+  string getColumnName(int i) nothrow
   {
     const(char)* _cretval;
     _cretval = garrow_record_batch_get_column_name(cast(GArrowRecordBatch*)this._cPtr, i);
@@ -153,7 +153,7 @@ class RecordBatch : gobject.object.ObjectWrap
   }
 
   /** */
-  uint getNColumns()
+  uint getNColumns() nothrow
   {
     uint _retval;
     _retval = garrow_record_batch_get_n_columns(cast(GArrowRecordBatch*)this._cPtr);
@@ -161,7 +161,7 @@ class RecordBatch : gobject.object.ObjectWrap
   }
 
   /** */
-  long getNRows()
+  long getNRows() nothrow
   {
     long _retval;
     _retval = garrow_record_batch_get_n_rows(cast(GArrowRecordBatch*)this._cPtr);
@@ -169,7 +169,7 @@ class RecordBatch : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.schema.Schema getSchema()
+  arrow.schema.Schema getSchema() nothrow
   {
     GArrowSchema* _cretval;
     _cretval = garrow_record_batch_get_schema(cast(GArrowRecordBatch*)this._cPtr);
@@ -202,7 +202,7 @@ class RecordBatch : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.record_batch.RecordBatch slice(long offset, long length)
+  arrow.record_batch.RecordBatch slice(long offset, long length) nothrow
   {
     GArrowRecordBatch* _cretval;
     _cretval = garrow_record_batch_slice(cast(GArrowRecordBatch*)this._cPtr, offset, length);
@@ -252,7 +252,7 @@ class RecordBatchGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T recordBatch(void* propval)
+  T recordBatch(void* propval) nothrow
   {
     return setProperty("record-batch", propval);
   }
@@ -265,7 +265,7 @@ final class RecordBatchGidBuilder : RecordBatchGidBuilderImpl!RecordBatchGidBuil
       Create object from builder.
       Returns: New object
   */
-  RecordBatch build()
+  RecordBatch build() nothrow
   {
     return new RecordBatch(cast(void*)createGObject(RecordBatch._getGType), Yes.Take);
   }

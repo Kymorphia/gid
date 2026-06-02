@@ -13,11 +13,8 @@ class TestLogBuffer
   GTestLogBuffer _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.test_log_buffer.TestLogBuffer");
-
     _cInstance = *cast(GTestLogBuffer*)ptr;
 
     if (take)
@@ -25,7 +22,7 @@ class TestLogBuffer
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -36,7 +33,7 @@ class TestLogBuffer
       Params:
         bytes = 
   */
-  void push(ubyte[] bytes)
+  void push(ubyte[] bytes) nothrow
   {
     uint _nBytes;
     if (bytes)

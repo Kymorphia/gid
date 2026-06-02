@@ -14,7 +14,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgstrtp-1.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // RTCPBuffer
   gboolean function(GstRTCPBuffer* rtcp, GstRTCPType type, GstRTCPPacket* packet) c_gst_rtcp_buffer_add_packet; ///

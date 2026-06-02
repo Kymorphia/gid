@@ -22,26 +22,26 @@ class AutocryptHeader : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_autocrypt_header_get_type != &gidSymbolNotFound ? g_mime_autocrypt_header_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AutocryptHeader self()
+  override AutocryptHeader self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
       Get builder for [gmime.autocrypt_header.AutocryptHeader]
       Returns: New builder object
   */
-  static AutocryptHeaderGidBuilder builder()
+  static AutocryptHeaderGidBuilder builder() nothrow
   {
     return new AutocryptHeaderGidBuilder;
   }
@@ -59,7 +59,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
       Creates a new #GMimeAutocryptHeader object.
       Returns: a new #GMimeAutocryptHeader object.
   */
-  this()
+  this() nothrow
   {
     GMimeAutocryptHeader* _cretval;
     _cretval = g_mime_autocrypt_header_new();
@@ -80,7 +80,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
       Returns: a new #GMimeAutocryptHeader object, or
         null on error.
   */
-  static gmime.autocrypt_header.AutocryptHeader newFromString(string string_)
+  static gmime.autocrypt_header.AutocryptHeader newFromString(string string_) nothrow
   {
     GMimeAutocryptHeader* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
@@ -96,7 +96,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
       Params:
         src = a #GMimeAutocryptHeader object
   */
-  void clone(gmime.autocrypt_header.AutocryptHeader src)
+  void clone(gmime.autocrypt_header.AutocryptHeader src) nothrow
   {
     g_mime_autocrypt_header_clone(cast(GMimeAutocryptHeader*)this._cPtr, src ? cast(GMimeAutocryptHeader*)src._cPtr(No.Dup) : null);
   }
@@ -114,7 +114,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
         ah2 = a #GMimeAutocryptHeader object
       Returns: -1, 0, or 1 when ah1 is less than, equal to, or greater than ah2.
   */
-  int compare(gmime.autocrypt_header.AutocryptHeader ah2)
+  int compare(gmime.autocrypt_header.AutocryptHeader ah2) nothrow
   {
     int _retval;
     _retval = g_mime_autocrypt_header_compare(cast(GMimeAutocryptHeader*)this._cPtr, ah2 ? cast(GMimeAutocryptHeader*)ah2._cPtr(No.Dup) : null);
@@ -125,7 +125,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
       Gets the internal address of the Autocrypt header, or null if not set.
       Returns: the address associated with the Autocrypt header
   */
-  gmime.internet_address_mailbox.InternetAddressMailbox getAddress()
+  gmime.internet_address_mailbox.InternetAddressMailbox getAddress() nothrow
   {
     GMimeInternetAddressMailbox* _cretval;
     _cretval = g_mime_autocrypt_header_get_address(cast(GMimeAutocryptHeader*)this._cPtr);
@@ -137,7 +137,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
       Gets the internal address of the Autocrypt header as a C string, or null if not set.
       Returns: the address associated with the Autocrypt header
   */
-  string getAddressAsString()
+  string getAddressAsString() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_autocrypt_header_get_address_as_string(cast(GMimeAutocryptHeader*)this._cPtr);
@@ -149,7 +149,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
       Gets the effective date of the Autocrypt header, or null if not set.
       Returns: the effective date associated with the Autocrypt header
   */
-  glib.date_time.DateTime getEffectiveDate()
+  glib.date_time.DateTime getEffectiveDate() nothrow
   {
     GDateTime* _cretval;
     _cretval = g_mime_autocrypt_header_get_effective_date(cast(GMimeAutocryptHeader*)this._cPtr);
@@ -161,7 +161,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
       Gets the raw keydata of the Autocrypt header, or null if not set.
       Returns: the raw key data associated with the Autocrypt header
   */
-  glib.bytes.Bytes getKeydata()
+  glib.bytes.Bytes getKeydata() nothrow
   {
     GBytes* _cretval;
     _cretval = g_mime_autocrypt_header_get_keydata(cast(GMimeAutocryptHeader*)this._cPtr);
@@ -173,7 +173,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
       Gets the encryption preference stated by the Autocrypt header.
       Returns: the encryption preference associated with the Autocrypt header
   */
-  gmime.types.AutocryptPreferEncrypt getPreferEncrypt()
+  gmime.types.AutocryptPreferEncrypt getPreferEncrypt() nothrow
   {
     GMimeAutocryptPreferEncrypt _cretval;
     _cretval = g_mime_autocrypt_header_get_prefer_encrypt(cast(GMimeAutocryptHeader*)this._cPtr);
@@ -189,7 +189,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
       associated address.
       Returns: true if the header is complete, or false if it is incomplete.
   */
-  bool isComplete()
+  bool isComplete() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_autocrypt_header_is_complete(cast(GMimeAutocryptHeader*)this._cPtr);
@@ -202,7 +202,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
       Params:
         address = a #InternetAddressMailbox value
   */
-  void setAddress(gmime.internet_address_mailbox.InternetAddressMailbox address)
+  void setAddress(gmime.internet_address_mailbox.InternetAddressMailbox address) nothrow
   {
     g_mime_autocrypt_header_set_address(cast(GMimeAutocryptHeader*)this._cPtr, address ? cast(GMimeInternetAddressMailbox*)address._cPtr(No.Dup) : null);
   }
@@ -213,7 +213,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
       Params:
         address = a null-terminated string that is a raw e-mail address
   */
-  void setAddressFromString(string address)
+  void setAddressFromString(string address) nothrow
   {
     const(char)* _address = address.toCString(No.Alloc);
     g_mime_autocrypt_header_set_address_from_string(cast(GMimeAutocryptHeader*)this._cPtr, _address);
@@ -225,7 +225,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
       Params:
         effectiveDate = a #GDateTime object
   */
-  void setEffectiveDate(glib.date_time.DateTime effectiveDate)
+  void setEffectiveDate(glib.date_time.DateTime effectiveDate) nothrow
   {
     g_mime_autocrypt_header_set_effective_date(cast(GMimeAutocryptHeader*)this._cPtr, effectiveDate ? cast(GDateTime*)effectiveDate._cPtr(No.Dup) : null);
   }
@@ -236,7 +236,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
       Params:
         keydata = a #GBytes object
   */
-  void setKeydata(glib.bytes.Bytes keydata)
+  void setKeydata(glib.bytes.Bytes keydata) nothrow
   {
     g_mime_autocrypt_header_set_keydata(cast(GMimeAutocryptHeader*)this._cPtr, keydata ? cast(GBytes*)keydata._cPtr(No.Dup) : null);
   }
@@ -247,7 +247,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
       Params:
         pref = a #GMimeAutocryptPreferEncrypt value
   */
-  void setPreferEncrypt(gmime.types.AutocryptPreferEncrypt pref)
+  void setPreferEncrypt(gmime.types.AutocryptPreferEncrypt pref) nothrow
   {
     g_mime_autocrypt_header_set_prefer_encrypt(cast(GMimeAutocryptHeader*)this._cPtr, pref);
   }
@@ -267,7 +267,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
       Returns: the string representation of the
         Autocrypt header.
   */
-  string toString_(bool gossip)
+  string toString_(bool gossip) nothrow
   {
     char* _cretval;
     _cretval = g_mime_autocrypt_header_to_string(cast(GMimeAutocryptHeader*)this._cPtr, gossip);
@@ -288,7 +288,7 @@ final class AutocryptHeaderGidBuilder : AutocryptHeaderGidBuilderImpl!AutocryptH
       Create object from builder.
       Returns: New object
   */
-  AutocryptHeader build()
+  AutocryptHeader build() nothrow
   {
     return new AutocryptHeader(cast(void*)createGObject(AutocryptHeader._getGType), Yes.Take);
   }

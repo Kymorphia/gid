@@ -27,7 +27,7 @@ interface RecentChooser
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_recent_chooser_get_type != &gidSymbolNotFound ? gtk_recent_chooser_get_type() : cast(GType)0;
@@ -38,7 +38,7 @@ interface RecentChooser
       Returns: The #GtkRecentFilter object to be used when displaying
         the recently used resources.
   */
-  @property gtk.recent_filter.RecentFilter filter();
+  @property gtk.recent_filter.RecentFilter filter() nothrow;
 
   /**
       Set `filter` property.
@@ -46,14 +46,14 @@ interface RecentChooser
         propval = The #GtkRecentFilter object to be used when displaying
           the recently used resources.
   */
-  @property void filter(gtk.recent_filter.RecentFilter propval);
+  @property void filter(gtk.recent_filter.RecentFilter propval) nothrow;
 
   /**
       Get `limit` property.
       Returns: The maximum number of recently used resources to be displayed,
         or -1 to display all items.
   */
-  @property int limit();
+  @property int limit() nothrow;
 
   /**
       Set `limit` property.
@@ -61,14 +61,14 @@ interface RecentChooser
         propval = The maximum number of recently used resources to be displayed,
           or -1 to display all items.
   */
-  @property void limit(int propval);
+  @property void limit(int propval) nothrow;
 
   /**
       Get `localOnly` property.
       Returns: Whether this #GtkRecentChooser should display only local (file:)
         resources.
   */
-  @property bool localOnly();
+  @property bool localOnly() nothrow;
 
   /**
       Set `localOnly` property.
@@ -76,33 +76,33 @@ interface RecentChooser
         propval = Whether this #GtkRecentChooser should display only local (file:)
           resources.
   */
-  @property void localOnly(bool propval);
+  @property void localOnly(bool propval) nothrow;
 
   /**
       Get `selectMultiple` property.
       Returns: Allow the user to select multiple resources.
   */
-  @property bool selectMultiple();
+  @property bool selectMultiple() nothrow;
 
   /**
       Set `selectMultiple` property.
       Params:
         propval = Allow the user to select multiple resources.
   */
-  @property void selectMultiple(bool propval);
+  @property void selectMultiple(bool propval) nothrow;
 
   /**
       Get `showIcons` property.
       Returns: Whether this #GtkRecentChooser should display an icon near the item.
   */
-  @property bool showIcons();
+  @property bool showIcons() nothrow;
 
   /**
       Set `showIcons` property.
       Params:
         propval = Whether this #GtkRecentChooser should display an icon near the item.
   */
-  @property void showIcons(bool propval);
+  @property void showIcons(bool propval) nothrow;
 
   /**
       Get `showNotFound` property.
@@ -111,7 +111,7 @@ interface RecentChooser
         potentially expensive check on every local resource (every remote
         resource will always be displayed).
   */
-  @property bool showNotFound();
+  @property bool showNotFound() nothrow;
 
   /**
       Set `showNotFound` property.
@@ -121,20 +121,20 @@ interface RecentChooser
           potentially expensive check on every local resource (every remote
           resource will always be displayed).
   */
-  @property void showNotFound(bool propval);
+  @property void showNotFound(bool propval) nothrow;
 
   /** */
-  @property bool showPrivate();
+  @property bool showPrivate() nothrow;
 
   /** */
-  @property void showPrivate(bool propval);
+  @property void showPrivate(bool propval) nothrow;
 
   /**
       Get `showTips` property.
       Returns: Whether this #GtkRecentChooser should display a tooltip containing the
         full path of the recently used resources.
   */
-  @property bool showTips();
+  @property bool showTips() nothrow;
 
   /**
       Set `showTips` property.
@@ -142,20 +142,20 @@ interface RecentChooser
         propval = Whether this #GtkRecentChooser should display a tooltip containing the
           full path of the recently used resources.
   */
-  @property void showTips(bool propval);
+  @property void showTips(bool propval) nothrow;
 
   /**
       Get `sortType` property.
       Returns: Sorting order to be used when displaying the recently used resources.
   */
-  @property gtk.types.RecentSortType sortType();
+  @property gtk.types.RecentSortType sortType() nothrow;
 
   /**
       Set `sortType` property.
       Params:
         propval = Sorting order to be used when displaying the recently used resources.
   */
-  @property void sortType(gtk.types.RecentSortType propval);
+  @property void sortType(gtk.types.RecentSortType propval) nothrow;
 
   /**
       Adds filter to the list of #GtkRecentFilter objects held by chooser.
@@ -438,7 +438,7 @@ interface RecentChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectItemActivated(T)(T callback, Flag!"After" after = No.After);
+  gulong connectItemActivated(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `SelectionChanged` signal.
@@ -458,7 +458,7 @@ interface RecentChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gtk.recent_chooser.RecentChooser]
@@ -472,7 +472,7 @@ interface RecentChooserGidBuilderImpl(T)
           the recently used resources.
       Returns: Builder instance for fluent chaining
   */
-  T filter(gtk.recent_filter.RecentFilter propval);
+  T filter(gtk.recent_filter.RecentFilter propval) nothrow;
 
   /**
       Set `limit` property.
@@ -481,7 +481,7 @@ interface RecentChooserGidBuilderImpl(T)
           or -1 to display all items.
       Returns: Builder instance for fluent chaining
   */
-  T limit(int propval);
+  T limit(int propval) nothrow;
 
   /**
       Set `localOnly` property.
@@ -490,7 +490,7 @@ interface RecentChooserGidBuilderImpl(T)
           resources.
       Returns: Builder instance for fluent chaining
   */
-  T localOnly(bool propval);
+  T localOnly(bool propval) nothrow;
 
   /**
       Set `recentManager` property.
@@ -499,7 +499,7 @@ interface RecentChooserGidBuilderImpl(T)
           display the list of recently used resources.
       Returns: Builder instance for fluent chaining
   */
-  T recentManager(gtk.recent_manager.RecentManager propval);
+  T recentManager(gtk.recent_manager.RecentManager propval) nothrow;
 
   /**
       Set `selectMultiple` property.
@@ -507,7 +507,7 @@ interface RecentChooserGidBuilderImpl(T)
         propval = Allow the user to select multiple resources.
       Returns: Builder instance for fluent chaining
   */
-  T selectMultiple(bool propval);
+  T selectMultiple(bool propval) nothrow;
 
   /**
       Set `showIcons` property.
@@ -515,7 +515,7 @@ interface RecentChooserGidBuilderImpl(T)
         propval = Whether this #GtkRecentChooser should display an icon near the item.
       Returns: Builder instance for fluent chaining
   */
-  T showIcons(bool propval);
+  T showIcons(bool propval) nothrow;
 
   /**
       Set `showNotFound` property.
@@ -526,10 +526,10 @@ interface RecentChooserGidBuilderImpl(T)
           resource will always be displayed).
       Returns: Builder instance for fluent chaining
   */
-  T showNotFound(bool propval);
+  T showNotFound(bool propval) nothrow;
 
   /** */
-  T showPrivate(bool propval);
+  T showPrivate(bool propval) nothrow;
 
   /**
       Set `showTips` property.
@@ -538,7 +538,7 @@ interface RecentChooserGidBuilderImpl(T)
           full path of the recently used resources.
       Returns: Builder instance for fluent chaining
   */
-  T showTips(bool propval);
+  T showTips(bool propval) nothrow;
 
   /**
       Set `sortType` property.
@@ -546,5 +546,5 @@ interface RecentChooserGidBuilderImpl(T)
         propval = Sorting order to be used when displaying the recently used resources.
       Returns: Builder instance for fluent chaining
   */
-  T sortType(gtk.types.RecentSortType propval);
+  T sortType(gtk.types.RecentSortType propval) nothrow;
 }

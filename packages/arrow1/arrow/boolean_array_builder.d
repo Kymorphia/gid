@@ -15,26 +15,26 @@ class BooleanArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_boolean_array_builder_get_type != &gidSymbolNotFound ? garrow_boolean_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BooleanArrayBuilder self()
+  override BooleanArrayBuilder self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class BooleanArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.boolean_array_builder.BooleanArrayBuilder]
       Returns: New builder object
   */
-  static BooleanArrayBuilderGidBuilder builder()
+  static BooleanArrayBuilderGidBuilder builder() nothrow
   {
     return new BooleanArrayBuilderGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowBooleanArrayBuilder* _cretval;
     _cretval = garrow_boolean_array_builder_new();
@@ -124,7 +124,7 @@ final class BooleanArrayBuilderGidBuilder : BooleanArrayBuilderGidBuilderImpl!Bo
       Create object from builder.
       Returns: New object
   */
-  BooleanArrayBuilder build()
+  BooleanArrayBuilder build() nothrow
   {
     return new BooleanArrayBuilder(cast(void*)createGObject(BooleanArrayBuilder._getGType), Yes.Take);
   }

@@ -30,26 +30,26 @@ class TlsConnection : gio.iostream.IOStream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_tls_connection_get_type != &gidSymbolNotFound ? g_tls_connection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TlsConnection self()
+  override TlsConnection self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class TlsConnection : gio.iostream.IOStream
       Get builder for [gio.tls_connection.TlsConnection]
       Returns: New builder object
   */
-  static TlsConnectionGidBuilder builder()
+  static TlsConnectionGidBuilder builder() nothrow
   {
     return new TlsConnectionGidBuilder;
   }
@@ -71,7 +71,7 @@ class TlsConnection : gio.iostream.IOStream
         constructed, application code may only run its own operations on this
         stream when no #GIOStream operations are running.
   */
-  @property gio.iostream.IOStream baseIoStream()
+  @property gio.iostream.IOStream baseIoStream() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.iostream.IOStream)("base-io-stream");
   }
@@ -81,7 +81,7 @@ class TlsConnection : gio.iostream.IOStream
       Returns: The connection's certificate; see
         [gio.tls_connection.TlsConnection.setCertificate].
   */
-  @property gio.tls_certificate.TlsCertificate certificate()
+  @property gio.tls_certificate.TlsCertificate certificate() nothrow
   {
     return getCertificate();
   }
@@ -92,7 +92,7 @@ class TlsConnection : gio.iostream.IOStream
         propval = The connection's certificate; see
           [gio.tls_connection.TlsConnection.setCertificate].
   */
-  @property void certificate(gio.tls_certificate.TlsCertificate propval)
+  @property void certificate(gio.tls_certificate.TlsCertificate propval) nothrow
   {
     setCertificate(propval);
   }
@@ -101,7 +101,7 @@ class TlsConnection : gio.iostream.IOStream
       Get `ciphersuiteName` property.
       Returns: The name of the TLS ciphersuite in use. See [gio.tls_connection.TlsConnection.getCiphersuiteName].
   */
-  @property string ciphersuiteName()
+  @property string ciphersuiteName() nothrow
   {
     return getCiphersuiteName();
   }
@@ -125,7 +125,7 @@ class TlsConnection : gio.iostream.IOStream
         non-default database is discouraged except for specialty applications with
         unusual security requirements.
   */
-  @property gio.tls_database.TlsDatabase database()
+  @property gio.tls_database.TlsDatabase database() nothrow
   {
     return getDatabase();
   }
@@ -150,7 +150,7 @@ class TlsConnection : gio.iostream.IOStream
           non-default database is discouraged except for specialty applications with
           unusual security requirements.
   */
-  @property void database(gio.tls_database.TlsDatabase propval)
+  @property void database(gio.tls_database.TlsDatabase propval) nothrow
   {
     setDatabase(propval);
   }
@@ -161,7 +161,7 @@ class TlsConnection : gio.iostream.IOStream
         database need to interact with the user. This will be used to prompt the
         user for passwords where necessary.
   */
-  @property gio.tls_interaction.TlsInteraction interaction()
+  @property gio.tls_interaction.TlsInteraction interaction() nothrow
   {
     return getInteraction();
   }
@@ -173,7 +173,7 @@ class TlsConnection : gio.iostream.IOStream
           database need to interact with the user. This will be used to prompt the
           user for passwords where necessary.
   */
-  @property void interaction(gio.tls_interaction.TlsInteraction propval)
+  @property void interaction(gio.tls_interaction.TlsInteraction propval) nothrow
   {
     setInteraction(propval);
   }
@@ -183,7 +183,7 @@ class TlsConnection : gio.iostream.IOStream
       Returns: The application-layer protocol negotiated during the TLS
         handshake. See [gio.tls_connection.TlsConnection.getNegotiatedProtocol].
   */
-  @property string negotiatedProtocol()
+  @property string negotiatedProtocol() nothrow
   {
     return getNegotiatedProtocol();
   }
@@ -197,7 +197,7 @@ class TlsConnection : gio.iostream.IOStream
         (You can watch for a #GObject::notify signal on this property to
         detect when a handshake has occurred.)
   */
-  @property gio.tls_certificate.TlsCertificate peerCertificate()
+  @property gio.tls_certificate.TlsCertificate peerCertificate() nothrow
   {
     return getPeerCertificate();
   }
@@ -219,7 +219,7 @@ class TlsConnection : gio.iostream.IOStream
         expired certificates, because this could potentially be the only
         error flag set even if other problems exist with the certificate.
   */
-  @property gio.types.TlsCertificateFlags peerCertificateErrors()
+  @property gio.types.TlsCertificateFlags peerCertificateErrors() nothrow
   {
     return getPeerCertificateErrors();
   }
@@ -228,7 +228,7 @@ class TlsConnection : gio.iostream.IOStream
       Get `protocolVersion` property.
       Returns: The TLS protocol version in use. See [gio.tls_connection.TlsConnection.getProtocolVersion].
   */
-  @property gio.types.TlsProtocolVersion protocolVersion()
+  @property gio.types.TlsProtocolVersion protocolVersion() nothrow
   {
     return getProtocolVersion();
   }
@@ -240,7 +240,7 @@ class TlsConnection : gio.iostream.IOStream
   
       Deprecated: The rehandshake mode is ignored.
   */
-  @property gio.types.TlsRehandshakeMode rehandshakeMode()
+  @property gio.types.TlsRehandshakeMode rehandshakeMode() nothrow
   {
     return getRehandshakeMode();
   }
@@ -253,7 +253,7 @@ class TlsConnection : gio.iostream.IOStream
   
       Deprecated: The rehandshake mode is ignored.
   */
-  @property void rehandshakeMode(gio.types.TlsRehandshakeMode propval)
+  @property void rehandshakeMode(gio.types.TlsRehandshakeMode propval) nothrow
   {
     setRehandshakeMode(propval);
   }
@@ -263,7 +263,7 @@ class TlsConnection : gio.iostream.IOStream
       Returns: Whether or not proper TLS close notification is required.
         See [gio.tls_connection.TlsConnection.setRequireCloseNotify].
   */
-  @property bool requireCloseNotify()
+  @property bool requireCloseNotify() nothrow
   {
     return getRequireCloseNotify();
   }
@@ -274,7 +274,7 @@ class TlsConnection : gio.iostream.IOStream
         propval = Whether or not proper TLS close notification is required.
           See [gio.tls_connection.TlsConnection.setRequireCloseNotify].
   */
-  @property void requireCloseNotify(bool propval)
+  @property void requireCloseNotify(bool propval) nothrow
   {
     setRequireCloseNotify(propval);
   }
@@ -287,7 +287,7 @@ class TlsConnection : gio.iostream.IOStream
   
       Deprecated: Use GTlsConnection:database instead
   */
-  @property bool useSystemCertdb()
+  @property bool useSystemCertdb() nothrow
   {
     return getUseSystemCertdb();
   }
@@ -301,7 +301,7 @@ class TlsConnection : gio.iostream.IOStream
   
       Deprecated: Use GTlsConnection:database instead
   */
-  @property void useSystemCertdb(bool propval)
+  @property void useSystemCertdb(bool propval) nothrow
   {
     setUseSystemCertdb(propval);
   }
@@ -316,7 +316,7 @@ class TlsConnection : gio.iostream.IOStream
       Returns: true if one of the signal handlers has returned
             true to accept peer_cert
   */
-  bool emitAcceptCertificate(gio.tls_certificate.TlsCertificate peerCert, gio.types.TlsCertificateFlags errors)
+  bool emitAcceptCertificate(gio.tls_certificate.TlsCertificate peerCert, gio.types.TlsCertificateFlags errors) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_tls_connection_emit_accept_certificate(cast(GTlsConnection*)this._cPtr, peerCert ? cast(GTlsCertificate*)peerCert._cPtr(No.Dup) : null, errors);
@@ -328,7 +328,7 @@ class TlsConnection : gio.iostream.IOStream
       [gio.tls_connection.TlsConnection.setCertificate].
       Returns: conn's certificate, or null
   */
-  gio.tls_certificate.TlsCertificate getCertificate()
+  gio.tls_certificate.TlsCertificate getCertificate() nothrow
   {
     GTlsCertificate* _cretval;
     _cretval = g_tls_connection_get_certificate(cast(GTlsConnection*)this._cPtr);
@@ -382,7 +382,7 @@ class TlsConnection : gio.iostream.IOStream
       is not recommended.
       Returns: The name of the current TLS ciphersuite, or null
   */
-  string getCiphersuiteName()
+  string getCiphersuiteName() nothrow
   {
     char* _cretval;
     _cretval = g_tls_connection_get_ciphersuite_name(cast(GTlsConnection*)this._cPtr);
@@ -395,7 +395,7 @@ class TlsConnection : gio.iostream.IOStream
       peer certificates. See [gio.tls_connection.TlsConnection.setDatabase].
       Returns: the certificate database that conn uses or null
   */
-  gio.tls_database.TlsDatabase getDatabase()
+  gio.tls_database.TlsDatabase getDatabase() nothrow
   {
     GTlsDatabase* _cretval;
     _cretval = g_tls_connection_get_database(cast(GTlsConnection*)this._cPtr);
@@ -409,7 +409,7 @@ class TlsConnection : gio.iostream.IOStream
       no user interaction will occur for this connection.
       Returns: The interaction object.
   */
-  gio.tls_interaction.TlsInteraction getInteraction()
+  gio.tls_interaction.TlsInteraction getInteraction() nothrow
   {
     GTlsInteraction* _cretval;
     _cretval = g_tls_connection_get_interaction(cast(GTlsConnection*)this._cPtr);
@@ -427,7 +427,7 @@ class TlsConnection : gio.iostream.IOStream
       [gio.tls_connection.TlsConnection.setAdvertisedProtocols].
       Returns: the negotiated protocol, or null
   */
-  string getNegotiatedProtocol()
+  string getNegotiatedProtocol() nothrow
   {
     const(char)* _cretval;
     _cretval = g_tls_connection_get_negotiated_protocol(cast(GTlsConnection*)this._cPtr);
@@ -441,7 +441,7 @@ class TlsConnection : gio.iostream.IOStream
       #GTlsConnection::accept-certificate.)
       Returns: conn's peer's certificate, or null
   */
-  gio.tls_certificate.TlsCertificate getPeerCertificate()
+  gio.tls_certificate.TlsCertificate getPeerCertificate() nothrow
   {
     GTlsCertificate* _cretval;
     _cretval = g_tls_connection_get_peer_certificate(cast(GTlsConnection*)this._cPtr);
@@ -457,7 +457,7 @@ class TlsConnection : gio.iostream.IOStream
       See #GTlsConnection:peer-certificate-errors for more information.
       Returns: conn's peer's certificate errors
   */
-  gio.types.TlsCertificateFlags getPeerCertificateErrors()
+  gio.types.TlsCertificateFlags getPeerCertificateErrors() nothrow
   {
     GTlsCertificateFlags _cretval;
     _cretval = g_tls_connection_get_peer_certificate_errors(cast(GTlsConnection*)this._cPtr);
@@ -472,7 +472,7 @@ class TlsConnection : gio.iostream.IOStream
       that is not a recognized #GTlsProtocolVersion.
       Returns: The current TLS protocol version
   */
-  gio.types.TlsProtocolVersion getProtocolVersion()
+  gio.types.TlsProtocolVersion getProtocolVersion() nothrow
   {
     GTlsProtocolVersion _cretval;
     _cretval = g_tls_connection_get_protocol_version(cast(GTlsConnection*)this._cPtr);
@@ -489,7 +489,7 @@ class TlsConnection : gio.iostream.IOStream
           required for compatibility. Also, rehandshaking has been removed
           from the TLS protocol in TLS 1.3.
   */
-  gio.types.TlsRehandshakeMode getRehandshakeMode()
+  gio.types.TlsRehandshakeMode getRehandshakeMode() nothrow
   {
     GTlsRehandshakeMode _cretval;
     _cretval = g_tls_connection_get_rehandshake_mode(cast(GTlsConnection*)this._cPtr);
@@ -504,7 +504,7 @@ class TlsConnection : gio.iostream.IOStream
       Returns: true if conn requires a proper TLS close
         notification.
   */
-  bool getRequireCloseNotify()
+  bool getRequireCloseNotify() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_tls_connection_get_require_close_notify(cast(GTlsConnection*)this._cPtr);
@@ -518,7 +518,7 @@ class TlsConnection : gio.iostream.IOStream
   
       Deprecated: Use [gio.tls_connection.TlsConnection.getDatabase] instead
   */
-  bool getUseSystemCertdb()
+  bool getUseSystemCertdb() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_tls_connection_get_use_system_certdb(cast(GTlsConnection*)this._cPtr);
@@ -582,14 +582,21 @@ class TlsConnection : gio.iostream.IOStream
         cancellable = a #GCancellable, or null
         callback = callback to call when the handshake is complete
   */
-  void handshakeAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void handshakeAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -632,7 +639,7 @@ class TlsConnection : gio.iostream.IOStream
         protocols = a null-terminated
             array of ALPN protocol names (eg, "http/1.1", "h2"), or null
   */
-  void setAdvertisedProtocols(string[] protocols = null)
+  void setAdvertisedProtocols(string[] protocols = null) nothrow
   {
     char*[] _tmpprotocols;
     foreach (s; protocols)
@@ -666,7 +673,7 @@ class TlsConnection : gio.iostream.IOStream
       Params:
         certificate = the certificate to use for conn
   */
-  void setCertificate(gio.tls_certificate.TlsCertificate certificate)
+  void setCertificate(gio.tls_certificate.TlsCertificate certificate) nothrow
   {
     g_tls_connection_set_certificate(cast(GTlsConnection*)this._cPtr, certificate ? cast(GTlsCertificate*)certificate._cPtr(No.Dup) : null);
   }
@@ -687,7 +694,7 @@ class TlsConnection : gio.iostream.IOStream
       Params:
         database = a #GTlsDatabase
   */
-  void setDatabase(gio.tls_database.TlsDatabase database = null)
+  void setDatabase(gio.tls_database.TlsDatabase database = null) nothrow
   {
     g_tls_connection_set_database(cast(GTlsConnection*)this._cPtr, database ? cast(GTlsDatabase*)database._cPtr(No.Dup) : null);
   }
@@ -703,7 +710,7 @@ class TlsConnection : gio.iostream.IOStream
       Params:
         interaction = an interaction object, or null
   */
-  void setInteraction(gio.tls_interaction.TlsInteraction interaction = null)
+  void setInteraction(gio.tls_interaction.TlsInteraction interaction = null) nothrow
   {
     g_tls_connection_set_interaction(cast(GTlsConnection*)this._cPtr, interaction ? cast(GTlsInteraction*)interaction._cPtr(No.Dup) : null);
   }
@@ -721,7 +728,7 @@ class TlsConnection : gio.iostream.IOStream
           required for compatibility. Also, rehandshaking has been removed
           from the TLS protocol in TLS 1.3.
   */
-  void setRehandshakeMode(gio.types.TlsRehandshakeMode mode)
+  void setRehandshakeMode(gio.types.TlsRehandshakeMode mode) nothrow
   {
     g_tls_connection_set_rehandshake_mode(cast(GTlsConnection*)this._cPtr, mode);
   }
@@ -758,7 +765,7 @@ class TlsConnection : gio.iostream.IOStream
       Params:
         requireCloseNotify = whether or not to require close notification
   */
-  void setRequireCloseNotify(bool requireCloseNotify)
+  void setRequireCloseNotify(bool requireCloseNotify) nothrow
   {
     g_tls_connection_set_require_close_notify(cast(GTlsConnection*)this._cPtr, requireCloseNotify);
   }
@@ -777,7 +784,7 @@ class TlsConnection : gio.iostream.IOStream
   
       Deprecated: Use [gio.tls_connection.TlsConnection.setDatabase] instead
   */
-  void setUseSystemCertdb(bool useSystemCertdb)
+  void setUseSystemCertdb(bool useSystemCertdb) nothrow
   {
     g_tls_connection_set_use_system_certdb(cast(GTlsConnection*)this._cPtr, useSystemCertdb);
   }
@@ -846,7 +853,7 @@ class TlsConnection : gio.iostream.IOStream
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAcceptCertificate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAcceptCertificate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.tls_certificate.TlsCertificate)))
@@ -854,11 +861,12 @@ class TlsConnection : gio.iostream.IOStream
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.tls_connection.TlsConnection)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -869,7 +877,14 @@ class TlsConnection : gio.iostream.IOStream
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.tls_connection.TlsConnection.acceptCertificate");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -893,7 +908,7 @@ class TlsConnectionGidBuilderImpl(T) : gio.iostream.IOStreamGidBuilderImpl!T
           stream when no #GIOStream operations are running.
       Returns: Builder instance for fluent chaining
   */
-  T baseIoStream(gio.iostream.IOStream propval)
+  T baseIoStream(gio.iostream.IOStream propval) nothrow
   {
     return setProperty("base-io-stream", propval);
   }
@@ -905,7 +920,7 @@ class TlsConnectionGidBuilderImpl(T) : gio.iostream.IOStreamGidBuilderImpl!T
           [gio.tls_connection.TlsConnection.setCertificate].
       Returns: Builder instance for fluent chaining
   */
-  T certificate(gio.tls_certificate.TlsCertificate propval)
+  T certificate(gio.tls_certificate.TlsCertificate propval) nothrow
   {
     return setProperty("certificate", propval);
   }
@@ -931,7 +946,7 @@ class TlsConnectionGidBuilderImpl(T) : gio.iostream.IOStreamGidBuilderImpl!T
           unusual security requirements.
       Returns: Builder instance for fluent chaining
   */
-  T database(gio.tls_database.TlsDatabase propval)
+  T database(gio.tls_database.TlsDatabase propval) nothrow
   {
     return setProperty("database", propval);
   }
@@ -944,7 +959,7 @@ class TlsConnectionGidBuilderImpl(T) : gio.iostream.IOStreamGidBuilderImpl!T
           user for passwords where necessary.
       Returns: Builder instance for fluent chaining
   */
-  T interaction(gio.tls_interaction.TlsInteraction propval)
+  T interaction(gio.tls_interaction.TlsInteraction propval) nothrow
   {
     return setProperty("interaction", propval);
   }
@@ -958,7 +973,7 @@ class TlsConnectionGidBuilderImpl(T) : gio.iostream.IOStreamGidBuilderImpl!T
   
       Deprecated: The rehandshake mode is ignored.
   */
-  T rehandshakeMode(gio.types.TlsRehandshakeMode propval)
+  T rehandshakeMode(gio.types.TlsRehandshakeMode propval) nothrow
   {
     return setProperty("rehandshake-mode", propval);
   }
@@ -970,7 +985,7 @@ class TlsConnectionGidBuilderImpl(T) : gio.iostream.IOStreamGidBuilderImpl!T
           See [gio.tls_connection.TlsConnection.setRequireCloseNotify].
       Returns: Builder instance for fluent chaining
   */
-  T requireCloseNotify(bool propval)
+  T requireCloseNotify(bool propval) nothrow
   {
     return setProperty("require-close-notify", propval);
   }
@@ -985,7 +1000,7 @@ class TlsConnectionGidBuilderImpl(T) : gio.iostream.IOStreamGidBuilderImpl!T
   
       Deprecated: Use GTlsConnection:database instead
   */
-  T useSystemCertdb(bool propval)
+  T useSystemCertdb(bool propval) nothrow
   {
     return setProperty("use-system-certdb", propval);
   }
@@ -998,7 +1013,7 @@ final class TlsConnectionGidBuilder : TlsConnectionGidBuilderImpl!TlsConnectionG
       Create object from builder.
       Returns: New object
   */
-  TlsConnection build()
+  TlsConnection build() nothrow
   {
     return new TlsConnection(cast(void*)createGObject(TlsConnection._getGType), No.Take);
   }

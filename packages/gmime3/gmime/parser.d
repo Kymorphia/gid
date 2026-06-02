@@ -20,26 +20,26 @@ class Parser : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_parser_get_type != &gidSymbolNotFound ? g_mime_parser_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Parser self()
+  override Parser self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class Parser : gobject.object.ObjectWrap
       Get builder for [gmime.parser.Parser]
       Returns: New builder object
   */
-  static ParserGidBuilder builder()
+  static ParserGidBuilder builder() nothrow
   {
     return new ParserGidBuilder;
   }
@@ -57,7 +57,7 @@ class Parser : gobject.object.ObjectWrap
       Creates a new parser object.
       Returns: a new parser object.
   */
-  this()
+  this() nothrow
   {
     GMimeParser* _cretval;
     _cretval = g_mime_parser_new();
@@ -71,7 +71,7 @@ class Parser : gobject.object.ObjectWrap
         stream = raw message or part stream
       Returns: a new parser object.
   */
-  static gmime.parser.Parser newWithStream(gmime.stream.Stream stream)
+  static gmime.parser.Parser newWithStream(gmime.stream.Stream stream) nothrow
   {
     GMimeParser* _cretval;
     _cretval = g_mime_parser_new_with_stream(stream ? cast(GMimeStream*)stream._cPtr(No.Dup) : null);
@@ -86,7 +86,7 @@ class Parser : gobject.object.ObjectWrap
         options = a #GMimeParserOptions or null
       Returns: a MIME message or null on fail.
   */
-  gmime.message.Message constructMessage(gmime.parser_options.ParserOptions options = null)
+  gmime.message.Message constructMessage(gmime.parser_options.ParserOptions options = null) nothrow
   {
     GMimeMessage* _cretval;
     _cretval = g_mime_parser_construct_message(cast(GMimeParser*)this._cPtr, options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null);
@@ -102,7 +102,7 @@ class Parser : gobject.object.ObjectWrap
       Returns: a MIME part based on parser or null on
         fail.
   */
-  gmime.object.ObjectWrap constructPart(gmime.parser_options.ParserOptions options = null)
+  gmime.object.ObjectWrap constructPart(gmime.parser_options.ParserOptions options = null) nothrow
   {
     GMimeObject* _cretval;
     _cretval = g_mime_parser_construct_part(cast(GMimeParser*)this._cPtr, options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null);
@@ -114,7 +114,7 @@ class Parser : gobject.object.ObjectWrap
       Tests the end-of-stream indicator for parser's internal stream.
       Returns: true on EOS or false otherwise.
   */
-  bool eos()
+  bool eos() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_parser_eos(cast(GMimeParser*)this._cPtr);
@@ -125,7 +125,7 @@ class Parser : gobject.object.ObjectWrap
       Gets the format that the parser is set to parse.
       Returns: the format that the parser is set to parse.
   */
-  gmime.types.Format getFormat()
+  gmime.types.Format getFormat() nothrow
   {
     GMimeFormat _cretval;
     _cretval = g_mime_parser_get_format(cast(GMimeParser*)this._cPtr);
@@ -139,7 +139,7 @@ class Parser : gobject.object.ObjectWrap
       Returns: the offset of the beginning of the headers of the most
         recently parsed message or %-1 on error.
   */
-  long getHeadersBegin()
+  long getHeadersBegin() nothrow
   {
     long _retval;
     _retval = g_mime_parser_get_headers_begin(cast(GMimeParser*)this._cPtr);
@@ -152,7 +152,7 @@ class Parser : gobject.object.ObjectWrap
       Returns: the offset of the end of the headers of the most recently
         parsed message or %-1 on error.
   */
-  long getHeadersEnd()
+  long getHeadersEnd() nothrow
   {
     long _retval;
     _retval = g_mime_parser_get_headers_end(cast(GMimeParser*)this._cPtr);
@@ -165,7 +165,7 @@ class Parser : gobject.object.ObjectWrap
       Returns: the mbox-style From-line of the most recently parsed
         message or null on error.
   */
-  string getMboxMarker()
+  string getMboxMarker() nothrow
   {
     char* _cretval;
     _cretval = g_mime_parser_get_mbox_marker(cast(GMimeParser*)this._cPtr);
@@ -179,7 +179,7 @@ class Parser : gobject.object.ObjectWrap
       Returns: the offset of the most recently parsed mbox-style From-line
         or %-1 on error.
   */
-  long getMboxMarkerOffset()
+  long getMboxMarkerOffset() nothrow
   {
     long _retval;
     _retval = g_mime_parser_get_mbox_marker_offset(cast(GMimeParser*)this._cPtr);
@@ -191,7 +191,7 @@ class Parser : gobject.object.ObjectWrap
       Returns: true if the parser will leave the content on disk or
         false if it will load the content into memory.
   */
-  bool getPersistStream()
+  bool getPersistStream() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_parser_get_persist_stream(cast(GMimeParser*)this._cPtr);
@@ -204,7 +204,7 @@ class Parser : gobject.object.ObjectWrap
       Returns: whether or not parser is set to use Content-Length for
         determining the offset of the end of the message.
   */
-  bool getRespectContentLength()
+  bool getRespectContentLength() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_parser_get_respect_content_length(cast(GMimeParser*)this._cPtr);
@@ -231,7 +231,7 @@ class Parser : gobject.object.ObjectWrap
       Params:
         stream = raw message or part stream
   */
-  void initWithStream(gmime.stream.Stream stream)
+  void initWithStream(gmime.stream.Stream stream) nothrow
   {
     g_mime_parser_init_with_stream(cast(GMimeParser*)this._cPtr, stream ? cast(GMimeStream*)stream._cPtr(No.Dup) : null);
   }
@@ -242,7 +242,7 @@ class Parser : gobject.object.ObjectWrap
       Params:
         format = a #GMimeFormat
   */
-  void setFormat(gmime.types.Format format)
+  void setFormat(gmime.types.Format format) nothrow
   {
     g_mime_parser_set_format(cast(GMimeParser*)this._cPtr, format);
   }
@@ -266,7 +266,7 @@ class Parser : gobject.object.ObjectWrap
       Params:
         persist = persist attribute
   */
-  void setPersistStream(bool persist)
+  void setPersistStream(bool persist) nothrow
   {
     g_mime_parser_set_persist_stream(cast(GMimeParser*)this._cPtr, persist);
   }
@@ -284,7 +284,7 @@ class Parser : gobject.object.ObjectWrap
       Params:
         respectContentLength = true if the parser should use Content-Length headers or false otherwise.
   */
-  void setRespectContentLength(bool respectContentLength)
+  void setRespectContentLength(bool respectContentLength) nothrow
   {
     g_mime_parser_set_respect_content_length(cast(GMimeParser*)this._cPtr, respectContentLength);
   }
@@ -294,7 +294,7 @@ class Parser : gobject.object.ObjectWrap
       Returns: the current stream offset from the parser's internal stream
         or %-1 on error.
   */
-  long tell()
+  long tell() nothrow
   {
     long _retval;
     _retval = g_mime_parser_tell(cast(GMimeParser*)this._cPtr);
@@ -314,7 +314,7 @@ final class ParserGidBuilder : ParserGidBuilderImpl!ParserGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Parser build()
+  Parser build() nothrow
   {
     return new Parser(cast(void*)createGObject(Parser._getGType), Yes.Take);
   }

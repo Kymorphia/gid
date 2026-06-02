@@ -51,26 +51,26 @@ class MenuShell : gtk.container.Container
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_menu_shell_get_type != &gidSymbolNotFound ? gtk_menu_shell_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MenuShell self()
+  override MenuShell self() nothrow
   {
     return this;
   }
@@ -79,7 +79,7 @@ class MenuShell : gtk.container.Container
       Get builder for [gtk.menu_shell.MenuShell]
       Returns: New builder object
   */
-  static MenuShellGidBuilder builder()
+  static MenuShellGidBuilder builder() nothrow
   {
     return new MenuShellGidBuilder;
   }
@@ -90,7 +90,7 @@ class MenuShell : gtk.container.Container
         keyboard focus. See [gtk.menu_shell.MenuShell.setTakeFocus] and
         [gtk.menu_shell.MenuShell.getTakeFocus].
   */
-  @property bool takeFocus()
+  @property bool takeFocus() nothrow
   {
     return getTakeFocus();
   }
@@ -102,7 +102,7 @@ class MenuShell : gtk.container.Container
           keyboard focus. See [gtk.menu_shell.MenuShell.setTakeFocus] and
           [gtk.menu_shell.MenuShell.getTakeFocus].
   */
-  @property void takeFocus(bool propval)
+  @property void takeFocus(bool propval) nothrow
   {
     setTakeFocus(propval);
   }
@@ -115,7 +115,7 @@ class MenuShell : gtk.container.Container
         forceDeactivate = if true, force the deactivation of the
               menu shell after the menu item is activated
   */
-  void activateItem(gtk.widget.Widget menuItem, bool forceDeactivate)
+  void activateItem(gtk.widget.Widget menuItem, bool forceDeactivate) nothrow
   {
     gtk_menu_shell_activate_item(cast(GtkMenuShell*)this._cPtr, menuItem ? cast(GtkWidget*)menuItem._cPtr(No.Dup) : null, forceDeactivate);
   }
@@ -127,7 +127,7 @@ class MenuShell : gtk.container.Container
       Params:
         child = The #GtkMenuItem to add
   */
-  void append(gtk.menu_item.MenuItem child)
+  void append(gtk.menu_item.MenuItem child) nothrow
   {
     gtk_menu_shell_append(cast(GtkMenuShell*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -174,7 +174,7 @@ class MenuShell : gtk.container.Container
         withSeparators = true if toplevel items in shell should have
             separators between them
   */
-  void bindModel(gio.menu_model.MenuModel model, string actionNamespace, bool withSeparators)
+  void bindModel(gio.menu_model.MenuModel model, string actionNamespace, bool withSeparators) nothrow
   {
     const(char)* _actionNamespace = actionNamespace.toCString(No.Alloc);
     gtk_menu_shell_bind_model(cast(GtkMenuShell*)this._cPtr, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null, _actionNamespace, withSeparators);
@@ -183,7 +183,7 @@ class MenuShell : gtk.container.Container
   /**
       Cancels the selection within the menu shell.
   */
-  void cancel()
+  void cancel() nothrow
   {
     gtk_menu_shell_cancel(cast(GtkMenuShell*)this._cPtr);
   }
@@ -194,7 +194,7 @@ class MenuShell : gtk.container.Container
       Typically this results in the menu shell being erased
       from the screen.
   */
-  void deactivate()
+  void deactivate() nothrow
   {
     gtk_menu_shell_deactivate(cast(GtkMenuShell*)this._cPtr);
   }
@@ -203,7 +203,7 @@ class MenuShell : gtk.container.Container
       Deselects the currently selected item from the menu shell,
       if any.
   */
-  void deselect()
+  void deselect() nothrow
   {
     gtk_menu_shell_deselect(cast(GtkMenuShell*)this._cPtr);
   }
@@ -215,7 +215,7 @@ class MenuShell : gtk.container.Container
       from which it was opened up.
       Returns: the parent #GtkMenuShell
   */
-  gtk.widget.Widget getParentShell()
+  gtk.widget.Widget getParentShell() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_shell_get_parent_shell(cast(GtkMenuShell*)this._cPtr);
@@ -227,7 +227,7 @@ class MenuShell : gtk.container.Container
       Gets the currently selected item.
       Returns: the currently selected item
   */
-  gtk.widget.Widget getSelectedItem()
+  gtk.widget.Widget getSelectedItem() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_shell_get_selected_item(cast(GtkMenuShell*)this._cPtr);
@@ -239,7 +239,7 @@ class MenuShell : gtk.container.Container
       Returns true if the menu shell will take the keyboard focus on popup.
       Returns: true if the menu shell will take the keyboard focus on popup.
   */
-  bool getTakeFocus()
+  bool getTakeFocus() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_menu_shell_get_take_focus(cast(GtkMenuShell*)this._cPtr);
@@ -255,7 +255,7 @@ class MenuShell : gtk.container.Container
         position = The position in the item list where child
               is added. Positions are numbered from 0 to n-1
   */
-  void insert(gtk.widget.Widget child, int position)
+  void insert(gtk.widget.Widget child, int position) nothrow
   {
     gtk_menu_shell_insert(cast(GtkMenuShell*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, position);
   }
@@ -267,7 +267,7 @@ class MenuShell : gtk.container.Container
       Params:
         child = The #GtkMenuItem to add
   */
-  void prepend(gtk.widget.Widget child)
+  void prepend(gtk.widget.Widget child) nothrow
   {
     gtk_menu_shell_prepend(cast(GtkMenuShell*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -284,7 +284,7 @@ class MenuShell : gtk.container.Container
                              should be false if the menu is being
                              popped up initially.
   */
-  void selectFirst(bool searchSensitive)
+  void selectFirst(bool searchSensitive) nothrow
   {
     gtk_menu_shell_select_first(cast(GtkMenuShell*)this._cPtr, searchSensitive);
   }
@@ -295,7 +295,7 @@ class MenuShell : gtk.container.Container
       Params:
         menuItem = The #GtkMenuItem to select
   */
-  void selectItem(gtk.widget.Widget menuItem)
+  void selectItem(gtk.widget.Widget menuItem) nothrow
   {
     gtk_menu_shell_select_item(cast(GtkMenuShell*)this._cPtr, menuItem ? cast(GtkWidget*)menuItem._cPtr(No.Dup) : null);
   }
@@ -332,7 +332,7 @@ class MenuShell : gtk.container.Container
         takeFocus = true if the menu shell should take the keyboard
               focus on popup
   */
-  void setTakeFocus(bool takeFocus)
+  void setTakeFocus(bool takeFocus) nothrow
   {
     gtk_menu_shell_set_take_focus(cast(GtkMenuShell*)this._cPtr, takeFocus);
   }
@@ -355,14 +355,14 @@ class MenuShell : gtk.container.Container
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivateCurrent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivateCurrent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.menu_shell.MenuShell)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -374,7 +374,14 @@ class MenuShell : gtk.container.Container
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.menu_shell.MenuShell.activateCurrent");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -397,13 +404,13 @@ class MenuShell : gtk.container.Container
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCancel(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCancel(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.menu_shell.MenuShell)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -412,7 +419,14 @@ class MenuShell : gtk.container.Container
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.menu_shell.MenuShell.cancel");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -437,14 +451,14 @@ class MenuShell : gtk.container.Container
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCycleFocus(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCycleFocus(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.DirectionType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.menu_shell.MenuShell)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -456,7 +470,14 @@ class MenuShell : gtk.container.Container
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.menu_shell.MenuShell.cycleFocus");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -478,13 +499,13 @@ class MenuShell : gtk.container.Container
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeactivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeactivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.menu_shell.MenuShell)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -493,7 +514,14 @@ class MenuShell : gtk.container.Container
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.menu_shell.MenuShell.deactivate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -524,7 +552,7 @@ class MenuShell : gtk.container.Container
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInsert(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInsert(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -532,7 +560,7 @@ class MenuShell : gtk.container.Container
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.menu_shell.MenuShell)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -547,7 +575,14 @@ class MenuShell : gtk.container.Container
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.menu_shell.MenuShell.insert");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -572,14 +607,14 @@ class MenuShell : gtk.container.Container
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveCurrent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveCurrent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.MenuDirectionType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.menu_shell.MenuShell)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -591,7 +626,14 @@ class MenuShell : gtk.container.Container
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.menu_shell.MenuShell.moveCurrent");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -617,18 +659,19 @@ class MenuShell : gtk.container.Container
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveSelected(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveSelected(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.menu_shell.MenuShell)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -636,7 +679,14 @@ class MenuShell : gtk.container.Container
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.menu_shell.MenuShell.moveSelected");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -661,13 +711,13 @@ class MenuShell : gtk.container.Container
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectionDone(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectionDone(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.menu_shell.MenuShell)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -676,7 +726,14 @@ class MenuShell : gtk.container.Container
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.menu_shell.MenuShell.selectionDone");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -697,7 +754,7 @@ class MenuShellGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
           [gtk.menu_shell.MenuShell.getTakeFocus].
       Returns: Builder instance for fluent chaining
   */
-  T takeFocus(bool propval)
+  T takeFocus(bool propval) nothrow
   {
     return setProperty("take-focus", propval);
   }
@@ -710,7 +767,7 @@ final class MenuShellGidBuilder : MenuShellGidBuilderImpl!MenuShellGidBuilder
       Create object from builder.
       Returns: New object
   */
-  MenuShell build()
+  MenuShell build() nothrow
   {
     return new MenuShell(cast(void*)createGObject(MenuShell._getGType), No.Take);
   }

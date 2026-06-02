@@ -17,7 +17,7 @@ struct WebsocketError
       Registers error quark for SoupWebsocket if needed.
       Returns: Error quark for SoupWebsocket.
   */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = soup_websocket_error_quark();
@@ -27,12 +27,12 @@ struct WebsocketError
 
 class WebsocketException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(soup.websocket_error.WebsocketError.quark, cast(int)code, msg);
   }

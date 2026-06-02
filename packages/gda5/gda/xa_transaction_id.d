@@ -34,7 +34,7 @@ struct XaTransactionId
       are converted to "`ab`" where ab is the hexadecimal representation of the character.
       Returns: a new string representation of xid
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gda_xa_transaction_id_to_string(cast(const(GdaXaTransactionId)*)&this);

@@ -16,11 +16,8 @@ class SDPBandwidth
   GstSDPBandwidth _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstsdp.sdpbandwidth.SDPBandwidth");
-
     _cInstance = *cast(GstSDPBandwidth*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class SDPBandwidth
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class SDPBandwidth
       Get `bwtype` field.
       Returns: the bandwidth modifier type
   */
-  @property string bwtype()
+  @property string bwtype() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPBandwidth*)this._cPtr).bwtype);
   }
@@ -47,7 +44,7 @@ class SDPBandwidth
       Params:
         propval = the bandwidth modifier type
   */
-  @property void bwtype(string propval)
+  @property void bwtype(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPBandwidth*)this._cPtr).bwtype);
     dToC(propval, cast(void*)&(cast(GstSDPBandwidth*)this._cPtr).bwtype);
@@ -57,7 +54,7 @@ class SDPBandwidth
       Get `bandwidth` field.
       Returns: the bandwidth in kilobits per second
   */
-  @property uint bandwidth()
+  @property uint bandwidth() nothrow
   {
     return (cast(GstSDPBandwidth*)this._cPtr).bandwidth;
   }
@@ -67,7 +64,7 @@ class SDPBandwidth
       Params:
         propval = the bandwidth in kilobits per second
   */
-  @property void bandwidth(uint propval)
+  @property void bandwidth(uint propval) nothrow
   {
     (cast(GstSDPBandwidth*)this._cPtr).bandwidth = propval;
   }
@@ -76,7 +73,7 @@ class SDPBandwidth
       Reset the bandwidth information in bw.
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult clear()
+  gstsdp.types.SDPResult clear() nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_bandwidth_clear(cast(GstSDPBandwidth*)this._cPtr);
@@ -92,7 +89,7 @@ class SDPBandwidth
         bandwidth = the bandwidth in kilobits per second
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult set(string bwtype, uint bandwidth)
+  gstsdp.types.SDPResult set(string bwtype, uint bandwidth) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _bwtype = bwtype.toCString(No.Alloc);

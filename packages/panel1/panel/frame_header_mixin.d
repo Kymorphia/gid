@@ -23,7 +23,7 @@ template FrameHeaderT()
       Get `frame` property.
       Returns: The frame the header is attached to, or null.
   */
-  @property panel.frame.Frame frame()
+  @property panel.frame.Frame frame() nothrow
   {
     return getFrame();
   }
@@ -33,7 +33,7 @@ template FrameHeaderT()
       Params:
         propval = The frame the header is attached to, or null.
   */
-  @property void frame(panel.frame.Frame propval)
+  @property void frame(panel.frame.Frame propval) nothrow
   {
     setFrame(propval);
   }
@@ -46,7 +46,7 @@ template FrameHeaderT()
         priority = the priority
         child = a #GtkWidget
   */
-  override void addPrefix(int priority, gtk.widget.Widget child)
+  override void addPrefix(int priority, gtk.widget.Widget child) nothrow
   {
     panel_frame_header_add_prefix(cast(PanelFrameHeader*)this._cPtr, priority, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -59,7 +59,7 @@ template FrameHeaderT()
         priority = the priority
         child = a #GtkWidget
   */
-  override void addSuffix(int priority, gtk.widget.Widget child)
+  override void addSuffix(int priority, gtk.widget.Widget child) nothrow
   {
     panel_frame_header_add_suffix(cast(PanelFrameHeader*)this._cPtr, priority, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -71,7 +71,7 @@ template FrameHeaderT()
         widget = a #PanelWidget
       Returns: whether the widget can be dropped.
   */
-  override bool canDrop(panel.widget.Widget widget)
+  override bool canDrop(panel.widget.Widget widget) nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_frame_header_can_drop(cast(PanelFrameHeader*)this._cPtr, widget ? cast(PanelWidget*)widget._cPtr(No.Dup) : null);
@@ -82,7 +82,7 @@ template FrameHeaderT()
       Gets the frame the header is attached to.
       Returns: a #PanelFrame or null
   */
-  override panel.frame.Frame getFrame()
+  override panel.frame.Frame getFrame() nothrow
   {
     PanelFrame* _cretval;
     _cretval = panel_frame_header_get_frame(cast(PanelFrameHeader*)this._cPtr);
@@ -96,7 +96,7 @@ template FrameHeaderT()
       Params:
         widget = a #PanelWidget or null if no page is visible
   */
-  override void pageChanged(panel.widget.Widget widget = null)
+  override void pageChanged(panel.widget.Widget widget = null) nothrow
   {
     panel_frame_header_page_changed(cast(PanelFrameHeader*)this._cPtr, widget ? cast(PanelWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -107,7 +107,7 @@ template FrameHeaderT()
       Params:
         frame = a #PanelFrame or null
   */
-  override void setFrame(panel.frame.Frame frame = null)
+  override void setFrame(panel.frame.Frame frame = null) nothrow
   {
     panel_frame_header_set_frame(cast(PanelFrameHeader*)this._cPtr, frame ? cast(PanelFrame*)frame._cPtr(No.Dup) : null);
   }
@@ -123,7 +123,7 @@ template FrameHeaderGidBuilderT()
         propval = The frame the header is attached to, or null.
       Returns: Builder instance for fluent chaining
   */
-  T frame(panel.frame.Frame propval)
+  T frame(panel.frame.Frame propval) nothrow
   {
     return setProperty("frame", propval);
   }

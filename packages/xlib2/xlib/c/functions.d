@@ -13,7 +13,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libX11.so.6"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // global
   void function() c_XOpenDisplay; ///

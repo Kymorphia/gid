@@ -22,26 +22,26 @@ class TextViewAccessible : gtk.container_accessible.ContainerAccessible, atk.edi
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_view_accessible_get_type != &gidSymbolNotFound ? gtk_text_view_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TextViewAccessible self()
+  override TextViewAccessible self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class TextViewAccessible : gtk.container_accessible.ContainerAccessible, atk.edi
       Get builder for [gtk.text_view_accessible.TextViewAccessible]
       Returns: New builder object
   */
-  static TextViewAccessibleGidBuilder builder()
+  static TextViewAccessibleGidBuilder builder() nothrow
   {
     return new TextViewAccessibleGidBuilder;
   }
@@ -76,7 +76,7 @@ final class TextViewAccessibleGidBuilder : TextViewAccessibleGidBuilderImpl!Text
       Create object from builder.
       Returns: New object
   */
-  TextViewAccessible build()
+  TextViewAccessible build() nothrow
   {
     return new TextViewAccessible(cast(void*)createGObject(TextViewAccessible._getGType), No.Take);
   }

@@ -15,11 +15,8 @@ class ProximityEvent : gdk.event.Event
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.proximity_event.ProximityEvent");
-
     super(cast(GdkEvent*)ptr, take);
   }
 }

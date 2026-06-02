@@ -16,26 +16,26 @@ class InternetAddressMailbox : gmime.internet_address.InternetAddress
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())internet_address_mailbox_get_type != &gidSymbolNotFound ? internet_address_mailbox_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override InternetAddressMailbox self()
+  override InternetAddressMailbox self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class InternetAddressMailbox : gmime.internet_address.InternetAddress
       Get builder for [gmime.internet_address_mailbox.InternetAddressMailbox]
       Returns: New builder object
   */
-  static InternetAddressMailboxGidBuilder builder()
+  static InternetAddressMailboxGidBuilder builder() nothrow
   {
     return new InternetAddressMailboxGidBuilder;
   }
@@ -60,7 +60,7 @@ class InternetAddressMailbox : gmime.internet_address.InternetAddress
         
         Note: The name string should be in UTF-8.
   */
-  this(string name, string addr)
+  this(string name, string addr) nothrow
   {
     GMimeInternetAddress* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -73,7 +73,7 @@ class InternetAddressMailbox : gmime.internet_address.InternetAddress
       Gets the addr-spec of the internet address mailbox.
       Returns: the addr-spec string.
   */
-  string getAddr()
+  string getAddr() nothrow
   {
     const(char)* _cretval;
     _cretval = internet_address_mailbox_get_addr(cast(GMimeInternetAddressMailbox*)this._cPtr);
@@ -85,7 +85,7 @@ class InternetAddressMailbox : gmime.internet_address.InternetAddress
       Gets the IDN ascii-encoded addr-spec.
       Returns: the encoded addr-spec string.
   */
-  string getIdnAddr()
+  string getIdnAddr() nothrow
   {
     const(char)* _cretval;
     _cretval = internet_address_mailbox_get_idn_addr(cast(GMimeInternetAddressMailbox*)this._cPtr);
@@ -99,7 +99,7 @@ class InternetAddressMailbox : gmime.internet_address.InternetAddress
       Params:
         addr = contact's email address
   */
-  void setAddr(string addr)
+  void setAddr(string addr) nothrow
   {
     const(char)* _addr = addr.toCString(No.Alloc);
     internet_address_mailbox_set_addr(cast(GMimeInternetAddressMailbox*)this._cPtr, _addr);
@@ -118,7 +118,7 @@ final class InternetAddressMailboxGidBuilder : InternetAddressMailboxGidBuilderI
       Create object from builder.
       Returns: New object
   */
-  InternetAddressMailbox build()
+  InternetAddressMailbox build() nothrow
   {
     return new InternetAddressMailbox(cast(void*)createGObject(InternetAddressMailbox._getGType), Yes.Take);
   }

@@ -16,32 +16,32 @@ class ITPFirstParty : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_itp_first_party_get_type != &gidSymbolNotFound ? webkit_itp_first_party_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ITPFirstParty self()
+  override ITPFirstParty self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class ITPFirstParty : gobject.boxed.Boxed
       Get the domain name of itp_first_party.
       Returns: the domain name
   */
-  string getDomain()
+  string getDomain() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_itp_first_party_get_domain(cast(WebKitITPFirstParty*)this._cPtr);
@@ -65,7 +65,7 @@ class ITPFirstParty : gobject.boxed.Boxed
       therefore corresponds to exactly one #WebKitITPThirdParty.
       Returns: the last update time as a #GDateTime
   */
-  glib.date_time.DateTime getLastUpdateTime()
+  glib.date_time.DateTime getLastUpdateTime() nothrow
   {
     GDateTime* _cretval;
     _cretval = webkit_itp_first_party_get_last_update_time(cast(WebKitITPFirstParty*)this._cPtr);
@@ -80,7 +80,7 @@ class ITPFirstParty : gobject.boxed.Boxed
       therefore corresponds to exactly one #WebKitITPThirdParty.
       Returns: true if website data access has been granted, or false otherwise
   */
-  bool getWebsiteDataAccessAllowed()
+  bool getWebsiteDataAccessAllowed() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_itp_first_party_get_website_data_access_allowed(cast(WebKitITPFirstParty*)this._cPtr);

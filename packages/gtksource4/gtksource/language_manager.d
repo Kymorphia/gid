@@ -15,26 +15,26 @@ class LanguageManager : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_language_manager_get_type != &gidSymbolNotFound ? gtk_source_language_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LanguageManager self()
+  override LanguageManager self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class LanguageManager : gobject.object.ObjectWrap
       Get builder for [gtksource.language_manager.LanguageManager]
       Returns: New builder object
   */
-  static LanguageManagerGidBuilder builder()
+  static LanguageManagerGidBuilder builder() nothrow
   {
     return new LanguageManagerGidBuilder;
   }
@@ -54,7 +54,7 @@ class LanguageManager : gobject.object.ObjectWrap
       [gtksource.language_manager.LanguageManager.getDefault] instead.
       Returns: a new #GtkSourceLanguageManager.
   */
-  this()
+  this() nothrow
   {
     GtkSourceLanguageManager* _cretval;
     _cretval = gtk_source_language_manager_new();
@@ -66,7 +66,7 @@ class LanguageManager : gobject.object.ObjectWrap
       Returns: a #GtkSourceLanguageManager.
         Return value is owned by GtkSourceView library and must not be unref'ed.
   */
-  static gtksource.language_manager.LanguageManager getDefault()
+  static gtksource.language_manager.LanguageManager getDefault() nothrow
   {
     GtkSourceLanguageManager* _cretval;
     _cretval = gtk_source_language_manager_get_default();
@@ -84,7 +84,7 @@ class LanguageManager : gobject.object.ObjectWrap
         if there is no language identified by the given id. Return value is
         owned by lm and should not be freed.
   */
-  gtksource.language.Language getLanguage(string id)
+  gtksource.language.Language getLanguage(string id) nothrow
   {
     GtkSourceLanguage* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -100,7 +100,7 @@ class LanguageManager : gobject.object.ObjectWrap
         The array is sorted alphabetically according to the language name.
         The array is owned by lm and must not be modified.
   */
-  string[] getLanguageIds()
+  string[] getLanguageIds() nothrow
   {
     const(char*)* _cretval;
     _cretval = gtk_source_language_manager_get_language_ids(cast(GtkSourceLanguageManager*)this._cPtr);
@@ -124,7 +124,7 @@ class LanguageManager : gobject.object.ObjectWrap
         containg a list of language files directories.
         The array is owned by lm and must not be modified.
   */
-  string[] getSearchPath()
+  string[] getSearchPath() nothrow
   {
     const(char*)* _cretval;
     _cretval = gtk_source_language_manager_get_search_path(cast(GtkSourceLanguageManager*)this._cPtr);
@@ -183,7 +183,7 @@ class LanguageManager : gobject.object.ObjectWrap
         is no suitable language for given filename and/or content_type. Return
         value is owned by lm and should not be freed.
   */
-  gtksource.language.Language guessLanguage(string filename = null, string contentType = null)
+  gtksource.language.Language guessLanguage(string filename = null, string contentType = null) nothrow
   {
     GtkSourceLanguage* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -210,7 +210,7 @@ class LanguageManager : gobject.object.ObjectWrap
       Params:
         dirs = a null-terminated array of strings or null.
   */
-  void setSearchPath(string[] dirs = null)
+  void setSearchPath(string[] dirs = null) nothrow
   {
     char*[] _tmpdirs;
     foreach (s; dirs)
@@ -234,7 +234,7 @@ final class LanguageManagerGidBuilder : LanguageManagerGidBuilderImpl!LanguageMa
       Create object from builder.
       Returns: New object
   */
-  LanguageManager build()
+  LanguageManager build() nothrow
   {
     return new LanguageManager(cast(void*)createGObject(LanguageManager._getGType), Yes.Take);
   }

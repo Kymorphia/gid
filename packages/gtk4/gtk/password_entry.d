@@ -58,26 +58,26 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_password_entry_get_type != &gidSymbolNotFound ? gtk_password_entry_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PasswordEntry self()
+  override PasswordEntry self() nothrow
   {
     return this;
   }
@@ -86,7 +86,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
       Get builder for [gtk.password_entry.PasswordEntry]
       Returns: New builder object
   */
-  static PasswordEntryGidBuilder builder()
+  static PasswordEntryGidBuilder builder() nothrow
   {
     return new PasswordEntryGidBuilder;
   }
@@ -95,7 +95,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
       Get `activatesDefault` property.
       Returns: Whether to activate the default widget when Enter is pressed.
   */
-  @property bool activatesDefault()
+  @property bool activatesDefault() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("activates-default");
   }
@@ -105,7 +105,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
       Params:
         propval = Whether to activate the default widget when Enter is pressed.
   */
-  @property void activatesDefault(bool propval)
+  @property void activatesDefault(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("activates-default", propval);
   }
@@ -115,7 +115,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
       Returns: A menu model whose contents will be appended to
         the context menu.
   */
-  @property gio.menu_model.MenuModel extraMenu()
+  @property gio.menu_model.MenuModel extraMenu() nothrow
   {
     return getExtraMenu();
   }
@@ -126,7 +126,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
         propval = A menu model whose contents will be appended to
           the context menu.
   */
-  @property void extraMenu(gio.menu_model.MenuModel propval)
+  @property void extraMenu(gio.menu_model.MenuModel propval) nothrow
   {
     setExtraMenu(propval);
   }
@@ -136,7 +136,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
       Returns: The text that will be displayed in the [gtk.password_entry.PasswordEntry]
         when it is empty and unfocused.
   */
-  @property string placeholderText()
+  @property string placeholderText() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("placeholder-text");
   }
@@ -147,7 +147,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
         propval = The text that will be displayed in the [gtk.password_entry.PasswordEntry]
           when it is empty and unfocused.
   */
-  @property void placeholderText(string propval)
+  @property void placeholderText(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("placeholder-text", propval);
   }
@@ -156,7 +156,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
       Get `showPeekIcon` property.
       Returns: Whether to show an icon for revealing the content.
   */
-  @property bool showPeekIcon()
+  @property bool showPeekIcon() nothrow
   {
     return getShowPeekIcon();
   }
@@ -166,7 +166,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
       Params:
         propval = Whether to show an icon for revealing the content.
   */
-  @property void showPeekIcon(bool propval)
+  @property void showPeekIcon(bool propval) nothrow
   {
     setShowPeekIcon(propval);
   }
@@ -177,7 +177,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
       Creates a [gtk.password_entry.PasswordEntry].
       Returns: a new [gtk.password_entry.PasswordEntry]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_password_entry_new();
@@ -188,7 +188,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
       Gets the menu model set with [gtk.password_entry.PasswordEntry.setExtraMenu].
       Returns: the menu model
   */
-  gio.menu_model.MenuModel getExtraMenu()
+  gio.menu_model.MenuModel getExtraMenu() nothrow
   {
     GMenuModel* _cretval;
     _cretval = gtk_password_entry_get_extra_menu(cast(GtkPasswordEntry*)this._cPtr);
@@ -201,7 +201,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
       reveal the contents.
       Returns: true if an icon is shown
   */
-  bool getShowPeekIcon()
+  bool getShowPeekIcon() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_password_entry_get_show_peek_icon(cast(GtkPasswordEntry*)this._cPtr);
@@ -215,7 +215,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
       Params:
         model = a [gio.menu_model.MenuModel]
   */
-  void setExtraMenu(gio.menu_model.MenuModel model = null)
+  void setExtraMenu(gio.menu_model.MenuModel model = null) nothrow
   {
     gtk_password_entry_set_extra_menu(cast(GtkPasswordEntry*)this._cPtr, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
   }
@@ -229,7 +229,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
       Params:
         showPeekIcon = whether to show the peek icon
   */
-  void setShowPeekIcon(bool showPeekIcon)
+  void setShowPeekIcon(bool showPeekIcon) nothrow
   {
     gtk_password_entry_set_show_peek_icon(cast(GtkPasswordEntry*)this._cPtr, showPeekIcon);
   }
@@ -251,13 +251,13 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.password_entry.PasswordEntry)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -266,7 +266,14 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.password_entry.PasswordEntry.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -286,7 +293,7 @@ class PasswordEntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.ed
         propval = Whether to activate the default widget when Enter is pressed.
       Returns: Builder instance for fluent chaining
   */
-  T activatesDefault(bool propval)
+  T activatesDefault(bool propval) nothrow
   {
     return setProperty("activates-default", propval);
   }
@@ -298,7 +305,7 @@ class PasswordEntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.ed
           the context menu.
       Returns: Builder instance for fluent chaining
   */
-  T extraMenu(gio.menu_model.MenuModel propval)
+  T extraMenu(gio.menu_model.MenuModel propval) nothrow
   {
     return setProperty("extra-menu", propval);
   }
@@ -310,7 +317,7 @@ class PasswordEntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.ed
           when it is empty and unfocused.
       Returns: Builder instance for fluent chaining
   */
-  T placeholderText(string propval)
+  T placeholderText(string propval) nothrow
   {
     return setProperty("placeholder-text", propval);
   }
@@ -321,7 +328,7 @@ class PasswordEntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.ed
         propval = Whether to show an icon for revealing the content.
       Returns: Builder instance for fluent chaining
   */
-  T showPeekIcon(bool propval)
+  T showPeekIcon(bool propval) nothrow
   {
     return setProperty("show-peek-icon", propval);
   }
@@ -334,7 +341,7 @@ final class PasswordEntryGidBuilder : PasswordEntryGidBuilderImpl!PasswordEntryG
       Create object from builder.
       Returns: New object
   */
-  PasswordEntry build()
+  PasswordEntry build() nothrow
   {
     return new PasswordEntry(cast(void*)createGObject(PasswordEntry._getGType), No.Take);
   }

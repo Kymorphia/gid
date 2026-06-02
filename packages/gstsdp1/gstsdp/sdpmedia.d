@@ -21,11 +21,8 @@ class SDPMedia
   GstSDPMedia _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstsdp.sdpmedia.SDPMedia");
-
     _cInstance = *cast(GstSDPMedia*)ptr;
 
     if (take)
@@ -33,7 +30,7 @@ class SDPMedia
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -42,7 +39,7 @@ class SDPMedia
       Get `media` field.
       Returns: the media type
   */
-  @property string media()
+  @property string media() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPMedia*)this._cPtr).media);
   }
@@ -52,7 +49,7 @@ class SDPMedia
       Params:
         propval = the media type
   */
-  @property void media(string propval)
+  @property void media(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPMedia*)this._cPtr).media);
     dToC(propval, cast(void*)&(cast(GstSDPMedia*)this._cPtr).media);
@@ -62,7 +59,7 @@ class SDPMedia
       Get `port` field.
       Returns: the transport port to which the media stream will be sent
   */
-  @property uint port()
+  @property uint port() nothrow
   {
     return (cast(GstSDPMedia*)this._cPtr).port;
   }
@@ -72,7 +69,7 @@ class SDPMedia
       Params:
         propval = the transport port to which the media stream will be sent
   */
-  @property void port(uint propval)
+  @property void port(uint propval) nothrow
   {
     (cast(GstSDPMedia*)this._cPtr).port = propval;
   }
@@ -81,7 +78,7 @@ class SDPMedia
       Get `numPorts` field.
       Returns: the number of ports or -1 if only one port was specified
   */
-  @property uint numPorts()
+  @property uint numPorts() nothrow
   {
     return (cast(GstSDPMedia*)this._cPtr).numPorts;
   }
@@ -91,7 +88,7 @@ class SDPMedia
       Params:
         propval = the number of ports or -1 if only one port was specified
   */
-  @property void numPorts(uint propval)
+  @property void numPorts(uint propval) nothrow
   {
     (cast(GstSDPMedia*)this._cPtr).numPorts = propval;
   }
@@ -100,7 +97,7 @@ class SDPMedia
       Get `proto` field.
       Returns: the transport protocol
   */
-  @property string proto()
+  @property string proto() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPMedia*)this._cPtr).proto);
   }
@@ -110,7 +107,7 @@ class SDPMedia
       Params:
         propval = the transport protocol
   */
-  @property void proto(string propval)
+  @property void proto(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPMedia*)this._cPtr).proto);
     dToC(propval, cast(void*)&(cast(GstSDPMedia*)this._cPtr).proto);
@@ -120,7 +117,7 @@ class SDPMedia
       Get `information` field.
       Returns: the media title
   */
-  @property string information()
+  @property string information() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPMedia*)this._cPtr).information);
   }
@@ -130,7 +127,7 @@ class SDPMedia
       Params:
         propval = the media title
   */
-  @property void information(string propval)
+  @property void information(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPMedia*)this._cPtr).information);
     dToC(propval, cast(void*)&(cast(GstSDPMedia*)this._cPtr).information);
@@ -140,7 +137,7 @@ class SDPMedia
       Get `key` field.
       Returns: the encryption key
   */
-  @property gstsdp.sdpkey.SDPKey key()
+  @property gstsdp.sdpkey.SDPKey key() nothrow
   {
     return new gstsdp.sdpkey.SDPKey(cast(GstSDPKey*)&(cast(GstSDPMedia*)this._cPtr).key, No.Take);
   }
@@ -153,7 +150,7 @@ class SDPMedia
         value = a value
       Returns: #GST_SDP_OK.
   */
-  gstsdp.types.SDPResult addAttribute(string key, string value = null)
+  gstsdp.types.SDPResult addAttribute(string key, string value = null) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -171,7 +168,7 @@ class SDPMedia
         bandwidth = the bandwidth in kilobits per second
       Returns: #GST_SDP_OK.
   */
-  gstsdp.types.SDPResult addBandwidth(string bwtype, uint bandwidth)
+  gstsdp.types.SDPResult addBandwidth(string bwtype, uint bandwidth) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _bwtype = bwtype.toCString(No.Alloc);
@@ -192,7 +189,7 @@ class SDPMedia
         addrNumber = the number of layers
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult addConnection(string nettype, string addrtype, string address, uint ttl, uint addrNumber)
+  gstsdp.types.SDPResult addConnection(string nettype, string addrtype, string address, uint ttl, uint addrNumber) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _nettype = nettype.toCString(No.Alloc);
@@ -210,7 +207,7 @@ class SDPMedia
         format = the format
       Returns: #GST_SDP_OK.
   */
-  gstsdp.types.SDPResult addFormat(string format)
+  gstsdp.types.SDPResult addFormat(string format) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _format = format.toCString(No.Alloc);
@@ -223,7 +220,7 @@ class SDPMedia
       Convert the contents of media to a text string.
       Returns: A dynamically allocated string representing the media.
   */
-  string asText()
+  string asText() nothrow
   {
     char* _cretval;
     _cretval = gst_sdp_media_as_text(cast(const(GstSDPMedia)*)this._cPtr);
@@ -235,7 +232,7 @@ class SDPMedia
       Get the number of attribute fields in media.
       Returns: the number of attributes in media.
   */
-  uint attributesLen()
+  uint attributesLen() nothrow
   {
     uint _retval;
     _retval = gst_sdp_media_attributes_len(cast(const(GstSDPMedia)*)this._cPtr);
@@ -249,7 +246,7 @@ class SDPMedia
         caps = a #GstCaps
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult attributesToCaps(gst.caps.Caps caps)
+  gstsdp.types.SDPResult attributesToCaps(gst.caps.Caps caps) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_media_attributes_to_caps(cast(const(GstSDPMedia)*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
@@ -261,7 +258,7 @@ class SDPMedia
       Get the number of bandwidth fields in media.
       Returns: the number of bandwidths in media.
   */
-  uint bandwidthsLen()
+  uint bandwidthsLen() nothrow
   {
     uint _retval;
     _retval = gst_sdp_media_bandwidths_len(cast(const(GstSDPMedia)*)this._cPtr);
@@ -272,7 +269,7 @@ class SDPMedia
       Get the number of connection fields in media.
       Returns: the number of connections in media.
   */
-  uint connectionsLen()
+  uint connectionsLen() nothrow
   {
     uint _retval;
     _retval = gst_sdp_media_connections_len(cast(const(GstSDPMedia)*)this._cPtr);
@@ -287,7 +284,7 @@ class SDPMedia
         copy = pointer to new #GstSDPMedia
       Returns: a #GstSDPResult
   */
-  gstsdp.types.SDPResult copy(out gstsdp.sdpmedia.SDPMedia copy)
+  gstsdp.types.SDPResult copy(out gstsdp.sdpmedia.SDPMedia copy) nothrow
   {
     GstSDPResult _cretval;
     GstSDPMedia* _copy;
@@ -301,7 +298,7 @@ class SDPMedia
       Get the number of formats in media.
       Returns: the number of formats in media.
   */
-  uint formatsLen()
+  uint formatsLen() nothrow
   {
     uint _retval;
     _retval = gst_sdp_media_formats_len(cast(const(GstSDPMedia)*)this._cPtr);
@@ -315,7 +312,7 @@ class SDPMedia
         idx = an index
       Returns: the #GstSDPAttribute at position idx.
   */
-  gstsdp.sdpattribute.SDPAttribute getAttribute(uint idx)
+  gstsdp.sdpattribute.SDPAttribute getAttribute(uint idx) nothrow
   {
     const(GstSDPAttribute)* _cretval;
     _cretval = gst_sdp_media_get_attribute(cast(const(GstSDPMedia)*)this._cPtr, idx);
@@ -330,7 +327,7 @@ class SDPMedia
         key = a key
       Returns: the first attribute value for key.
   */
-  string getAttributeVal(string key)
+  string getAttributeVal(string key) nothrow
   {
     const(char)* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -347,7 +344,7 @@ class SDPMedia
         nth = an index
       Returns: the nth attribute value.
   */
-  string getAttributeValN(string key, uint nth)
+  string getAttributeValN(string key, uint nth) nothrow
   {
     const(char)* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -363,7 +360,7 @@ class SDPMedia
         idx = an index
       Returns: the #GstSDPBandwidth at position idx.
   */
-  gstsdp.sdpbandwidth.SDPBandwidth getBandwidth(uint idx)
+  gstsdp.sdpbandwidth.SDPBandwidth getBandwidth(uint idx) nothrow
   {
     const(GstSDPBandwidth)* _cretval;
     _cretval = gst_sdp_media_get_bandwidth(cast(const(GstSDPMedia)*)this._cPtr, idx);
@@ -386,7 +383,7 @@ class SDPMedia
         pt = a payload type
       Returns: a #GstCaps, or null if an error happened
   */
-  gst.caps.Caps getCapsFromMedia(int pt)
+  gst.caps.Caps getCapsFromMedia(int pt) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_sdp_media_get_caps_from_media(cast(const(GstSDPMedia)*)this._cPtr, pt);
@@ -401,7 +398,7 @@ class SDPMedia
         idx = an index
       Returns: the #GstSDPConnection at position idx.
   */
-  gstsdp.sdpconnection.SDPConnection getConnection(uint idx)
+  gstsdp.sdpconnection.SDPConnection getConnection(uint idx) nothrow
   {
     const(GstSDPConnection)* _cretval;
     _cretval = gst_sdp_media_get_connection(cast(const(GstSDPMedia)*)this._cPtr, idx);
@@ -416,7 +413,7 @@ class SDPMedia
         idx = an index
       Returns: the format at position idx.
   */
-  string getFormat(uint idx)
+  string getFormat(uint idx) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_sdp_media_get_format(cast(const(GstSDPMedia)*)this._cPtr, idx);
@@ -428,7 +425,7 @@ class SDPMedia
       Get the information of media
       Returns: the information of media.
   */
-  string getInformation()
+  string getInformation() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_sdp_media_get_information(cast(const(GstSDPMedia)*)this._cPtr);
@@ -440,7 +437,7 @@ class SDPMedia
       Get the encryption information from media.
       Returns: a #GstSDPKey.
   */
-  gstsdp.sdpkey.SDPKey getKey()
+  gstsdp.sdpkey.SDPKey getKey() nothrow
   {
     const(GstSDPKey)* _cretval;
     _cretval = gst_sdp_media_get_key(cast(const(GstSDPMedia)*)this._cPtr);
@@ -452,7 +449,7 @@ class SDPMedia
       Get the media description of media.
       Returns: the media description.
   */
-  string getMedia()
+  string getMedia() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_sdp_media_get_media(cast(const(GstSDPMedia)*)this._cPtr);
@@ -464,7 +461,7 @@ class SDPMedia
       Get the number of ports for media.
       Returns: the number of ports for media.
   */
-  uint getNumPorts()
+  uint getNumPorts() nothrow
   {
     uint _retval;
     _retval = gst_sdp_media_get_num_ports(cast(const(GstSDPMedia)*)this._cPtr);
@@ -475,7 +472,7 @@ class SDPMedia
       Get the port number for media.
       Returns: the port number of media.
   */
-  uint getPort()
+  uint getPort() nothrow
   {
     uint _retval;
     _retval = gst_sdp_media_get_port(cast(const(GstSDPMedia)*)this._cPtr);
@@ -486,7 +483,7 @@ class SDPMedia
       Get the transport protocol of media
       Returns: the transport protocol of media.
   */
-  string getProto()
+  string getProto() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_sdp_media_get_proto(cast(const(GstSDPMedia)*)this._cPtr);
@@ -503,7 +500,7 @@ class SDPMedia
         attr = a #GstSDPAttribute
       Returns: #GST_SDP_OK.
   */
-  gstsdp.types.SDPResult insertAttribute(int idx, gstsdp.sdpattribute.SDPAttribute attr)
+  gstsdp.types.SDPResult insertAttribute(int idx, gstsdp.sdpattribute.SDPAttribute attr) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_media_insert_attribute(cast(GstSDPMedia*)this._cPtr, idx, attr ? cast(GstSDPAttribute*)attr._cPtr : null);
@@ -520,7 +517,7 @@ class SDPMedia
         bw = a #GstSDPBandwidth
       Returns: #GST_SDP_OK.
   */
-  gstsdp.types.SDPResult insertBandwidth(int idx, gstsdp.sdpbandwidth.SDPBandwidth bw)
+  gstsdp.types.SDPResult insertBandwidth(int idx, gstsdp.sdpbandwidth.SDPBandwidth bw) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_media_insert_bandwidth(cast(GstSDPMedia*)this._cPtr, idx, bw ? cast(GstSDPBandwidth*)bw._cPtr : null);
@@ -537,7 +534,7 @@ class SDPMedia
         conn = a #GstSDPConnection
       Returns: #GST_SDP_OK.
   */
-  gstsdp.types.SDPResult insertConnection(int idx, gstsdp.sdpconnection.SDPConnection conn)
+  gstsdp.types.SDPResult insertConnection(int idx, gstsdp.sdpconnection.SDPConnection conn) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_media_insert_connection(cast(GstSDPMedia*)this._cPtr, idx, conn ? cast(GstSDPConnection*)conn._cPtr : null);
@@ -554,7 +551,7 @@ class SDPMedia
         format = the format
       Returns: #GST_SDP_OK.
   */
-  gstsdp.types.SDPResult insertFormat(int idx, string format)
+  gstsdp.types.SDPResult insertFormat(int idx, string format) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _format = format.toCString(No.Alloc);
@@ -571,7 +568,7 @@ class SDPMedia
         mikey = pointer to new #GstMIKEYMessage
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult parseKeymgmt(out gstsdp.mikeymessage.MIKEYMessage mikey)
+  gstsdp.types.SDPResult parseKeymgmt(out gstsdp.mikeymessage.MIKEYMessage mikey) nothrow
   {
     GstSDPResult _cretval;
     GstMIKEYMessage* _mikey;
@@ -588,7 +585,7 @@ class SDPMedia
         idx = an index
       Returns: #GST_SDP_OK.
   */
-  gstsdp.types.SDPResult removeAttribute(uint idx)
+  gstsdp.types.SDPResult removeAttribute(uint idx) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_media_remove_attribute(cast(GstSDPMedia*)this._cPtr, idx);
@@ -603,7 +600,7 @@ class SDPMedia
         idx = an index
       Returns: #GST_SDP_OK.
   */
-  gstsdp.types.SDPResult removeBandwidth(uint idx)
+  gstsdp.types.SDPResult removeBandwidth(uint idx) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_media_remove_bandwidth(cast(GstSDPMedia*)this._cPtr, idx);
@@ -618,7 +615,7 @@ class SDPMedia
         idx = an index
       Returns: #GST_SDP_OK.
   */
-  gstsdp.types.SDPResult removeConnection(uint idx)
+  gstsdp.types.SDPResult removeConnection(uint idx) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_media_remove_connection(cast(GstSDPMedia*)this._cPtr, idx);
@@ -633,7 +630,7 @@ class SDPMedia
         idx = an index
       Returns: #GST_SDP_OK.
   */
-  gstsdp.types.SDPResult removeFormat(uint idx)
+  gstsdp.types.SDPResult removeFormat(uint idx) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_media_remove_format(cast(GstSDPMedia*)this._cPtr, idx);
@@ -649,7 +646,7 @@ class SDPMedia
         attr = a #GstSDPAttribute
       Returns: #GST_SDP_OK.
   */
-  gstsdp.types.SDPResult replaceAttribute(uint idx, gstsdp.sdpattribute.SDPAttribute attr)
+  gstsdp.types.SDPResult replaceAttribute(uint idx, gstsdp.sdpattribute.SDPAttribute attr) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_media_replace_attribute(cast(GstSDPMedia*)this._cPtr, idx, attr ? cast(GstSDPAttribute*)attr._cPtr : null);
@@ -665,7 +662,7 @@ class SDPMedia
         bw = a #GstSDPBandwidth
       Returns: #GST_SDP_OK.
   */
-  gstsdp.types.SDPResult replaceBandwidth(uint idx, gstsdp.sdpbandwidth.SDPBandwidth bw)
+  gstsdp.types.SDPResult replaceBandwidth(uint idx, gstsdp.sdpbandwidth.SDPBandwidth bw) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_media_replace_bandwidth(cast(GstSDPMedia*)this._cPtr, idx, bw ? cast(GstSDPBandwidth*)bw._cPtr : null);
@@ -681,7 +678,7 @@ class SDPMedia
         conn = a #GstSDPConnection
       Returns: #GST_SDP_OK.
   */
-  gstsdp.types.SDPResult replaceConnection(uint idx, gstsdp.sdpconnection.SDPConnection conn)
+  gstsdp.types.SDPResult replaceConnection(uint idx, gstsdp.sdpconnection.SDPConnection conn) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_media_replace_connection(cast(GstSDPMedia*)this._cPtr, idx, conn ? cast(GstSDPConnection*)conn._cPtr : null);
@@ -697,7 +694,7 @@ class SDPMedia
         format = the format
       Returns: #GST_SDP_OK.
   */
-  gstsdp.types.SDPResult replaceFormat(uint idx, string format)
+  gstsdp.types.SDPResult replaceFormat(uint idx, string format) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _format = format.toCString(No.Alloc);
@@ -713,7 +710,7 @@ class SDPMedia
         information = the media information
       Returns: #GST_SDP_OK.
   */
-  gstsdp.types.SDPResult setInformation(string information)
+  gstsdp.types.SDPResult setInformation(string information) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _information = information.toCString(No.Alloc);
@@ -730,7 +727,7 @@ class SDPMedia
         data = the encryption data
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult setKey(string type, string data)
+  gstsdp.types.SDPResult setKey(string type, string data) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _type = type.toCString(No.Alloc);
@@ -747,7 +744,7 @@ class SDPMedia
         med = the media description
       Returns: #GST_SDP_OK.
   */
-  gstsdp.types.SDPResult setMedia(string med)
+  gstsdp.types.SDPResult setMedia(string med) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _med = med.toCString(No.Alloc);
@@ -764,7 +761,7 @@ class SDPMedia
         numPorts = the number of ports
       Returns: #GST_SDP_OK.
   */
-  gstsdp.types.SDPResult setPortInfo(uint port, uint numPorts)
+  gstsdp.types.SDPResult setPortInfo(uint port, uint numPorts) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_media_set_port_info(cast(GstSDPMedia*)this._cPtr, port, numPorts);
@@ -779,7 +776,7 @@ class SDPMedia
         proto = the media transport protocol
       Returns: #GST_SDP_OK.
   */
-  gstsdp.types.SDPResult setProto(string proto)
+  gstsdp.types.SDPResult setProto(string proto) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _proto = proto.toCString(No.Alloc);
@@ -794,7 +791,7 @@ class SDPMedia
       stack and initialized with [gstsdp.sdpmedia.SDPMedia.init_].
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult uninit()
+  gstsdp.types.SDPResult uninit() nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_media_uninit(cast(GstSDPMedia*)this._cPtr);
@@ -814,7 +811,7 @@ class SDPMedia
         media = a #GstSDPMedia
       Returns: a #GstSDPResult.
   */
-  static gstsdp.types.SDPResult init_(out gstsdp.sdpmedia.SDPMedia media)
+  static gstsdp.types.SDPResult init_(out gstsdp.sdpmedia.SDPMedia media) nothrow
   {
     GstSDPResult _cretval;
     GstSDPMedia _media;
@@ -831,7 +828,7 @@ class SDPMedia
         media = pointer to new #GstSDPMedia
       Returns: a #GstSDPResult.
   */
-  static gstsdp.types.SDPResult new_(out gstsdp.sdpmedia.SDPMedia media)
+  static gstsdp.types.SDPResult new_(out gstsdp.sdpmedia.SDPMedia media) nothrow
   {
     GstSDPResult _cretval;
     GstSDPMedia* _media;
@@ -859,7 +856,7 @@ class SDPMedia
         media = a #GstSDPMedia
       Returns: a #GstSDPResult.
   */
-  static gstsdp.types.SDPResult setMediaFromCaps(gst.caps.Caps caps, out gstsdp.sdpmedia.SDPMedia media)
+  static gstsdp.types.SDPResult setMediaFromCaps(gst.caps.Caps caps, out gstsdp.sdpmedia.SDPMedia media) nothrow
   {
     GstSDPResult _cretval;
     GstSDPMedia _media;

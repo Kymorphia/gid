@@ -21,7 +21,7 @@ struct VideoFormat
         fourcc = a FOURCC value representing raw YUV video
       Returns: the #GstVideoFormat describing the FOURCC value
   */
-  static gstvideo.types.VideoFormat fromFourcc(uint fourcc)
+  static gstvideo.types.VideoFormat fromFourcc(uint fourcc) nothrow
   {
     GstVideoFormat _cretval;
     _cretval = gst_video_format_from_fourcc(fourcc);
@@ -44,7 +44,7 @@ struct VideoFormat
       Returns: a #GstVideoFormat or GST_VIDEO_FORMAT_UNKNOWN when the parameters to
         not specify a known format.
   */
-  static gstvideo.types.VideoFormat fromMasks(int depth, int bpp, int endianness, uint redMask, uint greenMask, uint blueMask, uint alphaMask)
+  static gstvideo.types.VideoFormat fromMasks(int depth, int bpp, int endianness, uint redMask, uint greenMask, uint blueMask, uint alphaMask) nothrow
   {
     GstVideoFormat _cretval;
     _cretval = gst_video_format_from_masks(depth, bpp, endianness, redMask, greenMask, blueMask, alphaMask);
@@ -60,7 +60,7 @@ struct VideoFormat
       Returns: the #GstVideoFormat for format or GST_VIDEO_FORMAT_UNKNOWN when the
         string is not a known format.
   */
-  static gstvideo.types.VideoFormat fromString(string format)
+  static gstvideo.types.VideoFormat fromString(string format) nothrow
   {
     GstVideoFormat _cretval;
     const(char)* _format = format.toCString(No.Alloc);
@@ -76,7 +76,7 @@ struct VideoFormat
         format = a #GstVideoFormat
       Returns: The #GstVideoFormatInfo for format.
   */
-  static gstvideo.video_format_info.VideoFormatInfo getInfo(gstvideo.types.VideoFormat format)
+  static gstvideo.video_format_info.VideoFormatInfo getInfo(gstvideo.types.VideoFormat format) nothrow
   {
     const(GstVideoFormatInfo)* _cretval;
     _cretval = gst_video_format_get_info(format);
@@ -94,7 +94,7 @@ struct VideoFormat
       Returns: the default palette of format or null when
         format does not have a palette.
   */
-  static const(void)* getPalette(gstvideo.types.VideoFormat format, out size_t size)
+  static const(void)* getPalette(gstvideo.types.VideoFormat format, out size_t size) nothrow
   {
     auto _retval = gst_video_format_get_palette(format, cast(size_t*)&size);
     return _retval;
@@ -109,7 +109,7 @@ struct VideoFormat
         format = a #GstVideoFormat video format
       Returns: the FOURCC corresponding to format
   */
-  static uint toFourcc(gstvideo.types.VideoFormat format)
+  static uint toFourcc(gstvideo.types.VideoFormat format) nothrow
   {
     uint _retval;
     _retval = gst_video_format_to_fourcc(format);
@@ -124,7 +124,7 @@ struct VideoFormat
         format = a #GstVideoFormat video format
       Returns: the name corresponding to format
   */
-  static string toString_(gstvideo.types.VideoFormat format)
+  static string toString_(gstvideo.types.VideoFormat format) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_video_format_to_string(format);

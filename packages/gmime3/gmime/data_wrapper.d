@@ -17,26 +17,26 @@ class DataWrapper : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_data_wrapper_get_type != &gidSymbolNotFound ? g_mime_data_wrapper_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DataWrapper self()
+  override DataWrapper self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class DataWrapper : gobject.object.ObjectWrap
       Get builder for [gmime.data_wrapper.DataWrapper]
       Returns: New builder object
   */
-  static DataWrapperGidBuilder builder()
+  static DataWrapperGidBuilder builder() nothrow
   {
     return new DataWrapperGidBuilder;
   }
@@ -54,7 +54,7 @@ class DataWrapper : gobject.object.ObjectWrap
       Creates a new #GMimeDataWrapper object.
       Returns: a new data wrapper object.
   */
-  this()
+  this() nothrow
   {
     GMimeDataWrapper* _cretval;
     _cretval = g_mime_data_wrapper_new();
@@ -71,7 +71,7 @@ class DataWrapper : gobject.object.ObjectWrap
         own reference on the stream, caller is responsible for unrefing
         its own copy.
   */
-  static gmime.data_wrapper.DataWrapper newWithStream(gmime.stream.Stream stream, gmime.types.ContentEncoding encoding)
+  static gmime.data_wrapper.DataWrapper newWithStream(gmime.stream.Stream stream, gmime.types.ContentEncoding encoding) nothrow
   {
     GMimeDataWrapper* _cretval;
     _cretval = g_mime_data_wrapper_new_with_stream(stream ? cast(GMimeStream*)stream._cPtr(No.Dup) : null, encoding);
@@ -83,7 +83,7 @@ class DataWrapper : gobject.object.ObjectWrap
       Gets the encoding type of the stream wrapped by wrapper.
       Returns: the encoding type of the internal stream.
   */
-  gmime.types.ContentEncoding getEncoding()
+  gmime.types.ContentEncoding getEncoding() nothrow
   {
     GMimeContentEncoding _cretval;
     _cretval = g_mime_data_wrapper_get_encoding(cast(GMimeDataWrapper*)this._cPtr);
@@ -95,7 +95,7 @@ class DataWrapper : gobject.object.ObjectWrap
       Gets a reference to the stream wrapped by wrapper.
       Returns: a reference to the internal stream.
   */
-  gmime.stream.Stream getStream()
+  gmime.stream.Stream getStream() nothrow
   {
     GMimeStream* _cretval;
     _cretval = g_mime_data_wrapper_get_stream(cast(GMimeDataWrapper*)this._cPtr);
@@ -109,7 +109,7 @@ class DataWrapper : gobject.object.ObjectWrap
       Params:
         encoding = encoding
   */
-  void setEncoding(gmime.types.ContentEncoding encoding)
+  void setEncoding(gmime.types.ContentEncoding encoding) nothrow
   {
     g_mime_data_wrapper_set_encoding(cast(GMimeDataWrapper*)this._cPtr, encoding);
   }
@@ -125,7 +125,7 @@ class DataWrapper : gobject.object.ObjectWrap
       Params:
         stream = a #GMimeStream
   */
-  void setStream(gmime.stream.Stream stream)
+  void setStream(gmime.stream.Stream stream) nothrow
   {
     g_mime_data_wrapper_set_stream(cast(GMimeDataWrapper*)this._cPtr, stream ? cast(GMimeStream*)stream._cPtr(No.Dup) : null);
   }
@@ -137,7 +137,7 @@ class DataWrapper : gobject.object.ObjectWrap
         stream = output stream
       Returns: the number of bytes written or %-1 on failure.
   */
-  ptrdiff_t writeToStream(gmime.stream.Stream stream)
+  ptrdiff_t writeToStream(gmime.stream.Stream stream) nothrow
   {
     ptrdiff_t _retval;
     _retval = g_mime_data_wrapper_write_to_stream(cast(GMimeDataWrapper*)this._cPtr, stream ? cast(GMimeStream*)stream._cPtr(No.Dup) : null);
@@ -157,7 +157,7 @@ final class DataWrapperGidBuilder : DataWrapperGidBuilderImpl!DataWrapperGidBuil
       Create object from builder.
       Returns: New object
   */
-  DataWrapper build()
+  DataWrapper build() nothrow
   {
     return new DataWrapper(cast(void*)createGObject(DataWrapper._getGType), Yes.Take);
   }

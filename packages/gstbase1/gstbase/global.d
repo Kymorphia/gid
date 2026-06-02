@@ -25,7 +25,7 @@ import gstbase.types;
     Returns: the #GstCaps corresponding to the data
           stream.  Returns null if no #GstCaps matches the data stream.
 */
-gst.caps.Caps typeFindHelper(gst.pad.Pad src, ulong size)
+gst.caps.Caps typeFindHelper(gst.pad.Pad src, ulong size) nothrow
 {
   GstCaps* _cretval;
   _cretval = gst_type_find_helper(src ? cast(GstPad*)src._cPtr(No.Dup) : null, size);
@@ -56,7 +56,7 @@ gst.caps.Caps typeFindHelper(gst.pad.Pad src, ulong size)
           or null if no type could be found. The caller should free the caps
           returned with gst_caps_unref().
 */
-gst.caps.Caps typeFindHelperForBuffer(gst.object.ObjectWrap obj, gst.buffer.Buffer buf, out gst.types.TypeFindProbability prob)
+gst.caps.Caps typeFindHelperForBuffer(gst.object.ObjectWrap obj, gst.buffer.Buffer buf, out gst.types.TypeFindProbability prob) nothrow
 {
   GstCaps* _cretval;
   _cretval = gst_type_find_helper_for_buffer(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, buf ? cast(GstBuffer*)buf._cPtr(No.Dup) : null, &prob);
@@ -89,7 +89,7 @@ gst.caps.Caps typeFindHelperForBuffer(gst.object.ObjectWrap obj, gst.buffer.Buff
           or null if no type could be found. The caller should free the caps
           returned with gst_caps_unref().
 */
-gst.caps.Caps typeFindHelperForBufferWithCaps(gst.object.ObjectWrap obj, gst.buffer.Buffer buf, gst.caps.Caps caps, out gst.types.TypeFindProbability prob)
+gst.caps.Caps typeFindHelperForBufferWithCaps(gst.object.ObjectWrap obj, gst.buffer.Buffer buf, gst.caps.Caps caps, out gst.types.TypeFindProbability prob) nothrow
 {
   GstCaps* _cretval;
   _cretval = gst_type_find_helper_for_buffer_with_caps(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, buf ? cast(GstBuffer*)buf._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, &prob);
@@ -125,7 +125,7 @@ gst.caps.Caps typeFindHelperForBufferWithCaps(gst.object.ObjectWrap obj, gst.buf
           or null if no type could be found. The caller should free the caps
           returned with gst_caps_unref().
 */
-gst.caps.Caps typeFindHelperForBufferWithExtension(gst.object.ObjectWrap obj, gst.buffer.Buffer buf, string extension, out gst.types.TypeFindProbability prob)
+gst.caps.Caps typeFindHelperForBufferWithExtension(gst.object.ObjectWrap obj, gst.buffer.Buffer buf, string extension, out gst.types.TypeFindProbability prob) nothrow
 {
   GstCaps* _cretval;
   const(char)* _extension = extension.toCString(No.Alloc);
@@ -157,7 +157,7 @@ gst.caps.Caps typeFindHelperForBufferWithExtension(gst.object.ObjectWrap obj, gs
           or null if no type could be found. The caller should free the caps
           returned with gst_caps_unref().
 */
-gst.caps.Caps typeFindHelperForData(gst.object.ObjectWrap obj, ubyte[] data, out gst.types.TypeFindProbability prob)
+gst.caps.Caps typeFindHelperForData(gst.object.ObjectWrap obj, ubyte[] data, out gst.types.TypeFindProbability prob) nothrow
 {
   GstCaps* _cretval;
   size_t _size;
@@ -191,7 +191,7 @@ gst.caps.Caps typeFindHelperForData(gst.object.ObjectWrap obj, ubyte[] data, out
           or null if no type could be found. The caller should free the caps
           returned with gst_caps_unref().
 */
-gst.caps.Caps typeFindHelperForDataWithCaps(gst.object.ObjectWrap obj, ubyte[] data, gst.caps.Caps caps, out gst.types.TypeFindProbability prob)
+gst.caps.Caps typeFindHelperForDataWithCaps(gst.object.ObjectWrap obj, ubyte[] data, gst.caps.Caps caps, out gst.types.TypeFindProbability prob) nothrow
 {
   GstCaps* _cretval;
   size_t _size;
@@ -232,7 +232,7 @@ gst.caps.Caps typeFindHelperForDataWithCaps(gst.object.ObjectWrap obj, ubyte[] d
           or null if no type could be found. The caller should free the caps
           returned with gst_caps_unref().
 */
-gst.caps.Caps typeFindHelperForDataWithExtension(gst.object.ObjectWrap obj, ubyte[] data, string extension, out gst.types.TypeFindProbability prob)
+gst.caps.Caps typeFindHelperForDataWithExtension(gst.object.ObjectWrap obj, ubyte[] data, string extension, out gst.types.TypeFindProbability prob) nothrow
 {
   GstCaps* _cretval;
   size_t _size;
@@ -262,7 +262,7 @@ gst.caps.Caps typeFindHelperForDataWithExtension(gst.object.ObjectWrap obj, ubyt
           extension, or null if no type could be found. The caller should free
           the caps returned with gst_caps_unref().
 */
-gst.caps.Caps typeFindHelperForExtension(gst.object.ObjectWrap obj, string extension)
+gst.caps.Caps typeFindHelperForExtension(gst.object.ObjectWrap obj, string extension) nothrow
 {
   GstCaps* _cretval;
   const(char)* _extension = extension.toCString(No.Alloc);
@@ -299,16 +299,23 @@ gst.caps.Caps typeFindHelperForExtension(gst.object.ObjectWrap obj, string exten
     Returns: the #GstCaps corresponding to the data
           stream.  Returns null if no #GstCaps matches the data stream.
 */
-gst.caps.Caps typeFindHelperGetRange(gst.object.ObjectWrap obj, gst.object.ObjectWrap parent, gstbase.types.TypeFindHelperGetRangeFunction func, ulong size, string extension, out gst.types.TypeFindProbability prob)
+gst.caps.Caps typeFindHelperGetRange(gst.object.ObjectWrap obj, gst.object.ObjectWrap parent, gstbase.types.TypeFindHelperGetRangeFunction func, ulong size, string extension, out gst.types.TypeFindProbability prob) nothrow
 {
   static gstbase.types.TypeFindHelperGetRangeFunction _static_func;
 
-  extern(C) GstFlowReturn _funcCallback(GstObject* obj, GstObject* parent, ulong offset, uint length, GstBuffer** buffer)
+  extern(C) GstFlowReturn _funcCallback(GstObject* obj, GstObject* parent, ulong offset, uint length, GstBuffer** buffer) nothrow
   {
     gst.types.FlowReturn _dretval;
     auto _buffer = new gst.buffer.Buffer(buffer, No.Take);
 
-    _dretval = _static_func(gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)obj, No.Take), gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take), offset, length, _buffer);
+    try
+    {
+      _dretval = _static_func(gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)obj, No.Take), gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take), offset, length, _buffer);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gstbase.types.TypeFindHelperGetRangeFunction");
+    }
     auto _retval = cast(GstFlowReturn)_dretval;
     *buffer = *cast(GstBuffer**)_buffer._cPtr;
 
@@ -351,16 +358,23 @@ gst.caps.Caps typeFindHelperGetRange(gst.object.ObjectWrap obj, gst.object.Objec
     Returns: the last [gst.types.FlowReturn] from pulling a buffer or [gst.types.FlowReturn.Ok] if
                typefinding was successful.
 */
-gst.types.FlowReturn typeFindHelperGetRangeFull(gst.object.ObjectWrap obj, gst.object.ObjectWrap parent, gstbase.types.TypeFindHelperGetRangeFunction func, ulong size, string extension, out gst.caps.Caps caps, out gst.types.TypeFindProbability prob)
+gst.types.FlowReturn typeFindHelperGetRangeFull(gst.object.ObjectWrap obj, gst.object.ObjectWrap parent, gstbase.types.TypeFindHelperGetRangeFunction func, ulong size, string extension, out gst.caps.Caps caps, out gst.types.TypeFindProbability prob) nothrow
 {
   static gstbase.types.TypeFindHelperGetRangeFunction _static_func;
 
-  extern(C) GstFlowReturn _funcCallback(GstObject* obj, GstObject* parent, ulong offset, uint length, GstBuffer** buffer)
+  extern(C) GstFlowReturn _funcCallback(GstObject* obj, GstObject* parent, ulong offset, uint length, GstBuffer** buffer) nothrow
   {
     gst.types.FlowReturn _dretval;
     auto _buffer = new gst.buffer.Buffer(buffer, No.Take);
 
-    _dretval = _static_func(gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)obj, No.Take), gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take), offset, length, _buffer);
+    try
+    {
+      _dretval = _static_func(gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)obj, No.Take), gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take), offset, length, _buffer);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gstbase.types.TypeFindHelperGetRangeFunction");
+    }
     auto _retval = cast(GstFlowReturn)_dretval;
     *buffer = *cast(GstBuffer**)_buffer._cPtr;
 
@@ -393,7 +407,7 @@ gst.types.FlowReturn typeFindHelperGetRangeFull(gst.object.ObjectWrap obj, gst.o
                found. Caller should free the returned list with [glib.list.List.free]
                and list elements with [gst.object.ObjectWrap.unref].
 */
-gst.type_find_factory.TypeFindFactory[] typeFindListFactoriesForCaps(gst.object.ObjectWrap obj, gst.caps.Caps caps)
+gst.type_find_factory.TypeFindFactory[] typeFindListFactoriesForCaps(gst.object.ObjectWrap obj, gst.caps.Caps caps) nothrow
 {
   GList* _cretval;
   _cretval = gst_type_find_list_factories_for_caps(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);

@@ -38,32 +38,32 @@ class VideoOverlayComposition : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_overlay_composition_get_type != &gidSymbolNotFound ? gst_video_overlay_composition_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VideoOverlayComposition self()
+  override VideoOverlayComposition self() nothrow
   {
     return this;
   }
@@ -80,7 +80,7 @@ class VideoOverlayComposition : gobject.boxed.Boxed
       Returns: a new #GstVideoOverlayComposition. Unref with
             gst_video_overlay_composition_unref() when no longer needed.
   */
-  this(gstvideo.video_overlay_rectangle.VideoOverlayRectangle rectangle = null)
+  this(gstvideo.video_overlay_rectangle.VideoOverlayRectangle rectangle = null) nothrow
   {
     GstVideoOverlayComposition* _cretval;
     _cretval = gst_video_overlay_composition_new(rectangle ? cast(GstVideoOverlayRectangle*)rectangle._cPtr(No.Dup) : null);
@@ -95,7 +95,7 @@ class VideoOverlayComposition : gobject.boxed.Boxed
         rectangle = a #GstVideoOverlayRectangle to add to the
               composition
   */
-  void addRectangle(gstvideo.video_overlay_rectangle.VideoOverlayRectangle rectangle)
+  void addRectangle(gstvideo.video_overlay_rectangle.VideoOverlayRectangle rectangle) nothrow
   {
     gst_video_overlay_composition_add_rectangle(cast(GstVideoOverlayComposition*)this._cPtr, rectangle ? cast(GstVideoOverlayRectangle*)rectangle._cPtr(No.Dup) : null);
   }
@@ -113,7 +113,7 @@ class VideoOverlayComposition : gobject.boxed.Boxed
                       supported format. It should be mapped using GST_MAP_READWRITE
       Returns: 
   */
-  bool blend(gstvideo.video_frame.VideoFrame videoBuf)
+  bool blend(gstvideo.video_frame.VideoFrame videoBuf) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_overlay_composition_blend(cast(GstVideoOverlayComposition*)this._cPtr, videoBuf ? cast(GstVideoFrame*)videoBuf._cPtr : null);
@@ -129,7 +129,7 @@ class VideoOverlayComposition : gobject.boxed.Boxed
       Returns: a new #GstVideoOverlayComposition equivalent
             to comp.
   */
-  gstvideo.video_overlay_composition.VideoOverlayComposition copy()
+  gstvideo.video_overlay_composition.VideoOverlayComposition copy() nothrow
   {
     GstVideoOverlayComposition* _cretval;
     _cretval = gst_video_overlay_composition_copy(cast(GstVideoOverlayComposition*)this._cPtr);
@@ -147,7 +147,7 @@ class VideoOverlayComposition : gobject.boxed.Boxed
             obtain her own reference using gst_video_overlay_rectangle_ref()
             if needed.
   */
-  gstvideo.video_overlay_rectangle.VideoOverlayRectangle getRectangle(uint n)
+  gstvideo.video_overlay_rectangle.VideoOverlayRectangle getRectangle(uint n) nothrow
   {
     GstVideoOverlayRectangle* _cretval;
     _cretval = gst_video_overlay_composition_get_rectangle(cast(GstVideoOverlayComposition*)this._cPtr, n);
@@ -162,7 +162,7 @@ class VideoOverlayComposition : gobject.boxed.Boxed
       a composition).
       Returns: the sequence number of comp
   */
-  uint getSeqnum()
+  uint getSeqnum() nothrow
   {
     uint _retval;
     _retval = gst_video_overlay_composition_get_seqnum(cast(GstVideoOverlayComposition*)this._cPtr);
@@ -178,7 +178,7 @@ class VideoOverlayComposition : gobject.boxed.Boxed
       Returns: a writable #GstVideoOverlayComposition
             equivalent to comp.
   */
-  gstvideo.video_overlay_composition.VideoOverlayComposition makeWritable()
+  gstvideo.video_overlay_composition.VideoOverlayComposition makeWritable() nothrow
   {
     GstVideoOverlayComposition* _cretval;
     _cretval = gst_video_overlay_composition_make_writable(cast(GstVideoOverlayComposition*)this._cPtr);
@@ -190,7 +190,7 @@ class VideoOverlayComposition : gobject.boxed.Boxed
       Returns the number of #GstVideoOverlayRectangle<!-- -->s contained in comp.
       Returns: the number of rectangles
   */
-  uint nRectangles()
+  uint nRectangles() nothrow
   {
     uint _retval;
     _retval = gst_video_overlay_composition_n_rectangles(cast(GstVideoOverlayComposition*)this._cPtr);

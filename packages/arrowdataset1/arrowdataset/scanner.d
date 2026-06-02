@@ -17,26 +17,26 @@ class Scanner : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_scanner_get_type != &gidSymbolNotFound ? gadataset_scanner_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Scanner self()
+  override Scanner self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class Scanner : gobject.object.ObjectWrap
       Get builder for [arrowdataset.scanner.Scanner]
       Returns: New builder object
   */
-  static ScannerGidBuilder builder()
+  static ScannerGidBuilder builder() nothrow
   {
     return new ScannerGidBuilder;
   }
@@ -80,7 +80,7 @@ class ScannerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T scanner(void* propval)
+  T scanner(void* propval) nothrow
   {
     return setProperty("scanner", propval);
   }
@@ -93,7 +93,7 @@ final class ScannerGidBuilder : ScannerGidBuilderImpl!ScannerGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Scanner build()
+  Scanner build() nothrow
   {
     return new Scanner(cast(void*)createGObject(Scanner._getGType), No.Take);
   }

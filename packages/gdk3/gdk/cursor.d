@@ -19,26 +19,26 @@ class Cursor : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_cursor_get_type != &gidSymbolNotFound ? gdk_cursor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Cursor self()
+  override Cursor self() nothrow
   {
     return this;
   }
@@ -47,19 +47,19 @@ class Cursor : gobject.object.ObjectWrap
       Get builder for [gdk.cursor.Cursor]
       Returns: New builder object
   */
-  static CursorGidBuilder builder()
+  static CursorGidBuilder builder() nothrow
   {
     return new CursorGidBuilder;
   }
 
   /** */
-  @property gdk.types.CursorType cursorType()
+  @property gdk.types.CursorType cursorType() nothrow
   {
     return getCursorType();
   }
 
   /** */
-  @property gdk.display.Display display()
+  @property gdk.display.Display display() nothrow
   {
     return getDisplay();
   }
@@ -76,7 +76,7 @@ class Cursor : gobject.object.ObjectWrap
   
       Deprecated: Use [gdk.cursor.Cursor.newForDisplay] instead.
   */
-  this(gdk.types.CursorType cursorType)
+  this(gdk.types.CursorType cursorType) nothrow
   {
     GdkCursor* _cretval;
     _cretval = gdk_cursor_new(cursorType);
@@ -91,7 +91,7 @@ class Cursor : gobject.object.ObjectWrap
         cursorType = cursor to create
       Returns: a new #GdkCursor, or null on failure
   */
-  static gdk.cursor.Cursor newForDisplay(gdk.display.Display display, gdk.types.CursorType cursorType)
+  static gdk.cursor.Cursor newForDisplay(gdk.display.Display display, gdk.types.CursorType cursorType) nothrow
   {
     GdkCursor* _cretval;
     _cretval = gdk_cursor_new_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, cursorType);
@@ -147,7 +147,7 @@ class Cursor : gobject.object.ObjectWrap
       Returns: a new #GdkCursor, or null if there is no
           cursor with the given name
   */
-  static gdk.cursor.Cursor newFromName(gdk.display.Display display, string name)
+  static gdk.cursor.Cursor newFromName(gdk.display.Display display, string name) nothrow
   {
     GdkCursor* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -183,7 +183,7 @@ class Cursor : gobject.object.ObjectWrap
         y = the vertical offset of the “hotspot” of the cursor.
       Returns: a new #GdkCursor.
   */
-  static gdk.cursor.Cursor newFromPixbuf(gdk.display.Display display, gdkpixbuf.pixbuf.Pixbuf pixbuf, int x, int y)
+  static gdk.cursor.Cursor newFromPixbuf(gdk.display.Display display, gdkpixbuf.pixbuf.Pixbuf pixbuf, int x, int y) nothrow
   {
     GdkCursor* _cretval;
     _cretval = gdk_cursor_new_from_pixbuf(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null, x, y);
@@ -213,7 +213,7 @@ class Cursor : gobject.object.ObjectWrap
         y = the vertical offset of the “hotspot” of the cursor
       Returns: a new #GdkCursor.
   */
-  static gdk.cursor.Cursor newFromSurface(gdk.display.Display display, cairo.surface.Surface surface, double x, double y)
+  static gdk.cursor.Cursor newFromSurface(gdk.display.Display display, cairo.surface.Surface surface, double x, double y) nothrow
   {
     GdkCursor* _cretval;
     _cretval = gdk_cursor_new_from_surface(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null, x, y);
@@ -225,7 +225,7 @@ class Cursor : gobject.object.ObjectWrap
       Returns the cursor type for this cursor.
       Returns: a #GdkCursorType
   */
-  gdk.types.CursorType getCursorType()
+  gdk.types.CursorType getCursorType() nothrow
   {
     GdkCursorType _cretval;
     _cretval = gdk_cursor_get_cursor_type(cast(GdkCursor*)this._cPtr);
@@ -237,7 +237,7 @@ class Cursor : gobject.object.ObjectWrap
       Returns the display on which the #GdkCursor is defined.
       Returns: the #GdkDisplay associated to cursor
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gdk_cursor_get_display(cast(GdkCursor*)this._cPtr);
@@ -254,7 +254,7 @@ class Cursor : gobject.object.ObjectWrap
       Returns: a #GdkPixbuf representing
           cursor, or null
   */
-  gdkpixbuf.pixbuf.Pixbuf getImage()
+  gdkpixbuf.pixbuf.Pixbuf getImage() nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gdk_cursor_get_image(cast(GdkCursor*)this._cPtr);
@@ -277,7 +277,7 @@ class Cursor : gobject.object.ObjectWrap
       Returns: a #cairo_surface_t
           representing cursor, or null
   */
-  cairo.surface.Surface getSurface(out double xHot, out double yHot)
+  cairo.surface.Surface getSurface(out double xHot, out double yHot) nothrow
   {
     cairo_surface_t* _cretval;
     _cretval = gdk_cursor_get_surface(cast(GdkCursor*)this._cPtr, cast(double*)&xHot, cast(double*)&yHot);
@@ -291,13 +291,13 @@ class CursorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T cursorType(gdk.types.CursorType propval)
+  T cursorType(gdk.types.CursorType propval) nothrow
   {
     return setProperty("cursor-type", propval);
   }
 
   /** */
-  T display(gdk.display.Display propval)
+  T display(gdk.display.Display propval) nothrow
   {
     return setProperty("display", propval);
   }
@@ -310,7 +310,7 @@ final class CursorGidBuilder : CursorGidBuilderImpl!CursorGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Cursor build()
+  Cursor build() nothrow
   {
     return new Cursor(cast(void*)createGObject(Cursor._getGType), Yes.Take);
   }

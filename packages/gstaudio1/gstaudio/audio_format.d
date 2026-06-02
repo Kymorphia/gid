@@ -23,7 +23,7 @@ struct AudioFormat
       Returns: a #GstAudioFormat or GST_AUDIO_FORMAT_UNKNOWN when no audio format
         exists with the given parameters.
   */
-  static gstaudio.types.AudioFormat buildInteger(bool sign, int endianness, int width, int depth)
+  static gstaudio.types.AudioFormat buildInteger(bool sign, int endianness, int width, int depth) nothrow
   {
     GstAudioFormat _cretval;
     _cretval = gst_audio_format_build_integer(sign, endianness, width, depth);
@@ -41,7 +41,7 @@ struct AudioFormat
   
       Deprecated: Use [gstaudio.audio_format_info.AudioFormatInfo.fillSilence] instead.
   */
-  static void fillSilence(gstaudio.audio_format_info.AudioFormatInfo info, ubyte[] dest)
+  static void fillSilence(gstaudio.audio_format_info.AudioFormatInfo info, ubyte[] dest) nothrow
   {
     size_t _length;
     if (dest)
@@ -59,7 +59,7 @@ struct AudioFormat
       Returns: the #GstAudioFormat for format or GST_AUDIO_FORMAT_UNKNOWN when the
         string is not a known format.
   */
-  static gstaudio.types.AudioFormat fromString(string format)
+  static gstaudio.types.AudioFormat fromString(string format) nothrow
   {
     GstAudioFormat _cretval;
     const(char)* _format = format.toCString(No.Alloc);
@@ -75,7 +75,7 @@ struct AudioFormat
         format = a #GstAudioFormat
       Returns: The #GstAudioFormatInfo for format.
   */
-  static gstaudio.audio_format_info.AudioFormatInfo getInfo(gstaudio.types.AudioFormat format)
+  static gstaudio.audio_format_info.AudioFormatInfo getInfo(gstaudio.types.AudioFormat format) nothrow
   {
     const(GstAudioFormatInfo)* _cretval;
     _cretval = gst_audio_format_get_info(format);
@@ -84,7 +84,7 @@ struct AudioFormat
   }
 
   /** */
-  static string toString_(gstaudio.types.AudioFormat format)
+  static string toString_(gstaudio.types.AudioFormat format) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_audio_format_to_string(format);

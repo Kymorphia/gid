@@ -22,11 +22,8 @@ class CustomMeta
   GstCustomMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gst.custom_meta.CustomMeta");
-
     _cInstance = *cast(GstCustomMeta*)ptr;
 
     if (take)
@@ -34,7 +31,7 @@ class CustomMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -43,7 +40,7 @@ class CustomMeta
       Get `meta` field.
       Returns: parent #GstMeta
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstCustomMeta*)this._cPtr).meta, No.Take);
   }
@@ -52,7 +49,7 @@ class CustomMeta
       Get `structure` field.
       Returns: #GstStructure containing custom metadata.
   */
-  @property gst.structure.Structure structure()
+  @property gst.structure.Structure structure() nothrow
   {
     return cToD!(gst.structure.Structure)(cast(void*)(cast(GstCustomMeta*)this._cPtr).structure);
   }
@@ -62,7 +59,7 @@ class CustomMeta
       is conditioned to the writability of the #GstBuffer meta is attached to.
       Returns: the #GstStructure backing meta
   */
-  gst.structure.Structure getStructure()
+  gst.structure.Structure getStructure() nothrow
   {
     GstStructure* _cretval;
     _cretval = gst_custom_meta_get_structure(cast(GstCustomMeta*)this._cPtr);
@@ -77,7 +74,7 @@ class CustomMeta
         name = 
       Returns: Whether name is the name of the custom meta
   */
-  bool hasName(string name)
+  bool hasName(string name) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);

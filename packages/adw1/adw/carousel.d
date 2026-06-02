@@ -44,26 +44,26 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_carousel_get_type != &gidSymbolNotFound ? adw_carousel_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Carousel self()
+  override Carousel self() nothrow
   {
     return this;
   }
@@ -72,7 +72,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Get builder for [adw.carousel.Carousel]
       Returns: New builder object
   */
-  static CarouselGidBuilder builder()
+  static CarouselGidBuilder builder() nothrow
   {
     return new CarouselGidBuilder;
   }
@@ -83,7 +83,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
         
         If the value is `FALSE`, each swipe can only move to the adjacent pages.
   */
-  @property bool allowLongSwipes()
+  @property bool allowLongSwipes() nothrow
   {
     return getAllowLongSwipes();
   }
@@ -95,7 +95,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
           
           If the value is `FALSE`, each swipe can only move to the adjacent pages.
   */
-  @property void allowLongSwipes(bool propval)
+  @property void allowLongSwipes(bool propval) nothrow
   {
     setAllowLongSwipes(propval);
   }
@@ -106,7 +106,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
         
         If the value is `FALSE`, dragging is only available on touch.
   */
-  @property bool allowMouseDrag()
+  @property bool allowMouseDrag() nothrow
   {
     return getAllowMouseDrag();
   }
@@ -118,7 +118,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
           
           If the value is `FALSE`, dragging is only available on touch.
   */
-  @property void allowMouseDrag(bool propval)
+  @property void allowMouseDrag(bool propval) nothrow
   {
     setAllowMouseDrag(propval);
   }
@@ -129,7 +129,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
         
         If the value is `FALSE`, wheel events will be ignored.
   */
-  @property bool allowScrollWheel()
+  @property bool allowScrollWheel() nothrow
   {
     return getAllowScrollWheel();
   }
@@ -141,7 +141,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
           
           If the value is `FALSE`, wheel events will be ignored.
   */
-  @property void allowScrollWheel(bool propval)
+  @property void allowScrollWheel(bool propval) nothrow
   {
     setAllowScrollWheel(propval);
   }
@@ -153,7 +153,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
         This can be used to temporarily disable the carousel to only allow
         navigating it in a certain state.
   */
-  @property bool interactive()
+  @property bool interactive() nothrow
   {
     return getInteractive();
   }
@@ -166,7 +166,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
           This can be used to temporarily disable the carousel to only allow
           navigating it in a certain state.
   */
-  @property void interactive(bool propval)
+  @property void interactive(bool propval) nothrow
   {
     setInteractive(propval);
   }
@@ -175,7 +175,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Get `nPages` property.
       Returns: The number of pages in a [adw.carousel.Carousel].
   */
-  @property uint nPages()
+  @property uint nPages() nothrow
   {
     return getNPages();
   }
@@ -186,7 +186,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
         
         1 matches 1 page. Use [adw.carousel.Carousel.scrollTo] for changing it.
   */
-  @property double position()
+  @property double position() nothrow
   {
     return getPosition();
   }
@@ -197,7 +197,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
         
         Reveal duration is used when animating adding or removing pages.
   */
-  @property uint revealDuration()
+  @property uint revealDuration() nothrow
   {
     return getRevealDuration();
   }
@@ -209,7 +209,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
           
           Reveal duration is used when animating adding or removing pages.
   */
-  @property void revealDuration(uint propval)
+  @property void revealDuration(uint propval) nothrow
   {
     setRevealDuration(propval);
   }
@@ -224,7 +224,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
         adw_spring_params_new (1, 0.5, 500)
         ```
   */
-  @property adw.spring_params.SpringParams scrollParams()
+  @property adw.spring_params.SpringParams scrollParams() nothrow
   {
     return getScrollParams();
   }
@@ -240,7 +240,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
           adw_spring_params_new (1, 0.5, 500)
           ```
   */
-  @property void scrollParams(adw.spring_params.SpringParams propval)
+  @property void scrollParams(adw.spring_params.SpringParams propval) nothrow
   {
     setScrollParams(propval);
   }
@@ -249,7 +249,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Get `spacing` property.
       Returns: Spacing between pages in pixels.
   */
-  @property uint spacing()
+  @property uint spacing() nothrow
   {
     return getSpacing();
   }
@@ -259,7 +259,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Params:
         propval = Spacing between pages in pixels.
   */
-  @property void spacing(uint propval)
+  @property void spacing(uint propval) nothrow
   {
     setSpacing(propval);
   }
@@ -271,7 +271,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Creates a new [adw.carousel.Carousel].
       Returns: the newly created [adw.carousel.Carousel]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_carousel_new();
@@ -284,7 +284,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Params:
         child = a widget to add
   */
-  void append(gtk.widget.Widget child)
+  void append(gtk.widget.Widget child) nothrow
   {
     adw_carousel_append(cast(AdwCarousel*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -293,7 +293,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Gets whether to allow swiping for more than one page at a time.
       Returns: `TRUE` if long swipes are allowed
   */
-  bool getAllowLongSwipes()
+  bool getAllowLongSwipes() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_carousel_get_allow_long_swipes(cast(AdwCarousel*)this._cPtr);
@@ -304,7 +304,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Sets whether self can be dragged with mouse pointer.
       Returns: whether self can be dragged with mouse pointer
   */
-  bool getAllowMouseDrag()
+  bool getAllowMouseDrag() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_carousel_get_allow_mouse_drag(cast(AdwCarousel*)this._cPtr);
@@ -315,7 +315,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Gets whether self will respond to scroll wheel events.
       Returns: `TRUE` if self will respond to scroll wheel events
   */
-  bool getAllowScrollWheel()
+  bool getAllowScrollWheel() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_carousel_get_allow_scroll_wheel(cast(AdwCarousel*)this._cPtr);
@@ -326,7 +326,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Gets whether self can be navigated.
       Returns: whether self can be navigated
   */
-  bool getInteractive()
+  bool getInteractive() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_carousel_get_interactive(cast(AdwCarousel*)this._cPtr);
@@ -337,7 +337,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Gets the number of pages in self.
       Returns: the number of pages in self
   */
-  uint getNPages()
+  uint getNPages() nothrow
   {
     uint _retval;
     _retval = adw_carousel_get_n_pages(cast(AdwCarousel*)this._cPtr);
@@ -351,7 +351,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
         n = index of the page
       Returns: the page
   */
-  gtk.widget.Widget getNthPage(uint n)
+  gtk.widget.Widget getNthPage(uint n) nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_carousel_get_nth_page(cast(AdwCarousel*)this._cPtr, n);
@@ -365,7 +365,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       1 matches 1 page. Use [adw.carousel.Carousel.scrollTo] for changing it.
       Returns: the scroll position
   */
-  double getPosition()
+  double getPosition() nothrow
   {
     double _retval;
     _retval = adw_carousel_get_position(cast(AdwCarousel*)this._cPtr);
@@ -376,7 +376,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Gets the page reveal duration, in milliseconds.
       Returns: the duration
   */
-  uint getRevealDuration()
+  uint getRevealDuration() nothrow
   {
     uint _retval;
     _retval = adw_carousel_get_reveal_duration(cast(AdwCarousel*)this._cPtr);
@@ -387,7 +387,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Gets the scroll animation spring parameters for self.
       Returns: the animation parameters
   */
-  adw.spring_params.SpringParams getScrollParams()
+  adw.spring_params.SpringParams getScrollParams() nothrow
   {
     AdwSpringParams* _cretval;
     _cretval = adw_carousel_get_scroll_params(cast(AdwCarousel*)this._cPtr);
@@ -399,7 +399,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Gets spacing between pages in pixels.
       Returns: spacing between pages
   */
-  uint getSpacing()
+  uint getSpacing() nothrow
   {
     uint _retval;
     _retval = adw_carousel_get_spacing(cast(AdwCarousel*)this._cPtr);
@@ -416,7 +416,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
         child = a widget to add
         position = the position to insert child at
   */
-  void insert(gtk.widget.Widget child, int position)
+  void insert(gtk.widget.Widget child, int position) nothrow
   {
     adw_carousel_insert(cast(AdwCarousel*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, position);
   }
@@ -427,7 +427,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Params:
         child = a widget to add
   */
-  void prepend(gtk.widget.Widget child)
+  void prepend(gtk.widget.Widget child) nothrow
   {
     adw_carousel_prepend(cast(AdwCarousel*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -438,7 +438,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Params:
         child = a widget to remove
   */
-  void remove(gtk.widget.Widget child)
+  void remove(gtk.widget.Widget child) nothrow
   {
     adw_carousel_remove(cast(AdwCarousel*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -453,7 +453,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
         child = a widget to add
         position = the position to move child to
   */
-  void reorder(gtk.widget.Widget child, int position)
+  void reorder(gtk.widget.Widget child, int position) nothrow
   {
     adw_carousel_reorder(cast(AdwCarousel*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, position);
   }
@@ -467,7 +467,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
         widget = a child of self
         animate = whether to animate the transition
   */
-  void scrollTo(gtk.widget.Widget widget, bool animate)
+  void scrollTo(gtk.widget.Widget widget, bool animate) nothrow
   {
     adw_carousel_scroll_to(cast(AdwCarousel*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, animate);
   }
@@ -481,7 +481,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Params:
         allowLongSwipes = whether to allow long swipes
   */
-  void setAllowLongSwipes(bool allowLongSwipes)
+  void setAllowLongSwipes(bool allowLongSwipes) nothrow
   {
     adw_carousel_set_allow_long_swipes(cast(AdwCarousel*)this._cPtr, allowLongSwipes);
   }
@@ -494,7 +494,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Params:
         allowMouseDrag = whether self can be dragged with mouse pointer
   */
-  void setAllowMouseDrag(bool allowMouseDrag)
+  void setAllowMouseDrag(bool allowMouseDrag) nothrow
   {
     adw_carousel_set_allow_mouse_drag(cast(AdwCarousel*)this._cPtr, allowMouseDrag);
   }
@@ -507,7 +507,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Params:
         allowScrollWheel = whether self will respond to scroll wheel events
   */
-  void setAllowScrollWheel(bool allowScrollWheel)
+  void setAllowScrollWheel(bool allowScrollWheel) nothrow
   {
     adw_carousel_set_allow_scroll_wheel(cast(AdwCarousel*)this._cPtr, allowScrollWheel);
   }
@@ -521,7 +521,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Params:
         interactive = whether self can be navigated
   */
-  void setInteractive(bool interactive)
+  void setInteractive(bool interactive) nothrow
   {
     adw_carousel_set_interactive(cast(AdwCarousel*)this._cPtr, interactive);
   }
@@ -534,7 +534,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Params:
         revealDuration = the new reveal duration value
   */
-  void setRevealDuration(uint revealDuration)
+  void setRevealDuration(uint revealDuration) nothrow
   {
     adw_carousel_set_reveal_duration(cast(AdwCarousel*)this._cPtr, revealDuration);
   }
@@ -551,7 +551,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Params:
         params = the new parameters
   */
-  void setScrollParams(adw.spring_params.SpringParams params)
+  void setScrollParams(adw.spring_params.SpringParams params) nothrow
   {
     adw_carousel_set_scroll_params(cast(AdwCarousel*)this._cPtr, params ? cast(AdwSpringParams*)params._cPtr(No.Dup) : null);
   }
@@ -562,7 +562,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Params:
         spacing = the new spacing value
   */
-  void setSpacing(uint spacing)
+  void setSpacing(uint spacing) nothrow
   {
     adw_carousel_set_spacing(cast(AdwCarousel*)this._cPtr, spacing);
   }
@@ -590,14 +590,14 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPageChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPageChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : adw.carousel.Carousel)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -609,7 +609,14 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.carousel.Carousel.pageChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -632,7 +639,7 @@ class CarouselGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeab
           If the value is `FALSE`, each swipe can only move to the adjacent pages.
       Returns: Builder instance for fluent chaining
   */
-  T allowLongSwipes(bool propval)
+  T allowLongSwipes(bool propval) nothrow
   {
     return setProperty("allow-long-swipes", propval);
   }
@@ -645,7 +652,7 @@ class CarouselGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeab
           If the value is `FALSE`, dragging is only available on touch.
       Returns: Builder instance for fluent chaining
   */
-  T allowMouseDrag(bool propval)
+  T allowMouseDrag(bool propval) nothrow
   {
     return setProperty("allow-mouse-drag", propval);
   }
@@ -658,7 +665,7 @@ class CarouselGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeab
           If the value is `FALSE`, wheel events will be ignored.
       Returns: Builder instance for fluent chaining
   */
-  T allowScrollWheel(bool propval)
+  T allowScrollWheel(bool propval) nothrow
   {
     return setProperty("allow-scroll-wheel", propval);
   }
@@ -672,7 +679,7 @@ class CarouselGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeab
           navigating it in a certain state.
       Returns: Builder instance for fluent chaining
   */
-  T interactive(bool propval)
+  T interactive(bool propval) nothrow
   {
     return setProperty("interactive", propval);
   }
@@ -685,7 +692,7 @@ class CarouselGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeab
           Reveal duration is used when animating adding or removing pages.
       Returns: Builder instance for fluent chaining
   */
-  T revealDuration(uint propval)
+  T revealDuration(uint propval) nothrow
   {
     return setProperty("reveal-duration", propval);
   }
@@ -702,7 +709,7 @@ class CarouselGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeab
           ```
       Returns: Builder instance for fluent chaining
   */
-  T scrollParams(adw.spring_params.SpringParams propval)
+  T scrollParams(adw.spring_params.SpringParams propval) nothrow
   {
     return setProperty("scroll-params", propval);
   }
@@ -713,7 +720,7 @@ class CarouselGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeab
         propval = Spacing between pages in pixels.
       Returns: Builder instance for fluent chaining
   */
-  T spacing(uint propval)
+  T spacing(uint propval) nothrow
   {
     return setProperty("spacing", propval);
   }
@@ -726,7 +733,7 @@ final class CarouselGidBuilder : CarouselGidBuilderImpl!CarouselGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Carousel build()
+  Carousel build() nothrow
   {
     return new Carousel(cast(void*)createGObject(Carousel._getGType), No.Take);
   }

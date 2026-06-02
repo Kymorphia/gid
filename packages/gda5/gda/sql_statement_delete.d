@@ -13,11 +13,8 @@ class SqlStatementDelete
   GdaSqlStatementDelete _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.sql_statement_delete.SqlStatementDelete");
-
     _cInstance = *cast(GdaSqlStatementDelete*)ptr;
 
     if (take)
@@ -25,7 +22,7 @@ class SqlStatementDelete
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }

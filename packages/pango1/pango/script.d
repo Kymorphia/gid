@@ -32,7 +32,7 @@ struct Script
   
       Deprecated: Use [glib.global.unicharGetScript]
   */
-  static pango.types.Script forUnichar(dchar ch)
+  static pango.types.Script forUnichar(dchar ch) nothrow
   {
     PangoScript _cretval;
     _cretval = pango_script_for_unichar(ch);
@@ -76,7 +76,7 @@ struct Script
       Returns: a [pango.language.Language] that is representative
           of the script
   */
-  static pango.language.Language getSampleLanguage(pango.types.Script script)
+  static pango.language.Language getSampleLanguage(pango.types.Script script) nothrow
   {
     PangoLanguage* _cretval;
     _cretval = pango_script_get_sample_language(script);

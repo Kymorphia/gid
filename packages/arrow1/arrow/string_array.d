@@ -15,26 +15,26 @@ class StringArray : arrow.binary_array.BinaryArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_string_array_get_type != &gidSymbolNotFound ? garrow_string_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StringArray self()
+  override StringArray self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class StringArray : arrow.binary_array.BinaryArray
       Get builder for [arrow.string_array.StringArray]
       Returns: New builder object
   */
-  static StringArrayGidBuilder builder()
+  static StringArrayGidBuilder builder() nothrow
   {
     return new StringArrayGidBuilder;
   }
 
   /** */
-  this(long length, arrow.buffer.Buffer valueOffsets, arrow.buffer.Buffer valueData, arrow.buffer.Buffer nullBitmap, long nNulls)
+  this(long length, arrow.buffer.Buffer valueOffsets, arrow.buffer.Buffer valueData, arrow.buffer.Buffer nullBitmap, long nNulls) nothrow
   {
     GArrowStringArray* _cretval;
     _cretval = garrow_string_array_new(length, valueOffsets ? cast(GArrowBuffer*)valueOffsets._cPtr(No.Dup) : null, valueData ? cast(GArrowBuffer*)valueData._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
@@ -57,7 +57,7 @@ class StringArray : arrow.binary_array.BinaryArray
   }
 
   /** */
-  string getString(long i)
+  string getString(long i) nothrow
   {
     char* _cretval;
     _cretval = garrow_string_array_get_string(cast(GArrowStringArray*)this._cPtr, i);
@@ -78,7 +78,7 @@ final class StringArrayGidBuilder : StringArrayGidBuilderImpl!StringArrayGidBuil
       Create object from builder.
       Returns: New object
   */
-  StringArray build()
+  StringArray build() nothrow
   {
     return new StringArray(cast(void*)createGObject(StringArray._getGType), Yes.Take);
   }

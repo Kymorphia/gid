@@ -25,26 +25,26 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_converter_output_stream_get_type != &gidSymbolNotFound ? g_converter_output_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ConverterOutputStream self()
+  override ConverterOutputStream self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
       Get builder for [gio.converter_output_stream.ConverterOutputStream]
       Returns: New builder object
   */
-  static ConverterOutputStreamGidBuilder builder()
+  static ConverterOutputStreamGidBuilder builder() nothrow
   {
     return new ConverterOutputStreamGidBuilder;
   }
@@ -62,7 +62,7 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
       Get `converter` property.
       Returns: The converter object.
   */
-  @property gio.converter.Converter converter()
+  @property gio.converter.Converter converter() nothrow
   {
     return getConverter();
   }
@@ -77,7 +77,7 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
         converter = a #GConverter
       Returns: a new #GOutputStream.
   */
-  this(gio.output_stream.OutputStream baseStream, gio.converter.Converter converter)
+  this(gio.output_stream.OutputStream baseStream, gio.converter.Converter converter) nothrow
   {
     GOutputStream* _cretval;
     _cretval = g_converter_output_stream_new(baseStream ? cast(GOutputStream*)baseStream._cPtr(No.Dup) : null, converter ? cast(GConverter*)(cast(gobject.object.ObjectWrap)converter)._cPtr(No.Dup) : null);
@@ -88,7 +88,7 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
       Gets the #GConverter that is used by converter_stream.
       Returns: the converter of the converter output stream
   */
-  gio.converter.Converter getConverter()
+  gio.converter.Converter getConverter() nothrow
   {
     GConverter* _cretval;
     _cretval = g_converter_output_stream_get_converter(cast(GConverterOutputStream*)this._cPtr);
@@ -109,7 +109,7 @@ class ConverterOutputStreamGidBuilderImpl(T) : gio.filter_output_stream.FilterOu
         propval = The converter object.
       Returns: Builder instance for fluent chaining
   */
-  T converter(gio.converter.Converter propval)
+  T converter(gio.converter.Converter propval) nothrow
   {
     return setProperty("converter", propval);
   }
@@ -122,7 +122,7 @@ final class ConverterOutputStreamGidBuilder : ConverterOutputStreamGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  ConverterOutputStream build()
+  ConverterOutputStream build() nothrow
   {
     return new ConverterOutputStream(cast(void*)createGObject(ConverterOutputStream._getGType), Yes.Take);
   }

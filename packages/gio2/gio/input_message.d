@@ -33,11 +33,8 @@ class InputMessage
   GInputMessage _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gio.input_message.InputMessage");
-
     _cInstance = *cast(GInputMessage*)ptr;
 
     if (take)
@@ -45,7 +42,7 @@ class InputMessage
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -54,7 +51,7 @@ class InputMessage
       Get `numVectors` field.
       Returns: the number of input vectors pointed to by @vectors
   */
-  @property uint numVectors()
+  @property uint numVectors() nothrow
   {
     return (cast(GInputMessage*)this._cPtr).numVectors;
   }
@@ -64,7 +61,7 @@ class InputMessage
       Params:
         propval = the number of input vectors pointed to by @vectors
   */
-  @property void numVectors(uint propval)
+  @property void numVectors(uint propval) nothrow
   {
     (cast(GInputMessage*)this._cPtr).numVectors = propval;
   }
@@ -74,7 +71,7 @@ class InputMessage
       Returns: will be set to the number of bytes that have been
           received
   */
-  @property size_t bytesReceived()
+  @property size_t bytesReceived() nothrow
   {
     return (cast(GInputMessage*)this._cPtr).bytesReceived;
   }
@@ -85,7 +82,7 @@ class InputMessage
         propval = will be set to the number of bytes that have been
             received
   */
-  @property void bytesReceived(size_t propval)
+  @property void bytesReceived(size_t propval) nothrow
   {
     (cast(GInputMessage*)this._cPtr).bytesReceived = propval;
   }
@@ -95,7 +92,7 @@ class InputMessage
       Returns: collection of #GSocketMsgFlags for the received message,
           outputted by the call
   */
-  @property int flags()
+  @property int flags() nothrow
   {
     return (cast(GInputMessage*)this._cPtr).flags;
   }
@@ -106,7 +103,7 @@ class InputMessage
         propval = collection of #GSocketMsgFlags for the received message,
             outputted by the call
   */
-  @property void flags(int propval)
+  @property void flags(int propval) nothrow
   {
     (cast(GInputMessage*)this._cPtr).flags = propval;
   }

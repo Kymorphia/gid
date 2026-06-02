@@ -19,26 +19,26 @@ class CairoRenderer : gsk.renderer.Renderer
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_cairo_renderer_get_type != &gidSymbolNotFound ? gsk_cairo_renderer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CairoRenderer self()
+  override CairoRenderer self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class CairoRenderer : gsk.renderer.Renderer
       Get builder for [gsk.cairo_renderer.CairoRenderer]
       Returns: New builder object
   */
-  static CairoRendererGidBuilder builder()
+  static CairoRendererGidBuilder builder() nothrow
   {
     return new CairoRendererGidBuilder;
   }
@@ -63,7 +63,7 @@ class CairoRenderer : gsk.renderer.Renderer
       avoided.
       Returns: a new Cairo renderer.
   */
-  this()
+  this() nothrow
   {
     GskRenderer* _cretval;
     _cretval = gsk_cairo_renderer_new();
@@ -83,7 +83,7 @@ final class CairoRendererGidBuilder : CairoRendererGidBuilderImpl!CairoRendererG
       Create object from builder.
       Returns: New object
   */
-  CairoRenderer build()
+  CairoRenderer build() nothrow
   {
     return new CairoRenderer(cast(void*)createGObject(CairoRenderer._getGType), Yes.Take);
   }

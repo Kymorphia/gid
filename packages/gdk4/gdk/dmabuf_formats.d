@@ -34,32 +34,32 @@ class DmabufFormats : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_dmabuf_formats_get_type != &gidSymbolNotFound ? gdk_dmabuf_formats_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DmabufFormats self()
+  override DmabufFormats self() nothrow
   {
     return this;
   }
@@ -73,7 +73,7 @@ class DmabufFormats : gobject.boxed.Boxed
       Returns: `TRUE` if the format specified by the arguments
           is part of formats
   */
-  bool contains(uint fourcc, ulong modifier)
+  bool contains(uint fourcc, ulong modifier) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_dmabuf_formats_contains(cast(GdkDmabufFormats*)this._cPtr, fourcc, modifier);
@@ -88,7 +88,7 @@ class DmabufFormats : gobject.boxed.Boxed
         formats2 = another [gdk.dmabuf_formats.DmabufFormats]
       Returns: `TRUE` if formats1 and formats2 are equal
   */
-  bool equal(gdk.dmabuf_formats.DmabufFormats formats2 = null)
+  bool equal(gdk.dmabuf_formats.DmabufFormats formats2 = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_dmabuf_formats_equal(cast(const(GdkDmabufFormats)*)this._cPtr, formats2 ? cast(const(GdkDmabufFormats)*)formats2._cPtr(No.Dup) : null);
@@ -104,7 +104,7 @@ class DmabufFormats : gobject.boxed.Boxed
         fourcc = return location for the format code
         modifier = return location for the format modifier
   */
-  void getFormat(size_t idx, out uint fourcc, out ulong modifier)
+  void getFormat(size_t idx, out uint fourcc, out ulong modifier) nothrow
   {
     gdk_dmabuf_formats_get_format(cast(GdkDmabufFormats*)this._cPtr, idx, cast(uint*)&fourcc, cast(ulong*)&modifier);
   }
@@ -118,7 +118,7 @@ class DmabufFormats : gobject.boxed.Boxed
       always return zero.
       Returns: the number of formats
   */
-  size_t getNFormats()
+  size_t getNFormats() nothrow
   {
     size_t _retval;
     _retval = gdk_dmabuf_formats_get_n_formats(cast(GdkDmabufFormats*)this._cPtr);

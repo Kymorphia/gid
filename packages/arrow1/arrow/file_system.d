@@ -20,26 +20,26 @@ class FileSystem : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_file_system_get_type != &gidSymbolNotFound ? garrow_file_system_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileSystem self()
+  override FileSystem self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class FileSystem : gobject.object.ObjectWrap
       Get builder for [arrow.file_system.FileSystem]
       Returns: New builder object
   */
-  static FileSystemGidBuilder builder()
+  static FileSystemGidBuilder builder() nothrow
   {
     return new FileSystemGidBuilder;
   }
@@ -286,7 +286,7 @@ class FileSystem : gobject.object.ObjectWrap
   }
 
   /** */
-  string getTypeName()
+  string getTypeName() nothrow
   {
     char* _cretval;
     _cretval = garrow_file_system_get_type_name(cast(GArrowFileSystem*)this._cPtr);
@@ -411,7 +411,7 @@ class FileSystemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T fileSystem(void* propval)
+  T fileSystem(void* propval) nothrow
   {
     return setProperty("file-system", propval);
   }
@@ -424,7 +424,7 @@ final class FileSystemGidBuilder : FileSystemGidBuilderImpl!FileSystemGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FileSystem build()
+  FileSystem build() nothrow
   {
     return new FileSystem(cast(void*)createGObject(FileSystem._getGType), No.Take);
   }

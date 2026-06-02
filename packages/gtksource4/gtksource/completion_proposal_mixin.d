@@ -22,7 +22,7 @@ template CompletionProposalT()
       implementations whenever the name, icon or info of the proposal has
       changed.
   */
-  override void changed()
+  override void changed() nothrow
   {
     gtk_source_completion_proposal_changed(cast(GtkSourceCompletionProposal*)this._cPtr);
   }
@@ -36,7 +36,7 @@ template CompletionProposalT()
         other = a #GtkSourceCompletionProposal.
       Returns: true if proposal and object are the same proposal
   */
-  override bool equal(gtksource.completion_proposal.CompletionProposal other)
+  override bool equal(gtksource.completion_proposal.CompletionProposal other) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_completion_proposal_equal(cast(GtkSourceCompletionProposal*)this._cPtr, other ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)other)._cPtr(No.Dup) : null);
@@ -47,7 +47,7 @@ template CompletionProposalT()
       Gets the #GIcon for the icon of proposal.
       Returns: A #GIcon with the icon of proposal.
   */
-  override gio.icon.Icon getGicon()
+  override gio.icon.Icon getGicon() nothrow
   {
     GIcon* _cretval;
     _cretval = gtk_source_completion_proposal_get_gicon(cast(GtkSourceCompletionProposal*)this._cPtr);
@@ -59,7 +59,7 @@ template CompletionProposalT()
       Gets the #GdkPixbuf for the icon of proposal.
       Returns: A #GdkPixbuf with the icon of proposal.
   */
-  override gdkpixbuf.pixbuf.Pixbuf getIcon()
+  override gdkpixbuf.pixbuf.Pixbuf getIcon() nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gtk_source_completion_proposal_get_icon(cast(GtkSourceCompletionProposal*)this._cPtr);
@@ -71,7 +71,7 @@ template CompletionProposalT()
       Gets the icon name of proposal.
       Returns: The icon name of proposal.
   */
-  override string getIconName()
+  override string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_completion_proposal_get_icon_name(cast(GtkSourceCompletionProposal*)this._cPtr);
@@ -87,7 +87,7 @@ template CompletionProposalT()
         extra information of proposal or null if no extra information is associated
         to proposal.
   */
-  override string getInfo()
+  override string getInfo() nothrow
   {
     char* _cretval;
     _cretval = gtk_source_completion_proposal_get_info(cast(GtkSourceCompletionProposal*)this._cPtr);
@@ -102,7 +102,7 @@ template CompletionProposalT()
       must be freed with [glib.global.gfree].
       Returns: a new string containing the label of proposal.
   */
-  override string getLabel()
+  override string getLabel() nothrow
   {
     char* _cretval;
     _cretval = gtk_source_completion_proposal_get_label(cast(GtkSourceCompletionProposal*)this._cPtr);
@@ -117,7 +117,7 @@ template CompletionProposalT()
       must be freed with [glib.global.gfree].
       Returns: a new string containing the label of proposal with markup.
   */
-  override string getMarkup()
+  override string getMarkup() nothrow
   {
     char* _cretval;
     _cretval = gtk_source_completion_proposal_get_markup(cast(GtkSourceCompletionProposal*)this._cPtr);
@@ -134,7 +134,7 @@ template CompletionProposalT()
       be freed with [glib.global.gfree].
       Returns: a new string containing the text of proposal.
   */
-  override string getText()
+  override string getText() nothrow
   {
     char* _cretval;
     _cretval = gtk_source_completion_proposal_get_text(cast(GtkSourceCompletionProposal*)this._cPtr);
@@ -148,7 +148,7 @@ template CompletionProposalT()
       model. By default, it uses a direct hash ([glib.global.directHash]).
       Returns: The hash value of proposal.
   */
-  override uint hash()
+  override uint hash() nothrow
   {
     uint _retval;
     _retval = gtk_source_completion_proposal_hash(cast(GtkSourceCompletionProposal*)this._cPtr);
@@ -171,13 +171,13 @@ template CompletionProposalT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.completion_proposal.CompletionProposal)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -186,7 +186,14 @@ template CompletionProposalT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.completion_proposal.CompletionProposal.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

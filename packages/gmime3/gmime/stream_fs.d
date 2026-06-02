@@ -18,26 +18,26 @@ class StreamFs : gmime.stream.Stream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_stream_fs_get_type != &gidSymbolNotFound ? g_mime_stream_fs_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StreamFs self()
+  override StreamFs self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class StreamFs : gmime.stream.Stream
       Get builder for [gmime.stream_fs.StreamFs]
       Returns: New builder object
   */
-  static StreamFsGidBuilder builder()
+  static StreamFsGidBuilder builder() nothrow
   {
     return new StreamFsGidBuilder;
   }
@@ -58,7 +58,7 @@ class StreamFs : gmime.stream.Stream
         fd = a file descriptor
       Returns: a stream using fd.
   */
-  this(int fd)
+  this(int fd) nothrow
   {
     GMimeStream* _cretval;
     _cretval = g_mime_stream_fs_new(fd);
@@ -75,7 +75,7 @@ class StreamFs : gmime.stream.Stream
         end = end boundary
       Returns: a stream using fd with bounds start and end.
   */
-  static gmime.stream_fs.StreamFs newWithBounds(int fd, long start, long end)
+  static gmime.stream_fs.StreamFs newWithBounds(int fd, long start, long end) nothrow
   {
     GMimeStream* _cretval;
     _cretval = g_mime_stream_fs_new_with_bounds(fd, start, end);
@@ -111,7 +111,7 @@ class StreamFs : gmime.stream.Stream
       Returns: true if stream owns the backend file descriptor or false
         otherwise.
   */
-  bool getOwner()
+  bool getOwner() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_stream_fs_get_owner(cast(GMimeStreamFs*)this._cPtr);
@@ -127,7 +127,7 @@ class StreamFs : gmime.stream.Stream
       Params:
         owner = true if this stream should own the file descriptor or false otherwise
   */
-  void setOwner(bool owner)
+  void setOwner(bool owner) nothrow
   {
     g_mime_stream_fs_set_owner(cast(GMimeStreamFs*)this._cPtr, owner);
   }
@@ -145,7 +145,7 @@ final class StreamFsGidBuilder : StreamFsGidBuilderImpl!StreamFsGidBuilder
       Create object from builder.
       Returns: New object
   */
-  StreamFs build()
+  StreamFs build() nothrow
   {
     return new StreamFs(cast(void*)createGObject(StreamFs._getGType), Yes.Take);
   }

@@ -16,11 +16,8 @@ class EventTouchpadPinch
   GdkEventTouchpadPinch _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.event_touchpad_pinch.EventTouchpadPinch");
-
     _cInstance = *cast(GdkEventTouchpadPinch*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class EventTouchpadPinch
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class EventTouchpadPinch
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.TouchpadPinch])
   */
-  @property gdk.types.EventType type()
+  @property gdk.types.EventType type() nothrow
   {
     return cast(gdk.types.EventType)(cast(GdkEventTouchpadPinch*)this._cPtr).type;
   }
@@ -47,7 +44,7 @@ class EventTouchpadPinch
       Params:
         propval = the type of the event ([gdk.types.EventType.TouchpadPinch])
   */
-  @property void type(gdk.types.EventType propval)
+  @property void type(gdk.types.EventType propval) nothrow
   {
     (cast(GdkEventTouchpadPinch*)this._cPtr).type = cast(GdkEventType)propval;
   }
@@ -56,7 +53,7 @@ class EventTouchpadPinch
       Get `window` field.
       Returns: the window which received the event
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventTouchpadPinch*)this._cPtr).window);
   }
@@ -66,7 +63,7 @@ class EventTouchpadPinch
       Params:
         propval = the window which received the event
   */
-  @property void window(gdk.window.Window propval)
+  @property void window(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventTouchpadPinch*)this._cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventTouchpadPinch*)this._cPtr).window);
@@ -76,7 +73,7 @@ class EventTouchpadPinch
       Get `sendEvent` field.
       Returns: true if the event was sent explicitly
   */
-  @property byte sendEvent()
+  @property byte sendEvent() nothrow
   {
     return (cast(GdkEventTouchpadPinch*)this._cPtr).sendEvent;
   }
@@ -86,7 +83,7 @@ class EventTouchpadPinch
       Params:
         propval = true if the event was sent explicitly
   */
-  @property void sendEvent(byte propval)
+  @property void sendEvent(byte propval) nothrow
   {
     (cast(GdkEventTouchpadPinch*)this._cPtr).sendEvent = propval;
   }
@@ -95,7 +92,7 @@ class EventTouchpadPinch
       Get `phase` field.
       Returns: the current phase of the gesture
   */
-  @property byte phase()
+  @property byte phase() nothrow
   {
     return (cast(GdkEventTouchpadPinch*)this._cPtr).phase;
   }
@@ -105,7 +102,7 @@ class EventTouchpadPinch
       Params:
         propval = the current phase of the gesture
   */
-  @property void phase(byte propval)
+  @property void phase(byte propval) nothrow
   {
     (cast(GdkEventTouchpadPinch*)this._cPtr).phase = propval;
   }
@@ -114,7 +111,7 @@ class EventTouchpadPinch
       Get `nFingers` field.
       Returns: The number of fingers triggering the pinch
   */
-  @property byte nFingers()
+  @property byte nFingers() nothrow
   {
     return (cast(GdkEventTouchpadPinch*)this._cPtr).nFingers;
   }
@@ -124,7 +121,7 @@ class EventTouchpadPinch
       Params:
         propval = The number of fingers triggering the pinch
   */
-  @property void nFingers(byte propval)
+  @property void nFingers(byte propval) nothrow
   {
     (cast(GdkEventTouchpadPinch*)this._cPtr).nFingers = propval;
   }
@@ -133,7 +130,7 @@ class EventTouchpadPinch
       Get `time` field.
       Returns: the time of the event in milliseconds
   */
-  @property uint time()
+  @property uint time() nothrow
   {
     return (cast(GdkEventTouchpadPinch*)this._cPtr).time;
   }
@@ -143,7 +140,7 @@ class EventTouchpadPinch
       Params:
         propval = the time of the event in milliseconds
   */
-  @property void time(uint propval)
+  @property void time(uint propval) nothrow
   {
     (cast(GdkEventTouchpadPinch*)this._cPtr).time = propval;
   }
@@ -152,7 +149,7 @@ class EventTouchpadPinch
       Get `x` field.
       Returns: The X coordinate of the pointer
   */
-  @property double x()
+  @property double x() nothrow
   {
     return (cast(GdkEventTouchpadPinch*)this._cPtr).x;
   }
@@ -162,7 +159,7 @@ class EventTouchpadPinch
       Params:
         propval = The X coordinate of the pointer
   */
-  @property void x(double propval)
+  @property void x(double propval) nothrow
   {
     (cast(GdkEventTouchpadPinch*)this._cPtr).x = propval;
   }
@@ -171,7 +168,7 @@ class EventTouchpadPinch
       Get `y` field.
       Returns: The Y coordinate of the pointer
   */
-  @property double y()
+  @property double y() nothrow
   {
     return (cast(GdkEventTouchpadPinch*)this._cPtr).y;
   }
@@ -181,7 +178,7 @@ class EventTouchpadPinch
       Params:
         propval = The Y coordinate of the pointer
   */
-  @property void y(double propval)
+  @property void y(double propval) nothrow
   {
     (cast(GdkEventTouchpadPinch*)this._cPtr).y = propval;
   }
@@ -190,7 +187,7 @@ class EventTouchpadPinch
       Get `dx` field.
       Returns: Movement delta in the X axis of the swipe focal point
   */
-  @property double dx()
+  @property double dx() nothrow
   {
     return (cast(GdkEventTouchpadPinch*)this._cPtr).dx;
   }
@@ -200,7 +197,7 @@ class EventTouchpadPinch
       Params:
         propval = Movement delta in the X axis of the swipe focal point
   */
-  @property void dx(double propval)
+  @property void dx(double propval) nothrow
   {
     (cast(GdkEventTouchpadPinch*)this._cPtr).dx = propval;
   }
@@ -209,7 +206,7 @@ class EventTouchpadPinch
       Get `dy` field.
       Returns: Movement delta in the Y axis of the swipe focal point
   */
-  @property double dy()
+  @property double dy() nothrow
   {
     return (cast(GdkEventTouchpadPinch*)this._cPtr).dy;
   }
@@ -219,7 +216,7 @@ class EventTouchpadPinch
       Params:
         propval = Movement delta in the Y axis of the swipe focal point
   */
-  @property void dy(double propval)
+  @property void dy(double propval) nothrow
   {
     (cast(GdkEventTouchpadPinch*)this._cPtr).dy = propval;
   }
@@ -229,7 +226,7 @@ class EventTouchpadPinch
       Returns: The angle change in radians, negative angles
           denote counter-clockwise movements
   */
-  @property double angleDelta()
+  @property double angleDelta() nothrow
   {
     return (cast(GdkEventTouchpadPinch*)this._cPtr).angleDelta;
   }
@@ -240,7 +237,7 @@ class EventTouchpadPinch
         propval = The angle change in radians, negative angles
             denote counter-clockwise movements
   */
-  @property void angleDelta(double propval)
+  @property void angleDelta(double propval) nothrow
   {
     (cast(GdkEventTouchpadPinch*)this._cPtr).angleDelta = propval;
   }
@@ -250,7 +247,7 @@ class EventTouchpadPinch
       Returns: The current scale, relative to that at the time of
           the corresponding [gdk.types.TouchpadGesturePhase.Begin] event
   */
-  @property double scale()
+  @property double scale() nothrow
   {
     return (cast(GdkEventTouchpadPinch*)this._cPtr).scale;
   }
@@ -261,7 +258,7 @@ class EventTouchpadPinch
         propval = The current scale, relative to that at the time of
             the corresponding [gdk.types.TouchpadGesturePhase.Begin] event
   */
-  @property void scale(double propval)
+  @property void scale(double propval) nothrow
   {
     (cast(GdkEventTouchpadPinch*)this._cPtr).scale = propval;
   }
@@ -271,7 +268,7 @@ class EventTouchpadPinch
       Returns: The X coordinate of the pointer, relative to the
           root of the screen.
   */
-  @property double xRoot()
+  @property double xRoot() nothrow
   {
     return (cast(GdkEventTouchpadPinch*)this._cPtr).xRoot;
   }
@@ -282,7 +279,7 @@ class EventTouchpadPinch
         propval = The X coordinate of the pointer, relative to the
             root of the screen.
   */
-  @property void xRoot(double propval)
+  @property void xRoot(double propval) nothrow
   {
     (cast(GdkEventTouchpadPinch*)this._cPtr).xRoot = propval;
   }
@@ -292,7 +289,7 @@ class EventTouchpadPinch
       Returns: The Y coordinate of the pointer, relative to the
           root of the screen.
   */
-  @property double yRoot()
+  @property double yRoot() nothrow
   {
     return (cast(GdkEventTouchpadPinch*)this._cPtr).yRoot;
   }
@@ -303,7 +300,7 @@ class EventTouchpadPinch
         propval = The Y coordinate of the pointer, relative to the
             root of the screen.
   */
-  @property void yRoot(double propval)
+  @property void yRoot(double propval) nothrow
   {
     (cast(GdkEventTouchpadPinch*)this._cPtr).yRoot = propval;
   }
@@ -314,7 +311,7 @@ class EventTouchpadPinch
           the modifier keys (e.g. Control, Shift and Alt) and the pointer
           buttons. See #GdkModifierType.
   */
-  @property gdk.types.ModifierType state()
+  @property gdk.types.ModifierType state() nothrow
   {
     return cast(gdk.types.ModifierType)(cast(GdkEventTouchpadPinch*)this._cPtr).state;
   }
@@ -326,7 +323,7 @@ class EventTouchpadPinch
             the modifier keys (e.g. Control, Shift and Alt) and the pointer
             buttons. See #GdkModifierType.
   */
-  @property void state(gdk.types.ModifierType propval)
+  @property void state(gdk.types.ModifierType propval) nothrow
   {
     (cast(GdkEventTouchpadPinch*)this._cPtr).state = cast(GdkModifierType)propval;
   }

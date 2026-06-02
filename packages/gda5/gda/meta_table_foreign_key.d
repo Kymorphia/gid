@@ -16,11 +16,8 @@ class MetaTableForeignKey
   GdaMetaTableForeignKey _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.meta_table_foreign_key.MetaTableForeignKey");
-
     _cInstance = *cast(GdaMetaTableForeignKey*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class MetaTableForeignKey
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class MetaTableForeignKey
       Get `metaTable` field.
       Returns: the #GdaMetaDbObject for which this structure represents a foreign key
   */
-  @property gda.meta_db_object.MetaDbObject metaTable()
+  @property gda.meta_db_object.MetaDbObject metaTable() nothrow
   {
     return new gda.meta_db_object.MetaDbObject(cast(GdaMetaDbObject*)(cast(GdaMetaTableForeignKey*)this._cPtr).metaTable, No.Take);
   }
@@ -46,7 +43,7 @@ class MetaTableForeignKey
       Get `dependOn` field.
       Returns: the #GdaMetaDbObject which is referenced by the foreign key
   */
-  @property gda.meta_db_object.MetaDbObject dependOn()
+  @property gda.meta_db_object.MetaDbObject dependOn() nothrow
   {
     return new gda.meta_db_object.MetaDbObject(cast(GdaMetaDbObject*)(cast(GdaMetaTableForeignKey*)this._cPtr).dependOn, No.Take);
   }
@@ -55,7 +52,7 @@ class MetaTableForeignKey
       Get `colsNb` field.
       Returns: the size of the @fk_cols_array, @fk_names_array, @ref_pk_cols_array and @ref_pk_names_array arrays
   */
-  @property int colsNb()
+  @property int colsNb() nothrow
   {
     return (cast(GdaMetaTableForeignKey*)this._cPtr).colsNb;
   }
@@ -65,19 +62,19 @@ class MetaTableForeignKey
       Params:
         propval = the size of the @fk_cols_array, @fk_names_array, @ref_pk_cols_array and @ref_pk_names_array arrays
   */
-  @property void colsNb(int propval)
+  @property void colsNb(int propval) nothrow
   {
     (cast(GdaMetaTableForeignKey*)this._cPtr).colsNb = propval;
   }
 
   /** */
-  @property string fkName()
+  @property string fkName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaMetaTableForeignKey*)this._cPtr).fkName);
   }
 
   /** */
-  @property void fkName(string propval)
+  @property void fkName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaMetaTableForeignKey*)this._cPtr).fkName);
     dToC(propval, cast(void*)&(cast(GdaMetaTableForeignKey*)this._cPtr).fkName);

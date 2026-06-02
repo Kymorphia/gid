@@ -54,26 +54,26 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_tab_button_get_type != &gidSymbolNotFound ? adw_tab_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TabButton self()
+  override TabButton self() nothrow
   {
     return this;
   }
@@ -82,7 +82,7 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
       Get builder for [adw.tab_button.TabButton]
       Returns: New builder object
   */
-  static TabButtonGidBuilder builder()
+  static TabButtonGidBuilder builder() nothrow
   {
     return new TabButtonGidBuilder;
   }
@@ -91,7 +91,7 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
       Get `view` property.
       Returns: The view the tab button displays.
   */
-  @property adw.tab_view.TabView view()
+  @property adw.tab_view.TabView view() nothrow
   {
     return getView();
   }
@@ -101,7 +101,7 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         propval = The view the tab button displays.
   */
-  @property void view(adw.tab_view.TabView propval)
+  @property void view(adw.tab_view.TabView propval) nothrow
   {
     setView(propval);
   }
@@ -112,7 +112,7 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
       Creates a new [adw.tab_button.TabButton].
       Returns: the newly created [adw.tab_button.TabButton]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_tab_button_new();
@@ -123,7 +123,7 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
       Gets the tab view self displays.
       Returns: the tab view
   */
-  adw.tab_view.TabView getView()
+  adw.tab_view.TabView getView() nothrow
   {
     AdwTabView* _cretval;
     _cretval = adw_tab_button_get_view(cast(AdwTabButton*)this._cPtr);
@@ -137,7 +137,7 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         view = a tab view
   */
-  void setView(adw.tab_view.TabView view = null)
+  void setView(adw.tab_view.TabView view = null) nothrow
   {
     adw_tab_button_set_view(cast(AdwTabButton*)this._cPtr, view ? cast(AdwTabView*)view._cPtr(No.Dup) : null);
   }
@@ -160,13 +160,13 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.tab_button.TabButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -175,7 +175,14 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.tab_button.TabButton.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -197,13 +204,13 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClicked(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClicked(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.tab_button.TabButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -212,7 +219,14 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.tab_button.TabButton.clicked");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -232,7 +246,7 @@ class TabButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.action
         propval = The view the tab button displays.
       Returns: Builder instance for fluent chaining
   */
-  T view(adw.tab_view.TabView propval)
+  T view(adw.tab_view.TabView propval) nothrow
   {
     return setProperty("view", propval);
   }
@@ -245,7 +259,7 @@ final class TabButtonGidBuilder : TabButtonGidBuilderImpl!TabButtonGidBuilder
       Create object from builder.
       Returns: New object
   */
-  TabButton build()
+  TabButton build() nothrow
   {
     return new TabButton(cast(void*)createGObject(TabButton._getGType), No.Take);
   }

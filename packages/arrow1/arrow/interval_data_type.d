@@ -14,26 +14,26 @@ class IntervalDataType : arrow.temporal_data_type.TemporalDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_interval_data_type_get_type != &gidSymbolNotFound ? garrow_interval_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override IntervalDataType self()
+  override IntervalDataType self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class IntervalDataType : arrow.temporal_data_type.TemporalDataType
       Get builder for [arrow.interval_data_type.IntervalDataType]
       Returns: New builder object
   */
-  static IntervalDataTypeGidBuilder builder()
+  static IntervalDataTypeGidBuilder builder() nothrow
   {
     return new IntervalDataTypeGidBuilder;
   }
 
   /** */
-  arrow.types.IntervalType getIntervalType()
+  arrow.types.IntervalType getIntervalType() nothrow
   {
     GArrowIntervalType _cretval;
     _cretval = garrow_interval_data_type_get_interval_type(cast(GArrowIntervalDataType*)this._cPtr);
@@ -69,7 +69,7 @@ final class IntervalDataTypeGidBuilder : IntervalDataTypeGidBuilderImpl!Interval
       Create object from builder.
       Returns: New object
   */
-  IntervalDataType build()
+  IntervalDataType build() nothrow
   {
     return new IntervalDataType(cast(void*)createGObject(IntervalDataType._getGType), No.Take);
   }

@@ -34,26 +34,26 @@ class SocketAddressEnumerator : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_socket_address_enumerator_get_type != &gidSymbolNotFound ? g_socket_address_enumerator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SocketAddressEnumerator self()
+  override SocketAddressEnumerator self() nothrow
   {
     return this;
   }
@@ -62,7 +62,7 @@ class SocketAddressEnumerator : gobject.object.ObjectWrap
       Get builder for [gio.socket_address_enumerator.SocketAddressEnumerator]
       Returns: New builder object
   */
-  static SocketAddressEnumeratorGidBuilder builder()
+  static SocketAddressEnumeratorGidBuilder builder() nothrow
   {
     return new SocketAddressEnumeratorGidBuilder;
   }
@@ -112,14 +112,21 @@ class SocketAddressEnumerator : gobject.object.ObjectWrap
         callback = a #GAsyncReadyCallback to call
             when the request is satisfied
   */
-  void nextAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void nextAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -163,7 +170,7 @@ final class SocketAddressEnumeratorGidBuilder : SocketAddressEnumeratorGidBuilde
       Create object from builder.
       Returns: New object
   */
-  SocketAddressEnumerator build()
+  SocketAddressEnumerator build() nothrow
   {
     return new SocketAddressEnumerator(cast(void*)createGObject(SocketAddressEnumerator._getGType), No.Take);
   }

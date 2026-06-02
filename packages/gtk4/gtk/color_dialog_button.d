@@ -43,26 +43,26 @@ class ColorDialogButton : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_color_dialog_button_get_type != &gidSymbolNotFound ? gtk_color_dialog_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ColorDialogButton self()
+  override ColorDialogButton self() nothrow
   {
     return this;
   }
@@ -71,7 +71,7 @@ class ColorDialogButton : gtk.widget.Widget
       Get builder for [gtk.color_dialog_button.ColorDialogButton]
       Returns: New builder object
   */
-  static ColorDialogButtonGidBuilder builder()
+  static ColorDialogButtonGidBuilder builder() nothrow
   {
     return new ColorDialogButtonGidBuilder;
   }
@@ -81,7 +81,7 @@ class ColorDialogButton : gtk.widget.Widget
       Returns: The [gtk.color_dialog.ColorDialog] that contains parameters for
         the color chooser dialog.
   */
-  @property gtk.color_dialog.ColorDialog dialog()
+  @property gtk.color_dialog.ColorDialog dialog() nothrow
   {
     return getDialog();
   }
@@ -92,7 +92,7 @@ class ColorDialogButton : gtk.widget.Widget
         propval = The [gtk.color_dialog.ColorDialog] that contains parameters for
           the color chooser dialog.
   */
-  @property void dialog(gtk.color_dialog.ColorDialog propval)
+  @property void dialog(gtk.color_dialog.ColorDialog propval) nothrow
   {
     setDialog(propval);
   }
@@ -108,7 +108,7 @@ class ColorDialogButton : gtk.widget.Widget
         Listen to `notify::rgba` to get informed about changes
         to the buttons color.
   */
-  @property gdk.rgba.RGBA rgba()
+  @property gdk.rgba.RGBA rgba() nothrow
   {
     return getRgba();
   }
@@ -125,7 +125,7 @@ class ColorDialogButton : gtk.widget.Widget
           Listen to `notify::rgba` to get informed about changes
           to the buttons color.
   */
-  @property void rgba(gdk.rgba.RGBA propval)
+  @property void rgba(gdk.rgba.RGBA propval) nothrow
   {
     setRgba(propval);
   }
@@ -141,7 +141,7 @@ class ColorDialogButton : gtk.widget.Widget
         dialog = the [gtk.color_dialog.ColorDialog] to use
       Returns: the new [gtk.color_dialog_button.ColorDialogButton]
   */
-  this(gtk.color_dialog.ColorDialog dialog = null)
+  this(gtk.color_dialog.ColorDialog dialog = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_color_dialog_button_new(dialog ? cast(GtkColorDialog*)dialog._cPtr(Yes.Dup) : null);
@@ -152,7 +152,7 @@ class ColorDialogButton : gtk.widget.Widget
       Returns the [gtk.color_dialog.ColorDialog] of self.
       Returns: the [gtk.color_dialog.ColorDialog]
   */
-  gtk.color_dialog.ColorDialog getDialog()
+  gtk.color_dialog.ColorDialog getDialog() nothrow
   {
     GtkColorDialog* _cretval;
     _cretval = gtk_color_dialog_button_get_dialog(cast(GtkColorDialogButton*)this._cPtr);
@@ -168,7 +168,7 @@ class ColorDialogButton : gtk.widget.Widget
       informed about changes, listen to "notify::rgba".
       Returns: the color
   */
-  gdk.rgba.RGBA getRgba()
+  gdk.rgba.RGBA getRgba() nothrow
   {
     const(GdkRGBA)* _cretval;
     _cretval = gtk_color_dialog_button_get_rgba(cast(GtkColorDialogButton*)this._cPtr);
@@ -186,7 +186,7 @@ class ColorDialogButton : gtk.widget.Widget
       Params:
         dialog = the new [gtk.color_dialog.ColorDialog]
   */
-  void setDialog(gtk.color_dialog.ColorDialog dialog)
+  void setDialog(gtk.color_dialog.ColorDialog dialog) nothrow
   {
     gtk_color_dialog_button_set_dialog(cast(GtkColorDialogButton*)this._cPtr, dialog ? cast(GtkColorDialog*)dialog._cPtr(No.Dup) : null);
   }
@@ -197,7 +197,7 @@ class ColorDialogButton : gtk.widget.Widget
       Params:
         color = the new color
   */
-  void setRgba(gdk.rgba.RGBA color)
+  void setRgba(gdk.rgba.RGBA color) nothrow
   {
     gtk_color_dialog_button_set_rgba(cast(GtkColorDialogButton*)this._cPtr, cast(const(GdkRGBA)*)&color);
   }
@@ -220,13 +220,13 @@ class ColorDialogButton : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.color_dialog_button.ColorDialogButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -235,7 +235,14 @@ class ColorDialogButton : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.color_dialog_button.ColorDialogButton.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -255,7 +262,7 @@ class ColorDialogButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           the color chooser dialog.
       Returns: Builder instance for fluent chaining
   */
-  T dialog(gtk.color_dialog.ColorDialog propval)
+  T dialog(gtk.color_dialog.ColorDialog propval) nothrow
   {
     return setProperty("dialog", propval);
   }
@@ -273,7 +280,7 @@ class ColorDialogButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           to the buttons color.
       Returns: Builder instance for fluent chaining
   */
-  T rgba(gdk.rgba.RGBA propval)
+  T rgba(gdk.rgba.RGBA propval) nothrow
   {
     return setProperty("rgba", propval);
   }
@@ -286,7 +293,7 @@ final class ColorDialogButtonGidBuilder : ColorDialogButtonGidBuilderImpl!ColorD
       Create object from builder.
       Returns: New object
   */
-  ColorDialogButton build()
+  ColorDialogButton build() nothrow
   {
     return new ColorDialogButton(cast(void*)createGObject(ColorDialogButton._getGType), No.Take);
   }

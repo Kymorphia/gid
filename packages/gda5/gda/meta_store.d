@@ -22,26 +22,26 @@ class MetaStore : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_meta_store_get_type != &gidSymbolNotFound ? gda_meta_store_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MetaStore self()
+  override MetaStore self() nothrow
   {
     return this;
   }
@@ -50,13 +50,13 @@ class MetaStore : gobject.object.ObjectWrap
       Get builder for [gda.meta_store.MetaStore]
       Returns: New builder object
   */
-  static MetaStoreGidBuilder builder()
+  static MetaStoreGidBuilder builder() nothrow
   {
     return new MetaStoreGidBuilder;
   }
 
   /** */
-  @property gda.connection.Connection cnc()
+  @property gda.connection.Connection cnc() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.connection.Connection)("cnc");
   }
@@ -68,7 +68,7 @@ class MetaStore : gobject.object.ObjectWrap
         cncString = a connection string, or null for an in-memory internal database
       Returns: the newly created object, or null if an error occurred
   */
-  this(string cncString = null)
+  this(string cncString = null) nothrow
   {
     GdaMetaStore* _cretval;
     const(char)* _cncString = cncString.toCString(No.Alloc);
@@ -84,7 +84,7 @@ class MetaStore : gobject.object.ObjectWrap
         fileName = a file name
       Returns: the newly created object, or null if an error occurred
   */
-  static gda.meta_store.MetaStore newWithFile(string fileName)
+  static gda.meta_store.MetaStore newWithFile(string fileName) nothrow
   {
     GdaMetaStore* _cretval;
     const(char)* _fileName = fileName.toCString(No.Alloc);
@@ -94,7 +94,7 @@ class MetaStore : gobject.object.ObjectWrap
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_meta_store_error_quark();
@@ -114,7 +114,7 @@ class MetaStore : gobject.object.ObjectWrap
         cnc = a #GdaConnection
       Returns: a new string, to free with [glib.global.gfree] once not needed anymore
   */
-  static string sqlIdentifierQuote(string id, gda.connection.Connection cnc)
+  static string sqlIdentifierQuote(string id, gda.connection.Connection cnc) nothrow
   {
     char* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -133,7 +133,7 @@ class MetaStore : gobject.object.ObjectWrap
         tableName = the name of a table present in store
       Returns: a new #GdaDataModel
   */
-  gda.data_model.DataModel createModifyDataModel(string tableName)
+  gda.data_model.DataModel createModifyDataModel(string tableName) nothrow
   {
     GdaDataModel* _cretval;
     const(char)* _tableName = tableName.toCString(No.Alloc);
@@ -248,7 +248,7 @@ class MetaStore : gobject.object.ObjectWrap
       Do not close the connection.
       Returns: a #GdaConnection, or null
   */
-  gda.connection.Connection getInternalConnection()
+  gda.connection.Connection getInternalConnection() nothrow
   {
     GdaConnection* _cretval;
     _cretval = gda_meta_store_get_internal_connection(cast(GdaMetaStore*)this._cPtr);
@@ -260,7 +260,7 @@ class MetaStore : gobject.object.ObjectWrap
       Get store's internal schema's version
       Returns: the version (incremented each time the schema changes, backward compatible)
   */
-  int getVersion()
+  int getVersion() nothrow
   {
     int _retval;
     _retval = gda_meta_store_get_version(cast(GdaMetaStore*)this._cPtr);
@@ -404,7 +404,7 @@ class MetaStore : gobject.object.ObjectWrap
       list.
       Returns: a new list of tables names (as gchar*), the list must be freed when no longer needed, but the strings present in the list must not be modified.
   */
-  string[] schemaGetAllTables()
+  string[] schemaGetAllTables() nothrow
   {
     GSList* _cretval;
     _cretval = gda_meta_store_schema_get_all_tables(cast(GdaMetaStore*)this._cPtr);
@@ -422,7 +422,7 @@ class MetaStore : gobject.object.ObjectWrap
         tableName = the name of the table for which all the dependencies must be listed
       Returns: a new list of tables names (as gchar*), the list must be freed when no longer needed, but the strings present in the list must not be modified.
   */
-  string[] schemaGetDependTables(string tableName)
+  string[] schemaGetDependTables(string tableName) nothrow
   {
     GSList* _cretval;
     const(char)* _tableName = tableName.toCString(No.Alloc);
@@ -495,7 +495,7 @@ class MetaStore : gobject.object.ObjectWrap
       Params:
         style = a style
   */
-  void setIdentifiersStyle(gda.types.SqlIdentifierStyle style)
+  void setIdentifiersStyle(gda.types.SqlIdentifierStyle style) nothrow
   {
     gda_meta_store_set_identifiers_style(cast(GdaMetaStore*)this._cPtr, style);
   }
@@ -509,16 +509,23 @@ class MetaStore : gobject.object.ObjectWrap
       Params:
         func = a #GdaSqlReservedKeywordsFunc function, or null
   */
-  void setReservedKeywordsFunc(gda.types.SqlReservedKeywordsFunc func = null)
+  void setReservedKeywordsFunc(gda.types.SqlReservedKeywordsFunc func = null) nothrow
   {
     static gda.types.SqlReservedKeywordsFunc _static_func;
 
-    extern(C) gboolean _funcCallback(const(char)* word)
+    extern(C) gboolean _funcCallback(const(char)* word) nothrow
     {
       bool _dretval;
       string _word = word.fromCString(No.Free);
 
-      _dretval = _static_func(_word);
+      try
+      {
+        _dretval = _static_func(_word);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.types.SqlReservedKeywordsFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -588,13 +595,13 @@ class MetaStore : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMetaReset(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMetaReset(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.meta_store.MetaStore)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -603,7 +610,14 @@ class MetaStore : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.meta_store.MetaStore.metaReset");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -631,18 +645,19 @@ class MetaStore : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSuggestUpdate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSuggestUpdate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == glib.error.ErrorWrap)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gda.meta_context.MetaContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.meta_store.MetaStore)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      glib.error.ErrorWrap _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -650,7 +665,14 @@ class MetaStore : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.meta_store.MetaStore.suggestUpdate");
+      }
 
       setVal!(glib.error.ErrorWrap)(_returnValue, _retval);
     }
@@ -665,25 +687,25 @@ class MetaStoreGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T catalog(string propval)
+  T catalog(string propval) nothrow
   {
     return setProperty("catalog", propval);
   }
 
   /** */
-  T cnc(gda.connection.Connection propval)
+  T cnc(gda.connection.Connection propval) nothrow
   {
     return setProperty("cnc", propval);
   }
 
   /** */
-  T cncString(string propval)
+  T cncString(string propval) nothrow
   {
     return setProperty("cnc-string", propval);
   }
 
   /** */
-  T schema(string propval)
+  T schema(string propval) nothrow
   {
     return setProperty("schema", propval);
   }
@@ -696,7 +718,7 @@ final class MetaStoreGidBuilder : MetaStoreGidBuilderImpl!MetaStoreGidBuilder
       Create object from builder.
       Returns: New object
   */
-  MetaStore build()
+  MetaStore build() nothrow
   {
     return new MetaStore(cast(void*)createGObject(MetaStore._getGType), Yes.Take);
   }
@@ -704,12 +726,12 @@ final class MetaStoreGidBuilder : MetaStoreGidBuilderImpl!MetaStoreGidBuilder
 
 class MetaStoreException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.meta_store.MetaStore.errorQuark, cast(int)code, msg);
   }

@@ -40,26 +40,26 @@ class WebInspector : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_web_inspector_get_type != &gidSymbolNotFound ? webkit_web_inspector_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WebInspector self()
+  override WebInspector self() nothrow
   {
     return this;
   }
@@ -68,7 +68,7 @@ class WebInspector : gobject.object.ObjectWrap
       Get builder for [webkit.web_inspector.WebInspector]
       Returns: New builder object
   */
-  static WebInspectorGidBuilder builder()
+  static WebInspectorGidBuilder builder() nothrow
   {
     return new WebInspectorGidBuilder;
   }
@@ -77,7 +77,7 @@ class WebInspector : gobject.object.ObjectWrap
       Get `attachedHeight` property.
       Returns: The height that the inspector view should have when it is attached.
   */
-  @property uint attachedHeight()
+  @property uint attachedHeight() nothrow
   {
     return getAttachedHeight();
   }
@@ -87,7 +87,7 @@ class WebInspector : gobject.object.ObjectWrap
       Returns: Whether the @inspector can be attached to the same window that contains
         the inspected view.
   */
-  @property bool canAttach()
+  @property bool canAttach() nothrow
   {
     return getCanAttach();
   }
@@ -96,7 +96,7 @@ class WebInspector : gobject.object.ObjectWrap
       Get `inspectedUri` property.
       Returns: The URI that is currently being inspected.
   */
-  @property string inspectedUri()
+  @property string inspectedUri() nothrow
   {
     return getInspectedUri();
   }
@@ -107,7 +107,7 @@ class WebInspector : gobject.object.ObjectWrap
       The signal #WebKitWebInspector::attach
       will be emitted. If the inspector is already attached it does nothing.
   */
-  void attach()
+  void attach() nothrow
   {
     webkit_web_inspector_attach(cast(WebKitWebInspector*)this._cPtr);
   }
@@ -115,7 +115,7 @@ class WebInspector : gobject.object.ObjectWrap
   /**
       Request inspector to be closed.
   */
-  void close()
+  void close() nothrow
   {
     webkit_web_inspector_close(cast(WebKitWebInspector*)this._cPtr);
   }
@@ -126,7 +126,7 @@ class WebInspector : gobject.object.ObjectWrap
       The signal #WebKitWebInspector::detach
       will be emitted. If the inspector is already detached it does nothing.
   */
-  void detach()
+  void detach() nothrow
   {
     webkit_web_inspector_detach(cast(WebKitWebInspector*)this._cPtr);
   }
@@ -139,7 +139,7 @@ class WebInspector : gobject.object.ObjectWrap
       returns 0.
       Returns: the height of the inspector view when attached
   */
-  uint getAttachedHeight()
+  uint getAttachedHeight() nothrow
   {
     uint _retval;
     _retval = webkit_web_inspector_get_attached_height(cast(WebKitWebInspector*)this._cPtr);
@@ -152,7 +152,7 @@ class WebInspector : gobject.object.ObjectWrap
       Returns: true if there is enough room for the inspector view inside the
             window that contains the inspected view, or false otherwise.
   */
-  bool getCanAttach()
+  bool getCanAttach() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_inspector_get_can_attach(cast(WebKitWebInspector*)this._cPtr);
@@ -168,7 +168,7 @@ class WebInspector : gobject.object.ObjectWrap
       instead of a URI.
       Returns: the URI that is currently being inspected or null
   */
-  string getInspectedUri()
+  string getInspectedUri() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_web_inspector_get_inspected_uri(cast(WebKitWebInspector*)this._cPtr);
@@ -183,7 +183,7 @@ class WebInspector : gobject.object.ObjectWrap
       or it has been closed.
       Returns: the #WebKitWebViewBase used to display the inspector or null
   */
-  webkit.web_view_base.WebViewBase getWebView()
+  webkit.web_view_base.WebViewBase getWebView() nothrow
   {
     WebKitWebViewBase* _cretval;
     _cretval = webkit_web_inspector_get_web_view(cast(WebKitWebInspector*)this._cPtr);
@@ -196,7 +196,7 @@ class WebInspector : gobject.object.ObjectWrap
       the inspected view.
       Returns: true if inspector is currently attached or false otherwise
   */
-  bool isAttached()
+  bool isAttached() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_inspector_is_attached(cast(WebKitWebInspector*)this._cPtr);
@@ -206,7 +206,7 @@ class WebInspector : gobject.object.ObjectWrap
   /**
       Request inspector to be shown.
   */
-  void show()
+  void show() nothrow
   {
     webkit_web_inspector_show(cast(WebKitWebInspector*)this._cPtr);
   }
@@ -236,22 +236,30 @@ class WebInspector : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAttach(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAttach(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_inspector.WebInspector)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_inspector.WebInspector.attach");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -287,22 +295,30 @@ class WebInspector : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectBringToFront(T)(T callback, Flag!"After" after = No.After)
+  gulong connectBringToFront(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_inspector.WebInspector)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_inspector.WebInspector.bringToFront");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -328,13 +344,13 @@ class WebInspector : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClosed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClosed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_inspector.WebInspector)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -343,7 +359,14 @@ class WebInspector : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_inspector.WebInspector.closed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -375,22 +398,30 @@ class WebInspector : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDetach(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDetach(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_inspector.WebInspector)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_inspector.WebInspector.detach");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -424,22 +455,30 @@ class WebInspector : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectOpenWindow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectOpenWindow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_inspector.WebInspector)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_inspector.WebInspector.openWindow");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -461,7 +500,7 @@ final class WebInspectorGidBuilder : WebInspectorGidBuilderImpl!WebInspectorGidB
       Create object from builder.
       Returns: New object
   */
-  WebInspector build()
+  WebInspector build() nothrow
   {
     return new WebInspector(cast(void*)createGObject(WebInspector._getGType), No.Take);
   }

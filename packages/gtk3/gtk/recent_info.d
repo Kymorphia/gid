@@ -24,32 +24,32 @@ class RecentInfo : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_recent_info_get_type != &gidSymbolNotFound ? gtk_recent_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RecentInfo self()
+  override RecentInfo self() nothrow
   {
     return this;
   }
@@ -84,7 +84,7 @@ class RecentInfo : gobject.boxed.Boxed
       to local files.
       Returns: true if the resource exists
   */
-  bool exists()
+  bool exists() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_recent_info_exists(cast(GtkRecentInfo*)this._cPtr);
@@ -97,7 +97,7 @@ class RecentInfo : gobject.boxed.Boxed
       Returns: the number of seconds elapsed from system’s Epoch when
           the resource was added to the list, or -1 on failure.
   */
-  long getAdded()
+  long getAdded() nothrow
   {
     long _retval;
     _retval = gtk_recent_info_get_added(cast(GtkRecentInfo*)this._cPtr);
@@ -110,7 +110,7 @@ class RecentInfo : gobject.boxed.Boxed
       Returns: a positive integer containing the number of days
           elapsed since the time this resource was last modified
   */
-  int getAge()
+  int getAge() nothrow
   {
     int _retval;
     _retval = gtk_recent_info_get_age(cast(GtkRecentInfo*)this._cPtr);
@@ -136,7 +136,7 @@ class RecentInfo : gobject.boxed.Boxed
           app_exec string is owned by the #GtkRecentInfo and should not be
           modified or freed
   */
-  bool getApplicationInfo(string appName, out string appExec, out uint count, out long time)
+  bool getApplicationInfo(string appName, out string appExec, out uint count, out long time) nothrow
   {
     bool _retval;
     const(char)* _appName = appName.toCString(No.Alloc);
@@ -151,7 +151,7 @@ class RecentInfo : gobject.boxed.Boxed
       Returns: a newly allocated null-terminated array of strings.
             Use [glib.global.strfreev] to free it.
   */
-  string[] getApplications()
+  string[] getApplications() nothrow
   {
     char** _cretval;
     size_t _cretlength;
@@ -173,7 +173,7 @@ class RecentInfo : gobject.boxed.Boxed
       Returns: the description of the resource. The returned string
           is owned by the recent manager, and should not be freed.
   */
-  string getDescription()
+  string getDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_recent_info_get_description(cast(GtkRecentInfo*)this._cPtr);
@@ -187,7 +187,7 @@ class RecentInfo : gobject.boxed.Boxed
       Returns: the display name of the resource. The returned string
           is owned by the recent manager, and should not be freed.
   */
-  string getDisplayName()
+  string getDisplayName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_recent_info_get_display_name(cast(GtkRecentInfo*)this._cPtr);
@@ -200,7 +200,7 @@ class RecentInfo : gobject.boxed.Boxed
       Returns: a #GIcon containing the icon, or null.
           Use [gobject.object.ObjectWrap.unref] when finished using the icon
   */
-  gio.icon.Icon getGicon()
+  gio.icon.Icon getGicon() nothrow
   {
     GIcon* _cretval;
     _cretval = gtk_recent_info_get_gicon(cast(GtkRecentInfo*)this._cPtr);
@@ -215,7 +215,7 @@ class RecentInfo : gobject.boxed.Boxed
       Returns: a newly allocated null terminated array of strings.
           Use [glib.global.strfreev] to free it.
   */
-  string[] getGroups()
+  string[] getGroups() nothrow
   {
     char** _cretval;
     size_t _cretlength;
@@ -240,7 +240,7 @@ class RecentInfo : gobject.boxed.Boxed
       Returns: a #GdkPixbuf containing the icon,
             or null. Use [gobject.object.ObjectWrap.unref] when finished using the icon.
   */
-  gdkpixbuf.pixbuf.Pixbuf getIcon(int size)
+  gdkpixbuf.pixbuf.Pixbuf getIcon(int size) nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gtk_recent_info_get_icon(cast(GtkRecentInfo*)this._cPtr, size);
@@ -253,7 +253,7 @@ class RecentInfo : gobject.boxed.Boxed
       Returns: the MIME type of the resource. The returned string
           is owned by the recent manager, and should not be freed.
   */
-  string getMimeType()
+  string getMimeType() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_recent_info_get_mime_type(cast(GtkRecentInfo*)this._cPtr);
@@ -267,7 +267,7 @@ class RecentInfo : gobject.boxed.Boxed
       Returns: the number of seconds elapsed from system’s Epoch when
           the resource was last modified, or -1 on failure.
   */
-  long getModified()
+  long getModified() nothrow
   {
     long _retval;
     _retval = gtk_recent_info_get_modified(cast(GtkRecentInfo*)this._cPtr);
@@ -280,7 +280,7 @@ class RecentInfo : gobject.boxed.Boxed
       applications that have registered them.
       Returns: true if the private flag was found, false otherwise
   */
-  bool getPrivateHint()
+  bool getPrivateHint() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_recent_info_get_private_hint(cast(GtkRecentInfo*)this._cPtr);
@@ -295,7 +295,7 @@ class RecentInfo : gobject.boxed.Boxed
       Returns: A newly-allocated string in UTF-8 encoding
           free it with [glib.global.gfree]
   */
-  string getShortName()
+  string getShortName() nothrow
   {
     char* _cretval;
     _cretval = gtk_recent_info_get_short_name(cast(GtkRecentInfo*)this._cPtr);
@@ -308,7 +308,7 @@ class RecentInfo : gobject.boxed.Boxed
       Returns: the URI of the resource. The returned string is
           owned by the recent manager, and should not be freed.
   */
-  string getUri()
+  string getUri() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_recent_info_get_uri(cast(GtkRecentInfo*)this._cPtr);
@@ -323,7 +323,7 @@ class RecentInfo : gobject.boxed.Boxed
       Returns: a newly allocated UTF-8 string containing the
           resource’s URI or null. Use [glib.global.gfree] when done using it.
   */
-  string getUriDisplay()
+  string getUriDisplay() nothrow
   {
     char* _cretval;
     _cretval = gtk_recent_info_get_uri_display(cast(GtkRecentInfo*)this._cPtr);
@@ -337,7 +337,7 @@ class RecentInfo : gobject.boxed.Boxed
       Returns: the number of seconds elapsed from system’s Epoch when
           the resource was last visited, or -1 on failure.
   */
-  long getVisited()
+  long getVisited() nothrow
   {
     long _retval;
     _retval = gtk_recent_info_get_visited(cast(GtkRecentInfo*)this._cPtr);
@@ -352,7 +352,7 @@ class RecentInfo : gobject.boxed.Boxed
       Returns: true if an application with name app_name was found,
           false otherwise
   */
-  bool hasApplication(string appName)
+  bool hasApplication(string appName) nothrow
   {
     bool _retval;
     const(char)* _appName = appName.toCString(No.Alloc);
@@ -368,7 +368,7 @@ class RecentInfo : gobject.boxed.Boxed
         groupName = name of a group
       Returns: true if the group was found
   */
-  bool hasGroup(string groupName)
+  bool hasGroup(string groupName) nothrow
   {
     bool _retval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
@@ -381,7 +381,7 @@ class RecentInfo : gobject.boxed.Boxed
       scheme of its URI.
       Returns: true if the resource is local
   */
-  bool isLocal()
+  bool isLocal() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_recent_info_is_local(cast(GtkRecentInfo*)this._cPtr);
@@ -393,7 +393,7 @@ class RecentInfo : gobject.boxed.Boxed
       recently used resource represented by info.
       Returns: an application name. Use [glib.global.gfree] to free it.
   */
-  string lastApplication()
+  string lastApplication() nothrow
   {
     char* _cretval;
     _cretval = gtk_recent_info_last_application(cast(GtkRecentInfo*)this._cPtr);
@@ -410,7 +410,7 @@ class RecentInfo : gobject.boxed.Boxed
       Returns: true if both #GtkRecentInfo-struct point to the same
           resource, false otherwise
   */
-  bool match(gtk.recent_info.RecentInfo infoB)
+  bool match(gtk.recent_info.RecentInfo infoB) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_recent_info_match(cast(GtkRecentInfo*)this._cPtr, infoB ? cast(GtkRecentInfo*)infoB._cPtr(No.Dup) : null);

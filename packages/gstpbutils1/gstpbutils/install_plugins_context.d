@@ -16,32 +16,32 @@ class InstallPluginsContext : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_install_plugins_context_get_type != &gidSymbolNotFound ? gst_install_plugins_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override InstallPluginsContext self()
+  override InstallPluginsContext self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class InstallPluginsContext : gobject.boxed.Boxed
       Returns: a new #GstInstallPluginsContext. Free with
         [gstpbutils.install_plugins_context.InstallPluginsContext.free] when no longer needed
   */
-  this()
+  this() nothrow
   {
     GstInstallPluginsContext* _cretval;
     _cretval = gst_install_plugins_context_new();
@@ -62,7 +62,7 @@ class InstallPluginsContext : gobject.boxed.Boxed
       Copies a #GstInstallPluginsContext.
       Returns: A copy of ctx
   */
-  gstpbutils.install_plugins_context.InstallPluginsContext copy()
+  gstpbutils.install_plugins_context.InstallPluginsContext copy() nothrow
   {
     GstInstallPluginsContext* _cretval;
     _cretval = gst_install_plugins_context_copy(cast(GstInstallPluginsContext*)this._cPtr);
@@ -80,7 +80,7 @@ class InstallPluginsContext : gobject.boxed.Boxed
       Params:
         confirmSearch = whether to ask for confirmation before searching for plugins
   */
-  void setConfirmSearch(bool confirmSearch)
+  void setConfirmSearch(bool confirmSearch) nothrow
   {
     gst_install_plugins_context_set_confirm_search(cast(GstInstallPluginsContext*)this._cPtr, confirmSearch);
   }
@@ -98,7 +98,7 @@ class InstallPluginsContext : gobject.boxed.Boxed
       Params:
         desktopId = the desktop file ID of the calling application
   */
-  void setDesktopId(string desktopId)
+  void setDesktopId(string desktopId) nothrow
   {
     const(char)* _desktopId = desktopId.toCString(No.Alloc);
     gst_install_plugins_context_set_desktop_id(cast(GstInstallPluginsContext*)this._cPtr, _desktopId);
@@ -127,7 +127,7 @@ class InstallPluginsContext : gobject.boxed.Boxed
       Params:
         startupId = the startup notification ID
   */
-  void setStartupNotificationId(string startupId)
+  void setStartupNotificationId(string startupId) nothrow
   {
     const(char)* _startupId = startupId.toCString(No.Alloc);
     gst_install_plugins_context_set_startup_notification_id(cast(GstInstallPluginsContext*)this._cPtr, _startupId);
@@ -160,7 +160,7 @@ class InstallPluginsContext : gobject.boxed.Boxed
       Params:
         xid = the XWindow ID (XID) of the top-level application
   */
-  void setXid(uint xid)
+  void setXid(uint xid) nothrow
   {
     gst_install_plugins_context_set_xid(cast(GstInstallPluginsContext*)this._cPtr, xid);
   }

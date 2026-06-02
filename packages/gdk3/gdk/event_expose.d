@@ -19,11 +19,8 @@ class EventExpose
   GdkEventExpose _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.event_expose.EventExpose");
-
     _cInstance = *cast(GdkEventExpose*)ptr;
 
     if (take)
@@ -31,7 +28,7 @@ class EventExpose
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -40,7 +37,7 @@ class EventExpose
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.Expose] or [gdk.types.EventType.Damage]).
   */
-  @property gdk.types.EventType type()
+  @property gdk.types.EventType type() nothrow
   {
     return cast(gdk.types.EventType)(cast(GdkEventExpose*)this._cPtr).type;
   }
@@ -50,7 +47,7 @@ class EventExpose
       Params:
         propval = the type of the event ([gdk.types.EventType.Expose] or [gdk.types.EventType.Damage]).
   */
-  @property void type(gdk.types.EventType propval)
+  @property void type(gdk.types.EventType propval) nothrow
   {
     (cast(GdkEventExpose*)this._cPtr).type = cast(GdkEventType)propval;
   }
@@ -59,7 +56,7 @@ class EventExpose
       Get `window` field.
       Returns: the window which received the event.
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventExpose*)this._cPtr).window);
   }
@@ -69,7 +66,7 @@ class EventExpose
       Params:
         propval = the window which received the event.
   */
-  @property void window(gdk.window.Window propval)
+  @property void window(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventExpose*)this._cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventExpose*)this._cPtr).window);
@@ -79,7 +76,7 @@ class EventExpose
       Get `sendEvent` field.
       Returns: true if the event was sent explicitly.
   */
-  @property byte sendEvent()
+  @property byte sendEvent() nothrow
   {
     return (cast(GdkEventExpose*)this._cPtr).sendEvent;
   }
@@ -89,7 +86,7 @@ class EventExpose
       Params:
         propval = true if the event was sent explicitly.
   */
-  @property void sendEvent(byte propval)
+  @property void sendEvent(byte propval) nothrow
   {
     (cast(GdkEventExpose*)this._cPtr).sendEvent = propval;
   }
@@ -98,7 +95,7 @@ class EventExpose
       Get `area` field.
       Returns: bounding box of @region.
   */
-  @property gdk.rectangle.Rectangle area()
+  @property gdk.rectangle.Rectangle area() nothrow
   {
     return cToD!(gdk.rectangle.Rectangle)(cast(void*)&(cast(GdkEventExpose*)this._cPtr).area);
   }
@@ -108,7 +105,7 @@ class EventExpose
       Params:
         propval = bounding box of @region.
   */
-  @property void area(gdk.rectangle.Rectangle propval)
+  @property void area(gdk.rectangle.Rectangle propval) nothrow
   {
     (cast(GdkEventExpose*)this._cPtr).area = cast(GdkRectangle)propval;
   }
@@ -117,7 +114,7 @@ class EventExpose
       Get `region` field.
       Returns: the region that needs to be redrawn.
   */
-  @property cairo.region.Region region()
+  @property cairo.region.Region region() nothrow
   {
     return cToD!(cairo.region.Region)(cast(void*)(cast(GdkEventExpose*)this._cPtr).region);
   }
@@ -127,7 +124,7 @@ class EventExpose
       Params:
         propval = the region that needs to be redrawn.
   */
-  @property void region(cairo.region.Region propval)
+  @property void region(cairo.region.Region propval) nothrow
   {
     cValueFree!(cairo.region.Region)(cast(void*)(cast(GdkEventExpose*)this._cPtr).region);
     dToC(propval, cast(void*)&(cast(GdkEventExpose*)this._cPtr).region);
@@ -140,7 +137,7 @@ class EventExpose
           contiguous [gdk.types.EventType.Expose] events in one go, though GDK performs some
           exposure compression so this is not normally needed.
   */
-  @property int count()
+  @property int count() nothrow
   {
     return (cast(GdkEventExpose*)this._cPtr).count;
   }
@@ -153,7 +150,7 @@ class EventExpose
             contiguous [gdk.types.EventType.Expose] events in one go, though GDK performs some
             exposure compression so this is not normally needed.
   */
-  @property void count(int propval)
+  @property void count(int propval) nothrow
   {
     (cast(GdkEventExpose*)this._cPtr).count = propval;
   }

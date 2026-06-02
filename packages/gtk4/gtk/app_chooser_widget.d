@@ -52,26 +52,26 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_app_chooser_widget_get_type != &gidSymbolNotFound ? gtk_app_chooser_widget_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AppChooserWidget self()
+  override AppChooserWidget self() nothrow
   {
     return this;
   }
@@ -80,7 +80,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Get builder for [gtk.app_chooser_widget.AppChooserWidget]
       Returns: New builder object
   */
-  static AppChooserWidgetGidBuilder builder()
+  static AppChooserWidgetGidBuilder builder() nothrow
   {
     return new AppChooserWidgetGidBuilder;
   }
@@ -90,7 +90,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Returns: The text that appears in the widget when there are no applications
         for the given content type.
   */
-  @property string defaultText()
+  @property string defaultText() nothrow
   {
     return getDefaultText();
   }
@@ -101,7 +101,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
         propval = The text that appears in the widget when there are no applications
           for the given content type.
   */
-  @property void defaultText(string propval)
+  @property void defaultText(string propval) nothrow
   {
     setDefaultText(propval);
   }
@@ -112,7 +112,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
         in a single list, without subsections for default,
         recommended or related applications.
   */
-  @property bool showAll()
+  @property bool showAll() nothrow
   {
     return getShowAll();
   }
@@ -124,7 +124,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
           in a single list, without subsections for default,
           recommended or related applications.
   */
-  @property void showAll(bool propval)
+  @property void showAll(bool propval) nothrow
   {
     setShowAll(propval);
   }
@@ -137,7 +137,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
         If false, the default handler is listed among the recommended
         applications.
   */
-  @property bool showDefault()
+  @property bool showDefault() nothrow
   {
     return getShowDefault();
   }
@@ -151,7 +151,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
           If false, the default handler is listed among the recommended
           applications.
   */
-  @property void showDefault(bool propval)
+  @property void showDefault(bool propval) nothrow
   {
     setShowDefault(propval);
   }
@@ -164,7 +164,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
         If false, the fallback applications are listed among the
         other applications.
   */
-  @property bool showFallback()
+  @property bool showFallback() nothrow
   {
     return getShowFallback();
   }
@@ -178,7 +178,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
           If false, the fallback applications are listed among the
           other applications.
   */
-  @property void showFallback(bool propval)
+  @property void showFallback(bool propval) nothrow
   {
     setShowFallback(propval);
   }
@@ -188,7 +188,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Returns: Determines whether the app chooser should show a section
         for other applications.
   */
-  @property bool showOther()
+  @property bool showOther() nothrow
   {
     return getShowOther();
   }
@@ -199,7 +199,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
         propval = Determines whether the app chooser should show a section
           for other applications.
   */
-  @property void showOther(bool propval)
+  @property void showOther(bool propval) nothrow
   {
     setShowOther(propval);
   }
@@ -212,7 +212,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
         If false, the recommended applications are listed
         among the other applications.
   */
-  @property bool showRecommended()
+  @property bool showRecommended() nothrow
   {
     return getShowRecommended();
   }
@@ -226,7 +226,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
           If false, the recommended applications are listed
           among the other applications.
   */
-  @property void showRecommended(bool propval)
+  @property void showRecommended(bool propval) nothrow
   {
     setShowRecommended(propval);
   }
@@ -243,7 +243,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  this(string contentType)
+  this(string contentType) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _contentType = contentType.toCString(No.Alloc);
@@ -258,7 +258,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  string getDefaultText()
+  string getDefaultText() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_app_chooser_widget_get_default_text(cast(GtkAppChooserWidget*)this._cPtr);
@@ -273,7 +273,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  bool getShowAll()
+  bool getShowAll() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_app_chooser_widget_get_show_all(cast(GtkAppChooserWidget*)this._cPtr);
@@ -287,7 +287,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  bool getShowDefault()
+  bool getShowDefault() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_app_chooser_widget_get_show_default(cast(GtkAppChooserWidget*)this._cPtr);
@@ -301,7 +301,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  bool getShowFallback()
+  bool getShowFallback() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_app_chooser_widget_get_show_fallback(cast(GtkAppChooserWidget*)this._cPtr);
@@ -315,7 +315,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  bool getShowOther()
+  bool getShowOther() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_app_chooser_widget_get_show_other(cast(GtkAppChooserWidget*)this._cPtr);
@@ -329,7 +329,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  bool getShowRecommended()
+  bool getShowRecommended() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_app_chooser_widget_get_show_recommended(cast(GtkAppChooserWidget*)this._cPtr);
@@ -345,7 +345,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  void setDefaultText(string text)
+  void setDefaultText(string text) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_app_chooser_widget_set_default_text(cast(GtkAppChooserWidget*)this._cPtr, _text);
@@ -360,7 +360,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  void setShowAll(bool setting)
+  void setShowAll(bool setting) nothrow
   {
     gtk_app_chooser_widget_set_show_all(cast(GtkAppChooserWidget*)this._cPtr, setting);
   }
@@ -374,7 +374,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  void setShowDefault(bool setting)
+  void setShowDefault(bool setting) nothrow
   {
     gtk_app_chooser_widget_set_show_default(cast(GtkAppChooserWidget*)this._cPtr, setting);
   }
@@ -388,7 +388,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  void setShowFallback(bool setting)
+  void setShowFallback(bool setting) nothrow
   {
     gtk_app_chooser_widget_set_show_fallback(cast(GtkAppChooserWidget*)this._cPtr, setting);
   }
@@ -402,7 +402,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  void setShowOther(bool setting)
+  void setShowOther(bool setting) nothrow
   {
     gtk_app_chooser_widget_set_show_other(cast(GtkAppChooserWidget*)this._cPtr, setting);
   }
@@ -416,7 +416,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   
       Deprecated: This widget will be removed in GTK 5
   */
-  void setShowRecommended(bool setting)
+  void setShowRecommended(bool setting) nothrow
   {
     gtk_app_chooser_widget_set_show_recommended(cast(GtkAppChooserWidget*)this._cPtr, setting);
   }
@@ -442,14 +442,14 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectApplicationActivated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectApplicationActivated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.app_info.AppInfo)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.app_chooser_widget.AppChooserWidget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -461,7 +461,14 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.app_chooser_widget.AppChooserWidget.applicationActivated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -485,14 +492,14 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectApplicationSelected(T)(T callback, Flag!"After" after = No.After)
+  gulong connectApplicationSelected(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.app_info.AppInfo)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.app_chooser_widget.AppChooserWidget)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -504,7 +511,14 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.app_chooser_widget.AppChooserWidget.applicationSelected");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -525,7 +539,7 @@ class AppChooserWidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk
           for the given content type.
       Returns: Builder instance for fluent chaining
   */
-  T defaultText(string propval)
+  T defaultText(string propval) nothrow
   {
     return setProperty("default-text", propval);
   }
@@ -538,7 +552,7 @@ class AppChooserWidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk
           recommended or related applications.
       Returns: Builder instance for fluent chaining
   */
-  T showAll(bool propval)
+  T showAll(bool propval) nothrow
   {
     return setProperty("show-all", propval);
   }
@@ -553,7 +567,7 @@ class AppChooserWidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk
           applications.
       Returns: Builder instance for fluent chaining
   */
-  T showDefault(bool propval)
+  T showDefault(bool propval) nothrow
   {
     return setProperty("show-default", propval);
   }
@@ -568,7 +582,7 @@ class AppChooserWidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk
           other applications.
       Returns: Builder instance for fluent chaining
   */
-  T showFallback(bool propval)
+  T showFallback(bool propval) nothrow
   {
     return setProperty("show-fallback", propval);
   }
@@ -580,7 +594,7 @@ class AppChooserWidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk
           for other applications.
       Returns: Builder instance for fluent chaining
   */
-  T showOther(bool propval)
+  T showOther(bool propval) nothrow
   {
     return setProperty("show-other", propval);
   }
@@ -595,7 +609,7 @@ class AppChooserWidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk
           among the other applications.
       Returns: Builder instance for fluent chaining
   */
-  T showRecommended(bool propval)
+  T showRecommended(bool propval) nothrow
   {
     return setProperty("show-recommended", propval);
   }
@@ -608,7 +622,7 @@ final class AppChooserWidgetGidBuilder : AppChooserWidgetGidBuilderImpl!AppChoos
       Create object from builder.
       Returns: New object
   */
-  AppChooserWidget build()
+  AppChooserWidget build() nothrow
   {
     return new AppChooserWidget(cast(void*)createGObject(AppChooserWidget._getGType), No.Take);
   }

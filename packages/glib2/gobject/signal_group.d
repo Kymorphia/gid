@@ -36,26 +36,26 @@ class SignalGroup : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_signal_group_get_type != &gidSymbolNotFound ? g_signal_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SignalGroup self()
+  override SignalGroup self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class SignalGroup : gobject.object.ObjectWrap
       Get builder for [gobject.signal_group.SignalGroup]
       Returns: New builder object
   */
-  static SignalGroupGidBuilder builder()
+  static SignalGroupGidBuilder builder() nothrow
   {
     return new SignalGroupGidBuilder;
   }
@@ -73,7 +73,7 @@ class SignalGroup : gobject.object.ObjectWrap
       Get `target` property.
       Returns: The target instance used when connecting signals.
   */
-  @property gobject.object.ObjectWrap target()
+  @property gobject.object.ObjectWrap target() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.object.ObjectWrap)("target");
   }
@@ -83,7 +83,7 @@ class SignalGroup : gobject.object.ObjectWrap
       Params:
         propval = The target instance used when connecting signals.
   */
-  @property void target(gobject.object.ObjectWrap propval)
+  @property void target(gobject.object.ObjectWrap propval) nothrow
   {
     setTarget(propval);
   }
@@ -92,7 +92,7 @@ class SignalGroup : gobject.object.ObjectWrap
       Get `targetType` property.
       Returns: The #GType of the target property.
   */
-  @property gobject.types.GType targetType()
+  @property gobject.types.GType targetType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("target-type");
   }
@@ -104,7 +104,7 @@ class SignalGroup : gobject.object.ObjectWrap
         targetType = the #GType of the target instance.
       Returns: a new #GSignalGroup
   */
-  this(gobject.types.GType targetType)
+  this(gobject.types.GType targetType) nothrow
   {
     GSignalGroup* _cretval;
     _cretval = g_signal_group_new(targetType);
@@ -118,7 +118,7 @@ class SignalGroup : gobject.object.ObjectWrap
       
       This blocked state will be kept across changes of the target instance.
   */
-  void block()
+  void block() nothrow
   {
     g_signal_group_block(cast(GSignalGroup*)this._cPtr);
   }
@@ -134,7 +134,7 @@ class SignalGroup : gobject.object.ObjectWrap
         after = whether the handler should be called before or after the
            default handler of the signal.
   */
-  void connectClosure(string detailedSignal, gobject.closure.Closure closure, bool after)
+  void connectClosure(string detailedSignal, gobject.closure.Closure closure, bool after) nothrow
   {
     const(char)* _detailedSignal = detailedSignal.toCString(No.Alloc);
     g_signal_group_connect_closure(cast(GSignalGroup*)this._cPtr, _detailedSignal, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, after);
@@ -144,7 +144,7 @@ class SignalGroup : gobject.object.ObjectWrap
       Gets the target instance used when connecting signals.
       Returns: The target instance
   */
-  gobject.object.ObjectWrap dupTarget()
+  gobject.object.ObjectWrap dupTarget() nothrow
   {
     GObject* _cretval;
     _cretval = g_signal_group_dup_target(cast(GSignalGroup*)this._cPtr);
@@ -164,7 +164,7 @@ class SignalGroup : gobject.object.ObjectWrap
         target = The target instance used
               when connecting signals.
   */
-  void setTarget(gobject.object.ObjectWrap target = null)
+  void setTarget(gobject.object.ObjectWrap target = null) nothrow
   {
     g_signal_group_set_target(cast(GSignalGroup*)this._cPtr, target ? cast(GObject*)target._cPtr(No.Dup) : null);
   }
@@ -175,7 +175,7 @@ class SignalGroup : gobject.object.ObjectWrap
       again. Must be unblocked exactly the same number of times it
       has been blocked to become active again.
   */
-  void unblock()
+  void unblock() nothrow
   {
     g_signal_group_unblock(cast(GSignalGroup*)this._cPtr);
   }
@@ -200,14 +200,14 @@ class SignalGroup : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectBind(T)(T callback, Flag!"After" after = No.After)
+  gulong connectBind(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gobject.signal_group.SignalGroup)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -219,7 +219,14 @@ class SignalGroup : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gobject.signal_group.SignalGroup.bind");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -245,13 +252,13 @@ class SignalGroup : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUnbind(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUnbind(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.signal_group.SignalGroup)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -260,7 +267,14 @@ class SignalGroup : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gobject.signal_group.SignalGroup.unbind");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -278,7 +292,7 @@ class SignalGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The target instance used when connecting signals.
       Returns: Builder instance for fluent chaining
   */
-  T target(gobject.object.ObjectWrap propval)
+  T target(gobject.object.ObjectWrap propval) nothrow
   {
     return setProperty("target", propval);
   }
@@ -289,7 +303,7 @@ class SignalGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The #GType of the target property.
       Returns: Builder instance for fluent chaining
   */
-  T targetType(gobject.types.GType propval)
+  T targetType(gobject.types.GType propval) nothrow
   {
     return setProperty("target-type", propval);
   }
@@ -302,7 +316,7 @@ final class SignalGroupGidBuilder : SignalGroupGidBuilderImpl!SignalGroupGidBuil
       Create object from builder.
       Returns: New object
   */
-  SignalGroup build()
+  SignalGroup build() nothrow
   {
     return new SignalGroup(cast(void*)createGObject(SignalGroup._getGType), Yes.Take);
   }

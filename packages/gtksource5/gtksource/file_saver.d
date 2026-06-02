@@ -31,26 +31,26 @@ class FileSaver : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_file_saver_get_type != &gidSymbolNotFound ? gtk_source_file_saver_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileSaver self()
+  override FileSaver self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class FileSaver : gobject.object.ObjectWrap
       Get builder for [gtksource.file_saver.FileSaver]
       Returns: New builder object
   */
-  static FileSaverGidBuilder builder()
+  static FileSaverGidBuilder builder() nothrow
   {
     return new FileSaverGidBuilder;
   }
@@ -69,7 +69,7 @@ class FileSaver : gobject.object.ObjectWrap
       Returns: The #GtkSourceBuffer to save. The #GtkSourceFileSaver object has a
         weak reference to the buffer.
   */
-  @property gtksource.buffer.Buffer buffer()
+  @property gtksource.buffer.Buffer buffer() nothrow
   {
     return getBuffer();
   }
@@ -78,7 +78,7 @@ class FileSaver : gobject.object.ObjectWrap
       Get `compressionType` property.
       Returns: The compression type.
   */
-  @property gtksource.types.CompressionType compressionType()
+  @property gtksource.types.CompressionType compressionType() nothrow
   {
     return getCompressionType();
   }
@@ -88,7 +88,7 @@ class FileSaver : gobject.object.ObjectWrap
       Params:
         propval = The compression type.
   */
-  @property void compressionType(gtksource.types.CompressionType propval)
+  @property void compressionType(gtksource.types.CompressionType propval) nothrow
   {
     setCompressionType(propval);
   }
@@ -97,7 +97,7 @@ class FileSaver : gobject.object.ObjectWrap
       Get `encoding` property.
       Returns: The file's encoding.
   */
-  @property gtksource.encoding.Encoding encoding()
+  @property gtksource.encoding.Encoding encoding() nothrow
   {
     return getEncoding();
   }
@@ -107,7 +107,7 @@ class FileSaver : gobject.object.ObjectWrap
       Params:
         propval = The file's encoding.
   */
-  @property void encoding(gtksource.encoding.Encoding propval)
+  @property void encoding(gtksource.encoding.Encoding propval) nothrow
   {
     setEncoding(propval);
   }
@@ -117,7 +117,7 @@ class FileSaver : gobject.object.ObjectWrap
       Returns: The #GtkSourceFile. The #GtkSourceFileSaver object has a weak
         reference to the file.
   */
-  @property gtksource.file.File file()
+  @property gtksource.file.File file() nothrow
   {
     return getFile();
   }
@@ -126,7 +126,7 @@ class FileSaver : gobject.object.ObjectWrap
       Get `flags` property.
       Returns: File saving flags.
   */
-  @property gtksource.types.FileSaverFlags flags()
+  @property gtksource.types.FileSaverFlags flags() nothrow
   {
     return getFlags();
   }
@@ -136,7 +136,7 @@ class FileSaver : gobject.object.ObjectWrap
       Params:
         propval = File saving flags.
   */
-  @property void flags(gtksource.types.FileSaverFlags propval)
+  @property void flags(gtksource.types.FileSaverFlags propval) nothrow
   {
     setFlags(propval);
   }
@@ -146,7 +146,7 @@ class FileSaver : gobject.object.ObjectWrap
       Returns: The #GFile where to save the buffer. By default the location is taken
         from the #GtkSourceFile at construction time.
   */
-  @property gio.file.File location()
+  @property gio.file.File location() nothrow
   {
     return getLocation();
   }
@@ -155,7 +155,7 @@ class FileSaver : gobject.object.ObjectWrap
       Get `newlineType` property.
       Returns: The newline type.
   */
-  @property gtksource.types.NewlineType newlineType()
+  @property gtksource.types.NewlineType newlineType() nothrow
   {
     return getNewlineType();
   }
@@ -165,7 +165,7 @@ class FileSaver : gobject.object.ObjectWrap
       Params:
         propval = The newline type.
   */
-  @property void newlineType(gtksource.types.NewlineType propval)
+  @property void newlineType(gtksource.types.NewlineType propval) nothrow
   {
     setNewlineType(propval);
   }
@@ -182,7 +182,7 @@ class FileSaver : gobject.object.ObjectWrap
         file = the #GtkSourceFile.
       Returns: a new #GtkSourceFileSaver object.
   */
-  this(gtksource.buffer.Buffer buffer, gtksource.file.File file)
+  this(gtksource.buffer.Buffer buffer, gtksource.file.File file) nothrow
   {
     GtkSourceFileSaver* _cretval;
     _cretval = gtk_source_file_saver_new(buffer ? cast(GtkSourceBuffer*)buffer._cPtr(No.Dup) : null, file ? cast(GtkSourceFile*)file._cPtr(No.Dup) : null);
@@ -205,7 +205,7 @@ class FileSaver : gobject.object.ObjectWrap
         targetLocation = the #GFile where to save the buffer to.
       Returns: a new #GtkSourceFileSaver object.
   */
-  static gtksource.file_saver.FileSaver newWithTarget(gtksource.buffer.Buffer buffer, gtksource.file.File file, gio.file.File targetLocation)
+  static gtksource.file_saver.FileSaver newWithTarget(gtksource.buffer.Buffer buffer, gtksource.file.File file, gio.file.File targetLocation) nothrow
   {
     GtkSourceFileSaver* _cretval;
     _cretval = gtk_source_file_saver_new_with_target(buffer ? cast(GtkSourceBuffer*)buffer._cPtr(No.Dup) : null, file ? cast(GtkSourceFile*)file._cPtr(No.Dup) : null, targetLocation ? cast(GFile*)(cast(gobject.object.ObjectWrap)targetLocation)._cPtr(No.Dup) : null);
@@ -214,7 +214,7 @@ class FileSaver : gobject.object.ObjectWrap
   }
 
   /** */
-  gtksource.buffer.Buffer getBuffer()
+  gtksource.buffer.Buffer getBuffer() nothrow
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_file_saver_get_buffer(cast(GtkSourceFileSaver*)this._cPtr);
@@ -223,7 +223,7 @@ class FileSaver : gobject.object.ObjectWrap
   }
 
   /** */
-  gtksource.types.CompressionType getCompressionType()
+  gtksource.types.CompressionType getCompressionType() nothrow
   {
     GtkSourceCompressionType _cretval;
     _cretval = gtk_source_file_saver_get_compression_type(cast(GtkSourceFileSaver*)this._cPtr);
@@ -232,7 +232,7 @@ class FileSaver : gobject.object.ObjectWrap
   }
 
   /** */
-  gtksource.encoding.Encoding getEncoding()
+  gtksource.encoding.Encoding getEncoding() nothrow
   {
     const(GtkSourceEncoding)* _cretval;
     _cretval = gtk_source_file_saver_get_encoding(cast(GtkSourceFileSaver*)this._cPtr);
@@ -241,7 +241,7 @@ class FileSaver : gobject.object.ObjectWrap
   }
 
   /** */
-  gtksource.file.File getFile()
+  gtksource.file.File getFile() nothrow
   {
     GtkSourceFile* _cretval;
     _cretval = gtk_source_file_saver_get_file(cast(GtkSourceFileSaver*)this._cPtr);
@@ -250,7 +250,7 @@ class FileSaver : gobject.object.ObjectWrap
   }
 
   /** */
-  gtksource.types.FileSaverFlags getFlags()
+  gtksource.types.FileSaverFlags getFlags() nothrow
   {
     GtkSourceFileSaverFlags _cretval;
     _cretval = gtk_source_file_saver_get_flags(cast(GtkSourceFileSaver*)this._cPtr);
@@ -259,7 +259,7 @@ class FileSaver : gobject.object.ObjectWrap
   }
 
   /** */
-  gio.file.File getLocation()
+  gio.file.File getLocation() nothrow
   {
     GFile* _cretval;
     _cretval = gtk_source_file_saver_get_location(cast(GtkSourceFileSaver*)this._cPtr);
@@ -268,7 +268,7 @@ class FileSaver : gobject.object.ObjectWrap
   }
 
   /** */
-  gtksource.types.NewlineType getNewlineType()
+  gtksource.types.NewlineType getNewlineType() nothrow
   {
     GtkSourceNewlineType _cretval;
     _cretval = gtk_source_file_saver_get_newline_type(cast(GtkSourceFileSaver*)this._cPtr);
@@ -290,21 +290,35 @@ class FileSaver : gobject.object.ObjectWrap
         callback = a #GAsyncReadyCallback to call when the request is
             satisfied.
   */
-  void saveAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null, gio.types.AsyncReadyCallback callback = null)
+  void saveAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _progressCallbackCallback(long currentNumBytes, long totalNumBytes, void* data)
+    extern(C) void _progressCallbackCallback(long currentNumBytes, long totalNumBytes, void* data) nothrow
     {
       auto _dlg = cast(gio.types.FileProgressCallback*)data;
 
-      (*_dlg)(currentNumBytes, totalNumBytes);
+      try
+      {
+        (*_dlg)(currentNumBytes, totalNumBytes);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.FileProgressCallback");
+      }
     }
     auto _progressCallbackCB = progressCallback ? &_progressCallbackCallback : null;
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _progressCallback = progressCallback ? freezeDelegate(cast(void*)&progressCallback) : null;
@@ -345,7 +359,7 @@ class FileSaver : gobject.object.ObjectWrap
       Params:
         compressionType = the new compression type.
   */
-  void setCompressionType(gtksource.types.CompressionType compressionType)
+  void setCompressionType(gtksource.types.CompressionType compressionType) nothrow
   {
     gtk_source_file_saver_set_compression_type(cast(GtkSourceFileSaver*)this._cPtr, compressionType);
   }
@@ -358,13 +372,13 @@ class FileSaver : gobject.object.ObjectWrap
       Params:
         encoding = the new encoding, or null for UTF-8.
   */
-  void setEncoding(gtksource.encoding.Encoding encoding = null)
+  void setEncoding(gtksource.encoding.Encoding encoding = null) nothrow
   {
     gtk_source_file_saver_set_encoding(cast(GtkSourceFileSaver*)this._cPtr, encoding ? cast(const(GtkSourceEncoding)*)encoding._cPtr(No.Dup) : null);
   }
 
   /** */
-  void setFlags(gtksource.types.FileSaverFlags flags)
+  void setFlags(gtksource.types.FileSaverFlags flags) nothrow
   {
     gtk_source_file_saver_set_flags(cast(GtkSourceFileSaver*)this._cPtr, flags);
   }
@@ -376,7 +390,7 @@ class FileSaver : gobject.object.ObjectWrap
       Params:
         newlineType = the new newline type.
   */
-  void setNewlineType(gtksource.types.NewlineType newlineType)
+  void setNewlineType(gtksource.types.NewlineType newlineType) nothrow
   {
     gtk_source_file_saver_set_newline_type(cast(GtkSourceFileSaver*)this._cPtr, newlineType);
   }
@@ -393,7 +407,7 @@ class FileSaverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           weak reference to the buffer.
       Returns: Builder instance for fluent chaining
   */
-  T buffer(gtksource.buffer.Buffer propval)
+  T buffer(gtksource.buffer.Buffer propval) nothrow
   {
     return setProperty("buffer", propval);
   }
@@ -404,7 +418,7 @@ class FileSaverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The compression type.
       Returns: Builder instance for fluent chaining
   */
-  T compressionType(gtksource.types.CompressionType propval)
+  T compressionType(gtksource.types.CompressionType propval) nothrow
   {
     return setProperty("compression-type", propval);
   }
@@ -415,7 +429,7 @@ class FileSaverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The file's encoding.
       Returns: Builder instance for fluent chaining
   */
-  T encoding(gtksource.encoding.Encoding propval)
+  T encoding(gtksource.encoding.Encoding propval) nothrow
   {
     return setProperty("encoding", propval);
   }
@@ -427,7 +441,7 @@ class FileSaverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           reference to the file.
       Returns: Builder instance for fluent chaining
   */
-  T file(gtksource.file.File propval)
+  T file(gtksource.file.File propval) nothrow
   {
     return setProperty("file", propval);
   }
@@ -438,7 +452,7 @@ class FileSaverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = File saving flags.
       Returns: Builder instance for fluent chaining
   */
-  T flags(gtksource.types.FileSaverFlags propval)
+  T flags(gtksource.types.FileSaverFlags propval) nothrow
   {
     return setProperty("flags", propval);
   }
@@ -450,7 +464,7 @@ class FileSaverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           from the #GtkSourceFile at construction time.
       Returns: Builder instance for fluent chaining
   */
-  T location(gio.file.File propval)
+  T location(gio.file.File propval) nothrow
   {
     return setProperty("location", propval);
   }
@@ -461,7 +475,7 @@ class FileSaverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The newline type.
       Returns: Builder instance for fluent chaining
   */
-  T newlineType(gtksource.types.NewlineType propval)
+  T newlineType(gtksource.types.NewlineType propval) nothrow
   {
     return setProperty("newline-type", propval);
   }
@@ -474,7 +488,7 @@ final class FileSaverGidBuilder : FileSaverGidBuilderImpl!FileSaverGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FileSaver build()
+  FileSaver build() nothrow
   {
     return new FileSaver(cast(void*)createGObject(FileSaver._getGType), Yes.Take);
   }

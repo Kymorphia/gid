@@ -44,26 +44,26 @@ class SocketService : gio.socket_listener.SocketListener
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_socket_service_get_type != &gidSymbolNotFound ? g_socket_service_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SocketService self()
+  override SocketService self() nothrow
   {
     return this;
   }
@@ -72,7 +72,7 @@ class SocketService : gio.socket_listener.SocketListener
       Get builder for [gio.socket_service.SocketService]
       Returns: New builder object
   */
-  static SocketServiceGidBuilder builder()
+  static SocketServiceGidBuilder builder() nothrow
   {
     return new SocketServiceGidBuilder;
   }
@@ -81,7 +81,7 @@ class SocketService : gio.socket_listener.SocketListener
       Get `active` property.
       Returns: Whether the service is currently accepting connections.
   */
-  @property bool active()
+  @property bool active() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("active");
   }
@@ -91,7 +91,7 @@ class SocketService : gio.socket_listener.SocketListener
       Params:
         propval = Whether the service is currently accepting connections.
   */
-  @property void active(bool propval)
+  @property void active(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("active", propval);
   }
@@ -106,7 +106,7 @@ class SocketService : gio.socket_listener.SocketListener
       called before.
       Returns: a new #GSocketService.
   */
-  this()
+  this() nothrow
   {
     GSocketService* _cretval;
     _cretval = g_socket_service_new();
@@ -120,7 +120,7 @@ class SocketService : gio.socket_listener.SocketListener
       up until the service is started.
       Returns: true if the service is active, false otherwise
   */
-  bool isActive()
+  bool isActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_socket_service_is_active(cast(GSocketService*)this._cPtr);
@@ -136,7 +136,7 @@ class SocketService : gio.socket_listener.SocketListener
       This call is thread-safe, so it may be called from a thread
       handling an incoming client request.
   */
-  void start()
+  void start() nothrow
   {
     g_socket_service_start(cast(GSocketService*)this._cPtr);
   }
@@ -158,7 +158,7 @@ class SocketService : gio.socket_listener.SocketListener
       the socket service will start accepting connections immediately
       when a new socket is added.
   */
-  void stop()
+  void stop() nothrow
   {
     g_socket_service_stop(cast(GSocketService*)this._cPtr);
   }
@@ -190,7 +190,7 @@ class SocketService : gio.socket_listener.SocketListener
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectIncoming(T)(T callback, Flag!"After" after = No.After)
+  gulong connectIncoming(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.socket_connection.SocketConnection)))
@@ -198,11 +198,12 @@ class SocketService : gio.socket_listener.SocketListener
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.socket_service.SocketService)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -213,7 +214,14 @@ class SocketService : gio.socket_listener.SocketListener
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.socket_service.SocketService.incoming");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -233,7 +241,7 @@ class SocketServiceGidBuilderImpl(T) : gio.socket_listener.SocketListenerGidBuil
         propval = Whether the service is currently accepting connections.
       Returns: Builder instance for fluent chaining
   */
-  T active(bool propval)
+  T active(bool propval) nothrow
   {
     return setProperty("active", propval);
   }
@@ -246,7 +254,7 @@ final class SocketServiceGidBuilder : SocketServiceGidBuilderImpl!SocketServiceG
       Create object from builder.
       Returns: New object
   */
-  SocketService build()
+  SocketService build() nothrow
   {
     return new SocketService(cast(void*)createGObject(SocketService._getGType), Yes.Take);
   }

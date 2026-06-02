@@ -91,26 +91,26 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_window_get_type != &gidSymbolNotFound ? gtk_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Window self()
+  override Window self() nothrow
   {
     return this;
   }
@@ -119,7 +119,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Get builder for [gtk.window.Window]
       Returns: New builder object
   */
-  static WindowGidBuilder builder()
+  static WindowGidBuilder builder() nothrow
   {
     return new WindowGidBuilder;
   }
@@ -136,7 +136,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
         will remain until the window is destroyed, but you can explicitly
         remove it by setting the :application property to null.
   */
-  @property gtk.application.Application application()
+  @property gtk.application.Application application() nothrow
   {
     return getApplication();
   }
@@ -154,7 +154,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
           will remain until the window is destroyed, but you can explicitly
           remove it by setting the :application property to null.
   */
-  @property void application(gtk.application.Application propval)
+  @property void application(gtk.application.Application propval) nothrow
   {
     setApplication(propval);
   }
@@ -163,7 +163,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Get `child` property.
       Returns: The child widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -173,7 +173,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         propval = The child widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -182,7 +182,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Get `decorated` property.
       Returns: Whether the window should have a frame (also known as *decorations*).
   */
-  @property bool decorated()
+  @property bool decorated() nothrow
   {
     return getDecorated();
   }
@@ -192,7 +192,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         propval = Whether the window should have a frame (also known as *decorations*).
   */
-  @property void decorated(bool propval)
+  @property void decorated(bool propval) nothrow
   {
     setDecorated(propval);
   }
@@ -201,7 +201,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Get `defaultHeight` property.
       Returns: The default height of the window.
   */
-  @property int defaultHeight()
+  @property int defaultHeight() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("default-height");
   }
@@ -211,7 +211,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         propval = The default height of the window.
   */
-  @property void defaultHeight(int propval)
+  @property void defaultHeight(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("default-height", propval);
   }
@@ -220,7 +220,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Get `defaultWidget` property.
       Returns: The default widget.
   */
-  @property gtk.widget.Widget defaultWidget()
+  @property gtk.widget.Widget defaultWidget() nothrow
   {
     return getDefaultWidget();
   }
@@ -230,7 +230,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         propval = The default widget.
   */
-  @property void defaultWidget(gtk.widget.Widget propval)
+  @property void defaultWidget(gtk.widget.Widget propval) nothrow
   {
     setDefaultWidget(propval);
   }
@@ -239,7 +239,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Get `defaultWidth` property.
       Returns: The default width of the window.
   */
-  @property int defaultWidth()
+  @property int defaultWidth() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("default-width");
   }
@@ -249,7 +249,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         propval = The default width of the window.
   */
-  @property void defaultWidth(int propval)
+  @property void defaultWidth(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("default-width", propval);
   }
@@ -258,7 +258,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Get `deletable` property.
       Returns: Whether the window frame should have a close button.
   */
-  @property bool deletable()
+  @property bool deletable() nothrow
   {
     return getDeletable();
   }
@@ -268,7 +268,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         propval = Whether the window frame should have a close button.
   */
-  @property void deletable(bool propval)
+  @property void deletable(bool propval) nothrow
   {
     setDeletable(propval);
   }
@@ -277,7 +277,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Get `destroyWithParent` property.
       Returns: If this window should be destroyed when the parent is destroyed.
   */
-  @property bool destroyWithParent()
+  @property bool destroyWithParent() nothrow
   {
     return getDestroyWithParent();
   }
@@ -287,7 +287,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         propval = If this window should be destroyed when the parent is destroyed.
   */
-  @property void destroyWithParent(bool propval)
+  @property void destroyWithParent(bool propval) nothrow
   {
     setDestroyWithParent(propval);
   }
@@ -296,7 +296,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Get `display` property.
       Returns: The display that will display this window.
   */
-  @property gdk.display.Display display()
+  @property gdk.display.Display display() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.display.Display)("display");
   }
@@ -306,7 +306,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         propval = The display that will display this window.
   */
-  @property void display(gdk.display.Display propval)
+  @property void display(gdk.display.Display propval) nothrow
   {
     setDisplay(propval);
   }
@@ -318,7 +318,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
         This property is maintained by GTK based on user input
         and should not be set by applications.
   */
-  @property bool focusVisible()
+  @property bool focusVisible() nothrow
   {
     return getFocusVisible();
   }
@@ -331,7 +331,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
           This property is maintained by GTK based on user input
           and should not be set by applications.
   */
-  @property void focusVisible(bool propval)
+  @property void focusVisible(bool propval) nothrow
   {
     setFocusVisible(propval);
   }
@@ -340,7 +340,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Get `focusWidget` property.
       Returns: The focus widget.
   */
-  @property gtk.widget.Widget focusWidget()
+  @property gtk.widget.Widget focusWidget() nothrow
   {
     return getFocus();
   }
@@ -350,7 +350,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         propval = The focus widget.
   */
-  @property void focusWidget(gtk.widget.Widget propval)
+  @property void focusWidget(gtk.widget.Widget propval) nothrow
   {
     setFocus(propval);
   }
@@ -365,7 +365,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
         connect to the ::notify signal in order to know whether the
         operation was successful.
   */
-  @property bool fullscreened()
+  @property bool fullscreened() nothrow
   {
     return isFullscreen();
   }
@@ -381,7 +381,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
           connect to the ::notify signal in order to know whether the
           operation was successful.
   */
-  @property void fullscreened(bool propval)
+  @property void fullscreened(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("fullscreened", propval);
   }
@@ -391,7 +391,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Returns: Whether the window frame should handle F10 for activating
         menubars.
   */
-  @property bool handleMenubarAccel()
+  @property bool handleMenubarAccel() nothrow
   {
     return getHandleMenubarAccel();
   }
@@ -402,7 +402,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
         propval = Whether the window frame should handle F10 for activating
           menubars.
   */
-  @property void handleMenubarAccel(bool propval)
+  @property void handleMenubarAccel(bool propval) nothrow
   {
     setHandleMenubarAccel(propval);
   }
@@ -411,7 +411,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Get `hideOnClose` property.
       Returns: If this window should be hidden when the users clicks the close button.
   */
-  @property bool hideOnClose()
+  @property bool hideOnClose() nothrow
   {
     return getHideOnClose();
   }
@@ -421,7 +421,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         propval = If this window should be hidden when the users clicks the close button.
   */
-  @property void hideOnClose(bool propval)
+  @property void hideOnClose(bool propval) nothrow
   {
     setHideOnClose(propval);
   }
@@ -432,7 +432,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
         
         See [gtk.icon_theme.IconTheme] for more details.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return getIconName();
   }
@@ -444,7 +444,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
           
           See [gtk.icon_theme.IconTheme] for more details.
   */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     setIconName(propval);
   }
@@ -459,7 +459,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
         connect to the ::notify signal in order to know whether the
         operation was successful.
   */
-  @property bool maximized()
+  @property bool maximized() nothrow
   {
     return isMaximized();
   }
@@ -475,7 +475,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
           connect to the ::notify signal in order to know whether the
           operation was successful.
   */
-  @property void maximized(bool propval)
+  @property void maximized(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("maximized", propval);
   }
@@ -487,7 +487,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
         This property is maintained by GTK based on user input,
         and should not be set by applications.
   */
-  @property bool mnemonicsVisible()
+  @property bool mnemonicsVisible() nothrow
   {
     return getMnemonicsVisible();
   }
@@ -500,7 +500,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
           This property is maintained by GTK based on user input,
           and should not be set by applications.
   */
-  @property void mnemonicsVisible(bool propval)
+  @property void mnemonicsVisible(bool propval) nothrow
   {
     setMnemonicsVisible(propval);
   }
@@ -509,7 +509,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Get `modal` property.
       Returns: If true, the window is modal.
   */
-  @property bool modal()
+  @property bool modal() nothrow
   {
     return getModal();
   }
@@ -519,7 +519,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         propval = If true, the window is modal.
   */
-  @property void modal(bool propval)
+  @property void modal(bool propval) nothrow
   {
     setModal(propval);
   }
@@ -528,7 +528,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Get `resizable` property.
       Returns: If true, users can resize the window.
   */
-  @property bool resizable()
+  @property bool resizable() nothrow
   {
     return getResizable();
   }
@@ -538,7 +538,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         propval = If true, users can resize the window.
   */
-  @property void resizable(bool propval)
+  @property void resizable(bool propval) nothrow
   {
     setResizable(propval);
   }
@@ -548,7 +548,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         propval = A write-only property for setting window's startup notification identifier.
   */
-  @property void startupId(string propval)
+  @property void startupId(string propval) nothrow
   {
     setStartupId(propval);
   }
@@ -559,7 +559,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
         
         See [gtk.window.Window.isSuspended] for details about what suspended means.
   */
-  @property bool suspended()
+  @property bool suspended() nothrow
   {
     return isSuspended();
   }
@@ -568,7 +568,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Get `title` property.
       Returns: The title of the window.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -578,7 +578,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         propval = The title of the window.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -587,7 +587,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Get `titlebar` property.
       Returns: The titlebar widget.
   */
-  @property gtk.widget.Widget titlebar()
+  @property gtk.widget.Widget titlebar() nothrow
   {
     return getTitlebar();
   }
@@ -597,7 +597,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         propval = The titlebar widget.
   */
-  @property void titlebar(gtk.widget.Widget propval)
+  @property void titlebar(gtk.widget.Widget propval) nothrow
   {
     setTitlebar(propval);
   }
@@ -606,7 +606,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Get `transientFor` property.
       Returns: The transient parent of the window.
   */
-  @property gtk.window.Window transientFor()
+  @property gtk.window.Window transientFor() nothrow
   {
     return getTransientFor();
   }
@@ -616,7 +616,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         propval = The transient parent of the window.
   */
-  @property void transientFor(gtk.window.Window propval)
+  @property void transientFor(gtk.window.Window propval) nothrow
   {
     setTransientFor(propval);
   }
@@ -640,7 +640,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       To delete a [gtk.window.Window], call [gtk.window.Window.destroy].
       Returns: a new [gtk.window.Window].
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_new();
@@ -655,7 +655,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       [gtk.window.Window.setDefaultIconName].
       Returns: the fallback icon name for windows
   */
-  static string getDefaultIconName()
+  static string getDefaultIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_default_icon_name();
@@ -672,7 +672,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Returns: the list
           of toplevel widgets
   */
-  static gio.list_model.ListModel getToplevels()
+  static gio.list_model.ListModel getToplevels() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_window_get_toplevels();
@@ -691,7 +691,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Returns: list of
           toplevel widgets
   */
-  static gtk.widget.Widget[] listToplevels()
+  static gtk.widget.Widget[] listToplevels() nothrow
   {
     GList* _cretval;
     _cretval = gtk_window_list_toplevels();
@@ -716,7 +716,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         setting = true to automatically do startup notification
   */
-  static void setAutoStartupNotification(bool setting)
+  static void setAutoStartupNotification(bool setting) nothrow
   {
     gtk_window_set_auto_startup_notification(setting);
   }
@@ -731,7 +731,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         name = the name of the themed icon
   */
-  static void setDefaultIconName(string name)
+  static void setDefaultIconName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_window_set_default_icon_name(_name);
@@ -746,7 +746,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         enable = true to enable interactive debugging
   */
-  static void setInteractiveDebugging(bool enable)
+  static void setInteractiveDebugging(bool enable) nothrow
   {
     gtk_window_set_interactive_debugging(enable);
   }
@@ -760,7 +760,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       This function can be used with close buttons in custom
       titlebars.
   */
-  void close()
+  void close() nothrow
   {
     gtk_window_close(cast(GtkWindow*)this._cPtr);
   }
@@ -768,7 +768,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   /**
       Drop the internal reference GTK holds on toplevel windows.
   */
-  void destroy()
+  void destroy() nothrow
   {
     gtk_window_destroy(cast(GtkWindow*)this._cPtr);
   }
@@ -785,7 +785,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       [gdk.toplevel.Toplevel.state] property, or by listening to
       notifications of the [gtk.window.Window.fullscreened] property.
   */
-  void fullscreen()
+  void fullscreen() nothrow
   {
     gtk_window_fullscreen(cast(GtkWindow*)this._cPtr);
   }
@@ -804,7 +804,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         monitor = which monitor to go fullscreen on
   */
-  void fullscreenOnMonitor(gdk.monitor.MonitorWrap monitor)
+  void fullscreenOnMonitor(gdk.monitor.MonitorWrap monitor) nothrow
   {
     gtk_window_fullscreen_on_monitor(cast(GtkWindow*)this._cPtr, monitor ? cast(GdkMonitor*)monitor._cPtr(No.Dup) : null);
   }
@@ -813,7 +813,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Gets the [gtk.application.Application] associated with the window.
       Returns: a [gtk.application.Application]
   */
-  gtk.application.Application getApplication()
+  gtk.application.Application getApplication() nothrow
   {
     GtkApplication* _cretval;
     _cretval = gtk_window_get_application(cast(GtkWindow*)this._cPtr);
@@ -825,7 +825,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Gets the child widget of window.
       Returns: the child widget of window
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_child(cast(GtkWindow*)this._cPtr);
@@ -837,7 +837,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Returns whether the window has been set to have decorations.
       Returns: true if the window has been set to have decorations
   */
-  bool getDecorated()
+  bool getDecorated() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_decorated(cast(GtkWindow*)this._cPtr);
@@ -858,7 +858,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
         width = location to store the default width
         height = location to store the default height
   */
-  void getDefaultSize(out int width, out int height)
+  void getDefaultSize(out int width, out int height) nothrow
   {
     gtk_window_get_default_size(cast(GtkWindow*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
@@ -867,7 +867,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Returns the default widget for window.
       Returns: the default widget
   */
-  gtk.widget.Widget getDefaultWidget()
+  gtk.widget.Widget getDefaultWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_default_widget(cast(GtkWindow*)this._cPtr);
@@ -879,7 +879,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Returns whether the window has been set to have a close button.
       Returns: true if the window has been set to have a close button
   */
-  bool getDeletable()
+  bool getDeletable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_deletable(cast(GtkWindow*)this._cPtr);
@@ -890,7 +890,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Returns whether the window will be destroyed with its transient parent.
       Returns: true if the window will be destroyed with its transient parent.
   */
-  bool getDestroyWithParent()
+  bool getDestroyWithParent() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_destroy_with_parent(cast(GtkWindow*)this._cPtr);
@@ -906,7 +906,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       not be true for the widget.
       Returns: the currently focused widget
   */
-  gtk.widget.Widget getFocus()
+  gtk.widget.Widget getFocus() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_focus(cast(GtkWindow*)this._cPtr);
@@ -919,7 +919,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Returns: true if “focus rectangles” are supposed to be visible
           in this window.
   */
-  bool getFocusVisible()
+  bool getFocusVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_focus_visible(cast(GtkWindow*)this._cPtr);
@@ -933,7 +933,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Returns: the [gtk.window_group.WindowGroup] for a window
           or the default group
   */
-  gtk.window_group.WindowGroup getGroup()
+  gtk.window_group.WindowGroup getGroup() nothrow
   {
     GtkWindowGroup* _cretval;
     _cretval = gtk_window_get_group(cast(GtkWindow*)this._cPtr);
@@ -946,7 +946,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       activating a menubar it contains.
       Returns: true if the window handles F10
   */
-  bool getHandleMenubarAccel()
+  bool getHandleMenubarAccel() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_handle_menubar_accel(cast(GtkWindow*)this._cPtr);
@@ -957,7 +957,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Returns whether the window will be hidden when the close button is clicked.
       Returns: true if the window will be hidden
   */
-  bool getHideOnClose()
+  bool getHideOnClose() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_hide_on_close(cast(GtkWindow*)this._cPtr);
@@ -968,7 +968,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Returns the name of the themed icon for the window.
       Returns: the icon name
   */
-  string getIconName()
+  string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_icon_name(cast(GtkWindow*)this._cPtr);
@@ -981,7 +981,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Returns: true if mnemonics are supposed to be visible
           in this window.
   */
-  bool getMnemonicsVisible()
+  bool getMnemonicsVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_mnemonics_visible(cast(GtkWindow*)this._cPtr);
@@ -993,7 +993,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Returns: true if the window is set to be modal and
           establishes a grab when shown
   */
-  bool getModal()
+  bool getModal() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_modal(cast(GtkWindow*)this._cPtr);
@@ -1004,7 +1004,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Gets the value set by [gtk.window.Window.setResizable].
       Returns: true if the user can resize the window
   */
-  bool getResizable()
+  bool getResizable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_get_resizable(cast(GtkWindow*)this._cPtr);
@@ -1015,7 +1015,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Retrieves the title of the window.
       Returns: the title of the window
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_title(cast(GtkWindow*)this._cPtr);
@@ -1028,7 +1028,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       [gtk.window.Window.setTitlebar].
       Returns: the custom titlebar
   */
-  gtk.widget.Widget getTitlebar()
+  gtk.widget.Widget getTitlebar() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_titlebar(cast(GtkWindow*)this._cPtr);
@@ -1040,7 +1040,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Fetches the transient parent for this window.
       Returns: the transient parent for this window
   */
-  gtk.window.Window getTransientFor()
+  gtk.window.Window getTransientFor() nothrow
   {
     GtkWindow* _cretval;
     _cretval = gtk_window_get_transient_for(cast(GtkWindow*)this._cPtr);
@@ -1052,7 +1052,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Returns whether window has an explicit window group.
       Returns: true if window has an explicit window group.
   */
-  bool hasGroup()
+  bool hasGroup() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_has_group(cast(GtkWindow*)this._cPtr);
@@ -1069,7 +1069,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       differently in an active window from a widget in an inactive window.
       Returns: true if the window part of the current active window.
   */
-  bool isActive()
+  bool isActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_is_active(cast(GtkWindow*)this._cPtr);
@@ -1089,7 +1089,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       initial requested state is fullscreen.
       Returns: whether the window has a fullscreen state.
   */
-  bool isFullscreen()
+  bool isFullscreen() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_is_fullscreen(cast(GtkWindow*)this._cPtr);
@@ -1109,7 +1109,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       initial requested state is maximized.
       Returns: whether the window has a maximized state.
   */
-  bool isMaximized()
+  bool isMaximized() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_is_maximized(cast(GtkWindow*)this._cPtr);
@@ -1123,7 +1123,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       example by being on a inactive workspace, minimized, obstructed.
       Returns: whether the window is suspended.
   */
-  bool isSuspended()
+  bool isSuspended() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_window_is_suspended(cast(GtkWindow*)this._cPtr);
@@ -1147,7 +1147,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       notifications on the [gtk.window.Window.maximized]
       property.
   */
-  void maximize()
+  void maximize() nothrow
   {
     gtk_window_maximize(cast(GtkWindow*)this._cPtr);
   }
@@ -1168,7 +1168,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       You can track result of this operation via the
       [gdk.toplevel.Toplevel.state] property.
   */
-  void minimize()
+  void minimize() nothrow
   {
     gtk_window_minimize(cast(GtkWindow*)this._cPtr);
   }
@@ -1183,7 +1183,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       
       If window is hidden, this function also makes it visible.
   */
-  void present()
+  void present() nothrow
   {
     gtk_window_present(cast(GtkWindow*)this._cPtr);
   }
@@ -1203,7 +1203,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   
       Deprecated: Use [gtk.window.Window.present]
   */
-  void presentWithTime(uint timestamp)
+  void presentWithTime(uint timestamp) nothrow
   {
     gtk_window_present_with_time(cast(GtkWindow*)this._cPtr, timestamp);
   }
@@ -1226,7 +1226,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         application = a [gtk.application.Application], or null to unset
   */
-  void setApplication(gtk.application.Application application = null)
+  void setApplication(gtk.application.Application application = null) nothrow
   {
     gtk_window_set_application(cast(GtkWindow*)this._cPtr, application ? cast(GtkApplication*)application._cPtr(No.Dup) : null);
   }
@@ -1237,7 +1237,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     gtk_window_set_child(cast(GtkWindow*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -1260,7 +1260,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         setting = true to decorate the window
   */
-  void setDecorated(bool setting)
+  void setDecorated(bool setting) nothrow
   {
     gtk_window_set_decorated(cast(GtkWindow*)this._cPtr, setting);
   }
@@ -1300,7 +1300,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
         width = width in pixels, or -1 to unset the default width
         height = height in pixels, or -1 to unset the default height
   */
-  void setDefaultSize(int width, int height)
+  void setDefaultSize(int width, int height) nothrow
   {
     gtk_window_set_default_size(cast(GtkWindow*)this._cPtr, width, height);
   }
@@ -1315,7 +1315,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
         defaultWidget = widget to be the default
             to unset the default widget for the toplevel
   */
-  void setDefaultWidget(gtk.widget.Widget defaultWidget = null)
+  void setDefaultWidget(gtk.widget.Widget defaultWidget = null) nothrow
   {
     gtk_window_set_default_widget(cast(GtkWindow*)this._cPtr, defaultWidget ? cast(GtkWidget*)defaultWidget._cPtr(No.Dup) : null);
   }
@@ -1337,7 +1337,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         setting = true to decorate the window as deletable
   */
-  void setDeletable(bool setting)
+  void setDeletable(bool setting) nothrow
   {
     gtk_window_set_deletable(cast(GtkWindow*)this._cPtr, setting);
   }
@@ -1352,7 +1352,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         setting = whether to destroy window with its transient parent
   */
-  void setDestroyWithParent(bool setting)
+  void setDestroyWithParent(bool setting) nothrow
   {
     gtk_window_set_destroy_with_parent(cast(GtkWindow*)this._cPtr, setting);
   }
@@ -1366,7 +1366,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         display = a [gdk.display.Display]
   */
-  void setDisplay(gdk.display.Display display)
+  void setDisplay(gdk.display.Display display) nothrow
   {
     gtk_window_set_display(cast(GtkWindow*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
   }
@@ -1384,7 +1384,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
         focus = widget to be the new focus widget, or null to unset
             any focus widget for the toplevel window.
   */
-  void setFocus(gtk.widget.Widget focus = null)
+  void setFocus(gtk.widget.Widget focus = null) nothrow
   {
     gtk_window_set_focus(cast(GtkWindow*)this._cPtr, focus ? cast(GtkWidget*)focus._cPtr(No.Dup) : null);
   }
@@ -1398,7 +1398,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         setting = the new value
   */
-  void setFocusVisible(bool setting)
+  void setFocusVisible(bool setting) nothrow
   {
     gtk_window_set_focus_visible(cast(GtkWindow*)this._cPtr, setting);
   }
@@ -1410,7 +1410,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         handleMenubarAccel = true to make window handle F10
   */
-  void setHandleMenubarAccel(bool handleMenubarAccel)
+  void setHandleMenubarAccel(bool handleMenubarAccel) nothrow
   {
     gtk_window_set_handle_menubar_accel(cast(GtkWindow*)this._cPtr, handleMenubarAccel);
   }
@@ -1422,7 +1422,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         setting = whether to hide the window when it is closed
   */
-  void setHideOnClose(bool setting)
+  void setHideOnClose(bool setting) nothrow
   {
     gtk_window_set_hide_on_close(cast(GtkWindow*)this._cPtr, setting);
   }
@@ -1439,7 +1439,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         name = the name of the themed icon
   */
-  void setIconName(string name = null)
+  void setIconName(string name = null) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_window_set_icon_name(cast(GtkWindow*)this._cPtr, _name);
@@ -1454,7 +1454,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         setting = the new value
   */
-  void setMnemonicsVisible(bool setting)
+  void setMnemonicsVisible(bool setting) nothrow
   {
     gtk_window_set_mnemonics_visible(cast(GtkWindow*)this._cPtr, setting);
   }
@@ -1471,7 +1471,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         modal = whether the window is modal
   */
-  void setModal(bool modal)
+  void setModal(bool modal) nothrow
   {
     gtk_window_set_modal(cast(GtkWindow*)this._cPtr, modal);
   }
@@ -1484,7 +1484,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         resizable = true if the user can resize this window
   */
-  void setResizable(bool resizable)
+  void setResizable(bool resizable) nothrow
   {
     gtk_window_set_resizable(cast(GtkWindow*)this._cPtr, resizable);
   }
@@ -1508,7 +1508,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         startupId = a string with startup-notification identifier
   */
-  void setStartupId(string startupId)
+  void setStartupId(string startupId) nothrow
   {
     const(char)* _startupId = startupId.toCString(No.Alloc);
     gtk_window_set_startup_id(cast(GtkWindow*)this._cPtr, _startupId);
@@ -1529,7 +1529,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         title = title of the window
   */
-  void setTitle(string title = null)
+  void setTitle(string title = null) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_window_set_title(cast(GtkWindow*)this._cPtr, _title);
@@ -1551,7 +1551,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         titlebar = the widget to use as titlebar
   */
-  void setTitlebar(gtk.widget.Widget titlebar = null)
+  void setTitlebar(gtk.widget.Widget titlebar = null) nothrow
   {
     gtk_window_set_titlebar(cast(GtkWindow*)this._cPtr, titlebar ? cast(GtkWidget*)titlebar._cPtr(No.Dup) : null);
   }
@@ -1572,7 +1572,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         parent = parent window
   */
-  void setTransientFor(gtk.window.Window parent = null)
+  void setTransientFor(gtk.window.Window parent = null) nothrow
   {
     gtk_window_set_transient_for(cast(GtkWindow*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
   }
@@ -1592,7 +1592,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       [gdk.toplevel.Toplevel.state] property, or by listening to
       notifications of the [gtk.window.Window.fullscreened] property.
   */
-  void unfullscreen()
+  void unfullscreen() nothrow
   {
     gtk_window_unfullscreen(cast(GtkWindow*)this._cPtr);
   }
@@ -1609,7 +1609,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       [gdk.toplevel.Toplevel.state] property, or by listening to
       notifications on the [gtk.window.Window.maximized] property.
   */
-  void unmaximize()
+  void unmaximize() nothrow
   {
     gtk_window_unmaximize(cast(GtkWindow*)this._cPtr);
   }
@@ -1626,7 +1626,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       You can track result of this operation via the
       [gdk.toplevel.Toplevel.state] property.
   */
-  void unminimize()
+  void unminimize() nothrow
   {
     gtk_window_unminimize(cast(GtkWindow*)this._cPtr);
   }
@@ -1649,13 +1649,13 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivateDefault(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivateDefault(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.window.Window)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1664,7 +1664,14 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.window.Window.activateDefault");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1689,13 +1696,13 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivateFocus(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivateFocus(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.window.Window)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1704,7 +1711,14 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.window.Window.activateFocus");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1727,22 +1741,30 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCloseRequest(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCloseRequest(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.window.Window)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.window.Window.closeRequest");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1778,18 +1800,19 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEnableDebugging(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEnableDebugging(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.window.Window)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1797,7 +1820,14 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.window.Window.enableDebugging");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1825,13 +1855,13 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Deprecated: Use [gtk.shortcut.Shortcut] and [gtk.event_controller.EventController]
         to implement keyboard shortcuts
   */
-  gulong connectKeysChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectKeysChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.window.Window)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1840,7 +1870,14 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.window.Window.keysChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1870,7 +1907,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
           remove it by setting the :application property to null.
       Returns: Builder instance for fluent chaining
   */
-  T application(gtk.application.Application propval)
+  T application(gtk.application.Application propval) nothrow
   {
     return setProperty("application", propval);
   }
@@ -1881,7 +1918,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
         propval = The child widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -1892,7 +1929,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
         propval = Whether the window should have a frame (also known as *decorations*).
       Returns: Builder instance for fluent chaining
   */
-  T decorated(bool propval)
+  T decorated(bool propval) nothrow
   {
     return setProperty("decorated", propval);
   }
@@ -1903,7 +1940,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
         propval = The default height of the window.
       Returns: Builder instance for fluent chaining
   */
-  T defaultHeight(int propval)
+  T defaultHeight(int propval) nothrow
   {
     return setProperty("default-height", propval);
   }
@@ -1914,7 +1951,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
         propval = The default widget.
       Returns: Builder instance for fluent chaining
   */
-  T defaultWidget(gtk.widget.Widget propval)
+  T defaultWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("default-widget", propval);
   }
@@ -1925,7 +1962,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
         propval = The default width of the window.
       Returns: Builder instance for fluent chaining
   */
-  T defaultWidth(int propval)
+  T defaultWidth(int propval) nothrow
   {
     return setProperty("default-width", propval);
   }
@@ -1936,7 +1973,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
         propval = Whether the window frame should have a close button.
       Returns: Builder instance for fluent chaining
   */
-  T deletable(bool propval)
+  T deletable(bool propval) nothrow
   {
     return setProperty("deletable", propval);
   }
@@ -1947,7 +1984,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
         propval = If this window should be destroyed when the parent is destroyed.
       Returns: Builder instance for fluent chaining
   */
-  T destroyWithParent(bool propval)
+  T destroyWithParent(bool propval) nothrow
   {
     return setProperty("destroy-with-parent", propval);
   }
@@ -1958,7 +1995,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
         propval = The display that will display this window.
       Returns: Builder instance for fluent chaining
   */
-  T display(gdk.display.Display propval)
+  T display(gdk.display.Display propval) nothrow
   {
     return setProperty("display", propval);
   }
@@ -1972,7 +2009,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
           and should not be set by applications.
       Returns: Builder instance for fluent chaining
   */
-  T focusVisible(bool propval)
+  T focusVisible(bool propval) nothrow
   {
     return setProperty("focus-visible", propval);
   }
@@ -1983,7 +2020,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
         propval = The focus widget.
       Returns: Builder instance for fluent chaining
   */
-  T focusWidget(gtk.widget.Widget propval)
+  T focusWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("focus-widget", propval);
   }
@@ -2000,7 +2037,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
           operation was successful.
       Returns: Builder instance for fluent chaining
   */
-  T fullscreened(bool propval)
+  T fullscreened(bool propval) nothrow
   {
     return setProperty("fullscreened", propval);
   }
@@ -2012,7 +2049,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
           menubars.
       Returns: Builder instance for fluent chaining
   */
-  T handleMenubarAccel(bool propval)
+  T handleMenubarAccel(bool propval) nothrow
   {
     return setProperty("handle-menubar-accel", propval);
   }
@@ -2023,7 +2060,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
         propval = If this window should be hidden when the users clicks the close button.
       Returns: Builder instance for fluent chaining
   */
-  T hideOnClose(bool propval)
+  T hideOnClose(bool propval) nothrow
   {
     return setProperty("hide-on-close", propval);
   }
@@ -2036,7 +2073,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
           See [gtk.icon_theme.IconTheme] for more details.
       Returns: Builder instance for fluent chaining
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
@@ -2053,7 +2090,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
           operation was successful.
       Returns: Builder instance for fluent chaining
   */
-  T maximized(bool propval)
+  T maximized(bool propval) nothrow
   {
     return setProperty("maximized", propval);
   }
@@ -2067,7 +2104,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
           and should not be set by applications.
       Returns: Builder instance for fluent chaining
   */
-  T mnemonicsVisible(bool propval)
+  T mnemonicsVisible(bool propval) nothrow
   {
     return setProperty("mnemonics-visible", propval);
   }
@@ -2078,7 +2115,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
         propval = If true, the window is modal.
       Returns: Builder instance for fluent chaining
   */
-  T modal(bool propval)
+  T modal(bool propval) nothrow
   {
     return setProperty("modal", propval);
   }
@@ -2089,7 +2126,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
         propval = If true, users can resize the window.
       Returns: Builder instance for fluent chaining
   */
-  T resizable(bool propval)
+  T resizable(bool propval) nothrow
   {
     return setProperty("resizable", propval);
   }
@@ -2100,7 +2137,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
         propval = A write-only property for setting window's startup notification identifier.
       Returns: Builder instance for fluent chaining
   */
-  T startupId(string propval)
+  T startupId(string propval) nothrow
   {
     return setProperty("startup-id", propval);
   }
@@ -2111,7 +2148,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
         propval = The title of the window.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -2122,7 +2159,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
         propval = The titlebar widget.
       Returns: Builder instance for fluent chaining
   */
-  T titlebar(gtk.widget.Widget propval)
+  T titlebar(gtk.widget.Widget propval) nothrow
   {
     return setProperty("titlebar", propval);
   }
@@ -2133,7 +2170,7 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
         propval = The transient parent of the window.
       Returns: Builder instance for fluent chaining
   */
-  T transientFor(gtk.window.Window propval)
+  T transientFor(gtk.window.Window propval) nothrow
   {
     return setProperty("transient-for", propval);
   }
@@ -2146,7 +2183,7 @@ final class WindowGidBuilder : WindowGidBuilderImpl!WindowGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Window build()
+  Window build() nothrow
   {
     return new Window(cast(void*)createGObject(Window._getGType), No.Take);
   }

@@ -17,26 +17,26 @@ class CustomSorter : gtk.sorter.Sorter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_custom_sorter_get_type != &gidSymbolNotFound ? gtk_custom_sorter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CustomSorter self()
+  override CustomSorter self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class CustomSorter : gtk.sorter.Sorter
       Get builder for [gtk.custom_sorter.CustomSorter]
       Returns: New builder object
   */
-  static CustomSorterGidBuilder builder()
+  static CustomSorterGidBuilder builder() nothrow
   {
     return new CustomSorterGidBuilder;
   }
@@ -62,16 +62,23 @@ class CustomSorter : gtk.sorter.Sorter
   *   sortFunc = the callback delegate to use for sorting
   * Returns: a new `CustomSorter`
   */
-  this(CustomSortDelegate sortFunc)
+  this(CustomSortDelegate sortFunc) nothrow
   {
-    extern(C) int _sortFuncCallback(const(void)* a, const(void)* b, void* userData)
+    extern(C) int _sortFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
       auto _dlg = cast(CustomSortDelegate*)userData;
       auto aObj = cast(GObject*)a;
       auto bObj = cast(GObject*)b;
+      int _retval;
 
-      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(aObj, No.Take),
-      gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(bObj, No.Take));
+      try
+      {
+        _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(aObj, No.Take),
+        gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(bObj, No.Take));
+      }
+      catch (Exception e)
+      gidInvokeCallbackExceptionHandler(e, "gtk.custom_sorter.CustomSorter");
+
       return _retval;
     }
 
@@ -91,16 +98,23 @@ class CustomSorter : gtk.sorter.Sorter
   * Params:
   *   sortFunc = function to sort items
   */
-  void setSortFunc(CustomSortDelegate sortFunc)
+  void setSortFunc(CustomSortDelegate sortFunc) nothrow
   {
-    extern(C) int _sortFuncCallback(const(void)* a, const(void)* b, void* userData)
+    extern(C) int _sortFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
       auto _dlg = cast(CustomSortDelegate*)userData;
       auto aObj = cast(GObject*)a;
       auto bObj = cast(GObject*)b;
+      int _retval;
 
-      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(aObj, No.Take),
-      gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(bObj, No.Take));
+      try
+      {
+        _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(aObj, No.Take),
+        gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(bObj, No.Take));
+      }
+      catch (Exception e)
+      gidInvokeCallbackExceptionHandler(e, "gtk.custom_sorter.CustomSorter.setSortFunc");
+
       return _retval;
     }
 
@@ -122,7 +136,7 @@ final class CustomSorterGidBuilder : CustomSorterGidBuilderImpl!CustomSorterGidB
       Create object from builder.
       Returns: New object
   */
-  CustomSorter build()
+  CustomSorter build() nothrow
   {
     return new CustomSorter(cast(void*)createGObject(CustomSorter._getGType), Yes.Take);
   }

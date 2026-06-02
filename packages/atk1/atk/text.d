@@ -38,7 +38,7 @@ interface Text
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_text_get_type != &gidSymbolNotFound ? atk_text_get_type() : cast(GType)0;
@@ -391,7 +391,7 @@ interface Text
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTextAttributesChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectTextAttributesChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `TextCaretMoved` signal.
@@ -412,7 +412,7 @@ interface Text
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTextCaretMoved(T)(T callback, Flag!"After" after = No.After);
+  gulong connectTextCaretMoved(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `TextChanged` signal.
@@ -441,7 +441,7 @@ interface Text
       Deprecated: Use #AtkObject::text-insert or
         #AtkObject::text-remove instead.
   */
-  gulong connectTextChanged(T)(string detail = null, T callback, Flag!"After" after = No.After);
+  gulong connectTextChanged(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `TextInsert` signal.
@@ -468,7 +468,7 @@ interface Text
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTextInsert(T)(string detail = null, T callback, Flag!"After" after = No.After);
+  gulong connectTextInsert(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `TextRemove` signal.
@@ -495,7 +495,7 @@ interface Text
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTextRemove(T)(string detail = null, T callback, Flag!"After" after = No.After);
+  gulong connectTextRemove(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `TextSelectionChanged` signal.
@@ -513,7 +513,7 @@ interface Text
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTextSelectionChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectTextSelectionChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [atk.text.Text]

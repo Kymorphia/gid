@@ -15,26 +15,26 @@ class SortOptions : arrow.function_options.FunctionOptions
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_sort_options_get_type != &gidSymbolNotFound ? garrow_sort_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SortOptions self()
+  override SortOptions self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class SortOptions : arrow.function_options.FunctionOptions
       Get builder for [arrow.sort_options.SortOptions]
       Returns: New builder object
   */
-  static SortOptionsGidBuilder builder()
+  static SortOptionsGidBuilder builder() nothrow
   {
     return new SortOptionsGidBuilder;
   }
 
   /** */
-  this(arrow.sort_key.SortKey[] sortKeys = null)
+  this(arrow.sort_key.SortKey[] sortKeys = null) nothrow
   {
     GArrowSortOptions* _cretval;
     auto _sortKeys = gListFromD!(arrow.sort_key.SortKey)(sortKeys);
@@ -64,7 +64,7 @@ class SortOptions : arrow.function_options.FunctionOptions
       Params:
         sortKey = The sort key to be added.
   */
-  void addSortKey(arrow.sort_key.SortKey sortKey)
+  void addSortKey(arrow.sort_key.SortKey sortKey) nothrow
   {
     garrow_sort_options_add_sort_key(cast(GArrowSortOptions*)this._cPtr, sortKey ? cast(GArrowSortKey*)sortKey._cPtr(No.Dup) : null);
   }
@@ -72,7 +72,7 @@ class SortOptions : arrow.function_options.FunctionOptions
   alias equal = arrow.function_options.FunctionOptions.equal;
 
   /** */
-  bool equal(arrow.sort_options.SortOptions otherOptions)
+  bool equal(arrow.sort_options.SortOptions otherOptions) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_sort_options_equal(cast(GArrowSortOptions*)this._cPtr, otherOptions ? cast(GArrowSortOptions*)otherOptions._cPtr(No.Dup) : null);
@@ -80,7 +80,7 @@ class SortOptions : arrow.function_options.FunctionOptions
   }
 
   /** */
-  arrow.sort_key.SortKey[] getSortKeys()
+  arrow.sort_key.SortKey[] getSortKeys() nothrow
   {
     GList* _cretval;
     _cretval = garrow_sort_options_get_sort_keys(cast(GArrowSortOptions*)this._cPtr);
@@ -94,7 +94,7 @@ class SortOptions : arrow.function_options.FunctionOptions
       Params:
         sortKeys = The sort keys to be used.
   */
-  void setSortKeys(arrow.sort_key.SortKey[] sortKeys)
+  void setSortKeys(arrow.sort_key.SortKey[] sortKeys) nothrow
   {
     auto _sortKeys = gListFromD!(arrow.sort_key.SortKey)(sortKeys);
     scope(exit) containerFree!(GList*, arrow.sort_key.SortKey, GidOwnership.None)(_sortKeys);
@@ -114,7 +114,7 @@ final class SortOptionsGidBuilder : SortOptionsGidBuilderImpl!SortOptionsGidBuil
       Create object from builder.
       Returns: New object
   */
-  SortOptions build()
+  SortOptions build() nothrow
   {
     return new SortOptions(cast(void*)createGObject(SortOptions._getGType), Yes.Take);
   }

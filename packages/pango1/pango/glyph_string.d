@@ -21,32 +21,32 @@ class GlyphString : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_glyph_string_get_type != &gidSymbolNotFound ? pango_glyph_string_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GlyphString self()
+  override GlyphString self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class GlyphString : gobject.boxed.Boxed
       Get `numGlyphs` field.
       Returns: number of glyphs in this glyph string
   */
-  @property int numGlyphs()
+  @property int numGlyphs() nothrow
   {
     return (cast(PangoGlyphString*)this._cPtr).numGlyphs;
   }
@@ -65,7 +65,7 @@ class GlyphString : gobject.boxed.Boxed
       Params:
         propval = number of glyphs in this glyph string
   */
-  @property void numGlyphs(int propval)
+  @property void numGlyphs(int propval) nothrow
   {
     (cast(PangoGlyphString*)this._cPtr).numGlyphs = propval;
   }
@@ -75,7 +75,7 @@ class GlyphString : gobject.boxed.Boxed
       Returns: the newly allocated [pango.glyph_string.GlyphString], which
           should be freed with [pango.glyph_string.GlyphString.free].
   */
-  this()
+  this() nothrow
   {
     PangoGlyphString* _cretval;
     _cretval = pango_glyph_string_new();
@@ -86,7 +86,7 @@ class GlyphString : gobject.boxed.Boxed
       Copy a glyph string and associated storage.
       Returns: the newly allocated [pango.glyph_string.GlyphString]
   */
-  pango.glyph_string.GlyphString copy()
+  pango.glyph_string.GlyphString copy() nothrow
   {
     PangoGlyphString* _cretval;
     _cretval = pango_glyph_string_copy(cast(PangoGlyphString*)this._cPtr);
@@ -109,7 +109,7 @@ class GlyphString : gobject.boxed.Boxed
         inkRect = rectangle used to store the extents of the glyph string as drawn
         logicalRect = rectangle used to store the logical extents of the glyph string
   */
-  void extents(pango.font.Font font, out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
+  void extents(pango.font.Font font, out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect) nothrow
   {
     pango_glyph_string_extents(cast(PangoGlyphString*)this._cPtr, font ? cast(PangoFont*)font._cPtr(No.Dup) : null, &inkRect, &logicalRect);
   }
@@ -131,7 +131,7 @@ class GlyphString : gobject.boxed.Boxed
         logicalRect = rectangle used to
             store the logical extents of the glyph string range
   */
-  void extentsRange(int start, int end, pango.font.Font font, out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
+  void extentsRange(int start, int end, pango.font.Font font, out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect) nothrow
   {
     pango_glyph_string_extents_range(cast(PangoGlyphString*)this._cPtr, start, end, font ? cast(PangoFont*)font._cPtr(No.Dup) : null, &inkRect, &logicalRect);
   }
@@ -145,7 +145,7 @@ class GlyphString : gobject.boxed.Boxed
       geometry.width for each glyph in the glyphs.
       Returns: the logical width of the glyph string.
   */
-  int getWidth()
+  int getWidth() nothrow
   {
     int _retval;
     _retval = pango_glyph_string_get_width(cast(PangoGlyphString*)this._cPtr);
@@ -173,7 +173,7 @@ class GlyphString : gobject.boxed.Boxed
             or end (true) of the character.
         xPos = location to store result
   */
-  void indexToX(string text, pango.analysis.Analysis analysis, int index, bool trailing, out int xPos)
+  void indexToX(string text, pango.analysis.Analysis analysis, int index, bool trailing, out int xPos) nothrow
   {
     int _length;
     if (text)
@@ -200,7 +200,7 @@ class GlyphString : gobject.boxed.Boxed
             or end (true) of the character.
         xPos = location to store result
   */
-  void indexToXFull(string text, pango.analysis.Analysis analysis, pango.types.LogAttr attrs, int index, bool trailing, out int xPos)
+  void indexToXFull(string text, pango.analysis.Analysis analysis, pango.types.LogAttr attrs, int index, bool trailing, out int xPos) nothrow
   {
     int _length;
     if (text)
@@ -216,7 +216,7 @@ class GlyphString : gobject.boxed.Boxed
       Params:
         newLen = the new length of the string
   */
-  void setSize(int newLen)
+  void setSize(int newLen) nothrow
   {
     pango_glyph_string_set_size(cast(PangoGlyphString*)this._cPtr, newLen);
   }
@@ -238,7 +238,7 @@ class GlyphString : gobject.boxed.Boxed
         trailing = location to store a boolean indicating whether the
             user clicked on the leading or trailing edge of the character
   */
-  void xToIndex(string text, pango.analysis.Analysis analysis, int xPos, out int index, out int trailing)
+  void xToIndex(string text, pango.analysis.Analysis analysis, int xPos, out int index, out int trailing) nothrow
   {
     int _length;
     if (text)

@@ -33,26 +33,26 @@ class ActionBar : gtk.bin.Bin
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_action_bar_get_type != &gidSymbolNotFound ? gtk_action_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ActionBar self()
+  override ActionBar self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class ActionBar : gtk.bin.Bin
       Get builder for [gtk.action_bar.ActionBar]
       Returns: New builder object
   */
-  static ActionBarGidBuilder builder()
+  static ActionBarGidBuilder builder() nothrow
   {
     return new ActionBarGidBuilder;
   }
@@ -70,7 +70,7 @@ class ActionBar : gtk.bin.Bin
       Creates a new #GtkActionBar widget.
       Returns: a new #GtkActionBar
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_bar_new();
@@ -81,7 +81,7 @@ class ActionBar : gtk.bin.Bin
       Retrieves the center bar widget of the bar.
       Returns: the center #GtkWidget or null.
   */
-  gtk.widget.Widget getCenterWidget()
+  gtk.widget.Widget getCenterWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_bar_get_center_widget(cast(GtkActionBar*)this._cPtr);
@@ -96,7 +96,7 @@ class ActionBar : gtk.bin.Bin
       Params:
         child = the #GtkWidget to be added to action_bar
   */
-  void packEnd(gtk.widget.Widget child)
+  void packEnd(gtk.widget.Widget child) nothrow
   {
     gtk_action_bar_pack_end(cast(GtkActionBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -108,7 +108,7 @@ class ActionBar : gtk.bin.Bin
       Params:
         child = the #GtkWidget to be added to action_bar
   */
-  void packStart(gtk.widget.Widget child)
+  void packStart(gtk.widget.Widget child) nothrow
   {
     gtk_action_bar_pack_start(cast(GtkActionBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -119,7 +119,7 @@ class ActionBar : gtk.bin.Bin
       Params:
         centerWidget = a widget to use for the center
   */
-  void setCenterWidget(gtk.widget.Widget centerWidget = null)
+  void setCenterWidget(gtk.widget.Widget centerWidget = null) nothrow
   {
     gtk_action_bar_set_center_widget(cast(GtkActionBar*)this._cPtr, centerWidget ? cast(GtkWidget*)centerWidget._cPtr(No.Dup) : null);
   }
@@ -138,7 +138,7 @@ final class ActionBarGidBuilder : ActionBarGidBuilderImpl!ActionBarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ActionBar build()
+  ActionBar build() nothrow
   {
     return new ActionBar(cast(void*)createGObject(ActionBar._getGType), No.Take);
   }

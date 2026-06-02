@@ -37,26 +37,26 @@ class Alignment : gtk.bin.Bin
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_alignment_get_type != &gidSymbolNotFound ? gtk_alignment_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Alignment self()
+  override Alignment self() nothrow
   {
     return this;
   }
@@ -65,7 +65,7 @@ class Alignment : gtk.bin.Bin
       Get builder for [gtk.alignment.Alignment]
       Returns: New builder object
   */
-  static AlignmentGidBuilder builder()
+  static AlignmentGidBuilder builder() nothrow
   {
     return new AlignmentGidBuilder;
   }
@@ -76,7 +76,7 @@ class Alignment : gtk.bin.Bin
   
       Deprecated: Use [gtk.widget.Widget.setMarginBottom] instead
   */
-  @property uint bottomPadding()
+  @property uint bottomPadding() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("bottom-padding");
   }
@@ -88,7 +88,7 @@ class Alignment : gtk.bin.Bin
   
       Deprecated: Use [gtk.widget.Widget.setMarginBottom] instead
   */
-  @property void bottomPadding(uint propval)
+  @property void bottomPadding(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("bottom-padding", propval);
   }
@@ -99,7 +99,7 @@ class Alignment : gtk.bin.Bin
   
       Deprecated: Use [gtk.widget.Widget.setMarginStart] instead
   */
-  @property uint leftPadding()
+  @property uint leftPadding() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("left-padding");
   }
@@ -111,7 +111,7 @@ class Alignment : gtk.bin.Bin
   
       Deprecated: Use [gtk.widget.Widget.setMarginStart] instead
   */
-  @property void leftPadding(uint propval)
+  @property void leftPadding(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("left-padding", propval);
   }
@@ -122,7 +122,7 @@ class Alignment : gtk.bin.Bin
   
       Deprecated: Use [gtk.widget.Widget.setMarginEnd] instead
   */
-  @property uint rightPadding()
+  @property uint rightPadding() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("right-padding");
   }
@@ -134,7 +134,7 @@ class Alignment : gtk.bin.Bin
   
       Deprecated: Use [gtk.widget.Widget.setMarginEnd] instead
   */
-  @property void rightPadding(uint propval)
+  @property void rightPadding(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("right-padding", propval);
   }
@@ -145,7 +145,7 @@ class Alignment : gtk.bin.Bin
   
       Deprecated: Use [gtk.widget.Widget.setMarginTop] instead
   */
-  @property uint topPadding()
+  @property uint topPadding() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("top-padding");
   }
@@ -157,7 +157,7 @@ class Alignment : gtk.bin.Bin
   
       Deprecated: Use [gtk.widget.Widget.setMarginTop] instead
   */
-  @property void topPadding(uint propval)
+  @property void topPadding(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("top-padding", propval);
   }
@@ -170,7 +170,7 @@ class Alignment : gtk.bin.Bin
   
       Deprecated: Use [gtk.widget.Widget.setHalign] on the child instead
   */
-  @property float xalign()
+  @property float xalign() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(float)("xalign");
   }
@@ -184,7 +184,7 @@ class Alignment : gtk.bin.Bin
   
       Deprecated: Use [gtk.widget.Widget.setHalign] on the child instead
   */
-  @property void xalign(float propval)
+  @property void xalign(float propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(float)("xalign", propval);
   }
@@ -197,7 +197,7 @@ class Alignment : gtk.bin.Bin
   
       Deprecated: Use [gtk.widget.Widget.setHexpand] on the child instead
   */
-  @property float xscale()
+  @property float xscale() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(float)("xscale");
   }
@@ -211,7 +211,7 @@ class Alignment : gtk.bin.Bin
   
       Deprecated: Use [gtk.widget.Widget.setHexpand] on the child instead
   */
-  @property void xscale(float propval)
+  @property void xscale(float propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(float)("xscale", propval);
   }
@@ -224,7 +224,7 @@ class Alignment : gtk.bin.Bin
   
       Deprecated: Use [gtk.widget.Widget.setValign] on the child instead
   */
-  @property float yalign()
+  @property float yalign() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(float)("yalign");
   }
@@ -238,7 +238,7 @@ class Alignment : gtk.bin.Bin
   
       Deprecated: Use [gtk.widget.Widget.setValign] on the child instead
   */
-  @property void yalign(float propval)
+  @property void yalign(float propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(float)("yalign", propval);
   }
@@ -251,7 +251,7 @@ class Alignment : gtk.bin.Bin
   
       Deprecated: Use [gtk.widget.Widget.setVexpand] on the child instead
   */
-  @property float yscale()
+  @property float yscale() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(float)("yscale");
   }
@@ -265,7 +265,7 @@ class Alignment : gtk.bin.Bin
   
       Deprecated: Use [gtk.widget.Widget.setVexpand] on the child instead
   */
-  @property void yscale(float propval)
+  @property void yscale(float propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(float)("yscale", propval);
   }
@@ -289,7 +289,7 @@ class Alignment : gtk.bin.Bin
   
       Deprecated: Use #GtkWidget alignment and margin properties
   */
-  this(float xalign, float yalign, float xscale, float yscale)
+  this(float xalign, float yalign, float xscale, float yscale) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_alignment_new(xalign, yalign, xscale, yscale);
@@ -312,7 +312,7 @@ class Alignment : gtk.bin.Bin
   
       Deprecated: Use #GtkWidget alignment and margin properties
   */
-  void getPadding(out uint paddingTop, out uint paddingBottom, out uint paddingLeft, out uint paddingRight)
+  void getPadding(out uint paddingTop, out uint paddingBottom, out uint paddingLeft, out uint paddingRight) nothrow
   {
     gtk_alignment_get_padding(cast(GtkAlignment*)this._cPtr, cast(uint*)&paddingTop, cast(uint*)&paddingBottom, cast(uint*)&paddingLeft, cast(uint*)&paddingRight);
   }
@@ -335,7 +335,7 @@ class Alignment : gtk.bin.Bin
   
       Deprecated: Use #GtkWidget alignment and margin properties
   */
-  void set(float xalign, float yalign, float xscale, float yscale)
+  void set(float xalign, float yalign, float xscale, float yscale) nothrow
   {
     gtk_alignment_set(cast(GtkAlignment*)this._cPtr, xalign, yalign, xscale, yscale);
   }
@@ -354,7 +354,7 @@ class Alignment : gtk.bin.Bin
   
       Deprecated: Use #GtkWidget alignment and margin properties
   */
-  void setPadding(uint paddingTop, uint paddingBottom, uint paddingLeft, uint paddingRight)
+  void setPadding(uint paddingTop, uint paddingBottom, uint paddingLeft, uint paddingRight) nothrow
   {
     gtk_alignment_set_padding(cast(GtkAlignment*)this._cPtr, paddingTop, paddingBottom, paddingLeft, paddingRight);
   }
@@ -373,7 +373,7 @@ class AlignmentGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
   
       Deprecated: Use [gtk.widget.Widget.setMarginBottom] instead
   */
-  T bottomPadding(uint propval)
+  T bottomPadding(uint propval) nothrow
   {
     return setProperty("bottom-padding", propval);
   }
@@ -386,7 +386,7 @@ class AlignmentGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
   
       Deprecated: Use [gtk.widget.Widget.setMarginStart] instead
   */
-  T leftPadding(uint propval)
+  T leftPadding(uint propval) nothrow
   {
     return setProperty("left-padding", propval);
   }
@@ -399,7 +399,7 @@ class AlignmentGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
   
       Deprecated: Use [gtk.widget.Widget.setMarginEnd] instead
   */
-  T rightPadding(uint propval)
+  T rightPadding(uint propval) nothrow
   {
     return setProperty("right-padding", propval);
   }
@@ -412,7 +412,7 @@ class AlignmentGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
   
       Deprecated: Use [gtk.widget.Widget.setMarginTop] instead
   */
-  T topPadding(uint propval)
+  T topPadding(uint propval) nothrow
   {
     return setProperty("top-padding", propval);
   }
@@ -427,7 +427,7 @@ class AlignmentGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
   
       Deprecated: Use [gtk.widget.Widget.setHalign] on the child instead
   */
-  T xalign(float propval)
+  T xalign(float propval) nothrow
   {
     return setProperty("xalign", propval);
   }
@@ -442,7 +442,7 @@ class AlignmentGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
   
       Deprecated: Use [gtk.widget.Widget.setHexpand] on the child instead
   */
-  T xscale(float propval)
+  T xscale(float propval) nothrow
   {
     return setProperty("xscale", propval);
   }
@@ -457,7 +457,7 @@ class AlignmentGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
   
       Deprecated: Use [gtk.widget.Widget.setValign] on the child instead
   */
-  T yalign(float propval)
+  T yalign(float propval) nothrow
   {
     return setProperty("yalign", propval);
   }
@@ -472,7 +472,7 @@ class AlignmentGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
   
       Deprecated: Use [gtk.widget.Widget.setVexpand] on the child instead
   */
-  T yscale(float propval)
+  T yscale(float propval) nothrow
   {
     return setProperty("yscale", propval);
   }
@@ -485,7 +485,7 @@ final class AlignmentGidBuilder : AlignmentGidBuilderImpl!AlignmentGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Alignment build()
+  Alignment build() nothrow
   {
     return new Alignment(cast(void*)createGObject(Alignment._getGType), No.Take);
   }

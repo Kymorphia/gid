@@ -14,26 +14,26 @@ class Date64DataType : arrow.temporal_data_type.TemporalDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_date64_data_type_get_type != &gidSymbolNotFound ? garrow_date64_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Date64DataType self()
+  override Date64DataType self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class Date64DataType : arrow.temporal_data_type.TemporalDataType
       Get builder for [arrow.date64_data_type.Date64DataType]
       Returns: New builder object
   */
-  static Date64DataTypeGidBuilder builder()
+  static Date64DataTypeGidBuilder builder() nothrow
   {
     return new Date64DataTypeGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowDate64DataType* _cretval;
     _cretval = garrow_date64_data_type_new();
@@ -68,7 +68,7 @@ final class Date64DataTypeGidBuilder : Date64DataTypeGidBuilderImpl!Date64DataTy
       Create object from builder.
       Returns: New object
   */
-  Date64DataType build()
+  Date64DataType build() nothrow
   {
     return new Date64DataType(cast(void*)createGObject(Date64DataType._getGType), Yes.Take);
   }

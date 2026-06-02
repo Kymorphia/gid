@@ -40,26 +40,26 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_clamp_layout_get_type != &gidSymbolNotFound ? adw_clamp_layout_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ClampLayout self()
+  override ClampLayout self() nothrow
   {
     return this;
   }
@@ -68,7 +68,7 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Get builder for [adw.clamp_layout.ClampLayout]
       Returns: New builder object
   */
-  static ClampLayoutGidBuilder builder()
+  static ClampLayoutGidBuilder builder() nothrow
   {
     return new ClampLayoutGidBuilder;
   }
@@ -80,7 +80,7 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
         It is the width if the layout is horizontal, or the height if it is
         vertical.
   */
-  @property int maximumSize()
+  @property int maximumSize() nothrow
   {
     return getMaximumSize();
   }
@@ -93,7 +93,7 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
           It is the width if the layout is horizontal, or the height if it is
           vertical.
   */
-  @property void maximumSize(int propval)
+  @property void maximumSize(int propval) nothrow
   {
     setMaximumSize(propval);
   }
@@ -115,7 +115,7 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
         Effectively, tightening the grip on a child before it reaches its maximum
         size makes transitions to and from the maximum size smoother when resizing.
   */
-  @property int tighteningThreshold()
+  @property int tighteningThreshold() nothrow
   {
     return getTighteningThreshold();
   }
@@ -138,7 +138,7 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
           Effectively, tightening the grip on a child before it reaches its maximum
           size makes transitions to and from the maximum size smoother when resizing.
   */
-  @property void tighteningThreshold(int propval)
+  @property void tighteningThreshold(int propval) nothrow
   {
     setTighteningThreshold(propval);
   }
@@ -149,7 +149,7 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
         
         Allows the sizes to vary depending on the text scale factor.
   */
-  @property adw.types.LengthUnit unit()
+  @property adw.types.LengthUnit unit() nothrow
   {
     return getUnit();
   }
@@ -161,7 +161,7 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
           
           Allows the sizes to vary depending on the text scale factor.
   */
-  @property void unit(adw.types.LengthUnit propval)
+  @property void unit(adw.types.LengthUnit propval) nothrow
   {
     setUnit(propval);
   }
@@ -172,7 +172,7 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Creates a new [adw.clamp_layout.ClampLayout].
       Returns: the newly created [adw.clamp_layout.ClampLayout]
   */
-  this()
+  this() nothrow
   {
     GtkLayoutManager* _cretval;
     _cretval = adw_clamp_layout_new();
@@ -183,7 +183,7 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Gets the maximum size allocated to the children.
       Returns: the maximum size to allocate to the children
   */
-  int getMaximumSize()
+  int getMaximumSize() nothrow
   {
     int _retval;
     _retval = adw_clamp_layout_get_maximum_size(cast(AdwClampLayout*)this._cPtr);
@@ -194,7 +194,7 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Gets the size above which the children are clamped.
       Returns: the size above which the children are clamped
   */
-  int getTighteningThreshold()
+  int getTighteningThreshold() nothrow
   {
     int _retval;
     _retval = adw_clamp_layout_get_tightening_threshold(cast(AdwClampLayout*)this._cPtr);
@@ -205,7 +205,7 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Gets the length unit for maximum size and tightening threshold.
       Returns: the length unit
   */
-  adw.types.LengthUnit getUnit()
+  adw.types.LengthUnit getUnit() nothrow
   {
     AdwLengthUnit _cretval;
     _cretval = adw_clamp_layout_get_unit(cast(AdwClampLayout*)this._cPtr);
@@ -221,7 +221,7 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Params:
         maximumSize = the maximum size
   */
-  void setMaximumSize(int maximumSize)
+  void setMaximumSize(int maximumSize) nothrow
   {
     adw_clamp_layout_set_maximum_size(cast(AdwClampLayout*)this._cPtr, maximumSize);
   }
@@ -245,7 +245,7 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Params:
         tighteningThreshold = the tightening threshold
   */
-  void setTighteningThreshold(int tighteningThreshold)
+  void setTighteningThreshold(int tighteningThreshold) nothrow
   {
     adw_clamp_layout_set_tightening_threshold(cast(AdwClampLayout*)this._cPtr, tighteningThreshold);
   }
@@ -258,7 +258,7 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Params:
         unit = the length unit
   */
-  void setUnit(adw.types.LengthUnit unit)
+  void setUnit(adw.types.LengthUnit unit) nothrow
   {
     adw_clamp_layout_set_unit(cast(AdwClampLayout*)this._cPtr, unit);
   }
@@ -279,7 +279,7 @@ class ClampLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderI
           vertical.
       Returns: Builder instance for fluent chaining
   */
-  T maximumSize(int propval)
+  T maximumSize(int propval) nothrow
   {
     return setProperty("maximum-size", propval);
   }
@@ -303,7 +303,7 @@ class ClampLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderI
           size makes transitions to and from the maximum size smoother when resizing.
       Returns: Builder instance for fluent chaining
   */
-  T tighteningThreshold(int propval)
+  T tighteningThreshold(int propval) nothrow
   {
     return setProperty("tightening-threshold", propval);
   }
@@ -316,7 +316,7 @@ class ClampLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderI
           Allows the sizes to vary depending on the text scale factor.
       Returns: Builder instance for fluent chaining
   */
-  T unit(adw.types.LengthUnit propval)
+  T unit(adw.types.LengthUnit propval) nothrow
   {
     return setProperty("unit", propval);
   }
@@ -329,7 +329,7 @@ final class ClampLayoutGidBuilder : ClampLayoutGidBuilderImpl!ClampLayoutGidBuil
       Create object from builder.
       Returns: New object
   */
-  ClampLayout build()
+  ClampLayout build() nothrow
   {
     return new ClampLayout(cast(void*)createGObject(ClampLayout._getGType), Yes.Take);
   }

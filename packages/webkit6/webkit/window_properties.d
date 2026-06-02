@@ -70,26 +70,26 @@ class WindowProperties : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_window_properties_get_type != &gidSymbolNotFound ? webkit_window_properties_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WindowProperties self()
+  override WindowProperties self() nothrow
   {
     return this;
   }
@@ -98,7 +98,7 @@ class WindowProperties : gobject.object.ObjectWrap
       Get builder for [webkit.window_properties.WindowProperties]
       Returns: New builder object
   */
-  static WindowPropertiesGidBuilder builder()
+  static WindowPropertiesGidBuilder builder() nothrow
   {
     return new WindowPropertiesGidBuilder;
   }
@@ -107,7 +107,7 @@ class WindowProperties : gobject.object.ObjectWrap
       Get `fullscreen` property.
       Returns: Whether window will be displayed fullscreen.
   */
-  @property bool fullscreen()
+  @property bool fullscreen() nothrow
   {
     return getFullscreen();
   }
@@ -116,7 +116,7 @@ class WindowProperties : gobject.object.ObjectWrap
       Get `geometry` property.
       Returns: The size and position of the window on the screen.
   */
-  @property gdk.rectangle.Rectangle geometry()
+  @property gdk.rectangle.Rectangle geometry() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.rectangle.Rectangle)("geometry");
   }
@@ -125,7 +125,7 @@ class WindowProperties : gobject.object.ObjectWrap
       Get `locationbarVisible` property.
       Returns: Whether the locationbar should be visible for the window.
   */
-  @property bool locationbarVisible()
+  @property bool locationbarVisible() nothrow
   {
     return getLocationbarVisible();
   }
@@ -134,7 +134,7 @@ class WindowProperties : gobject.object.ObjectWrap
       Get `menubarVisible` property.
       Returns: Whether the menubar should be visible for the window.
   */
-  @property bool menubarVisible()
+  @property bool menubarVisible() nothrow
   {
     return getMenubarVisible();
   }
@@ -143,7 +143,7 @@ class WindowProperties : gobject.object.ObjectWrap
       Get `resizable` property.
       Returns: Whether the window can be resized.
   */
-  @property bool resizable()
+  @property bool resizable() nothrow
   {
     return getResizable();
   }
@@ -152,7 +152,7 @@ class WindowProperties : gobject.object.ObjectWrap
       Get `scrollbarsVisible` property.
       Returns: Whether the scrollbars should be visible for the window.
   */
-  @property bool scrollbarsVisible()
+  @property bool scrollbarsVisible() nothrow
   {
     return getScrollbarsVisible();
   }
@@ -161,7 +161,7 @@ class WindowProperties : gobject.object.ObjectWrap
       Get `statusbarVisible` property.
       Returns: Whether the statusbar should be visible for the window.
   */
-  @property bool statusbarVisible()
+  @property bool statusbarVisible() nothrow
   {
     return getStatusbarVisible();
   }
@@ -170,7 +170,7 @@ class WindowProperties : gobject.object.ObjectWrap
       Get `toolbarVisible` property.
       Returns: Whether the toolbar should be visible for the window.
   */
-  @property bool toolbarVisible()
+  @property bool toolbarVisible() nothrow
   {
     return getToolbarVisible();
   }
@@ -179,7 +179,7 @@ class WindowProperties : gobject.object.ObjectWrap
       Get whether the window should be shown in fullscreen state or not.
       Returns: true if the window should be fullscreen or false otherwise.
   */
-  bool getFullscreen()
+  bool getFullscreen() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_window_properties_get_fullscreen(cast(WebKitWindowProperties*)this._cPtr);
@@ -192,7 +192,7 @@ class WindowProperties : gobject.object.ObjectWrap
       Params:
         geometry = return location for the window geometry
   */
-  void getGeometry(out gdk.rectangle.Rectangle geometry)
+  void getGeometry(out gdk.rectangle.Rectangle geometry) nothrow
   {
     webkit_window_properties_get_geometry(cast(WebKitWindowProperties*)this._cPtr, cast(GdkRectangle*)&geometry);
   }
@@ -201,7 +201,7 @@ class WindowProperties : gobject.object.ObjectWrap
       Get whether the window should have the locationbar visible or not.
       Returns: true if locationbar should be visible or false otherwise.
   */
-  bool getLocationbarVisible()
+  bool getLocationbarVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_window_properties_get_locationbar_visible(cast(WebKitWindowProperties*)this._cPtr);
@@ -212,7 +212,7 @@ class WindowProperties : gobject.object.ObjectWrap
       Get whether the window should have the menubar visible or not.
       Returns: true if menubar should be visible or false otherwise.
   */
-  bool getMenubarVisible()
+  bool getMenubarVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_window_properties_get_menubar_visible(cast(WebKitWindowProperties*)this._cPtr);
@@ -223,7 +223,7 @@ class WindowProperties : gobject.object.ObjectWrap
       Get whether the window should be resizable by the user or not.
       Returns: true if the window should be resizable or false otherwise.
   */
-  bool getResizable()
+  bool getResizable() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_window_properties_get_resizable(cast(WebKitWindowProperties*)this._cPtr);
@@ -234,7 +234,7 @@ class WindowProperties : gobject.object.ObjectWrap
       Get whether the window should have the scrollbars visible or not.
       Returns: true if scrollbars should be visible or false otherwise.
   */
-  bool getScrollbarsVisible()
+  bool getScrollbarsVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_window_properties_get_scrollbars_visible(cast(WebKitWindowProperties*)this._cPtr);
@@ -245,7 +245,7 @@ class WindowProperties : gobject.object.ObjectWrap
       Get whether the window should have the statusbar visible or not.
       Returns: true if statusbar should be visible or false otherwise.
   */
-  bool getStatusbarVisible()
+  bool getStatusbarVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_window_properties_get_statusbar_visible(cast(WebKitWindowProperties*)this._cPtr);
@@ -256,7 +256,7 @@ class WindowProperties : gobject.object.ObjectWrap
       Get whether the window should have the toolbar visible or not.
       Returns: true if toolbar should be visible or false otherwise.
   */
-  bool getToolbarVisible()
+  bool getToolbarVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_window_properties_get_toolbar_visible(cast(WebKitWindowProperties*)this._cPtr);
@@ -274,7 +274,7 @@ class WindowPropertiesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = Whether window will be displayed fullscreen.
       Returns: Builder instance for fluent chaining
   */
-  T fullscreen(bool propval)
+  T fullscreen(bool propval) nothrow
   {
     return setProperty("fullscreen", propval);
   }
@@ -285,7 +285,7 @@ class WindowPropertiesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = The size and position of the window on the screen.
       Returns: Builder instance for fluent chaining
   */
-  T geometry(gdk.rectangle.Rectangle propval)
+  T geometry(gdk.rectangle.Rectangle propval) nothrow
   {
     return setProperty("geometry", propval);
   }
@@ -296,7 +296,7 @@ class WindowPropertiesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = Whether the locationbar should be visible for the window.
       Returns: Builder instance for fluent chaining
   */
-  T locationbarVisible(bool propval)
+  T locationbarVisible(bool propval) nothrow
   {
     return setProperty("locationbar-visible", propval);
   }
@@ -307,7 +307,7 @@ class WindowPropertiesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = Whether the menubar should be visible for the window.
       Returns: Builder instance for fluent chaining
   */
-  T menubarVisible(bool propval)
+  T menubarVisible(bool propval) nothrow
   {
     return setProperty("menubar-visible", propval);
   }
@@ -318,7 +318,7 @@ class WindowPropertiesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = Whether the window can be resized.
       Returns: Builder instance for fluent chaining
   */
-  T resizable(bool propval)
+  T resizable(bool propval) nothrow
   {
     return setProperty("resizable", propval);
   }
@@ -329,7 +329,7 @@ class WindowPropertiesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = Whether the scrollbars should be visible for the window.
       Returns: Builder instance for fluent chaining
   */
-  T scrollbarsVisible(bool propval)
+  T scrollbarsVisible(bool propval) nothrow
   {
     return setProperty("scrollbars-visible", propval);
   }
@@ -340,7 +340,7 @@ class WindowPropertiesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = Whether the statusbar should be visible for the window.
       Returns: Builder instance for fluent chaining
   */
-  T statusbarVisible(bool propval)
+  T statusbarVisible(bool propval) nothrow
   {
     return setProperty("statusbar-visible", propval);
   }
@@ -351,7 +351,7 @@ class WindowPropertiesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = Whether the toolbar should be visible for the window.
       Returns: Builder instance for fluent chaining
   */
-  T toolbarVisible(bool propval)
+  T toolbarVisible(bool propval) nothrow
   {
     return setProperty("toolbar-visible", propval);
   }
@@ -364,7 +364,7 @@ final class WindowPropertiesGidBuilder : WindowPropertiesGidBuilderImpl!WindowPr
       Create object from builder.
       Returns: New object
   */
-  WindowProperties build()
+  WindowProperties build() nothrow
   {
     return new WindowProperties(cast(void*)createGObject(WindowProperties._getGType), No.Take);
   }

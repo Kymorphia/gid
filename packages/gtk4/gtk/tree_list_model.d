@@ -20,26 +20,26 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_list_model_get_type != &gidSymbolNotFound ? gtk_tree_list_model_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TreeListModel self()
+  override TreeListModel self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get builder for [gtk.tree_list_model.TreeListModel]
       Returns: New builder object
   */
-  static TreeListModelGidBuilder builder()
+  static TreeListModelGidBuilder builder() nothrow
   {
     return new TreeListModelGidBuilder;
   }
@@ -57,7 +57,7 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `autoexpand` property.
       Returns: If all rows should be expanded by default.
   */
-  @property bool autoexpand()
+  @property bool autoexpand() nothrow
   {
     return getAutoexpand();
   }
@@ -67,7 +67,7 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       Params:
         propval = If all rows should be expanded by default.
   */
-  @property void autoexpand(bool propval)
+  @property void autoexpand(bool propval) nothrow
   {
     setAutoexpand(propval);
   }
@@ -76,7 +76,7 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
-  @property gobject.types.GType itemType()
+  @property gobject.types.GType itemType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
   }
@@ -85,7 +85,7 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `model` property.
       Returns: The root model displayed.
   */
-  @property gio.list_model.ListModel model()
+  @property gio.list_model.ListModel model() nothrow
   {
     return getModel();
   }
@@ -94,7 +94,7 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `nItems` property.
       Returns: The number of items. See [gio.list_model.ListModel.getNItems].
   */
-  @property uint nItems()
+  @property uint nItems() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
@@ -107,7 +107,7 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
         [gtk.tree_list_row.TreeListRow] objects. If true, the values of the child
         models are pass through unmodified.
   */
-  @property bool passthrough()
+  @property bool passthrough() nothrow
   {
     return getPassthrough();
   }
@@ -126,14 +126,21 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
             of an item
       Returns: a newly created [gtk.tree_list_model.TreeListModel].
   */
-  this(gio.list_model.ListModel root, bool passthrough, bool autoexpand, gtk.types.TreeListModelCreateModelFunc createFunc)
+  this(gio.list_model.ListModel root, bool passthrough, bool autoexpand, gtk.types.TreeListModelCreateModelFunc createFunc) nothrow
   {
-    extern(C) GListModel* _createFuncCallback(GObject* item, void* userData)
+    extern(C) GListModel* _createFuncCallback(GObject* item, void* userData) nothrow
     {
       gio.list_model.ListModel _dretval;
       auto _dlg = cast(gtk.types.TreeListModelCreateModelFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeListModelCreateModelFunc");
+      }
       auto _retval = cast(GListModel*)(cast(gobject.object.ObjectWrap)_dretval)._cPtr(Yes.Dup);
 
       return _retval;
@@ -154,7 +161,7 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       models or via [gtk.tree_list_row.TreeListRow.setExpanded].
       Returns: true if the model is set to autoexpand
   */
-  bool getAutoexpand()
+  bool getAutoexpand() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_list_model_get_autoexpand(cast(GtkTreeListModel*)this._cPtr);
@@ -174,7 +181,7 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
         position = position of the child to get
       Returns: the child in position
   */
-  gtk.tree_list_row.TreeListRow getChildRow(uint position)
+  gtk.tree_list_row.TreeListRow getChildRow(uint position) nothrow
   {
     GtkTreeListRow* _cretval;
     _cretval = gtk_tree_list_model_get_child_row(cast(GtkTreeListModel*)this._cPtr, position);
@@ -186,7 +193,7 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       Gets the root model that self was created with.
       Returns: the root model
   */
-  gio.list_model.ListModel getModel()
+  gio.list_model.ListModel getModel() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_tree_list_model_get_model(cast(GtkTreeListModel*)this._cPtr);
@@ -207,7 +214,7 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       to get the custom [gtk.tree_list_row.TreeListRow]s.
       Returns: true if the model is passing through original row items
   */
-  bool getPassthrough()
+  bool getPassthrough() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_list_model_get_passthrough(cast(GtkTreeListModel*)this._cPtr);
@@ -237,7 +244,7 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
         position = the position of the row to fetch
       Returns: The row item
   */
-  gtk.tree_list_row.TreeListRow getRow(uint position)
+  gtk.tree_list_row.TreeListRow getRow(uint position) nothrow
   {
     GtkTreeListRow* _cretval;
     _cretval = gtk_tree_list_model_get_row(cast(GtkTreeListModel*)this._cPtr, position);
@@ -255,7 +262,7 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       Params:
         autoexpand = true to make the model autoexpand its rows
   */
-  void setAutoexpand(bool autoexpand)
+  void setAutoexpand(bool autoexpand) nothrow
   {
     gtk_tree_list_model_set_autoexpand(cast(GtkTreeListModel*)this._cPtr, autoexpand);
   }
@@ -273,7 +280,7 @@ class TreeListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = If all rows should be expanded by default.
       Returns: Builder instance for fluent chaining
   */
-  T autoexpand(bool propval)
+  T autoexpand(bool propval) nothrow
   {
     return setProperty("autoexpand", propval);
   }
@@ -288,7 +295,7 @@ class TreeListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           models are pass through unmodified.
       Returns: Builder instance for fluent chaining
   */
-  T passthrough(bool propval)
+  T passthrough(bool propval) nothrow
   {
     return setProperty("passthrough", propval);
   }
@@ -301,7 +308,7 @@ final class TreeListModelGidBuilder : TreeListModelGidBuilderImpl!TreeListModelG
       Create object from builder.
       Returns: New object
   */
-  TreeListModel build()
+  TreeListModel build() nothrow
   {
     return new TreeListModel(cast(void*)createGObject(TreeListModel._getGType), Yes.Take);
   }

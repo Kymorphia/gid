@@ -31,7 +31,7 @@ template RecentChooserT()
       Returns: The #GtkRecentFilter object to be used when displaying
         the recently used resources.
   */
-  @property gtk.recent_filter.RecentFilter filter()
+  @property gtk.recent_filter.RecentFilter filter() nothrow
   {
     return getFilter();
   }
@@ -42,7 +42,7 @@ template RecentChooserT()
         propval = The #GtkRecentFilter object to be used when displaying
           the recently used resources.
   */
-  @property void filter(gtk.recent_filter.RecentFilter propval)
+  @property void filter(gtk.recent_filter.RecentFilter propval) nothrow
   {
     setFilter(propval);
   }
@@ -52,7 +52,7 @@ template RecentChooserT()
       Returns: The maximum number of recently used resources to be displayed,
         or -1 to display all items.
   */
-  @property int limit()
+  @property int limit() nothrow
   {
     return getLimit();
   }
@@ -63,7 +63,7 @@ template RecentChooserT()
         propval = The maximum number of recently used resources to be displayed,
           or -1 to display all items.
   */
-  @property void limit(int propval)
+  @property void limit(int propval) nothrow
   {
     setLimit(propval);
   }
@@ -73,7 +73,7 @@ template RecentChooserT()
       Returns: Whether this #GtkRecentChooser should display only local (file:)
         resources.
   */
-  @property bool localOnly()
+  @property bool localOnly() nothrow
   {
     return getLocalOnly();
   }
@@ -84,7 +84,7 @@ template RecentChooserT()
         propval = Whether this #GtkRecentChooser should display only local (file:)
           resources.
   */
-  @property void localOnly(bool propval)
+  @property void localOnly(bool propval) nothrow
   {
     setLocalOnly(propval);
   }
@@ -93,7 +93,7 @@ template RecentChooserT()
       Get `selectMultiple` property.
       Returns: Allow the user to select multiple resources.
   */
-  @property bool selectMultiple()
+  @property bool selectMultiple() nothrow
   {
     return getSelectMultiple();
   }
@@ -103,7 +103,7 @@ template RecentChooserT()
       Params:
         propval = Allow the user to select multiple resources.
   */
-  @property void selectMultiple(bool propval)
+  @property void selectMultiple(bool propval) nothrow
   {
     setSelectMultiple(propval);
   }
@@ -112,7 +112,7 @@ template RecentChooserT()
       Get `showIcons` property.
       Returns: Whether this #GtkRecentChooser should display an icon near the item.
   */
-  @property bool showIcons()
+  @property bool showIcons() nothrow
   {
     return getShowIcons();
   }
@@ -122,7 +122,7 @@ template RecentChooserT()
       Params:
         propval = Whether this #GtkRecentChooser should display an icon near the item.
   */
-  @property void showIcons(bool propval)
+  @property void showIcons(bool propval) nothrow
   {
     setShowIcons(propval);
   }
@@ -134,7 +134,7 @@ template RecentChooserT()
         potentially expensive check on every local resource (every remote
         resource will always be displayed).
   */
-  @property bool showNotFound()
+  @property bool showNotFound() nothrow
   {
     return getShowNotFound();
   }
@@ -147,19 +147,19 @@ template RecentChooserT()
           potentially expensive check on every local resource (every remote
           resource will always be displayed).
   */
-  @property void showNotFound(bool propval)
+  @property void showNotFound(bool propval) nothrow
   {
     setShowNotFound(propval);
   }
 
   /** */
-  @property bool showPrivate()
+  @property bool showPrivate() nothrow
   {
     return getShowPrivate();
   }
 
   /** */
-  @property void showPrivate(bool propval)
+  @property void showPrivate(bool propval) nothrow
   {
     setShowPrivate(propval);
   }
@@ -169,7 +169,7 @@ template RecentChooserT()
       Returns: Whether this #GtkRecentChooser should display a tooltip containing the
         full path of the recently used resources.
   */
-  @property bool showTips()
+  @property bool showTips() nothrow
   {
     return getShowTips();
   }
@@ -180,7 +180,7 @@ template RecentChooserT()
         propval = Whether this #GtkRecentChooser should display a tooltip containing the
           full path of the recently used resources.
   */
-  @property void showTips(bool propval)
+  @property void showTips(bool propval) nothrow
   {
     setShowTips(propval);
   }
@@ -189,7 +189,7 @@ template RecentChooserT()
       Get `sortType` property.
       Returns: Sorting order to be used when displaying the recently used resources.
   */
-  @property gtk.types.RecentSortType sortType()
+  @property gtk.types.RecentSortType sortType() nothrow
   {
     return getSortType();
   }
@@ -199,7 +199,7 @@ template RecentChooserT()
       Params:
         propval = Sorting order to be used when displaying the recently used resources.
   */
-  @property void sortType(gtk.types.RecentSortType propval)
+  @property void sortType(gtk.types.RecentSortType propval) nothrow
   {
     setSortType(propval);
   }
@@ -213,7 +213,7 @@ template RecentChooserT()
       Params:
         filter = a #GtkRecentFilter
   */
-  override void addFilter(gtk.recent_filter.RecentFilter filter)
+  override void addFilter(gtk.recent_filter.RecentFilter filter) nothrow
   {
     gtk_recent_chooser_add_filter(cast(GtkRecentChooser*)this._cPtr, filter ? cast(GtkRecentFilter*)filter._cPtr(No.Dup) : null);
   }
@@ -223,7 +223,7 @@ template RecentChooserT()
       Returns: a #GtkRecentInfo.  Use [gtk.recent_info.RecentInfo.unref] when
           when you have finished using it.
   */
-  override gtk.recent_info.RecentInfo getCurrentItem()
+  override gtk.recent_info.RecentInfo getCurrentItem() nothrow
   {
     GtkRecentInfo* _cretval;
     _cretval = gtk_recent_chooser_get_current_item(cast(GtkRecentChooser*)this._cPtr);
@@ -235,7 +235,7 @@ template RecentChooserT()
       Gets the URI currently selected by chooser.
       Returns: a newly allocated string holding a URI.
   */
-  override string getCurrentUri()
+  override string getCurrentUri() nothrow
   {
     char* _cretval;
     _cretval = gtk_recent_chooser_get_current_uri(cast(GtkRecentChooser*)this._cPtr);
@@ -248,7 +248,7 @@ template RecentChooserT()
       the display of the recently used resources.
       Returns: a #GtkRecentFilter object.
   */
-  override gtk.recent_filter.RecentFilter getFilter()
+  override gtk.recent_filter.RecentFilter getFilter() nothrow
   {
     GtkRecentFilter* _cretval;
     _cretval = gtk_recent_chooser_get_filter(cast(GtkRecentChooser*)this._cPtr);
@@ -266,7 +266,7 @@ template RecentChooserT()
           use [gtk.recent_info.RecentInfo.unref] on every item of the list, and then free
           the list itself using [glib.list.List.free].
   */
-  override gtk.recent_info.RecentInfo[] getItems()
+  override gtk.recent_info.RecentInfo[] getItems() nothrow
   {
     GList* _cretval;
     _cretval = gtk_recent_chooser_get_items(cast(GtkRecentChooser*)this._cPtr);
@@ -280,7 +280,7 @@ template RecentChooserT()
       Returns: A positive integer, or -1 meaning that all items are
           returned.
   */
-  override int getLimit()
+  override int getLimit() nothrow
   {
     int _retval;
     _retval = gtk_recent_chooser_get_limit(cast(GtkRecentChooser*)this._cPtr);
@@ -292,7 +292,7 @@ template RecentChooserT()
       resources selector.  See [gtk.recent_chooser.RecentChooser.setLocalOnly]
       Returns: true if only local resources should be shown.
   */
-  override bool getLocalOnly()
+  override bool getLocalOnly() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_recent_chooser_get_local_only(cast(GtkRecentChooser*)this._cPtr);
@@ -303,7 +303,7 @@ template RecentChooserT()
       Gets whether chooser can select multiple items.
       Returns: true if chooser can select more than one item.
   */
-  override bool getSelectMultiple()
+  override bool getSelectMultiple() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_recent_chooser_get_select_multiple(cast(GtkRecentChooser*)this._cPtr);
@@ -314,7 +314,7 @@ template RecentChooserT()
       Retrieves whether chooser should show an icon near the resource.
       Returns: true if the icons should be displayed, false otherwise.
   */
-  override bool getShowIcons()
+  override bool getShowIcons() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_recent_chooser_get_show_icons(cast(GtkRecentChooser*)this._cPtr);
@@ -327,7 +327,7 @@ template RecentChooserT()
       Returns: true if the resources not found should be displayed, and
           false otheriwse.
   */
-  override bool getShowNotFound()
+  override bool getShowNotFound() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_recent_chooser_get_show_not_found(cast(GtkRecentChooser*)this._cPtr);
@@ -340,7 +340,7 @@ template RecentChooserT()
       Returns: true if the recent chooser should show private items,
           false otherwise.
   */
-  override bool getShowPrivate()
+  override bool getShowPrivate() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_recent_chooser_get_show_private(cast(GtkRecentChooser*)this._cPtr);
@@ -353,7 +353,7 @@ template RecentChooserT()
       Returns: true if the recent chooser should show tooltips,
           false otherwise.
   */
-  override bool getShowTips()
+  override bool getShowTips() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_recent_chooser_get_show_tips(cast(GtkRecentChooser*)this._cPtr);
@@ -364,7 +364,7 @@ template RecentChooserT()
       Gets the value set by [gtk.recent_chooser.RecentChooser.setSortType].
       Returns: the sorting order of the chooser.
   */
-  override gtk.types.RecentSortType getSortType()
+  override gtk.types.RecentSortType getSortType() nothrow
   {
     GtkRecentSortType _cretval;
     _cretval = gtk_recent_chooser_get_sort_type(cast(GtkRecentChooser*)this._cPtr);
@@ -382,7 +382,7 @@ template RecentChooserT()
       Returns: A newly allocated, null-terminated array of strings. Use
             [glib.global.strfreev] to free it.
   */
-  override string[] getUris()
+  override string[] getUris() nothrow
   {
     char** _cretval;
     size_t _cretlength;
@@ -405,7 +405,7 @@ template RecentChooserT()
           of #GtkRecentFilter objects.  You
           should just free the returned list using [glib.slist.SList.free].
   */
-  override gtk.recent_filter.RecentFilter[] listFilters()
+  override gtk.recent_filter.RecentFilter[] listFilters() nothrow
   {
     GSList* _cretval;
     _cretval = gtk_recent_chooser_list_filters(cast(GtkRecentChooser*)this._cPtr);
@@ -419,7 +419,7 @@ template RecentChooserT()
       Params:
         filter = a #GtkRecentFilter
   */
-  override void removeFilter(gtk.recent_filter.RecentFilter filter)
+  override void removeFilter(gtk.recent_filter.RecentFilter filter) nothrow
   {
     gtk_recent_chooser_remove_filter(cast(GtkRecentChooser*)this._cPtr, filter ? cast(GtkRecentFilter*)filter._cPtr(No.Dup) : null);
   }
@@ -428,7 +428,7 @@ template RecentChooserT()
       Selects all the items inside chooser, if the chooser supports
       multiple selection.
   */
-  override void selectAll()
+  override void selectAll() nothrow
   {
     gtk_recent_chooser_select_all(cast(GtkRecentChooser*)this._cPtr);
   }
@@ -478,7 +478,7 @@ template RecentChooserT()
       Params:
         filter = a #GtkRecentFilter
   */
-  override void setFilter(gtk.recent_filter.RecentFilter filter = null)
+  override void setFilter(gtk.recent_filter.RecentFilter filter = null) nothrow
   {
     gtk_recent_chooser_set_filter(cast(GtkRecentChooser*)this._cPtr, filter ? cast(GtkRecentFilter*)filter._cPtr(No.Dup) : null);
   }
@@ -490,7 +490,7 @@ template RecentChooserT()
       Params:
         limit = a positive integer, or -1 for all items
   */
-  override void setLimit(int limit)
+  override void setLimit(int limit) nothrow
   {
     gtk_recent_chooser_set_limit(cast(GtkRecentChooser*)this._cPtr, limit);
   }
@@ -504,7 +504,7 @@ template RecentChooserT()
       Params:
         localOnly = true if only local files can be shown
   */
-  override void setLocalOnly(bool localOnly)
+  override void setLocalOnly(bool localOnly) nothrow
   {
     gtk_recent_chooser_set_local_only(cast(GtkRecentChooser*)this._cPtr, localOnly);
   }
@@ -515,7 +515,7 @@ template RecentChooserT()
       Params:
         selectMultiple = true if chooser can select more than one item
   */
-  override void setSelectMultiple(bool selectMultiple)
+  override void setSelectMultiple(bool selectMultiple) nothrow
   {
     gtk_recent_chooser_set_select_multiple(cast(GtkRecentChooser*)this._cPtr, selectMultiple);
   }
@@ -527,7 +527,7 @@ template RecentChooserT()
       Params:
         showIcons = whether to show an icon near the resource
   */
-  override void setShowIcons(bool showIcons)
+  override void setShowIcons(bool showIcons) nothrow
   {
     gtk_recent_chooser_set_show_icons(cast(GtkRecentChooser*)this._cPtr, showIcons);
   }
@@ -539,7 +539,7 @@ template RecentChooserT()
       Params:
         showNotFound = whether to show the local items we didn’t find
   */
-  override void setShowNotFound(bool showNotFound)
+  override void setShowNotFound(bool showNotFound) nothrow
   {
     gtk_recent_chooser_set_show_not_found(cast(GtkRecentChooser*)this._cPtr, showNotFound);
   }
@@ -550,7 +550,7 @@ template RecentChooserT()
       Params:
         showPrivate = true to show private items, false otherwise
   */
-  override void setShowPrivate(bool showPrivate)
+  override void setShowPrivate(bool showPrivate) nothrow
   {
     gtk_recent_chooser_set_show_private(cast(GtkRecentChooser*)this._cPtr, showPrivate);
   }
@@ -562,7 +562,7 @@ template RecentChooserT()
       Params:
         showTips = true if tooltips should be shown
   */
-  override void setShowTips(bool showTips)
+  override void setShowTips(bool showTips) nothrow
   {
     gtk_recent_chooser_set_show_tips(cast(GtkRecentChooser*)this._cPtr, showTips);
   }
@@ -580,13 +580,21 @@ template RecentChooserT()
       Params:
         sortFunc = the comparison function
   */
-  override void setSortFunc(gtk.types.RecentSortFunc sortFunc)
+  override void setSortFunc(gtk.types.RecentSortFunc sortFunc) nothrow
   {
-    extern(C) int _sortFuncCallback(GtkRecentInfo* a, GtkRecentInfo* b, void* userData)
+    extern(C) int _sortFuncCallback(GtkRecentInfo* a, GtkRecentInfo* b, void* userData) nothrow
     {
+      int _retval;
       auto _dlg = cast(gtk.types.RecentSortFunc*)userData;
 
-      int _retval = (*_dlg)(a ? new gtk.recent_info.RecentInfo(cast(void*)a, No.Take) : null, b ? new gtk.recent_info.RecentInfo(cast(void*)b, No.Take) : null);
+      try
+      {
+        _retval = (*_dlg)(a ? new gtk.recent_info.RecentInfo(cast(void*)a, No.Take) : null, b ? new gtk.recent_info.RecentInfo(cast(void*)b, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.RecentSortFunc");
+      }
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
@@ -602,7 +610,7 @@ template RecentChooserT()
       Params:
         sortType = sort order that the chooser should use
   */
-  override void setSortType(gtk.types.RecentSortType sortType)
+  override void setSortType(gtk.types.RecentSortType sortType) nothrow
   {
     gtk_recent_chooser_set_sort_type(cast(GtkRecentChooser*)this._cPtr, sortType);
   }
@@ -610,7 +618,7 @@ template RecentChooserT()
   /**
       Unselects all the items inside chooser.
   */
-  override void unselectAll()
+  override void unselectAll() nothrow
   {
     gtk_recent_chooser_unselect_all(cast(GtkRecentChooser*)this._cPtr);
   }
@@ -621,7 +629,7 @@ template RecentChooserT()
       Params:
         uri = a URI
   */
-  override void unselectUri(string uri)
+  override void unselectUri(string uri) nothrow
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     gtk_recent_chooser_unselect_uri(cast(GtkRecentChooser*)this._cPtr, _uri);
@@ -645,13 +653,13 @@ template RecentChooserT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectItemActivated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectItemActivated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.recent_chooser.RecentChooser)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -660,7 +668,14 @@ template RecentChooserT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.recent_chooser.RecentChooser.itemActivated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -685,13 +700,13 @@ template RecentChooserT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.recent_chooser.RecentChooser)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -700,7 +715,14 @@ template RecentChooserT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.recent_chooser.RecentChooser.selectionChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -719,7 +741,7 @@ template RecentChooserGidBuilderT()
           the recently used resources.
       Returns: Builder instance for fluent chaining
   */
-  T filter(gtk.recent_filter.RecentFilter propval)
+  T filter(gtk.recent_filter.RecentFilter propval) nothrow
   {
     return setProperty("filter", propval);
   }
@@ -731,7 +753,7 @@ template RecentChooserGidBuilderT()
           or -1 to display all items.
       Returns: Builder instance for fluent chaining
   */
-  T limit(int propval)
+  T limit(int propval) nothrow
   {
     return setProperty("limit", propval);
   }
@@ -743,7 +765,7 @@ template RecentChooserGidBuilderT()
           resources.
       Returns: Builder instance for fluent chaining
   */
-  T localOnly(bool propval)
+  T localOnly(bool propval) nothrow
   {
     return setProperty("local-only", propval);
   }
@@ -755,7 +777,7 @@ template RecentChooserGidBuilderT()
           display the list of recently used resources.
       Returns: Builder instance for fluent chaining
   */
-  T recentManager(gtk.recent_manager.RecentManager propval)
+  T recentManager(gtk.recent_manager.RecentManager propval) nothrow
   {
     return setProperty("recent-manager", propval);
   }
@@ -766,7 +788,7 @@ template RecentChooserGidBuilderT()
         propval = Allow the user to select multiple resources.
       Returns: Builder instance for fluent chaining
   */
-  T selectMultiple(bool propval)
+  T selectMultiple(bool propval) nothrow
   {
     return setProperty("select-multiple", propval);
   }
@@ -777,7 +799,7 @@ template RecentChooserGidBuilderT()
         propval = Whether this #GtkRecentChooser should display an icon near the item.
       Returns: Builder instance for fluent chaining
   */
-  T showIcons(bool propval)
+  T showIcons(bool propval) nothrow
   {
     return setProperty("show-icons", propval);
   }
@@ -791,13 +813,13 @@ template RecentChooserGidBuilderT()
           resource will always be displayed).
       Returns: Builder instance for fluent chaining
   */
-  T showNotFound(bool propval)
+  T showNotFound(bool propval) nothrow
   {
     return setProperty("show-not-found", propval);
   }
 
   /** */
-  T showPrivate(bool propval)
+  T showPrivate(bool propval) nothrow
   {
     return setProperty("show-private", propval);
   }
@@ -809,7 +831,7 @@ template RecentChooserGidBuilderT()
           full path of the recently used resources.
       Returns: Builder instance for fluent chaining
   */
-  T showTips(bool propval)
+  T showTips(bool propval) nothrow
   {
     return setProperty("show-tips", propval);
   }
@@ -820,7 +842,7 @@ template RecentChooserGidBuilderT()
         propval = Sorting order to be used when displaying the recently used resources.
       Returns: Builder instance for fluent chaining
   */
-  T sortType(gtk.types.RecentSortType propval)
+  T sortType(gtk.types.RecentSortType propval) nothrow
   {
     return setProperty("sort-type", propval);
   }

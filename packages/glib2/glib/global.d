@@ -37,7 +37,7 @@ import gobject.types;
           object that has all the tested permissions, or -1 otherwise
           or on error.
 */
-int access(string filename, int mode)
+int access(string filename, int mode) nothrow
 {
   int _retval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -64,7 +64,7 @@ int access(string filename, int mode)
           and a multiple of `sizeof(void*)`
     Returns: the allocated memory
 */
-void* alignedAlloc(size_t nBlocks, size_t nBlockBytes, size_t alignment)
+void* alignedAlloc(size_t nBlocks, size_t nBlockBytes, size_t alignment) nothrow
 {
   auto _retval = g_aligned_alloc(nBlocks, nBlockBytes, alignment);
   return _retval;
@@ -81,7 +81,7 @@ void* alignedAlloc(size_t nBlocks, size_t nBlockBytes, size_t alignment)
           and a multiple of `sizeof(void*)`
     Returns: the allocated, cleared memory
 */
-void* alignedAlloc0(size_t nBlocks, size_t nBlockBytes, size_t alignment)
+void* alignedAlloc0(size_t nBlocks, size_t nBlockBytes, size_t alignment) nothrow
 {
   auto _retval = g_aligned_alloc0(nBlocks, nBlockBytes, alignment);
   return _retval;
@@ -93,7 +93,7 @@ void* alignedAlloc0(size_t nBlocks, size_t nBlockBytes, size_t alignment)
     Params:
       mem = the memory to deallocate
 */
-void alignedFree(void* mem = null)
+void alignedFree(void* mem = null) nothrow
 {
   g_aligned_free(mem);
 }
@@ -114,7 +114,7 @@ void alignedFree(void* mem = null)
       alignment = alignment of mem
       size = size of mem, in bytes
 */
-void alignedFreeSized(void* mem, size_t alignment, size_t size)
+void alignedFreeSized(void* mem, size_t alignment, size_t size) nothrow
 {
   g_aligned_free_sized(mem, alignment, size);
 }
@@ -131,7 +131,7 @@ void alignedFreeSized(void* mem, size_t alignment, size_t size)
       c = an ASCII character
     Returns: the numerical value of `c` if it is a decimal digit, `-1` otherwise
 */
-int asciiDigitValue(char c)
+int asciiDigitValue(char c) nothrow
 {
   int _retval;
   _retval = g_ascii_digit_value(c);
@@ -153,7 +153,7 @@ int asciiDigitValue(char c)
       buffer = a buffer to place the resulting string in
       d = the value to convert
 */
-void asciiDtostr(ref char[] buffer, double d)
+void asciiDtostr(ref char[] buffer, double d) nothrow
 {
   int _bufLen;
   _bufLen = cast(int)buffer.length;
@@ -180,7 +180,7 @@ void asciiDtostr(ref char[] buffer, double d)
           code to use for converting
       d = the value to convert
 */
-void asciiFormatd(ref char[] buffer, string format, double d)
+void asciiFormatd(ref char[] buffer, string format, double d) nothrow
 {
   int _bufLen;
   _bufLen = cast(int)buffer.length;
@@ -211,7 +211,7 @@ void asciiFormatd(ref char[] buffer, string format, double d)
     Returns: 0 if the strings match, a negative value if s1 < s2,
         or a positive value if s1 > s2
 */
-int asciiStrcasecmp(string s1, string s2)
+int asciiStrcasecmp(string s1, string s2) nothrow
 {
   int _retval;
   const(char)* _s1 = s1.toCString(No.Alloc);
@@ -230,7 +230,7 @@ int asciiStrcasecmp(string s1, string s2)
         str converted to lower case. (Note that this is unlike the old
         `funcGLib.strdown`, which modified the string in place.)
 */
-string asciiStrdown(string str)
+string asciiStrdown(string str) nothrow
 {
   char* _cretval;
   ptrdiff_t _len;
@@ -351,7 +351,7 @@ bool asciiStringToUnsigned(string str, uint base, ulong min, ulong max, out ulon
     Returns: 0 if the strings match, a negative value if s1 < s2,
         or a positive value if s1 > s2
 */
-int asciiStrncasecmp(string s1, string s2, size_t n)
+int asciiStrncasecmp(string s1, string s2, size_t n) nothrow
 {
   int _retval;
   const(char)* _s1 = s1.toCString(No.Alloc);
@@ -391,7 +391,7 @@ int asciiStrncasecmp(string s1, string s2, size_t n)
           character after the last character used in the conversion
     Returns: the converted value
 */
-double asciiStrtod(string nptr, out string endptr)
+double asciiStrtod(string nptr, out string endptr) nothrow
 {
   double _retval;
   const(char)* _nptr = nptr.toCString(No.Alloc);
@@ -428,7 +428,7 @@ double asciiStrtod(string nptr, out string endptr)
       base = to be used for the conversion, 2..36 or 0
     Returns: the converted value, or zero on error
 */
-long asciiStrtoll(string nptr, out string endptr, uint base)
+long asciiStrtoll(string nptr, out string endptr, uint base) nothrow
 {
   long _retval;
   const(char)* _nptr = nptr.toCString(No.Alloc);
@@ -470,7 +470,7 @@ long asciiStrtoll(string nptr, out string endptr, uint base)
       base = to be used for the conversion, 2..36 or 0
     Returns: the converted value, or zero on error
 */
-ulong asciiStrtoull(string nptr, out string endptr, uint base)
+ulong asciiStrtoull(string nptr, out string endptr, uint base) nothrow
 {
   ulong _retval;
   const(char)* _nptr = nptr.toCString(No.Alloc);
@@ -490,7 +490,7 @@ ulong asciiStrtoull(string nptr, out string endptr, uint base)
         in str converted to upper case. (Note that this is unlike the old
         `funcGLib.strup`, which modified the string in place.)
 */
-string asciiStrup(string str)
+string asciiStrup(string str) nothrow
 {
   char* _cretval;
   ptrdiff_t _len;
@@ -519,7 +519,7 @@ string asciiStrup(string str)
       c = any character
     Returns: the result of the conversion
 */
-char asciiTolower(char c)
+char asciiTolower(char c) nothrow
 {
   char _retval;
   _retval = g_ascii_tolower(c);
@@ -542,7 +542,7 @@ char asciiTolower(char c)
       c = any character
     Returns: the result of the conversion
 */
-char asciiToupper(char c)
+char asciiToupper(char c) nothrow
 {
   char _retval;
   _retval = g_ascii_toupper(c);
@@ -564,7 +564,7 @@ char asciiToupper(char c)
       c = an ASCII character
     Returns: the numerical value of `c` if it is a hex digit, `-1` otherwise
 */
-int asciiXdigitValue(char c)
+int asciiXdigitValue(char c) nothrow
 {
   int _retval;
   _retval = g_ascii_xdigit_value(c);
@@ -572,7 +572,7 @@ int asciiXdigitValue(char c)
 }
 
 /** */
-void assertWarning(string logDomain, string file, int line, string prettyFunction, string expression)
+void assertWarning(string logDomain, string file, int line, string prettyFunction, string expression) nothrow
 {
   const(char)* _logDomain = logDomain.toCString(No.Alloc);
   const(char)* _file = file.toCString(No.Alloc);
@@ -582,7 +582,7 @@ void assertWarning(string logDomain, string file, int line, string prettyFunctio
 }
 
 /** */
-void assertionMessage(string domain, string file, int line, string func, string message)
+void assertionMessage(string domain, string file, int line, string func, string message) nothrow
 {
   const(char)* _domain = domain.toCString(No.Alloc);
   const(char)* _file = file.toCString(No.Alloc);
@@ -592,7 +592,7 @@ void assertionMessage(string domain, string file, int line, string func, string 
 }
 
 /** */
-void assertionMessageCmpint(string domain, string file, int line, string func, string expr, ulong arg1, string cmp, ulong arg2, char numtype)
+void assertionMessageCmpint(string domain, string file, int line, string func, string expr, ulong arg1, string cmp, ulong arg2, char numtype) nothrow
 {
   const(char)* _domain = domain.toCString(No.Alloc);
   const(char)* _file = file.toCString(No.Alloc);
@@ -603,7 +603,7 @@ void assertionMessageCmpint(string domain, string file, int line, string func, s
 }
 
 /** */
-void assertionMessageCmpstr(string domain, string file, int line, string func, string expr, string arg1, string cmp, string arg2)
+void assertionMessageCmpstr(string domain, string file, int line, string func, string expr, string arg1, string cmp, string arg2) nothrow
 {
   const(char)* _domain = domain.toCString(No.Alloc);
   const(char)* _file = file.toCString(No.Alloc);
@@ -616,7 +616,7 @@ void assertionMessageCmpstr(string domain, string file, int line, string func, s
 }
 
 /** */
-void assertionMessageCmpstrv(string domain, string file, int line, string func, string expr, string[] arg1, string[] arg2, size_t firstWrongIdx)
+void assertionMessageCmpstrv(string domain, string file, int line, string func, string expr, string[] arg1, string[] arg2, size_t firstWrongIdx) nothrow
 {
   const(char)* _domain = domain.toCString(No.Alloc);
   const(char)* _file = file.toCString(No.Alloc);
@@ -638,7 +638,7 @@ void assertionMessageCmpstrv(string domain, string file, int line, string func, 
 }
 
 /** */
-void assertionMessageError(string domain, string file, int line, string func, string expr, glib.error.ErrorWrap error, glib.types.Quark errorDomain, int errorCode)
+void assertionMessageError(string domain, string file, int line, string func, string expr, glib.error.ErrorWrap error, glib.types.Quark errorDomain, int errorCode) nothrow
 {
   const(char)* _domain = domain.toCString(No.Alloc);
   const(char)* _file = file.toCString(No.Alloc);
@@ -666,7 +666,7 @@ void assertionMessageError(string domain, string file, int line, string func, st
       val = the value to add
     Returns: the value of atomic before the add, signed
 */
-int atomicIntAdd(ref int atomic, int val)
+int atomicIntAdd(ref int atomic, int val) nothrow
 {
   int _retval;
   _retval = g_atomic_int_add(cast(int*)&atomic, val);
@@ -690,7 +690,7 @@ int atomicIntAdd(ref int atomic, int val)
       val = the value to 'and'
     Returns: the value of atomic before the operation, unsigned
 */
-uint atomicIntAnd(ref uint atomic, uint val)
+uint atomicIntAnd(ref uint atomic, uint val) nothrow
 {
   uint _retval;
   _retval = g_atomic_int_and(cast(uint*)&atomic, val);
@@ -717,7 +717,7 @@ uint atomicIntAnd(ref uint atomic, uint val)
       newval = the value to conditionally replace with
     Returns: true if the exchange took place
 */
-bool atomicIntCompareAndExchange(ref int atomic, int oldval, int newval)
+bool atomicIntCompareAndExchange(ref int atomic, int oldval, int newval) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_atomic_int_compare_and_exchange(cast(int*)&atomic, oldval, newval);
@@ -745,7 +745,7 @@ bool atomicIntCompareAndExchange(ref int atomic, int oldval, int newval)
       preval = the contents of atomic before this operation
     Returns: true if the exchange took place
 */
-bool atomicIntCompareAndExchangeFull(ref int atomic, int oldval, int newval, out int preval)
+bool atomicIntCompareAndExchangeFull(ref int atomic, int oldval, int newval, out int preval) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_atomic_int_compare_and_exchange_full(cast(int*)&atomic, oldval, newval, cast(int*)&preval);
@@ -767,7 +767,7 @@ bool atomicIntCompareAndExchangeFull(ref int atomic, int oldval, int newval, out
       atomic = a pointer to a #gint or #guint
     Returns: true if the resultant value is zero
 */
-bool atomicIntDecAndTest(ref int atomic)
+bool atomicIntDecAndTest(ref int atomic) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_atomic_int_dec_and_test(cast(int*)&atomic);
@@ -789,7 +789,7 @@ bool atomicIntDecAndTest(ref int atomic)
       newval = the value to replace with
     Returns: the value of atomic before the exchange, signed
 */
-int atomicIntExchange(ref int atomic, int newval)
+int atomicIntExchange(ref int atomic, int newval) nothrow
 {
   int _retval;
   _retval = g_atomic_int_exchange(cast(int*)&atomic, newval);
@@ -808,7 +808,7 @@ int atomicIntExchange(ref int atomic, int newval)
 
     Deprecated: Use [glib.global.atomicIntAdd] instead.
 */
-int atomicIntExchangeAndAdd(ref int atomic, int val)
+int atomicIntExchangeAndAdd(ref int atomic, int val) nothrow
 {
   int _retval;
   _retval = g_atomic_int_exchange_and_add(cast(int*)&atomic, val);
@@ -828,7 +828,7 @@ int atomicIntExchangeAndAdd(ref int atomic, int val)
       atomic = a pointer to a #gint or #guint
     Returns: the value of the integer
 */
-int atomicIntGet(out int atomic)
+int atomicIntGet(out int atomic) nothrow
 {
   int _retval;
   _retval = g_atomic_int_get(cast(const(int)*)&atomic);
@@ -848,7 +848,7 @@ int atomicIntGet(out int atomic)
     Params:
       atomic = a pointer to a #gint or #guint
 */
-void atomicIntInc(ref int atomic)
+void atomicIntInc(ref int atomic) nothrow
 {
   g_atomic_int_inc(cast(int*)&atomic);
 }
@@ -870,7 +870,7 @@ void atomicIntInc(ref int atomic)
       val = the value to 'or'
     Returns: the value of atomic before the operation, unsigned
 */
-uint atomicIntOr(ref uint atomic, uint val)
+uint atomicIntOr(ref uint atomic, uint val) nothrow
 {
   uint _retval;
   _retval = g_atomic_int_or(cast(uint*)&atomic, val);
@@ -890,7 +890,7 @@ uint atomicIntOr(ref uint atomic, uint val)
       atomic = a pointer to a #gint or #guint
       newval = a new value to store
 */
-void atomicIntSet(ref int atomic, int newval)
+void atomicIntSet(ref int atomic, int newval) nothrow
 {
   g_atomic_int_set(cast(int*)&atomic, newval);
 }
@@ -912,7 +912,7 @@ void atomicIntSet(ref int atomic, int newval)
       val = the value to 'xor'
     Returns: the value of atomic before the operation, unsigned
 */
-uint atomicIntXor(ref uint atomic, uint val)
+uint atomicIntXor(ref uint atomic, uint val) nothrow
 {
   uint _retval;
   _retval = g_atomic_int_xor(cast(uint*)&atomic, val);
@@ -939,7 +939,7 @@ uint atomicIntXor(ref uint atomic, uint val)
       val = the value to add
     Returns: the value of atomic before the add, signed
 */
-ptrdiff_t atomicPointerAdd(void* atomic, ptrdiff_t val)
+ptrdiff_t atomicPointerAdd(void* atomic, ptrdiff_t val) nothrow
 {
   ptrdiff_t _retval;
   _retval = g_atomic_pointer_add(atomic, val);
@@ -967,7 +967,7 @@ ptrdiff_t atomicPointerAdd(void* atomic, ptrdiff_t val)
       val = the value to 'and'
     Returns: the value of atomic before the operation, unsigned
 */
-size_t atomicPointerAnd(void* atomic, size_t val)
+size_t atomicPointerAnd(void* atomic, size_t val) nothrow
 {
   size_t _retval;
   _retval = g_atomic_pointer_and(atomic, val);
@@ -994,7 +994,7 @@ size_t atomicPointerAnd(void* atomic, size_t val)
       newval = the value to conditionally replace with
     Returns: true if the exchange took place
 */
-bool atomicPointerCompareAndExchange(void* atomic, void* oldval = null, void* newval = null)
+bool atomicPointerCompareAndExchange(void* atomic, void* oldval = null, void* newval = null) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_atomic_pointer_compare_and_exchange(atomic, oldval, newval);
@@ -1022,7 +1022,7 @@ bool atomicPointerCompareAndExchange(void* atomic, void* oldval = null, void* ne
       preval = the contents of atomic before this operation
     Returns: true if the exchange took place
 */
-bool atomicPointerCompareAndExchangeFull(void* atomic, void* oldval, void* newval, out void* preval)
+bool atomicPointerCompareAndExchangeFull(void* atomic, void* oldval, void* newval, out void* preval) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_atomic_pointer_compare_and_exchange_full(atomic, oldval, newval, cast(void*)&preval);
@@ -1044,7 +1044,7 @@ bool atomicPointerCompareAndExchangeFull(void* atomic, void* oldval, void* newva
       newval = the value to replace with
     Returns: the value of atomic before the exchange
 */
-void* atomicPointerExchange(void* atomic = null, void* newval = null)
+void* atomicPointerExchange(void* atomic = null, void* newval = null) nothrow
 {
   auto _retval = g_atomic_pointer_exchange(atomic, newval);
   return _retval;
@@ -1063,7 +1063,7 @@ void* atomicPointerExchange(void* atomic = null, void* newval = null)
       atomic = a pointer to a #gpointer-sized value
     Returns: the value of the pointer
 */
-void* atomicPointerGet(void* atomic)
+void* atomicPointerGet(void* atomic) nothrow
 {
   auto _retval = g_atomic_pointer_get(atomic);
   return _retval;
@@ -1090,7 +1090,7 @@ void* atomicPointerGet(void* atomic)
       val = the value to 'or'
     Returns: the value of atomic before the operation, unsigned
 */
-size_t atomicPointerOr(void* atomic, size_t val)
+size_t atomicPointerOr(void* atomic, size_t val) nothrow
 {
   size_t _retval;
   _retval = g_atomic_pointer_or(atomic, val);
@@ -1110,7 +1110,7 @@ size_t atomicPointerOr(void* atomic, size_t val)
       atomic = a pointer to a #gpointer-sized value
       newval = a new value to store
 */
-void atomicPointerSet(void* atomic, void* newval = null)
+void atomicPointerSet(void* atomic, void* newval = null) nothrow
 {
   g_atomic_pointer_set(atomic, newval);
 }
@@ -1136,7 +1136,7 @@ void atomicPointerSet(void* atomic, void* newval = null)
       val = the value to 'xor'
     Returns: the value of atomic before the operation, unsigned
 */
-size_t atomicPointerXor(void* atomic, size_t val)
+size_t atomicPointerXor(void* atomic, size_t val) nothrow
 {
   size_t _retval;
   _retval = g_atomic_pointer_xor(atomic, val);
@@ -1151,7 +1151,7 @@ size_t atomicPointerXor(void* atomic, size_t val)
     Returns: a pointer to the data,
         with its reference count increased
 */
-void* atomicRcBoxAcquire(void* memBlock)
+void* atomicRcBoxAcquire(void* memBlock) nothrow
 {
   auto _retval = g_atomic_rc_box_acquire(memBlock);
   return _retval;
@@ -1171,7 +1171,7 @@ void* atomicRcBoxAcquire(void* memBlock)
       blockSize = the size of the allocation, must be greater than 0
     Returns: a pointer to the allocated memory
 */
-void* atomicRcBoxAlloc(size_t blockSize)
+void* atomicRcBoxAlloc(size_t blockSize) nothrow
 {
   auto _retval = g_atomic_rc_box_alloc(blockSize);
   return _retval;
@@ -1193,7 +1193,7 @@ void* atomicRcBoxAlloc(size_t blockSize)
       blockSize = the size of the allocation, must be greater than 0
     Returns: a pointer to the allocated memory
 */
-void* atomicRcBoxAlloc0(size_t blockSize)
+void* atomicRcBoxAlloc0(size_t blockSize) nothrow
 {
   auto _retval = g_atomic_rc_box_alloc0(blockSize);
   return _retval;
@@ -1210,7 +1210,7 @@ void* atomicRcBoxAlloc0(size_t blockSize)
     Returns: a pointer to the allocated
         memory
 */
-void* atomicRcBoxDup(size_t blockSize, const(void)* memBlock)
+void* atomicRcBoxDup(size_t blockSize, const(void)* memBlock) nothrow
 {
   auto _retval = g_atomic_rc_box_dup(blockSize, memBlock);
   return _retval;
@@ -1223,7 +1223,7 @@ void* atomicRcBoxDup(size_t blockSize, const(void)* memBlock)
       memBlock = a pointer to reference counted data
     Returns: the size of the data, in bytes
 */
-size_t atomicRcBoxGetSize(void* memBlock)
+size_t atomicRcBoxGetSize(void* memBlock) nothrow
 {
   size_t _retval;
   _retval = g_atomic_rc_box_get_size(memBlock);
@@ -1239,7 +1239,7 @@ size_t atomicRcBoxGetSize(void* memBlock)
     Params:
       memBlock = a pointer to reference counted data
 */
-void atomicRcBoxRelease(void* memBlock)
+void atomicRcBoxRelease(void* memBlock) nothrow
 {
   g_atomic_rc_box_release(memBlock);
 }
@@ -1255,13 +1255,20 @@ void atomicRcBoxRelease(void* memBlock)
       memBlock = a pointer to reference counted data
       clearFunc = a function to call when clearing the data
 */
-void atomicRcBoxReleaseFull(void* memBlock, glib.types.DestroyNotify clearFunc)
+void atomicRcBoxReleaseFull(void* memBlock, glib.types.DestroyNotify clearFunc) nothrow
 {
-  extern(C) void _clearFuncCallback(void* data)
+  extern(C) void _clearFuncCallback(void* data) nothrow
   {
     auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-    (*_dlg)();
+    try
+    {
+      (*_dlg)();
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+    }
   }
   auto _clearFuncCB = clearFunc ? &_clearFuncCallback : null;
   g_atomic_rc_box_release_full(memBlock, _clearFuncCB);
@@ -1276,7 +1283,7 @@ void atomicRcBoxReleaseFull(void* memBlock, glib.types.DestroyNotify clearFunc)
     Returns: true if the reference count is the same
         as the given value
 */
-bool atomicRefCountCompare(ref int arc, int val)
+bool atomicRefCountCompare(ref int arc, int val) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_atomic_ref_count_compare(cast(int*)&arc, val);
@@ -1294,7 +1301,7 @@ bool atomicRefCountCompare(ref int arc, int val)
       arc = the address of an atomic reference count variable
     Returns: true if the reference count reached 0, and false otherwise
 */
-bool atomicRefCountDec(ref int arc)
+bool atomicRefCountDec(ref int arc) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_atomic_ref_count_dec(cast(int*)&arc);
@@ -1307,7 +1314,7 @@ bool atomicRefCountDec(ref int arc)
     Params:
       arc = the address of an atomic reference count variable
 */
-void atomicRefCountInc(ref int arc)
+void atomicRefCountInc(ref int arc) nothrow
 {
   g_atomic_ref_count_inc(cast(int*)&arc);
 }
@@ -1318,7 +1325,7 @@ void atomicRefCountInc(ref int arc)
     Params:
       arc = the address of an atomic reference count variable
 */
-void atomicRefCountInit(ref int arc)
+void atomicRefCountInit(ref int arc) nothrow
 {
   g_atomic_ref_count_init(cast(int*)&arc);
 }
@@ -1334,7 +1341,7 @@ void atomicRefCountInit(ref int arc)
                     that text represents. The returned buffer must
                     be freed with [glib.global.gfree].
 */
-ubyte[] base64Decode(string text)
+ubyte[] base64Decode(string text) nothrow
 {
   ubyte* _cretval;
   size_t _cretlength;
@@ -1360,7 +1367,7 @@ ubyte[] base64Decode(string text)
                     encoded string representing data. The returned string must
                     be freed with [glib.global.gfree].
 */
-string base64Encode(ubyte[] data = null)
+string base64Encode(ubyte[] data = null) nothrow
 {
   char* _cretval;
   size_t _len;
@@ -1388,7 +1395,7 @@ string base64Encode(ubyte[] data = null)
         returned string, unlike this function which returns a pointer
         into the argument.
 */
-string basename(string fileName)
+string basename(string fileName) nothrow
 {
   const(char)* _cretval;
   const(char)* _fileName = fileName.toCString(No.Alloc);
@@ -1417,7 +1424,7 @@ string basename(string fileName)
       address = a pointer to an integer
       lockBit = a bit value between 0 and 31
 */
-void bitLock(ref int address, int lockBit)
+void bitLock(ref int address, int lockBit) nothrow
 {
   g_bit_lock(cast(int*)&address, lockBit);
 }
@@ -1434,7 +1441,7 @@ void bitLock(ref int address, int lockBit)
     Returns: the index of the first bit set which is higher than nth_bit, or -1
          if no higher bits are set
 */
-int bitNthLsf(gulong mask, int nthBit)
+int bitNthLsf(gulong mask, int nthBit) nothrow
 {
   int _retval;
   _retval = g_bit_nth_lsf(mask, nthBit);
@@ -1454,7 +1461,7 @@ int bitNthLsf(gulong mask, int nthBit)
     Returns: the index of the first bit set which is lower than nth_bit, or -1
          if no lower bits are set
 */
-int bitNthMsf(gulong mask, int nthBit)
+int bitNthMsf(gulong mask, int nthBit) nothrow
 {
   int _retval;
   _retval = g_bit_nth_msf(mask, nthBit);
@@ -1469,7 +1476,7 @@ int bitNthMsf(gulong mask, int nthBit)
       number = a #guint
     Returns: the number of bits used to hold number
 */
-uint bitStorage(gulong number)
+uint bitStorage(gulong number) nothrow
 {
   uint _retval;
   _retval = g_bit_storage(number);
@@ -1496,7 +1503,7 @@ uint bitStorage(gulong number)
       lockBit = a bit value between 0 and 31
     Returns: true if the lock was acquired
 */
-bool bitTrylock(ref int address, int lockBit)
+bool bitTrylock(ref int address, int lockBit) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_bit_trylock(cast(int*)&address, lockBit);
@@ -1517,13 +1524,13 @@ bool bitTrylock(ref int address, int lockBit)
       address = a pointer to an integer
       lockBit = a bit value between 0 and 31
 */
-void bitUnlock(ref int address, int lockBit)
+void bitUnlock(ref int address, int lockBit) nothrow
 {
   g_bit_unlock(cast(int*)&address, lockBit);
 }
 
 /** */
-void blowChunks()
+void blowChunks() nothrow
 {
   g_blow_chunks();
 }
@@ -1544,7 +1551,7 @@ void blowChunks()
           array of strings containing the path elements.
     Returns: the newly allocated path
 */
-string buildFilenamev(string[] args)
+string buildFilenamev(string[] args) nothrow
 {
   char* _cretval;
   char*[] _tmpargs;
@@ -1571,7 +1578,7 @@ string buildFilenamev(string[] args)
     Returns: a newly-allocated string that
           must be freed with [glib.global.gfree].
 */
-string buildPathv(string separator, string[] args)
+string buildPathv(string separator, string[] args) nothrow
 {
   char* _cretval;
   const(char)* _separator = separator.toCString(No.Alloc);
@@ -1609,7 +1616,7 @@ string buildPathv(string separator, string[] args)
     Returns: a newly allocated string with the
         canonical file path
 */
-string canonicalizeFilename(string filename, string relativeTo = null)
+string canonicalizeFilename(string filename, string relativeTo = null) nothrow
 {
   char* _cretval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -1630,7 +1637,7 @@ string canonicalizeFilename(string filename, string relativeTo = null)
             (UTF-8 on Windows)
     Returns: 0 on success, -1 if an error occurred.
 */
-int chdir(string path)
+int chdir(string path) nothrow
 {
   int _retval;
   const(char)* _path = path.toCString(No.Alloc);
@@ -1664,7 +1671,7 @@ int chdir(string path)
         version mismatch. The returned string is owned by GLib and must
         not be modified or freed.
 */
-string checkVersion(uint requiredMajor, uint requiredMinor, uint requiredMicro)
+string checkVersion(uint requiredMajor, uint requiredMinor, uint requiredMicro) nothrow
 {
   const(char)* _cretval;
   _cretval = glib_check_version(requiredMajor, requiredMinor, requiredMicro);
@@ -1706,13 +1713,20 @@ string checkVersion(uint requiredMajor, uint requiredMinor, uint requiredMicro)
       function_ = function to call
     Returns: the ID (greater than 0) of the event source.
 */
-uint childWatchAdd(int priority, glib.types.Pid pid, glib.types.ChildWatchFunc function_)
+uint childWatchAdd(int priority, glib.types.Pid pid, glib.types.ChildWatchFunc function_) nothrow
 {
-  extern(C) void _function_Callback(GPid pid, int waitStatus, void* userData)
+  extern(C) void _function_Callback(GPid pid, int waitStatus, void* userData) nothrow
   {
     auto _dlg = cast(glib.types.ChildWatchFunc*)userData;
 
-    (*_dlg)(pid, waitStatus);
+    try
+    {
+      (*_dlg)(pid, waitStatus);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "glib.types.ChildWatchFunc");
+    }
   }
   auto _function_CB = function_ ? &_function_Callback : null;
   uint _retval;
@@ -1769,7 +1783,7 @@ uint childWatchAdd(int priority, glib.types.Pid pid, glib.types.ChildWatchFunc f
         Windows a handle for a process (which doesn't have to be a child).
     Returns: the newly-created child watch source
 */
-glib.source.Source childWatchSourceNew(glib.types.Pid pid)
+glib.source.Source childWatchSourceNew(glib.types.Pid pid) nothrow
 {
   GSource* _cretval;
   _cretval = g_child_watch_source_new(pid);
@@ -1795,7 +1809,7 @@ glib.source.Source childWatchSourceNew(glib.types.Pid pid)
       mode = as in chmod()
     Returns: 0 if the operation succeeded, -1 on error
 */
-int chmod(string filename, int mode)
+int chmod(string filename, int mode) nothrow
 {
   int _retval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -1871,7 +1885,7 @@ bool close(int fd)
       lowfd = Minimum fd to close, which must be non-negative
     Returns: 0 on success, -1 with errno set on error
 */
-int closefrom(int lowfd)
+int closefrom(int lowfd) nothrow
 {
   int _retval;
   _retval = g_closefrom(lowfd);
@@ -1893,7 +1907,7 @@ int closefrom(int lowfd)
         checksum_type. The returned string should be freed with [glib.global.gfree] when
         done using it.
 */
-string computeChecksumForBytes(glib.types.ChecksumType checksumType, glib.bytes.Bytes data)
+string computeChecksumForBytes(glib.types.ChecksumType checksumType, glib.bytes.Bytes data) nothrow
 {
   char* _cretval;
   _cretval = g_compute_checksum_for_bytes(checksumType, data ? cast(GBytes*)data._cPtr(No.Dup) : null);
@@ -1916,7 +1930,7 @@ string computeChecksumForBytes(glib.types.ChecksumType checksumType, glib.bytes.
         checksum_type. The returned string should be freed with [glib.global.gfree] when
         done using it.
 */
-string computeChecksumForData(glib.types.ChecksumType checksumType, ubyte[] data)
+string computeChecksumForData(glib.types.ChecksumType checksumType, ubyte[] data) nothrow
 {
   char* _cretval;
   size_t _length;
@@ -1941,7 +1955,7 @@ string computeChecksumForData(glib.types.ChecksumType checksumType, ubyte[] data
         or null if [glib.checksum.Checksum.new_] fails for checksum_type. The returned string
         should be freed with [glib.global.gfree] when done using it.
 */
-string computeChecksumForString(glib.types.ChecksumType checksumType, string str)
+string computeChecksumForString(glib.types.ChecksumType checksumType, string str) nothrow
 {
   char* _cretval;
   ptrdiff_t _length;
@@ -1968,7 +1982,7 @@ string computeChecksumForString(glib.types.ChecksumType checksumType, string str
     Returns: the HMAC of the binary data as a string in hexadecimal.
         The returned string should be freed with [glib.global.gfree] when done using it.
 */
-string computeHmacForBytes(glib.types.ChecksumType digestType, glib.bytes.Bytes key, glib.bytes.Bytes data)
+string computeHmacForBytes(glib.types.ChecksumType digestType, glib.bytes.Bytes key, glib.bytes.Bytes data) nothrow
 {
   char* _cretval;
   _cretval = g_compute_hmac_for_bytes(digestType, key ? cast(GBytes*)key._cPtr(No.Dup) : null, data ? cast(GBytes*)data._cPtr(No.Dup) : null);
@@ -1990,7 +2004,7 @@ string computeHmacForBytes(glib.types.ChecksumType digestType, glib.bytes.Bytes 
     Returns: the HMAC of the binary data as a string in hexadecimal.
         The returned string should be freed with [glib.global.gfree] when done using it.
 */
-string computeHmacForData(glib.types.ChecksumType digestType, ubyte[] key, ubyte[] data)
+string computeHmacForData(glib.types.ChecksumType digestType, ubyte[] key, ubyte[] data) nothrow
 {
   char* _cretval;
   size_t _keyLen;
@@ -2021,7 +2035,7 @@ string computeHmacForData(glib.types.ChecksumType digestType, ubyte[] key, ubyte
           The returned string should be freed with [glib.global.gfree]
           when done using it.
 */
-string computeHmacForString(glib.types.ChecksumType digestType, ubyte[] key, string str)
+string computeHmacForString(glib.types.ChecksumType digestType, ubyte[] key, string str) nothrow
 {
   char* _cretval;
   size_t _keyLen;
@@ -2098,7 +2112,7 @@ ubyte[] convert(ubyte[] str, string toCodeset, string fromCodeset, out size_t by
 }
 
 /** */
-glib.types.Quark convertErrorQuark()
+glib.types.Quark convertErrorQuark() nothrow
 {
   glib.types.Quark _retval;
   _retval = g_convert_error_quark();
@@ -2198,7 +2212,7 @@ ubyte[] convertWithFallback(ubyte[] str, string toCodeset, string fromCodeset, s
           The return value can be used exactly like the return value
           from creat().
 */
-int creat(string filename, int mode)
+int creat(string filename, int mode) nothrow
 {
   int _retval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -2213,7 +2227,7 @@ int creat(string filename, int mode)
     Params:
       datasetLocation = the location identifying the dataset.
 */
-void datasetDestroy(const(void)* datasetLocation)
+void datasetDestroy(const(void)* datasetLocation) nothrow
 {
   g_dataset_destroy(datasetLocation);
 }
@@ -2232,13 +2246,20 @@ void datasetDestroy(const(void)* datasetLocation)
       datasetLocation = the location identifying the dataset.
       func = the function to call for each data element.
 */
-void datasetForeach(const(void)* datasetLocation, glib.types.DataForeachFunc func)
+void datasetForeach(const(void)* datasetLocation, glib.types.DataForeachFunc func) nothrow
 {
-  extern(C) void _funcCallback(GQuark keyId, void* data, void* userData)
+  extern(C) void _funcCallback(GQuark keyId, void* data, void* userData) nothrow
   {
     auto _dlg = cast(glib.types.DataForeachFunc*)userData;
 
-    (*_dlg)(keyId, data);
+    try
+    {
+      (*_dlg)(keyId, data);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "glib.types.DataForeachFunc");
+    }
   }
   auto _funcCB = func ? &_funcCallback : null;
   auto _func = func ? cast(void*)&(func) : null;
@@ -2254,7 +2275,7 @@ void datasetForeach(const(void)* datasetLocation, glib.types.DataForeachFunc fun
     Returns: the data element corresponding to
                the #GQuark, or null if it is not found.
 */
-void* datasetIdGetData(const(void)* datasetLocation, glib.types.Quark keyId)
+void* datasetIdGetData(const(void)* datasetLocation, glib.types.Quark keyId) nothrow
 {
   auto _retval = g_dataset_id_get_data(datasetLocation, keyId);
   return _retval;
@@ -2273,7 +2294,7 @@ void* datasetIdGetData(const(void)* datasetLocation, glib.types.Quark keyId)
       category = a locale category
     Returns: the translated string for the given locale category
 */
-string dcgettext(string domain, string msgid, int category)
+string dcgettext(string domain, string msgid, int category) nothrow
 {
   const(char)* _cretval;
   const(char)* _domain = domain.toCString(No.Alloc);
@@ -2323,7 +2344,7 @@ string dcgettext(string domain, string msgid, int category)
       msgid = message to translate
     Returns: The translated string
 */
-string dgettext(string domain, string msgid)
+string dgettext(string domain, string msgid) nothrow
 {
   const(char)* _cretval;
   const(char)* _domain = domain.toCString(No.Alloc);
@@ -2347,7 +2368,7 @@ string dgettext(string domain, string msgid)
       v2 = a key to compare with v1
     Returns: true if the two keys match.
 */
-bool directEqual(const(void)* v1 = null, const(void)* v2 = null)
+bool directEqual(const(void)* v1 = null, const(void)* v2 = null) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_direct_equal(v1, v2);
@@ -2367,7 +2388,7 @@ bool directEqual(const(void)* v1 = null, const(void)* v2 = null)
       v = a #gpointer key
     Returns: a hash value corresponding to the key.
 */
-uint directHash(const(void)* v = null)
+uint directHash(const(void)* v = null) nothrow
 {
   uint _retval;
   _retval = g_direct_hash(v);
@@ -2390,7 +2411,7 @@ uint directHash(const(void)* v = null)
       n = the quantity for which translation is needed
     Returns: The translated string
 */
-string dngettext(string domain, string msgid, string msgidPlural, gulong n)
+string dngettext(string domain, string msgid, string msgidPlural, gulong n) nothrow
 {
   const(char)* _cretval;
   const(char)* _domain = domain.toCString(No.Alloc);
@@ -2413,7 +2434,7 @@ string dngettext(string domain, string msgid, string msgidPlural, gulong n)
       v2 = a pointer to a #gdouble key to compare with v1
     Returns: true if the two keys match.
 */
-bool doubleEqual(const(void)* v1, const(void)* v2)
+bool doubleEqual(const(void)* v1, const(void)* v2) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_double_equal(v1, v2);
@@ -2430,7 +2451,7 @@ bool doubleEqual(const(void)* v1, const(void)* v2)
       v = a pointer to a #gdouble key
     Returns: a hash value corresponding to the key.
 */
-uint doubleHash(const(void)* v)
+uint doubleHash(const(void)* v) nothrow
 {
   uint _retval;
   _retval = g_double_hash(v);
@@ -2460,7 +2481,7 @@ uint doubleHash(const(void)* v)
       msgidoffset = the offset of the message id in msgctxid
     Returns: The translated string
 */
-string dpgettext(string domain, string msgctxtid, size_t msgidoffset)
+string dpgettext(string domain, string msgctxtid, size_t msgidoffset) nothrow
 {
   const(char)* _cretval;
   const(char)* _domain = domain.toCString(No.Alloc);
@@ -2489,7 +2510,7 @@ string dpgettext(string domain, string msgctxtid, size_t msgidoffset)
       msgid = the message
     Returns: The translated string
 */
-string dpgettext2(string domain, string context, string msgid)
+string dpgettext2(string domain, string context, string msgid) nothrow
 {
   const(char)* _cretval;
   const(char)* _domain = domain.toCString(No.Alloc);
@@ -2513,7 +2534,7 @@ string dpgettext2(string domain, string context, string msgid)
           string is owned by envp, and will be freed if variable is
           set or unset again.
 */
-string environGetenv(string[] envp, string variable)
+string environGetenv(string[] envp, string variable) nothrow
 {
   const(char)* _cretval;
   char*[] _tmpenvp;
@@ -2548,7 +2569,7 @@ string environGetenv(string[] envp, string variable)
       lowfd = Minimum fd to act on, which must be non-negative
     Returns: 0 on success, -1 with errno set on error
 */
-int fdwalkSetCloexec(int lowfd)
+int fdwalkSetCloexec(int lowfd) nothrow
 {
   int _retval;
   _retval = g_fdwalk_set_cloexec(lowfd);
@@ -2570,7 +2591,7 @@ int fdwalkSetCloexec(int lowfd)
       errNo = an "errno" value
     Returns: #GFileError corresponding to the given err_no
 */
-glib.types.FileError fileErrorFromErrno(int errNo)
+glib.types.FileError fileErrorFromErrno(int errNo) nothrow
 {
   GFileError _cretval;
   _cretval = g_file_error_from_errno(errNo);
@@ -2579,7 +2600,7 @@ glib.types.FileError fileErrorFromErrno(int errNo)
 }
 
 /** */
-glib.types.Quark fileErrorQuark()
+glib.types.Quark fileErrorQuark() nothrow
 {
   glib.types.Quark _retval;
   _retval = g_file_error_quark();
@@ -2883,7 +2904,7 @@ bool fileSetContentsFull(string filename, ubyte[] contents, glib.types.FileSetCo
       test = bitfield of #GFileTest flags
     Returns: whether a test was true
 */
-bool fileTest(string filename, glib.types.FileTest test)
+bool fileTest(string filename, glib.types.FileTest test) nothrow
 {
   bool _retval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -2915,7 +2936,7 @@ bool fileTest(string filename, glib.types.FileTest test)
     Returns: a newly allocated string containing
         a rendition of the basename of the filename in valid UTF-8
 */
-string filenameDisplayBasename(string filename)
+string filenameDisplayBasename(string filename) nothrow
 {
   char* _cretval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -2947,7 +2968,7 @@ string filenameDisplayBasename(string filename)
     Returns: a newly allocated string containing
         a rendition of the filename in valid UTF-8
 */
-string filenameDisplayName(string filename)
+string filenameDisplayName(string filename) nothrow
 {
   char* _cretval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -3136,7 +3157,7 @@ string filenameToUtf8(ubyte[] opsysstring, out size_t bytesRead)
     Returns: a newly-allocated
         string with the absolute path, or null
 */
-string findProgramInPath(string program)
+string findProgramInPath(string program) nothrow
 {
   char* _cretval;
   const(char)* _program = program.toCString(No.Alloc);
@@ -3170,7 +3191,7 @@ string findProgramInPath(string program)
     Returns: A `FILE*` if the file was successfully opened, or null if
           an error occurred
 */
-void* fopen(string filename, string mode)
+void* fopen(string filename, string mode) nothrow
 {
   const(char)* _filename = filename.toCString(No.Alloc);
   const(char)* _mode = mode.toCString(No.Alloc);
@@ -3198,7 +3219,7 @@ void* fopen(string filename, string mode)
     Returns: a newly-allocated formatted string containing
         a human readable file size
 */
-string formatSize(ulong size)
+string formatSize(ulong size) nothrow
 {
   char* _cretval;
   _cretval = g_format_size(size);
@@ -3225,7 +3246,7 @@ string formatSize(ulong size)
     Deprecated: This function is broken due to its use of SI
           suffixes to denote IEC units. Use [glib.global.formatSize] instead.
 */
-string formatSizeForDisplay(long size)
+string formatSizeForDisplay(long size) nothrow
 {
   char* _cretval;
   _cretval = g_format_size_for_display(size);
@@ -3245,7 +3266,7 @@ string formatSizeForDisplay(long size)
     Returns: a newly-allocated formatted string
         containing a human readable file size
 */
-string formatSizeFull(ulong size, glib.types.FormatSizeFlags flags)
+string formatSizeFull(ulong size, glib.types.FormatSizeFlags flags) nothrow
 {
   char* _cretval;
   _cretval = g_format_size_full(size, flags);
@@ -3271,7 +3292,7 @@ string formatSizeFull(ulong size, glib.types.FormatSizeFlags flags)
     Params:
       mem = the memory to free
 */
-void gfree(void* mem = null)
+void gfree(void* mem = null) nothrow
 {
   g_free(mem);
 }
@@ -3293,7 +3314,7 @@ void gfree(void* mem = null)
       mem = the memory to free
       size = size of mem, in bytes
 */
-void freeSized(void* mem, size_t size)
+void freeSized(void* mem, size_t size) nothrow
 {
   g_free_sized(mem, size);
 }
@@ -3312,7 +3333,7 @@ void freeSized(void* mem, size_t size)
     Returns: A FILE* if the file was successfully opened, or null if
           an error occurred.
 */
-void* freopen(string filename, string mode, void* stream = null)
+void* freopen(string filename, string mode, void* stream = null) nothrow
 {
   const(char)* _filename = filename.toCString(No.Alloc);
   const(char)* _mode = mode.toCString(No.Alloc);
@@ -3335,7 +3356,7 @@ void* freopen(string filename, string mode, void* stream = null)
     Returns: 0 on success, or -1 if an error occurred.
       The return value can be used exactly like the return value from fsync().
 */
-int fsync(int fd)
+int fsync(int fd) nothrow
 {
   int _retval;
   _retval = g_fsync(fd);
@@ -3353,7 +3374,7 @@ int fsync(int fd)
     Returns: human-readable application
         name. May return null
 */
-string getApplicationName()
+string getApplicationName() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_application_name();
@@ -3389,7 +3410,7 @@ string getApplicationName()
           name, or null.
     Returns: true if the returned charset is UTF-8
 */
-bool getCharset(out string charset)
+bool getCharset(out string charset) nothrow
 {
   bool _retval;
   char* _charset;
@@ -3403,7 +3424,7 @@ bool getCharset(out string charset)
     Returns: a newly allocated string containing the name
           of the character set. This string must be freed with [glib.global.gfree].
 */
-string getCodeset()
+string getCodeset() nothrow
 {
   char* _cretval;
   _cretval = g_get_codeset();
@@ -3435,7 +3456,7 @@ string getCodeset()
           name, or null.
     Returns: true if the returned charset is UTF-8
 */
-bool getConsoleCharset(out string charset)
+bool getConsoleCharset(out string charset) nothrow
 {
   bool _retval;
   char* _charset;
@@ -3457,7 +3478,7 @@ bool getConsoleCharset(out string charset)
     the current directory is the target of a symbolic link.
     Returns: the current directory
 */
-string getCurrentDir()
+string getCurrentDir() nothrow
 {
   char* _cretval;
   _cretval = g_get_current_dir();
@@ -3476,7 +3497,7 @@ string getCurrentDir()
     Deprecated: #GTimeVal is not year-2038-safe. Use [glib.global.getRealTime]
          instead.
 */
-void getCurrentTime(out glib.time_val.TimeVal result)
+void getCurrentTime(out glib.time_val.TimeVal result) nothrow
 {
   g_get_current_time(cast(GTimeVal*)&result);
 }
@@ -3494,7 +3515,7 @@ void getCurrentTime(out glib.time_val.TimeVal result)
     [glib.global.strfreev] when it is no longer needed.
     Returns: the list of environment variables
 */
-string[] getEnviron()
+string[] getEnviron() nothrow
 {
   char** _cretval;
   _cretval = g_get_environ();
@@ -3543,7 +3564,7 @@ string[] getEnviron()
       filenameCharsets = return location for the null-terminated list of encoding names
     Returns: true if the filename encoding is UTF-8.
 */
-bool getFilenameCharsets(out string[] filenameCharsets)
+bool getFilenameCharsets(out string[] filenameCharsets) nothrow
 {
   bool _retval;
   const(char*)* _filenameCharsets;
@@ -3585,7 +3606,7 @@ bool getFilenameCharsets(out string[] filenameCharsets)
     or unset it before calling any functions in GLib.
     Returns: the current user's home directory
 */
-string getHomeDir()
+string getHomeDir() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_home_dir();
@@ -3610,7 +3631,7 @@ string getHomeDir()
     The encoding of the returned string is UTF-8.
     Returns: the host name of the machine.
 */
-string getHostName()
+string getHostName() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_host_name();
@@ -3633,7 +3654,7 @@ string getHostName()
     Returns: a null-terminated array of strings owned by GLib
          that must not be modified or freed.
 */
-string[] getLanguageNames()
+string[] getLanguageNames() nothrow
 {
   const(char*)* _cretval;
   _cretval = g_get_language_names();
@@ -3669,7 +3690,7 @@ string[] getLanguageNames()
          the thread g_get_language_names_with_category was called from.
          It must not be modified or freed. It must be copied if planned to be used in another thread.
 */
-string[] getLanguageNamesWithCategory(string categoryName)
+string[] getLanguageNamesWithCategory(string categoryName) nothrow
 {
   const(char*)* _cretval;
   const(char)* _categoryName = categoryName.toCString(No.Alloc);
@@ -3711,7 +3732,7 @@ string[] getLanguageNamesWithCategory(string categoryName)
         allocated array of newly allocated strings with the locale variants. Free with
         [glib.global.strfreev].
 */
-string[] getLocaleVariants(string locale)
+string[] getLocaleVariants(string locale) nothrow
 {
   char** _cretval;
   const(char)* _locale = locale.toCString(No.Alloc);
@@ -3744,7 +3765,7 @@ string[] getLocaleVariants(string locale)
     may not always be possible to do this.
     Returns: the monotonic time, in microseconds
 */
-long getMonotonicTime()
+long getMonotonicTime() nothrow
 {
   long _retval;
   _retval = g_get_monotonic_time();
@@ -3758,7 +3779,7 @@ long getMonotonicTime()
     similar cases.
     Returns: Number of schedulable threads, always greater than 0
 */
-uint getNumProcessors()
+uint getNumProcessors() nothrow
 {
   uint _retval;
   _retval = g_get_num_processors();
@@ -3780,7 +3801,7 @@ uint getNumProcessors()
     Returns: The associated value for the requested key or null if
         this information is not provided.
 */
-string getOsInfo(string keyName)
+string getOsInfo(string keyName) nothrow
 {
   char* _cretval;
   const(char)* _keyName = keyName.toCString(No.Alloc);
@@ -3802,7 +3823,7 @@ string getOsInfo(string keyName)
         or null if it has not been set yet. The returned string belongs
         to GLib and must not be modified or freed.
 */
-string getPrgname()
+string getPrgname() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_prgname();
@@ -3818,7 +3839,7 @@ string getPrgname()
     returned.
     Returns: the user's real name.
 */
-string getRealName()
+string getRealName() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_real_name();
@@ -3838,7 +3859,7 @@ string getRealName()
     measuring intervals.
     Returns: the number of microseconds since January 1, 1970 UTC.
 */
-long getRealTime()
+long getRealTime() nothrow
 {
   long _retval;
   _retval = g_get_real_time();
@@ -3869,7 +3890,7 @@ long getRealTime()
     Returns: a null-terminated array of strings owned by GLib that must not be
           modified or freed.
 */
-string[] getSystemConfigDirs()
+string[] getSystemConfigDirs() nothrow
 {
   const(char*)* _cretval;
   _cretval = g_get_system_config_dirs();
@@ -3925,7 +3946,7 @@ string[] getSystemConfigDirs()
     Returns: a null-terminated array of strings owned by GLib that must not be
           modified or freed.
 */
-string[] getSystemDataDirs()
+string[] getSystemDataDirs() nothrow
 {
   const(char*)* _cretval;
   _cretval = g_get_system_data_dirs();
@@ -3960,7 +3981,7 @@ string[] getSystemDataDirs()
     string.
     Returns: the directory to use for temporary files.
 */
-string getTmpDir()
+string getTmpDir() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_tmp_dir();
@@ -3988,7 +4009,7 @@ string getTmpDir()
     Returns: a string owned by GLib that
         must not be modified or freed.
 */
-string getUserCacheDir()
+string getUserCacheDir() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_user_cache_dir();
@@ -4017,7 +4038,7 @@ string getUserCacheDir()
     Returns: a string owned by GLib that
         must not be modified or freed.
 */
-string getUserConfigDir()
+string getUserConfigDir() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_user_config_dir();
@@ -4046,7 +4067,7 @@ string getUserConfigDir()
     Returns: a string owned by GLib that must
         not be modified or freed.
 */
-string getUserDataDir()
+string getUserDataDir() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_user_data_dir();
@@ -4061,7 +4082,7 @@ string getUserDataDir()
     consistent on a machine. On Windows, it is always UTF-8.
     Returns: the user name of the current user.
 */
-string getUserName()
+string getUserName() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_user_name();
@@ -4086,7 +4107,7 @@ string getUserName()
     Returns: a string owned by GLib that must not be
           modified or freed.
 */
-string getUserRuntimeDir()
+string getUserRuntimeDir() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_user_runtime_dir();
@@ -4112,7 +4133,7 @@ string getUserRuntimeDir()
         directory, or null if the logical id was not found. The returned string is
         owned by GLib and should not be modified or freed.
 */
-string getUserSpecialDir(glib.types.UserDirectory directory)
+string getUserSpecialDir(glib.types.UserDirectory directory) nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_user_special_dir(directory);
@@ -4141,7 +4162,7 @@ string getUserSpecialDir(glib.types.UserDirectory directory)
     Returns: a string owned by GLib that
         must not be modified or freed.
 */
-string getUserStateDir()
+string getUserStateDir() nothrow
 {
   const(char)* _cretval;
   _cretval = g_get_user_state_dir();
@@ -4165,7 +4186,7 @@ string getUserStateDir()
           may be overwritten by the next call to [glib.global.getenv], [glib.global.setenv]
           or [glib.global.unsetenv].
 */
-string getenv(string variable)
+string getenv(string variable) nothrow
 {
   const(char)* _cretval;
   const(char)* _variable = variable.toCString(No.Alloc);
@@ -4189,7 +4210,7 @@ string getenv(string variable)
     Returns: true if hostname contains any ASCII-encoded
       segments.
 */
-bool hostnameIsAsciiEncoded(string hostname)
+bool hostnameIsAsciiEncoded(string hostname) nothrow
 {
   bool _retval;
   const(char)* _hostname = hostname.toCString(No.Alloc);
@@ -4207,7 +4228,7 @@ bool hostnameIsAsciiEncoded(string hostname)
       hostname = a hostname (or IP address in string form)
     Returns: true if hostname is an IP address
 */
-bool hostnameIsIpAddress(string hostname)
+bool hostnameIsIpAddress(string hostname) nothrow
 {
   bool _retval;
   const(char)* _hostname = hostname.toCString(No.Alloc);
@@ -4228,7 +4249,7 @@ bool hostnameIsIpAddress(string hostname)
       hostname = a hostname
     Returns: true if hostname contains any non-ASCII characters
 */
-bool hostnameIsNonAscii(string hostname)
+bool hostnameIsNonAscii(string hostname) nothrow
 {
   bool _retval;
   const(char)* _hostname = hostname.toCString(No.Alloc);
@@ -4246,7 +4267,7 @@ bool hostnameIsNonAscii(string hostname)
     Returns: an ASCII hostname, which must be freed,
          or null if hostname is in some way invalid.
 */
-string hostnameToAscii(string hostname)
+string hostnameToAscii(string hostname) nothrow
 {
   char* _cretval;
   const(char)* _hostname = hostname.toCString(No.Alloc);
@@ -4269,7 +4290,7 @@ string hostnameToAscii(string hostname)
     Returns: a UTF-8 hostname, which must be freed,
          or null if hostname is in some way invalid.
 */
-string hostnameToUnicode(string hostname)
+string hostnameToUnicode(string hostname) nothrow
 {
   char* _cretval;
   const(char)* _hostname = hostname.toCString(No.Alloc);
@@ -4300,14 +4321,21 @@ string hostnameToUnicode(string hostname)
       function_ = function to call
     Returns: the ID (greater than 0) of the event source.
 */
-uint idleAdd(int priority, glib.types.SourceFunc function_)
+uint idleAdd(int priority, glib.types.SourceFunc function_) nothrow
 {
-  extern(C) gboolean _function_Callback(void* userData)
+  extern(C) gboolean _function_Callback(void* userData) nothrow
   {
     bool _dretval;
     auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-    _dretval = (*_dlg)();
+    try
+    {
+      _dretval = (*_dlg)();
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "glib.types.SourceFunc");
+    }
     auto _retval = cast(gboolean)_dretval;
 
     return _retval;
@@ -4327,7 +4355,7 @@ uint idleAdd(int priority, glib.types.SourceFunc function_)
       data = the data for the idle source's callback.
     Returns: true if an idle source was found and removed.
 */
-bool idleRemoveByData(void* data = null)
+bool idleRemoveByData(void* data = null) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_idle_remove_by_data(data);
@@ -4344,7 +4372,7 @@ bool idleRemoveByData(void* data = null)
     have a default priority of [glib.types.PRIORITY_DEFAULT].
     Returns: the newly-created idle source
 */
-glib.source.Source idleSourceNew()
+glib.source.Source idleSourceNew() nothrow
 {
   GSource* _cretval;
   _cretval = g_idle_source_new();
@@ -4364,7 +4392,7 @@ glib.source.Source idleSourceNew()
       v2 = a pointer to a #gint64 key to compare with v1
     Returns: true if the two keys match.
 */
-bool int64Equal(const(void)* v1, const(void)* v2)
+bool int64Equal(const(void)* v1, const(void)* v2) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_int64_equal(v1, v2);
@@ -4382,7 +4410,7 @@ bool int64Equal(const(void)* v1, const(void)* v2)
       v = a pointer to a #gint64 key
     Returns: a hash value corresponding to the key.
 */
-uint int64Hash(const(void)* v)
+uint int64Hash(const(void)* v) nothrow
 {
   uint _retval;
   _retval = g_int64_hash(v);
@@ -4405,7 +4433,7 @@ uint int64Hash(const(void)* v)
       v2 = a pointer to a #gint key to compare with v1
     Returns: true if the two keys match.
 */
-bool intEqual(const(void)* v1, const(void)* v2)
+bool intEqual(const(void)* v1, const(void)* v2) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_int_equal(v1, v2);
@@ -4425,7 +4453,7 @@ bool intEqual(const(void)* v1, const(void)* v2)
       v = a pointer to a #gint key
     Returns: a hash value corresponding to the key.
 */
-uint intHash(const(void)* v)
+uint intHash(const(void)* v) nothrow
 {
   uint _retval;
   _retval = g_int_hash(v);
@@ -4446,7 +4474,7 @@ uint intHash(const(void)* v)
       string_ = a static string
     Returns: a canonical representation for the string
 */
-string internStaticString(string string_ = null)
+string internStaticString(string string_ = null) nothrow
 {
   const(char)* _cretval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -4468,7 +4496,7 @@ string internStaticString(string string_ = null)
       string_ = a string
     Returns: a canonical representation for the string
 */
-string internString(string string_ = null)
+string internString(string string_ = null) nothrow
 {
   const(char)* _cretval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -4492,14 +4520,21 @@ string internString(string string_ = null)
       func = the function to call when the condition is satisfied
     Returns: the event source id
 */
-uint ioAddWatch(glib.iochannel.IOChannel channel, int priority, glib.types.IOCondition condition, glib.types.IOFunc func)
+uint ioAddWatch(glib.iochannel.IOChannel channel, int priority, glib.types.IOCondition condition, glib.types.IOFunc func) nothrow
 {
-  extern(C) gboolean _funcCallback(GIOChannel* source, GIOCondition condition, void* data)
+  extern(C) gboolean _funcCallback(GIOChannel* source, GIOCondition condition, void* data) nothrow
   {
     bool _dretval;
     auto _dlg = cast(glib.types.IOFunc*)data;
 
-    _dretval = (*_dlg)(source ? new glib.iochannel.IOChannel(cast(void*)source, No.Take) : null, condition);
+    try
+    {
+      _dretval = (*_dlg)(source ? new glib.iochannel.IOChannel(cast(void*)source, No.Take) : null, condition);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "glib.types.IOFunc");
+    }
     auto _retval = cast(gboolean)_dretval;
 
     return _retval;
@@ -4533,7 +4568,7 @@ uint ioAddWatch(glib.iochannel.IOChannel channel, int priority, glib.types.IOCon
       condition = conditions to watch for
     Returns: a new #GSource
 */
-glib.source.Source ioCreateWatch(glib.iochannel.IOChannel channel, glib.types.IOCondition condition)
+glib.source.Source ioCreateWatch(glib.iochannel.IOChannel channel, glib.types.IOCondition condition) nothrow
 {
   GSource* _cretval;
   _cretval = g_io_create_watch(channel ? cast(GIOChannel*)channel._cPtr(No.Dup) : null, condition);
@@ -4553,7 +4588,7 @@ glib.source.Source ioCreateWatch(glib.iochannel.IOChannel channel, glib.types.IO
     Returns: a null-terminated list of strings which must be freed with
           [glib.global.strfreev].
 */
-string[] listenv()
+string[] listenv() nothrow
 {
   char** _cretval;
   _cretval = g_listenv();
@@ -4708,7 +4743,7 @@ string localeToUtf8(ubyte[] opsysstring, out size_t bytesRead)
       message = the message
       unusedData = data passed from `funcGLib.log` which is unused
 */
-void logDefaultHandler(string logDomain, glib.types.LogLevelFlags logLevel, string message = null, void* unusedData = null)
+void logDefaultHandler(string logDomain, glib.types.LogLevelFlags logLevel, string message = null, void* unusedData = null) nothrow
 {
   const(char)* _logDomain = logDomain.toCString(No.Alloc);
   const(char)* _message = message.toCString(No.Alloc);
@@ -4726,7 +4761,7 @@ void logDefaultHandler(string logDomain, glib.types.LogLevelFlags logLevel, stri
     `funcGLib.log_writer_default_set_debug_domains`; see the docs for `funcGLib.log_set_debug_enabled`.
     Returns: `TRUE` if debug output is enabled, `FALSE` otherwise
 */
-bool logGetDebugEnabled()
+bool logGetDebugEnabled() nothrow
 {
   bool _retval;
   _retval = cast(bool)g_log_get_debug_enabled();
@@ -4744,7 +4779,7 @@ bool logGetDebugEnabled()
       handlerId = the ID of the handler, which was returned
           in `funcGLib.log_set_handler`
 */
-void logRemoveHandler(string logDomain, uint handlerId)
+void logRemoveHandler(string logDomain, uint handlerId) nothrow
 {
   const(char)* _logDomain = logDomain.toCString(No.Alloc);
   g_log_remove_handler(_logDomain, handlerId);
@@ -4774,7 +4809,7 @@ void logRemoveHandler(string logDomain, uint handlerId)
           to be fatal
     Returns: the old fatal mask
 */
-glib.types.LogLevelFlags logSetAlwaysFatal(glib.types.LogLevelFlags fatalMask)
+glib.types.LogLevelFlags logSetAlwaysFatal(glib.types.LogLevelFlags fatalMask) nothrow
 {
   GLogLevelFlags _cretval;
   _cretval = g_log_set_always_fatal(fatalMask);
@@ -4795,7 +4830,7 @@ glib.types.LogLevelFlags logSetAlwaysFatal(glib.types.LogLevelFlags fatalMask)
     Params:
       enabled = `TRUE` to enable debug output, `FALSE` otherwise
 */
-void logSetDebugEnabled(bool enabled)
+void logSetDebugEnabled(bool enabled) nothrow
 {
   g_log_set_debug_enabled(enabled);
 }
@@ -4821,7 +4856,7 @@ void logSetDebugEnabled(bool enabled)
       fatalMask = the new fatal mask
     Returns: the old fatal mask for the log domain
 */
-glib.types.LogLevelFlags logSetFatalMask(string logDomain, glib.types.LogLevelFlags fatalMask)
+glib.types.LogLevelFlags logSetFatalMask(string logDomain, glib.types.LogLevelFlags fatalMask) nothrow
 {
   GLogLevelFlags _cretval;
   const(char)* _logDomain = logDomain.toCString(No.Alloc);
@@ -4846,15 +4881,22 @@ glib.types.LogLevelFlags logSetFatalMask(string logDomain, glib.types.LogLevelFl
       logFunc = the log handler function
     Returns: the ID of the new handler
 */
-uint logSetHandler(string logDomain, glib.types.LogLevelFlags logLevels, glib.types.LogFunc logFunc)
+uint logSetHandler(string logDomain, glib.types.LogLevelFlags logLevels, glib.types.LogFunc logFunc) nothrow
 {
-  extern(C) void _logFuncCallback(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* message, void* userData)
+  extern(C) void _logFuncCallback(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* message, void* userData) nothrow
   {
     auto _dlg = cast(glib.types.LogFunc*)userData;
     string _logDomain = logDomain.fromCString(No.Free);
     string _message = message.fromCString(No.Free);
 
-    (*_dlg)(_logDomain, logLevel, _message);
+    try
+    {
+      (*_dlg)(_logDomain, logLevel, _message);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "glib.types.LogFunc");
+    }
   }
   auto _logFuncCB = logFunc ? &_logFuncCallback : null;
   uint _retval;
@@ -4889,7 +4931,7 @@ uint logSetHandler(string logDomain, glib.types.LogLevelFlags logLevels, glib.ty
       fields = a dictionary ([glib.variant.Variant] of the type `G_VARIANT_TYPE_VARDICT`)
         containing the key-value pairs of message data.
 */
-void logVariant(string logDomain, glib.types.LogLevelFlags logLevel, glib.variant.Variant fields)
+void logVariant(string logDomain, glib.types.LogLevelFlags logLevel, glib.variant.Variant fields) nothrow
 {
   const(char)* _logDomain = logDomain.toCString(No.Alloc);
   g_log_variant(_logDomain, logLevel, fields ? cast(GVariant*)fields._cPtr(No.Dup) : null);
@@ -4905,7 +4947,7 @@ void logVariant(string logDomain, glib.types.LogLevelFlags logLevel, glib.varian
       domains = `NULL`-terminated array with domains to be printed.
           `NULL` or an array with no values means none. Array with a single value `"all"` means all.
 */
-void logWriterDefaultSetDebugDomains(string[] domains = null)
+void logWriterDefaultSetDebugDomains(string[] domains = null) nothrow
 {
   const(char)*[] _tmpdomains;
   foreach (s; domains)
@@ -4937,7 +4979,7 @@ void logWriterDefaultSetDebugDomains(string[] domains = null)
       useStderr = If `TRUE`, use `stderr` for log messages that would
          normally have appeared on `stdout`
 */
-void logWriterDefaultSetUseStderr(bool useStderr)
+void logWriterDefaultSetUseStderr(bool useStderr) nothrow
 {
   g_log_writer_default_set_use_stderr(useStderr);
 }
@@ -4977,7 +5019,7 @@ void logWriterDefaultSetUseStderr(bool useStderr)
     Returns: `TRUE` if the log message would be dropped by GLib’s
         default log handlers
 */
-bool logWriterDefaultWouldDrop(glib.types.LogLevelFlags logLevel, string logDomain = null)
+bool logWriterDefaultWouldDrop(glib.types.LogLevelFlags logLevel, string logDomain = null) nothrow
 {
   bool _retval;
   const(char)* _logDomain = logDomain.toCString(No.Alloc);
@@ -5000,7 +5042,7 @@ bool logWriterDefaultWouldDrop(glib.types.LogLevelFlags logLevel, string logDoma
       outputFd = output file descriptor to check
     Returns: `TRUE` if output_fd points to the journal, `FALSE` otherwise
 */
-bool logWriterIsJournald(int outputFd)
+bool logWriterIsJournald(int outputFd) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_log_writer_is_journald(outputFd);
@@ -5017,7 +5059,7 @@ bool logWriterIsJournald(int outputFd)
       outputFd = output file descriptor to check
     Returns: `TRUE` if ANSI color escapes are supported, `FALSE` otherwise
 */
-bool logWriterSupportsColor(int outputFd)
+bool logWriterSupportsColor(int outputFd) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_log_writer_supports_color(outputFd);
@@ -5041,7 +5083,7 @@ bool logWriterSupportsColor(int outputFd)
     Returns: 0 if the information was successfully retrieved,
           -1 if an error occurred
 */
-int lstat(string filename, glib.types.StatBuf buf)
+int lstat(string filename, glib.types.StatBuf buf) nothrow
 {
   int _retval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -5053,7 +5095,7 @@ int lstat(string filename, glib.types.StatBuf buf)
     Returns the currently firing source for this thread.
     Returns: The currently firing source or null.
 */
-glib.source.Source mainCurrentSource()
+glib.source.Source mainCurrentSource() nothrow
 {
   GSource* _cretval;
   _cretval = g_main_current_source();
@@ -5165,7 +5207,7 @@ glib.source.Source mainCurrentSource()
        there is more work to do.
     Returns: The main loop recursion level in the current thread
 */
-int mainDepth()
+int mainDepth() nothrow
 {
   int _retval;
   _retval = g_main_depth();
@@ -5183,7 +5225,7 @@ int mainDepth()
       nBytes = the number of bytes to allocate
     Returns: a pointer to the allocated memory
 */
-void* gmalloc(size_t nBytes)
+void* gmalloc(size_t nBytes) nothrow
 {
   auto _retval = g_malloc(nBytes);
   return _retval;
@@ -5200,7 +5242,7 @@ void* gmalloc(size_t nBytes)
       nBytes = the number of bytes to allocate
     Returns: a pointer to the allocated memory
 */
-void* malloc0(size_t nBytes)
+void* malloc0(size_t nBytes) nothrow
 {
   auto _retval = g_malloc0(nBytes);
   return _retval;
@@ -5218,7 +5260,7 @@ void* malloc0(size_t nBytes)
       nBlockBytes = the size of each block in bytes
     Returns: a pointer to the allocated memory
 */
-void* malloc0N(size_t nBlocks, size_t nBlockBytes)
+void* malloc0N(size_t nBlocks, size_t nBlockBytes) nothrow
 {
   auto _retval = g_malloc0_n(nBlocks, nBlockBytes);
   return _retval;
@@ -5236,14 +5278,14 @@ void* malloc0N(size_t nBlocks, size_t nBlockBytes)
       nBlockBytes = the size of each block in bytes
     Returns: a pointer to the allocated memory
 */
-void* mallocN(size_t nBlocks, size_t nBlockBytes)
+void* mallocN(size_t nBlocks, size_t nBlockBytes) nothrow
 {
   auto _retval = g_malloc_n(nBlocks, nBlockBytes);
   return _retval;
 }
 
 /** */
-glib.types.Quark markupErrorQuark()
+glib.types.Quark markupErrorQuark() nothrow
 {
   glib.types.Quark _retval;
   _retval = g_markup_error_quark();
@@ -5270,7 +5312,7 @@ glib.types.Quark markupErrorQuark()
       text = some valid UTF-8 text
     Returns: a newly allocated string with the escaped text
 */
-string markupEscapeText(string text)
+string markupEscapeText(string text) nothrow
 {
   char* _cretval;
   ptrdiff_t _length;
@@ -5294,7 +5336,7 @@ string markupEscapeText(string text)
     Deprecated: GLib always uses the system malloc, so this function always
       returns true.
 */
-bool memIsSystemMalloc()
+bool memIsSystemMalloc() nothrow
 {
   bool _retval;
   _retval = cast(bool)g_mem_is_system_malloc();
@@ -5308,7 +5350,7 @@ bool memIsSystemMalloc()
 
     Deprecated: Use other memory profiling tools instead
 */
-void memProfile()
+void memProfile() nothrow
 {
   g_mem_profile();
 }
@@ -5325,7 +5367,7 @@ void memProfile()
     Deprecated: This function now does nothing. Use other memory
       profiling tools instead
 */
-void memSetVtable(glib.types.MemVTable vtable)
+void memSetVtable(glib.types.MemVTable vtable) nothrow
 {
   g_mem_set_vtable(&vtable);
 }
@@ -5343,7 +5385,7 @@ void memSetVtable(glib.types.MemVTable vtable)
         for byte_size, avoiding the possibility of overflow in a [gobject.types.size_t] → [gda.types.uint]
         conversion
 */
-void* memdup(const(void)* mem, uint byteSize)
+void* memdup(const(void)* mem, uint byteSize) nothrow
 {
   auto _retval = g_memdup(mem, byteSize);
   return _retval;
@@ -5361,7 +5403,7 @@ void* memdup(const(void)* mem, uint byteSize)
       byteSize = the number of bytes to copy
     Returns: a pointer to the newly-allocated copy of the memory
 */
-void* memdup2(const(void)* mem, size_t byteSize)
+void* memdup2(const(void)* mem, size_t byteSize) nothrow
 {
   auto _retval = g_memdup2(mem, byteSize);
   return _retval;
@@ -5381,7 +5423,7 @@ void* memdup2(const(void)* mem, size_t byteSize)
     Returns: 0 if the directory was successfully created, -1 if an error
          occurred
 */
-int mkdir(string filename, int mode)
+int mkdir(string filename, int mode) nothrow
 {
   int _retval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -5399,7 +5441,7 @@ int mkdir(string filename, int mode)
     Returns: 0 if the directory already exists, or was successfully
       created. Returns -1 if an error occurred, with errno set.
 */
-int mkdirWithParents(string pathname, int mode)
+int mkdirWithParents(string pathname, int mode) nothrow
 {
   int _retval;
   const(char)* _pathname = pathname.toCString(No.Alloc);
@@ -5413,13 +5455,13 @@ int mkdirWithParents(string pathname, int mode)
     Params:
       nullifyLocation = the memory address of the pointer.
 */
-void nullifyPointer(out void* nullifyLocation)
+void nullifyPointer(out void* nullifyLocation) nothrow
 {
   g_nullify_pointer(cast(void**)&nullifyLocation);
 }
 
 /** */
-glib.types.Quark numberParserErrorQuark()
+glib.types.Quark numberParserErrorQuark() nothrow
 {
   glib.types.Quark _retval;
   _retval = g_number_parser_error_quark();
@@ -5480,7 +5522,7 @@ glib.types.Quark numberParserErrorQuark()
             the program name (which will work correctly if [gdk.global.init_] or
             [gtk.global.init_] has been called)
 */
-void onErrorQuery(string prgName)
+void onErrorQuery(string prgName) nothrow
 {
   const(char)* _prgName = prgName.toCString(No.Alloc);
   g_on_error_query(_prgName);
@@ -5505,7 +5547,7 @@ void onErrorQuery(string prgName)
       prgName = the program name, needed by gdb for the "[S]tack trace"
             option
 */
-void onErrorStackTrace(string prgName)
+void onErrorStackTrace(string prgName) nothrow
 {
   const(char)* _prgName = prgName.toCString(No.Alloc);
   g_on_error_stack_trace(_prgName);
@@ -5540,7 +5582,7 @@ void onErrorStackTrace(string prgName)
           The return value can be used exactly like the return value
           from open().
 */
-int open(string filename, int flags, int mode)
+int open(string filename, int flags, int mode) nothrow
 {
   int _retval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -5549,7 +5591,7 @@ int open(string filename, int flags, int mode)
 }
 
 /** */
-glib.types.Quark optionErrorQuark()
+glib.types.Quark optionErrorQuark() nothrow
 {
   glib.types.Quark _retval;
   _retval = g_option_error_quark();
@@ -5569,7 +5611,7 @@ glib.types.Quark optionErrorQuark()
     Returns: a newly allocated string
         containing the last component of the filename
 */
-string pathGetBasename(string fileName)
+string pathGetBasename(string fileName) nothrow
 {
   char* _cretval;
   const(char)* _fileName = fileName.toCString(No.Alloc);
@@ -5590,7 +5632,7 @@ string pathGetBasename(string fileName)
       fileName = the name of the file
     Returns: the directory components of the file
 */
-string pathGetDirname(string fileName)
+string pathGetDirname(string fileName) nothrow
 {
   char* _cretval;
   const(char)* _fileName = fileName.toCString(No.Alloc);
@@ -5629,7 +5671,7 @@ string pathGetDirname(string fileName)
       fileName = a file name
     Returns: true if file_name is absolute
 */
-bool pathIsAbsolute(string fileName)
+bool pathIsAbsolute(string fileName) nothrow
 {
   bool _retval;
   const(char)* _fileName = fileName.toCString(No.Alloc);
@@ -5647,7 +5689,7 @@ bool pathIsAbsolute(string fileName)
     Returns: a pointer into file_name after the
           root component
 */
-string pathSkipRoot(string fileName)
+string pathSkipRoot(string fileName) nothrow
 {
   const(char)* _cretval;
   const(char)* _fileName = fileName.toCString(No.Alloc);
@@ -5667,7 +5709,7 @@ string pathSkipRoot(string fileName)
       string_ = the UTF-8 encoded string to match
     Returns: true if string matches pspec
 */
-bool patternMatchSimple(string pattern, string string_)
+bool patternMatchSimple(string pattern, string string_) nothrow
 {
   bool _retval;
   const(char)* _pattern = pattern.toCString(No.Alloc);
@@ -5690,7 +5732,7 @@ bool patternMatchSimple(string pattern, string string_)
       address = a pointer to a #gpointer-sized value
       lockBit = a bit value between 0 and 31
 */
-void pointerBitLock(void* address, int lockBit)
+void pointerBitLock(void* address, int lockBit) nothrow
 {
   g_pointer_bit_lock(address, lockBit);
 }
@@ -5710,7 +5752,7 @@ void pointerBitLock(void* address, int lockBit)
           lock bit set, while previously address had the lockbit unset.
           You may also use [glib.global.pointerBitLockMaskPtr] to clear the lock bit.
 */
-void pointerBitLockAndGet(void* address, uint lockBit, out size_t outPtr)
+void pointerBitLockAndGet(void* address, uint lockBit, out size_t outPtr) nothrow
 {
   g_pointer_bit_lock_and_get(address, lockBit, cast(size_t*)&outPtr);
 }
@@ -5734,7 +5776,7 @@ void pointerBitLockAndGet(void* address, uint lockBit, out size_t outPtr)
           from this pointer are set in the result.
     Returns: the mangled pointer.
 */
-void* pointerBitLockMaskPtr(void* ptr, uint lockBit, bool set, size_t preserveMask, void* preservePtr = null)
+void* pointerBitLockMaskPtr(void* ptr, uint lockBit, bool set, size_t preserveMask, void* preservePtr = null) nothrow
 {
   auto _retval = g_pointer_bit_lock_mask_ptr(ptr, lockBit, set, preserveMask, preservePtr);
   return _retval;
@@ -5755,7 +5797,7 @@ void* pointerBitLockMaskPtr(void* ptr, uint lockBit, bool set, size_t preserveMa
       lockBit = a bit value between 0 and 31
     Returns: true if the lock was acquired
 */
-bool pointerBitTrylock(void* address, int lockBit)
+bool pointerBitTrylock(void* address, int lockBit) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_pointer_bit_trylock(address, lockBit);
@@ -5776,7 +5818,7 @@ bool pointerBitTrylock(void* address, int lockBit)
       address = a pointer to a #gpointer-sized value
       lockBit = a bit value between 0 and 31
 */
-void pointerBitUnlock(void* address, int lockBit)
+void pointerBitUnlock(void* address, int lockBit) nothrow
 {
   g_pointer_bit_unlock(address, lockBit);
 }
@@ -5799,7 +5841,7 @@ void pointerBitUnlock(void* address, int lockBit)
           Note that the lock_bit bit will be always set according to set,
           regardless of preserve_mask and the currently set value in address.
 */
-void pointerBitUnlockAndSet(void* address, uint lockBit, void* ptr, size_t preserveMask)
+void pointerBitUnlockAndSet(void* address, uint lockBit, void* ptr, size_t preserveMask) nothrow
 {
   g_pointer_bit_unlock_and_set(address, lockBit, ptr, preserveMask);
 }
@@ -5831,7 +5873,7 @@ void pointerBitUnlockAndSet(void* address, uint lockBit, void* ptr, size_t prese
       were filled in, or 0 if the operation timed out, or -1 on error or
       if the call was interrupted.
 */
-int poll(glib.types.PollFD fds, uint nfds, int timeout)
+int poll(glib.types.PollFD fds, uint nfds, int timeout) nothrow
 {
   int _retval;
   _retval = g_poll(&fds, nfds, timeout);
@@ -5852,7 +5894,7 @@ int poll(glib.types.PollFD fds, uint nfds, int timeout)
       dest = error return location
       src = error to move into the return location
 */
-void propagateError(out glib.error.ErrorWrap dest, glib.error.ErrorWrap src)
+void propagateError(out glib.error.ErrorWrap dest, glib.error.ErrorWrap src) nothrow
 {
   GError* _dest;
   g_propagate_error(&_dest, src ? cast(GError*)src._cPtr : null);
@@ -5871,13 +5913,21 @@ void propagateError(out glib.error.ErrorWrap dest, glib.error.ErrorWrap src)
       size = size of each element
       compareFunc = function to compare elements
 */
-void qsortWithData(const(void)* pbase, int totalElems, size_t size, glib.types.CompareDataFunc compareFunc)
+void qsortWithData(const(void)* pbase, int totalElems, size_t size, glib.types.CompareDataFunc compareFunc) nothrow
 {
-  extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
+  extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
   {
+    int _retval;
     auto _dlg = cast(glib.types.CompareDataFunc*)userData;
 
-    int _retval = (*_dlg)(a, b);
+    try
+    {
+      _retval = (*_dlg)(a, b);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "glib.types.CompareDataFunc");
+    }
     return _retval;
   }
   auto _compareFuncCB = compareFunc ? &_compareFuncCallback : null;
@@ -5907,7 +5957,7 @@ void qsortWithData(const(void)* pbase, int totalElems, size_t size, glib.types.C
       string_ = a string
     Returns: the #GQuark identifying the string, or 0 if string is null
 */
-glib.types.Quark quarkFromStaticString(string string_ = null)
+glib.types.Quark quarkFromStaticString(string string_ = null) nothrow
 {
   glib.types.Quark _retval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -5928,7 +5978,7 @@ glib.types.Quark quarkFromStaticString(string string_ = null)
       string_ = a string
     Returns: the #GQuark identifying the string, or 0 if string is null
 */
-glib.types.Quark quarkFromString(string string_ = null)
+glib.types.Quark quarkFromString(string string_ = null) nothrow
 {
   glib.types.Quark _retval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -5943,7 +5993,7 @@ glib.types.Quark quarkFromString(string string_ = null)
       quark = a #GQuark.
     Returns: the string associated with the #GQuark
 */
-string quarkToString(glib.types.Quark quark)
+string quarkToString(glib.types.Quark quark) nothrow
 {
   const(char)* _cretval;
   _cretval = g_quark_to_string(quark);
@@ -5966,7 +6016,7 @@ string quarkToString(glib.types.Quark quark)
     Returns: the #GQuark associated with the string, or 0 if string is
           null or there is no #GQuark associated with it
 */
-glib.types.Quark quarkTryString(string string_ = null)
+glib.types.Quark quarkTryString(string string_ = null) nothrow
 {
   glib.types.Quark _retval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -5978,7 +6028,7 @@ glib.types.Quark quarkTryString(string string_ = null)
     Returns a random #gdouble equally distributed over the range [0..1).
     Returns: a random number
 */
-double randomDouble()
+double randomDouble() nothrow
 {
   double _retval;
   _retval = g_random_double();
@@ -5994,7 +6044,7 @@ double randomDouble()
       end = upper open bound of the interval
     Returns: a random number
 */
-double randomDoubleRange(double begin, double end)
+double randomDoubleRange(double begin, double end) nothrow
 {
   double _retval;
   _retval = g_random_double_range(begin, end);
@@ -6006,7 +6056,7 @@ double randomDoubleRange(double begin, double end)
     [0..2^32-1].
     Returns: a random number
 */
-uint randomInt()
+uint randomInt() nothrow
 {
   uint _retval;
   _retval = g_random_int();
@@ -6022,7 +6072,7 @@ uint randomInt()
       end = upper open bound of the interval
     Returns: a random number
 */
-int randomIntRange(int begin, int end)
+int randomIntRange(int begin, int end) nothrow
 {
   int _retval;
   _retval = g_random_int_range(begin, end);
@@ -6036,7 +6086,7 @@ int randomIntRange(int begin, int end)
     Params:
       seed = a value to reinitialize the global random number generator
 */
-void randomSetSeed(uint seed)
+void randomSetSeed(uint seed) nothrow
 {
   g_random_set_seed(seed);
 }
@@ -6049,7 +6099,7 @@ void randomSetSeed(uint seed)
     Returns: a pointer to the data,
         with its reference count increased
 */
-void* rcBoxAcquire(void* memBlock)
+void* rcBoxAcquire(void* memBlock) nothrow
 {
   auto _retval = g_rc_box_acquire(memBlock);
   return _retval;
@@ -6069,7 +6119,7 @@ void* rcBoxAcquire(void* memBlock)
       blockSize = the size of the allocation, must be greater than 0
     Returns: a pointer to the allocated memory
 */
-void* rcBoxAlloc(size_t blockSize)
+void* rcBoxAlloc(size_t blockSize) nothrow
 {
   auto _retval = g_rc_box_alloc(blockSize);
   return _retval;
@@ -6091,7 +6141,7 @@ void* rcBoxAlloc(size_t blockSize)
       blockSize = the size of the allocation, must be greater than 0
     Returns: a pointer to the allocated memory
 */
-void* rcBoxAlloc0(size_t blockSize)
+void* rcBoxAlloc0(size_t blockSize) nothrow
 {
   auto _retval = g_rc_box_alloc0(blockSize);
   return _retval;
@@ -6108,7 +6158,7 @@ void* rcBoxAlloc0(size_t blockSize)
     Returns: a pointer to the allocated
         memory
 */
-void* rcBoxDup(size_t blockSize, const(void)* memBlock)
+void* rcBoxDup(size_t blockSize, const(void)* memBlock) nothrow
 {
   auto _retval = g_rc_box_dup(blockSize, memBlock);
   return _retval;
@@ -6121,7 +6171,7 @@ void* rcBoxDup(size_t blockSize, const(void)* memBlock)
       memBlock = a pointer to reference counted data
     Returns: the size of the data, in bytes
 */
-size_t rcBoxGetSize(void* memBlock)
+size_t rcBoxGetSize(void* memBlock) nothrow
 {
   size_t _retval;
   _retval = g_rc_box_get_size(memBlock);
@@ -6137,7 +6187,7 @@ size_t rcBoxGetSize(void* memBlock)
     Params:
       memBlock = a pointer to reference counted data
 */
-void rcBoxRelease(void* memBlock)
+void rcBoxRelease(void* memBlock) nothrow
 {
   g_rc_box_release(memBlock);
 }
@@ -6153,13 +6203,20 @@ void rcBoxRelease(void* memBlock)
       memBlock = a pointer to reference counted data
       clearFunc = a function to call when clearing the data
 */
-void rcBoxReleaseFull(void* memBlock, glib.types.DestroyNotify clearFunc)
+void rcBoxReleaseFull(void* memBlock, glib.types.DestroyNotify clearFunc) nothrow
 {
-  extern(C) void _clearFuncCallback(void* data)
+  extern(C) void _clearFuncCallback(void* data) nothrow
   {
     auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-    (*_dlg)();
+    try
+    {
+      (*_dlg)();
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+    }
   }
   auto _clearFuncCB = clearFunc ? &_clearFuncCallback : null;
   g_rc_box_release_full(memBlock, _clearFuncCB);
@@ -6180,7 +6237,7 @@ void rcBoxReleaseFull(void* memBlock, glib.types.DestroyNotify clearFunc)
       nBytes = new size of the memory in bytes
     Returns: the new address of the allocated memory
 */
-void* realloc(void* mem, size_t nBytes)
+void* realloc(void* mem, size_t nBytes) nothrow
 {
   auto _retval = g_realloc(mem, nBytes);
   return _retval;
@@ -6199,7 +6256,7 @@ void* realloc(void* mem, size_t nBytes)
       nBlockBytes = the size of each block in bytes
     Returns: the new address of the allocated memory
 */
-void* reallocN(void* mem, size_t nBlocks, size_t nBlockBytes)
+void* reallocN(void* mem, size_t nBlocks, size_t nBlockBytes) nothrow
 {
   auto _retval = g_realloc_n(mem, nBlocks, nBlockBytes);
   return _retval;
@@ -6214,7 +6271,7 @@ void* reallocN(void* mem, size_t nBlocks, size_t nBlockBytes)
     Returns: true if the reference count is the same
         as the given value
 */
-bool refCountCompare(ref int rc, int val)
+bool refCountCompare(ref int rc, int val) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_ref_count_compare(cast(int*)&rc, val);
@@ -6232,7 +6289,7 @@ bool refCountCompare(ref int rc, int val)
       rc = the address of a reference count variable
     Returns: true if the reference count reached 0, and false otherwise
 */
-bool refCountDec(ref int rc)
+bool refCountDec(ref int rc) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_ref_count_dec(cast(int*)&rc);
@@ -6245,7 +6302,7 @@ bool refCountDec(ref int rc)
     Params:
       rc = the address of a reference count variable
 */
-void refCountInc(ref int rc)
+void refCountInc(ref int rc) nothrow
 {
   g_ref_count_inc(cast(int*)&rc);
 }
@@ -6256,7 +6313,7 @@ void refCountInc(ref int rc)
     Params:
       rc = the address of a reference count variable
 */
-void refCountInit(ref int rc)
+void refCountInit(ref int rc) nothrow
 {
   g_ref_count_init(cast(int*)&rc);
 }
@@ -6268,7 +6325,7 @@ void refCountInit(ref int rc)
       str = a reference counted string
     Returns: the given string, with its reference count increased
 */
-string refStringAcquire(string str)
+string refStringAcquire(string str) nothrow
 {
   char* _cretval;
   char* _str = str.toCString(No.Alloc);
@@ -6284,7 +6341,7 @@ string refStringAcquire(string str)
       str = a reference counted string
     Returns: the length of the given string, in bytes
 */
-size_t refStringLength(string str)
+size_t refStringLength(string str) nothrow
 {
   size_t _retval;
   char* _str = str.toCString(No.Alloc);
@@ -6300,7 +6357,7 @@ size_t refStringLength(string str)
       str = a NUL-terminated string
     Returns: the newly created reference counted string
 */
-string refStringNew(string str)
+string refStringNew(string str) nothrow
 {
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -6322,7 +6379,7 @@ string refStringNew(string str)
     Returns: the newly created reference
         counted string, or a new reference to an existing string
 */
-string refStringNewIntern(string str)
+string refStringNewIntern(string str) nothrow
 {
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -6343,7 +6400,7 @@ string refStringNewIntern(string str)
       len = length of str to use, or -1 if str is nul-terminated
     Returns: the newly created reference counted string
 */
-string refStringNewLen(string str, ptrdiff_t len)
+string refStringNewLen(string str, ptrdiff_t len) nothrow
 {
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -6359,7 +6416,7 @@ string refStringNewLen(string str, ptrdiff_t len)
     Params:
       str = a reference counted string
 */
-void refStringRelease(string str)
+void refStringRelease(string str) nothrow
 {
   char* _str = str.toCString(No.Alloc);
   g_ref_string_release(_str);
@@ -6375,7 +6432,7 @@ void refStringRelease(string str)
     that can't be freed. We ensure to only leak the data for
     the directories that actually changed value though.
 */
-void reloadUserSpecialDirsCache()
+void reloadUserSpecialDirsCache() nothrow
 {
   g_reload_user_special_dirs_cache();
 }
@@ -6404,7 +6461,7 @@ void reloadUserSpecialDirsCache()
     Returns: 0 if the file was successfully removed, -1 if an error
          occurred
 */
-int remove(string filename)
+int remove(string filename) nothrow
 {
   int _retval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -6426,7 +6483,7 @@ int remove(string filename)
       newfilename = a pathname in the GLib file name encoding
     Returns: 0 if the renaming succeeded, -1 if an error occurred
 */
-int rename(string oldfilename, string newfilename)
+int rename(string oldfilename, string newfilename) nothrow
 {
   int _retval;
   const(char)* _oldfilename = oldfilename.toCString(No.Alloc);
@@ -6448,7 +6505,7 @@ int rename(string oldfilename, string newfilename)
     Returns: 0 if the directory was successfully removed, -1 if an error
          occurred
 */
-int rmdir(string filename)
+int rmdir(string filename) nothrow
 {
   int _retval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -6472,7 +6529,7 @@ int rmdir(string filename)
     Params:
       applicationName = localized name of the application
 */
-void setApplicationName(string applicationName)
+void setApplicationName(string applicationName) nothrow
 {
   const(char)* _applicationName = applicationName.toCString(No.Alloc);
   g_set_application_name(_applicationName);
@@ -6491,7 +6548,7 @@ void setApplicationName(string applicationName)
       code = error code
       message = error message
 */
-void setErrorLiteral(out glib.error.ErrorWrap err, glib.types.Quark domain, int code, string message)
+void setErrorLiteral(out glib.error.ErrorWrap err, glib.types.Quark domain, int code, string message) nothrow
 {
   GError* _err;
   const(char)* _message = message.toCString(No.Alloc);
@@ -6516,7 +6573,7 @@ void setErrorLiteral(out glib.error.ErrorWrap err, glib.types.Quark domain, int 
     Params:
       prgname = the name of the program.
 */
-void setPrgname(string prgname)
+void setPrgname(string prgname) nothrow
 {
   const(char)* _prgname = prgname.toCString(No.Alloc);
   g_set_prgname(_prgname);
@@ -6550,7 +6607,7 @@ void setPrgname(string prgname)
       overwrite = whether to change the variable if it already exists.
     Returns: false if the environment variable couldn't be set.
 */
-bool setenv(string variable, string value, bool overwrite)
+bool setenv(string variable, string value, bool overwrite) nothrow
 {
   bool _retval;
   const(char)* _variable = variable.toCString(No.Alloc);
@@ -6560,7 +6617,7 @@ bool setenv(string variable, string value, bool overwrite)
 }
 
 /** */
-glib.types.Quark shellErrorQuark()
+glib.types.Quark shellErrorQuark() nothrow
 {
   glib.types.Quark _retval;
   _retval = g_shell_error_quark();
@@ -6626,7 +6683,7 @@ bool shellParseArgv(string commandLine, out string[] argvp)
       unquotedString = a literal string
     Returns: quoted string
 */
-string shellQuote(string unquotedString)
+string shellQuote(string unquotedString) nothrow
 {
   char* _cretval;
   const(char)* _unquotedString = unquotedString.toCString(No.Alloc);
@@ -6695,7 +6752,7 @@ string shellUnquote(string quotedString)
     Returns: a pointer to the allocated memory block, which will
         be null if and only if mem_size is 0
 */
-void* sliceAlloc(size_t blockSize)
+void* sliceAlloc(size_t blockSize) nothrow
 {
   auto _retval = g_slice_alloc(blockSize);
   return _retval;
@@ -6713,7 +6770,7 @@ void* sliceAlloc(size_t blockSize)
     Returns: a pointer to the allocated block, which will be null
          if and only if mem_size is 0
 */
-void* sliceAlloc0(size_t blockSize)
+void* sliceAlloc0(size_t blockSize) nothrow
 {
   auto _retval = g_slice_alloc0(blockSize);
   return _retval;
@@ -6734,7 +6791,7 @@ void* sliceAlloc0(size_t blockSize)
     Returns: a pointer to the allocated memory block,
          which will be null if and only if mem_size is 0
 */
-void* sliceCopy(size_t blockSize, const(void)* memBlock = null)
+void* sliceCopy(size_t blockSize, const(void)* memBlock = null) nothrow
 {
   auto _retval = g_slice_copy(blockSize, memBlock);
   return _retval;
@@ -6758,7 +6815,7 @@ void* sliceCopy(size_t blockSize, const(void)* memBlock = null)
       blockSize = the size of the block
       memBlock = a pointer to the block to free
 */
-void sliceFree1(size_t blockSize, void* memBlock = null)
+void sliceFree1(size_t blockSize, void* memBlock = null) nothrow
 {
   g_slice_free1(blockSize, memBlock);
 }
@@ -6783,13 +6840,13 @@ void sliceFree1(size_t blockSize, void* memBlock = null)
       memChain = a pointer to the first block of the chain
       nextOffset = the offset of the next field in the blocks
 */
-void sliceFreeChainWithOffset(size_t blockSize, void* memChain, size_t nextOffset)
+void sliceFreeChainWithOffset(size_t blockSize, void* memChain, size_t nextOffset) nothrow
 {
   g_slice_free_chain_with_offset(blockSize, memChain, nextOffset);
 }
 
 /** */
-long sliceGetConfig(glib.types.SliceConfig ckey)
+long sliceGetConfig(glib.types.SliceConfig ckey) nothrow
 {
   long _retval;
   _retval = g_slice_get_config(ckey);
@@ -6797,7 +6854,7 @@ long sliceGetConfig(glib.types.SliceConfig ckey)
 }
 
 /** */
-long[] sliceGetConfigState(glib.types.SliceConfig ckey, long address)
+long[] sliceGetConfigState(glib.types.SliceConfig ckey, long address) nothrow
 {
   const(long)* _cretval;
   uint _cretlength;
@@ -6812,7 +6869,7 @@ long[] sliceGetConfigState(glib.types.SliceConfig ckey, long address)
 }
 
 /** */
-void sliceSetConfig(glib.types.SliceConfig ckey, long value)
+void sliceSetConfig(glib.types.SliceConfig ckey, long value) nothrow
 {
   g_slice_set_config(ckey, value);
 }
@@ -6830,7 +6887,7 @@ void sliceSetConfig(glib.types.SliceConfig ckey, long value)
     Returns: the smallest prime number from a built-in array of primes
           which is larger than num
 */
-uint spacedPrimesClosest(uint num)
+uint spacedPrimesClosest(uint num) nothrow
 {
   uint _retval;
   _retval = g_spaced_primes_closest(num);
@@ -6869,12 +6926,19 @@ uint spacedPrimesClosest(uint num)
 */
 bool spawnAsync(string workingDirectory, string[] argv, string[] envp, glib.types.SpawnFlags flags, glib.types.SpawnChildSetupFunc childSetup, out glib.types.Pid childPid)
 {
-  extern(C) void _childSetupCallback(void* data)
+  extern(C) void _childSetupCallback(void* data) nothrow
   {
     ptrThawGC(data);
     auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
-    (*_dlg)();
+    try
+    {
+      (*_dlg)();
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "glib.types.SpawnChildSetupFunc");
+    }
   }
   auto _childSetupCB = childSetup ? &_childSetupCallback : null;
   bool _retval;
@@ -6922,12 +6986,19 @@ bool spawnAsync(string workingDirectory, string[] argv, string[] envp, glib.type
 */
 bool spawnAsyncWithFds(string workingDirectory, string[] argv, string[] envp, glib.types.SpawnFlags flags, glib.types.SpawnChildSetupFunc childSetup, out glib.types.Pid childPid, int stdinFd, int stdoutFd, int stderrFd)
 {
-  extern(C) void _childSetupCallback(void* data)
+  extern(C) void _childSetupCallback(void* data) nothrow
   {
     ptrThawGC(data);
     auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
-    (*_dlg)();
+    try
+    {
+      (*_dlg)();
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "glib.types.SpawnChildSetupFunc");
+    }
   }
   auto _childSetupCB = childSetup ? &_childSetupCallback : null;
   bool _retval;
@@ -6975,12 +7046,19 @@ bool spawnAsyncWithFds(string workingDirectory, string[] argv, string[] envp, gl
 */
 bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, glib.types.SpawnFlags flags, glib.types.SpawnChildSetupFunc childSetup, out glib.types.Pid childPid, out int standardInput, out int standardOutput, out int standardError)
 {
-  extern(C) void _childSetupCallback(void* data)
+  extern(C) void _childSetupCallback(void* data) nothrow
   {
     ptrThawGC(data);
     auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
-    (*_dlg)();
+    try
+    {
+      (*_dlg)();
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "glib.types.SpawnChildSetupFunc");
+    }
   }
   auto _childSetupCB = childSetup ? &_childSetupCallback : null;
   bool _retval;
@@ -7227,12 +7305,19 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
 */
 bool spawnAsyncWithPipesAndFds(string workingDirectory, string[] argv, string[] envp, glib.types.SpawnFlags flags, glib.types.SpawnChildSetupFunc childSetup, int stdinFd, int stdoutFd, int stderrFd, int[] sourceFds, int[] targetFds, out glib.types.Pid childPidOut, out int stdinPipeOut, out int stdoutPipeOut, out int stderrPipeOut)
 {
-  extern(C) void _childSetupCallback(void* data)
+  extern(C) void _childSetupCallback(void* data) nothrow
   {
     ptrThawGC(data);
     auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
-    (*_dlg)();
+    try
+    {
+      (*_dlg)();
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "glib.types.SpawnChildSetupFunc");
+    }
   }
   auto _childSetupCB = childSetup ? &_childSetupCallback : null;
   bool _retval;
@@ -7360,7 +7445,7 @@ bool spawnCheckWaitStatus(int waitStatus)
     Params:
       pid = The process reference to close
 */
-void spawnClosePid(glib.types.Pid pid)
+void spawnClosePid(glib.types.Pid pid) nothrow
 {
   g_spawn_close_pid(pid);
 }
@@ -7448,7 +7533,7 @@ bool spawnCommandLineSync(string commandLine, out string standardOutput, out str
 }
 
 /** */
-glib.types.Quark spawnErrorQuark()
+glib.types.Quark spawnErrorQuark() nothrow
 {
   glib.types.Quark _retval;
   _retval = g_spawn_error_quark();
@@ -7456,7 +7541,7 @@ glib.types.Quark spawnErrorQuark()
 }
 
 /** */
-glib.types.Quark spawnExitErrorQuark()
+glib.types.Quark spawnExitErrorQuark() nothrow
 {
   glib.types.Quark _retval;
   _retval = g_spawn_exit_error_quark();
@@ -7504,11 +7589,18 @@ glib.types.Quark spawnExitErrorQuark()
 */
 bool spawnSync(string workingDirectory, string[] argv, string[] envp, glib.types.SpawnFlags flags, glib.types.SpawnChildSetupFunc childSetup, out string standardOutput, out string standardError, out int waitStatus)
 {
-  extern(C) void _childSetupCallback(void* data)
+  extern(C) void _childSetupCallback(void* data) nothrow
   {
     auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
-    (*_dlg)();
+    try
+    {
+      (*_dlg)();
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "glib.types.SpawnChildSetupFunc");
+    }
   }
   auto _childSetupCB = childSetup ? &_childSetupCallback : null;
   bool _retval;
@@ -7567,7 +7659,7 @@ bool spawnSync(string workingDirectory, string[] argv, string[] envp, glib.types
     Returns: 0 if the information was successfully retrieved,
           -1 if an error occurred
 */
-int stat(string filename, glib.types.StatBuf buf)
+int stat(string filename, glib.types.StatBuf buf) nothrow
 {
   int _retval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -7586,7 +7678,7 @@ int stat(string filename, glib.types.StatBuf buf)
       src = source string
     Returns: a pointer to the trailing nul byte in `dest`
 */
-string stpcpy(string dest, string src)
+string stpcpy(string dest, string src) nothrow
 {
   char* _cretval;
   char* _dest = dest.toCString(No.Alloc);
@@ -7611,7 +7703,7 @@ string stpcpy(string dest, string src)
       v2 = a key to compare with v1
     Returns: true if the two keys match
 */
-bool strEqual(const(void)* v1, const(void)* v2)
+bool strEqual(const(void)* v1, const(void)* v2) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_str_equal(v1, v2);
@@ -7626,7 +7718,7 @@ bool strEqual(const(void)* v1, const(void)* v2)
       prefix = the prefix to look for
     Returns: true if str begins with prefix, false otherwise
 */
-bool strHasPrefix(string str, string prefix)
+bool strHasPrefix(string str, string prefix) nothrow
 {
   bool _retval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -7643,7 +7735,7 @@ bool strHasPrefix(string str, string prefix)
       suffix = the suffix to look for
     Returns: true if str ends with suffix, false otherwise
 */
-bool strHasSuffix(string str, string suffix)
+bool strHasSuffix(string str, string suffix) nothrow
 {
   bool _retval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -7672,7 +7764,7 @@ bool strHasSuffix(string str, string suffix)
       v = a string key
     Returns: a hash value corresponding to the key
 */
-uint strHash(const(void)* v)
+uint strHash(const(void)* v) nothrow
 {
   uint _retval;
   _retval = g_str_hash(v);
@@ -7687,7 +7779,7 @@ uint strHash(const(void)* v)
       str = a string
     Returns: true if str is ASCII
 */
-bool strIsAscii(string str)
+bool strIsAscii(string str) nothrow
 {
   bool _retval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -7725,7 +7817,7 @@ bool strIsAscii(string str)
       acceptAlternates = if true, ASCII alternates are accepted
     Returns: true if potential_hit is a hit
 */
-bool strMatchString(string searchTerm, string potentialHit, bool acceptAlternates)
+bool strMatchString(string searchTerm, string potentialHit, bool acceptAlternates) nothrow
 {
   bool _retval;
   const(char)* _searchTerm = searchTerm.toCString(No.Alloc);
@@ -7759,7 +7851,7 @@ bool strMatchString(string searchTerm, string potentialHit, bool acceptAlternate
       fromLocale = the source locale, if known
     Returns: a string in plain ASCII
 */
-string strToAscii(string str, string fromLocale = null)
+string strToAscii(string str, string fromLocale = null) nothrow
 {
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -7793,7 +7885,7 @@ string strToAscii(string str, string fromLocale = null)
       asciiAlternates = a return location for ASCII alternates
     Returns: the folded tokens
 */
-string[] strTokenizeAndFold(string string_, string translitLocale, out string[] asciiAlternates)
+string[] strTokenizeAndFold(string string_, string translitLocale, out string[] asciiAlternates) nothrow
 {
   char** _cretval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -7850,7 +7942,7 @@ string[] strTokenizeAndFold(string string_, string translitLocale, out string[] 
       substitutor = replacement character for disallowed bytes
     Returns: the modified string
 */
-string strcanon(string string_, string validChars, char substitutor)
+string strcanon(string string_, string validChars, char substitutor) nothrow
 {
   char* _cretval;
   char* _string_ = string_.toCString(No.Alloc);
@@ -7873,7 +7965,7 @@ string strcanon(string string_, string validChars, char substitutor)
     Deprecated: See `funcGLib.strncasecmp` for a discussion of why this
         function is deprecated and how to replace it.
 */
-int strcasecmp(string s1, string s2)
+int strcasecmp(string s1, string s2) nothrow
 {
   int _retval;
   const(char)* _s1 = s1.toCString(No.Alloc);
@@ -7897,7 +7989,7 @@ int strcasecmp(string s1, string s2)
       string_ = a string to remove the trailing whitespace from
     Returns: the modified string
 */
-string strchomp(string string_)
+string strchomp(string string_) nothrow
 {
   char* _cretval;
   char* _string_ = string_.toCString(No.Alloc);
@@ -7922,7 +8014,7 @@ string strchomp(string string_)
       string_ = a string to remove the leading whitespace from
     Returns: the modified string
 */
-string strchug(string string_)
+string strchug(string string_) nothrow
 {
   char* _cretval;
   char* _string_ = string_.toCString(No.Alloc);
@@ -7941,7 +8033,7 @@ string strchug(string string_)
       str2 = another C string or null
     Returns: an integer less than, equal to, or greater than zero, if str1 is <, == or > than str2.
 */
-int strcmp0(string str1 = null, string str2 = null)
+int strcmp0(string str1 = null, string str2 = null) nothrow
 {
   int _retval;
   const(char)* _str1 = str1.toCString(No.Alloc);
@@ -7960,7 +8052,7 @@ int strcmp0(string str1 = null, string str2 = null)
     Returns: a newly-allocated copy of source with all escaped
         character compressed
 */
-string strcompress(string source)
+string strcompress(string source) nothrow
 {
   char* _cretval;
   const(char)* _source = source.toCString(No.Alloc);
@@ -7995,7 +8087,7 @@ string strcompress(string source)
       newDelimiter = the new delimiter character
     Returns: the modified string
 */
-string strdelimit(string string_, string delimiters, char newDelimiter)
+string strdelimit(string string_, string delimiters, char newDelimiter) nothrow
 {
   char* _cretval;
   char* _string_ = string_.toCString(No.Alloc);
@@ -8016,7 +8108,7 @@ string strdelimit(string string_, string delimiters, char newDelimiter)
         in the `funcGLib.strncasecmp` docs — use `funcGLib.ascii_strdown` or
         `funcGLib.utf8_strdown` instead.
 */
-string strdown(string string_)
+string strdown(string string_) nothrow
 {
   char* _cretval;
   char* _string_ = string_.toCString(No.Alloc);
@@ -8032,7 +8124,7 @@ string strdown(string string_)
       str = the string to duplicate
     Returns: a newly-allocated copy of str
 */
-string strdup(string str = null)
+string strdup(string str = null) nothrow
 {
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -8052,7 +8144,7 @@ string strdup(string str = null)
     Returns: a
         newly-allocated array of strings. Use `funcGLib.strfreev` to free it.
 */
-string[] strdupv(string[] strArray = null)
+string[] strdupv(string[] strArray = null) nothrow
 {
   char** _cretval;
   char*[] _tmpstrArray;
@@ -8104,7 +8196,7 @@ string[] strdupv(string[] strArray = null)
       errnum = the system error number. See the standard C `errno` documentation
     Returns: the string describing the error code
 */
-string strerror(int errnum)
+string strerror(int errnum) nothrow
 {
   const(char)* _cretval;
   _cretval = g_strerror(errnum);
@@ -8127,7 +8219,7 @@ string strerror(int errnum)
       exceptions = a string of characters not to escape in source
     Returns: a newly-allocated copy of source with special characters escaped
 */
-string strescape(string source, string exceptions = null)
+string strescape(string source, string exceptions = null) nothrow
 {
   char* _cretval;
   const(char)* _source = source.toCString(No.Alloc);
@@ -8147,7 +8239,7 @@ string strescape(string source, string exceptions = null)
           and contains a '|' character, in which case a pointer to
           the substring of msgid after the first '|' character is returned.
 */
-string stripContext(string msgid, string msgval)
+string stripContext(string msgid, string msgval) nothrow
 {
   const(char)* _cretval;
   const(char)* _msgid = msgid.toCString(No.Alloc);
@@ -8171,7 +8263,7 @@ string stripContext(string msgid, string msgval)
     Returns: a newly-allocated string containing all of the strings joined
         together, with separator between them
 */
-string strjoinv(string separator, string[] strArray)
+string strjoinv(string separator, string[] strArray) nothrow
 {
   char* _cretval;
   const(char)* _separator = separator.toCString(No.Alloc);
@@ -8214,7 +8306,7 @@ string strjoinv(string separator, string[] strArray)
         `funcGLib.utf8_casefold` followed by `strcmp()` on the resulting strings,
         which is good for case-insensitive sorting of UTF-8.
 */
-int strncasecmp(string s1, string s2, uint n)
+int strncasecmp(string s1, string s2, uint n) nothrow
 {
   int _retval;
   const(char)* _s1 = s1.toCString(No.Alloc);
@@ -8238,7 +8330,7 @@ int strncasecmp(string s1, string s2, uint n)
     Returns: a newly-allocated buffer containing the first
          `n` bytes of str
 */
-string strndup(string str, size_t n)
+string strndup(string str, size_t n) nothrow
 {
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -8255,7 +8347,7 @@ string strndup(string str, size_t n)
       fillChar = the byte to fill the string with
     Returns: a newly-allocated string filled with fill_char
 */
-string strnfill(size_t length, char fillChar)
+string strnfill(size_t length, char fillChar) nothrow
 {
   char* _cretval;
   _cretval = g_strnfill(length, fillChar);
@@ -8275,7 +8367,7 @@ string strnfill(size_t length, char fillChar)
       string_ = the string to reverse
     Returns: the string, reversed in place
 */
-string strreverse(string string_)
+string strreverse(string string_) nothrow
 {
   char* _cretval;
   char* _string_ = string_.toCString(No.Alloc);
@@ -8293,7 +8385,7 @@ string strreverse(string string_)
       needle = the string to search for
     Returns: a pointer to the found occurrence, or `NULL` if not found
 */
-string strrstr(string haystack, string needle)
+string strrstr(string haystack, string needle) nothrow
 {
   char* _cretval;
   const(char)* _haystack = haystack.toCString(No.Alloc);
@@ -8315,7 +8407,7 @@ string strrstr(string haystack, string needle)
       signum = the signal number. See the `signal` documentation
     Returns: the string describing the signal
 */
-string strsignal(int signum)
+string strsignal(int signum) nothrow
 {
   const(char)* _cretval;
   _cretval = g_strsignal(signum);
@@ -8348,7 +8440,7 @@ string strsignal(int signum)
     Returns: a newly-allocated array of strings, freed with
         `funcGLib.strfreev`
 */
-string[] strsplit(string string_, string delimiter, int maxTokens)
+string[] strsplit(string string_, string delimiter, int maxTokens) nothrow
 {
   char** _cretval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -8400,7 +8492,7 @@ string[] strsplit(string string_, string delimiter, int maxTokens)
     Returns: a newly-allocated array of strings. Use
         `funcGLib.strfreev` to free it.
 */
-string[] strsplitSet(string string_, string delimiters, int maxTokens)
+string[] strsplitSet(string string_, string delimiters, int maxTokens) nothrow
 {
   char** _cretval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -8441,7 +8533,7 @@ string[] strsplitSet(string string_, string delimiters, int maxTokens)
           character after the last character used in the conversion
     Returns: the converted value
 */
-double strtod(string nptr, out string endptr)
+double strtod(string nptr, out string endptr) nothrow
 {
   double _retval;
   const(char)* _nptr = nptr.toCString(No.Alloc);
@@ -8462,7 +8554,7 @@ double strtod(string nptr, out string endptr)
         in the `funcGLib.strncasecmp` docs — use `funcGLib.ascii_strup` or
         `funcGLib.utf8_strup` instead.
 */
-string strup(string string_)
+string strup(string string_) nothrow
 {
   char* _cretval;
   char* _string_ = string_.toCString(No.Alloc);
@@ -8480,7 +8572,7 @@ string strup(string string_)
       str = the string to search for
     Returns: true if str is an element of strv
 */
-bool strvContains(string[] strv, string str)
+bool strvContains(string[] strv, string str) nothrow
 {
   bool _retval;
   char*[] _tmpstrv;
@@ -8514,7 +8606,7 @@ bool strvContains(string[] strv, string str)
       strv2 = an array of strings to compare to strv1
     Returns: true if strv1 and strv2 are equal
 */
-bool strvEqual(string[] strv1, string[] strv2)
+bool strvEqual(string[] strv1, string[] strv2) nothrow
 {
   bool _retval;
   char*[] _tmpstrv1;
@@ -8534,7 +8626,7 @@ bool strvEqual(string[] strv1, string[] strv2)
 }
 
 /** */
-gobject.types.GType strvGetType()
+gobject.types.GType strvGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = g_strv_get_type();
@@ -8548,7 +8640,7 @@ gobject.types.GType strvGetType()
       strArray = an array of strings
     Returns: length of str_array
 */
-uint strvLength(string[] strArray)
+uint strvLength(string[] strArray) nothrow
 {
   uint _retval;
   char*[] _tmpstrArray;
@@ -8581,14 +8673,21 @@ uint strvLength(string[] strArray)
       testData = Test data argument for the test function.
       testFunc = The test function to invoke for this test.
 */
-void testAddDataFunc(string testpath, const(void)* testData, glib.types.TestDataFunc testFunc)
+void testAddDataFunc(string testpath, const(void)* testData, glib.types.TestDataFunc testFunc) nothrow
 {
-  extern(C) void _testFuncCallback(const(void)* userData)
+  extern(C) void _testFuncCallback(const(void)* userData) nothrow
   {
     ptrThawGC(userData);
     auto _dlg = cast(glib.types.TestDataFunc*)userData;
 
-    (*_dlg)();
+    try
+    {
+      (*_dlg)();
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "glib.types.TestDataFunc");
+    }
   }
   auto _testFuncCB = testFunc ? &_testFuncCallback : null;
   const(char)* _testpath = testpath.toCString(No.Alloc);
@@ -8596,7 +8695,7 @@ void testAddDataFunc(string testpath, const(void)* testData, glib.types.TestData
 }
 
 /** */
-void testAssertExpectedMessagesInternal(string domain, string file, int line, string func)
+void testAssertExpectedMessagesInternal(string domain, string file, int line, string func) nothrow
 {
   const(char)* _domain = domain.toCString(No.Alloc);
   const(char)* _file = file.toCString(No.Alloc);
@@ -8621,7 +8720,7 @@ void testAssertExpectedMessagesInternal(string domain, string file, int line, st
 
     Version: See also: g_test_summary()
 */
-void testBug(string bugUriSnippet)
+void testBug(string bugUriSnippet) nothrow
 {
   const(char)* _bugUriSnippet = bugUriSnippet.toCString(No.Alloc);
   g_test_bug(_bugUriSnippet);
@@ -8646,7 +8745,7 @@ void testBug(string bugUriSnippet)
     Params:
       uriPattern = the base pattern for bug URIs
 */
-void testBugBase(string uriPattern)
+void testBugBase(string uriPattern) nothrow
 {
   const(char)* _uriPattern = uriPattern.toCString(No.Alloc);
   g_test_bug_base(_uriPattern);
@@ -8659,7 +8758,7 @@ void testBugBase(string uriPattern)
     expected or intended to crash, to avoid wasting resources in system-wide
     crash collection infrastructure such as systemd-coredump or abrt.
 */
-void testDisableCrashReporting()
+void testDisableCrashReporting() nothrow
 {
   g_test_disable_crash_reporting();
 }
@@ -8706,7 +8805,7 @@ void testDisableCrashReporting()
       logLevel = the log level of the message
       pattern = a glob-style pattern (see [glib.pattern_spec.PatternSpec])
 */
-void testExpectMessage(string logDomain, glib.types.LogLevelFlags logLevel, string pattern)
+void testExpectMessage(string logDomain, glib.types.LogLevelFlags logLevel, string pattern) nothrow
 {
   const(char)* _logDomain = logDomain.toCString(No.Alloc);
   const(char)* _pattern = pattern.toCString(No.Alloc);
@@ -8734,7 +8833,7 @@ void testExpectMessage(string logDomain, glib.types.LogLevelFlags logLevel, stri
     [glib.global.testMessage] before [glib.global.testFail], or use [glib.global.testFailPrintf]
     instead.
 */
-void testFail()
+void testFail() nothrow
 {
   g_test_fail();
 }
@@ -8752,7 +8851,7 @@ void testFail()
     if it is called from inside a test function.
     Returns: true if the test has failed
 */
-bool testFailed()
+bool testFailed() nothrow
 {
   bool _retval;
   _retval = cast(bool)g_test_failed();
@@ -8770,7 +8869,7 @@ bool testFailed()
       fileType = the type of file (built vs. distributed)
     Returns: the path of the directory, owned by GLib
 */
-string testGetDir(glib.types.TestFileType fileType)
+string testGetDir(glib.types.TestFileType fileType) nothrow
 {
   const(char)* _cretval;
   _cretval = g_test_get_dir(fileType);
@@ -8789,7 +8888,7 @@ string testGetDir(glib.types.TestFileType fileType)
     Note that this is a test path, not a file system path.
     Returns: the test path for the test currently being run
 */
-string testGetPath()
+string testGetPath() nothrow
 {
   const(char)* _cretval;
   _cretval = g_test_get_path();
@@ -8812,14 +8911,14 @@ string testGetPath()
     Params:
       msg = explanation
 */
-void testIncomplete(string msg = null)
+void testIncomplete(string msg = null) nothrow
 {
   const(char)* _msg = msg.toCString(No.Alloc);
   g_test_incomplete(_msg);
 }
 
 /** */
-string testLogTypeName(glib.types.TestLogType logType)
+string testLogTypeName(glib.types.TestLogType logType) nothrow
 {
   const(char)* _cretval;
   _cretval = g_test_log_type_name(logType);
@@ -8835,7 +8934,7 @@ string testLogTypeName(glib.types.TestLogType logType)
     Params:
       gfreePointer = the pointer to be stored.
 */
-void testQueueFree(void* gfreePointer = null)
+void testQueueFree(void* gfreePointer = null) nothrow
 {
   g_test_queue_free(gfreePointer);
 }
@@ -8845,7 +8944,7 @@ void testQueueFree(void* gfreePointer = null)
     see [glib.global.testRandInt] for details on test case random numbers.
     Returns: a random number from the seeded random number generator.
 */
-double testRandDouble()
+double testRandDouble() nothrow
 {
   double _retval;
   _retval = g_test_rand_double();
@@ -8861,7 +8960,7 @@ double testRandDouble()
       rangeEnd = the minimum value not returned by this function
     Returns: a number with range_start <= number < range_end.
 */
-double testRandDoubleRange(double rangeStart, double rangeEnd)
+double testRandDoubleRange(double rangeStart, double rangeEnd) nothrow
 {
   double _retval;
   _retval = g_test_rand_double_range(rangeStart, rangeEnd);
@@ -8880,7 +8979,7 @@ double testRandDoubleRange(double rangeStart, double rangeEnd)
     effective for all test cases.
     Returns: a random number from the seeded random number generator.
 */
-int testRandInt()
+int testRandInt() nothrow
 {
   int _retval;
   _retval = g_test_rand_int();
@@ -8896,7 +8995,7 @@ int testRandInt()
       end = the smallest value not to be returned by this function
     Returns: a number with begin <= number < end.
 */
-int testRandIntRange(int begin, int end)
+int testRandIntRange(int begin, int end) nothrow
 {
   int _retval;
   _retval = g_test_rand_int_range(begin, end);
@@ -8940,7 +9039,7 @@ int testRandIntRange(int begin, int end)
         0 or 77 if all tests were skipped with [glib.global.testSkip] and/or
         [glib.global.testIncomplete]
 */
-int testRun()
+int testRun() nothrow
 {
   int _retval;
   _retval = g_test_run();
@@ -8961,7 +9060,7 @@ int testRun()
       suite = a #GTestSuite
     Returns: 0 on success
 */
-int testRunSuite(glib.test_suite.TestSuite suite)
+int testRunSuite(glib.test_suite.TestSuite suite) nothrow
 {
   int _retval;
   _retval = g_test_run_suite(suite ? cast(GTestSuite*)suite._cPtr : null);
@@ -8981,7 +9080,7 @@ int testRunSuite(glib.test_suite.TestSuite suite)
     
     This function can only be called after [glib.global.testInit].
 */
-void testSetNonfatalAssertions()
+void testSetNonfatalAssertions() nothrow
 {
   g_test_set_nonfatal_assertions();
 }
@@ -8999,7 +9098,7 @@ void testSetNonfatalAssertions()
     Params:
       msg = explanation
 */
-void testSkip(string msg = null)
+void testSkip(string msg = null) nothrow
 {
   const(char)* _msg = msg.toCString(No.Alloc);
   g_test_skip(_msg);
@@ -9011,7 +9110,7 @@ void testSkip(string msg = null)
     Returns: true if the test program is running under
       [glib.global.testTrapSubprocess].
 */
-bool testSubprocess()
+bool testSubprocess() nothrow
 {
   bool _retval;
   _retval = cast(bool)g_test_subprocess();
@@ -9044,7 +9143,7 @@ bool testSubprocess()
 
     Version: See also: g_test_bug()
 */
-void testSummary(string summary)
+void testSummary(string summary) nothrow
 {
   const(char)* _summary = summary.toCString(No.Alloc);
   g_test_summary(_summary);
@@ -9055,7 +9154,7 @@ void testSummary(string summary)
     [glib.global.testTimerStart].
     Returns: the time since the last start of the timer in seconds, as a double
 */
-double testTimerElapsed()
+double testTimerElapsed() nothrow
 {
   double _retval;
   _retval = g_test_timer_elapsed();
@@ -9066,7 +9165,7 @@ double testTimerElapsed()
     Report the last result of [glib.global.testTimerElapsed].
     Returns: the last result of [glib.global.testTimerElapsed], as a double
 */
-double testTimerLast()
+double testTimerLast() nothrow
 {
   double _retval;
   _retval = g_test_timer_last();
@@ -9077,13 +9176,13 @@ double testTimerLast()
     Start a timing test. Call [glib.global.testTimerElapsed] when the task is supposed
     to be done. Call this function again to restart the timer.
 */
-void testTimerStart()
+void testTimerStart() nothrow
 {
   g_test_timer_start();
 }
 
 /** */
-void testTrapAssertions(string domain, string file, int line, string func, ulong assertionFlags, string pattern)
+void testTrapAssertions(string domain, string file, int line, string func, ulong assertionFlags, string pattern) nothrow
 {
   const(char)* _domain = domain.toCString(No.Alloc);
   const(char)* _file = file.toCString(No.Alloc);
@@ -9132,7 +9231,7 @@ void testTrapAssertions(string domain, string file, int line, string func, ulong
       and doesn't set close-on-exec flag on its file descriptors.
       Use [glib.global.testTrapSubprocess] instead.
 */
-bool testTrapFork(ulong usecTimeout, glib.types.TestTrapFlags testTrapFlags)
+bool testTrapFork(ulong usecTimeout, glib.types.TestTrapFlags testTrapFlags) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_test_trap_fork(usecTimeout, testTrapFlags);
@@ -9143,7 +9242,7 @@ bool testTrapFork(ulong usecTimeout, glib.types.TestTrapFlags testTrapFlags)
     Check the result of the last [glib.global.testTrapSubprocess] call.
     Returns: true if the last test subprocess terminated successfully.
 */
-bool testTrapHasPassed()
+bool testTrapHasPassed() nothrow
 {
   bool _retval;
   _retval = cast(bool)g_test_trap_has_passed();
@@ -9154,7 +9253,7 @@ bool testTrapHasPassed()
     Check the result of the last [glib.global.testTrapSubprocess] call.
     Returns: true if the last test subprocess got killed due to a timeout.
 */
-bool testTrapReachedTimeout()
+bool testTrapReachedTimeout() nothrow
 {
   bool _retval;
   _retval = cast(bool)g_test_trap_reached_timeout();
@@ -9172,7 +9271,7 @@ bool testTrapReachedTimeout()
       usecTimeout = Timeout for the subprocess test in micro seconds.
       testFlags = Flags to modify subprocess behaviour.
 */
-void testTrapSubprocess(string testPath, ulong usecTimeout, glib.types.TestSubprocessFlags testFlags)
+void testTrapSubprocess(string testPath, ulong usecTimeout, glib.types.TestSubprocessFlags testFlags) nothrow
 {
   const(char)* _testPath = testPath.toCString(No.Alloc);
   g_test_trap_subprocess(_testPath, usecTimeout, testFlags);
@@ -9278,7 +9377,7 @@ void testTrapSubprocess(string testPath, ulong usecTimeout, glib.types.TestSubpr
       usecTimeout = Timeout for the subprocess test in micro seconds.
       testFlags = Flags to modify subprocess behaviour.
 */
-void testTrapSubprocessWithEnvp(string testPath, string[] envp, ulong usecTimeout, glib.types.TestSubprocessFlags testFlags)
+void testTrapSubprocessWithEnvp(string testPath, string[] envp, ulong usecTimeout, glib.types.TestSubprocessFlags testFlags) nothrow
 {
   const(char)* _testPath = testPath.toCString(No.Alloc);
   const(char)*[] _tmpenvp;
@@ -9324,14 +9423,21 @@ void testTrapSubprocessWithEnvp(string testPath, string[] envp, ulong usecTimeou
       function_ = function to call
     Returns: the ID (greater than 0) of the event source.
 */
-uint timeoutAdd(int priority, uint interval, glib.types.SourceFunc function_)
+uint timeoutAdd(int priority, uint interval, glib.types.SourceFunc function_) nothrow
 {
-  extern(C) gboolean _function_Callback(void* userData)
+  extern(C) gboolean _function_Callback(void* userData) nothrow
   {
     bool _dretval;
     auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-    _dretval = (*_dlg)();
+    try
+    {
+      _dretval = (*_dlg)();
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "glib.types.SourceFunc");
+    }
     auto _retval = cast(gboolean)_dretval;
 
     return _retval;
@@ -9392,14 +9498,21 @@ uint timeoutAdd(int priority, uint interval, glib.types.SourceFunc function_)
       function_ = function to call
     Returns: the ID (greater than 0) of the event source.
 */
-uint timeoutAddSeconds(int priority, uint interval, glib.types.SourceFunc function_)
+uint timeoutAddSeconds(int priority, uint interval, glib.types.SourceFunc function_) nothrow
 {
-  extern(C) gboolean _function_Callback(void* userData)
+  extern(C) gboolean _function_Callback(void* userData) nothrow
   {
     bool _dretval;
     auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-    _dretval = (*_dlg)();
+    try
+    {
+      _dretval = (*_dlg)();
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "glib.types.SourceFunc");
+    }
     auto _retval = cast(gboolean)_dretval;
 
     return _retval;
@@ -9426,7 +9539,7 @@ uint timeoutAddSeconds(int priority, uint interval, glib.types.SourceFunc functi
       interval = the timeout interval in milliseconds.
     Returns: the newly-created timeout source
 */
-glib.source.Source timeoutSourceNew(uint interval)
+glib.source.Source timeoutSourceNew(uint interval) nothrow
 {
   GSource* _cretval;
   _cretval = g_timeout_source_new(interval);
@@ -9451,7 +9564,7 @@ glib.source.Source timeoutSourceNew(uint interval)
       interval = the timeout interval in seconds
     Returns: the newly-created timeout source
 */
-glib.source.Source timeoutSourceNewSeconds(uint interval)
+glib.source.Source timeoutSourceNewSeconds(uint interval) nothrow
 {
   GSource* _cretval;
   _cretval = g_timeout_source_new_seconds(interval);
@@ -9467,7 +9580,7 @@ glib.source.Source timeoutSourceNewSeconds(uint interval)
       nBytes = number of bytes to allocate.
     Returns: the allocated memory, or null.
 */
-void* tryMalloc(size_t nBytes)
+void* tryMalloc(size_t nBytes) nothrow
 {
   auto _retval = g_try_malloc(nBytes);
   return _retval;
@@ -9481,7 +9594,7 @@ void* tryMalloc(size_t nBytes)
       nBytes = number of bytes to allocate
     Returns: the allocated memory, or null
 */
-void* tryMalloc0(size_t nBytes)
+void* tryMalloc0(size_t nBytes) nothrow
 {
   auto _retval = g_try_malloc0(nBytes);
   return _retval;
@@ -9496,7 +9609,7 @@ void* tryMalloc0(size_t nBytes)
       nBlockBytes = the size of each block in bytes
     Returns: the allocated memory, or null
 */
-void* tryMalloc0N(size_t nBlocks, size_t nBlockBytes)
+void* tryMalloc0N(size_t nBlocks, size_t nBlockBytes) nothrow
 {
   auto _retval = g_try_malloc0_n(nBlocks, nBlockBytes);
   return _retval;
@@ -9511,7 +9624,7 @@ void* tryMalloc0N(size_t nBlocks, size_t nBlockBytes)
       nBlockBytes = the size of each block in bytes
     Returns: the allocated memory, or null.
 */
-void* tryMallocN(size_t nBlocks, size_t nBlockBytes)
+void* tryMallocN(size_t nBlocks, size_t nBlockBytes) nothrow
 {
   auto _retval = g_try_malloc_n(nBlocks, nBlockBytes);
   return _retval;
@@ -9529,7 +9642,7 @@ void* tryMallocN(size_t nBlocks, size_t nBlockBytes)
       nBytes = number of bytes to allocate.
     Returns: the allocated memory, or null.
 */
-void* tryRealloc(void* mem, size_t nBytes)
+void* tryRealloc(void* mem, size_t nBytes) nothrow
 {
   auto _retval = g_try_realloc(mem, nBytes);
   return _retval;
@@ -9545,7 +9658,7 @@ void* tryRealloc(void* mem, size_t nBytes)
       nBlockBytes = the size of each block in bytes
     Returns: the allocated memory, or null.
 */
-void* tryReallocN(void* mem, size_t nBlocks, size_t nBlockBytes)
+void* tryReallocN(void* mem, size_t nBlocks, size_t nBlockBytes) nothrow
 {
   auto _retval = g_try_realloc_n(mem, nBlocks, nBlockBytes);
   return _retval;
@@ -9638,7 +9751,7 @@ string ucs4ToUtf8(dchar[] str, out glong itemsRead, out glong itemsWritten)
       c = a Unicode character
     Returns: the break type of `c`
 */
-glib.types.UnicodeBreakType unicharBreakType(dchar c)
+glib.types.UnicodeBreakType unicharBreakType(dchar c) nothrow
 {
   GUnicodeBreakType _cretval;
   _cretval = g_unichar_break_type(c);
@@ -9653,7 +9766,7 @@ glib.types.UnicodeBreakType unicharBreakType(dchar c)
       uc = a Unicode character
     Returns: the combining class of the character
 */
-int unicharCombiningClass(dchar uc)
+int unicharCombiningClass(dchar uc) nothrow
 {
   int _retval;
   _retval = g_unichar_combining_class(uc);
@@ -9684,7 +9797,7 @@ int unicharCombiningClass(dchar uc)
       ch = return location for the composed character
     Returns: true if the characters could be composed
 */
-bool unicharCompose(dchar a, dchar b, out dchar ch)
+bool unicharCompose(dchar a, dchar b, out dchar ch) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unichar_compose(a, b, cast(dchar*)&ch);
@@ -9722,7 +9835,7 @@ bool unicharCompose(dchar a, dchar b, out dchar ch)
       b = return location for the second component of ch
     Returns: true if the character could be decomposed
 */
-bool unicharDecompose(dchar ch, out dchar a, out dchar b)
+bool unicharDecompose(dchar ch, out dchar a, out dchar b) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unichar_decompose(ch, cast(dchar*)&a, cast(dchar*)&b);
@@ -9738,7 +9851,7 @@ bool unicharDecompose(dchar ch, out dchar a, out dchar b)
     Returns: If `c` is a decimal digit (according to
       [glib.global.unicharIsdigit]), its numeric value. Otherwise, -1.
 */
-int unicharDigitValue(dchar c)
+int unicharDigitValue(dchar c) nothrow
 {
   int _retval;
   _retval = g_unichar_digit_value(c);
@@ -9773,7 +9886,7 @@ int unicharDigitValue(dchar c)
       resultLen = length of result
     Returns: the length of the full decomposition.
 */
-size_t unicharFullyDecompose(dchar ch, bool compat, out dchar result, size_t resultLen)
+size_t unicharFullyDecompose(dchar ch, bool compat, out dchar result, size_t resultLen) nothrow
 {
   size_t _retval;
   _retval = g_unichar_fully_decompose(ch, compat, cast(dchar*)&result, resultLen);
@@ -9796,7 +9909,7 @@ size_t unicharFullyDecompose(dchar ch, bool compat, out dchar result, size_t res
       mirroredCh = location to store the mirrored character
     Returns: true if ch has a mirrored character, false otherwise
 */
-bool unicharGetMirrorChar(dchar ch, out dchar mirroredCh)
+bool unicharGetMirrorChar(dchar ch, out dchar mirroredCh) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unichar_get_mirror_char(ch, cast(dchar*)&mirroredCh);
@@ -9816,7 +9929,7 @@ bool unicharGetMirrorChar(dchar ch, out dchar mirroredCh)
       ch = a Unicode character
     Returns: the #GUnicodeScript for the character.
 */
-glib.types.UnicodeScript unicharGetScript(dchar ch)
+glib.types.UnicodeScript unicharGetScript(dchar ch) nothrow
 {
   GUnicodeScript _cretval;
   _cretval = g_unichar_get_script(ch);
@@ -9833,7 +9946,7 @@ glib.types.UnicodeScript unicharGetScript(dchar ch)
       c = a Unicode character
     Returns: true if `c` is an alphanumeric character
 */
-bool unicharIsalnum(dchar c)
+bool unicharIsalnum(dchar c) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unichar_isalnum(c);
@@ -9849,7 +9962,7 @@ bool unicharIsalnum(dchar c)
       c = a Unicode character
     Returns: true if `c` is an alphabetic character
 */
-bool unicharIsalpha(dchar c)
+bool unicharIsalpha(dchar c) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unichar_isalpha(c);
@@ -9865,7 +9978,7 @@ bool unicharIsalpha(dchar c)
       c = a Unicode character
     Returns: true if `c` is a control character
 */
-bool unicharIscntrl(dchar c)
+bool unicharIscntrl(dchar c) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unichar_iscntrl(c);
@@ -9880,7 +9993,7 @@ bool unicharIscntrl(dchar c)
       c = a Unicode character
     Returns: true if the character has an assigned value
 */
-bool unicharIsdefined(dchar c)
+bool unicharIsdefined(dchar c) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unichar_isdefined(c);
@@ -9896,7 +10009,7 @@ bool unicharIsdefined(dchar c)
       c = a Unicode character
     Returns: true if `c` is a digit
 */
-bool unicharIsdigit(dchar c)
+bool unicharIsdigit(dchar c) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unichar_isdigit(c);
@@ -9914,7 +10027,7 @@ bool unicharIsdigit(dchar c)
       c = a Unicode character
     Returns: true if `c` is printable unless it's a space
 */
-bool unicharIsgraph(dchar c)
+bool unicharIsgraph(dchar c) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unichar_isgraph(c);
@@ -9930,7 +10043,7 @@ bool unicharIsgraph(dchar c)
       c = a Unicode character
     Returns: true if `c` is a lowercase letter
 */
-bool unicharIslower(dchar c)
+bool unicharIslower(dchar c) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unichar_islower(c);
@@ -9952,7 +10065,7 @@ bool unicharIslower(dchar c)
       c = a Unicode character
     Returns: true if `c` is a mark character
 */
-bool unicharIsmark(dchar c)
+bool unicharIsmark(dchar c) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unichar_ismark(c);
@@ -9969,7 +10082,7 @@ bool unicharIsmark(dchar c)
       c = a Unicode character
     Returns: true if `c` is printable
 */
-bool unicharIsprint(dchar c)
+bool unicharIsprint(dchar c) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unichar_isprint(c);
@@ -9985,7 +10098,7 @@ bool unicharIsprint(dchar c)
       c = a Unicode character
     Returns: true if `c` is a punctuation or symbol character
 */
-bool unicharIspunct(dchar c)
+bool unicharIspunct(dchar c) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unichar_ispunct(c);
@@ -10005,7 +10118,7 @@ bool unicharIspunct(dchar c)
       c = a Unicode character
     Returns: true if `c` is a space character
 */
-bool unicharIsspace(dchar c)
+bool unicharIsspace(dchar c) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unichar_isspace(c);
@@ -10024,7 +10137,7 @@ bool unicharIsspace(dchar c)
       c = a Unicode character
     Returns: true if the character is titlecase
 */
-bool unicharIstitle(dchar c)
+bool unicharIstitle(dchar c) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unichar_istitle(c);
@@ -10038,7 +10151,7 @@ bool unicharIstitle(dchar c)
       c = a Unicode character
     Returns: true if `c` is an uppercase character
 */
-bool unicharIsupper(dchar c)
+bool unicharIsupper(dchar c) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unichar_isupper(c);
@@ -10053,7 +10166,7 @@ bool unicharIsupper(dchar c)
       c = a Unicode character
     Returns: true if the character is wide
 */
-bool unicharIswide(dchar c)
+bool unicharIswide(dchar c) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unichar_iswide(c);
@@ -10076,7 +10189,7 @@ bool unicharIswide(dchar c)
       c = a Unicode character
     Returns: true if the character is wide in legacy East Asian locales
 */
-bool unicharIswideCjk(dchar c)
+bool unicharIswideCjk(dchar c) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unichar_iswide_cjk(c);
@@ -10090,7 +10203,7 @@ bool unicharIswideCjk(dchar c)
       c = a Unicode character.
     Returns: true if the character is a hexadecimal digit
 */
-bool unicharIsxdigit(dchar c)
+bool unicharIsxdigit(dchar c) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unichar_isxdigit(c);
@@ -10112,7 +10225,7 @@ bool unicharIsxdigit(dchar c)
       c = a Unicode character
     Returns: true if the character has zero width
 */
-bool unicharIszerowidth(dchar c)
+bool unicharIszerowidth(dchar c) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unichar_iszerowidth(c);
@@ -10128,7 +10241,7 @@ bool unicharIszerowidth(dchar c)
                     If `c` is not an upperlower or titlecase character,
                     or has no lowercase equivalent `c` is returned unchanged.
 */
-dchar unicharTolower(dchar c)
+dchar unicharTolower(dchar c) nothrow
 {
   dchar _retval;
   _retval = g_unichar_tolower(c);
@@ -10144,7 +10257,7 @@ dchar unicharTolower(dchar c)
                     If `c` is not an uppercase or lowercase character,
                     `c` is returned unchanged.
 */
-dchar unicharTotitle(dchar c)
+dchar unicharTotitle(dchar c) nothrow
 {
   dchar _retval;
   _retval = g_unichar_totitle(c);
@@ -10160,7 +10273,7 @@ dchar unicharTotitle(dchar c)
                     If `c` is not a lowercase or titlecase character,
                     or has no upper case equivalent `c` is returned unchanged.
 */
-dchar unicharToupper(dchar c)
+dchar unicharToupper(dchar c) nothrow
 {
   dchar _retval;
   _retval = g_unichar_toupper(c);
@@ -10174,7 +10287,7 @@ dchar unicharToupper(dchar c)
       c = a Unicode character
     Returns: the type of the character.
 */
-glib.types.UnicodeType unicharType(dchar c)
+glib.types.UnicodeType unicharType(dchar c) nothrow
 {
   GUnicodeType _cretval;
   _cretval = g_unichar_type(c);
@@ -10191,7 +10304,7 @@ glib.types.UnicodeType unicharType(dchar c)
       ch = a Unicode character
     Returns: true if ch is a valid Unicode character
 */
-bool unicharValidate(dchar ch)
+bool unicharValidate(dchar ch) nothrow
 {
   bool _retval;
   _retval = cast(bool)g_unichar_validate(ch);
@@ -10207,7 +10320,7 @@ bool unicharValidate(dchar ch)
     Returns: If `c` is a hex digit (according to
       [glib.global.unicharIsxdigit]), its numeric value. Otherwise, -1.
 */
-int unicharXdigitValue(dchar c)
+int unicharXdigitValue(dchar c) nothrow
 {
   int _retval;
   _retval = g_unichar_xdigit_value(c);
@@ -10225,7 +10338,7 @@ int unicharXdigitValue(dchar c)
     Deprecated: Use the more flexible [glib.global.unicharFullyDecompose]
         instead.
 */
-dchar[] unicodeCanonicalDecomposition(dchar ch)
+dchar[] unicodeCanonicalDecomposition(dchar ch) nothrow
 {
   dchar* _cretval;
   size_t _cretlength;
@@ -10248,7 +10361,7 @@ dchar[] unicodeCanonicalDecomposition(dchar ch)
     Params:
       string_ = a UCS-4 encoded string.
 */
-void unicodeCanonicalOrdering(dchar[] string_)
+void unicodeCanonicalOrdering(dchar[] string_) nothrow
 {
   size_t _len;
   if (string_)
@@ -10259,7 +10372,7 @@ void unicodeCanonicalOrdering(dchar[] string_)
 }
 
 /** */
-glib.types.Quark unixErrorQuark()
+glib.types.Quark unixErrorQuark() nothrow
 {
   glib.types.Quark _retval;
   _retval = g_unix_error_quark();
@@ -10281,14 +10394,21 @@ glib.types.Quark unixErrorQuark()
       function_ = a #GUnixFDSourceFunc
     Returns: the ID (greater than 0) of the event source
 */
-uint unixFdAddFull(int priority, int fd, glib.types.IOCondition condition, glib.types.UnixFDSourceFunc function_)
+uint unixFdAddFull(int priority, int fd, glib.types.IOCondition condition, glib.types.UnixFDSourceFunc function_) nothrow
 {
-  extern(C) gboolean _function_Callback(int fd, GIOCondition condition, void* userData)
+  extern(C) gboolean _function_Callback(int fd, GIOCondition condition, void* userData) nothrow
   {
     bool _dretval;
     auto _dlg = cast(glib.types.UnixFDSourceFunc*)userData;
 
-    _dretval = (*_dlg)(fd, condition);
+    try
+    {
+      _dretval = (*_dlg)(fd, condition);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "glib.types.UnixFDSourceFunc");
+    }
     auto _retval = cast(gboolean)_dretval;
 
     return _retval;
@@ -10315,7 +10435,7 @@ uint unixFdAddFull(int priority, int fd, glib.types.IOCondition condition, glib.
       condition = I/O conditions to watch for on fd
     Returns: the newly created #GSource
 */
-glib.source.Source unixFdSourceNew(int fd, glib.types.IOCondition condition)
+glib.source.Source unixFdSourceNew(int fd, glib.types.IOCondition condition) nothrow
 {
   GSource* _cretval;
   _cretval = g_unix_fd_source_new(fd, condition);
@@ -10424,14 +10544,21 @@ bool unixSetFdNonblocking(int fd, bool nonblock)
       handler = Callback
     Returns: An ID (greater than 0) for the event source
 */
-uint unixSignalAdd(int priority, int signum, glib.types.SourceFunc handler)
+uint unixSignalAdd(int priority, int signum, glib.types.SourceFunc handler) nothrow
 {
-  extern(C) gboolean _handlerCallback(void* userData)
+  extern(C) gboolean _handlerCallback(void* userData) nothrow
   {
     bool _dretval;
     auto _dlg = cast(glib.types.SourceFunc*)userData;
 
-    _dretval = (*_dlg)();
+    try
+    {
+      _dretval = (*_dlg)();
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "glib.types.SourceFunc");
+    }
     auto _retval = cast(gboolean)_dretval;
 
     return _retval;
@@ -10473,7 +10600,7 @@ uint unixSignalAdd(int priority, int signum, glib.types.SourceFunc handler)
       signum = A signal number
     Returns: A newly created #GSource
 */
-glib.source.Source unixSignalSourceNew(int signum)
+glib.source.Source unixSignalSourceNew(int signum) nothrow
 {
   GSource* _cretval;
   _cretval = g_unix_signal_source_new(signum);
@@ -10497,7 +10624,7 @@ glib.source.Source unixSignalSourceNew(int signum)
     Returns: 0 if the name was successfully deleted, -1 if an error
          occurred
 */
-int unlink(string filename)
+int unlink(string filename) nothrow
 {
   int _retval;
   const(char)* _filename = filename.toCString(No.Alloc);
@@ -10528,7 +10655,7 @@ int unlink(string filename)
       variable = the environment variable to remove, must
             not contain '='
 */
-void unsetenv(string variable)
+void unsetenv(string variable) nothrow
 {
   const(char)* _variable = variable.toCString(No.Alloc);
   g_unsetenv(_variable);
@@ -10545,7 +10672,7 @@ void unsetenv(string variable)
     Params:
       microseconds = number of microseconds to pause
 */
-void usleep(gulong microseconds)
+void usleep(gulong microseconds) nothrow
 {
   g_usleep(microseconds);
 }
@@ -10652,7 +10779,7 @@ string utf16ToUtf8(ushort[] str, out glong itemsRead, out glong itemsWritten)
     Returns: a newly allocated string, that is a
         case independent form of str.
 */
-string utf8Casefold(string str)
+string utf8Casefold(string str) nothrow
 {
   char* _cretval;
   ptrdiff_t _len;
@@ -10683,7 +10810,7 @@ string utf8Casefold(string str)
     Returns: < 0 if str1 compares before str2,
         0 if they compare equal, > 0 if str1 compares after str2.
 */
-int utf8Collate(string str1, string str2)
+int utf8Collate(string str1, string str2) nothrow
 {
   int _retval;
   const(char)* _str1 = str1.toCString(No.Alloc);
@@ -10708,7 +10835,7 @@ int utf8Collate(string str1, string str2)
     Returns: a newly allocated string. This string should
         be freed with [glib.global.gfree] when you are done with it.
 */
-string utf8CollateKey(string str)
+string utf8CollateKey(string str) nothrow
 {
   char* _cretval;
   ptrdiff_t _len;
@@ -10739,7 +10866,7 @@ string utf8CollateKey(string str)
     Returns: a newly allocated string. This string should
         be freed with [glib.global.gfree] when you are done with it.
 */
-string utf8CollateKeyForFilename(string str)
+string utf8CollateKeyForFilename(string str) nothrow
 {
   char* _cretval;
   ptrdiff_t _len;
@@ -10771,7 +10898,7 @@ string utf8CollateKeyForFilename(string str)
     Returns: a pointer to the found character or null if end is
          set and is reached
 */
-string utf8FindNextChar(string p, string end = null)
+string utf8FindNextChar(string p, string end = null) nothrow
 {
   char* _cretval;
   const(char)* _p = p.toCString(No.Alloc);
@@ -10795,7 +10922,7 @@ string utf8FindNextChar(string p, string end = null)
       p = pointer to some position within str
     Returns: a pointer to the found character or null.
 */
-string utf8FindPrevChar(string str, string p)
+string utf8FindPrevChar(string str, string p) nothrow
 {
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -10817,7 +10944,7 @@ string utf8FindPrevChar(string str, string p)
       p = a pointer to Unicode character encoded as UTF-8
     Returns: the resulting character
 */
-dchar utf8GetChar(string p)
+dchar utf8GetChar(string p) nothrow
 {
   dchar _retval;
   const(char)* _p = p.toCString(No.Alloc);
@@ -10843,7 +10970,7 @@ dchar utf8GetChar(string p)
           otherwise, if `p` does not point to a valid UTF-8 encoded
           Unicode character, returns (gunichar)-1.
 */
-dchar utf8GetCharValidated(string p)
+dchar utf8GetCharValidated(string p) nothrow
 {
   dchar _retval;
   ptrdiff_t _maxLen;
@@ -10870,7 +10997,7 @@ dchar utf8GetCharValidated(string p)
       str = string to coerce into UTF-8
     Returns: a valid UTF-8 string whose content resembles str
 */
-string utf8MakeValid(string str)
+string utf8MakeValid(string str) nothrow
 {
   char* _cretval;
   ptrdiff_t _len;
@@ -10917,7 +11044,7 @@ string utf8MakeValid(string str)
         is the normalized form of str, or null if str
         is not valid UTF-8.
 */
-string utf8Normalize(string str, glib.types.NormalizeMode mode)
+string utf8Normalize(string str, glib.types.NormalizeMode mode) nothrow
 {
   char* _cretval;
   ptrdiff_t _len;
@@ -10950,7 +11077,7 @@ string utf8Normalize(string str, glib.types.NormalizeMode mode)
       offset = a character offset within str
     Returns: the resulting pointer
 */
-string utf8OffsetToPointer(string str, glong offset)
+string utf8OffsetToPointer(string str, glong offset) nothrow
 {
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -10971,7 +11098,7 @@ string utf8OffsetToPointer(string str, glong offset)
       pos = a pointer to a position within str
     Returns: the resulting character offset
 */
-glong utf8PointerToOffset(string str, string pos)
+glong utf8PointerToOffset(string str, string pos) nothrow
 {
   glong _retval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -10992,7 +11119,7 @@ glong utf8PointerToOffset(string str, string pos)
       p = a pointer to a position within a UTF-8 encoded string
     Returns: a pointer to the found character
 */
-string utf8PrevChar(string p)
+string utf8PrevChar(string p) nothrow
 {
   char* _cretval;
   const(char)* _p = p.toCString(No.Alloc);
@@ -11013,7 +11140,7 @@ string utf8PrevChar(string p)
           otherwise, a pointer to the start of the leftmost occurrence
           of the character in the string.
 */
-string utf8Strchr(string p, dchar c)
+string utf8Strchr(string p, dchar c) nothrow
 {
   char* _cretval;
   ptrdiff_t _len;
@@ -11037,7 +11164,7 @@ string utf8Strchr(string p, dchar c)
     Returns: a newly allocated string, with all characters
          converted to lowercase.
 */
-string utf8Strdown(string str)
+string utf8Strdown(string str) nothrow
 {
   char* _cretval;
   ptrdiff_t _len;
@@ -11064,7 +11191,7 @@ string utf8Strdown(string str)
               bytes are examined
     Returns: the length of the string in characters
 */
-glong utf8Strlen(string p, ptrdiff_t max)
+glong utf8Strlen(string p, ptrdiff_t max) nothrow
 {
   glong _retval;
   const(char)* _p = p.toCString(No.Alloc);
@@ -11087,7 +11214,7 @@ glong utf8Strlen(string p, ptrdiff_t max)
       n = character count
     Returns: dest
 */
-string utf8Strncpy(string dest, string src, size_t n)
+string utf8Strncpy(string dest, string src, size_t n) nothrow
 {
   char* _cretval;
   char* _dest = dest.toCString(No.Alloc);
@@ -11109,7 +11236,7 @@ string utf8Strncpy(string dest, string src, size_t n)
           otherwise, a pointer to the start of the rightmost occurrence
           of the character in the string.
 */
-string utf8Strrchr(string p, dchar c)
+string utf8Strrchr(string p, dchar c) nothrow
 {
   char* _cretval;
   ptrdiff_t _len;
@@ -11141,7 +11268,7 @@ string utf8Strrchr(string p, dchar c)
       str = a UTF-8 encoded string
     Returns: a newly-allocated string which is the reverse of str
 */
-string utf8Strreverse(string str)
+string utf8Strreverse(string str) nothrow
 {
   char* _cretval;
   ptrdiff_t _len;
@@ -11166,7 +11293,7 @@ string utf8Strreverse(string str)
     Returns: a newly allocated string, with all characters
          converted to uppercase.
 */
-string utf8Strup(string str)
+string utf8Strup(string str) nothrow
 {
   char* _cretval;
   ptrdiff_t _len;
@@ -11194,7 +11321,7 @@ string utf8Strup(string str)
     Returns: a newly allocated copy of the requested
           substring. Free with [glib.global.gfree] when no longer needed.
 */
-string utf8Substring(string str, glong startPos, glong endPos)
+string utf8Substring(string str, glong startPos, glong endPos) nothrow
 {
   char* _cretval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -11254,7 +11381,7 @@ dchar[] utf8ToUcs4(string str, glong len, out glong itemsRead)
     Returns: a pointer to a newly allocated UCS-4 string.
           This value must be freed with [glib.global.gfree].
 */
-dchar[] utf8ToUcs4Fast(string str)
+dchar[] utf8ToUcs4Fast(string str) nothrow
 {
   dchar* _cretval;
   glong _cretlength;
@@ -11322,7 +11449,7 @@ ushort[] utf8ToUtf16(string str, glong len, out glong itemsRead)
       truncateLength = the new size of string, in characters, including the ellipsis character
     Returns: a newly-allocated copy of string ellipsized in the middle
 */
-string utf8TruncateMiddle(string string_, size_t truncateLength)
+string utf8TruncateMiddle(string string_, size_t truncateLength) nothrow
 {
   char* _cretval;
   const(char)* _string_ = string_.toCString(No.Alloc);
@@ -11353,7 +11480,7 @@ string utf8TruncateMiddle(string string_, size_t truncateLength)
       end = return location for end of valid data
     Returns: true if the text was valid UTF-8
 */
-bool utf8Validate(ubyte[] str, out string end)
+bool utf8Validate(ubyte[] str, out string end) nothrow
 {
   bool _retval;
   ptrdiff_t _maxLen;
@@ -11378,7 +11505,7 @@ bool utf8Validate(ubyte[] str, out string end)
       end = return location for end of valid data
     Returns: true if the text was valid UTF-8
 */
-bool utf8ValidateLen(ubyte[] str, out string end)
+bool utf8ValidateLen(ubyte[] str, out string end) nothrow
 {
   bool _retval;
   size_t _maxLen;
@@ -11406,7 +11533,7 @@ bool utf8ValidateLen(ubyte[] str, out string end)
       str = a string representing a UUID
     Returns: true if str is a valid UUID, false otherwise.
 */
-bool uuidStringIsValid(string str)
+bool uuidStringIsValid(string str) nothrow
 {
   bool _retval;
   const(char)* _str = str.toCString(No.Alloc);
@@ -11420,7 +11547,7 @@ bool uuidStringIsValid(string str)
     purposes such as key generation, nonces, salts or one-time pads.
     Returns: A string that should be freed with [glib.global.gfree].
 */
-string uuidStringRandom()
+string uuidStringRandom() nothrow
 {
   char* _cretval;
   _cretval = g_uuid_string_random();
@@ -11429,7 +11556,7 @@ string uuidStringRandom()
 }
 
 /** */
-gobject.types.GType variantGetGtype()
+gobject.types.GType variantGetGtype() nothrow
 {
   gobject.types.GType _retval;
   _retval = g_variant_get_gtype();

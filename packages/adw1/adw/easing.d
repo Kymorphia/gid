@@ -21,7 +21,7 @@ struct Easing
         value = a value to ease
       Returns: the easing for value
   */
-  static double ease(adw.types.Easing self, double value)
+  static double ease(adw.types.Easing self, double value) nothrow
   {
     double _retval;
     _retval = adw_easing_ease(self, value);

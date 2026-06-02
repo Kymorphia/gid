@@ -28,26 +28,26 @@ class GLFramebuffer : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_framebuffer_get_type != &gidSymbolNotFound ? gst_gl_framebuffer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLFramebuffer self()
+  override GLFramebuffer self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class GLFramebuffer : gst.object.ObjectWrap
       Get builder for [gstgl.glframebuffer.GLFramebuffer]
       Returns: New builder object
   */
-  static GLFramebufferGidBuilder builder()
+  static GLFramebufferGidBuilder builder() nothrow
   {
     return new GLFramebufferGidBuilder;
   }
@@ -69,7 +69,7 @@ class GLFramebuffer : gst.object.ObjectWrap
         context = a #GstGLContext
       Returns: a new #GstGLFramebuffer
   */
-  this(gstgl.glcontext.GLContext context)
+  this(gstgl.glcontext.GLContext context) nothrow
   {
     GstGLFramebuffer* _cretval;
     _cretval = gst_gl_framebuffer_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
@@ -86,7 +86,7 @@ class GLFramebuffer : gst.object.ObjectWrap
         height = for the depth buffer
       Returns: a new #GstGLFramebuffer with a depth buffer of width and height
   */
-  static gstgl.glframebuffer.GLFramebuffer newWithDefaultDepth(gstgl.glcontext.GLContext context, uint width, uint height)
+  static gstgl.glframebuffer.GLFramebuffer newWithDefaultDepth(gstgl.glcontext.GLContext context, uint width, uint height) nothrow
   {
     GstGLFramebuffer* _cretval;
     _cretval = gst_gl_framebuffer_new_with_default_depth(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, width, height);
@@ -104,7 +104,7 @@ class GLFramebuffer : gst.object.ObjectWrap
         attachmentPoint = the OpenGL attachment point to bind mem to
         mem = the memory object to bind to attachment_point
   */
-  void attach(uint attachmentPoint, gstgl.glbase_memory.GLBaseMemory mem)
+  void attach(uint attachmentPoint, gstgl.glbase_memory.GLBaseMemory mem) nothrow
   {
     gst_gl_framebuffer_attach(cast(GstGLFramebuffer*)this._cPtr, attachmentPoint, mem ? cast(GstGLBaseMemory*)mem._cPtr(No.Dup) : null);
   }
@@ -115,7 +115,7 @@ class GLFramebuffer : gst.object.ObjectWrap
       Must be called with the same OpenGL context current that fb was created
       with.
   */
-  void bind()
+  void bind() nothrow
   {
     gst_gl_framebuffer_bind(cast(GstGLFramebuffer*)this._cPtr);
   }
@@ -128,13 +128,13 @@ class GLFramebuffer : gst.object.ObjectWrap
         width = output width
         height = output height
   */
-  void getEffectiveDimensions(out uint width, out uint height)
+  void getEffectiveDimensions(out uint width, out uint height) nothrow
   {
     gst_gl_framebuffer_get_effective_dimensions(cast(GstGLFramebuffer*)this._cPtr, cast(uint*)&width, cast(uint*)&height);
   }
 
   /** */
-  uint getId()
+  uint getId() nothrow
   {
     uint _retval;
     _retval = gst_gl_framebuffer_get_id(cast(GstGLFramebuffer*)this._cPtr);
@@ -154,7 +154,7 @@ final class GLFramebufferGidBuilder : GLFramebufferGidBuilderImpl!GLFramebufferG
       Create object from builder.
       Returns: New object
   */
-  GLFramebuffer build()
+  GLFramebuffer build() nothrow
   {
     return new GLFramebuffer(cast(void*)createGObject(GLFramebuffer._getGType), Yes.Take);
   }

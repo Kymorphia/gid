@@ -13,7 +13,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgraphene-1.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // Box
   GType function() c_graphene_box_get_type; ///

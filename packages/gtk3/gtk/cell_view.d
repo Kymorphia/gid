@@ -49,26 +49,26 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_view_get_type != &gidSymbolNotFound ? gtk_cell_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CellView self()
+  override CellView self() nothrow
   {
     return this;
   }
@@ -77,13 +77,13 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
       Get builder for [gtk.cell_view.CellView]
       Returns: New builder object
   */
-  static CellViewGidBuilder builder()
+  static CellViewGidBuilder builder() nothrow
   {
     return new CellViewGidBuilder;
   }
 
   /** */
-  @property void background(string propval)
+  @property void background(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("background", propval);
   }
@@ -94,7 +94,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   
       Deprecated: Use #GtkCellView:background-rgba instead.
   */
-  @property gdk.color.Color backgroundGdk()
+  @property gdk.color.Color backgroundGdk() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.color.Color)("background-gdk");
   }
@@ -106,7 +106,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   
       Deprecated: Use #GtkCellView:background-rgba instead.
   */
-  @property void backgroundGdk(gdk.color.Color propval)
+  @property void backgroundGdk(gdk.color.Color propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.color.Color)("background-gdk", propval);
   }
@@ -115,7 +115,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
       Get `backgroundRgba` property.
       Returns: The background color as a #GdkRGBA
   */
-  @property gdk.rgba.RGBA backgroundRgba()
+  @property gdk.rgba.RGBA backgroundRgba() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("background-rgba");
   }
@@ -125,19 +125,19 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
       Params:
         propval = The background color as a #GdkRGBA
   */
-  @property void backgroundRgba(gdk.rgba.RGBA propval)
+  @property void backgroundRgba(gdk.rgba.RGBA propval) nothrow
   {
     setBackgroundRgba(propval);
   }
 
   /** */
-  @property bool backgroundSet()
+  @property bool backgroundSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("background-set");
   }
 
   /** */
-  @property void backgroundSet(bool propval)
+  @property void backgroundSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("background-set", propval);
   }
@@ -151,7 +151,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
         
         since 3.0
   */
-  @property gtk.cell_area.CellArea cellArea()
+  @property gtk.cell_area.CellArea cellArea() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.cell_area.CellArea)("cell-area");
   }
@@ -171,7 +171,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
         
         since 3.0
   */
-  @property gtk.cell_area_context.CellAreaContext cellAreaContext()
+  @property gtk.cell_area_context.CellAreaContext cellAreaContext() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.cell_area_context.CellAreaContext)("cell-area-context");
   }
@@ -184,7 +184,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
         
         since 3.0
   */
-  @property bool drawSensitive()
+  @property bool drawSensitive() nothrow
   {
     return getDrawSensitive();
   }
@@ -198,7 +198,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
           
           since 3.0
   */
-  @property void drawSensitive(bool propval)
+  @property void drawSensitive(bool propval) nothrow
   {
     setDrawSensitive(propval);
   }
@@ -212,7 +212,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
         
         since 3.0
   */
-  @property bool fitModel()
+  @property bool fitModel() nothrow
   {
     return getFitModel();
   }
@@ -227,7 +227,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
           
           since 3.0
   */
-  @property void fitModel(bool propval)
+  @property void fitModel(bool propval) nothrow
   {
     setFitModel(propval);
   }
@@ -238,7 +238,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
         
         since 2.10
   */
-  @property gtk.tree_model.TreeModel model()
+  @property gtk.tree_model.TreeModel model() nothrow
   {
     return getModel();
   }
@@ -250,7 +250,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
           
           since 2.10
   */
-  @property void model(gtk.tree_model.TreeModel propval)
+  @property void model(gtk.tree_model.TreeModel propval) nothrow
   {
     setModel(propval);
   }
@@ -262,7 +262,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
       Creates a new #GtkCellView widget.
       Returns: A newly created #GtkCellView widget.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_cell_view_new();
@@ -283,7 +283,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
         context = the #GtkCellAreaContext in which to calculate cell geometry
       Returns: A newly created #GtkCellView widget.
   */
-  static gtk.cell_view.CellView newWithContext(gtk.cell_area.CellArea area, gtk.cell_area_context.CellAreaContext context)
+  static gtk.cell_view.CellView newWithContext(gtk.cell_area.CellArea area, gtk.cell_area_context.CellAreaContext context) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_cell_view_new_with_context(area ? cast(GtkCellArea*)area._cPtr(No.Dup) : null, context ? cast(GtkCellAreaContext*)context._cPtr(No.Dup) : null);
@@ -300,7 +300,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
         markup = the text to display in the cell view
       Returns: A newly created #GtkCellView widget.
   */
-  static gtk.cell_view.CellView newWithMarkup(string markup)
+  static gtk.cell_view.CellView newWithMarkup(string markup) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _markup = markup.toCString(No.Alloc);
@@ -317,7 +317,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
         pixbuf = the image to display in the cell view
       Returns: A newly created #GtkCellView widget.
   */
-  static gtk.cell_view.CellView newWithPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  static gtk.cell_view.CellView newWithPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_cell_view_new_with_pixbuf(pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
@@ -333,7 +333,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
         text = the text to display in the cell view
       Returns: A newly created #GtkCellView widget.
   */
-  static gtk.cell_view.CellView newWithText(string text)
+  static gtk.cell_view.CellView newWithText(string text) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _text = text.toCString(No.Alloc);
@@ -348,7 +348,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
       null is returned.
       Returns: the currently displayed row or null
   */
-  gtk.tree_path.TreePath getDisplayedRow()
+  gtk.tree_path.TreePath getDisplayedRow() nothrow
   {
     GtkTreePath* _cretval;
     _cretval = gtk_cell_view_get_displayed_row(cast(GtkCellView*)this._cPtr);
@@ -362,7 +362,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
       Returns: whether cell_view draws all of its
         cells in a sensitive state
   */
-  bool getDrawSensitive()
+  bool getDrawSensitive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_cell_view_get_draw_sensitive(cast(GtkCellView*)this._cPtr);
@@ -375,7 +375,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
       Returns: whether cell_view requests space to fit
         the entire #GtkTreeModel.
   */
-  bool getFitModel()
+  bool getFitModel() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_cell_view_get_fit_model(cast(GtkCellView*)this._cPtr);
@@ -387,7 +387,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
       returned.
       Returns: a #GtkTreeModel used or null
   */
-  gtk.tree_model.TreeModel getModel()
+  gtk.tree_model.TreeModel getModel() nothrow
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_cell_view_get_model(cast(GtkCellView*)this._cPtr);
@@ -409,7 +409,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
         the #GtkCellView:fit-model property or by setting the currently
         displayed row of the #GtkCellView and using [gtk.widget.Widget.getPreferredSize].
   */
-  bool getSizeOfRow(gtk.tree_path.TreePath path, out gtk.requisition.Requisition requisition)
+  bool getSizeOfRow(gtk.tree_path.TreePath path, out gtk.requisition.Requisition requisition) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_cell_view_get_size_of_row(cast(GtkCellView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, cast(GtkRequisition*)&requisition);
@@ -424,7 +424,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   
       Deprecated: Use [gtk.cell_view.CellView.setBackgroundRgba] instead.
   */
-  void setBackgroundColor(gdk.color.Color color)
+  void setBackgroundColor(gdk.color.Color color) nothrow
   {
     gtk_cell_view_set_background_color(cast(GtkCellView*)this._cPtr, cast(const(GdkColor)*)&color);
   }
@@ -435,7 +435,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
       Params:
         rgba = the new background color
   */
-  void setBackgroundRgba(gdk.rgba.RGBA rgba)
+  void setBackgroundRgba(gdk.rgba.RGBA rgba) nothrow
   {
     gtk_cell_view_set_background_rgba(cast(GtkCellView*)this._cPtr, cast(const(GdkRGBA)*)&rgba);
   }
@@ -451,7 +451,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
       Params:
         path = a #GtkTreePath or null to unset.
   */
-  void setDisplayedRow(gtk.tree_path.TreePath path = null)
+  void setDisplayedRow(gtk.tree_path.TreePath path = null) nothrow
   {
     gtk_cell_view_set_displayed_row(cast(GtkCellView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
   }
@@ -465,7 +465,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
       Params:
         drawSensitive = whether to draw all cells in a sensitive state.
   */
-  void setDrawSensitive(bool drawSensitive)
+  void setDrawSensitive(bool drawSensitive) nothrow
   {
     gtk_cell_view_set_draw_sensitive(cast(GtkCellView*)this._cPtr, drawSensitive);
   }
@@ -480,7 +480,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
       Params:
         fitModel = whether cell_view should request space for the whole model.
   */
-  void setFitModel(bool fitModel)
+  void setFitModel(bool fitModel) nothrow
   {
     gtk_cell_view_set_fit_model(cast(GtkCellView*)this._cPtr, fitModel);
   }
@@ -493,7 +493,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
       Params:
         model = a #GtkTreeModel
   */
-  void setModel(gtk.tree_model.TreeModel model = null)
+  void setModel(gtk.tree_model.TreeModel model = null) nothrow
   {
     gtk_cell_view_set_model(cast(GtkCellView*)this._cPtr, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
@@ -507,7 +507,7 @@ class CellViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_la
   mixin OrientableGidBuilderT!();
 
   /** */
-  T background(string propval)
+  T background(string propval) nothrow
   {
     return setProperty("background", propval);
   }
@@ -520,7 +520,7 @@ class CellViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_la
   
       Deprecated: Use #GtkCellView:background-rgba instead.
   */
-  T backgroundGdk(gdk.color.Color propval)
+  T backgroundGdk(gdk.color.Color propval) nothrow
   {
     return setProperty("background-gdk", propval);
   }
@@ -531,13 +531,13 @@ class CellViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_la
         propval = The background color as a #GdkRGBA
       Returns: Builder instance for fluent chaining
   */
-  T backgroundRgba(gdk.rgba.RGBA propval)
+  T backgroundRgba(gdk.rgba.RGBA propval) nothrow
   {
     return setProperty("background-rgba", propval);
   }
 
   /** */
-  T backgroundSet(bool propval)
+  T backgroundSet(bool propval) nothrow
   {
     return setProperty("background-set", propval);
   }
@@ -553,7 +553,7 @@ class CellViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_la
           since 3.0
       Returns: Builder instance for fluent chaining
   */
-  T cellArea(gtk.cell_area.CellArea propval)
+  T cellArea(gtk.cell_area.CellArea propval) nothrow
   {
     return setProperty("cell-area", propval);
   }
@@ -575,7 +575,7 @@ class CellViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_la
           since 3.0
       Returns: Builder instance for fluent chaining
   */
-  T cellAreaContext(gtk.cell_area_context.CellAreaContext propval)
+  T cellAreaContext(gtk.cell_area_context.CellAreaContext propval) nothrow
   {
     return setProperty("cell-area-context", propval);
   }
@@ -590,7 +590,7 @@ class CellViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_la
           since 3.0
       Returns: Builder instance for fluent chaining
   */
-  T drawSensitive(bool propval)
+  T drawSensitive(bool propval) nothrow
   {
     return setProperty("draw-sensitive", propval);
   }
@@ -606,7 +606,7 @@ class CellViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_la
           since 3.0
       Returns: Builder instance for fluent chaining
   */
-  T fitModel(bool propval)
+  T fitModel(bool propval) nothrow
   {
     return setProperty("fit-model", propval);
   }
@@ -619,7 +619,7 @@ class CellViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_la
           since 2.10
       Returns: Builder instance for fluent chaining
   */
-  T model(gtk.tree_model.TreeModel propval)
+  T model(gtk.tree_model.TreeModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -632,7 +632,7 @@ final class CellViewGidBuilder : CellViewGidBuilderImpl!CellViewGidBuilder
       Create object from builder.
       Returns: New object
   */
-  CellView build()
+  CellView build() nothrow
   {
     return new CellView(cast(void*)createGObject(CellView._getGType), No.Take);
   }

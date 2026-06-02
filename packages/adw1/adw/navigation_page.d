@@ -49,26 +49,26 @@ class NavigationPage : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_navigation_page_get_type != &gidSymbolNotFound ? adw_navigation_page_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NavigationPage self()
+  override NavigationPage self() nothrow
   {
     return this;
   }
@@ -77,7 +77,7 @@ class NavigationPage : gtk.widget.Widget
       Get builder for [adw.navigation_page.NavigationPage]
       Returns: New builder object
   */
-  static NavigationPageGidBuilder builder()
+  static NavigationPageGidBuilder builder() nothrow
   {
     return new NavigationPageGidBuilder;
   }
@@ -95,7 +95,7 @@ class NavigationPage : gtk.widget.Widget
         See [adw.header_bar.HeaderBar.showBackButton] for removing only the back
         button, but not shortcuts.
   */
-  @property bool canPop()
+  @property bool canPop() nothrow
   {
     return getCanPop();
   }
@@ -114,7 +114,7 @@ class NavigationPage : gtk.widget.Widget
           See [adw.header_bar.HeaderBar.showBackButton] for removing only the back
           button, but not shortcuts.
   */
-  @property void canPop(bool propval)
+  @property void canPop(bool propval) nothrow
   {
     setCanPop(propval);
   }
@@ -123,7 +123,7 @@ class NavigationPage : gtk.widget.Widget
       Get `child` property.
       Returns: The child widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -133,7 +133,7 @@ class NavigationPage : gtk.widget.Widget
       Params:
         propval = The child widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -151,7 +151,7 @@ class NavigationPage : gtk.widget.Widget
         
         The tag also must be set to use the `navigation.push` action.
   */
-  @property string tag()
+  @property string tag() nothrow
   {
     return getTag();
   }
@@ -170,7 +170,7 @@ class NavigationPage : gtk.widget.Widget
           
           The tag also must be set to use the `navigation.push` action.
   */
-  @property void tag(string propval)
+  @property void tag(string propval) nothrow
   {
     setTag(propval);
   }
@@ -182,7 +182,7 @@ class NavigationPage : gtk.widget.Widget
         It's displayed in [adw.header_bar.HeaderBar] instead of the window title, and used
         as the tooltip on the next page's back button, as well as by screen reader.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -195,7 +195,7 @@ class NavigationPage : gtk.widget.Widget
           It's displayed in [adw.header_bar.HeaderBar] instead of the window title, and used
           as the tooltip on the next page's back button, as well as by screen reader.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -208,7 +208,7 @@ class NavigationPage : gtk.widget.Widget
         title = the page title
       Returns: the new created [adw.navigation_page.NavigationPage]
   */
-  this(gtk.widget.Widget child, string title)
+  this(gtk.widget.Widget child, string title) nothrow
   {
     AdwNavigationPage* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -225,7 +225,7 @@ class NavigationPage : gtk.widget.Widget
         tag = the page tag
       Returns: the new created [adw.navigation_page.NavigationPage]
   */
-  static adw.navigation_page.NavigationPage newWithTag(gtk.widget.Widget child, string title, string tag)
+  static adw.navigation_page.NavigationPage newWithTag(gtk.widget.Widget child, string title, string tag) nothrow
   {
     AdwNavigationPage* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -239,7 +239,7 @@ class NavigationPage : gtk.widget.Widget
       Gets whether self can be popped from navigation stack.
       Returns: whether the page can be popped from navigation stack
   */
-  bool getCanPop()
+  bool getCanPop() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_navigation_page_get_can_pop(cast(AdwNavigationPage*)this._cPtr);
@@ -250,7 +250,7 @@ class NavigationPage : gtk.widget.Widget
       Gets the child widget of self.
       Returns: the child widget of self
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_navigation_page_get_child(cast(AdwNavigationPage*)this._cPtr);
@@ -262,7 +262,7 @@ class NavigationPage : gtk.widget.Widget
       Gets the tag of self.
       Returns: the page tag
   */
-  string getTag()
+  string getTag() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_navigation_page_get_tag(cast(AdwNavigationPage*)this._cPtr);
@@ -274,7 +274,7 @@ class NavigationPage : gtk.widget.Widget
       Gets the title of self.
       Returns: the title of self
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_navigation_page_get_title(cast(AdwNavigationPage*)this._cPtr);
@@ -297,7 +297,7 @@ class NavigationPage : gtk.widget.Widget
       Params:
         canPop = whether the page can be popped from navigation stack
   */
-  void setCanPop(bool canPop)
+  void setCanPop(bool canPop) nothrow
   {
     adw_navigation_page_set_can_pop(cast(AdwNavigationPage*)this._cPtr, canPop);
   }
@@ -308,7 +308,7 @@ class NavigationPage : gtk.widget.Widget
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     adw_navigation_page_set_child(cast(AdwNavigationPage*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -328,7 +328,7 @@ class NavigationPage : gtk.widget.Widget
       Params:
         tag = the page tag
   */
-  void setTag(string tag = null)
+  void setTag(string tag = null) nothrow
   {
     const(char)* _tag = tag.toCString(No.Alloc);
     adw_navigation_page_set_tag(cast(AdwNavigationPage*)this._cPtr, _tag);
@@ -343,7 +343,7 @@ class NavigationPage : gtk.widget.Widget
       Params:
         title = the title
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     adw_navigation_page_set_title(cast(AdwNavigationPage*)this._cPtr, _title);
@@ -368,13 +368,13 @@ class NavigationPage : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectHidden(T)(T callback, Flag!"After" after = No.After)
+  gulong connectHidden(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.navigation_page.NavigationPage)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -383,7 +383,14 @@ class NavigationPage : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.navigation_page.NavigationPage.hidden");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -409,13 +416,13 @@ class NavigationPage : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectHiding(T)(T callback, Flag!"After" after = No.After)
+  gulong connectHiding(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.navigation_page.NavigationPage)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -424,7 +431,14 @@ class NavigationPage : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.navigation_page.NavigationPage.hiding");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -450,13 +464,13 @@ class NavigationPage : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectShowing(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowing(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.navigation_page.NavigationPage)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -465,7 +479,14 @@ class NavigationPage : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.navigation_page.NavigationPage.showing");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -491,13 +512,13 @@ class NavigationPage : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectShown(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShown(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.navigation_page.NavigationPage)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -506,7 +527,14 @@ class NavigationPage : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.navigation_page.NavigationPage.shown");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -534,7 +562,7 @@ class NavigationPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           button, but not shortcuts.
       Returns: Builder instance for fluent chaining
   */
-  T canPop(bool propval)
+  T canPop(bool propval) nothrow
   {
     return setProperty("can-pop", propval);
   }
@@ -545,7 +573,7 @@ class NavigationPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The child widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -565,7 +593,7 @@ class NavigationPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           The tag also must be set to use the `navigation.push` action.
       Returns: Builder instance for fluent chaining
   */
-  T tag(string propval)
+  T tag(string propval) nothrow
   {
     return setProperty("tag", propval);
   }
@@ -579,7 +607,7 @@ class NavigationPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           as the tooltip on the next page's back button, as well as by screen reader.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -592,7 +620,7 @@ final class NavigationPageGidBuilder : NavigationPageGidBuilderImpl!NavigationPa
       Create object from builder.
       Returns: New object
   */
-  NavigationPage build()
+  NavigationPage build() nothrow
   {
     return new NavigationPage(cast(void*)createGObject(NavigationPage._getGType), No.Take);
   }

@@ -14,26 +14,26 @@ class ServerCallContext : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_server_call_context_get_type != &gidSymbolNotFound ? gaflight_server_call_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ServerCallContext self()
+  override ServerCallContext self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class ServerCallContext : gobject.object.ObjectWrap
       Get builder for [arrowflight.server_call_context.ServerCallContext]
       Returns: New builder object
   */
-  static ServerCallContextGidBuilder builder()
+  static ServerCallContextGidBuilder builder() nothrow
   {
     return new ServerCallContextGidBuilder;
   }
@@ -53,15 +53,22 @@ class ServerCallContext : gobject.object.ObjectWrap
       Params:
         func = The user's callback function.
   */
-  void foreachIncomingHeader(arrowflight.types.HeaderFunc func)
+  void foreachIncomingHeader(arrowflight.types.HeaderFunc func) nothrow
   {
-    extern(C) void _funcCallback(const(char)* name, const(char)* value, void* userData)
+    extern(C) void _funcCallback(const(char)* name, const(char)* value, void* userData) nothrow
     {
       auto _dlg = cast(arrowflight.types.HeaderFunc*)userData;
       string _name = name.fromCString(No.Free);
       string _value = value.fromCString(No.Free);
 
-      (*_dlg)(_name, _value);
+      try
+      {
+        (*_dlg)(_name, _value);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "arrowflight.types.HeaderFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -74,7 +81,7 @@ class ServerCallContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
 {
 
   /** */
-  T callContext(void* propval)
+  T callContext(void* propval) nothrow
   {
     return setProperty("call-context", propval);
   }
@@ -87,7 +94,7 @@ final class ServerCallContextGidBuilder : ServerCallContextGidBuilderImpl!Server
       Create object from builder.
       Returns: New object
   */
-  ServerCallContext build()
+  ServerCallContext build() nothrow
   {
     return new ServerCallContext(cast(void*)createGObject(ServerCallContext._getGType), No.Take);
   }

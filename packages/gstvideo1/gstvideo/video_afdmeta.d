@@ -30,11 +30,8 @@ class VideoAFDMeta
   GstVideoAFDMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_afdmeta.VideoAFDMeta");
-
     _cInstance = *cast(GstVideoAFDMeta*)ptr;
 
     if (take)
@@ -42,7 +39,7 @@ class VideoAFDMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -51,7 +48,7 @@ class VideoAFDMeta
       Get `meta` field.
       Returns: parent #GstMeta
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoAFDMeta*)this._cPtr).meta, No.Take);
   }
@@ -60,7 +57,7 @@ class VideoAFDMeta
       Get `field` field.
       Returns: 0 for progressive or field 1 and 1 for field 2
   */
-  @property ubyte field()
+  @property ubyte field() nothrow
   {
     return (cast(GstVideoAFDMeta*)this._cPtr).field;
   }
@@ -70,7 +67,7 @@ class VideoAFDMeta
       Params:
         propval = 0 for progressive or field 1 and 1 for field 2
   */
-  @property void field(ubyte propval)
+  @property void field(ubyte propval) nothrow
   {
     (cast(GstVideoAFDMeta*)this._cPtr).field = propval;
   }
@@ -79,7 +76,7 @@ class VideoAFDMeta
       Get `spec` field.
       Returns: #GstVideoAFDSpec that applies to @afd
   */
-  @property gstvideo.types.VideoAFDSpec spec()
+  @property gstvideo.types.VideoAFDSpec spec() nothrow
   {
     return cast(gstvideo.types.VideoAFDSpec)(cast(GstVideoAFDMeta*)this._cPtr).spec;
   }
@@ -89,7 +86,7 @@ class VideoAFDMeta
       Params:
         propval = #GstVideoAFDSpec that applies to @afd
   */
-  @property void spec(gstvideo.types.VideoAFDSpec propval)
+  @property void spec(gstvideo.types.VideoAFDSpec propval) nothrow
   {
     (cast(GstVideoAFDMeta*)this._cPtr).spec = cast(GstVideoAFDSpec)propval;
   }
@@ -98,7 +95,7 @@ class VideoAFDMeta
       Get `afd` field.
       Returns: #GstVideoAFDValue AFD value
   */
-  @property gstvideo.types.VideoAFDValue afd()
+  @property gstvideo.types.VideoAFDValue afd() nothrow
   {
     return cast(gstvideo.types.VideoAFDValue)(cast(GstVideoAFDMeta*)this._cPtr).afd;
   }
@@ -108,13 +105,13 @@ class VideoAFDMeta
       Params:
         propval = #GstVideoAFDValue AFD value
   */
-  @property void afd(gstvideo.types.VideoAFDValue propval)
+  @property void afd(gstvideo.types.VideoAFDValue propval) nothrow
   {
     (cast(GstVideoAFDMeta*)this._cPtr).afd = cast(GstVideoAFDValue)propval;
   }
 
   /** */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_afd_meta_get_info();

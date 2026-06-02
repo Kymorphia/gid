@@ -17,26 +17,26 @@ class FilterChecksum : gmime.filter.Filter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_filter_checksum_get_type != &gidSymbolNotFound ? g_mime_filter_checksum_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FilterChecksum self()
+  override FilterChecksum self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class FilterChecksum : gmime.filter.Filter
       Get builder for [gmime.filter_checksum.FilterChecksum]
       Returns: New builder object
   */
-  static FilterChecksumGidBuilder builder()
+  static FilterChecksumGidBuilder builder() nothrow
   {
     return new FilterChecksumGidBuilder;
   }
@@ -57,7 +57,7 @@ class FilterChecksum : gmime.filter.Filter
         type = the type of checksum
       Returns: a new #GMimeFilterChecksum filter.
   */
-  this(glib.types.ChecksumType type)
+  this(glib.types.ChecksumType type) nothrow
   {
     GMimeFilter* _cretval;
     _cretval = g_mime_filter_checksum_new(type);
@@ -71,7 +71,7 @@ class FilterChecksum : gmime.filter.Filter
         digest = the digest buffer
       Returns: the number of bytes used of the digest buffer.
   */
-  size_t getDigest(ubyte[] digest)
+  size_t getDigest(ubyte[] digest) nothrow
   {
     size_t _retval;
     size_t _len;
@@ -87,7 +87,7 @@ class FilterChecksum : gmime.filter.Filter
       Outputs the checksum digest as a newly allocated hexadecimal string.
       Returns: the hexadecimal representation of the checksum. The returned string should be freed with [glib.global.gfree] when no longer needed.
   */
-  string getString()
+  string getString() nothrow
   {
     char* _cretval;
     _cretval = g_mime_filter_checksum_get_string(cast(GMimeFilterChecksum*)this._cPtr);
@@ -108,7 +108,7 @@ final class FilterChecksumGidBuilder : FilterChecksumGidBuilderImpl!FilterChecks
       Create object from builder.
       Returns: New object
   */
-  FilterChecksum build()
+  FilterChecksum build() nothrow
   {
     return new FilterChecksum(cast(void*)createGObject(FilterChecksum._getGType), Yes.Take);
   }

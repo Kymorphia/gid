@@ -16,26 +16,26 @@ class MonthDayNanoIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_month_day_nano_interval_array_builder_get_type != &gidSymbolNotFound ? garrow_month_day_nano_interval_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MonthDayNanoIntervalArrayBuilder self()
+  override MonthDayNanoIntervalArrayBuilder self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class MonthDayNanoIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.month_day_nano_interval_array_builder.MonthDayNanoIntervalArrayBuilder]
       Returns: New builder object
   */
-  static MonthDayNanoIntervalArrayBuilderGidBuilder builder()
+  static MonthDayNanoIntervalArrayBuilderGidBuilder builder() nothrow
   {
     return new MonthDayNanoIntervalArrayBuilderGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowMonthDayNanoIntervalArrayBuilder* _cretval;
     _cretval = garrow_month_day_nano_interval_array_builder_new();
@@ -118,7 +118,7 @@ final class MonthDayNanoIntervalArrayBuilderGidBuilder : MonthDayNanoIntervalArr
       Create object from builder.
       Returns: New object
   */
-  MonthDayNanoIntervalArrayBuilder build()
+  MonthDayNanoIntervalArrayBuilder build() nothrow
   {
     return new MonthDayNanoIntervalArrayBuilder(cast(void*)createGObject(MonthDayNanoIntervalArrayBuilder._getGType), Yes.Take);
   }

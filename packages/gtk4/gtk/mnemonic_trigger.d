@@ -19,26 +19,26 @@ class MnemonicTrigger : gtk.shortcut_trigger.ShortcutTrigger
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_mnemonic_trigger_get_type != &gidSymbolNotFound ? gtk_mnemonic_trigger_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MnemonicTrigger self()
+  override MnemonicTrigger self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class MnemonicTrigger : gtk.shortcut_trigger.ShortcutTrigger
       Get builder for [gtk.mnemonic_trigger.MnemonicTrigger]
       Returns: New builder object
   */
-  static MnemonicTriggerGidBuilder builder()
+  static MnemonicTriggerGidBuilder builder() nothrow
   {
     return new MnemonicTriggerGidBuilder;
   }
@@ -56,7 +56,7 @@ class MnemonicTrigger : gtk.shortcut_trigger.ShortcutTrigger
       Get `keyval` property.
       Returns: The key value for the trigger.
   */
-  @property uint keyval()
+  @property uint keyval() nothrow
   {
     return getKeyval();
   }
@@ -72,7 +72,7 @@ class MnemonicTrigger : gtk.shortcut_trigger.ShortcutTrigger
         keyval = The keyval to trigger for
       Returns: A new [gtk.shortcut_trigger.ShortcutTrigger]
   */
-  this(uint keyval)
+  this(uint keyval) nothrow
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_mnemonic_trigger_new(keyval);
@@ -83,7 +83,7 @@ class MnemonicTrigger : gtk.shortcut_trigger.ShortcutTrigger
       Gets the keyval that must be pressed to succeed triggering self.
       Returns: the keyval
   */
-  uint getKeyval()
+  uint getKeyval() nothrow
   {
     uint _retval;
     _retval = gtk_mnemonic_trigger_get_keyval(cast(GtkMnemonicTrigger*)this._cPtr);
@@ -101,7 +101,7 @@ class MnemonicTriggerGidBuilderImpl(T) : gtk.shortcut_trigger.ShortcutTriggerGid
         propval = The key value for the trigger.
       Returns: Builder instance for fluent chaining
   */
-  T keyval(uint propval)
+  T keyval(uint propval) nothrow
   {
     return setProperty("keyval", propval);
   }
@@ -114,7 +114,7 @@ final class MnemonicTriggerGidBuilder : MnemonicTriggerGidBuilderImpl!MnemonicTr
       Create object from builder.
       Returns: New object
   */
-  MnemonicTrigger build()
+  MnemonicTrigger build() nothrow
   {
     return new MnemonicTrigger(cast(void*)createGObject(MnemonicTrigger._getGType), Yes.Take);
   }

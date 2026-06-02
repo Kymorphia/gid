@@ -97,26 +97,26 @@ class DragSource : gtk.gesture_single.GestureSingle
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_drag_source_get_type != &gidSymbolNotFound ? gtk_drag_source_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DragSource self()
+  override DragSource self() nothrow
   {
     return this;
   }
@@ -125,7 +125,7 @@ class DragSource : gtk.gesture_single.GestureSingle
       Get builder for [gtk.drag_source.DragSource]
       Returns: New builder object
   */
-  static DragSourceGidBuilder builder()
+  static DragSourceGidBuilder builder() nothrow
   {
     return new DragSourceGidBuilder;
   }
@@ -137,7 +137,7 @@ class DragSource : gtk.gesture_single.GestureSingle
         Note that you must handle the [gtk.drag_source.DragSource.dragEnd] signal
         if the actions include [gdk.types.DragAction.Move].
   */
-  @property gdk.types.DragAction actions()
+  @property gdk.types.DragAction actions() nothrow
   {
     return getActions();
   }
@@ -150,7 +150,7 @@ class DragSource : gtk.gesture_single.GestureSingle
           Note that you must handle the [gtk.drag_source.DragSource.dragEnd] signal
           if the actions include [gdk.types.DragAction.Move].
   */
-  @property void actions(gdk.types.DragAction propval)
+  @property void actions(gdk.types.DragAction propval) nothrow
   {
     setActions(propval);
   }
@@ -159,7 +159,7 @@ class DragSource : gtk.gesture_single.GestureSingle
       Get `content` property.
       Returns: The data that is offered by drag operations from this source.
   */
-  @property gdk.content_provider.ContentProvider content()
+  @property gdk.content_provider.ContentProvider content() nothrow
   {
     return getContent();
   }
@@ -169,7 +169,7 @@ class DragSource : gtk.gesture_single.GestureSingle
       Params:
         propval = The data that is offered by drag operations from this source.
   */
-  @property void content(gdk.content_provider.ContentProvider propval)
+  @property void content(gdk.content_provider.ContentProvider propval) nothrow
   {
     setContent(propval);
   }
@@ -178,7 +178,7 @@ class DragSource : gtk.gesture_single.GestureSingle
       Creates a new [gtk.drag_source.DragSource] object.
       Returns: the new [gtk.drag_source.DragSource]
   */
-  this()
+  this() nothrow
   {
     GtkDragSource* _cretval;
     _cretval = gtk_drag_source_new();
@@ -188,7 +188,7 @@ class DragSource : gtk.gesture_single.GestureSingle
   /**
       Cancels a currently ongoing drag operation.
   */
-  void dragCancel()
+  void dragCancel() nothrow
   {
     gtk_drag_source_drag_cancel(cast(GtkDragSource*)this._cPtr);
   }
@@ -197,7 +197,7 @@ class DragSource : gtk.gesture_single.GestureSingle
       Gets the actions that are currently set on the [gtk.drag_source.DragSource].
       Returns: the actions set on source
   */
-  gdk.types.DragAction getActions()
+  gdk.types.DragAction getActions() nothrow
   {
     GdkDragAction _cretval;
     _cretval = gtk_drag_source_get_actions(cast(GtkDragSource*)this._cPtr);
@@ -209,7 +209,7 @@ class DragSource : gtk.gesture_single.GestureSingle
       Gets the current content provider of a [gtk.drag_source.DragSource].
       Returns: the [gdk.content_provider.ContentProvider] of source
   */
-  gdk.content_provider.ContentProvider getContent()
+  gdk.content_provider.ContentProvider getContent() nothrow
   {
     GdkContentProvider* _cretval;
     _cretval = gtk_drag_source_get_content(cast(GtkDragSource*)this._cPtr);
@@ -222,7 +222,7 @@ class DragSource : gtk.gesture_single.GestureSingle
       Returns: the [gdk.drag.Drag] of the current
           drag operation
   */
-  gdk.drag.Drag getDrag()
+  gdk.drag.Drag getDrag() nothrow
   {
     GdkDrag* _cretval;
     _cretval = gtk_drag_source_get_drag(cast(GtkDragSource*)this._cPtr);
@@ -244,7 +244,7 @@ class DragSource : gtk.gesture_single.GestureSingle
       Params:
         actions = the actions to offer
   */
-  void setActions(gdk.types.DragAction actions)
+  void setActions(gdk.types.DragAction actions) nothrow
   {
     gtk_drag_source_set_actions(cast(GtkDragSource*)this._cPtr, actions);
   }
@@ -264,7 +264,7 @@ class DragSource : gtk.gesture_single.GestureSingle
       Params:
         content = a [gdk.content_provider.ContentProvider]
   */
-  void setContent(gdk.content_provider.ContentProvider content = null)
+  void setContent(gdk.content_provider.ContentProvider content = null) nothrow
   {
     gtk_drag_source_set_content(cast(GtkDragSource*)this._cPtr, content ? cast(GdkContentProvider*)content._cPtr(No.Dup) : null);
   }
@@ -286,7 +286,7 @@ class DragSource : gtk.gesture_single.GestureSingle
         hotX = the hotspot X coordinate on the icon
         hotY = the hotspot Y coordinate on the icon
   */
-  void setIcon(gdk.paintable.Paintable paintable, int hotX, int hotY)
+  void setIcon(gdk.paintable.Paintable paintable, int hotX, int hotY) nothrow
   {
     gtk_drag_source_set_icon(cast(GtkDragSource*)this._cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable)._cPtr(No.Dup) : null, hotX, hotY);
   }
@@ -311,14 +311,14 @@ class DragSource : gtk.gesture_single.GestureSingle
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDragBegin(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragBegin(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag.Drag)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.drag_source.DragSource)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -330,7 +330,14 @@ class DragSource : gtk.gesture_single.GestureSingle
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.drag_source.DragSource.dragBegin");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -361,7 +368,7 @@ class DragSource : gtk.gesture_single.GestureSingle
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDragCancel(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragCancel(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag.Drag)))
@@ -369,11 +376,12 @@ class DragSource : gtk.gesture_single.GestureSingle
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.drag_source.DragSource)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -384,7 +392,14 @@ class DragSource : gtk.gesture_single.GestureSingle
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.drag_source.DragSource.dragCancel");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -417,7 +432,7 @@ class DragSource : gtk.gesture_single.GestureSingle
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDragEnd(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag.Drag)))
@@ -425,7 +440,7 @@ class DragSource : gtk.gesture_single.GestureSingle
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.drag_source.DragSource)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -440,7 +455,14 @@ class DragSource : gtk.gesture_single.GestureSingle
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.drag_source.DragSource.dragEnd");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -472,7 +494,7 @@ class DragSource : gtk.gesture_single.GestureSingle
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPrepare(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPrepare(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T : gdk.content_provider.ContentProvider)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -480,11 +502,12 @@ class DragSource : gtk.gesture_single.GestureSingle
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.drag_source.DragSource)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gdk.content_provider.ContentProvider _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -495,7 +518,14 @@ class DragSource : gtk.gesture_single.GestureSingle
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.drag_source.DragSource.prepare");
+      }
 
       setVal!(gdk.content_provider.ContentProvider)(_returnValue, _retval);
     }
@@ -518,7 +548,7 @@ class DragSourceGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBuilderIm
           if the actions include [gdk.types.DragAction.Move].
       Returns: Builder instance for fluent chaining
   */
-  T actions(gdk.types.DragAction propval)
+  T actions(gdk.types.DragAction propval) nothrow
   {
     return setProperty("actions", propval);
   }
@@ -529,7 +559,7 @@ class DragSourceGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBuilderIm
         propval = The data that is offered by drag operations from this source.
       Returns: Builder instance for fluent chaining
   */
-  T content(gdk.content_provider.ContentProvider propval)
+  T content(gdk.content_provider.ContentProvider propval) nothrow
   {
     return setProperty("content", propval);
   }
@@ -542,7 +572,7 @@ final class DragSourceGidBuilder : DragSourceGidBuilderImpl!DragSourceGidBuilder
       Create object from builder.
       Returns: New object
   */
-  DragSource build()
+  DragSource build() nothrow
   {
     return new DragSource(cast(void*)createGObject(DragSource._getGType), Yes.Take);
   }

@@ -63,26 +63,26 @@ class Frame : gtk.bin.Bin
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_frame_get_type != &gidSymbolNotFound ? gtk_frame_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Frame self()
+  override Frame self() nothrow
   {
     return this;
   }
@@ -91,67 +91,67 @@ class Frame : gtk.bin.Bin
       Get builder for [gtk.frame.Frame]
       Returns: New builder object
   */
-  static FrameGidBuilder builder()
+  static FrameGidBuilder builder() nothrow
   {
     return new FrameGidBuilder;
   }
 
   /** */
-  @property string label()
+  @property string label() nothrow
   {
     return getLabel();
   }
 
   /** */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     setLabel(propval);
   }
 
   /** */
-  @property gtk.widget.Widget labelWidget()
+  @property gtk.widget.Widget labelWidget() nothrow
   {
     return getLabelWidget();
   }
 
   /** */
-  @property void labelWidget(gtk.widget.Widget propval)
+  @property void labelWidget(gtk.widget.Widget propval) nothrow
   {
     setLabelWidget(propval);
   }
 
   /** */
-  @property float labelXalign()
+  @property float labelXalign() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(float)("label-xalign");
   }
 
   /** */
-  @property void labelXalign(float propval)
+  @property void labelXalign(float propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(float)("label-xalign", propval);
   }
 
   /** */
-  @property float labelYalign()
+  @property float labelYalign() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(float)("label-yalign");
   }
 
   /** */
-  @property void labelYalign(float propval)
+  @property void labelYalign(float propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(float)("label-yalign", propval);
   }
 
   /** */
-  @property gtk.types.ShadowType shadowType()
+  @property gtk.types.ShadowType shadowType() nothrow
   {
     return getShadowType();
   }
 
   /** */
-  @property void shadowType(gtk.types.ShadowType propval)
+  @property void shadowType(gtk.types.ShadowType propval) nothrow
   {
     setShadowType(propval);
   }
@@ -164,7 +164,7 @@ class Frame : gtk.bin.Bin
         label = the text to use as the label of the frame
       Returns: a new #GtkFrame widget
   */
-  this(string label = null)
+  this(string label = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -182,7 +182,7 @@ class Frame : gtk.bin.Bin
                       a #GtkLabel. This string is owned by GTK+ and
                       must not be modified or freed.
   */
-  string getLabel()
+  string getLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_frame_get_label(cast(GtkFrame*)this._cPtr);
@@ -200,7 +200,7 @@ class Frame : gtk.bin.Bin
         yalign = location to store X alignment of
               frame’s label, or null
   */
-  void getLabelAlign(out float xalign, out float yalign)
+  void getLabelAlign(out float xalign, out float yalign) nothrow
   {
     gtk_frame_get_label_align(cast(GtkFrame*)this._cPtr, cast(float*)&xalign, cast(float*)&yalign);
   }
@@ -211,7 +211,7 @@ class Frame : gtk.bin.Bin
       Returns: the label widget, or null if
         there is none.
   */
-  gtk.widget.Widget getLabelWidget()
+  gtk.widget.Widget getLabelWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_frame_get_label_widget(cast(GtkFrame*)this._cPtr);
@@ -224,7 +224,7 @@ class Frame : gtk.bin.Bin
       [gtk.frame.Frame.setShadowType].
       Returns: the current shadow type of the frame.
   */
-  gtk.types.ShadowType getShadowType()
+  gtk.types.ShadowType getShadowType() nothrow
   {
     GtkShadowType _cretval;
     _cretval = gtk_frame_get_shadow_type(cast(GtkFrame*)this._cPtr);
@@ -239,7 +239,7 @@ class Frame : gtk.bin.Bin
       Params:
         label = the text to use as the label of the frame
   */
-  void setLabel(string label = null)
+  void setLabel(string label = null) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_frame_set_label(cast(GtkFrame*)this._cPtr, _label);
@@ -258,7 +258,7 @@ class Frame : gtk.bin.Bin
             0.0 or 1.0 the gap in the frame won’t be painted because the label
             will be completely above or below the frame.
   */
-  void setLabelAlign(float xalign, float yalign)
+  void setLabelAlign(float xalign, float yalign) nothrow
   {
     gtk_frame_set_label_align(cast(GtkFrame*)this._cPtr, xalign, yalign);
   }
@@ -270,7 +270,7 @@ class Frame : gtk.bin.Bin
       Params:
         labelWidget = the new label widget
   */
-  void setLabelWidget(gtk.widget.Widget labelWidget = null)
+  void setLabelWidget(gtk.widget.Widget labelWidget = null) nothrow
   {
     gtk_frame_set_label_widget(cast(GtkFrame*)this._cPtr, labelWidget ? cast(GtkWidget*)labelWidget._cPtr(No.Dup) : null);
   }
@@ -284,7 +284,7 @@ class Frame : gtk.bin.Bin
       Params:
         type = the new #GtkShadowType
   */
-  void setShadowType(gtk.types.ShadowType type)
+  void setShadowType(gtk.types.ShadowType type) nothrow
   {
     gtk_frame_set_shadow_type(cast(GtkFrame*)this._cPtr, type);
   }
@@ -296,31 +296,31 @@ class FrameGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 
 
   /** */
-  T label(string propval)
+  T label(string propval) nothrow
   {
     return setProperty("label", propval);
   }
 
   /** */
-  T labelWidget(gtk.widget.Widget propval)
+  T labelWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("label-widget", propval);
   }
 
   /** */
-  T labelXalign(float propval)
+  T labelXalign(float propval) nothrow
   {
     return setProperty("label-xalign", propval);
   }
 
   /** */
-  T labelYalign(float propval)
+  T labelYalign(float propval) nothrow
   {
     return setProperty("label-yalign", propval);
   }
 
   /** */
-  T shadowType(gtk.types.ShadowType propval)
+  T shadowType(gtk.types.ShadowType propval) nothrow
   {
     return setProperty("shadow-type", propval);
   }
@@ -333,7 +333,7 @@ final class FrameGidBuilder : FrameGidBuilderImpl!FrameGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Frame build()
+  Frame build() nothrow
   {
     return new Frame(cast(void*)createGObject(Frame._getGType), No.Take);
   }

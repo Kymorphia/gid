@@ -29,26 +29,26 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_cookie_jar_get_type != &gidSymbolNotFound ? soup_cookie_jar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CookieJar self()
+  override CookieJar self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Get builder for [soup.cookie_jar.CookieJar]
       Returns: New builder object
   */
-  static CookieJarGidBuilder builder()
+  static CookieJarGidBuilder builder() nothrow
   {
     return new CookieJarGidBuilder;
   }
@@ -66,7 +66,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Get `acceptPolicy` property.
       Returns: The policy the jar should follow to accept or reject cookies.
   */
-  @property soup.types.CookieJarAcceptPolicy acceptPolicy()
+  @property soup.types.CookieJarAcceptPolicy acceptPolicy() nothrow
   {
     return getAcceptPolicy();
   }
@@ -76,7 +76,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Params:
         propval = The policy the jar should follow to accept or reject cookies.
   */
-  @property void acceptPolicy(soup.types.CookieJarAcceptPolicy propval)
+  @property void acceptPolicy(soup.types.CookieJarAcceptPolicy propval) nothrow
   {
     setAcceptPolicy(propval);
   }
@@ -85,7 +85,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Get `readOnly` property.
       Returns: Whether or not the cookie jar is read-only.
   */
-  @property bool readOnly()
+  @property bool readOnly() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("read-only");
   }
@@ -99,7 +99,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       use a subclass for that.
       Returns: a new #SoupCookieJar
   */
-  this()
+  this() nothrow
   {
     SoupCookieJar* _cretval;
     _cretval = soup_cookie_jar_new();
@@ -118,7 +118,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Params:
         cookie = a #SoupCookie
   */
-  void addCookie(soup.cookie.Cookie cookie)
+  void addCookie(soup.cookie.Cookie cookie) nothrow
   {
     soup_cookie_jar_add_cookie(cast(SoupCookieJar*)this._cPtr, cookie ? cast(SoupCookie*)cookie._cPtr(Yes.Dup) : null);
   }
@@ -143,7 +143,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
         uri = the URI setting the cookie
         firstParty = the URI for the main document
   */
-  void addCookieFull(soup.cookie.Cookie cookie, glib.uri.Uri uri = null, glib.uri.Uri firstParty = null)
+  void addCookieFull(soup.cookie.Cookie cookie, glib.uri.Uri uri = null, glib.uri.Uri firstParty = null) nothrow
   {
     soup_cookie_jar_add_cookie_full(cast(SoupCookieJar*)this._cPtr, cookie ? cast(SoupCookie*)cookie._cPtr(Yes.Dup) : null, uri ? cast(GUri*)uri._cPtr(No.Dup) : null, firstParty ? cast(GUri*)firstParty._cPtr(No.Dup) : null);
   }
@@ -167,7 +167,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
         firstParty = the URI for the main document
         cookie = a #SoupCookie
   */
-  void addCookieWithFirstParty(glib.uri.Uri firstParty, soup.cookie.Cookie cookie)
+  void addCookieWithFirstParty(glib.uri.Uri firstParty, soup.cookie.Cookie cookie) nothrow
   {
     soup_cookie_jar_add_cookie_with_first_party(cast(SoupCookieJar*)this._cPtr, firstParty ? cast(GUri*)firstParty._cPtr(No.Dup) : null, cookie ? cast(SoupCookie*)cookie._cPtr(Yes.Dup) : null);
   }
@@ -180,7 +180,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Returns: a #GSList
           with all the cookies in the jar.
   */
-  soup.cookie.Cookie[] allCookies()
+  soup.cookie.Cookie[] allCookies() nothrow
   {
     GSList* _cretval;
     _cretval = soup_cookie_jar_all_cookies(cast(SoupCookieJar*)this._cPtr);
@@ -196,7 +196,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Params:
         cookie = a #SoupCookie
   */
-  void deleteCookie(soup.cookie.Cookie cookie)
+  void deleteCookie(soup.cookie.Cookie cookie) nothrow
   {
     soup_cookie_jar_delete_cookie(cast(SoupCookieJar*)this._cPtr, cookie ? cast(SoupCookie*)cookie._cPtr(No.Dup) : null);
   }
@@ -205,7 +205,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Gets jar's [soup.types.CookieJarAcceptPolicy].
       Returns: the #SoupCookieJarAcceptPolicy set in the jar
   */
-  soup.types.CookieJarAcceptPolicy getAcceptPolicy()
+  soup.types.CookieJarAcceptPolicy getAcceptPolicy() nothrow
   {
     SoupCookieJarAcceptPolicy _cretval;
     _cretval = soup_cookie_jar_get_accept_policy(cast(SoupCookieJar*)this._cPtr);
@@ -232,7 +232,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Returns: a #GSList
           with the cookies in the jar that would be sent with a request to uri.
   */
-  soup.cookie.Cookie[] getCookieList(glib.uri.Uri uri, bool forHttp)
+  soup.cookie.Cookie[] getCookieList(glib.uri.Uri uri, bool forHttp) nothrow
   {
     GSList* _cretval;
     _cretval = soup_cookie_jar_get_cookie_list(cast(SoupCookieJar*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null, forHttp);
@@ -260,7 +260,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Returns: a #GSList
           with the cookies in the jar that would be sent with a request to uri.
   */
-  soup.cookie.Cookie[] getCookieListWithSameSiteInfo(glib.uri.Uri uri, glib.uri.Uri topLevel, glib.uri.Uri siteForCookies, bool forHttp, bool isSafeMethod, bool isTopLevelNavigation)
+  soup.cookie.Cookie[] getCookieListWithSameSiteInfo(glib.uri.Uri uri, glib.uri.Uri topLevel, glib.uri.Uri siteForCookies, bool forHttp, bool isSafeMethod, bool isTopLevelNavigation) nothrow
   {
     GSList* _cretval;
     _cretval = soup_cookie_jar_get_cookie_list_with_same_site_info(cast(SoupCookieJar*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null, topLevel ? cast(GUri*)topLevel._cPtr(No.Dup) : null, siteForCookies ? cast(GUri*)siteForCookies._cPtr(No.Dup) : null, forHttp, isSafeMethod, isTopLevelNavigation);
@@ -287,7 +287,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Returns: the cookies, in string form, or null if
           there are no cookies for uri.
   */
-  string getCookies(glib.uri.Uri uri, bool forHttp)
+  string getCookies(glib.uri.Uri uri, bool forHttp) nothrow
   {
     char* _cretval;
     _cretval = soup_cookie_jar_get_cookies(cast(SoupCookieJar*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null, forHttp);
@@ -299,7 +299,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Gets whether jar stores cookies persistenly.
       Returns: true if jar storage is persistent or false otherwise.
   */
-  bool isPersistent()
+  bool isPersistent() nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_cookie_jar_is_persistent(cast(SoupCookieJar*)this._cPtr);
@@ -312,7 +312,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Params:
         policy = a #SoupCookieJarAcceptPolicy
   */
-  void setAcceptPolicy(soup.types.CookieJarAcceptPolicy policy)
+  void setAcceptPolicy(soup.types.CookieJarAcceptPolicy policy) nothrow
   {
     soup_cookie_jar_set_accept_policy(cast(SoupCookieJar*)this._cPtr, policy);
   }
@@ -332,7 +332,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
         uri = the URI setting the cookie
         cookie = the stringified cookie to set
   */
-  void setCookie(glib.uri.Uri uri, string cookie)
+  void setCookie(glib.uri.Uri uri, string cookie) nothrow
   {
     const(char)* _cookie = cookie.toCString(No.Alloc);
     soup_cookie_jar_set_cookie(cast(SoupCookieJar*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null, _cookie);
@@ -350,7 +350,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
         firstParty = the URI for the main document
         cookie = the stringified cookie to set
   */
-  void setCookieWithFirstParty(glib.uri.Uri uri, glib.uri.Uri firstParty, string cookie)
+  void setCookieWithFirstParty(glib.uri.Uri uri, glib.uri.Uri firstParty, string cookie) nothrow
   {
     const(char)* _cookie = cookie.toCString(No.Alloc);
     soup_cookie_jar_set_cookie_with_first_party(cast(SoupCookieJar*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null, firstParty ? cast(GUri*)firstParty._cPtr(No.Dup) : null, _cookie);
@@ -383,7 +383,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == soup.cookie.Cookie)))
@@ -391,7 +391,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : soup.cookie_jar.CookieJar)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -406,7 +406,14 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.cookie_jar.CookieJar.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -426,7 +433,7 @@ class CookieJarGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, so
         propval = The policy the jar should follow to accept or reject cookies.
       Returns: Builder instance for fluent chaining
   */
-  T acceptPolicy(soup.types.CookieJarAcceptPolicy propval)
+  T acceptPolicy(soup.types.CookieJarAcceptPolicy propval) nothrow
   {
     return setProperty("accept-policy", propval);
   }
@@ -437,7 +444,7 @@ class CookieJarGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, so
         propval = Whether or not the cookie jar is read-only.
       Returns: Builder instance for fluent chaining
   */
-  T readOnly(bool propval)
+  T readOnly(bool propval) nothrow
   {
     return setProperty("read-only", propval);
   }
@@ -450,7 +457,7 @@ final class CookieJarGidBuilder : CookieJarGidBuilderImpl!CookieJarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  CookieJar build()
+  CookieJar build() nothrow
   {
     return new CookieJar(cast(void*)createGObject(CookieJar._getGType), Yes.Take);
   }

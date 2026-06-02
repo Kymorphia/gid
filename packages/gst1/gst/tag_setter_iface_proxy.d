@@ -8,12 +8,12 @@ import gst.tag_setter_mixin;
 /// Proxy object for [gst.tag_setter.TagSetter] interface when a GObject has no applicable D binding
 class TagSetterIfaceProxy : IfaceProxy, gst.tag_setter.TagSetter
 {
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
-  override TypeInfo_Interface getIface()
+  override TypeInfo_Interface getIface() nothrow
   {
     return typeid(gst.tag_setter.TagSetter);
   }

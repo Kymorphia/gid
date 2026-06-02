@@ -15,11 +15,8 @@ class FileAttributeInfo
   GFileAttributeInfo _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gio.file_attribute_info.FileAttributeInfo");
-
     _cInstance = *cast(GFileAttributeInfo*)ptr;
 
     if (take)
@@ -27,7 +24,7 @@ class FileAttributeInfo
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -36,7 +33,7 @@ class FileAttributeInfo
       Get `name` field.
       Returns: the name of the attribute.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GFileAttributeInfo*)this._cPtr).name);
   }
@@ -46,7 +43,7 @@ class FileAttributeInfo
       Params:
         propval = the name of the attribute.
   */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GFileAttributeInfo*)this._cPtr).name);
     dToC(propval, cast(void*)&(cast(GFileAttributeInfo*)this._cPtr).name);
@@ -56,7 +53,7 @@ class FileAttributeInfo
       Get `type` field.
       Returns: the #GFileAttributeType type of the attribute.
   */
-  @property gio.types.FileAttributeType type()
+  @property gio.types.FileAttributeType type() nothrow
   {
     return cast(gio.types.FileAttributeType)(cast(GFileAttributeInfo*)this._cPtr).type;
   }
@@ -66,7 +63,7 @@ class FileAttributeInfo
       Params:
         propval = the #GFileAttributeType type of the attribute.
   */
-  @property void type(gio.types.FileAttributeType propval)
+  @property void type(gio.types.FileAttributeType propval) nothrow
   {
     (cast(GFileAttributeInfo*)this._cPtr).type = cast(GFileAttributeType)propval;
   }
@@ -75,7 +72,7 @@ class FileAttributeInfo
       Get `flags` field.
       Returns: a set of #GFileAttributeInfoFlags.
   */
-  @property gio.types.FileAttributeInfoFlags flags()
+  @property gio.types.FileAttributeInfoFlags flags() nothrow
   {
     return cast(gio.types.FileAttributeInfoFlags)(cast(GFileAttributeInfo*)this._cPtr).flags;
   }
@@ -85,7 +82,7 @@ class FileAttributeInfo
       Params:
         propval = a set of #GFileAttributeInfoFlags.
   */
-  @property void flags(gio.types.FileAttributeInfoFlags propval)
+  @property void flags(gio.types.FileAttributeInfoFlags propval) nothrow
   {
     (cast(GFileAttributeInfo*)this._cPtr).flags = cast(GFileAttributeInfoFlags)propval;
   }

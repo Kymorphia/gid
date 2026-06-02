@@ -37,32 +37,32 @@ class Surface : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_surface_get_type != &gidSymbolNotFound ? cairo_gobject_surface_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Surface self()
+  override Surface self() nothrow
   {
     return this;
   }
@@ -76,7 +76,7 @@ class Surface : gobject.boxed.Boxed
       There is a convenience function for this that takes a #cairo_t,
       namely [cairo.context.Context.copyPage].
   */
-  void copyPage()
+  void copyPage() nothrow
   {
     cairo_surface_copy_page(cast(cairo_surface_t*)this._cPtr);
   }
@@ -108,7 +108,7 @@ class Surface : gobject.boxed.Boxed
         pointer to a "nil" surface if other is already in an error state
         or any other error occurs.
   */
-  cairo.surface.Surface createForRectangle(double x, double y, double width, double height)
+  cairo.surface.Surface createForRectangle(double x, double y, double width, double height) nothrow
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_surface_create_for_rectangle(cast(cairo_surface_t*)this._cPtr, x, y, width, height);
@@ -135,7 +135,7 @@ class Surface : gobject.boxed.Boxed
         pointer to a "nil" surface if other is already in an error state
         or any other error occurs.
   */
-  cairo.surface.Surface createObserver(cairo.types.SurfaceObserverMode mode)
+  cairo.surface.Surface createObserver(cairo.types.SurfaceObserverMode mode) nothrow
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_surface_create_observer(cast(cairo_surface_t*)this._cPtr, mode);
@@ -170,7 +170,7 @@ class Surface : gobject.boxed.Boxed
         pointer to a "nil" surface if other is already in an error state
         or any other error occurs.
   */
-  cairo.surface.Surface createSimilar(cairo.types.Content content, int width, int height)
+  cairo.surface.Surface createSimilar(cairo.types.Content content, int width, int height) nothrow
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_surface_create_similar(cast(cairo_surface_t*)this._cPtr, content, width, height);
@@ -202,7 +202,7 @@ class Surface : gobject.boxed.Boxed
         pointer to a "nil" surface if other is already in an error state
         or any other error occurs.
   */
-  cairo.surface.Surface createSimilarImage(cairo.types.Format format, int width, int height)
+  cairo.surface.Surface createSimilarImage(cairo.types.Format format, int width, int height) nothrow
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_surface_create_similar_image(cast(cairo_surface_t*)this._cPtr, format, width, height);
@@ -226,7 +226,7 @@ class Surface : gobject.boxed.Boxed
       it hasn't been called already, before freeing the resources
       associated with the surface.
   */
-  void finish()
+  void finish() nothrow
   {
     cairo_surface_finish(cast(cairo_surface_t*)this._cPtr);
   }
@@ -239,7 +239,7 @@ class Surface : gobject.boxed.Boxed
       memory outside of Cairo. If the surface doesn't support direct
       access, then this function does nothing.
   */
-  void flush()
+  void flush() nothrow
   {
     cairo_surface_flush(cast(cairo_surface_t*)this._cPtr);
   }
@@ -250,7 +250,7 @@ class Surface : gobject.boxed.Boxed
       #cairo_content_t.
       Returns: The content type of surface.
   */
-  cairo.types.Content getContent()
+  cairo.types.Content getContent() nothrow
   {
     cairo_content_t _cretval;
     _cretval = cairo_surface_get_content(cast(cairo_surface_t*)this._cPtr);
@@ -264,7 +264,7 @@ class Surface : gobject.boxed.Boxed
       Returns: The device for surface or null if the surface does
                       not have an associated device.
   */
-  cairo.device.Device getDevice()
+  cairo.device.Device getDevice() nothrow
   {
     cairo_device_t* _cretval;
     _cretval = cairo_surface_get_device(cast(cairo_surface_t*)this._cPtr);
@@ -280,7 +280,7 @@ class Surface : gobject.boxed.Boxed
         xOffset = the offset in the X direction, in device units
         yOffset = the offset in the Y direction, in device units
   */
-  void getDeviceOffset(out double xOffset, out double yOffset)
+  void getDeviceOffset(out double xOffset, out double yOffset) nothrow
   {
     cairo_surface_get_device_offset(cast(cairo_surface_t*)this._cPtr, cast(double*)&xOffset, cast(double*)&yOffset);
   }
@@ -293,7 +293,7 @@ class Surface : gobject.boxed.Boxed
         xScale = the scale in the X direction, in device units
         yScale = the scale in the Y direction, in device units
   */
-  void getDeviceScale(out double xScale, out double yScale)
+  void getDeviceScale(out double xScale, out double yScale) nothrow
   {
     cairo_surface_get_device_scale(cast(cairo_surface_t*)this._cPtr, cast(double*)&xScale, cast(double*)&yScale);
   }
@@ -307,7 +307,7 @@ class Surface : gobject.boxed.Boxed
         xPixelsPerInch = horizontal pixels per inch
         yPixelsPerInch = vertical pixels per inch
   */
-  void getFallbackResolution(out double xPixelsPerInch, out double yPixelsPerInch)
+  void getFallbackResolution(out double xPixelsPerInch, out double yPixelsPerInch) nothrow
   {
     cairo_surface_get_fallback_resolution(cast(cairo_surface_t*)this._cPtr, cast(double*)&xPixelsPerInch, cast(double*)&yPixelsPerInch);
   }
@@ -323,7 +323,7 @@ class Surface : gobject.boxed.Boxed
         options = a #cairo_font_options_t object into which to store
             the retrieved options. All existing values are overwritten
   */
-  void getFontOptions(cairo.font_options.FontOptions options)
+  void getFontOptions(cairo.font_options.FontOptions options) nothrow
   {
     cairo_surface_get_font_options(cast(cairo_surface_t*)this._cPtr, options ? cast(cairo_font_options_t*)options._cPtr(No.Dup) : null);
   }
@@ -337,7 +337,7 @@ class Surface : gobject.boxed.Boxed
         mimeType = the mime type of the image data
         data = the image data to attached to the surface
   */
-  void getMimeData(string mimeType, out ubyte[] data)
+  void getMimeData(string mimeType, out ubyte[] data) nothrow
   {
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
     gulong _length;
@@ -352,7 +352,7 @@ class Surface : gobject.boxed.Boxed
       a surface. See #cairo_surface_type_t for available types.
       Returns: The type of surface.
   */
-  cairo.types.SurfaceType getSurfaceType()
+  cairo.types.SurfaceType getSurfaceType() nothrow
   {
     cairo_surface_type_t _cretval;
     _cretval = cairo_surface_get_type(cast(cairo_surface_t*)this._cPtr);
@@ -370,7 +370,7 @@ class Surface : gobject.boxed.Boxed
           attached to
       Returns: the user data previously attached or null.
   */
-  void* getUserData(cairo.types.UserDataKey key)
+  void* getUserData(cairo.types.UserDataKey key) nothrow
   {
     auto _retval = cairo_surface_get_user_data(cast(cairo_surface_t*)this._cPtr, &key);
     return _retval;
@@ -391,7 +391,7 @@ class Surface : gobject.boxed.Boxed
       Returns: true if surface supports
                       [cairo.context.Context.showTextGlyphs], false otherwise
   */
-  cairo.types.Bool hasShowTextGlyphs()
+  cairo.types.Bool hasShowTextGlyphs() nothrow
   {
     cairo.types.Bool _retval;
     _retval = cairo_surface_has_show_text_glyphs(cast(cairo_surface_t*)this._cPtr);
@@ -422,7 +422,7 @@ class Surface : gobject.boxed.Boxed
         error status, it is guaranteed to be an image surface whose format
         is not [cairo.types.Format.Invalid].
   */
-  cairo.surface.Surface mapToImage(cairo.types.RectangleInt extents)
+  cairo.surface.Surface mapToImage(cairo.types.RectangleInt extents) nothrow
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_surface_map_to_image(cast(cairo_surface_t*)this._cPtr, &extents);
@@ -435,7 +435,7 @@ class Surface : gobject.boxed.Boxed
       than cairo, and that cairo should reread any cached areas. Note
       that you must call [cairo.surface.Surface.flush] before doing such drawing.
   */
-  void markDirty()
+  void markDirty() nothrow
   {
     cairo_surface_mark_dirty(cast(cairo_surface_t*)this._cPtr);
   }
@@ -455,7 +455,7 @@ class Surface : gobject.boxed.Boxed
         width = width of dirty rectangle
         height = height of dirty rectangle
   */
-  void markDirtyRectangle(int x, int y, int width, int height)
+  void markDirtyRectangle(int x, int y, int width, int height) nothrow
   {
     cairo_surface_mark_dirty_rectangle(cast(cairo_surface_t*)this._cPtr, x, y, width, height);
   }
@@ -464,7 +464,7 @@ class Surface : gobject.boxed.Boxed
       Returns the total observation time.
       Returns: the elapsed time, in nanoseconds
   */
-  double observerElapsed()
+  double observerElapsed() nothrow
   {
     double _retval;
     _retval = cairo_surface_observer_elapsed(cast(cairo_surface_t*)this._cPtr);
@@ -478,9 +478,9 @@ class Surface : gobject.boxed.Boxed
         writeFunc = callback for writing on a stream
       Returns: the status of the print operation
   */
-  cairo.types.Status observerPrint(cairo.types.WriteFunc writeFunc)
+  cairo.types.Status observerPrint(cairo.types.WriteFunc writeFunc) nothrow
   {
-    extern(C) cairo_status_t _writeFuncCallback(void* closure, const(ubyte)* data, uint length)
+    extern(C) cairo_status_t _writeFuncCallback(void* closure, const(ubyte)* data, uint length) nothrow
     {
       cairo.types.Status _dretval;
       auto _dlg = cast(cairo.types.WriteFunc*)closure;
@@ -488,7 +488,14 @@ class Surface : gobject.boxed.Boxed
       _data.length = length;
       _data[0 .. length] = data[0 .. length];
 
-      _dretval = (*_dlg)(_data);
+      try
+      {
+        _dretval = (*_dlg)(_data);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "cairo.types.WriteFunc");
+      }
       auto _retval = cast(cairo_status_t)_dretval;
 
       return _retval;
@@ -518,7 +525,7 @@ class Surface : gobject.boxed.Boxed
         xOffset = the offset in the X direction, in device units
         yOffset = the offset in the Y direction, in device units
   */
-  void setDeviceOffset(double xOffset, double yOffset)
+  void setDeviceOffset(double xOffset, double yOffset) nothrow
   {
     cairo_surface_set_device_offset(cast(cairo_surface_t*)this._cPtr, xOffset, yOffset);
   }
@@ -539,7 +546,7 @@ class Surface : gobject.boxed.Boxed
         xScale = a scale factor in the X direction
         yScale = a scale factor in the Y direction
   */
-  void setDeviceScale(double xScale, double yScale)
+  void setDeviceScale(double xScale, double yScale) nothrow
   {
     cairo_surface_set_device_scale(cast(cairo_surface_t*)this._cPtr, xScale, yScale);
   }
@@ -574,7 +581,7 @@ class Surface : gobject.boxed.Boxed
         xPixelsPerInch = horizontal setting for pixels per inch
         yPixelsPerInch = vertical setting for pixels per inch
   */
-  void setFallbackResolution(double xPixelsPerInch, double yPixelsPerInch)
+  void setFallbackResolution(double xPixelsPerInch, double yPixelsPerInch) nothrow
   {
     cairo_surface_set_fallback_resolution(cast(cairo_surface_t*)this._cPtr, xPixelsPerInch, yPixelsPerInch);
   }
@@ -620,14 +627,21 @@ class Surface : gobject.boxed.Boxed
       Returns: [cairo.types.Status.Success] or [cairo.types.Status.NoMemory] if a
         slot could not be allocated for the user data.
   */
-  cairo.types.Status setMimeData(string mimeType, ubyte[] data, cairo.types.DestroyFunc destroy)
+  cairo.types.Status setMimeData(string mimeType, ubyte[] data, cairo.types.DestroyFunc destroy) nothrow
   {
-    extern(C) void _destroyCallback(void* data)
+    extern(C) void _destroyCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(cairo.types.DestroyFunc*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "cairo.types.DestroyFunc");
+      }
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
     cairo_status_t _cretval;
@@ -650,7 +664,7 @@ class Surface : gobject.boxed.Boxed
       There is a convenience function for this that takes a #cairo_t,
       namely [cairo.context.Context.showPage].
   */
-  void showPage()
+  void showPage() nothrow
   {
     cairo_surface_show_page(cast(cairo_surface_t*)this._cPtr);
   }
@@ -663,7 +677,7 @@ class Surface : gobject.boxed.Boxed
         [cairo.types.Status.InvalidContent], [cairo.types.Status.InvalidFormat], or
         [cairo.types.Status.InvalidVisual].
   */
-  cairo.types.Status status()
+  cairo.types.Status status() nothrow
   {
     cairo_status_t _cretval;
     _cretval = cairo_surface_status(cast(cairo_surface_t*)this._cPtr);
@@ -679,7 +693,7 @@ class Surface : gobject.boxed.Boxed
       Returns: true if surface supports
                       mime_type, false otherwise
   */
-  cairo.types.Bool supportsMimeType(string mimeType)
+  cairo.types.Bool supportsMimeType(string mimeType) nothrow
   {
     cairo.types.Bool _retval;
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
@@ -699,7 +713,7 @@ class Surface : gobject.boxed.Boxed
       Params:
         image = the currently mapped image
   */
-  void unmapImage(cairo.surface.Surface image)
+  void unmapImage(cairo.surface.Surface image) nothrow
   {
     cairo_surface_unmap_image(cast(cairo_surface_t*)this._cPtr, image ? cast(cairo_surface_t*)image._cPtr(No.Dup) : null);
   }
@@ -719,7 +733,7 @@ class Surface : gobject.boxed.Boxed
         while attempting to write the file, or [cairo.types.Status.PngError] if libpng
         returned an error.
   */
-  cairo.types.Status writeToPng(string filename)
+  cairo.types.Status writeToPng(string filename) nothrow
   {
     cairo_status_t _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -740,9 +754,9 @@ class Surface : gobject.boxed.Boxed
         pixel contents, or [cairo.types.Status.PngError] if libpng
         returned an error.
   */
-  cairo.types.Status writeToPngStream(cairo.types.WriteFunc writeFunc)
+  cairo.types.Status writeToPngStream(cairo.types.WriteFunc writeFunc) nothrow
   {
-    extern(C) cairo_status_t _writeFuncCallback(void* closure, const(ubyte)* data, uint length)
+    extern(C) cairo_status_t _writeFuncCallback(void* closure, const(ubyte)* data, uint length) nothrow
     {
       cairo.types.Status _dretval;
       auto _dlg = cast(cairo.types.WriteFunc*)closure;
@@ -750,7 +764,14 @@ class Surface : gobject.boxed.Boxed
       _data.length = length;
       _data[0 .. length] = data[0 .. length];
 
-      _dretval = (*_dlg)(_data);
+      try
+      {
+        _dretval = (*_dlg)(_data);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "cairo.types.WriteFunc");
+      }
       auto _retval = cast(cairo_status_t)_dretval;
 
       return _retval;

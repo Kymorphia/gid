@@ -14,26 +14,26 @@ class DoubleDataType : arrow.floating_point_data_type.FloatingPointDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_double_data_type_get_type != &gidSymbolNotFound ? garrow_double_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DoubleDataType self()
+  override DoubleDataType self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class DoubleDataType : arrow.floating_point_data_type.FloatingPointDataType
       Get builder for [arrow.double_data_type.DoubleDataType]
       Returns: New builder object
   */
-  static DoubleDataTypeGidBuilder builder()
+  static DoubleDataTypeGidBuilder builder() nothrow
   {
     return new DoubleDataTypeGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowDoubleDataType* _cretval;
     _cretval = garrow_double_data_type_new();
@@ -68,7 +68,7 @@ final class DoubleDataTypeGidBuilder : DoubleDataTypeGidBuilderImpl!DoubleDataTy
       Create object from builder.
       Returns: New object
   */
-  DoubleDataType build()
+  DoubleDataType build() nothrow
   {
     return new DoubleDataType(cast(void*)createGObject(DoubleDataType._getGType), Yes.Take);
   }

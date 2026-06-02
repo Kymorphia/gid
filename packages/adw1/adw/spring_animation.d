@@ -49,26 +49,26 @@ class SpringAnimation : adw.animation.Animation
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_spring_animation_get_type != &gidSymbolNotFound ? adw_spring_animation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SpringAnimation self()
+  override SpringAnimation self() nothrow
   {
     return this;
   }
@@ -77,7 +77,7 @@ class SpringAnimation : adw.animation.Animation
       Get builder for [adw.spring_animation.SpringAnimation]
       Returns: New builder object
   */
-  static SpringAnimationGidBuilder builder()
+  static SpringAnimationGidBuilder builder() nothrow
   {
     return new SpringAnimationGidBuilder;
   }
@@ -92,7 +92,7 @@ class SpringAnimation : adw.animation.Animation
         It won't prevent overshooting [adw.spring_animation.SpringAnimation.valueFrom] if a
         relative negative [adw.spring_animation.SpringAnimation.initialVelocity] is set.
   */
-  @property bool clamp()
+  @property bool clamp() nothrow
   {
     return getClamp();
   }
@@ -108,7 +108,7 @@ class SpringAnimation : adw.animation.Animation
           It won't prevent overshooting [adw.spring_animation.SpringAnimation.valueFrom] if a
           relative negative [adw.spring_animation.SpringAnimation.initialVelocity] is set.
   */
-  @property void clamp(bool propval)
+  @property void clamp(bool propval) nothrow
   {
     setClamp(propval);
   }
@@ -128,7 +128,7 @@ class SpringAnimation : adw.animation.Animation
         
         The default value is 0.001.
   */
-  @property double epsilon()
+  @property double epsilon() nothrow
   {
     return getEpsilon();
   }
@@ -149,7 +149,7 @@ class SpringAnimation : adw.animation.Animation
           
           The default value is 0.001.
   */
-  @property void epsilon(double propval)
+  @property void epsilon(double propval) nothrow
   {
     setEpsilon(propval);
   }
@@ -160,7 +160,7 @@ class SpringAnimation : adw.animation.Animation
         
         Can be [adw.types.DURATION_INFINITE] if the spring damping is set to 0.
   */
-  @property uint estimatedDuration()
+  @property uint estimatedDuration() nothrow
   {
     return getEstimatedDuration();
   }
@@ -171,7 +171,7 @@ class SpringAnimation : adw.animation.Animation
         
         Initial velocity affects only the animation curve, but not its duration.
   */
-  @property double initialVelocity()
+  @property double initialVelocity() nothrow
   {
     return getInitialVelocity();
   }
@@ -183,7 +183,7 @@ class SpringAnimation : adw.animation.Animation
           
           Initial velocity affects only the animation curve, but not its duration.
   */
-  @property void initialVelocity(double propval)
+  @property void initialVelocity(double propval) nothrow
   {
     setInitialVelocity(propval);
   }
@@ -192,7 +192,7 @@ class SpringAnimation : adw.animation.Animation
       Get `springParams` property.
       Returns: Physical parameters describing the spring.
   */
-  @property adw.spring_params.SpringParams springParams()
+  @property adw.spring_params.SpringParams springParams() nothrow
   {
     return getSpringParams();
   }
@@ -202,7 +202,7 @@ class SpringAnimation : adw.animation.Animation
       Params:
         propval = Physical parameters describing the spring.
   */
-  @property void springParams(adw.spring_params.SpringParams propval)
+  @property void springParams(adw.spring_params.SpringParams propval) nothrow
   {
     setSpringParams(propval);
   }
@@ -214,7 +214,7 @@ class SpringAnimation : adw.animation.Animation
         The animation will start at this value and end at
         [adw.spring_animation.SpringAnimation.valueTo].
   */
-  @property double valueFrom()
+  @property double valueFrom() nothrow
   {
     return getValueFrom();
   }
@@ -227,7 +227,7 @@ class SpringAnimation : adw.animation.Animation
           The animation will start at this value and end at
           [adw.spring_animation.SpringAnimation.valueTo].
   */
-  @property void valueFrom(double propval)
+  @property void valueFrom(double propval) nothrow
   {
     setValueFrom(propval);
   }
@@ -239,7 +239,7 @@ class SpringAnimation : adw.animation.Animation
         The animation will start at [adw.spring_animation.SpringAnimation.valueFrom] and end
         at this value.
   */
-  @property double valueTo()
+  @property double valueTo() nothrow
   {
     return getValueTo();
   }
@@ -252,7 +252,7 @@ class SpringAnimation : adw.animation.Animation
           The animation will start at [adw.spring_animation.SpringAnimation.valueFrom] and end
           at this value.
   */
-  @property void valueTo(double propval)
+  @property void valueTo(double propval) nothrow
   {
     setValueTo(propval);
   }
@@ -261,7 +261,7 @@ class SpringAnimation : adw.animation.Animation
       Get `velocity` property.
       Returns: Current velocity of the animation.
   */
-  @property double velocity()
+  @property double velocity() nothrow
   {
     return getVelocity();
   }
@@ -280,7 +280,7 @@ class SpringAnimation : adw.animation.Animation
         target = a target value to animate
       Returns: the newly created animation
   */
-  this(gtk.widget.Widget widget, double from, double to, adw.spring_params.SpringParams springParams, adw.animation_target.AnimationTarget target)
+  this(gtk.widget.Widget widget, double from, double to, adw.spring_params.SpringParams springParams, adw.animation_target.AnimationTarget target) nothrow
   {
     AdwAnimation* _cretval;
     _cretval = adw_spring_animation_new(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, from, to, springParams ? cast(AdwSpringParams*)springParams._cPtr(Yes.Dup) : null, target ? cast(AdwAnimationTarget*)target._cPtr(Yes.Dup) : null);
@@ -299,7 +299,7 @@ class SpringAnimation : adw.animation.Animation
         time = elapsed time, in milliseconds
       Returns: the value at time
   */
-  double calculateValue(uint time)
+  double calculateValue(uint time) nothrow
   {
     double _retval;
     _retval = adw_spring_animation_calculate_value(cast(AdwSpringAnimation*)this._cPtr, time);
@@ -318,7 +318,7 @@ class SpringAnimation : adw.animation.Animation
         time = elapsed time, in milliseconds
       Returns: the velocity at time
   */
-  double calculateVelocity(uint time)
+  double calculateVelocity(uint time) nothrow
   {
     double _retval;
     _retval = adw_spring_animation_calculate_velocity(cast(AdwSpringAnimation*)this._cPtr, time);
@@ -329,7 +329,7 @@ class SpringAnimation : adw.animation.Animation
       Gets whether self should be clamped.
       Returns: whether self is clamped
   */
-  bool getClamp()
+  bool getClamp() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_spring_animation_get_clamp(cast(AdwSpringAnimation*)this._cPtr);
@@ -340,7 +340,7 @@ class SpringAnimation : adw.animation.Animation
       Gets the precision of the spring.
       Returns: the epsilon value
   */
-  double getEpsilon()
+  double getEpsilon() nothrow
   {
     double _retval;
     _retval = adw_spring_animation_get_epsilon(cast(AdwSpringAnimation*)this._cPtr);
@@ -353,7 +353,7 @@ class SpringAnimation : adw.animation.Animation
       Can be [adw.types.DURATION_INFINITE] if the spring damping is set to 0.
       Returns: the estimated duration
   */
-  uint getEstimatedDuration()
+  uint getEstimatedDuration() nothrow
   {
     uint _retval;
     _retval = adw_spring_animation_get_estimated_duration(cast(AdwSpringAnimation*)this._cPtr);
@@ -364,7 +364,7 @@ class SpringAnimation : adw.animation.Animation
       Gets the initial velocity of self.
       Returns: the initial velocity
   */
-  double getInitialVelocity()
+  double getInitialVelocity() nothrow
   {
     double _retval;
     _retval = adw_spring_animation_get_initial_velocity(cast(AdwSpringAnimation*)this._cPtr);
@@ -375,7 +375,7 @@ class SpringAnimation : adw.animation.Animation
       Gets the physical parameters of the spring of self.
       Returns: the spring parameters
   */
-  adw.spring_params.SpringParams getSpringParams()
+  adw.spring_params.SpringParams getSpringParams() nothrow
   {
     AdwSpringParams* _cretval;
     _cretval = adw_spring_animation_get_spring_params(cast(AdwSpringAnimation*)this._cPtr);
@@ -387,7 +387,7 @@ class SpringAnimation : adw.animation.Animation
       Gets the value self will animate from.
       Returns: the value to animate from
   */
-  double getValueFrom()
+  double getValueFrom() nothrow
   {
     double _retval;
     _retval = adw_spring_animation_get_value_from(cast(AdwSpringAnimation*)this._cPtr);
@@ -398,7 +398,7 @@ class SpringAnimation : adw.animation.Animation
       Gets the value self will animate to.
       Returns: the value to animate to
   */
-  double getValueTo()
+  double getValueTo() nothrow
   {
     double _retval;
     _retval = adw_spring_animation_get_value_to(cast(AdwSpringAnimation*)this._cPtr);
@@ -409,7 +409,7 @@ class SpringAnimation : adw.animation.Animation
       Gets the current velocity of self.
       Returns: the current velocity
   */
-  double getVelocity()
+  double getVelocity() nothrow
   {
     double _retval;
     _retval = adw_spring_animation_get_velocity(cast(AdwSpringAnimation*)this._cPtr);
@@ -428,7 +428,7 @@ class SpringAnimation : adw.animation.Animation
       Params:
         clamp = the new value
   */
-  void setClamp(bool clamp)
+  void setClamp(bool clamp) nothrow
   {
     adw_spring_animation_set_clamp(cast(AdwSpringAnimation*)this._cPtr, clamp);
   }
@@ -450,7 +450,7 @@ class SpringAnimation : adw.animation.Animation
       Params:
         epsilon = the new value
   */
-  void setEpsilon(double epsilon)
+  void setEpsilon(double epsilon) nothrow
   {
     adw_spring_animation_set_epsilon(cast(AdwSpringAnimation*)this._cPtr, epsilon);
   }
@@ -463,7 +463,7 @@ class SpringAnimation : adw.animation.Animation
       Params:
         velocity = the initial velocity
   */
-  void setInitialVelocity(double velocity)
+  void setInitialVelocity(double velocity) nothrow
   {
     adw_spring_animation_set_initial_velocity(cast(AdwSpringAnimation*)this._cPtr, velocity);
   }
@@ -474,7 +474,7 @@ class SpringAnimation : adw.animation.Animation
       Params:
         springParams = the new spring parameters
   */
-  void setSpringParams(adw.spring_params.SpringParams springParams)
+  void setSpringParams(adw.spring_params.SpringParams springParams) nothrow
   {
     adw_spring_animation_set_spring_params(cast(AdwSpringAnimation*)this._cPtr, springParams ? cast(AdwSpringParams*)springParams._cPtr(No.Dup) : null);
   }
@@ -488,7 +488,7 @@ class SpringAnimation : adw.animation.Animation
       Params:
         value = the value to animate from
   */
-  void setValueFrom(double value)
+  void setValueFrom(double value) nothrow
   {
     adw_spring_animation_set_value_from(cast(AdwSpringAnimation*)this._cPtr, value);
   }
@@ -502,7 +502,7 @@ class SpringAnimation : adw.animation.Animation
       Params:
         value = the value to animate to
   */
-  void setValueTo(double value)
+  void setValueTo(double value) nothrow
   {
     adw_spring_animation_set_value_to(cast(AdwSpringAnimation*)this._cPtr, value);
   }
@@ -524,7 +524,7 @@ class SpringAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
           relative negative [adw.spring_animation.SpringAnimation.initialVelocity] is set.
       Returns: Builder instance for fluent chaining
   */
-  T clamp(bool propval)
+  T clamp(bool propval) nothrow
   {
     return setProperty("clamp", propval);
   }
@@ -546,7 +546,7 @@ class SpringAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
           The default value is 0.001.
       Returns: Builder instance for fluent chaining
   */
-  T epsilon(double propval)
+  T epsilon(double propval) nothrow
   {
     return setProperty("epsilon", propval);
   }
@@ -559,7 +559,7 @@ class SpringAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
           Initial velocity affects only the animation curve, but not its duration.
       Returns: Builder instance for fluent chaining
   */
-  T initialVelocity(double propval)
+  T initialVelocity(double propval) nothrow
   {
     return setProperty("initial-velocity", propval);
   }
@@ -570,7 +570,7 @@ class SpringAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
         propval = Physical parameters describing the spring.
       Returns: Builder instance for fluent chaining
   */
-  T springParams(adw.spring_params.SpringParams propval)
+  T springParams(adw.spring_params.SpringParams propval) nothrow
   {
     return setProperty("spring-params", propval);
   }
@@ -584,7 +584,7 @@ class SpringAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
           [adw.spring_animation.SpringAnimation.valueTo].
       Returns: Builder instance for fluent chaining
   */
-  T valueFrom(double propval)
+  T valueFrom(double propval) nothrow
   {
     return setProperty("value-from", propval);
   }
@@ -598,7 +598,7 @@ class SpringAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
           at this value.
       Returns: Builder instance for fluent chaining
   */
-  T valueTo(double propval)
+  T valueTo(double propval) nothrow
   {
     return setProperty("value-to", propval);
   }
@@ -611,7 +611,7 @@ final class SpringAnimationGidBuilder : SpringAnimationGidBuilderImpl!SpringAnim
       Create object from builder.
       Returns: New object
   */
-  SpringAnimation build()
+  SpringAnimation build() nothrow
   {
     return new SpringAnimation(cast(void*)createGObject(SpringAnimation._getGType), No.Take);
   }

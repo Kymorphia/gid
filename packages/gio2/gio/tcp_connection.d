@@ -17,26 +17,26 @@ class TcpConnection : gio.socket_connection.SocketConnection
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_tcp_connection_get_type != &gidSymbolNotFound ? g_tcp_connection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TcpConnection self()
+  override TcpConnection self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class TcpConnection : gio.socket_connection.SocketConnection
       Get builder for [gio.tcp_connection.TcpConnection]
       Returns: New builder object
   */
-  static TcpConnectionGidBuilder builder()
+  static TcpConnectionGidBuilder builder() nothrow
   {
     return new TcpConnectionGidBuilder;
   }
@@ -54,7 +54,7 @@ class TcpConnection : gio.socket_connection.SocketConnection
       Get `gracefulDisconnect` property.
       Returns: Whether [gio.iostream.IOStream.close] does a graceful disconnect.
   */
-  @property bool gracefulDisconnect()
+  @property bool gracefulDisconnect() nothrow
   {
     return getGracefulDisconnect();
   }
@@ -64,7 +64,7 @@ class TcpConnection : gio.socket_connection.SocketConnection
       Params:
         propval = Whether [gio.iostream.IOStream.close] does a graceful disconnect.
   */
-  @property void gracefulDisconnect(bool propval)
+  @property void gracefulDisconnect(bool propval) nothrow
   {
     setGracefulDisconnect(propval);
   }
@@ -74,7 +74,7 @@ class TcpConnection : gio.socket_connection.SocketConnection
       [gio.tcp_connection.TcpConnection.setGracefulDisconnect].
       Returns: true if graceful disconnect is used on close, false otherwise
   */
-  bool getGracefulDisconnect()
+  bool getGracefulDisconnect() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_tcp_connection_get_graceful_disconnect(cast(GTcpConnection*)this._cPtr);
@@ -95,7 +95,7 @@ class TcpConnection : gio.socket_connection.SocketConnection
       Params:
         gracefulDisconnect = Whether to do graceful disconnects or not
   */
-  void setGracefulDisconnect(bool gracefulDisconnect)
+  void setGracefulDisconnect(bool gracefulDisconnect) nothrow
   {
     g_tcp_connection_set_graceful_disconnect(cast(GTcpConnection*)this._cPtr, gracefulDisconnect);
   }
@@ -111,7 +111,7 @@ class TcpConnectionGidBuilderImpl(T) : gio.socket_connection.SocketConnectionGid
         propval = Whether [gio.iostream.IOStream.close] does a graceful disconnect.
       Returns: Builder instance for fluent chaining
   */
-  T gracefulDisconnect(bool propval)
+  T gracefulDisconnect(bool propval) nothrow
   {
     return setProperty("graceful-disconnect", propval);
   }
@@ -124,7 +124,7 @@ final class TcpConnectionGidBuilder : TcpConnectionGidBuilderImpl!TcpConnectionG
       Create object from builder.
       Returns: New object
   */
-  TcpConnection build()
+  TcpConnection build() nothrow
   {
     return new TcpConnection(cast(void*)createGObject(TcpConnection._getGType), No.Take);
   }

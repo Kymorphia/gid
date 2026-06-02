@@ -16,26 +16,26 @@ class MetadataWriter : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_metadata_writer_get_type != &gidSymbolNotFound ? gaflight_metadata_writer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MetadataWriter self()
+  override MetadataWriter self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class MetadataWriter : gobject.object.ObjectWrap
       Get builder for [arrowflight.metadata_writer.MetadataWriter]
       Returns: New builder object
   */
-  static MetadataWriterGidBuilder builder()
+  static MetadataWriterGidBuilder builder() nothrow
   {
     return new MetadataWriterGidBuilder;
   }
@@ -73,7 +73,7 @@ class MetadataWriterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 {
 
   /** */
-  T writer(void* propval)
+  T writer(void* propval) nothrow
   {
     return setProperty("writer", propval);
   }
@@ -86,7 +86,7 @@ final class MetadataWriterGidBuilder : MetadataWriterGidBuilderImpl!MetadataWrit
       Create object from builder.
       Returns: New object
   */
-  MetadataWriter build()
+  MetadataWriter build() nothrow
   {
     return new MetadataWriter(cast(void*)createGObject(MetadataWriter._getGType), No.Take);
   }

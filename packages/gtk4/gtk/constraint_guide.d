@@ -29,26 +29,26 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_constraint_guide_get_type != &gidSymbolNotFound ? gtk_constraint_guide_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ConstraintGuide self()
+  override ConstraintGuide self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Get builder for [gtk.constraint_guide.ConstraintGuide]
       Returns: New builder object
   */
-  static ConstraintGuideGidBuilder builder()
+  static ConstraintGuideGidBuilder builder() nothrow
   {
     return new ConstraintGuideGidBuilder;
   }
@@ -66,7 +66,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Get `maxHeight` property.
       Returns: The maximum height of the guide.
   */
-  @property int maxHeight()
+  @property int maxHeight() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("max-height");
   }
@@ -76,7 +76,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Params:
         propval = The maximum height of the guide.
   */
-  @property void maxHeight(int propval)
+  @property void maxHeight(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("max-height", propval);
   }
@@ -85,7 +85,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Get `maxWidth` property.
       Returns: The maximum width of the guide.
   */
-  @property int maxWidth()
+  @property int maxWidth() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("max-width");
   }
@@ -95,7 +95,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Params:
         propval = The maximum width of the guide.
   */
-  @property void maxWidth(int propval)
+  @property void maxWidth(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("max-width", propval);
   }
@@ -104,7 +104,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Get `minHeight` property.
       Returns: The minimum height of the guide.
   */
-  @property int minHeight()
+  @property int minHeight() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("min-height");
   }
@@ -114,7 +114,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Params:
         propval = The minimum height of the guide.
   */
-  @property void minHeight(int propval)
+  @property void minHeight(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("min-height", propval);
   }
@@ -123,7 +123,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Get `minWidth` property.
       Returns: The minimum width of the guide.
   */
-  @property int minWidth()
+  @property int minWidth() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("min-width");
   }
@@ -133,7 +133,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Params:
         propval = The minimum width of the guide.
   */
-  @property void minWidth(int propval)
+  @property void minWidth(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("min-width", propval);
   }
@@ -142,7 +142,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Get `name` property.
       Returns: A name that identifies the [gtk.constraint_guide.ConstraintGuide], for debugging.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return getName();
   }
@@ -152,7 +152,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Params:
         propval = A name that identifies the [gtk.constraint_guide.ConstraintGuide], for debugging.
   */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     setName(propval);
   }
@@ -161,7 +161,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Get `natHeight` property.
       Returns: The preferred, or natural, height of the guide.
   */
-  @property int natHeight()
+  @property int natHeight() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("nat-height");
   }
@@ -171,7 +171,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Params:
         propval = The preferred, or natural, height of the guide.
   */
-  @property void natHeight(int propval)
+  @property void natHeight(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("nat-height", propval);
   }
@@ -180,7 +180,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Get `natWidth` property.
       Returns: The preferred, or natural, width of the guide.
   */
-  @property int natWidth()
+  @property int natWidth() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("nat-width");
   }
@@ -190,7 +190,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Params:
         propval = The preferred, or natural, width of the guide.
   */
-  @property void natWidth(int propval)
+  @property void natWidth(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("nat-width", propval);
   }
@@ -200,7 +200,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Returns: The [gtk.types.ConstraintStrength] to be used for the constraint on
         the natural size of the guide.
   */
-  @property gtk.types.ConstraintStrength strength()
+  @property gtk.types.ConstraintStrength strength() nothrow
   {
     return getStrength();
   }
@@ -211,7 +211,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
         propval = The [gtk.types.ConstraintStrength] to be used for the constraint on
           the natural size of the guide.
   */
-  @property void strength(gtk.types.ConstraintStrength propval)
+  @property void strength(gtk.types.ConstraintStrength propval) nothrow
   {
     setStrength(propval);
   }
@@ -222,7 +222,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Creates a new [gtk.constraint_guide.ConstraintGuide] object.
       Returns: a new [gtk.constraint_guide.ConstraintGuide] object.
   */
-  this()
+  this() nothrow
   {
     GtkConstraintGuide* _cretval;
     _cretval = gtk_constraint_guide_new();
@@ -236,7 +236,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
         width = return location for the maximum width
         height = return location for the maximum height
   */
-  void getMaxSize(out int width, out int height)
+  void getMaxSize(out int width, out int height) nothrow
   {
     gtk_constraint_guide_get_max_size(cast(GtkConstraintGuide*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
@@ -248,7 +248,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
         width = return location for the minimum width
         height = return location for the minimum height
   */
-  void getMinSize(out int width, out int height)
+  void getMinSize(out int width, out int height) nothrow
   {
     gtk_constraint_guide_get_min_size(cast(GtkConstraintGuide*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
@@ -257,7 +257,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Retrieves the name set using [gtk.constraint_guide.ConstraintGuide.setName].
       Returns: the name of the guide
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_constraint_guide_get_name(cast(GtkConstraintGuide*)this._cPtr);
@@ -272,7 +272,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
         width = return location for the natural width
         height = return location for the natural height
   */
-  void getNatSize(out int width, out int height)
+  void getNatSize(out int width, out int height) nothrow
   {
     gtk_constraint_guide_get_nat_size(cast(GtkConstraintGuide*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
@@ -281,7 +281,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Retrieves the strength set using [gtk.constraint_guide.ConstraintGuide.setStrength].
       Returns: the strength of the constraint on the natural size
   */
-  gtk.types.ConstraintStrength getStrength()
+  gtk.types.ConstraintStrength getStrength() nothrow
   {
     GtkConstraintStrength _cretval;
     _cretval = gtk_constraint_guide_get_strength(cast(GtkConstraintGuide*)this._cPtr);
@@ -299,7 +299,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
         width = the new maximum width, or -1 to not change it
         height = the new maximum height, or -1 to not change it
   */
-  void setMaxSize(int width, int height)
+  void setMaxSize(int width, int height) nothrow
   {
     gtk_constraint_guide_set_max_size(cast(GtkConstraintGuide*)this._cPtr, width, height);
   }
@@ -314,7 +314,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
         width = the new minimum width, or -1 to not change it
         height = the new minimum height, or -1 to not change it
   */
-  void setMinSize(int width, int height)
+  void setMinSize(int width, int height) nothrow
   {
     gtk_constraint_guide_set_min_size(cast(GtkConstraintGuide*)this._cPtr, width, height);
   }
@@ -327,7 +327,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Params:
         name = a name for the guide
   */
-  void setName(string name = null)
+  void setName(string name = null) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_constraint_guide_set_name(cast(GtkConstraintGuide*)this._cPtr, _name);
@@ -343,7 +343,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
         width = the new natural width, or -1 to not change it
         height = the new natural height, or -1 to not change it
   */
-  void setNatSize(int width, int height)
+  void setNatSize(int width, int height) nothrow
   {
     gtk_constraint_guide_set_nat_size(cast(GtkConstraintGuide*)this._cPtr, width, height);
   }
@@ -355,7 +355,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
       Params:
         strength = the strength of the constraint
   */
-  void setStrength(gtk.types.ConstraintStrength strength)
+  void setStrength(gtk.types.ConstraintStrength strength) nothrow
   {
     gtk_constraint_guide_set_strength(cast(GtkConstraintGuide*)this._cPtr, strength);
   }
@@ -373,7 +373,7 @@ class ConstraintGuideGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The maximum height of the guide.
       Returns: Builder instance for fluent chaining
   */
-  T maxHeight(int propval)
+  T maxHeight(int propval) nothrow
   {
     return setProperty("max-height", propval);
   }
@@ -384,7 +384,7 @@ class ConstraintGuideGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The maximum width of the guide.
       Returns: Builder instance for fluent chaining
   */
-  T maxWidth(int propval)
+  T maxWidth(int propval) nothrow
   {
     return setProperty("max-width", propval);
   }
@@ -395,7 +395,7 @@ class ConstraintGuideGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The minimum height of the guide.
       Returns: Builder instance for fluent chaining
   */
-  T minHeight(int propval)
+  T minHeight(int propval) nothrow
   {
     return setProperty("min-height", propval);
   }
@@ -406,7 +406,7 @@ class ConstraintGuideGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The minimum width of the guide.
       Returns: Builder instance for fluent chaining
   */
-  T minWidth(int propval)
+  T minWidth(int propval) nothrow
   {
     return setProperty("min-width", propval);
   }
@@ -417,7 +417,7 @@ class ConstraintGuideGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = A name that identifies the [gtk.constraint_guide.ConstraintGuide], for debugging.
       Returns: Builder instance for fluent chaining
   */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -428,7 +428,7 @@ class ConstraintGuideGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The preferred, or natural, height of the guide.
       Returns: Builder instance for fluent chaining
   */
-  T natHeight(int propval)
+  T natHeight(int propval) nothrow
   {
     return setProperty("nat-height", propval);
   }
@@ -439,7 +439,7 @@ class ConstraintGuideGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The preferred, or natural, width of the guide.
       Returns: Builder instance for fluent chaining
   */
-  T natWidth(int propval)
+  T natWidth(int propval) nothrow
   {
     return setProperty("nat-width", propval);
   }
@@ -451,7 +451,7 @@ class ConstraintGuideGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           the natural size of the guide.
       Returns: Builder instance for fluent chaining
   */
-  T strength(gtk.types.ConstraintStrength propval)
+  T strength(gtk.types.ConstraintStrength propval) nothrow
   {
     return setProperty("strength", propval);
   }
@@ -464,7 +464,7 @@ final class ConstraintGuideGidBuilder : ConstraintGuideGidBuilderImpl!Constraint
       Create object from builder.
       Returns: New object
   */
-  ConstraintGuide build()
+  ConstraintGuide build() nothrow
   {
     return new ConstraintGuide(cast(void*)createGObject(ConstraintGuide._getGType), Yes.Take);
   }

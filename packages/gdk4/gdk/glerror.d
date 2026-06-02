@@ -14,7 +14,7 @@ struct GLError
   alias Enum = gdk.types.GLError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gdk_gl_error_quark();
@@ -24,12 +24,12 @@ struct GLError
 
 class GLException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gdk.glerror.GLError.quark, cast(int)code, msg);
   }

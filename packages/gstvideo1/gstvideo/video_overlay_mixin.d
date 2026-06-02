@@ -279,7 +279,7 @@ template VideoOverlayT()
       Tell an overlay that it has been exposed. This will redraw the current frame
       in the drawable even if the pipeline is PAUSED.
   */
-  override void expose()
+  override void expose() nothrow
   {
     gst_video_overlay_expose(cast(GstVideoOverlay*)this._cPtr);
   }
@@ -292,7 +292,7 @@ template VideoOverlayT()
       Params:
         handle = a platform-specific handle referencing the window
   */
-  override void gotWindowHandle(size_t handle)
+  override void gotWindowHandle(size_t handle) nothrow
   {
     gst_video_overlay_got_window_handle(cast(GstVideoOverlay*)this._cPtr, handle);
   }
@@ -307,7 +307,7 @@ template VideoOverlayT()
       Params:
         handleEvents = a #gboolean indicating if events should be handled or not.
   */
-  override void handleEvents(bool handleEvents)
+  override void handleEvents(bool handleEvents) nothrow
   {
     gst_video_overlay_handle_events(cast(GstVideoOverlay*)this._cPtr, handleEvents);
   }
@@ -320,7 +320,7 @@ template VideoOverlayT()
       
       This function should only be used by video overlay plugin developers.
   */
-  override void prepareWindowHandle()
+  override void prepareWindowHandle() nothrow
   {
     gst_video_overlay_prepare_window_handle(cast(GstVideoOverlay*)this._cPtr);
   }
@@ -344,7 +344,7 @@ template VideoOverlayT()
         height = the height of the render area inside the window
       Returns: false if not supported by the sink.
   */
-  override bool setRenderRectangle(int x, int y, int width, int height)
+  override bool setRenderRectangle(int x, int y, int width, int height) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_overlay_set_render_rectangle(cast(GstVideoOverlay*)this._cPtr, x, y, width, height);
@@ -360,7 +360,7 @@ template VideoOverlayT()
       Params:
         handle = a handle referencing the window.
   */
-  override void setWindowHandle(size_t handle)
+  override void setWindowHandle(size_t handle) nothrow
   {
     gst_video_overlay_set_window_handle(cast(GstVideoOverlay*)this._cPtr, handle);
   }

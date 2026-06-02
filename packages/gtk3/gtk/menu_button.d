@@ -112,26 +112,26 @@ class MenuButton : gtk.toggle_button.ToggleButton
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_menu_button_get_type != &gidSymbolNotFound ? gtk_menu_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MenuButton self()
+  override MenuButton self() nothrow
   {
     return this;
   }
@@ -140,7 +140,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       Get builder for [gtk.menu_button.MenuButton]
       Returns: New builder object
   */
-  static MenuButtonGidBuilder builder()
+  static MenuButtonGidBuilder builder() nothrow
   {
     return new MenuButtonGidBuilder;
   }
@@ -149,7 +149,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       Get `alignWidget` property.
       Returns: The #GtkWidget to use to align the menu with.
   */
-  @property gtk.container.Container alignWidget()
+  @property gtk.container.Container alignWidget() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.container.Container)("align-widget");
   }
@@ -159,7 +159,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       Params:
         propval = The #GtkWidget to use to align the menu with.
   */
-  @property void alignWidget(gtk.container.Container propval)
+  @property void alignWidget(gtk.container.Container propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.container.Container)("align-widget", propval);
   }
@@ -169,7 +169,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       Returns: The #GtkArrowType representing the direction in which the
         menu or popover will be popped out.
   */
-  @property gtk.types.ArrowType direction()
+  @property gtk.types.ArrowType direction() nothrow
   {
     return getDirection();
   }
@@ -180,7 +180,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
         propval = The #GtkArrowType representing the direction in which the
           menu or popover will be popped out.
   */
-  @property void direction(gtk.types.ArrowType propval)
+  @property void direction(gtk.types.ArrowType propval) nothrow
   {
     setDirection(propval);
   }
@@ -194,7 +194,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
         See [gtk.menu_button.MenuButton.setMenuModel] for the interaction with the
         #GtkMenuButton:popup property.
   */
-  @property gio.menu_model.MenuModel menuModel()
+  @property gio.menu_model.MenuModel menuModel() nothrow
   {
     return getMenuModel();
   }
@@ -209,7 +209,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
           See [gtk.menu_button.MenuButton.setMenuModel] for the interaction with the
           #GtkMenuButton:popup property.
   */
-  @property void menuModel(gio.menu_model.MenuModel propval)
+  @property void menuModel(gio.menu_model.MenuModel propval) nothrow
   {
     setMenuModel(propval);
   }
@@ -218,7 +218,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       Get `popover` property.
       Returns: The #GtkPopover that will be popped up when the button is clicked.
   */
-  @property gtk.popover.Popover popover()
+  @property gtk.popover.Popover popover() nothrow
   {
     return getPopover();
   }
@@ -228,7 +228,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       Params:
         propval = The #GtkPopover that will be popped up when the button is clicked.
   */
-  @property void popover(gtk.popover.Popover propval)
+  @property void popover(gtk.popover.Popover propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.popover.Popover)("popover", propval);
   }
@@ -237,7 +237,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       Get `popup` property.
       Returns: The #GtkMenu that will be popped up when the button is clicked.
   */
-  @property gtk.menu.Menu popup()
+  @property gtk.menu.Menu popup() nothrow
   {
     return getPopup();
   }
@@ -247,7 +247,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       Params:
         propval = The #GtkMenu that will be popped up when the button is clicked.
   */
-  @property void popup(gtk.menu.Menu propval)
+  @property void popup(gtk.menu.Menu propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.menu.Menu)("popup", propval);
   }
@@ -257,7 +257,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       Returns: Whether to construct a #GtkPopover from the menu model,
         or a #GtkMenu.
   */
-  @property bool usePopover()
+  @property bool usePopover() nothrow
   {
     return getUsePopover();
   }
@@ -268,7 +268,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
         propval = Whether to construct a #GtkPopover from the menu model,
           or a #GtkMenu.
   */
-  @property void usePopover(bool propval)
+  @property void usePopover(bool propval) nothrow
   {
     setUsePopover(propval);
   }
@@ -279,7 +279,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       with another #GtkWidget should you wish to.
       Returns: The newly created #GtkMenuButton widget
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_button_new();
@@ -290,7 +290,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       Returns the parent #GtkWidget to use to line up with menu.
       Returns: a #GtkWidget value or null
   */
-  gtk.widget.Widget getAlignWidget()
+  gtk.widget.Widget getAlignWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_button_get_align_widget(cast(GtkMenuButton*)this._cPtr);
@@ -304,7 +304,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       Returns the direction the popup will be pointing at when popped up.
       Returns: a #GtkArrowType value
   */
-  gtk.types.ArrowType getDirection()
+  gtk.types.ArrowType getDirection() nothrow
   {
     GtkArrowType _cretval;
     _cretval = gtk_menu_button_get_direction(cast(GtkMenuButton*)this._cPtr);
@@ -316,7 +316,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       Returns the #GMenuModel used to generate the popup.
       Returns: a #GMenuModel or null
   */
-  gio.menu_model.MenuModel getMenuModel()
+  gio.menu_model.MenuModel getMenuModel() nothrow
   {
     GMenuModel* _cretval;
     _cretval = gtk_menu_button_get_menu_model(cast(GtkMenuButton*)this._cPtr);
@@ -330,7 +330,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       returns null.
       Returns: a #GtkPopover or null
   */
-  gtk.popover.Popover getPopover()
+  gtk.popover.Popover getPopover() nothrow
   {
     GtkPopover* _cretval;
     _cretval = gtk_menu_button_get_popover(cast(GtkMenuButton*)this._cPtr);
@@ -344,7 +344,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       returns null.
       Returns: a #GtkMenu or null
   */
-  gtk.menu.Menu getPopup()
+  gtk.menu.Menu getPopup() nothrow
   {
     GtkMenu* _cretval;
     _cretval = gtk_menu_button_get_popup(cast(GtkMenuButton*)this._cPtr);
@@ -357,7 +357,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       from the menu model.
       Returns: true if using a #GtkPopover
   */
-  bool getUsePopover()
+  bool getUsePopover() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_menu_button_get_use_popover(cast(GtkMenuButton*)this._cPtr);
@@ -377,7 +377,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       Params:
         alignWidget = a #GtkWidget
   */
-  void setAlignWidget(gtk.widget.Widget alignWidget = null)
+  void setAlignWidget(gtk.widget.Widget alignWidget = null) nothrow
   {
     gtk_menu_button_set_align_widget(cast(GtkMenuButton*)this._cPtr, alignWidget ? cast(GtkWidget*)alignWidget._cPtr(No.Dup) : null);
   }
@@ -398,7 +398,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       Params:
         direction = a #GtkArrowType
   */
-  void setDirection(gtk.types.ArrowType direction)
+  void setDirection(gtk.types.ArrowType direction) nothrow
   {
     gtk_menu_button_set_direction(cast(GtkMenuButton*)this._cPtr, direction);
   }
@@ -420,7 +420,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
         menuModel = a #GMenuModel, or null to unset and disable the
             button
   */
-  void setMenuModel(gio.menu_model.MenuModel menuModel = null)
+  void setMenuModel(gio.menu_model.MenuModel menuModel = null) nothrow
   {
     gtk_menu_button_set_menu_model(cast(GtkMenuButton*)this._cPtr, menuModel ? cast(GMenuModel*)menuModel._cPtr(No.Dup) : null);
   }
@@ -435,7 +435,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       Params:
         popover = a #GtkPopover, or null to unset and disable the button
   */
-  void setPopover(gtk.widget.Widget popover = null)
+  void setPopover(gtk.widget.Widget popover = null) nothrow
   {
     gtk_menu_button_set_popover(cast(GtkMenuButton*)this._cPtr, popover ? cast(GtkWidget*)popover._cPtr(No.Dup) : null);
   }
@@ -450,7 +450,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       Params:
         menu = a #GtkMenu, or null to unset and disable the button
   */
-  void setPopup(gtk.widget.Widget menu = null)
+  void setPopup(gtk.widget.Widget menu = null) nothrow
   {
     gtk_menu_button_set_popup(cast(GtkMenuButton*)this._cPtr, menu ? cast(GtkWidget*)menu._cPtr(No.Dup) : null);
   }
@@ -463,7 +463,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
       Params:
         usePopover = true to construct a popover from the menu model
   */
-  void setUsePopover(bool usePopover)
+  void setUsePopover(bool usePopover) nothrow
   {
     gtk_menu_button_set_use_popover(cast(GtkMenuButton*)this._cPtr, usePopover);
   }
@@ -480,7 +480,7 @@ class MenuButtonGidBuilderImpl(T) : gtk.toggle_button.ToggleButtonGidBuilderImpl
         propval = The #GtkWidget to use to align the menu with.
       Returns: Builder instance for fluent chaining
   */
-  T alignWidget(gtk.container.Container propval)
+  T alignWidget(gtk.container.Container propval) nothrow
   {
     return setProperty("align-widget", propval);
   }
@@ -492,7 +492,7 @@ class MenuButtonGidBuilderImpl(T) : gtk.toggle_button.ToggleButtonGidBuilderImpl
           menu or popover will be popped out.
       Returns: Builder instance for fluent chaining
   */
-  T direction(gtk.types.ArrowType propval)
+  T direction(gtk.types.ArrowType propval) nothrow
   {
     return setProperty("direction", propval);
   }
@@ -508,7 +508,7 @@ class MenuButtonGidBuilderImpl(T) : gtk.toggle_button.ToggleButtonGidBuilderImpl
           #GtkMenuButton:popup property.
       Returns: Builder instance for fluent chaining
   */
-  T menuModel(gio.menu_model.MenuModel propval)
+  T menuModel(gio.menu_model.MenuModel propval) nothrow
   {
     return setProperty("menu-model", propval);
   }
@@ -519,7 +519,7 @@ class MenuButtonGidBuilderImpl(T) : gtk.toggle_button.ToggleButtonGidBuilderImpl
         propval = The #GtkPopover that will be popped up when the button is clicked.
       Returns: Builder instance for fluent chaining
   */
-  T popover(gtk.popover.Popover propval)
+  T popover(gtk.popover.Popover propval) nothrow
   {
     return setProperty("popover", propval);
   }
@@ -530,7 +530,7 @@ class MenuButtonGidBuilderImpl(T) : gtk.toggle_button.ToggleButtonGidBuilderImpl
         propval = The #GtkMenu that will be popped up when the button is clicked.
       Returns: Builder instance for fluent chaining
   */
-  T popup(gtk.menu.Menu propval)
+  T popup(gtk.menu.Menu propval) nothrow
   {
     return setProperty("popup", propval);
   }
@@ -542,7 +542,7 @@ class MenuButtonGidBuilderImpl(T) : gtk.toggle_button.ToggleButtonGidBuilderImpl
           or a #GtkMenu.
       Returns: Builder instance for fluent chaining
   */
-  T usePopover(bool propval)
+  T usePopover(bool propval) nothrow
   {
     return setProperty("use-popover", propval);
   }
@@ -555,7 +555,7 @@ final class MenuButtonGidBuilder : MenuButtonGidBuilderImpl!MenuButtonGidBuilder
       Create object from builder.
       Returns: New object
   */
-  MenuButton build()
+  MenuButton build() nothrow
   {
     return new MenuButton(cast(void*)createGObject(MenuButton._getGType), No.Take);
   }

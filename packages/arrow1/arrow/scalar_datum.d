@@ -16,26 +16,26 @@ class ScalarDatum : arrow.datum.Datum
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_scalar_datum_get_type != &gidSymbolNotFound ? garrow_scalar_datum_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ScalarDatum self()
+  override ScalarDatum self() nothrow
   {
     return this;
   }
@@ -44,19 +44,19 @@ class ScalarDatum : arrow.datum.Datum
       Get builder for [arrow.scalar_datum.ScalarDatum]
       Returns: New builder object
   */
-  static ScalarDatumGidBuilder builder()
+  static ScalarDatumGidBuilder builder() nothrow
   {
     return new ScalarDatumGidBuilder;
   }
 
   /** */
-  @property arrow.scalar.Scalar value()
+  @property arrow.scalar.Scalar value() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.scalar.Scalar)("value");
   }
 
   /** */
-  this(arrow.scalar.Scalar value)
+  this(arrow.scalar.Scalar value) nothrow
   {
     GArrowScalarDatum* _cretval;
     _cretval = garrow_scalar_datum_new(value ? cast(GArrowScalar*)value._cPtr(No.Dup) : null);
@@ -69,7 +69,7 @@ class ScalarDatumGidBuilderImpl(T) : arrow.datum.DatumGidBuilderImpl!T
 {
 
   /** */
-  T value(arrow.scalar.Scalar propval)
+  T value(arrow.scalar.Scalar propval) nothrow
   {
     return setProperty("value", propval);
   }
@@ -82,7 +82,7 @@ final class ScalarDatumGidBuilder : ScalarDatumGidBuilderImpl!ScalarDatumGidBuil
       Create object from builder.
       Returns: New object
   */
-  ScalarDatum build()
+  ScalarDatum build() nothrow
   {
     return new ScalarDatum(cast(void*)createGObject(ScalarDatum._getGType), Yes.Take);
   }

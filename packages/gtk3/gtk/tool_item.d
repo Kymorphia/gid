@@ -36,26 +36,26 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tool_item_get_type != &gidSymbolNotFound ? gtk_tool_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ToolItem self()
+  override ToolItem self() nothrow
   {
     return this;
   }
@@ -64,43 +64,43 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       Get builder for [gtk.tool_item.ToolItem]
       Returns: New builder object
   */
-  static ToolItemGidBuilder builder()
+  static ToolItemGidBuilder builder() nothrow
   {
     return new ToolItemGidBuilder;
   }
 
   /** */
-  @property bool isImportant()
+  @property bool isImportant() nothrow
   {
     return getIsImportant();
   }
 
   /** */
-  @property void isImportant(bool propval)
+  @property void isImportant(bool propval) nothrow
   {
     setIsImportant(propval);
   }
 
   /** */
-  @property bool visibleHorizontal()
+  @property bool visibleHorizontal() nothrow
   {
     return getVisibleHorizontal();
   }
 
   /** */
-  @property void visibleHorizontal(bool propval)
+  @property void visibleHorizontal(bool propval) nothrow
   {
     setVisibleHorizontal(propval);
   }
 
   /** */
-  @property bool visibleVertical()
+  @property bool visibleVertical() nothrow
   {
     return getVisibleVertical();
   }
 
   /** */
-  @property void visibleVertical(bool propval)
+  @property void visibleVertical(bool propval) nothrow
   {
     setVisibleVertical(propval);
   }
@@ -111,7 +111,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       Creates a new #GtkToolItem
       Returns: the new #GtkToolItem
   */
-  this()
+  this() nothrow
   {
     GtkToolItem* _cretval;
     _cretval = gtk_tool_item_new();
@@ -125,7 +125,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       Returns: a #PangoEllipsizeMode indicating how text in tool_item
         should be ellipsized.
   */
-  pango.types.EllipsizeMode getEllipsizeMode()
+  pango.types.EllipsizeMode getEllipsizeMode() nothrow
   {
     PangoEllipsizeMode _cretval;
     _cretval = gtk_tool_item_get_ellipsize_mode(cast(GtkToolItem*)this._cPtr);
@@ -138,7 +138,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       See [gtk.tool_item.ToolItem.setExpand].
       Returns: true if tool_item is allocated extra space.
   */
-  bool getExpand()
+  bool getExpand() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tool_item_get_expand(cast(GtkToolItem*)this._cPtr);
@@ -151,7 +151,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       Returns: true if the item is the same size as other homogeneous
         items.
   */
-  bool getHomogeneous()
+  bool getHomogeneous() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tool_item_get_homogeneous(cast(GtkToolItem*)this._cPtr);
@@ -165,7 +165,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       Returns: a #GtkIconSize indicating the icon size
         used for tool_item
   */
-  gtk.types.IconSize getIconSize()
+  gtk.types.IconSize getIconSize() nothrow
   {
     GtkIconSize _cretval;
     _cretval = gtk_tool_item_get_icon_size(cast(GtkToolItem*)this._cPtr);
@@ -178,7 +178,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       [gtk.tool_item.ToolItem.setIsImportant]
       Returns: true if tool_item is considered important.
   */
-  bool getIsImportant()
+  bool getIsImportant() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tool_item_get_is_important(cast(GtkToolItem*)this._cPtr);
@@ -192,7 +192,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       Returns: a #GtkOrientation indicating the orientation
         used for tool_item
   */
-  gtk.types.Orientation getOrientation()
+  gtk.types.Orientation getOrientation() nothrow
   {
     GtkOrientation _cretval;
     _cretval = gtk_tool_item_get_orientation(cast(GtkToolItem*)this._cPtr);
@@ -215,7 +215,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
             [gtk.tool_item.ToolItem.setProxyMenuItem], if the menu_item_ids
             match.
   */
-  gtk.widget.Widget getProxyMenuItem(string menuItemId)
+  gtk.widget.Widget getProxyMenuItem(string menuItemId) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _menuItemId = menuItemId.toCString(No.Alloc);
@@ -232,7 +232,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       Returns: a #GtkReliefStyle indicating the relief style used
         for tool_item.
   */
-  gtk.types.ReliefStyle getReliefStyle()
+  gtk.types.ReliefStyle getReliefStyle() nothrow
   {
     GtkReliefStyle _cretval;
     _cretval = gtk_tool_item_get_relief_style(cast(GtkToolItem*)this._cPtr);
@@ -247,7 +247,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       Returns: a #gfloat indicating the horizontal text alignment
         used for tool_item
   */
-  float getTextAlignment()
+  float getTextAlignment() nothrow
   {
     float _retval;
     _retval = gtk_tool_item_get_text_alignment(cast(GtkToolItem*)this._cPtr);
@@ -261,7 +261,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       Returns: a #GtkOrientation indicating the text orientation
         used for tool_item
   */
-  gtk.types.Orientation getTextOrientation()
+  gtk.types.Orientation getTextOrientation() nothrow
   {
     GtkOrientation _cretval;
     _cretval = gtk_tool_item_get_text_orientation(cast(GtkToolItem*)this._cPtr);
@@ -275,7 +275,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       and use the size group for labels.
       Returns: a #GtkSizeGroup
   */
-  gtk.size_group.SizeGroup getTextSizeGroup()
+  gtk.size_group.SizeGroup getTextSizeGroup() nothrow
   {
     GtkSizeGroup* _cretval;
     _cretval = gtk_tool_item_get_text_size_group(cast(GtkToolItem*)this._cPtr);
@@ -299,7 +299,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       Returns: A #GtkToolbarStyle indicating the toolbar style used
         for tool_item.
   */
-  gtk.types.ToolbarStyle getToolbarStyle()
+  gtk.types.ToolbarStyle getToolbarStyle() nothrow
   {
     GtkToolbarStyle _cretval;
     _cretval = gtk_tool_item_get_toolbar_style(cast(GtkToolItem*)this._cPtr);
@@ -312,7 +312,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       [gtk.tool_item.ToolItem.setUseDragWindow].
       Returns: true if tool_item uses a drag window.
   */
-  bool getUseDragWindow()
+  bool getUseDragWindow() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tool_item_get_use_drag_window(cast(GtkToolItem*)this._cPtr);
@@ -325,7 +325,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       Returns: true if tool_item is visible on toolbars that are
         docked horizontally.
   */
-  bool getVisibleHorizontal()
+  bool getVisibleHorizontal() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tool_item_get_visible_horizontal(cast(GtkToolItem*)this._cPtr);
@@ -337,7 +337,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       See [gtk.tool_item.ToolItem.setVisibleVertical].
       Returns: Whether tool_item is visible when the toolbar is docked vertically
   */
-  bool getVisibleVertical()
+  bool getVisibleVertical() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tool_item_get_visible_vertical(cast(GtkToolItem*)this._cPtr);
@@ -353,7 +353,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       The function must be called when the tool item changes what it
       will do in response to the #GtkToolItem::create-menu-proxy signal.
   */
-  void rebuildMenu()
+  void rebuildMenu() nothrow
   {
     gtk_tool_item_rebuild_menu(cast(GtkToolItem*)this._cPtr);
   }
@@ -365,7 +365,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       Returns: The #GtkMenuItem that is going to appear in the
         overflow menu for tool_item.
   */
-  gtk.widget.Widget retrieveProxyMenuItem()
+  gtk.widget.Widget retrieveProxyMenuItem() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_tool_item_retrieve_proxy_menu_item(cast(GtkToolItem*)this._cPtr);
@@ -382,7 +382,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       Params:
         expand = Whether tool_item is allocated extra space
   */
-  void setExpand(bool expand)
+  void setExpand(bool expand) nothrow
   {
     gtk_tool_item_set_expand(cast(GtkToolItem*)this._cPtr, expand);
   }
@@ -395,7 +395,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       Params:
         homogeneous = whether tool_item is the same size as other homogeneous items
   */
-  void setHomogeneous(bool homogeneous)
+  void setHomogeneous(bool homogeneous) nothrow
   {
     gtk_tool_item_set_homogeneous(cast(GtkToolItem*)this._cPtr, homogeneous);
   }
@@ -410,7 +410,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       Params:
         isImportant = whether the tool item should be considered important
   */
-  void setIsImportant(bool isImportant)
+  void setIsImportant(bool isImportant) nothrow
   {
     gtk_tool_item_set_is_important(cast(GtkToolItem*)this._cPtr, isImportant);
   }
@@ -426,7 +426,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
         menuItemId = a string used to identify menu_item
         menuItem = a #GtkMenuItem to use in the overflow menu, or null
   */
-  void setProxyMenuItem(string menuItemId, gtk.widget.Widget menuItem = null)
+  void setProxyMenuItem(string menuItemId, gtk.widget.Widget menuItem = null) nothrow
   {
     const(char)* _menuItemId = menuItemId.toCString(No.Alloc);
     gtk_tool_item_set_proxy_menu_item(cast(GtkToolItem*)this._cPtr, _menuItemId, menuItem ? cast(GtkWidget*)menuItem._cPtr(No.Dup) : null);
@@ -439,7 +439,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       Params:
         markup = markup text to be used as tooltip for tool_item
   */
-  override void setTooltipMarkup(string markup)
+  override void setTooltipMarkup(string markup) nothrow
   {
     const(char)* _markup = markup.toCString(No.Alloc);
     gtk_tool_item_set_tooltip_markup(cast(GtkToolItem*)this._cPtr, _markup);
@@ -452,7 +452,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       Params:
         text = text to be used as tooltip for tool_item
   */
-  override void setTooltipText(string text)
+  override void setTooltipText(string text) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_tool_item_set_tooltip_text(cast(GtkToolItem*)this._cPtr, _text);
@@ -467,7 +467,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       Params:
         useDragWindow = Whether tool_item has a drag window.
   */
-  void setUseDragWindow(bool useDragWindow)
+  void setUseDragWindow(bool useDragWindow) nothrow
   {
     gtk_tool_item_set_use_drag_window(cast(GtkToolItem*)this._cPtr, useDragWindow);
   }
@@ -478,7 +478,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       Params:
         visibleHorizontal = Whether tool_item is visible when in horizontal mode
   */
-  void setVisibleHorizontal(bool visibleHorizontal)
+  void setVisibleHorizontal(bool visibleHorizontal) nothrow
   {
     gtk_tool_item_set_visible_horizontal(cast(GtkToolItem*)this._cPtr, visibleHorizontal);
   }
@@ -493,7 +493,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
         visibleVertical = whether tool_item is visible when the toolbar
           is in vertical mode
   */
-  void setVisibleVertical(bool visibleVertical)
+  void setVisibleVertical(bool visibleVertical) nothrow
   {
     gtk_tool_item_set_visible_vertical(cast(GtkToolItem*)this._cPtr, visibleVertical);
   }
@@ -503,7 +503,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       #GtkToolbar and other #GtkToolShell implementations use this function
       to notify children, when some aspect of their configuration changes.
   */
-  void toolbarReconfigured()
+  void toolbarReconfigured() nothrow
   {
     gtk_tool_item_toolbar_reconfigured(cast(GtkToolItem*)this._cPtr);
   }
@@ -542,22 +542,30 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCreateMenuProxy(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCreateMenuProxy(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tool_item.ToolItem)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tool_item.ToolItem.createMenuProxy");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -589,13 +597,13 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectToolbarReconfigured(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToolbarReconfigured(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tool_item.ToolItem)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -604,7 +612,14 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tool_item.ToolItem.toolbarReconfigured");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -619,19 +634,19 @@ class ToolItemGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.activatable.A
   mixin ActivatableGidBuilderT!();
 
   /** */
-  T isImportant(bool propval)
+  T isImportant(bool propval) nothrow
   {
     return setProperty("is-important", propval);
   }
 
   /** */
-  T visibleHorizontal(bool propval)
+  T visibleHorizontal(bool propval) nothrow
   {
     return setProperty("visible-horizontal", propval);
   }
 
   /** */
-  T visibleVertical(bool propval)
+  T visibleVertical(bool propval) nothrow
   {
     return setProperty("visible-vertical", propval);
   }
@@ -644,7 +659,7 @@ final class ToolItemGidBuilder : ToolItemGidBuilderImpl!ToolItemGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ToolItem build()
+  ToolItem build() nothrow
   {
     return new ToolItem(cast(void*)createGObject(ToolItem._getGType), No.Take);
   }

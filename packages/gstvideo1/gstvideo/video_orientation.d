@@ -18,7 +18,7 @@ interface VideoOrientation
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_orientation_get_type != &gidSymbolNotFound ? gst_video_orientation_get_type() : cast(GType)0;
@@ -33,7 +33,7 @@ interface VideoOrientation
         method = The location where to return the orientation.
       Returns: TRUE if there was a valid "image-orientation" tag in the taglist.
   */
-  static bool fromTag(gst.tag_list.TagList taglist, out gstvideo.types.VideoOrientationMethod method)
+  static bool fromTag(gst.tag_list.TagList taglist, out gstvideo.types.VideoOrientationMethod method) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_orientation_from_tag(taglist ? cast(GstTagList*)taglist._cPtr(No.Dup) : null, &method);

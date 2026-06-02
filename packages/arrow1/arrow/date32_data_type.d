@@ -14,26 +14,26 @@ class Date32DataType : arrow.temporal_data_type.TemporalDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_date32_data_type_get_type != &gidSymbolNotFound ? garrow_date32_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Date32DataType self()
+  override Date32DataType self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class Date32DataType : arrow.temporal_data_type.TemporalDataType
       Get builder for [arrow.date32_data_type.Date32DataType]
       Returns: New builder object
   */
-  static Date32DataTypeGidBuilder builder()
+  static Date32DataTypeGidBuilder builder() nothrow
   {
     return new Date32DataTypeGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowDate32DataType* _cretval;
     _cretval = garrow_date32_data_type_new();
@@ -68,7 +68,7 @@ final class Date32DataTypeGidBuilder : Date32DataTypeGidBuilderImpl!Date32DataTy
       Create object from builder.
       Returns: New object
   */
-  Date32DataType build()
+  Date32DataType build() nothrow
   {
     return new Date32DataType(cast(void*)createGObject(Date32DataType._getGType), Yes.Take);
   }

@@ -147,7 +147,7 @@ template ConverterT()
       as if it was just created. If the converter has any internal
       state that would produce output then that output is lost.
   */
-  override void reset()
+  override void reset() nothrow
   {
     g_converter_reset(cast(GConverter*)this._cPtr);
   }

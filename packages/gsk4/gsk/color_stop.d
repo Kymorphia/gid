@@ -16,11 +16,8 @@ class ColorStop
   GskColorStop _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.color_stop.ColorStop");
-
     _cInstance = *cast(GskColorStop*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class ColorStop
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class ColorStop
       Get `offset` field.
       Returns: the offset of the color stop
   */
-  @property float offset()
+  @property float offset() nothrow
   {
     return (cast(GskColorStop*)this._cPtr).offset;
   }
@@ -47,7 +44,7 @@ class ColorStop
       Params:
         propval = the offset of the color stop
   */
-  @property void offset(float propval)
+  @property void offset(float propval) nothrow
   {
     (cast(GskColorStop*)this._cPtr).offset = propval;
   }
@@ -56,7 +53,7 @@ class ColorStop
       Get `color` field.
       Returns: the color at the given offset
   */
-  @property gdk.rgba.RGBA color()
+  @property gdk.rgba.RGBA color() nothrow
   {
     return cToD!(gdk.rgba.RGBA)(cast(void*)&(cast(GskColorStop*)this._cPtr).color);
   }
@@ -66,7 +63,7 @@ class ColorStop
       Params:
         propval = the color at the given offset
   */
-  @property void color(gdk.rgba.RGBA propval)
+  @property void color(gdk.rgba.RGBA propval) nothrow
   {
     (cast(GskColorStop*)this._cPtr).color = cast(GdkRGBA)propval;
   }

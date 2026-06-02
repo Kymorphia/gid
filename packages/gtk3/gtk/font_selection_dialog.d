@@ -20,26 +20,26 @@ class FontSelectionDialog : gtk.dialog.Dialog
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_font_selection_dialog_get_type != &gidSymbolNotFound ? gtk_font_selection_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FontSelectionDialog self()
+  override FontSelectionDialog self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
       Get builder for [gtk.font_selection_dialog.FontSelectionDialog]
       Returns: New builder object
   */
-  static FontSelectionDialogGidBuilder builder()
+  static FontSelectionDialogGidBuilder builder() nothrow
   {
     return new FontSelectionDialogGidBuilder;
   }
@@ -62,7 +62,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
   
       Deprecated: Use #GtkFontChooserDialog
   */
-  this(string title)
+  this(string title) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -77,7 +77,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
   
       Deprecated: Use #GtkFontChooserDialog
   */
-  gtk.widget.Widget getCancelButton()
+  gtk.widget.Widget getCancelButton() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_selection_dialog_get_cancel_button(cast(GtkFontSelectionDialog*)this._cPtr);
@@ -99,7 +99,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
   
       Deprecated: Use #GtkFontChooserDialog
   */
-  string getFontName()
+  string getFontName() nothrow
   {
     char* _cretval;
     _cretval = gtk_font_selection_dialog_get_font_name(cast(GtkFontSelectionDialog*)this._cPtr);
@@ -113,7 +113,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
   
       Deprecated: Use #GtkFontChooserDialog
   */
-  gtk.widget.Widget getFontSelection()
+  gtk.widget.Widget getFontSelection() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_selection_dialog_get_font_selection(cast(GtkFontSelectionDialog*)this._cPtr);
@@ -128,7 +128,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
   
       Deprecated: Use #GtkFontChooserDialog
   */
-  gtk.widget.Widget getOkButton()
+  gtk.widget.Widget getOkButton() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_selection_dialog_get_ok_button(cast(GtkFontSelectionDialog*)this._cPtr);
@@ -144,7 +144,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
   
       Deprecated: Use #GtkFontChooserDialog
   */
-  string getPreviewText()
+  string getPreviewText() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_font_selection_dialog_get_preview_text(cast(GtkFontSelectionDialog*)this._cPtr);
@@ -162,7 +162,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
   
       Deprecated: Use #GtkFontChooserDialog
   */
-  bool setFontName(string fontname)
+  bool setFontName(string fontname) nothrow
   {
     bool _retval;
     const(char)* _fontname = fontname.toCString(No.Alloc);
@@ -178,7 +178,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
   
       Deprecated: Use #GtkFontChooserDialog
   */
-  void setPreviewText(string text)
+  void setPreviewText(string text) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_font_selection_dialog_set_preview_text(cast(GtkFontSelectionDialog*)this._cPtr, _text);
@@ -198,7 +198,7 @@ final class FontSelectionDialogGidBuilder : FontSelectionDialogGidBuilderImpl!Fo
       Create object from builder.
       Returns: New object
   */
-  FontSelectionDialog build()
+  FontSelectionDialog build() nothrow
   {
     return new FontSelectionDialog(cast(void*)createGObject(FontSelectionDialog._getGType), No.Take);
   }

@@ -21,32 +21,32 @@ class AudioInfo : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_info_get_type != &gidSymbolNotFound ? gst_audio_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AudioInfo self()
+  override AudioInfo self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class AudioInfo : gobject.boxed.Boxed
       Get `finfo` field.
       Returns: the format info of the audio
   */
-  @property gstaudio.audio_format_info.AudioFormatInfo finfo()
+  @property gstaudio.audio_format_info.AudioFormatInfo finfo() nothrow
   {
     return new gstaudio.audio_format_info.AudioFormatInfo(cast(GstAudioFormatInfo*)(cast(GstAudioInfo*)this._cPtr).finfo, No.Take);
   }
@@ -64,7 +64,7 @@ class AudioInfo : gobject.boxed.Boxed
       Get `flags` field.
       Returns: additional audio flags
   */
-  @property gstaudio.types.AudioFlags flags()
+  @property gstaudio.types.AudioFlags flags() nothrow
   {
     return cast(gstaudio.types.AudioFlags)(cast(GstAudioInfo*)this._cPtr).flags;
   }
@@ -74,7 +74,7 @@ class AudioInfo : gobject.boxed.Boxed
       Params:
         propval = additional audio flags
   */
-  @property void flags(gstaudio.types.AudioFlags propval)
+  @property void flags(gstaudio.types.AudioFlags propval) nothrow
   {
     (cast(GstAudioInfo*)this._cPtr).flags = cast(GstAudioFlags)propval;
   }
@@ -83,7 +83,7 @@ class AudioInfo : gobject.boxed.Boxed
       Get `layout` field.
       Returns: audio layout
   */
-  @property gstaudio.types.AudioLayout layout()
+  @property gstaudio.types.AudioLayout layout() nothrow
   {
     return cast(gstaudio.types.AudioLayout)(cast(GstAudioInfo*)this._cPtr).layout;
   }
@@ -93,7 +93,7 @@ class AudioInfo : gobject.boxed.Boxed
       Params:
         propval = audio layout
   */
-  @property void layout(gstaudio.types.AudioLayout propval)
+  @property void layout(gstaudio.types.AudioLayout propval) nothrow
   {
     (cast(GstAudioInfo*)this._cPtr).layout = cast(GstAudioLayout)propval;
   }
@@ -102,7 +102,7 @@ class AudioInfo : gobject.boxed.Boxed
       Get `rate` field.
       Returns: the audio sample rate
   */
-  @property int rate()
+  @property int rate() nothrow
   {
     return (cast(GstAudioInfo*)this._cPtr).rate;
   }
@@ -112,7 +112,7 @@ class AudioInfo : gobject.boxed.Boxed
       Params:
         propval = the audio sample rate
   */
-  @property void rate(int propval)
+  @property void rate(int propval) nothrow
   {
     (cast(GstAudioInfo*)this._cPtr).rate = propval;
   }
@@ -121,7 +121,7 @@ class AudioInfo : gobject.boxed.Boxed
       Get `channels` field.
       Returns: the number of channels
   */
-  @property int channels()
+  @property int channels() nothrow
   {
     return (cast(GstAudioInfo*)this._cPtr).channels;
   }
@@ -131,7 +131,7 @@ class AudioInfo : gobject.boxed.Boxed
       Params:
         propval = the number of channels
   */
-  @property void channels(int propval)
+  @property void channels(int propval) nothrow
   {
     (cast(GstAudioInfo*)this._cPtr).channels = propval;
   }
@@ -141,7 +141,7 @@ class AudioInfo : gobject.boxed.Boxed
       Returns: the number of bytes for one frame, this is the size of one
                 sample * @channels
   */
-  @property int bpf()
+  @property int bpf() nothrow
   {
     return (cast(GstAudioInfo*)this._cPtr).bpf;
   }
@@ -152,7 +152,7 @@ class AudioInfo : gobject.boxed.Boxed
         propval = the number of bytes for one frame, this is the size of one
                   sample * @channels
   */
-  @property void bpf(int propval)
+  @property void bpf(int propval) nothrow
   {
     (cast(GstAudioInfo*)this._cPtr).bpf = propval;
   }
@@ -162,7 +162,7 @@ class AudioInfo : gobject.boxed.Boxed
       [gstaudio.audio_info.AudioInfo.init_].
       Returns: a new #GstAudioInfo. free with [gstaudio.audio_info.AudioInfo.free].
   */
-  this()
+  this() nothrow
   {
     GstAudioInfo* _cretval;
     _cretval = gst_audio_info_new();
@@ -176,7 +176,7 @@ class AudioInfo : gobject.boxed.Boxed
         caps = a #GstCaps
       Returns: A #GstAudioInfo, or null if caps couldn't be parsed
   */
-  static gstaudio.audio_info.AudioInfo newFromCaps(gst.caps.Caps caps)
+  static gstaudio.audio_info.AudioInfo newFromCaps(gst.caps.Caps caps) nothrow
   {
     GstAudioInfo* _cretval;
     _cretval = gst_audio_info_new_from_caps(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
@@ -197,7 +197,7 @@ class AudioInfo : gobject.boxed.Boxed
         destVal = pointer to destination value
       Returns: TRUE if the conversion was successful.
   */
-  bool convert(gst.types.Format srcFmt, long srcVal, gst.types.Format destFmt, out long destVal)
+  bool convert(gst.types.Format srcFmt, long srcVal, gst.types.Format destFmt, out long destVal) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_info_convert(cast(const(GstAudioInfo)*)this._cPtr, srcFmt, srcVal, destFmt, cast(long*)&destVal);
@@ -208,7 +208,7 @@ class AudioInfo : gobject.boxed.Boxed
       Copy a GstAudioInfo structure.
       Returns: a new #GstAudioInfo. free with gst_audio_info_free.
   */
-  gstaudio.audio_info.AudioInfo copy()
+  gstaudio.audio_info.AudioInfo copy() nothrow
   {
     GstAudioInfo* _cretval;
     _cretval = gst_audio_info_copy(cast(const(GstAudioInfo)*)this._cPtr);
@@ -223,7 +223,7 @@ class AudioInfo : gobject.boxed.Boxed
         other = a #GstAudioInfo
       Returns: true if info and other are equal, else false.
   */
-  bool isEqual(gstaudio.audio_info.AudioInfo other)
+  bool isEqual(gstaudio.audio_info.AudioInfo other) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_info_is_equal(cast(const(GstAudioInfo)*)this._cPtr, other ? cast(const(GstAudioInfo)*)other._cPtr(No.Dup) : null);
@@ -241,7 +241,7 @@ class AudioInfo : gobject.boxed.Boxed
         channels = the number of channels
         position = the channel positions
   */
-  void setFormat(gstaudio.types.AudioFormat format, int rate, int channels, gstaudio.types.AudioChannelPosition[] position = null)
+  void setFormat(gstaudio.types.AudioFormat format, int rate, int channels, gstaudio.types.AudioChannelPosition[] position = null) nothrow
   {
     assert(!position || position.length == 64);
     auto _position = position.ptr ? cast(const(GstAudioChannelPosition)*)position.ptr : [GstAudioChannelPosition.init].ptr;
@@ -253,7 +253,7 @@ class AudioInfo : gobject.boxed.Boxed
       Returns: the new #GstCaps containing the
                  info of info.
   */
-  gst.caps.Caps toCaps()
+  gst.caps.Caps toCaps() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_audio_info_to_caps(cast(const(GstAudioInfo)*)this._cPtr);
@@ -269,7 +269,7 @@ class AudioInfo : gobject.boxed.Boxed
         caps = a #GstCaps
       Returns: TRUE if caps could be parsed
   */
-  static bool fromCaps(out gstaudio.audio_info.AudioInfo info, gst.caps.Caps caps)
+  static bool fromCaps(out gstaudio.audio_info.AudioInfo info, gst.caps.Caps caps) nothrow
   {
     bool _retval;
     GstAudioInfo _info;
@@ -284,7 +284,7 @@ class AudioInfo : gobject.boxed.Boxed
       Params:
         info = a #GstAudioInfo
   */
-  static void init_(out gstaudio.audio_info.AudioInfo info)
+  static void init_(out gstaudio.audio_info.AudioInfo info) nothrow
   {
     GstAudioInfo _info;
     gst_audio_info_init(&_info);

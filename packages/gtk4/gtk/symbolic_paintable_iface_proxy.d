@@ -8,12 +8,12 @@ import gtk.symbolic_paintable_mixin;
 /// Proxy object for [gtk.symbolic_paintable.SymbolicPaintable] interface when a GObject has no applicable D binding
 class SymbolicPaintableIfaceProxy : IfaceProxy, gtk.symbolic_paintable.SymbolicPaintable
 {
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
-  override TypeInfo_Interface getIface()
+  override TypeInfo_Interface getIface() nothrow
   {
     return typeid(gtk.symbolic_paintable.SymbolicPaintable);
   }

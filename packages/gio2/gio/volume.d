@@ -66,7 +66,7 @@ interface Volume
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_volume_get_type != &gidSymbolNotFound ? g_volume_get_type() : cast(GType)0;
@@ -296,7 +296,7 @@ interface Volume
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `Removed` signal.
@@ -315,7 +315,7 @@ interface Volume
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRemoved(T)(T callback, Flag!"After" after = No.After);
+  gulong connectRemoved(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gio.volume.Volume]

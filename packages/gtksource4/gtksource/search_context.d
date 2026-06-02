@@ -22,26 +22,26 @@ class SearchContext : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_search_context_get_type != &gidSymbolNotFound ? gtk_source_search_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SearchContext self()
+  override SearchContext self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class SearchContext : gobject.object.ObjectWrap
       Get builder for [gtksource.search_context.SearchContext]
       Returns: New builder object
   */
-  static SearchContextGidBuilder builder()
+  static SearchContextGidBuilder builder() nothrow
   {
     return new SearchContextGidBuilder;
   }
@@ -59,7 +59,7 @@ class SearchContext : gobject.object.ObjectWrap
       Get `buffer` property.
       Returns: The #GtkSourceBuffer associated to the search context.
   */
-  @property gtksource.buffer.Buffer buffer()
+  @property gtksource.buffer.Buffer buffer() nothrow
   {
     return getBuffer();
   }
@@ -68,7 +68,7 @@ class SearchContext : gobject.object.ObjectWrap
       Get `highlight` property.
       Returns: Highlight the search occurrences.
   */
-  @property bool highlight()
+  @property bool highlight() nothrow
   {
     return getHighlight();
   }
@@ -78,7 +78,7 @@ class SearchContext : gobject.object.ObjectWrap
       Params:
         propval = Highlight the search occurrences.
   */
-  @property void highlight(bool propval)
+  @property void highlight(bool propval) nothrow
   {
     setHighlight(propval);
   }
@@ -87,7 +87,7 @@ class SearchContext : gobject.object.ObjectWrap
       Get `matchStyle` property.
       Returns: A #GtkSourceStyle, or null for theme's scheme default style.
   */
-  @property gtksource.style.Style matchStyle()
+  @property gtksource.style.Style matchStyle() nothrow
   {
     return getMatchStyle();
   }
@@ -97,7 +97,7 @@ class SearchContext : gobject.object.ObjectWrap
       Params:
         propval = A #GtkSourceStyle, or null for theme's scheme default style.
   */
-  @property void matchStyle(gtksource.style.Style propval)
+  @property void matchStyle(gtksource.style.Style propval) nothrow
   {
     setMatchStyle(propval);
   }
@@ -108,7 +108,7 @@ class SearchContext : gobject.object.ObjectWrap
         the value is 0. If the buffer is not already fully scanned, the value
         is -1.
   */
-  @property int occurrencesCount()
+  @property int occurrencesCount() nothrow
   {
     return getOccurrencesCount();
   }
@@ -121,7 +121,7 @@ class SearchContext : gobject.object.ObjectWrap
         
         Free with [glib.error.ErrorWrap.free].
   */
-  @property void* regexError()
+  @property void* regexError() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(void*)("regex-error");
   }
@@ -132,7 +132,7 @@ class SearchContext : gobject.object.ObjectWrap
         
         This property is construct-only since version 4.0.
   */
-  @property gtksource.search_settings.SearchSettings settings()
+  @property gtksource.search_settings.SearchSettings settings() nothrow
   {
     return getSettings();
   }
@@ -148,7 +148,7 @@ class SearchContext : gobject.object.ObjectWrap
         settings = a #GtkSourceSearchSettings, or null.
       Returns: a new search context.
   */
-  this(gtksource.buffer.Buffer buffer, gtksource.search_settings.SearchSettings settings = null)
+  this(gtksource.buffer.Buffer buffer, gtksource.search_settings.SearchSettings settings = null) nothrow
   {
     GtkSourceSearchContext* _cretval;
     _cretval = gtk_source_search_context_new(buffer ? cast(GtkSourceBuffer*)buffer._cPtr(No.Dup) : null, settings ? cast(GtkSourceSearchSettings*)settings._cPtr(No.Dup) : null);
@@ -175,7 +175,7 @@ class SearchContext : gobject.object.ObjectWrap
             search has wrapped around, or null.
       Returns: whether a match was found.
   */
-  bool backward(gtk.text_iter.TextIter iter, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, out bool hasWrappedAround)
+  bool backward(gtk.text_iter.TextIter iter, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, out bool hasWrappedAround) nothrow
   {
     bool _retval;
     GtkTextIter _matchStart;
@@ -205,14 +205,21 @@ class SearchContext : gobject.object.ObjectWrap
         cancellable = a #GCancellable, or null.
         callback = a #GAsyncReadyCallback to call when the operation is finished.
   */
-  void backwardAsync(gtk.text_iter.TextIter iter, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void backwardAsync(gtk.text_iter.TextIter iter, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -271,7 +278,7 @@ class SearchContext : gobject.object.ObjectWrap
             search has wrapped around, or null.
       Returns: whether a match was found.
   */
-  bool forward(gtk.text_iter.TextIter iter, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, out bool hasWrappedAround)
+  bool forward(gtk.text_iter.TextIter iter, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, out bool hasWrappedAround) nothrow
   {
     bool _retval;
     GtkTextIter _matchStart;
@@ -301,14 +308,21 @@ class SearchContext : gobject.object.ObjectWrap
         cancellable = a #GCancellable, or null.
         callback = a #GAsyncReadyCallback to call when the operation is finished.
   */
-  void forwardAsync(gtk.text_iter.TextIter iter, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void forwardAsync(gtk.text_iter.TextIter iter, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -348,7 +362,7 @@ class SearchContext : gobject.object.ObjectWrap
   }
 
   /** */
-  gtksource.buffer.Buffer getBuffer()
+  gtksource.buffer.Buffer getBuffer() nothrow
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_search_context_get_buffer(cast(GtkSourceSearchContext*)this._cPtr);
@@ -357,7 +371,7 @@ class SearchContext : gobject.object.ObjectWrap
   }
 
   /** */
-  bool getHighlight()
+  bool getHighlight() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_search_context_get_highlight(cast(GtkSourceSearchContext*)this._cPtr);
@@ -365,7 +379,7 @@ class SearchContext : gobject.object.ObjectWrap
   }
 
   /** */
-  gtksource.style.Style getMatchStyle()
+  gtksource.style.Style getMatchStyle() nothrow
   {
     GtkSourceStyle* _cretval;
     _cretval = gtk_source_search_context_get_match_style(cast(GtkSourceSearchContext*)this._cPtr);
@@ -386,7 +400,7 @@ class SearchContext : gobject.object.ObjectWrap
         position 1 (not 0). Returns 0 if match_start and match_end don't delimit
         an occurrence. Returns -1 if the position is not yet known.
   */
-  int getOccurrencePosition(gtk.text_iter.TextIter matchStart, gtk.text_iter.TextIter matchEnd)
+  int getOccurrencePosition(gtk.text_iter.TextIter matchStart, gtk.text_iter.TextIter matchEnd) nothrow
   {
     int _retval;
     _retval = gtk_source_search_context_get_occurrence_position(cast(GtkSourceSearchContext*)this._cPtr, matchStart ? cast(const(GtkTextIter)*)matchStart._cPtr(No.Dup) : null, matchEnd ? cast(const(GtkTextIter)*)matchEnd._cPtr(No.Dup) : null);
@@ -399,7 +413,7 @@ class SearchContext : gobject.object.ObjectWrap
       returned.
       Returns: the total number of search occurrences, or -1 if unknown.
   */
-  int getOccurrencesCount()
+  int getOccurrencesCount() nothrow
   {
     int _retval;
     _retval = gtk_source_search_context_get_occurrences_count(cast(GtkSourceSearchContext*)this._cPtr);
@@ -414,7 +428,7 @@ class SearchContext : gobject.object.ObjectWrap
       Free the return value with [glib.error.ErrorWrap.free].
       Returns: the #GError, or null if the pattern is valid.
   */
-  glib.error.ErrorWrap getRegexError()
+  glib.error.ErrorWrap getRegexError() nothrow
   {
     GError* _cretval;
     _cretval = gtk_source_search_context_get_regex_error(cast(GtkSourceSearchContext*)this._cPtr);
@@ -423,7 +437,7 @@ class SearchContext : gobject.object.ObjectWrap
   }
 
   /** */
-  gtksource.search_settings.SearchSettings getSettings()
+  gtksource.search_settings.SearchSettings getSettings() nothrow
   {
     GtkSourceSearchSettings* _cretval;
     _cretval = gtk_source_search_context_get_settings(cast(GtkSourceSearchContext*)this._cPtr);
@@ -498,7 +512,7 @@ class SearchContext : gobject.object.ObjectWrap
       Params:
         highlight = the setting.
   */
-  void setHighlight(bool highlight)
+  void setHighlight(bool highlight) nothrow
   {
     gtk_source_search_context_set_highlight(cast(GtkSourceSearchContext*)this._cPtr, highlight);
   }
@@ -512,7 +526,7 @@ class SearchContext : gobject.object.ObjectWrap
       Params:
         matchStyle = a #GtkSourceStyle, or null.
   */
-  void setMatchStyle(gtksource.style.Style matchStyle = null)
+  void setMatchStyle(gtksource.style.Style matchStyle = null) nothrow
   {
     gtk_source_search_context_set_match_style(cast(GtkSourceSearchContext*)this._cPtr, matchStyle ? cast(GtkSourceStyle*)matchStyle._cPtr(No.Dup) : null);
   }
@@ -528,7 +542,7 @@ class SearchContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The #GtkSourceBuffer associated to the search context.
       Returns: Builder instance for fluent chaining
   */
-  T buffer(gtksource.buffer.Buffer propval)
+  T buffer(gtksource.buffer.Buffer propval) nothrow
   {
     return setProperty("buffer", propval);
   }
@@ -539,7 +553,7 @@ class SearchContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Highlight the search occurrences.
       Returns: Builder instance for fluent chaining
   */
-  T highlight(bool propval)
+  T highlight(bool propval) nothrow
   {
     return setProperty("highlight", propval);
   }
@@ -550,7 +564,7 @@ class SearchContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = A #GtkSourceStyle, or null for theme's scheme default style.
       Returns: Builder instance for fluent chaining
   */
-  T matchStyle(gtksource.style.Style propval)
+  T matchStyle(gtksource.style.Style propval) nothrow
   {
     return setProperty("match-style", propval);
   }
@@ -563,7 +577,7 @@ class SearchContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           This property is construct-only since version 4.0.
       Returns: Builder instance for fluent chaining
   */
-  T settings(gtksource.search_settings.SearchSettings propval)
+  T settings(gtksource.search_settings.SearchSettings propval) nothrow
   {
     return setProperty("settings", propval);
   }
@@ -576,7 +590,7 @@ final class SearchContextGidBuilder : SearchContextGidBuilderImpl!SearchContextG
       Create object from builder.
       Returns: New object
   */
-  SearchContext build()
+  SearchContext build() nothrow
   {
     return new SearchContext(cast(void*)createGObject(SearchContext._getGType), Yes.Take);
   }

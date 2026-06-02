@@ -39,26 +39,26 @@ class HBox : gtk.box.Box
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_hbox_get_type != &gidSymbolNotFound ? gtk_hbox_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HBox self()
+  override HBox self() nothrow
   {
     return this;
   }
@@ -67,7 +67,7 @@ class HBox : gtk.box.Box
       Get builder for [gtk.hbox.HBox]
       Returns: New builder object
   */
-  static HBoxGidBuilder builder()
+  static HBoxGidBuilder builder() nothrow
   {
     return new HBoxGidBuilder;
   }
@@ -83,7 +83,7 @@ class HBox : gtk.box.Box
       Deprecated: You should use [gtk.box.Box.new_] with a [gtk.types.Orientation.Horizontal]
           #GtkOrientable:orientation instead
   */
-  this(bool homogeneous, int spacing)
+  this(bool homogeneous, int spacing) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_hbox_new(homogeneous, spacing);
@@ -104,7 +104,7 @@ final class HBoxGidBuilder : HBoxGidBuilderImpl!HBoxGidBuilder
       Create object from builder.
       Returns: New object
   */
-  HBox build()
+  HBox build() nothrow
   {
     return new HBox(cast(void*)createGObject(HBox._getGType), No.Take);
   }

@@ -23,7 +23,7 @@ class DrawState : gobject.boxed.Boxed
         currentX = X component of current point
         currentY = Y component of current point
   */
-  this(harfbuzz.types.Bool pathOpen = harfbuzz.types.Bool.init, float pathStartX = 0.0, float pathStartY = 0.0, float currentX = 0.0, float currentY = 0.0)
+  this(harfbuzz.types.Bool pathOpen = harfbuzz.types.Bool.init, float pathStartX = 0.0, float pathStartY = 0.0, float currentX = 0.0, float currentY = 0.0) nothrow
   {
     super(gMalloc(hb_draw_state_t.sizeof), Yes.Take);
     this.pathOpen = pathOpen;
@@ -34,32 +34,32 @@ class DrawState : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())hb_gobject_draw_state_get_type != &gidSymbolNotFound ? hb_gobject_draw_state_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DrawState self()
+  override DrawState self() nothrow
   {
     return this;
   }
@@ -68,7 +68,7 @@ class DrawState : gobject.boxed.Boxed
       Get `pathOpen` field.
       Returns: Whether there is an open path
   */
-  @property harfbuzz.types.Bool pathOpen()
+  @property harfbuzz.types.Bool pathOpen() nothrow
   {
     return (cast(hb_draw_state_t*)this._cPtr).pathOpen;
   }
@@ -78,7 +78,7 @@ class DrawState : gobject.boxed.Boxed
       Params:
         propval = Whether there is an open path
   */
-  @property void pathOpen(harfbuzz.types.Bool propval)
+  @property void pathOpen(harfbuzz.types.Bool propval) nothrow
   {
     (cast(hb_draw_state_t*)this._cPtr).pathOpen = propval;
   }
@@ -87,7 +87,7 @@ class DrawState : gobject.boxed.Boxed
       Get `pathStartX` field.
       Returns: X component of the start of current path
   */
-  @property float pathStartX()
+  @property float pathStartX() nothrow
   {
     return (cast(hb_draw_state_t*)this._cPtr).pathStartX;
   }
@@ -97,7 +97,7 @@ class DrawState : gobject.boxed.Boxed
       Params:
         propval = X component of the start of current path
   */
-  @property void pathStartX(float propval)
+  @property void pathStartX(float propval) nothrow
   {
     (cast(hb_draw_state_t*)this._cPtr).pathStartX = propval;
   }
@@ -106,7 +106,7 @@ class DrawState : gobject.boxed.Boxed
       Get `pathStartY` field.
       Returns: Y component of the start of current path
   */
-  @property float pathStartY()
+  @property float pathStartY() nothrow
   {
     return (cast(hb_draw_state_t*)this._cPtr).pathStartY;
   }
@@ -116,7 +116,7 @@ class DrawState : gobject.boxed.Boxed
       Params:
         propval = Y component of the start of current path
   */
-  @property void pathStartY(float propval)
+  @property void pathStartY(float propval) nothrow
   {
     (cast(hb_draw_state_t*)this._cPtr).pathStartY = propval;
   }
@@ -125,7 +125,7 @@ class DrawState : gobject.boxed.Boxed
       Get `currentX` field.
       Returns: X component of current point
   */
-  @property float currentX()
+  @property float currentX() nothrow
   {
     return (cast(hb_draw_state_t*)this._cPtr).currentX;
   }
@@ -135,7 +135,7 @@ class DrawState : gobject.boxed.Boxed
       Params:
         propval = X component of current point
   */
-  @property void currentX(float propval)
+  @property void currentX(float propval) nothrow
   {
     (cast(hb_draw_state_t*)this._cPtr).currentX = propval;
   }
@@ -144,7 +144,7 @@ class DrawState : gobject.boxed.Boxed
       Get `currentY` field.
       Returns: Y component of current point
   */
-  @property float currentY()
+  @property float currentY() nothrow
   {
     return (cast(hb_draw_state_t*)this._cPtr).currentY;
   }
@@ -154,7 +154,7 @@ class DrawState : gobject.boxed.Boxed
       Params:
         propval = Y component of current point
   */
-  @property void currentY(float propval)
+  @property void currentY(float propval) nothrow
   {
     (cast(hb_draw_state_t*)this._cPtr).currentY = propval;
   }

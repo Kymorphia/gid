@@ -36,26 +36,26 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_unix_credentials_message_get_type != &gidSymbolNotFound ? g_unix_credentials_message_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UnixCredentialsMessage self()
+  override UnixCredentialsMessage self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
       Get builder for [gio.unix_credentials_message.UnixCredentialsMessage]
       Returns: New builder object
   */
-  static UnixCredentialsMessageGidBuilder builder()
+  static UnixCredentialsMessageGidBuilder builder() nothrow
   {
     return new UnixCredentialsMessageGidBuilder;
   }
@@ -73,7 +73,7 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
       Get `credentials` property.
       Returns: The credentials stored in the message.
   */
-  @property gio.credentials.Credentials credentials()
+  @property gio.credentials.Credentials credentials() nothrow
   {
     return getCredentials();
   }
@@ -82,7 +82,7 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
       Creates a new #GUnixCredentialsMessage with credentials matching the current processes.
       Returns: a new #GUnixCredentialsMessage
   */
-  this()
+  this() nothrow
   {
     GSocketControlMessage* _cretval;
     _cretval = g_unix_credentials_message_new();
@@ -96,7 +96,7 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
         credentials = A #GCredentials object.
       Returns: a new #GUnixCredentialsMessage
   */
-  static gio.unix_credentials_message.UnixCredentialsMessage newWithCredentials(gio.credentials.Credentials credentials)
+  static gio.unix_credentials_message.UnixCredentialsMessage newWithCredentials(gio.credentials.Credentials credentials) nothrow
   {
     GSocketControlMessage* _cretval;
     _cretval = g_unix_credentials_message_new_with_credentials(credentials ? cast(GCredentials*)credentials._cPtr(No.Dup) : null);
@@ -108,7 +108,7 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
       Checks if passing #GCredentials on a #GSocket is supported on this platform.
       Returns: true if supported, false otherwise
   */
-  static bool isSupported()
+  static bool isSupported() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_unix_credentials_message_is_supported();
@@ -119,7 +119,7 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
       Gets the credentials stored in message.
       Returns: A #GCredentials instance. Do not free, it is owned by message.
   */
-  gio.credentials.Credentials getCredentials()
+  gio.credentials.Credentials getCredentials() nothrow
   {
     GCredentials* _cretval;
     _cretval = g_unix_credentials_message_get_credentials(cast(GUnixCredentialsMessage*)this._cPtr);
@@ -138,7 +138,7 @@ class UnixCredentialsMessageGidBuilderImpl(T) : gio.socket_control_message.Socke
         propval = The credentials stored in the message.
       Returns: Builder instance for fluent chaining
   */
-  T credentials(gio.credentials.Credentials propval)
+  T credentials(gio.credentials.Credentials propval) nothrow
   {
     return setProperty("credentials", propval);
   }
@@ -151,7 +151,7 @@ final class UnixCredentialsMessageGidBuilder : UnixCredentialsMessageGidBuilderI
       Create object from builder.
       Returns: New object
   */
-  UnixCredentialsMessage build()
+  UnixCredentialsMessage build() nothrow
   {
     return new UnixCredentialsMessage(cast(void*)createGObject(UnixCredentialsMessage._getGType), Yes.Take);
   }

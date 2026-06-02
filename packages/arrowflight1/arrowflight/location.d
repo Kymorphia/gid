@@ -15,26 +15,26 @@ class Location : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_location_get_type != &gidSymbolNotFound ? gaflight_location_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Location self()
+  override Location self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class Location : gobject.object.ObjectWrap
       Get builder for [arrowflight.location.Location]
       Returns: New builder object
   */
-  static LocationGidBuilder builder()
+  static LocationGidBuilder builder() nothrow
   {
     return new LocationGidBuilder;
   }
@@ -61,7 +61,7 @@ class Location : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equal(arrowflight.location.Location otherLocation)
+  bool equal(arrowflight.location.Location otherLocation) nothrow
   {
     bool _retval;
     _retval = cast(bool)gaflight_location_equal(cast(GAFlightLocation*)this._cPtr, otherLocation ? cast(GAFlightLocation*)otherLocation._cPtr(No.Dup) : null);
@@ -69,7 +69,7 @@ class Location : gobject.object.ObjectWrap
   }
 
   /** */
-  string getScheme()
+  string getScheme() nothrow
   {
     char* _cretval;
     _cretval = gaflight_location_get_scheme(cast(GAFlightLocation*)this._cPtr);
@@ -78,7 +78,7 @@ class Location : gobject.object.ObjectWrap
   }
 
   /** */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gaflight_location_to_string(cast(GAFlightLocation*)this._cPtr);
@@ -99,7 +99,7 @@ final class LocationGidBuilder : LocationGidBuilderImpl!LocationGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Location build()
+  Location build() nothrow
   {
     return new Location(cast(void*)createGObject(Location._getGType), Yes.Take);
   }

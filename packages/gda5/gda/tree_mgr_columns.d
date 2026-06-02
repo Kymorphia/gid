@@ -17,26 +17,26 @@ class TreeMgrColumns : gda.tree_manager.TreeManager
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_tree_mgr_columns_get_type != &gidSymbolNotFound ? gda_tree_mgr_columns_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TreeMgrColumns self()
+  override TreeMgrColumns self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class TreeMgrColumns : gda.tree_manager.TreeManager
       Get builder for [gda.tree_mgr_columns.TreeMgrColumns]
       Returns: New builder object
   */
-  static TreeMgrColumnsGidBuilder builder()
+  static TreeMgrColumnsGidBuilder builder() nothrow
   {
     return new TreeMgrColumnsGidBuilder;
   }
@@ -55,7 +55,7 @@ class TreeMgrColumns : gda.tree_manager.TreeManager
       Returns: Defines the #GdaConnection to display information for. Necessary upon construction unless
         the #GdaTreeMgrColumns:meta-store property is specified instead.
   */
-  @property gda.connection.Connection connection()
+  @property gda.connection.Connection connection() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.connection.Connection)("connection");
   }
@@ -66,7 +66,7 @@ class TreeMgrColumns : gda.tree_manager.TreeManager
         the #GdaTreeMgrColumns:connection property is specified instead. This property has
         priority over the GdaTreeMgrColumns:connection property.
   */
-  @property gda.meta_store.MetaStore metaStore()
+  @property gda.meta_store.MetaStore metaStore() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.meta_store.MetaStore)("meta-store");
   }
@@ -81,7 +81,7 @@ class TreeMgrColumns : gda.tree_manager.TreeManager
         tableName = the name of the table
       Returns: a new #GdaTreeManager object
   */
-  this(gda.connection.Connection cnc, string schema, string tableName)
+  this(gda.connection.Connection cnc, string schema, string tableName) nothrow
   {
     GdaTreeManager* _cretval;
     const(char)* _schema = schema.toCString(No.Alloc);
@@ -102,7 +102,7 @@ class TreeMgrColumnsGidBuilderImpl(T) : gda.tree_manager.TreeManagerGidBuilderIm
           the #GdaTreeMgrColumns:meta-store property is specified instead.
       Returns: Builder instance for fluent chaining
   */
-  T connection(gda.connection.Connection propval)
+  T connection(gda.connection.Connection propval) nothrow
   {
     return setProperty("connection", propval);
   }
@@ -115,7 +115,7 @@ class TreeMgrColumnsGidBuilderImpl(T) : gda.tree_manager.TreeManagerGidBuilderIm
           priority over the GdaTreeMgrColumns:connection property.
       Returns: Builder instance for fluent chaining
   */
-  T metaStore(gda.meta_store.MetaStore propval)
+  T metaStore(gda.meta_store.MetaStore propval) nothrow
   {
     return setProperty("meta-store", propval);
   }
@@ -126,7 +126,7 @@ class TreeMgrColumnsGidBuilderImpl(T) : gda.tree_manager.TreeManagerGidBuilderIm
         propval = If no set, then the table name will be fetched from the parent node using the "schema" attribute
       Returns: Builder instance for fluent chaining
   */
-  T schema(string propval)
+  T schema(string propval) nothrow
   {
     return setProperty("schema", propval);
   }
@@ -137,7 +137,7 @@ class TreeMgrColumnsGidBuilderImpl(T) : gda.tree_manager.TreeManagerGidBuilderIm
         propval = If no set, then the table name will be fetched from the parent node using the "table_name" attribute
       Returns: Builder instance for fluent chaining
   */
-  T tableName(string propval)
+  T tableName(string propval) nothrow
   {
     return setProperty("table-name", propval);
   }
@@ -150,7 +150,7 @@ final class TreeMgrColumnsGidBuilder : TreeMgrColumnsGidBuilderImpl!TreeMgrColum
       Create object from builder.
       Returns: New object
   */
-  TreeMgrColumns build()
+  TreeMgrColumns build() nothrow
   {
     return new TreeMgrColumns(cast(void*)createGObject(TreeMgrColumns._getGType), Yes.Take);
   }

@@ -15,32 +15,32 @@ class ScriptDialog : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_script_dialog_get_type != &gidSymbolNotFound ? webkit_script_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ScriptDialog self()
+  override ScriptDialog self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class ScriptDialog : gobject.boxed.Boxed
       that we are done with the script dialog. The dialog will be closed on destruction if this function
       hasn't been called before.
   */
-  void close()
+  void close() nothrow
   {
     webkit_script_dialog_close(cast(WebKitScriptDialog*)this._cPtr);
   }
@@ -71,7 +71,7 @@ class ScriptDialog : gobject.boxed.Boxed
       Params:
         confirmed = whether user confirmed the dialog
   */
-  void confirmSetConfirmed(bool confirmed)
+  void confirmSetConfirmed(bool confirmed) nothrow
   {
     webkit_script_dialog_confirm_set_confirmed(cast(WebKitScriptDialog*)this._cPtr, confirmed);
   }
@@ -80,7 +80,7 @@ class ScriptDialog : gobject.boxed.Boxed
       Get the dialog type of a #WebKitScriptDialog.
       Returns: the #WebKitScriptDialogType of dialog
   */
-  webkit.types.ScriptDialogType getDialogType()
+  webkit.types.ScriptDialogType getDialogType() nothrow
   {
     WebKitScriptDialogType _cretval;
     _cretval = webkit_script_dialog_get_dialog_type(cast(WebKitScriptDialog*)this._cPtr);
@@ -92,7 +92,7 @@ class ScriptDialog : gobject.boxed.Boxed
       Get the message of a #WebKitScriptDialog.
       Returns: the message of dialog.
   */
-  string getMessage()
+  string getMessage() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_script_dialog_get_message(cast(WebKitScriptDialog*)this._cPtr);
@@ -107,7 +107,7 @@ class ScriptDialog : gobject.boxed.Boxed
       [webkit.types.ScriptDialogType.Prompt].
       Returns: the default text of dialog
   */
-  string promptGetDefaultText()
+  string promptGetDefaultText() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_script_dialog_prompt_get_default_text(cast(WebKitScriptDialog*)this._cPtr);
@@ -128,7 +128,7 @@ class ScriptDialog : gobject.boxed.Boxed
       Params:
         text = the text to set
   */
-  void promptSetText(string text)
+  void promptSetText(string text) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     webkit_script_dialog_prompt_set_text(cast(WebKitScriptDialog*)this._cPtr, _text);

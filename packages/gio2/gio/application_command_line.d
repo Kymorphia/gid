@@ -187,26 +187,26 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_application_command_line_get_type != &gidSymbolNotFound ? g_application_command_line_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ApplicationCommandLine self()
+  override ApplicationCommandLine self() nothrow
   {
     return this;
   }
@@ -215,7 +215,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
       Get builder for [gio.application_command_line.ApplicationCommandLine]
       Returns: New builder object
   */
-  static ApplicationCommandLineGidBuilder builder()
+  static ApplicationCommandLineGidBuilder builder() nothrow
   {
     return new ApplicationCommandLineGidBuilder;
   }
@@ -224,7 +224,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
       Get `isRemote` property.
       Returns: Whether this is a remote commandline.
   */
-  @property bool isRemote()
+  @property bool isRemote() nothrow
   {
     return getIsRemote();
   }
@@ -241,7 +241,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
         arg = an argument from cmdline
       Returns: a new #GFile
   */
-  gio.file.File createFileForArg(string arg)
+  gio.file.File createFileForArg(string arg) nothrow
   {
     GFile* _cretval;
     const(char)* _arg = arg.toCString(No.Alloc);
@@ -267,7 +267,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
       object is disposed — so you can omit the call in non-garbage collected
       languages.
   */
-  void done()
+  void done() nothrow
   {
     g_application_command_line_done(cast(GApplicationCommandLine*)this._cPtr);
   }
@@ -286,7 +286,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
       [glib.global.strfreev].
       Returns: the string array containing the arguments (the argv)
   */
-  string[] getArguments()
+  string[] getArguments() nothrow
   {
     char** _cretval;
     int _cretlength;
@@ -314,7 +314,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
       long as cmdline exists.
       Returns: the current directory, or null
   */
-  string getCwd()
+  string getCwd() nothrow
   {
     const(char)* _cretval;
     _cretval = g_application_command_line_get_cwd(cast(GApplicationCommandLine*)this._cPtr);
@@ -340,7 +340,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
       in the value of a single environment variable.
       Returns: the environment strings, or null if they were not sent
   */
-  string[] getEnviron()
+  string[] getEnviron() nothrow
   {
     const(char*)* _cretval;
     _cretval = g_application_command_line_get_environ(cast(GApplicationCommandLine*)this._cPtr);
@@ -363,7 +363,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
       [gio.application_command_line.ApplicationCommandLine.setExitStatus] for more information.
       Returns: the exit status
   */
-  int getExitStatus()
+  int getExitStatus() nothrow
   {
     int _retval;
     _retval = g_application_command_line_get_exit_status(cast(GApplicationCommandLine*)this._cPtr);
@@ -374,7 +374,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
       Determines if cmdline represents a remote invocation.
       Returns: true if the invocation was remote
   */
-  bool getIsRemote()
+  bool getIsRemote() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_application_command_line_get_is_remote(cast(GApplicationCommandLine*)this._cPtr);
@@ -396,7 +396,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
       all values must be checked before being used.
       Returns: a #GVariantDict with the options
   */
-  glib.variant_dict.VariantDict getOptionsDict()
+  glib.variant_dict.VariantDict getOptionsDict() nothrow
   {
     GVariantDict* _cretval;
     _cretval = g_application_command_line_get_options_dict(cast(GApplicationCommandLine*)this._cPtr);
@@ -418,7 +418,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
       For local invocation, it will be null.
       Returns: the platform data, or null
   */
-  glib.variant.Variant getPlatformData()
+  glib.variant.Variant getPlatformData() nothrow
   {
     GVariant* _cretval;
     _cretval = g_application_command_line_get_platform_data(cast(GApplicationCommandLine*)this._cPtr);
@@ -439,7 +439,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
       You must only call this function once per commandline invocation.
       Returns: a #GInputStream for stdin
   */
-  gio.input_stream.InputStream getStdin()
+  gio.input_stream.InputStream getStdin() nothrow
   {
     GInputStream* _cretval;
     _cretval = g_application_command_line_get_stdin(cast(GApplicationCommandLine*)this._cPtr);
@@ -464,7 +464,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
         name = the environment variable to get
       Returns: the value of the variable, or null if unset or unsent
   */
-  string getenv(string name)
+  string getenv(string name) nothrow
   {
     const(char)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -483,7 +483,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
       Params:
         message = the message
   */
-  void printLiteral(string message)
+  void printLiteral(string message) nothrow
   {
     const(char)* _message = message.toCString(No.Alloc);
     g_application_command_line_print_literal(cast(GApplicationCommandLine*)this._cPtr, _message);
@@ -499,7 +499,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
       Params:
         message = the message
   */
-  void printerrLiteral(string message)
+  void printerrLiteral(string message) nothrow
   {
     const(char)* _message = message.toCString(No.Alloc);
     g_application_command_line_printerr_literal(cast(GApplicationCommandLine*)this._cPtr, _message);
@@ -534,7 +534,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
       Params:
         exitStatus = the exit status
   */
-  void setExitStatus(int exitStatus)
+  void setExitStatus(int exitStatus) nothrow
   {
     g_application_command_line_set_exit_status(cast(GApplicationCommandLine*)this._cPtr, exitStatus);
   }
@@ -551,7 +551,7 @@ class ApplicationCommandLineGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuil
           signal emission.
       Returns: Builder instance for fluent chaining
   */
-  T arguments(glib.variant.Variant propval)
+  T arguments(glib.variant.Variant propval) nothrow
   {
     return setProperty("arguments", propval);
   }
@@ -562,7 +562,7 @@ class ApplicationCommandLineGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuil
         propval = The options sent along with the commandline.
       Returns: Builder instance for fluent chaining
   */
-  T options(glib.variant.Variant propval)
+  T options(glib.variant.Variant propval) nothrow
   {
     return setProperty("options", propval);
   }
@@ -573,7 +573,7 @@ class ApplicationCommandLineGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuil
         propval = Platform-specific data for the commandline.
       Returns: Builder instance for fluent chaining
   */
-  T platformData(glib.variant.Variant propval)
+  T platformData(glib.variant.Variant propval) nothrow
   {
     return setProperty("platform-data", propval);
   }
@@ -586,7 +586,7 @@ final class ApplicationCommandLineGidBuilder : ApplicationCommandLineGidBuilderI
       Create object from builder.
       Returns: New object
   */
-  ApplicationCommandLine build()
+  ApplicationCommandLine build() nothrow
   {
     return new ApplicationCommandLine(cast(void*)createGObject(ApplicationCommandLine._getGType), No.Take);
   }

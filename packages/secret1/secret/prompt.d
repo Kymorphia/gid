@@ -42,26 +42,26 @@ class Prompt : gio.dbus_proxy.DBusProxy
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())secret_prompt_get_type != &gidSymbolNotFound ? secret_prompt_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Prompt self()
+  override Prompt self() nothrow
   {
     return this;
   }
@@ -70,7 +70,7 @@ class Prompt : gio.dbus_proxy.DBusProxy
       Get builder for [secret.prompt.Prompt]
       Returns: New builder object
   */
-  static PromptGidBuilder builder()
+  static PromptGidBuilder builder() nothrow
   {
     return new PromptGidBuilder;
   }
@@ -94,14 +94,21 @@ class Prompt : gio.dbus_proxy.DBusProxy
         cancellable = optional cancellation object
         callback = called when the operation completes
   */
-  void perform(string windowId, glib.variant_type.VariantType returnType, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void perform(string windowId, glib.variant_type.VariantType returnType, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _windowId = windowId.toCString(No.Alloc);
@@ -219,7 +226,7 @@ final class PromptGidBuilder : PromptGidBuilderImpl!PromptGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Prompt build()
+  Prompt build() nothrow
   {
     return new Prompt(cast(void*)createGObject(Prompt._getGType), No.Take);
   }

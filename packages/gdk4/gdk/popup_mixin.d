@@ -28,7 +28,7 @@ template PopupT()
       Get `autohide` property.
       Returns: Whether to hide on outside clicks.
   */
-  @property bool autohide()
+  @property bool autohide() nothrow
   {
     return getAutohide();
   }
@@ -37,7 +37,7 @@ template PopupT()
       Get `parent` property.
       Returns: The parent surface.
   */
-  @property gdk.surface.Surface parent()
+  @property gdk.surface.Surface parent() nothrow
   {
     return getParent();
   }
@@ -46,7 +46,7 @@ template PopupT()
       Returns whether this popup is set to hide on outside clicks.
       Returns: true if popup will autohide
   */
-  override bool getAutohide()
+  override bool getAutohide() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_popup_get_autohide(cast(GdkPopup*)this._cPtr);
@@ -57,7 +57,7 @@ template PopupT()
       Returns the parent surface of a popup.
       Returns: the parent surface
   */
-  override gdk.surface.Surface getParent()
+  override gdk.surface.Surface getParent() nothrow
   {
     GdkSurface* _cretval;
     _cretval = gdk_popup_get_parent(cast(GdkPopup*)this._cPtr);
@@ -69,7 +69,7 @@ template PopupT()
       Obtains the position of the popup relative to its parent.
       Returns: the X coordinate of popup position
   */
-  override int getPositionX()
+  override int getPositionX() nothrow
   {
     int _retval;
     _retval = gdk_popup_get_position_x(cast(GdkPopup*)this._cPtr);
@@ -80,7 +80,7 @@ template PopupT()
       Obtains the position of the popup relative to its parent.
       Returns: the Y coordinate of popup position
   */
-  override int getPositionY()
+  override int getPositionY() nothrow
   {
     int _retval;
     _retval = gdk_popup_get_position_y(cast(GdkPopup*)this._cPtr);
@@ -94,7 +94,7 @@ template PopupT()
       or after the [gdk.surface.Surface.layout] signal is emitted.
       Returns: the current rectangle anchor value of popup
   */
-  override gdk.types.Gravity getRectAnchor()
+  override gdk.types.Gravity getRectAnchor() nothrow
   {
     GdkGravity _cretval;
     _cretval = gdk_popup_get_rect_anchor(cast(GdkPopup*)this._cPtr);
@@ -109,7 +109,7 @@ template PopupT()
       or after the [gdk.surface.Surface.layout] signal is emitted.
       Returns: the current surface anchor value of popup
   */
-  override gdk.types.Gravity getSurfaceAnchor()
+  override gdk.types.Gravity getSurfaceAnchor() nothrow
   {
     GdkGravity _cretval;
     _cretval = gdk_popup_get_surface_anchor(cast(GdkPopup*)this._cPtr);
@@ -140,7 +140,7 @@ template PopupT()
         layout = the [gdk.popup_layout.PopupLayout] object used to layout
       Returns: false if it failed to be presented, otherwise true.
   */
-  override bool present(int width, int height, gdk.popup_layout.PopupLayout layout)
+  override bool present(int width, int height, gdk.popup_layout.PopupLayout layout) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_popup_present(cast(GdkPopup*)this._cPtr, width, height, layout ? cast(GdkPopupLayout*)layout._cPtr(No.Dup) : null);
@@ -158,7 +158,7 @@ template PopupGidBuilderT()
         propval = Whether to hide on outside clicks.
       Returns: Builder instance for fluent chaining
   */
-  T autohide(bool propval)
+  T autohide(bool propval) nothrow
   {
     return setProperty("autohide", propval);
   }
@@ -169,7 +169,7 @@ template PopupGidBuilderT()
         propval = The parent surface.
       Returns: Builder instance for fluent chaining
   */
-  T parent(gdk.surface.Surface propval)
+  T parent(gdk.surface.Surface propval) nothrow
   {
     return setProperty("parent", propval);
   }

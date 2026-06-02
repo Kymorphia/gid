@@ -48,26 +48,26 @@ class Application : gtk.application.Application
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_application_get_type != &gidSymbolNotFound ? adw_application_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Application self()
+  override Application self() nothrow
   {
     return this;
   }
@@ -76,7 +76,7 @@ class Application : gtk.application.Application
       Get builder for [adw.application.Application]
       Returns: New builder object
   */
-  static ApplicationGidBuilder builder()
+  static ApplicationGidBuilder builder() nothrow
   {
     return new ApplicationGidBuilder;
   }
@@ -88,7 +88,7 @@ class Application : gtk.application.Application
         This is a convenience property allowing to access [adw.style_manager.StyleManager] through
         property bindings or expressions.
   */
-  @property adw.style_manager.StyleManager styleManager()
+  @property adw.style_manager.StyleManager styleManager() nothrow
   {
     return getStyleManager();
   }
@@ -107,7 +107,7 @@ class Application : gtk.application.Application
         flags = The application flags
       Returns: the newly created [adw.application.Application]
   */
-  this(string applicationId, gio.types.ApplicationFlags flags)
+  this(string applicationId, gio.types.ApplicationFlags flags) nothrow
   {
     AdwApplication* _cretval;
     const(char)* _applicationId = applicationId.toCString(No.Alloc);
@@ -122,7 +122,7 @@ class Application : gtk.application.Application
       property bindings or expressions.
       Returns: the style manager
   */
-  adw.style_manager.StyleManager getStyleManager()
+  adw.style_manager.StyleManager getStyleManager() nothrow
   {
     AdwStyleManager* _cretval;
     _cretval = adw_application_get_style_manager(cast(AdwApplication*)this._cPtr);
@@ -144,7 +144,7 @@ final class ApplicationGidBuilder : ApplicationGidBuilderImpl!ApplicationGidBuil
       Create object from builder.
       Returns: New object
   */
-  Application build()
+  Application build() nothrow
   {
     return new Application(cast(void*)createGObject(Application._getGType), Yes.Take);
   }

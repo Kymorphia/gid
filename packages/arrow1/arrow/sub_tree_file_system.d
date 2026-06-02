@@ -15,26 +15,26 @@ class SubTreeFileSystem : arrow.file_system.FileSystem
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_sub_tree_file_system_get_type != &gidSymbolNotFound ? garrow_sub_tree_file_system_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SubTreeFileSystem self()
+  override SubTreeFileSystem self() nothrow
   {
     return this;
   }
@@ -43,19 +43,19 @@ class SubTreeFileSystem : arrow.file_system.FileSystem
       Get builder for [arrow.sub_tree_file_system.SubTreeFileSystem]
       Returns: New builder object
   */
-  static SubTreeFileSystemGidBuilder builder()
+  static SubTreeFileSystemGidBuilder builder() nothrow
   {
     return new SubTreeFileSystemGidBuilder;
   }
 
   /** */
-  @property arrow.file_system.FileSystem baseFileSystem()
+  @property arrow.file_system.FileSystem baseFileSystem() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.file_system.FileSystem)("base-file-system");
   }
 
   /** */
-  this(string basePath, arrow.file_system.FileSystem baseFileSystem)
+  this(string basePath, arrow.file_system.FileSystem baseFileSystem) nothrow
   {
     GArrowSubTreeFileSystem* _cretval;
     const(char)* _basePath = basePath.toCString(No.Alloc);
@@ -69,7 +69,7 @@ class SubTreeFileSystemGidBuilderImpl(T) : arrow.file_system.FileSystemGidBuilde
 {
 
   /** */
-  T baseFileSystem(arrow.file_system.FileSystem propval)
+  T baseFileSystem(arrow.file_system.FileSystem propval) nothrow
   {
     return setProperty("base-file-system", propval);
   }
@@ -82,7 +82,7 @@ final class SubTreeFileSystemGidBuilder : SubTreeFileSystemGidBuilderImpl!SubTre
       Create object from builder.
       Returns: New object
   */
-  SubTreeFileSystem build()
+  SubTreeFileSystem build() nothrow
   {
     return new SubTreeFileSystem(cast(void*)createGObject(SubTreeFileSystem._getGType), Yes.Take);
   }

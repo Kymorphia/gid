@@ -16,26 +16,26 @@ class InMemoryFragment : arrowdataset.fragment.Fragment
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_in_memory_fragment_get_type != &gidSymbolNotFound ? gadataset_in_memory_fragment_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override InMemoryFragment self()
+  override InMemoryFragment self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class InMemoryFragment : arrowdataset.fragment.Fragment
       Get builder for [arrowdataset.in_memory_fragment.InMemoryFragment]
       Returns: New builder object
   */
-  static InMemoryFragmentGidBuilder builder()
+  static InMemoryFragmentGidBuilder builder() nothrow
   {
     return new InMemoryFragmentGidBuilder;
   }
 
   /** */
-  this(arrow.schema.Schema schema, arrow.record_batch.RecordBatch[] recordBatches)
+  this(arrow.schema.Schema schema, arrow.record_batch.RecordBatch[] recordBatches) nothrow
   {
     GADatasetInMemoryFragment* _cretval;
     size_t _nRecordBatches;
@@ -79,7 +79,7 @@ final class InMemoryFragmentGidBuilder : InMemoryFragmentGidBuilderImpl!InMemory
       Create object from builder.
       Returns: New object
   */
-  InMemoryFragment build()
+  InMemoryFragment build() nothrow
   {
     return new InMemoryFragment(cast(void*)createGObject(InMemoryFragment._getGType), Yes.Take);
   }

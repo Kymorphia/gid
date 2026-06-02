@@ -93,26 +93,26 @@ class WebProcessExtension : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_web_process_extension_get_type != &gidSymbolNotFound ? webkit_web_process_extension_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WebProcessExtension self()
+  override WebProcessExtension self() nothrow
   {
     return this;
   }
@@ -121,7 +121,7 @@ class WebProcessExtension : gobject.object.ObjectWrap
       Get builder for [webkitwebprocessextension.web_process_extension.WebProcessExtension]
       Returns: New builder object
   */
-  static WebProcessExtensionGidBuilder builder()
+  static WebProcessExtensionGidBuilder builder() nothrow
   {
     return new WebProcessExtensionGidBuilder;
   }
@@ -134,7 +134,7 @@ class WebProcessExtension : gobject.object.ObjectWrap
       Returns: the #WebKitWebPage for the given page_id, or null if the
            identifier doesn't correspond to an existing web page.
   */
-  webkitwebprocessextension.web_page.WebPage getPage(ulong pageId)
+  webkitwebprocessextension.web_page.WebPage getPage(ulong pageId) nothrow
   {
     WebKitWebPage* _cretval;
     _cretval = webkit_web_process_extension_get_page(cast(WebKitWebProcessExtension*)this._cPtr, pageId);
@@ -154,14 +154,21 @@ class WebProcessExtension : gobject.object.ObjectWrap
         cancellable = a #GCancellable or null to ignore
         callback = A #GAsyncReadyCallback to call when the request is satisfied or null
   */
-  void sendMessageToContext(webkitwebprocessextension.user_message.UserMessage message, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void sendMessageToContext(webkitwebprocessextension.user_message.UserMessage message, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -205,14 +212,14 @@ class WebProcessExtension : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPageCreated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPageCreated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkitwebprocessextension.web_page.WebPage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkitwebprocessextension.web_process_extension.WebProcessExtension)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -224,7 +231,14 @@ class WebProcessExtension : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkitwebprocessextension.web_process_extension.WebProcessExtension.pageCreated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -251,14 +265,14 @@ class WebProcessExtension : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUserMessageReceived(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUserMessageReceived(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkitwebprocessextension.user_message.UserMessage)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkitwebprocessextension.web_process_extension.WebProcessExtension)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -270,7 +284,14 @@ class WebProcessExtension : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkitwebprocessextension.web_process_extension.WebProcessExtension.userMessageReceived");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -290,7 +311,7 @@ final class WebProcessExtensionGidBuilder : WebProcessExtensionGidBuilderImpl!We
       Create object from builder.
       Returns: New object
   */
-  WebProcessExtension build()
+  WebProcessExtension build() nothrow
   {
     return new WebProcessExtension(cast(void*)createGObject(WebProcessExtension._getGType), No.Take);
   }

@@ -17,26 +17,26 @@ class StreamMem : gmime.stream.Stream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_stream_mem_get_type != &gidSymbolNotFound ? g_mime_stream_mem_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StreamMem self()
+  override StreamMem self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class StreamMem : gmime.stream.Stream
       Get builder for [gmime.stream_mem.StreamMem]
       Returns: New builder object
   */
-  static StreamMemGidBuilder builder()
+  static StreamMemGidBuilder builder() nothrow
   {
     return new StreamMemGidBuilder;
   }
@@ -54,7 +54,7 @@ class StreamMem : gmime.stream.Stream
       Creates a new #GMimeStreamMem object.
       Returns: a new memory stream.
   */
-  this()
+  this() nothrow
   {
     GMimeStream* _cretval;
     _cretval = g_mime_stream_mem_new();
@@ -69,7 +69,7 @@ class StreamMem : gmime.stream.Stream
         buffer = stream data
       Returns: a new memory stream initialized with buffer.
   */
-  static gmime.stream_mem.StreamMem newWithBuffer(ubyte[] buffer)
+  static gmime.stream_mem.StreamMem newWithBuffer(ubyte[] buffer) nothrow
   {
     GMimeStream* _cretval;
     size_t _len;
@@ -89,7 +89,7 @@ class StreamMem : gmime.stream.Stream
         array = source data
       Returns: a new memory stream using array.
   */
-  static gmime.stream_mem.StreamMem newWithByteArray(ubyte[] array)
+  static gmime.stream_mem.StreamMem newWithByteArray(ubyte[] array) nothrow
   {
     GMimeStream* _cretval;
     auto _array = gByteArrayFromD(array);
@@ -103,7 +103,7 @@ class StreamMem : gmime.stream.Stream
       Gets the byte array from the memory stream.
       Returns: the byte array from the memory stream.
   */
-  ubyte[] getByteArray()
+  ubyte[] getByteArray() nothrow
   {
     GByteArray* _cretval;
     _cretval = g_mime_stream_mem_get_byte_array(cast(GMimeStreamMem*)this._cPtr);
@@ -116,7 +116,7 @@ class StreamMem : gmime.stream.Stream
       Returns: true if mem owns the backend memory buffer or false
         otherwise.
   */
-  bool getOwner()
+  bool getOwner() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_stream_mem_get_owner(cast(GMimeStreamMem*)this._cPtr);
@@ -132,7 +132,7 @@ class StreamMem : gmime.stream.Stream
       Params:
         array = stream data
   */
-  void setByteArray(ubyte[] array)
+  void setByteArray(ubyte[] array) nothrow
   {
     auto _array = gByteArrayFromD(array);
     scope(exit) containerFree!(GByteArray*, ubyte, GidOwnership.None)(_array);
@@ -148,7 +148,7 @@ class StreamMem : gmime.stream.Stream
       Params:
         owner = true if this stream should own the #GByteArray or false otherwise
   */
-  void setOwner(bool owner)
+  void setOwner(bool owner) nothrow
   {
     g_mime_stream_mem_set_owner(cast(GMimeStreamMem*)this._cPtr, owner);
   }
@@ -166,7 +166,7 @@ final class StreamMemGidBuilder : StreamMemGidBuilderImpl!StreamMemGidBuilder
       Create object from builder.
       Returns: New object
   */
-  StreamMem build()
+  StreamMem build() nothrow
   {
     return new StreamMem(cast(void*)createGObject(StreamMem._getGType), Yes.Take);
   }

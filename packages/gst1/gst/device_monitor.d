@@ -80,26 +80,26 @@ class DeviceMonitor : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_device_monitor_get_type != &gidSymbolNotFound ? gst_device_monitor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DeviceMonitor self()
+  override DeviceMonitor self() nothrow
   {
     return this;
   }
@@ -108,19 +108,19 @@ class DeviceMonitor : gst.object.ObjectWrap
       Get builder for [gst.device_monitor.DeviceMonitor]
       Returns: New builder object
   */
-  static DeviceMonitorGidBuilder builder()
+  static DeviceMonitorGidBuilder builder() nothrow
   {
     return new DeviceMonitorGidBuilder;
   }
 
   /** */
-  @property bool showAll()
+  @property bool showAll() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("show-all");
   }
 
   /** */
-  @property void showAll(bool propval)
+  @property void showAll(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("show-all", propval);
   }
@@ -129,7 +129,7 @@ class DeviceMonitor : gst.object.ObjectWrap
       Create a new #GstDeviceMonitor
       Returns: a new device monitor.
   */
-  this()
+  this() nothrow
   {
     GstDeviceMonitor* _cretval;
     _cretval = gst_device_monitor_new();
@@ -155,7 +155,7 @@ class DeviceMonitor : gst.object.ObjectWrap
       Returns: The id of the new filter or 0 if no provider matched the filter's
          classes.
   */
-  uint addFilter(string classes = null, gst.caps.Caps caps = null)
+  uint addFilter(string classes = null, gst.caps.Caps caps = null) nothrow
   {
     uint _retval;
     const(char)* _classes = classes.toCString(No.Alloc);
@@ -167,7 +167,7 @@ class DeviceMonitor : gst.object.ObjectWrap
       Gets the #GstBus of this #GstDeviceMonitor
       Returns: a #GstBus
   */
-  gst.bus.Bus getBus()
+  gst.bus.Bus getBus() nothrow
   {
     GstBus* _cretval;
     _cretval = gst_device_monitor_get_bus(cast(GstDeviceMonitor*)this._cPtr);
@@ -181,7 +181,7 @@ class DeviceMonitor : gst.object.ObjectWrap
       Returns: a #GList of
           #GstDevice
   */
-  gst.device.Device[] getDevices()
+  gst.device.Device[] getDevices() nothrow
   {
     GList* _cretval;
     _cretval = gst_device_monitor_get_devices(cast(GstDeviceMonitor*)this._cPtr);
@@ -196,7 +196,7 @@ class DeviceMonitor : gst.object.ObjectWrap
       Returns: A list of device provider factory names that are currently being
             monitored by monitor or null when nothing is being monitored.
   */
-  string[] getProviders()
+  string[] getProviders() nothrow
   {
     char** _cretval;
     _cretval = gst_device_monitor_get_providers(cast(GstDeviceMonitor*)this._cPtr);
@@ -220,7 +220,7 @@ class DeviceMonitor : gst.object.ObjectWrap
       providers.
       Returns: true when all devices will be shown.
   */
-  bool getShowAllDevices()
+  bool getShowAllDevices() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_device_monitor_get_show_all_devices(cast(GstDeviceMonitor*)this._cPtr);
@@ -235,7 +235,7 @@ class DeviceMonitor : gst.object.ObjectWrap
         filterId = the id of the filter
       Returns: true of the filter id was valid, false otherwise
   */
-  bool removeFilter(uint filterId)
+  bool removeFilter(uint filterId) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_device_monitor_remove_filter(cast(GstDeviceMonitor*)this._cPtr, filterId);
@@ -249,7 +249,7 @@ class DeviceMonitor : gst.object.ObjectWrap
       Params:
         showAll = show all devices
   */
-  void setShowAllDevices(bool showAll)
+  void setShowAllDevices(bool showAll) nothrow
   {
     gst_device_monitor_set_show_all_devices(cast(GstDeviceMonitor*)this._cPtr, showAll);
   }
@@ -261,7 +261,7 @@ class DeviceMonitor : gst.object.ObjectWrap
       Returns: true if the device monitoring could be started, i.e. at least a
             single device provider was started successfully.
   */
-  bool start()
+  bool start() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_device_monitor_start(cast(GstDeviceMonitor*)this._cPtr);
@@ -271,7 +271,7 @@ class DeviceMonitor : gst.object.ObjectWrap
   /**
       Stops monitoring the devices.
   */
-  void stop()
+  void stop() nothrow
   {
     gst_device_monitor_stop(cast(GstDeviceMonitor*)this._cPtr);
   }
@@ -282,7 +282,7 @@ class DeviceMonitorGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T showAll(bool propval)
+  T showAll(bool propval) nothrow
   {
     return setProperty("show-all", propval);
   }
@@ -295,7 +295,7 @@ final class DeviceMonitorGidBuilder : DeviceMonitorGidBuilderImpl!DeviceMonitorG
       Create object from builder.
       Returns: New object
   */
-  DeviceMonitor build()
+  DeviceMonitor build() nothrow
   {
     return new DeviceMonitor(cast(void*)createGObject(DeviceMonitor._getGType), Yes.Take);
   }

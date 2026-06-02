@@ -16,26 +16,26 @@ class ScrolledWindowAccessible : gtk.container_accessible.ContainerAccessible
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scrolled_window_accessible_get_type != &gidSymbolNotFound ? gtk_scrolled_window_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ScrolledWindowAccessible self()
+  override ScrolledWindowAccessible self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class ScrolledWindowAccessible : gtk.container_accessible.ContainerAccessible
       Get builder for [gtk.scrolled_window_accessible.ScrolledWindowAccessible]
       Returns: New builder object
   */
-  static ScrolledWindowAccessibleGidBuilder builder()
+  static ScrolledWindowAccessibleGidBuilder builder() nothrow
   {
     return new ScrolledWindowAccessibleGidBuilder;
   }
@@ -63,7 +63,7 @@ final class ScrolledWindowAccessibleGidBuilder : ScrolledWindowAccessibleGidBuil
       Create object from builder.
       Returns: New object
   */
-  ScrolledWindowAccessible build()
+  ScrolledWindowAccessible build() nothrow
   {
     return new ScrolledWindowAccessible(cast(void*)createGObject(ScrolledWindowAccessible._getGType), No.Take);
   }

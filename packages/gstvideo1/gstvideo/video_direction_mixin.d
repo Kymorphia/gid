@@ -18,13 +18,13 @@ template VideoDirectionT()
 {
 
   /** */
-  @property gstvideo.types.VideoOrientationMethod videoDirection()
+  @property gstvideo.types.VideoOrientationMethod videoDirection() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gstvideo.types.VideoOrientationMethod)("video-direction");
   }
 
   /** */
-  @property void videoDirection(gstvideo.types.VideoOrientationMethod propval)
+  @property void videoDirection(gstvideo.types.VideoOrientationMethod propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gstvideo.types.VideoOrientationMethod)("video-direction", propval);
   }
@@ -35,7 +35,7 @@ template VideoDirectionGidBuilderT()
 {
 
   /** */
-  T videoDirection(gstvideo.types.VideoOrientationMethod propval)
+  T videoDirection(gstvideo.types.VideoOrientationMethod propval) nothrow
   {
     return setProperty("video-direction", propval);
   }

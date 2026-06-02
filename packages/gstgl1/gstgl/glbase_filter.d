@@ -21,26 +21,26 @@ class GLBaseFilter : gstbase.base_transform.BaseTransform
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_base_filter_get_type != &gidSymbolNotFound ? gst_gl_base_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLBaseFilter self()
+  override GLBaseFilter self() nothrow
   {
     return this;
   }
@@ -49,19 +49,19 @@ class GLBaseFilter : gstbase.base_transform.BaseTransform
       Get builder for [gstgl.glbase_filter.GLBaseFilter]
       Returns: New builder object
   */
-  static GLBaseFilterGidBuilder builder()
+  static GLBaseFilterGidBuilder builder() nothrow
   {
     return new GLBaseFilterGidBuilder;
   }
 
   /** */
-  @property gstgl.glcontext.GLContext context()
+  @property gstgl.glcontext.GLContext context() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gstgl.glcontext.GLContext)("context");
   }
 
   /** */
-  bool findGlContext()
+  bool findGlContext() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_base_filter_find_gl_context(cast(GstGLBaseFilter*)this._cPtr);
@@ -69,7 +69,7 @@ class GLBaseFilter : gstbase.base_transform.BaseTransform
   }
 
   /** */
-  gstgl.glcontext.GLContext getGlContext()
+  gstgl.glcontext.GLContext getGlContext() nothrow
   {
     GstGLContext* _cretval;
     _cretval = gst_gl_base_filter_get_gl_context(cast(GstGLBaseFilter*)this._cPtr);
@@ -90,7 +90,7 @@ final class GLBaseFilterGidBuilder : GLBaseFilterGidBuilderImpl!GLBaseFilterGidB
       Create object from builder.
       Returns: New object
   */
-  GLBaseFilter build()
+  GLBaseFilter build() nothrow
   {
     return new GLBaseFilter(cast(void*)createGObject(GLBaseFilter._getGType), No.Take);
   }

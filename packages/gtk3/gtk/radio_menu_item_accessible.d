@@ -20,26 +20,26 @@ class RadioMenuItemAccessible : gtk.check_menu_item_accessible.CheckMenuItemAcce
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_radio_menu_item_accessible_get_type != &gidSymbolNotFound ? gtk_radio_menu_item_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RadioMenuItemAccessible self()
+  override RadioMenuItemAccessible self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class RadioMenuItemAccessible : gtk.check_menu_item_accessible.CheckMenuItemAcce
       Get builder for [gtk.radio_menu_item_accessible.RadioMenuItemAccessible]
       Returns: New builder object
   */
-  static RadioMenuItemAccessibleGidBuilder builder()
+  static RadioMenuItemAccessibleGidBuilder builder() nothrow
   {
     return new RadioMenuItemAccessibleGidBuilder;
   }
@@ -67,7 +67,7 @@ final class RadioMenuItemAccessibleGidBuilder : RadioMenuItemAccessibleGidBuilde
       Create object from builder.
       Returns: New object
   */
-  RadioMenuItemAccessible build()
+  RadioMenuItemAccessible build() nothrow
   {
     return new RadioMenuItemAccessible(cast(void*)createGObject(RadioMenuItemAccessible._getGType), No.Take);
   }

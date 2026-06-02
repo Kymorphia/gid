@@ -25,11 +25,8 @@ class ParentBufferMeta
   GstParentBufferMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gst.parent_buffer_meta.ParentBufferMeta");
-
     _cInstance = *cast(GstParentBufferMeta*)ptr;
 
     if (take)
@@ -37,7 +34,7 @@ class ParentBufferMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -46,7 +43,7 @@ class ParentBufferMeta
       Get `parent` field.
       Returns: the parent #GstMeta structure
   */
-  @property gst.meta.Meta parent()
+  @property gst.meta.Meta parent() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstParentBufferMeta*)this._cPtr).parent, No.Take);
   }
@@ -55,7 +52,7 @@ class ParentBufferMeta
       Get `buffer` field.
       Returns: the #GstBuffer on which a reference is being held.
   */
-  @property gst.buffer.Buffer buffer()
+  @property gst.buffer.Buffer buffer() nothrow
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstParentBufferMeta*)this._cPtr).buffer);
   }
@@ -65,7 +62,7 @@ class ParentBufferMeta
       Params:
         propval = the #GstBuffer on which a reference is being held.
   */
-  @property void buffer(gst.buffer.Buffer propval)
+  @property void buffer(gst.buffer.Buffer propval) nothrow
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstParentBufferMeta*)this._cPtr).buffer);
     dToC(propval, cast(void*)&(cast(GstParentBufferMeta*)this._cPtr).buffer);
@@ -75,7 +72,7 @@ class ParentBufferMeta
       Gets the global #GstMetaInfo describing  the #GstParentBufferMeta meta.
       Returns: The #GstMetaInfo
   */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_parent_buffer_meta_get_info();

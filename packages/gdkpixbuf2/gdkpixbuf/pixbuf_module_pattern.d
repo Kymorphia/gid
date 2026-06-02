@@ -44,11 +44,8 @@ class PixbufModulePattern
   GdkPixbufModulePattern _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdkpixbuf.pixbuf_module_pattern.PixbufModulePattern");
-
     _cInstance = *cast(GdkPixbufModulePattern*)ptr;
 
     if (take)
@@ -56,7 +53,7 @@ class PixbufModulePattern
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -65,7 +62,7 @@ class PixbufModulePattern
       Get `prefix` field.
       Returns: the prefix for this pattern
   */
-  @property string prefix()
+  @property string prefix() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdkPixbufModulePattern*)this._cPtr).prefix);
   }
@@ -75,7 +72,7 @@ class PixbufModulePattern
       Params:
         propval = the prefix for this pattern
   */
-  @property void prefix(string propval)
+  @property void prefix(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdkPixbufModulePattern*)this._cPtr).prefix);
     dToC(propval, cast(void*)&(cast(GdkPixbufModulePattern*)this._cPtr).prefix);
@@ -86,7 +83,7 @@ class PixbufModulePattern
       Returns: mask containing bytes which modify how the prefix is matched against
          test data
   */
-  @property string mask()
+  @property string mask() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdkPixbufModulePattern*)this._cPtr).mask);
   }
@@ -97,7 +94,7 @@ class PixbufModulePattern
         propval = mask containing bytes which modify how the prefix is matched against
            test data
   */
-  @property void mask(string propval)
+  @property void mask(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdkPixbufModulePattern*)this._cPtr).mask);
     dToC(propval, cast(void*)&(cast(GdkPixbufModulePattern*)this._cPtr).mask);
@@ -107,7 +104,7 @@ class PixbufModulePattern
       Get `relevance` field.
       Returns: relevance of this pattern
   */
-  @property int relevance()
+  @property int relevance() nothrow
   {
     return (cast(GdkPixbufModulePattern*)this._cPtr).relevance;
   }
@@ -117,7 +114,7 @@ class PixbufModulePattern
       Params:
         propval = relevance of this pattern
   */
-  @property void relevance(int propval)
+  @property void relevance(int propval) nothrow
   {
     (cast(GdkPixbufModulePattern*)this._cPtr).relevance = propval;
   }

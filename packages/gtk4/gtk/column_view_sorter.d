@@ -49,26 +49,26 @@ class ColumnViewSorter : gtk.sorter.Sorter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_column_view_sorter_get_type != &gidSymbolNotFound ? gtk_column_view_sorter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ColumnViewSorter self()
+  override ColumnViewSorter self() nothrow
   {
     return this;
   }
@@ -77,7 +77,7 @@ class ColumnViewSorter : gtk.sorter.Sorter
       Get builder for [gtk.column_view_sorter.ColumnViewSorter]
       Returns: New builder object
   */
-  static ColumnViewSorterGidBuilder builder()
+  static ColumnViewSorterGidBuilder builder() nothrow
   {
     return new ColumnViewSorterGidBuilder;
   }
@@ -89,7 +89,7 @@ class ColumnViewSorter : gtk.sorter.Sorter
         The primary sort column is the one that displays the triangle
         in a column view header.
   */
-  @property gtk.column_view_column.ColumnViewColumn primarySortColumn()
+  @property gtk.column_view_column.ColumnViewColumn primarySortColumn() nothrow
   {
     return getPrimarySortColumn();
   }
@@ -102,7 +102,7 @@ class ColumnViewSorter : gtk.sorter.Sorter
         in the column view header of the primary sort column points upwards
         or downwards.
   */
-  @property gtk.types.SortType primarySortOrder()
+  @property gtk.types.SortType primarySortOrder() nothrow
   {
     return getPrimarySortOrder();
   }
@@ -118,7 +118,7 @@ class ColumnViewSorter : gtk.sorter.Sorter
       when the number of sort columns changes.
       Returns: the number of sort columns
   */
-  uint getNSortColumns()
+  uint getNSortColumns() nothrow
   {
     uint _retval;
     _retval = gtk_column_view_sorter_get_n_sort_columns(cast(GtkColumnViewSorter*)this._cPtr);
@@ -137,7 +137,7 @@ class ColumnViewSorter : gtk.sorter.Sorter
         sortOrder = return location for the sort order
       Returns: the positions sort column
   */
-  gtk.column_view_column.ColumnViewColumn getNthSortColumn(uint position, out gtk.types.SortType sortOrder)
+  gtk.column_view_column.ColumnViewColumn getNthSortColumn(uint position, out gtk.types.SortType sortOrder) nothrow
   {
     GtkColumnViewColumn* _cretval;
     _cretval = gtk_column_view_sorter_get_nth_sort_column(cast(GtkColumnViewSorter*)this._cPtr, position, &sortOrder);
@@ -152,7 +152,7 @@ class ColumnViewSorter : gtk.sorter.Sorter
       in a column view header.
       Returns: the primary sort column
   */
-  gtk.column_view_column.ColumnViewColumn getPrimarySortColumn()
+  gtk.column_view_column.ColumnViewColumn getPrimarySortColumn() nothrow
   {
     GtkColumnViewColumn* _cretval;
     _cretval = gtk_column_view_sorter_get_primary_sort_column(cast(GtkColumnViewSorter*)this._cPtr);
@@ -171,7 +171,7 @@ class ColumnViewSorter : gtk.sorter.Sorter
       [gtk.types.SortType.Ascending].
       Returns: the primary sort order
   */
-  gtk.types.SortType getPrimarySortOrder()
+  gtk.types.SortType getPrimarySortOrder() nothrow
   {
     GtkSortType _cretval;
     _cretval = gtk_column_view_sorter_get_primary_sort_order(cast(GtkColumnViewSorter*)this._cPtr);
@@ -192,7 +192,7 @@ final class ColumnViewSorterGidBuilder : ColumnViewSorterGidBuilderImpl!ColumnVi
       Create object from builder.
       Returns: New object
   */
-  ColumnViewSorter build()
+  ColumnViewSorter build() nothrow
   {
     return new ColumnViewSorter(cast(void*)createGObject(ColumnViewSorter._getGType), No.Take);
   }

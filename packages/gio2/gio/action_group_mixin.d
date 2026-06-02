@@ -69,7 +69,7 @@ template ActionGroupT()
       Params:
         actionName = the name of an action in the group
   */
-  override void actionAdded(string actionName)
+  override void actionAdded(string actionName) nothrow
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     g_action_group_action_added(cast(GActionGroup*)this._cPtr, _actionName);
@@ -84,7 +84,7 @@ template ActionGroupT()
         actionName = the name of an action in the group
         enabled = whether or not the action is now enabled
   */
-  override void actionEnabledChanged(string actionName, bool enabled)
+  override void actionEnabledChanged(string actionName, bool enabled) nothrow
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     g_action_group_action_enabled_changed(cast(GActionGroup*)this._cPtr, _actionName, enabled);
@@ -98,7 +98,7 @@ template ActionGroupT()
       Params:
         actionName = the name of an action in the group
   */
-  override void actionRemoved(string actionName)
+  override void actionRemoved(string actionName) nothrow
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     g_action_group_action_removed(cast(GActionGroup*)this._cPtr, _actionName);
@@ -113,7 +113,7 @@ template ActionGroupT()
         actionName = the name of an action in the group
         state = the new state of the named action
   */
-  override void actionStateChanged(string actionName, glib.variant.Variant state)
+  override void actionStateChanged(string actionName, glib.variant.Variant state) nothrow
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     g_action_group_action_state_changed(cast(GActionGroup*)this._cPtr, _actionName, state ? cast(GVariant*)state._cPtr(No.Dup) : null);
@@ -158,7 +158,7 @@ template ActionGroupT()
         actionName = the name of the action to activate
         parameter = parameters to the activation
   */
-  override void activateAction(string actionName, glib.variant.Variant parameter = null)
+  override void activateAction(string actionName, glib.variant.Variant parameter = null) nothrow
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     g_action_group_activate_action(cast(GActionGroup*)this._cPtr, _actionName, parameter ? cast(GVariant*)parameter._cPtr(No.Dup) : null);
@@ -181,7 +181,7 @@ template ActionGroupT()
         actionName = the name of the action to request the change on
         value = the new state
   */
-  override void changeActionState(string actionName, glib.variant.Variant value)
+  override void changeActionState(string actionName, glib.variant.Variant value) nothrow
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     g_action_group_change_action_state(cast(GActionGroup*)this._cPtr, _actionName, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
@@ -197,7 +197,7 @@ template ActionGroupT()
         actionName = the name of the action to query
       Returns: whether or not the action is currently enabled
   */
-  override bool getActionEnabled(string actionName)
+  override bool getActionEnabled(string actionName) nothrow
   {
     bool _retval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
@@ -224,7 +224,7 @@ template ActionGroupT()
         actionName = the name of the action to query
       Returns: the parameter type
   */
-  override glib.variant_type.VariantType getActionParameterType(string actionName)
+  override glib.variant_type.VariantType getActionParameterType(string actionName) nothrow
   {
     const(GVariantType)* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
@@ -247,7 +247,7 @@ template ActionGroupT()
         actionName = the name of the action to query
       Returns: the current state of the action
   */
-  override glib.variant.Variant getActionState(string actionName)
+  override glib.variant.Variant getActionState(string actionName) nothrow
   {
     GVariant* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
@@ -280,7 +280,7 @@ template ActionGroupT()
         actionName = the name of the action to query
       Returns: the state range hint
   */
-  override glib.variant.Variant getActionStateHint(string actionName)
+  override glib.variant.Variant getActionStateHint(string actionName) nothrow
   {
     GVariant* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
@@ -311,7 +311,7 @@ template ActionGroupT()
         actionName = the name of the action to query
       Returns: the state type, if the action is stateful
   */
-  override glib.variant_type.VariantType getActionStateType(string actionName)
+  override glib.variant_type.VariantType getActionStateType(string actionName) nothrow
   {
     const(GVariantType)* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
@@ -327,7 +327,7 @@ template ActionGroupT()
         actionName = the name of the action to check for
       Returns: whether the named action exists
   */
-  override bool hasAction(string actionName)
+  override bool hasAction(string actionName) nothrow
   {
     bool _retval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
@@ -343,7 +343,7 @@ template ActionGroupT()
       Returns: a null-terminated array of the names of the
         actions in the group
   */
-  override string[] listActions()
+  override string[] listActions() nothrow
   {
     char** _cretval;
     _cretval = g_action_group_list_actions(cast(GActionGroup*)this._cPtr);
@@ -400,7 +400,7 @@ template ActionGroupT()
         state = the current state, or null if stateless
       Returns: true if the action exists, else false
   */
-  override bool queryAction(string actionName, out bool enabled, out glib.variant_type.VariantType parameterType, out glib.variant_type.VariantType stateType, out glib.variant.Variant stateHint, out glib.variant.Variant state)
+  override bool queryAction(string actionName, out bool enabled, out glib.variant_type.VariantType parameterType, out glib.variant_type.VariantType stateType, out glib.variant.Variant stateHint, out glib.variant.Variant state) nothrow
   {
     bool _retval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
@@ -438,14 +438,14 @@ template ActionGroupT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActionAdded(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectActionAdded(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.action_group.ActionGroup)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -457,7 +457,14 @@ template ActionGroupT()
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.action_group.ActionGroup.actionAdded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -484,7 +491,7 @@ template ActionGroupT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActionEnabledChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectActionEnabledChanged(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -492,7 +499,7 @@ template ActionGroupT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.action_group.ActionGroup)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -507,7 +514,14 @@ template ActionGroupT()
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.action_group.ActionGroup.actionEnabledChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -534,14 +548,14 @@ template ActionGroupT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActionRemoved(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectActionRemoved(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.action_group.ActionGroup)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -553,7 +567,14 @@ template ActionGroupT()
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.action_group.ActionGroup.actionRemoved");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -580,7 +601,7 @@ template ActionGroupT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActionStateChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectActionStateChanged(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -588,7 +609,7 @@ template ActionGroupT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.action_group.ActionGroup)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -603,7 +624,14 @@ template ActionGroupT()
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.action_group.ActionGroup.actionStateChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

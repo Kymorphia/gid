@@ -14,26 +14,26 @@ class NumericDataType : arrow.fixed_width_data_type.FixedWidthDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_numeric_data_type_get_type != &gidSymbolNotFound ? garrow_numeric_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NumericDataType self()
+  override NumericDataType self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class NumericDataType : arrow.fixed_width_data_type.FixedWidthDataType
       Get builder for [arrow.numeric_data_type.NumericDataType]
       Returns: New builder object
   */
-  static NumericDataTypeGidBuilder builder()
+  static NumericDataTypeGidBuilder builder() nothrow
   {
     return new NumericDataTypeGidBuilder;
   }
@@ -60,7 +60,7 @@ final class NumericDataTypeGidBuilder : NumericDataTypeGidBuilderImpl!NumericDat
       Create object from builder.
       Returns: New object
   */
-  NumericDataType build()
+  NumericDataType build() nothrow
   {
     return new NumericDataType(cast(void*)createGObject(NumericDataType._getGType), No.Take);
   }

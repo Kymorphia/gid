@@ -29,7 +29,7 @@ template FontChooserT()
       Get `font` property.
       Returns: The font description as a string, e.g. "Sans Italic 12".
   */
-  @property string font()
+  @property string font() nothrow
   {
     return getFont();
   }
@@ -39,7 +39,7 @@ template FontChooserT()
       Params:
         propval = The font description as a string, e.g. "Sans Italic 12".
   */
-  @property void font(string propval)
+  @property void font(string propval) nothrow
   {
     setFont(propval);
   }
@@ -48,7 +48,7 @@ template FontChooserT()
       Get `fontDesc` property.
       Returns: The font description as a #PangoFontDescription.
   */
-  @property pango.font_description.FontDescription fontDesc()
+  @property pango.font_description.FontDescription fontDesc() nothrow
   {
     return getFontDesc();
   }
@@ -58,7 +58,7 @@ template FontChooserT()
       Params:
         propval = The font description as a #PangoFontDescription.
   */
-  @property void fontDesc(pango.font_description.FontDescription propval)
+  @property void fontDesc(pango.font_description.FontDescription propval) nothrow
   {
     setFontDesc(propval);
   }
@@ -68,7 +68,7 @@ template FontChooserT()
       Returns: The selected font features, in a format that is compatible with
         CSS and with Pango attributes.
   */
-  @property string fontFeatures()
+  @property string fontFeatures() nothrow
   {
     return getFontFeatures();
   }
@@ -79,7 +79,7 @@ template FontChooserT()
         selected, in a format that is compatible with CSS and with Pango
         attributes.
   */
-  @property string language()
+  @property string language() nothrow
   {
     return getLanguage();
   }
@@ -91,7 +91,7 @@ template FontChooserT()
           selected, in a format that is compatible with CSS and with Pango
           attributes.
   */
-  @property void language(string propval)
+  @property void language(string propval) nothrow
   {
     setLanguage(propval);
   }
@@ -100,7 +100,7 @@ template FontChooserT()
       Get `level` property.
       Returns: The level of granularity to offer for selecting fonts.
   */
-  @property gtk.types.FontChooserLevel level()
+  @property gtk.types.FontChooserLevel level() nothrow
   {
     return getLevel();
   }
@@ -110,7 +110,7 @@ template FontChooserT()
       Params:
         propval = The level of granularity to offer for selecting fonts.
   */
-  @property void level(gtk.types.FontChooserLevel propval)
+  @property void level(gtk.types.FontChooserLevel propval) nothrow
   {
     setLevel(propval);
   }
@@ -119,7 +119,7 @@ template FontChooserT()
       Get `previewText` property.
       Returns: The string with which to preview the font.
   */
-  @property string previewText()
+  @property string previewText() nothrow
   {
     return getPreviewText();
   }
@@ -129,7 +129,7 @@ template FontChooserT()
       Params:
         propval = The string with which to preview the font.
   */
-  @property void previewText(string propval)
+  @property void previewText(string propval) nothrow
   {
     setPreviewText(propval);
   }
@@ -138,7 +138,7 @@ template FontChooserT()
       Get `showPreviewEntry` property.
       Returns: Whether to show an entry to change the preview text.
   */
-  @property bool showPreviewEntry()
+  @property bool showPreviewEntry() nothrow
   {
     return getShowPreviewEntry();
   }
@@ -148,7 +148,7 @@ template FontChooserT()
       Params:
         propval = Whether to show an entry to change the preview text.
   */
-  @property void showPreviewEntry(bool propval)
+  @property void showPreviewEntry(bool propval) nothrow
   {
     setShowPreviewEntry(propval);
   }
@@ -168,7 +168,7 @@ template FontChooserT()
             of the current font, or null if  no font is selected. You must
             free this string with [glib.global.gfree].
   */
-  override string getFont()
+  override string getFont() nothrow
   {
     char* _cretval;
     _cretval = gtk_font_chooser_get_font(cast(GtkFontChooser*)this._cPtr);
@@ -190,7 +190,7 @@ template FontChooserT()
       Returns: A #PangoFontDescription for the
             current font, or null if  no font is selected.
   */
-  override pango.font_description.FontDescription getFontDesc()
+  override pango.font_description.FontDescription getFontDesc() nothrow
   {
     PangoFontDescription* _cretval;
     _cretval = gtk_font_chooser_get_font_desc(cast(GtkFontChooser*)this._cPtr);
@@ -207,7 +207,7 @@ template FontChooserT()
             selected font group details, or null. The returned object is owned by
             fontchooser and must not be modified or freed.
   */
-  override pango.font_face.FontFace getFontFace()
+  override pango.font_face.FontFace getFontFace() nothrow
   {
     PangoFontFace* _cretval;
     _cretval = gtk_font_chooser_get_font_face(cast(GtkFontChooser*)this._cPtr);
@@ -224,7 +224,7 @@ template FontChooserT()
             selected font family, or null. The returned object is owned by fontchooser
             and must not be modified or freed.
   */
-  override pango.font_family.FontFamily getFontFamily()
+  override pango.font_family.FontFamily getFontFamily() nothrow
   {
     PangoFontFamily* _cretval;
     _cretval = gtk_font_chooser_get_font_family(cast(GtkFontChooser*)this._cPtr);
@@ -236,7 +236,7 @@ template FontChooserT()
       Gets the currently-selected font features.
       Returns: the currently selected font features
   */
-  override string getFontFeatures()
+  override string getFontFeatures() nothrow
   {
     char* _cretval;
     _cretval = gtk_font_chooser_get_font_features(cast(GtkFontChooser*)this._cPtr);
@@ -249,7 +249,7 @@ template FontChooserT()
       or null if it does not have one.
       Returns: a #PangoFontMap, or null
   */
-  override pango.font_map.FontMap getFontMap()
+  override pango.font_map.FontMap getFontMap() nothrow
   {
     PangoFontMap* _cretval;
     _cretval = gtk_font_chooser_get_font_map(cast(GtkFontChooser*)this._cPtr);
@@ -262,7 +262,7 @@ template FontChooserT()
       Returns: A n integer representing the selected font size,
             or -1 if no font size is selected.
   */
-  override int getFontSize()
+  override int getFontSize() nothrow
   {
     int _retval;
     _retval = gtk_font_chooser_get_font_size(cast(GtkFontChooser*)this._cPtr);
@@ -273,7 +273,7 @@ template FontChooserT()
       Gets the language that is used for font features.
       Returns: the currently selected language
   */
-  override string getLanguage()
+  override string getLanguage() nothrow
   {
     char* _cretval;
     _cretval = gtk_font_chooser_get_language(cast(GtkFontChooser*)this._cPtr);
@@ -285,7 +285,7 @@ template FontChooserT()
       Returns the current level of granularity for selecting fonts.
       Returns: the current granularity level
   */
-  override gtk.types.FontChooserLevel getLevel()
+  override gtk.types.FontChooserLevel getLevel() nothrow
   {
     GtkFontChooserLevel _cretval;
     _cretval = gtk_font_chooser_get_level(cast(GtkFontChooser*)this._cPtr);
@@ -298,7 +298,7 @@ template FontChooserT()
       Returns: the text displayed in the
             preview area
   */
-  override string getPreviewText()
+  override string getPreviewText() nothrow
   {
     char* _cretval;
     _cretval = gtk_font_chooser_get_preview_text(cast(GtkFontChooser*)this._cPtr);
@@ -311,7 +311,7 @@ template FontChooserT()
       Returns: true if the preview entry is shown
             or false if it is hidden.
   */
-  override bool getShowPreviewEntry()
+  override bool getShowPreviewEntry() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_font_chooser_get_show_preview_entry(cast(GtkFontChooser*)this._cPtr);
@@ -325,14 +325,21 @@ template FontChooserT()
       Params:
         filter = a #GtkFontFilterFunc, or null
   */
-  override void setFilterFunc(gtk.types.FontFilterFunc filter = null)
+  override void setFilterFunc(gtk.types.FontFilterFunc filter = null) nothrow
   {
-    extern(C) gboolean _filterCallback(const(PangoFontFamily)* family, const(PangoFontFace)* face, void* data)
+    extern(C) gboolean _filterCallback(const(PangoFontFamily)* family, const(PangoFontFace)* face, void* data) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.FontFilterFunc*)data;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(pango.font_family.FontFamily)(cast(void*)family, No.Take), gobject.object.ObjectWrap._getDObject!(pango.font_face.FontFace)(cast(void*)face, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(pango.font_family.FontFamily)(cast(void*)family, No.Take), gobject.object.ObjectWrap._getDObject!(pango.font_face.FontFace)(cast(void*)face, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.FontFilterFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -349,7 +356,7 @@ template FontChooserT()
       Params:
         fontname = a font name like “Helvetica 12” or “Times Bold 18”
   */
-  override void setFont(string fontname)
+  override void setFont(string fontname) nothrow
   {
     const(char)* _fontname = fontname.toCString(No.Alloc);
     gtk_font_chooser_set_font(cast(GtkFontChooser*)this._cPtr, _fontname);
@@ -361,7 +368,7 @@ template FontChooserT()
       Params:
         fontDesc = a #PangoFontDescription
   */
-  override void setFontDesc(pango.font_description.FontDescription fontDesc)
+  override void setFontDesc(pango.font_description.FontDescription fontDesc) nothrow
   {
     gtk_font_chooser_set_font_desc(cast(GtkFontChooser*)this._cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc._cPtr(No.Dup) : null);
   }
@@ -395,7 +402,7 @@ template FontChooserT()
       Params:
         fontmap = a #PangoFontMap
   */
-  override void setFontMap(pango.font_map.FontMap fontmap = null)
+  override void setFontMap(pango.font_map.FontMap fontmap = null) nothrow
   {
     gtk_font_chooser_set_font_map(cast(GtkFontChooser*)this._cPtr, fontmap ? cast(PangoFontMap*)fontmap._cPtr(No.Dup) : null);
   }
@@ -406,7 +413,7 @@ template FontChooserT()
       Params:
         language = a language
   */
-  override void setLanguage(string language)
+  override void setLanguage(string language) nothrow
   {
     const(char)* _language = language.toCString(No.Alloc);
     gtk_font_chooser_set_language(cast(GtkFontChooser*)this._cPtr, _language);
@@ -418,7 +425,7 @@ template FontChooserT()
       Params:
         level = the desired level of granularity
   */
-  override void setLevel(gtk.types.FontChooserLevel level)
+  override void setLevel(gtk.types.FontChooserLevel level) nothrow
   {
     gtk_font_chooser_set_level(cast(GtkFontChooser*)this._cPtr, level);
   }
@@ -430,7 +437,7 @@ template FontChooserT()
       Params:
         text = the text to display in the preview area
   */
-  override void setPreviewText(string text)
+  override void setPreviewText(string text) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_font_chooser_set_preview_text(cast(GtkFontChooser*)this._cPtr, _text);
@@ -442,7 +449,7 @@ template FontChooserT()
       Params:
         showPreviewEntry = whether to show the editable preview entry or not
   */
-  override void setShowPreviewEntry(bool showPreviewEntry)
+  override void setShowPreviewEntry(bool showPreviewEntry) nothrow
   {
     gtk_font_chooser_set_show_preview_entry(cast(GtkFontChooser*)this._cPtr, showPreviewEntry);
   }
@@ -467,14 +474,14 @@ template FontChooserT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFontActivated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFontActivated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.font_chooser.FontChooser)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -486,7 +493,14 @@ template FontChooserT()
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.font_chooser.FontChooser.fontActivated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -504,7 +518,7 @@ template FontChooserGidBuilderT()
         propval = The font description as a string, e.g. "Sans Italic 12".
       Returns: Builder instance for fluent chaining
   */
-  T font(string propval)
+  T font(string propval) nothrow
   {
     return setProperty("font", propval);
   }
@@ -515,7 +529,7 @@ template FontChooserGidBuilderT()
         propval = The font description as a #PangoFontDescription.
       Returns: Builder instance for fluent chaining
   */
-  T fontDesc(pango.font_description.FontDescription propval)
+  T fontDesc(pango.font_description.FontDescription propval) nothrow
   {
     return setProperty("font-desc", propval);
   }
@@ -528,7 +542,7 @@ template FontChooserGidBuilderT()
           attributes.
       Returns: Builder instance for fluent chaining
   */
-  T language(string propval)
+  T language(string propval) nothrow
   {
     return setProperty("language", propval);
   }
@@ -539,7 +553,7 @@ template FontChooserGidBuilderT()
         propval = The level of granularity to offer for selecting fonts.
       Returns: Builder instance for fluent chaining
   */
-  T level(gtk.types.FontChooserLevel propval)
+  T level(gtk.types.FontChooserLevel propval) nothrow
   {
     return setProperty("level", propval);
   }
@@ -550,7 +564,7 @@ template FontChooserGidBuilderT()
         propval = The string with which to preview the font.
       Returns: Builder instance for fluent chaining
   */
-  T previewText(string propval)
+  T previewText(string propval) nothrow
   {
     return setProperty("preview-text", propval);
   }
@@ -561,7 +575,7 @@ template FontChooserGidBuilderT()
         propval = Whether to show an entry to change the preview text.
       Returns: Builder instance for fluent chaining
   */
-  T showPreviewEntry(bool propval)
+  T showPreviewEntry(bool propval) nothrow
   {
     return setProperty("show-preview-entry", propval);
   }

@@ -16,11 +16,8 @@ class EventPadAxis
   GdkEventPadAxis _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.event_pad_axis.EventPadAxis");
-
     _cInstance = *cast(GdkEventPadAxis*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class EventPadAxis
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class EventPadAxis
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.PadRing] or [gdk.types.EventType.PadStrip]).
   */
-  @property gdk.types.EventType type()
+  @property gdk.types.EventType type() nothrow
   {
     return cast(gdk.types.EventType)(cast(GdkEventPadAxis*)this._cPtr).type;
   }
@@ -47,7 +44,7 @@ class EventPadAxis
       Params:
         propval = the type of the event ([gdk.types.EventType.PadRing] or [gdk.types.EventType.PadStrip]).
   */
-  @property void type(gdk.types.EventType propval)
+  @property void type(gdk.types.EventType propval) nothrow
   {
     (cast(GdkEventPadAxis*)this._cPtr).type = cast(GdkEventType)propval;
   }
@@ -56,7 +53,7 @@ class EventPadAxis
       Get `window` field.
       Returns: the window which received the event.
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventPadAxis*)this._cPtr).window);
   }
@@ -66,7 +63,7 @@ class EventPadAxis
       Params:
         propval = the window which received the event.
   */
-  @property void window(gdk.window.Window propval)
+  @property void window(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventPadAxis*)this._cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventPadAxis*)this._cPtr).window);
@@ -76,7 +73,7 @@ class EventPadAxis
       Get `sendEvent` field.
       Returns: true if the event was sent explicitly.
   */
-  @property byte sendEvent()
+  @property byte sendEvent() nothrow
   {
     return (cast(GdkEventPadAxis*)this._cPtr).sendEvent;
   }
@@ -86,7 +83,7 @@ class EventPadAxis
       Params:
         propval = true if the event was sent explicitly.
   */
-  @property void sendEvent(byte propval)
+  @property void sendEvent(byte propval) nothrow
   {
     (cast(GdkEventPadAxis*)this._cPtr).sendEvent = propval;
   }
@@ -95,7 +92,7 @@ class EventPadAxis
       Get `time` field.
       Returns: the time of the event in milliseconds.
   */
-  @property uint time()
+  @property uint time() nothrow
   {
     return (cast(GdkEventPadAxis*)this._cPtr).time;
   }
@@ -105,7 +102,7 @@ class EventPadAxis
       Params:
         propval = the time of the event in milliseconds.
   */
-  @property void time(uint propval)
+  @property void time(uint propval) nothrow
   {
     (cast(GdkEventPadAxis*)this._cPtr).time = propval;
   }
@@ -116,7 +113,7 @@ class EventPadAxis
           device may have one or more groups containing a set of buttons/rings/strips
           each.
   */
-  @property uint group()
+  @property uint group() nothrow
   {
     return (cast(GdkEventPadAxis*)this._cPtr).group;
   }
@@ -128,7 +125,7 @@ class EventPadAxis
             device may have one or more groups containing a set of buttons/rings/strips
             each.
   */
-  @property void group(uint propval)
+  @property void group(uint propval) nothrow
   {
     (cast(GdkEventPadAxis*)this._cPtr).group = propval;
   }
@@ -137,7 +134,7 @@ class EventPadAxis
       Get `index` field.
       Returns: number of strip/ring that was interacted. This number is 0-indexed.
   */
-  @property uint index()
+  @property uint index() nothrow
   {
     return (cast(GdkEventPadAxis*)this._cPtr).index;
   }
@@ -147,7 +144,7 @@ class EventPadAxis
       Params:
         propval = number of strip/ring that was interacted. This number is 0-indexed.
   */
-  @property void index(uint propval)
+  @property void index(uint propval) nothrow
   {
     (cast(GdkEventPadAxis*)this._cPtr).index = propval;
   }
@@ -157,7 +154,7 @@ class EventPadAxis
       Returns: The current mode of @group. Different groups in a [gdk.types.InputSource.TabletPad]
           device may have different current modes.
   */
-  @property uint mode()
+  @property uint mode() nothrow
   {
     return (cast(GdkEventPadAxis*)this._cPtr).mode;
   }
@@ -168,7 +165,7 @@ class EventPadAxis
         propval = The current mode of @group. Different groups in a [gdk.types.InputSource.TabletPad]
             device may have different current modes.
   */
-  @property void mode(uint propval)
+  @property void mode(uint propval) nothrow
   {
     (cast(GdkEventPadAxis*)this._cPtr).mode = propval;
   }
@@ -177,7 +174,7 @@ class EventPadAxis
       Get `value` field.
       Returns: The current value for the given axis.
   */
-  @property double value()
+  @property double value() nothrow
   {
     return (cast(GdkEventPadAxis*)this._cPtr).value;
   }
@@ -187,7 +184,7 @@ class EventPadAxis
       Params:
         propval = The current value for the given axis.
   */
-  @property void value(double propval)
+  @property void value(double propval) nothrow
   {
     (cast(GdkEventPadAxis*)this._cPtr).value = propval;
   }

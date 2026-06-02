@@ -19,26 +19,26 @@ class WebsitePolicies : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_website_policies_get_type != &gidSymbolNotFound ? webkit_website_policies_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WebsitePolicies self()
+  override WebsitePolicies self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class WebsitePolicies : gobject.object.ObjectWrap
       Get builder for [webkit.website_policies.WebsitePolicies]
       Returns: New builder object
   */
-  static WebsitePoliciesGidBuilder builder()
+  static WebsitePoliciesGidBuilder builder() nothrow
   {
     return new WebsitePoliciesGidBuilder;
   }
@@ -56,7 +56,7 @@ class WebsitePolicies : gobject.object.ObjectWrap
       Get `autoplay` property.
       Returns: The #WebKitAutoplayPolicy of #WebKitWebsitePolicies.
   */
-  @property webkit.types.AutoplayPolicy autoplay()
+  @property webkit.types.AutoplayPolicy autoplay() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(webkit.types.AutoplayPolicy)("autoplay");
   }
@@ -65,7 +65,7 @@ class WebsitePolicies : gobject.object.ObjectWrap
       Create a new #WebKitWebsitePolicies.
       Returns: the newly created #WebKitWebsitePolicies
   */
-  this()
+  this() nothrow
   {
     WebKitWebsitePolicies* _cretval;
     _cretval = webkit_website_policies_new();
@@ -76,7 +76,7 @@ class WebsitePolicies : gobject.object.ObjectWrap
       Get the #WebKitWebsitePolicies:autoplay property.
       Returns: #WebKitAutoplayPolicy
   */
-  webkit.types.AutoplayPolicy getAutoplayPolicy()
+  webkit.types.AutoplayPolicy getAutoplayPolicy() nothrow
   {
     WebKitAutoplayPolicy _cretval;
     _cretval = webkit_website_policies_get_autoplay_policy(cast(WebKitWebsitePolicies*)this._cPtr);
@@ -95,7 +95,7 @@ class WebsitePoliciesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The #WebKitAutoplayPolicy of #WebKitWebsitePolicies.
       Returns: Builder instance for fluent chaining
   */
-  T autoplay(webkit.types.AutoplayPolicy propval)
+  T autoplay(webkit.types.AutoplayPolicy propval) nothrow
   {
     return setProperty("autoplay", propval);
   }
@@ -108,7 +108,7 @@ final class WebsitePoliciesGidBuilder : WebsitePoliciesGidBuilderImpl!WebsitePol
       Create object from builder.
       Returns: New object
   */
-  WebsitePolicies build()
+  WebsitePolicies build() nothrow
   {
     return new WebsitePolicies(cast(void*)createGObject(WebsitePolicies._getGType), Yes.Take);
   }

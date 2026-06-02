@@ -25,26 +25,26 @@ class WebsocketExtensionManager : gobject.object.ObjectWrap, soup.session_featur
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_websocket_extension_manager_get_type != &gidSymbolNotFound ? soup_websocket_extension_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WebsocketExtensionManager self()
+  override WebsocketExtensionManager self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class WebsocketExtensionManager : gobject.object.ObjectWrap, soup.session_featur
       Get builder for [soup.websocket_extension_manager.WebsocketExtensionManager]
       Returns: New builder object
   */
-  static WebsocketExtensionManagerGidBuilder builder()
+  static WebsocketExtensionManagerGidBuilder builder() nothrow
   {
     return new WebsocketExtensionManagerGidBuilder;
   }
@@ -75,7 +75,7 @@ final class WebsocketExtensionManagerGidBuilder : WebsocketExtensionManagerGidBu
       Create object from builder.
       Returns: New object
   */
-  WebsocketExtensionManager build()
+  WebsocketExtensionManager build() nothrow
   {
     return new WebsocketExtensionManager(cast(void*)createGObject(WebsocketExtensionManager._getGType), No.Take);
   }

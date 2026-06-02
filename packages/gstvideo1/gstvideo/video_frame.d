@@ -18,11 +18,8 @@ class VideoFrame
   GstVideoFrame _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_frame.VideoFrame");
-
     _cInstance = *cast(GstVideoFrame*)ptr;
 
     if (take)
@@ -30,7 +27,7 @@ class VideoFrame
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class VideoFrame
       Get `info` field.
       Returns: the #GstVideoInfo
   */
-  @property gstvideo.video_info.VideoInfo info()
+  @property gstvideo.video_info.VideoInfo info() nothrow
   {
     return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)&(cast(GstVideoFrame*)this._cPtr).info);
   }
@@ -48,7 +45,7 @@ class VideoFrame
       Get `flags` field.
       Returns: #GstVideoFrameFlags for the frame
   */
-  @property gstvideo.types.VideoFrameFlags flags()
+  @property gstvideo.types.VideoFrameFlags flags() nothrow
   {
     return cast(gstvideo.types.VideoFrameFlags)(cast(GstVideoFrame*)this._cPtr).flags;
   }
@@ -58,7 +55,7 @@ class VideoFrame
       Params:
         propval = #GstVideoFrameFlags for the frame
   */
-  @property void flags(gstvideo.types.VideoFrameFlags propval)
+  @property void flags(gstvideo.types.VideoFrameFlags propval) nothrow
   {
     (cast(GstVideoFrame*)this._cPtr).flags = cast(GstVideoFrameFlags)propval;
   }
@@ -67,7 +64,7 @@ class VideoFrame
       Get `buffer` field.
       Returns: the mapped buffer
   */
-  @property gst.buffer.Buffer buffer()
+  @property gst.buffer.Buffer buffer() nothrow
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoFrame*)this._cPtr).buffer);
   }
@@ -77,7 +74,7 @@ class VideoFrame
       Params:
         propval = the mapped buffer
   */
-  @property void buffer(gst.buffer.Buffer propval)
+  @property void buffer(gst.buffer.Buffer propval) nothrow
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoFrame*)this._cPtr).buffer);
     dToC(propval, cast(void*)&(cast(GstVideoFrame*)this._cPtr).buffer);
@@ -88,7 +85,7 @@ class VideoFrame
       Returns: id of the mapped frame. the id can for example be used to
           identify the frame in case of multiview video.
   */
-  @property int id()
+  @property int id() nothrow
   {
     return (cast(GstVideoFrame*)this._cPtr).id;
   }
@@ -99,7 +96,7 @@ class VideoFrame
         propval = id of the mapped frame. the id can for example be used to
             identify the frame in case of multiview video.
   */
-  @property void id(int propval)
+  @property void id(int propval) nothrow
   {
     (cast(GstVideoFrame*)this._cPtr).id = propval;
   }
@@ -114,7 +111,7 @@ class VideoFrame
         src = a #GstVideoFrame
       Returns: TRUE if the contents could be copied.
   */
-  bool copy(gstvideo.video_frame.VideoFrame src)
+  bool copy(gstvideo.video_frame.VideoFrame src) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_frame_copy(cast(GstVideoFrame*)this._cPtr, src ? cast(const(GstVideoFrame)*)src._cPtr : null);
@@ -132,7 +129,7 @@ class VideoFrame
         plane = a plane
       Returns: TRUE if the contents could be copied.
   */
-  bool copyPlane(gstvideo.video_frame.VideoFrame src, uint plane)
+  bool copyPlane(gstvideo.video_frame.VideoFrame src, uint plane) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_frame_copy_plane(cast(GstVideoFrame*)this._cPtr, src ? cast(const(GstVideoFrame)*)src._cPtr : null, plane);
@@ -142,7 +139,7 @@ class VideoFrame
   /**
       Unmap the memory previously mapped with gst_video_frame_map.
   */
-  void unmap()
+  void unmap() nothrow
   {
     gst_video_frame_unmap(cast(GstVideoFrame*)this._cPtr);
   }
@@ -199,7 +196,7 @@ class VideoFrame
         flags = #GstMapFlags
       Returns: true on success.
   */
-  static bool map(out gstvideo.video_frame.VideoFrame frame, gstvideo.video_info.VideoInfo info, gst.buffer.Buffer buffer, gst.types.MapFlags flags)
+  static bool map(out gstvideo.video_frame.VideoFrame frame, gstvideo.video_info.VideoInfo info, gst.buffer.Buffer buffer, gst.types.MapFlags flags) nothrow
   {
     bool _retval;
     GstVideoFrame _frame;
@@ -226,7 +223,7 @@ class VideoFrame
         flags = #GstMapFlags
       Returns: true on success.
   */
-  static bool mapId(out gstvideo.video_frame.VideoFrame frame, gstvideo.video_info.VideoInfo info, gst.buffer.Buffer buffer, int id, gst.types.MapFlags flags)
+  static bool mapId(out gstvideo.video_frame.VideoFrame frame, gstvideo.video_info.VideoInfo info, gst.buffer.Buffer buffer, int id, gst.types.MapFlags flags) nothrow
   {
     bool _retval;
     GstVideoFrame _frame;

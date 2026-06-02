@@ -21,26 +21,26 @@ class GestureZoom : gtk.gesture.Gesture
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gesture_zoom_get_type != &gidSymbolNotFound ? gtk_gesture_zoom_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GestureZoom self()
+  override GestureZoom self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class GestureZoom : gtk.gesture.Gesture
       Get builder for [gtk.gesture_zoom.GestureZoom]
       Returns: New builder object
   */
-  static GestureZoomGidBuilder builder()
+  static GestureZoomGidBuilder builder() nothrow
   {
     return new GestureZoomGidBuilder;
   }
@@ -62,7 +62,7 @@ class GestureZoom : gtk.gesture.Gesture
         widget = a #GtkWidget
       Returns: a newly created #GtkGestureZoom
   */
-  this(gtk.widget.Widget widget)
+  this(gtk.widget.Widget widget) nothrow
   {
     GtkGesture* _cretval;
     _cretval = gtk_gesture_zoom_new(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
@@ -75,7 +75,7 @@ class GestureZoom : gtk.gesture.Gesture
       considered 1:1). If gesture is not active, 1 is returned.
       Returns: the scale delta
   */
-  double getScaleDelta()
+  double getScaleDelta() nothrow
   {
     double _retval;
     _retval = gtk_gesture_zoom_get_scale_delta(cast(GtkGestureZoom*)this._cPtr);
@@ -100,14 +100,14 @@ class GestureZoom : gtk.gesture.Gesture
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectScaleChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectScaleChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.gesture_zoom.GestureZoom)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -119,7 +119,14 @@ class GestureZoom : gtk.gesture.Gesture
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.gesture_zoom.GestureZoom.scaleChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -139,7 +146,7 @@ final class GestureZoomGidBuilder : GestureZoomGidBuilderImpl!GestureZoomGidBuil
       Create object from builder.
       Returns: New object
   */
-  GestureZoom build()
+  GestureZoom build() nothrow
   {
     return new GestureZoom(cast(void*)createGObject(GestureZoom._getGType), Yes.Take);
   }

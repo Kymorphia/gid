@@ -17,11 +17,8 @@ class GrabBrokenEvent : gdk.event.Event
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.grab_broken_event.GrabBrokenEvent");
-
     super(cast(GdkEvent*)ptr, take);
   }
 
@@ -29,7 +26,7 @@ class GrabBrokenEvent : gdk.event.Event
       Extracts the grab surface from a grab broken event.
       Returns: the grab surface of event
   */
-  gdk.surface.Surface getGrabSurface()
+  gdk.surface.Surface getGrabSurface() nothrow
   {
     GdkSurface* _cretval;
     _cretval = gdk_grab_broken_event_get_grab_surface(cast(GdkEvent*)this._cPtr);
@@ -41,7 +38,7 @@ class GrabBrokenEvent : gdk.event.Event
       Checks whether the grab broken event is for an implicit grab.
       Returns: true if the an implicit grab was broken
   */
-  bool getImplicit()
+  bool getImplicit() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_grab_broken_event_get_implicit(cast(GdkEvent*)this._cPtr);

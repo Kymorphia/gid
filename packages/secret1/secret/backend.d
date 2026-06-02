@@ -22,7 +22,7 @@ interface Backend
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())secret_backend_get_type != &gidSymbolNotFound ? secret_backend_get_type() : cast(GType)0;
@@ -33,7 +33,7 @@ interface Backend
       Returns: A set of flags describing which parts of the secret backend have
         been initialized.
   */
-  @property secret.types.ServiceFlags flags();
+  @property secret.types.ServiceFlags flags() nothrow;
 
   /**
       Get a #SecretBackend instance.
@@ -50,14 +50,21 @@ interface Backend
         cancellable = optional cancellation object
         callback = called when the operation completes
   */
-  static void get(secret.types.BackendFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  static void get(secret.types.BackendFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -96,5 +103,5 @@ interface BackendGidBuilderImpl(T)
           been initialized.
       Returns: Builder instance for fluent chaining
   */
-  T flags(secret.types.ServiceFlags propval);
+  T flags(secret.types.ServiceFlags propval) nothrow;
 }

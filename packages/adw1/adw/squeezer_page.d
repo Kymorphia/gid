@@ -19,26 +19,26 @@ class SqueezerPage : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_squeezer_page_get_type != &gidSymbolNotFound ? adw_squeezer_page_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SqueezerPage self()
+  override SqueezerPage self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class SqueezerPage : gobject.object.ObjectWrap
       Get builder for [adw.squeezer_page.SqueezerPage]
       Returns: New builder object
   */
-  static SqueezerPageGidBuilder builder()
+  static SqueezerPageGidBuilder builder() nothrow
   {
     return new SqueezerPageGidBuilder;
   }
@@ -58,7 +58,7 @@ class SqueezerPage : gobject.object.ObjectWrap
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -78,7 +78,7 @@ class SqueezerPage : gobject.object.ObjectWrap
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property bool enabled()
+  @property bool enabled() nothrow
   {
     return getEnabled();
   }
@@ -99,7 +99,7 @@ class SqueezerPage : gobject.object.ObjectWrap
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  @property void enabled(bool propval)
+  @property void enabled(bool propval) nothrow
   {
     setEnabled(propval);
   }
@@ -110,7 +110,7 @@ class SqueezerPage : gobject.object.ObjectWrap
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_squeezer_page_get_child(cast(AdwSqueezerPage*)this._cPtr);
@@ -124,7 +124,7 @@ class SqueezerPage : gobject.object.ObjectWrap
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  bool getEnabled()
+  bool getEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_squeezer_page_get_enabled(cast(AdwSqueezerPage*)this._cPtr);
@@ -148,7 +148,7 @@ class SqueezerPage : gobject.object.ObjectWrap
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  void setEnabled(bool enabled)
+  void setEnabled(bool enabled) nothrow
   {
     adw_squeezer_page_set_enabled(cast(AdwSqueezerPage*)this._cPtr, enabled);
   }
@@ -166,7 +166,7 @@ class SqueezerPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -188,7 +188,7 @@ class SqueezerPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
-  T enabled(bool propval)
+  T enabled(bool propval) nothrow
   {
     return setProperty("enabled", propval);
   }
@@ -201,7 +201,7 @@ final class SqueezerPageGidBuilder : SqueezerPageGidBuilderImpl!SqueezerPageGidB
       Create object from builder.
       Returns: New object
   */
-  SqueezerPage build()
+  SqueezerPage build() nothrow
   {
     return new SqueezerPage(cast(void*)createGObject(SqueezerPage._getGType), No.Take);
   }

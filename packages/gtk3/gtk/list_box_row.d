@@ -23,26 +23,26 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_list_box_row_get_type != &gidSymbolNotFound ? gtk_list_box_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ListBoxRow self()
+  override ListBoxRow self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
       Get builder for [gtk.list_box_row.ListBoxRow]
       Returns: New builder object
   */
-  static ListBoxRowGidBuilder builder()
+  static ListBoxRowGidBuilder builder() nothrow
   {
     return new ListBoxRowGidBuilder;
   }
@@ -61,7 +61,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
       Returns: The property determines whether the #GtkListBox::row-activated
         signal will be emitted for this row.
   */
-  @property bool activatable()
+  @property bool activatable() nothrow
   {
     return getActivatable();
   }
@@ -72,7 +72,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
         propval = The property determines whether the #GtkListBox::row-activated
           signal will be emitted for this row.
   */
-  @property void activatable(bool propval)
+  @property void activatable(bool propval) nothrow
   {
     setActivatable(propval);
   }
@@ -81,7 +81,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
       Get `selectable` property.
       Returns: The property determines whether this row can be selected.
   */
-  @property bool selectable()
+  @property bool selectable() nothrow
   {
     return getSelectable();
   }
@@ -91,7 +91,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
       Params:
         propval = The property determines whether this row can be selected.
   */
-  @property void selectable(bool propval)
+  @property void selectable(bool propval) nothrow
   {
     setSelectable(propval);
   }
@@ -102,7 +102,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
       Creates a new #GtkListBoxRow, to be used as a child of a #GtkListBox.
       Returns: a new #GtkListBoxRow
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_box_row_new();
@@ -127,7 +127,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
       is to call [gtk.list_box.ListBox.invalidateSort] on any model change,
       but that is more expensive.
   */
-  void changed()
+  void changed() nothrow
   {
     gtk_list_box_row_changed(cast(GtkListBoxRow*)this._cPtr);
   }
@@ -137,7 +137,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
       for this row.
       Returns: true if the row is activatable
   */
-  bool getActivatable()
+  bool getActivatable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_list_box_row_get_activatable(cast(GtkListBoxRow*)this._cPtr);
@@ -150,7 +150,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
       set already, and if so to update the state of it.
       Returns: the current header, or null if none
   */
-  gtk.widget.Widget getHeader()
+  gtk.widget.Widget getHeader() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_box_row_get_header(cast(GtkListBoxRow*)this._cPtr);
@@ -162,7 +162,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
       Gets the current index of the row in its #GtkListBox container.
       Returns: the index of the row, or -1 if the row is not in a listbox
   */
-  int getIndex()
+  int getIndex() nothrow
   {
     int _retval;
     _retval = gtk_list_box_row_get_index(cast(GtkListBoxRow*)this._cPtr);
@@ -174,7 +174,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
       for this row.
       Returns: true if the row is selectable
   */
-  bool getSelectable()
+  bool getSelectable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_list_box_row_get_selectable(cast(GtkListBoxRow*)this._cPtr);
@@ -186,7 +186,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
       #GtkListBox container.
       Returns: true if row is selected
   */
-  bool isSelected()
+  bool isSelected() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_list_box_row_is_selected(cast(GtkListBoxRow*)this._cPtr);
@@ -199,7 +199,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
       Params:
         activatable = true to mark the row as activatable
   */
-  void setActivatable(bool activatable)
+  void setActivatable(bool activatable) nothrow
   {
     gtk_list_box_row_set_activatable(cast(GtkListBoxRow*)this._cPtr, activatable);
   }
@@ -212,7 +212,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
       Params:
         header = the header, or null
   */
-  void setHeader(gtk.widget.Widget header = null)
+  void setHeader(gtk.widget.Widget header = null) nothrow
   {
     gtk_list_box_row_set_header(cast(GtkListBoxRow*)this._cPtr, header ? cast(GtkWidget*)header._cPtr(No.Dup) : null);
   }
@@ -223,7 +223,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
       Params:
         selectable = true to mark the row as selectable
   */
-  void setSelectable(bool selectable)
+  void setSelectable(bool selectable) nothrow
   {
     gtk_list_box_row_set_selectable(cast(GtkListBoxRow*)this._cPtr, selectable);
   }
@@ -246,13 +246,13 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.list_box_row.ListBoxRow)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -261,7 +261,14 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.list_box_row.ListBoxRow.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -282,7 +289,7 @@ class ListBoxRowGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.actionable.
           signal will be emitted for this row.
       Returns: Builder instance for fluent chaining
   */
-  T activatable(bool propval)
+  T activatable(bool propval) nothrow
   {
     return setProperty("activatable", propval);
   }
@@ -293,7 +300,7 @@ class ListBoxRowGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.actionable.
         propval = The property determines whether this row can be selected.
       Returns: Builder instance for fluent chaining
   */
-  T selectable(bool propval)
+  T selectable(bool propval) nothrow
   {
     return setProperty("selectable", propval);
   }
@@ -306,7 +313,7 @@ final class ListBoxRowGidBuilder : ListBoxRowGidBuilderImpl!ListBoxRowGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ListBoxRow build()
+  ListBoxRow build() nothrow
   {
     return new ListBoxRow(cast(void*)createGObject(ListBoxRow._getGType), No.Take);
   }

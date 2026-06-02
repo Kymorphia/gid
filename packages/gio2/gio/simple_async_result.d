@@ -185,26 +185,26 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_simple_async_result_get_type != &gidSymbolNotFound ? g_simple_async_result_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SimpleAsyncResult self()
+  override SimpleAsyncResult self() nothrow
   {
     return this;
   }
@@ -213,7 +213,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
       Get builder for [gio.simple_async_result.SimpleAsyncResult]
       Returns: New builder object
   */
-  static SimpleAsyncResultGidBuilder builder()
+  static SimpleAsyncResultGidBuilder builder() nothrow
   {
     return new SimpleAsyncResultGidBuilder;
   }
@@ -240,14 +240,21 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   
       Deprecated: Use [gio.task.Task.new_] instead.
   */
-  this(gobject.object.ObjectWrap sourceObject = null, gio.types.AsyncReadyCallback callback = null, void* sourceTag = null)
+  this(gobject.object.ObjectWrap sourceObject = null, gio.types.AsyncReadyCallback callback = null, void* sourceTag = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     GSimpleAsyncResult* _cretval;
@@ -267,14 +274,21 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   
       Deprecated: Use [gio.task.Task.new_] and [gio.task.Task.returnError] instead.
   */
-  static gio.simple_async_result.SimpleAsyncResult newFromError(gobject.object.ObjectWrap sourceObject, gio.types.AsyncReadyCallback callback, glib.error.ErrorWrap error)
+  static gio.simple_async_result.SimpleAsyncResult newFromError(gobject.object.ObjectWrap sourceObject, gio.types.AsyncReadyCallback callback, glib.error.ErrorWrap error) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     GSimpleAsyncResult* _cretval;
@@ -306,7 +320,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   
       Deprecated: Use #GTask and [gio.task.Task.isValid] instead.
   */
-  static bool isValid(gio.async_result.AsyncResult result, gobject.object.ObjectWrap source = null, void* sourceTag = null)
+  static bool isValid(gio.async_result.AsyncResult result, gobject.object.ObjectWrap source = null, void* sourceTag = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_simple_async_result_is_valid(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, source ? cast(GObject*)source._cPtr(No.Dup) : null, sourceTag);
@@ -324,7 +338,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   
       Deprecated: Use #GTask instead.
   */
-  void complete()
+  void complete() nothrow
   {
     g_simple_async_result_complete(cast(GSimpleAsyncResult*)this._cPtr);
   }
@@ -340,7 +354,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   
       Deprecated: Use #GTask instead.
   */
-  void completeInIdle()
+  void completeInIdle() nothrow
   {
     g_simple_async_result_complete_in_idle(cast(GSimpleAsyncResult*)this._cPtr);
   }
@@ -352,7 +366,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   
       Deprecated: Use #GTask and [gio.task.Task.propagateBoolean] instead.
   */
-  bool getOpResGboolean()
+  bool getOpResGboolean() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_simple_async_result_get_op_res_gboolean(cast(GSimpleAsyncResult*)this._cPtr);
@@ -365,7 +379,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   
       Deprecated: Use #GTask and [gio.task.Task.propagateInt] instead.
   */
-  ptrdiff_t getOpResGssize()
+  ptrdiff_t getOpResGssize() nothrow
   {
     ptrdiff_t _retval;
     _retval = g_simple_async_result_get_op_res_gssize(cast(GSimpleAsyncResult*)this._cPtr);
@@ -416,7 +430,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   
       Deprecated: Use #GTask instead.
   */
-  void setCheckCancellable(gio.cancellable.Cancellable checkCancellable = null)
+  void setCheckCancellable(gio.cancellable.Cancellable checkCancellable = null) nothrow
   {
     g_simple_async_result_set_check_cancellable(cast(GSimpleAsyncResult*)this._cPtr, checkCancellable ? cast(GCancellable*)checkCancellable._cPtr(No.Dup) : null);
   }
@@ -429,7 +443,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   
       Deprecated: Use #GTask and [gio.task.Task.returnError] instead.
   */
-  void setFromError(glib.error.ErrorWrap error)
+  void setFromError(glib.error.ErrorWrap error) nothrow
   {
     g_simple_async_result_set_from_error(cast(GSimpleAsyncResult*)this._cPtr, error ? cast(const(GError)*)error._cPtr : null);
   }
@@ -444,7 +458,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
       Params:
         handleCancellation = a #gboolean.
   */
-  void setHandleCancellation(bool handleCancellation)
+  void setHandleCancellation(bool handleCancellation) nothrow
   {
     g_simple_async_result_set_handle_cancellation(cast(GSimpleAsyncResult*)this._cPtr, handleCancellation);
   }
@@ -457,7 +471,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   
       Deprecated: Use #GTask and [gio.task.Task.returnBoolean] instead.
   */
-  void setOpResGboolean(bool opRes)
+  void setOpResGboolean(bool opRes) nothrow
   {
     g_simple_async_result_set_op_res_gboolean(cast(GSimpleAsyncResult*)this._cPtr, opRes);
   }
@@ -471,7 +485,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   
       Deprecated: Use #GTask and [gio.task.Task.returnInt] instead.
   */
-  void setOpResGssize(ptrdiff_t opRes)
+  void setOpResGssize(ptrdiff_t opRes) nothrow
   {
     g_simple_async_result_set_op_res_gssize(cast(GSimpleAsyncResult*)this._cPtr, opRes);
   }
@@ -491,7 +505,7 @@ final class SimpleAsyncResultGidBuilder : SimpleAsyncResultGidBuilderImpl!Simple
       Create object from builder.
       Returns: New object
   */
-  SimpleAsyncResult build()
+  SimpleAsyncResult build() nothrow
   {
     return new SimpleAsyncResult(cast(void*)createGObject(SimpleAsyncResult._getGType), Yes.Take);
   }

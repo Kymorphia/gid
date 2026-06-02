@@ -24,7 +24,7 @@ interface TableCell
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_table_cell_get_type != &gidSymbolNotFound ? atk_table_cell_get_type() : cast(GType)0;

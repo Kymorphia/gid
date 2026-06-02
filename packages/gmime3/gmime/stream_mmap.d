@@ -17,26 +17,26 @@ class StreamMmap : gmime.stream.Stream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_stream_mmap_get_type != &gidSymbolNotFound ? g_mime_stream_mmap_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StreamMmap self()
+  override StreamMmap self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class StreamMmap : gmime.stream.Stream
       Get builder for [gmime.stream_mmap.StreamMmap]
       Returns: New builder object
   */
-  static StreamMmapGidBuilder builder()
+  static StreamMmapGidBuilder builder() nothrow
   {
     return new StreamMmapGidBuilder;
   }
@@ -59,7 +59,7 @@ class StreamMmap : gmime.stream.Stream
         flags = map flags
       Returns: a stream using fd.
   */
-  this(int fd, int prot, int flags)
+  this(int fd, int prot, int flags) nothrow
   {
     GMimeStream* _cretval;
     _cretval = g_mime_stream_mmap_new(fd, prot, flags);
@@ -78,7 +78,7 @@ class StreamMmap : gmime.stream.Stream
         end = end boundary
       Returns: a stream using fd with bounds start and end.
   */
-  static gmime.stream_mmap.StreamMmap newWithBounds(int fd, int prot, int flags, long start, long end)
+  static gmime.stream_mmap.StreamMmap newWithBounds(int fd, int prot, int flags, long start, long end) nothrow
   {
     GMimeStream* _cretval;
     _cretval = g_mime_stream_mmap_new_with_bounds(fd, prot, flags, start, end);
@@ -91,7 +91,7 @@ class StreamMmap : gmime.stream.Stream
       Returns: true if stream owns the backend file descriptor or false
         otherwise.
   */
-  bool getOwner()
+  bool getOwner() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_stream_mmap_get_owner(cast(GMimeStreamMmap*)this._cPtr);
@@ -107,7 +107,7 @@ class StreamMmap : gmime.stream.Stream
       Params:
         owner = true if this stream should own the file descriptor or false otherwise
   */
-  void setOwner(bool owner)
+  void setOwner(bool owner) nothrow
   {
     g_mime_stream_mmap_set_owner(cast(GMimeStreamMmap*)this._cPtr, owner);
   }
@@ -125,7 +125,7 @@ final class StreamMmapGidBuilder : StreamMmapGidBuilderImpl!StreamMmapGidBuilder
       Create object from builder.
       Returns: New object
   */
-  StreamMmap build()
+  StreamMmap build() nothrow
   {
     return new StreamMmap(cast(void*)createGObject(StreamMmap._getGType), Yes.Take);
   }

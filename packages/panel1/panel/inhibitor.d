@@ -14,26 +14,26 @@ class Inhibitor : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_inhibitor_get_type != &gidSymbolNotFound ? panel_inhibitor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Inhibitor self()
+  override Inhibitor self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class Inhibitor : gobject.object.ObjectWrap
       Get builder for [panel.inhibitor.Inhibitor]
       Returns: New builder object
   */
-  static InhibitorGidBuilder builder()
+  static InhibitorGidBuilder builder() nothrow
   {
     return new InhibitorGidBuilder;
   }
 
   /** */
-  void uninhibit()
+  void uninhibit() nothrow
   {
     panel_inhibitor_uninhibit(cast(PanelInhibitor*)this._cPtr);
   }
@@ -66,7 +66,7 @@ final class InhibitorGidBuilder : InhibitorGidBuilderImpl!InhibitorGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Inhibitor build()
+  Inhibitor build() nothrow
   {
     return new Inhibitor(cast(void*)createGObject(Inhibitor._getGType), No.Take);
   }

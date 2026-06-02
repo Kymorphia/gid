@@ -40,26 +40,26 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scale_button_get_type != &gidSymbolNotFound ? gtk_scale_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ScaleButton self()
+  override ScaleButton self() nothrow
   {
     return this;
   }
@@ -68,43 +68,43 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
       Get builder for [gtk.scale_button.ScaleButton]
       Returns: New builder object
   */
-  static ScaleButtonGidBuilder builder()
+  static ScaleButtonGidBuilder builder() nothrow
   {
     return new ScaleButtonGidBuilder;
   }
 
   /** */
-  @property gtk.adjustment.Adjustment adjustment()
+  @property gtk.adjustment.Adjustment adjustment() nothrow
   {
     return getAdjustment();
   }
 
   /** */
-  @property void adjustment(gtk.adjustment.Adjustment propval)
+  @property void adjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     setAdjustment(propval);
   }
 
   /** */
-  @property gtk.types.IconSize size()
+  @property gtk.types.IconSize size() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.IconSize)("size");
   }
 
   /** */
-  @property void size(gtk.types.IconSize propval)
+  @property void size(gtk.types.IconSize propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.IconSize)("size", propval);
   }
 
   /** */
-  @property double value()
+  @property double value() nothrow
   {
     return getValue();
   }
 
   /** */
-  @property void value(double propval)
+  @property void value(double propval) nothrow
   {
     setValue(propval);
   }
@@ -126,7 +126,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
                   later with [gtk.scale_button.ScaleButton.setIcons]
       Returns: a new #GtkScaleButton
   */
-  this(gtk.types.IconSize size, double min, double max, double step, string[] icons = null)
+  this(gtk.types.IconSize size, double min, double max, double step, string[] icons = null) nothrow
   {
     GtkWidget* _cretval;
     char*[] _tmpicons;
@@ -144,7 +144,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
       See [gtk.range.Range.getAdjustment] for details.
       Returns: the adjustment associated with the scale
   */
-  gtk.adjustment.Adjustment getAdjustment()
+  gtk.adjustment.Adjustment getAdjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scale_button_get_adjustment(cast(GtkScaleButton*)this._cPtr);
@@ -156,7 +156,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
       Retrieves the minus button of the #GtkScaleButton.
       Returns: the minus button of the #GtkScaleButton as a #GtkButton
   */
-  gtk.button.Button getMinusButton()
+  gtk.button.Button getMinusButton() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_button_get_minus_button(cast(GtkScaleButton*)this._cPtr);
@@ -168,7 +168,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
       Retrieves the plus button of the #GtkScaleButton.
       Returns: the plus button of the #GtkScaleButton as a #GtkButton
   */
-  gtk.button.Button getPlusButton()
+  gtk.button.Button getPlusButton() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_button_get_plus_button(cast(GtkScaleButton*)this._cPtr);
@@ -180,7 +180,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
       Retrieves the popup of the #GtkScaleButton.
       Returns: the popup of the #GtkScaleButton
   */
-  gtk.widget.Widget getPopup()
+  gtk.widget.Widget getPopup() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_button_get_popup(cast(GtkScaleButton*)this._cPtr);
@@ -192,7 +192,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
       Gets the current value of the scale button.
       Returns: current value of the scale button
   */
-  double getValue()
+  double getValue() nothrow
   {
     double _retval;
     _retval = gtk_scale_button_get_value(cast(GtkScaleButton*)this._cPtr);
@@ -207,7 +207,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
       Params:
         adjustment = a #GtkAdjustment
   */
-  void setAdjustment(gtk.adjustment.Adjustment adjustment)
+  void setAdjustment(gtk.adjustment.Adjustment adjustment) nothrow
   {
     gtk_scale_button_set_adjustment(cast(GtkScaleButton*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
@@ -219,7 +219,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
       Params:
         icons = a null-terminated array of icon names
   */
-  void setIcons(string[] icons)
+  void setIcons(string[] icons) nothrow
   {
     char*[] _tmpicons;
     foreach (s; icons)
@@ -239,7 +239,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
       Params:
         value = new value of the scale button
   */
-  void setValue(double value)
+  void setValue(double value) nothrow
   {
     gtk_scale_button_set_value(cast(GtkScaleButton*)this._cPtr, value);
   }
@@ -263,13 +263,13 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPopdown(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPopdown(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.scale_button.ScaleButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -278,7 +278,14 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.scale_button.ScaleButton.popdown");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -304,13 +311,13 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPopup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPopup(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.scale_button.ScaleButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -319,7 +326,14 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.scale_button.ScaleButton.popup");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -344,14 +358,14 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.scale_button.ScaleButton)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -363,7 +377,14 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.scale_button.ScaleButton.valueChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -378,19 +399,19 @@ class ScaleButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtk.orie
   mixin OrientableGidBuilderT!();
 
   /** */
-  T adjustment(gtk.adjustment.Adjustment propval)
+  T adjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     return setProperty("adjustment", propval);
   }
 
   /** */
-  T size(gtk.types.IconSize propval)
+  T size(gtk.types.IconSize propval) nothrow
   {
     return setProperty("size", propval);
   }
 
   /** */
-  T value(double propval)
+  T value(double propval) nothrow
   {
     return setProperty("value", propval);
   }
@@ -403,7 +424,7 @@ final class ScaleButtonGidBuilder : ScaleButtonGidBuilderImpl!ScaleButtonGidBuil
       Create object from builder.
       Returns: New object
   */
-  ScaleButton build()
+  ScaleButton build() nothrow
   {
     return new ScaleButton(cast(void*)createGObject(ScaleButton._getGType), No.Take);
   }

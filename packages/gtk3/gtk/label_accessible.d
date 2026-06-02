@@ -20,26 +20,26 @@ class LabelAccessible : gtk.widget_accessible.WidgetAccessible, atk.hypertext.Hy
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_label_accessible_get_type != &gidSymbolNotFound ? gtk_label_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LabelAccessible self()
+  override LabelAccessible self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class LabelAccessible : gtk.widget_accessible.WidgetAccessible, atk.hypertext.Hy
       Get builder for [gtk.label_accessible.LabelAccessible]
       Returns: New builder object
   */
-  static LabelAccessibleGidBuilder builder()
+  static LabelAccessibleGidBuilder builder() nothrow
   {
     return new LabelAccessibleGidBuilder;
   }
@@ -72,7 +72,7 @@ final class LabelAccessibleGidBuilder : LabelAccessibleGidBuilderImpl!LabelAcces
       Create object from builder.
       Returns: New object
   */
-  LabelAccessible build()
+  LabelAccessible build() nothrow
   {
     return new LabelAccessible(cast(void*)createGObject(LabelAccessible._getGType), No.Take);
   }

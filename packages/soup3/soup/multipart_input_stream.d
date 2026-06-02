@@ -36,26 +36,26 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_multipart_input_stream_get_type != &gidSymbolNotFound ? soup_multipart_input_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MultipartInputStream self()
+  override MultipartInputStream self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
       Get builder for [soup.multipart_input_stream.MultipartInputStream]
       Returns: New builder object
   */
-  static MultipartInputStreamGidBuilder builder()
+  static MultipartInputStreamGidBuilder builder() nothrow
   {
     return new MultipartInputStreamGidBuilder;
   }
@@ -73,7 +73,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
       Get `message` property.
       Returns: The [soup.message.Message].
   */
-  @property soup.message.Message message()
+  @property soup.message.Message message() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(soup.message.Message)("message");
   }
@@ -93,7 +93,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
         baseStream = the #GInputStream returned by sending the request.
       Returns: a new #SoupMultipartInputStream
   */
-  this(soup.message.Message msg, gio.input_stream.InputStream baseStream)
+  this(soup.message.Message msg, gio.input_stream.InputStream baseStream) nothrow
   {
     SoupMultipartInputStream* _cretval;
     _cretval = soup_multipart_input_stream_new(msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, baseStream ? cast(GInputStream*)baseStream._cPtr(No.Dup) : null);
@@ -114,7 +114,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
           containing the headers for the part currently being processed or
           null if the headers failed to parse.
   */
-  soup.message_headers.MessageHeaders getHeaders()
+  soup.message_headers.MessageHeaders getHeaders() nothrow
   {
     SoupMessageHeaders* _cretval;
     _cretval = soup_multipart_input_stream_get_headers(cast(SoupMultipartInputStream*)this._cPtr);
@@ -162,14 +162,21 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
         cancellable = a #GCancellable.
         callback = callback to call when request is satisfied.
   */
-  void nextPartAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void nextPartAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -210,7 +217,7 @@ class MultipartInputStreamGidBuilderImpl(T) : gio.filter_input_stream.FilterInpu
         propval = The [soup.message.Message].
       Returns: Builder instance for fluent chaining
   */
-  T message(soup.message.Message propval)
+  T message(soup.message.Message propval) nothrow
   {
     return setProperty("message", propval);
   }
@@ -223,7 +230,7 @@ final class MultipartInputStreamGidBuilder : MultipartInputStreamGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  MultipartInputStream build()
+  MultipartInputStream build() nothrow
   {
     return new MultipartInputStream(cast(void*)createGObject(MultipartInputStream._getGType), Yes.Take);
   }

@@ -23,7 +23,7 @@ struct BidiType
       Returns: the bidirectional character type, as used in the
         Unicode bidirectional algorithm.
   */
-  static pango.types.BidiType forUnichar(dchar ch)
+  static pango.types.BidiType forUnichar(dchar ch) nothrow
   {
     PangoBidiType _cretval;
     _cretval = pango_bidi_type_for_unichar(ch);

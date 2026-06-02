@@ -16,11 +16,8 @@ class HookList
   GHookList _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.hook_list.HookList");
-
     _cInstance = *cast(GHookList*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class HookList
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class HookList
       Get `seqId` field.
       Returns: the next free #GHook id
   */
-  @property gulong seqId()
+  @property gulong seqId() nothrow
   {
     return (cast(GHookList*)this._cPtr).seqId;
   }
@@ -47,7 +44,7 @@ class HookList
       Params:
         propval = the next free #GHook id
   */
-  @property void seqId(gulong propval)
+  @property void seqId(gulong propval) nothrow
   {
     (cast(GHookList*)this._cPtr).seqId = propval;
   }
@@ -56,7 +53,7 @@ class HookList
       Get `hookSize` field.
       Returns: the size of the #GHookList elements, in bytes
   */
-  @property uint hookSize()
+  @property uint hookSize() nothrow
   {
     return (cast(GHookList*)this._cPtr).hookSize;
   }
@@ -66,7 +63,7 @@ class HookList
       Params:
         propval = the size of the #GHookList elements, in bytes
   */
-  @property void hookSize(uint propval)
+  @property void hookSize(uint propval) nothrow
   {
     (cast(GHookList*)this._cPtr).hookSize = propval;
   }
@@ -75,7 +72,7 @@ class HookList
       Get `isSetup` field.
       Returns: 1 if the #GHookList has been initialized
   */
-  @property uint isSetup()
+  @property uint isSetup() nothrow
   {
     return (cast(GHookList*)this._cPtr).isSetup;
   }
@@ -85,7 +82,7 @@ class HookList
       Params:
         propval = 1 if the #GHookList has been initialized
   */
-  @property void isSetup(uint propval)
+  @property void isSetup(uint propval) nothrow
   {
     (cast(GHookList*)this._cPtr).isSetup = propval;
   }
@@ -94,7 +91,7 @@ class HookList
       Get `hooks` field.
       Returns: the first #GHook element in the list
   */
-  @property glib.hook.Hook hooks()
+  @property glib.hook.Hook hooks() nothrow
   {
     return new glib.hook.Hook(cast(GHook*)(cast(GHookList*)this._cPtr).hooks, No.Take);
   }
@@ -104,7 +101,7 @@ class HookList
       Returns: the function to call to finalize a #GHook element.
             The default behaviour is to call the hooks @destroy function
   */
-  @property GHookFinalizeFunc finalizeHook()
+  @property GHookFinalizeFunc finalizeHook() nothrow
   {
     return (cast(GHookList*)this._cPtr).finalizeHook;
   }
@@ -116,7 +113,7 @@ class HookList
               The default behaviour is to call the hooks @destroy function
   */
 
-  @property void finalizeHook(GHookFinalizeFunc propval)
+  @property void finalizeHook(GHookFinalizeFunc propval) nothrow
   {
     (cast(GHookList*)this._cPtr).finalizeHook = propval;
   }
@@ -124,7 +121,7 @@ class HookList
   /**
       Removes all the #GHook elements from a #GHookList.
   */
-  void clear()
+  void clear() nothrow
   {
     g_hook_list_clear(cast(GHookList*)this._cPtr);
   }
@@ -137,7 +134,7 @@ class HookList
         hookSize = the size of each element in the #GHookList,
               typically `sizeof (GHook)`.
   */
-  void init_(uint hookSize)
+  void init_(uint hookSize) nothrow
   {
     g_hook_list_init(cast(GHookList*)this._cPtr, hookSize);
   }
@@ -150,7 +147,7 @@ class HookList
               (e.g. in another thread) can be called. If set to false,
               these are skipped
   */
-  void invoke(bool mayRecurse)
+  void invoke(bool mayRecurse) nothrow
   {
     g_hook_list_invoke(cast(GHookList*)this._cPtr, mayRecurse);
   }
@@ -164,7 +161,7 @@ class HookList
               (e.g. in another thread) can be called. If set to false,
               these are skipped
   */
-  void invokeCheck(bool mayRecurse)
+  void invokeCheck(bool mayRecurse) nothrow
   {
     g_hook_list_invoke_check(cast(GHookList*)this._cPtr, mayRecurse);
   }
@@ -178,13 +175,20 @@ class HookList
               these are skipped
         marshaller = the function to call for each #GHook
   */
-  void marshal(bool mayRecurse, glib.types.HookMarshaller marshaller)
+  void marshal(bool mayRecurse, glib.types.HookMarshaller marshaller) nothrow
   {
-    extern(C) void _marshallerCallback(GHook* hook, void* marshalData)
+    extern(C) void _marshallerCallback(GHook* hook, void* marshalData) nothrow
     {
       auto _dlg = cast(glib.types.HookMarshaller*)marshalData;
 
-      (*_dlg)(hook ? new glib.hook.Hook(cast(void*)hook, No.Take) : null);
+      try
+      {
+        (*_dlg)(hook ? new glib.hook.Hook(cast(void*)hook, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.HookMarshaller");
+      }
     }
     auto _marshallerCB = marshaller ? &_marshallerCallback : null;
     auto _marshaller = marshaller ? cast(void*)&(marshaller) : null;
@@ -201,14 +205,21 @@ class HookList
               these are skipped
         marshaller = the function to call for each #GHook
   */
-  void marshalCheck(bool mayRecurse, glib.types.HookCheckMarshaller marshaller)
+  void marshalCheck(bool mayRecurse, glib.types.HookCheckMarshaller marshaller) nothrow
   {
-    extern(C) gboolean _marshallerCallback(GHook* hook, void* marshalData)
+    extern(C) gboolean _marshallerCallback(GHook* hook, void* marshalData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(glib.types.HookCheckMarshaller*)marshalData;
 
-      _dretval = (*_dlg)(hook ? new glib.hook.Hook(cast(void*)hook, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(hook ? new glib.hook.Hook(cast(void*)hook, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.HookCheckMarshaller");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;

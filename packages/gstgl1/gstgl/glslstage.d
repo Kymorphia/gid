@@ -19,26 +19,26 @@ class GLSLStage : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_glsl_stage_get_type != &gidSymbolNotFound ? gst_glsl_stage_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLSLStage self()
+  override GLSLStage self() nothrow
   {
     return this;
   }
@@ -47,13 +47,13 @@ class GLSLStage : gst.object.ObjectWrap
       Get builder for [gstgl.glslstage.GLSLStage]
       Returns: New builder object
   */
-  static GLSLStageGidBuilder builder()
+  static GLSLStageGidBuilder builder() nothrow
   {
     return new GLSLStageGidBuilder;
   }
 
   /** */
-  this(gstgl.glcontext.GLContext context, uint type)
+  this(gstgl.glcontext.GLContext context, uint type) nothrow
   {
     GstGLSLStage* _cretval;
     _cretval = gst_glsl_stage_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, type);
@@ -61,7 +61,7 @@ class GLSLStage : gst.object.ObjectWrap
   }
 
   /** */
-  static gstgl.glslstage.GLSLStage newDefaultFragment(gstgl.glcontext.GLContext context)
+  static gstgl.glslstage.GLSLStage newDefaultFragment(gstgl.glcontext.GLContext context) nothrow
   {
     GstGLSLStage* _cretval;
     _cretval = gst_glsl_stage_new_default_fragment(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
@@ -70,7 +70,7 @@ class GLSLStage : gst.object.ObjectWrap
   }
 
   /** */
-  static gstgl.glslstage.GLSLStage newDefaultVertex(gstgl.glcontext.GLContext context)
+  static gstgl.glslstage.GLSLStage newDefaultVertex(gstgl.glcontext.GLContext context) nothrow
   {
     GstGLSLStage* _cretval;
     _cretval = gst_glsl_stage_new_default_vertex(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
@@ -79,7 +79,7 @@ class GLSLStage : gst.object.ObjectWrap
   }
 
   /** */
-  static gstgl.glslstage.GLSLStage newWithString(gstgl.glcontext.GLContext context, uint type, gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile, string str)
+  static gstgl.glslstage.GLSLStage newWithString(gstgl.glcontext.GLContext context, uint type, gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile, string str) nothrow
   {
     GstGLSLStage* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -89,7 +89,7 @@ class GLSLStage : gst.object.ObjectWrap
   }
 
   /** */
-  static gstgl.glslstage.GLSLStage newWithStrings(gstgl.glcontext.GLContext context, uint type, gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile, string[] str)
+  static gstgl.glslstage.GLSLStage newWithStrings(gstgl.glcontext.GLContext context, uint type, gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile, string[] str) nothrow
   {
     GstGLSLStage* _cretval;
     int _nStrings;
@@ -118,7 +118,7 @@ class GLSLStage : gst.object.ObjectWrap
   }
 
   /** */
-  uint getHandle()
+  uint getHandle() nothrow
   {
     uint _retval;
     _retval = gst_glsl_stage_get_handle(cast(GstGLSLStage*)this._cPtr);
@@ -126,7 +126,7 @@ class GLSLStage : gst.object.ObjectWrap
   }
 
   /** */
-  gstgl.types.GLSLProfile getProfile()
+  gstgl.types.GLSLProfile getProfile() nothrow
   {
     GstGLSLProfile _cretval;
     _cretval = gst_glsl_stage_get_profile(cast(GstGLSLStage*)this._cPtr);
@@ -135,7 +135,7 @@ class GLSLStage : gst.object.ObjectWrap
   }
 
   /** */
-  uint getShaderType()
+  uint getShaderType() nothrow
   {
     uint _retval;
     _retval = gst_glsl_stage_get_shader_type(cast(GstGLSLStage*)this._cPtr);
@@ -143,7 +143,7 @@ class GLSLStage : gst.object.ObjectWrap
   }
 
   /** */
-  gstgl.types.GLSLVersion getVersion()
+  gstgl.types.GLSLVersion getVersion() nothrow
   {
     GstGLSLVersion _cretval;
     _cretval = gst_glsl_stage_get_version(cast(GstGLSLStage*)this._cPtr);
@@ -160,7 +160,7 @@ class GLSLStage : gst.object.ObjectWrap
         str = a GLSL shader string
       Returns: 
   */
-  bool setStrings(gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile, string[] str)
+  bool setStrings(gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile, string[] str) nothrow
   {
     bool _retval;
     int _nStrings;
@@ -189,7 +189,7 @@ final class GLSLStageGidBuilder : GLSLStageGidBuilderImpl!GLSLStageGidBuilder
       Create object from builder.
       Returns: New object
   */
-  GLSLStage build()
+  GLSLStage build() nothrow
   {
     return new GLSLStage(cast(void*)createGObject(GLSLStage._getGType), No.Take);
   }

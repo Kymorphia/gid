@@ -21,26 +21,26 @@ class ARGBControlBinding : gst.control_binding.ControlBinding
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_argb_control_binding_get_type != &gidSymbolNotFound ? gst_argb_control_binding_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ARGBControlBinding self()
+  override ARGBControlBinding self() nothrow
   {
     return this;
   }
@@ -49,55 +49,55 @@ class ARGBControlBinding : gst.control_binding.ControlBinding
       Get builder for [gstcontroller.argbcontrol_binding.ARGBControlBinding]
       Returns: New builder object
   */
-  static ARGBControlBindingGidBuilder builder()
+  static ARGBControlBindingGidBuilder builder() nothrow
   {
     return new ARGBControlBindingGidBuilder;
   }
 
   /** */
-  @property gst.control_source.ControlSource controlSourceA()
+  @property gst.control_source.ControlSource controlSourceA() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gst.control_source.ControlSource)("control-source-a");
   }
 
   /** */
-  @property void controlSourceA(gst.control_source.ControlSource propval)
+  @property void controlSourceA(gst.control_source.ControlSource propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gst.control_source.ControlSource)("control-source-a", propval);
   }
 
   /** */
-  @property gst.control_source.ControlSource controlSourceB()
+  @property gst.control_source.ControlSource controlSourceB() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gst.control_source.ControlSource)("control-source-b");
   }
 
   /** */
-  @property void controlSourceB(gst.control_source.ControlSource propval)
+  @property void controlSourceB(gst.control_source.ControlSource propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gst.control_source.ControlSource)("control-source-b", propval);
   }
 
   /** */
-  @property gst.control_source.ControlSource controlSourceG()
+  @property gst.control_source.ControlSource controlSourceG() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gst.control_source.ControlSource)("control-source-g");
   }
 
   /** */
-  @property void controlSourceG(gst.control_source.ControlSource propval)
+  @property void controlSourceG(gst.control_source.ControlSource propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gst.control_source.ControlSource)("control-source-g", propval);
   }
 
   /** */
-  @property gst.control_source.ControlSource controlSourceR()
+  @property gst.control_source.ControlSource controlSourceR() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gst.control_source.ControlSource)("control-source-r");
   }
 
   /** */
-  @property void controlSourceR(gst.control_source.ControlSource propval)
+  @property void controlSourceR(gst.control_source.ControlSource propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gst.control_source.ControlSource)("control-source-r", propval);
   }
@@ -115,7 +115,7 @@ class ARGBControlBinding : gst.control_binding.ControlBinding
         csB = the control source for the blue channel
       Returns: the new #GstARGBControlBinding
   */
-  this(gst.object.ObjectWrap object, string propertyName, gst.control_source.ControlSource csA, gst.control_source.ControlSource csR, gst.control_source.ControlSource csG, gst.control_source.ControlSource csB)
+  this(gst.object.ObjectWrap object, string propertyName, gst.control_source.ControlSource csA, gst.control_source.ControlSource csR, gst.control_source.ControlSource csG, gst.control_source.ControlSource csB) nothrow
   {
     GstControlBinding* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
@@ -129,25 +129,25 @@ class ARGBControlBindingGidBuilderImpl(T) : gst.control_binding.ControlBindingGi
 {
 
   /** */
-  T controlSourceA(gst.control_source.ControlSource propval)
+  T controlSourceA(gst.control_source.ControlSource propval) nothrow
   {
     return setProperty("control-source-a", propval);
   }
 
   /** */
-  T controlSourceB(gst.control_source.ControlSource propval)
+  T controlSourceB(gst.control_source.ControlSource propval) nothrow
   {
     return setProperty("control-source-b", propval);
   }
 
   /** */
-  T controlSourceG(gst.control_source.ControlSource propval)
+  T controlSourceG(gst.control_source.ControlSource propval) nothrow
   {
     return setProperty("control-source-g", propval);
   }
 
   /** */
-  T controlSourceR(gst.control_source.ControlSource propval)
+  T controlSourceR(gst.control_source.ControlSource propval) nothrow
   {
     return setProperty("control-source-r", propval);
   }
@@ -160,7 +160,7 @@ final class ARGBControlBindingGidBuilder : ARGBControlBindingGidBuilderImpl!ARGB
       Create object from builder.
       Returns: New object
   */
-  ARGBControlBinding build()
+  ARGBControlBinding build() nothrow
   {
     return new ARGBControlBinding(cast(void*)createGObject(ARGBControlBinding._getGType), No.Take);
   }

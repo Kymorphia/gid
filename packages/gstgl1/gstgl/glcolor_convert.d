@@ -29,26 +29,26 @@ class GLColorConvert : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_color_convert_get_type != &gidSymbolNotFound ? gst_gl_color_convert_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLColorConvert self()
+  override GLColorConvert self() nothrow
   {
     return this;
   }
@@ -57,13 +57,13 @@ class GLColorConvert : gst.object.ObjectWrap
       Get builder for [gstgl.glcolor_convert.GLColorConvert]
       Returns: New builder object
   */
-  static GLColorConvertGidBuilder builder()
+  static GLColorConvertGidBuilder builder() nothrow
   {
     return new GLColorConvertGidBuilder;
   }
 
   /** */
-  this(gstgl.glcontext.GLContext context)
+  this(gstgl.glcontext.GLContext context) nothrow
   {
     GstGLColorConvert* _cretval;
     _cretval = gst_gl_color_convert_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
@@ -80,7 +80,7 @@ class GLColorConvert : gst.object.ObjectWrap
         other = the #GstCaps to fixate
       Returns: the fixated #GstCaps
   */
-  static gst.caps.Caps fixateCaps(gstgl.glcontext.GLContext context, gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps other)
+  static gst.caps.Caps fixateCaps(gstgl.glcontext.GLContext context, gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps other) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_gl_color_convert_fixate_caps(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, direction, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, other ? cast(GstCaps*)other._cPtr(Yes.Dup) : null);
@@ -89,7 +89,7 @@ class GLColorConvert : gst.object.ObjectWrap
   }
 
   /** */
-  static string swizzleShaderString(gstgl.glcontext.GLContext context)
+  static string swizzleShaderString(gstgl.glcontext.GLContext context) nothrow
   {
     char* _cretval;
     _cretval = gst_gl_color_convert_swizzle_shader_string(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
@@ -107,7 +107,7 @@ class GLColorConvert : gst.object.ObjectWrap
         filter = a set of filter #GstCaps
       Returns: the converted #GstCaps
   */
-  static gst.caps.Caps transformCaps(gstgl.glcontext.GLContext context, gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps filter)
+  static gst.caps.Caps transformCaps(gstgl.glcontext.GLContext context, gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps filter) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_gl_color_convert_transform_caps(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, direction, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
@@ -129,7 +129,7 @@ class GLColorConvert : gst.object.ObjectWrap
       Returns: a glsl function that can be used to convert from
         yuv to rgb
   */
-  static string yuvToRgbShaderString(gstgl.glcontext.GLContext context)
+  static string yuvToRgbShaderString(gstgl.glcontext.GLContext context) nothrow
   {
     char* _cretval;
     _cretval = gst_gl_color_convert_yuv_to_rgb_shader_string(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
@@ -144,7 +144,7 @@ class GLColorConvert : gst.object.ObjectWrap
         query = a completed ALLOCATION #GstQuery
       Returns: whether the allocation parameters were successfully chosen
   */
-  bool decideAllocation(gst.query.Query query)
+  bool decideAllocation(gst.query.Query query) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_color_convert_decide_allocation(cast(GstGLColorConvert*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
@@ -159,7 +159,7 @@ class GLColorConvert : gst.object.ObjectWrap
         inbuf = the #GstGLMemory filled #GstBuffer to convert
       Returns: a converted #GstBuffer or null
   */
-  gst.buffer.Buffer perform(gst.buffer.Buffer inbuf)
+  gst.buffer.Buffer perform(gst.buffer.Buffer inbuf) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_gl_color_convert_perform(cast(GstGLColorConvert*)this._cPtr, inbuf ? cast(GstBuffer*)inbuf._cPtr(No.Dup) : null);
@@ -175,7 +175,7 @@ class GLColorConvert : gst.object.ObjectWrap
         outCaps = output #GstCaps
       Returns: 
   */
-  bool setCaps(gst.caps.Caps inCaps, gst.caps.Caps outCaps)
+  bool setCaps(gst.caps.Caps inCaps, gst.caps.Caps outCaps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_color_convert_set_caps(cast(GstGLColorConvert*)this._cPtr, inCaps ? cast(GstCaps*)inCaps._cPtr(No.Dup) : null, outCaps ? cast(GstCaps*)outCaps._cPtr(No.Dup) : null);
@@ -195,7 +195,7 @@ final class GLColorConvertGidBuilder : GLColorConvertGidBuilderImpl!GLColorConve
       Create object from builder.
       Returns: New object
   */
-  GLColorConvert build()
+  GLColorConvert build() nothrow
   {
     return new GLColorConvert(cast(void*)createGObject(GLColorConvert._getGType), Yes.Take);
   }

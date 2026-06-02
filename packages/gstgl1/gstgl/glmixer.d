@@ -19,26 +19,26 @@ class GLMixer : gstgl.glbase_mixer.GLBaseMixer
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_mixer_get_type != &gidSymbolNotFound ? gst_gl_mixer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLMixer self()
+  override GLMixer self() nothrow
   {
     return this;
   }
@@ -47,13 +47,13 @@ class GLMixer : gstgl.glbase_mixer.GLBaseMixer
       Get builder for [gstgl.glmixer.GLMixer]
       Returns: New builder object
   */
-  static GLMixerGidBuilder builder()
+  static GLMixerGidBuilder builder() nothrow
   {
     return new GLMixerGidBuilder;
   }
 
   /** */
-  gstgl.glframebuffer.GLFramebuffer getFramebuffer()
+  gstgl.glframebuffer.GLFramebuffer getFramebuffer() nothrow
   {
     GstGLFramebuffer* _cretval;
     _cretval = gst_gl_mixer_get_framebuffer(cast(GstGLMixer*)this._cPtr);
@@ -70,7 +70,7 @@ class GLMixer : gstgl.glbase_mixer.GLBaseMixer
         outbuf = output GstBuffer
       Returns: whether processing of textures succeeded
   */
-  bool processTextures(gst.buffer.Buffer outbuf)
+  bool processTextures(gst.buffer.Buffer outbuf) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_mixer_process_textures(cast(GstGLMixer*)this._cPtr, outbuf ? cast(GstBuffer*)outbuf._cPtr(No.Dup) : null);
@@ -90,7 +90,7 @@ final class GLMixerGidBuilder : GLMixerGidBuilderImpl!GLMixerGidBuilder
       Create object from builder.
       Returns: New object
   */
-  GLMixer build()
+  GLMixer build() nothrow
   {
     return new GLMixer(cast(void*)createGObject(GLMixer._getGType), No.Take);
   }

@@ -17,26 +17,26 @@ class TextPart : gmime.part.Part
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_text_part_get_type != &gidSymbolNotFound ? g_mime_text_part_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TextPart self()
+  override TextPart self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class TextPart : gmime.part.Part
       Get builder for [gmime.text_part.TextPart]
       Returns: New builder object
   */
-  static TextPartGidBuilder builder()
+  static TextPartGidBuilder builder() nothrow
   {
     return new TextPartGidBuilder;
   }
@@ -56,7 +56,7 @@ class TextPart : gmime.part.Part
       Returns: an empty MIME Part object with a default content-type of
         text/plain.
   */
-  this()
+  this() nothrow
   {
     GMimeTextPart* _cretval;
     _cretval = g_mime_text_part_new();
@@ -70,7 +70,7 @@ class TextPart : gmime.part.Part
         subtype = textual subtype string
       Returns: an empty text MIME part object with the specified subtype.
   */
-  static gmime.text_part.TextPart newWithSubtype(string subtype)
+  static gmime.text_part.TextPart newWithSubtype(string subtype) nothrow
   {
     GMimeTextPart* _cretval;
     const(char)* _subtype = subtype.toCString(No.Alloc);
@@ -83,7 +83,7 @@ class TextPart : gmime.part.Part
       Gets the value of the charset parameter on the Content-Type header.
       Returns: the value of the charset parameter or null if unavailable.
   */
-  string getCharset()
+  string getCharset() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_text_part_get_charset(cast(GMimeTextPart*)this._cPtr);
@@ -95,7 +95,7 @@ class TextPart : gmime.part.Part
       Gets the text content of the mime_part as a string.
       Returns: a newly allocated string containing the utf-8 encoded text content.
   */
-  string getText()
+  string getText() nothrow
   {
     char* _cretval;
     _cretval = g_mime_text_part_get_text(cast(GMimeTextPart*)this._cPtr);
@@ -109,7 +109,7 @@ class TextPart : gmime.part.Part
       Params:
         charset = the name of the charset
   */
-  void setCharset(string charset)
+  void setCharset(string charset) nothrow
   {
     const(char)* _charset = charset.toCString(No.Alloc);
     g_mime_text_part_set_charset(cast(GMimeTextPart*)this._cPtr, _charset);
@@ -121,7 +121,7 @@ class TextPart : gmime.part.Part
       Params:
         text = the text in utf-8
   */
-  void setText(string text)
+  void setText(string text) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     g_mime_text_part_set_text(cast(GMimeTextPart*)this._cPtr, _text);
@@ -140,7 +140,7 @@ final class TextPartGidBuilder : TextPartGidBuilderImpl!TextPartGidBuilder
       Create object from builder.
       Returns: New object
   */
-  TextPart build()
+  TextPart build() nothrow
   {
     return new TextPart(cast(void*)createGObject(TextPart._getGType), Yes.Take);
   }

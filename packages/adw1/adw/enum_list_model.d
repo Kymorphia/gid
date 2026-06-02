@@ -21,26 +21,26 @@ class EnumListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_enum_list_model_get_type != &gidSymbolNotFound ? adw_enum_list_model_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EnumListModel self()
+  override EnumListModel self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class EnumListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get builder for [adw.enum_list_model.EnumListModel]
       Returns: New builder object
   */
-  static EnumListModelGidBuilder builder()
+  static EnumListModelGidBuilder builder() nothrow
   {
     return new EnumListModelGidBuilder;
   }
@@ -58,7 +58,7 @@ class EnumListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `enumType` property.
       Returns: The type of the enum represented by the model.
   */
-  @property gobject.types.GType enumType()
+  @property gobject.types.GType enumType() nothrow
   {
     return getEnumType();
   }
@@ -72,7 +72,7 @@ class EnumListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
         enumType = the type of the enum to construct the model from
       Returns: the newly created [adw.enum_list_model.EnumListModel]
   */
-  this(gobject.types.GType enumType)
+  this(gobject.types.GType enumType) nothrow
   {
     AdwEnumListModel* _cretval;
     _cretval = adw_enum_list_model_new(enumType);
@@ -88,7 +88,7 @@ class EnumListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
         value = an enum value
       Returns: the position of the value
   */
-  uint findPosition(int value)
+  uint findPosition(int value) nothrow
   {
     uint _retval;
     _retval = adw_enum_list_model_find_position(cast(AdwEnumListModel*)this._cPtr, value);
@@ -99,7 +99,7 @@ class EnumListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
       Gets the type of the enum represented by self.
       Returns: the enum type
   */
-  gobject.types.GType getEnumType()
+  gobject.types.GType getEnumType() nothrow
   {
     gobject.types.GType _retval;
     _retval = adw_enum_list_model_get_enum_type(cast(AdwEnumListModel*)this._cPtr);
@@ -119,7 +119,7 @@ class EnumListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The type of the enum represented by the model.
       Returns: Builder instance for fluent chaining
   */
-  T enumType(gobject.types.GType propval)
+  T enumType(gobject.types.GType propval) nothrow
   {
     return setProperty("enum-type", propval);
   }
@@ -132,7 +132,7 @@ final class EnumListModelGidBuilder : EnumListModelGidBuilderImpl!EnumListModelG
       Create object from builder.
       Returns: New object
   */
-  EnumListModel build()
+  EnumListModel build() nothrow
   {
     return new EnumListModel(cast(void*)createGObject(EnumListModel._getGType), Yes.Take);
   }

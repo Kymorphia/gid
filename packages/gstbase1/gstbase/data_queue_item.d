@@ -17,11 +17,8 @@ class DataQueueItem
   GstDataQueueItem _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstbase.data_queue_item.DataQueueItem");
-
     _cInstance = *cast(GstDataQueueItem*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class DataQueueItem
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class DataQueueItem
       Get `object` field.
       Returns: the #GstMiniObject to queue.
   */
-  @property gst.mini_object.MiniObject object()
+  @property gst.mini_object.MiniObject object() nothrow
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)(cast(GstDataQueueItem*)this._cPtr).object);
   }
@@ -48,7 +45,7 @@ class DataQueueItem
       Params:
         propval = the #GstMiniObject to queue.
   */
-  @property void object(gst.mini_object.MiniObject propval)
+  @property void object(gst.mini_object.MiniObject propval) nothrow
   {
     cValueFree!(gst.mini_object.MiniObject)(cast(void*)(cast(GstDataQueueItem*)this._cPtr).object);
     dToC(propval, cast(void*)&(cast(GstDataQueueItem*)this._cPtr).object);
@@ -58,7 +55,7 @@ class DataQueueItem
       Get `size` field.
       Returns: the size in bytes of the miniobject.
   */
-  @property uint size()
+  @property uint size() nothrow
   {
     return (cast(GstDataQueueItem*)this._cPtr).size;
   }
@@ -68,7 +65,7 @@ class DataQueueItem
       Params:
         propval = the size in bytes of the miniobject.
   */
-  @property void size(uint propval)
+  @property void size(uint propval) nothrow
   {
     (cast(GstDataQueueItem*)this._cPtr).size = propval;
   }
@@ -78,7 +75,7 @@ class DataQueueItem
       Returns: the duration in #GstClockTime of the miniobject. Can not be
         [gst.types.CLOCK_TIME_NONE].
   */
-  @property ulong duration()
+  @property ulong duration() nothrow
   {
     return (cast(GstDataQueueItem*)this._cPtr).duration;
   }
@@ -89,7 +86,7 @@ class DataQueueItem
         propval = the duration in #GstClockTime of the miniobject. Can not be
           [gst.types.CLOCK_TIME_NONE].
   */
-  @property void duration(ulong propval)
+  @property void duration(ulong propval) nothrow
   {
     (cast(GstDataQueueItem*)this._cPtr).duration = propval;
   }
@@ -98,7 +95,7 @@ class DataQueueItem
       Get `visible` field.
       Returns: true if @object should be considered as a visible object.
   */
-  @property bool visible()
+  @property bool visible() nothrow
   {
     return cast(bool)(cast(GstDataQueueItem*)this._cPtr).visible;
   }
@@ -108,7 +105,7 @@ class DataQueueItem
       Params:
         propval = true if @object should be considered as a visible object.
   */
-  @property void visible(bool propval)
+  @property void visible(bool propval) nothrow
   {
     (cast(GstDataQueueItem*)this._cPtr).visible = propval;
   }
@@ -119,7 +116,7 @@ class DataQueueItem
         This function should also drop the reference to @object the owner of the
         #GstDataQueueItem is assumed to hold.
   */
-  @property GDestroyNotify destroy()
+  @property GDestroyNotify destroy() nothrow
   {
     return (cast(GstDataQueueItem*)this._cPtr).destroy;
   }
@@ -132,7 +129,7 @@ class DataQueueItem
           #GstDataQueueItem is assumed to hold.
   */
 
-  @property void destroy(GDestroyNotify propval)
+  @property void destroy(GDestroyNotify propval) nothrow
   {
     (cast(GstDataQueueItem*)this._cPtr).destroy = propval;
   }

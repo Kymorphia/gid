@@ -19,26 +19,26 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_stack_page_get_type != &gidSymbolNotFound ? gtk_stack_page_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StackPage self()
+  override StackPage self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Get builder for [gtk.stack_page.StackPage]
       Returns: New builder object
   */
-  static StackPageGidBuilder builder()
+  static StackPageGidBuilder builder() nothrow
   {
     return new StackPageGidBuilder;
   }
@@ -56,7 +56,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Get `child` property.
       Returns: The child that this page is for.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -65,7 +65,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Get `iconName` property.
       Returns: The icon name of the child page.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return getIconName();
   }
@@ -75,7 +75,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         propval = The icon name of the child page.
   */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     setIconName(propval);
   }
@@ -84,7 +84,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Get `name` property.
       Returns: The name of the child page.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return getName();
   }
@@ -94,7 +94,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         propval = The name of the child page.
   */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     setName(propval);
   }
@@ -107,7 +107,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
         appearance of the corresponding button when a page needs
         attention and it is not the current one.
   */
-  @property bool needsAttention()
+  @property bool needsAttention() nothrow
   {
     return getNeedsAttention();
   }
@@ -121,7 +121,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
           appearance of the corresponding button when a page needs
           attention and it is not the current one.
   */
-  @property void needsAttention(bool propval)
+  @property void needsAttention(bool propval) nothrow
   {
     setNeedsAttention(propval);
   }
@@ -130,7 +130,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Get `title` property.
       Returns: The title of the child page.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -140,7 +140,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         propval = The title of the child page.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -149,7 +149,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Get `useUnderline` property.
       Returns: If set, an underline in the title indicates a mnemonic.
   */
-  @property bool useUnderline()
+  @property bool useUnderline() nothrow
   {
     return getUseUnderline();
   }
@@ -159,7 +159,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         propval = If set, an underline in the title indicates a mnemonic.
   */
-  @property void useUnderline(bool propval)
+  @property void useUnderline(bool propval) nothrow
   {
     setUseUnderline(propval);
   }
@@ -168,7 +168,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Get `visible` property.
       Returns: Whether this page is visible.
   */
-  @property bool visible()
+  @property bool visible() nothrow
   {
     return getVisible();
   }
@@ -178,7 +178,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         propval = Whether this page is visible.
   */
-  @property void visible(bool propval)
+  @property void visible(bool propval) nothrow
   {
     setVisible(propval);
   }
@@ -189,7 +189,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Returns the stack child to which self belongs.
       Returns: the child to which self belongs
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_stack_page_get_child(cast(GtkStackPage*)this._cPtr);
@@ -201,7 +201,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Returns the icon name of the page.
       Returns: The value of the [gtk.stack_page.StackPage.iconName] property
   */
-  string getIconName()
+  string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_stack_page_get_icon_name(cast(GtkStackPage*)this._cPtr);
@@ -213,7 +213,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Returns the name of the page.
       Returns: The value of the [gtk.stack_page.StackPage.name] property
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_stack_page_get_name(cast(GtkStackPage*)this._cPtr);
@@ -226,7 +226,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Returns: The value of the [gtk.stack_page.StackPage.needsAttention]
           property.
   */
-  bool getNeedsAttention()
+  bool getNeedsAttention() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_stack_page_get_needs_attention(cast(GtkStackPage*)this._cPtr);
@@ -237,7 +237,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Gets the page title.
       Returns: The value of the [gtk.stack_page.StackPage.title] property
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_stack_page_get_title(cast(GtkStackPage*)this._cPtr);
@@ -249,7 +249,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Gets whether underlines in the page title indicate mnemonics.
       Returns: The value of the [gtk.stack_page.StackPage.useUnderline] property
   */
-  bool getUseUnderline()
+  bool getUseUnderline() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_stack_page_get_use_underline(cast(GtkStackPage*)this._cPtr);
@@ -263,7 +263,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       property of its widget.
       Returns: true if page is visible
   */
-  bool getVisible()
+  bool getVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_stack_page_get_visible(cast(GtkStackPage*)this._cPtr);
@@ -276,7 +276,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         setting = the new value to set
   */
-  void setIconName(string setting)
+  void setIconName(string setting) nothrow
   {
     const(char)* _setting = setting.toCString(No.Alloc);
     gtk_stack_page_set_icon_name(cast(GtkStackPage*)this._cPtr, _setting);
@@ -288,7 +288,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         setting = the new value to set
   */
-  void setName(string setting)
+  void setName(string setting) nothrow
   {
     const(char)* _setting = setting.toCString(No.Alloc);
     gtk_stack_page_set_name(cast(GtkStackPage*)this._cPtr, _setting);
@@ -300,7 +300,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         setting = the new value to set
   */
-  void setNeedsAttention(bool setting)
+  void setNeedsAttention(bool setting) nothrow
   {
     gtk_stack_page_set_needs_attention(cast(GtkStackPage*)this._cPtr, setting);
   }
@@ -311,7 +311,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         setting = the new value to set
   */
-  void setTitle(string setting)
+  void setTitle(string setting) nothrow
   {
     const(char)* _setting = setting.toCString(No.Alloc);
     gtk_stack_page_set_title(cast(GtkStackPage*)this._cPtr, _setting);
@@ -323,7 +323,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         setting = the new value to set
   */
-  void setUseUnderline(bool setting)
+  void setUseUnderline(bool setting) nothrow
   {
     gtk_stack_page_set_use_underline(cast(GtkStackPage*)this._cPtr, setting);
   }
@@ -334,7 +334,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         visible = The new property value
   */
-  void setVisible(bool visible)
+  void setVisible(bool visible) nothrow
   {
     gtk_stack_page_set_visible(cast(GtkStackPage*)this._cPtr, visible);
   }
@@ -352,7 +352,7 @@ class StackPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gt
         propval = The child that this page is for.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -363,7 +363,7 @@ class StackPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gt
         propval = The icon name of the child page.
       Returns: Builder instance for fluent chaining
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
@@ -374,7 +374,7 @@ class StackPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gt
         propval = The name of the child page.
       Returns: Builder instance for fluent chaining
   */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -389,7 +389,7 @@ class StackPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gt
           attention and it is not the current one.
       Returns: Builder instance for fluent chaining
   */
-  T needsAttention(bool propval)
+  T needsAttention(bool propval) nothrow
   {
     return setProperty("needs-attention", propval);
   }
@@ -400,7 +400,7 @@ class StackPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gt
         propval = The title of the child page.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -411,7 +411,7 @@ class StackPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gt
         propval = If set, an underline in the title indicates a mnemonic.
       Returns: Builder instance for fluent chaining
   */
-  T useUnderline(bool propval)
+  T useUnderline(bool propval) nothrow
   {
     return setProperty("use-underline", propval);
   }
@@ -422,7 +422,7 @@ class StackPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gt
         propval = Whether this page is visible.
       Returns: Builder instance for fluent chaining
   */
-  T visible(bool propval)
+  T visible(bool propval) nothrow
   {
     return setProperty("visible", propval);
   }
@@ -435,7 +435,7 @@ final class StackPageGidBuilder : StackPageGidBuilderImpl!StackPageGidBuilder
       Create object from builder.
       Returns: New object
   */
-  StackPage build()
+  StackPage build() nothrow
   {
     return new StackPage(cast(void*)createGObject(StackPage._getGType), No.Take);
   }

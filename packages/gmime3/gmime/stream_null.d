@@ -16,26 +16,26 @@ class StreamNull : gmime.stream.Stream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_stream_null_get_type != &gidSymbolNotFound ? g_mime_stream_null_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StreamNull self()
+  override StreamNull self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class StreamNull : gmime.stream.Stream
       Get builder for [gmime.stream_null.StreamNull]
       Returns: New builder object
   */
-  static StreamNullGidBuilder builder()
+  static StreamNullGidBuilder builder() nothrow
   {
     return new StreamNullGidBuilder;
   }
@@ -53,7 +53,7 @@ class StreamNull : gmime.stream.Stream
       Creates a new #GMimeStreamNull object.
       Returns: a new null stream (similar to /dev/null on Unix).
   */
-  this()
+  this() nothrow
   {
     GMimeStream* _cretval;
     _cretval = g_mime_stream_null_new();
@@ -65,7 +65,7 @@ class StreamNull : gmime.stream.Stream
       encountered.
       Returns: true if the stream should count the number of newlines or false otherwise.
   */
-  bool getCountNewlines()
+  bool getCountNewlines() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_stream_null_get_count_newlines(cast(GMimeStreamNull*)this._cPtr);
@@ -79,7 +79,7 @@ class StreamNull : gmime.stream.Stream
       Params:
         count = true if newlines should be counted or false otherwise
   */
-  void setCountNewlines(bool count)
+  void setCountNewlines(bool count) nothrow
   {
     g_mime_stream_null_set_count_newlines(cast(GMimeStreamNull*)this._cPtr, count);
   }
@@ -97,7 +97,7 @@ final class StreamNullGidBuilder : StreamNullGidBuilderImpl!StreamNullGidBuilder
       Create object from builder.
       Returns: New object
   */
-  StreamNull build()
+  StreamNull build() nothrow
   {
     return new StreamNull(cast(void*)createGObject(StreamNull._getGType), Yes.Take);
   }

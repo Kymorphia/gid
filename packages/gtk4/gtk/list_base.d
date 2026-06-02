@@ -27,26 +27,26 @@ class ListBase : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scrollable.Sc
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_list_base_get_type != &gidSymbolNotFound ? gtk_list_base_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ListBase self()
+  override ListBase self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class ListBase : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scrollable.Sc
       Get builder for [gtk.list_base.ListBase]
       Returns: New builder object
   */
-  static ListBaseGidBuilder builder()
+  static ListBaseGidBuilder builder() nothrow
   {
     return new ListBaseGidBuilder;
   }
@@ -65,7 +65,7 @@ class ListBase : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scrollable.Sc
       Returns: The orientation of the list. See GtkOrientable:orientation
         for details.
   */
-  @property gtk.types.Orientation orientation()
+  @property gtk.types.Orientation orientation() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.Orientation)("orientation");
   }
@@ -76,7 +76,7 @@ class ListBase : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scrollable.Sc
         propval = The orientation of the list. See GtkOrientable:orientation
           for details.
   */
-  @property void orientation(gtk.types.Orientation propval)
+  @property void orientation(gtk.types.Orientation propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.Orientation)("orientation", propval);
   }
@@ -99,7 +99,7 @@ class ListBaseGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orienta
           for details.
       Returns: Builder instance for fluent chaining
   */
-  T orientation(gtk.types.Orientation propval)
+  T orientation(gtk.types.Orientation propval) nothrow
   {
     return setProperty("orientation", propval);
   }
@@ -112,7 +112,7 @@ final class ListBaseGidBuilder : ListBaseGidBuilderImpl!ListBaseGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ListBase build()
+  ListBase build() nothrow
   {
     return new ListBase(cast(void*)createGObject(ListBase._getGType), No.Take);
   }

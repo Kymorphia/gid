@@ -258,7 +258,7 @@ template ActivatableT()
         > #GtkActivatable implementors need to handle the this property and
         > call [gtk.activatable.Activatable.doSetRelatedAction] when it changes.
   */
-  @property gtk.action.Action relatedAction()
+  @property gtk.action.Action relatedAction() nothrow
   {
     return getRelatedAction();
   }
@@ -272,7 +272,7 @@ template ActivatableT()
           > #GtkActivatable implementors need to handle the this property and
           > call [gtk.activatable.Activatable.doSetRelatedAction] when it changes.
   */
-  @property void relatedAction(gtk.action.Action propval)
+  @property void relatedAction(gtk.action.Action propval) nothrow
   {
     setRelatedAction(propval);
   }
@@ -290,7 +290,7 @@ template ActivatableT()
         > and call [gtk.activatable.Activatable.syncActionProperties] on the activatable
         > widget when it changes.
   */
-  @property bool useActionAppearance()
+  @property bool useActionAppearance() nothrow
   {
     return getUseActionAppearance();
   }
@@ -309,7 +309,7 @@ template ActivatableT()
           > and call [gtk.activatable.Activatable.syncActionProperties] on the activatable
           > widget when it changes.
   */
-  @property void useActionAppearance(bool propval)
+  @property void useActionAppearance(bool propval) nothrow
   {
     setUseActionAppearance(propval);
   }
@@ -334,7 +334,7 @@ template ActivatableT()
       Params:
         action = the #GtkAction to set
   */
-  override void doSetRelatedAction(gtk.action.Action action)
+  override void doSetRelatedAction(gtk.action.Action action) nothrow
   {
     gtk_activatable_do_set_related_action(cast(GtkActivatable*)this._cPtr, action ? cast(GtkAction*)action._cPtr(No.Dup) : null);
   }
@@ -343,7 +343,7 @@ template ActivatableT()
       Gets the related #GtkAction for activatable.
       Returns: the related #GtkAction if one is set.
   */
-  override gtk.action.Action getRelatedAction()
+  override gtk.action.Action getRelatedAction() nothrow
   {
     GtkAction* _cretval;
     _cretval = gtk_activatable_get_related_action(cast(GtkActivatable*)this._cPtr);
@@ -357,7 +357,7 @@ template ActivatableT()
       the action changes appearance.
       Returns: whether activatable uses its actions appearance.
   */
-  override bool getUseActionAppearance()
+  override bool getUseActionAppearance() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_activatable_get_use_action_appearance(cast(GtkActivatable*)this._cPtr);
@@ -373,7 +373,7 @@ template ActivatableT()
       Params:
         action = the #GtkAction to set
   */
-  override void setRelatedAction(gtk.action.Action action)
+  override void setRelatedAction(gtk.action.Action action) nothrow
   {
     gtk_activatable_set_related_action(cast(GtkActivatable*)this._cPtr, action ? cast(GtkAction*)action._cPtr(No.Dup) : null);
   }
@@ -390,7 +390,7 @@ template ActivatableT()
       Params:
         useAppearance = whether to use the actions appearance
   */
-  override void setUseActionAppearance(bool useAppearance)
+  override void setUseActionAppearance(bool useAppearance) nothrow
   {
     gtk_activatable_set_use_action_appearance(cast(GtkActivatable*)this._cPtr, useAppearance);
   }
@@ -404,7 +404,7 @@ template ActivatableT()
       Params:
         action = the related #GtkAction or null
   */
-  override void syncActionProperties(gtk.action.Action action = null)
+  override void syncActionProperties(gtk.action.Action action = null) nothrow
   {
     gtk_activatable_sync_action_properties(cast(GtkActivatable*)this._cPtr, action ? cast(GtkAction*)action._cPtr(No.Dup) : null);
   }
@@ -424,7 +424,7 @@ template ActivatableGidBuilderT()
           > call [gtk.activatable.Activatable.doSetRelatedAction] when it changes.
       Returns: Builder instance for fluent chaining
   */
-  T relatedAction(gtk.action.Action propval)
+  T relatedAction(gtk.action.Action propval) nothrow
   {
     return setProperty("related-action", propval);
   }
@@ -444,7 +444,7 @@ template ActivatableGidBuilderT()
           > widget when it changes.
       Returns: Builder instance for fluent chaining
   */
-  T useActionAppearance(bool propval)
+  T useActionAppearance(bool propval) nothrow
   {
     return setProperty("use-action-appearance", propval);
   }

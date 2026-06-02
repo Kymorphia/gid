@@ -15,11 +15,8 @@ class MIKEYPayloadSPParam
   GstMIKEYPayloadSPParam _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstsdp.mikeypayload_spparam.MIKEYPayloadSPParam");
-
     _cInstance = *cast(GstMIKEYPayloadSPParam*)ptr;
 
     if (take)
@@ -27,7 +24,7 @@ class MIKEYPayloadSPParam
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -36,7 +33,7 @@ class MIKEYPayloadSPParam
       Get `type` field.
       Returns: specifies the type of the parameter
   */
-  @property ubyte type()
+  @property ubyte type() nothrow
   {
     return (cast(GstMIKEYPayloadSPParam*)this._cPtr).type;
   }
@@ -46,7 +43,7 @@ class MIKEYPayloadSPParam
       Params:
         propval = specifies the type of the parameter
   */
-  @property void type(ubyte propval)
+  @property void type(ubyte propval) nothrow
   {
     (cast(GstMIKEYPayloadSPParam*)this._cPtr).type = propval;
   }
@@ -55,7 +52,7 @@ class MIKEYPayloadSPParam
       Get `len` field.
       Returns: specifies the length of @val
   */
-  @property ubyte len()
+  @property ubyte len() nothrow
   {
     return (cast(GstMIKEYPayloadSPParam*)this._cPtr).len;
   }
@@ -65,7 +62,7 @@ class MIKEYPayloadSPParam
       Params:
         propval = specifies the length of @val
   */
-  @property void len(ubyte propval)
+  @property void len(ubyte propval) nothrow
   {
     (cast(GstMIKEYPayloadSPParam*)this._cPtr).len = propval;
   }

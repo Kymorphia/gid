@@ -21,7 +21,7 @@ import json.types;
       nodeType = a node type
     Returns: `TRUE` if the type can be deserialized, and `FALSE` otherwise
 */
-bool boxedCanDeserialize(gobject.types.GType gboxedType, json.types.NodeType nodeType)
+bool boxedCanDeserialize(gobject.types.GType gboxedType, json.types.NodeType nodeType) nothrow
 {
   bool _retval;
   _retval = cast(bool)json_boxed_can_deserialize(gboxedType, nodeType);
@@ -41,7 +41,7 @@ bool boxedCanDeserialize(gobject.types.GType gboxedType, json.types.NodeType nod
           can be serialized into
     Returns: `TRUE` if the type can be serialized, and `FALSE` otherwise
 */
-bool boxedCanSerialize(gobject.types.GType gboxedType, out json.types.NodeType nodeType)
+bool boxedCanSerialize(gobject.types.GType gboxedType, out json.types.NodeType nodeType) nothrow
 {
   bool _retval;
   _retval = cast(bool)json_boxed_can_serialize(gboxedType, &nodeType);
@@ -56,7 +56,7 @@ bool boxedCanSerialize(gobject.types.GType gboxedType, out json.types.NodeType n
       node = a node
     Returns: the newly allocated boxed data
 */
-void* boxedDeserialize(gobject.types.GType gboxedType, json.node.Node node)
+void* boxedDeserialize(gobject.types.GType gboxedType, json.node.Node node) nothrow
 {
   auto _retval = json_boxed_deserialize(gboxedType, node ? cast(JsonNode*)node._cPtr(No.Dup) : null);
   return _retval;
@@ -72,7 +72,7 @@ void* boxedDeserialize(gobject.types.GType gboxedType, json.node.Node node)
       boxed = a pointer to a boxed of type `gboxed_type`
     Returns: a node with the serialized boxed type
 */
-json.node.Node boxedSerialize(gobject.types.GType gboxedType, const(void)* boxed = null)
+json.node.Node boxedSerialize(gobject.types.GType gboxedType, const(void)* boxed = null) nothrow
 {
   JsonNode* _cretval;
   _cretval = json_boxed_serialize(gboxedType, boxed);
@@ -151,7 +151,7 @@ json.node.Node fromString(string str)
           object instance for the given type
     Returns: The newly created instance
 */
-gobject.object.ObjectWrap gobjectDeserialize(gobject.types.GType gtype, json.node.Node node)
+gobject.object.ObjectWrap gobjectDeserialize(gobject.types.GType gtype, json.node.Node node) nothrow
 {
   GObject* _cretval;
   _cretval = json_gobject_deserialize(gtype, node ? cast(JsonNode*)node._cPtr(No.Dup) : null);
@@ -205,7 +205,7 @@ gobject.object.ObjectWrap gobjectFromData(gobject.types.GType gtype, string data
       gobject = the object to serialize
     Returns: the newly created JSON tree
 */
-json.node.Node gobjectSerialize(gobject.object.ObjectWrap gobject)
+json.node.Node gobjectSerialize(gobject.object.ObjectWrap gobject) nothrow
 {
   JsonNode* _cretval;
   _cretval = json_gobject_serialize(gobject ? cast(GObject*)gobject._cPtr(No.Dup) : null);
@@ -227,7 +227,7 @@ json.node.Node gobjectSerialize(gobject.object.ObjectWrap gobject)
       length = return value for the length of the buffer
     Returns: a JSON data stream representing the given object
 */
-string gobjectToData(gobject.object.ObjectWrap gobject, out size_t length)
+string gobjectToData(gobject.object.ObjectWrap gobject, out size_t length) nothrow
 {
   char* _cretval;
   _cretval = json_gobject_to_data(gobject ? cast(GObject*)gobject._cPtr(No.Dup) : null, cast(size_t*)&length);
@@ -319,7 +319,7 @@ glib.variant.Variant gvariantDeserializeData(string json, string signature = nul
     Returns: the root of the JSON data structure
         obtained from `variant`
 */
-json.node.Node gvariantSerialize(glib.variant.Variant variant)
+json.node.Node gvariantSerialize(glib.variant.Variant variant) nothrow
 {
   JsonNode* _cretval;
   _cretval = json_gvariant_serialize(variant ? cast(GVariant*)variant._cPtr(No.Dup) : null);
@@ -339,7 +339,7 @@ json.node.Node gvariantSerialize(glib.variant.Variant variant)
     Returns: The JSON encoded string corresponding to
         the given variant
 */
-string gvariantSerializeData(glib.variant.Variant variant, out size_t length)
+string gvariantSerializeData(glib.variant.Variant variant, out size_t length) nothrow
 {
   char* _cretval;
   _cretval = json_gvariant_serialize_data(variant ? cast(GVariant*)variant._cPtr(No.Dup) : null, cast(size_t*)&length);
@@ -362,7 +362,7 @@ string gvariantSerializeData(glib.variant.Variant variant, out size_t length)
 
     Deprecated: Use `funcJson.gobject_to_data` instead
 */
-string serializeGobject(gobject.object.ObjectWrap gobject, out size_t length)
+string serializeGobject(gobject.object.ObjectWrap gobject, out size_t length) nothrow
 {
   char* _cretval;
   _cretval = json_serialize_gobject(gobject ? cast(GObject*)gobject._cPtr(No.Dup) : null, cast(size_t*)&length);
@@ -380,7 +380,7 @@ string serializeGobject(gobject.object.ObjectWrap gobject, out size_t length)
     Returns: an integer less than zero if `a < b`, equal to zero if `a == b`, and
         greater than zero if `a > b`
 */
-int stringCompare(string a, string b)
+int stringCompare(string a, string b) nothrow
 {
   int _retval;
   const(void)* _a = a.toCString(No.Alloc);
@@ -397,7 +397,7 @@ int stringCompare(string a, string b)
       b = another JSON string
     Returns: `TRUE` if `a` and `b` are equal; `FALSE` otherwise
 */
-bool stringEqual(string a, string b)
+bool stringEqual(string a, string b) nothrow
 {
   bool _retval;
   const(void)* _a = a.toCString(No.Alloc);
@@ -417,7 +417,7 @@ bool stringEqual(string a, string b)
       key = a JSON string to hash
     Returns: hash value for key
 */
-uint stringHash(string key)
+uint stringHash(string key) nothrow
 {
   uint _retval;
   const(void)* _key = key.toCString(No.Alloc);
@@ -434,7 +434,7 @@ uint stringHash(string key)
       pretty = whether the output should be prettyfied for printing
     Returns: the string representation of the node
 */
-string toString_(json.node.Node node, bool pretty)
+string toString_(json.node.Node node, bool pretty) nothrow
 {
   char* _cretval;
   _cretval = json_to_string(node ? cast(JsonNode*)node._cPtr(No.Dup) : null, pretty);

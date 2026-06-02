@@ -20,26 +20,26 @@ class Plug : atk.object.ObjectWrap, atk.component.Component
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_plug_get_type != &gidSymbolNotFound ? atk_plug_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Plug self()
+  override Plug self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class Plug : atk.object.ObjectWrap, atk.component.Component
       Get builder for [atk.plug.Plug]
       Returns: New builder object
   */
-  static PlugGidBuilder builder()
+  static PlugGidBuilder builder() nothrow
   {
     return new PlugGidBuilder;
   }
@@ -59,7 +59,7 @@ class Plug : atk.object.ObjectWrap, atk.component.Component
       Creates a new #AtkPlug instance.
       Returns: the newly created #AtkPlug
   */
-  this()
+  this() nothrow
   {
     AtkObject* _cretval;
     _cretval = atk_plug_new();
@@ -77,7 +77,7 @@ class Plug : atk.object.ObjectWrap, atk.component.Component
       #AtkSocket, so it could embed the plug.
       Returns: the unique ID for the plug
   */
-  string getId()
+  string getId() nothrow
   {
     char* _cretval;
     _cretval = atk_plug_get_id(cast(AtkPlug*)this._cPtr);
@@ -99,7 +99,7 @@ class Plug : atk.object.ObjectWrap, atk.component.Component
       Params:
         child = an #AtkObject to be set as accessible child of plug.
   */
-  void setChild(atk.object.ObjectWrap child)
+  void setChild(atk.object.ObjectWrap child) nothrow
   {
     atk_plug_set_child(cast(AtkPlug*)this._cPtr, child ? cast(AtkObject*)child._cPtr(No.Dup) : null);
   }
@@ -119,7 +119,7 @@ final class PlugGidBuilder : PlugGidBuilderImpl!PlugGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Plug build()
+  Plug build() nothrow
   {
     return new Plug(cast(void*)createGObject(Plug._getGType), Yes.Take);
   }

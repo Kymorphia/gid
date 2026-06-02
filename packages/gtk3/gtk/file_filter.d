@@ -59,26 +59,26 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_file_filter_get_type != &gidSymbolNotFound ? gtk_file_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileFilter self()
+  override FileFilter self() nothrow
   {
     return this;
   }
@@ -87,7 +87,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
       Get builder for [gtk.file_filter.FileFilter]
       Returns: New builder object
   */
-  static FileFilterGidBuilder builder()
+  static FileFilterGidBuilder builder() nothrow
   {
     return new FileFilterGidBuilder;
   }
@@ -107,7 +107,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
       ```
       Returns: a new #GtkFileFilter
   */
-  this()
+  this() nothrow
   {
     GtkFileFilter* _cretval;
     _cretval = gtk_file_filter_new();
@@ -122,7 +122,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
         variant = an a{sv} #GVariant
       Returns: a new #GtkFileFilter object
   */
-  static gtk.file_filter.FileFilter newFromGvariant(glib.variant.Variant variant)
+  static gtk.file_filter.FileFilter newFromGvariant(glib.variant.Variant variant) nothrow
   {
     GtkFileFilter* _cretval;
     _cretval = gtk_file_filter_new_from_gvariant(variant ? cast(GVariant*)variant._cPtr(No.Dup) : null);
@@ -143,14 +143,21 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
         func = callback function; if the function returns true, then
             the file will be displayed.
   */
-  void addCustom(gtk.types.FileFilterFlags needed, gtk.types.FileFilterFunc func)
+  void addCustom(gtk.types.FileFilterFlags needed, gtk.types.FileFilterFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(const(GtkFileFilterInfo)* filterInfo, void* data)
+    extern(C) gboolean _funcCallback(const(GtkFileFilterInfo)* filterInfo, void* data) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.FileFilterFunc*)data;
 
-      _dretval = (*_dlg)(filterInfo ? new gtk.file_filter_info.FileFilterInfo(cast(void*)filterInfo, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(filterInfo ? new gtk.file_filter_info.FileFilterInfo(cast(void*)filterInfo, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.FileFilterFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -167,7 +174,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
       Params:
         mimeType = name of a MIME type
   */
-  void addMimeType(string mimeType)
+  void addMimeType(string mimeType) nothrow
   {
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
     gtk_file_filter_add_mime_type(cast(GtkFileFilter*)this._cPtr, _mimeType);
@@ -179,7 +186,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
       Params:
         pattern = a shell style glob
   */
-  void addPattern(string pattern)
+  void addPattern(string pattern) nothrow
   {
     const(char)* _pattern = pattern.toCString(No.Alloc);
     gtk_file_filter_add_pattern(cast(GtkFileFilter*)this._cPtr, _pattern);
@@ -189,7 +196,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
       Adds a rule allowing image files in the formats supported
       by GdkPixbuf.
   */
-  void addPixbufFormats()
+  void addPixbufFormats() nothrow
   {
     gtk_file_filter_add_pixbuf_formats(cast(GtkFileFilter*)this._cPtr);
   }
@@ -208,7 +215,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
            about a file.
       Returns: true if the file should be displayed
   */
-  bool filter(gtk.file_filter_info.FileFilterInfo filterInfo)
+  bool filter(gtk.file_filter_info.FileFilterInfo filterInfo) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_file_filter_filter(cast(GtkFileFilter*)this._cPtr, filterInfo ? cast(const(GtkFileFilterInfo)*)filterInfo._cPtr : null);
@@ -221,7 +228,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
           or null. This value is owned by GTK+ and must not
           be modified or freed.
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_file_filter_get_name(cast(GtkFileFilter*)this._cPtr);
@@ -239,7 +246,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
       Returns: bitfield of flags indicating needed fields when
           calling [gtk.file_filter.FileFilter.filter]
   */
-  gtk.types.FileFilterFlags getNeeded()
+  gtk.types.FileFilterFlags getNeeded() nothrow
   {
     GtkFileFilterFlags _cretval;
     _cretval = gtk_file_filter_get_needed(cast(GtkFileFilter*)this._cPtr);
@@ -256,7 +263,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
         name = the human-readable-name for the filter, or null
             to remove any existing name.
   */
-  void setName(string name = null)
+  void setName(string name = null) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_file_filter_set_name(cast(GtkFileFilter*)this._cPtr, _name);
@@ -266,7 +273,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
       Serialize a file filter to an a{sv} variant.
       Returns: a new, floating, #GVariant
   */
-  glib.variant.Variant toGvariant()
+  glib.variant.Variant toGvariant() nothrow
   {
     GVariant* _cretval;
     _cretval = gtk_file_filter_to_gvariant(cast(GtkFileFilter*)this._cPtr);
@@ -289,7 +296,7 @@ final class FileFilterGidBuilder : FileFilterGidBuilderImpl!FileFilterGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FileFilter build()
+  FileFilter build() nothrow
   {
     return new FileFilter(cast(void*)createGObject(FileFilter._getGType), No.Take);
   }

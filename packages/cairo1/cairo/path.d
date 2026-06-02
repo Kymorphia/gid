@@ -32,7 +32,7 @@ class Path : gobject.boxed.Boxed
         status = the current error status
         numData = the number of elements in the data array
   */
-  this(cairo.types.Status status = cairo.types.Status.init, int numData = int.init)
+  this(cairo.types.Status status = cairo.types.Status.init, int numData = int.init) nothrow
   {
     super(gMalloc(cairo_path_t.sizeof), Yes.Take);
     this.status = status;
@@ -40,32 +40,32 @@ class Path : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_path_get_type != &gidSymbolNotFound ? cairo_gobject_path_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Path self()
+  override Path self() nothrow
   {
     return this;
   }
@@ -74,7 +74,7 @@ class Path : gobject.boxed.Boxed
       Get `status` field.
       Returns: the current error status
   */
-  @property cairo.types.Status status()
+  @property cairo.types.Status status() nothrow
   {
     return cast(cairo.types.Status)(cast(cairo_path_t*)this._cPtr).status;
   }
@@ -84,7 +84,7 @@ class Path : gobject.boxed.Boxed
       Params:
         propval = the current error status
   */
-  @property void status(cairo.types.Status propval)
+  @property void status(cairo.types.Status propval) nothrow
   {
     (cast(cairo_path_t*)this._cPtr).status = cast(cairo_status_t)propval;
   }
@@ -93,7 +93,7 @@ class Path : gobject.boxed.Boxed
       Get `data` field.
       Returns: the elements in the path
   */
-  @property cairo.path_data.PathData data()
+  @property cairo.path_data.PathData data() nothrow
   {
     return new cairo.path_data.PathData(cast(cairo_path_data_t*)(cast(cairo_path_t*)this._cPtr).data, No.Take);
   }
@@ -102,7 +102,7 @@ class Path : gobject.boxed.Boxed
       Get `numData` field.
       Returns: the number of elements in the data array
   */
-  @property int numData()
+  @property int numData() nothrow
   {
     return (cast(cairo_path_t*)this._cPtr).numData;
   }
@@ -112,7 +112,7 @@ class Path : gobject.boxed.Boxed
       Params:
         propval = the number of elements in the data array
   */
-  @property void numData(int propval)
+  @property void numData(int propval) nothrow
   {
     (cast(cairo_path_t*)this._cPtr).numData = propval;
   }

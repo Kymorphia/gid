@@ -50,26 +50,26 @@ class Completion : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_get_type != &gidSymbolNotFound ? gtk_source_completion_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Completion self()
+  override Completion self() nothrow
   {
     return this;
   }
@@ -78,7 +78,7 @@ class Completion : gobject.object.ObjectWrap
       Get builder for [gtksource.completion.Completion]
       Returns: New builder object
   */
-  static CompletionGidBuilder builder()
+  static CompletionGidBuilder builder() nothrow
   {
     return new CompletionGidBuilder;
   }
@@ -88,7 +88,7 @@ class Completion : gobject.object.ObjectWrap
       Returns: The #GtkTextBuffer for the #GtkSourceCompletion:view.
         This is a convenience property for providers.
   */
-  @property gtk.text_view.TextView buffer()
+  @property gtk.text_view.TextView buffer() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.text_view.TextView)("buffer");
   }
@@ -97,7 +97,7 @@ class Completion : gobject.object.ObjectWrap
       Get `pageSize` property.
       Returns: The number of rows to display to the user before scrolling.
   */
-  @property uint pageSize()
+  @property uint pageSize() nothrow
   {
     return getPageSize();
   }
@@ -107,7 +107,7 @@ class Completion : gobject.object.ObjectWrap
       Params:
         propval = The number of rows to display to the user before scrolling.
   */
-  @property void pageSize(uint propval)
+  @property void pageSize(uint propval) nothrow
   {
     setPageSize(propval);
   }
@@ -117,7 +117,7 @@ class Completion : gobject.object.ObjectWrap
       Returns: Determines whether the visibility of the info window should be saved when the
         completion is hidden, and restored when the completion is shown again.
   */
-  @property bool rememberInfoVisibility()
+  @property bool rememberInfoVisibility() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("remember-info-visibility");
   }
@@ -128,7 +128,7 @@ class Completion : gobject.object.ObjectWrap
         propval = Determines whether the visibility of the info window should be saved when the
           completion is hidden, and restored when the completion is shown again.
   */
-  @property void rememberInfoVisibility(bool propval)
+  @property void rememberInfoVisibility(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("remember-info-visibility", propval);
   }
@@ -138,7 +138,7 @@ class Completion : gobject.object.ObjectWrap
       Returns: Determines whether the first proposal should be selected when the completion
         is first shown.
   */
-  @property bool selectOnShow()
+  @property bool selectOnShow() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("select-on-show");
   }
@@ -149,7 +149,7 @@ class Completion : gobject.object.ObjectWrap
         propval = Determines whether the first proposal should be selected when the completion
           is first shown.
   */
-  @property void selectOnShow(bool propval)
+  @property void selectOnShow(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("select-on-show", propval);
   }
@@ -159,7 +159,7 @@ class Completion : gobject.object.ObjectWrap
       Returns: The "show-icons" property denotes if icons should be displayed within
         the list of completions presented to the user.
   */
-  @property bool showIcons()
+  @property bool showIcons() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("show-icons");
   }
@@ -170,7 +170,7 @@ class Completion : gobject.object.ObjectWrap
         propval = The "show-icons" property denotes if icons should be displayed within
           the list of completions presented to the user.
   */
-  @property void showIcons(bool propval)
+  @property void showIcons(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("show-icons", propval);
   }
@@ -180,7 +180,7 @@ class Completion : gobject.object.ObjectWrap
       Returns: The "view" property is the #GtkTextView for which this #GtkSourceCompletion
         is providing completion features.
   */
-  @property gtksource.view.View view()
+  @property gtksource.view.View view() nothrow
   {
     return getView();
   }
@@ -194,7 +194,7 @@ class Completion : gobject.object.ObjectWrap
         casefoldQuery = the typed-text used to highlight haystack
       Returns: a #PangoAttrList or null
   */
-  static pango.attr_list.AttrList fuzzyHighlight(string haystack, string casefoldQuery)
+  static pango.attr_list.AttrList fuzzyHighlight(string haystack, string casefoldQuery) nothrow
   {
     PangoAttrList* _cretval;
     const(char)* _haystack = haystack.toCString(No.Alloc);
@@ -220,7 +220,7 @@ class Completion : gobject.object.ObjectWrap
         priority = An optional location for the score of the match
       Returns: true if haystack matched casefold_needle, otherwise false.
   */
-  static bool fuzzyMatch(string haystack, string casefoldNeedle, out uint priority)
+  static bool fuzzyMatch(string haystack, string casefoldNeedle, out uint priority) nothrow
   {
     bool _retval;
     const(char)* _haystack = haystack.toCString(No.Alloc);
@@ -236,13 +236,13 @@ class Completion : gobject.object.ObjectWrap
       Params:
         provider = a #GtkSourceCompletionProvider
   */
-  void addProvider(gtksource.completion_provider.CompletionProvider provider)
+  void addProvider(gtksource.completion_provider.CompletionProvider provider) nothrow
   {
     gtk_source_completion_add_provider(cast(GtkSourceCompletion*)this._cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null);
   }
 
   /** */
-  void blockInteractive()
+  void blockInteractive() nothrow
   {
     gtk_source_completion_block_interactive(cast(GtkSourceCompletion*)this._cPtr);
   }
@@ -251,7 +251,7 @@ class Completion : gobject.object.ObjectWrap
       Gets the connected [gtksource.view.View]'s [gtksource.buffer.Buffer]
       Returns: A #GtkSourceBuffer
   */
-  gtksource.buffer.Buffer getBuffer()
+  gtksource.buffer.Buffer getBuffer() nothrow
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_completion_get_buffer(cast(GtkSourceCompletion*)this._cPtr);
@@ -260,7 +260,7 @@ class Completion : gobject.object.ObjectWrap
   }
 
   /** */
-  uint getPageSize()
+  uint getPageSize() nothrow
   {
     uint _retval;
     _retval = gtk_source_completion_get_page_size(cast(GtkSourceCompletion*)this._cPtr);
@@ -271,7 +271,7 @@ class Completion : gobject.object.ObjectWrap
       Gets the [gtksource.view.View] that owns the [gtksource.completion.Completion].
       Returns: A #GtkSourceView
   */
-  gtksource.view.View getView()
+  gtksource.view.View getView() nothrow
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_completion_get_view(cast(GtkSourceCompletion*)this._cPtr);
@@ -285,7 +285,7 @@ class Completion : gobject.object.ObjectWrap
       When the "hide" signal is emitted, the completion window will be
       dismissed.
   */
-  void hide()
+  void hide() nothrow
   {
     gtk_source_completion_hide(cast(GtkSourceCompletion*)this._cPtr);
   }
@@ -297,13 +297,13 @@ class Completion : gobject.object.ObjectWrap
       Params:
         provider = a #GtkSourceCompletionProvider
   */
-  void removeProvider(gtksource.completion_provider.CompletionProvider provider)
+  void removeProvider(gtksource.completion_provider.CompletionProvider provider) nothrow
   {
     gtk_source_completion_remove_provider(cast(GtkSourceCompletion*)this._cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null);
   }
 
   /** */
-  void setPageSize(uint pageSize)
+  void setPageSize(uint pageSize) nothrow
   {
     gtk_source_completion_set_page_size(cast(GtkSourceCompletion*)this._cPtr, pageSize);
   }
@@ -314,13 +314,13 @@ class Completion : gobject.object.ObjectWrap
       When the "show" signal is emitted, the completion window will be
       displayed if there are any results available.
   */
-  void show()
+  void show() nothrow
   {
     gtk_source_completion_show(cast(GtkSourceCompletion*)this._cPtr);
   }
 
   /** */
-  void unblockInteractive()
+  void unblockInteractive() nothrow
   {
     gtk_source_completion_unblock_interactive(cast(GtkSourceCompletion*)this._cPtr);
   }
@@ -341,13 +341,13 @@ class Completion : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectHide(T)(T callback, Flag!"After" after = No.After)
+  gulong connectHide(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.completion.Completion)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -356,7 +356,14 @@ class Completion : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.completion.Completion.hide");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -381,14 +388,14 @@ class Completion : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectProviderAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectProviderAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.completion_provider.CompletionProvider)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtksource.completion.Completion)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -400,7 +407,14 @@ class Completion : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.completion.Completion.providerAdded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -425,14 +439,14 @@ class Completion : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectProviderRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectProviderRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.completion_provider.CompletionProvider)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtksource.completion.Completion)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -444,7 +458,14 @@ class Completion : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.completion.Completion.providerRemoved");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -467,13 +488,13 @@ class Completion : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectShow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.completion.Completion)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -482,7 +503,14 @@ class Completion : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.completion.Completion.show");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -500,7 +528,7 @@ class CompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The number of rows to display to the user before scrolling.
       Returns: Builder instance for fluent chaining
   */
-  T pageSize(uint propval)
+  T pageSize(uint propval) nothrow
   {
     return setProperty("page-size", propval);
   }
@@ -512,7 +540,7 @@ class CompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           completion is hidden, and restored when the completion is shown again.
       Returns: Builder instance for fluent chaining
   */
-  T rememberInfoVisibility(bool propval)
+  T rememberInfoVisibility(bool propval) nothrow
   {
     return setProperty("remember-info-visibility", propval);
   }
@@ -524,7 +552,7 @@ class CompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           is first shown.
       Returns: Builder instance for fluent chaining
   */
-  T selectOnShow(bool propval)
+  T selectOnShow(bool propval) nothrow
   {
     return setProperty("select-on-show", propval);
   }
@@ -536,7 +564,7 @@ class CompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           the list of completions presented to the user.
       Returns: Builder instance for fluent chaining
   */
-  T showIcons(bool propval)
+  T showIcons(bool propval) nothrow
   {
     return setProperty("show-icons", propval);
   }
@@ -548,7 +576,7 @@ class CompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           is providing completion features.
       Returns: Builder instance for fluent chaining
   */
-  T view(gtksource.view.View propval)
+  T view(gtksource.view.View propval) nothrow
   {
     return setProperty("view", propval);
   }
@@ -561,7 +589,7 @@ final class CompletionGidBuilder : CompletionGidBuilderImpl!CompletionGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Completion build()
+  Completion build() nothrow
   {
     return new Completion(cast(void*)createGObject(Completion._getGType), No.Take);
   }

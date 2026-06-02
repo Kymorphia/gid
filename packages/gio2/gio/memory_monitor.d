@@ -65,7 +65,7 @@ interface MemoryMonitor
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_memory_monitor_get_type != &gidSymbolNotFound ? g_memory_monitor_get_type() : cast(GType)0;
@@ -75,7 +75,7 @@ interface MemoryMonitor
       Gets a reference to the default #GMemoryMonitor for the system.
       Returns: a new reference to the default #GMemoryMonitor
   */
-  static gio.memory_monitor.MemoryMonitor dupDefault()
+  static gio.memory_monitor.MemoryMonitor dupDefault() nothrow
   {
     GMemoryMonitor* _cretval;
     _cretval = g_memory_monitor_dup_default();
@@ -103,7 +103,7 @@ interface MemoryMonitor
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLowMemoryWarning(T)(T callback, Flag!"After" after = No.After);
+  gulong connectLowMemoryWarning(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gio.memory_monitor.MemoryMonitor]

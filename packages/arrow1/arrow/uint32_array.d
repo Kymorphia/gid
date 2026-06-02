@@ -16,26 +16,26 @@ class UInt32Array : arrow.numeric_array.NumericArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_uint32_array_get_type != &gidSymbolNotFound ? garrow_uint32_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UInt32Array self()
+  override UInt32Array self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class UInt32Array : arrow.numeric_array.NumericArray
       Get builder for [arrow.uint32_array.UInt32Array]
       Returns: New builder object
   */
-  static UInt32ArrayGidBuilder builder()
+  static UInt32ArrayGidBuilder builder() nothrow
   {
     return new UInt32ArrayGidBuilder;
   }
 
   /** */
-  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
+  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls) nothrow
   {
     GArrowUInt32Array* _cretval;
     _cretval = garrow_uint32_array_new(length, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
@@ -58,7 +58,7 @@ class UInt32Array : arrow.numeric_array.NumericArray
   }
 
   /** */
-  uint getValue(long i)
+  uint getValue(long i) nothrow
   {
     uint _retval;
     _retval = garrow_uint32_array_get_value(cast(GArrowUInt32Array*)this._cPtr, i);
@@ -66,7 +66,7 @@ class UInt32Array : arrow.numeric_array.NumericArray
   }
 
   /** */
-  uint[] getValues()
+  uint[] getValues() nothrow
   {
     const(uint)* _cretval;
     long _cretlength;
@@ -104,7 +104,7 @@ final class UInt32ArrayGidBuilder : UInt32ArrayGidBuilderImpl!UInt32ArrayGidBuil
       Create object from builder.
       Returns: New object
   */
-  UInt32Array build()
+  UInt32Array build() nothrow
   {
     return new UInt32Array(cast(void*)createGObject(UInt32Array._getGType), Yes.Take);
   }

@@ -33,7 +33,7 @@ template EditableTextT()
         startPos = start position
         endPos = end position
   */
-  override void copyText(int startPos, int endPos)
+  override void copyText(int startPos, int endPos) nothrow
   {
     atk_editable_text_copy_text(cast(AtkEditableText*)this._cPtr, startPos, endPos);
   }
@@ -46,7 +46,7 @@ template EditableTextT()
         startPos = start position
         endPos = end position
   */
-  override void cutText(int startPos, int endPos)
+  override void cutText(int startPos, int endPos) nothrow
   {
     atk_editable_text_cut_text(cast(AtkEditableText*)this._cPtr, startPos, endPos);
   }
@@ -58,7 +58,7 @@ template EditableTextT()
         startPos = start position
         endPos = end position
   */
-  override void deleteText(int startPos, int endPos)
+  override void deleteText(int startPos, int endPos) nothrow
   {
     atk_editable_text_delete_text(cast(AtkEditableText*)this._cPtr, startPos, endPos);
   }
@@ -72,7 +72,7 @@ template EditableTextT()
           the position at which to insert the text. After the call it
           points at the position after the newly inserted text.
   */
-  override void insertText(string string_, ref int position)
+  override void insertText(string string_, ref int position) nothrow
   {
     int _length;
     if (string_)
@@ -88,7 +88,7 @@ template EditableTextT()
       Params:
         position = position to paste
   */
-  override void pasteText(int position)
+  override void pasteText(int position) nothrow
   {
     atk_editable_text_paste_text(cast(AtkEditableText*)this._cPtr, position);
   }
@@ -99,7 +99,7 @@ template EditableTextT()
       Params:
         string_ = string to set for text contents of text
   */
-  override void setTextContents(string string_)
+  override void setTextContents(string string_) nothrow
   {
     const(char)* _string_ = string_.toCString(No.Alloc);
     atk_editable_text_set_text_contents(cast(AtkEditableText*)this._cPtr, _string_);

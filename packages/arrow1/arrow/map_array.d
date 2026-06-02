@@ -17,26 +17,26 @@ class MapArray : arrow.list_array.ListArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_map_array_get_type != &gidSymbolNotFound ? garrow_map_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MapArray self()
+  override MapArray self() nothrow
   {
     return this;
   }
@@ -45,25 +45,25 @@ class MapArray : arrow.list_array.ListArray
       Get builder for [arrow.map_array.MapArray]
       Returns: New builder object
   */
-  static MapArrayGidBuilder builder()
+  static MapArrayGidBuilder builder() nothrow
   {
     return new MapArrayGidBuilder;
   }
 
   /** */
-  @property arrow.array.Array items()
+  @property arrow.array.Array items() nothrow
   {
     return getItems();
   }
 
   /** */
-  @property arrow.array.Array keys()
+  @property arrow.array.Array keys() nothrow
   {
     return getKeys();
   }
 
   /** */
-  @property arrow.array.Array offsets()
+  @property arrow.array.Array offsets() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.array.Array)("offsets");
   }
@@ -80,7 +80,7 @@ class MapArray : arrow.list_array.ListArray
   }
 
   /** */
-  arrow.array.Array getItems()
+  arrow.array.Array getItems() nothrow
   {
     GArrowArray* _cretval;
     _cretval = garrow_map_array_get_items(cast(GArrowMapArray*)this._cPtr);
@@ -89,7 +89,7 @@ class MapArray : arrow.list_array.ListArray
   }
 
   /** */
-  arrow.array.Array getKeys()
+  arrow.array.Array getKeys() nothrow
   {
     GArrowArray* _cretval;
     _cretval = garrow_map_array_get_keys(cast(GArrowMapArray*)this._cPtr);
@@ -103,19 +103,19 @@ class MapArrayGidBuilderImpl(T) : arrow.list_array.ListArrayGidBuilderImpl!T
 {
 
   /** */
-  T items(arrow.array.Array propval)
+  T items(arrow.array.Array propval) nothrow
   {
     return setProperty("items", propval);
   }
 
   /** */
-  T keys(arrow.array.Array propval)
+  T keys(arrow.array.Array propval) nothrow
   {
     return setProperty("keys", propval);
   }
 
   /** */
-  T offsets(arrow.array.Array propval)
+  T offsets(arrow.array.Array propval) nothrow
   {
     return setProperty("offsets", propval);
   }
@@ -128,7 +128,7 @@ final class MapArrayGidBuilder : MapArrayGidBuilderImpl!MapArrayGidBuilder
       Create object from builder.
       Returns: New object
   */
-  MapArray build()
+  MapArray build() nothrow
   {
     return new MapArray(cast(void*)createGObject(MapArray._getGType), Yes.Take);
   }

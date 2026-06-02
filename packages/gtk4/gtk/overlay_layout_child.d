@@ -16,26 +16,26 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_overlay_layout_child_get_type != &gidSymbolNotFound ? gtk_overlay_layout_child_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override OverlayLayoutChild self()
+  override OverlayLayoutChild self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
       Get builder for [gtk.overlay_layout_child.OverlayLayoutChild]
       Returns: New builder object
   */
-  static OverlayLayoutChildGidBuilder builder()
+  static OverlayLayoutChildGidBuilder builder() nothrow
   {
     return new OverlayLayoutChildGidBuilder;
   }
@@ -53,7 +53,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
       Get `clipOverlay` property.
       Returns: Whether the child should be clipped to fit the parent's size.
   */
-  @property bool clipOverlay()
+  @property bool clipOverlay() nothrow
   {
     return getClipOverlay();
   }
@@ -63,7 +63,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
       Params:
         propval = Whether the child should be clipped to fit the parent's size.
   */
-  @property void clipOverlay(bool propval)
+  @property void clipOverlay(bool propval) nothrow
   {
     setClipOverlay(propval);
   }
@@ -73,7 +73,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
       Returns: Whether the child size should contribute to the [gtk.overlay_layout.OverlayLayout]'s
         measurement.
   */
-  @property bool measure()
+  @property bool measure() nothrow
   {
     return getMeasure();
   }
@@ -84,7 +84,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
         propval = Whether the child size should contribute to the [gtk.overlay_layout.OverlayLayout]'s
           measurement.
   */
-  @property void measure(bool propval)
+  @property void measure(bool propval) nothrow
   {
     setMeasure(propval);
   }
@@ -93,7 +93,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
       Retrieves whether the child is clipped.
       Returns: whether the child is clipped
   */
-  bool getClipOverlay()
+  bool getClipOverlay() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_overlay_layout_child_get_clip_overlay(cast(GtkOverlayLayoutChild*)this._cPtr);
@@ -104,7 +104,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
       Retrieves whether the child is measured.
       Returns: whether the child is measured
   */
-  bool getMeasure()
+  bool getMeasure() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_overlay_layout_child_get_measure(cast(GtkOverlayLayoutChild*)this._cPtr);
@@ -117,7 +117,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
       Params:
         clipOverlay = whether to clip this child
   */
-  void setClipOverlay(bool clipOverlay)
+  void setClipOverlay(bool clipOverlay) nothrow
   {
     gtk_overlay_layout_child_set_clip_overlay(cast(GtkOverlayLayoutChild*)this._cPtr, clipOverlay);
   }
@@ -128,7 +128,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
       Params:
         measure = whether to measure this child
   */
-  void setMeasure(bool measure)
+  void setMeasure(bool measure) nothrow
   {
     gtk_overlay_layout_child_set_measure(cast(GtkOverlayLayoutChild*)this._cPtr, measure);
   }
@@ -144,7 +144,7 @@ class OverlayLayoutChildGidBuilderImpl(T) : gtk.layout_child.LayoutChildGidBuild
         propval = Whether the child should be clipped to fit the parent's size.
       Returns: Builder instance for fluent chaining
   */
-  T clipOverlay(bool propval)
+  T clipOverlay(bool propval) nothrow
   {
     return setProperty("clip-overlay", propval);
   }
@@ -156,7 +156,7 @@ class OverlayLayoutChildGidBuilderImpl(T) : gtk.layout_child.LayoutChildGidBuild
           measurement.
       Returns: Builder instance for fluent chaining
   */
-  T measure(bool propval)
+  T measure(bool propval) nothrow
   {
     return setProperty("measure", propval);
   }
@@ -169,7 +169,7 @@ final class OverlayLayoutChildGidBuilder : OverlayLayoutChildGidBuilderImpl!Over
       Create object from builder.
       Returns: New object
   */
-  OverlayLayoutChild build()
+  OverlayLayoutChild build() nothrow
   {
     return new OverlayLayoutChild(cast(void*)createGObject(OverlayLayoutChild._getGType), No.Take);
   }

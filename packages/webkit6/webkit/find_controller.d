@@ -28,26 +28,26 @@ class FindController : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_find_controller_get_type != &gidSymbolNotFound ? webkit_find_controller_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FindController self()
+  override FindController self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class FindController : gobject.object.ObjectWrap
       Get builder for [webkit.find_controller.FindController]
       Returns: New builder object
   */
-  static FindControllerGidBuilder builder()
+  static FindControllerGidBuilder builder() nothrow
   {
     return new FindControllerGidBuilder;
   }
@@ -65,7 +65,7 @@ class FindController : gobject.object.ObjectWrap
       Get `maxMatchCount` property.
       Returns: The maximum number of matches to report for a given search.
   */
-  @property uint maxMatchCount()
+  @property uint maxMatchCount() nothrow
   {
     return getMaxMatchCount();
   }
@@ -74,7 +74,7 @@ class FindController : gobject.object.ObjectWrap
       Get `options` property.
       Returns: The options to be used in the search operation.
   */
-  @property webkit.types.FindOptions options()
+  @property webkit.types.FindOptions options() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(webkit.types.FindOptions)("options");
   }
@@ -83,7 +83,7 @@ class FindController : gobject.object.ObjectWrap
       Get `text` property.
       Returns: The current search text for this #WebKitFindController.
   */
-  @property string text()
+  @property string text() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("text");
   }
@@ -92,7 +92,7 @@ class FindController : gobject.object.ObjectWrap
       Get `webView` property.
       Returns: The #WebKitWebView this controller is associated to.
   */
-  @property webkit.web_view.WebView webView()
+  @property webkit.web_view.WebView webView() nothrow
   {
     return getWebView();
   }
@@ -110,7 +110,7 @@ class FindController : gobject.object.ObjectWrap
         findOptions = a bitmask with the #WebKitFindOptions used in the search
         maxMatchCount = the maximum number of matches allowed in the search
   */
-  void countMatches(string searchText, uint findOptions, uint maxMatchCount)
+  void countMatches(string searchText, uint findOptions, uint maxMatchCount) nothrow
   {
     const(char)* _searchText = searchText.toCString(No.Alloc);
     webkit_find_controller_count_matches(cast(WebKitFindController*)this._cPtr, _searchText, findOptions, maxMatchCount);
@@ -125,7 +125,7 @@ class FindController : gobject.object.ObjectWrap
       [webkit.find_controller.FindController.countMatches].
       Returns: the maximum number of matches to report.
   */
-  uint getMaxMatchCount()
+  uint getMaxMatchCount() nothrow
   {
     uint _retval;
     _retval = webkit_find_controller_get_max_match_count(cast(WebKitFindController*)this._cPtr);
@@ -140,7 +140,7 @@ class FindController : gobject.object.ObjectWrap
       Returns: a bitmask containing the #WebKitFindOptions associated
         with the current search.
   */
-  uint getOptions()
+  uint getOptions() nothrow
   {
     uint _retval;
     _retval = webkit_find_controller_get_options(cast(WebKitFindController*)this._cPtr);
@@ -156,7 +156,7 @@ class FindController : gobject.object.ObjectWrap
       [webkit.find_controller.FindController.countMatches].
       Returns: the text to look for in the #WebKitWebView.
   */
-  string getSearchText()
+  string getSearchText() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_find_controller_get_search_text(cast(WebKitFindController*)this._cPtr);
@@ -172,7 +172,7 @@ class FindController : gobject.object.ObjectWrap
       #WebKitFindController.
       Returns: the #WebKitWebView.
   */
-  webkit.web_view.WebView getWebView()
+  webkit.web_view.WebView getWebView() nothrow
   {
     WebKitWebView* _cretval;
     _cretval = webkit_find_controller_get_web_view(cast(WebKitFindController*)this._cPtr);
@@ -208,7 +208,7 @@ class FindController : gobject.object.ObjectWrap
         findOptions = a bitmask with the #WebKitFindOptions used in the search
         maxMatchCount = the maximum number of matches allowed in the search
   */
-  void search(string searchText, uint findOptions, uint maxMatchCount)
+  void search(string searchText, uint findOptions, uint maxMatchCount) nothrow
   {
     const(char)* _searchText = searchText.toCString(No.Alloc);
     webkit_find_controller_search(cast(WebKitFindController*)this._cPtr, _searchText, findOptions, maxMatchCount);
@@ -224,7 +224,7 @@ class FindController : gobject.object.ObjectWrap
       This method will be typically called when the search UI is
       closed/hidden by the client application.
   */
-  void searchFinish()
+  void searchFinish() nothrow
   {
     webkit_find_controller_search_finish(cast(WebKitFindController*)this._cPtr);
   }
@@ -235,7 +235,7 @@ class FindController : gobject.object.ObjectWrap
       Calling this method before [webkit.find_controller.FindController.search] or
       [webkit.find_controller.FindController.countMatches] is a programming error.
   */
-  void searchNext()
+  void searchNext() nothrow
   {
     webkit_find_controller_search_next(cast(WebKitFindController*)this._cPtr);
   }
@@ -246,7 +246,7 @@ class FindController : gobject.object.ObjectWrap
       Calling this method before [webkit.find_controller.FindController.search] or
       [webkit.find_controller.FindController.countMatches] is a programming error.
   */
-  void searchPrevious()
+  void searchPrevious() nothrow
   {
     webkit_find_controller_search_previous(cast(WebKitFindController*)this._cPtr);
   }
@@ -270,14 +270,14 @@ class FindController : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCountedMatches(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCountedMatches(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.find_controller.FindController)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -289,7 +289,14 @@ class FindController : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.find_controller.FindController.countedMatches");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -315,13 +322,13 @@ class FindController : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFailedToFindText(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFailedToFindText(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.find_controller.FindController)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -330,7 +337,14 @@ class FindController : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.find_controller.FindController.failedToFindText");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -358,14 +372,14 @@ class FindController : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFoundText(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFoundText(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.find_controller.FindController)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -377,7 +391,14 @@ class FindController : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.find_controller.FindController.foundText");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -395,7 +416,7 @@ class FindControllerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = The #WebKitWebView this controller is associated to.
       Returns: Builder instance for fluent chaining
   */
-  T webView(webkit.web_view.WebView propval)
+  T webView(webkit.web_view.WebView propval) nothrow
   {
     return setProperty("web-view", propval);
   }
@@ -408,7 +429,7 @@ final class FindControllerGidBuilder : FindControllerGidBuilderImpl!FindControll
       Create object from builder.
       Returns: New object
   */
-  FindController build()
+  FindController build() nothrow
   {
     return new FindController(cast(void*)createGObject(FindController._getGType), No.Take);
   }

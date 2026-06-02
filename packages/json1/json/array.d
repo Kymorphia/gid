@@ -32,32 +32,32 @@ class Array : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())json_array_get_type != &gidSymbolNotFound ? json_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Array self()
+  override Array self() nothrow
   {
     return this;
   }
@@ -66,7 +66,7 @@ class Array : gobject.boxed.Boxed
       Creates a new array.
       Returns: the newly created array
   */
-  this()
+  this() nothrow
   {
     JsonArray* _cretval;
     _cretval = json_array_new();
@@ -80,7 +80,7 @@ class Array : gobject.boxed.Boxed
         nElements = number of slots to pre-allocate
       Returns: the newly created array
   */
-  static json.array.Array sizedNew(uint nElements)
+  static json.array.Array sizedNew(uint nElements) nothrow
   {
     JsonArray* _cretval;
     _cretval = json_array_sized_new(nElements);
@@ -98,7 +98,7 @@ class Array : gobject.boxed.Boxed
       Params:
         value = the array to add
   */
-  void addArrayElement(json.array.Array value = null)
+  void addArrayElement(json.array.Array value = null) nothrow
   {
     json_array_add_array_element(cast(JsonArray*)this._cPtr, value ? cast(JsonArray*)value._cPtr(Yes.Dup) : null);
   }
@@ -111,7 +111,7 @@ class Array : gobject.boxed.Boxed
       Params:
         value = the boolean value to add
   */
-  void addBooleanElement(bool value)
+  void addBooleanElement(bool value) nothrow
   {
     json_array_add_boolean_element(cast(JsonArray*)this._cPtr, value);
   }
@@ -124,7 +124,7 @@ class Array : gobject.boxed.Boxed
       Params:
         value = the floating point value to add
   */
-  void addDoubleElement(double value)
+  void addDoubleElement(double value) nothrow
   {
     json_array_add_double_element(cast(JsonArray*)this._cPtr, value);
   }
@@ -135,7 +135,7 @@ class Array : gobject.boxed.Boxed
       Params:
         node = the element to add
   */
-  void addElement(json.node.Node node)
+  void addElement(json.node.Node node) nothrow
   {
     json_array_add_element(cast(JsonArray*)this._cPtr, node ? cast(JsonNode*)node._cPtr(Yes.Dup) : null);
   }
@@ -148,7 +148,7 @@ class Array : gobject.boxed.Boxed
       Params:
         value = the integer value to add
   */
-  void addIntElement(long value)
+  void addIntElement(long value) nothrow
   {
     json_array_add_int_element(cast(JsonArray*)this._cPtr, value);
   }
@@ -158,7 +158,7 @@ class Array : gobject.boxed.Boxed
       
       See also: [json.array.Array.addElement], [json.types.NodeType.Null]
   */
-  void addNullElement()
+  void addNullElement() nothrow
   {
     json_array_add_null_element(cast(JsonArray*)this._cPtr);
   }
@@ -173,7 +173,7 @@ class Array : gobject.boxed.Boxed
       Params:
         value = the object to add
   */
-  void addObjectElement(json.object.ObjectWrap value = null)
+  void addObjectElement(json.object.ObjectWrap value = null) nothrow
   {
     json_array_add_object_element(cast(JsonArray*)this._cPtr, value ? cast(JsonObject*)value._cPtr(Yes.Dup) : null);
   }
@@ -186,7 +186,7 @@ class Array : gobject.boxed.Boxed
       Params:
         value = the string value to add
   */
-  void addStringElement(string value)
+  void addStringElement(string value) nothrow
   {
     const(char)* _value = value.toCString(No.Alloc);
     json_array_add_string_element(cast(JsonArray*)this._cPtr, _value);
@@ -199,7 +199,7 @@ class Array : gobject.boxed.Boxed
         index = the index of the element to retrieve
       Returns: a copy of the element at the given position
   */
-  json.node.Node dupElement(uint index)
+  json.node.Node dupElement(uint index) nothrow
   {
     JsonNode* _cretval;
     _cretval = json_array_dup_element(cast(JsonArray*)this._cPtr, index);
@@ -219,7 +219,7 @@ class Array : gobject.boxed.Boxed
         b = another JSON array
       Returns: `TRUE` if the arrays are equal, and `FALSE` otherwise
   */
-  bool equal(json.array.Array b)
+  bool equal(json.array.Array b) nothrow
   {
     bool _retval;
     _retval = cast(bool)json_array_equal(cast(JsonArray*)this._cPtr, b ? cast(JsonArray*)b._cPtr(No.Dup) : null);
@@ -237,13 +237,20 @@ class Array : gobject.boxed.Boxed
       Params:
         func = the function to be called on each element
   */
-  void foreachElement(json.types.ArrayForeach func)
+  void foreachElement(json.types.ArrayForeach func) nothrow
   {
-    extern(C) void _funcCallback(JsonArray* array, uint index, JsonNode* elementNode, void* userData)
+    extern(C) void _funcCallback(JsonArray* array, uint index, JsonNode* elementNode, void* userData) nothrow
     {
       auto _dlg = cast(json.types.ArrayForeach*)userData;
 
-      (*_dlg)(array ? new json.array.Array(cast(void*)array, No.Take) : null, index, elementNode ? new json.node.Node(cast(void*)elementNode, No.Take) : null);
+      try
+      {
+        (*_dlg)(array ? new json.array.Array(cast(void*)array, No.Take) : null, index, elementNode ? new json.node.Node(cast(void*)elementNode, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "json.types.ArrayForeach");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -259,7 +266,7 @@ class Array : gobject.boxed.Boxed
         index = the index of the element to retrieve
       Returns: the array
   */
-  json.array.Array getArrayElement(uint index)
+  json.array.Array getArrayElement(uint index) nothrow
   {
     JsonArray* _cretval;
     _cretval = json_array_get_array_element(cast(JsonArray*)this._cPtr, index);
@@ -277,7 +284,7 @@ class Array : gobject.boxed.Boxed
         index = the index of the element to retrieve
       Returns: the boolean value
   */
-  bool getBooleanElement(uint index)
+  bool getBooleanElement(uint index) nothrow
   {
     bool _retval;
     _retval = cast(bool)json_array_get_boolean_element(cast(JsonArray*)this._cPtr, index);
@@ -294,7 +301,7 @@ class Array : gobject.boxed.Boxed
         index = the index of the element to retrieve
       Returns: the floating point value
   */
-  double getDoubleElement(uint index)
+  double getDoubleElement(uint index) nothrow
   {
     double _retval;
     _retval = json_array_get_double_element(cast(JsonArray*)this._cPtr, index);
@@ -308,7 +315,7 @@ class Array : gobject.boxed.Boxed
         index = the index of the element to retrieve
       Returns: the element at the given position
   */
-  json.node.Node getElement(uint index)
+  json.node.Node getElement(uint index) nothrow
   {
     JsonNode* _cretval;
     _cretval = json_array_get_element(cast(JsonArray*)this._cPtr, index);
@@ -321,7 +328,7 @@ class Array : gobject.boxed.Boxed
       Returns: the elements
           of the array
   */
-  json.node.Node[] getElements()
+  json.node.Node[] getElements() nothrow
   {
     GList* _cretval;
     _cretval = json_array_get_elements(cast(JsonArray*)this._cPtr);
@@ -339,7 +346,7 @@ class Array : gobject.boxed.Boxed
         index = the index of the element to retrieve
       Returns: the integer value
   */
-  long getIntElement(uint index)
+  long getIntElement(uint index) nothrow
   {
     long _retval;
     _retval = json_array_get_int_element(cast(JsonArray*)this._cPtr, index);
@@ -350,7 +357,7 @@ class Array : gobject.boxed.Boxed
       Retrieves the length of the given array
       Returns: the length of the array
   */
-  uint getLength()
+  uint getLength() nothrow
   {
     uint _retval;
     _retval = json_array_get_length(cast(JsonArray*)this._cPtr);
@@ -367,7 +374,7 @@ class Array : gobject.boxed.Boxed
         index = the index of the element to retrieve
       Returns: `TRUE` if the element is `null`
   */
-  bool getNullElement(uint index)
+  bool getNullElement(uint index) nothrow
   {
     bool _retval;
     _retval = cast(bool)json_array_get_null_element(cast(JsonArray*)this._cPtr, index);
@@ -383,7 +390,7 @@ class Array : gobject.boxed.Boxed
         index = the index of the element to retrieve
       Returns: the object
   */
-  json.object.ObjectWrap getObjectElement(uint index)
+  json.object.ObjectWrap getObjectElement(uint index) nothrow
   {
     JsonObject* _cretval;
     _cretval = json_array_get_object_element(cast(JsonArray*)this._cPtr, index);
@@ -401,7 +408,7 @@ class Array : gobject.boxed.Boxed
         index = the index of the element to retrieve
       Returns: the string value
   */
-  string getStringElement(uint index)
+  string getStringElement(uint index) nothrow
   {
     const(char)* _cretval;
     _cretval = json_array_get_string_element(cast(JsonArray*)this._cPtr, index);
@@ -418,7 +425,7 @@ class Array : gobject.boxed.Boxed
       proportionally with the length of the array.
       Returns: hash value for the key
   */
-  uint hash()
+  uint hash() nothrow
   {
     uint _retval;
     _retval = json_array_hash(cast(JsonArray*)this._cPtr);
@@ -430,7 +437,7 @@ class Array : gobject.boxed.Boxed
       [json.array.Array.seal] on it.
       Returns: true if the array is immutable
   */
-  bool isImmutable()
+  bool isImmutable() nothrow
   {
     bool _retval;
     _retval = cast(bool)json_array_is_immutable(cast(JsonArray*)this._cPtr);
@@ -445,7 +452,7 @@ class Array : gobject.boxed.Boxed
       Params:
         index = the position of the element to be removed
   */
-  void removeElement(uint index)
+  void removeElement(uint index) nothrow
   {
     json_array_remove_element(cast(JsonArray*)this._cPtr, index);
   }
@@ -457,7 +464,7 @@ class Array : gobject.boxed.Boxed
       
       If the `array` is already immutable, this is a no-op.
   */
-  void seal()
+  void seal() nothrow
   {
     json_array_seal(cast(JsonArray*)this._cPtr);
   }

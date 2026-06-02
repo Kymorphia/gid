@@ -19,26 +19,26 @@ class WebFormManager : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_web_form_manager_get_type != &gidSymbolNotFound ? webkit_web_form_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WebFormManager self()
+  override WebFormManager self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class WebFormManager : gobject.object.ObjectWrap
       Get builder for [webkitwebprocessextension.web_form_manager.WebFormManager]
       Returns: New builder object
   */
-  static WebFormManagerGidBuilder builder()
+  static WebFormManagerGidBuilder builder() nothrow
   {
     return new WebFormManagerGidBuilder;
   }
@@ -61,7 +61,7 @@ class WebFormManager : gobject.object.ObjectWrap
         element = a #JSCValue
         value = the text to set
   */
-  static void inputElementAutoFill(javascriptcore.value.Value element, string value)
+  static void inputElementAutoFill(javascriptcore.value.Value element, string value) nothrow
   {
     const(char)* _value = value.toCString(No.Alloc);
     webkit_web_form_manager_input_element_auto_fill(element ? cast(JSCValue*)element._cPtr(No.Dup) : null, _value);
@@ -75,7 +75,7 @@ class WebFormManager : gobject.object.ObjectWrap
       Returns: true if element is an HTML input element that has been filled automatically,
            or false otherwise
   */
-  static bool inputElementIsAutoFilled(javascriptcore.value.Value element)
+  static bool inputElementIsAutoFilled(javascriptcore.value.Value element) nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_form_manager_input_element_is_auto_filled(element ? cast(JSCValue*)element._cPtr(No.Dup) : null);
@@ -90,7 +90,7 @@ class WebFormManager : gobject.object.ObjectWrap
       Returns: true if element is an HTML text input element that has been edited by a user action,
            or false otherwise
   */
-  static bool inputElementIsUserEdited(javascriptcore.value.Value element)
+  static bool inputElementIsUserEdited(javascriptcore.value.Value element) nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_form_manager_input_element_is_user_edited(element ? cast(JSCValue*)element._cPtr(No.Dup) : null);
@@ -125,7 +125,7 @@ class WebFormManager : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFormControlsAssociated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFormControlsAssociated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkitwebprocessextension.frame.Frame)))
@@ -133,7 +133,7 @@ class WebFormManager : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkitwebprocessextension.web_form_manager.WebFormManager)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -148,7 +148,14 @@ class WebFormManager : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkitwebprocessextension.web_form_manager.WebFormManager.formControlsAssociated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -188,7 +195,7 @@ class WebFormManager : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWillSendSubmitEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWillSendSubmitEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : javascriptcore.value.Value)))
@@ -197,7 +204,7 @@ class WebFormManager : gobject.object.ObjectWrap
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : webkitwebprocessextension.web_form_manager.WebFormManager)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -215,7 +222,14 @@ class WebFormManager : gobject.object.ObjectWrap
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkitwebprocessextension.web_form_manager.WebFormManager.willSendSubmitEvent");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -248,7 +262,7 @@ class WebFormManager : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWillSubmitForm(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWillSubmitForm(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : javascriptcore.value.Value)))
@@ -257,7 +271,7 @@ class WebFormManager : gobject.object.ObjectWrap
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : webkitwebprocessextension.web_form_manager.WebFormManager)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -275,7 +289,14 @@ class WebFormManager : gobject.object.ObjectWrap
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkitwebprocessextension.web_form_manager.WebFormManager.willSubmitForm");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -295,7 +316,7 @@ final class WebFormManagerGidBuilder : WebFormManagerGidBuilderImpl!WebFormManag
       Create object from builder.
       Returns: New object
   */
-  WebFormManager build()
+  WebFormManager build() nothrow
   {
     return new WebFormManager(cast(void*)createGObject(WebFormManager._getGType), No.Take);
   }

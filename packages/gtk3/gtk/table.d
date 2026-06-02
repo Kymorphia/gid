@@ -45,26 +45,26 @@ class Table : gtk.container.Container
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_table_get_type != &gidSymbolNotFound ? gtk_table_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Table self()
+  override Table self() nothrow
   {
     return this;
   }
@@ -73,67 +73,67 @@ class Table : gtk.container.Container
       Get builder for [gtk.table.Table]
       Returns: New builder object
   */
-  static TableGidBuilder builder()
+  static TableGidBuilder builder() nothrow
   {
     return new TableGidBuilder;
   }
 
   /** */
-  @property uint columnSpacing()
+  @property uint columnSpacing() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("column-spacing");
   }
 
   /** */
-  @property void columnSpacing(uint propval)
+  @property void columnSpacing(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("column-spacing", propval);
   }
 
   /** */
-  @property bool homogeneous()
+  @property bool homogeneous() nothrow
   {
     return getHomogeneous();
   }
 
   /** */
-  @property void homogeneous(bool propval)
+  @property void homogeneous(bool propval) nothrow
   {
     setHomogeneous(propval);
   }
 
   /** */
-  @property uint nColumns()
+  @property uint nColumns() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-columns");
   }
 
   /** */
-  @property void nColumns(uint propval)
+  @property void nColumns(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("n-columns", propval);
   }
 
   /** */
-  @property uint nRows()
+  @property uint nRows() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-rows");
   }
 
   /** */
-  @property void nRows(uint propval)
+  @property void nRows(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("n-rows", propval);
   }
 
   /** */
-  @property uint rowSpacing()
+  @property uint rowSpacing() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("row-spacing");
   }
 
   /** */
-  @property void rowSpacing(uint propval)
+  @property void rowSpacing(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("row-spacing", propval);
   }
@@ -154,7 +154,7 @@ class Table : gtk.container.Container
   
       Deprecated: Use [gtk.grid.Grid.new_].
   */
-  this(uint rows, uint columns, bool homogeneous)
+  this(uint rows, uint columns, bool homogeneous) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_table_new(rows, columns, homogeneous);
@@ -191,7 +191,7 @@ class Table : gtk.container.Container
       Deprecated: Use [gtk.grid.Grid.attach] with #GtkGrid. Note that the attach
             arguments differ between those two functions.
   */
-  void attach(gtk.widget.Widget child, uint leftAttach, uint rightAttach, uint topAttach, uint bottomAttach, gtk.types.AttachOptions xoptions, gtk.types.AttachOptions yoptions, uint xpadding, uint ypadding)
+  void attach(gtk.widget.Widget child, uint leftAttach, uint rightAttach, uint topAttach, uint bottomAttach, gtk.types.AttachOptions xoptions, gtk.types.AttachOptions yoptions, uint xpadding, uint ypadding) nothrow
   {
     gtk_table_attach(cast(GtkTable*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, leftAttach, rightAttach, topAttach, bottomAttach, xoptions, yoptions, xpadding, ypadding);
   }
@@ -212,7 +212,7 @@ class Table : gtk.container.Container
       Deprecated: Use [gtk.grid.Grid.attach] with #GtkGrid. Note that the attach
             arguments differ between those two functions.
   */
-  void attachDefaults(gtk.widget.Widget widget, uint leftAttach, uint rightAttach, uint topAttach, uint bottomAttach)
+  void attachDefaults(gtk.widget.Widget widget, uint leftAttach, uint rightAttach, uint topAttach, uint bottomAttach) nothrow
   {
     gtk_table_attach_defaults(cast(GtkTable*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, leftAttach, rightAttach, topAttach, bottomAttach);
   }
@@ -228,7 +228,7 @@ class Table : gtk.container.Container
       Deprecated: #GtkGrid does not offer a replacement for this
             functionality.
   */
-  uint getColSpacing(uint column)
+  uint getColSpacing(uint column) nothrow
   {
     uint _retval;
     _retval = gtk_table_get_col_spacing(cast(GtkTable*)this._cPtr, column);
@@ -243,7 +243,7 @@ class Table : gtk.container.Container
   
       Deprecated: Use [gtk.grid.Grid.getColumnSpacing] with #GtkGrid.
   */
-  uint getDefaultColSpacing()
+  uint getDefaultColSpacing() nothrow
   {
     uint _retval;
     _retval = gtk_table_get_default_col_spacing(cast(GtkTable*)this._cPtr);
@@ -258,7 +258,7 @@ class Table : gtk.container.Container
   
       Deprecated: Use [gtk.grid.Grid.getRowSpacing] with #GtkGrid.
   */
-  uint getDefaultRowSpacing()
+  uint getDefaultRowSpacing() nothrow
   {
     uint _retval;
     _retval = gtk_table_get_default_row_spacing(cast(GtkTable*)this._cPtr);
@@ -273,7 +273,7 @@ class Table : gtk.container.Container
       Deprecated: Use [gtk.grid.Grid.getRowHomogeneous] and
             [gtk.grid.Grid.getColumnHomogeneous] with #GtkGrid.
   */
-  bool getHomogeneous()
+  bool getHomogeneous() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_table_get_homogeneous(cast(GtkTable*)this._cPtr);
@@ -291,7 +291,7 @@ class Table : gtk.container.Container
       Deprecated: #GtkGrid does not offer a replacement for this
             functionality.
   */
-  uint getRowSpacing(uint row)
+  uint getRowSpacing(uint row) nothrow
   {
     uint _retval;
     _retval = gtk_table_get_row_spacing(cast(GtkTable*)this._cPtr, row);
@@ -310,7 +310,7 @@ class Table : gtk.container.Container
       Deprecated: #GtkGrid does not expose the number of columns and
             rows.
   */
-  void getSize(out uint rows, out uint columns)
+  void getSize(out uint rows, out uint columns) nothrow
   {
     gtk_table_get_size(cast(GtkTable*)this._cPtr, cast(uint*)&rows, cast(uint*)&columns);
   }
@@ -325,7 +325,7 @@ class Table : gtk.container.Container
   
       Deprecated: #GtkGrid resizes automatically.
   */
-  void resize(uint rows, uint columns)
+  void resize(uint rows, uint columns) nothrow
   {
     gtk_table_resize(cast(GtkTable*)this._cPtr, rows, columns);
   }
@@ -342,7 +342,7 @@ class Table : gtk.container.Container
             [gtk.widget.Widget.setMarginEnd] on the widgets contained in the row if
             you need this functionality. #GtkGrid does not support per-row spacing.
   */
-  void setColSpacing(uint column, uint spacing)
+  void setColSpacing(uint column, uint spacing) nothrow
   {
     gtk_table_set_col_spacing(cast(GtkTable*)this._cPtr, column, spacing);
   }
@@ -356,7 +356,7 @@ class Table : gtk.container.Container
   
       Deprecated: Use [gtk.grid.Grid.setColumnSpacing] with #GtkGrid.
   */
-  void setColSpacings(uint spacing)
+  void setColSpacings(uint spacing) nothrow
   {
     gtk_table_set_col_spacings(cast(GtkTable*)this._cPtr, spacing);
   }
@@ -372,7 +372,7 @@ class Table : gtk.container.Container
       Deprecated: Use [gtk.grid.Grid.setRowHomogeneous] and
             [gtk.grid.Grid.setColumnHomogeneous] with #GtkGrid.
   */
-  void setHomogeneous(bool homogeneous)
+  void setHomogeneous(bool homogeneous) nothrow
   {
     gtk_table_set_homogeneous(cast(GtkTable*)this._cPtr, homogeneous);
   }
@@ -388,7 +388,7 @@ class Table : gtk.container.Container
             [gtk.widget.Widget.setMarginBottom] on the widgets contained in the row if
             you need this functionality. #GtkGrid does not support per-row spacing.
   */
-  void setRowSpacing(uint row, uint spacing)
+  void setRowSpacing(uint row, uint spacing) nothrow
   {
     gtk_table_set_row_spacing(cast(GtkTable*)this._cPtr, row, spacing);
   }
@@ -401,7 +401,7 @@ class Table : gtk.container.Container
   
       Deprecated: Use [gtk.grid.Grid.setRowSpacing] with #GtkGrid.
   */
-  void setRowSpacings(uint spacing)
+  void setRowSpacings(uint spacing) nothrow
   {
     gtk_table_set_row_spacings(cast(GtkTable*)this._cPtr, spacing);
   }
@@ -413,31 +413,31 @@ class TableGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
 
 
   /** */
-  T columnSpacing(uint propval)
+  T columnSpacing(uint propval) nothrow
   {
     return setProperty("column-spacing", propval);
   }
 
   /** */
-  T homogeneous(bool propval)
+  T homogeneous(bool propval) nothrow
   {
     return setProperty("homogeneous", propval);
   }
 
   /** */
-  T nColumns(uint propval)
+  T nColumns(uint propval) nothrow
   {
     return setProperty("n-columns", propval);
   }
 
   /** */
-  T nRows(uint propval)
+  T nRows(uint propval) nothrow
   {
     return setProperty("n-rows", propval);
   }
 
   /** */
-  T rowSpacing(uint propval)
+  T rowSpacing(uint propval) nothrow
   {
     return setProperty("row-spacing", propval);
   }
@@ -450,7 +450,7 @@ final class TableGidBuilder : TableGidBuilderImpl!TableGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Table build()
+  Table build() nothrow
   {
     return new Table(cast(void*)createGObject(Table._getGType), No.Take);
   }

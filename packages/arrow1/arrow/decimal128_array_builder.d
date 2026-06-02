@@ -18,26 +18,26 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal128_array_builder_get_type != &gidSymbolNotFound ? garrow_decimal128_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Decimal128ArrayBuilder self()
+  override Decimal128ArrayBuilder self() nothrow
   {
     return this;
   }
@@ -46,13 +46,13 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
       Get builder for [arrow.decimal128_array_builder.Decimal128ArrayBuilder]
       Returns: New builder object
   */
-  static Decimal128ArrayBuilderGidBuilder builder()
+  static Decimal128ArrayBuilderGidBuilder builder() nothrow
   {
     return new Decimal128ArrayBuilderGidBuilder;
   }
 
   /** */
-  this(arrow.decimal128_data_type.Decimal128DataType dataType)
+  this(arrow.decimal128_data_type.Decimal128DataType dataType) nothrow
   {
     GArrowDecimal128ArrayBuilder* _cretval;
     _cretval = garrow_decimal128_array_builder_new(dataType ? cast(GArrowDecimal128DataType*)dataType._cPtr(No.Dup) : null);
@@ -135,7 +135,7 @@ final class Decimal128ArrayBuilderGidBuilder : Decimal128ArrayBuilderGidBuilderI
       Create object from builder.
       Returns: New object
   */
-  Decimal128ArrayBuilder build()
+  Decimal128ArrayBuilder build() nothrow
   {
     return new Decimal128ArrayBuilder(cast(void*)createGObject(Decimal128ArrayBuilder._getGType), Yes.Take);
   }

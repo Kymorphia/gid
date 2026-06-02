@@ -18,11 +18,8 @@ class Analysis
   PangoAnalysis _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for pango.analysis.Analysis");
-
     _cInstance = *cast(PangoAnalysis*)ptr;
 
     if (take)
@@ -30,7 +27,7 @@ class Analysis
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class Analysis
       Get `font` field.
       Returns: the font for this segment.
   */
-  @property pango.font.Font font()
+  @property pango.font.Font font() nothrow
   {
     return cToD!(pango.font.Font)(cast(void*)(cast(PangoAnalysis*)this._cPtr).font);
   }
@@ -49,7 +46,7 @@ class Analysis
       Params:
         propval = the font for this segment.
   */
-  @property void font(pango.font.Font propval)
+  @property void font(pango.font.Font propval) nothrow
   {
     cValueFree!(pango.font.Font)(cast(void*)(cast(PangoAnalysis*)this._cPtr).font);
     dToC(propval, cast(void*)&(cast(PangoAnalysis*)this._cPtr).font);
@@ -59,7 +56,7 @@ class Analysis
       Get `level` field.
       Returns: the bidirectional level for this segment.
   */
-  @property ubyte level()
+  @property ubyte level() nothrow
   {
     return (cast(PangoAnalysis*)this._cPtr).level;
   }
@@ -69,7 +66,7 @@ class Analysis
       Params:
         propval = the bidirectional level for this segment.
   */
-  @property void level(ubyte propval)
+  @property void level(ubyte propval) nothrow
   {
     (cast(PangoAnalysis*)this._cPtr).level = propval;
   }
@@ -78,7 +75,7 @@ class Analysis
       Get `gravity` field.
       Returns: the glyph orientation for this segment (A [pango.types.Gravity]).
   */
-  @property ubyte gravity()
+  @property ubyte gravity() nothrow
   {
     return (cast(PangoAnalysis*)this._cPtr).gravity;
   }
@@ -88,7 +85,7 @@ class Analysis
       Params:
         propval = the glyph orientation for this segment (A [pango.types.Gravity]).
   */
-  @property void gravity(ubyte propval)
+  @property void gravity(ubyte propval) nothrow
   {
     (cast(PangoAnalysis*)this._cPtr).gravity = propval;
   }
@@ -97,7 +94,7 @@ class Analysis
       Get `flags` field.
       Returns: boolean flags for this segment (Since: 1.16).
   */
-  @property ubyte flags()
+  @property ubyte flags() nothrow
   {
     return (cast(PangoAnalysis*)this._cPtr).flags;
   }
@@ -107,7 +104,7 @@ class Analysis
       Params:
         propval = boolean flags for this segment (Since: 1.16).
   */
-  @property void flags(ubyte propval)
+  @property void flags(ubyte propval) nothrow
   {
     (cast(PangoAnalysis*)this._cPtr).flags = propval;
   }
@@ -116,7 +113,7 @@ class Analysis
       Get `script` field.
       Returns: the detected script for this segment (A [pango.types.Script]) (Since: 1.18).
   */
-  @property ubyte script()
+  @property ubyte script() nothrow
   {
     return (cast(PangoAnalysis*)this._cPtr).script;
   }
@@ -126,7 +123,7 @@ class Analysis
       Params:
         propval = the detected script for this segment (A [pango.types.Script]) (Since: 1.18).
   */
-  @property void script(ubyte propval)
+  @property void script(ubyte propval) nothrow
   {
     (cast(PangoAnalysis*)this._cPtr).script = propval;
   }
@@ -135,7 +132,7 @@ class Analysis
       Get `language` field.
       Returns: the detected language for this segment.
   */
-  @property pango.language.Language language()
+  @property pango.language.Language language() nothrow
   {
     return cToD!(pango.language.Language)(cast(void*)(cast(PangoAnalysis*)this._cPtr).language);
   }
@@ -145,7 +142,7 @@ class Analysis
       Params:
         propval = the detected language for this segment.
   */
-  @property void language(pango.language.Language propval)
+  @property void language(pango.language.Language propval) nothrow
   {
     cValueFree!(pango.language.Language)(cast(void*)(cast(PangoAnalysis*)this._cPtr).language);
     dToC(propval, cast(void*)&(cast(PangoAnalysis*)this._cPtr).language);

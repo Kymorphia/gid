@@ -17,26 +17,26 @@ class StreamFilter : gmime.stream.Stream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_stream_filter_get_type != &gidSymbolNotFound ? g_mime_stream_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StreamFilter self()
+  override StreamFilter self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class StreamFilter : gmime.stream.Stream
       Get builder for [gmime.stream_filter.StreamFilter]
       Returns: New builder object
   */
-  static StreamFilterGidBuilder builder()
+  static StreamFilterGidBuilder builder() nothrow
   {
     return new StreamFilterGidBuilder;
   }
@@ -58,7 +58,7 @@ class StreamFilter : gmime.stream.Stream
         stream = source stream
       Returns: a new filter stream with stream as its source.
   */
-  this(gmime.stream.Stream stream)
+  this(gmime.stream.Stream stream) nothrow
   {
     GMimeStream* _cretval;
     _cretval = g_mime_stream_filter_new(stream ? cast(GMimeStream*)stream._cPtr(No.Dup) : null);
@@ -73,7 +73,7 @@ class StreamFilter : gmime.stream.Stream
         filter = a #GMimeFilter
       Returns: an id for the filter.
   */
-  int add(gmime.filter.Filter filter)
+  int add(gmime.filter.Filter filter) nothrow
   {
     int _retval;
     _retval = g_mime_stream_filter_add(cast(GMimeStreamFilter*)this._cPtr, filter ? cast(GMimeFilter*)filter._cPtr(No.Dup) : null);
@@ -85,7 +85,7 @@ class StreamFilter : gmime.stream.Stream
       Returns: true if stream owns the source stream or false
         otherwise.
   */
-  bool getOwner()
+  bool getOwner() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_stream_filter_get_owner(cast(GMimeStreamFilter*)this._cPtr);
@@ -99,7 +99,7 @@ class StreamFilter : gmime.stream.Stream
       Params:
         id = filter id
   */
-  void remove(int id)
+  void remove(int id) nothrow
   {
     g_mime_stream_filter_remove(cast(GMimeStreamFilter*)this._cPtr, id);
   }
@@ -113,7 +113,7 @@ class StreamFilter : gmime.stream.Stream
       Params:
         owner = true if this stream should own the source stream or false otherwise
   */
-  void setOwner(bool owner)
+  void setOwner(bool owner) nothrow
   {
     g_mime_stream_filter_set_owner(cast(GMimeStreamFilter*)this._cPtr, owner);
   }
@@ -131,7 +131,7 @@ final class StreamFilterGidBuilder : StreamFilterGidBuilderImpl!StreamFilterGidB
       Create object from builder.
       Returns: New object
   */
-  StreamFilter build()
+  StreamFilter build() nothrow
   {
     return new StreamFilter(cast(void*)createGObject(StreamFilter._getGType), Yes.Take);
   }

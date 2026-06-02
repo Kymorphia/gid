@@ -26,26 +26,26 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_renderer_toggle_get_type != &gidSymbolNotFound ? gtk_cell_renderer_toggle_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CellRendererToggle self()
+  override CellRendererToggle self() nothrow
   {
     return this;
   }
@@ -54,55 +54,55 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
       Get builder for [gtk.cell_renderer_toggle.CellRendererToggle]
       Returns: New builder object
   */
-  static CellRendererToggleGidBuilder builder()
+  static CellRendererToggleGidBuilder builder() nothrow
   {
     return new CellRendererToggleGidBuilder;
   }
 
   /** */
-  @property bool activatable()
+  @property bool activatable() nothrow
   {
     return getActivatable();
   }
 
   /** */
-  @property void activatable(bool propval)
+  @property void activatable(bool propval) nothrow
   {
     setActivatable(propval);
   }
 
   /** */
-  @property bool active()
+  @property bool active() nothrow
   {
     return getActive();
   }
 
   /** */
-  @property void active(bool propval)
+  @property void active(bool propval) nothrow
   {
     setActive(propval);
   }
 
   /** */
-  @property bool inconsistent()
+  @property bool inconsistent() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("inconsistent");
   }
 
   /** */
-  @property void inconsistent(bool propval)
+  @property void inconsistent(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("inconsistent", propval);
   }
 
   /** */
-  @property bool radio()
+  @property bool radio() nothrow
   {
     return getRadio();
   }
 
   /** */
-  @property void radio(bool propval)
+  @property void radio(bool propval) nothrow
   {
     setRadio(propval);
   }
@@ -117,7 +117,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
       the model.
       Returns: the new cell renderer
   */
-  this()
+  this() nothrow
   {
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_renderer_toggle_new();
@@ -129,7 +129,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
       [gtk.cell_renderer_toggle.CellRendererToggle.setActivatable].
       Returns: true if the cell renderer is activatable.
   */
-  bool getActivatable()
+  bool getActivatable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_cell_renderer_toggle_get_activatable(cast(GtkCellRendererToggle*)this._cPtr);
@@ -141,7 +141,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
       [gtk.cell_renderer_toggle.CellRendererToggle.setActive].
       Returns: true if the cell renderer is active.
   */
-  bool getActive()
+  bool getActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_cell_renderer_toggle_get_active(cast(GtkCellRendererToggle*)this._cPtr);
@@ -152,7 +152,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
       Returns whether we’re rendering radio toggles rather than checkboxes.
       Returns: true if we’re rendering radio toggles rather than checkboxes
   */
-  bool getRadio()
+  bool getRadio() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_cell_renderer_toggle_get_radio(cast(GtkCellRendererToggle*)this._cPtr);
@@ -165,7 +165,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
       Params:
         setting = the value to set.
   */
-  void setActivatable(bool setting)
+  void setActivatable(bool setting) nothrow
   {
     gtk_cell_renderer_toggle_set_activatable(cast(GtkCellRendererToggle*)this._cPtr, setting);
   }
@@ -176,7 +176,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
       Params:
         setting = the value to set.
   */
-  void setActive(bool setting)
+  void setActive(bool setting) nothrow
   {
     gtk_cell_renderer_toggle_set_active(cast(GtkCellRendererToggle*)this._cPtr, setting);
   }
@@ -193,7 +193,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
       Params:
         radio = true to make the toggle look like a radio button
   */
-  void setRadio(bool radio)
+  void setRadio(bool radio) nothrow
   {
     gtk_cell_renderer_toggle_set_radio(cast(GtkCellRendererToggle*)this._cPtr, radio);
   }
@@ -220,14 +220,14 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectToggled(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToggled(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.cell_renderer_toggle.CellRendererToggle)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -239,7 +239,14 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.cell_renderer_toggle.CellRendererToggle.toggled");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -252,25 +259,25 @@ class CellRendererToggleGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBui
 {
 
   /** */
-  T activatable(bool propval)
+  T activatable(bool propval) nothrow
   {
     return setProperty("activatable", propval);
   }
 
   /** */
-  T active(bool propval)
+  T active(bool propval) nothrow
   {
     return setProperty("active", propval);
   }
 
   /** */
-  T inconsistent(bool propval)
+  T inconsistent(bool propval) nothrow
   {
     return setProperty("inconsistent", propval);
   }
 
   /** */
-  T radio(bool propval)
+  T radio(bool propval) nothrow
   {
     return setProperty("radio", propval);
   }
@@ -283,7 +290,7 @@ final class CellRendererToggleGidBuilder : CellRendererToggleGidBuilderImpl!Cell
       Create object from builder.
       Returns: New object
   */
-  CellRendererToggle build()
+  CellRendererToggle build() nothrow
   {
     return new CellRendererToggle(cast(void*)createGObject(CellRendererToggle._getGType), No.Take);
   }

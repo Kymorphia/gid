@@ -17,26 +17,26 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_pixbuf_simple_anim_get_type != &gidSymbolNotFound ? gdk_pixbuf_simple_anim_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PixbufSimpleAnim self()
+  override PixbufSimpleAnim self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
       Get builder for [gdkpixbuf.pixbuf_simple_anim.PixbufSimpleAnim]
       Returns: New builder object
   */
-  static PixbufSimpleAnimGidBuilder builder()
+  static PixbufSimpleAnimGidBuilder builder() nothrow
   {
     return new PixbufSimpleAnimGidBuilder;
   }
@@ -54,7 +54,7 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
       Get `loop` property.
       Returns: Whether the animation should loop when it reaches the end.
   */
-  @property bool loop()
+  @property bool loop() nothrow
   {
     return getLoop();
   }
@@ -64,7 +64,7 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
       Params:
         propval = Whether the animation should loop when it reaches the end.
   */
-  @property void loop(bool propval)
+  @property void loop(bool propval) nothrow
   {
     setLoop(propval);
   }
@@ -78,7 +78,7 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
         rate = the speed of the animation, in frames per second
       Returns: a newly allocated #GdkPixbufSimpleAnim
   */
-  this(int width, int height, float rate)
+  this(int width, int height, float rate) nothrow
   {
     GdkPixbufSimpleAnim* _cretval;
     _cretval = gdk_pixbuf_simple_anim_new(width, height, rate);
@@ -93,7 +93,7 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
       Params:
         pixbuf = the pixbuf to add
   */
-  void addFrame(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  void addFrame(gdkpixbuf.pixbuf.Pixbuf pixbuf) nothrow
   {
     gdk_pixbuf_simple_anim_add_frame(cast(GdkPixbufSimpleAnim*)this._cPtr, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
@@ -102,7 +102,7 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
       Gets whether animation should loop indefinitely when it reaches the end.
       Returns: true if the animation loops forever, false otherwise
   */
-  bool getLoop()
+  bool getLoop() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_pixbuf_simple_anim_get_loop(cast(GdkPixbufSimpleAnim*)this._cPtr);
@@ -115,7 +115,7 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
       Params:
         loop = whether to loop the animation
   */
-  void setLoop(bool loop)
+  void setLoop(bool loop) nothrow
   {
     gdk_pixbuf_simple_anim_set_loop(cast(GdkPixbufSimpleAnim*)this._cPtr, loop);
   }
@@ -131,7 +131,7 @@ class PixbufSimpleAnimGidBuilderImpl(T) : gdkpixbuf.pixbuf_animation.PixbufAnima
         propval = Whether the animation should loop when it reaches the end.
       Returns: Builder instance for fluent chaining
   */
-  T loop(bool propval)
+  T loop(bool propval) nothrow
   {
     return setProperty("loop", propval);
   }
@@ -144,7 +144,7 @@ final class PixbufSimpleAnimGidBuilder : PixbufSimpleAnimGidBuilderImpl!PixbufSi
       Create object from builder.
       Returns: New object
   */
-  PixbufSimpleAnim build()
+  PixbufSimpleAnim build() nothrow
   {
     return new PixbufSimpleAnim(cast(void*)createGObject(PixbufSimpleAnim._getGType), Yes.Take);
   }

@@ -30,26 +30,26 @@ class ShortcutTrigger : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_shortcut_trigger_get_type != &gidSymbolNotFound ? gtk_shortcut_trigger_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ShortcutTrigger self()
+  override ShortcutTrigger self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
       Get builder for [gtk.shortcut_trigger.ShortcutTrigger]
       Returns: New builder object
   */
-  static ShortcutTriggerGidBuilder builder()
+  static ShortcutTriggerGidBuilder builder() nothrow
   {
     return new ShortcutTriggerGidBuilder;
   }
@@ -85,7 +85,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
         string_ = the string to parse
       Returns: a new [gtk.shortcut_trigger.ShortcutTrigger]
   */
-  static gtk.shortcut_trigger.ShortcutTrigger parseString(string string_)
+  static gtk.shortcut_trigger.ShortcutTrigger parseString(string string_) nothrow
   {
     GtkShortcutTrigger* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
@@ -106,7 +106,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
           trigger1 is found, respectively, to be less than, to match,
           or be greater than trigger2.
   */
-  int compare(gtk.shortcut_trigger.ShortcutTrigger trigger2)
+  int compare(gtk.shortcut_trigger.ShortcutTrigger trigger2) nothrow
   {
     int _retval;
     _retval = gtk_shortcut_trigger_compare(cast(GtkShortcutTrigger*)this._cPtr, trigger2 ? cast(GtkShortcutTrigger*)trigger2._cPtr(No.Dup) : null);
@@ -123,7 +123,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
         trigger2 = a [gtk.shortcut_trigger.ShortcutTrigger]
       Returns: true if trigger1 and trigger2 are equal
   */
-  bool equal(gtk.shortcut_trigger.ShortcutTrigger trigger2)
+  bool equal(gtk.shortcut_trigger.ShortcutTrigger trigger2) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_shortcut_trigger_equal(cast(GtkShortcutTrigger*)this._cPtr, trigger2 ? cast(GtkShortcutTrigger*)trigger2._cPtr(No.Dup) : null);
@@ -142,7 +142,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
       function with [glib.hash_table.HashTable]. They must each be a [gtk.shortcut_trigger.ShortcutTrigger].
       Returns: a hash value corresponding to trigger
   */
-  uint hash()
+  uint hash() nothrow
   {
     uint _retval;
     _retval = gtk_shortcut_trigger_hash(cast(GtkShortcutTrigger*)this._cPtr);
@@ -159,7 +159,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
       Params:
         string_ = a [glib.string_.String] to print into
   */
-  void print(glib.string_.String string_)
+  void print(glib.string_.String string_) nothrow
   {
     gtk_shortcut_trigger_print(cast(GtkShortcutTrigger*)this._cPtr, string_ ? cast(GString*)string_._cPtr(No.Dup) : null);
   }
@@ -184,7 +184,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
           trigger did not have a textual representation suitable
           for end users.
   */
-  bool printLabel(gdk.display.Display display, glib.string_.String string_)
+  bool printLabel(gdk.display.Display display, glib.string_.String string_) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_shortcut_trigger_print_label(cast(GtkShortcutTrigger*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, string_ ? cast(GString*)string_._cPtr(No.Dup) : null);
@@ -209,7 +209,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
         display = [gdk.display.Display] to print for
       Returns: a new string
   */
-  string toLabel(gdk.display.Display display)
+  string toLabel(gdk.display.Display display) nothrow
   {
     char* _cretval;
     _cretval = gtk_shortcut_trigger_to_label(cast(GtkShortcutTrigger*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
@@ -224,7 +224,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
       to help when debugging.
       Returns: a new string
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gtk_shortcut_trigger_to_string(cast(GtkShortcutTrigger*)this._cPtr);
@@ -242,7 +242,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
             in event is a Key event and has the right modifiers set.
       Returns: Whether the event triggered the shortcut
   */
-  gdk.types.KeyMatch trigger(gdk.event.Event event, bool enableMnemonics)
+  gdk.types.KeyMatch trigger(gdk.event.Event event, bool enableMnemonics) nothrow
   {
     GdkKeyMatch _cretval;
     _cretval = gtk_shortcut_trigger_trigger(cast(GtkShortcutTrigger*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, enableMnemonics);
@@ -263,7 +263,7 @@ final class ShortcutTriggerGidBuilder : ShortcutTriggerGidBuilderImpl!ShortcutTr
       Create object from builder.
       Returns: New object
   */
-  ShortcutTrigger build()
+  ShortcutTrigger build() nothrow
   {
     return new ShortcutTrigger(cast(void*)createGObject(ShortcutTrigger._getGType), No.Take);
   }

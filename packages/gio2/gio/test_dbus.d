@@ -94,26 +94,26 @@ class TestDBus : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_test_dbus_get_type != &gidSymbolNotFound ? g_test_dbus_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TestDBus self()
+  override TestDBus self() nothrow
   {
     return this;
   }
@@ -122,7 +122,7 @@ class TestDBus : gobject.object.ObjectWrap
       Get builder for [gio.test_dbus.TestDBus]
       Returns: New builder object
   */
-  static TestDBusGidBuilder builder()
+  static TestDBusGidBuilder builder() nothrow
   {
     return new TestDBusGidBuilder;
   }
@@ -131,7 +131,7 @@ class TestDBus : gobject.object.ObjectWrap
       Get `flags` property.
       Returns: #GTestDBusFlags specifying the behaviour of the D-Bus session.
   */
-  @property gio.types.TestDBusFlags flags()
+  @property gio.types.TestDBusFlags flags() nothrow
   {
     return getFlags();
   }
@@ -143,7 +143,7 @@ class TestDBus : gobject.object.ObjectWrap
         flags = a #GTestDBusFlags
       Returns: a new #GTestDBus.
   */
-  this(gio.types.TestDBusFlags flags)
+  this(gio.types.TestDBusFlags flags) nothrow
   {
     GTestDBus* _cretval;
     _cretval = g_test_dbus_new(flags);
@@ -158,7 +158,7 @@ class TestDBus : gobject.object.ObjectWrap
       bus is running. It is not necessary to call this if unit test already calls
       [gio.test_dbus.TestDBus.up] before acquiring the session bus.
   */
-  static void unset()
+  static void unset() nothrow
   {
     g_test_dbus_unset();
   }
@@ -170,7 +170,7 @@ class TestDBus : gobject.object.ObjectWrap
       Params:
         path = path to a directory containing .service files
   */
-  void addServiceDir(string path)
+  void addServiceDir(string path) nothrow
   {
     const(char)* _path = path.toCString(No.Alloc);
     g_test_dbus_add_service_dir(cast(GTestDBus*)this._cPtr, _path);
@@ -183,7 +183,7 @@ class TestDBus : gobject.object.ObjectWrap
       to be destroyed. This is done to ensure that the next unit test won't get a
       leaked singleton from this test.
   */
-  void down()
+  void down() nothrow
   {
     g_test_dbus_down(cast(GTestDBus*)this._cPtr);
   }
@@ -194,7 +194,7 @@ class TestDBus : gobject.object.ObjectWrap
       [gio.dbus_connection.DBusConnection.newForAddress].
       Returns: the address of the bus, or null.
   */
-  string getBusAddress()
+  string getBusAddress() nothrow
   {
     const(char)* _cretval;
     _cretval = g_test_dbus_get_bus_address(cast(GTestDBus*)this._cPtr);
@@ -206,7 +206,7 @@ class TestDBus : gobject.object.ObjectWrap
       Get the flags of the #GTestDBus object.
       Returns: the value of #GTestDBus:flags property
   */
-  gio.types.TestDBusFlags getFlags()
+  gio.types.TestDBusFlags getFlags() nothrow
   {
     GTestDBusFlags _cretval;
     _cretval = g_test_dbus_get_flags(cast(GTestDBus*)this._cPtr);
@@ -222,7 +222,7 @@ class TestDBus : gobject.object.ObjectWrap
       tests wanting to verify behaviour after the session bus has been stopped
       can use this function but should still call [gio.test_dbus.TestDBus.down] when done.
   */
-  void stop()
+  void stop() nothrow
   {
     g_test_dbus_stop(cast(GTestDBus*)this._cPtr);
   }
@@ -237,7 +237,7 @@ class TestDBus : gobject.object.ObjectWrap
       If this function is called from unit test's main(), then [gio.test_dbus.TestDBus.down]
       must be called after [glib.global.testRun].
   */
-  void up()
+  void up() nothrow
   {
     g_test_dbus_up(cast(GTestDBus*)this._cPtr);
   }
@@ -253,7 +253,7 @@ class TestDBusGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = #GTestDBusFlags specifying the behaviour of the D-Bus session.
       Returns: Builder instance for fluent chaining
   */
-  T flags(gio.types.TestDBusFlags propval)
+  T flags(gio.types.TestDBusFlags propval) nothrow
   {
     return setProperty("flags", propval);
   }
@@ -266,7 +266,7 @@ final class TestDBusGidBuilder : TestDBusGidBuilderImpl!TestDBusGidBuilder
       Create object from builder.
       Returns: New object
   */
-  TestDBus build()
+  TestDBus build() nothrow
   {
     return new TestDBus(cast(void*)createGObject(TestDBus._getGType), Yes.Take);
   }

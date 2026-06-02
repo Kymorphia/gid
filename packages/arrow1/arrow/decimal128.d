@@ -16,26 +16,26 @@ class Decimal128 : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal128_get_type != &gidSymbolNotFound ? garrow_decimal128_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Decimal128 self()
+  override Decimal128 self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class Decimal128 : gobject.object.ObjectWrap
       Get builder for [arrow.decimal128.Decimal128]
       Returns: New builder object
   */
-  static Decimal128GidBuilder builder()
+  static Decimal128GidBuilder builder() nothrow
   {
     return new Decimal128GidBuilder;
   }
 
   /** */
-  static arrow.decimal128.Decimal128 newInteger(long data)
+  static arrow.decimal128.Decimal128 newInteger(long data) nothrow
   {
     GArrowDecimal128* _cretval;
     _cretval = garrow_decimal128_new_integer(data);
@@ -74,13 +74,13 @@ class Decimal128 : gobject.object.ObjectWrap
   /**
       Computes the absolute value of the decimal destructively.
   */
-  void abs()
+  void abs() nothrow
   {
     garrow_decimal128_abs(cast(GArrowDecimal128*)this._cPtr);
   }
 
   /** */
-  arrow.decimal128.Decimal128 copy()
+  arrow.decimal128.Decimal128 copy() nothrow
   {
     GArrowDecimal128* _cretval;
     _cretval = garrow_decimal128_copy(cast(GArrowDecimal128*)this._cPtr);
@@ -103,7 +103,7 @@ class Decimal128 : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equal(arrow.decimal128.Decimal128 otherDecimal)
+  bool equal(arrow.decimal128.Decimal128 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal128_equal(cast(GArrowDecimal128*)this._cPtr, otherDecimal ? cast(GArrowDecimal128*)otherDecimal._cPtr(No.Dup) : null);
@@ -111,7 +111,7 @@ class Decimal128 : gobject.object.ObjectWrap
   }
 
   /** */
-  bool greaterThan(arrow.decimal128.Decimal128 otherDecimal)
+  bool greaterThan(arrow.decimal128.Decimal128 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal128_greater_than(cast(GArrowDecimal128*)this._cPtr, otherDecimal ? cast(GArrowDecimal128*)otherDecimal._cPtr(No.Dup) : null);
@@ -119,7 +119,7 @@ class Decimal128 : gobject.object.ObjectWrap
   }
 
   /** */
-  bool greaterThanOrEqual(arrow.decimal128.Decimal128 otherDecimal)
+  bool greaterThanOrEqual(arrow.decimal128.Decimal128 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal128_greater_than_or_equal(cast(GArrowDecimal128*)this._cPtr, otherDecimal ? cast(GArrowDecimal128*)otherDecimal._cPtr(No.Dup) : null);
@@ -127,7 +127,7 @@ class Decimal128 : gobject.object.ObjectWrap
   }
 
   /** */
-  bool lessThan(arrow.decimal128.Decimal128 otherDecimal)
+  bool lessThan(arrow.decimal128.Decimal128 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal128_less_than(cast(GArrowDecimal128*)this._cPtr, otherDecimal ? cast(GArrowDecimal128*)otherDecimal._cPtr(No.Dup) : null);
@@ -135,7 +135,7 @@ class Decimal128 : gobject.object.ObjectWrap
   }
 
   /** */
-  bool lessThanOrEqual(arrow.decimal128.Decimal128 otherDecimal)
+  bool lessThanOrEqual(arrow.decimal128.Decimal128 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal128_less_than_or_equal(cast(GArrowDecimal128*)this._cPtr, otherDecimal ? cast(GArrowDecimal128*)otherDecimal._cPtr(No.Dup) : null);
@@ -143,7 +143,7 @@ class Decimal128 : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.decimal128.Decimal128 minus(arrow.decimal128.Decimal128 right)
+  arrow.decimal128.Decimal128 minus(arrow.decimal128.Decimal128 right) nothrow
   {
     GArrowDecimal128* _cretval;
     _cretval = garrow_decimal128_minus(cast(GArrowDecimal128*)this._cPtr, right ? cast(GArrowDecimal128*)right._cPtr(No.Dup) : null);
@@ -152,7 +152,7 @@ class Decimal128 : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.decimal128.Decimal128 multiply(arrow.decimal128.Decimal128 right)
+  arrow.decimal128.Decimal128 multiply(arrow.decimal128.Decimal128 right) nothrow
   {
     GArrowDecimal128* _cretval;
     _cretval = garrow_decimal128_multiply(cast(GArrowDecimal128*)this._cPtr, right ? cast(GArrowDecimal128*)right._cPtr(No.Dup) : null);
@@ -163,13 +163,13 @@ class Decimal128 : gobject.object.ObjectWrap
   /**
       Negate the current value of the decimal destructively.
   */
-  void negate()
+  void negate() nothrow
   {
     garrow_decimal128_negate(cast(GArrowDecimal128*)this._cPtr);
   }
 
   /** */
-  bool notEqual(arrow.decimal128.Decimal128 otherDecimal)
+  bool notEqual(arrow.decimal128.Decimal128 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal128_not_equal(cast(GArrowDecimal128*)this._cPtr, otherDecimal ? cast(GArrowDecimal128*)otherDecimal._cPtr(No.Dup) : null);
@@ -177,7 +177,7 @@ class Decimal128 : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.decimal128.Decimal128 plus(arrow.decimal128.Decimal128 right)
+  arrow.decimal128.Decimal128 plus(arrow.decimal128.Decimal128 right) nothrow
   {
     GArrowDecimal128* _cretval;
     _cretval = garrow_decimal128_plus(cast(GArrowDecimal128*)this._cPtr, right ? cast(GArrowDecimal128*)right._cPtr(No.Dup) : null);
@@ -198,7 +198,7 @@ class Decimal128 : gobject.object.ObjectWrap
   }
 
   /** */
-  glib.bytes.Bytes toBytes()
+  glib.bytes.Bytes toBytes() nothrow
   {
     GBytes* _cretval;
     _cretval = garrow_decimal128_to_bytes(cast(GArrowDecimal128*)this._cPtr);
@@ -207,7 +207,7 @@ class Decimal128 : gobject.object.ObjectWrap
   }
 
   /** */
-  long toInteger()
+  long toInteger() nothrow
   {
     long _retval;
     _retval = garrow_decimal128_to_integer(cast(GArrowDecimal128*)this._cPtr);
@@ -215,7 +215,7 @@ class Decimal128 : gobject.object.ObjectWrap
   }
 
   /** */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = garrow_decimal128_to_string(cast(GArrowDecimal128*)this._cPtr);
@@ -224,7 +224,7 @@ class Decimal128 : gobject.object.ObjectWrap
   }
 
   /** */
-  string toStringScale(int scale)
+  string toStringScale(int scale) nothrow
   {
     char* _cretval;
     _cretval = garrow_decimal128_to_string_scale(cast(GArrowDecimal128*)this._cPtr, scale);
@@ -238,7 +238,7 @@ class Decimal128GidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T decimal128(void* propval)
+  T decimal128(void* propval) nothrow
   {
     return setProperty("decimal128", propval);
   }
@@ -251,7 +251,7 @@ final class Decimal128GidBuilder : Decimal128GidBuilderImpl!Decimal128GidBuilder
       Create object from builder.
       Returns: New object
   */
-  Decimal128 build()
+  Decimal128 build() nothrow
   {
     return new Decimal128(cast(void*)createGObject(Decimal128._getGType), No.Take);
   }

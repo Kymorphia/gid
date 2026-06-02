@@ -25,26 +25,26 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_response_policy_decision_get_type != &gidSymbolNotFound ? webkit_response_policy_decision_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ResponsePolicyDecision self()
+  override ResponsePolicyDecision self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
       Get builder for [webkit.response_policy_decision.ResponsePolicyDecision]
       Returns: New builder object
   */
-  static ResponsePolicyDecisionGidBuilder builder()
+  static ResponsePolicyDecisionGidBuilder builder() nothrow
   {
     return new ResponsePolicyDecisionGidBuilder;
   }
@@ -63,7 +63,7 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
       Returns: This property contains the #WebKitURIRequest associated with this
         policy decision.
   */
-  @property webkit.urirequest.URIRequest request()
+  @property webkit.urirequest.URIRequest request() nothrow
   {
     return getRequest();
   }
@@ -73,7 +73,7 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
       Returns: This property contains the #WebKitURIResponse associated with this
         policy decision.
   */
-  @property webkit.uriresponse.URIResponse response()
+  @property webkit.uriresponse.URIResponse response() nothrow
   {
     return getResponse();
   }
@@ -88,7 +88,7 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
       #WebKitPage::send-request signal can be used instead.
       Returns: The URI request that is associated with this policy decision.
   */
-  webkit.urirequest.URIRequest getRequest()
+  webkit.urirequest.URIRequest getRequest() nothrow
   {
     WebKitURIRequest* _cretval;
     _cretval = webkit_response_policy_decision_get_request(cast(WebKitResponsePolicyDecision*)this._cPtr);
@@ -100,7 +100,7 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
       Gets the value of the #WebKitResponsePolicyDecision:response property.
       Returns: The URI response that is associated with this policy decision.
   */
-  webkit.uriresponse.URIResponse getResponse()
+  webkit.uriresponse.URIResponse getResponse() nothrow
   {
     WebKitURIResponse* _cretval;
     _cretval = webkit_response_policy_decision_get_response(cast(WebKitResponsePolicyDecision*)this._cPtr);
@@ -112,7 +112,7 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
       Gets whether the request is the main frame main resource
       Returns: true if the request is the main frame main resouce or false otherwise
   */
-  bool isMainFrameMainResource()
+  bool isMainFrameMainResource() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_response_policy_decision_is_main_frame_main_resource(cast(WebKitResponsePolicyDecision*)this._cPtr);
@@ -126,7 +126,7 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
       that triggered this policy decision request. See also [webkit.web_view.WebView.canShowMimeType].
       Returns: true if the MIME type of the response is supported or false otherwise
   */
-  bool isMimeTypeSupported()
+  bool isMimeTypeSupported() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_response_policy_decision_is_mime_type_supported(cast(WebKitResponsePolicyDecision*)this._cPtr);
@@ -146,7 +146,7 @@ final class ResponsePolicyDecisionGidBuilder : ResponsePolicyDecisionGidBuilderI
       Create object from builder.
       Returns: New object
   */
-  ResponsePolicyDecision build()
+  ResponsePolicyDecision build() nothrow
   {
     return new ResponsePolicyDecision(cast(void*)createGObject(ResponsePolicyDecision._getGType), No.Take);
   }

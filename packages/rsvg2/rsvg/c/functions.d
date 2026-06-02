@@ -17,7 +17,7 @@ else version(OSX)
 else
   private immutable LIBS = ["librsvg-2.so.2"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // Handle
   GType function() c_rsvg_handle_get_type; ///

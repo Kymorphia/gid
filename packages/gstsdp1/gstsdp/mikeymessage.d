@@ -19,32 +19,32 @@ class MIKEYMessage : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_mikey_message_get_type != &gidSymbolNotFound ? gst_mikey_message_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MIKEYMessage self()
+  override MIKEYMessage self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       Get `version_` field.
       Returns: the version
   */
-  @property ubyte version_()
+  @property ubyte version_() nothrow
   {
     return (cast(GstMIKEYMessage*)this._cPtr).version_;
   }
@@ -63,7 +63,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       Params:
         propval = the version
   */
-  @property void version_(ubyte propval)
+  @property void version_(ubyte propval) nothrow
   {
     (cast(GstMIKEYMessage*)this._cPtr).version_ = propval;
   }
@@ -72,7 +72,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       Get `type` field.
       Returns: the #GstMIKEYType message type
   */
-  @property gstsdp.types.MIKEYType type()
+  @property gstsdp.types.MIKEYType type() nothrow
   {
     return cast(gstsdp.types.MIKEYType)(cast(GstMIKEYMessage*)this._cPtr).type;
   }
@@ -82,7 +82,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       Params:
         propval = the #GstMIKEYType message type
   */
-  @property void type(gstsdp.types.MIKEYType propval)
+  @property void type(gstsdp.types.MIKEYType propval) nothrow
   {
     (cast(GstMIKEYMessage*)this._cPtr).type = cast(GstMIKEYType)propval;
   }
@@ -91,7 +91,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       Get `V` field.
       Returns: verify flag
   */
-  @property bool V()
+  @property bool V() nothrow
   {
     return cast(bool)(cast(GstMIKEYMessage*)this._cPtr).V;
   }
@@ -101,7 +101,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       Params:
         propval = verify flag
   */
-  @property void V(bool propval)
+  @property void V(bool propval) nothrow
   {
     (cast(GstMIKEYMessage*)this._cPtr).V = propval;
   }
@@ -110,7 +110,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       Get `prfFunc` field.
       Returns: a #GstMIKEYPRFFunc
   */
-  @property gstsdp.types.MIKEYPRFFunc prfFunc()
+  @property gstsdp.types.MIKEYPRFFunc prfFunc() nothrow
   {
     return cast(gstsdp.types.MIKEYPRFFunc)(cast(GstMIKEYMessage*)this._cPtr).prfFunc;
   }
@@ -120,7 +120,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       Params:
         propval = a #GstMIKEYPRFFunc
   */
-  @property void prfFunc(gstsdp.types.MIKEYPRFFunc propval)
+  @property void prfFunc(gstsdp.types.MIKEYPRFFunc propval) nothrow
   {
     (cast(GstMIKEYMessage*)this._cPtr).prfFunc = cast(GstMIKEYPRFFunc)propval;
   }
@@ -129,7 +129,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       Get `CSBId` field.
       Returns: Identifies the Crypto Session Bundle
   */
-  @property uint CSBId()
+  @property uint CSBId() nothrow
   {
     return (cast(GstMIKEYMessage*)this._cPtr).CSBId;
   }
@@ -139,7 +139,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       Params:
         propval = Identifies the Crypto Session Bundle
   */
-  @property void CSBId(uint propval)
+  @property void CSBId(uint propval) nothrow
   {
     (cast(GstMIKEYMessage*)this._cPtr).CSBId = propval;
   }
@@ -148,7 +148,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       Get `mapType` field.
       Returns: a #GstMIKEYMapType
   */
-  @property gstsdp.types.MIKEYMapType mapType()
+  @property gstsdp.types.MIKEYMapType mapType() nothrow
   {
     return cast(gstsdp.types.MIKEYMapType)(cast(GstMIKEYMessage*)this._cPtr).mapType;
   }
@@ -158,7 +158,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       Params:
         propval = a #GstMIKEYMapType
   */
-  @property void mapType(gstsdp.types.MIKEYMapType propval)
+  @property void mapType(gstsdp.types.MIKEYMapType propval) nothrow
   {
     (cast(GstMIKEYMessage*)this._cPtr).mapType = cast(GstMIKEYMapType)propval;
   }
@@ -167,7 +167,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       Make a new MIKEY message.
       Returns: a new #GstMIKEYMessage on success
   */
-  this()
+  this() nothrow
   {
     GstMIKEYMessage* _cretval;
     _cretval = gst_mikey_message_new();
@@ -205,7 +205,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       Returns: a #GstMIKEYMessage,
         or null if there is no srtp information in the caps.
   */
-  static gstsdp.mikeymessage.MIKEYMessage newFromCaps(gst.caps.Caps caps)
+  static gstsdp.mikeymessage.MIKEYMessage newFromCaps(gst.caps.Caps caps) nothrow
   {
     GstMIKEYMessage* _cretval;
     _cretval = gst_mikey_message_new_from_caps(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
@@ -249,7 +249,7 @@ class MIKEYMessage : gobject.boxed.Boxed
         roc = current rollover counter
       Returns: true on success
   */
-  bool addCsSrtp(ubyte policy, uint ssrc, uint roc)
+  bool addCsSrtp(ubyte policy, uint ssrc, uint roc) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_mikey_message_add_cs_srtp(cast(GstMIKEYMessage*)this._cPtr, policy, ssrc, roc);
@@ -263,7 +263,7 @@ class MIKEYMessage : gobject.boxed.Boxed
         payload = a #GstMIKEYPayload
       Returns: true on success
   */
-  bool addPayload(gstsdp.mikeypayload.MIKEYPayload payload)
+  bool addPayload(gstsdp.mikeypayload.MIKEYPayload payload) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_mikey_message_add_payload(cast(GstMIKEYMessage*)this._cPtr, payload ? cast(GstMIKEYPayload*)payload._cPtr(Yes.Dup) : null);
@@ -278,7 +278,7 @@ class MIKEYMessage : gobject.boxed.Boxed
         data = the encrypted envelope key
       Returns: true on success
   */
-  bool addPke(gstsdp.types.MIKEYCacheType C, ubyte[] data)
+  bool addPke(gstsdp.types.MIKEYCacheType C, ubyte[] data) nothrow
   {
     bool _retval;
     ushort _dataLen;
@@ -297,7 +297,7 @@ class MIKEYMessage : gobject.boxed.Boxed
         rand = random data
       Returns: true on success
   */
-  bool addRand(ubyte[] rand)
+  bool addRand(ubyte[] rand) nothrow
   {
     bool _retval;
     ubyte _len;
@@ -316,7 +316,7 @@ class MIKEYMessage : gobject.boxed.Boxed
         len = length
       Returns: true on success
   */
-  bool addRandLen(ubyte len)
+  bool addRandLen(ubyte len) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_mikey_message_add_rand_len(cast(GstMIKEYMessage*)this._cPtr, len);
@@ -328,7 +328,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       in NTP-UTC format.
       Returns: true on success
   */
-  bool addTNowNtpUtc()
+  bool addTNowNtpUtc() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_mikey_message_add_t_now_ntp_utc(cast(GstMIKEYMessage*)this._cPtr);
@@ -336,7 +336,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   }
 
   /** */
-  string base64Encode()
+  string base64Encode() nothrow
   {
     char* _cretval;
     _cretval = gst_mikey_message_base64_encode(cast(GstMIKEYMessage*)this._cPtr);
@@ -352,7 +352,7 @@ class MIKEYMessage : gobject.boxed.Boxed
         nth = payload to find
       Returns: the nth #GstMIKEYPayload of type.
   */
-  gstsdp.mikeypayload.MIKEYPayload findPayload(gstsdp.types.MIKEYPayloadType type, uint nth)
+  gstsdp.mikeypayload.MIKEYPayload findPayload(gstsdp.types.MIKEYPayloadType type, uint nth) nothrow
   {
     const(GstMIKEYPayload)* _cretval;
     _cretval = gst_mikey_message_find_payload(cast(const(GstMIKEYMessage)*)this._cPtr, type, nth);
@@ -367,7 +367,7 @@ class MIKEYMessage : gobject.boxed.Boxed
         idx = an index
       Returns: a #GstMIKEYMapSRTP
   */
-  gstsdp.types.MIKEYMapSRTP getCsSrtp(uint idx)
+  gstsdp.types.MIKEYMapSRTP getCsSrtp(uint idx) nothrow
   {
     const(GstMIKEYMapSRTP)* _cretval;
     _cretval = gst_mikey_message_get_cs_srtp(cast(const(GstMIKEYMessage)*)this._cPtr, idx);
@@ -381,7 +381,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       Get the number of crypto sessions in msg.
       Returns: the number of crypto sessions
   */
-  uint getNCs()
+  uint getNCs() nothrow
   {
     uint _retval;
     _retval = gst_mikey_message_get_n_cs(cast(const(GstMIKEYMessage)*)this._cPtr);
@@ -392,7 +392,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       Get the number of payloads in msg.
       Returns: the number of payloads in msg
   */
-  uint getNPayloads()
+  uint getNPayloads() nothrow
   {
     uint _retval;
     _retval = gst_mikey_message_get_n_payloads(cast(const(GstMIKEYMessage)*)this._cPtr);
@@ -407,7 +407,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       Returns: the #GstMIKEYPayload at idx. The payload
         remains valid for as long as it is part of msg.
   */
-  gstsdp.mikeypayload.MIKEYPayload getPayload(uint idx)
+  gstsdp.mikeypayload.MIKEYPayload getPayload(uint idx) nothrow
   {
     const(GstMIKEYPayload)* _cretval;
     _cretval = gst_mikey_message_get_payload(cast(const(GstMIKEYMessage)*)this._cPtr, idx);
@@ -425,7 +425,7 @@ class MIKEYMessage : gobject.boxed.Boxed
         map = the map info
       Returns: true on success
   */
-  bool insertCsSrtp(int idx, gstsdp.types.MIKEYMapSRTP map)
+  bool insertCsSrtp(int idx, gstsdp.types.MIKEYMapSRTP map) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_mikey_message_insert_cs_srtp(cast(GstMIKEYMessage*)this._cPtr, idx, &map);
@@ -441,7 +441,7 @@ class MIKEYMessage : gobject.boxed.Boxed
         payload = a #GstMIKEYPayload
       Returns: true on success
   */
-  bool insertPayload(uint idx, gstsdp.mikeypayload.MIKEYPayload payload)
+  bool insertPayload(uint idx, gstsdp.mikeypayload.MIKEYPayload payload) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_mikey_message_insert_payload(cast(GstMIKEYMessage*)this._cPtr, idx, payload ? cast(GstMIKEYPayload*)payload._cPtr(Yes.Dup) : null);
@@ -455,7 +455,7 @@ class MIKEYMessage : gobject.boxed.Boxed
         idx = the index to remove
       Returns: true on success
   */
-  bool removeCsSrtp(int idx)
+  bool removeCsSrtp(int idx) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_mikey_message_remove_cs_srtp(cast(GstMIKEYMessage*)this._cPtr, idx);
@@ -469,7 +469,7 @@ class MIKEYMessage : gobject.boxed.Boxed
         idx = an index
       Returns: true on success
   */
-  bool removePayload(uint idx)
+  bool removePayload(uint idx) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_mikey_message_remove_payload(cast(GstMIKEYMessage*)this._cPtr, idx);
@@ -484,7 +484,7 @@ class MIKEYMessage : gobject.boxed.Boxed
         map = the map info
       Returns: true on success
   */
-  bool replaceCsSrtp(int idx, gstsdp.types.MIKEYMapSRTP map)
+  bool replaceCsSrtp(int idx, gstsdp.types.MIKEYMapSRTP map) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_mikey_message_replace_cs_srtp(cast(GstMIKEYMessage*)this._cPtr, idx, &map);
@@ -499,7 +499,7 @@ class MIKEYMessage : gobject.boxed.Boxed
         payload = a #GstMIKEYPayload
       Returns: true on success
   */
-  bool replacePayload(uint idx, gstsdp.mikeypayload.MIKEYPayload payload)
+  bool replacePayload(uint idx, gstsdp.mikeypayload.MIKEYPayload payload) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_mikey_message_replace_payload(cast(GstMIKEYMessage*)this._cPtr, idx, payload ? cast(GstMIKEYPayload*)payload._cPtr(Yes.Dup) : null);
@@ -518,7 +518,7 @@ class MIKEYMessage : gobject.boxed.Boxed
         mapType = the #GstMIKEYMapType
       Returns: true on success
   */
-  bool setInfo(ubyte version_, gstsdp.types.MIKEYType type, bool V, gstsdp.types.MIKEYPRFFunc prfFunc, uint CSBId, gstsdp.types.MIKEYMapType mapType)
+  bool setInfo(ubyte version_, gstsdp.types.MIKEYType type, bool V, gstsdp.types.MIKEYPRFFunc prfFunc, uint CSBId, gstsdp.types.MIKEYMapType mapType) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_mikey_message_set_info(cast(GstMIKEYMessage*)this._cPtr, version_, type, V, prfFunc, CSBId, mapType);
@@ -545,7 +545,7 @@ class MIKEYMessage : gobject.boxed.Boxed
   }
 
   /** */
-  bool toCaps(gst.caps.Caps caps)
+  bool toCaps(gst.caps.Caps caps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_mikey_message_to_caps(cast(const(GstMIKEYMessage)*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);

@@ -14,26 +14,26 @@ class NullScalar : arrow.scalar.Scalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_null_scalar_get_type != &gidSymbolNotFound ? garrow_null_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NullScalar self()
+  override NullScalar self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class NullScalar : arrow.scalar.Scalar
       Get builder for [arrow.null_scalar.NullScalar]
       Returns: New builder object
   */
-  static NullScalarGidBuilder builder()
+  static NullScalarGidBuilder builder() nothrow
   {
     return new NullScalarGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowNullScalar* _cretval;
     _cretval = garrow_null_scalar_new();
@@ -68,7 +68,7 @@ final class NullScalarGidBuilder : NullScalarGidBuilderImpl!NullScalarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  NullScalar build()
+  NullScalar build() nothrow
   {
     return new NullScalar(cast(void*)createGObject(NullScalar._getGType), Yes.Take);
   }

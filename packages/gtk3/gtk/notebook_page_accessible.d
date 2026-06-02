@@ -18,26 +18,26 @@ class NotebookPageAccessible : atk.object.ObjectWrap, atk.component.Component
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_notebook_page_accessible_get_type != &gidSymbolNotFound ? gtk_notebook_page_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NotebookPageAccessible self()
+  override NotebookPageAccessible self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class NotebookPageAccessible : atk.object.ObjectWrap, atk.component.Component
       Get builder for [gtk.notebook_page_accessible.NotebookPageAccessible]
       Returns: New builder object
   */
-  static NotebookPageAccessibleGidBuilder builder()
+  static NotebookPageAccessibleGidBuilder builder() nothrow
   {
     return new NotebookPageAccessibleGidBuilder;
   }
@@ -54,7 +54,7 @@ class NotebookPageAccessible : atk.object.ObjectWrap, atk.component.Component
   mixin ComponentT!();
 
   /** */
-  this(gtk.notebook_accessible.NotebookAccessible notebook, gtk.widget.Widget child)
+  this(gtk.notebook_accessible.NotebookAccessible notebook, gtk.widget.Widget child) nothrow
   {
     AtkObject* _cretval;
     _cretval = gtk_notebook_page_accessible_new(notebook ? cast(GtkNotebookAccessible*)notebook._cPtr(No.Dup) : null, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -62,7 +62,7 @@ class NotebookPageAccessible : atk.object.ObjectWrap, atk.component.Component
   }
 
   /** */
-  void invalidate()
+  void invalidate() nothrow
   {
     gtk_notebook_page_accessible_invalidate(cast(GtkNotebookPageAccessible*)this._cPtr);
   }
@@ -82,7 +82,7 @@ final class NotebookPageAccessibleGidBuilder : NotebookPageAccessibleGidBuilderI
       Create object from builder.
       Returns: New object
   */
-  NotebookPageAccessible build()
+  NotebookPageAccessible build() nothrow
   {
     return new NotebookPageAccessible(cast(void*)createGObject(NotebookPageAccessible._getGType), Yes.Take);
   }

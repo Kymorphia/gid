@@ -26,7 +26,7 @@ template HyperlinkImplT()
       Returns: an AtkHyperlink object which points to this
         implementing AtkObject.
   */
-  override atk.hyperlink.Hyperlink getHyperlink()
+  override atk.hyperlink.Hyperlink getHyperlink() nothrow
   {
     AtkHyperlink* _cretval;
     _cretval = atk_hyperlink_impl_get_hyperlink(cast(AtkHyperlinkImpl*)this._cPtr);

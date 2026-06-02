@@ -16,26 +16,26 @@ class Decimal256 : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal256_get_type != &gidSymbolNotFound ? garrow_decimal256_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Decimal256 self()
+  override Decimal256 self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class Decimal256 : gobject.object.ObjectWrap
       Get builder for [arrow.decimal256.Decimal256]
       Returns: New builder object
   */
-  static Decimal256GidBuilder builder()
+  static Decimal256GidBuilder builder() nothrow
   {
     return new Decimal256GidBuilder;
   }
 
   /** */
-  static arrow.decimal256.Decimal256 newInteger(long data)
+  static arrow.decimal256.Decimal256 newInteger(long data) nothrow
   {
     GArrowDecimal256* _cretval;
     _cretval = garrow_decimal256_new_integer(data);
@@ -74,13 +74,13 @@ class Decimal256 : gobject.object.ObjectWrap
   /**
       Computes the absolute value of the decimal destructively.
   */
-  void abs()
+  void abs() nothrow
   {
     garrow_decimal256_abs(cast(GArrowDecimal256*)this._cPtr);
   }
 
   /** */
-  arrow.decimal256.Decimal256 copy()
+  arrow.decimal256.Decimal256 copy() nothrow
   {
     GArrowDecimal256* _cretval;
     _cretval = garrow_decimal256_copy(cast(GArrowDecimal256*)this._cPtr);
@@ -103,7 +103,7 @@ class Decimal256 : gobject.object.ObjectWrap
   }
 
   /** */
-  bool equal(arrow.decimal256.Decimal256 otherDecimal)
+  bool equal(arrow.decimal256.Decimal256 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal256_equal(cast(GArrowDecimal256*)this._cPtr, otherDecimal ? cast(GArrowDecimal256*)otherDecimal._cPtr(No.Dup) : null);
@@ -111,7 +111,7 @@ class Decimal256 : gobject.object.ObjectWrap
   }
 
   /** */
-  bool greaterThan(arrow.decimal256.Decimal256 otherDecimal)
+  bool greaterThan(arrow.decimal256.Decimal256 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal256_greater_than(cast(GArrowDecimal256*)this._cPtr, otherDecimal ? cast(GArrowDecimal256*)otherDecimal._cPtr(No.Dup) : null);
@@ -119,7 +119,7 @@ class Decimal256 : gobject.object.ObjectWrap
   }
 
   /** */
-  bool greaterThanOrEqual(arrow.decimal256.Decimal256 otherDecimal)
+  bool greaterThanOrEqual(arrow.decimal256.Decimal256 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal256_greater_than_or_equal(cast(GArrowDecimal256*)this._cPtr, otherDecimal ? cast(GArrowDecimal256*)otherDecimal._cPtr(No.Dup) : null);
@@ -127,7 +127,7 @@ class Decimal256 : gobject.object.ObjectWrap
   }
 
   /** */
-  bool lessThan(arrow.decimal256.Decimal256 otherDecimal)
+  bool lessThan(arrow.decimal256.Decimal256 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal256_less_than(cast(GArrowDecimal256*)this._cPtr, otherDecimal ? cast(GArrowDecimal256*)otherDecimal._cPtr(No.Dup) : null);
@@ -135,7 +135,7 @@ class Decimal256 : gobject.object.ObjectWrap
   }
 
   /** */
-  bool lessThanOrEqual(arrow.decimal256.Decimal256 otherDecimal)
+  bool lessThanOrEqual(arrow.decimal256.Decimal256 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal256_less_than_or_equal(cast(GArrowDecimal256*)this._cPtr, otherDecimal ? cast(GArrowDecimal256*)otherDecimal._cPtr(No.Dup) : null);
@@ -143,7 +143,7 @@ class Decimal256 : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.decimal256.Decimal256 multiply(arrow.decimal256.Decimal256 right)
+  arrow.decimal256.Decimal256 multiply(arrow.decimal256.Decimal256 right) nothrow
   {
     GArrowDecimal256* _cretval;
     _cretval = garrow_decimal256_multiply(cast(GArrowDecimal256*)this._cPtr, right ? cast(GArrowDecimal256*)right._cPtr(No.Dup) : null);
@@ -154,13 +154,13 @@ class Decimal256 : gobject.object.ObjectWrap
   /**
       Negate the current value of the decimal destructively.
   */
-  void negate()
+  void negate() nothrow
   {
     garrow_decimal256_negate(cast(GArrowDecimal256*)this._cPtr);
   }
 
   /** */
-  bool notEqual(arrow.decimal256.Decimal256 otherDecimal)
+  bool notEqual(arrow.decimal256.Decimal256 otherDecimal) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_decimal256_not_equal(cast(GArrowDecimal256*)this._cPtr, otherDecimal ? cast(GArrowDecimal256*)otherDecimal._cPtr(No.Dup) : null);
@@ -168,7 +168,7 @@ class Decimal256 : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.decimal256.Decimal256 plus(arrow.decimal256.Decimal256 right)
+  arrow.decimal256.Decimal256 plus(arrow.decimal256.Decimal256 right) nothrow
   {
     GArrowDecimal256* _cretval;
     _cretval = garrow_decimal256_plus(cast(GArrowDecimal256*)this._cPtr, right ? cast(GArrowDecimal256*)right._cPtr(No.Dup) : null);
@@ -189,7 +189,7 @@ class Decimal256 : gobject.object.ObjectWrap
   }
 
   /** */
-  glib.bytes.Bytes toBytes()
+  glib.bytes.Bytes toBytes() nothrow
   {
     GBytes* _cretval;
     _cretval = garrow_decimal256_to_bytes(cast(GArrowDecimal256*)this._cPtr);
@@ -198,7 +198,7 @@ class Decimal256 : gobject.object.ObjectWrap
   }
 
   /** */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = garrow_decimal256_to_string(cast(GArrowDecimal256*)this._cPtr);
@@ -207,7 +207,7 @@ class Decimal256 : gobject.object.ObjectWrap
   }
 
   /** */
-  string toStringScale(int scale)
+  string toStringScale(int scale) nothrow
   {
     char* _cretval;
     _cretval = garrow_decimal256_to_string_scale(cast(GArrowDecimal256*)this._cPtr, scale);
@@ -221,7 +221,7 @@ class Decimal256GidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T decimal256(void* propval)
+  T decimal256(void* propval) nothrow
   {
     return setProperty("decimal256", propval);
   }
@@ -234,7 +234,7 @@ final class Decimal256GidBuilder : Decimal256GidBuilderImpl!Decimal256GidBuilder
       Create object from builder.
       Returns: New object
   */
-  Decimal256 build()
+  Decimal256 build() nothrow
   {
     return new Decimal256(cast(void*)createGObject(Decimal256._getGType), No.Take);
   }

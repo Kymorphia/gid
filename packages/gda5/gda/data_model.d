@@ -25,14 +25,14 @@ interface DataModel
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_data_model_get_type != &gidSymbolNotFound ? gda_data_model_get_type() : cast(GType)0;
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_data_model_error_quark();
@@ -546,7 +546,7 @@ interface DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAccessChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectAccessChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `Changed` signal.
@@ -563,7 +563,7 @@ interface DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `Reset` signal.
@@ -581,7 +581,7 @@ interface DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectReset(T)(T callback, Flag!"After" after = No.After);
+  gulong connectReset(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `RowInserted` signal.
@@ -600,7 +600,7 @@ interface DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowInserted(T)(T callback, Flag!"After" after = No.After);
+  gulong connectRowInserted(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `RowRemoved` signal.
@@ -619,7 +619,7 @@ interface DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowRemoved(T)(T callback, Flag!"After" after = No.After);
+  gulong connectRowRemoved(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `RowUpdated` signal.
@@ -638,7 +638,7 @@ interface DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowUpdated(T)(T callback, Flag!"After" after = No.After);
+  gulong connectRowUpdated(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gda.data_model.DataModel]
@@ -648,12 +648,12 @@ interface DataModelGidBuilderImpl(T)
 
 class DataModelException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.data_model.DataModel.errorQuark, cast(int)code, msg);
   }

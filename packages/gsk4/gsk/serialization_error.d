@@ -14,7 +14,7 @@ struct SerializationError
   alias Enum = gsk.types.SerializationError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gsk_serialization_error_quark();
@@ -24,12 +24,12 @@ struct SerializationError
 
 class SerializationException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gsk.serialization_error.SerializationError.quark, cast(int)code, msg);
   }

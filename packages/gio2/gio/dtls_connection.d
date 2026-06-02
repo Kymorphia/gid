@@ -45,7 +45,7 @@ interface DtlsConnection
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dtls_connection_get_type != &gidSymbolNotFound ? g_dtls_connection_get_type() : cast(GType)0;
@@ -56,14 +56,14 @@ interface DtlsConnection
       Returns: The #GDatagramBased that the connection wraps. Note that this may be any
         implementation of #GDatagramBased, not just a #GSocket.
   */
-  @property gio.datagram_based.DatagramBased baseSocket();
+  @property gio.datagram_based.DatagramBased baseSocket() nothrow;
 
   /**
       Get `certificate` property.
       Returns: The connection's certificate; see
         [gio.dtls_connection.DtlsConnection.setCertificate].
   */
-  @property gio.tls_certificate.TlsCertificate certificate();
+  @property gio.tls_certificate.TlsCertificate certificate() nothrow;
 
   /**
       Set `certificate` property.
@@ -71,13 +71,13 @@ interface DtlsConnection
         propval = The connection's certificate; see
           [gio.dtls_connection.DtlsConnection.setCertificate].
   */
-  @property void certificate(gio.tls_certificate.TlsCertificate propval);
+  @property void certificate(gio.tls_certificate.TlsCertificate propval) nothrow;
 
   /**
       Get `ciphersuiteName` property.
       Returns: The name of the DTLS ciphersuite in use. See [gio.dtls_connection.DtlsConnection.getCiphersuiteName].
   */
-  @property string ciphersuiteName();
+  @property string ciphersuiteName() nothrow;
 
   /**
       Get `database` property.
@@ -98,7 +98,7 @@ interface DtlsConnection
         non-default database is discouraged except for specialty applications with
         unusual security requirements.
   */
-  @property gio.tls_database.TlsDatabase database();
+  @property gio.tls_database.TlsDatabase database() nothrow;
 
   /**
       Set `database` property.
@@ -120,7 +120,7 @@ interface DtlsConnection
           non-default database is discouraged except for specialty applications with
           unusual security requirements.
   */
-  @property void database(gio.tls_database.TlsDatabase propval);
+  @property void database(gio.tls_database.TlsDatabase propval) nothrow;
 
   /**
       Get `interaction` property.
@@ -128,7 +128,7 @@ interface DtlsConnection
         database need to interact with the user. This will be used to prompt the
         user for passwords where necessary.
   */
-  @property gio.tls_interaction.TlsInteraction interaction();
+  @property gio.tls_interaction.TlsInteraction interaction() nothrow;
 
   /**
       Set `interaction` property.
@@ -137,14 +137,14 @@ interface DtlsConnection
           database need to interact with the user. This will be used to prompt the
           user for passwords where necessary.
   */
-  @property void interaction(gio.tls_interaction.TlsInteraction propval);
+  @property void interaction(gio.tls_interaction.TlsInteraction propval) nothrow;
 
   /**
       Get `negotiatedProtocol` property.
       Returns: The application-layer protocol negotiated during the TLS
         handshake. See [gio.dtls_connection.DtlsConnection.getNegotiatedProtocol].
   */
-  @property string negotiatedProtocol();
+  @property string negotiatedProtocol() nothrow;
 
   /**
       Get `peerCertificate` property.
@@ -155,7 +155,7 @@ interface DtlsConnection
         (You can watch for a #GObject::notify signal on this property to
         detect when a handshake has occurred.)
   */
-  @property gio.tls_certificate.TlsCertificate peerCertificate();
+  @property gio.tls_certificate.TlsCertificate peerCertificate() nothrow;
 
   /**
       Get `peerCertificateErrors` property.
@@ -174,13 +174,13 @@ interface DtlsConnection
         expired certificates, because this could potentially be the only
         error flag set even if other problems exist with the certificate.
   */
-  @property gio.types.TlsCertificateFlags peerCertificateErrors();
+  @property gio.types.TlsCertificateFlags peerCertificateErrors() nothrow;
 
   /**
       Get `protocolVersion` property.
       Returns: The DTLS protocol version in use. See [gio.dtls_connection.DtlsConnection.getProtocolVersion].
   */
-  @property gio.types.TlsProtocolVersion protocolVersion();
+  @property gio.types.TlsProtocolVersion protocolVersion() nothrow;
 
   /**
       Get `rehandshakeMode` property.
@@ -189,7 +189,7 @@ interface DtlsConnection
   
       Deprecated: The rehandshake mode is ignored.
   */
-  @property gio.types.TlsRehandshakeMode rehandshakeMode();
+  @property gio.types.TlsRehandshakeMode rehandshakeMode() nothrow;
 
   /**
       Set `rehandshakeMode` property.
@@ -199,14 +199,14 @@ interface DtlsConnection
   
       Deprecated: The rehandshake mode is ignored.
   */
-  @property void rehandshakeMode(gio.types.TlsRehandshakeMode propval);
+  @property void rehandshakeMode(gio.types.TlsRehandshakeMode propval) nothrow;
 
   /**
       Get `requireCloseNotify` property.
       Returns: Whether or not proper TLS close notification is required.
         See [gio.dtls_connection.DtlsConnection.setRequireCloseNotify].
   */
-  @property bool requireCloseNotify();
+  @property bool requireCloseNotify() nothrow;
 
   /**
       Set `requireCloseNotify` property.
@@ -214,7 +214,7 @@ interface DtlsConnection
         propval = Whether or not proper TLS close notification is required.
           See [gio.dtls_connection.DtlsConnection.setRequireCloseNotify].
   */
-  @property void requireCloseNotify(bool propval);
+  @property void requireCloseNotify(bool propval) nothrow;
 
   /**
       Close the DTLS connection. This is equivalent to calling
@@ -689,7 +689,7 @@ interface DtlsConnection
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAcceptCertificate(T)(T callback, Flag!"After" after = No.After);
+  gulong connectAcceptCertificate(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gio.dtls_connection.DtlsConnection]
@@ -703,7 +703,7 @@ interface DtlsConnectionGidBuilderImpl(T)
           implementation of #GDatagramBased, not just a #GSocket.
       Returns: Builder instance for fluent chaining
   */
-  T baseSocket(gio.datagram_based.DatagramBased propval);
+  T baseSocket(gio.datagram_based.DatagramBased propval) nothrow;
 
   /**
       Set `certificate` property.
@@ -712,7 +712,7 @@ interface DtlsConnectionGidBuilderImpl(T)
           [gio.dtls_connection.DtlsConnection.setCertificate].
       Returns: Builder instance for fluent chaining
   */
-  T certificate(gio.tls_certificate.TlsCertificate propval);
+  T certificate(gio.tls_certificate.TlsCertificate propval) nothrow;
 
   /**
       Set `database` property.
@@ -735,7 +735,7 @@ interface DtlsConnectionGidBuilderImpl(T)
           unusual security requirements.
       Returns: Builder instance for fluent chaining
   */
-  T database(gio.tls_database.TlsDatabase propval);
+  T database(gio.tls_database.TlsDatabase propval) nothrow;
 
   /**
       Set `interaction` property.
@@ -745,7 +745,7 @@ interface DtlsConnectionGidBuilderImpl(T)
           user for passwords where necessary.
       Returns: Builder instance for fluent chaining
   */
-  T interaction(gio.tls_interaction.TlsInteraction propval);
+  T interaction(gio.tls_interaction.TlsInteraction propval) nothrow;
 
   /**
       Set `rehandshakeMode` property.
@@ -756,7 +756,7 @@ interface DtlsConnectionGidBuilderImpl(T)
   
       Deprecated: The rehandshake mode is ignored.
   */
-  T rehandshakeMode(gio.types.TlsRehandshakeMode propval);
+  T rehandshakeMode(gio.types.TlsRehandshakeMode propval) nothrow;
 
   /**
       Set `requireCloseNotify` property.
@@ -765,5 +765,5 @@ interface DtlsConnectionGidBuilderImpl(T)
           See [gio.dtls_connection.DtlsConnection.setRequireCloseNotify].
       Returns: Builder instance for fluent chaining
   */
-  T requireCloseNotify(bool propval);
+  T requireCloseNotify(bool propval) nothrow;
 }

@@ -32,26 +32,26 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_preferences_row_get_type != &gidSymbolNotFound ? adw_preferences_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PreferencesRow self()
+  override PreferencesRow self() nothrow
   {
     return this;
   }
@@ -60,7 +60,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
       Get builder for [adw.preferences_row.PreferencesRow]
       Returns: New builder object
   */
-  static PreferencesRowGidBuilder builder()
+  static PreferencesRowGidBuilder builder() nothrow
   {
     return new PreferencesRowGidBuilder;
   }
@@ -72,7 +72,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
         The title is interpreted as Pango markup unless
         [adw.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -85,7 +85,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
           The title is interpreted as Pango markup unless
           [adw.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -96,7 +96,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
         
         See also [gtk.label.Label.selectable].
   */
-  @property bool titleSelectable()
+  @property bool titleSelectable() nothrow
   {
     return getTitleSelectable();
   }
@@ -108,7 +108,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
           
           See also [gtk.label.Label.selectable].
   */
-  @property void titleSelectable(bool propval)
+  @property void titleSelectable(bool propval) nothrow
   {
     setTitleSelectable(propval);
   }
@@ -121,7 +121,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
         
         See also `func@Pango.parse_markup`.
   */
-  @property bool useMarkup()
+  @property bool useMarkup() nothrow
   {
     return getUseMarkup();
   }
@@ -135,7 +135,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
           
           See also `func@Pango.parse_markup`.
   */
-  @property void useMarkup(bool propval)
+  @property void useMarkup(bool propval) nothrow
   {
     setUseMarkup(propval);
   }
@@ -144,7 +144,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
       Get `useUnderline` property.
       Returns: Whether an embedded underline in the title indicates a mnemonic.
   */
-  @property bool useUnderline()
+  @property bool useUnderline() nothrow
   {
     return getUseUnderline();
   }
@@ -154,7 +154,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
       Params:
         propval = Whether an embedded underline in the title indicates a mnemonic.
   */
-  @property void useUnderline(bool propval)
+  @property void useUnderline(bool propval) nothrow
   {
     setUseUnderline(propval);
   }
@@ -163,7 +163,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
       Creates a new [adw.preferences_row.PreferencesRow].
       Returns: the newly created [adw.preferences_row.PreferencesRow]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_preferences_row_new();
@@ -174,7 +174,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
       Gets the title of the preference represented by self.
       Returns: the title
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_preferences_row_get_title(cast(AdwPreferencesRow*)this._cPtr);
@@ -186,7 +186,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
       Gets whether the user can copy the title from the label
       Returns: whether the user can copy the title from the label
   */
-  bool getTitleSelectable()
+  bool getTitleSelectable() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_preferences_row_get_title_selectable(cast(AdwPreferencesRow*)this._cPtr);
@@ -197,7 +197,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
       Gets whether to use Pango markup for the title label.
       Returns: whether to use markup
   */
-  bool getUseMarkup()
+  bool getUseMarkup() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_preferences_row_get_use_markup(cast(AdwPreferencesRow*)this._cPtr);
@@ -208,7 +208,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
       Gets whether an embedded underline in the title indicates a mnemonic.
       Returns: whether an embedded underline in the title indicates a mnemonic
   */
-  bool getUseUnderline()
+  bool getUseUnderline() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_preferences_row_get_use_underline(cast(AdwPreferencesRow*)this._cPtr);
@@ -224,7 +224,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
       Params:
         title = the title
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     adw_preferences_row_set_title(cast(AdwPreferencesRow*)this._cPtr, _title);
@@ -238,7 +238,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
       Params:
         titleSelectable = `TRUE` if the user can copy the title from the label
   */
-  void setTitleSelectable(bool titleSelectable)
+  void setTitleSelectable(bool titleSelectable) nothrow
   {
     adw_preferences_row_set_title_selectable(cast(AdwPreferencesRow*)this._cPtr, titleSelectable);
   }
@@ -253,7 +253,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
       Params:
         useMarkup = whether to use markup
   */
-  void setUseMarkup(bool useMarkup)
+  void setUseMarkup(bool useMarkup) nothrow
   {
     adw_preferences_row_set_use_markup(cast(AdwPreferencesRow*)this._cPtr, useMarkup);
   }
@@ -264,7 +264,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
       Params:
         useUnderline = `TRUE` if underlines in the text indicate mnemonics
   */
-  void setUseUnderline(bool useUnderline)
+  void setUseUnderline(bool useUnderline) nothrow
   {
     adw_preferences_row_set_use_underline(cast(AdwPreferencesRow*)this._cPtr, useUnderline);
   }
@@ -284,7 +284,7 @@ class PreferencesRowGidBuilderImpl(T) : gtk.list_box_row.ListBoxRowGidBuilderImp
           [adw.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -297,7 +297,7 @@ class PreferencesRowGidBuilderImpl(T) : gtk.list_box_row.ListBoxRowGidBuilderImp
           See also [gtk.label.Label.selectable].
       Returns: Builder instance for fluent chaining
   */
-  T titleSelectable(bool propval)
+  T titleSelectable(bool propval) nothrow
   {
     return setProperty("title-selectable", propval);
   }
@@ -312,7 +312,7 @@ class PreferencesRowGidBuilderImpl(T) : gtk.list_box_row.ListBoxRowGidBuilderImp
           See also `func@Pango.parse_markup`.
       Returns: Builder instance for fluent chaining
   */
-  T useMarkup(bool propval)
+  T useMarkup(bool propval) nothrow
   {
     return setProperty("use-markup", propval);
   }
@@ -323,7 +323,7 @@ class PreferencesRowGidBuilderImpl(T) : gtk.list_box_row.ListBoxRowGidBuilderImp
         propval = Whether an embedded underline in the title indicates a mnemonic.
       Returns: Builder instance for fluent chaining
   */
-  T useUnderline(bool propval)
+  T useUnderline(bool propval) nothrow
   {
     return setProperty("use-underline", propval);
   }
@@ -336,7 +336,7 @@ final class PreferencesRowGidBuilder : PreferencesRowGidBuilderImpl!PreferencesR
       Create object from builder.
       Returns: New object
   */
-  PreferencesRow build()
+  PreferencesRow build() nothrow
   {
     return new PreferencesRow(cast(void*)createGObject(PreferencesRow._getGType), No.Take);
   }

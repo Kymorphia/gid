@@ -23,26 +23,26 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_simple_action_get_type != &gidSymbolNotFound ? g_simple_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SimpleAction self()
+  override SimpleAction self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
       Get builder for [gio.simple_action.SimpleAction]
       Returns: New builder object
   */
-  static SimpleActionGidBuilder builder()
+  static SimpleActionGidBuilder builder() nothrow
   {
     return new SimpleActionGidBuilder;
   }
@@ -63,7 +63,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
         If the action is disabled then calls to [gio.action.Action.activate] and
         [gio.action.Action.changeState] have no effect.
   */
-  @property bool enabled()
+  @property bool enabled() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("enabled");
   }
@@ -76,7 +76,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
           If the action is disabled then calls to [gio.action.Action.activate] and
           [gio.action.Action.changeState] have no effect.
   */
-  @property void enabled(bool propval)
+  @property void enabled(bool propval) nothrow
   {
     setEnabled(propval);
   }
@@ -86,7 +86,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
       Returns: The name of the action. This is mostly meaningful for identifying
         the action once it has been added to a #GSimpleActionGroup.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("name");
   }
@@ -96,7 +96,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
       Returns: The type of the parameter that must be given when activating the
         action.
   */
-  @property glib.variant_type.VariantType parameterType()
+  @property glib.variant_type.VariantType parameterType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(glib.variant_type.VariantType)("parameter-type");
   }
@@ -105,7 +105,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
       Get `state` property.
       Returns: The state of the action, or null if the action is stateless.
   */
-  @property glib.variant.Variant state()
+  @property glib.variant.Variant state() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(glib.variant.Variant)("state");
   }
@@ -115,7 +115,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
       Params:
         propval = The state of the action, or null if the action is stateless.
   */
-  @property void state(glib.variant.Variant propval)
+  @property void state(glib.variant.Variant propval) nothrow
   {
     setState(propval);
   }
@@ -125,7 +125,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
       Returns: The #GVariantType of the state that the action has, or null if the
         action is stateless.
   */
-  @property glib.variant_type.VariantType stateType()
+  @property glib.variant_type.VariantType stateType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(glib.variant_type.VariantType)("state-type");
   }
@@ -144,7 +144,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
             handlers for the #GSimpleAction::activate signal, or null for no parameter
       Returns: a new #GSimpleAction
   */
-  this(string name, glib.variant_type.VariantType parameterType = null)
+  this(string name, glib.variant_type.VariantType parameterType = null) nothrow
   {
     GSimpleAction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -167,7 +167,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
         state = the initial state of the action
       Returns: a new #GSimpleAction
   */
-  static gio.simple_action.SimpleAction newStateful(string name, glib.variant_type.VariantType parameterType, glib.variant.Variant state)
+  static gio.simple_action.SimpleAction newStateful(string name, glib.variant_type.VariantType parameterType, glib.variant.Variant state) nothrow
   {
     GSimpleAction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -188,7 +188,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
       Params:
         enabled = whether the action is enabled
   */
-  void setEnabled(bool enabled)
+  void setEnabled(bool enabled) nothrow
   {
     g_simple_action_set_enabled(cast(GSimpleAction*)this._cPtr, enabled);
   }
@@ -208,7 +208,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
       Params:
         value = the new #GVariant for the state
   */
-  void setState(glib.variant.Variant value)
+  void setState(glib.variant.Variant value) nothrow
   {
     g_simple_action_set_state(cast(GSimpleAction*)this._cPtr, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
   }
@@ -222,7 +222,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
       Params:
         stateHint = a #GVariant representing the state hint
   */
-  void setStateHint(glib.variant.Variant stateHint = null)
+  void setStateHint(glib.variant.Variant stateHint = null) nothrow
   {
     g_simple_action_set_state_hint(cast(GSimpleAction*)this._cPtr, stateHint ? cast(GVariant*)stateHint._cPtr(No.Dup) : null);
   }
@@ -257,14 +257,14 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.variant.Variant)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.simple_action.SimpleAction)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -276,7 +276,14 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.simple_action.SimpleAction.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -332,14 +339,14 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChangeState(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChangeState(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.variant.Variant)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.simple_action.SimpleAction)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -351,7 +358,14 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.simple_action.SimpleAction.changeState");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -374,7 +388,7 @@ class SimpleActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
           [gio.action.Action.changeState] have no effect.
       Returns: Builder instance for fluent chaining
   */
-  T enabled(bool propval)
+  T enabled(bool propval) nothrow
   {
     return setProperty("enabled", propval);
   }
@@ -386,7 +400,7 @@ class SimpleActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
           the action once it has been added to a #GSimpleActionGroup.
       Returns: Builder instance for fluent chaining
   */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -398,7 +412,7 @@ class SimpleActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
           action.
       Returns: Builder instance for fluent chaining
   */
-  T parameterType(glib.variant_type.VariantType propval)
+  T parameterType(glib.variant_type.VariantType propval) nothrow
   {
     return setProperty("parameter-type", propval);
   }
@@ -409,7 +423,7 @@ class SimpleActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
         propval = The state of the action, or null if the action is stateless.
       Returns: Builder instance for fluent chaining
   */
-  T state(glib.variant.Variant propval)
+  T state(glib.variant.Variant propval) nothrow
   {
     return setProperty("state", propval);
   }
@@ -422,7 +436,7 @@ final class SimpleActionGidBuilder : SimpleActionGidBuilderImpl!SimpleActionGidB
       Create object from builder.
       Returns: New object
   */
-  SimpleAction build()
+  SimpleAction build() nothrow
   {
     return new SimpleAction(cast(void*)createGObject(SimpleAction._getGType), Yes.Take);
   }

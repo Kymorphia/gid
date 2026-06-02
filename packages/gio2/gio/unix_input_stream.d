@@ -28,26 +28,26 @@ class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_unix_input_stream_get_type != &gidSymbolNotFound ? g_unix_input_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UnixInputStream self()
+  override UnixInputStream self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.
       Get builder for [gio.unix_input_stream.UnixInputStream]
       Returns: New builder object
   */
-  static UnixInputStreamGidBuilder builder()
+  static UnixInputStreamGidBuilder builder() nothrow
   {
     return new UnixInputStreamGidBuilder;
   }
@@ -65,7 +65,7 @@ class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.
       Get `closeFd` property.
       Returns: Whether to close the file descriptor when the stream is closed.
   */
-  @property bool closeFd()
+  @property bool closeFd() nothrow
   {
     return getCloseFd();
   }
@@ -75,7 +75,7 @@ class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.
       Params:
         propval = Whether to close the file descriptor when the stream is closed.
   */
-  @property void closeFd(bool propval)
+  @property void closeFd(bool propval) nothrow
   {
     setCloseFd(propval);
   }
@@ -84,7 +84,7 @@ class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.
       Get `fd` property.
       Returns: The file descriptor that the stream reads from.
   */
-  @property int fd()
+  @property int fd() nothrow
   {
     return getFd();
   }
@@ -103,7 +103,7 @@ class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.
         closeFd = true to close the file descriptor when done
       Returns: a new #GUnixInputStream
   */
-  this(int fd, bool closeFd)
+  this(int fd, bool closeFd) nothrow
   {
     GInputStream* _cretval;
     _cretval = g_unix_input_stream_new(fd, closeFd);
@@ -115,7 +115,7 @@ class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.
       closed when the stream is closed.
       Returns: true if the file descriptor is closed when done
   */
-  bool getCloseFd()
+  bool getCloseFd() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_unix_input_stream_get_close_fd(cast(GUnixInputStream*)this._cPtr);
@@ -126,7 +126,7 @@ class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.
       Return the UNIX file descriptor that the stream reads from.
       Returns: The file descriptor of stream
   */
-  int getFd()
+  int getFd() nothrow
   {
     int _retval;
     _retval = g_unix_input_stream_get_fd(cast(GUnixInputStream*)this._cPtr);
@@ -140,7 +140,7 @@ class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.
       Params:
         closeFd = true to close the file descriptor when done
   */
-  void setCloseFd(bool closeFd)
+  void setCloseFd(bool closeFd) nothrow
   {
     g_unix_input_stream_set_close_fd(cast(GUnixInputStream*)this._cPtr, closeFd);
   }
@@ -159,7 +159,7 @@ class UnixInputStreamGidBuilderImpl(T) : gio.input_stream.InputStreamGidBuilderI
         propval = Whether to close the file descriptor when the stream is closed.
       Returns: Builder instance for fluent chaining
   */
-  T closeFd(bool propval)
+  T closeFd(bool propval) nothrow
   {
     return setProperty("close-fd", propval);
   }
@@ -170,7 +170,7 @@ class UnixInputStreamGidBuilderImpl(T) : gio.input_stream.InputStreamGidBuilderI
         propval = The file descriptor that the stream reads from.
       Returns: Builder instance for fluent chaining
   */
-  T fd(int propval)
+  T fd(int propval) nothrow
   {
     return setProperty("fd", propval);
   }
@@ -183,7 +183,7 @@ final class UnixInputStreamGidBuilder : UnixInputStreamGidBuilderImpl!UnixInputS
       Create object from builder.
       Returns: New object
   */
-  UnixInputStream build()
+  UnixInputStream build() nothrow
   {
     return new UnixInputStream(cast(void*)createGObject(UnixInputStream._getGType), Yes.Take);
   }

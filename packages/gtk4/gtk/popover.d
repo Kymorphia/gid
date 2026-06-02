@@ -105,26 +105,26 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_popover_get_type != &gidSymbolNotFound ? gtk_popover_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Popover self()
+  override Popover self() nothrow
   {
     return this;
   }
@@ -133,7 +133,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Get builder for [gtk.popover.Popover]
       Returns: New builder object
   */
-  static PopoverGidBuilder builder()
+  static PopoverGidBuilder builder() nothrow
   {
     return new PopoverGidBuilder;
   }
@@ -142,7 +142,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Get `autohide` property.
       Returns: Whether to dismiss the popover on outside clicks.
   */
-  @property bool autohide()
+  @property bool autohide() nothrow
   {
     return getAutohide();
   }
@@ -152,7 +152,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Params:
         propval = Whether to dismiss the popover on outside clicks.
   */
-  @property void autohide(bool propval)
+  @property void autohide(bool propval) nothrow
   {
     setAutohide(propval);
   }
@@ -163,7 +163,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
         
         This is used to implement the expected behavior of submenus.
   */
-  @property bool cascadePopdown()
+  @property bool cascadePopdown() nothrow
   {
     return getCascadePopdown();
   }
@@ -175,7 +175,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
           
           This is used to implement the expected behavior of submenus.
   */
-  @property void cascadePopdown(bool propval)
+  @property void cascadePopdown(bool propval) nothrow
   {
     setCascadePopdown(propval);
   }
@@ -184,7 +184,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Get `child` property.
       Returns: The child widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -194,7 +194,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Params:
         propval = The child widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -203,7 +203,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Get `defaultWidget` property.
       Returns: The default widget inside the popover.
   */
-  @property gtk.widget.Widget defaultWidget()
+  @property gtk.widget.Widget defaultWidget() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.widget.Widget)("default-widget");
   }
@@ -213,7 +213,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Params:
         propval = The default widget inside the popover.
   */
-  @property void defaultWidget(gtk.widget.Widget propval)
+  @property void defaultWidget(gtk.widget.Widget propval) nothrow
   {
     setDefaultWidget(propval);
   }
@@ -222,7 +222,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Get `hasArrow` property.
       Returns: Whether to draw an arrow.
   */
-  @property bool hasArrow()
+  @property bool hasArrow() nothrow
   {
     return getHasArrow();
   }
@@ -232,7 +232,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Params:
         propval = Whether to draw an arrow.
   */
-  @property void hasArrow(bool propval)
+  @property void hasArrow(bool propval) nothrow
   {
     setHasArrow(propval);
   }
@@ -241,7 +241,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Get `mnemonicsVisible` property.
       Returns: Whether mnemonics are currently visible in this popover.
   */
-  @property bool mnemonicsVisible()
+  @property bool mnemonicsVisible() nothrow
   {
     return getMnemonicsVisible();
   }
@@ -251,7 +251,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Params:
         propval = Whether mnemonics are currently visible in this popover.
   */
-  @property void mnemonicsVisible(bool propval)
+  @property void mnemonicsVisible(bool propval) nothrow
   {
     setMnemonicsVisible(propval);
   }
@@ -260,7 +260,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Get `pointingTo` property.
       Returns: Rectangle in the parent widget that the popover points to.
   */
-  @property gdk.rectangle.Rectangle pointingTo()
+  @property gdk.rectangle.Rectangle pointingTo() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.rectangle.Rectangle)("pointing-to");
   }
@@ -270,7 +270,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Params:
         propval = Rectangle in the parent widget that the popover points to.
   */
-  @property void pointingTo(gdk.rectangle.Rectangle propval)
+  @property void pointingTo(gdk.rectangle.Rectangle propval) nothrow
   {
     setPointingTo(propval);
   }
@@ -279,7 +279,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Get `position` property.
       Returns: How to place the popover, relative to its parent.
   */
-  @property gtk.types.PositionType position()
+  @property gtk.types.PositionType position() nothrow
   {
     return getPosition();
   }
@@ -289,7 +289,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Params:
         propval = How to place the popover, relative to its parent.
   */
-  @property void position(gtk.types.PositionType propval)
+  @property void position(gtk.types.PositionType propval) nothrow
   {
     setPosition(propval);
   }
@@ -301,7 +301,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Creates a new [gtk.popover.Popover].
       Returns: the new [gtk.popover.Popover]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_new();
@@ -315,7 +315,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       implications of this.
       Returns: true if popover is modal
   */
-  bool getAutohide()
+  bool getAutohide() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_popover_get_autohide(cast(GtkPopover*)this._cPtr);
@@ -326,7 +326,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Returns whether the popover will close after a modal child is closed.
       Returns: true if popover will close after a modal child.
   */
-  bool getCascadePopdown()
+  bool getCascadePopdown() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_popover_get_cascade_popdown(cast(GtkPopover*)this._cPtr);
@@ -337,7 +337,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Gets the child widget of popover.
       Returns: the child widget of popover
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_get_child(cast(GtkPopover*)this._cPtr);
@@ -350,7 +350,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       pointing at the widget that it is relative to.
       Returns: whether the popover has an arrow
   */
-  bool getHasArrow()
+  bool getHasArrow() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_popover_get_has_arrow(cast(GtkPopover*)this._cPtr);
@@ -362,7 +362,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Returns: true if mnemonics are supposed to be visible
           in this popover
   */
-  bool getMnemonicsVisible()
+  bool getMnemonicsVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_popover_get_mnemonics_visible(cast(GtkPopover*)this._cPtr);
@@ -376,7 +376,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
         xOffset = a location for the x_offset
         yOffset = a location for the y_offset
   */
-  void getOffset(out int xOffset, out int yOffset)
+  void getOffset(out int xOffset, out int yOffset) nothrow
   {
     gtk_popover_get_offset(cast(GtkPopover*)this._cPtr, cast(int*)&xOffset, cast(int*)&yOffset);
   }
@@ -393,7 +393,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
         rect = location to store the rectangle
       Returns: true if a rectangle to point to was set.
   */
-  bool getPointingTo(out gdk.rectangle.Rectangle rect)
+  bool getPointingTo(out gdk.rectangle.Rectangle rect) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_popover_get_pointing_to(cast(GtkPopover*)this._cPtr, cast(GdkRectangle*)&rect);
@@ -404,7 +404,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Returns the preferred position of popover.
       Returns: The preferred position.
   */
-  gtk.types.PositionType getPosition()
+  gtk.types.PositionType getPosition() nothrow
   {
     GtkPositionType _cretval;
     _cretval = gtk_popover_get_position(cast(GtkPopover*)this._cPtr);
@@ -418,7 +418,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       This may have the side-effect of closing a parent popover
       as well. See [gtk.popover.Popover.cascadePopdown].
   */
-  void popdown()
+  void popdown() nothrow
   {
     gtk_popover_popdown(cast(GtkPopover*)this._cPtr);
   }
@@ -426,7 +426,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   /**
       Pops popover up.
   */
-  void popup()
+  void popup() nothrow
   {
     gtk_popover_popup(cast(GtkPopover*)this._cPtr);
   }
@@ -440,7 +440,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       
       To make a popover appear on screen, use [gtk.popover.Popover.popup].
   */
-  void present()
+  void present() nothrow
   {
     gtk_popover_present(cast(GtkPopover*)this._cPtr);
   }
@@ -459,7 +459,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Params:
         autohide = true to dismiss the popover on outside clicks
   */
-  void setAutohide(bool autohide)
+  void setAutohide(bool autohide) nothrow
   {
     gtk_popover_set_autohide(cast(GtkPopover*)this._cPtr, autohide);
   }
@@ -473,7 +473,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Params:
         cascadePopdown = true if the popover should follow a child closing
   */
-  void setCascadePopdown(bool cascadePopdown)
+  void setCascadePopdown(bool cascadePopdown) nothrow
   {
     gtk_popover_set_cascade_popdown(cast(GtkPopover*)this._cPtr, cascadePopdown);
   }
@@ -484,7 +484,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     gtk_popover_set_child(cast(GtkPopover*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -500,7 +500,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
         widget = a child widget of popover to set as
             the default, or null to unset the default widget for the popover
   */
-  void setDefaultWidget(gtk.widget.Widget widget = null)
+  void setDefaultWidget(gtk.widget.Widget widget = null) nothrow
   {
     gtk_popover_set_default_widget(cast(GtkPopover*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -512,7 +512,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Params:
         hasArrow = true to draw an arrow
   */
-  void setHasArrow(bool hasArrow)
+  void setHasArrow(bool hasArrow) nothrow
   {
     gtk_popover_set_has_arrow(cast(GtkPopover*)this._cPtr, hasArrow);
   }
@@ -523,7 +523,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Params:
         mnemonicsVisible = the new value
   */
-  void setMnemonicsVisible(bool mnemonicsVisible)
+  void setMnemonicsVisible(bool mnemonicsVisible) nothrow
   {
     gtk_popover_set_mnemonics_visible(cast(GtkPopover*)this._cPtr, mnemonicsVisible);
   }
@@ -539,7 +539,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
         xOffset = the x offset to adjust the position by
         yOffset = the y offset to adjust the position by
   */
-  void setOffset(int xOffset, int yOffset)
+  void setOffset(int xOffset, int yOffset) nothrow
   {
     gtk_popover_set_offset(cast(GtkPopover*)this._cPtr, xOffset, yOffset);
   }
@@ -552,7 +552,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Params:
         rect = rectangle to point to
   */
-  void setPointingTo(gdk.rectangle.Rectangle rect)
+  void setPointingTo(gdk.rectangle.Rectangle rect) nothrow
   {
     gtk_popover_set_pointing_to(cast(GtkPopover*)this._cPtr, cast(const(GdkRectangle)*)&rect);
   }
@@ -570,7 +570,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Params:
         position = preferred popover position
   */
-  void setPosition(gtk.types.PositionType position)
+  void setPosition(gtk.types.PositionType position) nothrow
   {
     gtk_popover_set_position(cast(GtkPopover*)this._cPtr, position);
   }
@@ -592,13 +592,13 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivateDefault(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivateDefault(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.popover.Popover)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -607,7 +607,14 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.popover.Popover.activateDefault");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -629,13 +636,13 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClosed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClosed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.popover.Popover)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -644,7 +651,14 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.popover.Popover.closed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -665,7 +679,7 @@ class PopoverGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.N
         propval = Whether to dismiss the popover on outside clicks.
       Returns: Builder instance for fluent chaining
   */
-  T autohide(bool propval)
+  T autohide(bool propval) nothrow
   {
     return setProperty("autohide", propval);
   }
@@ -678,7 +692,7 @@ class PopoverGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.N
           This is used to implement the expected behavior of submenus.
       Returns: Builder instance for fluent chaining
   */
-  T cascadePopdown(bool propval)
+  T cascadePopdown(bool propval) nothrow
   {
     return setProperty("cascade-popdown", propval);
   }
@@ -689,7 +703,7 @@ class PopoverGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.N
         propval = The child widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -700,7 +714,7 @@ class PopoverGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.N
         propval = The default widget inside the popover.
       Returns: Builder instance for fluent chaining
   */
-  T defaultWidget(gtk.widget.Widget propval)
+  T defaultWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("default-widget", propval);
   }
@@ -711,7 +725,7 @@ class PopoverGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.N
         propval = Whether to draw an arrow.
       Returns: Builder instance for fluent chaining
   */
-  T hasArrow(bool propval)
+  T hasArrow(bool propval) nothrow
   {
     return setProperty("has-arrow", propval);
   }
@@ -722,7 +736,7 @@ class PopoverGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.N
         propval = Whether mnemonics are currently visible in this popover.
       Returns: Builder instance for fluent chaining
   */
-  T mnemonicsVisible(bool propval)
+  T mnemonicsVisible(bool propval) nothrow
   {
     return setProperty("mnemonics-visible", propval);
   }
@@ -733,7 +747,7 @@ class PopoverGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.N
         propval = Rectangle in the parent widget that the popover points to.
       Returns: Builder instance for fluent chaining
   */
-  T pointingTo(gdk.rectangle.Rectangle propval)
+  T pointingTo(gdk.rectangle.Rectangle propval) nothrow
   {
     return setProperty("pointing-to", propval);
   }
@@ -744,7 +758,7 @@ class PopoverGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.N
         propval = How to place the popover, relative to its parent.
       Returns: Builder instance for fluent chaining
   */
-  T position(gtk.types.PositionType propval)
+  T position(gtk.types.PositionType propval) nothrow
   {
     return setProperty("position", propval);
   }
@@ -757,7 +771,7 @@ final class PopoverGidBuilder : PopoverGidBuilderImpl!PopoverGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Popover build()
+  Popover build() nothrow
   {
     return new Popover(cast(void*)createGObject(Popover._getGType), No.Take);
   }

@@ -17,26 +17,26 @@ class MutableBuffer : arrow.buffer.Buffer
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_mutable_buffer_get_type != &gidSymbolNotFound ? garrow_mutable_buffer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MutableBuffer self()
+  override MutableBuffer self() nothrow
   {
     return this;
   }
@@ -45,13 +45,13 @@ class MutableBuffer : arrow.buffer.Buffer
       Get builder for [arrow.mutable_buffer.MutableBuffer]
       Returns: New builder object
   */
-  static MutableBufferGidBuilder builder()
+  static MutableBufferGidBuilder builder() nothrow
   {
     return new MutableBufferGidBuilder;
   }
 
   /** */
-  this(ubyte[] data)
+  this(ubyte[] data) nothrow
   {
     GArrowMutableBuffer* _cretval;
     long _size;
@@ -64,7 +64,7 @@ class MutableBuffer : arrow.buffer.Buffer
   }
 
   /** */
-  static arrow.mutable_buffer.MutableBuffer newBytes(glib.bytes.Bytes data)
+  static arrow.mutable_buffer.MutableBuffer newBytes(glib.bytes.Bytes data) nothrow
   {
     GArrowMutableBuffer* _cretval;
     _cretval = garrow_mutable_buffer_new_bytes(data ? cast(GBytes*)data._cPtr(No.Dup) : null);
@@ -91,7 +91,7 @@ class MutableBuffer : arrow.buffer.Buffer
   }
 
   /** */
-  override arrow.mutable_buffer.MutableBuffer slice(long offset, long size)
+  override arrow.mutable_buffer.MutableBuffer slice(long offset, long size) nothrow
   {
     GArrowMutableBuffer* _cretval;
     _cretval = garrow_mutable_buffer_slice(cast(GArrowMutableBuffer*)this._cPtr, offset, size);
@@ -112,7 +112,7 @@ final class MutableBufferGidBuilder : MutableBufferGidBuilderImpl!MutableBufferG
       Create object from builder.
       Returns: New object
   */
-  MutableBuffer build()
+  MutableBuffer build() nothrow
   {
     return new MutableBuffer(cast(void*)createGObject(MutableBuffer._getGType), Yes.Take);
   }

@@ -16,7 +16,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgstcheck-1.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // Harness
   void function(GstHarness* h, GstElement* element, GstStaticPadTemplate* hsrc, const(char)* elementSinkpadName, GstStaticPadTemplate* hsink, const(char)* elementSrcpadName) c_gst_harness_add_element_full; ///

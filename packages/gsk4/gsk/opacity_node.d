@@ -15,11 +15,8 @@ class OpacityNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.opacity_node.OpacityNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -32,7 +29,7 @@ class OpacityNode : gsk.render_node.RenderNode
         opacity = The opacity to apply
       Returns: A new [gsk.render_node.RenderNode]
   */
-  this(gsk.render_node.RenderNode child, float opacity)
+  this(gsk.render_node.RenderNode child, float opacity) nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_opacity_node_new(child ? cast(GskRenderNode*)child._cPtr(No.Dup) : null, opacity);
@@ -43,7 +40,7 @@ class OpacityNode : gsk.render_node.RenderNode
       Gets the child node that is getting opacityed by the given node.
       Returns: The child that is getting opacityed
   */
-  gsk.render_node.RenderNode getChild()
+  gsk.render_node.RenderNode getChild() nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_opacity_node_get_child(cast(const(GskRenderNode)*)this._cPtr);
@@ -55,7 +52,7 @@ class OpacityNode : gsk.render_node.RenderNode
       Gets the transparency factor for an opacity node.
       Returns: the opacity factor
   */
-  float getOpacity()
+  float getOpacity() nothrow
   {
     float _retval;
     _retval = gsk_opacity_node_get_opacity(cast(const(GskRenderNode)*)this._cPtr);

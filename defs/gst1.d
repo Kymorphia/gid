@@ -88,7 +88,7 @@
  * Params:
  *   argv = Array of program arguments or null to not process them.
  */
-void init_(ref string[] argv)
+void init_(ref string[] argv) nothrow
 {
   int _argc = cast(int)argv.length;
   char** _argv = cast(char**)gMalloc(_argc * (char*).sizeof);

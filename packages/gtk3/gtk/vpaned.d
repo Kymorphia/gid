@@ -27,26 +27,26 @@ class VPaned : gtk.paned.Paned
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_vpaned_get_type != &gidSymbolNotFound ? gtk_vpaned_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VPaned self()
+  override VPaned self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class VPaned : gtk.paned.Paned
       Get builder for [gtk.vpaned.VPaned]
       Returns: New builder object
   */
-  static VPanedGidBuilder builder()
+  static VPanedGidBuilder builder() nothrow
   {
     return new VPanedGidBuilder;
   }
@@ -66,7 +66,7 @@ class VPaned : gtk.paned.Paned
   
       Deprecated: Use [gtk.paned.Paned.new_] with [gtk.types.Orientation.Vertical] instead
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_vpaned_new();
@@ -87,7 +87,7 @@ final class VPanedGidBuilder : VPanedGidBuilderImpl!VPanedGidBuilder
       Create object from builder.
       Returns: New object
   */
-  VPaned build()
+  VPaned build() nothrow
   {
     return new VPaned(cast(void*)createGObject(VPaned._getGType), No.Take);
   }

@@ -14,7 +14,7 @@ struct FileLoaderError
   alias Enum = gtksource.types.FileLoaderError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gtk_source_file_loader_error_quark();
@@ -24,12 +24,12 @@ struct FileLoaderError
 
 class FileLoadeException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gtksource.file_loader_error.FileLoaderError.quark, cast(int)code, msg);
   }

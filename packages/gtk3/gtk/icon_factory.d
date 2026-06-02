@@ -88,26 +88,26 @@ class IconFactory : gobject.object.ObjectWrap, gtk.buildable.Buildable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_icon_factory_get_type != &gidSymbolNotFound ? gtk_icon_factory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override IconFactory self()
+  override IconFactory self() nothrow
   {
     return this;
   }
@@ -116,7 +116,7 @@ class IconFactory : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Get builder for [gtk.icon_factory.IconFactory]
       Returns: New builder object
   */
-  static IconFactoryGidBuilder builder()
+  static IconFactoryGidBuilder builder() nothrow
   {
     return new IconFactoryGidBuilder;
   }
@@ -141,7 +141,7 @@ class IconFactory : gobject.object.ObjectWrap, gtk.buildable.Buildable
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  this()
+  this() nothrow
   {
     GtkIconFactory* _cretval;
     _cretval = gtk_icon_factory_new();
@@ -161,7 +161,7 @@ class IconFactory : gobject.object.ObjectWrap, gtk.buildable.Buildable
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  static gtk.icon_set.IconSet lookupDefault(string stockId)
+  static gtk.icon_set.IconSet lookupDefault(string stockId) nothrow
   {
     GtkIconSet* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
@@ -188,7 +188,7 @@ class IconFactory : gobject.object.ObjectWrap, gtk.buildable.Buildable
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  void add(string stockId, gtk.icon_set.IconSet iconSet)
+  void add(string stockId, gtk.icon_set.IconSet iconSet) nothrow
   {
     const(char)* _stockId = stockId.toCString(No.Alloc);
     gtk_icon_factory_add(cast(GtkIconFactory*)this._cPtr, _stockId, iconSet ? cast(GtkIconSet*)iconSet._cPtr(No.Dup) : null);
@@ -204,7 +204,7 @@ class IconFactory : gobject.object.ObjectWrap, gtk.buildable.Buildable
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  void addDefault()
+  void addDefault() nothrow
   {
     gtk_icon_factory_add_default(cast(GtkIconFactory*)this._cPtr);
   }
@@ -222,7 +222,7 @@ class IconFactory : gobject.object.ObjectWrap, gtk.buildable.Buildable
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  gtk.icon_set.IconSet lookup(string stockId)
+  gtk.icon_set.IconSet lookup(string stockId) nothrow
   {
     GtkIconSet* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
@@ -238,7 +238,7 @@ class IconFactory : gobject.object.ObjectWrap, gtk.buildable.Buildable
   
       Deprecated: Use #GtkIconTheme instead.
   */
-  void removeDefault()
+  void removeDefault() nothrow
   {
     gtk_icon_factory_remove_default(cast(GtkIconFactory*)this._cPtr);
   }
@@ -258,7 +258,7 @@ final class IconFactoryGidBuilder : IconFactoryGidBuilderImpl!IconFactoryGidBuil
       Create object from builder.
       Returns: New object
   */
-  IconFactory build()
+  IconFactory build() nothrow
   {
     return new IconFactory(cast(void*)createGObject(IconFactory._getGType), Yes.Take);
   }

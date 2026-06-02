@@ -101,30 +101,29 @@ struct DsdInfo
   void*[4] GstReserved;
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_dsd_info_get_type != &gidSymbolNotFound ? gst_dsd_info_get_type() : cast(GType)0;
   }
 
   /** */
-  @property GType _gType()
+  @property GType _gType() nothrow
   {
     return _getGType();
   }
 
-  void* boxCopy()
+  void* boxCopy() nothrow
   {
     import gobject.c.functions : g_boxed_copy;
-    return g_boxed_copy(_gType,
-        cast(void*)&this);
+    return g_boxed_copy(_gType, cast(void*)&this);
   }
 
   /**
       Copy a GstDsdInfo structure.
       Returns: a new #GstDsdInfo. free with gst_dsd_info_free.
   */
-  gstaudio.dsd_info.DsdInfo copy()
+  gstaudio.dsd_info.DsdInfo copy() nothrow
   {
     GstDsdInfo* _cretval;
     _cretval = gst_dsd_info_copy(cast(const(GstDsdInfo)*)&this);
@@ -141,7 +140,7 @@ struct DsdInfo
         other = a #GstDsdInfo
       Returns: true if info and other are equal, else false.
   */
-  bool isEqual(gstaudio.dsd_info.DsdInfo other)
+  bool isEqual(gstaudio.dsd_info.DsdInfo other) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_dsd_info_is_equal(cast(const(GstDsdInfo)*)&this, cast(const(GstDsdInfo)*)&other);
@@ -159,7 +158,7 @@ struct DsdInfo
         channels = the number of channels
         positions = the channel positions
   */
-  void setFormat(gstaudio.types.DsdFormat format, int rate, int channels, gstaudio.types.AudioChannelPosition[] positions = null)
+  void setFormat(gstaudio.types.DsdFormat format, int rate, int channels, gstaudio.types.AudioChannelPosition[] positions = null) nothrow
   {
     assert(!positions || positions.length == 64);
     auto _positions = positions.ptr ? cast(const(GstAudioChannelPosition)*)positions.ptr : [GstAudioChannelPosition.init].ptr;
@@ -171,7 +170,7 @@ struct DsdInfo
       Returns: the new #GstCaps containing the
                  info of info.
   */
-  gst.caps.Caps toCaps()
+  gst.caps.Caps toCaps() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_dsd_info_to_caps(cast(const(GstDsdInfo)*)&this);
@@ -187,7 +186,7 @@ struct DsdInfo
         caps = a #GstCaps
       Returns: TRUE if caps could be parsed
   */
-  static bool fromCaps(out gstaudio.dsd_info.DsdInfo info, gst.caps.Caps caps)
+  static bool fromCaps(out gstaudio.dsd_info.DsdInfo info, gst.caps.Caps caps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_dsd_info_from_caps(cast(GstDsdInfo*)&info, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
@@ -200,7 +199,7 @@ struct DsdInfo
       Params:
         info = a #GstDsdInfo
   */
-  static void init_(out gstaudio.dsd_info.DsdInfo info)
+  static void init_(out gstaudio.dsd_info.DsdInfo info) nothrow
   {
     gst_dsd_info_init(cast(GstDsdInfo*)&info);
   }

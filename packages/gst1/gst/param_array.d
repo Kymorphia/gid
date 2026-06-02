@@ -16,11 +16,8 @@ class ParamArray : gobject.param_spec.ParamSpec
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gst.param_array.ParamArray");
-
     super(cast(GParamSpec*)ptr, take);
   }
 }

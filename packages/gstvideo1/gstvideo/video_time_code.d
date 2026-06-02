@@ -25,32 +25,32 @@ class VideoTimeCode : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_time_code_get_type != &gidSymbolNotFound ? gst_video_time_code_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VideoTimeCode self()
+  override VideoTimeCode self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class VideoTimeCode : gobject.boxed.Boxed
       Get `config` field.
       Returns: the corresponding #GstVideoTimeCodeConfig
   */
-  @property gstvideo.video_time_code_config.VideoTimeCodeConfig config()
+  @property gstvideo.video_time_code_config.VideoTimeCodeConfig config() nothrow
   {
     return new gstvideo.video_time_code_config.VideoTimeCodeConfig(cast(GstVideoTimeCodeConfig*)&(cast(GstVideoTimeCode*)this._cPtr).config, No.Take);
   }
@@ -68,7 +68,7 @@ class VideoTimeCode : gobject.boxed.Boxed
       Get `hours` field.
       Returns: the hours field of #GstVideoTimeCode
   */
-  @property uint hours()
+  @property uint hours() nothrow
   {
     return (cast(GstVideoTimeCode*)this._cPtr).hours;
   }
@@ -78,7 +78,7 @@ class VideoTimeCode : gobject.boxed.Boxed
       Params:
         propval = the hours field of #GstVideoTimeCode
   */
-  @property void hours(uint propval)
+  @property void hours(uint propval) nothrow
   {
     (cast(GstVideoTimeCode*)this._cPtr).hours = propval;
   }
@@ -87,7 +87,7 @@ class VideoTimeCode : gobject.boxed.Boxed
       Get `minutes` field.
       Returns: the minutes field of #GstVideoTimeCode
   */
-  @property uint minutes()
+  @property uint minutes() nothrow
   {
     return (cast(GstVideoTimeCode*)this._cPtr).minutes;
   }
@@ -97,7 +97,7 @@ class VideoTimeCode : gobject.boxed.Boxed
       Params:
         propval = the minutes field of #GstVideoTimeCode
   */
-  @property void minutes(uint propval)
+  @property void minutes(uint propval) nothrow
   {
     (cast(GstVideoTimeCode*)this._cPtr).minutes = propval;
   }
@@ -106,7 +106,7 @@ class VideoTimeCode : gobject.boxed.Boxed
       Get `seconds` field.
       Returns: the seconds field of #GstVideoTimeCode
   */
-  @property uint seconds()
+  @property uint seconds() nothrow
   {
     return (cast(GstVideoTimeCode*)this._cPtr).seconds;
   }
@@ -116,7 +116,7 @@ class VideoTimeCode : gobject.boxed.Boxed
       Params:
         propval = the seconds field of #GstVideoTimeCode
   */
-  @property void seconds(uint propval)
+  @property void seconds(uint propval) nothrow
   {
     (cast(GstVideoTimeCode*)this._cPtr).seconds = propval;
   }
@@ -125,7 +125,7 @@ class VideoTimeCode : gobject.boxed.Boxed
       Get `frames` field.
       Returns: the frames field of #GstVideoTimeCode
   */
-  @property uint frames()
+  @property uint frames() nothrow
   {
     return (cast(GstVideoTimeCode*)this._cPtr).frames;
   }
@@ -135,7 +135,7 @@ class VideoTimeCode : gobject.boxed.Boxed
       Params:
         propval = the frames field of #GstVideoTimeCode
   */
-  @property void frames(uint propval)
+  @property void frames(uint propval) nothrow
   {
     (cast(GstVideoTimeCode*)this._cPtr).frames = propval;
   }
@@ -144,7 +144,7 @@ class VideoTimeCode : gobject.boxed.Boxed
       Get `fieldCount` field.
       Returns: Interlaced video field count
   */
-  @property uint fieldCount()
+  @property uint fieldCount() nothrow
   {
     return (cast(GstVideoTimeCode*)this._cPtr).fieldCount;
   }
@@ -154,7 +154,7 @@ class VideoTimeCode : gobject.boxed.Boxed
       Params:
         propval = Interlaced video field count
   */
-  @property void fieldCount(uint propval)
+  @property void fieldCount(uint propval) nothrow
   {
     (cast(GstVideoTimeCode*)this._cPtr).fieldCount = propval;
   }
@@ -177,7 +177,7 @@ class VideoTimeCode : gobject.boxed.Boxed
         The values are not checked for being in a valid range. To see if your
         timecode actually has valid content, use [gstvideo.video_time_code.VideoTimeCode.isValid].
   */
-  this(uint fpsN, uint fpsD, glib.date_time.DateTime latestDailyJam, gstvideo.types.VideoTimeCodeFlags flags, uint hours, uint minutes, uint seconds, uint frames, uint fieldCount)
+  this(uint fpsN, uint fpsD, glib.date_time.DateTime latestDailyJam, gstvideo.types.VideoTimeCodeFlags flags, uint hours, uint minutes, uint seconds, uint frames, uint fieldCount) nothrow
   {
     GstVideoTimeCode* _cretval;
     _cretval = gst_video_time_code_new(fpsN, fpsD, latestDailyJam ? cast(GDateTime*)latestDailyJam._cPtr(No.Dup) : null, flags, hours, minutes, seconds, frames, fieldCount);
@@ -185,7 +185,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   }
 
   /** */
-  static gstvideo.video_time_code.VideoTimeCode newEmpty()
+  static gstvideo.video_time_code.VideoTimeCode newEmpty() nothrow
   {
     GstVideoTimeCode* _cretval;
     _cretval = gst_video_time_code_new_empty();
@@ -209,7 +209,7 @@ class VideoTimeCode : gobject.boxed.Boxed
         fieldCount = Interlaced video field count
       Returns: the #GstVideoTimeCode representation of dt.
   */
-  static gstvideo.video_time_code.VideoTimeCode newFromDateTime(uint fpsN, uint fpsD, glib.date_time.DateTime dt, gstvideo.types.VideoTimeCodeFlags flags, uint fieldCount)
+  static gstvideo.video_time_code.VideoTimeCode newFromDateTime(uint fpsN, uint fpsD, glib.date_time.DateTime dt, gstvideo.types.VideoTimeCodeFlags flags, uint fieldCount) nothrow
   {
     GstVideoTimeCode* _cretval;
     _cretval = gst_video_time_code_new_from_date_time(fpsN, fpsD, dt ? cast(GDateTime*)dt._cPtr(No.Dup) : null, flags, fieldCount);
@@ -230,7 +230,7 @@ class VideoTimeCode : gobject.boxed.Boxed
       Returns: the #GstVideoTimeCode representation of dt, or null if
           no valid timecode could be created.
   */
-  static gstvideo.video_time_code.VideoTimeCode newFromDateTimeFull(uint fpsN, uint fpsD, glib.date_time.DateTime dt, gstvideo.types.VideoTimeCodeFlags flags, uint fieldCount)
+  static gstvideo.video_time_code.VideoTimeCode newFromDateTimeFull(uint fpsN, uint fpsD, glib.date_time.DateTime dt, gstvideo.types.VideoTimeCodeFlags flags, uint fieldCount) nothrow
   {
     GstVideoTimeCode* _cretval;
     _cretval = gst_video_time_code_new_from_date_time_full(fpsN, fpsD, dt ? cast(GDateTime*)dt._cPtr(No.Dup) : null, flags, fieldCount);
@@ -239,7 +239,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   }
 
   /** */
-  static gstvideo.video_time_code.VideoTimeCode newFromString(string tcStr)
+  static gstvideo.video_time_code.VideoTimeCode newFromString(string tcStr) nothrow
   {
     GstVideoTimeCode* _cretval;
     const(char)* _tcStr = tcStr.toCString(No.Alloc);
@@ -255,7 +255,7 @@ class VideoTimeCode : gobject.boxed.Boxed
       Params:
         frames = How many frames to add or subtract
   */
-  void addFrames(long frames)
+  void addFrames(long frames) nothrow
   {
     gst_video_time_code_add_frames(cast(GstVideoTimeCode*)this._cPtr, frames);
   }
@@ -277,7 +277,7 @@ class VideoTimeCode : gobject.boxed.Boxed
       Returns: A new #GstVideoTimeCode with tc_inter added or null
           if the interval can't be added.
   */
-  gstvideo.video_time_code.VideoTimeCode addInterval(gstvideo.video_time_code_interval.VideoTimeCodeInterval tcInter)
+  gstvideo.video_time_code.VideoTimeCode addInterval(gstvideo.video_time_code_interval.VideoTimeCodeInterval tcInter) nothrow
   {
     GstVideoTimeCode* _cretval;
     _cretval = gst_video_time_code_add_interval(cast(const(GstVideoTimeCode)*)this._cPtr, cast(const(GstVideoTimeCodeInterval)*)&tcInter);
@@ -289,7 +289,7 @@ class VideoTimeCode : gobject.boxed.Boxed
       Initializes tc with empty/zero/NULL values and frees any memory
       it might currently use.
   */
-  void clear()
+  void clear() nothrow
   {
     gst_video_time_code_clear(cast(GstVideoTimeCode*)this._cPtr);
   }
@@ -303,7 +303,7 @@ class VideoTimeCode : gobject.boxed.Boxed
         tc2 = another valid #GstVideoTimeCode
       Returns: 1 if tc1 is after tc2, -1 if tc1 is before tc2, 0 otherwise.
   */
-  int compare(gstvideo.video_time_code.VideoTimeCode tc2)
+  int compare(gstvideo.video_time_code.VideoTimeCode tc2) nothrow
   {
     int _retval;
     _retval = gst_video_time_code_compare(cast(const(GstVideoTimeCode)*)this._cPtr, tc2 ? cast(const(GstVideoTimeCode)*)tc2._cPtr(No.Dup) : null);
@@ -311,7 +311,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   }
 
   /** */
-  gstvideo.video_time_code.VideoTimeCode copy()
+  gstvideo.video_time_code.VideoTimeCode copy() nothrow
   {
     GstVideoTimeCode* _cretval;
     _cretval = gst_video_time_code_copy(cast(const(GstVideoTimeCode)*)this._cPtr);
@@ -320,7 +320,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   }
 
   /** */
-  ulong framesSinceDailyJam()
+  ulong framesSinceDailyJam() nothrow
   {
     ulong _retval;
     _retval = gst_video_time_code_frames_since_daily_jam(cast(const(GstVideoTimeCode)*)this._cPtr);
@@ -330,7 +330,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   /**
       Adds one frame to tc.
   */
-  void incrementFrame()
+  void incrementFrame() nothrow
   {
     gst_video_time_code_increment_frame(cast(GstVideoTimeCode*)this._cPtr);
   }
@@ -354,7 +354,7 @@ class VideoTimeCode : gobject.boxed.Boxed
         frames = the frames field of #GstVideoTimeCode
         fieldCount = Interlaced video field count
   */
-  void init_(uint fpsN, uint fpsD, glib.date_time.DateTime latestDailyJam, gstvideo.types.VideoTimeCodeFlags flags, uint hours, uint minutes, uint seconds, uint frames, uint fieldCount)
+  void init_(uint fpsN, uint fpsD, glib.date_time.DateTime latestDailyJam, gstvideo.types.VideoTimeCodeFlags flags, uint hours, uint minutes, uint seconds, uint frames, uint fieldCount) nothrow
   {
     gst_video_time_code_init(cast(GstVideoTimeCode*)this._cPtr, fpsN, fpsD, latestDailyJam ? cast(GDateTime*)latestDailyJam._cPtr(No.Dup) : null, flags, hours, minutes, seconds, frames, fieldCount);
   }
@@ -373,7 +373,7 @@ class VideoTimeCode : gobject.boxed.Boxed
         flags = #GstVideoTimeCodeFlags
         fieldCount = Interlaced video field count
   */
-  void initFromDateTime(uint fpsN, uint fpsD, glib.date_time.DateTime dt, gstvideo.types.VideoTimeCodeFlags flags, uint fieldCount)
+  void initFromDateTime(uint fpsN, uint fpsD, glib.date_time.DateTime dt, gstvideo.types.VideoTimeCodeFlags flags, uint fieldCount) nothrow
   {
     gst_video_time_code_init_from_date_time(cast(GstVideoTimeCode*)this._cPtr, fpsN, fpsD, dt ? cast(GDateTime*)dt._cPtr(No.Dup) : null, flags, fieldCount);
   }
@@ -390,7 +390,7 @@ class VideoTimeCode : gobject.boxed.Boxed
         fieldCount = Interlaced video field count
       Returns: true if tc could be correctly initialized to a valid timecode
   */
-  bool initFromDateTimeFull(uint fpsN, uint fpsD, glib.date_time.DateTime dt, gstvideo.types.VideoTimeCodeFlags flags, uint fieldCount)
+  bool initFromDateTimeFull(uint fpsN, uint fpsD, glib.date_time.DateTime dt, gstvideo.types.VideoTimeCodeFlags flags, uint fieldCount) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_time_code_init_from_date_time_full(cast(GstVideoTimeCode*)this._cPtr, fpsN, fpsD, dt ? cast(GDateTime*)dt._cPtr(No.Dup) : null, flags, fieldCount);
@@ -398,7 +398,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   }
 
   /** */
-  bool isValid()
+  bool isValid() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_time_code_is_valid(cast(const(GstVideoTimeCode)*)this._cPtr);
@@ -406,7 +406,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   }
 
   /** */
-  ulong nsecSinceDailyJam()
+  ulong nsecSinceDailyJam() nothrow
   {
     ulong _retval;
     _retval = gst_video_time_code_nsec_since_daily_jam(cast(const(GstVideoTimeCode)*)this._cPtr);
@@ -418,7 +418,7 @@ class VideoTimeCode : gobject.boxed.Boxed
       Returns: the #GDateTime representation of tc or null if tc
           has no daily jam.
   */
-  glib.date_time.DateTime toDateTime()
+  glib.date_time.DateTime toDateTime() nothrow
   {
     GDateTime* _cretval;
     _cretval = gst_video_time_code_to_date_time(cast(const(GstVideoTimeCode)*)this._cPtr);
@@ -427,7 +427,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   }
 
   /** */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gst_video_time_code_to_string(cast(const(GstVideoTimeCode)*)this._cPtr);

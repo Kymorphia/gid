@@ -16,7 +16,7 @@ class DClosure : Closure
   void* contextPtr; // Used to keep a reference to delegate context so it doesn't get GC'd
 
   /** */
-  this(T)(T cb, GClosureMarshal cMarshal)
+  this(T)(T cb, GClosureMarshal cMarshal) nothrow
   {
     static if (is(T == delegate))
       contextPtr = cast(void*)cb.ptr;
@@ -32,18 +32,19 @@ class DClosure : Closure
   }
 
   /** */
-  this(T, Flag!"Swap" swap = No.Swap)(T cb)
+  this(T, Flag!"Swap" swap = No.Swap)(T cb) nothrow
   {
     this(cb, &_cmarshal!(T, swap));
   }
 
   private static extern(C) void _cmarshal(T, Flag!"Swap" swap)(GClosure* closure, GValue* returnValue, uint nParams,
-    const(GValue)* paramVals, void* invocHint, void* marshalData)
+    const(GValue)* paramVals, void* invocHint, void* marshalData) nothrow
   {
     auto dClosure = cast(DGClosure!T*)closure;
 
     if (Parameters!T.length > nParams)
-      throw new Exception("DClosure has " ~ nParams.to!string ~ ", expected at least " ~ Parameters!T.length.to!string);
+      gidInvokeCallbackExceptionHandler(new Exception("DClosure has " ~ nParams.to!string ~ ", expected at least "
+        ~ Parameters!T.length.to!string));
 
     GValue[] swapParams;
 
@@ -53,10 +54,15 @@ class DClosure : Closure
       paramVals = swapParams.ptr;
     }
 
-    mixin(callbackMixin!T);
+    try
+    {
+      mixin(callbackMixin!T);
+    }
+    catch (Exception e)
+      gidInvokeCallbackExceptionHandler(e, "gobject.dclosure.DGClosure.cb");
   }
 
-  private static string callbackMixin(T)()
+  private static string callbackMixin(T)() nothrow
   {
     string cb;
 

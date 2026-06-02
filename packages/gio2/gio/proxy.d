@@ -27,7 +27,7 @@ interface Proxy
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_proxy_get_type != &gidSymbolNotFound ? g_proxy_get_type() : cast(GType)0;
@@ -42,7 +42,7 @@ interface Proxy
       Returns: return a #GProxy or NULL if protocol
                       is not supported.
   */
-  static gio.proxy.Proxy getDefaultForProtocol(string protocol)
+  static gio.proxy.Proxy getDefaultForProtocol(string protocol) nothrow
   {
     GProxy* _cretval;
     const(char)* _protocol = protocol.toCString(No.Alloc);

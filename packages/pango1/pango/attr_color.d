@@ -18,11 +18,8 @@ class AttrColor
   PangoAttrColor _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for pango.attr_color.AttrColor");
-
     _cInstance = *cast(PangoAttrColor*)ptr;
 
     if (take)
@@ -30,7 +27,7 @@ class AttrColor
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class AttrColor
       Get `attr` field.
       Returns: the common portion of the attribute
   */
-  @property pango.attribute.Attribute attr()
+  @property pango.attribute.Attribute attr() nothrow
   {
     return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrColor*)this._cPtr).attr);
   }
@@ -48,7 +45,7 @@ class AttrColor
       Get `color` field.
       Returns: the [pango.color.Color] which is the value of the attribute
   */
-  @property pango.color.Color color()
+  @property pango.color.Color color() nothrow
   {
     return cToD!(pango.color.Color)(cast(void*)&(cast(PangoAttrColor*)this._cPtr).color);
   }
@@ -58,7 +55,7 @@ class AttrColor
       Params:
         propval = the [pango.color.Color] which is the value of the attribute
   */
-  @property void color(pango.color.Color propval)
+  @property void color(pango.color.Color propval) nothrow
   {
     (cast(PangoAttrColor*)this._cPtr).color = cast(PangoColor)propval;
   }

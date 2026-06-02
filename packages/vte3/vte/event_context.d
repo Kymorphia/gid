@@ -16,24 +16,21 @@ class EventContext
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for vte.event_context.EventContext");
-
     _cInstancePtr = cast(VteEventContext*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
 
   /** */
-  bool getCoordinates(out double x, out double y)
+  bool getCoordinates(out double x, out double y) nothrow
   {
     bool _retval;
     _retval = cast(bool)vte_event_context_get_coordinates(cast(const(VteEventContext)*)this._cPtr, cast(double*)&x, cast(double*)&y);

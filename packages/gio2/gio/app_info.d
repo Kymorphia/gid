@@ -73,7 +73,7 @@ interface AppInfo
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_app_info_get_type != &gidSymbolNotFound ? g_app_info_get_type() : cast(GType)0;
@@ -119,7 +119,7 @@ interface AppInfo
       the `Hidden` key set.
       Returns: a newly allocated #GList of references to #GAppInfos.
   */
-  static gio.app_info.AppInfo[] getAll()
+  static gio.app_info.AppInfo[] getAll() nothrow
   {
     GList* _cretval;
     _cretval = g_app_info_get_all();
@@ -138,7 +138,7 @@ interface AppInfo
       Returns: #GList of #GAppInfos
             for given content_type or null on error.
   */
-  static gio.app_info.AppInfo[] getAllForType(string contentType)
+  static gio.app_info.AppInfo[] getAllForType(string contentType) nothrow
   {
     GList* _cretval;
     const(char)* _contentType = contentType.toCString(No.Alloc);
@@ -157,7 +157,7 @@ interface AppInfo
       Returns: #GAppInfo for given content_type or
             null on error.
   */
-  static gio.app_info.AppInfo getDefaultForType(string contentType, bool mustSupportUris)
+  static gio.app_info.AppInfo getDefaultForType(string contentType, bool mustSupportUris) nothrow
   {
     GAppInfo* _cretval;
     const(char)* _contentType = contentType.toCString(No.Alloc);
@@ -176,14 +176,21 @@ interface AppInfo
         cancellable = optional #GCancellable object, null to ignore
         callback = a #GAsyncReadyCallback to call when the request is done
   */
-  static void getDefaultForTypeAsync(string contentType, bool mustSupportUris, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  static void getDefaultForTypeAsync(string contentType, bool mustSupportUris, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _contentType = contentType.toCString(No.Alloc);
@@ -225,7 +232,7 @@ interface AppInfo
       Returns: #GAppInfo for given uri_scheme or
             null on error.
   */
-  static gio.app_info.AppInfo getDefaultForUriScheme(string uriScheme)
+  static gio.app_info.AppInfo getDefaultForUriScheme(string uriScheme) nothrow
   {
     GAppInfo* _cretval;
     const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
@@ -245,14 +252,21 @@ interface AppInfo
         cancellable = optional #GCancellable object, null to ignore
         callback = a #GAsyncReadyCallback to call when the request is done
   */
-  static void getDefaultForUriSchemeAsync(string uriScheme, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  static void getDefaultForUriSchemeAsync(string uriScheme, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
@@ -293,7 +307,7 @@ interface AppInfo
       Returns: #GList of #GAppInfos
             for given content_type or null on error.
   */
-  static gio.app_info.AppInfo[] getFallbackForType(string contentType)
+  static gio.app_info.AppInfo[] getFallbackForType(string contentType) nothrow
   {
     GList* _cretval;
     const(char)* _contentType = contentType.toCString(No.Alloc);
@@ -315,7 +329,7 @@ interface AppInfo
       Returns: #GList of #GAppInfos
             for given content_type or null on error.
   */
-  static gio.app_info.AppInfo[] getRecommendedForType(string contentType)
+  static gio.app_info.AppInfo[] getRecommendedForType(string contentType) nothrow
   {
     GList* _cretval;
     const(char)* _contentType = contentType.toCString(No.Alloc);
@@ -369,14 +383,21 @@ interface AppInfo
         cancellable = a #GCancellable
         callback = a #GAsyncReadyCallback to call when the request is done
   */
-  static void launchDefaultForUriAsync(string uri, gio.app_launch_context.AppLaunchContext context = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  static void launchDefaultForUriAsync(string uri, gio.app_launch_context.AppLaunchContext context = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -412,7 +433,7 @@ interface AppInfo
       Params:
         contentType = a content type
   */
-  static void resetTypeAssociations(string contentType)
+  static void resetTypeAssociations(string contentType) nothrow
   {
     const(char)* _contentType = contentType.toCString(No.Alloc);
     g_app_info_reset_type_associations(_contentType);

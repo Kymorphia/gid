@@ -38,26 +38,26 @@ class SocketConnection : gio.iostream.IOStream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_socket_connection_get_type != &gidSymbolNotFound ? g_socket_connection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SocketConnection self()
+  override SocketConnection self() nothrow
   {
     return this;
   }
@@ -66,7 +66,7 @@ class SocketConnection : gio.iostream.IOStream
       Get builder for [gio.socket_connection.SocketConnection]
       Returns: New builder object
   */
-  static SocketConnectionGidBuilder builder()
+  static SocketConnectionGidBuilder builder() nothrow
   {
     return new SocketConnectionGidBuilder;
   }
@@ -75,7 +75,7 @@ class SocketConnection : gio.iostream.IOStream
       Get `socket` property.
       Returns: The underlying [gio.socket.Socket].
   */
-  @property gio.socket.Socket socket()
+  @property gio.socket.Socket socket() nothrow
   {
     return getSocket();
   }
@@ -92,7 +92,7 @@ class SocketConnection : gio.iostream.IOStream
         protocolId = a protocol id
       Returns: a #GType
   */
-  static gobject.types.GType factoryLookupType(gio.types.SocketFamily family, gio.types.SocketType type, int protocolId)
+  static gobject.types.GType factoryLookupType(gio.types.SocketFamily family, gio.types.SocketType type, int protocolId) nothrow
   {
     gobject.types.GType _retval;
     _retval = g_socket_connection_factory_lookup_type(family, type, protocolId);
@@ -111,7 +111,7 @@ class SocketConnection : gio.iostream.IOStream
         type = a #GSocketType
         protocol = a protocol id
   */
-  static void factoryRegisterType(gobject.types.GType gType, gio.types.SocketFamily family, gio.types.SocketType type, int protocol)
+  static void factoryRegisterType(gobject.types.GType gType, gio.types.SocketFamily family, gio.types.SocketType type, int protocol) nothrow
   {
     g_socket_connection_factory_register_type(gType, family, type, protocol);
   }
@@ -152,14 +152,21 @@ class SocketConnection : gio.iostream.IOStream
         cancellable = a [gio.cancellable.Cancellable] or null
         callback = a #GAsyncReadyCallback
   */
-  void connectAsync(gio.socket_address.SocketAddress address, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void connectAsync(gio.socket_address.SocketAddress address, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -231,7 +238,7 @@ class SocketConnection : gio.iostream.IOStream
       not supported by the #GSocketConnection APIs.
       Returns: a #GSocket or null on error.
   */
-  gio.socket.Socket getSocket()
+  gio.socket.Socket getSocket() nothrow
   {
     GSocket* _cretval;
     _cretval = g_socket_connection_get_socket(cast(GSocketConnection*)this._cPtr);
@@ -244,7 +251,7 @@ class SocketConnection : gio.iostream.IOStream
       [gio.socket.Socket.isConnected] on connection's underlying #GSocket.
       Returns: whether connection is connected
   */
-  bool isConnected()
+  bool isConnected() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_socket_connection_is_connected(cast(GSocketConnection*)this._cPtr);
@@ -262,7 +269,7 @@ class SocketConnectionGidBuilderImpl(T) : gio.iostream.IOStreamGidBuilderImpl!T
         propval = The underlying [gio.socket.Socket].
       Returns: Builder instance for fluent chaining
   */
-  T socket(gio.socket.Socket propval)
+  T socket(gio.socket.Socket propval) nothrow
   {
     return setProperty("socket", propval);
   }
@@ -275,7 +282,7 @@ final class SocketConnectionGidBuilder : SocketConnectionGidBuilderImpl!SocketCo
       Create object from builder.
       Returns: New object
   */
-  SocketConnection build()
+  SocketConnection build() nothrow
   {
     return new SocketConnection(cast(void*)createGObject(SocketConnection._getGType), No.Take);
   }

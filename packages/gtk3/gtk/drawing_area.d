@@ -102,26 +102,26 @@ class DrawingArea : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_drawing_area_get_type != &gidSymbolNotFound ? gtk_drawing_area_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DrawingArea self()
+  override DrawingArea self() nothrow
   {
     return this;
   }
@@ -130,7 +130,7 @@ class DrawingArea : gtk.widget.Widget
       Get builder for [gtk.drawing_area.DrawingArea]
       Returns: New builder object
   */
-  static DrawingAreaGidBuilder builder()
+  static DrawingAreaGidBuilder builder() nothrow
   {
     return new DrawingAreaGidBuilder;
   }
@@ -139,7 +139,7 @@ class DrawingArea : gtk.widget.Widget
       Creates a new drawing area.
       Returns: a new #GtkDrawingArea
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_drawing_area_new();
@@ -160,7 +160,7 @@ final class DrawingAreaGidBuilder : DrawingAreaGidBuilderImpl!DrawingAreaGidBuil
       Create object from builder.
       Returns: New object
   */
-  DrawingArea build()
+  DrawingArea build() nothrow
   {
     return new DrawingArea(cast(void*)createGObject(DrawingArea._getGType), No.Take);
   }

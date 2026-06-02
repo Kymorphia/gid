@@ -16,26 +16,26 @@ class GLMemoryPBOAllocator : gstgl.glmemory_allocator.GLMemoryAllocator
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_memory_pbo_allocator_get_type != &gidSymbolNotFound ? gst_gl_memory_pbo_allocator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLMemoryPBOAllocator self()
+  override GLMemoryPBOAllocator self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class GLMemoryPBOAllocator : gstgl.glmemory_allocator.GLMemoryAllocator
       Get builder for [gstgl.glmemory_pboallocator.GLMemoryPBOAllocator]
       Returns: New builder object
   */
-  static GLMemoryPBOAllocatorGidBuilder builder()
+  static GLMemoryPBOAllocatorGidBuilder builder() nothrow
   {
     return new GLMemoryPBOAllocatorGidBuilder;
   }
@@ -62,7 +62,7 @@ final class GLMemoryPBOAllocatorGidBuilder : GLMemoryPBOAllocatorGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  GLMemoryPBOAllocator build()
+  GLMemoryPBOAllocator build() nothrow
   {
     return new GLMemoryPBOAllocator(cast(void*)createGObject(GLMemoryPBOAllocator._getGType), No.Take);
   }

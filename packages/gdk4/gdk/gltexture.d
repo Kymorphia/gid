@@ -24,26 +24,26 @@ class GLTexture : gdk.texture.Texture
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_gl_texture_get_type != &gidSymbolNotFound ? gdk_gl_texture_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLTexture self()
+  override GLTexture self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class GLTexture : gdk.texture.Texture
       Get builder for [gdk.gltexture.GLTexture]
       Returns: New builder object
   */
-  static GLTextureGidBuilder builder()
+  static GLTextureGidBuilder builder() nothrow
   {
     return new GLTextureGidBuilder;
   }
@@ -78,14 +78,21 @@ class GLTexture : gdk.texture.Texture
       Deprecated: [gdk.gltexture_builder.GLTextureBuilder] supersedes this function
           and provides extended functionality for creating GL textures.
   */
-  this(gdk.glcontext.GLContext context, uint id, int width, int height, glib.types.DestroyNotify destroy, void* data = null)
+  this(gdk.glcontext.GLContext context, uint id, int width, int height, glib.types.DestroyNotify destroy, void* data = null) nothrow
   {
-    extern(C) void _destroyCallback(void* data)
+    extern(C) void _destroyCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
     GdkTexture* _cretval;
@@ -100,7 +107,7 @@ class GLTexture : gdk.texture.Texture
       [gdk.texture.Texture.download] function, after this
       function has been called.
   */
-  void release()
+  void release() nothrow
   {
     gdk_gl_texture_release(cast(GdkGLTexture*)this._cPtr);
   }
@@ -119,7 +126,7 @@ final class GLTextureGidBuilder : GLTextureGidBuilderImpl!GLTextureGidBuilder
       Create object from builder.
       Returns: New object
   */
-  GLTexture build()
+  GLTexture build() nothrow
   {
     return new GLTexture(cast(void*)createGObject(GLTexture._getGType), Yes.Take);
   }

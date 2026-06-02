@@ -14,7 +14,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libadwaita-1.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // AboutDialog
   GType function() c_adw_about_dialog_get_type; ///

@@ -33,26 +33,26 @@ class ColorDialog : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_color_dialog_get_type != &gidSymbolNotFound ? gtk_color_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ColorDialog self()
+  override ColorDialog self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class ColorDialog : gobject.object.ObjectWrap
       Get builder for [gtk.color_dialog.ColorDialog]
       Returns: New builder object
   */
-  static ColorDialogGidBuilder builder()
+  static ColorDialogGidBuilder builder() nothrow
   {
     return new ColorDialogGidBuilder;
   }
@@ -70,7 +70,7 @@ class ColorDialog : gobject.object.ObjectWrap
       Get `modal` property.
       Returns: Whether the color chooser dialog is modal.
   */
-  @property bool modal()
+  @property bool modal() nothrow
   {
     return getModal();
   }
@@ -80,7 +80,7 @@ class ColorDialog : gobject.object.ObjectWrap
       Params:
         propval = Whether the color chooser dialog is modal.
   */
-  @property void modal(bool propval)
+  @property void modal(bool propval) nothrow
   {
     setModal(propval);
   }
@@ -90,7 +90,7 @@ class ColorDialog : gobject.object.ObjectWrap
       Returns: A title that may be shown on the color chooser
         dialog that is presented by [gtk.color_dialog.ColorDialog.chooseRgba].
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -101,7 +101,7 @@ class ColorDialog : gobject.object.ObjectWrap
         propval = A title that may be shown on the color chooser
           dialog that is presented by [gtk.color_dialog.ColorDialog.chooseRgba].
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -113,7 +113,7 @@ class ColorDialog : gobject.object.ObjectWrap
         When with-alpha is false, the color that is selected
         will be forced to have alpha == 1.
   */
-  @property bool withAlpha()
+  @property bool withAlpha() nothrow
   {
     return getWithAlpha();
   }
@@ -126,7 +126,7 @@ class ColorDialog : gobject.object.ObjectWrap
           When with-alpha is false, the color that is selected
           will be forced to have alpha == 1.
   */
-  @property void withAlpha(bool propval)
+  @property void withAlpha(bool propval) nothrow
   {
     setWithAlpha(propval);
   }
@@ -135,7 +135,7 @@ class ColorDialog : gobject.object.ObjectWrap
       Creates a new [gtk.color_dialog.ColorDialog] object.
       Returns: the new [gtk.color_dialog.ColorDialog]
   */
-  this()
+  this() nothrow
   {
     GtkColorDialog* _cretval;
     _cretval = gtk_color_dialog_new();
@@ -156,14 +156,21 @@ class ColorDialog : gobject.object.ObjectWrap
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
   */
-  void chooseRgba(gtk.window.Window parent, gdk.rgba.RGBA initialColor, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void chooseRgba(gtk.window.Window parent, gdk.rgba.RGBA initialColor, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -199,7 +206,7 @@ class ColorDialog : gobject.object.ObjectWrap
       while it is presented.
       Returns: `TRUE` if the color chooser dialog is modal
   */
-  bool getModal()
+  bool getModal() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_color_dialog_get_modal(cast(GtkColorDialog*)this._cPtr);
@@ -211,7 +218,7 @@ class ColorDialog : gobject.object.ObjectWrap
       color chooser dialog.
       Returns: the title
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_color_dialog_get_title(cast(GtkColorDialog*)this._cPtr);
@@ -223,7 +230,7 @@ class ColorDialog : gobject.object.ObjectWrap
       Returns whether colors may have alpha.
       Returns: `TRUE` if colors may have alpha
   */
-  bool getWithAlpha()
+  bool getWithAlpha() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_color_dialog_get_with_alpha(cast(GtkColorDialog*)this._cPtr);
@@ -238,7 +245,7 @@ class ColorDialog : gobject.object.ObjectWrap
       Params:
         modal = the new value
   */
-  void setModal(bool modal)
+  void setModal(bool modal) nothrow
   {
     gtk_color_dialog_set_modal(cast(GtkColorDialog*)this._cPtr, modal);
   }
@@ -250,7 +257,7 @@ class ColorDialog : gobject.object.ObjectWrap
       Params:
         title = the new title
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_color_dialog_set_title(cast(GtkColorDialog*)this._cPtr, _title);
@@ -262,7 +269,7 @@ class ColorDialog : gobject.object.ObjectWrap
       Params:
         withAlpha = the new value
   */
-  void setWithAlpha(bool withAlpha)
+  void setWithAlpha(bool withAlpha) nothrow
   {
     gtk_color_dialog_set_with_alpha(cast(GtkColorDialog*)this._cPtr, withAlpha);
   }
@@ -278,7 +285,7 @@ class ColorDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether the color chooser dialog is modal.
       Returns: Builder instance for fluent chaining
   */
-  T modal(bool propval)
+  T modal(bool propval) nothrow
   {
     return setProperty("modal", propval);
   }
@@ -290,7 +297,7 @@ class ColorDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           dialog that is presented by [gtk.color_dialog.ColorDialog.chooseRgba].
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -304,7 +311,7 @@ class ColorDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           will be forced to have alpha == 1.
       Returns: Builder instance for fluent chaining
   */
-  T withAlpha(bool propval)
+  T withAlpha(bool propval) nothrow
   {
     return setProperty("with-alpha", propval);
   }
@@ -317,7 +324,7 @@ final class ColorDialogGidBuilder : ColorDialogGidBuilderImpl!ColorDialogGidBuil
       Create object from builder.
       Returns: New object
   */
-  ColorDialog build()
+  ColorDialog build() nothrow
   {
     return new ColorDialog(cast(void*)createGObject(ColorDialog._getGType), Yes.Take);
   }

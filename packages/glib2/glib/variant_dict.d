@@ -105,32 +105,32 @@ class VariantDict : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_variant_dict_get_type != &gidSymbolNotFound ? g_variant_dict_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VariantDict self()
+  override VariantDict self() nothrow
   {
     return this;
   }
@@ -152,7 +152,7 @@ class VariantDict : gobject.boxed.Boxed
             dictionary
       Returns: a #GVariantDict
   */
-  this(glib.variant.Variant fromAsv = null)
+  this(glib.variant.Variant fromAsv = null) nothrow
   {
     GVariantDict* _cretval;
     _cretval = g_variant_dict_new(fromAsv ? cast(GVariant*)fromAsv._cPtr(No.Dup) : null);
@@ -175,7 +175,7 @@ class VariantDict : gobject.boxed.Boxed
       to [glib.variant_dict.VariantDict.clear] but it is not valid to call this function
       on uninitialised memory.
   */
-  void clear()
+  void clear() nothrow
   {
     g_variant_dict_clear(cast(GVariantDict*)this._cPtr);
   }
@@ -187,7 +187,7 @@ class VariantDict : gobject.boxed.Boxed
         key = the key to look up in the dictionary
       Returns: true if key is in dict
   */
-  bool contains(string key)
+  bool contains(string key) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -205,7 +205,7 @@ class VariantDict : gobject.boxed.Boxed
       the case of stack-allocated).
       Returns: a new, floating, #GVariant
   */
-  glib.variant.Variant end()
+  glib.variant.Variant end() nothrow
   {
     GVariant* _cretval;
     _cretval = g_variant_dict_end(cast(GVariantDict*)this._cPtr);
@@ -222,7 +222,7 @@ class VariantDict : gobject.boxed.Boxed
         key = the key to insert a value for
         value = the value to insert
   */
-  void insertValue(string key, glib.variant.Variant value)
+  void insertValue(string key, glib.variant.Variant value) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     g_variant_dict_insert_value(cast(GVariantDict*)this._cPtr, _key, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
@@ -246,7 +246,7 @@ class VariantDict : gobject.boxed.Boxed
         expectedType = a #GVariantType, or null
       Returns: the value of the dictionary key, or null
   */
-  glib.variant.Variant lookupValue(string key, glib.variant_type.VariantType expectedType = null)
+  glib.variant.Variant lookupValue(string key, glib.variant_type.VariantType expectedType = null) nothrow
   {
     GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -262,7 +262,7 @@ class VariantDict : gobject.boxed.Boxed
         key = the key to remove
       Returns: true if the key was found and removed
   */
-  bool remove(string key)
+  bool remove(string key) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);

@@ -25,11 +25,8 @@ class EventProximity
   GdkEventProximity _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.event_proximity.EventProximity");
-
     _cInstance = *cast(GdkEventProximity*)ptr;
 
     if (take)
@@ -37,7 +34,7 @@ class EventProximity
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -46,7 +43,7 @@ class EventProximity
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.ProximityIn] or [gdk.types.EventType.ProximityOut]).
   */
-  @property gdk.types.EventType type()
+  @property gdk.types.EventType type() nothrow
   {
     return cast(gdk.types.EventType)(cast(GdkEventProximity*)this._cPtr).type;
   }
@@ -56,7 +53,7 @@ class EventProximity
       Params:
         propval = the type of the event ([gdk.types.EventType.ProximityIn] or [gdk.types.EventType.ProximityOut]).
   */
-  @property void type(gdk.types.EventType propval)
+  @property void type(gdk.types.EventType propval) nothrow
   {
     (cast(GdkEventProximity*)this._cPtr).type = cast(GdkEventType)propval;
   }
@@ -65,7 +62,7 @@ class EventProximity
       Get `window` field.
       Returns: the window which received the event.
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventProximity*)this._cPtr).window);
   }
@@ -75,7 +72,7 @@ class EventProximity
       Params:
         propval = the window which received the event.
   */
-  @property void window(gdk.window.Window propval)
+  @property void window(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventProximity*)this._cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventProximity*)this._cPtr).window);
@@ -85,7 +82,7 @@ class EventProximity
       Get `sendEvent` field.
       Returns: true if the event was sent explicitly.
   */
-  @property byte sendEvent()
+  @property byte sendEvent() nothrow
   {
     return (cast(GdkEventProximity*)this._cPtr).sendEvent;
   }
@@ -95,7 +92,7 @@ class EventProximity
       Params:
         propval = true if the event was sent explicitly.
   */
-  @property void sendEvent(byte propval)
+  @property void sendEvent(byte propval) nothrow
   {
     (cast(GdkEventProximity*)this._cPtr).sendEvent = propval;
   }
@@ -104,7 +101,7 @@ class EventProximity
       Get `time` field.
       Returns: the time of the event in milliseconds.
   */
-  @property uint time()
+  @property uint time() nothrow
   {
     return (cast(GdkEventProximity*)this._cPtr).time;
   }
@@ -114,7 +111,7 @@ class EventProximity
       Params:
         propval = the time of the event in milliseconds.
   */
-  @property void time(uint propval)
+  @property void time(uint propval) nothrow
   {
     (cast(GdkEventProximity*)this._cPtr).time = propval;
   }
@@ -124,7 +121,7 @@ class EventProximity
       Returns: the master device that the event originated from. Use
         [gdk.event.Event.getSourceDevice] to get the slave device.
   */
-  @property gdk.device.Device device()
+  @property gdk.device.Device device() nothrow
   {
     return cToD!(gdk.device.Device)(cast(void*)(cast(GdkEventProximity*)this._cPtr).device);
   }
@@ -135,7 +132,7 @@ class EventProximity
         propval = the master device that the event originated from. Use
           [gdk.event.Event.getSourceDevice] to get the slave device.
   */
-  @property void device(gdk.device.Device propval)
+  @property void device(gdk.device.Device propval) nothrow
   {
     cValueFree!(gdk.device.Device)(cast(void*)(cast(GdkEventProximity*)this._cPtr).device);
     dToC(propval, cast(void*)&(cast(GdkEventProximity*)this._cPtr).device);

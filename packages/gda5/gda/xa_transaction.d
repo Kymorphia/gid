@@ -17,26 +17,26 @@ class XaTransaction : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_xa_transaction_get_type != &gidSymbolNotFound ? gda_xa_transaction_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override XaTransaction self()
+  override XaTransaction self() nothrow
   {
     return this;
   }
@@ -45,19 +45,19 @@ class XaTransaction : gobject.object.ObjectWrap
       Get builder for [gda.xa_transaction.XaTransaction]
       Returns: New builder object
   */
-  static XaTransactionGidBuilder builder()
+  static XaTransactionGidBuilder builder() nothrow
   {
     return new XaTransactionGidBuilder;
   }
 
   /** */
-  @property uint formatId()
+  @property uint formatId() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("format-id");
   }
 
   /** */
-  @property string transactionId()
+  @property string transactionId() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("transaction-id");
   }
@@ -71,7 +71,7 @@ class XaTransaction : gobject.object.ObjectWrap
         globalTransactionId = the global transaction ID
       Returns: the newly created object.
   */
-  this(uint format, string globalTransactionId)
+  this(uint format, string globalTransactionId) nothrow
   {
     GdaXaTransaction* _cretval;
     const(char)* _globalTransactionId = globalTransactionId.toCString(No.Alloc);
@@ -80,7 +80,7 @@ class XaTransaction : gobject.object.ObjectWrap
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_xa_transaction_error_quark();
@@ -202,7 +202,7 @@ class XaTransaction : gobject.object.ObjectWrap
       Params:
         cnc = the connection to add to xa_trans
   */
-  void unregisterConnection(gda.connection.Connection cnc)
+  void unregisterConnection(gda.connection.Connection cnc) nothrow
   {
     gda_xa_transaction_unregister_connection(cast(GdaXaTransaction*)this._cPtr, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null);
   }
@@ -213,13 +213,13 @@ class XaTransactionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T formatId(uint propval)
+  T formatId(uint propval) nothrow
   {
     return setProperty("format-id", propval);
   }
 
   /** */
-  T transactionId(string propval)
+  T transactionId(string propval) nothrow
   {
     return setProperty("transaction-id", propval);
   }
@@ -232,7 +232,7 @@ final class XaTransactionGidBuilder : XaTransactionGidBuilderImpl!XaTransactionG
       Create object from builder.
       Returns: New object
   */
-  XaTransaction build()
+  XaTransaction build() nothrow
   {
     return new XaTransaction(cast(void*)createGObject(XaTransaction._getGType), Yes.Take);
   }
@@ -240,12 +240,12 @@ final class XaTransactionGidBuilder : XaTransactionGidBuilderImpl!XaTransactionG
 
 class XaTransactionException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.xa_transaction.XaTransaction.errorQuark, cast(int)code, msg);
   }

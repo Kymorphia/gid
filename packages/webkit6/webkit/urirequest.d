@@ -21,26 +21,26 @@ class URIRequest : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_uri_request_get_type != &gidSymbolNotFound ? webkit_uri_request_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override URIRequest self()
+  override URIRequest self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class URIRequest : gobject.object.ObjectWrap
       Get builder for [webkit.urirequest.URIRequest]
       Returns: New builder object
   */
-  static URIRequestGidBuilder builder()
+  static URIRequestGidBuilder builder() nothrow
   {
     return new URIRequestGidBuilder;
   }
@@ -58,7 +58,7 @@ class URIRequest : gobject.object.ObjectWrap
       Get `uri` property.
       Returns: The URI to which the request will be made.
   */
-  @property string uri()
+  @property string uri() nothrow
   {
     return getUri();
   }
@@ -68,7 +68,7 @@ class URIRequest : gobject.object.ObjectWrap
       Params:
         propval = The URI to which the request will be made.
   */
-  @property void uri(string propval)
+  @property void uri(string propval) nothrow
   {
     setUri(propval);
   }
@@ -80,7 +80,7 @@ class URIRequest : gobject.object.ObjectWrap
         uri = an URI
       Returns: a new #WebKitURIRequest
   */
-  this(string uri)
+  this(string uri) nothrow
   {
     WebKitURIRequest* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -93,7 +93,7 @@ class URIRequest : gobject.object.ObjectWrap
       Returns: a #SoupMessageHeaders with the HTTP headers of request
            or null if request is not an HTTP request.
   */
-  soup.message_headers.MessageHeaders getHttpHeaders()
+  soup.message_headers.MessageHeaders getHttpHeaders() nothrow
   {
     SoupMessageHeaders* _cretval;
     _cretval = webkit_uri_request_get_http_headers(cast(WebKitURIRequest*)this._cPtr);
@@ -106,7 +106,7 @@ class URIRequest : gobject.object.ObjectWrap
       Returns: the HTTP method of the #WebKitURIRequest or null if request is not
            an HTTP request.
   */
-  string getHttpMethod()
+  string getHttpMethod() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_uri_request_get_http_method(cast(WebKitURIRequest*)this._cPtr);
@@ -118,7 +118,7 @@ class URIRequest : gobject.object.ObjectWrap
       Obtains the request URI.
       Returns: request URI, as a string.
   */
-  string getUri()
+  string getUri() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_uri_request_get_uri(cast(WebKitURIRequest*)this._cPtr);
@@ -132,7 +132,7 @@ class URIRequest : gobject.object.ObjectWrap
       Params:
         uri = an URI
   */
-  void setUri(string uri)
+  void setUri(string uri) nothrow
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     webkit_uri_request_set_uri(cast(WebKitURIRequest*)this._cPtr, _uri);
@@ -149,7 +149,7 @@ class URIRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The URI to which the request will be made.
       Returns: Builder instance for fluent chaining
   */
-  T uri(string propval)
+  T uri(string propval) nothrow
   {
     return setProperty("uri", propval);
   }
@@ -162,7 +162,7 @@ final class URIRequestGidBuilder : URIRequestGidBuilderImpl!URIRequestGidBuilder
       Create object from builder.
       Returns: New object
   */
-  URIRequest build()
+  URIRequest build() nothrow
   {
     return new URIRequest(cast(void*)createGObject(URIRequest._getGType), Yes.Take);
   }

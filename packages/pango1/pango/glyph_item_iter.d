@@ -66,7 +66,7 @@ class GlyphItemIter : gobject.boxed.Boxed
         endIndex = 
         endChar = 
   */
-  this(pango.glyph_item.GlyphItem glyphItem = pango.glyph_item.GlyphItem.init, string text = string.init, int startGlyph = int.init, int startIndex = int.init, int startChar = int.init, int endGlyph = int.init, int endIndex = int.init, int endChar = int.init)
+  this(pango.glyph_item.GlyphItem glyphItem = pango.glyph_item.GlyphItem.init, string text = string.init, int startGlyph = int.init, int startIndex = int.init, int startChar = int.init, int endGlyph = int.init, int endIndex = int.init, int endChar = int.init) nothrow
   {
     super(gMalloc(PangoGlyphItemIter.sizeof), Yes.Take);
     this.glyphItem = glyphItem;
@@ -80,130 +80,130 @@ class GlyphItemIter : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_glyph_item_iter_get_type != &gidSymbolNotFound ? pango_glyph_item_iter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GlyphItemIter self()
+  override GlyphItemIter self() nothrow
   {
     return this;
   }
 
   /** */
-  @property pango.glyph_item.GlyphItem glyphItem()
+  @property pango.glyph_item.GlyphItem glyphItem() nothrow
   {
     return cToD!(pango.glyph_item.GlyphItem)(cast(void*)(cast(PangoGlyphItemIter*)this._cPtr).glyphItem);
   }
 
   /** */
-  @property void glyphItem(pango.glyph_item.GlyphItem propval)
+  @property void glyphItem(pango.glyph_item.GlyphItem propval) nothrow
   {
     cValueFree!(pango.glyph_item.GlyphItem)(cast(void*)(cast(PangoGlyphItemIter*)this._cPtr).glyphItem);
     dToC(propval, cast(void*)&(cast(PangoGlyphItemIter*)this._cPtr).glyphItem);
   }
 
   /** */
-  @property string text()
+  @property string text() nothrow
   {
     return cToD!(string)(cast(void*)(cast(PangoGlyphItemIter*)this._cPtr).text);
   }
 
   /** */
-  @property void text(string propval)
+  @property void text(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(PangoGlyphItemIter*)this._cPtr).text);
     dToC(propval, cast(void*)&(cast(PangoGlyphItemIter*)this._cPtr).text);
   }
 
   /** */
-  @property int startGlyph()
+  @property int startGlyph() nothrow
   {
     return (cast(PangoGlyphItemIter*)this._cPtr).startGlyph;
   }
 
   /** */
-  @property void startGlyph(int propval)
+  @property void startGlyph(int propval) nothrow
   {
     (cast(PangoGlyphItemIter*)this._cPtr).startGlyph = propval;
   }
 
   /** */
-  @property int startIndex()
+  @property int startIndex() nothrow
   {
     return (cast(PangoGlyphItemIter*)this._cPtr).startIndex;
   }
 
   /** */
-  @property void startIndex(int propval)
+  @property void startIndex(int propval) nothrow
   {
     (cast(PangoGlyphItemIter*)this._cPtr).startIndex = propval;
   }
 
   /** */
-  @property int startChar()
+  @property int startChar() nothrow
   {
     return (cast(PangoGlyphItemIter*)this._cPtr).startChar;
   }
 
   /** */
-  @property void startChar(int propval)
+  @property void startChar(int propval) nothrow
   {
     (cast(PangoGlyphItemIter*)this._cPtr).startChar = propval;
   }
 
   /** */
-  @property int endGlyph()
+  @property int endGlyph() nothrow
   {
     return (cast(PangoGlyphItemIter*)this._cPtr).endGlyph;
   }
 
   /** */
-  @property void endGlyph(int propval)
+  @property void endGlyph(int propval) nothrow
   {
     (cast(PangoGlyphItemIter*)this._cPtr).endGlyph = propval;
   }
 
   /** */
-  @property int endIndex()
+  @property int endIndex() nothrow
   {
     return (cast(PangoGlyphItemIter*)this._cPtr).endIndex;
   }
 
   /** */
-  @property void endIndex(int propval)
+  @property void endIndex(int propval) nothrow
   {
     (cast(PangoGlyphItemIter*)this._cPtr).endIndex = propval;
   }
 
   /** */
-  @property int endChar()
+  @property int endChar() nothrow
   {
     return (cast(PangoGlyphItemIter*)this._cPtr).endChar;
   }
 
   /** */
-  @property void endChar(int propval)
+  @property void endChar(int propval) nothrow
   {
     (cast(PangoGlyphItemIter*)this._cPtr).endChar = propval;
   }
@@ -212,7 +212,7 @@ class GlyphItemIter : gobject.boxed.Boxed
       Make a shallow copy of an existing [pango.glyph_item_iter.GlyphItemIter] structure.
       Returns: the newly allocated [pango.glyph_item_iter.GlyphItemIter]
   */
-  pango.glyph_item_iter.GlyphItemIter copy()
+  pango.glyph_item_iter.GlyphItemIter copy() nothrow
   {
     PangoGlyphItemIter* _cretval;
     _cretval = pango_glyph_item_iter_copy(cast(PangoGlyphItemIter*)this._cPtr);
@@ -231,7 +231,7 @@ class GlyphItemIter : gobject.boxed.Boxed
         text = text corresponding to the glyph item
       Returns: false if there are no clusters in the glyph item
   */
-  bool initEnd(pango.glyph_item.GlyphItem glyphItem, string text)
+  bool initEnd(pango.glyph_item.GlyphItem glyphItem, string text) nothrow
   {
     bool _retval;
     const(char)* _text = text.toCString(No.Alloc);
@@ -250,7 +250,7 @@ class GlyphItemIter : gobject.boxed.Boxed
         text = text corresponding to the glyph item
       Returns: false if there are no clusters in the glyph item
   */
-  bool initStart(pango.glyph_item.GlyphItem glyphItem, string text)
+  bool initStart(pango.glyph_item.GlyphItem glyphItem, string text) nothrow
   {
     bool _retval;
     const(char)* _text = text.toCString(No.Alloc);
@@ -265,7 +265,7 @@ class GlyphItemIter : gobject.boxed.Boxed
       Returns: true if the iterator was advanced,
           false if we were already on the  last cluster.
   */
-  bool nextCluster()
+  bool nextCluster() nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_glyph_item_iter_next_cluster(cast(PangoGlyphItemIter*)this._cPtr);
@@ -278,7 +278,7 @@ class GlyphItemIter : gobject.boxed.Boxed
       Returns: true if the iterator was moved,
           false if we were already on the first cluster.
   */
-  bool prevCluster()
+  bool prevCluster() nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_glyph_item_iter_prev_cluster(cast(PangoGlyphItemIter*)this._cPtr);

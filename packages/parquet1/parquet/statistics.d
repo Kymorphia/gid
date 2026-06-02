@@ -14,26 +14,26 @@ class Statistics : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_statistics_get_type != &gidSymbolNotFound ? gparquet_statistics_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Statistics self()
+  override Statistics self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class Statistics : gobject.object.ObjectWrap
       Get builder for [parquet.statistics.Statistics]
       Returns: New builder object
   */
-  static StatisticsGidBuilder builder()
+  static StatisticsGidBuilder builder() nothrow
   {
     return new StatisticsGidBuilder;
   }
 
   /** */
-  bool equal(parquet.statistics.Statistics otherStatistics)
+  bool equal(parquet.statistics.Statistics otherStatistics) nothrow
   {
     bool _retval;
     _retval = cast(bool)gparquet_statistics_equal(cast(GParquetStatistics*)this._cPtr, otherStatistics ? cast(GParquetStatistics*)otherStatistics._cPtr(No.Dup) : null);
@@ -56,7 +56,7 @@ class Statistics : gobject.object.ObjectWrap
   }
 
   /** */
-  long getNDistinctValues()
+  long getNDistinctValues() nothrow
   {
     long _retval;
     _retval = gparquet_statistics_get_n_distinct_values(cast(GParquetStatistics*)this._cPtr);
@@ -64,7 +64,7 @@ class Statistics : gobject.object.ObjectWrap
   }
 
   /** */
-  long getNNulls()
+  long getNNulls() nothrow
   {
     long _retval;
     _retval = gparquet_statistics_get_n_nulls(cast(GParquetStatistics*)this._cPtr);
@@ -72,7 +72,7 @@ class Statistics : gobject.object.ObjectWrap
   }
 
   /** */
-  long getNValues()
+  long getNValues() nothrow
   {
     long _retval;
     _retval = gparquet_statistics_get_n_values(cast(GParquetStatistics*)this._cPtr);
@@ -80,7 +80,7 @@ class Statistics : gobject.object.ObjectWrap
   }
 
   /** */
-  bool hasMinMax()
+  bool hasMinMax() nothrow
   {
     bool _retval;
     _retval = cast(bool)gparquet_statistics_has_min_max(cast(GParquetStatistics*)this._cPtr);
@@ -88,7 +88,7 @@ class Statistics : gobject.object.ObjectWrap
   }
 
   /** */
-  bool hasNDistinctValues()
+  bool hasNDistinctValues() nothrow
   {
     bool _retval;
     _retval = cast(bool)gparquet_statistics_has_n_distinct_values(cast(GParquetStatistics*)this._cPtr);
@@ -96,7 +96,7 @@ class Statistics : gobject.object.ObjectWrap
   }
 
   /** */
-  bool hasNNulls()
+  bool hasNNulls() nothrow
   {
     bool _retval;
     _retval = cast(bool)gparquet_statistics_has_n_nulls(cast(GParquetStatistics*)this._cPtr);
@@ -109,7 +109,7 @@ class StatisticsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T statistics(void* propval)
+  T statistics(void* propval) nothrow
   {
     return setProperty("statistics", propval);
   }
@@ -122,7 +122,7 @@ final class StatisticsGidBuilder : StatisticsGidBuilderImpl!StatisticsGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Statistics build()
+  Statistics build() nothrow
   {
     return new Statistics(cast(void*)createGObject(Statistics._getGType), No.Take);
   }

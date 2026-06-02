@@ -43,26 +43,26 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_viewport_get_type != &gidSymbolNotFound ? gtk_viewport_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Viewport self()
+  override Viewport self() nothrow
   {
     return this;
   }
@@ -71,19 +71,19 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
       Get builder for [gtk.viewport.Viewport]
       Returns: New builder object
   */
-  static ViewportGidBuilder builder()
+  static ViewportGidBuilder builder() nothrow
   {
     return new ViewportGidBuilder;
   }
 
   /** */
-  @property gtk.types.ShadowType shadowType()
+  @property gtk.types.ShadowType shadowType() nothrow
   {
     return getShadowType();
   }
 
   /** */
-  @property void shadowType(gtk.types.ShadowType propval)
+  @property void shadowType(gtk.types.ShadowType propval) nothrow
   {
     setShadowType(propval);
   }
@@ -99,7 +99,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
         vadjustment = vertical adjustment
       Returns: a new #GtkViewport
   */
-  this(gtk.adjustment.Adjustment hadjustment = null, gtk.adjustment.Adjustment vadjustment = null)
+  this(gtk.adjustment.Adjustment hadjustment = null, gtk.adjustment.Adjustment vadjustment = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_viewport_new(hadjustment ? cast(GtkAdjustment*)hadjustment._cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment._cPtr(No.Dup) : null);
@@ -110,7 +110,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
       Gets the bin window of the #GtkViewport.
       Returns: a #GdkWindow
   */
-  gdk.window.Window getBinWindow()
+  gdk.window.Window getBinWindow() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gtk_viewport_get_bin_window(cast(GtkViewport*)this._cPtr);
@@ -124,7 +124,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
   
       Deprecated: Use [gtk.scrollable.Scrollable.getHadjustment]
   */
-  gtk.adjustment.Adjustment getHadjustment()
+  gtk.adjustment.Adjustment getHadjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_viewport_get_hadjustment(cast(GtkViewport*)this._cPtr);
@@ -137,7 +137,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
       [gtk.viewport.Viewport.setShadowType].
       Returns: the shadow type
   */
-  gtk.types.ShadowType getShadowType()
+  gtk.types.ShadowType getShadowType() nothrow
   {
     GtkShadowType _cretval;
     _cretval = gtk_viewport_get_shadow_type(cast(GtkViewport*)this._cPtr);
@@ -151,7 +151,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
   
       Deprecated: Use [gtk.scrollable.Scrollable.getVadjustment]
   */
-  gtk.adjustment.Adjustment getVadjustment()
+  gtk.adjustment.Adjustment getVadjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_viewport_get_vadjustment(cast(GtkViewport*)this._cPtr);
@@ -163,7 +163,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
       Gets the view window of the #GtkViewport.
       Returns: a #GdkWindow
   */
-  gdk.window.Window getViewWindow()
+  gdk.window.Window getViewWindow() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gtk_viewport_get_view_window(cast(GtkViewport*)this._cPtr);
@@ -179,7 +179,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
   
       Deprecated: Use [gtk.scrollable.Scrollable.setHadjustment]
   */
-  void setHadjustment(gtk.adjustment.Adjustment adjustment = null)
+  void setHadjustment(gtk.adjustment.Adjustment adjustment = null) nothrow
   {
     gtk_viewport_set_hadjustment(cast(GtkViewport*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
@@ -190,7 +190,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
       Params:
         type = the new shadow type.
   */
-  void setShadowType(gtk.types.ShadowType type)
+  void setShadowType(gtk.types.ShadowType type) nothrow
   {
     gtk_viewport_set_shadow_type(cast(GtkViewport*)this._cPtr, type);
   }
@@ -203,7 +203,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
   
       Deprecated: Use [gtk.scrollable.Scrollable.setVadjustment]
   */
-  void setVadjustment(gtk.adjustment.Adjustment adjustment = null)
+  void setVadjustment(gtk.adjustment.Adjustment adjustment = null) nothrow
   {
     gtk_viewport_set_vadjustment(cast(GtkViewport*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
@@ -216,7 +216,7 @@ class ViewportGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.scrollable.Sc
   mixin ScrollableGidBuilderT!();
 
   /** */
-  T shadowType(gtk.types.ShadowType propval)
+  T shadowType(gtk.types.ShadowType propval) nothrow
   {
     return setProperty("shadow-type", propval);
   }
@@ -229,7 +229,7 @@ final class ViewportGidBuilder : ViewportGidBuilderImpl!ViewportGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Viewport build()
+  Viewport build() nothrow
   {
     return new Viewport(cast(void*)createGObject(Viewport._getGType), No.Take);
   }

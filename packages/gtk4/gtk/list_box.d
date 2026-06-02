@@ -79,26 +79,26 @@ class ListBox : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_list_box_get_type != &gidSymbolNotFound ? gtk_list_box_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ListBox self()
+  override ListBox self() nothrow
   {
     return this;
   }
@@ -107,7 +107,7 @@ class ListBox : gtk.widget.Widget
       Get builder for [gtk.list_box.ListBox]
       Returns: New builder object
   */
-  static ListBoxGidBuilder builder()
+  static ListBoxGidBuilder builder() nothrow
   {
     return new ListBoxGidBuilder;
   }
@@ -116,7 +116,7 @@ class ListBox : gtk.widget.Widget
       Get `acceptUnpairedRelease` property.
       Returns: Whether to accept unpaired release events.
   */
-  @property bool acceptUnpairedRelease()
+  @property bool acceptUnpairedRelease() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("accept-unpaired-release");
   }
@@ -126,7 +126,7 @@ class ListBox : gtk.widget.Widget
       Params:
         propval = Whether to accept unpaired release events.
   */
-  @property void acceptUnpairedRelease(bool propval)
+  @property void acceptUnpairedRelease(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("accept-unpaired-release", propval);
   }
@@ -136,7 +136,7 @@ class ListBox : gtk.widget.Widget
       Returns: Determines whether children can be activated with a single
         click, or require a double-click.
   */
-  @property bool activateOnSingleClick()
+  @property bool activateOnSingleClick() nothrow
   {
     return getActivateOnSingleClick();
   }
@@ -147,7 +147,7 @@ class ListBox : gtk.widget.Widget
         propval = Determines whether children can be activated with a single
           click, or require a double-click.
   */
-  @property void activateOnSingleClick(bool propval)
+  @property void activateOnSingleClick(bool propval) nothrow
   {
     setActivateOnSingleClick(propval);
   }
@@ -156,7 +156,7 @@ class ListBox : gtk.widget.Widget
       Get `selectionMode` property.
       Returns: The selection mode used by the list box.
   */
-  @property gtk.types.SelectionMode selectionMode()
+  @property gtk.types.SelectionMode selectionMode() nothrow
   {
     return getSelectionMode();
   }
@@ -166,7 +166,7 @@ class ListBox : gtk.widget.Widget
       Params:
         propval = The selection mode used by the list box.
   */
-  @property void selectionMode(gtk.types.SelectionMode propval)
+  @property void selectionMode(gtk.types.SelectionMode propval) nothrow
   {
     setSelectionMode(propval);
   }
@@ -175,7 +175,7 @@ class ListBox : gtk.widget.Widget
       Get `showSeparators` property.
       Returns: Whether to show separators between rows.
   */
-  @property bool showSeparators()
+  @property bool showSeparators() nothrow
   {
     return getShowSeparators();
   }
@@ -185,7 +185,7 @@ class ListBox : gtk.widget.Widget
       Params:
         propval = Whether to show separators between rows.
   */
-  @property void showSeparators(bool propval)
+  @property void showSeparators(bool propval) nothrow
   {
     setShowSeparators(propval);
   }
@@ -194,7 +194,7 @@ class ListBox : gtk.widget.Widget
       Creates a new [gtk.list_box.ListBox] container.
       Returns: a new [gtk.list_box.ListBox]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_box_new();
@@ -210,7 +210,7 @@ class ListBox : gtk.widget.Widget
       Params:
         child = the [gtk.widget.Widget] to add
   */
-  void append(gtk.widget.Widget child)
+  void append(gtk.widget.Widget child) nothrow
   {
     gtk_list_box_append(cast(GtkListBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -237,14 +237,21 @@ class ListBox : gtk.widget.Widget
         createWidgetFunc = a function that creates widgets for items
             or null in case you also passed null as model
   */
-  void bindModel(gio.list_model.ListModel model = null, gtk.types.ListBoxCreateWidgetFunc createWidgetFunc = null)
+  void bindModel(gio.list_model.ListModel model = null, gtk.types.ListBoxCreateWidgetFunc createWidgetFunc = null) nothrow
   {
-    extern(C) GtkWidget* _createWidgetFuncCallback(GObject* item, void* userData)
+    extern(C) GtkWidget* _createWidgetFuncCallback(GObject* item, void* userData) nothrow
     {
       gtk.widget.Widget _dretval;
       auto _dlg = cast(gtk.types.ListBoxCreateWidgetFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.ListBoxCreateWidgetFunc");
+      }
       auto _retval = cast(GtkWidget*)_dretval._cPtr(Yes.Dup);
 
       return _retval;
@@ -269,7 +276,7 @@ class ListBox : gtk.widget.Widget
       Params:
         row = a [gtk.list_box_row.ListBoxRow]
   */
-  void dragHighlightRow(gtk.list_box_row.ListBoxRow row)
+  void dragHighlightRow(gtk.list_box_row.ListBoxRow row) nothrow
   {
     gtk_list_box_drag_highlight_row(cast(GtkListBox*)this._cPtr, row ? cast(GtkListBoxRow*)row._cPtr(No.Dup) : null);
   }
@@ -278,7 +285,7 @@ class ListBox : gtk.widget.Widget
       If a row has previously been highlighted via [gtk.list_box.ListBox.dragHighlightRow],
       it will have the highlight removed.
   */
-  void dragUnhighlightRow()
+  void dragUnhighlightRow() nothrow
   {
     gtk_list_box_drag_unhighlight_row(cast(GtkListBox*)this._cPtr);
   }
@@ -287,7 +294,7 @@ class ListBox : gtk.widget.Widget
       Returns whether rows activate on single clicks.
       Returns: true if rows are activated on single click, false otherwise
   */
-  bool getActivateOnSingleClick()
+  bool getActivateOnSingleClick() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_list_box_get_activate_on_single_click(cast(GtkListBox*)this._cPtr);
@@ -299,7 +306,7 @@ class ListBox : gtk.widget.Widget
       for vertical scrolling.
       Returns: the adjustment
   */
-  gtk.adjustment.Adjustment getAdjustment()
+  gtk.adjustment.Adjustment getAdjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_list_box_get_adjustment(cast(GtkListBox*)this._cPtr);
@@ -317,7 +324,7 @@ class ListBox : gtk.widget.Widget
         index = the index of the row
       Returns: the child [gtk.widget.Widget]
   */
-  gtk.list_box_row.ListBoxRow getRowAtIndex(int index)
+  gtk.list_box_row.ListBoxRow getRowAtIndex(int index) nothrow
   {
     GtkListBoxRow* _cretval;
     _cretval = gtk_list_box_get_row_at_index(cast(GtkListBox*)this._cPtr, index);
@@ -332,7 +339,7 @@ class ListBox : gtk.widget.Widget
         y = position
       Returns: the row
   */
-  gtk.list_box_row.ListBoxRow getRowAtY(int y)
+  gtk.list_box_row.ListBoxRow getRowAtY(int y) nothrow
   {
     GtkListBoxRow* _cretval;
     _cretval = gtk_list_box_get_row_at_y(cast(GtkListBox*)this._cPtr, y);
@@ -348,7 +355,7 @@ class ListBox : gtk.widget.Widget
       find all selected rows.
       Returns: the selected row
   */
-  gtk.list_box_row.ListBoxRow getSelectedRow()
+  gtk.list_box_row.ListBoxRow getSelectedRow() nothrow
   {
     GtkListBoxRow* _cretval;
     _cretval = gtk_list_box_get_selected_row(cast(GtkListBox*)this._cPtr);
@@ -361,7 +368,7 @@ class ListBox : gtk.widget.Widget
       Returns: A [glib.list.List] containing the [gtk.widget.Widget] for each selected child.
           Free with [glib.list.List.free] when done.
   */
-  gtk.list_box_row.ListBoxRow[] getSelectedRows()
+  gtk.list_box_row.ListBoxRow[] getSelectedRows() nothrow
   {
     GList* _cretval;
     _cretval = gtk_list_box_get_selected_rows(cast(GtkListBox*)this._cPtr);
@@ -373,7 +380,7 @@ class ListBox : gtk.widget.Widget
       Gets the selection mode of the listbox.
       Returns: a [gtk.types.SelectionMode]
   */
-  gtk.types.SelectionMode getSelectionMode()
+  gtk.types.SelectionMode getSelectionMode() nothrow
   {
     GtkSelectionMode _cretval;
     _cretval = gtk_list_box_get_selection_mode(cast(GtkListBox*)this._cPtr);
@@ -386,7 +393,7 @@ class ListBox : gtk.widget.Widget
       between rows.
       Returns: true if the list box shows separators
   */
-  bool getShowSeparators()
+  bool getShowSeparators() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_list_box_get_show_separators(cast(GtkListBox*)this._cPtr);
@@ -406,7 +413,7 @@ class ListBox : gtk.widget.Widget
         child = the [gtk.widget.Widget] to add
         position = the position to insert child in
   */
-  void insert(gtk.widget.Widget child, int position)
+  void insert(gtk.widget.Widget child, int position) nothrow
   {
     gtk_list_box_insert(cast(GtkListBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, position);
   }
@@ -420,7 +427,7 @@ class ListBox : gtk.widget.Widget
       if the filter function just looked for a specific search
       string and the entry with the search string has changed.
   */
-  void invalidateFilter()
+  void invalidateFilter() nothrow
   {
     gtk_list_box_invalidate_filter(cast(GtkListBox*)this._cPtr);
   }
@@ -432,7 +439,7 @@ class ListBox : gtk.widget.Widget
       of the header function on the box is changed due
       to an external factor.
   */
-  void invalidateHeaders()
+  void invalidateHeaders() nothrow
   {
     gtk_list_box_invalidate_headers(cast(GtkListBox*)this._cPtr);
   }
@@ -444,7 +451,7 @@ class ListBox : gtk.widget.Widget
       of the sort function on the box is changed due
       to an external factor.
   */
-  void invalidateSort()
+  void invalidateSort() nothrow
   {
     gtk_list_box_invalidate_sort(cast(GtkListBox*)this._cPtr);
   }
@@ -458,7 +465,7 @@ class ListBox : gtk.widget.Widget
       Params:
         child = the [gtk.widget.Widget] to add
   */
-  void prepend(gtk.widget.Widget child)
+  void prepend(gtk.widget.Widget child) nothrow
   {
     gtk_list_box_prepend(cast(GtkListBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -469,7 +476,7 @@ class ListBox : gtk.widget.Widget
       Params:
         child = the child to remove
   */
-  void remove(gtk.widget.Widget child)
+  void remove(gtk.widget.Widget child) nothrow
   {
     gtk_list_box_remove(cast(GtkListBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -479,7 +486,7 @@ class ListBox : gtk.widget.Widget
       
       This function does nothing if box is backed by a model.
   */
-  void removeAll()
+  void removeAll() nothrow
   {
     gtk_list_box_remove_all(cast(GtkListBox*)this._cPtr);
   }
@@ -487,7 +494,7 @@ class ListBox : gtk.widget.Widget
   /**
       Select all children of box, if the selection mode allows it.
   */
-  void selectAll()
+  void selectAll() nothrow
   {
     gtk_list_box_select_all(cast(GtkListBox*)this._cPtr);
   }
@@ -498,7 +505,7 @@ class ListBox : gtk.widget.Widget
       Params:
         row = The row to select
   */
-  void selectRow(gtk.list_box_row.ListBoxRow row = null)
+  void selectRow(gtk.list_box_row.ListBoxRow row = null) nothrow
   {
     gtk_list_box_select_row(cast(GtkListBox*)this._cPtr, row ? cast(GtkListBoxRow*)row._cPtr(No.Dup) : null);
   }
@@ -511,13 +518,20 @@ class ListBox : gtk.widget.Widget
       Params:
         func = the function to call for each selected child
   */
-  void selectedForeach(gtk.types.ListBoxForeachFunc func)
+  void selectedForeach(gtk.types.ListBoxForeachFunc func) nothrow
   {
-    extern(C) void _funcCallback(GtkListBox* box, GtkListBoxRow* row, void* userData)
+    extern(C) void _funcCallback(GtkListBox* box, GtkListBoxRow* row, void* userData) nothrow
     {
       auto _dlg = cast(gtk.types.ListBoxForeachFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.list_box.ListBox)(cast(void*)box, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.list_box.ListBox)(cast(void*)box, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.ListBoxForeachFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -531,7 +545,7 @@ class ListBox : gtk.widget.Widget
       Params:
         single = a boolean
   */
-  void setActivateOnSingleClick(bool single)
+  void setActivateOnSingleClick(bool single) nothrow
   {
     gtk_list_box_set_activate_on_single_click(cast(GtkListBox*)this._cPtr, single);
   }
@@ -551,7 +565,7 @@ class ListBox : gtk.widget.Widget
       Params:
         adjustment = the adjustment
   */
-  void setAdjustment(gtk.adjustment.Adjustment adjustment = null)
+  void setAdjustment(gtk.adjustment.Adjustment adjustment = null) nothrow
   {
     gtk_list_box_set_adjustment(cast(GtkListBox*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
@@ -574,14 +588,21 @@ class ListBox : gtk.widget.Widget
       Params:
         filterFunc = callback that lets you filter which rows to show
   */
-  void setFilterFunc(gtk.types.ListBoxFilterFunc filterFunc = null)
+  void setFilterFunc(gtk.types.ListBoxFilterFunc filterFunc = null) nothrow
   {
-    extern(C) gboolean _filterFuncCallback(GtkListBoxRow* row, void* userData)
+    extern(C) gboolean _filterFuncCallback(GtkListBoxRow* row, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.ListBoxFilterFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.ListBoxFilterFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -622,13 +643,20 @@ class ListBox : gtk.widget.Widget
       Params:
         updateHeader = callback that lets you add row headers
   */
-  void setHeaderFunc(gtk.types.ListBoxUpdateHeaderFunc updateHeader = null)
+  void setHeaderFunc(gtk.types.ListBoxUpdateHeaderFunc updateHeader = null) nothrow
   {
-    extern(C) void _updateHeaderCallback(GtkListBoxRow* row, GtkListBoxRow* before, void* userData)
+    extern(C) void _updateHeaderCallback(GtkListBoxRow* row, GtkListBoxRow* before, void* userData) nothrow
     {
       auto _dlg = cast(gtk.types.ListBoxUpdateHeaderFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)before, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)before, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.ListBoxUpdateHeaderFunc");
+      }
     }
     auto _updateHeaderCB = updateHeader ? &_updateHeaderCallback : null;
     auto _updateHeader = updateHeader ? freezeDelegate(cast(void*)&updateHeader) : null;
@@ -643,7 +671,7 @@ class ListBox : gtk.widget.Widget
       Params:
         placeholder = a [gtk.widget.Widget]
   */
-  void setPlaceholder(gtk.widget.Widget placeholder = null)
+  void setPlaceholder(gtk.widget.Widget placeholder = null) nothrow
   {
     gtk_list_box_set_placeholder(cast(GtkListBox*)this._cPtr, placeholder ? cast(GtkWidget*)placeholder._cPtr(No.Dup) : null);
   }
@@ -654,7 +682,7 @@ class ListBox : gtk.widget.Widget
       Params:
         mode = The [gtk.types.SelectionMode]
   */
-  void setSelectionMode(gtk.types.SelectionMode mode)
+  void setSelectionMode(gtk.types.SelectionMode mode) nothrow
   {
     gtk_list_box_set_selection_mode(cast(GtkListBox*)this._cPtr, mode);
   }
@@ -666,7 +694,7 @@ class ListBox : gtk.widget.Widget
       Params:
         showSeparators = true to show separators
   */
-  void setShowSeparators(bool showSeparators)
+  void setShowSeparators(bool showSeparators) nothrow
   {
     gtk_list_box_set_show_separators(cast(GtkListBox*)this._cPtr, showSeparators);
   }
@@ -688,13 +716,21 @@ class ListBox : gtk.widget.Widget
       Params:
         sortFunc = the sort function
   */
-  void setSortFunc(gtk.types.ListBoxSortFunc sortFunc = null)
+  void setSortFunc(gtk.types.ListBoxSortFunc sortFunc = null) nothrow
   {
-    extern(C) int _sortFuncCallback(GtkListBoxRow* row1, GtkListBoxRow* row2, void* userData)
+    extern(C) int _sortFuncCallback(GtkListBoxRow* row1, GtkListBoxRow* row2, void* userData) nothrow
     {
+      int _retval;
       auto _dlg = cast(gtk.types.ListBoxSortFunc*)userData;
 
-      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row1, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row2, No.Take));
+      try
+      {
+        _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row1, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.list_box_row.ListBoxRow)(cast(void*)row2, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.ListBoxSortFunc");
+      }
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
@@ -706,7 +742,7 @@ class ListBox : gtk.widget.Widget
   /**
       Unselect all children of box, if the selection mode allows it.
   */
-  void unselectAll()
+  void unselectAll() nothrow
   {
     gtk_list_box_unselect_all(cast(GtkListBox*)this._cPtr);
   }
@@ -717,7 +753,7 @@ class ListBox : gtk.widget.Widget
       Params:
         row = the row to unselect
   */
-  void unselectRow(gtk.list_box_row.ListBoxRow row)
+  void unselectRow(gtk.list_box_row.ListBoxRow row) nothrow
   {
     gtk_list_box_unselect_row(cast(GtkListBox*)this._cPtr, row ? cast(GtkListBoxRow*)row._cPtr(No.Dup) : null);
   }
@@ -737,13 +773,13 @@ class ListBox : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivateCursorRow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivateCursorRow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.list_box.ListBox)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -752,7 +788,14 @@ class ListBox : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.list_box.ListBox.activateCursorRow");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -782,7 +825,7 @@ class ListBox : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.MovementStep)))
@@ -792,7 +835,7 @@ class ListBox : gtk.widget.Widget
   && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gtk.list_box.ListBox)))
   && Parameters!T.length < 6)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -813,7 +856,14 @@ class ListBox : gtk.widget.Widget
       static if (Parameters!T.length > 4)
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.list_box.ListBox.moveCursor");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -837,14 +887,14 @@ class ListBox : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowActivated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRowActivated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.list_box_row.ListBoxRow)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.list_box.ListBox)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -856,7 +906,14 @@ class ListBox : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.list_box.ListBox.rowActivated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -885,14 +942,14 @@ class ListBox : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowSelected(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRowSelected(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.list_box_row.ListBoxRow)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.list_box.ListBox)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -904,7 +961,14 @@ class ListBox : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.list_box.ListBox.rowSelected");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -931,13 +995,13 @@ class ListBox : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectAll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.list_box.ListBox)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -946,7 +1010,14 @@ class ListBox : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.list_box.ListBox.selectAll");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -968,13 +1039,13 @@ class ListBox : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectedRowsChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectedRowsChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.list_box.ListBox)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -983,7 +1054,14 @@ class ListBox : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.list_box.ListBox.selectedRowsChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1005,13 +1083,13 @@ class ListBox : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectToggleCursorRow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToggleCursorRow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.list_box.ListBox)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1020,7 +1098,14 @@ class ListBox : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.list_box.ListBox.toggleCursorRow");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1048,13 +1133,13 @@ class ListBox : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.list_box.ListBox)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1063,7 +1148,14 @@ class ListBox : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.list_box.ListBox.unselectAll");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1082,7 +1174,7 @@ class ListBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether to accept unpaired release events.
       Returns: Builder instance for fluent chaining
   */
-  T acceptUnpairedRelease(bool propval)
+  T acceptUnpairedRelease(bool propval) nothrow
   {
     return setProperty("accept-unpaired-release", propval);
   }
@@ -1094,7 +1186,7 @@ class ListBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           click, or require a double-click.
       Returns: Builder instance for fluent chaining
   */
-  T activateOnSingleClick(bool propval)
+  T activateOnSingleClick(bool propval) nothrow
   {
     return setProperty("activate-on-single-click", propval);
   }
@@ -1105,7 +1197,7 @@ class ListBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The selection mode used by the list box.
       Returns: Builder instance for fluent chaining
   */
-  T selectionMode(gtk.types.SelectionMode propval)
+  T selectionMode(gtk.types.SelectionMode propval) nothrow
   {
     return setProperty("selection-mode", propval);
   }
@@ -1116,7 +1208,7 @@ class ListBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether to show separators between rows.
       Returns: Builder instance for fluent chaining
   */
-  T showSeparators(bool propval)
+  T showSeparators(bool propval) nothrow
   {
     return setProperty("show-separators", propval);
   }
@@ -1129,7 +1221,7 @@ final class ListBoxGidBuilder : ListBoxGidBuilderImpl!ListBoxGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ListBox build()
+  ListBox build() nothrow
   {
     return new ListBox(cast(void*)createGObject(ListBox._getGType), No.Take);
   }

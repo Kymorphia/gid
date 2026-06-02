@@ -15,26 +15,26 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_hash_join_node_options_get_type != &gidSymbolNotFound ? garrow_hash_join_node_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HashJoinNodeOptions self()
+  override HashJoinNodeOptions self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
       Get builder for [arrow.hash_join_node_options.HashJoinNodeOptions]
       Returns: New builder object
   */
-  static HashJoinNodeOptionsGidBuilder builder()
+  static HashJoinNodeOptionsGidBuilder builder() nothrow
   {
     return new HashJoinNodeOptionsGidBuilder;
   }
@@ -130,7 +130,7 @@ final class HashJoinNodeOptionsGidBuilder : HashJoinNodeOptionsGidBuilderImpl!Ha
       Create object from builder.
       Returns: New object
   */
-  HashJoinNodeOptions build()
+  HashJoinNodeOptions build() nothrow
   {
     return new HashJoinNodeOptions(cast(void*)createGObject(HashJoinNodeOptions._getGType), Yes.Take);
   }

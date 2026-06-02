@@ -16,26 +16,26 @@ class Decimal128Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal128_array_get_type != &gidSymbolNotFound ? garrow_decimal128_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Decimal128Array self()
+  override Decimal128Array self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class Decimal128Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
       Get builder for [arrow.decimal128_array.Decimal128Array]
       Returns: New builder object
   */
-  static Decimal128ArrayGidBuilder builder()
+  static Decimal128ArrayGidBuilder builder() nothrow
   {
     return new Decimal128ArrayGidBuilder;
   }
 
   /** */
-  string formatValue(long i)
+  string formatValue(long i) nothrow
   {
     char* _cretval;
     _cretval = garrow_decimal128_array_format_value(cast(GArrowDecimal128Array*)this._cPtr, i);
@@ -61,7 +61,7 @@ class Decimal128Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
   alias getValue = arrow.fixed_size_binary_array.FixedSizeBinaryArray.getValue;
 
   /** */
-  arrow.decimal128.Decimal128 getValue(long i)
+  arrow.decimal128.Decimal128 getValue(long i) nothrow
   {
     GArrowDecimal128* _cretval;
     _cretval = garrow_decimal128_array_get_value(cast(GArrowDecimal128Array*)this._cPtr, i);
@@ -82,7 +82,7 @@ final class Decimal128ArrayGidBuilder : Decimal128ArrayGidBuilderImpl!Decimal128
       Create object from builder.
       Returns: New object
   */
-  Decimal128Array build()
+  Decimal128Array build() nothrow
   {
     return new Decimal128Array(cast(void*)createGObject(Decimal128Array._getGType), No.Take);
   }

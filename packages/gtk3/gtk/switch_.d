@@ -40,26 +40,26 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_switch_get_type != &gidSymbolNotFound ? gtk_switch_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Switch self()
+  override Switch self() nothrow
   {
     return this;
   }
@@ -68,7 +68,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
       Get builder for [gtk.switch_.Switch]
       Returns: New builder object
   */
-  static SwitchGidBuilder builder()
+  static SwitchGidBuilder builder() nothrow
   {
     return new SwitchGidBuilder;
   }
@@ -77,7 +77,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
       Get `active` property.
       Returns: Whether the #GtkSwitch widget is in its on or off state.
   */
-  @property bool active()
+  @property bool active() nothrow
   {
     return getActive();
   }
@@ -87,7 +87,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
       Params:
         propval = Whether the #GtkSwitch widget is in its on or off state.
   */
-  @property void active(bool propval)
+  @property void active(bool propval) nothrow
   {
     setActive(propval);
   }
@@ -97,7 +97,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
       Returns: The backend state that is controlled by the switch.
         See #GtkSwitch::state-set for details.
   */
-  @property bool state()
+  @property bool state() nothrow
   {
     return getState();
   }
@@ -108,7 +108,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
         propval = The backend state that is controlled by the switch.
           See #GtkSwitch::state-set for details.
   */
-  @property void state(bool propval)
+  @property void state(bool propval) nothrow
   {
     setState(propval);
   }
@@ -120,7 +120,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
       Creates a new #GtkSwitch widget.
       Returns: the newly created #GtkSwitch instance
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_switch_new();
@@ -131,7 +131,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
       Gets whether the #GtkSwitch is in its “on” or “off” state.
       Returns: true if the #GtkSwitch is active, and false otherwise
   */
-  bool getActive()
+  bool getActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_switch_get_active(cast(GtkSwitch*)this._cPtr);
@@ -144,7 +144,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
       Gets the underlying state of the #GtkSwitch.
       Returns: the underlying state
   */
-  bool getState()
+  bool getState() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_switch_get_state(cast(GtkSwitch*)this._cPtr);
@@ -157,7 +157,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
       Params:
         isActive = true if sw should be active, and false otherwise
   */
-  void setActive(bool isActive)
+  void setActive(bool isActive) nothrow
   {
     gtk_switch_set_active(cast(GtkSwitch*)this._cPtr, isActive);
   }
@@ -176,7 +176,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
       Params:
         state = the new state
   */
-  void setState(bool state)
+  void setState(bool state) nothrow
   {
     gtk_switch_set_state(cast(GtkSwitch*)this._cPtr, state);
   }
@@ -199,13 +199,13 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.switch_.Switch)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -214,7 +214,14 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.switch_.Switch.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -251,18 +258,19 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectStateSet(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStateSet(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.switch_.Switch)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -270,7 +278,14 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.switch_.Switch.stateSet");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -293,7 +308,7 @@ class SwitchGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionabl
         propval = Whether the #GtkSwitch widget is in its on or off state.
       Returns: Builder instance for fluent chaining
   */
-  T active(bool propval)
+  T active(bool propval) nothrow
   {
     return setProperty("active", propval);
   }
@@ -305,7 +320,7 @@ class SwitchGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionabl
           See #GtkSwitch::state-set for details.
       Returns: Builder instance for fluent chaining
   */
-  T state(bool propval)
+  T state(bool propval) nothrow
   {
     return setProperty("state", propval);
   }
@@ -318,7 +333,7 @@ final class SwitchGidBuilder : SwitchGidBuilderImpl!SwitchGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Switch build()
+  Switch build() nothrow
   {
     return new Switch(cast(void*)createGObject(Switch._getGType), No.Take);
   }

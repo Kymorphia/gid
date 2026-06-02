@@ -18,26 +18,26 @@ class StreamFile : gmime.stream.Stream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_stream_file_get_type != &gidSymbolNotFound ? g_mime_stream_file_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StreamFile self()
+  override StreamFile self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class StreamFile : gmime.stream.Stream
       Get builder for [gmime.stream_file.StreamFile]
       Returns: New builder object
   */
-  static StreamFileGidBuilder builder()
+  static StreamFileGidBuilder builder() nothrow
   {
     return new StreamFileGidBuilder;
   }
@@ -61,7 +61,7 @@ class StreamFile : gmime.stream.Stream
         fp = a FILE pointer
       Returns: a stream using fp.
   */
-  this(void* fp = null)
+  this(void* fp = null) nothrow
   {
     GMimeStream* _cretval;
     _cretval = g_mime_stream_file_new(fp);
@@ -81,7 +81,7 @@ class StreamFile : gmime.stream.Stream
         end = end boundary
       Returns: a stream using fp with bounds start and end.
   */
-  static gmime.stream_file.StreamFile newWithBounds(void* fp, long start, long end)
+  static gmime.stream_file.StreamFile newWithBounds(void* fp, long start, long end) nothrow
   {
     GMimeStream* _cretval;
     _cretval = g_mime_stream_file_new_with_bounds(fp, start, end);
@@ -117,7 +117,7 @@ class StreamFile : gmime.stream.Stream
       Returns: true if stream owns the backend FILE pointer or false
         otherwise.
   */
-  bool getOwner()
+  bool getOwner() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_stream_file_get_owner(cast(GMimeStreamFile*)this._cPtr);
@@ -133,7 +133,7 @@ class StreamFile : gmime.stream.Stream
       Params:
         owner = true if this stream should own the FILE pointer or false otherwise
   */
-  void setOwner(bool owner)
+  void setOwner(bool owner) nothrow
   {
     g_mime_stream_file_set_owner(cast(GMimeStreamFile*)this._cPtr, owner);
   }
@@ -151,7 +151,7 @@ final class StreamFileGidBuilder : StreamFileGidBuilderImpl!StreamFileGidBuilder
       Create object from builder.
       Returns: New object
   */
-  StreamFile build()
+  StreamFile build() nothrow
   {
     return new StreamFile(cast(void*)createGObject(StreamFile._getGType), Yes.Take);
   }

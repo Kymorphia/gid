@@ -47,7 +47,7 @@ interface Action
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_action_get_type != &gidSymbolNotFound ? g_action_get_type() : cast(GType)0;
@@ -60,14 +60,14 @@ interface Action
         If the action is disabled then calls to [gio.action.Action.activate] and
         [gio.action.Action.changeState] have no effect.
   */
-  @property bool enabled();
+  @property bool enabled() nothrow;
 
   /**
       Get `name` property.
       Returns: The name of the action.  This is mostly meaningful for identifying
         the action once it has been added to a #GActionGroup. It is immutable.
   */
-  @property string name();
+  @property string name() nothrow;
 
   /**
       Get `parameterType` property.
@@ -75,20 +75,20 @@ interface Action
         action. This is immutable, and may be null if no parameter is needed when
         activating the action.
   */
-  @property glib.variant_type.VariantType parameterType();
+  @property glib.variant_type.VariantType parameterType() nothrow;
 
   /**
       Get `state` property.
       Returns: The state of the action, or null if the action is stateless.
   */
-  @property glib.variant.Variant state();
+  @property glib.variant.Variant state() nothrow;
 
   /**
       Get `stateType` property.
       Returns: The #GVariantType of the state that the action has, or null if the
         action is stateless. This is immutable.
   */
-  @property glib.variant_type.VariantType stateType();
+  @property glib.variant_type.VariantType stateType() nothrow;
 
   /**
       Checks if action_name is valid.
@@ -103,7 +103,7 @@ interface Action
         actionName = a potential action name
       Returns: true if action_name is valid
   */
-  static bool nameIsValid(string actionName)
+  static bool nameIsValid(string actionName) nothrow
   {
     bool _retval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
@@ -183,7 +183,7 @@ interface Action
         targetValue = a #GVariant target value, or null
       Returns: a detailed format string
   */
-  static string printDetailedName(string actionName, glib.variant.Variant targetValue = null)
+  static string printDetailedName(string actionName, glib.variant.Variant targetValue = null) nothrow
   {
     char* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);

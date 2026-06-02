@@ -51,26 +51,26 @@ class LinkButton : gtk.button.Button
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_link_button_get_type != &gidSymbolNotFound ? gtk_link_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LinkButton self()
+  override LinkButton self() nothrow
   {
     return this;
   }
@@ -79,7 +79,7 @@ class LinkButton : gtk.button.Button
       Get builder for [gtk.link_button.LinkButton]
       Returns: New builder object
   */
-  static LinkButtonGidBuilder builder()
+  static LinkButtonGidBuilder builder() nothrow
   {
     return new LinkButtonGidBuilder;
   }
@@ -88,7 +88,7 @@ class LinkButton : gtk.button.Button
       Get `uri` property.
       Returns: The URI bound to this button.
   */
-  @property string uri()
+  @property string uri() nothrow
   {
     return getUri();
   }
@@ -98,7 +98,7 @@ class LinkButton : gtk.button.Button
       Params:
         propval = The URI bound to this button.
   */
-  @property void uri(string propval)
+  @property void uri(string propval) nothrow
   {
     setUri(propval);
   }
@@ -109,7 +109,7 @@ class LinkButton : gtk.button.Button
         
         A visited link is drawn in a different color.
   */
-  @property bool visited()
+  @property bool visited() nothrow
   {
     return getVisited();
   }
@@ -121,7 +121,7 @@ class LinkButton : gtk.button.Button
           
           A visited link is drawn in a different color.
   */
-  @property void visited(bool propval)
+  @property void visited(bool propval) nothrow
   {
     setVisited(propval);
   }
@@ -133,7 +133,7 @@ class LinkButton : gtk.button.Button
         uri = a valid URI
       Returns: a new link button widget.
   */
-  this(string uri)
+  this(string uri) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -149,7 +149,7 @@ class LinkButton : gtk.button.Button
         label = the text of the button
       Returns: a new link button widget.
   */
-  static gtk.link_button.LinkButton newWithLabel(string uri, string label = null)
+  static gtk.link_button.LinkButton newWithLabel(string uri, string label = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -164,7 +164,7 @@ class LinkButton : gtk.button.Button
       Returns: a valid URI. The returned string is owned by the link button
           and should not be modified or freed.
   */
-  string getUri()
+  string getUri() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_link_button_get_uri(cast(GtkLinkButton*)this._cPtr);
@@ -181,7 +181,7 @@ class LinkButton : gtk.button.Button
       The state may also be changed using [gtk.link_button.LinkButton.setVisited].
       Returns: true if the link has been visited, false otherwise
   */
-  bool getVisited()
+  bool getVisited() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_link_button_get_visited(cast(GtkLinkButton*)this._cPtr);
@@ -196,7 +196,7 @@ class LinkButton : gtk.button.Button
       Params:
         uri = a valid URI
   */
-  void setUri(string uri)
+  void setUri(string uri) nothrow
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     gtk_link_button_set_uri(cast(GtkLinkButton*)this._cPtr, _uri);
@@ -210,7 +210,7 @@ class LinkButton : gtk.button.Button
       Params:
         visited = the new “visited” state
   */
-  void setVisited(bool visited)
+  void setVisited(bool visited) nothrow
   {
     gtk_link_button_set_visited(cast(GtkLinkButton*)this._cPtr, visited);
   }
@@ -238,22 +238,30 @@ class LinkButton : gtk.button.Button
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivateLink(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivateLink(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.link_button.LinkButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.link_button.LinkButton.activateLink");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -274,7 +282,7 @@ class LinkButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
         propval = The URI bound to this button.
       Returns: Builder instance for fluent chaining
   */
-  T uri(string propval)
+  T uri(string propval) nothrow
   {
     return setProperty("uri", propval);
   }
@@ -287,7 +295,7 @@ class LinkButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
           A visited link is drawn in a different color.
       Returns: Builder instance for fluent chaining
   */
-  T visited(bool propval)
+  T visited(bool propval) nothrow
   {
     return setProperty("visited", propval);
   }
@@ -300,7 +308,7 @@ final class LinkButtonGidBuilder : LinkButtonGidBuilderImpl!LinkButtonGidBuilder
       Create object from builder.
       Returns: New object
   */
-  LinkButton build()
+  LinkButton build() nothrow
   {
     return new LinkButton(cast(void*)createGObject(LinkButton._getGType), No.Take);
   }

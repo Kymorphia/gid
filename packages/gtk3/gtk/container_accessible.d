@@ -16,26 +16,26 @@ class ContainerAccessible : gtk.widget_accessible.WidgetAccessible
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_container_accessible_get_type != &gidSymbolNotFound ? gtk_container_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ContainerAccessible self()
+  override ContainerAccessible self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class ContainerAccessible : gtk.widget_accessible.WidgetAccessible
       Get builder for [gtk.container_accessible.ContainerAccessible]
       Returns: New builder object
   */
-  static ContainerAccessibleGidBuilder builder()
+  static ContainerAccessibleGidBuilder builder() nothrow
   {
     return new ContainerAccessibleGidBuilder;
   }
@@ -63,7 +63,7 @@ final class ContainerAccessibleGidBuilder : ContainerAccessibleGidBuilderImpl!Co
       Create object from builder.
       Returns: New object
   */
-  ContainerAccessible build()
+  ContainerAccessible build() nothrow
   {
     return new ContainerAccessible(cast(void*)createGObject(ContainerAccessible._getGType), No.Take);
   }

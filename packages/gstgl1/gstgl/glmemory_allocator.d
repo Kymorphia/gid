@@ -18,26 +18,26 @@ class GLMemoryAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAllocator
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_memory_allocator_get_type != &gidSymbolNotFound ? gst_gl_memory_allocator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLMemoryAllocator self()
+  override GLMemoryAllocator self() nothrow
   {
     return this;
   }
@@ -46,13 +46,13 @@ class GLMemoryAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAllocator
       Get builder for [gstgl.glmemory_allocator.GLMemoryAllocator]
       Returns: New builder object
   */
-  static GLMemoryAllocatorGidBuilder builder()
+  static GLMemoryAllocatorGidBuilder builder() nothrow
   {
     return new GLMemoryAllocatorGidBuilder;
   }
 
   /** */
-  static gstgl.glmemory_allocator.GLMemoryAllocator getDefault(gstgl.glcontext.GLContext context)
+  static gstgl.glmemory_allocator.GLMemoryAllocator getDefault(gstgl.glcontext.GLContext context) nothrow
   {
     GstGLMemoryAllocator* _cretval;
     _cretval = gst_gl_memory_allocator_get_default(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
@@ -73,7 +73,7 @@ final class GLMemoryAllocatorGidBuilder : GLMemoryAllocatorGidBuilderImpl!GLMemo
       Create object from builder.
       Returns: New object
   */
-  GLMemoryAllocator build()
+  GLMemoryAllocator build() nothrow
   {
     return new GLMemoryAllocator(cast(void*)createGObject(GLMemoryAllocator._getGType), No.Take);
   }

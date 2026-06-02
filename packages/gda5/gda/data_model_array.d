@@ -18,26 +18,26 @@ class DataModelArray : gobject.object.ObjectWrap, gda.data_model.DataModel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_data_model_array_get_type != &gidSymbolNotFound ? gda_data_model_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DataModelArray self()
+  override DataModelArray self() nothrow
   {
     return this;
   }
@@ -46,31 +46,31 @@ class DataModelArray : gobject.object.ObjectWrap, gda.data_model.DataModel
       Get builder for [gda.data_model_array.DataModelArray]
       Returns: New builder object
   */
-  static DataModelArrayGidBuilder builder()
+  static DataModelArrayGidBuilder builder() nothrow
   {
     return new DataModelArrayGidBuilder;
   }
 
   /** */
-  @property uint nColumns()
+  @property uint nColumns() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-columns");
   }
 
   /** */
-  @property void nColumns(uint propval)
+  @property void nColumns(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("n-columns", propval);
   }
 
   /** */
-  @property bool readOnly()
+  @property bool readOnly() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("read-only");
   }
 
   /** */
-  @property void readOnly(bool propval)
+  @property void readOnly(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("read-only", propval);
   }
@@ -85,7 +85,7 @@ class DataModelArray : gobject.object.ObjectWrap, gda.data_model.DataModel
         cols = number of columns for rows in this data model.
       Returns: a pointer to the newly created #GdaDataModel.
   */
-  static gda.data_model.DataModel new_(int cols)
+  static gda.data_model.DataModel new_(int cols) nothrow
   {
     GdaDataModel* _cretval;
     _cretval = gda_data_model_array_new(cols);
@@ -96,7 +96,7 @@ class DataModelArray : gobject.object.ObjectWrap, gda.data_model.DataModel
   /**
       Frees all the rows in model.
   */
-  void clear()
+  void clear() nothrow
   {
     gda_data_model_array_clear(cast(GdaDataModelArray*)this._cPtr);
   }
@@ -129,7 +129,7 @@ class DataModelArray : gobject.object.ObjectWrap, gda.data_model.DataModel
       Params:
         cols = number of columns for rows this data model should use.
   */
-  void setNColumns(int cols)
+  void setNColumns(int cols) nothrow
   {
     gda_data_model_array_set_n_columns(cast(GdaDataModelArray*)this._cPtr, cols);
   }
@@ -142,13 +142,13 @@ class DataModelArrayGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
   mixin DataModelGidBuilderT!();
 
   /** */
-  T nColumns(uint propval)
+  T nColumns(uint propval) nothrow
   {
     return setProperty("n-columns", propval);
   }
 
   /** */
-  T readOnly(bool propval)
+  T readOnly(bool propval) nothrow
   {
     return setProperty("read-only", propval);
   }
@@ -161,7 +161,7 @@ final class DataModelArrayGidBuilder : DataModelArrayGidBuilderImpl!DataModelArr
       Create object from builder.
       Returns: New object
   */
-  DataModelArray build()
+  DataModelArray build() nothrow
   {
     return new DataModelArray(cast(void*)createGObject(DataModelArray._getGType), No.Take);
   }

@@ -16,26 +16,26 @@ class Int64Array : arrow.numeric_array.NumericArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_int64_array_get_type != &gidSymbolNotFound ? garrow_int64_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Int64Array self()
+  override Int64Array self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class Int64Array : arrow.numeric_array.NumericArray
       Get builder for [arrow.int64_array.Int64Array]
       Returns: New builder object
   */
-  static Int64ArrayGidBuilder builder()
+  static Int64ArrayGidBuilder builder() nothrow
   {
     return new Int64ArrayGidBuilder;
   }
 
   /** */
-  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
+  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls) nothrow
   {
     GArrowInt64Array* _cretval;
     _cretval = garrow_int64_array_new(length, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
@@ -58,7 +58,7 @@ class Int64Array : arrow.numeric_array.NumericArray
   }
 
   /** */
-  long getValue(long i)
+  long getValue(long i) nothrow
   {
     long _retval;
     _retval = garrow_int64_array_get_value(cast(GArrowInt64Array*)this._cPtr, i);
@@ -66,7 +66,7 @@ class Int64Array : arrow.numeric_array.NumericArray
   }
 
   /** */
-  long[] getValues()
+  long[] getValues() nothrow
   {
     const(long)* _cretval;
     long _cretlength;
@@ -104,7 +104,7 @@ final class Int64ArrayGidBuilder : Int64ArrayGidBuilderImpl!Int64ArrayGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Int64Array build()
+  Int64Array build() nothrow
   {
     return new Int64Array(cast(void*)createGObject(Int64Array._getGType), Yes.Take);
   }

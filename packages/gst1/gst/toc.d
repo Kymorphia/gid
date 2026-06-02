@@ -61,32 +61,32 @@ class Toc : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_toc_get_type != &gidSymbolNotFound ? gst_toc_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Toc self()
+  override Toc self() nothrow
   {
     return this;
   }
@@ -99,7 +99,7 @@ class Toc : gobject.boxed.Boxed
       Returns: newly allocated #GstToc structure, free it
             with gst_toc_unref().
   */
-  this(gst.types.TocScope scope_)
+  this(gst.types.TocScope scope_) nothrow
   {
     GstToc* _cretval;
     _cretval = gst_toc_new(scope_);
@@ -112,13 +112,13 @@ class Toc : gobject.boxed.Boxed
       Params:
         entry = A #GstTocEntry
   */
-  void appendEntry(gst.toc_entry.TocEntry entry)
+  void appendEntry(gst.toc_entry.TocEntry entry) nothrow
   {
     gst_toc_append_entry(cast(GstToc*)this._cPtr, entry ? cast(GstTocEntry*)entry._cPtr(Yes.Dup) : null);
   }
 
   /** */
-  void dump()
+  void dump() nothrow
   {
     gst_toc_dump(cast(GstToc*)this._cPtr);
   }
@@ -131,7 +131,7 @@ class Toc : gobject.boxed.Boxed
       Returns: #GstTocEntry with specified
         uid from the toc, or null if not found.
   */
-  gst.toc_entry.TocEntry findEntry(string uid)
+  gst.toc_entry.TocEntry findEntry(string uid) nothrow
   {
     GstTocEntry* _cretval;
     const(char)* _uid = uid.toCString(No.Alloc);
@@ -144,7 +144,7 @@ class Toc : gobject.boxed.Boxed
       Gets the list of #GstTocEntry of toc.
       Returns: A #GList of #GstTocEntry for entry
   */
-  gst.toc_entry.TocEntry[] getEntries()
+  gst.toc_entry.TocEntry[] getEntries() nothrow
   {
     GList* _cretval;
     _cretval = gst_toc_get_entries(cast(const(GstToc)*)this._cPtr);
@@ -153,7 +153,7 @@ class Toc : gobject.boxed.Boxed
   }
 
   /** */
-  gst.types.TocScope getScope()
+  gst.types.TocScope getScope() nothrow
   {
     GstTocScope _cretval;
     _cretval = gst_toc_get_scope(cast(const(GstToc)*)this._cPtr);
@@ -165,7 +165,7 @@ class Toc : gobject.boxed.Boxed
       Gets the tags for toc.
       Returns: A #GstTagList for entry
   */
-  gst.tag_list.TagList getTags()
+  gst.tag_list.TagList getTags() nothrow
   {
     GstTagList* _cretval;
     _cretval = gst_toc_get_tags(cast(const(GstToc)*)this._cPtr);
@@ -180,7 +180,7 @@ class Toc : gobject.boxed.Boxed
         tags = A #GstTagList or null
         mode = A #GstTagMergeMode
   */
-  void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode)
+  void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode) nothrow
   {
     gst_toc_merge_tags(cast(GstToc*)this._cPtr, tags ? cast(GstTagList*)tags._cPtr(No.Dup) : null, mode);
   }
@@ -191,7 +191,7 @@ class Toc : gobject.boxed.Boxed
       Params:
         tags = A #GstTagList or null
   */
-  void setTags(gst.tag_list.TagList tags = null)
+  void setTags(gst.tag_list.TagList tags = null) nothrow
   {
     gst_toc_set_tags(cast(GstToc*)this._cPtr, tags ? cast(GstTagList*)tags._cPtr(Yes.Dup) : null);
   }

@@ -32,32 +32,32 @@ class Pattern : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_pattern_get_type != &gidSymbolNotFound ? cairo_gobject_pattern_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Pattern self()
+  override Pattern self() nothrow
   {
     return this;
   }
@@ -88,7 +88,7 @@ class Pattern : gobject.boxed.Boxed
         green = green component of color
         blue = blue component of color
   */
-  void addColorStopRgb(double offset, double red, double green, double blue)
+  void addColorStopRgb(double offset, double red, double green, double blue) nothrow
   {
     cairo_pattern_add_color_stop_rgb(cast(cairo_pattern_t*)this._cPtr, offset, red, green, blue);
   }
@@ -119,7 +119,7 @@ class Pattern : gobject.boxed.Boxed
         blue = blue component of color
         alpha = alpha component of color
   */
-  void addColorStopRgba(double offset, double red, double green, double blue, double alpha)
+  void addColorStopRgba(double offset, double red, double green, double blue, double alpha) nothrow
   {
     cairo_pattern_add_color_stop_rgba(cast(cairo_pattern_t*)this._cPtr, offset, red, green, blue, alpha);
   }
@@ -134,7 +134,7 @@ class Pattern : gobject.boxed.Boxed
         [cairo.types.Status.PatternTypeMismatch] if pattern is not a gradient
         pattern.
   */
-  cairo.types.Status getColorStopCount(out int count)
+  cairo.types.Status getColorStopCount(out int count) nothrow
   {
     cairo_status_t _cretval;
     _cretval = cairo_pattern_get_color_stop_count(cast(cairo_pattern_t*)this._cPtr, cast(int*)&count);
@@ -162,7 +162,7 @@ class Pattern : gobject.boxed.Boxed
         not a gradient pattern, [cairo.types.Status.PatternTypeMismatch] is
         returned.
   */
-  cairo.types.Status getColorStopRgba(int index, out double offset, out double red, out double green, out double blue, out double alpha)
+  cairo.types.Status getColorStopRgba(int index, out double offset, out double red, out double green, out double blue, out double alpha) nothrow
   {
     cairo_status_t _cretval;
     _cretval = cairo_pattern_get_color_stop_rgba(cast(cairo_pattern_t*)this._cPtr, index, cast(double*)&offset, cast(double*)&red, cast(double*)&green, cast(double*)&blue, cast(double*)&alpha);
@@ -175,7 +175,7 @@ class Pattern : gobject.boxed.Boxed
       [cairo.pattern.Pattern.setDither].
       Returns: the current dithering mode.
   */
-  cairo.types.Dither getDither()
+  cairo.types.Dither getDither() nothrow
   {
     cairo_dither_t _cretval;
     _cretval = cairo_pattern_get_dither(cast(cairo_pattern_t*)this._cPtr);
@@ -189,7 +189,7 @@ class Pattern : gobject.boxed.Boxed
       Returns: the current extend strategy used for drawing the
         pattern.
   */
-  cairo.types.Extend getExtend()
+  cairo.types.Extend getExtend() nothrow
   {
     cairo_extend_t _cretval;
     _cretval = cairo_pattern_get_extend(cast(cairo_pattern_t*)this._cPtr);
@@ -202,7 +202,7 @@ class Pattern : gobject.boxed.Boxed
       for details on each filter.
       Returns: the current filter used for resizing the pattern.
   */
-  cairo.types.Filter getFilter()
+  cairo.types.Filter getFilter() nothrow
   {
     cairo_filter_t _cretval;
     _cretval = cairo_pattern_get_filter(cast(cairo_pattern_t*)this._cPtr);
@@ -222,7 +222,7 @@ class Pattern : gobject.boxed.Boxed
         [cairo.types.Status.PatternTypeMismatch] if pattern is not a linear
         gradient pattern.
   */
-  cairo.types.Status getLinearPoints(out double x0, out double y0, out double x1, out double y1)
+  cairo.types.Status getLinearPoints(out double x0, out double y0, out double x1, out double y1) nothrow
   {
     cairo_status_t _cretval;
     _cretval = cairo_pattern_get_linear_points(cast(cairo_pattern_t*)this._cPtr, cast(double*)&x0, cast(double*)&y0, cast(double*)&x1, cast(double*)&y1);
@@ -236,7 +236,7 @@ class Pattern : gobject.boxed.Boxed
       Params:
         matrix = return value for the matrix
   */
-  void getMatrix(out cairo.matrix.Matrix matrix)
+  void getMatrix(out cairo.matrix.Matrix matrix) nothrow
   {
     cairo_pattern_get_matrix(cast(cairo_pattern_t*)this._cPtr, cast(cairo_matrix_t*)&matrix);
   }
@@ -256,7 +256,7 @@ class Pattern : gobject.boxed.Boxed
         [cairo.types.Status.PatternTypeMismatch] if pattern is not a radial
         gradient pattern.
   */
-  cairo.types.Status getRadialCircles(out double x0, out double y0, out double r0, out double x1, out double y1, out double r1)
+  cairo.types.Status getRadialCircles(out double x0, out double y0, out double r0, out double x1, out double y1, out double r1) nothrow
   {
     cairo_status_t _cretval;
     _cretval = cairo_pattern_get_radial_circles(cast(cairo_pattern_t*)this._cPtr, cast(double*)&x0, cast(double*)&y0, cast(double*)&r0, cast(double*)&x1, cast(double*)&y1, cast(double*)&r1);
@@ -278,7 +278,7 @@ class Pattern : gobject.boxed.Boxed
         [cairo.types.Status.PatternTypeMismatch] if the pattern is not a solid
         color pattern.
   */
-  cairo.types.Status getRgba(out double red, out double green, out double blue, out double alpha)
+  cairo.types.Status getRgba(out double red, out double green, out double blue, out double alpha) nothrow
   {
     cairo_status_t _cretval;
     _cretval = cairo_pattern_get_rgba(cast(cairo_pattern_t*)this._cPtr, cast(double*)&red, cast(double*)&green, cast(double*)&blue, cast(double*)&alpha);
@@ -297,7 +297,7 @@ class Pattern : gobject.boxed.Boxed
         [cairo.types.Status.PatternTypeMismatch] if the pattern is not a surface
         pattern.
   */
-  cairo.types.Status getSurface(cairo.surface.Surface surface)
+  cairo.types.Status getSurface(cairo.surface.Surface surface) nothrow
   {
     cairo_status_t _cretval;
     _cretval = cairo_pattern_get_surface(cast(cairo_pattern_t*)this._cPtr, surface ? cast(cairo_surface_t**)surface._cPtr(No.Dup) : null);
@@ -310,7 +310,7 @@ class Pattern : gobject.boxed.Boxed
       types.
       Returns: The type of pattern.
   */
-  cairo.types.PatternType getPatternType()
+  cairo.types.PatternType getPatternType() nothrow
   {
     cairo_pattern_type_t _cretval;
     _cretval = cairo_pattern_get_type(cast(cairo_pattern_t*)this._cPtr);
@@ -328,7 +328,7 @@ class Pattern : gobject.boxed.Boxed
           attached to
       Returns: the user data previously attached or null.
   */
-  void* getUserData(cairo.types.UserDataKey key)
+  void* getUserData(cairo.types.UserDataKey key) nothrow
   {
     auto _retval = cairo_pattern_get_user_data(cast(cairo_pattern_t*)this._cPtr, &key);
     return _retval;
@@ -342,7 +342,7 @@ class Pattern : gobject.boxed.Boxed
       Params:
         dither = a #cairo_dither_t describing the new dithering mode
   */
-  void setDither(cairo.types.Dither dither)
+  void setDither(cairo.types.Dither dither) nothrow
   {
     cairo_pattern_set_dither(cast(cairo_pattern_t*)this._cPtr, dither);
   }
@@ -359,7 +359,7 @@ class Pattern : gobject.boxed.Boxed
         extend = a #cairo_extend_t describing how the area outside of the
           pattern will be drawn
   */
-  void setExtend(cairo.types.Extend extend)
+  void setExtend(cairo.types.Extend extend) nothrow
   {
     cairo_pattern_set_extend(cast(cairo_pattern_t*)this._cPtr, extend);
   }
@@ -383,7 +383,7 @@ class Pattern : gobject.boxed.Boxed
         filter = a #cairo_filter_t describing the filter to use for resizing
           the pattern
   */
-  void setFilter(cairo.types.Filter filter)
+  void setFilter(cairo.types.Filter filter) nothrow
   {
     cairo_pattern_set_filter(cast(cairo_pattern_t*)this._cPtr, filter);
   }
@@ -419,7 +419,7 @@ class Pattern : gobject.boxed.Boxed
       Params:
         matrix = a #cairo_matrix_t
   */
-  void setMatrix(cairo.matrix.Matrix matrix)
+  void setMatrix(cairo.matrix.Matrix matrix) nothrow
   {
     cairo_pattern_set_matrix(cast(cairo_pattern_t*)this._cPtr, cast(const(cairo_matrix_t)*)&matrix);
   }
@@ -431,7 +431,7 @@ class Pattern : gobject.boxed.Boxed
         [cairo.types.Status.InvalidMatrix], [cairo.types.Status.PatternTypeMismatch],
         or [cairo.types.Status.InvalidMeshConstruction].
   */
-  cairo.types.Status status()
+  cairo.types.Status status() nothrow
   {
     cairo_status_t _cretval;
     _cretval = cairo_pattern_status(cast(cairo_pattern_t*)this._cPtr);

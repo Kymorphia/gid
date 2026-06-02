@@ -15,26 +15,26 @@ class LargeStringArray : arrow.large_binary_array.LargeBinaryArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_large_string_array_get_type != &gidSymbolNotFound ? garrow_large_string_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LargeStringArray self()
+  override LargeStringArray self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class LargeStringArray : arrow.large_binary_array.LargeBinaryArray
       Get builder for [arrow.large_string_array.LargeStringArray]
       Returns: New builder object
   */
-  static LargeStringArrayGidBuilder builder()
+  static LargeStringArrayGidBuilder builder() nothrow
   {
     return new LargeStringArrayGidBuilder;
   }
 
   /** */
-  this(long length, arrow.buffer.Buffer valueOffsets, arrow.buffer.Buffer valueData, arrow.buffer.Buffer nullBitmap, long nNulls)
+  this(long length, arrow.buffer.Buffer valueOffsets, arrow.buffer.Buffer valueData, arrow.buffer.Buffer nullBitmap, long nNulls) nothrow
   {
     GArrowLargeStringArray* _cretval;
     _cretval = garrow_large_string_array_new(length, valueOffsets ? cast(GArrowBuffer*)valueOffsets._cPtr(No.Dup) : null, valueData ? cast(GArrowBuffer*)valueData._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
@@ -57,7 +57,7 @@ class LargeStringArray : arrow.large_binary_array.LargeBinaryArray
   }
 
   /** */
-  string getString(long i)
+  string getString(long i) nothrow
   {
     char* _cretval;
     _cretval = garrow_large_string_array_get_string(cast(GArrowLargeStringArray*)this._cPtr, i);
@@ -78,7 +78,7 @@ final class LargeStringArrayGidBuilder : LargeStringArrayGidBuilderImpl!LargeStr
       Create object from builder.
       Returns: New object
   */
-  LargeStringArray build()
+  LargeStringArray build() nothrow
   {
     return new LargeStringArray(cast(void*)createGObject(LargeStringArray._getGType), Yes.Take);
   }

@@ -21,26 +21,26 @@ class ComboBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.act
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_combo_box_accessible_get_type != &gidSymbolNotFound ? gtk_combo_box_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ComboBoxAccessible self()
+  override ComboBoxAccessible self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class ComboBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.act
       Get builder for [gtk.combo_box_accessible.ComboBoxAccessible]
       Returns: New builder object
   */
-  static ComboBoxAccessibleGidBuilder builder()
+  static ComboBoxAccessibleGidBuilder builder() nothrow
   {
     return new ComboBoxAccessibleGidBuilder;
   }
@@ -76,7 +76,7 @@ final class ComboBoxAccessibleGidBuilder : ComboBoxAccessibleGidBuilderImpl!Comb
       Create object from builder.
       Returns: New object
   */
-  ComboBoxAccessible build()
+  ComboBoxAccessible build() nothrow
   {
     return new ComboBoxAccessible(cast(void*)createGObject(ComboBoxAccessible._getGType), No.Take);
   }

@@ -34,7 +34,7 @@ class GlyphItem : gobject.boxed.Boxed
         endXOffset = horizontal displacement to apply after th
             glyph item. Positive values shift right
   */
-  this(pango.item.Item item = pango.item.Item.init, pango.glyph_string.GlyphString glyphs = pango.glyph_string.GlyphString.init, int yOffset = int.init, int startXOffset = int.init, int endXOffset = int.init)
+  this(pango.item.Item item = pango.item.Item.init, pango.glyph_string.GlyphString glyphs = pango.glyph_string.GlyphString.init, int yOffset = int.init, int startXOffset = int.init, int endXOffset = int.init) nothrow
   {
     super(gMalloc(PangoGlyphItem.sizeof), Yes.Take);
     this.item = item;
@@ -45,32 +45,32 @@ class GlyphItem : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_glyph_item_get_type != &gidSymbolNotFound ? pango_glyph_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GlyphItem self()
+  override GlyphItem self() nothrow
   {
     return this;
   }
@@ -79,7 +79,7 @@ class GlyphItem : gobject.boxed.Boxed
       Get `item` field.
       Returns: corresponding [pango.item.Item]
   */
-  @property pango.item.Item item()
+  @property pango.item.Item item() nothrow
   {
     return cToD!(pango.item.Item)(cast(void*)(cast(PangoGlyphItem*)this._cPtr).item);
   }
@@ -89,7 +89,7 @@ class GlyphItem : gobject.boxed.Boxed
       Params:
         propval = corresponding [pango.item.Item]
   */
-  @property void item(pango.item.Item propval)
+  @property void item(pango.item.Item propval) nothrow
   {
     cValueFree!(pango.item.Item)(cast(void*)(cast(PangoGlyphItem*)this._cPtr).item);
     dToC(propval, cast(void*)&(cast(PangoGlyphItem*)this._cPtr).item);
@@ -99,7 +99,7 @@ class GlyphItem : gobject.boxed.Boxed
       Get `glyphs` field.
       Returns: corresponding [pango.glyph_string.GlyphString]
   */
-  @property pango.glyph_string.GlyphString glyphs()
+  @property pango.glyph_string.GlyphString glyphs() nothrow
   {
     return cToD!(pango.glyph_string.GlyphString)(cast(void*)(cast(PangoGlyphItem*)this._cPtr).glyphs);
   }
@@ -109,7 +109,7 @@ class GlyphItem : gobject.boxed.Boxed
       Params:
         propval = corresponding [pango.glyph_string.GlyphString]
   */
-  @property void glyphs(pango.glyph_string.GlyphString propval)
+  @property void glyphs(pango.glyph_string.GlyphString propval) nothrow
   {
     cValueFree!(pango.glyph_string.GlyphString)(cast(void*)(cast(PangoGlyphItem*)this._cPtr).glyphs);
     dToC(propval, cast(void*)&(cast(PangoGlyphItem*)this._cPtr).glyphs);
@@ -120,7 +120,7 @@ class GlyphItem : gobject.boxed.Boxed
       Returns: shift of the baseline, relative to the baseline
           of the containing line. Positive values shift upwards
   */
-  @property int yOffset()
+  @property int yOffset() nothrow
   {
     return (cast(PangoGlyphItem*)this._cPtr).yOffset;
   }
@@ -131,7 +131,7 @@ class GlyphItem : gobject.boxed.Boxed
         propval = shift of the baseline, relative to the baseline
             of the containing line. Positive values shift upwards
   */
-  @property void yOffset(int propval)
+  @property void yOffset(int propval) nothrow
   {
     (cast(PangoGlyphItem*)this._cPtr).yOffset = propval;
   }
@@ -141,7 +141,7 @@ class GlyphItem : gobject.boxed.Boxed
       Returns: horizontal displacement to apply before the
           glyph item. Positive values shift right
   */
-  @property int startXOffset()
+  @property int startXOffset() nothrow
   {
     return (cast(PangoGlyphItem*)this._cPtr).startXOffset;
   }
@@ -152,7 +152,7 @@ class GlyphItem : gobject.boxed.Boxed
         propval = horizontal displacement to apply before the
             glyph item. Positive values shift right
   */
-  @property void startXOffset(int propval)
+  @property void startXOffset(int propval) nothrow
   {
     (cast(PangoGlyphItem*)this._cPtr).startXOffset = propval;
   }
@@ -162,7 +162,7 @@ class GlyphItem : gobject.boxed.Boxed
       Returns: horizontal displacement to apply after th
           glyph item. Positive values shift right
   */
-  @property int endXOffset()
+  @property int endXOffset() nothrow
   {
     return (cast(PangoGlyphItem*)this._cPtr).endXOffset;
   }
@@ -173,7 +173,7 @@ class GlyphItem : gobject.boxed.Boxed
         propval = horizontal displacement to apply after th
             glyph item. Positive values shift right
   */
-  @property void endXOffset(int propval)
+  @property void endXOffset(int propval) nothrow
   {
     (cast(PangoGlyphItem*)this._cPtr).endXOffset = propval;
   }
@@ -205,7 +205,7 @@ class GlyphItem : gobject.boxed.Boxed
           the elements using [pango.glyph_item.GlyphItem.free], the list using
           [glib.slist.SList.free].
   */
-  pango.glyph_item.GlyphItem[] applyAttrs(string text, pango.attr_list.AttrList list)
+  pango.glyph_item.GlyphItem[] applyAttrs(string text, pango.attr_list.AttrList list) nothrow
   {
     GSList* _cretval;
     const(char)* _text = text.toCString(No.Alloc);
@@ -218,7 +218,7 @@ class GlyphItem : gobject.boxed.Boxed
       Make a deep copy of an existing [pango.glyph_item.GlyphItem] structure.
       Returns: the newly allocated [pango.glyph_item.GlyphItem]
   */
-  pango.glyph_item.GlyphItem copy()
+  pango.glyph_item.GlyphItem copy() nothrow
   {
     PangoGlyphItem* _cretval;
     _cretval = pango_glyph_item_copy(cast(PangoGlyphItem*)this._cPtr);
@@ -247,7 +247,7 @@ class GlyphItem : gobject.boxed.Boxed
           representing text before split_index, which should be freed
           with [pango.glyph_item.GlyphItem.free].
   */
-  pango.glyph_item.GlyphItem split(string text, int splitIndex)
+  pango.glyph_item.GlyphItem split(string text, int splitIndex) nothrow
   {
     PangoGlyphItem* _cretval;
     const(char)* _text = text.toCString(No.Alloc);

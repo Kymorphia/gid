@@ -15,11 +15,8 @@ class DeleteEvent : gdk.event.Event
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.delete_event.DeleteEvent");
-
     super(cast(GdkEvent*)ptr, take);
   }
 }

@@ -16,26 +16,26 @@ class StructDataType : arrow.data_type.DataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_struct_data_type_get_type != &gidSymbolNotFound ? garrow_struct_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StructDataType self()
+  override StructDataType self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class StructDataType : arrow.data_type.DataType
       Get builder for [arrow.struct_data_type.StructDataType]
       Returns: New builder object
   */
-  static StructDataTypeGidBuilder builder()
+  static StructDataTypeGidBuilder builder() nothrow
   {
     return new StructDataTypeGidBuilder;
   }
 
   /** */
-  this(arrow.field.Field[] fields)
+  this(arrow.field.Field[] fields) nothrow
   {
     GArrowStructDataType* _cretval;
     auto _fields = gListFromD!(arrow.field.Field)(fields);
@@ -60,7 +60,7 @@ class StructDataType : arrow.data_type.DataType
   }
 
   /** */
-  arrow.field.Field getField(int i)
+  arrow.field.Field getField(int i) nothrow
   {
     GArrowField* _cretval;
     _cretval = garrow_struct_data_type_get_field(cast(GArrowStructDataType*)this._cPtr, i);
@@ -69,7 +69,7 @@ class StructDataType : arrow.data_type.DataType
   }
 
   /** */
-  arrow.field.Field getFieldByName(string name)
+  arrow.field.Field getFieldByName(string name) nothrow
   {
     GArrowField* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -79,7 +79,7 @@ class StructDataType : arrow.data_type.DataType
   }
 
   /** */
-  int getFieldIndex(string name)
+  int getFieldIndex(string name) nothrow
   {
     int _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -88,7 +88,7 @@ class StructDataType : arrow.data_type.DataType
   }
 
   /** */
-  arrow.field.Field[] getFields()
+  arrow.field.Field[] getFields() nothrow
   {
     GList* _cretval;
     _cretval = garrow_struct_data_type_get_fields(cast(GArrowStructDataType*)this._cPtr);
@@ -97,7 +97,7 @@ class StructDataType : arrow.data_type.DataType
   }
 
   /** */
-  int getNFields()
+  int getNFields() nothrow
   {
     int _retval;
     _retval = garrow_struct_data_type_get_n_fields(cast(GArrowStructDataType*)this._cPtr);
@@ -117,7 +117,7 @@ final class StructDataTypeGidBuilder : StructDataTypeGidBuilderImpl!StructDataTy
       Create object from builder.
       Returns: New object
   */
-  StructDataType build()
+  StructDataType build() nothrow
   {
     return new StructDataType(cast(void*)createGObject(StructDataType._getGType), Yes.Take);
   }

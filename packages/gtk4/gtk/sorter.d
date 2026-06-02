@@ -36,26 +36,26 @@ class Sorter : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_sorter_get_type != &gidSymbolNotFound ? gtk_sorter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Sorter self()
+  override Sorter self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class Sorter : gobject.object.ObjectWrap
       Get builder for [gtk.sorter.Sorter]
       Returns: New builder object
   */
-  static SorterGidBuilder builder()
+  static SorterGidBuilder builder() nothrow
   {
     return new SorterGidBuilder;
   }
@@ -86,7 +86,7 @@ class Sorter : gobject.object.ObjectWrap
       Params:
         change = How the sorter changed
   */
-  void changed(gtk.types.SorterChange change)
+  void changed(gtk.types.SorterChange change) nothrow
   {
     gtk_sorter_changed(cast(GtkSorter*)this._cPtr, change);
   }
@@ -112,7 +112,7 @@ class Sorter : gobject.object.ObjectWrap
           [gtk.types.Ordering.Smaller] if item1 < item2,
           [gtk.types.Ordering.Larger] if item1 > item2
   */
-  gtk.types.Ordering compare(gobject.object.ObjectWrap item1, gobject.object.ObjectWrap item2)
+  gtk.types.Ordering compare(gobject.object.ObjectWrap item1, gobject.object.ObjectWrap item2) nothrow
   {
     GtkOrdering _cretval;
     _cretval = gtk_sorter_compare(cast(GtkSorter*)this._cPtr, item1 ? cast(GObject*)item1._cPtr(No.Dup) : null, item2 ? cast(GObject*)item2._cPtr(No.Dup) : null);
@@ -129,7 +129,7 @@ class Sorter : gobject.object.ObjectWrap
       This function is intended to allow optimizations.
       Returns: The order
   */
-  gtk.types.SorterOrder getOrder()
+  gtk.types.SorterOrder getOrder() nothrow
   {
     GtkSorterOrder _cretval;
     _cretval = gtk_sorter_get_order(cast(GtkSorter*)this._cPtr);
@@ -163,14 +163,14 @@ class Sorter : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.SorterChange)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.sorter.Sorter)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -182,7 +182,14 @@ class Sorter : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.sorter.Sorter.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -202,7 +209,7 @@ final class SorterGidBuilder : SorterGidBuilderImpl!SorterGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Sorter build()
+  Sorter build() nothrow
   {
     return new Sorter(cast(void*)createGObject(Sorter._getGType), No.Take);
   }

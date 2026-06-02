@@ -25,26 +25,26 @@ class Paned : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_paned_get_type != &gidSymbolNotFound ? panel_paned_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Paned self()
+  override Paned self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class Paned : gtk.widget.Widget, gtk.orientable.Orientable
       Get builder for [panel.paned.Paned]
       Returns: New builder object
   */
-  static PanedGidBuilder builder()
+  static PanedGidBuilder builder() nothrow
   {
     return new PanedGidBuilder;
   }
@@ -64,7 +64,7 @@ class Paned : gtk.widget.Widget, gtk.orientable.Orientable
       Create a new #PanelPaned.
       Returns: a newly created #PanelPaned
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = panel_paned_new();
@@ -77,7 +77,7 @@ class Paned : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         child = a #GtkWidget to append.
   */
-  void append(gtk.widget.Widget child)
+  void append(gtk.widget.Widget child) nothrow
   {
     panel_paned_append(cast(PanelPaned*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -86,7 +86,7 @@ class Paned : gtk.widget.Widget, gtk.orientable.Orientable
       Gets the number of children in the paned.
       Returns: the number of children.
   */
-  uint getNChildren()
+  uint getNChildren() nothrow
   {
     uint _retval;
     _retval = panel_paned_get_n_children(cast(PanelPaned*)this._cPtr);
@@ -100,7 +100,7 @@ class Paned : gtk.widget.Widget, gtk.orientable.Orientable
         nth = the child position
       Returns: a #GtkWidget or null
   */
-  gtk.widget.Widget getNthChild(uint nth)
+  gtk.widget.Widget getNthChild(uint nth) nothrow
   {
     GtkWidget* _cretval;
     _cretval = panel_paned_get_nth_child(cast(PanelPaned*)this._cPtr, nth);
@@ -115,7 +115,7 @@ class Paned : gtk.widget.Widget, gtk.orientable.Orientable
         position = the position
         child = a #GtkWidget to insert.
   */
-  void insert(int position, gtk.widget.Widget child)
+  void insert(int position, gtk.widget.Widget child) nothrow
   {
     panel_paned_insert(cast(PanelPaned*)this._cPtr, position, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -127,7 +127,7 @@ class Paned : gtk.widget.Widget, gtk.orientable.Orientable
         child = a #GtkWidget to insert.
         sibling = the widget after which to insert.
   */
-  override void insertAfter(gtk.widget.Widget child, gtk.widget.Widget sibling)
+  override void insertAfter(gtk.widget.Widget child, gtk.widget.Widget sibling) nothrow
   {
     panel_paned_insert_after(cast(PanelPaned*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling._cPtr(No.Dup) : null);
   }
@@ -138,7 +138,7 @@ class Paned : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         child = a #GtkWidget to prepend.
   */
-  void prepend(gtk.widget.Widget child)
+  void prepend(gtk.widget.Widget child) nothrow
   {
     panel_paned_prepend(cast(PanelPaned*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -149,7 +149,7 @@ class Paned : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         child = a #GtkWidget
   */
-  void remove(gtk.widget.Widget child)
+  void remove(gtk.widget.Widget child) nothrow
   {
     panel_paned_remove(cast(PanelPaned*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -169,7 +169,7 @@ final class PanedGidBuilder : PanedGidBuilderImpl!PanedGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Paned build()
+  Paned build() nothrow
   {
     return new Paned(cast(void*)createGObject(Paned._getGType), No.Take);
   }

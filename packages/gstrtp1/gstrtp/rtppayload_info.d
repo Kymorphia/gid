@@ -15,11 +15,8 @@ class RTPPayloadInfo
   GstRTPPayloadInfo _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstrtp.rtppayload_info.RTPPayloadInfo");
-
     _cInstance = *cast(GstRTPPayloadInfo*)ptr;
 
     if (take)
@@ -27,7 +24,7 @@ class RTPPayloadInfo
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -36,7 +33,7 @@ class RTPPayloadInfo
       Get `payloadType` field.
       Returns: payload type, -1 means dynamic
   */
-  @property ubyte payloadType()
+  @property ubyte payloadType() nothrow
   {
     return (cast(GstRTPPayloadInfo*)this._cPtr).payloadType;
   }
@@ -46,7 +43,7 @@ class RTPPayloadInfo
       Params:
         propval = payload type, -1 means dynamic
   */
-  @property void payloadType(ubyte propval)
+  @property void payloadType(ubyte propval) nothrow
   {
     (cast(GstRTPPayloadInfo*)this._cPtr).payloadType = propval;
   }
@@ -56,7 +53,7 @@ class RTPPayloadInfo
       Returns: the media type(s), usually "audio", "video", "application", "text",
         "message".
   */
-  @property string media()
+  @property string media() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstRTPPayloadInfo*)this._cPtr).media);
   }
@@ -67,7 +64,7 @@ class RTPPayloadInfo
         propval = the media type(s), usually "audio", "video", "application", "text",
           "message".
   */
-  @property void media(string propval)
+  @property void media(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstRTPPayloadInfo*)this._cPtr).media);
     dToC(propval, cast(void*)&(cast(GstRTPPayloadInfo*)this._cPtr).media);
@@ -77,7 +74,7 @@ class RTPPayloadInfo
       Get `encodingName` field.
       Returns: the encoding name of @pt
   */
-  @property string encodingName()
+  @property string encodingName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstRTPPayloadInfo*)this._cPtr).encodingName);
   }
@@ -87,7 +84,7 @@ class RTPPayloadInfo
       Params:
         propval = the encoding name of @pt
   */
-  @property void encodingName(string propval)
+  @property void encodingName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstRTPPayloadInfo*)this._cPtr).encodingName);
     dToC(propval, cast(void*)&(cast(GstRTPPayloadInfo*)this._cPtr).encodingName);
@@ -97,7 +94,7 @@ class RTPPayloadInfo
       Get `clockRate` field.
       Returns: default clock rate, 0 = unknown/variable
   */
-  @property uint clockRate()
+  @property uint clockRate() nothrow
   {
     return (cast(GstRTPPayloadInfo*)this._cPtr).clockRate;
   }
@@ -107,7 +104,7 @@ class RTPPayloadInfo
       Params:
         propval = default clock rate, 0 = unknown/variable
   */
-  @property void clockRate(uint propval)
+  @property void clockRate(uint propval) nothrow
   {
     (cast(GstRTPPayloadInfo*)this._cPtr).clockRate = propval;
   }
@@ -117,7 +114,7 @@ class RTPPayloadInfo
       Returns: encoding parameters. For audio this is the number of
         channels. NULL = not applicable.
   */
-  @property string encodingParameters()
+  @property string encodingParameters() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstRTPPayloadInfo*)this._cPtr).encodingParameters);
   }
@@ -128,7 +125,7 @@ class RTPPayloadInfo
         propval = encoding parameters. For audio this is the number of
           channels. NULL = not applicable.
   */
-  @property void encodingParameters(string propval)
+  @property void encodingParameters(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstRTPPayloadInfo*)this._cPtr).encodingParameters);
     dToC(propval, cast(void*)&(cast(GstRTPPayloadInfo*)this._cPtr).encodingParameters);
@@ -138,7 +135,7 @@ class RTPPayloadInfo
       Get `bitrate` field.
       Returns: the bitrate of the media. 0 = unknown/variable.
   */
-  @property uint bitrate()
+  @property uint bitrate() nothrow
   {
     return (cast(GstRTPPayloadInfo*)this._cPtr).bitrate;
   }
@@ -148,7 +145,7 @@ class RTPPayloadInfo
       Params:
         propval = the bitrate of the media. 0 = unknown/variable.
   */
-  @property void bitrate(uint propval)
+  @property void bitrate(uint propval) nothrow
   {
     (cast(GstRTPPayloadInfo*)this._cPtr).bitrate = propval;
   }
@@ -165,7 +162,7 @@ class RTPPayloadInfo
         encodingName = the encoding name to find
       Returns: a #GstRTPPayloadInfo or NULL when no info could be found.
   */
-  static gstrtp.rtppayload_info.RTPPayloadInfo forName(string media, string encodingName)
+  static gstrtp.rtppayload_info.RTPPayloadInfo forName(string media, string encodingName) nothrow
   {
     const(GstRTPPayloadInfo)* _cretval;
     const(char)* _media = media.toCString(No.Alloc);
@@ -184,7 +181,7 @@ class RTPPayloadInfo
         payloadType = the payload_type to find
       Returns: a #GstRTPPayloadInfo or NULL when no info could be found.
   */
-  static gstrtp.rtppayload_info.RTPPayloadInfo forPt(ubyte payloadType)
+  static gstrtp.rtppayload_info.RTPPayloadInfo forPt(ubyte payloadType) nothrow
   {
     const(GstRTPPayloadInfo)* _cretval;
     _cretval = gst_rtp_payload_info_for_pt(payloadType);

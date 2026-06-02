@@ -16,18 +16,15 @@ class Implementor
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for atk.implementor.Implementor");
-
     _cInstancePtr = cast(AtkImplementor*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -38,7 +35,7 @@ class Implementor
       Returns: a reference to an object's #AtkObject
         implementation
   */
-  atk.object.ObjectWrap refAccessible()
+  atk.object.ObjectWrap refAccessible() nothrow
   {
     AtkObject* _cretval;
     _cretval = atk_implementor_ref_accessible(cast(AtkImplementor*)this._cPtr);

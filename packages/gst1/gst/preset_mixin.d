@@ -46,7 +46,7 @@ template PresetT()
         name = preset name to remove
       Returns: true for success, false if e.g. there is no preset with that name
   */
-  override bool deletePreset(string name)
+  override bool deletePreset(string name) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -65,7 +65,7 @@ template PresetT()
       Returns: true for success, false if e.g. there is no preset with that name
         or no value for the given tag
   */
-  override bool getMeta(string name, string tag, out string value)
+  override bool getMeta(string name, string tag, out string value) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -80,7 +80,7 @@ template PresetT()
       Get a copy of preset names as a null terminated string array.
       Returns: list with names, use [glib.global.strfreev] after usage.
   */
-  override string[] getPresetNames()
+  override string[] getPresetNames() nothrow
   {
     char** _cretval;
     _cretval = gst_preset_get_preset_names(cast(GstPreset*)this._cPtr);
@@ -104,7 +104,7 @@ template PresetT()
       Returns: an
           array of property names which should be freed with [glib.global.strfreev] after use.
   */
-  override string[] getPropertyNames()
+  override string[] getPropertyNames() nothrow
   {
     char** _cretval;
     _cretval = gst_preset_get_property_names(cast(GstPreset*)this._cPtr);
@@ -127,7 +127,7 @@ template PresetT()
       Check if one can add new presets, change existing ones and remove presets.
       Returns: true if presets are editable or false if they are static
   */
-  override bool isEditable()
+  override bool isEditable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_preset_is_editable(cast(GstPreset*)this._cPtr);
@@ -141,7 +141,7 @@ template PresetT()
         name = preset name to load
       Returns: true for success, false if e.g. there is no preset with that name
   */
-  override bool loadPreset(string name)
+  override bool loadPreset(string name) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -158,7 +158,7 @@ template PresetT()
         newName = new preset name
       Returns: true for success, false if e.g. there is no preset with old_name
   */
-  override bool renamePreset(string oldName, string newName)
+  override bool renamePreset(string oldName, string newName) nothrow
   {
     bool _retval;
     const(char)* _oldName = oldName.toCString(No.Alloc);
@@ -175,7 +175,7 @@ template PresetT()
         name = preset name to save
       Returns: true for success, false
   */
-  override bool savePreset(string name)
+  override bool savePreset(string name) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -194,7 +194,7 @@ template PresetT()
         value = new value
       Returns: true for success, false if e.g. there is no preset with that name
   */
-  override bool setMeta(string name, string tag, string value = null)
+  override bool setMeta(string name, string tag, string value = null) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);

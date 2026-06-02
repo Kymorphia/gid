@@ -18,26 +18,26 @@ class PrintCompositor : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_print_compositor_get_type != &gidSymbolNotFound ? gtk_source_print_compositor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PrintCompositor self()
+  override PrintCompositor self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       Get builder for [gtksource.print_compositor.PrintCompositor]
       Returns: New builder object
   */
-  static PrintCompositorGidBuilder builder()
+  static PrintCompositorGidBuilder builder() nothrow
   {
     return new PrintCompositorGidBuilder;
   }
@@ -62,7 +62,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         The value of this property cannot be changed anymore after the first
         call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
   */
-  @property string bodyFontName()
+  @property string bodyFontName() nothrow
   {
     return getBodyFontName();
   }
@@ -79,7 +79,7 @@ class PrintCompositor : gobject.object.ObjectWrap
           The value of this property cannot be changed anymore after the first
           call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
   */
-  @property void bodyFontName(string propval)
+  @property void bodyFontName(string propval) nothrow
   {
     setBodyFontName(propval);
   }
@@ -88,7 +88,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       Get `buffer` property.
       Returns: The GtkSourceBuffer object to print.
   */
-  @property gtksource.buffer.Buffer buffer()
+  @property gtksource.buffer.Buffer buffer() nothrow
   {
     return getBuffer();
   }
@@ -105,7 +105,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         The value of this property cannot be changed anymore after the first
         call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
   */
-  @property string footerFontName()
+  @property string footerFontName() nothrow
   {
     return getFooterFontName();
   }
@@ -123,7 +123,7 @@ class PrintCompositor : gobject.object.ObjectWrap
           The value of this property cannot be changed anymore after the first
           call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
   */
-  @property void footerFontName(string propval)
+  @property void footerFontName(string propval) nothrow
   {
     setFooterFontName(propval);
   }
@@ -140,7 +140,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         The value of this property cannot be changed anymore after the first
         call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
   */
-  @property string headerFontName()
+  @property string headerFontName() nothrow
   {
     return getHeaderFontName();
   }
@@ -158,7 +158,7 @@ class PrintCompositor : gobject.object.ObjectWrap
           The value of this property cannot be changed anymore after the first
           call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
   */
-  @property void headerFontName(string propval)
+  @property void headerFontName(string propval) nothrow
   {
     setHeaderFontName(propval);
   }
@@ -170,7 +170,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         The value of this property cannot be changed anymore after the first
         call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
   */
-  @property bool highlightSyntax()
+  @property bool highlightSyntax() nothrow
   {
     return getHighlightSyntax();
   }
@@ -183,7 +183,7 @@ class PrintCompositor : gobject.object.ObjectWrap
           The value of this property cannot be changed anymore after the first
           call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
   */
-  @property void highlightSyntax(bool propval)
+  @property void highlightSyntax(bool propval) nothrow
   {
     setHighlightSyntax(propval);
   }
@@ -200,7 +200,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         The value of this property cannot be changed anymore after the first
         call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
   */
-  @property string lineNumbersFontName()
+  @property string lineNumbersFontName() nothrow
   {
     return getLineNumbersFontName();
   }
@@ -218,7 +218,7 @@ class PrintCompositor : gobject.object.ObjectWrap
           The value of this property cannot be changed anymore after the first
           call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
   */
-  @property void lineNumbersFontName(string propval)
+  @property void lineNumbersFontName(string propval) nothrow
   {
     setLineNumbersFontName(propval);
   }
@@ -228,7 +228,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       Returns: The number of pages in the document or <code>-1</code> if the
         document has not been completely paginated.
   */
-  @property int nPages()
+  @property int nPages() nothrow
   {
     return getNPages();
   }
@@ -244,7 +244,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         The value of this property cannot be changed anymore after the first
         call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
   */
-  @property bool printFooter()
+  @property bool printFooter() nothrow
   {
     return getPrintFooter();
   }
@@ -261,7 +261,7 @@ class PrintCompositor : gobject.object.ObjectWrap
           The value of this property cannot be changed anymore after the first
           call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
   */
-  @property void printFooter(bool propval)
+  @property void printFooter(bool propval) nothrow
   {
     setPrintFooter(propval);
   }
@@ -277,7 +277,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         The value of this property cannot be changed anymore after the first
         call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
   */
-  @property bool printHeader()
+  @property bool printHeader() nothrow
   {
     return getPrintHeader();
   }
@@ -294,7 +294,7 @@ class PrintCompositor : gobject.object.ObjectWrap
           The value of this property cannot be changed anymore after the first
           call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
   */
-  @property void printHeader(bool propval)
+  @property void printHeader(bool propval) nothrow
   {
     setPrintHeader(propval);
   }
@@ -308,7 +308,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         The value of this property cannot be changed anymore after the first
         call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
   */
-  @property uint printLineNumbers()
+  @property uint printLineNumbers() nothrow
   {
     return getPrintLineNumbers();
   }
@@ -323,7 +323,7 @@ class PrintCompositor : gobject.object.ObjectWrap
           The value of this property cannot be changed anymore after the first
           call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
   */
-  @property void printLineNumbers(uint propval)
+  @property void printLineNumbers(uint propval) nothrow
   {
     setPrintLineNumbers(propval);
   }
@@ -335,7 +335,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         The value of this property cannot be changed anymore after the first
         call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
   */
-  @property uint tabWidth()
+  @property uint tabWidth() nothrow
   {
     return getTabWidth();
   }
@@ -348,7 +348,7 @@ class PrintCompositor : gobject.object.ObjectWrap
           The value of this property cannot be changed anymore after the first
           call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
   */
-  @property void tabWidth(uint propval)
+  @property void tabWidth(uint propval) nothrow
   {
     setTabWidth(propval);
   }
@@ -360,7 +360,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         The value of this property cannot be changed anymore after the first
         call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
   */
-  @property gtk.types.WrapMode wrapMode()
+  @property gtk.types.WrapMode wrapMode() nothrow
   {
     return getWrapMode();
   }
@@ -373,7 +373,7 @@ class PrintCompositor : gobject.object.ObjectWrap
           The value of this property cannot be changed anymore after the first
           call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
   */
-  @property void wrapMode(gtk.types.WrapMode propval)
+  @property void wrapMode(gtk.types.WrapMode propval) nothrow
   {
     setWrapMode(propval);
   }
@@ -385,7 +385,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         buffer = the #GtkSourceBuffer to print.
       Returns: a new print compositor object.
   */
-  this(gtksource.buffer.Buffer buffer)
+  this(gtksource.buffer.Buffer buffer) nothrow
   {
     GtkSourcePrintCompositor* _cretval;
     _cretval = gtk_source_print_compositor_new(buffer ? cast(GtkSourceBuffer*)buffer._cPtr(No.Dup) : null);
@@ -405,7 +405,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         view = a #GtkSourceView to get configuration from.
       Returns: a new print compositor object.
   */
-  static gtksource.print_compositor.PrintCompositor newFromView(gtksource.view.View view)
+  static gtksource.print_compositor.PrintCompositor newFromView(gtksource.view.View view) nothrow
   {
     GtkSourcePrintCompositor* _cretval;
     _cretval = gtk_source_print_compositor_new_from_view(view ? cast(GtkSourceView*)view._cPtr(No.Dup) : null);
@@ -443,7 +443,7 @@ class PrintCompositor : gobject.object.ObjectWrap
                     drawing the page for printing.
         pageNr = the number of the page to print.
   */
-  void drawPage(gtk.print_context.PrintContext context, int pageNr)
+  void drawPage(gtk.print_context.PrintContext context, int pageNr) nothrow
   {
     gtk_source_print_compositor_draw_page(cast(GtkSourcePrintCompositor*)this._cPtr, context ? cast(GtkPrintContext*)context._cPtr(No.Dup) : null, pageNr);
   }
@@ -454,7 +454,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       Returns: a new string containing the name of the font used to print the
         text body.
   */
-  string getBodyFontName()
+  string getBodyFontName() nothrow
   {
     char* _cretval;
     _cretval = gtk_source_print_compositor_get_body_font_name(cast(GtkSourcePrintCompositor*)this._cPtr);
@@ -469,7 +469,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         unit = the unit for the return value.
       Returns: the bottom margin.
   */
-  double getBottomMargin(gtk.types.Unit unit)
+  double getBottomMargin(gtk.types.Unit unit) nothrow
   {
     double _retval;
     _retval = gtk_source_print_compositor_get_bottom_margin(cast(GtkSourcePrintCompositor*)this._cPtr, unit);
@@ -482,7 +482,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       should not be unreferenced.
       Returns: the #GtkSourceBuffer associated with the compositor.
   */
-  gtksource.buffer.Buffer getBuffer()
+  gtksource.buffer.Buffer getBuffer() nothrow
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_print_compositor_get_buffer(cast(GtkSourcePrintCompositor*)this._cPtr);
@@ -496,7 +496,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       Returns: a new string containing the name of the font used to print
         the page footer.
   */
-  string getFooterFontName()
+  string getFooterFontName() nothrow
   {
     char* _cretval;
     _cretval = gtk_source_print_compositor_get_footer_font_name(cast(GtkSourcePrintCompositor*)this._cPtr);
@@ -510,7 +510,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       Returns: a new string containing the name of the font used to print
         the page header.
   */
-  string getHeaderFontName()
+  string getHeaderFontName() nothrow
   {
     char* _cretval;
     _cretval = gtk_source_print_compositor_get_header_font_name(cast(GtkSourcePrintCompositor*)this._cPtr);
@@ -524,7 +524,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       only if the buffer to print has highlighting activated.
       Returns: true if the printed output will be highlighted.
   */
-  bool getHighlightSyntax()
+  bool getHighlightSyntax() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_print_compositor_get_highlight_syntax(cast(GtkSourcePrintCompositor*)this._cPtr);
@@ -538,7 +538,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         unit = the unit for the return value.
       Returns: the left margin
   */
-  double getLeftMargin(gtk.types.Unit unit)
+  double getLeftMargin(gtk.types.Unit unit) nothrow
   {
     double _retval;
     _retval = gtk_source_print_compositor_get_left_margin(cast(GtkSourcePrintCompositor*)this._cPtr, unit);
@@ -551,7 +551,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       Returns: a new string containing the name of the font used to print
         line numbers on the left margin.
   */
-  string getLineNumbersFontName()
+  string getLineNumbersFontName() nothrow
   {
     char* _cretval;
     _cretval = gtk_source_print_compositor_get_line_numbers_font_name(cast(GtkSourcePrintCompositor*)this._cPtr);
@@ -565,7 +565,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       Returns: the number of pages in the document or <code>-1</code> if the
         document has not been completely paginated.
   */
-  int getNPages()
+  int getNPages() nothrow
   {
     int _retval;
     _retval = gtk_source_print_compositor_get_n_pages(cast(GtkSourcePrintCompositor*)this._cPtr);
@@ -576,7 +576,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       Returns the current fraction of the document pagination that has been completed.
       Returns: a fraction from 0.0 to 1.0 inclusive.
   */
-  double getPaginationProgress()
+  double getPaginationProgress() nothrow
   {
     double _retval;
     _retval = gtk_source_print_compositor_get_pagination_progress(cast(GtkSourcePrintCompositor*)this._cPtr);
@@ -590,7 +590,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       with [gtksource.print_compositor.PrintCompositor.setFooterFormat].
       Returns: true if the footer is set to be printed.
   */
-  bool getPrintFooter()
+  bool getPrintFooter() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_print_compositor_get_print_footer(cast(GtkSourcePrintCompositor*)this._cPtr);
@@ -604,7 +604,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       with [gtksource.print_compositor.PrintCompositor.setHeaderFormat].
       Returns: true if the header is set to be printed.
   */
-  bool getPrintHeader()
+  bool getPrintHeader() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_print_compositor_get_print_header(cast(GtkSourcePrintCompositor*)this._cPtr);
@@ -617,7 +617,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       1 (i.e. numbers printed in all lines).
       Returns: the interval of printed line numbers.
   */
-  uint getPrintLineNumbers()
+  uint getPrintLineNumbers() nothrow
   {
     uint _retval;
     _retval = gtk_source_print_compositor_get_print_line_numbers(cast(GtkSourcePrintCompositor*)this._cPtr);
@@ -631,7 +631,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         unit = the unit for the return value.
       Returns: the right margin.
   */
-  double getRightMargin(gtk.types.Unit unit)
+  double getRightMargin(gtk.types.Unit unit) nothrow
   {
     double _retval;
     _retval = gtk_source_print_compositor_get_right_margin(cast(GtkSourcePrintCompositor*)this._cPtr, unit);
@@ -642,7 +642,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       Returns the width of tabulation in characters for printed text.
       Returns: width of tab.
   */
-  uint getTabWidth()
+  uint getTabWidth() nothrow
   {
     uint _retval;
     _retval = gtk_source_print_compositor_get_tab_width(cast(GtkSourcePrintCompositor*)this._cPtr);
@@ -656,7 +656,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         unit = the unit for the return value.
       Returns: the top margin.
   */
-  double getTopMargin(gtk.types.Unit unit)
+  double getTopMargin(gtk.types.Unit unit) nothrow
   {
     double _retval;
     _retval = gtk_source_print_compositor_get_top_margin(cast(GtkSourcePrintCompositor*)this._cPtr, unit);
@@ -667,7 +667,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       Gets the line wrapping mode for the printed text.
       Returns: the line wrap mode.
   */
-  gtk.types.WrapMode getWrapMode()
+  gtk.types.WrapMode getWrapMode() nothrow
   {
     GtkWrapMode _cretval;
     _cretval = gtk_source_print_compositor_get_wrap_mode(cast(GtkSourcePrintCompositor*)this._cPtr);
@@ -742,7 +742,7 @@ class PrintCompositor : gobject.object.ObjectWrap
           are used by the the compositor to paginate the document.
       Returns: true if the document has been completely paginated, false otherwise.
   */
-  bool paginate(gtk.print_context.PrintContext context)
+  bool paginate(gtk.print_context.PrintContext context) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_print_compositor_paginate(cast(GtkSourcePrintCompositor*)this._cPtr, context ? cast(GtkPrintContext*)context._cPtr(No.Dup) : null);
@@ -763,7 +763,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       Params:
         fontName = the name of the default font for the body text.
   */
-  void setBodyFontName(string fontName)
+  void setBodyFontName(string fontName) nothrow
   {
     const(char)* _fontName = fontName.toCString(No.Alloc);
     gtk_source_print_compositor_set_body_font_name(cast(GtkSourcePrintCompositor*)this._cPtr, _fontName);
@@ -776,7 +776,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         margin = the new bottom margin in units of unit.
         unit = the units for margin.
   */
-  void setBottomMargin(double margin, gtk.types.Unit unit)
+  void setBottomMargin(double margin, gtk.types.Unit unit) nothrow
   {
     gtk_source_print_compositor_set_bottom_margin(cast(GtkSourcePrintCompositor*)this._cPtr, margin, unit);
   }
@@ -797,7 +797,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       Params:
         fontName = the name of the font for the footer text, or null.
   */
-  void setFooterFontName(string fontName = null)
+  void setFooterFontName(string fontName = null) nothrow
   {
     const(char)* _fontName = fontName.toCString(No.Alloc);
     gtk_source_print_compositor_set_footer_font_name(cast(GtkSourcePrintCompositor*)this._cPtr, _fontName);
@@ -813,7 +813,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         center = a format string to print on the center of the footer.
         right = a format string to print on the right of the footer.
   */
-  void setFooterFormat(bool separator, string left = null, string center = null, string right = null)
+  void setFooterFormat(bool separator, string left = null, string center = null, string right = null) nothrow
   {
     const(char)* _left = left.toCString(No.Alloc);
     const(char)* _center = center.toCString(No.Alloc);
@@ -837,7 +837,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       Params:
         fontName = the name of the font for header text, or null.
   */
-  void setHeaderFontName(string fontName = null)
+  void setHeaderFontName(string fontName = null) nothrow
   {
     const(char)* _fontName = fontName.toCString(No.Alloc);
     gtk_source_print_compositor_set_header_font_name(cast(GtkSourcePrintCompositor*)this._cPtr, _fontName);
@@ -872,7 +872,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         center = a format string to print on the center of the header.
         right = a format string to print on the right of the header.
   */
-  void setHeaderFormat(bool separator, string left = null, string center = null, string right = null)
+  void setHeaderFormat(bool separator, string left = null, string center = null, string right = null) nothrow
   {
     const(char)* _left = left.toCString(No.Alloc);
     const(char)* _center = center.toCString(No.Alloc);
@@ -890,7 +890,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       Params:
         highlight = whether syntax should be highlighted.
   */
-  void setHighlightSyntax(bool highlight)
+  void setHighlightSyntax(bool highlight) nothrow
   {
     gtk_source_print_compositor_set_highlight_syntax(cast(GtkSourcePrintCompositor*)this._cPtr, highlight);
   }
@@ -902,7 +902,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         margin = the new left margin in units of unit.
         unit = the units for margin.
   */
-  void setLeftMargin(double margin, gtk.types.Unit unit)
+  void setLeftMargin(double margin, gtk.types.Unit unit) nothrow
   {
     gtk_source_print_compositor_set_left_margin(cast(GtkSourcePrintCompositor*)this._cPtr, margin, unit);
   }
@@ -923,7 +923,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       Params:
         fontName = the name of the font for line numbers, or null.
   */
-  void setLineNumbersFontName(string fontName = null)
+  void setLineNumbersFontName(string fontName = null) nothrow
   {
     const(char)* _fontName = fontName.toCString(No.Alloc);
     gtk_source_print_compositor_set_line_numbers_font_name(cast(GtkSourcePrintCompositor*)this._cPtr, _fontName);
@@ -944,7 +944,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       Params:
         print = true if you want the footer to be printed.
   */
-  void setPrintFooter(bool print)
+  void setPrintFooter(bool print) nothrow
   {
     gtk_source_print_compositor_set_print_footer(cast(GtkSourcePrintCompositor*)this._cPtr, print);
   }
@@ -964,7 +964,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       Params:
         print = true if you want the header to be printed.
   */
-  void setPrintHeader(bool print)
+  void setPrintHeader(bool print) nothrow
   {
     gtk_source_print_compositor_set_print_header(cast(GtkSourcePrintCompositor*)this._cPtr, print);
   }
@@ -982,7 +982,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       Params:
         interval = interval for printed line numbers.
   */
-  void setPrintLineNumbers(uint interval)
+  void setPrintLineNumbers(uint interval) nothrow
   {
     gtk_source_print_compositor_set_print_line_numbers(cast(GtkSourcePrintCompositor*)this._cPtr, interval);
   }
@@ -994,7 +994,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         margin = the new right margin in units of unit.
         unit = the units for margin.
   */
-  void setRightMargin(double margin, gtk.types.Unit unit)
+  void setRightMargin(double margin, gtk.types.Unit unit) nothrow
   {
     gtk_source_print_compositor_set_right_margin(cast(GtkSourcePrintCompositor*)this._cPtr, margin, unit);
   }
@@ -1008,7 +1008,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       Params:
         width = width of tab in characters.
   */
-  void setTabWidth(uint width)
+  void setTabWidth(uint width) nothrow
   {
     gtk_source_print_compositor_set_tab_width(cast(GtkSourcePrintCompositor*)this._cPtr, width);
   }
@@ -1020,7 +1020,7 @@ class PrintCompositor : gobject.object.ObjectWrap
         margin = the new top margin in units of unit
         unit = the units for margin
   */
-  void setTopMargin(double margin, gtk.types.Unit unit)
+  void setTopMargin(double margin, gtk.types.Unit unit) nothrow
   {
     gtk_source_print_compositor_set_top_margin(cast(GtkSourcePrintCompositor*)this._cPtr, margin, unit);
   }
@@ -1034,7 +1034,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       Params:
         wrapMode = a #GtkWrapMode.
   */
-  void setWrapMode(gtk.types.WrapMode wrapMode)
+  void setWrapMode(gtk.types.WrapMode wrapMode) nothrow
   {
     gtk_source_print_compositor_set_wrap_mode(cast(GtkSourcePrintCompositor*)this._cPtr, wrapMode);
   }
@@ -1057,7 +1057,7 @@ class PrintCompositorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
       Returns: Builder instance for fluent chaining
   */
-  T bodyFontName(string propval)
+  T bodyFontName(string propval) nothrow
   {
     return setProperty("body-font-name", propval);
   }
@@ -1068,7 +1068,7 @@ class PrintCompositorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The GtkSourceBuffer object to print.
       Returns: Builder instance for fluent chaining
   */
-  T buffer(gtksource.buffer.Buffer propval)
+  T buffer(gtksource.buffer.Buffer propval) nothrow
   {
     return setProperty("buffer", propval);
   }
@@ -1087,7 +1087,7 @@ class PrintCompositorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
       Returns: Builder instance for fluent chaining
   */
-  T footerFontName(string propval)
+  T footerFontName(string propval) nothrow
   {
     return setProperty("footer-font-name", propval);
   }
@@ -1106,7 +1106,7 @@ class PrintCompositorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
       Returns: Builder instance for fluent chaining
   */
-  T headerFontName(string propval)
+  T headerFontName(string propval) nothrow
   {
     return setProperty("header-font-name", propval);
   }
@@ -1120,7 +1120,7 @@ class PrintCompositorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
       Returns: Builder instance for fluent chaining
   */
-  T highlightSyntax(bool propval)
+  T highlightSyntax(bool propval) nothrow
   {
     return setProperty("highlight-syntax", propval);
   }
@@ -1139,7 +1139,7 @@ class PrintCompositorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
       Returns: Builder instance for fluent chaining
   */
-  T lineNumbersFontName(string propval)
+  T lineNumbersFontName(string propval) nothrow
   {
     return setProperty("line-numbers-font-name", propval);
   }
@@ -1157,7 +1157,7 @@ class PrintCompositorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
       Returns: Builder instance for fluent chaining
   */
-  T printFooter(bool propval)
+  T printFooter(bool propval) nothrow
   {
     return setProperty("print-footer", propval);
   }
@@ -1175,7 +1175,7 @@ class PrintCompositorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
       Returns: Builder instance for fluent chaining
   */
-  T printHeader(bool propval)
+  T printHeader(bool propval) nothrow
   {
     return setProperty("print-header", propval);
   }
@@ -1191,7 +1191,7 @@ class PrintCompositorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
       Returns: Builder instance for fluent chaining
   */
-  T printLineNumbers(uint propval)
+  T printLineNumbers(uint propval) nothrow
   {
     return setProperty("print-line-numbers", propval);
   }
@@ -1205,7 +1205,7 @@ class PrintCompositorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
       Returns: Builder instance for fluent chaining
   */
-  T tabWidth(uint propval)
+  T tabWidth(uint propval) nothrow
   {
     return setProperty("tab-width", propval);
   }
@@ -1219,7 +1219,7 @@ class PrintCompositorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           call to the [gtksource.print_compositor.PrintCompositor.paginate] function.
       Returns: Builder instance for fluent chaining
   */
-  T wrapMode(gtk.types.WrapMode propval)
+  T wrapMode(gtk.types.WrapMode propval) nothrow
   {
     return setProperty("wrap-mode", propval);
   }
@@ -1232,7 +1232,7 @@ final class PrintCompositorGidBuilder : PrintCompositorGidBuilderImpl!PrintCompo
       Create object from builder.
       Returns: New object
   */
-  PrintCompositor build()
+  PrintCompositor build() nothrow
   {
     return new PrintCompositor(cast(void*)createGObject(PrintCompositor._getGType), Yes.Take);
   }

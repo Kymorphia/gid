@@ -24,26 +24,26 @@ class MultiSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_multi_selection_get_type != &gidSymbolNotFound ? gtk_multi_selection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MultiSelection self()
+  override MultiSelection self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class MultiSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Get builder for [gtk.multi_selection.MultiSelection]
       Returns: New builder object
   */
-  static MultiSelectionGidBuilder builder()
+  static MultiSelectionGidBuilder builder() nothrow
   {
     return new MultiSelectionGidBuilder;
   }
@@ -61,7 +61,7 @@ class MultiSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
-  @property gobject.types.GType itemType()
+  @property gobject.types.GType itemType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
   }
@@ -70,7 +70,7 @@ class MultiSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Get `model` property.
       Returns: The list managed by this selection.
   */
-  @property gio.list_model.ListModel model()
+  @property gio.list_model.ListModel model() nothrow
   {
     return getModel();
   }
@@ -80,7 +80,7 @@ class MultiSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Params:
         propval = The list managed by this selection.
   */
-  @property void model(gio.list_model.ListModel propval)
+  @property void model(gio.list_model.ListModel propval) nothrow
   {
     setModel(propval);
   }
@@ -89,7 +89,7 @@ class MultiSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Get `nItems` property.
       Returns: The number of items. See [gio.list_model.ListModel.getNItems].
   */
-  @property uint nItems()
+  @property uint nItems() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
@@ -105,7 +105,7 @@ class MultiSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
         model = the [gio.list_model.ListModel] to manage
       Returns: a new [gtk.multi_selection.MultiSelection]
   */
-  this(gio.list_model.ListModel model = null)
+  this(gio.list_model.ListModel model = null) nothrow
   {
     GtkMultiSelection* _cretval;
     _cretval = gtk_multi_selection_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(Yes.Dup) : null);
@@ -116,7 +116,7 @@ class MultiSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Returns the underlying model of self.
       Returns: the underlying model
   */
-  gio.list_model.ListModel getModel()
+  gio.list_model.ListModel getModel() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_multi_selection_get_model(cast(GtkMultiSelection*)this._cPtr);
@@ -132,7 +132,7 @@ class MultiSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Params:
         model = A [gio.list_model.ListModel] to wrap
   */
-  void setModel(gio.list_model.ListModel model = null)
+  void setModel(gio.list_model.ListModel model = null) nothrow
   {
     gtk_multi_selection_set_model(cast(GtkMultiSelection*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
@@ -152,7 +152,7 @@ class MultiSelectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = The list managed by this selection.
       Returns: Builder instance for fluent chaining
   */
-  T model(gio.list_model.ListModel propval)
+  T model(gio.list_model.ListModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -165,7 +165,7 @@ final class MultiSelectionGidBuilder : MultiSelectionGidBuilderImpl!MultiSelecti
       Create object from builder.
       Returns: New object
   */
-  MultiSelection build()
+  MultiSelection build() nothrow
   {
     return new MultiSelection(cast(void*)createGObject(MultiSelection._getGType), Yes.Take);
   }

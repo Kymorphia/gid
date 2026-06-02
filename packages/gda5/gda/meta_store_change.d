@@ -13,11 +13,8 @@ class MetaStoreChange
   GdaMetaStoreChange _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.meta_store_change.MetaStoreChange");
-
     _cInstance = *cast(GdaMetaStoreChange*)ptr;
 
     if (take)
@@ -25,31 +22,31 @@ class MetaStoreChange
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
 
   /** */
-  @property gda.types.MetaStoreChangeType cType()
+  @property gda.types.MetaStoreChangeType cType() nothrow
   {
     return cast(gda.types.MetaStoreChangeType)(cast(GdaMetaStoreChange*)this._cPtr).cType;
   }
 
   /** */
-  @property void cType(gda.types.MetaStoreChangeType propval)
+  @property void cType(gda.types.MetaStoreChangeType propval) nothrow
   {
     (cast(GdaMetaStoreChange*)this._cPtr).cType = cast(GdaMetaStoreChangeType)propval;
   }
 
   /** */
-  @property string tableName()
+  @property string tableName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaMetaStoreChange*)this._cPtr).tableName);
   }
 
   /** */
-  @property void tableName(string propval)
+  @property void tableName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaMetaStoreChange*)this._cPtr).tableName);
     dToC(propval, cast(void*)&(cast(GdaMetaStoreChange*)this._cPtr).tableName);

@@ -28,26 +28,26 @@ class NetworkSession : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_network_session_get_type != &gidSymbolNotFound ? webkit_network_session_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NetworkSession self()
+  override NetworkSession self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class NetworkSession : gobject.object.ObjectWrap
       Get builder for [webkit.network_session.NetworkSession]
       Returns: New builder object
   */
-  static NetworkSessionGidBuilder builder()
+  static NetworkSessionGidBuilder builder() nothrow
   {
     return new NetworkSessionGidBuilder;
   }
@@ -77,7 +77,7 @@ class NetworkSession : gobject.object.ObjectWrap
         cacheDirectory = a base directory for caches, or null
       Returns: the newly created #WebKitNetworkSession
   */
-  this(string dataDirectory = null, string cacheDirectory = null)
+  this(string dataDirectory = null, string cacheDirectory = null) nothrow
   {
     WebKitNetworkSession* _cretval;
     const(char)* _dataDirectory = dataDirectory.toCString(No.Alloc);
@@ -90,7 +90,7 @@ class NetworkSession : gobject.object.ObjectWrap
       Creates a new #WebKitNetworkSession with an ephemeral #WebKitWebsiteDataManager.
       Returns: a new ephemeral #WebKitNetworkSession.
   */
-  static webkit.network_session.NetworkSession newEphemeral()
+  static webkit.network_session.NetworkSession newEphemeral() nothrow
   {
     WebKitNetworkSession* _cretval;
     _cretval = webkit_network_session_new_ephemeral();
@@ -104,7 +104,7 @@ class NetworkSession : gobject.object.ObjectWrap
       null as data and cache directories.
       Returns: a #WebKitNetworkSession
   */
-  static webkit.network_session.NetworkSession getDefault()
+  static webkit.network_session.NetworkSession getDefault() nothrow
   {
     WebKitNetworkSession* _cretval;
     _cretval = webkit_network_session_get_default();
@@ -129,7 +129,7 @@ class NetworkSession : gobject.object.ObjectWrap
       Params:
         settings = a WebKitMemoryPressureSettings.
   */
-  static void setMemoryPressureSettings(webkit.memory_pressure_settings.MemoryPressureSettings settings)
+  static void setMemoryPressureSettings(webkit.memory_pressure_settings.MemoryPressureSettings settings) nothrow
   {
     webkit_network_session_set_memory_pressure_settings(settings ? cast(WebKitMemoryPressureSettings*)settings._cPtr(No.Dup) : null);
   }
@@ -144,7 +144,7 @@ class NetworkSession : gobject.object.ObjectWrap
         certificate = a #GTlsCertificate
         host = the host for which a certificate is to be allowed
   */
-  void allowTlsCertificateForHost(gio.tls_certificate.TlsCertificate certificate, string host)
+  void allowTlsCertificateForHost(gio.tls_certificate.TlsCertificate certificate, string host) nothrow
   {
     const(char)* _host = host.toCString(No.Alloc);
     webkit_network_session_allow_tls_certificate_for_host(cast(WebKitNetworkSession*)this._cPtr, certificate ? cast(GTlsCertificate*)certificate._cPtr(No.Dup) : null, _host);
@@ -162,7 +162,7 @@ class NetworkSession : gobject.object.ObjectWrap
       Returns: a new #WebKitDownload representing
            the download operation.
   */
-  webkit.download.Download downloadUri(string uri)
+  webkit.download.Download downloadUri(string uri) nothrow
   {
     WebKitDownload* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -175,7 +175,7 @@ class NetworkSession : gobject.object.ObjectWrap
       Get the #WebKitCookieManager of session.
       Returns: a #WebKitCookieManager
   */
-  webkit.cookie_manager.CookieManager getCookieManager()
+  webkit.cookie_manager.CookieManager getCookieManager() nothrow
   {
     WebKitCookieManager* _cretval;
     _cretval = webkit_network_session_get_cookie_manager(cast(WebKitNetworkSession*)this._cPtr);
@@ -187,7 +187,7 @@ class NetworkSession : gobject.object.ObjectWrap
       Get whether Intelligent Tracking Prevention (ITP) is enabled or not.
       Returns: true if ITP is enabled, or false otherwise.
   */
-  bool getItpEnabled()
+  bool getItpEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_network_session_get_itp_enabled(cast(WebKitNetworkSession*)this._cPtr);
@@ -207,14 +207,21 @@ class NetworkSession : gobject.object.ObjectWrap
         cancellable = a #GCancellable or null to ignore
         callback = a #GAsyncReadyCallback to call when the request is satisfied
   */
-  void getItpSummary(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void getItpSummary(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -248,7 +255,7 @@ class NetworkSession : gobject.object.ObjectWrap
       See also [webkit.network_session.NetworkSession.setPersistentCredentialStorageEnabled].
       Returns: true if persistent credential storage is enabled, or false otherwise.
   */
-  bool getPersistentCredentialStorageEnabled()
+  bool getPersistentCredentialStorageEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_network_session_get_persistent_credential_storage_enabled(cast(WebKitNetworkSession*)this._cPtr);
@@ -259,7 +266,7 @@ class NetworkSession : gobject.object.ObjectWrap
       Get the TLS errors policy of session.
       Returns: a #WebKitTLSErrorsPolicy
   */
-  webkit.types.TLSErrorsPolicy getTlsErrorsPolicy()
+  webkit.types.TLSErrorsPolicy getTlsErrorsPolicy() nothrow
   {
     WebKitTLSErrorsPolicy _cretval;
     _cretval = webkit_network_session_get_tls_errors_policy(cast(WebKitNetworkSession*)this._cPtr);
@@ -271,7 +278,7 @@ class NetworkSession : gobject.object.ObjectWrap
       Get the #WebKitWebsiteDataManager of session.
       Returns: a #WebKitWebsiteDataManager
   */
-  webkit.website_data_manager.WebsiteDataManager getWebsiteDataManager()
+  webkit.website_data_manager.WebsiteDataManager getWebsiteDataManager() nothrow
   {
     WebKitWebsiteDataManager* _cretval;
     _cretval = webkit_network_session_get_website_data_manager(cast(WebKitNetworkSession*)this._cPtr);
@@ -285,7 +292,7 @@ class NetworkSession : gobject.object.ObjectWrap
       See #WebKitWebsiteDataManager:is-ephemeral for more details.
       Returns: true if session is pehmeral, or false otherwise
   */
-  bool isEphemeral()
+  bool isEphemeral() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_network_session_is_ephemeral(cast(WebKitNetworkSession*)this._cPtr);
@@ -299,7 +306,7 @@ class NetworkSession : gobject.object.ObjectWrap
       Params:
         hostname = a hostname to be resolved
   */
-  void prefetchDns(string hostname)
+  void prefetchDns(string hostname) nothrow
   {
     const(char)* _hostname = hostname.toCString(No.Alloc);
     webkit_network_session_prefetch_dns(cast(WebKitNetworkSession*)this._cPtr, _hostname);
@@ -316,7 +323,7 @@ class NetworkSession : gobject.object.ObjectWrap
       Params:
         enabled = value to set
   */
-  void setItpEnabled(bool enabled)
+  void setItpEnabled(bool enabled) nothrow
   {
     webkit_network_session_set_itp_enabled(cast(WebKitNetworkSession*)this._cPtr, enabled);
   }
@@ -331,7 +338,7 @@ class NetworkSession : gobject.object.ObjectWrap
       Params:
         enabled = value to set
   */
-  void setPersistentCredentialStorageEnabled(bool enabled)
+  void setPersistentCredentialStorageEnabled(bool enabled) nothrow
   {
     webkit_network_session_set_persistent_credential_storage_enabled(cast(WebKitNetworkSession*)this._cPtr, enabled);
   }
@@ -351,7 +358,7 @@ class NetworkSession : gobject.object.ObjectWrap
         proxyMode = a #WebKitNetworkProxyMode
         proxySettings = a #WebKitNetworkProxySettings, or null
   */
-  void setProxySettings(webkit.types.NetworkProxyMode proxyMode, webkit.network_proxy_settings.NetworkProxySettings proxySettings = null)
+  void setProxySettings(webkit.types.NetworkProxyMode proxyMode, webkit.network_proxy_settings.NetworkProxySettings proxySettings = null) nothrow
   {
     webkit_network_session_set_proxy_settings(cast(WebKitNetworkSession*)this._cPtr, proxyMode, proxySettings ? cast(WebKitNetworkProxySettings*)proxySettings._cPtr(No.Dup) : null);
   }
@@ -362,7 +369,7 @@ class NetworkSession : gobject.object.ObjectWrap
       Params:
         policy = a #WebKitTLSErrorsPolicy
   */
-  void setTlsErrorsPolicy(webkit.types.TLSErrorsPolicy policy)
+  void setTlsErrorsPolicy(webkit.types.TLSErrorsPolicy policy) nothrow
   {
     webkit_network_session_set_tls_errors_policy(cast(WebKitNetworkSession*)this._cPtr, policy);
   }
@@ -384,14 +391,14 @@ class NetworkSession : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDownloadStarted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDownloadStarted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.download.Download)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.network_session.NetworkSession)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -403,7 +410,14 @@ class NetworkSession : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.network_session.NetworkSession.downloadStarted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -421,7 +435,7 @@ class NetworkSessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = The base caches directory used to create the #WebKitWebsiteDataManager. If null, a default location will be used.
       Returns: Builder instance for fluent chaining
   */
-  T cacheDirectory(string propval)
+  T cacheDirectory(string propval) nothrow
   {
     return setProperty("cache-directory", propval);
   }
@@ -432,7 +446,7 @@ class NetworkSessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = The base data directory used to create the #WebKitWebsiteDataManager. If null, a default location will be used.
       Returns: Builder instance for fluent chaining
   */
-  T dataDirectory(string propval)
+  T dataDirectory(string propval) nothrow
   {
     return setProperty("data-directory", propval);
   }
@@ -445,7 +459,7 @@ final class NetworkSessionGidBuilder : NetworkSessionGidBuilderImpl!NetworkSessi
       Create object from builder.
       Returns: New object
   */
-  NetworkSession build()
+  NetworkSession build() nothrow
   {
     return new NetworkSession(cast(void*)createGObject(NetworkSession._getGType), Yes.Take);
   }

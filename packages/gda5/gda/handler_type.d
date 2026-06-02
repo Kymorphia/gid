@@ -16,26 +16,26 @@ class HandlerType : gobject.object.ObjectWrap, gda.data_handler.DataHandler
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_handler_type_get_type != &gidSymbolNotFound ? gda_handler_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HandlerType self()
+  override HandlerType self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class HandlerType : gobject.object.ObjectWrap, gda.data_handler.DataHandler
       Get builder for [gda.handler_type.HandlerType]
       Returns: New builder object
   */
-  static HandlerTypeGidBuilder builder()
+  static HandlerTypeGidBuilder builder() nothrow
   {
     return new HandlerTypeGidBuilder;
   }
@@ -55,7 +55,7 @@ class HandlerType : gobject.object.ObjectWrap, gda.data_handler.DataHandler
       Creates a data handler for Gda types
       Returns: the new object
   */
-  static gda.data_handler.DataHandler new_()
+  static gda.data_handler.DataHandler new_() nothrow
   {
     GdaDataHandler* _cretval;
     _cretval = gda_handler_type_new();
@@ -78,7 +78,7 @@ final class HandlerTypeGidBuilder : HandlerTypeGidBuilderImpl!HandlerTypeGidBuil
       Create object from builder.
       Returns: New object
   */
-  HandlerType build()
+  HandlerType build() nothrow
   {
     return new HandlerType(cast(void*)createGObject(HandlerType._getGType), No.Take);
   }

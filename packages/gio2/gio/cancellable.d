@@ -24,26 +24,26 @@ class Cancellable : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_cancellable_get_type != &gidSymbolNotFound ? g_cancellable_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Cancellable self()
+  override Cancellable self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class Cancellable : gobject.object.ObjectWrap
       Get builder for [gio.cancellable.Cancellable]
       Returns: New builder object
   */
-  static CancellableGidBuilder builder()
+  static CancellableGidBuilder builder() nothrow
   {
     return new CancellableGidBuilder;
   }
@@ -68,7 +68,7 @@ class Cancellable : gobject.object.ObjectWrap
       operations or in multiple concurrent operations.
       Returns: a #GCancellable.
   */
-  this()
+  this() nothrow
   {
     GCancellable* _cretval;
     _cretval = g_cancellable_new();
@@ -80,7 +80,7 @@ class Cancellable : gobject.object.ObjectWrap
       Returns: a #GCancellable from the top
         of the stack, or null if the stack is empty.
   */
-  static gio.cancellable.Cancellable getCurrent()
+  static gio.cancellable.Cancellable getCurrent() nothrow
   {
     GCancellable* _cretval;
     _cretval = g_cancellable_get_current();
@@ -106,7 +106,7 @@ class Cancellable : gobject.object.ObjectWrap
       then the operation's #GAsyncReadyCallback will not be invoked until
       the application returns to the main loop.
   */
-  void cancel()
+  void cancel() nothrow
   {
     g_cancellable_cancel(cast(GCancellable*)this._cPtr);
   }
@@ -130,7 +130,7 @@ class Cancellable : gobject.object.ObjectWrap
       Params:
         handlerId = Handler id of the handler to be disconnected, or `0`.
   */
-  void disconnect(gulong handlerId)
+  void disconnect(gulong handlerId) nothrow
   {
     g_cancellable_disconnect(cast(GCancellable*)this._cPtr, handlerId);
   }
@@ -152,7 +152,7 @@ class Cancellable : gobject.object.ObjectWrap
       Returns: A valid file descriptor. `-1` if the file descriptor
         is not supported, or on errors.
   */
-  int getFd()
+  int getFd() nothrow
   {
     int _retval;
     _retval = g_cancellable_get_fd(cast(GCancellable*)this._cPtr);
@@ -164,7 +164,7 @@ class Cancellable : gobject.object.ObjectWrap
       Returns: true if cancellable is cancelled,
         FALSE if called with null or if item is not cancelled.
   */
-  bool isCancelled()
+  bool isCancelled() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_cancellable_is_cancelled(cast(GCancellable*)this._cPtr);
@@ -196,7 +196,7 @@ class Cancellable : gobject.object.ObjectWrap
       Returns: true if pollfd was successfully initialized, false on
                  failure to prepare the cancellable.
   */
-  bool makePollfd(glib.types.PollFD pollfd)
+  bool makePollfd(glib.types.PollFD pollfd) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_cancellable_make_pollfd(cast(GCancellable*)this._cPtr, &pollfd);
@@ -207,7 +207,7 @@ class Cancellable : gobject.object.ObjectWrap
       Pops cancellable off the cancellable stack (verifying that cancellable
       is on the top of the stack).
   */
-  void popCurrent()
+  void popCurrent() nothrow
   {
     g_cancellable_pop_current(cast(GCancellable*)this._cPtr);
   }
@@ -222,7 +222,7 @@ class Cancellable : gobject.object.ObjectWrap
       This is typically called automatically by e.g. #GFile operations,
       so you rarely have to call this yourself.
   */
-  void pushCurrent()
+  void pushCurrent() nothrow
   {
     g_cancellable_push_current(cast(GCancellable*)this._cPtr);
   }
@@ -238,7 +238,7 @@ class Cancellable : gobject.object.ObjectWrap
       is not called. This can cause the application to run out of file
       descriptors when many #GCancellables are used at the same time.
   */
-  void releaseFd()
+  void releaseFd() nothrow
   {
     g_cancellable_release_fd(cast(GCancellable*)this._cPtr);
   }
@@ -256,7 +256,7 @@ class Cancellable : gobject.object.ObjectWrap
       and let it die with the outstanding async operations. You should
       create a fresh cancellable for further async operations.
   */
-  void reset()
+  void reset() nothrow
   {
     g_cancellable_reset(cast(GCancellable*)this._cPtr);
   }
@@ -289,7 +289,7 @@ class Cancellable : gobject.object.ObjectWrap
       The new #GSource will hold a reference to the #GCancellable.
       Returns: the new #GSource.
   */
-  glib.source.Source sourceNew()
+  glib.source.Source sourceNew() nothrow
   {
     GSource* _cretval;
     _cretval = g_cancellable_source_new(cast(GCancellable*)this._cPtr);
@@ -362,13 +362,13 @@ class Cancellable : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCancelled(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCancelled(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.cancellable.Cancellable)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -377,7 +377,14 @@ class Cancellable : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.cancellable.Cancellable.cancelled");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -397,7 +404,7 @@ final class CancellableGidBuilder : CancellableGidBuilderImpl!CancellableGidBuil
       Create object from builder.
       Returns: New object
   */
-  Cancellable build()
+  Cancellable build() nothrow
   {
     return new Cancellable(cast(void*)createGObject(Cancellable._getGType), Yes.Take);
   }

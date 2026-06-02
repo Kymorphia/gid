@@ -20,26 +20,26 @@ class InternetAddressList : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())internet_address_list_get_type != &gidSymbolNotFound ? internet_address_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override InternetAddressList self()
+  override InternetAddressList self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class InternetAddressList : gobject.object.ObjectWrap
       Get builder for [gmime.internet_address_list.InternetAddressList]
       Returns: New builder object
   */
-  static InternetAddressListGidBuilder builder()
+  static InternetAddressListGidBuilder builder() nothrow
   {
     return new InternetAddressListGidBuilder;
   }
@@ -57,7 +57,7 @@ class InternetAddressList : gobject.object.ObjectWrap
       Creates a new #InternetAddressList.
       Returns: a new #InternetAddressList.
   */
-  this()
+  this() nothrow
   {
     GMimeInternetAddressList* _cretval;
     _cretval = internet_address_list_new();
@@ -73,7 +73,7 @@ class InternetAddressList : gobject.object.ObjectWrap
       Returns: a #InternetAddressList or null if the
         input string does not contain any addresses.
   */
-  static gmime.internet_address_list.InternetAddressList parse(gmime.parser_options.ParserOptions options, string str)
+  static gmime.internet_address_list.InternetAddressList parse(gmime.parser_options.ParserOptions options, string str) nothrow
   {
     GMimeInternetAddressList* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -89,7 +89,7 @@ class InternetAddressList : gobject.object.ObjectWrap
         ia = a #InternetAddress
       Returns: the index of the added #InternetAddress.
   */
-  int add(gmime.internet_address.InternetAddress ia)
+  int add(gmime.internet_address.InternetAddress ia) nothrow
   {
     int _retval;
     _retval = internet_address_list_add(cast(GMimeInternetAddressList*)this._cPtr, ia ? cast(GMimeInternetAddress*)ia._cPtr(No.Dup) : null);
@@ -102,7 +102,7 @@ class InternetAddressList : gobject.object.ObjectWrap
       Params:
         append = a #InternetAddressList
   */
-  void append(gmime.internet_address_list.InternetAddressList append)
+  void append(gmime.internet_address_list.InternetAddressList append) nothrow
   {
     internet_address_list_append(cast(GMimeInternetAddressList*)this._cPtr, append ? cast(GMimeInternetAddressList*)append._cPtr(No.Dup) : null);
   }
@@ -114,7 +114,7 @@ class InternetAddressList : gobject.object.ObjectWrap
         options = a #GMimeParserOptions or null
         str = a string containing internet addresses
   */
-  void appendParse(gmime.parser_options.ParserOptions options, string str)
+  void appendParse(gmime.parser_options.ParserOptions options, string str) nothrow
   {
     const(char)* _str = str.toCString(No.Alloc);
     internet_address_list_append_parse(cast(GMimeInternetAddressList*)this._cPtr, options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null, _str);
@@ -123,7 +123,7 @@ class InternetAddressList : gobject.object.ObjectWrap
   /**
       Clears the list of addresses.
   */
-  void clear()
+  void clear() nothrow
   {
     internet_address_list_clear(cast(GMimeInternetAddressList*)this._cPtr);
   }
@@ -137,7 +137,7 @@ class InternetAddressList : gobject.object.ObjectWrap
       Returns: true if the specified #InternetAddress is contained
         within the specified #InternetAddressList or false otherwise.
   */
-  bool contains(gmime.internet_address.InternetAddress ia)
+  bool contains(gmime.internet_address.InternetAddress ia) nothrow
   {
     bool _retval;
     _retval = cast(bool)internet_address_list_contains(cast(GMimeInternetAddressList*)this._cPtr, ia ? cast(GMimeInternetAddress*)ia._cPtr(No.Dup) : null);
@@ -152,7 +152,7 @@ class InternetAddressList : gobject.object.ObjectWrap
         options = a #GMimeFormatOptions or null
         str = string to write to
   */
-  void encode(gmime.format_options.FormatOptions options, glib.string_.String str)
+  void encode(gmime.format_options.FormatOptions options, glib.string_.String str) nothrow
   {
     internet_address_list_encode(cast(GMimeInternetAddressList*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, str ? cast(GString*)str._cPtr(No.Dup) : null);
   }
@@ -165,7 +165,7 @@ class InternetAddressList : gobject.object.ObjectWrap
       Returns: the #InternetAddress at the specified
         index or null if the index is out of range.
   */
-  gmime.internet_address.InternetAddress getAddress(int index)
+  gmime.internet_address.InternetAddress getAddress(int index) nothrow
   {
     GMimeInternetAddress* _cretval;
     _cretval = internet_address_list_get_address(cast(GMimeInternetAddressList*)this._cPtr, index);
@@ -183,7 +183,7 @@ class InternetAddressList : gobject.object.ObjectWrap
         #InternetAddressList or %-1 if it is not contained within the
         #InternetAddressList.
   */
-  int indexOf(gmime.internet_address.InternetAddress ia)
+  int indexOf(gmime.internet_address.InternetAddress ia) nothrow
   {
     int _retval;
     _retval = internet_address_list_index_of(cast(GMimeInternetAddressList*)this._cPtr, ia ? cast(GMimeInternetAddress*)ia._cPtr(No.Dup) : null);
@@ -198,7 +198,7 @@ class InternetAddressList : gobject.object.ObjectWrap
         index = index to insert at
         ia = a #InternetAddress
   */
-  void insert(int index, gmime.internet_address.InternetAddress ia)
+  void insert(int index, gmime.internet_address.InternetAddress ia) nothrow
   {
     internet_address_list_insert(cast(GMimeInternetAddressList*)this._cPtr, index, ia ? cast(GMimeInternetAddress*)ia._cPtr(No.Dup) : null);
   }
@@ -207,7 +207,7 @@ class InternetAddressList : gobject.object.ObjectWrap
       Gets the length of the list.
       Returns: the number of #InternetAddress objects in the list.
   */
-  int length()
+  int length() nothrow
   {
     int _retval;
     _retval = internet_address_list_length(cast(GMimeInternetAddressList*)this._cPtr);
@@ -220,7 +220,7 @@ class InternetAddressList : gobject.object.ObjectWrap
       Params:
         prepend = a #InternetAddressList
   */
-  void prepend(gmime.internet_address_list.InternetAddressList prepend)
+  void prepend(gmime.internet_address_list.InternetAddressList prepend) nothrow
   {
     internet_address_list_prepend(cast(GMimeInternetAddressList*)this._cPtr, prepend ? cast(GMimeInternetAddressList*)prepend._cPtr(No.Dup) : null);
   }
@@ -233,7 +233,7 @@ class InternetAddressList : gobject.object.ObjectWrap
       Returns: true if the specified #InternetAddress was removed or
         false otherwise.
   */
-  bool remove(gmime.internet_address.InternetAddress ia)
+  bool remove(gmime.internet_address.InternetAddress ia) nothrow
   {
     bool _retval;
     _retval = cast(bool)internet_address_list_remove(cast(GMimeInternetAddressList*)this._cPtr, ia ? cast(GMimeInternetAddress*)ia._cPtr(No.Dup) : null);
@@ -249,7 +249,7 @@ class InternetAddressList : gobject.object.ObjectWrap
       Returns: true if an #InternetAddress was removed or false
         otherwise.
   */
-  bool removeAt(int index)
+  bool removeAt(int index) nothrow
   {
     bool _retval;
     _retval = cast(bool)internet_address_list_remove_at(cast(GMimeInternetAddressList*)this._cPtr, index);
@@ -263,7 +263,7 @@ class InternetAddressList : gobject.object.ObjectWrap
         index = index of #InternetAddress to set
         ia = a #InternetAddress
   */
-  void setAddress(int index, gmime.internet_address.InternetAddress ia)
+  void setAddress(int index, gmime.internet_address.InternetAddress ia) nothrow
   {
     internet_address_list_set_address(cast(GMimeInternetAddressList*)this._cPtr, index, ia ? cast(GMimeInternetAddress*)ia._cPtr(No.Dup) : null);
   }
@@ -278,7 +278,7 @@ class InternetAddressList : gobject.object.ObjectWrap
       Returns: a string containing the list of addresses in rfc822
         format or null if no addresses are contained in the list.
   */
-  string toString_(gmime.format_options.FormatOptions options, bool encode)
+  string toString_(gmime.format_options.FormatOptions options, bool encode) nothrow
   {
     char* _cretval;
     _cretval = internet_address_list_to_string(cast(GMimeInternetAddressList*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, encode);
@@ -299,7 +299,7 @@ final class InternetAddressListGidBuilder : InternetAddressListGidBuilderImpl!In
       Create object from builder.
       Returns: New object
   */
-  InternetAddressList build()
+  InternetAddressList build() nothrow
   {
     return new InternetAddressList(cast(void*)createGObject(InternetAddressList._getGType), Yes.Take);
   }

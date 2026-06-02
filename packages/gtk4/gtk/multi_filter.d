@@ -22,26 +22,26 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_multi_filter_get_type != &gidSymbolNotFound ? gtk_multi_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MultiFilter self()
+  override MultiFilter self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
       Get builder for [gtk.multi_filter.MultiFilter]
       Returns: New builder object
   */
-  static MultiFilterGidBuilder builder()
+  static MultiFilterGidBuilder builder() nothrow
   {
     return new MultiFilterGidBuilder;
   }
@@ -59,7 +59,7 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
-  @property gobject.types.GType itemType()
+  @property gobject.types.GType itemType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
   }
@@ -68,7 +68,7 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
       Get `nItems` property.
       Returns: The number of items. See [gio.list_model.ListModel.getNItems].
   */
-  @property uint nItems()
+  @property uint nItems() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
@@ -82,7 +82,7 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
       Params:
         filter = A new filter to use
   */
-  void append(gtk.filter.Filter filter)
+  void append(gtk.filter.Filter filter) nothrow
   {
     gtk_multi_filter_append(cast(GtkMultiFilter*)this._cPtr, filter ? cast(GtkFilter*)filter._cPtr(Yes.Dup) : null);
   }
@@ -97,7 +97,7 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
       Params:
         position = position of filter to remove
   */
-  void remove(uint position)
+  void remove(uint position) nothrow
   {
     gtk_multi_filter_remove(cast(GtkMultiFilter*)this._cPtr, position);
   }
@@ -118,7 +118,7 @@ final class MultiFilterGidBuilder : MultiFilterGidBuilderImpl!MultiFilterGidBuil
       Create object from builder.
       Returns: New object
   */
-  MultiFilter build()
+  MultiFilter build() nothrow
   {
     return new MultiFilter(cast(void*)createGObject(MultiFilter._getGType), No.Take);
   }

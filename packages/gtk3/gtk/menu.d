@@ -101,26 +101,26 @@ class Menu : gtk.menu_shell.MenuShell
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_menu_get_type != &gidSymbolNotFound ? gtk_menu_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Menu self()
+  override Menu self() nothrow
   {
     return this;
   }
@@ -129,7 +129,7 @@ class Menu : gtk.menu_shell.MenuShell
       Get builder for [gtk.menu.Menu]
       Returns: New builder object
   */
-  static MenuGidBuilder builder()
+  static MenuGidBuilder builder() nothrow
   {
     return new MenuGidBuilder;
   }
@@ -138,7 +138,7 @@ class Menu : gtk.menu_shell.MenuShell
       Get `accelGroup` property.
       Returns: The accel group holding accelerators for the menu.
   */
-  @property gtk.accel_group.AccelGroup accelGroup()
+  @property gtk.accel_group.AccelGroup accelGroup() nothrow
   {
     return getAccelGroup();
   }
@@ -148,7 +148,7 @@ class Menu : gtk.menu_shell.MenuShell
       Params:
         propval = The accel group holding accelerators for the menu.
   */
-  @property void accelGroup(gtk.accel_group.AccelGroup propval)
+  @property void accelGroup(gtk.accel_group.AccelGroup propval) nothrow
   {
     setAccelGroup(propval);
   }
@@ -157,7 +157,7 @@ class Menu : gtk.menu_shell.MenuShell
       Get `accelPath` property.
       Returns: An accel path used to conveniently construct accel paths of child items.
   */
-  @property string accelPath()
+  @property string accelPath() nothrow
   {
     return getAccelPath();
   }
@@ -167,7 +167,7 @@ class Menu : gtk.menu_shell.MenuShell
       Params:
         propval = An accel path used to conveniently construct accel paths of child items.
   */
-  @property void accelPath(string propval)
+  @property void accelPath(string propval) nothrow
   {
     setAccelPath(propval);
   }
@@ -177,7 +177,7 @@ class Menu : gtk.menu_shell.MenuShell
       Returns: The index of the currently selected menu item, or -1 if no
         menu item is selected.
   */
-  @property int active()
+  @property int active() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("active");
   }
@@ -188,7 +188,7 @@ class Menu : gtk.menu_shell.MenuShell
         propval = The index of the currently selected menu item, or -1 if no
           menu item is selected.
   */
-  @property void active(int propval)
+  @property void active(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("active", propval);
   }
@@ -210,7 +210,7 @@ class Menu : gtk.menu_shell.MenuShell
         gtk_menu_popup_at_pointer (), #GtkMenu:rect-anchor-dx,
         #GtkMenu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
   */
-  @property gdk.types.AnchorHints anchorHints()
+  @property gdk.types.AnchorHints anchorHints() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.types.AnchorHints)("anchor-hints");
   }
@@ -233,7 +233,7 @@ class Menu : gtk.menu_shell.MenuShell
           gtk_menu_popup_at_pointer (), #GtkMenu:rect-anchor-dx,
           #GtkMenu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
   */
-  @property void anchorHints(gdk.types.AnchorHints propval)
+  @property void anchorHints(gdk.types.AnchorHints propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.types.AnchorHints)("anchor-hints", propval);
   }
@@ -244,7 +244,7 @@ class Menu : gtk.menu_shell.MenuShell
         the menu without a #GtkMenuDetachFunc. If you need to use a detacher,
         use [gtk.menu.Menu.attachToWidget] directly.
   */
-  @property gtk.widget.Widget attachWidget()
+  @property gtk.widget.Widget attachWidget() nothrow
   {
     return getAttachWidget();
   }
@@ -256,7 +256,7 @@ class Menu : gtk.menu_shell.MenuShell
           the menu without a #GtkMenuDetachFunc. If you need to use a detacher,
           use [gtk.menu.Menu.attachToWidget] directly.
   */
-  @property void attachWidget(gtk.widget.Widget propval)
+  @property void attachWidget(gtk.widget.Widget propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.widget.Widget)("attach-widget", propval);
   }
@@ -269,7 +269,7 @@ class Menu : gtk.menu_shell.MenuShell
         gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
         #GtkMenu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and #GtkMenu::popped-up.
   */
-  @property gdk.types.WindowTypeHint menuTypeHint()
+  @property gdk.types.WindowTypeHint menuTypeHint() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.types.WindowTypeHint)("menu-type-hint");
   }
@@ -283,7 +283,7 @@ class Menu : gtk.menu_shell.MenuShell
           gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
           #GtkMenu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and #GtkMenu::popped-up.
   */
-  @property void menuTypeHint(gdk.types.WindowTypeHint propval)
+  @property void menuTypeHint(gdk.types.WindowTypeHint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.types.WindowTypeHint)("menu-type-hint", propval);
   }
@@ -292,7 +292,7 @@ class Menu : gtk.menu_shell.MenuShell
       Get `monitor` property.
       Returns: The monitor the menu will be popped up on.
   */
-  @property int monitor()
+  @property int monitor() nothrow
   {
     return getMonitor();
   }
@@ -302,7 +302,7 @@ class Menu : gtk.menu_shell.MenuShell
       Params:
         propval = The monitor the menu will be popped up on.
   */
-  @property void monitor(int propval)
+  @property void monitor(int propval) nothrow
   {
     setMonitor(propval);
   }
@@ -316,7 +316,7 @@ class Menu : gtk.menu_shell.MenuShell
         gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
         #GtkMenu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
   */
-  @property int rectAnchorDx()
+  @property int rectAnchorDx() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("rect-anchor-dx");
   }
@@ -331,7 +331,7 @@ class Menu : gtk.menu_shell.MenuShell
           gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
           #GtkMenu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
   */
-  @property void rectAnchorDx(int propval)
+  @property void rectAnchorDx(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("rect-anchor-dx", propval);
   }
@@ -344,7 +344,7 @@ class Menu : gtk.menu_shell.MenuShell
         gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
         #GtkMenu:rect-anchor-dx, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
   */
-  @property int rectAnchorDy()
+  @property int rectAnchorDy() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("rect-anchor-dy");
   }
@@ -358,7 +358,7 @@ class Menu : gtk.menu_shell.MenuShell
           gtk_menu_popup_at_pointer (), #GtkMenu:anchor-hints,
           #GtkMenu:rect-anchor-dx, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
   */
-  @property void rectAnchorDy(int propval)
+  @property void rectAnchorDy(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("rect-anchor-dy", propval);
   }
@@ -373,7 +373,7 @@ class Menu : gtk.menu_shell.MenuShell
         are connected to a menu bar or context menus should reserve
         toggle space for consistency.
   */
-  @property bool reserveToggleSize()
+  @property bool reserveToggleSize() nothrow
   {
     return getReserveToggleSize();
   }
@@ -389,7 +389,7 @@ class Menu : gtk.menu_shell.MenuShell
           are connected to a menu bar or context menus should reserve
           toggle space for consistency.
   */
-  @property void reserveToggleSize(bool propval)
+  @property void reserveToggleSize(bool propval) nothrow
   {
     setReserveToggleSize(propval);
   }
@@ -398,7 +398,7 @@ class Menu : gtk.menu_shell.MenuShell
       Get `tearoffState` property.
       Returns: A boolean that indicates whether the menu is torn-off.
   */
-  @property bool tearoffState()
+  @property bool tearoffState() nothrow
   {
     return getTearoffState();
   }
@@ -408,7 +408,7 @@ class Menu : gtk.menu_shell.MenuShell
       Params:
         propval = A boolean that indicates whether the menu is torn-off.
   */
-  @property void tearoffState(bool propval)
+  @property void tearoffState(bool propval) nothrow
   {
     setTearoffState(propval);
   }
@@ -418,7 +418,7 @@ class Menu : gtk.menu_shell.MenuShell
       Returns: A title that may be displayed by the window manager when this
         menu is torn-off.
   */
-  @property string tearoffTitle()
+  @property string tearoffTitle() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("tearoff-title");
   }
@@ -429,7 +429,7 @@ class Menu : gtk.menu_shell.MenuShell
         propval = A title that may be displayed by the window manager when this
           menu is torn-off.
   */
-  @property void tearoffTitle(string propval)
+  @property void tearoffTitle(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("tearoff-title", propval);
   }
@@ -438,7 +438,7 @@ class Menu : gtk.menu_shell.MenuShell
       Creates a new #GtkMenu
       Returns: a new #GtkMenu
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_new();
@@ -461,7 +461,7 @@ class Menu : gtk.menu_shell.MenuShell
         model = a #GMenuModel
       Returns: a new #GtkMenu
   */
-  static gtk.menu.Menu newFromModel(gio.menu_model.MenuModel model)
+  static gtk.menu.Menu newFromModel(gio.menu_model.MenuModel model) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_new_from_model(model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
@@ -478,7 +478,7 @@ class Menu : gtk.menu_shell.MenuShell
       Returns: the list
             of menus attached to his widget.
   */
-  static gtk.widget.Widget[] getForAttachWidget(gtk.widget.Widget widget)
+  static gtk.widget.Widget[] getForAttachWidget(gtk.widget.Widget widget) nothrow
   {
     GList* _cretval;
     _cretval = gtk_menu_get_for_attach_widget(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
@@ -502,7 +502,7 @@ class Menu : gtk.menu_shell.MenuShell
         topAttach = The row number to attach the top of the item to
         bottomAttach = The row number to attach the bottom of the item to
   */
-  void attach(gtk.widget.Widget child, uint leftAttach, uint rightAttach, uint topAttach, uint bottomAttach)
+  void attach(gtk.widget.Widget child, uint leftAttach, uint rightAttach, uint topAttach, uint bottomAttach) nothrow
   {
     gtk_menu_attach(cast(GtkMenu*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, leftAttach, rightAttach, topAttach, bottomAttach);
   }
@@ -512,7 +512,7 @@ class Menu : gtk.menu_shell.MenuShell
       This function will call the callback function, detacher, provided
       when the [gtk.menu.Menu.attachToWidget] function was called.
   */
-  void detach()
+  void detach() nothrow
   {
     gtk_menu_detach(cast(GtkMenu*)this._cPtr);
   }
@@ -522,7 +522,7 @@ class Menu : gtk.menu_shell.MenuShell
       menu. See [gtk.menu.Menu.setAccelGroup].
       Returns: the #GtkAccelGroup associated with the menu
   */
-  gtk.accel_group.AccelGroup getAccelGroup()
+  gtk.accel_group.AccelGroup getAccelGroup() nothrow
   {
     GtkAccelGroup* _cretval;
     _cretval = gtk_menu_get_accel_group(cast(GtkMenu*)this._cPtr);
@@ -534,7 +534,7 @@ class Menu : gtk.menu_shell.MenuShell
       Retrieves the accelerator path set on the menu.
       Returns: the accelerator path set on the menu.
   */
-  string getAccelPath()
+  string getAccelPath() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_menu_get_accel_path(cast(GtkMenu*)this._cPtr);
@@ -549,7 +549,7 @@ class Menu : gtk.menu_shell.MenuShell
                  in the menu.  If a selection has not yet been made, the
                  first menu item is selected.
   */
-  gtk.widget.Widget getActive()
+  gtk.widget.Widget getActive() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_get_active(cast(GtkMenu*)this._cPtr);
@@ -561,7 +561,7 @@ class Menu : gtk.menu_shell.MenuShell
       Returns the #GtkWidget that the menu is attached to.
       Returns: the #GtkWidget that the menu is attached to
   */
-  gtk.widget.Widget getAttachWidget()
+  gtk.widget.Widget getAttachWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_get_attach_widget(cast(GtkMenu*)this._cPtr);
@@ -574,7 +574,7 @@ class Menu : gtk.menu_shell.MenuShell
       Returns: the number of the monitor on which the menu should
            be popped up or -1, if no monitor has been set
   */
-  int getMonitor()
+  int getMonitor() nothrow
   {
     int _retval;
     _retval = gtk_menu_get_monitor(cast(GtkMenu*)this._cPtr);
@@ -586,7 +586,7 @@ class Menu : gtk.menu_shell.MenuShell
       icons, regardless of their actual presence.
       Returns: Whether the menu reserves toggle space
   */
-  bool getReserveToggleSize()
+  bool getReserveToggleSize() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_menu_get_reserve_toggle_size(cast(GtkMenu*)this._cPtr);
@@ -598,7 +598,7 @@ class Menu : gtk.menu_shell.MenuShell
       See [gtk.menu.Menu.setTearoffState].
       Returns: true if the menu is currently torn off.
   */
-  bool getTearoffState()
+  bool getTearoffState() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_menu_get_tearoff_state(cast(GtkMenu*)this._cPtr);
@@ -611,7 +611,7 @@ class Menu : gtk.menu_shell.MenuShell
             has no title set on it. This string is owned by GTK+
             and should not be modified or freed.
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_menu_get_title(cast(GtkMenu*)this._cPtr);
@@ -625,7 +625,7 @@ class Menu : gtk.menu_shell.MenuShell
       Params:
         monitor = the monitor to place the menu on
   */
-  void placeOnMonitor(gdk.monitor.MonitorWrap monitor)
+  void placeOnMonitor(gdk.monitor.MonitorWrap monitor) nothrow
   {
     gtk_menu_place_on_monitor(cast(GtkMenu*)this._cPtr, monitor ? cast(GdkMonitor*)monitor._cPtr(No.Dup) : null);
   }
@@ -633,7 +633,7 @@ class Menu : gtk.menu_shell.MenuShell
   /**
       Removes the menu from the screen.
   */
-  void popdown()
+  void popdown() nothrow
   {
     gtk_menu_popdown(cast(GtkMenu*)this._cPtr);
   }
@@ -677,15 +677,22 @@ class Menu : gtk.menu_shell.MenuShell
       Deprecated: Please use [gtk.menu.Menu.popupAtWidget],
             [gtk.menu.Menu.popupAtPointer]. or [gtk.menu.Menu.popupAtRect] instead
   */
-  void popup(gtk.widget.Widget parentMenuShell, gtk.widget.Widget parentMenuItem, gtk.types.MenuPositionFunc func, uint button, uint activateTime)
+  void popup(gtk.widget.Widget parentMenuShell, gtk.widget.Widget parentMenuItem, gtk.types.MenuPositionFunc func, uint button, uint activateTime) nothrow
   {
-    extern(C) void _funcCallback(GtkMenu* menu, int* x, int* y, gboolean* pushIn, void* userData)
+    extern(C) void _funcCallback(GtkMenu* menu, int* x, int* y, gboolean* pushIn, void* userData) nothrow
     {
       ptrThawGC(userData);
       auto _dlg = cast(gtk.types.MenuPositionFunc*)userData;
       bool _pushIn;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.menu.Menu)(cast(void*)menu, No.Take), *x, *y, _pushIn);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.menu.Menu)(cast(void*)menu, No.Take), *x, *y, _pushIn);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.MenuPositionFunc");
+      }
       *pushIn = _pushIn;
 
     }
@@ -712,7 +719,7 @@ class Menu : gtk.menu_shell.MenuShell
         triggerEvent = the #GdkEvent that initiated this request or
                           null if it's the current event
   */
-  void popupAtPointer(gdk.event.Event triggerEvent = null)
+  void popupAtPointer(gdk.event.Event triggerEvent = null) nothrow
   {
     gtk_menu_popup_at_pointer(cast(GtkMenu*)this._cPtr, triggerEvent ? cast(const(GdkEvent)*)triggerEvent._cPtr(No.Dup) : null);
   }
@@ -745,7 +752,7 @@ class Menu : gtk.menu_shell.MenuShell
         triggerEvent = the #GdkEvent that initiated this request or
                           null if it's the current event
   */
-  void popupAtRect(gdk.window.Window rectWindow, gdk.rectangle.Rectangle rect, gdk.types.Gravity rectAnchor, gdk.types.Gravity menuAnchor, gdk.event.Event triggerEvent = null)
+  void popupAtRect(gdk.window.Window rectWindow, gdk.rectangle.Rectangle rect, gdk.types.Gravity rectAnchor, gdk.types.Gravity menuAnchor, gdk.event.Event triggerEvent = null) nothrow
   {
     gtk_menu_popup_at_rect(cast(GtkMenu*)this._cPtr, rectWindow ? cast(GdkWindow*)rectWindow._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&rect, rectAnchor, menuAnchor, triggerEvent ? cast(const(GdkEvent)*)triggerEvent._cPtr(No.Dup) : null);
   }
@@ -779,7 +786,7 @@ class Menu : gtk.menu_shell.MenuShell
         triggerEvent = the #GdkEvent that initiated this request or
                           null if it's the current event
   */
-  void popupAtWidget(gtk.widget.Widget widget, gdk.types.Gravity widgetAnchor, gdk.types.Gravity menuAnchor, gdk.event.Event triggerEvent = null)
+  void popupAtWidget(gtk.widget.Widget widget, gdk.types.Gravity widgetAnchor, gdk.types.Gravity menuAnchor, gdk.event.Event triggerEvent = null) nothrow
   {
     gtk_menu_popup_at_widget(cast(GtkMenu*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, widgetAnchor, menuAnchor, triggerEvent ? cast(const(GdkEvent)*)triggerEvent._cPtr(No.Dup) : null);
   }
@@ -824,14 +831,21 @@ class Menu : gtk.menu_shell.MenuShell
       Deprecated: Please use [gtk.menu.Menu.popupAtWidget],
             [gtk.menu.Menu.popupAtPointer]. or [gtk.menu.Menu.popupAtRect] instead
   */
-  void popupForDevice(gdk.device.Device device, gtk.widget.Widget parentMenuShell, gtk.widget.Widget parentMenuItem, gtk.types.MenuPositionFunc func, uint button, uint activateTime)
+  void popupForDevice(gdk.device.Device device, gtk.widget.Widget parentMenuShell, gtk.widget.Widget parentMenuItem, gtk.types.MenuPositionFunc func, uint button, uint activateTime) nothrow
   {
-    extern(C) void _funcCallback(GtkMenu* menu, int* x, int* y, gboolean* pushIn, void* userData)
+    extern(C) void _funcCallback(GtkMenu* menu, int* x, int* y, gboolean* pushIn, void* userData) nothrow
     {
       auto _dlg = cast(gtk.types.MenuPositionFunc*)userData;
       bool _pushIn;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.menu.Menu)(cast(void*)menu, No.Take), *x, *y, _pushIn);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.menu.Menu)(cast(void*)menu, No.Take), *x, *y, _pushIn);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.MenuPositionFunc");
+      }
       *pushIn = _pushIn;
 
     }
@@ -850,7 +864,7 @@ class Menu : gtk.menu_shell.MenuShell
         position = the new position to place child.
               Positions are numbered from 0 to n - 1
   */
-  void reorderChild(gtk.widget.Widget child, int position)
+  void reorderChild(gtk.widget.Widget child, int position) nothrow
   {
     gtk_menu_reorder_child(cast(GtkMenu*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, position);
   }
@@ -858,7 +872,7 @@ class Menu : gtk.menu_shell.MenuShell
   /**
       Repositions the menu according to its position function.
   */
-  void reposition()
+  void reposition() nothrow
   {
     gtk_menu_reposition(cast(GtkMenu*)this._cPtr);
   }
@@ -874,7 +888,7 @@ class Menu : gtk.menu_shell.MenuShell
         accelGroup = the #GtkAccelGroup to be associated
                         with the menu.
   */
-  void setAccelGroup(gtk.accel_group.AccelGroup accelGroup = null)
+  void setAccelGroup(gtk.accel_group.AccelGroup accelGroup = null) nothrow
   {
     gtk_menu_set_accel_group(cast(GtkMenu*)this._cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup._cPtr(No.Dup) : null);
   }
@@ -907,7 +921,7 @@ class Menu : gtk.menu_shell.MenuShell
       Params:
         accelPath = a valid accelerator path, or null to unset the path
   */
-  void setAccelPath(string accelPath = null)
+  void setAccelPath(string accelPath = null) nothrow
   {
     const(char)* _accelPath = accelPath.toCString(No.Alloc);
     gtk_menu_set_accel_path(cast(GtkMenu*)this._cPtr, _accelPath);
@@ -921,7 +935,7 @@ class Menu : gtk.menu_shell.MenuShell
         index = the index of the menu item to select.  Index values are
                   from 0 to n-1
   */
-  void setActive(uint index)
+  void setActive(uint index) nothrow
   {
     gtk_menu_set_active(cast(GtkMenu*)this._cPtr, index);
   }
@@ -941,7 +955,7 @@ class Menu : gtk.menu_shell.MenuShell
         monitorNum = the number of the monitor on which the menu should
              be popped up
   */
-  void setMonitor(int monitorNum)
+  void setMonitor(int monitorNum) nothrow
   {
     gtk_menu_set_monitor(cast(GtkMenu*)this._cPtr, monitorNum);
   }
@@ -953,7 +967,7 @@ class Menu : gtk.menu_shell.MenuShell
       Params:
         reserveToggleSize = whether to reserve size for toggles
   */
-  void setReserveToggleSize(bool reserveToggleSize)
+  void setReserveToggleSize(bool reserveToggleSize) nothrow
   {
     gtk_menu_set_reserve_toggle_size(cast(GtkMenu*)this._cPtr, reserveToggleSize);
   }
@@ -965,7 +979,7 @@ class Menu : gtk.menu_shell.MenuShell
         screen = a #GdkScreen, or null if the screen should be
                    determined by the widget the menu is attached to
   */
-  void setScreen(gdk.screen.Screen screen = null)
+  void setScreen(gdk.screen.Screen screen = null) nothrow
   {
     gtk_menu_set_screen(cast(GtkMenu*)this._cPtr, screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
   }
@@ -979,7 +993,7 @@ class Menu : gtk.menu_shell.MenuShell
       Params:
         tornOff = If true, menu is displayed as a tearoff menu.
   */
-  void setTearoffState(bool tornOff)
+  void setTearoffState(bool tornOff) nothrow
   {
     gtk_menu_set_tearoff_state(cast(GtkMenu*)this._cPtr, tornOff);
   }
@@ -996,7 +1010,7 @@ class Menu : gtk.menu_shell.MenuShell
         title = a string containing the title for the menu, or null to
             inherit the title of the parent menu item, if any
   */
-  void setTitle(string title = null)
+  void setTitle(string title = null) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_menu_set_title(cast(GtkMenu*)this._cPtr, _title);
@@ -1019,14 +1033,14 @@ class Menu : gtk.menu_shell.MenuShell
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveScroll(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveScroll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ScrollType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.menu.Menu)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1038,7 +1052,14 @@ class Menu : gtk.menu_shell.MenuShell
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.menu.Menu.moveScroll");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1091,7 +1112,7 @@ class Menu : gtk.menu_shell.MenuShell
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPoppedUp(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPoppedUp(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == void*)))
@@ -1101,7 +1122,7 @@ class Menu : gtk.menu_shell.MenuShell
   && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gtk.menu.Menu)))
   && Parameters!T.length < 6)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1122,7 +1143,14 @@ class Menu : gtk.menu_shell.MenuShell
       static if (Parameters!T.length > 4)
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.menu.Menu.poppedUp");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1141,7 +1169,7 @@ class MenuGidBuilderImpl(T) : gtk.menu_shell.MenuShellGidBuilderImpl!T
         propval = The accel group holding accelerators for the menu.
       Returns: Builder instance for fluent chaining
   */
-  T accelGroup(gtk.accel_group.AccelGroup propval)
+  T accelGroup(gtk.accel_group.AccelGroup propval) nothrow
   {
     return setProperty("accel-group", propval);
   }
@@ -1152,7 +1180,7 @@ class MenuGidBuilderImpl(T) : gtk.menu_shell.MenuShellGidBuilderImpl!T
         propval = An accel path used to conveniently construct accel paths of child items.
       Returns: Builder instance for fluent chaining
   */
-  T accelPath(string propval)
+  T accelPath(string propval) nothrow
   {
     return setProperty("accel-path", propval);
   }
@@ -1164,7 +1192,7 @@ class MenuGidBuilderImpl(T) : gtk.menu_shell.MenuShellGidBuilderImpl!T
           menu item is selected.
       Returns: Builder instance for fluent chaining
   */
-  T active(int propval)
+  T active(int propval) nothrow
   {
     return setProperty("active", propval);
   }
@@ -1188,7 +1216,7 @@ class MenuGidBuilderImpl(T) : gtk.menu_shell.MenuShellGidBuilderImpl!T
           #GtkMenu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
       Returns: Builder instance for fluent chaining
   */
-  T anchorHints(gdk.types.AnchorHints propval)
+  T anchorHints(gdk.types.AnchorHints propval) nothrow
   {
     return setProperty("anchor-hints", propval);
   }
@@ -1201,7 +1229,7 @@ class MenuGidBuilderImpl(T) : gtk.menu_shell.MenuShellGidBuilderImpl!T
           use [gtk.menu.Menu.attachToWidget] directly.
       Returns: Builder instance for fluent chaining
   */
-  T attachWidget(gtk.widget.Widget propval)
+  T attachWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("attach-widget", propval);
   }
@@ -1216,7 +1244,7 @@ class MenuGidBuilderImpl(T) : gtk.menu_shell.MenuShellGidBuilderImpl!T
           #GtkMenu:rect-anchor-dx, #GtkMenu:rect-anchor-dy, and #GtkMenu::popped-up.
       Returns: Builder instance for fluent chaining
   */
-  T menuTypeHint(gdk.types.WindowTypeHint propval)
+  T menuTypeHint(gdk.types.WindowTypeHint propval) nothrow
   {
     return setProperty("menu-type-hint", propval);
   }
@@ -1227,7 +1255,7 @@ class MenuGidBuilderImpl(T) : gtk.menu_shell.MenuShellGidBuilderImpl!T
         propval = The monitor the menu will be popped up on.
       Returns: Builder instance for fluent chaining
   */
-  T monitor(int propval)
+  T monitor(int propval) nothrow
   {
     return setProperty("monitor", propval);
   }
@@ -1243,7 +1271,7 @@ class MenuGidBuilderImpl(T) : gtk.menu_shell.MenuShellGidBuilderImpl!T
           #GtkMenu:rect-anchor-dy, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
       Returns: Builder instance for fluent chaining
   */
-  T rectAnchorDx(int propval)
+  T rectAnchorDx(int propval) nothrow
   {
     return setProperty("rect-anchor-dx", propval);
   }
@@ -1258,7 +1286,7 @@ class MenuGidBuilderImpl(T) : gtk.menu_shell.MenuShellGidBuilderImpl!T
           #GtkMenu:rect-anchor-dx, #GtkMenu:menu-type-hint, and #GtkMenu::popped-up.
       Returns: Builder instance for fluent chaining
   */
-  T rectAnchorDy(int propval)
+  T rectAnchorDy(int propval) nothrow
   {
     return setProperty("rect-anchor-dy", propval);
   }
@@ -1275,7 +1303,7 @@ class MenuGidBuilderImpl(T) : gtk.menu_shell.MenuShellGidBuilderImpl!T
           toggle space for consistency.
       Returns: Builder instance for fluent chaining
   */
-  T reserveToggleSize(bool propval)
+  T reserveToggleSize(bool propval) nothrow
   {
     return setProperty("reserve-toggle-size", propval);
   }
@@ -1286,7 +1314,7 @@ class MenuGidBuilderImpl(T) : gtk.menu_shell.MenuShellGidBuilderImpl!T
         propval = A boolean that indicates whether the menu is torn-off.
       Returns: Builder instance for fluent chaining
   */
-  T tearoffState(bool propval)
+  T tearoffState(bool propval) nothrow
   {
     return setProperty("tearoff-state", propval);
   }
@@ -1298,7 +1326,7 @@ class MenuGidBuilderImpl(T) : gtk.menu_shell.MenuShellGidBuilderImpl!T
           menu is torn-off.
       Returns: Builder instance for fluent chaining
   */
-  T tearoffTitle(string propval)
+  T tearoffTitle(string propval) nothrow
   {
     return setProperty("tearoff-title", propval);
   }
@@ -1311,7 +1339,7 @@ final class MenuGidBuilder : MenuGidBuilderImpl!MenuGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Menu build()
+  Menu build() nothrow
   {
     return new Menu(cast(void*)createGObject(Menu._getGType), No.Take);
   }

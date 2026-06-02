@@ -31,26 +31,26 @@ class ContextMenu : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_context_menu_get_type != &gidSymbolNotFound ? webkit_context_menu_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ContextMenu self()
+  override ContextMenu self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class ContextMenu : gobject.object.ObjectWrap
       Get builder for [webkitwebprocessextension.context_menu.ContextMenu]
       Returns: New builder object
   */
-  static ContextMenuGidBuilder builder()
+  static ContextMenuGidBuilder builder() nothrow
   {
     return new ContextMenuGidBuilder;
   }
@@ -76,7 +76,7 @@ class ContextMenu : gobject.object.ObjectWrap
       a list of initial items.
       Returns: The newly created #WebKitContextMenu object
   */
-  this()
+  this() nothrow
   {
     WebKitContextMenu* _cretval;
     _cretval = webkit_context_menu_new();
@@ -94,7 +94,7 @@ class ContextMenu : gobject.object.ObjectWrap
         items = a #GList of #WebKitContextMenuItem
       Returns: The newly created #WebKitContextMenu object
   */
-  static webkitwebprocessextension.context_menu.ContextMenu newWithItems(webkitwebprocessextension.context_menu_item.ContextMenuItem[] items)
+  static webkitwebprocessextension.context_menu.ContextMenu newWithItems(webkitwebprocessextension.context_menu_item.ContextMenuItem[] items) nothrow
   {
     WebKitContextMenu* _cretval;
     auto _items = gListFromD!(webkitwebprocessextension.context_menu_item.ContextMenuItem)(items);
@@ -110,7 +110,7 @@ class ContextMenu : gobject.object.ObjectWrap
       Params:
         item = the #WebKitContextMenuItem to add
   */
-  void append(webkitwebprocessextension.context_menu_item.ContextMenuItem item)
+  void append(webkitwebprocessextension.context_menu_item.ContextMenuItem item) nothrow
   {
     webkit_context_menu_append(cast(WebKitContextMenu*)this._cPtr, item ? cast(WebKitContextMenuItem*)item._cPtr(No.Dup) : null);
   }
@@ -120,7 +120,7 @@ class ContextMenu : gobject.object.ObjectWrap
       Returns: the first #WebKitContextMenuItem of menu,
            or null if the #WebKitContextMenu is empty.
   */
-  webkitwebprocessextension.context_menu_item.ContextMenuItem first()
+  webkitwebprocessextension.context_menu_item.ContextMenuItem first() nothrow
   {
     WebKitContextMenuItem* _cretval;
     _cretval = webkit_context_menu_first(cast(WebKitContextMenu*)this._cPtr);
@@ -147,7 +147,7 @@ class ContextMenu : gobject.object.ObjectWrap
       </itemizedlist>
       Returns: the menu event or null.
   */
-  gdk.event.Event getEvent()
+  gdk.event.Event getEvent() nothrow
   {
     GdkEvent* _cretval;
     _cretval = webkit_context_menu_get_event(cast(WebKitContextMenu*)this._cPtr);
@@ -163,7 +163,7 @@ class ContextMenu : gobject.object.ObjectWrap
       Returns: the #WebKitContextMenuItem at position position in menu,
            or null if the position is off the end of the menu.
   */
-  webkitwebprocessextension.context_menu_item.ContextMenuItem getItemAtPosition(uint position)
+  webkitwebprocessextension.context_menu_item.ContextMenuItem getItemAtPosition(uint position) nothrow
   {
     WebKitContextMenuItem* _cretval;
     _cretval = webkit_context_menu_get_item_at_position(cast(WebKitContextMenu*)this._cPtr, position);
@@ -176,7 +176,7 @@ class ContextMenu : gobject.object.ObjectWrap
       Returns: a #GList of
            #WebKitContextMenuItem<!-- -->s
   */
-  webkitwebprocessextension.context_menu_item.ContextMenuItem[] getItems()
+  webkitwebprocessextension.context_menu_item.ContextMenuItem[] getItems() nothrow
   {
     GList* _cretval;
     _cretval = webkit_context_menu_get_items(cast(WebKitContextMenu*)this._cPtr);
@@ -188,7 +188,7 @@ class ContextMenu : gobject.object.ObjectWrap
       Gets the length of the menu.
       Returns: the number of #WebKitContextMenuItem<!-- -->s in menu
   */
-  uint getNItems()
+  uint getNItems() nothrow
   {
     uint _retval;
     _retval = webkit_context_menu_get_n_items(cast(WebKitContextMenu*)this._cPtr);
@@ -202,7 +202,7 @@ class ContextMenu : gobject.object.ObjectWrap
       from the Web Process with [webkitwebprocessextension.context_menu.ContextMenu.setUserData].
       Returns: the user data of menu, or null if menu doesn't have user data
   */
-  glib.variant.Variant getUserData()
+  glib.variant.Variant getUserData() nothrow
   {
     GVariant* _cretval;
     _cretval = webkit_context_menu_get_user_data(cast(WebKitContextMenu*)this._cPtr);
@@ -221,7 +221,7 @@ class ContextMenu : gobject.object.ObjectWrap
         item = the #WebKitContextMenuItem to add
         position = the position to insert the item
   */
-  void insert(webkitwebprocessextension.context_menu_item.ContextMenuItem item, int position)
+  void insert(webkitwebprocessextension.context_menu_item.ContextMenuItem item, int position) nothrow
   {
     webkit_context_menu_insert(cast(WebKitContextMenu*)this._cPtr, item ? cast(WebKitContextMenuItem*)item._cPtr(No.Dup) : null, position);
   }
@@ -231,7 +231,7 @@ class ContextMenu : gobject.object.ObjectWrap
       Returns: the last #WebKitContextMenuItem of menu,
            or null if the #WebKitContextMenu is empty.
   */
-  webkitwebprocessextension.context_menu_item.ContextMenuItem last()
+  webkitwebprocessextension.context_menu_item.ContextMenuItem last() nothrow
   {
     WebKitContextMenuItem* _cretval;
     _cretval = webkit_context_menu_last(cast(WebKitContextMenu*)this._cPtr);
@@ -251,7 +251,7 @@ class ContextMenu : gobject.object.ObjectWrap
         item = the #WebKitContextMenuItem to add
         position = the new position to move the item
   */
-  void moveItem(webkitwebprocessextension.context_menu_item.ContextMenuItem item, int position)
+  void moveItem(webkitwebprocessextension.context_menu_item.ContextMenuItem item, int position) nothrow
   {
     webkit_context_menu_move_item(cast(WebKitContextMenu*)this._cPtr, item ? cast(WebKitContextMenuItem*)item._cPtr(No.Dup) : null, position);
   }
@@ -262,7 +262,7 @@ class ContextMenu : gobject.object.ObjectWrap
       Params:
         item = the #WebKitContextMenuItem to add
   */
-  void prepend(webkitwebprocessextension.context_menu_item.ContextMenuItem item)
+  void prepend(webkitwebprocessextension.context_menu_item.ContextMenuItem item) nothrow
   {
     webkit_context_menu_prepend(cast(WebKitContextMenu*)this._cPtr, item ? cast(WebKitContextMenuItem*)item._cPtr(No.Dup) : null);
   }
@@ -275,7 +275,7 @@ class ContextMenu : gobject.object.ObjectWrap
       Params:
         item = the #WebKitContextMenuItem to remove
   */
-  void remove(webkitwebprocessextension.context_menu_item.ContextMenuItem item)
+  void remove(webkitwebprocessextension.context_menu_item.ContextMenuItem item) nothrow
   {
     webkit_context_menu_remove(cast(WebKitContextMenu*)this._cPtr, item ? cast(WebKitContextMenuItem*)item._cPtr(No.Dup) : null);
   }
@@ -283,7 +283,7 @@ class ContextMenu : gobject.object.ObjectWrap
   /**
       Removes all items of the menu.
   */
-  void removeAll()
+  void removeAll() nothrow
   {
     webkit_context_menu_remove_all(cast(WebKitContextMenu*)this._cPtr);
   }
@@ -298,7 +298,7 @@ class ContextMenu : gobject.object.ObjectWrap
       Params:
         userData = a #GVariant
   */
-  void setUserData(glib.variant.Variant userData)
+  void setUserData(glib.variant.Variant userData) nothrow
   {
     webkit_context_menu_set_user_data(cast(WebKitContextMenu*)this._cPtr, userData ? cast(GVariant*)userData._cPtr(No.Dup) : null);
   }
@@ -316,7 +316,7 @@ final class ContextMenuGidBuilder : ContextMenuGidBuilderImpl!ContextMenuGidBuil
       Create object from builder.
       Returns: New object
   */
-  ContextMenu build()
+  ContextMenu build() nothrow
   {
     return new ContextMenu(cast(void*)createGObject(ContextMenu._getGType), Yes.Take);
   }

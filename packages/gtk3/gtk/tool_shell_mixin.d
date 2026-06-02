@@ -25,7 +25,7 @@ template ToolShellT()
       instead.
       Returns: the current ellipsize mode of shell
   */
-  override pango.types.EllipsizeMode getEllipsizeMode()
+  override pango.types.EllipsizeMode getEllipsizeMode() nothrow
   {
     PangoEllipsizeMode _cretval;
     _cretval = gtk_tool_shell_get_ellipsize_mode(cast(GtkToolShell*)this._cPtr);
@@ -38,7 +38,7 @@ template ToolShellT()
       function directly, but rely on [gtk.tool_item.ToolItem.getIconSize] instead.
       Returns: the current size (#GtkIconSize) for icons of shell
   */
-  override gtk.types.IconSize getIconSize()
+  override gtk.types.IconSize getIconSize() nothrow
   {
     GtkIconSize _cretval;
     _cretval = gtk_tool_shell_get_icon_size(cast(GtkToolShell*)this._cPtr);
@@ -52,7 +52,7 @@ template ToolShellT()
       instead.
       Returns: the current orientation of shell
   */
-  override gtk.types.Orientation toolShellGetOrientation()
+  override gtk.types.Orientation toolShellGetOrientation() nothrow
   {
     GtkOrientation _cretval;
     _cretval = gtk_tool_shell_get_orientation(cast(GtkToolShell*)this._cPtr);
@@ -65,7 +65,7 @@ template ToolShellT()
       function directly, but rely on [gtk.tool_item.ToolItem.getReliefStyle] instead.
       Returns: The relief style of buttons on shell.
   */
-  override gtk.types.ReliefStyle getReliefStyle()
+  override gtk.types.ReliefStyle getReliefStyle() nothrow
   {
     GtkReliefStyle _cretval;
     _cretval = gtk_tool_shell_get_relief_style(cast(GtkToolShell*)this._cPtr);
@@ -79,7 +79,7 @@ template ToolShellT()
       instead.
       Returns: the current style of shell
   */
-  override gtk.types.ToolbarStyle getStyle()
+  override gtk.types.ToolbarStyle getStyle() nothrow
   {
     GtkToolbarStyle _cretval;
     _cretval = gtk_tool_shell_get_style(cast(GtkToolShell*)this._cPtr);
@@ -93,7 +93,7 @@ template ToolShellT()
       instead.
       Returns: the current text alignment of shell
   */
-  override float getTextAlignment()
+  override float getTextAlignment() nothrow
   {
     float _retval;
     _retval = gtk_tool_shell_get_text_alignment(cast(GtkToolShell*)this._cPtr);
@@ -106,7 +106,7 @@ template ToolShellT()
       instead.
       Returns: the current text orientation of shell
   */
-  override gtk.types.Orientation getTextOrientation()
+  override gtk.types.Orientation getTextOrientation() nothrow
   {
     GtkOrientation _cretval;
     _cretval = gtk_tool_shell_get_text_orientation(cast(GtkToolShell*)this._cPtr);
@@ -120,7 +120,7 @@ template ToolShellT()
       instead.
       Returns: the current text size group of shell
   */
-  override gtk.size_group.SizeGroup getTextSizeGroup()
+  override gtk.size_group.SizeGroup getTextSizeGroup() nothrow
   {
     GtkSizeGroup* _cretval;
     _cretval = gtk_tool_shell_get_text_size_group(cast(GtkToolShell*)this._cPtr);
@@ -136,7 +136,7 @@ template ToolShellT()
       Tool items must not call this function directly, but rely on
       [gtk.tool_item.ToolItem.rebuildMenu] instead.
   */
-  override void rebuildMenu()
+  override void rebuildMenu() nothrow
   {
     gtk_tool_shell_rebuild_menu(cast(GtkToolShell*)this._cPtr);
   }

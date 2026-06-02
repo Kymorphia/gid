@@ -14,7 +14,7 @@ struct CssProviderError
   alias Enum = gtk.types.CssProviderError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gtk_css_provider_error_quark();
@@ -24,12 +24,12 @@ struct CssProviderError
 
 class CssProvideException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gtk.css_provider_error.CssProviderError.quark, cast(int)code, msg);
   }

@@ -15,11 +15,8 @@ class MountOperationHandlerProxy
   _GtkMountOperationHandlerProxy _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.__mount_operation_handler_proxy.MountOperationHandlerProxy");
-
     _cInstance = *cast(_GtkMountOperationHandlerProxy*)ptr;
 
     if (take)
@@ -27,7 +24,7 @@ class MountOperationHandlerProxy
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }

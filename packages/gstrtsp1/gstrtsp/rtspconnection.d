@@ -29,18 +29,15 @@ class RTSPConnection
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstrtsp.rtspconnection.RTSPConnection");
-
     _cInstancePtr = cast(GstRTSPConnection*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -55,7 +52,7 @@ class RTSPConnection
         key = HTTP header name
         value = HTTP header value
   */
-  void addExtraHttpRequestHeader(string key, string value)
+  void addExtraHttpRequestHeader(string key, string value) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -65,7 +62,7 @@ class RTSPConnection
   /**
       Clear the list of authentication directives stored in conn.
   */
-  void clearAuthParams()
+  void clearAuthParams() nothrow
   {
     gst_rtsp_connection_clear_auth_params(cast(GstRTSPConnection*)this._cPtr);
   }
@@ -75,7 +72,7 @@ class RTSPConnection
       state as when it was first created.
       Returns: #GST_RTSP_OK on success.
   */
-  gstrtsp.types.RTSPResult close()
+  gstrtsp.types.RTSPResult close() nothrow
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_connection_close(cast(GstRTSPConnection*)this._cPtr);
@@ -95,7 +92,7 @@ class RTSPConnection
         timeout = a GTimeVal timeout
       Returns: #GST_RTSP_OK when a connection could be made.
   */
-  gstrtsp.types.RTSPResult connect(glib.time_val.TimeVal timeout)
+  gstrtsp.types.RTSPResult connect(glib.time_val.TimeVal timeout) nothrow
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_connection_connect(cast(GstRTSPConnection*)this._cPtr, cast(GTimeVal*)&timeout);
@@ -115,7 +112,7 @@ class RTSPConnection
         timeout = a timeout in microseconds
       Returns: #GST_RTSP_OK when a connection could be made.
   */
-  gstrtsp.types.RTSPResult connectUsec(long timeout)
+  gstrtsp.types.RTSPResult connectUsec(long timeout) nothrow
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_connection_connect_usec(cast(GstRTSPConnection*)this._cPtr, timeout);
@@ -137,7 +134,7 @@ class RTSPConnection
         response = a #GstRTSPMessage
       Returns: #GST_RTSP_OK when a connection could be made.
   */
-  gstrtsp.types.RTSPResult connectWithResponse(glib.time_val.TimeVal timeout, gstrtsp.rtspmessage.RTSPMessage response)
+  gstrtsp.types.RTSPResult connectWithResponse(glib.time_val.TimeVal timeout, gstrtsp.rtspmessage.RTSPMessage response) nothrow
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_connection_connect_with_response(cast(GstRTSPConnection*)this._cPtr, cast(GTimeVal*)&timeout, response ? cast(GstRTSPMessage*)response._cPtr(No.Dup) : null);
@@ -159,7 +156,7 @@ class RTSPConnection
         response = a #GstRTSPMessage
       Returns: #GST_RTSP_OK when a connection could be made.
   */
-  gstrtsp.types.RTSPResult connectWithResponseUsec(long timeout, gstrtsp.rtspmessage.RTSPMessage response)
+  gstrtsp.types.RTSPResult connectWithResponseUsec(long timeout, gstrtsp.rtspmessage.RTSPMessage response) nothrow
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_connection_connect_with_response_usec(cast(GstRTSPConnection*)this._cPtr, timeout, response ? cast(GstRTSPMessage*)response._cPtr(No.Dup) : null);
@@ -182,7 +179,7 @@ class RTSPConnection
         conn2 = a #GstRTSPConnection or null
       Returns: return GST_RTSP_OK on success.
   */
-  gstrtsp.types.RTSPResult doTunnel(gstrtsp.rtspconnection.RTSPConnection conn2 = null)
+  gstrtsp.types.RTSPResult doTunnel(gstrtsp.rtspconnection.RTSPConnection conn2 = null) nothrow
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_connection_do_tunnel(cast(GstRTSPConnection*)this._cPtr, conn2 ? cast(GstRTSPConnection*)conn2._cPtr : null);
@@ -199,7 +196,7 @@ class RTSPConnection
         flush = start or stop the flush
       Returns: #GST_RTSP_OK.
   */
-  gstrtsp.types.RTSPResult flush(bool flush)
+  gstrtsp.types.RTSPResult flush(bool flush) nothrow
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_connection_flush(cast(GstRTSPConnection*)this._cPtr, flush);
@@ -212,7 +209,7 @@ class RTSPConnection
       Returns: returns true if the x-server-ip-address header reply will be
                  ignored, else returns false
   */
-  bool getIgnoreXServerReply()
+  bool getIgnoreXServerReply() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtsp_connection_get_ignore_x_server_reply(cast(const(GstRTSPConnection)*)this._cPtr);
@@ -224,7 +221,7 @@ class RTSPConnection
       Returns: The IP address as a string. this value remains valid until the
         connection is closed.
   */
-  string getIp()
+  string getIp() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_rtsp_connection_get_ip(cast(const(GstRTSPConnection)*)this._cPtr);
@@ -237,7 +234,7 @@ class RTSPConnection
       Returns: the file descriptor used for reading or null on
         error. The file descriptor remains valid until the connection is closed.
   */
-  gio.socket.Socket getReadSocket()
+  gio.socket.Socket getReadSocket() nothrow
   {
     GSocket* _cretval;
     _cretval = gst_rtsp_connection_get_read_socket(cast(const(GstRTSPConnection)*)this._cPtr);
@@ -246,7 +243,7 @@ class RTSPConnection
   }
 
   /** */
-  bool getRememberSessionId()
+  bool getRememberSessionId() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtsp_connection_get_remember_session_id(cast(GstRTSPConnection*)this._cPtr);
@@ -284,7 +281,7 @@ class RTSPConnection
         database has been previously set. Use [gobject.object.ObjectWrap.unref] to release the
         certificate database.
   */
-  gio.tls_database.TlsDatabase getTlsDatabase()
+  gio.tls_database.TlsDatabase getTlsDatabase() nothrow
   {
     GTlsDatabase* _cretval;
     _cretval = gst_rtsp_connection_get_tls_database(cast(GstRTSPConnection*)this._cPtr);
@@ -299,7 +296,7 @@ class RTSPConnection
       Returns: a reference on the #GTlsInteraction. Use
         [gobject.object.ObjectWrap.unref] to release.
   */
-  gio.tls_interaction.TlsInteraction getTlsInteraction()
+  gio.tls_interaction.TlsInteraction getTlsInteraction() nothrow
   {
     GTlsInteraction* _cretval;
     _cretval = gst_rtsp_connection_get_tls_interaction(cast(GstRTSPConnection*)this._cPtr);
@@ -321,7 +318,7 @@ class RTSPConnection
       the only error flag set even if other problems exist with the certificate.
       Returns: the validation flags.
   */
-  gio.types.TlsCertificateFlags getTlsValidationFlags()
+  gio.types.TlsCertificateFlags getTlsValidationFlags() nothrow
   {
     GTlsCertificateFlags _cretval;
     _cretval = gst_rtsp_connection_get_tls_validation_flags(cast(GstRTSPConnection*)this._cPtr);
@@ -333,7 +330,7 @@ class RTSPConnection
       Get the tunnel session id the connection.
       Returns: returns a non-empty string if conn is being tunneled over HTTP.
   */
-  string getTunnelid()
+  string getTunnelid() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_rtsp_connection_get_tunnelid(cast(const(GstRTSPConnection)*)this._cPtr);
@@ -346,7 +343,7 @@ class RTSPConnection
       Returns: The URL. This value remains valid until the
         connection is freed.
   */
-  gstrtsp.rtspurl.RTSPUrl getUrl()
+  gstrtsp.rtspurl.RTSPUrl getUrl() nothrow
   {
     GstRTSPUrl* _cretval;
     _cretval = gst_rtsp_connection_get_url(cast(const(GstRTSPConnection)*)this._cPtr);
@@ -359,7 +356,7 @@ class RTSPConnection
       Returns: the file descriptor used for writing or NULL on
         error. The file descriptor remains valid until the connection is closed.
   */
-  gio.socket.Socket getWriteSocket()
+  gio.socket.Socket getWriteSocket() nothrow
   {
     GSocket* _cretval;
     _cretval = gst_rtsp_connection_get_write_socket(cast(const(GstRTSPConnection)*)this._cPtr);
@@ -371,7 +368,7 @@ class RTSPConnection
       Get the tunneling state of the connection.
       Returns: if conn is using HTTP tunneling.
   */
-  bool isTunneled()
+  bool isTunneled() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtsp_connection_is_tunneled(cast(const(GstRTSPConnection)*)this._cPtr);
@@ -385,7 +382,7 @@ class RTSPConnection
         timeout = a timeout
       Returns: #GST_RTSP_OK.
   */
-  gstrtsp.types.RTSPResult nextTimeout(glib.time_val.TimeVal timeout)
+  gstrtsp.types.RTSPResult nextTimeout(glib.time_val.TimeVal timeout) nothrow
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_connection_next_timeout(cast(GstRTSPConnection*)this._cPtr, cast(GTimeVal*)&timeout);
@@ -397,7 +394,7 @@ class RTSPConnection
       Calculate the next timeout for conn
       Returns: #the next timeout in microseconds
   */
-  long nextTimeoutUsec()
+  long nextTimeoutUsec() nothrow
   {
     long _retval;
     _retval = gst_rtsp_connection_next_timeout_usec(cast(GstRTSPConnection*)this._cPtr);
@@ -420,7 +417,7 @@ class RTSPConnection
         timeout = a timeout
       Returns: #GST_RTSP_OK on success.
   */
-  gstrtsp.types.RTSPResult poll(gstrtsp.types.RTSPEvent events, out gstrtsp.types.RTSPEvent revents, glib.time_val.TimeVal timeout)
+  gstrtsp.types.RTSPResult poll(gstrtsp.types.RTSPEvent events, out gstrtsp.types.RTSPEvent revents, glib.time_val.TimeVal timeout) nothrow
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_connection_poll(cast(GstRTSPConnection*)this._cPtr, events, &revents, cast(GTimeVal*)&timeout);
@@ -444,7 +441,7 @@ class RTSPConnection
         timeout = a timeout in microseconds
       Returns: #GST_RTSP_OK on success.
   */
-  gstrtsp.types.RTSPResult pollUsec(gstrtsp.types.RTSPEvent events, out gstrtsp.types.RTSPEvent revents, long timeout)
+  gstrtsp.types.RTSPResult pollUsec(gstrtsp.types.RTSPEvent events, out gstrtsp.types.RTSPEvent revents, long timeout) nothrow
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_connection_poll_usec(cast(GstRTSPConnection*)this._cPtr, events, &revents, timeout);
@@ -464,7 +461,7 @@ class RTSPConnection
         timeout = a timeout value or null
       Returns: #GST_RTSP_OK on success.
   */
-  gstrtsp.types.RTSPResult read(ubyte[] data, glib.time_val.TimeVal timeout)
+  gstrtsp.types.RTSPResult read(ubyte[] data, glib.time_val.TimeVal timeout) nothrow
   {
     GstRTSPResult _cretval;
     uint _size;
@@ -489,7 +486,7 @@ class RTSPConnection
         timeout = a timeout value in microseconds
       Returns: #GST_RTSP_OK on success.
   */
-  gstrtsp.types.RTSPResult readUsec(ubyte[] data, long timeout)
+  gstrtsp.types.RTSPResult readUsec(ubyte[] data, long timeout) nothrow
   {
     GstRTSPResult _cretval;
     uint _size;
@@ -514,7 +511,7 @@ class RTSPConnection
         timeout = a timeout value or null
       Returns: #GST_RTSP_OK on success.
   */
-  gstrtsp.types.RTSPResult receive(gstrtsp.rtspmessage.RTSPMessage message, glib.time_val.TimeVal timeout)
+  gstrtsp.types.RTSPResult receive(gstrtsp.rtspmessage.RTSPMessage message, glib.time_val.TimeVal timeout) nothrow
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_connection_receive(cast(GstRTSPConnection*)this._cPtr, message ? cast(GstRTSPMessage*)message._cPtr(No.Dup) : null, cast(GTimeVal*)&timeout);
@@ -534,7 +531,7 @@ class RTSPConnection
         timeout = a timeout value or 0
       Returns: #GST_RTSP_OK on success.
   */
-  gstrtsp.types.RTSPResult receiveUsec(gstrtsp.rtspmessage.RTSPMessage message, long timeout)
+  gstrtsp.types.RTSPResult receiveUsec(gstrtsp.rtspmessage.RTSPMessage message, long timeout) nothrow
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_connection_receive_usec(cast(GstRTSPConnection*)this._cPtr, message ? cast(GstRTSPMessage*)message._cPtr(No.Dup) : null, timeout);
@@ -546,7 +543,7 @@ class RTSPConnection
       Reset the timeout of conn.
       Returns: #GST_RTSP_OK.
   */
-  gstrtsp.types.RTSPResult resetTimeout()
+  gstrtsp.types.RTSPResult resetTimeout() nothrow
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_connection_reset_timeout(cast(GstRTSPConnection*)this._cPtr);
@@ -566,7 +563,7 @@ class RTSPConnection
         timeout = a timeout value or null
       Returns: #GST_RTSP_OK on success.
   */
-  gstrtsp.types.RTSPResult send(gstrtsp.rtspmessage.RTSPMessage message, glib.time_val.TimeVal timeout)
+  gstrtsp.types.RTSPResult send(gstrtsp.rtspmessage.RTSPMessage message, glib.time_val.TimeVal timeout) nothrow
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_connection_send(cast(GstRTSPConnection*)this._cPtr, message ? cast(GstRTSPMessage*)message._cPtr(No.Dup) : null, cast(GTimeVal*)&timeout);
@@ -586,7 +583,7 @@ class RTSPConnection
         timeout = a timeout value or null
       Returns: #GST_RTSP_OK on success.
   */
-  gstrtsp.types.RTSPResult sendMessages(gstrtsp.rtspmessage.RTSPMessage[] messages, glib.time_val.TimeVal timeout)
+  gstrtsp.types.RTSPResult sendMessages(gstrtsp.rtspmessage.RTSPMessage[] messages, glib.time_val.TimeVal timeout) nothrow
   {
     GstRTSPResult _cretval;
     uint _nMessages;
@@ -615,7 +612,7 @@ class RTSPConnection
         timeout = a timeout value in microseconds
       Returns: #GST_RTSP_OK on Since.
   */
-  gstrtsp.types.RTSPResult sendMessagesUsec(gstrtsp.rtspmessage.RTSPMessage[] messages, long timeout)
+  gstrtsp.types.RTSPResult sendMessagesUsec(gstrtsp.rtspmessage.RTSPMessage[] messages, long timeout) nothrow
   {
     GstRTSPResult _cretval;
     uint _nMessages;
@@ -644,7 +641,7 @@ class RTSPConnection
         timeout = a timeout value in microseconds
       Returns: #GST_RTSP_OK on success.
   */
-  gstrtsp.types.RTSPResult sendUsec(gstrtsp.rtspmessage.RTSPMessage message, long timeout)
+  gstrtsp.types.RTSPResult sendUsec(gstrtsp.rtspmessage.RTSPMessage message, long timeout) nothrow
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_connection_send_usec(cast(GstRTSPConnection*)this._cPtr, message ? cast(GstRTSPMessage*)message._cPtr(No.Dup) : null, timeout);
@@ -663,14 +660,21 @@ class RTSPConnection
       Params:
         func = a #GstRTSPConnectionAcceptCertificateFunc to check certificates
   */
-  void setAcceptCertificateFunc(gstrtsp.types.RTSPConnectionAcceptCertificateFunc func)
+  void setAcceptCertificateFunc(gstrtsp.types.RTSPConnectionAcceptCertificateFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(GTlsConnection* conn, GTlsCertificate* peerCert, GTlsCertificateFlags errors, void* userData)
+    extern(C) gboolean _funcCallback(GTlsConnection* conn, GTlsCertificate* peerCert, GTlsCertificateFlags errors, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gstrtsp.types.RTSPConnectionAcceptCertificateFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.tls_connection.TlsConnection)(cast(void*)conn, No.Take), gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(void*)peerCert, No.Take), errors);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.tls_connection.TlsConnection)(cast(void*)conn, No.Take), gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(void*)peerCert, No.Take), errors);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstrtsp.types.RTSPConnectionAcceptCertificateFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -691,7 +695,7 @@ class RTSPConnection
         pass = the password
       Returns: #GST_RTSP_OK.
   */
-  gstrtsp.types.RTSPResult setAuth(gstrtsp.types.RTSPAuthMethod method, string user, string pass)
+  gstrtsp.types.RTSPResult setAuth(gstrtsp.types.RTSPAuthMethod method, string user, string pass) nothrow
   {
     GstRTSPResult _cretval;
     const(char)* _user = user.toCString(No.Alloc);
@@ -712,7 +716,7 @@ class RTSPConnection
         param = authentication directive
         value = value
   */
-  void setAuthParam(string param, string value)
+  void setAuthParam(string param, string value) nothrow
   {
     const(char)* _param = param.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -727,7 +731,7 @@ class RTSPConnection
       Params:
         limit = Content-Length limit
   */
-  void setContentLengthLimit(uint limit)
+  void setContentLengthLimit(uint limit) nothrow
   {
     gst_rtsp_connection_set_content_length_limit(cast(GstRTSPConnection*)this._cPtr, limit);
   }
@@ -740,7 +744,7 @@ class RTSPConnection
       Params:
         enable = true to enable manual HTTP mode
   */
-  void setHttpMode(bool enable)
+  void setHttpMode(bool enable) nothrow
   {
     gst_rtsp_connection_set_http_mode(cast(GstRTSPConnection*)this._cPtr, enable);
   }
@@ -753,7 +757,7 @@ class RTSPConnection
         ignore = true to ignore the x-server-ip-address header reply or false to
                    comply with it (false is the default).
   */
-  void setIgnoreXServerReply(bool ignore)
+  void setIgnoreXServerReply(bool ignore) nothrow
   {
     gst_rtsp_connection_set_ignore_x_server_reply(cast(GstRTSPConnection*)this._cPtr, ignore);
   }
@@ -764,7 +768,7 @@ class RTSPConnection
       Params:
         ip = an ip address
   */
-  void setIp(string ip)
+  void setIp(string ip) nothrow
   {
     const(char)* _ip = ip.toCString(No.Alloc);
     gst_rtsp_connection_set_ip(cast(GstRTSPConnection*)this._cPtr, _ip);
@@ -778,7 +782,7 @@ class RTSPConnection
         port = the proxy port
       Returns: #GST_RTSP_OK.
   */
-  gstrtsp.types.RTSPResult setProxy(string host, uint port)
+  gstrtsp.types.RTSPResult setProxy(string host, uint port) nothrow
   {
     GstRTSPResult _cretval;
     const(char)* _host = host.toCString(No.Alloc);
@@ -794,7 +798,7 @@ class RTSPConnection
         qosDscp = DSCP value
       Returns: #GST_RTSP_OK on success.
   */
-  gstrtsp.types.RTSPResult setQosDscp(uint qosDscp)
+  gstrtsp.types.RTSPResult setQosDscp(uint qosDscp) nothrow
   {
     GstRTSPResult _cretval;
     _cretval = gst_rtsp_connection_set_qos_dscp(cast(GstRTSPConnection*)this._cPtr, qosDscp);
@@ -811,7 +815,7 @@ class RTSPConnection
       Params:
         remember = true if the connection should remember the session id
   */
-  void setRememberSessionId(bool remember)
+  void setRememberSessionId(bool remember) nothrow
   {
     gst_rtsp_connection_set_remember_session_id(cast(GstRTSPConnection*)this._cPtr, remember);
   }
@@ -824,7 +828,7 @@ class RTSPConnection
       Params:
         database = a #GTlsDatabase
   */
-  void setTlsDatabase(gio.tls_database.TlsDatabase database = null)
+  void setTlsDatabase(gio.tls_database.TlsDatabase database = null) nothrow
   {
     gst_rtsp_connection_set_tls_database(cast(GstRTSPConnection*)this._cPtr, database ? cast(GTlsDatabase*)database._cPtr(No.Dup) : null);
   }
@@ -837,7 +841,7 @@ class RTSPConnection
       Params:
         interaction = a #GTlsInteraction
   */
-  void setTlsInteraction(gio.tls_interaction.TlsInteraction interaction = null)
+  void setTlsInteraction(gio.tls_interaction.TlsInteraction interaction = null) nothrow
   {
     gst_rtsp_connection_set_tls_interaction(cast(GstRTSPConnection*)this._cPtr, interaction ? cast(GTlsInteraction*)interaction._cPtr(No.Dup) : null);
   }
@@ -860,7 +864,7 @@ class RTSPConnection
       Returns: TRUE if the validation flags are set correctly, or FALSE if
         conn is NULL or is not a TLS connection.
   */
-  bool setTlsValidationFlags(gio.types.TlsCertificateFlags flags)
+  bool setTlsValidationFlags(gio.types.TlsCertificateFlags flags) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtsp_connection_set_tls_validation_flags(cast(GstRTSPConnection*)this._cPtr, flags);
@@ -874,7 +878,7 @@ class RTSPConnection
       Params:
         tunneled = the new state
   */
-  void setTunneled(bool tunneled)
+  void setTunneled(bool tunneled) nothrow
   {
     gst_rtsp_connection_set_tunneled(cast(GstRTSPConnection*)this._cPtr, tunneled);
   }
@@ -891,7 +895,7 @@ class RTSPConnection
         timeout = a timeout value or null
       Returns: #GST_RTSP_OK on success.
   */
-  gstrtsp.types.RTSPResult write(ubyte[] data, glib.time_val.TimeVal timeout)
+  gstrtsp.types.RTSPResult write(ubyte[] data, glib.time_val.TimeVal timeout) nothrow
   {
     GstRTSPResult _cretval;
     uint _size;
@@ -916,7 +920,7 @@ class RTSPConnection
         timeout = a timeout value or 0
       Returns: #GST_RTSP_OK on success.
   */
-  gstrtsp.types.RTSPResult writeUsec(ubyte[] data, long timeout)
+  gstrtsp.types.RTSPResult writeUsec(ubyte[] data, long timeout) nothrow
   {
     GstRTSPResult _cretval;
     uint _size;
@@ -939,7 +943,7 @@ class RTSPConnection
         cancellable = a #GCancellable to cancel the operation
       Returns: #GST_RTSP_OK when conn contains a valid connection.
   */
-  static gstrtsp.types.RTSPResult accept(gio.socket.Socket socket, out gstrtsp.rtspconnection.RTSPConnection conn, gio.cancellable.Cancellable cancellable = null)
+  static gstrtsp.types.RTSPResult accept(gio.socket.Socket socket, out gstrtsp.rtspconnection.RTSPConnection conn, gio.cancellable.Cancellable cancellable = null) nothrow
   {
     GstRTSPResult _cretval;
     GstRTSPConnection* _conn;
@@ -961,7 +965,7 @@ class RTSPConnection
         conn = storage for a #GstRTSPConnection
       Returns: #GST_RTSP_OK when conn contains a valid connection.
   */
-  static gstrtsp.types.RTSPResult create(gstrtsp.rtspurl.RTSPUrl url, out gstrtsp.rtspconnection.RTSPConnection conn)
+  static gstrtsp.types.RTSPResult create(gstrtsp.rtspurl.RTSPUrl url, out gstrtsp.rtspconnection.RTSPConnection conn) nothrow
   {
     GstRTSPResult _cretval;
     GstRTSPConnection* _conn;
@@ -984,7 +988,7 @@ class RTSPConnection
         conn = storage for a #GstRTSPConnection
       Returns: #GST_RTSP_OK when conn contains a valid connection.
   */
-  static gstrtsp.types.RTSPResult createFromSocket(gio.socket.Socket socket, string ip, ushort port, string initialBuffer, out gstrtsp.rtspconnection.RTSPConnection conn)
+  static gstrtsp.types.RTSPResult createFromSocket(gio.socket.Socket socket, string ip, ushort port, string initialBuffer, out gstrtsp.rtspconnection.RTSPConnection conn) nothrow
   {
     GstRTSPResult _cretval;
     const(char)* _ip = ip.toCString(No.Alloc);

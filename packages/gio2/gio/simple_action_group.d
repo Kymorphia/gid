@@ -23,26 +23,26 @@ class SimpleActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGrou
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_simple_action_group_get_type != &gidSymbolNotFound ? g_simple_action_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SimpleActionGroup self()
+  override SimpleActionGroup self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class SimpleActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGrou
       Get builder for [gio.simple_action_group.SimpleActionGroup]
       Returns: New builder object
   */
-  static SimpleActionGroupGidBuilder builder()
+  static SimpleActionGroupGidBuilder builder() nothrow
   {
     return new SimpleActionGroupGidBuilder;
   }
@@ -63,7 +63,7 @@ class SimpleActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGrou
       Creates a new, empty, #GSimpleActionGroup.
       Returns: a new #GSimpleActionGroup
   */
-  this()
+  this() nothrow
   {
     GSimpleActionGroup* _cretval;
     _cretval = g_simple_action_group_new();
@@ -83,7 +83,7 @@ class SimpleActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGrou
   
       Deprecated: Use [gio.action_map.ActionMap.addAction]
   */
-  void insert(gio.action.Action action)
+  void insert(gio.action.Action action) nothrow
   {
     g_simple_action_group_insert(cast(GSimpleActionGroup*)this._cPtr, action ? cast(GAction*)(cast(gobject.object.ObjectWrap)action)._cPtr(No.Dup) : null);
   }
@@ -99,7 +99,7 @@ class SimpleActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGrou
   
       Deprecated: Use [gio.action_map.ActionMap.lookupAction]
   */
-  gio.action.Action lookup(string actionName)
+  gio.action.Action lookup(string actionName) nothrow
   {
     GAction* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
@@ -118,7 +118,7 @@ class SimpleActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGrou
   
       Deprecated: Use [gio.action_map.ActionMap.removeAction]
   */
-  void remove(string actionName)
+  void remove(string actionName) nothrow
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     g_simple_action_group_remove(cast(GSimpleActionGroup*)this._cPtr, _actionName);
@@ -140,7 +140,7 @@ final class SimpleActionGroupGidBuilder : SimpleActionGroupGidBuilderImpl!Simple
       Create object from builder.
       Returns: New object
   */
-  SimpleActionGroup build()
+  SimpleActionGroup build() nothrow
   {
     return new SimpleActionGroup(cast(void*)createGObject(SimpleActionGroup._getGType), Yes.Take);
   }

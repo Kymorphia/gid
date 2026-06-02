@@ -18,26 +18,26 @@ class DataQueue : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_data_queue_get_type != &gidSymbolNotFound ? gst_data_queue_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DataQueue self()
+  override DataQueue self() nothrow
   {
     return this;
   }
@@ -46,25 +46,25 @@ class DataQueue : gobject.object.ObjectWrap
       Get builder for [gstbase.data_queue.DataQueue]
       Returns: New builder object
   */
-  static DataQueueGidBuilder builder()
+  static DataQueueGidBuilder builder() nothrow
   {
     return new DataQueueGidBuilder;
   }
 
   /** */
-  @property uint currentLevelBytes()
+  @property uint currentLevelBytes() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("current-level-bytes");
   }
 
   /** */
-  @property ulong currentLevelTime()
+  @property ulong currentLevelTime() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("current-level-time");
   }
 
   /** */
-  @property uint currentLevelVisible()
+  @property uint currentLevelVisible() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("current-level-visible");
   }
@@ -82,7 +82,7 @@ final class DataQueueGidBuilder : DataQueueGidBuilderImpl!DataQueueGidBuilder
       Create object from builder.
       Returns: New object
   */
-  DataQueue build()
+  DataQueue build() nothrow
   {
     return new DataQueue(cast(void*)createGObject(DataQueue._getGType), Yes.Take);
   }

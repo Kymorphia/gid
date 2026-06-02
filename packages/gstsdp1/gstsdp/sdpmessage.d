@@ -33,7 +33,7 @@ class SDPMessage : gobject.boxed.Boxed
         information = session information
         uri = URI of description
   */
-  this(string version_ = string.init, string sessionName = string.init, string information = string.init, string uri = string.init)
+  this(string version_ = string.init, string sessionName = string.init, string information = string.init, string uri = string.init) nothrow
   {
     super(gMalloc(GstSDPMessage.sizeof), Yes.Take);
     this.version_ = version_;
@@ -43,32 +43,32 @@ class SDPMessage : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_sdp_message_get_type != &gidSymbolNotFound ? gst_sdp_message_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SDPMessage self()
+  override SDPMessage self() nothrow
   {
     return this;
   }
@@ -77,7 +77,7 @@ class SDPMessage : gobject.boxed.Boxed
       Get `version_` field.
       Returns: the protocol version
   */
-  @property string version_()
+  @property string version_() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPMessage*)this._cPtr).version_);
   }
@@ -87,7 +87,7 @@ class SDPMessage : gobject.boxed.Boxed
       Params:
         propval = the protocol version
   */
-  @property void version_(string propval)
+  @property void version_(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)this._cPtr).version_);
     dToC(propval, cast(void*)&(cast(GstSDPMessage*)this._cPtr).version_);
@@ -97,7 +97,7 @@ class SDPMessage : gobject.boxed.Boxed
       Get `origin` field.
       Returns: owner/creator and session identifier
   */
-  @property gstsdp.sdporigin.SDPOrigin origin()
+  @property gstsdp.sdporigin.SDPOrigin origin() nothrow
   {
     return new gstsdp.sdporigin.SDPOrigin(cast(GstSDPOrigin*)&(cast(GstSDPMessage*)this._cPtr).origin, No.Take);
   }
@@ -106,7 +106,7 @@ class SDPMessage : gobject.boxed.Boxed
       Get `sessionName` field.
       Returns: session name
   */
-  @property string sessionName()
+  @property string sessionName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPMessage*)this._cPtr).sessionName);
   }
@@ -116,7 +116,7 @@ class SDPMessage : gobject.boxed.Boxed
       Params:
         propval = session name
   */
-  @property void sessionName(string propval)
+  @property void sessionName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)this._cPtr).sessionName);
     dToC(propval, cast(void*)&(cast(GstSDPMessage*)this._cPtr).sessionName);
@@ -126,7 +126,7 @@ class SDPMessage : gobject.boxed.Boxed
       Get `information` field.
       Returns: session information
   */
-  @property string information()
+  @property string information() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPMessage*)this._cPtr).information);
   }
@@ -136,7 +136,7 @@ class SDPMessage : gobject.boxed.Boxed
       Params:
         propval = session information
   */
-  @property void information(string propval)
+  @property void information(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)this._cPtr).information);
     dToC(propval, cast(void*)&(cast(GstSDPMessage*)this._cPtr).information);
@@ -146,7 +146,7 @@ class SDPMessage : gobject.boxed.Boxed
       Get `uri` field.
       Returns: URI of description
   */
-  @property string uri()
+  @property string uri() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPMessage*)this._cPtr).uri);
   }
@@ -156,7 +156,7 @@ class SDPMessage : gobject.boxed.Boxed
       Params:
         propval = URI of description
   */
-  @property void uri(string propval)
+  @property void uri(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)this._cPtr).uri);
     dToC(propval, cast(void*)&(cast(GstSDPMessage*)this._cPtr).uri);
@@ -166,7 +166,7 @@ class SDPMessage : gobject.boxed.Boxed
       Get `connection` field.
       Returns: connection information for the session
   */
-  @property gstsdp.sdpconnection.SDPConnection connection()
+  @property gstsdp.sdpconnection.SDPConnection connection() nothrow
   {
     return new gstsdp.sdpconnection.SDPConnection(cast(GstSDPConnection*)&(cast(GstSDPMessage*)this._cPtr).connection, No.Take);
   }
@@ -175,7 +175,7 @@ class SDPMessage : gobject.boxed.Boxed
       Get `key` field.
       Returns: encryption key
   */
-  @property gstsdp.sdpkey.SDPKey key()
+  @property gstsdp.sdpkey.SDPKey key() nothrow
   {
     return new gstsdp.sdpkey.SDPKey(cast(GstSDPKey*)&(cast(GstSDPMessage*)this._cPtr).key, No.Take);
   }
@@ -188,7 +188,7 @@ class SDPMessage : gobject.boxed.Boxed
         value = the value
       Returns: GST_SDP_OK.
   */
-  gstsdp.types.SDPResult addAttribute(string key, string value = null)
+  gstsdp.types.SDPResult addAttribute(string key, string value = null) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -206,7 +206,7 @@ class SDPMessage : gobject.boxed.Boxed
         bandwidth = the bandwidth in kilobits per second
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult addBandwidth(string bwtype, uint bandwidth)
+  gstsdp.types.SDPResult addBandwidth(string bwtype, uint bandwidth) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _bwtype = bwtype.toCString(No.Alloc);
@@ -222,7 +222,7 @@ class SDPMessage : gobject.boxed.Boxed
         email = an email
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult addEmail(string email)
+  gstsdp.types.SDPResult addEmail(string email) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _email = email.toCString(No.Alloc);
@@ -240,7 +240,7 @@ class SDPMessage : gobject.boxed.Boxed
         media = a #GstSDPMedia to add
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult addMedia(gstsdp.sdpmedia.SDPMedia media)
+  gstsdp.types.SDPResult addMedia(gstsdp.sdpmedia.SDPMedia media) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_message_add_media(cast(GstSDPMessage*)this._cPtr, media ? cast(GstSDPMedia*)media._cPtr : null);
@@ -255,7 +255,7 @@ class SDPMessage : gobject.boxed.Boxed
         phone = a phone
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult addPhone(string phone)
+  gstsdp.types.SDPResult addPhone(string phone) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _phone = phone.toCString(No.Alloc);
@@ -273,7 +273,7 @@ class SDPMessage : gobject.boxed.Boxed
         repeat = the repeat times
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult addTime(string start, string stop, string[] repeat)
+  gstsdp.types.SDPResult addTime(string start, string stop, string[] repeat) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _start = start.toCString(No.Alloc);
@@ -297,7 +297,7 @@ class SDPMessage : gobject.boxed.Boxed
         typedTime = the offset from the time when the session was first scheduled
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult addZone(string adjTime, string typedTime)
+  gstsdp.types.SDPResult addZone(string adjTime, string typedTime) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _adjTime = adjTime.toCString(No.Alloc);
@@ -311,7 +311,7 @@ class SDPMessage : gobject.boxed.Boxed
       Convert the contents of msg to a text string.
       Returns: A dynamically allocated string representing the SDP description.
   */
-  string asText()
+  string asText() nothrow
   {
     char* _cretval;
     _cretval = gst_sdp_message_as_text(cast(const(GstSDPMessage)*)this._cPtr);
@@ -323,7 +323,7 @@ class SDPMessage : gobject.boxed.Boxed
       Get the number of attributes in msg.
       Returns: the number of attributes in msg.
   */
-  uint attributesLen()
+  uint attributesLen() nothrow
   {
     uint _retval;
     _retval = gst_sdp_message_attributes_len(cast(const(GstSDPMessage)*)this._cPtr);
@@ -337,7 +337,7 @@ class SDPMessage : gobject.boxed.Boxed
         caps = a #GstCaps
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult attributesToCaps(gst.caps.Caps caps)
+  gstsdp.types.SDPResult attributesToCaps(gst.caps.Caps caps) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_message_attributes_to_caps(cast(const(GstSDPMessage)*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
@@ -349,7 +349,7 @@ class SDPMessage : gobject.boxed.Boxed
       Get the number of bandwidth information in msg.
       Returns: the number of bandwidth information in msg.
   */
-  uint bandwidthsLen()
+  uint bandwidthsLen() nothrow
   {
     uint _retval;
     _retval = gst_sdp_message_bandwidths_len(cast(const(GstSDPMessage)*)this._cPtr);
@@ -364,7 +364,7 @@ class SDPMessage : gobject.boxed.Boxed
         copy = pointer to new #GstSDPMessage
       Returns: a #GstSDPResult
   */
-  gstsdp.types.SDPResult copy(out gstsdp.sdpmessage.SDPMessage copy)
+  gstsdp.types.SDPResult copy(out gstsdp.sdpmessage.SDPMessage copy) nothrow
   {
     GstSDPResult _cretval;
     GstSDPMessage* _copy;
@@ -378,7 +378,7 @@ class SDPMessage : gobject.boxed.Boxed
       Dump the parsed contents of msg to stdout.
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult dump()
+  gstsdp.types.SDPResult dump() nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_message_dump(cast(const(GstSDPMessage)*)this._cPtr);
@@ -390,7 +390,7 @@ class SDPMessage : gobject.boxed.Boxed
       Get the number of emails in msg.
       Returns: the number of emails in msg.
   */
-  uint emailsLen()
+  uint emailsLen() nothrow
   {
     uint _retval;
     _retval = gst_sdp_message_emails_len(cast(const(GstSDPMessage)*)this._cPtr);
@@ -404,7 +404,7 @@ class SDPMessage : gobject.boxed.Boxed
         idx = the index
       Returns: the #GstSDPAttribute at position idx.
   */
-  gstsdp.sdpattribute.SDPAttribute getAttribute(uint idx)
+  gstsdp.sdpattribute.SDPAttribute getAttribute(uint idx) nothrow
   {
     const(GstSDPAttribute)* _cretval;
     _cretval = gst_sdp_message_get_attribute(cast(const(GstSDPMessage)*)this._cPtr, idx);
@@ -419,7 +419,7 @@ class SDPMessage : gobject.boxed.Boxed
         key = the key
       Returns: the attribute value of the first attribute with key.
   */
-  string getAttributeVal(string key)
+  string getAttributeVal(string key) nothrow
   {
     const(char)* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -436,7 +436,7 @@ class SDPMessage : gobject.boxed.Boxed
         nth = the index
       Returns: the attribute value of the nth attribute with key.
   */
-  string getAttributeValN(string key, uint nth)
+  string getAttributeValN(string key, uint nth) nothrow
   {
     const(char)* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -452,7 +452,7 @@ class SDPMessage : gobject.boxed.Boxed
         idx = the bandwidth index
       Returns: a #GstSDPBandwidth.
   */
-  gstsdp.sdpbandwidth.SDPBandwidth getBandwidth(uint idx)
+  gstsdp.sdpbandwidth.SDPBandwidth getBandwidth(uint idx) nothrow
   {
     const(GstSDPBandwidth)* _cretval;
     _cretval = gst_sdp_message_get_bandwidth(cast(const(GstSDPMessage)*)this._cPtr, idx);
@@ -464,7 +464,7 @@ class SDPMessage : gobject.boxed.Boxed
       Get the connection of msg.
       Returns: a #GstSDPConnection. The result remains valid as long as msg is valid.
   */
-  gstsdp.sdpconnection.SDPConnection getConnection()
+  gstsdp.sdpconnection.SDPConnection getConnection() nothrow
   {
     const(GstSDPConnection)* _cretval;
     _cretval = gst_sdp_message_get_connection(cast(const(GstSDPMessage)*)this._cPtr);
@@ -479,7 +479,7 @@ class SDPMessage : gobject.boxed.Boxed
         idx = an email index
       Returns: the email at position idx.
   */
-  string getEmail(uint idx)
+  string getEmail(uint idx) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_sdp_message_get_email(cast(const(GstSDPMessage)*)this._cPtr, idx);
@@ -491,7 +491,7 @@ class SDPMessage : gobject.boxed.Boxed
       Get the information in msg.
       Returns: a #GstSDPResult.
   */
-  string getInformation()
+  string getInformation() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_sdp_message_get_information(cast(const(GstSDPMessage)*)this._cPtr);
@@ -503,7 +503,7 @@ class SDPMessage : gobject.boxed.Boxed
       Get the encryption information from msg.
       Returns: a #GstSDPKey.
   */
-  gstsdp.sdpkey.SDPKey getKey()
+  gstsdp.sdpkey.SDPKey getKey() nothrow
   {
     const(GstSDPKey)* _cretval;
     _cretval = gst_sdp_message_get_key(cast(const(GstSDPMessage)*)this._cPtr);
@@ -518,7 +518,7 @@ class SDPMessage : gobject.boxed.Boxed
         idx = the index
       Returns: a #GstSDPMedia.
   */
-  gstsdp.sdpmedia.SDPMedia getMedia(uint idx)
+  gstsdp.sdpmedia.SDPMedia getMedia(uint idx) nothrow
   {
     const(GstSDPMedia)* _cretval;
     _cretval = gst_sdp_message_get_media(cast(const(GstSDPMessage)*)this._cPtr, idx);
@@ -530,7 +530,7 @@ class SDPMessage : gobject.boxed.Boxed
       Get the origin of msg.
       Returns: a #GstSDPOrigin. The result remains valid as long as msg is valid.
   */
-  gstsdp.sdporigin.SDPOrigin getOrigin()
+  gstsdp.sdporigin.SDPOrigin getOrigin() nothrow
   {
     const(GstSDPOrigin)* _cretval;
     _cretval = gst_sdp_message_get_origin(cast(const(GstSDPMessage)*)this._cPtr);
@@ -545,7 +545,7 @@ class SDPMessage : gobject.boxed.Boxed
         idx = a phone index
       Returns: the phone at position idx.
   */
-  string getPhone(uint idx)
+  string getPhone(uint idx) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_sdp_message_get_phone(cast(const(GstSDPMessage)*)this._cPtr, idx);
@@ -557,7 +557,7 @@ class SDPMessage : gobject.boxed.Boxed
       Get the session name in msg.
       Returns: a #GstSDPResult.
   */
-  string getSessionName()
+  string getSessionName() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_sdp_message_get_session_name(cast(const(GstSDPMessage)*)this._cPtr);
@@ -572,7 +572,7 @@ class SDPMessage : gobject.boxed.Boxed
         idx = the time index
       Returns: a #GstSDPTime.
   */
-  gstsdp.sdptime.SDPTime getTime(uint idx)
+  gstsdp.sdptime.SDPTime getTime(uint idx) nothrow
   {
     const(GstSDPTime)* _cretval;
     _cretval = gst_sdp_message_get_time(cast(const(GstSDPMessage)*)this._cPtr, idx);
@@ -584,7 +584,7 @@ class SDPMessage : gobject.boxed.Boxed
       Get the URI in msg.
       Returns: a #GstSDPResult.
   */
-  string getUri()
+  string getUri() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_sdp_message_get_uri(cast(const(GstSDPMessage)*)this._cPtr);
@@ -596,7 +596,7 @@ class SDPMessage : gobject.boxed.Boxed
       Get the version in msg.
       Returns: a #GstSDPResult.
   */
-  string getVersion()
+  string getVersion() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_sdp_message_get_version(cast(const(GstSDPMessage)*)this._cPtr);
@@ -611,7 +611,7 @@ class SDPMessage : gobject.boxed.Boxed
         idx = the zone index
       Returns: a #GstSDPZone.
   */
-  gstsdp.sdpzone.SDPZone getZone(uint idx)
+  gstsdp.sdpzone.SDPZone getZone(uint idx) nothrow
   {
     const(GstSDPZone)* _cretval;
     _cretval = gst_sdp_message_get_zone(cast(const(GstSDPMessage)*)this._cPtr, idx);
@@ -629,7 +629,7 @@ class SDPMessage : gobject.boxed.Boxed
         attr = a #GstSDPAttribute
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult insertAttribute(int idx, gstsdp.sdpattribute.SDPAttribute attr)
+  gstsdp.types.SDPResult insertAttribute(int idx, gstsdp.sdpattribute.SDPAttribute attr) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_message_insert_attribute(cast(GstSDPMessage*)this._cPtr, idx, attr ? cast(GstSDPAttribute*)attr._cPtr : null);
@@ -647,7 +647,7 @@ class SDPMessage : gobject.boxed.Boxed
         bw = the bandwidth
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult insertBandwidth(int idx, gstsdp.sdpbandwidth.SDPBandwidth bw)
+  gstsdp.types.SDPResult insertBandwidth(int idx, gstsdp.sdpbandwidth.SDPBandwidth bw) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_message_insert_bandwidth(cast(GstSDPMessage*)this._cPtr, idx, bw ? cast(GstSDPBandwidth*)bw._cPtr : null);
@@ -664,7 +664,7 @@ class SDPMessage : gobject.boxed.Boxed
         email = an email
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult insertEmail(int idx, string email)
+  gstsdp.types.SDPResult insertEmail(int idx, string email) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _email = email.toCString(No.Alloc);
@@ -682,7 +682,7 @@ class SDPMessage : gobject.boxed.Boxed
         phone = a phone
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult insertPhone(int idx, string phone)
+  gstsdp.types.SDPResult insertPhone(int idx, string phone) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _phone = phone.toCString(No.Alloc);
@@ -701,7 +701,7 @@ class SDPMessage : gobject.boxed.Boxed
         t = a #GstSDPTime
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult insertTime(int idx, gstsdp.sdptime.SDPTime t)
+  gstsdp.types.SDPResult insertTime(int idx, gstsdp.sdptime.SDPTime t) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_message_insert_time(cast(GstSDPMessage*)this._cPtr, idx, t ? cast(GstSDPTime*)t._cPtr : null);
@@ -719,7 +719,7 @@ class SDPMessage : gobject.boxed.Boxed
         zone = a #GstSDPZone
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult insertZone(int idx, gstsdp.sdpzone.SDPZone zone)
+  gstsdp.types.SDPResult insertZone(int idx, gstsdp.sdpzone.SDPZone zone) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_message_insert_zone(cast(GstSDPMessage*)this._cPtr, idx, zone ? cast(GstSDPZone*)zone._cPtr : null);
@@ -731,7 +731,7 @@ class SDPMessage : gobject.boxed.Boxed
       Get the number of media descriptions in msg.
       Returns: the number of media descriptions in msg.
   */
-  uint mediasLen()
+  uint mediasLen() nothrow
   {
     uint _retval;
     _retval = gst_sdp_message_medias_len(cast(const(GstSDPMessage)*)this._cPtr);
@@ -746,7 +746,7 @@ class SDPMessage : gobject.boxed.Boxed
         mikey = pointer to new #GstMIKEYMessage
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult parseKeymgmt(out gstsdp.mikeymessage.MIKEYMessage mikey)
+  gstsdp.types.SDPResult parseKeymgmt(out gstsdp.mikeymessage.MIKEYMessage mikey) nothrow
   {
     GstSDPResult _cretval;
     GstMIKEYMessage* _mikey;
@@ -760,7 +760,7 @@ class SDPMessage : gobject.boxed.Boxed
       Get the number of phones in msg.
       Returns: the number of phones in msg.
   */
-  uint phonesLen()
+  uint phonesLen() nothrow
   {
     uint _retval;
     _retval = gst_sdp_message_phones_len(cast(const(GstSDPMessage)*)this._cPtr);
@@ -774,7 +774,7 @@ class SDPMessage : gobject.boxed.Boxed
         idx = the index
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult removeAttribute(uint idx)
+  gstsdp.types.SDPResult removeAttribute(uint idx) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_message_remove_attribute(cast(GstSDPMessage*)this._cPtr, idx);
@@ -789,7 +789,7 @@ class SDPMessage : gobject.boxed.Boxed
         idx = the bandwidth index
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult removeBandwidth(uint idx)
+  gstsdp.types.SDPResult removeBandwidth(uint idx) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_message_remove_bandwidth(cast(GstSDPMessage*)this._cPtr, idx);
@@ -804,7 +804,7 @@ class SDPMessage : gobject.boxed.Boxed
         idx = an email index
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult removeEmail(uint idx)
+  gstsdp.types.SDPResult removeEmail(uint idx) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_message_remove_email(cast(GstSDPMessage*)this._cPtr, idx);
@@ -820,7 +820,7 @@ class SDPMessage : gobject.boxed.Boxed
       Returns: #GST_SDP_OK when the specified media is found at idx and removed,
         #GST_SDP_EINVAL otherwise.
   */
-  gstsdp.types.SDPResult removeMedia(uint idx)
+  gstsdp.types.SDPResult removeMedia(uint idx) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_message_remove_media(cast(GstSDPMessage*)this._cPtr, idx);
@@ -835,7 +835,7 @@ class SDPMessage : gobject.boxed.Boxed
         idx = a phone index
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult removePhone(uint idx)
+  gstsdp.types.SDPResult removePhone(uint idx) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_message_remove_phone(cast(GstSDPMessage*)this._cPtr, idx);
@@ -850,7 +850,7 @@ class SDPMessage : gobject.boxed.Boxed
         idx = the index
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult removeTime(uint idx)
+  gstsdp.types.SDPResult removeTime(uint idx) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_message_remove_time(cast(GstSDPMessage*)this._cPtr, idx);
@@ -865,7 +865,7 @@ class SDPMessage : gobject.boxed.Boxed
         idx = the index
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult removeZone(uint idx)
+  gstsdp.types.SDPResult removeZone(uint idx) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_message_remove_zone(cast(GstSDPMessage*)this._cPtr, idx);
@@ -881,7 +881,7 @@ class SDPMessage : gobject.boxed.Boxed
         attr = a #GstSDPAttribute
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult replaceAttribute(uint idx, gstsdp.sdpattribute.SDPAttribute attr)
+  gstsdp.types.SDPResult replaceAttribute(uint idx, gstsdp.sdpattribute.SDPAttribute attr) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_message_replace_attribute(cast(GstSDPMessage*)this._cPtr, idx, attr ? cast(GstSDPAttribute*)attr._cPtr : null);
@@ -897,7 +897,7 @@ class SDPMessage : gobject.boxed.Boxed
         bw = the bandwidth
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult replaceBandwidth(uint idx, gstsdp.sdpbandwidth.SDPBandwidth bw)
+  gstsdp.types.SDPResult replaceBandwidth(uint idx, gstsdp.sdpbandwidth.SDPBandwidth bw) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_message_replace_bandwidth(cast(GstSDPMessage*)this._cPtr, idx, bw ? cast(GstSDPBandwidth*)bw._cPtr : null);
@@ -913,7 +913,7 @@ class SDPMessage : gobject.boxed.Boxed
         email = an email
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult replaceEmail(uint idx, string email)
+  gstsdp.types.SDPResult replaceEmail(uint idx, string email) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _email = email.toCString(No.Alloc);
@@ -930,7 +930,7 @@ class SDPMessage : gobject.boxed.Boxed
         phone = a phone
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult replacePhone(uint idx, string phone)
+  gstsdp.types.SDPResult replacePhone(uint idx, string phone) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _phone = phone.toCString(No.Alloc);
@@ -947,7 +947,7 @@ class SDPMessage : gobject.boxed.Boxed
         t = a #GstSDPTime
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult replaceTime(uint idx, gstsdp.sdptime.SDPTime t)
+  gstsdp.types.SDPResult replaceTime(uint idx, gstsdp.sdptime.SDPTime t) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_message_replace_time(cast(GstSDPMessage*)this._cPtr, idx, t ? cast(GstSDPTime*)t._cPtr : null);
@@ -963,7 +963,7 @@ class SDPMessage : gobject.boxed.Boxed
         zone = a #GstSDPZone
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult replaceZone(uint idx, gstsdp.sdpzone.SDPZone zone)
+  gstsdp.types.SDPResult replaceZone(uint idx, gstsdp.sdpzone.SDPZone zone) nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_message_replace_zone(cast(GstSDPMessage*)this._cPtr, idx, zone ? cast(GstSDPZone*)zone._cPtr : null);
@@ -983,7 +983,7 @@ class SDPMessage : gobject.boxed.Boxed
         addrNumber = the number of layers
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult setConnection(string nettype, string addrtype, string address, uint ttl, uint addrNumber)
+  gstsdp.types.SDPResult setConnection(string nettype, string addrtype, string address, uint ttl, uint addrNumber) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _nettype = nettype.toCString(No.Alloc);
@@ -1001,7 +1001,7 @@ class SDPMessage : gobject.boxed.Boxed
         information = the information
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult setInformation(string information)
+  gstsdp.types.SDPResult setInformation(string information) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _information = information.toCString(No.Alloc);
@@ -1018,7 +1018,7 @@ class SDPMessage : gobject.boxed.Boxed
         data = the encryption data
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult setKey(string type, string data)
+  gstsdp.types.SDPResult setKey(string type, string data) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _type = type.toCString(No.Alloc);
@@ -1040,7 +1040,7 @@ class SDPMessage : gobject.boxed.Boxed
         addr = an address
       Returns: #GST_SDP_OK.
   */
-  gstsdp.types.SDPResult setOrigin(string username, string sessId, string sessVersion, string nettype, string addrtype, string addr)
+  gstsdp.types.SDPResult setOrigin(string username, string sessId, string sessVersion, string nettype, string addrtype, string addr) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _username = username.toCString(No.Alloc);
@@ -1061,7 +1061,7 @@ class SDPMessage : gobject.boxed.Boxed
         sessionName = the session name
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult setSessionName(string sessionName)
+  gstsdp.types.SDPResult setSessionName(string sessionName) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _sessionName = sessionName.toCString(No.Alloc);
@@ -1077,7 +1077,7 @@ class SDPMessage : gobject.boxed.Boxed
         uri = the URI
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult setUri(string uri)
+  gstsdp.types.SDPResult setUri(string uri) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -1093,7 +1093,7 @@ class SDPMessage : gobject.boxed.Boxed
         version_ = the version
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult setVersion(string version_)
+  gstsdp.types.SDPResult setVersion(string version_) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _version_ = version_.toCString(No.Alloc);
@@ -1106,7 +1106,7 @@ class SDPMessage : gobject.boxed.Boxed
       Get the number of time information entries in msg.
       Returns: the number of time information entries in msg.
   */
-  uint timesLen()
+  uint timesLen() nothrow
   {
     uint _retval;
     _retval = gst_sdp_message_times_len(cast(const(GstSDPMessage)*)this._cPtr);
@@ -1119,7 +1119,7 @@ class SDPMessage : gobject.boxed.Boxed
       stack and initialized with [gstsdp.sdpmessage.SDPMessage.init_].
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult uninit()
+  gstsdp.types.SDPResult uninit() nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_message_uninit(cast(GstSDPMessage*)this._cPtr);
@@ -1131,7 +1131,7 @@ class SDPMessage : gobject.boxed.Boxed
       Get the number of time zone information entries in msg.
       Returns: the number of time zone information entries in msg.
   */
-  uint zonesLen()
+  uint zonesLen() nothrow
   {
     uint _retval;
     _retval = gst_sdp_message_zones_len(cast(const(GstSDPMessage)*)this._cPtr);
@@ -1150,7 +1150,7 @@ class SDPMessage : gobject.boxed.Boxed
         msg = the #GstSDPMessage
       Returns: a uri for msg.
   */
-  static string asUri(string scheme, gstsdp.sdpmessage.SDPMessage msg)
+  static string asUri(string scheme, gstsdp.sdpmessage.SDPMessage msg) nothrow
   {
     char* _cretval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -1171,7 +1171,7 @@ class SDPMessage : gobject.boxed.Boxed
         msg = a #GstSDPMessage
       Returns: a #GstSDPResult.
   */
-  static gstsdp.types.SDPResult init_(out gstsdp.sdpmessage.SDPMessage msg)
+  static gstsdp.types.SDPResult init_(out gstsdp.sdpmessage.SDPMessage msg) nothrow
   {
     GstSDPResult _cretval;
     GstSDPMessage _msg;
@@ -1188,7 +1188,7 @@ class SDPMessage : gobject.boxed.Boxed
         msg = pointer to new #GstSDPMessage
       Returns: a #GstSDPResult.
   */
-  static gstsdp.types.SDPResult new_(out gstsdp.sdpmessage.SDPMessage msg)
+  static gstsdp.types.SDPResult new_(out gstsdp.sdpmessage.SDPMessage msg) nothrow
   {
     GstSDPResult _cretval;
     GstSDPMessage* _msg;
@@ -1206,7 +1206,7 @@ class SDPMessage : gobject.boxed.Boxed
         msg = pointer to new #GstSDPMessage
       Returns: a #GstSDPResult.
   */
-  static gstsdp.types.SDPResult newFromText(string text, out gstsdp.sdpmessage.SDPMessage msg)
+  static gstsdp.types.SDPResult newFromText(string text, out gstsdp.sdpmessage.SDPMessage msg) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _text = text.toCString(No.Alloc);
@@ -1226,7 +1226,7 @@ class SDPMessage : gobject.boxed.Boxed
         msg = the result #GstSDPMessage
       Returns: #GST_SDP_OK on success.
   */
-  static gstsdp.types.SDPResult parseBuffer(ubyte[] data, gstsdp.sdpmessage.SDPMessage msg)
+  static gstsdp.types.SDPResult parseBuffer(ubyte[] data, gstsdp.sdpmessage.SDPMessage msg) nothrow
   {
     GstSDPResult _cretval;
     uint _size;
@@ -1255,7 +1255,7 @@ class SDPMessage : gobject.boxed.Boxed
         msg = the result #GstSDPMessage
       Returns: #GST_SDP_OK on success.
   */
-  static gstsdp.types.SDPResult parseUri(string uri, gstsdp.sdpmessage.SDPMessage msg)
+  static gstsdp.types.SDPResult parseUri(string uri, gstsdp.sdpmessage.SDPMessage msg) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);

@@ -26,23 +26,22 @@ struct Rectangle
   int height;
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_rectangle_get_type != &gidSymbolNotFound ? gdk_rectangle_get_type() : cast(GType)0;
   }
 
   /** */
-  @property GType _gType()
+  @property GType _gType() nothrow
   {
     return _getGType();
   }
 
-  void* boxCopy()
+  void* boxCopy() nothrow
   {
     import gobject.c.functions : g_boxed_copy;
-    return g_boxed_copy(_gType,
-        cast(void*)&this);
+    return g_boxed_copy(_gType, cast(void*)&this);
   }
 
   /**
@@ -52,7 +51,7 @@ struct Rectangle
         rect2 = a #GdkRectangle
       Returns: true if the rectangles are equal.
   */
-  bool equal(gdk.rectangle.Rectangle rect2)
+  bool equal(gdk.rectangle.Rectangle rect2) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_rectangle_equal(cast(const(GdkRectangle)*)&this, cast(const(GdkRectangle)*)&rect2);
@@ -73,7 +72,7 @@ struct Rectangle
           intersection of src1 and src2, or null
       Returns: true if the rectangles intersect.
   */
-  bool intersect(gdk.rectangle.Rectangle src2, out gdk.rectangle.Rectangle dest)
+  bool intersect(gdk.rectangle.Rectangle src2, out gdk.rectangle.Rectangle dest) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_rectangle_intersect(cast(const(GdkRectangle)*)&this, cast(const(GdkRectangle)*)&src2, cast(GdkRectangle*)&dest);
@@ -93,7 +92,7 @@ struct Rectangle
         src2 = a #GdkRectangle
         dest = return location for the union of src1 and src2
   */
-  void union_(gdk.rectangle.Rectangle src2, out gdk.rectangle.Rectangle dest)
+  void union_(gdk.rectangle.Rectangle src2, out gdk.rectangle.Rectangle dest) nothrow
   {
     gdk_rectangle_union(cast(const(GdkRectangle)*)&this, cast(const(GdkRectangle)*)&src2, cast(GdkRectangle*)&dest);
   }

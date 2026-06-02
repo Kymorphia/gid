@@ -17,26 +17,26 @@ class EncodingAudioProfile : gstpbutils.encoding_profile.EncodingProfile
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_encoding_audio_profile_get_type != &gidSymbolNotFound ? gst_encoding_audio_profile_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EncodingAudioProfile self()
+  override EncodingAudioProfile self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class EncodingAudioProfile : gstpbutils.encoding_profile.EncodingProfile
       Get builder for [gstpbutils.encoding_audio_profile.EncodingAudioProfile]
       Returns: New builder object
   */
-  static EncodingAudioProfileGidBuilder builder()
+  static EncodingAudioProfileGidBuilder builder() nothrow
   {
     return new EncodingAudioProfileGidBuilder;
   }
@@ -65,7 +65,7 @@ class EncodingAudioProfile : gstpbutils.encoding_profile.EncodingProfile
            times (including never)
       Returns: the newly created #GstEncodingAudioProfile.
   */
-  this(gst.caps.Caps format, string preset, gst.caps.Caps restriction, uint presence)
+  this(gst.caps.Caps format, string preset, gst.caps.Caps restriction, uint presence) nothrow
   {
     GstEncodingAudioProfile* _cretval;
     const(char)* _preset = preset.toCString(No.Alloc);
@@ -86,7 +86,7 @@ final class EncodingAudioProfileGidBuilder : EncodingAudioProfileGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  EncodingAudioProfile build()
+  EncodingAudioProfile build() nothrow
   {
     return new EncodingAudioProfile(cast(void*)createGObject(EncodingAudioProfile._getGType), Yes.Take);
   }

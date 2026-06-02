@@ -51,26 +51,26 @@ class Assistant : gtk.window.Window
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_assistant_get_type != &gidSymbolNotFound ? gtk_assistant_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Assistant self()
+  override Assistant self() nothrow
   {
     return this;
   }
@@ -79,7 +79,7 @@ class Assistant : gtk.window.Window
       Get builder for [gtk.assistant.Assistant]
       Returns: New builder object
   */
-  static AssistantGidBuilder builder()
+  static AssistantGidBuilder builder() nothrow
   {
     return new AssistantGidBuilder;
   }
@@ -92,7 +92,7 @@ class Assistant : gtk.window.Window
         For technical reasons, this property is declared as an integer
         property, but you should only set it to true or false.
   */
-  @property int useHeaderBar()
+  @property int useHeaderBar() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("use-header-bar");
   }
@@ -101,7 +101,7 @@ class Assistant : gtk.window.Window
       Creates a new #GtkAssistant.
       Returns: a newly created #GtkAssistant
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_assistant_new();
@@ -114,7 +114,7 @@ class Assistant : gtk.window.Window
       Params:
         child = a #GtkWidget
   */
-  void addActionWidget(gtk.widget.Widget child)
+  void addActionWidget(gtk.widget.Widget child) nothrow
   {
     gtk_assistant_add_action_widget(cast(GtkAssistant*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -126,7 +126,7 @@ class Assistant : gtk.window.Window
         page = a #GtkWidget
       Returns: the index (starting at 0) of the inserted page
   */
-  int appendPage(gtk.widget.Widget page)
+  int appendPage(gtk.widget.Widget page) nothrow
   {
     int _retval;
     _retval = gtk_assistant_append_page(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null);
@@ -144,7 +144,7 @@ class Assistant : gtk.window.Window
       a long-running, unreversible operation after the user has
       clicked apply on a confirmation page.
   */
-  void commit()
+  void commit() nothrow
   {
     gtk_assistant_commit(cast(GtkAssistant*)this._cPtr);
   }
@@ -155,7 +155,7 @@ class Assistant : gtk.window.Window
             page in the assistant, or -1 if the assistant has no pages,
             or no current page.
   */
-  int getCurrentPage()
+  int getCurrentPage() nothrow
   {
     int _retval;
     _retval = gtk_assistant_get_current_page(cast(GtkAssistant*)this._cPtr);
@@ -166,7 +166,7 @@ class Assistant : gtk.window.Window
       Returns the number of pages in the assistant
       Returns: the number of pages in the assistant
   */
-  int getNPages()
+  int getNPages() nothrow
   {
     int _retval;
     _retval = gtk_assistant_get_n_pages(cast(GtkAssistant*)this._cPtr);
@@ -182,7 +182,7 @@ class Assistant : gtk.window.Window
       Returns: the child widget, or null
             if page_num is out of bounds
   */
-  gtk.widget.Widget getNthPage(int pageNum)
+  gtk.widget.Widget getNthPage(int pageNum) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_assistant_get_nth_page(cast(GtkAssistant*)this._cPtr, pageNum);
@@ -197,7 +197,7 @@ class Assistant : gtk.window.Window
         page = a page of assistant
       Returns: true if page is complete.
   */
-  bool getPageComplete(gtk.widget.Widget page)
+  bool getPageComplete(gtk.widget.Widget page) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_assistant_get_page_complete(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null);
@@ -211,7 +211,7 @@ class Assistant : gtk.window.Window
         page = a page of assistant
       Returns: true if page has padding
   */
-  bool getPageHasPadding(gtk.widget.Widget page)
+  bool getPageHasPadding(gtk.widget.Widget page) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_assistant_get_page_has_padding(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null);
@@ -229,7 +229,7 @@ class Assistant : gtk.window.Window
       Deprecated: Since GTK+ 3.2, a header is no longer shown;
             add your header decoration to the page content instead.
   */
-  gdkpixbuf.pixbuf.Pixbuf getPageHeaderImage(gtk.widget.Widget page)
+  gdkpixbuf.pixbuf.Pixbuf getPageHeaderImage(gtk.widget.Widget page) nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gtk_assistant_get_page_header_image(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null);
@@ -248,7 +248,7 @@ class Assistant : gtk.window.Window
       Deprecated: Since GTK+ 3.2, sidebar images are not
             shown anymore.
   */
-  gdkpixbuf.pixbuf.Pixbuf getPageSideImage(gtk.widget.Widget page)
+  gdkpixbuf.pixbuf.Pixbuf getPageSideImage(gtk.widget.Widget page) nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gtk_assistant_get_page_side_image(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null);
@@ -263,7 +263,7 @@ class Assistant : gtk.window.Window
         page = a page of assistant
       Returns: the title for page
   */
-  string getPageTitle(gtk.widget.Widget page)
+  string getPageTitle(gtk.widget.Widget page) nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_assistant_get_page_title(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null);
@@ -278,7 +278,7 @@ class Assistant : gtk.window.Window
         page = a page of assistant
       Returns: the page type of page
   */
-  gtk.types.AssistantPageType getPageType(gtk.widget.Widget page)
+  gtk.types.AssistantPageType getPageType(gtk.widget.Widget page) nothrow
   {
     GtkAssistantPageType _cretval;
     _cretval = gtk_assistant_get_page_type(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null);
@@ -295,7 +295,7 @@ class Assistant : gtk.window.Window
               or -1 to append the page to the assistant
       Returns: the index (starting from 0) of the inserted page
   */
-  int insertPage(gtk.widget.Widget page, int position)
+  int insertPage(gtk.widget.Widget page, int position) nothrow
   {
     int _retval;
     _retval = gtk_assistant_insert_page(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null, position);
@@ -311,7 +311,7 @@ class Assistant : gtk.window.Window
       This function is for use when creating pages of the
       #GTK_ASSISTANT_PAGE_CUSTOM type.
   */
-  void nextPage()
+  void nextPage() nothrow
   {
     gtk_assistant_next_page(cast(GtkAssistant*)this._cPtr);
   }
@@ -323,7 +323,7 @@ class Assistant : gtk.window.Window
         page = a #GtkWidget
       Returns: the index (starting at 0) of the inserted page
   */
-  int prependPage(gtk.widget.Widget page)
+  int prependPage(gtk.widget.Widget page) nothrow
   {
     int _retval;
     _retval = gtk_assistant_prepend_page(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null);
@@ -339,7 +339,7 @@ class Assistant : gtk.window.Window
       This function is for use when creating pages of the
       #GTK_ASSISTANT_PAGE_CUSTOM type.
   */
-  void previousPage()
+  void previousPage() nothrow
   {
     gtk_assistant_previous_page(cast(GtkAssistant*)this._cPtr);
   }
@@ -350,7 +350,7 @@ class Assistant : gtk.window.Window
       Params:
         child = a #GtkWidget
   */
-  void removeActionWidget(gtk.widget.Widget child)
+  void removeActionWidget(gtk.widget.Widget child) nothrow
   {
     gtk_assistant_remove_action_widget(cast(GtkAssistant*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -362,7 +362,7 @@ class Assistant : gtk.window.Window
         pageNum = the index of a page in the assistant,
               or -1 to remove the last page
   */
-  void removePage(int pageNum)
+  void removePage(int pageNum) nothrow
   {
     gtk_assistant_remove_page(cast(GtkAssistant*)this._cPtr, pageNum);
   }
@@ -380,7 +380,7 @@ class Assistant : gtk.window.Window
               than the number of pages in the assistant, nothing
               will be done.
   */
-  void setCurrentPage(int pageNum)
+  void setCurrentPage(int pageNum) nothrow
   {
     gtk_assistant_set_current_page(cast(GtkAssistant*)this._cPtr, pageNum);
   }
@@ -398,13 +398,21 @@ class Assistant : gtk.window.Window
         pageFunc = the #GtkAssistantPageFunc, or null
               to use the default one
   */
-  void setForwardPageFunc(gtk.types.AssistantPageFunc pageFunc = null)
+  void setForwardPageFunc(gtk.types.AssistantPageFunc pageFunc = null) nothrow
   {
-    extern(C) int _pageFuncCallback(int currentPage, void* data)
+    extern(C) int _pageFuncCallback(int currentPage, void* data) nothrow
     {
+      int _retval;
       auto _dlg = cast(gtk.types.AssistantPageFunc*)data;
 
-      int _retval = (*_dlg)(currentPage);
+      try
+      {
+        _retval = (*_dlg)(currentPage);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.AssistantPageFunc");
+      }
       return _retval;
     }
     auto _pageFuncCB = pageFunc ? &_pageFuncCallback : null;
@@ -423,7 +431,7 @@ class Assistant : gtk.window.Window
         page = a page of assistant
         complete = the completeness status of the page
   */
-  void setPageComplete(gtk.widget.Widget page, bool complete)
+  void setPageComplete(gtk.widget.Widget page, bool complete) nothrow
   {
     gtk_assistant_set_page_complete(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null, complete);
   }
@@ -436,7 +444,7 @@ class Assistant : gtk.window.Window
         page = a page of assistant
         hasPadding = whether this page has padding
   */
-  void setPageHasPadding(gtk.widget.Widget page, bool hasPadding)
+  void setPageHasPadding(gtk.widget.Widget page, bool hasPadding) nothrow
   {
     gtk_assistant_set_page_has_padding(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null, hasPadding);
   }
@@ -451,7 +459,7 @@ class Assistant : gtk.window.Window
       Deprecated: Since GTK+ 3.2, a header is no longer shown;
             add your header decoration to the page content instead.
   */
-  void setPageHeaderImage(gtk.widget.Widget page, gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
+  void setPageHeaderImage(gtk.widget.Widget page, gdkpixbuf.pixbuf.Pixbuf pixbuf = null) nothrow
   {
     gtk_assistant_set_page_header_image(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
@@ -469,7 +477,7 @@ class Assistant : gtk.window.Window
       Deprecated: Since GTK+ 3.2, sidebar images are not
             shown anymore.
   */
-  void setPageSideImage(gtk.widget.Widget page, gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
+  void setPageSideImage(gtk.widget.Widget page, gdkpixbuf.pixbuf.Pixbuf pixbuf = null) nothrow
   {
     gtk_assistant_set_page_side_image(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
@@ -484,7 +492,7 @@ class Assistant : gtk.window.Window
         page = a page of assistant
         title = the new title for page
   */
-  void setPageTitle(gtk.widget.Widget page, string title)
+  void setPageTitle(gtk.widget.Widget page, string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_assistant_set_page_title(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null, _title);
@@ -499,7 +507,7 @@ class Assistant : gtk.window.Window
         page = a page of assistant
         type = the new type for page
   */
-  void setPageType(gtk.widget.Widget page, gtk.types.AssistantPageType type)
+  void setPageType(gtk.widget.Widget page, gtk.types.AssistantPageType type) nothrow
   {
     gtk_assistant_set_page_type(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null, type);
   }
@@ -515,7 +523,7 @@ class Assistant : gtk.window.Window
       function is when changing a value on the current page
       affects the future page flow of the assistant.
   */
-  void updateButtonsState()
+  void updateButtonsState() nothrow
   {
     gtk_assistant_update_buttons_state(cast(GtkAssistant*)this._cPtr);
   }
@@ -545,13 +553,13 @@ class Assistant : gtk.window.Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectApply(T)(T callback, Flag!"After" after = No.After)
+  gulong connectApply(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.assistant.Assistant)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -560,7 +568,14 @@ class Assistant : gtk.window.Window
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.assistant.Assistant.apply");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -582,13 +597,13 @@ class Assistant : gtk.window.Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCancel(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCancel(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.assistant.Assistant)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -597,7 +612,14 @@ class Assistant : gtk.window.Window
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.assistant.Assistant.cancel");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -621,13 +643,13 @@ class Assistant : gtk.window.Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClose(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClose(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.assistant.Assistant)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -636,7 +658,14 @@ class Assistant : gtk.window.Window
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.assistant.Assistant.close");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -658,13 +687,13 @@ class Assistant : gtk.window.Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEscape(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEscape(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.assistant.Assistant)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -673,7 +702,14 @@ class Assistant : gtk.window.Window
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.assistant.Assistant.escape");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -701,14 +737,14 @@ class Assistant : gtk.window.Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPrepare(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPrepare(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.assistant.Assistant)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -720,7 +756,14 @@ class Assistant : gtk.window.Window
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.assistant.Assistant.prepare");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -743,7 +786,7 @@ class AssistantGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           property, but you should only set it to true or false.
       Returns: Builder instance for fluent chaining
   */
-  T useHeaderBar(int propval)
+  T useHeaderBar(int propval) nothrow
   {
     return setProperty("use-header-bar", propval);
   }
@@ -756,7 +799,7 @@ final class AssistantGidBuilder : AssistantGidBuilderImpl!AssistantGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Assistant build()
+  Assistant build() nothrow
   {
     return new Assistant(cast(void*)createGObject(Assistant._getGType), No.Take);
   }

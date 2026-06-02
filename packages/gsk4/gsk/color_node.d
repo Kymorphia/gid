@@ -17,11 +17,8 @@ class ColorNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.color_node.ColorNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -34,7 +31,7 @@ class ColorNode : gsk.render_node.RenderNode
         bounds = the rectangle to render the color into
       Returns: A new [gsk.render_node.RenderNode]
   */
-  this(gdk.rgba.RGBA rgba, graphene.rect.Rect bounds)
+  this(gdk.rgba.RGBA rgba, graphene.rect.Rect bounds) nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_color_node_new(cast(const(GdkRGBA)*)&rgba, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null);
@@ -45,7 +42,7 @@ class ColorNode : gsk.render_node.RenderNode
       Retrieves the color of the given node.
       Returns: the color of the node
   */
-  gdk.rgba.RGBA getColor()
+  gdk.rgba.RGBA getColor() nothrow
   {
     const(GdkRGBA)* _cretval;
     _cretval = gsk_color_node_get_color(cast(const(GskRenderNode)*)this._cPtr);

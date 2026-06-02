@@ -48,26 +48,26 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tool_button_get_type != &gidSymbolNotFound ? gtk_tool_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ToolButton self()
+  override ToolButton self() nothrow
   {
     return this;
   }
@@ -76,7 +76,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
       Get builder for [gtk.tool_button.ToolButton]
       Returns: New builder object
   */
-  static ToolButtonGidBuilder builder()
+  static ToolButtonGidBuilder builder() nothrow
   {
     return new ToolButtonGidBuilder;
   }
@@ -88,7 +88,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
         #GtkToolButton:label-widget, #GtkToolButton:icon-widget or
         #GtkToolButton:stock-id properties.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return getIconName();
   }
@@ -101,67 +101,67 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
           #GtkToolButton:label-widget, #GtkToolButton:icon-widget or
           #GtkToolButton:stock-id properties.
   */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     setIconName(propval);
   }
 
   /** */
-  @property gtk.widget.Widget iconWidget()
+  @property gtk.widget.Widget iconWidget() nothrow
   {
     return getIconWidget();
   }
 
   /** */
-  @property void iconWidget(gtk.widget.Widget propval)
+  @property void iconWidget(gtk.widget.Widget propval) nothrow
   {
     setIconWidget(propval);
   }
 
   /** */
-  @property string label()
+  @property string label() nothrow
   {
     return getLabel();
   }
 
   /** */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     setLabel(propval);
   }
 
   /** */
-  @property gtk.widget.Widget labelWidget()
+  @property gtk.widget.Widget labelWidget() nothrow
   {
     return getLabelWidget();
   }
 
   /** */
-  @property void labelWidget(gtk.widget.Widget propval)
+  @property void labelWidget(gtk.widget.Widget propval) nothrow
   {
     setLabelWidget(propval);
   }
 
   /** */
-  @property string stockId()
+  @property string stockId() nothrow
   {
     return getStockId();
   }
 
   /** */
-  @property void stockId(string propval)
+  @property void stockId(string propval) nothrow
   {
     setStockId(propval);
   }
 
   /** */
-  @property bool useUnderline()
+  @property bool useUnderline() nothrow
   {
     return getUseUnderline();
   }
 
   /** */
-  @property void useUnderline(bool propval)
+  @property void useUnderline(bool propval) nothrow
   {
     setUseUnderline(propval);
   }
@@ -177,7 +177,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
         label = a string that will be used as label, or null
       Returns: A new #GtkToolButton
   */
-  this(gtk.widget.Widget iconWidget = null, string label = null)
+  this(gtk.widget.Widget iconWidget = null, string label = null) nothrow
   {
     GtkToolItem* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -199,7 +199,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
       Deprecated: Use [gtk.tool_button.ToolButton.new_] together with
         [gtk.image.Image.newFromIconName] instead.
   */
-  static gtk.tool_button.ToolButton newFromStock(string stockId)
+  static gtk.tool_button.ToolButton newFromStock(string stockId) nothrow
   {
     GtkToolItem* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
@@ -214,7 +214,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
       Returns: the icon name or null if the tool button has
         no themed icon
   */
-  string getIconName()
+  string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_tool_button_get_icon_name(cast(GtkToolButton*)this._cPtr);
@@ -228,7 +228,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
       Returns: The widget used as icon
             on button, or null.
   */
-  gtk.widget.Widget getIconWidget()
+  gtk.widget.Widget getIconWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_tool_button_get_icon_widget(cast(GtkToolButton*)this._cPtr);
@@ -242,7 +242,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
       string is owned by GTK+, and must not be modified or freed.
       Returns: The label, or null
   */
-  string getLabel()
+  string getLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_tool_button_get_label(cast(GtkToolButton*)this._cPtr);
@@ -256,7 +256,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
       Returns: The widget used as label
             on button, or null.
   */
-  gtk.widget.Widget getLabelWidget()
+  gtk.widget.Widget getLabelWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_tool_button_get_label_widget(cast(GtkToolButton*)this._cPtr);
@@ -271,7 +271,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   
       Deprecated: Use [gtk.tool_button.ToolButton.getIconName] instead.
   */
-  string getStockId()
+  string getStockId() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_tool_button_get_stock_id(cast(GtkToolButton*)this._cPtr);
@@ -285,7 +285,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
       Returns: true if underscores in the label property are used as
         mnemonics on menu items on the overflow menu.
   */
-  bool getUseUnderline()
+  bool getUseUnderline() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tool_button_get_use_underline(cast(GtkToolButton*)this._cPtr);
@@ -302,7 +302,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
       Params:
         iconName = the name of the themed icon
   */
-  void setIconName(string iconName = null)
+  void setIconName(string iconName = null) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_tool_button_set_icon_name(cast(GtkToolButton*)this._cPtr, _iconName);
@@ -316,7 +316,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
       Params:
         iconWidget = the widget used as icon, or null
   */
-  void setIconWidget(gtk.widget.Widget iconWidget = null)
+  void setIconWidget(gtk.widget.Widget iconWidget = null) nothrow
   {
     gtk_tool_button_set_icon_widget(cast(GtkToolButton*)this._cPtr, iconWidget ? cast(GtkWidget*)iconWidget._cPtr(No.Dup) : null);
   }
@@ -332,7 +332,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
       Params:
         label = a string that will be used as label, or null.
   */
-  void setLabel(string label = null)
+  void setLabel(string label = null) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_tool_button_set_label(cast(GtkToolButton*)this._cPtr, _label);
@@ -348,7 +348,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
       Params:
         labelWidget = the widget used as label, or null
   */
-  void setLabelWidget(gtk.widget.Widget labelWidget = null)
+  void setLabelWidget(gtk.widget.Widget labelWidget = null) nothrow
   {
     gtk_tool_button_set_label_widget(cast(GtkToolButton*)this._cPtr, labelWidget ? cast(GtkWidget*)labelWidget._cPtr(No.Dup) : null);
   }
@@ -363,7 +363,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   
       Deprecated: Use [gtk.tool_button.ToolButton.setIconName] instead.
   */
-  void setStockId(string stockId = null)
+  void setStockId(string stockId = null) nothrow
   {
     const(char)* _stockId = stockId.toCString(No.Alloc);
     gtk_tool_button_set_stock_id(cast(GtkToolButton*)this._cPtr, _stockId);
@@ -382,7 +382,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
       Params:
         useUnderline = whether the button label has the form “_Open”
   */
-  void setUseUnderline(bool useUnderline)
+  void setUseUnderline(bool useUnderline) nothrow
   {
     gtk_tool_button_set_use_underline(cast(GtkToolButton*)this._cPtr, useUnderline);
   }
@@ -403,13 +403,13 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClicked(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClicked(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tool_button.ToolButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -418,7 +418,14 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tool_button.ToolButton.clicked");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -441,37 +448,37 @@ class ToolButtonGidBuilderImpl(T) : gtk.tool_item.ToolItemGidBuilderImpl!T, gtk.
           #GtkToolButton:stock-id properties.
       Returns: Builder instance for fluent chaining
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
 
   /** */
-  T iconWidget(gtk.widget.Widget propval)
+  T iconWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("icon-widget", propval);
   }
 
   /** */
-  T label(string propval)
+  T label(string propval) nothrow
   {
     return setProperty("label", propval);
   }
 
   /** */
-  T labelWidget(gtk.widget.Widget propval)
+  T labelWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("label-widget", propval);
   }
 
   /** */
-  T stockId(string propval)
+  T stockId(string propval) nothrow
   {
     return setProperty("stock-id", propval);
   }
 
   /** */
-  T useUnderline(bool propval)
+  T useUnderline(bool propval) nothrow
   {
     return setProperty("use-underline", propval);
   }
@@ -484,7 +491,7 @@ final class ToolButtonGidBuilder : ToolButtonGidBuilderImpl!ToolButtonGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ToolButton build()
+  ToolButton build() nothrow
   {
     return new ToolButton(cast(void*)createGObject(ToolButton._getGType), No.Take);
   }

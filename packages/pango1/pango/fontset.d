@@ -23,26 +23,26 @@ class Fontset : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_fontset_get_type != &gidSymbolNotFound ? pango_fontset_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Fontset self()
+  override Fontset self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class Fontset : gobject.object.ObjectWrap
       Get builder for [pango.fontset.Fontset]
       Returns: New builder object
   */
-  static FontsetGidBuilder builder()
+  static FontsetGidBuilder builder() nothrow
   {
     return new FontsetGidBuilder;
   }
@@ -65,14 +65,21 @@ class Fontset : gobject.object.ObjectWrap
       Params:
         func = Callback function
   */
-  void foreach_(pango.types.FontsetForeachFunc func)
+  void foreach_(pango.types.FontsetForeachFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(PangoFontset* fontset, PangoFont* font, void* userData)
+    extern(C) gboolean _funcCallback(PangoFontset* fontset, PangoFont* font, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(pango.types.FontsetForeachFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(pango.fontset.Fontset)(cast(void*)fontset, No.Take), gobject.object.ObjectWrap._getDObject!(pango.font.Font)(cast(void*)font, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(pango.fontset.Fontset)(cast(void*)fontset, No.Take), gobject.object.ObjectWrap._getDObject!(pango.font.Font)(cast(void*)font, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "pango.types.FontsetForeachFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -90,7 +97,7 @@ class Fontset : gobject.object.ObjectWrap
         wc = a Unicode character
       Returns: a [pango.font.Font]
   */
-  pango.font.Font getFont(uint wc)
+  pango.font.Font getFont(uint wc) nothrow
   {
     PangoFont* _cretval;
     _cretval = pango_fontset_get_font(cast(PangoFontset*)this._cPtr, wc);
@@ -102,7 +109,7 @@ class Fontset : gobject.object.ObjectWrap
       Get overall metric information for the fonts in the fontset.
       Returns: a [pango.font_metrics.FontMetrics] object
   */
-  pango.font_metrics.FontMetrics getMetrics()
+  pango.font_metrics.FontMetrics getMetrics() nothrow
   {
     PangoFontMetrics* _cretval;
     _cretval = pango_fontset_get_metrics(cast(PangoFontset*)this._cPtr);
@@ -125,7 +132,7 @@ final class FontsetGidBuilder : FontsetGidBuilderImpl!FontsetGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Fontset build()
+  Fontset build() nothrow
   {
     return new Fontset(cast(void*)createGObject(Fontset._getGType), No.Take);
   }

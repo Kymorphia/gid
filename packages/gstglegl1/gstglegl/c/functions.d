@@ -16,7 +16,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgstgl-1.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // EGLImage
   GType function() c_gst_egl_image_get_type; ///

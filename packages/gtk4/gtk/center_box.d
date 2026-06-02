@@ -58,26 +58,26 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_center_box_get_type != &gidSymbolNotFound ? gtk_center_box_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CenterBox self()
+  override CenterBox self() nothrow
   {
     return this;
   }
@@ -86,7 +86,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
       Get builder for [gtk.center_box.CenterBox]
       Returns: New builder object
   */
-  static CenterBoxGidBuilder builder()
+  static CenterBoxGidBuilder builder() nothrow
   {
     return new CenterBoxGidBuilder;
   }
@@ -95,7 +95,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
       Get `baselinePosition` property.
       Returns: The position of the baseline aligned widget if extra space is available.
   */
-  @property gtk.types.BaselinePosition baselinePosition()
+  @property gtk.types.BaselinePosition baselinePosition() nothrow
   {
     return getBaselinePosition();
   }
@@ -105,7 +105,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         propval = The position of the baseline aligned widget if extra space is available.
   */
-  @property void baselinePosition(gtk.types.BaselinePosition propval)
+  @property void baselinePosition(gtk.types.BaselinePosition propval) nothrow
   {
     setBaselinePosition(propval);
   }
@@ -114,7 +114,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
       Get `centerWidget` property.
       Returns: The widget that is placed at the center position.
   */
-  @property gtk.widget.Widget centerWidget()
+  @property gtk.widget.Widget centerWidget() nothrow
   {
     return getCenterWidget();
   }
@@ -124,7 +124,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         propval = The widget that is placed at the center position.
   */
-  @property void centerWidget(gtk.widget.Widget propval)
+  @property void centerWidget(gtk.widget.Widget propval) nothrow
   {
     setCenterWidget(propval);
   }
@@ -137,7 +137,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
         In horizontal orientation, the end position is at the trailing
         edge wrt. to the text direction.
   */
-  @property gtk.widget.Widget endWidget()
+  @property gtk.widget.Widget endWidget() nothrow
   {
     return getEndWidget();
   }
@@ -151,7 +151,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
           In horizontal orientation, the end position is at the trailing
           edge wrt. to the text direction.
   */
-  @property void endWidget(gtk.widget.Widget propval)
+  @property void endWidget(gtk.widget.Widget propval) nothrow
   {
     setEndWidget(propval);
   }
@@ -167,7 +167,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
         If set to `FALSE`, start and end widgets keep natural width and the
         center widget starts shrinking instead.
   */
-  @property bool shrinkCenterLast()
+  @property bool shrinkCenterLast() nothrow
   {
     return getShrinkCenterLast();
   }
@@ -184,7 +184,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
           If set to `FALSE`, start and end widgets keep natural width and the
           center widget starts shrinking instead.
   */
-  @property void shrinkCenterLast(bool propval)
+  @property void shrinkCenterLast(bool propval) nothrow
   {
     setShrinkCenterLast(propval);
   }
@@ -197,7 +197,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
         In horizontal orientation, the start position is at the leading
         edge wrt. to the text direction.
   */
-  @property gtk.widget.Widget startWidget()
+  @property gtk.widget.Widget startWidget() nothrow
   {
     return getStartWidget();
   }
@@ -211,7 +211,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
           In horizontal orientation, the start position is at the leading
           edge wrt. to the text direction.
   */
-  @property void startWidget(gtk.widget.Widget propval)
+  @property void startWidget(gtk.widget.Widget propval) nothrow
   {
     setStartWidget(propval);
   }
@@ -222,7 +222,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
       Creates a new [gtk.center_box.CenterBox].
       Returns: the new [gtk.center_box.CenterBox].
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_box_new();
@@ -233,7 +233,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
       Gets the value set by [gtk.center_box.CenterBox.setBaselinePosition].
       Returns: the baseline position
   */
-  gtk.types.BaselinePosition getBaselinePosition()
+  gtk.types.BaselinePosition getBaselinePosition() nothrow
   {
     GtkBaselinePosition _cretval;
     _cretval = gtk_center_box_get_baseline_position(cast(GtkCenterBox*)this._cPtr);
@@ -245,7 +245,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
       Gets the center widget, or null if there is none.
       Returns: the center widget.
   */
-  gtk.widget.Widget getCenterWidget()
+  gtk.widget.Widget getCenterWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_box_get_center_widget(cast(GtkCenterBox*)this._cPtr);
@@ -257,7 +257,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
       Gets the end widget, or null if there is none.
       Returns: the end widget.
   */
-  gtk.widget.Widget getEndWidget()
+  gtk.widget.Widget getEndWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_box_get_end_widget(cast(GtkCenterBox*)this._cPtr);
@@ -269,7 +269,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
       Gets whether self shrinks the center widget after other children.
       Returns: whether to shrink the center widget after others
   */
-  bool getShrinkCenterLast()
+  bool getShrinkCenterLast() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_center_box_get_shrink_center_last(cast(GtkCenterBox*)this._cPtr);
@@ -280,7 +280,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
       Gets the start widget, or null if there is none.
       Returns: the start widget.
   */
-  gtk.widget.Widget getStartWidget()
+  gtk.widget.Widget getStartWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_box_get_start_widget(cast(GtkCenterBox*)this._cPtr);
@@ -300,7 +300,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         position = a [gtk.types.BaselinePosition]
   */
-  void setBaselinePosition(gtk.types.BaselinePosition position)
+  void setBaselinePosition(gtk.types.BaselinePosition position) nothrow
   {
     gtk_center_box_set_baseline_position(cast(GtkCenterBox*)this._cPtr, position);
   }
@@ -313,7 +313,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         child = the new center widget
   */
-  void setCenterWidget(gtk.widget.Widget child = null)
+  void setCenterWidget(gtk.widget.Widget child = null) nothrow
   {
     gtk_center_box_set_center_widget(cast(GtkCenterBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -326,7 +326,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         child = the new end widget
   */
-  void setEndWidget(gtk.widget.Widget child = null)
+  void setEndWidget(gtk.widget.Widget child = null) nothrow
   {
     gtk_center_box_set_end_widget(cast(GtkCenterBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -344,7 +344,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         shrinkCenterLast = whether to shrink the center widget after others
   */
-  void setShrinkCenterLast(bool shrinkCenterLast)
+  void setShrinkCenterLast(bool shrinkCenterLast) nothrow
   {
     gtk_center_box_set_shrink_center_last(cast(GtkCenterBox*)this._cPtr, shrinkCenterLast);
   }
@@ -357,7 +357,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         child = the new start widget
   */
-  void setStartWidget(gtk.widget.Widget child = null)
+  void setStartWidget(gtk.widget.Widget child = null) nothrow
   {
     gtk_center_box_set_start_widget(cast(GtkCenterBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -375,7 +375,7 @@ class CenterBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orient
         propval = The position of the baseline aligned widget if extra space is available.
       Returns: Builder instance for fluent chaining
   */
-  T baselinePosition(gtk.types.BaselinePosition propval)
+  T baselinePosition(gtk.types.BaselinePosition propval) nothrow
   {
     return setProperty("baseline-position", propval);
   }
@@ -386,7 +386,7 @@ class CenterBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orient
         propval = The widget that is placed at the center position.
       Returns: Builder instance for fluent chaining
   */
-  T centerWidget(gtk.widget.Widget propval)
+  T centerWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("center-widget", propval);
   }
@@ -401,7 +401,7 @@ class CenterBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orient
           edge wrt. to the text direction.
       Returns: Builder instance for fluent chaining
   */
-  T endWidget(gtk.widget.Widget propval)
+  T endWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("end-widget", propval);
   }
@@ -419,7 +419,7 @@ class CenterBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orient
           center widget starts shrinking instead.
       Returns: Builder instance for fluent chaining
   */
-  T shrinkCenterLast(bool propval)
+  T shrinkCenterLast(bool propval) nothrow
   {
     return setProperty("shrink-center-last", propval);
   }
@@ -434,7 +434,7 @@ class CenterBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orient
           edge wrt. to the text direction.
       Returns: Builder instance for fluent chaining
   */
-  T startWidget(gtk.widget.Widget propval)
+  T startWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("start-widget", propval);
   }
@@ -447,7 +447,7 @@ final class CenterBoxGidBuilder : CenterBoxGidBuilderImpl!CenterBoxGidBuilder
       Create object from builder.
       Returns: New object
   */
-  CenterBox build()
+  CenterBox build() nothrow
   {
     return new CenterBox(cast(void*)createGObject(CenterBox._getGType), No.Take);
   }

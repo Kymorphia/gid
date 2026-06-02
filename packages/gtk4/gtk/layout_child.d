@@ -26,26 +26,26 @@ class LayoutChild : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_layout_child_get_type != &gidSymbolNotFound ? gtk_layout_child_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LayoutChild self()
+  override LayoutChild self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class LayoutChild : gobject.object.ObjectWrap
       Get builder for [gtk.layout_child.LayoutChild]
       Returns: New builder object
   */
-  static LayoutChildGidBuilder builder()
+  static LayoutChildGidBuilder builder() nothrow
   {
     return new LayoutChildGidBuilder;
   }
@@ -63,7 +63,7 @@ class LayoutChild : gobject.object.ObjectWrap
       Get `childWidget` property.
       Returns: The widget that is associated to the [gtk.layout_child.LayoutChild] instance.
   */
-  @property gtk.widget.Widget childWidget()
+  @property gtk.widget.Widget childWidget() nothrow
   {
     return getChildWidget();
   }
@@ -72,7 +72,7 @@ class LayoutChild : gobject.object.ObjectWrap
       Get `layoutManager` property.
       Returns: The layout manager that created the [gtk.layout_child.LayoutChild] instance.
   */
-  @property gtk.layout_manager.LayoutManager layoutManager()
+  @property gtk.layout_manager.LayoutManager layoutManager() nothrow
   {
     return getLayoutManager();
   }
@@ -81,7 +81,7 @@ class LayoutChild : gobject.object.ObjectWrap
       Retrieves the [gtk.widget.Widget] associated to the given layout_child.
       Returns: a [gtk.widget.Widget]
   */
-  gtk.widget.Widget getChildWidget()
+  gtk.widget.Widget getChildWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_layout_child_get_child_widget(cast(GtkLayoutChild*)this._cPtr);
@@ -94,7 +94,7 @@ class LayoutChild : gobject.object.ObjectWrap
       given layout_child.
       Returns: a [gtk.layout_manager.LayoutManager]
   */
-  gtk.layout_manager.LayoutManager getLayoutManager()
+  gtk.layout_manager.LayoutManager getLayoutManager() nothrow
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_layout_child_get_layout_manager(cast(GtkLayoutChild*)this._cPtr);
@@ -113,7 +113,7 @@ class LayoutChildGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The widget that is associated to the [gtk.layout_child.LayoutChild] instance.
       Returns: Builder instance for fluent chaining
   */
-  T childWidget(gtk.widget.Widget propval)
+  T childWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child-widget", propval);
   }
@@ -124,7 +124,7 @@ class LayoutChildGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The layout manager that created the [gtk.layout_child.LayoutChild] instance.
       Returns: Builder instance for fluent chaining
   */
-  T layoutManager(gtk.layout_manager.LayoutManager propval)
+  T layoutManager(gtk.layout_manager.LayoutManager propval) nothrow
   {
     return setProperty("layout-manager", propval);
   }
@@ -137,7 +137,7 @@ final class LayoutChildGidBuilder : LayoutChildGidBuilderImpl!LayoutChildGidBuil
       Create object from builder.
       Returns: New object
   */
-  LayoutChild build()
+  LayoutChild build() nothrow
   {
     return new LayoutChild(cast(void*)createGObject(LayoutChild._getGType), No.Take);
   }

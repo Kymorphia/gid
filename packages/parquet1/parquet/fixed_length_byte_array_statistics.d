@@ -15,26 +15,26 @@ class FixedLengthByteArrayStatistics : parquet.statistics.Statistics
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_fixed_length_byte_array_statistics_get_type != &gidSymbolNotFound ? gparquet_fixed_length_byte_array_statistics_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FixedLengthByteArrayStatistics self()
+  override FixedLengthByteArrayStatistics self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class FixedLengthByteArrayStatistics : parquet.statistics.Statistics
       Get builder for [parquet.fixed_length_byte_array_statistics.FixedLengthByteArrayStatistics]
       Returns: New builder object
   */
-  static FixedLengthByteArrayStatisticsGidBuilder builder()
+  static FixedLengthByteArrayStatisticsGidBuilder builder() nothrow
   {
     return new FixedLengthByteArrayStatisticsGidBuilder;
   }
 
   /** */
-  glib.bytes.Bytes getMax()
+  glib.bytes.Bytes getMax() nothrow
   {
     GBytes* _cretval;
     _cretval = gparquet_fixed_length_byte_array_statistics_get_max(cast(GParquetFixedLengthByteArrayStatistics*)this._cPtr);
@@ -58,7 +58,7 @@ class FixedLengthByteArrayStatistics : parquet.statistics.Statistics
   }
 
   /** */
-  glib.bytes.Bytes getMin()
+  glib.bytes.Bytes getMin() nothrow
   {
     GBytes* _cretval;
     _cretval = gparquet_fixed_length_byte_array_statistics_get_min(cast(GParquetFixedLengthByteArrayStatistics*)this._cPtr);
@@ -79,7 +79,7 @@ final class FixedLengthByteArrayStatisticsGidBuilder : FixedLengthByteArrayStati
       Create object from builder.
       Returns: New object
   */
-  FixedLengthByteArrayStatistics build()
+  FixedLengthByteArrayStatistics build() nothrow
   {
     return new FixedLengthByteArrayStatistics(cast(void*)createGObject(FixedLengthByteArrayStatistics._getGType), No.Take);
   }

@@ -38,32 +38,32 @@ class Bytes : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_bytes_get_type != &gidSymbolNotFound ? g_bytes_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Bytes self()
+  override Bytes self() nothrow
   {
     return this;
   }
@@ -77,7 +77,7 @@ class Bytes : gobject.boxed.Boxed
         data = the data to be used for the bytes
       Returns: a new #GBytes
   */
-  this(ubyte[] data = null)
+  this(ubyte[] data = null) nothrow
   {
     GBytes* _cretval;
     size_t _size;
@@ -106,7 +106,7 @@ class Bytes : gobject.boxed.Boxed
                  if bytes1 is greater than bytes2, and zero if bytes1 is equal to
                  bytes2
   */
-  int compare(glib.bytes.Bytes bytes2)
+  int compare(glib.bytes.Bytes bytes2) nothrow
   {
     int _retval;
     _retval = g_bytes_compare(cast(GBytes*)this._cPtr, bytes2 ? cast(GBytes*)bytes2._cPtr(No.Dup) : null);
@@ -124,7 +124,7 @@ class Bytes : gobject.boxed.Boxed
         bytes2 = a pointer to a #GBytes to compare with bytes1
       Returns: true if the two keys match.
   */
-  bool equal(glib.bytes.Bytes bytes2)
+  bool equal(glib.bytes.Bytes bytes2) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_bytes_equal(cast(GBytes*)this._cPtr, bytes2 ? cast(GBytes*)bytes2._cPtr(No.Dup) : null);
@@ -141,7 +141,7 @@ class Bytes : gobject.boxed.Boxed
       not be returned if size is non-zero.
       Returns: a pointer to the byte data, or null
   */
-  ubyte[] getData()
+  ubyte[] getData() nothrow
   {
     const(void)* _cretval;
     size_t _cretlength;
@@ -183,7 +183,7 @@ class Bytes : gobject.boxed.Boxed
         nElements = the number of elements in the region
       Returns: the requested region, or null in case of an error
   */
-  const(void)* getRegion(size_t elementSize, size_t offset, size_t nElements)
+  const(void)* getRegion(size_t elementSize, size_t offset, size_t nElements) nothrow
   {
     auto _retval = g_bytes_get_region(cast(GBytes*)this._cPtr, elementSize, offset, nElements);
     return _retval;
@@ -195,7 +195,7 @@ class Bytes : gobject.boxed.Boxed
       This function will always return the same value for a given #GBytes.
       Returns: the size
   */
-  size_t getSize()
+  size_t getSize() nothrow
   {
     size_t _retval;
     _retval = g_bytes_get_size(cast(GBytes*)this._cPtr);
@@ -209,7 +209,7 @@ class Bytes : gobject.boxed.Boxed
       parameter, when using non-null #GBytes pointers as keys in a #GHashTable.
       Returns: a hash value corresponding to the key.
   */
-  uint hash()
+  uint hash() nothrow
   {
     uint _retval;
     _retval = g_bytes_hash(cast(GBytes*)this._cPtr);
@@ -234,7 +234,7 @@ class Bytes : gobject.boxed.Boxed
         length = length of subsection
       Returns: a new #GBytes
   */
-  glib.bytes.Bytes newFromBytes(size_t offset, size_t length)
+  glib.bytes.Bytes newFromBytes(size_t offset, size_t length) nothrow
   {
     GBytes* _cretval;
     _cretval = g_bytes_new_from_bytes(cast(GBytes*)this._cPtr, offset, length);
@@ -256,7 +256,7 @@ class Bytes : gobject.boxed.Boxed
       may be shorter than #gsize, that bytes is using.
       Returns: a new mutable #GByteArray containing the same byte data
   */
-  ubyte[] unrefToArray()
+  ubyte[] unrefToArray() nothrow
   {
     GByteArray* _cretval;
     _cretval = g_bytes_unref_to_array(cast(GBytes*)this._cPtr);
@@ -275,7 +275,7 @@ class Bytes : gobject.boxed.Boxed
       Returns: a pointer to the same byte data, which should be
                  freed with [glib.global.gfree]
   */
-  ubyte[] unrefToData()
+  ubyte[] unrefToData() nothrow
   {
     void* _cretval;
     size_t _cretlength;

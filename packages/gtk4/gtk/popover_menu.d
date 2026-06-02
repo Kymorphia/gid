@@ -138,26 +138,26 @@ class PopoverMenu : gtk.popover.Popover
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_popover_menu_get_type != &gidSymbolNotFound ? gtk_popover_menu_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PopoverMenu self()
+  override PopoverMenu self() nothrow
   {
     return this;
   }
@@ -166,7 +166,7 @@ class PopoverMenu : gtk.popover.Popover
       Get builder for [gtk.popover_menu.PopoverMenu]
       Returns: New builder object
   */
-  static PopoverMenuGidBuilder builder()
+  static PopoverMenuGidBuilder builder() nothrow
   {
     return new PopoverMenuGidBuilder;
   }
@@ -178,7 +178,7 @@ class PopoverMenu : gtk.popover.Popover
         If a model is set and the flags change, contents are rebuilt, so if setting
         properties individually, set flags before model to avoid a redundant rebuild.
   */
-  @property gtk.types.PopoverMenuFlags flags()
+  @property gtk.types.PopoverMenuFlags flags() nothrow
   {
     return getFlags();
   }
@@ -191,7 +191,7 @@ class PopoverMenu : gtk.popover.Popover
           If a model is set and the flags change, contents are rebuilt, so if setting
           properties individually, set flags before model to avoid a redundant rebuild.
   */
-  @property void flags(gtk.types.PopoverMenuFlags propval)
+  @property void flags(gtk.types.PopoverMenuFlags propval) nothrow
   {
     setFlags(propval);
   }
@@ -200,7 +200,7 @@ class PopoverMenu : gtk.popover.Popover
       Get `menuModel` property.
       Returns: The model from which the menu is made.
   */
-  @property gio.menu_model.MenuModel menuModel()
+  @property gio.menu_model.MenuModel menuModel() nothrow
   {
     return getMenuModel();
   }
@@ -210,7 +210,7 @@ class PopoverMenu : gtk.popover.Popover
       Params:
         propval = The model from which the menu is made.
   */
-  @property void menuModel(gio.menu_model.MenuModel propval)
+  @property void menuModel(gio.menu_model.MenuModel propval) nothrow
   {
     setMenuModel(propval);
   }
@@ -219,7 +219,7 @@ class PopoverMenu : gtk.popover.Popover
       Get `visibleSubmenu` property.
       Returns: The name of the visible submenu.
   */
-  @property string visibleSubmenu()
+  @property string visibleSubmenu() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("visible-submenu");
   }
@@ -229,7 +229,7 @@ class PopoverMenu : gtk.popover.Popover
       Params:
         propval = The name of the visible submenu.
   */
-  @property void visibleSubmenu(string propval)
+  @property void visibleSubmenu(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("visible-submenu", propval);
   }
@@ -253,7 +253,7 @@ class PopoverMenu : gtk.popover.Popover
         model = a [gio.menu_model.MenuModel]
       Returns: the new [gtk.popover_menu.PopoverMenu]
   */
-  static gtk.popover_menu.PopoverMenu newFromModel(gio.menu_model.MenuModel model = null)
+  static gtk.popover_menu.PopoverMenu newFromModel(gio.menu_model.MenuModel model = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_menu_new_from_model(model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
@@ -275,7 +275,7 @@ class PopoverMenu : gtk.popover.Popover
         flags = flags that affect how the menu is created
       Returns: the new [gtk.popover_menu.PopoverMenu]
   */
-  static gtk.popover_menu.PopoverMenu newFromModelFull(gio.menu_model.MenuModel model, gtk.types.PopoverMenuFlags flags)
+  static gtk.popover_menu.PopoverMenu newFromModelFull(gio.menu_model.MenuModel model, gtk.types.PopoverMenuFlags flags) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_menu_new_from_model_full(model ? cast(GMenuModel*)model._cPtr(No.Dup) : null, flags);
@@ -294,7 +294,7 @@ class PopoverMenu : gtk.popover.Popover
         id = the ID to insert child at
       Returns: true if id was found and the widget added
   */
-  bool addChild(gtk.widget.Widget child, string id)
+  bool addChild(gtk.widget.Widget child, string id) nothrow
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -306,7 +306,7 @@ class PopoverMenu : gtk.popover.Popover
       Returns the flags that popover uses to create/display a menu from its model.
       Returns: the [gtk.types.PopoverMenuFlags]
   */
-  gtk.types.PopoverMenuFlags getFlags()
+  gtk.types.PopoverMenuFlags getFlags() nothrow
   {
     GtkPopoverMenuFlags _cretval;
     _cretval = gtk_popover_menu_get_flags(cast(GtkPopoverMenu*)this._cPtr);
@@ -318,7 +318,7 @@ class PopoverMenu : gtk.popover.Popover
       Returns the menu model used to populate the popover.
       Returns: the menu model of popover
   */
-  gio.menu_model.MenuModel getMenuModel()
+  gio.menu_model.MenuModel getMenuModel() nothrow
   {
     GMenuModel* _cretval;
     _cretval = gtk_popover_menu_get_menu_model(cast(GtkPopoverMenu*)this._cPtr);
@@ -334,7 +334,7 @@ class PopoverMenu : gtk.popover.Popover
         child = the [gtk.widget.Widget] to remove
       Returns: true if the widget was removed
   */
-  bool removeChild(gtk.widget.Widget child)
+  bool removeChild(gtk.widget.Widget child) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_popover_menu_remove_child(cast(GtkPopoverMenu*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -350,7 +350,7 @@ class PopoverMenu : gtk.popover.Popover
       Params:
         flags = a set of [gtk.types.PopoverMenuFlags]
   */
-  void setFlags(gtk.types.PopoverMenuFlags flags)
+  void setFlags(gtk.types.PopoverMenuFlags flags) nothrow
   {
     gtk_popover_menu_set_flags(cast(GtkPopoverMenu*)this._cPtr, flags);
   }
@@ -365,7 +365,7 @@ class PopoverMenu : gtk.popover.Popover
       Params:
         model = a [gio.menu_model.MenuModel]
   */
-  void setMenuModel(gio.menu_model.MenuModel model = null)
+  void setMenuModel(gio.menu_model.MenuModel model = null) nothrow
   {
     gtk_popover_menu_set_menu_model(cast(GtkPopoverMenu*)this._cPtr, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
   }
@@ -385,7 +385,7 @@ class PopoverMenuGidBuilderImpl(T) : gtk.popover.PopoverGidBuilderImpl!T
           properties individually, set flags before model to avoid a redundant rebuild.
       Returns: Builder instance for fluent chaining
   */
-  T flags(gtk.types.PopoverMenuFlags propval)
+  T flags(gtk.types.PopoverMenuFlags propval) nothrow
   {
     return setProperty("flags", propval);
   }
@@ -396,7 +396,7 @@ class PopoverMenuGidBuilderImpl(T) : gtk.popover.PopoverGidBuilderImpl!T
         propval = The model from which the menu is made.
       Returns: Builder instance for fluent chaining
   */
-  T menuModel(gio.menu_model.MenuModel propval)
+  T menuModel(gio.menu_model.MenuModel propval) nothrow
   {
     return setProperty("menu-model", propval);
   }
@@ -407,7 +407,7 @@ class PopoverMenuGidBuilderImpl(T) : gtk.popover.PopoverGidBuilderImpl!T
         propval = The name of the visible submenu.
       Returns: Builder instance for fluent chaining
   */
-  T visibleSubmenu(string propval)
+  T visibleSubmenu(string propval) nothrow
   {
     return setProperty("visible-submenu", propval);
   }
@@ -420,7 +420,7 @@ final class PopoverMenuGidBuilder : PopoverMenuGidBuilderImpl!PopoverMenuGidBuil
       Create object from builder.
       Returns: New object
   */
-  PopoverMenu build()
+  PopoverMenu build() nothrow
   {
     return new PopoverMenu(cast(void*)createGObject(PopoverMenu._getGType), No.Take);
   }

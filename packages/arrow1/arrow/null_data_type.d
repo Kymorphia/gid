@@ -14,26 +14,26 @@ class NullDataType : arrow.data_type.DataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_null_data_type_get_type != &gidSymbolNotFound ? garrow_null_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NullDataType self()
+  override NullDataType self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class NullDataType : arrow.data_type.DataType
       Get builder for [arrow.null_data_type.NullDataType]
       Returns: New builder object
   */
-  static NullDataTypeGidBuilder builder()
+  static NullDataTypeGidBuilder builder() nothrow
   {
     return new NullDataTypeGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowNullDataType* _cretval;
     _cretval = garrow_null_data_type_new();
@@ -68,7 +68,7 @@ final class NullDataTypeGidBuilder : NullDataTypeGidBuilderImpl!NullDataTypeGidB
       Create object from builder.
       Returns: New object
   */
-  NullDataType build()
+  NullDataType build() nothrow
   {
     return new NullDataType(cast(void*)createGObject(NullDataType._getGType), Yes.Take);
   }

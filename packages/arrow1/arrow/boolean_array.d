@@ -17,26 +17,26 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_boolean_array_get_type != &gidSymbolNotFound ? garrow_boolean_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BooleanArray self()
+  override BooleanArray self() nothrow
   {
     return this;
   }
@@ -45,13 +45,13 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
       Get builder for [arrow.boolean_array.BooleanArray]
       Returns: New builder object
   */
-  static BooleanArrayGidBuilder builder()
+  static BooleanArrayGidBuilder builder() nothrow
   {
     return new BooleanArrayGidBuilder;
   }
 
   /** */
-  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
+  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls) nothrow
   {
     GArrowBooleanArray* _cretval;
     _cretval = garrow_boolean_array_new(length, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
@@ -71,7 +71,7 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
   }
 
   /** */
-  bool getValue(long i)
+  bool getValue(long i) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_boolean_array_get_value(cast(GArrowBooleanArray*)this._cPtr, i);
@@ -79,7 +79,7 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
   }
 
   /** */
-  bool[] getValues()
+  bool[] getValues() nothrow
   {
     gboolean* _cretval;
     long _cretlength;
@@ -145,7 +145,7 @@ final class BooleanArrayGidBuilder : BooleanArrayGidBuilderImpl!BooleanArrayGidB
       Create object from builder.
       Returns: New object
   */
-  BooleanArray build()
+  BooleanArray build() nothrow
   {
     return new BooleanArray(cast(void*)createGObject(BooleanArray._getGType), Yes.Take);
   }

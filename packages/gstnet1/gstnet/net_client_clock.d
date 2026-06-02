@@ -41,26 +41,26 @@ class NetClientClock : gst.system_clock.SystemClock
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_net_client_clock_get_type != &gidSymbolNotFound ? gst_net_client_clock_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NetClientClock self()
+  override NetClientClock self() nothrow
   {
     return this;
   }
@@ -69,91 +69,91 @@ class NetClientClock : gst.system_clock.SystemClock
       Get builder for [gstnet.net_client_clock.NetClientClock]
       Returns: New builder object
   */
-  static NetClientClockGidBuilder builder()
+  static NetClientClockGidBuilder builder() nothrow
   {
     return new NetClientClockGidBuilder;
   }
 
   /** */
-  @property string address()
+  @property string address() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("address");
   }
 
   /** */
-  @property void address(string propval)
+  @property void address(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("address", propval);
   }
 
   /** */
-  @property ulong baseTime()
+  @property ulong baseTime() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("base-time");
   }
 
   /** */
-  @property gst.bus.Bus bus()
+  @property gst.bus.Bus bus() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gst.bus.Bus)("bus");
   }
 
   /** */
-  @property void bus(gst.bus.Bus propval)
+  @property void bus(gst.bus.Bus propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gst.bus.Bus)("bus", propval);
   }
 
   /** */
-  @property gst.clock.Clock internalClock()
+  @property gst.clock.Clock internalClock() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gst.clock.Clock)("internal-clock");
   }
 
   /** */
-  @property ulong minimumUpdateInterval()
+  @property ulong minimumUpdateInterval() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("minimum-update-interval");
   }
 
   /** */
-  @property void minimumUpdateInterval(ulong propval)
+  @property void minimumUpdateInterval(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("minimum-update-interval", propval);
   }
 
   /** */
-  @property int port()
+  @property int port() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("port");
   }
 
   /** */
-  @property void port(int propval)
+  @property void port(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("port", propval);
   }
 
   /** */
-  @property int qosDscp()
+  @property int qosDscp() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("qos-dscp");
   }
 
   /** */
-  @property void qosDscp(int propval)
+  @property void qosDscp(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("qos-dscp", propval);
   }
 
   /** */
-  @property ulong roundTripLimit()
+  @property ulong roundTripLimit() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("round-trip-limit");
   }
 
   /** */
-  @property void roundTripLimit(ulong propval)
+  @property void roundTripLimit(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("round-trip-limit", propval);
   }
@@ -171,7 +171,7 @@ class NetClientClock : gst.system_clock.SystemClock
       Returns: a new #GstClock that receives a time from the remote
         clock.
   */
-  this(string name, string remoteAddress, int remotePort, gst.types.ClockTime baseTime)
+  this(string name, string remoteAddress, int remotePort, gst.types.ClockTime baseTime) nothrow
   {
     GstClock* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -186,43 +186,43 @@ class NetClientClockGidBuilderImpl(T) : gst.system_clock.SystemClockGidBuilderIm
 {
 
   /** */
-  T address(string propval)
+  T address(string propval) nothrow
   {
     return setProperty("address", propval);
   }
 
   /** */
-  T baseTime(ulong propval)
+  T baseTime(ulong propval) nothrow
   {
     return setProperty("base-time", propval);
   }
 
   /** */
-  T bus(gst.bus.Bus propval)
+  T bus(gst.bus.Bus propval) nothrow
   {
     return setProperty("bus", propval);
   }
 
   /** */
-  T minimumUpdateInterval(ulong propval)
+  T minimumUpdateInterval(ulong propval) nothrow
   {
     return setProperty("minimum-update-interval", propval);
   }
 
   /** */
-  T port(int propval)
+  T port(int propval) nothrow
   {
     return setProperty("port", propval);
   }
 
   /** */
-  T qosDscp(int propval)
+  T qosDscp(int propval) nothrow
   {
     return setProperty("qos-dscp", propval);
   }
 
   /** */
-  T roundTripLimit(ulong propval)
+  T roundTripLimit(ulong propval) nothrow
   {
     return setProperty("round-trip-limit", propval);
   }
@@ -235,7 +235,7 @@ final class NetClientClockGidBuilder : NetClientClockGidBuilderImpl!NetClientClo
       Create object from builder.
       Returns: New object
   */
-  NetClientClock build()
+  NetClientClock build() nothrow
   {
     return new NetClientClock(cast(void*)createGObject(NetClientClock._getGType), Yes.Take);
   }

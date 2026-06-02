@@ -15,11 +15,8 @@ class SqlSelectFrom
   GdaSqlSelectFrom _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.sql_select_from.SqlSelectFrom");
-
     _cInstance = *cast(GdaSqlSelectFrom*)ptr;
 
     if (take)
@@ -27,7 +24,7 @@ class SqlSelectFrom
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -36,7 +33,7 @@ class SqlSelectFrom
       Creates a new string description of the FROM clause used in a SELECT statement.
       Returns: a new string with the description of the FROM or "null" in case from is invalid.
   */
-  string serialize()
+  string serialize() nothrow
   {
     char* _cretval;
     _cretval = gda_sql_select_from_serialize(cast(GdaSqlSelectFrom*)this._cPtr);

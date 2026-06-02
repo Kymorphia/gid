@@ -18,26 +18,26 @@ class ImageAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Image
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_image_accessible_get_type != &gidSymbolNotFound ? gtk_image_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ImageAccessible self()
+  override ImageAccessible self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class ImageAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Image
       Get builder for [gtk.image_accessible.ImageAccessible]
       Returns: New builder object
   */
-  static ImageAccessibleGidBuilder builder()
+  static ImageAccessibleGidBuilder builder() nothrow
   {
     return new ImageAccessibleGidBuilder;
   }
@@ -68,7 +68,7 @@ final class ImageAccessibleGidBuilder : ImageAccessibleGidBuilderImpl!ImageAcces
       Create object from builder.
       Returns: New object
   */
-  ImageAccessible build()
+  ImageAccessible build() nothrow
   {
     return new ImageAccessible(cast(void*)createGObject(ImageAccessible._getGType), No.Take);
   }

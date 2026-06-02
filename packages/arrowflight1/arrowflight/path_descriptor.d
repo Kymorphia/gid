@@ -14,26 +14,26 @@ class PathDescriptor : arrowflight.descriptor.Descriptor
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_path_descriptor_get_type != &gidSymbolNotFound ? gaflight_path_descriptor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PathDescriptor self()
+  override PathDescriptor self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class PathDescriptor : arrowflight.descriptor.Descriptor
       Get builder for [arrowflight.path_descriptor.PathDescriptor]
       Returns: New builder object
   */
-  static PathDescriptorGidBuilder builder()
+  static PathDescriptorGidBuilder builder() nothrow
   {
     return new PathDescriptorGidBuilder;
   }
 
   /** */
-  this(string[] paths)
+  this(string[] paths) nothrow
   {
     GAFlightPathDescriptor* _cretval;
     size_t _nPaths;
@@ -65,7 +65,7 @@ class PathDescriptor : arrowflight.descriptor.Descriptor
   }
 
   /** */
-  string[] getPaths()
+  string[] getPaths() nothrow
   {
     char** _cretval;
     _cretval = gaflight_path_descriptor_get_paths(cast(GAFlightPathDescriptor*)this._cPtr);
@@ -97,7 +97,7 @@ final class PathDescriptorGidBuilder : PathDescriptorGidBuilderImpl!PathDescript
       Create object from builder.
       Returns: New object
   */
-  PathDescriptor build()
+  PathDescriptor build() nothrow
   {
     return new PathDescriptor(cast(void*)createGObject(PathDescriptor._getGType), Yes.Take);
   }

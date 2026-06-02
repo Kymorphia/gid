@@ -33,26 +33,26 @@ class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_renderer_spin_get_type != &gidSymbolNotFound ? gtk_cell_renderer_spin_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CellRendererSpin self()
+  override CellRendererSpin self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
       Get builder for [gtk.cell_renderer_spin.CellRendererSpin]
       Returns: New builder object
   */
-  static CellRendererSpinGidBuilder builder()
+  static CellRendererSpinGidBuilder builder() nothrow
   {
     return new CellRendererSpinGidBuilder;
   }
@@ -71,7 +71,7 @@ class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
       Returns: The adjustment that holds the value of the spinbutton.
         This must be non-null for the cell renderer to be editable.
   */
-  @property gtk.adjustment.Adjustment adjustment()
+  @property gtk.adjustment.Adjustment adjustment() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.adjustment.Adjustment)("adjustment");
   }
@@ -82,7 +82,7 @@ class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
         propval = The adjustment that holds the value of the spinbutton.
           This must be non-null for the cell renderer to be editable.
   */
-  @property void adjustment(gtk.adjustment.Adjustment propval)
+  @property void adjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.adjustment.Adjustment)("adjustment", propval);
   }
@@ -91,7 +91,7 @@ class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
       Get `climbRate` property.
       Returns: The acceleration rate when you hold down a button.
   */
-  @property double climbRate()
+  @property double climbRate() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(double)("climb-rate");
   }
@@ -101,7 +101,7 @@ class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
       Params:
         propval = The acceleration rate when you hold down a button.
   */
-  @property void climbRate(double propval)
+  @property void climbRate(double propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(double)("climb-rate", propval);
   }
@@ -110,7 +110,7 @@ class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
       Get `digits` property.
       Returns: The number of decimal places to display.
   */
-  @property uint digits()
+  @property uint digits() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("digits");
   }
@@ -120,7 +120,7 @@ class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
       Params:
         propval = The number of decimal places to display.
   */
-  @property void digits(uint propval)
+  @property void digits(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("digits", propval);
   }
@@ -129,7 +129,7 @@ class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
       Creates a new [gtk.cell_renderer_spin.CellRendererSpin].
       Returns: a new [gtk.cell_renderer_spin.CellRendererSpin]
   */
-  this()
+  this() nothrow
   {
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_renderer_spin_new();
@@ -148,7 +148,7 @@ class CellRendererSpinGidBuilderImpl(T) : gtk.cell_renderer_text.CellRendererTex
           This must be non-null for the cell renderer to be editable.
       Returns: Builder instance for fluent chaining
   */
-  T adjustment(gtk.adjustment.Adjustment propval)
+  T adjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     return setProperty("adjustment", propval);
   }
@@ -159,7 +159,7 @@ class CellRendererSpinGidBuilderImpl(T) : gtk.cell_renderer_text.CellRendererTex
         propval = The acceleration rate when you hold down a button.
       Returns: Builder instance for fluent chaining
   */
-  T climbRate(double propval)
+  T climbRate(double propval) nothrow
   {
     return setProperty("climb-rate", propval);
   }
@@ -170,7 +170,7 @@ class CellRendererSpinGidBuilderImpl(T) : gtk.cell_renderer_text.CellRendererTex
         propval = The number of decimal places to display.
       Returns: Builder instance for fluent chaining
   */
-  T digits(uint propval)
+  T digits(uint propval) nothrow
   {
     return setProperty("digits", propval);
   }
@@ -183,7 +183,7 @@ final class CellRendererSpinGidBuilder : CellRendererSpinGidBuilderImpl!CellRend
       Create object from builder.
       Returns: New object
   */
-  CellRendererSpin build()
+  CellRendererSpin build() nothrow
   {
     return new CellRendererSpin(cast(void*)createGObject(CellRendererSpin._getGType), No.Take);
   }

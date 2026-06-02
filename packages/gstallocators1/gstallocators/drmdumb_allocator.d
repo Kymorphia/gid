@@ -18,26 +18,26 @@ class DRMDumbAllocator : gst.allocator.Allocator
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_drm_dumb_allocator_get_type != &gidSymbolNotFound ? gst_drm_dumb_allocator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DRMDumbAllocator self()
+  override DRMDumbAllocator self() nothrow
   {
     return this;
   }
@@ -46,19 +46,19 @@ class DRMDumbAllocator : gst.allocator.Allocator
       Get builder for [gstallocators.drmdumb_allocator.DRMDumbAllocator]
       Returns: New builder object
   */
-  static DRMDumbAllocatorGidBuilder builder()
+  static DRMDumbAllocatorGidBuilder builder() nothrow
   {
     return new DRMDumbAllocatorGidBuilder;
   }
 
   /** */
-  @property string drmDevicePath()
+  @property string drmDevicePath() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("drm-device-path");
   }
 
   /** */
-  @property int drmFd()
+  @property int drmFd() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("drm-fd");
   }
@@ -73,7 +73,7 @@ class DRMDumbAllocator : gst.allocator.Allocator
       Returns: a new DRM Dumb allocator. Use [gst.object.ObjectWrap.unref]
           to release the allocator after usage.
   */
-  static gstallocators.drmdumb_allocator.DRMDumbAllocator newWithDevicePath(string drmDevicePath)
+  static gstallocators.drmdumb_allocator.DRMDumbAllocator newWithDevicePath(string drmDevicePath) nothrow
   {
     GstAllocator* _cretval;
     const(char)* _drmDevicePath = drmDevicePath.toCString(No.Alloc);
@@ -92,7 +92,7 @@ class DRMDumbAllocator : gst.allocator.Allocator
       Returns: a new DRM Dumb allocator. Use [gst.object.ObjectWrap.unref]
           to release the allocator after usage.
   */
-  static gstallocators.drmdumb_allocator.DRMDumbAllocator newWithFd(int drmFd)
+  static gstallocators.drmdumb_allocator.DRMDumbAllocator newWithFd(int drmFd) nothrow
   {
     GstAllocator* _cretval;
     _cretval = gst_drm_dumb_allocator_new_with_fd(drmFd);
@@ -116,7 +116,7 @@ class DRMDumbAllocator : gst.allocator.Allocator
       Returns: a new DRM Dumb #GstMemory. Use gst_memory_unref()
           to release the memory after usage.
   */
-  gst.memory.Memory alloc(uint drmFourcc, uint width, uint height, out uint outPitch)
+  gst.memory.Memory alloc(uint drmFourcc, uint width, uint height, out uint outPitch) nothrow
   {
     GstMemory* _cretval;
     _cretval = gst_drm_dumb_allocator_alloc(cast(GstAllocator*)this._cPtr, drmFourcc, width, height, cast(uint*)&outPitch);
@@ -128,7 +128,7 @@ class DRMDumbAllocator : gst.allocator.Allocator
       This function allow verifying if the driver support dma-buf exportation.
       Returns: true if the allocator support exporting dma-buf.
   */
-  bool hasPrimeExport()
+  bool hasPrimeExport() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_drm_dumb_allocator_has_prime_export(cast(GstAllocator*)this._cPtr);
@@ -141,13 +141,13 @@ class DRMDumbAllocatorGidBuilderImpl(T) : gst.allocator.AllocatorGidBuilderImpl!
 {
 
   /** */
-  T drmDevicePath(string propval)
+  T drmDevicePath(string propval) nothrow
   {
     return setProperty("drm-device-path", propval);
   }
 
   /** */
-  T drmFd(int propval)
+  T drmFd(int propval) nothrow
   {
     return setProperty("drm-fd", propval);
   }
@@ -160,7 +160,7 @@ final class DRMDumbAllocatorGidBuilder : DRMDumbAllocatorGidBuilderImpl!DRMDumbA
       Create object from builder.
       Returns: New object
   */
-  DRMDumbAllocator build()
+  DRMDumbAllocator build() nothrow
   {
     return new DRMDumbAllocator(cast(void*)createGObject(DRMDumbAllocator._getGType), No.Take);
   }

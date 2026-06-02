@@ -48,7 +48,7 @@ interface Table
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_table_get_type != &gidSymbolNotFound ? atk_table_get_type() : cast(GType)0;
@@ -367,7 +367,7 @@ interface Table
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectColumnDeleted(T)(T callback, Flag!"After" after = No.After);
+  gulong connectColumnDeleted(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `ColumnInserted` signal.
@@ -389,7 +389,7 @@ interface Table
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectColumnInserted(T)(T callback, Flag!"After" after = No.After);
+  gulong connectColumnInserted(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `ColumnReordered` signal.
@@ -408,7 +408,7 @@ interface Table
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectColumnReordered(T)(T callback, Flag!"After" after = No.After);
+  gulong connectColumnReordered(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `ModelChanged` signal.
@@ -427,7 +427,7 @@ interface Table
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectModelChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectModelChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `RowDeleted` signal.
@@ -449,7 +449,7 @@ interface Table
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowDeleted(T)(T callback, Flag!"After" after = No.After);
+  gulong connectRowDeleted(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `RowInserted` signal.
@@ -471,7 +471,7 @@ interface Table
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowInserted(T)(T callback, Flag!"After" after = No.After);
+  gulong connectRowInserted(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `RowReordered` signal.
@@ -490,7 +490,7 @@ interface Table
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowReordered(T)(T callback, Flag!"After" after = No.After);
+  gulong connectRowReordered(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [atk.table.Table]

@@ -36,26 +36,26 @@ class WindowHandle : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_window_handle_get_type != &gidSymbolNotFound ? gtk_window_handle_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WindowHandle self()
+  override WindowHandle self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class WindowHandle : gtk.widget.Widget
       Get builder for [gtk.window_handle.WindowHandle]
       Returns: New builder object
   */
-  static WindowHandleGidBuilder builder()
+  static WindowHandleGidBuilder builder() nothrow
   {
     return new WindowHandleGidBuilder;
   }
@@ -73,7 +73,7 @@ class WindowHandle : gtk.widget.Widget
       Get `child` property.
       Returns: The child widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -83,7 +83,7 @@ class WindowHandle : gtk.widget.Widget
       Params:
         propval = The child widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -92,7 +92,7 @@ class WindowHandle : gtk.widget.Widget
       Creates a new [gtk.window_handle.WindowHandle].
       Returns: a new [gtk.window_handle.WindowHandle].
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_handle_new();
@@ -103,7 +103,7 @@ class WindowHandle : gtk.widget.Widget
       Gets the child widget of self.
       Returns: the child widget of self
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_handle_get_child(cast(GtkWindowHandle*)this._cPtr);
@@ -117,7 +117,7 @@ class WindowHandle : gtk.widget.Widget
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     gtk_window_handle_set_child(cast(GtkWindowHandle*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -134,7 +134,7 @@ class WindowHandleGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The child widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -147,7 +147,7 @@ final class WindowHandleGidBuilder : WindowHandleGidBuilderImpl!WindowHandleGidB
       Create object from builder.
       Returns: New object
   */
-  WindowHandle build()
+  WindowHandle build() nothrow
   {
     return new WindowHandle(cast(void*)createGObject(WindowHandle._getGType), No.Take);
   }

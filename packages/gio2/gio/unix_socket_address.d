@@ -37,26 +37,26 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_unix_socket_address_get_type != &gidSymbolNotFound ? g_unix_socket_address_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UnixSocketAddress self()
+  override UnixSocketAddress self() nothrow
   {
     return this;
   }
@@ -65,7 +65,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
       Get builder for [gio.unix_socket_address.UnixSocketAddress]
       Returns: New builder object
   */
-  static UnixSocketAddressGidBuilder builder()
+  static UnixSocketAddressGidBuilder builder() nothrow
   {
     return new UnixSocketAddressGidBuilder;
   }
@@ -78,7 +78,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
         distinguishes between zero-padded and non-zero-padded
         abstract addresses.
   */
-  @property bool abstract_()
+  @property bool abstract_() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("abstract");
   }
@@ -87,7 +87,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
       Get `addressType` property.
       Returns: The type of Unix socket address.
   */
-  @property gio.types.UnixSocketAddressType addressType()
+  @property gio.types.UnixSocketAddressType addressType() nothrow
   {
     return getAddressType();
   }
@@ -96,7 +96,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
       Get `path` property.
       Returns: Unix socket path.
   */
-  @property string path()
+  @property string path() nothrow
   {
     return getPath();
   }
@@ -111,7 +111,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
         path = the socket path
       Returns: a new #GUnixSocketAddress
   */
-  this(string path)
+  this(string path) nothrow
   {
     GSocketAddress* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -129,7 +129,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
   
       Deprecated: Use [gio.unix_socket_address.UnixSocketAddress.newWithType].
   */
-  static gio.unix_socket_address.UnixSocketAddress newAbstract(string path)
+  static gio.unix_socket_address.UnixSocketAddress newAbstract(string path) nothrow
   {
     GSocketAddress* _cretval;
     int _pathLen;
@@ -180,7 +180,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
         type = a #GUnixSocketAddressType
       Returns: a new #GUnixSocketAddress
   */
-  static gio.unix_socket_address.UnixSocketAddress newWithType(string path, gio.types.UnixSocketAddressType type)
+  static gio.unix_socket_address.UnixSocketAddress newWithType(string path, gio.types.UnixSocketAddressType type) nothrow
   {
     GSocketAddress* _cretval;
     int _pathLen;
@@ -197,7 +197,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
       Checks if abstract UNIX domain socket names are supported.
       Returns: true if supported, false otherwise
   */
-  static bool abstractNamesSupported()
+  static bool abstractNamesSupported() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_unix_socket_address_abstract_names_supported();
@@ -208,7 +208,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
       Gets address's type.
       Returns: a #GUnixSocketAddressType
   */
-  gio.types.UnixSocketAddressType getAddressType()
+  gio.types.UnixSocketAddressType getAddressType() nothrow
   {
     GUnixSocketAddressType _cretval;
     _cretval = g_unix_socket_address_get_address_type(cast(GUnixSocketAddress*)this._cPtr);
@@ -222,7 +222,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
   
       Deprecated: Use [gio.unix_socket_address.UnixSocketAddress.getAddressType]
   */
-  bool getIsAbstract()
+  bool getIsAbstract() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_unix_socket_address_get_is_abstract(cast(GUnixSocketAddress*)this._cPtr);
@@ -238,7 +238,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
       of this string.
       Returns: the path for address
   */
-  string getPath()
+  string getPath() nothrow
   {
     const(char)* _cretval;
     _cretval = g_unix_socket_address_get_path(cast(GUnixSocketAddress*)this._cPtr);
@@ -252,7 +252,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
       For details, see [gio.unix_socket_address.UnixSocketAddress.getPath].
       Returns: the length of the path
   */
-  size_t getPathLen()
+  size_t getPathLen() nothrow
   {
     size_t _retval;
     _retval = g_unix_socket_address_get_path_len(cast(GUnixSocketAddress*)this._cPtr);
@@ -275,7 +275,7 @@ class UnixSocketAddressGidBuilderImpl(T) : gio.socket_address.SocketAddressGidBu
         distinguishes between zero-padded and non-zero-padded
         abstract addresses.
   */
-  T abstract_(bool propval)
+  T abstract_(bool propval) nothrow
   {
     return setProperty("abstract", propval);
   }
@@ -286,7 +286,7 @@ class UnixSocketAddressGidBuilderImpl(T) : gio.socket_address.SocketAddressGidBu
         propval = The type of Unix socket address.
       Returns: Builder instance for fluent chaining
   */
-  T addressType(gio.types.UnixSocketAddressType propval)
+  T addressType(gio.types.UnixSocketAddressType propval) nothrow
   {
     return setProperty("address-type", propval);
   }
@@ -297,7 +297,7 @@ class UnixSocketAddressGidBuilderImpl(T) : gio.socket_address.SocketAddressGidBu
         propval = Unix socket path.
       Returns: Builder instance for fluent chaining
   */
-  T path(string propval)
+  T path(string propval) nothrow
   {
     return setProperty("path", propval);
   }
@@ -310,7 +310,7 @@ final class UnixSocketAddressGidBuilder : UnixSocketAddressGidBuilderImpl!UnixSo
       Create object from builder.
       Returns: New object
   */
-  UnixSocketAddress build()
+  UnixSocketAddress build() nothrow
   {
     return new UnixSocketAddress(cast(void*)createGObject(UnixSocketAddress._getGType), Yes.Take);
   }

@@ -18,26 +18,26 @@ class MessagePartial : gmime.part.Part
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_message_partial_get_type != &gidSymbolNotFound ? g_mime_message_partial_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MessagePartial self()
+  override MessagePartial self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class MessagePartial : gmime.part.Part
       Get builder for [gmime.message_partial.MessagePartial]
       Returns: New builder object
   */
-  static MessagePartialGidBuilder builder()
+  static MessagePartialGidBuilder builder() nothrow
   {
     return new MessagePartialGidBuilder;
   }
@@ -60,7 +60,7 @@ class MessagePartial : gmime.part.Part
         total = total number of message/partial parts
       Returns: an empty MIME message/partial object.
   */
-  this(string id, int number, int total)
+  this(string id, int number, int total) nothrow
   {
     GMimeMessagePartial* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -77,7 +77,7 @@ class MessagePartial : gmime.part.Part
       Returns: a GMimeMessage object on success or null
         on fail.
   */
-  static gmime.message.Message reconstructMessage(gmime.message_partial.MessagePartial[] partials)
+  static gmime.message.Message reconstructMessage(gmime.message_partial.MessagePartial[] partials) nothrow
   {
     GMimeMessage* _cretval;
     size_t _num;
@@ -98,7 +98,7 @@ class MessagePartial : gmime.part.Part
       Gets the message/partial id parameter value.
       Returns: the message/partial id or null on fail.
   */
-  string getId()
+  string getId() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_message_partial_get_id(cast(GMimeMessagePartial*)this._cPtr);
@@ -110,7 +110,7 @@ class MessagePartial : gmime.part.Part
       Gets the message/partial part number.
       Returns: the message/partial part number or %-1 on fail.
   */
-  int getNumber()
+  int getNumber() nothrow
   {
     int _retval;
     _retval = g_mime_message_partial_get_number(cast(GMimeMessagePartial*)this._cPtr);
@@ -123,7 +123,7 @@ class MessagePartial : gmime.part.Part
       Returns: the total number of message/partial parts needed to
         reconstruct the original message or -1 on fail.
   */
-  int getTotal()
+  int getTotal() nothrow
   {
     int _retval;
     _retval = g_mime_message_partial_get_total(cast(GMimeMessagePartial*)this._cPtr);
@@ -143,7 +143,7 @@ final class MessagePartialGidBuilder : MessagePartialGidBuilderImpl!MessageParti
       Create object from builder.
       Returns: New object
   */
-  MessagePartial build()
+  MessagePartial build() nothrow
   {
     return new MessagePartial(cast(void*)createGObject(MessagePartial._getGType), Yes.Take);
   }

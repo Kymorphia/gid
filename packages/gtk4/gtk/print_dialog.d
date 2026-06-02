@@ -33,26 +33,26 @@ class PrintDialog : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_print_dialog_get_type != &gidSymbolNotFound ? gtk_print_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PrintDialog self()
+  override PrintDialog self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class PrintDialog : gobject.object.ObjectWrap
       Get builder for [gtk.print_dialog.PrintDialog]
       Returns: New builder object
   */
-  static PrintDialogGidBuilder builder()
+  static PrintDialogGidBuilder builder() nothrow
   {
     return new PrintDialogGidBuilder;
   }
@@ -71,7 +71,7 @@ class PrintDialog : gobject.object.ObjectWrap
       Returns: A label that may be shown on the accept button of a print dialog
         that is presented by [gtk.print_dialog.PrintDialog.setup].
   */
-  @property string acceptLabel()
+  @property string acceptLabel() nothrow
   {
     return getAcceptLabel();
   }
@@ -82,7 +82,7 @@ class PrintDialog : gobject.object.ObjectWrap
         propval = A label that may be shown on the accept button of a print dialog
           that is presented by [gtk.print_dialog.PrintDialog.setup].
   */
-  @property void acceptLabel(string propval)
+  @property void acceptLabel(string propval) nothrow
   {
     setAcceptLabel(propval);
   }
@@ -91,7 +91,7 @@ class PrintDialog : gobject.object.ObjectWrap
       Get `modal` property.
       Returns: Whether the print dialog is modal.
   */
-  @property bool modal()
+  @property bool modal() nothrow
   {
     return getModal();
   }
@@ -101,7 +101,7 @@ class PrintDialog : gobject.object.ObjectWrap
       Params:
         propval = Whether the print dialog is modal.
   */
-  @property void modal(bool propval)
+  @property void modal(bool propval) nothrow
   {
     setModal(propval);
   }
@@ -110,7 +110,7 @@ class PrintDialog : gobject.object.ObjectWrap
       Get `pageSetup` property.
       Returns: The page setup to use.
   */
-  @property gtk.page_setup.PageSetup pageSetup()
+  @property gtk.page_setup.PageSetup pageSetup() nothrow
   {
     return getPageSetup();
   }
@@ -120,7 +120,7 @@ class PrintDialog : gobject.object.ObjectWrap
       Params:
         propval = The page setup to use.
   */
-  @property void pageSetup(gtk.page_setup.PageSetup propval)
+  @property void pageSetup(gtk.page_setup.PageSetup propval) nothrow
   {
     setPageSetup(propval);
   }
@@ -129,7 +129,7 @@ class PrintDialog : gobject.object.ObjectWrap
       Get `printSettings` property.
       Returns: The print settings to use.
   */
-  @property gtk.print_settings.PrintSettings printSettings()
+  @property gtk.print_settings.PrintSettings printSettings() nothrow
   {
     return getPrintSettings();
   }
@@ -139,7 +139,7 @@ class PrintDialog : gobject.object.ObjectWrap
       Params:
         propval = The print settings to use.
   */
-  @property void printSettings(gtk.print_settings.PrintSettings propval)
+  @property void printSettings(gtk.print_settings.PrintSettings propval) nothrow
   {
     setPrintSettings(propval);
   }
@@ -149,7 +149,7 @@ class PrintDialog : gobject.object.ObjectWrap
       Returns: A title that may be shown on the print dialog that is
         presented by [gtk.print_dialog.PrintDialog.setup].
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -160,7 +160,7 @@ class PrintDialog : gobject.object.ObjectWrap
         propval = A title that may be shown on the print dialog that is
           presented by [gtk.print_dialog.PrintDialog.setup].
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -169,7 +169,7 @@ class PrintDialog : gobject.object.ObjectWrap
       Creates a new [gtk.print_dialog.PrintDialog] object.
       Returns: the new [gtk.print_dialog.PrintDialog]
   */
-  this()
+  this() nothrow
   {
     GtkPrintDialog* _cretval;
     _cretval = gtk_print_dialog_new();
@@ -181,7 +181,7 @@ class PrintDialog : gobject.object.ObjectWrap
       accept button of the print dialog.
       Returns: the accept label
   */
-  string getAcceptLabel()
+  string getAcceptLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_print_dialog_get_accept_label(cast(GtkPrintDialog*)this._cPtr);
@@ -195,7 +195,7 @@ class PrintDialog : gobject.object.ObjectWrap
       it is presented.
       Returns: whether the print dialog is modal
   */
-  bool getModal()
+  bool getModal() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_print_dialog_get_modal(cast(GtkPrintDialog*)this._cPtr);
@@ -206,7 +206,7 @@ class PrintDialog : gobject.object.ObjectWrap
       Returns the page setup.
       Returns: the page setup
   */
-  gtk.page_setup.PageSetup getPageSetup()
+  gtk.page_setup.PageSetup getPageSetup() nothrow
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_dialog_get_page_setup(cast(GtkPrintDialog*)this._cPtr);
@@ -218,7 +218,7 @@ class PrintDialog : gobject.object.ObjectWrap
       Returns the print settings for the print dialog.
       Returns: the settings
   */
-  gtk.print_settings.PrintSettings getPrintSettings()
+  gtk.print_settings.PrintSettings getPrintSettings() nothrow
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_dialog_get_print_settings(cast(GtkPrintDialog*)this._cPtr);
@@ -231,7 +231,7 @@ class PrintDialog : gobject.object.ObjectWrap
       print dialog.
       Returns: the title
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_print_dialog_get_title(cast(GtkPrintDialog*)this._cPtr);
@@ -254,14 +254,21 @@ class PrintDialog : gobject.object.ObjectWrap
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
   */
-  void print(gtk.window.Window parent = null, gtk.print_setup.PrintSetup setup = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void print(gtk.window.Window parent = null, gtk.print_setup.PrintSetup setup = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -284,14 +291,21 @@ class PrintDialog : gobject.object.ObjectWrap
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
   */
-  void printFile(gtk.window.Window parent, gtk.print_setup.PrintSetup setup, gio.file.File file, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void printFile(gtk.window.Window parent, gtk.print_setup.PrintSetup setup, gio.file.File file, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -355,7 +369,7 @@ class PrintDialog : gobject.object.ObjectWrap
       Params:
         acceptLabel = the new accept label
   */
-  void setAcceptLabel(string acceptLabel)
+  void setAcceptLabel(string acceptLabel) nothrow
   {
     const(char)* _acceptLabel = acceptLabel.toCString(No.Alloc);
     gtk_print_dialog_set_accept_label(cast(GtkPrintDialog*)this._cPtr, _acceptLabel);
@@ -369,7 +383,7 @@ class PrintDialog : gobject.object.ObjectWrap
       Params:
         modal = the new value
   */
-  void setModal(bool modal)
+  void setModal(bool modal) nothrow
   {
     gtk_print_dialog_set_modal(cast(GtkPrintDialog*)this._cPtr, modal);
   }
@@ -380,7 +394,7 @@ class PrintDialog : gobject.object.ObjectWrap
       Params:
         pageSetup = the new page setup
   */
-  void setPageSetup(gtk.page_setup.PageSetup pageSetup)
+  void setPageSetup(gtk.page_setup.PageSetup pageSetup) nothrow
   {
     gtk_print_dialog_set_page_setup(cast(GtkPrintDialog*)this._cPtr, pageSetup ? cast(GtkPageSetup*)pageSetup._cPtr(No.Dup) : null);
   }
@@ -391,7 +405,7 @@ class PrintDialog : gobject.object.ObjectWrap
       Params:
         printSettings = the new print settings
   */
-  void setPrintSettings(gtk.print_settings.PrintSettings printSettings)
+  void setPrintSettings(gtk.print_settings.PrintSettings printSettings) nothrow
   {
     gtk_print_dialog_set_print_settings(cast(GtkPrintDialog*)this._cPtr, printSettings ? cast(GtkPrintSettings*)printSettings._cPtr(No.Dup) : null);
   }
@@ -402,7 +416,7 @@ class PrintDialog : gobject.object.ObjectWrap
       Params:
         title = the new title
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_print_dialog_set_title(cast(GtkPrintDialog*)this._cPtr, _title);
@@ -428,14 +442,21 @@ class PrintDialog : gobject.object.ObjectWrap
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
   */
-  void setup(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void setup(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -478,7 +499,7 @@ class PrintDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           that is presented by [gtk.print_dialog.PrintDialog.setup].
       Returns: Builder instance for fluent chaining
   */
-  T acceptLabel(string propval)
+  T acceptLabel(string propval) nothrow
   {
     return setProperty("accept-label", propval);
   }
@@ -489,7 +510,7 @@ class PrintDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether the print dialog is modal.
       Returns: Builder instance for fluent chaining
   */
-  T modal(bool propval)
+  T modal(bool propval) nothrow
   {
     return setProperty("modal", propval);
   }
@@ -500,7 +521,7 @@ class PrintDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The page setup to use.
       Returns: Builder instance for fluent chaining
   */
-  T pageSetup(gtk.page_setup.PageSetup propval)
+  T pageSetup(gtk.page_setup.PageSetup propval) nothrow
   {
     return setProperty("page-setup", propval);
   }
@@ -511,7 +532,7 @@ class PrintDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The print settings to use.
       Returns: Builder instance for fluent chaining
   */
-  T printSettings(gtk.print_settings.PrintSettings propval)
+  T printSettings(gtk.print_settings.PrintSettings propval) nothrow
   {
     return setProperty("print-settings", propval);
   }
@@ -523,7 +544,7 @@ class PrintDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           presented by [gtk.print_dialog.PrintDialog.setup].
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -536,7 +557,7 @@ final class PrintDialogGidBuilder : PrintDialogGidBuilderImpl!PrintDialogGidBuil
       Create object from builder.
       Returns: New object
   */
-  PrintDialog build()
+  PrintDialog build() nothrow
   {
     return new PrintDialog(cast(void*)createGObject(PrintDialog._getGType), Yes.Take);
   }

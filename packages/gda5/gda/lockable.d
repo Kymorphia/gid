@@ -14,7 +14,7 @@ interface Lockable
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_lockable_get_type != &gidSymbolNotFound ? gda_lockable_get_type() : cast(GType)0;

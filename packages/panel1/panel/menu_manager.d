@@ -36,26 +36,26 @@ class MenuManager : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_menu_manager_get_type != &gidSymbolNotFound ? panel_menu_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MenuManager self()
+  override MenuManager self() nothrow
   {
     return this;
   }
@@ -64,13 +64,13 @@ class MenuManager : gobject.object.ObjectWrap
       Get builder for [panel.menu_manager.MenuManager]
       Returns: New builder object
   */
-  static MenuManagerGidBuilder builder()
+  static MenuManagerGidBuilder builder() nothrow
   {
     return new MenuManagerGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     PanelMenuManager* _cretval;
     _cretval = panel_menu_manager_new();
@@ -113,7 +113,7 @@ class MenuManager : gobject.object.ObjectWrap
       Returns: a #GMenu if successful; otherwise
           null and position is unset.
   */
-  gio.menu.Menu findItemById(string id, out uint position)
+  gio.menu.Menu findItemById(string id, out uint position) nothrow
   {
     GMenu* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -123,7 +123,7 @@ class MenuManager : gobject.object.ObjectWrap
   }
 
   /** */
-  gio.menu.Menu getMenuById(string menuId)
+  gio.menu.Menu getMenuById(string menuId) nothrow
   {
     GMenu* _cretval;
     const(char)* _menuId = menuId.toCString(No.Alloc);
@@ -136,7 +136,7 @@ class MenuManager : gobject.object.ObjectWrap
       Gets the known menu ids as a string array.
       Returns: 
   */
-  string[] getMenuIds()
+  string[] getMenuIds() nothrow
   {
     const(char*)* _cretval;
     _cretval = panel_menu_manager_get_menu_ids(cast(PanelMenuManager*)this._cPtr);
@@ -162,7 +162,7 @@ class MenuManager : gobject.object.ObjectWrap
         menuModel = the menu model to merge
       Returns: the merge-id which can be used with [panel.menu_manager.MenuManager.remove]
   */
-  uint merge(string menuId, gio.menu_model.MenuModel menuModel)
+  uint merge(string menuId, gio.menu_model.MenuModel menuModel) nothrow
   {
     uint _retval;
     const(char)* _menuId = menuId.toCString(No.Alloc);
@@ -178,7 +178,7 @@ class MenuManager : gobject.object.ObjectWrap
       Params:
         mergeId = A previously registered merge id
   */
-  void remove(uint mergeId)
+  void remove(uint mergeId) nothrow
   {
     panel_menu_manager_remove(cast(PanelMenuManager*)this._cPtr, mergeId);
   }
@@ -196,7 +196,7 @@ class MenuManager : gobject.object.ObjectWrap
         attribute = the attribute to change
         value = the new value for the attribute
   */
-  void setAttributeString(gio.menu.Menu menu, uint position, string attribute, string value)
+  void setAttributeString(gio.menu.Menu menu, uint position, string attribute, string value) nothrow
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -216,7 +216,7 @@ final class MenuManagerGidBuilder : MenuManagerGidBuilderImpl!MenuManagerGidBuil
       Create object from builder.
       Returns: New object
   */
-  MenuManager build()
+  MenuManager build() nothrow
   {
     return new MenuManager(cast(void*)createGObject(MenuManager._getGType), Yes.Take);
   }

@@ -24,32 +24,32 @@ class SecurityOrigin : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_security_origin_get_type != &gidSymbolNotFound ? webkit_security_origin_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SecurityOrigin self()
+  override SecurityOrigin self() nothrow
   {
     return this;
   }
@@ -65,7 +65,7 @@ class SecurityOrigin : gobject.boxed.Boxed
                  default port for protocol
       Returns: A #WebKitSecurityOrigin.
   */
-  this(string protocol, string host, ushort port)
+  this(string protocol, string host, ushort port) nothrow
   {
     WebKitSecurityOrigin* _cretval;
     const(char)* _protocol = protocol.toCString(No.Alloc);
@@ -85,7 +85,7 @@ class SecurityOrigin : gobject.boxed.Boxed
         uri = The URI for the new origin
       Returns: A #WebKitSecurityOrigin.
   */
-  static webkit.security_origin.SecurityOrigin newForUri(string uri)
+  static webkit.security_origin.SecurityOrigin newForUri(string uri) nothrow
   {
     WebKitSecurityOrigin* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -101,7 +101,7 @@ class SecurityOrigin : gobject.boxed.Boxed
       if its protocol does not require a host component.
       Returns: The host of the #WebKitSecurityOrigin
   */
-  string getHost()
+  string getHost() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_security_origin_get_host(cast(WebKitSecurityOrigin*)this._cPtr);
@@ -119,7 +119,7 @@ class SecurityOrigin : gobject.boxed.Boxed
       #WebKitSecurityOrigin constructed from either URI.
       Returns: The port of the #WebKitSecurityOrigin.
   */
-  ushort getPort()
+  ushort getPort() nothrow
   {
     ushort _retval;
     _retval = webkit_security_origin_get_port(cast(WebKitSecurityOrigin*)this._cPtr);
@@ -130,7 +130,7 @@ class SecurityOrigin : gobject.boxed.Boxed
       Gets the protocol of origin.
       Returns: The protocol of the #WebKitSecurityOrigin
   */
-  string getProtocol()
+  string getProtocol() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_security_origin_get_protocol(cast(WebKitSecurityOrigin*)this._cPtr);
@@ -146,7 +146,7 @@ class SecurityOrigin : gobject.boxed.Boxed
       null.
       Returns: a URI representing origin.
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = webkit_security_origin_to_string(cast(WebKitSecurityOrigin*)this._cPtr);

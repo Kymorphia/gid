@@ -82,7 +82,7 @@ interface ListModel
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_list_model_get_type != &gidSymbolNotFound ? g_list_model_get_type() : cast(GType)0;
@@ -104,7 +104,7 @@ interface ListModel
   *   position = the position of the item to fetch
   * Returns: the object at position.
   */
-  T getItem(T)(uint position)
+  T getItem(T)(uint position) nothrow
   {
     auto gobj = cast(GObject*)g_list_model_get_object(cast(GListModel*)(cast(gobject.object.ObjectWrap)this)._cPtr, position);
     return gobject.object.ObjectWrap._getDObject!T(gobj, Yes.Take);
@@ -210,7 +210,7 @@ interface ListModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectItemsChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectItemsChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gio.list_model.ListModel]

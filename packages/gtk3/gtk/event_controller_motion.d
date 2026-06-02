@@ -21,26 +21,26 @@ class EventControllerMotion : gtk.event_controller.EventController
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_event_controller_motion_get_type != &gidSymbolNotFound ? gtk_event_controller_motion_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EventControllerMotion self()
+  override EventControllerMotion self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class EventControllerMotion : gtk.event_controller.EventController
       Get builder for [gtk.event_controller_motion.EventControllerMotion]
       Returns: New builder object
   */
-  static EventControllerMotionGidBuilder builder()
+  static EventControllerMotionGidBuilder builder() nothrow
   {
     return new EventControllerMotionGidBuilder;
   }
@@ -62,7 +62,7 @@ class EventControllerMotion : gtk.event_controller.EventController
         widget = a #GtkWidget
       Returns: a new #GtkEventControllerMotion
   */
-  this(gtk.widget.Widget widget)
+  this(gtk.widget.Widget widget) nothrow
   {
     GtkEventController* _cretval;
     _cretval = gtk_event_controller_motion_new(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
@@ -88,7 +88,7 @@ class EventControllerMotion : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEnter(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEnter(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -96,7 +96,7 @@ class EventControllerMotion : gtk.event_controller.EventController
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.event_controller_motion.EventControllerMotion)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -111,7 +111,14 @@ class EventControllerMotion : gtk.event_controller.EventController
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.event_controller_motion.EventControllerMotion.enter");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -133,13 +140,13 @@ class EventControllerMotion : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLeave(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLeave(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.event_controller_motion.EventControllerMotion)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -148,7 +155,14 @@ class EventControllerMotion : gtk.event_controller.EventController
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.event_controller_motion.EventControllerMotion.leave");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -174,7 +188,7 @@ class EventControllerMotion : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMotion(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMotion(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -182,7 +196,7 @@ class EventControllerMotion : gtk.event_controller.EventController
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.event_controller_motion.EventControllerMotion)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -197,7 +211,14 @@ class EventControllerMotion : gtk.event_controller.EventController
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.event_controller_motion.EventControllerMotion.motion");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -217,7 +238,7 @@ final class EventControllerMotionGidBuilder : EventControllerMotionGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  EventControllerMotion build()
+  EventControllerMotion build() nothrow
   {
     return new EventControllerMotion(cast(void*)createGObject(EventControllerMotion._getGType), Yes.Take);
   }

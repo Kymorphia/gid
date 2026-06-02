@@ -27,26 +27,26 @@ class SnippetManager : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_snippet_manager_get_type != &gidSymbolNotFound ? gtk_source_snippet_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SnippetManager self()
+  override SnippetManager self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class SnippetManager : gobject.object.ObjectWrap
       Get builder for [gtksource.snippet_manager.SnippetManager]
       Returns: New builder object
   */
-  static SnippetManagerGidBuilder builder()
+  static SnippetManagerGidBuilder builder() nothrow
   {
     return new SnippetManagerGidBuilder;
   }
@@ -65,7 +65,7 @@ class SnippetManager : gobject.object.ObjectWrap
       Returns: a #GtkSourceSnippetManager which
           is owned by GtkSourceView library and must not be unref'd.
   */
-  static gtksource.snippet_manager.SnippetManager getDefault()
+  static gtksource.snippet_manager.SnippetManager getDefault() nothrow
   {
     GtkSourceSnippetManager* _cretval;
     _cretval = gtk_source_snippet_manager_get_default();
@@ -79,7 +79,7 @@ class SnippetManager : gobject.object.ObjectWrap
           containing a list of snippet files directories.
           The array is owned by lm and must not be modified.
   */
-  string[] getSearchPath()
+  string[] getSearchPath() nothrow
   {
     const(char*)* _cretval;
     _cretval = gtk_source_snippet_manager_get_search_path(cast(GtkSourceSnippetManager*)this._cPtr);
@@ -110,7 +110,7 @@ class SnippetManager : gobject.object.ObjectWrap
       Returns: a #GtkSourceSnippet or null if no
           matching snippet was found.
   */
-  gtksource.snippet.Snippet getSnippet(string group, string languageId, string trigger)
+  gtksource.snippet.Snippet getSnippet(string group, string languageId, string trigger) nothrow
   {
     GtkSourceSnippet* _cretval;
     const(char)* _group = group.toCString(No.Alloc);
@@ -128,7 +128,7 @@ class SnippetManager : gobject.object.ObjectWrap
       known to the snippet manager.
       Returns: a [gio.list_model.ListModel] of [gtksource.snippet.Snippet]
   */
-  gio.list_model.ListModel listAll()
+  gio.list_model.ListModel listAll() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_source_snippet_manager_list_all(cast(GtkSourceSnippetManager*)this._cPtr);
@@ -143,7 +143,7 @@ class SnippetManager : gobject.object.ObjectWrap
       owned by self and should never be freed by the caller.
       Returns: An array of strings which should be freed with [glib.global.gfree].
   */
-  string[] listGroups()
+  string[] listGroups() nothrow
   {
     const(char*)* _cretval;
     _cretval = gtk_source_snippet_manager_list_groups(cast(GtkSourceSnippetManager*)this._cPtr);
@@ -179,7 +179,7 @@ class SnippetManager : gobject.object.ObjectWrap
         triggerPrefix = a prefix for a trigger to activate
       Returns: a #GListModel of #GtkSourceSnippet.
   */
-  gio.list_model.ListModel listMatching(string group = null, string languageId = null, string triggerPrefix = null)
+  gio.list_model.ListModel listMatching(string group = null, string languageId = null, string triggerPrefix = null) nothrow
   {
     GListModel* _cretval;
     const(char)* _group = group.toCString(No.Alloc);
@@ -205,7 +205,7 @@ class SnippetManager : gobject.object.ObjectWrap
         dirs = a null-terminated array of
             strings or null.
   */
-  void setSearchPath(string[] dirs = null)
+  void setSearchPath(string[] dirs = null) nothrow
   {
     char*[] _tmpdirs;
     foreach (s; dirs)
@@ -229,7 +229,7 @@ final class SnippetManagerGidBuilder : SnippetManagerGidBuilderImpl!SnippetManag
       Create object from builder.
       Returns: New object
   */
-  SnippetManager build()
+  SnippetManager build() nothrow
   {
     return new SnippetManager(cast(void*)createGObject(SnippetManager._getGType), No.Take);
   }

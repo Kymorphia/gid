@@ -18,11 +18,8 @@ class TypeFind
   GstTypeFind _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gst.type_find.TypeFind");
-
     _cInstance = *cast(GstTypeFind*)ptr;
 
     if (take)
@@ -30,7 +27,7 @@ class TypeFind
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -42,7 +39,7 @@ class TypeFind
       Get `peekFunc` field.
       Returns: Method to peek data.
   */
-  @property PeekFuncFuncType peekFunc()
+  @property PeekFuncFuncType peekFunc() nothrow
   {
     return (cast(GstTypeFind*)this._cPtr).peekFunc;
   }
@@ -54,7 +51,7 @@ class TypeFind
       Get `suggestFunc` field.
       Returns: Method to suggest #GstCaps with a given probability.
   */
-  @property SuggestFuncFuncType suggestFunc()
+  @property SuggestFuncFuncType suggestFunc() nothrow
   {
     return (cast(GstTypeFind*)this._cPtr).suggestFunc;
   }
@@ -66,7 +63,7 @@ class TypeFind
       Get `getLengthFunc` field.
       Returns: Returns the length of current data.
   */
-  @property GetLengthFuncFuncType getLengthFunc()
+  @property GetLengthFuncFuncType getLengthFunc() nothrow
   {
     return (cast(GstTypeFind*)this._cPtr).getLengthFunc;
   }
@@ -75,7 +72,7 @@ class TypeFind
       Get the length of the data stream.
       Returns: The length of the data stream, or 0 if it is not available.
   */
-  ulong getLength()
+  ulong getLength() nothrow
   {
     ulong _retval;
     _retval = gst_type_find_get_length(cast(GstTypeFind*)this._cPtr);
@@ -95,7 +92,7 @@ class TypeFind
       Returns: the
             requested data, or null if that data is not available.
   */
-  const(ubyte)* peek(long offset, uint size)
+  const(ubyte)* peek(long offset, uint size) nothrow
   {
     auto _retval = gst_type_find_peek(cast(GstTypeFind*)this._cPtr, offset, size);
     return _retval;
@@ -111,7 +108,7 @@ class TypeFind
         probability = The probability in percent that the suggestion is right
         caps = The fixed #GstCaps to suggest
   */
-  void suggest(uint probability, gst.caps.Caps caps)
+  void suggest(uint probability, gst.caps.Caps caps) nothrow
   {
     gst_type_find_suggest(cast(GstTypeFind*)this._cPtr, probability, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
   }
@@ -127,7 +124,7 @@ class TypeFind
         probability = The probability in percent that the suggestion is right
         mediaType = the media type of the suggested caps
   */
-  void suggestEmptySimple(uint probability, string mediaType)
+  void suggestEmptySimple(uint probability, string mediaType) nothrow
   {
     const(char)* _mediaType = mediaType.toCString(No.Alloc);
     gst_type_find_suggest_empty_simple(cast(GstTypeFind*)this._cPtr, probability, _mediaType);
@@ -149,13 +146,20 @@ class TypeFind
                           succeeds
       Returns: true on success, false otherwise
   */
-  static bool register(gst.plugin.Plugin plugin, string name, uint rank, gst.types.TypeFindFunction func, string extensions = null, gst.caps.Caps possibleCaps = null)
+  static bool register(gst.plugin.Plugin plugin, string name, uint rank, gst.types.TypeFindFunction func, string extensions = null, gst.caps.Caps possibleCaps = null) nothrow
   {
-    extern(C) void _funcCallback(GstTypeFind* find, void* userData)
+    extern(C) void _funcCallback(GstTypeFind* find, void* userData) nothrow
     {
       auto _dlg = cast(gst.types.TypeFindFunction*)userData;
 
-      (*_dlg)(find ? new gst.type_find.TypeFind(cast(void*)find, No.Take) : null);
+      try
+      {
+        (*_dlg)(find ? new gst.type_find.TypeFind(cast(void*)find, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.TypeFindFunction");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     bool _retval;

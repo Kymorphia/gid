@@ -60,26 +60,26 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_app_sink_get_type != &gidSymbolNotFound ? gst_app_sink_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AppSink self()
+  override AppSink self() nothrow
   {
     return this;
   }
@@ -88,61 +88,61 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Get builder for [gstapp.app_sink.AppSink]
       Returns: New builder object
   */
-  static AppSinkGidBuilder builder()
+  static AppSinkGidBuilder builder() nothrow
   {
     return new AppSinkGidBuilder;
   }
 
   /** */
-  @property bool bufferList()
+  @property bool bufferList() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("buffer-list");
   }
 
   /** */
-  @property void bufferList(bool propval)
+  @property void bufferList(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("buffer-list", propval);
   }
 
   /** */
-  @property gst.caps.Caps caps()
+  @property gst.caps.Caps caps() nothrow
   {
     return getCaps();
   }
 
   /** */
-  @property void caps(gst.caps.Caps propval)
+  @property void caps(gst.caps.Caps propval) nothrow
   {
     setCaps(propval);
   }
 
   /** */
-  @property bool drop()
+  @property bool drop() nothrow
   {
     return getDrop();
   }
 
   /** */
-  @property void drop(bool propval)
+  @property void drop(bool propval) nothrow
   {
     setDrop(propval);
   }
 
   /** */
-  @property bool emitSignals()
+  @property bool emitSignals() nothrow
   {
     return getEmitSignals();
   }
 
   /** */
-  @property void emitSignals(bool propval)
+  @property void emitSignals(bool propval) nothrow
   {
     setEmitSignals(propval);
   }
 
   /** */
-  @property bool eos()
+  @property bool eos() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("eos");
   }
@@ -151,7 +151,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Get `maxBuffers` property.
       Returns: Maximum amount of buffers in the queue (0 = unlimited).
   */
-  @property uint maxBuffers()
+  @property uint maxBuffers() nothrow
   {
     return getMaxBuffers();
   }
@@ -161,7 +161,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         propval = Maximum amount of buffers in the queue (0 = unlimited).
   */
-  @property void maxBuffers(uint propval)
+  @property void maxBuffers(uint propval) nothrow
   {
     setMaxBuffers(propval);
   }
@@ -170,7 +170,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Get `maxBytes` property.
       Returns: Maximum amount of bytes in the queue (0 = unlimited)
   */
-  @property ulong maxBytes()
+  @property ulong maxBytes() nothrow
   {
     return getMaxBytes();
   }
@@ -180,7 +180,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         propval = Maximum amount of bytes in the queue (0 = unlimited)
   */
-  @property void maxBytes(ulong propval)
+  @property void maxBytes(ulong propval) nothrow
   {
     setMaxBytes(propval);
   }
@@ -189,7 +189,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Get `maxTime` property.
       Returns: Maximum total duration of data in the queue (0 = unlimited)
   */
-  @property ulong maxTime()
+  @property ulong maxTime() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("max-time");
   }
@@ -199,7 +199,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         propval = Maximum total duration of data in the queue (0 = unlimited)
   */
-  @property void maxTime(ulong propval)
+  @property void maxTime(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("max-time", propval);
   }
@@ -211,7 +211,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         In cases where it is uncertain if an @appsink will have a consumer for its buffers
         when it receives an EOS, set to false to ensure that the @appsink will not hang.
   */
-  @property bool waitOnEos()
+  @property bool waitOnEos() nothrow
   {
     return getWaitOnEos();
   }
@@ -224,7 +224,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
           In cases where it is uncertain if an @appsink will have a consumer for its buffers
           when it receives an EOS, set to false to ensure that the @appsink will not hang.
   */
-  @property void waitOnEos(bool propval)
+  @property void waitOnEos(bool propval) nothrow
   {
     setWaitOnEos(propval);
   }
@@ -235,7 +235,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Check if appsink supports buffer lists.
       Returns: true if appsink supports buffer lists.
   */
-  bool getBufferListSupport()
+  bool getBufferListSupport() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_app_sink_get_buffer_list_support(cast(GstAppSink*)this._cPtr);
@@ -246,7 +246,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Get the configured caps on appsink.
       Returns: the #GstCaps accepted by the sink. gst_caps_unref() after usage.
   */
-  gst.caps.Caps getCaps()
+  gst.caps.Caps getCaps() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_app_sink_get_caps(cast(GstAppSink*)this._cPtr);
@@ -260,7 +260,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Returns: true if appsink is dropping old buffers when the queue is
         filled.
   */
-  bool getDrop()
+  bool getDrop() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_app_sink_get_drop(cast(GstAppSink*)this._cPtr);
@@ -272,7 +272,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Returns: true if appsink is emitting the "new-preroll" and "new-sample"
         signals.
   */
-  bool getEmitSignals()
+  bool getEmitSignals() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_app_sink_get_emit_signals(cast(GstAppSink*)this._cPtr);
@@ -283,7 +283,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Get the maximum amount of buffers that can be queued in appsink.
       Returns: The maximum amount of buffers that can be queued.
   */
-  uint getMaxBuffers()
+  uint getMaxBuffers() nothrow
   {
     uint _retval;
     _retval = gst_app_sink_get_max_buffers(cast(GstAppSink*)this._cPtr);
@@ -294,7 +294,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Get the maximum total size, in bytes, that can be queued in appsink.
       Returns: The maximum amount of bytes that can be queued
   */
-  ulong getMaxBytes()
+  ulong getMaxBytes() nothrow
   {
     ulong _retval;
     _retval = gst_app_sink_get_max_bytes(cast(GstAppSink*)this._cPtr);
@@ -305,7 +305,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Get the maximum total duration that can be queued in appsink.
       Returns: The maximum total duration that can be queued.
   */
-  gst.types.ClockTime getMaxTime()
+  gst.types.ClockTime getMaxTime() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_app_sink_get_max_time(cast(GstAppSink*)this._cPtr);
@@ -318,7 +318,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Returns: true if appsink will wait for all buffers to be consumed when an
         EOS is received.
   */
-  bool getWaitOnEos()
+  bool getWaitOnEos() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_app_sink_get_wait_on_eos(cast(GstAppSink*)this._cPtr);
@@ -333,7 +333,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       PLAYING state.
       Returns: true if no more samples can be pulled and the appsink is EOS.
   */
-  bool isEos()
+  bool isEos() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_app_sink_is_eos(cast(GstAppSink*)this._cPtr);
@@ -362,7 +362,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Returns: a #GstSample or NULL when the appsink is stopped or EOS.
                  Call gst_sample_unref() after usage.
   */
-  gst.sample.Sample pullPreroll()
+  gst.sample.Sample pullPreroll() nothrow
   {
     GstSample* _cretval;
     _cretval = gst_app_sink_pull_preroll(cast(GstAppSink*)this._cPtr);
@@ -385,7 +385,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Returns: a #GstSample or NULL when the appsink is stopped or EOS.
                  Call gst_sample_unref() after usage.
   */
-  gst.sample.Sample pullSample()
+  gst.sample.Sample pullSample() nothrow
   {
     GstSample* _cretval;
     _cretval = gst_app_sink_pull_sample(cast(GstAppSink*)this._cPtr);
@@ -402,7 +402,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         enableLists = enable or disable buffer list support
   */
-  void setBufferListSupport(bool enableLists)
+  void setBufferListSupport(bool enableLists) nothrow
   {
     gst_app_sink_set_buffer_list_support(cast(GstAppSink*)this._cPtr, enableLists);
   }
@@ -416,7 +416,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         caps = caps to set
   */
-  void setCaps(gst.caps.Caps caps = null)
+  void setCaps(gst.caps.Caps caps = null) nothrow
   {
     gst_app_sink_set_caps(cast(GstAppSink*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
   }
@@ -428,7 +428,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         drop = the new state
   */
-  void setDrop(bool drop)
+  void setDrop(bool drop) nothrow
   {
     gst_app_sink_set_drop(cast(GstAppSink*)this._cPtr, drop);
   }
@@ -441,7 +441,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         emit = the new state
   */
-  void setEmitSignals(bool emit)
+  void setEmitSignals(bool emit) nothrow
   {
     gst_app_sink_set_emit_signals(cast(GstAppSink*)this._cPtr, emit);
   }
@@ -455,7 +455,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         max = the maximum number of buffers to queue
   */
-  void setMaxBuffers(uint max)
+  void setMaxBuffers(uint max) nothrow
   {
     gst_app_sink_set_max_buffers(cast(GstAppSink*)this._cPtr, max);
   }
@@ -469,7 +469,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         max = the maximum total size of buffers to queue, in bytes
   */
-  void setMaxBytes(ulong max)
+  void setMaxBytes(ulong max) nothrow
   {
     gst_app_sink_set_max_bytes(cast(GstAppSink*)this._cPtr, max);
   }
@@ -483,7 +483,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         max = the maximum total duration to queue
   */
-  void setMaxTime(gst.types.ClockTime max)
+  void setMaxTime(gst.types.ClockTime max) nothrow
   {
     gst_app_sink_set_max_time(cast(GstAppSink*)this._cPtr, max);
   }
@@ -494,7 +494,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         wait = the new state
   */
-  void setWaitOnEos(bool wait)
+  void setWaitOnEos(bool wait) nothrow
   {
     gst_app_sink_set_wait_on_eos(cast(GstAppSink*)this._cPtr, wait);
   }
@@ -525,7 +525,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Returns: a #GstSample or NULL when the appsink is stopped or EOS or the timeout expires.
                  Call gst_sample_unref() after usage.
   */
-  gst.sample.Sample tryPullPreroll(gst.types.ClockTime timeout)
+  gst.sample.Sample tryPullPreroll(gst.types.ClockTime timeout) nothrow
   {
     GstSample* _cretval;
     _cretval = gst_app_sink_try_pull_preroll(cast(GstAppSink*)this._cPtr, timeout);
@@ -552,7 +552,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Returns: a #GstSample or NULL when the appsink is stopped or EOS or the timeout expires.
                  Call gst_sample_unref() after usage.
   */
-  gst.sample.Sample tryPullSample(gst.types.ClockTime timeout)
+  gst.sample.Sample tryPullSample(gst.types.ClockTime timeout) nothrow
   {
     GstSample* _cretval;
     _cretval = gst_app_sink_try_pull_sample(cast(GstAppSink*)this._cPtr, timeout);
@@ -576,13 +576,13 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEos(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEos(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_sink.AppSink)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -591,7 +591,14 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstapp.app_sink.AppSink.eos");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -624,22 +631,30 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNewPreroll(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNewPreroll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == gst.types.FlowReturn)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_sink.AppSink)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gst.types.FlowReturn _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstapp.app_sink.AppSink.newPreroll");
+      }
 
       setVal!(gst.types.FlowReturn)(_returnValue, _retval);
     }
@@ -674,22 +689,30 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNewSample(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNewSample(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == gst.types.FlowReturn)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_sink.AppSink)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gst.types.FlowReturn _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstapp.app_sink.AppSink.newSample");
+      }
 
       setVal!(gst.types.FlowReturn)(_returnValue, _retval);
     }
@@ -730,22 +753,30 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNewSerializedEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNewSerializedEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_sink.AppSink)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstapp.app_sink.AppSink.newSerializedEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -775,18 +806,19 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectProposeAllocation(T)(T callback, Flag!"After" after = No.After)
+  gulong connectProposeAllocation(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gst.query.Query)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstapp.app_sink.AppSink)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -794,7 +826,14 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstapp.app_sink.AppSink.proposeAllocation");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -836,22 +875,30 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPullPreroll(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPullPreroll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == gst.sample.Sample)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_sink.AppSink)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gst.sample.Sample _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstapp.app_sink.AppSink.pullPreroll");
+      }
 
       setVal!(gst.sample.Sample)(_returnValue, _retval);
     }
@@ -889,22 +936,30 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPullSample(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPullSample(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == gst.sample.Sample)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_sink.AppSink)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gst.sample.Sample _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstapp.app_sink.AppSink.pullSample");
+      }
 
       setVal!(gst.sample.Sample)(_returnValue, _retval);
     }
@@ -952,18 +1007,19 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTryPullObject(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTryPullObject(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == gst.mini_object.MiniObject)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == ulong)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstapp.app_sink.AppSink)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gst.mini_object.MiniObject _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -971,7 +1027,14 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstapp.app_sink.AppSink.tryPullObject");
+      }
 
       setVal!(gst.mini_object.MiniObject)(_returnValue, _retval);
     }
@@ -1017,18 +1080,19 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTryPullPreroll(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTryPullPreroll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == gst.sample.Sample)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == ulong)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstapp.app_sink.AppSink)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gst.sample.Sample _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1036,7 +1100,14 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstapp.app_sink.AppSink.tryPullPreroll");
+      }
 
       setVal!(gst.sample.Sample)(_returnValue, _retval);
     }
@@ -1077,18 +1148,19 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTryPullSample(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTryPullSample(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == gst.sample.Sample)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == ulong)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstapp.app_sink.AppSink)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gst.sample.Sample _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1096,7 +1168,14 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstapp.app_sink.AppSink.tryPullSample");
+      }
 
       setVal!(gst.sample.Sample)(_returnValue, _retval);
     }
@@ -1113,25 +1192,25 @@ class AppSinkGidBuilderImpl(T) : gstbase.base_sink.BaseSinkGidBuilderImpl!T, gst
   mixin URIHandlerGidBuilderT!();
 
   /** */
-  T bufferList(bool propval)
+  T bufferList(bool propval) nothrow
   {
     return setProperty("buffer-list", propval);
   }
 
   /** */
-  T caps(gst.caps.Caps propval)
+  T caps(gst.caps.Caps propval) nothrow
   {
     return setProperty("caps", propval);
   }
 
   /** */
-  T drop(bool propval)
+  T drop(bool propval) nothrow
   {
     return setProperty("drop", propval);
   }
 
   /** */
-  T emitSignals(bool propval)
+  T emitSignals(bool propval) nothrow
   {
     return setProperty("emit-signals", propval);
   }
@@ -1142,7 +1221,7 @@ class AppSinkGidBuilderImpl(T) : gstbase.base_sink.BaseSinkGidBuilderImpl!T, gst
         propval = Maximum amount of buffers in the queue (0 = unlimited).
       Returns: Builder instance for fluent chaining
   */
-  T maxBuffers(uint propval)
+  T maxBuffers(uint propval) nothrow
   {
     return setProperty("max-buffers", propval);
   }
@@ -1153,7 +1232,7 @@ class AppSinkGidBuilderImpl(T) : gstbase.base_sink.BaseSinkGidBuilderImpl!T, gst
         propval = Maximum amount of bytes in the queue (0 = unlimited)
       Returns: Builder instance for fluent chaining
   */
-  T maxBytes(ulong propval)
+  T maxBytes(ulong propval) nothrow
   {
     return setProperty("max-bytes", propval);
   }
@@ -1164,7 +1243,7 @@ class AppSinkGidBuilderImpl(T) : gstbase.base_sink.BaseSinkGidBuilderImpl!T, gst
         propval = Maximum total duration of data in the queue (0 = unlimited)
       Returns: Builder instance for fluent chaining
   */
-  T maxTime(ulong propval)
+  T maxTime(ulong propval) nothrow
   {
     return setProperty("max-time", propval);
   }
@@ -1178,7 +1257,7 @@ class AppSinkGidBuilderImpl(T) : gstbase.base_sink.BaseSinkGidBuilderImpl!T, gst
           when it receives an EOS, set to false to ensure that the @appsink will not hang.
       Returns: Builder instance for fluent chaining
   */
-  T waitOnEos(bool propval)
+  T waitOnEos(bool propval) nothrow
   {
     return setProperty("wait-on-eos", propval);
   }
@@ -1191,7 +1270,7 @@ final class AppSinkGidBuilder : AppSinkGidBuilderImpl!AppSinkGidBuilder
       Create object from builder.
       Returns: New object
   */
-  AppSink build()
+  AppSink build() nothrow
   {
     return new AppSink(cast(void*)createGObject(AppSink._getGType), No.Take);
   }

@@ -32,7 +32,7 @@ template NetworkMonitorT()
         See [gio.network_monitor.NetworkMonitor.getConnectivity] and
         #GNetworkConnectivity for more details.
   */
-  @property gio.types.NetworkConnectivity connectivity()
+  @property gio.types.NetworkConnectivity connectivity() nothrow
   {
     return getConnectivity();
   }
@@ -57,7 +57,7 @@ template NetworkMonitorT()
         
         See also #GNetworkMonitor::network-changed.
   */
-  @property bool networkAvailable()
+  @property bool networkAvailable() nothrow
   {
     return getNetworkAvailable();
   }
@@ -86,7 +86,7 @@ template NetworkMonitorT()
         
         See also #GNetworkMonitor:network-available.
   */
-  @property bool networkMetered()
+  @property bool networkMetered() nothrow
   {
     return getNetworkMetered();
   }
@@ -144,14 +144,21 @@ template NetworkMonitorT()
         callback = a #GAsyncReadyCallback
               to call when the request is satisfied
   */
-  override void canReachAsync(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  override void canReachAsync(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -199,7 +206,7 @@ template NetworkMonitorT()
       back to their "offline" behavior if the connection attempt fails.
       Returns: the network connectivity state
   */
-  override gio.types.NetworkConnectivity getConnectivity()
+  override gio.types.NetworkConnectivity getConnectivity() nothrow
   {
     GNetworkConnectivity _cretval;
     _cretval = g_network_monitor_get_connectivity(cast(GNetworkMonitor*)this._cPtr);
@@ -214,7 +221,7 @@ template NetworkMonitorT()
       reachable. See #GNetworkMonitor:network-available for more details.
       Returns: whether the network is available
   */
-  override bool getNetworkAvailable()
+  override bool getNetworkAvailable() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_network_monitor_get_network_available(cast(GNetworkMonitor*)this._cPtr);
@@ -226,7 +233,7 @@ template NetworkMonitorT()
       See #GNetworkMonitor:network-metered for more details.
       Returns: whether the connection is metered
   */
-  override bool getNetworkMetered()
+  override bool getNetworkMetered() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_network_monitor_get_network_metered(cast(GNetworkMonitor*)this._cPtr);
@@ -250,14 +257,14 @@ template NetworkMonitorT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNetworkChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNetworkChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.network_monitor.NetworkMonitor)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -269,7 +276,14 @@ template NetworkMonitorT()
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.network_monitor.NetworkMonitor.networkChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

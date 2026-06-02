@@ -20,26 +20,26 @@ class NoOpObjectFactory : atk.object_factory.ObjectFactory
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_no_op_object_factory_get_type != &gidSymbolNotFound ? atk_no_op_object_factory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NoOpObjectFactory self()
+  override NoOpObjectFactory self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class NoOpObjectFactory : atk.object_factory.ObjectFactory
       Get builder for [atk.no_op_object_factory.NoOpObjectFactory]
       Returns: New builder object
   */
-  static NoOpObjectFactoryGidBuilder builder()
+  static NoOpObjectFactoryGidBuilder builder() nothrow
   {
     return new NoOpObjectFactoryGidBuilder;
   }
@@ -58,7 +58,7 @@ class NoOpObjectFactory : atk.object_factory.ObjectFactory
       (non-functioning) #AtkObjects.
       Returns: an instance of an #AtkObjectFactory
   */
-  this()
+  this() nothrow
   {
     AtkObjectFactory* _cretval;
     _cretval = atk_no_op_object_factory_new();
@@ -78,7 +78,7 @@ final class NoOpObjectFactoryGidBuilder : NoOpObjectFactoryGidBuilderImpl!NoOpOb
       Create object from builder.
       Returns: New object
   */
-  NoOpObjectFactory build()
+  NoOpObjectFactory build() nothrow
   {
     return new NoOpObjectFactory(cast(void*)createGObject(NoOpObjectFactory._getGType), Yes.Take);
   }

@@ -15,7 +15,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgtk-3.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // AboutDialog
   GType function() c_gtk_about_dialog_get_type; ///

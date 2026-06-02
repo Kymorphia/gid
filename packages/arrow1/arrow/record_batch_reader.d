@@ -18,26 +18,26 @@ class RecordBatchReader : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_record_batch_reader_get_type != &gidSymbolNotFound ? garrow_record_batch_reader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RecordBatchReader self()
+  override RecordBatchReader self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class RecordBatchReader : gobject.object.ObjectWrap
       Get builder for [arrow.record_batch_reader.RecordBatchReader]
       Returns: New builder object
   */
-  static RecordBatchReaderGidBuilder builder()
+  static RecordBatchReaderGidBuilder builder() nothrow
   {
     return new RecordBatchReaderGidBuilder;
   }
@@ -99,7 +99,7 @@ class RecordBatchReader : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.schema.Schema getSchema()
+  arrow.schema.Schema getSchema() nothrow
   {
     GArrowSchema* _cretval;
     _cretval = garrow_record_batch_reader_get_schema(cast(GArrowRecordBatchReader*)this._cPtr);
@@ -108,7 +108,7 @@ class RecordBatchReader : gobject.object.ObjectWrap
   }
 
   /** */
-  gobject.object.ObjectWrap[] getSources()
+  gobject.object.ObjectWrap[] getSources() nothrow
   {
     GList* _cretval;
     _cretval = garrow_record_batch_reader_get_sources(cast(GArrowRecordBatchReader*)this._cPtr);
@@ -158,13 +158,13 @@ class RecordBatchReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
 {
 
   /** */
-  T recordBatchReader(void* propval)
+  T recordBatchReader(void* propval) nothrow
   {
     return setProperty("record-batch-reader", propval);
   }
 
   /** */
-  T sources(void* propval)
+  T sources(void* propval) nothrow
   {
     return setProperty("sources", propval);
   }
@@ -177,7 +177,7 @@ final class RecordBatchReaderGidBuilder : RecordBatchReaderGidBuilderImpl!Record
       Create object from builder.
       Returns: New object
   */
-  RecordBatchReader build()
+  RecordBatchReader build() nothrow
   {
     return new RecordBatchReader(cast(void*)createGObject(RecordBatchReader._getGType), Yes.Take);
   }

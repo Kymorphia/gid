@@ -14,7 +14,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libharfbuzz-gobject.so.0", "libharfbuzz.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // Blob
   GType function() c_hb_gobject_blob_get_type; ///

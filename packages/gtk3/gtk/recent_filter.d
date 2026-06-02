@@ -66,26 +66,26 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_recent_filter_get_type != &gidSymbolNotFound ? gtk_recent_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RecentFilter self()
+  override RecentFilter self() nothrow
   {
     return this;
   }
@@ -94,7 +94,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
       Get builder for [gtk.recent_filter.RecentFilter]
       Returns: New builder object
   */
-  static RecentFilterGidBuilder builder()
+  static RecentFilterGidBuilder builder() nothrow
   {
     return new RecentFilterGidBuilder;
   }
@@ -114,7 +114,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
       ```
       Returns: a new #GtkRecentFilter
   */
-  this()
+  this() nothrow
   {
     GtkRecentFilter* _cretval;
     _cretval = gtk_recent_filter_new();
@@ -128,7 +128,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
       Params:
         days = number of days
   */
-  void addAge(int days)
+  void addAge(int days) nothrow
   {
     gtk_recent_filter_add_age(cast(GtkRecentFilter*)this._cPtr, days);
   }
@@ -140,7 +140,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
       Params:
         application = an application name
   */
-  void addApplication(string application)
+  void addApplication(string application) nothrow
   {
     const(char)* _application = application.toCString(No.Alloc);
     gtk_recent_filter_add_application(cast(GtkRecentFilter*)this._cPtr, _application);
@@ -159,14 +159,21 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
         func = callback function; if the function returns true, then
             the file will be displayed.
   */
-  void addCustom(gtk.types.RecentFilterFlags needed, gtk.types.RecentFilterFunc func)
+  void addCustom(gtk.types.RecentFilterFlags needed, gtk.types.RecentFilterFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(const(GtkRecentFilterInfo)* filterInfo, void* userData)
+    extern(C) gboolean _funcCallback(const(GtkRecentFilterInfo)* filterInfo, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.RecentFilterFunc*)userData;
 
-      _dretval = (*_dlg)(filterInfo ? new gtk.recent_filter_info.RecentFilterInfo(cast(void*)filterInfo, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(filterInfo ? new gtk.recent_filter_info.RecentFilterInfo(cast(void*)filterInfo, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.RecentFilterFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -184,7 +191,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
       Params:
         group = a group name
   */
-  void addGroup(string group)
+  void addGroup(string group) nothrow
   {
     const(char)* _group = group.toCString(No.Alloc);
     gtk_recent_filter_add_group(cast(GtkRecentFilter*)this._cPtr, _group);
@@ -196,7 +203,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
       Params:
         mimeType = a MIME type
   */
-  void addMimeType(string mimeType)
+  void addMimeType(string mimeType) nothrow
   {
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
     gtk_recent_filter_add_mime_type(cast(GtkRecentFilter*)this._cPtr, _mimeType);
@@ -209,7 +216,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
       Params:
         pattern = a file pattern
   */
-  void addPattern(string pattern)
+  void addPattern(string pattern) nothrow
   {
     const(char)* _pattern = pattern.toCString(No.Alloc);
     gtk_recent_filter_add_pattern(cast(GtkRecentFilter*)this._cPtr, _pattern);
@@ -219,7 +226,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
       Adds a rule allowing image files in the formats supported
       by GdkPixbuf.
   */
-  void addPixbufFormats()
+  void addPixbufFormats() nothrow
   {
     gtk_recent_filter_add_pixbuf_formats(cast(GtkRecentFilter*)this._cPtr);
   }
@@ -240,7 +247,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
             about a recently used resource
       Returns: true if the file should be displayed
   */
-  bool filter(gtk.recent_filter_info.RecentFilterInfo filterInfo)
+  bool filter(gtk.recent_filter_info.RecentFilterInfo filterInfo) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_recent_filter_filter(cast(GtkRecentFilter*)this._cPtr, filterInfo ? cast(const(GtkRecentFilterInfo)*)filterInfo._cPtr : null);
@@ -253,7 +260,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
       Returns: the name of the filter, or null.  The returned string
           is owned by the filter object and should not be freed.
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_recent_filter_get_name(cast(GtkRecentFilter*)this._cPtr);
@@ -271,7 +278,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
       Returns: bitfield of flags indicating needed fields when
           calling [gtk.recent_filter.RecentFilter.filter]
   */
-  gtk.types.RecentFilterFlags getNeeded()
+  gtk.types.RecentFilterFlags getNeeded() nothrow
   {
     GtkRecentFilterFlags _cretval;
     _cretval = gtk_recent_filter_get_needed(cast(GtkRecentFilter*)this._cPtr);
@@ -287,7 +294,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
       Params:
         name = then human readable name of filter
   */
-  void setName(string name)
+  void setName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_recent_filter_set_name(cast(GtkRecentFilter*)this._cPtr, _name);
@@ -308,7 +315,7 @@ final class RecentFilterGidBuilder : RecentFilterGidBuilderImpl!RecentFilterGidB
       Create object from builder.
       Returns: New object
   */
-  RecentFilter build()
+  RecentFilter build() nothrow
   {
     return new RecentFilter(cast(void*)createGObject(RecentFilter._getGType), No.Take);
   }

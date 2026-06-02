@@ -26,26 +26,26 @@ class MultiSorter : gtk.sorter.Sorter, gio.list_model.ListModel, gtk.buildable.B
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_multi_sorter_get_type != &gidSymbolNotFound ? gtk_multi_sorter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MultiSorter self()
+  override MultiSorter self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class MultiSorter : gtk.sorter.Sorter, gio.list_model.ListModel, gtk.buildable.B
       Get builder for [gtk.multi_sorter.MultiSorter]
       Returns: New builder object
   */
-  static MultiSorterGidBuilder builder()
+  static MultiSorterGidBuilder builder() nothrow
   {
     return new MultiSorterGidBuilder;
   }
@@ -63,7 +63,7 @@ class MultiSorter : gtk.sorter.Sorter, gio.list_model.ListModel, gtk.buildable.B
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
-  @property gobject.types.GType itemType()
+  @property gobject.types.GType itemType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
   }
@@ -72,7 +72,7 @@ class MultiSorter : gtk.sorter.Sorter, gio.list_model.ListModel, gtk.buildable.B
       Get `nItems` property.
       Returns: The number of items. See [gio.list_model.ListModel.getNItems].
   */
-  @property uint nItems()
+  @property uint nItems() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
@@ -89,7 +89,7 @@ class MultiSorter : gtk.sorter.Sorter, gio.list_model.ListModel, gtk.buildable.B
       items as equal.
       Returns: a new [gtk.multi_sorter.MultiSorter]
   */
-  this()
+  this() nothrow
   {
     GtkMultiSorter* _cretval;
     _cretval = gtk_multi_sorter_new();
@@ -105,7 +105,7 @@ class MultiSorter : gtk.sorter.Sorter, gio.list_model.ListModel, gtk.buildable.B
       Params:
         sorter = a sorter to add
   */
-  void append(gtk.sorter.Sorter sorter)
+  void append(gtk.sorter.Sorter sorter) nothrow
   {
     gtk_multi_sorter_append(cast(GtkMultiSorter*)this._cPtr, sorter ? cast(GtkSorter*)sorter._cPtr(Yes.Dup) : null);
   }
@@ -119,7 +119,7 @@ class MultiSorter : gtk.sorter.Sorter, gio.list_model.ListModel, gtk.buildable.B
       Params:
         position = position of sorter to remove
   */
-  void remove(uint position)
+  void remove(uint position) nothrow
   {
     gtk_multi_sorter_remove(cast(GtkMultiSorter*)this._cPtr, position);
   }
@@ -140,7 +140,7 @@ final class MultiSorterGidBuilder : MultiSorterGidBuilderImpl!MultiSorterGidBuil
       Create object from builder.
       Returns: New object
   */
-  MultiSorter build()
+  MultiSorter build() nothrow
   {
     return new MultiSorter(cast(void*)createGObject(MultiSorter._getGType), Yes.Take);
   }

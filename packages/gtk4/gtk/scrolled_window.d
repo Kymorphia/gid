@@ -92,26 +92,26 @@ class ScrolledWindow : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scrolled_window_get_type != &gidSymbolNotFound ? gtk_scrolled_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ScrolledWindow self()
+  override ScrolledWindow self() nothrow
   {
     return this;
   }
@@ -120,7 +120,7 @@ class ScrolledWindow : gtk.widget.Widget
       Get builder for [gtk.scrolled_window.ScrolledWindow]
       Returns: New builder object
   */
-  static ScrolledWindowGidBuilder builder()
+  static ScrolledWindowGidBuilder builder() nothrow
   {
     return new ScrolledWindowGidBuilder;
   }
@@ -133,7 +133,7 @@ class ScrolledWindow : gtk.widget.Widget
         [gtk.scrollable.Scrollable], the scrolled window will add the child to
         a [gtk.viewport.Viewport] and then set the viewport as the child.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -147,19 +147,19 @@ class ScrolledWindow : gtk.widget.Widget
           [gtk.scrollable.Scrollable], the scrolled window will add the child to
           a [gtk.viewport.Viewport] and then set the viewport as the child.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
 
   /** */
-  @property gtk.adjustment.Adjustment hadjustment()
+  @property gtk.adjustment.Adjustment hadjustment() nothrow
   {
     return getHadjustment();
   }
 
   /** */
-  @property void hadjustment(gtk.adjustment.Adjustment propval)
+  @property void hadjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     setHadjustment(propval);
   }
@@ -168,7 +168,7 @@ class ScrolledWindow : gtk.widget.Widget
       Get `hasFrame` property.
       Returns: Whether to draw a frame around the contents.
   */
-  @property bool hasFrame()
+  @property bool hasFrame() nothrow
   {
     return getHasFrame();
   }
@@ -178,7 +178,7 @@ class ScrolledWindow : gtk.widget.Widget
       Params:
         propval = Whether to draw a frame around the contents.
   */
-  @property void hasFrame(bool propval)
+  @property void hasFrame(bool propval) nothrow
   {
     setHasFrame(propval);
   }
@@ -190,7 +190,7 @@ class ScrolledWindow : gtk.widget.Widget
         Use [gtk.scrolled_window.ScrolledWindow.setPolicy] to set
         this property.
   */
-  @property gtk.types.PolicyType hscrollbarPolicy()
+  @property gtk.types.PolicyType hscrollbarPolicy() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.PolicyType)("hscrollbar-policy");
   }
@@ -203,7 +203,7 @@ class ScrolledWindow : gtk.widget.Widget
           Use [gtk.scrolled_window.ScrolledWindow.setPolicy] to set
           this property.
   */
-  @property void hscrollbarPolicy(gtk.types.PolicyType propval)
+  @property void hscrollbarPolicy(gtk.types.PolicyType propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.PolicyType)("hscrollbar-policy", propval);
   }
@@ -214,7 +214,7 @@ class ScrolledWindow : gtk.widget.Widget
         
         Kinetic scrolling only applies to devices with source [gdk.types.InputSource.Touchscreen].
   */
-  @property bool kineticScrolling()
+  @property bool kineticScrolling() nothrow
   {
     return getKineticScrolling();
   }
@@ -226,7 +226,7 @@ class ScrolledWindow : gtk.widget.Widget
           
           Kinetic scrolling only applies to devices with source [gdk.types.InputSource.Touchscreen].
   */
-  @property void kineticScrolling(bool propval)
+  @property void kineticScrolling(bool propval) nothrow
   {
     setKineticScrolling(propval);
   }
@@ -235,7 +235,7 @@ class ScrolledWindow : gtk.widget.Widget
       Get `maxContentHeight` property.
       Returns: The maximum content height of @scrolled_window.
   */
-  @property int maxContentHeight()
+  @property int maxContentHeight() nothrow
   {
     return getMaxContentHeight();
   }
@@ -245,7 +245,7 @@ class ScrolledWindow : gtk.widget.Widget
       Params:
         propval = The maximum content height of @scrolled_window.
   */
-  @property void maxContentHeight(int propval)
+  @property void maxContentHeight(int propval) nothrow
   {
     setMaxContentHeight(propval);
   }
@@ -254,7 +254,7 @@ class ScrolledWindow : gtk.widget.Widget
       Get `maxContentWidth` property.
       Returns: The maximum content width of @scrolled_window.
   */
-  @property int maxContentWidth()
+  @property int maxContentWidth() nothrow
   {
     return getMaxContentWidth();
   }
@@ -264,7 +264,7 @@ class ScrolledWindow : gtk.widget.Widget
       Params:
         propval = The maximum content width of @scrolled_window.
   */
-  @property void maxContentWidth(int propval)
+  @property void maxContentWidth(int propval) nothrow
   {
     setMaxContentWidth(propval);
   }
@@ -273,7 +273,7 @@ class ScrolledWindow : gtk.widget.Widget
       Get `minContentHeight` property.
       Returns: The minimum content height of @scrolled_window.
   */
-  @property int minContentHeight()
+  @property int minContentHeight() nothrow
   {
     return getMinContentHeight();
   }
@@ -283,7 +283,7 @@ class ScrolledWindow : gtk.widget.Widget
       Params:
         propval = The minimum content height of @scrolled_window.
   */
-  @property void minContentHeight(int propval)
+  @property void minContentHeight(int propval) nothrow
   {
     setMinContentHeight(propval);
   }
@@ -292,7 +292,7 @@ class ScrolledWindow : gtk.widget.Widget
       Get `minContentWidth` property.
       Returns: The minimum content width of @scrolled_window.
   */
-  @property int minContentWidth()
+  @property int minContentWidth() nothrow
   {
     return getMinContentWidth();
   }
@@ -302,7 +302,7 @@ class ScrolledWindow : gtk.widget.Widget
       Params:
         propval = The minimum content width of @scrolled_window.
   */
-  @property void minContentWidth(int propval)
+  @property void minContentWidth(int propval) nothrow
   {
     setMinContentWidth(propval);
   }
@@ -318,7 +318,7 @@ class ScrolledWindow : gtk.widget.Widget
         Note that overlay scrolling can also be globally disabled, with
         the [gtk.settings.Settings.gtkOverlayScrolling] setting.
   */
-  @property bool overlayScrolling()
+  @property bool overlayScrolling() nothrow
   {
     return getOverlayScrolling();
   }
@@ -335,7 +335,7 @@ class ScrolledWindow : gtk.widget.Widget
           Note that overlay scrolling can also be globally disabled, with
           the [gtk.settings.Settings.gtkOverlayScrolling] setting.
   */
-  @property void overlayScrolling(bool propval)
+  @property void overlayScrolling(bool propval) nothrow
   {
     setOverlayScrolling(propval);
   }
@@ -348,7 +348,7 @@ class ScrolledWindow : gtk.widget.Widget
         This is useful in cases where an attempt should be made to allocate exactly
         enough space for the natural size of the child.
   */
-  @property bool propagateNaturalHeight()
+  @property bool propagateNaturalHeight() nothrow
   {
     return getPropagateNaturalHeight();
   }
@@ -362,7 +362,7 @@ class ScrolledWindow : gtk.widget.Widget
           This is useful in cases where an attempt should be made to allocate exactly
           enough space for the natural size of the child.
   */
-  @property void propagateNaturalHeight(bool propval)
+  @property void propagateNaturalHeight(bool propval) nothrow
   {
     setPropagateNaturalHeight(propval);
   }
@@ -375,7 +375,7 @@ class ScrolledWindow : gtk.widget.Widget
         This is useful in cases where an attempt should be made to allocate exactly
         enough space for the natural size of the child.
   */
-  @property bool propagateNaturalWidth()
+  @property bool propagateNaturalWidth() nothrow
   {
     return getPropagateNaturalWidth();
   }
@@ -389,19 +389,19 @@ class ScrolledWindow : gtk.widget.Widget
           This is useful in cases where an attempt should be made to allocate exactly
           enough space for the natural size of the child.
   */
-  @property void propagateNaturalWidth(bool propval)
+  @property void propagateNaturalWidth(bool propval) nothrow
   {
     setPropagateNaturalWidth(propval);
   }
 
   /** */
-  @property gtk.adjustment.Adjustment vadjustment()
+  @property gtk.adjustment.Adjustment vadjustment() nothrow
   {
     return getVadjustment();
   }
 
   /** */
-  @property void vadjustment(gtk.adjustment.Adjustment propval)
+  @property void vadjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     setVadjustment(propval);
   }
@@ -413,7 +413,7 @@ class ScrolledWindow : gtk.widget.Widget
         Use [gtk.scrolled_window.ScrolledWindow.setPolicy] to set
         this property.
   */
-  @property gtk.types.PolicyType vscrollbarPolicy()
+  @property gtk.types.PolicyType vscrollbarPolicy() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.PolicyType)("vscrollbar-policy");
   }
@@ -426,7 +426,7 @@ class ScrolledWindow : gtk.widget.Widget
           Use [gtk.scrolled_window.ScrolledWindow.setPolicy] to set
           this property.
   */
-  @property void vscrollbarPolicy(gtk.types.PolicyType propval)
+  @property void vscrollbarPolicy(gtk.types.PolicyType propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.PolicyType)("vscrollbar-policy", propval);
   }
@@ -435,7 +435,7 @@ class ScrolledWindow : gtk.widget.Widget
       Get `windowPlacement` property.
       Returns: Where the contents are located with respect to the scrollbars.
   */
-  @property gtk.types.CornerType windowPlacement()
+  @property gtk.types.CornerType windowPlacement() nothrow
   {
     return getPlacement();
   }
@@ -445,7 +445,7 @@ class ScrolledWindow : gtk.widget.Widget
       Params:
         propval = Where the contents are located with respect to the scrollbars.
   */
-  @property void windowPlacement(gtk.types.CornerType propval)
+  @property void windowPlacement(gtk.types.CornerType propval) nothrow
   {
     setPlacement(propval);
   }
@@ -454,7 +454,7 @@ class ScrolledWindow : gtk.widget.Widget
       Creates a new scrolled window.
       Returns: a new scrolled window
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_scrolled_window_new();
@@ -469,7 +469,7 @@ class ScrolledWindow : gtk.widget.Widget
       using [gtk.viewport.Viewport.getChild].
       Returns: the child widget of scrolled_window
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_scrolled_window_get_child(cast(GtkScrolledWindow*)this._cPtr);
@@ -484,7 +484,7 @@ class ScrolledWindow : gtk.widget.Widget
       to the child widget’s horizontal scroll functionality.
       Returns: the horizontal [gtk.adjustment.Adjustment]
   */
-  gtk.adjustment.Adjustment getHadjustment()
+  gtk.adjustment.Adjustment getHadjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrolled_window_get_hadjustment(cast(GtkScrolledWindow*)this._cPtr);
@@ -496,7 +496,7 @@ class ScrolledWindow : gtk.widget.Widget
       Gets whether the scrolled window draws a frame.
       Returns: true if the scrolled_window has a frame
   */
-  bool getHasFrame()
+  bool getHasFrame() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_scrolled_window_get_has_frame(cast(GtkScrolledWindow*)this._cPtr);
@@ -507,7 +507,7 @@ class ScrolledWindow : gtk.widget.Widget
       Returns the horizontal scrollbar of scrolled_window.
       Returns: the horizontal scrollbar of the scrolled window.
   */
-  gtk.widget.Widget getHscrollbar()
+  gtk.widget.Widget getHscrollbar() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_scrolled_window_get_hscrollbar(cast(GtkScrolledWindow*)this._cPtr);
@@ -519,7 +519,7 @@ class ScrolledWindow : gtk.widget.Widget
       Returns the specified kinetic scrolling behavior.
       Returns: the scrolling behavior flags.
   */
-  bool getKineticScrolling()
+  bool getKineticScrolling() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_scrolled_window_get_kinetic_scrolling(cast(GtkScrolledWindow*)this._cPtr);
@@ -530,7 +530,7 @@ class ScrolledWindow : gtk.widget.Widget
       Returns the maximum content height set.
       Returns: the maximum content height, or -1
   */
-  int getMaxContentHeight()
+  int getMaxContentHeight() nothrow
   {
     int _retval;
     _retval = gtk_scrolled_window_get_max_content_height(cast(GtkScrolledWindow*)this._cPtr);
@@ -541,7 +541,7 @@ class ScrolledWindow : gtk.widget.Widget
       Returns the maximum content width set.
       Returns: the maximum content width, or -1
   */
-  int getMaxContentWidth()
+  int getMaxContentWidth() nothrow
   {
     int _retval;
     _retval = gtk_scrolled_window_get_max_content_width(cast(GtkScrolledWindow*)this._cPtr);
@@ -552,7 +552,7 @@ class ScrolledWindow : gtk.widget.Widget
       Gets the minimal content height of scrolled_window.
       Returns: the minimal content height
   */
-  int getMinContentHeight()
+  int getMinContentHeight() nothrow
   {
     int _retval;
     _retval = gtk_scrolled_window_get_min_content_height(cast(GtkScrolledWindow*)this._cPtr);
@@ -563,7 +563,7 @@ class ScrolledWindow : gtk.widget.Widget
       Gets the minimum content width of scrolled_window.
       Returns: the minimum content width
   */
-  int getMinContentWidth()
+  int getMinContentWidth() nothrow
   {
     int _retval;
     _retval = gtk_scrolled_window_get_min_content_width(cast(GtkScrolledWindow*)this._cPtr);
@@ -574,7 +574,7 @@ class ScrolledWindow : gtk.widget.Widget
       Returns whether overlay scrolling is enabled for this scrolled window.
       Returns: true if overlay scrolling is enabled
   */
-  bool getOverlayScrolling()
+  bool getOverlayScrolling() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_scrolled_window_get_overlay_scrolling(cast(GtkScrolledWindow*)this._cPtr);
@@ -585,7 +585,7 @@ class ScrolledWindow : gtk.widget.Widget
       Gets the placement of the contents with respect to the scrollbars.
       Returns: the current placement value.
   */
-  gtk.types.CornerType getPlacement()
+  gtk.types.CornerType getPlacement() nothrow
   {
     GtkCornerType _cretval;
     _cretval = gtk_scrolled_window_get_placement(cast(GtkScrolledWindow*)this._cPtr);
@@ -605,7 +605,7 @@ class ScrolledWindow : gtk.widget.Widget
         vscrollbarPolicy = location to store the policy
             for the vertical scrollbar
   */
-  void getPolicy(out gtk.types.PolicyType hscrollbarPolicy, out gtk.types.PolicyType vscrollbarPolicy)
+  void getPolicy(out gtk.types.PolicyType hscrollbarPolicy, out gtk.types.PolicyType vscrollbarPolicy) nothrow
   {
     gtk_scrolled_window_get_policy(cast(GtkScrolledWindow*)this._cPtr, &hscrollbarPolicy, &vscrollbarPolicy);
   }
@@ -615,7 +615,7 @@ class ScrolledWindow : gtk.widget.Widget
       and propagated through the scrolled window’s requested natural height.
       Returns: whether natural height propagation is enabled.
   */
-  bool getPropagateNaturalHeight()
+  bool getPropagateNaturalHeight() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_scrolled_window_get_propagate_natural_height(cast(GtkScrolledWindow*)this._cPtr);
@@ -627,7 +627,7 @@ class ScrolledWindow : gtk.widget.Widget
       and propagated through the scrolled window’s requested natural width.
       Returns: whether natural width propagation is enabled.
   */
-  bool getPropagateNaturalWidth()
+  bool getPropagateNaturalWidth() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_scrolled_window_get_propagate_natural_width(cast(GtkScrolledWindow*)this._cPtr);
@@ -641,7 +641,7 @@ class ScrolledWindow : gtk.widget.Widget
       scrollbar to the child widget’s vertical scroll functionality.
       Returns: the vertical [gtk.adjustment.Adjustment]
   */
-  gtk.adjustment.Adjustment getVadjustment()
+  gtk.adjustment.Adjustment getVadjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrolled_window_get_vadjustment(cast(GtkScrolledWindow*)this._cPtr);
@@ -653,7 +653,7 @@ class ScrolledWindow : gtk.widget.Widget
       Returns the vertical scrollbar of scrolled_window.
       Returns: the vertical scrollbar of the scrolled window.
   */
-  gtk.widget.Widget getVscrollbar()
+  gtk.widget.Widget getVscrollbar() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_scrolled_window_get_vscrollbar(cast(GtkScrolledWindow*)this._cPtr);
@@ -671,7 +671,7 @@ class ScrolledWindow : gtk.widget.Widget
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     gtk_scrolled_window_set_child(cast(GtkScrolledWindow*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -682,7 +682,7 @@ class ScrolledWindow : gtk.widget.Widget
       Params:
         hadjustment = the [gtk.adjustment.Adjustment] to use, or null to create a new one
   */
-  void setHadjustment(gtk.adjustment.Adjustment hadjustment = null)
+  void setHadjustment(gtk.adjustment.Adjustment hadjustment = null) nothrow
   {
     gtk_scrolled_window_set_hadjustment(cast(GtkScrolledWindow*)this._cPtr, hadjustment ? cast(GtkAdjustment*)hadjustment._cPtr(No.Dup) : null);
   }
@@ -693,7 +693,7 @@ class ScrolledWindow : gtk.widget.Widget
       Params:
         hasFrame = whether to draw a frame around scrolled window contents
   */
-  void setHasFrame(bool hasFrame)
+  void setHasFrame(bool hasFrame) nothrow
   {
     gtk_scrolled_window_set_has_frame(cast(GtkScrolledWindow*)this._cPtr, hasFrame);
   }
@@ -707,7 +707,7 @@ class ScrolledWindow : gtk.widget.Widget
       Params:
         kineticScrolling = true to enable kinetic scrolling
   */
-  void setKineticScrolling(bool kineticScrolling)
+  void setKineticScrolling(bool kineticScrolling) nothrow
   {
     gtk_scrolled_window_set_kinetic_scrolling(cast(GtkScrolledWindow*)this._cPtr, kineticScrolling);
   }
@@ -724,7 +724,7 @@ class ScrolledWindow : gtk.widget.Widget
       Params:
         height = the maximum content height
   */
-  void setMaxContentHeight(int height)
+  void setMaxContentHeight(int height) nothrow
   {
     gtk_scrolled_window_set_max_content_height(cast(GtkScrolledWindow*)this._cPtr, height);
   }
@@ -741,7 +741,7 @@ class ScrolledWindow : gtk.widget.Widget
       Params:
         width = the maximum content width
   */
-  void setMaxContentWidth(int width)
+  void setMaxContentWidth(int width) nothrow
   {
     gtk_scrolled_window_set_max_content_width(cast(GtkScrolledWindow*)this._cPtr, width);
   }
@@ -758,7 +758,7 @@ class ScrolledWindow : gtk.widget.Widget
       Params:
         height = the minimal content height
   */
-  void setMinContentHeight(int height)
+  void setMinContentHeight(int height) nothrow
   {
     gtk_scrolled_window_set_min_content_height(cast(GtkScrolledWindow*)this._cPtr, height);
   }
@@ -775,7 +775,7 @@ class ScrolledWindow : gtk.widget.Widget
       Params:
         width = the minimal content width
   */
-  void setMinContentWidth(int width)
+  void setMinContentWidth(int width) nothrow
   {
     gtk_scrolled_window_set_min_content_width(cast(GtkScrolledWindow*)this._cPtr, width);
   }
@@ -786,7 +786,7 @@ class ScrolledWindow : gtk.widget.Widget
       Params:
         overlayScrolling = whether to enable overlay scrolling
   */
-  void setOverlayScrolling(bool overlayScrolling)
+  void setOverlayScrolling(bool overlayScrolling) nothrow
   {
     gtk_scrolled_window_set_overlay_scrolling(cast(GtkScrolledWindow*)this._cPtr, overlayScrolling);
   }
@@ -806,7 +806,7 @@ class ScrolledWindow : gtk.widget.Widget
       Params:
         windowPlacement = position of the child window
   */
-  void setPlacement(gtk.types.CornerType windowPlacement)
+  void setPlacement(gtk.types.CornerType windowPlacement) nothrow
   {
     gtk_scrolled_window_set_placement(cast(GtkScrolledWindow*)this._cPtr, windowPlacement);
   }
@@ -825,7 +825,7 @@ class ScrolledWindow : gtk.widget.Widget
         hscrollbarPolicy = policy for horizontal bar
         vscrollbarPolicy = policy for vertical bar
   */
-  void setPolicy(gtk.types.PolicyType hscrollbarPolicy, gtk.types.PolicyType vscrollbarPolicy)
+  void setPolicy(gtk.types.PolicyType hscrollbarPolicy, gtk.types.PolicyType vscrollbarPolicy) nothrow
   {
     gtk_scrolled_window_set_policy(cast(GtkScrolledWindow*)this._cPtr, hscrollbarPolicy, vscrollbarPolicy);
   }
@@ -837,7 +837,7 @@ class ScrolledWindow : gtk.widget.Widget
       Params:
         propagate = whether to propagate natural height
   */
-  void setPropagateNaturalHeight(bool propagate)
+  void setPropagateNaturalHeight(bool propagate) nothrow
   {
     gtk_scrolled_window_set_propagate_natural_height(cast(GtkScrolledWindow*)this._cPtr, propagate);
   }
@@ -849,7 +849,7 @@ class ScrolledWindow : gtk.widget.Widget
       Params:
         propagate = whether to propagate natural width
   */
-  void setPropagateNaturalWidth(bool propagate)
+  void setPropagateNaturalWidth(bool propagate) nothrow
   {
     gtk_scrolled_window_set_propagate_natural_width(cast(GtkScrolledWindow*)this._cPtr, propagate);
   }
@@ -860,7 +860,7 @@ class ScrolledWindow : gtk.widget.Widget
       Params:
         vadjustment = the [gtk.adjustment.Adjustment] to use, or null to create a new one
   */
-  void setVadjustment(gtk.adjustment.Adjustment vadjustment = null)
+  void setVadjustment(gtk.adjustment.Adjustment vadjustment = null) nothrow
   {
     gtk_scrolled_window_set_vadjustment(cast(GtkScrolledWindow*)this._cPtr, vadjustment ? cast(GtkAdjustment*)vadjustment._cPtr(No.Dup) : null);
   }
@@ -871,7 +871,7 @@ class ScrolledWindow : gtk.widget.Widget
       If no window placement is set for a scrolled window,
       it defaults to [gtk.types.CornerType.TopLeft].
   */
-  void unsetPlacement()
+  void unsetPlacement() nothrow
   {
     gtk_scrolled_window_unset_placement(cast(GtkScrolledWindow*)this._cPtr);
   }
@@ -901,14 +901,14 @@ class ScrolledWindow : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEdgeOvershot(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEdgeOvershot(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.PositionType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.scrolled_window.ScrolledWindow)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -920,7 +920,14 @@ class ScrolledWindow : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.scrolled_window.ScrolledWindow.edgeOvershot");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -952,14 +959,14 @@ class ScrolledWindow : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEdgeReached(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEdgeReached(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.PositionType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.scrolled_window.ScrolledWindow)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -971,7 +978,14 @@ class ScrolledWindow : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.scrolled_window.ScrolledWindow.edgeReached");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1003,14 +1017,14 @@ class ScrolledWindow : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveFocusOut(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveFocusOut(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.DirectionType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.scrolled_window.ScrolledWindow)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1022,7 +1036,14 @@ class ScrolledWindow : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.scrolled_window.ScrolledWindow.moveFocusOut");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1055,7 +1076,7 @@ class ScrolledWindow : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectScrollChild(T)(T callback, Flag!"After" after = No.After)
+  gulong connectScrollChild(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ScrollType)))
@@ -1063,11 +1084,12 @@ class ScrolledWindow : gtk.widget.Widget
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.scrolled_window.ScrolledWindow)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1078,7 +1100,14 @@ class ScrolledWindow : gtk.widget.Widget
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.scrolled_window.ScrolledWindow.scrollChild");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1103,13 +1132,13 @@ class ScrolledWindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           a [gtk.viewport.Viewport] and then set the viewport as the child.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
 
   /** */
-  T hadjustment(gtk.adjustment.Adjustment propval)
+  T hadjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     return setProperty("hadjustment", propval);
   }
@@ -1120,7 +1149,7 @@ class ScrolledWindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether to draw a frame around the contents.
       Returns: Builder instance for fluent chaining
   */
-  T hasFrame(bool propval)
+  T hasFrame(bool propval) nothrow
   {
     return setProperty("has-frame", propval);
   }
@@ -1134,7 +1163,7 @@ class ScrolledWindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           this property.
       Returns: Builder instance for fluent chaining
   */
-  T hscrollbarPolicy(gtk.types.PolicyType propval)
+  T hscrollbarPolicy(gtk.types.PolicyType propval) nothrow
   {
     return setProperty("hscrollbar-policy", propval);
   }
@@ -1147,7 +1176,7 @@ class ScrolledWindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           Kinetic scrolling only applies to devices with source [gdk.types.InputSource.Touchscreen].
       Returns: Builder instance for fluent chaining
   */
-  T kineticScrolling(bool propval)
+  T kineticScrolling(bool propval) nothrow
   {
     return setProperty("kinetic-scrolling", propval);
   }
@@ -1158,7 +1187,7 @@ class ScrolledWindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The maximum content height of @scrolled_window.
       Returns: Builder instance for fluent chaining
   */
-  T maxContentHeight(int propval)
+  T maxContentHeight(int propval) nothrow
   {
     return setProperty("max-content-height", propval);
   }
@@ -1169,7 +1198,7 @@ class ScrolledWindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The maximum content width of @scrolled_window.
       Returns: Builder instance for fluent chaining
   */
-  T maxContentWidth(int propval)
+  T maxContentWidth(int propval) nothrow
   {
     return setProperty("max-content-width", propval);
   }
@@ -1180,7 +1209,7 @@ class ScrolledWindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The minimum content height of @scrolled_window.
       Returns: Builder instance for fluent chaining
   */
-  T minContentHeight(int propval)
+  T minContentHeight(int propval) nothrow
   {
     return setProperty("min-content-height", propval);
   }
@@ -1191,7 +1220,7 @@ class ScrolledWindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The minimum content width of @scrolled_window.
       Returns: Builder instance for fluent chaining
   */
-  T minContentWidth(int propval)
+  T minContentWidth(int propval) nothrow
   {
     return setProperty("min-content-width", propval);
   }
@@ -1209,7 +1238,7 @@ class ScrolledWindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           the [gtk.settings.Settings.gtkOverlayScrolling] setting.
       Returns: Builder instance for fluent chaining
   */
-  T overlayScrolling(bool propval)
+  T overlayScrolling(bool propval) nothrow
   {
     return setProperty("overlay-scrolling", propval);
   }
@@ -1224,7 +1253,7 @@ class ScrolledWindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           enough space for the natural size of the child.
       Returns: Builder instance for fluent chaining
   */
-  T propagateNaturalHeight(bool propval)
+  T propagateNaturalHeight(bool propval) nothrow
   {
     return setProperty("propagate-natural-height", propval);
   }
@@ -1239,13 +1268,13 @@ class ScrolledWindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           enough space for the natural size of the child.
       Returns: Builder instance for fluent chaining
   */
-  T propagateNaturalWidth(bool propval)
+  T propagateNaturalWidth(bool propval) nothrow
   {
     return setProperty("propagate-natural-width", propval);
   }
 
   /** */
-  T vadjustment(gtk.adjustment.Adjustment propval)
+  T vadjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     return setProperty("vadjustment", propval);
   }
@@ -1259,7 +1288,7 @@ class ScrolledWindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           this property.
       Returns: Builder instance for fluent chaining
   */
-  T vscrollbarPolicy(gtk.types.PolicyType propval)
+  T vscrollbarPolicy(gtk.types.PolicyType propval) nothrow
   {
     return setProperty("vscrollbar-policy", propval);
   }
@@ -1270,7 +1299,7 @@ class ScrolledWindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Where the contents are located with respect to the scrollbars.
       Returns: Builder instance for fluent chaining
   */
-  T windowPlacement(gtk.types.CornerType propval)
+  T windowPlacement(gtk.types.CornerType propval) nothrow
   {
     return setProperty("window-placement", propval);
   }
@@ -1283,7 +1312,7 @@ final class ScrolledWindowGidBuilder : ScrolledWindowGidBuilderImpl!ScrolledWind
       Create object from builder.
       Returns: New object
   */
-  ScrolledWindow build()
+  ScrolledWindow build() nothrow
   {
     return new ScrolledWindow(cast(void*)createGObject(ScrolledWindow._getGType), No.Take);
   }

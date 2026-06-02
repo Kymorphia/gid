@@ -19,26 +19,26 @@ class RTPHeaderExtension : gst.element.Element
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_rtp_header_extension_get_type != &gidSymbolNotFound ? gst_rtp_header_extension_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RTPHeaderExtension self()
+  override RTPHeaderExtension self() nothrow
   {
     return this;
   }
@@ -47,13 +47,13 @@ class RTPHeaderExtension : gst.element.Element
       Get builder for [gstrtp.rtpheader_extension.RTPHeaderExtension]
       Returns: New builder object
   */
-  static RTPHeaderExtensionGidBuilder builder()
+  static RTPHeaderExtensionGidBuilder builder() nothrow
   {
     return new RTPHeaderExtensionGidBuilder;
   }
 
   /** */
-  static gstrtp.rtpheader_extension.RTPHeaderExtension createFromUri(string uri)
+  static gstrtp.rtpheader_extension.RTPHeaderExtension createFromUri(string uri) nothrow
   {
     GstRTPHeaderExtension* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -66,7 +66,7 @@ class RTPHeaderExtension : gst.element.Element
       Retrieve the direction
       Returns: The direction
   */
-  gstrtp.types.RTPHeaderExtensionDirection getDirection()
+  gstrtp.types.RTPHeaderExtensionDirection getDirection() nothrow
   {
     GstRTPHeaderExtensionDirection _cretval;
     _cretval = gst_rtp_header_extension_get_direction(cast(GstRTPHeaderExtension*)this._cPtr);
@@ -75,7 +75,7 @@ class RTPHeaderExtension : gst.element.Element
   }
 
   /** */
-  uint getId()
+  uint getId() nothrow
   {
     uint _retval;
     _retval = gst_rtp_header_extension_get_id(cast(GstRTPHeaderExtension*)this._cPtr);
@@ -94,7 +94,7 @@ class RTPHeaderExtension : gst.element.Element
         inputMeta = a #GstBuffer
       Returns: the maximum size of the data written by this extension
   */
-  size_t getMaxSize(gst.buffer.Buffer inputMeta)
+  size_t getMaxSize(gst.buffer.Buffer inputMeta) nothrow
   {
     size_t _retval;
     _retval = gst_rtp_header_extension_get_max_size(cast(GstRTPHeaderExtension*)this._cPtr, inputMeta ? cast(const(GstBuffer)*)inputMeta._cPtr(No.Dup) : null);
@@ -102,7 +102,7 @@ class RTPHeaderExtension : gst.element.Element
   }
 
   /** */
-  string getSdpCapsFieldName()
+  string getSdpCapsFieldName() nothrow
   {
     char* _cretval;
     _cretval = gst_rtp_header_extension_get_sdp_caps_field_name(cast(GstRTPHeaderExtension*)this._cPtr);
@@ -111,7 +111,7 @@ class RTPHeaderExtension : gst.element.Element
   }
 
   /** */
-  gstrtp.types.RTPHeaderExtensionFlags getSupportedFlags()
+  gstrtp.types.RTPHeaderExtensionFlags getSupportedFlags() nothrow
   {
     GstRTPHeaderExtensionFlags _cretval;
     _cretval = gst_rtp_header_extension_get_supported_flags(cast(GstRTPHeaderExtension*)this._cPtr);
@@ -120,7 +120,7 @@ class RTPHeaderExtension : gst.element.Element
   }
 
   /** */
-  string getUri()
+  string getUri() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_rtp_header_extension_get_uri(cast(GstRTPHeaderExtension*)this._cPtr);
@@ -138,7 +138,7 @@ class RTPHeaderExtension : gst.element.Element
         buffer = a #GstBuffer to modify if necessary
       Returns: whether the extension could be read from data
   */
-  bool read(gstrtp.types.RTPHeaderExtensionFlags readFlags, ubyte[] data, gst.buffer.Buffer buffer)
+  bool read(gstrtp.types.RTPHeaderExtensionFlags readFlags, ubyte[] data, gst.buffer.Buffer buffer) nothrow
   {
     bool _retval;
     size_t _size;
@@ -161,7 +161,7 @@ class RTPHeaderExtension : gst.element.Element
         caps = the #GstCaps to configure this extension with
       Returns: whether the caps could be successfully set on ext.
   */
-  bool setAttributesFromCaps(gst.caps.Caps caps)
+  bool setAttributesFromCaps(gst.caps.Caps caps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtp_header_extension_set_attributes_from_caps(cast(GstRTPHeaderExtension*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
@@ -180,7 +180,7 @@ class RTPHeaderExtension : gst.element.Element
       Returns: whether the configured attributes on ext can successfully be set on
         	caps
   */
-  bool setCapsFromAttributes(gst.caps.Caps caps)
+  bool setCapsFromAttributes(gst.caps.Caps caps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtp_header_extension_set_caps_from_attributes(cast(GstRTPHeaderExtension*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
@@ -200,7 +200,7 @@ class RTPHeaderExtension : gst.element.Element
         attributes = 
       Returns: whether the ext attributes could be set on caps.
   */
-  bool setCapsFromAttributesHelper(gst.caps.Caps caps, string attributes)
+  bool setCapsFromAttributesHelper(gst.caps.Caps caps, string attributes) nothrow
   {
     bool _retval;
     const(char)* _attributes = attributes.toCString(No.Alloc);
@@ -217,7 +217,7 @@ class RTPHeaderExtension : gst.element.Element
       Params:
         direction = The direction
   */
-  void setDirection(gstrtp.types.RTPHeaderExtensionDirection direction)
+  void setDirection(gstrtp.types.RTPHeaderExtensionDirection direction) nothrow
   {
     gst_rtp_header_extension_set_direction(cast(GstRTPHeaderExtension*)this._cPtr, direction);
   }
@@ -228,7 +228,7 @@ class RTPHeaderExtension : gst.element.Element
       Params:
         extId = The id of this extension
   */
-  void setId(uint extId)
+  void setId(uint extId) nothrow
   {
     gst_rtp_header_extension_set_id(cast(GstRTPHeaderExtension*)this._cPtr, extId);
   }
@@ -241,7 +241,7 @@ class RTPHeaderExtension : gst.element.Element
         caps = sink #GstCaps
       Returns: Whether caps could be read successfully
   */
-  bool setNonRtpSinkCaps(gst.caps.Caps caps)
+  bool setNonRtpSinkCaps(gst.caps.Caps caps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtp_header_extension_set_non_rtp_sink_caps(cast(GstRTPHeaderExtension*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
@@ -259,7 +259,7 @@ class RTPHeaderExtension : gst.element.Element
       Params:
         state = TRUE if caps update is needed
   */
-  void setWantsUpdateNonRtpSrcCaps(bool state)
+  void setWantsUpdateNonRtpSrcCaps(bool state) nothrow
   {
     gst_rtp_header_extension_set_wants_update_non_rtp_src_caps(cast(GstRTPHeaderExtension*)this._cPtr, state);
   }
@@ -272,7 +272,7 @@ class RTPHeaderExtension : gst.element.Element
         caps = src #GstCaps to modify
       Returns: whether caps were modified successfully
   */
-  bool updateNonRtpSrcCaps(gst.caps.Caps caps)
+  bool updateNonRtpSrcCaps(gst.caps.Caps caps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtp_header_extension_update_non_rtp_src_caps(cast(GstRTPHeaderExtension*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
@@ -285,7 +285,7 @@ class RTPHeaderExtension : gst.element.Element
       packet.
       Returns: Whether ext wants to update depayloader's src caps.
   */
-  bool wantsUpdateNonRtpSrcCaps()
+  bool wantsUpdateNonRtpSrcCaps() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtp_header_extension_wants_update_non_rtp_src_caps(cast(GstRTPHeaderExtension*)this._cPtr);
@@ -305,7 +305,7 @@ class RTPHeaderExtension : gst.element.Element
         data = location to write the rtp header extension into
       Returns: the size of the data written, < 0 on failure
   */
-  ptrdiff_t write(gst.buffer.Buffer inputMeta, gstrtp.types.RTPHeaderExtensionFlags writeFlags, gst.buffer.Buffer output, ubyte[] data)
+  ptrdiff_t write(gst.buffer.Buffer inputMeta, gstrtp.types.RTPHeaderExtensionFlags writeFlags, gst.buffer.Buffer output, ubyte[] data) nothrow
   {
     ptrdiff_t _retval;
     size_t _size;
@@ -330,7 +330,7 @@ final class RTPHeaderExtensionGidBuilder : RTPHeaderExtensionGidBuilderImpl!RTPH
       Create object from builder.
       Returns: New object
   */
-  RTPHeaderExtension build()
+  RTPHeaderExtension build() nothrow
   {
     return new RTPHeaderExtension(cast(void*)createGObject(RTPHeaderExtension._getGType), No.Take);
   }

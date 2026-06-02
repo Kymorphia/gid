@@ -80,26 +80,26 @@ class Clipboard : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_clipboard_get_type != &gidSymbolNotFound ? gtk_clipboard_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Clipboard self()
+  override Clipboard self() nothrow
   {
     return this;
   }
@@ -108,7 +108,7 @@ class Clipboard : gobject.object.ObjectWrap
       Get builder for [gtk.clipboard.Clipboard]
       Returns: New builder object
   */
-  static ClipboardGidBuilder builder()
+  static ClipboardGidBuilder builder() nothrow
   {
     return new ClipboardGidBuilder;
   }
@@ -124,7 +124,7 @@ class Clipboard : gobject.object.ObjectWrap
             object has been created, it is persistent and, since it is
             owned by GTK+, must not be freed or unreffed.
   */
-  static gtk.clipboard.Clipboard get(gdk.atom.Atom selection)
+  static gtk.clipboard.Clipboard get(gdk.atom.Atom selection) nothrow
   {
     GtkClipboard* _cretval;
     _cretval = gtk_clipboard_get(selection ? cast(GdkAtom)selection._cPtr : null);
@@ -140,7 +140,7 @@ class Clipboard : gobject.object.ObjectWrap
         display = the #GdkDisplay for which the clipboard is to be retrieved.
       Returns: the default clipboard object.
   */
-  static gtk.clipboard.Clipboard getDefault(gdk.display.Display display)
+  static gtk.clipboard.Clipboard getDefault(gdk.display.Display display) nothrow
   {
     GtkClipboard* _cretval;
     _cretval = gtk_clipboard_get_default(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
@@ -184,7 +184,7 @@ class Clipboard : gobject.object.ObjectWrap
           object has been created, it is persistent and, since it is owned by
           GTK+, must not be freed or unrefd.
   */
-  static gtk.clipboard.Clipboard getForDisplay(gdk.display.Display display, gdk.atom.Atom selection)
+  static gtk.clipboard.Clipboard getForDisplay(gdk.display.Display display, gdk.atom.Atom selection) nothrow
   {
     GtkClipboard* _cretval;
     _cretval = gtk_clipboard_get_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection._cPtr : null);
@@ -199,7 +199,7 @@ class Clipboard : gobject.object.ObjectWrap
       and when the clear_func you supplied is called. Otherwise, the
       clipboard may be owned by someone else.
   */
-  void clear()
+  void clear() nothrow
   {
     gtk_clipboard_clear(cast(GtkClipboard*)this._cPtr);
   }
@@ -208,7 +208,7 @@ class Clipboard : gobject.object.ObjectWrap
       Gets the #GdkDisplay associated with clipboard
       Returns: the #GdkDisplay associated with clipboard
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gtk_clipboard_get_display(cast(GtkClipboard*)this._cPtr);
@@ -224,7 +224,7 @@ class Clipboard : gobject.object.ObjectWrap
       Returns: the owner of the clipboard, if any;
             otherwise null.
   */
-  gobject.object.ObjectWrap getOwner()
+  gobject.object.ObjectWrap getOwner() nothrow
   {
     GObject* _cretval;
     _cretval = gtk_clipboard_get_owner(cast(GtkClipboard*)this._cPtr);
@@ -236,7 +236,7 @@ class Clipboard : gobject.object.ObjectWrap
       Gets the selection that this clipboard is for.
       Returns: the selection
   */
-  gdk.atom.Atom getSelection()
+  gdk.atom.Atom getSelection() nothrow
   {
     GdkAtom _cretval;
     _cretval = gtk_clipboard_get_selection(cast(GtkClipboard*)this._cPtr);
@@ -256,14 +256,21 @@ class Clipboard : gobject.object.ObjectWrap
               (or the retrieval fails). If the retrieval fails the length field of
               selection_data will be negative.
   */
-  void requestContents(gdk.atom.Atom target, gtk.types.ClipboardReceivedFunc callback)
+  void requestContents(gdk.atom.Atom target, gtk.types.ClipboardReceivedFunc callback) nothrow
   {
-    extern(C) void _callbackCallback(GtkClipboard* clipboard, GtkSelectionData* selectionData, void* data)
+    extern(C) void _callbackCallback(GtkClipboard* clipboard, GtkSelectionData* selectionData, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gtk.types.ClipboardReceivedFunc*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), selectionData ? new gtk.selection_data.SelectionData(cast(void*)selectionData, No.Take) : null);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), selectionData ? new gtk.selection_data.SelectionData(cast(void*)selectionData, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.ClipboardReceivedFunc");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -285,14 +292,21 @@ class Clipboard : gobject.object.ObjectWrap
         callback = a function to call when the image is received,
               or the retrieval fails. (It will always be called one way or the other.)
   */
-  void requestImage(gtk.types.ClipboardImageReceivedFunc callback)
+  void requestImage(gtk.types.ClipboardImageReceivedFunc callback) nothrow
   {
-    extern(C) void _callbackCallback(GtkClipboard* clipboard, GdkPixbuf* pixbuf, void* data)
+    extern(C) void _callbackCallback(GtkClipboard* clipboard, GdkPixbuf* pixbuf, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gtk.types.ClipboardImageReceivedFunc*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(void*)pixbuf, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(void*)pixbuf, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.ClipboardImageReceivedFunc");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -314,9 +328,9 @@ class Clipboard : gobject.object.ObjectWrap
         callback = a function to call when the text is received,
               or the retrieval fails. (It will always be called one way or the other.)
   */
-  void requestRichText(gtk.text_buffer.TextBuffer buffer, gtk.types.ClipboardRichTextReceivedFunc callback)
+  void requestRichText(gtk.text_buffer.TextBuffer buffer, gtk.types.ClipboardRichTextReceivedFunc callback) nothrow
   {
-    extern(C) void _callbackCallback(GtkClipboard* clipboard, GdkAtom format, const(char)* text, size_t length, void* data)
+    extern(C) void _callbackCallback(GtkClipboard* clipboard, GdkAtom format, const(char)* text, size_t length, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gtk.types.ClipboardRichTextReceivedFunc*)data;
@@ -324,7 +338,14 @@ class Clipboard : gobject.object.ObjectWrap
       _text.length = length;
       _text[0 .. length] = text[0 .. length];
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), format ? new gdk.atom.Atom(cast(void*)format, No.Take) : null, _text);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), format ? new gdk.atom.Atom(cast(void*)format, No.Take) : null, _text);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.ClipboardRichTextReceivedFunc");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -345,15 +366,22 @@ class Clipboard : gobject.object.ObjectWrap
         callback = a function to call when the text is received,
               or the retrieval fails. (It will always be called one way or the other.)
   */
-  void requestText(gtk.types.ClipboardTextReceivedFunc callback)
+  void requestText(gtk.types.ClipboardTextReceivedFunc callback) nothrow
   {
-    extern(C) void _callbackCallback(GtkClipboard* clipboard, const(char)* text, void* data)
+    extern(C) void _callbackCallback(GtkClipboard* clipboard, const(char)* text, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gtk.types.ClipboardTextReceivedFunc*)data;
       string _text = text.fromCString(No.Free);
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), _text);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), _text);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.ClipboardTextReceivedFunc");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -373,9 +401,9 @@ class Clipboard : gobject.object.ObjectWrap
         callback = a function to call when the URIs are received,
               or the retrieval fails. (It will always be called one way or the other.)
   */
-  void requestUris(gtk.types.ClipboardURIReceivedFunc callback)
+  void requestUris(gtk.types.ClipboardURIReceivedFunc callback) nothrow
   {
-    extern(C) void _callbackCallback(GtkClipboard* clipboard, char** uris, void* data)
+    extern(C) void _callbackCallback(GtkClipboard* clipboard, char** uris, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gtk.types.ClipboardURIReceivedFunc*)data;
@@ -388,7 +416,14 @@ class Clipboard : gobject.object.ObjectWrap
       foreach (i; 0 .. _lenuris)
         _uris[i] = uris[i].fromCString(No.Free);
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), _uris);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.clipboard.Clipboard)(cast(void*)clipboard, No.Take), _uris);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.ClipboardURIReceivedFunc");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -408,7 +443,7 @@ class Clipboard : gobject.object.ObjectWrap
                     information about which forms should be stored or null
                     to indicate that all forms should be stored.
   */
-  void setCanStore(gtk.target_entry.TargetEntry[] targets = null)
+  void setCanStore(gtk.target_entry.TargetEntry[] targets = null) nothrow
   {
     int _nTargets;
     if (targets)
@@ -431,7 +466,7 @@ class Clipboard : gobject.object.ObjectWrap
       Params:
         pixbuf = a #GdkPixbuf
   */
-  void setImage(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  void setImage(gdkpixbuf.pixbuf.Pixbuf pixbuf) nothrow
   {
     gtk_clipboard_set_image(cast(GtkClipboard*)this._cPtr, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
@@ -445,7 +480,7 @@ class Clipboard : gobject.object.ObjectWrap
       Params:
         text = a UTF-8 string.
   */
-  void setText(string text)
+  void setText(string text) nothrow
   {
     int _len;
     if (text)
@@ -459,7 +494,7 @@ class Clipboard : gobject.object.ObjectWrap
       Stores the current clipboard data somewhere so that it will stay
       around after the application has quit.
   */
-  void store()
+  void store() nothrow
   {
     gtk_clipboard_store(cast(GtkClipboard*)this._cPtr);
   }
@@ -477,7 +512,7 @@ class Clipboard : gobject.object.ObjectWrap
                       this value must be freed with [gtk.selection_data.SelectionData.free]
                       when you are finished with it.
   */
-  gtk.selection_data.SelectionData waitForContents(gdk.atom.Atom target)
+  gtk.selection_data.SelectionData waitForContents(gdk.atom.Atom target) nothrow
   {
     GtkSelectionData* _cretval;
     _cretval = gtk_clipboard_wait_for_contents(cast(GtkClipboard*)this._cPtr, target ? cast(GdkAtom)target._cPtr : null);
@@ -497,7 +532,7 @@ class Clipboard : gobject.object.ObjectWrap
             was empty or if the contents of the clipboard could not be
             converted into an image.)
   */
-  gdkpixbuf.pixbuf.Pixbuf waitForImage()
+  gdkpixbuf.pixbuf.Pixbuf waitForImage() nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gtk_clipboard_wait_for_image(cast(GtkClipboard*)this._cPtr);
@@ -521,7 +556,7 @@ class Clipboard : gobject.object.ObjectWrap
                       if the contents of the clipboard could not be
                       converted into text form.)
   */
-  ubyte[] waitForRichText(gtk.text_buffer.TextBuffer buffer, out gdk.atom.Atom format)
+  ubyte[] waitForRichText(gtk.text_buffer.TextBuffer buffer, out gdk.atom.Atom format) nothrow
   {
     ubyte* _cretval;
     size_t _cretlength;
@@ -550,7 +585,7 @@ class Clipboard : gobject.object.ObjectWrap
                       clipboard was empty or if the contents of the
                       clipboard could not be converted into text form.)
   */
-  string waitForText()
+  string waitForText() nothrow
   {
     char* _cretval;
     _cretval = gtk_clipboard_wait_for_text(cast(GtkClipboard*)this._cPtr);
@@ -568,7 +603,7 @@ class Clipboard : gobject.object.ObjectWrap
             in particular if the clipboard was empty or if the contents of
             the clipboard could not be converted into URI form.)
   */
-  string[] waitForUris()
+  string[] waitForUris() nothrow
   {
     char** _cretval;
     _cretval = gtk_clipboard_wait_for_uris(cast(GtkClipboard*)this._cPtr);
@@ -599,7 +634,7 @@ class Clipboard : gobject.object.ObjectWrap
       the actual image data.
       Returns: true is there is an image available, false otherwise.
   */
-  bool waitIsImageAvailable()
+  bool waitIsImageAvailable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_clipboard_wait_is_image_available(cast(GtkClipboard*)this._cPtr);
@@ -621,7 +656,7 @@ class Clipboard : gobject.object.ObjectWrap
         buffer = a #GtkTextBuffer
       Returns: true is there is rich text available, false otherwise.
   */
-  bool waitIsRichTextAvailable(gtk.text_buffer.TextBuffer buffer)
+  bool waitIsRichTextAvailable(gtk.text_buffer.TextBuffer buffer) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_clipboard_wait_is_rich_text_available(cast(GtkClipboard*)this._cPtr, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
@@ -640,7 +675,7 @@ class Clipboard : gobject.object.ObjectWrap
         target = A #GdkAtom indicating which target to look for.
       Returns: true if the target is available, false otherwise.
   */
-  bool waitIsTargetAvailable(gdk.atom.Atom target)
+  bool waitIsTargetAvailable(gdk.atom.Atom target) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_clipboard_wait_is_target_available(cast(GtkClipboard*)this._cPtr, target ? cast(GdkAtom)target._cPtr : null);
@@ -659,7 +694,7 @@ class Clipboard : gobject.object.ObjectWrap
       the actual text.
       Returns: true is there is text available, false otherwise.
   */
-  bool waitIsTextAvailable()
+  bool waitIsTextAvailable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_clipboard_wait_is_text_available(cast(GtkClipboard*)this._cPtr);
@@ -678,7 +713,7 @@ class Clipboard : gobject.object.ObjectWrap
       the actual URI data.
       Returns: true is there is an URI list available, false otherwise.
   */
-  bool waitIsUrisAvailable()
+  bool waitIsUrisAvailable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_clipboard_wait_is_uris_available(cast(GtkClipboard*)this._cPtr);
@@ -704,14 +739,14 @@ class Clipboard : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectOwnerChange(T)(T callback, Flag!"After" after = No.After)
+  gulong connectOwnerChange(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_owner_change.EventOwnerChange)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.clipboard.Clipboard)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -723,7 +758,14 @@ class Clipboard : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.clipboard.Clipboard.ownerChange");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -743,7 +785,7 @@ final class ClipboardGidBuilder : ClipboardGidBuilderImpl!ClipboardGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Clipboard build()
+  Clipboard build() nothrow
   {
     return new Clipboard(cast(void*)createGObject(Clipboard._getGType), No.Take);
   }

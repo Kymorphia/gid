@@ -62,26 +62,26 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_leaflet_get_type != &gidSymbolNotFound ? adw_leaflet_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Leaflet self()
+  override Leaflet self() nothrow
   {
     return this;
   }
@@ -90,7 +90,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
       Get builder for [adw.leaflet.Leaflet]
       Returns: New builder object
   */
-  static LeafletGidBuilder builder()
+  static LeafletGidBuilder builder() nothrow
   {
     return new LeafletGidBuilder;
   }
@@ -117,7 +117,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property bool canNavigateBack()
+  @property bool canNavigateBack() nothrow
   {
     return getCanNavigateBack();
   }
@@ -145,7 +145,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property void canNavigateBack(bool propval)
+  @property void canNavigateBack(bool propval) nothrow
   {
     setCanNavigateBack(propval);
   }
@@ -172,7 +172,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property bool canNavigateForward()
+  @property bool canNavigateForward() nothrow
   {
     return getCanNavigateForward();
   }
@@ -200,7 +200,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property void canNavigateForward(bool propval)
+  @property void canNavigateForward(bool propval) nothrow
   {
     setCanNavigateForward(propval);
   }
@@ -211,7 +211,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property bool canUnfold()
+  @property bool canUnfold() nothrow
   {
     return getCanUnfold();
   }
@@ -223,7 +223,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property void canUnfold(bool propval)
+  @property void canUnfold(bool propval) nothrow
   {
     setCanUnfold(propval);
   }
@@ -240,7 +240,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property adw.spring_params.SpringParams childTransitionParams()
+  @property adw.spring_params.SpringParams childTransitionParams() nothrow
   {
     return getChildTransitionParams();
   }
@@ -258,7 +258,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property void childTransitionParams(adw.spring_params.SpringParams propval)
+  @property void childTransitionParams(adw.spring_params.SpringParams propval) nothrow
   {
     setChildTransitionParams(propval);
   }
@@ -269,7 +269,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property bool childTransitionRunning()
+  @property bool childTransitionRunning() nothrow
   {
     return getChildTransitionRunning();
   }
@@ -287,7 +287,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property adw.types.FoldThresholdPolicy foldThresholdPolicy()
+  @property adw.types.FoldThresholdPolicy foldThresholdPolicy() nothrow
   {
     return getFoldThresholdPolicy();
   }
@@ -306,7 +306,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property void foldThresholdPolicy(adw.types.FoldThresholdPolicy propval)
+  @property void foldThresholdPolicy(adw.types.FoldThresholdPolicy propval) nothrow
   {
     setFoldThresholdPolicy(propval);
   }
@@ -321,7 +321,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property bool folded()
+  @property bool folded() nothrow
   {
     return getFolded();
   }
@@ -335,7 +335,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property bool homogeneous()
+  @property bool homogeneous() nothrow
   {
     return getHomogeneous();
   }
@@ -350,7 +350,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property void homogeneous(bool propval)
+  @property void homogeneous(bool propval) nothrow
   {
     setHomogeneous(propval);
   }
@@ -361,7 +361,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property uint modeTransitionDuration()
+  @property uint modeTransitionDuration() nothrow
   {
     return getModeTransitionDuration();
   }
@@ -373,7 +373,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property void modeTransitionDuration(uint propval)
+  @property void modeTransitionDuration(uint propval) nothrow
   {
     setModeTransitionDuration(propval);
   }
@@ -388,7 +388,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property gtk.selection_model.SelectionModel pages()
+  @property gtk.selection_model.SelectionModel pages() nothrow
   {
     return getPages();
   }
@@ -403,7 +403,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property adw.types.LeafletTransitionType transitionType()
+  @property adw.types.LeafletTransitionType transitionType() nothrow
   {
     return getTransitionType();
   }
@@ -419,7 +419,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property void transitionType(adw.types.LeafletTransitionType propval)
+  @property void transitionType(adw.types.LeafletTransitionType propval) nothrow
   {
     setTransitionType(propval);
   }
@@ -435,7 +435,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property gtk.widget.Widget visibleChild()
+  @property gtk.widget.Widget visibleChild() nothrow
   {
     return getVisibleChild();
   }
@@ -452,7 +452,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property void visibleChild(gtk.widget.Widget propval)
+  @property void visibleChild(gtk.widget.Widget propval) nothrow
   {
     setVisibleChild(propval);
   }
@@ -465,7 +465,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property string visibleChildName()
+  @property string visibleChildName() nothrow
   {
     return getVisibleChildName();
   }
@@ -479,7 +479,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property void visibleChildName(string propval)
+  @property void visibleChildName(string propval) nothrow
   {
     setVisibleChildName(propval);
   }
@@ -493,7 +493,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_leaflet_new();
@@ -509,7 +509,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  adw.leaflet_page.LeafletPage append(gtk.widget.Widget child)
+  adw.leaflet_page.LeafletPage append(gtk.widget.Widget child) nothrow
   {
     AdwLeafletPage* _cretval;
     _cretval = adw_leaflet_append(cast(AdwLeaflet*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -533,7 +533,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  gtk.widget.Widget getAdjacentChild(adw.types.NavigationDirection direction)
+  gtk.widget.Widget getAdjacentChild(adw.types.NavigationDirection direction) nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_leaflet_get_adjacent_child(cast(AdwLeaflet*)this._cPtr, direction);
@@ -547,7 +547,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  bool getCanNavigateBack()
+  bool getCanNavigateBack() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_leaflet_get_can_navigate_back(cast(AdwLeaflet*)this._cPtr);
@@ -560,7 +560,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  bool getCanNavigateForward()
+  bool getCanNavigateForward() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_leaflet_get_can_navigate_forward(cast(AdwLeaflet*)this._cPtr);
@@ -573,7 +573,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  bool getCanUnfold()
+  bool getCanUnfold() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_leaflet_get_can_unfold(cast(AdwLeaflet*)this._cPtr);
@@ -593,7 +593,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  gtk.widget.Widget getChildByName(string name)
+  gtk.widget.Widget getChildByName(string name) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -608,7 +608,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  adw.spring_params.SpringParams getChildTransitionParams()
+  adw.spring_params.SpringParams getChildTransitionParams() nothrow
   {
     AdwSpringParams* _cretval;
     _cretval = adw_leaflet_get_child_transition_params(cast(AdwLeaflet*)this._cPtr);
@@ -622,7 +622,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  bool getChildTransitionRunning()
+  bool getChildTransitionRunning() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_leaflet_get_child_transition_running(cast(AdwLeaflet*)this._cPtr);
@@ -635,7 +635,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  adw.types.FoldThresholdPolicy getFoldThresholdPolicy()
+  adw.types.FoldThresholdPolicy getFoldThresholdPolicy() nothrow
   {
     AdwFoldThresholdPolicy _cretval;
     _cretval = adw_leaflet_get_fold_threshold_policy(cast(AdwLeaflet*)this._cPtr);
@@ -653,7 +653,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  bool getFolded()
+  bool getFolded() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_leaflet_get_folded(cast(AdwLeaflet*)this._cPtr);
@@ -666,7 +666,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  bool getHomogeneous()
+  bool getHomogeneous() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_leaflet_get_homogeneous(cast(AdwLeaflet*)this._cPtr);
@@ -679,7 +679,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  uint getModeTransitionDuration()
+  uint getModeTransitionDuration() nothrow
   {
     uint _retval;
     _retval = adw_leaflet_get_mode_transition_duration(cast(AdwLeaflet*)this._cPtr);
@@ -695,7 +695,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  adw.leaflet_page.LeafletPage getPage(gtk.widget.Widget child)
+  adw.leaflet_page.LeafletPage getPage(gtk.widget.Widget child) nothrow
   {
     AdwLeafletPage* _cretval;
     _cretval = adw_leaflet_get_page(cast(AdwLeaflet*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -713,7 +713,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  gtk.selection_model.SelectionModel getPages()
+  gtk.selection_model.SelectionModel getPages() nothrow
   {
     GtkSelectionModel* _cretval;
     _cretval = adw_leaflet_get_pages(cast(AdwLeaflet*)this._cPtr);
@@ -727,7 +727,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  adw.types.LeafletTransitionType getTransitionType()
+  adw.types.LeafletTransitionType getTransitionType() nothrow
   {
     AdwLeafletTransitionType _cretval;
     _cretval = adw_leaflet_get_transition_type(cast(AdwLeaflet*)this._cPtr);
@@ -741,7 +741,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  gtk.widget.Widget getVisibleChild()
+  gtk.widget.Widget getVisibleChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_leaflet_get_visible_child(cast(AdwLeaflet*)this._cPtr);
@@ -755,7 +755,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  string getVisibleChildName()
+  string getVisibleChildName() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_leaflet_get_visible_child_name(cast(AdwLeaflet*)this._cPtr);
@@ -775,7 +775,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  adw.leaflet_page.LeafletPage insertChildAfter(gtk.widget.Widget child, gtk.widget.Widget sibling = null)
+  adw.leaflet_page.LeafletPage insertChildAfter(gtk.widget.Widget child, gtk.widget.Widget sibling = null) nothrow
   {
     AdwLeafletPage* _cretval;
     _cretval = adw_leaflet_insert_child_after(cast(AdwLeaflet*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling._cPtr(No.Dup) : null);
@@ -798,7 +798,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  bool navigate(adw.types.NavigationDirection direction)
+  bool navigate(adw.types.NavigationDirection direction) nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_leaflet_navigate(cast(AdwLeaflet*)this._cPtr, direction);
@@ -814,7 +814,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  adw.leaflet_page.LeafletPage prepend(gtk.widget.Widget child)
+  adw.leaflet_page.LeafletPage prepend(gtk.widget.Widget child) nothrow
   {
     AdwLeafletPage* _cretval;
     _cretval = adw_leaflet_prepend(cast(AdwLeaflet*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -830,7 +830,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  void remove(gtk.widget.Widget child)
+  void remove(gtk.widget.Widget child) nothrow
   {
     adw_leaflet_remove(cast(AdwLeaflet*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -846,7 +846,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  void reorderChildAfter(gtk.widget.Widget child, gtk.widget.Widget sibling = null)
+  void reorderChildAfter(gtk.widget.Widget child, gtk.widget.Widget sibling = null) nothrow
   {
     adw_leaflet_reorder_child_after(cast(AdwLeaflet*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling._cPtr(No.Dup) : null);
   }
@@ -875,7 +875,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  void setCanNavigateBack(bool canNavigateBack)
+  void setCanNavigateBack(bool canNavigateBack) nothrow
   {
     adw_leaflet_set_can_navigate_back(cast(AdwLeaflet*)this._cPtr, canNavigateBack);
   }
@@ -904,7 +904,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  void setCanNavigateForward(bool canNavigateForward)
+  void setCanNavigateForward(bool canNavigateForward) nothrow
   {
     adw_leaflet_set_can_navigate_forward(cast(AdwLeaflet*)this._cPtr, canNavigateForward);
   }
@@ -917,7 +917,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  void setCanUnfold(bool canUnfold)
+  void setCanUnfold(bool canUnfold) nothrow
   {
     adw_leaflet_set_can_unfold(cast(AdwLeaflet*)this._cPtr, canUnfold);
   }
@@ -936,7 +936,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  void setChildTransitionParams(adw.spring_params.SpringParams params)
+  void setChildTransitionParams(adw.spring_params.SpringParams params) nothrow
   {
     adw_leaflet_set_child_transition_params(cast(AdwLeaflet*)this._cPtr, params ? cast(AdwSpringParams*)params._cPtr(No.Dup) : null);
   }
@@ -956,7 +956,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  void setFoldThresholdPolicy(adw.types.FoldThresholdPolicy policy)
+  void setFoldThresholdPolicy(adw.types.FoldThresholdPolicy policy) nothrow
   {
     adw_leaflet_set_fold_threshold_policy(cast(AdwLeaflet*)this._cPtr, policy);
   }
@@ -972,7 +972,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  void setHomogeneous(bool homogeneous)
+  void setHomogeneous(bool homogeneous) nothrow
   {
     adw_leaflet_set_homogeneous(cast(AdwLeaflet*)this._cPtr, homogeneous);
   }
@@ -985,7 +985,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  void setModeTransitionDuration(uint duration)
+  void setModeTransitionDuration(uint duration) nothrow
   {
     adw_leaflet_set_mode_transition_duration(cast(AdwLeaflet*)this._cPtr, duration);
   }
@@ -1002,7 +1002,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  void setTransitionType(adw.types.LeafletTransitionType transition)
+  void setTransitionType(adw.types.LeafletTransitionType transition) nothrow
   {
     adw_leaflet_set_transition_type(cast(AdwLeaflet*)this._cPtr, transition);
   }
@@ -1020,7 +1020,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  void setVisibleChild(gtk.widget.Widget visibleChild)
+  void setVisibleChild(gtk.widget.Widget visibleChild) nothrow
   {
     adw_leaflet_set_visible_child(cast(AdwLeaflet*)this._cPtr, visibleChild ? cast(GtkWidget*)visibleChild._cPtr(No.Dup) : null);
   }
@@ -1035,7 +1035,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  void setVisibleChildName(string name)
+  void setVisibleChildName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     adw_leaflet_set_visible_child_name(cast(AdwLeaflet*)this._cPtr, _name);
@@ -1073,7 +1073,7 @@ class LeafletGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeabl
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  T canNavigateBack(bool propval)
+  T canNavigateBack(bool propval) nothrow
   {
     return setProperty("can-navigate-back", propval);
   }
@@ -1102,7 +1102,7 @@ class LeafletGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeabl
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  T canNavigateForward(bool propval)
+  T canNavigateForward(bool propval) nothrow
   {
     return setProperty("can-navigate-forward", propval);
   }
@@ -1115,7 +1115,7 @@ class LeafletGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeabl
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  T canUnfold(bool propval)
+  T canUnfold(bool propval) nothrow
   {
     return setProperty("can-unfold", propval);
   }
@@ -1134,7 +1134,7 @@ class LeafletGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeabl
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  T childTransitionParams(adw.spring_params.SpringParams propval)
+  T childTransitionParams(adw.spring_params.SpringParams propval) nothrow
   {
     return setProperty("child-transition-params", propval);
   }
@@ -1154,7 +1154,7 @@ class LeafletGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeabl
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  T foldThresholdPolicy(adw.types.FoldThresholdPolicy propval)
+  T foldThresholdPolicy(adw.types.FoldThresholdPolicy propval) nothrow
   {
     return setProperty("fold-threshold-policy", propval);
   }
@@ -1170,7 +1170,7 @@ class LeafletGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeabl
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  T homogeneous(bool propval)
+  T homogeneous(bool propval) nothrow
   {
     return setProperty("homogeneous", propval);
   }
@@ -1183,7 +1183,7 @@ class LeafletGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeabl
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  T modeTransitionDuration(uint propval)
+  T modeTransitionDuration(uint propval) nothrow
   {
     return setProperty("mode-transition-duration", propval);
   }
@@ -1200,7 +1200,7 @@ class LeafletGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeabl
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  T transitionType(adw.types.LeafletTransitionType propval)
+  T transitionType(adw.types.LeafletTransitionType propval) nothrow
   {
     return setProperty("transition-type", propval);
   }
@@ -1218,7 +1218,7 @@ class LeafletGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeabl
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  T visibleChild(gtk.widget.Widget propval)
+  T visibleChild(gtk.widget.Widget propval) nothrow
   {
     return setProperty("visible-child", propval);
   }
@@ -1233,7 +1233,7 @@ class LeafletGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeabl
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  T visibleChildName(string propval)
+  T visibleChildName(string propval) nothrow
   {
     return setProperty("visible-child-name", propval);
   }
@@ -1246,7 +1246,7 @@ final class LeafletGidBuilder : LeafletGidBuilderImpl!LeafletGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Leaflet build()
+  Leaflet build() nothrow
   {
     return new Leaflet(cast(void*)createGObject(Leaflet._getGType), No.Take);
   }

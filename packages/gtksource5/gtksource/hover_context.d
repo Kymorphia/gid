@@ -29,26 +29,26 @@ class HoverContext : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_hover_context_get_type != &gidSymbolNotFound ? gtk_source_hover_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HoverContext self()
+  override HoverContext self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class HoverContext : gobject.object.ObjectWrap
       Get builder for [gtksource.hover_context.HoverContext]
       Returns: New builder object
   */
-  static HoverContextGidBuilder builder()
+  static HoverContextGidBuilder builder() nothrow
   {
     return new HoverContextGidBuilder;
   }
@@ -76,7 +76,7 @@ class HoverContext : gobject.object.ObjectWrap
         end = a #GtkTextIter
       Returns: true if the marks are still valid and begin or end was set.
   */
-  bool getBounds(out gtk.text_iter.TextIter begin, out gtk.text_iter.TextIter end)
+  bool getBounds(out gtk.text_iter.TextIter begin, out gtk.text_iter.TextIter end) nothrow
   {
     bool _retval;
     GtkTextIter _begin;
@@ -91,7 +91,7 @@ class HoverContext : gobject.object.ObjectWrap
       A convenience function to get the buffer.
       Returns: The #GtkSourceBuffer for the view
   */
-  gtksource.buffer.Buffer getBuffer()
+  gtksource.buffer.Buffer getBuffer() nothrow
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_hover_context_get_buffer(cast(GtkSourceHoverContext*)this._cPtr);
@@ -100,7 +100,7 @@ class HoverContext : gobject.object.ObjectWrap
   }
 
   /** */
-  bool getIter(gtk.text_iter.TextIter iter)
+  bool getIter(gtk.text_iter.TextIter iter) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_hover_context_get_iter(cast(GtkSourceHoverContext*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
@@ -108,7 +108,7 @@ class HoverContext : gobject.object.ObjectWrap
   }
 
   /** */
-  gtksource.view.View getView()
+  gtksource.view.View getView() nothrow
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_hover_context_get_view(cast(GtkSourceHoverContext*)this._cPtr);
@@ -129,7 +129,7 @@ final class HoverContextGidBuilder : HoverContextGidBuilderImpl!HoverContextGidB
       Create object from builder.
       Returns: New object
   */
-  HoverContext build()
+  HoverContext build() nothrow
   {
     return new HoverContext(cast(void*)createGObject(HoverContext._getGType), No.Take);
   }

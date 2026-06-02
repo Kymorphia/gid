@@ -18,26 +18,26 @@ class TreeMgrSelect : gda.tree_manager.TreeManager
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_tree_mgr_select_get_type != &gidSymbolNotFound ? gda_tree_mgr_select_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TreeMgrSelect self()
+  override TreeMgrSelect self() nothrow
   {
     return this;
   }
@@ -46,25 +46,25 @@ class TreeMgrSelect : gda.tree_manager.TreeManager
       Get builder for [gda.tree_mgr_select.TreeMgrSelect]
       Returns: New builder object
   */
-  static TreeMgrSelectGidBuilder builder()
+  static TreeMgrSelectGidBuilder builder() nothrow
   {
     return new TreeMgrSelectGidBuilder;
   }
 
   /** */
-  @property gda.connection.Connection connection()
+  @property gda.connection.Connection connection() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.connection.Connection)("connection");
   }
 
   /** */
-  @property gda.set.Set params()
+  @property gda.set.Set params() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.set.Set)("params");
   }
 
   /** */
-  @property gda.statement.Statement statement()
+  @property gda.statement.Statement statement() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.statement.Statement)("statement");
   }
@@ -79,7 +79,7 @@ class TreeMgrSelect : gda.tree_manager.TreeManager
         params = a #GdaSet object representing fixed parameters which are to be used when executing stmt
       Returns: a new #GdaTreeManager object
   */
-  this(gda.connection.Connection cnc, gda.statement.Statement stmt, gda.set.Set params)
+  this(gda.connection.Connection cnc, gda.statement.Statement stmt, gda.set.Set params) nothrow
   {
     GdaTreeManager* _cretval;
     _cretval = gda_tree_mgr_select_new(cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null, stmt ? cast(GdaStatement*)stmt._cPtr(No.Dup) : null, params ? cast(GdaSet*)params._cPtr(No.Dup) : null);
@@ -92,19 +92,19 @@ class TreeMgrSelectGidBuilderImpl(T) : gda.tree_manager.TreeManagerGidBuilderImp
 {
 
   /** */
-  T connection(gda.connection.Connection propval)
+  T connection(gda.connection.Connection propval) nothrow
   {
     return setProperty("connection", propval);
   }
 
   /** */
-  T params(gda.set.Set propval)
+  T params(gda.set.Set propval) nothrow
   {
     return setProperty("params", propval);
   }
 
   /** */
-  T statement(gda.statement.Statement propval)
+  T statement(gda.statement.Statement propval) nothrow
   {
     return setProperty("statement", propval);
   }
@@ -117,7 +117,7 @@ final class TreeMgrSelectGidBuilder : TreeMgrSelectGidBuilderImpl!TreeMgrSelectG
       Create object from builder.
       Returns: New object
   */
-  TreeMgrSelect build()
+  TreeMgrSelect build() nothrow
   {
     return new TreeMgrSelect(cast(void*)createGObject(TreeMgrSelect._getGType), Yes.Take);
   }

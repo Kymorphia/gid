@@ -32,7 +32,7 @@ interface DevicePad
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_device_pad_get_type != &gidSymbolNotFound ? gdk_device_pad_get_type() : cast(GType)0;

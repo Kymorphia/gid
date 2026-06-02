@@ -19,32 +19,32 @@ class ScrollInfo : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scroll_info_get_type != &gidSymbolNotFound ? gtk_scroll_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ScrollInfo self()
+  override ScrollInfo self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class ScrollInfo : gobject.boxed.Boxed
       Creates a new scroll info for scrolling an element into view.
       Returns: A new scroll info
   */
-  this()
+  this() nothrow
   {
     GtkScrollInfo* _cretval;
     _cretval = gtk_scroll_info_new();
@@ -64,7 +64,7 @@ class ScrollInfo : gobject.boxed.Boxed
       Checks if horizontal scrolling is enabled.
       Returns: true if horizontal scrolling is enabled.
   */
-  bool getEnableHorizontal()
+  bool getEnableHorizontal() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_scroll_info_get_enable_horizontal(cast(GtkScrollInfo*)this._cPtr);
@@ -75,7 +75,7 @@ class ScrollInfo : gobject.boxed.Boxed
       Checks if vertical scrolling is enabled.
       Returns: true if vertical scrolling is enabled.
   */
-  bool getEnableVertical()
+  bool getEnableVertical() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_scroll_info_get_enable_vertical(cast(GtkScrollInfo*)this._cPtr);
@@ -89,7 +89,7 @@ class ScrollInfo : gobject.boxed.Boxed
         horizontal = if scrolling in the horizontal direction
               should happen
   */
-  void setEnableHorizontal(bool horizontal)
+  void setEnableHorizontal(bool horizontal) nothrow
   {
     gtk_scroll_info_set_enable_horizontal(cast(GtkScrollInfo*)this._cPtr, horizontal);
   }
@@ -101,7 +101,7 @@ class ScrollInfo : gobject.boxed.Boxed
         vertical = if scrolling in the vertical direction
               should happen
   */
-  void setEnableVertical(bool vertical)
+  void setEnableVertical(bool vertical) nothrow
   {
     gtk_scroll_info_set_enable_vertical(cast(GtkScrollInfo*)this._cPtr, vertical);
   }

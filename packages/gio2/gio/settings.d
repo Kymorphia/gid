@@ -310,26 +310,26 @@ class Settings : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_settings_get_type != &gidSymbolNotFound ? g_settings_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Settings self()
+  override Settings self() nothrow
   {
     return this;
   }
@@ -338,7 +338,7 @@ class Settings : gobject.object.ObjectWrap
       Get builder for [gio.settings.Settings]
       Returns: New builder object
   */
-  static SettingsGidBuilder builder()
+  static SettingsGidBuilder builder() nothrow
   {
     return new SettingsGidBuilder;
   }
@@ -347,7 +347,7 @@ class Settings : gobject.object.ObjectWrap
       Get `backend` property.
       Returns: The name of the context that the settings are stored in.
   */
-  @property gio.settings_backend.SettingsBackend backend()
+  @property gio.settings_backend.SettingsBackend backend() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.settings_backend.SettingsBackend)("backend");
   }
@@ -357,7 +357,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: Whether the #GSettings object is in 'delay-apply' mode. See
         [gio.settings.Settings.delay] for details.
   */
-  @property bool delayApply()
+  @property bool delayApply() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("delay-apply");
   }
@@ -367,7 +367,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: If this property is true, the #GSettings object has outstanding
         changes that will be applied when [gio.settings.Settings.apply] is called.
   */
-  @property bool hasUnapplied()
+  @property bool hasUnapplied() nothrow
   {
     return getHasUnapplied();
   }
@@ -376,7 +376,7 @@ class Settings : gobject.object.ObjectWrap
       Get `path` property.
       Returns: The path within the backend where the settings are stored.
   */
-  @property string path()
+  @property string path() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("path");
   }
@@ -396,7 +396,7 @@ class Settings : gobject.object.ObjectWrap
       Deprecated: Use the 'schema-id' property instead.  In a future
         version, this property may instead refer to a #GSettingsSchema.
   */
-  @property string schema()
+  @property string schema() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("schema");
   }
@@ -406,7 +406,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: The name of the schema that describes the types of keys
         for this #GSettings object.
   */
-  @property string schemaId()
+  @property string schemaId() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("schema-id");
   }
@@ -421,7 +421,7 @@ class Settings : gobject.object.ObjectWrap
         'schema' property was used to refer to the ID of the schema rather
         than the schema itself.  Take care.
   */
-  @property gio.settings_schema.SettingsSchema settingsSchema()
+  @property gio.settings_schema.SettingsSchema settingsSchema() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.settings_schema.SettingsSchema)("settings-schema");
   }
@@ -445,7 +445,7 @@ class Settings : gobject.object.ObjectWrap
         schemaId = the id of the schema
       Returns: a new #GSettings object
   */
-  this(string schemaId)
+  this(string schemaId) nothrow
   {
     GSettings* _cretval;
     const(char)* _schemaId = schemaId.toCString(No.Alloc);
@@ -484,7 +484,7 @@ class Settings : gobject.object.ObjectWrap
         path = the path to use
       Returns: a new #GSettings object
   */
-  static gio.settings.Settings newFull(gio.settings_schema.SettingsSchema schema, gio.settings_backend.SettingsBackend backend = null, string path = null)
+  static gio.settings.Settings newFull(gio.settings_schema.SettingsSchema schema, gio.settings_backend.SettingsBackend backend = null, string path = null) nothrow
   {
     GSettings* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -508,7 +508,7 @@ class Settings : gobject.object.ObjectWrap
         backend = the #GSettingsBackend to use
       Returns: a new #GSettings object
   */
-  static gio.settings.Settings newWithBackend(string schemaId, gio.settings_backend.SettingsBackend backend)
+  static gio.settings.Settings newWithBackend(string schemaId, gio.settings_backend.SettingsBackend backend) nothrow
   {
     GSettings* _cretval;
     const(char)* _schemaId = schemaId.toCString(No.Alloc);
@@ -530,7 +530,7 @@ class Settings : gobject.object.ObjectWrap
         path = the path to use
       Returns: a new #GSettings object
   */
-  static gio.settings.Settings newWithBackendAndPath(string schemaId, gio.settings_backend.SettingsBackend backend, string path)
+  static gio.settings.Settings newWithBackendAndPath(string schemaId, gio.settings_backend.SettingsBackend backend, string path) nothrow
   {
     GSettings* _cretval;
     const(char)* _schemaId = schemaId.toCString(No.Alloc);
@@ -560,7 +560,7 @@ class Settings : gobject.object.ObjectWrap
         path = the path to use
       Returns: a new #GSettings object
   */
-  static gio.settings.Settings newWithPath(string schemaId, string path)
+  static gio.settings.Settings newWithPath(string schemaId, string path) nothrow
   {
     GSettings* _cretval;
     const(char)* _schemaId = schemaId.toCString(No.Alloc);
@@ -578,7 +578,7 @@ class Settings : gobject.object.ObjectWrap
   
       Deprecated: Use [gio.settings_schema_source.SettingsSchemaSource.listSchemas] instead
   */
-  static string[] listRelocatableSchemas()
+  static string[] listRelocatableSchemas() nothrow
   {
     const(char*)* _cretval;
     _cretval = g_settings_list_relocatable_schemas();
@@ -607,7 +607,7 @@ class Settings : gobject.object.ObjectWrap
         a particular schema, use [gio.settings_schema_source.SettingsSchemaSource.lookup] instead
         of your whole loop.
   */
-  static string[] listSchemas()
+  static string[] listSchemas() nothrow
   {
     const(char*)* _cretval;
     _cretval = g_settings_list_schemas();
@@ -637,7 +637,7 @@ class Settings : gobject.object.ObjectWrap
       will be dispatched during this call (but some may be queued by the
       time the call is done).
   */
-  static void sync()
+  static void sync() nothrow
   {
     g_settings_sync();
   }
@@ -653,7 +653,7 @@ class Settings : gobject.object.ObjectWrap
         object = the object
         property = the property whose binding is removed
   */
-  static void unbind(gobject.object.ObjectWrap object, string property)
+  static void unbind(gobject.object.ObjectWrap object, string property) nothrow
   {
     const(char)* _property = property.toCString(No.Alloc);
     g_settings_unbind(object ? cast(GObject*)object._cPtr(No.Dup) : null, _property);
@@ -665,7 +665,7 @@ class Settings : gobject.object.ObjectWrap
       see [gio.settings.Settings.delay].  In the normal case settings are always
       applied immediately.
   */
-  void apply()
+  void apply() nothrow
   {
     g_settings_apply(cast(GSettings*)this._cPtr);
   }
@@ -698,7 +698,7 @@ class Settings : gobject.object.ObjectWrap
         property = the name of the property to bind
         flags = flags for the binding
   */
-  void bind(string key, gobject.object.ObjectWrap object, string property, gio.types.SettingsBindFlags flags)
+  void bind(string key, gobject.object.ObjectWrap object, string property, gio.types.SettingsBindFlags flags) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _property = property.toCString(No.Alloc);
@@ -730,7 +730,7 @@ class Settings : gobject.object.ObjectWrap
         property = the name of a boolean property to bind
         inverted = whether to 'invert' the value
   */
-  void bindWritable(string key, gobject.object.ObjectWrap object, string property, bool inverted)
+  void bindWritable(string key, gobject.object.ObjectWrap object, string property, bool inverted) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _property = property.toCString(No.Alloc);
@@ -757,7 +757,7 @@ class Settings : gobject.object.ObjectWrap
         key = the name of a key in settings
       Returns: a new #GAction
   */
-  gio.action.Action createAction(string key)
+  gio.action.Action createAction(string key) nothrow
   {
     GAction* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -771,7 +771,7 @@ class Settings : gobject.object.ObjectWrap
       mode, changes to settings are not immediately propagated to the
       backend, but kept locally until [gio.settings.Settings.apply] is called.
   */
-  void delay()
+  void delay() nothrow
   {
     g_settings_delay(cast(GSettings*)this._cPtr);
   }
@@ -788,7 +788,7 @@ class Settings : gobject.object.ObjectWrap
         key = the key to get the value for
       Returns: a boolean
   */
-  bool getBoolean(string key)
+  bool getBoolean(string key) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -811,7 +811,7 @@ class Settings : gobject.object.ObjectWrap
         name = the name of the child schema
       Returns: a 'child' settings object
   */
-  gio.settings.Settings getChild(string name)
+  gio.settings.Settings getChild(string name) nothrow
   {
     GSettings* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -847,7 +847,7 @@ class Settings : gobject.object.ObjectWrap
         key = the key to get the default value for
       Returns: the default value
   */
-  glib.variant.Variant getDefaultValue(string key)
+  glib.variant.Variant getDefaultValue(string key) nothrow
   {
     GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -868,7 +868,7 @@ class Settings : gobject.object.ObjectWrap
         key = the key to get the value for
       Returns: a double
   */
-  double getDouble(string key)
+  double getDouble(string key) nothrow
   {
     double _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -894,7 +894,7 @@ class Settings : gobject.object.ObjectWrap
         key = the key to get the value for
       Returns: the enum value
   */
-  int getEnum(string key)
+  int getEnum(string key) nothrow
   {
     int _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -920,7 +920,7 @@ class Settings : gobject.object.ObjectWrap
         key = the key to get the value for
       Returns: the flags value
   */
-  uint getFlags(string key)
+  uint getFlags(string key) nothrow
   {
     uint _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -933,7 +933,7 @@ class Settings : gobject.object.ObjectWrap
       changes.  This can only be the case if it is in 'delayed-apply' mode.
       Returns: true if settings has unapplied changes
   */
-  bool getHasUnapplied()
+  bool getHasUnapplied() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_settings_get_has_unapplied(cast(GSettings*)this._cPtr);
@@ -952,7 +952,7 @@ class Settings : gobject.object.ObjectWrap
         key = the key to get the value for
       Returns: an integer
   */
-  int getInt(string key)
+  int getInt(string key) nothrow
   {
     int _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -972,7 +972,7 @@ class Settings : gobject.object.ObjectWrap
         key = the key to get the value for
       Returns: a 64-bit integer
   */
-  long getInt64(string key)
+  long getInt64(string key) nothrow
   {
     long _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1015,14 +1015,21 @@ class Settings : gobject.object.ObjectWrap
                     settings database to the value used by the application
       Returns: the result, which may be null
   */
-  void* getMapped(string key, gio.types.SettingsGetMapping mapping)
+  void* getMapped(string key, gio.types.SettingsGetMapping mapping) nothrow
   {
-    extern(C) gboolean _mappingCallback(GVariant* value, void** result, void* userData)
+    extern(C) gboolean _mappingCallback(GVariant* value, void** result, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gio.types.SettingsGetMapping*)userData;
 
-      _dretval = (*_dlg)(value ? new glib.variant.Variant(cast(void*)value, No.Take) : null, *result);
+      try
+      {
+        _dretval = (*_dlg)(value ? new glib.variant.Variant(cast(void*)value, No.Take) : null, *result);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.SettingsGetMapping");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -1043,7 +1050,7 @@ class Settings : gobject.object.ObjectWrap
   
       Deprecated: Use [gio.settings_schema_key.SettingsSchemaKey.getRange] instead.
   */
-  glib.variant.Variant getRange(string key)
+  glib.variant.Variant getRange(string key) nothrow
   {
     GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1064,7 +1071,7 @@ class Settings : gobject.object.ObjectWrap
         key = the key to get the value for
       Returns: a newly-allocated string
   */
-  string getString(string key)
+  string getString(string key) nothrow
   {
     char* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1085,7 +1092,7 @@ class Settings : gobject.object.ObjectWrap
         newly-allocated, null-terminated array of strings, the value that
         is stored at key in settings.
   */
-  string[] getStrv(string key)
+  string[] getStrv(string key) nothrow
   {
     char** _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1118,7 +1125,7 @@ class Settings : gobject.object.ObjectWrap
         key = the key to get the value for
       Returns: an unsigned integer
   */
-  uint getUint(string key)
+  uint getUint(string key) nothrow
   {
     uint _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1139,7 +1146,7 @@ class Settings : gobject.object.ObjectWrap
         key = the key to get the value for
       Returns: a 64-bit unsigned integer
   */
-  ulong getUint64(string key)
+  ulong getUint64(string key) nothrow
   {
     ulong _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1171,7 +1178,7 @@ class Settings : gobject.object.ObjectWrap
         key = the key to get the user value for
       Returns: the user's value, if set
   */
-  glib.variant.Variant getUserValue(string key)
+  glib.variant.Variant getUserValue(string key) nothrow
   {
     GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1190,7 +1197,7 @@ class Settings : gobject.object.ObjectWrap
         key = the key to get the value for
       Returns: a new #GVariant
   */
-  glib.variant.Variant getValue(string key)
+  glib.variant.Variant getValue(string key) nothrow
   {
     GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1206,7 +1213,7 @@ class Settings : gobject.object.ObjectWrap
         name = the name of a key
       Returns: true if the key name is writable
   */
-  bool isWritable(string name)
+  bool isWritable(string name) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -1229,7 +1236,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: a list of the children
            on settings, in no defined order
   */
-  string[] listChildren()
+  string[] listChildren() nothrow
   {
     char** _cretval;
     _cretval = g_settings_list_children(cast(GSettings*)this._cPtr);
@@ -1262,7 +1269,7 @@ class Settings : gobject.object.ObjectWrap
   
       Deprecated: Use [gio.settings_schema.SettingsSchema.listKeys] instead.
   */
-  string[] listKeys()
+  string[] listKeys() nothrow
   {
     char** _cretval;
     _cretval = g_settings_list_keys(cast(GSettings*)this._cPtr);
@@ -1292,7 +1299,7 @@ class Settings : gobject.object.ObjectWrap
   
       Deprecated: Use [gio.settings_schema_key.SettingsSchemaKey.rangeCheck] instead.
   */
-  bool rangeCheck(string key, glib.variant.Variant value)
+  bool rangeCheck(string key, glib.variant.Variant value) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1310,7 +1317,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         key = the name of a key
   */
-  void reset(string key)
+  void reset(string key) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     g_settings_reset(cast(GSettings*)this._cPtr, _key);
@@ -1324,7 +1331,7 @@ class Settings : gobject.object.ObjectWrap
       
       Change notifications will be emitted for affected keys.
   */
-  void revert()
+  void revert() nothrow
   {
     g_settings_revert(cast(GSettings*)this._cPtr);
   }
@@ -1343,7 +1350,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: true if setting the key succeeded,
             false if the key was not writable
   */
-  bool setBoolean(string key, bool value)
+  bool setBoolean(string key, bool value) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1365,7 +1372,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: true if setting the key succeeded,
             false if the key was not writable
   */
-  bool setDouble(string key, double value)
+  bool setDouble(string key, double value) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1390,7 +1397,7 @@ class Settings : gobject.object.ObjectWrap
         value = an enumerated value
       Returns: true, if the set succeeds
   */
-  bool setEnum(string key, int value)
+  bool setEnum(string key, int value) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1416,7 +1423,7 @@ class Settings : gobject.object.ObjectWrap
         value = a flags value
       Returns: true, if the set succeeds
   */
-  bool setFlags(string key, uint value)
+  bool setFlags(string key, uint value) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1438,7 +1445,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: true if setting the key succeeded,
             false if the key was not writable
   */
-  bool setInt(string key, int value)
+  bool setInt(string key, int value) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1460,7 +1467,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: true if setting the key succeeded,
             false if the key was not writable
   */
-  bool setInt64(string key, long value)
+  bool setInt64(string key, long value) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1482,7 +1489,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: true if setting the key succeeded,
             false if the key was not writable
   */
-  bool setString(string key, string value)
+  bool setString(string key, string value) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1506,7 +1513,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: true if setting the key succeeded,
             false if the key was not writable
   */
-  bool setStrv(string key, string[] value = null)
+  bool setStrv(string key, string[] value = null) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1535,7 +1542,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: true if setting the key succeeded,
             false if the key was not writable
   */
-  bool setUint(string key, uint value)
+  bool setUint(string key, uint value) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1558,7 +1565,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: true if setting the key succeeded,
             false if the key was not writable
   */
-  bool setUint64(string key, ulong value)
+  bool setUint64(string key, ulong value) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1581,7 +1588,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: true if setting the key succeeded,
             false if the key was not writable
   */
-  bool setValue(string key, glib.variant.Variant value)
+  bool setValue(string key, glib.variant.Variant value) nothrow
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -1622,18 +1629,19 @@ class Settings : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChangeEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChangeEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.types.Quark[])))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.settings.Settings)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
       auto nKeys = getVal!(int)(&_paramVals[2]);
 
       static if (Parameters!T.length > 1)
@@ -1647,7 +1655,14 @@ class Settings : gobject.object.ObjectWrap
         _paramTuple[0] = _dArray;
       }
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.settings.Settings.changeEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1683,14 +1698,14 @@ class Settings : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.settings.Settings)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1702,7 +1717,14 @@ class Settings : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.settings.Settings.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1745,18 +1767,19 @@ class Settings : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWritableChangeEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWritableChangeEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.settings.Settings)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1764,7 +1787,14 @@ class Settings : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.settings.Settings.writableChangeEvent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1797,14 +1827,14 @@ class Settings : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWritableChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectWritableChanged(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.settings.Settings)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1816,7 +1846,14 @@ class Settings : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.settings.Settings.writableChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1834,7 +1871,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The name of the context that the settings are stored in.
       Returns: Builder instance for fluent chaining
   */
-  T backend(gio.settings_backend.SettingsBackend propval)
+  T backend(gio.settings_backend.SettingsBackend propval) nothrow
   {
     return setProperty("backend", propval);
   }
@@ -1845,7 +1882,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The path within the backend where the settings are stored.
       Returns: Builder instance for fluent chaining
   */
-  T path(string propval)
+  T path(string propval) nothrow
   {
     return setProperty("path", propval);
   }
@@ -1867,7 +1904,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Deprecated: Use the 'schema-id' property instead.  In a future
         version, this property may instead refer to a #GSettingsSchema.
   */
-  T schema(string propval)
+  T schema(string propval) nothrow
   {
     return setProperty("schema", propval);
   }
@@ -1879,7 +1916,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           for this #GSettings object.
       Returns: Builder instance for fluent chaining
   */
-  T schemaId(string propval)
+  T schemaId(string propval) nothrow
   {
     return setProperty("schema-id", propval);
   }
@@ -1896,7 +1933,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           than the schema itself.  Take care.
       Returns: Builder instance for fluent chaining
   */
-  T settingsSchema(gio.settings_schema.SettingsSchema propval)
+  T settingsSchema(gio.settings_schema.SettingsSchema propval) nothrow
   {
     return setProperty("settings-schema", propval);
   }
@@ -1909,7 +1946,7 @@ final class SettingsGidBuilder : SettingsGidBuilderImpl!SettingsGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Settings build()
+  Settings build() nothrow
   {
     return new Settings(cast(void*)createGObject(Settings._getGType), Yes.Take);
   }

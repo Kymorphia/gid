@@ -22,11 +22,8 @@ class AudioCdSrcTrack
   GstAudioCdSrcTrack _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstaudio.audio_cd_src_track.AudioCdSrcTrack");
-
     _cInstance = *cast(GstAudioCdSrcTrack*)ptr;
 
     if (take)
@@ -34,7 +31,7 @@ class AudioCdSrcTrack
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -43,7 +40,7 @@ class AudioCdSrcTrack
       Get `isAudio` field.
       Returns: Whether this is an audio track
   */
-  @property bool isAudio()
+  @property bool isAudio() nothrow
   {
     return cast(bool)(cast(GstAudioCdSrcTrack*)this._cPtr).isAudio;
   }
@@ -53,7 +50,7 @@ class AudioCdSrcTrack
       Params:
         propval = Whether this is an audio track
   */
-  @property void isAudio(bool propval)
+  @property void isAudio(bool propval) nothrow
   {
     (cast(GstAudioCdSrcTrack*)this._cPtr).isAudio = propval;
   }
@@ -62,7 +59,7 @@ class AudioCdSrcTrack
       Get `num` field.
       Returns: Track number in TOC (usually starts from 1, but not always)
   */
-  @property uint num()
+  @property uint num() nothrow
   {
     return (cast(GstAudioCdSrcTrack*)this._cPtr).num;
   }
@@ -72,7 +69,7 @@ class AudioCdSrcTrack
       Params:
         propval = Track number in TOC (usually starts from 1, but not always)
   */
-  @property void num(uint propval)
+  @property void num(uint propval) nothrow
   {
     (cast(GstAudioCdSrcTrack*)this._cPtr).num = propval;
   }
@@ -81,7 +78,7 @@ class AudioCdSrcTrack
       Get `start` field.
       Returns: The first sector of this track (LBA)
   */
-  @property uint start()
+  @property uint start() nothrow
   {
     return (cast(GstAudioCdSrcTrack*)this._cPtr).start;
   }
@@ -91,7 +88,7 @@ class AudioCdSrcTrack
       Params:
         propval = The first sector of this track (LBA)
   */
-  @property void start(uint propval)
+  @property void start(uint propval) nothrow
   {
     (cast(GstAudioCdSrcTrack*)this._cPtr).start = propval;
   }
@@ -100,7 +97,7 @@ class AudioCdSrcTrack
       Get `end` field.
       Returns: The last sector of this track (LBA)
   */
-  @property uint end()
+  @property uint end() nothrow
   {
     return (cast(GstAudioCdSrcTrack*)this._cPtr).end;
   }
@@ -110,7 +107,7 @@ class AudioCdSrcTrack
       Params:
         propval = The last sector of this track (LBA)
   */
-  @property void end(uint propval)
+  @property void end(uint propval) nothrow
   {
     (cast(GstAudioCdSrcTrack*)this._cPtr).end = propval;
   }
@@ -119,7 +116,7 @@ class AudioCdSrcTrack
       Get `tags` field.
       Returns: Track-specific tags (e.g. from cd-text information), or NULL
   */
-  @property gst.tag_list.TagList tags()
+  @property gst.tag_list.TagList tags() nothrow
   {
     return cToD!(gst.tag_list.TagList)(cast(void*)(cast(GstAudioCdSrcTrack*)this._cPtr).tags);
   }
@@ -129,7 +126,7 @@ class AudioCdSrcTrack
       Params:
         propval = Track-specific tags (e.g. from cd-text information), or NULL
   */
-  @property void tags(gst.tag_list.TagList propval)
+  @property void tags(gst.tag_list.TagList propval) nothrow
   {
     cValueFree!(gst.tag_list.TagList)(cast(void*)(cast(GstAudioCdSrcTrack*)this._cPtr).tags);
     dToC(propval, cast(void*)&(cast(GstAudioCdSrcTrack*)this._cPtr).tags);

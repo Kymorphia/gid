@@ -19,7 +19,7 @@ struct DsdFormat
       Returns: the #GstDsdFormat for format or GST_DSD_FORMAT_UNKNOWN when the
         string is not a known format.
   */
-  static gstaudio.types.DsdFormat fromString(string str)
+  static gstaudio.types.DsdFormat fromString(string str) nothrow
   {
     GstDsdFormat _cretval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -29,7 +29,7 @@ struct DsdFormat
   }
 
   /** */
-  static uint getWidth(gstaudio.types.DsdFormat format)
+  static uint getWidth(gstaudio.types.DsdFormat format) nothrow
   {
     uint _retval;
     _retval = gst_dsd_format_get_width(format);
@@ -44,7 +44,7 @@ struct DsdFormat
         format = a #GstDsdFormat
       Returns: the name corresponding to format
   */
-  static string toString_(gstaudio.types.DsdFormat format)
+  static string toString_(gstaudio.types.DsdFormat format) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_dsd_format_to_string(format);

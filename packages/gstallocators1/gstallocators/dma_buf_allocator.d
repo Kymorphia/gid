@@ -18,26 +18,26 @@ class DmaBufAllocator : gstallocators.fd_allocator.FdAllocator
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_dmabuf_allocator_get_type != &gidSymbolNotFound ? gst_dmabuf_allocator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DmaBufAllocator self()
+  override DmaBufAllocator self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class DmaBufAllocator : gstallocators.fd_allocator.FdAllocator
       Get builder for [gstallocators.dma_buf_allocator.DmaBufAllocator]
       Returns: New builder object
   */
-  static DmaBufAllocatorGidBuilder builder()
+  static DmaBufAllocatorGidBuilder builder() nothrow
   {
     return new DmaBufAllocatorGidBuilder;
   }
@@ -56,7 +56,7 @@ class DmaBufAllocator : gstallocators.fd_allocator.FdAllocator
       Returns: a new dmabuf allocator. Use [gst.object.ObjectWrap.unref] to
         release the allocator after usage
   */
-  this()
+  this() nothrow
   {
     GstAllocator* _cretval;
     _cretval = gst_dmabuf_allocator_new();
@@ -74,7 +74,7 @@ class DmaBufAllocator : gstallocators.fd_allocator.FdAllocator
         When the buffer will be released dmabuf allocator will close the fd.
         The memory is only mmapped on [gst.buffer.Buffer.map] request.
   */
-  static gst.memory.Memory alloc(gst.allocator.Allocator allocator, int fd, size_t size)
+  static gst.memory.Memory alloc(gst.allocator.Allocator allocator, int fd, size_t size) nothrow
   {
     GstMemory* _cretval;
     _cretval = gst_dmabuf_allocator_alloc(allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, fd, size);
@@ -96,7 +96,7 @@ class DmaBufAllocator : gstallocators.fd_allocator.FdAllocator
         the `GST_FD_MEMORY_FLAG_DONT_CLOSE` flag is specified.
         The memory is only mmapped on gst_buffer_mmap() request.
   */
-  static gst.memory.Memory allocWithFlags(gst.allocator.Allocator allocator, int fd, size_t size, gstallocators.types.FdMemoryFlags flags)
+  static gst.memory.Memory allocWithFlags(gst.allocator.Allocator allocator, int fd, size_t size, gstallocators.types.FdMemoryFlags flags) nothrow
   {
     GstMemory* _cretval;
     _cretval = gst_dmabuf_allocator_alloc_with_flags(allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, fd, size, flags);
@@ -117,7 +117,7 @@ final class DmaBufAllocatorGidBuilder : DmaBufAllocatorGidBuilderImpl!DmaBufAllo
       Create object from builder.
       Returns: New object
   */
-  DmaBufAllocator build()
+  DmaBufAllocator build() nothrow
   {
     return new DmaBufAllocator(cast(void*)createGObject(DmaBufAllocator._getGType), Yes.Take);
   }

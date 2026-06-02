@@ -46,7 +46,7 @@ struct Encoding
         outbuf = an output buffer
       Returns: the number of bytes written to outbuf.
   */
-  size_t flush(string inbuf, ref char[] outbuf)
+  size_t flush(string inbuf, ref char[] outbuf) nothrow
   {
     size_t _retval;
     size_t _inlen;
@@ -65,7 +65,7 @@ struct Encoding
       Params:
         encoding = a #GMimeContentEncoding to use
   */
-  void initDecode(gmime.types.ContentEncoding encoding)
+  void initDecode(gmime.types.ContentEncoding encoding) nothrow
   {
     g_mime_encoding_init_decode(cast(GMimeEncoding*)&this, encoding);
   }
@@ -77,7 +77,7 @@ struct Encoding
       Params:
         encoding = a #GMimeContentEncoding to use
   */
-  void initEncode(gmime.types.ContentEncoding encoding)
+  void initEncode(gmime.types.ContentEncoding encoding) nothrow
   {
     g_mime_encoding_init_encode(cast(GMimeEncoding*)&this, encoding);
   }
@@ -91,7 +91,7 @@ struct Encoding
       Returns: the maximum number of bytes needed to encode or decode a
         buffer of inlen bytes.
   */
-  size_t outlen(size_t inlen)
+  size_t outlen(size_t inlen) nothrow
   {
     size_t _retval;
     _retval = g_mime_encoding_outlen(cast(GMimeEncoding*)&this, inlen);
@@ -101,7 +101,7 @@ struct Encoding
   /**
       Resets the state of the #GMimeEncoding.
   */
-  void reset()
+  void reset() nothrow
   {
     g_mime_encoding_reset(cast(GMimeEncoding*)&this);
   }
@@ -119,7 +119,7 @@ struct Encoding
         outbuf = an output buffer
       Returns: the number of bytes written to outbuf.
   */
-  size_t step(string inbuf, ref char[] outbuf)
+  size_t step(string inbuf, ref char[] outbuf) nothrow
   {
     size_t _retval;
     size_t _inlen;
@@ -142,7 +142,7 @@ struct Encoding
       Returns: the number of bytes decoded (which have been dumped in
         outbuf).
   */
-  static size_t base64DecodeStep(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint save)
+  static size_t base64DecodeStep(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint save) nothrow
   {
     size_t _retval;
     size_t _inlen;
@@ -166,7 +166,7 @@ struct Encoding
         save = leftover bits that have not yet been encoded
       Returns: the number of bytes encoded.
   */
-  static size_t base64EncodeClose(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint save)
+  static size_t base64EncodeClose(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint save) nothrow
   {
     size_t _retval;
     size_t _inlen;
@@ -191,7 +191,7 @@ struct Encoding
         save = leftover bits that have not yet been encoded
       Returns: the number of bytes encoded.
   */
-  static size_t base64EncodeStep(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint save)
+  static size_t base64EncodeStep(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint save) nothrow
   {
     size_t _retval;
     size_t _inlen;
@@ -214,7 +214,7 @@ struct Encoding
         save = leftover bits that have not yet been decoded
       Returns: the number of bytes decoded.
   */
-  static size_t quotedDecodeStep(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint save)
+  static size_t quotedDecodeStep(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint save) nothrow
   {
     size_t _retval;
     size_t _inlen;
@@ -238,7 +238,7 @@ struct Encoding
         save = leftover bits that have not yet been encoded
       Returns: the number of bytes encoded.
   */
-  static size_t quotedEncodeClose(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint save)
+  static size_t quotedEncodeClose(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint save) nothrow
   {
     size_t _retval;
     size_t _inlen;
@@ -262,7 +262,7 @@ struct Encoding
         save = leftover bits that have not yet been encoded
       Returns: the number of bytes encoded.
   */
-  static size_t quotedEncodeStep(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint save)
+  static size_t quotedEncodeStep(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint save) nothrow
   {
     size_t _retval;
     size_t _inlen;
@@ -286,7 +286,7 @@ struct Encoding
         save = leftover bits that have not yet been decoded
       Returns: the number of bytes decoded.
   */
-  static size_t uudecodeStep(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint save)
+  static size_t uudecodeStep(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint save) nothrow
   {
     size_t _retval;
     size_t _inlen;
@@ -310,7 +310,7 @@ struct Encoding
         save = leftover bits that have not yet been encoded
       Returns: the number of bytes encoded.
   */
-  static size_t uuencodeClose(ubyte[] inbuf, ref ubyte[] outbuf, ref ubyte[] uubuf, ref int state, ref uint save)
+  static size_t uuencodeClose(ubyte[] inbuf, ref ubyte[] outbuf, ref ubyte[] uubuf, ref int state, ref uint save) nothrow
   {
     size_t _retval;
     size_t _inlen;
@@ -336,7 +336,7 @@ struct Encoding
         save = leftover bits that have not yet been encoded
       Returns: the number of bytes encoded.
   */
-  static size_t uuencodeStep(ubyte[] inbuf, ref ubyte[] outbuf, ref ubyte[] uubuf, ref int state, ref uint save)
+  static size_t uuencodeStep(ubyte[] inbuf, ref ubyte[] outbuf, ref ubyte[] uubuf, ref int state, ref uint save) nothrow
   {
     size_t _retval;
     size_t _inlen;

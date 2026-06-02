@@ -22,26 +22,26 @@ class Message : gmime.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_message_get_type != &gidSymbolNotFound ? g_mime_message_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Message self()
+  override Message self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class Message : gmime.object.ObjectWrap
       Get builder for [gmime.message.Message]
       Returns: New builder object
   */
-  static MessageGidBuilder builder()
+  static MessageGidBuilder builder() nothrow
   {
     return new MessageGidBuilder;
   }
@@ -65,7 +65,7 @@ class Message : gmime.object.ObjectWrap
         prettyHeaders = make pretty headers
       Returns: an empty #GMimeMessage object.
   */
-  this(bool prettyHeaders)
+  this(bool prettyHeaders) nothrow
   {
     GMimeMessage* _cretval;
     _cretval = g_mime_message_new(prettyHeaders);
@@ -82,7 +82,7 @@ class Message : gmime.object.ObjectWrap
         name = The name of the mailbox (or null)
         addr = The address of the mailbox
   */
-  void addMailbox(gmime.types.AddressType type, string name, string addr)
+  void addMailbox(gmime.types.AddressType type, string name, string addr) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _addr = addr.toCString(No.Alloc);
@@ -96,13 +96,20 @@ class Message : gmime.object.ObjectWrap
         callback = function to call on each of the mime parts
             contained by the mime message
   */
-  void foreach_(gmime.types.ObjectForeachFunc callback)
+  void foreach_(gmime.types.ObjectForeachFunc callback) nothrow
   {
-    extern(C) void _callbackCallback(GMimeObject* parent, GMimeObject* part, void* userData)
+    extern(C) void _callbackCallback(GMimeObject* parent, GMimeObject* part, void* userData) nothrow
     {
       auto _dlg = cast(gmime.types.ObjectForeachFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gmime.object.ObjectWrap)(cast(void*)parent, No.Take), gobject.object.ObjectWrap._getDObject!(gmime.object.ObjectWrap)(cast(void*)part, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gmime.object.ObjectWrap)(cast(void*)parent, No.Take), gobject.object.ObjectWrap._getDObject!(gmime.object.ObjectWrap)(cast(void*)part, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gmime.types.ObjectForeachFunc");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? cast(void*)&(callback) : null;
@@ -117,7 +124,7 @@ class Message : gmime.object.ObjectWrap
       Returns: a list of addresses of the specified
         type from the message.
   */
-  gmime.internet_address_list.InternetAddressList getAddresses(gmime.types.AddressType type)
+  gmime.internet_address_list.InternetAddressList getAddresses(gmime.types.AddressType type) nothrow
   {
     GMimeInternetAddressList* _cretval;
     _cretval = g_mime_message_get_addresses(cast(GMimeMessage*)this._cPtr, type);
@@ -131,7 +138,7 @@ class Message : gmime.object.ObjectWrap
         containing all recipients of the message or null if no recipients
         are set.
   */
-  gmime.internet_address_list.InternetAddressList getAllRecipients()
+  gmime.internet_address_list.InternetAddressList getAllRecipients() nothrow
   {
     GMimeInternetAddressList* _cretval;
     _cretval = g_mime_message_get_all_recipients(cast(GMimeMessage*)this._cPtr);
@@ -223,7 +230,7 @@ class Message : gmime.object.ObjectWrap
       Returns: a new #GMimeAutocryptHeaderList object,
         or null on error.
   */
-  gmime.autocrypt_header_list.AutocryptHeaderList getAutocryptGossipHeadersFromInnerPart(glib.date_time.DateTime now, gmime.object.ObjectWrap innerPart)
+  gmime.autocrypt_header_list.AutocryptHeaderList getAutocryptGossipHeadersFromInnerPart(glib.date_time.DateTime now, gmime.object.ObjectWrap innerPart) nothrow
   {
     GMimeAutocryptHeaderList* _cretval;
     _cretval = g_mime_message_get_autocrypt_gossip_headers_from_inner_part(cast(GMimeMessage*)this._cPtr, now ? cast(GDateTime*)now._cPtr(No.Dup) : null, innerPart ? cast(GMimeObject*)innerPart._cPtr(No.Dup) : null);
@@ -264,7 +271,7 @@ class Message : gmime.object.ObjectWrap
         or null if the message should be ignored for purposes of
         Autocrypt.
   */
-  gmime.autocrypt_header.AutocryptHeader getAutocryptHeader(glib.date_time.DateTime now = null)
+  gmime.autocrypt_header.AutocryptHeader getAutocryptHeader(glib.date_time.DateTime now = null) nothrow
   {
     GMimeAutocryptHeader* _cretval;
     _cretval = g_mime_message_get_autocrypt_header(cast(GMimeMessage*)this._cPtr, now ? cast(GDateTime*)now._cPtr(No.Dup) : null);
@@ -276,7 +283,7 @@ class Message : gmime.object.ObjectWrap
       Gets combined list of parsed addresses in the Bcc header(s).
       Returns: the parsed list of addresses in the Bcc header(s).
   */
-  gmime.internet_address_list.InternetAddressList getBcc()
+  gmime.internet_address_list.InternetAddressList getBcc() nothrow
   {
     GMimeInternetAddressList* _cretval;
     _cretval = g_mime_message_get_bcc(cast(GMimeMessage*)this._cPtr);
@@ -295,7 +302,7 @@ class Message : gmime.object.ObjectWrap
         makes some assumptions that are not necessarily true. It is
         recommended that you traverse the MIME structure yourself.
   */
-  gmime.object.ObjectWrap getBody()
+  gmime.object.ObjectWrap getBody() nothrow
   {
     GMimeObject* _cretval;
     _cretval = g_mime_message_get_body(cast(GMimeMessage*)this._cPtr);
@@ -307,7 +314,7 @@ class Message : gmime.object.ObjectWrap
       Gets combined list of parsed addresses in the Cc header(s).
       Returns: the parsed list of addresses in the Cc header(s).
   */
-  gmime.internet_address_list.InternetAddressList getCc()
+  gmime.internet_address_list.InternetAddressList getCc() nothrow
   {
     GMimeInternetAddressList* _cretval;
     _cretval = g_mime_message_get_cc(cast(GMimeMessage*)this._cPtr);
@@ -320,7 +327,7 @@ class Message : gmime.object.ObjectWrap
       Returns: a #GDateTime on success or null if
         the date could not be parsed.
   */
-  glib.date_time.DateTime getDate()
+  glib.date_time.DateTime getDate() nothrow
   {
     GDateTime* _cretval;
     _cretval = g_mime_message_get_date(cast(GMimeMessage*)this._cPtr);
@@ -332,7 +339,7 @@ class Message : gmime.object.ObjectWrap
       Gets the parsed list of addresses in the From header.
       Returns: the parsed list of addresses in the From header.
   */
-  gmime.internet_address_list.InternetAddressList getFrom()
+  gmime.internet_address_list.InternetAddressList getFrom() nothrow
   {
     GMimeInternetAddressList* _cretval;
     _cretval = g_mime_message_get_from(cast(GMimeMessage*)this._cPtr);
@@ -344,7 +351,7 @@ class Message : gmime.object.ObjectWrap
       Gets the Message-Id header of message.
       Returns: the Message-Id of a message, or null if not specified.
   */
-  string getMessageId()
+  string getMessageId() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_message_get_message_id(cast(GMimeMessage*)this._cPtr);
@@ -357,7 +364,7 @@ class Message : gmime.object.ObjectWrap
       Returns: the toplevel MIME part of message, or
         null if none is present.
   */
-  gmime.object.ObjectWrap getMimePart()
+  gmime.object.ObjectWrap getMimePart() nothrow
   {
     GMimeObject* _cretval;
     _cretval = g_mime_message_get_mime_part(cast(GMimeMessage*)this._cPtr);
@@ -369,7 +376,7 @@ class Message : gmime.object.ObjectWrap
       Gets the parsed list of addresses in the Reply-To header.
       Returns: the parsed list of addresses in the Reply-To header.
   */
-  gmime.internet_address_list.InternetAddressList getReplyTo()
+  gmime.internet_address_list.InternetAddressList getReplyTo() nothrow
   {
     GMimeInternetAddressList* _cretval;
     _cretval = g_mime_message_get_reply_to(cast(GMimeMessage*)this._cPtr);
@@ -381,7 +388,7 @@ class Message : gmime.object.ObjectWrap
       Gets the parsed list of addresses in the Sender header.
       Returns: the parsed list of addresses in the Sender header.
   */
-  gmime.internet_address_list.InternetAddressList getSender()
+  gmime.internet_address_list.InternetAddressList getSender() nothrow
   {
     GMimeInternetAddressList* _cretval;
     _cretval = g_mime_message_get_sender(cast(GMimeMessage*)this._cPtr);
@@ -395,7 +402,7 @@ class Message : gmime.object.ObjectWrap
         display or null if no subject is set. If not null, the returned string
         will be in UTF-8.
   */
-  string getSubject()
+  string getSubject() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_message_get_subject(cast(GMimeMessage*)this._cPtr);
@@ -407,7 +414,7 @@ class Message : gmime.object.ObjectWrap
       Gets combined list of parsed addresses in the To header(s).
       Returns: the parsed list of addresses in the To header(s).
   */
-  gmime.internet_address_list.InternetAddressList getTo()
+  gmime.internet_address_list.InternetAddressList getTo() nothrow
   {
     GMimeInternetAddressList* _cretval;
     _cretval = g_mime_message_get_to(cast(GMimeMessage*)this._cPtr);
@@ -426,7 +433,7 @@ class Message : gmime.object.ObjectWrap
       Returns: an array of #GMimeMessage objects and
         sets nparts to the number of messages returned or null on fail.
   */
-  gmime.message.Message[] partialSplitMessage(size_t maxSize)
+  gmime.message.Message[] partialSplitMessage(size_t maxSize) nothrow
   {
     GMimeMessage** _cretval;
     size_t _cretlength;
@@ -449,7 +456,7 @@ class Message : gmime.object.ObjectWrap
       Params:
         date = a date to be used in the Date header
   */
-  void setDate(glib.date_time.DateTime date)
+  void setDate(glib.date_time.DateTime date) nothrow
   {
     g_mime_message_set_date(cast(GMimeMessage*)this._cPtr, date ? cast(GDateTime*)date._cPtr(No.Dup) : null);
   }
@@ -460,7 +467,7 @@ class Message : gmime.object.ObjectWrap
       Params:
         messageId = message-id (addr-spec portion)
   */
-  void setMessageId(string messageId)
+  void setMessageId(string messageId) nothrow
   {
     const(char)* _messageId = messageId.toCString(No.Alloc);
     g_mime_message_set_message_id(cast(GMimeMessage*)this._cPtr, _messageId);
@@ -472,7 +479,7 @@ class Message : gmime.object.ObjectWrap
       Params:
         mimePart = The root-level MIME Part
   */
-  void setMimePart(gmime.object.ObjectWrap mimePart)
+  void setMimePart(gmime.object.ObjectWrap mimePart) nothrow
   {
     g_mime_message_set_mime_part(cast(GMimeMessage*)this._cPtr, mimePart ? cast(GMimeObject*)mimePart._cPtr(No.Dup) : null);
   }
@@ -486,7 +493,7 @@ class Message : gmime.object.ObjectWrap
         subject = Subject string
         charset = The charset to use for encoding the subject or null to use the default
   */
-  void setSubject(string subject, string charset = null)
+  void setSubject(string subject, string charset = null) nothrow
   {
     const(char)* _subject = subject.toCString(No.Alloc);
     const(char)* _charset = charset.toCString(No.Alloc);
@@ -506,7 +513,7 @@ final class MessageGidBuilder : MessageGidBuilderImpl!MessageGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Message build()
+  Message build() nothrow
   {
     return new Message(cast(void*)createGObject(Message._getGType), Yes.Take);
   }

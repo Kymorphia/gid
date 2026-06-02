@@ -32,26 +32,26 @@ class BackForwardList : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_back_forward_list_get_type != &gidSymbolNotFound ? webkit_back_forward_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BackForwardList self()
+  override BackForwardList self() nothrow
   {
     return this;
   }
@@ -60,7 +60,7 @@ class BackForwardList : gobject.object.ObjectWrap
       Get builder for [webkit.back_forward_list.BackForwardList]
       Returns: New builder object
   */
-  static BackForwardListGidBuilder builder()
+  static BackForwardListGidBuilder builder() nothrow
   {
     return new BackForwardListGidBuilder;
   }
@@ -70,7 +70,7 @@ class BackForwardList : gobject.object.ObjectWrap
       Returns: the #WebKitBackForwardListItem
            preceding the current item or null.
   */
-  webkit.back_forward_list_item.BackForwardListItem getBackItem()
+  webkit.back_forward_list_item.BackForwardListItem getBackItem() nothrow
   {
     WebKitBackForwardListItem* _cretval;
     _cretval = webkit_back_forward_list_get_back_item(cast(WebKitBackForwardList*)this._cPtr);
@@ -83,7 +83,7 @@ class BackForwardList : gobject.object.ObjectWrap
       Returns: a #GList of
            items preceding the current item.
   */
-  webkit.back_forward_list_item.BackForwardListItem[] getBackList()
+  webkit.back_forward_list_item.BackForwardListItem[] getBackList() nothrow
   {
     GList* _cretval;
     _cretval = webkit_back_forward_list_get_back_list(cast(WebKitBackForwardList*)this._cPtr);
@@ -99,7 +99,7 @@ class BackForwardList : gobject.object.ObjectWrap
       Returns: a #GList of
            items preceding the current item limited by limit.
   */
-  webkit.back_forward_list_item.BackForwardListItem[] getBackListWithLimit(uint limit)
+  webkit.back_forward_list_item.BackForwardListItem[] getBackListWithLimit(uint limit) nothrow
   {
     GList* _cretval;
     _cretval = webkit_back_forward_list_get_back_list_with_limit(cast(WebKitBackForwardList*)this._cPtr, limit);
@@ -112,7 +112,7 @@ class BackForwardList : gobject.object.ObjectWrap
       Returns: a #WebKitBackForwardListItem
            or null if back_forward_list is empty.
   */
-  webkit.back_forward_list_item.BackForwardListItem getCurrentItem()
+  webkit.back_forward_list_item.BackForwardListItem getCurrentItem() nothrow
   {
     WebKitBackForwardListItem* _cretval;
     _cretval = webkit_back_forward_list_get_current_item(cast(WebKitBackForwardList*)this._cPtr);
@@ -125,7 +125,7 @@ class BackForwardList : gobject.object.ObjectWrap
       Returns: the #WebKitBackForwardListItem
            following the current item or null.
   */
-  webkit.back_forward_list_item.BackForwardListItem getForwardItem()
+  webkit.back_forward_list_item.BackForwardListItem getForwardItem() nothrow
   {
     WebKitBackForwardListItem* _cretval;
     _cretval = webkit_back_forward_list_get_forward_item(cast(WebKitBackForwardList*)this._cPtr);
@@ -138,7 +138,7 @@ class BackForwardList : gobject.object.ObjectWrap
       Returns: a #GList of
            items following the current item.
   */
-  webkit.back_forward_list_item.BackForwardListItem[] getForwardList()
+  webkit.back_forward_list_item.BackForwardListItem[] getForwardList() nothrow
   {
     GList* _cretval;
     _cretval = webkit_back_forward_list_get_forward_list(cast(WebKitBackForwardList*)this._cPtr);
@@ -154,7 +154,7 @@ class BackForwardList : gobject.object.ObjectWrap
       Returns: a #GList of
            items following the current item limited by limit.
   */
-  webkit.back_forward_list_item.BackForwardListItem[] getForwardListWithLimit(uint limit)
+  webkit.back_forward_list_item.BackForwardListItem[] getForwardListWithLimit(uint limit) nothrow
   {
     GList* _cretval;
     _cretval = webkit_back_forward_list_get_forward_list_with_limit(cast(WebKitBackForwardList*)this._cPtr, limit);
@@ -166,7 +166,7 @@ class BackForwardList : gobject.object.ObjectWrap
       Obtain the amount of items in the list.
       Returns: the length of back_forward_list.
   */
-  uint getLength()
+  uint getLength() nothrow
   {
     uint _retval;
     _retval = webkit_back_forward_list_get_length(cast(WebKitBackForwardList*)this._cPtr);
@@ -181,7 +181,7 @@ class BackForwardList : gobject.object.ObjectWrap
       Returns: the #WebKitBackForwardListItem
            located at the specified index relative to the current item or null.
   */
-  webkit.back_forward_list_item.BackForwardListItem getNthItem(int index)
+  webkit.back_forward_list_item.BackForwardListItem getNthItem(int index) nothrow
   {
     WebKitBackForwardListItem* _cretval;
     _cretval = webkit_back_forward_list_get_nth_item(cast(WebKitBackForwardList*)this._cPtr, index);
@@ -212,7 +212,7 @@ class BackForwardList : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.back_forward_list_item.BackForwardListItem)))
@@ -220,7 +220,7 @@ class BackForwardList : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkit.back_forward_list.BackForwardList)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -235,7 +235,14 @@ class BackForwardList : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.back_forward_list.BackForwardList.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -255,7 +262,7 @@ final class BackForwardListGidBuilder : BackForwardListGidBuilderImpl!BackForwar
       Create object from builder.
       Returns: New object
   */
-  BackForwardList build()
+  BackForwardList build() nothrow
   {
     return new BackForwardList(cast(void*)createGObject(BackForwardList._getGType), No.Take);
   }

@@ -34,7 +34,7 @@ template BuildableT()
       of the `<object>` tag used to construct the buildable.
       Returns: the ID of the buildable object
   */
-  override string getBuildableId()
+  override string getBuildableId() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_buildable_get_buildable_id(cast(GtkBuildable*)this._cPtr);

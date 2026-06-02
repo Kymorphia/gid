@@ -18,32 +18,32 @@ class SelectionData : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_selection_data_get_type != &gidSymbolNotFound ? gtk_selection_data_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SelectionData self()
+  override SelectionData self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class SelectionData : gobject.boxed.Boxed
       Makes a copy of a #GtkSelectionData-struct and its data.
       Returns: a pointer to a copy of data.
   */
-  gtk.selection_data.SelectionData copy()
+  gtk.selection_data.SelectionData copy() nothrow
   {
     GtkSelectionData* _cretval;
     _cretval = gtk_selection_data_copy(cast(const(GtkSelectionData)*)this._cPtr);
@@ -64,7 +64,7 @@ class SelectionData : gobject.boxed.Boxed
       Retrieves the data type of the selection.
       Returns: the data type of the selection.
   */
-  gdk.atom.Atom getDataType()
+  gdk.atom.Atom getDataType() nothrow
   {
     GdkAtom _cretval;
     _cretval = gtk_selection_data_get_data_type(cast(const(GtkSelectionData)*)this._cPtr);
@@ -76,7 +76,7 @@ class SelectionData : gobject.boxed.Boxed
       Retrieves the raw data of the selection along with its length.
       Returns: the raw data of the selection
   */
-  ubyte[] getData()
+  ubyte[] getData() nothrow
   {
     const(ubyte)* _cretval;
     int _cretlength;
@@ -94,7 +94,7 @@ class SelectionData : gobject.boxed.Boxed
       Retrieves the display of the selection.
       Returns: the display of the selection.
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gtk_selection_data_get_display(cast(const(GtkSelectionData)*)this._cPtr);
@@ -106,7 +106,7 @@ class SelectionData : gobject.boxed.Boxed
       Retrieves the format of the selection.
       Returns: the format of the selection.
   */
-  int getFormat()
+  int getFormat() nothrow
   {
     int _retval;
     _retval = gtk_selection_data_get_format(cast(const(GtkSelectionData)*)this._cPtr);
@@ -117,7 +117,7 @@ class SelectionData : gobject.boxed.Boxed
       Retrieves the length of the raw data of the selection.
       Returns: the length of the data of the selection.
   */
-  int getLength()
+  int getLength() nothrow
   {
     int _retval;
     _retval = gtk_selection_data_get_length(cast(const(GtkSelectionData)*)this._cPtr);
@@ -132,7 +132,7 @@ class SelectionData : gobject.boxed.Boxed
           null.  If the result is non-null it must be freed with
           [gobject.object.ObjectWrap.unref].
   */
-  gdkpixbuf.pixbuf.Pixbuf getPixbuf()
+  gdkpixbuf.pixbuf.Pixbuf getPixbuf() nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gtk_selection_data_get_pixbuf(cast(const(GtkSelectionData)*)this._cPtr);
@@ -144,7 +144,7 @@ class SelectionData : gobject.boxed.Boxed
       Retrieves the selection #GdkAtom of the selection data.
       Returns: the selection #GdkAtom of the selection data.
   */
-  gdk.atom.Atom getSelection()
+  gdk.atom.Atom getSelection() nothrow
   {
     GdkAtom _cretval;
     _cretval = gtk_selection_data_get_selection(cast(const(GtkSelectionData)*)this._cPtr);
@@ -156,7 +156,7 @@ class SelectionData : gobject.boxed.Boxed
       Retrieves the target of the selection.
       Returns: the target of the selection.
   */
-  gdk.atom.Atom getTarget()
+  gdk.atom.Atom getTarget() nothrow
   {
     GdkAtom _cretval;
     _cretval = gtk_selection_data_get_target(cast(const(GtkSelectionData)*)this._cPtr);
@@ -171,7 +171,7 @@ class SelectionData : gobject.boxed.Boxed
           allocated string containing the converted text, otherwise null.
           If the result is non-null it must be freed with [glib.global.gfree].
   */
-  string getText()
+  string getText() nothrow
   {
     ubyte* _cretval;
     _cretval = gtk_selection_data_get_text(cast(const(GtkSelectionData)*)this._cPtr);
@@ -190,7 +190,7 @@ class SelectionData : gobject.boxed.Boxed
           containing the URIs, otherwise null. If the result is
           non-null it must be freed with [glib.global.strfreev].
   */
-  string[] getUris()
+  string[] getUris() nothrow
   {
     char** _cretval;
     _cretval = gtk_selection_data_get_uris(cast(const(GtkSelectionData)*)this._cPtr);
@@ -219,7 +219,7 @@ class SelectionData : gobject.boxed.Boxed
         format = format (number of bits in a unit)
         data = pointer to the data (will be copied)
   */
-  void set(gdk.atom.Atom type, int format, ubyte[] data)
+  void set(gdk.atom.Atom type, int format, ubyte[] data) nothrow
   {
     int _length;
     if (data)
@@ -239,7 +239,7 @@ class SelectionData : gobject.boxed.Boxed
       Returns: true if the selection was successfully set,
           otherwise false.
   */
-  bool setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  bool setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_selection_data_set_pixbuf(cast(GtkSelectionData*)this._cPtr, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
@@ -256,7 +256,7 @@ class SelectionData : gobject.boxed.Boxed
       Returns: true if the selection was successfully set,
           otherwise false.
   */
-  bool setText(string str)
+  bool setText(string str) nothrow
   {
     bool _retval;
     int _len;
@@ -282,7 +282,7 @@ class SelectionData : gobject.boxed.Boxed
       Returns: true if the selection was successfully set,
           otherwise false.
   */
-  bool setUris(string[] uris)
+  bool setUris(string[] uris) nothrow
   {
     bool _retval;
     char*[] _tmpuris;
@@ -306,7 +306,7 @@ class SelectionData : gobject.boxed.Boxed
       Returns: true if selection_data holds a list of targets,
           and a suitable target for images is included, otherwise false.
   */
-  bool targetsIncludeImage(bool writable)
+  bool targetsIncludeImage(bool writable) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_selection_data_targets_include_image(cast(const(GtkSelectionData)*)this._cPtr, writable);
@@ -324,7 +324,7 @@ class SelectionData : gobject.boxed.Boxed
                       and a suitable target for rich text is included,
                       otherwise false.
   */
-  bool targetsIncludeRichText(gtk.text_buffer.TextBuffer buffer)
+  bool targetsIncludeRichText(gtk.text_buffer.TextBuffer buffer) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_selection_data_targets_include_rich_text(cast(const(GtkSelectionData)*)this._cPtr, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
@@ -338,7 +338,7 @@ class SelectionData : gobject.boxed.Boxed
       Returns: true if selection_data holds a list of targets,
           and a suitable target for text is included, otherwise false.
   */
-  bool targetsIncludeText()
+  bool targetsIncludeText() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_selection_data_targets_include_text(cast(const(GtkSelectionData)*)this._cPtr);
@@ -352,7 +352,7 @@ class SelectionData : gobject.boxed.Boxed
       Returns: true if selection_data holds a list of targets,
           and a suitable target for URI lists is included, otherwise false.
   */
-  bool targetsIncludeUri()
+  bool targetsIncludeUri() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_selection_data_targets_include_uri(cast(const(GtkSelectionData)*)this._cPtr);

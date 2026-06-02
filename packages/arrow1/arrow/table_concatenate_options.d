@@ -14,26 +14,26 @@ class TableConcatenateOptions : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_table_concatenate_options_get_type != &gidSymbolNotFound ? garrow_table_concatenate_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TableConcatenateOptions self()
+  override TableConcatenateOptions self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class TableConcatenateOptions : gobject.object.ObjectWrap
       Get builder for [arrow.table_concatenate_options.TableConcatenateOptions]
       Returns: New builder object
   */
-  static TableConcatenateOptionsGidBuilder builder()
+  static TableConcatenateOptionsGidBuilder builder() nothrow
   {
     return new TableConcatenateOptionsGidBuilder;
   }
@@ -54,7 +54,7 @@ class TableConcatenateOptions : gobject.object.ObjectWrap
         the other type and become nullable. Nullability will be promoted
         to the looser option (nullable if one is not nullable).
   */
-  @property bool promoteNullability()
+  @property bool promoteNullability() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("promote-nullability");
   }
@@ -67,7 +67,7 @@ class TableConcatenateOptions : gobject.object.ObjectWrap
           the other type and become nullable. Nullability will be promoted
           to the looser option (nullable if one is not nullable).
   */
-  @property void promoteNullability(bool propval)
+  @property void promoteNullability(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("promote-nullability", propval);
   }
@@ -84,7 +84,7 @@ class TableConcatenateOptions : gobject.object.ObjectWrap
         the output table is the result of concatenating the corresponding
         columns in all input tables.
   */
-  @property bool unifySchemas()
+  @property bool unifySchemas() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("unify-schemas");
   }
@@ -102,13 +102,13 @@ class TableConcatenateOptions : gobject.object.ObjectWrap
           the output table is the result of concatenating the corresponding
           columns in all input tables.
   */
-  @property void unifySchemas(bool propval)
+  @property void unifySchemas(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("unify-schemas", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowTableConcatenateOptions* _cretval;
     _cretval = garrow_table_concatenate_options_new();
@@ -129,7 +129,7 @@ class TableConcatenateOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBui
           to the looser option (nullable if one is not nullable).
       Returns: Builder instance for fluent chaining
   */
-  T promoteNullability(bool propval)
+  T promoteNullability(bool propval) nothrow
   {
     return setProperty("promote-nullability", propval);
   }
@@ -148,7 +148,7 @@ class TableConcatenateOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBui
           columns in all input tables.
       Returns: Builder instance for fluent chaining
   */
-  T unifySchemas(bool propval)
+  T unifySchemas(bool propval) nothrow
   {
     return setProperty("unify-schemas", propval);
   }
@@ -161,7 +161,7 @@ final class TableConcatenateOptionsGidBuilder : TableConcatenateOptionsGidBuilde
       Create object from builder.
       Returns: New object
   */
-  TableConcatenateOptions build()
+  TableConcatenateOptions build() nothrow
   {
     return new TableConcatenateOptions(cast(void*)createGObject(TableConcatenateOptions._getGType), Yes.Take);
   }

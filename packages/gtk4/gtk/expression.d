@@ -167,25 +167,23 @@ class Expression
   GtkExpression* _cInstancePtr;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.expression.Expression");
-
     _cInstancePtr = cast(GtkExpression*)ptr;
 
-    if (!take)
+    if (!take && ptr)
       gtk_expression_ref(_cInstancePtr);
   }
 
-  ~this()
+  ~this() nothrow
   {
-    gtk_expression_unref(_cInstancePtr);
+    if (_cInstancePtr)
+      gtk_expression_unref(_cInstancePtr);
   }
 
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     if (dup)
       gtk_expression_ref(_cInstancePtr);
@@ -214,7 +212,7 @@ class Expression
             the evaluation of `self`
       Returns: a [gtk.expression_watch.ExpressionWatch]
   */
-  gtk.expression_watch.ExpressionWatch bind(gobject.object.ObjectWrap target, string property, gobject.object.ObjectWrap this_ = null)
+  gtk.expression_watch.ExpressionWatch bind(gobject.object.ObjectWrap target, string property, gobject.object.ObjectWrap this_ = null) nothrow
   {
     GtkExpressionWatch* _cretval;
     const(char)* _property = property.toCString(No.Alloc);
@@ -240,7 +238,7 @@ class Expression
         value = an empty [gobject.value.Value]
       Returns: `TRUE` if the expression could be evaluated
   */
-  bool evaluate(gobject.object.ObjectWrap this_, gobject.value.Value value)
+  bool evaluate(gobject.object.ObjectWrap this_, gobject.value.Value value) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_expression_evaluate(cast(GtkExpression*)this._cPtr, this_ ? cast(GObject*)this_._cPtr(No.Dup) : null, value ? cast(GValue*)value._cPtr(No.Dup) : null);
@@ -254,7 +252,7 @@ class Expression
       of this expression.
       Returns: The type returned from [gtk.expression.Expression.evaluate]
   */
-  gobject.types.GType getValueType()
+  gobject.types.GType getValueType() nothrow
   {
     gobject.types.GType _retval;
     _retval = gtk_expression_get_value_type(cast(GtkExpression*)this._cPtr);
@@ -271,7 +269,7 @@ class Expression
       it will never trigger a notify.
       Returns: `TRUE` if the expression is static
   */
-  bool isStatic()
+  bool isStatic() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_expression_is_static(cast(GtkExpression*)this._cPtr);
@@ -298,13 +296,20 @@ class Expression
           [gtk.expression_watch.ExpressionWatch.unwatch]. You should call [gtk.expression_watch.ExpressionWatch.ref_]
           if you want to keep the watch around.
   */
-  gtk.expression_watch.ExpressionWatch watch(gobject.object.ObjectWrap this_, gtk.types.ExpressionNotify notify)
+  gtk.expression_watch.ExpressionWatch watch(gobject.object.ObjectWrap this_, gtk.types.ExpressionNotify notify) nothrow
   {
-    extern(C) void _notifyCallback(void* userData)
+    extern(C) void _notifyCallback(void* userData) nothrow
     {
       auto _dlg = cast(gtk.types.ExpressionNotify*)userData;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.ExpressionNotify");
+      }
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
     GtkExpressionWatch* _cretval;

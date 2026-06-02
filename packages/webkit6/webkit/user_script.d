@@ -15,32 +15,32 @@ class UserScript : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_user_script_get_type != &gidSymbolNotFound ? webkit_user_script_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UserScript self()
+  override UserScript self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class UserScript : gobject.boxed.Boxed
         blockList = A block_list of URI patterns or null
       Returns: A new #WebKitUserScript
   */
-  this(string source, webkit.types.UserContentInjectedFrames injectedFrames, webkit.types.UserScriptInjectionTime injectionTime, string[] allowList = null, string[] blockList = null)
+  this(string source, webkit.types.UserContentInjectedFrames injectedFrames, webkit.types.UserScriptInjectionTime injectionTime, string[] allowList = null, string[] blockList = null) nothrow
   {
     WebKitUserScript* _cretval;
     const(char)* _source = source.toCString(No.Alloc);
@@ -98,7 +98,7 @@ class UserScript : gobject.boxed.Boxed
         blockList = A block_list of URI patterns or null
       Returns: A new #WebKitUserScript
   */
-  static webkit.user_script.UserScript newForWorld(string source, webkit.types.UserContentInjectedFrames injectedFrames, webkit.types.UserScriptInjectionTime injectionTime, string worldName, string[] allowList = null, string[] blockList = null)
+  static webkit.user_script.UserScript newForWorld(string source, webkit.types.UserContentInjectedFrames injectedFrames, webkit.types.UserScriptInjectionTime injectionTime, string worldName, string[] allowList = null, string[] blockList = null) nothrow
   {
     WebKitUserScript* _cretval;
     const(char)* _source = source.toCString(No.Alloc);

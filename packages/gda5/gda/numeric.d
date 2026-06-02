@@ -18,32 +18,32 @@ class Numeric : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_numeric_get_type != &gidSymbolNotFound ? gda_numeric_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Numeric self()
+  override Numeric self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class Numeric : gobject.boxed.Boxed
       Get `number` field.
       Returns: a string representing a number
   */
-  @property string number()
+  @property string number() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaNumeric*)this._cPtr).number);
   }
@@ -62,7 +62,7 @@ class Numeric : gobject.boxed.Boxed
       Params:
         propval = a string representing a number
   */
-  @property void number(string propval)
+  @property void number(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaNumeric*)this._cPtr).number);
     dToC(propval, cast(void*)&(cast(GdaNumeric*)this._cPtr).number);
@@ -72,7 +72,7 @@ class Numeric : gobject.boxed.Boxed
       Get `precision` field.
       Returns: precision to use when @number is converted (not implemented jet)
   */
-  @property glong precision()
+  @property glong precision() nothrow
   {
     return (cast(GdaNumeric*)this._cPtr).precision;
   }
@@ -82,7 +82,7 @@ class Numeric : gobject.boxed.Boxed
       Params:
         propval = precision to use when @number is converted (not implemented jet)
   */
-  @property void precision(glong propval)
+  @property void precision(glong propval) nothrow
   {
     (cast(GdaNumeric*)this._cPtr).precision = propval;
   }
@@ -91,7 +91,7 @@ class Numeric : gobject.boxed.Boxed
       Get `width` field.
       Returns: not implemented jet
   */
-  @property glong width()
+  @property glong width() nothrow
   {
     return (cast(GdaNumeric*)this._cPtr).width;
   }
@@ -101,7 +101,7 @@ class Numeric : gobject.boxed.Boxed
       Params:
         propval = not implemented jet
   */
-  @property void width(glong propval)
+  @property void width(glong propval) nothrow
   {
     (cast(GdaNumeric*)this._cPtr).width = propval;
   }
@@ -110,7 +110,7 @@ class Numeric : gobject.boxed.Boxed
       Creates a new #GdaNumeric with defaults.
       Returns: a new #GdaNumeric.
   */
-  this()
+  this() nothrow
   {
     GdaNumeric* _cretval;
     _cretval = gda_numeric_new();
@@ -123,7 +123,7 @@ class Numeric : gobject.boxed.Boxed
         
         Free-function: gda_numeric_free
   */
-  gda.numeric.Numeric copy()
+  gda.numeric.Numeric copy() nothrow
   {
     GdaNumeric* _cretval;
     _cretval = gda_numeric_copy(cast(GdaNumeric*)this._cPtr);
@@ -132,7 +132,7 @@ class Numeric : gobject.boxed.Boxed
   }
 
   /** */
-  double getDouble()
+  double getDouble() nothrow
   {
     double _retval;
     _retval = gda_numeric_get_double(cast(const(GdaNumeric)*)this._cPtr);
@@ -143,7 +143,7 @@ class Numeric : gobject.boxed.Boxed
       Gets the precision of a #GdaNumeric.
       Returns: an integer with the precision of a #GdaNumeric.
   */
-  glong getPrecision()
+  glong getPrecision() nothrow
   {
     glong _retval;
     _retval = gda_numeric_get_precision(cast(const(GdaNumeric)*)this._cPtr);
@@ -154,7 +154,7 @@ class Numeric : gobject.boxed.Boxed
       Get the string representation of numeric, in the C locale format (dot as a fraction separator).
       Returns: a new string representing the stored valued in numeric
   */
-  string getString()
+  string getString() nothrow
   {
     char* _cretval;
     _cretval = gda_numeric_get_string(cast(const(GdaNumeric)*)this._cPtr);
@@ -166,7 +166,7 @@ class Numeric : gobject.boxed.Boxed
       Gets the width of a #GdaNumeric. (Not yet implemented).
       Returns: an integer with the width of a #GdaNumeric. (Not jet implemented).
   */
-  glong getWidth()
+  glong getWidth() nothrow
   {
     glong _retval;
     _retval = gda_numeric_get_width(cast(const(GdaNumeric)*)this._cPtr);
@@ -179,7 +179,7 @@ class Numeric : gobject.boxed.Boxed
       Params:
         number = a #gdouble
   */
-  void setDouble(double number)
+  void setDouble(double number) nothrow
   {
     gda_numeric_set_double(cast(GdaNumeric*)this._cPtr, number);
   }
@@ -190,7 +190,7 @@ class Numeric : gobject.boxed.Boxed
       Params:
         str = a string representing a number, in the C locale format
   */
-  void setFromString(string str)
+  void setFromString(string str) nothrow
   {
     const(char)* _str = str.toCString(No.Alloc);
     gda_numeric_set_from_string(cast(GdaNumeric*)this._cPtr, _str);
@@ -202,7 +202,7 @@ class Numeric : gobject.boxed.Boxed
       Params:
         precision = a #glong
   */
-  void setPrecision(glong precision)
+  void setPrecision(glong precision) nothrow
   {
     gda_numeric_set_precision(cast(GdaNumeric*)this._cPtr, precision);
   }
@@ -213,7 +213,7 @@ class Numeric : gobject.boxed.Boxed
       Params:
         width = a #glong
   */
-  void setWidth(glong width)
+  void setWidth(glong width) nothrow
   {
     gda_numeric_set_width(cast(GdaNumeric*)this._cPtr, width);
   }

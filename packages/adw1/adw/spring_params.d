@@ -44,32 +44,32 @@ class SpringParams : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_spring_params_get_type != &gidSymbolNotFound ? adw_spring_params_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SpringParams self()
+  override SpringParams self() nothrow
   {
     return this;
   }
@@ -97,7 +97,7 @@ class SpringParams : gobject.boxed.Boxed
         stiffness = the stiffness of the spring
       Returns: the newly created spring parameters
   */
-  this(double dampingRatio, double mass, double stiffness)
+  this(double dampingRatio, double mass, double stiffness) nothrow
   {
     AdwSpringParams* _cretval;
     _cretval = adw_spring_params_new(dampingRatio, mass, stiffness);
@@ -116,7 +116,7 @@ class SpringParams : gobject.boxed.Boxed
         stiffness = the stiffness of the spring
       Returns: the newly created spring parameters
   */
-  static adw.spring_params.SpringParams newFull(double damping, double mass, double stiffness)
+  static adw.spring_params.SpringParams newFull(double damping, double mass, double stiffness) nothrow
   {
     AdwSpringParams* _cretval;
     _cretval = adw_spring_params_new_full(damping, mass, stiffness);
@@ -128,7 +128,7 @@ class SpringParams : gobject.boxed.Boxed
       Gets the damping of self.
       Returns: the damping
   */
-  double getDamping()
+  double getDamping() nothrow
   {
     double _retval;
     _retval = adw_spring_params_get_damping(cast(AdwSpringParams*)this._cPtr);
@@ -139,7 +139,7 @@ class SpringParams : gobject.boxed.Boxed
       Gets the damping ratio of self.
       Returns: the damping ratio
   */
-  double getDampingRatio()
+  double getDampingRatio() nothrow
   {
     double _retval;
     _retval = adw_spring_params_get_damping_ratio(cast(AdwSpringParams*)this._cPtr);
@@ -150,7 +150,7 @@ class SpringParams : gobject.boxed.Boxed
       Gets the mass of self.
       Returns: the mass
   */
-  double getMass()
+  double getMass() nothrow
   {
     double _retval;
     _retval = adw_spring_params_get_mass(cast(AdwSpringParams*)this._cPtr);
@@ -161,7 +161,7 @@ class SpringParams : gobject.boxed.Boxed
       Gets the stiffness of self.
       Returns: the stiffness
   */
-  double getStiffness()
+  double getStiffness() nothrow
   {
     double _retval;
     _retval = adw_spring_params_get_stiffness(cast(AdwSpringParams*)this._cPtr);

@@ -18,11 +18,8 @@ class TextureNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.texture_node.TextureNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -39,7 +36,7 @@ class TextureNode : gsk.render_node.RenderNode
         bounds = the rectangle to render the texture into
       Returns: A new [gsk.render_node.RenderNode]
   */
-  this(gdk.texture.Texture texture, graphene.rect.Rect bounds)
+  this(gdk.texture.Texture texture, graphene.rect.Rect bounds) nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_texture_node_new(texture ? cast(GdkTexture*)texture._cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null);
@@ -50,7 +47,7 @@ class TextureNode : gsk.render_node.RenderNode
       Retrieves the [gdk.texture.Texture] used when creating this [gsk.render_node.RenderNode].
       Returns: the [gdk.texture.Texture]
   */
-  gdk.texture.Texture getTexture()
+  gdk.texture.Texture getTexture() nothrow
   {
     GdkTexture* _cretval;
     _cretval = gsk_texture_node_get_texture(cast(const(GskRenderNode)*)this._cPtr);

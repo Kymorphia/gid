@@ -51,7 +51,7 @@ struct PathBuf
       [glib.path_buf.PathBuf] initialized using [glib.path_buf.PathBuf.init_] or
       [glib.path_buf.PathBuf.initFromPath].
   */
-  void clear()
+  void clear() nothrow
   {
     g_path_buf_clear(cast(GPathBuf*)&this);
   }
@@ -64,7 +64,7 @@ struct PathBuf
       See also: [glib.path_buf.PathBuf.toPath]
       Returns: the built path
   */
-  string clearToPath()
+  string clearToPath() nothrow
   {
     char* _cretval;
     _cretval = g_path_buf_clear_to_path(cast(GPathBuf*)&this);
@@ -81,7 +81,7 @@ struct PathBuf
       See also: [glib.path_buf.PathBuf.toPath]
       Returns: the path
   */
-  string freeToPath()
+  string freeToPath() nothrow
   {
     char* _cretval;
     _cretval = g_path_buf_free_to_path(cast(GPathBuf*)&this);
@@ -93,7 +93,7 @@ struct PathBuf
       Initializes a [glib.path_buf.PathBuf] instance.
       Returns: the initialized path builder
   */
-  glib.path_buf.PathBuf init_()
+  glib.path_buf.PathBuf init_() nothrow
   {
     GPathBuf* _cretval;
     _cretval = g_path_buf_init(cast(GPathBuf*)&this);
@@ -110,7 +110,7 @@ struct PathBuf
         path = a file system path
       Returns: the initialized path builder
   */
-  glib.path_buf.PathBuf initFromPath(string path = null)
+  glib.path_buf.PathBuf initFromPath(string path = null) nothrow
   {
     GPathBuf* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -147,7 +147,7 @@ struct PathBuf
       ```
       Returns: `TRUE` if the buffer was modified and `FALSE` otherwise
   */
-  bool pop()
+  bool pop() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_path_buf_pop(cast(GPathBuf*)&this);
@@ -187,7 +187,7 @@ struct PathBuf
         path = a path
       Returns: the same pointer to buf, for convenience
   */
-  glib.path_buf.PathBuf push(string path)
+  glib.path_buf.PathBuf push(string path) nothrow
   {
     GPathBuf* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -210,7 +210,7 @@ struct PathBuf
         extension = the file extension
       Returns: `TRUE` if the extension was replaced, and `FALSE` otherwise
   */
-  bool setExtension(string extension = null)
+  bool setExtension(string extension = null) nothrow
   {
     bool _retval;
     const(char)* _extension = extension.toCString(No.Alloc);
@@ -254,7 +254,7 @@ struct PathBuf
         fileName = the file name in the path
       Returns: `TRUE` if the file name was replaced, and `FALSE` otherwise
   */
-  bool setFilename(string fileName)
+  bool setFilename(string fileName) nothrow
   {
     bool _retval;
     const(char)* _fileName = fileName.toCString(No.Alloc);
@@ -271,7 +271,7 @@ struct PathBuf
       If the path buffer is empty, this function returns `NULL`.
       Returns: the path
   */
-  string toPath()
+  string toPath() nothrow
   {
     char* _cretval;
     _cretval = g_path_buf_to_path(cast(GPathBuf*)&this);
@@ -296,7 +296,7 @@ struct PathBuf
       Returns: `TRUE` if the two path buffers are equal,
           and `FALSE` otherwise
   */
-  static bool equal(const(void)* v1, const(void)* v2)
+  static bool equal(const(void)* v1, const(void)* v2) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_path_buf_equal(v1, v2);

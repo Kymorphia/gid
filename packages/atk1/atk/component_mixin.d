@@ -46,7 +46,7 @@ template ComponentT()
       Returns: true or false indicating whether the specified point is within
         the extent of the component or not
   */
-  override bool contains(int x, int y, atk.types.CoordType coordType)
+  override bool contains(int x, int y, atk.types.CoordType coordType) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_component_contains(cast(AtkComponent*)this._cPtr, x, y, coordType);
@@ -59,7 +59,7 @@ template ComponentT()
       (fully opaque).
       Returns: An alpha value from 0 to 1.0, inclusive.
   */
-  override double getAlpha()
+  override double getAlpha() nothrow
   {
     double _retval;
     _retval = atk_component_get_alpha(cast(AtkComponent*)this._cPtr);
@@ -80,7 +80,7 @@ template ComponentT()
         coordType = specifies whether the coordinates are relative to the screen
           or to the components top level window
   */
-  override void getExtents(out int x, out int y, out int width, out int height, atk.types.CoordType coordType)
+  override void getExtents(out int x, out int y, out int width, out int height, atk.types.CoordType coordType) nothrow
   {
     atk_component_get_extents(cast(AtkComponent*)this._cPtr, cast(int*)&x, cast(int*)&y, cast(int*)&width, cast(int*)&height, coordType);
   }
@@ -89,7 +89,7 @@ template ComponentT()
       Gets the layer of the component.
       Returns: an #AtkLayer which is the layer of the component
   */
-  override atk.types.Layer getLayer()
+  override atk.types.Layer getLayer() nothrow
   {
     AtkLayer _cretval;
     _cretval = atk_component_get_layer(cast(AtkComponent*)this._cPtr);
@@ -104,7 +104,7 @@ template ComponentT()
         which the component is shown in relation to other components in the same
         container.
   */
-  override int getMdiZorder()
+  override int getMdiZorder() nothrow
   {
     int _retval;
     _retval = atk_component_get_mdi_zorder(cast(AtkComponent*)this._cPtr);
@@ -126,7 +126,7 @@ template ComponentT()
   
       Deprecated: Since 2.12. Use [atk.component.Component.getExtents] instead.
   */
-  override void getPosition(out int x, out int y, atk.types.CoordType coordType)
+  override void getPosition(out int x, out int y, atk.types.CoordType coordType) nothrow
   {
     atk_component_get_position(cast(AtkComponent*)this._cPtr, cast(int*)&x, cast(int*)&y, coordType);
   }
@@ -143,7 +143,7 @@ template ComponentT()
   
       Deprecated: Since 2.12. Use [atk.component.Component.getExtents] instead.
   */
-  override void getSize(out int width, out int height)
+  override void getSize(out int width, out int height) nothrow
   {
     atk_component_get_size(cast(AtkComponent*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
@@ -152,7 +152,7 @@ template ComponentT()
       Grabs focus for this component.
       Returns: true if successful, false otherwise.
   */
-  override bool grabFocus()
+  override bool grabFocus() nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_component_grab_focus(cast(AtkComponent*)this._cPtr);
@@ -171,7 +171,7 @@ template ComponentT()
       Returns: a reference to the accessible
         child, if one exists
   */
-  override atk.object.ObjectWrap refAccessibleAtPoint(int x, int y, atk.types.CoordType coordType)
+  override atk.object.ObjectWrap refAccessibleAtPoint(int x, int y, atk.types.CoordType coordType) nothrow
   {
     AtkObject* _cretval;
     _cretval = atk_component_ref_accessible_at_point(cast(AtkComponent*)this._cPtr, x, y, coordType);
@@ -191,7 +191,7 @@ template ComponentT()
       Deprecated: If you need to track when an object gains or
         lose the focus, use the #AtkObject::state-change "focused" notification instead.
   */
-  override void removeFocusHandler(uint handlerId)
+  override void removeFocusHandler(uint handlerId) nothrow
   {
     atk_component_remove_focus_handler(cast(AtkComponent*)this._cPtr, handlerId);
   }
@@ -207,7 +207,7 @@ template ComponentT()
         type = specify where the object should be made visible.
       Returns: whether scrolling was successful.
   */
-  override bool scrollTo(atk.types.ScrollType type)
+  override bool scrollTo(atk.types.ScrollType type) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_component_scroll_to(cast(AtkComponent*)this._cPtr, type);
@@ -225,7 +225,7 @@ template ComponentT()
         y = y-position where to scroll to
       Returns: whether scrolling was successful.
   */
-  override bool scrollToPoint(atk.types.CoordType coords, int x, int y)
+  override bool scrollToPoint(atk.types.CoordType coords, int x, int y) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_component_scroll_to_point(cast(AtkComponent*)this._cPtr, coords, x, y);
@@ -244,7 +244,7 @@ template ComponentT()
           or to the components top level window
       Returns: true or false whether the extents were set or not
   */
-  override bool setExtents(int x, int y, int width, int height, atk.types.CoordType coordType)
+  override bool setExtents(int x, int y, int width, int height, atk.types.CoordType coordType) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_component_set_extents(cast(AtkComponent*)this._cPtr, x, y, width, height, coordType);
@@ -264,7 +264,7 @@ template ComponentT()
           or to the component's top level window
       Returns: true or false whether or not the position was set or not
   */
-  override bool setPosition(int x, int y, atk.types.CoordType coordType)
+  override bool setPosition(int x, int y, atk.types.CoordType coordType) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_component_set_position(cast(AtkComponent*)this._cPtr, x, y, coordType);
@@ -279,7 +279,7 @@ template ComponentT()
         height = height to set for component
       Returns: true or false whether the size was set or not
   */
-  override bool setSize(int width, int height)
+  override bool setSize(int width, int height) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_component_set_size(cast(AtkComponent*)this._cPtr, width, height);
@@ -304,14 +304,14 @@ template ComponentT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectBoundsChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectBoundsChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == atk.types.Rectangle)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.component.Component)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -323,7 +323,14 @@ template ComponentT()
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.component.Component.boundsChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

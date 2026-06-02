@@ -30,7 +30,7 @@ template CompletionProposalT()
       external tooling to compare results.
       Returns: a newly allocated string, or null
   */
-  override string getTypedText()
+  override string getTypedText() nothrow
   {
     char* _cretval;
     _cretval = gtk_source_completion_proposal_get_typed_text(cast(GtkSourceCompletionProposal*)this._cPtr);

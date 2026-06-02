@@ -24,26 +24,26 @@ class EmblemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_emblemed_icon_get_type != &gidSymbolNotFound ? g_emblemed_icon_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EmblemedIcon self()
+  override EmblemedIcon self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class EmblemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
       Get builder for [gio.emblemed_icon.EmblemedIcon]
       Returns: New builder object
   */
-  static EmblemedIconGidBuilder builder()
+  static EmblemedIconGidBuilder builder() nothrow
   {
     return new EmblemedIconGidBuilder;
   }
@@ -61,7 +61,7 @@ class EmblemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
       Get `gicon` property.
       Returns: The [gio.icon.Icon] to attach emblems to.
   */
-  @property gio.icon.Icon gicon()
+  @property gio.icon.Icon gicon() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.icon.Icon)("gicon");
   }
@@ -76,7 +76,7 @@ class EmblemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
         emblem = a #GEmblem, or null
       Returns: a new #GIcon
   */
-  this(gio.icon.Icon icon, gio.emblem.Emblem emblem = null)
+  this(gio.icon.Icon icon, gio.emblem.Emblem emblem = null) nothrow
   {
     GIcon* _cretval;
     _cretval = g_emblemed_icon_new(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null, emblem ? cast(GEmblem*)emblem._cPtr(No.Dup) : null);
@@ -89,7 +89,7 @@ class EmblemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
       Params:
         emblem = a #GEmblem
   */
-  void addEmblem(gio.emblem.Emblem emblem)
+  void addEmblem(gio.emblem.Emblem emblem) nothrow
   {
     g_emblemed_icon_add_emblem(cast(GEmblemedIcon*)this._cPtr, emblem ? cast(GEmblem*)emblem._cPtr(No.Dup) : null);
   }
@@ -97,7 +97,7 @@ class EmblemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   /**
       Removes all the emblems from icon.
   */
-  void clearEmblems()
+  void clearEmblems() nothrow
   {
     g_emblemed_icon_clear_emblems(cast(GEmblemedIcon*)this._cPtr);
   }
@@ -107,7 +107,7 @@ class EmblemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
       Returns: a #GList of
             #GEmblems that is owned by emblemed
   */
-  gio.emblem.Emblem[] getEmblems()
+  gio.emblem.Emblem[] getEmblems() nothrow
   {
     GList* _cretval;
     _cretval = g_emblemed_icon_get_emblems(cast(GEmblemedIcon*)this._cPtr);
@@ -119,7 +119,7 @@ class EmblemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
       Gets the main icon for emblemed.
       Returns: a #GIcon that is owned by emblemed
   */
-  gio.icon.Icon getIcon()
+  gio.icon.Icon getIcon() nothrow
   {
     GIcon* _cretval;
     _cretval = g_emblemed_icon_get_icon(cast(GEmblemedIcon*)this._cPtr);
@@ -140,7 +140,7 @@ class EmblemedIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
         propval = The [gio.icon.Icon] to attach emblems to.
       Returns: Builder instance for fluent chaining
   */
-  T gicon(gio.icon.Icon propval)
+  T gicon(gio.icon.Icon propval) nothrow
   {
     return setProperty("gicon", propval);
   }
@@ -153,7 +153,7 @@ final class EmblemedIconGidBuilder : EmblemedIconGidBuilderImpl!EmblemedIconGidB
       Create object from builder.
       Returns: New object
   */
-  EmblemedIcon build()
+  EmblemedIcon build() nothrow
   {
     return new EmblemedIcon(cast(void*)createGObject(EmblemedIcon._getGType), Yes.Take);
   }

@@ -16,11 +16,8 @@ class ProviderInfo
   GdaProviderInfo _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.provider_info.ProviderInfo");
-
     _cInstance = *cast(GdaProviderInfo*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class ProviderInfo
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class ProviderInfo
       Get `id` field.
       Returns: the unique identifier of the database provider
   */
-  @property string id()
+  @property string id() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaProviderInfo*)this._cPtr).id);
   }
@@ -47,7 +44,7 @@ class ProviderInfo
       Params:
         propval = the unique identifier of the database provider
   */
-  @property void id(string propval)
+  @property void id(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaProviderInfo*)this._cPtr).id);
     dToC(propval, cast(void*)&(cast(GdaProviderInfo*)this._cPtr).id);
@@ -57,7 +54,7 @@ class ProviderInfo
       Get `location` field.
       Returns: the complete path to the shared library implementing the database provider
   */
-  @property string location()
+  @property string location() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaProviderInfo*)this._cPtr).location);
   }
@@ -67,7 +64,7 @@ class ProviderInfo
       Params:
         propval = the complete path to the shared library implementing the database provider
   */
-  @property void location(string propval)
+  @property void location(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaProviderInfo*)this._cPtr).location);
     dToC(propval, cast(void*)&(cast(GdaProviderInfo*)this._cPtr).location);
@@ -77,7 +74,7 @@ class ProviderInfo
       Get `description` field.
       Returns: provider's description
   */
-  @property string description()
+  @property string description() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaProviderInfo*)this._cPtr).description);
   }
@@ -87,7 +84,7 @@ class ProviderInfo
       Params:
         propval = provider's description
   */
-  @property void description(string propval)
+  @property void description(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaProviderInfo*)this._cPtr).description);
     dToC(propval, cast(void*)&(cast(GdaProviderInfo*)this._cPtr).description);
@@ -97,7 +94,7 @@ class ProviderInfo
       Get `dsnParams` field.
       Returns: a #GdaSet containing all the parameters which can/must be specified when opening a connection or defining a named data source (DSN)
   */
-  @property gda.set.Set dsnParams()
+  @property gda.set.Set dsnParams() nothrow
   {
     return cToD!(gda.set.Set)(cast(void*)(cast(GdaProviderInfo*)this._cPtr).dsnParams);
   }
@@ -107,7 +104,7 @@ class ProviderInfo
       Params:
         propval = a #GdaSet containing all the parameters which can/must be specified when opening a connection or defining a named data source (DSN)
   */
-  @property void dsnParams(gda.set.Set propval)
+  @property void dsnParams(gda.set.Set propval) nothrow
   {
     cValueFree!(gda.set.Set)(cast(void*)(cast(GdaProviderInfo*)this._cPtr).dsnParams);
     dToC(propval, cast(void*)&(cast(GdaProviderInfo*)this._cPtr).dsnParams);
@@ -117,7 +114,7 @@ class ProviderInfo
       Get `authParams` field.
       Returns: a #GdaSet containing all the authentication parameters
   */
-  @property gda.set.Set authParams()
+  @property gda.set.Set authParams() nothrow
   {
     return cToD!(gda.set.Set)(cast(void*)(cast(GdaProviderInfo*)this._cPtr).authParams);
   }
@@ -127,7 +124,7 @@ class ProviderInfo
       Params:
         propval = a #GdaSet containing all the authentication parameters
   */
-  @property void authParams(gda.set.Set propval)
+  @property void authParams(gda.set.Set propval) nothrow
   {
     cValueFree!(gda.set.Set)(cast(void*)(cast(GdaProviderInfo*)this._cPtr).authParams);
     dToC(propval, cast(void*)&(cast(GdaProviderInfo*)this._cPtr).authParams);

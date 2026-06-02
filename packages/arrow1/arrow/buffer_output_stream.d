@@ -19,26 +19,26 @@ class BufferOutputStream : arrow.output_stream.OutputStream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_buffer_output_stream_get_type != &gidSymbolNotFound ? garrow_buffer_output_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BufferOutputStream self()
+  override BufferOutputStream self() nothrow
   {
     return this;
   }
@@ -47,13 +47,13 @@ class BufferOutputStream : arrow.output_stream.OutputStream
       Get builder for [arrow.buffer_output_stream.BufferOutputStream]
       Returns: New builder object
   */
-  static BufferOutputStreamGidBuilder builder()
+  static BufferOutputStreamGidBuilder builder() nothrow
   {
     return new BufferOutputStreamGidBuilder;
   }
 
   /** */
-  this(arrow.resizable_buffer.ResizableBuffer buffer)
+  this(arrow.resizable_buffer.ResizableBuffer buffer) nothrow
   {
     GArrowBufferOutputStream* _cretval;
     _cretval = garrow_buffer_output_stream_new(buffer ? cast(GArrowResizableBuffer*)buffer._cPtr(No.Dup) : null);
@@ -74,7 +74,7 @@ final class BufferOutputStreamGidBuilder : BufferOutputStreamGidBuilderImpl!Buff
       Create object from builder.
       Returns: New object
   */
-  BufferOutputStream build()
+  BufferOutputStream build() nothrow
   {
     return new BufferOutputStream(cast(void*)createGObject(BufferOutputStream._getGType), Yes.Take);
   }

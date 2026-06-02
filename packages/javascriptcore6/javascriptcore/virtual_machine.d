@@ -21,26 +21,26 @@ class VirtualMachine : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())jsc_virtual_machine_get_type != &gidSymbolNotFound ? jsc_virtual_machine_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VirtualMachine self()
+  override VirtualMachine self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class VirtualMachine : gobject.object.ObjectWrap
       Get builder for [javascriptcore.virtual_machine.VirtualMachine]
       Returns: New builder object
   */
-  static VirtualMachineGidBuilder builder()
+  static VirtualMachineGidBuilder builder() nothrow
   {
     return new VirtualMachineGidBuilder;
   }
@@ -58,7 +58,7 @@ class VirtualMachine : gobject.object.ObjectWrap
       Create a new #JSCVirtualMachine.
       Returns: the newly created #JSCVirtualMachine.
   */
-  this()
+  this() nothrow
   {
     JSCVirtualMachine* _cretval;
     _cretval = jsc_virtual_machine_new();
@@ -78,7 +78,7 @@ final class VirtualMachineGidBuilder : VirtualMachineGidBuilderImpl!VirtualMachi
       Create object from builder.
       Returns: New object
   */
-  VirtualMachine build()
+  VirtualMachine build() nothrow
   {
     return new VirtualMachine(cast(void*)createGObject(VirtualMachine._getGType), Yes.Take);
   }

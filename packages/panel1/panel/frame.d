@@ -35,26 +35,26 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_frame_get_type != &gidSymbolNotFound ? panel_frame_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Frame self()
+  override Frame self() nothrow
   {
     return this;
   }
@@ -63,43 +63,43 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       Get builder for [panel.frame.Frame]
       Returns: New builder object
   */
-  static FrameGidBuilder builder()
+  static FrameGidBuilder builder() nothrow
   {
     return new FrameGidBuilder;
   }
 
   /** */
-  @property bool closeable()
+  @property bool closeable() nothrow
   {
     return getCloseable();
   }
 
   /** */
-  @property bool empty()
+  @property bool empty() nothrow
   {
     return getEmpty();
   }
 
   /** */
-  @property gtk.widget.Widget placeholder()
+  @property gtk.widget.Widget placeholder() nothrow
   {
     return getPlaceholder();
   }
 
   /** */
-  @property void placeholder(gtk.widget.Widget propval)
+  @property void placeholder(gtk.widget.Widget propval) nothrow
   {
     setPlaceholder(propval);
   }
 
   /** */
-  @property panel.widget.Widget visibleChild()
+  @property panel.widget.Widget visibleChild() nothrow
   {
     return getVisibleChild();
   }
 
   /** */
-  @property void visibleChild(panel.widget.Widget propval)
+  @property void visibleChild(panel.widget.Widget propval) nothrow
   {
     setVisibleChild(propval);
   }
@@ -110,7 +110,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       Create a new #PanelFrame.
       Returns: a newly created #PanelFrame object.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = panel_frame_new();
@@ -123,7 +123,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         panel = a #PanelWidget to add
   */
-  void add(panel.widget.Widget panel)
+  void add(panel.widget.Widget panel) nothrow
   {
     panel_frame_add(cast(PanelFrame*)this._cPtr, panel ? cast(PanelWidget*)panel._cPtr(No.Dup) : null);
   }
@@ -135,7 +135,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
         panel = the #PanelWidget to add.
         sibling = the sibling #PanelWidget to add the panel before.
   */
-  void addBefore(panel.widget.Widget panel, panel.widget.Widget sibling)
+  void addBefore(panel.widget.Widget panel, panel.widget.Widget sibling) nothrow
   {
     panel_frame_add_before(cast(PanelFrame*)this._cPtr, panel ? cast(PanelWidget*)panel._cPtr(No.Dup) : null, sibling ? cast(PanelWidget*)sibling._cPtr(No.Dup) : null);
   }
@@ -144,7 +144,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       Tells if the panel frame is closeable.
       Returns: true if the panel frame is closeable.
   */
-  bool getCloseable()
+  bool getCloseable() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_frame_get_closeable(cast(PanelFrame*)this._cPtr);
@@ -155,7 +155,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       Tells if the panel frame is empty.
       Returns: true if the panel is empty.
   */
-  bool getEmpty()
+  bool getEmpty() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_frame_get_empty(cast(PanelFrame*)this._cPtr);
@@ -166,7 +166,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       Gets the header for the frame.
       Returns: a #PanelFrameHeader or null
   */
-  panel.frame_header.FrameHeader getHeader()
+  panel.frame_header.FrameHeader getHeader() nothrow
   {
     PanelFrameHeader* _cretval;
     _cretval = panel_frame_get_header(cast(PanelFrame*)this._cPtr);
@@ -178,7 +178,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       Gets the number of pages in the panel frame.
       Returns: The number of pages.
   */
-  uint getNPages()
+  uint getNPages() nothrow
   {
     uint _retval;
     _retval = panel_frame_get_n_pages(cast(PanelFrame*)this._cPtr);
@@ -192,7 +192,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
         n = the index of the page
       Returns: a #PanelWidget or null
   */
-  panel.widget.Widget getPage(uint n)
+  panel.widget.Widget getPage(uint n) nothrow
   {
     PanelWidget* _cretval;
     _cretval = panel_frame_get_page(cast(PanelFrame*)this._cPtr, n);
@@ -204,7 +204,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       Get the pages for the frame.
       Returns: a #GtkSelectionModel
   */
-  gtk.selection_model.SelectionModel getPages()
+  gtk.selection_model.SelectionModel getPages() nothrow
   {
     GtkSelectionModel* _cretval;
     _cretval = panel_frame_get_pages(cast(PanelFrame*)this._cPtr);
@@ -216,7 +216,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       Gets the placeholder widget, if any.
       Returns: a #GtkWidget or null
   */
-  gtk.widget.Widget getPlaceholder()
+  gtk.widget.Widget getPlaceholder() nothrow
   {
     GtkWidget* _cretval;
     _cretval = panel_frame_get_placeholder(cast(PanelFrame*)this._cPtr);
@@ -228,7 +228,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       Gets the #PanelPosition for the frame.
       Returns: a #PanelPosition
   */
-  panel.position.Position getPosition()
+  panel.position.Position getPosition() nothrow
   {
     PanelPosition* _cretval;
     _cretval = panel_frame_get_position(cast(PanelFrame*)this._cPtr);
@@ -240,7 +240,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       Gets the requested size for the panel frame.
       Returns: the requested size.
   */
-  int getRequestedSize()
+  int getRequestedSize() nothrow
   {
     int _retval;
     _retval = panel_frame_get_requested_size(cast(PanelFrame*)this._cPtr);
@@ -251,7 +251,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       Gets the widget of the currently visible child.
       Returns: a #PanelWidget or null
   */
-  panel.widget.Widget getVisibleChild()
+  panel.widget.Widget getVisibleChild() nothrow
   {
     PanelWidget* _cretval;
     _cretval = panel_frame_get_visible_child(cast(PanelFrame*)this._cPtr);
@@ -265,7 +265,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         panel = a #PanelWidget to remove.
   */
-  void remove(panel.widget.Widget panel)
+  void remove(panel.widget.Widget panel) nothrow
   {
     panel_frame_remove(cast(PanelFrame*)this._cPtr, panel ? cast(PanelWidget*)panel._cPtr(No.Dup) : null);
   }
@@ -277,7 +277,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
         child = a #PanelWidget
         pinned = if widget should be pinned
   */
-  void setChildPinned(panel.widget.Widget child, bool pinned)
+  void setChildPinned(panel.widget.Widget child, bool pinned) nothrow
   {
     panel_frame_set_child_pinned(cast(PanelFrame*)this._cPtr, child ? cast(PanelWidget*)child._cPtr(No.Dup) : null, pinned);
   }
@@ -288,7 +288,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         header = a #PanelFrameHeader
   */
-  void setHeader(panel.frame_header.FrameHeader header = null)
+  void setHeader(panel.frame_header.FrameHeader header = null) nothrow
   {
     panel_frame_set_header(cast(PanelFrame*)this._cPtr, header ? cast(PanelFrameHeader*)(cast(gobject.object.ObjectWrap)header)._cPtr(No.Dup) : null);
   }
@@ -302,7 +302,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         placeholder = a #GtkWidget or null
   */
-  void setPlaceholder(gtk.widget.Widget placeholder = null)
+  void setPlaceholder(gtk.widget.Widget placeholder = null) nothrow
   {
     panel_frame_set_placeholder(cast(PanelFrame*)this._cPtr, placeholder ? cast(GtkWidget*)placeholder._cPtr(No.Dup) : null);
   }
@@ -313,7 +313,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         requestedSize = the requested size.
   */
-  void setRequestedSize(int requestedSize)
+  void setRequestedSize(int requestedSize) nothrow
   {
     panel_frame_set_requested_size(cast(PanelFrame*)this._cPtr, requestedSize);
   }
@@ -324,7 +324,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         widget = a #PanelWidget
   */
-  void setVisibleChild(panel.widget.Widget widget)
+  void setVisibleChild(panel.widget.Widget widget) nothrow
   {
     panel_frame_set_visible_child(cast(PanelFrame*)this._cPtr, widget ? cast(PanelWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -350,18 +350,19 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAdoptWidget(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAdoptWidget(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : panel.frame.Frame)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -369,7 +370,14 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "panel.frame.Frame.adoptWidget");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -395,14 +403,14 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPageClosed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPageClosed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : panel.frame.Frame)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -414,7 +422,14 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "panel.frame.Frame.pageClosed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -429,13 +444,13 @@ class FrameGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable
   mixin OrientableGidBuilderT!();
 
   /** */
-  T placeholder(gtk.widget.Widget propval)
+  T placeholder(gtk.widget.Widget propval) nothrow
   {
     return setProperty("placeholder", propval);
   }
 
   /** */
-  T visibleChild(panel.widget.Widget propval)
+  T visibleChild(panel.widget.Widget propval) nothrow
   {
     return setProperty("visible-child", propval);
   }
@@ -448,7 +463,7 @@ final class FrameGidBuilder : FrameGidBuilderImpl!FrameGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Frame build()
+  Frame build() nothrow
   {
     return new Frame(cast(void*)createGObject(Frame._getGType), No.Take);
   }

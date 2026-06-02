@@ -47,7 +47,7 @@ interface Accessible
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_accessible_get_type != &gidSymbolNotFound ? gtk_accessible_get_type() : cast(GType)0;
@@ -59,7 +59,7 @@ interface Accessible
         
         The accessible role cannot be changed once set.
   */
-  @property gtk.types.AccessibleRole accessibleRole();
+  @property gtk.types.AccessibleRole accessibleRole() nothrow;
 
   /**
       Set `accessibleRole` property.
@@ -68,7 +68,7 @@ interface Accessible
           
           The accessible role cannot be changed once set.
   */
-  @property void accessibleRole(gtk.types.AccessibleRole propval);
+  @property void accessibleRole(gtk.types.AccessibleRole propval) nothrow;
 
   /**
       Requests the user's screen reader to announce the given message.
@@ -257,5 +257,5 @@ interface AccessibleGidBuilderImpl(T)
           The accessible role cannot be changed once set.
       Returns: Builder instance for fluent chaining
   */
-  T accessibleRole(gtk.types.AccessibleRole propval);
+  T accessibleRole(gtk.types.AccessibleRole propval) nothrow;
 }

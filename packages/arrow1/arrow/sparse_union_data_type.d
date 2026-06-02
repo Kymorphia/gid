@@ -15,26 +15,26 @@ class SparseUnionDataType : arrow.union_data_type.UnionDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_sparse_union_data_type_get_type != &gidSymbolNotFound ? garrow_sparse_union_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SparseUnionDataType self()
+  override SparseUnionDataType self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class SparseUnionDataType : arrow.union_data_type.UnionDataType
       Get builder for [arrow.sparse_union_data_type.SparseUnionDataType]
       Returns: New builder object
   */
-  static SparseUnionDataTypeGidBuilder builder()
+  static SparseUnionDataTypeGidBuilder builder() nothrow
   {
     return new SparseUnionDataTypeGidBuilder;
   }
 
   /** */
-  this(arrow.field.Field[] fields, byte[] typeCodes)
+  this(arrow.field.Field[] fields, byte[] typeCodes) nothrow
   {
     GArrowSparseUnionDataType* _cretval;
     auto _fields = gListFromD!(arrow.field.Field)(fields);
@@ -76,7 +76,7 @@ final class SparseUnionDataTypeGidBuilder : SparseUnionDataTypeGidBuilderImpl!Sp
       Create object from builder.
       Returns: New object
   */
-  SparseUnionDataType build()
+  SparseUnionDataType build() nothrow
   {
     return new SparseUnionDataType(cast(void*)createGObject(SparseUnionDataType._getGType), Yes.Take);
   }

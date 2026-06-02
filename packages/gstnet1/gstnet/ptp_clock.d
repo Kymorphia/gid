@@ -38,26 +38,26 @@ class PtpClock : gst.system_clock.SystemClock
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_ptp_clock_get_type != &gidSymbolNotFound ? gst_ptp_clock_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PtpClock self()
+  override PtpClock self() nothrow
   {
     return this;
   }
@@ -66,31 +66,31 @@ class PtpClock : gst.system_clock.SystemClock
       Get builder for [gstnet.ptp_clock.PtpClock]
       Returns: New builder object
   */
-  static PtpClockGidBuilder builder()
+  static PtpClockGidBuilder builder() nothrow
   {
     return new PtpClockGidBuilder;
   }
 
   /** */
-  @property uint domain()
+  @property uint domain() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("domain");
   }
 
   /** */
-  @property ulong grandmasterClockId()
+  @property ulong grandmasterClockId() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("grandmaster-clock-id");
   }
 
   /** */
-  @property gst.clock.Clock internalClock()
+  @property gst.clock.Clock internalClock() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gst.clock.Clock)("internal-clock");
   }
 
   /** */
-  @property ulong masterClockId()
+  @property ulong masterClockId() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("master-clock-id");
   }
@@ -113,7 +113,7 @@ class PtpClock : gst.system_clock.SystemClock
         domain = PTP domain
       Returns: A new #GstClock
   */
-  this(string name, uint domain)
+  this(string name, uint domain) nothrow
   {
     GstClock* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -127,7 +127,7 @@ class PtpClockGidBuilderImpl(T) : gst.system_clock.SystemClockGidBuilderImpl!T
 {
 
   /** */
-  T domain(uint propval)
+  T domain(uint propval) nothrow
   {
     return setProperty("domain", propval);
   }
@@ -140,7 +140,7 @@ final class PtpClockGidBuilder : PtpClockGidBuilderImpl!PtpClockGidBuilder
       Create object from builder.
       Returns: New object
   */
-  PtpClock build()
+  PtpClock build() nothrow
   {
     return new PtpClock(cast(void*)createGObject(PtpClock._getGType), Yes.Take);
   }

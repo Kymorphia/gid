@@ -18,11 +18,8 @@ class PropertyValues
   AtkPropertyValues _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for atk.property_values.PropertyValues");
-
     _cInstance = *cast(AtkPropertyValues*)ptr;
 
     if (take)
@@ -30,7 +27,7 @@ class PropertyValues
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class PropertyValues
       Get `propertyName` field.
       Returns: The name of the ATK property which has changed.
   */
-  @property string propertyName()
+  @property string propertyName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(AtkPropertyValues*)this._cPtr).propertyName);
   }
@@ -49,7 +46,7 @@ class PropertyValues
       Params:
         propval = The name of the ATK property which has changed.
   */
-  @property void propertyName(string propval)
+  @property void propertyName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(AtkPropertyValues*)this._cPtr).propertyName);
     dToC(propval, cast(void*)&(cast(AtkPropertyValues*)this._cPtr).propertyName);
@@ -59,7 +56,7 @@ class PropertyValues
       Get `oldValue` field.
       Returns: NULL. This field is not used anymore.
   */
-  @property gobject.value.Value oldValue()
+  @property gobject.value.Value oldValue() nothrow
   {
     return cToD!(gobject.value.Value)(cast(void*)&(cast(AtkPropertyValues*)this._cPtr).oldValue);
   }
@@ -68,7 +65,7 @@ class PropertyValues
       Get `newValue` field.
       Returns: The new value of the named property.
   */
-  @property gobject.value.Value newValue()
+  @property gobject.value.Value newValue() nothrow
   {
     return cToD!(gobject.value.Value)(cast(void*)&(cast(AtkPropertyValues*)this._cPtr).newValue);
   }

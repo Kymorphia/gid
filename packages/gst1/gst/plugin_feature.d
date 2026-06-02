@@ -18,26 +18,26 @@ class PluginFeature : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_plugin_feature_get_type != &gidSymbolNotFound ? gst_plugin_feature_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PluginFeature self()
+  override PluginFeature self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class PluginFeature : gst.object.ObjectWrap
       Get builder for [gst.plugin_feature.PluginFeature]
       Returns: New builder object
   */
-  static PluginFeatureGidBuilder builder()
+  static PluginFeatureGidBuilder builder() nothrow
   {
     return new PluginFeatureGidBuilder;
   }
@@ -61,7 +61,7 @@ class PluginFeature : gst.object.ObjectWrap
       Returns: a copy of list,
             with each feature's reference count incremented.
   */
-  static gst.plugin_feature.PluginFeature[] listCopy(gst.plugin_feature.PluginFeature[] list)
+  static gst.plugin_feature.PluginFeature[] listCopy(gst.plugin_feature.PluginFeature[] list) nothrow
   {
     GList* _cretval;
     auto _list = gListFromD!(gst.plugin_feature.PluginFeature)(list);
@@ -78,7 +78,7 @@ class PluginFeature : gst.object.ObjectWrap
         list = a #GList of
               plugin features
   */
-  static void listDebug(gst.plugin_feature.PluginFeature[] list)
+  static void listDebug(gst.plugin_feature.PluginFeature[] list) nothrow
   {
     auto _list = gListFromD!(gst.plugin_feature.PluginFeature)(list);
     scope(exit) containerFree!(GList*, gst.plugin_feature.PluginFeature, GidOwnership.None)(_list);
@@ -97,7 +97,7 @@ class PluginFeature : gst.object.ObjectWrap
         and names are equal; positive value if the rank of p1 < the rank of p2 or the
         ranks are equal but the name of p2 comes before the name of p1
   */
-  static int rankCompareFunc(const(void)* p1 = null, const(void)* p2 = null)
+  static int rankCompareFunc(const(void)* p1 = null, const(void)* p2 = null) nothrow
   {
     int _retval;
     _retval = gst_plugin_feature_rank_compare_func(p1, p2);
@@ -120,7 +120,7 @@ class PluginFeature : gst.object.ObjectWrap
       Returns: true if the plugin feature has at least
          the required version, otherwise false.
   */
-  bool checkVersion(uint minMajor, uint minMinor, uint minMicro)
+  bool checkVersion(uint minMajor, uint minMinor, uint minMicro) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_plugin_feature_check_version(cast(GstPluginFeature*)this._cPtr, minMajor, minMinor, minMicro);
@@ -133,7 +133,7 @@ class PluginFeature : gst.object.ObjectWrap
             feature, or null.  Unref with [gst.object.ObjectWrap.unref] when no
             longer needed.
   */
-  gst.plugin.Plugin getPlugin()
+  gst.plugin.Plugin getPlugin() nothrow
   {
     GstPlugin* _cretval;
     _cretval = gst_plugin_feature_get_plugin(cast(GstPluginFeature*)this._cPtr);
@@ -147,7 +147,7 @@ class PluginFeature : gst.object.ObjectWrap
             feature, or null if the feature is not associated with a
             plugin.
   */
-  string getPluginName()
+  string getPluginName() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_plugin_feature_get_plugin_name(cast(GstPluginFeature*)this._cPtr);
@@ -159,7 +159,7 @@ class PluginFeature : gst.object.ObjectWrap
       Gets the rank of a plugin feature.
       Returns: The rank of the feature
   */
-  uint getRank()
+  uint getRank() nothrow
   {
     uint _retval;
     _retval = gst_plugin_feature_get_rank(cast(GstPluginFeature*)this._cPtr);
@@ -182,7 +182,7 @@ class PluginFeature : gst.object.ObjectWrap
       Returns: a reference to the loaded
         feature, or null on error
   */
-  gst.plugin_feature.PluginFeature load()
+  gst.plugin_feature.PluginFeature load() nothrow
   {
     GstPluginFeature* _cretval;
     _cretval = gst_plugin_feature_load(cast(GstPluginFeature*)this._cPtr);
@@ -197,7 +197,7 @@ class PluginFeature : gst.object.ObjectWrap
       Params:
         rank = rank value - higher number means more priority rank
   */
-  void setRank(uint rank)
+  void setRank(uint rank) nothrow
   {
     gst_plugin_feature_set_rank(cast(GstPluginFeature*)this._cPtr, rank);
   }
@@ -215,7 +215,7 @@ final class PluginFeatureGidBuilder : PluginFeatureGidBuilderImpl!PluginFeatureG
       Create object from builder.
       Returns: New object
   */
-  PluginFeature build()
+  PluginFeature build() nothrow
   {
     return new PluginFeature(cast(void*)createGObject(PluginFeature._getGType), No.Take);
   }

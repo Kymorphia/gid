@@ -26,7 +26,7 @@ template TagXmpWriterT()
       Adds all available XMP schemas to the configuration. Meaning that
       all will be used.
   */
-  override void addAllSchemas()
+  override void addAllSchemas() nothrow
   {
     gst_tag_xmp_writer_add_all_schemas(cast(GstTagXmpWriter*)this._cPtr);
   }
@@ -37,7 +37,7 @@ template TagXmpWriterT()
       Params:
         schema = the schema to be added
   */
-  override void addSchema(string schema)
+  override void addSchema(string schema) nothrow
   {
     const(char)* _schema = schema.toCString(No.Alloc);
     gst_tag_xmp_writer_add_schema(cast(GstTagXmpWriter*)this._cPtr, _schema);
@@ -50,7 +50,7 @@ template TagXmpWriterT()
         schema = the schema to test
       Returns: true if it is going to be used
   */
-  override bool hasSchema(string schema)
+  override bool hasSchema(string schema) nothrow
   {
     bool _retval;
     const(char)* _schema = schema.toCString(No.Alloc);
@@ -62,7 +62,7 @@ template TagXmpWriterT()
       Removes all schemas from the list of schemas to use. Meaning that no
       XMP will be generated.
   */
-  override void removeAllSchemas()
+  override void removeAllSchemas() nothrow
   {
     gst_tag_xmp_writer_remove_all_schemas(cast(GstTagXmpWriter*)this._cPtr);
   }
@@ -74,14 +74,14 @@ template TagXmpWriterT()
       Params:
         schema = the schema to remove
   */
-  override void removeSchema(string schema)
+  override void removeSchema(string schema) nothrow
   {
     const(char)* _schema = schema.toCString(No.Alloc);
     gst_tag_xmp_writer_remove_schema(cast(GstTagXmpWriter*)this._cPtr, _schema);
   }
 
   /** */
-  override gst.buffer.Buffer tagListToXmpBuffer(gst.tag_list.TagList taglist, bool readOnly)
+  override gst.buffer.Buffer tagListToXmpBuffer(gst.tag_list.TagList taglist, bool readOnly) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_tag_xmp_writer_tag_list_to_xmp_buffer(cast(GstTagXmpWriter*)this._cPtr, taglist ? cast(const(GstTagList)*)taglist._cPtr(No.Dup) : null, readOnly);

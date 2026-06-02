@@ -22,11 +22,8 @@ class NetControlMessageMeta
   GstNetControlMessageMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstnet.net_control_message_meta.NetControlMessageMeta");
-
     _cInstance = *cast(GstNetControlMessageMeta*)ptr;
 
     if (take)
@@ -34,7 +31,7 @@ class NetControlMessageMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -43,7 +40,7 @@ class NetControlMessageMeta
       Get `meta` field.
       Returns: the parent type
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstNetControlMessageMeta*)this._cPtr).meta, No.Take);
   }
@@ -52,7 +49,7 @@ class NetControlMessageMeta
       Get `message` field.
       Returns: a #GSocketControlMessage stored as metadata
   */
-  @property gio.socket_control_message.SocketControlMessage message()
+  @property gio.socket_control_message.SocketControlMessage message() nothrow
   {
     return cToD!(gio.socket_control_message.SocketControlMessage)(cast(void*)(cast(GstNetControlMessageMeta*)this._cPtr).message);
   }
@@ -62,14 +59,14 @@ class NetControlMessageMeta
       Params:
         propval = a #GSocketControlMessage stored as metadata
   */
-  @property void message(gio.socket_control_message.SocketControlMessage propval)
+  @property void message(gio.socket_control_message.SocketControlMessage propval) nothrow
   {
     cValueFree!(gio.socket_control_message.SocketControlMessage)(cast(void*)(cast(GstNetControlMessageMeta*)this._cPtr).message);
     dToC(propval, cast(void*)&(cast(GstNetControlMessageMeta*)this._cPtr).message);
   }
 
   /** */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_net_control_message_meta_get_info();

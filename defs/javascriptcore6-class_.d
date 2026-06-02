@@ -24,10 +24,10 @@ class Class : gobject.object.ObjectWrap
    *   callback = The callback
    * Returns: A Value representing the class constructor
    */
-  Value addConstructor(alias Ctor)(string name = null)
+  Value addConstructor(alias Ctor)(string name = null) nothrow
     if (isCallable!Ctor && is(ReturnType!Ctor : Object))
   {
-    extern(C) JSCValue* ctorThunk(GPtrArray* args, void* userData)
+    extern(C) JSCValue* ctorThunk(GPtrArray* args, void* userData) nothrow
     {
       auto ctx = jsc_context_get_current();
 
@@ -72,13 +72,13 @@ class Class : gobject.object.ObjectWrap
    *   Method = The method
    *   name = The JSC name of the method or null to use the D method name (default)
    */
-  void addMethod(alias Method)(string name = null)
+  void addMethod(alias Method)(string name = null) nothrow
     if (isCallable!Method)
   {
     alias ClassT = __traits(parent, Method);
     enum string dMethodName = __traits(identifier, Method);
 
-    extern(C) JSCValue* methodThunk(JSCValue* instance, GPtrArray* args, void* userData)
+    extern(C) JSCValue* methodThunk(JSCValue* instance, GPtrArray* args, void* userData) nothrow
     {
       auto ctx = jsc_context_get_current();
 
@@ -122,7 +122,7 @@ class Class : gobject.object.ObjectWrap
   }
 
   /// Used as a default value for addProperty template Setter argument which results in a read-only property
-  void readOnlyProperty() {}
+  void readOnlyProperty() nothrow {}
 
   /**
    * Add a property to a Class.
@@ -131,12 +131,12 @@ class Class : gobject.object.ObjectWrap
    *   Setter = The setter method (optional)
    *   name = The property name
    */
-  void addProperty(alias Getter, alias Setter = readOnlyProperty)(string name)
+  void addProperty(alias Getter, alias Setter = readOnlyProperty)(string name) nothrow
     if ((isCallable!Getter && !is(ReturnType!Getter == void) && Parameters!Getter.length == 0)
       && (__traits(isSame, Setter, readOnlyProperty)
       || (isCallable!Setter && is(ReturnType!Setter == void) && Parameters!Setter.length == 1)))
   {
-    extern(C) JSCValue* getterThunk(JSCValue* instance, void* userData)
+    extern(C) JSCValue* getterThunk(JSCValue* instance, void* userData) nothrow
     {
       alias ClassT = __traits(parent, Getter);
       enum string getterName = __traits(identifier, Getter);
@@ -164,7 +164,7 @@ class Class : gobject.object.ObjectWrap
 
     static if (!__traits(isSame, Setter, readOnlyProperty))
     {
-      extern(C) void setterThunk(JSCValue* instance, JSCValue* value, void* userData)
+      extern(C) void setterThunk(JSCValue* instance, JSCValue* value, void* userData) nothrow
       {
         alias ClassT = __traits(parent, Setter);
         enum string setterName = __traits(identifier, Setter);

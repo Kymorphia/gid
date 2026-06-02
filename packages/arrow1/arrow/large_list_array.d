@@ -17,26 +17,26 @@ class LargeListArray : arrow.array.Array
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_large_list_array_get_type != &gidSymbolNotFound ? garrow_large_list_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LargeListArray self()
+  override LargeListArray self() nothrow
   {
     return this;
   }
@@ -45,19 +45,19 @@ class LargeListArray : arrow.array.Array
       Get builder for [arrow.large_list_array.LargeListArray]
       Returns: New builder object
   */
-  static LargeListArrayGidBuilder builder()
+  static LargeListArrayGidBuilder builder() nothrow
   {
     return new LargeListArrayGidBuilder;
   }
 
   /** */
-  @property arrow.array.Array rawValues()
+  @property arrow.array.Array rawValues() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.array.Array)("raw-values");
   }
 
   /** */
-  this(arrow.data_type.DataType dataType, long length, arrow.buffer.Buffer valueOffsets, arrow.array.Array values, arrow.buffer.Buffer nullBitmap, long nNulls)
+  this(arrow.data_type.DataType dataType, long length, arrow.buffer.Buffer valueOffsets, arrow.array.Array values, arrow.buffer.Buffer nullBitmap, long nNulls) nothrow
   {
     GArrowLargeListArray* _cretval;
     _cretval = garrow_large_list_array_new(dataType ? cast(GArrowDataType*)dataType._cPtr(No.Dup) : null, length, valueOffsets ? cast(GArrowBuffer*)valueOffsets._cPtr(No.Dup) : null, values ? cast(GArrowArray*)values._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
@@ -65,7 +65,7 @@ class LargeListArray : arrow.array.Array
   }
 
   /** */
-  arrow.array.Array getValue(long i)
+  arrow.array.Array getValue(long i) nothrow
   {
     GArrowArray* _cretval;
     _cretval = garrow_large_list_array_get_value(cast(GArrowLargeListArray*)this._cPtr, i);
@@ -74,7 +74,7 @@ class LargeListArray : arrow.array.Array
   }
 
   /** */
-  long getValueLength(long i)
+  long getValueLength(long i) nothrow
   {
     long _retval;
     _retval = garrow_large_list_array_get_value_length(cast(GArrowLargeListArray*)this._cPtr, i);
@@ -82,7 +82,7 @@ class LargeListArray : arrow.array.Array
   }
 
   /** */
-  long getValueOffset(long i)
+  long getValueOffset(long i) nothrow
   {
     long _retval;
     _retval = garrow_large_list_array_get_value_offset(cast(GArrowLargeListArray*)this._cPtr, i);
@@ -90,7 +90,7 @@ class LargeListArray : arrow.array.Array
   }
 
   /** */
-  long[] getValueOffsets()
+  long[] getValueOffsets() nothrow
   {
     const(long)* _cretval;
     long _cretlength;
@@ -107,7 +107,7 @@ class LargeListArray : arrow.array.Array
   alias getValueType = arrow.array.Array.getValueType;
 
   /** */
-  arrow.data_type.DataType getValueType()
+  arrow.data_type.DataType getValueType() nothrow
   {
     GArrowDataType* _cretval;
     _cretval = garrow_large_list_array_get_value_type(cast(GArrowLargeListArray*)this._cPtr);
@@ -116,7 +116,7 @@ class LargeListArray : arrow.array.Array
   }
 
   /** */
-  arrow.array.Array getValues()
+  arrow.array.Array getValues() nothrow
   {
     GArrowArray* _cretval;
     _cretval = garrow_large_list_array_get_values(cast(GArrowLargeListArray*)this._cPtr);
@@ -130,7 +130,7 @@ class LargeListArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
 {
 
   /** */
-  T rawValues(arrow.array.Array propval)
+  T rawValues(arrow.array.Array propval) nothrow
   {
     return setProperty("raw-values", propval);
   }
@@ -143,7 +143,7 @@ final class LargeListArrayGidBuilder : LargeListArrayGidBuilderImpl!LargeListArr
       Create object from builder.
       Returns: New object
   */
-  LargeListArray build()
+  LargeListArray build() nothrow
   {
     return new LargeListArray(cast(void*)createGObject(LargeListArray._getGType), Yes.Take);
   }

@@ -87,7 +87,7 @@ template PaintableT()
         concreteWidth = will be set to the concrete width computed
         concreteHeight = will be set to the concrete height computed
   */
-  override void computeConcreteSize(double specifiedWidth, double specifiedHeight, double defaultWidth, double defaultHeight, out double concreteWidth, out double concreteHeight)
+  override void computeConcreteSize(double specifiedWidth, double specifiedHeight, double defaultWidth, double defaultHeight, out double concreteWidth, out double concreteHeight) nothrow
   {
     gdk_paintable_compute_concrete_size(cast(GdkPaintable*)this._cPtr, specifiedWidth, specifiedHeight, defaultWidth, defaultHeight, cast(double*)&concreteWidth, cast(double*)&concreteHeight);
   }
@@ -102,7 +102,7 @@ template PaintableT()
       Returns: An immutable paintable for the current
           contents of paintable
   */
-  override gdk.paintable.Paintable getCurrentImage()
+  override gdk.paintable.Paintable getCurrentImage() nothrow
   {
     GdkPaintable* _cretval;
     _cretval = gdk_paintable_get_current_image(cast(GdkPaintable*)this._cPtr);
@@ -118,7 +118,7 @@ template PaintableT()
       See [gdk.types.PaintableFlags] for the flags and what they mean.
       Returns: The [gdk.types.PaintableFlags] for this paintable
   */
-  override gdk.types.PaintableFlags getFlags()
+  override gdk.types.PaintableFlags getFlags() nothrow
   {
     GdkPaintableFlags _cretval;
     _cretval = gdk_paintable_get_flags(cast(GdkPaintable*)this._cPtr);
@@ -146,7 +146,7 @@ template PaintableT()
       it returns 0. Negative values are never returned.
       Returns: the intrinsic aspect ratio of paintable or 0 if none.
   */
-  override double getIntrinsicAspectRatio()
+  override double getIntrinsicAspectRatio() nothrow
   {
     double _retval;
     _retval = gdk_paintable_get_intrinsic_aspect_ratio(cast(GdkPaintable*)this._cPtr);
@@ -166,7 +166,7 @@ template PaintableT()
       Negative values are never returned.
       Returns: the intrinsic height of paintable or 0 if none.
   */
-  override int getIntrinsicHeight()
+  override int getIntrinsicHeight() nothrow
   {
     int _retval;
     _retval = gdk_paintable_get_intrinsic_height(cast(GdkPaintable*)this._cPtr);
@@ -186,7 +186,7 @@ template PaintableT()
       Negative values are never returned.
       Returns: the intrinsic width of paintable or 0 if none.
   */
-  override int getIntrinsicWidth()
+  override int getIntrinsicWidth() nothrow
   {
     int _retval;
     _retval = gdk_paintable_get_intrinsic_width(cast(GdkPaintable*)this._cPtr);
@@ -205,7 +205,7 @@ template PaintableT()
       If a paintable reports the [gdk.types.PaintableFlags.Contents] flag,
       it must not call this function.
   */
-  override void invalidateContents()
+  override void invalidateContents() nothrow
   {
     gdk_paintable_invalidate_contents(cast(GdkPaintable*)this._cPtr);
   }
@@ -222,7 +222,7 @@ template PaintableT()
       If a paintable reports the [gdk.types.PaintableFlags.Size] flag,
       it must not call this function.
   */
-  override void invalidateSize()
+  override void invalidateSize() nothrow
   {
     gdk_paintable_invalidate_size(cast(GdkPaintable*)this._cPtr);
   }
@@ -239,7 +239,7 @@ template PaintableT()
         width = width to snapshot in
         height = height to snapshot in
   */
-  override void snapshot(gdk.snapshot.Snapshot snapshot, double width, double height)
+  override void snapshot(gdk.snapshot.Snapshot snapshot, double width, double height) nothrow
   {
     gdk_paintable_snapshot(cast(GdkPaintable*)this._cPtr, snapshot ? cast(GdkSnapshot*)snapshot._cPtr(No.Dup) : null, width, height);
   }
@@ -262,13 +262,13 @@ template PaintableT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInvalidateContents(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInvalidateContents(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.paintable.Paintable)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -277,7 +277,14 @@ template PaintableT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.paintable.Paintable.invalidateContents");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -308,13 +315,13 @@ template PaintableT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInvalidateSize(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInvalidateSize(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.paintable.Paintable)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -323,7 +330,14 @@ template PaintableT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.paintable.Paintable.invalidateSize");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

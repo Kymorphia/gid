@@ -152,26 +152,26 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_application_get_type != &gidSymbolNotFound ? g_application_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Application self()
+  override Application self() nothrow
   {
     return this;
   }
@@ -180,7 +180,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Get builder for [gio.application.Application]
       Returns: New builder object
   */
-  static ApplicationGidBuilder builder()
+  static ApplicationGidBuilder builder() nothrow
   {
     return new ApplicationGidBuilder;
   }
@@ -190,7 +190,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Params:
         propval = The group of actions that the application exports.
   */
-  @property void actionGroup(gio.action_group.ActionGroup propval)
+  @property void actionGroup(gio.action_group.ActionGroup propval) nothrow
   {
     setActionGroup(propval);
   }
@@ -199,7 +199,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Get `applicationId` property.
       Returns: The unique identifier for the application.
   */
-  @property string applicationId()
+  @property string applicationId() nothrow
   {
     return getApplicationId();
   }
@@ -209,7 +209,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Params:
         propval = The unique identifier for the application.
   */
-  @property void applicationId(string propval)
+  @property void applicationId(string propval) nothrow
   {
     setApplicationId(propval);
   }
@@ -218,7 +218,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Get `flags` property.
       Returns: Flags specifying the behaviour of the application.
   */
-  @property gio.types.ApplicationFlags flags()
+  @property gio.types.ApplicationFlags flags() nothrow
   {
     return getFlags();
   }
@@ -228,7 +228,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Params:
         propval = Flags specifying the behaviour of the application.
   */
-  @property void flags(gio.types.ApplicationFlags propval)
+  @property void flags(gio.types.ApplicationFlags propval) nothrow
   {
     setFlags(propval);
   }
@@ -237,7 +237,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Get `inactivityTimeout` property.
       Returns: Time (in milliseconds) to stay alive after becoming idle.
   */
-  @property uint inactivityTimeout()
+  @property uint inactivityTimeout() nothrow
   {
     return getInactivityTimeout();
   }
@@ -247,7 +247,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Params:
         propval = Time (in milliseconds) to stay alive after becoming idle.
   */
-  @property void inactivityTimeout(uint propval)
+  @property void inactivityTimeout(uint propval) nothrow
   {
     setInactivityTimeout(propval);
   }
@@ -257,7 +257,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Returns: Whether the application is currently marked as busy through
         [gio.application.Application.markBusy] or [gio.application.Application.bindBusyProperty].
   */
-  @property bool isBusy()
+  @property bool isBusy() nothrow
   {
     return getIsBusy();
   }
@@ -266,7 +266,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Get `isRegistered` property.
       Returns: Whether [gio.application.Application.register] has been called.
   */
-  @property bool isRegistered()
+  @property bool isRegistered() nothrow
   {
     return getIsRegistered();
   }
@@ -275,7 +275,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Get `isRemote` property.
       Returns: Whether this application instance is remote.
   */
-  @property bool isRemote()
+  @property bool isRemote() nothrow
   {
     return getIsRemote();
   }
@@ -284,7 +284,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Get `resourceBasePath` property.
       Returns: The base resource path for the application.
   */
-  @property string resourceBasePath()
+  @property string resourceBasePath() nothrow
   {
     return getResourceBasePath();
   }
@@ -294,7 +294,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Params:
         propval = The base resource path for the application.
   */
-  @property void resourceBasePath(string propval)
+  @property void resourceBasePath(string propval) nothrow
   {
     setResourceBasePath(propval);
   }
@@ -303,7 +303,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Get `version_` property.
       Returns: The human-readable version number of the application.
   */
-  @property string version_()
+  @property string version_() nothrow
   {
     return getVersion();
   }
@@ -313,7 +313,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Params:
         propval = The human-readable version number of the application.
   */
-  @property void version_(string propval)
+  @property void version_(string propval) nothrow
   {
     setVersion(propval);
   }
@@ -335,7 +335,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         flags = the application flags
       Returns: a new #GApplication instance
   */
-  this(string applicationId, gio.types.ApplicationFlags flags)
+  this(string applicationId, gio.types.ApplicationFlags flags) nothrow
   {
     GApplication* _cretval;
     const(char)* _applicationId = applicationId.toCString(No.Alloc);
@@ -353,7 +353,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       If there is no default application then null is returned.
       Returns: the default application for this process, or null
   */
-  static gio.application.Application getDefault()
+  static gio.application.Application getDefault() nothrow
   {
     GApplication* _cretval;
     _cretval = g_application_get_default();
@@ -412,7 +412,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         applicationId = a potential application identifier
       Returns: true if application_id is valid
   */
-  static bool idIsValid(string applicationId)
+  static bool idIsValid(string applicationId) nothrow
   {
     bool _retval;
     const(char)* _applicationId = applicationId.toCString(No.Alloc);
@@ -428,7 +428,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       
       The application must be registered before calling this function.
   */
-  void activate()
+  void activate() nothrow
   {
     g_application_activate(cast(GApplication*)this._cPtr);
   }
@@ -457,7 +457,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         argDescription = the placeholder to use for the extra argument
              parsed by the option in `--help` output
   */
-  void addMainOption(string longName, char shortName, glib.types.OptionFlags flags, glib.types.OptionArg arg, string description, string argDescription = null)
+  void addMainOption(string longName, char shortName, glib.types.OptionFlags flags, glib.types.OptionArg arg, string description, string argDescription = null) nothrow
   {
     const(char)* _longName = longName.toCString(No.Alloc);
     const(char)* _description = description.toCString(No.Alloc);
@@ -527,7 +527,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         entries = the
             main options for the application
   */
-  void addMainOptionEntries(glib.types.OptionEntry[] entries)
+  void addMainOptionEntries(glib.types.OptionEntry[] entries) nothrow
   {
     auto _entries = entries.ptr ? cast(const(GOptionEntry)*)(entries ~ GOptionEntry.init).ptr : [GOptionEntry.init].ptr;
     g_application_add_main_option_entries(cast(GApplication*)this._cPtr, _entries);
@@ -563,7 +563,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Params:
         group = a #GOptionGroup
   */
-  void addOptionGroup(glib.option_group.OptionGroup group)
+  void addOptionGroup(glib.option_group.OptionGroup group) nothrow
   {
     g_application_add_option_group(cast(GApplication*)this._cPtr, group ? cast(GOptionGroup*)group._cPtr(Yes.Dup) : null);
   }
@@ -580,7 +580,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         object = a #GObject
         property = the name of a boolean property of object
   */
-  void bindBusyProperty(gobject.object.ObjectWrap object, string property)
+  void bindBusyProperty(gobject.object.ObjectWrap object, string property) nothrow
   {
     const(char)* _property = property.toCString(No.Alloc);
     g_application_bind_busy_property(cast(GApplication*)this._cPtr, object ? cast(GObject*)object._cPtr(No.Dup) : null, _property);
@@ -590,7 +590,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Gets the unique identifier for application.
       Returns: the identifier for application, owned by application
   */
-  string getApplicationId()
+  string getApplicationId() nothrow
   {
     const(char)* _cretval;
     _cretval = g_application_get_application_id(cast(GApplication*)this._cPtr);
@@ -614,7 +614,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       registered.  See [gio.application.Application.getIsRegistered].
       Returns: a #GDBusConnection, or null
   */
-  gio.dbus_connection.DBusConnection getDbusConnection()
+  gio.dbus_connection.DBusConnection getDbusConnection() nothrow
   {
     GDBusConnection* _cretval;
     _cretval = g_application_get_dbus_connection(cast(GApplication*)this._cPtr);
@@ -639,7 +639,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       registered.  See [gio.application.Application.getIsRegistered].
       Returns: the object path, or null
   */
-  string getDbusObjectPath()
+  string getDbusObjectPath() nothrow
   {
     const(char)* _cretval;
     _cretval = g_application_get_dbus_object_path(cast(GApplication*)this._cPtr);
@@ -653,7 +653,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       See #GApplicationFlags.
       Returns: the flags for application
   */
-  gio.types.ApplicationFlags getFlags()
+  gio.types.ApplicationFlags getFlags() nothrow
   {
     GApplicationFlags _cretval;
     _cretval = g_application_get_flags(cast(GApplication*)this._cPtr);
@@ -668,7 +668,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       [gio.application.Application.release] before the application stops running.
       Returns: the timeout, in milliseconds
   */
-  uint getInactivityTimeout()
+  uint getInactivityTimeout() nothrow
   {
     uint _retval;
     _retval = g_application_get_inactivity_timeout(cast(GApplication*)this._cPtr);
@@ -680,7 +680,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       [gio.application.Application.markBusy] or [gio.application.Application.bindBusyProperty].
       Returns: true if application is currently marked as busy
   */
-  bool getIsBusy()
+  bool getIsBusy() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_application_get_is_busy(cast(GApplication*)this._cPtr);
@@ -694,7 +694,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       successfully called.
       Returns: true if application is registered
   */
-  bool getIsRegistered()
+  bool getIsRegistered() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_application_get_is_registered(cast(GApplication*)this._cPtr);
@@ -714,7 +714,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       [gio.application.Application.getIsRegistered].
       Returns: true if application is remote
   */
-  bool getIsRemote()
+  bool getIsRemote() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_application_get_is_remote(cast(GApplication*)this._cPtr);
@@ -727,7 +727,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       See [gio.application.Application.setResourceBasePath] for more information.
       Returns: the base resource path, if one is set
   */
-  string getResourceBasePath()
+  string getResourceBasePath() nothrow
   {
     const(char)* _cretval;
     _cretval = g_application_get_resource_base_path(cast(GApplication*)this._cPtr);
@@ -739,7 +739,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Gets the version of application.
       Returns: the version of application
   */
-  string getVersion()
+  string getVersion() nothrow
   {
     const(char)* _cretval;
     _cretval = g_application_get_version(cast(GApplication*)this._cPtr);
@@ -756,7 +756,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       
       To cancel the hold, call [gio.application.Application.release].
   */
-  void hold()
+  void hold() nothrow
   {
     g_application_hold(cast(GApplication*)this._cPtr);
   }
@@ -775,7 +775,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       
       The application must be registered before calling this function.
   */
-  void markBusy()
+  void markBusy() nothrow
   {
     g_application_mark_busy(cast(GApplication*)this._cPtr);
   }
@@ -800,7 +800,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         files = an array of #GFiles to open
         hint = a hint (or ""), but never null
   */
-  void open(gio.file.File[] files, string hint)
+  void open(gio.file.File[] files, string hint) nothrow
   {
     int _nFiles;
     if (files)
@@ -830,7 +830,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       The result of calling [gio.application.Application.run] again after it returns is
       unspecified.
   */
-  void quit()
+  void quit() nothrow
   {
     g_application_quit(cast(GApplication*)this._cPtr);
   }
@@ -890,7 +890,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Never call this function except to cancel the effect of a previous
       call to [gio.application.Application.hold].
   */
-  void release()
+  void release() nothrow
   {
     g_application_release(cast(GApplication*)this._cPtr);
   }
@@ -976,7 +976,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         argv = the argv from main(), or null
       Returns: the exit status
   */
-  int run(string[] argv = null)
+  int run(string[] argv = null) nothrow
   {
     int _retval;
     int _argc;
@@ -1027,7 +1027,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         id = id of the notification, or null
         notification = the #GNotification to send
   */
-  void sendNotification(string id, gio.notification.Notification notification)
+  void sendNotification(string id, gio.notification.Notification notification) nothrow
   {
     const(char)* _id = id.toCString(No.Alloc);
     g_application_send_notification(cast(GApplication*)this._cPtr, _id, notification ? cast(GNotification*)notification._cPtr(No.Dup) : null);
@@ -1046,7 +1046,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         introduce buggy behaviour (ie: signals not emitted on changes to the
         action group), so you should really use #GActionMap instead.
   */
-  void setActionGroup(gio.action_group.ActionGroup actionGroup = null)
+  void setActionGroup(gio.action_group.ActionGroup actionGroup = null) nothrow
   {
     g_application_set_action_group(cast(GApplication*)this._cPtr, actionGroup ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)actionGroup)._cPtr(No.Dup) : null);
   }
@@ -1063,7 +1063,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Params:
         applicationId = the identifier for application
   */
-  void setApplicationId(string applicationId = null)
+  void setApplicationId(string applicationId = null) nothrow
   {
     const(char)* _applicationId = applicationId.toCString(No.Alloc);
     g_application_set_application_id(cast(GApplication*)this._cPtr, _applicationId);
@@ -1077,7 +1077,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       application is destroyed then the default application will revert
       back to null.
   */
-  void setDefault()
+  void setDefault() nothrow
   {
     g_application_set_default(cast(GApplication*)this._cPtr);
   }
@@ -1093,7 +1093,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Params:
         flags = the flags for application
   */
-  void setFlags(gio.types.ApplicationFlags flags)
+  void setFlags(gio.types.ApplicationFlags flags) nothrow
   {
     g_application_set_flags(cast(GApplication*)this._cPtr, flags);
   }
@@ -1111,7 +1111,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Params:
         inactivityTimeout = the timeout, in milliseconds
   */
-  void setInactivityTimeout(uint inactivityTimeout)
+  void setInactivityTimeout(uint inactivityTimeout) nothrow
   {
     g_application_set_inactivity_timeout(cast(GApplication*)this._cPtr, inactivityTimeout);
   }
@@ -1125,7 +1125,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         description = a string to be shown in `--help` output
            after the list of options, or null
   */
-  void setOptionContextDescription(string description = null)
+  void setOptionContextDescription(string description = null) nothrow
   {
     const(char)* _description = description.toCString(No.Alloc);
     g_application_set_option_context_description(cast(GApplication*)this._cPtr, _description);
@@ -1143,7 +1143,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         parameterString = a string which is displayed
             in the first line of `--help` output, after the usage summary `programname [OPTION...]`.
   */
-  void setOptionContextParameterString(string parameterString = null)
+  void setOptionContextParameterString(string parameterString = null) nothrow
   {
     const(char)* _parameterString = parameterString.toCString(No.Alloc);
     g_application_set_option_context_parameter_string(cast(GApplication*)this._cPtr, _parameterString);
@@ -1158,7 +1158,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         summary = a string to be shown in `--help` output
            before the list of options, or null
   */
-  void setOptionContextSummary(string summary = null)
+  void setOptionContextSummary(string summary = null) nothrow
   {
     const(char)* _summary = summary.toCString(No.Alloc);
     g_application_set_option_context_summary(cast(GApplication*)this._cPtr, _summary);
@@ -1202,7 +1202,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Params:
         resourcePath = the resource path to use
   */
-  void setResourceBasePath(string resourcePath = null)
+  void setResourceBasePath(string resourcePath = null) nothrow
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     g_application_set_resource_base_path(cast(GApplication*)this._cPtr, _resourcePath);
@@ -1218,7 +1218,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Params:
         version_ = the version of application
   */
-  void setVersion(string version_)
+  void setVersion(string version_) nothrow
   {
     const(char)* _version_ = version_.toCString(No.Alloc);
     g_application_set_version(cast(GApplication*)this._cPtr, _version_);
@@ -1233,7 +1233,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         object = a #GObject
         property = the name of a boolean property of object
   */
-  void unbindBusyProperty(gobject.object.ObjectWrap object, string property)
+  void unbindBusyProperty(gobject.object.ObjectWrap object, string property) nothrow
   {
     const(char)* _property = property.toCString(No.Alloc);
     g_application_unbind_busy_property(cast(GApplication*)this._cPtr, object ? cast(GObject*)object._cPtr(No.Dup) : null, _property);
@@ -1248,7 +1248,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       This function must only be called to cancel the effect of a previous
       call to [gio.application.Application.markBusy].
   */
-  void unmarkBusy()
+  void unmarkBusy() nothrow
   {
     g_application_unmark_busy(cast(GApplication*)this._cPtr);
   }
@@ -1271,7 +1271,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Params:
         id = id of a previously sent notification
   */
-  void withdrawNotification(string id)
+  void withdrawNotification(string id) nothrow
   {
     const(char)* _id = id.toCString(No.Alloc);
     g_application_withdraw_notification(cast(GApplication*)this._cPtr, _id);
@@ -1293,13 +1293,13 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.application.Application)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1308,7 +1308,14 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.application.Application.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1337,18 +1344,19 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCommandLine(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCommandLine(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == int)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.application_command_line.ApplicationCommandLine)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.application.Application)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      int _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1356,7 +1364,14 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.application.Application.commandLine");
+      }
 
       setVal!(int)(_returnValue, _retval);
     }
@@ -1426,18 +1441,19 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectHandleLocalOptions(T)(T callback, Flag!"After" after = No.After)
+  gulong connectHandleLocalOptions(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == int)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.variant_dict.VariantDict)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.application.Application)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      int _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1445,7 +1461,14 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.application.Application.handleLocalOptions");
+      }
 
       setVal!(int)(_returnValue, _retval);
     }
@@ -1474,22 +1497,30 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNameLost(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNameLost(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.application.Application)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.application.Application.nameLost");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1518,7 +1549,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectOpen(T)(T callback, Flag!"After" after = No.After)
+  gulong connectOpen(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.file.File[])))
@@ -1526,7 +1557,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.application.Application)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1548,7 +1579,14 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         _paramTuple[0] = _dArray;
       }
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.application.Application.open");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1571,13 +1609,13 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectShutdown(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShutdown(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.application.Application)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1586,7 +1624,14 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.application.Application.shutdown");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1609,13 +1654,13 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectStartup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStartup(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.application.Application)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1624,7 +1669,14 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.application.Application.startup");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1645,7 +1697,7 @@ class ApplicationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
         propval = The group of actions that the application exports.
       Returns: Builder instance for fluent chaining
   */
-  T actionGroup(gio.action_group.ActionGroup propval)
+  T actionGroup(gio.action_group.ActionGroup propval) nothrow
   {
     return setProperty("action-group", propval);
   }
@@ -1656,7 +1708,7 @@ class ApplicationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
         propval = The unique identifier for the application.
       Returns: Builder instance for fluent chaining
   */
-  T applicationId(string propval)
+  T applicationId(string propval) nothrow
   {
     return setProperty("application-id", propval);
   }
@@ -1667,7 +1719,7 @@ class ApplicationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
         propval = Flags specifying the behaviour of the application.
       Returns: Builder instance for fluent chaining
   */
-  T flags(gio.types.ApplicationFlags propval)
+  T flags(gio.types.ApplicationFlags propval) nothrow
   {
     return setProperty("flags", propval);
   }
@@ -1678,7 +1730,7 @@ class ApplicationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
         propval = Time (in milliseconds) to stay alive after becoming idle.
       Returns: Builder instance for fluent chaining
   */
-  T inactivityTimeout(uint propval)
+  T inactivityTimeout(uint propval) nothrow
   {
     return setProperty("inactivity-timeout", propval);
   }
@@ -1689,7 +1741,7 @@ class ApplicationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
         propval = The base resource path for the application.
       Returns: Builder instance for fluent chaining
   */
-  T resourceBasePath(string propval)
+  T resourceBasePath(string propval) nothrow
   {
     return setProperty("resource-base-path", propval);
   }
@@ -1700,7 +1752,7 @@ class ApplicationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
         propval = The human-readable version number of the application.
       Returns: Builder instance for fluent chaining
   */
-  T version_(string propval)
+  T version_(string propval) nothrow
   {
     return setProperty("version", propval);
   }
@@ -1713,7 +1765,7 @@ final class ApplicationGidBuilder : ApplicationGidBuilderImpl!ApplicationGidBuil
       Create object from builder.
       Returns: New object
   */
-  Application build()
+  Application build() nothrow
   {
     return new Application(cast(void*)createGObject(Application._getGType), Yes.Take);
   }

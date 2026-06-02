@@ -35,7 +35,7 @@ template FontChooserT()
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property string font()
+  @property string font() nothrow
   {
     return getFont();
   }
@@ -47,7 +47,7 @@ template FontChooserT()
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property void font(string propval)
+  @property void font(string propval) nothrow
   {
     setFont(propval);
   }
@@ -58,7 +58,7 @@ template FontChooserT()
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property pango.font_description.FontDescription fontDesc()
+  @property pango.font_description.FontDescription fontDesc() nothrow
   {
     return getFontDesc();
   }
@@ -70,7 +70,7 @@ template FontChooserT()
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property void fontDesc(pango.font_description.FontDescription propval)
+  @property void fontDesc(pango.font_description.FontDescription propval) nothrow
   {
     setFontDesc(propval);
   }
@@ -84,7 +84,7 @@ template FontChooserT()
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property string fontFeatures()
+  @property string fontFeatures() nothrow
   {
     return getFontFeatures();
   }
@@ -95,7 +95,7 @@ template FontChooserT()
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property string language()
+  @property string language() nothrow
   {
     return getLanguage();
   }
@@ -107,7 +107,7 @@ template FontChooserT()
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property void language(string propval)
+  @property void language(string propval) nothrow
   {
     setLanguage(propval);
   }
@@ -118,7 +118,7 @@ template FontChooserT()
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property gtk.types.FontChooserLevel level()
+  @property gtk.types.FontChooserLevel level() nothrow
   {
     return getLevel();
   }
@@ -130,7 +130,7 @@ template FontChooserT()
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property void level(gtk.types.FontChooserLevel propval)
+  @property void level(gtk.types.FontChooserLevel propval) nothrow
   {
     setLevel(propval);
   }
@@ -141,7 +141,7 @@ template FontChooserT()
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property string previewText()
+  @property string previewText() nothrow
   {
     return getPreviewText();
   }
@@ -153,7 +153,7 @@ template FontChooserT()
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property void previewText(string propval)
+  @property void previewText(string propval) nothrow
   {
     setPreviewText(propval);
   }
@@ -164,7 +164,7 @@ template FontChooserT()
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property bool showPreviewEntry()
+  @property bool showPreviewEntry() nothrow
   {
     return getShowPreviewEntry();
   }
@@ -176,7 +176,7 @@ template FontChooserT()
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property void showPreviewEntry(bool propval)
+  @property void showPreviewEntry(bool propval) nothrow
   {
     setShowPreviewEntry(propval);
   }
@@ -198,7 +198,7 @@ template FontChooserT()
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
         instead
   */
-  override string getFont()
+  override string getFont() nothrow
   {
     char* _cretval;
     _cretval = gtk_font_chooser_get_font(cast(GtkFontChooser*)this._cPtr);
@@ -223,7 +223,7 @@ template FontChooserT()
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
         instead
   */
-  override pango.font_description.FontDescription getFontDesc()
+  override pango.font_description.FontDescription getFontDesc() nothrow
   {
     PangoFontDescription* _cretval;
     _cretval = gtk_font_chooser_get_font_desc(cast(GtkFontChooser*)this._cPtr);
@@ -242,7 +242,7 @@ template FontChooserT()
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
         instead
   */
-  override pango.font_face.FontFace getFontFace()
+  override pango.font_face.FontFace getFontFace() nothrow
   {
     PangoFontFace* _cretval;
     _cretval = gtk_font_chooser_get_font_face(cast(GtkFontChooser*)this._cPtr);
@@ -262,7 +262,7 @@ template FontChooserT()
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
         instead
   */
-  override pango.font_family.FontFamily getFontFamily()
+  override pango.font_family.FontFamily getFontFamily() nothrow
   {
     PangoFontFamily* _cretval;
     _cretval = gtk_font_chooser_get_font_family(cast(GtkFontChooser*)this._cPtr);
@@ -281,7 +281,7 @@ template FontChooserT()
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
         instead
   */
-  override string getFontFeatures()
+  override string getFontFeatures() nothrow
   {
     char* _cretval;
     _cretval = gtk_font_chooser_get_font_features(cast(GtkFontChooser*)this._cPtr);
@@ -297,7 +297,7 @@ template FontChooserT()
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
         instead
   */
-  override pango.font_map.FontMap getFontMap()
+  override pango.font_map.FontMap getFontMap() nothrow
   {
     PangoFontMap* _cretval;
     _cretval = gtk_font_chooser_get_font_map(cast(GtkFontChooser*)this._cPtr);
@@ -313,7 +313,7 @@ template FontChooserT()
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
         instead
   */
-  override int getFontSize()
+  override int getFontSize() nothrow
   {
     int _retval;
     _retval = gtk_font_chooser_get_font_size(cast(GtkFontChooser*)this._cPtr);
@@ -327,7 +327,7 @@ template FontChooserT()
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
         instead
   */
-  override string getLanguage()
+  override string getLanguage() nothrow
   {
     char* _cretval;
     _cretval = gtk_font_chooser_get_language(cast(GtkFontChooser*)this._cPtr);
@@ -342,7 +342,7 @@ template FontChooserT()
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
         instead
   */
-  override gtk.types.FontChooserLevel getLevel()
+  override gtk.types.FontChooserLevel getLevel() nothrow
   {
     GtkFontChooserLevel _cretval;
     _cretval = gtk_font_chooser_get_level(cast(GtkFontChooser*)this._cPtr);
@@ -357,7 +357,7 @@ template FontChooserT()
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
         instead
   */
-  override string getPreviewText()
+  override string getPreviewText() nothrow
   {
     char* _cretval;
     _cretval = gtk_font_chooser_get_preview_text(cast(GtkFontChooser*)this._cPtr);
@@ -372,7 +372,7 @@ template FontChooserT()
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
         instead
   */
-  override bool getShowPreviewEntry()
+  override bool getShowPreviewEntry() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_font_chooser_get_show_preview_entry(cast(GtkFontChooser*)this._cPtr);
@@ -389,14 +389,21 @@ template FontChooserT()
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
         instead
   */
-  override void setFilterFunc(gtk.types.FontFilterFunc filter = null)
+  override void setFilterFunc(gtk.types.FontFilterFunc filter = null) nothrow
   {
-    extern(C) gboolean _filterCallback(const(PangoFontFamily)* family, const(PangoFontFace)* face, void* data)
+    extern(C) gboolean _filterCallback(const(PangoFontFamily)* family, const(PangoFontFace)* face, void* data) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.FontFilterFunc*)data;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(pango.font_family.FontFamily)(cast(void*)family, No.Take), gobject.object.ObjectWrap._getDObject!(pango.font_face.FontFace)(cast(void*)face, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(pango.font_family.FontFamily)(cast(void*)family, No.Take), gobject.object.ObjectWrap._getDObject!(pango.font_face.FontFace)(cast(void*)face, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.FontFilterFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -416,7 +423,7 @@ template FontChooserT()
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
         instead
   */
-  override void setFont(string fontname)
+  override void setFont(string fontname) nothrow
   {
     const(char)* _fontname = fontname.toCString(No.Alloc);
     gtk_font_chooser_set_font(cast(GtkFontChooser*)this._cPtr, _fontname);
@@ -431,7 +438,7 @@ template FontChooserT()
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
         instead
   */
-  override void setFontDesc(pango.font_description.FontDescription fontDesc)
+  override void setFontDesc(pango.font_description.FontDescription fontDesc) nothrow
   {
     gtk_font_chooser_set_font_desc(cast(GtkFontChooser*)this._cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc._cPtr(No.Dup) : null);
   }
@@ -469,7 +476,7 @@ template FontChooserT()
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
         instead
   */
-  override void setFontMap(pango.font_map.FontMap fontmap = null)
+  override void setFontMap(pango.font_map.FontMap fontmap = null) nothrow
   {
     gtk_font_chooser_set_font_map(cast(GtkFontChooser*)this._cPtr, fontmap ? cast(PangoFontMap*)fontmap._cPtr(No.Dup) : null);
   }
@@ -483,7 +490,7 @@ template FontChooserT()
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
         instead
   */
-  override void setLanguage(string language)
+  override void setLanguage(string language) nothrow
   {
     const(char)* _language = language.toCString(No.Alloc);
     gtk_font_chooser_set_language(cast(GtkFontChooser*)this._cPtr, _language);
@@ -498,7 +505,7 @@ template FontChooserT()
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
         instead
   */
-  override void setLevel(gtk.types.FontChooserLevel level)
+  override void setLevel(gtk.types.FontChooserLevel level) nothrow
   {
     gtk_font_chooser_set_level(cast(GtkFontChooser*)this._cPtr, level);
   }
@@ -514,7 +521,7 @@ template FontChooserT()
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
         instead
   */
-  override void setPreviewText(string text)
+  override void setPreviewText(string text) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_font_chooser_set_preview_text(cast(GtkFontChooser*)this._cPtr, _text);
@@ -529,7 +536,7 @@ template FontChooserT()
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton]
         instead
   */
-  override void setShowPreviewEntry(bool showPreviewEntry)
+  override void setShowPreviewEntry(bool showPreviewEntry) nothrow
   {
     gtk_font_chooser_set_show_preview_entry(cast(GtkFontChooser*)this._cPtr, showPreviewEntry);
   }
@@ -557,14 +564,14 @@ template FontChooserT()
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  gulong connectFontActivated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFontActivated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.font_chooser.FontChooser)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -576,7 +583,14 @@ template FontChooserT()
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.font_chooser.FontChooser.fontActivated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -596,7 +610,7 @@ template FontChooserGidBuilderT()
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  T font(string propval)
+  T font(string propval) nothrow
   {
     return setProperty("font", propval);
   }
@@ -609,7 +623,7 @@ template FontChooserGidBuilderT()
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  T fontDesc(pango.font_description.FontDescription propval)
+  T fontDesc(pango.font_description.FontDescription propval) nothrow
   {
     return setProperty("font-desc", propval);
   }
@@ -622,7 +636,7 @@ template FontChooserGidBuilderT()
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  T language(string propval)
+  T language(string propval) nothrow
   {
     return setProperty("language", propval);
   }
@@ -635,7 +649,7 @@ template FontChooserGidBuilderT()
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  T level(gtk.types.FontChooserLevel propval)
+  T level(gtk.types.FontChooserLevel propval) nothrow
   {
     return setProperty("level", propval);
   }
@@ -648,7 +662,7 @@ template FontChooserGidBuilderT()
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  T previewText(string propval)
+  T previewText(string propval) nothrow
   {
     return setProperty("preview-text", propval);
   }
@@ -661,7 +675,7 @@ template FontChooserGidBuilderT()
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  T showPreviewEntry(bool propval)
+  T showPreviewEntry(bool propval) nothrow
   {
     return setProperty("show-preview-entry", propval);
   }

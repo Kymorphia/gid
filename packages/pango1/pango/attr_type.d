@@ -28,7 +28,7 @@ struct AttrType
           may be null), or null if type is a built-in Pango
           attribute type or invalid.
   */
-  static string getName(pango.types.AttrType type)
+  static string getName(pango.types.AttrType type) nothrow
   {
     const(char)* _cretval;
     _cretval = pango_attr_type_get_name(type);
@@ -46,7 +46,7 @@ struct AttrType
         name = an identifier for the type
       Returns: the new type ID.
   */
-  static pango.types.AttrType register(string name)
+  static pango.types.AttrType register(string name) nothrow
   {
     PangoAttrType _cretval;
     const(char)* _name = name.toCString(No.Alloc);

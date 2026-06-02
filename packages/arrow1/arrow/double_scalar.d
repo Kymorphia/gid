@@ -14,26 +14,26 @@ class DoubleScalar : arrow.scalar.Scalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_double_scalar_get_type != &gidSymbolNotFound ? garrow_double_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DoubleScalar self()
+  override DoubleScalar self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class DoubleScalar : arrow.scalar.Scalar
       Get builder for [arrow.double_scalar.DoubleScalar]
       Returns: New builder object
   */
-  static DoubleScalarGidBuilder builder()
+  static DoubleScalarGidBuilder builder() nothrow
   {
     return new DoubleScalarGidBuilder;
   }
 
   /** */
-  this(double value)
+  this(double value) nothrow
   {
     GArrowDoubleScalar* _cretval;
     _cretval = garrow_double_scalar_new(value);
@@ -56,7 +56,7 @@ class DoubleScalar : arrow.scalar.Scalar
   }
 
   /** */
-  double getValue()
+  double getValue() nothrow
   {
     double _retval;
     _retval = garrow_double_scalar_get_value(cast(GArrowDoubleScalar*)this._cPtr);
@@ -76,7 +76,7 @@ final class DoubleScalarGidBuilder : DoubleScalarGidBuilderImpl!DoubleScalarGidB
       Create object from builder.
       Returns: New object
   */
-  DoubleScalar build()
+  DoubleScalar build() nothrow
   {
     return new DoubleScalar(cast(void*)createGObject(DoubleScalar._getGType), Yes.Take);
   }

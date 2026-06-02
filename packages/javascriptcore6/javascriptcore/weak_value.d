@@ -20,26 +20,26 @@ class WeakValue : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())jsc_weak_value_get_type != &gidSymbolNotFound ? jsc_weak_value_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WeakValue self()
+  override WeakValue self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class WeakValue : gobject.object.ObjectWrap
       Get builder for [javascriptcore.weak_value.WeakValue]
       Returns: New builder object
   */
-  static WeakValueGidBuilder builder()
+  static WeakValueGidBuilder builder() nothrow
   {
     return new WeakValueGidBuilder;
   }
@@ -60,7 +60,7 @@ class WeakValue : gobject.object.ObjectWrap
         value = a #JSCValue
       Returns: a new #JSCWeakValue
   */
-  this(javascriptcore.value.Value value)
+  this(javascriptcore.value.Value value) nothrow
   {
     JSCWeakValue* _cretval;
     _cretval = jsc_weak_value_new(value ? cast(JSCValue*)value._cPtr(No.Dup) : null);
@@ -71,7 +71,7 @@ class WeakValue : gobject.object.ObjectWrap
       Get a #JSCValue referencing the JavaScript value of weak_value.
       Returns: a new #JSCValue or null if weak_value was cleared.
   */
-  javascriptcore.value.Value getValue()
+  javascriptcore.value.Value getValue() nothrow
   {
     JSCValue* _cretval;
     _cretval = jsc_weak_value_get_value(cast(JSCWeakValue*)this._cPtr);
@@ -94,13 +94,13 @@ class WeakValue : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCleared(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCleared(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : javascriptcore.weak_value.WeakValue)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -109,7 +109,14 @@ class WeakValue : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "javascriptcore.weak_value.WeakValue.cleared");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -127,7 +134,7 @@ class WeakValueGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The #JSCValue referencing the JavaScript value.
       Returns: Builder instance for fluent chaining
   */
-  T value(javascriptcore.value.Value propval)
+  T value(javascriptcore.value.Value propval) nothrow
   {
     return setProperty("value", propval);
   }
@@ -140,7 +147,7 @@ final class WeakValueGidBuilder : WeakValueGidBuilderImpl!WeakValueGidBuilder
       Create object from builder.
       Returns: New object
   */
-  WeakValue build()
+  WeakValue build() nothrow
   {
     return new WeakValue(cast(void*)createGObject(WeakValue._getGType), Yes.Take);
   }

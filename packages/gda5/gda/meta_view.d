@@ -17,11 +17,8 @@ class MetaView
   GdaMetaView _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.meta_view.MetaView");
-
     _cInstance = *cast(GdaMetaView*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class MetaView
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class MetaView
       Get `table` field.
       Returns: a view is also a table as it has columns
   */
-  @property gda.meta_table.MetaTable table()
+  @property gda.meta_table.MetaTable table() nothrow
   {
     return new gda.meta_table.MetaTable(cast(GdaMetaTable*)&(cast(GdaMetaView*)this._cPtr).table, No.Take);
   }
@@ -47,7 +44,7 @@ class MetaView
       Get `viewDef` field.
       Returns: views' definition
   */
-  @property string viewDef()
+  @property string viewDef() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaMetaView*)this._cPtr).viewDef);
   }
@@ -57,7 +54,7 @@ class MetaView
       Params:
         propval = views' definition
   */
-  @property void viewDef(string propval)
+  @property void viewDef(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaMetaView*)this._cPtr).viewDef);
     dToC(propval, cast(void*)&(cast(GdaMetaView*)this._cPtr).viewDef);
@@ -67,7 +64,7 @@ class MetaView
       Get `isUpdatable` field.
       Returns: tells if the view's contents can be updated
   */
-  @property bool isUpdatable()
+  @property bool isUpdatable() nothrow
   {
     return cast(bool)(cast(GdaMetaView*)this._cPtr).isUpdatable;
   }
@@ -77,7 +74,7 @@ class MetaView
       Params:
         propval = tells if the view's contents can be updated
   */
-  @property void isUpdatable(bool propval)
+  @property void isUpdatable(bool propval) nothrow
   {
     (cast(GdaMetaView*)this._cPtr).isUpdatable = propval;
   }

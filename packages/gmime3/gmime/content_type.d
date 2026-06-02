@@ -19,26 +19,26 @@ class ContentType : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_content_type_get_type != &gidSymbolNotFound ? g_mime_content_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ContentType self()
+  override ContentType self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class ContentType : gobject.object.ObjectWrap
       Get builder for [gmime.content_type.ContentType]
       Returns: New builder object
   */
-  static ContentTypeGidBuilder builder()
+  static ContentTypeGidBuilder builder() nothrow
   {
     return new ContentTypeGidBuilder;
   }
@@ -60,7 +60,7 @@ class ContentType : gobject.object.ObjectWrap
         subtype = the MIME subtype or null for the default value
       Returns: a new #GMimeContentType object.
   */
-  this(string type, string subtype)
+  this(string type, string subtype) nothrow
   {
     GMimeContentType* _cretval;
     const(char)* _type = type.toCString(No.Alloc);
@@ -77,7 +77,7 @@ class ContentType : gobject.object.ObjectWrap
         str = input string containing a content-type (and params)
       Returns: a new #GMimeContentType object.
   */
-  static gmime.content_type.ContentType parse(gmime.parser_options.ParserOptions options, string str)
+  static gmime.content_type.ContentType parse(gmime.parser_options.ParserOptions options, string str) nothrow
   {
     GMimeContentType* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -93,7 +93,7 @@ class ContentType : gobject.object.ObjectWrap
         options = a #GMimeFormatOptions or null
       Returns: a new string containing the encoded header value.
   */
-  string encode(gmime.format_options.FormatOptions options = null)
+  string encode(gmime.format_options.FormatOptions options = null) nothrow
   {
     char* _cretval;
     _cretval = g_mime_content_type_encode(cast(GMimeContentType*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null);
@@ -105,7 +105,7 @@ class ContentType : gobject.object.ObjectWrap
       Gets the Content-Type's media sub-type.
       Returns: the Content-Type's media sub-type.
   */
-  string getMediaSubtype()
+  string getMediaSubtype() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_content_type_get_media_subtype(cast(GMimeContentType*)this._cPtr);
@@ -117,7 +117,7 @@ class ContentType : gobject.object.ObjectWrap
       Gets the Content-Type's media type.
       Returns: the Content-Type's media type.
   */
-  string getMediaType()
+  string getMediaType() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_content_type_get_media_type(cast(GMimeContentType*)this._cPtr);
@@ -131,7 +131,7 @@ class ContentType : gobject.object.ObjectWrap
       Returns: an allocated string containing the type and subtype of the
         content-type in the format: type/subtype.
   */
-  string getMimeType()
+  string getMimeType() nothrow
   {
     char* _cretval;
     _cretval = g_mime_content_type_get_mime_type(cast(GMimeContentType*)this._cPtr);
@@ -148,7 +148,7 @@ class ContentType : gobject.object.ObjectWrap
         parameter is not set. If the parameter is set, the returned string
         will be in UTF-8.
   */
-  string getParameter(string name)
+  string getParameter(string name) nothrow
   {
     const(char)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -161,7 +161,7 @@ class ContentType : gobject.object.ObjectWrap
       Gets the Content-Type's parameter list.
       Returns: the Content-Type's parameter list.
   */
-  gmime.param_list.ParamList getParameters()
+  gmime.param_list.ParamList getParameters() nothrow
   {
     GMimeParamList* _cretval;
     _cretval = g_mime_content_type_get_parameters(cast(GMimeContentType*)this._cPtr);
@@ -179,7 +179,7 @@ class ContentType : gobject.object.ObjectWrap
       Returns: true if the MIME types match or false otherwise. You may
         use "*" in place of type and/or subtype as a wilcard.
   */
-  bool isType(string type, string subtype)
+  bool isType(string type, string subtype) nothrow
   {
     bool _retval;
     const(char)* _type = type.toCString(No.Alloc);
@@ -194,7 +194,7 @@ class ContentType : gobject.object.ObjectWrap
       Params:
         subtype = media subtype
   */
-  void setMediaSubtype(string subtype)
+  void setMediaSubtype(string subtype) nothrow
   {
     const(char)* _subtype = subtype.toCString(No.Alloc);
     g_mime_content_type_set_media_subtype(cast(GMimeContentType*)this._cPtr, _subtype);
@@ -206,7 +206,7 @@ class ContentType : gobject.object.ObjectWrap
       Params:
         type = media type
   */
-  void setMediaType(string type)
+  void setMediaType(string type) nothrow
   {
     const(char)* _type = type.toCString(No.Alloc);
     g_mime_content_type_set_media_type(cast(GMimeContentType*)this._cPtr, _type);
@@ -222,7 +222,7 @@ class ContentType : gobject.object.ObjectWrap
         name = parameter name (aka attribute)
         value = parameter value
   */
-  void setParameter(string name, string value)
+  void setParameter(string name, string value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -242,7 +242,7 @@ final class ContentTypeGidBuilder : ContentTypeGidBuilderImpl!ContentTypeGidBuil
       Create object from builder.
       Returns: New object
   */
-  ContentType build()
+  ContentType build() nothrow
   {
     return new ContentType(cast(void*)createGObject(ContentType._getGType), Yes.Take);
   }

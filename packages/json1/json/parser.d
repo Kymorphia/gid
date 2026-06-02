@@ -60,26 +60,26 @@ class Parser : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())json_parser_get_type != &gidSymbolNotFound ? json_parser_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Parser self()
+  override Parser self() nothrow
   {
     return this;
   }
@@ -88,7 +88,7 @@ class Parser : gobject.object.ObjectWrap
       Get builder for [json.parser.Parser]
       Returns: New builder object
   */
-  static ParserGidBuilder builder()
+  static ParserGidBuilder builder() nothrow
   {
     return new ParserGidBuilder;
   }
@@ -101,7 +101,7 @@ class Parser : gobject.object.ObjectWrap
         Making the output immutable on creation avoids the expense
         of traversing it to make it immutable later.
   */
-  @property bool immutable_()
+  @property bool immutable_() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("immutable");
   }
@@ -113,7 +113,7 @@ class Parser : gobject.object.ObjectWrap
       buffer and then walk the hierarchy using the data types API.
       Returns: the newly created parser
   */
-  this()
+  this() nothrow
   {
     JsonParser* _cretval;
     _cretval = json_parser_new();
@@ -125,7 +125,7 @@ class Parser : gobject.object.ObjectWrap
       property set to `TRUE` to create immutable output trees.
       Returns: the newly created parser
   */
-  static json.parser.Parser newImmutable()
+  static json.parser.Parser newImmutable() nothrow
   {
     JsonParser* _cretval;
     _cretval = json_parser_new_immutable();
@@ -141,7 +141,7 @@ class Parser : gobject.object.ObjectWrap
       yield 0.
       Returns: the currently parsed line, or 0.
   */
-  uint getCurrentLine()
+  uint getCurrentLine() nothrow
   {
     uint _retval;
     _retval = json_parser_get_current_line(cast(JsonParser*)this._cPtr);
@@ -157,7 +157,7 @@ class Parser : gobject.object.ObjectWrap
       yield 0.
       Returns: the position in the current line, or 0.
   */
-  uint getCurrentPos()
+  uint getCurrentPos() nothrow
   {
     uint _retval;
     _retval = json_parser_get_current_pos(cast(JsonParser*)this._cPtr);
@@ -172,7 +172,7 @@ class Parser : gobject.object.ObjectWrap
       [json.parser.Parser.stealRoot].
       Returns: the root node.
   */
-  json.node.Node getRoot()
+  json.node.Node getRoot() nothrow
   {
     JsonNode* _cretval;
     _cretval = json_parser_get_root(cast(JsonParser*)this._cPtr);
@@ -198,7 +198,7 @@ class Parser : gobject.object.ObjectWrap
         variableName = the variable name
       Returns: `TRUE` if there was an assignment, and `FALSE` otherwise
   */
-  bool hasAssignment(out string variableName)
+  bool hasAssignment(out string variableName) nothrow
   {
     bool _retval;
     char* _variableName;
@@ -323,14 +323,21 @@ class Parser : gobject.object.ObjectWrap
         cancellable = a #GCancellable
         callback = the function to call when the request is satisfied
   */
-  void loadFromStreamAsync(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void loadFromStreamAsync(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -364,7 +371,7 @@ class Parser : gobject.object.ObjectWrap
       return `NULL`.
       Returns: the root node
   */
-  json.node.Node stealRoot()
+  json.node.Node stealRoot() nothrow
   {
     JsonNode* _cretval;
     _cretval = json_parser_steal_root(cast(JsonParser*)this._cPtr);
@@ -392,7 +399,7 @@ class Parser : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectArrayElement(T)(T callback, Flag!"After" after = No.After)
+  gulong connectArrayElement(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == json.array.Array)))
@@ -400,7 +407,7 @@ class Parser : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : json.parser.Parser)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -415,7 +422,14 @@ class Parser : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "json.parser.Parser.arrayElement");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -440,14 +454,14 @@ class Parser : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectArrayEnd(T)(T callback, Flag!"After" after = No.After)
+  gulong connectArrayEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == json.array.Array)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : json.parser.Parser)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -459,7 +473,14 @@ class Parser : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "json.parser.Parser.arrayEnd");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -482,13 +503,13 @@ class Parser : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectArrayStart(T)(T callback, Flag!"After" after = No.After)
+  gulong connectArrayStart(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : json.parser.Parser)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -497,7 +518,14 @@ class Parser : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "json.parser.Parser.arrayStart");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -522,14 +550,14 @@ class Parser : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectError(T)(T callback, Flag!"After" after = No.After)
+  gulong connectError(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == void*)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : json.parser.Parser)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -541,7 +569,14 @@ class Parser : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "json.parser.Parser.error");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -566,14 +601,14 @@ class Parser : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectObjectEnd(T)(T callback, Flag!"After" after = No.After)
+  gulong connectObjectEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == json.object.ObjectWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : json.parser.Parser)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -585,7 +620,14 @@ class Parser : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "json.parser.Parser.objectEnd");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -612,7 +654,7 @@ class Parser : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectObjectMember(T)(T callback, Flag!"After" after = No.After)
+  gulong connectObjectMember(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == json.object.ObjectWrap)))
@@ -620,7 +662,7 @@ class Parser : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : json.parser.Parser)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -635,7 +677,14 @@ class Parser : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "json.parser.Parser.objectMember");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -657,13 +706,13 @@ class Parser : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectObjectStart(T)(T callback, Flag!"After" after = No.After)
+  gulong connectObjectStart(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : json.parser.Parser)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -672,7 +721,14 @@ class Parser : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "json.parser.Parser.objectStart");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -695,13 +751,13 @@ class Parser : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectParseEnd(T)(T callback, Flag!"After" after = No.After)
+  gulong connectParseEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : json.parser.Parser)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -710,7 +766,14 @@ class Parser : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "json.parser.Parser.parseEnd");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -732,13 +795,13 @@ class Parser : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectParseStart(T)(T callback, Flag!"After" after = No.After)
+  gulong connectParseStart(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : json.parser.Parser)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -747,7 +810,14 @@ class Parser : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "json.parser.Parser.parseStart");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -769,7 +839,7 @@ class ParserGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           of traversing it to make it immutable later.
       Returns: Builder instance for fluent chaining
   */
-  T immutable_(bool propval)
+  T immutable_(bool propval) nothrow
   {
     return setProperty("immutable", propval);
   }
@@ -782,7 +852,7 @@ final class ParserGidBuilder : ParserGidBuilderImpl!ParserGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Parser build()
+  Parser build() nothrow
   {
     return new Parser(cast(void*)createGObject(Parser._getGType), Yes.Take);
   }

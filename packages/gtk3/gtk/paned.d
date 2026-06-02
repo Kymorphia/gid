@@ -89,26 +89,26 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_paned_get_type != &gidSymbolNotFound ? gtk_paned_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Paned self()
+  override Paned self() nothrow
   {
     return this;
   }
@@ -117,7 +117,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       Get builder for [gtk.paned.Paned]
       Returns: New builder object
   */
-  static PanedGidBuilder builder()
+  static PanedGidBuilder builder() nothrow
   {
     return new PanedGidBuilder;
   }
@@ -128,7 +128,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
         This property is derived from the size and shrinkability
         of the widget's children.
   */
-  @property int maxPosition()
+  @property int maxPosition() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("max-position");
   }
@@ -139,31 +139,31 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
         This property is derived from the size and shrinkability
         of the widget's children.
   */
-  @property int minPosition()
+  @property int minPosition() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("min-position");
   }
 
   /** */
-  @property int position()
+  @property int position() nothrow
   {
     return getPosition();
   }
 
   /** */
-  @property void position(int propval)
+  @property void position(int propval) nothrow
   {
     setPosition(propval);
   }
 
   /** */
-  @property bool positionSet()
+  @property bool positionSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("position-set");
   }
 
   /** */
-  @property void positionSet(bool propval)
+  @property void positionSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("position-set", propval);
   }
@@ -174,7 +174,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
         to provide stronger visual separation (e.g. because it separates
         between two notebooks, whose tab rows would otherwise merge visually).
   */
-  @property bool wideHandle()
+  @property bool wideHandle() nothrow
   {
     return getWideHandle();
   }
@@ -186,7 +186,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
           to provide stronger visual separation (e.g. because it separates
           between two notebooks, whose tab rows would otherwise merge visually).
   */
-  @property void wideHandle(bool propval)
+  @property void wideHandle(bool propval) nothrow
   {
     setWideHandle(propval);
   }
@@ -200,7 +200,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
         orientation = the paned’s orientation.
       Returns: a new #GtkPaned.
   */
-  this(gtk.types.Orientation orientation)
+  this(gtk.types.Orientation orientation) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_paned_new(orientation);
@@ -215,7 +215,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       Params:
         child = the child to add
   */
-  void add1(gtk.widget.Widget child)
+  void add1(gtk.widget.Widget child) nothrow
   {
     gtk_paned_add1(cast(GtkPaned*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -228,7 +228,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       Params:
         child = the child to add
   */
-  void add2(gtk.widget.Widget child)
+  void add2(gtk.widget.Widget child) nothrow
   {
     gtk_paned_add2(cast(GtkPaned*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -237,7 +237,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       Obtains the first child of the paned widget.
       Returns: first child, or null if it is not set.
   */
-  gtk.widget.Widget getChild1()
+  gtk.widget.Widget getChild1() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_paned_get_child1(cast(GtkPaned*)this._cPtr);
@@ -249,7 +249,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       Obtains the second child of the paned widget.
       Returns: second child, or null if it is not set.
   */
-  gtk.widget.Widget getChild2()
+  gtk.widget.Widget getChild2() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_paned_get_child2(cast(GtkPaned*)this._cPtr);
@@ -264,7 +264,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       of the paned, a child and the handle.
       Returns: the paned’s handle window.
   */
-  gdk.window.Window getHandleWindow()
+  gdk.window.Window getHandleWindow() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gtk_paned_get_handle_window(cast(GtkPaned*)this._cPtr);
@@ -276,7 +276,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       Obtains the position of the divider between the two panes.
       Returns: position of the divider
   */
-  int getPosition()
+  int getPosition() nothrow
   {
     int _retval;
     _retval = gtk_paned_get_position(cast(GtkPaned*)this._cPtr);
@@ -287,7 +287,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       Gets the #GtkPaned:wide-handle property.
       Returns: true if the paned should have a wide handle
   */
-  bool getWideHandle()
+  bool getWideHandle() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_paned_get_wide_handle(cast(GtkPaned*)this._cPtr);
@@ -302,7 +302,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
         resize = should this child expand when the paned widget is resized.
         shrink = can this child be made smaller than its requisition.
   */
-  void pack1(gtk.widget.Widget child, bool resize, bool shrink)
+  void pack1(gtk.widget.Widget child, bool resize, bool shrink) nothrow
   {
     gtk_paned_pack1(cast(GtkPaned*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, resize, shrink);
   }
@@ -315,7 +315,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
         resize = should this child expand when the paned widget is resized.
         shrink = can this child be made smaller than its requisition.
   */
-  void pack2(gtk.widget.Widget child, bool resize, bool shrink)
+  void pack2(gtk.widget.Widget child, bool resize, bool shrink) nothrow
   {
     gtk_paned_pack2(cast(GtkPaned*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, resize, shrink);
   }
@@ -327,7 +327,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
         position = pixel position of divider, a negative value means that the position
                      is unset.
   */
-  void setPosition(int position)
+  void setPosition(int position) nothrow
   {
     gtk_paned_set_position(cast(GtkPaned*)this._cPtr, position);
   }
@@ -338,7 +338,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       Params:
         wide = the new value for the #GtkPaned:wide-handle property
   */
-  void setWideHandle(bool wide)
+  void setWideHandle(bool wide) nothrow
   {
     gtk_paned_set_wide_handle(cast(GtkPaned*)this._cPtr, wide);
   }
@@ -364,22 +364,30 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAcceptPosition(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAcceptPosition(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.paned.Paned)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.paned.Paned.acceptPosition");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -410,22 +418,30 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCancelPosition(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCancelPosition(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.paned.Paned)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.paned.Paned.cancelPosition");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -456,18 +472,19 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCycleChildFocus(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCycleChildFocus(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.paned.Paned)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -475,7 +492,14 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.paned.Paned.cycleChildFocus");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -507,18 +531,19 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCycleHandleFocus(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCycleHandleFocus(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.paned.Paned)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -526,7 +551,14 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.paned.Paned.cycleHandleFocus");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -556,18 +588,19 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveHandle(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveHandle(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ScrollType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.paned.Paned)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -575,7 +608,14 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.paned.Paned.moveHandle");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -605,22 +645,30 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectToggleHandleFocus(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToggleHandleFocus(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.paned.Paned)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.paned.Paned.toggleHandleFocus");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -637,13 +685,13 @@ class PanedGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.orie
   mixin OrientableGidBuilderT!();
 
   /** */
-  T position(int propval)
+  T position(int propval) nothrow
   {
     return setProperty("position", propval);
   }
 
   /** */
-  T positionSet(bool propval)
+  T positionSet(bool propval) nothrow
   {
     return setProperty("position-set", propval);
   }
@@ -656,7 +704,7 @@ class PanedGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.orie
           between two notebooks, whose tab rows would otherwise merge visually).
       Returns: Builder instance for fluent chaining
   */
-  T wideHandle(bool propval)
+  T wideHandle(bool propval) nothrow
   {
     return setProperty("wide-handle", propval);
   }
@@ -669,7 +717,7 @@ final class PanedGidBuilder : PanedGidBuilderImpl!PanedGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Paned build()
+  Paned build() nothrow
   {
     return new Paned(cast(void*)createGObject(Paned._getGType), No.Take);
   }

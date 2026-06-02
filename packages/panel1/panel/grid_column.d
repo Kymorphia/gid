@@ -22,26 +22,26 @@ class GridColumn : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_grid_column_get_type != &gidSymbolNotFound ? panel_grid_column_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GridColumn self()
+  override GridColumn self() nothrow
   {
     return this;
   }
@@ -50,13 +50,13 @@ class GridColumn : gtk.widget.Widget
       Get builder for [panel.grid_column.GridColumn]
       Returns: New builder object
   */
-  static GridColumnGidBuilder builder()
+  static GridColumnGidBuilder builder() nothrow
   {
     return new GridColumnGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = panel_grid_column_new();
@@ -69,13 +69,20 @@ class GridColumn : gtk.widget.Widget
       Params:
         callback = a function to be called on each frame
   */
-  void foreachFrame(panel.types.FrameCallback callback)
+  void foreachFrame(panel.types.FrameCallback callback) nothrow
   {
-    extern(C) void _callbackCallback(PanelFrame* frame, void* userData)
+    extern(C) void _callbackCallback(PanelFrame* frame, void* userData) nothrow
     {
       auto _dlg = cast(panel.types.FrameCallback*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(panel.frame.Frame)(cast(void*)frame, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(panel.frame.Frame)(cast(void*)frame, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "panel.types.FrameCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? cast(void*)&(callback) : null;
@@ -83,7 +90,7 @@ class GridColumn : gtk.widget.Widget
   }
 
   /** */
-  bool getEmpty()
+  bool getEmpty() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_grid_column_get_empty(cast(PanelGridColumn*)this._cPtr);
@@ -94,7 +101,7 @@ class GridColumn : gtk.widget.Widget
       Gets the most recently acive frame on a grid column.
       Returns: a #PanelGridFrame
   */
-  panel.frame.Frame getMostRecentFrame()
+  panel.frame.Frame getMostRecentFrame() nothrow
   {
     PanelFrame* _cretval;
     _cretval = panel_grid_column_get_most_recent_frame(cast(PanelGridColumn*)this._cPtr);
@@ -103,7 +110,7 @@ class GridColumn : gtk.widget.Widget
   }
 
   /** */
-  uint getNRows()
+  uint getNRows() nothrow
   {
     uint _retval;
     _retval = panel_grid_column_get_n_rows(cast(PanelGridColumn*)this._cPtr);
@@ -117,7 +124,7 @@ class GridColumn : gtk.widget.Widget
         row = the index of the row
       Returns: a #PanelGridFrame
   */
-  panel.frame.Frame getRow(uint row)
+  panel.frame.Frame getRow(uint row) nothrow
   {
     PanelFrame* _cretval;
     _cretval = panel_grid_column_get_row(cast(PanelGridColumn*)this._cPtr, row);
@@ -139,7 +146,7 @@ final class GridColumnGidBuilder : GridColumnGidBuilderImpl!GridColumnGidBuilder
       Create object from builder.
       Returns: New object
   */
-  GridColumn build()
+  GridColumn build() nothrow
   {
     return new GridColumn(cast(void*)createGObject(GridColumn._getGType), No.Take);
   }

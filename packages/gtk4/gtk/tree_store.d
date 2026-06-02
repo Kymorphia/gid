@@ -61,26 +61,26 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_store_get_type != &gidSymbolNotFound ? gtk_tree_store_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TreeStore self()
+  override TreeStore self() nothrow
   {
     return this;
   }
@@ -89,7 +89,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
       Get builder for [gtk.tree_store.TreeStore]
       Returns: New builder object
   */
-  static TreeStoreGidBuilder builder()
+  static TreeStoreGidBuilder builder() nothrow
   {
     return new TreeStoreGidBuilder;
   }
@@ -111,7 +111,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   
       Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
   */
-  static gtk.tree_store.TreeStore new_(gobject.types.GType[] types)
+  static gtk.tree_store.TreeStore new_(gobject.types.GType[] types) nothrow
   {
     GtkTreeStore* _cretval;
     int _nColumns;
@@ -140,7 +140,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   
       Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
   */
-  void append(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null)
+  void append(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null) nothrow
   {
     GtkTreeIter _iter;
     gtk_tree_store_append(cast(GtkTreeStore*)this._cPtr, &_iter, parent ? cast(GtkTreeIter*)parent._cPtr(No.Dup) : null);
@@ -152,7 +152,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   
       Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
   */
-  void clear()
+  void clear() nothrow
   {
     gtk_tree_store_clear(cast(GtkTreeStore*)this._cPtr);
   }
@@ -177,7 +177,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   
       Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
   */
-  void insert(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent, int position)
+  void insert(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent, int position) nothrow
   {
     GtkTreeIter _iter;
     gtk_tree_store_insert(cast(GtkTreeStore*)this._cPtr, &_iter, parent ? cast(GtkTreeIter*)parent._cPtr(No.Dup) : null, position);
@@ -206,7 +206,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   
       Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
   */
-  void insertAfter(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null, gtk.tree_iter.TreeIter sibling = null)
+  void insertAfter(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null, gtk.tree_iter.TreeIter sibling = null) nothrow
   {
     GtkTreeIter _iter;
     gtk_tree_store_insert_after(cast(GtkTreeStore*)this._cPtr, &_iter, parent ? cast(GtkTreeIter*)parent._cPtr(No.Dup) : null, sibling ? cast(GtkTreeIter*)sibling._cPtr(No.Dup) : null);
@@ -235,7 +235,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   
       Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
   */
-  void insertBefore(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null, gtk.tree_iter.TreeIter sibling = null)
+  void insertBefore(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null, gtk.tree_iter.TreeIter sibling = null) nothrow
   {
     GtkTreeIter _iter;
     gtk_tree_store_insert_before(cast(GtkTreeStore*)this._cPtr, &_iter, parent ? cast(GtkTreeIter*)parent._cPtr(No.Dup) : null, sibling ? cast(GtkTreeIter*)sibling._cPtr(No.Dup) : null);
@@ -257,7 +257,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   
       Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
   */
-  void insertWithValues(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent, int position, int[] columns, gobject.value.Value[] values)
+  void insertWithValues(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent, int position, int[] columns, gobject.value.Value[] values) nothrow
   {
     GtkTreeIter _iter;
     int _nValues;
@@ -287,7 +287,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   
       Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
   */
-  bool isAncestor(gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter descendant)
+  bool isAncestor(gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter descendant) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_store_is_ancestor(cast(GtkTreeStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, descendant ? cast(GtkTreeIter*)descendant._cPtr(No.Dup) : null);
@@ -306,7 +306,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   
       Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
   */
-  int iterDepth(gtk.tree_iter.TreeIter iter)
+  int iterDepth(gtk.tree_iter.TreeIter iter) nothrow
   {
     int _retval;
     _retval = gtk_tree_store_iter_depth(cast(GtkTreeStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
@@ -325,7 +325,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   
       Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
   */
-  bool iterIsValid(gtk.tree_iter.TreeIter iter)
+  bool iterIsValid(gtk.tree_iter.TreeIter iter) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_store_iter_is_valid(cast(GtkTreeStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
@@ -347,7 +347,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   
       Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
   */
-  void moveAfter(gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter position = null)
+  void moveAfter(gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter position = null) nothrow
   {
     gtk_tree_store_move_after(cast(GtkTreeStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, position ? cast(GtkTreeIter*)position._cPtr(No.Dup) : null);
   }
@@ -367,7 +367,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   
       Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
   */
-  void moveBefore(gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter position = null)
+  void moveBefore(gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter position = null) nothrow
   {
     gtk_tree_store_move_before(cast(GtkTreeStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, position ? cast(GtkTreeIter*)position._cPtr(No.Dup) : null);
   }
@@ -387,7 +387,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   
       Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
   */
-  void prepend(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null)
+  void prepend(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null) nothrow
   {
     GtkTreeIter _iter;
     gtk_tree_store_prepend(cast(GtkTreeStore*)this._cPtr, &_iter, parent ? cast(GtkTreeIter*)parent._cPtr(No.Dup) : null);
@@ -406,7 +406,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   
       Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
   */
-  bool remove(gtk.tree_iter.TreeIter iter)
+  bool remove(gtk.tree_iter.TreeIter iter) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_store_remove(cast(GtkTreeStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
@@ -429,7 +429,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   
       Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
   */
-  void setColumnTypes(gobject.types.GType[] types)
+  void setColumnTypes(gobject.types.GType[] types) nothrow
   {
     int _nColumns;
     if (types)
@@ -452,7 +452,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   
       Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
   */
-  void setValue(gtk.tree_iter.TreeIter iter, int column, gobject.value.Value value)
+  void setValue(gtk.tree_iter.TreeIter iter, int column, gobject.value.Value value) nothrow
   {
     gtk_tree_store_set_value(cast(GtkTreeStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, column, value ? cast(GValue*)value._cPtr(No.Dup) : null);
   }
@@ -472,7 +472,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   
       Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
   */
-  void set(gtk.tree_iter.TreeIter iter, int[] columns, gobject.value.Value[] values)
+  void set(gtk.tree_iter.TreeIter iter, int[] columns, gobject.value.Value[] values) nothrow
   {
     int _nValues;
     if (columns)
@@ -501,7 +501,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   
       Deprecated: Use [gtk.tree_list_model.TreeListModel] instead
   */
-  void swap(gtk.tree_iter.TreeIter a, gtk.tree_iter.TreeIter b)
+  void swap(gtk.tree_iter.TreeIter a, gtk.tree_iter.TreeIter b) nothrow
   {
     gtk_tree_store_swap(cast(GtkTreeStore*)this._cPtr, a ? cast(GtkTreeIter*)a._cPtr(No.Dup) : null, b ? cast(GtkTreeIter*)b._cPtr(No.Dup) : null);
   }
@@ -525,7 +525,7 @@ final class TreeStoreGidBuilder : TreeStoreGidBuilderImpl!TreeStoreGidBuilder
       Create object from builder.
       Returns: New object
   */
-  TreeStore build()
+  TreeStore build() nothrow
   {
     return new TreeStore(cast(void*)createGObject(TreeStore._getGType), Yes.Take);
   }

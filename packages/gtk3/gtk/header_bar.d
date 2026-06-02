@@ -36,26 +36,26 @@ class HeaderBar : gtk.container.Container
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_header_bar_get_type != &gidSymbolNotFound ? gtk_header_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HeaderBar self()
+  override HeaderBar self() nothrow
   {
     return this;
   }
@@ -64,19 +64,19 @@ class HeaderBar : gtk.container.Container
       Get builder for [gtk.header_bar.HeaderBar]
       Returns: New builder object
   */
-  static HeaderBarGidBuilder builder()
+  static HeaderBarGidBuilder builder() nothrow
   {
     return new HeaderBarGidBuilder;
   }
 
   /** */
-  @property gtk.widget.Widget customTitle()
+  @property gtk.widget.Widget customTitle() nothrow
   {
     return getCustomTitle();
   }
 
   /** */
-  @property void customTitle(gtk.widget.Widget propval)
+  @property void customTitle(gtk.widget.Widget propval) nothrow
   {
     setCustomTitle(propval);
   }
@@ -90,7 +90,7 @@ class HeaderBar : gtk.container.Container
         See [gtk.header_bar.HeaderBar.setDecorationLayout] for information
         about the format of this string.
   */
-  @property string decorationLayout()
+  @property string decorationLayout() nothrow
   {
     return getDecorationLayout();
   }
@@ -105,7 +105,7 @@ class HeaderBar : gtk.container.Container
           See [gtk.header_bar.HeaderBar.setDecorationLayout] for information
           about the format of this string.
   */
-  @property void decorationLayout(string propval)
+  @property void decorationLayout(string propval) nothrow
   {
     setDecorationLayout(propval);
   }
@@ -114,7 +114,7 @@ class HeaderBar : gtk.container.Container
       Get `decorationLayoutSet` property.
       Returns: Set to true if #GtkHeaderBar:decoration-layout is set.
   */
-  @property bool decorationLayoutSet()
+  @property bool decorationLayoutSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("decoration-layout-set");
   }
@@ -124,7 +124,7 @@ class HeaderBar : gtk.container.Container
       Params:
         propval = Set to true if #GtkHeaderBar:decoration-layout is set.
   */
-  @property void decorationLayoutSet(bool propval)
+  @property void decorationLayoutSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("decoration-layout-set", propval);
   }
@@ -134,7 +134,7 @@ class HeaderBar : gtk.container.Container
       Returns: If true, reserve space for a subtitle, even if none
         is currently set.
   */
-  @property bool hasSubtitle()
+  @property bool hasSubtitle() nothrow
   {
     return getHasSubtitle();
   }
@@ -145,7 +145,7 @@ class HeaderBar : gtk.container.Container
         propval = If true, reserve space for a subtitle, even if none
           is currently set.
   */
-  @property void hasSubtitle(bool propval)
+  @property void hasSubtitle(bool propval) nothrow
   {
     setHasSubtitle(propval);
   }
@@ -159,7 +159,7 @@ class HeaderBar : gtk.container.Container
         the state of the window (e.g. a close button will not be
         shown if the window can't be closed).
   */
-  @property bool showCloseButton()
+  @property bool showCloseButton() nothrow
   {
     return getShowCloseButton();
   }
@@ -174,43 +174,43 @@ class HeaderBar : gtk.container.Container
           the state of the window (e.g. a close button will not be
           shown if the window can't be closed).
   */
-  @property void showCloseButton(bool propval)
+  @property void showCloseButton(bool propval) nothrow
   {
     setShowCloseButton(propval);
   }
 
   /** */
-  @property int spacing()
+  @property int spacing() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("spacing");
   }
 
   /** */
-  @property void spacing(int propval)
+  @property void spacing(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("spacing", propval);
   }
 
   /** */
-  @property string subtitle()
+  @property string subtitle() nothrow
   {
     return getSubtitle();
   }
 
   /** */
-  @property void subtitle(string propval)
+  @property void subtitle(string propval) nothrow
   {
     setSubtitle(propval);
   }
 
   /** */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
 
   /** */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -219,7 +219,7 @@ class HeaderBar : gtk.container.Container
       Creates a new #GtkHeaderBar widget.
       Returns: a new #GtkHeaderBar
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_header_bar_new();
@@ -232,7 +232,7 @@ class HeaderBar : gtk.container.Container
       Returns: the custom title widget
            of the header, or null if none has been set explicitly.
   */
-  gtk.widget.Widget getCustomTitle()
+  gtk.widget.Widget getCustomTitle() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_header_bar_get_custom_title(cast(GtkHeaderBar*)this._cPtr);
@@ -245,7 +245,7 @@ class HeaderBar : gtk.container.Container
       [gtk.header_bar.HeaderBar.setDecorationLayout].
       Returns: the decoration layout
   */
-  string getDecorationLayout()
+  string getDecorationLayout() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_header_bar_get_decoration_layout(cast(GtkHeaderBar*)this._cPtr);
@@ -259,7 +259,7 @@ class HeaderBar : gtk.container.Container
       Returns: true if the header bar reserves space
             for a subtitle
   */
-  bool getHasSubtitle()
+  bool getHasSubtitle() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_header_bar_get_has_subtitle(cast(GtkHeaderBar*)this._cPtr);
@@ -271,7 +271,7 @@ class HeaderBar : gtk.container.Container
       decorations.
       Returns: true if the decorations are shown
   */
-  bool getShowCloseButton()
+  bool getShowCloseButton() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_header_bar_get_show_close_button(cast(GtkHeaderBar*)this._cPtr);
@@ -284,7 +284,7 @@ class HeaderBar : gtk.container.Container
            been set explicitly. The returned string is owned by the widget
            and must not be modified or freed.
   */
-  string getSubtitle()
+  string getSubtitle() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_header_bar_get_subtitle(cast(GtkHeaderBar*)this._cPtr);
@@ -298,7 +298,7 @@ class HeaderBar : gtk.container.Container
            been set explicitly. The returned string is owned by the widget
            and must not be modified or freed.
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_header_bar_get_title(cast(GtkHeaderBar*)this._cPtr);
@@ -313,7 +313,7 @@ class HeaderBar : gtk.container.Container
       Params:
         child = the #GtkWidget to be added to bar
   */
-  void packEnd(gtk.widget.Widget child)
+  void packEnd(gtk.widget.Widget child) nothrow
   {
     gtk_header_bar_pack_end(cast(GtkHeaderBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -325,7 +325,7 @@ class HeaderBar : gtk.container.Container
       Params:
         child = the #GtkWidget to be added to bar
   */
-  void packStart(gtk.widget.Widget child)
+  void packStart(gtk.widget.Widget child) nothrow
   {
     gtk_header_bar_pack_start(cast(GtkHeaderBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -345,7 +345,7 @@ class HeaderBar : gtk.container.Container
       Params:
         titleWidget = a custom widget to use for a title
   */
-  void setCustomTitle(gtk.widget.Widget titleWidget = null)
+  void setCustomTitle(gtk.widget.Widget titleWidget = null) nothrow
   {
     gtk_header_bar_set_custom_title(cast(GtkHeaderBar*)this._cPtr, titleWidget ? cast(GtkWidget*)titleWidget._cPtr(No.Dup) : null);
   }
@@ -373,7 +373,7 @@ class HeaderBar : gtk.container.Container
         layout = a decoration layout, or null to
               unset the layout
   */
-  void setDecorationLayout(string layout = null)
+  void setDecorationLayout(string layout = null) nothrow
   {
     const(char)* _layout = layout.toCString(No.Alloc);
     gtk_header_bar_set_decoration_layout(cast(GtkHeaderBar*)this._cPtr, _layout);
@@ -386,7 +386,7 @@ class HeaderBar : gtk.container.Container
       Params:
         setting = true to reserve space for a subtitle
   */
-  void setHasSubtitle(bool setting)
+  void setHasSubtitle(bool setting) nothrow
   {
     gtk_header_bar_set_has_subtitle(cast(GtkHeaderBar*)this._cPtr, setting);
   }
@@ -398,7 +398,7 @@ class HeaderBar : gtk.container.Container
       Params:
         setting = true to show standard window decorations
   */
-  void setShowCloseButton(bool setting)
+  void setShowCloseButton(bool setting) nothrow
   {
     gtk_header_bar_set_show_close_button(cast(GtkHeaderBar*)this._cPtr, setting);
   }
@@ -414,7 +414,7 @@ class HeaderBar : gtk.container.Container
       Params:
         subtitle = a subtitle, or null
   */
-  void setSubtitle(string subtitle = null)
+  void setSubtitle(string subtitle = null) nothrow
   {
     const(char)* _subtitle = subtitle.toCString(No.Alloc);
     gtk_header_bar_set_subtitle(cast(GtkHeaderBar*)this._cPtr, _subtitle);
@@ -428,7 +428,7 @@ class HeaderBar : gtk.container.Container
       Params:
         title = a title, or null
   */
-  void setTitle(string title = null)
+  void setTitle(string title = null) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_header_bar_set_title(cast(GtkHeaderBar*)this._cPtr, _title);
@@ -441,7 +441,7 @@ class HeaderBarGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
 
 
   /** */
-  T customTitle(gtk.widget.Widget propval)
+  T customTitle(gtk.widget.Widget propval) nothrow
   {
     return setProperty("custom-title", propval);
   }
@@ -457,7 +457,7 @@ class HeaderBarGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
           about the format of this string.
       Returns: Builder instance for fluent chaining
   */
-  T decorationLayout(string propval)
+  T decorationLayout(string propval) nothrow
   {
     return setProperty("decoration-layout", propval);
   }
@@ -468,7 +468,7 @@ class HeaderBarGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
         propval = Set to true if #GtkHeaderBar:decoration-layout is set.
       Returns: Builder instance for fluent chaining
   */
-  T decorationLayoutSet(bool propval)
+  T decorationLayoutSet(bool propval) nothrow
   {
     return setProperty("decoration-layout-set", propval);
   }
@@ -480,7 +480,7 @@ class HeaderBarGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
           is currently set.
       Returns: Builder instance for fluent chaining
   */
-  T hasSubtitle(bool propval)
+  T hasSubtitle(bool propval) nothrow
   {
     return setProperty("has-subtitle", propval);
   }
@@ -496,25 +496,25 @@ class HeaderBarGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
           shown if the window can't be closed).
       Returns: Builder instance for fluent chaining
   */
-  T showCloseButton(bool propval)
+  T showCloseButton(bool propval) nothrow
   {
     return setProperty("show-close-button", propval);
   }
 
   /** */
-  T spacing(int propval)
+  T spacing(int propval) nothrow
   {
     return setProperty("spacing", propval);
   }
 
   /** */
-  T subtitle(string propval)
+  T subtitle(string propval) nothrow
   {
     return setProperty("subtitle", propval);
   }
 
   /** */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -527,7 +527,7 @@ final class HeaderBarGidBuilder : HeaderBarGidBuilderImpl!HeaderBarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  HeaderBar build()
+  HeaderBar build() nothrow
   {
     return new HeaderBar(cast(void*)createGObject(HeaderBar._getGType), No.Take);
   }

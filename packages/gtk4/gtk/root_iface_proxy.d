@@ -8,12 +8,12 @@ import gtk.root_mixin;
 /// Proxy object for [gtk.root.Root] interface when a GObject has no applicable D binding
 class RootIfaceProxy : IfaceProxy, gtk.root.Root
 {
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
-  override TypeInfo_Interface getIface()
+  override TypeInfo_Interface getIface() nothrow
   {
     return typeid(gtk.root.Root);
   }

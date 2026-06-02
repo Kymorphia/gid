@@ -15,26 +15,26 @@ class SlowFileSystem : arrow.file_system.FileSystem
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_slow_file_system_get_type != &gidSymbolNotFound ? garrow_slow_file_system_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SlowFileSystem self()
+  override SlowFileSystem self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class SlowFileSystem : arrow.file_system.FileSystem
       Get builder for [arrow.slow_file_system.SlowFileSystem]
       Returns: New builder object
   */
-  static SlowFileSystemGidBuilder builder()
+  static SlowFileSystemGidBuilder builder() nothrow
   {
     return new SlowFileSystemGidBuilder;
   }
 
   /** */
-  @property arrow.file_system.FileSystem baseFileSystem()
+  @property arrow.file_system.FileSystem baseFileSystem() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.file_system.FileSystem)("base-file-system");
   }
@@ -65,7 +65,7 @@ class SlowFileSystem : arrow.file_system.FileSystem
         averageLatency = The average value of the latency.
       Returns: A newly created #GArrowSlowFileSystem.
   */
-  static arrow.slow_file_system.SlowFileSystem newAverageLatency(arrow.file_system.FileSystem baseFileSystem, double averageLatency)
+  static arrow.slow_file_system.SlowFileSystem newAverageLatency(arrow.file_system.FileSystem baseFileSystem, double averageLatency) nothrow
   {
     GArrowSlowFileSystem* _cretval;
     _cretval = garrow_slow_file_system_new_average_latency(baseFileSystem ? cast(GArrowFileSystem*)baseFileSystem._cPtr(No.Dup) : null, averageLatency);
@@ -83,7 +83,7 @@ class SlowFileSystem : arrow.file_system.FileSystem
         seed = A random seed.
       Returns: A newly created #GArrowSlowFileSystem.
   */
-  static arrow.slow_file_system.SlowFileSystem newAverageLatencyAndSeed(arrow.file_system.FileSystem baseFileSystem, double averageLatency, int seed)
+  static arrow.slow_file_system.SlowFileSystem newAverageLatencyAndSeed(arrow.file_system.FileSystem baseFileSystem, double averageLatency, int seed) nothrow
   {
     GArrowSlowFileSystem* _cretval;
     _cretval = garrow_slow_file_system_new_average_latency_and_seed(baseFileSystem ? cast(GArrowFileSystem*)baseFileSystem._cPtr(No.Dup) : null, averageLatency, seed);
@@ -97,7 +97,7 @@ class SlowFileSystemGidBuilderImpl(T) : arrow.file_system.FileSystemGidBuilderIm
 {
 
   /** */
-  T baseFileSystem(arrow.file_system.FileSystem propval)
+  T baseFileSystem(arrow.file_system.FileSystem propval) nothrow
   {
     return setProperty("base-file-system", propval);
   }
@@ -110,7 +110,7 @@ final class SlowFileSystemGidBuilder : SlowFileSystemGidBuilderImpl!SlowFileSyst
       Create object from builder.
       Returns: New object
   */
-  SlowFileSystem build()
+  SlowFileSystem build() nothrow
   {
     return new SlowFileSystem(cast(void*)createGObject(SlowFileSystem._getGType), No.Take);
   }

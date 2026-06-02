@@ -14,26 +14,26 @@ class ClientOptions : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_client_options_get_type != &gidSymbolNotFound ? gaflight_client_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ClientOptions self()
+  override ClientOptions self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class ClientOptions : gobject.object.ObjectWrap
       Get builder for [arrowflight.client_options.ClientOptions]
       Returns: New builder object
   */
-  static ClientOptionsGidBuilder builder()
+  static ClientOptionsGidBuilder builder() nothrow
   {
     return new ClientOptionsGidBuilder;
   }
@@ -51,7 +51,7 @@ class ClientOptions : gobject.object.ObjectWrap
       Get `certificateChain` property.
       Returns: The client certificate to use if using Mutual TLS.
   */
-  @property string certificateChain()
+  @property string certificateChain() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("certificate-chain");
   }
@@ -61,7 +61,7 @@ class ClientOptions : gobject.object.ObjectWrap
       Params:
         propval = The client certificate to use if using Mutual TLS.
   */
-  @property void certificateChain(string propval)
+  @property void certificateChain(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("certificate-chain", propval);
   }
@@ -71,7 +71,7 @@ class ClientOptions : gobject.object.ObjectWrap
       Returns: Whether use TLS without validating the server certificate. Use
         with caution.
   */
-  @property bool disableServerVerification()
+  @property bool disableServerVerification() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("disable-server-verification");
   }
@@ -82,7 +82,7 @@ class ClientOptions : gobject.object.ObjectWrap
         propval = Whether use TLS without validating the server certificate. Use
           with caution.
   */
-  @property void disableServerVerification(bool propval)
+  @property void disableServerVerification(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("disable-server-verification", propval);
   }
@@ -91,7 +91,7 @@ class ClientOptions : gobject.object.ObjectWrap
       Get `overrideHostName` property.
       Returns: Override the host name checked by TLS. Use with caution.
   */
-  @property string overrideHostName()
+  @property string overrideHostName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("override-host-name");
   }
@@ -101,7 +101,7 @@ class ClientOptions : gobject.object.ObjectWrap
       Params:
         propval = Override the host name checked by TLS. Use with caution.
   */
-  @property void overrideHostName(string propval)
+  @property void overrideHostName(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("override-host-name", propval);
   }
@@ -111,7 +111,7 @@ class ClientOptions : gobject.object.ObjectWrap
       Returns: The private key associated with the client certificate for Mutual
         TLS.
   */
-  @property string privateKey()
+  @property string privateKey() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("private-key");
   }
@@ -122,7 +122,7 @@ class ClientOptions : gobject.object.ObjectWrap
         propval = The private key associated with the client certificate for Mutual
           TLS.
   */
-  @property void privateKey(string propval)
+  @property void privateKey(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("private-key", propval);
   }
@@ -131,7 +131,7 @@ class ClientOptions : gobject.object.ObjectWrap
       Get `tlsRootCertificates` property.
       Returns: Root certificates to use for validating server certificates.
   */
-  @property string tlsRootCertificates()
+  @property string tlsRootCertificates() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("tls-root-certificates");
   }
@@ -141,7 +141,7 @@ class ClientOptions : gobject.object.ObjectWrap
       Params:
         propval = Root certificates to use for validating server certificates.
   */
-  @property void tlsRootCertificates(string propval)
+  @property void tlsRootCertificates(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("tls-root-certificates", propval);
   }
@@ -154,7 +154,7 @@ class ClientOptions : gobject.object.ObjectWrap
         Used to help limit server memory consumption. Only enabled if
         positive. When enabled, @GARROW_ERROR_IO may be yielded.
   */
-  @property long writeSizeLimitBytes()
+  @property long writeSizeLimitBytes() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("write-size-limit-bytes");
   }
@@ -168,13 +168,13 @@ class ClientOptions : gobject.object.ObjectWrap
           Used to help limit server memory consumption. Only enabled if
           positive. When enabled, @GARROW_ERROR_IO may be yielded.
   */
-  @property void writeSizeLimitBytes(long propval)
+  @property void writeSizeLimitBytes(long propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(long)("write-size-limit-bytes", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GAFlightClientOptions* _cretval;
     _cretval = gaflight_client_options_new();
@@ -192,7 +192,7 @@ class ClientOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The client certificate to use if using Mutual TLS.
       Returns: Builder instance for fluent chaining
   */
-  T certificateChain(string propval)
+  T certificateChain(string propval) nothrow
   {
     return setProperty("certificate-chain", propval);
   }
@@ -204,7 +204,7 @@ class ClientOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           with caution.
       Returns: Builder instance for fluent chaining
   */
-  T disableServerVerification(bool propval)
+  T disableServerVerification(bool propval) nothrow
   {
     return setProperty("disable-server-verification", propval);
   }
@@ -215,7 +215,7 @@ class ClientOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Override the host name checked by TLS. Use with caution.
       Returns: Builder instance for fluent chaining
   */
-  T overrideHostName(string propval)
+  T overrideHostName(string propval) nothrow
   {
     return setProperty("override-host-name", propval);
   }
@@ -227,7 +227,7 @@ class ClientOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           TLS.
       Returns: Builder instance for fluent chaining
   */
-  T privateKey(string propval)
+  T privateKey(string propval) nothrow
   {
     return setProperty("private-key", propval);
   }
@@ -238,7 +238,7 @@ class ClientOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Root certificates to use for validating server certificates.
       Returns: Builder instance for fluent chaining
   */
-  T tlsRootCertificates(string propval)
+  T tlsRootCertificates(string propval) nothrow
   {
     return setProperty("tls-root-certificates", propval);
   }
@@ -253,7 +253,7 @@ class ClientOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           positive. When enabled, @GARROW_ERROR_IO may be yielded.
       Returns: Builder instance for fluent chaining
   */
-  T writeSizeLimitBytes(long propval)
+  T writeSizeLimitBytes(long propval) nothrow
   {
     return setProperty("write-size-limit-bytes", propval);
   }
@@ -266,7 +266,7 @@ final class ClientOptionsGidBuilder : ClientOptionsGidBuilderImpl!ClientOptionsG
       Create object from builder.
       Returns: New object
   */
-  ClientOptions build()
+  ClientOptions build() nothrow
   {
     return new ClientOptions(cast(void*)createGObject(ClientOptions._getGType), Yes.Take);
   }

@@ -16,26 +16,26 @@ class BaseBinaryScalar : arrow.scalar.Scalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_base_binary_scalar_get_type != &gidSymbolNotFound ? garrow_base_binary_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BaseBinaryScalar self()
+  override BaseBinaryScalar self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class BaseBinaryScalar : arrow.scalar.Scalar
       Get builder for [arrow.base_binary_scalar.BaseBinaryScalar]
       Returns: New builder object
   */
-  static BaseBinaryScalarGidBuilder builder()
+  static BaseBinaryScalarGidBuilder builder() nothrow
   {
     return new BaseBinaryScalarGidBuilder;
   }
 
   /** */
-  arrow.buffer.Buffer getValue()
+  arrow.buffer.Buffer getValue() nothrow
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_base_binary_scalar_get_value(cast(GArrowBaseBinaryScalar*)this._cPtr);
@@ -69,7 +69,7 @@ class BaseBinaryScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
         propval = The value of the scalar.
       Returns: Builder instance for fluent chaining
   */
-  T value(arrow.buffer.Buffer propval)
+  T value(arrow.buffer.Buffer propval) nothrow
   {
     return setProperty("value", propval);
   }
@@ -82,7 +82,7 @@ final class BaseBinaryScalarGidBuilder : BaseBinaryScalarGidBuilderImpl!BaseBina
       Create object from builder.
       Returns: New object
   */
-  BaseBinaryScalar build()
+  BaseBinaryScalar build() nothrow
   {
     return new BaseBinaryScalar(cast(void*)createGObject(BaseBinaryScalar._getGType), No.Take);
   }

@@ -18,11 +18,8 @@ class SqlRenderingContext
   GdaSqlRenderingContext _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.sql_rendering_context.SqlRenderingContext");
-
     _cInstance = *cast(GdaSqlRenderingContext*)ptr;
 
     if (take)
@@ -30,7 +27,7 @@ class SqlRenderingContext
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class SqlRenderingContext
       Get `flags` field.
       Returns: Global rendering options
   */
-  @property gda.types.StatementSqlFlag flags()
+  @property gda.types.StatementSqlFlag flags() nothrow
   {
     return cast(gda.types.StatementSqlFlag)(cast(GdaSqlRenderingContext*)this._cPtr).flags;
   }
@@ -49,7 +46,7 @@ class SqlRenderingContext
       Params:
         propval = Global rendering options
   */
-  @property void flags(gda.types.StatementSqlFlag propval)
+  @property void flags(gda.types.StatementSqlFlag propval) nothrow
   {
     (cast(GdaSqlRenderingContext*)this._cPtr).flags = cast(GdaStatementSqlFlag)propval;
   }
@@ -58,7 +55,7 @@ class SqlRenderingContext
       Get `params` field.
       Returns: Parameters to be used while doing the rendering
   */
-  @property gda.set.Set params()
+  @property gda.set.Set params() nothrow
   {
     return cToD!(gda.set.Set)(cast(void*)(cast(GdaSqlRenderingContext*)this._cPtr).params);
   }
@@ -68,7 +65,7 @@ class SqlRenderingContext
       Params:
         propval = Parameters to be used while doing the rendering
   */
-  @property void params(gda.set.Set propval)
+  @property void params(gda.set.Set propval) nothrow
   {
     cValueFree!(gda.set.Set)(cast(void*)(cast(GdaSqlRenderingContext*)this._cPtr).params);
     dToC(propval, cast(void*)&(cast(GdaSqlRenderingContext*)this._cPtr).params);
@@ -78,7 +75,7 @@ class SqlRenderingContext
       Get `provider` field.
       Returns: Pointer to the server provider to be used
   */
-  @property gda.server_provider.ServerProvider provider()
+  @property gda.server_provider.ServerProvider provider() nothrow
   {
     return cToD!(gda.server_provider.ServerProvider)(cast(void*)(cast(GdaSqlRenderingContext*)this._cPtr).provider);
   }
@@ -88,7 +85,7 @@ class SqlRenderingContext
       Params:
         propval = Pointer to the server provider to be used
   */
-  @property void provider(gda.server_provider.ServerProvider propval)
+  @property void provider(gda.server_provider.ServerProvider propval) nothrow
   {
     cValueFree!(gda.server_provider.ServerProvider)(cast(void*)(cast(GdaSqlRenderingContext*)this._cPtr).provider);
     dToC(propval, cast(void*)&(cast(GdaSqlRenderingContext*)this._cPtr).provider);
@@ -98,7 +95,7 @@ class SqlRenderingContext
       Get `cnc` field.
       Returns: Pointer to the connection to be used
   */
-  @property gda.connection.Connection cnc()
+  @property gda.connection.Connection cnc() nothrow
   {
     return cToD!(gda.connection.Connection)(cast(void*)(cast(GdaSqlRenderingContext*)this._cPtr).cnc);
   }
@@ -108,7 +105,7 @@ class SqlRenderingContext
       Params:
         propval = Pointer to the connection to be used
   */
-  @property void cnc(gda.connection.Connection propval)
+  @property void cnc(gda.connection.Connection propval) nothrow
   {
     cValueFree!(gda.connection.Connection)(cast(void*)(cast(GdaSqlRenderingContext*)this._cPtr).cnc);
     dToC(propval, cast(void*)&(cast(GdaSqlRenderingContext*)this._cPtr).cnc);
@@ -118,7 +115,7 @@ class SqlRenderingContext
       Get `renderValue` field.
       Returns: function to render a #GValue
   */
-  @property GdaSqlRenderingValue renderValue()
+  @property GdaSqlRenderingValue renderValue() nothrow
   {
     return (cast(GdaSqlRenderingContext*)this._cPtr).renderValue;
   }
@@ -129,7 +126,7 @@ class SqlRenderingContext
         propval = function to render a #GValue
   */
 
-  @property void renderValue(GdaSqlRenderingValue propval)
+  @property void renderValue(GdaSqlRenderingValue propval) nothrow
   {
     (cast(GdaSqlRenderingContext*)this._cPtr).renderValue = propval;
   }

@@ -49,23 +49,22 @@ struct Matrix
   double y0;
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_matrix_get_type != &gidSymbolNotFound ? cairo_gobject_matrix_get_type() : cast(GType)0;
   }
 
   /** */
-  @property GType _gType()
+  @property GType _gType() nothrow
   {
     return _getGType();
   }
 
-  void* boxCopy()
+  void* boxCopy() nothrow
   {
     import gobject.c.functions : g_boxed_copy;
-    return g_boxed_copy(_gType,
-        cast(void*)&this);
+    return g_boxed_copy(_gType, cast(void*)&this);
   }
 
   /**
@@ -85,7 +84,7 @@ struct Matrix
         x0 = X translation component of the affine transformation
         y0 = Y translation component of the affine transformation
   */
-  void init_(double xx, double yx, double xy, double yy, double x0, double y0)
+  void init_(double xx, double yx, double xy, double yy, double x0, double y0) nothrow
   {
     cairo_matrix_init(cast(cairo_matrix_t*)&this, xx, yx, xy, yy, x0, y0);
   }
@@ -93,7 +92,7 @@ struct Matrix
   /**
       Modifies matrix to be an identity transformation.
   */
-  void initIdentity()
+  void initIdentity() nothrow
   {
     cairo_matrix_init_identity(cast(cairo_matrix_t*)&this);
   }
@@ -108,7 +107,7 @@ struct Matrix
           axis orientation of cairo, positive angles rotate in a clockwise
           direction.
   */
-  void initRotate(double radians)
+  void initRotate(double radians) nothrow
   {
     cairo_matrix_init_rotate(cast(cairo_matrix_t*)&this, radians);
   }
@@ -121,7 +120,7 @@ struct Matrix
         sx = scale factor in the X direction
         sy = scale factor in the Y direction
   */
-  void initScale(double sx, double sy)
+  void initScale(double sx, double sy) nothrow
   {
     cairo_matrix_init_scale(cast(cairo_matrix_t*)&this, sx, sy);
   }
@@ -134,7 +133,7 @@ struct Matrix
         tx = amount to translate in the X direction
         ty = amount to translate in the Y direction
   */
-  void initTranslate(double tx, double ty)
+  void initTranslate(double tx, double ty) nothrow
   {
     cairo_matrix_init_translate(cast(cairo_matrix_t*)&this, tx, ty);
   }
@@ -148,7 +147,7 @@ struct Matrix
          be the inverse matrix and returns [cairo.types.Status.Success]. Otherwise,
          returns [cairo.types.Status.InvalidMatrix].
   */
-  cairo.types.Status invert()
+  cairo.types.Status invert() nothrow
   {
     cairo_status_t _cretval;
     _cretval = cairo_matrix_invert(cast(cairo_matrix_t*)&this);
@@ -169,7 +168,7 @@ struct Matrix
         a = a #cairo_matrix_t
         b = a #cairo_matrix_t
   */
-  void multiply(cairo.matrix.Matrix a, cairo.matrix.Matrix b)
+  void multiply(cairo.matrix.Matrix a, cairo.matrix.Matrix b) nothrow
   {
     cairo_matrix_multiply(cast(cairo_matrix_t*)&this, cast(const(cairo_matrix_t)*)&a, cast(const(cairo_matrix_t)*)&b);
   }
@@ -187,7 +186,7 @@ struct Matrix
           axis orientation of cairo, positive angles rotate in a clockwise
           direction.
   */
-  void rotate(double radians)
+  void rotate(double radians) nothrow
   {
     cairo_matrix_rotate(cast(cairo_matrix_t*)&this, radians);
   }
@@ -201,7 +200,7 @@ struct Matrix
         sx = scale factor in the X direction
         sy = scale factor in the Y direction
   */
-  void scale(double sx, double sy)
+  void scale(double sx, double sy) nothrow
   {
     cairo_matrix_scale(cast(cairo_matrix_t*)&this, sx, sy);
   }
@@ -221,7 +220,7 @@ struct Matrix
         dx = X component of a distance vector. An in/out parameter
         dy = Y component of a distance vector. An in/out parameter
   */
-  void transformDistance(out double dx, out double dy)
+  void transformDistance(out double dx, out double dy) nothrow
   {
     cairo_matrix_transform_distance(cast(const(cairo_matrix_t)*)&this, cast(double*)&dx, cast(double*)&dy);
   }
@@ -233,7 +232,7 @@ struct Matrix
         x = X position. An in/out parameter
         y = Y position. An in/out parameter
   */
-  void transformPoint(out double x, out double y)
+  void transformPoint(out double x, out double y) nothrow
   {
     cairo_matrix_transform_point(cast(const(cairo_matrix_t)*)&this, cast(double*)&x, cast(double*)&y);
   }
@@ -248,7 +247,7 @@ struct Matrix
         tx = amount to translate in the X direction
         ty = amount to translate in the Y direction
   */
-  void translate(double tx, double ty)
+  void translate(double tx, double ty) nothrow
   {
     cairo_matrix_translate(cast(cairo_matrix_t*)&this, tx, ty);
   }

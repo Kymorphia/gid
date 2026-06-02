@@ -14,18 +14,15 @@ class AudioChannelMixer
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstaudio.audio_channel_mixer.AudioChannelMixer");
-
     _cInstancePtr = cast(GstAudioChannelMixer*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -44,7 +41,7 @@ class AudioChannelMixer
       constitute an appropriate epsilon.
       Returns: true is mix is passthrough.
   */
-  bool isPassthrough()
+  bool isPassthrough() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_channel_mixer_is_passthrough(cast(GstAudioChannelMixer*)this._cPtr);

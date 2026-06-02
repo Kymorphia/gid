@@ -63,7 +63,7 @@ template SelectionModelT()
           selected in model. If no items are selected, the bitset is empty.
           The bitset must not be modified.
   */
-  override gtk.bitset.Bitset getSelection()
+  override gtk.bitset.Bitset getSelection() nothrow
   {
     GtkBitset* _cretval;
     _cretval = gtk_selection_model_get_selection(cast(GtkSelectionModel*)this._cPtr);
@@ -87,7 +87,7 @@ template SelectionModelT()
           for the given range with all other values being undefined.
           The bitset must not be modified.
   */
-  override gtk.bitset.Bitset getSelectionInRange(uint position, uint nItems)
+  override gtk.bitset.Bitset getSelectionInRange(uint position, uint nItems) nothrow
   {
     GtkBitset* _cretval;
     _cretval = gtk_selection_model_get_selection_in_range(cast(GtkSelectionModel*)this._cPtr, position, nItems);
@@ -102,7 +102,7 @@ template SelectionModelT()
         position = the position of the item to query
       Returns: true if the item is selected
   */
-  override bool isSelected(uint position)
+  override bool isSelected(uint position) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_selection_model_is_selected(cast(GtkSelectionModel*)this._cPtr, position);
@@ -114,7 +114,7 @@ template SelectionModelT()
       Returns: true if this action was supported and no fallback should be
           tried. This does not mean that all items are now selected.
   */
-  override bool selectAll()
+  override bool selectAll() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_selection_model_select_all(cast(GtkSelectionModel*)this._cPtr);
@@ -130,7 +130,7 @@ template SelectionModelT()
       Returns: true if this action was supported and no fallback should be
           tried. This does not mean the item was selected.
   */
-  override bool selectItem(uint position, bool unselectRest)
+  override bool selectItem(uint position, bool unselectRest) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_selection_model_select_item(cast(GtkSelectionModel*)this._cPtr, position, unselectRest);
@@ -147,7 +147,7 @@ template SelectionModelT()
       Returns: true if this action was supported and no fallback should be
           tried. This does not mean the range was selected.
   */
-  override bool selectRange(uint position, uint nItems, bool unselectRest)
+  override bool selectRange(uint position, uint nItems, bool unselectRest) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_selection_model_select_range(cast(GtkSelectionModel*)this._cPtr, position, nItems, unselectRest);
@@ -164,7 +164,7 @@ template SelectionModelT()
         position = the first changed item
         nItems = the number of changed items
   */
-  override void selectionChanged(uint position, uint nItems)
+  override void selectionChanged(uint position, uint nItems) nothrow
   {
     gtk_selection_model_selection_changed(cast(GtkSelectionModel*)this._cPtr, position, nItems);
   }
@@ -211,7 +211,7 @@ template SelectionModelT()
           tried. This does not mean that all items were updated according
           to the inputs.
   */
-  override bool setSelection(gtk.bitset.Bitset selected, gtk.bitset.Bitset mask)
+  override bool setSelection(gtk.bitset.Bitset selected, gtk.bitset.Bitset mask) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_selection_model_set_selection(cast(GtkSelectionModel*)this._cPtr, selected ? cast(GtkBitset*)selected._cPtr(No.Dup) : null, mask ? cast(GtkBitset*)mask._cPtr(No.Dup) : null);
@@ -223,7 +223,7 @@ template SelectionModelT()
       Returns: true if this action was supported and no fallback should be
           tried. This does not mean that all items are now unselected.
   */
-  override bool unselectAll()
+  override bool unselectAll() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_selection_model_unselect_all(cast(GtkSelectionModel*)this._cPtr);
@@ -238,7 +238,7 @@ template SelectionModelT()
       Returns: true if this action was supported and no fallback should be
           tried. This does not mean the item was unselected.
   */
-  override bool unselectItem(uint position)
+  override bool unselectItem(uint position) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_selection_model_unselect_item(cast(GtkSelectionModel*)this._cPtr, position);
@@ -254,7 +254,7 @@ template SelectionModelT()
       Returns: true if this action was supported and no fallback should be
           tried. This does not mean the range was unselected.
   */
-  override bool unselectRange(uint position, uint nItems)
+  override bool unselectRange(uint position, uint nItems) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_selection_model_unselect_range(cast(GtkSelectionModel*)this._cPtr, position, nItems);
@@ -285,7 +285,7 @@ template SelectionModelT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -293,7 +293,7 @@ template SelectionModelT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.selection_model.SelectionModel)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -308,7 +308,14 @@ template SelectionModelT()
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.selection_model.SelectionModel.selectionChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

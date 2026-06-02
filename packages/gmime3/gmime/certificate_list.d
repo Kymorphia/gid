@@ -17,26 +17,26 @@ class CertificateList : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_certificate_list_get_type != &gidSymbolNotFound ? g_mime_certificate_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CertificateList self()
+  override CertificateList self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class CertificateList : gobject.object.ObjectWrap
       Get builder for [gmime.certificate_list.CertificateList]
       Returns: New builder object
   */
-  static CertificateListGidBuilder builder()
+  static CertificateListGidBuilder builder() nothrow
   {
     return new CertificateListGidBuilder;
   }
@@ -54,7 +54,7 @@ class CertificateList : gobject.object.ObjectWrap
       Creates a new #GMimeCertificateList.
       Returns: a new #GMimeCertificateList.
   */
-  this()
+  this() nothrow
   {
     GMimeCertificateList* _cretval;
     _cretval = g_mime_certificate_list_new();
@@ -68,7 +68,7 @@ class CertificateList : gobject.object.ObjectWrap
         cert = a #GMimeCertificate
       Returns: the index of the added #GMimeCertificate.
   */
-  int add(gmime.certificate.Certificate cert)
+  int add(gmime.certificate.Certificate cert) nothrow
   {
     int _retval;
     _retval = g_mime_certificate_list_add(cast(GMimeCertificateList*)this._cPtr, cert ? cast(GMimeCertificate*)cert._cPtr(No.Dup) : null);
@@ -78,7 +78,7 @@ class CertificateList : gobject.object.ObjectWrap
   /**
       Clears the list of certificates.
   */
-  void clear()
+  void clear() nothrow
   {
     g_mime_certificate_list_clear(cast(GMimeCertificateList*)this._cPtr);
   }
@@ -92,7 +92,7 @@ class CertificateList : gobject.object.ObjectWrap
       Returns: true if the specified #GMimeCertificate is contained within the
         specified #GMimeCertificateList or false otherwise.
   */
-  bool contains(gmime.certificate.Certificate cert)
+  bool contains(gmime.certificate.Certificate cert) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_certificate_list_contains(cast(GMimeCertificateList*)this._cPtr, cert ? cast(GMimeCertificate*)cert._cPtr(No.Dup) : null);
@@ -107,7 +107,7 @@ class CertificateList : gobject.object.ObjectWrap
       Returns: the #GMimeCertificate at the specified
         index or null if the index is out of range.
   */
-  gmime.certificate.Certificate getCertificate(int index)
+  gmime.certificate.Certificate getCertificate(int index) nothrow
   {
     GMimeCertificate* _cretval;
     _cretval = g_mime_certificate_list_get_certificate(cast(GMimeCertificateList*)this._cPtr, index);
@@ -125,7 +125,7 @@ class CertificateList : gobject.object.ObjectWrap
         #GMimeCertificateList or %-1 if it is not contained within the
         #GMimeCertificateList.
   */
-  int indexOf(gmime.certificate.Certificate cert)
+  int indexOf(gmime.certificate.Certificate cert) nothrow
   {
     int _retval;
     _retval = g_mime_certificate_list_index_of(cast(GMimeCertificateList*)this._cPtr, cert ? cast(GMimeCertificate*)cert._cPtr(No.Dup) : null);
@@ -140,7 +140,7 @@ class CertificateList : gobject.object.ObjectWrap
         index = index to insert at
         cert = a #GMimeCertificate
   */
-  void insert(int index, gmime.certificate.Certificate cert)
+  void insert(int index, gmime.certificate.Certificate cert) nothrow
   {
     g_mime_certificate_list_insert(cast(GMimeCertificateList*)this._cPtr, index, cert ? cast(GMimeCertificate*)cert._cPtr(No.Dup) : null);
   }
@@ -149,7 +149,7 @@ class CertificateList : gobject.object.ObjectWrap
       Gets the length of the list.
       Returns: the number of #GMimeCertificate objects in the list.
   */
-  int length()
+  int length() nothrow
   {
     int _retval;
     _retval = g_mime_certificate_list_length(cast(GMimeCertificateList*)this._cPtr);
@@ -164,7 +164,7 @@ class CertificateList : gobject.object.ObjectWrap
       Returns: true if the specified #GMimeCertificate was removed or false
         otherwise.
   */
-  bool remove(gmime.certificate.Certificate cert)
+  bool remove(gmime.certificate.Certificate cert) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_certificate_list_remove(cast(GMimeCertificateList*)this._cPtr, cert ? cast(GMimeCertificate*)cert._cPtr(No.Dup) : null);
@@ -179,7 +179,7 @@ class CertificateList : gobject.object.ObjectWrap
         index = index of the certificate to remove
       Returns: true if a #GMimeCertificate was removed or false otherwise.
   */
-  bool removeAt(int index)
+  bool removeAt(int index) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_certificate_list_remove_at(cast(GMimeCertificateList*)this._cPtr, index);
@@ -193,7 +193,7 @@ class CertificateList : gobject.object.ObjectWrap
         index = index of #GMimeCertificate to set
         cert = a #GMimeCertificate
   */
-  void setCertificate(int index, gmime.certificate.Certificate cert)
+  void setCertificate(int index, gmime.certificate.Certificate cert) nothrow
   {
     g_mime_certificate_list_set_certificate(cast(GMimeCertificateList*)this._cPtr, index, cert ? cast(GMimeCertificate*)cert._cPtr(No.Dup) : null);
   }
@@ -211,7 +211,7 @@ final class CertificateListGidBuilder : CertificateListGidBuilderImpl!Certificat
       Create object from builder.
       Returns: New object
   */
-  CertificateList build()
+  CertificateList build() nothrow
   {
     return new CertificateList(cast(void*)createGObject(CertificateList._getGType), Yes.Take);
   }

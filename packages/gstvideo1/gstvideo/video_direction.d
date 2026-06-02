@@ -17,17 +17,17 @@ interface VideoDirection
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_direction_get_type != &gidSymbolNotFound ? gst_video_direction_get_type() : cast(GType)0;
   }
 
   /** */
-  @property gstvideo.types.VideoOrientationMethod videoDirection();
+  @property gstvideo.types.VideoOrientationMethod videoDirection() nothrow;
 
   /** */
-  @property void videoDirection(gstvideo.types.VideoOrientationMethod propval);
+  @property void videoDirection(gstvideo.types.VideoOrientationMethod propval) nothrow;
 }
 
 /// Fluent builder implementation template for [gstvideo.video_direction.VideoDirection]
@@ -35,5 +35,5 @@ interface VideoDirectionGidBuilderImpl(T)
 {
 
   /** */
-  T videoDirection(gstvideo.types.VideoOrientationMethod propval);
+  T videoDirection(gstvideo.types.VideoOrientationMethod propval) nothrow;
 }

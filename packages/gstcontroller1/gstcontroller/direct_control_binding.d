@@ -24,26 +24,26 @@ class DirectControlBinding : gst.control_binding.ControlBinding
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_direct_control_binding_get_type != &gidSymbolNotFound ? gst_direct_control_binding_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DirectControlBinding self()
+  override DirectControlBinding self() nothrow
   {
     return this;
   }
@@ -52,25 +52,25 @@ class DirectControlBinding : gst.control_binding.ControlBinding
       Get builder for [gstcontroller.direct_control_binding.DirectControlBinding]
       Returns: New builder object
   */
-  static DirectControlBindingGidBuilder builder()
+  static DirectControlBindingGidBuilder builder() nothrow
   {
     return new DirectControlBindingGidBuilder;
   }
 
   /** */
-  @property bool absolute()
+  @property bool absolute() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("absolute");
   }
 
   /** */
-  @property gst.control_source.ControlSource controlSource()
+  @property gst.control_source.ControlSource controlSource() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gst.control_source.ControlSource)("control-source");
   }
 
   /** */
-  @property void controlSource(gst.control_source.ControlSource propval)
+  @property void controlSource(gst.control_source.ControlSource propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gst.control_source.ControlSource)("control-source", propval);
   }
@@ -86,7 +86,7 @@ class DirectControlBinding : gst.control_binding.ControlBinding
         cs = the control source
       Returns: the new #GstDirectControlBinding
   */
-  this(gst.object.ObjectWrap object, string propertyName, gst.control_source.ControlSource cs)
+  this(gst.object.ObjectWrap object, string propertyName, gst.control_source.ControlSource cs) nothrow
   {
     GstControlBinding* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
@@ -105,7 +105,7 @@ class DirectControlBinding : gst.control_binding.ControlBinding
         cs = the control source
       Returns: the new #GstDirectControlBinding
   */
-  static gstcontroller.direct_control_binding.DirectControlBinding newAbsolute(gst.object.ObjectWrap object, string propertyName, gst.control_source.ControlSource cs)
+  static gstcontroller.direct_control_binding.DirectControlBinding newAbsolute(gst.object.ObjectWrap object, string propertyName, gst.control_source.ControlSource cs) nothrow
   {
     GstControlBinding* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
@@ -120,13 +120,13 @@ class DirectControlBindingGidBuilderImpl(T) : gst.control_binding.ControlBinding
 {
 
   /** */
-  T absolute(bool propval)
+  T absolute(bool propval) nothrow
   {
     return setProperty("absolute", propval);
   }
 
   /** */
-  T controlSource(gst.control_source.ControlSource propval)
+  T controlSource(gst.control_source.ControlSource propval) nothrow
   {
     return setProperty("control-source", propval);
   }
@@ -139,7 +139,7 @@ final class DirectControlBindingGidBuilder : DirectControlBindingGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  DirectControlBinding build()
+  DirectControlBinding build() nothrow
   {
     return new DirectControlBinding(cast(void*)createGObject(DirectControlBinding._getGType), No.Take);
   }

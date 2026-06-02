@@ -17,26 +17,26 @@ class FileSystemDatasetWriteOptions : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_file_system_dataset_write_options_get_type != &gidSymbolNotFound ? gadataset_file_system_dataset_write_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileSystemDatasetWriteOptions self()
+  override FileSystemDatasetWriteOptions self() nothrow
   {
     return this;
   }
@@ -45,19 +45,19 @@ class FileSystemDatasetWriteOptions : gobject.object.ObjectWrap
       Get builder for [arrowdataset.file_system_dataset_write_options.FileSystemDatasetWriteOptions]
       Returns: New builder object
   */
-  static FileSystemDatasetWriteOptionsGidBuilder builder()
+  static FileSystemDatasetWriteOptionsGidBuilder builder() nothrow
   {
     return new FileSystemDatasetWriteOptionsGidBuilder;
   }
 
   /** */
-  @property string baseDir()
+  @property string baseDir() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("base-dir");
   }
 
   /** */
-  @property void baseDir(string propval)
+  @property void baseDir(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("base-dir", propval);
   }
@@ -67,7 +67,7 @@ class FileSystemDatasetWriteOptions : gobject.object.ObjectWrap
       Returns: Template string used to generate fragment base names. {i} will be
         replaced by an auto incremented integer.
   */
-  @property string baseNameTemplate()
+  @property string baseNameTemplate() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("base-name-template");
   }
@@ -78,31 +78,31 @@ class FileSystemDatasetWriteOptions : gobject.object.ObjectWrap
         propval = Template string used to generate fragment base names. {i} will be
           replaced by an auto incremented integer.
   */
-  @property void baseNameTemplate(string propval)
+  @property void baseNameTemplate(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("base-name-template", propval);
   }
 
   /** */
-  @property arrow.file_system.FileSystem fileSystem()
+  @property arrow.file_system.FileSystem fileSystem() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.file_system.FileSystem)("file-system");
   }
 
   /** */
-  @property void fileSystem(arrow.file_system.FileSystem propval)
+  @property void fileSystem(arrow.file_system.FileSystem propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(arrow.file_system.FileSystem)("file-system", propval);
   }
 
   /** */
-  @property arrowdataset.file_write_options.FileWriteOptions fileWriteOptions()
+  @property arrowdataset.file_write_options.FileWriteOptions fileWriteOptions() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrowdataset.file_write_options.FileWriteOptions)("file-write-options");
   }
 
   /** */
-  @property void fileWriteOptions(arrowdataset.file_write_options.FileWriteOptions propval)
+  @property void fileWriteOptions(arrowdataset.file_write_options.FileWriteOptions propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(arrowdataset.file_write_options.FileWriteOptions)("file-write-options", propval);
   }
@@ -111,7 +111,7 @@ class FileSystemDatasetWriteOptions : gobject.object.ObjectWrap
       Get `maxPartitions` property.
       Returns: Maximum number of partitions any batch may be written into.
   */
-  @property uint maxPartitions()
+  @property uint maxPartitions() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("max-partitions");
   }
@@ -121,7 +121,7 @@ class FileSystemDatasetWriteOptions : gobject.object.ObjectWrap
       Params:
         propval = Maximum number of partitions any batch may be written into.
   */
-  @property void maxPartitions(uint propval)
+  @property void maxPartitions(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("max-partitions", propval);
   }
@@ -130,7 +130,7 @@ class FileSystemDatasetWriteOptions : gobject.object.ObjectWrap
       Get `partitioning` property.
       Returns: #GADatasetPartitioning used to generate fragment paths.
   */
-  @property arrowdataset.partitioning.Partitioning partitioning()
+  @property arrowdataset.partitioning.Partitioning partitioning() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrowdataset.partitioning.Partitioning)("partitioning");
   }
@@ -140,13 +140,13 @@ class FileSystemDatasetWriteOptions : gobject.object.ObjectWrap
       Params:
         propval = #GADatasetPartitioning used to generate fragment paths.
   */
-  @property void partitioning(arrowdataset.partitioning.Partitioning propval)
+  @property void partitioning(arrowdataset.partitioning.Partitioning propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(arrowdataset.partitioning.Partitioning)("partitioning", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GADatasetFileSystemDatasetWriteOptions* _cretval;
     _cretval = gadataset_file_system_dataset_write_options_new();
@@ -159,7 +159,7 @@ class FileSystemDatasetWriteOptionsGidBuilderImpl(T) : gobject.object.ObjectWrap
 {
 
   /** */
-  T baseDir(string propval)
+  T baseDir(string propval) nothrow
   {
     return setProperty("base-dir", propval);
   }
@@ -171,19 +171,19 @@ class FileSystemDatasetWriteOptionsGidBuilderImpl(T) : gobject.object.ObjectWrap
           replaced by an auto incremented integer.
       Returns: Builder instance for fluent chaining
   */
-  T baseNameTemplate(string propval)
+  T baseNameTemplate(string propval) nothrow
   {
     return setProperty("base-name-template", propval);
   }
 
   /** */
-  T fileSystem(arrow.file_system.FileSystem propval)
+  T fileSystem(arrow.file_system.FileSystem propval) nothrow
   {
     return setProperty("file-system", propval);
   }
 
   /** */
-  T fileWriteOptions(arrowdataset.file_write_options.FileWriteOptions propval)
+  T fileWriteOptions(arrowdataset.file_write_options.FileWriteOptions propval) nothrow
   {
     return setProperty("file-write-options", propval);
   }
@@ -194,7 +194,7 @@ class FileSystemDatasetWriteOptionsGidBuilderImpl(T) : gobject.object.ObjectWrap
         propval = Maximum number of partitions any batch may be written into.
       Returns: Builder instance for fluent chaining
   */
-  T maxPartitions(uint propval)
+  T maxPartitions(uint propval) nothrow
   {
     return setProperty("max-partitions", propval);
   }
@@ -205,7 +205,7 @@ class FileSystemDatasetWriteOptionsGidBuilderImpl(T) : gobject.object.ObjectWrap
         propval = #GADatasetPartitioning used to generate fragment paths.
       Returns: Builder instance for fluent chaining
   */
-  T partitioning(arrowdataset.partitioning.Partitioning propval)
+  T partitioning(arrowdataset.partitioning.Partitioning propval) nothrow
   {
     return setProperty("partitioning", propval);
   }
@@ -218,7 +218,7 @@ final class FileSystemDatasetWriteOptionsGidBuilder : FileSystemDatasetWriteOpti
       Create object from builder.
       Returns: New object
   */
-  FileSystemDatasetWriteOptions build()
+  FileSystemDatasetWriteOptions build() nothrow
   {
     return new FileSystemDatasetWriteOptions(cast(void*)createGObject(FileSystemDatasetWriteOptions._getGType), Yes.Take);
   }

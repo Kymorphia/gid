@@ -20,26 +20,26 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_data_proxy_get_type != &gidSymbolNotFound ? gda_data_proxy_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DataProxy self()
+  override DataProxy self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Get builder for [gda.data_proxy.DataProxy]
       Returns: New builder object
   */
-  static DataProxyGidBuilder builder()
+  static DataProxyGidBuilder builder() nothrow
   {
     return new DataProxyGidBuilder;
   }
@@ -66,7 +66,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
           <listitem><para>the inserts are always kept</para></listitem>
         </itemizedlist>
   */
-  @property bool cacheChanges()
+  @property bool cacheChanges() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("cache-changes");
   }
@@ -85,55 +85,55 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
             <listitem><para>the inserts are always kept</para></listitem>
           </itemizedlist>
   */
-  @property void cacheChanges(bool propval)
+  @property void cacheChanges(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("cache-changes", propval);
   }
 
   /** */
-  @property bool deferSync()
+  @property bool deferSync() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("defer-sync");
   }
 
   /** */
-  @property void deferSync(bool propval)
+  @property void deferSync(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("defer-sync", propval);
   }
 
   /** */
-  @property gda.data_model.DataModel model()
+  @property gda.data_model.DataModel model() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.data_model.DataModel)("model");
   }
 
   /** */
-  @property void model(gda.data_model.DataModel propval)
+  @property void model(gda.data_model.DataModel propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gda.data_model.DataModel)("model", propval);
   }
 
   /** */
-  @property bool prependNullEntry()
+  @property bool prependNullEntry() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("prepend-null-entry");
   }
 
   /** */
-  @property void prependNullEntry(bool propval)
+  @property void prependNullEntry(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("prepend-null-entry", propval);
   }
 
   /** */
-  @property int sampleSize()
+  @property int sampleSize() nothrow
   {
     return getSampleSize();
   }
 
   /** */
-  @property void sampleSize(int propval)
+  @property void sampleSize(int propval) nothrow
   {
     setSampleSize(propval);
   }
@@ -147,7 +147,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
         model = Data model to be proxied
       Returns: a new #GdaDataProxy object
   */
-  this(gda.data_model.DataModel model)
+  this(gda.data_model.DataModel model) nothrow
   {
     GObject* _cretval;
     _cretval = gda_data_proxy_new(model ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
@@ -162,7 +162,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
         model = Data model to be proxied
       Returns: a new #GdaDataProxy object
   */
-  static gda.data_proxy.DataProxy newWithDataModel(gda.data_model.DataModel model)
+  static gda.data_proxy.DataProxy newWithDataModel(gda.data_model.DataModel model) nothrow
   {
     GdaDataProxy* _cretval;
     _cretval = gda_data_proxy_new_with_data_model(model ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
@@ -171,7 +171,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_data_proxy_error_quark();
@@ -188,7 +188,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
         col = a valid column number
         alterFlags = flags to alter the attributes
   */
-  void alterValueAttributes(int proxyRow, int col, gda.types.ValueAttribute alterFlags)
+  void alterValueAttributes(int proxyRow, int col, gda.types.ValueAttribute alterFlags) nothrow
   {
     gda_data_proxy_alter_value_attributes(cast(GdaDataProxy*)this._cPtr, proxyRow, col, alterFlags);
   }
@@ -235,7 +235,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       property to false for this).
       Returns: TRUE if no error occurred
   */
-  bool cancelAllChanges()
+  bool cancelAllChanges() nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_data_proxy_cancel_all_changes(cast(GdaDataProxy*)this._cPtr);
@@ -250,7 +250,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
         proxyRow = the row to cancel changes
         col = the column to cancel changes, or less than 0 to cancel any change on the row row
   */
-  void cancelRowChanges(int proxyRow, int col)
+  void cancelRowChanges(int proxyRow, int col) nothrow
   {
     gda_data_proxy_cancel_row_changes(cast(GdaDataProxy*)this._cPtr, proxyRow, col);
   }
@@ -261,7 +261,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Params:
         proxyRow = A proxy row number
   */
-  void delete_(int proxyRow)
+  void delete_(int proxyRow) nothrow
   {
     gda_data_proxy_delete(cast(GdaDataProxy*)this._cPtr, proxyRow);
   }
@@ -270,7 +270,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Get the current filter expression used by proxy.
       Returns: the current filter expression or null if no filter has been set
   */
-  string getFilterExpr()
+  string getFilterExpr() nothrow
   {
     const(char)* _cretval;
     _cretval = gda_data_proxy_get_filter_expr(cast(GdaDataProxy*)this._cPtr);
@@ -285,7 +285,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       the returned number also contains references to new rows and rows to be removed.
       Returns: the number of filtered rows in proxy, or -1 if no filter has been applied
   */
-  int getFilteredNRows()
+  int getFilteredNRows() nothrow
   {
     int _retval;
     _retval = gda_data_proxy_get_filtered_n_rows(cast(GdaDataProxy*)this._cPtr);
@@ -297,7 +297,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       the proxied data model which have been modified, and new rows).
       Returns: the number of modified rows
   */
-  int getNModifiedRows()
+  int getNModifiedRows() nothrow
   {
     int _retval;
     _retval = gda_data_proxy_get_n_modified_rows(cast(GdaDataProxy*)this._cPtr);
@@ -309,7 +309,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       the proxied data model.
       Returns: the number of new rows
   */
-  int getNNewRows()
+  int getNNewRows() nothrow
   {
     int _retval;
     _retval = gda_data_proxy_get_n_new_rows(cast(GdaDataProxy*)this._cPtr);
@@ -320,7 +320,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Fetch the #GdaDataModel which proxy does proxy
       Returns: the proxied data model
   */
-  gda.data_model.DataModel getProxiedModel()
+  gda.data_model.DataModel getProxiedModel() nothrow
   {
     GdaDataModel* _cretval;
     _cretval = gda_data_proxy_get_proxied_model(cast(GdaDataProxy*)this._cPtr);
@@ -332,7 +332,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Get the number of columns in the proxied data model
       Returns: the number of columns, or -1 if an error occurred
   */
-  int getProxiedModelNCols()
+  int getProxiedModelNCols() nothrow
   {
     int _retval;
     _retval = gda_data_proxy_get_proxied_model_n_cols(cast(GdaDataProxy*)this._cPtr);
@@ -343,7 +343,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Get the number of rows in the proxied data model
       Returns: the number of rows, or -1 if the number of rows is not known
   */
-  int getProxiedModelNRows()
+  int getProxiedModelNRows() nothrow
   {
     int _retval;
     _retval = gda_data_proxy_get_proxied_model_n_rows(cast(GdaDataProxy*)this._cPtr);
@@ -357,7 +357,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
         proxyRow = A proxy row number
       Returns: the proxied model's row, or -1 if proxy row which only exists proxy
   */
-  int getProxiedModelRow(int proxyRow)
+  int getProxiedModelRow(int proxyRow) nothrow
   {
     int _retval;
     _retval = gda_data_proxy_get_proxied_model_row(cast(GdaDataProxy*)this._cPtr, proxyRow);
@@ -368,7 +368,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Get the number of the last row to be available in proxy (in reference to the proxied data model)
       Returns: the number of the last proxied model's row.
   */
-  int getSampleEnd()
+  int getSampleEnd() nothrow
   {
     int _retval;
     _retval = gda_data_proxy_get_sample_end(cast(GdaDataProxy*)this._cPtr);
@@ -379,7 +379,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Get the size of each chunk of data displayed at a time.
       Returns: the chunk (or sample) size, or 0 if chunking is disabled.
   */
-  int getSampleSize()
+  int getSampleSize() nothrow
   {
     int _retval;
     _retval = gda_data_proxy_get_sample_size(cast(GdaDataProxy*)this._cPtr);
@@ -390,7 +390,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Get the number of the first row to be available in proxy (in reference to the proxied data model)
       Returns: the number of the first proxied model's row.
   */
-  int getSampleStart()
+  int getSampleStart() nothrow
   {
     int _retval;
     _retval = gda_data_proxy_get_sample_start(cast(GdaDataProxy*)this._cPtr);
@@ -406,7 +406,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
         col = a valid proxy column
       Returns: a #GdaValueAttribute with the value's attributes at given position
   */
-  gda.types.ValueAttribute getValueAttributes(int proxyRow, int col)
+  gda.types.ValueAttribute getValueAttributes(int proxyRow, int col) nothrow
   {
     GdaValueAttribute _cretval;
     _cretval = gda_data_proxy_get_value_attributes(cast(GdaDataProxy*)this._cPtr, proxyRow, col);
@@ -425,7 +425,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Returns: a new list of values (the list must be freed, not the values),
         or null if an error occurred
   */
-  gobject.value.Value[] getValues(int proxyRow, int[] colsIndex)
+  gobject.value.Value[] getValues(int proxyRow, int[] colsIndex) nothrow
   {
     GSList* _cretval;
     int _nCols;
@@ -442,7 +442,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Tells if proxy contains any modifications not applied to the proxied data model.
       Returns: TRUE if there are some modifications in proxy
   */
-  bool hasChanged()
+  bool hasChanged() nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_data_proxy_has_changed(cast(GdaDataProxy*)this._cPtr);
@@ -450,7 +450,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   }
 
   /** */
-  bool isReadOnly()
+  bool isReadOnly() nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_data_proxy_is_read_only(cast(GdaDataProxy*)this._cPtr);
@@ -464,7 +464,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
         proxyRow = A proxy row number
       Returns: TRUE if the row has changed
   */
-  bool rowHasChanged(int proxyRow)
+  bool rowHasChanged(int proxyRow) nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_data_proxy_row_has_changed(cast(GdaDataProxy*)this._cPtr, proxyRow);
@@ -478,7 +478,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
         proxyRow = A proxy row number
       Returns: TRUE if the row is marked to be deleted
   */
-  bool rowIsDeleted(int proxyRow)
+  bool rowIsDeleted(int proxyRow) nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_data_proxy_row_is_deleted(cast(GdaDataProxy*)this._cPtr, proxyRow);
@@ -493,7 +493,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
         proxyRow = A proxy row number
       Returns: TRUE if the row is an inserted row
   */
-  bool rowIsInserted(int proxyRow)
+  bool rowIsInserted(int proxyRow) nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_data_proxy_row_is_inserted(cast(GdaDataProxy*)this._cPtr, proxyRow);
@@ -563,7 +563,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Params:
         sampleSize = the requested size of a chunk, or 0
   */
-  void setSampleSize(int sampleSize)
+  void setSampleSize(int sampleSize) nothrow
   {
     gda_data_proxy_set_sample_size(cast(GdaDataProxy*)this._cPtr, sampleSize);
   }
@@ -574,7 +574,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Params:
         sampleStart = the number of the first row to be displayed
   */
-  void setSampleStart(int sampleStart)
+  void setSampleStart(int sampleStart) nothrow
   {
     gda_data_proxy_set_sample_start(cast(GdaDataProxy*)this._cPtr, sampleStart);
   }
@@ -585,7 +585,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Params:
         proxyRow = A proxy row number
   */
-  void undelete(int proxyRow)
+  void undelete(int proxyRow) nothrow
   {
     gda_data_proxy_undelete(cast(GdaDataProxy*)this._cPtr, proxyRow);
   }
@@ -605,13 +605,13 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFilterChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFilterChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.data_proxy.DataProxy)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -620,7 +620,14 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.data_proxy.DataProxy.filterChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -646,7 +653,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowChangesApplied(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRowChangesApplied(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -654,7 +661,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gda.data_proxy.DataProxy)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -669,7 +676,14 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.data_proxy.DataProxy.rowChangesApplied");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -695,7 +709,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowDeleteChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRowDeleteChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -703,7 +717,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gda.data_proxy.DataProxy)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -718,7 +732,14 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.data_proxy.DataProxy.rowDeleteChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -745,7 +766,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSampleChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSampleChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -753,7 +774,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gda.data_proxy.DataProxy)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -768,7 +789,14 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.data_proxy.DataProxy.sampleChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -792,14 +820,14 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSampleSizeChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSampleSizeChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.data_proxy.DataProxy)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -811,7 +839,14 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.data_proxy.DataProxy.sampleSizeChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -839,7 +874,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectValidateRowChanges(T)(T callback, Flag!"After" after = No.After)
+  gulong connectValidateRowChanges(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == glib.error.ErrorWrap)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -847,11 +882,12 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gda.data_proxy.DataProxy)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      glib.error.ErrorWrap _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -862,7 +898,14 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.data_proxy.DataProxy.validateRowChanges");
+      }
 
       setVal!(glib.error.ErrorWrap)(_returnValue, _retval);
     }
@@ -893,31 +936,31 @@ class DataProxyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gd
           </itemizedlist>
       Returns: Builder instance for fluent chaining
   */
-  T cacheChanges(bool propval)
+  T cacheChanges(bool propval) nothrow
   {
     return setProperty("cache-changes", propval);
   }
 
   /** */
-  T deferSync(bool propval)
+  T deferSync(bool propval) nothrow
   {
     return setProperty("defer-sync", propval);
   }
 
   /** */
-  T model(gda.data_model.DataModel propval)
+  T model(gda.data_model.DataModel propval) nothrow
   {
     return setProperty("model", propval);
   }
 
   /** */
-  T prependNullEntry(bool propval)
+  T prependNullEntry(bool propval) nothrow
   {
     return setProperty("prepend-null-entry", propval);
   }
 
   /** */
-  T sampleSize(int propval)
+  T sampleSize(int propval) nothrow
   {
     return setProperty("sample-size", propval);
   }
@@ -930,7 +973,7 @@ final class DataProxyGidBuilder : DataProxyGidBuilderImpl!DataProxyGidBuilder
       Create object from builder.
       Returns: New object
   */
-  DataProxy build()
+  DataProxy build() nothrow
   {
     return new DataProxy(cast(void*)createGObject(DataProxy._getGType), Yes.Take);
   }
@@ -938,12 +981,12 @@ final class DataProxyGidBuilder : DataProxyGidBuilderImpl!DataProxyGidBuilder
 
 class DataProxyException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.data_proxy.DataProxy.errorQuark, cast(int)code, msg);
   }

@@ -15,26 +15,26 @@ class HivePartitioningOptions : arrowdataset.key_value_partitioning_options.KeyV
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_hive_partitioning_options_get_type != &gidSymbolNotFound ? gadataset_hive_partitioning_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HivePartitioningOptions self()
+  override HivePartitioningOptions self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class HivePartitioningOptions : arrowdataset.key_value_partitioning_options.KeyV
       Get builder for [arrowdataset.hive_partitioning_options.HivePartitioningOptions]
       Returns: New builder object
   */
-  static HivePartitioningOptionsGidBuilder builder()
+  static HivePartitioningOptionsGidBuilder builder() nothrow
   {
     return new HivePartitioningOptionsGidBuilder;
   }
@@ -53,7 +53,7 @@ class HivePartitioningOptions : arrowdataset.key_value_partitioning_options.KeyV
       Returns: The fallback string for null. This is used only by
         #GADatasetHivePartitioning.
   */
-  @property string nullFallback()
+  @property string nullFallback() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("null-fallback");
   }
@@ -64,13 +64,13 @@ class HivePartitioningOptions : arrowdataset.key_value_partitioning_options.KeyV
         propval = The fallback string for null. This is used only by
           #GADatasetHivePartitioning.
   */
-  @property void nullFallback(string propval)
+  @property void nullFallback(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("null-fallback", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GADatasetHivePartitioningOptions* _cretval;
     _cretval = gadataset_hive_partitioning_options_new();
@@ -89,7 +89,7 @@ class HivePartitioningOptionsGidBuilderImpl(T) : arrowdataset.key_value_partitio
           #GADatasetHivePartitioning.
       Returns: Builder instance for fluent chaining
   */
-  T nullFallback(string propval)
+  T nullFallback(string propval) nothrow
   {
     return setProperty("null-fallback", propval);
   }
@@ -102,7 +102,7 @@ final class HivePartitioningOptionsGidBuilder : HivePartitioningOptionsGidBuilde
       Create object from builder.
       Returns: New object
   */
-  HivePartitioningOptions build()
+  HivePartitioningOptions build() nothrow
   {
     return new HivePartitioningOptions(cast(void*)createGObject(HivePartitioningOptions._getGType), Yes.Take);
   }

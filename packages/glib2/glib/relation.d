@@ -56,18 +56,15 @@ class Relation
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.relation.Relation");
-
     _cInstancePtr = cast(GRelation*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -83,7 +80,7 @@ class Relation
   
       Deprecated: Rarely used API
   */
-  int count(const(void)* key, int field)
+  int count(const(void)* key, int field) nothrow
   {
     int _retval;
     _retval = g_relation_count(cast(GRelation*)this._cPtr, key, field);
@@ -101,7 +98,7 @@ class Relation
   
       Deprecated: Rarely used API
   */
-  int delete_(const(void)* key, int field)
+  int delete_(const(void)* key, int field) nothrow
   {
     int _retval;
     _retval = g_relation_delete(cast(GRelation*)this._cPtr, key, field);
@@ -115,7 +112,7 @@ class Relation
   
       Deprecated: Rarely used API
   */
-  void destroy()
+  void destroy() nothrow
   {
     g_relation_destroy(cast(GRelation*)this._cPtr);
   }
@@ -126,7 +123,7 @@ class Relation
   
       Deprecated: Rarely used API
   */
-  void print()
+  void print() nothrow
   {
     g_relation_print(cast(GRelation*)this._cPtr);
   }

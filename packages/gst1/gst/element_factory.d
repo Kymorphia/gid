@@ -45,26 +45,26 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_element_factory_get_type != &gidSymbolNotFound ? gst_element_factory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ElementFactory self()
+  override ElementFactory self() nothrow
   {
     return this;
   }
@@ -73,7 +73,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
       Get builder for [gst.element_factory.ElementFactory]
       Returns: New builder object
   */
-  static ElementFactoryGidBuilder builder()
+  static ElementFactoryGidBuilder builder() nothrow
   {
     return new ElementFactoryGidBuilder;
   }
@@ -87,7 +87,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
       Returns: #GstElementFactory if found,
         null otherwise
   */
-  static gst.element_factory.ElementFactory find(string name)
+  static gst.element_factory.ElementFactory find(string name) nothrow
   {
     GstElementFactory* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -114,7 +114,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
             #GstElementFactory elements that match the given requisites.
             Use #gst_plugin_feature_list_free after usage.
   */
-  static gst.element_factory.ElementFactory[] listFilter(gst.element_factory.ElementFactory[] list, gst.caps.Caps caps, gst.types.PadDirection direction, bool subsetonly)
+  static gst.element_factory.ElementFactory[] listFilter(gst.element_factory.ElementFactory[] list, gst.caps.Caps caps, gst.types.PadDirection direction, bool subsetonly) nothrow
   {
     GList* _cretval;
     auto _list = gListFromD!(gst.element_factory.ElementFactory)(list);
@@ -136,7 +136,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
             #GstElementFactory elements. Use [gst.plugin_feature.PluginFeature.listFree] after
             usage.
   */
-  static gst.element_factory.ElementFactory[] listGetElements(gst.types.ElementFactoryListType type, gst.types.Rank minrank)
+  static gst.element_factory.ElementFactory[] listGetElements(gst.types.ElementFactoryListType type, gst.types.Rank minrank) nothrow
   {
     GList* _cretval;
     _cretval = gst_element_factory_list_get_elements(type, minrank);
@@ -157,7 +157,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
       Returns: new #GstElement or null
         if unable to create element
   */
-  static gst.element.Element make(string factoryname, string name = null)
+  static gst.element.Element make(string factoryname, string name = null) nothrow
   {
     GstElement* _cretval;
     const(char)* _factoryname = factoryname.toCString(No.Alloc);
@@ -178,7 +178,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
       Returns: new #GstElement or null
             if the element couldn't be created
   */
-  static gst.element.Element makeWithProperties(string factoryname, string[] names = null, gobject.value.Value[] values = null)
+  static gst.element.Element makeWithProperties(string factoryname, string[] names = null, gobject.value.Value[] values = null) nothrow
   {
     GstElement* _cretval;
     const(char)* _factoryname = factoryname.toCString(No.Alloc);
@@ -211,7 +211,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
         caps = the caps to check
       Returns: true if the caps are fully compatible.
   */
-  bool canSinkAllCaps(gst.caps.Caps caps)
+  bool canSinkAllCaps(gst.caps.Caps caps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_factory_can_sink_all_caps(cast(GstElementFactory*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
@@ -225,7 +225,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
         caps = the caps to check
       Returns: true if the caps have a common subset.
   */
-  bool canSinkAnyCaps(gst.caps.Caps caps)
+  bool canSinkAnyCaps(gst.caps.Caps caps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_factory_can_sink_any_caps(cast(GstElementFactory*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
@@ -239,7 +239,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
         caps = the caps to check
       Returns: true if the caps are fully compatible.
   */
-  bool canSrcAllCaps(gst.caps.Caps caps)
+  bool canSrcAllCaps(gst.caps.Caps caps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_factory_can_src_all_caps(cast(GstElementFactory*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
@@ -253,7 +253,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
         caps = the caps to check
       Returns: true if the caps have a common subset.
   */
-  bool canSrcAnyCaps(gst.caps.Caps caps)
+  bool canSrcAnyCaps(gst.caps.Caps caps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_factory_can_src_any_caps(cast(GstElementFactory*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
@@ -271,7 +271,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
       Returns: new #GstElement or null
             if the element couldn't be created
   */
-  gst.element.Element create(string name = null)
+  gst.element.Element create(string name = null) nothrow
   {
     GstElement* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -290,7 +290,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
       Returns: new #GstElement or null
             if the element couldn't be created
   */
-  gst.element.Element createWithProperties(string[] names = null, gobject.value.Value[] values = null)
+  gst.element.Element createWithProperties(string[] names = null, gobject.value.Value[] values = null) nothrow
   {
     GstElement* _cretval;
     uint _n;
@@ -322,7 +322,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
       Returns: the #GType for elements managed by this factory or 0 if
         the factory is not loaded.
   */
-  gobject.types.GType getElementType()
+  gobject.types.GType getElementType() nothrow
   {
     gobject.types.GType _retval;
     _retval = gst_element_factory_get_element_type(cast(GstElementFactory*)this._cPtr);
@@ -337,7 +337,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
       Returns: the metadata with key on factory or null
         when there was no metadata with the given key.
   */
-  string getMetadata(string key)
+  string getMetadata(string key) nothrow
   {
     const(char)* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -351,7 +351,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
       Returns: a null-terminated array of key strings, or null when there is no
         metadata. Free with [glib.global.strfreev] when no longer needed.
   */
-  string[] getMetadataKeys()
+  string[] getMetadataKeys() nothrow
   {
     char** _cretval;
     _cretval = gst_element_factory_get_metadata_keys(cast(GstElementFactory*)this._cPtr);
@@ -374,7 +374,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
       Gets the number of pad_templates in this factory.
       Returns: the number of pad_templates
   */
-  uint getNumPadTemplates()
+  uint getNumPadTemplates() nothrow
   {
     uint _retval;
     _retval = gst_element_factory_get_num_pad_templates(cast(GstElementFactory*)this._cPtr);
@@ -386,7 +386,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
       be excluded from documentation system or not.
       Returns: true if documentation should be skipped
   */
-  bool getSkipDocumentation()
+  bool getSkipDocumentation() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_factory_get_skip_documentation(cast(GstElementFactory*)this._cPtr);
@@ -401,7 +401,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
       Returns: the supported protocols
             or null
   */
-  string[] getUriProtocols()
+  string[] getUriProtocols() nothrow
   {
     const(char*)* _cretval;
     _cretval = gst_element_factory_get_uri_protocols(cast(GstElementFactory*)this._cPtr);
@@ -423,7 +423,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
       Gets the type of URIs the element supports or #GST_URI_UNKNOWN if none.
       Returns: type of URIs this element supports
   */
-  gst.types.URIType getUriType()
+  gst.types.URIType getUriType() nothrow
   {
     GstURIType _cretval;
     _cretval = gst_element_factory_get_uri_type(cast(GstElementFactory*)this._cPtr);
@@ -438,7 +438,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
         interfacename = an interface name
       Returns: true when factory implement the interface.
   */
-  bool hasInterface(string interfacename)
+  bool hasInterface(string interfacename) nothrow
   {
     bool _retval;
     const(char)* _interfacename = interfacename.toCString(No.Alloc);
@@ -453,7 +453,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
         type = a #GstElementFactoryListType
       Returns: true if factory is of type.
   */
-  bool listIsType(gst.types.ElementFactoryListType type)
+  bool listIsType(gst.types.ElementFactoryListType type) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_element_factory_list_is_type(cast(GstElementFactory*)this._cPtr, type);
@@ -473,7 +473,7 @@ final class ElementFactoryGidBuilder : ElementFactoryGidBuilderImpl!ElementFacto
       Create object from builder.
       Returns: New object
   */
-  ElementFactory build()
+  ElementFactory build() nothrow
   {
     return new ElementFactory(cast(void*)createGObject(ElementFactory._getGType), No.Take);
   }

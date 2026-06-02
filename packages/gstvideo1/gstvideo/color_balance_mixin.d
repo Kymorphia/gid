@@ -25,7 +25,7 @@ template ColorBalanceT()
       Get the #GstColorBalanceType of this implementation.
       Returns: A the #GstColorBalanceType.
   */
-  override gstvideo.types.ColorBalanceType getBalanceType()
+  override gstvideo.types.ColorBalanceType getBalanceType() nothrow
   {
     GstColorBalanceType _cretval;
     _cretval = gst_color_balance_get_balance_type(cast(GstColorBalance*)this._cPtr);
@@ -45,7 +45,7 @@ template ColorBalanceT()
         channel = A #GstColorBalanceChannel instance
       Returns: The current value of the channel.
   */
-  override int getValue(gstvideo.color_balance_channel.ColorBalanceChannel channel)
+  override int getValue(gstvideo.color_balance_channel.ColorBalanceChannel channel) nothrow
   {
     int _retval;
     _retval = gst_color_balance_get_value(cast(GstColorBalance*)this._cPtr, channel ? cast(GstColorBalanceChannel*)channel._cPtr(No.Dup) : null);
@@ -59,7 +59,7 @@ template ColorBalanceT()
                  objects. The list is owned by the #GstColorBalance
                  instance and must not be freed.
   */
-  override gstvideo.color_balance_channel.ColorBalanceChannel[] listChannels()
+  override gstvideo.color_balance_channel.ColorBalanceChannel[] listChannels() nothrow
   {
     const(GList)* _cretval;
     _cretval = gst_color_balance_list_channels(cast(GstColorBalance*)this._cPtr);
@@ -79,7 +79,7 @@ template ColorBalanceT()
         channel = A #GstColorBalanceChannel instance
         value = The new value for the channel.
   */
-  override void setValue(gstvideo.color_balance_channel.ColorBalanceChannel channel, int value)
+  override void setValue(gstvideo.color_balance_channel.ColorBalanceChannel channel, int value) nothrow
   {
     gst_color_balance_set_value(cast(GstColorBalance*)this._cPtr, channel ? cast(GstColorBalanceChannel*)channel._cPtr(No.Dup) : null, value);
   }
@@ -94,7 +94,7 @@ template ColorBalanceT()
         channel = A #GstColorBalanceChannel whose value has changed
         value = The new value of the channel
   */
-  override void valueChanged(gstvideo.color_balance_channel.ColorBalanceChannel channel, int value)
+  override void valueChanged(gstvideo.color_balance_channel.ColorBalanceChannel channel, int value) nothrow
   {
     gst_color_balance_value_changed(cast(GstColorBalance*)this._cPtr, channel ? cast(GstColorBalanceChannel*)channel._cPtr(No.Dup) : null, value);
   }
@@ -118,7 +118,7 @@ template ColorBalanceT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstvideo.color_balance_channel.ColorBalanceChannel)))
@@ -126,7 +126,7 @@ template ColorBalanceT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gstvideo.color_balance.ColorBalance)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -141,7 +141,14 @@ template ColorBalanceT()
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstvideo.color_balance.ColorBalance.valueChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

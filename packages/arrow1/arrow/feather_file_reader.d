@@ -17,26 +17,26 @@ class FeatherFileReader : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_feather_file_reader_get_type != &gidSymbolNotFound ? garrow_feather_file_reader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FeatherFileReader self()
+  override FeatherFileReader self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class FeatherFileReader : gobject.object.ObjectWrap
       Get builder for [arrow.feather_file_reader.FeatherFileReader]
       Returns: New builder object
   */
-  static FeatherFileReaderGidBuilder builder()
+  static FeatherFileReaderGidBuilder builder() nothrow
   {
     return new FeatherFileReaderGidBuilder;
   }
@@ -62,7 +62,7 @@ class FeatherFileReader : gobject.object.ObjectWrap
   }
 
   /** */
-  int getVersion()
+  int getVersion() nothrow
   {
     int _retval;
     _retval = garrow_feather_file_reader_get_version(cast(GArrowFeatherFileReader*)this._cPtr);
@@ -125,7 +125,7 @@ class FeatherFileReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
 {
 
   /** */
-  T featherReader(void* propval)
+  T featherReader(void* propval) nothrow
   {
     return setProperty("feather-reader", propval);
   }
@@ -138,7 +138,7 @@ final class FeatherFileReaderGidBuilder : FeatherFileReaderGidBuilderImpl!Feathe
       Create object from builder.
       Returns: New object
   */
-  FeatherFileReader build()
+  FeatherFileReader build() nothrow
   {
     return new FeatherFileReader(cast(void*)createGObject(FeatherFileReader._getGType), Yes.Take);
   }

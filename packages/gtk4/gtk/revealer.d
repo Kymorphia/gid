@@ -43,26 +43,26 @@ class Revealer : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_revealer_get_type != &gidSymbolNotFound ? gtk_revealer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Revealer self()
+  override Revealer self() nothrow
   {
     return this;
   }
@@ -71,7 +71,7 @@ class Revealer : gtk.widget.Widget
       Get builder for [gtk.revealer.Revealer]
       Returns: New builder object
   */
-  static RevealerGidBuilder builder()
+  static RevealerGidBuilder builder() nothrow
   {
     return new RevealerGidBuilder;
   }
@@ -80,7 +80,7 @@ class Revealer : gtk.widget.Widget
       Get `child` property.
       Returns: The child widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -90,7 +90,7 @@ class Revealer : gtk.widget.Widget
       Params:
         propval = The child widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -99,7 +99,7 @@ class Revealer : gtk.widget.Widget
       Get `childRevealed` property.
       Returns: Whether the child is revealed and the animation target reached.
   */
-  @property bool childRevealed()
+  @property bool childRevealed() nothrow
   {
     return getChildRevealed();
   }
@@ -108,7 +108,7 @@ class Revealer : gtk.widget.Widget
       Get `revealChild` property.
       Returns: Whether the revealer should reveal the child.
   */
-  @property bool revealChild()
+  @property bool revealChild() nothrow
   {
     return getRevealChild();
   }
@@ -118,7 +118,7 @@ class Revealer : gtk.widget.Widget
       Params:
         propval = Whether the revealer should reveal the child.
   */
-  @property void revealChild(bool propval)
+  @property void revealChild(bool propval) nothrow
   {
     setRevealChild(propval);
   }
@@ -127,7 +127,7 @@ class Revealer : gtk.widget.Widget
       Get `transitionDuration` property.
       Returns: The animation duration, in milliseconds.
   */
-  @property uint transitionDuration()
+  @property uint transitionDuration() nothrow
   {
     return getTransitionDuration();
   }
@@ -137,7 +137,7 @@ class Revealer : gtk.widget.Widget
       Params:
         propval = The animation duration, in milliseconds.
   */
-  @property void transitionDuration(uint propval)
+  @property void transitionDuration(uint propval) nothrow
   {
     setTransitionDuration(propval);
   }
@@ -146,7 +146,7 @@ class Revealer : gtk.widget.Widget
       Get `transitionType` property.
       Returns: The type of animation used to transition.
   */
-  @property gtk.types.RevealerTransitionType transitionType()
+  @property gtk.types.RevealerTransitionType transitionType() nothrow
   {
     return getTransitionType();
   }
@@ -156,7 +156,7 @@ class Revealer : gtk.widget.Widget
       Params:
         propval = The type of animation used to transition.
   */
-  @property void transitionType(gtk.types.RevealerTransitionType propval)
+  @property void transitionType(gtk.types.RevealerTransitionType propval) nothrow
   {
     setTransitionType(propval);
   }
@@ -165,7 +165,7 @@ class Revealer : gtk.widget.Widget
       Creates a new [gtk.revealer.Revealer].
       Returns: a newly created [gtk.revealer.Revealer]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_revealer_new();
@@ -176,7 +176,7 @@ class Revealer : gtk.widget.Widget
       Gets the child widget of revealer.
       Returns: the child widget of revealer
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_revealer_get_child(cast(GtkRevealer*)this._cPtr);
@@ -191,7 +191,7 @@ class Revealer : gtk.widget.Widget
       to the revealed state is completed.
       Returns: true if the child is fully revealed
   */
-  bool getChildRevealed()
+  bool getChildRevealed() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_revealer_get_child_revealed(cast(GtkRevealer*)this._cPtr);
@@ -207,7 +207,7 @@ class Revealer : gtk.widget.Widget
       use [gtk.revealer.Revealer.getChildRevealed].
       Returns: true if the child is revealed.
   */
-  bool getRevealChild()
+  bool getRevealChild() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_revealer_get_reveal_child(cast(GtkRevealer*)this._cPtr);
@@ -219,7 +219,7 @@ class Revealer : gtk.widget.Widget
       transitions will take.
       Returns: the transition duration
   */
-  uint getTransitionDuration()
+  uint getTransitionDuration() nothrow
   {
     uint _retval;
     _retval = gtk_revealer_get_transition_duration(cast(GtkRevealer*)this._cPtr);
@@ -231,7 +231,7 @@ class Revealer : gtk.widget.Widget
       for transitions in revealer.
       Returns: the current transition type of revealer
   */
-  gtk.types.RevealerTransitionType getTransitionType()
+  gtk.types.RevealerTransitionType getTransitionType() nothrow
   {
     GtkRevealerTransitionType _cretval;
     _cretval = gtk_revealer_get_transition_type(cast(GtkRevealer*)this._cPtr);
@@ -245,7 +245,7 @@ class Revealer : gtk.widget.Widget
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     gtk_revealer_set_child(cast(GtkRevealer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -259,7 +259,7 @@ class Revealer : gtk.widget.Widget
       Params:
         revealChild = true to reveal the child
   */
-  void setRevealChild(bool revealChild)
+  void setRevealChild(bool revealChild) nothrow
   {
     gtk_revealer_set_reveal_child(cast(GtkRevealer*)this._cPtr, revealChild);
   }
@@ -270,7 +270,7 @@ class Revealer : gtk.widget.Widget
       Params:
         duration = the new duration, in milliseconds
   */
-  void setTransitionDuration(uint duration)
+  void setTransitionDuration(uint duration) nothrow
   {
     gtk_revealer_set_transition_duration(cast(GtkRevealer*)this._cPtr, duration);
   }
@@ -284,7 +284,7 @@ class Revealer : gtk.widget.Widget
       Params:
         transition = the new transition type
   */
-  void setTransitionType(gtk.types.RevealerTransitionType transition)
+  void setTransitionType(gtk.types.RevealerTransitionType transition) nothrow
   {
     gtk_revealer_set_transition_type(cast(GtkRevealer*)this._cPtr, transition);
   }
@@ -301,7 +301,7 @@ class RevealerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The child widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -312,7 +312,7 @@ class RevealerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether the revealer should reveal the child.
       Returns: Builder instance for fluent chaining
   */
-  T revealChild(bool propval)
+  T revealChild(bool propval) nothrow
   {
     return setProperty("reveal-child", propval);
   }
@@ -323,7 +323,7 @@ class RevealerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The animation duration, in milliseconds.
       Returns: Builder instance for fluent chaining
   */
-  T transitionDuration(uint propval)
+  T transitionDuration(uint propval) nothrow
   {
     return setProperty("transition-duration", propval);
   }
@@ -334,7 +334,7 @@ class RevealerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The type of animation used to transition.
       Returns: Builder instance for fluent chaining
   */
-  T transitionType(gtk.types.RevealerTransitionType propval)
+  T transitionType(gtk.types.RevealerTransitionType propval) nothrow
   {
     return setProperty("transition-type", propval);
   }
@@ -347,7 +347,7 @@ final class RevealerGidBuilder : RevealerGidBuilderImpl!RevealerGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Revealer build()
+  Revealer build() nothrow
   {
     return new Revealer(cast(void*)createGObject(Revealer._getGType), No.Take);
   }

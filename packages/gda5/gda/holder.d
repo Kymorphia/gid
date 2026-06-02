@@ -23,26 +23,26 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_holder_get_type != &gidSymbolNotFound ? gda_holder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Holder self()
+  override Holder self() nothrow
   {
     return this;
   }
@@ -51,115 +51,115 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       Get builder for [gda.holder.Holder]
       Returns: New builder object
   */
-  static HolderGidBuilder builder()
+  static HolderGidBuilder builder() nothrow
   {
     return new HolderGidBuilder;
   }
 
   /** */
-  @property string description()
+  @property string description() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("description");
   }
 
   /** */
-  @property void description(string propval)
+  @property void description(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("description", propval);
   }
 
   /** */
-  @property gda.holder.Holder fullBind()
+  @property gda.holder.Holder fullBind() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.holder.Holder)("full-bind");
   }
 
   /** */
-  @property void fullBind(gda.holder.Holder propval)
+  @property void fullBind(gda.holder.Holder propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gda.holder.Holder)("full-bind", propval);
   }
 
   /** */
-  @property gobject.types.GType gType()
+  @property gobject.types.GType gType() nothrow
   {
     return getGType();
   }
 
   /** */
-  @property void gType(gobject.types.GType propval)
+  @property void gType(gobject.types.GType propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gobject.types.GType)("g-type", propval);
   }
 
   /** */
-  @property string id()
+  @property string id() nothrow
   {
     return getId();
   }
 
   /** */
-  @property void id(string propval)
+  @property void id(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("id", propval);
   }
 
   /** */
-  @property string name()
+  @property string name() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("name");
   }
 
   /** */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("name", propval);
   }
 
   /** */
-  @property bool notNull()
+  @property bool notNull() nothrow
   {
     return getNotNull();
   }
 
   /** */
-  @property void notNull(bool propval)
+  @property void notNull(bool propval) nothrow
   {
     setNotNull(propval);
   }
 
   /** */
-  @property gda.holder.Holder simpleBind()
+  @property gda.holder.Holder simpleBind() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.holder.Holder)("simple-bind");
   }
 
   /** */
-  @property void simpleBind(gda.holder.Holder propval)
+  @property void simpleBind(gda.holder.Holder propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gda.holder.Holder)("simple-bind", propval);
   }
 
   /** */
-  @property int sourceColumn()
+  @property int sourceColumn() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("source-column");
   }
 
   /** */
-  @property void sourceColumn(int propval)
+  @property void sourceColumn(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("source-column", propval);
   }
 
   /** */
-  @property gda.data_model.DataModel sourceModel()
+  @property gda.data_model.DataModel sourceModel() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.data_model.DataModel)("source-model");
   }
 
   /** */
-  @property void sourceModel(gda.data_model.DataModel propval)
+  @property void sourceModel(gda.data_model.DataModel propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gda.data_model.DataModel)("source-model", propval);
   }
@@ -169,7 +169,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       Returns: Defines if the "validate-change" signal gets emitted when
         the holder's value changes.
   */
-  @property bool validateChanges()
+  @property bool validateChanges() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("validate-changes");
   }
@@ -180,7 +180,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
         propval = Defines if the "validate-change" signal gets emitted when
           the holder's value changes.
   */
-  @property void validateChanges(bool propval)
+  @property void validateChanges(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("validate-changes", propval);
   }
@@ -194,7 +194,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
         type = the #GType requested
       Returns: a new #GdaHolder object
   */
-  this(gobject.types.GType type)
+  this(gobject.types.GType type) nothrow
   {
     GdaHolder* _cretval;
     _cretval = gda_holder_new(type);
@@ -202,7 +202,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_holder_error_quark();
@@ -216,7 +216,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       its copy will have a fresh new allocated GValue, so that user should free it when done.
       Returns: a new #GdaHolder object
   */
-  gda.holder.Holder copy()
+  gda.holder.Holder copy() nothrow
   {
     GdaHolder* _cretval;
     _cretval = gda_holder_copy(cast(GdaHolder*)this._cPtr);
@@ -230,7 +230,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       
       holder's value is set to null.
   */
-  void forceInvalid()
+  void forceInvalid() nothrow
   {
     gda_holder_force_invalid(cast(GdaHolder*)this._cPtr);
   }
@@ -244,7 +244,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       Params:
         error = a #GError explaining why holder is declared invalid, or null
   */
-  void forceInvalidE(glib.error.ErrorWrap error = null)
+  void forceInvalidE(glib.error.ErrorWrap error = null) nothrow
   {
     gda_holder_force_invalid_e(cast(GdaHolder*)this._cPtr, error ? cast(GError*)error._cPtr : null);
   }
@@ -257,7 +257,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       This method is just a wrapper around the [gda.global.textToAlphanum] function.
       Returns: a new string
   */
-  string getAlphanumId()
+  string getAlphanumId() nothrow
   {
     char* _cretval;
     _cretval = gda_holder_get_alphanum_id(cast(GdaHolder*)this._cPtr);
@@ -274,7 +274,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
         attribute = attribute name as a string
       Returns: a read-only #GValue, or null if not attribute named attribute has been set for holder
   */
-  gobject.value.Value getAttribute(string attribute)
+  gobject.value.Value getAttribute(string attribute) nothrow
   {
     const(GValue)* _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -287,7 +287,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       Get the holder which makes holder change its value when the holder's value is changed.
       Returns: the #GdaHolder or null
   */
-  gda.holder.Holder getBind()
+  gda.holder.Holder getBind() nothrow
   {
     GdaHolder* _cretval;
     _cretval = gda_holder_get_bind(cast(GdaHolder*)this._cPtr);
@@ -300,7 +300,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       the same type as the one required by holder.
       Returns: the default value
   */
-  gobject.value.Value getDefaultValue()
+  gobject.value.Value getDefaultValue() nothrow
   {
     const(GValue)* _cretval;
     _cretval = gda_holder_get_default_value(cast(GdaHolder*)this._cPtr);
@@ -309,7 +309,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   }
 
   /** */
-  gobject.types.GType getGType()
+  gobject.types.GType getGType() nothrow
   {
     gobject.types.GType _retval;
     _retval = gda_holder_get_g_type(cast(GdaHolder*)this._cPtr);
@@ -320,7 +320,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       Get the ID of holder. The ID can be set using holder's "id" property
       Returns: the ID (don't modify the string).
   */
-  string getId()
+  string getId() nothrow
   {
     const(char)* _cretval;
     _cretval = gda_holder_get_id(cast(GdaHolder*)this._cPtr);
@@ -332,7 +332,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       Get wether the holder can be NULL or not
       Returns: TRUE if the holder cannot be NULL
   */
-  bool getNotNull()
+  bool getNotNull() nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_holder_get_not_null(cast(GdaHolder*)this._cPtr);
@@ -348,7 +348,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       If holder is invalid, then the returned value is null.
       Returns: the value, or null
   */
-  gobject.value.Value getValue()
+  gobject.value.Value getValue() nothrow
   {
     const(GValue)* _cretval;
     _cretval = gda_holder_get_value(cast(GdaHolder*)this._cPtr);
@@ -364,7 +364,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
         dh = a #GdaDataHandler to use, or null
       Returns: the value, or null
   */
-  string getValueStr(gda.data_handler.DataHandler dh = null)
+  string getValueStr(gda.data_handler.DataHandler dh = null) nothrow
   {
     char* _cretval;
     _cretval = gda_holder_get_value_str(cast(GdaHolder*)this._cPtr, dh ? cast(GdaDataHandler*)(cast(gobject.object.ObjectWrap)dh)._cPtr(No.Dup) : null);
@@ -376,7 +376,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       Get the validity of holder (that is, of the value held by holder)
       Returns: TRUE if holder's value can safely be used
   */
-  bool isValid()
+  bool isValid() nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_holder_is_valid(cast(GdaHolder*)this._cPtr);
@@ -419,14 +419,21 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
         value = a #GValue, or null
         destroy = a function to be called when attribute is not needed anymore, or null
   */
-  void setAttribute(string attribute, gobject.value.Value value, glib.types.DestroyNotify destroy)
+  void setAttribute(string attribute, gobject.value.Value value, glib.types.DestroyNotify destroy) nothrow
   {
-    extern(C) void _destroyCallback(void* data)
+    extern(C) void _destroyCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -466,7 +473,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       Params:
         value = a value to set the holder's default value, or null
   */
-  void setDefaultValue(gobject.value.Value value)
+  void setDefaultValue(gobject.value.Value value) nothrow
   {
     gda_holder_set_default_value(cast(GdaHolder*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
@@ -477,7 +484,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       Params:
         notNull = TRUE if holder should not accept null values
   */
-  void setNotNull(bool notNull)
+  void setNotNull(bool notNull) nothrow
   {
     gda_holder_set_not_null(cast(GdaHolder*)this._cPtr, notNull);
   }
@@ -570,7 +577,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       Set holder's value to its default value.
       Returns: TRUE if holder has got a default value
   */
-  bool setValueToDefault()
+  bool setValueToDefault() nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_holder_set_value_to_default(cast(GdaHolder*)this._cPtr);
@@ -617,7 +624,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       Tells if holder's current value is the default one.
       Returns: TRUE if holder holder's current value is the default one
   */
-  bool valueIsDefault()
+  bool valueIsDefault() nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_holder_value_is_default(cast(GdaHolder*)this._cPtr);
@@ -643,7 +650,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAttributeChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAttributeChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -651,7 +658,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gda.holder.Holder)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -666,7 +673,14 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.holder.Holder.attributeChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -688,13 +702,13 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.holder.Holder)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -703,7 +717,14 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.holder.Holder.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -725,13 +746,13 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSourceChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSourceChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.holder.Holder)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -740,7 +761,14 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.holder.Holder.sourceChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -767,18 +795,19 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectValidateChange(T)(T callback, Flag!"After" after = No.After)
+  gulong connectValidateChange(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == glib.error.ErrorWrap)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gobject.value.Value)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.holder.Holder)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      glib.error.ErrorWrap _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -786,7 +815,14 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.holder.Holder.validateChange");
+      }
 
       setVal!(glib.error.ErrorWrap)(_returnValue, _retval);
     }
@@ -803,55 +839,55 @@ class HolderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.l
   mixin LockableGidBuilderT!();
 
   /** */
-  T description(string propval)
+  T description(string propval) nothrow
   {
     return setProperty("description", propval);
   }
 
   /** */
-  T fullBind(gda.holder.Holder propval)
+  T fullBind(gda.holder.Holder propval) nothrow
   {
     return setProperty("full-bind", propval);
   }
 
   /** */
-  T gType(gobject.types.GType propval)
+  T gType(gobject.types.GType propval) nothrow
   {
     return setProperty("g-type", propval);
   }
 
   /** */
-  T id(string propval)
+  T id(string propval) nothrow
   {
     return setProperty("id", propval);
   }
 
   /** */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
 
   /** */
-  T notNull(bool propval)
+  T notNull(bool propval) nothrow
   {
     return setProperty("not-null", propval);
   }
 
   /** */
-  T simpleBind(gda.holder.Holder propval)
+  T simpleBind(gda.holder.Holder propval) nothrow
   {
     return setProperty("simple-bind", propval);
   }
 
   /** */
-  T sourceColumn(int propval)
+  T sourceColumn(int propval) nothrow
   {
     return setProperty("source-column", propval);
   }
 
   /** */
-  T sourceModel(gda.data_model.DataModel propval)
+  T sourceModel(gda.data_model.DataModel propval) nothrow
   {
     return setProperty("source-model", propval);
   }
@@ -863,7 +899,7 @@ class HolderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.l
           the holder's value changes.
       Returns: Builder instance for fluent chaining
   */
-  T validateChanges(bool propval)
+  T validateChanges(bool propval) nothrow
   {
     return setProperty("validate-changes", propval);
   }
@@ -876,7 +912,7 @@ final class HolderGidBuilder : HolderGidBuilderImpl!HolderGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Holder build()
+  Holder build() nothrow
   {
     return new Holder(cast(void*)createGObject(Holder._getGType), Yes.Take);
   }
@@ -884,12 +920,12 @@ final class HolderGidBuilder : HolderGidBuilderImpl!HolderGidBuilder
 
 class HolderException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.holder.Holder.errorQuark, cast(int)code, msg);
   }

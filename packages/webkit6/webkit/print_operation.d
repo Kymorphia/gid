@@ -27,26 +27,26 @@ class PrintOperation : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_print_operation_get_type != &gidSymbolNotFound ? webkit_print_operation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PrintOperation self()
+  override PrintOperation self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class PrintOperation : gobject.object.ObjectWrap
       Get builder for [webkit.print_operation.PrintOperation]
       Returns: New builder object
   */
-  static PrintOperationGidBuilder builder()
+  static PrintOperationGidBuilder builder() nothrow
   {
     return new PrintOperationGidBuilder;
   }
@@ -64,7 +64,7 @@ class PrintOperation : gobject.object.ObjectWrap
       Get `pageSetup` property.
       Returns: The initial #GtkPageSetup for the print operation.
   */
-  @property gtk.page_setup.PageSetup pageSetup()
+  @property gtk.page_setup.PageSetup pageSetup() nothrow
   {
     return getPageSetup();
   }
@@ -74,7 +74,7 @@ class PrintOperation : gobject.object.ObjectWrap
       Params:
         propval = The initial #GtkPageSetup for the print operation.
   */
-  @property void pageSetup(gtk.page_setup.PageSetup propval)
+  @property void pageSetup(gtk.page_setup.PageSetup propval) nothrow
   {
     setPageSetup(propval);
   }
@@ -83,7 +83,7 @@ class PrintOperation : gobject.object.ObjectWrap
       Get `printSettings` property.
       Returns: The initial #GtkPrintSettings for the print operation.
   */
-  @property gtk.print_settings.PrintSettings printSettings()
+  @property gtk.print_settings.PrintSettings printSettings() nothrow
   {
     return getPrintSettings();
   }
@@ -93,7 +93,7 @@ class PrintOperation : gobject.object.ObjectWrap
       Params:
         propval = The initial #GtkPrintSettings for the print operation.
   */
-  @property void printSettings(gtk.print_settings.PrintSettings propval)
+  @property void printSettings(gtk.print_settings.PrintSettings propval) nothrow
   {
     setPrintSettings(propval);
   }
@@ -102,7 +102,7 @@ class PrintOperation : gobject.object.ObjectWrap
       Get `webView` property.
       Returns: The #WebKitWebView that will be printed.
   */
-  @property webkit.web_view.WebView webView()
+  @property webkit.web_view.WebView webView() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(webkit.web_view.WebView)("web-view");
   }
@@ -114,7 +114,7 @@ class PrintOperation : gobject.object.ObjectWrap
         webView = a #WebKitWebView
       Returns: a new #WebKitPrintOperation.
   */
-  this(webkit.web_view.WebView webView)
+  this(webkit.web_view.WebView webView) nothrow
   {
     WebKitPrintOperation* _cretval;
     _cretval = webkit_print_operation_new(webView ? cast(WebKitWebView*)webView._cPtr(No.Dup) : null);
@@ -129,7 +129,7 @@ class PrintOperation : gobject.object.ObjectWrap
       have been called.
       Returns: the current #GtkPageSetup of print_operation.
   */
-  gtk.page_setup.PageSetup getPageSetup()
+  gtk.page_setup.PageSetup getPageSetup() nothrow
   {
     GtkPageSetup* _cretval;
     _cretval = webkit_print_operation_get_page_setup(cast(WebKitPrintOperation*)this._cPtr);
@@ -145,7 +145,7 @@ class PrintOperation : gobject.object.ObjectWrap
       have been called.
       Returns: the current #GtkPrintSettings of print_operation.
   */
-  gtk.print_settings.PrintSettings getPrintSettings()
+  gtk.print_settings.PrintSettings getPrintSettings() nothrow
   {
     GtkPrintSettings* _cretval;
     _cretval = webkit_print_operation_get_print_settings(cast(WebKitPrintOperation*)this._cPtr);
@@ -170,7 +170,7 @@ class PrintOperation : gobject.object.ObjectWrap
       through the File Chooser portal. This function will not work for physical
       printers when running in a sandbox.
   */
-  void print()
+  void print() nothrow
   {
     webkit_print_operation_print(cast(WebKitPrintOperation*)this._cPtr);
   }
@@ -195,7 +195,7 @@ class PrintOperation : gobject.object.ObjectWrap
         parent = transient parent of the print dialog
       Returns: the #WebKitPrintOperationResponse of the print dialog
   */
-  webkit.types.PrintOperationResponse runDialog(gtk.window.Window parent = null)
+  webkit.types.PrintOperationResponse runDialog(gtk.window.Window parent = null) nothrow
   {
     WebKitPrintOperationResponse _cretval;
     _cretval = webkit_print_operation_run_dialog(cast(WebKitPrintOperation*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
@@ -212,7 +212,7 @@ class PrintOperation : gobject.object.ObjectWrap
       Params:
         pageSetup = a #GtkPageSetup to set
   */
-  void setPageSetup(gtk.page_setup.PageSetup pageSetup)
+  void setPageSetup(gtk.page_setup.PageSetup pageSetup) nothrow
   {
     webkit_print_operation_set_page_setup(cast(WebKitPrintOperation*)this._cPtr, pageSetup ? cast(GtkPageSetup*)pageSetup._cPtr(No.Dup) : null);
   }
@@ -226,7 +226,7 @@ class PrintOperation : gobject.object.ObjectWrap
       Params:
         printSettings = a #GtkPrintSettings to set
   */
-  void setPrintSettings(gtk.print_settings.PrintSettings printSettings)
+  void setPrintSettings(gtk.print_settings.PrintSettings printSettings) nothrow
   {
     webkit_print_operation_set_print_settings(cast(WebKitPrintOperation*)this._cPtr, printSettings ? cast(GtkPrintSettings*)printSettings._cPtr(No.Dup) : null);
   }
@@ -250,14 +250,14 @@ class PrintOperation : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFailed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFailed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.error.ErrorWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.print_operation.PrintOperation)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -269,7 +269,14 @@ class PrintOperation : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.print_operation.PrintOperation.failed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -292,13 +299,13 @@ class PrintOperation : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFinished(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFinished(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.print_operation.PrintOperation)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -307,7 +314,14 @@ class PrintOperation : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.print_operation.PrintOperation.finished");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -325,7 +339,7 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = The initial #GtkPageSetup for the print operation.
       Returns: Builder instance for fluent chaining
   */
-  T pageSetup(gtk.page_setup.PageSetup propval)
+  T pageSetup(gtk.page_setup.PageSetup propval) nothrow
   {
     return setProperty("page-setup", propval);
   }
@@ -336,7 +350,7 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = The initial #GtkPrintSettings for the print operation.
       Returns: Builder instance for fluent chaining
   */
-  T printSettings(gtk.print_settings.PrintSettings propval)
+  T printSettings(gtk.print_settings.PrintSettings propval) nothrow
   {
     return setProperty("print-settings", propval);
   }
@@ -347,7 +361,7 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = The #WebKitWebView that will be printed.
       Returns: Builder instance for fluent chaining
   */
-  T webView(webkit.web_view.WebView propval)
+  T webView(webkit.web_view.WebView propval) nothrow
   {
     return setProperty("web-view", propval);
   }
@@ -360,7 +374,7 @@ final class PrintOperationGidBuilder : PrintOperationGidBuilderImpl!PrintOperati
       Create object from builder.
       Returns: New object
   */
-  PrintOperation build()
+  PrintOperation build() nothrow
   {
     return new PrintOperation(cast(void*)createGObject(PrintOperation._getGType), Yes.Take);
   }

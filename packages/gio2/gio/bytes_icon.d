@@ -22,26 +22,26 @@ class BytesIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Lo
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_bytes_icon_get_type != &gidSymbolNotFound ? g_bytes_icon_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BytesIcon self()
+  override BytesIcon self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class BytesIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Lo
       Get builder for [gio.bytes_icon.BytesIcon]
       Returns: New builder object
   */
-  static BytesIconGidBuilder builder()
+  static BytesIconGidBuilder builder() nothrow
   {
     return new BytesIconGidBuilder;
   }
@@ -59,7 +59,7 @@ class BytesIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Lo
       Get `bytes` property.
       Returns: The bytes containing the icon.
   */
-  @property glib.bytes.Bytes bytes()
+  @property glib.bytes.Bytes bytes() nothrow
   {
     return getBytes();
   }
@@ -78,7 +78,7 @@ class BytesIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Lo
       Returns: a #GIcon for the given
           bytes.
   */
-  this(glib.bytes.Bytes bytes)
+  this(glib.bytes.Bytes bytes) nothrow
   {
     GIcon* _cretval;
     _cretval = g_bytes_icon_new(bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null);
@@ -89,7 +89,7 @@ class BytesIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Lo
       Gets the #GBytes associated with the given icon.
       Returns: a #GBytes.
   */
-  glib.bytes.Bytes getBytes()
+  glib.bytes.Bytes getBytes() nothrow
   {
     GBytes* _cretval;
     _cretval = g_bytes_icon_get_bytes(cast(GBytesIcon*)this._cPtr);
@@ -111,7 +111,7 @@ class BytesIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gi
         propval = The bytes containing the icon.
       Returns: Builder instance for fluent chaining
   */
-  T bytes(glib.bytes.Bytes propval)
+  T bytes(glib.bytes.Bytes propval) nothrow
   {
     return setProperty("bytes", propval);
   }
@@ -124,7 +124,7 @@ final class BytesIconGidBuilder : BytesIconGidBuilderImpl!BytesIconGidBuilder
       Create object from builder.
       Returns: New object
   */
-  BytesIcon build()
+  BytesIcon build() nothrow
   {
     return new BytesIcon(cast(void*)createGObject(BytesIcon._getGType), Yes.Take);
   }

@@ -28,7 +28,7 @@ template TreeDragDestT()
         selectionData = data to drop
       Returns: whether a new row was created before position dest
   */
-  override bool dragDataReceived(gtk.tree_path.TreePath dest, gtk.selection_data.SelectionData selectionData)
+  override bool dragDataReceived(gtk.tree_path.TreePath dest, gtk.selection_data.SelectionData selectionData) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_drag_dest_drag_data_received(cast(GtkTreeDragDest*)this._cPtr, dest ? cast(GtkTreePath*)dest._cPtr(No.Dup) : null, selectionData ? cast(GtkSelectionData*)selectionData._cPtr(No.Dup) : null);
@@ -47,7 +47,7 @@ template TreeDragDestT()
         selectionData = the data being dragged
       Returns: true if a drop is possible before dest_path
   */
-  override bool rowDropPossible(gtk.tree_path.TreePath destPath, gtk.selection_data.SelectionData selectionData)
+  override bool rowDropPossible(gtk.tree_path.TreePath destPath, gtk.selection_data.SelectionData selectionData) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_drag_dest_row_drop_possible(cast(GtkTreeDragDest*)this._cPtr, destPath ? cast(GtkTreePath*)destPath._cPtr(No.Dup) : null, selectionData ? cast(GtkSelectionData*)selectionData._cPtr(No.Dup) : null);

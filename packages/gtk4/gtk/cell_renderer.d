@@ -64,26 +64,26 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_renderer_get_type != &gidSymbolNotFound ? gtk_cell_renderer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CellRenderer self()
+  override CellRenderer self() nothrow
   {
     return this;
   }
@@ -92,13 +92,13 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
       Get builder for [gtk.cell_renderer.CellRenderer]
       Returns: New builder object
   */
-  static CellRendererGidBuilder builder()
+  static CellRendererGidBuilder builder() nothrow
   {
     return new CellRendererGidBuilder;
   }
 
   /** */
-  @property void cellBackground(string propval)
+  @property void cellBackground(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("cell-background", propval);
   }
@@ -107,7 +107,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
       Get `cellBackgroundRgba` property.
       Returns: Cell background as a [gdk.rgba.RGBA]
   */
-  @property gdk.rgba.RGBA cellBackgroundRgba()
+  @property gdk.rgba.RGBA cellBackgroundRgba() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("cell-background-rgba");
   }
@@ -117,157 +117,157 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
       Params:
         propval = Cell background as a [gdk.rgba.RGBA]
   */
-  @property void cellBackgroundRgba(gdk.rgba.RGBA propval)
+  @property void cellBackgroundRgba(gdk.rgba.RGBA propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.rgba.RGBA)("cell-background-rgba", propval);
   }
 
   /** */
-  @property bool cellBackgroundSet()
+  @property bool cellBackgroundSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("cell-background-set");
   }
 
   /** */
-  @property void cellBackgroundSet(bool propval)
+  @property void cellBackgroundSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("cell-background-set", propval);
   }
 
   /** */
-  @property bool editing()
+  @property bool editing() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("editing");
   }
 
   /** */
-  @property int height()
+  @property int height() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("height");
   }
 
   /** */
-  @property void height(int propval)
+  @property void height(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("height", propval);
   }
 
   /** */
-  @property bool isExpanded()
+  @property bool isExpanded() nothrow
   {
     return getIsExpanded();
   }
 
   /** */
-  @property void isExpanded(bool propval)
+  @property void isExpanded(bool propval) nothrow
   {
     setIsExpanded(propval);
   }
 
   /** */
-  @property bool isExpander()
+  @property bool isExpander() nothrow
   {
     return getIsExpander();
   }
 
   /** */
-  @property void isExpander(bool propval)
+  @property void isExpander(bool propval) nothrow
   {
     setIsExpander(propval);
   }
 
   /** */
-  @property gtk.types.CellRendererMode mode()
+  @property gtk.types.CellRendererMode mode() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.CellRendererMode)("mode");
   }
 
   /** */
-  @property void mode(gtk.types.CellRendererMode propval)
+  @property void mode(gtk.types.CellRendererMode propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.CellRendererMode)("mode", propval);
   }
 
   /** */
-  @property bool sensitive()
+  @property bool sensitive() nothrow
   {
     return getSensitive();
   }
 
   /** */
-  @property void sensitive(bool propval)
+  @property void sensitive(bool propval) nothrow
   {
     setSensitive(propval);
   }
 
   /** */
-  @property bool visible()
+  @property bool visible() nothrow
   {
     return getVisible();
   }
 
   /** */
-  @property void visible(bool propval)
+  @property void visible(bool propval) nothrow
   {
     setVisible(propval);
   }
 
   /** */
-  @property int width()
+  @property int width() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("width");
   }
 
   /** */
-  @property void width(int propval)
+  @property void width(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("width", propval);
   }
 
   /** */
-  @property float xalign()
+  @property float xalign() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(float)("xalign");
   }
 
   /** */
-  @property void xalign(float propval)
+  @property void xalign(float propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(float)("xalign", propval);
   }
 
   /** */
-  @property uint xpad()
+  @property uint xpad() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("xpad");
   }
 
   /** */
-  @property void xpad(uint propval)
+  @property void xpad(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("xpad", propval);
   }
 
   /** */
-  @property float yalign()
+  @property float yalign() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(float)("yalign");
   }
 
   /** */
-  @property void yalign(float propval)
+  @property void yalign(float propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(float)("yalign", propval);
   }
 
   /** */
-  @property uint ypad()
+  @property uint ypad() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("ypad");
   }
 
   /** */
-  @property void ypad(uint propval)
+  @property void ypad(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("ypad", propval);
   }
@@ -287,7 +287,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
         flags = render flags
       Returns: true if the event was consumed/handled
   */
-  bool activate(gdk.event.Event event, gtk.widget.Widget widget, string path, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.types.CellRendererState flags)
+  bool activate(gdk.event.Event event, gtk.widget.Widget widget, string path, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.types.CellRendererState flags) nothrow
   {
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -306,7 +306,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
         alignedArea = the return location for the space inside cell_area
                          that would actually be used to render.
   */
-  void getAlignedArea(gtk.widget.Widget widget, gtk.types.CellRendererState flags, gdk.rectangle.Rectangle cellArea, out gdk.rectangle.Rectangle alignedArea)
+  void getAlignedArea(gtk.widget.Widget widget, gtk.types.CellRendererState flags, gdk.rectangle.Rectangle cellArea, out gdk.rectangle.Rectangle alignedArea) nothrow
   {
     gtk_cell_renderer_get_aligned_area(cast(GtkCellRenderer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, flags, cast(const(GdkRectangle)*)&cellArea, cast(GdkRectangle*)&alignedArea);
   }
@@ -318,7 +318,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
         xalign = location to fill in with the x alignment of the cell
         yalign = location to fill in with the y alignment of the cell
   */
-  void getAlignment(out float xalign, out float yalign)
+  void getAlignment(out float xalign, out float yalign) nothrow
   {
     gtk_cell_renderer_get_alignment(cast(GtkCellRenderer*)this._cPtr, cast(float*)&xalign, cast(float*)&yalign);
   }
@@ -330,7 +330,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
         width = location to fill in with the fixed width of the cell
         height = location to fill in with the fixed height of the cell
   */
-  void getFixedSize(out int width, out int height)
+  void getFixedSize(out int width, out int height) nothrow
   {
     gtk_cell_renderer_get_fixed_size(cast(GtkCellRenderer*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
@@ -339,7 +339,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
       Checks whether the given [gtk.cell_renderer.CellRenderer] is expanded.
       Returns: true if the cell renderer is expanded
   */
-  bool getIsExpanded()
+  bool getIsExpanded() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_cell_renderer_get_is_expanded(cast(GtkCellRenderer*)this._cPtr);
@@ -350,7 +350,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
       Checks whether the given [gtk.cell_renderer.CellRenderer] is an expander.
       Returns: true if cell is an expander, and false otherwise
   */
-  bool getIsExpander()
+  bool getIsExpander() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_cell_renderer_get_is_expander(cast(GtkCellRenderer*)this._cPtr);
@@ -364,7 +364,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
         xpad = location to fill in with the x padding of the cell
         ypad = location to fill in with the y padding of the cell
   */
-  void getPadding(out int xpad, out int ypad)
+  void getPadding(out int xpad, out int ypad) nothrow
   {
     gtk_cell_renderer_get_padding(cast(GtkCellRenderer*)this._cPtr, cast(int*)&xpad, cast(int*)&ypad);
   }
@@ -377,7 +377,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
         minimumSize = location to store the minimum size
         naturalSize = location to store the natural size
   */
-  void getPreferredHeight(gtk.widget.Widget widget, out int minimumSize, out int naturalSize)
+  void getPreferredHeight(gtk.widget.Widget widget, out int minimumSize, out int naturalSize) nothrow
   {
     gtk_cell_renderer_get_preferred_height(cast(GtkCellRenderer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cast(int*)&minimumSize, cast(int*)&naturalSize);
   }
@@ -392,7 +392,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
         minimumHeight = location for storing the minimum size
         naturalHeight = location for storing the preferred size
   */
-  void getPreferredHeightForWidth(gtk.widget.Widget widget, int width, out int minimumHeight, out int naturalHeight)
+  void getPreferredHeightForWidth(gtk.widget.Widget widget, int width, out int minimumHeight, out int naturalHeight) nothrow
   {
     gtk_cell_renderer_get_preferred_height_for_width(cast(GtkCellRenderer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
   }
@@ -406,7 +406,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
         minimumSize = location for storing the minimum size
         naturalSize = location for storing the natural size
   */
-  void getPreferredSize(gtk.widget.Widget widget, out gtk.requisition.Requisition minimumSize, out gtk.requisition.Requisition naturalSize)
+  void getPreferredSize(gtk.widget.Widget widget, out gtk.requisition.Requisition minimumSize, out gtk.requisition.Requisition naturalSize) nothrow
   {
     gtk_cell_renderer_get_preferred_size(cast(GtkCellRenderer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cast(GtkRequisition*)&minimumSize, cast(GtkRequisition*)&naturalSize);
   }
@@ -419,7 +419,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
         minimumSize = location to store the minimum size
         naturalSize = location to store the natural size
   */
-  void getPreferredWidth(gtk.widget.Widget widget, out int minimumSize, out int naturalSize)
+  void getPreferredWidth(gtk.widget.Widget widget, out int minimumSize, out int naturalSize) nothrow
   {
     gtk_cell_renderer_get_preferred_width(cast(GtkCellRenderer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cast(int*)&minimumSize, cast(int*)&naturalSize);
   }
@@ -434,7 +434,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
         minimumWidth = location for storing the minimum size
         naturalWidth = location for storing the preferred size
   */
-  void getPreferredWidthForHeight(gtk.widget.Widget widget, int height, out int minimumWidth, out int naturalWidth)
+  void getPreferredWidthForHeight(gtk.widget.Widget widget, int height, out int minimumWidth, out int naturalWidth) nothrow
   {
     gtk_cell_renderer_get_preferred_width_for_height(cast(GtkCellRenderer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, height, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
   }
@@ -444,7 +444,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
       or a width-for-height layout.
       Returns: The [gtk.types.SizeRequestMode] preferred by this renderer.
   */
-  gtk.types.SizeRequestMode getRequestMode()
+  gtk.types.SizeRequestMode getRequestMode() nothrow
   {
     GtkSizeRequestMode _cretval;
     _cretval = gtk_cell_renderer_get_request_mode(cast(GtkCellRenderer*)this._cPtr);
@@ -456,7 +456,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
       Returns the cell renderer’s sensitivity.
       Returns: true if the cell renderer is sensitive
   */
-  bool getSensitive()
+  bool getSensitive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_cell_renderer_get_sensitive(cast(GtkCellRenderer*)this._cPtr);
@@ -473,7 +473,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
         cellState = cell renderer state
       Returns: the widget state flags applying to cell
   */
-  gtk.types.StateFlags getState(gtk.widget.Widget widget, gtk.types.CellRendererState cellState)
+  gtk.types.StateFlags getState(gtk.widget.Widget widget, gtk.types.CellRendererState cellState) nothrow
   {
     GtkStateFlags _cretval;
     _cretval = gtk_cell_renderer_get_state(cast(GtkCellRenderer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cellState);
@@ -485,7 +485,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
       Returns the cell renderer’s visibility.
       Returns: true if the cell renderer is visible
   */
-  bool getVisible()
+  bool getVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_cell_renderer_get_visible(cast(GtkCellRenderer*)this._cPtr);
@@ -496,7 +496,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
       Checks whether the cell renderer can do something when activated.
       Returns: true if the cell renderer can do anything when activated
   */
-  bool isActivatable()
+  bool isActivatable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_cell_renderer_is_activatable(cast(GtkCellRenderer*)this._cPtr);
@@ -510,7 +510,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
         xalign = the x alignment of the cell renderer
         yalign = the y alignment of the cell renderer
   */
-  void setAlignment(float xalign, float yalign)
+  void setAlignment(float xalign, float yalign) nothrow
   {
     gtk_cell_renderer_set_alignment(cast(GtkCellRenderer*)this._cPtr, xalign, yalign);
   }
@@ -522,7 +522,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
         width = the width of the cell renderer, or -1
         height = the height of the cell renderer, or -1
   */
-  void setFixedSize(int width, int height)
+  void setFixedSize(int width, int height) nothrow
   {
     gtk_cell_renderer_set_fixed_size(cast(GtkCellRenderer*)this._cPtr, width, height);
   }
@@ -533,7 +533,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
       Params:
         isExpanded = whether cell should be expanded
   */
-  void setIsExpanded(bool isExpanded)
+  void setIsExpanded(bool isExpanded) nothrow
   {
     gtk_cell_renderer_set_is_expanded(cast(GtkCellRenderer*)this._cPtr, isExpanded);
   }
@@ -544,7 +544,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
       Params:
         isExpander = whether cell is an expander
   */
-  void setIsExpander(bool isExpander)
+  void setIsExpander(bool isExpander) nothrow
   {
     gtk_cell_renderer_set_is_expander(cast(GtkCellRenderer*)this._cPtr, isExpander);
   }
@@ -556,7 +556,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
         xpad = the x padding of the cell renderer
         ypad = the y padding of the cell renderer
   */
-  void setPadding(int xpad, int ypad)
+  void setPadding(int xpad, int ypad) nothrow
   {
     gtk_cell_renderer_set_padding(cast(GtkCellRenderer*)this._cPtr, xpad, ypad);
   }
@@ -567,7 +567,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
       Params:
         sensitive = the sensitivity of the cell
   */
-  void setSensitive(bool sensitive)
+  void setSensitive(bool sensitive) nothrow
   {
     gtk_cell_renderer_set_sensitive(cast(GtkCellRenderer*)this._cPtr, sensitive);
   }
@@ -578,7 +578,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
       Params:
         visible = the visibility of the cell
   */
-  void setVisible(bool visible)
+  void setVisible(bool visible) nothrow
   {
     gtk_cell_renderer_set_visible(cast(GtkCellRenderer*)this._cPtr, visible);
   }
@@ -600,7 +600,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
         cellArea = area normally rendered by a cell renderer
         flags = flags that affect rendering
   */
-  void snapshot(gtk.snapshot.Snapshot snapshot, gtk.widget.Widget widget, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.types.CellRendererState flags)
+  void snapshot(gtk.snapshot.Snapshot snapshot, gtk.widget.Widget widget, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.types.CellRendererState flags) nothrow
   {
     gtk_cell_renderer_snapshot(cast(GtkCellRenderer*)this._cPtr, snapshot ? cast(GtkSnapshot*)snapshot._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&backgroundArea, cast(const(GdkRectangle)*)&cellArea, flags);
   }
@@ -620,7 +620,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
       Returns: A new [gtk.cell_editable.CellEditable] for editing this
           cell, or null if editing is not possible
   */
-  gtk.cell_editable.CellEditable startEditing(gdk.event.Event event, gtk.widget.Widget widget, string path, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.types.CellRendererState flags)
+  gtk.cell_editable.CellEditable startEditing(gdk.event.Event event, gtk.widget.Widget widget, string path, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.types.CellRendererState flags) nothrow
   {
     GtkCellEditable* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -641,7 +641,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
       Params:
         canceled = true if the editing has been canceled
   */
-  void stopEditing(bool canceled)
+  void stopEditing(bool canceled) nothrow
   {
     gtk_cell_renderer_stop_editing(cast(GtkCellRenderer*)this._cPtr, canceled);
   }
@@ -665,13 +665,13 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEditingCanceled(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEditingCanceled(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.cell_renderer.CellRenderer)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -680,7 +680,14 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.cell_renderer.CellRenderer.editingCanceled");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -734,7 +741,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEditingStarted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEditingStarted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.cell_editable.CellEditable)))
@@ -742,7 +749,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.cell_renderer.CellRenderer)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -757,7 +764,14 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.cell_renderer.CellRenderer.editingStarted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -770,7 +784,7 @@ class CellRendererGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnowned
 {
 
   /** */
-  T cellBackground(string propval)
+  T cellBackground(string propval) nothrow
   {
     return setProperty("cell-background", propval);
   }
@@ -781,79 +795,79 @@ class CellRendererGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnowned
         propval = Cell background as a [gdk.rgba.RGBA]
       Returns: Builder instance for fluent chaining
   */
-  T cellBackgroundRgba(gdk.rgba.RGBA propval)
+  T cellBackgroundRgba(gdk.rgba.RGBA propval) nothrow
   {
     return setProperty("cell-background-rgba", propval);
   }
 
   /** */
-  T cellBackgroundSet(bool propval)
+  T cellBackgroundSet(bool propval) nothrow
   {
     return setProperty("cell-background-set", propval);
   }
 
   /** */
-  T height(int propval)
+  T height(int propval) nothrow
   {
     return setProperty("height", propval);
   }
 
   /** */
-  T isExpanded(bool propval)
+  T isExpanded(bool propval) nothrow
   {
     return setProperty("is-expanded", propval);
   }
 
   /** */
-  T isExpander(bool propval)
+  T isExpander(bool propval) nothrow
   {
     return setProperty("is-expander", propval);
   }
 
   /** */
-  T mode(gtk.types.CellRendererMode propval)
+  T mode(gtk.types.CellRendererMode propval) nothrow
   {
     return setProperty("mode", propval);
   }
 
   /** */
-  T sensitive(bool propval)
+  T sensitive(bool propval) nothrow
   {
     return setProperty("sensitive", propval);
   }
 
   /** */
-  T visible(bool propval)
+  T visible(bool propval) nothrow
   {
     return setProperty("visible", propval);
   }
 
   /** */
-  T width(int propval)
+  T width(int propval) nothrow
   {
     return setProperty("width", propval);
   }
 
   /** */
-  T xalign(float propval)
+  T xalign(float propval) nothrow
   {
     return setProperty("xalign", propval);
   }
 
   /** */
-  T xpad(uint propval)
+  T xpad(uint propval) nothrow
   {
     return setProperty("xpad", propval);
   }
 
   /** */
-  T yalign(float propval)
+  T yalign(float propval) nothrow
   {
     return setProperty("yalign", propval);
   }
 
   /** */
-  T ypad(uint propval)
+  T ypad(uint propval) nothrow
   {
     return setProperty("ypad", propval);
   }
@@ -866,7 +880,7 @@ final class CellRendererGidBuilder : CellRendererGidBuilderImpl!CellRendererGidB
       Create object from builder.
       Returns: New object
   */
-  CellRenderer build()
+  CellRenderer build() nothrow
   {
     return new CellRenderer(cast(void*)createGObject(CellRenderer._getGType), No.Take);
   }

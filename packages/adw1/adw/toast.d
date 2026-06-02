@@ -139,26 +139,26 @@ class Toast : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_toast_get_type != &gidSymbolNotFound ? adw_toast_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Toast self()
+  override Toast self() nothrow
   {
     return this;
   }
@@ -167,7 +167,7 @@ class Toast : gobject.object.ObjectWrap
       Get builder for [adw.toast.Toast]
       Returns: New builder object
   */
-  static ToastGidBuilder builder()
+  static ToastGidBuilder builder() nothrow
   {
     return new ToastGidBuilder;
   }
@@ -180,7 +180,7 @@ class Toast : gobject.object.ObjectWrap
         
         See [adw.toast.Toast.actionTarget].
   */
-  @property string actionName()
+  @property string actionName() nothrow
   {
     return getActionName();
   }
@@ -194,7 +194,7 @@ class Toast : gobject.object.ObjectWrap
           
           See [adw.toast.Toast.actionTarget].
   */
-  @property void actionName(string propval)
+  @property void actionName(string propval) nothrow
   {
     setActionName(propval);
   }
@@ -203,7 +203,7 @@ class Toast : gobject.object.ObjectWrap
       Get `actionTarget` property.
       Returns: The parameter for action invocations.
   */
-  @property glib.variant.Variant actionTarget()
+  @property glib.variant.Variant actionTarget() nothrow
   {
     return getActionTargetValue();
   }
@@ -213,7 +213,7 @@ class Toast : gobject.object.ObjectWrap
       Params:
         propval = The parameter for action invocations.
   */
-  @property void actionTarget(glib.variant.Variant propval)
+  @property void actionTarget(glib.variant.Variant propval) nothrow
   {
     setActionTargetValue(propval);
   }
@@ -228,7 +228,7 @@ class Toast : gobject.object.ObjectWrap
         
         See [adw.toast.Toast.actionName].
   */
-  @property string buttonLabel()
+  @property string buttonLabel() nothrow
   {
     return getButtonLabel();
   }
@@ -244,7 +244,7 @@ class Toast : gobject.object.ObjectWrap
           
           See [adw.toast.Toast.actionName].
   */
-  @property void buttonLabel(string propval)
+  @property void buttonLabel(string propval) nothrow
   {
     setButtonLabel(propval);
   }
@@ -258,7 +258,7 @@ class Toast : gobject.object.ObjectWrap
         
         Setting a custom title will unset [adw.toast.Toast.title].
   */
-  @property gtk.widget.Widget customTitle()
+  @property gtk.widget.Widget customTitle() nothrow
   {
     return getCustomTitle();
   }
@@ -273,7 +273,7 @@ class Toast : gobject.object.ObjectWrap
           
           Setting a custom title will unset [adw.toast.Toast.title].
   */
-  @property void customTitle(gtk.widget.Widget propval)
+  @property void customTitle(gtk.widget.Widget propval) nothrow
   {
     setCustomTitle(propval);
   }
@@ -290,7 +290,7 @@ class Toast : gobject.object.ObjectWrap
         If the priority is [adw.types.ToastPriority.High], the toast will be displayed
         immediately, pushing the previous toast into the queue instead.
   */
-  @property adw.types.ToastPriority priority()
+  @property adw.types.ToastPriority priority() nothrow
   {
     return getPriority();
   }
@@ -308,7 +308,7 @@ class Toast : gobject.object.ObjectWrap
           If the priority is [adw.types.ToastPriority.High], the toast will be displayed
           immediately, pushing the previous toast into the queue instead.
   */
-  @property void priority(adw.types.ToastPriority propval)
+  @property void priority(adw.types.ToastPriority propval) nothrow
   {
     setPriority(propval);
   }
@@ -323,7 +323,7 @@ class Toast : gobject.object.ObjectWrap
         Toasts cannot disappear while being hovered, pressed (on touchscreen), or
         have keyboard focus inside them.
   */
-  @property uint timeout()
+  @property uint timeout() nothrow
   {
     return getTimeout();
   }
@@ -339,7 +339,7 @@ class Toast : gobject.object.ObjectWrap
           Toasts cannot disappear while being hovered, pressed (on touchscreen), or
           have keyboard focus inside them.
   */
-  @property void timeout(uint propval)
+  @property void timeout(uint propval) nothrow
   {
     setTimeout(propval);
   }
@@ -354,7 +354,7 @@ class Toast : gobject.object.ObjectWrap
         
         If [adw.toast.Toast.customTitle] is set, it will be used instead.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -370,7 +370,7 @@ class Toast : gobject.object.ObjectWrap
           
           If [adw.toast.Toast.customTitle] is set, it will be used instead.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -381,7 +381,7 @@ class Toast : gobject.object.ObjectWrap
         
         See also `func@Pango.parse_markup`.
   */
-  @property bool useMarkup()
+  @property bool useMarkup() nothrow
   {
     return getUseMarkup();
   }
@@ -393,7 +393,7 @@ class Toast : gobject.object.ObjectWrap
           
           See also `func@Pango.parse_markup`.
   */
-  @property void useMarkup(bool propval)
+  @property void useMarkup(bool propval) nothrow
   {
     setUseMarkup(propval);
   }
@@ -409,7 +409,7 @@ class Toast : gobject.object.ObjectWrap
         title = the title to be displayed
       Returns: the new created [adw.toast.Toast]
   */
-  this(string title)
+  this(string title) nothrow
   {
     AdwToast* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -423,7 +423,7 @@ class Toast : gobject.object.ObjectWrap
       Does nothing if self has already been dismissed, or hasn't been added to an
       [adw.toast_overlay.ToastOverlay].
   */
-  void dismiss()
+  void dismiss() nothrow
   {
     adw_toast_dismiss(cast(AdwToast*)this._cPtr);
   }
@@ -432,7 +432,7 @@ class Toast : gobject.object.ObjectWrap
       Gets the name of the associated action.
       Returns: the action name
   */
-  string getActionName()
+  string getActionName() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_toast_get_action_name(cast(AdwToast*)this._cPtr);
@@ -444,7 +444,7 @@ class Toast : gobject.object.ObjectWrap
       Gets the parameter for action invocations.
       Returns: the action target
   */
-  glib.variant.Variant getActionTargetValue()
+  glib.variant.Variant getActionTargetValue() nothrow
   {
     GVariant* _cretval;
     _cretval = adw_toast_get_action_target_value(cast(AdwToast*)this._cPtr);
@@ -456,7 +456,7 @@ class Toast : gobject.object.ObjectWrap
       Gets the label to show on the button.
       Returns: the button label
   */
-  string getButtonLabel()
+  string getButtonLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_toast_get_button_label(cast(AdwToast*)this._cPtr);
@@ -468,7 +468,7 @@ class Toast : gobject.object.ObjectWrap
       Gets the custom title widget of self.
       Returns: the custom title widget
   */
-  gtk.widget.Widget getCustomTitle()
+  gtk.widget.Widget getCustomTitle() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_toast_get_custom_title(cast(AdwToast*)this._cPtr);
@@ -480,7 +480,7 @@ class Toast : gobject.object.ObjectWrap
       Gets priority for self.
       Returns: the priority
   */
-  adw.types.ToastPriority getPriority()
+  adw.types.ToastPriority getPriority() nothrow
   {
     AdwToastPriority _cretval;
     _cretval = adw_toast_get_priority(cast(AdwToast*)this._cPtr);
@@ -492,7 +492,7 @@ class Toast : gobject.object.ObjectWrap
       Gets timeout for self.
       Returns: the timeout
   */
-  uint getTimeout()
+  uint getTimeout() nothrow
   {
     uint _retval;
     _retval = adw_toast_get_timeout(cast(AdwToast*)this._cPtr);
@@ -506,7 +506,7 @@ class Toast : gobject.object.ObjectWrap
       the return value will be null.
       Returns: the title
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_toast_get_title(cast(AdwToast*)this._cPtr);
@@ -518,7 +518,7 @@ class Toast : gobject.object.ObjectWrap
       Gets whether to use Pango markup for the toast title.
       Returns: whether the toast uses markup
   */
-  bool getUseMarkup()
+  bool getUseMarkup() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_toast_get_use_markup(cast(AdwToast*)this._cPtr);
@@ -535,7 +535,7 @@ class Toast : gobject.object.ObjectWrap
       Params:
         actionName = the action name
   */
-  void setActionName(string actionName = null)
+  void setActionName(string actionName = null) nothrow
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     adw_toast_set_action_name(cast(AdwToast*)this._cPtr, _actionName);
@@ -550,7 +550,7 @@ class Toast : gobject.object.ObjectWrap
       Params:
         actionTarget = the action target
   */
-  void setActionTargetValue(glib.variant.Variant actionTarget = null)
+  void setActionTargetValue(glib.variant.Variant actionTarget = null) nothrow
   {
     adw_toast_set_action_target_value(cast(AdwToast*)this._cPtr, actionTarget ? cast(GVariant*)actionTarget._cPtr(No.Dup) : null);
   }
@@ -567,7 +567,7 @@ class Toast : gobject.object.ObjectWrap
       Params:
         buttonLabel = a button label
   */
-  void setButtonLabel(string buttonLabel = null)
+  void setButtonLabel(string buttonLabel = null) nothrow
   {
     const(char)* _buttonLabel = buttonLabel.toCString(No.Alloc);
     adw_toast_set_button_label(cast(AdwToast*)this._cPtr, _buttonLabel);
@@ -584,7 +584,7 @@ class Toast : gobject.object.ObjectWrap
       Params:
         widget = the custom title widget
   */
-  void setCustomTitle(gtk.widget.Widget widget = null)
+  void setCustomTitle(gtk.widget.Widget widget = null) nothrow
   {
     adw_toast_set_custom_title(cast(AdwToast*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -598,7 +598,7 @@ class Toast : gobject.object.ObjectWrap
       Params:
         detailedActionName = the detailed action name
   */
-  void setDetailedActionName(string detailedActionName = null)
+  void setDetailedActionName(string detailedActionName = null) nothrow
   {
     const(char)* _detailedActionName = detailedActionName.toCString(No.Alloc);
     adw_toast_set_detailed_action_name(cast(AdwToast*)this._cPtr, _detailedActionName);
@@ -618,7 +618,7 @@ class Toast : gobject.object.ObjectWrap
       Params:
         priority = the priority
   */
-  void setPriority(adw.types.ToastPriority priority)
+  void setPriority(adw.types.ToastPriority priority) nothrow
   {
     adw_toast_set_priority(cast(AdwToast*)this._cPtr, priority);
   }
@@ -635,7 +635,7 @@ class Toast : gobject.object.ObjectWrap
       Params:
         timeout = the timeout
   */
-  void setTimeout(uint timeout)
+  void setTimeout(uint timeout) nothrow
   {
     adw_toast_set_timeout(cast(AdwToast*)this._cPtr, timeout);
   }
@@ -652,7 +652,7 @@ class Toast : gobject.object.ObjectWrap
       Params:
         title = a title
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     adw_toast_set_title(cast(AdwToast*)this._cPtr, _title);
@@ -666,7 +666,7 @@ class Toast : gobject.object.ObjectWrap
       Params:
         useMarkup = whether to use markup
   */
-  void setUseMarkup(bool useMarkup)
+  void setUseMarkup(bool useMarkup) nothrow
   {
     adw_toast_set_use_markup(cast(AdwToast*)this._cPtr, useMarkup);
   }
@@ -688,13 +688,13 @@ class Toast : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectButtonClicked(T)(T callback, Flag!"After" after = No.After)
+  gulong connectButtonClicked(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.toast.Toast)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -703,7 +703,14 @@ class Toast : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.toast.Toast.buttonClicked");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -725,13 +732,13 @@ class Toast : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDismissed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDismissed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.toast.Toast)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -740,7 +747,14 @@ class Toast : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.toast.Toast.dismissed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -762,7 +776,7 @@ class ToastGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           See [adw.toast.Toast.actionTarget].
       Returns: Builder instance for fluent chaining
   */
-  T actionName(string propval)
+  T actionName(string propval) nothrow
   {
     return setProperty("action-name", propval);
   }
@@ -773,7 +787,7 @@ class ToastGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The parameter for action invocations.
       Returns: Builder instance for fluent chaining
   */
-  T actionTarget(glib.variant.Variant propval)
+  T actionTarget(glib.variant.Variant propval) nothrow
   {
     return setProperty("action-target", propval);
   }
@@ -790,7 +804,7 @@ class ToastGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           See [adw.toast.Toast.actionName].
       Returns: Builder instance for fluent chaining
   */
-  T buttonLabel(string propval)
+  T buttonLabel(string propval) nothrow
   {
     return setProperty("button-label", propval);
   }
@@ -806,7 +820,7 @@ class ToastGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           Setting a custom title will unset [adw.toast.Toast.title].
       Returns: Builder instance for fluent chaining
   */
-  T customTitle(gtk.widget.Widget propval)
+  T customTitle(gtk.widget.Widget propval) nothrow
   {
     return setProperty("custom-title", propval);
   }
@@ -825,7 +839,7 @@ class ToastGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           immediately, pushing the previous toast into the queue instead.
       Returns: Builder instance for fluent chaining
   */
-  T priority(adw.types.ToastPriority propval)
+  T priority(adw.types.ToastPriority propval) nothrow
   {
     return setProperty("priority", propval);
   }
@@ -842,7 +856,7 @@ class ToastGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           have keyboard focus inside them.
       Returns: Builder instance for fluent chaining
   */
-  T timeout(uint propval)
+  T timeout(uint propval) nothrow
   {
     return setProperty("timeout", propval);
   }
@@ -859,7 +873,7 @@ class ToastGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           If [adw.toast.Toast.customTitle] is set, it will be used instead.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -872,7 +886,7 @@ class ToastGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           See also `func@Pango.parse_markup`.
       Returns: Builder instance for fluent chaining
   */
-  T useMarkup(bool propval)
+  T useMarkup(bool propval) nothrow
   {
     return setProperty("use-markup", propval);
   }
@@ -885,7 +899,7 @@ final class ToastGidBuilder : ToastGidBuilderImpl!ToastGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Toast build()
+  Toast build() nothrow
   {
     return new Toast(cast(void*)createGObject(Toast._getGType), Yes.Take);
   }

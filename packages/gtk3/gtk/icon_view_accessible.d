@@ -18,26 +18,26 @@ class IconViewAccessible : gtk.container_accessible.ContainerAccessible, atk.sel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_icon_view_accessible_get_type != &gidSymbolNotFound ? gtk_icon_view_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override IconViewAccessible self()
+  override IconViewAccessible self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class IconViewAccessible : gtk.container_accessible.ContainerAccessible, atk.sel
       Get builder for [gtk.icon_view_accessible.IconViewAccessible]
       Returns: New builder object
   */
-  static IconViewAccessibleGidBuilder builder()
+  static IconViewAccessibleGidBuilder builder() nothrow
   {
     return new IconViewAccessibleGidBuilder;
   }
@@ -68,7 +68,7 @@ final class IconViewAccessibleGidBuilder : IconViewAccessibleGidBuilderImpl!Icon
       Create object from builder.
       Returns: New object
   */
-  IconViewAccessible build()
+  IconViewAccessible build() nothrow
   {
     return new IconViewAccessible(cast(void*)createGObject(IconViewAccessible._getGType), No.Take);
   }

@@ -18,26 +18,26 @@ class EntryIconAccessible : atk.object.ObjectWrap, atk.action.Action, atk.compon
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_entry_icon_accessible_get_type != &gidSymbolNotFound ? gtk_entry_icon_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EntryIconAccessible self()
+  override EntryIconAccessible self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class EntryIconAccessible : atk.object.ObjectWrap, atk.action.Action, atk.compon
       Get builder for [gtk.entry_icon_accessible.EntryIconAccessible]
       Returns: New builder object
   */
-  static EntryIconAccessibleGidBuilder builder()
+  static EntryIconAccessibleGidBuilder builder() nothrow
   {
     return new EntryIconAccessibleGidBuilder;
   }
@@ -73,7 +73,7 @@ final class EntryIconAccessibleGidBuilder : EntryIconAccessibleGidBuilderImpl!En
       Create object from builder.
       Returns: New object
   */
-  EntryIconAccessible build()
+  EntryIconAccessible build() nothrow
   {
     return new EntryIconAccessible(cast(void*)createGObject(EntryIconAccessible._getGType), No.Take);
   }

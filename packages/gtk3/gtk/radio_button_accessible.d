@@ -20,26 +20,26 @@ class RadioButtonAccessible : gtk.toggle_button_accessible.ToggleButtonAccessibl
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_radio_button_accessible_get_type != &gidSymbolNotFound ? gtk_radio_button_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RadioButtonAccessible self()
+  override RadioButtonAccessible self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class RadioButtonAccessible : gtk.toggle_button_accessible.ToggleButtonAccessibl
       Get builder for [gtk.radio_button_accessible.RadioButtonAccessible]
       Returns: New builder object
   */
-  static RadioButtonAccessibleGidBuilder builder()
+  static RadioButtonAccessibleGidBuilder builder() nothrow
   {
     return new RadioButtonAccessibleGidBuilder;
   }
@@ -67,7 +67,7 @@ final class RadioButtonAccessibleGidBuilder : RadioButtonAccessibleGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  RadioButtonAccessible build()
+  RadioButtonAccessible build() nothrow
   {
     return new RadioButtonAccessible(cast(void*)createGObject(RadioButtonAccessible._getGType), No.Take);
   }

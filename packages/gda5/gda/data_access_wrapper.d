@@ -16,26 +16,26 @@ class DataAccessWrapper : gobject.object.ObjectWrap, gda.data_model.DataModel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_data_access_wrapper_get_type != &gidSymbolNotFound ? gda_data_access_wrapper_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DataAccessWrapper self()
+  override DataAccessWrapper self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class DataAccessWrapper : gobject.object.ObjectWrap, gda.data_model.DataModel
       Get builder for [gda.data_access_wrapper.DataAccessWrapper]
       Returns: New builder object
   */
-  static DataAccessWrapperGidBuilder builder()
+  static DataAccessWrapperGidBuilder builder() nothrow
   {
     return new DataAccessWrapperGidBuilder;
   }
 
   /** */
-  @property gda.data_model.DataModel model()
+  @property gda.data_model.DataModel model() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.data_model.DataModel)("model");
   }
@@ -65,7 +65,7 @@ class DataAccessWrapper : gobject.object.ObjectWrap, gda.data_model.DataModel
         model = a #GdaDataModel
       Returns: a pointer to the newly created #GdaDataModel.
   */
-  static gda.data_model.DataModel new_(gda.data_model.DataModel model)
+  static gda.data_model.DataModel new_(gda.data_model.DataModel model) nothrow
   {
     GdaDataModel* _cretval;
     _cretval = gda_data_access_wrapper_new(model ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
@@ -96,7 +96,7 @@ class DataAccessWrapper : gobject.object.ObjectWrap, gda.data_model.DataModel
           and the columns of the wrapped data model
       Returns: true if the mapping actually changed
   */
-  bool setMapping(int[] mapping = null)
+  bool setMapping(int[] mapping = null) nothrow
   {
     bool _retval;
     int _mappingSize;
@@ -116,7 +116,7 @@ class DataAccessWrapperGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
   mixin DataModelGidBuilderT!();
 
   /** */
-  T model(gda.data_model.DataModel propval)
+  T model(gda.data_model.DataModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -129,7 +129,7 @@ final class DataAccessWrapperGidBuilder : DataAccessWrapperGidBuilderImpl!DataAc
       Create object from builder.
       Returns: New object
   */
-  DataAccessWrapper build()
+  DataAccessWrapper build() nothrow
   {
     return new DataAccessWrapper(cast(void*)createGObject(DataAccessWrapper._getGType), No.Take);
   }

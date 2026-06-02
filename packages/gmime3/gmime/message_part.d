@@ -18,26 +18,26 @@ class MessagePart : gmime.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_message_part_get_type != &gidSymbolNotFound ? g_mime_message_part_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MessagePart self()
+  override MessagePart self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class MessagePart : gmime.object.ObjectWrap
       Get builder for [gmime.message_part.MessagePart]
       Returns: New builder object
   */
-  static MessagePartGidBuilder builder()
+  static MessagePartGidBuilder builder() nothrow
   {
     return new MessagePartGidBuilder;
   }
@@ -60,7 +60,7 @@ class MessagePart : gmime.object.ObjectWrap
       Returns: an empty MIME message part object with a default
         content-type of message/subtype.
   */
-  this(string subtype)
+  this(string subtype) nothrow
   {
     GMimeMessagePart* _cretval;
     const(char)* _subtype = subtype.toCString(No.Alloc);
@@ -78,7 +78,7 @@ class MessagePart : gmime.object.ObjectWrap
       Returns: a MIME message part object with a default content-type of
         message/subtype containing message.
   */
-  static gmime.message_part.MessagePart newWithMessage(string subtype, gmime.message.Message message)
+  static gmime.message_part.MessagePart newWithMessage(string subtype, gmime.message.Message message) nothrow
   {
     GMimeMessagePart* _cretval;
     const(char)* _subtype = subtype.toCString(No.Alloc);
@@ -91,7 +91,7 @@ class MessagePart : gmime.object.ObjectWrap
       Gets the message object on the message part object part.
       Returns: the message part contained within part.
   */
-  gmime.message.Message getMessage()
+  gmime.message.Message getMessage() nothrow
   {
     GMimeMessage* _cretval;
     _cretval = g_mime_message_part_get_message(cast(GMimeMessagePart*)this._cPtr);
@@ -105,7 +105,7 @@ class MessagePart : gmime.object.ObjectWrap
       Params:
         message = message
   */
-  void setMessage(gmime.message.Message message)
+  void setMessage(gmime.message.Message message) nothrow
   {
     g_mime_message_part_set_message(cast(GMimeMessagePart*)this._cPtr, message ? cast(GMimeMessage*)message._cPtr(No.Dup) : null);
   }
@@ -123,7 +123,7 @@ final class MessagePartGidBuilder : MessagePartGidBuilderImpl!MessagePartGidBuil
       Create object from builder.
       Returns: New object
   */
-  MessagePart build()
+  MessagePart build() nothrow
   {
     return new MessagePart(cast(void*)createGObject(MessagePart._getGType), Yes.Take);
   }

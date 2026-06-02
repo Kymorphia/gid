@@ -22,26 +22,26 @@ class CairoContext : gdk.draw_context.DrawContext
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_cairo_context_get_type != &gidSymbolNotFound ? gdk_cairo_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CairoContext self()
+  override CairoContext self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class CairoContext : gdk.draw_context.DrawContext
       Get builder for [gdk.cairo_context.CairoContext]
       Returns: New builder object
   */
-  static CairoContextGidBuilder builder()
+  static CairoContextGidBuilder builder() nothrow
   {
     return new CairoContextGidBuilder;
   }
@@ -67,7 +67,7 @@ class CairoContext : gdk.draw_context.DrawContext
       Returns: a Cairo context
           to draw on `GdkSurface
   */
-  cairo.context.Context cairoCreate()
+  cairo.context.Context cairoCreate() nothrow
   {
     cairo_t* _cretval;
     _cretval = gdk_cairo_context_cairo_create(cast(GdkCairoContext*)this._cPtr);
@@ -88,7 +88,7 @@ final class CairoContextGidBuilder : CairoContextGidBuilderImpl!CairoContextGidB
       Create object from builder.
       Returns: New object
   */
-  CairoContext build()
+  CairoContext build() nothrow
   {
     return new CairoContext(cast(void*)createGObject(CairoContext._getGType), No.Take);
   }

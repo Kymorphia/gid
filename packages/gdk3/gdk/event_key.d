@@ -16,11 +16,8 @@ class EventKey
   GdkEventKey _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.event_key.EventKey");
-
     _cInstance = *cast(GdkEventKey*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class EventKey
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class EventKey
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.KeyPress] or [gdk.types.EventType.KeyRelease]).
   */
-  @property gdk.types.EventType type()
+  @property gdk.types.EventType type() nothrow
   {
     return cast(gdk.types.EventType)(cast(GdkEventKey*)this._cPtr).type;
   }
@@ -47,7 +44,7 @@ class EventKey
       Params:
         propval = the type of the event ([gdk.types.EventType.KeyPress] or [gdk.types.EventType.KeyRelease]).
   */
-  @property void type(gdk.types.EventType propval)
+  @property void type(gdk.types.EventType propval) nothrow
   {
     (cast(GdkEventKey*)this._cPtr).type = cast(GdkEventType)propval;
   }
@@ -56,7 +53,7 @@ class EventKey
       Get `window` field.
       Returns: the window which received the event.
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventKey*)this._cPtr).window);
   }
@@ -66,7 +63,7 @@ class EventKey
       Params:
         propval = the window which received the event.
   */
-  @property void window(gdk.window.Window propval)
+  @property void window(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventKey*)this._cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventKey*)this._cPtr).window);
@@ -76,7 +73,7 @@ class EventKey
       Get `sendEvent` field.
       Returns: true if the event was sent explicitly.
   */
-  @property byte sendEvent()
+  @property byte sendEvent() nothrow
   {
     return (cast(GdkEventKey*)this._cPtr).sendEvent;
   }
@@ -86,7 +83,7 @@ class EventKey
       Params:
         propval = true if the event was sent explicitly.
   */
-  @property void sendEvent(byte propval)
+  @property void sendEvent(byte propval) nothrow
   {
     (cast(GdkEventKey*)this._cPtr).sendEvent = propval;
   }
@@ -95,7 +92,7 @@ class EventKey
       Get `time` field.
       Returns: the time of the event in milliseconds.
   */
-  @property uint time()
+  @property uint time() nothrow
   {
     return (cast(GdkEventKey*)this._cPtr).time;
   }
@@ -105,7 +102,7 @@ class EventKey
       Params:
         propval = the time of the event in milliseconds.
   */
-  @property void time(uint propval)
+  @property void time(uint propval) nothrow
   {
     (cast(GdkEventKey*)this._cPtr).time = propval;
   }
@@ -116,7 +113,7 @@ class EventKey
           the modifier keys (e.g. Control, Shift and Alt) and the pointer
           buttons. See #GdkModifierType.
   */
-  @property gdk.types.ModifierType state()
+  @property gdk.types.ModifierType state() nothrow
   {
     return cast(gdk.types.ModifierType)(cast(GdkEventKey*)this._cPtr).state;
   }
@@ -128,7 +125,7 @@ class EventKey
             the modifier keys (e.g. Control, Shift and Alt) and the pointer
             buttons. See #GdkModifierType.
   */
-  @property void state(gdk.types.ModifierType propval)
+  @property void state(gdk.types.ModifierType propval) nothrow
   {
     (cast(GdkEventKey*)this._cPtr).state = cast(GdkModifierType)propval;
   }
@@ -139,7 +136,7 @@ class EventKey
           `gdk/gdkkeysyms.h` header file for a
           complete list of GDK key codes.
   */
-  @property uint keyval()
+  @property uint keyval() nothrow
   {
     return (cast(GdkEventKey*)this._cPtr).keyval;
   }
@@ -151,7 +148,7 @@ class EventKey
             `gdk/gdkkeysyms.h` header file for a
             complete list of GDK key codes.
   */
-  @property void keyval(uint propval)
+  @property void keyval(uint propval) nothrow
   {
     (cast(GdkEventKey*)this._cPtr).keyval = propval;
   }
@@ -160,7 +157,7 @@ class EventKey
       Get `length` field.
       Returns: the length of @string.
   */
-  @property int length()
+  @property int length() nothrow
   {
     return (cast(GdkEventKey*)this._cPtr).length;
   }
@@ -170,7 +167,7 @@ class EventKey
       Params:
         propval = the length of @string.
   */
-  @property void length(int propval)
+  @property void length(int propval) nothrow
   {
     (cast(GdkEventKey*)this._cPtr).length = propval;
   }
@@ -189,7 +186,7 @@ class EventKey
           NUL byte, in which case looking at @length is necessary to distinguish
           it from the an empty translation.
   */
-  @property string string_()
+  @property string string_() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdkEventKey*)this._cPtr).string_);
   }
@@ -209,7 +206,7 @@ class EventKey
             NUL byte, in which case looking at @length is necessary to distinguish
             it from the an empty translation.
   */
-  @property void string_(string propval)
+  @property void string_(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdkEventKey*)this._cPtr).string_);
     dToC(propval, cast(void*)&(cast(GdkEventKey*)this._cPtr).string_);
@@ -219,7 +216,7 @@ class EventKey
       Get `hardwareKeycode` field.
       Returns: the raw code of the key that was pressed or released.
   */
-  @property ushort hardwareKeycode()
+  @property ushort hardwareKeycode() nothrow
   {
     return (cast(GdkEventKey*)this._cPtr).hardwareKeycode;
   }
@@ -229,7 +226,7 @@ class EventKey
       Params:
         propval = the raw code of the key that was pressed or released.
   */
-  @property void hardwareKeycode(ushort propval)
+  @property void hardwareKeycode(ushort propval) nothrow
   {
     (cast(GdkEventKey*)this._cPtr).hardwareKeycode = propval;
   }
@@ -238,7 +235,7 @@ class EventKey
       Get `group` field.
       Returns: the keyboard group.
   */
-  @property ubyte group()
+  @property ubyte group() nothrow
   {
     return (cast(GdkEventKey*)this._cPtr).group;
   }
@@ -248,7 +245,7 @@ class EventKey
       Params:
         propval = the keyboard group.
   */
-  @property void group(ubyte propval)
+  @property void group(ubyte propval) nothrow
   {
     (cast(GdkEventKey*)this._cPtr).group = propval;
   }
@@ -258,7 +255,7 @@ class EventKey
       Returns: a flag that indicates if @hardware_keycode is mapped to a
           modifier. Since 2.10
   */
-  @property uint isModifier()
+  @property uint isModifier() nothrow
   {
     return (cast(GdkEventKey*)this._cPtr).isModifier;
   }
@@ -269,7 +266,7 @@ class EventKey
         propval = a flag that indicates if @hardware_keycode is mapped to a
             modifier. Since 2.10
   */
-  @property void isModifier(uint propval)
+  @property void isModifier(uint propval) nothrow
   {
     (cast(GdkEventKey*)this._cPtr).isModifier = propval;
   }

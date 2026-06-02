@@ -96,26 +96,26 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_column_view_get_type != &gidSymbolNotFound ? gtk_column_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ColumnView self()
+  override ColumnView self() nothrow
   {
     return this;
   }
@@ -124,7 +124,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get builder for [gtk.column_view.ColumnView]
       Returns: New builder object
   */
-  static ColumnViewGidBuilder builder()
+  static ColumnViewGidBuilder builder() nothrow
   {
     return new ColumnViewGidBuilder;
   }
@@ -133,7 +133,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `columns` property.
       Returns: The list of columns.
   */
-  @property gio.list_model.ListModel columns()
+  @property gio.list_model.ListModel columns() nothrow
   {
     return getColumns();
   }
@@ -142,7 +142,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `enableRubberband` property.
       Returns: Allow rubberband selection.
   */
-  @property bool enableRubberband()
+  @property bool enableRubberband() nothrow
   {
     return getEnableRubberband();
   }
@@ -152,7 +152,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = Allow rubberband selection.
   */
-  @property void enableRubberband(bool propval)
+  @property void enableRubberband(bool propval) nothrow
   {
     setEnableRubberband(propval);
   }
@@ -161,7 +161,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `headerFactory` property.
       Returns: Factory for creating header widgets.
   */
-  @property gtk.list_item_factory.ListItemFactory headerFactory()
+  @property gtk.list_item_factory.ListItemFactory headerFactory() nothrow
   {
     return getHeaderFactory();
   }
@@ -171,7 +171,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = Factory for creating header widgets.
   */
-  @property void headerFactory(gtk.list_item_factory.ListItemFactory propval)
+  @property void headerFactory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
     setHeaderFactory(propval);
   }
@@ -180,7 +180,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `model` property.
       Returns: Model for the items displayed.
   */
-  @property gtk.selection_model.SelectionModel model()
+  @property gtk.selection_model.SelectionModel model() nothrow
   {
     return getModel();
   }
@@ -190,7 +190,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = Model for the items displayed.
   */
-  @property void model(gtk.selection_model.SelectionModel propval)
+  @property void model(gtk.selection_model.SelectionModel propval) nothrow
   {
     setModel(propval);
   }
@@ -199,7 +199,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `reorderable` property.
       Returns: Whether columns are reorderable.
   */
-  @property bool reorderable()
+  @property bool reorderable() nothrow
   {
     return getReorderable();
   }
@@ -209,7 +209,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = Whether columns are reorderable.
   */
-  @property void reorderable(bool propval)
+  @property void reorderable(bool propval) nothrow
   {
     setReorderable(propval);
   }
@@ -218,7 +218,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `rowFactory` property.
       Returns: The factory used for configuring rows.
   */
-  @property gtk.list_item_factory.ListItemFactory rowFactory()
+  @property gtk.list_item_factory.ListItemFactory rowFactory() nothrow
   {
     return getRowFactory();
   }
@@ -228,7 +228,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = The factory used for configuring rows.
   */
-  @property void rowFactory(gtk.list_item_factory.ListItemFactory propval)
+  @property void rowFactory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
     setRowFactory(propval);
   }
@@ -237,7 +237,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `showColumnSeparators` property.
       Returns: Show separators between columns.
   */
-  @property bool showColumnSeparators()
+  @property bool showColumnSeparators() nothrow
   {
     return getShowColumnSeparators();
   }
@@ -247,7 +247,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = Show separators between columns.
   */
-  @property void showColumnSeparators(bool propval)
+  @property void showColumnSeparators(bool propval) nothrow
   {
     setShowColumnSeparators(propval);
   }
@@ -256,7 +256,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `showRowSeparators` property.
       Returns: Show separators between rows.
   */
-  @property bool showRowSeparators()
+  @property bool showRowSeparators() nothrow
   {
     return getShowRowSeparators();
   }
@@ -266,7 +266,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = Show separators between rows.
   */
-  @property void showRowSeparators(bool propval)
+  @property void showRowSeparators(bool propval) nothrow
   {
     setShowRowSeparators(propval);
   }
@@ -275,7 +275,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `singleClickActivate` property.
       Returns: Activate rows on single click and select them on hover.
   */
-  @property bool singleClickActivate()
+  @property bool singleClickActivate() nothrow
   {
     return getSingleClickActivate();
   }
@@ -285,7 +285,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = Activate rows on single click and select them on hover.
   */
-  @property void singleClickActivate(bool propval)
+  @property void singleClickActivate(bool propval) nothrow
   {
     setSingleClickActivate(propval);
   }
@@ -294,7 +294,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `sorter` property.
       Returns: Sorter with the sorting choices of the user.
   */
-  @property gtk.sorter.Sorter sorter()
+  @property gtk.sorter.Sorter sorter() nothrow
   {
     return getSorter();
   }
@@ -303,7 +303,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Get `tabBehavior` property.
       Returns: Behavior of the <kbd>Tab</kbd> key
   */
-  @property gtk.types.ListTabBehavior tabBehavior()
+  @property gtk.types.ListTabBehavior tabBehavior() nothrow
   {
     return getTabBehavior();
   }
@@ -313,7 +313,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         propval = Behavior of the <kbd>Tab</kbd> key
   */
-  @property void tabBehavior(gtk.types.ListTabBehavior propval)
+  @property void tabBehavior(gtk.types.ListTabBehavior propval) nothrow
   {
     setTabBehavior(propval);
   }
@@ -330,7 +330,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
         model = the list model to use
       Returns: a new [gtk.column_view.ColumnView]
   */
-  this(gtk.selection_model.SelectionModel model = null)
+  this(gtk.selection_model.SelectionModel model = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_column_view_new(model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(Yes.Dup) : null);
@@ -344,7 +344,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
         column = a [gtk.column_view_column.ColumnViewColumn] that hasn't been added to a
             [gtk.column_view.ColumnView] yet
   */
-  void appendColumn(gtk.column_view_column.ColumnViewColumn column)
+  void appendColumn(gtk.column_view_column.ColumnViewColumn column) nothrow
   {
     gtk_column_view_append_column(cast(GtkColumnView*)this._cPtr, column ? cast(GtkColumnViewColumn*)column._cPtr(No.Dup) : null);
   }
@@ -357,7 +357,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       ::items-changed signal.
       Returns: The list managing the columns
   */
-  gio.list_model.ListModel getColumns()
+  gio.list_model.ListModel getColumns() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_column_view_get_columns(cast(GtkColumnView*)this._cPtr);
@@ -369,7 +369,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Returns whether rows can be selected by dragging with the mouse.
       Returns: true if rubberband selection is enabled
   */
-  bool getEnableRubberband()
+  bool getEnableRubberband() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_column_view_get_enable_rubberband(cast(GtkColumnView*)this._cPtr);
@@ -380,7 +380,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Gets the factory that's currently used to populate section headers.
       Returns: The factory in use
   */
-  gtk.list_item_factory.ListItemFactory getHeaderFactory()
+  gtk.list_item_factory.ListItemFactory getHeaderFactory() nothrow
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_column_view_get_header_factory(cast(GtkColumnView*)this._cPtr);
@@ -392,7 +392,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Gets the model that's currently used to read the items displayed.
       Returns: The model in use
   */
-  gtk.selection_model.SelectionModel getModel()
+  gtk.selection_model.SelectionModel getModel() nothrow
   {
     GtkSelectionModel* _cretval;
     _cretval = gtk_column_view_get_model(cast(GtkColumnView*)this._cPtr);
@@ -404,7 +404,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Returns whether columns are reorderable.
       Returns: true if columns are reorderable
   */
-  bool getReorderable()
+  bool getReorderable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_column_view_get_reorderable(cast(GtkColumnView*)this._cPtr);
@@ -415,7 +415,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Gets the factory set via [gtk.column_view.ColumnView.setRowFactory].
       Returns: The factory
   */
-  gtk.list_item_factory.ListItemFactory getRowFactory()
+  gtk.list_item_factory.ListItemFactory getRowFactory() nothrow
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_column_view_get_row_factory(cast(GtkColumnView*)this._cPtr);
@@ -428,7 +428,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       between columns.
       Returns: true if the list shows column separators
   */
-  bool getShowColumnSeparators()
+  bool getShowColumnSeparators() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_column_view_get_show_column_separators(cast(GtkColumnView*)this._cPtr);
@@ -440,7 +440,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       between rows.
       Returns: true if the list shows separators
   */
-  bool getShowRowSeparators()
+  bool getShowRowSeparators() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_column_view_get_show_row_separators(cast(GtkColumnView*)this._cPtr);
@@ -452,7 +452,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       selected on hover.
       Returns: true if rows are activated on single click
   */
-  bool getSingleClickActivate()
+  bool getSingleClickActivate() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_column_view_get_single_click_activate(cast(GtkColumnView*)this._cPtr);
@@ -481,7 +481,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       ```
       Returns: the [gtk.sorter.Sorter] of self
   */
-  gtk.sorter.Sorter getSorter()
+  gtk.sorter.Sorter getSorter() nothrow
   {
     GtkSorter* _cretval;
     _cretval = gtk_column_view_get_sorter(cast(GtkColumnView*)this._cPtr);
@@ -493,7 +493,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Gets the behavior set for the <kbd>Tab</kbd> key.
       Returns: The behavior of the <kbd>Tab</kbd> key
   */
-  gtk.types.ListTabBehavior getTabBehavior()
+  gtk.types.ListTabBehavior getTabBehavior() nothrow
   {
     GtkListTabBehavior _cretval;
     _cretval = gtk_column_view_get_tab_behavior(cast(GtkColumnView*)this._cPtr);
@@ -510,7 +510,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
         position = the position to insert column at
         column = the [gtk.column_view_column.ColumnViewColumn] to insert
   */
-  void insertColumn(uint position, gtk.column_view_column.ColumnViewColumn column)
+  void insertColumn(uint position, gtk.column_view_column.ColumnViewColumn column) nothrow
   {
     gtk_column_view_insert_column(cast(GtkColumnView*)this._cPtr, position, column ? cast(GtkColumnViewColumn*)column._cPtr(No.Dup) : null);
   }
@@ -521,7 +521,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         column = a [gtk.column_view_column.ColumnViewColumn] that's part of self
   */
-  void removeColumn(gtk.column_view_column.ColumnViewColumn column)
+  void removeColumn(gtk.column_view_column.ColumnViewColumn column) nothrow
   {
     gtk_column_view_remove_column(cast(GtkColumnView*)this._cPtr, column ? cast(GtkColumnViewColumn*)column._cPtr(No.Dup) : null);
   }
@@ -541,7 +541,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
         scroll = details of how to perform
             the scroll operation or null to scroll into view
   */
-  void scrollTo(uint pos, gtk.column_view_column.ColumnViewColumn column, gtk.types.ListScrollFlags flags, gtk.scroll_info.ScrollInfo scroll = null)
+  void scrollTo(uint pos, gtk.column_view_column.ColumnViewColumn column, gtk.types.ListScrollFlags flags, gtk.scroll_info.ScrollInfo scroll = null) nothrow
   {
     gtk_column_view_scroll_to(cast(GtkColumnView*)this._cPtr, pos, column ? cast(GtkColumnViewColumn*)column._cPtr(No.Dup) : null, flags, scroll ? cast(GtkScrollInfo*)scroll._cPtr(Yes.Dup) : null);
   }
@@ -552,7 +552,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         enableRubberband = true to enable rubberband selection
   */
-  void setEnableRubberband(bool enableRubberband)
+  void setEnableRubberband(bool enableRubberband) nothrow
   {
     gtk_column_view_set_enable_rubberband(cast(GtkColumnView*)this._cPtr, enableRubberband);
   }
@@ -567,7 +567,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         factory = the factory to use
   */
-  void setHeaderFactory(gtk.list_item_factory.ListItemFactory factory = null)
+  void setHeaderFactory(gtk.list_item_factory.ListItemFactory factory = null) nothrow
   {
     gtk_column_view_set_header_factory(cast(GtkColumnView*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
   }
@@ -580,7 +580,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         model = the model to use
   */
-  void setModel(gtk.selection_model.SelectionModel model = null)
+  void setModel(gtk.selection_model.SelectionModel model = null) nothrow
   {
     gtk_column_view_set_model(cast(GtkColumnView*)this._cPtr, model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
@@ -591,7 +591,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         reorderable = whether columns should be reorderable
   */
-  void setReorderable(bool reorderable)
+  void setReorderable(bool reorderable) nothrow
   {
     gtk_column_view_set_reorderable(cast(GtkColumnView*)this._cPtr, reorderable);
   }
@@ -608,7 +608,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         factory = The row factory
   */
-  void setRowFactory(gtk.list_item_factory.ListItemFactory factory = null)
+  void setRowFactory(gtk.list_item_factory.ListItemFactory factory = null) nothrow
   {
     gtk_column_view_set_row_factory(cast(GtkColumnView*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
   }
@@ -620,7 +620,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         showColumnSeparators = true to show column separators
   */
-  void setShowColumnSeparators(bool showColumnSeparators)
+  void setShowColumnSeparators(bool showColumnSeparators) nothrow
   {
     gtk_column_view_set_show_column_separators(cast(GtkColumnView*)this._cPtr, showColumnSeparators);
   }
@@ -632,7 +632,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         showRowSeparators = true to show row separators
   */
-  void setShowRowSeparators(bool showRowSeparators)
+  void setShowRowSeparators(bool showRowSeparators) nothrow
   {
     gtk_column_view_set_show_row_separators(cast(GtkColumnView*)this._cPtr, showRowSeparators);
   }
@@ -644,7 +644,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         singleClickActivate = true to activate items on single click
   */
-  void setSingleClickActivate(bool singleClickActivate)
+  void setSingleClickActivate(bool singleClickActivate) nothrow
   {
     gtk_column_view_set_single_click_activate(cast(GtkColumnView*)this._cPtr, singleClickActivate);
   }
@@ -655,7 +655,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         tabBehavior = The desired tab behavior
   */
-  void setTabBehavior(gtk.types.ListTabBehavior tabBehavior)
+  void setTabBehavior(gtk.types.ListTabBehavior tabBehavior) nothrow
   {
     gtk_column_view_set_tab_behavior(cast(GtkColumnView*)this._cPtr, tabBehavior);
   }
@@ -678,7 +678,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
         column = the [gtk.column_view_column.ColumnViewColumn] to sort by
         direction = the direction to sort in
   */
-  void sortByColumn(gtk.column_view_column.ColumnViewColumn column, gtk.types.SortType direction)
+  void sortByColumn(gtk.column_view_column.ColumnViewColumn column, gtk.types.SortType direction) nothrow
   {
     gtk_column_view_sort_by_column(cast(GtkColumnView*)this._cPtr, column ? cast(GtkColumnViewColumn*)column._cPtr(No.Dup) : null, direction);
   }
@@ -705,14 +705,14 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.column_view.ColumnView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -724,7 +724,14 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.column_view.ColumnView.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -744,7 +751,7 @@ class ColumnViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrol
         propval = Allow rubberband selection.
       Returns: Builder instance for fluent chaining
   */
-  T enableRubberband(bool propval)
+  T enableRubberband(bool propval) nothrow
   {
     return setProperty("enable-rubberband", propval);
   }
@@ -755,7 +762,7 @@ class ColumnViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrol
         propval = Factory for creating header widgets.
       Returns: Builder instance for fluent chaining
   */
-  T headerFactory(gtk.list_item_factory.ListItemFactory propval)
+  T headerFactory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
     return setProperty("header-factory", propval);
   }
@@ -766,7 +773,7 @@ class ColumnViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrol
         propval = Model for the items displayed.
       Returns: Builder instance for fluent chaining
   */
-  T model(gtk.selection_model.SelectionModel propval)
+  T model(gtk.selection_model.SelectionModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -777,7 +784,7 @@ class ColumnViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrol
         propval = Whether columns are reorderable.
       Returns: Builder instance for fluent chaining
   */
-  T reorderable(bool propval)
+  T reorderable(bool propval) nothrow
   {
     return setProperty("reorderable", propval);
   }
@@ -788,7 +795,7 @@ class ColumnViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrol
         propval = The factory used for configuring rows.
       Returns: Builder instance for fluent chaining
   */
-  T rowFactory(gtk.list_item_factory.ListItemFactory propval)
+  T rowFactory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
     return setProperty("row-factory", propval);
   }
@@ -799,7 +806,7 @@ class ColumnViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrol
         propval = Show separators between columns.
       Returns: Builder instance for fluent chaining
   */
-  T showColumnSeparators(bool propval)
+  T showColumnSeparators(bool propval) nothrow
   {
     return setProperty("show-column-separators", propval);
   }
@@ -810,7 +817,7 @@ class ColumnViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrol
         propval = Show separators between rows.
       Returns: Builder instance for fluent chaining
   */
-  T showRowSeparators(bool propval)
+  T showRowSeparators(bool propval) nothrow
   {
     return setProperty("show-row-separators", propval);
   }
@@ -821,7 +828,7 @@ class ColumnViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrol
         propval = Activate rows on single click and select them on hover.
       Returns: Builder instance for fluent chaining
   */
-  T singleClickActivate(bool propval)
+  T singleClickActivate(bool propval) nothrow
   {
     return setProperty("single-click-activate", propval);
   }
@@ -832,7 +839,7 @@ class ColumnViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrol
         propval = Behavior of the <kbd>Tab</kbd> key
       Returns: Builder instance for fluent chaining
   */
-  T tabBehavior(gtk.types.ListTabBehavior propval)
+  T tabBehavior(gtk.types.ListTabBehavior propval) nothrow
   {
     return setProperty("tab-behavior", propval);
   }
@@ -845,7 +852,7 @@ final class ColumnViewGidBuilder : ColumnViewGidBuilderImpl!ColumnViewGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ColumnView build()
+  ColumnView build() nothrow
   {
     return new ColumnView(cast(void*)createGObject(ColumnView._getGType), No.Take);
   }

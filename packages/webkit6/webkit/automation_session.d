@@ -26,26 +26,26 @@ class AutomationSession : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_automation_session_get_type != &gidSymbolNotFound ? webkit_automation_session_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AutomationSession self()
+  override AutomationSession self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class AutomationSession : gobject.object.ObjectWrap
       Get builder for [webkit.automation_session.AutomationSession]
       Returns: New builder object
   */
-  static AutomationSessionGidBuilder builder()
+  static AutomationSessionGidBuilder builder() nothrow
   {
     return new AutomationSessionGidBuilder;
   }
@@ -63,7 +63,7 @@ class AutomationSession : gobject.object.ObjectWrap
       Get `id` property.
       Returns: The session unique identifier.
   */
-  @property string id()
+  @property string id() nothrow
   {
     return getId();
   }
@@ -74,7 +74,7 @@ class AutomationSession : gobject.object.ObjectWrap
       Get the #WebKitAutomationSession previously set with [webkit.automation_session.AutomationSession.setApplicationInfo].
       Returns: the #WebKitAutomationSession of session, or null if no one has been set.
   */
-  webkit.application_info.ApplicationInfo getApplicationInfo()
+  webkit.application_info.ApplicationInfo getApplicationInfo() nothrow
   {
     WebKitApplicationInfo* _cretval;
     _cretval = webkit_automation_session_get_application_info(cast(WebKitAutomationSession*)this._cPtr);
@@ -86,7 +86,7 @@ class AutomationSession : gobject.object.ObjectWrap
       Get the unique identifier of a #WebKitAutomationSession
       Returns: the unique identifier of session
   */
-  string getId()
+  string getId() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_automation_session_get_id(cast(WebKitAutomationSession*)this._cPtr);
@@ -107,7 +107,7 @@ class AutomationSession : gobject.object.ObjectWrap
       Params:
         info = a #WebKitApplicationInfo
   */
-  void setApplicationInfo(webkit.application_info.ApplicationInfo info)
+  void setApplicationInfo(webkit.application_info.ApplicationInfo info) nothrow
   {
     webkit_automation_session_set_application_info(cast(WebKitAutomationSession*)this._cPtr, info ? cast(WebKitApplicationInfo*)info._cPtr(No.Dup) : null);
   }
@@ -140,22 +140,30 @@ class AutomationSession : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCreateWebView(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectCreateWebView(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T : webkit.web_view.WebView)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.automation_session.AutomationSession)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      webkit.web_view.WebView _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.automation_session.AutomationSession.createWebView");
+      }
 
       setVal!(webkit.web_view.WebView)(_returnValue, _retval);
     }
@@ -180,13 +188,13 @@ class AutomationSession : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWillClose(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWillClose(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.automation_session.AutomationSession)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -195,7 +203,14 @@ class AutomationSession : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.automation_session.AutomationSession.willClose");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -213,7 +228,7 @@ class AutomationSessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
         propval = The session unique identifier.
       Returns: Builder instance for fluent chaining
   */
-  T id(string propval)
+  T id(string propval) nothrow
   {
     return setProperty("id", propval);
   }
@@ -226,7 +241,7 @@ final class AutomationSessionGidBuilder : AutomationSessionGidBuilderImpl!Automa
       Create object from builder.
       Returns: New object
   */
-  AutomationSession build()
+  AutomationSession build() nothrow
   {
     return new AutomationSession(cast(void*)createGObject(AutomationSession._getGType), No.Take);
   }

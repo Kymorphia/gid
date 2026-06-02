@@ -16,26 +16,26 @@ class GpgContext : gmime.crypto_context.CryptoContext
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_gpg_context_get_type != &gidSymbolNotFound ? g_mime_gpg_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GpgContext self()
+  override GpgContext self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class GpgContext : gmime.crypto_context.CryptoContext
       Get builder for [gmime.gpg_context.GpgContext]
       Returns: New builder object
   */
-  static GpgContextGidBuilder builder()
+  static GpgContextGidBuilder builder() nothrow
   {
     return new GpgContextGidBuilder;
   }
@@ -53,7 +53,7 @@ class GpgContext : gmime.crypto_context.CryptoContext
       Creates a new gpg crypto context object.
       Returns: a new gpg crypto context object.
   */
-  this()
+  this() nothrow
   {
     GMimeCryptoContext* _cretval;
     _cretval = g_mime_gpg_context_new();
@@ -73,7 +73,7 @@ final class GpgContextGidBuilder : GpgContextGidBuilderImpl!GpgContextGidBuilder
       Create object from builder.
       Returns: New object
   */
-  GpgContext build()
+  GpgContext build() nothrow
   {
     return new GpgContext(cast(void*)createGObject(GpgContext._getGType), Yes.Take);
   }

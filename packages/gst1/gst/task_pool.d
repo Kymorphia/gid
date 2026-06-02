@@ -20,26 +20,26 @@ class TaskPool : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_task_pool_get_type != &gidSymbolNotFound ? gst_task_pool_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TaskPool self()
+  override TaskPool self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class TaskPool : gst.object.ObjectWrap
       Get builder for [gst.task_pool.TaskPool]
       Returns: New builder object
   */
-  static TaskPoolGidBuilder builder()
+  static TaskPoolGidBuilder builder() nothrow
   {
     return new TaskPoolGidBuilder;
   }
@@ -58,7 +58,7 @@ class TaskPool : gst.object.ObjectWrap
       GThreadPool for threads.
       Returns: a new #GstTaskPool. [gst.object.ObjectWrap.unref] after usage.
   */
-  this()
+  this() nothrow
   {
     GstTaskPool* _cretval;
     _cretval = gst_task_pool_new();
@@ -71,7 +71,7 @@ class TaskPool : gst.object.ObjectWrap
       
       MT safe.
   */
-  void cleanup()
+  void cleanup() nothrow
   {
     gst_task_pool_cleanup(cast(GstTaskPool*)this._cPtr);
   }
@@ -90,7 +90,7 @@ class TaskPool : gst.object.ObjectWrap
       Params:
         id = the id
   */
-  void disposeHandle(void* id = null)
+  void disposeHandle(void* id = null) nothrow
   {
     gst_task_pool_dispose_handle(cast(GstTaskPool*)this._cPtr, id);
   }
@@ -106,7 +106,7 @@ class TaskPool : gst.object.ObjectWrap
       Params:
         id = the id
   */
-  void join(void* id = null)
+  void join(void* id = null) nothrow
   {
     gst_task_pool_join(cast(GstTaskPool*)this._cPtr, id);
   }
@@ -139,12 +139,19 @@ class TaskPool : gst.object.ObjectWrap
   */
   void* push(gst.types.TaskPoolFunction func)
   {
-    extern(C) void _funcCallback(void* userData)
+    extern(C) void _funcCallback(void* userData) nothrow
     {
       ptrThawGC(userData);
       auto _dlg = cast(gst.types.TaskPoolFunction*)userData;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.TaskPoolFunction");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -168,7 +175,7 @@ final class TaskPoolGidBuilder : TaskPoolGidBuilderImpl!TaskPoolGidBuilder
       Create object from builder.
       Returns: New object
   */
-  TaskPool build()
+  TaskPool build() nothrow
   {
     return new TaskPool(cast(void*)createGObject(TaskPool._getGType), Yes.Take);
   }

@@ -15,26 +15,26 @@ class UnionScalar : arrow.scalar.Scalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_union_scalar_get_type != &gidSymbolNotFound ? garrow_union_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UnionScalar self()
+  override UnionScalar self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class UnionScalar : arrow.scalar.Scalar
       Get builder for [arrow.union_scalar.UnionScalar]
       Returns: New builder object
   */
-  static UnionScalarGidBuilder builder()
+  static UnionScalarGidBuilder builder() nothrow
   {
     return new UnionScalarGidBuilder;
   }
 
   /** */
-  byte getTypeCode()
+  byte getTypeCode() nothrow
   {
     byte _retval;
     _retval = garrow_union_scalar_get_type_code(cast(GArrowUnionScalar*)this._cPtr);
@@ -57,7 +57,7 @@ class UnionScalar : arrow.scalar.Scalar
   }
 
   /** */
-  arrow.scalar.Scalar getValue()
+  arrow.scalar.Scalar getValue() nothrow
   {
     GArrowScalar* _cretval;
     _cretval = garrow_union_scalar_get_value(cast(GArrowUnionScalar*)this._cPtr);
@@ -76,7 +76,7 @@ class UnionScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
         propval = The value of the scalar.
       Returns: Builder instance for fluent chaining
   */
-  T value(arrow.scalar.Scalar propval)
+  T value(arrow.scalar.Scalar propval) nothrow
   {
     return setProperty("value", propval);
   }
@@ -89,7 +89,7 @@ final class UnionScalarGidBuilder : UnionScalarGidBuilderImpl!UnionScalarGidBuil
       Create object from builder.
       Returns: New object
   */
-  UnionScalar build()
+  UnionScalar build() nothrow
   {
     return new UnionScalar(cast(void*)createGObject(UnionScalar._getGType), No.Take);
   }

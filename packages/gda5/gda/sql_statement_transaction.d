@@ -18,11 +18,8 @@ class SqlStatementTransaction
   GdaSqlStatementTransaction _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.sql_statement_transaction.SqlStatementTransaction");
-
     _cInstance = *cast(GdaSqlStatementTransaction*)ptr;
 
     if (take)
@@ -30,7 +27,7 @@ class SqlStatementTransaction
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class SqlStatementTransaction
       Get `isolationLevel` field.
       Returns: isolation level as a #GdaTransactionIsolation
   */
-  @property gda.types.TransactionIsolation isolationLevel()
+  @property gda.types.TransactionIsolation isolationLevel() nothrow
   {
     return cast(gda.types.TransactionIsolation)(cast(GdaSqlStatementTransaction*)this._cPtr).isolationLevel;
   }
@@ -49,7 +46,7 @@ class SqlStatementTransaction
       Params:
         propval = isolation level as a #GdaTransactionIsolation
   */
-  @property void isolationLevel(gda.types.TransactionIsolation propval)
+  @property void isolationLevel(gda.types.TransactionIsolation propval) nothrow
   {
     (cast(GdaSqlStatementTransaction*)this._cPtr).isolationLevel = cast(GdaTransactionIsolation)propval;
   }
@@ -58,7 +55,7 @@ class SqlStatementTransaction
       Get `transMode` field.
       Returns: transaction mode (DEFERRED, IMMEDIATE, EXCLUSIVE, READ_WRITE, READ_ONLY)
   */
-  @property string transMode()
+  @property string transMode() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaSqlStatementTransaction*)this._cPtr).transMode);
   }
@@ -68,7 +65,7 @@ class SqlStatementTransaction
       Params:
         propval = transaction mode (DEFERRED, IMMEDIATE, EXCLUSIVE, READ_WRITE, READ_ONLY)
   */
-  @property void transMode(string propval)
+  @property void transMode(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaSqlStatementTransaction*)this._cPtr).transMode);
     dToC(propval, cast(void*)&(cast(GdaSqlStatementTransaction*)this._cPtr).transMode);
@@ -78,7 +75,7 @@ class SqlStatementTransaction
       Get `transName` field.
       Returns: transaction name
   */
-  @property string transName()
+  @property string transName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaSqlStatementTransaction*)this._cPtr).transName);
   }
@@ -88,7 +85,7 @@ class SqlStatementTransaction
       Params:
         propval = transaction name
   */
-  @property void transName(string propval)
+  @property void transName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaSqlStatementTransaction*)this._cPtr).transName);
     dToC(propval, cast(void*)&(cast(GdaSqlStatementTransaction*)this._cPtr).transName);

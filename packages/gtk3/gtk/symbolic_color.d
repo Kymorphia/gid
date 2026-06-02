@@ -31,32 +31,32 @@ class SymbolicColor : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_symbolic_color_get_type != &gidSymbolNotFound ? gtk_symbolic_color_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SymbolicColor self()
+  override SymbolicColor self() nothrow
   {
     return this;
   }
@@ -74,7 +74,7 @@ class SymbolicColor : gobject.boxed.Boxed
   
       Deprecated: #GtkSymbolicColor is deprecated.
   */
-  static gtk.symbolic_color.SymbolicColor newAlpha(gtk.symbolic_color.SymbolicColor color, double factor)
+  static gtk.symbolic_color.SymbolicColor newAlpha(gtk.symbolic_color.SymbolicColor color, double factor) nothrow
   {
     GtkSymbolicColor* _cretval;
     _cretval = gtk_symbolic_color_new_alpha(color ? cast(GtkSymbolicColor*)color._cPtr(No.Dup) : null, factor);
@@ -91,7 +91,7 @@ class SymbolicColor : gobject.boxed.Boxed
   
       Deprecated: #GtkSymbolicColor is deprecated.
   */
-  static gtk.symbolic_color.SymbolicColor newLiteral(gdk.rgba.RGBA color)
+  static gtk.symbolic_color.SymbolicColor newLiteral(gdk.rgba.RGBA color) nothrow
   {
     GtkSymbolicColor* _cretval;
     _cretval = gtk_symbolic_color_new_literal(cast(const(GdkRGBA)*)&color);
@@ -112,7 +112,7 @@ class SymbolicColor : gobject.boxed.Boxed
   
       Deprecated: #GtkSymbolicColor is deprecated.
   */
-  static gtk.symbolic_color.SymbolicColor newMix(gtk.symbolic_color.SymbolicColor color1, gtk.symbolic_color.SymbolicColor color2, double factor)
+  static gtk.symbolic_color.SymbolicColor newMix(gtk.symbolic_color.SymbolicColor color1, gtk.symbolic_color.SymbolicColor color2, double factor) nothrow
   {
     GtkSymbolicColor* _cretval;
     _cretval = gtk_symbolic_color_new_mix(color1 ? cast(GtkSymbolicColor*)color1._cPtr(No.Dup) : null, color2 ? cast(GtkSymbolicColor*)color2._cPtr(No.Dup) : null, factor);
@@ -131,7 +131,7 @@ class SymbolicColor : gobject.boxed.Boxed
   
       Deprecated: #GtkSymbolicColor is deprecated.
   */
-  static gtk.symbolic_color.SymbolicColor newName(string name)
+  static gtk.symbolic_color.SymbolicColor newName(string name) nothrow
   {
     GtkSymbolicColor* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -153,7 +153,7 @@ class SymbolicColor : gobject.boxed.Boxed
   
       Deprecated: #GtkSymbolicColor is deprecated.
   */
-  static gtk.symbolic_color.SymbolicColor newShade(gtk.symbolic_color.SymbolicColor color, double factor)
+  static gtk.symbolic_color.SymbolicColor newShade(gtk.symbolic_color.SymbolicColor color, double factor) nothrow
   {
     GtkSymbolicColor* _cretval;
     _cretval = gtk_symbolic_color_new_shade(color ? cast(GtkSymbolicColor*)color._cPtr(No.Dup) : null, factor);
@@ -176,7 +176,7 @@ class SymbolicColor : gobject.boxed.Boxed
   
       Deprecated: #GtkSymbolicColor is deprecated.
   */
-  static gtk.symbolic_color.SymbolicColor newWin32(string themeClass, int id)
+  static gtk.symbolic_color.SymbolicColor newWin32(string themeClass, int id) nothrow
   {
     GtkSymbolicColor* _cretval;
     const(char)* _themeClass = themeClass.toCString(No.Alloc);
@@ -203,7 +203,7 @@ class SymbolicColor : gobject.boxed.Boxed
   
       Deprecated: #GtkSymbolicColor is deprecated.
   */
-  bool resolve(gtk.style_properties.StyleProperties props, out gdk.rgba.RGBA resolvedColor)
+  bool resolve(gtk.style_properties.StyleProperties props, out gdk.rgba.RGBA resolvedColor) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_symbolic_color_resolve(cast(GtkSymbolicColor*)this._cPtr, props ? cast(GtkStyleProperties*)props._cPtr(No.Dup) : null, cast(GdkRGBA*)&resolvedColor);
@@ -220,7 +220,7 @@ class SymbolicColor : gobject.boxed.Boxed
   
       Deprecated: #GtkSymbolicColor is deprecated.
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gtk_symbolic_color_to_string(cast(GtkSymbolicColor*)this._cPtr);

@@ -15,11 +15,8 @@ class KeyEventStruct
   AtkKeyEventStruct _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for atk.key_event_struct.KeyEventStruct");
-
     _cInstance = *cast(AtkKeyEventStruct*)ptr;
 
     if (take)
@@ -27,7 +24,7 @@ class KeyEventStruct
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -36,7 +33,7 @@ class KeyEventStruct
       Get `type` field.
       Returns: An AtkKeyEventType, generally one of ATK_KEY_EVENT_PRESS or ATK_KEY_EVENT_RELEASE
   */
-  @property int type()
+  @property int type() nothrow
   {
     return (cast(AtkKeyEventStruct*)this._cPtr).type;
   }
@@ -46,7 +43,7 @@ class KeyEventStruct
       Params:
         propval = An AtkKeyEventType, generally one of ATK_KEY_EVENT_PRESS or ATK_KEY_EVENT_RELEASE
   */
-  @property void type(int propval)
+  @property void type(int propval) nothrow
   {
     (cast(AtkKeyEventStruct*)this._cPtr).type = propval;
   }
@@ -58,7 +55,7 @@ class KeyEventStruct
         GdkEventType.state, see
         http://developer.gnome.org/doc/API/2.0/gdk/gdk-Event-Structures.html#GdkEventKey
   */
-  @property uint state()
+  @property uint state() nothrow
   {
     return (cast(AtkKeyEventStruct*)this._cPtr).state;
   }
@@ -71,7 +68,7 @@ class KeyEventStruct
           GdkEventType.state, see
           http://developer.gnome.org/doc/API/2.0/gdk/gdk-Event-Structures.html#GdkEventKey
   */
-  @property void state(uint propval)
+  @property void state(uint propval) nothrow
   {
     (cast(AtkKeyEventStruct*)this._cPtr).state = propval;
   }
@@ -81,7 +78,7 @@ class KeyEventStruct
       Returns: A guint representing a keysym value corresponding to those used by GDK and X11: see
         /usr/X11/include/keysymdef.h.
   */
-  @property uint keyval()
+  @property uint keyval() nothrow
   {
     return (cast(AtkKeyEventStruct*)this._cPtr).keyval;
   }
@@ -92,7 +89,7 @@ class KeyEventStruct
         propval = A guint representing a keysym value corresponding to those used by GDK and X11: see
           /usr/X11/include/keysymdef.h.
   */
-  @property void keyval(uint propval)
+  @property void keyval(uint propval) nothrow
   {
     (cast(AtkKeyEventStruct*)this._cPtr).keyval = propval;
   }
@@ -101,7 +98,7 @@ class KeyEventStruct
       Get `length` field.
       Returns: The length of member #string.
   */
-  @property int length()
+  @property int length() nothrow
   {
     return (cast(AtkKeyEventStruct*)this._cPtr).length;
   }
@@ -111,7 +108,7 @@ class KeyEventStruct
       Params:
         propval = The length of member #string.
   */
-  @property void length(int propval)
+  @property void length(int propval) nothrow
   {
     (cast(AtkKeyEventStruct*)this._cPtr).length = propval;
   }
@@ -123,7 +120,7 @@ class KeyEventStruct
         Alphanumeric and printable keys will have the symbolic key name in this string member, for instance "A". "0",
         "semicolon", "aacute".  Keypad keys have the prefix "KP".
   */
-  @property string string_()
+  @property string string_() nothrow
   {
     return cToD!(string)(cast(void*)(cast(AtkKeyEventStruct*)this._cPtr).string_);
   }
@@ -136,7 +133,7 @@ class KeyEventStruct
           Alphanumeric and printable keys will have the symbolic key name in this string member, for instance "A". "0",
           "semicolon", "aacute".  Keypad keys have the prefix "KP".
   */
-  @property void string_(string propval)
+  @property void string_(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(AtkKeyEventStruct*)this._cPtr).string_);
     dToC(propval, cast(void*)&(cast(AtkKeyEventStruct*)this._cPtr).string_);
@@ -146,7 +143,7 @@ class KeyEventStruct
       Get `keycode` field.
       Returns: The raw hardware code that generated the key event.  This field is raraly useful.
   */
-  @property ushort keycode()
+  @property ushort keycode() nothrow
   {
     return (cast(AtkKeyEventStruct*)this._cPtr).keycode;
   }
@@ -156,7 +153,7 @@ class KeyEventStruct
       Params:
         propval = The raw hardware code that generated the key event.  This field is raraly useful.
   */
-  @property void keycode(ushort propval)
+  @property void keycode(ushort propval) nothrow
   {
     (cast(AtkKeyEventStruct*)this._cPtr).keycode = propval;
   }
@@ -167,7 +164,7 @@ class KeyEventStruct
         These timestamps are relative to a starting point which should be considered arbitrary,
         and only used to compare the dispatch times of events to one another.
   */
-  @property uint timestamp()
+  @property uint timestamp() nothrow
   {
     return (cast(AtkKeyEventStruct*)this._cPtr).timestamp;
   }
@@ -179,7 +176,7 @@ class KeyEventStruct
           These timestamps are relative to a starting point which should be considered arbitrary,
           and only used to compare the dispatch times of events to one another.
   */
-  @property void timestamp(uint propval)
+  @property void timestamp(uint propval) nothrow
   {
     (cast(AtkKeyEventStruct*)this._cPtr).timestamp = propval;
   }

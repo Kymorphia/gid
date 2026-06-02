@@ -29,26 +29,26 @@ class HoverDisplay : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_hover_display_get_type != &gidSymbolNotFound ? gtk_source_hover_display_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HoverDisplay self()
+  override HoverDisplay self() nothrow
   {
     return this;
   }
@@ -57,31 +57,31 @@ class HoverDisplay : gtk.widget.Widget
       Get builder for [gtksource.hover_display.HoverDisplay]
       Returns: New builder object
   */
-  static HoverDisplayGidBuilder builder()
+  static HoverDisplayGidBuilder builder() nothrow
   {
     return new HoverDisplayGidBuilder;
   }
 
   /** */
-  void append(gtk.widget.Widget child)
+  void append(gtk.widget.Widget child) nothrow
   {
     gtk_source_hover_display_append(cast(GtkSourceHoverDisplay*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /** */
-  override void insertAfter(gtk.widget.Widget child, gtk.widget.Widget sibling)
+  override void insertAfter(gtk.widget.Widget child, gtk.widget.Widget sibling) nothrow
   {
     gtk_source_hover_display_insert_after(cast(GtkSourceHoverDisplay*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling._cPtr(No.Dup) : null);
   }
 
   /** */
-  void prepend(gtk.widget.Widget child)
+  void prepend(gtk.widget.Widget child) nothrow
   {
     gtk_source_hover_display_prepend(cast(GtkSourceHoverDisplay*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /** */
-  void remove(gtk.widget.Widget child)
+  void remove(gtk.widget.Widget child) nothrow
   {
     gtk_source_hover_display_remove(cast(GtkSourceHoverDisplay*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -100,7 +100,7 @@ final class HoverDisplayGidBuilder : HoverDisplayGidBuilderImpl!HoverDisplayGidB
       Create object from builder.
       Returns: New object
   */
-  HoverDisplay build()
+  HoverDisplay build() nothrow
   {
     return new HoverDisplay(cast(void*)createGObject(HoverDisplay._getGType), No.Take);
   }

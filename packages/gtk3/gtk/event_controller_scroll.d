@@ -51,26 +51,26 @@ class EventControllerScroll : gtk.event_controller.EventController
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_event_controller_scroll_get_type != &gidSymbolNotFound ? gtk_event_controller_scroll_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EventControllerScroll self()
+  override EventControllerScroll self() nothrow
   {
     return this;
   }
@@ -79,7 +79,7 @@ class EventControllerScroll : gtk.event_controller.EventController
       Get builder for [gtk.event_controller_scroll.EventControllerScroll]
       Returns: New builder object
   */
-  static EventControllerScrollGidBuilder builder()
+  static EventControllerScrollGidBuilder builder() nothrow
   {
     return new EventControllerScrollGidBuilder;
   }
@@ -88,7 +88,7 @@ class EventControllerScroll : gtk.event_controller.EventController
       Get `flags` property.
       Returns: The flags affecting event controller behavior
   */
-  @property gtk.types.EventControllerScrollFlags flags()
+  @property gtk.types.EventControllerScrollFlags flags() nothrow
   {
     return getFlags();
   }
@@ -98,7 +98,7 @@ class EventControllerScroll : gtk.event_controller.EventController
       Params:
         propval = The flags affecting event controller behavior
   */
-  @property void flags(gtk.types.EventControllerScrollFlags propval)
+  @property void flags(gtk.types.EventControllerScrollFlags propval) nothrow
   {
     setFlags(propval);
   }
@@ -112,7 +112,7 @@ class EventControllerScroll : gtk.event_controller.EventController
         flags = behavior flags
       Returns: a new #GtkEventControllerScroll
   */
-  this(gtk.widget.Widget widget, gtk.types.EventControllerScrollFlags flags)
+  this(gtk.widget.Widget widget, gtk.types.EventControllerScrollFlags flags) nothrow
   {
     GtkEventController* _cretval;
     _cretval = gtk_event_controller_scroll_new(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, flags);
@@ -123,7 +123,7 @@ class EventControllerScroll : gtk.event_controller.EventController
       Gets the flags conditioning the scroll controller behavior.
       Returns: the controller flags.
   */
-  gtk.types.EventControllerScrollFlags getFlags()
+  gtk.types.EventControllerScrollFlags getFlags() nothrow
   {
     GtkEventControllerScrollFlags _cretval;
     _cretval = gtk_event_controller_scroll_get_flags(cast(GtkEventControllerScroll*)this._cPtr);
@@ -137,7 +137,7 @@ class EventControllerScroll : gtk.event_controller.EventController
       Params:
         flags = behavior flags
   */
-  void setFlags(gtk.types.EventControllerScrollFlags flags)
+  void setFlags(gtk.types.EventControllerScrollFlags flags) nothrow
   {
     gtk_event_controller_scroll_set_flags(cast(GtkEventControllerScroll*)this._cPtr, flags);
   }
@@ -164,7 +164,7 @@ class EventControllerScroll : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDecelerate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDecelerate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -172,7 +172,7 @@ class EventControllerScroll : gtk.event_controller.EventController
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.event_controller_scroll.EventControllerScroll)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -187,7 +187,14 @@ class EventControllerScroll : gtk.event_controller.EventController
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.event_controller_scroll.EventControllerScroll.decelerate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -214,7 +221,7 @@ class EventControllerScroll : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectScroll(T)(T callback, Flag!"After" after = No.After)
+  gulong connectScroll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -222,7 +229,7 @@ class EventControllerScroll : gtk.event_controller.EventController
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.event_controller_scroll.EventControllerScroll)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -237,7 +244,14 @@ class EventControllerScroll : gtk.event_controller.EventController
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.event_controller_scroll.EventControllerScroll.scroll");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -260,13 +274,13 @@ class EventControllerScroll : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectScrollBegin(T)(T callback, Flag!"After" after = No.After)
+  gulong connectScrollBegin(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.event_controller_scroll.EventControllerScroll)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -275,7 +289,14 @@ class EventControllerScroll : gtk.event_controller.EventController
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.event_controller_scroll.EventControllerScroll.scrollBegin");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -298,13 +319,13 @@ class EventControllerScroll : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectScrollEnd(T)(T callback, Flag!"After" after = No.After)
+  gulong connectScrollEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.event_controller_scroll.EventControllerScroll)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -313,7 +334,14 @@ class EventControllerScroll : gtk.event_controller.EventController
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.event_controller_scroll.EventControllerScroll.scrollEnd");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -331,7 +359,7 @@ class EventControllerScrollGidBuilderImpl(T) : gtk.event_controller.EventControl
         propval = The flags affecting event controller behavior
       Returns: Builder instance for fluent chaining
   */
-  T flags(gtk.types.EventControllerScrollFlags propval)
+  T flags(gtk.types.EventControllerScrollFlags propval) nothrow
   {
     return setProperty("flags", propval);
   }
@@ -344,7 +372,7 @@ final class EventControllerScrollGidBuilder : EventControllerScrollGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  EventControllerScroll build()
+  EventControllerScroll build() nothrow
   {
     return new EventControllerScroll(cast(void*)createGObject(EventControllerScroll._getGType), Yes.Take);
   }

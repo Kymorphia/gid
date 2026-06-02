@@ -40,7 +40,7 @@ template AppChooserT()
         See [GContentType][gio-GContentType]
         for more information about content types.
   */
-  @property string contentType()
+  @property string contentType() nothrow
   {
     return getContentType();
   }
@@ -50,7 +50,7 @@ template AppChooserT()
       Returns: a #GAppInfo for the currently selected
             application, or null if none is selected. Free with [gobject.object.ObjectWrap.unref]
   */
-  override gio.app_info.AppInfo getAppInfo()
+  override gio.app_info.AppInfo getAppInfo() nothrow
   {
     GAppInfo* _cretval;
     _cretval = gtk_app_chooser_get_app_info(cast(GtkAppChooser*)this._cPtr);
@@ -62,7 +62,7 @@ template AppChooserT()
       Returns the current value of the #GtkAppChooser:content-type property.
       Returns: the content type of self. Free with [glib.global.gfree]
   */
-  override string getContentType()
+  override string getContentType() nothrow
   {
     char* _cretval;
     _cretval = gtk_app_chooser_get_content_type(cast(GtkAppChooser*)this._cPtr);
@@ -73,7 +73,7 @@ template AppChooserT()
   /**
       Reloads the list of applications.
   */
-  override void refresh()
+  override void refresh() nothrow
   {
     gtk_app_chooser_refresh(cast(GtkAppChooser*)this._cPtr);
   }
@@ -92,7 +92,7 @@ template AppChooserGidBuilderT()
           for more information about content types.
       Returns: Builder instance for fluent chaining
   */
-  T contentType(string propval)
+  T contentType(string propval) nothrow
   {
     return setProperty("content-type", propval);
   }

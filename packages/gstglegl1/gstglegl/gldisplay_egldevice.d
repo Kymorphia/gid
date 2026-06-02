@@ -18,26 +18,26 @@ class GLDisplayEGLDevice : gstgl.gldisplay.GLDisplay
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_display_egl_device_get_type != &gidSymbolNotFound ? gst_gl_display_egl_device_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLDisplayEGLDevice self()
+  override GLDisplayEGLDevice self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class GLDisplayEGLDevice : gstgl.gldisplay.GLDisplay
       Get builder for [gstglegl.gldisplay_egldevice.GLDisplayEGLDevice]
       Returns: New builder object
   */
-  static GLDisplayEGLDeviceGidBuilder builder()
+  static GLDisplayEGLDeviceGidBuilder builder() nothrow
   {
     return new GLDisplayEGLDeviceGidBuilder;
   }
@@ -58,7 +58,7 @@ class GLDisplayEGLDevice : gstgl.gldisplay.GLDisplay
         deviceIndex = the index of device to use
       Returns: a new #GstGLDisplayEGLDevice or null
   */
-  this(uint deviceIndex)
+  this(uint deviceIndex) nothrow
   {
     GstGLDisplayEGLDevice* _cretval;
     _cretval = gst_gl_display_egl_device_new(deviceIndex);
@@ -73,7 +73,7 @@ class GLDisplayEGLDevice : gstgl.gldisplay.GLDisplay
         device = an existing EGLDeviceEXT
       Returns: a new #GstGLDisplayEGLDevice
   */
-  static gstglegl.gldisplay_egldevice.GLDisplayEGLDevice newWithEglDevice(void* device = null)
+  static gstglegl.gldisplay_egldevice.GLDisplayEGLDevice newWithEglDevice(void* device = null) nothrow
   {
     GstGLDisplayEGLDevice* _cretval;
     _cretval = gst_gl_display_egl_device_new_with_egl_device(device);
@@ -94,7 +94,7 @@ final class GLDisplayEGLDeviceGidBuilder : GLDisplayEGLDeviceGidBuilderImpl!GLDi
       Create object from builder.
       Returns: New object
   */
-  GLDisplayEGLDevice build()
+  GLDisplayEGLDevice build() nothrow
   {
     return new GLDisplayEGLDevice(cast(void*)createGObject(GLDisplayEGLDevice._getGType), Yes.Take);
   }

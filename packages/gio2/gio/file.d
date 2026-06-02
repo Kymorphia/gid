@@ -121,7 +121,7 @@ interface File
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_file_get_type != &gidSymbolNotFound ? g_file_get_type() : cast(GType)0;
@@ -139,7 +139,7 @@ interface File
             array of strings containing the path elements.
       Returns: a new #GFile
   */
-  static gio.file.File newBuildFilenamev(string[] args)
+  static gio.file.File newBuildFilenamev(string[] args) nothrow
   {
     GFile* _cretval;
     const(char)*[] _tmpargs;
@@ -174,7 +174,7 @@ interface File
       Returns: a new #GFile.
           Free the returned object with [gobject.object.ObjectWrap.unref].
   */
-  static gio.file.File newForCommandlineArg(string arg)
+  static gio.file.File newForCommandlineArg(string arg) nothrow
   {
     GFile* _cretval;
     const(char)* _arg = arg.toCString(No.Alloc);
@@ -201,7 +201,7 @@ interface File
         cwd = the current working directory of the commandline
       Returns: a new #GFile
   */
-  static gio.file.File newForCommandlineArgAndCwd(string arg, string cwd)
+  static gio.file.File newForCommandlineArgAndCwd(string arg, string cwd) nothrow
   {
     GFile* _cretval;
     const(char)* _arg = arg.toCString(No.Alloc);
@@ -222,7 +222,7 @@ interface File
       Returns: a new #GFile for the given path.
           Free the returned object with [gobject.object.ObjectWrap.unref].
   */
-  static gio.file.File newForPath(string path)
+  static gio.file.File newForPath(string path) nothrow
   {
     GFile* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -242,7 +242,7 @@ interface File
       Returns: a new #GFile for the given uri.
           Free the returned object with [gobject.object.ObjectWrap.unref].
   */
-  static gio.file.File newForUri(string uri)
+  static gio.file.File newForUri(string uri) nothrow
   {
     GFile* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -300,14 +300,21 @@ interface File
         cancellable = optional #GCancellable object, null to ignore
         callback = a #GAsyncReadyCallback to call when the request is done
   */
-  static void newTmpAsync(string tmpl, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  static void newTmpAsync(string tmpl, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _tmpl = tmpl.toCString(No.Alloc);
@@ -330,14 +337,21 @@ interface File
         cancellable = optional #GCancellable object, null to ignore
         callback = a #GAsyncReadyCallback to call when the request is done
   */
-  static void newTmpDirAsync(string tmpl, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  static void newTmpDirAsync(string tmpl, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _tmpl = tmpl.toCString(No.Alloc);
@@ -399,7 +413,7 @@ interface File
         parseName = a file name or path to be parsed
       Returns: a new #GFile.
   */
-  static gio.file.File parseName(string parseName)
+  static gio.file.File parseName(string parseName) nothrow
   {
     GFile* _cretval;
     const(char)* _parseName = parseName.toCString(No.Alloc);

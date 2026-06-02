@@ -34,7 +34,7 @@ interface AppChooser
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_app_chooser_get_type != &gidSymbolNotFound ? gtk_app_chooser_get_type() : cast(GType)0;
@@ -47,7 +47,7 @@ interface AppChooser
         See [GContentType][gio-GContentType]
         for more information about content types.
   */
-  @property string contentType();
+  @property string contentType() nothrow;
 
   /**
       Returns the currently selected application.
@@ -81,5 +81,5 @@ interface AppChooserGidBuilderImpl(T)
           for more information about content types.
       Returns: Builder instance for fluent chaining
   */
-  T contentType(string propval);
+  T contentType(string propval) nothrow;
 }

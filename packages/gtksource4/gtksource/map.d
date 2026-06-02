@@ -22,26 +22,26 @@ class Map : gtksource.view.View
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_map_get_type != &gidSymbolNotFound ? gtk_source_map_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Map self()
+  override Map self() nothrow
   {
     return this;
   }
@@ -50,31 +50,31 @@ class Map : gtksource.view.View
       Get builder for [gtksource.map.Map]
       Returns: New builder object
   */
-  static MapGidBuilder builder()
+  static MapGidBuilder builder() nothrow
   {
     return new MapGidBuilder;
   }
 
   /** */
-  @property pango.font_description.FontDescription fontDesc()
+  @property pango.font_description.FontDescription fontDesc() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(pango.font_description.FontDescription)("font-desc");
   }
 
   /** */
-  @property void fontDesc(pango.font_description.FontDescription propval)
+  @property void fontDesc(pango.font_description.FontDescription propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(pango.font_description.FontDescription)("font-desc", propval);
   }
 
   /** */
-  @property gtksource.view.View view()
+  @property gtksource.view.View view() nothrow
   {
     return getView();
   }
 
   /** */
-  @property void view(gtksource.view.View propval)
+  @property void view(gtksource.view.View propval) nothrow
   {
     setView(propval);
   }
@@ -83,7 +83,7 @@ class Map : gtksource.view.View
       Creates a new #GtkSourceMap.
       Returns: a new #GtkSourceMap.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_source_map_new();
@@ -94,7 +94,7 @@ class Map : gtksource.view.View
       Gets the #GtkSourceMap:view property, which is the view this widget is mapping.
       Returns: a #GtkSourceView or null.
   */
-  gtksource.view.View getView()
+  gtksource.view.View getView() nothrow
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_map_get_view(cast(GtkSourceMap*)this._cPtr);
@@ -108,7 +108,7 @@ class Map : gtksource.view.View
       Params:
         view = a #GtkSourceView
   */
-  void setView(gtksource.view.View view)
+  void setView(gtksource.view.View view) nothrow
   {
     gtk_source_map_set_view(cast(GtkSourceMap*)this._cPtr, view ? cast(GtkSourceView*)view._cPtr(No.Dup) : null);
   }
@@ -120,13 +120,13 @@ class MapGidBuilderImpl(T) : gtksource.view.ViewGidBuilderImpl!T
 
 
   /** */
-  T fontDesc(pango.font_description.FontDescription propval)
+  T fontDesc(pango.font_description.FontDescription propval) nothrow
   {
     return setProperty("font-desc", propval);
   }
 
   /** */
-  T view(gtksource.view.View propval)
+  T view(gtksource.view.View propval) nothrow
   {
     return setProperty("view", propval);
   }
@@ -139,7 +139,7 @@ final class MapGidBuilder : MapGidBuilderImpl!MapGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Map build()
+  Map build() nothrow
   {
     return new Map(cast(void*)createGObject(Map._getGType), No.Take);
   }

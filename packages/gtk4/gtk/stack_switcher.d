@@ -58,26 +58,26 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_stack_switcher_get_type != &gidSymbolNotFound ? gtk_stack_switcher_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StackSwitcher self()
+  override StackSwitcher self() nothrow
   {
     return this;
   }
@@ -86,7 +86,7 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
       Get builder for [gtk.stack_switcher.StackSwitcher]
       Returns: New builder object
   */
-  static StackSwitcherGidBuilder builder()
+  static StackSwitcherGidBuilder builder() nothrow
   {
     return new StackSwitcherGidBuilder;
   }
@@ -95,7 +95,7 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
       Get `stack` property.
       Returns: The stack.
   */
-  @property gtk.stack.Stack stack()
+  @property gtk.stack.Stack stack() nothrow
   {
     return getStack();
   }
@@ -105,7 +105,7 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         propval = The stack.
   */
-  @property void stack(gtk.stack.Stack propval)
+  @property void stack(gtk.stack.Stack propval) nothrow
   {
     setStack(propval);
   }
@@ -116,7 +116,7 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
       Create a new [gtk.stack_switcher.StackSwitcher].
       Returns: a new [gtk.stack_switcher.StackSwitcher].
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_stack_switcher_new();
@@ -127,7 +127,7 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
       Retrieves the stack.
       Returns: the stack
   */
-  gtk.stack.Stack getStack()
+  gtk.stack.Stack getStack() nothrow
   {
     GtkStack* _cretval;
     _cretval = gtk_stack_switcher_get_stack(cast(GtkStackSwitcher*)this._cPtr);
@@ -141,7 +141,7 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         stack = a [gtk.stack.Stack]
   */
-  void setStack(gtk.stack.Stack stack = null)
+  void setStack(gtk.stack.Stack stack = null) nothrow
   {
     gtk_stack_switcher_set_stack(cast(GtkStackSwitcher*)this._cPtr, stack ? cast(GtkStack*)stack._cPtr(No.Dup) : null);
   }
@@ -159,7 +159,7 @@ class StackSwitcherGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.or
         propval = The stack.
       Returns: Builder instance for fluent chaining
   */
-  T stack(gtk.stack.Stack propval)
+  T stack(gtk.stack.Stack propval) nothrow
   {
     return setProperty("stack", propval);
   }
@@ -172,7 +172,7 @@ final class StackSwitcherGidBuilder : StackSwitcherGidBuilderImpl!StackSwitcherG
       Create object from builder.
       Returns: New object
   */
-  StackSwitcher build()
+  StackSwitcher build() nothrow
   {
     return new StackSwitcher(cast(void*)createGObject(StackSwitcher._getGType), No.Take);
   }

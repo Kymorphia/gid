@@ -16,11 +16,8 @@ class RecentData
   GtkRecentData _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.recent_data.RecentData");
-
     _cInstance = *cast(GtkRecentData*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class RecentData
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class RecentData
       Returns: a UTF-8 encoded string, containing the name of the recently
           used resource to be displayed, or null;
   */
-  @property string displayName()
+  @property string displayName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).displayName);
   }
@@ -49,7 +46,7 @@ class RecentData
         propval = a UTF-8 encoded string, containing the name of the recently
             used resource to be displayed, or null;
   */
-  @property void displayName(string propval)
+  @property void displayName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).displayName);
     dToC(propval, cast(void*)&(cast(GtkRecentData*)this._cPtr).displayName);
@@ -60,7 +57,7 @@ class RecentData
       Returns: a UTF-8 encoded string, containing a short description of
           the resource, or null;
   */
-  @property string description()
+  @property string description() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).description);
   }
@@ -71,7 +68,7 @@ class RecentData
         propval = a UTF-8 encoded string, containing a short description of
             the resource, or null;
   */
-  @property void description(string propval)
+  @property void description(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).description);
     dToC(propval, cast(void*)&(cast(GtkRecentData*)this._cPtr).description);
@@ -81,7 +78,7 @@ class RecentData
       Get `mimeType` field.
       Returns: the MIME type of the resource;
   */
-  @property string mimeType()
+  @property string mimeType() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).mimeType);
   }
@@ -91,7 +88,7 @@ class RecentData
       Params:
         propval = the MIME type of the resource;
   */
-  @property void mimeType(string propval)
+  @property void mimeType(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).mimeType);
     dToC(propval, cast(void*)&(cast(GtkRecentData*)this._cPtr).mimeType);
@@ -102,7 +99,7 @@ class RecentData
       Returns: the name of the application that is registering this recently
           used resource;
   */
-  @property string appName()
+  @property string appName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).appName);
   }
@@ -113,7 +110,7 @@ class RecentData
         propval = the name of the application that is registering this recently
             used resource;
   */
-  @property void appName(string propval)
+  @property void appName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).appName);
     dToC(propval, cast(void*)&(cast(GtkRecentData*)this._cPtr).appName);
@@ -126,7 +123,7 @@ class RecentData
           to the resource file path and URI respectively when the command line
           is retrieved;
   */
-  @property string appExec()
+  @property string appExec() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).appExec);
   }
@@ -139,7 +136,7 @@ class RecentData
             to the resource file path and URI respectively when the command line
             is retrieved;
   */
-  @property void appExec(string propval)
+  @property void appExec(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).appExec);
     dToC(propval, cast(void*)&(cast(GtkRecentData*)this._cPtr).appExec);
@@ -150,7 +147,7 @@ class RecentData
       Returns: whether this resource should be displayed only by the
           applications that have registered it or not.
   */
-  @property bool isPrivate()
+  @property bool isPrivate() nothrow
   {
     return cast(bool)(cast(GtkRecentData*)this._cPtr).isPrivate;
   }
@@ -161,7 +158,7 @@ class RecentData
         propval = whether this resource should be displayed only by the
             applications that have registered it or not.
   */
-  @property void isPrivate(bool propval)
+  @property void isPrivate(bool propval) nothrow
   {
     (cast(GtkRecentData*)this._cPtr).isPrivate = propval;
   }

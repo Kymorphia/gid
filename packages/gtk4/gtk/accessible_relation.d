@@ -13,7 +13,7 @@ struct AccessibleRelation
   alias Enum = gtk.types.AccessibleRelation; ///
 
   /** */
-  static void initValue(gtk.types.AccessibleRelation relation, gobject.value.Value value)
+  static void initValue(gtk.types.AccessibleRelation relation, gobject.value.Value value) nothrow
   {
     gtk_accessible_relation_init_value(relation, value ? cast(GValue*)value._cPtr(No.Dup) : null);
   }

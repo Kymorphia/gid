@@ -38,7 +38,7 @@ template ChildProxyT()
         child = the newly added child
         name = the name of the new child
   */
-  override void childAdded(gobject.object.ObjectWrap child, string name)
+  override void childAdded(gobject.object.ObjectWrap child, string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gst_child_proxy_child_added(cast(GstChildProxy*)this._cPtr, child ? cast(GObject*)child._cPtr(No.Dup) : null, _name);
@@ -51,7 +51,7 @@ template ChildProxyT()
         child = the removed child
         name = the name of the old child
   */
-  override void childRemoved(gobject.object.ObjectWrap child, string name)
+  override void childRemoved(gobject.object.ObjectWrap child, string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gst_child_proxy_child_removed(cast(GstChildProxy*)this._cPtr, child ? cast(GObject*)child._cPtr(No.Dup) : null, _name);
@@ -65,7 +65,7 @@ template ChildProxyT()
       Returns: the child object or null if
             not found (index too high).
   */
-  override gobject.object.ObjectWrap getChildByIndex(uint index)
+  override gobject.object.ObjectWrap getChildByIndex(uint index) nothrow
   {
     GObject* _cretval;
     _cretval = gst_child_proxy_get_child_by_index(cast(GstChildProxy*)this._cPtr, index);
@@ -85,7 +85,7 @@ template ChildProxyT()
       Returns: the child object or null if
             not found.
   */
-  override gobject.object.ObjectWrap getChildByName(string name)
+  override gobject.object.ObjectWrap getChildByName(string name) nothrow
   {
     GObject* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -109,7 +109,7 @@ template ChildProxyT()
       Returns: the child object or null if
             not found.
   */
-  override gobject.object.ObjectWrap getChildByNameRecurse(string name)
+  override gobject.object.ObjectWrap getChildByNameRecurse(string name) nothrow
   {
     GObject* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -122,7 +122,7 @@ template ChildProxyT()
       Gets the number of child objects this parent contains.
       Returns: the number of child objects
   */
-  override uint getChildrenCount()
+  override uint getChildrenCount() nothrow
   {
     uint _retval;
     _retval = gst_child_proxy_get_children_count(cast(GstChildProxy*)this._cPtr);
@@ -137,7 +137,7 @@ template ChildProxyT()
         name = name of the property
         value = a #GValue that should take the result.
   */
-  override void getChildProxyProperty(string name, out gobject.value.Value value)
+  override void getChildProxyProperty(string name, out gobject.value.Value value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     GValue _value;
@@ -158,7 +158,7 @@ template ChildProxyT()
         case the values for pspec and target are not modified. Unref target after
         usage. For plain #GObject target is the same as object.
   */
-  override bool lookup(string name, out gobject.object.ObjectWrap target, out gobject.param_spec.ParamSpec pspec)
+  override bool lookup(string name, out gobject.object.ObjectWrap target, out gobject.param_spec.ParamSpec pspec) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -177,7 +177,7 @@ template ChildProxyT()
         name = name of the property to set
         value = new #GValue for the property
   */
-  override void setProperty(string name, gobject.value.Value value)
+  override void setProperty(string name, gobject.value.Value value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gst_child_proxy_set_property(cast(GstChildProxy*)this._cPtr, _name, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -202,7 +202,7 @@ template ChildProxyT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChildAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChildAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
@@ -210,7 +210,7 @@ template ChildProxyT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gst.child_proxy.ChildProxy)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -225,7 +225,14 @@ template ChildProxyT()
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.child_proxy.ChildProxy.childAdded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -251,7 +258,7 @@ template ChildProxyT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChildRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChildRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
@@ -259,7 +266,7 @@ template ChildProxyT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gst.child_proxy.ChildProxy)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -274,7 +281,14 @@ template ChildProxyT()
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.child_proxy.ChildProxy.childRemoved");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

@@ -68,7 +68,7 @@ interface DatagramBased
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_datagram_based_get_type != &gidSymbolNotFound ? g_datagram_based_get_type() : cast(GType)0;

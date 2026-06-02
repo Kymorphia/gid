@@ -118,26 +118,26 @@ class Adapter : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_adapter_get_type != &gidSymbolNotFound ? gst_adapter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Adapter self()
+  override Adapter self() nothrow
   {
     return this;
   }
@@ -146,7 +146,7 @@ class Adapter : gobject.object.ObjectWrap
       Get builder for [gstbase.adapter.Adapter]
       Returns: New builder object
   */
-  static AdapterGidBuilder builder()
+  static AdapterGidBuilder builder() nothrow
   {
     return new AdapterGidBuilder;
   }
@@ -155,7 +155,7 @@ class Adapter : gobject.object.ObjectWrap
       Creates a new #GstAdapter. Free with [gobject.object.ObjectWrap.unref].
       Returns: a new #GstAdapter
   */
-  this()
+  this() nothrow
   {
     GstAdapter* _cretval;
     _cretval = gst_adapter_new();
@@ -168,7 +168,7 @@ class Adapter : gobject.object.ObjectWrap
       returning null.
       Returns: number of bytes available in adapter
   */
-  size_t available()
+  size_t available() nothrow
   {
     size_t _retval;
     _retval = gst_adapter_available(cast(GstAdapter*)this._cPtr);
@@ -182,7 +182,7 @@ class Adapter : gobject.object.ObjectWrap
       Returns: number of bytes that are available in adapter without expensive
         operations
   */
-  size_t availableFast()
+  size_t availableFast() nothrow
   {
     size_t _retval;
     _retval = gst_adapter_available_fast(cast(GstAdapter*)this._cPtr);
@@ -192,7 +192,7 @@ class Adapter : gobject.object.ObjectWrap
   /**
       Removes all buffers from adapter.
   */
-  void clear()
+  void clear() nothrow
   {
     gst_adapter_clear(cast(GstAdapter*)this._cPtr);
   }
@@ -208,7 +208,7 @@ class Adapter : gobject.object.ObjectWrap
         size = the number of bytes to copy
       Returns: A new #GBytes structure containing the copied data.
   */
-  glib.bytes.Bytes copy(size_t offset, size_t size)
+  glib.bytes.Bytes copy(size_t offset, size_t size) nothrow
   {
     GBytes* _cretval;
     _cretval = gst_adapter_copy_bytes(cast(GstAdapter*)this._cPtr, offset, size);
@@ -225,7 +225,7 @@ class Adapter : gobject.object.ObjectWrap
       following buffers based on their size.
       Returns: The offset. Can be [gst.types.BUFFER_OFFSET_NONE].
   */
-  ulong distanceFromDiscont()
+  ulong distanceFromDiscont() nothrow
   {
     ulong _retval;
     _retval = gst_adapter_distance_from_discont(cast(GstAdapter*)this._cPtr);
@@ -237,7 +237,7 @@ class Adapter : gobject.object.ObjectWrap
       flag, or GST_CLOCK_TIME_NONE.
       Returns: The DTS at the last discont or GST_CLOCK_TIME_NONE.
   */
-  gst.types.ClockTime dtsAtDiscont()
+  gst.types.ClockTime dtsAtDiscont() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_adapter_dts_at_discont(cast(GstAdapter*)this._cPtr);
@@ -253,7 +253,7 @@ class Adapter : gobject.object.ObjectWrap
       Params:
         flush = the number of bytes to flush
   */
-  void flush(size_t flush)
+  void flush(size_t flush) nothrow
   {
     gst_adapter_flush(cast(GstAdapter*)this._cPtr, flush);
   }
@@ -274,7 +274,7 @@ class Adapter : gobject.object.ObjectWrap
             nbytes of the adapter, or null if nbytes bytes are not available.
             gst_buffer_unref() when no longer needed.
   */
-  gst.buffer.Buffer getBuffer(size_t nbytes)
+  gst.buffer.Buffer getBuffer(size_t nbytes) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_adapter_get_buffer(cast(GstAdapter*)this._cPtr, nbytes);
@@ -298,7 +298,7 @@ class Adapter : gobject.object.ObjectWrap
             nbytes of the adapter, or null if nbytes bytes are not available.
             gst_buffer_unref() when no longer needed.
   */
-  gst.buffer.Buffer getBufferFast(size_t nbytes)
+  gst.buffer.Buffer getBufferFast(size_t nbytes) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_adapter_get_buffer_fast(cast(GstAdapter*)this._cPtr, nbytes);
@@ -320,7 +320,7 @@ class Adapter : gobject.object.ObjectWrap
             the first nbytes of the adapter, or null if nbytes bytes are not
             available
   */
-  gst.buffer_list.BufferList getBufferList(size_t nbytes)
+  gst.buffer_list.BufferList getBufferList(size_t nbytes) nothrow
   {
     GstBufferList* _cretval;
     _cretval = gst_adapter_get_buffer_list(cast(GstAdapter*)this._cPtr, nbytes);
@@ -342,7 +342,7 @@ class Adapter : gobject.object.ObjectWrap
             buffers containing the first nbytes of the adapter, or null if nbytes
             bytes are not available
   */
-  gst.buffer.Buffer[] getList(size_t nbytes)
+  gst.buffer.Buffer[] getList(size_t nbytes) nothrow
   {
     GList* _cretval;
     _cretval = gst_adapter_get_list(cast(GstAdapter*)this._cPtr, nbytes);
@@ -392,7 +392,7 @@ class Adapter : gobject.object.ObjectWrap
         // -> returns -1
         ```
   */
-  ptrdiff_t maskedScanUint32(uint mask, uint pattern, size_t offset, size_t size)
+  ptrdiff_t maskedScanUint32(uint mask, uint pattern, size_t offset, size_t size) nothrow
   {
     ptrdiff_t _retval;
     _retval = gst_adapter_masked_scan_uint32(cast(GstAdapter*)this._cPtr, mask, pattern, offset, size);
@@ -420,7 +420,7 @@ class Adapter : gobject.object.ObjectWrap
         value = pointer to uint32 to return matching data
       Returns: offset of the first match, or -1 if no match was found.
   */
-  ptrdiff_t maskedScanUint32Peek(uint mask, uint pattern, size_t offset, size_t size, out uint value)
+  ptrdiff_t maskedScanUint32Peek(uint mask, uint pattern, size_t offset, size_t size, out uint value) nothrow
   {
     ptrdiff_t _retval;
     _retval = gst_adapter_masked_scan_uint32_peek(cast(GstAdapter*)this._cPtr, mask, pattern, offset, size, cast(uint*)&value);
@@ -432,7 +432,7 @@ class Adapter : gobject.object.ObjectWrap
       flag, or GST_BUFFER_OFFSET_NONE.
       Returns: The offset at the last discont or GST_BUFFER_OFFSET_NONE.
   */
-  ulong offsetAtDiscont()
+  ulong offsetAtDiscont() nothrow
   {
     ulong _retval;
     _retval = gst_adapter_offset_at_discont(cast(GstAdapter*)this._cPtr);
@@ -453,7 +453,7 @@ class Adapter : gobject.object.ObjectWrap
         distance = pointer to location for distance, or null
       Returns: The previously seen dts.
   */
-  gst.types.ClockTime prevDts(out ulong distance)
+  gst.types.ClockTime prevDts(out ulong distance) nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_adapter_prev_dts(cast(GstAdapter*)this._cPtr, cast(ulong*)&distance);
@@ -475,7 +475,7 @@ class Adapter : gobject.object.ObjectWrap
         distance = pointer to location for distance, or null
       Returns: The previously seen dts at given offset.
   */
-  gst.types.ClockTime prevDtsAtOffset(size_t offset, out ulong distance)
+  gst.types.ClockTime prevDtsAtOffset(size_t offset, out ulong distance) nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_adapter_prev_dts_at_offset(cast(GstAdapter*)this._cPtr, offset, cast(ulong*)&distance);
@@ -496,7 +496,7 @@ class Adapter : gobject.object.ObjectWrap
         distance = pointer to a location for distance, or null
       Returns: The previous seen offset.
   */
-  ulong prevOffset(out ulong distance)
+  ulong prevOffset(out ulong distance) nothrow
   {
     ulong _retval;
     _retval = gst_adapter_prev_offset(cast(GstAdapter*)this._cPtr, cast(ulong*)&distance);
@@ -517,7 +517,7 @@ class Adapter : gobject.object.ObjectWrap
         distance = pointer to location for distance, or null
       Returns: The previously seen pts.
   */
-  gst.types.ClockTime prevPts(out ulong distance)
+  gst.types.ClockTime prevPts(out ulong distance) nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_adapter_prev_pts(cast(GstAdapter*)this._cPtr, cast(ulong*)&distance);
@@ -539,7 +539,7 @@ class Adapter : gobject.object.ObjectWrap
         distance = pointer to location for distance, or null
       Returns: The previously seen pts at given offset.
   */
-  gst.types.ClockTime prevPtsAtOffset(size_t offset, out ulong distance)
+  gst.types.ClockTime prevPtsAtOffset(size_t offset, out ulong distance) nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_adapter_prev_pts_at_offset(cast(GstAdapter*)this._cPtr, offset, cast(ulong*)&distance);
@@ -551,7 +551,7 @@ class Adapter : gobject.object.ObjectWrap
       flag, or GST_CLOCK_TIME_NONE.
       Returns: The PTS at the last discont or GST_CLOCK_TIME_NONE.
   */
-  gst.types.ClockTime ptsAtDiscont()
+  gst.types.ClockTime ptsAtDiscont() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_adapter_pts_at_discont(cast(GstAdapter*)this._cPtr);
@@ -565,7 +565,7 @@ class Adapter : gobject.object.ObjectWrap
       Params:
         buf = a #GstBuffer to add to queue in the adapter
   */
-  void push(gst.buffer.Buffer buf)
+  void push(gst.buffer.Buffer buf) nothrow
   {
     gst_adapter_push(cast(GstAdapter*)this._cPtr, buf ? cast(GstBuffer*)buf._cPtr(Yes.Dup) : null);
   }
@@ -597,7 +597,7 @@ class Adapter : gobject.object.ObjectWrap
             nbytes of the adapter, or null if nbytes bytes are not available.
             gst_buffer_unref() when no longer needed.
   */
-  gst.buffer.Buffer takeBuffer(size_t nbytes)
+  gst.buffer.Buffer takeBuffer(size_t nbytes) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_adapter_take_buffer(cast(GstAdapter*)this._cPtr, nbytes);
@@ -636,7 +636,7 @@ class Adapter : gobject.object.ObjectWrap
             nbytes of the adapter, or null if nbytes bytes are not available.
             gst_buffer_unref() when no longer needed.
   */
-  gst.buffer.Buffer takeBufferFast(size_t nbytes)
+  gst.buffer.Buffer takeBufferFast(size_t nbytes) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_adapter_take_buffer_fast(cast(GstAdapter*)this._cPtr, nbytes);
@@ -659,7 +659,7 @@ class Adapter : gobject.object.ObjectWrap
             the first nbytes of the adapter, or null if nbytes bytes are not
             available
   */
-  gst.buffer_list.BufferList takeBufferList(size_t nbytes)
+  gst.buffer_list.BufferList takeBufferList(size_t nbytes) nothrow
   {
     GstBufferList* _cretval;
     _cretval = gst_adapter_take_buffer_list(cast(GstAdapter*)this._cPtr, nbytes);
@@ -682,7 +682,7 @@ class Adapter : gobject.object.ObjectWrap
             buffers containing the first nbytes of the adapter, or null if nbytes
             bytes are not available
   */
-  gst.buffer.Buffer[] takeList(size_t nbytes)
+  gst.buffer.Buffer[] takeList(size_t nbytes) nothrow
   {
     GList* _cretval;
     _cretval = gst_adapter_take_list(cast(GstAdapter*)this._cPtr, nbytes);
@@ -693,7 +693,7 @@ class Adapter : gobject.object.ObjectWrap
   /**
       Releases the memory obtained with the last [gstbase.adapter.Adapter.map].
   */
-  void unmap()
+  void unmap() nothrow
   {
     gst_adapter_unmap(cast(GstAdapter*)this._cPtr);
   }
@@ -711,7 +711,7 @@ final class AdapterGidBuilder : AdapterGidBuilderImpl!AdapterGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Adapter build()
+  Adapter build() nothrow
   {
     return new Adapter(cast(void*)createGObject(Adapter._getGType), Yes.Take);
   }

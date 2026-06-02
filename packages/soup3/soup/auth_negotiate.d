@@ -25,26 +25,26 @@ class AuthNegotiate : soup.auth.Auth
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_auth_negotiate_get_type != &gidSymbolNotFound ? soup_auth_negotiate_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AuthNegotiate self()
+  override AuthNegotiate self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class AuthNegotiate : soup.auth.Auth
       Get builder for [soup.auth_negotiate.AuthNegotiate]
       Returns: New builder object
   */
-  static AuthNegotiateGidBuilder builder()
+  static AuthNegotiateGidBuilder builder() nothrow
   {
     return new AuthNegotiateGidBuilder;
   }
@@ -66,7 +66,7 @@ class AuthNegotiate : soup.auth.Auth
       actually use this auth type.
       Returns: true if supported otherwise false
   */
-  static bool supported()
+  static bool supported() nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_auth_negotiate_supported();
@@ -86,7 +86,7 @@ final class AuthNegotiateGidBuilder : AuthNegotiateGidBuilderImpl!AuthNegotiateG
       Create object from builder.
       Returns: New object
   */
-  AuthNegotiate build()
+  AuthNegotiate build() nothrow
   {
     return new AuthNegotiate(cast(void*)createGObject(AuthNegotiate._getGType), No.Take);
   }

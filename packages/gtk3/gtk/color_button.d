@@ -37,26 +37,26 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_color_button_get_type != &gidSymbolNotFound ? gtk_color_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ColorButton self()
+  override ColorButton self() nothrow
   {
     return this;
   }
@@ -65,7 +65,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
       Get builder for [gtk.color_button.ColorButton]
       Returns: New builder object
   */
-  static ColorButtonGidBuilder builder()
+  static ColorButtonGidBuilder builder() nothrow
   {
     return new ColorButtonGidBuilder;
   }
@@ -74,7 +74,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
       Get `alpha` property.
       Returns: The selected opacity value (0 fully transparent, 65535 fully opaque).
   */
-  @property uint alpha()
+  @property uint alpha() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("alpha");
   }
@@ -84,7 +84,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
       Params:
         propval = The selected opacity value (0 fully transparent, 65535 fully opaque).
   */
-  @property void alpha(uint propval)
+  @property void alpha(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("alpha", propval);
   }
@@ -95,7 +95,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   
       Deprecated: Use #GtkColorButton:rgba instead.
   */
-  @property gdk.color.Color color()
+  @property gdk.color.Color color() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.color.Color)("color");
   }
@@ -107,7 +107,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   
       Deprecated: Use #GtkColorButton:rgba instead.
   */
-  @property void color(gdk.color.Color propval)
+  @property void color(gdk.color.Color propval) nothrow
   {
     setColor(propval);
   }
@@ -116,7 +116,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
       Get `rgba` property.
       Returns: The RGBA color.
   */
-  @property gdk.rgba.RGBA rgba()
+  @property gdk.rgba.RGBA rgba() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("rgba");
   }
@@ -126,7 +126,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
       Params:
         propval = The RGBA color.
   */
-  @property void rgba(gdk.rgba.RGBA propval)
+  @property void rgba(gdk.rgba.RGBA propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.rgba.RGBA)("rgba", propval);
   }
@@ -140,7 +140,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
         in the editor would be redundant, such as when the color
         button is already part of a palette.
   */
-  @property bool showEditor()
+  @property bool showEditor() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("show-editor");
   }
@@ -155,7 +155,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
           in the editor would be redundant, such as when the color
           button is already part of a palette.
   */
-  @property void showEditor(bool propval)
+  @property void showEditor(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("show-editor", propval);
   }
@@ -164,7 +164,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
       Get `title` property.
       Returns: The title of the color selection dialog
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -174,7 +174,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
       Params:
         propval = The title of the color selection dialog
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -185,7 +185,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
         rendered against a checkerboard background to show its opacity and
         the opacity slider is displayed in the color selection dialog.
   */
-  @property bool useAlpha()
+  @property bool useAlpha() nothrow
   {
     return getUseAlpha();
   }
@@ -197,7 +197,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
           rendered against a checkerboard background to show its opacity and
           the opacity slider is displayed in the color selection dialog.
   */
-  @property void useAlpha(bool propval)
+  @property void useAlpha(bool propval) nothrow
   {
     setUseAlpha(propval);
   }
@@ -214,7 +214,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
       color when the user finishes.
       Returns: a new color button
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_color_button_new();
@@ -230,7 +230,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   
       Deprecated: Use [gtk.color_button.ColorButton.newWithRgba] instead.
   */
-  static gtk.color_button.ColorButton newWithColor(gdk.color.Color color)
+  static gtk.color_button.ColorButton newWithColor(gdk.color.Color color) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_color_button_new_with_color(cast(const(GdkColor)*)&color);
@@ -245,7 +245,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
         rgba = A #GdkRGBA to set the current color with
       Returns: a new color button
   */
-  static gtk.color_button.ColorButton newWithRgba(gdk.rgba.RGBA rgba)
+  static gtk.color_button.ColorButton newWithRgba(gdk.rgba.RGBA rgba) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_color_button_new_with_rgba(cast(const(GdkRGBA)*)&rgba);
@@ -259,7 +259,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   
       Deprecated: Use [gtk.color_chooser.ColorChooser.getRgba] instead.
   */
-  ushort getAlpha()
+  ushort getAlpha() nothrow
   {
     ushort _retval;
     _retval = gtk_color_button_get_alpha(cast(GtkColorButton*)this._cPtr);
@@ -274,7 +274,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   
       Deprecated: Use [gtk.color_chooser.ColorChooser.getRgba] instead.
   */
-  void getColor(out gdk.color.Color color)
+  void getColor(out gdk.color.Color color) nothrow
   {
     gtk_color_button_get_color(cast(GtkColorButton*)this._cPtr, cast(GdkColor*)&color);
   }
@@ -283,7 +283,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
       Gets the title of the color selection dialog.
       Returns: An internal string, do not free the return value
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_color_button_get_title(cast(GtkColorButton*)this._cPtr);
@@ -297,7 +297,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   
       Deprecated: Use [gtk.color_chooser.ColorChooser.getUseAlpha] instead.
   */
-  bool getUseAlpha()
+  bool getUseAlpha() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_color_button_get_use_alpha(cast(GtkColorButton*)this._cPtr);
@@ -312,7 +312,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   
       Deprecated: Use [gtk.color_chooser.ColorChooser.setRgba] instead.
   */
-  void setAlpha(ushort alpha)
+  void setAlpha(ushort alpha) nothrow
   {
     gtk_color_button_set_alpha(cast(GtkColorButton*)this._cPtr, alpha);
   }
@@ -325,7 +325,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   
       Deprecated: Use [gtk.color_chooser.ColorChooser.setRgba] instead.
   */
-  void setColor(gdk.color.Color color)
+  void setColor(gdk.color.Color color) nothrow
   {
     gtk_color_button_set_color(cast(GtkColorButton*)this._cPtr, cast(const(GdkColor)*)&color);
   }
@@ -336,7 +336,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
       Params:
         title = String containing new window title
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_color_button_set_title(cast(GtkColorButton*)this._cPtr, _title);
@@ -350,7 +350,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   
       Deprecated: Use [gtk.color_chooser.ColorChooser.setUseAlpha] instead.
   */
-  void setUseAlpha(bool useAlpha)
+  void setUseAlpha(bool useAlpha) nothrow
   {
     gtk_color_button_set_use_alpha(cast(GtkColorButton*)this._cPtr, useAlpha);
   }
@@ -376,13 +376,13 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectColorSet(T)(T callback, Flag!"After" after = No.After)
+  gulong connectColorSet(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.color_button.ColorButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -391,7 +391,14 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.color_button.ColorButton.colorSet");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -411,7 +418,7 @@ class ColorButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtk.colo
         propval = The selected opacity value (0 fully transparent, 65535 fully opaque).
       Returns: Builder instance for fluent chaining
   */
-  T alpha(uint propval)
+  T alpha(uint propval) nothrow
   {
     return setProperty("alpha", propval);
   }
@@ -424,7 +431,7 @@ class ColorButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtk.colo
   
       Deprecated: Use #GtkColorButton:rgba instead.
   */
-  T color(gdk.color.Color propval)
+  T color(gdk.color.Color propval) nothrow
   {
     return setProperty("color", propval);
   }
@@ -435,7 +442,7 @@ class ColorButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtk.colo
         propval = The RGBA color.
       Returns: Builder instance for fluent chaining
   */
-  T rgba(gdk.rgba.RGBA propval)
+  T rgba(gdk.rgba.RGBA propval) nothrow
   {
     return setProperty("rgba", propval);
   }
@@ -451,7 +458,7 @@ class ColorButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtk.colo
           button is already part of a palette.
       Returns: Builder instance for fluent chaining
   */
-  T showEditor(bool propval)
+  T showEditor(bool propval) nothrow
   {
     return setProperty("show-editor", propval);
   }
@@ -462,7 +469,7 @@ class ColorButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtk.colo
         propval = The title of the color selection dialog
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -475,7 +482,7 @@ class ColorButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtk.colo
           the opacity slider is displayed in the color selection dialog.
       Returns: Builder instance for fluent chaining
   */
-  T useAlpha(bool propval)
+  T useAlpha(bool propval) nothrow
   {
     return setProperty("use-alpha", propval);
   }
@@ -488,7 +495,7 @@ final class ColorButtonGidBuilder : ColorButtonGidBuilderImpl!ColorButtonGidBuil
       Create object from builder.
       Returns: New object
   */
-  ColorButton build()
+  ColorButton build() nothrow
   {
     return new ColorButton(cast(void*)createGObject(ColorButton._getGType), No.Take);
   }

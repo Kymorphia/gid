@@ -13,11 +13,8 @@ class ClassClass
   JSCClassClass _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for javascriptcore.class_class.ClassClass");
-
     _cInstance = *cast(JSCClassClass*)ptr;
 
     if (take)
@@ -25,7 +22,7 @@ class ClassClass
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }

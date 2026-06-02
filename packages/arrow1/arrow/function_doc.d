@@ -14,26 +14,26 @@ class FunctionDoc : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_function_doc_get_type != &gidSymbolNotFound ? garrow_function_doc_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FunctionDoc self()
+  override FunctionDoc self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class FunctionDoc : gobject.object.ObjectWrap
       Get builder for [arrow.function_doc.FunctionDoc]
       Returns: New builder object
   */
-  static FunctionDocGidBuilder builder()
+  static FunctionDocGidBuilder builder() nothrow
   {
     return new FunctionDocGidBuilder;
   }
 
   /** */
-  string[] getArgNames()
+  string[] getArgNames() nothrow
   {
     char** _cretval;
     _cretval = garrow_function_doc_get_arg_names(cast(GArrowFunctionDoc*)this._cPtr);
@@ -68,7 +68,7 @@ class FunctionDoc : gobject.object.ObjectWrap
   }
 
   /** */
-  string getDescription()
+  string getDescription() nothrow
   {
     char* _cretval;
     _cretval = garrow_function_doc_get_description(cast(GArrowFunctionDoc*)this._cPtr);
@@ -77,7 +77,7 @@ class FunctionDoc : gobject.object.ObjectWrap
   }
 
   /** */
-  string getOptionsClassName()
+  string getOptionsClassName() nothrow
   {
     char* _cretval;
     _cretval = garrow_function_doc_get_options_class_name(cast(GArrowFunctionDoc*)this._cPtr);
@@ -86,7 +86,7 @@ class FunctionDoc : gobject.object.ObjectWrap
   }
 
   /** */
-  string getSummary()
+  string getSummary() nothrow
   {
     char* _cretval;
     _cretval = garrow_function_doc_get_summary(cast(GArrowFunctionDoc*)this._cPtr);
@@ -100,7 +100,7 @@ class FunctionDocGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T doc(void* propval)
+  T doc(void* propval) nothrow
   {
     return setProperty("doc", propval);
   }
@@ -113,7 +113,7 @@ final class FunctionDocGidBuilder : FunctionDocGidBuilderImpl!FunctionDocGidBuil
       Create object from builder.
       Returns: New object
   */
-  FunctionDoc build()
+  FunctionDoc build() nothrow
   {
     return new FunctionDoc(cast(void*)createGObject(FunctionDoc._getGType), No.Take);
   }

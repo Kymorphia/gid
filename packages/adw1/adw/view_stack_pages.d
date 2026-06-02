@@ -23,26 +23,26 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_view_stack_pages_get_type != &gidSymbolNotFound ? adw_view_stack_pages_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ViewStackPages self()
+  override ViewStackPages self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Get builder for [adw.view_stack_pages.ViewStackPages]
       Returns: New builder object
   */
-  static ViewStackPagesGidBuilder builder()
+  static ViewStackPagesGidBuilder builder() nothrow
   {
     return new ViewStackPagesGidBuilder;
   }
@@ -65,7 +65,7 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
         
         This can be used to keep an up-to-date view of the visible child.
   */
-  @property adw.view_stack_page.ViewStackPage selectedPage()
+  @property adw.view_stack_page.ViewStackPage selectedPage() nothrow
   {
     return getSelectedPage();
   }
@@ -80,7 +80,7 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
           
           This can be used to keep an up-to-date view of the visible child.
   */
-  @property void selectedPage(adw.view_stack_page.ViewStackPage propval)
+  @property void selectedPage(adw.view_stack_page.ViewStackPage propval) nothrow
   {
     setSelectedPage(propval);
   }
@@ -96,7 +96,7 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Returns `NULL` if there's no selected page.
       Returns: the stack page
   */
-  adw.view_stack_page.ViewStackPage getSelectedPage()
+  adw.view_stack_page.ViewStackPage getSelectedPage() nothrow
   {
     AdwViewStackPage* _cretval;
     _cretval = adw_view_stack_pages_get_selected_page(cast(AdwViewStackPages*)this._cPtr);
@@ -112,7 +112,7 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
       Params:
         page = a stack page within the associated stack
   */
-  void setSelectedPage(adw.view_stack_page.ViewStackPage page)
+  void setSelectedPage(adw.view_stack_page.ViewStackPage page) nothrow
   {
     adw_view_stack_pages_set_selected_page(cast(AdwViewStackPages*)this._cPtr, page ? cast(AdwViewStackPage*)page._cPtr(No.Dup) : null);
   }
@@ -136,7 +136,7 @@ class ViewStackPagesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           This can be used to keep an up-to-date view of the visible child.
       Returns: Builder instance for fluent chaining
   */
-  T selectedPage(adw.view_stack_page.ViewStackPage propval)
+  T selectedPage(adw.view_stack_page.ViewStackPage propval) nothrow
   {
     return setProperty("selected-page", propval);
   }
@@ -149,7 +149,7 @@ final class ViewStackPagesGidBuilder : ViewStackPagesGidBuilderImpl!ViewStackPag
       Create object from builder.
       Returns: New object
   */
-  ViewStackPages build()
+  ViewStackPages build() nothrow
   {
     return new ViewStackPages(cast(void*)createGObject(ViewStackPages._getGType), No.Take);
   }

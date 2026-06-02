@@ -20,7 +20,7 @@ struct TocEntryType
            only for debugging purpose and should not be displayed in a user
            interface.
   */
-  static string getNick(gst.types.TocEntryType type)
+  static string getNick(gst.types.TocEntryType type) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_toc_entry_type_get_nick(type);

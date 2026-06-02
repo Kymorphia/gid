@@ -25,26 +25,26 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_object_skeleton_get_type != &gidSymbolNotFound ? g_dbus_object_skeleton_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DBusObjectSkeleton self()
+  override DBusObjectSkeleton self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
       Get builder for [gio.dbus_object_skeleton.DBusObjectSkeleton]
       Returns: New builder object
   */
-  static DBusObjectSkeletonGidBuilder builder()
+  static DBusObjectSkeletonGidBuilder builder() nothrow
   {
     return new DBusObjectSkeletonGidBuilder;
   }
@@ -62,7 +62,7 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
       Get `gObjectPath` property.
       Returns: The object path where the object is exported.
   */
-  @property string gObjectPath()
+  @property string gObjectPath() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("g-object-path");
   }
@@ -72,7 +72,7 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
       Params:
         propval = The object path where the object is exported.
   */
-  @property void gObjectPath(string propval)
+  @property void gObjectPath(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("g-object-path", propval);
   }
@@ -86,7 +86,7 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
         objectPath = An object path.
       Returns: A #GDBusObjectSkeleton. Free with [gobject.object.ObjectWrap.unref].
   */
-  this(string objectPath)
+  this(string objectPath) nothrow
   {
     GDBusObjectSkeleton* _cretval;
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
@@ -106,7 +106,7 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
       Params:
         interface_ = A #GDBusInterfaceSkeleton.
   */
-  void addInterface(gio.dbus_interface_skeleton.DBusInterfaceSkeleton interface_)
+  void addInterface(gio.dbus_interface_skeleton.DBusInterfaceSkeleton interface_) nothrow
   {
     g_dbus_object_skeleton_add_interface(cast(GDBusObjectSkeleton*)this._cPtr, interface_ ? cast(GDBusInterfaceSkeleton*)interface_._cPtr(No.Dup) : null);
   }
@@ -116,7 +116,7 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
       interfaces belonging to object. See that method for when flushing
       is useful.
   */
-  void flush()
+  void flush() nothrow
   {
     g_dbus_object_skeleton_flush(cast(GDBusObjectSkeleton*)this._cPtr);
   }
@@ -127,7 +127,7 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
       Params:
         interface_ = A #GDBusInterfaceSkeleton.
   */
-  void removeInterface(gio.dbus_interface_skeleton.DBusInterfaceSkeleton interface_)
+  void removeInterface(gio.dbus_interface_skeleton.DBusInterfaceSkeleton interface_) nothrow
   {
     g_dbus_object_skeleton_remove_interface(cast(GDBusObjectSkeleton*)this._cPtr, interface_ ? cast(GDBusInterfaceSkeleton*)interface_._cPtr(No.Dup) : null);
   }
@@ -141,7 +141,7 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
       Params:
         interfaceName = A D-Bus interface name.
   */
-  void removeInterfaceByName(string interfaceName)
+  void removeInterfaceByName(string interfaceName) nothrow
   {
     const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
     g_dbus_object_skeleton_remove_interface_by_name(cast(GDBusObjectSkeleton*)this._cPtr, _interfaceName);
@@ -153,7 +153,7 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
       Params:
         objectPath = A valid D-Bus object path.
   */
-  void setObjectPath(string objectPath)
+  void setObjectPath(string objectPath) nothrow
   {
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
     g_dbus_object_skeleton_set_object_path(cast(GDBusObjectSkeleton*)this._cPtr, _objectPath);
@@ -186,7 +186,7 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAuthorizeMethod(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAuthorizeMethod(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.dbus_interface_skeleton.DBusInterfaceSkeleton)))
@@ -194,11 +194,12 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.dbus_object_skeleton.DBusObjectSkeleton)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -209,7 +210,14 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.dbus_object_skeleton.DBusObjectSkeleton.authorizeMethod");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -231,7 +239,7 @@ class DBusObjectSkeletonGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
         propval = The object path where the object is exported.
       Returns: Builder instance for fluent chaining
   */
-  T gObjectPath(string propval)
+  T gObjectPath(string propval) nothrow
   {
     return setProperty("g-object-path", propval);
   }
@@ -244,7 +252,7 @@ final class DBusObjectSkeletonGidBuilder : DBusObjectSkeletonGidBuilderImpl!DBus
       Create object from builder.
       Returns: New object
   */
-  DBusObjectSkeleton build()
+  DBusObjectSkeleton build() nothrow
   {
     return new DBusObjectSkeleton(cast(void*)createGObject(DBusObjectSkeleton._getGType), Yes.Take);
   }

@@ -135,26 +135,26 @@ class BaseSrc : gst.element.Element
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_base_src_get_type != &gidSymbolNotFound ? gst_base_src_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BaseSrc self()
+  override BaseSrc self() nothrow
   {
     return this;
   }
@@ -163,7 +163,7 @@ class BaseSrc : gst.element.Element
       Get builder for [gstbase.base_src.BaseSrc]
       Returns: New builder object
   */
-  static BaseSrcGidBuilder builder()
+  static BaseSrcGidBuilder builder() nothrow
   {
     return new BaseSrcGidBuilder;
   }
@@ -172,7 +172,7 @@ class BaseSrc : gst.element.Element
       Get `automaticEos` property.
       Returns: See [gstbase.base_src.BaseSrc.setAutomaticEos]
   */
-  @property bool automaticEos()
+  @property bool automaticEos() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("automatic-eos");
   }
@@ -182,55 +182,55 @@ class BaseSrc : gst.element.Element
       Params:
         propval = See [gstbase.base_src.BaseSrc.setAutomaticEos]
   */
-  @property void automaticEos(bool propval)
+  @property void automaticEos(bool propval) nothrow
   {
     setAutomaticEos(propval);
   }
 
   /** */
-  @property uint blocksize()
+  @property uint blocksize() nothrow
   {
     return getBlocksize();
   }
 
   /** */
-  @property void blocksize(uint propval)
+  @property void blocksize(uint propval) nothrow
   {
     setBlocksize(propval);
   }
 
   /** */
-  @property bool doTimestamp()
+  @property bool doTimestamp() nothrow
   {
     return getDoTimestamp();
   }
 
   /** */
-  @property void doTimestamp(bool propval)
+  @property void doTimestamp(bool propval) nothrow
   {
     setDoTimestamp(propval);
   }
 
   /** */
-  @property int numBuffers()
+  @property int numBuffers() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("num-buffers");
   }
 
   /** */
-  @property void numBuffers(int propval)
+  @property void numBuffers(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("num-buffers", propval);
   }
 
   /** */
-  @property bool typefind()
+  @property bool typefind() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("typefind");
   }
 
   /** */
-  @property void typefind(bool propval)
+  @property void typefind(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("typefind", propval);
   }
@@ -246,7 +246,7 @@ class BaseSrc : gst.element.Element
           used
         params = the #GstAllocationParams of allocator
   */
-  void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
+  void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params) nothrow
   {
     GstAllocator* _allocator;
     gst_base_src_get_allocator(cast(GstBaseSrc*)this._cPtr, &_allocator, cast(GstAllocationParams*)&params);
@@ -257,7 +257,7 @@ class BaseSrc : gst.element.Element
       Get the number of bytes that src will push out with each buffer.
       Returns: the number of bytes pushed with each buffer.
   */
-  uint getBlocksize()
+  uint getBlocksize() nothrow
   {
     uint _retval;
     _retval = gst_base_src_get_blocksize(cast(GstBaseSrc*)this._cPtr);
@@ -265,7 +265,7 @@ class BaseSrc : gst.element.Element
   }
 
   /** */
-  gst.buffer_pool.BufferPool getBufferPool()
+  gst.buffer_pool.BufferPool getBufferPool() nothrow
   {
     GstBufferPool* _cretval;
     _cretval = gst_base_src_get_buffer_pool(cast(GstBaseSrc*)this._cPtr);
@@ -277,7 +277,7 @@ class BaseSrc : gst.element.Element
       Query if src timestamps outgoing buffers based on the current running_time.
       Returns: true if the base class will automatically timestamp outgoing buffers.
   */
-  bool getDoTimestamp()
+  bool getDoTimestamp() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_base_src_get_do_timestamp(cast(GstBaseSrc*)this._cPtr);
@@ -288,7 +288,7 @@ class BaseSrc : gst.element.Element
       Get the current async behaviour of src. See also [gstbase.base_src.BaseSrc.setAsync].
       Returns: true if src is operating in async mode.
   */
-  bool isAsync()
+  bool isAsync() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_base_src_is_async(cast(GstBaseSrc*)this._cPtr);
@@ -299,7 +299,7 @@ class BaseSrc : gst.element.Element
       Check if an element is in live mode.
       Returns: true if element is in live mode.
   */
-  bool isLive()
+  bool isLive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_base_src_is_live(cast(GstBaseSrc*)this._cPtr);
@@ -316,7 +316,7 @@ class BaseSrc : gst.element.Element
       buffer is allocated.
       Returns: true if the negotiation succeeded, else false.
   */
-  bool negotiate()
+  bool negotiate() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_base_src_negotiate(cast(GstBaseSrc*)this._cPtr);
@@ -339,7 +339,7 @@ class BaseSrc : gst.element.Element
   
       Deprecated: Use [gstbase.base_src.BaseSrc.newSegment]
   */
-  bool newSeamlessSegment(long start, long stop, long time)
+  bool newSeamlessSegment(long start, long stop, long time) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_base_src_new_seamless_segment(cast(GstBaseSrc*)this._cPtr, start, stop, time);
@@ -361,7 +361,7 @@ class BaseSrc : gst.element.Element
         segment = a pointer to a #GstSegment
       Returns: true if preparation of new segment succeeded.
   */
-  bool newSegment(gst.segment.Segment segment)
+  bool newSegment(gst.segment.Segment segment) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_base_src_new_segment(cast(GstBaseSrc*)this._cPtr, cast(const(GstSegment)*)&segment);
@@ -388,7 +388,7 @@ class BaseSrc : gst.element.Element
         segment = a pointer to a #GstSegment
       Returns: true if sending of new segment succeeded.
   */
-  bool pushSegment(gst.segment.Segment segment)
+  bool pushSegment(gst.segment.Segment segment) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_base_src_push_segment(cast(GstBaseSrc*)this._cPtr, cast(const(GstSegment)*)&segment);
@@ -409,7 +409,7 @@ class BaseSrc : gst.element.Element
         maxLatency = the max latency of the source
       Returns: true if the query succeeded.
   */
-  bool queryLatency(out bool live, out gst.types.ClockTime minLatency, out gst.types.ClockTime maxLatency)
+  bool queryLatency(out bool live, out gst.types.ClockTime minLatency, out gst.types.ClockTime maxLatency) nothrow
   {
     bool _retval;
     gboolean _live;
@@ -427,7 +427,7 @@ class BaseSrc : gst.element.Element
       Params:
         async = new async mode
   */
-  void setAsync(bool async)
+  void setAsync(bool async) nothrow
   {
     gst_base_src_set_async(cast(GstBaseSrc*)this._cPtr, async);
   }
@@ -447,7 +447,7 @@ class BaseSrc : gst.element.Element
       Params:
         automaticEos = automatic eos
   */
-  void setAutomaticEos(bool automaticEos)
+  void setAutomaticEos(bool automaticEos) nothrow
   {
     gst_base_src_set_automatic_eos(cast(GstBaseSrc*)this._cPtr, automaticEos);
   }
@@ -459,7 +459,7 @@ class BaseSrc : gst.element.Element
       Params:
         blocksize = the new blocksize in bytes
   */
-  void setBlocksize(uint blocksize)
+  void setBlocksize(uint blocksize) nothrow
   {
     gst_base_src_set_blocksize(cast(GstBaseSrc*)this._cPtr, blocksize);
   }
@@ -471,7 +471,7 @@ class BaseSrc : gst.element.Element
         caps = a #GstCaps
       Returns: true if the caps could be set
   */
-  bool setCaps(gst.caps.Caps caps)
+  bool setCaps(gst.caps.Caps caps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_base_src_set_caps(cast(GstBaseSrc*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
@@ -486,7 +486,7 @@ class BaseSrc : gst.element.Element
       Params:
         timestamp = enable or disable timestamping
   */
-  void setDoTimestamp(bool timestamp)
+  void setDoTimestamp(bool timestamp) nothrow
   {
     gst_base_src_set_do_timestamp(cast(GstBaseSrc*)this._cPtr, timestamp);
   }
@@ -499,7 +499,7 @@ class BaseSrc : gst.element.Element
       Params:
         dynamic = new dynamic size mode
   */
-  void setDynamicSize(bool dynamic)
+  void setDynamicSize(bool dynamic) nothrow
   {
     gst_base_src_set_dynamic_size(cast(GstBaseSrc*)this._cPtr, dynamic);
   }
@@ -516,7 +516,7 @@ class BaseSrc : gst.element.Element
       Params:
         format = the format to use
   */
-  void setFormat(gst.types.Format format)
+  void setFormat(gst.types.Format format) nothrow
   {
     gst_base_src_set_format(cast(GstBaseSrc*)this._cPtr, format);
   }
@@ -534,7 +534,7 @@ class BaseSrc : gst.element.Element
       Params:
         live = new live-mode
   */
-  void setLive(bool live)
+  void setLive(bool live) nothrow
   {
     gst_base_src_set_live(cast(GstBaseSrc*)this._cPtr, live);
   }
@@ -548,7 +548,7 @@ class BaseSrc : gst.element.Element
       Params:
         ret = a #GstFlowReturn
   */
-  void startComplete(gst.types.FlowReturn ret)
+  void startComplete(gst.types.FlowReturn ret) nothrow
   {
     gst_base_src_start_complete(cast(GstBaseSrc*)this._cPtr, ret);
   }
@@ -557,7 +557,7 @@ class BaseSrc : gst.element.Element
       Wait until the start operation completes.
       Returns: a #GstFlowReturn.
   */
-  gst.types.FlowReturn startWait()
+  gst.types.FlowReturn startWait() nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_base_src_start_wait(cast(GstBaseSrc*)this._cPtr);
@@ -586,7 +586,7 @@ class BaseSrc : gst.element.Element
       Params:
         bufferList = a #GstBufferList
   */
-  void submitBufferList(gst.buffer_list.BufferList bufferList)
+  void submitBufferList(gst.buffer_list.BufferList bufferList) nothrow
   {
     gst_base_src_submit_buffer_list(cast(GstBaseSrc*)this._cPtr, bufferList ? cast(GstBufferList*)bufferList._cPtr(Yes.Dup) : null);
   }
@@ -603,7 +603,7 @@ class BaseSrc : gst.element.Element
       Returns: [gst.types.FlowReturn.Ok] if src is PLAYING and processing can
         continue. Any other return value should be returned from the create vmethod.
   */
-  gst.types.FlowReturn waitPlaying()
+  gst.types.FlowReturn waitPlaying() nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_base_src_wait_playing(cast(GstBaseSrc*)this._cPtr);
@@ -622,31 +622,31 @@ class BaseSrcGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
         propval = See [gstbase.base_src.BaseSrc.setAutomaticEos]
       Returns: Builder instance for fluent chaining
   */
-  T automaticEos(bool propval)
+  T automaticEos(bool propval) nothrow
   {
     return setProperty("automatic-eos", propval);
   }
 
   /** */
-  T blocksize(uint propval)
+  T blocksize(uint propval) nothrow
   {
     return setProperty("blocksize", propval);
   }
 
   /** */
-  T doTimestamp(bool propval)
+  T doTimestamp(bool propval) nothrow
   {
     return setProperty("do-timestamp", propval);
   }
 
   /** */
-  T numBuffers(int propval)
+  T numBuffers(int propval) nothrow
   {
     return setProperty("num-buffers", propval);
   }
 
   /** */
-  T typefind(bool propval)
+  T typefind(bool propval) nothrow
   {
     return setProperty("typefind", propval);
   }
@@ -659,7 +659,7 @@ final class BaseSrcGidBuilder : BaseSrcGidBuilderImpl!BaseSrcGidBuilder
       Create object from builder.
       Returns: New object
   */
-  BaseSrc build()
+  BaseSrc build() nothrow
   {
     return new BaseSrc(cast(void*)createGObject(BaseSrc._getGType), No.Take);
   }

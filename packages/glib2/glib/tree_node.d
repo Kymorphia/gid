@@ -16,18 +16,15 @@ class TreeNode
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.tree_node.TreeNode");
-
     _cInstancePtr = cast(GTreeNode*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -36,7 +33,7 @@ class TreeNode
       Gets the key stored at a particular tree node.
       Returns: the key at the node.
   */
-  void* key()
+  void* key() nothrow
   {
     auto _retval = g_tree_node_key(cast(GTreeNode*)this._cPtr);
     return _retval;
@@ -47,7 +44,7 @@ class TreeNode
       if the passed node was already the last one.
       Returns: the next node in the tree
   */
-  glib.tree_node.TreeNode next()
+  glib.tree_node.TreeNode next() nothrow
   {
     GTreeNode* _cretval;
     _cretval = g_tree_node_next(cast(GTreeNode*)this._cPtr);
@@ -60,7 +57,7 @@ class TreeNode
       if the passed node was already the first one.
       Returns: the previous node in the tree
   */
-  glib.tree_node.TreeNode previous()
+  glib.tree_node.TreeNode previous() nothrow
   {
     GTreeNode* _cretval;
     _cretval = g_tree_node_previous(cast(GTreeNode*)this._cPtr);
@@ -72,7 +69,7 @@ class TreeNode
       Gets the value stored at a particular tree node.
       Returns: the value at the node.
   */
-  void* value()
+  void* value() nothrow
   {
     auto _retval = g_tree_node_value(cast(GTreeNode*)this._cPtr);
     return _retval;

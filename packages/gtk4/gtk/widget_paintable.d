@@ -38,26 +38,26 @@ class WidgetPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_widget_paintable_get_type != &gidSymbolNotFound ? gtk_widget_paintable_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WidgetPaintable self()
+  override WidgetPaintable self() nothrow
   {
     return this;
   }
@@ -66,7 +66,7 @@ class WidgetPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Get builder for [gtk.widget_paintable.WidgetPaintable]
       Returns: New builder object
   */
-  static WidgetPaintableGidBuilder builder()
+  static WidgetPaintableGidBuilder builder() nothrow
   {
     return new WidgetPaintableGidBuilder;
   }
@@ -75,7 +75,7 @@ class WidgetPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Get `widget` property.
       Returns: The observed widget or null if none.
   */
-  @property gtk.widget.Widget widget()
+  @property gtk.widget.Widget widget() nothrow
   {
     return getWidget();
   }
@@ -85,7 +85,7 @@ class WidgetPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Params:
         propval = The observed widget or null if none.
   */
-  @property void widget(gtk.widget.Widget propval)
+  @property void widget(gtk.widget.Widget propval) nothrow
   {
     setWidget(propval);
   }
@@ -99,7 +99,7 @@ class WidgetPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable
         widget = a [gtk.widget.Widget]
       Returns: a new [gtk.widget_paintable.WidgetPaintable]
   */
-  this(gtk.widget.Widget widget = null)
+  this(gtk.widget.Widget widget = null) nothrow
   {
     GdkPaintable* _cretval;
     _cretval = gtk_widget_paintable_new(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
@@ -110,7 +110,7 @@ class WidgetPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Returns the widget that is observed or null if none.
       Returns: the observed widget.
   */
-  gtk.widget.Widget getWidget()
+  gtk.widget.Widget getWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_paintable_get_widget(cast(GtkWidgetPaintable*)this._cPtr);
@@ -124,7 +124,7 @@ class WidgetPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable
       Params:
         widget = the widget to observe
   */
-  void setWidget(gtk.widget.Widget widget = null)
+  void setWidget(gtk.widget.Widget widget = null) nothrow
   {
     gtk_widget_paintable_set_widget(cast(GtkWidgetPaintable*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -142,7 +142,7 @@ class WidgetPaintableGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The observed widget or null if none.
       Returns: Builder instance for fluent chaining
   */
-  T widget(gtk.widget.Widget propval)
+  T widget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("widget", propval);
   }
@@ -155,7 +155,7 @@ final class WidgetPaintableGidBuilder : WidgetPaintableGidBuilderImpl!WidgetPain
       Create object from builder.
       Returns: New object
   */
-  WidgetPaintable build()
+  WidgetPaintable build() nothrow
   {
     return new WidgetPaintable(cast(void*)createGObject(WidgetPaintable._getGType), Yes.Take);
   }

@@ -15,32 +15,32 @@ class ApplicationInfo : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_application_info_get_type != &gidSymbolNotFound ? webkit_application_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ApplicationInfo self()
+  override ApplicationInfo self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class ApplicationInfo : gobject.boxed.Boxed
       Creates a new #WebKitApplicationInfo
       Returns: the newly created #WebKitApplicationInfo.
   */
-  this()
+  this() nothrow
   {
     WebKitApplicationInfo* _cretval;
     _cretval = webkit_application_info_new();
@@ -63,7 +63,7 @@ class ApplicationInfo : gobject.boxed.Boxed
       called with a valid name, this returns [glib.global.getPrgname].
       Returns: the application name
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_application_info_get_name(cast(WebKitApplicationInfo*)this._cPtr);
@@ -79,7 +79,7 @@ class ApplicationInfo : gobject.boxed.Boxed
         minor = return location for the minor version number
         micro = return location for the micro version number
   */
-  void getVersion(out ulong major, out ulong minor, out ulong micro)
+  void getVersion(out ulong major, out ulong minor, out ulong micro) nothrow
   {
     webkit_application_info_get_version(cast(WebKitApplicationInfo*)this._cPtr, cast(ulong*)&major, cast(ulong*)&minor, cast(ulong*)&micro);
   }
@@ -93,7 +93,7 @@ class ApplicationInfo : gobject.boxed.Boxed
       Params:
         name = the application name
   */
-  void setName(string name)
+  void setName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     webkit_application_info_set_name(cast(WebKitApplicationInfo*)this._cPtr, _name);
@@ -112,7 +112,7 @@ class ApplicationInfo : gobject.boxed.Boxed
         minor = the minor version number
         micro = the micro version number
   */
-  void setVersion(ulong major, ulong minor, ulong micro)
+  void setVersion(ulong major, ulong minor, ulong micro) nothrow
   {
     webkit_application_info_set_version(cast(WebKitApplicationInfo*)this._cPtr, major, minor, micro);
   }

@@ -26,26 +26,26 @@ class Auth : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_auth_get_type != &gidSymbolNotFound ? soup_auth_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Auth self()
+  override Auth self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class Auth : gobject.object.ObjectWrap
       Get builder for [soup.auth.Auth]
       Returns: New builder object
   */
-  static AuthGidBuilder builder()
+  static AuthGidBuilder builder() nothrow
   {
     return new AuthGidBuilder;
   }
@@ -63,7 +63,7 @@ class Auth : gobject.object.ObjectWrap
       Get `authority` property.
       Returns: The authority (host:port) being authenticated to.
   */
-  @property string authority()
+  @property string authority() nothrow
   {
     return getAuthority();
   }
@@ -73,7 +73,7 @@ class Auth : gobject.object.ObjectWrap
       Params:
         propval = The authority (host:port) being authenticated to.
   */
-  @property void authority(string propval)
+  @property void authority(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("authority", propval);
   }
@@ -82,7 +82,7 @@ class Auth : gobject.object.ObjectWrap
       Get `realm` property.
       Returns: The authentication realm.
   */
-  @property string realm()
+  @property string realm() nothrow
   {
     return getRealm();
   }
@@ -92,7 +92,7 @@ class Auth : gobject.object.ObjectWrap
       Params:
         propval = The authentication realm.
   */
-  @property void realm(string propval)
+  @property void realm(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("realm", propval);
   }
@@ -101,7 +101,7 @@ class Auth : gobject.object.ObjectWrap
       Get `schemeName` property.
       Returns: The authentication scheme name.
   */
-  @property string schemeName()
+  @property string schemeName() nothrow
   {
     return getSchemeName();
   }
@@ -120,7 +120,7 @@ class Auth : gobject.object.ObjectWrap
       Returns: the new #SoupAuth, or null if it could
           not be created
   */
-  this(gobject.types.GType type, soup.message.Message msg, string authHeader)
+  this(gobject.types.GType type, soup.message.Message msg, string authHeader) nothrow
   {
     SoupAuth* _cretval;
     const(char)* _authHeader = authHeader.toCString(No.Alloc);
@@ -138,7 +138,7 @@ class Auth : gobject.object.ObjectWrap
         username = the username provided by the user or client
         password = the password provided by the user or client
   */
-  void authenticate(string username, string password)
+  void authenticate(string username, string password) nothrow
   {
     const(char)* _username = username.toCString(No.Alloc);
     const(char)* _password = password.toCString(No.Alloc);
@@ -150,7 +150,7 @@ class Auth : gobject.object.ObjectWrap
       [soup.auth.Auth.authenticate].
       Returns: true if auth is able to accept credentials.
   */
-  bool canAuthenticate()
+  bool canAuthenticate() nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_auth_can_authenticate(cast(SoupAuth*)this._cPtr);
@@ -164,7 +164,7 @@ class Auth : gobject.object.ObjectWrap
       when no credentials are provided ([soup.auth.Auth.authenticate] is not called).
       The #SoupAuth will be cancelled on dispose if it hans't been authenticated.
   */
-  void cancel()
+  void cancel() nothrow
   {
     soup_auth_cancel(cast(SoupAuth*)this._cPtr);
   }
@@ -173,7 +173,7 @@ class Auth : gobject.object.ObjectWrap
       Returns the authority (host:port) that auth is associated with.
       Returns: the authority
   */
-  string getAuthority()
+  string getAuthority() nothrow
   {
     const(char)* _cretval;
     _cretval = soup_auth_get_authority(cast(SoupAuth*)this._cPtr);
@@ -191,7 +191,7 @@ class Auth : gobject.object.ObjectWrap
         msg = the #SoupMessage to be authorized
       Returns: the "Authorization" header, which must be freed.
   */
-  string getAuthorization(soup.message.Message msg)
+  string getAuthorization(soup.message.Message msg) nothrow
   {
     char* _cretval;
     _cretval = soup_auth_get_authorization(cast(SoupAuth*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null);
@@ -208,7 +208,7 @@ class Auth : gobject.object.ObjectWrap
       passwords).
       Returns: the identifier
   */
-  string getInfo()
+  string getInfo() nothrow
   {
     char* _cretval;
     _cretval = soup_auth_get_info(cast(SoupAuth*)this._cPtr);
@@ -229,7 +229,7 @@ class Auth : gobject.object.ObjectWrap
       Returns: the list of
           paths, which can be freed with [soup.auth.Auth.freeProtectionSpace].
   */
-  string[] getProtectionSpace(glib.uri.Uri sourceUri)
+  string[] getProtectionSpace(glib.uri.Uri sourceUri) nothrow
   {
     GSList* _cretval;
     _cretval = soup_auth_get_protection_space(cast(SoupAuth*)this._cPtr, sourceUri ? cast(GUri*)sourceUri._cPtr(No.Dup) : null);
@@ -245,7 +245,7 @@ class Auth : gobject.object.ObjectWrap
       (Although it is probably not localized.)
       Returns: the realm name
   */
-  string getRealm()
+  string getRealm() nothrow
   {
     const(char)* _cretval;
     _cretval = soup_auth_get_realm(cast(SoupAuth*)this._cPtr);
@@ -258,7 +258,7 @@ class Auth : gobject.object.ObjectWrap
       Returns auth's scheme name. (Eg, "Basic", "Digest", or "NTLM")
       Returns: the scheme name
   */
-  string getSchemeName()
+  string getSchemeName() nothrow
   {
     const(char)* _cretval;
     _cretval = soup_auth_get_scheme_name(cast(SoupAuth*)this._cPtr);
@@ -270,7 +270,7 @@ class Auth : gobject.object.ObjectWrap
       Tests if auth has been given a username and password.
       Returns: true if auth has been given a username and password
   */
-  bool isAuthenticated()
+  bool isAuthenticated() nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_auth_is_authenticated(cast(SoupAuth*)this._cPtr);
@@ -281,7 +281,7 @@ class Auth : gobject.object.ObjectWrap
       Tests if auth has been cancelled
       Returns: true if auth has been cancelled
   */
-  bool isCancelled()
+  bool isCancelled() nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_auth_is_cancelled(cast(SoupAuth*)this._cPtr);
@@ -293,7 +293,7 @@ class Auth : gobject.object.ObjectWrap
       than an "origin" server.
       Returns: true or false
   */
-  bool isForProxy()
+  bool isForProxy() nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_auth_is_for_proxy(cast(SoupAuth*)this._cPtr);
@@ -311,7 +311,7 @@ class Auth : gobject.object.ObjectWrap
         msg = a #SoupMessage
       Returns: true if auth is ready to make a request with.
   */
-  bool isReady(soup.message.Message msg)
+  bool isReady(soup.message.Message msg) nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_auth_is_ready(cast(SoupAuth*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null);
@@ -331,7 +331,7 @@ class Auth : gobject.object.ObjectWrap
           unauthenticated) #SoupAuth. false if something about auth_params
           could not be parsed or incorporated into auth at all.
   */
-  bool update(soup.message.Message msg, string authHeader)
+  bool update(soup.message.Message msg, string authHeader) nothrow
   {
     bool _retval;
     const(char)* _authHeader = authHeader.toCString(No.Alloc);
@@ -350,7 +350,7 @@ class AuthGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The authority (host:port) being authenticated to.
       Returns: Builder instance for fluent chaining
   */
-  T authority(string propval)
+  T authority(string propval) nothrow
   {
     return setProperty("authority", propval);
   }
@@ -361,7 +361,7 @@ class AuthGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The authentication realm.
       Returns: Builder instance for fluent chaining
   */
-  T realm(string propval)
+  T realm(string propval) nothrow
   {
     return setProperty("realm", propval);
   }
@@ -374,7 +374,7 @@ final class AuthGidBuilder : AuthGidBuilderImpl!AuthGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Auth build()
+  Auth build() nothrow
   {
     return new Auth(cast(void*)createGObject(Auth._getGType), Yes.Take);
   }

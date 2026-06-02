@@ -134,26 +134,26 @@ class DebugControllerDBus : gobject.object.ObjectWrap, gio.debug_controller.Debu
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_debug_controller_dbus_get_type != &gidSymbolNotFound ? g_debug_controller_dbus_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DebugControllerDBus self()
+  override DebugControllerDBus self() nothrow
   {
     return this;
   }
@@ -162,7 +162,7 @@ class DebugControllerDBus : gobject.object.ObjectWrap, gio.debug_controller.Debu
       Get builder for [gio.debug_controller_dbus.DebugControllerDBus]
       Returns: New builder object
   */
-  static DebugControllerDBusGidBuilder builder()
+  static DebugControllerDBusGidBuilder builder() nothrow
   {
     return new DebugControllerDBusGidBuilder;
   }
@@ -175,7 +175,7 @@ class DebugControllerDBus : gobject.object.ObjectWrap, gio.debug_controller.Debu
         which the rest of the application or service’s D-Bus objects are registered
         on.
   */
-  @property gio.dbus_connection.DBusConnection connection()
+  @property gio.dbus_connection.DBusConnection connection() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.dbus_connection.DBusConnection)("connection");
   }
@@ -227,7 +227,7 @@ class DebugControllerDBus : gobject.object.ObjectWrap, gio.debug_controller.Debu
       Calling this method from within a #GDebugControllerDBus::authorize signal
       handler will cause a deadlock and must not be done.
   */
-  void stop()
+  void stop() nothrow
   {
     g_debug_controller_dbus_stop(cast(GDebugControllerDBus*)this._cPtr);
   }
@@ -266,18 +266,19 @@ class DebugControllerDBus : gobject.object.ObjectWrap, gio.debug_controller.Debu
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAuthorize(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAuthorize(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.dbus_method_invocation.DBusMethodInvocation)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.debug_controller_dbus.DebugControllerDBus)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -285,7 +286,14 @@ class DebugControllerDBus : gobject.object.ObjectWrap, gio.debug_controller.Debu
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.debug_controller_dbus.DebugControllerDBus.authorize");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -312,7 +320,7 @@ class DebugControllerDBusGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
           on.
       Returns: Builder instance for fluent chaining
   */
-  T connection(gio.dbus_connection.DBusConnection propval)
+  T connection(gio.dbus_connection.DBusConnection propval) nothrow
   {
     return setProperty("connection", propval);
   }
@@ -325,7 +333,7 @@ final class DebugControllerDBusGidBuilder : DebugControllerDBusGidBuilderImpl!De
       Create object from builder.
       Returns: New object
   */
-  DebugControllerDBus build()
+  DebugControllerDBus build() nothrow
   {
     return new DebugControllerDBus(cast(void*)createGObject(DebugControllerDBus._getGType), Yes.Take);
   }

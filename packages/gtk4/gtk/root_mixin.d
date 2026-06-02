@@ -34,7 +34,7 @@ template RootT()
       Returns the display that this [gtk.root.Root] is on.
       Returns: the display of root
   */
-  override gdk.display.Display getDisplay()
+  override gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gtk_root_get_display(cast(GtkRoot*)this._cPtr);
@@ -51,7 +51,7 @@ template RootT()
       widget.
       Returns: the currently focused widget
   */
-  override gtk.widget.Widget getFocus()
+  override gtk.widget.Widget getFocus() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_root_get_focus(cast(GtkRoot*)this._cPtr);
@@ -73,7 +73,7 @@ template RootT()
         focus = widget to be the new focus widget, or null
              to unset the focus widget
   */
-  override void setFocus(gtk.widget.Widget focus = null)
+  override void setFocus(gtk.widget.Widget focus = null) nothrow
   {
     gtk_root_set_focus(cast(GtkRoot*)this._cPtr, focus ? cast(GtkWidget*)focus._cPtr(No.Dup) : null);
   }

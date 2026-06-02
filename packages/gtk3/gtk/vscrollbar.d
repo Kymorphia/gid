@@ -30,26 +30,26 @@ class VScrollbar : gtk.scrollbar.Scrollbar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_vscrollbar_get_type != &gidSymbolNotFound ? gtk_vscrollbar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VScrollbar self()
+  override VScrollbar self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class VScrollbar : gtk.scrollbar.Scrollbar
       Get builder for [gtk.vscrollbar.VScrollbar]
       Returns: New builder object
   */
-  static VScrollbarGidBuilder builder()
+  static VScrollbarGidBuilder builder() nothrow
   {
     return new VScrollbarGidBuilder;
   }
@@ -72,7 +72,7 @@ class VScrollbar : gtk.scrollbar.Scrollbar
   
       Deprecated: Use [gtk.scrollbar.Scrollbar.new_] with [gtk.types.Orientation.Vertical] instead
   */
-  this(gtk.adjustment.Adjustment adjustment = null)
+  this(gtk.adjustment.Adjustment adjustment = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_vscrollbar_new(adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
@@ -93,7 +93,7 @@ final class VScrollbarGidBuilder : VScrollbarGidBuilderImpl!VScrollbarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  VScrollbar build()
+  VScrollbar build() nothrow
   {
     return new VScrollbar(cast(void*)createGObject(VScrollbar._getGType), No.Take);
   }

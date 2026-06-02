@@ -22,32 +22,32 @@ class BaseParseFrame : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_base_parse_frame_get_type != &gidSymbolNotFound ? gst_base_parse_frame_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BaseParseFrame self()
+  override BaseParseFrame self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class BaseParseFrame : gobject.boxed.Boxed
       Get `buffer` field.
       Returns: input data to be parsed for frames.
   */
-  @property gst.buffer.Buffer buffer()
+  @property gst.buffer.Buffer buffer() nothrow
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstBaseParseFrame*)this._cPtr).buffer);
   }
@@ -66,7 +66,7 @@ class BaseParseFrame : gobject.boxed.Boxed
       Params:
         propval = input data to be parsed for frames.
   */
-  @property void buffer(gst.buffer.Buffer propval)
+  @property void buffer(gst.buffer.Buffer propval) nothrow
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstBaseParseFrame*)this._cPtr).buffer);
     dToC(propval, cast(void*)&(cast(GstBaseParseFrame*)this._cPtr).buffer);
@@ -76,7 +76,7 @@ class BaseParseFrame : gobject.boxed.Boxed
       Get `outBuffer` field.
       Returns: output data.
   */
-  @property gst.buffer.Buffer outBuffer()
+  @property gst.buffer.Buffer outBuffer() nothrow
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstBaseParseFrame*)this._cPtr).outBuffer);
   }
@@ -86,7 +86,7 @@ class BaseParseFrame : gobject.boxed.Boxed
       Params:
         propval = output data.
   */
-  @property void outBuffer(gst.buffer.Buffer propval)
+  @property void outBuffer(gst.buffer.Buffer propval) nothrow
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstBaseParseFrame*)this._cPtr).outBuffer);
     dToC(propval, cast(void*)&(cast(GstBaseParseFrame*)this._cPtr).outBuffer);
@@ -98,7 +98,7 @@ class BaseParseFrame : gobject.boxed.Boxed
          convey additional context to subclass or allow subclass to tune
          subsequent #GstBaseParse actions.
   */
-  @property uint flags()
+  @property uint flags() nothrow
   {
     return (cast(GstBaseParseFrame*)this._cPtr).flags;
   }
@@ -110,7 +110,7 @@ class BaseParseFrame : gobject.boxed.Boxed
            convey additional context to subclass or allow subclass to tune
            subsequent #GstBaseParse actions.
   */
-  @property void flags(uint propval)
+  @property void flags(uint propval) nothrow
   {
     (cast(GstBaseParseFrame*)this._cPtr).flags = propval;
   }
@@ -120,7 +120,7 @@ class BaseParseFrame : gobject.boxed.Boxed
       Returns: media specific offset of input frame
           Note that a converter may have a different one on the frame's buffer.
   */
-  @property ulong offset()
+  @property ulong offset() nothrow
   {
     return (cast(GstBaseParseFrame*)this._cPtr).offset;
   }
@@ -131,7 +131,7 @@ class BaseParseFrame : gobject.boxed.Boxed
         propval = media specific offset of input frame
             Note that a converter may have a different one on the frame's buffer.
   */
-  @property void offset(ulong propval)
+  @property void offset(ulong propval) nothrow
   {
     (cast(GstBaseParseFrame*)this._cPtr).offset = propval;
   }
@@ -143,7 +143,7 @@ class BaseParseFrame : gobject.boxed.Boxed
           computations. If this is -1, it is assumed that this frame should be
           skipped in bitrate calculation.
   */
-  @property int overhead()
+  @property int overhead() nothrow
   {
     return (cast(GstBaseParseFrame*)this._cPtr).overhead;
   }
@@ -156,7 +156,7 @@ class BaseParseFrame : gobject.boxed.Boxed
             computations. If this is -1, it is assumed that this frame should be
             skipped in bitrate calculation.
   */
-  @property void overhead(int propval)
+  @property void overhead(int propval) nothrow
   {
     (cast(GstBaseParseFrame*)this._cPtr).overhead = propval;
   }
@@ -175,7 +175,7 @@ class BaseParseFrame : gobject.boxed.Boxed
       Returns: a newly-allocated #GstBaseParseFrame. Free with
             [gstbase.base_parse_frame.BaseParseFrame.free] when no longer needed.
   */
-  this(gst.buffer.Buffer buffer, gstbase.types.BaseParseFrameFlags flags, int overhead)
+  this(gst.buffer.Buffer buffer, gstbase.types.BaseParseFrameFlags flags, int overhead) nothrow
   {
     GstBaseParseFrame* _cretval;
     _cretval = gst_base_parse_frame_new(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags, overhead);
@@ -186,7 +186,7 @@ class BaseParseFrame : gobject.boxed.Boxed
       Copies a #GstBaseParseFrame.
       Returns: A copy of frame
   */
-  gstbase.base_parse_frame.BaseParseFrame copy()
+  gstbase.base_parse_frame.BaseParseFrame copy() nothrow
   {
     GstBaseParseFrame* _cretval;
     _cretval = gst_base_parse_frame_copy(cast(GstBaseParseFrame*)this._cPtr);
@@ -201,7 +201,7 @@ class BaseParseFrame : gobject.boxed.Boxed
       the actual frame. Use this function to initialise a #GstBaseParseFrame
       allocated on the stack.
   */
-  void init_()
+  void init_() nothrow
   {
     gst_base_parse_frame_init(cast(GstBaseParseFrame*)this._cPtr);
   }

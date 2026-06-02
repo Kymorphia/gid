@@ -166,26 +166,26 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_file_chooser_native_get_type != &gidSymbolNotFound ? gtk_file_chooser_native_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileChooserNative self()
+  override FileChooserNative self() nothrow
   {
     return this;
   }
@@ -194,7 +194,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
       Get builder for [gtk.file_chooser_native.FileChooserNative]
       Returns: New builder object
   */
-  static FileChooserNativeGidBuilder builder()
+  static FileChooserNativeGidBuilder builder() nothrow
   {
     return new FileChooserNativeGidBuilder;
   }
@@ -204,7 +204,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
       Returns: The text used for the label on the accept button in the dialog, or
         null to use the default text.
   */
-  @property string acceptLabel()
+  @property string acceptLabel() nothrow
   {
     return getAcceptLabel();
   }
@@ -215,7 +215,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
         propval = The text used for the label on the accept button in the dialog, or
           null to use the default text.
   */
-  @property void acceptLabel(string propval)
+  @property void acceptLabel(string propval) nothrow
   {
     setAcceptLabel(propval);
   }
@@ -225,7 +225,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
       Returns: The text used for the label on the cancel button in the dialog, or
         null to use the default text.
   */
-  @property string cancelLabel()
+  @property string cancelLabel() nothrow
   {
     return getCancelLabel();
   }
@@ -236,7 +236,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
         propval = The text used for the label on the cancel button in the dialog, or
           null to use the default text.
   */
-  @property void cancelLabel(string propval)
+  @property void cancelLabel(string propval) nothrow
   {
     setCancelLabel(propval);
   }
@@ -256,7 +256,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  this(string title, gtk.window.Window parent, gtk.types.FileChooserAction action, string acceptLabel = null, string cancelLabel = null)
+  this(string title, gtk.window.Window parent, gtk.types.FileChooserAction action, string acceptLabel = null, string cancelLabel = null) nothrow
   {
     GtkFileChooserNative* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -272,7 +272,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  string getAcceptLabel()
+  string getAcceptLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_file_chooser_native_get_accept_label(cast(GtkFileChooserNative*)this._cPtr);
@@ -286,7 +286,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  string getCancelLabel()
+  string getCancelLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_file_chooser_native_get_cancel_label(cast(GtkFileChooserNative*)this._cPtr);
@@ -309,7 +309,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  void setAcceptLabel(string acceptLabel = null)
+  void setAcceptLabel(string acceptLabel = null) nothrow
   {
     const(char)* _acceptLabel = acceptLabel.toCString(No.Alloc);
     gtk_file_chooser_native_set_accept_label(cast(GtkFileChooserNative*)this._cPtr, _acceptLabel);
@@ -330,7 +330,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  void setCancelLabel(string cancelLabel = null)
+  void setCancelLabel(string cancelLabel = null) nothrow
   {
     const(char)* _cancelLabel = cancelLabel.toCString(No.Alloc);
     gtk_file_chooser_native_set_cancel_label(cast(GtkFileChooserNative*)this._cPtr, _cancelLabel);
@@ -350,7 +350,7 @@ class FileChooserNativeGidBuilderImpl(T) : gtk.native_dialog.NativeDialogGidBuil
           null to use the default text.
       Returns: Builder instance for fluent chaining
   */
-  T acceptLabel(string propval)
+  T acceptLabel(string propval) nothrow
   {
     return setProperty("accept-label", propval);
   }
@@ -362,7 +362,7 @@ class FileChooserNativeGidBuilderImpl(T) : gtk.native_dialog.NativeDialogGidBuil
           null to use the default text.
       Returns: Builder instance for fluent chaining
   */
-  T cancelLabel(string propval)
+  T cancelLabel(string propval) nothrow
   {
     return setProperty("cancel-label", propval);
   }
@@ -375,7 +375,7 @@ final class FileChooserNativeGidBuilder : FileChooserNativeGidBuilderImpl!FileCh
       Create object from builder.
       Returns: New object
   */
-  FileChooserNative build()
+  FileChooserNative build() nothrow
   {
     return new FileChooserNative(cast(void*)createGObject(FileChooserNative._getGType), Yes.Take);
   }

@@ -86,26 +86,26 @@ class IMContext : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_im_context_get_type != &gidSymbolNotFound ? gtk_im_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override IMContext self()
+  override IMContext self() nothrow
   {
     return this;
   }
@@ -114,31 +114,31 @@ class IMContext : gobject.object.ObjectWrap
       Get builder for [gtk.imcontext.IMContext]
       Returns: New builder object
   */
-  static IMContextGidBuilder builder()
+  static IMContextGidBuilder builder() nothrow
   {
     return new IMContextGidBuilder;
   }
 
   /** */
-  @property gtk.types.InputHints inputHints()
+  @property gtk.types.InputHints inputHints() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.InputHints)("input-hints");
   }
 
   /** */
-  @property void inputHints(gtk.types.InputHints propval)
+  @property void inputHints(gtk.types.InputHints propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.InputHints)("input-hints", propval);
   }
 
   /** */
-  @property gtk.types.InputPurpose inputPurpose()
+  @property gtk.types.InputPurpose inputPurpose() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.InputPurpose)("input-purpose");
   }
 
   /** */
-  @property void inputPurpose(gtk.types.InputPurpose propval)
+  @property void inputPurpose(gtk.types.InputPurpose propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.InputPurpose)("input-purpose", propval);
   }
@@ -167,7 +167,7 @@ class IMContext : gobject.object.ObjectWrap
         nChars = number of characters to delete.
       Returns: true if the signal was handled.
   */
-  bool deleteSurrounding(int offset, int nChars)
+  bool deleteSurrounding(int offset, int nChars) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_im_context_delete_surrounding(cast(GtkIMContext*)this._cPtr, offset, nChars);
@@ -183,7 +183,7 @@ class IMContext : gobject.object.ObjectWrap
         event = the key event
       Returns: true if the input method handled the key event.
   */
-  bool filterKeypress(gdk.event_key.EventKey event)
+  bool filterKeypress(gdk.event_key.EventKey event) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_im_context_filter_keypress(cast(GtkIMContext*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr : null);
@@ -196,7 +196,7 @@ class IMContext : gobject.object.ObjectWrap
       may, for example, change the displayed feedback to reflect
       this change.
   */
-  void focusIn()
+  void focusIn() nothrow
   {
     gtk_im_context_focus_in(cast(GtkIMContext*)this._cPtr);
   }
@@ -207,7 +207,7 @@ class IMContext : gobject.object.ObjectWrap
       may, for example, change the displayed feedback or reset the contexts
       state to reflect this change.
   */
-  void focusOut()
+  void focusOut() nothrow
   {
     gtk_im_context_focus_out(cast(GtkIMContext*)this._cPtr);
   }
@@ -227,7 +227,7 @@ class IMContext : gobject.object.ObjectWrap
         cursorPos = location to store position of cursor (in characters)
                        within the preedit string.
   */
-  void getPreeditString(out string str, out pango.attr_list.AttrList attrs, out int cursorPos)
+  void getPreeditString(out string str, out pango.attr_list.AttrList attrs, out int cursorPos) nothrow
   {
     char* _str;
     PangoAttrList* _attrs;
@@ -260,7 +260,7 @@ class IMContext : gobject.object.ObjectWrap
       Returns: true if surrounding text was provided; in this case
            you must free the result stored in *text.
   */
-  bool getSurrounding(out string text, out int cursorIndex)
+  bool getSurrounding(out string text, out int cursorIndex) nothrow
   {
     bool _retval;
     char* _text;
@@ -274,7 +274,7 @@ class IMContext : gobject.object.ObjectWrap
       position has been made. This will typically cause the input
       method to clear the preedit state.
   */
-  void reset()
+  void reset() nothrow
   {
     gtk_im_context_reset(cast(GtkIMContext*)this._cPtr);
   }
@@ -289,7 +289,7 @@ class IMContext : gobject.object.ObjectWrap
         window = the client window. This may be null to indicate
                     that the previous client window no longer exists.
   */
-  void setClientWindow(gdk.window.Window window = null)
+  void setClientWindow(gdk.window.Window window = null) nothrow
   {
     gtk_im_context_set_client_window(cast(GtkIMContext*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null);
   }
@@ -302,7 +302,7 @@ class IMContext : gobject.object.ObjectWrap
       Params:
         area = new location
   */
-  void setCursorLocation(gdk.rectangle.Rectangle area)
+  void setCursorLocation(gdk.rectangle.Rectangle area) nothrow
   {
     gtk_im_context_set_cursor_location(cast(GtkIMContext*)this._cPtr, cast(const(GdkRectangle)*)&area);
   }
@@ -319,7 +319,7 @@ class IMContext : gobject.object.ObjectWrap
                  text.
         cursorIndex = the byte index of the insertion cursor within text.
   */
-  void setSurrounding(string text, int cursorIndex)
+  void setSurrounding(string text, int cursorIndex) nothrow
   {
     int _len;
     if (text)
@@ -338,7 +338,7 @@ class IMContext : gobject.object.ObjectWrap
       Params:
         usePreedit = whether the IM context should use the preedit string.
   */
-  void setUsePreedit(bool usePreedit)
+  void setUsePreedit(bool usePreedit) nothrow
   {
     gtk_im_context_set_use_preedit(cast(GtkIMContext*)this._cPtr, usePreedit);
   }
@@ -362,14 +362,14 @@ class IMContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCommit(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCommit(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.imcontext.IMContext)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -381,7 +381,14 @@ class IMContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.imcontext.IMContext.commit");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -411,7 +418,7 @@ class IMContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeleteSurrounding(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeleteSurrounding(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -419,11 +426,12 @@ class IMContext : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.imcontext.IMContext)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -434,7 +442,14 @@ class IMContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.imcontext.IMContext.deleteSurrounding");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -461,13 +476,13 @@ class IMContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.imcontext.IMContext)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -476,7 +491,14 @@ class IMContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.imcontext.IMContext.preeditChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -499,13 +521,13 @@ class IMContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPreeditEnd(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPreeditEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.imcontext.IMContext)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -514,7 +536,14 @@ class IMContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.imcontext.IMContext.preeditEnd");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -537,13 +566,13 @@ class IMContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPreeditStart(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPreeditStart(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.imcontext.IMContext)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -552,7 +581,14 @@ class IMContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.imcontext.IMContext.preeditStart");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -578,22 +614,30 @@ class IMContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRetrieveSurrounding(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRetrieveSurrounding(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.imcontext.IMContext)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.imcontext.IMContext.retrieveSurrounding");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -608,13 +652,13 @@ class IMContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T inputHints(gtk.types.InputHints propval)
+  T inputHints(gtk.types.InputHints propval) nothrow
   {
     return setProperty("input-hints", propval);
   }
 
   /** */
-  T inputPurpose(gtk.types.InputPurpose propval)
+  T inputPurpose(gtk.types.InputPurpose propval) nothrow
   {
     return setProperty("input-purpose", propval);
   }
@@ -627,7 +671,7 @@ final class IMContextGidBuilder : IMContextGidBuilderImpl!IMContextGidBuilder
       Create object from builder.
       Returns: New object
   */
-  IMContext build()
+  IMContext build() nothrow
   {
     return new IMContext(cast(void*)createGObject(IMContext._getGType), No.Take);
   }

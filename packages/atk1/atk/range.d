@@ -21,32 +21,32 @@ class Range : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_range_get_type != &gidSymbolNotFound ? atk_range_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Range self()
+  override Range self() nothrow
   {
     return this;
   }
@@ -60,7 +60,7 @@ class Range : gobject.boxed.Boxed
         description = human readable description of this range.
       Returns: a new #AtkRange
   */
-  this(double lowerLimit, double upperLimit, string description)
+  this(double lowerLimit, double upperLimit, string description) nothrow
   {
     AtkRange* _cretval;
     const(char)* _description = description.toCString(No.Alloc);
@@ -72,7 +72,7 @@ class Range : gobject.boxed.Boxed
       Returns a new #AtkRange that is a exact copy of src
       Returns: a new #AtkRange copy of src
   */
-  atk.range.Range copy()
+  atk.range.Range copy() nothrow
   {
     AtkRange* _cretval;
     _cretval = atk_range_copy(cast(AtkRange*)this._cPtr);
@@ -84,7 +84,7 @@ class Range : gobject.boxed.Boxed
       Returns the human readable description of range
       Returns: the human-readable description of range
   */
-  string getDescription()
+  string getDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = atk_range_get_description(cast(AtkRange*)this._cPtr);
@@ -96,7 +96,7 @@ class Range : gobject.boxed.Boxed
       Returns the lower limit of range
       Returns: the lower limit of range
   */
-  double getLowerLimit()
+  double getLowerLimit() nothrow
   {
     double _retval;
     _retval = atk_range_get_lower_limit(cast(AtkRange*)this._cPtr);
@@ -107,7 +107,7 @@ class Range : gobject.boxed.Boxed
       Returns the upper limit of range
       Returns: the upper limit of range
   */
-  double getUpperLimit()
+  double getUpperLimit() nothrow
   {
     double _retval;
     _retval = atk_range_get_upper_limit(cast(AtkRange*)this._cPtr);

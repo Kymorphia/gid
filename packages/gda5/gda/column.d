@@ -18,26 +18,26 @@ class Column : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_column_get_type != &gidSymbolNotFound ? gda_column_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Column self()
+  override Column self() nothrow
   {
     return this;
   }
@@ -46,25 +46,25 @@ class Column : gobject.object.ObjectWrap
       Get builder for [gda.column.Column]
       Returns: New builder object
   */
-  static ColumnGidBuilder builder()
+  static ColumnGidBuilder builder() nothrow
   {
     return new ColumnGidBuilder;
   }
 
   /** */
-  @property string id()
+  @property string id() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("id");
   }
 
   /** */
-  @property void id(string propval)
+  @property void id(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("id", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GdaColumn* _cretval;
     _cretval = gda_column_new();
@@ -76,7 +76,7 @@ class Column : gobject.object.ObjectWrap
       Returns: a newly allocated #GdaColumn with a copy of the data
         in column.
   */
-  gda.column.Column copy()
+  gda.column.Column copy() nothrow
   {
     GdaColumn* _cretval;
     _cretval = gda_column_copy(cast(GdaColumn*)this._cPtr);
@@ -88,7 +88,7 @@ class Column : gobject.object.ObjectWrap
       Gets the 'allow null' flag of the given column.
       Returns: whether the given column allows null values or not (true or false).
   */
-  bool getAllowNull()
+  bool getAllowNull() nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_column_get_allow_null(cast(GdaColumn*)this._cPtr);
@@ -104,7 +104,7 @@ class Column : gobject.object.ObjectWrap
         attribute = attribute name as a string
       Returns: a read-only #GValue, or null if not attribute named attribute has been set for column
   */
-  gobject.value.Value getAttribute(string attribute)
+  gobject.value.Value getAttribute(string attribute) nothrow
   {
     const(GValue)* _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -114,7 +114,7 @@ class Column : gobject.object.ObjectWrap
   }
 
   /** */
-  bool getAutoIncrement()
+  bool getAutoIncrement() nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_column_get_auto_increment(cast(GdaColumn*)this._cPtr);
@@ -122,7 +122,7 @@ class Column : gobject.object.ObjectWrap
   }
 
   /** */
-  string getDbmsType()
+  string getDbmsType() nothrow
   {
     const(char)* _cretval;
     _cretval = gda_column_get_dbms_type(cast(GdaColumn*)this._cPtr);
@@ -131,7 +131,7 @@ class Column : gobject.object.ObjectWrap
   }
 
   /** */
-  gobject.value.Value getDefaultValue()
+  gobject.value.Value getDefaultValue() nothrow
   {
     const(GValue)* _cretval;
     _cretval = gda_column_get_default_value(cast(GdaColumn*)this._cPtr);
@@ -140,7 +140,7 @@ class Column : gobject.object.ObjectWrap
   }
 
   /** */
-  string getDescription()
+  string getDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = gda_column_get_description(cast(GdaColumn*)this._cPtr);
@@ -149,7 +149,7 @@ class Column : gobject.object.ObjectWrap
   }
 
   /** */
-  gobject.types.GType getGType()
+  gobject.types.GType getGType() nothrow
   {
     gobject.types.GType _retval;
     _retval = gda_column_get_g_type(cast(GdaColumn*)this._cPtr);
@@ -157,7 +157,7 @@ class Column : gobject.object.ObjectWrap
   }
 
   /** */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gda_column_get_name(cast(GdaColumn*)this._cPtr);
@@ -166,7 +166,7 @@ class Column : gobject.object.ObjectWrap
   }
 
   /** */
-  int getPosition()
+  int getPosition() nothrow
   {
     int _retval;
     _retval = gda_column_get_position(cast(GdaColumn*)this._cPtr);
@@ -179,7 +179,7 @@ class Column : gobject.object.ObjectWrap
       Params:
         allow = whether the given column should allows null values or not.
   */
-  void setAllowNull(bool allow)
+  void setAllowNull(bool allow) nothrow
   {
     gda_column_set_allow_null(cast(GdaColumn*)this._cPtr, allow);
   }
@@ -211,14 +211,21 @@ class Column : gobject.object.ObjectWrap
         value = a #GValue, or null
         destroy = a function to be called when attribute is not needed anymore, or null
   */
-  void setAttribute(string attribute, gobject.value.Value value = null, glib.types.DestroyNotify destroy = null)
+  void setAttribute(string attribute, gobject.value.Value value = null, glib.types.DestroyNotify destroy = null) nothrow
   {
-    extern(C) void _destroyCallback(void* data)
+    extern(C) void _destroyCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -231,7 +238,7 @@ class Column : gobject.object.ObjectWrap
       Params:
         isAuto = auto increment status.
   */
-  void setAutoIncrement(bool isAuto)
+  void setAutoIncrement(bool isAuto) nothrow
   {
     gda_column_set_auto_increment(cast(GdaColumn*)this._cPtr, isAuto);
   }
@@ -242,7 +249,7 @@ class Column : gobject.object.ObjectWrap
       Params:
         dbmsType = a string
   */
-  void setDbmsType(string dbmsType)
+  void setDbmsType(string dbmsType) nothrow
   {
     const(char)* _dbmsType = dbmsType.toCString(No.Alloc);
     gda_column_set_dbms_type(cast(GdaColumn*)this._cPtr, _dbmsType);
@@ -254,7 +261,7 @@ class Column : gobject.object.ObjectWrap
       Params:
         defaultValue = default #GValue for the column
   */
-  void setDefaultValue(gobject.value.Value defaultValue = null)
+  void setDefaultValue(gobject.value.Value defaultValue = null) nothrow
   {
     gda_column_set_default_value(cast(GdaColumn*)this._cPtr, defaultValue ? cast(const(GValue)*)defaultValue._cPtr(No.Dup) : null);
   }
@@ -265,7 +272,7 @@ class Column : gobject.object.ObjectWrap
       Params:
         title = title name.
   */
-  void setDescription(string title)
+  void setDescription(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     gda_column_set_description(cast(GdaColumn*)this._cPtr, _title);
@@ -277,7 +284,7 @@ class Column : gobject.object.ObjectWrap
       Params:
         type = the new type of column.
   */
-  void setGType(gobject.types.GType type)
+  void setGType(gobject.types.GType type) nothrow
   {
     gda_column_set_g_type(cast(GdaColumn*)this._cPtr, type);
   }
@@ -288,7 +295,7 @@ class Column : gobject.object.ObjectWrap
       Params:
         name = the new name of column.
   */
-  void setName(string name)
+  void setName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gda_column_set_name(cast(GdaColumn*)this._cPtr, _name);
@@ -301,7 +308,7 @@ class Column : gobject.object.ObjectWrap
       Params:
         position = the wanted position of the column in the containing data model.
   */
-  void setPosition(int position)
+  void setPosition(int position) nothrow
   {
     gda_column_set_position(cast(GdaColumn*)this._cPtr, position);
   }
@@ -325,7 +332,7 @@ class Column : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGTypeChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGTypeChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gobject.types.GType)))
@@ -333,7 +340,7 @@ class Column : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gda.column.Column)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -348,7 +355,14 @@ class Column : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.column.Column.gTypeChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -372,14 +386,14 @@ class Column : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNameChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNameChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.column.Column)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -391,7 +405,14 @@ class Column : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.column.Column.nameChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -404,7 +425,7 @@ class ColumnGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T id(string propval)
+  T id(string propval) nothrow
   {
     return setProperty("id", propval);
   }
@@ -417,7 +438,7 @@ final class ColumnGidBuilder : ColumnGidBuilderImpl!ColumnGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Column build()
+  Column build() nothrow
   {
     return new Column(cast(void*)createGObject(Column._getGType), Yes.Take);
   }

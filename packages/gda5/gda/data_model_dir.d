@@ -16,26 +16,26 @@ class DataModelDir : gobject.object.ObjectWrap, gda.data_model.DataModel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_data_model_dir_get_type != &gidSymbolNotFound ? gda_data_model_dir_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DataModelDir self()
+  override DataModelDir self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class DataModelDir : gobject.object.ObjectWrap, gda.data_model.DataModel
       Get builder for [gda.data_model_dir.DataModelDir]
       Returns: New builder object
   */
-  static DataModelDirGidBuilder builder()
+  static DataModelDirGidBuilder builder() nothrow
   {
     return new DataModelDirGidBuilder;
   }
 
   /** */
-  @property string basedir()
+  @property string basedir() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("basedir");
   }
@@ -64,7 +64,7 @@ class DataModelDir : gobject.object.ObjectWrap, gda.data_model.DataModel
         basedir = a directory
       Returns: a new #GdaDataModel
   */
-  static gda.data_model.DataModel new_(string basedir)
+  static gda.data_model.DataModel new_(string basedir) nothrow
   {
     GdaDataModel* _cretval;
     const(char)* _basedir = basedir.toCString(No.Alloc);
@@ -76,7 +76,7 @@ class DataModelDir : gobject.object.ObjectWrap, gda.data_model.DataModel
   /**
       Reset the list of errors which have occurred while using model
   */
-  void cleanErrors()
+  void cleanErrors() nothrow
   {
     gda_data_model_dir_clean_errors(cast(GdaDataModelDir*)this._cPtr);
   }
@@ -89,7 +89,7 @@ class DataModelDirGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
   mixin DataModelGidBuilderT!();
 
   /** */
-  T basedir(string propval)
+  T basedir(string propval) nothrow
   {
     return setProperty("basedir", propval);
   }
@@ -102,7 +102,7 @@ final class DataModelDirGidBuilder : DataModelDirGidBuilderImpl!DataModelDirGidB
       Create object from builder.
       Returns: New object
   */
-  DataModelDir build()
+  DataModelDir build() nothrow
   {
     return new DataModelDir(cast(void*)createGObject(DataModelDir._getGType), No.Take);
   }

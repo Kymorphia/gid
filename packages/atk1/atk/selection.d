@@ -30,7 +30,7 @@ interface Selection
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_selection_get_type != &gidSymbolNotFound ? atk_selection_get_type() : cast(GType)0;
@@ -128,7 +128,7 @@ interface Selection
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [atk.selection.Selection]

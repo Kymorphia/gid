@@ -16,11 +16,8 @@ class SqlSelectJoin
   GdaSqlSelectJoin _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.sql_select_join.SqlSelectJoin");
-
     _cInstance = *cast(GdaSqlSelectJoin*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class SqlSelectJoin
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class SqlSelectJoin
       Get `type` field.
       Returns: type of join
   */
-  @property gda.types.SqlSelectJoinType type()
+  @property gda.types.SqlSelectJoinType type() nothrow
   {
     return cast(gda.types.SqlSelectJoinType)(cast(GdaSqlSelectJoin*)this._cPtr).type;
   }
@@ -47,7 +44,7 @@ class SqlSelectJoin
       Params:
         propval = type of join
   */
-  @property void type(gda.types.SqlSelectJoinType propval)
+  @property void type(gda.types.SqlSelectJoinType propval) nothrow
   {
     (cast(GdaSqlSelectJoin*)this._cPtr).type = cast(GdaSqlSelectJoinType)propval;
   }
@@ -56,7 +53,7 @@ class SqlSelectJoin
       Get `position` field.
       Returns: represents a join between a target at (pos &lt; @position) and the one at @position
   */
-  @property int position()
+  @property int position() nothrow
   {
     return (cast(GdaSqlSelectJoin*)this._cPtr).position;
   }
@@ -66,7 +63,7 @@ class SqlSelectJoin
       Params:
         propval = represents a join between a target at (pos &lt; @position) and the one at @position
   */
-  @property void position(int propval)
+  @property void position(int propval) nothrow
   {
     (cast(GdaSqlSelectJoin*)this._cPtr).position = propval;
   }
@@ -75,7 +72,7 @@ class SqlSelectJoin
       Get `expr` field.
       Returns: joining expression, or null
   */
-  @property gda.sql_expr.SqlExpr expr()
+  @property gda.sql_expr.SqlExpr expr() nothrow
   {
     return cToD!(gda.sql_expr.SqlExpr)(cast(void*)(cast(GdaSqlSelectJoin*)this._cPtr).expr);
   }
@@ -85,7 +82,7 @@ class SqlSelectJoin
       Params:
         propval = joining expression, or null
   */
-  @property void expr(gda.sql_expr.SqlExpr propval)
+  @property void expr(gda.sql_expr.SqlExpr propval) nothrow
   {
     cValueFree!(gda.sql_expr.SqlExpr)(cast(void*)(cast(GdaSqlSelectJoin*)this._cPtr).expr);
     dToC(propval, cast(void*)&(cast(GdaSqlSelectJoin*)this._cPtr).expr);
@@ -95,7 +92,7 @@ class SqlSelectJoin
       Creates a new string description of the join used in a SELECT statement.
       Returns: a new string with the description of the join or "null" in case join is invalid.
   */
-  string serialize()
+  string serialize() nothrow
   {
     char* _cretval;
     _cretval = gda_sql_select_join_serialize(cast(GdaSqlSelectJoin*)this._cPtr);
@@ -110,7 +107,7 @@ class SqlSelectJoin
         type = a #GdaSqlSelectJoinType structure to be copied
       Returns: a string representing the Join type.
   */
-  static string typeToString(gda.types.SqlSelectJoinType type)
+  static string typeToString(gda.types.SqlSelectJoinType type) nothrow
   {
     const(char)* _cretval;
     _cretval = gda_sql_select_join_type_to_string(type);

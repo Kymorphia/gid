@@ -18,32 +18,32 @@ class ScriptMessageReply : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_script_message_reply_get_type != &gidSymbolNotFound ? webkit_script_message_reply_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ScriptMessageReply self()
+  override ScriptMessageReply self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class ScriptMessageReply : gobject.boxed.Boxed
       Params:
         errorMessage = An error message to return as specified by the user's script message
   */
-  void returnErrorMessage(string errorMessage)
+  void returnErrorMessage(string errorMessage) nothrow
   {
     const(char)* _errorMessage = errorMessage.toCString(No.Alloc);
     webkit_script_message_reply_return_error_message(cast(WebKitScriptMessageReply*)this._cPtr, _errorMessage);
@@ -68,7 +68,7 @@ class ScriptMessageReply : gobject.boxed.Boxed
       Params:
         replyValue = Reply value of the provided script message
   */
-  void returnValue(javascriptcore.value.Value replyValue)
+  void returnValue(javascriptcore.value.Value replyValue) nothrow
   {
     webkit_script_message_reply_return_value(cast(WebKitScriptMessageReply*)this._cPtr, replyValue ? cast(JSCValue*)replyValue._cPtr(No.Dup) : null);
   }

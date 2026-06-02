@@ -65,26 +65,26 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_file_filter_get_type != &gidSymbolNotFound ? gtk_file_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileFilter self()
+  override FileFilter self() nothrow
   {
     return this;
   }
@@ -93,7 +93,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
       Get builder for [gtk.file_filter.FileFilter]
       Returns: New builder object
   */
-  static FileFilterGidBuilder builder()
+  static FileFilterGidBuilder builder() nothrow
   {
     return new FileFilterGidBuilder;
   }
@@ -105,7 +105,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
         This is the string that will be displayed in the file chooser
         user interface if there is a selectable list of filters.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return getName();
   }
@@ -118,7 +118,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
           This is the string that will be displayed in the file chooser
           user interface if there is a selectable list of filters.
   */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     setName(propval);
   }
@@ -142,7 +142,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
       ```
       Returns: a new [gtk.file_filter.FileFilter]
   */
-  this()
+  this() nothrow
   {
     GtkFileFilter* _cretval;
     _cretval = gtk_file_filter_new();
@@ -159,7 +159,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
         variant = an `a{sv}` [glib.variant.Variant]
       Returns: a new [gtk.file_filter.FileFilter] object
   */
-  static gtk.file_filter.FileFilter newFromGvariant(glib.variant.Variant variant)
+  static gtk.file_filter.FileFilter newFromGvariant(glib.variant.Variant variant) nothrow
   {
     GtkFileFilter* _cretval;
     _cretval = gtk_file_filter_new_from_gvariant(variant ? cast(GVariant*)variant._cPtr(No.Dup) : null);
@@ -173,7 +173,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
       Params:
         mimeType = name of a MIME type
   */
-  void addMimeType(string mimeType)
+  void addMimeType(string mimeType) nothrow
   {
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
     gtk_file_filter_add_mime_type(cast(GtkFileFilter*)this._cPtr, _mimeType);
@@ -189,7 +189,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
       Params:
         pattern = a shell style glob
   */
-  void addPattern(string pattern)
+  void addPattern(string pattern) nothrow
   {
     const(char)* _pattern = pattern.toCString(No.Alloc);
     gtk_file_filter_add_pattern(cast(GtkFileFilter*)this._cPtr, _pattern);
@@ -202,7 +202,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
       This is equivalent to calling [gtk.file_filter.FileFilter.addMimeType]
       for all the supported mime types.
   */
-  void addPixbufFormats()
+  void addPixbufFormats() nothrow
   {
     gtk_file_filter_add_pixbuf_formats(cast(GtkFileFilter*)this._cPtr);
   }
@@ -219,7 +219,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
       Params:
         suffix = filename suffix to match
   */
-  void addSuffix(string suffix)
+  void addSuffix(string suffix) nothrow
   {
     const(char)* _suffix = suffix.toCString(No.Alloc);
     gtk_file_filter_add_suffix(cast(GtkFileFilter*)this._cPtr, _suffix);
@@ -234,7 +234,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
       of [gtk.file_chooser.FileChooser].
       Returns: the attributes
   */
-  string[] getAttributes()
+  string[] getAttributes() nothrow
   {
     const(char*)* _cretval;
     _cretval = gtk_file_filter_get_attributes(cast(GtkFileFilter*)this._cPtr);
@@ -258,7 +258,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
       See [gtk.file_filter.FileFilter.setName].
       Returns: The human-readable name of the filter
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_file_filter_get_name(cast(GtkFileFilter*)this._cPtr);
@@ -276,7 +276,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
         name = the human-readable-name for the filter, or null
             to remove any existing name.
   */
-  void setName(string name = null)
+  void setName(string name = null) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_file_filter_set_name(cast(GtkFileFilter*)this._cPtr, _name);
@@ -286,7 +286,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
       Serialize a file filter to an `a{sv}` variant.
       Returns: a new, floating, [glib.variant.Variant]
   */
-  glib.variant.Variant toGvariant()
+  glib.variant.Variant toGvariant() nothrow
   {
     GVariant* _cretval;
     _cretval = gtk_file_filter_to_gvariant(cast(GtkFileFilter*)this._cPtr);
@@ -310,7 +310,7 @@ class FileFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T, gtk.build
           user interface if there is a selectable list of filters.
       Returns: Builder instance for fluent chaining
   */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -323,7 +323,7 @@ final class FileFilterGidBuilder : FileFilterGidBuilderImpl!FileFilterGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FileFilter build()
+  FileFilter build() nothrow
   {
     return new FileFilter(cast(void*)createGObject(FileFilter._getGType), Yes.Take);
   }

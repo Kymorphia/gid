@@ -22,26 +22,26 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_base_sink_get_type != &gidSymbolNotFound ? gst_audio_base_sink_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AudioBaseSink self()
+  override AudioBaseSink self() nothrow
   {
     return this;
   }
@@ -50,43 +50,43 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
       Get builder for [gstaudio.audio_base_sink.AudioBaseSink]
       Returns: New builder object
   */
-  static AudioBaseSinkGidBuilder builder()
+  static AudioBaseSinkGidBuilder builder() nothrow
   {
     return new AudioBaseSinkGidBuilder;
   }
 
   /** */
-  @property ulong alignmentThreshold()
+  @property ulong alignmentThreshold() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("alignment-threshold");
   }
 
   /** */
-  @property void alignmentThreshold(ulong propval)
+  @property void alignmentThreshold(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("alignment-threshold", propval);
   }
 
   /** */
-  @property long bufferTime()
+  @property long bufferTime() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("buffer-time");
   }
 
   /** */
-  @property void bufferTime(long propval)
+  @property void bufferTime(long propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(long)("buffer-time", propval);
   }
 
   /** */
-  @property bool canActivatePull()
+  @property bool canActivatePull() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("can-activate-pull");
   }
 
   /** */
-  @property void canActivatePull(bool propval)
+  @property void canActivatePull(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("can-activate-pull", propval);
   }
@@ -96,7 +96,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
       Returns: A window of time in nanoseconds to wait before creating a discontinuity as
         a result of breaching the drift-tolerance.
   */
-  @property ulong discontWait()
+  @property ulong discontWait() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("discont-wait");
   }
@@ -107,7 +107,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
         propval = A window of time in nanoseconds to wait before creating a discontinuity as
           a result of breaching the drift-tolerance.
   */
-  @property void discontWait(ulong propval)
+  @property void discontWait(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("discont-wait", propval);
   }
@@ -117,7 +117,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
       Returns: Controls the amount of time in microseconds that clocks are allowed
         to drift before resynchronisation happens.
   */
-  @property long driftTolerance()
+  @property long driftTolerance() nothrow
   {
     return getDriftTolerance();
   }
@@ -128,19 +128,19 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
         propval = Controls the amount of time in microseconds that clocks are allowed
           to drift before resynchronisation happens.
   */
-  @property void driftTolerance(long propval)
+  @property void driftTolerance(long propval) nothrow
   {
     setDriftTolerance(propval);
   }
 
   /** */
-  @property long latencyTime()
+  @property long latencyTime() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("latency-time");
   }
 
   /** */
-  @property void latencyTime(long propval)
+  @property void latencyTime(long propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(long)("latency-time", propval);
   }
@@ -148,7 +148,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   alias provideClock = gst.element.Element.provideClock;
 
   /** */
-  @property bool provideClock()
+  @property bool provideClock() nothrow
   {
     return getProvideClock();
   }
@@ -156,19 +156,19 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   alias provideClock = gst.element.Element.provideClock;
 
   /** */
-  @property void provideClock(bool propval)
+  @property void provideClock(bool propval) nothrow
   {
     setProvideClock(propval);
   }
 
   /** */
-  @property gstaudio.types.AudioBaseSinkSlaveMethod slaveMethod()
+  @property gstaudio.types.AudioBaseSinkSlaveMethod slaveMethod() nothrow
   {
     return getSlaveMethod();
   }
 
   /** */
-  @property void slaveMethod(gstaudio.types.AudioBaseSinkSlaveMethod propval)
+  @property void slaveMethod(gstaudio.types.AudioBaseSinkSlaveMethod propval) nothrow
   {
     setSlaveMethod(propval);
   }
@@ -179,7 +179,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
       the returned buffer (see [gst.object.ObjectWrap.setParent]).
       Returns: The new ringbuffer of sink.
   */
-  gstaudio.audio_ring_buffer.AudioRingBuffer createRingbuffer()
+  gstaudio.audio_ring_buffer.AudioRingBuffer createRingbuffer() nothrow
   {
     GstAudioRingBuffer* _cretval;
     _cretval = gst_audio_base_sink_create_ringbuffer(cast(GstAudioBaseSink*)this._cPtr);
@@ -191,7 +191,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
       Get the current alignment threshold, in nanoseconds, used by sink.
       Returns: The current alignment threshold used by sink.
   */
-  gst.types.ClockTime getAlignmentThreshold()
+  gst.types.ClockTime getAlignmentThreshold() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_audio_base_sink_get_alignment_threshold(cast(GstAudioBaseSink*)this._cPtr);
@@ -202,7 +202,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
       Get the current discont wait, in nanoseconds, used by sink.
       Returns: The current discont wait used by sink.
   */
-  gst.types.ClockTime getDiscontWait()
+  gst.types.ClockTime getDiscontWait() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_audio_base_sink_get_discont_wait(cast(GstAudioBaseSink*)this._cPtr);
@@ -213,7 +213,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
       Get the current drift tolerance, in microseconds, used by sink.
       Returns: The current drift tolerance used by sink.
   */
-  long getDriftTolerance()
+  long getDriftTolerance() nothrow
   {
     long _retval;
     _retval = gst_audio_base_sink_get_drift_tolerance(cast(GstAudioBaseSink*)this._cPtr);
@@ -225,7 +225,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
       gst_audio_base_sink_set_provide_clock.
       Returns: true if sink will provide a clock.
   */
-  bool getProvideClock()
+  bool getProvideClock() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_base_sink_get_provide_clock(cast(GstAudioBaseSink*)this._cPtr);
@@ -236,7 +236,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
       Get the current slave method used by sink.
       Returns: The current slave method used by sink.
   */
-  gstaudio.types.AudioBaseSinkSlaveMethod getSlaveMethod()
+  gstaudio.types.AudioBaseSinkSlaveMethod getSlaveMethod() nothrow
   {
     GstAudioBaseSinkSlaveMethod _cretval;
     _cretval = gst_audio_base_sink_get_slave_method(cast(GstAudioBaseSink*)this._cPtr);
@@ -251,7 +251,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
       This function is typically called by derived classes, and is useful
       for the custom slave method.
   */
-  void reportDeviceFailure()
+  void reportDeviceFailure() nothrow
   {
     gst_audio_base_sink_report_device_failure(cast(GstAudioBaseSink*)this._cPtr);
   }
@@ -262,7 +262,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
       Params:
         alignmentThreshold = the new alignment threshold in nanoseconds
   */
-  void setAlignmentThreshold(gst.types.ClockTime alignmentThreshold)
+  void setAlignmentThreshold(gst.types.ClockTime alignmentThreshold) nothrow
   {
     gst_audio_base_sink_set_alignment_threshold(cast(GstAudioBaseSink*)this._cPtr, alignmentThreshold);
   }
@@ -280,13 +280,20 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
       Params:
         callback = a #GstAudioBaseSinkCustomSlavingCallback
   */
-  void setCustomSlavingCallback(gstaudio.types.AudioBaseSinkCustomSlavingCallback callback)
+  void setCustomSlavingCallback(gstaudio.types.AudioBaseSinkCustomSlavingCallback callback) nothrow
   {
-    extern(C) void _callbackCallback(GstAudioBaseSink* sink, GstClockTime etime, GstClockTime itime, GstClockTimeDiff* requestedSkew, GstAudioBaseSinkDiscontReason discontReason, void* userData)
+    extern(C) void _callbackCallback(GstAudioBaseSink* sink, GstClockTime etime, GstClockTime itime, GstClockTimeDiff* requestedSkew, GstAudioBaseSinkDiscontReason discontReason, void* userData) nothrow
     {
       auto _dlg = cast(gstaudio.types.AudioBaseSinkCustomSlavingCallback*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstaudio.audio_base_sink.AudioBaseSink)(cast(void*)sink, No.Take), etime, itime, *requestedSkew, discontReason);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstaudio.audio_base_sink.AudioBaseSink)(cast(void*)sink, No.Take), etime, itime, *requestedSkew, discontReason);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstaudio.types.AudioBaseSinkCustomSlavingCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -300,7 +307,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
       Params:
         discontWait = the new discont wait in nanoseconds
   */
-  void setDiscontWait(gst.types.ClockTime discontWait)
+  void setDiscontWait(gst.types.ClockTime discontWait) nothrow
   {
     gst_audio_base_sink_set_discont_wait(cast(GstAudioBaseSink*)this._cPtr, discontWait);
   }
@@ -311,7 +318,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
       Params:
         driftTolerance = the new drift tolerance in microseconds
   */
-  void setDriftTolerance(long driftTolerance)
+  void setDriftTolerance(long driftTolerance) nothrow
   {
     gst_audio_base_sink_set_drift_tolerance(cast(GstAudioBaseSink*)this._cPtr, driftTolerance);
   }
@@ -325,7 +332,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
       Params:
         provide = new state
   */
-  void setProvideClock(bool provide)
+  void setProvideClock(bool provide) nothrow
   {
     gst_audio_base_sink_set_provide_clock(cast(GstAudioBaseSink*)this._cPtr, provide);
   }
@@ -336,7 +343,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
       Params:
         method = the new slave method
   */
-  void setSlaveMethod(gstaudio.types.AudioBaseSinkSlaveMethod method)
+  void setSlaveMethod(gstaudio.types.AudioBaseSinkSlaveMethod method) nothrow
   {
     gst_audio_base_sink_set_slave_method(cast(GstAudioBaseSink*)this._cPtr, method);
   }
@@ -347,19 +354,19 @@ class AudioBaseSinkGidBuilderImpl(T) : gstbase.base_sink.BaseSinkGidBuilderImpl!
 {
 
   /** */
-  T alignmentThreshold(ulong propval)
+  T alignmentThreshold(ulong propval) nothrow
   {
     return setProperty("alignment-threshold", propval);
   }
 
   /** */
-  T bufferTime(long propval)
+  T bufferTime(long propval) nothrow
   {
     return setProperty("buffer-time", propval);
   }
 
   /** */
-  T canActivatePull(bool propval)
+  T canActivatePull(bool propval) nothrow
   {
     return setProperty("can-activate-pull", propval);
   }
@@ -371,7 +378,7 @@ class AudioBaseSinkGidBuilderImpl(T) : gstbase.base_sink.BaseSinkGidBuilderImpl!
           a result of breaching the drift-tolerance.
       Returns: Builder instance for fluent chaining
   */
-  T discontWait(ulong propval)
+  T discontWait(ulong propval) nothrow
   {
     return setProperty("discont-wait", propval);
   }
@@ -383,25 +390,25 @@ class AudioBaseSinkGidBuilderImpl(T) : gstbase.base_sink.BaseSinkGidBuilderImpl!
           to drift before resynchronisation happens.
       Returns: Builder instance for fluent chaining
   */
-  T driftTolerance(long propval)
+  T driftTolerance(long propval) nothrow
   {
     return setProperty("drift-tolerance", propval);
   }
 
   /** */
-  T latencyTime(long propval)
+  T latencyTime(long propval) nothrow
   {
     return setProperty("latency-time", propval);
   }
 
   /** */
-  T provideClock(bool propval)
+  T provideClock(bool propval) nothrow
   {
     return setProperty("provide-clock", propval);
   }
 
   /** */
-  T slaveMethod(gstaudio.types.AudioBaseSinkSlaveMethod propval)
+  T slaveMethod(gstaudio.types.AudioBaseSinkSlaveMethod propval) nothrow
   {
     return setProperty("slave-method", propval);
   }
@@ -414,7 +421,7 @@ final class AudioBaseSinkGidBuilder : AudioBaseSinkGidBuilderImpl!AudioBaseSinkG
       Create object from builder.
       Returns: New object
   */
-  AudioBaseSink build()
+  AudioBaseSink build() nothrow
   {
     return new AudioBaseSink(cast(void*)createGObject(AudioBaseSink._getGType), No.Take);
   }

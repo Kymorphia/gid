@@ -21,7 +21,7 @@ template PrintOperationPreviewT()
       
       This function must be called to finish a custom print preview.
   */
-  override void endPreview()
+  override void endPreview() nothrow
   {
     gtk_print_operation_preview_end_preview(cast(GtkPrintOperationPreview*)this._cPtr);
   }
@@ -34,7 +34,7 @@ template PrintOperationPreviewT()
         pageNr = a page number
       Returns: true if the page has been selected for printing
   */
-  override bool isSelected(int pageNr)
+  override bool isSelected(int pageNr) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_print_operation_preview_is_selected(cast(GtkPrintOperationPreview*)this._cPtr, pageNr);
@@ -55,7 +55,7 @@ template PrintOperationPreviewT()
       Params:
         pageNr = the page to render
   */
-  override void renderPage(int pageNr)
+  override void renderPage(int pageNr) nothrow
   {
     gtk_print_operation_preview_render_page(cast(GtkPrintOperationPreview*)this._cPtr, pageNr);
   }
@@ -84,7 +84,7 @@ template PrintOperationPreviewT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGotPageSize(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGotPageSize(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_context.PrintContext)))
@@ -92,7 +92,7 @@ template PrintOperationPreviewT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.print_operation_preview.PrintOperationPreview)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -107,7 +107,14 @@ template PrintOperationPreviewT()
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.print_operation_preview.PrintOperationPreview.gotPageSize");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -134,14 +141,14 @@ template PrintOperationPreviewT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectReady(T)(T callback, Flag!"After" after = No.After)
+  gulong connectReady(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_context.PrintContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.print_operation_preview.PrintOperationPreview)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -153,7 +160,14 @@ template PrintOperationPreviewT()
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.print_operation_preview.PrintOperationPreview.ready");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

@@ -18,26 +18,26 @@ class PanedAccessible : gtk.container_accessible.ContainerAccessible, atk.value.
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_paned_accessible_get_type != &gidSymbolNotFound ? gtk_paned_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PanedAccessible self()
+  override PanedAccessible self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class PanedAccessible : gtk.container_accessible.ContainerAccessible, atk.value.
       Get builder for [gtk.paned_accessible.PanedAccessible]
       Returns: New builder object
   */
-  static PanedAccessibleGidBuilder builder()
+  static PanedAccessibleGidBuilder builder() nothrow
   {
     return new PanedAccessibleGidBuilder;
   }
@@ -68,7 +68,7 @@ final class PanedAccessibleGidBuilder : PanedAccessibleGidBuilderImpl!PanedAcces
       Create object from builder.
       Returns: New object
   */
-  PanedAccessible build()
+  PanedAccessible build() nothrow
   {
     return new PanedAccessible(cast(void*)createGObject(PanedAccessible._getGType), No.Take);
   }

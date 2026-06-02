@@ -30,7 +30,7 @@ interface FontChooser
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_font_chooser_get_type != &gidSymbolNotFound ? gtk_font_chooser_get_type() : cast(GType)0;
@@ -42,7 +42,7 @@ interface FontChooser
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property string font();
+  @property string font() nothrow;
 
   /**
       Set `font` property.
@@ -51,7 +51,7 @@ interface FontChooser
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property void font(string propval);
+  @property void font(string propval) nothrow;
 
   /**
       Get `fontDesc` property.
@@ -59,7 +59,7 @@ interface FontChooser
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property pango.font_description.FontDescription fontDesc();
+  @property pango.font_description.FontDescription fontDesc() nothrow;
 
   /**
       Set `fontDesc` property.
@@ -68,7 +68,7 @@ interface FontChooser
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property void fontDesc(pango.font_description.FontDescription propval);
+  @property void fontDesc(pango.font_description.FontDescription propval) nothrow;
 
   /**
       Get `fontFeatures` property.
@@ -79,7 +79,7 @@ interface FontChooser
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property string fontFeatures();
+  @property string fontFeatures() nothrow;
 
   /**
       Get `language` property.
@@ -87,7 +87,7 @@ interface FontChooser
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property string language();
+  @property string language() nothrow;
 
   /**
       Set `language` property.
@@ -96,7 +96,7 @@ interface FontChooser
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property void language(string propval);
+  @property void language(string propval) nothrow;
 
   /**
       Get `level` property.
@@ -104,7 +104,7 @@ interface FontChooser
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property gtk.types.FontChooserLevel level();
+  @property gtk.types.FontChooserLevel level() nothrow;
 
   /**
       Set `level` property.
@@ -113,7 +113,7 @@ interface FontChooser
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property void level(gtk.types.FontChooserLevel propval);
+  @property void level(gtk.types.FontChooserLevel propval) nothrow;
 
   /**
       Get `previewText` property.
@@ -121,7 +121,7 @@ interface FontChooser
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property string previewText();
+  @property string previewText() nothrow;
 
   /**
       Set `previewText` property.
@@ -130,7 +130,7 @@ interface FontChooser
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property void previewText(string propval);
+  @property void previewText(string propval) nothrow;
 
   /**
       Get `showPreviewEntry` property.
@@ -138,7 +138,7 @@ interface FontChooser
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property bool showPreviewEntry();
+  @property bool showPreviewEntry() nothrow;
 
   /**
       Set `showPreviewEntry` property.
@@ -147,7 +147,7 @@ interface FontChooser
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  @property void showPreviewEntry(bool propval);
+  @property void showPreviewEntry(bool propval) nothrow;
 
   /**
       Gets the currently-selected font name.
@@ -421,7 +421,7 @@ interface FontChooser
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  gulong connectFontActivated(T)(T callback, Flag!"After" after = No.After);
+  gulong connectFontActivated(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gtk.font_chooser.FontChooser]
@@ -436,7 +436,7 @@ interface FontChooserGidBuilderImpl(T)
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  T font(string propval);
+  T font(string propval) nothrow;
 
   /**
       Set `fontDesc` property.
@@ -446,7 +446,7 @@ interface FontChooserGidBuilderImpl(T)
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  T fontDesc(pango.font_description.FontDescription propval);
+  T fontDesc(pango.font_description.FontDescription propval) nothrow;
 
   /**
       Set `language` property.
@@ -456,7 +456,7 @@ interface FontChooserGidBuilderImpl(T)
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  T language(string propval);
+  T language(string propval) nothrow;
 
   /**
       Set `level` property.
@@ -466,7 +466,7 @@ interface FontChooserGidBuilderImpl(T)
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  T level(gtk.types.FontChooserLevel propval);
+  T level(gtk.types.FontChooserLevel propval) nothrow;
 
   /**
       Set `previewText` property.
@@ -476,7 +476,7 @@ interface FontChooserGidBuilderImpl(T)
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  T previewText(string propval);
+  T previewText(string propval) nothrow;
 
   /**
       Set `showPreviewEntry` property.
@@ -486,5 +486,5 @@ interface FontChooserGidBuilderImpl(T)
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  T showPreviewEntry(bool propval);
+  T showPreviewEntry(bool propval) nothrow;
 }

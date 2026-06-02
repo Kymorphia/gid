@@ -15,11 +15,8 @@ class MaskNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.mask_node.MaskNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -36,7 +33,7 @@ class MaskNode : gsk.render_node.RenderNode
         maskMode = The mask mode to use
       Returns: A new [gsk.render_node.RenderNode]
   */
-  this(gsk.render_node.RenderNode source, gsk.render_node.RenderNode mask, gsk.types.MaskMode maskMode)
+  this(gsk.render_node.RenderNode source, gsk.render_node.RenderNode mask, gsk.types.MaskMode maskMode) nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_mask_node_new(source ? cast(GskRenderNode*)source._cPtr(No.Dup) : null, mask ? cast(GskRenderNode*)mask._cPtr(No.Dup) : null, maskMode);
@@ -47,7 +44,7 @@ class MaskNode : gsk.render_node.RenderNode
       Retrieves the mask [gsk.render_node.RenderNode] child of the node.
       Returns: the mask child node
   */
-  gsk.render_node.RenderNode getMask()
+  gsk.render_node.RenderNode getMask() nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_mask_node_get_mask(cast(const(GskRenderNode)*)this._cPtr);
@@ -59,7 +56,7 @@ class MaskNode : gsk.render_node.RenderNode
       Retrieves the mask mode used by node.
       Returns: the mask mode
   */
-  gsk.types.MaskMode getMaskMode()
+  gsk.types.MaskMode getMaskMode() nothrow
   {
     GskMaskMode _cretval;
     _cretval = gsk_mask_node_get_mask_mode(cast(const(GskRenderNode)*)this._cPtr);
@@ -71,7 +68,7 @@ class MaskNode : gsk.render_node.RenderNode
       Retrieves the source [gsk.render_node.RenderNode] child of the node.
       Returns: the source child node
   */
-  gsk.render_node.RenderNode getSource()
+  gsk.render_node.RenderNode getSource() nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_mask_node_get_source(cast(const(GskRenderNode)*)this._cPtr);

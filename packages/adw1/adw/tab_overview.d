@@ -85,26 +85,26 @@ class TabOverview : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_tab_overview_get_type != &gidSymbolNotFound ? adw_tab_overview_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TabOverview self()
+  override TabOverview self() nothrow
   {
     return this;
   }
@@ -113,7 +113,7 @@ class TabOverview : gtk.widget.Widget
       Get builder for [adw.tab_overview.TabOverview]
       Returns: New builder object
   */
-  static TabOverviewGidBuilder builder()
+  static TabOverviewGidBuilder builder() nothrow
   {
     return new TabOverviewGidBuilder;
   }
@@ -122,7 +122,7 @@ class TabOverview : gtk.widget.Widget
       Get `child` property.
       Returns: The child widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -132,7 +132,7 @@ class TabOverview : gtk.widget.Widget
       Params:
         propval = The child widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -143,7 +143,7 @@ class TabOverview : gtk.widget.Widget
         
         Connect to the [adw.tab_overview.TabOverview.createTab] signal to use it.
   */
-  @property bool enableNewTab()
+  @property bool enableNewTab() nothrow
   {
     return getEnableNewTab();
   }
@@ -155,7 +155,7 @@ class TabOverview : gtk.widget.Widget
           
           Connect to the [adw.tab_overview.TabOverview.createTab] signal to use it.
   */
-  @property void enableNewTab(bool propval)
+  @property void enableNewTab(bool propval) nothrow
   {
     setEnableNewTab(propval);
   }
@@ -173,7 +173,7 @@ class TabOverview : gtk.widget.Widget
         Use [adw.tab_overview.TabOverview.searchActive] to check out if search is
         currently active.
   */
-  @property bool enableSearch()
+  @property bool enableSearch() nothrow
   {
     return getEnableSearch();
   }
@@ -192,7 +192,7 @@ class TabOverview : gtk.widget.Widget
           Use [adw.tab_overview.TabOverview.searchActive] to check out if search is
           currently active.
   */
-  @property void enableSearch(bool propval)
+  @property void enableSearch(bool propval) nothrow
   {
     setEnableSearch(propval);
   }
@@ -206,7 +206,7 @@ class TabOverview : gtk.widget.Widget
         [adw.tab_overview.TabOverview.extraDragDrop] and is always a subset of what was
         originally passed to [adw.tab_overview.TabOverview.setupExtraDropTarget].
   */
-  @property gdk.types.DragAction extraDragPreferredAction()
+  @property gdk.types.DragAction extraDragPreferredAction() nothrow
   {
     return getExtraDragPreferredAction();
   }
@@ -217,7 +217,7 @@ class TabOverview : gtk.widget.Widget
         
         See [gtk.drop_target.DropTarget.preload].
   */
-  @property bool extraDragPreload()
+  @property bool extraDragPreload() nothrow
   {
     return getExtraDragPreload();
   }
@@ -229,7 +229,7 @@ class TabOverview : gtk.widget.Widget
           
           See [gtk.drop_target.DropTarget.preload].
   */
-  @property void extraDragPreload(bool propval)
+  @property void extraDragPreload(bool propval) nothrow
   {
     setExtraDragPreload(propval);
   }
@@ -241,7 +241,7 @@ class TabOverview : gtk.widget.Widget
         If set to `TRUE`, thumbnails will have the close or unpin buttons at the
         beginning and the indicator at the end rather than the other way around.
   */
-  @property bool inverted()
+  @property bool inverted() nothrow
   {
     return getInverted();
   }
@@ -254,7 +254,7 @@ class TabOverview : gtk.widget.Widget
           If set to `TRUE`, thumbnails will have the close or unpin buttons at the
           beginning and the indicator at the end rather than the other way around.
   */
-  @property void inverted(bool propval)
+  @property void inverted(bool propval) nothrow
   {
     setInverted(propval);
   }
@@ -263,7 +263,7 @@ class TabOverview : gtk.widget.Widget
       Get `open` property.
       Returns: Whether the overview is open.
   */
-  @property bool open()
+  @property bool open() nothrow
   {
     return getOpen();
   }
@@ -273,7 +273,7 @@ class TabOverview : gtk.widget.Widget
       Params:
         propval = Whether the overview is open.
   */
-  @property void open(bool propval)
+  @property void open(bool propval) nothrow
   {
     setOpen(propval);
   }
@@ -284,7 +284,7 @@ class TabOverview : gtk.widget.Widget
         
         See [adw.tab_overview.TabOverview.enableSearch].
   */
-  @property bool searchActive()
+  @property bool searchActive() nothrow
   {
     return getSearchActive();
   }
@@ -295,7 +295,7 @@ class TabOverview : gtk.widget.Widget
         
         Use it to add extra actions, e.g. to open a new window or undo closed tab.
   */
-  @property gio.menu_model.MenuModel secondaryMenu()
+  @property gio.menu_model.MenuModel secondaryMenu() nothrow
   {
     return getSecondaryMenu();
   }
@@ -307,7 +307,7 @@ class TabOverview : gtk.widget.Widget
           
           Use it to add extra actions, e.g. to open a new window or undo closed tab.
   */
-  @property void secondaryMenu(gio.menu_model.MenuModel propval)
+  @property void secondaryMenu(gio.menu_model.MenuModel propval) nothrow
   {
     setSecondaryMenu(propval);
   }
@@ -318,7 +318,7 @@ class TabOverview : gtk.widget.Widget
         
         See [adw.header_bar.HeaderBar.showStartTitleButtons] for the other side.
   */
-  @property bool showEndTitleButtons()
+  @property bool showEndTitleButtons() nothrow
   {
     return getShowEndTitleButtons();
   }
@@ -330,7 +330,7 @@ class TabOverview : gtk.widget.Widget
           
           See [adw.header_bar.HeaderBar.showStartTitleButtons] for the other side.
   */
-  @property void showEndTitleButtons(bool propval)
+  @property void showEndTitleButtons(bool propval) nothrow
   {
     setShowEndTitleButtons(propval);
   }
@@ -341,7 +341,7 @@ class TabOverview : gtk.widget.Widget
         
         See [adw.header_bar.HeaderBar.showEndTitleButtons] for the other side.
   */
-  @property bool showStartTitleButtons()
+  @property bool showStartTitleButtons() nothrow
   {
     return getShowStartTitleButtons();
   }
@@ -353,7 +353,7 @@ class TabOverview : gtk.widget.Widget
           
           See [adw.header_bar.HeaderBar.showEndTitleButtons] for the other side.
   */
-  @property void showStartTitleButtons(bool propval)
+  @property void showStartTitleButtons(bool propval) nothrow
   {
     setShowStartTitleButtons(propval);
   }
@@ -364,7 +364,7 @@ class TabOverview : gtk.widget.Widget
         
         The view must be inside the tab overview, see [adw.tab_overview.TabOverview.child].
   */
-  @property adw.tab_view.TabView view()
+  @property adw.tab_view.TabView view() nothrow
   {
     return getView();
   }
@@ -376,7 +376,7 @@ class TabOverview : gtk.widget.Widget
           
           The view must be inside the tab overview, see [adw.tab_overview.TabOverview.child].
   */
-  @property void view(adw.tab_view.TabView propval)
+  @property void view(adw.tab_view.TabView propval) nothrow
   {
     setView(propval);
   }
@@ -385,7 +385,7 @@ class TabOverview : gtk.widget.Widget
       Creates a new [adw.tab_overview.TabOverview].
       Returns: the newly created [adw.tab_overview.TabOverview]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_tab_overview_new();
@@ -396,7 +396,7 @@ class TabOverview : gtk.widget.Widget
       Gets the child widget of self.
       Returns: the child widget of self
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_tab_overview_get_child(cast(AdwTabOverview*)this._cPtr);
@@ -408,7 +408,7 @@ class TabOverview : gtk.widget.Widget
       Gets whether to new tab button is enabled for self.
       Returns: whether new tab button is enabled
   */
-  bool getEnableNewTab()
+  bool getEnableNewTab() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_overview_get_enable_new_tab(cast(AdwTabOverview*)this._cPtr);
@@ -419,7 +419,7 @@ class TabOverview : gtk.widget.Widget
       Gets whether search in tabs is enabled for self.
       Returns: whether search is enabled
   */
-  bool getEnableSearch()
+  bool getEnableSearch() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_overview_get_enable_search(cast(AdwTabOverview*)this._cPtr);
@@ -430,7 +430,7 @@ class TabOverview : gtk.widget.Widget
       Gets the current action during a drop on the extra_drop_target.
       Returns: the drag action of the current drop.
   */
-  gdk.types.DragAction getExtraDragPreferredAction()
+  gdk.types.DragAction getExtraDragPreferredAction() nothrow
   {
     GdkDragAction _cretval;
     _cretval = adw_tab_overview_get_extra_drag_preferred_action(cast(AdwTabOverview*)this._cPtr);
@@ -442,7 +442,7 @@ class TabOverview : gtk.widget.Widget
       Gets whether drop data should be preloaded on hover.
       Returns: whether drop data should be preloaded on hover
   */
-  bool getExtraDragPreload()
+  bool getExtraDragPreload() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_overview_get_extra_drag_preload(cast(AdwTabOverview*)this._cPtr);
@@ -453,7 +453,7 @@ class TabOverview : gtk.widget.Widget
       Gets whether thumbnails use inverted layout.
       Returns: whether thumbnails use inverted layout
   */
-  bool getInverted()
+  bool getInverted() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_overview_get_inverted(cast(AdwTabOverview*)this._cPtr);
@@ -464,7 +464,7 @@ class TabOverview : gtk.widget.Widget
       Gets whether self is open.
       Returns: whether the overview is open
   */
-  bool getOpen()
+  bool getOpen() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_overview_get_open(cast(AdwTabOverview*)this._cPtr);
@@ -477,7 +477,7 @@ class TabOverview : gtk.widget.Widget
       See [adw.tab_overview.TabOverview.enableSearch].
       Returns: whether search is active
   */
-  bool getSearchActive()
+  bool getSearchActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_overview_get_search_active(cast(AdwTabOverview*)this._cPtr);
@@ -488,7 +488,7 @@ class TabOverview : gtk.widget.Widget
       Gets the secondary menu model for self.
       Returns: the secondary menu model
   */
-  gio.menu_model.MenuModel getSecondaryMenu()
+  gio.menu_model.MenuModel getSecondaryMenu() nothrow
   {
     GMenuModel* _cretval;
     _cretval = adw_tab_overview_get_secondary_menu(cast(AdwTabOverview*)this._cPtr);
@@ -500,7 +500,7 @@ class TabOverview : gtk.widget.Widget
       Gets whether end title buttons are shown in self's header bar.
       Returns: whether end title buttons are shown
   */
-  bool getShowEndTitleButtons()
+  bool getShowEndTitleButtons() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_overview_get_show_end_title_buttons(cast(AdwTabOverview*)this._cPtr);
@@ -511,7 +511,7 @@ class TabOverview : gtk.widget.Widget
       Gets whether start title buttons are shown in self's header bar.
       Returns: whether start title buttons are shown
   */
-  bool getShowStartTitleButtons()
+  bool getShowStartTitleButtons() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_tab_overview_get_show_start_title_buttons(cast(AdwTabOverview*)this._cPtr);
@@ -522,7 +522,7 @@ class TabOverview : gtk.widget.Widget
       Gets the tab view self controls.
       Returns: the tab view
   */
-  adw.tab_view.TabView getView()
+  adw.tab_view.TabView getView() nothrow
   {
     AdwTabView* _cretval;
     _cretval = adw_tab_overview_get_view(cast(AdwTabOverview*)this._cPtr);
@@ -536,7 +536,7 @@ class TabOverview : gtk.widget.Widget
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     adw_tab_overview_set_child(cast(AdwTabOverview*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -549,7 +549,7 @@ class TabOverview : gtk.widget.Widget
       Params:
         enableNewTab = whether to enable new tab button
   */
-  void setEnableNewTab(bool enableNewTab)
+  void setEnableNewTab(bool enableNewTab) nothrow
   {
     adw_tab_overview_set_enable_new_tab(cast(AdwTabOverview*)this._cPtr, enableNewTab);
   }
@@ -569,7 +569,7 @@ class TabOverview : gtk.widget.Widget
       Params:
         enableSearch = whether to enable search
   */
-  void setEnableSearch(bool enableSearch)
+  void setEnableSearch(bool enableSearch) nothrow
   {
     adw_tab_overview_set_enable_search(cast(AdwTabOverview*)this._cPtr, enableSearch);
   }
@@ -582,7 +582,7 @@ class TabOverview : gtk.widget.Widget
       Params:
         preload = whether to preload drop data
   */
-  void setExtraDragPreload(bool preload)
+  void setExtraDragPreload(bool preload) nothrow
   {
     adw_tab_overview_set_extra_drag_preload(cast(AdwTabOverview*)this._cPtr, preload);
   }
@@ -596,7 +596,7 @@ class TabOverview : gtk.widget.Widget
       Params:
         inverted = whether thumbnails use inverted layout
   */
-  void setInverted(bool inverted)
+  void setInverted(bool inverted) nothrow
   {
     adw_tab_overview_set_inverted(cast(AdwTabOverview*)this._cPtr, inverted);
   }
@@ -607,7 +607,7 @@ class TabOverview : gtk.widget.Widget
       Params:
         open = whether the overview is open
   */
-  void setOpen(bool open)
+  void setOpen(bool open) nothrow
   {
     adw_tab_overview_set_open(cast(AdwTabOverview*)this._cPtr, open);
   }
@@ -620,7 +620,7 @@ class TabOverview : gtk.widget.Widget
       Params:
         secondaryMenu = a menu model
   */
-  void setSecondaryMenu(gio.menu_model.MenuModel secondaryMenu = null)
+  void setSecondaryMenu(gio.menu_model.MenuModel secondaryMenu = null) nothrow
   {
     adw_tab_overview_set_secondary_menu(cast(AdwTabOverview*)this._cPtr, secondaryMenu ? cast(GMenuModel*)secondaryMenu._cPtr(No.Dup) : null);
   }
@@ -633,7 +633,7 @@ class TabOverview : gtk.widget.Widget
       Params:
         showEndTitleButtons = whether to show end title buttons
   */
-  void setShowEndTitleButtons(bool showEndTitleButtons)
+  void setShowEndTitleButtons(bool showEndTitleButtons) nothrow
   {
     adw_tab_overview_set_show_end_title_buttons(cast(AdwTabOverview*)this._cPtr, showEndTitleButtons);
   }
@@ -646,7 +646,7 @@ class TabOverview : gtk.widget.Widget
       Params:
         showStartTitleButtons = whether to show start title buttons
   */
-  void setShowStartTitleButtons(bool showStartTitleButtons)
+  void setShowStartTitleButtons(bool showStartTitleButtons) nothrow
   {
     adw_tab_overview_set_show_start_title_buttons(cast(AdwTabOverview*)this._cPtr, showStartTitleButtons);
   }
@@ -659,7 +659,7 @@ class TabOverview : gtk.widget.Widget
       Params:
         view = a tab view
   */
-  void setView(adw.tab_view.TabView view = null)
+  void setView(adw.tab_view.TabView view = null) nothrow
   {
     adw_tab_overview_set_view(cast(AdwTabOverview*)this._cPtr, view ? cast(AdwTabView*)view._cPtr(No.Dup) : null);
   }
@@ -682,7 +682,7 @@ class TabOverview : gtk.widget.Widget
         actions = the supported actions
         types = all supported `GType`s that can be dropped
   */
-  void setupExtraDropTarget(gdk.types.DragAction actions, gobject.types.GType[] types = null)
+  void setupExtraDropTarget(gdk.types.DragAction actions, gobject.types.GType[] types = null) nothrow
   {
     size_t _nTypes;
     if (types)
@@ -714,22 +714,30 @@ class TabOverview : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCreateTab(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCreateTab(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T : adw.tab_page.TabPage)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.tab_overview.TabOverview)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      adw.tab_page.TabPage _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.tab_overview.TabOverview.createTab");
+      }
 
       setVal!(adw.tab_page.TabPage)(_returnValue, _retval);
     }
@@ -763,7 +771,7 @@ class TabOverview : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectExtraDragDrop(T)(T callback, Flag!"After" after = No.After)
+  gulong connectExtraDragDrop(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.tab_page.TabPage)))
@@ -771,11 +779,12 @@ class TabOverview : gtk.widget.Widget
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : adw.tab_overview.TabOverview)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -786,7 +795,14 @@ class TabOverview : gtk.widget.Widget
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.tab_overview.TabOverview.extraDragDrop");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -823,7 +839,7 @@ class TabOverview : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectExtraDragValue(T)(T callback, Flag!"After" after = No.After)
+  gulong connectExtraDragValue(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == gdk.types.DragAction)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.tab_page.TabPage)))
@@ -831,11 +847,12 @@ class TabOverview : gtk.widget.Widget
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : adw.tab_overview.TabOverview)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gdk.types.DragAction _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -846,7 +863,14 @@ class TabOverview : gtk.widget.Widget
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.tab_overview.TabOverview.extraDragValue");
+      }
 
       setVal!(gdk.types.DragAction)(_returnValue, _retval);
     }
@@ -867,7 +891,7 @@ class TabOverviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The child widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -880,7 +904,7 @@ class TabOverviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           Connect to the [adw.tab_overview.TabOverview.createTab] signal to use it.
       Returns: Builder instance for fluent chaining
   */
-  T enableNewTab(bool propval)
+  T enableNewTab(bool propval) nothrow
   {
     return setProperty("enable-new-tab", propval);
   }
@@ -900,7 +924,7 @@ class TabOverviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           currently active.
       Returns: Builder instance for fluent chaining
   */
-  T enableSearch(bool propval)
+  T enableSearch(bool propval) nothrow
   {
     return setProperty("enable-search", propval);
   }
@@ -913,7 +937,7 @@ class TabOverviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           See [gtk.drop_target.DropTarget.preload].
       Returns: Builder instance for fluent chaining
   */
-  T extraDragPreload(bool propval)
+  T extraDragPreload(bool propval) nothrow
   {
     return setProperty("extra-drag-preload", propval);
   }
@@ -927,7 +951,7 @@ class TabOverviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           beginning and the indicator at the end rather than the other way around.
       Returns: Builder instance for fluent chaining
   */
-  T inverted(bool propval)
+  T inverted(bool propval) nothrow
   {
     return setProperty("inverted", propval);
   }
@@ -938,7 +962,7 @@ class TabOverviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether the overview is open.
       Returns: Builder instance for fluent chaining
   */
-  T open(bool propval)
+  T open(bool propval) nothrow
   {
     return setProperty("open", propval);
   }
@@ -951,7 +975,7 @@ class TabOverviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           Use it to add extra actions, e.g. to open a new window or undo closed tab.
       Returns: Builder instance for fluent chaining
   */
-  T secondaryMenu(gio.menu_model.MenuModel propval)
+  T secondaryMenu(gio.menu_model.MenuModel propval) nothrow
   {
     return setProperty("secondary-menu", propval);
   }
@@ -964,7 +988,7 @@ class TabOverviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           See [adw.header_bar.HeaderBar.showStartTitleButtons] for the other side.
       Returns: Builder instance for fluent chaining
   */
-  T showEndTitleButtons(bool propval)
+  T showEndTitleButtons(bool propval) nothrow
   {
     return setProperty("show-end-title-buttons", propval);
   }
@@ -977,7 +1001,7 @@ class TabOverviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           See [adw.header_bar.HeaderBar.showEndTitleButtons] for the other side.
       Returns: Builder instance for fluent chaining
   */
-  T showStartTitleButtons(bool propval)
+  T showStartTitleButtons(bool propval) nothrow
   {
     return setProperty("show-start-title-buttons", propval);
   }
@@ -990,7 +1014,7 @@ class TabOverviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           The view must be inside the tab overview, see [adw.tab_overview.TabOverview.child].
       Returns: Builder instance for fluent chaining
   */
-  T view(adw.tab_view.TabView propval)
+  T view(adw.tab_view.TabView propval) nothrow
   {
     return setProperty("view", propval);
   }
@@ -1003,7 +1027,7 @@ final class TabOverviewGidBuilder : TabOverviewGidBuilderImpl!TabOverviewGidBuil
       Create object from builder.
       Returns: New object
   */
-  TabOverview build()
+  TabOverview build() nothrow
   {
     return new TabOverview(cast(void*)createGObject(TabOverview._getGType), No.Take);
   }

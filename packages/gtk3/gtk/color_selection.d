@@ -24,26 +24,26 @@ class ColorSelection : gtk.box.Box
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_color_selection_get_type != &gidSymbolNotFound ? gtk_color_selection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ColorSelection self()
+  override ColorSelection self() nothrow
   {
     return this;
   }
@@ -52,19 +52,19 @@ class ColorSelection : gtk.box.Box
       Get builder for [gtk.color_selection.ColorSelection]
       Returns: New builder object
   */
-  static ColorSelectionGidBuilder builder()
+  static ColorSelectionGidBuilder builder() nothrow
   {
     return new ColorSelectionGidBuilder;
   }
 
   /** */
-  @property uint currentAlpha()
+  @property uint currentAlpha() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("current-alpha");
   }
 
   /** */
-  @property void currentAlpha(uint propval)
+  @property void currentAlpha(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("current-alpha", propval);
   }
@@ -75,7 +75,7 @@ class ColorSelection : gtk.box.Box
   
       Deprecated: Use #GtkColorSelection:current-rgba instead.
   */
-  @property gdk.color.Color currentColor()
+  @property gdk.color.Color currentColor() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.color.Color)("current-color");
   }
@@ -87,7 +87,7 @@ class ColorSelection : gtk.box.Box
   
       Deprecated: Use #GtkColorSelection:current-rgba instead.
   */
-  @property void currentColor(gdk.color.Color propval)
+  @property void currentColor(gdk.color.Color propval) nothrow
   {
     setCurrentColor(propval);
   }
@@ -96,7 +96,7 @@ class ColorSelection : gtk.box.Box
       Get `currentRgba` property.
       Returns: The current RGBA color.
   */
-  @property gdk.rgba.RGBA currentRgba()
+  @property gdk.rgba.RGBA currentRgba() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("current-rgba");
   }
@@ -106,31 +106,31 @@ class ColorSelection : gtk.box.Box
       Params:
         propval = The current RGBA color.
   */
-  @property void currentRgba(gdk.rgba.RGBA propval)
+  @property void currentRgba(gdk.rgba.RGBA propval) nothrow
   {
     setCurrentRgba(propval);
   }
 
   /** */
-  @property bool hasOpacityControl()
+  @property bool hasOpacityControl() nothrow
   {
     return getHasOpacityControl();
   }
 
   /** */
-  @property void hasOpacityControl(bool propval)
+  @property void hasOpacityControl(bool propval) nothrow
   {
     setHasOpacityControl(propval);
   }
 
   /** */
-  @property bool hasPalette()
+  @property bool hasPalette() nothrow
   {
     return getHasPalette();
   }
 
   /** */
-  @property void hasPalette(bool propval)
+  @property void hasPalette(bool propval) nothrow
   {
     setHasPalette(propval);
   }
@@ -139,7 +139,7 @@ class ColorSelection : gtk.box.Box
       Creates a new GtkColorSelection.
       Returns: a new #GtkColorSelection
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_color_selection_new();
@@ -156,7 +156,7 @@ class ColorSelection : gtk.box.Box
               allocated array of #GdkColor
       Returns: true if a palette was successfully parsed
   */
-  static bool paletteFromString(string str, out gdk.color.Color[] colors)
+  static bool paletteFromString(string str, out gdk.color.Color[] colors) nothrow
   {
     bool _retval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -176,7 +176,7 @@ class ColorSelection : gtk.box.Box
         colors = an array of colors
       Returns: allocated string encoding the palette
   */
-  static string paletteToString(gdk.color.Color[] colors)
+  static string paletteToString(gdk.color.Color[] colors) nothrow
   {
     char* _cretval;
     int _nColors;
@@ -193,7 +193,7 @@ class ColorSelection : gtk.box.Box
       Returns the current alpha value.
       Returns: an integer between 0 and 65535
   */
-  ushort getCurrentAlpha()
+  ushort getCurrentAlpha() nothrow
   {
     ushort _retval;
     _retval = gtk_color_selection_get_current_alpha(cast(GtkColorSelection*)this._cPtr);
@@ -208,7 +208,7 @@ class ColorSelection : gtk.box.Box
   
       Deprecated: Use [gtk.color_selection.ColorSelection.getCurrentRgba] instead.
   */
-  void getCurrentColor(out gdk.color.Color color)
+  void getCurrentColor(out gdk.color.Color color) nothrow
   {
     gtk_color_selection_get_current_color(cast(GtkColorSelection*)this._cPtr, cast(GdkColor*)&color);
   }
@@ -219,7 +219,7 @@ class ColorSelection : gtk.box.Box
       Params:
         rgba = a #GdkRGBA to fill in with the current color
   */
-  void getCurrentRgba(out gdk.rgba.RGBA rgba)
+  void getCurrentRgba(out gdk.rgba.RGBA rgba) nothrow
   {
     gtk_color_selection_get_current_rgba(cast(GtkColorSelection*)this._cPtr, cast(GdkRGBA*)&rgba);
   }
@@ -229,7 +229,7 @@ class ColorSelection : gtk.box.Box
       Returns: true if the colorsel has an opacity control,
             false if it does't
   */
-  bool getHasOpacityControl()
+  bool getHasOpacityControl() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_color_selection_get_has_opacity_control(cast(GtkColorSelection*)this._cPtr);
@@ -240,7 +240,7 @@ class ColorSelection : gtk.box.Box
       Determines whether the color selector has a color palette.
       Returns: true if the selector has a palette, false if it hasn't
   */
-  bool getHasPalette()
+  bool getHasPalette() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_color_selection_get_has_palette(cast(GtkColorSelection*)this._cPtr);
@@ -251,7 +251,7 @@ class ColorSelection : gtk.box.Box
       Returns the previous alpha value.
       Returns: an integer between 0 and 65535
   */
-  ushort getPreviousAlpha()
+  ushort getPreviousAlpha() nothrow
   {
     ushort _retval;
     _retval = gtk_color_selection_get_previous_alpha(cast(GtkColorSelection*)this._cPtr);
@@ -266,7 +266,7 @@ class ColorSelection : gtk.box.Box
   
       Deprecated: Use [gtk.color_selection.ColorSelection.getPreviousRgba] instead.
   */
-  void getPreviousColor(out gdk.color.Color color)
+  void getPreviousColor(out gdk.color.Color color) nothrow
   {
     gtk_color_selection_get_previous_color(cast(GtkColorSelection*)this._cPtr, cast(GdkColor*)&color);
   }
@@ -277,7 +277,7 @@ class ColorSelection : gtk.box.Box
       Params:
         rgba = a #GdkRGBA to fill in with the original color value
   */
-  void getPreviousRgba(out gdk.rgba.RGBA rgba)
+  void getPreviousRgba(out gdk.rgba.RGBA rgba) nothrow
   {
     gtk_color_selection_get_previous_rgba(cast(GtkColorSelection*)this._cPtr, cast(GdkRGBA*)&rgba);
   }
@@ -287,7 +287,7 @@ class ColorSelection : gtk.box.Box
       Returns: true if the user is currently dragging
             a color around, and false if the selection has stopped
   */
-  bool isAdjusting()
+  bool isAdjusting() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_color_selection_is_adjusting(cast(GtkColorSelection*)this._cPtr);
@@ -303,7 +303,7 @@ class ColorSelection : gtk.box.Box
       Params:
         alpha = an integer between 0 and 65535
   */
-  void setCurrentAlpha(ushort alpha)
+  void setCurrentAlpha(ushort alpha) nothrow
   {
     gtk_color_selection_set_current_alpha(cast(GtkColorSelection*)this._cPtr, alpha);
   }
@@ -319,7 +319,7 @@ class ColorSelection : gtk.box.Box
   
       Deprecated: Use [gtk.color_selection.ColorSelection.setCurrentRgba] instead.
   */
-  void setCurrentColor(gdk.color.Color color)
+  void setCurrentColor(gdk.color.Color color) nothrow
   {
     gtk_color_selection_set_current_color(cast(GtkColorSelection*)this._cPtr, cast(const(GdkColor)*)&color);
   }
@@ -333,7 +333,7 @@ class ColorSelection : gtk.box.Box
       Params:
         rgba = A #GdkRGBA to set the current color with
   */
-  void setCurrentRgba(gdk.rgba.RGBA rgba)
+  void setCurrentRgba(gdk.rgba.RGBA rgba) nothrow
   {
     gtk_color_selection_set_current_rgba(cast(GtkColorSelection*)this._cPtr, cast(const(GdkRGBA)*)&rgba);
   }
@@ -344,7 +344,7 @@ class ColorSelection : gtk.box.Box
       Params:
         hasOpacity = true if colorsel can set the opacity, false otherwise
   */
-  void setHasOpacityControl(bool hasOpacity)
+  void setHasOpacityControl(bool hasOpacity) nothrow
   {
     gtk_color_selection_set_has_opacity_control(cast(GtkColorSelection*)this._cPtr, hasOpacity);
   }
@@ -355,7 +355,7 @@ class ColorSelection : gtk.box.Box
       Params:
         hasPalette = true if palette is to be visible, false otherwise
   */
-  void setHasPalette(bool hasPalette)
+  void setHasPalette(bool hasPalette) nothrow
   {
     gtk_color_selection_set_has_palette(cast(GtkColorSelection*)this._cPtr, hasPalette);
   }
@@ -369,7 +369,7 @@ class ColorSelection : gtk.box.Box
       Params:
         alpha = an integer between 0 and 65535
   */
-  void setPreviousAlpha(ushort alpha)
+  void setPreviousAlpha(ushort alpha) nothrow
   {
     gtk_color_selection_set_previous_alpha(cast(GtkColorSelection*)this._cPtr, alpha);
   }
@@ -387,7 +387,7 @@ class ColorSelection : gtk.box.Box
   
       Deprecated: Use [gtk.color_selection.ColorSelection.setPreviousRgba] instead.
   */
-  void setPreviousColor(gdk.color.Color color)
+  void setPreviousColor(gdk.color.Color color) nothrow
   {
     gtk_color_selection_set_previous_color(cast(GtkColorSelection*)this._cPtr, cast(const(GdkColor)*)&color);
   }
@@ -403,7 +403,7 @@ class ColorSelection : gtk.box.Box
       Params:
         rgba = a #GdkRGBA to set the previous color with
   */
-  void setPreviousRgba(gdk.rgba.RGBA rgba)
+  void setPreviousRgba(gdk.rgba.RGBA rgba) nothrow
   {
     gtk_color_selection_set_previous_rgba(cast(GtkColorSelection*)this._cPtr, cast(const(GdkRGBA)*)&rgba);
   }
@@ -424,13 +424,13 @@ class ColorSelection : gtk.box.Box
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectColorChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectColorChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.color_selection.ColorSelection)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -439,7 +439,14 @@ class ColorSelection : gtk.box.Box
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.color_selection.ColorSelection.colorChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -453,7 +460,7 @@ class ColorSelectionGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
 
 
   /** */
-  T currentAlpha(uint propval)
+  T currentAlpha(uint propval) nothrow
   {
     return setProperty("current-alpha", propval);
   }
@@ -466,7 +473,7 @@ class ColorSelectionGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
   
       Deprecated: Use #GtkColorSelection:current-rgba instead.
   */
-  T currentColor(gdk.color.Color propval)
+  T currentColor(gdk.color.Color propval) nothrow
   {
     return setProperty("current-color", propval);
   }
@@ -477,19 +484,19 @@ class ColorSelectionGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
         propval = The current RGBA color.
       Returns: Builder instance for fluent chaining
   */
-  T currentRgba(gdk.rgba.RGBA propval)
+  T currentRgba(gdk.rgba.RGBA propval) nothrow
   {
     return setProperty("current-rgba", propval);
   }
 
   /** */
-  T hasOpacityControl(bool propval)
+  T hasOpacityControl(bool propval) nothrow
   {
     return setProperty("has-opacity-control", propval);
   }
 
   /** */
-  T hasPalette(bool propval)
+  T hasPalette(bool propval) nothrow
   {
     return setProperty("has-palette", propval);
   }
@@ -502,7 +509,7 @@ final class ColorSelectionGidBuilder : ColorSelectionGidBuilderImpl!ColorSelecti
       Create object from builder.
       Returns: New object
   */
-  ColorSelection build()
+  ColorSelection build() nothrow
   {
     return new ColorSelection(cast(void*)createGObject(ColorSelection._getGType), No.Take);
   }

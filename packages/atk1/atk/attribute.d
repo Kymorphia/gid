@@ -25,11 +25,8 @@ class Attribute
   AtkAttribute _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for atk.attribute.Attribute");
-
     _cInstance = *cast(AtkAttribute*)ptr;
 
     if (take)
@@ -37,7 +34,7 @@ class Attribute
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -46,7 +43,7 @@ class Attribute
       Get `name` field.
       Returns: The attribute name.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return cToD!(string)(cast(void*)(cast(AtkAttribute*)this._cPtr).name);
   }
@@ -56,7 +53,7 @@ class Attribute
       Params:
         propval = The attribute name.
   */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(AtkAttribute*)this._cPtr).name);
     dToC(propval, cast(void*)&(cast(AtkAttribute*)this._cPtr).name);
@@ -66,7 +63,7 @@ class Attribute
       Get `value` field.
       Returns: the value of the attribute, represented as a string.
   */
-  @property string value()
+  @property string value() nothrow
   {
     return cToD!(string)(cast(void*)(cast(AtkAttribute*)this._cPtr).value);
   }
@@ -76,7 +73,7 @@ class Attribute
       Params:
         propval = the value of the attribute, represented as a string.
   */
-  @property void value(string propval)
+  @property void value(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(AtkAttribute*)this._cPtr).value);
     dToC(propval, cast(void*)&(cast(AtkAttribute*)this._cPtr).value);

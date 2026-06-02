@@ -12,7 +12,7 @@ struct GLConfigSurfaceType
   alias Enum = gstgl.types.GLConfigSurfaceType; ///
 
   /** */
-  static string toString_(gstgl.types.GLConfigSurfaceType surfaceType)
+  static string toString_(gstgl.types.GLConfigSurfaceType surfaceType) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_gl_config_surface_type_to_string(surfaceType);

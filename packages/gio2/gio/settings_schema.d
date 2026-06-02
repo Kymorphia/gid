@@ -105,32 +105,32 @@ class SettingsSchema : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_settings_schema_get_type != &gidSymbolNotFound ? g_settings_schema_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SettingsSchema self()
+  override SettingsSchema self() nothrow
   {
     return this;
   }
@@ -139,7 +139,7 @@ class SettingsSchema : gobject.boxed.Boxed
       Get the ID of schema.
       Returns: the ID
   */
-  string getId()
+  string getId() nothrow
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_get_id(cast(GSettingsSchema*)this._cPtr);
@@ -157,7 +157,7 @@ class SettingsSchema : gobject.boxed.Boxed
         name = the name of a key
       Returns: the #GSettingsSchemaKey for name
   */
-  gio.settings_schema_key.SettingsSchemaKey getKey(string name)
+  gio.settings_schema_key.SettingsSchemaKey getKey(string name) nothrow
   {
     GSettingsSchemaKey* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -178,7 +178,7 @@ class SettingsSchema : gobject.boxed.Boxed
       relocatable schemas, this function will return null.
       Returns: the path of the schema, or null
   */
-  string getPath()
+  string getPath() nothrow
   {
     const(char)* _cretval;
     _cretval = g_settings_schema_get_path(cast(GSettingsSchema*)this._cPtr);
@@ -193,7 +193,7 @@ class SettingsSchema : gobject.boxed.Boxed
         name = the name of a key
       Returns: true if such a key exists
   */
-  bool hasKey(string name)
+  bool hasKey(string name) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -209,7 +209,7 @@ class SettingsSchema : gobject.boxed.Boxed
       Returns: a list of
            the children on settings, in no defined order
   */
-  string[] listChildren()
+  string[] listChildren() nothrow
   {
     char** _cretval;
     _cretval = g_settings_schema_list_children(cast(GSettingsSchema*)this._cPtr);
@@ -237,7 +237,7 @@ class SettingsSchema : gobject.boxed.Boxed
       Returns: a list
           of the keys on schema, in no defined order
   */
-  string[] listKeys()
+  string[] listKeys() nothrow
   {
     char** _cretval;
     _cretval = g_settings_schema_list_keys(cast(GSettingsSchema*)this._cPtr);

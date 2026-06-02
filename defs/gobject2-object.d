@@ -3,6 +3,7 @@
 
 import core.atomic;
 import std.conv : to;
+import std.exception : assumeWontThrow;
 public import std.typecons : Flag, No, Yes;
 
 import gid.basictypes;
@@ -42,10 +43,10 @@ __gshared bool classMapsInitialized;
  * A convenient string mixin to be used for ObjectWrap derived classes to declare boilerplate constructors.
  * Returns: A string value to use with mixin() within ObjectWrap derived classes.
  */
-string objectMixin()
+string objectMixin() nothrow
 {
   return
-`  this(void* cObj, Flag!"Take" take)
+`  this(void* cObj, Flag!"Take" take) nothrow
   {
     super(cObj, take);
   }
@@ -63,7 +64,7 @@ class ObjectWrap
    * Params:
    *   type = The GType value to use for creating the wrapped GObject
    */
-  final this(GType type)
+  final this(GType type) nothrow
   {
     this(g_object_new(type, null), Yes.Take);
   }
@@ -74,15 +75,13 @@ class ObjectWrap
    *   cObj = Pointer to the GObject
    *   take = Yes.Take if the D object should take ownership of the passed reference, No.Take to add a new reference
    */
-  final this(void* cObj, Flag!"Take" take)
+  final this(void* cObj, Flag!"Take" take) nothrow
   {
-    if (!cObj)
-      throw new GidConstructException("Null instance pointer for " ~ typeid(this).name);
-
-    _setGObject(cObj, take);
+    if (cObj)
+      _setGObject(cObj, take);
   }
 
-  ~this()
+  ~this() nothrow
   { // D object is being garbage collected. Only happens when there is only the toggle reference on GObject and there are no more pointers to the D proxy object.
     if (_cInstancePtr) // Might be null if an exception occurred during construction
     {
@@ -97,7 +96,7 @@ class ObjectWrap
    *   cObj = Pointer to the GObject
    *   take = Yes.Take if the D object should take ownership of the passed reference, No.Take to add a new reference
    */
-  final void _setGObject(void* cObj, Flag!"Take" take)
+  final void _setGObject(void* cObj, Flag!"Take" take) nothrow
   {
     assert(!_cInstancePtr);
 
@@ -127,7 +126,7 @@ class ObjectWrap
   }
 
   // Toggle ref callback
-  extern(C) static void _cObjToggleNotify(void *dObj, GObject* gObj, gboolean isLastRef)
+  extern(C) static void _cObjToggleNotify(void *dObj, GObject* gObj, gboolean isLastRef) nothrow
   {
     debug
     {
@@ -147,7 +146,7 @@ class ObjectWrap
    *   dup = Yes.Dup to add a reference with g_object_ref(), No.Dup otherwise (default)
    * Returns: The C object (reference added according to addRef parameter)
    */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     if (dup)
       g_object_ref(_cInstancePtr);
@@ -167,7 +166,7 @@ class ObjectWrap
    *   gObj = The GObject to reference
    * Returns: The GObject
    */
-  static void* _ref(void* gObj)
+  static void* _ref(void* gObj) nothrow
   {
     return g_object_ref(cast(GObject*)gObj);
   }
@@ -177,7 +176,7 @@ class ObjectWrap
    * Params:
    *   gObj = The GObject to reference
    */
-  static _unref(void* gObj)
+  static _unref(void* gObj) nothrow
   {
     g_object_unref(cast(GObject*)gObj);
   }
@@ -186,7 +185,7 @@ class ObjectWrap
    * Get the GType of an object.
    * Returns: The GType
    */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     return g_object_get_type();
   }
@@ -195,7 +194,7 @@ class ObjectWrap
    * GObject GType property.
    * Returns: The GType of the GObject class.
    */
-  @property GType _gType()
+  @property GType _gType() nothrow
   {
     return _getGType;
   }
@@ -204,7 +203,7 @@ class ObjectWrap
    * Convenience method to return `this` cast to a type. For use in D with statements.
    * Returns: The object instance
    */
-  ObjectWrap self()
+  ObjectWrap self() nothrow
   {
     return this;
   }
@@ -217,7 +216,7 @@ class ObjectWrap
    *   take = If Yes.Take then the D object will consume a GObject reference.
    * Returns: The D object (which may be a new object if the GObject wasn't already wrapped)
    */
-  static T _getDObject(T)(void* cptr, Flag!"Take" take)
+  static T _getDObject(T)(void* cptr, Flag!"Take" take) nothrow
   {
     if (!cptr)
       return null;
@@ -235,36 +234,7 @@ class ObjectWrap
     {
       synchronized
       {
-        auto gobjClass = typeid(ObjectWrap);
-        auto ifProxyClass = typeid(IfaceProxy);
-
-        foreach (m; ModuleInfo)
-        {
-          if (!m)
-            continue;
-
-          foreach (c; m.localClasses)
-          {
-            if (c && ifProxyClass.isBaseOf(c))
-            {
-              if (c is ifProxyClass)
-                continue;
-
-              auto obj = cast(IfaceProxy)_d_newclass(c);
-
-              if (auto ifaceInfo = obj.getIface)
-                ifaceProxyClasses[ifaceInfo] = c;
-            }
-            else if (c && gobjClass.isBaseOf(c))
-            { // Create object without calling the constructor which could have side effects - FIXME is there a better way to do this?
-              auto obj = _d_newclass(c);
-
-              if (auto gType = (cast(ObjectWrap)obj)._gType)
-                gtypeClasses[gType] = c;
-            }
-          }
-        }
-
+        assumeWontThrow(createClassMaps);
         atomicStore(classMapsInitialized, true);
       }
     }
@@ -278,7 +248,7 @@ class ObjectWrap
         if (is(T == interface) && !typeid(T).isBaseOf(cast(const)*dClassType))
           break;
 
-        if (auto obj = _d_newclass(cast()*dClassType))
+        if (auto obj = assumeWontThrow(_d_newclass(cast()*dClassType)))
         {
           (cast(ObjectWrap)obj)._setGObject(cptr, take);
           return cast(T)obj;
@@ -292,7 +262,7 @@ class ObjectWrap
     {
       if (auto proxyClass = typeid(T) in ifaceProxyClasses) // Interface has a proxy object?
       {
-        if (auto obj = _d_newclass(cast()*proxyClass)) // Create the object without calling the constructor
+        if (auto obj = assumeWontThrow(_d_newclass(cast()*proxyClass))) // Create the object without calling the constructor
         {
           (cast(ObjectWrap)obj)._setGObject(cptr, take); // Assign the C GObject
           return cast(T)obj;
@@ -302,12 +272,21 @@ class ObjectWrap
       return null;
     }
     else
-      return new T(cptr, take); // Fallback to attempting to create Object from this template Object type
+    {
+      T retval;
+
+      try
+        retval = new T(cptr, take); // Fallback to attempting to create Object from this template Object type
+      catch (Exception e)
+        gidInvokeCallbackExceptionHandler(e, "new " ~ T.stringof);
+
+      return retval;
+    }
   }
 
   debug
   { // Function for GObject debugging output (@nogc to avoid memory issues during GC finalization)
-    void objectDebugLog(string action) @nogc
+    void objectDebugLog(string action) @nogc nothrow
     {
       if (gidObjectDebug)
       {
@@ -334,13 +313,13 @@ class ObjectWrap
       }
     }
 
-    private static void toHex(char[] buffer, ulong value) @nogc
+    private static void toHex(char[] buffer, ulong value) @nogc nothrow
     {
       foreach (i; 0 .. 16)
         buffer[i] = "0123456789ABCDEF"[(value >> (60 - i * 4)) & 0xF];
     }
 
-    private static uint toDec(char[] buffer, uint value) @nogc
+    private static uint toDec(char[] buffer, uint value) @nogc nothrow
     {
       uint pos;
       uint div = 1_000_000_000;
@@ -363,6 +342,39 @@ class ObjectWrap
     }
   }
 
+  static private void createClassMaps()
+  {
+    auto gobjClass = typeid(ObjectWrap);
+    auto ifProxyClass = typeid(IfaceProxy);
+
+    foreach (m; ModuleInfo)
+    {
+      if (!m)
+        continue;
+
+      foreach (c; m.localClasses)
+      {
+        if (c && ifProxyClass.isBaseOf(c))
+        {
+          if (c is ifProxyClass)
+            continue;
+
+          auto obj = cast(IfaceProxy)_d_newclass(c);
+
+          if (auto ifaceInfo = obj.getIface)
+            ifaceProxyClasses[ifaceInfo] = c;
+        }
+        else if (c && gobjClass.isBaseOf(c))
+        { // Create object without calling the constructor which could have side effects - FIXME is there a better way to do this?
+          auto obj = _d_newclass(c);
+
+          if (auto gType = (cast(ObjectWrap)obj)._gType)
+            gtypeClasses[gType] = c;
+        }
+      }
+    }
+  }
+
   /**
    * Connect a D closure to an object signal.
    * Params:
@@ -371,7 +383,7 @@ class ObjectWrap
    *   after = Yes.After to invoke the signal after the default handler, No.After to execute before (default)
    * Returns: The signal connection ID
    */
-  gulong connectSignalClosure(string signalDetail, DClosure closure, Flag!"After" after = No.After)
+  gulong connectSignalClosure(string signalDetail, DClosure closure, Flag!"After" after = No.After) nothrow
   {
     auto gclosure = cast(GClosure*)(cast(Closure)closure)._cPtr;
     auto retval = g_signal_connect_closure(_cInstancePtr, signalDetail.toCString(No.Alloc), gclosure, after == Yes.After);
@@ -389,7 +401,7 @@ class ObjectWrap
    *   propertyName = Name of the GObject property
    *   val = The value to assign (must match the property value type)
    */
-  void setProperty(T)(string propertyName, T val)
+  void setProperty(T)(string propertyName, T val) nothrow
   {
     GValue value;
     initVal!T(&value);
@@ -404,7 +416,7 @@ class ObjectWrap
    *   propertyName = Name of the GObject property
    * Returns: The property value (must match the property value type)
    */
-  T getProperty(T)(string propertyName) const
+  T getProperty(T)(string propertyName) const nothrow
   {
     GValue value;
     initVal!T(&value);
@@ -420,10 +432,10 @@ class ObjectWrap
  */
 abstract class IfaceProxy : ObjectWrap
 {
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
   }
 
-  abstract TypeInfo_Interface getIface();
+  abstract TypeInfo_Interface getIface() nothrow;
 }

@@ -68,26 +68,26 @@ class IOStream : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_io_stream_get_type != &gidSymbolNotFound ? g_io_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override IOStream self()
+  override IOStream self() nothrow
   {
     return this;
   }
@@ -96,7 +96,7 @@ class IOStream : gobject.object.ObjectWrap
       Get builder for [gio.iostream.IOStream]
       Returns: New builder object
   */
-  static IOStreamGidBuilder builder()
+  static IOStreamGidBuilder builder() nothrow
   {
     return new IOStreamGidBuilder;
   }
@@ -105,7 +105,7 @@ class IOStream : gobject.object.ObjectWrap
       Get `closed` property.
       Returns: Whether the stream is closed.
   */
-  @property bool closed()
+  @property bool closed() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("closed");
   }
@@ -114,7 +114,7 @@ class IOStream : gobject.object.ObjectWrap
       Get `inputStream` property.
       Returns: The [gio.input_stream.InputStream] to read from.
   */
-  @property gio.input_stream.InputStream inputStream()
+  @property gio.input_stream.InputStream inputStream() nothrow
   {
     return getInputStream();
   }
@@ -123,7 +123,7 @@ class IOStream : gobject.object.ObjectWrap
       Get `outputStream` property.
       Returns: The [gio.output_stream.OutputStream] to write to.
   */
-  @property gio.output_stream.OutputStream outputStream()
+  @property gio.output_stream.OutputStream outputStream() nothrow
   {
     return getOutputStream();
   }
@@ -149,7 +149,7 @@ class IOStream : gobject.object.ObjectWrap
   /**
       Clears the pending flag on stream.
   */
-  void clearPending()
+  void clearPending() nothrow
   {
     g_io_stream_clear_pending(cast(GIOStream*)this._cPtr);
   }
@@ -222,14 +222,21 @@ class IOStream : gobject.object.ObjectWrap
         callback = a #GAsyncReadyCallback
             to call when the request is satisfied
   */
-  void closeAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void closeAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -260,7 +267,7 @@ class IOStream : gobject.object.ObjectWrap
       Returns: a #GInputStream, owned by the #GIOStream.
         Do not free.
   */
-  gio.input_stream.InputStream getInputStream()
+  gio.input_stream.InputStream getInputStream() nothrow
   {
     GInputStream* _cretval;
     _cretval = g_io_stream_get_input_stream(cast(GIOStream*)this._cPtr);
@@ -274,7 +281,7 @@ class IOStream : gobject.object.ObjectWrap
       Returns: a #GOutputStream, owned by the #GIOStream.
         Do not free.
   */
-  gio.output_stream.OutputStream getOutputStream()
+  gio.output_stream.OutputStream getOutputStream() nothrow
   {
     GOutputStream* _cretval;
     _cretval = g_io_stream_get_output_stream(cast(GIOStream*)this._cPtr);
@@ -286,7 +293,7 @@ class IOStream : gobject.object.ObjectWrap
       Checks if a stream has pending actions.
       Returns: true if stream has pending actions.
   */
-  bool hasPending()
+  bool hasPending() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_io_stream_has_pending(cast(GIOStream*)this._cPtr);
@@ -297,7 +304,7 @@ class IOStream : gobject.object.ObjectWrap
       Checks if a stream is closed.
       Returns: true if the stream is closed.
   */
-  bool isClosed()
+  bool isClosed() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_io_stream_is_closed(cast(GIOStream*)this._cPtr);
@@ -338,14 +345,21 @@ class IOStream : gobject.object.ObjectWrap
         callback = a #GAsyncReadyCallback
             to call when the request is satisfied
   */
-  void spliceAsync(gio.iostream.IOStream stream2, gio.types.IOStreamSpliceFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void spliceAsync(gio.iostream.IOStream stream2, gio.types.IOStreamSpliceFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -365,7 +379,7 @@ final class IOStreamGidBuilder : IOStreamGidBuilderImpl!IOStreamGidBuilder
       Create object from builder.
       Returns: New object
   */
-  IOStream build()
+  IOStream build() nothrow
   {
     return new IOStream(cast(void*)createGObject(IOStream._getGType), No.Take);
   }

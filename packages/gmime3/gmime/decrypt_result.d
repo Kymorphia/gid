@@ -18,26 +18,26 @@ class DecryptResult : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_decrypt_result_get_type != &gidSymbolNotFound ? g_mime_decrypt_result_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DecryptResult self()
+  override DecryptResult self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class DecryptResult : gobject.object.ObjectWrap
       Get builder for [gmime.decrypt_result.DecryptResult]
       Returns: New builder object
   */
-  static DecryptResultGidBuilder builder()
+  static DecryptResultGidBuilder builder() nothrow
   {
     return new DecryptResultGidBuilder;
   }
@@ -55,7 +55,7 @@ class DecryptResult : gobject.object.ObjectWrap
       Creates a new #GMimeDecryptResult object.
       Returns: a new #GMimeDecryptResult object.
   */
-  this()
+  this() nothrow
   {
     GMimeDecryptResult* _cretval;
     _cretval = g_mime_decrypt_result_new();
@@ -66,7 +66,7 @@ class DecryptResult : gobject.object.ObjectWrap
       Get the cipher algorithm used.
       Returns: the cipher algorithm used.
   */
-  gmime.types.CipherAlgo getCipher()
+  gmime.types.CipherAlgo getCipher() nothrow
   {
     GMimeCipherAlgo _cretval;
     _cretval = g_mime_decrypt_result_get_cipher(cast(GMimeDecryptResult*)this._cPtr);
@@ -78,7 +78,7 @@ class DecryptResult : gobject.object.ObjectWrap
       Get the mdc digest algorithm used.
       Returns: the mdc digest algorithm used.
   */
-  gmime.types.DigestAlgo getMdc()
+  gmime.types.DigestAlgo getMdc() nothrow
   {
     GMimeDigestAlgo _cretval;
     _cretval = g_mime_decrypt_result_get_mdc(cast(GMimeDecryptResult*)this._cPtr);
@@ -90,7 +90,7 @@ class DecryptResult : gobject.object.ObjectWrap
       Gets the list of certificates that the stream had been encrypted to.
       Returns: a #GMimeCertificateList.
   */
-  gmime.certificate_list.CertificateList getRecipients()
+  gmime.certificate_list.CertificateList getRecipients() nothrow
   {
     GMimeCertificateList* _cretval;
     _cretval = g_mime_decrypt_result_get_recipients(cast(GMimeDecryptResult*)this._cPtr);
@@ -103,7 +103,7 @@ class DecryptResult : gobject.object.ObjectWrap
       Returns: the session key digest algorithm used, or null if no
         session key was requested or found.
   */
-  string getSessionKey()
+  string getSessionKey() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_decrypt_result_get_session_key(cast(GMimeDecryptResult*)this._cPtr);
@@ -116,7 +116,7 @@ class DecryptResult : gobject.object.ObjectWrap
       Returns: a #GMimeSignatureList or null if the
         stream was not signed.
   */
-  gmime.signature_list.SignatureList getSignatures()
+  gmime.signature_list.SignatureList getSignatures() nothrow
   {
     GMimeSignatureList* _cretval;
     _cretval = g_mime_decrypt_result_get_signatures(cast(GMimeDecryptResult*)this._cPtr);
@@ -130,7 +130,7 @@ class DecryptResult : gobject.object.ObjectWrap
       Params:
         cipher = a #GMimeCipherAlgo
   */
-  void setCipher(gmime.types.CipherAlgo cipher)
+  void setCipher(gmime.types.CipherAlgo cipher) nothrow
   {
     g_mime_decrypt_result_set_cipher(cast(GMimeDecryptResult*)this._cPtr, cipher);
   }
@@ -141,7 +141,7 @@ class DecryptResult : gobject.object.ObjectWrap
       Params:
         mdc = a #GMimeDigestAlgo
   */
-  void setMdc(gmime.types.DigestAlgo mdc)
+  void setMdc(gmime.types.DigestAlgo mdc) nothrow
   {
     g_mime_decrypt_result_set_mdc(cast(GMimeDecryptResult*)this._cPtr, mdc);
   }
@@ -152,7 +152,7 @@ class DecryptResult : gobject.object.ObjectWrap
       Params:
         recipients = A #GMimeCertificateList
   */
-  void setRecipients(gmime.certificate_list.CertificateList recipients)
+  void setRecipients(gmime.certificate_list.CertificateList recipients) nothrow
   {
     g_mime_decrypt_result_set_recipients(cast(GMimeDecryptResult*)this._cPtr, recipients ? cast(GMimeCertificateList*)recipients._cPtr(No.Dup) : null);
   }
@@ -163,7 +163,7 @@ class DecryptResult : gobject.object.ObjectWrap
       Params:
         sessionKey = a string representing the session key or null to unset the key
   */
-  void setSessionKey(string sessionKey = null)
+  void setSessionKey(string sessionKey = null) nothrow
   {
     const(char)* _sessionKey = sessionKey.toCString(No.Alloc);
     g_mime_decrypt_result_set_session_key(cast(GMimeDecryptResult*)this._cPtr, _sessionKey);
@@ -175,7 +175,7 @@ class DecryptResult : gobject.object.ObjectWrap
       Params:
         signatures = A #GMimeSignatureList
   */
-  void setSignatures(gmime.signature_list.SignatureList signatures)
+  void setSignatures(gmime.signature_list.SignatureList signatures) nothrow
   {
     g_mime_decrypt_result_set_signatures(cast(GMimeDecryptResult*)this._cPtr, signatures ? cast(GMimeSignatureList*)signatures._cPtr(No.Dup) : null);
   }
@@ -193,7 +193,7 @@ final class DecryptResultGidBuilder : DecryptResultGidBuilderImpl!DecryptResultG
       Create object from builder.
       Returns: New object
   */
-  DecryptResult build()
+  DecryptResult build() nothrow
   {
     return new DecryptResult(cast(void*)createGObject(DecryptResult._getGType), Yes.Take);
   }

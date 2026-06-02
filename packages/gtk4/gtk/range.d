@@ -38,26 +38,26 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_range_get_type != &gidSymbolNotFound ? gtk_range_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Range self()
+  override Range self() nothrow
   {
     return this;
   }
@@ -66,7 +66,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Get builder for [gtk.range.Range]
       Returns: New builder object
   */
-  static RangeGidBuilder builder()
+  static RangeGidBuilder builder() nothrow
   {
     return new RangeGidBuilder;
   }
@@ -75,7 +75,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Get `adjustment` property.
       Returns: The adjustment that is controlled by the range.
   */
-  @property gtk.adjustment.Adjustment adjustment()
+  @property gtk.adjustment.Adjustment adjustment() nothrow
   {
     return getAdjustment();
   }
@@ -85,7 +85,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Params:
         propval = The adjustment that is controlled by the range.
   */
-  @property void adjustment(gtk.adjustment.Adjustment propval)
+  @property void adjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     setAdjustment(propval);
   }
@@ -94,7 +94,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Get `fillLevel` property.
       Returns: The fill level (e.g. prebuffering of a network stream).
   */
-  @property double fillLevel()
+  @property double fillLevel() nothrow
   {
     return getFillLevel();
   }
@@ -104,7 +104,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Params:
         propval = The fill level (e.g. prebuffering of a network stream).
   */
-  @property void fillLevel(double propval)
+  @property void fillLevel(double propval) nothrow
   {
     setFillLevel(propval);
   }
@@ -113,7 +113,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Get `inverted` property.
       Returns: If true, the direction in which the slider moves is inverted.
   */
-  @property bool inverted()
+  @property bool inverted() nothrow
   {
     return getInverted();
   }
@@ -123,7 +123,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Params:
         propval = If true, the direction in which the slider moves is inverted.
   */
-  @property void inverted(bool propval)
+  @property void inverted(bool propval) nothrow
   {
     setInverted(propval);
   }
@@ -133,7 +133,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Returns: Controls whether slider movement is restricted to an
         upper boundary set by the fill level.
   */
-  @property bool restrictToFillLevel()
+  @property bool restrictToFillLevel() nothrow
   {
     return getRestrictToFillLevel();
   }
@@ -144,7 +144,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
         propval = Controls whether slider movement is restricted to an
           upper boundary set by the fill level.
   */
-  @property void restrictToFillLevel(bool propval)
+  @property void restrictToFillLevel(bool propval) nothrow
   {
     setRestrictToFillLevel(propval);
   }
@@ -156,7 +156,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
         
         See [gtk.range.Range.changeValue].
   */
-  @property int roundDigits()
+  @property int roundDigits() nothrow
   {
     return getRoundDigits();
   }
@@ -169,7 +169,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
           
           See [gtk.range.Range.changeValue].
   */
-  @property void roundDigits(int propval)
+  @property void roundDigits(int propval) nothrow
   {
     setRoundDigits(propval);
   }
@@ -179,7 +179,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Returns: Controls whether fill level indicator graphics are displayed
         on the trough.
   */
-  @property bool showFillLevel()
+  @property bool showFillLevel() nothrow
   {
     return getShowFillLevel();
   }
@@ -190,7 +190,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
         propval = Controls whether fill level indicator graphics are displayed
           on the trough.
   */
-  @property void showFillLevel(bool propval)
+  @property void showFillLevel(bool propval) nothrow
   {
     setShowFillLevel(propval);
   }
@@ -202,7 +202,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Get the adjustment which is the “model” object for [gtk.range.Range].
       Returns: a [gtk.adjustment.Adjustment]
   */
-  gtk.adjustment.Adjustment getAdjustment()
+  gtk.adjustment.Adjustment getAdjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_range_get_adjustment(cast(GtkRange*)this._cPtr);
@@ -214,7 +214,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Gets the current position of the fill level indicator.
       Returns: The current fill level
   */
-  double getFillLevel()
+  double getFillLevel() nothrow
   {
     double _retval;
     _retval = gtk_range_get_fill_level(cast(GtkRange*)this._cPtr);
@@ -227,7 +227,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       See [gtk.range.Range.setFlippable].
       Returns: true if the range is flippable
   */
-  bool getFlippable()
+  bool getFlippable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_range_get_flippable(cast(GtkRange*)this._cPtr);
@@ -240,7 +240,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       See [gtk.range.Range.setInverted].
       Returns: true if the range is inverted
   */
-  bool getInverted()
+  bool getInverted() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_range_get_inverted(cast(GtkRange*)this._cPtr);
@@ -256,7 +256,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Params:
         rangeRect = return location for the range rectangle
   */
-  void getRangeRect(out gdk.rectangle.Rectangle rangeRect)
+  void getRangeRect(out gdk.rectangle.Rectangle rangeRect) nothrow
   {
     gtk_range_get_range_rect(cast(GtkRange*)this._cPtr, cast(GdkRectangle*)&rangeRect);
   }
@@ -265,7 +265,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Gets whether the range is restricted to the fill level.
       Returns: true if range is restricted to the fill level.
   */
-  bool getRestrictToFillLevel()
+  bool getRestrictToFillLevel() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_range_get_restrict_to_fill_level(cast(GtkRange*)this._cPtr);
@@ -279,7 +279,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       See [gtk.range.Range.changeValue].
       Returns: the number of digits to round to
   */
-  int getRoundDigits()
+  int getRoundDigits() nothrow
   {
     int _retval;
     _retval = gtk_range_get_round_digits(cast(GtkRange*)this._cPtr);
@@ -290,7 +290,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Gets whether the range displays the fill level graphically.
       Returns: true if range shows the fill level.
   */
-  bool getShowFillLevel()
+  bool getShowFillLevel() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_range_get_show_fill_level(cast(GtkRange*)this._cPtr);
@@ -307,7 +307,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
         sliderStart = return location for the slider's start
         sliderEnd = return location for the slider's end
   */
-  void getSliderRange(out int sliderStart, out int sliderEnd)
+  void getSliderRange(out int sliderStart, out int sliderEnd) nothrow
   {
     gtk_range_get_slider_range(cast(GtkRange*)this._cPtr, cast(int*)&sliderStart, cast(int*)&sliderEnd);
   }
@@ -318,7 +318,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       See [gtk.range.Range.setSliderSizeFixed].
       Returns: whether the range’s slider has a fixed size.
   */
-  bool getSliderSizeFixed()
+  bool getSliderSizeFixed() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_range_get_slider_size_fixed(cast(GtkRange*)this._cPtr);
@@ -329,7 +329,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Gets the current value of the range.
       Returns: current value of the range.
   */
-  double getValue()
+  double getValue() nothrow
   {
     double _retval;
     _retval = gtk_range_get_value(cast(GtkRange*)this._cPtr);
@@ -350,7 +350,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Params:
         adjustment = a [gtk.adjustment.Adjustment]
   */
-  void setAdjustment(gtk.adjustment.Adjustment adjustment)
+  void setAdjustment(gtk.adjustment.Adjustment adjustment) nothrow
   {
     gtk_range_set_adjustment(cast(GtkRange*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
@@ -377,7 +377,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Params:
         fillLevel = the new position of the fill level indicator
   */
-  void setFillLevel(double fillLevel)
+  void setFillLevel(double fillLevel) nothrow
   {
     gtk_range_set_fill_level(cast(GtkRange*)this._cPtr, fillLevel);
   }
@@ -393,7 +393,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Params:
         flippable = true to make the range flippable
   */
-  void setFlippable(bool flippable)
+  void setFlippable(bool flippable) nothrow
   {
     gtk_range_set_flippable(cast(GtkRange*)this._cPtr, flippable);
   }
@@ -409,7 +409,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
         step = step size
         page = page size
   */
-  void setIncrements(double step, double page)
+  void setIncrements(double step, double page) nothrow
   {
     gtk_range_set_increments(cast(GtkRange*)this._cPtr, step, page);
   }
@@ -425,7 +425,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Params:
         setting = true to invert the range
   */
-  void setInverted(bool setting)
+  void setInverted(bool setting) nothrow
   {
     gtk_range_set_inverted(cast(GtkRange*)this._cPtr, setting);
   }
@@ -441,7 +441,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
         min = minimum range value
         max = maximum range value
   */
-  void setRange(double min, double max)
+  void setRange(double min, double max) nothrow
   {
     gtk_range_set_range(cast(GtkRange*)this._cPtr, min, max);
   }
@@ -455,7 +455,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Params:
         restrictToFillLevel = Whether the fill level restricts slider movement.
   */
-  void setRestrictToFillLevel(bool restrictToFillLevel)
+  void setRestrictToFillLevel(bool restrictToFillLevel) nothrow
   {
     gtk_range_set_restrict_to_fill_level(cast(GtkRange*)this._cPtr, restrictToFillLevel);
   }
@@ -469,7 +469,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Params:
         roundDigits = the precision in digits, or -1
   */
-  void setRoundDigits(int roundDigits)
+  void setRoundDigits(int roundDigits) nothrow
   {
     gtk_range_set_round_digits(cast(GtkRange*)this._cPtr, roundDigits);
   }
@@ -483,7 +483,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Params:
         showFillLevel = Whether a fill level indicator graphics is shown.
   */
-  void setShowFillLevel(bool showFillLevel)
+  void setShowFillLevel(bool showFillLevel) nothrow
   {
     gtk_range_set_show_fill_level(cast(GtkRange*)this._cPtr, showFillLevel);
   }
@@ -497,7 +497,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Params:
         sizeFixed = true to make the slider size constant
   */
-  void setSliderSizeFixed(bool sizeFixed)
+  void setSliderSizeFixed(bool sizeFixed) nothrow
   {
     gtk_range_set_slider_size_fixed(cast(GtkRange*)this._cPtr, sizeFixed);
   }
@@ -512,7 +512,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Params:
         value = new value of the range
   */
-  void setValue(double value)
+  void setValue(double value) nothrow
   {
     gtk_range_set_value(cast(GtkRange*)this._cPtr, value);
   }
@@ -535,14 +535,14 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAdjustBounds(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAdjustBounds(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.range.Range)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -554,7 +554,14 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.range.Range.adjustBounds");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -593,7 +600,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChangeValue(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChangeValue(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ScrollType)))
@@ -601,11 +608,12 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.range.Range)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -616,7 +624,14 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.range.Range.changeValue");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -644,14 +659,14 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveSlider(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveSlider(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ScrollType)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.range.Range)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -663,7 +678,14 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.range.Range.moveSlider");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -685,13 +707,13 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.range.Range)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -700,7 +722,14 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.range.Range.valueChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -721,7 +750,7 @@ class RangeGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
         propval = The adjustment that is controlled by the range.
       Returns: Builder instance for fluent chaining
   */
-  T adjustment(gtk.adjustment.Adjustment propval)
+  T adjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     return setProperty("adjustment", propval);
   }
@@ -732,7 +761,7 @@ class RangeGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
         propval = The fill level (e.g. prebuffering of a network stream).
       Returns: Builder instance for fluent chaining
   */
-  T fillLevel(double propval)
+  T fillLevel(double propval) nothrow
   {
     return setProperty("fill-level", propval);
   }
@@ -743,7 +772,7 @@ class RangeGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
         propval = If true, the direction in which the slider moves is inverted.
       Returns: Builder instance for fluent chaining
   */
-  T inverted(bool propval)
+  T inverted(bool propval) nothrow
   {
     return setProperty("inverted", propval);
   }
@@ -755,7 +784,7 @@ class RangeGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
           upper boundary set by the fill level.
       Returns: Builder instance for fluent chaining
   */
-  T restrictToFillLevel(bool propval)
+  T restrictToFillLevel(bool propval) nothrow
   {
     return setProperty("restrict-to-fill-level", propval);
   }
@@ -769,7 +798,7 @@ class RangeGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
           See [gtk.range.Range.changeValue].
       Returns: Builder instance for fluent chaining
   */
-  T roundDigits(int propval)
+  T roundDigits(int propval) nothrow
   {
     return setProperty("round-digits", propval);
   }
@@ -781,7 +810,7 @@ class RangeGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
           on the trough.
       Returns: Builder instance for fluent chaining
   */
-  T showFillLevel(bool propval)
+  T showFillLevel(bool propval) nothrow
   {
     return setProperty("show-fill-level", propval);
   }
@@ -794,7 +823,7 @@ final class RangeGidBuilder : RangeGidBuilderImpl!RangeGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Range build()
+  Range build() nothrow
   {
     return new Range(cast(void*)createGObject(Range._getGType), No.Take);
   }

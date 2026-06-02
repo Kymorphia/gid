@@ -19,24 +19,21 @@ class AsyncQueue
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.async_queue.AsyncQueue");
-
     _cInstancePtr = cast(GAsyncQueue*)ptr;
 
     owned = take;
   }
 
-  ~this()
+  ~this() nothrow
   {
-    if (owned)
+    if (owned && _cInstancePtr)
       g_async_queue_unref(_cInstancePtr);
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -52,7 +49,7 @@ class AsyncQueue
       of the queue or due to scheduling.
       Returns: the length of the queue
   */
-  int length()
+  int length() nothrow
   {
     int _retval;
     _retval = g_async_queue_length(cast(GAsyncQueue*)this._cPtr);
@@ -72,7 +69,7 @@ class AsyncQueue
       This function must be called while holding the queue's lock.
       Returns: the length of the queue.
   */
-  int lengthUnlocked()
+  int lengthUnlocked() nothrow
   {
     int _retval;
     _retval = g_async_queue_length_unlocked(cast(GAsyncQueue*)this._cPtr);
@@ -90,7 +87,7 @@ class AsyncQueue
       g_async_queue_*_unlocked() functions on queue. Otherwise,
       deadlock may occur.
   */
-  void lock()
+  void lock() nothrow
   {
     g_async_queue_lock(cast(GAsyncQueue*)this._cPtr);
   }
@@ -100,7 +97,7 @@ class AsyncQueue
       blocks until data becomes available.
       Returns: data from the queue
   */
-  void* pop()
+  void* pop() nothrow
   {
     auto _retval = g_async_queue_pop(cast(GAsyncQueue*)this._cPtr);
     return _retval;
@@ -113,7 +110,7 @@ class AsyncQueue
       This function must be called while holding the queue's lock.
       Returns: data from the queue.
   */
-  void* popUnlocked()
+  void* popUnlocked() nothrow
   {
     auto _retval = g_async_queue_pop_unlocked(cast(GAsyncQueue*)this._cPtr);
     return _retval;
@@ -127,7 +124,7 @@ class AsyncQueue
       Params:
         data = data to push onto the queue
   */
-  void push(void* data)
+  void push(void* data) nothrow
   {
     g_async_queue_push(cast(GAsyncQueue*)this._cPtr, data);
   }
@@ -141,7 +138,7 @@ class AsyncQueue
       Params:
         item = data to push into the queue
   */
-  void pushFront(void* item)
+  void pushFront(void* item) nothrow
   {
     g_async_queue_push_front(cast(GAsyncQueue*)this._cPtr, item);
   }
@@ -157,7 +154,7 @@ class AsyncQueue
       Params:
         item = data to push into the queue
   */
-  void pushFrontUnlocked(void* item)
+  void pushFrontUnlocked(void* item) nothrow
   {
     g_async_queue_push_front_unlocked(cast(GAsyncQueue*)this._cPtr, item);
   }
@@ -178,13 +175,21 @@ class AsyncQueue
         data = the data to push into the queue
         func = the #GCompareDataFunc is used to sort queue
   */
-  void pushSorted(void* data, glib.types.CompareDataFunc func)
+  void pushSorted(void* data, glib.types.CompareDataFunc func) nothrow
   {
-    extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData)
+    extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      int _retval;
       auto _dlg = cast(glib.types.CompareDataFunc*)userData;
 
-      int _retval = (*_dlg)(a, b);
+      try
+      {
+        _retval = (*_dlg)(a, b);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.CompareDataFunc");
+      }
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -213,13 +218,21 @@ class AsyncQueue
         data = the data to push into the queue
         func = the #GCompareDataFunc is used to sort queue
   */
-  void pushSortedUnlocked(void* data, glib.types.CompareDataFunc func)
+  void pushSortedUnlocked(void* data, glib.types.CompareDataFunc func) nothrow
   {
-    extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData)
+    extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      int _retval;
       auto _dlg = cast(glib.types.CompareDataFunc*)userData;
 
-      int _retval = (*_dlg)(a, b);
+      try
+      {
+        _retval = (*_dlg)(a, b);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.CompareDataFunc");
+      }
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -237,7 +250,7 @@ class AsyncQueue
       Params:
         data = data to push onto the queue
   */
-  void pushUnlocked(void* data)
+  void pushUnlocked(void* data) nothrow
   {
     g_async_queue_push_unlocked(cast(GAsyncQueue*)this._cPtr, data);
   }
@@ -249,7 +262,7 @@ class AsyncQueue
         so [glib.async_queue.AsyncQueue.ref_] can be used regardless of the queue's
         lock.
   */
-  void refUnlocked()
+  void refUnlocked() nothrow
   {
     g_async_queue_ref_unlocked(cast(GAsyncQueue*)this._cPtr);
   }
@@ -261,7 +274,7 @@ class AsyncQueue
         item = the data to remove from the queue
       Returns: true if the item was removed
   */
-  bool remove(void* item)
+  bool remove(void* item) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_async_queue_remove(cast(GAsyncQueue*)this._cPtr, item);
@@ -277,7 +290,7 @@ class AsyncQueue
         item = the data to remove from the queue
       Returns: true if the item was removed
   */
-  bool removeUnlocked(void* item = null)
+  bool removeUnlocked(void* item = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_async_queue_remove_unlocked(cast(GAsyncQueue*)this._cPtr, item);
@@ -311,13 +324,21 @@ class AsyncQueue
       Params:
         func = the #GCompareDataFunc is used to sort queue
   */
-  void sort(glib.types.CompareDataFunc func)
+  void sort(glib.types.CompareDataFunc func) nothrow
   {
-    extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData)
+    extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      int _retval;
       auto _dlg = cast(glib.types.CompareDataFunc*)userData;
 
-      int _retval = (*_dlg)(a, b);
+      try
+      {
+        _retval = (*_dlg)(a, b);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.CompareDataFunc");
+      }
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -339,13 +360,21 @@ class AsyncQueue
       Params:
         func = the #GCompareDataFunc is used to sort queue
   */
-  void sortUnlocked(glib.types.CompareDataFunc func)
+  void sortUnlocked(glib.types.CompareDataFunc func) nothrow
   {
-    extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData)
+    extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      int _retval;
       auto _dlg = cast(glib.types.CompareDataFunc*)userData;
 
-      int _retval = (*_dlg)(a, b);
+      try
+      {
+        _retval = (*_dlg)(a, b);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.CompareDataFunc");
+      }
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -369,7 +398,7 @@ class AsyncQueue
   
       Deprecated: use [glib.async_queue.AsyncQueue.timeoutPop].
   */
-  void* timedPop(glib.time_val.TimeVal endTime)
+  void* timedPop(glib.time_val.TimeVal endTime) nothrow
   {
     auto _retval = g_async_queue_timed_pop(cast(GAsyncQueue*)this._cPtr, cast(GTimeVal*)&endTime);
     return _retval;
@@ -393,7 +422,7 @@ class AsyncQueue
   
       Deprecated: use [glib.async_queue.AsyncQueue.timeoutPopUnlocked].
   */
-  void* timedPopUnlocked(glib.time_val.TimeVal endTime)
+  void* timedPopUnlocked(glib.time_val.TimeVal endTime) nothrow
   {
     auto _retval = g_async_queue_timed_pop_unlocked(cast(GAsyncQueue*)this._cPtr, cast(GTimeVal*)&endTime);
     return _retval;
@@ -410,7 +439,7 @@ class AsyncQueue
       Returns: data from the queue or null, when no data is
           received before the timeout.
   */
-  void* timeoutPop(ulong timeout)
+  void* timeoutPop(ulong timeout) nothrow
   {
     auto _retval = g_async_queue_timeout_pop(cast(GAsyncQueue*)this._cPtr, timeout);
     return _retval;
@@ -429,7 +458,7 @@ class AsyncQueue
       Returns: data from the queue or null, when no data is
           received before the timeout.
   */
-  void* timeoutPopUnlocked(ulong timeout)
+  void* timeoutPopUnlocked(ulong timeout) nothrow
   {
     auto _retval = g_async_queue_timeout_pop_unlocked(cast(GAsyncQueue*)this._cPtr, timeout);
     return _retval;
@@ -441,7 +470,7 @@ class AsyncQueue
       Returns: data from the queue or null, when no data is
           available immediately.
   */
-  void* tryPop()
+  void* tryPop() nothrow
   {
     auto _retval = g_async_queue_try_pop(cast(GAsyncQueue*)this._cPtr);
     return _retval;
@@ -455,7 +484,7 @@ class AsyncQueue
       Returns: data from the queue or null, when no data is
           available immediately.
   */
-  void* tryPopUnlocked()
+  void* tryPopUnlocked() nothrow
   {
     auto _retval = g_async_queue_try_pop_unlocked(cast(GAsyncQueue*)this._cPtr);
     return _retval;
@@ -468,7 +497,7 @@ class AsyncQueue
       the with [glib.async_queue.AsyncQueue.lock] leads to undefined
       behaviour.
   */
-  void unlock()
+  void unlock() nothrow
   {
     g_async_queue_unlock(cast(GAsyncQueue*)this._cPtr);
   }
@@ -483,7 +512,7 @@ class AsyncQueue
         so [glib.async_queue.AsyncQueue.unref] can be used regardless of the queue's
         lock.
   */
-  void unrefAndUnlock()
+  void unrefAndUnlock() nothrow
   {
     g_async_queue_unref_and_unlock(cast(GAsyncQueue*)this._cPtr);
   }

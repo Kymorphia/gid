@@ -14,26 +14,26 @@ class FloatStatistics : parquet.statistics.Statistics
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_float_statistics_get_type != &gidSymbolNotFound ? gparquet_float_statistics_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FloatStatistics self()
+  override FloatStatistics self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class FloatStatistics : parquet.statistics.Statistics
       Get builder for [parquet.float_statistics.FloatStatistics]
       Returns: New builder object
   */
-  static FloatStatisticsGidBuilder builder()
+  static FloatStatisticsGidBuilder builder() nothrow
   {
     return new FloatStatisticsGidBuilder;
   }
 
   /** */
-  float getMax()
+  float getMax() nothrow
   {
     float _retval;
     _retval = gparquet_float_statistics_get_max(cast(GParquetFloatStatistics*)this._cPtr);
@@ -56,7 +56,7 @@ class FloatStatistics : parquet.statistics.Statistics
   }
 
   /** */
-  float getMin()
+  float getMin() nothrow
   {
     float _retval;
     _retval = gparquet_float_statistics_get_min(cast(GParquetFloatStatistics*)this._cPtr);
@@ -76,7 +76,7 @@ final class FloatStatisticsGidBuilder : FloatStatisticsGidBuilderImpl!FloatStati
       Create object from builder.
       Returns: New object
   */
-  FloatStatistics build()
+  FloatStatistics build() nothrow
   {
     return new FloatStatistics(cast(void*)createGObject(FloatStatistics._getGType), No.Take);
   }

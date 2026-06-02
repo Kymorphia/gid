@@ -23,32 +23,32 @@ class LayoutIter : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_layout_iter_get_type != &gidSymbolNotFound ? pango_layout_iter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LayoutIter self()
+  override LayoutIter self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class LayoutIter : gobject.boxed.Boxed
       Determines whether iter is on the last line of the layout.
       Returns: true if iter is on the last line
   */
-  bool atLastLine()
+  bool atLastLine() nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_layout_iter_at_last_line(cast(PangoLayoutIter*)this._cPtr);
@@ -68,7 +68,7 @@ class LayoutIter : gobject.boxed.Boxed
       Copies a [pango.layout_iter.LayoutIter].
       Returns: the newly allocated [pango.layout_iter.LayoutIter]
   */
-  pango.layout_iter.LayoutIter copy()
+  pango.layout_iter.LayoutIter copy() nothrow
   {
     PangoLayoutIter* _cretval;
     _cretval = pango_layout_iter_copy(cast(PangoLayoutIter*)this._cPtr);
@@ -83,7 +83,7 @@ class LayoutIter : gobject.boxed.Boxed
       Layout coordinates have the origin at the top left of the entire layout.
       Returns: baseline of current line
   */
-  int getBaseline()
+  int getBaseline() nothrow
   {
     int _retval;
     _retval = pango_layout_iter_get_baseline(cast(PangoLayoutIter*)this._cPtr);
@@ -102,7 +102,7 @@ class LayoutIter : gobject.boxed.Boxed
         logicalRect = rectangle to fill with
             logical extents
   */
-  void getCharExtents(out pango.types.Rectangle logicalRect)
+  void getCharExtents(out pango.types.Rectangle logicalRect) nothrow
   {
     pango_layout_iter_get_char_extents(cast(PangoLayoutIter*)this._cPtr, &logicalRect);
   }
@@ -116,7 +116,7 @@ class LayoutIter : gobject.boxed.Boxed
         inkRect = rectangle to fill with ink extents
         logicalRect = rectangle to fill with logical extents
   */
-  void getClusterExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
+  void getClusterExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect) nothrow
   {
     pango_layout_iter_get_cluster_extents(cast(PangoLayoutIter*)this._cPtr, &inkRect, &logicalRect);
   }
@@ -130,7 +130,7 @@ class LayoutIter : gobject.boxed.Boxed
       layout, if on the null run (see [pango.layout_iter.LayoutIter.getRun]).
       Returns: current byte index
   */
-  int getIndex()
+  int getIndex() nothrow
   {
     int _retval;
     _retval = pango_layout_iter_get_index(cast(PangoLayoutIter*)this._cPtr);
@@ -141,7 +141,7 @@ class LayoutIter : gobject.boxed.Boxed
       Gets the layout associated with a [pango.layout_iter.LayoutIter].
       Returns: the layout associated with iter
   */
-  pango.layout.Layout getLayout()
+  pango.layout.Layout getLayout() nothrow
   {
     PangoLayout* _cretval;
     _cretval = pango_layout_iter_get_layout(cast(PangoLayoutIter*)this._cPtr);
@@ -156,7 +156,7 @@ class LayoutIter : gobject.boxed.Boxed
         inkRect = rectangle to fill with ink extents
         logicalRect = rectangle to fill with logical extents
   */
-  void getLayoutExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
+  void getLayoutExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect) nothrow
   {
     pango_layout_iter_get_layout_extents(cast(PangoLayoutIter*)this._cPtr, &inkRect, &logicalRect);
   }
@@ -169,7 +169,7 @@ class LayoutIter : gobject.boxed.Boxed
       glyph widths, etc.).
       Returns: the current line
   */
-  pango.layout_line.LayoutLine getLine()
+  pango.layout_line.LayoutLine getLine() nothrow
   {
     PangoLayoutLine* _cretval;
     _cretval = pango_layout_iter_get_line(cast(PangoLayoutIter*)this._cPtr);
@@ -189,7 +189,7 @@ class LayoutIter : gobject.boxed.Boxed
         inkRect = rectangle to fill with ink extents
         logicalRect = rectangle to fill with logical extents
   */
-  void getLineExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
+  void getLineExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect) nothrow
   {
     pango_layout_iter_get_line_extents(cast(PangoLayoutIter*)this._cPtr, &inkRect, &logicalRect);
   }
@@ -203,7 +203,7 @@ class LayoutIter : gobject.boxed.Boxed
       Returns: the current line, that should not be
           modified
   */
-  pango.layout_line.LayoutLine getLineReadonly()
+  pango.layout_line.LayoutLine getLineReadonly() nothrow
   {
     PangoLayoutLine* _cretval;
     _cretval = pango_layout_iter_get_line_readonly(cast(PangoLayoutIter*)this._cPtr);
@@ -228,7 +228,7 @@ class LayoutIter : gobject.boxed.Boxed
         y0 = start of line
         y1 = end of line
   */
-  void getLineYrange(out int y0, out int y1)
+  void getLineYrange(out int y0, out int y1) nothrow
   {
     pango_layout_iter_get_line_yrange(cast(PangoLayoutIter*)this._cPtr, cast(int*)&y0, cast(int*)&y1);
   }
@@ -245,7 +245,7 @@ class LayoutIter : gobject.boxed.Boxed
       plan to modify the contents of the run (glyphs, glyph widths, etc.).
       Returns: the current run
   */
-  pango.types.LayoutRun getRun()
+  pango.types.LayoutRun getRun() nothrow
   {
     PangoLayoutRun* _cretval;
     _cretval = pango_layout_iter_get_run(cast(PangoLayoutIter*)this._cPtr);
@@ -263,7 +263,7 @@ class LayoutIter : gobject.boxed.Boxed
       example due to superscript or subscript positioning.
       Returns: 
   */
-  int getRunBaseline()
+  int getRunBaseline() nothrow
   {
     int _retval;
     _retval = pango_layout_iter_get_run_baseline(cast(PangoLayoutIter*)this._cPtr);
@@ -279,7 +279,7 @@ class LayoutIter : gobject.boxed.Boxed
         inkRect = rectangle to fill with ink extents
         logicalRect = rectangle to fill with logical extents
   */
-  void getRunExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
+  void getRunExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect) nothrow
   {
     pango_layout_iter_get_run_extents(cast(PangoLayoutIter*)this._cPtr, &inkRect, &logicalRect);
   }
@@ -298,7 +298,7 @@ class LayoutIter : gobject.boxed.Boxed
       Returns: the current run, that
           should not be modified
   */
-  pango.types.LayoutRun getRunReadonly()
+  pango.types.LayoutRun getRunReadonly() nothrow
   {
     PangoLayoutRun* _cretval;
     _cretval = pango_layout_iter_get_run_readonly(cast(PangoLayoutIter*)this._cPtr);
@@ -312,7 +312,7 @@ class LayoutIter : gobject.boxed.Boxed
       If iter was already at the end of the layout, returns false.
       Returns: whether motion was possible
   */
-  bool nextChar()
+  bool nextChar() nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_layout_iter_next_char(cast(PangoLayoutIter*)this._cPtr);
@@ -325,7 +325,7 @@ class LayoutIter : gobject.boxed.Boxed
       If iter was already at the end of the layout, returns false.
       Returns: whether motion was possible
   */
-  bool nextCluster()
+  bool nextCluster() nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_layout_iter_next_cluster(cast(PangoLayoutIter*)this._cPtr);
@@ -338,7 +338,7 @@ class LayoutIter : gobject.boxed.Boxed
       If iter is already on the last line, returns false.
       Returns: whether motion was possible
   */
-  bool nextLine()
+  bool nextLine() nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_layout_iter_next_line(cast(PangoLayoutIter*)this._cPtr);
@@ -351,7 +351,7 @@ class LayoutIter : gobject.boxed.Boxed
       If iter was already at the end of the layout, returns false.
       Returns: whether motion was possible
   */
-  bool nextRun()
+  bool nextRun() nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_layout_iter_next_run(cast(PangoLayoutIter*)this._cPtr);

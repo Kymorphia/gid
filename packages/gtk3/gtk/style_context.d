@@ -80,26 +80,26 @@ class StyleContext : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_style_context_get_type != &gidSymbolNotFound ? gtk_style_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StyleContext self()
+  override StyleContext self() nothrow
   {
     return this;
   }
@@ -108,31 +108,31 @@ class StyleContext : gobject.object.ObjectWrap
       Get builder for [gtk.style_context.StyleContext]
       Returns: New builder object
   */
-  static StyleContextGidBuilder builder()
+  static StyleContextGidBuilder builder() nothrow
   {
     return new StyleContextGidBuilder;
   }
 
   /** */
-  @property gtk.types.TextDirection direction()
+  @property gtk.types.TextDirection direction() nothrow
   {
     return getDirection();
   }
 
   /** */
-  @property void direction(gtk.types.TextDirection propval)
+  @property void direction(gtk.types.TextDirection propval) nothrow
   {
     setDirection(propval);
   }
 
   /** */
-  @property gdk.frame_clock.FrameClock paintClock()
+  @property gdk.frame_clock.FrameClock paintClock() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.frame_clock.FrameClock)("paint-clock");
   }
 
   /** */
-  @property void paintClock(gdk.frame_clock.FrameClock propval)
+  @property void paintClock(gdk.frame_clock.FrameClock propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.frame_clock.FrameClock)("paint-clock", propval);
   }
@@ -142,7 +142,7 @@ class StyleContext : gobject.object.ObjectWrap
       Returns: Sets or gets the style context’s parent. See [gtk.style_context.StyleContext.setParent]
         for details.
   */
-  @property gtk.style_context.StyleContext parent()
+  @property gtk.style_context.StyleContext parent() nothrow
   {
     return getParent();
   }
@@ -153,19 +153,19 @@ class StyleContext : gobject.object.ObjectWrap
         propval = Sets or gets the style context’s parent. See [gtk.style_context.StyleContext.setParent]
           for details.
   */
-  @property void parent(gtk.style_context.StyleContext propval)
+  @property void parent(gtk.style_context.StyleContext propval) nothrow
   {
     setParent(propval);
   }
 
   /** */
-  @property gdk.screen.Screen screen()
+  @property gdk.screen.Screen screen() nothrow
   {
     return getScreen();
   }
 
   /** */
-  @property void screen(gdk.screen.Screen propval)
+  @property void screen(gdk.screen.Screen propval) nothrow
   {
     setScreen(propval);
   }
@@ -181,7 +181,7 @@ class StyleContext : gobject.object.ObjectWrap
       in order to get a style context ready to theme the widget.
       Returns: A newly created #GtkStyleContext.
   */
-  this()
+  this() nothrow
   {
     GtkStyleContext* _cretval;
     _cretval = gtk_style_context_new();
@@ -208,7 +208,7 @@ class StyleContext : gobject.object.ObjectWrap
                      between [gtk.types.STYLE_PROVIDER_PRIORITY_FALLBACK] and
                      [gtk.types.STYLE_PROVIDER_PRIORITY_USER]
   */
-  static void addProviderForScreen(gdk.screen.Screen screen, gtk.style_provider.StyleProvider provider, uint priority)
+  static void addProviderForScreen(gdk.screen.Screen screen, gtk.style_provider.StyleProvider provider, uint priority) nothrow
   {
     gtk_style_context_add_provider_for_screen(screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null, provider ? cast(GtkStyleProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null, priority);
   }
@@ -220,7 +220,7 @@ class StyleContext : gobject.object.ObjectWrap
         screen = a #GdkScreen
         provider = a #GtkStyleProvider
   */
-  static void removeProviderForScreen(gdk.screen.Screen screen, gtk.style_provider.StyleProvider provider)
+  static void removeProviderForScreen(gdk.screen.Screen screen, gtk.style_provider.StyleProvider provider) nothrow
   {
     gtk_style_context_remove_provider_for_screen(screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null, provider ? cast(GtkStyleProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null);
   }
@@ -236,7 +236,7 @@ class StyleContext : gobject.object.ObjectWrap
       Params:
         screen = a #GdkScreen
   */
-  static void resetWidgets(gdk.screen.Screen screen)
+  static void resetWidgets(gdk.screen.Screen screen) nothrow
   {
     gtk_style_context_reset_widgets(screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
   }
@@ -262,7 +262,7 @@ class StyleContext : gobject.object.ObjectWrap
       Params:
         className = class name to use in styling
   */
-  void addClass(string className)
+  void addClass(string className) nothrow
   {
     const(char)* _className = className.toCString(No.Alloc);
     gtk_style_context_add_class(cast(GtkStyleContext*)this._cPtr, _className);
@@ -287,7 +287,7 @@ class StyleContext : gobject.object.ObjectWrap
                      between [gtk.types.STYLE_PROVIDER_PRIORITY_FALLBACK] and
                      [gtk.types.STYLE_PROVIDER_PRIORITY_USER]
   */
-  void addProvider(gtk.style_provider.StyleProvider provider, uint priority)
+  void addProvider(gtk.style_provider.StyleProvider provider, uint priority) nothrow
   {
     gtk_style_context_add_provider(cast(GtkStyleContext*)this._cPtr, provider ? cast(GtkStyleProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null, priority);
   }
@@ -320,7 +320,7 @@ class StyleContext : gobject.object.ObjectWrap
         regionName = region name to use in styling
         flags = flags that apply to the region
   */
-  void addRegion(string regionName, gtk.types.RegionFlags flags)
+  void addRegion(string regionName, gtk.types.RegionFlags flags) nothrow
   {
     const(char)* _regionName = regionName.toCString(No.Alloc);
     gtk_style_context_add_region(cast(GtkStyleContext*)this._cPtr, _regionName, flags);
@@ -343,7 +343,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: This function does nothing.
   */
-  void cancelAnimations(void* regionId = null)
+  void cancelAnimations(void* regionId = null) nothrow
   {
     gtk_style_context_cancel_animations(cast(GtkStyleContext*)this._cPtr, regionId);
   }
@@ -366,7 +366,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: Use [gtk.global.renderBackground] instead.
   */
-  void getBackgroundColor(gtk.types.StateFlags state, out gdk.rgba.RGBA color)
+  void getBackgroundColor(gtk.types.StateFlags state, out gdk.rgba.RGBA color) nothrow
   {
     gtk_style_context_get_background_color(cast(GtkStyleContext*)this._cPtr, state, cast(GdkRGBA*)&color);
   }
@@ -381,7 +381,7 @@ class StyleContext : gobject.object.ObjectWrap
         state = state to retrieve the border for
         border = return value for the border settings
   */
-  void getBorder(gtk.types.StateFlags state, out gtk.border.Border border)
+  void getBorder(gtk.types.StateFlags state, out gtk.border.Border border) nothrow
   {
     gtk_style_context_get_border(cast(GtkStyleContext*)this._cPtr, state, cast(GtkBorder*)&border);
   }
@@ -395,7 +395,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: Use [gtk.global.renderFrame] instead.
   */
-  void getBorderColor(gtk.types.StateFlags state, out gdk.rgba.RGBA color)
+  void getBorderColor(gtk.types.StateFlags state, out gdk.rgba.RGBA color) nothrow
   {
     gtk_style_context_get_border_color(cast(GtkStyleContext*)this._cPtr, state, cast(GdkRGBA*)&color);
   }
@@ -410,7 +410,7 @@ class StyleContext : gobject.object.ObjectWrap
         state = state to retrieve the color for
         color = return value for the foreground color
   */
-  void getColor(gtk.types.StateFlags state, out gdk.rgba.RGBA color)
+  void getColor(gtk.types.StateFlags state, out gdk.rgba.RGBA color) nothrow
   {
     gtk_style_context_get_color(cast(GtkStyleContext*)this._cPtr, state, cast(GdkRGBA*)&color);
   }
@@ -423,7 +423,7 @@ class StyleContext : gobject.object.ObjectWrap
           check for #GTK_STATE_FLAG_DIR_LTR and
           #GTK_STATE_FLAG_DIR_RTL instead.
   */
-  gtk.types.TextDirection getDirection()
+  gtk.types.TextDirection getDirection() nothrow
   {
     GtkTextDirection _cretval;
     _cretval = gtk_style_context_get_direction(cast(GtkStyleContext*)this._cPtr);
@@ -445,7 +445,7 @@ class StyleContext : gobject.object.ObjectWrap
       Deprecated: Use [gtk.style_context.StyleContext.get] for "font" or
             subproperties instead.
   */
-  pango.font_description.FontDescription getFont(gtk.types.StateFlags state)
+  pango.font_description.FontDescription getFont(gtk.types.StateFlags state) nothrow
   {
     const(PangoFontDescription)* _cretval;
     _cretval = gtk_style_context_get_font(cast(GtkStyleContext*)this._cPtr, state);
@@ -458,7 +458,7 @@ class StyleContext : gobject.object.ObjectWrap
       Returns: a #GdkFrameClock, or null
          if context does not have an attached frame clock.
   */
-  gdk.frame_clock.FrameClock getFrameClock()
+  gdk.frame_clock.FrameClock getFrameClock() nothrow
   {
     GdkFrameClock* _cretval;
     _cretval = gtk_style_context_get_frame_clock(cast(GtkStyleContext*)this._cPtr);
@@ -470,7 +470,7 @@ class StyleContext : gobject.object.ObjectWrap
       Returns the sides where rendered elements connect visually with others.
       Returns: the junction sides
   */
-  gtk.types.JunctionSides getJunctionSides()
+  gtk.types.JunctionSides getJunctionSides() nothrow
   {
     GtkJunctionSides _cretval;
     _cretval = gtk_style_context_get_junction_sides(cast(GtkStyleContext*)this._cPtr);
@@ -487,7 +487,7 @@ class StyleContext : gobject.object.ObjectWrap
         state = state to retrieve the border for
         margin = return value for the margin settings
   */
-  void getMargin(gtk.types.StateFlags state, out gtk.border.Border margin)
+  void getMargin(gtk.types.StateFlags state, out gtk.border.Border margin) nothrow
   {
     gtk_style_context_get_margin(cast(GtkStyleContext*)this._cPtr, state, cast(GtkBorder*)&margin);
   }
@@ -501,7 +501,7 @@ class StyleContext : gobject.object.ObjectWrap
         state = state to retrieve the padding for
         padding = return value for the padding settings
   */
-  void getPadding(gtk.types.StateFlags state, out gtk.border.Border padding)
+  void getPadding(gtk.types.StateFlags state, out gtk.border.Border padding) nothrow
   {
     gtk_style_context_get_padding(cast(GtkStyleContext*)this._cPtr, state, cast(GtkBorder*)&padding);
   }
@@ -511,7 +511,7 @@ class StyleContext : gobject.object.ObjectWrap
       See that function for details.
       Returns: the parent context or null
   */
-  gtk.style_context.StyleContext getParent()
+  gtk.style_context.StyleContext getParent() nothrow
   {
     GtkStyleContext* _cretval;
     _cretval = gtk_style_context_get_parent(cast(GtkStyleContext*)this._cPtr);
@@ -523,7 +523,7 @@ class StyleContext : gobject.object.ObjectWrap
       Returns the widget path used for style matching.
       Returns: A #GtkWidgetPath
   */
-  gtk.widget_path.WidgetPath getPath()
+  gtk.widget_path.WidgetPath getPath() nothrow
   {
     const(GtkWidgetPath)* _cretval;
     _cretval = gtk_style_context_get_path(cast(GtkStyleContext*)this._cPtr);
@@ -553,7 +553,7 @@ class StyleContext : gobject.object.ObjectWrap
         state = state to retrieve the property value for
         value = return location for the style property value
   */
-  void getProperty(string property, gtk.types.StateFlags state, out gobject.value.Value value)
+  void getProperty(string property, gtk.types.StateFlags state, out gobject.value.Value value) nothrow
   {
     const(char)* _property = property.toCString(No.Alloc);
     GValue _value;
@@ -565,7 +565,7 @@ class StyleContext : gobject.object.ObjectWrap
       Returns the scale used for assets.
       Returns: the scale
   */
-  int getScale()
+  int getScale() nothrow
   {
     int _retval;
     _retval = gtk_style_context_get_scale(cast(GtkStyleContext*)this._cPtr);
@@ -576,7 +576,7 @@ class StyleContext : gobject.object.ObjectWrap
       Returns the #GdkScreen to which context is attached.
       Returns: a #GdkScreen.
   */
-  gdk.screen.Screen getScreen()
+  gdk.screen.Screen getScreen() nothrow
   {
     GdkScreen* _cretval;
     _cretval = gtk_style_context_get_screen(cast(GtkStyleContext*)this._cPtr);
@@ -603,7 +603,7 @@ class StyleContext : gobject.object.ObjectWrap
       Returns: null or the section where a value
         for property was defined
   */
-  gtk.css_section.CssSection getSection(string property)
+  gtk.css_section.CssSection getSection(string property) nothrow
   {
     GtkCssSection* _cretval;
     const(char)* _property = property.toCString(No.Alloc);
@@ -621,7 +621,7 @@ class StyleContext : gobject.object.ObjectWrap
       [gtk.widget.Widget.getStateFlags].
       Returns: the state flags
   */
-  gtk.types.StateFlags getState()
+  gtk.types.StateFlags getState() nothrow
   {
     GtkStateFlags _cretval;
     _cretval = gtk_style_context_get_state(cast(GtkStyleContext*)this._cPtr);
@@ -639,7 +639,7 @@ class StyleContext : gobject.object.ObjectWrap
         propertyName = the name of the widget style property
         value = Return location for the property value
   */
-  void getStyleProperty(string propertyName, gobject.value.Value value)
+  void getStyleProperty(string propertyName, gobject.value.Value value) nothrow
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
     gtk_style_context_get_style_property(cast(GtkStyleContext*)this._cPtr, _propertyName, value ? cast(GValue*)value._cPtr(No.Dup) : null);
@@ -653,7 +653,7 @@ class StyleContext : gobject.object.ObjectWrap
         className = a class name
       Returns: true if context has class_name defined
   */
-  bool hasClass(string className)
+  bool hasClass(string className) nothrow
   {
     bool _retval;
     const(char)* _className = className.toCString(No.Alloc);
@@ -671,7 +671,7 @@ class StyleContext : gobject.object.ObjectWrap
         flagsReturn = return location for region flags
       Returns: true if region is defined
   */
-  bool hasRegion(string regionName, out gtk.types.RegionFlags flagsReturn)
+  bool hasRegion(string regionName, out gtk.types.RegionFlags flagsReturn) nothrow
   {
     bool _retval;
     const(char)* _regionName = regionName.toCString(No.Alloc);
@@ -686,7 +686,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: Style contexts are invalidated automatically.
   */
-  void invalidate()
+  void invalidate() nothrow
   {
     gtk_style_context_invalidate(cast(GtkStyleContext*)this._cPtr);
   }
@@ -698,7 +698,7 @@ class StyleContext : gobject.object.ObjectWrap
                  of the list are owned by GTK+, but you must free the list
                  itself with [glib.list.List.free] when you are done with it.
   */
-  string[] listClasses()
+  string[] listClasses() nothrow
   {
     GList* _cretval;
     _cretval = gtk_style_context_list_classes(cast(GtkStyleContext*)this._cPtr);
@@ -713,7 +713,7 @@ class StyleContext : gobject.object.ObjectWrap
                  of the list are owned by GTK+, but you must free the list
                  itself with [glib.list.List.free] when you are done with it.
   */
-  string[] listRegions()
+  string[] listRegions() nothrow
   {
     GList* _cretval;
     _cretval = gtk_style_context_list_regions(cast(GtkStyleContext*)this._cPtr);
@@ -729,7 +729,7 @@ class StyleContext : gobject.object.ObjectWrap
         color = Return location for the looked up color
       Returns: true if color_name was found and resolved, false otherwise
   */
-  bool lookupColor(string colorName, out gdk.rgba.RGBA color)
+  bool lookupColor(string colorName, out gdk.rgba.RGBA color) nothrow
   {
     bool _retval;
     const(char)* _colorName = colorName.toCString(No.Alloc);
@@ -748,7 +748,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: Use [gtk.icon_theme.IconTheme.lookupIcon] instead.
   */
-  gtk.icon_set.IconSet lookupIconSet(string stockId)
+  gtk.icon_set.IconSet lookupIconSet(string stockId) nothrow
   {
     GtkIconSet* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
@@ -809,7 +809,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: This function does nothing.
   */
-  void notifyStateChange(gdk.window.Window window, void* regionId, gtk.types.StateType state, bool stateValue)
+  void notifyStateChange(gdk.window.Window window, void* regionId, gtk.types.StateType state, bool stateValue) nothrow
   {
     gtk_style_context_notify_state_change(cast(GtkStyleContext*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, regionId, state, stateValue);
   }
@@ -820,7 +820,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: This function does nothing.
   */
-  void popAnimatableRegion()
+  void popAnimatableRegion() nothrow
   {
     gtk_style_context_pop_animatable_region(cast(GtkStyleContext*)this._cPtr);
   }
@@ -841,7 +841,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: This function does nothing.
   */
-  void pushAnimatableRegion(void* regionId = null)
+  void pushAnimatableRegion(void* regionId = null) nothrow
   {
     gtk_style_context_push_animatable_region(cast(GtkStyleContext*)this._cPtr, regionId);
   }
@@ -852,7 +852,7 @@ class StyleContext : gobject.object.ObjectWrap
       Params:
         className = class name to remove
   */
-  void removeClass(string className)
+  void removeClass(string className) nothrow
   {
     const(char)* _className = className.toCString(No.Alloc);
     gtk_style_context_remove_class(cast(GtkStyleContext*)this._cPtr, _className);
@@ -864,7 +864,7 @@ class StyleContext : gobject.object.ObjectWrap
       Params:
         provider = a #GtkStyleProvider
   */
-  void removeProvider(gtk.style_provider.StyleProvider provider)
+  void removeProvider(gtk.style_provider.StyleProvider provider) nothrow
   {
     gtk_style_context_remove_provider(cast(GtkStyleContext*)this._cPtr, provider ? cast(GtkStyleProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null);
   }
@@ -875,7 +875,7 @@ class StyleContext : gobject.object.ObjectWrap
       Params:
         regionName = region name to unset
   */
-  void removeRegion(string regionName)
+  void removeRegion(string regionName) nothrow
   {
     const(char)* _regionName = regionName.toCString(No.Alloc);
     gtk_style_context_remove_region(cast(GtkStyleContext*)this._cPtr, _regionName);
@@ -885,7 +885,7 @@ class StyleContext : gobject.object.ObjectWrap
       Restores context state to a previous stage.
       See [gtk.style_context.StyleContext.save].
   */
-  void restore()
+  void restore() nothrow
   {
     gtk_style_context_restore(cast(GtkStyleContext*)this._cPtr);
   }
@@ -899,7 +899,7 @@ class StyleContext : gobject.object.ObjectWrap
       The matching call to [gtk.style_context.StyleContext.restore] must be done
       before GTK returns to the main loop.
   */
-  void save()
+  void save() nothrow
   {
     gtk_style_context_save(cast(GtkStyleContext*)this._cPtr);
   }
@@ -918,7 +918,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: This function does nothing.
   */
-  void scrollAnimations(gdk.window.Window window, int dx, int dy)
+  void scrollAnimations(gdk.window.Window window, int dx, int dy) nothrow
   {
     gtk_style_context_scroll_animations(cast(GtkStyleContext*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, dx, dy);
   }
@@ -934,7 +934,7 @@ class StyleContext : gobject.object.ObjectWrap
           Note that clients still using this function are now responsible
           for calling this function again whenever context is invalidated.
   */
-  void setBackground(gdk.window.Window window)
+  void setBackground(gdk.window.Window window) nothrow
   {
     gtk_style_context_set_background(cast(GtkStyleContext*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null);
   }
@@ -953,7 +953,7 @@ class StyleContext : gobject.object.ObjectWrap
           #GTK_STATE_FLAG_DIR_LTR and #GTK_STATE_FLAG_DIR_RTL
           instead.
   */
-  void setDirection(gtk.types.TextDirection direction)
+  void setDirection(gtk.types.TextDirection direction) nothrow
   {
     gtk_style_context_set_direction(cast(GtkStyleContext*)this._cPtr, direction);
   }
@@ -970,7 +970,7 @@ class StyleContext : gobject.object.ObjectWrap
       Params:
         frameClock = a #GdkFrameClock
   */
-  void setFrameClock(gdk.frame_clock.FrameClock frameClock)
+  void setFrameClock(gdk.frame_clock.FrameClock frameClock) nothrow
   {
     gtk_style_context_set_frame_clock(cast(GtkStyleContext*)this._cPtr, frameClock ? cast(GdkFrameClock*)frameClock._cPtr(No.Dup) : null);
   }
@@ -990,7 +990,7 @@ class StyleContext : gobject.object.ObjectWrap
         sides = sides where rendered elements are visually connected to
               other elements
   */
-  void setJunctionSides(gtk.types.JunctionSides sides)
+  void setJunctionSides(gtk.types.JunctionSides sides) nothrow
   {
     gtk_style_context_set_junction_sides(cast(GtkStyleContext*)this._cPtr, sides);
   }
@@ -1007,7 +1007,7 @@ class StyleContext : gobject.object.ObjectWrap
       Params:
         parent = the new parent or null
   */
-  void setParent(gtk.style_context.StyleContext parent = null)
+  void setParent(gtk.style_context.StyleContext parent = null) nothrow
   {
     gtk_style_context_set_parent(cast(GtkStyleContext*)this._cPtr, parent ? cast(GtkStyleContext*)parent._cPtr(No.Dup) : null);
   }
@@ -1024,7 +1024,7 @@ class StyleContext : gobject.object.ObjectWrap
       Params:
         path = a #GtkWidgetPath
   */
-  void setPath(gtk.widget_path.WidgetPath path)
+  void setPath(gtk.widget_path.WidgetPath path) nothrow
   {
     gtk_style_context_set_path(cast(GtkStyleContext*)this._cPtr, path ? cast(GtkWidgetPath*)path._cPtr(No.Dup) : null);
   }
@@ -1035,7 +1035,7 @@ class StyleContext : gobject.object.ObjectWrap
       Params:
         scale = scale
   */
-  void setScale(int scale)
+  void setScale(int scale) nothrow
   {
     gtk_style_context_set_scale(cast(GtkStyleContext*)this._cPtr, scale);
   }
@@ -1053,7 +1053,7 @@ class StyleContext : gobject.object.ObjectWrap
       Params:
         screen = a #GdkScreen
   */
-  void setScreen(gdk.screen.Screen screen)
+  void setScreen(gdk.screen.Screen screen) nothrow
   {
     gtk_style_context_set_screen(cast(GtkStyleContext*)this._cPtr, screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
   }
@@ -1064,7 +1064,7 @@ class StyleContext : gobject.object.ObjectWrap
       Params:
         flags = state to represent
   */
-  void setState(gtk.types.StateFlags flags)
+  void setState(gtk.types.StateFlags flags) nothrow
   {
     gtk_style_context_set_state(cast(GtkStyleContext*)this._cPtr, flags);
   }
@@ -1086,7 +1086,7 @@ class StyleContext : gobject.object.ObjectWrap
   
       Deprecated: This function always returns false
   */
-  bool stateIsRunning(gtk.types.StateType state, out double progress)
+  bool stateIsRunning(gtk.types.StateType state, out double progress) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_style_context_state_is_running(cast(GtkStyleContext*)this._cPtr, state, cast(double*)&progress);
@@ -1109,7 +1109,7 @@ class StyleContext : gobject.object.ObjectWrap
         flags = Flags that determine what to print
       Returns: a newly allocated string representing context
   */
-  string toString_(gtk.types.StyleContextPrintFlags flags)
+  string toString_(gtk.types.StyleContextPrintFlags flags) nothrow
   {
     char* _cretval;
     _cretval = gtk_style_context_to_string(cast(GtkStyleContext*)this._cPtr, flags);
@@ -1138,13 +1138,13 @@ class StyleContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.style_context.StyleContext)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1153,7 +1153,14 @@ class StyleContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.style_context.StyleContext.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1166,13 +1173,13 @@ class StyleContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T direction(gtk.types.TextDirection propval)
+  T direction(gtk.types.TextDirection propval) nothrow
   {
     return setProperty("direction", propval);
   }
 
   /** */
-  T paintClock(gdk.frame_clock.FrameClock propval)
+  T paintClock(gdk.frame_clock.FrameClock propval) nothrow
   {
     return setProperty("paint-clock", propval);
   }
@@ -1184,13 +1191,13 @@ class StyleContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           for details.
       Returns: Builder instance for fluent chaining
   */
-  T parent(gtk.style_context.StyleContext propval)
+  T parent(gtk.style_context.StyleContext propval) nothrow
   {
     return setProperty("parent", propval);
   }
 
   /** */
-  T screen(gdk.screen.Screen propval)
+  T screen(gdk.screen.Screen propval) nothrow
   {
     return setProperty("screen", propval);
   }
@@ -1203,7 +1210,7 @@ final class StyleContextGidBuilder : StyleContextGidBuilderImpl!StyleContextGidB
       Create object from builder.
       Returns: New object
   */
-  StyleContext build()
+  StyleContext build() nothrow
   {
     return new StyleContext(cast(void*)createGObject(StyleContext._getGType), Yes.Take);
   }

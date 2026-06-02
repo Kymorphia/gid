@@ -203,26 +203,26 @@ class Builder : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_builder_get_type != &gidSymbolNotFound ? gtk_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Builder self()
+  override Builder self() nothrow
   {
     return this;
   }
@@ -231,7 +231,7 @@ class Builder : gobject.object.ObjectWrap
       Get builder for [gtk.builder.Builder]
       Returns: New builder object
   */
-  static BuilderGidBuilder builder()
+  static BuilderGidBuilder builder() nothrow
   {
     return new BuilderGidBuilder;
   }
@@ -243,7 +243,7 @@ class Builder : gobject.object.ObjectWrap
         If the translation domain is null, #GtkBuilder uses gettext(),
         otherwise [glib.global.dgettext].
   */
-  @property string translationDomain()
+  @property string translationDomain() nothrow
   {
     return getTranslationDomain();
   }
@@ -256,7 +256,7 @@ class Builder : gobject.object.ObjectWrap
           If the translation domain is null, #GtkBuilder uses gettext(),
           otherwise [glib.global.dgettext].
   */
-  @property void translationDomain(string propval)
+  @property void translationDomain(string propval) nothrow
   {
     setTranslationDomain(propval);
   }
@@ -273,7 +273,7 @@ class Builder : gobject.object.ObjectWrap
       [gtk.builder.Builder.newFromResource] or [gtk.builder.Builder.newFromString].
       Returns: a new (empty) #GtkBuilder object
   */
-  this()
+  this() nothrow
   {
     GtkBuilder* _cretval;
     _cretval = gtk_builder_new();
@@ -292,7 +292,7 @@ class Builder : gobject.object.ObjectWrap
         filename = filename of user interface description file
       Returns: a #GtkBuilder containing the described interface
   */
-  static gtk.builder.Builder newFromFile(string filename)
+  static gtk.builder.Builder newFromFile(string filename) nothrow
   {
     GtkBuilder* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -312,7 +312,7 @@ class Builder : gobject.object.ObjectWrap
         resourcePath = a #GResource resource path
       Returns: a #GtkBuilder containing the described interface
   */
-  static gtk.builder.Builder newFromResource(string resourcePath)
+  static gtk.builder.Builder newFromResource(string resourcePath) nothrow
   {
     GtkBuilder* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
@@ -336,7 +336,7 @@ class Builder : gobject.object.ObjectWrap
         string_ = a user interface (XML) description
       Returns: a #GtkBuilder containing the interface described by string
   */
-  static gtk.builder.Builder newFromString(string string_)
+  static gtk.builder.Builder newFromString(string string_) nothrow
   {
     GtkBuilder* _cretval;
     ptrdiff_t _length;
@@ -583,7 +583,7 @@ class Builder : gobject.object.ObjectWrap
       Params:
         userData = user data to pass back with all signals
   */
-  void connectSignals(void* userData = null)
+  void connectSignals(void* userData = null) nothrow
   {
     gtk_builder_connect_signals(cast(GtkBuilder*)this._cPtr, userData);
   }
@@ -596,15 +596,22 @@ class Builder : gobject.object.ObjectWrap
       Params:
         func = the function used to connect the signals
   */
-  void connectSignalsFull(gtk.types.BuilderConnectFunc func)
+  void connectSignalsFull(gtk.types.BuilderConnectFunc func) nothrow
   {
-    extern(C) void _funcCallback(GtkBuilder* builder, GObject* object, const(char)* signalName, const(char)* handlerName, GObject* connectObject, GConnectFlags flags, void* userData)
+    extern(C) void _funcCallback(GtkBuilder* builder, GObject* object, const(char)* signalName, const(char)* handlerName, GObject* connectObject, GConnectFlags flags, void* userData) nothrow
     {
       auto _dlg = cast(gtk.types.BuilderConnectFunc*)userData;
       string _signalName = signalName.fromCString(No.Free);
       string _handlerName = handlerName.fromCString(No.Free);
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.builder.Builder)(cast(void*)builder, No.Take), gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)object, No.Take), _signalName, _handlerName, gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)connectObject, No.Take), flags);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.builder.Builder)(cast(void*)builder, No.Take), gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)object, No.Take), _signalName, _handlerName, gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)connectObject, No.Take), flags);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.BuilderConnectFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -619,7 +626,7 @@ class Builder : gobject.object.ObjectWrap
         name = the name of the object exposed to the builder
         object = the object to expose
   */
-  void exposeObject(string name, gobject.object.ObjectWrap object)
+  void exposeObject(string name, gobject.object.ObjectWrap object) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_builder_expose_object(cast(GtkBuilder*)this._cPtr, _name, object ? cast(GObject*)object._cPtr(No.Dup) : null);
@@ -666,7 +673,7 @@ class Builder : gobject.object.ObjectWrap
       Returns: the application being used by the builder,
             or null
   */
-  gtk.application.Application getApplication()
+  gtk.application.Application getApplication() nothrow
   {
     GtkApplication* _cretval;
     _cretval = gtk_builder_get_application(cast(GtkBuilder*)this._cPtr);
@@ -683,7 +690,7 @@ class Builder : gobject.object.ObjectWrap
       Returns: the object named name or null if
            it could not be found in the object tree.
   */
-  gobject.object.ObjectWrap getObject(string name)
+  gobject.object.ObjectWrap getObject(string name) nothrow
   {
     GObject* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -700,7 +707,7 @@ class Builder : gobject.object.ObjectWrap
           constructed by the #GtkBuilder instance. It should be freed by
           [glib.slist.SList.free]
   */
-  gobject.object.ObjectWrap[] getObjects()
+  gobject.object.ObjectWrap[] getObjects() nothrow
   {
     GSList* _cretval;
     _cretval = gtk_builder_get_objects(cast(GtkBuilder*)this._cPtr);
@@ -713,7 +720,7 @@ class Builder : gobject.object.ObjectWrap
       Returns: the translation domain. This string is owned
         by the builder object and must not be modified or freed.
   */
-  string getTranslationDomain()
+  string getTranslationDomain() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_builder_get_translation_domain(cast(GtkBuilder*)this._cPtr);
@@ -731,7 +738,7 @@ class Builder : gobject.object.ObjectWrap
       Returns: the #GType found for type_name or #G_TYPE_INVALID
           if no type was found
   */
-  gobject.types.GType getTypeFromName(string typeName)
+  gobject.types.GType getTypeFromName(string typeName) nothrow
   {
     gobject.types.GType _retval;
     const(char)* _typeName = typeName.toCString(No.Alloc);
@@ -748,7 +755,7 @@ class Builder : gobject.object.ObjectWrap
       Params:
         application = a #GtkApplication
   */
-  void setApplication(gtk.application.Application application)
+  void setApplication(gtk.application.Application application) nothrow
   {
     gtk_builder_set_application(cast(GtkBuilder*)this._cPtr, application ? cast(GtkApplication*)application._cPtr(No.Dup) : null);
   }
@@ -760,7 +767,7 @@ class Builder : gobject.object.ObjectWrap
       Params:
         domain = the translation domain or null
   */
-  void setTranslationDomain(string domain = null)
+  void setTranslationDomain(string domain = null) nothrow
   {
     const(char)* _domain = domain.toCString(No.Alloc);
     gtk_builder_set_translation_domain(cast(GtkBuilder*)this._cPtr, _domain);
@@ -842,7 +849,7 @@ class BuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           otherwise [glib.global.dgettext].
       Returns: Builder instance for fluent chaining
   */
-  T translationDomain(string propval)
+  T translationDomain(string propval) nothrow
   {
     return setProperty("translation-domain", propval);
   }
@@ -855,7 +862,7 @@ final class BuilderGidBuilder : BuilderGidBuilderImpl!BuilderGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Builder build()
+  Builder build() nothrow
   {
     return new Builder(cast(void*)createGObject(Builder._getGType), Yes.Take);
   }

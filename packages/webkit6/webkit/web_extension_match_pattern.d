@@ -21,32 +21,32 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_web_extension_match_pattern_get_type != &gidSymbolNotFound ? webkit_web_extension_match_pattern_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WebExtensionMatchPattern self()
+  override WebExtensionMatchPattern self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
       Returns a new #WebKitWebExtensionMatchPattern that has `*` for scheme, host, and path.
       Returns: a newly created #WebKitWebExtensionMatchPattern
   */
-  static webkit.web_extension_match_pattern.WebExtensionMatchPattern newAllHostsAndSchemes()
+  static webkit.web_extension_match_pattern.WebExtensionMatchPattern newAllHostsAndSchemes() nothrow
   {
     WebKitWebExtensionMatchPattern* _cretval;
     _cretval = webkit_web_extension_match_pattern_new_all_hosts_and_schemes();
@@ -67,7 +67,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
       Returns a new #WebKitWebExtensionMatchPattern for `<all_urls>`.
       Returns: a newly created #WebKitWebExtensionMatchPattern
   */
-  static webkit.web_extension_match_pattern.WebExtensionMatchPattern newAllUrls()
+  static webkit.web_extension_match_pattern.WebExtensionMatchPattern newAllUrls() nothrow
   {
     WebKitWebExtensionMatchPattern* _cretval;
     _cretval = webkit_web_extension_match_pattern_new_all_urls();
@@ -125,7 +125,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
       Gets the host part of the pattern string, unless [webkit.web_extension_match_pattern.WebExtensionMatchPattern.getMatchesAllUrls] is true.
       Returns: The host string.
   */
-  string getHost()
+  string getHost() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_web_extension_match_pattern_get_host(cast(WebKitWebExtensionMatchPattern*)this._cPtr);
@@ -138,7 +138,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
       the pattern is `<all_urls>`, or if `*` is set as the host string.
       Returns: Whether this match pattern matches all hosts.
   */
-  bool getMatchesAllHosts()
+  bool getMatchesAllHosts() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_extension_match_pattern_get_matches_all_hosts(cast(WebKitWebExtensionMatchPattern*)this._cPtr);
@@ -150,7 +150,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
       the pattern is `<all_urls>`.
       Returns: Whether this match pattern matches all URLs.
   */
-  bool getMatchesAllUrls()
+  bool getMatchesAllUrls() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_extension_match_pattern_get_matches_all_urls(cast(WebKitWebExtensionMatchPattern*)this._cPtr);
@@ -161,7 +161,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
       Gets the path part of the pattern string, unless [webkit.web_extension_match_pattern.WebExtensionMatchPattern.getMatchesAllUrls] is true.
       Returns: The path string.
   */
-  string getPath()
+  string getPath() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_web_extension_match_pattern_get_path(cast(WebKitWebExtensionMatchPattern*)this._cPtr);
@@ -173,7 +173,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
       Gets the scheme part of the pattern string, unless [webkit.web_extension_match_pattern.WebExtensionMatchPattern.getMatchesAllUrls] is true.
       Returns: The scheme string.
   */
-  string getScheme()
+  string getScheme() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_web_extension_match_pattern_get_scheme(cast(WebKitWebExtensionMatchPattern*)this._cPtr);
@@ -185,7 +185,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
       Gets the original pattern string.
       Returns: The original pattern string.
   */
-  string getString()
+  string getString() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_web_extension_match_pattern_get_string(cast(WebKitWebExtensionMatchPattern*)this._cPtr);
@@ -201,7 +201,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
         options = The #WebKitWebExtensionMatchPatternOptions use while matching.
       Returns: Whether the pattern matches the specified pattern.
   */
-  bool matchesPattern(webkit.web_extension_match_pattern.WebExtensionMatchPattern pattern, webkit.types.WebExtensionMatchPatternOptions options)
+  bool matchesPattern(webkit.web_extension_match_pattern.WebExtensionMatchPattern pattern, webkit.types.WebExtensionMatchPatternOptions options) nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_web_extension_match_pattern_matches_pattern(cast(WebKitWebExtensionMatchPattern*)this._cPtr, pattern ? cast(WebKitWebExtensionMatchPattern*)pattern._cPtr(No.Dup) : null, options);
@@ -216,7 +216,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
         options = The #WebKitWebExtensionMatchPatternOptions use while matching.
       Returns: Whether the pattern matches the specified URL.
   */
-  bool matchesUrl(string url, webkit.types.WebExtensionMatchPatternOptions options)
+  bool matchesUrl(string url, webkit.types.WebExtensionMatchPatternOptions options) nothrow
   {
     bool _retval;
     const(char)* _url = url.toCString(No.Alloc);
@@ -233,7 +233,7 @@ class WebExtensionMatchPattern : gobject.boxed.Boxed
       Params:
         urlScheme = The custom URL scheme to register
   */
-  static void registerCustomURLScheme(string urlScheme)
+  static void registerCustomURLScheme(string urlScheme) nothrow
   {
     const(char)* _urlScheme = urlScheme.toCString(No.Alloc);
     webkit_web_extension_match_pattern_register_custom_URL_scheme(_urlScheme);

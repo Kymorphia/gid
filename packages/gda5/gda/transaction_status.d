@@ -15,26 +15,26 @@ class TransactionStatus : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_transaction_status_get_type != &gidSymbolNotFound ? gda_transaction_status_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TransactionStatus self()
+  override TransactionStatus self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class TransactionStatus : gobject.object.ObjectWrap
       Get builder for [gda.transaction_status.TransactionStatus]
       Returns: New builder object
   */
-  static TransactionStatusGidBuilder builder()
+  static TransactionStatusGidBuilder builder() nothrow
   {
     return new TransactionStatusGidBuilder;
   }
@@ -56,7 +56,7 @@ class TransactionStatus : gobject.object.ObjectWrap
         name = name for the transaction
       Returns: the newly created object.
   */
-  this(string name)
+  this(string name) nothrow
   {
     GdaTransactionStatus* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -65,7 +65,7 @@ class TransactionStatus : gobject.object.ObjectWrap
   }
 
   /** */
-  gda.transaction_status.TransactionStatus find(string str, gda.transaction_status_event.TransactionStatusEvent destev)
+  gda.transaction_status.TransactionStatus find(string str, gda.transaction_status_event.TransactionStatusEvent destev) nothrow
   {
     GdaTransactionStatus* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
@@ -83,7 +83,7 @@ class TransactionStatus : gobject.object.ObjectWrap
         unnamedOnly = 
       Returns: 
   */
-  gda.transaction_status.TransactionStatus findCurrent(gda.transaction_status_event.TransactionStatusEvent destev, bool unnamedOnly)
+  gda.transaction_status.TransactionStatus findCurrent(gda.transaction_status_event.TransactionStatusEvent destev, bool unnamedOnly) nothrow
   {
     GdaTransactionStatus* _cretval;
     _cretval = gda_transaction_status_find_current(cast(GdaTransactionStatus*)this._cPtr, destev ? cast(GdaTransactionStatusEvent**)destev._cPtr : null, unnamedOnly);
@@ -92,7 +92,7 @@ class TransactionStatus : gobject.object.ObjectWrap
   }
 
   /** */
-  void freeEvents(gda.transaction_status_event.TransactionStatusEvent event, bool freeAfter)
+  void freeEvents(gda.transaction_status_event.TransactionStatusEvent event, bool freeAfter) nothrow
   {
     gda_transaction_status_free_events(cast(GdaTransactionStatus*)this._cPtr, event ? cast(GdaTransactionStatusEvent*)event._cPtr : null, freeAfter);
   }
@@ -110,7 +110,7 @@ final class TransactionStatusGidBuilder : TransactionStatusGidBuilderImpl!Transa
       Create object from builder.
       Returns: New object
   */
-  TransactionStatus build()
+  TransactionStatus build() nothrow
   {
     return new TransactionStatus(cast(void*)createGObject(TransactionStatus._getGType), Yes.Take);
   }

@@ -17,26 +17,26 @@ class Vfs : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_vfs_get_type != &gidSymbolNotFound ? g_vfs_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Vfs self()
+  override Vfs self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class Vfs : gobject.object.ObjectWrap
       Get builder for [gio.vfs.Vfs]
       Returns: New builder object
   */
-  static VfsGidBuilder builder()
+  static VfsGidBuilder builder() nothrow
   {
     return new VfsGidBuilder;
   }
@@ -55,7 +55,7 @@ class Vfs : gobject.object.ObjectWrap
       Returns: a #GVfs, which will be the local
             file system #GVfs if no other implementation is available.
   */
-  static gio.vfs.Vfs getDefault()
+  static gio.vfs.Vfs getDefault() nothrow
   {
     GVfs* _cretval;
     _cretval = g_vfs_get_default();
@@ -67,7 +67,7 @@ class Vfs : gobject.object.ObjectWrap
       Gets the local #GVfs for the system.
       Returns: a #GVfs.
   */
-  static gio.vfs.Vfs getLocal()
+  static gio.vfs.Vfs getLocal() nothrow
   {
     GVfs* _cretval;
     _cretval = g_vfs_get_local();
@@ -83,7 +83,7 @@ class Vfs : gobject.object.ObjectWrap
       Returns: a #GFile.
             Free the returned object with [gobject.object.ObjectWrap.unref].
   */
-  gio.file.File getFileForPath(string path)
+  gio.file.File getFileForPath(string path) nothrow
   {
     GFile* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -104,7 +104,7 @@ class Vfs : gobject.object.ObjectWrap
       Returns: a #GFile.
             Free the returned object with [gobject.object.ObjectWrap.unref].
   */
-  gio.file.File getFileForUri(string uri)
+  gio.file.File getFileForUri(string uri) nothrow
   {
     GFile* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -119,7 +119,7 @@ class Vfs : gobject.object.ObjectWrap
             The returned array belongs to GIO and must
             not be freed or modified.
   */
-  string[] getSupportedUriSchemes()
+  string[] getSupportedUriSchemes() nothrow
   {
     const(char*)* _cretval;
     _cretval = g_vfs_get_supported_uri_schemes(cast(GVfs*)this._cPtr);
@@ -142,7 +142,7 @@ class Vfs : gobject.object.ObjectWrap
       Returns: true if construction of the vfs was successful
             and it is now active.
   */
-  bool isActive()
+  bool isActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_vfs_is_active(cast(GVfs*)this._cPtr);
@@ -159,7 +159,7 @@ class Vfs : gobject.object.ObjectWrap
       Returns: a #GFile for the given parse_name.
             Free the returned object with [gobject.object.ObjectWrap.unref].
   */
-  gio.file.File parseName(string parseName)
+  gio.file.File parseName(string parseName) nothrow
   {
     GFile* _cretval;
     const(char)* _parseName = parseName.toCString(No.Alloc);
@@ -197,27 +197,41 @@ class Vfs : gobject.object.ObjectWrap
       Returns: true if scheme was successfully registered, or false if a handler
             for scheme already exists.
   */
-  bool registerUriScheme(string scheme, gio.types.VfsFileLookupFunc uriFunc = null, gio.types.VfsFileLookupFunc parseNameFunc = null)
+  bool registerUriScheme(string scheme, gio.types.VfsFileLookupFunc uriFunc = null, gio.types.VfsFileLookupFunc parseNameFunc = null) nothrow
   {
-    extern(C) GFile* _uriFuncCallback(GVfs* vfs, const(char)* identifier, void* userData)
+    extern(C) GFile* _uriFuncCallback(GVfs* vfs, const(char)* identifier, void* userData) nothrow
     {
       gio.file.File _dretval;
       auto _dlg = cast(gio.types.VfsFileLookupFunc*)userData;
       string _identifier = identifier.fromCString(No.Free);
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.vfs.Vfs)(cast(void*)vfs, No.Take), _identifier);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.vfs.Vfs)(cast(void*)vfs, No.Take), _identifier);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.VfsFileLookupFunc");
+      }
       auto _retval = cast(GFile*)(cast(gobject.object.ObjectWrap)_dretval)._cPtr(Yes.Dup);
 
       return _retval;
     }
     auto _uriFuncCB = uriFunc ? &_uriFuncCallback : null;
-    extern(C) GFile* _parseNameFuncCallback(GVfs* vfs, const(char)* identifier, void* userData)
+    extern(C) GFile* _parseNameFuncCallback(GVfs* vfs, const(char)* identifier, void* userData) nothrow
     {
       gio.file.File _dretval;
       auto _dlg = cast(gio.types.VfsFileLookupFunc*)userData;
       string _identifier = identifier.fromCString(No.Free);
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.vfs.Vfs)(cast(void*)vfs, No.Take), _identifier);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.vfs.Vfs)(cast(void*)vfs, No.Take), _identifier);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.VfsFileLookupFunc");
+      }
       auto _retval = cast(GFile*)(cast(gobject.object.ObjectWrap)_dretval)._cPtr(Yes.Dup);
 
       return _retval;
@@ -242,7 +256,7 @@ class Vfs : gobject.object.ObjectWrap
       Returns: true if scheme was successfully unregistered, or false if a
             handler for scheme does not exist.
   */
-  bool unregisterUriScheme(string scheme)
+  bool unregisterUriScheme(string scheme) nothrow
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
@@ -263,7 +277,7 @@ final class VfsGidBuilder : VfsGidBuilderImpl!VfsGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Vfs build()
+  Vfs build() nothrow
   {
     return new Vfs(cast(void*)createGObject(Vfs._getGType), No.Take);
   }

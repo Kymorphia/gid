@@ -25,26 +25,26 @@ class PointerLockPermissionRequest : gobject.object.ObjectWrap, webkit.permissio
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_pointer_lock_permission_request_get_type != &gidSymbolNotFound ? webkit_pointer_lock_permission_request_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PointerLockPermissionRequest self()
+  override PointerLockPermissionRequest self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class PointerLockPermissionRequest : gobject.object.ObjectWrap, webkit.permissio
       Get builder for [webkit.pointer_lock_permission_request.PointerLockPermissionRequest]
       Returns: New builder object
   */
-  static PointerLockPermissionRequestGidBuilder builder()
+  static PointerLockPermissionRequestGidBuilder builder() nothrow
   {
     return new PointerLockPermissionRequestGidBuilder;
   }
@@ -75,7 +75,7 @@ final class PointerLockPermissionRequestGidBuilder : PointerLockPermissionReques
       Create object from builder.
       Returns: New object
   */
-  PointerLockPermissionRequest build()
+  PointerLockPermissionRequest build() nothrow
   {
     return new PointerLockPermissionRequest(cast(void*)createGObject(PointerLockPermissionRequest._getGType), No.Take);
   }

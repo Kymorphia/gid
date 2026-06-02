@@ -46,26 +46,26 @@ class FileEnumerator : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_file_enumerator_get_type != &gidSymbolNotFound ? g_file_enumerator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileEnumerator self()
+  override FileEnumerator self() nothrow
   {
     return this;
   }
@@ -74,7 +74,7 @@ class FileEnumerator : gobject.object.ObjectWrap
       Get builder for [gio.file_enumerator.FileEnumerator]
       Returns: New builder object
   */
-  static FileEnumeratorGidBuilder builder()
+  static FileEnumeratorGidBuilder builder() nothrow
   {
     return new FileEnumeratorGidBuilder;
   }
@@ -116,14 +116,21 @@ class FileEnumerator : gobject.object.ObjectWrap
         callback = a #GAsyncReadyCallback
             to call when the request is satisfied
   */
-  void closeAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void closeAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -177,7 +184,7 @@ class FileEnumerator : gobject.object.ObjectWrap
             or the async equivalents.
       Returns: a #GFile for the #GFileInfo passed it.
   */
-  gio.file.File getChild(gio.file_info.FileInfo info)
+  gio.file.File getChild(gio.file_info.FileInfo info) nothrow
   {
     GFile* _cretval;
     _cretval = g_file_enumerator_get_child(cast(GFileEnumerator*)this._cPtr, info ? cast(GFileInfo*)info._cPtr(No.Dup) : null);
@@ -189,7 +196,7 @@ class FileEnumerator : gobject.object.ObjectWrap
       Get the #GFile container which is being enumerated.
       Returns: the #GFile which is being enumerated.
   */
-  gio.file.File getContainer()
+  gio.file.File getContainer() nothrow
   {
     GFile* _cretval;
     _cretval = g_file_enumerator_get_container(cast(GFileEnumerator*)this._cPtr);
@@ -201,7 +208,7 @@ class FileEnumerator : gobject.object.ObjectWrap
       Checks if the file enumerator has pending operations.
       Returns: true if the enumerator has pending operations.
   */
-  bool hasPending()
+  bool hasPending() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_file_enumerator_has_pending(cast(GFileEnumerator*)this._cPtr);
@@ -212,7 +219,7 @@ class FileEnumerator : gobject.object.ObjectWrap
       Checks if the file enumerator has been closed.
       Returns: true if the enumerator is closed.
   */
-  bool isClosed()
+  bool isClosed() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_file_enumerator_is_closed(cast(GFileEnumerator*)this._cPtr);
@@ -384,14 +391,21 @@ class FileEnumerator : gobject.object.ObjectWrap
         callback = a #GAsyncReadyCallback
             to call when the request is satisfied
   */
-  void nextFilesAsync(int numFiles, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void nextFilesAsync(int numFiles, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -425,7 +439,7 @@ class FileEnumerator : gobject.object.ObjectWrap
       Params:
         pending = a boolean value.
   */
-  void setPending(bool pending)
+  void setPending(bool pending) nothrow
   {
     g_file_enumerator_set_pending(cast(GFileEnumerator*)this._cPtr, pending);
   }
@@ -441,7 +455,7 @@ class FileEnumeratorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = The container that is being enumerated.
       Returns: Builder instance for fluent chaining
   */
-  T container(gio.file.File propval)
+  T container(gio.file.File propval) nothrow
   {
     return setProperty("container", propval);
   }
@@ -454,7 +468,7 @@ final class FileEnumeratorGidBuilder : FileEnumeratorGidBuilderImpl!FileEnumerat
       Create object from builder.
       Returns: New object
   */
-  FileEnumerator build()
+  FileEnumerator build() nothrow
   {
     return new FileEnumerator(cast(void*)createGObject(FileEnumerator._getGType), No.Take);
   }

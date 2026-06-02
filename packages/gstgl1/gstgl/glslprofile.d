@@ -12,7 +12,7 @@ struct GLSLProfile
   alias Enum = gstgl.types.GLSLProfile; ///
 
   /** */
-  static gstgl.types.GLSLProfile fromString(string string_)
+  static gstgl.types.GLSLProfile fromString(string string_) nothrow
   {
     GstGLSLProfile _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
@@ -22,7 +22,7 @@ struct GLSLProfile
   }
 
   /** */
-  static string toString_(gstgl.types.GLSLProfile profile)
+  static string toString_(gstgl.types.GLSLProfile profile) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_glsl_profile_to_string(profile);

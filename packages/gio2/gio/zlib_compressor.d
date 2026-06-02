@@ -20,26 +20,26 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_zlib_compressor_get_type != &gidSymbolNotFound ? g_zlib_compressor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ZlibCompressor self()
+  override ZlibCompressor self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
       Get builder for [gio.zlib_compressor.ZlibCompressor]
       Returns: New builder object
   */
-  static ZlibCompressorGidBuilder builder()
+  static ZlibCompressorGidBuilder builder() nothrow
   {
     return new ZlibCompressorGidBuilder;
   }
@@ -59,7 +59,7 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
         [gio.types.ZlibCompressorFormat.Gzip], the compressor will write the file name
         and modification time from the file info to the GZIP header.
   */
-  @property gio.file_info.FileInfo fileInfo()
+  @property gio.file_info.FileInfo fileInfo() nothrow
   {
     return getFileInfo();
   }
@@ -71,7 +71,7 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
           [gio.types.ZlibCompressorFormat.Gzip], the compressor will write the file name
           and modification time from the file info to the GZIP header.
   */
-  @property void fileInfo(gio.file_info.FileInfo propval)
+  @property void fileInfo(gio.file_info.FileInfo propval) nothrow
   {
     setFileInfo(propval);
   }
@@ -80,7 +80,7 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
       Get `format` property.
       Returns: The format of the compressed data.
   */
-  @property gio.types.ZlibCompressorFormat format()
+  @property gio.types.ZlibCompressorFormat format() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.types.ZlibCompressorFormat)("format");
   }
@@ -90,7 +90,7 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
       Returns: The level of compression from `0` (no compression) to `9` (most
         compression). `-1` for the default level.
   */
-  @property int level()
+  @property int level() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("level");
   }
@@ -105,7 +105,7 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
         level = compression level (0-9), -1 for default
       Returns: a new #GZlibCompressor
   */
-  this(gio.types.ZlibCompressorFormat format, int level)
+  this(gio.types.ZlibCompressorFormat format, int level) nothrow
   {
     GZlibCompressor* _cretval;
     _cretval = g_zlib_compressor_new(format, level);
@@ -116,7 +116,7 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
       Returns the #GZlibCompressor:file-info property.
       Returns: a #GFileInfo, or null
   */
-  gio.file_info.FileInfo getFileInfo()
+  gio.file_info.FileInfo getFileInfo() nothrow
   {
     GFileInfo* _cretval;
     _cretval = g_zlib_compressor_get_file_info(cast(GZlibCompressor*)this._cPtr);
@@ -137,7 +137,7 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
       Params:
         fileInfo = a #GFileInfo
   */
-  void setFileInfo(gio.file_info.FileInfo fileInfo = null)
+  void setFileInfo(gio.file_info.FileInfo fileInfo = null) nothrow
   {
     g_zlib_compressor_set_file_info(cast(GZlibCompressor*)this._cPtr, fileInfo ? cast(GFileInfo*)fileInfo._cPtr(No.Dup) : null);
   }
@@ -157,7 +157,7 @@ class ZlibCompressorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           and modification time from the file info to the GZIP header.
       Returns: Builder instance for fluent chaining
   */
-  T fileInfo(gio.file_info.FileInfo propval)
+  T fileInfo(gio.file_info.FileInfo propval) nothrow
   {
     return setProperty("file-info", propval);
   }
@@ -168,7 +168,7 @@ class ZlibCompressorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = The format of the compressed data.
       Returns: Builder instance for fluent chaining
   */
-  T format(gio.types.ZlibCompressorFormat propval)
+  T format(gio.types.ZlibCompressorFormat propval) nothrow
   {
     return setProperty("format", propval);
   }
@@ -180,7 +180,7 @@ class ZlibCompressorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           compression). `-1` for the default level.
       Returns: Builder instance for fluent chaining
   */
-  T level(int propval)
+  T level(int propval) nothrow
   {
     return setProperty("level", propval);
   }
@@ -193,7 +193,7 @@ final class ZlibCompressorGidBuilder : ZlibCompressorGidBuilderImpl!ZlibCompress
       Create object from builder.
       Returns: New object
   */
-  ZlibCompressor build()
+  ZlibCompressor build() nothrow
   {
     return new ZlibCompressor(cast(void*)createGObject(ZlibCompressor._getGType), Yes.Take);
   }

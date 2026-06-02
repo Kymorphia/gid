@@ -18,11 +18,8 @@ class VideoMetaTransform
   GstVideoMetaTransform _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_meta_transform.VideoMetaTransform");
-
     _cInstance = *cast(GstVideoMetaTransform*)ptr;
 
     if (take)
@@ -30,7 +27,7 @@ class VideoMetaTransform
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class VideoMetaTransform
       Get `inInfo` field.
       Returns: the input #GstVideoInfo
   */
-  @property gstvideo.video_info.VideoInfo inInfo()
+  @property gstvideo.video_info.VideoInfo inInfo() nothrow
   {
     return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)this._cPtr).inInfo);
   }
@@ -49,7 +46,7 @@ class VideoMetaTransform
       Params:
         propval = the input #GstVideoInfo
   */
-  @property void inInfo(gstvideo.video_info.VideoInfo propval)
+  @property void inInfo(gstvideo.video_info.VideoInfo propval) nothrow
   {
     cValueFree!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)this._cPtr).inInfo);
     dToC(propval, cast(void*)&(cast(GstVideoMetaTransform*)this._cPtr).inInfo);
@@ -59,7 +56,7 @@ class VideoMetaTransform
       Get `outInfo` field.
       Returns: the output #GstVideoInfo
   */
-  @property gstvideo.video_info.VideoInfo outInfo()
+  @property gstvideo.video_info.VideoInfo outInfo() nothrow
   {
     return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)this._cPtr).outInfo);
   }
@@ -69,7 +66,7 @@ class VideoMetaTransform
       Params:
         propval = the output #GstVideoInfo
   */
-  @property void outInfo(gstvideo.video_info.VideoInfo propval)
+  @property void outInfo(gstvideo.video_info.VideoInfo propval) nothrow
   {
     cValueFree!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)this._cPtr).outInfo);
     dToC(propval, cast(void*)&(cast(GstVideoMetaTransform*)this._cPtr).outInfo);
@@ -79,7 +76,7 @@ class VideoMetaTransform
       Get the #GQuark for the "gst-video-scale" metadata transform operation.
       Returns: a #GQuark
   */
-  static glib.types.Quark scaleGetQuark()
+  static glib.types.Quark scaleGetQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gst_video_meta_transform_scale_get_quark();

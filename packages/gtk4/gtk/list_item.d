@@ -31,26 +31,26 @@ class ListItem : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_list_item_get_type != &gidSymbolNotFound ? gtk_list_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ListItem self()
+  override ListItem self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class ListItem : gobject.object.ObjectWrap
       Get builder for [gtk.list_item.ListItem]
       Returns: New builder object
   */
-  static ListItemGidBuilder builder()
+  static ListItemGidBuilder builder() nothrow
   {
     return new ListItemGidBuilder;
   }
@@ -68,7 +68,7 @@ class ListItem : gobject.object.ObjectWrap
       Get `accessibleDescription` property.
       Returns: The accessible description to set on the list item.
   */
-  @property string accessibleDescription()
+  @property string accessibleDescription() nothrow
   {
     return getAccessibleDescription();
   }
@@ -78,7 +78,7 @@ class ListItem : gobject.object.ObjectWrap
       Params:
         propval = The accessible description to set on the list item.
   */
-  @property void accessibleDescription(string propval)
+  @property void accessibleDescription(string propval) nothrow
   {
     setAccessibleDescription(propval);
   }
@@ -87,7 +87,7 @@ class ListItem : gobject.object.ObjectWrap
       Get `accessibleLabel` property.
       Returns: The accessible label to set on the list item.
   */
-  @property string accessibleLabel()
+  @property string accessibleLabel() nothrow
   {
     return getAccessibleLabel();
   }
@@ -97,7 +97,7 @@ class ListItem : gobject.object.ObjectWrap
       Params:
         propval = The accessible label to set on the list item.
   */
-  @property void accessibleLabel(string propval)
+  @property void accessibleLabel(string propval) nothrow
   {
     setAccessibleLabel(propval);
   }
@@ -106,7 +106,7 @@ class ListItem : gobject.object.ObjectWrap
       Get `activatable` property.
       Returns: If the item can be activated by the user.
   */
-  @property bool activatable()
+  @property bool activatable() nothrow
   {
     return getActivatable();
   }
@@ -116,7 +116,7 @@ class ListItem : gobject.object.ObjectWrap
       Params:
         propval = If the item can be activated by the user.
   */
-  @property void activatable(bool propval)
+  @property void activatable(bool propval) nothrow
   {
     setActivatable(propval);
   }
@@ -125,7 +125,7 @@ class ListItem : gobject.object.ObjectWrap
       Get `child` property.
       Returns: Widget used for display.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -135,7 +135,7 @@ class ListItem : gobject.object.ObjectWrap
       Params:
         propval = Widget used for display.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -144,7 +144,7 @@ class ListItem : gobject.object.ObjectWrap
       Get `focusable` property.
       Returns: If the item can be focused with the keyboard.
   */
-  @property bool focusable()
+  @property bool focusable() nothrow
   {
     return getFocusable();
   }
@@ -154,7 +154,7 @@ class ListItem : gobject.object.ObjectWrap
       Params:
         propval = If the item can be focused with the keyboard.
   */
-  @property void focusable(bool propval)
+  @property void focusable(bool propval) nothrow
   {
     setFocusable(propval);
   }
@@ -163,7 +163,7 @@ class ListItem : gobject.object.ObjectWrap
       Get `item` property.
       Returns: Displayed item.
   */
-  @property gobject.object.ObjectWrap item()
+  @property gobject.object.ObjectWrap item() nothrow
   {
     return getItem();
   }
@@ -172,7 +172,7 @@ class ListItem : gobject.object.ObjectWrap
       Get `position` property.
       Returns: Position of the item.
   */
-  @property uint position()
+  @property uint position() nothrow
   {
     return getPosition();
   }
@@ -181,7 +181,7 @@ class ListItem : gobject.object.ObjectWrap
       Get `selectable` property.
       Returns: If the item can be selected by the user.
   */
-  @property bool selectable()
+  @property bool selectable() nothrow
   {
     return getSelectable();
   }
@@ -191,7 +191,7 @@ class ListItem : gobject.object.ObjectWrap
       Params:
         propval = If the item can be selected by the user.
   */
-  @property void selectable(bool propval)
+  @property void selectable(bool propval) nothrow
   {
     setSelectable(propval);
   }
@@ -200,7 +200,7 @@ class ListItem : gobject.object.ObjectWrap
       Get `selected` property.
       Returns: If the item is currently selected.
   */
-  @property bool selected()
+  @property bool selected() nothrow
   {
     return getSelected();
   }
@@ -209,7 +209,7 @@ class ListItem : gobject.object.ObjectWrap
       Gets the accessible description of self.
       Returns: the accessible description
   */
-  string getAccessibleDescription()
+  string getAccessibleDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_list_item_get_accessible_description(cast(GtkListItem*)this._cPtr);
@@ -221,7 +221,7 @@ class ListItem : gobject.object.ObjectWrap
       Gets the accessible label of self.
       Returns: the accessible label
   */
-  string getAccessibleLabel()
+  string getAccessibleLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_list_item_get_accessible_label(cast(GtkListItem*)this._cPtr);
@@ -234,7 +234,7 @@ class ListItem : gobject.object.ObjectWrap
       [gtk.list_item.ListItem.setActivatable].
       Returns: true if the item is activatable
   */
-  bool getActivatable()
+  bool getActivatable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_list_item_get_activatable(cast(GtkListItem*)this._cPtr);
@@ -246,7 +246,7 @@ class ListItem : gobject.object.ObjectWrap
       null if none was set.
       Returns: The child
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_item_get_child(cast(GtkListItem*)this._cPtr);
@@ -259,7 +259,7 @@ class ListItem : gobject.object.ObjectWrap
       [gtk.list_item.ListItem.setFocusable].
       Returns: true if the item is focusable
   */
-  bool getFocusable()
+  bool getFocusable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_list_item_get_focusable(cast(GtkListItem*)this._cPtr);
@@ -272,7 +272,7 @@ class ListItem : gobject.object.ObjectWrap
       If self is unbound, this function returns null.
       Returns: The item displayed
   */
-  gobject.object.ObjectWrap getItem()
+  gobject.object.ObjectWrap getItem() nothrow
   {
     GObject* _cretval;
     _cretval = gtk_list_item_get_item(cast(GtkListItem*)this._cPtr);
@@ -286,7 +286,7 @@ class ListItem : gobject.object.ObjectWrap
       If self is unbound, [gtk.types.INVALID_LIST_POSITION] is returned.
       Returns: The position of this item
   */
-  uint getPosition()
+  uint getPosition() nothrow
   {
     uint _retval;
     _retval = gtk_list_item_get_position(cast(GtkListItem*)this._cPtr);
@@ -300,7 +300,7 @@ class ListItem : gobject.object.ObjectWrap
       Do not confuse this function with [gtk.list_item.ListItem.getSelected].
       Returns: true if the item is selectable
   */
-  bool getSelectable()
+  bool getSelectable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_list_item_get_selectable(cast(GtkListItem*)this._cPtr);
@@ -314,7 +314,7 @@ class ListItem : gobject.object.ObjectWrap
       and cannot be set otherwise.
       Returns: true if the item is selected.
   */
-  bool getSelected()
+  bool getSelected() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_list_item_get_selected(cast(GtkListItem*)this._cPtr);
@@ -328,7 +328,7 @@ class ListItem : gobject.object.ObjectWrap
       Params:
         description = the description
   */
-  void setAccessibleDescription(string description)
+  void setAccessibleDescription(string description) nothrow
   {
     const(char)* _description = description.toCString(No.Alloc);
     gtk_list_item_set_accessible_description(cast(GtkListItem*)this._cPtr, _description);
@@ -341,7 +341,7 @@ class ListItem : gobject.object.ObjectWrap
       Params:
         label = the label
   */
-  void setAccessibleLabel(string label)
+  void setAccessibleLabel(string label) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_list_item_set_accessible_label(cast(GtkListItem*)this._cPtr, _label);
@@ -361,7 +361,7 @@ class ListItem : gobject.object.ObjectWrap
       Params:
         activatable = if the item should be activatable
   */
-  void setActivatable(bool activatable)
+  void setActivatable(bool activatable) nothrow
   {
     gtk_list_item_set_activatable(cast(GtkListItem*)this._cPtr, activatable);
   }
@@ -376,7 +376,7 @@ class ListItem : gobject.object.ObjectWrap
       Params:
         child = The list item's child or null to unset
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     gtk_list_item_set_child(cast(GtkListItem*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -395,7 +395,7 @@ class ListItem : gobject.object.ObjectWrap
       Params:
         focusable = if the item should be focusable
   */
-  void setFocusable(bool focusable)
+  void setFocusable(bool focusable) nothrow
   {
     gtk_list_item_set_focusable(cast(GtkListItem*)this._cPtr, focusable);
   }
@@ -417,7 +417,7 @@ class ListItem : gobject.object.ObjectWrap
       Params:
         selectable = if the item should be selectable
   */
-  void setSelectable(bool selectable)
+  void setSelectable(bool selectable) nothrow
   {
     gtk_list_item_set_selectable(cast(GtkListItem*)this._cPtr, selectable);
   }
@@ -433,7 +433,7 @@ class ListItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The accessible description to set on the list item.
       Returns: Builder instance for fluent chaining
   */
-  T accessibleDescription(string propval)
+  T accessibleDescription(string propval) nothrow
   {
     return setProperty("accessible-description", propval);
   }
@@ -444,7 +444,7 @@ class ListItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The accessible label to set on the list item.
       Returns: Builder instance for fluent chaining
   */
-  T accessibleLabel(string propval)
+  T accessibleLabel(string propval) nothrow
   {
     return setProperty("accessible-label", propval);
   }
@@ -455,7 +455,7 @@ class ListItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = If the item can be activated by the user.
       Returns: Builder instance for fluent chaining
   */
-  T activatable(bool propval)
+  T activatable(bool propval) nothrow
   {
     return setProperty("activatable", propval);
   }
@@ -466,7 +466,7 @@ class ListItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Widget used for display.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -477,7 +477,7 @@ class ListItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = If the item can be focused with the keyboard.
       Returns: Builder instance for fluent chaining
   */
-  T focusable(bool propval)
+  T focusable(bool propval) nothrow
   {
     return setProperty("focusable", propval);
   }
@@ -488,7 +488,7 @@ class ListItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = If the item can be selected by the user.
       Returns: Builder instance for fluent chaining
   */
-  T selectable(bool propval)
+  T selectable(bool propval) nothrow
   {
     return setProperty("selectable", propval);
   }
@@ -501,7 +501,7 @@ final class ListItemGidBuilder : ListItemGidBuilderImpl!ListItemGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ListItem build()
+  ListItem build() nothrow
   {
     return new ListItem(cast(void*)createGObject(ListItem._getGType), No.Take);
   }

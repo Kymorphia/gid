@@ -72,26 +72,26 @@ class Calendar : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_calendar_get_type != &gidSymbolNotFound ? gtk_calendar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Calendar self()
+  override Calendar self() nothrow
   {
     return this;
   }
@@ -100,7 +100,7 @@ class Calendar : gtk.widget.Widget
       Get builder for [gtk.calendar.Calendar]
       Returns: New builder object
   */
-  static CalendarGidBuilder builder()
+  static CalendarGidBuilder builder() nothrow
   {
     return new CalendarGidBuilder;
   }
@@ -109,7 +109,7 @@ class Calendar : gtk.widget.Widget
       Get `day` property.
       Returns: The selected day (as a number between 1 and 31).
   */
-  @property int day()
+  @property int day() nothrow
   {
     return getDay();
   }
@@ -119,7 +119,7 @@ class Calendar : gtk.widget.Widget
       Params:
         propval = The selected day (as a number between 1 and 31).
   */
-  @property void day(int propval)
+  @property void day(int propval) nothrow
   {
     setDay(propval);
   }
@@ -130,7 +130,7 @@ class Calendar : gtk.widget.Widget
         
         This property gets initially set to the current month.
   */
-  @property int month()
+  @property int month() nothrow
   {
     return getMonth();
   }
@@ -142,7 +142,7 @@ class Calendar : gtk.widget.Widget
           
           This property gets initially set to the current month.
   */
-  @property void month(int propval)
+  @property void month(int propval) nothrow
   {
     setMonth(propval);
   }
@@ -151,7 +151,7 @@ class Calendar : gtk.widget.Widget
       Get `showDayNames` property.
       Returns: Determines whether day names are displayed.
   */
-  @property bool showDayNames()
+  @property bool showDayNames() nothrow
   {
     return getShowDayNames();
   }
@@ -161,7 +161,7 @@ class Calendar : gtk.widget.Widget
       Params:
         propval = Determines whether day names are displayed.
   */
-  @property void showDayNames(bool propval)
+  @property void showDayNames(bool propval) nothrow
   {
     setShowDayNames(propval);
   }
@@ -170,7 +170,7 @@ class Calendar : gtk.widget.Widget
       Get `showHeading` property.
       Returns: Determines whether a heading is displayed.
   */
-  @property bool showHeading()
+  @property bool showHeading() nothrow
   {
     return getShowHeading();
   }
@@ -180,7 +180,7 @@ class Calendar : gtk.widget.Widget
       Params:
         propval = Determines whether a heading is displayed.
   */
-  @property void showHeading(bool propval)
+  @property void showHeading(bool propval) nothrow
   {
     setShowHeading(propval);
   }
@@ -189,7 +189,7 @@ class Calendar : gtk.widget.Widget
       Get `showWeekNumbers` property.
       Returns: Determines whether week numbers are displayed.
   */
-  @property bool showWeekNumbers()
+  @property bool showWeekNumbers() nothrow
   {
     return getShowWeekNumbers();
   }
@@ -199,7 +199,7 @@ class Calendar : gtk.widget.Widget
       Params:
         propval = Determines whether week numbers are displayed.
   */
-  @property void showWeekNumbers(bool propval)
+  @property void showWeekNumbers(bool propval) nothrow
   {
     setShowWeekNumbers(propval);
   }
@@ -210,7 +210,7 @@ class Calendar : gtk.widget.Widget
         
         This property gets initially set to the current year.
   */
-  @property int year()
+  @property int year() nothrow
   {
     return getYear();
   }
@@ -222,7 +222,7 @@ class Calendar : gtk.widget.Widget
           
           This property gets initially set to the current year.
   */
-  @property void year(int propval)
+  @property void year(int propval) nothrow
   {
     setYear(propval);
   }
@@ -231,7 +231,7 @@ class Calendar : gtk.widget.Widget
       Creates a new calendar, with the current date being selected.
       Returns: a newly [gtk.calendar.Calendar] widget
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_calendar_new();
@@ -241,7 +241,7 @@ class Calendar : gtk.widget.Widget
   /**
       Remove all visual markers.
   */
-  void clearMarks()
+  void clearMarks() nothrow
   {
     gtk_calendar_clear_marks(cast(GtkCalendar*)this._cPtr);
   }
@@ -253,7 +253,7 @@ class Calendar : gtk.widget.Widget
       The returned date is in the local time zone.
       Returns: the [glib.date_time.DateTime] representing the shown date
   */
-  glib.date_time.DateTime getDate()
+  glib.date_time.DateTime getDate() nothrow
   {
     GDateTime* _cretval;
     _cretval = gtk_calendar_get_date(cast(GtkCalendar*)this._cPtr);
@@ -265,7 +265,7 @@ class Calendar : gtk.widget.Widget
       Gets the day of the selected date.
       Returns: the day of the selected date.
   */
-  int getDay()
+  int getDay() nothrow
   {
     int _retval;
     _retval = gtk_calendar_get_day(cast(GtkCalendar*)this._cPtr);
@@ -279,7 +279,7 @@ class Calendar : gtk.widget.Widget
         day = the day number between 1 and 31.
       Returns: whether the day is marked.
   */
-  bool getDayIsMarked(uint day)
+  bool getDayIsMarked(uint day) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_calendar_get_day_is_marked(cast(GtkCalendar*)this._cPtr, day);
@@ -290,7 +290,7 @@ class Calendar : gtk.widget.Widget
       Gets the month of the selected date.
       Returns: The month of the selected date (as a number between 0 and 11).
   */
-  int getMonth()
+  int getMonth() nothrow
   {
     int _retval;
     _retval = gtk_calendar_get_month(cast(GtkCalendar*)this._cPtr);
@@ -305,7 +305,7 @@ class Calendar : gtk.widget.Widget
       property.
       Returns: Whether the calendar shows day names.
   */
-  bool getShowDayNames()
+  bool getShowDayNames() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_calendar_get_show_day_names(cast(GtkCalendar*)this._cPtr);
@@ -319,7 +319,7 @@ class Calendar : gtk.widget.Widget
       property.
       Returns: Whether the calendar is showing a heading.
   */
-  bool getShowHeading()
+  bool getShowHeading() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_calendar_get_show_heading(cast(GtkCalendar*)this._cPtr);
@@ -334,7 +334,7 @@ class Calendar : gtk.widget.Widget
       property.
       Returns: Whether the calendar is showing week numbers.
   */
-  bool getShowWeekNumbers()
+  bool getShowWeekNumbers() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_calendar_get_show_week_numbers(cast(GtkCalendar*)this._cPtr);
@@ -345,7 +345,7 @@ class Calendar : gtk.widget.Widget
       Gets the year of the selected date.
       Returns: the year of the selected date.
   */
-  int getYear()
+  int getYear() nothrow
   {
     int _retval;
     _retval = gtk_calendar_get_year(cast(GtkCalendar*)this._cPtr);
@@ -358,7 +358,7 @@ class Calendar : gtk.widget.Widget
       Params:
         day = the day number to mark between 1 and 31.
   */
-  void markDay(uint day)
+  void markDay(uint day) nothrow
   {
     gtk_calendar_mark_day(cast(GtkCalendar*)this._cPtr, day);
   }
@@ -369,7 +369,7 @@ class Calendar : gtk.widget.Widget
       Params:
         date = a [glib.date_time.DateTime] representing the day to select
   */
-  void selectDay(glib.date_time.DateTime date)
+  void selectDay(glib.date_time.DateTime date) nothrow
   {
     gtk_calendar_select_day(cast(GtkCalendar*)this._cPtr, date ? cast(GDateTime*)date._cPtr(No.Dup) : null);
   }
@@ -383,7 +383,7 @@ class Calendar : gtk.widget.Widget
       Params:
         day = The desired day for the selected date (as a number between 1 and 31).
   */
-  void setDay(int day)
+  void setDay(int day) nothrow
   {
     gtk_calendar_set_day(cast(GtkCalendar*)this._cPtr, day);
   }
@@ -397,7 +397,7 @@ class Calendar : gtk.widget.Widget
       Params:
         month = The desired month for the selected date (as a number between 0 and 11).
   */
-  void setMonth(int month)
+  void setMonth(int month) nothrow
   {
     gtk_calendar_set_month(cast(GtkCalendar*)this._cPtr, month);
   }
@@ -408,7 +408,7 @@ class Calendar : gtk.widget.Widget
       Params:
         value = Whether to show day names above the day numbers
   */
-  void setShowDayNames(bool value)
+  void setShowDayNames(bool value) nothrow
   {
     gtk_calendar_set_show_day_names(cast(GtkCalendar*)this._cPtr, value);
   }
@@ -422,7 +422,7 @@ class Calendar : gtk.widget.Widget
       Params:
         value = Whether to show the heading in the calendar
   */
-  void setShowHeading(bool value)
+  void setShowHeading(bool value) nothrow
   {
     gtk_calendar_set_show_heading(cast(GtkCalendar*)this._cPtr, value);
   }
@@ -433,7 +433,7 @@ class Calendar : gtk.widget.Widget
       Params:
         value = whether to show week numbers on the left of the days
   */
-  void setShowWeekNumbers(bool value)
+  void setShowWeekNumbers(bool value) nothrow
   {
     gtk_calendar_set_show_week_numbers(cast(GtkCalendar*)this._cPtr, value);
   }
@@ -448,7 +448,7 @@ class Calendar : gtk.widget.Widget
         year = The desired year for the selected date (within [glib.date_time.DateTime]
             limits, i.e. from 0001 to 9999).
   */
-  void setYear(int year)
+  void setYear(int year) nothrow
   {
     gtk_calendar_set_year(cast(GtkCalendar*)this._cPtr, year);
   }
@@ -459,7 +459,7 @@ class Calendar : gtk.widget.Widget
       Params:
         day = the day number to unmark between 1 and 31.
   */
-  void unmarkDay(uint day)
+  void unmarkDay(uint day) nothrow
   {
     gtk_calendar_unmark_day(cast(GtkCalendar*)this._cPtr, day);
   }
@@ -479,13 +479,13 @@ class Calendar : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDaySelected(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDaySelected(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.calendar.Calendar)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -494,7 +494,14 @@ class Calendar : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.calendar.Calendar.daySelected");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -516,13 +523,13 @@ class Calendar : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNextMonth(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNextMonth(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.calendar.Calendar)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -531,7 +538,14 @@ class Calendar : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.calendar.Calendar.nextMonth");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -553,13 +567,13 @@ class Calendar : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNextYear(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNextYear(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.calendar.Calendar)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -568,7 +582,14 @@ class Calendar : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.calendar.Calendar.nextYear");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -590,13 +611,13 @@ class Calendar : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPrevMonth(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPrevMonth(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.calendar.Calendar)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -605,7 +626,14 @@ class Calendar : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.calendar.Calendar.prevMonth");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -627,13 +655,13 @@ class Calendar : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPrevYear(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPrevYear(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.calendar.Calendar)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -642,7 +670,14 @@ class Calendar : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.calendar.Calendar.prevYear");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -661,7 +696,7 @@ class CalendarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The selected day (as a number between 1 and 31).
       Returns: Builder instance for fluent chaining
   */
-  T day(int propval)
+  T day(int propval) nothrow
   {
     return setProperty("day", propval);
   }
@@ -674,7 +709,7 @@ class CalendarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           This property gets initially set to the current month.
       Returns: Builder instance for fluent chaining
   */
-  T month(int propval)
+  T month(int propval) nothrow
   {
     return setProperty("month", propval);
   }
@@ -685,7 +720,7 @@ class CalendarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Determines whether day names are displayed.
       Returns: Builder instance for fluent chaining
   */
-  T showDayNames(bool propval)
+  T showDayNames(bool propval) nothrow
   {
     return setProperty("show-day-names", propval);
   }
@@ -696,7 +731,7 @@ class CalendarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Determines whether a heading is displayed.
       Returns: Builder instance for fluent chaining
   */
-  T showHeading(bool propval)
+  T showHeading(bool propval) nothrow
   {
     return setProperty("show-heading", propval);
   }
@@ -707,7 +742,7 @@ class CalendarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Determines whether week numbers are displayed.
       Returns: Builder instance for fluent chaining
   */
-  T showWeekNumbers(bool propval)
+  T showWeekNumbers(bool propval) nothrow
   {
     return setProperty("show-week-numbers", propval);
   }
@@ -720,7 +755,7 @@ class CalendarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           This property gets initially set to the current year.
       Returns: Builder instance for fluent chaining
   */
-  T year(int propval)
+  T year(int propval) nothrow
   {
     return setProperty("year", propval);
   }
@@ -733,7 +768,7 @@ final class CalendarGidBuilder : CalendarGidBuilderImpl!CalendarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Calendar build()
+  Calendar build() nothrow
   {
     return new Calendar(cast(void*)createGObject(Calendar._getGType), No.Take);
   }

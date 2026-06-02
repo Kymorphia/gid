@@ -8,12 +8,12 @@ import gtk.orientable_mixin;
 /// Proxy object for [gtk.orientable.Orientable] interface when a GObject has no applicable D binding
 class OrientableIfaceProxy : IfaceProxy, gtk.orientable.Orientable
 {
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
-  override TypeInfo_Interface getIface()
+  override TypeInfo_Interface getIface() nothrow
   {
     return typeid(gtk.orientable.Orientable);
   }

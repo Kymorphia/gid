@@ -71,26 +71,26 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_action_group_get_type != &gidSymbolNotFound ? gtk_action_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ActionGroup self()
+  override ActionGroup self() nothrow
   {
     return this;
   }
@@ -99,7 +99,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Get builder for [gtk.action_group.ActionGroup]
       Returns: New builder object
   */
-  static ActionGroupGidBuilder builder()
+  static ActionGroupGidBuilder builder() nothrow
   {
     return new ActionGroupGidBuilder;
   }
@@ -108,7 +108,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Get `accelGroup` property.
       Returns: The accelerator group the actions of this group should use.
   */
-  @property gtk.accel_group.AccelGroup accelGroup()
+  @property gtk.accel_group.AccelGroup accelGroup() nothrow
   {
     return getAccelGroup();
   }
@@ -118,7 +118,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         propval = The accelerator group the actions of this group should use.
   */
-  @property void accelGroup(gtk.accel_group.AccelGroup propval)
+  @property void accelGroup(gtk.accel_group.AccelGroup propval) nothrow
   {
     setAccelGroup(propval);
   }
@@ -127,7 +127,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Get `name` property.
       Returns: A name for the action.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return getName();
   }
@@ -136,7 +136,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Get `sensitive` property.
       Returns: Whether the action group is enabled.
   */
-  @property bool sensitive()
+  @property bool sensitive() nothrow
   {
     return getSensitive();
   }
@@ -146,7 +146,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         propval = Whether the action group is enabled.
   */
-  @property void sensitive(bool propval)
+  @property void sensitive(bool propval) nothrow
   {
     setSensitive(propval);
   }
@@ -155,7 +155,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Get `visible` property.
       Returns: Whether the action group is visible.
   */
-  @property bool visible()
+  @property bool visible() nothrow
   {
     return getVisible();
   }
@@ -165,7 +165,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         propval = Whether the action group is visible.
   */
-  @property void visible(bool propval)
+  @property void visible(bool propval) nothrow
   {
     setVisible(propval);
   }
@@ -181,7 +181,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
         name = the name of the action group.
       Returns: the new #GtkActionGroup
   */
-  this(string name)
+  this(string name) nothrow
   {
     GtkActionGroup* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -200,7 +200,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         action = an action
   */
-  void addAction(gtk.action.Action action)
+  void addAction(gtk.action.Action action) nothrow
   {
     gtk_action_group_add_action(cast(GtkActionGroup*)this._cPtr, action ? cast(GtkAction*)action._cPtr(No.Dup) : null);
   }
@@ -219,7 +219,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
             the format understood by [gtk.global.acceleratorParse], or "" for no accelerator, or
             null to use the stock accelerator
   */
-  void addActionWithAccel(gtk.action.Action action, string accelerator = null)
+  void addActionWithAccel(gtk.action.Action action, string accelerator = null) nothrow
   {
     const(char)* _accelerator = accelerator.toCString(No.Alloc);
     gtk_action_group_add_action_with_accel(cast(GtkActionGroup*)this._cPtr, action ? cast(GtkAction*)action._cPtr(No.Dup) : null, _accelerator);
@@ -230,7 +230,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Returns: the accelerator group associated with this action
         group or null if there is none.
   */
-  gtk.accel_group.AccelGroup getAccelGroup()
+  gtk.accel_group.AccelGroup getAccelGroup() nothrow
   {
     GtkAccelGroup* _cretval;
     _cretval = gtk_action_group_get_accel_group(cast(GtkActionGroup*)this._cPtr);
@@ -245,7 +245,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
         actionName = the name of the action
       Returns: the action, or null if no action by that name exists
   */
-  gtk.action.Action getAction(string actionName)
+  gtk.action.Action getAction(string actionName) nothrow
   {
     GtkAction* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
@@ -258,7 +258,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Gets the name of the action group.
       Returns: the name of the action group.
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_action_group_get_name(cast(GtkActionGroup*)this._cPtr);
@@ -273,7 +273,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       is sensitive.
       Returns: true if the group is sensitive.
   */
-  bool getSensitive()
+  bool getSensitive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_action_group_get_sensitive(cast(GtkActionGroup*)this._cPtr);
@@ -287,7 +287,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       is visible.
       Returns: true if the group is visible.
   */
-  bool getVisible()
+  bool getVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_action_group_get_visible(cast(GtkActionGroup*)this._cPtr);
@@ -298,7 +298,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Lists the actions in the action group.
       Returns: an allocated list of the action objects in the action group
   */
-  gtk.action.Action[] listActions()
+  gtk.action.Action[] listActions() nothrow
   {
     GList* _cretval;
     _cretval = gtk_action_group_list_actions(cast(GtkActionGroup*)this._cPtr);
@@ -312,7 +312,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         action = an action
   */
-  void removeAction(gtk.action.Action action)
+  void removeAction(gtk.action.Action action) nothrow
   {
     gtk_action_group_remove_action(cast(GtkActionGroup*)this._cPtr, action ? cast(GtkAction*)action._cPtr(No.Dup) : null);
   }
@@ -323,7 +323,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         accelGroup = a #GtkAccelGroup to set or null
   */
-  void setAccelGroup(gtk.accel_group.AccelGroup accelGroup = null)
+  void setAccelGroup(gtk.accel_group.AccelGroup accelGroup = null) nothrow
   {
     gtk_action_group_set_accel_group(cast(GtkActionGroup*)this._cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup._cPtr(No.Dup) : null);
   }
@@ -334,7 +334,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         sensitive = new sensitivity
   */
-  void setSensitive(bool sensitive)
+  void setSensitive(bool sensitive) nothrow
   {
     gtk_action_group_set_sensitive(cast(GtkActionGroup*)this._cPtr, sensitive);
   }
@@ -349,15 +349,22 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         func = a #GtkTranslateFunc
   */
-  void setTranslateFunc(gtk.types.TranslateFunc func)
+  void setTranslateFunc(gtk.types.TranslateFunc func) nothrow
   {
-    extern(C) char* _funcCallback(const(char)* path, void* funcData)
+    extern(C) char* _funcCallback(const(char)* path, void* funcData) nothrow
     {
       string _dretval;
       auto _dlg = cast(gtk.types.TranslateFunc*)funcData;
       string _path = path.fromCString(No.Free);
 
-      _dretval = (*_dlg)(_path);
+      try
+      {
+        _dretval = (*_dlg)(_path);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.TranslateFunc");
+      }
       auto _retval = _dretval.toCString(Yes.Alloc);
 
       return _retval;
@@ -380,7 +387,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
         domain = the translation domain to use for [glib.global.dgettext]
           calls, or null to use the domain set with textdomain()
   */
-  void setTranslationDomain(string domain = null)
+  void setTranslationDomain(string domain = null) nothrow
   {
     const(char)* _domain = domain.toCString(No.Alloc);
     gtk_action_group_set_translation_domain(cast(GtkActionGroup*)this._cPtr, _domain);
@@ -392,7 +399,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         visible = new visiblity
   */
-  void setVisible(bool visible)
+  void setVisible(bool visible) nothrow
   {
     gtk_action_group_set_visible(cast(GtkActionGroup*)this._cPtr, visible);
   }
@@ -406,7 +413,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
         string_ = a string
       Returns: the translation of string
   */
-  string translateString(string string_)
+  string translateString(string string_) nothrow
   {
     const(char)* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
@@ -444,7 +451,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectConnectProxy(T)(T callback, Flag!"After" after = No.After)
+  gulong connectConnectProxy(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.action.Action)))
@@ -452,7 +459,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.action_group.ActionGroup)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -467,7 +474,14 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.action_group.ActionGroup.connectProxy");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -498,7 +512,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDisconnectProxy(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDisconnectProxy(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.action.Action)))
@@ -506,7 +520,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.action_group.ActionGroup)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -521,7 +535,14 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.action_group.ActionGroup.disconnectProxy");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -549,14 +570,14 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPostActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPostActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.action.Action)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.action_group.ActionGroup)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -568,7 +589,14 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.action_group.ActionGroup.postActivate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -596,14 +624,14 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPreActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPreActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.action.Action)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.action_group.ActionGroup)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -615,7 +643,14 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.action_group.ActionGroup.preActivate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -635,7 +670,7 @@ class ActionGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
         propval = The accelerator group the actions of this group should use.
       Returns: Builder instance for fluent chaining
   */
-  T accelGroup(gtk.accel_group.AccelGroup propval)
+  T accelGroup(gtk.accel_group.AccelGroup propval) nothrow
   {
     return setProperty("accel-group", propval);
   }
@@ -646,7 +681,7 @@ class ActionGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
         propval = A name for the action.
       Returns: Builder instance for fluent chaining
   */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -657,7 +692,7 @@ class ActionGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
         propval = Whether the action group is enabled.
       Returns: Builder instance for fluent chaining
   */
-  T sensitive(bool propval)
+  T sensitive(bool propval) nothrow
   {
     return setProperty("sensitive", propval);
   }
@@ -668,7 +703,7 @@ class ActionGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
         propval = Whether the action group is visible.
       Returns: Builder instance for fluent chaining
   */
-  T visible(bool propval)
+  T visible(bool propval) nothrow
   {
     return setProperty("visible", propval);
   }
@@ -681,7 +716,7 @@ final class ActionGroupGidBuilder : ActionGroupGidBuilderImpl!ActionGroupGidBuil
       Create object from builder.
       Returns: New object
   */
-  ActionGroup build()
+  ActionGroup build() nothrow
   {
     return new ActionGroup(cast(void*)createGObject(ActionGroup._getGType), Yes.Take);
   }

@@ -19,11 +19,8 @@ class PadProbeInfo
   GstPadProbeInfo _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gst.pad_probe_info.PadProbeInfo");
-
     _cInstance = *cast(GstPadProbeInfo*)ptr;
 
     if (take)
@@ -31,7 +28,7 @@ class PadProbeInfo
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -40,7 +37,7 @@ class PadProbeInfo
       Get `type` field.
       Returns: the current probe type
   */
-  @property gst.types.PadProbeType type()
+  @property gst.types.PadProbeType type() nothrow
   {
     return cast(gst.types.PadProbeType)(cast(GstPadProbeInfo*)this._cPtr).type;
   }
@@ -50,7 +47,7 @@ class PadProbeInfo
       Params:
         propval = the current probe type
   */
-  @property void type(gst.types.PadProbeType propval)
+  @property void type(gst.types.PadProbeType propval) nothrow
   {
     (cast(GstPadProbeInfo*)this._cPtr).type = cast(GstPadProbeType)propval;
   }
@@ -59,7 +56,7 @@ class PadProbeInfo
       Get `id` field.
       Returns: the id of the probe
   */
-  @property gulong id()
+  @property gulong id() nothrow
   {
     return (cast(GstPadProbeInfo*)this._cPtr).id;
   }
@@ -69,7 +66,7 @@ class PadProbeInfo
       Params:
         propval = the id of the probe
   */
-  @property void id(gulong propval)
+  @property void id(gulong propval) nothrow
   {
     (cast(GstPadProbeInfo*)this._cPtr).id = propval;
   }
@@ -79,7 +76,7 @@ class PadProbeInfo
       Returns: offset of pull probe, this field is valid when @type contains
            #GST_PAD_PROBE_TYPE_PULL
   */
-  @property ulong offset()
+  @property ulong offset() nothrow
   {
     return (cast(GstPadProbeInfo*)this._cPtr).offset;
   }
@@ -90,7 +87,7 @@ class PadProbeInfo
         propval = offset of pull probe, this field is valid when @type contains
              #GST_PAD_PROBE_TYPE_PULL
   */
-  @property void offset(ulong propval)
+  @property void offset(ulong propval) nothrow
   {
     (cast(GstPadProbeInfo*)this._cPtr).offset = propval;
   }
@@ -100,7 +97,7 @@ class PadProbeInfo
       Returns: size of pull probe, this field is valid when @type contains
            #GST_PAD_PROBE_TYPE_PULL
   */
-  @property uint size()
+  @property uint size() nothrow
   {
     return (cast(GstPadProbeInfo*)this._cPtr).size;
   }
@@ -111,13 +108,13 @@ class PadProbeInfo
         propval = size of pull probe, this field is valid when @type contains
              #GST_PAD_PROBE_TYPE_PULL
   */
-  @property void size(uint propval)
+  @property void size(uint propval) nothrow
   {
     (cast(GstPadProbeInfo*)this._cPtr).size = propval;
   }
 
   /** */
-  gst.buffer.Buffer getBuffer()
+  gst.buffer.Buffer getBuffer() nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_pad_probe_info_get_buffer(cast(GstPadProbeInfo*)this._cPtr);
@@ -126,7 +123,7 @@ class PadProbeInfo
   }
 
   /** */
-  gst.buffer_list.BufferList getBufferList()
+  gst.buffer_list.BufferList getBufferList() nothrow
   {
     GstBufferList* _cretval;
     _cretval = gst_pad_probe_info_get_buffer_list(cast(GstPadProbeInfo*)this._cPtr);
@@ -135,7 +132,7 @@ class PadProbeInfo
   }
 
   /** */
-  gst.event.Event getEvent()
+  gst.event.Event getEvent() nothrow
   {
     GstEvent* _cretval;
     _cretval = gst_pad_probe_info_get_event(cast(GstPadProbeInfo*)this._cPtr);
@@ -144,7 +141,7 @@ class PadProbeInfo
   }
 
   /** */
-  gst.query.Query getQuery()
+  gst.query.Query getQuery() nothrow
   {
     GstQuery* _cretval;
     _cretval = gst_pad_probe_info_get_query(cast(GstPadProbeInfo*)this._cPtr);

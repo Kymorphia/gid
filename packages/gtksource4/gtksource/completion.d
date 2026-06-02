@@ -24,26 +24,26 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_get_type != &gidSymbolNotFound ? gtk_source_completion_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Completion self()
+  override Completion self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Get builder for [gtksource.completion.Completion]
       Returns: New builder object
   */
-  static CompletionGidBuilder builder()
+  static CompletionGidBuilder builder() nothrow
   {
     return new CompletionGidBuilder;
   }
@@ -63,7 +63,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
         example, to activate the first proposal, the user can press
         <keycombo><keycap>Alt</keycap><keycap>1</keycap></keycombo>.
   */
-  @property uint accelerators()
+  @property uint accelerators() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("accelerators");
   }
@@ -75,7 +75,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
           example, to activate the first proposal, the user can press
           <keycombo><keycap>Alt</keycap><keycap>1</keycap></keycombo>.
   */
-  @property void accelerators(uint propval)
+  @property void accelerators(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("accelerators", propval);
   }
@@ -85,7 +85,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Returns: Determines the popup delay (in milliseconds) at which the completion
         will be shown for interactive completion.
   */
-  @property uint autoCompleteDelay()
+  @property uint autoCompleteDelay() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("auto-complete-delay");
   }
@@ -96,7 +96,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
         propval = Determines the popup delay (in milliseconds) at which the completion
           will be shown for interactive completion.
   */
-  @property void autoCompleteDelay(uint propval)
+  @property void autoCompleteDelay(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("auto-complete-delay", propval);
   }
@@ -111,7 +111,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
         
         See also the #GtkSourceCompletion::move-cursor signal.
   */
-  @property uint proposalPageSize()
+  @property uint proposalPageSize() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("proposal-page-size");
   }
@@ -127,7 +127,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
           
           See also the #GtkSourceCompletion::move-cursor signal.
   */
-  @property void proposalPageSize(uint propval)
+  @property void proposalPageSize(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("proposal-page-size", propval);
   }
@@ -138,7 +138,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
         
         See the #GtkSourceCompletion::move-page signal.
   */
-  @property uint providerPageSize()
+  @property uint providerPageSize() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("provider-page-size");
   }
@@ -150,7 +150,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
           
           See the #GtkSourceCompletion::move-page signal.
   */
-  @property void providerPageSize(uint propval)
+  @property void providerPageSize(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("provider-page-size", propval);
   }
@@ -161,7 +161,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
         saved when the completion is hidden, and restored when the completion
         is shown again.
   */
-  @property bool rememberInfoVisibility()
+  @property bool rememberInfoVisibility() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("remember-info-visibility");
   }
@@ -173,7 +173,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
           saved when the completion is hidden, and restored when the completion
           is shown again.
   */
-  @property void rememberInfoVisibility(bool propval)
+  @property void rememberInfoVisibility(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("remember-info-visibility", propval);
   }
@@ -183,7 +183,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Returns: Determines whether the first proposal should be selected when the
         completion is first shown.
   */
-  @property bool selectOnShow()
+  @property bool selectOnShow() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("select-on-show");
   }
@@ -194,7 +194,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
         propval = Determines whether the first proposal should be selected when the
           completion is first shown.
   */
-  @property void selectOnShow(bool propval)
+  @property void selectOnShow(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("select-on-show", propval);
   }
@@ -204,7 +204,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Returns: Determines whether provider headers should be shown in the proposal
         list. It can be useful to disable when there is only one provider.
   */
-  @property bool showHeaders()
+  @property bool showHeaders() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("show-headers");
   }
@@ -215,7 +215,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
         propval = Determines whether provider headers should be shown in the proposal
           list. It can be useful to disable when there is only one provider.
   */
-  @property void showHeaders(bool propval)
+  @property void showHeaders(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("show-headers", propval);
   }
@@ -225,7 +225,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Returns: Determines whether provider and proposal icons should be shown in
         the completion popup.
   */
-  @property bool showIcons()
+  @property bool showIcons() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("show-icons");
   }
@@ -236,7 +236,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
         propval = Determines whether provider and proposal icons should be shown in
           the completion popup.
   */
-  @property void showIcons(bool propval)
+  @property void showIcons(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("show-icons", propval);
   }
@@ -245,7 +245,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Get `view` property.
       Returns: The #GtkSourceView bound to the completion object.
   */
-  @property gtksource.view.View view()
+  @property gtksource.view.View view() nothrow
   {
     return getView();
   }
@@ -283,7 +283,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       interactive completion until [gtksource.completion.Completion.unblockInteractive]
       has been called the same number of times.
   */
-  void blockInteractive()
+  void blockInteractive() nothrow
   {
     gtk_source_completion_block_interactive(cast(GtkSourceCompletion*)this._cPtr);
   }
@@ -300,7 +300,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
         so if you invoke [gtksource.completion.Completion.start] with this context
         you don't need to unref it.
   */
-  gtksource.completion_context.CompletionContext createContext(gtk.text_iter.TextIter position = null)
+  gtksource.completion_context.CompletionContext createContext(gtk.text_iter.TextIter position = null) nothrow
   {
     GtkSourceCompletionContext* _cretval;
     _cretval = gtk_source_completion_create_context(cast(GtkSourceCompletion*)this._cPtr, position ? cast(GtkTextIter*)position._cPtr(No.Dup) : null);
@@ -314,7 +314,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Returns: The #GtkSourceCompletionInfo window
                                   associated with completion.
   */
-  gtksource.completion_info.CompletionInfo getInfoWindow()
+  gtksource.completion_info.CompletionInfo getInfoWindow() nothrow
   {
     GtkSourceCompletionInfo* _cretval;
     _cretval = gtk_source_completion_get_info_window(cast(GtkSourceCompletion*)this._cPtr);
@@ -327,7 +327,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       by the completion and should not be freed.
       Returns: list of #GtkSourceCompletionProvider.
   */
-  gtksource.completion_provider.CompletionProvider[] getProviders()
+  gtksource.completion_provider.CompletionProvider[] getProviders() nothrow
   {
     GList* _cretval;
     _cretval = gtk_source_completion_get_providers(cast(GtkSourceCompletion*)this._cPtr);
@@ -341,7 +341,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Returns: The #GtkSourceView associated with
         completion, or null.
   */
-  gtksource.view.View getView()
+  gtksource.view.View getView() nothrow
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_completion_get_view(cast(GtkSourceCompletion*)this._cPtr);
@@ -352,7 +352,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   /**
       Hides the completion if it is active (visible).
   */
-  void hide()
+  void hide() nothrow
   {
     gtk_source_completion_hide(cast(GtkSourceCompletion*)this._cPtr);
   }
@@ -393,7 +393,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
           with which to start the completion.
       Returns: true if it was possible to the show completion window.
   */
-  bool start(gtksource.completion_provider.CompletionProvider[] providers, gtksource.completion_context.CompletionContext context)
+  bool start(gtksource.completion_provider.CompletionProvider[] providers, gtksource.completion_context.CompletionContext context) nothrow
   {
     bool _retval;
     auto _providers = gListFromD!(gtksource.completion_provider.CompletionProvider)(providers);
@@ -407,7 +407,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       [gtksource.completion.Completion.blockInteractive] to enable interactive completion
       again.
   */
-  void unblockInteractive()
+  void unblockInteractive() nothrow
   {
     gtk_source_completion_unblock_interactive(cast(GtkSourceCompletion*)this._cPtr);
   }
@@ -433,13 +433,13 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivateProposal(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivateProposal(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.completion.Completion)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -448,7 +448,14 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.completion.Completion.activateProposal");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -471,13 +478,13 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectHide(T)(T callback, Flag!"After" after = No.After)
+  gulong connectHide(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.completion.Completion)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -486,7 +493,14 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.completion.Completion.hide");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -527,7 +541,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ScrollStep)))
@@ -535,7 +549,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtksource.completion.Completion)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -550,7 +564,14 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.completion.Completion.moveCursor");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -594,7 +615,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMovePage(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMovePage(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ScrollStep)))
@@ -602,7 +623,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtksource.completion.Completion)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -617,7 +638,14 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.completion.Completion.movePage");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -642,14 +670,14 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPopulateContext(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPopulateContext(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.completion_context.CompletionContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtksource.completion.Completion)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -661,7 +689,14 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.completion.Completion.populateContext");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -684,13 +719,13 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectShow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.completion.Completion)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -699,7 +734,14 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.completion.Completion.show");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -721,7 +763,7 @@ class CompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
           <keycombo><keycap>Alt</keycap><keycap>1</keycap></keycombo>.
       Returns: Builder instance for fluent chaining
   */
-  T accelerators(uint propval)
+  T accelerators(uint propval) nothrow
   {
     return setProperty("accelerators", propval);
   }
@@ -733,7 +775,7 @@ class CompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
           will be shown for interactive completion.
       Returns: Builder instance for fluent chaining
   */
-  T autoCompleteDelay(uint propval)
+  T autoCompleteDelay(uint propval) nothrow
   {
     return setProperty("auto-complete-delay", propval);
   }
@@ -750,7 +792,7 @@ class CompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
           See also the #GtkSourceCompletion::move-cursor signal.
       Returns: Builder instance for fluent chaining
   */
-  T proposalPageSize(uint propval)
+  T proposalPageSize(uint propval) nothrow
   {
     return setProperty("proposal-page-size", propval);
   }
@@ -763,7 +805,7 @@ class CompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
           See the #GtkSourceCompletion::move-page signal.
       Returns: Builder instance for fluent chaining
   */
-  T providerPageSize(uint propval)
+  T providerPageSize(uint propval) nothrow
   {
     return setProperty("provider-page-size", propval);
   }
@@ -776,7 +818,7 @@ class CompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
           is shown again.
       Returns: Builder instance for fluent chaining
   */
-  T rememberInfoVisibility(bool propval)
+  T rememberInfoVisibility(bool propval) nothrow
   {
     return setProperty("remember-info-visibility", propval);
   }
@@ -788,7 +830,7 @@ class CompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
           completion is first shown.
       Returns: Builder instance for fluent chaining
   */
-  T selectOnShow(bool propval)
+  T selectOnShow(bool propval) nothrow
   {
     return setProperty("select-on-show", propval);
   }
@@ -800,7 +842,7 @@ class CompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
           list. It can be useful to disable when there is only one provider.
       Returns: Builder instance for fluent chaining
   */
-  T showHeaders(bool propval)
+  T showHeaders(bool propval) nothrow
   {
     return setProperty("show-headers", propval);
   }
@@ -812,7 +854,7 @@ class CompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
           the completion popup.
       Returns: Builder instance for fluent chaining
   */
-  T showIcons(bool propval)
+  T showIcons(bool propval) nothrow
   {
     return setProperty("show-icons", propval);
   }
@@ -823,7 +865,7 @@ class CompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
         propval = The #GtkSourceView bound to the completion object.
       Returns: Builder instance for fluent chaining
   */
-  T view(gtksource.view.View propval)
+  T view(gtksource.view.View propval) nothrow
   {
     return setProperty("view", propval);
   }
@@ -836,7 +878,7 @@ final class CompletionGidBuilder : CompletionGidBuilderImpl!CompletionGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Completion build()
+  Completion build() nothrow
   {
     return new Completion(cast(void*)createGObject(Completion._getGType), No.Take);
   }

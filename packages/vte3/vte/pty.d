@@ -21,26 +21,26 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())vte_pty_get_type != &gidSymbolNotFound ? vte_pty_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Pty self()
+  override Pty self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
       Get builder for [vte.pty.Pty]
       Returns: New builder object
   */
-  static PtyGidBuilder builder()
+  static PtyGidBuilder builder() nothrow
   {
     return new PtyGidBuilder;
   }
@@ -58,7 +58,7 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
       Get `fd` property.
       Returns: The file descriptor of the PTY master.
   */
-  @property int fd()
+  @property int fd() nothrow
   {
     return getFd();
   }
@@ -67,7 +67,7 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
       Get `flags` property.
       Returns: Flags.
   */
-  @property vte.types.PtyFlags flags()
+  @property vte.types.PtyFlags flags() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(vte.types.PtyFlags)("flags");
   }
@@ -146,7 +146,7 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
   }
 
   /** */
-  void childSetup()
+  void childSetup() nothrow
   {
     vte_pty_child_setup(cast(VtePty*)this._cPtr);
   }
@@ -154,13 +154,13 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
   /**
       Since 0.42 this is a no-op.
   */
-  void close()
+  void close() nothrow
   {
     vte_pty_close(cast(VtePty*)this._cPtr);
   }
 
   /** */
-  int getFd()
+  int getFd() nothrow
   {
     int _retval;
     _retval = vte_pty_get_fd(cast(VtePty*)this._cPtr);
@@ -247,21 +247,35 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
         cancellable = a #GCancellable, or null
         callback = a #GAsyncReadyCallback, or null
   */
-  void spawnAsync(string workingDirectory, string[] argv, string[] envv, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void spawnAsync(string workingDirectory, string[] argv, string[] envv, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _childSetupCallback(void* data)
+    extern(C) void _childSetupCallback(void* data) nothrow
     {
       auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.SpawnChildSetupFunc");
+      }
     }
     auto _childSetupCB = childSetup ? &_childSetupCallback : null;
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
@@ -341,21 +355,35 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
         cancellable = a #GCancellable, or null
         callback = a #GAsyncReadyCallback, or null
   */
-  void spawnWithFdsAsync(string workingDirectory, string[] argv, string[] envv, int[] fds, int[] mapFds, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void spawnWithFdsAsync(string workingDirectory, string[] argv, string[] envv, int[] fds, int[] mapFds, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc childSetup, int timeout, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _childSetupCallback(void* data)
+    extern(C) void _childSetupCallback(void* data) nothrow
     {
       auto _dlg = cast(glib.types.SpawnChildSetupFunc*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.SpawnChildSetupFunc");
+      }
     }
     auto _childSetupCB = childSetup ? &_childSetupCallback : null;
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
@@ -400,7 +428,7 @@ class PtyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.init
         propval = The file descriptor of the PTY master.
       Returns: Builder instance for fluent chaining
   */
-  T fd(int propval)
+  T fd(int propval) nothrow
   {
     return setProperty("fd", propval);
   }
@@ -411,7 +439,7 @@ class PtyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.init
         propval = Flags.
       Returns: Builder instance for fluent chaining
   */
-  T flags(vte.types.PtyFlags propval)
+  T flags(vte.types.PtyFlags propval) nothrow
   {
     return setProperty("flags", propval);
   }
@@ -424,7 +452,7 @@ final class PtyGidBuilder : PtyGidBuilderImpl!PtyGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Pty build()
+  Pty build() nothrow
   {
     return new Pty(cast(void*)createGObject(Pty._getGType), No.Take);
   }

@@ -17,11 +17,8 @@ class EventProperty
   GdkEventProperty _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.event_property.EventProperty");
-
     _cInstance = *cast(GdkEventProperty*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class EventProperty
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class EventProperty
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.PropertyNotify]).
   */
-  @property gdk.types.EventType type()
+  @property gdk.types.EventType type() nothrow
   {
     return cast(gdk.types.EventType)(cast(GdkEventProperty*)this._cPtr).type;
   }
@@ -48,7 +45,7 @@ class EventProperty
       Params:
         propval = the type of the event ([gdk.types.EventType.PropertyNotify]).
   */
-  @property void type(gdk.types.EventType propval)
+  @property void type(gdk.types.EventType propval) nothrow
   {
     (cast(GdkEventProperty*)this._cPtr).type = cast(GdkEventType)propval;
   }
@@ -57,7 +54,7 @@ class EventProperty
       Get `window` field.
       Returns: the window which received the event.
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventProperty*)this._cPtr).window);
   }
@@ -67,7 +64,7 @@ class EventProperty
       Params:
         propval = the window which received the event.
   */
-  @property void window(gdk.window.Window propval)
+  @property void window(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventProperty*)this._cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventProperty*)this._cPtr).window);
@@ -77,7 +74,7 @@ class EventProperty
       Get `sendEvent` field.
       Returns: true if the event was sent explicitly.
   */
-  @property byte sendEvent()
+  @property byte sendEvent() nothrow
   {
     return (cast(GdkEventProperty*)this._cPtr).sendEvent;
   }
@@ -87,7 +84,7 @@ class EventProperty
       Params:
         propval = true if the event was sent explicitly.
   */
-  @property void sendEvent(byte propval)
+  @property void sendEvent(byte propval) nothrow
   {
     (cast(GdkEventProperty*)this._cPtr).sendEvent = propval;
   }
@@ -96,7 +93,7 @@ class EventProperty
       Get `atom` field.
       Returns: the property that was changed.
   */
-  @property gdk.atom.Atom atom()
+  @property gdk.atom.Atom atom() nothrow
   {
     return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventProperty*)this._cPtr).atom, No.Take);
   }
@@ -105,7 +102,7 @@ class EventProperty
       Get `time` field.
       Returns: the time of the event in milliseconds.
   */
-  @property uint time()
+  @property uint time() nothrow
   {
     return (cast(GdkEventProperty*)this._cPtr).time;
   }
@@ -115,7 +112,7 @@ class EventProperty
       Params:
         propval = the time of the event in milliseconds.
   */
-  @property void time(uint propval)
+  @property void time(uint propval) nothrow
   {
     (cast(GdkEventProperty*)this._cPtr).time = propval;
   }
@@ -125,7 +122,7 @@ class EventProperty
       Returns: whether the property was changed
           ([gdk.types.PropertyState.NewValue]) or deleted ([gdk.types.PropertyState.Delete]).
   */
-  @property gdk.types.PropertyState state()
+  @property gdk.types.PropertyState state() nothrow
   {
     return cast(gdk.types.PropertyState)(cast(GdkEventProperty*)this._cPtr).state;
   }
@@ -136,7 +133,7 @@ class EventProperty
         propval = whether the property was changed
             ([gdk.types.PropertyState.NewValue]) or deleted ([gdk.types.PropertyState.Delete]).
   */
-  @property void state(gdk.types.PropertyState propval)
+  @property void state(gdk.types.PropertyState propval) nothrow
   {
     (cast(GdkEventProperty*)this._cPtr).state = cast(GdkPropertyState)propval;
   }

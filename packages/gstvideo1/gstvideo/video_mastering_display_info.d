@@ -17,11 +17,8 @@ class VideoMasteringDisplayInfo
   GstVideoMasteringDisplayInfo _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo");
-
     _cInstance = *cast(GstVideoMasteringDisplayInfo*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class VideoMasteringDisplayInfo
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class VideoMasteringDisplayInfo
       Returns: the xy coordinates of white point in the CIE 1931 color space.
           each value is normalized to 50000 (meaning that in unit of 0.00002)
   */
-  @property gstvideo.types.VideoMasteringDisplayInfoCoordinates whitePoint()
+  @property gstvideo.types.VideoMasteringDisplayInfoCoordinates whitePoint() nothrow
   {
     return cToD!(gstvideo.types.VideoMasteringDisplayInfoCoordinates)(cast(void*)&(cast(GstVideoMasteringDisplayInfo*)this._cPtr).whitePoint);
   }
@@ -50,7 +47,7 @@ class VideoMasteringDisplayInfo
         propval = the xy coordinates of white point in the CIE 1931 color space.
             each value is normalized to 50000 (meaning that in unit of 0.00002)
   */
-  @property void whitePoint(gstvideo.types.VideoMasteringDisplayInfoCoordinates propval)
+  @property void whitePoint(gstvideo.types.VideoMasteringDisplayInfoCoordinates propval) nothrow
   {
     (cast(GstVideoMasteringDisplayInfo*)this._cPtr).whitePoint = cast(GstVideoMasteringDisplayInfoCoordinates)propval;
   }
@@ -60,7 +57,7 @@ class VideoMasteringDisplayInfo
       Returns: the maximum value of display luminance
           in unit of 0.0001 candelas per square metre (cd/m^2 and nit)
   */
-  @property uint maxDisplayMasteringLuminance()
+  @property uint maxDisplayMasteringLuminance() nothrow
   {
     return (cast(GstVideoMasteringDisplayInfo*)this._cPtr).maxDisplayMasteringLuminance;
   }
@@ -71,7 +68,7 @@ class VideoMasteringDisplayInfo
         propval = the maximum value of display luminance
             in unit of 0.0001 candelas per square metre (cd/m^2 and nit)
   */
-  @property void maxDisplayMasteringLuminance(uint propval)
+  @property void maxDisplayMasteringLuminance(uint propval) nothrow
   {
     (cast(GstVideoMasteringDisplayInfo*)this._cPtr).maxDisplayMasteringLuminance = propval;
   }
@@ -81,7 +78,7 @@ class VideoMasteringDisplayInfo
       Returns: the minimum value of display luminance
           in unit of 0.0001 candelas per square metre (cd/m^2 and nit)
   */
-  @property uint minDisplayMasteringLuminance()
+  @property uint minDisplayMasteringLuminance() nothrow
   {
     return (cast(GstVideoMasteringDisplayInfo*)this._cPtr).minDisplayMasteringLuminance;
   }
@@ -92,7 +89,7 @@ class VideoMasteringDisplayInfo
         propval = the minimum value of display luminance
             in unit of 0.0001 candelas per square metre (cd/m^2 and nit)
   */
-  @property void minDisplayMasteringLuminance(uint propval)
+  @property void minDisplayMasteringLuminance(uint propval) nothrow
   {
     (cast(GstVideoMasteringDisplayInfo*)this._cPtr).minDisplayMasteringLuminance = propval;
   }
@@ -104,7 +101,7 @@ class VideoMasteringDisplayInfo
         caps = a #GstCaps
       Returns: true if minfo was successfully set to caps
   */
-  bool addToCaps(gst.caps.Caps caps)
+  bool addToCaps(gst.caps.Caps caps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_mastering_display_info_add_to_caps(cast(const(GstVideoMasteringDisplayInfo)*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
@@ -118,7 +115,7 @@ class VideoMasteringDisplayInfo
         caps = a #GstCaps
       Returns: true if caps has #GstVideoMasteringDisplayInfo and could be parsed
   */
-  bool fromCaps(gst.caps.Caps caps)
+  bool fromCaps(gst.caps.Caps caps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_mastering_display_info_from_caps(cast(GstVideoMasteringDisplayInfo*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
@@ -128,7 +125,7 @@ class VideoMasteringDisplayInfo
   /**
       Initialize minfo
   */
-  void init_()
+  void init_() nothrow
   {
     gst_video_mastering_display_info_init(cast(GstVideoMasteringDisplayInfo*)this._cPtr);
   }
@@ -140,7 +137,7 @@ class VideoMasteringDisplayInfo
         other = a #GstVideoMasteringDisplayInfo
       Returns: true if minfo and other are equal.
   */
-  bool isEqual(gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo other)
+  bool isEqual(gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo other) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_mastering_display_info_is_equal(cast(const(GstVideoMasteringDisplayInfo)*)this._cPtr, other ? cast(const(GstVideoMasteringDisplayInfo)*)other._cPtr : null);
@@ -151,7 +148,7 @@ class VideoMasteringDisplayInfo
       Convert minfo to its string representation
       Returns: a string representation of minfo
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gst_video_mastering_display_info_to_string(cast(const(GstVideoMasteringDisplayInfo)*)this._cPtr);
@@ -167,7 +164,7 @@ class VideoMasteringDisplayInfo
         mastering = a #GstStructure representing #GstVideoMasteringDisplayInfo
       Returns: true if minfo was filled with mastering
   */
-  static bool fromString(out gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo minfo, string mastering)
+  static bool fromString(out gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo minfo, string mastering) nothrow
   {
     bool _retval;
     GstVideoMasteringDisplayInfo _minfo;

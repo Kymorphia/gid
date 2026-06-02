@@ -41,7 +41,7 @@ template DevicePadT()
         featureIdx = the index of the feature to get the group from
       Returns: The group number of the queried pad feature.
   */
-  override int getFeatureGroup(gdk.types.DevicePadFeature feature, int featureIdx)
+  override int getFeatureGroup(gdk.types.DevicePadFeature feature, int featureIdx) nothrow
   {
     int _retval;
     _retval = gdk_device_pad_get_feature_group(cast(GdkDevicePad*)this._cPtr, feature, featureIdx);
@@ -55,7 +55,7 @@ template DevicePadT()
         groupIdx = group to get the number of available modes from
       Returns: The number of modes available in group.
   */
-  override int getGroupNModes(int groupIdx)
+  override int getGroupNModes(int groupIdx) nothrow
   {
     int _retval;
     _retval = gdk_device_pad_get_group_n_modes(cast(GdkDevicePad*)this._cPtr, groupIdx);
@@ -69,7 +69,7 @@ template DevicePadT()
         feature = a pad feature
       Returns: The amount of elements of type feature that this pad has.
   */
-  override int getNFeatures(gdk.types.DevicePadFeature feature)
+  override int getNFeatures(gdk.types.DevicePadFeature feature) nothrow
   {
     int _retval;
     _retval = gdk_device_pad_get_n_features(cast(GdkDevicePad*)this._cPtr, feature);
@@ -84,7 +84,7 @@ template DevicePadT()
       current mode.
       Returns: The number of button/ring/strip groups in the pad.
   */
-  override int getNGroups()
+  override int getNGroups() nothrow
   {
     int _retval;
     _retval = gdk_device_pad_get_n_groups(cast(GdkDevicePad*)this._cPtr);

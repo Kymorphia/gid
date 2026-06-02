@@ -18,32 +18,32 @@ class UnixMountPoint : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_unix_mount_point_get_type != &gidSymbolNotFound ? g_unix_mount_point_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UnixMountPoint self()
+  override UnixMountPoint self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class UnixMountPoint : gobject.boxed.Boxed
       Returns: 1, 0 or -1 if mount1 is greater than, equal to,
         or less than mount2, respectively.
   */
-  int compare(gio.unix_mount_point.UnixMountPoint mount2)
+  int compare(gio.unix_mount_point.UnixMountPoint mount2) nothrow
   {
     int _retval;
     _retval = g_unix_mount_point_compare(cast(GUnixMountPoint*)this._cPtr, mount2 ? cast(GUnixMountPoint*)mount2._cPtr(No.Dup) : null);
@@ -67,7 +67,7 @@ class UnixMountPoint : gobject.boxed.Boxed
       Makes a copy of mount_point.
       Returns: a new #GUnixMountPoint
   */
-  gio.unix_mount_point.UnixMountPoint copy()
+  gio.unix_mount_point.UnixMountPoint copy() nothrow
   {
     GUnixMountPoint* _cretval;
     _cretval = g_unix_mount_point_copy(cast(GUnixMountPoint*)this._cPtr);
@@ -79,7 +79,7 @@ class UnixMountPoint : gobject.boxed.Boxed
       Gets the device path for a unix mount point.
       Returns: a string containing the device path.
   */
-  string getDevicePath()
+  string getDevicePath() nothrow
   {
     const(char)* _cretval;
     _cretval = g_unix_mount_point_get_device_path(cast(GUnixMountPoint*)this._cPtr);
@@ -91,7 +91,7 @@ class UnixMountPoint : gobject.boxed.Boxed
       Gets the file system type for the mount point.
       Returns: a string containing the file system type.
   */
-  string getFsType()
+  string getFsType() nothrow
   {
     const(char)* _cretval;
     _cretval = g_unix_mount_point_get_fs_type(cast(GUnixMountPoint*)this._cPtr);
@@ -103,7 +103,7 @@ class UnixMountPoint : gobject.boxed.Boxed
       Gets the mount path for a unix mount point.
       Returns: a string containing the mount path.
   */
-  string getMountPath()
+  string getMountPath() nothrow
   {
     const(char)* _cretval;
     _cretval = g_unix_mount_point_get_mount_path(cast(GUnixMountPoint*)this._cPtr);
@@ -115,7 +115,7 @@ class UnixMountPoint : gobject.boxed.Boxed
       Gets the options for the mount point.
       Returns: a string containing the options.
   */
-  string getOptions()
+  string getOptions() nothrow
   {
     const(char)* _cretval;
     _cretval = g_unix_mount_point_get_options(cast(GUnixMountPoint*)this._cPtr);
@@ -127,7 +127,7 @@ class UnixMountPoint : gobject.boxed.Boxed
       Guesses whether a Unix mount point can be ejected.
       Returns: true if mount_point is deemed to be ejectable.
   */
-  bool guessCanEject()
+  bool guessCanEject() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_unix_mount_point_guess_can_eject(cast(GUnixMountPoint*)this._cPtr);
@@ -138,7 +138,7 @@ class UnixMountPoint : gobject.boxed.Boxed
       Guesses the icon of a Unix mount point.
       Returns: a #GIcon
   */
-  gio.icon.Icon guessIcon()
+  gio.icon.Icon guessIcon() nothrow
   {
     GIcon* _cretval;
     _cretval = g_unix_mount_point_guess_icon(cast(GUnixMountPoint*)this._cPtr);
@@ -152,7 +152,7 @@ class UnixMountPoint : gobject.boxed.Boxed
       Returns: A newly allocated string that must
             be freed with [glib.global.gfree]
   */
-  string guessName()
+  string guessName() nothrow
   {
     char* _cretval;
     _cretval = g_unix_mount_point_guess_name(cast(GUnixMountPoint*)this._cPtr);
@@ -164,7 +164,7 @@ class UnixMountPoint : gobject.boxed.Boxed
       Guesses the symbolic icon of a Unix mount point.
       Returns: a #GIcon
   */
-  gio.icon.Icon guessSymbolicIcon()
+  gio.icon.Icon guessSymbolicIcon() nothrow
   {
     GIcon* _cretval;
     _cretval = g_unix_mount_point_guess_symbolic_icon(cast(GUnixMountPoint*)this._cPtr);
@@ -176,7 +176,7 @@ class UnixMountPoint : gobject.boxed.Boxed
       Checks if a unix mount point is a loopback device.
       Returns: true if the mount point is a loopback. false otherwise.
   */
-  bool isLoopback()
+  bool isLoopback() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_unix_mount_point_is_loopback(cast(GUnixMountPoint*)this._cPtr);
@@ -187,7 +187,7 @@ class UnixMountPoint : gobject.boxed.Boxed
       Checks if a unix mount point is read only.
       Returns: true if a mount point is read only.
   */
-  bool isReadonly()
+  bool isReadonly() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_unix_mount_point_is_readonly(cast(GUnixMountPoint*)this._cPtr);
@@ -198,7 +198,7 @@ class UnixMountPoint : gobject.boxed.Boxed
       Checks if a unix mount point is mountable by the user.
       Returns: true if the mount point is user mountable.
   */
-  bool isUserMountable()
+  bool isUserMountable() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_unix_mount_point_is_user_mountable(cast(GUnixMountPoint*)this._cPtr);
@@ -219,7 +219,7 @@ class UnixMountPoint : gobject.boxed.Boxed
       Returns: a #GUnixMountPoint, or null if no match
         is found.
   */
-  static gio.unix_mount_point.UnixMountPoint at(string mountPath, out ulong timeRead)
+  static gio.unix_mount_point.UnixMountPoint at(string mountPath, out ulong timeRead) nothrow
   {
     GUnixMountPoint* _cretval;
     const(char)* _mountPath = mountPath.toCString(No.Alloc);

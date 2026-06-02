@@ -15,11 +15,8 @@ class SDPAttribute
   GstSDPAttribute _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstsdp.sdpattribute.SDPAttribute");
-
     _cInstance = *cast(GstSDPAttribute*)ptr;
 
     if (take)
@@ -27,7 +24,7 @@ class SDPAttribute
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -36,7 +33,7 @@ class SDPAttribute
       Get `key` field.
       Returns: the attribute key
   */
-  @property string key()
+  @property string key() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPAttribute*)this._cPtr).key);
   }
@@ -46,7 +43,7 @@ class SDPAttribute
       Params:
         propval = the attribute key
   */
-  @property void key(string propval)
+  @property void key(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPAttribute*)this._cPtr).key);
     dToC(propval, cast(void*)&(cast(GstSDPAttribute*)this._cPtr).key);
@@ -56,7 +53,7 @@ class SDPAttribute
       Get `value` field.
       Returns: the attribute value or NULL when it was a property attribute
   */
-  @property string value()
+  @property string value() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPAttribute*)this._cPtr).value);
   }
@@ -66,7 +63,7 @@ class SDPAttribute
       Params:
         propval = the attribute value or NULL when it was a property attribute
   */
-  @property void value(string propval)
+  @property void value(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPAttribute*)this._cPtr).value);
     dToC(propval, cast(void*)&(cast(GstSDPAttribute*)this._cPtr).value);
@@ -76,7 +73,7 @@ class SDPAttribute
       Clear the attribute.
       Returns: GST_SDP_OK.
   */
-  gstsdp.types.SDPResult clear()
+  gstsdp.types.SDPResult clear() nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_attribute_clear(cast(GstSDPAttribute*)this._cPtr);
@@ -92,7 +89,7 @@ class SDPAttribute
         value = the value
       Returns: GST_SDP_OK.
   */
-  gstsdp.types.SDPResult set(string key, string value = null)
+  gstsdp.types.SDPResult set(string key, string value = null) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _key = key.toCString(No.Alloc);

@@ -25,18 +25,15 @@ class Cache
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.cache.Cache");
-
     _cInstancePtr = cast(GCache*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -49,7 +46,7 @@ class Cache
   
       Deprecated: Use a #GHashTable instead
   */
-  void destroy()
+  void destroy() nothrow
   {
     g_cache_destroy(cast(GCache*)this._cPtr);
   }
@@ -70,7 +67,7 @@ class Cache
   
       Deprecated: Use a #GHashTable instead
   */
-  void* insert(void* key = null)
+  void* insert(void* key = null) nothrow
   {
     auto _retval = g_cache_insert(cast(GCache*)this._cPtr, key);
     return _retval;
@@ -89,13 +86,20 @@ class Cache
   
       Deprecated: Use a #GHashTable instead
   */
-  void keyForeach(glib.types.HFunc func)
+  void keyForeach(glib.types.HFunc func) nothrow
   {
-    extern(C) void _funcCallback(void* key, void* value, void* userData)
+    extern(C) void _funcCallback(void* key, void* value, void* userData) nothrow
     {
       auto _dlg = cast(glib.types.HFunc*)userData;
 
-      (*_dlg)(key, value);
+      try
+      {
+        (*_dlg)(key, value);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.HFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -112,7 +116,7 @@ class Cache
   
       Deprecated: Use a #GHashTable instead
   */
-  void remove(const(void)* value = null)
+  void remove(const(void)* value = null) nothrow
   {
     g_cache_remove(cast(GCache*)this._cPtr, value);
   }
@@ -126,13 +130,20 @@ class Cache
       Deprecated: The reason is that it passes pointers to internal
            data structures to func; use [glib.cache.Cache.keyForeach] instead
   */
-  void valueForeach(glib.types.HFunc func)
+  void valueForeach(glib.types.HFunc func) nothrow
   {
-    extern(C) void _funcCallback(void* key, void* value, void* userData)
+    extern(C) void _funcCallback(void* key, void* value, void* userData) nothrow
     {
       auto _dlg = cast(glib.types.HFunc*)userData;
 
-      (*_dlg)(key, value);
+      try
+      {
+        (*_dlg)(key, value);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.HFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;

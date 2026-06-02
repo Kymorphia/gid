@@ -22,32 +22,32 @@ class FrameTimings : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_frame_timings_get_type != &gidSymbolNotFound ? gdk_frame_timings_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FrameTimings self()
+  override FrameTimings self() nothrow
   {
     return this;
   }
@@ -69,7 +69,7 @@ class FrameTimings : gobject.boxed.Boxed
       Returns: true if all information that will be available
           for the frame has been filled in.
   */
-  bool getComplete()
+  bool getComplete() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_frame_timings_get_complete(cast(GdkFrameTimings*)this._cPtr);
@@ -81,7 +81,7 @@ class FrameTimings : gobject.boxed.Boxed
       this frame was drawn.
       Returns: the frame counter value for this frame
   */
-  long getFrameCounter()
+  long getFrameCounter() nothrow
   {
     long _retval;
     _retval = gdk_frame_timings_get_frame_counter(cast(GdkFrameTimings*)this._cPtr);
@@ -96,7 +96,7 @@ class FrameTimings : gobject.boxed.Boxed
       Returns: the frame time for the frame, in the timescale
          of [glib.global.getMonotonicTime]
   */
-  long getFrameTime()
+  long getFrameTime() nothrow
   {
     long _retval;
     _retval = gdk_frame_timings_get_frame_time(cast(GdkFrameTimings*)this._cPtr);
@@ -120,7 +120,7 @@ class FrameTimings : gobject.boxed.Boxed
           in the timescale of [glib.global.getMonotonicTime], or 0 if no predicted
           presentation time is available.
   */
-  long getPredictedPresentationTime()
+  long getPredictedPresentationTime() nothrow
   {
     long _retval;
     _retval = gdk_frame_timings_get_predicted_presentation_time(cast(GdkFrameTimings*)this._cPtr);
@@ -135,7 +135,7 @@ class FrameTimings : gobject.boxed.Boxed
           timescale of [glib.global.getMonotonicTime], or 0 if no presentation
           time is available. See [gdk.frame_timings.FrameTimings.getComplete]
   */
-  long getPresentationTime()
+  long getPresentationTime() nothrow
   {
     long _retval;
     _retval = gdk_frame_timings_get_presentation_time(cast(GdkFrameTimings*)this._cPtr);
@@ -152,7 +152,7 @@ class FrameTimings : gobject.boxed.Boxed
           or 0 if the refresh interval is not available.
           See [gdk.frame_timings.FrameTimings.getComplete].
   */
-  long getRefreshInterval()
+  long getRefreshInterval() nothrow
   {
     long _retval;
     _retval = gdk_frame_timings_get_refresh_interval(cast(GdkFrameTimings*)this._cPtr);

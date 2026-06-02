@@ -24,26 +24,26 @@ class FlowBoxChild : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_flow_box_child_get_type != &gidSymbolNotFound ? gtk_flow_box_child_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FlowBoxChild self()
+  override FlowBoxChild self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class FlowBoxChild : gtk.widget.Widget
       Get builder for [gtk.flow_box_child.FlowBoxChild]
       Returns: New builder object
   */
-  static FlowBoxChildGidBuilder builder()
+  static FlowBoxChildGidBuilder builder() nothrow
   {
     return new FlowBoxChildGidBuilder;
   }
@@ -61,7 +61,7 @@ class FlowBoxChild : gtk.widget.Widget
       Get `child` property.
       Returns: The child widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -71,7 +71,7 @@ class FlowBoxChild : gtk.widget.Widget
       Params:
         propval = The child widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -82,7 +82,7 @@ class FlowBoxChild : gtk.widget.Widget
       This should only be used as a child of a [gtk.flow_box.FlowBox].
       Returns: a new [gtk.flow_box_child.FlowBoxChild]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_flow_box_child_new();
@@ -110,7 +110,7 @@ class FlowBoxChild : gtk.widget.Widget
       Another alternative is to call [gtk.flow_box.FlowBox.invalidateSort]
       on any model change, but that is more expensive.
   */
-  void changed()
+  void changed() nothrow
   {
     gtk_flow_box_child_changed(cast(GtkFlowBoxChild*)this._cPtr);
   }
@@ -119,7 +119,7 @@ class FlowBoxChild : gtk.widget.Widget
       Gets the child widget of self.
       Returns: the child widget of self
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_flow_box_child_get_child(cast(GtkFlowBoxChild*)this._cPtr);
@@ -132,7 +132,7 @@ class FlowBoxChild : gtk.widget.Widget
       Returns: the index of the child, or -1 if the child is not
           in a flow box
   */
-  int getIndex()
+  int getIndex() nothrow
   {
     int _retval;
     _retval = gtk_flow_box_child_get_index(cast(GtkFlowBoxChild*)this._cPtr);
@@ -144,7 +144,7 @@ class FlowBoxChild : gtk.widget.Widget
       [gtk.flow_box.FlowBox] container.
       Returns: true if child is selected
   */
-  bool isSelected()
+  bool isSelected() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_flow_box_child_is_selected(cast(GtkFlowBoxChild*)this._cPtr);
@@ -157,7 +157,7 @@ class FlowBoxChild : gtk.widget.Widget
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     gtk_flow_box_child_set_child(cast(GtkFlowBoxChild*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -185,13 +185,13 @@ class FlowBoxChild : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.flow_box_child.FlowBoxChild)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -200,7 +200,14 @@ class FlowBoxChild : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.flow_box_child.FlowBoxChild.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -219,7 +226,7 @@ class FlowBoxChildGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The child widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -232,7 +239,7 @@ final class FlowBoxChildGidBuilder : FlowBoxChildGidBuilderImpl!FlowBoxChildGidB
       Create object from builder.
       Returns: New object
   */
-  FlowBoxChild build()
+  FlowBoxChild build() nothrow
   {
     return new FlowBoxChild(cast(void*)createGObject(FlowBoxChild._getGType), No.Take);
   }

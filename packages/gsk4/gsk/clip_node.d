@@ -16,11 +16,8 @@ class ClipNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.clip_node.ClipNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -33,7 +30,7 @@ class ClipNode : gsk.render_node.RenderNode
         clip = The clip to apply
       Returns: A new [gsk.render_node.RenderNode]
   */
-  this(gsk.render_node.RenderNode child, graphene.rect.Rect clip)
+  this(gsk.render_node.RenderNode child, graphene.rect.Rect clip) nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_clip_node_new(child ? cast(GskRenderNode*)child._cPtr(No.Dup) : null, clip ? cast(const(graphene_rect_t)*)clip._cPtr(No.Dup) : null);
@@ -44,7 +41,7 @@ class ClipNode : gsk.render_node.RenderNode
       Gets the child node that is getting clipped by the given node.
       Returns: The child that is getting clipped
   */
-  gsk.render_node.RenderNode getChild()
+  gsk.render_node.RenderNode getChild() nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_clip_node_get_child(cast(const(GskRenderNode)*)this._cPtr);
@@ -56,7 +53,7 @@ class ClipNode : gsk.render_node.RenderNode
       Retrieves the clip rectangle for node.
       Returns: a clip rectangle
   */
-  graphene.rect.Rect getClip()
+  graphene.rect.Rect getClip() nothrow
   {
     const(graphene_rect_t)* _cretval;
     _cretval = gsk_clip_node_get_clip(cast(const(GskRenderNode)*)this._cPtr);

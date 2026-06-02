@@ -15,11 +15,8 @@ class KeyEvent : gdk.event.Event
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.key_event.KeyEvent");
-
     super(cast(GdkEvent*)ptr, take);
   }
 
@@ -27,7 +24,7 @@ class KeyEvent : gdk.event.Event
       Extracts the consumed modifiers from a key event.
       Returns: the consumed modifiers or event
   */
-  gdk.types.ModifierType getConsumedModifiers()
+  gdk.types.ModifierType getConsumedModifiers() nothrow
   {
     GdkModifierType _cretval;
     _cretval = gdk_key_event_get_consumed_modifiers(cast(GdkEvent*)this._cPtr);
@@ -39,7 +36,7 @@ class KeyEvent : gdk.event.Event
       Extracts the keycode from a key event.
       Returns: the keycode of event
   */
-  uint getKeycode()
+  uint getKeycode() nothrow
   {
     uint _retval;
     _retval = gdk_key_event_get_keycode(cast(GdkEvent*)this._cPtr);
@@ -50,7 +47,7 @@ class KeyEvent : gdk.event.Event
       Extracts the keyval from a key event.
       Returns: the keyval of event
   */
-  uint getKeyval()
+  uint getKeyval() nothrow
   {
     uint _retval;
     _retval = gdk_key_event_get_keyval(cast(GdkEvent*)this._cPtr);
@@ -61,7 +58,7 @@ class KeyEvent : gdk.event.Event
       Extracts the layout from a key event.
       Returns: the layout of event
   */
-  uint getLayout()
+  uint getLayout() nothrow
   {
     uint _retval;
     _retval = gdk_key_event_get_layout(cast(GdkEvent*)this._cPtr);
@@ -72,7 +69,7 @@ class KeyEvent : gdk.event.Event
       Extracts the shift level from a key event.
       Returns: the shift level of event
   */
-  uint getLevel()
+  uint getLevel() nothrow
   {
     uint _retval;
     _retval = gdk_key_event_get_level(cast(GdkEvent*)this._cPtr);
@@ -90,7 +87,7 @@ class KeyEvent : gdk.event.Event
         modifiers = return location for modifiers
       Returns: true on success
   */
-  bool getMatch(out uint keyval, out gdk.types.ModifierType modifiers)
+  bool getMatch(out uint keyval, out gdk.types.ModifierType modifiers) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_key_event_get_match(cast(GdkEvent*)this._cPtr, cast(uint*)&keyval, &modifiers);
@@ -101,7 +98,7 @@ class KeyEvent : gdk.event.Event
       Extracts whether the key event is for a modifier key.
       Returns: true if the event is for a modifier key
   */
-  bool isModifier()
+  bool isModifier() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_key_event_is_modifier(cast(GdkEvent*)this._cPtr);
@@ -123,7 +120,7 @@ class KeyEvent : gdk.event.Event
         modifiers = the modifiers to match
       Returns: a [gdk.types.KeyMatch] value describing whether event matches
   */
-  gdk.types.KeyMatch matches(uint keyval, gdk.types.ModifierType modifiers)
+  gdk.types.KeyMatch matches(uint keyval, gdk.types.ModifierType modifiers) nothrow
   {
     GdkKeyMatch _cretval;
     _cretval = gdk_key_event_matches(cast(GdkEvent*)this._cPtr, keyval, modifiers);

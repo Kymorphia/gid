@@ -20,26 +20,26 @@ class ZlibDecompressor : gobject.object.ObjectWrap, gio.converter.Converter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_zlib_decompressor_get_type != &gidSymbolNotFound ? g_zlib_decompressor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ZlibDecompressor self()
+  override ZlibDecompressor self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class ZlibDecompressor : gobject.object.ObjectWrap, gio.converter.Converter
       Get builder for [gio.zlib_decompressor.ZlibDecompressor]
       Returns: New builder object
   */
-  static ZlibDecompressorGidBuilder builder()
+  static ZlibDecompressorGidBuilder builder() nothrow
   {
     return new ZlibDecompressorGidBuilder;
   }
@@ -60,7 +60,7 @@ class ZlibDecompressor : gobject.object.ObjectWrap, gio.converter.Converter
         fully processed, is not present at all, or the compressor's
         #GZlibDecompressor:format property is not [gio.types.ZlibCompressorFormat.Gzip].
   */
-  @property gio.file_info.FileInfo fileInfo()
+  @property gio.file_info.FileInfo fileInfo() nothrow
   {
     return getFileInfo();
   }
@@ -69,7 +69,7 @@ class ZlibDecompressor : gobject.object.ObjectWrap, gio.converter.Converter
       Get `format` property.
       Returns: The format of the compressed data.
   */
-  @property gio.types.ZlibCompressorFormat format()
+  @property gio.types.ZlibCompressorFormat format() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.types.ZlibCompressorFormat)("format");
   }
@@ -83,7 +83,7 @@ class ZlibDecompressor : gobject.object.ObjectWrap, gio.converter.Converter
         format = The format to use for the compressed data
       Returns: a new #GZlibDecompressor
   */
-  this(gio.types.ZlibCompressorFormat format)
+  this(gio.types.ZlibCompressorFormat format) nothrow
   {
     GZlibDecompressor* _cretval;
     _cretval = g_zlib_decompressor_new(format);
@@ -98,7 +98,7 @@ class ZlibDecompressor : gobject.object.ObjectWrap, gio.converter.Converter
       data stream at all.
       Returns: a #GFileInfo, or null
   */
-  gio.file_info.FileInfo getFileInfo()
+  gio.file_info.FileInfo getFileInfo() nothrow
   {
     GFileInfo* _cretval;
     _cretval = g_zlib_decompressor_get_file_info(cast(GZlibDecompressor*)this._cPtr);
@@ -119,7 +119,7 @@ class ZlibDecompressorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = The format of the compressed data.
       Returns: Builder instance for fluent chaining
   */
-  T format(gio.types.ZlibCompressorFormat propval)
+  T format(gio.types.ZlibCompressorFormat propval) nothrow
   {
     return setProperty("format", propval);
   }
@@ -132,7 +132,7 @@ final class ZlibDecompressorGidBuilder : ZlibDecompressorGidBuilderImpl!ZlibDeco
       Create object from builder.
       Returns: New object
   */
-  ZlibDecompressor build()
+  ZlibDecompressor build() nothrow
   {
     return new ZlibDecompressor(cast(void*)createGObject(ZlibDecompressor._getGType), Yes.Take);
   }

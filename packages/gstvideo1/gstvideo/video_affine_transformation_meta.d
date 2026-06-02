@@ -26,11 +26,8 @@ class VideoAffineTransformationMeta
   GstVideoAffineTransformationMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta");
-
     _cInstance = *cast(GstVideoAffineTransformationMeta*)ptr;
 
     if (take)
@@ -38,7 +35,7 @@ class VideoAffineTransformationMeta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -47,7 +44,7 @@ class VideoAffineTransformationMeta
       Get `meta` field.
       Returns: parent #GstMeta
   */
-  @property gst.meta.Meta meta()
+  @property gst.meta.Meta meta() nothrow
   {
     return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoAffineTransformationMeta*)this._cPtr).meta, No.Take);
   }
@@ -59,7 +56,7 @@ class VideoAffineTransformationMeta
       Params:
         matrix = a 4x4 transformation matrix to be applied
   */
-  void applyMatrix(float[] matrix)
+  void applyMatrix(float[] matrix) nothrow
   {
     assert(!matrix || matrix.length == 16);
     auto _matrix = matrix.ptr ? cast(const(float)*)matrix.ptr : [float.init].ptr;
@@ -67,7 +64,7 @@ class VideoAffineTransformationMeta
   }
 
   /** */
-  static gst.meta_info.MetaInfo getInfo()
+  static gst.meta_info.MetaInfo getInfo() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_affine_transformation_meta_get_info();

@@ -40,26 +40,26 @@ class GLContext : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_context_get_type != &gidSymbolNotFound ? gst_gl_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLContext self()
+  override GLContext self() nothrow
   {
     return this;
   }
@@ -68,7 +68,7 @@ class GLContext : gst.object.ObjectWrap
       Get builder for [gstgl.glcontext.GLContext]
       Returns: New builder object
   */
-  static GLContextGidBuilder builder()
+  static GLContextGidBuilder builder() nothrow
   {
     return new GLContextGidBuilder;
   }
@@ -80,7 +80,7 @@ class GLContext : gst.object.ObjectWrap
         display = a #GstGLDisplay
       Returns: a new #GstGLContext
   */
-  this(gstgl.gldisplay.GLDisplay display)
+  this(gstgl.gldisplay.GLDisplay display) nothrow
   {
     GstGLContext* _cretval;
     _cretval = gst_gl_context_new(display ? cast(GstGLDisplay*)display._cPtr(No.Dup) : null);
@@ -105,7 +105,7 @@ class GLContext : gst.object.ObjectWrap
         availableApis = a #GstGLAPI containing the available OpenGL apis in handle
       Returns: a #GstGLContext wrapping handle
   */
-  static gstgl.glcontext.GLContext newWrapped(gstgl.gldisplay.GLDisplay display, size_t handle, gstgl.types.GLPlatform contextType, gstgl.types.GLAPI availableApis)
+  static gstgl.glcontext.GLContext newWrapped(gstgl.gldisplay.GLDisplay display, size_t handle, gstgl.types.GLPlatform contextType, gstgl.types.GLAPI availableApis) nothrow
   {
     GstGLContext* _cretval;
     _cretval = gst_gl_context_new_wrapped(display ? cast(GstGLDisplay*)display._cPtr(No.Dup) : null, handle, contextType, availableApis);
@@ -124,7 +124,7 @@ class GLContext : gst.object.ObjectWrap
         name = then function to get the address of
       Returns: an address pointing to name or null
   */
-  static void* defaultGetProcAddress(gstgl.types.GLAPI glApi, string name)
+  static void* defaultGetProcAddress(gstgl.types.GLAPI glApi, string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     auto _retval = gst_gl_context_default_get_proc_address(glApi, _name);
@@ -135,7 +135,7 @@ class GLContext : gst.object.ObjectWrap
       See also [gstgl.glcontext.GLContext.activate].
       Returns: the #GstGLContext active in the current thread or null
   */
-  static gstgl.glcontext.GLContext getCurrent()
+  static gstgl.glcontext.GLContext getCurrent() nothrow
   {
     GstGLContext* _cretval;
     _cretval = gst_gl_context_get_current();
@@ -154,7 +154,7 @@ class GLContext : gst.object.ObjectWrap
       Returns: The version supported by the OpenGL context current in the calling
                  thread or [gstgl.types.GLAPI.None]
   */
-  static gstgl.types.GLAPI getCurrentGlApi(gstgl.types.GLPlatform platform, out uint major, out uint minor)
+  static gstgl.types.GLAPI getCurrentGlApi(gstgl.types.GLPlatform platform, out uint major, out uint minor) nothrow
   {
     GstGLAPI _cretval;
     _cretval = gst_gl_context_get_current_gl_api(platform, cast(uint*)&major, cast(uint*)&minor);
@@ -163,7 +163,7 @@ class GLContext : gst.object.ObjectWrap
   }
 
   /** */
-  static size_t getCurrentGlContext(gstgl.types.GLPlatform contextType)
+  static size_t getCurrentGlContext(gstgl.types.GLPlatform contextType) nothrow
   {
     size_t _retval;
     _retval = gst_gl_context_get_current_gl_context(contextType);
@@ -182,7 +182,7 @@ class GLContext : gst.object.ObjectWrap
         name = the name of the function to retrieve
       Returns: a function pointer for name, or null
   */
-  static void* getProcAddressWithPlatform(gstgl.types.GLPlatform contextType, gstgl.types.GLAPI glApi, string name)
+  static void* getProcAddressWithPlatform(gstgl.types.GLPlatform contextType, gstgl.types.GLAPI glApi, string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     auto _retval = gst_gl_context_get_proc_address_with_platform(contextType, glApi, _name);
@@ -199,7 +199,7 @@ class GLContext : gst.object.ObjectWrap
         activate = true to activate, false to deactivate
       Returns: Whether the activation succeeded
   */
-  bool activate(bool activate)
+  bool activate(bool activate) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_context_activate(cast(GstGLContext*)this._cPtr, activate);
@@ -214,7 +214,7 @@ class GLContext : gst.object.ObjectWrap
       Returns: whether context and other_context are able to share OpenGL
              resources.
   */
-  bool canShare(gstgl.glcontext.GLContext otherContext)
+  bool canShare(gstgl.glcontext.GLContext otherContext) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_context_can_share(cast(GstGLContext*)this._cPtr, otherContext ? cast(GstGLContext*)otherContext._cPtr(No.Dup) : null);
@@ -232,7 +232,7 @@ class GLContext : gst.object.ObjectWrap
         feature = a platform specific feature
       Returns: Whether feature is supported by context
   */
-  bool checkFeature(string feature)
+  bool checkFeature(string feature) nothrow
   {
     bool _retval;
     const(char)* _feature = feature.toCString(No.Alloc);
@@ -248,7 +248,7 @@ class GLContext : gst.object.ObjectWrap
                        GL_READ_FRAMEBUFFER, GL_DRAW_FRAMEBUFFER
       Returns: whether whether the current framebuffer is complete
   */
-  bool checkFramebufferStatus(uint fboTarget)
+  bool checkFramebufferStatus(uint fboTarget) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_context_check_framebuffer_status(cast(GstGLContext*)this._cPtr, fboTarget);
@@ -256,7 +256,7 @@ class GLContext : gst.object.ObjectWrap
   }
 
   /** */
-  bool checkGlVersion(gstgl.types.GLAPI api, int maj, int min)
+  bool checkGlVersion(gstgl.types.GLAPI api, int maj, int min) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_context_check_gl_version(cast(GstGLContext*)this._cPtr, api, maj, min);
@@ -266,7 +266,7 @@ class GLContext : gst.object.ObjectWrap
   /**
       Unbind the current framebuffer
   */
-  void clearFramebuffer()
+  void clearFramebuffer() nothrow
   {
     gst_gl_context_clear_framebuffer(cast(GstGLContext*)this._cPtr);
   }
@@ -276,7 +276,7 @@ class GLContext : gst.object.ObjectWrap
       
       Note: must be called in the GL thread.
   */
-  void clearShader()
+  void clearShader() nothrow
   {
     gst_gl_context_clear_shader(cast(GstGLContext*)this._cPtr);
   }
@@ -323,7 +323,7 @@ class GLContext : gst.object.ObjectWrap
       Should only be called after [gstgl.glcontext.GLContext.create] has been successfully
       called for this context.
   */
-  void destroy()
+  void destroy() nothrow
   {
     gst_gl_context_destroy(cast(GstGLContext*)this._cPtr);
   }
@@ -353,7 +353,7 @@ class GLContext : gst.object.ObjectWrap
       return null when not supported.
       Returns: the configuration chosen for this OpenGL context.
   */
-  gst.structure.Structure getConfig()
+  gst.structure.Structure getConfig() nothrow
   {
     GstStructure* _cretval;
     _cretval = gst_gl_context_get_config(cast(GstGLContext*)this._cPtr);
@@ -362,7 +362,7 @@ class GLContext : gst.object.ObjectWrap
   }
 
   /** */
-  gstgl.gldisplay.GLDisplay getDisplay()
+  gstgl.gldisplay.GLDisplay getDisplay() nothrow
   {
     GstGLDisplay* _cretval;
     _cretval = gst_gl_context_get_display(cast(GstGLContext*)this._cPtr);
@@ -377,7 +377,7 @@ class GLContext : gst.object.ObjectWrap
       the #GstGLWindow chosen.
       Returns: the available OpenGL api
   */
-  gstgl.types.GLAPI getGlApi()
+  gstgl.types.GLAPI getGlApi() nothrow
   {
     GstGLAPI _cretval;
     _cretval = gst_gl_context_get_gl_api(cast(GstGLContext*)this._cPtr);
@@ -389,7 +389,7 @@ class GLContext : gst.object.ObjectWrap
       Gets the backing OpenGL context used by context.
       Returns: The platform specific backing OpenGL context
   */
-  size_t getGlContext()
+  size_t getGlContext() nothrow
   {
     size_t _retval;
     _retval = gst_gl_context_get_gl_context(cast(GstGLContext*)this._cPtr);
@@ -400,7 +400,7 @@ class GLContext : gst.object.ObjectWrap
       Gets the OpenGL platform that used by context.
       Returns: The platform specific backing OpenGL context
   */
-  gstgl.types.GLPlatform getGlPlatform()
+  gstgl.types.GLPlatform getGlPlatform() nothrow
   {
     GstGLPlatform _cretval;
     _cretval = gst_gl_context_get_gl_platform(cast(GstGLContext*)this._cPtr);
@@ -416,7 +416,7 @@ class GLContext : gst.object.ObjectWrap
         major = return for the major version
         minor = return for the minor version
   */
-  void getGlPlatformVersion(out int major, out int minor)
+  void getGlPlatformVersion(out int major, out int minor) nothrow
   {
     gst_gl_context_get_gl_platform_version(cast(GstGLContext*)this._cPtr, cast(int*)&major, cast(int*)&minor);
   }
@@ -430,7 +430,7 @@ class GLContext : gst.object.ObjectWrap
         maj = resulting major version
         min = resulting minor version
   */
-  void getGlVersion(out int maj, out int min)
+  void getGlVersion(out int maj, out int min) nothrow
   {
     gst_gl_context_get_gl_version(cast(GstGLContext*)this._cPtr, cast(int*)&maj, cast(int*)&min);
   }
@@ -460,7 +460,7 @@ class GLContext : gst.object.ObjectWrap
         name = an opengl function name
       Returns: a function pointer or null
   */
-  void* getProcAddress(string name)
+  void* getProcAddress(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     auto _retval = gst_gl_context_get_proc_address(cast(GstGLContext*)this._cPtr, _name);
@@ -468,7 +468,7 @@ class GLContext : gst.object.ObjectWrap
   }
 
   /** */
-  glib.thread.Thread getThread()
+  glib.thread.Thread getThread() nothrow
   {
     GThread* _cretval;
     _cretval = gst_gl_context_get_thread(cast(GstGLContext*)this._cPtr);
@@ -477,7 +477,7 @@ class GLContext : gst.object.ObjectWrap
   }
 
   /** */
-  gstgl.glwindow.GLWindow getWindow()
+  gstgl.glwindow.GLWindow getWindow() nothrow
   {
     GstGLWindow* _cretval;
     _cretval = gst_gl_context_get_window(cast(GstGLContext*)this._cPtr);
@@ -486,7 +486,7 @@ class GLContext : gst.object.ObjectWrap
   }
 
   /** */
-  bool isShared()
+  bool isShared() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_context_is_shared(cast(GstGLContext*)this._cPtr);
@@ -512,7 +512,7 @@ class GLContext : gst.object.ObjectWrap
                       configuring the OpenGL context
       Returns: whether gl_config could be successfully set on context
   */
-  bool requestConfig(gst.structure.Structure glConfig = null)
+  bool requestConfig(gst.structure.Structure glConfig = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_context_request_config(cast(GstGLContext*)this._cPtr, glConfig ? cast(GstStructure*)glConfig._cPtr(Yes.Dup) : null);
@@ -525,7 +525,7 @@ class GLContext : gst.object.ObjectWrap
       Params:
         share = another #GstGLContext
   */
-  void setSharedWith(gstgl.glcontext.GLContext share)
+  void setSharedWith(gstgl.glcontext.GLContext share) nothrow
   {
     gst_gl_context_set_shared_with(cast(GstGLContext*)this._cPtr, share ? cast(GstGLContext*)share._cPtr(No.Dup) : null);
   }
@@ -539,7 +539,7 @@ class GLContext : gst.object.ObjectWrap
         window = a #GstGLWindow
       Returns: Whether the window was successfully updated
   */
-  bool setWindow(gstgl.glwindow.GLWindow window)
+  bool setWindow(gstgl.glwindow.GLWindow window) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_context_set_window(cast(GstGLContext*)this._cPtr, window ? cast(GstGLWindow*)window._cPtr(Yes.Dup) : null);
@@ -547,7 +547,7 @@ class GLContext : gst.object.ObjectWrap
   }
 
   /** */
-  bool supportsGlslProfileVersion(gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile)
+  bool supportsGlslProfileVersion(gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_context_supports_glsl_profile_version(cast(GstGLContext*)this._cPtr, version_, profile);
@@ -555,7 +555,7 @@ class GLContext : gst.object.ObjectWrap
   }
 
   /** */
-  bool supportsPrecision(gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile)
+  bool supportsPrecision(gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_context_supports_precision(cast(GstGLContext*)this._cPtr, version_, profile);
@@ -563,7 +563,7 @@ class GLContext : gst.object.ObjectWrap
   }
 
   /** */
-  bool supportsPrecisionHighp(gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile)
+  bool supportsPrecisionHighp(gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_context_supports_precision_highp(cast(GstGLContext*)this._cPtr, version_, profile);
@@ -574,7 +574,7 @@ class GLContext : gst.object.ObjectWrap
       Swap the front and back buffers on the window attached to context.
       This will display the frame on the next refresh cycle.
   */
-  void swapBuffers()
+  void swapBuffers() nothrow
   {
     gst_gl_context_swap_buffers(cast(GstGLContext*)this._cPtr);
   }
@@ -587,13 +587,20 @@ class GLContext : gst.object.ObjectWrap
       Params:
         func = a #GstGLContextThreadFunc
   */
-  void threadAdd(gstgl.types.GLContextThreadFunc func)
+  void threadAdd(gstgl.types.GLContextThreadFunc func) nothrow
   {
-    extern(C) void _funcCallback(GstGLContext* context, void* data)
+    extern(C) void _funcCallback(GstGLContext* context, void* data) nothrow
     {
       auto _dlg = cast(gstgl.types.GLContextThreadFunc*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstgl.glcontext.GLContext)(cast(void*)context, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstgl.glcontext.GLContext)(cast(void*)context, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstgl.types.GLContextThreadFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -613,7 +620,7 @@ final class GLContextGidBuilder : GLContextGidBuilderImpl!GLContextGidBuilder
       Create object from builder.
       Returns: New object
   */
-  GLContext build()
+  GLContext build() nothrow
   {
     return new GLContext(cast(void*)createGObject(GLContext._getGType), No.Take);
   }

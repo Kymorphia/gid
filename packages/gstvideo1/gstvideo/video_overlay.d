@@ -275,7 +275,7 @@ interface VideoOverlay
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_overlay_get_type != &gidSymbolNotFound ? gst_video_overlay_get_type() : cast(GType)0;
@@ -294,7 +294,7 @@ interface VideoOverlay
         value = The #GValue to be set
       Returns: true if the property_id matches the GstVideoOverlay property
   */
-  static bool setProperty(gobject.object.ObjectWrap object, int lastPropId, uint propertyId, gobject.value.Value value)
+  static bool setProperty(gobject.object.ObjectWrap object, int lastPropId, uint propertyId, gobject.value.Value value) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_overlay_set_property(object ? cast(GObject*)object._cPtr(No.Dup) : null, lastPropId, propertyId, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);

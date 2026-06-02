@@ -36,7 +36,7 @@ class VideoCodecState : gobject.boxed.Boxed
         allocationCaps = The #GstCaps for allocation query and pool
               negotiation. Since: 1.10
   */
-  this(gst.caps.Caps caps = gst.caps.Caps.init, gst.buffer.Buffer codecData = gst.buffer.Buffer.init, gst.caps.Caps allocationCaps = gst.caps.Caps.init)
+  this(gst.caps.Caps caps = gst.caps.Caps.init, gst.buffer.Buffer codecData = gst.buffer.Buffer.init, gst.caps.Caps allocationCaps = gst.caps.Caps.init) nothrow
   {
     super(gMalloc(GstVideoCodecState.sizeof), Yes.Take);
     this.caps = caps;
@@ -45,32 +45,32 @@ class VideoCodecState : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_codec_state_get_type != &gidSymbolNotFound ? gst_video_codec_state_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VideoCodecState self()
+  override VideoCodecState self() nothrow
   {
     return this;
   }
@@ -79,7 +79,7 @@ class VideoCodecState : gobject.boxed.Boxed
       Get `info` field.
       Returns: The #GstVideoInfo describing the stream
   */
-  @property gstvideo.video_info.VideoInfo info()
+  @property gstvideo.video_info.VideoInfo info() nothrow
   {
     return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)&(cast(GstVideoCodecState*)this._cPtr).info);
   }
@@ -88,7 +88,7 @@ class VideoCodecState : gobject.boxed.Boxed
       Get `caps` field.
       Returns: The #GstCaps used in the caps negotiation of the pad.
   */
-  @property gst.caps.Caps caps()
+  @property gst.caps.Caps caps() nothrow
   {
     return cToD!(gst.caps.Caps)(cast(void*)(cast(GstVideoCodecState*)this._cPtr).caps);
   }
@@ -98,7 +98,7 @@ class VideoCodecState : gobject.boxed.Boxed
       Params:
         propval = The #GstCaps used in the caps negotiation of the pad.
   */
-  @property void caps(gst.caps.Caps propval)
+  @property void caps(gst.caps.Caps propval) nothrow
   {
     cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstVideoCodecState*)this._cPtr).caps);
     dToC(propval, cast(void*)&(cast(GstVideoCodecState*)this._cPtr).caps);
@@ -109,7 +109,7 @@ class VideoCodecState : gobject.boxed.Boxed
       Returns: a #GstBuffer corresponding to the
             'codec_data' field of a stream, or NULL.
   */
-  @property gst.buffer.Buffer codecData()
+  @property gst.buffer.Buffer codecData() nothrow
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecState*)this._cPtr).codecData);
   }
@@ -120,7 +120,7 @@ class VideoCodecState : gobject.boxed.Boxed
         propval = a #GstBuffer corresponding to the
               'codec_data' field of a stream, or NULL.
   */
-  @property void codecData(gst.buffer.Buffer propval)
+  @property void codecData(gst.buffer.Buffer propval) nothrow
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecState*)this._cPtr).codecData);
     dToC(propval, cast(void*)&(cast(GstVideoCodecState*)this._cPtr).codecData);
@@ -131,7 +131,7 @@ class VideoCodecState : gobject.boxed.Boxed
       Returns: The #GstCaps for allocation query and pool
             negotiation. Since: 1.10
   */
-  @property gst.caps.Caps allocationCaps()
+  @property gst.caps.Caps allocationCaps() nothrow
   {
     return cToD!(gst.caps.Caps)(cast(void*)(cast(GstVideoCodecState*)this._cPtr).allocationCaps);
   }
@@ -142,7 +142,7 @@ class VideoCodecState : gobject.boxed.Boxed
         propval = The #GstCaps for allocation query and pool
               negotiation. Since: 1.10
   */
-  @property void allocationCaps(gst.caps.Caps propval)
+  @property void allocationCaps(gst.caps.Caps propval) nothrow
   {
     cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstVideoCodecState*)this._cPtr).allocationCaps);
     dToC(propval, cast(void*)&(cast(GstVideoCodecState*)this._cPtr).allocationCaps);
@@ -152,7 +152,7 @@ class VideoCodecState : gobject.boxed.Boxed
       Get `masteringDisplayInfo` field.
       Returns: Mastering display color volume information (HDR metadata) for the stream.
   */
-  @property gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo masteringDisplayInfo()
+  @property gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo masteringDisplayInfo() nothrow
   {
     return new gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo(cast(GstVideoMasteringDisplayInfo*)(cast(GstVideoCodecState*)this._cPtr).masteringDisplayInfo, No.Take);
   }
@@ -161,7 +161,7 @@ class VideoCodecState : gobject.boxed.Boxed
       Get `contentLightLevel` field.
       Returns: Content light level information for the stream.
   */
-  @property gstvideo.video_content_light_level.VideoContentLightLevel contentLightLevel()
+  @property gstvideo.video_content_light_level.VideoContentLightLevel contentLightLevel() nothrow
   {
     return cToD!(gstvideo.video_content_light_level.VideoContentLightLevel)(cast(void*)(cast(GstVideoCodecState*)this._cPtr).contentLightLevel);
   }

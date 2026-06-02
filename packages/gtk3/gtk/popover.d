@@ -85,26 +85,26 @@ class Popover : gtk.bin.Bin
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_popover_get_type != &gidSymbolNotFound ? gtk_popover_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Popover self()
+  override Popover self() nothrow
   {
     return this;
   }
@@ -113,7 +113,7 @@ class Popover : gtk.bin.Bin
       Get builder for [gtk.popover.Popover]
       Returns: New builder object
   */
-  static PopoverGidBuilder builder()
+  static PopoverGidBuilder builder() nothrow
   {
     return new PopoverGidBuilder;
   }
@@ -122,7 +122,7 @@ class Popover : gtk.bin.Bin
       Get `constrainTo` property.
       Returns: Sets a constraint for the popover position.
   */
-  @property gtk.types.PopoverConstraint constrainTo()
+  @property gtk.types.PopoverConstraint constrainTo() nothrow
   {
     return getConstrainTo();
   }
@@ -132,7 +132,7 @@ class Popover : gtk.bin.Bin
       Params:
         propval = Sets a constraint for the popover position.
   */
-  @property void constrainTo(gtk.types.PopoverConstraint propval)
+  @property void constrainTo(gtk.types.PopoverConstraint propval) nothrow
   {
     setConstrainTo(propval);
   }
@@ -142,7 +142,7 @@ class Popover : gtk.bin.Bin
       Returns: Sets whether the popover is modal (so other elements in the window do not
         receive input while the popover is visible).
   */
-  @property bool modal()
+  @property bool modal() nothrow
   {
     return getModal();
   }
@@ -153,7 +153,7 @@ class Popover : gtk.bin.Bin
         propval = Sets whether the popover is modal (so other elements in the window do not
           receive input while the popover is visible).
   */
-  @property void modal(bool propval)
+  @property void modal(bool propval) nothrow
   {
     setModal(propval);
   }
@@ -162,7 +162,7 @@ class Popover : gtk.bin.Bin
       Get `pointingTo` property.
       Returns: Marks a specific rectangle to be pointed.
   */
-  @property gdk.rectangle.Rectangle pointingTo()
+  @property gdk.rectangle.Rectangle pointingTo() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.rectangle.Rectangle)("pointing-to");
   }
@@ -172,7 +172,7 @@ class Popover : gtk.bin.Bin
       Params:
         propval = Marks a specific rectangle to be pointed.
   */
-  @property void pointingTo(gdk.rectangle.Rectangle propval)
+  @property void pointingTo(gdk.rectangle.Rectangle propval) nothrow
   {
     setPointingTo(propval);
   }
@@ -181,7 +181,7 @@ class Popover : gtk.bin.Bin
       Get `position` property.
       Returns: Sets the preferred position of the popover.
   */
-  @property gtk.types.PositionType position()
+  @property gtk.types.PositionType position() nothrow
   {
     return getPosition();
   }
@@ -191,7 +191,7 @@ class Popover : gtk.bin.Bin
       Params:
         propval = Sets the preferred position of the popover.
   */
-  @property void position(gtk.types.PositionType propval)
+  @property void position(gtk.types.PositionType propval) nothrow
   {
     setPosition(propval);
   }
@@ -200,7 +200,7 @@ class Popover : gtk.bin.Bin
       Get `relativeTo` property.
       Returns: Sets the attached widget.
   */
-  @property gtk.widget.Widget relativeTo()
+  @property gtk.widget.Widget relativeTo() nothrow
   {
     return getRelativeTo();
   }
@@ -210,7 +210,7 @@ class Popover : gtk.bin.Bin
       Params:
         propval = Sets the attached widget.
   */
-  @property void relativeTo(gtk.widget.Widget propval)
+  @property void relativeTo(gtk.widget.Widget propval) nothrow
   {
     setRelativeTo(propval);
   }
@@ -223,7 +223,7 @@ class Popover : gtk.bin.Bin
           using [gtk.widget.Widget.show] and [gtk.widget.Widget.hide] while [gtk.popover.Popover.popup]
           and [gtk.popover.Popover.popdown] will use transitions.
   */
-  @property bool transitionsEnabled()
+  @property bool transitionsEnabled() nothrow
   {
     return getTransitionsEnabled();
   }
@@ -237,7 +237,7 @@ class Popover : gtk.bin.Bin
           using [gtk.widget.Widget.show] and [gtk.widget.Widget.hide] while [gtk.popover.Popover.popup]
           and [gtk.popover.Popover.popdown] will use transitions.
   */
-  @property void transitionsEnabled(bool propval)
+  @property void transitionsEnabled(bool propval) nothrow
   {
     setTransitionsEnabled(propval);
   }
@@ -249,7 +249,7 @@ class Popover : gtk.bin.Bin
         relativeTo = #GtkWidget the popover is related to
       Returns: a new #GtkPopover
   */
-  this(gtk.widget.Widget relativeTo = null)
+  this(gtk.widget.Widget relativeTo = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_new(relativeTo ? cast(GtkWidget*)relativeTo._cPtr(No.Dup) : null);
@@ -273,7 +273,7 @@ class Popover : gtk.bin.Bin
         model = a #GMenuModel
       Returns: the new #GtkPopover
   */
-  static gtk.popover.Popover newFromModel(gtk.widget.Widget relativeTo, gio.menu_model.MenuModel model)
+  static gtk.popover.Popover newFromModel(gtk.widget.Widget relativeTo, gio.menu_model.MenuModel model) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_new_from_model(relativeTo ? cast(GtkWidget*)relativeTo._cPtr(No.Dup) : null, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
@@ -312,7 +312,7 @@ class Popover : gtk.bin.Bin
             binding
         actionNamespace = the namespace for actions in model
   */
-  void bindModel(gio.menu_model.MenuModel model = null, string actionNamespace = null)
+  void bindModel(gio.menu_model.MenuModel model = null, string actionNamespace = null) nothrow
   {
     const(char)* _actionNamespace = actionNamespace.toCString(No.Alloc);
     gtk_popover_bind_model(cast(GtkPopover*)this._cPtr, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null, _actionNamespace);
@@ -323,7 +323,7 @@ class Popover : gtk.bin.Bin
       See [gtk.popover.Popover.setConstrainTo].
       Returns: the constraint for placing this popover.
   */
-  gtk.types.PopoverConstraint getConstrainTo()
+  gtk.types.PopoverConstraint getConstrainTo() nothrow
   {
     GtkPopoverConstraint _cretval;
     _cretval = gtk_popover_get_constrain_to(cast(GtkPopover*)this._cPtr);
@@ -337,7 +337,7 @@ class Popover : gtk.bin.Bin
       Returns: the default widget,
         or null if there is none
   */
-  gtk.widget.Widget getDefaultWidget()
+  gtk.widget.Widget getDefaultWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_get_default_widget(cast(GtkPopover*)this._cPtr);
@@ -350,7 +350,7 @@ class Popover : gtk.bin.Bin
       see the implications of this.
       Returns: #TRUE if popover is modal
   */
-  bool getModal()
+  bool getModal() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_popover_get_modal(cast(GtkPopover*)this._cPtr);
@@ -367,7 +367,7 @@ class Popover : gtk.bin.Bin
         rect = location to store the rectangle
       Returns: true if a rectangle to point to was set.
   */
-  bool getPointingTo(out gdk.rectangle.Rectangle rect)
+  bool getPointingTo(out gdk.rectangle.Rectangle rect) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_popover_get_pointing_to(cast(GtkPopover*)this._cPtr, cast(GdkRectangle*)&rect);
@@ -378,7 +378,7 @@ class Popover : gtk.bin.Bin
       Returns the preferred position of popover.
       Returns: The preferred position.
   */
-  gtk.types.PositionType getPosition()
+  gtk.types.PositionType getPosition() nothrow
   {
     GtkPositionType _cretval;
     _cretval = gtk_popover_get_position(cast(GtkPopover*)this._cPtr);
@@ -390,7 +390,7 @@ class Popover : gtk.bin.Bin
       Returns the widget popover is currently attached to
       Returns: a #GtkWidget
   */
-  gtk.widget.Widget getRelativeTo()
+  gtk.widget.Widget getRelativeTo() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_get_relative_to(cast(GtkPopover*)this._cPtr);
@@ -407,7 +407,7 @@ class Popover : gtk.bin.Bin
           using [gtk.widget.Widget.show] and [gtk.widget.Widget.hide] while [gtk.popover.Popover.popup]
           and [gtk.popover.Popover.popdown] will use transitions.
   */
-  bool getTransitionsEnabled()
+  bool getTransitionsEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_popover_get_transitions_enabled(cast(GtkPopover*)this._cPtr);
@@ -419,7 +419,7 @@ class Popover : gtk.bin.Bin
       in that it shows the popover with a transition. If you want to hide
       the popover without a transition, use [gtk.widget.Widget.hide].
   */
-  void popdown()
+  void popdown() nothrow
   {
     gtk_popover_popdown(cast(GtkPopover*)this._cPtr);
   }
@@ -429,7 +429,7 @@ class Popover : gtk.bin.Bin
       in that it shows the popover with a transition. If you want to show
       the popover without a transition, use [gtk.widget.Widget.show].
   */
-  void popup()
+  void popup() nothrow
   {
     gtk_popover_popup(cast(GtkPopover*)this._cPtr);
   }
@@ -443,7 +443,7 @@ class Popover : gtk.bin.Bin
       Params:
         constraint = the new constraint
   */
-  void setConstrainTo(gtk.types.PopoverConstraint constraint)
+  void setConstrainTo(gtk.types.PopoverConstraint constraint) nothrow
   {
     gtk_popover_set_constrain_to(cast(GtkPopover*)this._cPtr, constraint);
   }
@@ -457,7 +457,7 @@ class Popover : gtk.bin.Bin
       Params:
         widget = the new default widget, or null
   */
-  void setDefaultWidget(gtk.widget.Widget widget = null)
+  void setDefaultWidget(gtk.widget.Widget widget = null) nothrow
   {
     gtk_popover_set_default_widget(cast(GtkPopover*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -471,7 +471,7 @@ class Popover : gtk.bin.Bin
       Params:
         modal = #TRUE to make popover claim all input within the toplevel
   */
-  void setModal(bool modal)
+  void setModal(bool modal) nothrow
   {
     gtk_popover_set_modal(cast(GtkPopover*)this._cPtr, modal);
   }
@@ -484,7 +484,7 @@ class Popover : gtk.bin.Bin
       Params:
         rect = rectangle to point to
   */
-  void setPointingTo(gdk.rectangle.Rectangle rect)
+  void setPointingTo(gdk.rectangle.Rectangle rect) nothrow
   {
     gtk_popover_set_pointing_to(cast(GtkPopover*)this._cPtr, cast(const(GdkRectangle)*)&rect);
   }
@@ -500,7 +500,7 @@ class Popover : gtk.bin.Bin
       Params:
         position = preferred popover position
   */
-  void setPosition(gtk.types.PositionType position)
+  void setPosition(gtk.types.PositionType position) nothrow
   {
     gtk_popover_set_position(cast(GtkPopover*)this._cPtr, position);
   }
@@ -517,7 +517,7 @@ class Popover : gtk.bin.Bin
       Params:
         relativeTo = a #GtkWidget
   */
-  void setRelativeTo(gtk.widget.Widget relativeTo = null)
+  void setRelativeTo(gtk.widget.Widget relativeTo = null) nothrow
   {
     gtk_popover_set_relative_to(cast(GtkPopover*)this._cPtr, relativeTo ? cast(GtkWidget*)relativeTo._cPtr(No.Dup) : null);
   }
@@ -532,7 +532,7 @@ class Popover : gtk.bin.Bin
           using [gtk.widget.Widget.show] and [gtk.widget.Widget.hide] while [gtk.popover.Popover.popup]
           and [gtk.popover.Popover.popdown] will use transitions.
   */
-  void setTransitionsEnabled(bool transitionsEnabled)
+  void setTransitionsEnabled(bool transitionsEnabled) nothrow
   {
     gtk_popover_set_transitions_enabled(cast(GtkPopover*)this._cPtr, transitionsEnabled);
   }
@@ -553,13 +553,13 @@ class Popover : gtk.bin.Bin
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClosed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClosed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.popover.Popover)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -568,7 +568,14 @@ class Popover : gtk.bin.Bin
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.popover.Popover.closed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -587,7 +594,7 @@ class PopoverGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
         propval = Sets a constraint for the popover position.
       Returns: Builder instance for fluent chaining
   */
-  T constrainTo(gtk.types.PopoverConstraint propval)
+  T constrainTo(gtk.types.PopoverConstraint propval) nothrow
   {
     return setProperty("constrain-to", propval);
   }
@@ -599,7 +606,7 @@ class PopoverGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
           receive input while the popover is visible).
       Returns: Builder instance for fluent chaining
   */
-  T modal(bool propval)
+  T modal(bool propval) nothrow
   {
     return setProperty("modal", propval);
   }
@@ -610,7 +617,7 @@ class PopoverGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
         propval = Marks a specific rectangle to be pointed.
       Returns: Builder instance for fluent chaining
   */
-  T pointingTo(gdk.rectangle.Rectangle propval)
+  T pointingTo(gdk.rectangle.Rectangle propval) nothrow
   {
     return setProperty("pointing-to", propval);
   }
@@ -621,7 +628,7 @@ class PopoverGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
         propval = Sets the preferred position of the popover.
       Returns: Builder instance for fluent chaining
   */
-  T position(gtk.types.PositionType propval)
+  T position(gtk.types.PositionType propval) nothrow
   {
     return setProperty("position", propval);
   }
@@ -632,7 +639,7 @@ class PopoverGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
         propval = Sets the attached widget.
       Returns: Builder instance for fluent chaining
   */
-  T relativeTo(gtk.widget.Widget propval)
+  T relativeTo(gtk.widget.Widget propval) nothrow
   {
     return setProperty("relative-to", propval);
   }
@@ -647,7 +654,7 @@ class PopoverGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
           using [gtk.widget.Widget.show] and [gtk.widget.Widget.hide] while [gtk.popover.Popover.popup]
           and [gtk.popover.Popover.popdown] will use transitions.
   */
-  T transitionsEnabled(bool propval)
+  T transitionsEnabled(bool propval) nothrow
   {
     return setProperty("transitions-enabled", propval);
   }
@@ -660,7 +667,7 @@ final class PopoverGidBuilder : PopoverGidBuilderImpl!PopoverGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Popover build()
+  Popover build() nothrow
   {
     return new Popover(cast(void*)createGObject(Popover._getGType), No.Take);
   }

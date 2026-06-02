@@ -42,26 +42,26 @@ class Plug : gtk.window.Window
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_plug_get_type != &gidSymbolNotFound ? gtk_plug_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Plug self()
+  override Plug self() nothrow
   {
     return this;
   }
@@ -70,7 +70,7 @@ class Plug : gtk.window.Window
       Get builder for [gtk.plug.Plug]
       Returns: New builder object
   */
-  static PlugGidBuilder builder()
+  static PlugGidBuilder builder() nothrow
   {
     return new PlugGidBuilder;
   }
@@ -79,7 +79,7 @@ class Plug : gtk.window.Window
       Get `embedded` property.
       Returns: true if the plug is embedded in a socket.
   */
-  @property bool embedded()
+  @property bool embedded() nothrow
   {
     return getEmbedded();
   }
@@ -88,7 +88,7 @@ class Plug : gtk.window.Window
       Get `socketWindow` property.
       Returns: The window of the socket the plug is embedded in.
   */
-  @property gdk.window.Window socketWindow()
+  @property gdk.window.Window socketWindow() nothrow
   {
     return getSocketWindow();
   }
@@ -102,7 +102,7 @@ class Plug : gtk.window.Window
         socketId = the window ID of the socket, or 0.
       Returns: the new #GtkPlug widget.
   */
-  this(xlib.types.Window socketId)
+  this(xlib.types.Window socketId) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_plug_new(socketId);
@@ -117,7 +117,7 @@ class Plug : gtk.window.Window
         socketId = the XID of the socket’s window.
       Returns: the new #GtkPlug widget.
   */
-  static gtk.plug.Plug newForDisplay(gdk.display.Display display, xlib.types.Window socketId)
+  static gtk.plug.Plug newForDisplay(gdk.display.Display display, xlib.types.Window socketId) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_plug_new_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, socketId);
@@ -132,7 +132,7 @@ class Plug : gtk.window.Window
       Params:
         socketId = the XID of the socket’s window.
   */
-  void construct(xlib.types.Window socketId)
+  void construct(xlib.types.Window socketId) nothrow
   {
     gtk_plug_construct(cast(GtkPlug*)this._cPtr, socketId);
   }
@@ -147,7 +147,7 @@ class Plug : gtk.window.Window
                #GtkSocket.
         socketId = the XID of the socket’s window.
   */
-  void constructForDisplay(gdk.display.Display display, xlib.types.Window socketId)
+  void constructForDisplay(gdk.display.Display display, xlib.types.Window socketId) nothrow
   {
     gtk_plug_construct_for_display(cast(GtkPlug*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, socketId);
   }
@@ -156,7 +156,7 @@ class Plug : gtk.window.Window
       Determines whether the plug is embedded in a socket.
       Returns: true if the plug is embedded in a socket
   */
-  bool getEmbedded()
+  bool getEmbedded() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_plug_get_embedded(cast(GtkPlug*)this._cPtr);
@@ -169,7 +169,7 @@ class Plug : gtk.window.Window
       instance with [gtk.socket.Socket.addId].
       Returns: the window ID for the plug
   */
-  xlib.types.Window getId()
+  xlib.types.Window getId() nothrow
   {
     xlib.types.Window _retval;
     _retval = gtk_plug_get_id(cast(GtkPlug*)this._cPtr);
@@ -180,7 +180,7 @@ class Plug : gtk.window.Window
       Retrieves the socket the plug is embedded in.
       Returns: the window of the socket, or null
   */
-  gdk.window.Window getSocketWindow()
+  gdk.window.Window getSocketWindow() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gtk_plug_get_socket_window(cast(GtkPlug*)this._cPtr);
@@ -203,13 +203,13 @@ class Plug : gtk.window.Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEmbedded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEmbedded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.plug.Plug)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -218,7 +218,14 @@ class Plug : gtk.window.Window
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.plug.Plug.embedded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -239,7 +246,7 @@ final class PlugGidBuilder : PlugGidBuilderImpl!PlugGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Plug build()
+  Plug build() nothrow
   {
     return new Plug(cast(void*)createGObject(Plug._getGType), No.Take);
   }

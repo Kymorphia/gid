@@ -36,7 +36,7 @@ template PollableInputStreamT()
       a stream cannot switch from pollable to non-pollable or vice versa.
       Returns: true if stream is pollable, false if not.
   */
-  override bool canPoll()
+  override bool canPoll() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_pollable_input_stream_can_poll(cast(GPollableInputStream*)this._cPtr);
@@ -60,7 +60,7 @@ template PollableInputStreamT()
         cancellable = a #GCancellable, or null
       Returns: a new #GSource
   */
-  override glib.source.Source createSource(gio.cancellable.Cancellable cancellable = null)
+  override glib.source.Source createSource(gio.cancellable.Cancellable cancellable = null) nothrow
   {
     GSource* _cretval;
     _cretval = g_pollable_input_stream_create_source(cast(GPollableInputStream*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null);
@@ -85,7 +85,7 @@ template PollableInputStreamT()
           [gio.pollable_input_stream.PollableInputStream.isReadable] returning true, and the
           next attempt to read will return the error.
   */
-  override bool isReadable()
+  override bool isReadable() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_pollable_input_stream_is_readable(cast(GPollableInputStream*)this._cPtr);

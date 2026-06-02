@@ -42,26 +42,26 @@ class Style : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_style_get_type != &gidSymbolNotFound ? gtk_style_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Style self()
+  override Style self() nothrow
   {
     return this;
   }
@@ -70,13 +70,13 @@ class Style : gobject.object.ObjectWrap
       Get builder for [gtk.style.Style]
       Returns: New builder object
   */
-  static StyleGidBuilder builder()
+  static StyleGidBuilder builder() nothrow
   {
     return new StyleGidBuilder;
   }
 
   /** */
-  @property gtk.style_context.StyleContext context()
+  @property gtk.style_context.StyleContext context() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.style_context.StyleContext)("context");
   }
@@ -87,7 +87,7 @@ class Style : gobject.object.ObjectWrap
   
       Deprecated: Use #GtkStyleContext
   */
-  this()
+  this() nothrow
   {
     GtkStyle* _cretval;
     _cretval = gtk_style_new();
@@ -95,7 +95,7 @@ class Style : gobject.object.ObjectWrap
   }
 
   /** */
-  void applyDefaultBackground(cairo.context.Context cr, gdk.window.Window window, gtk.types.StateType stateType, int x, int y, int width, int height)
+  void applyDefaultBackground(cairo.context.Context cr, gdk.window.Window window, gtk.types.StateType stateType, int x, int y, int width, int height) nothrow
   {
     gtk_style_apply_default_background(cast(GtkStyle*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, stateType, x, y, width, height);
   }
@@ -106,7 +106,7 @@ class Style : gobject.object.ObjectWrap
   
       Deprecated: Use #GtkStyleContext instead
   */
-  gtk.style.Style copy()
+  gtk.style.Style copy() nothrow
   {
     GtkStyle* _cretval;
     _cretval = gtk_style_copy(cast(GtkStyle*)this._cPtr);
@@ -120,7 +120,7 @@ class Style : gobject.object.ObjectWrap
   
       Deprecated: Use #GtkStyleContext instead
   */
-  void detach()
+  void detach() nothrow
   {
     gtk_style_detach(cast(GtkStyle*)this._cPtr);
   }
@@ -135,7 +135,7 @@ class Style : gobject.object.ObjectWrap
         value = a #GValue where the value of the property being
               queried will be stored
   */
-  void getStyleProperty(gobject.types.GType widgetType, string propertyName, out gobject.value.Value value)
+  void getStyleProperty(gobject.types.GType widgetType, string propertyName, out gobject.value.Value value) nothrow
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
     GValue _value;
@@ -147,7 +147,7 @@ class Style : gobject.object.ObjectWrap
       Returns whether style has an associated #GtkStyleContext.
       Returns: true if style has a #GtkStyleContext
   */
-  bool hasContext()
+  bool hasContext() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_style_has_context(cast(GtkStyle*)this._cPtr);
@@ -168,7 +168,7 @@ class Style : gobject.object.ObjectWrap
   
       Deprecated: Use [gtk.style_context.StyleContext.lookupColor] instead
   */
-  bool lookupColor(string colorName, out gdk.color.Color color)
+  bool lookupColor(string colorName, out gdk.color.Color color) nothrow
   {
     bool _retval;
     const(char)* _colorName = colorName.toCString(No.Alloc);
@@ -187,7 +187,7 @@ class Style : gobject.object.ObjectWrap
   
       Deprecated: Use [gtk.style_context.StyleContext.lookupIconSet] instead
   */
-  gtk.icon_set.IconSet lookupIconSet(string stockId)
+  gtk.icon_set.IconSet lookupIconSet(string stockId) nothrow
   {
     GtkIconSet* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
@@ -215,7 +215,7 @@ class Style : gobject.object.ObjectWrap
   
       Deprecated: Use [gtk.global.renderIconPixbuf] instead
   */
-  gdkpixbuf.pixbuf.Pixbuf renderIcon(gtk.icon_source.IconSource source, gtk.types.TextDirection direction, gtk.types.StateType state, gtk.types.IconSize size, gtk.widget.Widget widget = null, string detail = null)
+  gdkpixbuf.pixbuf.Pixbuf renderIcon(gtk.icon_source.IconSource source, gtk.types.TextDirection direction, gtk.types.StateType state, gtk.types.IconSize size, gtk.widget.Widget widget = null, string detail = null) nothrow
   {
     GdkPixbuf* _cretval;
     const(char)* _detail = detail.toCString(No.Alloc);
@@ -234,7 +234,7 @@ class Style : gobject.object.ObjectWrap
   
       Deprecated: Use [gtk.style_context.StyleContext.setBackground] instead
   */
-  void setBackground(gdk.window.Window window, gtk.types.StateType stateType)
+  void setBackground(gdk.window.Window window, gtk.types.StateType stateType) nothrow
   {
     gtk_style_set_background(cast(GtkStyle*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, stateType);
   }
@@ -257,13 +257,13 @@ class Style : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRealize(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRealize(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.style.Style)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -272,7 +272,14 @@ class Style : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.style.Style.realize");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -297,13 +304,13 @@ class Style : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUnrealize(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUnrealize(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.style.Style)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -312,7 +319,14 @@ class Style : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.style.Style.unrealize");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -325,7 +339,7 @@ class StyleGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T context(gtk.style_context.StyleContext propval)
+  T context(gtk.style_context.StyleContext propval) nothrow
   {
     return setProperty("context", propval);
   }
@@ -338,7 +352,7 @@ final class StyleGidBuilder : StyleGidBuilderImpl!StyleGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Style build()
+  Style build() nothrow
   {
     return new Style(cast(void*)createGObject(Style._getGType), Yes.Take);
   }

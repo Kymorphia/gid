@@ -20,18 +20,15 @@ class Module
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gmodule.module_.Module");
-
     _cInstancePtr = cast(ModuleC*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -40,7 +37,7 @@ class Module
       Closes a module.
       Returns: true on success
   */
-  bool close()
+  bool close() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_module_close(cast(ModuleC*)this._cPtr);
@@ -51,7 +48,7 @@ class Module
       Ensures that a module will never be unloaded.
       Any future [gmodule.module_.Module.close] calls on the module will be ignored.
   */
-  void makeResident()
+  void makeResident() nothrow
   {
     g_module_make_resident(cast(ModuleC*)this._cPtr);
   }
@@ -62,7 +59,7 @@ class Module
       If module refers to the application itself, "main" is returned.
       Returns: the filename of the module
   */
-  string name()
+  string name() nothrow
   {
     const(char)* _cretval;
     _cretval = g_module_name(cast(ModuleC*)this._cPtr);
@@ -79,7 +76,7 @@ class Module
         symbol = returns the pointer to the symbol value
       Returns: true on success
   */
-  bool symbol(string symbolName, out void* symbol)
+  bool symbol(string symbolName, out void* symbol) nothrow
   {
     bool _retval;
     const(char)* _symbolName = symbolName.toCString(No.Alloc);
@@ -113,7 +110,7 @@ class Module
       Deprecated: Use [gmodule.module_.Module.open] instead with module_name as the
         basename of the file_name argument. See [glib.types.MODULE_SUFFIX] for why.
   */
-  static string buildPath(string directory, string moduleName)
+  static string buildPath(string directory, string moduleName) nothrow
   {
     char* _cretval;
     const(char)* _directory = directory.toCString(No.Alloc);
@@ -127,7 +124,7 @@ class Module
       Gets a string describing the last module error.
       Returns: a string describing the last module error
   */
-  static string error()
+  static string error() nothrow
   {
     const(char)* _cretval;
     _cretval = g_module_error();
@@ -136,7 +133,7 @@ class Module
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = g_module_error_quark();
@@ -147,7 +144,7 @@ class Module
       Checks if modules are supported on the current platform.
       Returns: true if modules are supported
   */
-  static bool supported()
+  static bool supported() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_module_supported();
@@ -157,12 +154,12 @@ class Module
 
 class ModuleException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gmodule.module_.Module.errorQuark, cast(int)code, msg);
   }

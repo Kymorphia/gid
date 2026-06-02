@@ -11,7 +11,7 @@ import panel.types;
 
 
 /** */
-bool checkVersion(uint major, uint minor, uint micro)
+bool checkVersion(uint major, uint minor, uint micro) nothrow
 {
   bool _retval;
   _retval = cast(bool)panel_check_version(major, minor, micro);
@@ -19,13 +19,13 @@ bool checkVersion(uint major, uint minor, uint micro)
 }
 
 /** */
-void finalize()
+void finalize() nothrow
 {
   panel_finalize();
 }
 
 /** */
-uint getMajorVersion()
+uint getMajorVersion() nothrow
 {
   uint _retval;
   _retval = panel_get_major_version();
@@ -33,7 +33,7 @@ uint getMajorVersion()
 }
 
 /** */
-uint getMicroVersion()
+uint getMicroVersion() nothrow
 {
   uint _retval;
   _retval = panel_get_micro_version();
@@ -41,7 +41,7 @@ uint getMicroVersion()
 }
 
 /** */
-uint getMinorVersion()
+uint getMinorVersion() nothrow
 {
   uint _retval;
   _retval = panel_get_minor_version();
@@ -49,7 +49,7 @@ uint getMinorVersion()
 }
 
 /** */
-gio.resource.Resource getResource()
+gio.resource.Resource getResource() nothrow
 {
   GResource* _cretval;
   _cretval = panel_get_resource();
@@ -58,19 +58,19 @@ gio.resource.Resource getResource()
 }
 
 /** */
-void init_()
+void init_() nothrow
 {
   panel_init();
 }
 
 /** */
-void marshalBOOLEANOBJECTOBJECT(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
+void marshalBOOLEANOBJECTOBJECT(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null) nothrow
 {
   panel_marshal_BOOLEAN__OBJECT_OBJECT(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
 }
 
 /** */
-void marshalOBJECTOBJECT(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
+void marshalOBJECTOBJECT(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null) nothrow
 {
   panel_marshal_OBJECT__OBJECT(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
 }

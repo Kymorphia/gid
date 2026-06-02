@@ -32,7 +32,7 @@ class GlyphInfo : gobject.boxed.Boxed
                     even if they are separate glyphs, [harfbuzz.global.bufferSetClusterLevel]
                     allow selecting more fine-grained cluster handling.
   */
-  this(harfbuzz.types.Codepoint codepoint = harfbuzz.types.Codepoint.init, uint cluster = uint.init)
+  this(harfbuzz.types.Codepoint codepoint = harfbuzz.types.Codepoint.init, uint cluster = uint.init) nothrow
   {
     super(gMalloc(hb_glyph_info_t.sizeof), Yes.Take);
     this.codepoint = codepoint;
@@ -40,32 +40,32 @@ class GlyphInfo : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())hb_gobject_glyph_info_get_type != &gidSymbolNotFound ? hb_gobject_glyph_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GlyphInfo self()
+  override GlyphInfo self() nothrow
   {
     return this;
   }
@@ -75,7 +75,7 @@ class GlyphInfo : gobject.boxed.Boxed
       Returns: either a Unicode code point (before shaping) or a glyph index
                     (after shaping).
   */
-  @property harfbuzz.types.Codepoint codepoint()
+  @property harfbuzz.types.Codepoint codepoint() nothrow
   {
     return (cast(hb_glyph_info_t*)this._cPtr).codepoint;
   }
@@ -86,7 +86,7 @@ class GlyphInfo : gobject.boxed.Boxed
         propval = either a Unicode code point (before shaping) or a glyph index
                       (after shaping).
   */
-  @property void codepoint(harfbuzz.types.Codepoint propval)
+  @property void codepoint(harfbuzz.types.Codepoint propval) nothrow
   {
     (cast(hb_glyph_info_t*)this._cPtr).codepoint = propval;
   }
@@ -105,7 +105,7 @@ class GlyphInfo : gobject.boxed.Boxed
                   even if they are separate glyphs, [harfbuzz.global.bufferSetClusterLevel]
                   allow selecting more fine-grained cluster handling.
   */
-  @property uint cluster()
+  @property uint cluster() nothrow
   {
     return (cast(hb_glyph_info_t*)this._cPtr).cluster;
   }
@@ -125,7 +125,7 @@ class GlyphInfo : gobject.boxed.Boxed
                     even if they are separate glyphs, [harfbuzz.global.bufferSetClusterLevel]
                     allow selecting more fine-grained cluster handling.
   */
-  @property void cluster(uint propval)
+  @property void cluster(uint propval) nothrow
   {
     (cast(hb_glyph_info_t*)this._cPtr).cluster = propval;
   }

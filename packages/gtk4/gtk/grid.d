@@ -108,26 +108,26 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_grid_get_type != &gidSymbolNotFound ? gtk_grid_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Grid self()
+  override Grid self() nothrow
   {
     return this;
   }
@@ -136,7 +136,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Get builder for [gtk.grid.Grid]
       Returns: New builder object
   */
-  static GridGidBuilder builder()
+  static GridGidBuilder builder() nothrow
   {
     return new GridGidBuilder;
   }
@@ -145,7 +145,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Get `baselineRow` property.
       Returns: The row to align to the baseline when valign is using baseline alignment.
   */
-  @property int baselineRow()
+  @property int baselineRow() nothrow
   {
     return getBaselineRow();
   }
@@ -155,7 +155,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         propval = The row to align to the baseline when valign is using baseline alignment.
   */
-  @property void baselineRow(int propval)
+  @property void baselineRow(int propval) nothrow
   {
     setBaselineRow(propval);
   }
@@ -164,7 +164,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Get `columnHomogeneous` property.
       Returns: If true, the columns are all the same width.
   */
-  @property bool columnHomogeneous()
+  @property bool columnHomogeneous() nothrow
   {
     return getColumnHomogeneous();
   }
@@ -174,7 +174,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         propval = If true, the columns are all the same width.
   */
-  @property void columnHomogeneous(bool propval)
+  @property void columnHomogeneous(bool propval) nothrow
   {
     setColumnHomogeneous(propval);
   }
@@ -183,7 +183,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Get `columnSpacing` property.
       Returns: The amount of space between two consecutive columns.
   */
-  @property int columnSpacing()
+  @property int columnSpacing() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("column-spacing");
   }
@@ -193,7 +193,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         propval = The amount of space between two consecutive columns.
   */
-  @property void columnSpacing(int propval)
+  @property void columnSpacing(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("column-spacing", propval);
   }
@@ -202,7 +202,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Get `rowHomogeneous` property.
       Returns: If true, the rows are all the same height.
   */
-  @property bool rowHomogeneous()
+  @property bool rowHomogeneous() nothrow
   {
     return getRowHomogeneous();
   }
@@ -212,7 +212,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         propval = If true, the rows are all the same height.
   */
-  @property void rowHomogeneous(bool propval)
+  @property void rowHomogeneous(bool propval) nothrow
   {
     setRowHomogeneous(propval);
   }
@@ -221,7 +221,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Get `rowSpacing` property.
       Returns: The amount of space between two consecutive rows.
   */
-  @property int rowSpacing()
+  @property int rowSpacing() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("row-spacing");
   }
@@ -231,7 +231,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         propval = The amount of space between two consecutive rows.
   */
-  @property void rowSpacing(int propval)
+  @property void rowSpacing(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("row-spacing", propval);
   }
@@ -242,7 +242,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Creates a new grid widget.
       Returns: the new [gtk.grid.Grid]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_grid_new();
@@ -263,7 +263,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
         width = the number of columns that child will span
         height = the number of rows that child will span
   */
-  void attach(gtk.widget.Widget child, int column, int row, int width, int height)
+  void attach(gtk.widget.Widget child, int column, int row, int width, int height) nothrow
   {
     gtk_grid_attach(cast(GtkGrid*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, column, row, width, height);
   }
@@ -287,7 +287,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
         width = the number of columns that child will span
         height = the number of rows that child will span
   */
-  void attachNextTo(gtk.widget.Widget child, gtk.widget.Widget sibling, gtk.types.PositionType side, int width, int height)
+  void attachNextTo(gtk.widget.Widget child, gtk.widget.Widget sibling, gtk.types.PositionType side, int width, int height) nothrow
   {
     gtk_grid_attach_next_to(cast(GtkGrid*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling._cPtr(No.Dup) : null, side, width, height);
   }
@@ -296,7 +296,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Returns which row defines the global baseline of grid.
       Returns: the row index defining the global baseline
   */
-  int getBaselineRow()
+  int getBaselineRow() nothrow
   {
     int _retval;
     _retval = gtk_grid_get_baseline_row(cast(GtkGrid*)this._cPtr);
@@ -312,7 +312,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
         row = the top edge of the cell
       Returns: the child at the given position
   */
-  gtk.widget.Widget getChildAt(int column, int row)
+  gtk.widget.Widget getChildAt(int column, int row) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_grid_get_child_at(cast(GtkGrid*)this._cPtr, column, row);
@@ -324,7 +324,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Returns whether all columns of grid have the same width.
       Returns: whether all columns of grid have the same width.
   */
-  bool getColumnHomogeneous()
+  bool getColumnHomogeneous() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_grid_get_column_homogeneous(cast(GtkGrid*)this._cPtr);
@@ -335,7 +335,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Returns the amount of space between the columns of grid.
       Returns: the column spacing of grid
   */
-  uint getColumnSpacing()
+  uint getColumnSpacing() nothrow
   {
     uint _retval;
     _retval = gtk_grid_get_column_spacing(cast(GtkGrid*)this._cPtr);
@@ -351,7 +351,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
         row = a row index
       Returns: the baseline position of row
   */
-  gtk.types.BaselinePosition getRowBaselinePosition(int row)
+  gtk.types.BaselinePosition getRowBaselinePosition(int row) nothrow
   {
     GtkBaselinePosition _cretval;
     _cretval = gtk_grid_get_row_baseline_position(cast(GtkGrid*)this._cPtr, row);
@@ -363,7 +363,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Returns whether all rows of grid have the same height.
       Returns: whether all rows of grid have the same height.
   */
-  bool getRowHomogeneous()
+  bool getRowHomogeneous() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_grid_get_row_homogeneous(cast(GtkGrid*)this._cPtr);
@@ -374,7 +374,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Returns the amount of space between the rows of grid.
       Returns: the row spacing of grid
   */
-  uint getRowSpacing()
+  uint getRowSpacing() nothrow
   {
     uint _retval;
     _retval = gtk_grid_get_row_spacing(cast(GtkGrid*)this._cPtr);
@@ -391,7 +391,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         position = the position to insert the column at
   */
-  void insertColumn(int position)
+  void insertColumn(int position) nothrow
   {
     gtk_grid_insert_column(cast(GtkGrid*)this._cPtr, position);
   }
@@ -409,7 +409,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
             placed next to
         side = the side of sibling that child is positioned next to
   */
-  void insertNextTo(gtk.widget.Widget sibling, gtk.types.PositionType side)
+  void insertNextTo(gtk.widget.Widget sibling, gtk.types.PositionType side) nothrow
   {
     gtk_grid_insert_next_to(cast(GtkGrid*)this._cPtr, sibling ? cast(GtkWidget*)sibling._cPtr(No.Dup) : null, side);
   }
@@ -424,7 +424,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         position = the position to insert the row at
   */
-  void insertRow(int position)
+  void insertRow(int position) nothrow
   {
     gtk_grid_insert_row(cast(GtkGrid*)this._cPtr, position);
   }
@@ -439,7 +439,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
         width = the number of columns child spans
         height = the number of rows child spans
   */
-  void queryChild(gtk.widget.Widget child, out int column, out int row, out int width, out int height)
+  void queryChild(gtk.widget.Widget child, out int column, out int row, out int width, out int height) nothrow
   {
     gtk_grid_query_child(cast(GtkGrid*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, cast(int*)&column, cast(int*)&row, cast(int*)&width, cast(int*)&height);
   }
@@ -453,7 +453,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         child = the child widget to remove
   */
-  void remove(gtk.widget.Widget child)
+  void remove(gtk.widget.Widget child) nothrow
   {
     gtk_grid_remove(cast(GtkGrid*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -469,7 +469,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         position = the position of the column to remove
   */
-  void removeColumn(int position)
+  void removeColumn(int position) nothrow
   {
     gtk_grid_remove_column(cast(GtkGrid*)this._cPtr, position);
   }
@@ -485,7 +485,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         position = the position of the row to remove
   */
-  void removeRow(int position)
+  void removeRow(int position) nothrow
   {
     gtk_grid_remove_row(cast(GtkGrid*)this._cPtr, position);
   }
@@ -500,7 +500,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         row = the row index
   */
-  void setBaselineRow(int row)
+  void setBaselineRow(int row) nothrow
   {
     gtk_grid_set_baseline_row(cast(GtkGrid*)this._cPtr, row);
   }
@@ -511,7 +511,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         homogeneous = true to make columns homogeneous
   */
-  void setColumnHomogeneous(bool homogeneous)
+  void setColumnHomogeneous(bool homogeneous) nothrow
   {
     gtk_grid_set_column_homogeneous(cast(GtkGrid*)this._cPtr, homogeneous);
   }
@@ -522,7 +522,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         spacing = the amount of space to insert between columns
   */
-  void setColumnSpacing(uint spacing)
+  void setColumnSpacing(uint spacing) nothrow
   {
     gtk_grid_set_column_spacing(cast(GtkGrid*)this._cPtr, spacing);
   }
@@ -537,7 +537,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
         row = a row index
         pos = a [gtk.types.BaselinePosition]
   */
-  void setRowBaselinePosition(int row, gtk.types.BaselinePosition pos)
+  void setRowBaselinePosition(int row, gtk.types.BaselinePosition pos) nothrow
   {
     gtk_grid_set_row_baseline_position(cast(GtkGrid*)this._cPtr, row, pos);
   }
@@ -548,7 +548,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         homogeneous = true to make rows homogeneous
   */
-  void setRowHomogeneous(bool homogeneous)
+  void setRowHomogeneous(bool homogeneous) nothrow
   {
     gtk_grid_set_row_homogeneous(cast(GtkGrid*)this._cPtr, homogeneous);
   }
@@ -559,7 +559,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         spacing = the amount of space to insert between rows
   */
-  void setRowSpacing(uint spacing)
+  void setRowSpacing(uint spacing) nothrow
   {
     gtk_grid_set_row_spacing(cast(GtkGrid*)this._cPtr, spacing);
   }
@@ -577,7 +577,7 @@ class GridGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.
         propval = The row to align to the baseline when valign is using baseline alignment.
       Returns: Builder instance for fluent chaining
   */
-  T baselineRow(int propval)
+  T baselineRow(int propval) nothrow
   {
     return setProperty("baseline-row", propval);
   }
@@ -588,7 +588,7 @@ class GridGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.
         propval = If true, the columns are all the same width.
       Returns: Builder instance for fluent chaining
   */
-  T columnHomogeneous(bool propval)
+  T columnHomogeneous(bool propval) nothrow
   {
     return setProperty("column-homogeneous", propval);
   }
@@ -599,7 +599,7 @@ class GridGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.
         propval = The amount of space between two consecutive columns.
       Returns: Builder instance for fluent chaining
   */
-  T columnSpacing(int propval)
+  T columnSpacing(int propval) nothrow
   {
     return setProperty("column-spacing", propval);
   }
@@ -610,7 +610,7 @@ class GridGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.
         propval = If true, the rows are all the same height.
       Returns: Builder instance for fluent chaining
   */
-  T rowHomogeneous(bool propval)
+  T rowHomogeneous(bool propval) nothrow
   {
     return setProperty("row-homogeneous", propval);
   }
@@ -621,7 +621,7 @@ class GridGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.
         propval = The amount of space between two consecutive rows.
       Returns: Builder instance for fluent chaining
   */
-  T rowSpacing(int propval)
+  T rowSpacing(int propval) nothrow
   {
     return setProperty("row-spacing", propval);
   }
@@ -634,7 +634,7 @@ final class GridGidBuilder : GridGidBuilderImpl!GridGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Grid build()
+  Grid build() nothrow
   {
     return new Grid(cast(void*)createGObject(Grid._getGType), No.Take);
   }

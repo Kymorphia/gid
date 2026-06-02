@@ -29,23 +29,22 @@ struct Color
   ushort blue;
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_color_get_type != &gidSymbolNotFound ? pango_color_get_type() : cast(GType)0;
   }
 
   /** */
-  @property GType _gType()
+  @property GType _gType() nothrow
   {
     return _getGType();
   }
 
-  void* boxCopy()
+  void* boxCopy() nothrow
   {
     import gobject.c.functions : g_boxed_copy;
-    return g_boxed_copy(_gType,
-        cast(void*)&this);
+    return g_boxed_copy(_gType, cast(void*)&this);
   }
 
   /**
@@ -58,7 +57,7 @@ struct Color
       Returns: the newly allocated [pango.color.Color],
           which should be freed with [pango.color.Color.free]
   */
-  pango.color.Color copy()
+  pango.color.Color copy() nothrow
   {
     PangoColor* _cretval;
     _cretval = pango_color_copy(cast(const(PangoColor)*)&this);
@@ -84,7 +83,7 @@ struct Color
       Returns: true if parsing of the specifier succeeded,
           otherwise false
   */
-  bool parse(string spec)
+  bool parse(string spec) nothrow
   {
     bool _retval;
     const(char)* _spec = spec.toCString(No.Alloc);
@@ -115,7 +114,7 @@ struct Color
       Returns: true if parsing of the specifier succeeded,
           otherwise false
   */
-  bool parseWithAlpha(out ushort alpha, string spec)
+  bool parseWithAlpha(out ushort alpha, string spec) nothrow
   {
     bool _retval;
     const(char)* _spec = spec.toCString(No.Alloc);
@@ -132,7 +131,7 @@ struct Color
       Returns: a newly-allocated text string that must
           be freed with [glib.global.gfree].
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = pango_color_to_string(cast(const(PangoColor)*)&this);

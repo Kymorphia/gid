@@ -25,11 +25,8 @@ class ParamSpecOverride : gobject.param_spec.ParamSpec
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gobject.param_spec_override.ParamSpecOverride");
-
     super(cast(GParamSpec*)ptr, take);
   }
 }

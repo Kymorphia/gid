@@ -112,26 +112,26 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_view_get_type != &gidSymbolNotFound ? gtk_tree_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TreeView self()
+  override TreeView self() nothrow
   {
     return this;
   }
@@ -140,7 +140,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Get builder for [gtk.tree_view.TreeView]
       Returns: New builder object
   */
-  static TreeViewGidBuilder builder()
+  static TreeViewGidBuilder builder() nothrow
   {
     return new TreeViewGidBuilder;
   }
@@ -150,7 +150,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns: The activate-on-single-click property specifies whether the "row-activated" signal
         will be emitted after a single click.
   */
-  @property bool activateOnSingleClick()
+  @property bool activateOnSingleClick() nothrow
   {
     return getActivateOnSingleClick();
   }
@@ -161,55 +161,55 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         propval = The activate-on-single-click property specifies whether the "row-activated" signal
           will be emitted after a single click.
   */
-  @property void activateOnSingleClick(bool propval)
+  @property void activateOnSingleClick(bool propval) nothrow
   {
     setActivateOnSingleClick(propval);
   }
 
   /** */
-  @property gtk.types.TreeViewGridLines enableGridLines()
+  @property gtk.types.TreeViewGridLines enableGridLines() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.TreeViewGridLines)("enable-grid-lines");
   }
 
   /** */
-  @property void enableGridLines(gtk.types.TreeViewGridLines propval)
+  @property void enableGridLines(gtk.types.TreeViewGridLines propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.TreeViewGridLines)("enable-grid-lines", propval);
   }
 
   /** */
-  @property bool enableSearch()
+  @property bool enableSearch() nothrow
   {
     return getEnableSearch();
   }
 
   /** */
-  @property void enableSearch(bool propval)
+  @property void enableSearch(bool propval) nothrow
   {
     setEnableSearch(propval);
   }
 
   /** */
-  @property bool enableTreeLines()
+  @property bool enableTreeLines() nothrow
   {
     return getEnableTreeLines();
   }
 
   /** */
-  @property void enableTreeLines(bool propval)
+  @property void enableTreeLines(bool propval) nothrow
   {
     setEnableTreeLines(propval);
   }
 
   /** */
-  @property gtk.tree_view_column.TreeViewColumn expanderColumn()
+  @property gtk.tree_view_column.TreeViewColumn expanderColumn() nothrow
   {
     return getExpanderColumn();
   }
 
   /** */
-  @property void expanderColumn(gtk.tree_view_column.TreeViewColumn propval)
+  @property void expanderColumn(gtk.tree_view_column.TreeViewColumn propval) nothrow
   {
     setExpanderColumn(propval);
   }
@@ -222,7 +222,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         Please see [gtk.tree_view.TreeView.setFixedHeightMode] for more
         information on this option.
   */
-  @property bool fixedHeightMode()
+  @property bool fixedHeightMode() nothrow
   {
     return getFixedHeightMode();
   }
@@ -236,31 +236,31 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
           Please see [gtk.tree_view.TreeView.setFixedHeightMode] for more
           information on this option.
   */
-  @property void fixedHeightMode(bool propval)
+  @property void fixedHeightMode(bool propval) nothrow
   {
     setFixedHeightMode(propval);
   }
 
   /** */
-  @property bool headersClickable()
+  @property bool headersClickable() nothrow
   {
     return getHeadersClickable();
   }
 
   /** */
-  @property void headersClickable(bool propval)
+  @property void headersClickable(bool propval) nothrow
   {
     setHeadersClickable(propval);
   }
 
   /** */
-  @property bool headersVisible()
+  @property bool headersVisible() nothrow
   {
     return getHeadersVisible();
   }
 
   /** */
-  @property void headersVisible(bool propval)
+  @property void headersVisible(bool propval) nothrow
   {
     setHeadersVisible(propval);
   }
@@ -274,7 +274,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         This mode is primarily intended for treeviews in popups, e.g.
         in #GtkComboBox or #GtkEntryCompletion.
   */
-  @property bool hoverExpand()
+  @property bool hoverExpand() nothrow
   {
     return getHoverExpand();
   }
@@ -289,7 +289,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
           This mode is primarily intended for treeviews in popups, e.g.
           in #GtkComboBox or #GtkEntryCompletion.
   */
-  @property void hoverExpand(bool propval)
+  @property void hoverExpand(bool propval) nothrow
   {
     setHoverExpand(propval);
   }
@@ -304,7 +304,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         This mode is primarily intended for treeviews in popups, e.g.
         in #GtkComboBox or #GtkEntryCompletion.
   */
-  @property bool hoverSelection()
+  @property bool hoverSelection() nothrow
   {
     return getHoverSelection();
   }
@@ -320,7 +320,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
           This mode is primarily intended for treeviews in popups, e.g.
           in #GtkComboBox or #GtkEntryCompletion.
   */
-  @property void hoverSelection(bool propval)
+  @property void hoverSelection(bool propval) nothrow
   {
     setHoverSelection(propval);
   }
@@ -329,7 +329,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Get `levelIndentation` property.
       Returns: Extra indentation for each level.
   */
-  @property int levelIndentation()
+  @property int levelIndentation() nothrow
   {
     return getLevelIndentation();
   }
@@ -339,43 +339,43 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         propval = Extra indentation for each level.
   */
-  @property void levelIndentation(int propval)
+  @property void levelIndentation(int propval) nothrow
   {
     setLevelIndentation(propval);
   }
 
   /** */
-  @property gtk.tree_model.TreeModel model()
+  @property gtk.tree_model.TreeModel model() nothrow
   {
     return getModel();
   }
 
   /** */
-  @property void model(gtk.tree_model.TreeModel propval)
+  @property void model(gtk.tree_model.TreeModel propval) nothrow
   {
     setModel(propval);
   }
 
   /** */
-  @property bool reorderable()
+  @property bool reorderable() nothrow
   {
     return getReorderable();
   }
 
   /** */
-  @property void reorderable(bool propval)
+  @property void reorderable(bool propval) nothrow
   {
     setReorderable(propval);
   }
 
   /** */
-  @property bool rubberBanding()
+  @property bool rubberBanding() nothrow
   {
     return getRubberBanding();
   }
 
   /** */
-  @property void rubberBanding(bool propval)
+  @property void rubberBanding(bool propval) nothrow
   {
     setRubberBanding(propval);
   }
@@ -387,7 +387,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Deprecated: The theme is responsible for drawing rows
           using zebra striping
   */
-  @property bool rulesHint()
+  @property bool rulesHint() nothrow
   {
     return getRulesHint();
   }
@@ -400,19 +400,19 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Deprecated: The theme is responsible for drawing rows
           using zebra striping
   */
-  @property void rulesHint(bool propval)
+  @property void rulesHint(bool propval) nothrow
   {
     setRulesHint(propval);
   }
 
   /** */
-  @property int searchColumn()
+  @property int searchColumn() nothrow
   {
     return getSearchColumn();
   }
 
   /** */
-  @property void searchColumn(int propval)
+  @property void searchColumn(int propval) nothrow
   {
     setSearchColumn(propval);
   }
@@ -421,7 +421,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Get `showExpanders` property.
       Returns: true if the view has expanders.
   */
-  @property bool showExpanders()
+  @property bool showExpanders() nothrow
   {
     return getShowExpanders();
   }
@@ -431,25 +431,25 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         propval = true if the view has expanders.
   */
-  @property void showExpanders(bool propval)
+  @property void showExpanders(bool propval) nothrow
   {
     setShowExpanders(propval);
   }
 
   /** */
-  @property int tooltipColumn()
+  @property int tooltipColumn() nothrow
   {
     return getTooltipColumn();
   }
 
   /** */
-  @property void tooltipColumn(int propval)
+  @property void tooltipColumn(int propval) nothrow
   {
     setTooltipColumn(propval);
   }
 
   /** */
-  @property void ubuntuAlmostFixedHeightMode(bool propval)
+  @property void ubuntuAlmostFixedHeightMode(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("ubuntu-almost-fixed-height-mode", propval);
   }
@@ -460,7 +460,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Creates a new #GtkTreeView widget.
       Returns: A newly created #GtkTreeView widget.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_tree_view_new();
@@ -474,7 +474,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         model = the model.
       Returns: A newly created #GtkTreeView widget.
   */
-  static gtk.tree_view.TreeView newWithModel(gtk.tree_model.TreeModel model)
+  static gtk.tree_view.TreeView newWithModel(gtk.tree_model.TreeModel model) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_tree_view_new_with_model(model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
@@ -491,7 +491,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         column = The #GtkTreeViewColumn to add.
       Returns: The number of columns in tree_view after appending.
   */
-  int appendColumn(gtk.tree_view_column.TreeViewColumn column)
+  int appendColumn(gtk.tree_view_column.TreeViewColumn column) nothrow
   {
     int _retval;
     _retval = gtk_tree_view_append_column(cast(GtkTreeView*)this._cPtr, column ? cast(GtkTreeViewColumn*)column._cPtr(No.Dup) : null);
@@ -501,7 +501,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   /**
       Recursively collapses all visible, expanded nodes in tree_view.
   */
-  void collapseAll()
+  void collapseAll() nothrow
   {
     gtk_tree_view_collapse_all(cast(GtkTreeView*)this._cPtr);
   }
@@ -513,7 +513,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         path = path to a row in the tree_view
       Returns: true if the row was collapsed.
   */
-  bool collapseRow(gtk.tree_path.TreePath path)
+  bool collapseRow(gtk.tree_path.TreePath path) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_view_collapse_row(cast(GtkTreeView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
@@ -524,7 +524,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Resizes all columns to their optimal width. Only works after the
       treeview has been realized.
   */
-  void columnsAutosize()
+  void columnsAutosize() nothrow
   {
     gtk_tree_view_columns_autosize(cast(GtkTreeView*)this._cPtr);
   }
@@ -539,7 +539,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         tx = return location for tree X coordinate
         ty = return location for tree Y coordinate
   */
-  void convertBinWindowToTreeCoords(int bx, int by, out int tx, out int ty)
+  void convertBinWindowToTreeCoords(int bx, int by, out int tx, out int ty) nothrow
   {
     gtk_tree_view_convert_bin_window_to_tree_coords(cast(GtkTreeView*)this._cPtr, bx, by, cast(int*)&tx, cast(int*)&ty);
   }
@@ -554,7 +554,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         wx = return location for widget X coordinate
         wy = return location for widget Y coordinate
   */
-  void convertBinWindowToWidgetCoords(int bx, int by, out int wx, out int wy)
+  void convertBinWindowToWidgetCoords(int bx, int by, out int wx, out int wy) nothrow
   {
     gtk_tree_view_convert_bin_window_to_widget_coords(cast(GtkTreeView*)this._cPtr, bx, by, cast(int*)&wx, cast(int*)&wy);
   }
@@ -569,7 +569,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         bx = return location for X coordinate relative to bin_window
         by = return location for Y coordinate relative to bin_window
   */
-  void convertTreeToBinWindowCoords(int tx, int ty, out int bx, out int by)
+  void convertTreeToBinWindowCoords(int tx, int ty, out int bx, out int by) nothrow
   {
     gtk_tree_view_convert_tree_to_bin_window_coords(cast(GtkTreeView*)this._cPtr, tx, ty, cast(int*)&bx, cast(int*)&by);
   }
@@ -584,7 +584,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         wx = return location for widget X coordinate
         wy = return location for widget Y coordinate
   */
-  void convertTreeToWidgetCoords(int tx, int ty, out int wx, out int wy)
+  void convertTreeToWidgetCoords(int tx, int ty, out int wx, out int wy) nothrow
   {
     gtk_tree_view_convert_tree_to_widget_coords(cast(GtkTreeView*)this._cPtr, tx, ty, cast(int*)&wx, cast(int*)&wy);
   }
@@ -599,7 +599,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         bx = return location for bin_window X coordinate
         by = return location for bin_window Y coordinate
   */
-  void convertWidgetToBinWindowCoords(int wx, int wy, out int bx, out int by)
+  void convertWidgetToBinWindowCoords(int wx, int wy, out int bx, out int by) nothrow
   {
     gtk_tree_view_convert_widget_to_bin_window_coords(cast(GtkTreeView*)this._cPtr, wx, wy, cast(int*)&bx, cast(int*)&by);
   }
@@ -614,7 +614,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         tx = return location for tree X coordinate
         ty = return location for tree Y coordinate
   */
-  void convertWidgetToTreeCoords(int wx, int wy, out int tx, out int ty)
+  void convertWidgetToTreeCoords(int wx, int wy, out int tx, out int ty) nothrow
   {
     gtk_tree_view_convert_widget_to_tree_coords(cast(GtkTreeView*)this._cPtr, wx, wy, cast(int*)&tx, cast(int*)&ty);
   }
@@ -627,7 +627,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         path = a #GtkTreePath in tree_view
       Returns: a newly-allocated surface of the drag icon.
   */
-  cairo.surface.Surface createRowDragIcon(gtk.tree_path.TreePath path)
+  cairo.surface.Surface createRowDragIcon(gtk.tree_path.TreePath path) nothrow
   {
     cairo_surface_t* _cretval;
     _cretval = gtk_tree_view_create_row_drag_icon(cast(GtkTreeView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
@@ -645,7 +645,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         actions = the bitmask of possible actions for a drag from this
              widget
   */
-  void enableModelDragDest(gtk.target_entry.TargetEntry[] targets, gdk.types.DragAction actions)
+  void enableModelDragDest(gtk.target_entry.TargetEntry[] targets, gdk.types.DragAction actions) nothrow
   {
     int _nTargets;
     if (targets)
@@ -669,7 +669,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         actions = the bitmask of possible actions for a drag from this
              widget
   */
-  void enableModelDragSource(gdk.types.ModifierType startButtonMask, gtk.target_entry.TargetEntry[] targets, gdk.types.DragAction actions)
+  void enableModelDragSource(gdk.types.ModifierType startButtonMask, gtk.target_entry.TargetEntry[] targets, gdk.types.DragAction actions) nothrow
   {
     int _nTargets;
     if (targets)
@@ -686,7 +686,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   /**
       Recursively expands all nodes in the tree_view.
   */
-  void expandAll()
+  void expandAll() nothrow
   {
     gtk_tree_view_expand_all(cast(GtkTreeView*)this._cPtr);
   }
@@ -699,7 +699,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         openAll = whether to recursively expand, or just expand immediate children
       Returns: true if the row existed and had children
   */
-  bool expandRow(gtk.tree_path.TreePath path, bool openAll)
+  bool expandRow(gtk.tree_path.TreePath path, bool openAll) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_view_expand_row(cast(GtkTreeView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, openAll);
@@ -713,7 +713,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         path = path to a row.
   */
-  void expandToPath(gtk.tree_path.TreePath path)
+  void expandToPath(gtk.tree_path.TreePath path) nothrow
   {
     gtk_tree_view_expand_to_path(cast(GtkTreeView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
   }
@@ -722,7 +722,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Gets the setting set by [gtk.tree_view.TreeView.setActivateOnSingleClick].
       Returns: true if row-activated will be emitted on a single click
   */
-  bool getActivateOnSingleClick()
+  bool getActivateOnSingleClick() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_view_get_activate_on_single_click(cast(GtkTreeView*)this._cPtr);
@@ -745,7 +745,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         column = a #GtkTreeViewColumn for the column, or null to get only vertical coordiantes
         rect = rectangle to fill with cell background rect
   */
-  void getBackgroundArea(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column, out gdk.rectangle.Rectangle rect)
+  void getBackgroundArea(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column, out gdk.rectangle.Rectangle rect) nothrow
   {
     gtk_tree_view_get_background_area(cast(GtkTreeView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column._cPtr(No.Dup) : null, cast(GdkRectangle*)&rect);
   }
@@ -757,7 +757,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns: A #GdkWindow, or null when tree_view
         hasn’t been realized yet.
   */
-  gdk.window.Window getBinWindow()
+  gdk.window.Window getBinWindow() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gtk_tree_view_get_bin_window(cast(GtkTreeView*)this._cPtr);
@@ -781,7 +781,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         column = a #GtkTreeViewColumn for the column, or null to get only vertical coordinates
         rect = rectangle to fill with cell rect
   */
-  void getCellArea(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column, out gdk.rectangle.Rectangle rect)
+  void getCellArea(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column, out gdk.rectangle.Rectangle rect) nothrow
   {
     gtk_tree_view_get_cell_area(cast(GtkTreeView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column._cPtr(No.Dup) : null, cast(GdkRectangle*)&rect);
   }
@@ -794,7 +794,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns: The #GtkTreeViewColumn, or null if the
         position is outside the range of columns.
   */
-  gtk.tree_view_column.TreeViewColumn getColumn(int n)
+  gtk.tree_view_column.TreeViewColumn getColumn(int n) nothrow
   {
     GtkTreeViewColumn* _cretval;
     _cretval = gtk_tree_view_get_column(cast(GtkTreeView*)this._cPtr, n);
@@ -807,7 +807,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       The returned list must be freed with g_list_free ().
       Returns: A list of #GtkTreeViewColumn s
   */
-  gtk.tree_view_column.TreeViewColumn[] getColumns()
+  gtk.tree_view_column.TreeViewColumn[] getColumns() nothrow
   {
     GList* _cretval;
     _cretval = gtk_tree_view_get_columns(cast(GtkTreeView*)this._cPtr);
@@ -829,7 +829,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         focusColumn = A
             pointer to be filled with the current focus column, or null
   */
-  void getCursor(out gtk.tree_path.TreePath path, out gtk.tree_view_column.TreeViewColumn focusColumn)
+  void getCursor(out gtk.tree_path.TreePath path, out gtk.tree_view_column.TreeViewColumn focusColumn) nothrow
   {
     GtkTreePath* _path;
     GtkTreeViewColumn* _focusColumn;
@@ -854,7 +854,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns: whether there is a row at the given position, true if this
         is indeed the case.
   */
-  bool getDestRowAtPos(int dragX, int dragY, out gtk.tree_path.TreePath path, out gtk.types.TreeViewDropPosition pos)
+  bool getDestRowAtPos(int dragX, int dragY, out gtk.tree_path.TreePath path, out gtk.types.TreeViewDropPosition pos) nothrow
   {
     bool _retval;
     GtkTreePath* _path;
@@ -870,7 +870,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         path = Return location for the path of the highlighted row, or null.
         pos = Return location for the drop position, or null
   */
-  void getDragDestRow(out gtk.tree_path.TreePath path, out gtk.types.TreeViewDropPosition pos)
+  void getDragDestRow(out gtk.tree_path.TreePath path, out gtk.types.TreeViewDropPosition pos) nothrow
   {
     GtkTreePath* _path;
     gtk_tree_view_get_drag_dest_row(cast(GtkTreeView*)this._cPtr, &_path, &pos);
@@ -882,7 +882,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       by typing in text.
       Returns: whether or not to let the user search interactively
   */
-  bool getEnableSearch()
+  bool getEnableSearch() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_view_get_enable_search(cast(GtkTreeView*)this._cPtr);
@@ -894,7 +894,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns: true if tree lines are drawn in tree_view, false
         otherwise.
   */
-  bool getEnableTreeLines()
+  bool getEnableTreeLines() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_view_get_enable_tree_lines(cast(GtkTreeView*)this._cPtr);
@@ -906,7 +906,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       This column has the expander arrow drawn next to it.
       Returns: The expander column.
   */
-  gtk.tree_view_column.TreeViewColumn getExpanderColumn()
+  gtk.tree_view_column.TreeViewColumn getExpanderColumn() nothrow
   {
     GtkTreeViewColumn* _cretval;
     _cretval = gtk_tree_view_get_expander_column(cast(GtkTreeView*)this._cPtr);
@@ -918,7 +918,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns whether fixed height mode is turned on for tree_view.
       Returns: true if tree_view is in fixed height mode
   */
-  bool getFixedHeightMode()
+  bool getFixedHeightMode() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_view_get_fixed_height_mode(cast(GtkTreeView*)this._cPtr);
@@ -930,7 +930,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns: a #GtkTreeViewGridLines value indicating which grid lines
         are enabled.
   */
-  gtk.types.TreeViewGridLines getGridLines()
+  gtk.types.TreeViewGridLines getGridLines() nothrow
   {
     GtkTreeViewGridLines _cretval;
     _cretval = gtk_tree_view_get_grid_lines(cast(GtkTreeView*)this._cPtr);
@@ -945,7 +945,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   
       Deprecated: Use [gtk.scrollable.Scrollable.getHadjustment]
   */
-  gtk.adjustment.Adjustment getHadjustment()
+  gtk.adjustment.Adjustment getHadjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_tree_view_get_hadjustment(cast(GtkTreeView*)this._cPtr);
@@ -957,7 +957,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns whether all header columns are clickable.
       Returns: true if all header columns are clickable, otherwise false
   */
-  bool getHeadersClickable()
+  bool getHeadersClickable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_view_get_headers_clickable(cast(GtkTreeView*)this._cPtr);
@@ -968,7 +968,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns true if the headers on the tree_view are visible.
       Returns: Whether the headers are visible or not.
   */
-  bool getHeadersVisible()
+  bool getHeadersVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_view_get_headers_visible(cast(GtkTreeView*)this._cPtr);
@@ -979,7 +979,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns whether hover expansion mode is turned on for tree_view.
       Returns: true if tree_view is in hover expansion mode
   */
-  bool getHoverExpand()
+  bool getHoverExpand() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_view_get_hover_expand(cast(GtkTreeView*)this._cPtr);
@@ -990,7 +990,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns whether hover selection mode is turned on for tree_view.
       Returns: true if tree_view is in hover selection mode
   */
-  bool getHoverSelection()
+  bool getHoverSelection() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_view_get_hover_selection(cast(GtkTreeView*)this._cPtr);
@@ -1003,7 +1003,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns: the amount of extra indentation for child levels in
         tree_view.  A return value of 0 means that this feature is disabled.
   */
-  int getLevelIndentation()
+  int getLevelIndentation() nothrow
   {
     int _retval;
     _retval = gtk_tree_view_get_level_indentation(cast(GtkTreeView*)this._cPtr);
@@ -1016,7 +1016,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns: A #GtkTreeModel, or null if
         none is currently being used.
   */
-  gtk.tree_model.TreeModel getModel()
+  gtk.tree_model.TreeModel getModel() nothrow
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_tree_view_get_model(cast(GtkTreeView*)this._cPtr);
@@ -1028,7 +1028,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Queries the number of columns in the given tree_view.
       Returns: The number of columns in the tree_view
   */
-  uint getNColumns()
+  uint getNColumns() nothrow
   {
     uint _retval;
     _retval = gtk_tree_view_get_n_columns(cast(GtkTreeView*)this._cPtr);
@@ -1067,7 +1067,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
             relative to the cell can be placed, or null
       Returns: true if a row exists at that coordinate.
   */
-  bool getPathAtPos(int x, int y, out gtk.tree_path.TreePath path, out gtk.tree_view_column.TreeViewColumn column, out int cellX, out int cellY)
+  bool getPathAtPos(int x, int y, out gtk.tree_path.TreePath path, out gtk.tree_view_column.TreeViewColumn column, out int cellX, out int cellY) nothrow
   {
     bool _retval;
     GtkTreePath* _path;
@@ -1083,7 +1083,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       [gtk.tree_view.TreeView.setReorderable].
       Returns: true if the tree can be reordered.
   */
-  bool getReorderable()
+  bool getReorderable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_view_get_reorderable(cast(GtkTreeView*)this._cPtr);
@@ -1096,7 +1096,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       user to select multiple rows by dragging the mouse.
       Returns: true if rubber banding in tree_view is enabled.
   */
-  bool getRubberBanding()
+  bool getRubberBanding() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_view_get_rubber_banding(cast(GtkTreeView*)this._cPtr);
@@ -1107,7 +1107,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Gets the setting set by [gtk.tree_view.TreeView.setRulesHint].
       Returns: true if the hint is set
   */
-  bool getRulesHint()
+  bool getRulesHint() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_view_get_rules_hint(cast(GtkTreeView*)this._cPtr);
@@ -1118,7 +1118,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Gets the column searched on by the interactive search code.
       Returns: the column the interactive search code searches in.
   */
-  int getSearchColumn()
+  int getSearchColumn() nothrow
   {
     int _retval;
     _retval = gtk_tree_view_get_search_column(cast(GtkTreeView*)this._cPtr);
@@ -1131,7 +1131,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       will be returned.
       Returns: the entry currently in use as search entry.
   */
-  gtk.entry.Entry getSearchEntry()
+  gtk.entry.Entry getSearchEntry() nothrow
   {
     GtkEntry* _cretval;
     _cretval = gtk_tree_view_get_search_entry(cast(GtkTreeView*)this._cPtr);
@@ -1143,7 +1143,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Gets the #GtkTreeSelection associated with tree_view.
       Returns: A #GtkTreeSelection object.
   */
-  gtk.tree_selection.TreeSelection getSelection()
+  gtk.tree_selection.TreeSelection getSelection() nothrow
   {
     GtkTreeSelection* _cretval;
     _cretval = gtk_tree_view_get_selection(cast(GtkTreeView*)this._cPtr);
@@ -1156,7 +1156,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns: true if expanders are drawn in tree_view, false
         otherwise.
   */
-  bool getShowExpanders()
+  bool getShowExpanders() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_view_get_show_expanders(cast(GtkTreeView*)this._cPtr);
@@ -1169,7 +1169,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns: the index of the tooltip column that is currently being
         used, or -1 if this is disabled.
   */
-  int getTooltipColumn()
+  int getTooltipColumn() nothrow
   {
     int _retval;
     _retval = gtk_tree_view_get_tooltip_column(cast(GtkTreeView*)this._cPtr);
@@ -1199,7 +1199,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         iter = a pointer to receive a #GtkTreeIter or null
       Returns: whether or not the given tooltip context points to a row.
   */
-  bool getTooltipContext(ref int x, ref int y, bool keyboardTip, out gtk.tree_model.TreeModel model, out gtk.tree_path.TreePath path, out gtk.tree_iter.TreeIter iter)
+  bool getTooltipContext(ref int x, ref int y, bool keyboardTip, out gtk.tree_model.TreeModel model, out gtk.tree_path.TreePath path, out gtk.tree_iter.TreeIter iter) nothrow
   {
     bool _retval;
     GtkTreeModel* _model;
@@ -1219,7 +1219,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   
       Deprecated: Use [gtk.scrollable.Scrollable.getVadjustment]
   */
-  gtk.adjustment.Adjustment getVadjustment()
+  gtk.adjustment.Adjustment getVadjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_tree_view_get_vadjustment(cast(GtkTreeView*)this._cPtr);
@@ -1239,7 +1239,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         endPath = Return location for end of region, or null.
       Returns: true, if valid paths were placed in start_path and end_path.
   */
-  bool getVisibleRange(out gtk.tree_path.TreePath startPath, out gtk.tree_path.TreePath endPath)
+  bool getVisibleRange(out gtk.tree_path.TreePath startPath, out gtk.tree_path.TreePath endPath) nothrow
   {
     bool _retval;
     GtkTreePath* _startPath;
@@ -1260,7 +1260,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         visibleRect = rectangle to fill
   */
-  void getVisibleRect(out gdk.rectangle.Rectangle visibleRect)
+  void getVisibleRect(out gdk.rectangle.Rectangle visibleRect) nothrow
   {
     gtk_tree_view_get_visible_rect(cast(GtkTreeView*)this._cPtr, cast(GdkRectangle*)&visibleRect);
   }
@@ -1276,7 +1276,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         position = The position to insert column in.
       Returns: The number of columns in tree_view after insertion.
   */
-  int insertColumn(gtk.tree_view_column.TreeViewColumn column, int position)
+  int insertColumn(gtk.tree_view_column.TreeViewColumn column, int position) nothrow
   {
     int _retval;
     _retval = gtk_tree_view_insert_column(cast(GtkTreeView*)this._cPtr, column ? cast(GtkTreeViewColumn*)column._cPtr(No.Dup) : null, position);
@@ -1298,13 +1298,20 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         func = function to set attributes of cell renderer
       Returns: number of columns in the tree view post-insert
   */
-  int insertColumnWithDataFunc(int position, string title, gtk.cell_renderer.CellRenderer cell, gtk.types.TreeCellDataFunc func)
+  int insertColumnWithDataFunc(int position, string title, gtk.cell_renderer.CellRenderer cell, gtk.types.TreeCellDataFunc func) nothrow
   {
-    extern(C) void _funcCallback(GtkTreeViewColumn* treeColumn, GtkCellRenderer* cell, GtkTreeModel* treeModel, GtkTreeIter* iter, void* data)
+    extern(C) void _funcCallback(GtkTreeViewColumn* treeColumn, GtkCellRenderer* cell, GtkTreeModel* treeModel, GtkTreeIter* iter, void* data) nothrow
     {
       auto _dlg = cast(gtk.types.TreeCellDataFunc*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)treeColumn, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)cell, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)treeModel, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)treeColumn, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)cell, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)treeModel, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeCellDataFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     int _retval;
@@ -1348,7 +1355,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns: true if the area at the given coordinates is blank,
         false otherwise.
   */
-  bool isBlankAtPos(int x, int y, out gtk.tree_path.TreePath path, out gtk.tree_view_column.TreeViewColumn column, out int cellX, out int cellY)
+  bool isBlankAtPos(int x, int y, out gtk.tree_path.TreePath path, out gtk.tree_view_column.TreeViewColumn column, out int cellX, out int cellY) nothrow
   {
     bool _retval;
     GtkTreePath* _path;
@@ -1365,7 +1372,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Returns: true if a rubber banding operation is currently being
         done in tree_view.
   */
-  bool isRubberBandingActive()
+  bool isRubberBandingActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_view_is_rubber_banding_active(cast(GtkTreeView*)this._cPtr);
@@ -1378,13 +1385,20 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         func = A function to be called
   */
-  void mapExpandedRows(gtk.types.TreeViewMappingFunc func)
+  void mapExpandedRows(gtk.types.TreeViewMappingFunc func) nothrow
   {
-    extern(C) void _funcCallback(GtkTreeView* treeView, GtkTreePath* path, void* userData)
+    extern(C) void _funcCallback(GtkTreeView* treeView, GtkTreePath* path, void* userData) nothrow
     {
       auto _dlg = cast(gtk.types.TreeViewMappingFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_view.TreeView)(cast(void*)treeView, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_view.TreeView)(cast(void*)treeView, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeViewMappingFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -1399,7 +1413,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         column = The #GtkTreeViewColumn to be moved.
         baseColumn = The #GtkTreeViewColumn to be moved relative to, or null.
   */
-  void moveColumnAfter(gtk.tree_view_column.TreeViewColumn column, gtk.tree_view_column.TreeViewColumn baseColumn = null)
+  void moveColumnAfter(gtk.tree_view_column.TreeViewColumn column, gtk.tree_view_column.TreeViewColumn baseColumn = null) nothrow
   {
     gtk_tree_view_move_column_after(cast(GtkTreeView*)this._cPtr, column ? cast(GtkTreeViewColumn*)column._cPtr(No.Dup) : null, baseColumn ? cast(GtkTreeViewColumn*)baseColumn._cPtr(No.Dup) : null);
   }
@@ -1411,7 +1425,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         column = The #GtkTreeViewColumn to remove.
       Returns: The number of columns in tree_view after removing.
   */
-  int removeColumn(gtk.tree_view_column.TreeViewColumn column)
+  int removeColumn(gtk.tree_view_column.TreeViewColumn column) nothrow
   {
     int _retval;
     _retval = gtk_tree_view_remove_column(cast(GtkTreeView*)this._cPtr, column ? cast(GtkTreeViewColumn*)column._cPtr(No.Dup) : null);
@@ -1425,7 +1439,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         path = The #GtkTreePath to be activated.
         column = The #GtkTreeViewColumn to be activated.
   */
-  void rowActivated(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column)
+  void rowActivated(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column) nothrow
   {
     gtk_tree_view_row_activated(cast(GtkTreeView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column._cPtr(No.Dup) : null);
   }
@@ -1437,7 +1451,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         path = A #GtkTreePath to test expansion state.
       Returns: true if #path is expanded.
   */
-  bool rowExpanded(gtk.tree_path.TreePath path)
+  bool rowExpanded(gtk.tree_path.TreePath path) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_view_row_expanded(cast(GtkTreeView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
@@ -1469,7 +1483,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         rowAlign = The vertical alignment of the row specified by path.
         colAlign = The horizontal alignment of the column specified by column.
   */
-  void scrollToCell(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column, bool useAlign, float rowAlign, float colAlign)
+  void scrollToCell(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column, bool useAlign, float rowAlign, float colAlign) nothrow
   {
     gtk_tree_view_scroll_to_cell(cast(GtkTreeView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column._cPtr(No.Dup) : null, useAlign, rowAlign, colAlign);
   }
@@ -1487,7 +1501,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         treeX = X coordinate of new top-left pixel of visible area, or -1
         treeY = Y coordinate of new top-left pixel of visible area, or -1
   */
-  void scrollToPoint(int treeX, int treeY)
+  void scrollToPoint(int treeX, int treeY) nothrow
   {
     gtk_tree_view_scroll_to_point(cast(GtkTreeView*)this._cPtr, treeX, treeY);
   }
@@ -1499,7 +1513,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         single = true to emit row-activated on a single click
   */
-  void setActivateOnSingleClick(bool single)
+  void setActivateOnSingleClick(bool single) nothrow
   {
     gtk_tree_view_set_activate_on_single_click(cast(GtkTreeView*)this._cPtr, single);
   }
@@ -1518,14 +1532,21 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         func = A function to determine which columns are reorderable, or null.
   */
-  void setColumnDragFunction(gtk.types.TreeViewColumnDropFunc func = null)
+  void setColumnDragFunction(gtk.types.TreeViewColumnDropFunc func = null) nothrow
   {
-    extern(C) gboolean _funcCallback(GtkTreeView* treeView, GtkTreeViewColumn* column, GtkTreeViewColumn* prevColumn, GtkTreeViewColumn* nextColumn, void* data)
+    extern(C) gboolean _funcCallback(GtkTreeView* treeView, GtkTreeViewColumn* column, GtkTreeViewColumn* prevColumn, GtkTreeViewColumn* nextColumn, void* data) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.TreeViewColumnDropFunc*)data;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_view.TreeView)(cast(void*)treeView, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)column, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)prevColumn, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)nextColumn, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_view.TreeView)(cast(void*)treeView, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)column, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)prevColumn, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_view_column.TreeViewColumn)(cast(void*)nextColumn, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeViewColumnDropFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -1554,7 +1575,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         focusColumn = A #GtkTreeViewColumn, or null
         startEditing = true if the specified cell should start being edited.
   */
-  void setCursor(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn focusColumn, bool startEditing)
+  void setCursor(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn focusColumn, bool startEditing) nothrow
   {
     gtk_tree_view_set_cursor(cast(GtkTreeView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, focusColumn ? cast(GtkTreeViewColumn*)focusColumn._cPtr(No.Dup) : null, startEditing);
   }
@@ -1581,7 +1602,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         focusCell = A #GtkCellRenderer, or null
         startEditing = true if the specified cell should start being edited.
   */
-  void setCursorOnCell(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn focusColumn, gtk.cell_renderer.CellRenderer focusCell, bool startEditing)
+  void setCursorOnCell(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn focusColumn, gtk.cell_renderer.CellRenderer focusCell, bool startEditing) nothrow
   {
     gtk_tree_view_set_cursor_on_cell(cast(GtkTreeView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, focusColumn ? cast(GtkTreeViewColumn*)focusColumn._cPtr(No.Dup) : null, focusCell ? cast(GtkCellRenderer*)focusCell._cPtr(No.Dup) : null, startEditing);
   }
@@ -1596,13 +1617,20 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   
       Deprecated: Accessibility does not need the function anymore.
   */
-  void setDestroyCountFunc(gtk.types.TreeDestroyCountFunc func = null)
+  void setDestroyCountFunc(gtk.types.TreeDestroyCountFunc func = null) nothrow
   {
-    extern(C) void _funcCallback(GtkTreeView* treeView, GtkTreePath* path, int children, void* userData)
+    extern(C) void _funcCallback(GtkTreeView* treeView, GtkTreePath* path, int children, void* userData) nothrow
     {
       auto _dlg = cast(gtk.types.TreeDestroyCountFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_view.TreeView)(cast(void*)treeView, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, children);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_view.TreeView)(cast(void*)treeView, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, children);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeDestroyCountFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -1618,7 +1646,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         path = The path of the row to highlight, or null
         pos = Specifies whether to drop before, after or into the row
   */
-  void setDragDestRow(gtk.tree_path.TreePath path, gtk.types.TreeViewDropPosition pos)
+  void setDragDestRow(gtk.tree_path.TreePath path, gtk.types.TreeViewDropPosition pos) nothrow
   {
     gtk_tree_view_set_drag_dest_row(cast(GtkTreeView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, pos);
   }
@@ -1633,7 +1661,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         enableSearch = true, if the user can search interactively
   */
-  void setEnableSearch(bool enableSearch)
+  void setEnableSearch(bool enableSearch) nothrow
   {
     gtk_tree_view_set_enable_search(cast(GtkTreeView*)this._cPtr, enableSearch);
   }
@@ -1645,7 +1673,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         enabled = true to enable tree line drawing, false otherwise.
   */
-  void setEnableTreeLines(bool enabled)
+  void setEnableTreeLines(bool enabled) nothrow
   {
     gtk_tree_view_set_enable_tree_lines(cast(GtkTreeView*)this._cPtr, enabled);
   }
@@ -1661,7 +1689,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         column = null, or the column to draw the expander arrow at.
   */
-  void setExpanderColumn(gtk.tree_view_column.TreeViewColumn column = null)
+  void setExpanderColumn(gtk.tree_view_column.TreeViewColumn column = null) nothrow
   {
     gtk_tree_view_set_expander_column(cast(GtkTreeView*)this._cPtr, column ? cast(GtkTreeViewColumn*)column._cPtr(No.Dup) : null);
   }
@@ -1676,7 +1704,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         enable = true to enable fixed height mode
   */
-  void setFixedHeightMode(bool enable)
+  void setFixedHeightMode(bool enable) nothrow
   {
     gtk_tree_view_set_fixed_height_mode(cast(GtkTreeView*)this._cPtr, enable);
   }
@@ -1688,7 +1716,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         gridLines = a #GtkTreeViewGridLines value indicating which grid lines to
           enable.
   */
-  void setGridLines(gtk.types.TreeViewGridLines gridLines)
+  void setGridLines(gtk.types.TreeViewGridLines gridLines) nothrow
   {
     gtk_tree_view_set_grid_lines(cast(GtkTreeView*)this._cPtr, gridLines);
   }
@@ -1701,7 +1729,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   
       Deprecated: Use [gtk.scrollable.Scrollable.setHadjustment]
   */
-  void setHadjustment(gtk.adjustment.Adjustment adjustment = null)
+  void setHadjustment(gtk.adjustment.Adjustment adjustment = null) nothrow
   {
     gtk_tree_view_set_hadjustment(cast(GtkTreeView*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
@@ -1712,7 +1740,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         setting = true if the columns are clickable.
   */
-  void setHeadersClickable(bool setting)
+  void setHeadersClickable(bool setting) nothrow
   {
     gtk_tree_view_set_headers_clickable(cast(GtkTreeView*)this._cPtr, setting);
   }
@@ -1723,7 +1751,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         headersVisible = true if the headers are visible
   */
-  void setHeadersVisible(bool headersVisible)
+  void setHeadersVisible(bool headersVisible) nothrow
   {
     gtk_tree_view_set_headers_visible(cast(GtkTreeView*)this._cPtr, headersVisible);
   }
@@ -1736,7 +1764,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         expand = true to enable hover selection mode
   */
-  void setHoverExpand(bool expand)
+  void setHoverExpand(bool expand) nothrow
   {
     gtk_tree_view_set_hover_expand(cast(GtkTreeView*)this._cPtr, expand);
   }
@@ -1750,7 +1778,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         hover = true to enable hover selection mode
   */
-  void setHoverSelection(bool hover)
+  void setHoverSelection(bool hover) nothrow
   {
     gtk_tree_view_set_hover_selection(cast(GtkTreeView*)this._cPtr, hover);
   }
@@ -1765,7 +1793,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         indentation = the amount, in pixels, of extra indentation in tree_view.
   */
-  void setLevelIndentation(int indentation)
+  void setLevelIndentation(int indentation) nothrow
   {
     gtk_tree_view_set_level_indentation(cast(GtkTreeView*)this._cPtr, indentation);
   }
@@ -1778,7 +1806,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         model = The model.
   */
-  void setModel(gtk.tree_model.TreeModel model = null)
+  void setModel(gtk.tree_model.TreeModel model = null) nothrow
   {
     gtk_tree_view_set_model(cast(GtkTreeView*)this._cPtr, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
@@ -1802,7 +1830,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         reorderable = true, if the tree can be reordered.
   */
-  void setReorderable(bool reorderable)
+  void setReorderable(bool reorderable) nothrow
   {
     gtk_tree_view_set_reorderable(cast(GtkTreeView*)this._cPtr, reorderable);
   }
@@ -1815,14 +1843,21 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         func = a #GtkTreeViewRowSeparatorFunc
   */
-  void setRowSeparatorFunc(gtk.types.TreeViewRowSeparatorFunc func = null)
+  void setRowSeparatorFunc(gtk.types.TreeViewRowSeparatorFunc func = null) nothrow
   {
-    extern(C) gboolean _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data)
+    extern(C) gboolean _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.TreeViewRowSeparatorFunc*)data;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeViewRowSeparatorFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -1841,7 +1876,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         enable = true to enable rubber banding
   */
-  void setRubberBanding(bool enable)
+  void setRubberBanding(bool enable) nothrow
   {
     gtk_tree_view_set_rubber_banding(cast(GtkTreeView*)this._cPtr, enable);
   }
@@ -1866,7 +1901,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         setting = true if the tree requires reading across rows
   */
-  void setRulesHint(bool setting)
+  void setRulesHint(bool setting) nothrow
   {
     gtk_tree_view_set_rules_hint(cast(GtkTreeView*)this._cPtr, setting);
   }
@@ -1885,7 +1920,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         column = the column of the model to search in, or -1 to disable searching
   */
-  void setSearchColumn(int column)
+  void setSearchColumn(int column) nothrow
   {
     gtk_tree_view_set_search_column(cast(GtkTreeView*)this._cPtr, column);
   }
@@ -1900,7 +1935,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         entry = the entry the interactive search code of tree_view should use or null
   */
-  void setSearchEntry(gtk.entry.Entry entry = null)
+  void setSearchEntry(gtk.entry.Entry entry = null) nothrow
   {
     gtk_tree_view_set_search_entry(cast(GtkTreeView*)this._cPtr, entry ? cast(GtkEntry*)entry._cPtr(No.Dup) : null);
   }
@@ -1913,15 +1948,22 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         searchEqualFunc = the compare function to use during the search
   */
-  void setSearchEqualFunc(gtk.types.TreeViewSearchEqualFunc searchEqualFunc)
+  void setSearchEqualFunc(gtk.types.TreeViewSearchEqualFunc searchEqualFunc) nothrow
   {
-    extern(C) gboolean _searchEqualFuncCallback(GtkTreeModel* model, int column, const(char)* key, GtkTreeIter* iter, void* searchData)
+    extern(C) gboolean _searchEqualFuncCallback(GtkTreeModel* model, int column, const(char)* key, GtkTreeIter* iter, void* searchData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.TreeViewSearchEqualFunc*)searchData;
       string _key = key.fromCString(No.Free);
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), column, _key, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), column, _key, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeViewSearchEqualFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -1939,13 +1981,20 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         func = the function to use to position the search dialog, or null
              to use the default search position function
   */
-  void setSearchPositionFunc(gtk.types.TreeViewSearchPositionFunc func = null)
+  void setSearchPositionFunc(gtk.types.TreeViewSearchPositionFunc func = null) nothrow
   {
-    extern(C) void _funcCallback(GtkTreeView* treeView, GtkWidget* searchDialog, void* userData)
+    extern(C) void _funcCallback(GtkTreeView* treeView, GtkWidget* searchDialog, void* userData) nothrow
     {
       auto _dlg = cast(gtk.types.TreeViewSearchPositionFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_view.TreeView)(cast(void*)treeView, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)searchDialog, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_view.TreeView)(cast(void*)treeView, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)searchDialog, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeViewSearchPositionFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
@@ -1965,7 +2014,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         enabled = true to enable expander drawing, false otherwise.
   */
-  void setShowExpanders(bool enabled)
+  void setShowExpanders(bool enabled) nothrow
   {
     gtk_tree_view_set_show_expanders(cast(GtkTreeView*)this._cPtr, enabled);
   }
@@ -1989,7 +2038,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         column = a #GtkTreeViewColumn or null
         cell = a #GtkCellRenderer or null
   */
-  void setTooltipCell(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path = null, gtk.tree_view_column.TreeViewColumn column = null, gtk.cell_renderer.CellRenderer cell = null)
+  void setTooltipCell(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path = null, gtk.tree_view_column.TreeViewColumn column = null, gtk.cell_renderer.CellRenderer cell = null) nothrow
   {
     gtk_tree_view_set_tooltip_cell(cast(GtkTreeView*)this._cPtr, tooltip ? cast(GtkTooltip*)tooltip._cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column._cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null);
   }
@@ -2009,7 +2058,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         column = an integer, which is a valid column number for tree_view’s model
   */
-  void setTooltipColumn(int column)
+  void setTooltipColumn(int column) nothrow
   {
     gtk_tree_view_set_tooltip_column(cast(GtkTreeView*)this._cPtr, column);
   }
@@ -2023,7 +2072,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         tooltip = a #GtkTooltip
         path = a #GtkTreePath
   */
-  void setTooltipRow(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path)
+  void setTooltipRow(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path) nothrow
   {
     gtk_tree_view_set_tooltip_row(cast(GtkTreeView*)this._cPtr, tooltip ? cast(GtkTooltip*)tooltip._cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
   }
@@ -2036,7 +2085,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   
       Deprecated: Use [gtk.scrollable.Scrollable.setVadjustment]
   */
-  void setVadjustment(gtk.adjustment.Adjustment adjustment = null)
+  void setVadjustment(gtk.adjustment.Adjustment adjustment = null) nothrow
   {
     gtk_tree_view_set_vadjustment(cast(GtkTreeView*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
@@ -2046,7 +2095,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       [gtk.tree_view.TreeView.enableModelDragDest]. Calling this method sets
       #GtkTreeView:reorderable to false.
   */
-  void unsetRowsDragDest()
+  void unsetRowsDragDest() nothrow
   {
     gtk_tree_view_unset_rows_drag_dest(cast(GtkTreeView*)this._cPtr);
   }
@@ -2056,7 +2105,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       [gtk.tree_view.TreeView.enableModelDragSource]. Calling this method sets
       #GtkTreeView:reorderable to false.
   */
-  void unsetRowsDragSource()
+  void unsetRowsDragSource() nothrow
   {
     gtk_tree_view_unset_rows_drag_source(cast(GtkTreeView*)this._cPtr);
   }
@@ -2076,13 +2125,13 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectColumnsChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectColumnsChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2091,7 +2140,14 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tree_view.TreeView.columnsChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2113,13 +2169,13 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCursorChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCursorChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2128,7 +2184,14 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tree_view.TreeView.cursorChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2157,7 +2220,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectExpandCollapseCursorRow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectExpandCollapseCursorRow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
@@ -2166,11 +2229,12 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -2184,7 +2248,14 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tree_view.TreeView.expandCollapseCursorRow");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -2228,7 +2299,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.MovementStep)))
@@ -2236,11 +2307,12 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -2251,7 +2323,14 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tree_view.TreeView.moveCursor");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -2289,7 +2368,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowActivated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRowActivated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.tree_path.TreePath)))
@@ -2297,7 +2376,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2312,7 +2391,14 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tree_view.TreeView.rowActivated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2338,7 +2424,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowCollapsed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRowCollapsed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.tree_iter.TreeIter)))
@@ -2346,7 +2432,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2361,7 +2447,14 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tree_view.TreeView.rowCollapsed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2387,7 +2480,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowExpanded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRowExpanded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.tree_iter.TreeIter)))
@@ -2395,7 +2488,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2410,7 +2503,14 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tree_view.TreeView.rowExpanded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2433,22 +2533,30 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectAll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tree_view.TreeView.selectAll");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -2473,22 +2581,30 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectCursorParent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectCursorParent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tree_view.TreeView.selectCursorParent");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -2515,18 +2631,19 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSelectCursorRow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectCursorRow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -2534,7 +2651,14 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tree_view.TreeView.selectCursorRow");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -2559,22 +2683,30 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectStartInteractiveSearch(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStartInteractiveSearch(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tree_view.TreeView.startInteractiveSearch");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -2604,7 +2736,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTestCollapseRow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTestCollapseRow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.tree_iter.TreeIter)))
@@ -2612,11 +2744,12 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -2627,7 +2760,14 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tree_view.TreeView.testCollapseRow");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -2657,7 +2797,7 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectTestExpandRow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTestExpandRow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.tree_iter.TreeIter)))
@@ -2665,11 +2805,12 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -2680,7 +2821,14 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tree_view.TreeView.testExpandRow");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -2705,22 +2853,30 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectToggleCursorRow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToggleCursorRow(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tree_view.TreeView.toggleCursorRow");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -2745,22 +2901,30 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tree_view.TreeView)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tree_view.TreeView.unselectAll");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -2783,31 +2947,31 @@ class TreeViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.s
           will be emitted after a single click.
       Returns: Builder instance for fluent chaining
   */
-  T activateOnSingleClick(bool propval)
+  T activateOnSingleClick(bool propval) nothrow
   {
     return setProperty("activate-on-single-click", propval);
   }
 
   /** */
-  T enableGridLines(gtk.types.TreeViewGridLines propval)
+  T enableGridLines(gtk.types.TreeViewGridLines propval) nothrow
   {
     return setProperty("enable-grid-lines", propval);
   }
 
   /** */
-  T enableSearch(bool propval)
+  T enableSearch(bool propval) nothrow
   {
     return setProperty("enable-search", propval);
   }
 
   /** */
-  T enableTreeLines(bool propval)
+  T enableTreeLines(bool propval) nothrow
   {
     return setProperty("enable-tree-lines", propval);
   }
 
   /** */
-  T expanderColumn(gtk.tree_view_column.TreeViewColumn propval)
+  T expanderColumn(gtk.tree_view_column.TreeViewColumn propval) nothrow
   {
     return setProperty("expander-column", propval);
   }
@@ -2822,19 +2986,19 @@ class TreeViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.s
           information on this option.
       Returns: Builder instance for fluent chaining
   */
-  T fixedHeightMode(bool propval)
+  T fixedHeightMode(bool propval) nothrow
   {
     return setProperty("fixed-height-mode", propval);
   }
 
   /** */
-  T headersClickable(bool propval)
+  T headersClickable(bool propval) nothrow
   {
     return setProperty("headers-clickable", propval);
   }
 
   /** */
-  T headersVisible(bool propval)
+  T headersVisible(bool propval) nothrow
   {
     return setProperty("headers-visible", propval);
   }
@@ -2850,7 +3014,7 @@ class TreeViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.s
           in #GtkComboBox or #GtkEntryCompletion.
       Returns: Builder instance for fluent chaining
   */
-  T hoverExpand(bool propval)
+  T hoverExpand(bool propval) nothrow
   {
     return setProperty("hover-expand", propval);
   }
@@ -2867,7 +3031,7 @@ class TreeViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.s
           in #GtkComboBox or #GtkEntryCompletion.
       Returns: Builder instance for fluent chaining
   */
-  T hoverSelection(bool propval)
+  T hoverSelection(bool propval) nothrow
   {
     return setProperty("hover-selection", propval);
   }
@@ -2878,25 +3042,25 @@ class TreeViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.s
         propval = Extra indentation for each level.
       Returns: Builder instance for fluent chaining
   */
-  T levelIndentation(int propval)
+  T levelIndentation(int propval) nothrow
   {
     return setProperty("level-indentation", propval);
   }
 
   /** */
-  T model(gtk.tree_model.TreeModel propval)
+  T model(gtk.tree_model.TreeModel propval) nothrow
   {
     return setProperty("model", propval);
   }
 
   /** */
-  T reorderable(bool propval)
+  T reorderable(bool propval) nothrow
   {
     return setProperty("reorderable", propval);
   }
 
   /** */
-  T rubberBanding(bool propval)
+  T rubberBanding(bool propval) nothrow
   {
     return setProperty("rubber-banding", propval);
   }
@@ -2910,13 +3074,13 @@ class TreeViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.s
       Deprecated: The theme is responsible for drawing rows
           using zebra striping
   */
-  T rulesHint(bool propval)
+  T rulesHint(bool propval) nothrow
   {
     return setProperty("rules-hint", propval);
   }
 
   /** */
-  T searchColumn(int propval)
+  T searchColumn(int propval) nothrow
   {
     return setProperty("search-column", propval);
   }
@@ -2927,19 +3091,19 @@ class TreeViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.s
         propval = true if the view has expanders.
       Returns: Builder instance for fluent chaining
   */
-  T showExpanders(bool propval)
+  T showExpanders(bool propval) nothrow
   {
     return setProperty("show-expanders", propval);
   }
 
   /** */
-  T tooltipColumn(int propval)
+  T tooltipColumn(int propval) nothrow
   {
     return setProperty("tooltip-column", propval);
   }
 
   /** */
-  T ubuntuAlmostFixedHeightMode(bool propval)
+  T ubuntuAlmostFixedHeightMode(bool propval) nothrow
   {
     return setProperty("ubuntu-almost-fixed-height-mode", propval);
   }
@@ -2952,7 +3116,7 @@ final class TreeViewGidBuilder : TreeViewGidBuilderImpl!TreeViewGidBuilder
       Create object from builder.
       Returns: New object
   */
-  TreeView build()
+  TreeView build() nothrow
   {
     return new TreeView(cast(void*)createGObject(TreeView._getGType), No.Take);
   }

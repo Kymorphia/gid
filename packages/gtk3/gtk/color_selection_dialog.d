@@ -20,26 +20,26 @@ class ColorSelectionDialog : gtk.dialog.Dialog
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_color_selection_dialog_get_type != &gidSymbolNotFound ? gtk_color_selection_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ColorSelectionDialog self()
+  override ColorSelectionDialog self() nothrow
   {
     return this;
   }
@@ -48,31 +48,31 @@ class ColorSelectionDialog : gtk.dialog.Dialog
       Get builder for [gtk.color_selection_dialog.ColorSelectionDialog]
       Returns: New builder object
   */
-  static ColorSelectionDialogGidBuilder builder()
+  static ColorSelectionDialogGidBuilder builder() nothrow
   {
     return new ColorSelectionDialogGidBuilder;
   }
 
   /** */
-  @property gtk.widget.Widget cancelButton()
+  @property gtk.widget.Widget cancelButton() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.widget.Widget)("cancel-button");
   }
 
   /** */
-  @property gtk.widget.Widget colorSelection()
+  @property gtk.widget.Widget colorSelection() nothrow
   {
     return getColorSelection();
   }
 
   /** */
-  @property gtk.widget.Widget helpButton()
+  @property gtk.widget.Widget helpButton() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.widget.Widget)("help-button");
   }
 
   /** */
-  @property gtk.widget.Widget okButton()
+  @property gtk.widget.Widget okButton() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.widget.Widget)("ok-button");
   }
@@ -84,7 +84,7 @@ class ColorSelectionDialog : gtk.dialog.Dialog
         title = a string containing the title text for the dialog.
       Returns: a #GtkColorSelectionDialog.
   */
-  this(string title)
+  this(string title) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -96,7 +96,7 @@ class ColorSelectionDialog : gtk.dialog.Dialog
       Retrieves the #GtkColorSelection widget embedded in the dialog.
       Returns: the embedded #GtkColorSelection
   */
-  gtk.widget.Widget getColorSelection()
+  gtk.widget.Widget getColorSelection() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_color_selection_dialog_get_color_selection(cast(GtkColorSelectionDialog*)this._cPtr);
@@ -118,7 +118,7 @@ final class ColorSelectionDialogGidBuilder : ColorSelectionDialogGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  ColorSelectionDialog build()
+  ColorSelectionDialog build() nothrow
   {
     return new ColorSelectionDialog(cast(void*)createGObject(ColorSelectionDialog._getGType), No.Take);
   }

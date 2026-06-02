@@ -14,7 +14,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgda-5.0.so.4"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // AttributesManager
   void function(GdaAttributesManager* mgr, void* ptr) c_gda_attributes_manager_clear; ///

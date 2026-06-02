@@ -28,32 +28,32 @@ class Thread : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_thread_get_type != &gidSymbolNotFound ? g_thread_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Thread self()
+  override Thread self() nothrow
   {
     return this;
   }
@@ -92,14 +92,22 @@ class Thread : gobject.boxed.Boxed
         func = a function to execute in the new thread
       Returns: the new #GThread
   */
-  this(string name, glib.types.ThreadFunc func)
+  this(string name, glib.types.ThreadFunc func) nothrow
   {
-    extern(C) void* _funcCallback(void* data)
+    extern(C) void* _funcCallback(void* data) nothrow
     {
       ptrThawGC(data);
+      void* _retval;
       auto _dlg = cast(glib.types.ThreadFunc*)data;
 
-      void* _retval = (*_dlg)();
+      try
+      {
+        _retval = (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.ThreadFunc");
+      }
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -125,12 +133,20 @@ class Thread : gobject.boxed.Boxed
   */
   static glib.thread.Thread tryNew(string name, glib.types.ThreadFunc func)
   {
-    extern(C) void* _funcCallback(void* data)
+    extern(C) void* _funcCallback(void* data) nothrow
     {
       ptrThawGC(data);
+      void* _retval;
       auto _dlg = cast(glib.types.ThreadFunc*)data;
 
-      void* _retval = (*_dlg)();
+      try
+      {
+        _retval = (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.ThreadFunc");
+      }
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -164,14 +180,14 @@ class Thread : gobject.boxed.Boxed
       want to keep the GThread alive beyond the [glib.thread.Thread.join] call.
       Returns: the return value of the thread
   */
-  void* join()
+  void* join() nothrow
   {
     auto _retval = g_thread_join(cast(GThread*)this._cPtr);
     return _retval;
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = g_thread_error_quark();
@@ -196,7 +212,7 @@ class Thread : gobject.boxed.Boxed
       Params:
         retval = the return value of this thread
   */
-  static void exit(void* retval = null)
+  static void exit(void* retval = null) nothrow
   {
     g_thread_exit(retval);
   }
@@ -213,7 +229,7 @@ class Thread : gobject.boxed.Boxed
       as [glib.thread.Thread.join]) on these threads.
       Returns: the #GThread representing the current thread
   */
-  static glib.thread.Thread self()
+  static glib.thread.Thread self() nothrow
   {
     GThread* _cretval;
     _cretval = g_thread_self();
@@ -227,7 +243,7 @@ class Thread : gobject.boxed.Boxed
       
       This function is often used as a method to make busy wait less evil.
   */
-  static void yield()
+  static void yield() nothrow
   {
     g_thread_yield();
   }
@@ -235,12 +251,12 @@ class Thread : gobject.boxed.Boxed
 
 class ThreadException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(glib.thread.Thread.errorQuark, cast(int)code, msg);
   }

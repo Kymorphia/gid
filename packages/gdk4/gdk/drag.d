@@ -31,26 +31,26 @@ class Drag : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_drag_get_type != &gidSymbolNotFound ? gdk_drag_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Drag self()
+  override Drag self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class Drag : gobject.object.ObjectWrap
       Get builder for [gdk.drag.Drag]
       Returns: New builder object
   */
-  static DragGidBuilder builder()
+  static DragGidBuilder builder() nothrow
   {
     return new DragGidBuilder;
   }
@@ -68,7 +68,7 @@ class Drag : gobject.object.ObjectWrap
       Get `actions` property.
       Returns: The possible actions of this drag.
   */
-  @property gdk.types.DragAction actions()
+  @property gdk.types.DragAction actions() nothrow
   {
     return getActions();
   }
@@ -78,7 +78,7 @@ class Drag : gobject.object.ObjectWrap
       Params:
         propval = The possible actions of this drag.
   */
-  @property void actions(gdk.types.DragAction propval)
+  @property void actions(gdk.types.DragAction propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.types.DragAction)("actions", propval);
   }
@@ -87,7 +87,7 @@ class Drag : gobject.object.ObjectWrap
       Get `content` property.
       Returns: The [gdk.content_provider.ContentProvider].
   */
-  @property gdk.content_provider.ContentProvider content()
+  @property gdk.content_provider.ContentProvider content() nothrow
   {
     return getContent();
   }
@@ -96,7 +96,7 @@ class Drag : gobject.object.ObjectWrap
       Get `device` property.
       Returns: The [gdk.device.Device] that is performing the drag.
   */
-  @property gdk.device.Device device()
+  @property gdk.device.Device device() nothrow
   {
     return getDevice();
   }
@@ -105,7 +105,7 @@ class Drag : gobject.object.ObjectWrap
       Get `display` property.
       Returns: The [gdk.display.Display] that the drag belongs to.
   */
-  @property gdk.display.Display display()
+  @property gdk.display.Display display() nothrow
   {
     return getDisplay();
   }
@@ -114,7 +114,7 @@ class Drag : gobject.object.ObjectWrap
       Get `formats` property.
       Returns: The possible formats that the drag can provide its data in.
   */
-  @property gdk.content_formats.ContentFormats formats()
+  @property gdk.content_formats.ContentFormats formats() nothrow
   {
     return getFormats();
   }
@@ -123,7 +123,7 @@ class Drag : gobject.object.ObjectWrap
       Get `selectedAction` property.
       Returns: The currently selected action of the drag.
   */
-  @property gdk.types.DragAction selectedAction()
+  @property gdk.types.DragAction selectedAction() nothrow
   {
     return getSelectedAction();
   }
@@ -133,7 +133,7 @@ class Drag : gobject.object.ObjectWrap
       Params:
         propval = The currently selected action of the drag.
   */
-  @property void selectedAction(gdk.types.DragAction propval)
+  @property void selectedAction(gdk.types.DragAction propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.types.DragAction)("selected-action", propval);
   }
@@ -142,7 +142,7 @@ class Drag : gobject.object.ObjectWrap
       Get `surface` property.
       Returns: The surface where the drag originates.
   */
-  @property gdk.surface.Surface surface()
+  @property gdk.surface.Surface surface() nothrow
   {
     return getSurface();
   }
@@ -172,7 +172,7 @@ class Drag : gobject.object.ObjectWrap
         dy = the y offset to device's position where the drag nominally started
       Returns: a newly created [gdk.drag.Drag]
   */
-  static gdk.drag.Drag begin(gdk.surface.Surface surface, gdk.device.Device device, gdk.content_provider.ContentProvider content, gdk.types.DragAction actions, double dx, double dy)
+  static gdk.drag.Drag begin(gdk.surface.Surface surface, gdk.device.Device device, gdk.content_provider.ContentProvider content, gdk.types.DragAction actions, double dx, double dy) nothrow
   {
     GdkDrag* _cretval;
     _cretval = gdk_drag_begin(surface ? cast(GdkSurface*)surface._cPtr(No.Dup) : null, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, content ? cast(GdkContentProvider*)content._cPtr(No.Dup) : null, actions, dx, dy);
@@ -196,7 +196,7 @@ class Drag : gobject.object.ObjectWrap
       Params:
         success = whether the drag was ultimatively successful
   */
-  void dropDone(bool success)
+  void dropDone(bool success) nothrow
   {
     gdk_drag_drop_done(cast(GdkDrag*)this._cPtr, success);
   }
@@ -205,7 +205,7 @@ class Drag : gobject.object.ObjectWrap
       Determines the bitmask of possible actions proposed by the source.
       Returns: the [gdk.types.DragAction] flags
   */
-  gdk.types.DragAction getActions()
+  gdk.types.DragAction getActions() nothrow
   {
     GdkDragAction _cretval;
     _cretval = gdk_drag_get_actions(cast(GdkDrag*)this._cPtr);
@@ -217,7 +217,7 @@ class Drag : gobject.object.ObjectWrap
       Returns the [gdk.content_provider.ContentProvider] associated to the [gdk.drag.Drag] object.
       Returns: The [gdk.content_provider.ContentProvider] associated to drag.
   */
-  gdk.content_provider.ContentProvider getContent()
+  gdk.content_provider.ContentProvider getContent() nothrow
   {
     GdkContentProvider* _cretval;
     _cretval = gdk_drag_get_content(cast(GdkDrag*)this._cPtr);
@@ -229,7 +229,7 @@ class Drag : gobject.object.ObjectWrap
       Returns the [gdk.device.Device] associated to the [gdk.drag.Drag] object.
       Returns: The [gdk.device.Device] associated to drag.
   */
-  gdk.device.Device getDevice()
+  gdk.device.Device getDevice() nothrow
   {
     GdkDevice* _cretval;
     _cretval = gdk_drag_get_device(cast(GdkDrag*)this._cPtr);
@@ -241,7 +241,7 @@ class Drag : gobject.object.ObjectWrap
       Gets the [gdk.display.Display] that the drag object was created for.
       Returns: a [gdk.display.Display]
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gdk_drag_get_display(cast(GdkDrag*)this._cPtr);
@@ -259,7 +259,7 @@ class Drag : gobject.object.ObjectWrap
       when the drag operation is over.
       Returns: the drag surface
   */
-  gdk.surface.Surface getDragSurface()
+  gdk.surface.Surface getDragSurface() nothrow
   {
     GdkSurface* _cretval;
     _cretval = gdk_drag_get_drag_surface(cast(GdkDrag*)this._cPtr);
@@ -271,7 +271,7 @@ class Drag : gobject.object.ObjectWrap
       Retrieves the formats supported by this [gdk.drag.Drag] object.
       Returns: a [gdk.content_formats.ContentFormats]
   */
-  gdk.content_formats.ContentFormats getFormats()
+  gdk.content_formats.ContentFormats getFormats() nothrow
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_drag_get_formats(cast(GdkDrag*)this._cPtr);
@@ -283,7 +283,7 @@ class Drag : gobject.object.ObjectWrap
       Determines the action chosen by the drag destination.
       Returns: a [gdk.types.DragAction] value
   */
-  gdk.types.DragAction getSelectedAction()
+  gdk.types.DragAction getSelectedAction() nothrow
   {
     GdkDragAction _cretval;
     _cretval = gdk_drag_get_selected_action(cast(GdkDrag*)this._cPtr);
@@ -295,7 +295,7 @@ class Drag : gobject.object.ObjectWrap
       Returns the [gdk.surface.Surface] where the drag originates.
       Returns: The [gdk.surface.Surface] where the drag originates
   */
-  gdk.surface.Surface getSurface()
+  gdk.surface.Surface getSurface() nothrow
   {
     GdkSurface* _cretval;
     _cretval = gdk_drag_get_surface(cast(GdkDrag*)this._cPtr);
@@ -313,7 +313,7 @@ class Drag : gobject.object.ObjectWrap
         hotX = x coordinate of the drag surface hotspot
         hotY = y coordinate of the drag surface hotspot
   */
-  void setHotspot(int hotX, int hotY)
+  void setHotspot(int hotX, int hotY) nothrow
   {
     gdk_drag_set_hotspot(cast(GdkDrag*)this._cPtr, hotX, hotY);
   }
@@ -335,14 +335,14 @@ class Drag : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCancel(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCancel(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.types.DragCancelReason)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.drag.Drag)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -354,7 +354,14 @@ class Drag : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.drag.Drag.cancel");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -378,13 +385,13 @@ class Drag : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDndFinished(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDndFinished(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag.Drag)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -393,7 +400,14 @@ class Drag : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.drag.Drag.dndFinished");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -415,13 +429,13 @@ class Drag : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDropPerformed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDropPerformed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag.Drag)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -430,7 +444,14 @@ class Drag : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.drag.Drag.dropPerformed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -448,7 +469,7 @@ class DragGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The possible actions of this drag.
       Returns: Builder instance for fluent chaining
   */
-  T actions(gdk.types.DragAction propval)
+  T actions(gdk.types.DragAction propval) nothrow
   {
     return setProperty("actions", propval);
   }
@@ -459,7 +480,7 @@ class DragGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The [gdk.content_provider.ContentProvider].
       Returns: Builder instance for fluent chaining
   */
-  T content(gdk.content_provider.ContentProvider propval)
+  T content(gdk.content_provider.ContentProvider propval) nothrow
   {
     return setProperty("content", propval);
   }
@@ -470,7 +491,7 @@ class DragGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The [gdk.device.Device] that is performing the drag.
       Returns: Builder instance for fluent chaining
   */
-  T device(gdk.device.Device propval)
+  T device(gdk.device.Device propval) nothrow
   {
     return setProperty("device", propval);
   }
@@ -481,7 +502,7 @@ class DragGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The possible formats that the drag can provide its data in.
       Returns: Builder instance for fluent chaining
   */
-  T formats(gdk.content_formats.ContentFormats propval)
+  T formats(gdk.content_formats.ContentFormats propval) nothrow
   {
     return setProperty("formats", propval);
   }
@@ -492,7 +513,7 @@ class DragGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The currently selected action of the drag.
       Returns: Builder instance for fluent chaining
   */
-  T selectedAction(gdk.types.DragAction propval)
+  T selectedAction(gdk.types.DragAction propval) nothrow
   {
     return setProperty("selected-action", propval);
   }
@@ -503,7 +524,7 @@ class DragGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The surface where the drag originates.
       Returns: Builder instance for fluent chaining
   */
-  T surface(gdk.surface.Surface propval)
+  T surface(gdk.surface.Surface propval) nothrow
   {
     return setProperty("surface", propval);
   }
@@ -516,7 +537,7 @@ final class DragGidBuilder : DragGidBuilderImpl!DragGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Drag build()
+  Drag build() nothrow
   {
     return new Drag(cast(void*)createGObject(Drag._getGType), No.Take);
   }

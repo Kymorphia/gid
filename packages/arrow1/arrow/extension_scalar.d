@@ -14,26 +14,26 @@ class ExtensionScalar : arrow.scalar.Scalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_extension_scalar_get_type != &gidSymbolNotFound ? garrow_extension_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ExtensionScalar self()
+  override ExtensionScalar self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class ExtensionScalar : arrow.scalar.Scalar
       Get builder for [arrow.extension_scalar.ExtensionScalar]
       Returns: New builder object
   */
-  static ExtensionScalarGidBuilder builder()
+  static ExtensionScalarGidBuilder builder() nothrow
   {
     return new ExtensionScalarGidBuilder;
   }
@@ -60,7 +60,7 @@ final class ExtensionScalarGidBuilder : ExtensionScalarGidBuilderImpl!ExtensionS
       Create object from builder.
       Returns: New object
   */
-  ExtensionScalar build()
+  ExtensionScalar build() nothrow
   {
     return new ExtensionScalar(cast(void*)createGObject(ExtensionScalar._getGType), No.Take);
   }

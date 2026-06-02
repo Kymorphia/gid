@@ -18,26 +18,26 @@ class ProgressBarAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_progress_bar_accessible_get_type != &gidSymbolNotFound ? gtk_progress_bar_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ProgressBarAccessible self()
+  override ProgressBarAccessible self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class ProgressBarAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.
       Get builder for [gtk.progress_bar_accessible.ProgressBarAccessible]
       Returns: New builder object
   */
-  static ProgressBarAccessibleGidBuilder builder()
+  static ProgressBarAccessibleGidBuilder builder() nothrow
   {
     return new ProgressBarAccessibleGidBuilder;
   }
@@ -68,7 +68,7 @@ final class ProgressBarAccessibleGidBuilder : ProgressBarAccessibleGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  ProgressBarAccessible build()
+  ProgressBarAccessible build() nothrow
   {
     return new ProgressBarAccessible(cast(void*)createGObject(ProgressBarAccessible._getGType), No.Take);
   }

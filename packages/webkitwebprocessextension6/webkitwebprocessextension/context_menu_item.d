@@ -26,26 +26,26 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_context_menu_item_get_type != &gidSymbolNotFound ? webkit_context_menu_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ContextMenuItem self()
+  override ContextMenuItem self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
       Get builder for [webkitwebprocessextension.context_menu_item.ContextMenuItem]
       Returns: New builder object
   */
-  static ContextMenuItemGidBuilder builder()
+  static ContextMenuItemGidBuilder builder() nothrow
   {
     return new ContextMenuItemGidBuilder;
   }
@@ -71,7 +71,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
         target = a #GVariant to use as the action target
       Returns: the newly created #WebKitContextMenuItem object.
   */
-  static webkitwebprocessextension.context_menu_item.ContextMenuItem newFromGaction(gio.action.Action action, string label, glib.variant.Variant target = null)
+  static webkitwebprocessextension.context_menu_item.ContextMenuItem newFromGaction(gio.action.Action action, string label, glib.variant.Variant target = null) nothrow
   {
     WebKitContextMenuItem* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -96,7 +96,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
         action = a #WebKitContextMenuAction stock action
       Returns: the newly created #WebKitContextMenuItem object.
   */
-  static webkitwebprocessextension.context_menu_item.ContextMenuItem newFromStockAction(webkitwebprocessextension.types.ContextMenuAction action)
+  static webkitwebprocessextension.context_menu_item.ContextMenuItem newFromStockAction(webkitwebprocessextension.types.ContextMenuAction action) nothrow
   {
     WebKitContextMenuItem* _cretval;
     _cretval = webkit_context_menu_item_new_from_stock_action(action);
@@ -115,7 +115,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
         label = a custom label text to use instead of the predefined one
       Returns: the newly created #WebKitContextMenuItem object.
   */
-  static webkitwebprocessextension.context_menu_item.ContextMenuItem newFromStockActionWithLabel(webkitwebprocessextension.types.ContextMenuAction action, string label)
+  static webkitwebprocessextension.context_menu_item.ContextMenuItem newFromStockActionWithLabel(webkitwebprocessextension.types.ContextMenuAction action, string label) nothrow
   {
     WebKitContextMenuItem* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -128,7 +128,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
       Creates a new #WebKitContextMenuItem representing a separator.
       Returns: the newly created #WebKitContextMenuItem object.
   */
-  static webkitwebprocessextension.context_menu_item.ContextMenuItem newSeparator()
+  static webkitwebprocessextension.context_menu_item.ContextMenuItem newSeparator() nothrow
   {
     WebKitContextMenuItem* _cretval;
     _cretval = webkit_context_menu_item_new_separator();
@@ -144,7 +144,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
         submenu = a #WebKitContextMenu to set
       Returns: the newly created #WebKitContextMenuItem object.
   */
-  static webkitwebprocessextension.context_menu_item.ContextMenuItem newWithSubmenu(string label, webkitwebprocessextension.context_menu.ContextMenu submenu)
+  static webkitwebprocessextension.context_menu_item.ContextMenuItem newWithSubmenu(string label, webkitwebprocessextension.context_menu.ContextMenu submenu) nothrow
   {
     WebKitContextMenuItem* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -158,7 +158,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
       Returns: the #GAction associated to the #WebKitContextMenuItem,
            or null if item is a separator.
   */
-  gio.action.Action getGaction()
+  gio.action.Action getGaction() nothrow
   {
     GAction* _cretval;
     _cretval = webkit_context_menu_item_get_gaction(cast(WebKitContextMenuItem*)this._cPtr);
@@ -175,7 +175,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
       will be returned.
       Returns: the #WebKitContextMenuAction of item
   */
-  webkitwebprocessextension.types.ContextMenuAction getStockAction()
+  webkitwebprocessextension.types.ContextMenuAction getStockAction() nothrow
   {
     WebKitContextMenuAction _cretval;
     _cretval = webkit_context_menu_item_get_stock_action(cast(WebKitContextMenuItem*)this._cPtr);
@@ -188,7 +188,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
       Returns: the #WebKitContextMenu representing the submenu of
            item or null if item doesn't have a submenu.
   */
-  webkitwebprocessextension.context_menu.ContextMenu getSubmenu()
+  webkitwebprocessextension.context_menu.ContextMenu getSubmenu() nothrow
   {
     WebKitContextMenu* _cretval;
     _cretval = webkit_context_menu_item_get_submenu(cast(WebKitContextMenuItem*)this._cPtr);
@@ -200,7 +200,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
       Checks whether item is a separator.
       Returns: true is item is a separator or false otherwise
   */
-  bool isSeparator()
+  bool isSeparator() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_context_menu_item_is_separator(cast(WebKitContextMenuItem*)this._cPtr);
@@ -216,7 +216,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
       Params:
         submenu = a #WebKitContextMenu
   */
-  void setSubmenu(webkitwebprocessextension.context_menu.ContextMenu submenu = null)
+  void setSubmenu(webkitwebprocessextension.context_menu.ContextMenu submenu = null) nothrow
   {
     webkit_context_menu_item_set_submenu(cast(WebKitContextMenuItem*)this._cPtr, submenu ? cast(WebKitContextMenu*)submenu._cPtr(No.Dup) : null);
   }
@@ -234,7 +234,7 @@ final class ContextMenuItemGidBuilder : ContextMenuItemGidBuilderImpl!ContextMen
       Create object from builder.
       Returns: New object
   */
-  ContextMenuItem build()
+  ContextMenuItem build() nothrow
   {
     return new ContextMenuItem(cast(void*)createGObject(ContextMenuItem._getGType), No.Take);
   }

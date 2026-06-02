@@ -79,11 +79,8 @@ class Cond
   GCond _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.cond.Cond");
-
     _cInstance = *cast(GCond*)ptr;
 
     if (take)
@@ -91,7 +88,7 @@ class Cond
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -102,7 +99,7 @@ class Cond
       It is good practice to lock the same mutex as the waiting threads
       while calling this function, though not required.
   */
-  void broadcast()
+  void broadcast() nothrow
   {
     g_cond_broadcast(cast(GCond*)this._cPtr);
   }
@@ -116,7 +113,7 @@ class Cond
       Calling [glib.cond.Cond.clear] for a #GCond on which threads are
       blocking leads to undefined behaviour.
   */
-  void clear()
+  void clear() nothrow
   {
     g_cond_clear(cast(GCond*)this._cPtr);
   }
@@ -134,7 +131,7 @@ class Cond
       Calling [glib.cond.Cond.init_] on an already-initialised #GCond leads
       to undefined behaviour.
   */
-  void init_()
+  void init_() nothrow
   {
     g_cond_init(cast(GCond*)this._cPtr);
   }
@@ -145,7 +142,7 @@ class Cond
       It is good practice to hold the same lock as the waiting thread
       while calling this function, though not required.
   */
-  void signal()
+  void signal() nothrow
   {
     g_cond_signal(cast(GCond*)this._cPtr);
   }

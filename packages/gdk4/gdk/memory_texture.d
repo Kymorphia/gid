@@ -23,26 +23,26 @@ class MemoryTexture : gdk.texture.Texture
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_memory_texture_get_type != &gidSymbolNotFound ? gdk_memory_texture_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MemoryTexture self()
+  override MemoryTexture self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class MemoryTexture : gdk.texture.Texture
       Get builder for [gdk.memory_texture.MemoryTexture]
       Returns: New builder object
   */
-  static MemoryTextureGidBuilder builder()
+  static MemoryTextureGidBuilder builder() nothrow
   {
     return new MemoryTextureGidBuilder;
   }
@@ -70,7 +70,7 @@ class MemoryTexture : gdk.texture.Texture
         stride = rowstride for the data
       Returns: A newly-created [gdk.texture.Texture]
   */
-  this(int width, int height, gdk.types.MemoryFormat format, glib.bytes.Bytes bytes, size_t stride)
+  this(int width, int height, gdk.types.MemoryFormat format, glib.bytes.Bytes bytes, size_t stride) nothrow
   {
     GdkTexture* _cretval;
     _cretval = gdk_memory_texture_new(width, height, format, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, stride);
@@ -91,7 +91,7 @@ final class MemoryTextureGidBuilder : MemoryTextureGidBuilderImpl!MemoryTextureG
       Create object from builder.
       Returns: New object
   */
-  MemoryTexture build()
+  MemoryTexture build() nothrow
   {
     return new MemoryTexture(cast(void*)createGObject(MemoryTexture._getGType), Yes.Take);
   }

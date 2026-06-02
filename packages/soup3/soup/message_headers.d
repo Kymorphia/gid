@@ -15,32 +15,32 @@ class MessageHeaders : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_message_headers_get_type != &gidSymbolNotFound ? soup_message_headers_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MessageHeaders self()
+  override MessageHeaders self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class MessageHeaders : gobject.boxed.Boxed
         type = the type of headers
       Returns: a new #SoupMessageHeaders
   */
-  this(soup.types.MessageHeadersType type)
+  this(soup.types.MessageHeadersType type) nothrow
   {
     SoupMessageHeaders* _cretval;
     _cretval = soup_message_headers_new(type);
@@ -77,7 +77,7 @@ class MessageHeaders : gobject.boxed.Boxed
         name = the header name to add
         value = the new value of name
   */
-  void append(string name, string value)
+  void append(string name, string value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -87,7 +87,7 @@ class MessageHeaders : gobject.boxed.Boxed
   /**
       Removes all the headers listed in the Connection header.
   */
-  void cleanConnectionHeaders()
+  void cleanConnectionHeaders() nothrow
   {
     soup_message_headers_clean_connection_headers(cast(SoupMessageHeaders*)this._cPtr);
   }
@@ -95,7 +95,7 @@ class MessageHeaders : gobject.boxed.Boxed
   /**
       Clears hdrs.
   */
-  void clear()
+  void clear() nothrow
   {
     soup_message_headers_clear(cast(SoupMessageHeaders*)this._cPtr);
   }
@@ -117,15 +117,22 @@ class MessageHeaders : gobject.boxed.Boxed
       Params:
         func = callback function to run for each header
   */
-  void foreach_(soup.types.MessageHeadersForeachFunc func)
+  void foreach_(soup.types.MessageHeadersForeachFunc func) nothrow
   {
-    extern(C) void _funcCallback(const(char)* name, const(char)* value, void* userData)
+    extern(C) void _funcCallback(const(char)* name, const(char)* value, void* userData) nothrow
     {
       auto _dlg = cast(soup.types.MessageHeadersForeachFunc*)userData;
       string _name = name.fromCString(No.Free);
       string _value = value.fromCString(No.Free);
 
-      (*_dlg)(_name, _value);
+      try
+      {
+        (*_dlg)(_name, _value);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.types.MessageHeadersForeachFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -138,7 +145,7 @@ class MessageHeaders : gobject.boxed.Boxed
       Params:
         ranges = an array of #SoupRange
   */
-  void freeRanges(soup.types.Range ranges)
+  void freeRanges(soup.types.Range ranges) nothrow
   {
     soup_message_headers_free_ranges(cast(SoupMessageHeaders*)this._cPtr, &ranges);
   }
@@ -171,7 +178,7 @@ class MessageHeaders : gobject.boxed.Boxed
           header, false if not (in which case *disposition and *params
           will be unchanged).
   */
-  bool getContentDisposition(out string disposition, out string[string] params)
+  bool getContentDisposition(out string disposition, out string[string] params) nothrow
   {
     bool _retval;
     char* _disposition;
@@ -189,7 +196,7 @@ class MessageHeaders : gobject.boxed.Boxed
       [soup.types.Encoding.ContentLength].
       Returns: the message body length declared by hdrs.
   */
-  long getContentLength()
+  long getContentLength() nothrow
   {
     long _retval;
     _retval = soup_message_headers_get_content_length(cast(SoupMessageHeaders*)this._cPtr);
@@ -209,7 +216,7 @@ class MessageHeaders : gobject.boxed.Boxed
       Returns: true if hdrs contained a "Content-Range" header
           containing a byte range which could be parsed, false otherwise.
   */
-  bool getContentRange(out long start, out long end, out long totalLength)
+  bool getContentRange(out long start, out long end, out long totalLength) nothrow
   {
     bool _retval;
     _retval = cast(bool)soup_message_headers_get_content_range(cast(SoupMessageHeaders*)this._cPtr, cast(long*)&start, cast(long*)&end, cast(long*)&totalLength);
@@ -230,7 +237,7 @@ class MessageHeaders : gobject.boxed.Boxed
           header or it cannot be parsed (in which case *params will be
           unchanged).
   */
-  string getContentType(out string[string] params)
+  string getContentType(out string[string] params) nothrow
   {
     const(char)* _cretval;
     GHashTable* _params;
@@ -248,7 +255,7 @@ class MessageHeaders : gobject.boxed.Boxed
       actually include a body.
       Returns: the encoding declared by hdrs.
   */
-  soup.types.Encoding getEncoding()
+  soup.types.Encoding getEncoding() nothrow
   {
     SoupEncoding _cretval;
     _cretval = soup_message_headers_get_encoding(cast(SoupMessageHeaders*)this._cPtr);
@@ -263,7 +270,7 @@ class MessageHeaders : gobject.boxed.Boxed
       [soup.types.Expectation.Unrecognized].
       Returns: the contents of hdrs's "Expect" header
   */
-  soup.types.Expectation getExpectations()
+  soup.types.Expectation getExpectations() nothrow
   {
     SoupExpectation _cretval;
     _cretval = soup_message_headers_get_expectations(cast(SoupMessageHeaders*)this._cPtr);
@@ -275,7 +282,7 @@ class MessageHeaders : gobject.boxed.Boxed
       Gets the type of headers.
       Returns: the header's type.
   */
-  soup.types.MessageHeadersType getHeadersType()
+  soup.types.MessageHeadersType getHeadersType() nothrow
   {
     SoupMessageHeadersType _cretval;
     _cretval = soup_message_headers_get_headers_type(cast(SoupMessageHeaders*)this._cPtr);
@@ -302,7 +309,7 @@ class MessageHeaders : gobject.boxed.Boxed
         name = header name
       Returns: the header's value or null if not found.
   */
-  string getList(string name)
+  string getList(string name) nothrow
   {
     const(char)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -327,7 +334,7 @@ class MessageHeaders : gobject.boxed.Boxed
         name = header name
       Returns: the header's value or null if not found.
   */
-  string getOne(string name)
+  string getOne(string name) nothrow
   {
     const(char)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -374,7 +381,7 @@ class MessageHeaders : gobject.boxed.Boxed
           "Range" header, false otherwise (in which case range and length
           will not be set).
   */
-  bool getRanges(long totalLength, out soup.types.Range[] ranges)
+  bool getRanges(long totalLength, out soup.types.Range[] ranges) nothrow
   {
     bool _retval;
     int _length;
@@ -399,7 +406,7 @@ class MessageHeaders : gobject.boxed.Boxed
       Returns: true if the header is present and contains token,
           false otherwise.
   */
-  bool headerContains(string name, string token)
+  bool headerContains(string name, string token) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -418,7 +425,7 @@ class MessageHeaders : gobject.boxed.Boxed
       Returns: true if the header is present and its value is
           value, false otherwise.
   */
-  bool headerEquals(string name, string value)
+  bool headerEquals(string name, string value) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -435,7 +442,7 @@ class MessageHeaders : gobject.boxed.Boxed
       Params:
         name = the header name to remove
   */
-  void remove(string name)
+  void remove(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     soup_message_headers_remove(cast(SoupMessageHeaders*)this._cPtr, _name);
@@ -453,7 +460,7 @@ class MessageHeaders : gobject.boxed.Boxed
         name = the header name to replace
         value = the new value of name
   */
-  void replace(string name, string value)
+  void replace(string name, string value) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -471,7 +478,7 @@ class MessageHeaders : gobject.boxed.Boxed
         disposition = the disposition-type
         params = additional parameters
   */
-  void setContentDisposition(string disposition, string[string] params = null)
+  void setContentDisposition(string disposition, string[string] params = null) nothrow
   {
     const(char)* _disposition = disposition.toCString(No.Alloc);
     auto _params = gHashTableFromD!(string, string)(params);
@@ -495,7 +502,7 @@ class MessageHeaders : gobject.boxed.Boxed
       Params:
         contentLength = the message body length
   */
-  void setContentLength(long contentLength)
+  void setContentLength(long contentLength) nothrow
   {
     soup_message_headers_set_content_length(cast(SoupMessageHeaders*)this._cPtr, contentLength);
   }
@@ -515,7 +522,7 @@ class MessageHeaders : gobject.boxed.Boxed
         end = the end of the range
         totalLength = the total length of the resource, or -1 if unknown
   */
-  void setContentRange(long start, long end, long totalLength)
+  void setContentRange(long start, long end, long totalLength) nothrow
   {
     soup_message_headers_set_content_range(cast(SoupMessageHeaders*)this._cPtr, start, end, totalLength);
   }
@@ -529,7 +536,7 @@ class MessageHeaders : gobject.boxed.Boxed
         contentType = the MIME type
         params = additional parameters
   */
-  void setContentType(string contentType, string[string] params = null)
+  void setContentType(string contentType, string[string] params = null) nothrow
   {
     const(char)* _contentType = contentType.toCString(No.Alloc);
     auto _params = gHashTableFromD!(string, string)(params);
@@ -546,7 +553,7 @@ class MessageHeaders : gobject.boxed.Boxed
       Params:
         encoding = a #SoupEncoding
   */
-  void setEncoding(soup.types.Encoding encoding)
+  void setEncoding(soup.types.Encoding encoding) nothrow
   {
     soup_message_headers_set_encoding(cast(SoupMessageHeaders*)this._cPtr, encoding);
   }
@@ -566,7 +573,7 @@ class MessageHeaders : gobject.boxed.Boxed
       Params:
         expectations = the expectations to set
   */
-  void setExpectations(soup.types.Expectation expectations)
+  void setExpectations(soup.types.Expectation expectations) nothrow
   {
     soup_message_headers_set_expectations(cast(SoupMessageHeaders*)this._cPtr, expectations);
   }
@@ -583,7 +590,7 @@ class MessageHeaders : gobject.boxed.Boxed
         start = the start of the range to request
         end = the end of the range to request
   */
-  void setRange(long start, long end)
+  void setRange(long start, long end) nothrow
   {
     soup_message_headers_set_range(cast(SoupMessageHeaders*)this._cPtr, start, end);
   }
@@ -598,7 +605,7 @@ class MessageHeaders : gobject.boxed.Boxed
         ranges = an array of #SoupRange
         length = the length of range
   */
-  void setRanges(soup.types.Range ranges, int length)
+  void setRanges(soup.types.Range ranges, int length) nothrow
   {
     soup_message_headers_set_ranges(cast(SoupMessageHeaders*)this._cPtr, &ranges, length);
   }

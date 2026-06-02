@@ -62,26 +62,26 @@ class AudioCdSrc : gstbase.push_src.PushSrc, gst.urihandler.URIHandler
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_cd_src_get_type != &gidSymbolNotFound ? gst_audio_cd_src_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AudioCdSrc self()
+  override AudioCdSrc self() nothrow
   {
     return this;
   }
@@ -90,43 +90,43 @@ class AudioCdSrc : gstbase.push_src.PushSrc, gst.urihandler.URIHandler
       Get builder for [gstaudio.audio_cd_src.AudioCdSrc]
       Returns: New builder object
   */
-  static AudioCdSrcGidBuilder builder()
+  static AudioCdSrcGidBuilder builder() nothrow
   {
     return new AudioCdSrcGidBuilder;
   }
 
   /** */
-  @property string device()
+  @property string device() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("device");
   }
 
   /** */
-  @property void device(string propval)
+  @property void device(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("device", propval);
   }
 
   /** */
-  @property gstaudio.types.AudioCdSrcMode mode()
+  @property gstaudio.types.AudioCdSrcMode mode() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gstaudio.types.AudioCdSrcMode)("mode");
   }
 
   /** */
-  @property void mode(gstaudio.types.AudioCdSrcMode propval)
+  @property void mode(gstaudio.types.AudioCdSrcMode propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gstaudio.types.AudioCdSrcMode)("mode", propval);
   }
 
   /** */
-  @property uint track()
+  @property uint track() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("track");
   }
 
   /** */
-  @property void track(uint propval)
+  @property void track(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("track", propval);
   }
@@ -143,7 +143,7 @@ class AudioCdSrc : gstbase.push_src.PushSrc, gst.urihandler.URIHandler
         track = address of #GstAudioCdSrcTrack to add
       Returns: FALSE on error, otherwise TRUE.
   */
-  bool addTrack(gstaudio.audio_cd_src_track.AudioCdSrcTrack track)
+  bool addTrack(gstaudio.audio_cd_src_track.AudioCdSrcTrack track) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_cd_src_add_track(cast(GstAudioCdSrc*)this._cPtr, track ? cast(GstAudioCdSrcTrack*)track._cPtr : null);
@@ -158,19 +158,19 @@ class AudioCdSrcGidBuilderImpl(T) : gstbase.push_src.PushSrcGidBuilderImpl!T, gs
   mixin URIHandlerGidBuilderT!();
 
   /** */
-  T device(string propval)
+  T device(string propval) nothrow
   {
     return setProperty("device", propval);
   }
 
   /** */
-  T mode(gstaudio.types.AudioCdSrcMode propval)
+  T mode(gstaudio.types.AudioCdSrcMode propval) nothrow
   {
     return setProperty("mode", propval);
   }
 
   /** */
-  T track(uint propval)
+  T track(uint propval) nothrow
   {
     return setProperty("track", propval);
   }
@@ -183,7 +183,7 @@ final class AudioCdSrcGidBuilder : AudioCdSrcGidBuilderImpl!AudioCdSrcGidBuilder
       Create object from builder.
       Returns: New object
   */
-  AudioCdSrc build()
+  AudioCdSrc build() nothrow
   {
     return new AudioCdSrc(cast(void*)createGObject(AudioCdSrc._getGType), No.Take);
   }

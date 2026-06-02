@@ -17,7 +17,7 @@ struct ResolverError
       Gets the #GResolver Error Quark.
       Returns: a #GQuark.
   */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = g_resolver_error_quark();
@@ -27,12 +27,12 @@ struct ResolverError
 
 class ResolveException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gio.resolver_error.ResolverError.quark, cast(int)code, msg);
   }

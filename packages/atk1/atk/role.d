@@ -19,7 +19,7 @@ struct Role
       Returns: the #AtkRole enumerated type corresponding to the specified name,
                  or #ATK_ROLE_INVALID if no matching role is found.
   */
-  static atk.types.Role forName(string name)
+  static atk.types.Role forName(string name) nothrow
   {
     AtkRole _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -35,7 +35,7 @@ struct Role
         role = The #AtkRole whose localized name is required
       Returns: the localized string describing the AtkRole
   */
-  static string getLocalizedName(atk.types.Role role)
+  static string getLocalizedName(atk.types.Role role) nothrow
   {
     const(char)* _cretval;
     _cretval = atk_role_get_localized_name(role);
@@ -50,7 +50,7 @@ struct Role
         role = The #AtkRole whose name is required
       Returns: the string describing the AtkRole
   */
-  static string getName(atk.types.Role role)
+  static string getName(atk.types.Role role) nothrow
   {
     const(char)* _cretval;
     _cretval = atk_role_get_name(role);
@@ -71,7 +71,7 @@ struct Role
         suitable role for a specific object defined at #AtkRole, please
         submit a bug in order to add a new role to the specification.
   */
-  static atk.types.Role register(string name)
+  static atk.types.Role register(string name) nothrow
   {
     AtkRole _cretval;
     const(char)* _name = name.toCString(No.Alloc);

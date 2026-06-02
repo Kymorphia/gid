@@ -9,7 +9,7 @@ import gstglegl.types;
 
 
 /** */
-string eglGetErrorString(int err)
+string eglGetErrorString(int err) nothrow
 {
   const(char)* _cretval;
   _cretval = gst_egl_get_error_string(err);
@@ -18,7 +18,7 @@ string eglGetErrorString(int err)
 }
 
 /** */
-bool isGlMemoryEgl(gst.memory.Memory mem)
+bool isGlMemoryEgl(gst.memory.Memory mem) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_is_gl_memory_egl(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);

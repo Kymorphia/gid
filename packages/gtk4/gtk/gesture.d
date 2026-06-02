@@ -110,26 +110,26 @@ class Gesture : gtk.event_controller.EventController
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gesture_get_type != &gidSymbolNotFound ? gtk_gesture_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Gesture self()
+  override Gesture self() nothrow
   {
     return this;
   }
@@ -138,7 +138,7 @@ class Gesture : gtk.event_controller.EventController
       Get builder for [gtk.gesture.Gesture]
       Returns: New builder object
   */
-  static GestureGidBuilder builder()
+  static GestureGidBuilder builder() nothrow
   {
     return new GestureGidBuilder;
   }
@@ -148,7 +148,7 @@ class Gesture : gtk.event_controller.EventController
       Returns: The number of touch points that trigger
         recognition on this gesture.
   */
-  @property uint nPoints()
+  @property uint nPoints() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-points");
   }
@@ -170,7 +170,7 @@ class Gesture : gtk.event_controller.EventController
         rect = bounding box containing all active touches.
       Returns: true if there are active touches, false otherwise
   */
-  bool getBoundingBox(out gdk.rectangle.Rectangle rect)
+  bool getBoundingBox(out gdk.rectangle.Rectangle rect) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_gesture_get_bounding_box(cast(GtkGesture*)this._cPtr, cast(GdkRectangle*)&rect);
@@ -189,7 +189,7 @@ class Gesture : gtk.event_controller.EventController
         y = Y coordinate for the bounding box center
       Returns: false if no active touches are present, true otherwise
   */
-  bool getBoundingBoxCenter(out double x, out double y)
+  bool getBoundingBoxCenter(out double x, out double y) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_gesture_get_bounding_box_center(cast(GtkGesture*)this._cPtr, cast(double*)&x, cast(double*)&y);
@@ -203,7 +203,7 @@ class Gesture : gtk.event_controller.EventController
       This returns null if the gesture is not being interacted.
       Returns: a [gdk.device.Device]
   */
-  gdk.device.Device getDevice()
+  gdk.device.Device getDevice() nothrow
   {
     GdkDevice* _cretval;
     _cretval = gtk_gesture_get_device(cast(GtkGesture*)this._cPtr);
@@ -216,7 +216,7 @@ class Gesture : gtk.event_controller.EventController
       Returns: The list
           of [gtk.gesture.Gesture]s, free with [glib.list.List.free]
   */
-  gtk.gesture.Gesture[] getGroup()
+  gtk.gesture.Gesture[] getGroup() nothrow
   {
     GList* _cretval;
     _cretval = gtk_gesture_get_group(cast(GtkGesture*)this._cPtr);
@@ -235,7 +235,7 @@ class Gesture : gtk.event_controller.EventController
         sequence = a [gdk.event_sequence.EventSequence]
       Returns: The last event from sequence
   */
-  gdk.event.Event getLastEvent(gdk.event_sequence.EventSequence sequence = null)
+  gdk.event.Event getLastEvent(gdk.event_sequence.EventSequence sequence = null) nothrow
   {
     GdkEvent* _cretval;
     _cretval = gtk_gesture_get_last_event(cast(GtkGesture*)this._cPtr, sequence ? cast(GdkEventSequence*)sequence._cPtr(No.Dup) : null);
@@ -247,7 +247,7 @@ class Gesture : gtk.event_controller.EventController
       Returns the [gdk.event_sequence.EventSequence] that was last updated on gesture.
       Returns: The last updated sequence
   */
-  gdk.event_sequence.EventSequence getLastUpdatedSequence()
+  gdk.event_sequence.EventSequence getLastUpdatedSequence() nothrow
   {
     GdkEventSequence* _cretval;
     _cretval = gtk_gesture_get_last_updated_sequence(cast(GtkGesture*)this._cPtr);
@@ -268,7 +268,7 @@ class Gesture : gtk.event_controller.EventController
         y = return location for Y axis of the sequence coordinates
       Returns: true if sequence is currently interpreted
   */
-  bool getPoint(gdk.event_sequence.EventSequence sequence, out double x, out double y)
+  bool getPoint(gdk.event_sequence.EventSequence sequence, out double x, out double y) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_gesture_get_point(cast(GtkGesture*)this._cPtr, sequence ? cast(GdkEventSequence*)sequence._cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
@@ -282,7 +282,7 @@ class Gesture : gtk.event_controller.EventController
         sequence = a [gdk.event_sequence.EventSequence]
       Returns: The sequence state in gesture
   */
-  gtk.types.EventSequenceState getSequenceState(gdk.event_sequence.EventSequence sequence)
+  gtk.types.EventSequenceState getSequenceState(gdk.event_sequence.EventSequence sequence) nothrow
   {
     GtkEventSequenceState _cretval;
     _cretval = gtk_gesture_get_sequence_state(cast(GtkGesture*)this._cPtr, sequence ? cast(GdkEventSequence*)sequence._cPtr(No.Dup) : null);
@@ -298,7 +298,7 @@ class Gesture : gtk.event_controller.EventController
           not be freed or modified, the list itself must be deleted
           through [glib.list.List.free]
   */
-  gdk.event_sequence.EventSequence[] getSequences()
+  gdk.event_sequence.EventSequence[] getSequences() nothrow
   {
     GList* _cretval;
     _cretval = gtk_gesture_get_sequences(cast(GtkGesture*)this._cPtr);
@@ -328,7 +328,7 @@ class Gesture : gtk.event_controller.EventController
       Params:
         gesture = a [gtk.gesture.Gesture]
   */
-  void group(gtk.gesture.Gesture gesture)
+  void group(gtk.gesture.Gesture gesture) nothrow
   {
     gtk_gesture_group(cast(GtkGesture*)this._cPtr, gesture ? cast(GtkGesture*)gesture._cPtr(No.Dup) : null);
   }
@@ -341,7 +341,7 @@ class Gesture : gtk.event_controller.EventController
         sequence = a [gdk.event_sequence.EventSequence]
       Returns: true if gesture is handling sequence, false otherwise
   */
-  bool handlesSequence(gdk.event_sequence.EventSequence sequence = null)
+  bool handlesSequence(gdk.event_sequence.EventSequence sequence = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_gesture_handles_sequence(cast(GtkGesture*)this._cPtr, sequence ? cast(GdkEventSequence*)sequence._cPtr(No.Dup) : null);
@@ -355,7 +355,7 @@ class Gesture : gtk.event_controller.EventController
       interacting with it.
       Returns: true if gesture is active
   */
-  bool isActive()
+  bool isActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_gesture_is_active(cast(GtkGesture*)this._cPtr);
@@ -369,7 +369,7 @@ class Gesture : gtk.event_controller.EventController
         other = another [gtk.gesture.Gesture]
       Returns: whether the gestures are grouped
   */
-  bool isGroupedWith(gtk.gesture.Gesture other)
+  bool isGroupedWith(gtk.gesture.Gesture other) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_gesture_is_grouped_with(cast(GtkGesture*)this._cPtr, other ? cast(GtkGesture*)other._cPtr(No.Dup) : null);
@@ -383,7 +383,7 @@ class Gesture : gtk.event_controller.EventController
       touch sequences as required by gesture.
       Returns: true if gesture is recognized
   */
-  bool isRecognized()
+  bool isRecognized() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_gesture_is_recognized(cast(GtkGesture*)this._cPtr);
@@ -442,7 +442,7 @@ class Gesture : gtk.event_controller.EventController
   
       Deprecated: Use [gtk.gesture.Gesture.setState]
   */
-  bool setSequenceState(gdk.event_sequence.EventSequence sequence, gtk.types.EventSequenceState state)
+  bool setSequenceState(gdk.event_sequence.EventSequence sequence, gtk.types.EventSequenceState state) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_gesture_set_sequence_state(cast(GtkGesture*)this._cPtr, sequence ? cast(GdkEventSequence*)sequence._cPtr(No.Dup) : null, state);
@@ -499,7 +499,7 @@ class Gesture : gtk.event_controller.EventController
       Returns: true if the state of at least one sequence
           was changed successfully
   */
-  bool setState(gtk.types.EventSequenceState state)
+  bool setState(gtk.types.EventSequenceState state) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_gesture_set_state(cast(GtkGesture*)this._cPtr, state);
@@ -509,7 +509,7 @@ class Gesture : gtk.event_controller.EventController
   /**
       Separates gesture into an isolated group.
   */
-  void ungroup()
+  void ungroup() nothrow
   {
     gtk_gesture_ungroup(cast(GtkGesture*)this._cPtr);
   }
@@ -540,14 +540,14 @@ class Gesture : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectBegin(T)(T callback, Flag!"After" after = No.After)
+  gulong connectBegin(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_sequence.EventSequence)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.gesture.Gesture)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -559,7 +559,14 @@ class Gesture : gtk.event_controller.EventController
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.gesture.Gesture.begin");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -592,14 +599,14 @@ class Gesture : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCancel(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCancel(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_sequence.EventSequence)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.gesture.Gesture)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -611,7 +618,14 @@ class Gesture : gtk.event_controller.EventController
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.gesture.Gesture.cancel");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -644,14 +658,14 @@ class Gesture : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEnd(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_sequence.EventSequence)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.gesture.Gesture)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -663,7 +677,14 @@ class Gesture : gtk.event_controller.EventController
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.gesture.Gesture.end");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -692,7 +713,7 @@ class Gesture : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSequenceStateChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSequenceStateChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_sequence.EventSequence)))
@@ -700,7 +721,7 @@ class Gesture : gtk.event_controller.EventController
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.gesture.Gesture)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -715,7 +736,14 @@ class Gesture : gtk.event_controller.EventController
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.gesture.Gesture.sequenceStateChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -741,14 +769,14 @@ class Gesture : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUpdate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUpdate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_sequence.EventSequence)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.gesture.Gesture)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -760,7 +788,14 @@ class Gesture : gtk.event_controller.EventController
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.gesture.Gesture.update");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -779,7 +814,7 @@ class GestureGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderI
           recognition on this gesture.
       Returns: Builder instance for fluent chaining
   */
-  T nPoints(uint propval)
+  T nPoints(uint propval) nothrow
   {
     return setProperty("n-points", propval);
   }
@@ -792,7 +827,7 @@ final class GestureGidBuilder : GestureGidBuilderImpl!GestureGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Gesture build()
+  Gesture build() nothrow
   {
     return new Gesture(cast(void*)createGObject(Gesture._getGType), No.Take);
   }

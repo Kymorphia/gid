@@ -14,7 +14,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libpanel-1.so.1"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // ActionMuxer
   GType function() c_panel_action_muxer_get_type; ///

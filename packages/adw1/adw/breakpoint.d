@@ -66,26 +66,26 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_breakpoint_get_type != &gidSymbolNotFound ? adw_breakpoint_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Breakpoint self()
+  override Breakpoint self() nothrow
   {
     return this;
   }
@@ -94,7 +94,7 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Get builder for [adw.breakpoint.Breakpoint]
       Returns: New builder object
   */
-  static BreakpointGidBuilder builder()
+  static BreakpointGidBuilder builder() nothrow
   {
     return new BreakpointGidBuilder;
   }
@@ -103,7 +103,7 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Get `condition` property.
       Returns: The breakpoint's condition.
   */
-  @property adw.breakpoint_condition.BreakpointCondition condition()
+  @property adw.breakpoint_condition.BreakpointCondition condition() nothrow
   {
     return getCondition();
   }
@@ -113,7 +113,7 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         propval = The breakpoint's condition.
   */
-  @property void condition(adw.breakpoint_condition.BreakpointCondition propval)
+  @property void condition(adw.breakpoint_condition.BreakpointCondition propval) nothrow
   {
     setCondition(propval);
   }
@@ -127,7 +127,7 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
         condition = the condition
       Returns: the newly created [adw.breakpoint.Breakpoint]
   */
-  this(adw.breakpoint_condition.BreakpointCondition condition)
+  this(adw.breakpoint_condition.BreakpointCondition condition) nothrow
   {
     AdwBreakpoint* _cretval;
     _cretval = adw_breakpoint_new(condition ? cast(AdwBreakpointCondition*)condition._cPtr(Yes.Dup) : null);
@@ -177,7 +177,7 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
         property = the target property
         value = the value to set
   */
-  void addSetter(gobject.object.ObjectWrap object, string property, gobject.value.Value value = null)
+  void addSetter(gobject.object.ObjectWrap object, string property, gobject.value.Value value = null) nothrow
   {
     const(char)* _property = property.toCString(No.Alloc);
     adw_breakpoint_add_setter(cast(AdwBreakpoint*)this._cPtr, object ? cast(GObject*)object._cPtr(No.Dup) : null, _property, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -197,7 +197,7 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
         names = setter target properties
         values = setter values
   */
-  void addSetters(gobject.object.ObjectWrap[] objects, string[] names, gobject.value.Value[] values)
+  void addSetters(gobject.object.ObjectWrap[] objects, string[] names, gobject.value.Value[] values) nothrow
   {
     int _nSetters;
     if (objects)
@@ -231,7 +231,7 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Gets the condition for self.
       Returns: the condition
   */
-  adw.breakpoint_condition.BreakpointCondition getCondition()
+  adw.breakpoint_condition.BreakpointCondition getCondition() nothrow
   {
     AdwBreakpointCondition* _cretval;
     _cretval = adw_breakpoint_get_condition(cast(AdwBreakpoint*)this._cPtr);
@@ -245,7 +245,7 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         condition = the new condition
   */
-  void setCondition(adw.breakpoint_condition.BreakpointCondition condition = null)
+  void setCondition(adw.breakpoint_condition.BreakpointCondition condition = null) nothrow
   {
     adw_breakpoint_set_condition(cast(AdwBreakpoint*)this._cPtr, condition ? cast(AdwBreakpointCondition*)condition._cPtr(No.Dup) : null);
   }
@@ -267,13 +267,13 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectApply(T)(T callback, Flag!"After" after = No.After)
+  gulong connectApply(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.breakpoint.Breakpoint)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -282,7 +282,14 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.breakpoint.Breakpoint.apply");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -306,13 +313,13 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUnapply(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUnapply(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.breakpoint.Breakpoint)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -321,7 +328,14 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.breakpoint.Breakpoint.unapply");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -341,7 +355,7 @@ class BreakpointGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
         propval = The breakpoint's condition.
       Returns: Builder instance for fluent chaining
   */
-  T condition(adw.breakpoint_condition.BreakpointCondition propval)
+  T condition(adw.breakpoint_condition.BreakpointCondition propval) nothrow
   {
     return setProperty("condition", propval);
   }
@@ -354,7 +368,7 @@ final class BreakpointGidBuilder : BreakpointGidBuilderImpl!BreakpointGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Breakpoint build()
+  Breakpoint build() nothrow
   {
     return new Breakpoint(cast(void*)createGObject(Breakpoint._getGType), Yes.Take);
   }

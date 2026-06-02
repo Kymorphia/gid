@@ -22,26 +22,26 @@ class SeekableInputStream : arrow.input_stream.InputStream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_seekable_input_stream_get_type != &gidSymbolNotFound ? garrow_seekable_input_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SeekableInputStream self()
+  override SeekableInputStream self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class SeekableInputStream : arrow.input_stream.InputStream
       Get builder for [arrow.seekable_input_stream.SeekableInputStream]
       Returns: New builder object
   */
-  static SeekableInputStreamGidBuilder builder()
+  static SeekableInputStreamGidBuilder builder() nothrow
   {
     return new SeekableInputStreamGidBuilder;
   }
@@ -67,7 +67,7 @@ class SeekableInputStream : arrow.input_stream.InputStream
   }
 
   /** */
-  bool getSupportZeroCopy()
+  bool getSupportZeroCopy() nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_seekable_input_stream_get_support_zero_copy(cast(GArrowSeekableInputStream*)this._cPtr);
@@ -124,7 +124,7 @@ final class SeekableInputStreamGidBuilder : SeekableInputStreamGidBuilderImpl!Se
       Create object from builder.
       Returns: New object
   */
-  SeekableInputStream build()
+  SeekableInputStream build() nothrow
   {
     return new SeekableInputStream(cast(void*)createGObject(SeekableInputStream._getGType), No.Take);
   }

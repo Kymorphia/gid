@@ -122,26 +122,26 @@ class GLArea : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gl_area_get_type != &gidSymbolNotFound ? gtk_gl_area_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLArea self()
+  override GLArea self() nothrow
   {
     return this;
   }
@@ -150,7 +150,7 @@ class GLArea : gtk.widget.Widget
       Get builder for [gtk.glarea.GLArea]
       Returns: New builder object
   */
-  static GLAreaGidBuilder builder()
+  static GLAreaGidBuilder builder() nothrow
   {
     return new GLAreaGidBuilder;
   }
@@ -167,7 +167,7 @@ class GLArea : gtk.widget.Widget
         This mode is useful when the scene changes seldomly, but takes a long time
         to redraw.
   */
-  @property bool autoRender()
+  @property bool autoRender() nothrow
   {
     return getAutoRender();
   }
@@ -185,7 +185,7 @@ class GLArea : gtk.widget.Widget
           This mode is useful when the scene changes seldomly, but takes a long time
           to redraw.
   */
-  @property void autoRender(bool propval)
+  @property void autoRender(bool propval) nothrow
   {
     setAutoRender(propval);
   }
@@ -198,7 +198,7 @@ class GLArea : gtk.widget.Widget
         instance. If you need to render with other kinds of buffers (stencil,
         depth, etc), use render buffers.
   */
-  @property gdk.glcontext.GLContext context()
+  @property gdk.glcontext.GLContext context() nothrow
   {
     return getContext();
   }
@@ -212,7 +212,7 @@ class GLArea : gtk.widget.Widget
         If set to false there will be no alpha channel, and the buffer will fully
         replace anything below the widget.
   */
-  @property bool hasAlpha()
+  @property bool hasAlpha() nothrow
   {
     return getHasAlpha();
   }
@@ -227,7 +227,7 @@ class GLArea : gtk.widget.Widget
           If set to false there will be no alpha channel, and the buffer will fully
           replace anything below the widget.
   */
-  @property void hasAlpha(bool propval)
+  @property void hasAlpha(bool propval) nothrow
   {
     setHasAlpha(propval);
   }
@@ -237,7 +237,7 @@ class GLArea : gtk.widget.Widget
       Returns: If set to true the widget will allocate and enable a depth buffer for the
         target framebuffer.
   */
-  @property bool hasDepthBuffer()
+  @property bool hasDepthBuffer() nothrow
   {
     return getHasDepthBuffer();
   }
@@ -248,7 +248,7 @@ class GLArea : gtk.widget.Widget
         propval = If set to true the widget will allocate and enable a depth buffer for the
           target framebuffer.
   */
-  @property void hasDepthBuffer(bool propval)
+  @property void hasDepthBuffer(bool propval) nothrow
   {
     setHasDepthBuffer(propval);
   }
@@ -258,7 +258,7 @@ class GLArea : gtk.widget.Widget
       Returns: If set to true the widget will allocate and enable a stencil buffer for the
         target framebuffer.
   */
-  @property bool hasStencilBuffer()
+  @property bool hasStencilBuffer() nothrow
   {
     return getHasStencilBuffer();
   }
@@ -269,7 +269,7 @@ class GLArea : gtk.widget.Widget
         propval = If set to true the widget will allocate and enable a stencil buffer for the
           target framebuffer.
   */
-  @property void hasStencilBuffer(bool propval)
+  @property void hasStencilBuffer(bool propval) nothrow
   {
     setHasStencilBuffer(propval);
   }
@@ -281,7 +281,7 @@ class GLArea : gtk.widget.Widget
         
         See also: [gdk.glcontext.GLContext.setUseEs]
   */
-  @property bool useEs()
+  @property bool useEs() nothrow
   {
     return getUseEs();
   }
@@ -294,7 +294,7 @@ class GLArea : gtk.widget.Widget
           
           See also: [gdk.glcontext.GLContext.setUseEs]
   */
-  @property void useEs(bool propval)
+  @property void useEs(bool propval) nothrow
   {
     setUseEs(propval);
   }
@@ -303,7 +303,7 @@ class GLArea : gtk.widget.Widget
       Creates a new #GtkGLArea widget.
       Returns: a new #GtkGLArea
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_gl_area_new();
@@ -319,7 +319,7 @@ class GLArea : gtk.widget.Widget
       #GtkGLArea::render signal, and doesn't normally need to be called
       by application code.
   */
-  void attachBuffers()
+  void attachBuffers() nothrow
   {
     gtk_gl_area_attach_buffers(cast(GtkGLArea*)this._cPtr);
   }
@@ -328,7 +328,7 @@ class GLArea : gtk.widget.Widget
       Returns whether the area is in auto render mode or not.
       Returns: true if the area is auto rendering, false otherwise
   */
-  bool getAutoRender()
+  bool getAutoRender() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_gl_area_get_auto_render(cast(GtkGLArea*)this._cPtr);
@@ -339,7 +339,7 @@ class GLArea : gtk.widget.Widget
       Retrieves the #GdkGLContext used by area.
       Returns: the #GdkGLContext
   */
-  gdk.glcontext.GLContext getContext()
+  gdk.glcontext.GLContext getContext() nothrow
   {
     GdkGLContext* _cretval;
     _cretval = gtk_gl_area_get_context(cast(GtkGLArea*)this._cPtr);
@@ -351,7 +351,7 @@ class GLArea : gtk.widget.Widget
       Gets the current error set on the area.
       Returns: the #GError or null
   */
-  glib.error.ErrorWrap getError()
+  glib.error.ErrorWrap getError() nothrow
   {
     GError* _cretval;
     _cretval = gtk_gl_area_get_error(cast(GtkGLArea*)this._cPtr);
@@ -363,7 +363,7 @@ class GLArea : gtk.widget.Widget
       Returns whether the area has an alpha component.
       Returns: true if the area has an alpha component, false otherwise
   */
-  bool getHasAlpha()
+  bool getHasAlpha() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_gl_area_get_has_alpha(cast(GtkGLArea*)this._cPtr);
@@ -374,7 +374,7 @@ class GLArea : gtk.widget.Widget
       Returns whether the area has a depth buffer.
       Returns: true if the area has a depth buffer, false otherwise
   */
-  bool getHasDepthBuffer()
+  bool getHasDepthBuffer() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_gl_area_get_has_depth_buffer(cast(GtkGLArea*)this._cPtr);
@@ -385,7 +385,7 @@ class GLArea : gtk.widget.Widget
       Returns whether the area has a stencil buffer.
       Returns: true if the area has a stencil buffer, false otherwise
   */
-  bool getHasStencilBuffer()
+  bool getHasStencilBuffer() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_gl_area_get_has_stencil_buffer(cast(GtkGLArea*)this._cPtr);
@@ -400,7 +400,7 @@ class GLArea : gtk.widget.Widget
         major = return location for the required major version
         minor = return location for the required minor version
   */
-  void getRequiredVersion(out int major, out int minor)
+  void getRequiredVersion(out int major, out int minor) nothrow
   {
     gtk_gl_area_get_required_version(cast(GtkGLArea*)this._cPtr, cast(int*)&major, cast(int*)&minor);
   }
@@ -410,7 +410,7 @@ class GLArea : gtk.widget.Widget
       Returns: true if the #GtkGLArea should create an OpenGL ES context
           and false otherwise
   */
-  bool getUseEs()
+  bool getUseEs() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_gl_area_get_use_es(cast(GtkGLArea*)this._cPtr);
@@ -425,7 +425,7 @@ class GLArea : gtk.widget.Widget
       #GtkGLArea::render signal, and doesn't normally need to be called
       by application code.
   */
-  void makeCurrent()
+  void makeCurrent() nothrow
   {
     gtk_gl_area_make_current(cast(GtkGLArea*)this._cPtr);
   }
@@ -439,7 +439,7 @@ class GLArea : gtk.widget.Widget
       been called with a false value. The default behaviour is to
       emit #GtkGLArea::render on each draw.
   */
-  void queueRender()
+  void queueRender() nothrow
   {
     gtk_gl_area_queue_render(cast(GtkGLArea*)this._cPtr);
   }
@@ -458,7 +458,7 @@ class GLArea : gtk.widget.Widget
       Params:
         autoRender = a boolean
   */
-  void setAutoRender(bool autoRender)
+  void setAutoRender(bool autoRender) nothrow
   {
     gtk_gl_area_set_auto_render(cast(GtkGLArea*)this._cPtr, autoRender);
   }
@@ -471,7 +471,7 @@ class GLArea : gtk.widget.Widget
       Params:
         error = a new #GError, or null to unset the error
   */
-  void setError(glib.error.ErrorWrap error = null)
+  void setError(glib.error.ErrorWrap error = null) nothrow
   {
     gtk_gl_area_set_error(cast(GtkGLArea*)this._cPtr, error ? cast(const(GError)*)error._cPtr : null);
   }
@@ -487,7 +487,7 @@ class GLArea : gtk.widget.Widget
       Params:
         hasAlpha = true to add an alpha component
   */
-  void setHasAlpha(bool hasAlpha)
+  void setHasAlpha(bool hasAlpha) nothrow
   {
     gtk_gl_area_set_has_alpha(cast(GtkGLArea*)this._cPtr, hasAlpha);
   }
@@ -500,7 +500,7 @@ class GLArea : gtk.widget.Widget
       Params:
         hasDepthBuffer = true to add a depth buffer
   */
-  void setHasDepthBuffer(bool hasDepthBuffer)
+  void setHasDepthBuffer(bool hasDepthBuffer) nothrow
   {
     gtk_gl_area_set_has_depth_buffer(cast(GtkGLArea*)this._cPtr, hasDepthBuffer);
   }
@@ -513,7 +513,7 @@ class GLArea : gtk.widget.Widget
       Params:
         hasStencilBuffer = true to add a stencil buffer
   */
-  void setHasStencilBuffer(bool hasStencilBuffer)
+  void setHasStencilBuffer(bool hasStencilBuffer) nothrow
   {
     gtk_gl_area_set_has_stencil_buffer(cast(GtkGLArea*)this._cPtr, hasStencilBuffer);
   }
@@ -528,7 +528,7 @@ class GLArea : gtk.widget.Widget
         major = the major version
         minor = the minor version
   */
-  void setRequiredVersion(int major, int minor)
+  void setRequiredVersion(int major, int minor) nothrow
   {
     gtk_gl_area_set_required_version(cast(GtkGLArea*)this._cPtr, major, minor);
   }
@@ -542,7 +542,7 @@ class GLArea : gtk.widget.Widget
       Params:
         useEs = whether to use OpenGL or OpenGL ES
   */
-  void setUseEs(bool useEs)
+  void setUseEs(bool useEs) nothrow
   {
     gtk_gl_area_set_use_es(cast(GtkGLArea*)this._cPtr, useEs);
   }
@@ -572,22 +572,30 @@ class GLArea : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCreateContext(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCreateContext(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T : gdk.glcontext.GLContext)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.glarea.GLArea)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gdk.glcontext.GLContext _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.glarea.GLArea.createContext");
+      }
 
       setVal!(gdk.glcontext.GLContext)(_returnValue, _retval);
     }
@@ -619,18 +627,19 @@ class GLArea : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRender(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRender(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.glcontext.GLContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.glarea.GLArea)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -638,7 +647,14 @@ class GLArea : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.glarea.GLArea.render");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -674,7 +690,7 @@ class GLArea : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectResize(T)(T callback, Flag!"After" after = No.After)
+  gulong connectResize(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -682,7 +698,7 @@ class GLArea : gtk.widget.Widget
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.glarea.GLArea)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -697,7 +713,14 @@ class GLArea : gtk.widget.Widget
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.glarea.GLArea.resize");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -724,7 +747,7 @@ class GLAreaGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           to redraw.
       Returns: Builder instance for fluent chaining
   */
-  T autoRender(bool propval)
+  T autoRender(bool propval) nothrow
   {
     return setProperty("auto-render", propval);
   }
@@ -740,7 +763,7 @@ class GLAreaGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           replace anything below the widget.
       Returns: Builder instance for fluent chaining
   */
-  T hasAlpha(bool propval)
+  T hasAlpha(bool propval) nothrow
   {
     return setProperty("has-alpha", propval);
   }
@@ -752,7 +775,7 @@ class GLAreaGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           target framebuffer.
       Returns: Builder instance for fluent chaining
   */
-  T hasDepthBuffer(bool propval)
+  T hasDepthBuffer(bool propval) nothrow
   {
     return setProperty("has-depth-buffer", propval);
   }
@@ -764,7 +787,7 @@ class GLAreaGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           target framebuffer.
       Returns: Builder instance for fluent chaining
   */
-  T hasStencilBuffer(bool propval)
+  T hasStencilBuffer(bool propval) nothrow
   {
     return setProperty("has-stencil-buffer", propval);
   }
@@ -778,7 +801,7 @@ class GLAreaGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           See also: [gdk.glcontext.GLContext.setUseEs]
       Returns: Builder instance for fluent chaining
   */
-  T useEs(bool propval)
+  T useEs(bool propval) nothrow
   {
     return setProperty("use-es", propval);
   }
@@ -791,7 +814,7 @@ final class GLAreaGidBuilder : GLAreaGidBuilderImpl!GLAreaGidBuilder
       Create object from builder.
       Returns: New object
   */
-  GLArea build()
+  GLArea build() nothrow
   {
     return new GLArea(cast(void*)createGObject(GLArea._getGType), No.Take);
   }

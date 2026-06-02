@@ -14,11 +14,8 @@ class TextAppearance
   GtkTextAppearance _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.text_appearance.TextAppearance");
-
     _cInstance = *cast(GtkTextAppearance*)ptr;
 
     if (take)
@@ -26,7 +23,7 @@ class TextAppearance
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -35,7 +32,7 @@ class TextAppearance
       Get `bgColor` field.
       Returns: Background #GdkColor.
   */
-  @property gdk.color.Color bgColor()
+  @property gdk.color.Color bgColor() nothrow
   {
     return cToD!(gdk.color.Color)(cast(void*)&(cast(GtkTextAppearance*)this._cPtr).bgColor);
   }
@@ -45,7 +42,7 @@ class TextAppearance
       Params:
         propval = Background #GdkColor.
   */
-  @property void bgColor(gdk.color.Color propval)
+  @property void bgColor(gdk.color.Color propval) nothrow
   {
     (cast(GtkTextAppearance*)this._cPtr).bgColor = cast(GdkColor)propval;
   }
@@ -54,7 +51,7 @@ class TextAppearance
       Get `fgColor` field.
       Returns: Foreground #GdkColor.
   */
-  @property gdk.color.Color fgColor()
+  @property gdk.color.Color fgColor() nothrow
   {
     return cToD!(gdk.color.Color)(cast(void*)&(cast(GtkTextAppearance*)this._cPtr).fgColor);
   }
@@ -64,7 +61,7 @@ class TextAppearance
       Params:
         propval = Foreground #GdkColor.
   */
-  @property void fgColor(gdk.color.Color propval)
+  @property void fgColor(gdk.color.Color propval) nothrow
   {
     (cast(GtkTextAppearance*)this._cPtr).fgColor = cast(GdkColor)propval;
   }
@@ -73,7 +70,7 @@ class TextAppearance
       Get `rise` field.
       Returns: Super/subscript rise, can be negative.
   */
-  @property int rise()
+  @property int rise() nothrow
   {
     return (cast(GtkTextAppearance*)this._cPtr).rise;
   }
@@ -83,7 +80,7 @@ class TextAppearance
       Params:
         propval = Super/subscript rise, can be negative.
   */
-  @property void rise(int propval)
+  @property void rise(int propval) nothrow
   {
     (cast(GtkTextAppearance*)this._cPtr).rise = propval;
   }
@@ -92,7 +89,7 @@ class TextAppearance
       Get `underline` field.
       Returns: #PangoUnderline
   */
-  @property uint underline()
+  @property uint underline() nothrow
   {
     return (cast(GtkTextAppearance*)this._cPtr).underline;
   }
@@ -102,7 +99,7 @@ class TextAppearance
       Params:
         propval = #PangoUnderline
   */
-  @property void underline(uint propval)
+  @property void underline(uint propval) nothrow
   {
     (cast(GtkTextAppearance*)this._cPtr).underline = propval;
   }
@@ -111,7 +108,7 @@ class TextAppearance
       Get `strikethrough` field.
       Returns: Strikethrough style
   */
-  @property uint strikethrough()
+  @property uint strikethrough() nothrow
   {
     return (cast(GtkTextAppearance*)this._cPtr).strikethrough;
   }
@@ -121,7 +118,7 @@ class TextAppearance
       Params:
         propval = Strikethrough style
   */
-  @property void strikethrough(uint propval)
+  @property void strikethrough(uint propval) nothrow
   {
     (cast(GtkTextAppearance*)this._cPtr).strikethrough = propval;
   }
@@ -133,7 +130,7 @@ class TextAppearance
           the composite values struct; it’s true if any of the tags being
           composited had background stuff set.
   */
-  @property uint drawBg()
+  @property uint drawBg() nothrow
   {
     return (cast(GtkTextAppearance*)this._cPtr).drawBg;
   }
@@ -146,7 +143,7 @@ class TextAppearance
             the composite values struct; it’s true if any of the tags being
             composited had background stuff set.
   */
-  @property void drawBg(uint propval)
+  @property void drawBg(uint propval) nothrow
   {
     (cast(GtkTextAppearance*)this._cPtr).drawBg = propval;
   }
@@ -157,7 +154,7 @@ class TextAppearance
           out and rendering a paragraph; not when a #GtkTextAppearance is
           part of a #GtkTextAttributes.
   */
-  @property uint insideSelection()
+  @property uint insideSelection() nothrow
   {
     return (cast(GtkTextAppearance*)this._cPtr).insideSelection;
   }
@@ -169,7 +166,7 @@ class TextAppearance
             out and rendering a paragraph; not when a #GtkTextAppearance is
             part of a #GtkTextAttributes.
   */
-  @property void insideSelection(uint propval)
+  @property void insideSelection(uint propval) nothrow
   {
     (cast(GtkTextAppearance*)this._cPtr).insideSelection = propval;
   }
@@ -180,7 +177,7 @@ class TextAppearance
           out and rendering a paragraph; not when a #GtkTextAppearance is
           part of a #GtkTextAttributes.
   */
-  @property uint isText()
+  @property uint isText() nothrow
   {
     return (cast(GtkTextAppearance*)this._cPtr).isText;
   }
@@ -192,7 +189,7 @@ class TextAppearance
             out and rendering a paragraph; not when a #GtkTextAppearance is
             part of a #GtkTextAttributes.
   */
-  @property void isText(uint propval)
+  @property void isText(uint propval) nothrow
   {
     (cast(GtkTextAppearance*)this._cPtr).isText = propval;
   }

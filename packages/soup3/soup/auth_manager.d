@@ -36,26 +36,26 @@ class AuthManager : gobject.object.ObjectWrap, soup.session_feature.SessionFeatu
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_auth_manager_get_type != &gidSymbolNotFound ? soup_auth_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AuthManager self()
+  override AuthManager self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class AuthManager : gobject.object.ObjectWrap, soup.session_feature.SessionFeatu
       Get builder for [soup.auth_manager.AuthManager]
       Returns: New builder object
   */
-  static AuthManagerGidBuilder builder()
+  static AuthManagerGidBuilder builder() nothrow
   {
     return new AuthManagerGidBuilder;
   }
@@ -74,7 +74,7 @@ class AuthManager : gobject.object.ObjectWrap, soup.session_feature.SessionFeatu
   /**
       Clear all credentials cached by manager.
   */
-  void clearCachedCredentials()
+  void clearCachedCredentials() nothrow
   {
     soup_auth_manager_clear_cached_credentials(cast(SoupAuthManager*)this._cPtr);
   }
@@ -95,7 +95,7 @@ class AuthManager : gobject.object.ObjectWrap, soup.session_feature.SessionFeatu
         uri = the #GUri under which auth is to be used
         auth = the #SoupAuth to use
   */
-  void useAuth(glib.uri.Uri uri, soup.auth.Auth auth)
+  void useAuth(glib.uri.Uri uri, soup.auth.Auth auth) nothrow
   {
     soup_auth_manager_use_auth(cast(SoupAuthManager*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null, auth ? cast(SoupAuth*)auth._cPtr(No.Dup) : null);
   }
@@ -115,7 +115,7 @@ final class AuthManagerGidBuilder : AuthManagerGidBuilderImpl!AuthManagerGidBuil
       Create object from builder.
       Returns: New object
   */
-  AuthManager build()
+  AuthManager build() nothrow
   {
     return new AuthManager(cast(void*)createGObject(AuthManager._getGType), No.Take);
   }

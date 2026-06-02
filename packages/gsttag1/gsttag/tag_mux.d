@@ -31,26 +31,26 @@ class TagMux : gst.element.Element, gst.tag_setter.TagSetter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_tag_mux_get_type != &gidSymbolNotFound ? gst_tag_mux_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TagMux self()
+  override TagMux self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class TagMux : gst.element.Element, gst.tag_setter.TagSetter
       Get builder for [gsttag.tag_mux.TagMux]
       Returns: New builder object
   */
-  static TagMuxGidBuilder builder()
+  static TagMuxGidBuilder builder() nothrow
   {
     return new TagMuxGidBuilder;
   }
@@ -81,7 +81,7 @@ final class TagMuxGidBuilder : TagMuxGidBuilderImpl!TagMuxGidBuilder
       Create object from builder.
       Returns: New object
   */
-  TagMux build()
+  TagMux build() nothrow
   {
     return new TagMux(cast(void*)createGObject(TagMux._getGType), No.Take);
   }

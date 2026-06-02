@@ -15,11 +15,8 @@ class SqlOperation
   GdaSqlOperation _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.sql_operation.SqlOperation");
-
     _cInstance = *cast(GdaSqlOperation*)ptr;
 
     if (take)
@@ -27,19 +24,19 @@ class SqlOperation
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
 
   /** */
-  @property gda.types.SqlOperatorType operatorType()
+  @property gda.types.SqlOperatorType operatorType() nothrow
   {
     return cast(gda.types.SqlOperatorType)(cast(GdaSqlOperation*)this._cPtr).operatorType;
   }
 
   /** */
-  @property void operatorType(gda.types.SqlOperatorType propval)
+  @property void operatorType(gda.types.SqlOperatorType propval) nothrow
   {
     (cast(GdaSqlOperation*)this._cPtr).operatorType = cast(GdaSqlOperatorType)propval;
   }
@@ -49,7 +46,7 @@ class SqlOperation
       using [glib.global.gfree];
       Returns: a new string with the description of the operator or "null" in case operation is invalid.
   */
-  string serialize()
+  string serialize() nothrow
   {
     char* _cretval;
     _cretval = gda_sql_operation_serialize(cast(GdaSqlOperation*)this._cPtr);
@@ -64,7 +61,7 @@ class SqlOperation
         op = a #GdaSqlOperation structure
       Returns: #GdaSqlOperatorType
   */
-  static gda.types.SqlOperatorType operatorFromString(string op)
+  static gda.types.SqlOperatorType operatorFromString(string op) nothrow
   {
     GdaSqlOperatorType _cretval;
     const(char)* _op = op.toCString(No.Alloc);
@@ -81,7 +78,7 @@ class SqlOperation
         op = a #GdaSqlOperation structure
       Returns: a string with the operator's name or NULL in case op is invalid.
   */
-  static string operatorToString(gda.types.SqlOperatorType op)
+  static string operatorToString(gda.types.SqlOperatorType op) nothrow
   {
     const(char)* _cretval;
     _cretval = gda_sql_operation_operator_to_string(op);

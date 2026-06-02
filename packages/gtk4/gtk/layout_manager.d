@@ -65,26 +65,26 @@ class LayoutManager : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_layout_manager_get_type != &gidSymbolNotFound ? gtk_layout_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LayoutManager self()
+  override LayoutManager self() nothrow
   {
     return this;
   }
@@ -93,7 +93,7 @@ class LayoutManager : gobject.object.ObjectWrap
       Get builder for [gtk.layout_manager.LayoutManager]
       Returns: New builder object
   */
-  static LayoutManagerGidBuilder builder()
+  static LayoutManagerGidBuilder builder() nothrow
   {
     return new LayoutManagerGidBuilder;
   }
@@ -109,7 +109,7 @@ class LayoutManager : gobject.object.ObjectWrap
         height = the new height of the widget
         baseline = the baseline position of the widget, or -1
   */
-  void allocate(gtk.widget.Widget widget, int width, int height, int baseline)
+  void allocate(gtk.widget.Widget widget, int width, int height, int baseline) nothrow
   {
     gtk_layout_manager_allocate(cast(GtkLayoutManager*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, width, height, baseline);
   }
@@ -128,7 +128,7 @@ class LayoutManager : gobject.object.ObjectWrap
         child = a [gtk.widget.Widget]
       Returns: a [gtk.layout_child.LayoutChild]
   */
-  gtk.layout_child.LayoutChild getLayoutChild(gtk.widget.Widget child)
+  gtk.layout_child.LayoutChild getLayoutChild(gtk.widget.Widget child) nothrow
   {
     GtkLayoutChild* _cretval;
     _cretval = gtk_layout_manager_get_layout_child(cast(GtkLayoutManager*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -140,7 +140,7 @@ class LayoutManager : gobject.object.ObjectWrap
       Retrieves the request mode of manager.
       Returns: a [gtk.types.SizeRequestMode]
   */
-  gtk.types.SizeRequestMode getRequestMode()
+  gtk.types.SizeRequestMode getRequestMode() nothrow
   {
     GtkSizeRequestMode _cretval;
     _cretval = gtk_layout_manager_get_request_mode(cast(GtkLayoutManager*)this._cPtr);
@@ -152,7 +152,7 @@ class LayoutManager : gobject.object.ObjectWrap
       Retrieves the [gtk.widget.Widget] using the given [gtk.layout_manager.LayoutManager].
       Returns: a [gtk.widget.Widget]
   */
-  gtk.widget.Widget getWidget()
+  gtk.widget.Widget getWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_layout_manager_get_widget(cast(GtkLayoutManager*)this._cPtr);
@@ -166,7 +166,7 @@ class LayoutManager : gobject.object.ObjectWrap
       This function should be called by subclasses of [gtk.layout_manager.LayoutManager]
       in response to changes to their layout management policies.
   */
-  void layoutChanged()
+  void layoutChanged() nothrow
   {
     gtk_layout_manager_layout_changed(cast(GtkLayoutManager*)this._cPtr);
   }
@@ -196,7 +196,7 @@ class LayoutManager : gobject.object.ObjectWrap
         naturalBaseline = the baseline position for the
             natural size
   */
-  void measure(gtk.widget.Widget widget, gtk.types.Orientation orientation, int forSize, out int minimum, out int natural, out int minimumBaseline, out int naturalBaseline)
+  void measure(gtk.widget.Widget widget, gtk.types.Orientation orientation, int forSize, out int minimum, out int natural, out int minimumBaseline, out int naturalBaseline) nothrow
   {
     gtk_layout_manager_measure(cast(GtkLayoutManager*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, orientation, forSize, cast(int*)&minimum, cast(int*)&natural, cast(int*)&minimumBaseline, cast(int*)&naturalBaseline);
   }
@@ -214,7 +214,7 @@ final class LayoutManagerGidBuilder : LayoutManagerGidBuilderImpl!LayoutManagerG
       Create object from builder.
       Returns: New object
   */
-  LayoutManager build()
+  LayoutManager build() nothrow
   {
     return new LayoutManager(cast(void*)createGObject(LayoutManager._getGType), No.Take);
   }

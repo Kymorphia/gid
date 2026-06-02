@@ -21,11 +21,8 @@ class EventVisibility
   GdkEventVisibility _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.event_visibility.EventVisibility");
-
     _cInstance = *cast(GdkEventVisibility*)ptr;
 
     if (take)
@@ -33,7 +30,7 @@ class EventVisibility
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -42,7 +39,7 @@ class EventVisibility
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.VisibilityNotify]).
   */
-  @property gdk.types.EventType type()
+  @property gdk.types.EventType type() nothrow
   {
     return cast(gdk.types.EventType)(cast(GdkEventVisibility*)this._cPtr).type;
   }
@@ -52,7 +49,7 @@ class EventVisibility
       Params:
         propval = the type of the event ([gdk.types.EventType.VisibilityNotify]).
   */
-  @property void type(gdk.types.EventType propval)
+  @property void type(gdk.types.EventType propval) nothrow
   {
     (cast(GdkEventVisibility*)this._cPtr).type = cast(GdkEventType)propval;
   }
@@ -61,7 +58,7 @@ class EventVisibility
       Get `window` field.
       Returns: the window which received the event.
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventVisibility*)this._cPtr).window);
   }
@@ -71,7 +68,7 @@ class EventVisibility
       Params:
         propval = the window which received the event.
   */
-  @property void window(gdk.window.Window propval)
+  @property void window(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventVisibility*)this._cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventVisibility*)this._cPtr).window);
@@ -81,7 +78,7 @@ class EventVisibility
       Get `sendEvent` field.
       Returns: true if the event was sent explicitly.
   */
-  @property byte sendEvent()
+  @property byte sendEvent() nothrow
   {
     return (cast(GdkEventVisibility*)this._cPtr).sendEvent;
   }
@@ -91,7 +88,7 @@ class EventVisibility
       Params:
         propval = true if the event was sent explicitly.
   */
-  @property void sendEvent(byte propval)
+  @property void sendEvent(byte propval) nothrow
   {
     (cast(GdkEventVisibility*)this._cPtr).sendEvent = propval;
   }
@@ -101,7 +98,7 @@ class EventVisibility
       Returns: the new visibility state ([gdk.types.VisibilityState.FullyObscured],
           [gdk.types.VisibilityState.Partial] or [gdk.types.VisibilityState.Unobscured]).
   */
-  @property gdk.types.VisibilityState state()
+  @property gdk.types.VisibilityState state() nothrow
   {
     return cast(gdk.types.VisibilityState)(cast(GdkEventVisibility*)this._cPtr).state;
   }
@@ -112,7 +109,7 @@ class EventVisibility
         propval = the new visibility state ([gdk.types.VisibilityState.FullyObscured],
             [gdk.types.VisibilityState.Partial] or [gdk.types.VisibilityState.Unobscured]).
   */
-  @property void state(gdk.types.VisibilityState propval)
+  @property void state(gdk.types.VisibilityState propval) nothrow
   {
     (cast(GdkEventVisibility*)this._cPtr).state = cast(GdkVisibilityState)propval;
   }

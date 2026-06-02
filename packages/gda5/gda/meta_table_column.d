@@ -18,11 +18,8 @@ class MetaTableColumn
   GdaMetaTableColumn _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.meta_table_column.MetaTableColumn");
-
     _cInstance = *cast(GdaMetaTableColumn*)ptr;
 
     if (take)
@@ -30,7 +27,7 @@ class MetaTableColumn
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class MetaTableColumn
       Get `columnName` field.
       Returns: the column's name
   */
-  @property string columnName()
+  @property string columnName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaMetaTableColumn*)this._cPtr).columnName);
   }
@@ -49,7 +46,7 @@ class MetaTableColumn
       Params:
         propval = the column's name
   */
-  @property void columnName(string propval)
+  @property void columnName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaMetaTableColumn*)this._cPtr).columnName);
     dToC(propval, cast(void*)&(cast(GdaMetaTableColumn*)this._cPtr).columnName);
@@ -59,7 +56,7 @@ class MetaTableColumn
       Get `columnType` field.
       Returns: the column's DBMS's type
   */
-  @property string columnType()
+  @property string columnType() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaMetaTableColumn*)this._cPtr).columnType);
   }
@@ -69,7 +66,7 @@ class MetaTableColumn
       Params:
         propval = the column's DBMS's type
   */
-  @property void columnType(string propval)
+  @property void columnType(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaMetaTableColumn*)this._cPtr).columnType);
     dToC(propval, cast(void*)&(cast(GdaMetaTableColumn*)this._cPtr).columnType);
@@ -79,7 +76,7 @@ class MetaTableColumn
       Get `gtype` field.
       Returns: the detected column's #GType
   */
-  @property gobject.types.GType gtype()
+  @property gobject.types.GType gtype() nothrow
   {
     return (cast(GdaMetaTableColumn*)this._cPtr).gtype;
   }
@@ -89,7 +86,7 @@ class MetaTableColumn
       Params:
         propval = the detected column's #GType
   */
-  @property void gtype(gobject.types.GType propval)
+  @property void gtype(gobject.types.GType propval) nothrow
   {
     (cast(GdaMetaTableColumn*)this._cPtr).gtype = propval;
   }
@@ -98,7 +95,7 @@ class MetaTableColumn
       Get `pkey` field.
       Returns: tells if the column is part of a primary key
   */
-  @property bool pkey()
+  @property bool pkey() nothrow
   {
     return cast(bool)(cast(GdaMetaTableColumn*)this._cPtr).pkey;
   }
@@ -108,7 +105,7 @@ class MetaTableColumn
       Params:
         propval = tells if the column is part of a primary key
   */
-  @property void pkey(bool propval)
+  @property void pkey(bool propval) nothrow
   {
     (cast(GdaMetaTableColumn*)this._cPtr).pkey = propval;
   }
@@ -117,7 +114,7 @@ class MetaTableColumn
       Get `nullok` field.
       Returns: tells if the column can be null
   */
-  @property bool nullok()
+  @property bool nullok() nothrow
   {
     return cast(bool)(cast(GdaMetaTableColumn*)this._cPtr).nullok;
   }
@@ -127,7 +124,7 @@ class MetaTableColumn
       Params:
         propval = tells if the column can be null
   */
-  @property void nullok(bool propval)
+  @property void nullok(bool propval) nothrow
   {
     (cast(GdaMetaTableColumn*)this._cPtr).nullok = propval;
   }
@@ -136,7 +133,7 @@ class MetaTableColumn
       Get `defaultValue` field.
       Returns: the column's default value, represented as a valid SQL value (surrounded by simple quotes for strings, ...), or null if column has no default value
   */
-  @property string defaultValue()
+  @property string defaultValue() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaMetaTableColumn*)this._cPtr).defaultValue);
   }
@@ -146,7 +143,7 @@ class MetaTableColumn
       Params:
         propval = the column's default value, represented as a valid SQL value (surrounded by simple quotes for strings, ...), or null if column has no default value
   */
-  @property void defaultValue(string propval)
+  @property void defaultValue(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaMetaTableColumn*)this._cPtr).defaultValue);
     dToC(propval, cast(void*)&(cast(GdaMetaTableColumn*)this._cPtr).defaultValue);
@@ -158,14 +155,21 @@ class MetaTableColumn
       Params:
         func = a #GdaAttributesManagerFunc function
   */
-  void foreachAttribute(gda.types.AttributesManagerFunc func)
+  void foreachAttribute(gda.types.AttributesManagerFunc func) nothrow
   {
-    extern(C) void _funcCallback(const(char)* attName, const(GValue)* value, void* data)
+    extern(C) void _funcCallback(const(char)* attName, const(GValue)* value, void* data) nothrow
     {
       auto _dlg = cast(gda.types.AttributesManagerFunc*)data;
       string _attName = attName.fromCString(No.Free);
 
-      (*_dlg)(_attName, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
+      try
+      {
+        (*_dlg)(_attName, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.types.AttributesManagerFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -181,7 +185,7 @@ class MetaTableColumn
         attribute = attribute name as a string
       Returns: a read-only #GValue, or null if not attribute named attribute has been set for column
   */
-  gobject.value.Value getAttribute(string attribute)
+  gobject.value.Value getAttribute(string attribute) nothrow
   {
     const(GValue)* _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
@@ -205,14 +209,21 @@ class MetaTableColumn
         value = a #GValue, or null
         destroy = function called when attribute has to be freed, or null
   */
-  void setAttribute(string attribute, gobject.value.Value value = null, glib.types.DestroyNotify destroy = null)
+  void setAttribute(string attribute, gobject.value.Value value = null, glib.types.DestroyNotify destroy = null) nothrow
   {
-    extern(C) void _destroyCallback(void* data)
+    extern(C) void _destroyCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
     const(char)* _attribute = attribute.toCString(No.Alloc);

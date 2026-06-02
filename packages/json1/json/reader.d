@@ -76,26 +76,26 @@ class Reader : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())json_reader_get_type != &gidSymbolNotFound ? json_reader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Reader self()
+  override Reader self() nothrow
   {
     return this;
   }
@@ -104,7 +104,7 @@ class Reader : gobject.object.ObjectWrap
       Get builder for [json.reader.Reader]
       Returns: New builder object
   */
-  static ReaderGidBuilder builder()
+  static ReaderGidBuilder builder() nothrow
   {
     return new ReaderGidBuilder;
   }
@@ -113,7 +113,7 @@ class Reader : gobject.object.ObjectWrap
       Get `root` property.
       Returns: The root of the JSON tree that the reader should read.
   */
-  @property json.node.Node root()
+  @property json.node.Node root() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(json.node.Node)("root");
   }
@@ -123,7 +123,7 @@ class Reader : gobject.object.ObjectWrap
       Params:
         propval = The root of the JSON tree that the reader should read.
   */
-  @property void root(json.node.Node propval)
+  @property void root(json.node.Node propval) nothrow
   {
     setRoot(propval);
   }
@@ -138,7 +138,7 @@ class Reader : gobject.object.ObjectWrap
         node = the root node
       Returns: the newly created reader
   */
-  this(json.node.Node node = null)
+  this(json.node.Node node = null) nothrow
   {
     JsonReader* _cretval;
     _cretval = json_reader_new(node ? cast(JsonNode*)node._cPtr(No.Dup) : null);
@@ -152,7 +152,7 @@ class Reader : gobject.object.ObjectWrap
       In case of failure, the reader is set to an error state.
       Returns: the number of elements, or -1.
   */
-  int countElements()
+  int countElements() nothrow
   {
     int _retval;
     _retval = json_reader_count_elements(cast(JsonReader*)this._cPtr);
@@ -166,7 +166,7 @@ class Reader : gobject.object.ObjectWrap
       In case of failure, the reader is set to an error state.
       Returns: the number of members, or -1
   */
-  int countMembers()
+  int countMembers() nothrow
   {
     int _retval;
     _retval = json_reader_count_members(cast(JsonReader*)this._cPtr);
@@ -179,7 +179,7 @@ class Reader : gobject.object.ObjectWrap
       
       This function resets the error state of the reader, if any was set.
   */
-  void endElement()
+  void endElement() nothrow
   {
     json_reader_end_element(cast(JsonReader*)this._cPtr);
   }
@@ -190,7 +190,7 @@ class Reader : gobject.object.ObjectWrap
       
       This function resets the error state of the reader, if any was set.
   */
-  void endMember()
+  void endMember() nothrow
   {
     json_reader_end_member(cast(JsonReader*)this._cPtr);
   }
@@ -201,7 +201,7 @@ class Reader : gobject.object.ObjectWrap
       See also: [json.reader.Reader.getValue]
       Returns: the boolean value
   */
-  bool getBooleanValue()
+  bool getBooleanValue() nothrow
   {
     bool _retval;
     _retval = cast(bool)json_reader_get_boolean_value(cast(JsonReader*)this._cPtr);
@@ -212,7 +212,7 @@ class Reader : gobject.object.ObjectWrap
       Retrieves the reader node at the current position.
       Returns: the current node of the reader
   */
-  json.node.Node getCurrentNode()
+  json.node.Node getCurrentNode() nothrow
   {
     JsonNode* _cretval;
     _cretval = json_reader_get_current_node(cast(JsonReader*)this._cPtr);
@@ -226,7 +226,7 @@ class Reader : gobject.object.ObjectWrap
       See also: [json.reader.Reader.getValue]
       Returns: the floating point value
   */
-  double getDoubleValue()
+  double getDoubleValue() nothrow
   {
     double _retval;
     _retval = json_reader_get_double_value(cast(JsonReader*)this._cPtr);
@@ -237,7 +237,7 @@ class Reader : gobject.object.ObjectWrap
       Retrieves the error currently set on the reader.
       Returns: the current error
   */
-  glib.error.ErrorWrap getError()
+  glib.error.ErrorWrap getError() nothrow
   {
     const(GError)* _cretval;
     _cretval = json_reader_get_error(cast(JsonReader*)this._cPtr);
@@ -251,7 +251,7 @@ class Reader : gobject.object.ObjectWrap
       See also: [json.reader.Reader.getValue]
       Returns: the integer value
   */
-  long getIntValue()
+  long getIntValue() nothrow
   {
     long _retval;
     _retval = json_reader_get_int_value(cast(JsonReader*)this._cPtr);
@@ -264,7 +264,7 @@ class Reader : gobject.object.ObjectWrap
       In case of failure, the reader is set to an error state.
       Returns: the name of the member
   */
-  string getMemberName()
+  string getMemberName() nothrow
   {
     const(char)* _cretval;
     _cretval = json_reader_get_member_name(cast(JsonReader*)this._cPtr);
@@ -278,7 +278,7 @@ class Reader : gobject.object.ObjectWrap
       See also: [json.reader.Reader.getValue]
       Returns: `TRUE` if `null` is set, and `FALSE` otherwise
   */
-  bool getNullValue()
+  bool getNullValue() nothrow
   {
     bool _retval;
     _retval = cast(bool)json_reader_get_null_value(cast(JsonReader*)this._cPtr);
@@ -291,7 +291,7 @@ class Reader : gobject.object.ObjectWrap
       See also: [json.reader.Reader.getValue]
       Returns: the string value
   */
-  string getStringValue()
+  string getStringValue() nothrow
   {
     const(char)* _cretval;
     _cretval = json_reader_get_string_value(cast(JsonReader*)this._cPtr);
@@ -306,7 +306,7 @@ class Reader : gobject.object.ObjectWrap
       is set to an error state.
       Returns: the current value node
   */
-  json.node.Node getValue()
+  json.node.Node getValue() nothrow
   {
     JsonNode* _cretval;
     _cretval = json_reader_get_value(cast(JsonReader*)this._cPtr);
@@ -318,7 +318,7 @@ class Reader : gobject.object.ObjectWrap
       Checks whether the reader is currently on an array.
       Returns: `TRUE` if the reader is on an array
   */
-  bool isArray()
+  bool isArray() nothrow
   {
     bool _retval;
     _retval = cast(bool)json_reader_is_array(cast(JsonReader*)this._cPtr);
@@ -329,7 +329,7 @@ class Reader : gobject.object.ObjectWrap
       Checks whether the reader is currently on an object.
       Returns: `TRUE` if the reader is on an object
   */
-  bool isObject()
+  bool isObject() nothrow
   {
     bool _retval;
     _retval = cast(bool)json_reader_is_object(cast(JsonReader*)this._cPtr);
@@ -340,7 +340,7 @@ class Reader : gobject.object.ObjectWrap
       Checks whether the reader is currently on a value.
       Returns: `TRUE` if the reader is on a value
   */
-  bool isValue()
+  bool isValue() nothrow
   {
     bool _retval;
     _retval = cast(bool)json_reader_is_value(cast(JsonReader*)this._cPtr);
@@ -355,7 +355,7 @@ class Reader : gobject.object.ObjectWrap
       Returns: the members of
           the object
   */
-  string[] listMembers()
+  string[] listMembers() nothrow
   {
     char** _cretval;
     _cretval = json_reader_list_members(cast(JsonReader*)this._cPtr);
@@ -430,7 +430,7 @@ class Reader : gobject.object.ObjectWrap
         index = the index of the element
       Returns: `TRUE` on success, and `FALSE` otherwise
   */
-  bool readElement(uint index)
+  bool readElement(uint index) nothrow
   {
     bool _retval;
     _retval = cast(bool)json_reader_read_element(cast(JsonReader*)this._cPtr, index);
@@ -489,7 +489,7 @@ class Reader : gobject.object.ObjectWrap
         memberName = the name of the member to read
       Returns: `TRUE` on success, and `FALSE` otherwise
   */
-  bool readMember(string memberName)
+  bool readMember(string memberName) nothrow
   {
     bool _retval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
@@ -505,7 +505,7 @@ class Reader : gobject.object.ObjectWrap
       Params:
         root = the root node
   */
-  void setRoot(json.node.Node root = null)
+  void setRoot(json.node.Node root = null) nothrow
   {
     json_reader_set_root(cast(JsonReader*)this._cPtr, root ? cast(JsonNode*)root._cPtr(No.Dup) : null);
   }
@@ -521,7 +521,7 @@ class ReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The root of the JSON tree that the reader should read.
       Returns: Builder instance for fluent chaining
   */
-  T root(json.node.Node propval)
+  T root(json.node.Node propval) nothrow
   {
     return setProperty("root", propval);
   }
@@ -534,7 +534,7 @@ final class ReaderGidBuilder : ReaderGidBuilderImpl!ReaderGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Reader build()
+  Reader build() nothrow
   {
     return new Reader(cast(void*)createGObject(Reader._getGType), Yes.Take);
   }

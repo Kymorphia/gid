@@ -38,26 +38,26 @@ class Video : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_video_get_type != &gidSymbolNotFound ? gtk_video_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Video self()
+  override Video self() nothrow
   {
     return this;
   }
@@ -66,7 +66,7 @@ class Video : gtk.widget.Widget
       Get builder for [gtk.video.Video]
       Returns: New builder object
   */
-  static VideoGidBuilder builder()
+  static VideoGidBuilder builder() nothrow
   {
     return new VideoGidBuilder;
   }
@@ -75,7 +75,7 @@ class Video : gtk.widget.Widget
       Get `autoplay` property.
       Returns: If the video should automatically begin playing.
   */
-  @property bool autoplay()
+  @property bool autoplay() nothrow
   {
     return getAutoplay();
   }
@@ -85,7 +85,7 @@ class Video : gtk.widget.Widget
       Params:
         propval = If the video should automatically begin playing.
   */
-  @property void autoplay(bool propval)
+  @property void autoplay(bool propval) nothrow
   {
     setAutoplay(propval);
   }
@@ -94,7 +94,7 @@ class Video : gtk.widget.Widget
       Get `file` property.
       Returns: The file played by this video if the video is playing a file.
   */
-  @property gio.file.File file()
+  @property gio.file.File file() nothrow
   {
     return getFile();
   }
@@ -104,7 +104,7 @@ class Video : gtk.widget.Widget
       Params:
         propval = The file played by this video if the video is playing a file.
   */
-  @property void file(gio.file.File propval)
+  @property void file(gio.file.File propval) nothrow
   {
     setFile(propval);
   }
@@ -113,7 +113,7 @@ class Video : gtk.widget.Widget
       Get `graphicsOffload` property.
       Returns: Whether to enable graphics offload.
   */
-  @property gtk.types.GraphicsOffloadEnabled graphicsOffload()
+  @property gtk.types.GraphicsOffloadEnabled graphicsOffload() nothrow
   {
     return getGraphicsOffload();
   }
@@ -123,7 +123,7 @@ class Video : gtk.widget.Widget
       Params:
         propval = Whether to enable graphics offload.
   */
-  @property void graphicsOffload(gtk.types.GraphicsOffloadEnabled propval)
+  @property void graphicsOffload(gtk.types.GraphicsOffloadEnabled propval) nothrow
   {
     setGraphicsOffload(propval);
   }
@@ -132,7 +132,7 @@ class Video : gtk.widget.Widget
       Get `loop` property.
       Returns: If new media files should be set to loop.
   */
-  @property bool loop()
+  @property bool loop() nothrow
   {
     return getLoop();
   }
@@ -142,7 +142,7 @@ class Video : gtk.widget.Widget
       Params:
         propval = If new media files should be set to loop.
   */
-  @property void loop(bool propval)
+  @property void loop(bool propval) nothrow
   {
     setLoop(propval);
   }
@@ -151,7 +151,7 @@ class Video : gtk.widget.Widget
       Get `mediaStream` property.
       Returns: The media-stream played
   */
-  @property gtk.media_stream.MediaStream mediaStream()
+  @property gtk.media_stream.MediaStream mediaStream() nothrow
   {
     return getMediaStream();
   }
@@ -161,7 +161,7 @@ class Video : gtk.widget.Widget
       Params:
         propval = The media-stream played
   */
-  @property void mediaStream(gtk.media_stream.MediaStream propval)
+  @property void mediaStream(gtk.media_stream.MediaStream propval) nothrow
   {
     setMediaStream(propval);
   }
@@ -170,7 +170,7 @@ class Video : gtk.widget.Widget
       Creates a new empty [gtk.video.Video].
       Returns: a new [gtk.video.Video]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_video_new();
@@ -184,7 +184,7 @@ class Video : gtk.widget.Widget
         file = a [gio.file.File]
       Returns: a new [gtk.video.Video]
   */
-  static gtk.video.Video newForFile(gio.file.File file = null)
+  static gtk.video.Video newForFile(gio.file.File file = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_video_new_for_file(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
@@ -202,7 +202,7 @@ class Video : gtk.widget.Widget
         filename = filename to play back
       Returns: a new [gtk.video.Video]
   */
-  static gtk.video.Video newForFilename(string filename = null)
+  static gtk.video.Video newForFilename(string filename = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -218,7 +218,7 @@ class Video : gtk.widget.Widget
         stream = a [gtk.media_stream.MediaStream]
       Returns: a new [gtk.video.Video]
   */
-  static gtk.video.Video newForMediaStream(gtk.media_stream.MediaStream stream = null)
+  static gtk.video.Video newForMediaStream(gtk.media_stream.MediaStream stream = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_video_new_for_media_stream(stream ? cast(GtkMediaStream*)stream._cPtr(No.Dup) : null);
@@ -236,7 +236,7 @@ class Video : gtk.widget.Widget
         resourcePath = resource path to play back
       Returns: a new [gtk.video.Video]
   */
-  static gtk.video.Video newForResource(string resourcePath = null)
+  static gtk.video.Video newForResource(string resourcePath = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
@@ -249,7 +249,7 @@ class Video : gtk.widget.Widget
       Returns true if videos have been set to loop.
       Returns: true if streams should autoplay
   */
-  bool getAutoplay()
+  bool getAutoplay() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_video_get_autoplay(cast(GtkVideo*)this._cPtr);
@@ -261,7 +261,7 @@ class Video : gtk.widget.Widget
       a file.
       Returns: The file played by self
   */
-  gio.file.File getFile()
+  gio.file.File getFile() nothrow
   {
     GFile* _cretval;
     _cretval = gtk_video_get_file(cast(GtkVideo*)this._cPtr);
@@ -275,7 +275,7 @@ class Video : gtk.widget.Widget
       See [gtk.graphics_offload.GraphicsOffload] for more information on graphics offload.
       Returns: the graphics offload status
   */
-  gtk.types.GraphicsOffloadEnabled getGraphicsOffload()
+  gtk.types.GraphicsOffloadEnabled getGraphicsOffload() nothrow
   {
     GtkGraphicsOffloadEnabled _cretval;
     _cretval = gtk_video_get_graphics_offload(cast(GtkVideo*)this._cPtr);
@@ -287,7 +287,7 @@ class Video : gtk.widget.Widget
       Returns true if videos have been set to loop.
       Returns: true if streams should loop
   */
-  bool getLoop()
+  bool getLoop() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_video_get_loop(cast(GtkVideo*)this._cPtr);
@@ -298,7 +298,7 @@ class Video : gtk.widget.Widget
       Gets the media stream managed by self or null if none.
       Returns: The media stream managed by self
   */
-  gtk.media_stream.MediaStream getMediaStream()
+  gtk.media_stream.MediaStream getMediaStream() nothrow
   {
     GtkMediaStream* _cretval;
     _cretval = gtk_video_get_media_stream(cast(GtkVideo*)this._cPtr);
@@ -313,7 +313,7 @@ class Video : gtk.widget.Widget
       Params:
         autoplay = whether media streams should autoplay
   */
-  void setAutoplay(bool autoplay)
+  void setAutoplay(bool autoplay) nothrow
   {
     gtk_video_set_autoplay(cast(GtkVideo*)this._cPtr, autoplay);
   }
@@ -324,7 +324,7 @@ class Video : gtk.widget.Widget
       Params:
         file = the file to play
   */
-  void setFile(gio.file.File file = null)
+  void setFile(gio.file.File file = null) nothrow
   {
     gtk_video_set_file(cast(GtkVideo*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
   }
@@ -337,7 +337,7 @@ class Video : gtk.widget.Widget
       Params:
         filename = the filename to play
   */
-  void setFilename(string filename = null)
+  void setFilename(string filename = null) nothrow
   {
     const(char)* _filename = filename.toCString(No.Alloc);
     gtk_video_set_filename(cast(GtkVideo*)this._cPtr, _filename);
@@ -351,7 +351,7 @@ class Video : gtk.widget.Widget
       Params:
         enabled = the new graphics offload status
   */
-  void setGraphicsOffload(gtk.types.GraphicsOffloadEnabled enabled)
+  void setGraphicsOffload(gtk.types.GraphicsOffloadEnabled enabled) nothrow
   {
     gtk_video_set_graphics_offload(cast(GtkVideo*)this._cPtr, enabled);
   }
@@ -362,7 +362,7 @@ class Video : gtk.widget.Widget
       Params:
         loop = whether media streams should loop
   */
-  void setLoop(bool loop)
+  void setLoop(bool loop) nothrow
   {
     gtk_video_set_loop(cast(GtkVideo*)this._cPtr, loop);
   }
@@ -380,7 +380,7 @@ class Video : gtk.widget.Widget
       Params:
         stream = The media stream to play or null to unset
   */
-  void setMediaStream(gtk.media_stream.MediaStream stream = null)
+  void setMediaStream(gtk.media_stream.MediaStream stream = null) nothrow
   {
     gtk_video_set_media_stream(cast(GtkVideo*)this._cPtr, stream ? cast(GtkMediaStream*)stream._cPtr(No.Dup) : null);
   }
@@ -393,7 +393,7 @@ class Video : gtk.widget.Widget
       Params:
         resourcePath = the resource to set
   */
-  void setResource(string resourcePath = null)
+  void setResource(string resourcePath = null) nothrow
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     gtk_video_set_resource(cast(GtkVideo*)this._cPtr, _resourcePath);
@@ -411,7 +411,7 @@ class VideoGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = If the video should automatically begin playing.
       Returns: Builder instance for fluent chaining
   */
-  T autoplay(bool propval)
+  T autoplay(bool propval) nothrow
   {
     return setProperty("autoplay", propval);
   }
@@ -422,7 +422,7 @@ class VideoGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The file played by this video if the video is playing a file.
       Returns: Builder instance for fluent chaining
   */
-  T file(gio.file.File propval)
+  T file(gio.file.File propval) nothrow
   {
     return setProperty("file", propval);
   }
@@ -433,7 +433,7 @@ class VideoGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether to enable graphics offload.
       Returns: Builder instance for fluent chaining
   */
-  T graphicsOffload(gtk.types.GraphicsOffloadEnabled propval)
+  T graphicsOffload(gtk.types.GraphicsOffloadEnabled propval) nothrow
   {
     return setProperty("graphics-offload", propval);
   }
@@ -444,7 +444,7 @@ class VideoGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = If new media files should be set to loop.
       Returns: Builder instance for fluent chaining
   */
-  T loop(bool propval)
+  T loop(bool propval) nothrow
   {
     return setProperty("loop", propval);
   }
@@ -455,7 +455,7 @@ class VideoGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The media-stream played
       Returns: Builder instance for fluent chaining
   */
-  T mediaStream(gtk.media_stream.MediaStream propval)
+  T mediaStream(gtk.media_stream.MediaStream propval) nothrow
   {
     return setProperty("media-stream", propval);
   }
@@ -468,7 +468,7 @@ final class VideoGidBuilder : VideoGidBuilderImpl!VideoGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Video build()
+  Video build() nothrow
   {
     return new Video(cast(void*)createGObject(Video._getGType), No.Take);
   }

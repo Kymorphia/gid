@@ -33,26 +33,26 @@ class ToggleButton : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_toggle_button_get_type != &gidSymbolNotFound ? panel_toggle_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ToggleButton self()
+  override ToggleButton self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class ToggleButton : gtk.widget.Widget
       Get builder for [panel.toggle_button.ToggleButton]
       Returns: New builder object
   */
-  static ToggleButtonGidBuilder builder()
+  static ToggleButtonGidBuilder builder() nothrow
   {
     return new ToggleButtonGidBuilder;
   }
@@ -70,7 +70,7 @@ class ToggleButton : gtk.widget.Widget
       Get `area` property.
       Returns: The area this button will reveal.
   */
-  @property panel.types.Area area()
+  @property panel.types.Area area() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(panel.types.Area)("area");
   }
@@ -79,7 +79,7 @@ class ToggleButton : gtk.widget.Widget
       Get `dock` property.
       Returns: The associated [panel.dock.Dock]
   */
-  @property panel.dock.Dock dock()
+  @property panel.dock.Dock dock() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(panel.dock.Dock)("dock");
   }
@@ -89,7 +89,7 @@ class ToggleButton : gtk.widget.Widget
       Params:
         propval = The associated [panel.dock.Dock]
   */
-  @property void dock(panel.dock.Dock propval)
+  @property void dock(panel.dock.Dock propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(panel.dock.Dock)("dock", propval);
   }
@@ -103,7 +103,7 @@ class ToggleButton : gtk.widget.Widget
             `enumPanel.Area.CENTER` is invalid.
       Returns: a newly created [panel.toggle_button.ToggleButton]
   */
-  this(panel.dock.Dock dock, panel.types.Area area)
+  this(panel.dock.Dock dock, panel.types.Area area) nothrow
   {
     GtkWidget* _cretval;
     _cretval = panel_toggle_button_new(dock ? cast(PanelDock*)dock._cPtr(No.Dup) : null, area);
@@ -122,7 +122,7 @@ class ToggleButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The area this button will reveal.
       Returns: Builder instance for fluent chaining
   */
-  T area(panel.types.Area propval)
+  T area(panel.types.Area propval) nothrow
   {
     return setProperty("area", propval);
   }
@@ -133,7 +133,7 @@ class ToggleButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The associated [panel.dock.Dock]
       Returns: Builder instance for fluent chaining
   */
-  T dock(panel.dock.Dock propval)
+  T dock(panel.dock.Dock propval) nothrow
   {
     return setProperty("dock", propval);
   }
@@ -146,7 +146,7 @@ final class ToggleButtonGidBuilder : ToggleButtonGidBuilderImpl!ToggleButtonGidB
       Create object from builder.
       Returns: New object
   */
-  ToggleButton build()
+  ToggleButton build() nothrow
   {
     return new ToggleButton(cast(void*)createGObject(ToggleButton._getGType), No.Take);
   }

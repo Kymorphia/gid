@@ -37,26 +37,26 @@ class SocketListener : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_socket_listener_get_type != &gidSymbolNotFound ? g_socket_listener_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SocketListener self()
+  override SocketListener self() nothrow
   {
     return this;
   }
@@ -65,7 +65,7 @@ class SocketListener : gobject.object.ObjectWrap
       Get builder for [gio.socket_listener.SocketListener]
       Returns: New builder object
   */
-  static SocketListenerGidBuilder builder()
+  static SocketListenerGidBuilder builder() nothrow
   {
     return new SocketListenerGidBuilder;
   }
@@ -74,7 +74,7 @@ class SocketListener : gobject.object.ObjectWrap
       Get `listenBacklog` property.
       Returns: The number of outstanding connections in the listen queue.
   */
-  @property int listenBacklog()
+  @property int listenBacklog() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("listen-backlog");
   }
@@ -84,7 +84,7 @@ class SocketListener : gobject.object.ObjectWrap
       Params:
         propval = The number of outstanding connections in the listen queue.
   */
-  @property void listenBacklog(int propval)
+  @property void listenBacklog(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("listen-backlog", propval);
   }
@@ -95,7 +95,7 @@ class SocketListener : gobject.object.ObjectWrap
       or [gio.socket_listener.SocketListener.addInetPort].
       Returns: a new #GSocketListener.
   */
-  this()
+  this() nothrow
   {
     GSocketListener* _cretval;
     _cretval = g_socket_listener_new();
@@ -145,14 +145,21 @@ class SocketListener : gobject.object.ObjectWrap
         cancellable = a #GCancellable, or null
         callback = a #GAsyncReadyCallback
   */
-  void acceptAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void acceptAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -227,14 +234,21 @@ class SocketListener : gobject.object.ObjectWrap
         cancellable = a #GCancellable, or null
         callback = a #GAsyncReadyCallback
   */
-  void acceptSocketAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void acceptSocketAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -400,7 +414,7 @@ class SocketListener : gobject.object.ObjectWrap
   /**
       Closes all the sockets in the listener.
   */
-  void close()
+  void close() nothrow
   {
     g_socket_listener_close(cast(GSocketListener*)this._cPtr);
   }
@@ -415,7 +429,7 @@ class SocketListener : gobject.object.ObjectWrap
       Params:
         listenBacklog = an integer
   */
-  void setBacklog(int listenBacklog)
+  void setBacklog(int listenBacklog) nothrow
   {
     g_socket_listener_set_backlog(cast(GSocketListener*)this._cPtr, listenBacklog);
   }
@@ -442,7 +456,7 @@ class SocketListener : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gio.types.SocketListenerEvent)))
@@ -450,7 +464,7 @@ class SocketListener : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.socket_listener.SocketListener)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -465,7 +479,14 @@ class SocketListener : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.socket_listener.SocketListener.event");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -483,7 +504,7 @@ class SocketListenerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = The number of outstanding connections in the listen queue.
       Returns: Builder instance for fluent chaining
   */
-  T listenBacklog(int propval)
+  T listenBacklog(int propval) nothrow
   {
     return setProperty("listen-backlog", propval);
   }
@@ -496,7 +517,7 @@ final class SocketListenerGidBuilder : SocketListenerGidBuilderImpl!SocketListen
       Create object from builder.
       Returns: New object
   */
-  SocketListener build()
+  SocketListener build() nothrow
   {
     return new SocketListener(cast(void*)createGObject(SocketListener._getGType), Yes.Take);
   }

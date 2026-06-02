@@ -20,32 +20,32 @@ class TreeRowReference : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_row_reference_get_type != &gidSymbolNotFound ? gtk_tree_row_reference_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TreeRowReference self()
+  override TreeRowReference self() nothrow
   {
     return this;
   }
@@ -63,7 +63,7 @@ class TreeRowReference : gobject.boxed.Boxed
         path = a valid #GtkTreePath-struct to monitor
       Returns: a newly allocated #GtkTreeRowReference, or null
   */
-  this(gtk.tree_model.TreeModel model, gtk.tree_path.TreePath path)
+  this(gtk.tree_model.TreeModel model, gtk.tree_path.TreePath path) nothrow
   {
     GtkTreeRowReference* _cretval;
     _cretval = gtk_tree_row_reference_new(model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
@@ -102,7 +102,7 @@ class TreeRowReference : gobject.boxed.Boxed
         path = a valid #GtkTreePath-struct to monitor
       Returns: a newly allocated #GtkTreeRowReference, or null
   */
-  static gtk.tree_row_reference.TreeRowReference newProxy(gobject.object.ObjectWrap proxy, gtk.tree_model.TreeModel model, gtk.tree_path.TreePath path)
+  static gtk.tree_row_reference.TreeRowReference newProxy(gobject.object.ObjectWrap proxy, gtk.tree_model.TreeModel model, gtk.tree_path.TreePath path) nothrow
   {
     GtkTreeRowReference* _cretval;
     _cretval = gtk_tree_row_reference_new_proxy(proxy ? cast(GObject*)proxy._cPtr(No.Dup) : null, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
@@ -114,7 +114,7 @@ class TreeRowReference : gobject.boxed.Boxed
       Copies a #GtkTreeRowReference.
       Returns: a copy of reference
   */
-  gtk.tree_row_reference.TreeRowReference copy()
+  gtk.tree_row_reference.TreeRowReference copy() nothrow
   {
     GtkTreeRowReference* _cretval;
     _cretval = gtk_tree_row_reference_copy(cast(GtkTreeRowReference*)this._cPtr);
@@ -126,7 +126,7 @@ class TreeRowReference : gobject.boxed.Boxed
       Returns the model that the row reference is monitoring.
       Returns: the model
   */
-  gtk.tree_model.TreeModel getModel()
+  gtk.tree_model.TreeModel getModel() nothrow
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_tree_row_reference_get_model(cast(GtkTreeRowReference*)this._cPtr);
@@ -139,7 +139,7 @@ class TreeRowReference : gobject.boxed.Boxed
       or null if the path pointed to is no longer valid.
       Returns: a current path, or null
   */
-  gtk.tree_path.TreePath getPath()
+  gtk.tree_path.TreePath getPath() nothrow
   {
     GtkTreePath* _cretval;
     _cretval = gtk_tree_row_reference_get_path(cast(GtkTreeRowReference*)this._cPtr);
@@ -152,7 +152,7 @@ class TreeRowReference : gobject.boxed.Boxed
       a current valid path.
       Returns: true if reference points to a valid path
   */
-  bool valid()
+  bool valid() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_row_reference_valid(cast(GtkTreeRowReference*)this._cPtr);
@@ -168,7 +168,7 @@ class TreeRowReference : gobject.boxed.Boxed
         proxy = a #GObject
         path = the path position that was deleted
   */
-  static void deleted(gobject.object.ObjectWrap proxy, gtk.tree_path.TreePath path)
+  static void deleted(gobject.object.ObjectWrap proxy, gtk.tree_path.TreePath path) nothrow
   {
     gtk_tree_row_reference_deleted(proxy ? cast(GObject*)proxy._cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
   }
@@ -182,7 +182,7 @@ class TreeRowReference : gobject.boxed.Boxed
         proxy = a #GObject
         path = the row position that was inserted
   */
-  static void inserted(gobject.object.ObjectWrap proxy, gtk.tree_path.TreePath path)
+  static void inserted(gobject.object.ObjectWrap proxy, gtk.tree_path.TreePath path) nothrow
   {
     gtk_tree_row_reference_inserted(proxy ? cast(GObject*)proxy._cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
   }

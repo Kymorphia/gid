@@ -14,26 +14,26 @@ class EqualOptions : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_equal_options_get_type != &gidSymbolNotFound ? garrow_equal_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EqualOptions self()
+  override EqualOptions self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class EqualOptions : gobject.object.ObjectWrap
       Get builder for [arrow.equal_options.EqualOptions]
       Returns: New builder object
   */
-  static EqualOptionsGidBuilder builder()
+  static EqualOptionsGidBuilder builder() nothrow
   {
     return new EqualOptionsGidBuilder;
   }
@@ -52,7 +52,7 @@ class EqualOptions : gobject.object.ObjectWrap
       Returns: The absolute tolerance for approximate comparison of
         floating-point values.
   */
-  @property double absoluteTolerance()
+  @property double absoluteTolerance() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(double)("absolute-tolerance");
   }
@@ -63,7 +63,7 @@ class EqualOptions : gobject.object.ObjectWrap
         propval = The absolute tolerance for approximate comparison of
           floating-point values.
   */
-  @property void absoluteTolerance(double propval)
+  @property void absoluteTolerance(double propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(double)("absolute-tolerance", propval);
   }
@@ -72,7 +72,7 @@ class EqualOptions : gobject.object.ObjectWrap
       Get `approx` property.
       Returns: Whether or not approximate comparison is used.
   */
-  @property bool approx()
+  @property bool approx() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("approx");
   }
@@ -82,7 +82,7 @@ class EqualOptions : gobject.object.ObjectWrap
       Params:
         propval = Whether or not approximate comparison is used.
   */
-  @property void approx(bool propval)
+  @property void approx(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("approx", propval);
   }
@@ -91,7 +91,7 @@ class EqualOptions : gobject.object.ObjectWrap
       Get `nansEqual` property.
       Returns: Whether or not NaNs are considered equal.
   */
-  @property bool nansEqual()
+  @property bool nansEqual() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("nans-equal");
   }
@@ -101,13 +101,13 @@ class EqualOptions : gobject.object.ObjectWrap
       Params:
         propval = Whether or not NaNs are considered equal.
   */
-  @property void nansEqual(bool propval)
+  @property void nansEqual(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("nans-equal", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowEqualOptions* _cretval;
     _cretval = garrow_equal_options_new();
@@ -115,7 +115,7 @@ class EqualOptions : gobject.object.ObjectWrap
   }
 
   /** */
-  bool isApprox()
+  bool isApprox() nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_equal_options_is_approx(cast(GArrowEqualOptions*)this._cPtr);
@@ -134,7 +134,7 @@ class EqualOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           floating-point values.
       Returns: Builder instance for fluent chaining
   */
-  T absoluteTolerance(double propval)
+  T absoluteTolerance(double propval) nothrow
   {
     return setProperty("absolute-tolerance", propval);
   }
@@ -145,7 +145,7 @@ class EqualOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether or not approximate comparison is used.
       Returns: Builder instance for fluent chaining
   */
-  T approx(bool propval)
+  T approx(bool propval) nothrow
   {
     return setProperty("approx", propval);
   }
@@ -156,7 +156,7 @@ class EqualOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether or not NaNs are considered equal.
       Returns: Builder instance for fluent chaining
   */
-  T nansEqual(bool propval)
+  T nansEqual(bool propval) nothrow
   {
     return setProperty("nans-equal", propval);
   }
@@ -169,7 +169,7 @@ final class EqualOptionsGidBuilder : EqualOptionsGidBuilderImpl!EqualOptionsGidB
       Create object from builder.
       Returns: New object
   */
-  EqualOptions build()
+  EqualOptions build() nothrow
   {
     return new EqualOptions(cast(void*)createGObject(EqualOptions._getGType), Yes.Take);
   }

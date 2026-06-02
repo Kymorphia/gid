@@ -18,11 +18,8 @@ class EventSelection
   GdkEventSelection _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.event_selection.EventSelection");
-
     _cInstance = *cast(GdkEventSelection*)ptr;
 
     if (take)
@@ -30,7 +27,7 @@ class EventSelection
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -40,7 +37,7 @@ class EventSelection
       Returns: the type of the event ([gdk.types.EventType.SelectionClear],
           [gdk.types.EventType.SelectionNotify] or [gdk.types.EventType.SelectionRequest]).
   */
-  @property gdk.types.EventType type()
+  @property gdk.types.EventType type() nothrow
   {
     return cast(gdk.types.EventType)(cast(GdkEventSelection*)this._cPtr).type;
   }
@@ -51,7 +48,7 @@ class EventSelection
         propval = the type of the event ([gdk.types.EventType.SelectionClear],
             [gdk.types.EventType.SelectionNotify] or [gdk.types.EventType.SelectionRequest]).
   */
-  @property void type(gdk.types.EventType propval)
+  @property void type(gdk.types.EventType propval) nothrow
   {
     (cast(GdkEventSelection*)this._cPtr).type = cast(GdkEventType)propval;
   }
@@ -60,7 +57,7 @@ class EventSelection
       Get `window` field.
       Returns: the window which received the event.
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventSelection*)this._cPtr).window);
   }
@@ -70,7 +67,7 @@ class EventSelection
       Params:
         propval = the window which received the event.
   */
-  @property void window(gdk.window.Window propval)
+  @property void window(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventSelection*)this._cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventSelection*)this._cPtr).window);
@@ -80,7 +77,7 @@ class EventSelection
       Get `sendEvent` field.
       Returns: true if the event was sent explicitly.
   */
-  @property byte sendEvent()
+  @property byte sendEvent() nothrow
   {
     return (cast(GdkEventSelection*)this._cPtr).sendEvent;
   }
@@ -90,7 +87,7 @@ class EventSelection
       Params:
         propval = true if the event was sent explicitly.
   */
-  @property void sendEvent(byte propval)
+  @property void sendEvent(byte propval) nothrow
   {
     (cast(GdkEventSelection*)this._cPtr).sendEvent = propval;
   }
@@ -99,7 +96,7 @@ class EventSelection
       Get `selection` field.
       Returns: the selection.
   */
-  @property gdk.atom.Atom selection()
+  @property gdk.atom.Atom selection() nothrow
   {
     return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventSelection*)this._cPtr).selection, No.Take);
   }
@@ -108,7 +105,7 @@ class EventSelection
       Get `target` field.
       Returns: the target to which the selection should be converted.
   */
-  @property gdk.atom.Atom target()
+  @property gdk.atom.Atom target() nothrow
   {
     return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventSelection*)this._cPtr).target, No.Take);
   }
@@ -117,7 +114,7 @@ class EventSelection
       Get `property` field.
       Returns: the property in which to place the result of the conversion.
   */
-  @property gdk.atom.Atom property()
+  @property gdk.atom.Atom property() nothrow
   {
     return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventSelection*)this._cPtr).property, No.Take);
   }
@@ -126,7 +123,7 @@ class EventSelection
       Get `time` field.
       Returns: the time of the event in milliseconds.
   */
-  @property uint time()
+  @property uint time() nothrow
   {
     return (cast(GdkEventSelection*)this._cPtr).time;
   }
@@ -136,7 +133,7 @@ class EventSelection
       Params:
         propval = the time of the event in milliseconds.
   */
-  @property void time(uint propval)
+  @property void time(uint propval) nothrow
   {
     (cast(GdkEventSelection*)this._cPtr).time = propval;
   }
@@ -145,7 +142,7 @@ class EventSelection
       Get `requestor` field.
       Returns: the window on which to place @property or null if none.
   */
-  @property gdk.window.Window requestor()
+  @property gdk.window.Window requestor() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventSelection*)this._cPtr).requestor);
   }
@@ -155,7 +152,7 @@ class EventSelection
       Params:
         propval = the window on which to place @property or null if none.
   */
-  @property void requestor(gdk.window.Window propval)
+  @property void requestor(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventSelection*)this._cPtr).requestor);
     dToC(propval, cast(void*)&(cast(GdkEventSelection*)this._cPtr).requestor);

@@ -15,26 +15,26 @@ class RoundOptions : arrow.function_options.FunctionOptions
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_round_options_get_type != &gidSymbolNotFound ? garrow_round_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RoundOptions self()
+  override RoundOptions self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class RoundOptions : arrow.function_options.FunctionOptions
       Get builder for [arrow.round_options.RoundOptions]
       Returns: New builder object
   */
-  static RoundOptionsGidBuilder builder()
+  static RoundOptionsGidBuilder builder() nothrow
   {
     return new RoundOptionsGidBuilder;
   }
@@ -52,7 +52,7 @@ class RoundOptions : arrow.function_options.FunctionOptions
       Get `mode` property.
       Returns: The rounding and tie-breaking mode.
   */
-  @property arrow.types.RoundMode mode()
+  @property arrow.types.RoundMode mode() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.types.RoundMode)("mode");
   }
@@ -62,7 +62,7 @@ class RoundOptions : arrow.function_options.FunctionOptions
       Params:
         propval = The rounding and tie-breaking mode.
   */
-  @property void mode(arrow.types.RoundMode propval)
+  @property void mode(arrow.types.RoundMode propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(arrow.types.RoundMode)("mode", propval);
   }
@@ -71,7 +71,7 @@ class RoundOptions : arrow.function_options.FunctionOptions
       Get `nDigits` property.
       Returns: The rounding precision (number of digits to round to).
   */
-  @property long nDigits()
+  @property long nDigits() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("n-digits");
   }
@@ -81,13 +81,13 @@ class RoundOptions : arrow.function_options.FunctionOptions
       Params:
         propval = The rounding precision (number of digits to round to).
   */
-  @property void nDigits(long propval)
+  @property void nDigits(long propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(long)("n-digits", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowRoundOptions* _cretval;
     _cretval = garrow_round_options_new();
@@ -105,7 +105,7 @@ class RoundOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidB
         propval = The rounding and tie-breaking mode.
       Returns: Builder instance for fluent chaining
   */
-  T mode(arrow.types.RoundMode propval)
+  T mode(arrow.types.RoundMode propval) nothrow
   {
     return setProperty("mode", propval);
   }
@@ -116,7 +116,7 @@ class RoundOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidB
         propval = The rounding precision (number of digits to round to).
       Returns: Builder instance for fluent chaining
   */
-  T nDigits(long propval)
+  T nDigits(long propval) nothrow
   {
     return setProperty("n-digits", propval);
   }
@@ -129,7 +129,7 @@ final class RoundOptionsGidBuilder : RoundOptionsGidBuilderImpl!RoundOptionsGidB
       Create object from builder.
       Returns: New object
   */
-  RoundOptions build()
+  RoundOptions build() nothrow
   {
     return new RoundOptions(cast(void*)createGObject(RoundOptions._getGType), Yes.Take);
   }

@@ -37,26 +37,26 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_inscription_get_type != &gidSymbolNotFound ? gtk_inscription_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Inscription self()
+  override Inscription self() nothrow
   {
     return this;
   }
@@ -65,7 +65,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Get builder for [gtk.inscription.Inscription]
       Returns: New builder object
   */
-  static InscriptionGidBuilder builder()
+  static InscriptionGidBuilder builder() nothrow
   {
     return new InscriptionGidBuilder;
   }
@@ -74,7 +74,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Get `attributes` property.
       Returns: A list of style attributes to apply to the text of the inscription.
   */
-  @property pango.attr_list.AttrList attributes()
+  @property pango.attr_list.AttrList attributes() nothrow
   {
     return getAttributes();
   }
@@ -84,7 +84,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         propval = A list of style attributes to apply to the text of the inscription.
   */
-  @property void attributes(pango.attr_list.AttrList propval)
+  @property void attributes(pango.attr_list.AttrList propval) nothrow
   {
     setAttributes(propval);
   }
@@ -100,7 +100,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           attributes. The markup must be valid. If you cannot ensure that, consider using
           `func@Pango.parse_markup` and setting the two properties yourself.
   */
-  @property void markup(string propval)
+  @property void markup(string propval) nothrow
   {
     setMarkup(propval);
   }
@@ -119,7 +119,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         If you set this property to 0, the inscription will not request any width at all
         and its width will be determined entirely by its surroundings.
   */
-  @property uint minChars()
+  @property uint minChars() nothrow
   {
     return getMinChars();
   }
@@ -139,7 +139,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           If you set this property to 0, the inscription will not request any width at all
           and its width will be determined entirely by its surroundings.
   */
-  @property void minChars(uint propval)
+  @property void minChars(uint propval) nothrow
   {
     setMinChars(propval);
   }
@@ -157,7 +157,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         If you set this property to 0, the inscription will not request any height at all
         and its height will be determined entirely by its surroundings.
   */
-  @property uint minLines()
+  @property uint minLines() nothrow
   {
     return getMinLines();
   }
@@ -176,7 +176,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           If you set this property to 0, the inscription will not request any height at all
           and its height will be determined entirely by its surroundings.
   */
-  @property void minLines(uint propval)
+  @property void minLines(uint propval) nothrow
   {
     setMinLines(propval);
   }
@@ -192,7 +192,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         that value will be used. In particular, for the default value of 0, this will always
         be the case.
   */
-  @property uint natChars()
+  @property uint natChars() nothrow
   {
     return getNatChars();
   }
@@ -209,7 +209,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           that value will be used. In particular, for the default value of 0, this will always
           be the case.
   */
-  @property void natChars(uint propval)
+  @property void natChars(uint propval) nothrow
   {
     setNatChars(propval);
   }
@@ -225,7 +225,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         that value will be used. In particular, for the default value of 0, this will always
         be the case.
   */
-  @property uint natLines()
+  @property uint natLines() nothrow
   {
     return getNatLines();
   }
@@ -242,7 +242,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           that value will be used. In particular, for the default value of 0, this will always
           be the case.
   */
-  @property void natLines(uint propval)
+  @property void natLines(uint propval) nothrow
   {
     setNatLines(propval);
   }
@@ -251,7 +251,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Get `text` property.
       Returns: The displayed text.
   */
-  @property string text()
+  @property string text() nothrow
   {
     return getText();
   }
@@ -261,7 +261,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         propval = The displayed text.
   */
-  @property void text(string propval)
+  @property void text(string propval) nothrow
   {
     setText(propval);
   }
@@ -270,7 +270,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Get `textOverflow` property.
       Returns: The overflow method to use for the text.
   */
-  @property gtk.types.InscriptionOverflow textOverflow()
+  @property gtk.types.InscriptionOverflow textOverflow() nothrow
   {
     return getTextOverflow();
   }
@@ -280,7 +280,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         propval = The overflow method to use for the text.
   */
-  @property void textOverflow(gtk.types.InscriptionOverflow propval)
+  @property void textOverflow(gtk.types.InscriptionOverflow propval) nothrow
   {
     setTextOverflow(propval);
   }
@@ -291,7 +291,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         
         Note that unlike [gtk.label.Label], the default here is [pango.types.WrapMode.WordChar].
   */
-  @property pango.types.WrapMode wrapMode()
+  @property pango.types.WrapMode wrapMode() nothrow
   {
     return getWrapMode();
   }
@@ -303,7 +303,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           
           Note that unlike [gtk.label.Label], the default here is [pango.types.WrapMode.WordChar].
   */
-  @property void wrapMode(pango.types.WrapMode propval)
+  @property void wrapMode(pango.types.WrapMode propval) nothrow
   {
     setWrapMode(propval);
   }
@@ -315,7 +315,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         Compare this to [gtk.widget.Widget.halign], which determines how the
         inscription's size allocation is positioned in the available space.
   */
-  @property float xalign()
+  @property float xalign() nothrow
   {
     return getXalign();
   }
@@ -328,7 +328,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           Compare this to [gtk.widget.Widget.halign], which determines how the
           inscription's size allocation is positioned in the available space.
   */
-  @property void xalign(float propval)
+  @property void xalign(float propval) nothrow
   {
     setXalign(propval);
   }
@@ -340,7 +340,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         Compare this to [gtk.widget.Widget.valign], which determines how the
         inscription's size allocation is positioned in the available space.
   */
-  @property float yalign()
+  @property float yalign() nothrow
   {
     return getYalign();
   }
@@ -353,7 +353,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           Compare this to [gtk.widget.Widget.valign], which determines how the
           inscription's size allocation is positioned in the available space.
   */
-  @property void yalign(float propval)
+  @property void yalign(float propval) nothrow
   {
     setYalign(propval);
   }
@@ -367,7 +367,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         text = The text to display.
       Returns: a new [gtk.inscription.Inscription]
   */
-  this(string text = null)
+  this(string text = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _text = text.toCString(No.Alloc);
@@ -379,7 +379,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Gets the inscription's attribute list.
       Returns: the attribute list
   */
-  pango.attr_list.AttrList getAttributes()
+  pango.attr_list.AttrList getAttributes() nothrow
   {
     PangoAttrList* _cretval;
     _cretval = gtk_inscription_get_attributes(cast(GtkInscription*)this._cPtr);
@@ -393,7 +393,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       See the [gtk.inscription.Inscription.minChars] property.
       Returns: the min-chars property
   */
-  uint getMinChars()
+  uint getMinChars() nothrow
   {
     uint _retval;
     _retval = gtk_inscription_get_min_chars(cast(GtkInscription*)this._cPtr);
@@ -406,7 +406,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       See the [gtk.inscription.Inscription.minLines] property.
       Returns: the min-lines property
   */
-  uint getMinLines()
+  uint getMinLines() nothrow
   {
     uint _retval;
     _retval = gtk_inscription_get_min_lines(cast(GtkInscription*)this._cPtr);
@@ -419,7 +419,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       See the [gtk.inscription.Inscription.natChars] property.
       Returns: the nat-chars property
   */
-  uint getNatChars()
+  uint getNatChars() nothrow
   {
     uint _retval;
     _retval = gtk_inscription_get_nat_chars(cast(GtkInscription*)this._cPtr);
@@ -432,7 +432,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       See the [gtk.inscription.Inscription.natLines] property.
       Returns: the nat-lines property
   */
-  uint getNatLines()
+  uint getNatLines() nothrow
   {
     uint _retval;
     _retval = gtk_inscription_get_nat_lines(cast(GtkInscription*)this._cPtr);
@@ -443,7 +443,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Gets the text that is displayed.
       Returns: The displayed text
   */
-  string getText()
+  string getText() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_inscription_get_text(cast(GtkInscription*)this._cPtr);
@@ -455,7 +455,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Gets the inscription's overflow method.
       Returns: the overflow method
   */
-  gtk.types.InscriptionOverflow getTextOverflow()
+  gtk.types.InscriptionOverflow getTextOverflow() nothrow
   {
     GtkInscriptionOverflow _cretval;
     _cretval = gtk_inscription_get_text_overflow(cast(GtkInscription*)this._cPtr);
@@ -469,7 +469,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       See [gtk.inscription.Inscription.setWrapMode].
       Returns: the line wrap mode
   */
-  pango.types.WrapMode getWrapMode()
+  pango.types.WrapMode getWrapMode() nothrow
   {
     PangoWrapMode _cretval;
     _cretval = gtk_inscription_get_wrap_mode(cast(GtkInscription*)this._cPtr);
@@ -483,7 +483,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       See the [gtk.inscription.Inscription.xalign] property.
       Returns: the xalign property
   */
-  float getXalign()
+  float getXalign() nothrow
   {
     float _retval;
     _retval = gtk_inscription_get_xalign(cast(GtkInscription*)this._cPtr);
@@ -496,7 +496,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       See the [gtk.inscription.Inscription.yalign] property.
       Returns: the yalign property
   */
-  float getYalign()
+  float getYalign() nothrow
   {
     float _retval;
     _retval = gtk_inscription_get_yalign(cast(GtkInscription*)this._cPtr);
@@ -511,7 +511,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         attrs = a [pango.attr_list.AttrList]
   */
-  void setAttributes(pango.attr_list.AttrList attrs = null)
+  void setAttributes(pango.attr_list.AttrList attrs = null) nothrow
   {
     gtk_inscription_set_attributes(cast(GtkInscription*)this._cPtr, attrs ? cast(PangoAttrList*)attrs._cPtr(No.Dup) : null);
   }
@@ -524,7 +524,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         markup = The markup to display
   */
-  void setMarkup(string markup = null)
+  void setMarkup(string markup = null) nothrow
   {
     const(char)* _markup = markup.toCString(No.Alloc);
     gtk_inscription_set_markup(cast(GtkInscription*)this._cPtr, _markup);
@@ -538,7 +538,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         minChars = the minimum number of characters that should fit, approximately
   */
-  void setMinChars(uint minChars)
+  void setMinChars(uint minChars) nothrow
   {
     gtk_inscription_set_min_chars(cast(GtkInscription*)this._cPtr, minChars);
   }
@@ -551,7 +551,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         minLines = the minimum number of lines that should fit, approximately
   */
-  void setMinLines(uint minLines)
+  void setMinLines(uint minLines) nothrow
   {
     gtk_inscription_set_min_lines(cast(GtkInscription*)this._cPtr, minLines);
   }
@@ -564,7 +564,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         natChars = the number of characters that should ideally fit, approximately
   */
-  void setNatChars(uint natChars)
+  void setNatChars(uint natChars) nothrow
   {
     gtk_inscription_set_nat_chars(cast(GtkInscription*)this._cPtr, natChars);
   }
@@ -577,7 +577,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         natLines = the number of lines that should ideally fit
   */
-  void setNatLines(uint natLines)
+  void setNatLines(uint natLines) nothrow
   {
     gtk_inscription_set_nat_lines(cast(GtkInscription*)this._cPtr, natLines);
   }
@@ -588,7 +588,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         text = The text to display
   */
-  void setText(string text = null)
+  void setText(string text = null) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_inscription_set_text(cast(GtkInscription*)this._cPtr, _text);
@@ -600,7 +600,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         overflow = the overflow method to use
   */
-  void setTextOverflow(gtk.types.InscriptionOverflow overflow)
+  void setTextOverflow(gtk.types.InscriptionOverflow overflow) nothrow
   {
     gtk_inscription_set_text_overflow(cast(GtkInscription*)this._cPtr, overflow);
   }
@@ -611,7 +611,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         wrapMode = the line wrapping mode
   */
-  void setWrapMode(pango.types.WrapMode wrapMode)
+  void setWrapMode(pango.types.WrapMode wrapMode) nothrow
   {
     gtk_inscription_set_wrap_mode(cast(GtkInscription*)this._cPtr, wrapMode);
   }
@@ -624,7 +624,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         xalign = the new xalign value, between 0 and 1
   */
-  void setXalign(float xalign)
+  void setXalign(float xalign) nothrow
   {
     gtk_inscription_set_xalign(cast(GtkInscription*)this._cPtr, xalign);
   }
@@ -637,7 +637,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Params:
         yalign = the new yalign value, between 0 and 1
   */
-  void setYalign(float yalign)
+  void setYalign(float yalign) nothrow
   {
     gtk_inscription_set_yalign(cast(GtkInscription*)this._cPtr, yalign);
   }
@@ -655,7 +655,7 @@ class InscriptionGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
         propval = A list of style attributes to apply to the text of the inscription.
       Returns: Builder instance for fluent chaining
   */
-  T attributes(pango.attr_list.AttrList propval)
+  T attributes(pango.attr_list.AttrList propval) nothrow
   {
     return setProperty("attributes", propval);
   }
@@ -672,7 +672,7 @@ class InscriptionGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
           `func@Pango.parse_markup` and setting the two properties yourself.
       Returns: Builder instance for fluent chaining
   */
-  T markup(string propval)
+  T markup(string propval) nothrow
   {
     return setProperty("markup", propval);
   }
@@ -693,7 +693,7 @@ class InscriptionGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
           and its width will be determined entirely by its surroundings.
       Returns: Builder instance for fluent chaining
   */
-  T minChars(uint propval)
+  T minChars(uint propval) nothrow
   {
     return setProperty("min-chars", propval);
   }
@@ -713,7 +713,7 @@ class InscriptionGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
           and its height will be determined entirely by its surroundings.
       Returns: Builder instance for fluent chaining
   */
-  T minLines(uint propval)
+  T minLines(uint propval) nothrow
   {
     return setProperty("min-lines", propval);
   }
@@ -731,7 +731,7 @@ class InscriptionGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
           be the case.
       Returns: Builder instance for fluent chaining
   */
-  T natChars(uint propval)
+  T natChars(uint propval) nothrow
   {
     return setProperty("nat-chars", propval);
   }
@@ -749,7 +749,7 @@ class InscriptionGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
           be the case.
       Returns: Builder instance for fluent chaining
   */
-  T natLines(uint propval)
+  T natLines(uint propval) nothrow
   {
     return setProperty("nat-lines", propval);
   }
@@ -760,7 +760,7 @@ class InscriptionGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
         propval = The displayed text.
       Returns: Builder instance for fluent chaining
   */
-  T text(string propval)
+  T text(string propval) nothrow
   {
     return setProperty("text", propval);
   }
@@ -771,7 +771,7 @@ class InscriptionGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
         propval = The overflow method to use for the text.
       Returns: Builder instance for fluent chaining
   */
-  T textOverflow(gtk.types.InscriptionOverflow propval)
+  T textOverflow(gtk.types.InscriptionOverflow propval) nothrow
   {
     return setProperty("text-overflow", propval);
   }
@@ -784,7 +784,7 @@ class InscriptionGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
           Note that unlike [gtk.label.Label], the default here is [pango.types.WrapMode.WordChar].
       Returns: Builder instance for fluent chaining
   */
-  T wrapMode(pango.types.WrapMode propval)
+  T wrapMode(pango.types.WrapMode propval) nothrow
   {
     return setProperty("wrap-mode", propval);
   }
@@ -798,7 +798,7 @@ class InscriptionGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
           inscription's size allocation is positioned in the available space.
       Returns: Builder instance for fluent chaining
   */
-  T xalign(float propval)
+  T xalign(float propval) nothrow
   {
     return setProperty("xalign", propval);
   }
@@ -812,7 +812,7 @@ class InscriptionGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
           inscription's size allocation is positioned in the available space.
       Returns: Builder instance for fluent chaining
   */
-  T yalign(float propval)
+  T yalign(float propval) nothrow
   {
     return setProperty("yalign", propval);
   }
@@ -825,7 +825,7 @@ final class InscriptionGidBuilder : InscriptionGidBuilderImpl!InscriptionGidBuil
       Create object from builder.
       Returns: New object
   */
-  Inscription build()
+  Inscription build() nothrow
   {
     return new Inscription(cast(void*)createGObject(Inscription._getGType), No.Take);
   }

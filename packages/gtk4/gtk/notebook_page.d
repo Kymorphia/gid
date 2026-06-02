@@ -17,26 +17,26 @@ class NotebookPage : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_notebook_page_get_type != &gidSymbolNotFound ? gtk_notebook_page_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NotebookPage self()
+  override NotebookPage self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class NotebookPage : gobject.object.ObjectWrap
       Get builder for [gtk.notebook_page.NotebookPage]
       Returns: New builder object
   */
-  static NotebookPageGidBuilder builder()
+  static NotebookPageGidBuilder builder() nothrow
   {
     return new NotebookPageGidBuilder;
   }
@@ -54,7 +54,7 @@ class NotebookPage : gobject.object.ObjectWrap
       Get `child` property.
       Returns: The child for this page.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -63,7 +63,7 @@ class NotebookPage : gobject.object.ObjectWrap
       Get `detachable` property.
       Returns: Whether the tab is detachable.
   */
-  @property bool detachable()
+  @property bool detachable() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("detachable");
   }
@@ -73,7 +73,7 @@ class NotebookPage : gobject.object.ObjectWrap
       Params:
         propval = Whether the tab is detachable.
   */
-  @property void detachable(bool propval)
+  @property void detachable(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("detachable", propval);
   }
@@ -82,7 +82,7 @@ class NotebookPage : gobject.object.ObjectWrap
       Get `menu` property.
       Returns: The label widget displayed in the child's menu entry.
   */
-  @property gtk.widget.Widget menu()
+  @property gtk.widget.Widget menu() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.widget.Widget)("menu");
   }
@@ -91,7 +91,7 @@ class NotebookPage : gobject.object.ObjectWrap
       Get `menuLabel` property.
       Returns: The text of the menu widget.
   */
-  @property string menuLabel()
+  @property string menuLabel() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("menu-label");
   }
@@ -101,7 +101,7 @@ class NotebookPage : gobject.object.ObjectWrap
       Params:
         propval = The text of the menu widget.
   */
-  @property void menuLabel(string propval)
+  @property void menuLabel(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("menu-label", propval);
   }
@@ -110,7 +110,7 @@ class NotebookPage : gobject.object.ObjectWrap
       Get `position` property.
       Returns: The index of the child in the parent.
   */
-  @property int position()
+  @property int position() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("position");
   }
@@ -120,7 +120,7 @@ class NotebookPage : gobject.object.ObjectWrap
       Params:
         propval = The index of the child in the parent.
   */
-  @property void position(int propval)
+  @property void position(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("position", propval);
   }
@@ -129,7 +129,7 @@ class NotebookPage : gobject.object.ObjectWrap
       Get `reorderable` property.
       Returns: Whether the tab is reorderable by user action.
   */
-  @property bool reorderable()
+  @property bool reorderable() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("reorderable");
   }
@@ -139,7 +139,7 @@ class NotebookPage : gobject.object.ObjectWrap
       Params:
         propval = Whether the tab is reorderable by user action.
   */
-  @property void reorderable(bool propval)
+  @property void reorderable(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("reorderable", propval);
   }
@@ -148,7 +148,7 @@ class NotebookPage : gobject.object.ObjectWrap
       Get `tab` property.
       Returns: The tab widget for this page.
   */
-  @property gtk.widget.Widget tab()
+  @property gtk.widget.Widget tab() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.widget.Widget)("tab");
   }
@@ -157,7 +157,7 @@ class NotebookPage : gobject.object.ObjectWrap
       Get `tabExpand` property.
       Returns: Whether to expand the child's tab.
   */
-  @property bool tabExpand()
+  @property bool tabExpand() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("tab-expand");
   }
@@ -167,7 +167,7 @@ class NotebookPage : gobject.object.ObjectWrap
       Params:
         propval = Whether to expand the child's tab.
   */
-  @property void tabExpand(bool propval)
+  @property void tabExpand(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("tab-expand", propval);
   }
@@ -176,7 +176,7 @@ class NotebookPage : gobject.object.ObjectWrap
       Get `tabFill` property.
       Returns: Whether the child's tab should fill the allocated area.
   */
-  @property bool tabFill()
+  @property bool tabFill() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("tab-fill");
   }
@@ -186,7 +186,7 @@ class NotebookPage : gobject.object.ObjectWrap
       Params:
         propval = Whether the child's tab should fill the allocated area.
   */
-  @property void tabFill(bool propval)
+  @property void tabFill(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("tab-fill", propval);
   }
@@ -195,7 +195,7 @@ class NotebookPage : gobject.object.ObjectWrap
       Get `tabLabel` property.
       Returns: The text of the tab widget.
   */
-  @property string tabLabel()
+  @property string tabLabel() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("tab-label");
   }
@@ -205,7 +205,7 @@ class NotebookPage : gobject.object.ObjectWrap
       Params:
         propval = The text of the tab widget.
   */
-  @property void tabLabel(string propval)
+  @property void tabLabel(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("tab-label", propval);
   }
@@ -214,7 +214,7 @@ class NotebookPage : gobject.object.ObjectWrap
       Returns the notebook child to which page belongs.
       Returns: the child to which page belongs
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_notebook_page_get_child(cast(GtkNotebookPage*)this._cPtr);
@@ -233,7 +233,7 @@ class NotebookPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The child for this page.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -244,7 +244,7 @@ class NotebookPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether the tab is detachable.
       Returns: Builder instance for fluent chaining
   */
-  T detachable(bool propval)
+  T detachable(bool propval) nothrow
   {
     return setProperty("detachable", propval);
   }
@@ -255,7 +255,7 @@ class NotebookPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The label widget displayed in the child's menu entry.
       Returns: Builder instance for fluent chaining
   */
-  T menu(gtk.widget.Widget propval)
+  T menu(gtk.widget.Widget propval) nothrow
   {
     return setProperty("menu", propval);
   }
@@ -266,7 +266,7 @@ class NotebookPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The text of the menu widget.
       Returns: Builder instance for fluent chaining
   */
-  T menuLabel(string propval)
+  T menuLabel(string propval) nothrow
   {
     return setProperty("menu-label", propval);
   }
@@ -277,7 +277,7 @@ class NotebookPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The index of the child in the parent.
       Returns: Builder instance for fluent chaining
   */
-  T position(int propval)
+  T position(int propval) nothrow
   {
     return setProperty("position", propval);
   }
@@ -288,7 +288,7 @@ class NotebookPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether the tab is reorderable by user action.
       Returns: Builder instance for fluent chaining
   */
-  T reorderable(bool propval)
+  T reorderable(bool propval) nothrow
   {
     return setProperty("reorderable", propval);
   }
@@ -299,7 +299,7 @@ class NotebookPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The tab widget for this page.
       Returns: Builder instance for fluent chaining
   */
-  T tab(gtk.widget.Widget propval)
+  T tab(gtk.widget.Widget propval) nothrow
   {
     return setProperty("tab", propval);
   }
@@ -310,7 +310,7 @@ class NotebookPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether to expand the child's tab.
       Returns: Builder instance for fluent chaining
   */
-  T tabExpand(bool propval)
+  T tabExpand(bool propval) nothrow
   {
     return setProperty("tab-expand", propval);
   }
@@ -321,7 +321,7 @@ class NotebookPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether the child's tab should fill the allocated area.
       Returns: Builder instance for fluent chaining
   */
-  T tabFill(bool propval)
+  T tabFill(bool propval) nothrow
   {
     return setProperty("tab-fill", propval);
   }
@@ -332,7 +332,7 @@ class NotebookPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The text of the tab widget.
       Returns: Builder instance for fluent chaining
   */
-  T tabLabel(string propval)
+  T tabLabel(string propval) nothrow
   {
     return setProperty("tab-label", propval);
   }
@@ -345,7 +345,7 @@ final class NotebookPageGidBuilder : NotebookPageGidBuilderImpl!NotebookPageGidB
       Create object from builder.
       Returns: New object
   */
-  NotebookPage build()
+  NotebookPage build() nothrow
   {
     return new NotebookPage(cast(void*)createGObject(NotebookPage._getGType), No.Take);
   }

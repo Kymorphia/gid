@@ -64,7 +64,7 @@ struct MetaInfo
   GstMetaClearFunction clearFunc;
 
   /** */
-  bool isCustom()
+  bool isCustom() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_meta_info_is_custom(cast(const(GstMetaInfo)*)&this);
@@ -79,7 +79,7 @@ struct MetaInfo
       kept.
       Returns: the registered meta
   */
-  gst.meta_info.MetaInfo register()
+  gst.meta_info.MetaInfo register() nothrow
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_meta_info_register(cast(GstMetaInfo*)&this);

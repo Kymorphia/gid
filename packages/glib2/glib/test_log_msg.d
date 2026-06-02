@@ -13,11 +13,8 @@ class TestLogMsg
   GTestLogMsg _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.test_log_msg.TestLogMsg");
-
     _cInstance = *cast(GTestLogMsg*)ptr;
 
     if (take)
@@ -25,7 +22,7 @@ class TestLogMsg
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }

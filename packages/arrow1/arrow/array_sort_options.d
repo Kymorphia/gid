@@ -15,26 +15,26 @@ class ArraySortOptions : arrow.function_options.FunctionOptions
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_array_sort_options_get_type != &gidSymbolNotFound ? garrow_array_sort_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ArraySortOptions self()
+  override ArraySortOptions self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class ArraySortOptions : arrow.function_options.FunctionOptions
       Get builder for [arrow.array_sort_options.ArraySortOptions]
       Returns: New builder object
   */
-  static ArraySortOptionsGidBuilder builder()
+  static ArraySortOptionsGidBuilder builder() nothrow
   {
     return new ArraySortOptionsGidBuilder;
   }
@@ -52,7 +52,7 @@ class ArraySortOptions : arrow.function_options.FunctionOptions
       Get `order` property.
       Returns: How to order values.
   */
-  @property arrow.types.SortOrder order()
+  @property arrow.types.SortOrder order() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.types.SortOrder)("order");
   }
@@ -62,13 +62,13 @@ class ArraySortOptions : arrow.function_options.FunctionOptions
       Params:
         propval = How to order values.
   */
-  @property void order(arrow.types.SortOrder propval)
+  @property void order(arrow.types.SortOrder propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(arrow.types.SortOrder)("order", propval);
   }
 
   /** */
-  this(arrow.types.SortOrder order)
+  this(arrow.types.SortOrder order) nothrow
   {
     GArrowArraySortOptions* _cretval;
     _cretval = garrow_array_sort_options_new(order);
@@ -78,7 +78,7 @@ class ArraySortOptions : arrow.function_options.FunctionOptions
   alias equal = arrow.function_options.FunctionOptions.equal;
 
   /** */
-  bool equal(arrow.array_sort_options.ArraySortOptions otherOptions)
+  bool equal(arrow.array_sort_options.ArraySortOptions otherOptions) nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_array_sort_options_equal(cast(GArrowArraySortOptions*)this._cPtr, otherOptions ? cast(GArrowArraySortOptions*)otherOptions._cPtr(No.Dup) : null);
@@ -96,7 +96,7 @@ class ArraySortOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptions
         propval = How to order values.
       Returns: Builder instance for fluent chaining
   */
-  T order(arrow.types.SortOrder propval)
+  T order(arrow.types.SortOrder propval) nothrow
   {
     return setProperty("order", propval);
   }
@@ -109,7 +109,7 @@ final class ArraySortOptionsGidBuilder : ArraySortOptionsGidBuilderImpl!ArraySor
       Create object from builder.
       Returns: New object
   */
-  ArraySortOptions build()
+  ArraySortOptions build() nothrow
   {
     return new ArraySortOptions(cast(void*)createGObject(ArraySortOptions._getGType), Yes.Take);
   }

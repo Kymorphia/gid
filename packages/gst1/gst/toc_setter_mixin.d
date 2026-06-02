@@ -35,7 +35,7 @@ template TocSetterT()
       Returns: TOC set, or null. Unref with
             gst_toc_unref() when no longer needed
   */
-  override gst.toc.Toc getToc()
+  override gst.toc.Toc getToc() nothrow
   {
     GstToc* _cretval;
     _cretval = gst_toc_setter_get_toc(cast(GstTocSetter*)this._cPtr);
@@ -47,7 +47,7 @@ template TocSetterT()
       Reset the internal TOC. Elements should call this from within the
       state-change handler.
   */
-  override void reset()
+  override void reset() nothrow
   {
     gst_toc_setter_reset(cast(GstTocSetter*)this._cPtr);
   }
@@ -59,7 +59,7 @@ template TocSetterT()
       Params:
         toc = a #GstToc to set.
   */
-  override void setToc(gst.toc.Toc toc = null)
+  override void setToc(gst.toc.Toc toc = null) nothrow
   {
     gst_toc_setter_set_toc(cast(GstTocSetter*)this._cPtr, toc ? cast(GstToc*)toc._cPtr(No.Dup) : null);
   }

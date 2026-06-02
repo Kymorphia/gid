@@ -41,24 +41,21 @@ class ThreadPool
   GThreadPool _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.thread_pool.ThreadPool");
-
     _cInstance = *cast(GThreadPool*)ptr;
 
     if (take)
       gFree(ptr);
   }
 
-  ~this()
+  ~this() nothrow
   {
     freePool(&_cInstance);
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -67,7 +64,7 @@ class ThreadPool
       Get `func` field.
       Returns: the function to execute in the threads of this pool
   */
-  @property GFunc func()
+  @property GFunc func() nothrow
   {
     return (cast(GThreadPool*)this._cPtr).func;
   }
@@ -78,7 +75,7 @@ class ThreadPool
         propval = the function to execute in the threads of this pool
   */
 
-  @property void func(GFunc propval)
+  @property void func(GFunc propval) nothrow
   {
     (cast(GThreadPool*)this._cPtr).func = propval;
   }
@@ -87,7 +84,7 @@ class ThreadPool
       Get `exclusive` field.
       Returns: are all threads exclusive to this pool
   */
-  @property bool exclusive()
+  @property bool exclusive() nothrow
   {
     return cast(bool)(cast(GThreadPool*)this._cPtr).exclusive;
   }
@@ -97,12 +94,12 @@ class ThreadPool
       Params:
         propval = are all threads exclusive to this pool
   */
-  @property void exclusive(bool propval)
+  @property void exclusive(bool propval) nothrow
   {
     (cast(GThreadPool*)this._cPtr).exclusive = propval;
   }
 
-  private static void freePool(GThreadPool* pool)
+  private static void freePool(GThreadPool* pool) nothrow
   {
     g_thread_pool_free(pool, true, false); // immediate, wait
   }
@@ -113,7 +110,7 @@ class ThreadPool
       Returns the maximal number of threads for pool.
       Returns: the maximal number of threads
   */
-  int getMaxThreads()
+  int getMaxThreads() nothrow
   {
     int _retval;
     _retval = g_thread_pool_get_max_threads(cast(GThreadPool*)this._cPtr);
@@ -124,7 +121,7 @@ class ThreadPool
       Returns the number of threads currently running in pool.
       Returns: the number of threads currently running
   */
-  uint getNumThreads()
+  uint getNumThreads() nothrow
   {
     uint _retval;
     _retval = g_thread_pool_get_num_threads(cast(GThreadPool*)this._cPtr);
@@ -139,7 +136,7 @@ class ThreadPool
         data = an unprocessed item in the pool
       Returns: true if the item was found and moved
   */
-  bool moveToFront(void* data = null)
+  bool moveToFront(void* data = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_thread_pool_move_to_front(cast(GThreadPool*)this._cPtr, data);
@@ -219,7 +216,7 @@ class ThreadPool
       Returns the number of tasks still unprocessed in pool.
       Returns: the number of unprocessed tasks
   */
-  uint unprocessed()
+  uint unprocessed() nothrow
   {
     uint _retval;
     _retval = g_thread_pool_unprocessed(cast(GThreadPool*)this._cPtr);
@@ -237,7 +234,7 @@ class ThreadPool
             for new tasks in the thread pool before stopping the
             thread
   */
-  static uint getMaxIdleTime()
+  static uint getMaxIdleTime() nothrow
   {
     uint _retval;
     _retval = g_thread_pool_get_max_idle_time();
@@ -248,7 +245,7 @@ class ThreadPool
       Returns the maximal allowed number of unused threads.
       Returns: the maximal number of unused threads
   */
-  static int getMaxUnusedThreads()
+  static int getMaxUnusedThreads() nothrow
   {
     int _retval;
     _retval = g_thread_pool_get_max_unused_threads();
@@ -259,7 +256,7 @@ class ThreadPool
       Returns the number of currently unused threads.
       Returns: the number of currently unused threads
   */
-  static uint getNumUnusedThreads()
+  static uint getNumUnusedThreads() nothrow
   {
     uint _retval;
     _retval = g_thread_pool_get_num_unused_threads();
@@ -281,7 +278,7 @@ class ThreadPool
         interval = the maximum interval (in milliseconds)
               a thread can be idle
   */
-  static void setMaxIdleTime(uint interval)
+  static void setMaxIdleTime(uint interval) nothrow
   {
     g_thread_pool_set_max_idle_time(interval);
   }
@@ -296,7 +293,7 @@ class ThreadPool
       Params:
         maxThreads = maximal number of unused threads
   */
-  static void setMaxUnusedThreads(int maxThreads)
+  static void setMaxUnusedThreads(int maxThreads) nothrow
   {
     g_thread_pool_set_max_unused_threads(maxThreads);
   }
@@ -306,7 +303,7 @@ class ThreadPool
       maximal number of unused threads. This function can be used to
       regularly stop all unused threads e.g. from [glib.global.timeoutAdd].
   */
-  static void stopUnusedThreads()
+  static void stopUnusedThreads() nothrow
   {
     g_thread_pool_stop_unused_threads();
   }

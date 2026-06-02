@@ -72,26 +72,26 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())secret_service_get_type != &gidSymbolNotFound ? secret_service_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Service self()
+  override Service self() nothrow
   {
     return this;
   }
@@ -100,7 +100,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       Get builder for [secret.service.Service]
       Returns: New builder object
   */
-  static ServiceGidBuilder builder()
+  static ServiceGidBuilder builder() nothrow
   {
     return new ServiceGidBuilder;
   }
@@ -118,7 +118,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       library are still referenced, then this will not result in all memory
       being freed.
   */
-  static void disconnect()
+  static void disconnect() nothrow
   {
     secret_service_disconnect();
   }
@@ -138,14 +138,21 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         cancellable = optional cancellation object
         callback = called when the operation completes
   */
-  static void get(secret.types.ServiceFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  static void get(secret.types.ServiceFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -224,14 +231,21 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         cancellable = optional cancellation object
         callback = called when the operation completes
   */
-  static void open(gobject.types.GType serviceGtype, string serviceBusName, secret.types.ServiceFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  static void open(gobject.types.GType serviceGtype, string serviceBusName, secret.types.ServiceFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _serviceBusName = serviceBusName.toCString(No.Alloc);
@@ -313,14 +327,21 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         cancellable = optional cancellation object
         callback = called when the operation completes
   */
-  void clear(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void clear(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _attributes = gHashTableFromD!(string, string)(attributes);
@@ -391,7 +412,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         value = the encoded secret
       Returns: the decoded secret value
   */
-  secret.value.Value decodeDbusSecret(glib.variant.Variant value)
+  secret.value.Value decodeDbusSecret(glib.variant.Variant value) nothrow
   {
     SecretValue* _cretval;
     _cretval = secret_service_decode_dbus_secret(cast(SecretService*)this._cPtr, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
@@ -411,7 +432,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         value = the secret value
       Returns: the encoded secret
   */
-  glib.variant.Variant encodeDbusSecret(secret.value.Value value)
+  glib.variant.Variant encodeDbusSecret(secret.value.Value value) nothrow
   {
     GVariant* _cretval;
     _cretval = secret_service_encode_dbus_secret(cast(SecretService*)this._cPtr, value ? cast(SecretValue*)value._cPtr(No.Dup) : null);
@@ -436,14 +457,21 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         cancellable = optional cancellation object
         callback = called when the operation completes
   */
-  void ensureSession(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void ensureSession(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -504,7 +532,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       This will always be either [secret.collection.Collection] or derived from it.
       Returns: the gobject type for collections
   */
-  gobject.types.GType getCollectionGtype()
+  gobject.types.GType getCollectionGtype() nothrow
   {
     gobject.types.GType _retval;
     _retval = secret_service_get_collection_gtype(cast(SecretService*)this._cPtr);
@@ -521,7 +549,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       Returns: a
           list of the collections in the secret service
   */
-  secret.collection.Collection[] getCollections()
+  secret.collection.Collection[] getCollections() nothrow
   {
     GList* _cretval;
     _cretval = secret_service_get_collections(cast(SecretService*)this._cPtr);
@@ -539,7 +567,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       to initialize further features and change the flags.
       Returns: the flags for features initialized
   */
-  secret.types.ServiceFlags getFlags()
+  secret.types.ServiceFlags getFlags() nothrow
   {
     SecretServiceFlags _cretval;
     _cretval = secret_service_get_flags(cast(SecretService*)this._cPtr);
@@ -553,7 +581,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       This will always be either [secret.item.Item] or derived from it.
       Returns: the gobject type for items
   */
-  gobject.types.GType getItemGtype()
+  gobject.types.GType getItemGtype() nothrow
   {
     gobject.types.GType _retval;
     _retval = secret_service_get_item_gtype(cast(SecretService*)this._cPtr);
@@ -569,7 +597,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       Returns: a string representing the algorithms for transferring
           secrets
   */
-  string getSessionAlgorithms()
+  string getSessionAlgorithms() nothrow
   {
     const(char)* _cretval;
     _cretval = secret_service_get_session_algorithms(cast(SecretService*)this._cPtr);
@@ -586,7 +614,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       Returns: a string representing the D-Bus object path of the
           session
   */
-  string getSessionDbusPath()
+  string getSessionDbusPath() nothrow
   {
     const(char)* _cretval;
     _cretval = secret_service_get_session_dbus_path(cast(SecretService*)this._cPtr);
@@ -610,14 +638,21 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         cancellable = optional cancellation object
         callback = called when the operation completes
   */
-  void loadCollections(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void loadCollections(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -689,14 +724,21 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         cancellable = optional cancellation object
         callback = called when the operation completes
   */
-  void lock(gio.dbus_proxy.DBusProxy[] objects, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void lock(gio.dbus_proxy.DBusProxy[] objects, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _objects = gListFromD!(gio.dbus_proxy.DBusProxy)(objects);
@@ -780,14 +822,21 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         cancellable = optional cancellation object
         callback = called when the operation completes
   */
-  void lookup(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void lookup(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _attributes = gHashTableFromD!(string, string)(attributes);
@@ -866,14 +915,21 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         cancellable = optional cancellation object
         callback = called when the operation completes
   */
-  void prompt(secret.prompt.Prompt prompt, glib.variant_type.VariantType returnType = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void prompt(secret.prompt.Prompt prompt, glib.variant_type.VariantType returnType = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -967,14 +1023,21 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         cancellable = optional cancellation object
         callback = called when the operation completes
   */
-  void search(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void search(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _attributes = gHashTableFromD!(string, string)(attributes);
@@ -1064,14 +1127,21 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         cancellable = optional cancellation object
         callback = called when the operation completes
   */
-  void setAlias(string alias_, secret.collection.Collection collection = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void setAlias(string alias_, secret.collection.Collection collection = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _alias_ = alias_.toCString(No.Alloc);
@@ -1151,14 +1221,21 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         cancellable = optional cancellation object
         callback = called when the operation completes
   */
-  void store(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.Value value, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void store(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.Value value, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _attributes = gHashTableFromD!(string, string)(attributes);
@@ -1248,14 +1325,21 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         cancellable = optional cancellation object
         callback = called when the operation completes
   */
-  void unlock(gio.dbus_proxy.DBusProxy[] objects, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void unlock(gio.dbus_proxy.DBusProxy[] objects, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _objects = gListFromD!(gio.dbus_proxy.DBusProxy)(objects);
@@ -1338,7 +1422,7 @@ final class ServiceGidBuilder : ServiceGidBuilderImpl!ServiceGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Service build()
+  Service build() nothrow
   {
     return new Service(cast(void*)createGObject(Service._getGType), No.Take);
   }

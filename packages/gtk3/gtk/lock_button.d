@@ -55,26 +55,26 @@ class LockButton : gtk.button.Button
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_lock_button_get_type != &gidSymbolNotFound ? gtk_lock_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LockButton self()
+  override LockButton self() nothrow
   {
     return this;
   }
@@ -83,79 +83,79 @@ class LockButton : gtk.button.Button
       Get builder for [gtk.lock_button.LockButton]
       Returns: New builder object
   */
-  static LockButtonGidBuilder builder()
+  static LockButtonGidBuilder builder() nothrow
   {
     return new LockButtonGidBuilder;
   }
 
   /** */
-  @property gio.permission.Permission permission()
+  @property gio.permission.Permission permission() nothrow
   {
     return getPermission();
   }
 
   /** */
-  @property void permission(gio.permission.Permission propval)
+  @property void permission(gio.permission.Permission propval) nothrow
   {
     setPermission(propval);
   }
 
   /** */
-  @property string textLock()
+  @property string textLock() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("text-lock");
   }
 
   /** */
-  @property void textLock(string propval)
+  @property void textLock(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("text-lock", propval);
   }
 
   /** */
-  @property string textUnlock()
+  @property string textUnlock() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("text-unlock");
   }
 
   /** */
-  @property void textUnlock(string propval)
+  @property void textUnlock(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("text-unlock", propval);
   }
 
   /** */
-  @property string tooltipLock()
+  @property string tooltipLock() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("tooltip-lock");
   }
 
   /** */
-  @property void tooltipLock(string propval)
+  @property void tooltipLock(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("tooltip-lock", propval);
   }
 
   /** */
-  @property string tooltipNotAuthorized()
+  @property string tooltipNotAuthorized() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("tooltip-not-authorized");
   }
 
   /** */
-  @property void tooltipNotAuthorized(string propval)
+  @property void tooltipNotAuthorized(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("tooltip-not-authorized", propval);
   }
 
   /** */
-  @property string tooltipUnlock()
+  @property string tooltipUnlock() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("tooltip-unlock");
   }
 
   /** */
-  @property void tooltipUnlock(string propval)
+  @property void tooltipUnlock(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("tooltip-unlock", propval);
   }
@@ -167,7 +167,7 @@ class LockButton : gtk.button.Button
         permission = a #GPermission
       Returns: a new #GtkLockButton
   */
-  this(gio.permission.Permission permission = null)
+  this(gio.permission.Permission permission = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_lock_button_new(permission ? cast(GPermission*)permission._cPtr(No.Dup) : null);
@@ -178,7 +178,7 @@ class LockButton : gtk.button.Button
       Obtains the #GPermission object that controls button.
       Returns: the #GPermission of button
   */
-  gio.permission.Permission getPermission()
+  gio.permission.Permission getPermission() nothrow
   {
     GPermission* _cretval;
     _cretval = gtk_lock_button_get_permission(cast(GtkLockButton*)this._cPtr);
@@ -192,7 +192,7 @@ class LockButton : gtk.button.Button
       Params:
         permission = a #GPermission object, or null
   */
-  void setPermission(gio.permission.Permission permission = null)
+  void setPermission(gio.permission.Permission permission = null) nothrow
   {
     gtk_lock_button_set_permission(cast(GtkLockButton*)this._cPtr, permission ? cast(GPermission*)permission._cPtr(No.Dup) : null);
   }
@@ -204,37 +204,37 @@ class LockButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
 
 
   /** */
-  T permission(gio.permission.Permission propval)
+  T permission(gio.permission.Permission propval) nothrow
   {
     return setProperty("permission", propval);
   }
 
   /** */
-  T textLock(string propval)
+  T textLock(string propval) nothrow
   {
     return setProperty("text-lock", propval);
   }
 
   /** */
-  T textUnlock(string propval)
+  T textUnlock(string propval) nothrow
   {
     return setProperty("text-unlock", propval);
   }
 
   /** */
-  T tooltipLock(string propval)
+  T tooltipLock(string propval) nothrow
   {
     return setProperty("tooltip-lock", propval);
   }
 
   /** */
-  T tooltipNotAuthorized(string propval)
+  T tooltipNotAuthorized(string propval) nothrow
   {
     return setProperty("tooltip-not-authorized", propval);
   }
 
   /** */
-  T tooltipUnlock(string propval)
+  T tooltipUnlock(string propval) nothrow
   {
     return setProperty("tooltip-unlock", propval);
   }
@@ -247,7 +247,7 @@ final class LockButtonGidBuilder : LockButtonGidBuilderImpl!LockButtonGidBuilder
       Create object from builder.
       Returns: New object
   */
-  LockButton build()
+  LockButton build() nothrow
   {
     return new LockButton(cast(void*)createGObject(LockButton._getGType), No.Take);
   }

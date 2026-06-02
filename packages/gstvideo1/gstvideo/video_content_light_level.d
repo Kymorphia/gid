@@ -35,7 +35,7 @@ struct VideoContentLightLevel
         caps = a #GstCaps
       Returns: true if linfo was successfully set to caps
   */
-  bool addToCaps(gst.caps.Caps caps)
+  bool addToCaps(gst.caps.Caps caps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_content_light_level_add_to_caps(cast(const(GstVideoContentLightLevel)*)&this, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
@@ -49,7 +49,7 @@ struct VideoContentLightLevel
         caps = a #GstCaps
       Returns: if caps has #GstVideoContentLightLevel and could be parsed
   */
-  bool fromCaps(gst.caps.Caps caps)
+  bool fromCaps(gst.caps.Caps caps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_content_light_level_from_caps(cast(GstVideoContentLightLevel*)&this, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
@@ -64,7 +64,7 @@ struct VideoContentLightLevel
         level = a content-light-level string from caps
       Returns: true if linfo points to valid #GstVideoContentLightLevel.
   */
-  bool fromString(string level)
+  bool fromString(string level) nothrow
   {
     bool _retval;
     const(char)* _level = level.toCString(No.Alloc);
@@ -75,7 +75,7 @@ struct VideoContentLightLevel
   /**
       Initialize linfo
   */
-  void init_()
+  void init_() nothrow
   {
     gst_video_content_light_level_init(cast(GstVideoContentLightLevel*)&this);
   }
@@ -87,7 +87,7 @@ struct VideoContentLightLevel
         other = a #GstVideoContentLightLevel
       Returns: true if linfo and other are equal.
   */
-  bool isEqual(gstvideo.video_content_light_level.VideoContentLightLevel other)
+  bool isEqual(gstvideo.video_content_light_level.VideoContentLightLevel other) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_content_light_level_is_equal(cast(const(GstVideoContentLightLevel)*)&this, cast(const(GstVideoContentLightLevel)*)&other);
@@ -98,7 +98,7 @@ struct VideoContentLightLevel
       Convert linfo to its string representation.
       Returns: a string representation of linfo.
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gst_video_content_light_level_to_string(cast(const(GstVideoContentLightLevel)*)&this);

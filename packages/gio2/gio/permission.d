@@ -33,26 +33,26 @@ class Permission : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_permission_get_type != &gidSymbolNotFound ? g_permission_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Permission self()
+  override Permission self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class Permission : gobject.object.ObjectWrap
       Get builder for [gio.permission.Permission]
       Returns: New builder object
   */
-  static PermissionGidBuilder builder()
+  static PermissionGidBuilder builder() nothrow
   {
     return new PermissionGidBuilder;
   }
@@ -71,7 +71,7 @@ class Permission : gobject.object.ObjectWrap
       Returns: true if the caller currently has permission to perform the action that
         @permission represents the permission to perform.
   */
-  @property bool allowed()
+  @property bool allowed() nothrow
   {
     return getAllowed();
   }
@@ -81,7 +81,7 @@ class Permission : gobject.object.ObjectWrap
       Returns: true if it is generally possible to acquire the permission by calling
         [gio.permission.Permission.acquire].
   */
-  @property bool canAcquire()
+  @property bool canAcquire() nothrow
   {
     return getCanAcquire();
   }
@@ -91,7 +91,7 @@ class Permission : gobject.object.ObjectWrap
       Returns: true if it is generally possible to release the permission by calling
         [gio.permission.Permission.release].
   */
-  @property bool canRelease()
+  @property bool canRelease() nothrow
   {
     return getCanRelease();
   }
@@ -138,14 +138,21 @@ class Permission : gobject.object.ObjectWrap
         cancellable = a #GCancellable, or null
         callback = the #GAsyncReadyCallback to call when done
   */
-  void acquireAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void acquireAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -180,7 +187,7 @@ class Permission : gobject.object.ObjectWrap
       permission represents the permission to perform.
       Returns: the value of the 'allowed' property
   */
-  bool getAllowed()
+  bool getAllowed() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_permission_get_allowed(cast(GPermission*)this._cPtr);
@@ -193,7 +200,7 @@ class Permission : gobject.object.ObjectWrap
       [gio.permission.Permission.acquire].
       Returns: the value of the 'can-acquire' property
   */
-  bool getCanAcquire()
+  bool getCanAcquire() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_permission_get_can_acquire(cast(GPermission*)this._cPtr);
@@ -206,7 +213,7 @@ class Permission : gobject.object.ObjectWrap
       [gio.permission.Permission.release].
       Returns: the value of the 'can-release' property
   */
-  bool getCanRelease()
+  bool getCanRelease() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_permission_get_can_release(cast(GPermission*)this._cPtr);
@@ -225,7 +232,7 @@ class Permission : gobject.object.ObjectWrap
         canAcquire = the new value for the 'can-acquire' property
         canRelease = the new value for the 'can-release' property
   */
-  void implUpdate(bool allowed, bool canAcquire, bool canRelease)
+  void implUpdate(bool allowed, bool canAcquire, bool canRelease) nothrow
   {
     g_permission_impl_update(cast(GPermission*)this._cPtr, allowed, canAcquire, canRelease);
   }
@@ -272,14 +279,21 @@ class Permission : gobject.object.ObjectWrap
         cancellable = a #GCancellable, or null
         callback = the #GAsyncReadyCallback to call when done
   */
-  void releaseAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void releaseAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -321,7 +335,7 @@ final class PermissionGidBuilder : PermissionGidBuilderImpl!PermissionGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Permission build()
+  Permission build() nothrow
   {
     return new Permission(cast(void*)createGObject(Permission._getGType), No.Take);
   }

@@ -17,26 +17,26 @@ class InternetAddress : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())internet_address_get_type != &gidSymbolNotFound ? internet_address_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override InternetAddress self()
+  override InternetAddress self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class InternetAddress : gobject.object.ObjectWrap
       Get builder for [gmime.internet_address.InternetAddress]
       Returns: New builder object
   */
-  static InternetAddressGidBuilder builder()
+  static InternetAddressGidBuilder builder() nothrow
   {
     return new InternetAddressGidBuilder;
   }
@@ -55,7 +55,7 @@ class InternetAddress : gobject.object.ObjectWrap
       Returns: the charset to be used when encoding the name of the
         mailbox or group if available or null otherwise.
   */
-  string getCharset()
+  string getCharset() nothrow
   {
     const(char)* _cretval;
     _cretval = internet_address_get_charset(cast(GMimeInternetAddress*)this._cPtr);
@@ -69,7 +69,7 @@ class InternetAddress : gobject.object.ObjectWrap
         for display if available or null otherwise. If the name is available,
         the returned string will be in UTF-8.
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = internet_address_get_name(cast(GMimeInternetAddress*)this._cPtr);
@@ -83,7 +83,7 @@ class InternetAddress : gobject.object.ObjectWrap
       Params:
         charset = the charset to use when encoding the name or null to use the defaults
   */
-  void setCharset(string charset = null)
+  void setCharset(string charset = null) nothrow
   {
     const(char)* _charset = charset.toCString(No.Alloc);
     internet_address_set_charset(cast(GMimeInternetAddress*)this._cPtr, _charset);
@@ -97,7 +97,7 @@ class InternetAddress : gobject.object.ObjectWrap
       Params:
         name = the display name for the address group or mailbox
   */
-  void setName(string name)
+  void setName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     internet_address_set_name(cast(GMimeInternetAddress*)this._cPtr, _name);
@@ -113,7 +113,7 @@ class InternetAddress : gobject.object.ObjectWrap
       Returns: the #InternetAddress object as an allocated string in
         rfc822 format.
   */
-  string toString_(gmime.format_options.FormatOptions options, bool encode)
+  string toString_(gmime.format_options.FormatOptions options, bool encode) nothrow
   {
     char* _cretval;
     _cretval = internet_address_to_string(cast(GMimeInternetAddress*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, encode);
@@ -134,7 +134,7 @@ final class InternetAddressGidBuilder : InternetAddressGidBuilderImpl!InternetAd
       Create object from builder.
       Returns: New object
   */
-  InternetAddress build()
+  InternetAddress build() nothrow
   {
     return new InternetAddress(cast(void*)createGObject(InternetAddress._getGType), No.Take);
   }

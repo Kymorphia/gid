@@ -13,11 +13,8 @@ class Simd4X4F
   graphene_simd4x4f_t _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for graphene.simd4_x4_f.Simd4X4F");
-
     _cInstance = *cast(graphene_simd4x4f_t*)ptr;
 
     if (take)
@@ -25,7 +22,7 @@ class Simd4X4F
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }

@@ -26,26 +26,26 @@ class Device : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_device_get_type != &gidSymbolNotFound ? gst_device_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Device self()
+  override Device self() nothrow
   {
     return this;
   }
@@ -54,31 +54,31 @@ class Device : gst.object.ObjectWrap
       Get builder for [gst.device.Device]
       Returns: New builder object
   */
-  static DeviceGidBuilder builder()
+  static DeviceGidBuilder builder() nothrow
   {
     return new DeviceGidBuilder;
   }
 
   /** */
-  @property gst.caps.Caps caps()
+  @property gst.caps.Caps caps() nothrow
   {
     return getCaps();
   }
 
   /** */
-  @property string deviceClass()
+  @property string deviceClass() nothrow
   {
     return getDeviceClass();
   }
 
   /** */
-  @property string displayName()
+  @property string displayName() nothrow
   {
     return getDisplayName();
   }
 
   /** */
-  @property gst.structure.Structure properties()
+  @property gst.structure.Structure properties() nothrow
   {
     return getProperties();
   }
@@ -93,7 +93,7 @@ class Device : gst.object.ObjectWrap
       Returns: a new #GstElement configured to use
         this device
   */
-  gst.element.Element createElement(string name = null)
+  gst.element.Element createElement(string name = null) nothrow
   {
     GstElement* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -107,7 +107,7 @@ class Device : gst.object.ObjectWrap
       Returns: The #GstCaps supported by this device. Unref with
         gst_caps_unref() when done.
   */
-  gst.caps.Caps getCaps()
+  gst.caps.Caps getCaps() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_device_get_caps(cast(GstDevice*)this._cPtr);
@@ -121,7 +121,7 @@ class Device : gst.object.ObjectWrap
       classes of the #GstDeviceProvider that produced this device.
       Returns: The device class. Free with [glib.global.gfree] after use.
   */
-  string getDeviceClass()
+  string getDeviceClass() nothrow
   {
     char* _cretval;
     _cretval = gst_device_get_device_class(cast(GstDevice*)this._cPtr);
@@ -133,7 +133,7 @@ class Device : gst.object.ObjectWrap
       Gets the user-friendly name of the device.
       Returns: The device name. Free with [glib.global.gfree] after use.
   */
-  string getDisplayName()
+  string getDisplayName() nothrow
   {
     char* _cretval;
     _cretval = gst_device_get_display_name(cast(GstDevice*)this._cPtr);
@@ -146,7 +146,7 @@ class Device : gst.object.ObjectWrap
       Returns: The extra properties or null when there are none.
                  Free with [gst.structure.Structure.free] after use.
   */
-  gst.structure.Structure getProperties()
+  gst.structure.Structure getProperties() nothrow
   {
     GstStructure* _cretval;
     _cretval = gst_device_get_properties(cast(GstDevice*)this._cPtr);
@@ -162,7 +162,7 @@ class Device : gst.object.ObjectWrap
            all classes are matched
       Returns: true if device matches.
   */
-  bool hasClasses(string classes)
+  bool hasClasses(string classes) nothrow
   {
     bool _retval;
     const(char)* _classes = classes.toCString(No.Alloc);
@@ -178,7 +178,7 @@ class Device : gst.object.ObjectWrap
             to match, only match if all classes are matched
       Returns: true if device matches.
   */
-  bool hasClassesv(string[] classes)
+  bool hasClassesv(string[] classes) nothrow
   {
     bool _retval;
     char*[] _tmpclasses;
@@ -204,7 +204,7 @@ class Device : gst.object.ObjectWrap
       Returns: true if the element could be reconfigured to use this device,
         false otherwise.
   */
-  bool reconfigureElement(gst.element.Element element)
+  bool reconfigureElement(gst.element.Element element) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_device_reconfigure_element(cast(GstDevice*)this._cPtr, element ? cast(GstElement*)element._cPtr(No.Dup) : null);
@@ -226,13 +226,13 @@ class Device : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.device.Device)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -241,7 +241,14 @@ class Device : gst.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.device.Device.removed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -254,25 +261,25 @@ class DeviceGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T caps(gst.caps.Caps propval)
+  T caps(gst.caps.Caps propval) nothrow
   {
     return setProperty("caps", propval);
   }
 
   /** */
-  T deviceClass(string propval)
+  T deviceClass(string propval) nothrow
   {
     return setProperty("device-class", propval);
   }
 
   /** */
-  T displayName(string propval)
+  T displayName(string propval) nothrow
   {
     return setProperty("display-name", propval);
   }
 
   /** */
-  T properties(gst.structure.Structure propval)
+  T properties(gst.structure.Structure propval) nothrow
   {
     return setProperty("properties", propval);
   }
@@ -285,7 +292,7 @@ final class DeviceGidBuilder : DeviceGidBuilderImpl!DeviceGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Device build()
+  Device build() nothrow
   {
     return new Device(cast(void*)createGObject(Device._getGType), No.Take);
   }

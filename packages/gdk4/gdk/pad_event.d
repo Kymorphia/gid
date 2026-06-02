@@ -15,11 +15,8 @@ class PadEvent : gdk.event.Event
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.pad_event.PadEvent");
-
     super(cast(GdkEvent*)ptr, take);
   }
 
@@ -30,7 +27,7 @@ class PadEvent : gdk.event.Event
         index = Return location for the axis index
         value = Return location for the axis value
   */
-  void getAxisValue(out uint index, out double value)
+  void getAxisValue(out uint index, out double value) nothrow
   {
     gdk_pad_event_get_axis_value(cast(GdkEvent*)this._cPtr, cast(uint*)&index, cast(double*)&value);
   }
@@ -40,7 +37,7 @@ class PadEvent : gdk.event.Event
       a pad event.
       Returns: the button of event
   */
-  uint getButton()
+  uint getButton() nothrow
   {
     uint _retval;
     _retval = gdk_pad_event_get_button(cast(GdkEvent*)this._cPtr);
@@ -54,7 +51,7 @@ class PadEvent : gdk.event.Event
         group = return location for the group
         mode = return location for the mode
   */
-  void getGroupMode(out uint group, out uint mode)
+  void getGroupMode(out uint group, out uint mode) nothrow
   {
     gdk_pad_event_get_group_mode(cast(GdkEvent*)this._cPtr, cast(uint*)&group, cast(uint*)&mode);
   }

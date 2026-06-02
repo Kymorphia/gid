@@ -21,7 +21,7 @@ interface TlsClientConnection
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_tls_client_connection_get_type != &gidSymbolNotFound ? g_tls_client_connection_get_type() : cast(GType)0;
@@ -44,7 +44,7 @@ interface TlsClientConnection
         certificate we expect, which is useful for servers that serve
         virtual hosts.
   */
-  @property gio.socket_connectable.SocketConnectable serverIdentity();
+  @property gio.socket_connectable.SocketConnectable serverIdentity() nothrow;
 
   /**
       Set `serverIdentity` property.
@@ -64,7 +64,7 @@ interface TlsClientConnection
           certificate we expect, which is useful for servers that serve
           virtual hosts.
   */
-  @property void serverIdentity(gio.socket_connectable.SocketConnectable propval);
+  @property void serverIdentity(gio.socket_connectable.SocketConnectable propval) nothrow;
 
   /**
       Get `useSsl3` property.
@@ -73,7 +73,7 @@ interface TlsClientConnection
   
       Deprecated: SSL 3.0 is insecure.
   */
-  @property bool useSsl3();
+  @property bool useSsl3() nothrow;
 
   /**
       Set `useSsl3` property.
@@ -83,7 +83,7 @@ interface TlsClientConnection
   
       Deprecated: SSL 3.0 is insecure.
   */
-  @property void useSsl3(bool propval);
+  @property void useSsl3(bool propval) nothrow;
 
   /**
       Get `validationFlags` property.
@@ -106,7 +106,7 @@ interface TlsClientConnection
   
       Deprecated: Do not attempt to ignore validation errors.
   */
-  @property gio.types.TlsCertificateFlags validationFlags();
+  @property gio.types.TlsCertificateFlags validationFlags() nothrow;
 
   /**
       Set `validationFlags` property.
@@ -130,7 +130,7 @@ interface TlsClientConnection
   
       Deprecated: Do not attempt to ignore validation errors.
   */
-  @property void validationFlags(gio.types.TlsCertificateFlags propval);
+  @property void validationFlags(gio.types.TlsCertificateFlags propval) nothrow;
 
   /**
       Creates a new #GTlsClientConnection wrapping base_io_stream (which
@@ -293,7 +293,7 @@ interface TlsClientConnectionGidBuilderImpl(T)
           virtual hosts.
       Returns: Builder instance for fluent chaining
   */
-  T serverIdentity(gio.socket_connectable.SocketConnectable propval);
+  T serverIdentity(gio.socket_connectable.SocketConnectable propval) nothrow;
 
   /**
       Set `useSsl3` property.
@@ -304,7 +304,7 @@ interface TlsClientConnectionGidBuilderImpl(T)
   
       Deprecated: SSL 3.0 is insecure.
   */
-  T useSsl3(bool propval);
+  T useSsl3(bool propval) nothrow;
 
   /**
       Set `validationFlags` property.
@@ -329,5 +329,5 @@ interface TlsClientConnectionGidBuilderImpl(T)
   
       Deprecated: Do not attempt to ignore validation errors.
   */
-  T validationFlags(gio.types.TlsCertificateFlags propval);
+  T validationFlags(gio.types.TlsCertificateFlags propval) nothrow;
 }

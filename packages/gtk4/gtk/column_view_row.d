@@ -20,26 +20,26 @@ class ColumnViewRow : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_column_view_row_get_type != &gidSymbolNotFound ? gtk_column_view_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ColumnViewRow self()
+  override ColumnViewRow self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Get builder for [gtk.column_view_row.ColumnViewRow]
       Returns: New builder object
   */
-  static ColumnViewRowGidBuilder builder()
+  static ColumnViewRowGidBuilder builder() nothrow
   {
     return new ColumnViewRowGidBuilder;
   }
@@ -57,7 +57,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Get `accessibleDescription` property.
       Returns: The accessible description to set on the row.
   */
-  @property string accessibleDescription()
+  @property string accessibleDescription() nothrow
   {
     return getAccessibleDescription();
   }
@@ -67,7 +67,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Params:
         propval = The accessible description to set on the row.
   */
-  @property void accessibleDescription(string propval)
+  @property void accessibleDescription(string propval) nothrow
   {
     setAccessibleDescription(propval);
   }
@@ -76,7 +76,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Get `accessibleLabel` property.
       Returns: The accessible label to set on the row.
   */
-  @property string accessibleLabel()
+  @property string accessibleLabel() nothrow
   {
     return getAccessibleLabel();
   }
@@ -86,7 +86,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Params:
         propval = The accessible label to set on the row.
   */
-  @property void accessibleLabel(string propval)
+  @property void accessibleLabel(string propval) nothrow
   {
     setAccessibleLabel(propval);
   }
@@ -95,7 +95,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Get `activatable` property.
       Returns: If the row can be activated by the user.
   */
-  @property bool activatable()
+  @property bool activatable() nothrow
   {
     return getActivatable();
   }
@@ -105,7 +105,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Params:
         propval = If the row can be activated by the user.
   */
-  @property void activatable(bool propval)
+  @property void activatable(bool propval) nothrow
   {
     setActivatable(propval);
   }
@@ -114,7 +114,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Get `focusable` property.
       Returns: If the row can be focused with the keyboard.
   */
-  @property bool focusable()
+  @property bool focusable() nothrow
   {
     return getFocusable();
   }
@@ -124,7 +124,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Params:
         propval = If the row can be focused with the keyboard.
   */
-  @property void focusable(bool propval)
+  @property void focusable(bool propval) nothrow
   {
     setFocusable(propval);
   }
@@ -133,7 +133,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Get `item` property.
       Returns: The item for this row.
   */
-  @property gobject.object.ObjectWrap item()
+  @property gobject.object.ObjectWrap item() nothrow
   {
     return getItem();
   }
@@ -142,7 +142,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Get `position` property.
       Returns: Position of the row.
   */
-  @property uint position()
+  @property uint position() nothrow
   {
     return getPosition();
   }
@@ -151,7 +151,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Get `selectable` property.
       Returns: If the row can be selected by the user.
   */
-  @property bool selectable()
+  @property bool selectable() nothrow
   {
     return getSelectable();
   }
@@ -161,7 +161,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Params:
         propval = If the row can be selected by the user.
   */
-  @property void selectable(bool propval)
+  @property void selectable(bool propval) nothrow
   {
     setSelectable(propval);
   }
@@ -170,7 +170,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Get `selected` property.
       Returns: If the item in the row is currently selected.
   */
-  @property bool selected()
+  @property bool selected() nothrow
   {
     return getSelected();
   }
@@ -179,7 +179,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Gets the accessible description of self.
       Returns: the accessible description
   */
-  string getAccessibleDescription()
+  string getAccessibleDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_column_view_row_get_accessible_description(cast(GtkColumnViewRow*)this._cPtr);
@@ -191,7 +191,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Gets the accessible label of self.
       Returns: the accessible label
   */
-  string getAccessibleLabel()
+  string getAccessibleLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_column_view_row_get_accessible_label(cast(GtkColumnViewRow*)this._cPtr);
@@ -204,7 +204,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       [gtk.column_view_row.ColumnViewRow.setActivatable].
       Returns: true if the row is activatable
   */
-  bool getActivatable()
+  bool getActivatable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_column_view_row_get_activatable(cast(GtkColumnViewRow*)this._cPtr);
@@ -216,7 +216,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       [gtk.column_view_row.ColumnViewRow.setFocusable].
       Returns: true if the row is focusable
   */
-  bool getFocusable()
+  bool getFocusable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_column_view_row_get_focusable(cast(GtkColumnViewRow*)this._cPtr);
@@ -229,7 +229,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       If self is unbound, this function returns null.
       Returns: The item displayed
   */
-  gobject.object.ObjectWrap getItem()
+  gobject.object.ObjectWrap getItem() nothrow
   {
     GObject* _cretval;
     _cretval = gtk_column_view_row_get_item(cast(GtkColumnViewRow*)this._cPtr);
@@ -243,7 +243,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       If self is unbound, [gtk.types.INVALID_LIST_POSITION] is returned.
       Returns: The position of this row
   */
-  uint getPosition()
+  uint getPosition() nothrow
   {
     uint _retval;
     _retval = gtk_column_view_row_get_position(cast(GtkColumnViewRow*)this._cPtr);
@@ -257,7 +257,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Do not confuse this function with [gtk.column_view_row.ColumnViewRow.getSelected].
       Returns: true if the row is selectable
   */
-  bool getSelectable()
+  bool getSelectable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_column_view_row_get_selectable(cast(GtkColumnViewRow*)this._cPtr);
@@ -271,7 +271,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       and cannot be set otherwise.
       Returns: true if the item is selected.
   */
-  bool getSelected()
+  bool getSelected() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_column_view_row_get_selected(cast(GtkColumnViewRow*)this._cPtr);
@@ -285,7 +285,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Params:
         description = the description
   */
-  void setAccessibleDescription(string description)
+  void setAccessibleDescription(string description) nothrow
   {
     const(char)* _description = description.toCString(No.Alloc);
     gtk_column_view_row_set_accessible_description(cast(GtkColumnViewRow*)this._cPtr, _description);
@@ -298,7 +298,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Params:
         label = the label
   */
-  void setAccessibleLabel(string label)
+  void setAccessibleLabel(string label) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_column_view_row_set_accessible_label(cast(GtkColumnViewRow*)this._cPtr, _label);
@@ -317,7 +317,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Params:
         activatable = if the row should be activatable
   */
-  void setActivatable(bool activatable)
+  void setActivatable(bool activatable) nothrow
   {
     gtk_column_view_row_set_activatable(cast(GtkColumnViewRow*)this._cPtr, activatable);
   }
@@ -336,7 +336,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Params:
         focusable = if the row should be focusable
   */
-  void setFocusable(bool focusable)
+  void setFocusable(bool focusable) nothrow
   {
     gtk_column_view_row_set_focusable(cast(GtkColumnViewRow*)this._cPtr, focusable);
   }
@@ -357,7 +357,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
       Params:
         selectable = if the row should be selectable
   */
-  void setSelectable(bool selectable)
+  void setSelectable(bool selectable) nothrow
   {
     gtk_column_view_row_set_selectable(cast(GtkColumnViewRow*)this._cPtr, selectable);
   }
@@ -373,7 +373,7 @@ class ColumnViewRowGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The accessible description to set on the row.
       Returns: Builder instance for fluent chaining
   */
-  T accessibleDescription(string propval)
+  T accessibleDescription(string propval) nothrow
   {
     return setProperty("accessible-description", propval);
   }
@@ -384,7 +384,7 @@ class ColumnViewRowGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The accessible label to set on the row.
       Returns: Builder instance for fluent chaining
   */
-  T accessibleLabel(string propval)
+  T accessibleLabel(string propval) nothrow
   {
     return setProperty("accessible-label", propval);
   }
@@ -395,7 +395,7 @@ class ColumnViewRowGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = If the row can be activated by the user.
       Returns: Builder instance for fluent chaining
   */
-  T activatable(bool propval)
+  T activatable(bool propval) nothrow
   {
     return setProperty("activatable", propval);
   }
@@ -406,7 +406,7 @@ class ColumnViewRowGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = If the row can be focused with the keyboard.
       Returns: Builder instance for fluent chaining
   */
-  T focusable(bool propval)
+  T focusable(bool propval) nothrow
   {
     return setProperty("focusable", propval);
   }
@@ -417,7 +417,7 @@ class ColumnViewRowGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = If the row can be selected by the user.
       Returns: Builder instance for fluent chaining
   */
-  T selectable(bool propval)
+  T selectable(bool propval) nothrow
   {
     return setProperty("selectable", propval);
   }
@@ -430,7 +430,7 @@ final class ColumnViewRowGidBuilder : ColumnViewRowGidBuilderImpl!ColumnViewRowG
       Create object from builder.
       Returns: New object
   */
-  ColumnViewRow build()
+  ColumnViewRow build() nothrow
   {
     return new ColumnViewRow(cast(void*)createGObject(ColumnViewRow._getGType), No.Take);
   }

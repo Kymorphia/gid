@@ -17,7 +17,7 @@ interface DataHandler
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_data_handler_get_type != &gidSymbolNotFound ? gda_data_handler_get_type() : cast(GType)0;
@@ -34,7 +34,7 @@ interface DataHandler
         forType = a #GType type
       Returns: a #GdaDataHandler which must not be modified or destroyed.
   */
-  static gda.data_handler.DataHandler getDefault(gobject.types.GType forType)
+  static gda.data_handler.DataHandler getDefault(gobject.types.GType forType) nothrow
   {
     GdaDataHandler* _cretval;
     _cretval = gda_data_handler_get_default(forType);

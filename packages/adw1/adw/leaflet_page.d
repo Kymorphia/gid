@@ -19,26 +19,26 @@ class LeafletPage : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_leaflet_page_get_type != &gidSymbolNotFound ? adw_leaflet_page_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LeafletPage self()
+  override LeafletPage self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class LeafletPage : gobject.object.ObjectWrap
       Get builder for [adw.leaflet_page.LeafletPage]
       Returns: New builder object
   */
-  static LeafletPageGidBuilder builder()
+  static LeafletPageGidBuilder builder() nothrow
   {
     return new LeafletPageGidBuilder;
   }
@@ -58,7 +58,7 @@ class LeafletPage : gobject.object.ObjectWrap
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -69,7 +69,7 @@ class LeafletPage : gobject.object.ObjectWrap
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property string name()
+  @property string name() nothrow
   {
     return getName();
   }
@@ -81,7 +81,7 @@ class LeafletPage : gobject.object.ObjectWrap
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     setName(propval);
   }
@@ -98,7 +98,7 @@ class LeafletPage : gobject.object.ObjectWrap
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property bool navigatable()
+  @property bool navigatable() nothrow
   {
     return getNavigatable();
   }
@@ -116,7 +116,7 @@ class LeafletPage : gobject.object.ObjectWrap
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  @property void navigatable(bool propval)
+  @property void navigatable(bool propval) nothrow
   {
     setNavigatable(propval);
   }
@@ -127,7 +127,7 @@ class LeafletPage : gobject.object.ObjectWrap
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_leaflet_page_get_child(cast(AdwLeafletPage*)this._cPtr);
@@ -141,7 +141,7 @@ class LeafletPage : gobject.object.ObjectWrap
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_leaflet_page_get_name(cast(AdwLeafletPage*)this._cPtr);
@@ -155,7 +155,7 @@ class LeafletPage : gobject.object.ObjectWrap
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  bool getNavigatable()
+  bool getNavigatable() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_leaflet_page_get_navigatable(cast(AdwLeafletPage*)this._cPtr);
@@ -170,7 +170,7 @@ class LeafletPage : gobject.object.ObjectWrap
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  void setName(string name = null)
+  void setName(string name = null) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     adw_leaflet_page_set_name(cast(AdwLeafletPage*)this._cPtr, _name);
@@ -189,7 +189,7 @@ class LeafletPage : gobject.object.ObjectWrap
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  void setNavigatable(bool navigatable)
+  void setNavigatable(bool navigatable) nothrow
   {
     adw_leaflet_page_set_navigatable(cast(AdwLeafletPage*)this._cPtr, navigatable);
   }
@@ -207,7 +207,7 @@ class LeafletPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -220,7 +220,7 @@ class LeafletPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -239,7 +239,7 @@ class LeafletPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
-  T navigatable(bool propval)
+  T navigatable(bool propval) nothrow
   {
     return setProperty("navigatable", propval);
   }
@@ -252,7 +252,7 @@ final class LeafletPageGidBuilder : LeafletPageGidBuilderImpl!LeafletPageGidBuil
       Create object from builder.
       Returns: New object
   */
-  LeafletPage build()
+  LeafletPage build() nothrow
   {
     return new LeafletPage(cast(void*)createGObject(LeafletPage._getGType), No.Take);
   }

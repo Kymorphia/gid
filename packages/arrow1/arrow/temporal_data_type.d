@@ -14,26 +14,26 @@ class TemporalDataType : arrow.fixed_width_data_type.FixedWidthDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_temporal_data_type_get_type != &gidSymbolNotFound ? garrow_temporal_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TemporalDataType self()
+  override TemporalDataType self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class TemporalDataType : arrow.fixed_width_data_type.FixedWidthDataType
       Get builder for [arrow.temporal_data_type.TemporalDataType]
       Returns: New builder object
   */
-  static TemporalDataTypeGidBuilder builder()
+  static TemporalDataTypeGidBuilder builder() nothrow
   {
     return new TemporalDataTypeGidBuilder;
   }
@@ -60,7 +60,7 @@ final class TemporalDataTypeGidBuilder : TemporalDataTypeGidBuilderImpl!Temporal
       Create object from builder.
       Returns: New object
   */
-  TemporalDataType build()
+  TemporalDataType build() nothrow
   {
     return new TemporalDataType(cast(void*)createGObject(TemporalDataType._getGType), No.Take);
   }

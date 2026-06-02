@@ -14,26 +14,26 @@ class FileWriteOptions : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_file_write_options_get_type != &gidSymbolNotFound ? gadataset_file_write_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileWriteOptions self()
+  override FileWriteOptions self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class FileWriteOptions : gobject.object.ObjectWrap
       Get builder for [arrowdataset.file_write_options.FileWriteOptions]
       Returns: New builder object
   */
-  static FileWriteOptionsGidBuilder builder()
+  static FileWriteOptionsGidBuilder builder() nothrow
   {
     return new FileWriteOptionsGidBuilder;
   }
@@ -53,7 +53,7 @@ class FileWriteOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
 {
 
   /** */
-  T options(void* propval)
+  T options(void* propval) nothrow
   {
     return setProperty("options", propval);
   }
@@ -66,7 +66,7 @@ final class FileWriteOptionsGidBuilder : FileWriteOptionsGidBuilderImpl!FileWrit
       Create object from builder.
       Returns: New object
   */
-  FileWriteOptions build()
+  FileWriteOptions build() nothrow
   {
     return new FileWriteOptions(cast(void*)createGObject(FileWriteOptions._getGType), No.Take);
   }

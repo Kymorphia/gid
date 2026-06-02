@@ -24,26 +24,26 @@ class Set : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_set_get_type != &gidSymbolNotFound ? gda_set_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Set self()
+  override Set self() nothrow
   {
     return this;
   }
@@ -52,43 +52,43 @@ class Set : gobject.object.ObjectWrap
       Get builder for [gda.set.Set]
       Returns: New builder object
   */
-  static SetGidBuilder builder()
+  static SetGidBuilder builder() nothrow
   {
     return new SetGidBuilder;
   }
 
   /** */
-  @property string description()
+  @property string description() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("description");
   }
 
   /** */
-  @property void description(string propval)
+  @property void description(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("description", propval);
   }
 
   /** */
-  @property string id()
+  @property string id() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("id");
   }
 
   /** */
-  @property void id(string propval)
+  @property void id(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("id", propval);
   }
 
   /** */
-  @property string name()
+  @property string name() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("name");
   }
 
   /** */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("name", propval);
   }
@@ -99,7 +99,7 @@ class Set : gobject.object.ObjectWrap
         any holder in the data set changes. This property also affects the
         GdaHolder:validate-changes property.
   */
-  @property bool validateChanges()
+  @property bool validateChanges() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("validate-changes");
   }
@@ -111,7 +111,7 @@ class Set : gobject.object.ObjectWrap
           any holder in the data set changes. This property also affects the
           GdaHolder:validate-changes property.
   */
-  @property void validateChanges(bool propval)
+  @property void validateChanges(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("validate-changes", propval);
   }
@@ -125,7 +125,7 @@ class Set : gobject.object.ObjectWrap
         holders = a list of #GdaHolder objects
       Returns: a new #GdaSet object
   */
-  this(gda.holder.Holder[] holders)
+  this(gda.holder.Holder[] holders) nothrow
   {
     GdaSet* _cretval;
     auto _holders = gSListFromD!(gda.holder.Holder)(holders);
@@ -183,7 +183,7 @@ class Set : gobject.object.ObjectWrap
         holders = a list of #GdaHolder objects
       Returns: a new #GdaSet object
   */
-  static gda.set.Set newReadOnly(gda.holder.Holder[] holders)
+  static gda.set.Set newReadOnly(gda.holder.Holder[] holders) nothrow
   {
     GdaSet* _cretval;
     auto _holders = gSListFromD!(gda.holder.Holder)(holders);
@@ -194,7 +194,7 @@ class Set : gobject.object.ObjectWrap
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_set_error_quark();
@@ -213,7 +213,7 @@ class Set : gobject.object.ObjectWrap
       Returns: TRUE if holder has been added to set (and FALSE if it has not been added because there is another #GdaHolder
         with the same ID)
   */
-  bool addHolder(gda.holder.Holder holder)
+  bool addHolder(gda.holder.Holder holder) nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_set_add_holder(cast(GdaSet*)this._cPtr, holder ? cast(GdaHolder*)holder._cPtr(No.Dup) : null);
@@ -224,7 +224,7 @@ class Set : gobject.object.ObjectWrap
       Creates a new #GdaSet object, copy of set
       Returns: a new #GdaSet object
   */
-  gda.set.Set copy()
+  gda.set.Set copy() nothrow
   {
     GdaSet* _cretval;
     _cretval = gda_set_copy(cast(GdaSet*)this._cPtr);
@@ -240,7 +240,7 @@ class Set : gobject.object.ObjectWrap
         holder = a #GdaHolder object
       Returns: the requested #GdaSetGroup or null
   */
-  gda.set_group.SetGroup getGroup(gda.holder.Holder holder)
+  gda.set_group.SetGroup getGroup(gda.holder.Holder holder) nothrow
   {
     GdaSetGroup* _cretval;
     _cretval = gda_set_get_group(cast(GdaSet*)this._cPtr, holder ? cast(GdaHolder*)holder._cPtr(No.Dup) : null);
@@ -255,7 +255,7 @@ class Set : gobject.object.ObjectWrap
         holderId = the ID of the requested value holder
       Returns: the requested #GdaHolder or null
   */
-  gda.holder.Holder getHolder(string holderId)
+  gda.holder.Holder getHolder(string holderId) nothrow
   {
     GdaHolder* _cretval;
     const(char)* _holderId = holderId.toCString(No.Alloc);
@@ -271,7 +271,7 @@ class Set : gobject.object.ObjectWrap
         holderId = the ID of the holder to set the value
       Returns: the requested GValue, or null (see [gda.holder.Holder.getValue])
   */
-  gobject.value.Value getHolderValue(string holderId)
+  gobject.value.Value getHolderValue(string holderId) nothrow
   {
     const(GValue)* _cretval;
     const(char)* _holderId = holderId.toCString(No.Alloc);
@@ -287,7 +287,7 @@ class Set : gobject.object.ObjectWrap
         holder = a #GdaHolder object
       Returns: the requested #GdaSetNode or null
   */
-  gda.set_node.SetNode getNode(gda.holder.Holder holder)
+  gda.set_node.SetNode getNode(gda.holder.Holder holder) nothrow
   {
     GdaSetNode* _cretval;
     _cretval = gda_set_get_node(cast(GdaSet*)this._cPtr, holder ? cast(GdaHolder*)holder._cPtr(No.Dup) : null);
@@ -302,7 +302,7 @@ class Set : gobject.object.ObjectWrap
         pos = the position of the requested #GdaHolder, starting at `0`
       Returns: the requested #GdaHolder or null
   */
-  gda.holder.Holder getNthHolder(int pos)
+  gda.holder.Holder getNthHolder(int pos) nothrow
   {
     GdaHolder* _cretval;
     _cretval = gda_set_get_nth_holder(cast(GdaSet*)this._cPtr, pos);
@@ -318,7 +318,7 @@ class Set : gobject.object.ObjectWrap
         holder = a #GdaHolder object
       Returns: the requested #GdaSetSource or null
   */
-  gda.set_source.SetSource getSource(gda.holder.Holder holder)
+  gda.set_source.SetSource getSource(gda.holder.Holder holder) nothrow
   {
     GdaSetSource* _cretval;
     _cretval = gda_set_get_source(cast(GdaSet*)this._cPtr, holder ? cast(GdaHolder*)holder._cPtr(No.Dup) : null);
@@ -334,7 +334,7 @@ class Set : gobject.object.ObjectWrap
         model = a #GdaDataModel object
       Returns: the requested #GdaSetSource pointer or null.
   */
-  gda.set_source.SetSource getSourceForModel(gda.data_model.DataModel model)
+  gda.set_source.SetSource getSourceForModel(gda.data_model.DataModel model) nothrow
   {
     GdaSetSource* _cretval;
     _cretval = gda_set_get_source_for_model(cast(GdaSet*)this._cPtr, model ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
@@ -369,7 +369,7 @@ class Set : gobject.object.ObjectWrap
       Params:
         setToMerge = a #GdaSet object
   */
-  void mergeWithSet(gda.set.Set setToMerge)
+  void mergeWithSet(gda.set.Set setToMerge) nothrow
   {
     gda_set_merge_with_set(cast(GdaSet*)this._cPtr, setToMerge ? cast(GdaSet*)setToMerge._cPtr(No.Dup) : null);
   }
@@ -380,7 +380,7 @@ class Set : gobject.object.ObjectWrap
       Params:
         holder = the #GdaHolder to remove from set
   */
-  void removeHolder(gda.holder.Holder holder)
+  void removeHolder(gda.holder.Holder holder) nothrow
   {
     gda_set_remove_holder(cast(GdaSet*)this._cPtr, holder ? cast(GdaHolder*)holder._cPtr(No.Dup) : null);
   }
@@ -397,7 +397,7 @@ class Set : gobject.object.ObjectWrap
         source = a pointer to a #GdaSetSource in set
         model = a #GdaDataModel
   */
-  void replaceSourceModel(gda.set_source.SetSource source, gda.data_model.DataModel model)
+  void replaceSourceModel(gda.set_source.SetSource source, gda.data_model.DataModel model) nothrow
   {
     gda_set_replace_source_model(cast(GdaSet*)this._cPtr, source ? cast(GdaSetSource*)source._cPtr(No.Dup) : null, model ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
@@ -423,7 +423,7 @@ class Set : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectHolderAttrChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectHolderAttrChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.holder.Holder)))
@@ -432,7 +432,7 @@ class Set : gobject.object.ObjectWrap
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gda.set.Set)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -450,7 +450,14 @@ class Set : gobject.object.ObjectWrap
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.set.Set.holderAttrChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -474,14 +481,14 @@ class Set : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectHolderChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectHolderChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.holder.Holder)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.set.Set)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -493,7 +500,14 @@ class Set : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.set.Set.holderChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -518,14 +532,14 @@ class Set : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectHolderTypeSet(T)(T callback, Flag!"After" after = No.After)
+  gulong connectHolderTypeSet(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.holder.Holder)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.set.Set)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -537,7 +551,14 @@ class Set : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.set.Set.holderTypeSet");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -559,13 +580,13 @@ class Set : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPublicDataChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPublicDataChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.set.Set)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -574,7 +595,14 @@ class Set : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.set.Set.publicDataChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -598,14 +626,14 @@ class Set : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSourceModelChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSourceModelChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == void*)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.set.Set)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -617,7 +645,14 @@ class Set : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.set.Set.sourceModelChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -646,7 +681,7 @@ class Set : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectValidateHolderChange(T)(T callback, Flag!"After" after = No.After)
+  gulong connectValidateHolderChange(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == glib.error.ErrorWrap)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.holder.Holder)))
@@ -654,11 +689,12 @@ class Set : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gda.set.Set)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      glib.error.ErrorWrap _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -669,7 +705,14 @@ class Set : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.set.Set.validateHolderChange");
+      }
 
       setVal!(glib.error.ErrorWrap)(_returnValue, _retval);
     }
@@ -696,22 +739,30 @@ class Set : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectValidateSet(T)(T callback, Flag!"After" after = No.After)
+  gulong connectValidateSet(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == glib.error.ErrorWrap)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.set.Set)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      glib.error.ErrorWrap _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.set.Set.validateSet");
+      }
 
       setVal!(glib.error.ErrorWrap)(_returnValue, _retval);
     }
@@ -726,25 +777,25 @@ class SetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T description(string propval)
+  T description(string propval) nothrow
   {
     return setProperty("description", propval);
   }
 
   /** */
-  T holders(void* propval)
+  T holders(void* propval) nothrow
   {
     return setProperty("holders", propval);
   }
 
   /** */
-  T id(string propval)
+  T id(string propval) nothrow
   {
     return setProperty("id", propval);
   }
 
   /** */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -757,7 +808,7 @@ class SetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           GdaHolder:validate-changes property.
       Returns: Builder instance for fluent chaining
   */
-  T validateChanges(bool propval)
+  T validateChanges(bool propval) nothrow
   {
     return setProperty("validate-changes", propval);
   }
@@ -770,7 +821,7 @@ final class SetGidBuilder : SetGidBuilderImpl!SetGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Set build()
+  Set build() nothrow
   {
     return new Set(cast(void*)createGObject(Set._getGType), Yes.Take);
   }
@@ -778,12 +829,12 @@ final class SetGidBuilder : SetGidBuilderImpl!SetGidBuilder
 
 class SetException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.set.Set.errorQuark, cast(int)code, msg);
   }

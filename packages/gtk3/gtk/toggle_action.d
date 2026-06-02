@@ -20,26 +20,26 @@ class ToggleAction : gtk.action.Action
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_toggle_action_get_type != &gidSymbolNotFound ? gtk_toggle_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ToggleAction self()
+  override ToggleAction self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class ToggleAction : gtk.action.Action
       Get builder for [gtk.toggle_action.ToggleAction]
       Returns: New builder object
   */
-  static ToggleActionGidBuilder builder()
+  static ToggleActionGidBuilder builder() nothrow
   {
     return new ToggleActionGidBuilder;
   }
@@ -57,7 +57,7 @@ class ToggleAction : gtk.action.Action
       Get `active` property.
       Returns: Whether the toggle action should be active.
   */
-  @property bool active()
+  @property bool active() nothrow
   {
     return getActive();
   }
@@ -67,7 +67,7 @@ class ToggleAction : gtk.action.Action
       Params:
         propval = Whether the toggle action should be active.
   */
-  @property void active(bool propval)
+  @property void active(bool propval) nothrow
   {
     setActive(propval);
   }
@@ -79,7 +79,7 @@ class ToggleAction : gtk.action.Action
         This is an appearance property and thus only applies if
         #GtkActivatable:use-action-appearance is true.
   */
-  @property bool drawAsRadio()
+  @property bool drawAsRadio() nothrow
   {
     return getDrawAsRadio();
   }
@@ -92,7 +92,7 @@ class ToggleAction : gtk.action.Action
           This is an appearance property and thus only applies if
           #GtkActivatable:use-action-appearance is true.
   */
-  @property void drawAsRadio(bool propval)
+  @property void drawAsRadio(bool propval) nothrow
   {
     setDrawAsRadio(propval);
   }
@@ -111,7 +111,7 @@ class ToggleAction : gtk.action.Action
                      the action, or null
       Returns: a new #GtkToggleAction
   */
-  this(string name, string label = null, string tooltip = null, string stockId = null)
+  this(string name, string label = null, string tooltip = null, string stockId = null) nothrow
   {
     GtkToggleAction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -126,7 +126,7 @@ class ToggleAction : gtk.action.Action
       Returns the checked state of the toggle action.
       Returns: the checked state of the toggle action
   */
-  bool getActive()
+  bool getActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_toggle_action_get_active(cast(GtkToggleAction*)this._cPtr);
@@ -137,7 +137,7 @@ class ToggleAction : gtk.action.Action
       Returns whether the action should have proxies like a radio action.
       Returns: whether the action should have proxies like a radio action.
   */
-  bool getDrawAsRadio()
+  bool getDrawAsRadio() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_toggle_action_get_draw_as_radio(cast(GtkToggleAction*)this._cPtr);
@@ -150,7 +150,7 @@ class ToggleAction : gtk.action.Action
       Params:
         isActive = whether the action should be checked or not
   */
-  void setActive(bool isActive)
+  void setActive(bool isActive) nothrow
   {
     gtk_toggle_action_set_active(cast(GtkToggleAction*)this._cPtr, isActive);
   }
@@ -162,7 +162,7 @@ class ToggleAction : gtk.action.Action
         drawAsRadio = whether the action should have proxies like a radio
              action
   */
-  void setDrawAsRadio(bool drawAsRadio)
+  void setDrawAsRadio(bool drawAsRadio) nothrow
   {
     gtk_toggle_action_set_draw_as_radio(cast(GtkToggleAction*)this._cPtr, drawAsRadio);
   }
@@ -170,7 +170,7 @@ class ToggleAction : gtk.action.Action
   /**
       Emits the “toggled” signal on the toggle action.
   */
-  void toggled()
+  void toggled() nothrow
   {
     gtk_toggle_action_toggled(cast(GtkToggleAction*)this._cPtr);
   }
@@ -191,13 +191,13 @@ class ToggleAction : gtk.action.Action
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectToggled(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToggled(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.toggle_action.ToggleAction)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -206,7 +206,14 @@ class ToggleAction : gtk.action.Action
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.toggle_action.ToggleAction.toggled");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -225,7 +232,7 @@ class ToggleActionGidBuilderImpl(T) : gtk.action.ActionGidBuilderImpl!T
         propval = Whether the toggle action should be active.
       Returns: Builder instance for fluent chaining
   */
-  T active(bool propval)
+  T active(bool propval) nothrow
   {
     return setProperty("active", propval);
   }
@@ -239,7 +246,7 @@ class ToggleActionGidBuilderImpl(T) : gtk.action.ActionGidBuilderImpl!T
           #GtkActivatable:use-action-appearance is true.
       Returns: Builder instance for fluent chaining
   */
-  T drawAsRadio(bool propval)
+  T drawAsRadio(bool propval) nothrow
   {
     return setProperty("draw-as-radio", propval);
   }
@@ -252,7 +259,7 @@ final class ToggleActionGidBuilder : ToggleActionGidBuilderImpl!ToggleActionGidB
       Create object from builder.
       Returns: New object
   */
-  ToggleAction build()
+  ToggleAction build() nothrow
   {
     return new ToggleAction(cast(void*)createGObject(ToggleAction._getGType), Yes.Take);
   }

@@ -27,26 +27,26 @@ class DrawContext : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_draw_context_get_type != &gidSymbolNotFound ? gdk_draw_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DrawContext self()
+  override DrawContext self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class DrawContext : gobject.object.ObjectWrap
       Get builder for [gdk.draw_context.DrawContext]
       Returns: New builder object
   */
-  static DrawContextGidBuilder builder()
+  static DrawContextGidBuilder builder() nothrow
   {
     return new DrawContextGidBuilder;
   }
@@ -64,7 +64,7 @@ class DrawContext : gobject.object.ObjectWrap
       Get `display` property.
       Returns: The [gdk.display.Display] used to create the [gdk.draw_context.DrawContext].
   */
-  @property gdk.display.Display display()
+  @property gdk.display.Display display() nothrow
   {
     return getDisplay();
   }
@@ -73,7 +73,7 @@ class DrawContext : gobject.object.ObjectWrap
       Get `surface` property.
       Returns: The [gdk.surface.Surface] the context is bound to.
   */
-  @property gdk.surface.Surface surface()
+  @property gdk.surface.Surface surface() nothrow
   {
     return getSurface();
   }
@@ -107,7 +107,7 @@ class DrawContext : gobject.object.ObjectWrap
       Params:
         region = minimum region that should be drawn
   */
-  void beginFrame(cairo.region.Region region)
+  void beginFrame(cairo.region.Region region) nothrow
   {
     gdk_draw_context_begin_frame(cast(GdkDrawContext*)this._cPtr, region ? cast(const(cairo_region_t)*)region._cPtr(No.Dup) : null);
   }
@@ -122,7 +122,7 @@ class DrawContext : gobject.object.ObjectWrap
       implicitly before returning; it is not recommended to call `glFlush()`
       explicitly before calling this function.
   */
-  void endFrame()
+  void endFrame() nothrow
   {
     gdk_draw_context_end_frame(cast(GdkDrawContext*)this._cPtr);
   }
@@ -131,7 +131,7 @@ class DrawContext : gobject.object.ObjectWrap
       Retrieves the [gdk.display.Display] the context is created for
       Returns: the [gdk.display.Display]
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gdk_draw_context_get_display(cast(GdkDrawContext*)this._cPtr);
@@ -150,7 +150,7 @@ class DrawContext : gobject.object.ObjectWrap
       and [gdk.draw_context.DrawContext.endFrame], null will be returned.
       Returns: a Cairo region
   */
-  cairo.region.Region getFrameRegion()
+  cairo.region.Region getFrameRegion() nothrow
   {
     const(cairo_region_t)* _cretval;
     _cretval = gdk_draw_context_get_frame_region(cast(GdkDrawContext*)this._cPtr);
@@ -162,7 +162,7 @@ class DrawContext : gobject.object.ObjectWrap
       Retrieves the surface that context is bound to.
       Returns: a [gdk.surface.Surface]
   */
-  gdk.surface.Surface getSurface()
+  gdk.surface.Surface getSurface() nothrow
   {
     GdkSurface* _cretval;
     _cretval = gdk_draw_context_get_surface(cast(GdkDrawContext*)this._cPtr);
@@ -179,7 +179,7 @@ class DrawContext : gobject.object.ObjectWrap
       Returns: true if the context is between [gdk.draw_context.DrawContext.beginFrame]
           and [gdk.draw_context.DrawContext.endFrame] calls.
   */
-  bool isInFrame()
+  bool isInFrame() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_draw_context_is_in_frame(cast(GdkDrawContext*)this._cPtr);
@@ -197,7 +197,7 @@ class DrawContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The [gdk.display.Display] used to create the [gdk.draw_context.DrawContext].
       Returns: Builder instance for fluent chaining
   */
-  T display(gdk.display.Display propval)
+  T display(gdk.display.Display propval) nothrow
   {
     return setProperty("display", propval);
   }
@@ -208,7 +208,7 @@ class DrawContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The [gdk.surface.Surface] the context is bound to.
       Returns: Builder instance for fluent chaining
   */
-  T surface(gdk.surface.Surface propval)
+  T surface(gdk.surface.Surface propval) nothrow
   {
     return setProperty("surface", propval);
   }
@@ -221,7 +221,7 @@ final class DrawContextGidBuilder : DrawContextGidBuilderImpl!DrawContextGidBuil
       Create object from builder.
       Returns: New object
   */
-  DrawContext build()
+  DrawContext build() nothrow
   {
     return new DrawContext(cast(void*)createGObject(DrawContext._getGType), No.Take);
   }

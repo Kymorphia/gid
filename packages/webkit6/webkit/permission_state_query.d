@@ -25,32 +25,32 @@ class PermissionStateQuery : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_permission_state_query_get_type != &gidSymbolNotFound ? webkit_permission_state_query_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PermissionStateQuery self()
+  override PermissionStateQuery self() nothrow
   {
     return this;
   }
@@ -62,7 +62,7 @@ class PermissionStateQuery : gobject.boxed.Boxed
       Params:
         state = a #WebKitPermissionState
   */
-  void finish(webkit.types.PermissionState state)
+  void finish(webkit.types.PermissionState state) nothrow
   {
     webkit_permission_state_query_finish(cast(WebKitPermissionStateQuery*)this._cPtr, state);
   }
@@ -71,7 +71,7 @@ class PermissionStateQuery : gobject.boxed.Boxed
       Get the permission name for which access is being queried.
       Returns: the permission name for query
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_permission_state_query_get_name(cast(WebKitPermissionStateQuery*)this._cPtr);
@@ -84,7 +84,7 @@ class PermissionStateQuery : gobject.boxed.Boxed
       Returns: A #WebKitSecurityOrigin representing the origin from which the
         query was emitted.
   */
-  webkit.security_origin.SecurityOrigin getSecurityOrigin()
+  webkit.security_origin.SecurityOrigin getSecurityOrigin() nothrow
   {
     WebKitSecurityOrigin* _cretval;
     _cretval = webkit_permission_state_query_get_security_origin(cast(WebKitPermissionStateQuery*)this._cPtr);

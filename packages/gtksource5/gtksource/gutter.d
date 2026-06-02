@@ -42,26 +42,26 @@ class Gutter : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_gutter_get_type != &gidSymbolNotFound ? gtk_source_gutter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Gutter self()
+  override Gutter self() nothrow
   {
     return this;
   }
@@ -70,7 +70,7 @@ class Gutter : gtk.widget.Widget
       Get builder for [gtksource.gutter.Gutter]
       Returns: New builder object
   */
-  static GutterGidBuilder builder()
+  static GutterGidBuilder builder() nothrow
   {
     return new GutterGidBuilder;
   }
@@ -79,7 +79,7 @@ class Gutter : gtk.widget.Widget
       Get `view` property.
       Returns: The #GtkSourceView of the gutter.
   */
-  @property gtksource.view.View view()
+  @property gtksource.view.View view() nothrow
   {
     return getView();
   }
@@ -88,13 +88,13 @@ class Gutter : gtk.widget.Widget
       Get `windowType` property.
       Returns: The text window type on which the window is placed.
   */
-  @property gtk.types.TextWindowType windowType()
+  @property gtk.types.TextWindowType windowType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.TextWindowType)("window-type");
   }
 
   /** */
-  gtksource.view.View getView()
+  gtksource.view.View getView() nothrow
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_gutter_get_view(cast(GtkSourceGutter*)this._cPtr);
@@ -112,7 +112,7 @@ class Gutter : gtk.widget.Widget
         position = the renderer position.
       Returns: true if operation succeeded. Otherwise false.
   */
-  bool insert(gtksource.gutter_renderer.GutterRenderer renderer, int position)
+  bool insert(gtksource.gutter_renderer.GutterRenderer renderer, int position) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_gutter_insert(cast(GtkSourceGutter*)this._cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer._cPtr(No.Dup) : null, position);
@@ -120,7 +120,7 @@ class Gutter : gtk.widget.Widget
   }
 
   /** */
-  void remove(gtksource.gutter_renderer.GutterRenderer renderer)
+  void remove(gtksource.gutter_renderer.GutterRenderer renderer) nothrow
   {
     gtk_source_gutter_remove(cast(GtkSourceGutter*)this._cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer._cPtr(No.Dup) : null);
   }
@@ -132,7 +132,7 @@ class Gutter : gtk.widget.Widget
         renderer = a #GtkCellRenderer.
         position = the new renderer position.
   */
-  void reorder(gtksource.gutter_renderer.GutterRenderer renderer, int position)
+  void reorder(gtksource.gutter_renderer.GutterRenderer renderer, int position) nothrow
   {
     gtk_source_gutter_reorder(cast(GtkSourceGutter*)this._cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer._cPtr(No.Dup) : null, position);
   }
@@ -149,7 +149,7 @@ class GutterGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The #GtkSourceView of the gutter.
       Returns: Builder instance for fluent chaining
   */
-  T view(gtksource.view.View propval)
+  T view(gtksource.view.View propval) nothrow
   {
     return setProperty("view", propval);
   }
@@ -160,7 +160,7 @@ class GutterGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The text window type on which the window is placed.
       Returns: Builder instance for fluent chaining
   */
-  T windowType(gtk.types.TextWindowType propval)
+  T windowType(gtk.types.TextWindowType propval) nothrow
   {
     return setProperty("window-type", propval);
   }
@@ -173,7 +173,7 @@ final class GutterGidBuilder : GutterGidBuilderImpl!GutterGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Gutter build()
+  Gutter build() nothrow
   {
     return new Gutter(cast(void*)createGObject(Gutter._getGType), No.Take);
   }

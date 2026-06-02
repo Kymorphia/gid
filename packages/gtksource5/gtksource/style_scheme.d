@@ -29,26 +29,26 @@ class StyleScheme : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_style_scheme_get_type != &gidSymbolNotFound ? gtk_source_style_scheme_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StyleScheme self()
+  override StyleScheme self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class StyleScheme : gobject.object.ObjectWrap
       Get builder for [gtksource.style_scheme.StyleScheme]
       Returns: New builder object
   */
-  static StyleSchemeGidBuilder builder()
+  static StyleSchemeGidBuilder builder() nothrow
   {
     return new StyleSchemeGidBuilder;
   }
@@ -66,7 +66,7 @@ class StyleScheme : gobject.object.ObjectWrap
       Get `description` property.
       Returns: Style scheme description, a translatable string to present to the user.
   */
-  @property string description()
+  @property string description() nothrow
   {
     return getDescription();
   }
@@ -75,7 +75,7 @@ class StyleScheme : gobject.object.ObjectWrap
       Get `filename` property.
       Returns: Style scheme filename or null.
   */
-  @property string filename()
+  @property string filename() nothrow
   {
     return getFilename();
   }
@@ -85,7 +85,7 @@ class StyleScheme : gobject.object.ObjectWrap
       Returns: Style scheme id, a unique string used to identify the style scheme
         in [gtksource.style_scheme_manager.StyleSchemeManager].
   */
-  @property string id()
+  @property string id() nothrow
   {
     return getId();
   }
@@ -94,13 +94,13 @@ class StyleScheme : gobject.object.ObjectWrap
       Get `name` property.
       Returns: Style scheme name, a translatable string to present to the user.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return getName();
   }
 
   /** */
-  string[] getAuthors()
+  string[] getAuthors() nothrow
   {
     const(char*)* _cretval;
     _cretval = gtk_source_style_scheme_get_authors(cast(GtkSourceStyleScheme*)this._cPtr);
@@ -119,7 +119,7 @@ class StyleScheme : gobject.object.ObjectWrap
   }
 
   /** */
-  string getDescription()
+  string getDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_style_scheme_get_description(cast(GtkSourceStyleScheme*)this._cPtr);
@@ -128,7 +128,7 @@ class StyleScheme : gobject.object.ObjectWrap
   }
 
   /** */
-  string getFilename()
+  string getFilename() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_style_scheme_get_filename(cast(GtkSourceStyleScheme*)this._cPtr);
@@ -137,7 +137,7 @@ class StyleScheme : gobject.object.ObjectWrap
   }
 
   /** */
-  string getId()
+  string getId() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_style_scheme_get_id(cast(GtkSourceStyleScheme*)this._cPtr);
@@ -154,7 +154,7 @@ class StyleScheme : gobject.object.ObjectWrap
           the metadata of scheme or null if scheme does not contain the
           specified metadata property.
   */
-  string getMetadata(string name)
+  string getMetadata(string name) nothrow
   {
     const(char)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -164,7 +164,7 @@ class StyleScheme : gobject.object.ObjectWrap
   }
 
   /** */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_style_scheme_get_name(cast(GtkSourceStyleScheme*)this._cPtr);
@@ -173,7 +173,7 @@ class StyleScheme : gobject.object.ObjectWrap
   }
 
   /** */
-  gtksource.style.Style getStyle(string styleId)
+  gtksource.style.Style getStyle(string styleId) nothrow
   {
     GtkSourceStyle* _cretval;
     const(char)* _styleId = styleId.toCString(No.Alloc);
@@ -194,7 +194,7 @@ class StyleSchemeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           in [gtksource.style_scheme_manager.StyleSchemeManager].
       Returns: Builder instance for fluent chaining
   */
-  T id(string propval)
+  T id(string propval) nothrow
   {
     return setProperty("id", propval);
   }
@@ -207,7 +207,7 @@ final class StyleSchemeGidBuilder : StyleSchemeGidBuilderImpl!StyleSchemeGidBuil
       Create object from builder.
       Returns: New object
   */
-  StyleScheme build()
+  StyleScheme build() nothrow
   {
     return new StyleScheme(cast(void*)createGObject(StyleScheme._getGType), No.Take);
   }

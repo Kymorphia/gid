@@ -42,38 +42,38 @@ class Value : Boxed
   /**
       Create a `value.Value` boxed type.
   */
-  this()
+  this() nothrow
   {
     super(gMalloc(GValue.sizeof), Yes.Take);
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_value_get_type != &gidSymbolNotFound ? g_value_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Value self()
+  override Value self() nothrow
   {
     return this;
   }
@@ -84,7 +84,7 @@ class Value : Boxed
   *   T = The D type to initialize the value to
   *   val = The value to assign
   */
-  this(T)(T val)
+  this(T)(T val) nothrow
   if (!is(T == void*))
   {
     this();
@@ -97,7 +97,7 @@ class Value : Boxed
   * Params:
   *   T = The D type to initialize the Value to
   */
-  void init_(T)()
+  void init_(T)() nothrow
   {
     initVal!T(cast(GValue*)_cPtr);
   }
@@ -106,7 +106,7 @@ class Value : Boxed
   * Get the GType of the data stored in the value.
   * Returns: The GType of the value
   */
-  @property GType valType()
+  @property GType valType() nothrow
   {
     return (cast(GValue*)_cPtr).gType;
   }
@@ -117,7 +117,7 @@ class Value : Boxed
   *   T = The D type of the value to get (must match the type of the Value)
   * Returns: The value
   */
-  T get(T)()
+  T get(T)() nothrow
   {
     return getVal!T(cast(GValue*)_cPtr);
   }
@@ -128,7 +128,7 @@ class Value : Boxed
   *   T = The D type of the value to set (must match the type of the Value)
   *   val = The value to assign
   */
-  void set(T)(T val)
+  void set(T)(T val) nothrow
   {
     setVal!T(cast(GValue*)_cPtr, val);
   }
@@ -139,7 +139,7 @@ class Value : Boxed
       Params:
         destValue = An initialized #GValue structure of the same type as src_value.
   */
-  void copy(gobject.value.Value destValue)
+  void copy(gobject.value.Value destValue) nothrow
   {
     g_value_copy(cast(const(GValue)*)this._cPtr, destValue ? cast(GValue*)destValue._cPtr(No.Dup) : null);
   }
@@ -151,7 +151,7 @@ class Value : Boxed
       Returns: object content of value,
                  should be unreferenced when no longer needed.
   */
-  gobject.object.ObjectWrap dupObject()
+  gobject.object.ObjectWrap dupObject() nothrow
   {
     GObject* _cretval;
     _cretval = g_value_dup_object(cast(const(GValue)*)this._cPtr);
@@ -163,7 +163,7 @@ class Value : Boxed
       Get a copy the contents of a `G_TYPE_STRING` #GValue.
       Returns: a newly allocated copy of the string content of value
   */
-  string dupString()
+  string dupString() nothrow
   {
     char* _cretval;
     _cretval = g_value_dup_string(cast(const(GValue)*)this._cPtr);
@@ -177,7 +177,7 @@ class Value : Boxed
       Returns: variant contents of value (may be null);
            should be unreffed using [glib.variant.Variant.unref] when no longer needed
   */
-  glib.variant.Variant dupVariant()
+  glib.variant.Variant dupVariant() nothrow
   {
     GVariant* _cretval;
     _cretval = g_value_dup_variant(cast(const(GValue)*)this._cPtr);
@@ -190,7 +190,7 @@ class Value : Boxed
       This is an internal function introduced mainly for C marshallers.
       Returns: true if value will fit inside a pointer value.
   */
-  bool fitsPointer()
+  bool fitsPointer() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_value_fits_pointer(cast(const(GValue)*)this._cPtr);
@@ -201,7 +201,7 @@ class Value : Boxed
       Get the contents of a `G_TYPE_BOOLEAN` #GValue.
       Returns: boolean contents of value
   */
-  bool getBoolean()
+  bool getBoolean() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_value_get_boolean(cast(const(GValue)*)this._cPtr);
@@ -212,7 +212,7 @@ class Value : Boxed
       Get the contents of a `G_TYPE_BOXED` derived #GValue.
       Returns: boxed contents of value
   */
-  void* getBoxed()
+  void* getBoxed() nothrow
   {
     auto _retval = g_value_get_boxed(cast(const(GValue)*)this._cPtr);
     return _retval;
@@ -227,7 +227,7 @@ class Value : Boxed
   
       Deprecated: This function's return type is broken, see [gobject.value.Value.getSchar]
   */
-  char getChar()
+  char getChar() nothrow
   {
     char _retval;
     _retval = g_value_get_char(cast(const(GValue)*)this._cPtr);
@@ -238,7 +238,7 @@ class Value : Boxed
       Get the contents of a `G_TYPE_DOUBLE` #GValue.
       Returns: double contents of value
   */
-  double getDouble()
+  double getDouble() nothrow
   {
     double _retval;
     _retval = g_value_get_double(cast(const(GValue)*)this._cPtr);
@@ -249,7 +249,7 @@ class Value : Boxed
       Get the contents of a `G_TYPE_ENUM` #GValue.
       Returns: enum contents of value
   */
-  int getEnum()
+  int getEnum() nothrow
   {
     int _retval;
     _retval = g_value_get_enum(cast(const(GValue)*)this._cPtr);
@@ -260,7 +260,7 @@ class Value : Boxed
       Get the contents of a `G_TYPE_FLAGS` #GValue.
       Returns: flags contents of value
   */
-  uint getFlags()
+  uint getFlags() nothrow
   {
     uint _retval;
     _retval = g_value_get_flags(cast(const(GValue)*)this._cPtr);
@@ -271,7 +271,7 @@ class Value : Boxed
       Get the contents of a `G_TYPE_FLOAT` #GValue.
       Returns: float contents of value
   */
-  float getFloat()
+  float getFloat() nothrow
   {
     float _retval;
     _retval = g_value_get_float(cast(const(GValue)*)this._cPtr);
@@ -282,7 +282,7 @@ class Value : Boxed
       Get the contents of a `G_TYPE_GTYPE` #GValue.
       Returns: the #GType stored in value
   */
-  gobject.types.GType getGtype()
+  gobject.types.GType getGtype() nothrow
   {
     gobject.types.GType _retval;
     _retval = g_value_get_gtype(cast(const(GValue)*)this._cPtr);
@@ -293,7 +293,7 @@ class Value : Boxed
       Get the contents of a `G_TYPE_INT` #GValue.
       Returns: integer contents of value
   */
-  int getInt()
+  int getInt() nothrow
   {
     int _retval;
     _retval = g_value_get_int(cast(const(GValue)*)this._cPtr);
@@ -304,7 +304,7 @@ class Value : Boxed
       Get the contents of a `G_TYPE_INT64` #GValue.
       Returns: 64bit integer contents of value
   */
-  long getInt64()
+  long getInt64() nothrow
   {
     long _retval;
     _retval = g_value_get_int64(cast(const(GValue)*)this._cPtr);
@@ -315,7 +315,7 @@ class Value : Boxed
       Get the contents of a `G_TYPE_LONG` #GValue.
       Returns: long integer contents of value
   */
-  glong getLong()
+  glong getLong() nothrow
   {
     glong _retval;
     _retval = g_value_get_long(cast(const(GValue)*)this._cPtr);
@@ -326,7 +326,7 @@ class Value : Boxed
       Get the contents of a `G_TYPE_OBJECT` derived #GValue.
       Returns: object contents of value
   */
-  gobject.object.ObjectWrap getObject()
+  gobject.object.ObjectWrap getObject() nothrow
   {
     GObject* _cretval;
     _cretval = g_value_get_object(cast(const(GValue)*)this._cPtr);
@@ -338,7 +338,7 @@ class Value : Boxed
       Get the contents of a `G_TYPE_PARAM` #GValue.
       Returns: #GParamSpec content of value
   */
-  gobject.param_spec.ParamSpec getParam()
+  gobject.param_spec.ParamSpec getParam() nothrow
   {
     GParamSpec* _cretval;
     _cretval = g_value_get_param(cast(const(GValue)*)this._cPtr);
@@ -350,7 +350,7 @@ class Value : Boxed
       Get the contents of a pointer #GValue.
       Returns: pointer contents of value
   */
-  void* getPointer()
+  void* getPointer() nothrow
   {
     auto _retval = g_value_get_pointer(cast(const(GValue)*)this._cPtr);
     return _retval;
@@ -360,7 +360,7 @@ class Value : Boxed
       Get the contents of a `G_TYPE_CHAR` #GValue.
       Returns: signed 8 bit integer contents of value
   */
-  byte getSchar()
+  byte getSchar() nothrow
   {
     byte _retval;
     _retval = g_value_get_schar(cast(const(GValue)*)this._cPtr);
@@ -371,7 +371,7 @@ class Value : Boxed
       Get the contents of a `G_TYPE_STRING` #GValue.
       Returns: string content of value
   */
-  string getString()
+  string getString() nothrow
   {
     const(char)* _cretval;
     _cretval = g_value_get_string(cast(const(GValue)*)this._cPtr);
@@ -383,7 +383,7 @@ class Value : Boxed
       Get the contents of a `G_TYPE_UCHAR` #GValue.
       Returns: unsigned character contents of value
   */
-  ubyte getUchar()
+  ubyte getUchar() nothrow
   {
     ubyte _retval;
     _retval = g_value_get_uchar(cast(const(GValue)*)this._cPtr);
@@ -394,7 +394,7 @@ class Value : Boxed
       Get the contents of a `G_TYPE_UINT` #GValue.
       Returns: unsigned integer contents of value
   */
-  uint getUint()
+  uint getUint() nothrow
   {
     uint _retval;
     _retval = g_value_get_uint(cast(const(GValue)*)this._cPtr);
@@ -405,7 +405,7 @@ class Value : Boxed
       Get the contents of a `G_TYPE_UINT64` #GValue.
       Returns: unsigned 64bit integer contents of value
   */
-  ulong getUint64()
+  ulong getUint64() nothrow
   {
     ulong _retval;
     _retval = g_value_get_uint64(cast(const(GValue)*)this._cPtr);
@@ -416,7 +416,7 @@ class Value : Boxed
       Get the contents of a `G_TYPE_ULONG` #GValue.
       Returns: unsigned long integer contents of value
   */
-  gulong getUlong()
+  gulong getUlong() nothrow
   {
     gulong _retval;
     _retval = g_value_get_ulong(cast(const(GValue)*)this._cPtr);
@@ -427,7 +427,7 @@ class Value : Boxed
       Get the contents of a variant #GValue.
       Returns: variant contents of value (may be null)
   */
-  glib.variant.Variant getVariant()
+  glib.variant.Variant getVariant() nothrow
   {
     GVariant* _cretval;
     _cretval = g_value_get_variant(cast(const(GValue)*)this._cPtr);
@@ -442,7 +442,7 @@ class Value : Boxed
         gType = Type the #GValue should hold values of.
       Returns: the #GValue structure that has been passed in
   */
-  gobject.value.Value init_(gobject.types.GType gType)
+  gobject.value.Value init_(gobject.types.GType gType) nothrow
   {
     GValue* _cretval;
     _cretval = g_value_init(cast(GValue*)this._cPtr, gType);
@@ -462,7 +462,7 @@ class Value : Boxed
       Params:
         instance = the instance
   */
-  void initFromInstance(gobject.type_instance.TypeInstance instance)
+  void initFromInstance(gobject.type_instance.TypeInstance instance) nothrow
   {
     g_value_init_from_instance(cast(GValue*)this._cPtr, instance ? cast(GTypeInstance*)instance._cPtr : null);
   }
@@ -473,7 +473,7 @@ class Value : Boxed
       This is an internal function introduced mainly for C marshallers.
       Returns: the value contents as pointer
   */
-  void* peekPointer()
+  void* peekPointer() nothrow
   {
     auto _retval = g_value_peek_pointer(cast(const(GValue)*)this._cPtr);
     return _retval;
@@ -484,7 +484,7 @@ class Value : Boxed
       (as if the value had just been initialized).
       Returns: the #GValue structure that has been passed in
   */
-  gobject.value.Value reset()
+  gobject.value.Value reset() nothrow
   {
     GValue* _cretval;
     _cretval = g_value_reset(cast(GValue*)this._cPtr);
@@ -498,7 +498,7 @@ class Value : Boxed
       Params:
         vBoolean = boolean value to be set
   */
-  void setBoolean(bool vBoolean)
+  void setBoolean(bool vBoolean) nothrow
   {
     g_value_set_boolean(cast(GValue*)this._cPtr, vBoolean);
   }
@@ -509,7 +509,7 @@ class Value : Boxed
       Params:
         vBoxed = boxed value to be set
   */
-  void setBoxed(const(void)* vBoxed = null)
+  void setBoxed(const(void)* vBoxed = null) nothrow
   {
     g_value_set_boxed(cast(GValue*)this._cPtr, vBoxed);
   }
@@ -522,7 +522,7 @@ class Value : Boxed
   
       Deprecated: Use [gobject.value.Value.takeBoxed] instead.
   */
-  void setBoxedTakeOwnership(const(void)* vBoxed = null)
+  void setBoxedTakeOwnership(const(void)* vBoxed = null) nothrow
   {
     g_value_set_boxed_take_ownership(cast(GValue*)this._cPtr, vBoxed);
   }
@@ -535,7 +535,7 @@ class Value : Boxed
   
       Deprecated: This function's input type is broken, see [gobject.value.Value.setSchar]
   */
-  void setChar(char vChar)
+  void setChar(char vChar) nothrow
   {
     g_value_set_char(cast(GValue*)this._cPtr, vChar);
   }
@@ -546,7 +546,7 @@ class Value : Boxed
       Params:
         vDouble = double value to be set
   */
-  void setDouble(double vDouble)
+  void setDouble(double vDouble) nothrow
   {
     g_value_set_double(cast(GValue*)this._cPtr, vDouble);
   }
@@ -557,7 +557,7 @@ class Value : Boxed
       Params:
         vEnum = enum value to be set
   */
-  void setEnum(int vEnum)
+  void setEnum(int vEnum) nothrow
   {
     g_value_set_enum(cast(GValue*)this._cPtr, vEnum);
   }
@@ -568,7 +568,7 @@ class Value : Boxed
       Params:
         vFlags = flags value to be set
   */
-  void setFlags(uint vFlags)
+  void setFlags(uint vFlags) nothrow
   {
     g_value_set_flags(cast(GValue*)this._cPtr, vFlags);
   }
@@ -579,7 +579,7 @@ class Value : Boxed
       Params:
         vFloat = float value to be set
   */
-  void setFloat(float vFloat)
+  void setFloat(float vFloat) nothrow
   {
     g_value_set_float(cast(GValue*)this._cPtr, vFloat);
   }
@@ -590,7 +590,7 @@ class Value : Boxed
       Params:
         vGtype = #GType to be set
   */
-  void setGtype(gobject.types.GType vGtype)
+  void setGtype(gobject.types.GType vGtype) nothrow
   {
     g_value_set_gtype(cast(GValue*)this._cPtr, vGtype);
   }
@@ -602,7 +602,7 @@ class Value : Boxed
       Params:
         instance = the instance
   */
-  void setInstance(void* instance = null)
+  void setInstance(void* instance = null) nothrow
   {
     g_value_set_instance(cast(GValue*)this._cPtr, instance);
   }
@@ -613,7 +613,7 @@ class Value : Boxed
       Params:
         vInt = integer value to be set
   */
-  void setInt(int vInt)
+  void setInt(int vInt) nothrow
   {
     g_value_set_int(cast(GValue*)this._cPtr, vInt);
   }
@@ -624,7 +624,7 @@ class Value : Boxed
       Params:
         vInt64 = 64bit integer value to be set
   */
-  void setInt64(long vInt64)
+  void setInt64(long vInt64) nothrow
   {
     g_value_set_int64(cast(GValue*)this._cPtr, vInt64);
   }
@@ -637,7 +637,7 @@ class Value : Boxed
       Params:
         vString = static string to be set
   */
-  void setInternedString(string vString = null)
+  void setInternedString(string vString = null) nothrow
   {
     const(char)* _vString = vString.toCString(No.Alloc);
     g_value_set_interned_string(cast(GValue*)this._cPtr, _vString);
@@ -649,7 +649,7 @@ class Value : Boxed
       Params:
         vLong = long integer value to be set
   */
-  void setLong(glong vLong)
+  void setLong(glong vLong) nothrow
   {
     g_value_set_long(cast(GValue*)this._cPtr, vLong);
   }
@@ -670,7 +670,7 @@ class Value : Boxed
       Params:
         vObject = object value to be set
   */
-  void setObject(gobject.object.ObjectWrap vObject = null)
+  void setObject(gobject.object.ObjectWrap vObject = null) nothrow
   {
     g_value_set_object(cast(GValue*)this._cPtr, vObject ? cast(GObject*)vObject._cPtr(No.Dup) : null);
   }
@@ -681,7 +681,7 @@ class Value : Boxed
       Params:
         param = the #GParamSpec to be set
   */
-  void setParam(gobject.param_spec.ParamSpec param = null)
+  void setParam(gobject.param_spec.ParamSpec param = null) nothrow
   {
     g_value_set_param(cast(GValue*)this._cPtr, param ? cast(GParamSpec*)param._cPtr(No.Dup) : null);
   }
@@ -692,7 +692,7 @@ class Value : Boxed
       Params:
         vPointer = pointer value to be set
   */
-  void setPointer(void* vPointer = null)
+  void setPointer(void* vPointer = null) nothrow
   {
     g_value_set_pointer(cast(GValue*)this._cPtr, vPointer);
   }
@@ -703,7 +703,7 @@ class Value : Boxed
       Params:
         vChar = signed 8 bit integer to be set
   */
-  void setSchar(byte vChar)
+  void setSchar(byte vChar) nothrow
   {
     g_value_set_schar(cast(GValue*)this._cPtr, vChar);
   }
@@ -717,7 +717,7 @@ class Value : Boxed
       Params:
         vBoxed = static boxed value to be set
   */
-  void setStaticBoxed(const(void)* vBoxed = null)
+  void setStaticBoxed(const(void)* vBoxed = null) nothrow
   {
     g_value_set_static_boxed(cast(GValue*)this._cPtr, vBoxed);
   }
@@ -733,7 +733,7 @@ class Value : Boxed
       Params:
         vString = static string to be set
   */
-  void setStaticString(string vString = null)
+  void setStaticString(string vString = null) nothrow
   {
     const(char)* _vString = vString.toCString(No.Alloc);
     g_value_set_static_string(cast(GValue*)this._cPtr, _vString);
@@ -745,7 +745,7 @@ class Value : Boxed
       Params:
         vString = caller-owned string to be duplicated for the #GValue
   */
-  void setString(string vString = null)
+  void setString(string vString = null) nothrow
   {
     const(char)* _vString = vString.toCString(No.Alloc);
     g_value_set_string(cast(GValue*)this._cPtr, _vString);
@@ -759,7 +759,7 @@ class Value : Boxed
   
       Deprecated: Use [gobject.value.Value.takeString] instead.
   */
-  void setStringTakeOwnership(string vString = null)
+  void setStringTakeOwnership(string vString = null) nothrow
   {
     char* _vString = vString.toCString(No.Alloc);
     g_value_set_string_take_ownership(cast(GValue*)this._cPtr, _vString);
@@ -771,7 +771,7 @@ class Value : Boxed
       Params:
         vUchar = unsigned character value to be set
   */
-  void setUchar(ubyte vUchar)
+  void setUchar(ubyte vUchar) nothrow
   {
     g_value_set_uchar(cast(GValue*)this._cPtr, vUchar);
   }
@@ -782,7 +782,7 @@ class Value : Boxed
       Params:
         vUint = unsigned integer value to be set
   */
-  void setUint(uint vUint)
+  void setUint(uint vUint) nothrow
   {
     g_value_set_uint(cast(GValue*)this._cPtr, vUint);
   }
@@ -793,7 +793,7 @@ class Value : Boxed
       Params:
         vUint64 = unsigned 64bit integer value to be set
   */
-  void setUint64(ulong vUint64)
+  void setUint64(ulong vUint64) nothrow
   {
     g_value_set_uint64(cast(GValue*)this._cPtr, vUint64);
   }
@@ -804,7 +804,7 @@ class Value : Boxed
       Params:
         vUlong = unsigned long integer value to be set
   */
-  void setUlong(gulong vUlong)
+  void setUlong(gulong vUlong) nothrow
   {
     g_value_set_ulong(cast(GValue*)this._cPtr, vUlong);
   }
@@ -816,7 +816,7 @@ class Value : Boxed
       Params:
         variant = a #GVariant, or null
   */
-  void setVariant(glib.variant.Variant variant = null)
+  void setVariant(glib.variant.Variant variant = null) nothrow
   {
     g_value_set_variant(cast(GValue*)this._cPtr, variant ? cast(GVariant*)variant._cPtr(No.Dup) : null);
   }
@@ -834,7 +834,7 @@ class Value : Boxed
       Returns: string content of value;
          Should be freed with [glib.global.gfree] when no longer needed.
   */
-  string stealString()
+  string stealString() nothrow
   {
     char* _cretval;
     _cretval = g_value_steal_string(cast(GValue*)this._cPtr);
@@ -850,7 +850,7 @@ class Value : Boxed
       Params:
         vBoxed = duplicated unowned boxed value to be set
   */
-  void takeBoxed(const(void)* vBoxed = null)
+  void takeBoxed(const(void)* vBoxed = null) nothrow
   {
     g_value_take_boxed(cast(GValue*)this._cPtr, vBoxed);
   }
@@ -861,7 +861,7 @@ class Value : Boxed
       Params:
         vString = string to take ownership of
   */
-  void takeString(string vString = null)
+  void takeString(string vString = null) nothrow
   {
     char* _vString = vString.toCString(Yes.Alloc);
     g_value_take_string(cast(GValue*)this._cPtr, _vString);
@@ -884,7 +884,7 @@ class Value : Boxed
       Params:
         variant = a #GVariant, or null
   */
-  void takeVariant(glib.variant.Variant variant = null)
+  void takeVariant(glib.variant.Variant variant = null) nothrow
   {
     g_value_take_variant(cast(GValue*)this._cPtr, variant ? cast(GVariant*)variant._cPtr(Yes.Dup) : null);
   }
@@ -903,7 +903,7 @@ class Value : Boxed
       Returns: Whether a transformation rule was found and could be applied.
          Upon failing transformations, dest_value is left untouched.
   */
-  bool transform(gobject.value.Value destValue)
+  bool transform(gobject.value.Value destValue) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_value_transform(cast(const(GValue)*)this._cPtr, destValue ? cast(GValue*)destValue._cPtr(No.Dup) : null);
@@ -916,7 +916,7 @@ class Value : Boxed
       value is the same as an uninitialized (zero-filled) #GValue
       structure.
   */
-  void unset()
+  void unset() nothrow
   {
     g_value_unset(cast(GValue*)this._cPtr);
   }
@@ -930,7 +930,7 @@ class Value : Boxed
         destType = destination type for copying.
       Returns: true if [gobject.value.Value.copy] is possible with src_type and dest_type.
   */
-  static bool typeCompatible(gobject.types.GType srcType, gobject.types.GType destType)
+  static bool typeCompatible(gobject.types.GType srcType, gobject.types.GType destType) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_value_type_compatible(srcType, destType);
@@ -948,7 +948,7 @@ class Value : Boxed
         destType = Target type.
       Returns: true if the transformation is possible, false otherwise.
   */
-  static bool typeTransformable(gobject.types.GType srcType, gobject.types.GType destType)
+  static bool typeTransformable(gobject.types.GType srcType, gobject.types.GType destType) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_value_type_transformable(srcType, destType);
@@ -962,7 +962,7 @@ class Value : Boxed
 *   T = The D type to initialize the GValue to
 *   gval = The C GValue structure pointer
 */
-void initVal(T)(GValue* gval)
+void initVal(T)(GValue* gval) nothrow
 {
   static if (is(T == bool))
     g_value_init(gval, GTypeEnum.Boolean);
@@ -1010,7 +1010,7 @@ void initVal(T)(GValue* gval)
 *   gval = C GValue structure pointer
 * Returns: The value of type `T`
 */
-T getVal(T)(const(GValue)* gval)
+T getVal(T)(const(GValue)* gval) nothrow
 {
   static if (is(T == bool))
     return cast(bool)g_value_get_boolean(gval);
@@ -1089,7 +1089,7 @@ T getVal(T)(const(GValue)* gval)
 *   length = Length of string (-1 to use strlen)
 * Returns: The D string
 */
-string getStringWithLength(const(GValue)* gval, int length)
+string getStringWithLength(const(GValue)* gval, int length) nothrow
 {
   auto cstr = g_value_get_string(gval);
   if (!cstr)
@@ -1108,7 +1108,7 @@ string getStringWithLength(const(GValue)* gval, int length)
 *   gval = C GValue structure pointer
 *   v = The value to set the GValue structure to
 */
-void setVal(T)(GValue* gval, T v)
+void setVal(T)(GValue* gval, T v) nothrow
 {
   static if (is(T == bool))
     g_value_set_boolean(gval, cast(gboolean)v);

@@ -30,26 +30,26 @@ class SeparatorMenuItem : gtk.menu_item.MenuItem
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_separator_menu_item_get_type != &gidSymbolNotFound ? gtk_separator_menu_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SeparatorMenuItem self()
+  override SeparatorMenuItem self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class SeparatorMenuItem : gtk.menu_item.MenuItem
       Get builder for [gtk.separator_menu_item.SeparatorMenuItem]
       Returns: New builder object
   */
-  static SeparatorMenuItemGidBuilder builder()
+  static SeparatorMenuItemGidBuilder builder() nothrow
   {
     return new SeparatorMenuItemGidBuilder;
   }
@@ -67,7 +67,7 @@ class SeparatorMenuItem : gtk.menu_item.MenuItem
       Creates a new #GtkSeparatorMenuItem.
       Returns: a new #GtkSeparatorMenuItem.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_separator_menu_item_new();
@@ -88,7 +88,7 @@ final class SeparatorMenuItemGidBuilder : SeparatorMenuItemGidBuilderImpl!Separa
       Create object from builder.
       Returns: New object
   */
-  SeparatorMenuItem build()
+  SeparatorMenuItem build() nothrow
   {
     return new SeparatorMenuItem(cast(void*)createGObject(SeparatorMenuItem._getGType), No.Take);
   }

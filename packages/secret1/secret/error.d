@@ -16,7 +16,7 @@ struct Error
       Get the error quark.
       Returns: the quark
   */
-  static glib.types.Quark getQuark()
+  static glib.types.Quark getQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = secret_error_get_quark();

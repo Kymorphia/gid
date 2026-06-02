@@ -41,32 +41,32 @@ class DateTime : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_date_time_get_type != &gidSymbolNotFound ? g_date_time_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DateTime self()
+  override DateTime self() nothrow
   {
     return this;
   }
@@ -111,7 +111,7 @@ class DateTime : gobject.boxed.Boxed
         seconds = the number of seconds past the minute
       Returns: a new #GDateTime, or null
   */
-  this(glib.time_zone.TimeZone tz, int year, int month, int day, int hour, int minute, double seconds)
+  this(glib.time_zone.TimeZone tz, int year, int month, int day, int hour, int minute, double seconds) nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new(tz ? cast(GTimeZone*)tz._cPtr(No.Dup) : null, year, month, day, hour, minute, seconds);
@@ -169,7 +169,7 @@ class DateTime : gobject.boxed.Boxed
                                    timezone, or null.
       Returns: a new #GDateTime, or null
   */
-  static glib.date_time.DateTime newFromIso8601(string text, glib.time_zone.TimeZone defaultTz = null)
+  static glib.date_time.DateTime newFromIso8601(string text, glib.time_zone.TimeZone defaultTz = null) nothrow
   {
     GDateTime* _cretval;
     const(char)* _text = text.toCString(No.Alloc);
@@ -199,7 +199,7 @@ class DateTime : gobject.boxed.Boxed
       Deprecated: #GTimeVal is not year-2038-safe. Use
            [glib.date_time.DateTime.newFromUnixLocal] instead.
   */
-  static glib.date_time.DateTime newFromTimevalLocal(glib.time_val.TimeVal tv)
+  static glib.date_time.DateTime newFromTimevalLocal(glib.time_val.TimeVal tv) nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new_from_timeval_local(cast(const(GTimeVal)*)&tv);
@@ -226,7 +226,7 @@ class DateTime : gobject.boxed.Boxed
       Deprecated: #GTimeVal is not year-2038-safe. Use
            [glib.date_time.DateTime.newFromUnixUtc] instead.
   */
-  static glib.date_time.DateTime newFromTimevalUtc(glib.time_val.TimeVal tv)
+  static glib.date_time.DateTime newFromTimevalUtc(glib.time_val.TimeVal tv) nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new_from_timeval_utc(cast(const(GTimeVal)*)&tv);
@@ -251,7 +251,7 @@ class DateTime : gobject.boxed.Boxed
         t = the Unix time
       Returns: a new #GDateTime, or null
   */
-  static glib.date_time.DateTime newFromUnixLocal(long t)
+  static glib.date_time.DateTime newFromUnixLocal(long t) nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new_from_unix_local(t);
@@ -276,7 +276,7 @@ class DateTime : gobject.boxed.Boxed
         usecs = the Unix time in microseconds
       Returns: a new [glib.date_time.DateTime], or `NULL`
   */
-  static glib.date_time.DateTime newFromUnixLocalUsec(long usecs)
+  static glib.date_time.DateTime newFromUnixLocalUsec(long usecs) nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new_from_unix_local_usec(usecs);
@@ -300,7 +300,7 @@ class DateTime : gobject.boxed.Boxed
         t = the Unix time
       Returns: a new #GDateTime, or null
   */
-  static glib.date_time.DateTime newFromUnixUtc(long t)
+  static glib.date_time.DateTime newFromUnixUtc(long t) nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new_from_unix_utc(t);
@@ -324,7 +324,7 @@ class DateTime : gobject.boxed.Boxed
         usecs = the Unix time in microseconds
       Returns: a new [glib.date_time.DateTime], or `NULL`
   */
-  static glib.date_time.DateTime newFromUnixUtcUsec(long usecs)
+  static glib.date_time.DateTime newFromUnixUtcUsec(long usecs) nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new_from_unix_utc_usec(usecs);
@@ -348,7 +348,7 @@ class DateTime : gobject.boxed.Boxed
         seconds = the number of seconds past the minute
       Returns: a #GDateTime, or null
   */
-  static glib.date_time.DateTime newLocal(int year, int month, int day, int hour, int minute, double seconds)
+  static glib.date_time.DateTime newLocal(int year, int month, int day, int hour, int minute, double seconds) nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new_local(year, month, day, hour, minute, seconds);
@@ -371,7 +371,7 @@ class DateTime : gobject.boxed.Boxed
         tz = a #GTimeZone
       Returns: a new #GDateTime, or null
   */
-  static glib.date_time.DateTime newNow(glib.time_zone.TimeZone tz)
+  static glib.date_time.DateTime newNow(glib.time_zone.TimeZone tz) nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new_now(tz ? cast(GTimeZone*)tz._cPtr(No.Dup) : null);
@@ -387,7 +387,7 @@ class DateTime : gobject.boxed.Boxed
       zone returned by [glib.time_zone.TimeZone.newLocal].
       Returns: a new #GDateTime, or null
   */
-  static glib.date_time.DateTime newNowLocal()
+  static glib.date_time.DateTime newNowLocal() nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new_now_local();
@@ -402,7 +402,7 @@ class DateTime : gobject.boxed.Boxed
       zone returned by [glib.time_zone.TimeZone.newUtc].
       Returns: a new #GDateTime, or null
   */
-  static glib.date_time.DateTime newNowUtc()
+  static glib.date_time.DateTime newNowUtc() nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new_now_utc();
@@ -426,7 +426,7 @@ class DateTime : gobject.boxed.Boxed
         seconds = the number of seconds past the minute
       Returns: a #GDateTime, or null
   */
-  static glib.date_time.DateTime newUtc(int year, int month, int day, int hour, int minute, double seconds)
+  static glib.date_time.DateTime newUtc(int year, int month, int day, int hour, int minute, double seconds) nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_new_utc(year, month, day, hour, minute, seconds);
@@ -442,7 +442,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the newly created #GDateTime which
           should be freed with [glib.date_time.DateTime.unref], or null
   */
-  glib.date_time.DateTime add(glib.types.TimeSpan timespan)
+  glib.date_time.DateTime add(glib.types.TimeSpan timespan) nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_add(cast(GDateTime*)this._cPtr, timespan);
@@ -459,7 +459,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the newly created #GDateTime which
           should be freed with [glib.date_time.DateTime.unref], or null
   */
-  glib.date_time.DateTime addDays(int days)
+  glib.date_time.DateTime addDays(int days) nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_add_days(cast(GDateTime*)this._cPtr, days);
@@ -481,7 +481,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the newly created #GDateTime which
           should be freed with [glib.date_time.DateTime.unref], or null
   */
-  glib.date_time.DateTime addFull(int years, int months, int days, int hours, int minutes, double seconds)
+  glib.date_time.DateTime addFull(int years, int months, int days, int hours, int minutes, double seconds) nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_add_full(cast(GDateTime*)this._cPtr, years, months, days, hours, minutes, seconds);
@@ -498,7 +498,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the newly created #GDateTime which
           should be freed with [glib.date_time.DateTime.unref], or null
   */
-  glib.date_time.DateTime addHours(int hours)
+  glib.date_time.DateTime addHours(int hours) nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_add_hours(cast(GDateTime*)this._cPtr, hours);
@@ -515,7 +515,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the newly created #GDateTime which
           should be freed with [glib.date_time.DateTime.unref], or null
   */
-  glib.date_time.DateTime addMinutes(int minutes)
+  glib.date_time.DateTime addMinutes(int minutes) nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_add_minutes(cast(GDateTime*)this._cPtr, minutes);
@@ -537,7 +537,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the newly created #GDateTime which
           should be freed with [glib.date_time.DateTime.unref], or null
   */
-  glib.date_time.DateTime addMonths(int months)
+  glib.date_time.DateTime addMonths(int months) nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_add_months(cast(GDateTime*)this._cPtr, months);
@@ -554,7 +554,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the newly created #GDateTime which
           should be freed with [glib.date_time.DateTime.unref], or null
   */
-  glib.date_time.DateTime addSeconds(double seconds)
+  glib.date_time.DateTime addSeconds(double seconds) nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_add_seconds(cast(GDateTime*)this._cPtr, seconds);
@@ -571,7 +571,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the newly created #GDateTime which
           should be freed with [glib.date_time.DateTime.unref], or null
   */
-  glib.date_time.DateTime addWeeks(int weeks)
+  glib.date_time.DateTime addWeeks(int weeks) nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_add_weeks(cast(GDateTime*)this._cPtr, weeks);
@@ -591,7 +591,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the newly created #GDateTime which
           should be freed with [glib.date_time.DateTime.unref], or null
   */
-  glib.date_time.DateTime addYears(int years)
+  glib.date_time.DateTime addYears(int years) nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_add_years(cast(GDateTime*)this._cPtr, years);
@@ -608,7 +608,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: -1, 0 or 1 if dt1 is less than, equal to or greater
           than dt2.
   */
-  int compare(glib.date_time.DateTime dt2)
+  int compare(glib.date_time.DateTime dt2) nothrow
   {
     int _retval;
     _retval = g_date_time_compare(cast(GDateTime*)this._cPtr, dt2 ? cast(GDateTime*)dt2._cPtr(No.Dup) : null);
@@ -625,7 +625,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the difference between the two #GDateTime, as a time
           span expressed in microseconds.
   */
-  glib.types.TimeSpan difference(glib.date_time.DateTime begin)
+  glib.types.TimeSpan difference(glib.date_time.DateTime begin) nothrow
   {
     glib.types.TimeSpan _retval;
     _retval = g_date_time_difference(cast(GDateTime*)this._cPtr, begin ? cast(GDateTime*)begin._cPtr(No.Dup) : null);
@@ -642,7 +642,7 @@ class DateTime : gobject.boxed.Boxed
         dt2 = a #GDateTime
       Returns: true if dt1 and dt2 are equal
   */
-  bool equal(glib.date_time.DateTime dt2)
+  bool equal(glib.date_time.DateTime dt2) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_date_time_equal(cast(GDateTime*)this._cPtr, dt2 ? cast(GDateTime*)dt2._cPtr(No.Dup) : null);
@@ -783,7 +783,7 @@ class DateTime : gobject.boxed.Boxed
            as a format specifier not being supported in the current locale). The
            string should be freed with [glib.global.gfree].
   */
-  string format(string format)
+  string format(string format) nothrow
   {
     char* _cretval;
     const(char)* _format = format.toCString(No.Alloc);
@@ -802,7 +802,7 @@ class DateTime : gobject.boxed.Boxed
           ISO 8601 format or null in the case that there was an error. The string
           should be freed with [glib.global.gfree].
   */
-  string formatIso8601()
+  string formatIso8601() nothrow
   {
     char* _cretval;
     _cretval = g_date_time_format_iso8601(cast(GDateTime*)this._cPtr);
@@ -815,7 +815,7 @@ class DateTime : gobject.boxed.Boxed
       calendar.
       Returns: the day of the month
   */
-  int getDayOfMonth()
+  int getDayOfMonth() nothrow
   {
     int _retval;
     _retval = g_date_time_get_day_of_month(cast(GDateTime*)this._cPtr);
@@ -827,7 +827,7 @@ class DateTime : gobject.boxed.Boxed
       Monday, 2 is Tuesday... 7 is Sunday).
       Returns: the day of the week
   */
-  int getDayOfWeek()
+  int getDayOfWeek() nothrow
   {
     int _retval;
     _retval = g_date_time_get_day_of_week(cast(GDateTime*)this._cPtr);
@@ -839,7 +839,7 @@ class DateTime : gobject.boxed.Boxed
       calendar.
       Returns: the day of the year
   */
-  int getDayOfYear()
+  int getDayOfYear() nothrow
   {
     int _retval;
     _retval = g_date_time_get_day_of_year(cast(GDateTime*)this._cPtr);
@@ -850,7 +850,7 @@ class DateTime : gobject.boxed.Boxed
       Retrieves the hour of the day represented by datetime
       Returns: the hour of the day
   */
-  int getHour()
+  int getHour() nothrow
   {
     int _retval;
     _retval = g_date_time_get_hour(cast(GDateTime*)this._cPtr);
@@ -861,7 +861,7 @@ class DateTime : gobject.boxed.Boxed
       Retrieves the microsecond of the date represented by datetime
       Returns: the microsecond of the second
   */
-  int getMicrosecond()
+  int getMicrosecond() nothrow
   {
     int _retval;
     _retval = g_date_time_get_microsecond(cast(GDateTime*)this._cPtr);
@@ -872,7 +872,7 @@ class DateTime : gobject.boxed.Boxed
       Retrieves the minute of the hour represented by datetime
       Returns: the minute of the hour
   */
-  int getMinute()
+  int getMinute() nothrow
   {
     int _retval;
     _retval = g_date_time_get_minute(cast(GDateTime*)this._cPtr);
@@ -884,7 +884,7 @@ class DateTime : gobject.boxed.Boxed
       calendar.
       Returns: the month represented by datetime
   */
-  int getMonth()
+  int getMonth() nothrow
   {
     int _retval;
     _retval = g_date_time_get_month(cast(GDateTime*)this._cPtr);
@@ -895,7 +895,7 @@ class DateTime : gobject.boxed.Boxed
       Retrieves the second of the minute represented by datetime
       Returns: the second represented by datetime
   */
-  int getSecond()
+  int getSecond() nothrow
   {
     int _retval;
     _retval = g_date_time_get_second(cast(GDateTime*)this._cPtr);
@@ -907,7 +907,7 @@ class DateTime : gobject.boxed.Boxed
       including the fractional part.
       Returns: the number of seconds
   */
-  double getSeconds()
+  double getSeconds() nothrow
   {
     double _retval;
     _retval = g_date_time_get_seconds(cast(GDateTime*)this._cPtr);
@@ -918,7 +918,7 @@ class DateTime : gobject.boxed.Boxed
       Get the time zone for this datetime.
       Returns: the time zone
   */
-  glib.time_zone.TimeZone getTimezone()
+  glib.time_zone.TimeZone getTimezone() nothrow
   {
     GTimeZone* _cretval;
     _cretval = g_date_time_get_timezone(cast(GDateTime*)this._cPtr);
@@ -937,7 +937,7 @@ class DateTime : gobject.boxed.Boxed
                  string is owned by the #GDateTime and it should not be
                  modified or freed
   */
-  string getTimezoneAbbreviation()
+  string getTimezoneAbbreviation() nothrow
   {
     const(char)* _cretval;
     _cretval = g_date_time_get_timezone_abbreviation(cast(GDateTime*)this._cPtr);
@@ -957,7 +957,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the number of microseconds that should be added to UTC to
                  get the local time
   */
-  glib.types.TimeSpan getUtcOffset()
+  glib.types.TimeSpan getUtcOffset() nothrow
   {
     glib.types.TimeSpan _retval;
     _retval = g_date_time_get_utc_offset(cast(GDateTime*)this._cPtr);
@@ -998,7 +998,7 @@ class DateTime : gobject.boxed.Boxed
       Monday, so this function never returns 0.
       Returns: the ISO 8601 week-numbering year for datetime
   */
-  int getWeekNumberingYear()
+  int getWeekNumberingYear() nothrow
   {
     int _retval;
     _retval = g_date_time_get_week_numbering_year(cast(GDateTime*)this._cPtr);
@@ -1023,7 +1023,7 @@ class DateTime : gobject.boxed.Boxed
       if 4 or more days of that week are contained within the new year.
       Returns: the ISO 8601 week number for datetime.
   */
-  int getWeekOfYear()
+  int getWeekOfYear() nothrow
   {
     int _retval;
     _retval = g_date_time_get_week_of_year(cast(GDateTime*)this._cPtr);
@@ -1034,7 +1034,7 @@ class DateTime : gobject.boxed.Boxed
       Retrieves the year represented by datetime in the Gregorian calendar.
       Returns: the year represented by datetime
   */
-  int getYear()
+  int getYear() nothrow
   {
     int _retval;
     _retval = g_date_time_get_year(cast(GDateTime*)this._cPtr);
@@ -1049,7 +1049,7 @@ class DateTime : gobject.boxed.Boxed
         month = the return location for the month of the year, or null.
         day = the return location for the day of the month, or null.
   */
-  void getYmd(out int year, out int month, out int day)
+  void getYmd(out int year, out int month, out int day) nothrow
   {
     g_date_time_get_ymd(cast(GDateTime*)this._cPtr, cast(int*)&year, cast(int*)&month, cast(int*)&day);
   }
@@ -1058,7 +1058,7 @@ class DateTime : gobject.boxed.Boxed
       Hashes datetime into a #guint, suitable for use within #GHashTable.
       Returns: a #guint containing the hash
   */
-  uint hash()
+  uint hash() nothrow
   {
     uint _retval;
     _retval = g_date_time_hash(cast(GDateTime*)this._cPtr);
@@ -1070,7 +1070,7 @@ class DateTime : gobject.boxed.Boxed
       the time zone of datetime.
       Returns: true if daylight savings time is in effect
   */
-  bool isDaylightSavings()
+  bool isDaylightSavings() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_date_time_is_daylight_savings(cast(GDateTime*)this._cPtr);
@@ -1086,7 +1086,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the newly created #GDateTime which
           should be freed with [glib.date_time.DateTime.unref], or null
   */
-  glib.date_time.DateTime toLocal()
+  glib.date_time.DateTime toLocal() nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_to_local(cast(GDateTime*)this._cPtr);
@@ -1116,7 +1116,7 @@ class DateTime : gobject.boxed.Boxed
       Deprecated: #GTimeVal is not year-2038-safe. Use
            [glib.date_time.DateTime.toUnix] instead.
   */
-  bool toTimeval(glib.time_val.TimeVal tv)
+  bool toTimeval(glib.time_val.TimeVal tv) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_date_time_to_timeval(cast(GDateTime*)this._cPtr, cast(GTimeVal*)&tv);
@@ -1136,7 +1136,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the newly created #GDateTime which
           should be freed with [glib.date_time.DateTime.unref], or null
   */
-  glib.date_time.DateTime toTimezone(glib.time_zone.TimeZone tz)
+  glib.date_time.DateTime toTimezone(glib.time_zone.TimeZone tz) nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_to_timezone(cast(GDateTime*)this._cPtr, tz ? cast(GTimeZone*)tz._cPtr(No.Dup) : null);
@@ -1152,7 +1152,7 @@ class DateTime : gobject.boxed.Boxed
       00:00:00 UTC, regardless of the time zone associated with datetime.
       Returns: the Unix time corresponding to datetime
   */
-  long toUnix()
+  long toUnix() nothrow
   {
     long _retval;
     _retval = g_date_time_to_unix(cast(GDateTime*)this._cPtr);
@@ -1166,7 +1166,7 @@ class DateTime : gobject.boxed.Boxed
       00:00:00 UTC, regardless of the time zone associated with datetime.
       Returns: the Unix time corresponding to datetime
   */
-  long toUnixUsec()
+  long toUnixUsec() nothrow
   {
     long _retval;
     _retval = g_date_time_to_unix_usec(cast(GDateTime*)this._cPtr);
@@ -1182,7 +1182,7 @@ class DateTime : gobject.boxed.Boxed
       Returns: the newly created #GDateTime which
           should be freed with [glib.date_time.DateTime.unref], or null
   */
-  glib.date_time.DateTime toUtc()
+  glib.date_time.DateTime toUtc() nothrow
   {
     GDateTime* _cretval;
     _cretval = g_date_time_to_utc(cast(GDateTime*)this._cPtr);

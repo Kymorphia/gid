@@ -20,26 +20,26 @@ class GLOverlayCompositor : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_overlay_compositor_get_type != &gidSymbolNotFound ? gst_gl_overlay_compositor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLOverlayCompositor self()
+  override GLOverlayCompositor self() nothrow
   {
     return this;
   }
@@ -48,25 +48,25 @@ class GLOverlayCompositor : gst.object.ObjectWrap
       Get builder for [gstgl.gloverlay_compositor.GLOverlayCompositor]
       Returns: New builder object
   */
-  static GLOverlayCompositorGidBuilder builder()
+  static GLOverlayCompositorGidBuilder builder() nothrow
   {
     return new GLOverlayCompositorGidBuilder;
   }
 
   /** */
-  @property bool yinvert()
+  @property bool yinvert() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("yinvert");
   }
 
   /** */
-  @property void yinvert(bool propval)
+  @property void yinvert(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("yinvert", propval);
   }
 
   /** */
-  this(gstgl.glcontext.GLContext context)
+  this(gstgl.glcontext.GLContext context) nothrow
   {
     GstGLOverlayCompositor* _cretval;
     _cretval = gst_gl_overlay_compositor_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
@@ -74,7 +74,7 @@ class GLOverlayCompositor : gst.object.ObjectWrap
   }
 
   /** */
-  static gst.caps.Caps addCaps(gst.caps.Caps caps)
+  static gst.caps.Caps addCaps(gst.caps.Caps caps) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_gl_overlay_compositor_add_caps(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
@@ -83,19 +83,19 @@ class GLOverlayCompositor : gst.object.ObjectWrap
   }
 
   /** */
-  void drawOverlays()
+  void drawOverlays() nothrow
   {
     gst_gl_overlay_compositor_draw_overlays(cast(GstGLOverlayCompositor*)this._cPtr);
   }
 
   /** */
-  void freeOverlays()
+  void freeOverlays() nothrow
   {
     gst_gl_overlay_compositor_free_overlays(cast(GstGLOverlayCompositor*)this._cPtr);
   }
 
   /** */
-  void uploadOverlays(gst.buffer.Buffer buf)
+  void uploadOverlays(gst.buffer.Buffer buf) nothrow
   {
     gst_gl_overlay_compositor_upload_overlays(cast(GstGLOverlayCompositor*)this._cPtr, buf ? cast(GstBuffer*)buf._cPtr(No.Dup) : null);
   }
@@ -106,7 +106,7 @@ class GLOverlayCompositorGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl
 {
 
   /** */
-  T yinvert(bool propval)
+  T yinvert(bool propval) nothrow
   {
     return setProperty("yinvert", propval);
   }
@@ -119,7 +119,7 @@ final class GLOverlayCompositorGidBuilder : GLOverlayCompositorGidBuilderImpl!GL
       Create object from builder.
       Returns: New object
   */
-  GLOverlayCompositor build()
+  GLOverlayCompositor build() nothrow
   {
     return new GLOverlayCompositor(cast(void*)createGObject(GLOverlayCompositor._getGType), No.Take);
   }

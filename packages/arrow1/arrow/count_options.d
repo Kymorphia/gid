@@ -15,26 +15,26 @@ class CountOptions : arrow.function_options.FunctionOptions
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_count_options_get_type != &gidSymbolNotFound ? garrow_count_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CountOptions self()
+  override CountOptions self() nothrow
   {
     return this;
   }
@@ -43,25 +43,25 @@ class CountOptions : arrow.function_options.FunctionOptions
       Get builder for [arrow.count_options.CountOptions]
       Returns: New builder object
   */
-  static CountOptionsGidBuilder builder()
+  static CountOptionsGidBuilder builder() nothrow
   {
     return new CountOptionsGidBuilder;
   }
 
   /** */
-  @property arrow.types.CountMode mode()
+  @property arrow.types.CountMode mode() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.types.CountMode)("mode");
   }
 
   /** */
-  @property void mode(arrow.types.CountMode propval)
+  @property void mode(arrow.types.CountMode propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(arrow.types.CountMode)("mode", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowCountOptions* _cretval;
     _cretval = garrow_count_options_new();
@@ -74,7 +74,7 @@ class CountOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidB
 {
 
   /** */
-  T mode(arrow.types.CountMode propval)
+  T mode(arrow.types.CountMode propval) nothrow
   {
     return setProperty("mode", propval);
   }
@@ -87,7 +87,7 @@ final class CountOptionsGidBuilder : CountOptionsGidBuilderImpl!CountOptionsGidB
       Create object from builder.
       Returns: New object
   */
-  CountOptions build()
+  CountOptions build() nothrow
   {
     return new CountOptions(cast(void*)createGObject(CountOptions._getGType), Yes.Take);
   }

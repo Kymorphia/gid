@@ -56,7 +56,7 @@ template IconT()
         icon2 = pointer to the second #GIcon.
       Returns: true if icon1 is equal to icon2. false otherwise.
   */
-  override bool equal(gio.icon.Icon icon2 = null)
+  override bool equal(gio.icon.Icon icon2 = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_icon_equal(cast(GIcon*)this._cPtr, icon2 ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon2)._cPtr(No.Dup) : null);
@@ -68,7 +68,7 @@ template IconT()
       Returns: a #guint containing a hash for the icon, suitable for
           use in a #GHashTable or similar data structure.
   */
-  override uint hash()
+  override uint hash() nothrow
   {
     uint _retval;
     _retval = g_icon_hash(cast(GIcon*)this._cPtr);
@@ -83,7 +83,7 @@ template IconT()
       (as opposed to over the network), and within the same file system namespace.
       Returns: a #GVariant, or null when serialization fails. The #GVariant will not be floating.
   */
-  override glib.variant.Variant serialize()
+  override glib.variant.Variant serialize() nothrow
   {
     GVariant* _cretval;
     _cretval = g_icon_serialize(cast(GIcon*)this._cPtr);
@@ -111,7 +111,7 @@ template IconT()
       Returns: An allocated NUL-terminated UTF8 string or
         null if icon can't be serialized. Use [glib.global.gfree] to free.
   */
-  override string toString_()
+  override string toString_() nothrow
   {
     char* _cretval;
     _cretval = g_icon_to_string(cast(GIcon*)this._cPtr);

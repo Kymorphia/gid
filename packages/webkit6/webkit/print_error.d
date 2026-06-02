@@ -17,7 +17,7 @@ struct PrintError
       Gets the quark for the domain of printing errors.
       Returns: print error domain.
   */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = webkit_print_error_quark();
@@ -27,12 +27,12 @@ struct PrintError
 
 class PrintException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(webkit.print_error.PrintError.quark, cast(int)code, msg);
   }

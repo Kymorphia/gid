@@ -219,7 +219,7 @@ interface TreeModel
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_model_get_type != &gidSymbolNotFound ? gtk_tree_model_get_type() : cast(GType)0;
@@ -576,7 +576,7 @@ interface TreeModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectRowChanged(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `RowDeleted` signal.
@@ -602,7 +602,7 @@ interface TreeModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowDeleted(T)(T callback, Flag!"After" after = No.After);
+  gulong connectRowDeleted(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `RowHasChildToggled` signal.
@@ -624,7 +624,7 @@ interface TreeModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowHasChildToggled(T)(T callback, Flag!"After" after = No.After);
+  gulong connectRowHasChildToggled(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `RowInserted` signal.
@@ -650,7 +650,7 @@ interface TreeModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowInserted(T)(T callback, Flag!"After" after = No.After);
+  gulong connectRowInserted(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gtk.tree_model.TreeModel]

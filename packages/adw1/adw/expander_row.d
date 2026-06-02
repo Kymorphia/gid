@@ -52,26 +52,26 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_expander_row_get_type != &gidSymbolNotFound ? adw_expander_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ExpanderRow self()
+  override ExpanderRow self() nothrow
   {
     return this;
   }
@@ -80,7 +80,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Get builder for [adw.expander_row.ExpanderRow]
       Returns: New builder object
   */
-  static ExpanderRowGidBuilder builder()
+  static ExpanderRowGidBuilder builder() nothrow
   {
     return new ExpanderRowGidBuilder;
   }
@@ -89,7 +89,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Get `enableExpansion` property.
       Returns: Whether expansion is enabled.
   */
-  @property bool enableExpansion()
+  @property bool enableExpansion() nothrow
   {
     return getEnableExpansion();
   }
@@ -99,7 +99,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Params:
         propval = Whether expansion is enabled.
   */
-  @property void enableExpansion(bool propval)
+  @property void enableExpansion(bool propval) nothrow
   {
     setEnableExpansion(propval);
   }
@@ -108,7 +108,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Get `expanded` property.
       Returns: Whether the row is expanded.
   */
-  @property bool expanded()
+  @property bool expanded() nothrow
   {
     return getExpanded();
   }
@@ -118,7 +118,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Params:
         propval = Whether the row is expanded.
   */
-  @property void expanded(bool propval)
+  @property void expanded(bool propval) nothrow
   {
     setExpanded(propval);
   }
@@ -129,7 +129,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   
       Deprecated: Use [adw.expander_row.ExpanderRow.addPrefix] to add an icon.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return getIconName();
   }
@@ -141,7 +141,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   
       Deprecated: Use [adw.expander_row.ExpanderRow.addPrefix] to add an icon.
   */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     setIconName(propval);
   }
@@ -150,7 +150,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Get `showEnableSwitch` property.
       Returns: Whether the switch enabling the expansion is visible.
   */
-  @property bool showEnableSwitch()
+  @property bool showEnableSwitch() nothrow
   {
     return getShowEnableSwitch();
   }
@@ -160,7 +160,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Params:
         propval = Whether the switch enabling the expansion is visible.
   */
-  @property void showEnableSwitch(bool propval)
+  @property void showEnableSwitch(bool propval) nothrow
   {
     setShowEnableSwitch(propval);
   }
@@ -172,7 +172,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
         The subtitle is interpreted as Pango markup unless
         [adw.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
   */
-  @property string subtitle()
+  @property string subtitle() nothrow
   {
     return getSubtitle();
   }
@@ -185,7 +185,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
           The subtitle is interpreted as Pango markup unless
           [adw.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
   */
-  @property void subtitle(string propval)
+  @property void subtitle(string propval) nothrow
   {
     setSubtitle(propval);
   }
@@ -197,7 +197,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
         
         If the value is 0, the number of lines won't be limited.
   */
-  @property int subtitleLines()
+  @property int subtitleLines() nothrow
   {
     return getSubtitleLines();
   }
@@ -210,7 +210,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
           
           If the value is 0, the number of lines won't be limited.
   */
-  @property void subtitleLines(int propval)
+  @property void subtitleLines(int propval) nothrow
   {
     setSubtitleLines(propval);
   }
@@ -221,7 +221,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
         
         If the value is 0, the number of lines won't be limited.
   */
-  @property int titleLines()
+  @property int titleLines() nothrow
   {
     return getTitleLines();
   }
@@ -233,7 +233,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
           
           If the value is 0, the number of lines won't be limited.
   */
-  @property void titleLines(int propval)
+  @property void titleLines(int propval) nothrow
   {
     setTitleLines(propval);
   }
@@ -242,7 +242,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Creates a new [adw.expander_row.ExpanderRow].
       Returns: the newly created [adw.expander_row.ExpanderRow]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_expander_row_new();
@@ -257,7 +257,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   
       Deprecated: Use [adw.expander_row.ExpanderRow.addSuffix] to add a suffix.
   */
-  void addAction(gtk.widget.Widget widget)
+  void addAction(gtk.widget.Widget widget) nothrow
   {
     adw_expander_row_add_action(cast(AdwExpanderRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -268,7 +268,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Params:
         widget = a widget
   */
-  void addPrefix(gtk.widget.Widget widget)
+  void addPrefix(gtk.widget.Widget widget) nothrow
   {
     adw_expander_row_add_prefix(cast(AdwExpanderRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -281,7 +281,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Params:
         child = a widget
   */
-  void addRow(gtk.widget.Widget child)
+  void addRow(gtk.widget.Widget child) nothrow
   {
     adw_expander_row_add_row(cast(AdwExpanderRow*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -292,7 +292,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Params:
         widget = a widget
   */
-  void addSuffix(gtk.widget.Widget widget)
+  void addSuffix(gtk.widget.Widget widget) nothrow
   {
     adw_expander_row_add_suffix(cast(AdwExpanderRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -301,7 +301,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Gets whether the expansion of self is enabled.
       Returns: whether the expansion of self is enabled.
   */
-  bool getEnableExpansion()
+  bool getEnableExpansion() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_expander_row_get_enable_expansion(cast(AdwExpanderRow*)this._cPtr);
@@ -312,7 +312,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Gets whether self is expanded.
       Returns: whether self is expanded
   */
-  bool getExpanded()
+  bool getExpanded() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_expander_row_get_expanded(cast(AdwExpanderRow*)this._cPtr);
@@ -325,7 +325,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   
       Deprecated: Use [adw.expander_row.ExpanderRow.addPrefix] to add an icon.
   */
-  string getIconName()
+  string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_expander_row_get_icon_name(cast(AdwExpanderRow*)this._cPtr);
@@ -337,7 +337,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Gets whether the switch enabling the expansion of self is visible.
       Returns: whether the switch enabling the expansion is visible
   */
-  bool getShowEnableSwitch()
+  bool getShowEnableSwitch() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_expander_row_get_show_enable_switch(cast(AdwExpanderRow*)this._cPtr);
@@ -348,7 +348,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Gets the subtitle for self.
       Returns: the subtitle for self
   */
-  string getSubtitle()
+  string getSubtitle() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_expander_row_get_subtitle(cast(AdwExpanderRow*)this._cPtr);
@@ -362,7 +362,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Returns: the number of lines at the end of which the subtitle label will be
           ellipsized
   */
-  int getSubtitleLines()
+  int getSubtitleLines() nothrow
   {
     int _retval;
     _retval = adw_expander_row_get_subtitle_lines(cast(AdwExpanderRow*)this._cPtr);
@@ -375,7 +375,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Returns: the number of lines at the end of which the title label will be
           ellipsized
   */
-  int getTitleLines()
+  int getTitleLines() nothrow
   {
     int _retval;
     _retval = adw_expander_row_get_title_lines(cast(AdwExpanderRow*)this._cPtr);
@@ -388,7 +388,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Params:
         child = the child to be removed
   */
-  void remove(gtk.widget.Widget child)
+  void remove(gtk.widget.Widget child) nothrow
   {
     adw_expander_row_remove(cast(AdwExpanderRow*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -399,7 +399,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Params:
         enableExpansion = whether to enable the expansion
   */
-  void setEnableExpansion(bool enableExpansion)
+  void setEnableExpansion(bool enableExpansion) nothrow
   {
     adw_expander_row_set_enable_expansion(cast(AdwExpanderRow*)this._cPtr, enableExpansion);
   }
@@ -410,7 +410,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Params:
         expanded = whether to expand the row
   */
-  void setExpanded(bool expanded)
+  void setExpanded(bool expanded) nothrow
   {
     adw_expander_row_set_expanded(cast(AdwExpanderRow*)this._cPtr, expanded);
   }
@@ -423,7 +423,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   
       Deprecated: Use [adw.expander_row.ExpanderRow.addPrefix] to add an icon.
   */
-  void setIconName(string iconName = null)
+  void setIconName(string iconName = null) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     adw_expander_row_set_icon_name(cast(AdwExpanderRow*)this._cPtr, _iconName);
@@ -435,7 +435,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Params:
         showEnableSwitch = whether to show the switch enabling the expansion
   */
-  void setShowEnableSwitch(bool showEnableSwitch)
+  void setShowEnableSwitch(bool showEnableSwitch) nothrow
   {
     adw_expander_row_set_show_enable_switch(cast(AdwExpanderRow*)this._cPtr, showEnableSwitch);
   }
@@ -449,7 +449,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Params:
         subtitle = the subtitle
   */
-  void setSubtitle(string subtitle)
+  void setSubtitle(string subtitle) nothrow
   {
     const(char)* _subtitle = subtitle.toCString(No.Alloc);
     adw_expander_row_set_subtitle(cast(AdwExpanderRow*)this._cPtr, _subtitle);
@@ -464,7 +464,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Params:
         subtitleLines = the number of lines at the end of which the subtitle label will be ellipsized
   */
-  void setSubtitleLines(int subtitleLines)
+  void setSubtitleLines(int subtitleLines) nothrow
   {
     adw_expander_row_set_subtitle_lines(cast(AdwExpanderRow*)this._cPtr, subtitleLines);
   }
@@ -478,7 +478,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Params:
         titleLines = the number of lines at the end of which the title label will be ellipsized
   */
-  void setTitleLines(int titleLines)
+  void setTitleLines(int titleLines) nothrow
   {
     adw_expander_row_set_title_lines(cast(AdwExpanderRow*)this._cPtr, titleLines);
   }
@@ -495,7 +495,7 @@ class ExpanderRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilde
         propval = Whether expansion is enabled.
       Returns: Builder instance for fluent chaining
   */
-  T enableExpansion(bool propval)
+  T enableExpansion(bool propval) nothrow
   {
     return setProperty("enable-expansion", propval);
   }
@@ -506,7 +506,7 @@ class ExpanderRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilde
         propval = Whether the row is expanded.
       Returns: Builder instance for fluent chaining
   */
-  T expanded(bool propval)
+  T expanded(bool propval) nothrow
   {
     return setProperty("expanded", propval);
   }
@@ -519,7 +519,7 @@ class ExpanderRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilde
   
       Deprecated: Use [adw.expander_row.ExpanderRow.addPrefix] to add an icon.
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
@@ -530,7 +530,7 @@ class ExpanderRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilde
         propval = Whether the switch enabling the expansion is visible.
       Returns: Builder instance for fluent chaining
   */
-  T showEnableSwitch(bool propval)
+  T showEnableSwitch(bool propval) nothrow
   {
     return setProperty("show-enable-switch", propval);
   }
@@ -544,7 +544,7 @@ class ExpanderRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilde
           [adw.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
       Returns: Builder instance for fluent chaining
   */
-  T subtitle(string propval)
+  T subtitle(string propval) nothrow
   {
     return setProperty("subtitle", propval);
   }
@@ -558,7 +558,7 @@ class ExpanderRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilde
           If the value is 0, the number of lines won't be limited.
       Returns: Builder instance for fluent chaining
   */
-  T subtitleLines(int propval)
+  T subtitleLines(int propval) nothrow
   {
     return setProperty("subtitle-lines", propval);
   }
@@ -571,7 +571,7 @@ class ExpanderRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilde
           If the value is 0, the number of lines won't be limited.
       Returns: Builder instance for fluent chaining
   */
-  T titleLines(int propval)
+  T titleLines(int propval) nothrow
   {
     return setProperty("title-lines", propval);
   }
@@ -584,7 +584,7 @@ final class ExpanderRowGidBuilder : ExpanderRowGidBuilderImpl!ExpanderRowGidBuil
       Create object from builder.
       Returns: New object
   */
-  ExpanderRow build()
+  ExpanderRow build() nothrow
   {
     return new ExpanderRow(cast(void*)createGObject(ExpanderRow._getGType), No.Take);
   }

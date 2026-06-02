@@ -64,7 +64,7 @@ template TagSetterT()
         tag = tag to set
         value = GValue to set for the tag
   */
-  override void addTagValue(gst.types.TagMergeMode mode, string tag, gobject.value.Value value)
+  override void addTagValue(gst.types.TagMergeMode mode, string tag, gobject.value.Value value) nothrow
   {
     const(char)* _tag = tag.toCString(No.Alloc);
     gst_tag_setter_add_tag_value(cast(GstTagSetter*)this._cPtr, mode, _tag, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -78,7 +78,7 @@ template TagSetterT()
       Returns: a current snapshot of the
                  taglist used in the setter or null if none is used.
   */
-  override gst.tag_list.TagList getTagList()
+  override gst.tag_list.TagList getTagList() nothrow
   {
     const(GstTagList)* _cretval;
     _cretval = gst_tag_setter_get_tag_list(cast(GstTagSetter*)this._cPtr);
@@ -91,7 +91,7 @@ template TagSetterT()
       from events
       Returns: the merge mode used inside the element.
   */
-  override gst.types.TagMergeMode getTagMergeMode()
+  override gst.types.TagMergeMode getTagMergeMode() nothrow
   {
     GstTagMergeMode _cretval;
     _cretval = gst_tag_setter_get_tag_merge_mode(cast(GstTagSetter*)this._cPtr);
@@ -106,7 +106,7 @@ template TagSetterT()
         list = a tag list to merge from
         mode = the mode to merge with
   */
-  override void mergeTags(gst.tag_list.TagList list, gst.types.TagMergeMode mode)
+  override void mergeTags(gst.tag_list.TagList list, gst.types.TagMergeMode mode) nothrow
   {
     gst_tag_setter_merge_tags(cast(GstTagSetter*)this._cPtr, list ? cast(const(GstTagList)*)list._cPtr(No.Dup) : null, mode);
   }
@@ -115,7 +115,7 @@ template TagSetterT()
       Reset the internal taglist. Elements should call this from within the
       state-change handler.
   */
-  override void resetTags()
+  override void resetTags() nothrow
   {
     gst_tag_setter_reset_tags(cast(GstTagSetter*)this._cPtr);
   }
@@ -128,7 +128,7 @@ template TagSetterT()
       Params:
         mode = The mode with which tags are added
   */
-  override void setTagMergeMode(gst.types.TagMergeMode mode)
+  override void setTagMergeMode(gst.types.TagMergeMode mode) nothrow
   {
     gst_tag_setter_set_tag_merge_mode(cast(GstTagSetter*)this._cPtr, mode);
   }

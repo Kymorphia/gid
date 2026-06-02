@@ -27,26 +27,26 @@ class Registry : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_registry_get_type != &gidSymbolNotFound ? atk_registry_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Registry self()
+  override Registry self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class Registry : gobject.object.ObjectWrap
       Get builder for [atk.registry.Registry]
       Returns: New builder object
   */
-  static RegistryGidBuilder builder()
+  static RegistryGidBuilder builder() nothrow
   {
     return new RegistryGidBuilder;
   }
@@ -69,7 +69,7 @@ class Registry : gobject.object.ObjectWrap
       Returns: an #AtkObjectFactory appropriate for creating
         #AtkObjects appropriate for type.
   */
-  atk.object_factory.ObjectFactory getFactory(gobject.types.GType type)
+  atk.object_factory.ObjectFactory getFactory(gobject.types.GType type) nothrow
   {
     AtkObjectFactory* _cretval;
     _cretval = atk_registry_get_factory(cast(AtkRegistry*)this._cPtr, type);
@@ -86,7 +86,7 @@ class Registry : gobject.object.ObjectWrap
           subclass
       Returns: a #GType associated with type type
   */
-  gobject.types.GType getFactoryType(gobject.types.GType type)
+  gobject.types.GType getFactoryType(gobject.types.GType type) nothrow
   {
     gobject.types.GType _retval;
     _retval = atk_registry_get_factory_type(cast(AtkRegistry*)this._cPtr, type);
@@ -104,7 +104,7 @@ class Registry : gobject.object.ObjectWrap
         factoryType = an #AtkObjectFactory type to associate with type.  Must
           implement AtkObject appropriate for type.
   */
-  void setFactoryType(gobject.types.GType type, gobject.types.GType factoryType)
+  void setFactoryType(gobject.types.GType type, gobject.types.GType factoryType) nothrow
   {
     atk_registry_set_factory_type(cast(AtkRegistry*)this._cPtr, type, factoryType);
   }
@@ -122,7 +122,7 @@ final class RegistryGidBuilder : RegistryGidBuilderImpl!RegistryGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Registry build()
+  Registry build() nothrow
   {
     return new Registry(cast(void*)createGObject(Registry._getGType), No.Take);
   }

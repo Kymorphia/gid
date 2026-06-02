@@ -28,32 +28,32 @@ class PaperSize : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_paper_size_get_type != &gidSymbolNotFound ? gtk_paper_size_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PaperSize self()
+  override PaperSize self() nothrow
   {
     return this;
   }
@@ -71,7 +71,7 @@ class PaperSize : gobject.boxed.Boxed
       Returns: a new #GtkPaperSize, use [gtk.paper_size.PaperSize.free]
         to free it
   */
-  this(string name = null)
+  this(string name = null) nothrow
   {
     GtkPaperSize* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -92,7 +92,7 @@ class PaperSize : gobject.boxed.Boxed
       Returns: a new #GtkPaperSize object, use [gtk.paper_size.PaperSize.free]
         to free it
   */
-  static gtk.paper_size.PaperSize newCustom(string name, string displayName, double width, double height, gtk.types.Unit unit)
+  static gtk.paper_size.PaperSize newCustom(string name, string displayName, double width, double height, gtk.types.Unit unit) nothrow
   {
     GtkPaperSize* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -110,7 +110,7 @@ class PaperSize : gobject.boxed.Boxed
         variant = an a{sv} #GVariant
       Returns: a new #GtkPaperSize object
   */
-  static gtk.paper_size.PaperSize newFromGvariant(glib.variant.Variant variant)
+  static gtk.paper_size.PaperSize newFromGvariant(glib.variant.Variant variant) nothrow
   {
     GtkPaperSize* _cretval;
     _cretval = gtk_paper_size_new_from_gvariant(variant ? cast(GVariant*)variant._cPtr(No.Dup) : null);
@@ -133,7 +133,7 @@ class PaperSize : gobject.boxed.Boxed
       Returns: a new #GtkPaperSize, use [gtk.paper_size.PaperSize.free]
         to free it
   */
-  static gtk.paper_size.PaperSize newFromIpp(string ippName, double width, double height)
+  static gtk.paper_size.PaperSize newFromIpp(string ippName, double width, double height) nothrow
   {
     GtkPaperSize* _cretval;
     const(char)* _ippName = ippName.toCString(No.Alloc);
@@ -182,7 +182,7 @@ class PaperSize : gobject.boxed.Boxed
       Returns: a new #GtkPaperSize, use [gtk.paper_size.PaperSize.free]
         to free it
   */
-  static gtk.paper_size.PaperSize newFromPpd(string ppdName, string ppdDisplayName, double width, double height)
+  static gtk.paper_size.PaperSize newFromPpd(string ppdName, string ppdDisplayName, double width, double height) nothrow
   {
     GtkPaperSize* _cretval;
     const(char)* _ppdName = ppdName.toCString(No.Alloc);
@@ -196,7 +196,7 @@ class PaperSize : gobject.boxed.Boxed
       Copies an existing #GtkPaperSize.
       Returns: a copy of other
   */
-  gtk.paper_size.PaperSize copy()
+  gtk.paper_size.PaperSize copy() nothrow
   {
     GtkPaperSize* _cretval;
     _cretval = gtk_paper_size_copy(cast(GtkPaperSize*)this._cPtr);
@@ -211,7 +211,7 @@ class PaperSize : gobject.boxed.Boxed
         unit = the unit for the return value, not [gtk.types.Unit.None]
       Returns: the default bottom margin
   */
-  double getDefaultBottomMargin(gtk.types.Unit unit)
+  double getDefaultBottomMargin(gtk.types.Unit unit) nothrow
   {
     double _retval;
     _retval = gtk_paper_size_get_default_bottom_margin(cast(GtkPaperSize*)this._cPtr, unit);
@@ -225,7 +225,7 @@ class PaperSize : gobject.boxed.Boxed
         unit = the unit for the return value, not [gtk.types.Unit.None]
       Returns: the default left margin
   */
-  double getDefaultLeftMargin(gtk.types.Unit unit)
+  double getDefaultLeftMargin(gtk.types.Unit unit) nothrow
   {
     double _retval;
     _retval = gtk_paper_size_get_default_left_margin(cast(GtkPaperSize*)this._cPtr, unit);
@@ -239,7 +239,7 @@ class PaperSize : gobject.boxed.Boxed
         unit = the unit for the return value, not [gtk.types.Unit.None]
       Returns: the default right margin
   */
-  double getDefaultRightMargin(gtk.types.Unit unit)
+  double getDefaultRightMargin(gtk.types.Unit unit) nothrow
   {
     double _retval;
     _retval = gtk_paper_size_get_default_right_margin(cast(GtkPaperSize*)this._cPtr, unit);
@@ -253,7 +253,7 @@ class PaperSize : gobject.boxed.Boxed
         unit = the unit for the return value, not [gtk.types.Unit.None]
       Returns: the default top margin
   */
-  double getDefaultTopMargin(gtk.types.Unit unit)
+  double getDefaultTopMargin(gtk.types.Unit unit) nothrow
   {
     double _retval;
     _retval = gtk_paper_size_get_default_top_margin(cast(GtkPaperSize*)this._cPtr, unit);
@@ -264,7 +264,7 @@ class PaperSize : gobject.boxed.Boxed
       Gets the human-readable name of the #GtkPaperSize.
       Returns: the human-readable name of size
   */
-  string getDisplayName()
+  string getDisplayName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_paper_size_get_display_name(cast(GtkPaperSize*)this._cPtr);
@@ -280,7 +280,7 @@ class PaperSize : gobject.boxed.Boxed
         unit = the unit for the return value, not [gtk.types.Unit.None]
       Returns: the paper height
   */
-  double getHeight(gtk.types.Unit unit)
+  double getHeight(gtk.types.Unit unit) nothrow
   {
     double _retval;
     _retval = gtk_paper_size_get_height(cast(GtkPaperSize*)this._cPtr, unit);
@@ -291,7 +291,7 @@ class PaperSize : gobject.boxed.Boxed
       Gets the name of the #GtkPaperSize.
       Returns: the name of size
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_paper_size_get_name(cast(GtkPaperSize*)this._cPtr);
@@ -304,7 +304,7 @@ class PaperSize : gobject.boxed.Boxed
       may be null.
       Returns: the PPD name of size
   */
-  string getPpdName()
+  string getPpdName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_paper_size_get_ppd_name(cast(GtkPaperSize*)this._cPtr);
@@ -320,7 +320,7 @@ class PaperSize : gobject.boxed.Boxed
         unit = the unit for the return value, not [gtk.types.Unit.None]
       Returns: the paper width
   */
-  double getWidth(gtk.types.Unit unit)
+  double getWidth(gtk.types.Unit unit) nothrow
   {
     double _retval;
     _retval = gtk_paper_size_get_width(cast(GtkPaperSize*)this._cPtr, unit);
@@ -331,7 +331,7 @@ class PaperSize : gobject.boxed.Boxed
       Returns true if size is not a standard paper size.
       Returns: whether size is a custom paper size.
   */
-  bool isCustom()
+  bool isCustom() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_paper_size_is_custom(cast(GtkPaperSize*)this._cPtr);
@@ -346,7 +346,7 @@ class PaperSize : gobject.boxed.Boxed
       Returns: true, if size1 and size2
         represent the same paper size
   */
-  bool isEqual(gtk.paper_size.PaperSize size2)
+  bool isEqual(gtk.paper_size.PaperSize size2) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_paper_size_is_equal(cast(GtkPaperSize*)this._cPtr, size2 ? cast(GtkPaperSize*)size2._cPtr(No.Dup) : null);
@@ -357,7 +357,7 @@ class PaperSize : gobject.boxed.Boxed
       Returns true if size is an IPP standard paper size.
       Returns: whether size is not an IPP custom paper size.
   */
-  bool isIpp()
+  bool isIpp() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_paper_size_is_ipp(cast(GtkPaperSize*)this._cPtr);
@@ -372,7 +372,7 @@ class PaperSize : gobject.boxed.Boxed
         height = the new height in units of unit
         unit = the unit for width and height
   */
-  void setSize(double width, double height, gtk.types.Unit unit)
+  void setSize(double width, double height, gtk.types.Unit unit) nothrow
   {
     gtk_paper_size_set_size(cast(GtkPaperSize*)this._cPtr, width, height, unit);
   }
@@ -381,7 +381,7 @@ class PaperSize : gobject.boxed.Boxed
       Serialize a paper size to an a{sv} variant.
       Returns: a new, floating, #GVariant
   */
-  glib.variant.Variant toGvariant()
+  glib.variant.Variant toGvariant() nothrow
   {
     GVariant* _cretval;
     _cretval = gtk_paper_size_to_gvariant(cast(GtkPaperSize*)this._cPtr);
@@ -396,7 +396,7 @@ class PaperSize : gobject.boxed.Boxed
         keyFile = the #GKeyFile to save the paper size to
         groupName = the group to add the settings to in key_file
   */
-  void toKeyFile(glib.key_file.KeyFile keyFile, string groupName)
+  void toKeyFile(glib.key_file.KeyFile keyFile, string groupName) nothrow
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
     gtk_paper_size_to_key_file(cast(GtkPaperSize*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName);
@@ -408,7 +408,7 @@ class PaperSize : gobject.boxed.Boxed
       Returns: the name of the default paper size. The string
         is owned by GTK+ and should not be modified.
   */
-  static string getDefault()
+  static string getDefault() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_paper_size_get_default();
@@ -425,7 +425,7 @@ class PaperSize : gobject.boxed.Boxed
       Returns: a newly allocated list of newly
            allocated #GtkPaperSize objects
   */
-  static gtk.paper_size.PaperSize[] getPaperSizes(bool includeCustom)
+  static gtk.paper_size.PaperSize[] getPaperSizes(bool includeCustom) nothrow
   {
     GList* _cretval;
     _cretval = gtk_paper_size_get_paper_sizes(includeCustom);

@@ -38,11 +38,8 @@ class Meta
   GstMeta _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gst.meta.Meta");
-
     _cInstance = *cast(GstMeta*)ptr;
 
     if (take)
@@ -50,7 +47,7 @@ class Meta
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -59,7 +56,7 @@ class Meta
       Get `flags` field.
       Returns: extra flags for the metadata
   */
-  @property gst.types.MetaFlags flags()
+  @property gst.types.MetaFlags flags() nothrow
   {
     return cast(gst.types.MetaFlags)(cast(GstMeta*)this._cPtr).flags;
   }
@@ -69,7 +66,7 @@ class Meta
       Params:
         propval = extra flags for the metadata
   */
-  @property void flags(gst.types.MetaFlags propval)
+  @property void flags(gst.types.MetaFlags propval) nothrow
   {
     (cast(GstMeta*)this._cPtr).flags = cast(GstMetaFlags)propval;
   }
@@ -78,7 +75,7 @@ class Meta
       Get `info` field.
       Returns: pointer to the #GstMetaInfo
   */
-  @property gst.meta_info.MetaInfo info()
+  @property gst.meta_info.MetaInfo info() nothrow
   {
     return cToD!(gst.meta_info.MetaInfo)(cast(void*)(cast(GstMeta*)this._cPtr).info);
   }
@@ -93,7 +90,7 @@ class Meta
           have an equal sequence number, or a positive integer if meta1 comes
           after meta2.
   */
-  int compareSeqnum(gst.meta.Meta meta2)
+  int compareSeqnum(gst.meta.Meta meta2) nothrow
   {
     int _retval;
     _retval = gst_meta_compare_seqnum(cast(const(GstMeta)*)this._cPtr, meta2 ? cast(const(GstMeta)*)meta2._cPtr : null);
@@ -104,7 +101,7 @@ class Meta
       Gets seqnum for this meta.
       Returns: 
   */
-  ulong getSeqnum()
+  ulong getSeqnum() nothrow
   {
     ulong _retval;
     _retval = gst_meta_get_seqnum(cast(const(GstMeta)*)this._cPtr);
@@ -119,7 +116,7 @@ class Meta
         data = #GByteArray to append serialization data
       Returns: true on success, false otherwise.
   */
-  bool serializeSimple(ubyte[] data)
+  bool serializeSimple(ubyte[] data) nothrow
   {
     bool _retval;
     auto _data = gByteArrayFromD(data);
@@ -129,7 +126,7 @@ class Meta
   }
 
   /** */
-  static string[] apiTypeGetTags(gobject.types.GType api)
+  static string[] apiTypeGetTags(gobject.types.GType api) nothrow
   {
     const(char*)* _cretval;
     _cretval = gst_meta_api_type_get_tags(api);
@@ -155,7 +152,7 @@ class Meta
         tag = the tag to check
       Returns: true if api was registered with tag.
   */
-  static bool apiTypeHasTag(gobject.types.GType api, glib.types.Quark tag)
+  static bool apiTypeHasTag(gobject.types.GType api, glib.types.Quark tag) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_meta_api_type_has_tag(api, tag);
@@ -171,7 +168,7 @@ class Meta
         tags = tags for api
       Returns: a unique GType for api.
   */
-  static gobject.types.GType apiTypeRegister(string api, string[] tags)
+  static gobject.types.GType apiTypeRegister(string api, string[] tags) nothrow
   {
     gobject.types.GType _retval;
     const(char)* _api = api.toCString(No.Alloc);
@@ -202,7 +199,7 @@ class Meta
         consumed = total size used by this meta, could be less than size
       Returns: the metadata owned by buffer, or null.
   */
-  static gst.meta.Meta deserialize(gst.buffer.Buffer buffer, ubyte[] data, out uint consumed)
+  static gst.meta.Meta deserialize(gst.buffer.Buffer buffer, ubyte[] data, out uint consumed) nothrow
   {
     GstMeta* _cretval;
     size_t _size;
@@ -224,7 +221,7 @@ class Meta
       Returns: a #GstMetaInfo with impl, or
         null when no such metainfo exists.
   */
-  static gst.meta_info.MetaInfo getInfo(string impl)
+  static gst.meta_info.MetaInfo getInfo(string impl) nothrow
   {
     const(GstMetaInfo)* _cretval;
     const(char)* _impl = impl.toCString(No.Alloc);
@@ -257,14 +254,21 @@ class Meta
       Returns: a #GstMetaInfo that can be used to
         access metadata.
   */
-  static gst.meta_info.MetaInfo registerCustom(string name, string[] tags, gst.types.CustomMetaTransformFunction transformFunc = null)
+  static gst.meta_info.MetaInfo registerCustom(string name, string[] tags, gst.types.CustomMetaTransformFunction transformFunc = null) nothrow
   {
-    extern(C) gboolean _transformFuncCallback(GstBuffer* transbuf, GstCustomMeta* meta, GstBuffer* buffer, GQuark type, void* data, void* userData)
+    extern(C) gboolean _transformFuncCallback(GstBuffer* transbuf, GstCustomMeta* meta, GstBuffer* buffer, GQuark type, void* data, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gst.types.CustomMetaTransformFunction*)userData;
 
-      _dretval = (*_dlg)(transbuf ? new gst.buffer.Buffer(cast(void*)transbuf, No.Take) : null, meta ? new gst.custom_meta.CustomMeta(cast(void*)meta, No.Take) : null, buffer ? new gst.buffer.Buffer(cast(void*)buffer, No.Take) : null, type, data);
+      try
+      {
+        _dretval = (*_dlg)(transbuf ? new gst.buffer.Buffer(cast(void*)transbuf, No.Take) : null, meta ? new gst.custom_meta.CustomMeta(cast(void*)meta, No.Take) : null, buffer ? new gst.buffer.Buffer(cast(void*)buffer, No.Take) : null, type, data);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.CustomMetaTransformFunction");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -295,7 +299,7 @@ class Meta
         name = the name of the #GstMeta implementation
       Returns: a #GstMetaInfo that can be used to access metadata.
   */
-  static gst.meta_info.MetaInfo registerCustomSimple(string name)
+  static gst.meta_info.MetaInfo registerCustomSimple(string name) nothrow
   {
     const(GstMetaInfo)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);

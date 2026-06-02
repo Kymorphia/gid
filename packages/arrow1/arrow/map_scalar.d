@@ -15,26 +15,26 @@ class MapScalar : arrow.base_list_scalar.BaseListScalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_map_scalar_get_type != &gidSymbolNotFound ? garrow_map_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MapScalar self()
+  override MapScalar self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class MapScalar : arrow.base_list_scalar.BaseListScalar
       Get builder for [arrow.map_scalar.MapScalar]
       Returns: New builder object
   */
-  static MapScalarGidBuilder builder()
+  static MapScalarGidBuilder builder() nothrow
   {
     return new MapScalarGidBuilder;
   }
 
   /** */
-  this(arrow.struct_array.StructArray value)
+  this(arrow.struct_array.StructArray value) nothrow
   {
     GArrowMapScalar* _cretval;
     _cretval = garrow_map_scalar_new(value ? cast(GArrowStructArray*)value._cPtr(No.Dup) : null);
@@ -69,7 +69,7 @@ final class MapScalarGidBuilder : MapScalarGidBuilderImpl!MapScalarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  MapScalar build()
+  MapScalar build() nothrow
   {
     return new MapScalar(cast(void*)createGObject(MapScalar._getGType), Yes.Take);
   }

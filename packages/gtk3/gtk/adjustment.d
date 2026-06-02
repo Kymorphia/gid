@@ -23,26 +23,26 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_adjustment_get_type != &gidSymbolNotFound ? gtk_adjustment_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Adjustment self()
+  override Adjustment self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Get builder for [gtk.adjustment.Adjustment]
       Returns: New builder object
   */
-  static AdjustmentGidBuilder builder()
+  static AdjustmentGidBuilder builder() nothrow
   {
     return new AdjustmentGidBuilder;
   }
@@ -60,7 +60,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Get `lower` property.
       Returns: The minimum value of the adjustment.
   */
-  @property double lower()
+  @property double lower() nothrow
   {
     return getLower();
   }
@@ -70,7 +70,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Params:
         propval = The minimum value of the adjustment.
   */
-  @property void lower(double propval)
+  @property void lower(double propval) nothrow
   {
     setLower(propval);
   }
@@ -79,7 +79,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Get `pageIncrement` property.
       Returns: The page increment of the adjustment.
   */
-  @property double pageIncrement()
+  @property double pageIncrement() nothrow
   {
     return getPageIncrement();
   }
@@ -89,7 +89,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Params:
         propval = The page increment of the adjustment.
   */
-  @property void pageIncrement(double propval)
+  @property void pageIncrement(double propval) nothrow
   {
     setPageIncrement(propval);
   }
@@ -101,7 +101,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
         if the adjustment is used for a simple scalar value, e.g. in a
         #GtkSpinButton.
   */
-  @property double pageSize()
+  @property double pageSize() nothrow
   {
     return getPageSize();
   }
@@ -114,7 +114,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
           if the adjustment is used for a simple scalar value, e.g. in a
           #GtkSpinButton.
   */
-  @property void pageSize(double propval)
+  @property void pageSize(double propval) nothrow
   {
     setPageSize(propval);
   }
@@ -123,7 +123,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Get `stepIncrement` property.
       Returns: The step increment of the adjustment.
   */
-  @property double stepIncrement()
+  @property double stepIncrement() nothrow
   {
     return getStepIncrement();
   }
@@ -133,7 +133,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Params:
         propval = The step increment of the adjustment.
   */
-  @property void stepIncrement(double propval)
+  @property void stepIncrement(double propval) nothrow
   {
     setStepIncrement(propval);
   }
@@ -145,7 +145,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
         `upper - page-size` if the page-size
         property is nonzero.
   */
-  @property double upper()
+  @property double upper() nothrow
   {
     return getUpper();
   }
@@ -158,7 +158,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
           `upper - page-size` if the page-size
           property is nonzero.
   */
-  @property void upper(double propval)
+  @property void upper(double propval) nothrow
   {
     setUpper(propval);
   }
@@ -167,7 +167,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Get `value` property.
       Returns: The value of the adjustment.
   */
-  @property double value()
+  @property double value() nothrow
   {
     return getValue();
   }
@@ -177,7 +177,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Params:
         propval = The value of the adjustment.
   */
-  @property void value(double propval)
+  @property void value(double propval) nothrow
   {
     setValue(propval);
   }
@@ -194,7 +194,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
         pageSize = the page size
       Returns: a new #GtkAdjustment
   */
-  this(double value, double lower, double upper, double stepIncrement, double pageIncrement, double pageSize)
+  this(double value, double lower, double upper, double stepIncrement, double pageIncrement, double pageSize) nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_adjustment_new(value, lower, upper, stepIncrement, pageIncrement, pageSize);
@@ -209,7 +209,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Deprecated: GTK+ emits #GtkAdjustment::changed itself whenever any
            of the properties (other than value) change
   */
-  void changed()
+  void changed() nothrow
   {
     gtk_adjustment_changed(cast(GtkAdjustment*)this._cPtr);
   }
@@ -227,7 +227,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
         lower = the lower value
         upper = the upper value
   */
-  void clampPage(double lower, double upper)
+  void clampPage(double lower, double upper) nothrow
   {
     gtk_adjustment_clamp_page(cast(GtkAdjustment*)this._cPtr, lower, upper);
   }
@@ -248,7 +248,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
         pageIncrement = the new page increment
         pageSize = the new page size
   */
-  void configure(double value, double lower, double upper, double stepIncrement, double pageIncrement, double pageSize)
+  void configure(double value, double lower, double upper, double stepIncrement, double pageIncrement, double pageSize) nothrow
   {
     gtk_adjustment_configure(cast(GtkAdjustment*)this._cPtr, value, lower, upper, stepIncrement, pageIncrement, pageSize);
   }
@@ -257,7 +257,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Retrieves the minimum value of the adjustment.
       Returns: The current minimum value of the adjustment
   */
-  double getLower()
+  double getLower() nothrow
   {
     double _retval;
     _retval = gtk_adjustment_get_lower(cast(GtkAdjustment*)this._cPtr);
@@ -268,7 +268,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Gets the smaller of step increment and page increment.
       Returns: the minimum increment of adjustment
   */
-  double getMinimumIncrement()
+  double getMinimumIncrement() nothrow
   {
     double _retval;
     _retval = gtk_adjustment_get_minimum_increment(cast(GtkAdjustment*)this._cPtr);
@@ -279,7 +279,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Retrieves the page increment of the adjustment.
       Returns: The current page increment of the adjustment
   */
-  double getPageIncrement()
+  double getPageIncrement() nothrow
   {
     double _retval;
     _retval = gtk_adjustment_get_page_increment(cast(GtkAdjustment*)this._cPtr);
@@ -290,7 +290,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Retrieves the page size of the adjustment.
       Returns: The current page size of the adjustment
   */
-  double getPageSize()
+  double getPageSize() nothrow
   {
     double _retval;
     _retval = gtk_adjustment_get_page_size(cast(GtkAdjustment*)this._cPtr);
@@ -301,7 +301,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Retrieves the step increment of the adjustment.
       Returns: The current step increment of the adjustment.
   */
-  double getStepIncrement()
+  double getStepIncrement() nothrow
   {
     double _retval;
     _retval = gtk_adjustment_get_step_increment(cast(GtkAdjustment*)this._cPtr);
@@ -312,7 +312,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Retrieves the maximum value of the adjustment.
       Returns: The current maximum value of the adjustment
   */
-  double getUpper()
+  double getUpper() nothrow
   {
     double _retval;
     _retval = gtk_adjustment_get_upper(cast(GtkAdjustment*)this._cPtr);
@@ -324,7 +324,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       See [gtk.adjustment.Adjustment.setValue].
       Returns: The current value of the adjustment
   */
-  double getValue()
+  double getValue() nothrow
   {
     double _retval;
     _retval = gtk_adjustment_get_value(cast(GtkAdjustment*)this._cPtr);
@@ -349,7 +349,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Params:
         lower = the new minimum value
   */
-  void setLower(double lower)
+  void setLower(double lower) nothrow
   {
     gtk_adjustment_set_lower(cast(GtkAdjustment*)this._cPtr, lower);
   }
@@ -364,7 +364,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Params:
         pageIncrement = the new page increment
   */
-  void setPageIncrement(double pageIncrement)
+  void setPageIncrement(double pageIncrement) nothrow
   {
     gtk_adjustment_set_page_increment(cast(GtkAdjustment*)this._cPtr, pageIncrement);
   }
@@ -379,7 +379,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Params:
         pageSize = the new page size
   */
-  void setPageSize(double pageSize)
+  void setPageSize(double pageSize) nothrow
   {
     gtk_adjustment_set_page_size(cast(GtkAdjustment*)this._cPtr, pageSize);
   }
@@ -394,7 +394,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Params:
         stepIncrement = the new step increment
   */
-  void setStepIncrement(double stepIncrement)
+  void setStepIncrement(double stepIncrement) nothrow
   {
     gtk_adjustment_set_step_increment(cast(GtkAdjustment*)this._cPtr, stepIncrement);
   }
@@ -412,7 +412,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Params:
         upper = the new maximum value
   */
-  void setUpper(double upper)
+  void setUpper(double upper) nothrow
   {
     gtk_adjustment_set_upper(cast(GtkAdjustment*)this._cPtr, upper);
   }
@@ -428,7 +428,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Params:
         value = the new value
   */
-  void setValue(double value)
+  void setValue(double value) nothrow
   {
     gtk_adjustment_set_value(cast(GtkAdjustment*)this._cPtr, value);
   }
@@ -441,7 +441,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Deprecated: GTK+ emits #GtkAdjustment::value-changed itself whenever
            the value changes
   */
-  void valueChanged()
+  void valueChanged() nothrow
   {
     gtk_adjustment_value_changed(cast(GtkAdjustment*)this._cPtr);
   }
@@ -462,13 +462,13 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.adjustment.Adjustment)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -477,7 +477,14 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.adjustment.Adjustment.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -499,13 +506,13 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.adjustment.Adjustment)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -514,7 +521,14 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.adjustment.Adjustment.valueChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -532,7 +546,7 @@ class AdjustmentGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGi
         propval = The minimum value of the adjustment.
       Returns: Builder instance for fluent chaining
   */
-  T lower(double propval)
+  T lower(double propval) nothrow
   {
     return setProperty("lower", propval);
   }
@@ -543,7 +557,7 @@ class AdjustmentGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGi
         propval = The page increment of the adjustment.
       Returns: Builder instance for fluent chaining
   */
-  T pageIncrement(double propval)
+  T pageIncrement(double propval) nothrow
   {
     return setProperty("page-increment", propval);
   }
@@ -557,7 +571,7 @@ class AdjustmentGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGi
           #GtkSpinButton.
       Returns: Builder instance for fluent chaining
   */
-  T pageSize(double propval)
+  T pageSize(double propval) nothrow
   {
     return setProperty("page-size", propval);
   }
@@ -568,7 +582,7 @@ class AdjustmentGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGi
         propval = The step increment of the adjustment.
       Returns: Builder instance for fluent chaining
   */
-  T stepIncrement(double propval)
+  T stepIncrement(double propval) nothrow
   {
     return setProperty("step-increment", propval);
   }
@@ -582,7 +596,7 @@ class AdjustmentGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGi
           property is nonzero.
       Returns: Builder instance for fluent chaining
   */
-  T upper(double propval)
+  T upper(double propval) nothrow
   {
     return setProperty("upper", propval);
   }
@@ -593,7 +607,7 @@ class AdjustmentGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGi
         propval = The value of the adjustment.
       Returns: Builder instance for fluent chaining
   */
-  T value(double propval)
+  T value(double propval) nothrow
   {
     return setProperty("value", propval);
   }
@@ -606,7 +620,7 @@ final class AdjustmentGidBuilder : AdjustmentGidBuilderImpl!AdjustmentGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Adjustment build()
+  Adjustment build() nothrow
   {
     return new Adjustment(cast(void*)createGObject(Adjustment._getGType), No.Take);
   }

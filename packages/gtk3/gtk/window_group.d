@@ -33,26 +33,26 @@ class WindowGroup : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_window_group_get_type != &gidSymbolNotFound ? gtk_window_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WindowGroup self()
+  override WindowGroup self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class WindowGroup : gobject.object.ObjectWrap
       Get builder for [gtk.window_group.WindowGroup]
       Returns: New builder object
   */
-  static WindowGroupGidBuilder builder()
+  static WindowGroupGidBuilder builder() nothrow
   {
     return new WindowGroupGidBuilder;
   }
@@ -71,7 +71,7 @@ class WindowGroup : gobject.object.ObjectWrap
       [gtk.widget.Widget.grabAdd] only affect windows within the same #GtkWindowGroup.
       Returns: a new #GtkWindowGroup.
   */
-  this()
+  this() nothrow
   {
     GtkWindowGroup* _cretval;
     _cretval = gtk_window_group_new();
@@ -84,7 +84,7 @@ class WindowGroup : gobject.object.ObjectWrap
       Params:
         window = the #GtkWindow to add
   */
-  void addWindow(gtk.window.Window window)
+  void addWindow(gtk.window.Window window) nothrow
   {
     gtk_window_group_add_window(cast(GtkWindowGroup*)this._cPtr, window ? cast(GtkWindow*)window._cPtr(No.Dup) : null);
   }
@@ -96,7 +96,7 @@ class WindowGroup : gobject.object.ObjectWrap
         device = a #GdkDevice
       Returns: The grab widget, or null
   */
-  gtk.widget.Widget getCurrentDeviceGrab(gdk.device.Device device)
+  gtk.widget.Widget getCurrentDeviceGrab(gdk.device.Device device) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_group_get_current_device_grab(cast(GtkWindowGroup*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
@@ -109,7 +109,7 @@ class WindowGroup : gobject.object.ObjectWrap
       see [gtk.widget.Widget.grabAdd].
       Returns: the current grab widget of the group
   */
-  gtk.widget.Widget getCurrentGrab()
+  gtk.widget.Widget getCurrentGrab() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_group_get_current_grab(cast(GtkWindowGroup*)this._cPtr);
@@ -122,7 +122,7 @@ class WindowGroup : gobject.object.ObjectWrap
       Returns: A
           newly-allocated list of windows inside the group.
   */
-  gtk.window.Window[] listWindows()
+  gtk.window.Window[] listWindows() nothrow
   {
     GList* _cretval;
     _cretval = gtk_window_group_list_windows(cast(GtkWindowGroup*)this._cPtr);
@@ -136,7 +136,7 @@ class WindowGroup : gobject.object.ObjectWrap
       Params:
         window = the #GtkWindow to remove
   */
-  void removeWindow(gtk.window.Window window)
+  void removeWindow(gtk.window.Window window) nothrow
   {
     gtk_window_group_remove_window(cast(GtkWindowGroup*)this._cPtr, window ? cast(GtkWindow*)window._cPtr(No.Dup) : null);
   }
@@ -154,7 +154,7 @@ final class WindowGroupGidBuilder : WindowGroupGidBuilderImpl!WindowGroupGidBuil
       Create object from builder.
       Returns: New object
   */
-  WindowGroup build()
+  WindowGroup build() nothrow
   {
     return new WindowGroup(cast(void*)createGObject(WindowGroup._getGType), Yes.Take);
   }

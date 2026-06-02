@@ -25,32 +25,32 @@ class String : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_gstring_get_type != &gidSymbolNotFound ? g_gstring_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override String self()
+  override String self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class String : gobject.boxed.Boxed
           The @str field is null-terminated and so
           can be used as an ordinary C string.
   */
-  @property string str()
+  @property string str() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GString*)this._cPtr).str);
   }
@@ -73,7 +73,7 @@ class String : gobject.boxed.Boxed
             The @str field is null-terminated and so
             can be used as an ordinary C string.
   */
-  @property void str(string propval)
+  @property void str(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GString*)this._cPtr).str);
     dToC(propval, cast(void*)&(cast(GString*)this._cPtr).str);
@@ -84,7 +84,7 @@ class String : gobject.boxed.Boxed
       Returns: contains the length of the string, not including the
           terminating nul byte.
   */
-  @property size_t len()
+  @property size_t len() nothrow
   {
     return (cast(GString*)this._cPtr).len;
   }
@@ -95,7 +95,7 @@ class String : gobject.boxed.Boxed
         propval = contains the length of the string, not including the
             terminating nul byte.
   */
-  @property void len(size_t propval)
+  @property void len(size_t propval) nothrow
   {
     (cast(GString*)this._cPtr).len = propval;
   }
@@ -105,7 +105,7 @@ class String : gobject.boxed.Boxed
       Returns: the number of bytes that can be stored in the
           string before it needs to be reallocated. May be larger than @len.
   */
-  @property size_t allocatedLen()
+  @property size_t allocatedLen() nothrow
   {
     return (cast(GString*)this._cPtr).allocatedLen;
   }
@@ -116,7 +116,7 @@ class String : gobject.boxed.Boxed
         propval = the number of bytes that can be stored in the
             string before it needs to be reallocated. May be larger than @len.
   */
-  @property void allocatedLen(size_t propval)
+  @property void allocatedLen(size_t propval) nothrow
   {
     (cast(GString*)this._cPtr).allocatedLen = propval;
   }
@@ -129,7 +129,7 @@ class String : gobject.boxed.Boxed
             start with an empty string
       Returns: the new #GString
   */
-  this(string init_ = null)
+  this(string init_ = null) nothrow
   {
     GString* _cretval;
     const(char)* _init_ = init_.toCString(No.Alloc);
@@ -151,7 +151,7 @@ class String : gobject.boxed.Boxed
         len = length of init to use
       Returns: a new #GString
   */
-  static glib.string_.String newLen(string init_, ptrdiff_t len)
+  static glib.string_.String newLen(string init_, ptrdiff_t len) nothrow
   {
     GString* _cretval;
     const(char)* _init_ = init_.toCString(No.Alloc);
@@ -173,7 +173,7 @@ class String : gobject.boxed.Boxed
               Passing null creates an empty string.
       Returns: the new #GString
   */
-  static glib.string_.String newTake(string init_ = null)
+  static glib.string_.String newTake(string init_ = null) nothrow
   {
     GString* _cretval;
     char* _init_ = init_.toCString(Yes.Alloc);
@@ -192,7 +192,7 @@ class String : gobject.boxed.Boxed
         dflSize = the default size of the space allocated to hold the string
       Returns: the new #GString
   */
-  static glib.string_.String sizedNew(size_t dflSize)
+  static glib.string_.String sizedNew(size_t dflSize) nothrow
   {
     GString* _cretval;
     _cretval = g_string_sized_new(dflSize);
@@ -208,7 +208,7 @@ class String : gobject.boxed.Boxed
         val = the string to append onto the end of string
       Returns: string
   */
-  glib.string_.String append(string val)
+  glib.string_.String append(string val) nothrow
   {
     GString* _cretval;
     const(char)* _val = val.toCString(No.Alloc);
@@ -225,7 +225,7 @@ class String : gobject.boxed.Boxed
         c = the byte to append onto the end of string
       Returns: string
   */
-  glib.string_.String appendC(char c)
+  glib.string_.String appendC(char c) nothrow
   {
     GString* _cretval;
     _cretval = g_string_append_c(cast(GString*)this._cPtr, c);
@@ -249,7 +249,7 @@ class String : gobject.boxed.Boxed
         len = number of bytes of val to use, or -1 for all of val
       Returns: string
   */
-  glib.string_.String appendLen(string val, ptrdiff_t len)
+  glib.string_.String appendLen(string val, ptrdiff_t len) nothrow
   {
     GString* _cretval;
     const(char)* _val = val.toCString(No.Alloc);
@@ -266,7 +266,7 @@ class String : gobject.boxed.Boxed
         wc = a Unicode character
       Returns: string
   */
-  glib.string_.String appendUnichar(dchar wc)
+  glib.string_.String appendUnichar(dchar wc) nothrow
   {
     GString* _cretval;
     _cretval = g_string_append_unichar(cast(GString*)this._cPtr, wc);
@@ -285,7 +285,7 @@ class String : gobject.boxed.Boxed
         allowUtf8 = set true if the escaped string may include UTF8 characters
       Returns: string
   */
-  glib.string_.String appendUriEscaped(string unescaped, string reservedCharsAllowed, bool allowUtf8)
+  glib.string_.String appendUriEscaped(string unescaped, string reservedCharsAllowed, bool allowUtf8) nothrow
   {
     GString* _cretval;
     const(char)* _unescaped = unescaped.toCString(No.Alloc);
@@ -301,7 +301,7 @@ class String : gobject.boxed.Boxed
             uppercase characters converted to lowercase in place,
             with semantics that exactly match [glib.global.asciiTolower].
   */
-  glib.string_.String asciiDown()
+  glib.string_.String asciiDown() nothrow
   {
     GString* _cretval;
     _cretval = g_string_ascii_down(cast(GString*)this._cPtr);
@@ -315,7 +315,7 @@ class String : gobject.boxed.Boxed
             lowercase characters converted to uppercase in place,
             with semantics that exactly match [glib.global.asciiToupper].
   */
-  glib.string_.String asciiUp()
+  glib.string_.String asciiUp() nothrow
   {
     GString* _cretval;
     _cretval = g_string_ascii_up(cast(GString*)this._cPtr);
@@ -333,7 +333,7 @@ class String : gobject.boxed.Boxed
         rval = the string to copy into string
       Returns: string
   */
-  glib.string_.String assign(string rval)
+  glib.string_.String assign(string rval) nothrow
   {
     GString* _cretval;
     const(char)* _rval = rval.toCString(No.Alloc);
@@ -350,7 +350,7 @@ class String : gobject.boxed.Boxed
             tolower() function, which is almost never the right thing.
             Use [glib.string_.String.asciiDown] or [glib.global.utf8Strdown] instead.
   */
-  glib.string_.String down()
+  glib.string_.String down() nothrow
   {
     GString* _cretval;
     _cretval = g_string_down(cast(GString*)this._cPtr);
@@ -367,7 +367,7 @@ class String : gobject.boxed.Boxed
       Returns: true if the strings are the same length and contain the
             same bytes
   */
-  bool equal(glib.string_.String v2)
+  bool equal(glib.string_.String v2) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_string_equal(cast(const(GString)*)this._cPtr, v2 ? cast(const(GString)*)v2._cPtr(No.Dup) : null);
@@ -384,7 +384,7 @@ class String : gobject.boxed.Boxed
                 following bytes
       Returns: string
   */
-  glib.string_.String erase(ptrdiff_t pos, ptrdiff_t len)
+  glib.string_.String erase(ptrdiff_t pos, ptrdiff_t len) nothrow
   {
     GString* _cretval;
     _cretval = g_string_erase(cast(GString*)this._cPtr, pos, len);
@@ -399,7 +399,7 @@ class String : gobject.boxed.Boxed
       must free it after use with [glib.global.gfree].
       Returns: the character data of string
   */
-  string freeAndSteal()
+  string freeAndSteal() nothrow
   {
     char* _cretval;
     _cretval = g_string_free_and_steal(cast(GString*)this._cPtr);
@@ -418,7 +418,7 @@ class String : gobject.boxed.Boxed
       equal to the "len" member.
       Returns: A newly allocated #GBytes containing contents of string; string itself is freed
   */
-  glib.bytes.Bytes freeToBytes()
+  glib.bytes.Bytes freeToBytes() nothrow
   {
     GBytes* _cretval;
     _cretval = g_string_free_to_bytes(cast(GString*)this._cPtr);
@@ -430,7 +430,7 @@ class String : gobject.boxed.Boxed
       Creates a hash code for str; for use with #GHashTable.
       Returns: hash code for str
   */
-  uint hash()
+  uint hash() nothrow
   {
     uint _retval;
     _retval = g_string_hash(cast(const(GString)*)this._cPtr);
@@ -446,7 +446,7 @@ class String : gobject.boxed.Boxed
         val = the string to insert
       Returns: string
   */
-  glib.string_.String insert(ptrdiff_t pos, string val)
+  glib.string_.String insert(ptrdiff_t pos, string val) nothrow
   {
     GString* _cretval;
     const(char)* _val = val.toCString(No.Alloc);
@@ -463,7 +463,7 @@ class String : gobject.boxed.Boxed
         c = the byte to insert
       Returns: string
   */
-  glib.string_.String insertC(ptrdiff_t pos, char c)
+  glib.string_.String insertC(ptrdiff_t pos, char c) nothrow
   {
     GString* _cretval;
     _cretval = g_string_insert_c(cast(GString*)this._cPtr, pos, c);
@@ -490,7 +490,7 @@ class String : gobject.boxed.Boxed
         len = number of bytes of val to insert, or -1 for all of val
       Returns: string
   */
-  glib.string_.String insertLen(ptrdiff_t pos, string val, ptrdiff_t len)
+  glib.string_.String insertLen(ptrdiff_t pos, string val, ptrdiff_t len) nothrow
   {
     GString* _cretval;
     const(char)* _val = val.toCString(No.Alloc);
@@ -509,7 +509,7 @@ class String : gobject.boxed.Boxed
         wc = a Unicode character
       Returns: string
   */
-  glib.string_.String insertUnichar(ptrdiff_t pos, dchar wc)
+  glib.string_.String insertUnichar(ptrdiff_t pos, dchar wc) nothrow
   {
     GString* _cretval;
     _cretval = g_string_insert_unichar(cast(GString*)this._cPtr, pos, wc);
@@ -525,7 +525,7 @@ class String : gobject.boxed.Boxed
         val = the string that will overwrite the string starting at pos
       Returns: string
   */
-  glib.string_.String overwrite(size_t pos, string val)
+  glib.string_.String overwrite(size_t pos, string val) nothrow
   {
     GString* _cretval;
     const(char)* _val = val.toCString(No.Alloc);
@@ -544,7 +544,7 @@ class String : gobject.boxed.Boxed
         len = the number of bytes to write from val
       Returns: string
   */
-  glib.string_.String overwriteLen(size_t pos, string val, ptrdiff_t len)
+  glib.string_.String overwriteLen(size_t pos, string val, ptrdiff_t len) nothrow
   {
     GString* _cretval;
     const(char)* _val = val.toCString(No.Alloc);
@@ -561,7 +561,7 @@ class String : gobject.boxed.Boxed
         val = the string to prepend on the start of string
       Returns: string
   */
-  glib.string_.String prepend(string val)
+  glib.string_.String prepend(string val) nothrow
   {
     GString* _cretval;
     const(char)* _val = val.toCString(No.Alloc);
@@ -578,7 +578,7 @@ class String : gobject.boxed.Boxed
         c = the byte to prepend on the start of the #GString
       Returns: string
   */
-  glib.string_.String prependC(char c)
+  glib.string_.String prependC(char c) nothrow
   {
     GString* _cretval;
     _cretval = g_string_prepend_c(cast(GString*)this._cPtr, c);
@@ -602,7 +602,7 @@ class String : gobject.boxed.Boxed
         len = number of bytes in val to prepend, or -1 for all of val
       Returns: string
   */
-  glib.string_.String prependLen(string val, ptrdiff_t len)
+  glib.string_.String prependLen(string val, ptrdiff_t len) nothrow
   {
     GString* _cretval;
     const(char)* _val = val.toCString(No.Alloc);
@@ -619,7 +619,7 @@ class String : gobject.boxed.Boxed
         wc = a Unicode character
       Returns: string
   */
-  glib.string_.String prependUnichar(dchar wc)
+  glib.string_.String prependUnichar(dchar wc) nothrow
   {
     GString* _cretval;
     _cretval = g_string_prepend_unichar(cast(GString*)this._cPtr, wc);
@@ -645,7 +645,7 @@ class String : gobject.boxed.Boxed
           no limit
       Returns: the number of find and replace operations performed.
   */
-  uint replace(string find, string replace, uint limit)
+  uint replace(string find, string replace, uint limit) nothrow
   {
     uint _retval;
     const(char)* _find = find.toCString(No.Alloc);
@@ -665,7 +665,7 @@ class String : gobject.boxed.Boxed
         len = the new length
       Returns: string
   */
-  glib.string_.String setSize(size_t len)
+  glib.string_.String setSize(size_t len) nothrow
   {
     GString* _cretval;
     _cretval = g_string_set_size(cast(GString*)this._cPtr, len);
@@ -680,7 +680,7 @@ class String : gobject.boxed.Boxed
         len = the new size of string
       Returns: string
   */
-  glib.string_.String truncate(size_t len)
+  glib.string_.String truncate(size_t len) nothrow
   {
     GString* _cretval;
     _cretval = g_string_truncate(cast(GString*)this._cPtr, len);
@@ -696,7 +696,7 @@ class String : gobject.boxed.Boxed
             toupper() function, which is almost never the right thing.
             Use [glib.string_.String.asciiUp] or [glib.global.utf8Strup] instead.
   */
-  glib.string_.String up()
+  glib.string_.String up() nothrow
   {
     GString* _cretval;
     _cretval = g_string_up(cast(GString*)this._cPtr);

@@ -19,11 +19,8 @@ class Parameter
   GParameter _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gobject.parameter.Parameter");
-
     _cInstance = *cast(GParameter*)ptr;
 
     if (take)
@@ -31,7 +28,7 @@ class Parameter
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -40,7 +37,7 @@ class Parameter
       Get `name` field.
       Returns: the parameter name
   */
-  @property string name()
+  @property string name() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GParameter*)this._cPtr).name);
   }
@@ -50,7 +47,7 @@ class Parameter
       Params:
         propval = the parameter name
   */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GParameter*)this._cPtr).name);
     dToC(propval, cast(void*)&(cast(GParameter*)this._cPtr).name);
@@ -60,7 +57,7 @@ class Parameter
       Get `value` field.
       Returns: the parameter value
   */
-  @property gobject.value.Value value()
+  @property gobject.value.Value value() nothrow
   {
     return cToD!(gobject.value.Value)(cast(void*)&(cast(GParameter*)this._cPtr).value);
   }

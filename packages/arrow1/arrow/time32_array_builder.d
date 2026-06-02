@@ -16,26 +16,26 @@ class Time32ArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_time32_array_builder_get_type != &gidSymbolNotFound ? garrow_time32_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Time32ArrayBuilder self()
+  override Time32ArrayBuilder self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class Time32ArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.time32_array_builder.Time32ArrayBuilder]
       Returns: New builder object
   */
-  static Time32ArrayBuilderGidBuilder builder()
+  static Time32ArrayBuilderGidBuilder builder() nothrow
   {
     return new Time32ArrayBuilderGidBuilder;
   }
 
   /** */
-  this(arrow.time32_data_type.Time32DataType dataType)
+  this(arrow.time32_data_type.Time32DataType dataType) nothrow
   {
     GArrowTime32ArrayBuilder* _cretval;
     _cretval = garrow_time32_array_builder_new(dataType ? cast(GArrowTime32DataType*)dataType._cPtr(No.Dup) : null);
@@ -126,7 +126,7 @@ final class Time32ArrayBuilderGidBuilder : Time32ArrayBuilderGidBuilderImpl!Time
       Create object from builder.
       Returns: New object
   */
-  Time32ArrayBuilder build()
+  Time32ArrayBuilder build() nothrow
   {
     return new Time32ArrayBuilder(cast(void*)createGObject(Time32ArrayBuilder._getGType), Yes.Take);
   }

@@ -92,26 +92,26 @@ class PopoverMenu : gtk.popover.Popover
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_popover_menu_get_type != &gidSymbolNotFound ? gtk_popover_menu_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PopoverMenu self()
+  override PopoverMenu self() nothrow
   {
     return this;
   }
@@ -120,19 +120,19 @@ class PopoverMenu : gtk.popover.Popover
       Get builder for [gtk.popover_menu.PopoverMenu]
       Returns: New builder object
   */
-  static PopoverMenuGidBuilder builder()
+  static PopoverMenuGidBuilder builder() nothrow
   {
     return new PopoverMenuGidBuilder;
   }
 
   /** */
-  @property string visibleSubmenu()
+  @property string visibleSubmenu() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("visible-submenu");
   }
 
   /** */
-  @property void visibleSubmenu(string propval)
+  @property void visibleSubmenu(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("visible-submenu", propval);
   }
@@ -141,7 +141,7 @@ class PopoverMenu : gtk.popover.Popover
       Creates a new popover menu.
       Returns: a new #GtkPopoverMenu
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_popover_menu_new();
@@ -162,7 +162,7 @@ class PopoverMenu : gtk.popover.Popover
       Params:
         name = the name of the menu to switch to
   */
-  void openSubmenu(string name)
+  void openSubmenu(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_popover_menu_open_submenu(cast(GtkPopoverMenu*)this._cPtr, _name);
@@ -175,7 +175,7 @@ class PopoverMenuGidBuilderImpl(T) : gtk.popover.PopoverGidBuilderImpl!T
 
 
   /** */
-  T visibleSubmenu(string propval)
+  T visibleSubmenu(string propval) nothrow
   {
     return setProperty("visible-submenu", propval);
   }
@@ -188,7 +188,7 @@ final class PopoverMenuGidBuilder : PopoverMenuGidBuilderImpl!PopoverMenuGidBuil
       Create object from builder.
       Returns: New object
   */
-  PopoverMenu build()
+  PopoverMenu build() nothrow
   {
     return new PopoverMenu(cast(void*)createGObject(PopoverMenu._getGType), No.Take);
   }

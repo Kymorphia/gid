@@ -84,26 +84,26 @@ class ViewSwitcherBar : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_view_switcher_bar_get_type != &gidSymbolNotFound ? adw_view_switcher_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ViewSwitcherBar self()
+  override ViewSwitcherBar self() nothrow
   {
     return this;
   }
@@ -112,7 +112,7 @@ class ViewSwitcherBar : gtk.widget.Widget
       Get builder for [adw.view_switcher_bar.ViewSwitcherBar]
       Returns: New builder object
   */
-  static ViewSwitcherBarGidBuilder builder()
+  static ViewSwitcherBarGidBuilder builder() nothrow
   {
     return new ViewSwitcherBarGidBuilder;
   }
@@ -121,7 +121,7 @@ class ViewSwitcherBar : gtk.widget.Widget
       Get `reveal` property.
       Returns: Whether the bar should be revealed or hidden.
   */
-  @property bool reveal()
+  @property bool reveal() nothrow
   {
     return getReveal();
   }
@@ -131,7 +131,7 @@ class ViewSwitcherBar : gtk.widget.Widget
       Params:
         propval = Whether the bar should be revealed or hidden.
   */
-  @property void reveal(bool propval)
+  @property void reveal(bool propval) nothrow
   {
     setReveal(propval);
   }
@@ -140,7 +140,7 @@ class ViewSwitcherBar : gtk.widget.Widget
       Get `stack` property.
       Returns: The stack the view switcher controls.
   */
-  @property adw.view_stack.ViewStack stack()
+  @property adw.view_stack.ViewStack stack() nothrow
   {
     return getStack();
   }
@@ -150,7 +150,7 @@ class ViewSwitcherBar : gtk.widget.Widget
       Params:
         propval = The stack the view switcher controls.
   */
-  @property void stack(adw.view_stack.ViewStack propval)
+  @property void stack(adw.view_stack.ViewStack propval) nothrow
   {
     setStack(propval);
   }
@@ -159,7 +159,7 @@ class ViewSwitcherBar : gtk.widget.Widget
       Creates a new [adw.view_switcher_bar.ViewSwitcherBar].
       Returns: the newly created [adw.view_switcher_bar.ViewSwitcherBar]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_view_switcher_bar_new();
@@ -170,7 +170,7 @@ class ViewSwitcherBar : gtk.widget.Widget
       Gets whether self should be revealed or hidden.
       Returns: whether self is revealed
   */
-  bool getReveal()
+  bool getReveal() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_view_switcher_bar_get_reveal(cast(AdwViewSwitcherBar*)this._cPtr);
@@ -181,7 +181,7 @@ class ViewSwitcherBar : gtk.widget.Widget
       Gets the stack controlled by self.
       Returns: the stack
   */
-  adw.view_stack.ViewStack getStack()
+  adw.view_stack.ViewStack getStack() nothrow
   {
     AdwViewStack* _cretval;
     _cretval = adw_view_switcher_bar_get_stack(cast(AdwViewSwitcherBar*)this._cPtr);
@@ -195,7 +195,7 @@ class ViewSwitcherBar : gtk.widget.Widget
       Params:
         reveal = whether to reveal self
   */
-  void setReveal(bool reveal)
+  void setReveal(bool reveal) nothrow
   {
     adw_view_switcher_bar_set_reveal(cast(AdwViewSwitcherBar*)this._cPtr, reveal);
   }
@@ -206,7 +206,7 @@ class ViewSwitcherBar : gtk.widget.Widget
       Params:
         stack = a stack
   */
-  void setStack(adw.view_stack.ViewStack stack = null)
+  void setStack(adw.view_stack.ViewStack stack = null) nothrow
   {
     adw_view_switcher_bar_set_stack(cast(AdwViewSwitcherBar*)this._cPtr, stack ? cast(AdwViewStack*)stack._cPtr(No.Dup) : null);
   }
@@ -223,7 +223,7 @@ class ViewSwitcherBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether the bar should be revealed or hidden.
       Returns: Builder instance for fluent chaining
   */
-  T reveal(bool propval)
+  T reveal(bool propval) nothrow
   {
     return setProperty("reveal", propval);
   }
@@ -234,7 +234,7 @@ class ViewSwitcherBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The stack the view switcher controls.
       Returns: Builder instance for fluent chaining
   */
-  T stack(adw.view_stack.ViewStack propval)
+  T stack(adw.view_stack.ViewStack propval) nothrow
   {
     return setProperty("stack", propval);
   }
@@ -247,7 +247,7 @@ final class ViewSwitcherBarGidBuilder : ViewSwitcherBarGidBuilderImpl!ViewSwitch
       Create object from builder.
       Returns: New object
   */
-  ViewSwitcherBar build()
+  ViewSwitcherBar build() nothrow
   {
     return new ViewSwitcherBar(cast(void*)createGObject(ViewSwitcherBar._getGType), No.Take);
   }

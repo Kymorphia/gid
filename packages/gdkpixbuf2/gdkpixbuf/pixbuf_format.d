@@ -30,7 +30,7 @@ class PixbufFormat : gobject.boxed.Boxed
         license = a string containing license information, typically set to
             shorthands like "GPL", "LGPL", etc.
   */
-  this(string name = string.init, string domain = string.init, string description = string.init, uint flags = uint.init, bool disabled = bool.init, string license = string.init)
+  this(string name = string.init, string domain = string.init, string description = string.init, uint flags = uint.init, bool disabled = bool.init, string license = string.init) nothrow
   {
     super(gMalloc(GdkPixbufFormat.sizeof), Yes.Take);
     this.name = name;
@@ -42,32 +42,32 @@ class PixbufFormat : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_pixbuf_format_get_type != &gidSymbolNotFound ? gdk_pixbuf_format_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PixbufFormat self()
+  override PixbufFormat self() nothrow
   {
     return this;
   }
@@ -76,7 +76,7 @@ class PixbufFormat : gobject.boxed.Boxed
       Get `name` field.
       Returns: the name of the image format
   */
-  @property string name()
+  @property string name() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdkPixbufFormat*)this._cPtr).name);
   }
@@ -86,7 +86,7 @@ class PixbufFormat : gobject.boxed.Boxed
       Params:
         propval = the name of the image format
   */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdkPixbufFormat*)this._cPtr).name);
     dToC(propval, cast(void*)&(cast(GdkPixbufFormat*)this._cPtr).name);
@@ -96,7 +96,7 @@ class PixbufFormat : gobject.boxed.Boxed
       Get `signature` field.
       Returns: the signature of the module
   */
-  @property gdkpixbuf.pixbuf_module_pattern.PixbufModulePattern signature()
+  @property gdkpixbuf.pixbuf_module_pattern.PixbufModulePattern signature() nothrow
   {
     return new gdkpixbuf.pixbuf_module_pattern.PixbufModulePattern(cast(GdkPixbufModulePattern*)(cast(GdkPixbufFormat*)this._cPtr).signature, No.Take);
   }
@@ -105,7 +105,7 @@ class PixbufFormat : gobject.boxed.Boxed
       Get `domain` field.
       Returns: the message domain for the `description`
   */
-  @property string domain()
+  @property string domain() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdkPixbufFormat*)this._cPtr).domain);
   }
@@ -115,7 +115,7 @@ class PixbufFormat : gobject.boxed.Boxed
       Params:
         propval = the message domain for the `description`
   */
-  @property void domain(string propval)
+  @property void domain(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdkPixbufFormat*)this._cPtr).domain);
     dToC(propval, cast(void*)&(cast(GdkPixbufFormat*)this._cPtr).domain);
@@ -125,7 +125,7 @@ class PixbufFormat : gobject.boxed.Boxed
       Get `description` field.
       Returns: a description of the image format
   */
-  @property string description()
+  @property string description() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdkPixbufFormat*)this._cPtr).description);
   }
@@ -135,7 +135,7 @@ class PixbufFormat : gobject.boxed.Boxed
       Params:
         propval = a description of the image format
   */
-  @property void description(string propval)
+  @property void description(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdkPixbufFormat*)this._cPtr).description);
     dToC(propval, cast(void*)&(cast(GdkPixbufFormat*)this._cPtr).description);
@@ -145,7 +145,7 @@ class PixbufFormat : gobject.boxed.Boxed
       Get `flags` field.
       Returns: a combination of [gdkpixbuf.types.PixbufFormatFlags]
   */
-  @property uint flags()
+  @property uint flags() nothrow
   {
     return (cast(GdkPixbufFormat*)this._cPtr).flags;
   }
@@ -155,7 +155,7 @@ class PixbufFormat : gobject.boxed.Boxed
       Params:
         propval = a combination of [gdkpixbuf.types.PixbufFormatFlags]
   */
-  @property void flags(uint propval)
+  @property void flags(uint propval) nothrow
   {
     (cast(GdkPixbufFormat*)this._cPtr).flags = propval;
   }
@@ -164,7 +164,7 @@ class PixbufFormat : gobject.boxed.Boxed
       Get `disabled` field.
       Returns: a boolean determining whether the loader is disabled`
   */
-  @property bool disabled()
+  @property bool disabled() nothrow
   {
     return cast(bool)(cast(GdkPixbufFormat*)this._cPtr).disabled;
   }
@@ -174,7 +174,7 @@ class PixbufFormat : gobject.boxed.Boxed
       Params:
         propval = a boolean determining whether the loader is disabled`
   */
-  @property void disabled(bool propval)
+  @property void disabled(bool propval) nothrow
   {
     (cast(GdkPixbufFormat*)this._cPtr).disabled = propval;
   }
@@ -184,7 +184,7 @@ class PixbufFormat : gobject.boxed.Boxed
       Returns: a string containing license information, typically set to
           shorthands like "GPL", "LGPL", etc.
   */
-  @property string license()
+  @property string license() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdkPixbufFormat*)this._cPtr).license);
   }
@@ -195,7 +195,7 @@ class PixbufFormat : gobject.boxed.Boxed
         propval = a string containing license information, typically set to
             shorthands like "GPL", "LGPL", etc.
   */
-  @property void license(string propval)
+  @property void license(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdkPixbufFormat*)this._cPtr).license);
     dToC(propval, cast(void*)&(cast(GdkPixbufFormat*)this._cPtr).license);
@@ -206,7 +206,7 @@ class PixbufFormat : gobject.boxed.Boxed
       Returns: the newly allocated copy of a [gdkpixbuf.pixbuf_format.PixbufFormat]. Use
           [gdkpixbuf.pixbuf_format.PixbufFormat.free] to free the resources when done
   */
-  gdkpixbuf.pixbuf_format.PixbufFormat copy()
+  gdkpixbuf.pixbuf_format.PixbufFormat copy() nothrow
   {
     GdkPixbufFormat* _cretval;
     _cretval = gdk_pixbuf_format_copy(cast(const(GdkPixbufFormat)*)this._cPtr);
@@ -218,7 +218,7 @@ class PixbufFormat : gobject.boxed.Boxed
       Returns a description of the format.
       Returns: a description of the format.
   */
-  string getDescription()
+  string getDescription() nothrow
   {
     char* _cretval;
     _cretval = gdk_pixbuf_format_get_description(cast(GdkPixbufFormat*)this._cPtr);
@@ -232,7 +232,7 @@ class PixbufFormat : gobject.boxed.Boxed
       Returns: an array of
           filename extensions
   */
-  string[] getExtensions()
+  string[] getExtensions() nothrow
   {
     char** _cretval;
     _cretval = gdk_pixbuf_format_get_extensions(cast(GdkPixbufFormat*)this._cPtr);
@@ -258,7 +258,7 @@ class PixbufFormat : gobject.boxed.Boxed
       "LGPL", "GPL", "QPL", "GPL/QPL", or "other" to indicate some other license.
       Returns: a string describing the license of the pixbuf format
   */
-  string getLicense()
+  string getLicense() nothrow
   {
     char* _cretval;
     _cretval = gdk_pixbuf_format_get_license(cast(GdkPixbufFormat*)this._cPtr);
@@ -270,7 +270,7 @@ class PixbufFormat : gobject.boxed.Boxed
       Returns the mime types supported by the format.
       Returns: an array of mime types
   */
-  string[] getMimeTypes()
+  string[] getMimeTypes() nothrow
   {
     char** _cretval;
     _cretval = gdk_pixbuf_format_get_mime_types(cast(GdkPixbufFormat*)this._cPtr);
@@ -293,7 +293,7 @@ class PixbufFormat : gobject.boxed.Boxed
       Returns the name of the format.
       Returns: the name of the format.
   */
-  string getName()
+  string getName() nothrow
   {
     char* _cretval;
     _cretval = gdk_pixbuf_format_get_name(cast(GdkPixbufFormat*)this._cPtr);
@@ -307,7 +307,7 @@ class PixbufFormat : gobject.boxed.Boxed
       See [gdkpixbuf.pixbuf_format.PixbufFormat.setDisabled].
       Returns: whether this image format is disabled.
   */
-  bool isDisabled()
+  bool isDisabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_pixbuf_format_is_disabled(cast(GdkPixbufFormat*)this._cPtr);
@@ -324,7 +324,7 @@ class PixbufFormat : gobject.boxed.Boxed
         optionKey = the name of an option
       Returns: `TRUE` if the specified option is supported
   */
-  bool isSaveOptionSupported(string optionKey)
+  bool isSaveOptionSupported(string optionKey) nothrow
   {
     bool _retval;
     const(char)* _optionKey = optionKey.toCString(No.Alloc);
@@ -340,7 +340,7 @@ class PixbufFormat : gobject.boxed.Boxed
       scaling the resulting pixbuf to the desired size.
       Returns: whether this image format is scalable.
   */
-  bool isScalable()
+  bool isScalable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_pixbuf_format_is_scalable(cast(GdkPixbufFormat*)this._cPtr);
@@ -351,7 +351,7 @@ class PixbufFormat : gobject.boxed.Boxed
       Returns whether pixbufs can be saved in the given format.
       Returns: whether pixbufs can be saved in the given format.
   */
-  bool isWritable()
+  bool isWritable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_pixbuf_format_is_writable(cast(GdkPixbufFormat*)this._cPtr);
@@ -370,7 +370,7 @@ class PixbufFormat : gobject.boxed.Boxed
       Params:
         disabled = `TRUE` to disable the format format
   */
-  void setDisabled(bool disabled)
+  void setDisabled(bool disabled) nothrow
   {
     gdk_pixbuf_format_set_disabled(cast(GdkPixbufFormat*)this._cPtr, disabled);
   }

@@ -16,26 +16,26 @@ class MessageReader : arrowflight.record_batch_reader.RecordBatchReader
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_message_reader_get_type != &gidSymbolNotFound ? gaflight_message_reader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MessageReader self()
+  override MessageReader self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class MessageReader : arrowflight.record_batch_reader.RecordBatchReader
       Get builder for [arrowflight.message_reader.MessageReader]
       Returns: New builder object
   */
-  static MessageReaderGidBuilder builder()
+  static MessageReaderGidBuilder builder() nothrow
   {
     return new MessageReaderGidBuilder;
   }
 
   /** */
-  arrowflight.descriptor.Descriptor getDescriptor()
+  arrowflight.descriptor.Descriptor getDescriptor() nothrow
   {
     GAFlightDescriptor* _cretval;
     _cretval = gaflight_message_reader_get_descriptor(cast(GAFlightMessageReader*)this._cPtr);
@@ -71,7 +71,7 @@ final class MessageReaderGidBuilder : MessageReaderGidBuilderImpl!MessageReaderG
       Create object from builder.
       Returns: New object
   */
-  MessageReader build()
+  MessageReader build() nothrow
   {
     return new MessageReader(cast(void*)createGObject(MessageReader._getGType), No.Take);
   }

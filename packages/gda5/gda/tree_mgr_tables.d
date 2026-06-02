@@ -17,26 +17,26 @@ class TreeMgrTables : gda.tree_manager.TreeManager
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_tree_mgr_tables_get_type != &gidSymbolNotFound ? gda_tree_mgr_tables_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TreeMgrTables self()
+  override TreeMgrTables self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class TreeMgrTables : gda.tree_manager.TreeManager
       Get builder for [gda.tree_mgr_tables.TreeMgrTables]
       Returns: New builder object
   */
-  static TreeMgrTablesGidBuilder builder()
+  static TreeMgrTablesGidBuilder builder() nothrow
   {
     return new TreeMgrTablesGidBuilder;
   }
@@ -55,7 +55,7 @@ class TreeMgrTables : gda.tree_manager.TreeManager
       Returns: Defines the #GdaConnection to display information for. Necessary upon construction unless
         the #GdaTreeMgrTables:meta-store property is specified instead.
   */
-  @property gda.connection.Connection connection()
+  @property gda.connection.Connection connection() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.connection.Connection)("connection");
   }
@@ -66,7 +66,7 @@ class TreeMgrTables : gda.tree_manager.TreeManager
         the #GdaTreeMgrTables:connection property is specified instead. This property has
         priority over the GdaTreeMgrTables:connection property.
   */
-  @property gda.meta_store.MetaStore metaStore()
+  @property gda.meta_store.MetaStore metaStore() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.meta_store.MetaStore)("meta-store");
   }
@@ -80,7 +80,7 @@ class TreeMgrTables : gda.tree_manager.TreeManager
         schema = a schema name or null
       Returns: a new #GdaTreeManager object
   */
-  this(gda.connection.Connection cnc, string schema = null)
+  this(gda.connection.Connection cnc, string schema = null) nothrow
   {
     GdaTreeManager* _cretval;
     const(char)* _schema = schema.toCString(No.Alloc);
@@ -100,7 +100,7 @@ class TreeMgrTablesGidBuilderImpl(T) : gda.tree_manager.TreeManagerGidBuilderImp
           the #GdaTreeMgrTables:meta-store property is specified instead.
       Returns: Builder instance for fluent chaining
   */
-  T connection(gda.connection.Connection propval)
+  T connection(gda.connection.Connection propval) nothrow
   {
     return setProperty("connection", propval);
   }
@@ -113,7 +113,7 @@ class TreeMgrTablesGidBuilderImpl(T) : gda.tree_manager.TreeManagerGidBuilderImp
           priority over the GdaTreeMgrTables:connection property.
       Returns: Builder instance for fluent chaining
   */
-  T metaStore(gda.meta_store.MetaStore propval)
+  T metaStore(gda.meta_store.MetaStore propval) nothrow
   {
     return setProperty("meta-store", propval);
   }
@@ -126,7 +126,7 @@ class TreeMgrTablesGidBuilderImpl(T) : gda.tree_manager.TreeManagerGidBuilderImp
           a schema) will be used
       Returns: Builder instance for fluent chaining
   */
-  T schema(string propval)
+  T schema(string propval) nothrow
   {
     return setProperty("schema", propval);
   }
@@ -139,7 +139,7 @@ final class TreeMgrTablesGidBuilder : TreeMgrTablesGidBuilderImpl!TreeMgrTablesG
       Create object from builder.
       Returns: New object
   */
-  TreeMgrTables build()
+  TreeMgrTables build() nothrow
   {
     return new TreeMgrTables(cast(void*)createGObject(TreeMgrTables._getGType), Yes.Take);
   }

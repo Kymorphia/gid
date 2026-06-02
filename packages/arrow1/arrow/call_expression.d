@@ -15,26 +15,26 @@ class CallExpression : arrow.expression.Expression
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_call_expression_get_type != &gidSymbolNotFound ? garrow_call_expression_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CallExpression self()
+  override CallExpression self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class CallExpression : arrow.expression.Expression
       Get builder for [arrow.call_expression.CallExpression]
       Returns: New builder object
   */
-  static CallExpressionGidBuilder builder()
+  static CallExpressionGidBuilder builder() nothrow
   {
     return new CallExpressionGidBuilder;
   }
 
   /** */
-  this(string function_, arrow.expression.Expression[] arguments, arrow.function_options.FunctionOptions options = null)
+  this(string function_, arrow.expression.Expression[] arguments, arrow.function_options.FunctionOptions options = null) nothrow
   {
     GArrowCallExpression* _cretval;
     const(char)* _function_ = function_.toCString(No.Alloc);
@@ -72,7 +72,7 @@ final class CallExpressionGidBuilder : CallExpressionGidBuilderImpl!CallExpressi
       Create object from builder.
       Returns: New object
   */
-  CallExpression build()
+  CallExpression build() nothrow
   {
     return new CallExpression(cast(void*)createGObject(CallExpression._getGType), Yes.Take);
   }

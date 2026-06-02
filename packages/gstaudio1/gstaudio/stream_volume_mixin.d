@@ -32,32 +32,32 @@ template StreamVolumeT()
 {
 
   /** */
-  @property bool mute()
+  @property bool mute() nothrow
   {
     return getMute();
   }
 
   /** */
-  @property void mute(bool propval)
+  @property void mute(bool propval) nothrow
   {
     setMute(propval);
   }
 
   /** */
-  @property double volume()
+  @property double volume() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(double)("volume");
   }
 
   /** */
-  @property void volume(double propval)
+  @property void volume(double propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(double)("volume", propval);
   }
 
 
   /** */
-  override bool getMute()
+  override bool getMute() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_stream_volume_get_mute(cast(GstStreamVolume*)this._cPtr);
@@ -65,7 +65,7 @@ template StreamVolumeT()
   }
 
   /** */
-  override double getVolume(gstaudio.types.StreamVolumeFormat format)
+  override double getVolume(gstaudio.types.StreamVolumeFormat format) nothrow
   {
     double _retval;
     _retval = gst_stream_volume_get_volume(cast(GstStreamVolume*)this._cPtr, format);
@@ -73,13 +73,13 @@ template StreamVolumeT()
   }
 
   /** */
-  override void setMute(bool mute)
+  override void setMute(bool mute) nothrow
   {
     gst_stream_volume_set_mute(cast(GstStreamVolume*)this._cPtr, mute);
   }
 
   /** */
-  override void setVolume(gstaudio.types.StreamVolumeFormat format, double val)
+  override void setVolume(gstaudio.types.StreamVolumeFormat format, double val) nothrow
   {
     gst_stream_volume_set_volume(cast(GstStreamVolume*)this._cPtr, format, val);
   }
@@ -90,13 +90,13 @@ template StreamVolumeGidBuilderT()
 {
 
   /** */
-  T mute(bool propval)
+  T mute(bool propval) nothrow
   {
     return setProperty("mute", propval);
   }
 
   /** */
-  T volume(double propval)
+  T volume(double propval) nothrow
   {
     return setProperty("volume", propval);
   }

@@ -23,7 +23,7 @@ class DBusNodeInfo : gobject.boxed.Boxed
         refCount = The reference count or -1 if statically allocated.
         path = The path of the node or null if omitted. Note that this may be a relative path. See the D-Bus specification for more details.
   */
-  this(int refCount = int.init, string path = string.init)
+  this(int refCount = int.init, string path = string.init) nothrow
   {
     super(gMalloc(GDBusNodeInfo.sizeof), Yes.Take);
     this.refCount = refCount;
@@ -31,32 +31,32 @@ class DBusNodeInfo : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_node_info_get_type != &gidSymbolNotFound ? g_dbus_node_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DBusNodeInfo self()
+  override DBusNodeInfo self() nothrow
   {
     return this;
   }
@@ -65,7 +65,7 @@ class DBusNodeInfo : gobject.boxed.Boxed
       Get `refCount` field.
       Returns: The reference count or -1 if statically allocated.
   */
-  @property int refCount()
+  @property int refCount() nothrow
   {
     return (cast(GDBusNodeInfo*)this._cPtr).refCount;
   }
@@ -75,7 +75,7 @@ class DBusNodeInfo : gobject.boxed.Boxed
       Params:
         propval = The reference count or -1 if statically allocated.
   */
-  @property void refCount(int propval)
+  @property void refCount(int propval) nothrow
   {
     (cast(GDBusNodeInfo*)this._cPtr).refCount = propval;
   }
@@ -84,7 +84,7 @@ class DBusNodeInfo : gobject.boxed.Boxed
       Get `path` field.
       Returns: The path of the node or null if omitted. Note that this may be a relative path. See the D-Bus specification for more details.
   */
-  @property string path()
+  @property string path() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GDBusNodeInfo*)this._cPtr).path);
   }
@@ -94,7 +94,7 @@ class DBusNodeInfo : gobject.boxed.Boxed
       Params:
         propval = The path of the node or null if omitted. Note that this may be a relative path. See the D-Bus specification for more details.
   */
-  @property void path(string propval)
+  @property void path(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GDBusNodeInfo*)this._cPtr).path);
     dToC(propval, cast(void*)&(cast(GDBusNodeInfo*)this._cPtr).path);
@@ -138,7 +138,7 @@ class DBusNodeInfo : gobject.boxed.Boxed
         indent = Indentation level.
         stringBuilder = A #GString to to append XML data to.
   */
-  void generateXml(uint indent, glib.string_.String stringBuilder)
+  void generateXml(uint indent, glib.string_.String stringBuilder) nothrow
   {
     g_dbus_node_info_generate_xml(cast(GDBusNodeInfo*)this._cPtr, indent, stringBuilder ? cast(GString*)stringBuilder._cPtr(No.Dup) : null);
   }
@@ -152,7 +152,7 @@ class DBusNodeInfo : gobject.boxed.Boxed
         name = A D-Bus interface name.
       Returns: A #GDBusInterfaceInfo or null if not found. Do not free, it is owned by info.
   */
-  gio.dbus_interface_info.DBusInterfaceInfo lookupInterface(string name)
+  gio.dbus_interface_info.DBusInterfaceInfo lookupInterface(string name) nothrow
   {
     GDBusInterfaceInfo* _cretval;
     const(char)* _name = name.toCString(No.Alloc);

@@ -20,26 +20,26 @@ class GestureRotate : gtk.gesture.Gesture
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gesture_rotate_get_type != &gidSymbolNotFound ? gtk_gesture_rotate_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GestureRotate self()
+  override GestureRotate self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class GestureRotate : gtk.gesture.Gesture
       Get builder for [gtk.gesture_rotate.GestureRotate]
       Returns: New builder object
   */
-  static GestureRotateGidBuilder builder()
+  static GestureRotateGidBuilder builder() nothrow
   {
     return new GestureRotateGidBuilder;
   }
@@ -58,7 +58,7 @@ class GestureRotate : gtk.gesture.Gesture
       rotation gestures.
       Returns: a newly created [gtk.gesture_rotate.GestureRotate]
   */
-  this()
+  this() nothrow
   {
     GtkGesture* _cretval;
     _cretval = gtk_gesture_rotate_new();
@@ -73,7 +73,7 @@ class GestureRotate : gtk.gesture.Gesture
       not active, 0 is returned.
       Returns: the angle delta in radians
   */
-  double getAngleDelta()
+  double getAngleDelta() nothrow
   {
     double _retval;
     _retval = gtk_gesture_rotate_get_angle_delta(cast(GtkGestureRotate*)this._cPtr);
@@ -99,7 +99,7 @@ class GestureRotate : gtk.gesture.Gesture
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAngleChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAngleChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -107,7 +107,7 @@ class GestureRotate : gtk.gesture.Gesture
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.gesture_rotate.GestureRotate)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -122,7 +122,14 @@ class GestureRotate : gtk.gesture.Gesture
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.gesture_rotate.GestureRotate.angleChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -142,7 +149,7 @@ final class GestureRotateGidBuilder : GestureRotateGidBuilderImpl!GestureRotateG
       Create object from builder.
       Returns: New object
   */
-  GestureRotate build()
+  GestureRotate build() nothrow
   {
     return new GestureRotate(cast(void*)createGObject(GestureRotate._getGType), Yes.Take);
   }

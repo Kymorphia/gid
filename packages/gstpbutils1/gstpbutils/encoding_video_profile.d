@@ -17,26 +17,26 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_encoding_video_profile_get_type != &gidSymbolNotFound ? gst_encoding_video_profile_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EncodingVideoProfile self()
+  override EncodingVideoProfile self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
       Get builder for [gstpbutils.encoding_video_profile.EncodingVideoProfile]
       Returns: New builder object
   */
-  static EncodingVideoProfileGidBuilder builder()
+  static EncodingVideoProfileGidBuilder builder() nothrow
   {
     return new EncodingVideoProfileGidBuilder;
   }
@@ -71,7 +71,7 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
            times (including never)
       Returns: the newly created #GstEncodingVideoProfile.
   */
-  this(gst.caps.Caps format, string preset, gst.caps.Caps restriction, uint presence)
+  this(gst.caps.Caps format, string preset, gst.caps.Caps restriction, uint presence) nothrow
   {
     GstEncodingVideoProfile* _cretval;
     const(char)* _preset = preset.toCString(No.Alloc);
@@ -84,7 +84,7 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
       Returns: The pass number. Starts at 1 for multi-pass. 0 if this is
         not a multi-pass profile
   */
-  uint getPass()
+  uint getPass() nothrow
   {
     uint _retval;
     _retval = gst_encoding_video_profile_get_pass(cast(GstEncodingVideoProfile*)this._cPtr);
@@ -96,7 +96,7 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
       > is set.
       Returns: Whether non-constant video framerate is allowed for encoding.
   */
-  bool getVariableframerate()
+  bool getVariableframerate() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_encoding_video_profile_get_variableframerate(cast(GstEncodingVideoProfile*)this._cPtr);
@@ -111,7 +111,7 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
       Params:
         pass = the pass number for this profile
   */
-  void setPass(uint pass)
+  void setPass(uint pass) nothrow
   {
     gst_encoding_video_profile_set_pass(cast(GstEncodingVideoProfile*)this._cPtr, pass);
   }
@@ -125,7 +125,7 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
       Params:
         variableframerate = a boolean
   */
-  void setVariableframerate(bool variableframerate)
+  void setVariableframerate(bool variableframerate) nothrow
   {
     gst_encoding_video_profile_set_variableframerate(cast(GstEncodingVideoProfile*)this._cPtr, variableframerate);
   }
@@ -143,7 +143,7 @@ final class EncodingVideoProfileGidBuilder : EncodingVideoProfileGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  EncodingVideoProfile build()
+  EncodingVideoProfile build() nothrow
   {
     return new EncodingVideoProfile(cast(void*)createGObject(EncodingVideoProfile._getGType), Yes.Take);
   }

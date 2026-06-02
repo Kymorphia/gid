@@ -14,26 +14,26 @@ class Fragment : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_fragment_get_type != &gidSymbolNotFound ? gadataset_fragment_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Fragment self()
+  override Fragment self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class Fragment : gobject.object.ObjectWrap
       Get builder for [arrowdataset.fragment.Fragment]
       Returns: New builder object
   */
-  static FragmentGidBuilder builder()
+  static FragmentGidBuilder builder() nothrow
   {
     return new FragmentGidBuilder;
   }
@@ -53,7 +53,7 @@ class FragmentGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T fragment(void* propval)
+  T fragment(void* propval) nothrow
   {
     return setProperty("fragment", propval);
   }
@@ -66,7 +66,7 @@ final class FragmentGidBuilder : FragmentGidBuilderImpl!FragmentGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Fragment build()
+  Fragment build() nothrow
   {
     return new Fragment(cast(void*)createGObject(Fragment._getGType), No.Take);
   }

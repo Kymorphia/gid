@@ -17,26 +17,26 @@ class CustomFilter : gtk.filter.Filter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_custom_filter_get_type != &gidSymbolNotFound ? gtk_custom_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CustomFilter self()
+  override CustomFilter self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class CustomFilter : gtk.filter.Filter
       Get builder for [gtk.custom_filter.CustomFilter]
       Returns: New builder object
   */
-  static CustomFilterGidBuilder builder()
+  static CustomFilterGidBuilder builder() nothrow
   {
     return new CustomFilterGidBuilder;
   }
@@ -63,14 +63,21 @@ class CustomFilter : gtk.filter.Filter
         matchFunc = function to filter items
       Returns: a new [gtk.custom_filter.CustomFilter]
   */
-  this(gtk.types.CustomFilterFunc matchFunc = null)
+  this(gtk.types.CustomFilterFunc matchFunc = null) nothrow
   {
-    extern(C) gboolean _matchFuncCallback(GObject* item, void* userData)
+    extern(C) gboolean _matchFuncCallback(GObject* item, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.CustomFilterFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.CustomFilterFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -97,14 +104,21 @@ class CustomFilter : gtk.filter.Filter
       Params:
         matchFunc = function to filter items
   */
-  void setFilterFunc(gtk.types.CustomFilterFunc matchFunc = null)
+  void setFilterFunc(gtk.types.CustomFilterFunc matchFunc = null) nothrow
   {
-    extern(C) gboolean _matchFuncCallback(GObject* item, void* userData)
+    extern(C) gboolean _matchFuncCallback(GObject* item, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.CustomFilterFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.CustomFilterFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -128,7 +142,7 @@ final class CustomFilterGidBuilder : CustomFilterGidBuilderImpl!CustomFilterGidB
       Create object from builder.
       Returns: New object
   */
-  CustomFilter build()
+  CustomFilter build() nothrow
   {
     return new CustomFilter(cast(void*)createGObject(CustomFilter._getGType), Yes.Take);
   }

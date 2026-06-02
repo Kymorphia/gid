@@ -90,26 +90,26 @@ class Binding : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_binding_get_type != &gidSymbolNotFound ? g_binding_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Binding self()
+  override Binding self() nothrow
   {
     return this;
   }
@@ -118,7 +118,7 @@ class Binding : gobject.object.ObjectWrap
       Get builder for [gobject.binding.Binding]
       Returns: New builder object
   */
-  static BindingGidBuilder builder()
+  static BindingGidBuilder builder() nothrow
   {
     return new BindingGidBuilder;
   }
@@ -127,7 +127,7 @@ class Binding : gobject.object.ObjectWrap
       Get `flags` property.
       Returns: Flags to be used to control the #GBinding
   */
-  @property gobject.types.BindingFlags flags()
+  @property gobject.types.BindingFlags flags() nothrow
   {
     return getFlags();
   }
@@ -136,7 +136,7 @@ class Binding : gobject.object.ObjectWrap
       Get `source` property.
       Returns: The #GObject that should be used as the source of the binding
   */
-  @property gobject.object.ObjectWrap source()
+  @property gobject.object.ObjectWrap source() nothrow
   {
     return getSource();
   }
@@ -149,7 +149,7 @@ class Binding : gobject.object.ObjectWrap
         This should be in [canonical form][canonical-parameter-names] to get the
         best performance.
   */
-  @property string sourceProperty()
+  @property string sourceProperty() nothrow
   {
     return getSourceProperty();
   }
@@ -158,7 +158,7 @@ class Binding : gobject.object.ObjectWrap
       Get `target` property.
       Returns: The #GObject that should be used as the target of the binding
   */
-  @property gobject.object.ObjectWrap target()
+  @property gobject.object.ObjectWrap target() nothrow
   {
     return getTarget();
   }
@@ -171,7 +171,7 @@ class Binding : gobject.object.ObjectWrap
         This should be in [canonical form][canonical-parameter-names] to get the
         best performance.
   */
-  @property string targetProperty()
+  @property string targetProperty() nothrow
   {
     return getTargetProperty();
   }
@@ -185,7 +185,7 @@ class Binding : gobject.object.ObjectWrap
       Returns: the source #GObject, or null if the
             source does not exist any more.
   */
-  gobject.object.ObjectWrap dupSource()
+  gobject.object.ObjectWrap dupSource() nothrow
   {
     GObject* _cretval;
     _cretval = g_binding_dup_source(cast(GBinding*)this._cPtr);
@@ -202,7 +202,7 @@ class Binding : gobject.object.ObjectWrap
       Returns: the target #GObject, or null if the
             target does not exist any more.
   */
-  gobject.object.ObjectWrap dupTarget()
+  gobject.object.ObjectWrap dupTarget() nothrow
   {
     GObject* _cretval;
     _cretval = g_binding_dup_target(cast(GBinding*)this._cPtr);
@@ -214,7 +214,7 @@ class Binding : gobject.object.ObjectWrap
       Retrieves the flags passed when constructing the #GBinding.
       Returns: the #GBindingFlags used by the #GBinding
   */
-  gobject.types.BindingFlags getFlags()
+  gobject.types.BindingFlags getFlags() nothrow
   {
     GBindingFlags _cretval;
     _cretval = g_binding_get_flags(cast(GBinding*)this._cPtr);
@@ -238,7 +238,7 @@ class Binding : gobject.object.ObjectWrap
       Deprecated: Use [gobject.binding.Binding.dupSource] for a safer version of this
         function.
   */
-  gobject.object.ObjectWrap getSource()
+  gobject.object.ObjectWrap getSource() nothrow
   {
     GObject* _cretval;
     _cretval = g_binding_get_source(cast(GBinding*)this._cPtr);
@@ -251,7 +251,7 @@ class Binding : gobject.object.ObjectWrap
       of the binding.
       Returns: the name of the source property
   */
-  string getSourceProperty()
+  string getSourceProperty() nothrow
   {
     const(char)* _cretval;
     _cretval = g_binding_get_source_property(cast(GBinding*)this._cPtr);
@@ -275,7 +275,7 @@ class Binding : gobject.object.ObjectWrap
       Deprecated: Use [gobject.binding.Binding.dupTarget] for a safer version of this
         function.
   */
-  gobject.object.ObjectWrap getTarget()
+  gobject.object.ObjectWrap getTarget() nothrow
   {
     GObject* _cretval;
     _cretval = g_binding_get_target(cast(GBinding*)this._cPtr);
@@ -288,7 +288,7 @@ class Binding : gobject.object.ObjectWrap
       of the binding.
       Returns: the name of the target property
   */
-  string getTargetProperty()
+  string getTargetProperty() nothrow
   {
     const(char)* _cretval;
     _cretval = g_binding_get_target_property(cast(GBinding*)this._cPtr);
@@ -309,7 +309,7 @@ class Binding : gobject.object.ObjectWrap
       only unrefs the reference that was initially created by
       [gobject.object.ObjectWrap.bindProperty] and is owned by the binding.
   */
-  void unbind()
+  void unbind() nothrow
   {
     g_binding_unbind(cast(GBinding*)this._cPtr);
   }
@@ -325,7 +325,7 @@ class BindingGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Flags to be used to control the #GBinding
       Returns: Builder instance for fluent chaining
   */
-  T flags(gobject.types.BindingFlags propval)
+  T flags(gobject.types.BindingFlags propval) nothrow
   {
     return setProperty("flags", propval);
   }
@@ -336,7 +336,7 @@ class BindingGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The #GObject that should be used as the source of the binding
       Returns: Builder instance for fluent chaining
   */
-  T source(gobject.object.ObjectWrap propval)
+  T source(gobject.object.ObjectWrap propval) nothrow
   {
     return setProperty("source", propval);
   }
@@ -351,7 +351,7 @@ class BindingGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           best performance.
       Returns: Builder instance for fluent chaining
   */
-  T sourceProperty(string propval)
+  T sourceProperty(string propval) nothrow
   {
     return setProperty("source-property", propval);
   }
@@ -362,7 +362,7 @@ class BindingGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The #GObject that should be used as the target of the binding
       Returns: Builder instance for fluent chaining
   */
-  T target(gobject.object.ObjectWrap propval)
+  T target(gobject.object.ObjectWrap propval) nothrow
   {
     return setProperty("target", propval);
   }
@@ -377,7 +377,7 @@ class BindingGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           best performance.
       Returns: Builder instance for fluent chaining
   */
-  T targetProperty(string propval)
+  T targetProperty(string propval) nothrow
   {
     return setProperty("target-property", propval);
   }
@@ -390,7 +390,7 @@ final class BindingGidBuilder : BindingGidBuilderImpl!BindingGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Binding build()
+  Binding build() nothrow
   {
     return new Binding(cast(void*)createGObject(Binding._getGType), No.Take);
   }

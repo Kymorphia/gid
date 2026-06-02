@@ -21,26 +21,26 @@ class Util : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_util_get_type != &gidSymbolNotFound ? atk_util_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Util self()
+  override Util self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class Util : gobject.object.ObjectWrap
       Get builder for [atk.util.Util]
       Returns: New builder object
   */
-  static UtilGidBuilder builder()
+  static UtilGidBuilder builder() nothrow
   {
     return new UtilGidBuilder;
   }
@@ -67,7 +67,7 @@ final class UtilGidBuilder : UtilGidBuilderImpl!UtilGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Util build()
+  Util build() nothrow
   {
     return new Util(cast(void*)createGObject(Util._getGType), No.Take);
   }

@@ -47,26 +47,26 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_sort_list_model_get_type != &gidSymbolNotFound ? gtk_sort_list_model_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SortListModel self()
+  override SortListModel self() nothrow
   {
     return this;
   }
@@ -75,7 +75,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
       Get builder for [gtk.sort_list_model.SortListModel]
       Returns: New builder object
   */
-  static SortListModelGidBuilder builder()
+  static SortListModelGidBuilder builder() nothrow
   {
     return new SortListModelGidBuilder;
   }
@@ -84,7 +84,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
       Get `incremental` property.
       Returns: If the model should sort items incrementally.
   */
-  @property bool incremental()
+  @property bool incremental() nothrow
   {
     return getIncremental();
   }
@@ -94,7 +94,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
       Params:
         propval = If the model should sort items incrementally.
   */
-  @property void incremental(bool propval)
+  @property void incremental(bool propval) nothrow
   {
     setIncremental(propval);
   }
@@ -103,7 +103,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
-  @property gobject.types.GType itemType()
+  @property gobject.types.GType itemType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
   }
@@ -112,7 +112,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
       Get `model` property.
       Returns: The model being sorted.
   */
-  @property gio.list_model.ListModel model()
+  @property gio.list_model.ListModel model() nothrow
   {
     return getModel();
   }
@@ -122,7 +122,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
       Params:
         propval = The model being sorted.
   */
-  @property void model(gio.list_model.ListModel propval)
+  @property void model(gio.list_model.ListModel propval) nothrow
   {
     setModel(propval);
   }
@@ -131,7 +131,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
       Get `nItems` property.
       Returns: The number of items. See [gio.list_model.ListModel.getNItems].
   */
-  @property uint nItems()
+  @property uint nItems() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
@@ -140,7 +140,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
       Get `pending` property.
       Returns: Estimate of unsorted items remaining.
   */
-  @property uint pending()
+  @property uint pending() nothrow
   {
     return getPending();
   }
@@ -149,7 +149,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
       Get `sectionSorter` property.
       Returns: The section sorter for this model, if one is set.
   */
-  @property gtk.sorter.Sorter sectionSorter()
+  @property gtk.sorter.Sorter sectionSorter() nothrow
   {
     return getSectionSorter();
   }
@@ -159,7 +159,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
       Params:
         propval = The section sorter for this model, if one is set.
   */
-  @property void sectionSorter(gtk.sorter.Sorter propval)
+  @property void sectionSorter(gtk.sorter.Sorter propval) nothrow
   {
     setSectionSorter(propval);
   }
@@ -168,7 +168,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
       Get `sorter` property.
       Returns: The sorter for this model.
   */
-  @property gtk.sorter.Sorter sorter()
+  @property gtk.sorter.Sorter sorter() nothrow
   {
     return getSorter();
   }
@@ -178,7 +178,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
       Params:
         propval = The sorter for this model.
   */
-  @property void sorter(gtk.sorter.Sorter propval)
+  @property void sorter(gtk.sorter.Sorter propval) nothrow
   {
     setSorter(propval);
   }
@@ -194,7 +194,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
         sorter = the [gtk.sorter.Sorter] to sort model with,
       Returns: a new [gtk.sort_list_model.SortListModel]
   */
-  this(gio.list_model.ListModel model = null, gtk.sorter.Sorter sorter = null)
+  this(gio.list_model.ListModel model = null, gtk.sorter.Sorter sorter = null) nothrow
   {
     GtkSortListModel* _cretval;
     _cretval = gtk_sort_list_model_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(Yes.Dup) : null, sorter ? cast(GtkSorter*)sorter._cPtr(Yes.Dup) : null);
@@ -207,7 +207,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
       See [gtk.sort_list_model.SortListModel.setIncremental].
       Returns: true if incremental sorting is enabled
   */
-  bool getIncremental()
+  bool getIncremental() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_sort_list_model_get_incremental(cast(GtkSortListModel*)this._cPtr);
@@ -218,7 +218,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
       Gets the model currently sorted or null if none.
       Returns: The model that gets sorted
   */
-  gio.list_model.ListModel getModel()
+  gio.list_model.ListModel getModel() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_sort_list_model_get_model(cast(GtkSortListModel*)this._cPtr);
@@ -246,7 +246,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
       function returns 0.
       Returns: a progress estimate of remaining items to sort
   */
-  uint getPending()
+  uint getPending() nothrow
   {
     uint _retval;
     _retval = gtk_sort_list_model_get_pending(cast(GtkSortListModel*)this._cPtr);
@@ -258,7 +258,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
       sections.
       Returns: the sorter of #self
   */
-  gtk.sorter.Sorter getSectionSorter()
+  gtk.sorter.Sorter getSectionSorter() nothrow
   {
     GtkSorter* _cretval;
     _cretval = gtk_sort_list_model_get_section_sorter(cast(GtkSortListModel*)this._cPtr);
@@ -270,7 +270,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
       Gets the sorter that is used to sort self.
       Returns: the sorter of #self
   */
-  gtk.sorter.Sorter getSorter()
+  gtk.sorter.Sorter getSorter() nothrow
   {
     GtkSorter* _cretval;
     _cretval = gtk_sort_list_model_get_sorter(cast(GtkSortListModel*)this._cPtr);
@@ -299,7 +299,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
       Params:
         incremental = true to sort incrementally
   */
-  void setIncremental(bool incremental)
+  void setIncremental(bool incremental) nothrow
   {
     gtk_sort_list_model_set_incremental(cast(GtkSortListModel*)this._cPtr, incremental);
   }
@@ -312,7 +312,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
       Params:
         model = The model to be sorted
   */
-  void setModel(gio.list_model.ListModel model = null)
+  void setModel(gio.list_model.ListModel model = null) nothrow
   {
     gtk_sort_list_model_set_model(cast(GtkSortListModel*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
@@ -323,7 +323,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
       Params:
         sorter = the [gtk.sorter.Sorter] to sort model with
   */
-  void setSectionSorter(gtk.sorter.Sorter sorter = null)
+  void setSectionSorter(gtk.sorter.Sorter sorter = null) nothrow
   {
     gtk_sort_list_model_set_section_sorter(cast(GtkSortListModel*)this._cPtr, sorter ? cast(GtkSorter*)sorter._cPtr(No.Dup) : null);
   }
@@ -334,7 +334,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
       Params:
         sorter = the [gtk.sorter.Sorter] to sort model with
   */
-  void setSorter(gtk.sorter.Sorter sorter = null)
+  void setSorter(gtk.sorter.Sorter sorter = null) nothrow
   {
     gtk_sort_list_model_set_sorter(cast(GtkSortListModel*)this._cPtr, sorter ? cast(GtkSorter*)sorter._cPtr(No.Dup) : null);
   }
@@ -353,7 +353,7 @@ class SortListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = If the model should sort items incrementally.
       Returns: Builder instance for fluent chaining
   */
-  T incremental(bool propval)
+  T incremental(bool propval) nothrow
   {
     return setProperty("incremental", propval);
   }
@@ -364,7 +364,7 @@ class SortListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The model being sorted.
       Returns: Builder instance for fluent chaining
   */
-  T model(gio.list_model.ListModel propval)
+  T model(gio.list_model.ListModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -375,7 +375,7 @@ class SortListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The section sorter for this model, if one is set.
       Returns: Builder instance for fluent chaining
   */
-  T sectionSorter(gtk.sorter.Sorter propval)
+  T sectionSorter(gtk.sorter.Sorter propval) nothrow
   {
     return setProperty("section-sorter", propval);
   }
@@ -386,7 +386,7 @@ class SortListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The sorter for this model.
       Returns: Builder instance for fluent chaining
   */
-  T sorter(gtk.sorter.Sorter propval)
+  T sorter(gtk.sorter.Sorter propval) nothrow
   {
     return setProperty("sorter", propval);
   }
@@ -399,7 +399,7 @@ final class SortListModelGidBuilder : SortListModelGidBuilderImpl!SortListModelG
       Create object from builder.
       Returns: New object
   */
-  SortListModel build()
+  SortListModel build() nothrow
   {
     return new SortListModel(cast(void*)createGObject(SortListModel._getGType), Yes.Take);
   }

@@ -14,7 +14,7 @@ struct VulkanError
   alias Enum = gdk.types.VulkanError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gdk_vulkan_error_quark();
@@ -24,12 +24,12 @@ struct VulkanError
 
 class VulkanException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gdk.vulkan_error.VulkanError.quark, cast(int)code, msg);
   }

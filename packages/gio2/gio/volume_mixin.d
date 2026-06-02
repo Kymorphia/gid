@@ -69,7 +69,7 @@ template VolumeT()
       Checks if a volume can be ejected.
       Returns: true if the volume can be ejected. false otherwise
   */
-  override bool canEject()
+  override bool canEject() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_volume_can_eject(cast(GVolume*)this._cPtr);
@@ -80,7 +80,7 @@ template VolumeT()
       Checks if a volume can be mounted.
       Returns: true if the volume can be mounted. false otherwise
   */
-  override bool canMount()
+  override bool canMount() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_volume_can_mount(cast(GVolume*)this._cPtr);
@@ -99,14 +99,21 @@ template VolumeT()
   
       Deprecated: Use [gio.volume.Volume.ejectWithOperation] instead.
   */
-  override void eject(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  override void eject(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -146,14 +153,21 @@ template VolumeT()
         cancellable = optional #GCancellable object, null to ignore
         callback = a #GAsyncReadyCallback, or null
   */
-  override void ejectWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  override void ejectWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -185,7 +199,7 @@ template VolumeT()
       Returns: a null-terminated array
           of strings containing kinds of identifiers. Use [glib.global.strfreev] to free.
   */
-  override string[] enumerateIdentifiers()
+  override string[] enumerateIdentifiers() nothrow
   {
     char** _cretval;
     _cretval = g_volume_enumerate_identifiers(cast(GVolume*)this._cPtr);
@@ -234,7 +248,7 @@ template VolumeT()
       Returns: the activation root of volume
             or null. Use [gobject.object.ObjectWrap.unref] to free.
   */
-  override gio.file.File getActivationRoot()
+  override gio.file.File getActivationRoot() nothrow
   {
     GFile* _cretval;
     _cretval = g_volume_get_activation_root(cast(GVolume*)this._cPtr);
@@ -248,7 +262,7 @@ template VolumeT()
             associated with a drive. The returned object should be unreffed
             with [gobject.object.ObjectWrap.unref] when no longer needed.
   */
-  override gio.drive.Drive getDrive()
+  override gio.drive.Drive getDrive() nothrow
   {
     GDrive* _cretval;
     _cretval = g_volume_get_drive(cast(GVolume*)this._cPtr);
@@ -262,7 +276,7 @@ template VolumeT()
             The returned object should be unreffed with [gobject.object.ObjectWrap.unref]
             when no longer needed.
   */
-  override gio.icon.Icon getIcon()
+  override gio.icon.Icon getIcon() nothrow
   {
     GIcon* _cretval;
     _cretval = g_volume_get_icon(cast(GVolume*)this._cPtr);
@@ -281,7 +295,7 @@ template VolumeT()
             requested identifier, or null if the #GVolume
             doesn't have this kind of identifier
   */
-  override string getIdentifier(string kind)
+  override string getIdentifier(string kind) nothrow
   {
     char* _cretval;
     const(char)* _kind = kind.toCString(No.Alloc);
@@ -296,7 +310,7 @@ template VolumeT()
             The returned object should be unreffed with [gobject.object.ObjectWrap.unref]
             when no longer needed.
   */
-  override gio.mount.Mount getMount()
+  override gio.mount.Mount getMount() nothrow
   {
     GMount* _cretval;
     _cretval = g_volume_get_mount(cast(GVolume*)this._cPtr);
@@ -309,7 +323,7 @@ template VolumeT()
       Returns: the name for the given volume. The returned string should
             be freed with [glib.global.gfree] when no longer needed.
   */
-  override string getName()
+  override string getName() nothrow
   {
     char* _cretval;
     _cretval = g_volume_get_name(cast(GVolume*)this._cPtr);
@@ -321,7 +335,7 @@ template VolumeT()
       Gets the sort key for volume, if any.
       Returns: Sorting key for volume or null if no such key is available
   */
-  override string getSortKey()
+  override string getSortKey() nothrow
   {
     const(char)* _cretval;
     _cretval = g_volume_get_sort_key(cast(GVolume*)this._cPtr);
@@ -335,7 +349,7 @@ template VolumeT()
             The returned object should be unreffed with [gobject.object.ObjectWrap.unref]
             when no longer needed.
   */
-  override gio.icon.Icon getSymbolicIcon()
+  override gio.icon.Icon getSymbolicIcon() nothrow
   {
     GIcon* _cretval;
     _cretval = g_volume_get_symbolic_icon(cast(GVolume*)this._cPtr);
@@ -353,7 +367,7 @@ template VolumeT()
             The returned string should be freed with [glib.global.gfree]
             when no longer needed.
   */
-  override string getUuid()
+  override string getUuid() nothrow
   {
     char* _cretval;
     _cretval = g_volume_get_uuid(cast(GVolume*)this._cPtr);
@@ -372,14 +386,21 @@ template VolumeT()
         cancellable = optional #GCancellable object, null to ignore
         callback = a #GAsyncReadyCallback, or null
   */
-  override void mount(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  override void mount(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -414,7 +435,7 @@ template VolumeT()
       Returns whether the volume should be automatically mounted.
       Returns: true if the volume should be automatically mounted
   */
-  override bool shouldAutomount()
+  override bool shouldAutomount() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_volume_should_automount(cast(GVolume*)this._cPtr);
@@ -436,13 +457,13 @@ template VolumeT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.volume.Volume)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -451,7 +472,14 @@ template VolumeT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.volume.Volume.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -475,13 +503,13 @@ template VolumeT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.volume.Volume)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -490,7 +518,14 @@ template VolumeT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.volume.Volume.removed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

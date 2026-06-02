@@ -17,24 +17,21 @@ class VariantIter
   GVariantIter _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.variant_iter.VariantIter");
-
     _cInstance = *cast(GVariantIter*)ptr;
 
     if (take)
       gFree(ptr);
   }
 
-  ~this()
+  ~this() nothrow
   {
     g_variant_iter_free(&_cInstance);
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -47,7 +44,7 @@ class VariantIter
       This function might be useful for preallocation of arrays.
       Returns: the number of children in the container
   */
-  size_t nChildren()
+  size_t nChildren() nothrow
   {
     size_t _retval;
     _retval = g_variant_iter_n_children(cast(GVariantIter*)this._cPtr);
@@ -84,7 +81,7 @@ class VariantIter
       ```
       Returns: a #GVariant, or null
   */
-  glib.variant.Variant nextValue()
+  glib.variant.Variant nextValue() nothrow
   {
     GVariant* _cretval;
     _cretval = g_variant_iter_next_value(cast(GVariantIter*)this._cPtr);

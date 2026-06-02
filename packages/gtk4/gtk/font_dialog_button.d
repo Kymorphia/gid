@@ -43,26 +43,26 @@ class FontDialogButton : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_font_dialog_button_get_type != &gidSymbolNotFound ? gtk_font_dialog_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FontDialogButton self()
+  override FontDialogButton self() nothrow
   {
     return this;
   }
@@ -71,7 +71,7 @@ class FontDialogButton : gtk.widget.Widget
       Get builder for [gtk.font_dialog_button.FontDialogButton]
       Returns: New builder object
   */
-  static FontDialogButtonGidBuilder builder()
+  static FontDialogButtonGidBuilder builder() nothrow
   {
     return new FontDialogButtonGidBuilder;
   }
@@ -81,7 +81,7 @@ class FontDialogButton : gtk.widget.Widget
       Returns: The [gtk.font_dialog.FontDialog] that contains parameters for
         the font chooser dialog.
   */
-  @property gtk.font_dialog.FontDialog dialog()
+  @property gtk.font_dialog.FontDialog dialog() nothrow
   {
     return getDialog();
   }
@@ -92,7 +92,7 @@ class FontDialogButton : gtk.widget.Widget
         propval = The [gtk.font_dialog.FontDialog] that contains parameters for
           the font chooser dialog.
   */
-  @property void dialog(gtk.font_dialog.FontDialog propval)
+  @property void dialog(gtk.font_dialog.FontDialog propval) nothrow
   {
     setDialog(propval);
   }
@@ -108,7 +108,7 @@ class FontDialogButton : gtk.widget.Widget
         Listen to `notify::font-desc` to get informed about changes
         to the buttons font.
   */
-  @property pango.font_description.FontDescription fontDesc()
+  @property pango.font_description.FontDescription fontDesc() nothrow
   {
     return getFontDesc();
   }
@@ -125,7 +125,7 @@ class FontDialogButton : gtk.widget.Widget
           Listen to `notify::font-desc` to get informed about changes
           to the buttons font.
   */
-  @property void fontDesc(pango.font_description.FontDescription propval)
+  @property void fontDesc(pango.font_description.FontDescription propval) nothrow
   {
     setFontDesc(propval);
   }
@@ -140,7 +140,7 @@ class FontDialogButton : gtk.widget.Widget
         Listen to `notify::font-features` to get informed about changes
         to the buttons font features.
   */
-  @property string fontFeatures()
+  @property string fontFeatures() nothrow
   {
     return getFontFeatures();
   }
@@ -156,7 +156,7 @@ class FontDialogButton : gtk.widget.Widget
           Listen to `notify::font-features` to get informed about changes
           to the buttons font features.
   */
-  @property void fontFeatures(string propval)
+  @property void fontFeatures(string propval) nothrow
   {
     setFontFeatures(propval);
   }
@@ -171,7 +171,7 @@ class FontDialogButton : gtk.widget.Widget
         Listen to `notify::language` to get informed about changes
         to the buttons language.
   */
-  @property pango.language.Language language()
+  @property pango.language.Language language() nothrow
   {
     return getLanguage();
   }
@@ -187,7 +187,7 @@ class FontDialogButton : gtk.widget.Widget
           Listen to `notify::language` to get informed about changes
           to the buttons language.
   */
-  @property void language(pango.language.Language propval)
+  @property void language(pango.language.Language propval) nothrow
   {
     setLanguage(propval);
   }
@@ -196,7 +196,7 @@ class FontDialogButton : gtk.widget.Widget
       Get `level` property.
       Returns: The level of detail for the font chooser dialog.
   */
-  @property gtk.types.FontLevel level()
+  @property gtk.types.FontLevel level() nothrow
   {
     return getLevel();
   }
@@ -206,7 +206,7 @@ class FontDialogButton : gtk.widget.Widget
       Params:
         propval = The level of detail for the font chooser dialog.
   */
-  @property void level(gtk.types.FontLevel propval)
+  @property void level(gtk.types.FontLevel propval) nothrow
   {
     setLevel(propval);
   }
@@ -215,7 +215,7 @@ class FontDialogButton : gtk.widget.Widget
       Get `useFont` property.
       Returns: Whether the buttons label will be drawn in the selected font.
   */
-  @property bool useFont()
+  @property bool useFont() nothrow
   {
     return getUseFont();
   }
@@ -225,7 +225,7 @@ class FontDialogButton : gtk.widget.Widget
       Params:
         propval = Whether the buttons label will be drawn in the selected font.
   */
-  @property void useFont(bool propval)
+  @property void useFont(bool propval) nothrow
   {
     setUseFont(propval);
   }
@@ -234,7 +234,7 @@ class FontDialogButton : gtk.widget.Widget
       Get `useSize` property.
       Returns: Whether the buttons label will use the selected font size.
   */
-  @property bool useSize()
+  @property bool useSize() nothrow
   {
     return getUseSize();
   }
@@ -244,7 +244,7 @@ class FontDialogButton : gtk.widget.Widget
       Params:
         propval = Whether the buttons label will use the selected font size.
   */
-  @property void useSize(bool propval)
+  @property void useSize(bool propval) nothrow
   {
     setUseSize(propval);
   }
@@ -260,7 +260,7 @@ class FontDialogButton : gtk.widget.Widget
         dialog = the [gtk.font_dialog.FontDialog] to use
       Returns: the new [gtk.font_dialog_button.FontDialogButton]
   */
-  this(gtk.font_dialog.FontDialog dialog = null)
+  this(gtk.font_dialog.FontDialog dialog = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_font_dialog_button_new(dialog ? cast(GtkFontDialog*)dialog._cPtr(Yes.Dup) : null);
@@ -271,7 +271,7 @@ class FontDialogButton : gtk.widget.Widget
       Returns the [gtk.font_dialog.FontDialog] of self.
       Returns: the [gtk.font_dialog.FontDialog]
   */
-  gtk.font_dialog.FontDialog getDialog()
+  gtk.font_dialog.FontDialog getDialog() nothrow
   {
     GtkFontDialog* _cretval;
     _cretval = gtk_font_dialog_button_get_dialog(cast(GtkFontDialogButton*)this._cPtr);
@@ -287,7 +287,7 @@ class FontDialogButton : gtk.widget.Widget
       informed about changes, listen to "notify::font-desc".
       Returns: the font
   */
-  pango.font_description.FontDescription getFontDesc()
+  pango.font_description.FontDescription getFontDesc() nothrow
   {
     PangoFontDescription* _cretval;
     _cretval = gtk_font_dialog_button_get_font_desc(cast(GtkFontDialogButton*)this._cPtr);
@@ -307,7 +307,7 @@ class FontDialogButton : gtk.widget.Widget
       [gtk.types.FontLevel.Features].
       Returns: the font features
   */
-  string getFontFeatures()
+  string getFontFeatures() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_font_dialog_button_get_font_features(cast(GtkFontDialogButton*)this._cPtr);
@@ -319,7 +319,7 @@ class FontDialogButton : gtk.widget.Widget
       Returns the language that is used for font features.
       Returns: the language
   */
-  pango.language.Language getLanguage()
+  pango.language.Language getLanguage() nothrow
   {
     PangoLanguage* _cretval;
     _cretval = gtk_font_dialog_button_get_language(cast(GtkFontDialogButton*)this._cPtr);
@@ -332,7 +332,7 @@ class FontDialogButton : gtk.widget.Widget
       lets the user select fonts.
       Returns: the level of detail
   */
-  gtk.types.FontLevel getLevel()
+  gtk.types.FontLevel getLevel() nothrow
   {
     GtkFontLevel _cretval;
     _cretval = gtk_font_dialog_button_get_level(cast(GtkFontDialogButton*)this._cPtr);
@@ -344,7 +344,7 @@ class FontDialogButton : gtk.widget.Widget
       Returns whether the selected font is used in the label.
       Returns: whether the selected font is used in the label
   */
-  bool getUseFont()
+  bool getUseFont() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_font_dialog_button_get_use_font(cast(GtkFontDialogButton*)this._cPtr);
@@ -355,7 +355,7 @@ class FontDialogButton : gtk.widget.Widget
       Returns whether the selected font size is used in the label.
       Returns: whether the selected font size is used in the label
   */
-  bool getUseSize()
+  bool getUseSize() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_font_dialog_button_get_use_size(cast(GtkFontDialogButton*)this._cPtr);
@@ -370,7 +370,7 @@ class FontDialogButton : gtk.widget.Widget
       Params:
         dialog = the new [gtk.font_dialog.FontDialog]
   */
-  void setDialog(gtk.font_dialog.FontDialog dialog)
+  void setDialog(gtk.font_dialog.FontDialog dialog) nothrow
   {
     gtk_font_dialog_button_set_dialog(cast(GtkFontDialogButton*)this._cPtr, dialog ? cast(GtkFontDialog*)dialog._cPtr(No.Dup) : null);
   }
@@ -381,7 +381,7 @@ class FontDialogButton : gtk.widget.Widget
       Params:
         fontDesc = the new font
   */
-  void setFontDesc(pango.font_description.FontDescription fontDesc)
+  void setFontDesc(pango.font_description.FontDescription fontDesc) nothrow
   {
     gtk_font_dialog_button_set_font_desc(cast(GtkFontDialogButton*)this._cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc._cPtr(No.Dup) : null);
   }
@@ -392,7 +392,7 @@ class FontDialogButton : gtk.widget.Widget
       Params:
         fontFeatures = the font features
   */
-  void setFontFeatures(string fontFeatures = null)
+  void setFontFeatures(string fontFeatures = null) nothrow
   {
     const(char)* _fontFeatures = fontFeatures.toCString(No.Alloc);
     gtk_font_dialog_button_set_font_features(cast(GtkFontDialogButton*)this._cPtr, _fontFeatures);
@@ -404,7 +404,7 @@ class FontDialogButton : gtk.widget.Widget
       Params:
         language = the new language
   */
-  void setLanguage(pango.language.Language language = null)
+  void setLanguage(pango.language.Language language = null) nothrow
   {
     gtk_font_dialog_button_set_language(cast(GtkFontDialogButton*)this._cPtr, language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);
   }
@@ -416,7 +416,7 @@ class FontDialogButton : gtk.widget.Widget
       Params:
         level = the level of detail
   */
-  void setLevel(gtk.types.FontLevel level)
+  void setLevel(gtk.types.FontLevel level) nothrow
   {
     gtk_font_dialog_button_set_level(cast(GtkFontDialogButton*)this._cPtr, level);
   }
@@ -429,7 +429,7 @@ class FontDialogButton : gtk.widget.Widget
         useFont = If `TRUE`, font name will be written using
             the chosen font
   */
-  void setUseFont(bool useFont)
+  void setUseFont(bool useFont) nothrow
   {
     gtk_font_dialog_button_set_use_font(cast(GtkFontDialogButton*)this._cPtr, useFont);
   }
@@ -442,7 +442,7 @@ class FontDialogButton : gtk.widget.Widget
         useSize = If `TRUE`, font name will be written using
             the chosen font size
   */
-  void setUseSize(bool useSize)
+  void setUseSize(bool useSize) nothrow
   {
     gtk_font_dialog_button_set_use_size(cast(GtkFontDialogButton*)this._cPtr, useSize);
   }
@@ -465,13 +465,13 @@ class FontDialogButton : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.font_dialog_button.FontDialogButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -480,7 +480,14 @@ class FontDialogButton : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.font_dialog_button.FontDialogButton.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -500,7 +507,7 @@ class FontDialogButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           the font chooser dialog.
       Returns: Builder instance for fluent chaining
   */
-  T dialog(gtk.font_dialog.FontDialog propval)
+  T dialog(gtk.font_dialog.FontDialog propval) nothrow
   {
     return setProperty("dialog", propval);
   }
@@ -518,7 +525,7 @@ class FontDialogButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           to the buttons font.
       Returns: Builder instance for fluent chaining
   */
-  T fontDesc(pango.font_description.FontDescription propval)
+  T fontDesc(pango.font_description.FontDescription propval) nothrow
   {
     return setProperty("font-desc", propval);
   }
@@ -535,7 +542,7 @@ class FontDialogButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           to the buttons font features.
       Returns: Builder instance for fluent chaining
   */
-  T fontFeatures(string propval)
+  T fontFeatures(string propval) nothrow
   {
     return setProperty("font-features", propval);
   }
@@ -552,7 +559,7 @@ class FontDialogButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           to the buttons language.
       Returns: Builder instance for fluent chaining
   */
-  T language(pango.language.Language propval)
+  T language(pango.language.Language propval) nothrow
   {
     return setProperty("language", propval);
   }
@@ -563,7 +570,7 @@ class FontDialogButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The level of detail for the font chooser dialog.
       Returns: Builder instance for fluent chaining
   */
-  T level(gtk.types.FontLevel propval)
+  T level(gtk.types.FontLevel propval) nothrow
   {
     return setProperty("level", propval);
   }
@@ -574,7 +581,7 @@ class FontDialogButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether the buttons label will be drawn in the selected font.
       Returns: Builder instance for fluent chaining
   */
-  T useFont(bool propval)
+  T useFont(bool propval) nothrow
   {
     return setProperty("use-font", propval);
   }
@@ -585,7 +592,7 @@ class FontDialogButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether the buttons label will use the selected font size.
       Returns: Builder instance for fluent chaining
   */
-  T useSize(bool propval)
+  T useSize(bool propval) nothrow
   {
     return setProperty("use-size", propval);
   }
@@ -598,7 +605,7 @@ final class FontDialogButtonGidBuilder : FontDialogButtonGidBuilderImpl!FontDial
       Create object from builder.
       Returns: New object
   */
-  FontDialogButton build()
+  FontDialogButton build() nothrow
   {
     return new FontDialogButton(cast(void*)createGObject(FontDialogButton._getGType), No.Take);
   }

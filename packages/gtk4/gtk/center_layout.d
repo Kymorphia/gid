@@ -24,26 +24,26 @@ class CenterLayout : gtk.layout_manager.LayoutManager
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_center_layout_get_type != &gidSymbolNotFound ? gtk_center_layout_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CenterLayout self()
+  override CenterLayout self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
       Get builder for [gtk.center_layout.CenterLayout]
       Returns: New builder object
   */
-  static CenterLayoutGidBuilder builder()
+  static CenterLayoutGidBuilder builder() nothrow
   {
     return new CenterLayoutGidBuilder;
   }
@@ -68,7 +68,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
         If set to `FALSE`, start and end widgets keep natural width and the
         center widget starts shrinking instead.
   */
-  @property bool shrinkCenterLast()
+  @property bool shrinkCenterLast() nothrow
   {
     return getShrinkCenterLast();
   }
@@ -85,7 +85,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
           If set to `FALSE`, start and end widgets keep natural width and the
           center widget starts shrinking instead.
   */
-  @property void shrinkCenterLast(bool propval)
+  @property void shrinkCenterLast(bool propval) nothrow
   {
     setShrinkCenterLast(propval);
   }
@@ -94,7 +94,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
       Creates a new [gtk.center_layout.CenterLayout].
       Returns: the newly created [gtk.center_layout.CenterLayout]
   */
-  this()
+  this() nothrow
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_center_layout_new();
@@ -105,7 +105,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
       Returns the baseline position of the layout.
       Returns: The current baseline position of self.
   */
-  gtk.types.BaselinePosition getBaselinePosition()
+  gtk.types.BaselinePosition getBaselinePosition() nothrow
   {
     GtkBaselinePosition _cretval;
     _cretval = gtk_center_layout_get_baseline_position(cast(GtkCenterLayout*)this._cPtr);
@@ -117,7 +117,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
       Returns the center widget of the layout.
       Returns: the current center widget of self
   */
-  gtk.widget.Widget getCenterWidget()
+  gtk.widget.Widget getCenterWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_layout_get_center_widget(cast(GtkCenterLayout*)this._cPtr);
@@ -129,7 +129,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
       Returns the end widget of the layout.
       Returns: the current end widget of self
   */
-  gtk.widget.Widget getEndWidget()
+  gtk.widget.Widget getEndWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_layout_get_end_widget(cast(GtkCenterLayout*)this._cPtr);
@@ -141,7 +141,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
       Gets the current orienration of the layout manager.
       Returns: The current orientation of self
   */
-  gtk.types.Orientation getOrientation()
+  gtk.types.Orientation getOrientation() nothrow
   {
     GtkOrientation _cretval;
     _cretval = gtk_center_layout_get_orientation(cast(GtkCenterLayout*)this._cPtr);
@@ -153,7 +153,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
       Gets whether self shrinks the center widget after other children.
       Returns: whether to shrink the center widget after others
   */
-  bool getShrinkCenterLast()
+  bool getShrinkCenterLast() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_center_layout_get_shrink_center_last(cast(GtkCenterLayout*)this._cPtr);
@@ -164,7 +164,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
       Returns the start widget of the layout.
       Returns: The current start widget of self
   */
-  gtk.widget.Widget getStartWidget()
+  gtk.widget.Widget getStartWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_layout_get_start_widget(cast(GtkCenterLayout*)this._cPtr);
@@ -178,7 +178,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
       Params:
         baselinePosition = the new baseline position
   */
-  void setBaselinePosition(gtk.types.BaselinePosition baselinePosition)
+  void setBaselinePosition(gtk.types.BaselinePosition baselinePosition) nothrow
   {
     gtk_center_layout_set_baseline_position(cast(GtkCenterLayout*)this._cPtr, baselinePosition);
   }
@@ -191,7 +191,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
       Params:
         widget = the new center widget
   */
-  void setCenterWidget(gtk.widget.Widget widget = null)
+  void setCenterWidget(gtk.widget.Widget widget = null) nothrow
   {
     gtk_center_layout_set_center_widget(cast(GtkCenterLayout*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -204,7 +204,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
       Params:
         widget = the new end widget
   */
-  void setEndWidget(gtk.widget.Widget widget = null)
+  void setEndWidget(gtk.widget.Widget widget = null) nothrow
   {
     gtk_center_layout_set_end_widget(cast(GtkCenterLayout*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -215,7 +215,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
       Params:
         orientation = the new orientation
   */
-  void setOrientation(gtk.types.Orientation orientation)
+  void setOrientation(gtk.types.Orientation orientation) nothrow
   {
     gtk_center_layout_set_orientation(cast(GtkCenterLayout*)this._cPtr, orientation);
   }
@@ -233,7 +233,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
       Params:
         shrinkCenterLast = whether to shrink the center widget after others
   */
-  void setShrinkCenterLast(bool shrinkCenterLast)
+  void setShrinkCenterLast(bool shrinkCenterLast) nothrow
   {
     gtk_center_layout_set_shrink_center_last(cast(GtkCenterLayout*)this._cPtr, shrinkCenterLast);
   }
@@ -246,7 +246,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
       Params:
         widget = the new start widget
   */
-  void setStartWidget(gtk.widget.Widget widget = null)
+  void setStartWidget(gtk.widget.Widget widget = null) nothrow
   {
     gtk_center_layout_set_start_widget(cast(GtkCenterLayout*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -269,7 +269,7 @@ class CenterLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilder
           center widget starts shrinking instead.
       Returns: Builder instance for fluent chaining
   */
-  T shrinkCenterLast(bool propval)
+  T shrinkCenterLast(bool propval) nothrow
   {
     return setProperty("shrink-center-last", propval);
   }
@@ -282,7 +282,7 @@ final class CenterLayoutGidBuilder : CenterLayoutGidBuilderImpl!CenterLayoutGidB
       Create object from builder.
       Returns: New object
   */
-  CenterLayout build()
+  CenterLayout build() nothrow
   {
     return new CenterLayout(cast(void*)createGObject(CenterLayout._getGType), Yes.Take);
   }

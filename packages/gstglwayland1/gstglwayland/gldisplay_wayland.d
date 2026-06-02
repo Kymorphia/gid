@@ -18,26 +18,26 @@ class GLDisplayWayland : gstgl.gldisplay.GLDisplay
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_display_wayland_get_type != &gidSymbolNotFound ? gst_gl_display_wayland_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLDisplayWayland self()
+  override GLDisplayWayland self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class GLDisplayWayland : gstgl.gldisplay.GLDisplay
       Get builder for [gstglwayland.gldisplay_wayland.GLDisplayWayland]
       Returns: New builder object
   */
-  static GLDisplayWaylandGidBuilder builder()
+  static GLDisplayWaylandGidBuilder builder() nothrow
   {
     return new GLDisplayWaylandGidBuilder;
   }
@@ -59,7 +59,7 @@ class GLDisplayWayland : gstgl.gldisplay.GLDisplay
         name = a display name
       Returns: a new #GstGLDisplayWayland or null
   */
-  this(string name = null)
+  this(string name = null) nothrow
   {
     GstGLDisplayWayland* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -74,7 +74,7 @@ class GLDisplayWayland : gstgl.gldisplay.GLDisplay
         display = an existing, wayland display
       Returns: a new #GstGLDisplayWayland
   */
-  static gstglwayland.gldisplay_wayland.GLDisplayWayland newWithDisplay(void* display = null)
+  static gstglwayland.gldisplay_wayland.GLDisplayWayland newWithDisplay(void* display = null) nothrow
   {
     GstGLDisplayWayland* _cretval;
     _cretval = gst_gl_display_wayland_new_with_display(display);
@@ -95,7 +95,7 @@ final class GLDisplayWaylandGidBuilder : GLDisplayWaylandGidBuilderImpl!GLDispla
       Create object from builder.
       Returns: New object
   */
-  GLDisplayWayland build()
+  GLDisplayWayland build() nothrow
   {
     return new GLDisplayWayland(cast(void*)createGObject(GLDisplayWayland._getGType), Yes.Take);
   }

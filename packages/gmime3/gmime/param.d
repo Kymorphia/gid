@@ -16,26 +16,26 @@ class Param : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_param_get_type != &gidSymbolNotFound ? g_mime_param_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Param self()
+  override Param self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class Param : gobject.object.ObjectWrap
       Get builder for [gmime.param.Param]
       Returns: New builder object
   */
-  static ParamGidBuilder builder()
+  static ParamGidBuilder builder() nothrow
   {
     return new ParamGidBuilder;
   }
@@ -53,7 +53,7 @@ class Param : gobject.object.ObjectWrap
       Gets the charset used for encoding the parameter.
       Returns: the charset used for encoding the parameter.
   */
-  string getCharset()
+  string getCharset() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_param_get_charset(cast(GMimeParam*)this._cPtr);
@@ -65,7 +65,7 @@ class Param : gobject.object.ObjectWrap
       Gets the encoding method used for encoding the parameter.
       Returns: the encoding method used for encoding the parameter.
   */
-  gmime.types.ParamEncodingMethod getEncodingMethod()
+  gmime.types.ParamEncodingMethod getEncodingMethod() nothrow
   {
     GMimeParamEncodingMethod _cretval;
     _cretval = g_mime_param_get_encoding_method(cast(GMimeParam*)this._cPtr);
@@ -77,7 +77,7 @@ class Param : gobject.object.ObjectWrap
       Gets the language specifier used for encoding the parameter.
       Returns: the language specifier used for encoding the parameter.
   */
-  string getLang()
+  string getLang() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_param_get_lang(cast(GMimeParam*)this._cPtr);
@@ -89,7 +89,7 @@ class Param : gobject.object.ObjectWrap
       Gets the name of the parameter.
       Returns: the name of the parameter.
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_param_get_name(cast(GMimeParam*)this._cPtr);
@@ -101,7 +101,7 @@ class Param : gobject.object.ObjectWrap
       Gets the value of the parameter.
       Returns: the value of the parameter.
   */
-  string getValue()
+  string getValue() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_param_get_value(cast(GMimeParam*)this._cPtr);
@@ -115,7 +115,7 @@ class Param : gobject.object.ObjectWrap
       Params:
         charset = the charset or null to use the default
   */
-  void setCharset(string charset)
+  void setCharset(string charset) nothrow
   {
     const(char)* _charset = charset.toCString(No.Alloc);
     g_mime_param_set_charset(cast(GMimeParam*)this._cPtr, _charset);
@@ -127,7 +127,7 @@ class Param : gobject.object.ObjectWrap
       Params:
         method = a #GMimeParamEncodingMethod
   */
-  void setEncodingMethod(gmime.types.ParamEncodingMethod method)
+  void setEncodingMethod(gmime.types.ParamEncodingMethod method) nothrow
   {
     g_mime_param_set_encoding_method(cast(GMimeParam*)this._cPtr, method);
   }
@@ -138,7 +138,7 @@ class Param : gobject.object.ObjectWrap
       Params:
         lang = the language specifier
   */
-  void setLang(string lang)
+  void setLang(string lang) nothrow
   {
     const(char)* _lang = lang.toCString(No.Alloc);
     g_mime_param_set_lang(cast(GMimeParam*)this._cPtr, _lang);
@@ -150,7 +150,7 @@ class Param : gobject.object.ObjectWrap
       Params:
         value = the new parameter value
   */
-  void setValue(string value)
+  void setValue(string value) nothrow
   {
     const(char)* _value = value.toCString(No.Alloc);
     g_mime_param_set_value(cast(GMimeParam*)this._cPtr, _value);
@@ -169,7 +169,7 @@ final class ParamGidBuilder : ParamGidBuilderImpl!ParamGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Param build()
+  Param build() nothrow
   {
     return new Param(cast(void*)createGObject(Param._getGType), No.Take);
   }

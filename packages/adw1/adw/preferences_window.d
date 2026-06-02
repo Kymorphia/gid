@@ -46,26 +46,26 @@ class PreferencesWindow : adw.window.Window
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_preferences_window_get_type != &gidSymbolNotFound ? adw_preferences_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PreferencesWindow self()
+  override PreferencesWindow self() nothrow
   {
     return this;
   }
@@ -74,7 +74,7 @@ class PreferencesWindow : adw.window.Window
       Get builder for [adw.preferences_window.PreferencesWindow]
       Returns: New builder object
   */
-  static PreferencesWindowGidBuilder builder()
+  static PreferencesWindowGidBuilder builder() nothrow
   {
     return new PreferencesWindowGidBuilder;
   }
@@ -99,7 +99,7 @@ class PreferencesWindow : adw.window.Window
         Has no effect for subpages added with
         [adw.preferences_window.PreferencesWindow.pushSubpage].
   */
-  @property bool canNavigateBack()
+  @property bool canNavigateBack() nothrow
   {
     return getCanNavigateBack();
   }
@@ -125,7 +125,7 @@ class PreferencesWindow : adw.window.Window
         Has no effect for subpages added with
         [adw.preferences_window.PreferencesWindow.pushSubpage].
   */
-  @property void canNavigateBack(bool propval)
+  @property void canNavigateBack(bool propval) nothrow
   {
     setCanNavigateBack(propval);
   }
@@ -134,7 +134,7 @@ class PreferencesWindow : adw.window.Window
       Get `searchEnabled` property.
       Returns: Whether search is enabled.
   */
-  @property bool searchEnabled()
+  @property bool searchEnabled() nothrow
   {
     return getSearchEnabled();
   }
@@ -144,7 +144,7 @@ class PreferencesWindow : adw.window.Window
       Params:
         propval = Whether search is enabled.
   */
-  @property void searchEnabled(bool propval)
+  @property void searchEnabled(bool propval) nothrow
   {
     setSearchEnabled(propval);
   }
@@ -153,7 +153,7 @@ class PreferencesWindow : adw.window.Window
       Get `visiblePage` property.
       Returns: The currently visible page.
   */
-  @property gtk.widget.Widget visiblePage()
+  @property gtk.widget.Widget visiblePage() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.widget.Widget)("visible-page");
   }
@@ -163,7 +163,7 @@ class PreferencesWindow : adw.window.Window
       Params:
         propval = The currently visible page.
   */
-  @property void visiblePage(gtk.widget.Widget propval)
+  @property void visiblePage(gtk.widget.Widget propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.widget.Widget)("visible-page", propval);
   }
@@ -174,7 +174,7 @@ class PreferencesWindow : adw.window.Window
         
         See [adw.preferences_window.PreferencesWindow.visiblePage].
   */
-  @property string visiblePageName()
+  @property string visiblePageName() nothrow
   {
     return getVisiblePageName();
   }
@@ -186,7 +186,7 @@ class PreferencesWindow : adw.window.Window
           
           See [adw.preferences_window.PreferencesWindow.visiblePage].
   */
-  @property void visiblePageName(string propval)
+  @property void visiblePageName(string propval) nothrow
   {
     setVisiblePageName(propval);
   }
@@ -195,7 +195,7 @@ class PreferencesWindow : adw.window.Window
       Creates a new [adw.preferences_window.PreferencesWindow].
       Returns: the newly created [adw.preferences_window.PreferencesWindow]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_preferences_window_new();
@@ -208,7 +208,7 @@ class PreferencesWindow : adw.window.Window
       Params:
         page = the page to add
   */
-  void add(adw.preferences_page.PreferencesPage page)
+  void add(adw.preferences_page.PreferencesPage page) nothrow
   {
     adw_preferences_window_add(cast(AdwPreferencesWindow*)this._cPtr, page ? cast(AdwPreferencesPage*)page._cPtr(No.Dup) : null);
   }
@@ -221,7 +221,7 @@ class PreferencesWindow : adw.window.Window
       Params:
         toast = a toast
   */
-  void addToast(adw.toast.Toast toast)
+  void addToast(adw.toast.Toast toast) nothrow
   {
     adw_preferences_window_add_toast(cast(AdwPreferencesWindow*)this._cPtr, toast ? cast(AdwToast*)toast._cPtr(Yes.Dup) : null);
   }
@@ -233,7 +233,7 @@ class PreferencesWindow : adw.window.Window
   
       Deprecated: Use [adw.preferences_window.PreferencesWindow.popSubpage] instead.
   */
-  void closeSubpage()
+  void closeSubpage() nothrow
   {
     adw_preferences_window_close_subpage(cast(AdwPreferencesWindow*)this._cPtr);
   }
@@ -244,7 +244,7 @@ class PreferencesWindow : adw.window.Window
   
       Deprecated: Use [adw.navigation_page.NavigationPage.getCanPop] instead.
   */
-  bool getCanNavigateBack()
+  bool getCanNavigateBack() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_preferences_window_get_can_navigate_back(cast(AdwPreferencesWindow*)this._cPtr);
@@ -255,7 +255,7 @@ class PreferencesWindow : adw.window.Window
       Gets whether search is enabled for self.
       Returns: whether search is enabled for self.
   */
-  bool getSearchEnabled()
+  bool getSearchEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_preferences_window_get_search_enabled(cast(AdwPreferencesWindow*)this._cPtr);
@@ -266,7 +266,7 @@ class PreferencesWindow : adw.window.Window
       Gets the currently visible page of self.
       Returns: the visible page
   */
-  adw.preferences_page.PreferencesPage getVisiblePage()
+  adw.preferences_page.PreferencesPage getVisiblePage() nothrow
   {
     AdwPreferencesPage* _cretval;
     _cretval = adw_preferences_window_get_visible_page(cast(AdwPreferencesWindow*)this._cPtr);
@@ -278,7 +278,7 @@ class PreferencesWindow : adw.window.Window
       Gets the name of currently visible page of self.
       Returns: the name of the visible page
   */
-  string getVisiblePageName()
+  string getVisiblePageName() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_preferences_window_get_visible_page_name(cast(AdwPreferencesWindow*)this._cPtr);
@@ -290,7 +290,7 @@ class PreferencesWindow : adw.window.Window
       Pop the visible page from the subpage stack of self.
       Returns: `TRUE` if a page has been popped
   */
-  bool popSubpage()
+  bool popSubpage() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_preferences_window_pop_subpage(cast(AdwPreferencesWindow*)this._cPtr);
@@ -308,7 +308,7 @@ class PreferencesWindow : adw.window.Window
   
       Deprecated: Use [adw.preferences_window.PreferencesWindow.pushSubpage] instead.
   */
-  void presentSubpage(gtk.widget.Widget subpage)
+  void presentSubpage(gtk.widget.Widget subpage) nothrow
   {
     adw_preferences_window_present_subpage(cast(AdwPreferencesWindow*)this._cPtr, subpage ? cast(GtkWidget*)subpage._cPtr(No.Dup) : null);
   }
@@ -321,7 +321,7 @@ class PreferencesWindow : adw.window.Window
       Params:
         page = the subpage
   */
-  void pushSubpage(adw.navigation_page.NavigationPage page)
+  void pushSubpage(adw.navigation_page.NavigationPage page) nothrow
   {
     adw_preferences_window_push_subpage(cast(AdwPreferencesWindow*)this._cPtr, page ? cast(AdwNavigationPage*)page._cPtr(No.Dup) : null);
   }
@@ -332,7 +332,7 @@ class PreferencesWindow : adw.window.Window
       Params:
         page = the page to remove
   */
-  void remove(adw.preferences_page.PreferencesPage page)
+  void remove(adw.preferences_page.PreferencesPage page) nothrow
   {
     adw_preferences_window_remove(cast(AdwPreferencesWindow*)this._cPtr, page ? cast(AdwPreferencesPage*)page._cPtr(No.Dup) : null);
   }
@@ -358,7 +358,7 @@ class PreferencesWindow : adw.window.Window
         
         Has no effect for subpages added with [adw.preferences_window.PreferencesWindow.pushSubpage].
   */
-  void setCanNavigateBack(bool canNavigateBack)
+  void setCanNavigateBack(bool canNavigateBack) nothrow
   {
     adw_preferences_window_set_can_navigate_back(cast(AdwPreferencesWindow*)this._cPtr, canNavigateBack);
   }
@@ -369,7 +369,7 @@ class PreferencesWindow : adw.window.Window
       Params:
         searchEnabled = whether search is enabled
   */
-  void setSearchEnabled(bool searchEnabled)
+  void setSearchEnabled(bool searchEnabled) nothrow
   {
     adw_preferences_window_set_search_enabled(cast(AdwPreferencesWindow*)this._cPtr, searchEnabled);
   }
@@ -380,7 +380,7 @@ class PreferencesWindow : adw.window.Window
       Params:
         page = a page of self
   */
-  void setVisiblePage(adw.preferences_page.PreferencesPage page)
+  void setVisiblePage(adw.preferences_page.PreferencesPage page) nothrow
   {
     adw_preferences_window_set_visible_page(cast(AdwPreferencesWindow*)this._cPtr, page ? cast(AdwPreferencesPage*)page._cPtr(No.Dup) : null);
   }
@@ -393,7 +393,7 @@ class PreferencesWindow : adw.window.Window
       Params:
         name = the name of the page to make visible
   */
-  void setVisiblePageName(string name)
+  void setVisiblePageName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     adw_preferences_window_set_visible_page_name(cast(AdwPreferencesWindow*)this._cPtr, _name);
@@ -427,7 +427,7 @@ class PreferencesWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
         Has no effect for subpages added with
         [adw.preferences_window.PreferencesWindow.pushSubpage].
   */
-  T canNavigateBack(bool propval)
+  T canNavigateBack(bool propval) nothrow
   {
     return setProperty("can-navigate-back", propval);
   }
@@ -438,7 +438,7 @@ class PreferencesWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
         propval = Whether search is enabled.
       Returns: Builder instance for fluent chaining
   */
-  T searchEnabled(bool propval)
+  T searchEnabled(bool propval) nothrow
   {
     return setProperty("search-enabled", propval);
   }
@@ -449,7 +449,7 @@ class PreferencesWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
         propval = The currently visible page.
       Returns: Builder instance for fluent chaining
   */
-  T visiblePage(gtk.widget.Widget propval)
+  T visiblePage(gtk.widget.Widget propval) nothrow
   {
     return setProperty("visible-page", propval);
   }
@@ -462,7 +462,7 @@ class PreferencesWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           See [adw.preferences_window.PreferencesWindow.visiblePage].
       Returns: Builder instance for fluent chaining
   */
-  T visiblePageName(string propval)
+  T visiblePageName(string propval) nothrow
   {
     return setProperty("visible-page-name", propval);
   }
@@ -475,7 +475,7 @@ final class PreferencesWindowGidBuilder : PreferencesWindowGidBuilderImpl!Prefer
       Create object from builder.
       Returns: New object
   */
-  PreferencesWindow build()
+  PreferencesWindow build() nothrow
   {
     return new PreferencesWindow(cast(void*)createGObject(PreferencesWindow._getGType), No.Take);
   }

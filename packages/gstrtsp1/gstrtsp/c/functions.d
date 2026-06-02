@@ -16,7 +16,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgstrtsp-1.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // RTSPAuthCredential
   GType function() c_gst_rtsp_auth_credential_get_type; ///

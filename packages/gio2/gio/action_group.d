@@ -62,7 +62,7 @@ interface ActionGroup
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_action_group_get_type != &gidSymbolNotFound ? g_action_group_get_type() : cast(GType)0;
@@ -348,7 +348,7 @@ interface ActionGroup
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActionAdded(T)(string detail = null, T callback, Flag!"After" after = No.After);
+  gulong connectActionAdded(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `ActionEnabledChanged` signal.
@@ -370,7 +370,7 @@ interface ActionGroup
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActionEnabledChanged(T)(string detail = null, T callback, Flag!"After" after = No.After);
+  gulong connectActionEnabledChanged(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `ActionRemoved` signal.
@@ -392,7 +392,7 @@ interface ActionGroup
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActionRemoved(T)(string detail = null, T callback, Flag!"After" after = No.After);
+  gulong connectActionRemoved(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `ActionStateChanged` signal.
@@ -414,7 +414,7 @@ interface ActionGroup
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActionStateChanged(T)(string detail = null, T callback, Flag!"After" after = No.After);
+  gulong connectActionStateChanged(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gio.action_group.ActionGroup]

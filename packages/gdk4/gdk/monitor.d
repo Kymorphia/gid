@@ -25,26 +25,26 @@ class MonitorWrap : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_monitor_get_type != &gidSymbolNotFound ? gdk_monitor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MonitorWrap self()
+  override MonitorWrap self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Get builder for [gdk.monitor.MonitorWrap]
       Returns: New builder object
   */
-  static MonitorWrapGidBuilder builder()
+  static MonitorWrapGidBuilder builder() nothrow
   {
     return new MonitorWrapGidBuilder;
   }
@@ -62,7 +62,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Get `connector` property.
       Returns: The connector name.
   */
-  @property string connector()
+  @property string connector() nothrow
   {
     return getConnector();
   }
@@ -71,7 +71,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Get `description` property.
       Returns: A short description of the monitor, meant for display to the user.
   */
-  @property string description()
+  @property string description() nothrow
   {
     return getDescription();
   }
@@ -80,7 +80,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Get `display` property.
       Returns: The [gdk.display.Display] of the monitor.
   */
-  @property gdk.display.Display display()
+  @property gdk.display.Display display() nothrow
   {
     return getDisplay();
   }
@@ -89,7 +89,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Get `geometry` property.
       Returns: The geometry of the monitor.
   */
-  @property gdk.rectangle.Rectangle geometry()
+  @property gdk.rectangle.Rectangle geometry() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.rectangle.Rectangle)("geometry");
   }
@@ -98,7 +98,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Get `heightMm` property.
       Returns: The height of the monitor, in millimeters.
   */
-  @property int heightMm()
+  @property int heightMm() nothrow
   {
     return getHeightMm();
   }
@@ -107,7 +107,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Get `manufacturer` property.
       Returns: The manufacturer name.
   */
-  @property string manufacturer()
+  @property string manufacturer() nothrow
   {
     return getManufacturer();
   }
@@ -116,7 +116,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Get `model` property.
       Returns: The model name.
   */
-  @property string model()
+  @property string model() nothrow
   {
     return getModel();
   }
@@ -125,7 +125,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Get `refreshRate` property.
       Returns: The refresh rate, in milli-Hertz.
   */
-  @property int refreshRate()
+  @property int refreshRate() nothrow
   {
     return getRefreshRate();
   }
@@ -134,7 +134,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Get `scale` property.
       Returns: The scale of the monitor.
   */
-  @property double scale()
+  @property double scale() nothrow
   {
     return getScale();
   }
@@ -146,7 +146,7 @@ class MonitorWrap : gobject.object.ObjectWrap
         The scale factor is the next larger integer,
         compared to [gdk.surface.Surface.scale].
   */
-  @property int scaleFactor()
+  @property int scaleFactor() nothrow
   {
     return getScaleFactor();
   }
@@ -155,7 +155,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Get `subpixelLayout` property.
       Returns: The subpixel layout.
   */
-  @property gdk.types.SubpixelLayout subpixelLayout()
+  @property gdk.types.SubpixelLayout subpixelLayout() nothrow
   {
     return getSubpixelLayout();
   }
@@ -164,7 +164,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Get `valid` property.
       Returns: Whether the object is still valid.
   */
-  @property bool valid()
+  @property bool valid() nothrow
   {
     return isValid();
   }
@@ -173,7 +173,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Get `widthMm` property.
       Returns: The width of the monitor, in millimeters.
   */
-  @property int widthMm()
+  @property int widthMm() nothrow
   {
     return getWidthMm();
   }
@@ -186,7 +186,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       relied on as stable identifiers of a specific monitor.
       Returns: the name of the connector
   */
-  string getConnector()
+  string getConnector() nothrow
   {
     const(char)* _cretval;
     _cretval = gdk_monitor_get_connector(cast(GdkMonitor*)this._cPtr);
@@ -200,7 +200,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       This can be used to identify a monitor in the UI.
       Returns: the monitor description
   */
-  string getDescription()
+  string getDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = gdk_monitor_get_description(cast(GdkMonitor*)this._cPtr);
@@ -212,7 +212,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Gets the display that this monitor belongs to.
       Returns: the display
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gdk_monitor_get_display(cast(GdkMonitor*)this._cPtr);
@@ -230,7 +230,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Params:
         geometry = a [gtk.types.Rectangle] to be filled with the monitor geometry
   */
-  void getGeometry(out gdk.rectangle.Rectangle geometry)
+  void getGeometry(out gdk.rectangle.Rectangle geometry) nothrow
   {
     gdk_monitor_get_geometry(cast(GdkMonitor*)this._cPtr, cast(GdkRectangle*)&geometry);
   }
@@ -239,7 +239,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Gets the height in millimeters of the monitor.
       Returns: the physical height of the monitor
   */
-  int getHeightMm()
+  int getHeightMm() nothrow
   {
     int _retval;
     _retval = gdk_monitor_get_height_mm(cast(GdkMonitor*)this._cPtr);
@@ -256,7 +256,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       [https://uefi.org/pnp_id_list](https://uefi.org/pnp_id_list).
       Returns: the name of the manufacturer
   */
-  string getManufacturer()
+  string getManufacturer() nothrow
   {
     const(char)* _cretval;
     _cretval = gdk_monitor_get_manufacturer(cast(GdkMonitor*)this._cPtr);
@@ -268,7 +268,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Gets the string identifying the monitor model, if available.
       Returns: the monitor model
   */
-  string getModel()
+  string getModel() nothrow
   {
     const(char)* _cretval;
     _cretval = gdk_monitor_get_model(cast(GdkMonitor*)this._cPtr);
@@ -283,7 +283,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       is returned as 60000.
       Returns: the refresh rate in milli-Hertz, or 0
   */
-  int getRefreshRate()
+  int getRefreshRate() nothrow
   {
     int _retval;
     _retval = gdk_monitor_get_refresh_rate(cast(GdkMonitor*)this._cPtr);
@@ -299,7 +299,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       where it is better to use [gdk.surface.Surface.getScale] instead.
       Returns: the scale
   */
-  double getScale()
+  double getScale() nothrow
   {
     double _retval;
     _retval = gdk_monitor_get_scale(cast(GdkMonitor*)this._cPtr);
@@ -318,7 +318,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       where it is better to use [gdk.surface.Surface.getScaleFactor] instead.
       Returns: the scale factor
   */
-  int getScaleFactor()
+  int getScaleFactor() nothrow
   {
     int _retval;
     _retval = gdk_monitor_get_scale_factor(cast(GdkMonitor*)this._cPtr);
@@ -330,7 +330,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       primaries for pixels.
       Returns: the subpixel layout
   */
-  gdk.types.SubpixelLayout getSubpixelLayout()
+  gdk.types.SubpixelLayout getSubpixelLayout() nothrow
   {
     GdkSubpixelLayout _cretval;
     _cretval = gdk_monitor_get_subpixel_layout(cast(GdkMonitor*)this._cPtr);
@@ -342,7 +342,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Gets the width in millimeters of the monitor.
       Returns: the physical width of the monitor
   */
-  int getWidthMm()
+  int getWidthMm() nothrow
   {
     int _retval;
     _retval = gdk_monitor_get_width_mm(cast(GdkMonitor*)this._cPtr);
@@ -357,7 +357,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       is unplugged or removed.
       Returns: true if the object corresponds to a physical monitor
   */
-  bool isValid()
+  bool isValid() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_monitor_is_valid(cast(GdkMonitor*)this._cPtr);
@@ -379,13 +379,13 @@ class MonitorWrap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInvalidate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInvalidate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.monitor.MonitorWrap)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -394,7 +394,14 @@ class MonitorWrap : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.monitor.MonitorWrap.invalidate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -412,7 +419,7 @@ class MonitorWrapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The [gdk.display.Display] of the monitor.
       Returns: Builder instance for fluent chaining
   */
-  T display(gdk.display.Display propval)
+  T display(gdk.display.Display propval) nothrow
   {
     return setProperty("display", propval);
   }
@@ -425,7 +432,7 @@ final class MonitorWrapGidBuilder : MonitorWrapGidBuilderImpl!MonitorWrapGidBuil
       Create object from builder.
       Returns: New object
   */
-  MonitorWrap build()
+  MonitorWrap build() nothrow
   {
     return new MonitorWrap(cast(void*)createGObject(MonitorWrap._getGType), No.Take);
   }

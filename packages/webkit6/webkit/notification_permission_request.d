@@ -25,26 +25,26 @@ class NotificationPermissionRequest : gobject.object.ObjectWrap, webkit.permissi
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_notification_permission_request_get_type != &gidSymbolNotFound ? webkit_notification_permission_request_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NotificationPermissionRequest self()
+  override NotificationPermissionRequest self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class NotificationPermissionRequest : gobject.object.ObjectWrap, webkit.permissi
       Get builder for [webkit.notification_permission_request.NotificationPermissionRequest]
       Returns: New builder object
   */
-  static NotificationPermissionRequestGidBuilder builder()
+  static NotificationPermissionRequestGidBuilder builder() nothrow
   {
     return new NotificationPermissionRequestGidBuilder;
   }
@@ -75,7 +75,7 @@ final class NotificationPermissionRequestGidBuilder : NotificationPermissionRequ
       Create object from builder.
       Returns: New object
   */
-  NotificationPermissionRequest build()
+  NotificationPermissionRequest build() nothrow
   {
     return new NotificationPermissionRequest(cast(void*)createGObject(NotificationPermissionRequest._getGType), No.Take);
   }

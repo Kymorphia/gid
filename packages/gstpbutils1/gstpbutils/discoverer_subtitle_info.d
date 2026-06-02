@@ -17,26 +17,26 @@ class DiscovererSubtitleInfo : gstpbutils.discoverer_stream_info.DiscovererStrea
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_discoverer_subtitle_info_get_type != &gidSymbolNotFound ? gst_discoverer_subtitle_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DiscovererSubtitleInfo self()
+  override DiscovererSubtitleInfo self() nothrow
   {
     return this;
   }
@@ -45,13 +45,13 @@ class DiscovererSubtitleInfo : gstpbutils.discoverer_stream_info.DiscovererStrea
       Get builder for [gstpbutils.discoverer_subtitle_info.DiscovererSubtitleInfo]
       Returns: New builder object
   */
-  static DiscovererSubtitleInfoGidBuilder builder()
+  static DiscovererSubtitleInfoGidBuilder builder() nothrow
   {
     return new DiscovererSubtitleInfoGidBuilder;
   }
 
   /** */
-  string getLanguage()
+  string getLanguage() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_discoverer_subtitle_info_get_language(cast(const(GstDiscovererSubtitleInfo)*)this._cPtr);
@@ -72,7 +72,7 @@ final class DiscovererSubtitleInfoGidBuilder : DiscovererSubtitleInfoGidBuilderI
       Create object from builder.
       Returns: New object
   */
-  DiscovererSubtitleInfo build()
+  DiscovererSubtitleInfo build() nothrow
   {
     return new DiscovererSubtitleInfo(cast(void*)createGObject(DiscovererSubtitleInfo._getGType), No.Take);
   }

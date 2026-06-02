@@ -16,26 +16,26 @@ class DoubleArray : arrow.numeric_array.NumericArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_double_array_get_type != &gidSymbolNotFound ? garrow_double_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DoubleArray self()
+  override DoubleArray self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class DoubleArray : arrow.numeric_array.NumericArray
       Get builder for [arrow.double_array.DoubleArray]
       Returns: New builder object
   */
-  static DoubleArrayGidBuilder builder()
+  static DoubleArrayGidBuilder builder() nothrow
   {
     return new DoubleArrayGidBuilder;
   }
 
   /** */
-  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
+  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls) nothrow
   {
     GArrowDoubleArray* _cretval;
     _cretval = garrow_double_array_new(length, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
@@ -58,7 +58,7 @@ class DoubleArray : arrow.numeric_array.NumericArray
   }
 
   /** */
-  double getValue(long i)
+  double getValue(long i) nothrow
   {
     double _retval;
     _retval = garrow_double_array_get_value(cast(GArrowDoubleArray*)this._cPtr, i);
@@ -66,7 +66,7 @@ class DoubleArray : arrow.numeric_array.NumericArray
   }
 
   /** */
-  double[] getValues()
+  double[] getValues() nothrow
   {
     const(double)* _cretval;
     long _cretlength;
@@ -104,7 +104,7 @@ final class DoubleArrayGidBuilder : DoubleArrayGidBuilderImpl!DoubleArrayGidBuil
       Create object from builder.
       Returns: New object
   */
-  DoubleArray build()
+  DoubleArray build() nothrow
   {
     return new DoubleArray(cast(void*)createGObject(DoubleArray._getGType), Yes.Take);
   }

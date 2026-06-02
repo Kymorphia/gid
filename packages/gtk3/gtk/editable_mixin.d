@@ -54,7 +54,7 @@ template EditableT()
       Copies the contents of the currently selected content in the editable and
       puts it on the clipboard.
   */
-  override void copyClipboard()
+  override void copyClipboard() nothrow
   {
     gtk_editable_copy_clipboard(cast(GtkEditable*)this._cPtr);
   }
@@ -63,7 +63,7 @@ template EditableT()
       Removes the contents of the currently selected content in the editable and
       puts it on the clipboard.
   */
-  override void cutClipboard()
+  override void cutClipboard() nothrow
   {
     gtk_editable_cut_clipboard(cast(GtkEditable*)this._cPtr);
   }
@@ -72,7 +72,7 @@ template EditableT()
       Deletes the currently selected text of the editable.
       This call doesn’t do anything if there is no selected text.
   */
-  override void deleteSelection()
+  override void deleteSelection() nothrow
   {
     gtk_editable_delete_selection(cast(GtkEditable*)this._cPtr);
   }
@@ -89,7 +89,7 @@ template EditableT()
         startPos = start position
         endPos = end position
   */
-  override void deleteText(int startPos, int endPos)
+  override void deleteText(int startPos, int endPos) nothrow
   {
     gtk_editable_delete_text(cast(GtkEditable*)this._cPtr, startPos, endPos);
   }
@@ -109,7 +109,7 @@ template EditableT()
              string. This string is allocated by the #GtkEditable
              implementation and should be freed by the caller.
   */
-  override string getChars(int startPos, int endPos)
+  override string getChars(int startPos, int endPos) nothrow
   {
     char* _cretval;
     _cretval = gtk_editable_get_chars(cast(GtkEditable*)this._cPtr, startPos, endPos);
@@ -122,7 +122,7 @@ template EditableT()
       [gtk.editable.Editable.setEditable].
       Returns: true if editable is editable.
   */
-  override bool getEditable()
+  override bool getEditable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_editable_get_editable(cast(GtkEditable*)this._cPtr);
@@ -136,7 +136,7 @@ template EditableT()
       Note that this position is in characters, not in bytes.
       Returns: the cursor position
   */
-  override int getPosition()
+  override int getPosition() nothrow
   {
     int _retval;
     _retval = gtk_editable_get_position(cast(GtkEditable*)this._cPtr);
@@ -155,7 +155,7 @@ template EditableT()
         endPos = location to store the end position, or null
       Returns: true if an area is selected, false otherwise
   */
-  override bool getSelectionBounds(out int startPos, out int endPos)
+  override bool getSelectionBounds(out int startPos, out int endPos) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_editable_get_selection_bounds(cast(GtkEditable*)this._cPtr, cast(int*)&startPos, cast(int*)&endPos);
@@ -173,7 +173,7 @@ template EditableT()
         newText = the text to append
         position = location of the position text will be inserted at
   */
-  override void insertText(string newText, ref int position)
+  override void insertText(string newText, ref int position) nothrow
   {
     int _newTextLength;
     if (newText)
@@ -187,7 +187,7 @@ template EditableT()
       Pastes the content of the clipboard to the current position of the
       cursor in the editable.
   */
-  override void pasteClipboard()
+  override void pasteClipboard() nothrow
   {
     gtk_editable_paste_clipboard(cast(GtkEditable*)this._cPtr);
   }
@@ -205,7 +205,7 @@ template EditableT()
         startPos = start of region
         endPos = end of region
   */
-  override void selectRegion(int startPos, int endPos)
+  override void selectRegion(int startPos, int endPos) nothrow
   {
     gtk_editable_select_region(cast(GtkEditable*)this._cPtr, startPos, endPos);
   }
@@ -218,7 +218,7 @@ template EditableT()
         isEditable = true if the user is allowed to edit the text
             in the widget
   */
-  override void setEditable(bool isEditable)
+  override void setEditable(bool isEditable) nothrow
   {
     gtk_editable_set_editable(cast(GtkEditable*)this._cPtr, isEditable);
   }
@@ -235,7 +235,7 @@ template EditableT()
       Params:
         position = the position of the cursor
   */
-  override void setPosition(int position)
+  override void setPosition(int position) nothrow
   {
     gtk_editable_set_position(cast(GtkEditable*)this._cPtr, position);
   }
@@ -262,13 +262,13 @@ template EditableT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.editable.Editable)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -277,7 +277,14 @@ template EditableT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.editable.Editable.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -311,7 +318,7 @@ template EditableT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeleteText(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeleteText(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -319,7 +326,7 @@ template EditableT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.editable.Editable)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -334,7 +341,14 @@ template EditableT()
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.editable.Editable.deleteText");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -369,7 +383,7 @@ template EditableT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInsertText(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInsertText(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -377,7 +391,7 @@ template EditableT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.editable.Editable)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -395,7 +409,14 @@ template EditableT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getStringWithLength(&_paramVals[1], newTextLength);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.editable.Editable.insertText");
+      }
 
       static if (Parameters!T.length > 1)
         *getVal!(Parameters!T[1]*)(&_paramVals[3]) = position;

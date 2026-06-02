@@ -19,26 +19,26 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_signal_action_get_type != &gidSymbolNotFound ? gtk_signal_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SignalAction self()
+  override SignalAction self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
       Get builder for [gtk.signal_action.SignalAction]
       Returns: New builder object
   */
-  static SignalActionGidBuilder builder()
+  static SignalActionGidBuilder builder() nothrow
   {
     return new SignalActionGidBuilder;
   }
@@ -56,7 +56,7 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
       Get `signalName` property.
       Returns: The name of the signal to emit.
   */
-  @property string signalName()
+  @property string signalName() nothrow
   {
     return getSignalName();
   }
@@ -71,7 +71,7 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
         signalName = name of the signal to emit
       Returns: a new [gtk.shortcut_action.ShortcutAction]
   */
-  this(string signalName)
+  this(string signalName) nothrow
   {
     GtkShortcutAction* _cretval;
     const(char)* _signalName = signalName.toCString(No.Alloc);
@@ -83,7 +83,7 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
       Returns the name of the signal that will be emitted.
       Returns: the name of the signal to emit
   */
-  string getSignalName()
+  string getSignalName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_signal_action_get_signal_name(cast(GtkSignalAction*)this._cPtr);
@@ -102,7 +102,7 @@ class SignalActionGidBuilderImpl(T) : gtk.shortcut_action.ShortcutActionGidBuild
         propval = The name of the signal to emit.
       Returns: Builder instance for fluent chaining
   */
-  T signalName(string propval)
+  T signalName(string propval) nothrow
   {
     return setProperty("signal-name", propval);
   }
@@ -115,7 +115,7 @@ final class SignalActionGidBuilder : SignalActionGidBuilderImpl!SignalActionGidB
       Create object from builder.
       Returns: New object
   */
-  SignalAction build()
+  SignalAction build() nothrow
   {
     return new SignalAction(cast(void*)createGObject(SignalAction._getGType), Yes.Take);
   }

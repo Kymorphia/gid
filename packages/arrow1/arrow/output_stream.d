@@ -22,26 +22,26 @@ class OutputStream : gobject.object.ObjectWrap, arrow.file.File, arrow.writable.
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_output_stream_get_type != &gidSymbolNotFound ? garrow_output_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override OutputStream self()
+  override OutputStream self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class OutputStream : gobject.object.ObjectWrap, arrow.file.File, arrow.writable.
       Get builder for [arrow.output_stream.OutputStream]
       Returns: New builder object
   */
-  static OutputStreamGidBuilder builder()
+  static OutputStreamGidBuilder builder() nothrow
   {
     return new OutputStreamGidBuilder;
   }
@@ -100,7 +100,7 @@ class OutputStreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
   mixin WritableGidBuilderT!();
 
   /** */
-  T outputStream(void* propval)
+  T outputStream(void* propval) nothrow
   {
     return setProperty("output-stream", propval);
   }
@@ -113,7 +113,7 @@ final class OutputStreamGidBuilder : OutputStreamGidBuilderImpl!OutputStreamGidB
       Create object from builder.
       Returns: New object
   */
-  OutputStream build()
+  OutputStream build() nothrow
   {
     return new OutputStream(cast(void*)createGObject(OutputStream._getGType), No.Take);
   }

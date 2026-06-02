@@ -26,7 +26,7 @@ template BackendT()
       Returns: A set of flags describing which parts of the secret backend have
         been initialized.
   */
-  @property secret.types.ServiceFlags flags()
+  @property secret.types.ServiceFlags flags() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(secret.types.ServiceFlags)("flags");
   }
@@ -45,7 +45,7 @@ template BackendGidBuilderT()
           been initialized.
       Returns: Builder instance for fluent chaining
   */
-  T flags(secret.types.ServiceFlags propval)
+  T flags(secret.types.ServiceFlags propval) nothrow
   {
     return setProperty("flags", propval);
   }

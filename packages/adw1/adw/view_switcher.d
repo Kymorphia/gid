@@ -93,26 +93,26 @@ class ViewSwitcher : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_view_switcher_get_type != &gidSymbolNotFound ? adw_view_switcher_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ViewSwitcher self()
+  override ViewSwitcher self() nothrow
   {
     return this;
   }
@@ -121,7 +121,7 @@ class ViewSwitcher : gtk.widget.Widget
       Get builder for [adw.view_switcher.ViewSwitcher]
       Returns: New builder object
   */
-  static ViewSwitcherGidBuilder builder()
+  static ViewSwitcherGidBuilder builder() nothrow
   {
     return new ViewSwitcherGidBuilder;
   }
@@ -130,7 +130,7 @@ class ViewSwitcher : gtk.widget.Widget
       Get `policy` property.
       Returns: The policy to determine which mode to use.
   */
-  @property adw.types.ViewSwitcherPolicy policy()
+  @property adw.types.ViewSwitcherPolicy policy() nothrow
   {
     return getPolicy();
   }
@@ -140,7 +140,7 @@ class ViewSwitcher : gtk.widget.Widget
       Params:
         propval = The policy to determine which mode to use.
   */
-  @property void policy(adw.types.ViewSwitcherPolicy propval)
+  @property void policy(adw.types.ViewSwitcherPolicy propval) nothrow
   {
     setPolicy(propval);
   }
@@ -149,7 +149,7 @@ class ViewSwitcher : gtk.widget.Widget
       Get `stack` property.
       Returns: The stack the view switcher controls.
   */
-  @property adw.view_stack.ViewStack stack()
+  @property adw.view_stack.ViewStack stack() nothrow
   {
     return getStack();
   }
@@ -159,7 +159,7 @@ class ViewSwitcher : gtk.widget.Widget
       Params:
         propval = The stack the view switcher controls.
   */
-  @property void stack(adw.view_stack.ViewStack propval)
+  @property void stack(adw.view_stack.ViewStack propval) nothrow
   {
     setStack(propval);
   }
@@ -168,7 +168,7 @@ class ViewSwitcher : gtk.widget.Widget
       Creates a new [adw.view_switcher.ViewSwitcher].
       Returns: the newly created [adw.view_switcher.ViewSwitcher]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_view_switcher_new();
@@ -179,7 +179,7 @@ class ViewSwitcher : gtk.widget.Widget
       Gets the policy of self.
       Returns: the policy of self
   */
-  adw.types.ViewSwitcherPolicy getPolicy()
+  adw.types.ViewSwitcherPolicy getPolicy() nothrow
   {
     AdwViewSwitcherPolicy _cretval;
     _cretval = adw_view_switcher_get_policy(cast(AdwViewSwitcher*)this._cPtr);
@@ -191,7 +191,7 @@ class ViewSwitcher : gtk.widget.Widget
       Gets the stack controlled by self.
       Returns: the stack
   */
-  adw.view_stack.ViewStack getStack()
+  adw.view_stack.ViewStack getStack() nothrow
   {
     AdwViewStack* _cretval;
     _cretval = adw_view_switcher_get_stack(cast(AdwViewSwitcher*)this._cPtr);
@@ -205,7 +205,7 @@ class ViewSwitcher : gtk.widget.Widget
       Params:
         policy = the new policy
   */
-  void setPolicy(adw.types.ViewSwitcherPolicy policy)
+  void setPolicy(adw.types.ViewSwitcherPolicy policy) nothrow
   {
     adw_view_switcher_set_policy(cast(AdwViewSwitcher*)this._cPtr, policy);
   }
@@ -216,7 +216,7 @@ class ViewSwitcher : gtk.widget.Widget
       Params:
         stack = a stack
   */
-  void setStack(adw.view_stack.ViewStack stack = null)
+  void setStack(adw.view_stack.ViewStack stack = null) nothrow
   {
     adw_view_switcher_set_stack(cast(AdwViewSwitcher*)this._cPtr, stack ? cast(AdwViewStack*)stack._cPtr(No.Dup) : null);
   }
@@ -233,7 +233,7 @@ class ViewSwitcherGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The policy to determine which mode to use.
       Returns: Builder instance for fluent chaining
   */
-  T policy(adw.types.ViewSwitcherPolicy propval)
+  T policy(adw.types.ViewSwitcherPolicy propval) nothrow
   {
     return setProperty("policy", propval);
   }
@@ -244,7 +244,7 @@ class ViewSwitcherGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The stack the view switcher controls.
       Returns: Builder instance for fluent chaining
   */
-  T stack(adw.view_stack.ViewStack propval)
+  T stack(adw.view_stack.ViewStack propval) nothrow
   {
     return setProperty("stack", propval);
   }
@@ -257,7 +257,7 @@ final class ViewSwitcherGidBuilder : ViewSwitcherGidBuilderImpl!ViewSwitcherGidB
       Create object from builder.
       Returns: New object
   */
-  ViewSwitcher build()
+  ViewSwitcher build() nothrow
   {
     return new ViewSwitcher(cast(void*)createGObject(ViewSwitcher._getGType), No.Take);
   }

@@ -41,26 +41,26 @@ class Resolver : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_resolver_get_type != &gidSymbolNotFound ? g_resolver_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Resolver self()
+  override Resolver self() nothrow
   {
     return this;
   }
@@ -69,7 +69,7 @@ class Resolver : gobject.object.ObjectWrap
       Get builder for [gio.resolver.Resolver]
       Returns: New builder object
   */
-  static ResolverGidBuilder builder()
+  static ResolverGidBuilder builder() nothrow
   {
     return new ResolverGidBuilder;
   }
@@ -87,7 +87,7 @@ class Resolver : gobject.object.ObjectWrap
         No timeout was applied to lookups before this property was added in
         GLib 2.78.
   */
-  @property uint timeout()
+  @property uint timeout() nothrow
   {
     return getTimeout();
   }
@@ -106,7 +106,7 @@ class Resolver : gobject.object.ObjectWrap
           No timeout was applied to lookups before this property was added in
           GLib 2.78.
   */
-  @property void timeout(uint propval)
+  @property void timeout(uint propval) nothrow
   {
     setTimeout(propval);
   }
@@ -117,7 +117,7 @@ class Resolver : gobject.object.ObjectWrap
       many threads it should allocate for concurrent DNS resolutions.
       Returns: the default #GResolver.
   */
-  static gio.resolver.Resolver getDefault()
+  static gio.resolver.Resolver getDefault() nothrow
   {
     GResolver* _cretval;
     _cretval = g_resolver_get_default();
@@ -129,7 +129,7 @@ class Resolver : gobject.object.ObjectWrap
       Get the timeout applied to all resolver lookups. See #GResolver:timeout.
       Returns: the resolver timeout, in milliseconds, or `0` for no timeout
   */
-  uint getTimeout()
+  uint getTimeout() nothrow
   {
     uint _retval;
     _retval = g_resolver_get_timeout(cast(GResolver*)this._cPtr);
@@ -175,14 +175,21 @@ class Resolver : gobject.object.ObjectWrap
         cancellable = a #GCancellable, or null
         callback = callback to call after resolution completes
   */
-  void lookupByAddressAsync(gio.inet_address.InetAddress address, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void lookupByAddressAsync(gio.inet_address.InetAddress address, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -271,14 +278,21 @@ class Resolver : gobject.object.ObjectWrap
         cancellable = a #GCancellable, or null
         callback = callback to call after resolution completes
   */
-  void lookupByNameAsync(string hostname, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void lookupByNameAsync(string hostname, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _hostname = hostname.toCString(No.Alloc);
@@ -351,14 +365,21 @@ class Resolver : gobject.object.ObjectWrap
         cancellable = a #GCancellable, or null
         callback = callback to call after resolution completes
   */
-  void lookupByNameWithFlagsAsync(string hostname, gio.types.ResolverNameLookupFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void lookupByNameWithFlagsAsync(string hostname, gio.types.ResolverNameLookupFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _hostname = hostname.toCString(No.Alloc);
@@ -438,14 +459,21 @@ class Resolver : gobject.object.ObjectWrap
         cancellable = a #GCancellable, or null
         callback = callback to call after resolution completes
   */
-  void lookupRecordsAsync(string rrname, gio.types.ResolverRecordType recordType, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void lookupRecordsAsync(string rrname, gio.types.ResolverRecordType recordType, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _rrname = rrname.toCString(No.Alloc);
@@ -544,14 +572,21 @@ class Resolver : gobject.object.ObjectWrap
         cancellable = a #GCancellable, or null
         callback = callback to call after resolution completes
   */
-  void lookupServiceAsync(string service, string protocol, string domain, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void lookupServiceAsync(string service, string protocol, string domain, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _service = service.toCString(No.Alloc);
@@ -598,7 +633,7 @@ class Resolver : gobject.object.ObjectWrap
       implements its own cache policies on top of that, and then set
       itself as the default resolver for all later code to use.
   */
-  void setDefault()
+  void setDefault() nothrow
   {
     g_resolver_set_default(cast(GResolver*)this._cPtr);
   }
@@ -609,7 +644,7 @@ class Resolver : gobject.object.ObjectWrap
       Params:
         timeoutMs = timeout in milliseconds, or `0` for no timeouts
   */
-  void setTimeout(uint timeoutMs)
+  void setTimeout(uint timeoutMs) nothrow
   {
     g_resolver_set_timeout(cast(GResolver*)this._cPtr, timeoutMs);
   }
@@ -630,13 +665,13 @@ class Resolver : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectReload(T)(T callback, Flag!"After" after = No.After)
+  gulong connectReload(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.resolver.Resolver)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -645,7 +680,14 @@ class Resolver : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.resolver.Resolver.reload");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -672,7 +714,7 @@ class ResolverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           GLib 2.78.
       Returns: Builder instance for fluent chaining
   */
-  T timeout(uint propval)
+  T timeout(uint propval) nothrow
   {
     return setProperty("timeout", propval);
   }
@@ -685,7 +727,7 @@ final class ResolverGidBuilder : ResolverGidBuilderImpl!ResolverGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Resolver build()
+  Resolver build() nothrow
   {
     return new Resolver(cast(void*)createGObject(Resolver._getGType), No.Take);
   }

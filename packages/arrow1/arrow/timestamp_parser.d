@@ -14,26 +14,26 @@ class TimestampParser : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_timestamp_parser_get_type != &gidSymbolNotFound ? garrow_timestamp_parser_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TimestampParser self()
+  override TimestampParser self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class TimestampParser : gobject.object.ObjectWrap
       Get builder for [arrow.timestamp_parser.TimestampParser]
       Returns: New builder object
   */
-  static TimestampParserGidBuilder builder()
+  static TimestampParserGidBuilder builder() nothrow
   {
     return new TimestampParserGidBuilder;
   }
 
   /** */
-  string getKind()
+  string getKind() nothrow
   {
     const(char)* _cretval;
     _cretval = garrow_timestamp_parser_get_kind(cast(GArrowTimestampParser*)this._cPtr);
@@ -62,7 +62,7 @@ class TimestampParserGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 {
 
   /** */
-  T parser(void* propval)
+  T parser(void* propval) nothrow
   {
     return setProperty("parser", propval);
   }
@@ -75,7 +75,7 @@ final class TimestampParserGidBuilder : TimestampParserGidBuilderImpl!TimestampP
       Create object from builder.
       Returns: New object
   */
-  TimestampParser build()
+  TimestampParser build() nothrow
   {
     return new TimestampParser(cast(void*)createGObject(TimestampParser._getGType), No.Take);
   }

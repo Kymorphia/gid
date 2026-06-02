@@ -78,26 +78,26 @@ class Registry : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_registry_get_type != &gidSymbolNotFound ? gst_registry_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Registry self()
+  override Registry self() nothrow
   {
     return this;
   }
@@ -106,7 +106,7 @@ class Registry : gst.object.ObjectWrap
       Get builder for [gst.registry.Registry]
       Returns: New builder object
   */
-  static RegistryGidBuilder builder()
+  static RegistryGidBuilder builder() nothrow
   {
     return new RegistryGidBuilder;
   }
@@ -121,7 +121,7 @@ class Registry : gst.object.ObjectWrap
       Returns: true if GStreamer will use the child helper process when
         rebuilding the registry.
   */
-  static bool forkIsEnabled()
+  static bool forkIsEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_registry_fork_is_enabled();
@@ -136,7 +136,7 @@ class Registry : gst.object.ObjectWrap
       Params:
         enabled = whether rebuilding the registry can use a temporary child helper process.
   */
-  static void forkSetEnabled(bool enabled)
+  static void forkSetEnabled(bool enabled) nothrow
   {
     gst_registry_fork_set_enabled(enabled);
   }
@@ -147,7 +147,7 @@ class Registry : gst.object.ObjectWrap
       initialized.
       Returns: the #GstRegistry.
   */
-  static gst.registry.Registry get()
+  static gst.registry.Registry get() nothrow
   {
     GstRegistry* _cretval;
     _cretval = gst_registry_get();
@@ -167,7 +167,7 @@ class Registry : gst.object.ObjectWrap
         
         MT safe.
   */
-  bool addFeature(gst.plugin_feature.PluginFeature feature)
+  bool addFeature(gst.plugin_feature.PluginFeature feature) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_registry_add_feature(cast(GstRegistry*)this._cPtr, feature ? cast(GstPluginFeature*)feature._cPtr(No.Dup) : null);
@@ -186,7 +186,7 @@ class Registry : gst.object.ObjectWrap
         
         MT safe.
   */
-  bool addPlugin(gst.plugin.Plugin plugin)
+  bool addPlugin(gst.plugin.Plugin plugin) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_registry_add_plugin(cast(GstRegistry*)this._cPtr, plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null);
@@ -206,7 +206,7 @@ class Registry : gst.object.ObjectWrap
       Returns: true if the feature could be found and the version is
         the same as the required version or newer, and false otherwise.
   */
-  bool checkFeatureVersion(string featureName, uint minMajor, uint minMinor, uint minMicro)
+  bool checkFeatureVersion(string featureName, uint minMajor, uint minMinor, uint minMicro) nothrow
   {
     bool _retval;
     const(char)* _featureName = featureName.toCString(No.Alloc);
@@ -228,14 +228,21 @@ class Registry : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.plugin_feature.PluginFeature[] featureFilter(gst.types.PluginFeatureFilter filter, bool first)
+  gst.plugin_feature.PluginFeature[] featureFilter(gst.types.PluginFeatureFilter filter, bool first) nothrow
   {
-    extern(C) gboolean _filterCallback(GstPluginFeature* feature, void* userData)
+    extern(C) gboolean _filterCallback(GstPluginFeature* feature, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gst.types.PluginFeatureFilter*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.plugin_feature.PluginFeature)(cast(void*)feature, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.plugin_feature.PluginFeature)(cast(void*)feature, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PluginFeatureFilter");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -260,7 +267,7 @@ class Registry : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.plugin_feature.PluginFeature findFeature(string name, gobject.types.GType type)
+  gst.plugin_feature.PluginFeature findFeature(string name, gobject.types.GType type) nothrow
   {
     GstPluginFeature* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -281,7 +288,7 @@ class Registry : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.plugin.Plugin findPlugin(string name)
+  gst.plugin.Plugin findPlugin(string name) nothrow
   {
     GstPlugin* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -300,7 +307,7 @@ class Registry : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.plugin_feature.PluginFeature[] getFeatureList(gobject.types.GType type)
+  gst.plugin_feature.PluginFeature[] getFeatureList(gobject.types.GType type) nothrow
   {
     GList* _cretval;
     _cretval = gst_registry_get_feature_list(cast(GstRegistry*)this._cPtr, type);
@@ -316,7 +323,7 @@ class Registry : gst.object.ObjectWrap
       Returns: a #GList of
             #GstPluginFeature. Use [gst.plugin_feature.PluginFeature.listFree] after usage.
   */
-  gst.plugin_feature.PluginFeature[] getFeatureListByPlugin(string name)
+  gst.plugin_feature.PluginFeature[] getFeatureListByPlugin(string name) nothrow
   {
     GList* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -330,7 +337,7 @@ class Registry : gst.object.ObjectWrap
       every time a feature is added or removed from the registry.
       Returns: the feature list cookie.
   */
-  uint getFeatureListCookie()
+  uint getFeatureListCookie() nothrow
   {
     uint _retval;
     _retval = gst_registry_get_feature_list_cookie(cast(GstRegistry*)this._cPtr);
@@ -345,7 +352,7 @@ class Registry : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.plugin.Plugin[] getPluginList()
+  gst.plugin.Plugin[] getPluginList() nothrow
   {
     GList* _cretval;
     _cretval = gst_registry_get_plugin_list(cast(GstRegistry*)this._cPtr);
@@ -362,7 +369,7 @@ class Registry : gst.object.ObjectWrap
       Returns: the #GstPlugin if found, or
             null if not.  [gst.object.ObjectWrap.unref] after usage.
   */
-  gst.plugin.Plugin lookup(string filename)
+  gst.plugin.Plugin lookup(string filename) nothrow
   {
     GstPlugin* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -381,7 +388,7 @@ class Registry : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.plugin_feature.PluginFeature lookupFeature(string name)
+  gst.plugin_feature.PluginFeature lookupFeature(string name) nothrow
   {
     GstPluginFeature* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -405,14 +412,21 @@ class Registry : gst.object.ObjectWrap
         
         MT safe.
   */
-  gst.plugin.Plugin[] pluginFilter(gst.types.PluginFilter filter, bool first)
+  gst.plugin.Plugin[] pluginFilter(gst.types.PluginFilter filter, bool first) nothrow
   {
-    extern(C) gboolean _filterCallback(GstPlugin* plugin, void* userData)
+    extern(C) gboolean _filterCallback(GstPlugin* plugin, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gst.types.PluginFilter*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PluginFilter");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -433,7 +447,7 @@ class Registry : gst.object.ObjectWrap
       Params:
         feature = the feature to remove
   */
-  void removeFeature(gst.plugin_feature.PluginFeature feature)
+  void removeFeature(gst.plugin_feature.PluginFeature feature) nothrow
   {
     gst_registry_remove_feature(cast(GstRegistry*)this._cPtr, feature ? cast(GstPluginFeature*)feature._cPtr(No.Dup) : null);
   }
@@ -446,7 +460,7 @@ class Registry : gst.object.ObjectWrap
       Params:
         plugin = the plugin to remove
   */
-  void removePlugin(gst.plugin.Plugin plugin)
+  void removePlugin(gst.plugin.Plugin plugin) nothrow
   {
     gst_registry_remove_plugin(cast(GstRegistry*)this._cPtr, plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null);
   }
@@ -459,7 +473,7 @@ class Registry : gst.object.ObjectWrap
         path = the path to scan
       Returns: true if registry changed
   */
-  bool scanPath(string path)
+  bool scanPath(string path) nothrow
   {
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -485,14 +499,14 @@ class Registry : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFeatureAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFeatureAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.plugin_feature.PluginFeature)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gst.registry.Registry)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -504,7 +518,14 @@ class Registry : gst.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.registry.Registry.featureAdded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -529,14 +550,14 @@ class Registry : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPluginAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPluginAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.plugin.Plugin)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gst.registry.Registry)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -548,7 +569,14 @@ class Registry : gst.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.registry.Registry.pluginAdded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -568,7 +596,7 @@ final class RegistryGidBuilder : RegistryGidBuilderImpl!RegistryGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Registry build()
+  Registry build() nothrow
   {
     return new Registry(cast(void*)createGObject(Registry._getGType), No.Take);
   }

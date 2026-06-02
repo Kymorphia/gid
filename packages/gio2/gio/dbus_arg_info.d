@@ -21,7 +21,7 @@ class DBusArgInfo : gobject.boxed.Boxed
         name = Name of the argument, e.g. @unix_user_id.
         signature = D-Bus signature of the argument (a single complete type).
   */
-  this(int refCount = int.init, string name = string.init, string signature = string.init)
+  this(int refCount = int.init, string name = string.init, string signature = string.init) nothrow
   {
     super(gMalloc(GDBusArgInfo.sizeof), Yes.Take);
     this.refCount = refCount;
@@ -30,32 +30,32 @@ class DBusArgInfo : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_arg_info_get_type != &gidSymbolNotFound ? g_dbus_arg_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DBusArgInfo self()
+  override DBusArgInfo self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class DBusArgInfo : gobject.boxed.Boxed
       Get `refCount` field.
       Returns: The reference count or -1 if statically allocated.
   */
-  @property int refCount()
+  @property int refCount() nothrow
   {
     return (cast(GDBusArgInfo*)this._cPtr).refCount;
   }
@@ -74,7 +74,7 @@ class DBusArgInfo : gobject.boxed.Boxed
       Params:
         propval = The reference count or -1 if statically allocated.
   */
-  @property void refCount(int propval)
+  @property void refCount(int propval) nothrow
   {
     (cast(GDBusArgInfo*)this._cPtr).refCount = propval;
   }
@@ -83,7 +83,7 @@ class DBusArgInfo : gobject.boxed.Boxed
       Get `name` field.
       Returns: Name of the argument, e.g. @unix_user_id.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GDBusArgInfo*)this._cPtr).name);
   }
@@ -93,7 +93,7 @@ class DBusArgInfo : gobject.boxed.Boxed
       Params:
         propval = Name of the argument, e.g. @unix_user_id.
   */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GDBusArgInfo*)this._cPtr).name);
     dToC(propval, cast(void*)&(cast(GDBusArgInfo*)this._cPtr).name);
@@ -103,7 +103,7 @@ class DBusArgInfo : gobject.boxed.Boxed
       Get `signature` field.
       Returns: D-Bus signature of the argument (a single complete type).
   */
-  @property string signature()
+  @property string signature() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GDBusArgInfo*)this._cPtr).signature);
   }
@@ -113,7 +113,7 @@ class DBusArgInfo : gobject.boxed.Boxed
       Params:
         propval = D-Bus signature of the argument (a single complete type).
   */
-  @property void signature(string propval)
+  @property void signature(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GDBusArgInfo*)this._cPtr).signature);
     dToC(propval, cast(void*)&(cast(GDBusArgInfo*)this._cPtr).signature);

@@ -16,26 +16,26 @@ class MetadataReader : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_metadata_reader_get_type != &gidSymbolNotFound ? gaflight_metadata_reader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MetadataReader self()
+  override MetadataReader self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class MetadataReader : gobject.object.ObjectWrap
       Get builder for [arrowflight.metadata_reader.MetadataReader]
       Returns: New builder object
   */
-  static MetadataReaderGidBuilder builder()
+  static MetadataReaderGidBuilder builder() nothrow
   {
     return new MetadataReaderGidBuilder;
   }
@@ -67,7 +67,7 @@ class MetadataReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 {
 
   /** */
-  T reader(void* propval)
+  T reader(void* propval) nothrow
   {
     return setProperty("reader", propval);
   }
@@ -80,7 +80,7 @@ final class MetadataReaderGidBuilder : MetadataReaderGidBuilderImpl!MetadataRead
       Create object from builder.
       Returns: New object
   */
-  MetadataReader build()
+  MetadataReader build() nothrow
   {
     return new MetadataReader(cast(void*)createGObject(MetadataReader._getGType), No.Take);
   }

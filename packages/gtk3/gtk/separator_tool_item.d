@@ -35,26 +35,26 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_separator_tool_item_get_type != &gidSymbolNotFound ? gtk_separator_tool_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SeparatorToolItem self()
+  override SeparatorToolItem self() nothrow
   {
     return this;
   }
@@ -63,7 +63,7 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
       Get builder for [gtk.separator_tool_item.SeparatorToolItem]
       Returns: New builder object
   */
-  static SeparatorToolItemGidBuilder builder()
+  static SeparatorToolItemGidBuilder builder() nothrow
   {
     return new SeparatorToolItemGidBuilder;
   }
@@ -71,7 +71,7 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
   alias draw = gtk.widget.Widget.draw;
 
   /** */
-  @property bool draw()
+  @property bool draw() nothrow
   {
     return getDraw();
   }
@@ -79,7 +79,7 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
   alias draw = gtk.widget.Widget.draw;
 
   /** */
-  @property void draw(bool propval)
+  @property void draw(bool propval) nothrow
   {
     setDraw(propval);
   }
@@ -88,7 +88,7 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
       Create a new #GtkSeparatorToolItem
       Returns: the new #GtkSeparatorToolItem
   */
-  this()
+  this() nothrow
   {
     GtkToolItem* _cretval;
     _cretval = gtk_separator_tool_item_new();
@@ -100,7 +100,7 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
       See [gtk.separator_tool_item.SeparatorToolItem.setDraw].
       Returns: true if item is drawn as a line, or just blank.
   */
-  bool getDraw()
+  bool getDraw() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_separator_tool_item_get_draw(cast(GtkSeparatorToolItem*)this._cPtr);
@@ -115,7 +115,7 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
       Params:
         draw = whether item is drawn as a vertical line
   */
-  void setDraw(bool draw)
+  void setDraw(bool draw) nothrow
   {
     gtk_separator_tool_item_set_draw(cast(GtkSeparatorToolItem*)this._cPtr, draw);
   }
@@ -127,7 +127,7 @@ class SeparatorToolItemGidBuilderImpl(T) : gtk.tool_item.ToolItemGidBuilderImpl!
 
 
   /** */
-  T draw(bool propval)
+  T draw(bool propval) nothrow
   {
     return setProperty("draw", propval);
   }
@@ -140,7 +140,7 @@ final class SeparatorToolItemGidBuilder : SeparatorToolItemGidBuilderImpl!Separa
       Create object from builder.
       Returns: New object
   */
-  SeparatorToolItem build()
+  SeparatorToolItem build() nothrow
   {
     return new SeparatorToolItem(cast(void*)createGObject(SeparatorToolItem._getGType), No.Take);
   }

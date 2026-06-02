@@ -16,7 +16,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgstpbutils-1.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // AudioVisualizer
   GType function() c_gst_audio_visualizer_get_type; ///

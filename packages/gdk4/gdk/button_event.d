@@ -15,11 +15,8 @@ class ButtonEvent : gdk.event.Event
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.button_event.ButtonEvent");
-
     super(cast(GdkEvent*)ptr, take);
   }
 
@@ -27,7 +24,7 @@ class ButtonEvent : gdk.event.Event
       Extract the button number from a button event.
       Returns: the button of event
   */
-  uint getButton()
+  uint getButton() nothrow
   {
     uint _retval;
     _retval = gdk_button_event_get_button(cast(GdkEvent*)this._cPtr);

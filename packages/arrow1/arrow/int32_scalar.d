@@ -14,26 +14,26 @@ class Int32Scalar : arrow.scalar.Scalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_int32_scalar_get_type != &gidSymbolNotFound ? garrow_int32_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Int32Scalar self()
+  override Int32Scalar self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class Int32Scalar : arrow.scalar.Scalar
       Get builder for [arrow.int32_scalar.Int32Scalar]
       Returns: New builder object
   */
-  static Int32ScalarGidBuilder builder()
+  static Int32ScalarGidBuilder builder() nothrow
   {
     return new Int32ScalarGidBuilder;
   }
 
   /** */
-  this(int value)
+  this(int value) nothrow
   {
     GArrowInt32Scalar* _cretval;
     _cretval = garrow_int32_scalar_new(value);
@@ -56,7 +56,7 @@ class Int32Scalar : arrow.scalar.Scalar
   }
 
   /** */
-  int getValue()
+  int getValue() nothrow
   {
     int _retval;
     _retval = garrow_int32_scalar_get_value(cast(GArrowInt32Scalar*)this._cPtr);
@@ -76,7 +76,7 @@ final class Int32ScalarGidBuilder : Int32ScalarGidBuilderImpl!Int32ScalarGidBuil
       Create object from builder.
       Returns: New object
   */
-  Int32Scalar build()
+  Int32Scalar build() nothrow
   {
     return new Int32Scalar(cast(void*)createGObject(Int32Scalar._getGType), Yes.Take);
   }

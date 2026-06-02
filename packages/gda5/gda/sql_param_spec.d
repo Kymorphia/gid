@@ -15,11 +15,8 @@ class SqlParamSpec
   GdaSqlParamSpec _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.sql_param_spec.SqlParamSpec");
-
     _cInstance = *cast(GdaSqlParamSpec*)ptr;
 
     if (take)
@@ -27,69 +24,69 @@ class SqlParamSpec
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
 
   /** */
-  @property string name()
+  @property string name() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaSqlParamSpec*)this._cPtr).name);
   }
 
   /** */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaSqlParamSpec*)this._cPtr).name);
     dToC(propval, cast(void*)&(cast(GdaSqlParamSpec*)this._cPtr).name);
   }
 
   /** */
-  @property string descr()
+  @property string descr() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaSqlParamSpec*)this._cPtr).descr);
   }
 
   /** */
-  @property void descr(string propval)
+  @property void descr(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaSqlParamSpec*)this._cPtr).descr);
     dToC(propval, cast(void*)&(cast(GdaSqlParamSpec*)this._cPtr).descr);
   }
 
   /** */
-  @property bool isParam()
+  @property bool isParam() nothrow
   {
     return cast(bool)(cast(GdaSqlParamSpec*)this._cPtr).isParam;
   }
 
   /** */
-  @property void isParam(bool propval)
+  @property void isParam(bool propval) nothrow
   {
     (cast(GdaSqlParamSpec*)this._cPtr).isParam = propval;
   }
 
   /** */
-  @property bool nullok()
+  @property bool nullok() nothrow
   {
     return cast(bool)(cast(GdaSqlParamSpec*)this._cPtr).nullok;
   }
 
   /** */
-  @property void nullok(bool propval)
+  @property void nullok(bool propval) nothrow
   {
     (cast(GdaSqlParamSpec*)this._cPtr).nullok = propval;
   }
 
   /** */
-  @property gobject.types.GType gType()
+  @property gobject.types.GType gType() nothrow
   {
     return (cast(GdaSqlParamSpec*)this._cPtr).gType;
   }
 
   /** */
-  @property void gType(gobject.types.GType propval)
+  @property void gType(gobject.types.GType propval) nothrow
   {
     (cast(GdaSqlParamSpec*)this._cPtr).gType = propval;
   }
@@ -98,7 +95,7 @@ class SqlParamSpec
       Creates a new string representing pspec.
       Returns: a new string.
   */
-  string serialize()
+  string serialize() nothrow
   {
     char* _cretval;
     _cretval = gda_sql_param_spec_serialize(cast(GdaSqlParamSpec*)this._cPtr);
@@ -113,7 +110,7 @@ class SqlParamSpec
       Params:
         value = a G_TYPE_STRING #GValue
   */
-  void takeDescr(gobject.value.Value value)
+  void takeDescr(gobject.value.Value value) nothrow
   {
     gda_sql_param_spec_take_descr(cast(GdaSqlParamSpec*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }
@@ -125,7 +122,7 @@ class SqlParamSpec
       Params:
         value = a G_TYPE_STRING #GValue
   */
-  void takeName(gobject.value.Value value)
+  void takeName(gobject.value.Value value) nothrow
   {
     gda_sql_param_spec_take_name(cast(GdaSqlParamSpec*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }
@@ -139,7 +136,7 @@ class SqlParamSpec
       Params:
         value = a G_TYPE_STRING #GValue.
   */
-  void takeNullok(gobject.value.Value value)
+  void takeNullok(gobject.value.Value value) nothrow
   {
     gda_sql_param_spec_take_nullok(cast(GdaSqlParamSpec*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }
@@ -153,7 +150,7 @@ class SqlParamSpec
       Params:
         value = a G_TYPE_STRING #GValue
   */
-  void takeType(gobject.value.Value value)
+  void takeType(gobject.value.Value value) nothrow
   {
     gda_sql_param_spec_take_type(cast(GdaSqlParamSpec*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }

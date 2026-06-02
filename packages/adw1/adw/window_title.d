@@ -34,26 +34,26 @@ class WindowTitle : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_window_title_get_type != &gidSymbolNotFound ? adw_window_title_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WindowTitle self()
+  override WindowTitle self() nothrow
   {
     return this;
   }
@@ -62,7 +62,7 @@ class WindowTitle : gtk.widget.Widget
       Get builder for [adw.window_title.WindowTitle]
       Returns: New builder object
   */
-  static WindowTitleGidBuilder builder()
+  static WindowTitleGidBuilder builder() nothrow
   {
     return new WindowTitleGidBuilder;
   }
@@ -73,7 +73,7 @@ class WindowTitle : gtk.widget.Widget
         
         The subtitle should give the user additional details.
   */
-  @property string subtitle()
+  @property string subtitle() nothrow
   {
     return getSubtitle();
   }
@@ -85,7 +85,7 @@ class WindowTitle : gtk.widget.Widget
           
           The subtitle should give the user additional details.
   */
-  @property void subtitle(string propval)
+  @property void subtitle(string propval) nothrow
   {
     setSubtitle(propval);
   }
@@ -97,7 +97,7 @@ class WindowTitle : gtk.widget.Widget
         The title typically identifies the current view or content item, and
         generally does not use the application name.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -110,7 +110,7 @@ class WindowTitle : gtk.widget.Widget
           The title typically identifies the current view or content item, and
           generally does not use the application name.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -123,7 +123,7 @@ class WindowTitle : gtk.widget.Widget
         subtitle = a subtitle
       Returns: the newly created [adw.window_title.WindowTitle]
   */
-  this(string title, string subtitle)
+  this(string title, string subtitle) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -136,7 +136,7 @@ class WindowTitle : gtk.widget.Widget
       Gets the subtitle of self.
       Returns: the subtitle
   */
-  string getSubtitle()
+  string getSubtitle() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_window_title_get_subtitle(cast(AdwWindowTitle*)this._cPtr);
@@ -148,7 +148,7 @@ class WindowTitle : gtk.widget.Widget
       Gets the title of self.
       Returns: the title
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_window_title_get_title(cast(AdwWindowTitle*)this._cPtr);
@@ -164,7 +164,7 @@ class WindowTitle : gtk.widget.Widget
       Params:
         subtitle = a subtitle
   */
-  void setSubtitle(string subtitle)
+  void setSubtitle(string subtitle) nothrow
   {
     const(char)* _subtitle = subtitle.toCString(No.Alloc);
     adw_window_title_set_subtitle(cast(AdwWindowTitle*)this._cPtr, _subtitle);
@@ -179,7 +179,7 @@ class WindowTitle : gtk.widget.Widget
       Params:
         title = a title
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     adw_window_title_set_title(cast(AdwWindowTitle*)this._cPtr, _title);
@@ -199,7 +199,7 @@ class WindowTitleGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           The subtitle should give the user additional details.
       Returns: Builder instance for fluent chaining
   */
-  T subtitle(string propval)
+  T subtitle(string propval) nothrow
   {
     return setProperty("subtitle", propval);
   }
@@ -213,7 +213,7 @@ class WindowTitleGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           generally does not use the application name.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -226,7 +226,7 @@ final class WindowTitleGidBuilder : WindowTitleGidBuilderImpl!WindowTitleGidBuil
       Create object from builder.
       Returns: New object
   */
-  WindowTitle build()
+  WindowTitle build() nothrow
   {
     return new WindowTitle(cast(void*)createGObject(WindowTitle._getGType), No.Take);
   }

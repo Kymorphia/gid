@@ -17,26 +17,26 @@ class RunEndEncodedArray : arrow.array.Array
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_run_end_encoded_array_get_type != &gidSymbolNotFound ? garrow_run_end_encoded_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RunEndEncodedArray self()
+  override RunEndEncodedArray self() nothrow
   {
     return this;
   }
@@ -45,19 +45,19 @@ class RunEndEncodedArray : arrow.array.Array
       Get builder for [arrow.run_end_encoded_array.RunEndEncodedArray]
       Returns: New builder object
   */
-  static RunEndEncodedArrayGidBuilder builder()
+  static RunEndEncodedArrayGidBuilder builder() nothrow
   {
     return new RunEndEncodedArrayGidBuilder;
   }
 
   /** */
-  @property arrow.array.Array runEnds()
+  @property arrow.array.Array runEnds() nothrow
   {
     return getRunEnds();
   }
 
   /** */
-  @property arrow.array.Array values()
+  @property arrow.array.Array values() nothrow
   {
     return getValues();
   }
@@ -86,7 +86,7 @@ class RunEndEncodedArray : arrow.array.Array
   }
 
   /** */
-  long findPhysicalLength()
+  long findPhysicalLength() nothrow
   {
     long _retval;
     _retval = garrow_run_end_encoded_array_find_physical_length(cast(GArrowRunEndEncodedArray*)this._cPtr);
@@ -94,7 +94,7 @@ class RunEndEncodedArray : arrow.array.Array
   }
 
   /** */
-  long findPhysicalOffset()
+  long findPhysicalOffset() nothrow
   {
     long _retval;
     _retval = garrow_run_end_encoded_array_find_physical_offset(cast(GArrowRunEndEncodedArray*)this._cPtr);
@@ -114,7 +114,7 @@ class RunEndEncodedArray : arrow.array.Array
   }
 
   /** */
-  arrow.array.Array getLogicalValues()
+  arrow.array.Array getLogicalValues() nothrow
   {
     GArrowArray* _cretval;
     _cretval = garrow_run_end_encoded_array_get_logical_values(cast(GArrowRunEndEncodedArray*)this._cPtr);
@@ -123,7 +123,7 @@ class RunEndEncodedArray : arrow.array.Array
   }
 
   /** */
-  arrow.array.Array getRunEnds()
+  arrow.array.Array getRunEnds() nothrow
   {
     GArrowArray* _cretval;
     _cretval = garrow_run_end_encoded_array_get_run_ends(cast(GArrowRunEndEncodedArray*)this._cPtr);
@@ -132,7 +132,7 @@ class RunEndEncodedArray : arrow.array.Array
   }
 
   /** */
-  arrow.array.Array getValues()
+  arrow.array.Array getValues() nothrow
   {
     GArrowArray* _cretval;
     _cretval = garrow_run_end_encoded_array_get_values(cast(GArrowRunEndEncodedArray*)this._cPtr);
@@ -146,13 +146,13 @@ class RunEndEncodedArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
 {
 
   /** */
-  T runEnds(arrow.array.Array propval)
+  T runEnds(arrow.array.Array propval) nothrow
   {
     return setProperty("run-ends", propval);
   }
 
   /** */
-  T values(arrow.array.Array propval)
+  T values(arrow.array.Array propval) nothrow
   {
     return setProperty("values", propval);
   }
@@ -165,7 +165,7 @@ final class RunEndEncodedArrayGidBuilder : RunEndEncodedArrayGidBuilderImpl!RunE
       Create object from builder.
       Returns: New object
   */
-  RunEndEncodedArray build()
+  RunEndEncodedArray build() nothrow
   {
     return new RunEndEncodedArray(cast(void*)createGObject(RunEndEncodedArray._getGType), Yes.Take);
   }

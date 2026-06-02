@@ -53,26 +53,26 @@ class MarkAttributes : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_mark_attributes_get_type != &gidSymbolNotFound ? gtk_source_mark_attributes_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MarkAttributes self()
+  override MarkAttributes self() nothrow
   {
     return this;
   }
@@ -81,7 +81,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Get builder for [gtksource.mark_attributes.MarkAttributes]
       Returns: New builder object
   */
-  static MarkAttributesGidBuilder builder()
+  static MarkAttributesGidBuilder builder() nothrow
   {
     return new MarkAttributesGidBuilder;
   }
@@ -90,7 +90,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Get `background` property.
       Returns: A color used for background of a line.
   */
-  @property gdk.rgba.RGBA background()
+  @property gdk.rgba.RGBA background() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("background");
   }
@@ -100,7 +100,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Params:
         propval = A color used for background of a line.
   */
-  @property void background(gdk.rgba.RGBA propval)
+  @property void background(gdk.rgba.RGBA propval) nothrow
   {
     setBackground(propval);
   }
@@ -109,7 +109,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Get `gicon` property.
       Returns: A #GIcon that may be a base of a rendered icon.
   */
-  @property gio.icon.Icon gicon()
+  @property gio.icon.Icon gicon() nothrow
   {
     return getGicon();
   }
@@ -119,7 +119,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Params:
         propval = A #GIcon that may be a base of a rendered icon.
   */
-  @property void gicon(gio.icon.Icon propval)
+  @property void gicon(gio.icon.Icon propval) nothrow
   {
     setGicon(propval);
   }
@@ -128,7 +128,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Get `iconName` property.
       Returns: An icon name that may be a base of a rendered icon.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return getIconName();
   }
@@ -138,7 +138,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Params:
         propval = An icon name that may be a base of a rendered icon.
   */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     setIconName(propval);
   }
@@ -147,7 +147,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Get `pixbuf` property.
       Returns: A #GdkPixbuf that may be a base of a rendered icon.
   */
-  @property gdkpixbuf.pixbuf.Pixbuf pixbuf()
+  @property gdkpixbuf.pixbuf.Pixbuf pixbuf() nothrow
   {
     return getPixbuf();
   }
@@ -157,7 +157,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Params:
         propval = A #GdkPixbuf that may be a base of a rendered icon.
   */
-  @property void pixbuf(gdkpixbuf.pixbuf.Pixbuf propval)
+  @property void pixbuf(gdkpixbuf.pixbuf.Pixbuf propval) nothrow
   {
     setPixbuf(propval);
   }
@@ -166,7 +166,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Creates a new source mark attributes.
       Returns: a new source mark attributes.
   */
-  this()
+  this() nothrow
   {
     GtkSourceMarkAttributes* _cretval;
     _cretval = gtk_source_mark_attributes_new();
@@ -180,7 +180,7 @@ class MarkAttributes : gobject.object.ObjectWrap
         background = a #GdkRGBA.
       Returns: whether background color for attributes was set.
   */
-  bool getBackground(out gdk.rgba.RGBA background)
+  bool getBackground(out gdk.rgba.RGBA background) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_mark_attributes_get_background(cast(GtkSourceMarkAttributes*)this._cPtr, cast(GdkRGBA*)&background);
@@ -194,7 +194,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Returns: An icon. The icon belongs to attributes and should
         not be unreffed.
   */
-  gio.icon.Icon getGicon()
+  gio.icon.Icon getGicon() nothrow
   {
     GIcon* _cretval;
     _cretval = gtk_source_mark_attributes_get_gicon(cast(GtkSourceMarkAttributes*)this._cPtr);
@@ -209,7 +209,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Returns: An icon name. The string belongs to attributes and
         should not be freed.
   */
-  string getIconName()
+  string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_mark_attributes_get_icon_name(cast(GtkSourceMarkAttributes*)this._cPtr);
@@ -224,7 +224,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Returns: A pixbuf. The pixbuf belongs to attributes and
         should not be unreffed.
   */
-  gdkpixbuf.pixbuf.Pixbuf getPixbuf()
+  gdkpixbuf.pixbuf.Pixbuf getPixbuf() nothrow
   {
     const(GdkPixbuf)* _cretval;
     _cretval = gtk_source_mark_attributes_get_pixbuf(cast(GtkSourceMarkAttributes*)this._cPtr);
@@ -242,7 +242,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Returns: A tooltip. The returned string should be freed by
         using [glib.global.gfree] when done with it.
   */
-  string getTooltipMarkup(gtksource.mark.Mark mark)
+  string getTooltipMarkup(gtksource.mark.Mark mark) nothrow
   {
     char* _cretval;
     _cretval = gtk_source_mark_attributes_get_tooltip_markup(cast(GtkSourceMarkAttributes*)this._cPtr, mark ? cast(GtkSourceMark*)mark._cPtr(No.Dup) : null);
@@ -260,7 +260,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Returns: A tooltip. The returned string should be freed by
         using [glib.global.gfree] when done with it.
   */
-  string getTooltipText(gtksource.mark.Mark mark)
+  string getTooltipText(gtksource.mark.Mark mark) nothrow
   {
     char* _cretval;
     _cretval = gtk_source_mark_attributes_get_tooltip_text(cast(GtkSourceMarkAttributes*)this._cPtr, mark ? cast(GtkSourceMark*)mark._cPtr(No.Dup) : null);
@@ -285,7 +285,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Returns: A #GdkPaintable. The paintable belongs to attributes
         and should not be unreffed.
   */
-  gdk.paintable.Paintable renderIcon(gtk.widget.Widget widget, int size)
+  gdk.paintable.Paintable renderIcon(gtk.widget.Widget widget, int size) nothrow
   {
     GdkPaintable* _cretval;
     _cretval = gtk_source_mark_attributes_render_icon(cast(GtkSourceMarkAttributes*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, size);
@@ -299,7 +299,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Params:
         background = a #GdkRGBA.
   */
-  void setBackground(gdk.rgba.RGBA background)
+  void setBackground(gdk.rgba.RGBA background) nothrow
   {
     gtk_source_mark_attributes_set_background(cast(GtkSourceMarkAttributes*)this._cPtr, cast(const(GdkRGBA)*)&background);
   }
@@ -310,7 +310,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Params:
         gicon = a #GIcon to be used.
   */
-  void setGicon(gio.icon.Icon gicon)
+  void setGicon(gio.icon.Icon gicon) nothrow
   {
     gtk_source_mark_attributes_set_gicon(cast(GtkSourceMarkAttributes*)this._cPtr, gicon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)gicon)._cPtr(No.Dup) : null);
   }
@@ -321,7 +321,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Params:
         iconName = name of an icon to be used.
   */
-  void setIconName(string iconName)
+  void setIconName(string iconName) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_source_mark_attributes_set_icon_name(cast(GtkSourceMarkAttributes*)this._cPtr, _iconName);
@@ -333,7 +333,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Params:
         pixbuf = a #GdkPixbuf to be used.
   */
-  void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf) nothrow
   {
     gtk_source_mark_attributes_set_pixbuf(cast(GtkSourceMarkAttributes*)this._cPtr, pixbuf ? cast(const(GdkPixbuf)*)pixbuf._cPtr(No.Dup) : null);
   }
@@ -358,18 +358,19 @@ class MarkAttributes : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectQueryTooltipMarkup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectQueryTooltipMarkup(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == string)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.mark.Mark)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtksource.mark_attributes.MarkAttributes)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      string _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -377,7 +378,14 @@ class MarkAttributes : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.mark_attributes.MarkAttributes.queryTooltipMarkup");
+      }
 
       setVal!(string)(_returnValue, _retval);
     }
@@ -406,18 +414,19 @@ class MarkAttributes : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectQueryTooltipText(T)(T callback, Flag!"After" after = No.After)
+  gulong connectQueryTooltipText(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == string)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.mark.Mark)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtksource.mark_attributes.MarkAttributes)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      string _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -425,7 +434,14 @@ class MarkAttributes : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.mark_attributes.MarkAttributes.queryTooltipText");
+      }
 
       setVal!(string)(_returnValue, _retval);
     }
@@ -445,7 +461,7 @@ class MarkAttributesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = A color used for background of a line.
       Returns: Builder instance for fluent chaining
   */
-  T background(gdk.rgba.RGBA propval)
+  T background(gdk.rgba.RGBA propval) nothrow
   {
     return setProperty("background", propval);
   }
@@ -456,7 +472,7 @@ class MarkAttributesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = A #GIcon that may be a base of a rendered icon.
       Returns: Builder instance for fluent chaining
   */
-  T gicon(gio.icon.Icon propval)
+  T gicon(gio.icon.Icon propval) nothrow
   {
     return setProperty("gicon", propval);
   }
@@ -467,7 +483,7 @@ class MarkAttributesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = An icon name that may be a base of a rendered icon.
       Returns: Builder instance for fluent chaining
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
@@ -478,7 +494,7 @@ class MarkAttributesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = A #GdkPixbuf that may be a base of a rendered icon.
       Returns: Builder instance for fluent chaining
   */
-  T pixbuf(gdkpixbuf.pixbuf.Pixbuf propval)
+  T pixbuf(gdkpixbuf.pixbuf.Pixbuf propval) nothrow
   {
     return setProperty("pixbuf", propval);
   }
@@ -491,7 +507,7 @@ final class MarkAttributesGidBuilder : MarkAttributesGidBuilderImpl!MarkAttribut
       Create object from builder.
       Returns: New object
   */
-  MarkAttributes build()
+  MarkAttributes build() nothrow
   {
     return new MarkAttributes(cast(void*)createGObject(MarkAttributes._getGType), Yes.Take);
   }

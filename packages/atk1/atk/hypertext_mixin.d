@@ -36,7 +36,7 @@ template HypertextT()
       Returns: the link in this hypertext document at
         index link_index
   */
-  override atk.hyperlink.Hyperlink getLink(int linkIndex)
+  override atk.hyperlink.Hyperlink getLink(int linkIndex) nothrow
   {
     AtkHyperlink* _cretval;
     _cretval = atk_hypertext_get_link(cast(AtkHypertext*)this._cPtr, linkIndex);
@@ -53,7 +53,7 @@ template HypertextT()
       Returns: an index into the array of hyperlinks in hypertext,
         or -1 if there is no hyperlink associated with this character.
   */
-  override int getLinkIndex(int charIndex)
+  override int getLinkIndex(int charIndex) nothrow
   {
     int _retval;
     _retval = atk_hypertext_get_link_index(cast(AtkHypertext*)this._cPtr, charIndex);
@@ -64,7 +64,7 @@ template HypertextT()
       Gets the number of links within this hypertext document.
       Returns: the number of links within this hypertext document
   */
-  override int getNLinks()
+  override int getNLinks() nothrow
   {
     int _retval;
     _retval = atk_hypertext_get_n_links(cast(AtkHypertext*)this._cPtr);
@@ -90,14 +90,14 @@ template HypertextT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLinkSelected(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLinkSelected(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.hypertext.Hypertext)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -109,7 +109,14 @@ template HypertextT()
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.hypertext.Hypertext.linkSelected");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

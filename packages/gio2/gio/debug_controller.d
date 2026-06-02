@@ -31,7 +31,7 @@ interface DebugController
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_debug_controller_get_type != &gidSymbolNotFound ? g_debug_controller_get_type() : cast(GType)0;
@@ -42,7 +42,7 @@ interface DebugController
       Returns: true if debug output should be exposed (for example by forwarding it to
         the journal), false otherwise.
   */
-  @property bool debugEnabled();
+  @property bool debugEnabled() nothrow;
 
   /**
       Set `debugEnabled` property.
@@ -50,7 +50,7 @@ interface DebugController
         propval = true if debug output should be exposed (for example by forwarding it to
           the journal), false otherwise.
   */
-  @property void debugEnabled(bool propval);
+  @property void debugEnabled(bool propval) nothrow;
 
   /**
       Get the value of #GDebugController:debug-enabled.
@@ -78,5 +78,5 @@ interface DebugControllerGidBuilderImpl(T)
           the journal), false otherwise.
       Returns: Builder instance for fluent chaining
   */
-  T debugEnabled(bool propval);
+  T debugEnabled(bool propval) nothrow;
 }

@@ -22,26 +22,26 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_charset_converter_get_type != &gidSymbolNotFound ? g_charset_converter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CharsetConverter self()
+  override CharsetConverter self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
       Get builder for [gio.charset_converter.CharsetConverter]
       Returns: New builder object
   */
-  static CharsetConverterGidBuilder builder()
+  static CharsetConverterGidBuilder builder() nothrow
   {
     return new CharsetConverterGidBuilder;
   }
@@ -59,7 +59,7 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
       Get `fromCharset` property.
       Returns: The character encoding to convert from.
   */
-  @property string fromCharset()
+  @property string fromCharset() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("from-charset");
   }
@@ -68,7 +68,7 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
       Get `toCharset` property.
       Returns: The character encoding to convert to.
   */
-  @property string toCharset()
+  @property string toCharset() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("to-charset");
   }
@@ -77,7 +77,7 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
       Get `useFallback` property.
       Returns: Use fallback (of form `\<hexval>`) for invalid bytes.
   */
-  @property bool useFallback()
+  @property bool useFallback() nothrow
   {
     return getUseFallback();
   }
@@ -87,7 +87,7 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
       Params:
         propval = Use fallback (of form `\<hexval>`) for invalid bytes.
   */
-  @property void useFallback(bool propval)
+  @property void useFallback(bool propval) nothrow
   {
     setUseFallback(propval);
   }
@@ -120,7 +120,7 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
       Gets the number of fallbacks that converter has applied so far.
       Returns: the number of fallbacks that converter has applied
   */
-  uint getNumFallbacks()
+  uint getNumFallbacks() nothrow
   {
     uint _retval;
     _retval = g_charset_converter_get_num_fallbacks(cast(GCharsetConverter*)this._cPtr);
@@ -131,7 +131,7 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
       Gets the #GCharsetConverter:use-fallback property.
       Returns: true if fallbacks are used by converter
   */
-  bool getUseFallback()
+  bool getUseFallback() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_charset_converter_get_use_fallback(cast(GCharsetConverter*)this._cPtr);
@@ -144,7 +144,7 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
       Params:
         useFallback = true to use fallbacks
   */
-  void setUseFallback(bool useFallback)
+  void setUseFallback(bool useFallback) nothrow
   {
     g_charset_converter_set_use_fallback(cast(GCharsetConverter*)this._cPtr, useFallback);
   }
@@ -163,7 +163,7 @@ class CharsetConverterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = The character encoding to convert from.
       Returns: Builder instance for fluent chaining
   */
-  T fromCharset(string propval)
+  T fromCharset(string propval) nothrow
   {
     return setProperty("from-charset", propval);
   }
@@ -174,7 +174,7 @@ class CharsetConverterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = The character encoding to convert to.
       Returns: Builder instance for fluent chaining
   */
-  T toCharset(string propval)
+  T toCharset(string propval) nothrow
   {
     return setProperty("to-charset", propval);
   }
@@ -185,7 +185,7 @@ class CharsetConverterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = Use fallback (of form `\<hexval>`) for invalid bytes.
       Returns: Builder instance for fluent chaining
   */
-  T useFallback(bool propval)
+  T useFallback(bool propval) nothrow
   {
     return setProperty("use-fallback", propval);
   }
@@ -198,7 +198,7 @@ final class CharsetConverterGidBuilder : CharsetConverterGidBuilderImpl!CharsetC
       Create object from builder.
       Returns: New object
   */
-  CharsetConverter build()
+  CharsetConverter build() nothrow
   {
     return new CharsetConverter(cast(void*)createGObject(CharsetConverter._getGType), Yes.Take);
   }

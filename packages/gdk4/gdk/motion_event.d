@@ -15,11 +15,8 @@ class MotionEvent : gdk.event.Event
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.motion_event.MotionEvent");
-
     super(cast(GdkEvent*)ptr, take);
   }
 }

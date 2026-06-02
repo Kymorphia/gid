@@ -42,26 +42,26 @@ class WebsocketConnection : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_websocket_connection_get_type != &gidSymbolNotFound ? soup_websocket_connection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WebsocketConnection self()
+  override WebsocketConnection self() nothrow
   {
     return this;
   }
@@ -70,7 +70,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Get builder for [soup.websocket_connection.WebsocketConnection]
       Returns: New builder object
   */
-  static WebsocketConnectionGidBuilder builder()
+  static WebsocketConnectionGidBuilder builder() nothrow
   {
     return new WebsocketConnectionGidBuilder;
   }
@@ -79,7 +79,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Get `connectionType` property.
       Returns: The type of connection (client/server).
   */
-  @property soup.types.WebsocketConnectionType connectionType()
+  @property soup.types.WebsocketConnectionType connectionType() nothrow
   {
     return getConnectionType();
   }
@@ -88,7 +88,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Get `extensions` property.
       Returns: List of [soup.websocket_extension.WebsocketExtension] objects that are active in the connection.
   */
-  @property void* extensions()
+  @property void* extensions() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(void*)("extensions");
   }
@@ -100,7 +100,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
         
         The input and output streams must be pollable streams.
   */
-  @property gio.iostream.IOStream ioStream()
+  @property gio.iostream.IOStream ioStream() nothrow
   {
     return getIoStream();
   }
@@ -112,7 +112,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
         
         If set to 0 the keepalive message is disabled.
   */
-  @property uint keepaliveInterval()
+  @property uint keepaliveInterval() nothrow
   {
     return getKeepaliveInterval();
   }
@@ -125,7 +125,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
           
           If set to 0 the keepalive message is disabled.
   */
-  @property void keepaliveInterval(uint propval)
+  @property void keepaliveInterval(uint propval) nothrow
   {
     setKeepaliveInterval(propval);
   }
@@ -136,7 +136,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
         
         The protocol expects or 0 to not limit it.
   */
-  @property ulong maxIncomingPayloadSize()
+  @property ulong maxIncomingPayloadSize() nothrow
   {
     return getMaxIncomingPayloadSize();
   }
@@ -148,7 +148,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
           
           The protocol expects or 0 to not limit it.
   */
-  @property void maxIncomingPayloadSize(ulong propval)
+  @property void maxIncomingPayloadSize(ulong propval) nothrow
   {
     setMaxIncomingPayloadSize(propval);
   }
@@ -157,7 +157,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Get `origin` property.
       Returns: The client's Origin.
   */
-  @property string origin()
+  @property string origin() nothrow
   {
     return getOrigin();
   }
@@ -167,7 +167,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Returns: The chosen protocol, or null if a protocol was not agreed
         upon.
   */
-  @property string protocol()
+  @property string protocol() nothrow
   {
     return getProtocol();
   }
@@ -176,7 +176,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Get `state` property.
       Returns: The current state of the WebSocket.
   */
-  @property soup.types.WebsocketState state()
+  @property soup.types.WebsocketState state() nothrow
   {
     return getState();
   }
@@ -188,7 +188,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
         For servers this represents the address of the WebSocket,
         and for clients it is the address connected to.
   */
-  @property glib.uri.Uri uri()
+  @property glib.uri.Uri uri() nothrow
   {
     return getUri();
   }
@@ -209,7 +209,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
         code = close code
         data = close data
   */
-  void close(ushort code, string data = null)
+  void close(ushort code, string data = null) nothrow
   {
     const(char)* _data = data.toCString(No.Alloc);
     soup_websocket_connection_close(cast(SoupWebsocketConnection*)this._cPtr, code, _data);
@@ -224,7 +224,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       defined close code.
       Returns: the close code or zero.
   */
-  ushort getCloseCode()
+  ushort getCloseCode() nothrow
   {
     ushort _retval;
     _retval = soup_websocket_connection_get_close_code(cast(SoupWebsocketConnection*)this._cPtr);
@@ -239,7 +239,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       the main loop is run, so copy it if you need to keep it around.
       Returns: the close data or null
   */
-  string getCloseData()
+  string getCloseData() nothrow
   {
     const(char)* _cretval;
     _cretval = soup_websocket_connection_get_close_data(cast(SoupWebsocketConnection*)this._cPtr);
@@ -251,7 +251,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Get the connection type (client/server) of the connection.
       Returns: the connection type
   */
-  soup.types.WebsocketConnectionType getConnectionType()
+  soup.types.WebsocketConnectionType getConnectionType() nothrow
   {
     SoupWebsocketConnectionType _cretval;
     _cretval = soup_websocket_connection_get_connection_type(cast(SoupWebsocketConnection*)this._cPtr);
@@ -263,7 +263,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Get the extensions chosen via negotiation with the peer.
       Returns: a #GList of #SoupWebsocketExtension objects
   */
-  soup.websocket_extension.WebsocketExtension[] getExtensions()
+  soup.websocket_extension.WebsocketExtension[] getExtensions() nothrow
   {
     GList* _cretval;
     _cretval = soup_websocket_connection_get_extensions(cast(SoupWebsocketConnection*)this._cPtr);
@@ -275,7 +275,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Get the I/O stream the WebSocket is communicating over.
       Returns: the WebSocket's I/O stream.
   */
-  gio.iostream.IOStream getIoStream()
+  gio.iostream.IOStream getIoStream() nothrow
   {
     GIOStream* _cretval;
     _cretval = soup_websocket_connection_get_io_stream(cast(SoupWebsocketConnection*)this._cPtr);
@@ -287,7 +287,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Gets the keepalive interval in seconds or 0 if disabled.
       Returns: the keepalive interval.
   */
-  uint getKeepaliveInterval()
+  uint getKeepaliveInterval() nothrow
   {
     uint _retval;
     _retval = soup_websocket_connection_get_keepalive_interval(cast(SoupWebsocketConnection*)this._cPtr);
@@ -298,7 +298,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Gets the maximum payload size allowed for incoming packets.
       Returns: the maximum payload size.
   */
-  ulong getMaxIncomingPayloadSize()
+  ulong getMaxIncomingPayloadSize() nothrow
   {
     ulong _retval;
     _retval = soup_websocket_connection_get_max_incoming_payload_size(cast(SoupWebsocketConnection*)this._cPtr);
@@ -309,7 +309,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Get the origin of the WebSocket.
       Returns: the origin
   */
-  string getOrigin()
+  string getOrigin() nothrow
   {
     const(char)* _cretval;
     _cretval = soup_websocket_connection_get_origin(cast(SoupWebsocketConnection*)this._cPtr);
@@ -321,7 +321,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Get the protocol chosen via negotiation with the peer.
       Returns: the chosen protocol
   */
-  string getProtocol()
+  string getProtocol() nothrow
   {
     const(char)* _cretval;
     _cretval = soup_websocket_connection_get_protocol(cast(SoupWebsocketConnection*)this._cPtr);
@@ -333,7 +333,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Get the current state of the WebSocket.
       Returns: the state
   */
-  soup.types.WebsocketState getState()
+  soup.types.WebsocketState getState() nothrow
   {
     SoupWebsocketState _cretval;
     _cretval = soup_websocket_connection_get_state(cast(SoupWebsocketConnection*)this._cPtr);
@@ -348,7 +348,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       for clients it is the address connected to.
       Returns: the URI
   */
-  glib.uri.Uri getUri()
+  glib.uri.Uri getUri() nothrow
   {
     GUri* _cretval;
     _cretval = soup_websocket_connection_get_uri(cast(SoupWebsocketConnection*)this._cPtr);
@@ -367,7 +367,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Params:
         data = the message contents
   */
-  void sendBinary(ubyte[] data = null)
+  void sendBinary(ubyte[] data = null) nothrow
   {
     size_t _length;
     if (data)
@@ -388,7 +388,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
         type = the type of message contents
         message = the message data as #GBytes
   */
-  void sendMessage(soup.types.WebsocketDataType type, glib.bytes.Bytes message)
+  void sendMessage(soup.types.WebsocketDataType type, glib.bytes.Bytes message) nothrow
   {
     soup_websocket_connection_send_message(cast(SoupWebsocketConnection*)this._cPtr, type, message ? cast(GBytes*)message._cPtr(No.Dup) : null);
   }
@@ -405,7 +405,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Params:
         text = the message contents
   */
-  void sendText(string text)
+  void sendText(string text) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     soup_websocket_connection_send_text(cast(SoupWebsocketConnection*)this._cPtr, _text);
@@ -420,7 +420,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Params:
         interval = the interval to send a ping message or 0 to disable it
   */
-  void setKeepaliveInterval(uint interval)
+  void setKeepaliveInterval(uint interval) nothrow
   {
     soup_websocket_connection_set_keepalive_interval(cast(SoupWebsocketConnection*)this._cPtr, interval);
   }
@@ -433,7 +433,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Params:
         maxIncomingPayloadSize = the maximum payload size
   */
-  void setMaxIncomingPayloadSize(ulong maxIncomingPayloadSize)
+  void setMaxIncomingPayloadSize(ulong maxIncomingPayloadSize) nothrow
   {
     soup_websocket_connection_set_max_incoming_payload_size(cast(SoupWebsocketConnection*)this._cPtr, maxIncomingPayloadSize);
   }
@@ -459,13 +459,13 @@ class WebsocketConnection : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClosed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClosed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.websocket_connection.WebsocketConnection)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -474,7 +474,14 @@ class WebsocketConnection : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.websocket_connection.WebsocketConnection.closed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -496,13 +503,13 @@ class WebsocketConnection : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClosing(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClosing(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.websocket_connection.WebsocketConnection)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -511,7 +518,14 @@ class WebsocketConnection : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.websocket_connection.WebsocketConnection.closing");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -538,14 +552,14 @@ class WebsocketConnection : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectError(T)(T callback, Flag!"After" after = No.After)
+  gulong connectError(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.error.ErrorWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.websocket_connection.WebsocketConnection)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -557,7 +571,14 @@ class WebsocketConnection : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.websocket_connection.WebsocketConnection.error");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -587,7 +608,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMessage(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMessage(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -595,7 +616,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : soup.websocket_connection.WebsocketConnection)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -610,7 +631,14 @@ class WebsocketConnection : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.websocket_connection.WebsocketConnection.message");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -639,14 +667,14 @@ class WebsocketConnection : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPong(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPong(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.bytes.Bytes)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.websocket_connection.WebsocketConnection)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -658,7 +686,14 @@ class WebsocketConnection : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "soup.websocket_connection.WebsocketConnection.pong");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -676,7 +711,7 @@ class WebsocketConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
         propval = The type of connection (client/server).
       Returns: Builder instance for fluent chaining
   */
-  T connectionType(soup.types.WebsocketConnectionType propval)
+  T connectionType(soup.types.WebsocketConnectionType propval) nothrow
   {
     return setProperty("connection-type", propval);
   }
@@ -687,7 +722,7 @@ class WebsocketConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
         propval = List of [soup.websocket_extension.WebsocketExtension] objects that are active in the connection.
       Returns: Builder instance for fluent chaining
   */
-  T extensions(void* propval)
+  T extensions(void* propval) nothrow
   {
     return setProperty("extensions", propval);
   }
@@ -701,7 +736,7 @@ class WebsocketConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
           The input and output streams must be pollable streams.
       Returns: Builder instance for fluent chaining
   */
-  T ioStream(gio.iostream.IOStream propval)
+  T ioStream(gio.iostream.IOStream propval) nothrow
   {
     return setProperty("io-stream", propval);
   }
@@ -715,7 +750,7 @@ class WebsocketConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
           If set to 0 the keepalive message is disabled.
       Returns: Builder instance for fluent chaining
   */
-  T keepaliveInterval(uint propval)
+  T keepaliveInterval(uint propval) nothrow
   {
     return setProperty("keepalive-interval", propval);
   }
@@ -728,7 +763,7 @@ class WebsocketConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
           The protocol expects or 0 to not limit it.
       Returns: Builder instance for fluent chaining
   */
-  T maxIncomingPayloadSize(ulong propval)
+  T maxIncomingPayloadSize(ulong propval) nothrow
   {
     return setProperty("max-incoming-payload-size", propval);
   }
@@ -739,7 +774,7 @@ class WebsocketConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
         propval = The client's Origin.
       Returns: Builder instance for fluent chaining
   */
-  T origin(string propval)
+  T origin(string propval) nothrow
   {
     return setProperty("origin", propval);
   }
@@ -751,7 +786,7 @@ class WebsocketConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
           upon.
       Returns: Builder instance for fluent chaining
   */
-  T protocol(string propval)
+  T protocol(string propval) nothrow
   {
     return setProperty("protocol", propval);
   }
@@ -765,7 +800,7 @@ class WebsocketConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
           and for clients it is the address connected to.
       Returns: Builder instance for fluent chaining
   */
-  T uri(glib.uri.Uri propval)
+  T uri(glib.uri.Uri propval) nothrow
   {
     return setProperty("uri", propval);
   }
@@ -778,7 +813,7 @@ final class WebsocketConnectionGidBuilder : WebsocketConnectionGidBuilderImpl!We
       Create object from builder.
       Returns: New object
   */
-  WebsocketConnection build()
+  WebsocketConnection build() nothrow
   {
     return new WebsocketConnection(cast(void*)createGObject(WebsocketConnection._getGType), Yes.Take);
   }

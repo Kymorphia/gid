@@ -17,26 +17,26 @@ class StyleSchemeManager : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_style_scheme_manager_get_type != &gidSymbolNotFound ? gtk_source_style_scheme_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StyleSchemeManager self()
+  override StyleSchemeManager self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
       Get builder for [gtksource.style_scheme_manager.StyleSchemeManager]
       Returns: New builder object
   */
-  static StyleSchemeManagerGidBuilder builder()
+  static StyleSchemeManagerGidBuilder builder() nothrow
   {
     return new StyleSchemeManagerGidBuilder;
   }
@@ -57,7 +57,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
       then use [gtksource.style_scheme_manager.StyleSchemeManager.getDefault] instead.
       Returns: a new #GtkSourceStyleSchemeManager.
   */
-  this()
+  this() nothrow
   {
     GtkSourceStyleSchemeManager* _cretval;
     _cretval = gtk_source_style_scheme_manager_new();
@@ -69,7 +69,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
       Returns: a #GtkSourceStyleSchemeManager. Return value
         is owned by GtkSourceView library and must not be unref'ed.
   */
-  static gtksource.style_scheme_manager.StyleSchemeManager getDefault()
+  static gtksource.style_scheme_manager.StyleSchemeManager getDefault() nothrow
   {
     GtkSourceStyleSchemeManager* _cretval;
     _cretval = gtk_source_style_scheme_manager_get_default();
@@ -86,7 +86,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
       Params:
         path = a directory or a filename.
   */
-  void appendSearchPath(string path)
+  void appendSearchPath(string path) nothrow
   {
     const(char)* _path = path.toCString(No.Alloc);
     gtk_source_style_scheme_manager_append_search_path(cast(GtkSourceStyleSchemeManager*)this._cPtr, _path);
@@ -98,7 +98,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
       
       All the available style schemes will be reloaded next time the manager is accessed.
   */
-  void forceRescan()
+  void forceRescan() nothrow
   {
     gtk_source_style_scheme_manager_force_rescan(cast(GtkSourceStyleSchemeManager*)this._cPtr);
   }
@@ -111,7 +111,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
       Returns: a #GtkSourceStyleScheme object.
           The returned value is owned by manager and must not be unref'ed.
   */
-  gtksource.style_scheme.StyleScheme getScheme(string schemeId)
+  gtksource.style_scheme.StyleScheme getScheme(string schemeId) nothrow
   {
     GtkSourceStyleScheme* _cretval;
     const(char)* _schemeId = schemeId.toCString(No.Alloc);
@@ -127,7 +127,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
         The array is sorted alphabetically according to the scheme name.
         The array is owned by the manager and must not be modified.
   */
-  string[] getSchemeIds()
+  string[] getSchemeIds() nothrow
   {
     const(char*)* _cretval;
     _cretval = gtk_source_style_scheme_manager_get_scheme_ids(cast(GtkSourceStyleSchemeManager*)this._cPtr);
@@ -153,7 +153,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
         of string containing the search path.
         The array is owned by the manager and must not be modified.
   */
-  string[] getSearchPath()
+  string[] getSearchPath() nothrow
   {
     const(char*)* _cretval;
     _cretval = gtk_source_style_scheme_manager_get_search_path(cast(GtkSourceStyleSchemeManager*)this._cPtr);
@@ -180,7 +180,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
       Params:
         path = a directory or a filename.
   */
-  void prependSearchPath(string path)
+  void prependSearchPath(string path) nothrow
   {
     const(char)* _path = path.toCString(No.Alloc);
     gtk_source_style_scheme_manager_prepend_search_path(cast(GtkSourceStyleSchemeManager*)this._cPtr, _path);
@@ -196,7 +196,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
         path = a null-terminated array of
             strings or null.
   */
-  void setSearchPath(string[] path = null)
+  void setSearchPath(string[] path = null) nothrow
   {
     char*[] _tmppath;
     foreach (s; path)
@@ -220,7 +220,7 @@ final class StyleSchemeManagerGidBuilder : StyleSchemeManagerGidBuilderImpl!Styl
       Create object from builder.
       Returns: New object
   */
-  StyleSchemeManager build()
+  StyleSchemeManager build() nothrow
   {
     return new StyleSchemeManager(cast(void*)createGObject(StyleSchemeManager._getGType), Yes.Take);
   }

@@ -16,11 +16,8 @@ class SDPTime
   GstSDPTime _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstsdp.sdptime.SDPTime");
-
     _cInstance = *cast(GstSDPTime*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class SDPTime
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class SDPTime
       Returns: start time for the conference. The value is the decimal
             representation of Network Time Protocol (NTP) time values in seconds
   */
-  @property string start()
+  @property string start() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPTime*)this._cPtr).start);
   }
@@ -49,7 +46,7 @@ class SDPTime
         propval = start time for the conference. The value is the decimal
               representation of Network Time Protocol (NTP) time values in seconds
   */
-  @property void start(string propval)
+  @property void start(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPTime*)this._cPtr).start);
     dToC(propval, cast(void*)&(cast(GstSDPTime*)this._cPtr).start);
@@ -60,7 +57,7 @@ class SDPTime
       Returns: stop time for the conference. The value is the decimal
             representation of Network Time Protocol (NTP) time values in seconds
   */
-  @property string stop()
+  @property string stop() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstSDPTime*)this._cPtr).stop);
   }
@@ -71,7 +68,7 @@ class SDPTime
         propval = stop time for the conference. The value is the decimal
               representation of Network Time Protocol (NTP) time values in seconds
   */
-  @property void stop(string propval)
+  @property void stop(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstSDPTime*)this._cPtr).stop);
     dToC(propval, cast(void*)&(cast(GstSDPTime*)this._cPtr).stop);
@@ -81,7 +78,7 @@ class SDPTime
       Reset the time information in `t`.
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult clear()
+  gstsdp.types.SDPResult clear() nothrow
   {
     GstSDPResult _cretval;
     _cretval = gst_sdp_time_clear(cast(GstSDPTime*)this._cPtr);
@@ -98,7 +95,7 @@ class SDPTime
         repeat = the repeat times
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult set(string start, string stop, string[] repeat)
+  gstsdp.types.SDPResult set(string start, string stop, string[] repeat) nothrow
   {
     GstSDPResult _cretval;
     const(char)* _start = start.toCString(No.Alloc);

@@ -16,26 +16,26 @@ class StreamCat : gmime.stream.Stream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_stream_cat_get_type != &gidSymbolNotFound ? g_mime_stream_cat_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StreamCat self()
+  override StreamCat self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class StreamCat : gmime.stream.Stream
       Get builder for [gmime.stream_cat.StreamCat]
       Returns: New builder object
   */
-  static StreamCatGidBuilder builder()
+  static StreamCatGidBuilder builder() nothrow
   {
     return new StreamCatGidBuilder;
   }
@@ -53,7 +53,7 @@ class StreamCat : gmime.stream.Stream
       Creates a new #GMimeStreamCat object.
       Returns: a new #GMimeStreamCat stream.
   */
-  this()
+  this() nothrow
   {
     GMimeStream* _cretval;
     _cretval = g_mime_stream_cat_new();
@@ -67,7 +67,7 @@ class StreamCat : gmime.stream.Stream
         source = a source stream
       Returns: `0` on success or %-1 on fail.
   */
-  int addSource(gmime.stream.Stream source)
+  int addSource(gmime.stream.Stream source) nothrow
   {
     int _retval;
     _retval = g_mime_stream_cat_add_source(cast(GMimeStreamCat*)this._cPtr, source ? cast(GMimeStream*)source._cPtr(No.Dup) : null);
@@ -87,7 +87,7 @@ final class StreamCatGidBuilder : StreamCatGidBuilderImpl!StreamCatGidBuilder
       Create object from builder.
       Returns: New object
   */
-  StreamCat build()
+  StreamCat build() nothrow
   {
     return new StreamCat(cast(void*)createGObject(StreamCat._getGType), Yes.Take);
   }

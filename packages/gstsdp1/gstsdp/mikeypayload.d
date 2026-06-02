@@ -16,32 +16,32 @@ class MIKEYPayload : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_mikey_payload_get_type != &gidSymbolNotFound ? gst_mikey_payload_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MIKEYPayload self()
+  override MIKEYPayload self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class MIKEYPayload : gobject.boxed.Boxed
       Get `type` field.
       Returns: the payload type
   */
-  @property gstsdp.types.MIKEYPayloadType type()
+  @property gstsdp.types.MIKEYPayloadType type() nothrow
   {
     return cast(gstsdp.types.MIKEYPayloadType)(cast(GstMIKEYPayload*)this._cPtr).type;
   }
@@ -60,7 +60,7 @@ class MIKEYPayload : gobject.boxed.Boxed
       Params:
         propval = the payload type
   */
-  @property void type(gstsdp.types.MIKEYPayloadType propval)
+  @property void type(gstsdp.types.MIKEYPayloadType propval) nothrow
   {
     (cast(GstMIKEYPayload*)this._cPtr).type = cast(GstMIKEYPayloadType)propval;
   }
@@ -69,7 +69,7 @@ class MIKEYPayload : gobject.boxed.Boxed
       Get `len` field.
       Returns: length of the payload
   */
-  @property uint len()
+  @property uint len() nothrow
   {
     return (cast(GstMIKEYPayload*)this._cPtr).len;
   }
@@ -79,7 +79,7 @@ class MIKEYPayload : gobject.boxed.Boxed
       Params:
         propval = length of the payload
   */
-  @property void len(uint propval)
+  @property void len(uint propval) nothrow
   {
     (cast(GstMIKEYPayload*)this._cPtr).len = propval;
   }
@@ -91,7 +91,7 @@ class MIKEYPayload : gobject.boxed.Boxed
         type = a #GstMIKEYPayloadType
       Returns: a new #GstMIKEYPayload or null on failure.
   */
-  this(gstsdp.types.MIKEYPayloadType type)
+  this(gstsdp.types.MIKEYPayloadType type) nothrow
   {
     GstMIKEYPayload* _cretval;
     _cretval = gst_mikey_payload_new(type);
@@ -105,7 +105,7 @@ class MIKEYPayload : gobject.boxed.Boxed
         newpay = a #GstMIKEYPayload to add
       Returns: true on success.
   */
-  bool kemacAddSub(gstsdp.mikeypayload.MIKEYPayload newpay)
+  bool kemacAddSub(gstsdp.mikeypayload.MIKEYPayload newpay) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_mikey_payload_kemac_add_sub(cast(GstMIKEYPayload*)this._cPtr, newpay ? cast(GstMIKEYPayload*)newpay._cPtr(Yes.Dup) : null);
@@ -117,7 +117,7 @@ class MIKEYPayload : gobject.boxed.Boxed
       `GST_MIKEY_PT_KEMAC`.
       Returns: the number of sub payloads in payload
   */
-  uint kemacGetNSub()
+  uint kemacGetNSub() nothrow
   {
     uint _retval;
     _retval = gst_mikey_payload_kemac_get_n_sub(cast(const(GstMIKEYPayload)*)this._cPtr);
@@ -132,7 +132,7 @@ class MIKEYPayload : gobject.boxed.Boxed
         idx = an index
       Returns: the #GstMIKEYPayload at idx.
   */
-  gstsdp.mikeypayload.MIKEYPayload kemacGetSub(uint idx)
+  gstsdp.mikeypayload.MIKEYPayload kemacGetSub(uint idx) nothrow
   {
     const(GstMIKEYPayload)* _cretval;
     _cretval = gst_mikey_payload_kemac_get_sub(cast(const(GstMIKEYPayload)*)this._cPtr, idx);
@@ -147,7 +147,7 @@ class MIKEYPayload : gobject.boxed.Boxed
         idx = the index to remove
       Returns: true on success.
   */
-  bool kemacRemoveSub(uint idx)
+  bool kemacRemoveSub(uint idx) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_mikey_payload_kemac_remove_sub(cast(GstMIKEYPayload*)this._cPtr, idx);
@@ -163,7 +163,7 @@ class MIKEYPayload : gobject.boxed.Boxed
         macAlg = a #GstMIKEYMacAlg
       Returns: true on success
   */
-  bool kemacSet(gstsdp.types.MIKEYEncAlg encAlg, gstsdp.types.MIKEYMacAlg macAlg)
+  bool kemacSet(gstsdp.types.MIKEYEncAlg encAlg, gstsdp.types.MIKEYMacAlg macAlg) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_mikey_payload_kemac_set(cast(GstMIKEYPayload*)this._cPtr, encAlg, macAlg);
@@ -178,7 +178,7 @@ class MIKEYPayload : gobject.boxed.Boxed
         vtData = the Valid To data
       Returns: true on success
   */
-  bool keyDataSetInterval(ubyte[] vfData, ubyte[] vtData)
+  bool keyDataSetInterval(ubyte[] vfData, ubyte[] vtData) nothrow
   {
     bool _retval;
     ubyte _vfLen;
@@ -204,7 +204,7 @@ class MIKEYPayload : gobject.boxed.Boxed
         keyData = the key of type key_type
       Returns: true on success
   */
-  bool keyDataSetKey(gstsdp.types.MIKEYKeyDataType keyType, ubyte[] keyData)
+  bool keyDataSetKey(gstsdp.types.MIKEYKeyDataType keyType, ubyte[] keyData) nothrow
   {
     bool _retval;
     ushort _keyLen;
@@ -224,7 +224,7 @@ class MIKEYPayload : gobject.boxed.Boxed
         saltData = the salt
       Returns: true on success
   */
-  bool keyDataSetSalt(ubyte[] saltData = null)
+  bool keyDataSetSalt(ubyte[] saltData = null) nothrow
   {
     bool _retval;
     ushort _saltLen;
@@ -243,7 +243,7 @@ class MIKEYPayload : gobject.boxed.Boxed
         spiData = the SPI/MKI data
       Returns: true on success
   */
-  bool keyDataSetSpi(ubyte[] spiData)
+  bool keyDataSetSpi(ubyte[] spiData) nothrow
   {
     bool _retval;
     ubyte _spiLen;
@@ -264,7 +264,7 @@ class MIKEYPayload : gobject.boxed.Boxed
         data = the encrypted envelope key
       Returns: true on success
   */
-  bool pkeSet(gstsdp.types.MIKEYCacheType C, ubyte[] data)
+  bool pkeSet(gstsdp.types.MIKEYCacheType C, ubyte[] data) nothrow
   {
     bool _retval;
     ushort _dataLen;
@@ -283,7 +283,7 @@ class MIKEYPayload : gobject.boxed.Boxed
         rand = random values
       Returns: true on success
   */
-  bool randSet(ubyte[] rand)
+  bool randSet(ubyte[] rand) nothrow
   {
     bool _retval;
     ubyte _len;
@@ -304,7 +304,7 @@ class MIKEYPayload : gobject.boxed.Boxed
         val = len bytes of data
       Returns: true on success
   */
-  bool spAddParam(ubyte type, ubyte[] val)
+  bool spAddParam(ubyte type, ubyte[] val) nothrow
   {
     bool _retval;
     ubyte _len;
@@ -321,7 +321,7 @@ class MIKEYPayload : gobject.boxed.Boxed
       payload.
       Returns: the number of parameters in payload
   */
-  uint spGetNParams()
+  uint spGetNParams() nothrow
   {
     uint _retval;
     _retval = gst_mikey_payload_sp_get_n_params(cast(const(GstMIKEYPayload)*)this._cPtr);
@@ -336,7 +336,7 @@ class MIKEYPayload : gobject.boxed.Boxed
         idx = an index
       Returns: the #GstMIKEYPayloadSPParam at idx in payload
   */
-  gstsdp.mikeypayload_spparam.MIKEYPayloadSPParam spGetParam(uint idx)
+  gstsdp.mikeypayload_spparam.MIKEYPayloadSPParam spGetParam(uint idx) nothrow
   {
     const(GstMIKEYPayloadSPParam)* _cretval;
     _cretval = gst_mikey_payload_sp_get_param(cast(const(GstMIKEYPayload)*)this._cPtr, idx);
@@ -352,7 +352,7 @@ class MIKEYPayload : gobject.boxed.Boxed
         idx = an index
       Returns: true on success
   */
-  bool spRemoveParam(uint idx)
+  bool spRemoveParam(uint idx) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_mikey_payload_sp_remove_param(cast(GstMIKEYPayload*)this._cPtr, idx);
@@ -367,7 +367,7 @@ class MIKEYPayload : gobject.boxed.Boxed
         proto = a #GstMIKEYSecProto
       Returns: true on success
   */
-  bool spSet(uint policy, gstsdp.types.MIKEYSecProto proto)
+  bool spSet(uint policy, gstsdp.types.MIKEYSecProto proto) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_mikey_payload_sp_set(cast(GstMIKEYPayload*)this._cPtr, policy, proto);

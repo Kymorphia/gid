@@ -20,7 +20,7 @@ interface TlsFileDatabase
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_tls_file_database_get_type != &gidSymbolNotFound ? g_tls_file_database_get_type() : cast(GType)0;
@@ -33,7 +33,7 @@ interface TlsFileDatabase
         root authorities for the purpose of verifying other certificates
         via the [gio.tls_database.TlsDatabase.verifyChain] operation.
   */
-  @property string anchors();
+  @property string anchors() nothrow;
 
   /**
       Set `anchors` property.
@@ -43,7 +43,7 @@ interface TlsFileDatabase
           root authorities for the purpose of verifying other certificates
           via the [gio.tls_database.TlsDatabase.verifyChain] operation.
   */
-  @property void anchors(string propval);
+  @property void anchors(string propval) nothrow;
 
   /**
       Creates a new #GTlsFileDatabase which uses anchor certificate authorities
@@ -83,5 +83,5 @@ interface TlsFileDatabaseGidBuilderImpl(T)
           via the [gio.tls_database.TlsDatabase.verifyChain] operation.
       Returns: Builder instance for fluent chaining
   */
-  T anchors(string propval);
+  T anchors(string propval) nothrow;
 }

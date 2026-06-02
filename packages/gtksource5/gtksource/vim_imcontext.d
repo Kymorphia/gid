@@ -64,26 +64,26 @@ class VimIMContext : gtk.imcontext.IMContext
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_vim_im_context_get_type != &gidSymbolNotFound ? gtk_source_vim_im_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VimIMContext self()
+  override VimIMContext self() nothrow
   {
     return this;
   }
@@ -92,25 +92,25 @@ class VimIMContext : gtk.imcontext.IMContext
       Get builder for [gtksource.vim_imcontext.VimIMContext]
       Returns: New builder object
   */
-  static VimIMContextGidBuilder builder()
+  static VimIMContextGidBuilder builder() nothrow
   {
     return new VimIMContextGidBuilder;
   }
 
   /** */
-  @property string commandBarText()
+  @property string commandBarText() nothrow
   {
     return getCommandBarText();
   }
 
   /** */
-  @property string commandText()
+  @property string commandText() nothrow
   {
     return getCommandText();
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GtkIMContext* _cretval;
     _cretval = gtk_source_vim_im_context_new();
@@ -125,7 +125,7 @@ class VimIMContext : gtk.imcontext.IMContext
       Params:
         command = the command text
   */
-  void executeCommand(string command)
+  void executeCommand(string command) nothrow
   {
     const(char)* _command = command.toCString(No.Alloc);
     gtk_source_vim_im_context_execute_command(cast(GtkSourceVimIMContext*)this._cPtr, _command);
@@ -135,7 +135,7 @@ class VimIMContext : gtk.imcontext.IMContext
       Gets the current command-bar text as it is entered by the user.
       Returns: A string containing the command-bar text
   */
-  string getCommandBarText()
+  string getCommandBarText() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_vim_im_context_get_command_bar_text(cast(GtkSourceVimIMContext*)this._cPtr);
@@ -147,7 +147,7 @@ class VimIMContext : gtk.imcontext.IMContext
       Gets the current command text as it is entered by the user.
       Returns: A string containing the command text
   */
-  string getCommandText()
+  string getCommandText() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_vim_im_context_get_command_text(cast(GtkSourceVimIMContext*)this._cPtr);
@@ -179,7 +179,7 @@ class VimIMContext : gtk.imcontext.IMContext
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEdit(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEdit(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.view.View)))
@@ -187,7 +187,7 @@ class VimIMContext : gtk.imcontext.IMContext
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtksource.vim_imcontext.VimIMContext)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -202,7 +202,14 @@ class VimIMContext : gtk.imcontext.IMContext
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.vim_imcontext.VimIMContext.edit");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -231,18 +238,19 @@ class VimIMContext : gtk.imcontext.IMContext
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectExecuteCommand(T)(T callback, Flag!"After" after = No.After)
+  gulong connectExecuteCommand(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtksource.vim_imcontext.VimIMContext)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -250,7 +258,14 @@ class VimIMContext : gtk.imcontext.IMContext
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.vim_imcontext.VimIMContext.executeCommand");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -279,7 +294,7 @@ class VimIMContext : gtk.imcontext.IMContext
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFormatText(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFormatText(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
@@ -287,7 +302,7 @@ class VimIMContext : gtk.imcontext.IMContext
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtksource.vim_imcontext.VimIMContext)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -302,7 +317,14 @@ class VimIMContext : gtk.imcontext.IMContext
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.vim_imcontext.VimIMContext.formatText");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -331,7 +353,7 @@ class VimIMContext : gtk.imcontext.IMContext
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWrite(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWrite(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.view.View)))
@@ -339,7 +361,7 @@ class VimIMContext : gtk.imcontext.IMContext
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtksource.vim_imcontext.VimIMContext)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -354,7 +376,14 @@ class VimIMContext : gtk.imcontext.IMContext
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.vim_imcontext.VimIMContext.write");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -374,7 +403,7 @@ final class VimIMContextGidBuilder : VimIMContextGidBuilderImpl!VimIMContextGidB
       Create object from builder.
       Returns: New object
   */
-  VimIMContext build()
+  VimIMContext build() nothrow
   {
     return new VimIMContext(cast(void*)createGObject(VimIMContext._getGType), Yes.Take);
   }

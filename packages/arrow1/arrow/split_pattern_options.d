@@ -15,26 +15,26 @@ class SplitPatternOptions : arrow.function_options.FunctionOptions
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_split_pattern_options_get_type != &gidSymbolNotFound ? garrow_split_pattern_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SplitPatternOptions self()
+  override SplitPatternOptions self() nothrow
   {
     return this;
   }
@@ -43,19 +43,19 @@ class SplitPatternOptions : arrow.function_options.FunctionOptions
       Get builder for [arrow.split_pattern_options.SplitPatternOptions]
       Returns: New builder object
   */
-  static SplitPatternOptionsGidBuilder builder()
+  static SplitPatternOptionsGidBuilder builder() nothrow
   {
     return new SplitPatternOptionsGidBuilder;
   }
 
   /** */
-  @property long maxSplits()
+  @property long maxSplits() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("max-splits");
   }
 
   /** */
-  @property void maxSplits(long propval)
+  @property void maxSplits(long propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(long)("max-splits", propval);
   }
@@ -64,7 +64,7 @@ class SplitPatternOptions : arrow.function_options.FunctionOptions
       Get `pattern` property.
       Returns: The exact substring to split on.
   */
-  @property string pattern()
+  @property string pattern() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("pattern");
   }
@@ -74,7 +74,7 @@ class SplitPatternOptions : arrow.function_options.FunctionOptions
       Params:
         propval = The exact substring to split on.
   */
-  @property void pattern(string propval)
+  @property void pattern(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("pattern", propval);
   }
@@ -84,7 +84,7 @@ class SplitPatternOptions : arrow.function_options.FunctionOptions
       Returns: Start splitting from the end of the string (only relevant when
         max_splits != -1)
   */
-  @property bool reverse()
+  @property bool reverse() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("reverse");
   }
@@ -95,13 +95,13 @@ class SplitPatternOptions : arrow.function_options.FunctionOptions
         propval = Start splitting from the end of the string (only relevant when
           max_splits != -1)
   */
-  @property void reverse(bool propval)
+  @property void reverse(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("reverse", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowSplitPatternOptions* _cretval;
     _cretval = garrow_split_pattern_options_new();
@@ -114,7 +114,7 @@ class SplitPatternOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOpti
 {
 
   /** */
-  T maxSplits(long propval)
+  T maxSplits(long propval) nothrow
   {
     return setProperty("max-splits", propval);
   }
@@ -125,7 +125,7 @@ class SplitPatternOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOpti
         propval = The exact substring to split on.
       Returns: Builder instance for fluent chaining
   */
-  T pattern(string propval)
+  T pattern(string propval) nothrow
   {
     return setProperty("pattern", propval);
   }
@@ -137,7 +137,7 @@ class SplitPatternOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOpti
           max_splits != -1)
       Returns: Builder instance for fluent chaining
   */
-  T reverse(bool propval)
+  T reverse(bool propval) nothrow
   {
     return setProperty("reverse", propval);
   }
@@ -150,7 +150,7 @@ final class SplitPatternOptionsGidBuilder : SplitPatternOptionsGidBuilderImpl!Sp
       Create object from builder.
       Returns: New object
   */
-  SplitPatternOptions build()
+  SplitPatternOptions build() nothrow
   {
     return new SplitPatternOptions(cast(void*)createGObject(SplitPatternOptions._getGType), Yes.Take);
   }

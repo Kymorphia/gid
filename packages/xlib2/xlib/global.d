@@ -8,7 +8,7 @@ import xlib.types;
 
 
 /** */
-void openDisplay()
+void openDisplay() nothrow
 {
   XOpenDisplay();
 }

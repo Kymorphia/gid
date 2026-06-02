@@ -20,26 +20,26 @@ class DBusMessage : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_message_get_type != &gidSymbolNotFound ? g_dbus_message_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DBusMessage self()
+  override DBusMessage self() nothrow
   {
     return this;
   }
@@ -48,13 +48,13 @@ class DBusMessage : gobject.object.ObjectWrap
       Get builder for [gio.dbus_message.DBusMessage]
       Returns: New builder object
   */
-  static DBusMessageGidBuilder builder()
+  static DBusMessageGidBuilder builder() nothrow
   {
     return new DBusMessageGidBuilder;
   }
 
   /** */
-  @property bool locked()
+  @property bool locked() nothrow
   {
     return getLocked();
   }
@@ -63,7 +63,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Creates a new empty #GDBusMessage.
       Returns: A #GDBusMessage. Free with [gobject.object.ObjectWrap.unref].
   */
-  this()
+  this() nothrow
   {
     GDBusMessage* _cretval;
     _cretval = g_dbus_message_new();
@@ -111,7 +111,7 @@ class DBusMessage : gobject.object.ObjectWrap
         method = A valid method name.
       Returns: A #GDBusMessage. Free with [gobject.object.ObjectWrap.unref].
   */
-  static gio.dbus_message.DBusMessage newMethodCall(string name, string path, string interface_, string method)
+  static gio.dbus_message.DBusMessage newMethodCall(string name, string path, string interface_, string method) nothrow
   {
     GDBusMessage* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -132,7 +132,7 @@ class DBusMessage : gobject.object.ObjectWrap
         signal = A valid signal name.
       Returns: A #GDBusMessage. Free with [gobject.object.ObjectWrap.unref].
   */
-  static gio.dbus_message.DBusMessage newSignal(string path, string interface_, string signal)
+  static gio.dbus_message.DBusMessage newSignal(string path, string interface_, string signal) nothrow
   {
     GDBusMessage* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
@@ -199,7 +199,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Returns: The string item or null if the first item in the body of
         message is not a string.
   */
-  string getArg0()
+  string getArg0() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_arg0(cast(GDBusMessage*)this._cPtr);
@@ -214,7 +214,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Returns: The object path item or `NULL` if the first item in the
           body of message is not an object path.
   */
-  string getArg0Path()
+  string getArg0Path() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_arg0_path(cast(GDBusMessage*)this._cPtr);
@@ -227,7 +227,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Returns: A #GVariant or null if the body is
         empty. Do not free, it is owned by message.
   */
-  glib.variant.Variant getBody()
+  glib.variant.Variant getBody() nothrow
   {
     GVariant* _cretval;
     _cretval = g_dbus_message_get_body(cast(GDBusMessage*)this._cPtr);
@@ -239,7 +239,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Gets the byte order of message.
       Returns: The byte order.
   */
-  gio.types.DBusMessageByteOrder getByteOrder()
+  gio.types.DBusMessageByteOrder getByteOrder() nothrow
   {
     GDBusMessageByteOrder _cretval;
     _cretval = g_dbus_message_get_byte_order(cast(GDBusMessage*)this._cPtr);
@@ -251,7 +251,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Convenience getter for the [gio.types.DBusMessageHeaderField.Destination] header field.
       Returns: The value.
   */
-  string getDestination()
+  string getDestination() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_destination(cast(GDBusMessage*)this._cPtr);
@@ -263,7 +263,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Convenience getter for the [gio.types.DBusMessageHeaderField.ErrorName] header field.
       Returns: The value.
   */
-  string getErrorName()
+  string getErrorName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_error_name(cast(GDBusMessage*)this._cPtr);
@@ -275,7 +275,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Gets the flags for message.
       Returns: Flags that are set (typically values from the #GDBusMessageFlags enumeration bitwise ORed together).
   */
-  gio.types.DBusMessageFlags getFlags()
+  gio.types.DBusMessageFlags getFlags() nothrow
   {
     GDBusMessageFlags _cretval;
     _cretval = g_dbus_message_get_flags(cast(GDBusMessage*)this._cPtr);
@@ -294,7 +294,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Returns: A #GVariant with the value if the header was found, null
         otherwise. Do not free, it is owned by message.
   */
-  glib.variant.Variant getHeader(gio.types.DBusMessageHeaderField headerField)
+  glib.variant.Variant getHeader(gio.types.DBusMessageHeaderField headerField) nothrow
   {
     GVariant* _cretval;
     _cretval = g_dbus_message_get_header(cast(GDBusMessage*)this._cPtr, headerField);
@@ -308,7 +308,7 @@ class DBusMessage : gobject.object.ObjectWrap
         terminated by [gio.types.DBusMessageHeaderField.Invalid].  Each element
         is a #guchar. Free with [glib.global.gfree].
   */
-  ubyte[] getHeaderFields()
+  ubyte[] getHeaderFields() nothrow
   {
     ubyte* _cretval;
     _cretval = g_dbus_message_get_header_fields(cast(GDBusMessage*)this._cPtr);
@@ -328,7 +328,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Convenience getter for the [gio.types.DBusMessageHeaderField.Interface] header field.
       Returns: The value.
   */
-  string getInterface()
+  string getInterface() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_interface(cast(GDBusMessage*)this._cPtr);
@@ -342,7 +342,7 @@ class DBusMessage : gobject.object.ObjectWrap
       on the #GDBusMessage:locked property.
       Returns: true if message is locked, false otherwise.
   */
-  bool getLocked()
+  bool getLocked() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_dbus_message_get_locked(cast(GDBusMessage*)this._cPtr);
@@ -353,7 +353,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Convenience getter for the [gio.types.DBusMessageHeaderField.Member] header field.
       Returns: The value.
   */
-  string getMember()
+  string getMember() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_member(cast(GDBusMessage*)this._cPtr);
@@ -365,7 +365,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Gets the type of message.
       Returns: A 8-bit unsigned integer (typically a value from the #GDBusMessageType enumeration).
   */
-  gio.types.DBusMessageType getMessageType()
+  gio.types.DBusMessageType getMessageType() nothrow
   {
     GDBusMessageType _cretval;
     _cretval = g_dbus_message_get_message_type(cast(GDBusMessage*)this._cPtr);
@@ -377,7 +377,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Convenience getter for the [gio.types.DBusMessageHeaderField.NumUnixFds] header field.
       Returns: The value.
   */
-  uint getNumUnixFds()
+  uint getNumUnixFds() nothrow
   {
     uint _retval;
     _retval = g_dbus_message_get_num_unix_fds(cast(GDBusMessage*)this._cPtr);
@@ -388,7 +388,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Convenience getter for the [gio.types.DBusMessageHeaderField.Path] header field.
       Returns: The value.
   */
-  string getPath()
+  string getPath() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_path(cast(GDBusMessage*)this._cPtr);
@@ -400,7 +400,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Convenience getter for the [gio.types.DBusMessageHeaderField.ReplySerial] header field.
       Returns: The value.
   */
-  uint getReplySerial()
+  uint getReplySerial() nothrow
   {
     uint _retval;
     _retval = g_dbus_message_get_reply_serial(cast(GDBusMessage*)this._cPtr);
@@ -411,7 +411,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Convenience getter for the [gio.types.DBusMessageHeaderField.Sender] header field.
       Returns: The value.
   */
-  string getSender()
+  string getSender() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_sender(cast(GDBusMessage*)this._cPtr);
@@ -423,7 +423,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Gets the serial for message.
       Returns: A #guint32.
   */
-  uint getSerial()
+  uint getSerial() nothrow
   {
     uint _retval;
     _retval = g_dbus_message_get_serial(cast(GDBusMessage*)this._cPtr);
@@ -436,7 +436,7 @@ class DBusMessage : gobject.object.ObjectWrap
       This will always be non-null, but may be an empty string.
       Returns: The value.
   */
-  string getSignature()
+  string getSignature() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_message_get_signature(cast(GDBusMessage*)this._cPtr);
@@ -457,7 +457,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Returns: A #GUnixFDList or null if no file descriptors are
         associated. Do not free, this object is owned by message.
   */
-  gio.unix_fdlist.UnixFDList getUnixFdList()
+  gio.unix_fdlist.UnixFDList getUnixFdList() nothrow
   {
     GUnixFDList* _cretval;
     _cretval = g_dbus_message_get_unix_fd_list(cast(GDBusMessage*)this._cPtr);
@@ -468,7 +468,7 @@ class DBusMessage : gobject.object.ObjectWrap
   /**
       If message is locked, does nothing. Otherwise locks the message.
   */
-  void lock()
+  void lock() nothrow
   {
     g_dbus_message_lock(cast(GDBusMessage*)this._cPtr);
   }
@@ -481,7 +481,7 @@ class DBusMessage : gobject.object.ObjectWrap
         errorMessage = The D-Bus error message.
       Returns: A #GDBusMessage. Free with [gobject.object.ObjectWrap.unref].
   */
-  gio.dbus_message.DBusMessage newMethodErrorLiteral(string errorName, string errorMessage)
+  gio.dbus_message.DBusMessage newMethodErrorLiteral(string errorName, string errorMessage) nothrow
   {
     GDBusMessage* _cretval;
     const(char)* _errorName = errorName.toCString(No.Alloc);
@@ -495,7 +495,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Creates a new #GDBusMessage that is a reply to method_call_message.
       Returns: #GDBusMessage. Free with [gobject.object.ObjectWrap.unref].
   */
-  gio.dbus_message.DBusMessage newMethodReply()
+  gio.dbus_message.DBusMessage newMethodReply() nothrow
   {
     GDBusMessage* _cretval;
     _cretval = g_dbus_message_new_method_reply(cast(GDBusMessage*)this._cPtr);
@@ -541,7 +541,7 @@ class DBusMessage : gobject.object.ObjectWrap
         indent = Indentation level.
       Returns: A string that should be freed with `funcGLib.free`.
   */
-  string print(uint indent)
+  string print(uint indent) nothrow
   {
     char* _cretval;
     _cretval = g_dbus_message_print(cast(GDBusMessage*)this._cPtr, indent);
@@ -559,7 +559,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Params:
         body_ = Either null or a #GVariant that is a tuple.
   */
-  void setBody(glib.variant.Variant body_)
+  void setBody(glib.variant.Variant body_) nothrow
   {
     g_dbus_message_set_body(cast(GDBusMessage*)this._cPtr, body_ ? cast(GVariant*)body_._cPtr(No.Dup) : null);
   }
@@ -570,7 +570,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Params:
         byteOrder = The byte order.
   */
-  void setByteOrder(gio.types.DBusMessageByteOrder byteOrder)
+  void setByteOrder(gio.types.DBusMessageByteOrder byteOrder) nothrow
   {
     g_dbus_message_set_byte_order(cast(GDBusMessage*)this._cPtr, byteOrder);
   }
@@ -581,7 +581,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Params:
         value = The value to set.
   */
-  void setDestination(string value = null)
+  void setDestination(string value = null) nothrow
   {
     const(char)* _value = value.toCString(No.Alloc);
     g_dbus_message_set_destination(cast(GDBusMessage*)this._cPtr, _value);
@@ -593,7 +593,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Params:
         value = The value to set.
   */
-  void setErrorName(string value)
+  void setErrorName(string value) nothrow
   {
     const(char)* _value = value.toCString(No.Alloc);
     g_dbus_message_set_error_name(cast(GDBusMessage*)this._cPtr, _value);
@@ -606,7 +606,7 @@ class DBusMessage : gobject.object.ObjectWrap
         flags = Flags for message that are set (typically values from the #GDBusMessageFlags
           enumeration bitwise ORed together).
   */
-  void setFlags(gio.types.DBusMessageFlags flags)
+  void setFlags(gio.types.DBusMessageFlags flags) nothrow
   {
     g_dbus_message_set_flags(cast(GDBusMessage*)this._cPtr, flags);
   }
@@ -620,7 +620,7 @@ class DBusMessage : gobject.object.ObjectWrap
         headerField = A 8-bit unsigned integer (typically a value from the #GDBusMessageHeaderField enumeration)
         value = A #GVariant to set the header field or null to clear the header field.
   */
-  void setHeader(gio.types.DBusMessageHeaderField headerField, glib.variant.Variant value = null)
+  void setHeader(gio.types.DBusMessageHeaderField headerField, glib.variant.Variant value = null) nothrow
   {
     g_dbus_message_set_header(cast(GDBusMessage*)this._cPtr, headerField, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
   }
@@ -631,7 +631,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Params:
         value = The value to set.
   */
-  void setInterface(string value = null)
+  void setInterface(string value = null) nothrow
   {
     const(char)* _value = value.toCString(No.Alloc);
     g_dbus_message_set_interface(cast(GDBusMessage*)this._cPtr, _value);
@@ -643,7 +643,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Params:
         value = The value to set.
   */
-  void setMember(string value = null)
+  void setMember(string value = null) nothrow
   {
     const(char)* _value = value.toCString(No.Alloc);
     g_dbus_message_set_member(cast(GDBusMessage*)this._cPtr, _value);
@@ -655,7 +655,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Params:
         type = A 8-bit unsigned integer (typically a value from the #GDBusMessageType enumeration).
   */
-  void setMessageType(gio.types.DBusMessageType type)
+  void setMessageType(gio.types.DBusMessageType type) nothrow
   {
     g_dbus_message_set_message_type(cast(GDBusMessage*)this._cPtr, type);
   }
@@ -666,7 +666,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Params:
         value = The value to set.
   */
-  void setNumUnixFds(uint value)
+  void setNumUnixFds(uint value) nothrow
   {
     g_dbus_message_set_num_unix_fds(cast(GDBusMessage*)this._cPtr, value);
   }
@@ -677,7 +677,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Params:
         value = The value to set.
   */
-  void setPath(string value = null)
+  void setPath(string value = null) nothrow
   {
     const(char)* _value = value.toCString(No.Alloc);
     g_dbus_message_set_path(cast(GDBusMessage*)this._cPtr, _value);
@@ -689,7 +689,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Params:
         value = The value to set.
   */
-  void setReplySerial(uint value)
+  void setReplySerial(uint value) nothrow
   {
     g_dbus_message_set_reply_serial(cast(GDBusMessage*)this._cPtr, value);
   }
@@ -700,7 +700,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Params:
         value = The value to set.
   */
-  void setSender(string value = null)
+  void setSender(string value = null) nothrow
   {
     const(char)* _value = value.toCString(No.Alloc);
     g_dbus_message_set_sender(cast(GDBusMessage*)this._cPtr, _value);
@@ -712,7 +712,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Params:
         serial = A #guint32.
   */
-  void setSerial(uint serial)
+  void setSerial(uint serial) nothrow
   {
     g_dbus_message_set_serial(cast(GDBusMessage*)this._cPtr, serial);
   }
@@ -723,7 +723,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Params:
         value = The value to set.
   */
-  void setSignature(string value = null)
+  void setSignature(string value = null) nothrow
   {
     const(char)* _value = value.toCString(No.Alloc);
     g_dbus_message_set_signature(cast(GDBusMessage*)this._cPtr, _value);
@@ -745,7 +745,7 @@ class DBusMessage : gobject.object.ObjectWrap
       Params:
         fdList = A #GUnixFDList or null.
   */
-  void setUnixFdList(gio.unix_fdlist.UnixFDList fdList = null)
+  void setUnixFdList(gio.unix_fdlist.UnixFDList fdList = null) nothrow
   {
     g_dbus_message_set_unix_fd_list(cast(GDBusMessage*)this._cPtr, fdList ? cast(GUnixFDList*)fdList._cPtr(No.Dup) : null);
   }
@@ -813,7 +813,7 @@ final class DBusMessageGidBuilder : DBusMessageGidBuilderImpl!DBusMessageGidBuil
       Create object from builder.
       Returns: New object
   */
-  DBusMessage build()
+  DBusMessage build() nothrow
   {
     return new DBusMessage(cast(void*)createGObject(DBusMessage._getGType), Yes.Take);
   }

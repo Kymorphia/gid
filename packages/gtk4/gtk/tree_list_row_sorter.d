@@ -29,26 +29,26 @@ class TreeListRowSorter : gtk.sorter.Sorter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_list_row_sorter_get_type != &gidSymbolNotFound ? gtk_tree_list_row_sorter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TreeListRowSorter self()
+  override TreeListRowSorter self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class TreeListRowSorter : gtk.sorter.Sorter
       Get builder for [gtk.tree_list_row_sorter.TreeListRowSorter]
       Returns: New builder object
   */
-  static TreeListRowSorterGidBuilder builder()
+  static TreeListRowSorterGidBuilder builder() nothrow
   {
     return new TreeListRowSorterGidBuilder;
   }
@@ -66,7 +66,7 @@ class TreeListRowSorter : gtk.sorter.Sorter
       Get `sorter` property.
       Returns: The underlying sorter
   */
-  @property gtk.sorter.Sorter sorter()
+  @property gtk.sorter.Sorter sorter() nothrow
   {
     return getSorter();
   }
@@ -76,7 +76,7 @@ class TreeListRowSorter : gtk.sorter.Sorter
       Params:
         propval = The underlying sorter
   */
-  @property void sorter(gtk.sorter.Sorter propval)
+  @property void sorter(gtk.sorter.Sorter propval) nothrow
   {
     setSorter(propval);
   }
@@ -92,7 +92,7 @@ class TreeListRowSorter : gtk.sorter.Sorter
         sorter = a [gtk.sorter.Sorter]
       Returns: a new [gtk.tree_list_row_sorter.TreeListRowSorter]
   */
-  this(gtk.sorter.Sorter sorter = null)
+  this(gtk.sorter.Sorter sorter = null) nothrow
   {
     GtkTreeListRowSorter* _cretval;
     _cretval = gtk_tree_list_row_sorter_new(sorter ? cast(GtkSorter*)sorter._cPtr(Yes.Dup) : null);
@@ -103,7 +103,7 @@ class TreeListRowSorter : gtk.sorter.Sorter
       Returns the sorter used by self.
       Returns: the sorter used
   */
-  gtk.sorter.Sorter getSorter()
+  gtk.sorter.Sorter getSorter() nothrow
   {
     GtkSorter* _cretval;
     _cretval = gtk_tree_list_row_sorter_get_sorter(cast(GtkTreeListRowSorter*)this._cPtr);
@@ -120,7 +120,7 @@ class TreeListRowSorter : gtk.sorter.Sorter
       Params:
         sorter = The sorter to use
   */
-  void setSorter(gtk.sorter.Sorter sorter = null)
+  void setSorter(gtk.sorter.Sorter sorter = null) nothrow
   {
     gtk_tree_list_row_sorter_set_sorter(cast(GtkTreeListRowSorter*)this._cPtr, sorter ? cast(GtkSorter*)sorter._cPtr(No.Dup) : null);
   }
@@ -136,7 +136,7 @@ class TreeListRowSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T
         propval = The underlying sorter
       Returns: Builder instance for fluent chaining
   */
-  T sorter(gtk.sorter.Sorter propval)
+  T sorter(gtk.sorter.Sorter propval) nothrow
   {
     return setProperty("sorter", propval);
   }
@@ -149,7 +149,7 @@ final class TreeListRowSorterGidBuilder : TreeListRowSorterGidBuilderImpl!TreeLi
       Create object from builder.
       Returns: New object
   */
-  TreeListRowSorter build()
+  TreeListRowSorter build() nothrow
   {
     return new TreeListRowSorter(cast(void*)createGObject(TreeListRowSorter._getGType), Yes.Take);
   }

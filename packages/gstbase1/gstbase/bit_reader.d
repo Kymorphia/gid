@@ -17,11 +17,8 @@ class BitReader
   GstBitReader _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstbase.bit_reader.BitReader");
-
     _cInstance = *cast(GstBitReader*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class BitReader
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class BitReader
       Get `size` field.
       Returns: Size of @data in bytes
   */
-  @property uint size()
+  @property uint size() nothrow
   {
     return (cast(GstBitReader*)this._cPtr).size;
   }
@@ -48,7 +45,7 @@ class BitReader
       Params:
         propval = Size of @data in bytes
   */
-  @property void size(uint propval)
+  @property void size(uint propval) nothrow
   {
     (cast(GstBitReader*)this._cPtr).size = propval;
   }
@@ -57,7 +54,7 @@ class BitReader
       Get `byte_` field.
       Returns: Current byte position
   */
-  @property uint byte_()
+  @property uint byte_() nothrow
   {
     return (cast(GstBitReader*)this._cPtr).byte_;
   }
@@ -67,7 +64,7 @@ class BitReader
       Params:
         propval = Current byte position
   */
-  @property void byte_(uint propval)
+  @property void byte_(uint propval) nothrow
   {
     (cast(GstBitReader*)this._cPtr).byte_ = propval;
   }
@@ -76,7 +73,7 @@ class BitReader
       Get `bit` field.
       Returns: Bit position in the current byte
   */
-  @property uint bit()
+  @property uint bit() nothrow
   {
     return (cast(GstBitReader*)this._cPtr).bit;
   }
@@ -86,7 +83,7 @@ class BitReader
       Params:
         propval = Bit position in the current byte
   */
-  @property void bit(uint propval)
+  @property void bit(uint propval) nothrow
   {
     (cast(GstBitReader*)this._cPtr).bit = propval;
   }
@@ -99,7 +96,7 @@ class BitReader
         nbits = number of bits to read
       Returns: true if successful, false otherwise.
   */
-  bool getBitsUint16(out ushort val, uint nbits)
+  bool getBitsUint16(out ushort val, uint nbits) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bit_reader_get_bits_uint16(cast(GstBitReader*)this._cPtr, cast(ushort*)&val, nbits);
@@ -114,7 +111,7 @@ class BitReader
         nbits = number of bits to read
       Returns: true if successful, false otherwise.
   */
-  bool getBitsUint32(out uint val, uint nbits)
+  bool getBitsUint32(out uint val, uint nbits) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bit_reader_get_bits_uint32(cast(GstBitReader*)this._cPtr, cast(uint*)&val, nbits);
@@ -129,7 +126,7 @@ class BitReader
         nbits = number of bits to read
       Returns: true if successful, false otherwise.
   */
-  bool getBitsUint64(out ulong val, uint nbits)
+  bool getBitsUint64(out ulong val, uint nbits) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bit_reader_get_bits_uint64(cast(GstBitReader*)this._cPtr, cast(ulong*)&val, nbits);
@@ -144,7 +141,7 @@ class BitReader
         nbits = number of bits to read
       Returns: true if successful, false otherwise.
   */
-  bool getBitsUint8(out ubyte val, uint nbits)
+  bool getBitsUint8(out ubyte val, uint nbits) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bit_reader_get_bits_uint8(cast(GstBitReader*)this._cPtr, cast(ubyte*)&val, nbits);
@@ -155,7 +152,7 @@ class BitReader
       Returns the current position of a #GstBitReader instance in bits.
       Returns: The current position of reader in bits.
   */
-  uint getPos()
+  uint getPos() nothrow
   {
     uint _retval;
     _retval = gst_bit_reader_get_pos(cast(const(GstBitReader)*)this._cPtr);
@@ -166,7 +163,7 @@ class BitReader
       Returns the remaining number of bits of a #GstBitReader instance.
       Returns: The remaining number of bits of reader instance.
   */
-  uint getRemaining()
+  uint getRemaining() nothrow
   {
     uint _retval;
     _retval = gst_bit_reader_get_remaining(cast(const(GstBitReader)*)this._cPtr);
@@ -177,7 +174,7 @@ class BitReader
       Returns the total number of bits of a #GstBitReader instance.
       Returns: The total number of bits of reader instance.
   */
-  uint getSize()
+  uint getSize() nothrow
   {
     uint _retval;
     _retval = gst_bit_reader_get_size(cast(const(GstBitReader)*)this._cPtr);
@@ -191,7 +188,7 @@ class BitReader
       Params:
         data = data from which the bit reader should read
   */
-  void init_(ubyte[] data)
+  void init_(ubyte[] data) nothrow
   {
     uint _size;
     if (data)
@@ -209,7 +206,7 @@ class BitReader
         nbits = number of bits to read
       Returns: true if successful, false otherwise.
   */
-  bool peekBitsUint16(out ushort val, uint nbits)
+  bool peekBitsUint16(out ushort val, uint nbits) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bit_reader_peek_bits_uint16(cast(const(GstBitReader)*)this._cPtr, cast(ushort*)&val, nbits);
@@ -224,7 +221,7 @@ class BitReader
         nbits = number of bits to read
       Returns: true if successful, false otherwise.
   */
-  bool peekBitsUint32(out uint val, uint nbits)
+  bool peekBitsUint32(out uint val, uint nbits) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bit_reader_peek_bits_uint32(cast(const(GstBitReader)*)this._cPtr, cast(uint*)&val, nbits);
@@ -239,7 +236,7 @@ class BitReader
         nbits = number of bits to read
       Returns: true if successful, false otherwise.
   */
-  bool peekBitsUint64(out ulong val, uint nbits)
+  bool peekBitsUint64(out ulong val, uint nbits) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bit_reader_peek_bits_uint64(cast(const(GstBitReader)*)this._cPtr, cast(ulong*)&val, nbits);
@@ -254,7 +251,7 @@ class BitReader
         nbits = number of bits to read
       Returns: true if successful, false otherwise.
   */
-  bool peekBitsUint8(out ubyte val, uint nbits)
+  bool peekBitsUint8(out ubyte val, uint nbits) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bit_reader_peek_bits_uint8(cast(const(GstBitReader)*)this._cPtr, cast(ubyte*)&val, nbits);
@@ -269,7 +266,7 @@ class BitReader
       Returns: true if the position could be set successfully, false
         otherwise.
   */
-  bool setPos(uint pos)
+  bool setPos(uint pos) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bit_reader_set_pos(cast(GstBitReader*)this._cPtr, pos);
@@ -283,7 +280,7 @@ class BitReader
         nbits = the number of bits to skip
       Returns: true if nbits bits could be skipped, false otherwise.
   */
-  bool skip(uint nbits)
+  bool skip(uint nbits) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bit_reader_skip(cast(GstBitReader*)this._cPtr, nbits);
@@ -294,7 +291,7 @@ class BitReader
       Skips until the next byte.
       Returns: true if successful, false otherwise.
   */
-  bool skipToByte()
+  bool skipToByte() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_bit_reader_skip_to_byte(cast(GstBitReader*)this._cPtr);

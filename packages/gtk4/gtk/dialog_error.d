@@ -14,7 +14,7 @@ struct DialogError
   alias Enum = gtk.types.DialogError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gtk_dialog_error_quark();
@@ -24,12 +24,12 @@ struct DialogError
 
 class DialogException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gtk.dialog_error.DialogError.quark, cast(int)code, msg);
   }

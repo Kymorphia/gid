@@ -30,26 +30,26 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_numerable_icon_get_type != &gidSymbolNotFound ? gtk_numerable_icon_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NumerableIcon self()
+  override NumerableIcon self() nothrow
   {
     return this;
   }
@@ -58,67 +58,67 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
       Get builder for [gtk.numerable_icon.NumerableIcon]
       Returns: New builder object
   */
-  static NumerableIconGidBuilder builder()
+  static NumerableIconGidBuilder builder() nothrow
   {
     return new NumerableIconGidBuilder;
   }
 
   /** */
-  @property gio.icon.Icon backgroundIcon()
+  @property gio.icon.Icon backgroundIcon() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.icon.Icon)("background-icon");
   }
 
   /** */
-  @property void backgroundIcon(gio.icon.Icon propval)
+  @property void backgroundIcon(gio.icon.Icon propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gio.icon.Icon)("background-icon", propval);
   }
 
   /** */
-  @property string backgroundIconName()
+  @property string backgroundIconName() nothrow
   {
     return getBackgroundIconName();
   }
 
   /** */
-  @property void backgroundIconName(string propval)
+  @property void backgroundIconName(string propval) nothrow
   {
     setBackgroundIconName(propval);
   }
 
   /** */
-  @property int count()
+  @property int count() nothrow
   {
     return getCount();
   }
 
   /** */
-  @property void count(int propval)
+  @property void count(int propval) nothrow
   {
     setCount(propval);
   }
 
   /** */
-  @property string label()
+  @property string label() nothrow
   {
     return getLabel();
   }
 
   /** */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     setLabel(propval);
   }
 
   /** */
-  @property gtk.style_context.StyleContext styleContext()
+  @property gtk.style_context.StyleContext styleContext() nothrow
   {
     return getStyleContext();
   }
 
   /** */
-  @property void styleContext(gtk.style_context.StyleContext propval)
+  @property void styleContext(gtk.style_context.StyleContext propval) nothrow
   {
     setStyleContext(propval);
   }
@@ -130,7 +130,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
         baseIcon = a #GIcon to overlay on
       Returns: a new #GIcon
   */
-  static gio.icon.Icon new_(gio.icon.Icon baseIcon)
+  static gio.icon.Icon new_(gio.icon.Icon baseIcon) nothrow
   {
     GIcon* _cretval;
     _cretval = gtk_numerable_icon_new(baseIcon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)baseIcon)._cPtr(No.Dup) : null);
@@ -148,7 +148,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
         context = a #GtkStyleContext
       Returns: a new #GIcon
   */
-  static gio.icon.Icon newWithStyleContext(gio.icon.Icon baseIcon, gtk.style_context.StyleContext context)
+  static gio.icon.Icon newWithStyleContext(gio.icon.Icon baseIcon, gtk.style_context.StyleContext context) nothrow
   {
     GIcon* _cretval;
     _cretval = gtk_numerable_icon_new_with_style_context(baseIcon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)baseIcon)._cPtr(No.Dup) : null, context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null);
@@ -162,7 +162,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
       a reference to the returned #GIcon.
       Returns: a #GIcon, or null
   */
-  gio.icon.Icon getBackgroundGicon()
+  gio.icon.Icon getBackgroundGicon() nothrow
   {
     GIcon* _cretval;
     _cretval = gtk_numerable_icon_get_background_gicon(cast(GtkNumerableIcon*)this._cPtr);
@@ -175,7 +175,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
       or null if there’s none.
       Returns: an icon name, or null
   */
-  string getBackgroundIconName()
+  string getBackgroundIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_numerable_icon_get_background_icon_name(cast(GtkNumerableIcon*)this._cPtr);
@@ -187,7 +187,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
       Returns the value currently displayed by self.
       Returns: the currently displayed value
   */
-  int getCount()
+  int getCount() nothrow
   {
     int _retval;
     _retval = gtk_numerable_icon_get_count(cast(GtkNumerableIcon*)this._cPtr);
@@ -198,7 +198,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
       Returns the currently displayed label of the icon, or null.
       Returns: the currently displayed label
   */
-  string getLabel()
+  string getLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_numerable_icon_get_label(cast(GtkNumerableIcon*)this._cPtr);
@@ -213,7 +213,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
             This object is internal to GTK+ and should not be unreffed.
             Use [gobject.object.ObjectWrap.ref_] if you want to keep it around
   */
-  gtk.style_context.StyleContext getStyleContext()
+  gtk.style_context.StyleContext getStyleContext() nothrow
   {
     GtkStyleContext* _cretval;
     _cretval = gtk_numerable_icon_get_style_context(cast(GtkNumerableIcon*)this._cPtr);
@@ -234,7 +234,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
       Params:
         icon = a #GIcon, or null
   */
-  void setBackgroundGicon(gio.icon.Icon icon = null)
+  void setBackgroundGicon(gio.icon.Icon icon = null) nothrow
   {
     gtk_numerable_icon_set_background_gicon(cast(GtkNumerableIcon*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
@@ -253,7 +253,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
       Params:
         iconName = an icon name, or null
   */
-  void setBackgroundIconName(string iconName = null)
+  void setBackgroundIconName(string iconName = null) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_numerable_icon_set_background_icon_name(cast(GtkNumerableIcon*)this._cPtr, _iconName);
@@ -272,7 +272,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
       Params:
         count = a number between -99 and 99
   */
-  void setCount(int count)
+  void setCount(int count) nothrow
   {
     gtk_numerable_icon_set_count(cast(GtkNumerableIcon*)this._cPtr, count);
   }
@@ -295,7 +295,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
       Params:
         label = a short label, or null
   */
-  void setLabel(string label = null)
+  void setLabel(string label = null) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_numerable_icon_set_label(cast(GtkNumerableIcon*)this._cPtr, _label);
@@ -308,7 +308,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
       Params:
         style = a #GtkStyleContext
   */
-  void setStyleContext(gtk.style_context.StyleContext style)
+  void setStyleContext(gtk.style_context.StyleContext style) nothrow
   {
     gtk_numerable_icon_set_style_context(cast(GtkNumerableIcon*)this._cPtr, style ? cast(GtkStyleContext*)style._cPtr(No.Dup) : null);
   }
@@ -320,31 +320,31 @@ class NumerableIconGidBuilderImpl(T) : gio.emblemed_icon.EmblemedIconGidBuilderI
 
 
   /** */
-  T backgroundIcon(gio.icon.Icon propval)
+  T backgroundIcon(gio.icon.Icon propval) nothrow
   {
     return setProperty("background-icon", propval);
   }
 
   /** */
-  T backgroundIconName(string propval)
+  T backgroundIconName(string propval) nothrow
   {
     return setProperty("background-icon-name", propval);
   }
 
   /** */
-  T count(int propval)
+  T count(int propval) nothrow
   {
     return setProperty("count", propval);
   }
 
   /** */
-  T label(string propval)
+  T label(string propval) nothrow
   {
     return setProperty("label", propval);
   }
 
   /** */
-  T styleContext(gtk.style_context.StyleContext propval)
+  T styleContext(gtk.style_context.StyleContext propval) nothrow
   {
     return setProperty("style-context", propval);
   }
@@ -357,7 +357,7 @@ final class NumerableIconGidBuilder : NumerableIconGidBuilderImpl!NumerableIconG
       Create object from builder.
       Returns: New object
   */
-  NumerableIcon build()
+  NumerableIcon build() nothrow
   {
     return new NumerableIcon(cast(void*)createGObject(NumerableIcon._getGType), No.Take);
   }

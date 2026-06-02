@@ -29,26 +29,26 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_single_selection_get_type != &gidSymbolNotFound ? gtk_single_selection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SingleSelection self()
+  override SingleSelection self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Get builder for [gtk.single_selection.SingleSelection]
       Returns: New builder object
   */
-  static SingleSelectionGidBuilder builder()
+  static SingleSelectionGidBuilder builder() nothrow
   {
     return new SingleSelectionGidBuilder;
   }
@@ -66,7 +66,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Get `autoselect` property.
       Returns: If the selection will always select an item.
   */
-  @property bool autoselect()
+  @property bool autoselect() nothrow
   {
     return getAutoselect();
   }
@@ -76,7 +76,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Params:
         propval = If the selection will always select an item.
   */
-  @property void autoselect(bool propval)
+  @property void autoselect(bool propval) nothrow
   {
     setAutoselect(propval);
   }
@@ -85,7 +85,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Get `canUnselect` property.
       Returns: If unselecting the selected item is allowed.
   */
-  @property bool canUnselect()
+  @property bool canUnselect() nothrow
   {
     return getCanUnselect();
   }
@@ -95,7 +95,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Params:
         propval = If unselecting the selected item is allowed.
   */
-  @property void canUnselect(bool propval)
+  @property void canUnselect(bool propval) nothrow
   {
     setCanUnselect(propval);
   }
@@ -104,7 +104,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
-  @property gobject.types.GType itemType()
+  @property gobject.types.GType itemType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
   }
@@ -113,7 +113,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Get `model` property.
       Returns: The model being managed.
   */
-  @property gio.list_model.ListModel model()
+  @property gio.list_model.ListModel model() nothrow
   {
     return getModel();
   }
@@ -123,7 +123,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Params:
         propval = The model being managed.
   */
-  @property void model(gio.list_model.ListModel propval)
+  @property void model(gio.list_model.ListModel propval) nothrow
   {
     setModel(propval);
   }
@@ -132,7 +132,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Get `nItems` property.
       Returns: The number of items. See [gio.list_model.ListModel.getNItems].
   */
-  @property uint nItems()
+  @property uint nItems() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
@@ -141,7 +141,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Get `selected` property.
       Returns: Position of the selected item.
   */
-  @property uint selected()
+  @property uint selected() nothrow
   {
     return getSelected();
   }
@@ -151,7 +151,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Params:
         propval = Position of the selected item.
   */
-  @property void selected(uint propval)
+  @property void selected(uint propval) nothrow
   {
     setSelected(propval);
   }
@@ -160,7 +160,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Get `selectedItem` property.
       Returns: The selected item.
   */
-  @property gobject.object.ObjectWrap selectedItem()
+  @property gobject.object.ObjectWrap selectedItem() nothrow
   {
     return getSelectedItem();
   }
@@ -176,7 +176,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
         model = the [gio.list_model.ListModel] to manage
       Returns: a new [gtk.single_selection.SingleSelection]
   */
-  this(gio.list_model.ListModel model = null)
+  this(gio.list_model.ListModel model = null) nothrow
   {
     GtkSingleSelection* _cretval;
     _cretval = gtk_single_selection_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(Yes.Dup) : null);
@@ -188,7 +188,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       [gtk.single_selection.SingleSelection.setAutoselect].
       Returns: true if autoselect is enabled
   */
-  bool getAutoselect()
+  bool getAutoselect() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_single_selection_get_autoselect(cast(GtkSingleSelection*)this._cPtr);
@@ -200,7 +200,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       unselecting the selected item.
       Returns: true to support unselecting
   */
-  bool getCanUnselect()
+  bool getCanUnselect() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_single_selection_get_can_unselect(cast(GtkSingleSelection*)this._cPtr);
@@ -211,7 +211,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Gets the model that self is wrapping.
       Returns: The model being wrapped
   */
-  gio.list_model.ListModel getModel()
+  gio.list_model.ListModel getModel() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_single_selection_get_model(cast(GtkSingleSelection*)this._cPtr);
@@ -225,7 +225,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       If no item is selected, [gtk.types.INVALID_LIST_POSITION] is returned.
       Returns: The position of the selected item
   */
-  uint getSelected()
+  uint getSelected() nothrow
   {
     uint _retval;
     _retval = gtk_single_selection_get_selected(cast(GtkSingleSelection*)this._cPtr);
@@ -238,7 +238,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       If no item is selected, null is returned.
       Returns: The selected item
   */
-  gobject.object.ObjectWrap getSelectedItem()
+  gobject.object.ObjectWrap getSelectedItem() nothrow
   {
     GObject* _cretval;
     _cretval = gtk_single_selection_get_selected_item(cast(GtkSingleSelection*)this._cPtr);
@@ -256,7 +256,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Params:
         autoselect = true to always select an item
   */
-  void setAutoselect(bool autoselect)
+  void setAutoselect(bool autoselect) nothrow
   {
     gtk_single_selection_set_autoselect(cast(GtkSingleSelection*)this._cPtr, autoselect);
   }
@@ -272,7 +272,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Params:
         canUnselect = true to allow unselecting
   */
-  void setCanUnselect(bool canUnselect)
+  void setCanUnselect(bool canUnselect) nothrow
   {
     gtk_single_selection_set_can_unselect(cast(GtkSingleSelection*)this._cPtr, canUnselect);
   }
@@ -285,7 +285,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Params:
         model = A [gio.list_model.ListModel] to wrap
   */
-  void setModel(gio.list_model.ListModel model = null)
+  void setModel(gio.list_model.ListModel model = null) nothrow
   {
     gtk_single_selection_set_model(cast(GtkSingleSelection*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
@@ -303,7 +303,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Params:
         position = the item to select or [gtk.types.INVALID_LIST_POSITION]
   */
-  void setSelected(uint position)
+  void setSelected(uint position) nothrow
   {
     gtk_single_selection_set_selected(cast(GtkSingleSelection*)this._cPtr, position);
   }
@@ -323,7 +323,7 @@ class SingleSelectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = If the selection will always select an item.
       Returns: Builder instance for fluent chaining
   */
-  T autoselect(bool propval)
+  T autoselect(bool propval) nothrow
   {
     return setProperty("autoselect", propval);
   }
@@ -334,7 +334,7 @@ class SingleSelectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = If unselecting the selected item is allowed.
       Returns: Builder instance for fluent chaining
   */
-  T canUnselect(bool propval)
+  T canUnselect(bool propval) nothrow
   {
     return setProperty("can-unselect", propval);
   }
@@ -345,7 +345,7 @@ class SingleSelectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The model being managed.
       Returns: Builder instance for fluent chaining
   */
-  T model(gio.list_model.ListModel propval)
+  T model(gio.list_model.ListModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -356,7 +356,7 @@ class SingleSelectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = Position of the selected item.
       Returns: Builder instance for fluent chaining
   */
-  T selected(uint propval)
+  T selected(uint propval) nothrow
   {
     return setProperty("selected", propval);
   }
@@ -369,7 +369,7 @@ final class SingleSelectionGidBuilder : SingleSelectionGidBuilderImpl!SingleSele
       Create object from builder.
       Returns: New object
   */
-  SingleSelection build()
+  SingleSelection build() nothrow
   {
     return new SingleSelection(cast(void*)createGObject(SingleSelection._getGType), Yes.Take);
   }

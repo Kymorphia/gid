@@ -32,26 +32,26 @@ class FaviconDatabase : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_favicon_database_get_type != &gidSymbolNotFound ? webkit_favicon_database_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FaviconDatabase self()
+  override FaviconDatabase self() nothrow
   {
     return this;
   }
@@ -60,7 +60,7 @@ class FaviconDatabase : gobject.object.ObjectWrap
       Get builder for [webkit.favicon_database.FaviconDatabase]
       Returns: New builder object
   */
-  static FaviconDatabaseGidBuilder builder()
+  static FaviconDatabaseGidBuilder builder() nothrow
   {
     return new FaviconDatabaseGidBuilder;
   }
@@ -68,7 +68,7 @@ class FaviconDatabase : gobject.object.ObjectWrap
   /**
       Clears all icons from the database.
   */
-  void clear()
+  void clear() nothrow
   {
     webkit_favicon_database_clear(cast(WebKitFaviconDatabase*)this._cPtr);
   }
@@ -90,14 +90,21 @@ class FaviconDatabase : gobject.object.ObjectWrap
         callback = A #GAsyncReadyCallback to call when the request is
                      satisfied or null if you don't care about the result.
   */
-  void getFavicon(string pageUri, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void getFavicon(string pageUri, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _pageUri = pageUri.toCString(No.Alloc);
@@ -132,7 +139,7 @@ class FaviconDatabase : gobject.object.ObjectWrap
       Returns: a newly allocated URI for the favicon, or null if the
         database doesn't have a favicon for page_uri.
   */
-  string getFaviconUri(string pageUri)
+  string getFaviconUri(string pageUri) nothrow
   {
     char* _cretval;
     const(char)* _pageUri = pageUri.toCString(No.Alloc);
@@ -165,7 +172,7 @@ class FaviconDatabase : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFaviconChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFaviconChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -173,7 +180,7 @@ class FaviconDatabase : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkit.favicon_database.FaviconDatabase)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -188,7 +195,14 @@ class FaviconDatabase : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.favicon_database.FaviconDatabase.faviconChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -208,7 +222,7 @@ final class FaviconDatabaseGidBuilder : FaviconDatabaseGidBuilderImpl!FaviconDat
       Create object from builder.
       Returns: New object
   */
-  FaviconDatabase build()
+  FaviconDatabase build() nothrow
   {
     return new FaviconDatabase(cast(void*)createGObject(FaviconDatabase._getGType), No.Take);
   }

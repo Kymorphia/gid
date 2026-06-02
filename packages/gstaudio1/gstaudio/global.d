@@ -26,7 +26,7 @@ import gstaudio.types;
     Returns: a fallback channel-mask for channels or 0 when there is no
       mask and mono.
 */
-ulong audioChannelGetFallbackMask(int channels)
+ulong audioChannelGetFallbackMask(int channels) nothrow
 {
   ulong _retval;
   _retval = gst_audio_channel_get_fallback_mask(channels);
@@ -47,7 +47,7 @@ ulong audioChannelGetFallbackMask(int channels)
           [gstaudio.types.AudioChannelPosition]<!-- -->s
     Returns: true if channel and channel mask are valid and could be converted
 */
-bool audioChannelPositionsFromMask(ulong channelMask, gstaudio.types.AudioChannelPosition[] position)
+bool audioChannelPositionsFromMask(ulong channelMask, gstaudio.types.AudioChannelPosition[] position) nothrow
 {
   bool _retval;
   int _channels;
@@ -71,7 +71,7 @@ bool audioChannelPositionsFromMask(ulong channelMask, gstaudio.types.AudioChanne
       channelMask = the output channel mask
     Returns: true if the channel positions are valid and could be converted.
 */
-bool audioChannelPositionsToMask(gstaudio.types.AudioChannelPosition[] position, bool forceOrder, out ulong channelMask)
+bool audioChannelPositionsToMask(gstaudio.types.AudioChannelPosition[] position, bool forceOrder, out ulong channelMask) nothrow
 {
   bool _retval;
   int _channels;
@@ -93,7 +93,7 @@ bool audioChannelPositionsToMask(gstaudio.types.AudioChannelPosition[] position,
     Returns: a newly allocated string representing
       position
 */
-string audioChannelPositionsToString(gstaudio.types.AudioChannelPosition[] position)
+string audioChannelPositionsToString(gstaudio.types.AudioChannelPosition[] position) nothrow
 {
   char* _cretval;
   int _channels;
@@ -116,7 +116,7 @@ string audioChannelPositionsToString(gstaudio.types.AudioChannelPosition[] posit
     Returns: true if the channel positions are valid and reordering
       was successful.
 */
-bool audioChannelPositionsToValidOrder(gstaudio.types.AudioChannelPosition[] position)
+bool audioChannelPositionsToValidOrder(gstaudio.types.AudioChannelPosition[] position) nothrow
 {
   bool _retval;
   int _channels;
@@ -139,7 +139,7 @@ bool audioChannelPositionsToValidOrder(gstaudio.types.AudioChannelPosition[] pos
       forceOrder = Only consider the GStreamer channel order.
     Returns: true if the channel positions are valid.
 */
-bool audioCheckValidChannelPositions(gstaudio.types.AudioChannelPosition[] position, bool forceOrder)
+bool audioCheckValidChannelPositions(gstaudio.types.AudioChannelPosition[] position, bool forceOrder) nothrow
 {
   bool _retval;
   int _channels;
@@ -152,7 +152,7 @@ bool audioCheckValidChannelPositions(gstaudio.types.AudioChannelPosition[] posit
 }
 
 /** */
-gobject.types.GType audioClippingMetaApiGetType()
+gobject.types.GType audioClippingMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_audio_clipping_meta_api_get_type();
@@ -160,7 +160,7 @@ gobject.types.GType audioClippingMetaApiGetType()
 }
 
 /** */
-gobject.types.GType audioDownmixMetaApiGetType()
+gobject.types.GType audioDownmixMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_audio_downmix_meta_api_get_type();
@@ -168,7 +168,7 @@ gobject.types.GType audioDownmixMetaApiGetType()
 }
 
 /** */
-gobject.types.GType audioFormatInfoGetType()
+gobject.types.GType audioFormatInfoGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_audio_format_info_get_type();
@@ -179,7 +179,7 @@ gobject.types.GType audioFormatInfoGetType()
     Return all the raw audio formats supported by GStreamer.
     Returns: an array of #GstAudioFormat
 */
-gstaudio.types.AudioFormat[] audioFormatsRaw()
+gstaudio.types.AudioFormat[] audioFormatsRaw() nothrow
 {
   const(GstAudioFormat)* _cretval;
   uint _cretlength;
@@ -212,7 +212,7 @@ gstaudio.types.AudioFormat[] audioFormatsRaw()
     Returns: true if the channel positions are valid and reordering
       is possible.
 */
-bool audioGetChannelReorderMap(gstaudio.types.AudioChannelPosition[] from, gstaudio.types.AudioChannelPosition[] to, int[] reorderMap)
+bool audioGetChannelReorderMap(gstaudio.types.AudioChannelPosition[] from, gstaudio.types.AudioChannelPosition[] to, int[] reorderMap) nothrow
 {
   bool _retval;
   int _channels;
@@ -241,7 +241,7 @@ bool audioGetChannelReorderMap(gstaudio.types.AudioChannelPosition[] from, gstau
     Returns: the size or 0 if the given type is not supported or cannot be
       payloaded.
 */
-uint audioIec61937FrameSize(gstaudio.audio_ring_buffer_spec.AudioRingBufferSpec spec)
+uint audioIec61937FrameSize(gstaudio.audio_ring_buffer_spec.AudioRingBufferSpec spec) nothrow
 {
   uint _retval;
   _retval = gst_audio_iec61937_frame_size(spec ? cast(const(GstAudioRingBufferSpec)*)spec._cPtr : null);
@@ -262,7 +262,7 @@ uint audioIec61937FrameSize(gstaudio.audio_ring_buffer_spec.AudioRingBufferSpec 
     Returns: transfer-full: true if the payloading was successful, false
       otherwise.
 */
-bool audioIec61937Payload(ubyte[] src, ubyte[] dst, gstaudio.audio_ring_buffer_spec.AudioRingBufferSpec spec, int endianness)
+bool audioIec61937Payload(ubyte[] src, ubyte[] dst, gstaudio.audio_ring_buffer_spec.AudioRingBufferSpec spec, int endianness) nothrow
 {
   bool _retval;
   uint _srcN;
@@ -283,7 +283,7 @@ bool audioIec61937Payload(ubyte[] src, ubyte[] dst, gstaudio.audio_ring_buffer_s
     Return the #GType associated with #GstAudioLevelMeta.
     Returns: a #GType
 */
-gobject.types.GType audioLevelMetaApiGetType()
+gobject.types.GType audioLevelMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_audio_level_meta_api_get_type();
@@ -300,7 +300,7 @@ gobject.types.GType audioLevelMetaApiGetType()
       layout = the layout of audio samples
     Returns: an audio GstCaps
 */
-gst.caps.Caps audioMakeRawCaps(gstaudio.types.AudioFormat[] formats, gstaudio.types.AudioLayout layout)
+gst.caps.Caps audioMakeRawCaps(gstaudio.types.AudioFormat[] formats, gstaudio.types.AudioLayout layout) nothrow
 {
   GstCaps* _cretval;
   uint _len;
@@ -314,7 +314,7 @@ gst.caps.Caps audioMakeRawCaps(gstaudio.types.AudioFormat[] formats, gstaudio.ty
 }
 
 /** */
-gobject.types.GType audioMetaApiGetType()
+gobject.types.GType audioMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_audio_meta_api_get_type();
@@ -336,7 +336,7 @@ gobject.types.GType audioMetaApiGetType()
       to = The channel positions to convert to.
     Returns: true if the reordering was possible.
 */
-bool audioReorderChannels(ubyte[] data, gstaudio.types.AudioFormat format, gstaudio.types.AudioChannelPosition[] from, gstaudio.types.AudioChannelPosition[] to)
+bool audioReorderChannels(ubyte[] data, gstaudio.types.AudioFormat format, gstaudio.types.AudioChannelPosition[] from, gstaudio.types.AudioChannelPosition[] to) nothrow
 {
   bool _retval;
   size_t _size;
@@ -367,7 +367,7 @@ bool audioReorderChannels(ubyte[] data, gstaudio.types.AudioFormat format, gstau
       end = Amount of  to clip from end of buffer
     Returns: the #GstAudioClippingMeta on buffer.
 */
-gstaudio.audio_clipping_meta.AudioClippingMeta bufferAddAudioClippingMeta(gst.buffer.Buffer buffer, gst.types.Format format, ulong start, ulong end)
+gstaudio.audio_clipping_meta.AudioClippingMeta bufferAddAudioClippingMeta(gst.buffer.Buffer buffer, gst.types.Format format, ulong start, ulong end) nothrow
 {
   GstAudioClippingMeta* _cretval;
   _cretval = gst_buffer_add_audio_clipping_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, format, start, end);
@@ -384,7 +384,7 @@ gstaudio.audio_clipping_meta.AudioClippingMeta bufferAddAudioClippingMeta(gst.bu
       voiceActivity = whether the buffer contains voice activity.
     Returns: the #GstAudioLevelMeta on buffer.
 */
-gstaudio.audio_level_meta.AudioLevelMeta bufferAddAudioLevelMeta(gst.buffer.Buffer buffer, ubyte level, bool voiceActivity)
+gstaudio.audio_level_meta.AudioLevelMeta bufferAddAudioLevelMeta(gst.buffer.Buffer buffer, ubyte level, bool voiceActivity) nothrow
 {
   GstAudioLevelMeta* _cretval;
   _cretval = gst_buffer_add_audio_level_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, level, voiceActivity);
@@ -402,7 +402,7 @@ gstaudio.audio_level_meta.AudioLevelMeta bufferAddAudioLevelMeta(gst.buffer.Buff
           the destination
     Returns: the #GstAudioDownmixMeta on buffer.
 */
-gstaudio.audio_downmix_meta.AudioDownmixMeta bufferGetAudioDownmixMetaForChannels(gst.buffer.Buffer buffer, gstaudio.types.AudioChannelPosition[] toPosition)
+gstaudio.audio_downmix_meta.AudioDownmixMeta bufferGetAudioDownmixMetaForChannels(gst.buffer.Buffer buffer, gstaudio.types.AudioChannelPosition[] toPosition) nothrow
 {
   GstAudioDownmixMeta* _cretval;
   int _toChannels;
@@ -423,7 +423,7 @@ gstaudio.audio_downmix_meta.AudioDownmixMeta bufferGetAudioDownmixMetaForChannel
     Returns: the #GstAudioLevelMeta or null when
       there is no such metadata on buffer.
 */
-gstaudio.audio_level_meta.AudioLevelMeta bufferGetAudioLevelMeta(gst.buffer.Buffer buffer)
+gstaudio.audio_level_meta.AudioLevelMeta bufferGetAudioLevelMeta(gst.buffer.Buffer buffer) nothrow
 {
   GstAudioLevelMeta* _cretval;
   _cretval = gst_buffer_get_audio_level_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
@@ -432,7 +432,7 @@ gstaudio.audio_level_meta.AudioLevelMeta bufferGetAudioLevelMeta(gst.buffer.Buff
 }
 
 /** */
-gobject.types.GType dsdPlaneOffsetMetaApiGetType()
+gobject.types.GType dsdPlaneOffsetMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_dsd_plane_offset_meta_api_get_type();

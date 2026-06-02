@@ -31,26 +31,26 @@ class Spinner : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_spinner_get_type != &gidSymbolNotFound ? gtk_spinner_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Spinner self()
+  override Spinner self() nothrow
   {
     return this;
   }
@@ -59,19 +59,19 @@ class Spinner : gtk.widget.Widget
       Get builder for [gtk.spinner.Spinner]
       Returns: New builder object
   */
-  static SpinnerGidBuilder builder()
+  static SpinnerGidBuilder builder() nothrow
   {
     return new SpinnerGidBuilder;
   }
 
   /** */
-  @property bool active()
+  @property bool active() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("active");
   }
 
   /** */
-  @property void active(bool propval)
+  @property void active(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("active", propval);
   }
@@ -80,7 +80,7 @@ class Spinner : gtk.widget.Widget
       Returns a new spinner widget. Not yet started.
       Returns: a new #GtkSpinner
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_spinner_new();
@@ -90,7 +90,7 @@ class Spinner : gtk.widget.Widget
   /**
       Starts the animation of the spinner.
   */
-  void start()
+  void start() nothrow
   {
     gtk_spinner_start(cast(GtkSpinner*)this._cPtr);
   }
@@ -98,7 +98,7 @@ class Spinner : gtk.widget.Widget
   /**
       Stops the animation of the spinner.
   */
-  void stop()
+  void stop() nothrow
   {
     gtk_spinner_stop(cast(GtkSpinner*)this._cPtr);
   }
@@ -110,7 +110,7 @@ class SpinnerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 
 
   /** */
-  T active(bool propval)
+  T active(bool propval) nothrow
   {
     return setProperty("active", propval);
   }
@@ -123,7 +123,7 @@ final class SpinnerGidBuilder : SpinnerGidBuilderImpl!SpinnerGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Spinner build()
+  Spinner build() nothrow
   {
     return new Spinner(cast(void*)createGObject(Spinner._getGType), No.Take);
   }

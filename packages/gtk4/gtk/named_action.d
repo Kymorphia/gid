@@ -16,26 +16,26 @@ class NamedAction : gtk.shortcut_action.ShortcutAction
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_named_action_get_type != &gidSymbolNotFound ? gtk_named_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NamedAction self()
+  override NamedAction self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class NamedAction : gtk.shortcut_action.ShortcutAction
       Get builder for [gtk.named_action.NamedAction]
       Returns: New builder object
   */
-  static NamedActionGidBuilder builder()
+  static NamedActionGidBuilder builder() nothrow
   {
     return new NamedActionGidBuilder;
   }
@@ -53,7 +53,7 @@ class NamedAction : gtk.shortcut_action.ShortcutAction
       Get `actionName` property.
       Returns: The name of the action to activate.
   */
-  @property string actionName()
+  @property string actionName() nothrow
   {
     return getActionName();
   }
@@ -71,7 +71,7 @@ class NamedAction : gtk.shortcut_action.ShortcutAction
         name = the detailed name of the action
       Returns: a new [gtk.shortcut_action.ShortcutAction]
   */
-  this(string name)
+  this(string name) nothrow
   {
     GtkShortcutAction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -83,7 +83,7 @@ class NamedAction : gtk.shortcut_action.ShortcutAction
       Returns the name of the action that will be activated.
       Returns: the name of the action to activate
   */
-  string getActionName()
+  string getActionName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_named_action_get_action_name(cast(GtkNamedAction*)this._cPtr);
@@ -102,7 +102,7 @@ class NamedActionGidBuilderImpl(T) : gtk.shortcut_action.ShortcutActionGidBuilde
         propval = The name of the action to activate.
       Returns: Builder instance for fluent chaining
   */
-  T actionName(string propval)
+  T actionName(string propval) nothrow
   {
     return setProperty("action-name", propval);
   }
@@ -115,7 +115,7 @@ final class NamedActionGidBuilder : NamedActionGidBuilderImpl!NamedActionGidBuil
       Create object from builder.
       Returns: New object
   */
-  NamedAction build()
+  NamedAction build() nothrow
   {
     return new NamedAction(cast(void*)createGObject(NamedAction._getGType), Yes.Take);
   }

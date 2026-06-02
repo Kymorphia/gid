@@ -17,26 +17,26 @@ class SignatureList : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_signature_list_get_type != &gidSymbolNotFound ? g_mime_signature_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SignatureList self()
+  override SignatureList self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class SignatureList : gobject.object.ObjectWrap
       Get builder for [gmime.signature_list.SignatureList]
       Returns: New builder object
   */
-  static SignatureListGidBuilder builder()
+  static SignatureListGidBuilder builder() nothrow
   {
     return new SignatureListGidBuilder;
   }
@@ -54,7 +54,7 @@ class SignatureList : gobject.object.ObjectWrap
       Creates a new #GMimeSignatureList.
       Returns: a new #GMimeSignatureList.
   */
-  this()
+  this() nothrow
   {
     GMimeSignatureList* _cretval;
     _cretval = g_mime_signature_list_new();
@@ -68,7 +68,7 @@ class SignatureList : gobject.object.ObjectWrap
         sig = a #GMimeSignature
       Returns: the index of the added #GMimeSignature.
   */
-  int add(gmime.signature.Signature sig)
+  int add(gmime.signature.Signature sig) nothrow
   {
     int _retval;
     _retval = g_mime_signature_list_add(cast(GMimeSignatureList*)this._cPtr, sig ? cast(GMimeSignature*)sig._cPtr(No.Dup) : null);
@@ -78,7 +78,7 @@ class SignatureList : gobject.object.ObjectWrap
   /**
       Clears the list of addresses.
   */
-  void clear()
+  void clear() nothrow
   {
     g_mime_signature_list_clear(cast(GMimeSignatureList*)this._cPtr);
   }
@@ -92,7 +92,7 @@ class SignatureList : gobject.object.ObjectWrap
       Returns: true if the specified #GMimeSignature is contained within the
         specified #GMimeSignatureList or false otherwise.
   */
-  bool contains(gmime.signature.Signature sig)
+  bool contains(gmime.signature.Signature sig) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_signature_list_contains(cast(GMimeSignatureList*)this._cPtr, sig ? cast(GMimeSignature*)sig._cPtr(No.Dup) : null);
@@ -107,7 +107,7 @@ class SignatureList : gobject.object.ObjectWrap
       Returns: the #GMimeSignature at the specified
         index or null if the index is out of range.
   */
-  gmime.signature.Signature getSignature(int index)
+  gmime.signature.Signature getSignature(int index) nothrow
   {
     GMimeSignature* _cretval;
     _cretval = g_mime_signature_list_get_signature(cast(GMimeSignatureList*)this._cPtr, index);
@@ -125,7 +125,7 @@ class SignatureList : gobject.object.ObjectWrap
         #GMimeSignatureList or %-1 if it is not contained within the
         #GMimeSignatureList.
   */
-  int indexOf(gmime.signature.Signature sig)
+  int indexOf(gmime.signature.Signature sig) nothrow
   {
     int _retval;
     _retval = g_mime_signature_list_index_of(cast(GMimeSignatureList*)this._cPtr, sig ? cast(GMimeSignature*)sig._cPtr(No.Dup) : null);
@@ -140,7 +140,7 @@ class SignatureList : gobject.object.ObjectWrap
         index = index to insert at
         sig = a #GMimeSignature
   */
-  void insert(int index, gmime.signature.Signature sig)
+  void insert(int index, gmime.signature.Signature sig) nothrow
   {
     g_mime_signature_list_insert(cast(GMimeSignatureList*)this._cPtr, index, sig ? cast(GMimeSignature*)sig._cPtr(No.Dup) : null);
   }
@@ -149,7 +149,7 @@ class SignatureList : gobject.object.ObjectWrap
       Gets the length of the list.
       Returns: the number of #GMimeSignature objects in the list.
   */
-  int length()
+  int length() nothrow
   {
     int _retval;
     _retval = g_mime_signature_list_length(cast(GMimeSignatureList*)this._cPtr);
@@ -164,7 +164,7 @@ class SignatureList : gobject.object.ObjectWrap
       Returns: true if the specified #GMimeSignature was removed or false
         otherwise.
   */
-  bool remove(gmime.signature.Signature sig)
+  bool remove(gmime.signature.Signature sig) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_signature_list_remove(cast(GMimeSignatureList*)this._cPtr, sig ? cast(GMimeSignature*)sig._cPtr(No.Dup) : null);
@@ -179,7 +179,7 @@ class SignatureList : gobject.object.ObjectWrap
         index = index to remove
       Returns: true if an #GMimeSignature was removed or false otherwise.
   */
-  bool removeAt(int index)
+  bool removeAt(int index) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_signature_list_remove_at(cast(GMimeSignatureList*)this._cPtr, index);
@@ -193,7 +193,7 @@ class SignatureList : gobject.object.ObjectWrap
         index = index of #GMimeSignature to set
         sig = a #GMimeSignature
   */
-  void setSignature(int index, gmime.signature.Signature sig)
+  void setSignature(int index, gmime.signature.Signature sig) nothrow
   {
     g_mime_signature_list_set_signature(cast(GMimeSignatureList*)this._cPtr, index, sig ? cast(GMimeSignature*)sig._cPtr(No.Dup) : null);
   }
@@ -211,7 +211,7 @@ final class SignatureListGidBuilder : SignatureListGidBuilderImpl!SignatureListG
       Create object from builder.
       Returns: New object
   */
-  SignatureList build()
+  SignatureList build() nothrow
   {
     return new SignatureList(cast(void*)createGObject(SignatureList._getGType), Yes.Take);
   }

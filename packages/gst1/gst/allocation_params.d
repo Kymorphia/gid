@@ -36,30 +36,29 @@ struct AllocationParams
   void*[4] GstReserved;
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_allocation_params_get_type != &gidSymbolNotFound ? gst_allocation_params_get_type() : cast(GType)0;
   }
 
   /** */
-  @property GType _gType()
+  @property GType _gType() nothrow
   {
     return _getGType();
   }
 
-  void* boxCopy()
+  void* boxCopy() nothrow
   {
     import gobject.c.functions : g_boxed_copy;
-    return g_boxed_copy(_gType,
-        cast(void*)&this);
+    return g_boxed_copy(_gType, cast(void*)&this);
   }
 
   /**
       Create a copy of params.
       Returns: a new #GstAllocationParams.
   */
-  gst.allocation_params.AllocationParams copy()
+  gst.allocation_params.AllocationParams copy() nothrow
   {
     GstAllocationParams* _cretval;
     _cretval = gst_allocation_params_copy(cast(const(GstAllocationParams)*)&this);
@@ -72,7 +71,7 @@ struct AllocationParams
   /**
       Initialize params to its default values
   */
-  void init_()
+  void init_() nothrow
   {
     gst_allocation_params_init(cast(GstAllocationParams*)&this);
   }

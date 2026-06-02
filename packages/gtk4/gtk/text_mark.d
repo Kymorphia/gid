@@ -49,26 +49,26 @@ class TextMark : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_mark_get_type != &gidSymbolNotFound ? gtk_text_mark_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TextMark self()
+  override TextMark self() nothrow
   {
     return this;
   }
@@ -77,7 +77,7 @@ class TextMark : gobject.object.ObjectWrap
       Get builder for [gtk.text_mark.TextMark]
       Returns: New builder object
   */
-  static TextMarkGidBuilder builder()
+  static TextMarkGidBuilder builder() nothrow
   {
     return new TextMarkGidBuilder;
   }
@@ -90,7 +90,7 @@ class TextMark : gobject.object.ObjectWrap
         has left gravity it will be moved to the left of the newly-inserted
         text, otherwise to the right.
   */
-  @property bool leftGravity()
+  @property bool leftGravity() nothrow
   {
     return getLeftGravity();
   }
@@ -99,7 +99,7 @@ class TextMark : gobject.object.ObjectWrap
       Get `name` property.
       Returns: The name of the mark or null if the mark is anonymous.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return getName();
   }
@@ -122,7 +122,7 @@ class TextMark : gobject.object.ObjectWrap
         leftGravity = whether the mark should have left gravity
       Returns: new [gtk.text_mark.TextMark]
   */
-  this(string name, bool leftGravity)
+  this(string name, bool leftGravity) nothrow
   {
     GtkTextMark* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -136,7 +136,7 @@ class TextMark : gobject.object.ObjectWrap
       Returns null if the mark is deleted.
       Returns: the mark’s [gtk.text_buffer.TextBuffer]
   */
-  gtk.text_buffer.TextBuffer getBuffer()
+  gtk.text_buffer.TextBuffer getBuffer() nothrow
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_text_mark_get_buffer(cast(GtkTextMark*)this._cPtr);
@@ -151,7 +151,7 @@ class TextMark : gobject.object.ObjectWrap
       to a buffer again.
       Returns: whether the mark is deleted
   */
-  bool getDeleted()
+  bool getDeleted() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_mark_get_deleted(cast(GtkTextMark*)this._cPtr);
@@ -162,7 +162,7 @@ class TextMark : gobject.object.ObjectWrap
       Determines whether the mark has left gravity.
       Returns: true if the mark has left gravity, false otherwise
   */
-  bool getLeftGravity()
+  bool getLeftGravity() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_mark_get_left_gravity(cast(GtkTextMark*)this._cPtr);
@@ -175,7 +175,7 @@ class TextMark : gobject.object.ObjectWrap
       Returns null for anonymous marks.
       Returns: mark name
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_text_mark_get_name(cast(GtkTextMark*)this._cPtr);
@@ -189,7 +189,7 @@ class TextMark : gobject.object.ObjectWrap
       A cursor is displayed for visible marks.
       Returns: true if visible
   */
-  bool getVisible()
+  bool getVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_mark_get_visible(cast(GtkTextMark*)this._cPtr);
@@ -197,7 +197,7 @@ class TextMark : gobject.object.ObjectWrap
   }
 
   /** */
-  void setVisible(bool setting)
+  void setVisible(bool setting) nothrow
   {
     gtk_text_mark_set_visible(cast(GtkTextMark*)this._cPtr, setting);
   }
@@ -217,7 +217,7 @@ class TextMarkGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           text, otherwise to the right.
       Returns: Builder instance for fluent chaining
   */
-  T leftGravity(bool propval)
+  T leftGravity(bool propval) nothrow
   {
     return setProperty("left-gravity", propval);
   }
@@ -228,7 +228,7 @@ class TextMarkGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The name of the mark or null if the mark is anonymous.
       Returns: Builder instance for fluent chaining
   */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -241,7 +241,7 @@ final class TextMarkGidBuilder : TextMarkGidBuilderImpl!TextMarkGidBuilder
       Create object from builder.
       Returns: New object
   */
-  TextMark build()
+  TextMark build() nothrow
   {
     return new TextMark(cast(void*)createGObject(TextMark._getGType), Yes.Take);
   }

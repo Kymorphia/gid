@@ -84,26 +84,26 @@ class ViewSwitcherTitle : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_view_switcher_title_get_type != &gidSymbolNotFound ? adw_view_switcher_title_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ViewSwitcherTitle self()
+  override ViewSwitcherTitle self() nothrow
   {
     return this;
   }
@@ -112,7 +112,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
       Get builder for [adw.view_switcher_title.ViewSwitcherTitle]
       Returns: New builder object
   */
-  static ViewSwitcherTitleGidBuilder builder()
+  static ViewSwitcherTitleGidBuilder builder() nothrow
   {
     return new ViewSwitcherTitleGidBuilder;
   }
@@ -123,7 +123,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  @property adw.view_stack.ViewStack stack()
+  @property adw.view_stack.ViewStack stack() nothrow
   {
     return getStack();
   }
@@ -135,7 +135,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  @property void stack(adw.view_stack.ViewStack propval)
+  @property void stack(adw.view_stack.ViewStack propval) nothrow
   {
     setStack(propval);
   }
@@ -148,7 +148,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  @property string subtitle()
+  @property string subtitle() nothrow
   {
     return getSubtitle();
   }
@@ -162,7 +162,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  @property void subtitle(string propval)
+  @property void subtitle(string propval) nothrow
   {
     setSubtitle(propval);
   }
@@ -176,7 +176,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -191,7 +191,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -205,7 +205,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  @property bool titleVisible()
+  @property bool titleVisible() nothrow
   {
     return getTitleVisible();
   }
@@ -223,7 +223,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  @property bool viewSwitcherEnabled()
+  @property bool viewSwitcherEnabled() nothrow
   {
     return getViewSwitcherEnabled();
   }
@@ -242,7 +242,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  @property void viewSwitcherEnabled(bool propval)
+  @property void viewSwitcherEnabled(bool propval) nothrow
   {
     setViewSwitcherEnabled(propval);
   }
@@ -253,7 +253,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_view_switcher_title_new();
@@ -266,7 +266,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  adw.view_stack.ViewStack getStack()
+  adw.view_stack.ViewStack getStack() nothrow
   {
     AdwViewStack* _cretval;
     _cretval = adw_view_switcher_title_get_stack(cast(AdwViewSwitcherTitle*)this._cPtr);
@@ -280,7 +280,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  string getSubtitle()
+  string getSubtitle() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_view_switcher_title_get_subtitle(cast(AdwViewSwitcherTitle*)this._cPtr);
@@ -294,7 +294,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_view_switcher_title_get_title(cast(AdwViewSwitcherTitle*)this._cPtr);
@@ -311,7 +311,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  bool getTitleVisible()
+  bool getTitleVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_view_switcher_title_get_title_visible(cast(AdwViewSwitcherTitle*)this._cPtr);
@@ -324,7 +324,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  bool getViewSwitcherEnabled()
+  bool getViewSwitcherEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_view_switcher_title_get_view_switcher_enabled(cast(AdwViewSwitcherTitle*)this._cPtr);
@@ -339,7 +339,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  void setStack(adw.view_stack.ViewStack stack = null)
+  void setStack(adw.view_stack.ViewStack stack = null) nothrow
   {
     adw_view_switcher_title_set_stack(cast(AdwViewSwitcherTitle*)this._cPtr, stack ? cast(AdwViewStack*)stack._cPtr(No.Dup) : null);
   }
@@ -354,7 +354,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  void setSubtitle(string subtitle)
+  void setSubtitle(string subtitle) nothrow
   {
     const(char)* _subtitle = subtitle.toCString(No.Alloc);
     adw_view_switcher_title_set_subtitle(cast(AdwViewSwitcherTitle*)this._cPtr, _subtitle);
@@ -371,7 +371,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  void setTitle(string title)
+  void setTitle(string title) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     adw_view_switcher_title_set_title(cast(AdwViewSwitcherTitle*)this._cPtr, _title);
@@ -392,7 +392,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  void setViewSwitcherEnabled(bool enabled)
+  void setViewSwitcherEnabled(bool enabled) nothrow
   {
     adw_view_switcher_title_set_view_switcher_enabled(cast(AdwViewSwitcherTitle*)this._cPtr, enabled);
   }
@@ -411,7 +411,7 @@ class ViewSwitcherTitleGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  T stack(adw.view_stack.ViewStack propval)
+  T stack(adw.view_stack.ViewStack propval) nothrow
   {
     return setProperty("stack", propval);
   }
@@ -426,7 +426,7 @@ class ViewSwitcherTitleGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  T subtitle(string propval)
+  T subtitle(string propval) nothrow
   {
     return setProperty("subtitle", propval);
   }
@@ -442,7 +442,7 @@ class ViewSwitcherTitleGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -462,7 +462,7 @@ class ViewSwitcherTitleGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
-  T viewSwitcherEnabled(bool propval)
+  T viewSwitcherEnabled(bool propval) nothrow
   {
     return setProperty("view-switcher-enabled", propval);
   }
@@ -475,7 +475,7 @@ final class ViewSwitcherTitleGidBuilder : ViewSwitcherTitleGidBuilderImpl!ViewSw
       Create object from builder.
       Returns: New object
   */
-  ViewSwitcherTitle build()
+  ViewSwitcherTitle build() nothrow
   {
     return new ViewSwitcherTitle(cast(void*)createGObject(ViewSwitcherTitle._getGType), No.Take);
   }

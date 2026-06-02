@@ -15,26 +15,26 @@ class MonthIntervalArray : arrow.numeric_array.NumericArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_month_interval_array_get_type != &gidSymbolNotFound ? garrow_month_interval_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MonthIntervalArray self()
+  override MonthIntervalArray self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class MonthIntervalArray : arrow.numeric_array.NumericArray
       Get builder for [arrow.month_interval_array.MonthIntervalArray]
       Returns: New builder object
   */
-  static MonthIntervalArrayGidBuilder builder()
+  static MonthIntervalArrayGidBuilder builder() nothrow
   {
     return new MonthIntervalArrayGidBuilder;
   }
 
   /** */
-  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
+  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls) nothrow
   {
     GArrowMonthIntervalArray* _cretval;
     _cretval = garrow_month_interval_array_new(length, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
@@ -57,7 +57,7 @@ class MonthIntervalArray : arrow.numeric_array.NumericArray
   }
 
   /** */
-  int getValue(long i)
+  int getValue(long i) nothrow
   {
     int _retval;
     _retval = garrow_month_interval_array_get_value(cast(GArrowMonthIntervalArray*)this._cPtr, i);
@@ -65,7 +65,7 @@ class MonthIntervalArray : arrow.numeric_array.NumericArray
   }
 
   /** */
-  int[] getValues()
+  int[] getValues() nothrow
   {
     const(int)* _cretval;
     long _cretlength;
@@ -92,7 +92,7 @@ final class MonthIntervalArrayGidBuilder : MonthIntervalArrayGidBuilderImpl!Mont
       Create object from builder.
       Returns: New object
   */
-  MonthIntervalArray build()
+  MonthIntervalArray build() nothrow
   {
     return new MonthIntervalArray(cast(void*)createGObject(MonthIntervalArray._getGType), Yes.Take);
   }

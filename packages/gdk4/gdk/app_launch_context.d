@@ -37,26 +37,26 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_app_launch_context_get_type != &gidSymbolNotFound ? gdk_app_launch_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AppLaunchContext self()
+  override AppLaunchContext self() nothrow
   {
     return this;
   }
@@ -65,7 +65,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
       Get builder for [gdk.app_launch_context.AppLaunchContext]
       Returns: New builder object
   */
-  static AppLaunchContextGidBuilder builder()
+  static AppLaunchContextGidBuilder builder() nothrow
   {
     return new AppLaunchContextGidBuilder;
   }
@@ -74,7 +74,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
       Get `display` property.
       Returns: The display that the [gdk.app_launch_context.AppLaunchContext] is on.
   */
-  @property gdk.display.Display display()
+  @property gdk.display.Display display() nothrow
   {
     return getDisplay();
   }
@@ -85,7 +85,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
       Gets the [gdk.display.Display] that context is for.
       Returns: the display of context
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gdk_app_launch_context_get_display(cast(GdkAppLaunchContext*)this._cPtr);
@@ -111,7 +111,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
       Params:
         desktop = the number of a workspace, or -1
   */
-  void setDesktop(int desktop)
+  void setDesktop(int desktop) nothrow
   {
     gdk_app_launch_context_set_desktop(cast(GdkAppLaunchContext*)this._cPtr, desktop);
   }
@@ -128,7 +128,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
       Params:
         icon = a [gio.icon.Icon]
   */
-  void setIcon(gio.icon.Icon icon = null)
+  void setIcon(gio.icon.Icon icon = null) nothrow
   {
     gdk_app_launch_context_set_icon(cast(GdkAppLaunchContext*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
@@ -147,7 +147,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
       Params:
         iconName = an icon name
   */
-  void setIconName(string iconName = null)
+  void setIconName(string iconName = null) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gdk_app_launch_context_set_icon_name(cast(GdkAppLaunchContext*)this._cPtr, _iconName);
@@ -167,7 +167,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
       Params:
         timestamp = a timestamp
   */
-  void setTimestamp(uint timestamp)
+  void setTimestamp(uint timestamp) nothrow
   {
     gdk_app_launch_context_set_timestamp(cast(GdkAppLaunchContext*)this._cPtr, timestamp);
   }
@@ -183,7 +183,7 @@ class AppLaunchContextGidBuilderImpl(T) : gio.app_launch_context.AppLaunchContex
         propval = The display that the [gdk.app_launch_context.AppLaunchContext] is on.
       Returns: Builder instance for fluent chaining
   */
-  T display(gdk.display.Display propval)
+  T display(gdk.display.Display propval) nothrow
   {
     return setProperty("display", propval);
   }
@@ -196,7 +196,7 @@ final class AppLaunchContextGidBuilder : AppLaunchContextGidBuilderImpl!AppLaunc
       Create object from builder.
       Returns: New object
   */
-  AppLaunchContext build()
+  AppLaunchContext build() nothrow
   {
     return new AppLaunchContext(cast(void*)createGObject(AppLaunchContext._getGType), No.Take);
   }

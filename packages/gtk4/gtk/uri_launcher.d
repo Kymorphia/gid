@@ -32,26 +32,26 @@ class UriLauncher : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_uri_launcher_get_type != &gidSymbolNotFound ? gtk_uri_launcher_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UriLauncher self()
+  override UriLauncher self() nothrow
   {
     return this;
   }
@@ -60,7 +60,7 @@ class UriLauncher : gobject.object.ObjectWrap
       Get builder for [gtk.uri_launcher.UriLauncher]
       Returns: New builder object
   */
-  static UriLauncherGidBuilder builder()
+  static UriLauncherGidBuilder builder() nothrow
   {
     return new UriLauncherGidBuilder;
   }
@@ -69,7 +69,7 @@ class UriLauncher : gobject.object.ObjectWrap
       Get `uri` property.
       Returns: The uri to launch.
   */
-  @property string uri()
+  @property string uri() nothrow
   {
     return getUri();
   }
@@ -79,7 +79,7 @@ class UriLauncher : gobject.object.ObjectWrap
       Params:
         propval = The uri to launch.
   */
-  @property void uri(string propval)
+  @property void uri(string propval) nothrow
   {
     setUri(propval);
   }
@@ -91,7 +91,7 @@ class UriLauncher : gobject.object.ObjectWrap
         uri = the uri to open
       Returns: the new [gtk.uri_launcher.UriLauncher]
   */
-  this(string uri = null)
+  this(string uri = null) nothrow
   {
     GtkUriLauncher* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
@@ -103,7 +103,7 @@ class UriLauncher : gobject.object.ObjectWrap
       Gets the uri that will be opened.
       Returns: the uri
   */
-  string getUri()
+  string getUri() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_uri_launcher_get_uri(cast(GtkUriLauncher*)this._cPtr);
@@ -125,14 +125,21 @@ class UriLauncher : gobject.object.ObjectWrap
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
   */
-  void launch(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void launch(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -165,7 +172,7 @@ class UriLauncher : gobject.object.ObjectWrap
       Params:
         uri = the uri
   */
-  void setUri(string uri = null)
+  void setUri(string uri = null) nothrow
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     gtk_uri_launcher_set_uri(cast(GtkUriLauncher*)this._cPtr, _uri);
@@ -182,7 +189,7 @@ class UriLauncherGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The uri to launch.
       Returns: Builder instance for fluent chaining
   */
-  T uri(string propval)
+  T uri(string propval) nothrow
   {
     return setProperty("uri", propval);
   }
@@ -195,7 +202,7 @@ final class UriLauncherGidBuilder : UriLauncherGidBuilderImpl!UriLauncherGidBuil
       Create object from builder.
       Returns: New object
   */
-  UriLauncher build()
+  UriLauncher build() nothrow
   {
     return new UriLauncher(cast(void*)createGObject(UriLauncher._getGType), Yes.Take);
   }

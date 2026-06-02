@@ -24,26 +24,26 @@ class Menu : gio.menu_model.MenuModel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_menu_get_type != &gidSymbolNotFound ? g_menu_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Menu self()
+  override Menu self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class Menu : gio.menu_model.MenuModel
       Get builder for [gio.menu.Menu]
       Returns: New builder object
   */
-  static MenuGidBuilder builder()
+  static MenuGidBuilder builder() nothrow
   {
     return new MenuGidBuilder;
   }
@@ -63,7 +63,7 @@ class Menu : gio.menu_model.MenuModel
       The new menu has no items.
       Returns: a new #GMenu
   */
-  this()
+  this() nothrow
   {
     GMenu* _cretval;
     _cretval = g_menu_new();
@@ -79,7 +79,7 @@ class Menu : gio.menu_model.MenuModel
         label = the section label, or null
         detailedAction = the detailed action string, or null
   */
-  void append(string label = null, string detailedAction = null)
+  void append(string label = null, string detailedAction = null) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
@@ -94,7 +94,7 @@ class Menu : gio.menu_model.MenuModel
       Params:
         item = a #GMenuItem to append
   */
-  void appendItem(gio.menu_item.MenuItem item)
+  void appendItem(gio.menu_item.MenuItem item) nothrow
   {
     g_menu_append_item(cast(GMenu*)this._cPtr, item ? cast(GMenuItem*)item._cPtr(No.Dup) : null);
   }
@@ -108,7 +108,7 @@ class Menu : gio.menu_model.MenuModel
         label = the section label, or null
         section = a #GMenuModel with the items of the section
   */
-  void appendSection(string label, gio.menu_model.MenuModel section)
+  void appendSection(string label, gio.menu_model.MenuModel section) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     g_menu_append_section(cast(GMenu*)this._cPtr, _label, section ? cast(GMenuModel*)section._cPtr(No.Dup) : null);
@@ -123,7 +123,7 @@ class Menu : gio.menu_model.MenuModel
         label = the section label, or null
         submenu = a #GMenuModel with the items of the submenu
   */
-  void appendSubmenu(string label, gio.menu_model.MenuModel submenu)
+  void appendSubmenu(string label, gio.menu_model.MenuModel submenu) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     g_menu_append_submenu(cast(GMenu*)this._cPtr, _label, submenu ? cast(GMenuModel*)submenu._cPtr(No.Dup) : null);
@@ -139,7 +139,7 @@ class Menu : gio.menu_model.MenuModel
       This function causes [gio.menu_model.MenuModel.isMutable] to begin returning
       false, which has some positive performance implications.
   */
-  void freeze()
+  void freeze() nothrow
   {
     g_menu_freeze(cast(GMenu*)this._cPtr);
   }
@@ -154,7 +154,7 @@ class Menu : gio.menu_model.MenuModel
         label = the section label, or null
         detailedAction = the detailed action string, or null
   */
-  void insert(int position, string label = null, string detailedAction = null)
+  void insert(int position, string label = null, string detailedAction = null) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
@@ -184,7 +184,7 @@ class Menu : gio.menu_model.MenuModel
         position = the position at which to insert the item
         item = the #GMenuItem to insert
   */
-  void insertItem(int position, gio.menu_item.MenuItem item)
+  void insertItem(int position, gio.menu_item.MenuItem item) nothrow
   {
     g_menu_insert_item(cast(GMenu*)this._cPtr, position, item ? cast(GMenuItem*)item._cPtr(No.Dup) : null);
   }
@@ -199,7 +199,7 @@ class Menu : gio.menu_model.MenuModel
         label = the section label, or null
         section = a #GMenuModel with the items of the section
   */
-  void insertSection(int position, string label, gio.menu_model.MenuModel section)
+  void insertSection(int position, string label, gio.menu_model.MenuModel section) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     g_menu_insert_section(cast(GMenu*)this._cPtr, position, _label, section ? cast(GMenuModel*)section._cPtr(No.Dup) : null);
@@ -215,7 +215,7 @@ class Menu : gio.menu_model.MenuModel
         label = the section label, or null
         submenu = a #GMenuModel with the items of the submenu
   */
-  void insertSubmenu(int position, string label, gio.menu_model.MenuModel submenu)
+  void insertSubmenu(int position, string label, gio.menu_model.MenuModel submenu) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     g_menu_insert_submenu(cast(GMenu*)this._cPtr, position, _label, submenu ? cast(GMenuModel*)submenu._cPtr(No.Dup) : null);
@@ -230,7 +230,7 @@ class Menu : gio.menu_model.MenuModel
         label = the section label, or null
         detailedAction = the detailed action string, or null
   */
-  void prepend(string label = null, string detailedAction = null)
+  void prepend(string label = null, string detailedAction = null) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
@@ -245,7 +245,7 @@ class Menu : gio.menu_model.MenuModel
       Params:
         item = a #GMenuItem to prepend
   */
-  void prependItem(gio.menu_item.MenuItem item)
+  void prependItem(gio.menu_item.MenuItem item) nothrow
   {
     g_menu_prepend_item(cast(GMenu*)this._cPtr, item ? cast(GMenuItem*)item._cPtr(No.Dup) : null);
   }
@@ -259,7 +259,7 @@ class Menu : gio.menu_model.MenuModel
         label = the section label, or null
         section = a #GMenuModel with the items of the section
   */
-  void prependSection(string label, gio.menu_model.MenuModel section)
+  void prependSection(string label, gio.menu_model.MenuModel section) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     g_menu_prepend_section(cast(GMenu*)this._cPtr, _label, section ? cast(GMenuModel*)section._cPtr(No.Dup) : null);
@@ -274,7 +274,7 @@ class Menu : gio.menu_model.MenuModel
         label = the section label, or null
         submenu = a #GMenuModel with the items of the submenu
   */
-  void prependSubmenu(string label, gio.menu_model.MenuModel submenu)
+  void prependSubmenu(string label, gio.menu_model.MenuModel submenu) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     g_menu_prepend_submenu(cast(GMenu*)this._cPtr, _label, submenu ? cast(GMenuModel*)submenu._cPtr(No.Dup) : null);
@@ -295,7 +295,7 @@ class Menu : gio.menu_model.MenuModel
       Params:
         position = the position of the item to remove
   */
-  void remove(int position)
+  void remove(int position) nothrow
   {
     g_menu_remove(cast(GMenu*)this._cPtr, position);
   }
@@ -303,7 +303,7 @@ class Menu : gio.menu_model.MenuModel
   /**
       Removes all items in the menu.
   */
-  void removeAll()
+  void removeAll() nothrow
   {
     g_menu_remove_all(cast(GMenu*)this._cPtr);
   }
@@ -321,7 +321,7 @@ final class MenuGidBuilder : MenuGidBuilderImpl!MenuGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Menu build()
+  Menu build() nothrow
   {
     return new Menu(cast(void*)createGObject(Menu._getGType), Yes.Take);
   }

@@ -19,7 +19,7 @@ struct VideoChromaSite
       Returns: a #GstVideoChromaSite or [gstvideo.types.VideoChromaSite.Unknown] when `s` does
         not contain a valid chroma-site description.
   */
-  static gstvideo.types.VideoChromaSite fromString(string s)
+  static gstvideo.types.VideoChromaSite fromString(string s) nothrow
   {
     GstVideoChromaSite _cretval;
     const(char)* _s = s.toCString(No.Alloc);
@@ -37,7 +37,7 @@ struct VideoChromaSite
                  or null if site contains undefined value or
                  is equal to [gstvideo.types.VideoChromaSite.Unknown]
   */
-  static string toString_(gstvideo.types.VideoChromaSite site)
+  static string toString_(gstvideo.types.VideoChromaSite site) nothrow
   {
     char* _cretval;
     _cretval = gst_video_chroma_site_to_string(site);

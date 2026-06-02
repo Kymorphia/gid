@@ -37,26 +37,26 @@ class Dock : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_dock_get_type != &gidSymbolNotFound ? panel_dock_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Dock self()
+  override Dock self() nothrow
   {
     return this;
   }
@@ -65,127 +65,127 @@ class Dock : gtk.widget.Widget
       Get builder for [panel.dock.Dock]
       Returns: New builder object
   */
-  static DockGidBuilder builder()
+  static DockGidBuilder builder() nothrow
   {
     return new DockGidBuilder;
   }
 
   /** */
-  @property int bottomHeight()
+  @property int bottomHeight() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("bottom-height");
   }
 
   /** */
-  @property void bottomHeight(int propval)
+  @property void bottomHeight(int propval) nothrow
   {
     setBottomHeight(propval);
   }
 
   /** */
-  @property bool canRevealBottom()
+  @property bool canRevealBottom() nothrow
   {
     return getCanRevealBottom();
   }
 
   /** */
-  @property bool canRevealEnd()
+  @property bool canRevealEnd() nothrow
   {
     return getCanRevealEnd();
   }
 
   /** */
-  @property bool canRevealStart()
+  @property bool canRevealStart() nothrow
   {
     return getCanRevealStart();
   }
 
   /** */
-  @property bool canRevealTop()
+  @property bool canRevealTop() nothrow
   {
     return getCanRevealTop();
   }
 
   /** */
-  @property int endWidth()
+  @property int endWidth() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("end-width");
   }
 
   /** */
-  @property void endWidth(int propval)
+  @property void endWidth(int propval) nothrow
   {
     setEndWidth(propval);
   }
 
   /** */
-  @property bool revealBottom()
+  @property bool revealBottom() nothrow
   {
     return getRevealBottom();
   }
 
   /** */
-  @property void revealBottom(bool propval)
+  @property void revealBottom(bool propval) nothrow
   {
     setRevealBottom(propval);
   }
 
   /** */
-  @property bool revealEnd()
+  @property bool revealEnd() nothrow
   {
     return getRevealEnd();
   }
 
   /** */
-  @property void revealEnd(bool propval)
+  @property void revealEnd(bool propval) nothrow
   {
     setRevealEnd(propval);
   }
 
   /** */
-  @property bool revealStart()
+  @property bool revealStart() nothrow
   {
     return getRevealStart();
   }
 
   /** */
-  @property void revealStart(bool propval)
+  @property void revealStart(bool propval) nothrow
   {
     setRevealStart(propval);
   }
 
   /** */
-  @property bool revealTop()
+  @property bool revealTop() nothrow
   {
     return getRevealTop();
   }
 
   /** */
-  @property void revealTop(bool propval)
+  @property void revealTop(bool propval) nothrow
   {
     setRevealTop(propval);
   }
 
   /** */
-  @property int startWidth()
+  @property int startWidth() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("start-width");
   }
 
   /** */
-  @property void startWidth(int propval)
+  @property void startWidth(int propval) nothrow
   {
     setStartWidth(propval);
   }
 
   /** */
-  @property int topHeight()
+  @property int topHeight() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("top-height");
   }
 
   /** */
-  @property void topHeight(int propval)
+  @property void topHeight(int propval) nothrow
   {
     setTopHeight(propval);
   }
@@ -194,7 +194,7 @@ class Dock : gtk.widget.Widget
       Create a new #PanelDock.
       Returns: a newly created #PanelDock
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = panel_dock_new();
@@ -207,13 +207,20 @@ class Dock : gtk.widget.Widget
       Params:
         callback = a function to be called on each frame
   */
-  void foreachFrame(panel.types.FrameCallback callback)
+  void foreachFrame(panel.types.FrameCallback callback) nothrow
   {
-    extern(C) void _callbackCallback(PanelFrame* frame, void* userData)
+    extern(C) void _callbackCallback(PanelFrame* frame, void* userData) nothrow
     {
       auto _dlg = cast(panel.types.FrameCallback*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(panel.frame.Frame)(cast(void*)frame, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(panel.frame.Frame)(cast(void*)frame, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "panel.types.FrameCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? cast(void*)&(callback) : null;
@@ -228,7 +235,7 @@ class Dock : gtk.widget.Widget
       Returns: whether it can reveal the area or not. If the is no child
         or the child is empty, will return false.
   */
-  bool getCanRevealArea(panel.types.Area area)
+  bool getCanRevealArea(panel.types.Area area) nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_dock_get_can_reveal_area(cast(PanelDock*)this._cPtr, area);
@@ -240,7 +247,7 @@ class Dock : gtk.widget.Widget
       Returns: whether it can reveal the bottom area or not. If the is no
         child or the child is empty, will return false.
   */
-  bool getCanRevealBottom()
+  bool getCanRevealBottom() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_dock_get_can_reveal_bottom(cast(PanelDock*)this._cPtr);
@@ -252,7 +259,7 @@ class Dock : gtk.widget.Widget
       Returns: whether it can reveal the end area or not. If the is no
         child or the child is empty, will return false.
   */
-  bool getCanRevealEnd()
+  bool getCanRevealEnd() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_dock_get_can_reveal_end(cast(PanelDock*)this._cPtr);
@@ -264,7 +271,7 @@ class Dock : gtk.widget.Widget
       Returns: whether it can reveal the start area or not. If the is no
         child or the child is empty, will return false.
   */
-  bool getCanRevealStart()
+  bool getCanRevealStart() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_dock_get_can_reveal_start(cast(PanelDock*)this._cPtr);
@@ -276,7 +283,7 @@ class Dock : gtk.widget.Widget
       Returns: whether it can reveal the top area or not. If the is no
         child or the child is empty, will return false.
   */
-  bool getCanRevealTop()
+  bool getCanRevealTop() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_dock_get_can_reveal_top(cast(PanelDock*)this._cPtr);
@@ -290,7 +297,7 @@ class Dock : gtk.widget.Widget
         area = the #PanelArea to return the reveal status of.
       Returns: The reveal state.
   */
-  bool getRevealArea(panel.types.Area area)
+  bool getRevealArea(panel.types.Area area) nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_dock_get_reveal_area(cast(PanelDock*)this._cPtr, area);
@@ -301,7 +308,7 @@ class Dock : gtk.widget.Widget
       Tells if the bottom area is revealed.
       Returns: The reveal state of the bottom area.
   */
-  bool getRevealBottom()
+  bool getRevealBottom() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_dock_get_reveal_bottom(cast(PanelDock*)this._cPtr);
@@ -312,7 +319,7 @@ class Dock : gtk.widget.Widget
       Tells if the end area is revealed.
       Returns: The reveal state of the end area.
   */
-  bool getRevealEnd()
+  bool getRevealEnd() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_dock_get_reveal_end(cast(PanelDock*)this._cPtr);
@@ -323,7 +330,7 @@ class Dock : gtk.widget.Widget
       Tells if the start area is revealed.
       Returns: The reveal state of the start area.
   */
-  bool getRevealStart()
+  bool getRevealStart() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_dock_get_reveal_start(cast(PanelDock*)this._cPtr);
@@ -334,7 +341,7 @@ class Dock : gtk.widget.Widget
       Tells if the top area is revealed.
       Returns: The reveal state of the top area.
   */
-  bool getRevealTop()
+  bool getRevealTop() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_dock_get_reveal_top(cast(PanelDock*)this._cPtr);
@@ -348,7 +355,7 @@ class Dock : gtk.widget.Widget
       Params:
         widget = a #GtkWidget to remove
   */
-  void remove(gtk.widget.Widget widget)
+  void remove(gtk.widget.Widget widget) nothrow
   {
     panel_dock_remove(cast(PanelDock*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -359,7 +366,7 @@ class Dock : gtk.widget.Widget
       Params:
         height = the height
   */
-  void setBottomHeight(int height)
+  void setBottomHeight(int height) nothrow
   {
     panel_dock_set_bottom_height(cast(PanelDock*)this._cPtr, height);
   }
@@ -370,7 +377,7 @@ class Dock : gtk.widget.Widget
       Params:
         width = the width
   */
-  void setEndWidth(int width)
+  void setEndWidth(int width) nothrow
   {
     panel_dock_set_end_width(cast(PanelDock*)this._cPtr, width);
   }
@@ -382,7 +389,7 @@ class Dock : gtk.widget.Widget
         area = a #PanelArea. [panel.types.Area.Center] is an invalid value.
         reveal = reveal the area.
   */
-  void setRevealArea(panel.types.Area area, bool reveal)
+  void setRevealArea(panel.types.Area area, bool reveal) nothrow
   {
     panel_dock_set_reveal_area(cast(PanelDock*)this._cPtr, area, reveal);
   }
@@ -393,7 +400,7 @@ class Dock : gtk.widget.Widget
       Params:
         revealBottom = reveal the bottom area.
   */
-  void setRevealBottom(bool revealBottom)
+  void setRevealBottom(bool revealBottom) nothrow
   {
     panel_dock_set_reveal_bottom(cast(PanelDock*)this._cPtr, revealBottom);
   }
@@ -404,7 +411,7 @@ class Dock : gtk.widget.Widget
       Params:
         revealEnd = reveal the end area.
   */
-  void setRevealEnd(bool revealEnd)
+  void setRevealEnd(bool revealEnd) nothrow
   {
     panel_dock_set_reveal_end(cast(PanelDock*)this._cPtr, revealEnd);
   }
@@ -415,7 +422,7 @@ class Dock : gtk.widget.Widget
       Params:
         revealStart = reveal the start area.
   */
-  void setRevealStart(bool revealStart)
+  void setRevealStart(bool revealStart) nothrow
   {
     panel_dock_set_reveal_start(cast(PanelDock*)this._cPtr, revealStart);
   }
@@ -426,7 +433,7 @@ class Dock : gtk.widget.Widget
       Params:
         revealTop = reveal the top area.
   */
-  void setRevealTop(bool revealTop)
+  void setRevealTop(bool revealTop) nothrow
   {
     panel_dock_set_reveal_top(cast(PanelDock*)this._cPtr, revealTop);
   }
@@ -437,7 +444,7 @@ class Dock : gtk.widget.Widget
       Params:
         width = the width
   */
-  void setStartWidth(int width)
+  void setStartWidth(int width) nothrow
   {
     panel_dock_set_start_width(cast(PanelDock*)this._cPtr, width);
   }
@@ -448,7 +455,7 @@ class Dock : gtk.widget.Widget
       Params:
         height = the height
   */
-  void setTopHeight(int height)
+  void setTopHeight(int height) nothrow
   {
     panel_dock_set_top_height(cast(PanelDock*)this._cPtr, height);
   }
@@ -477,18 +484,19 @@ class Dock : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAdoptWidget(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAdoptWidget(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : panel.dock.Dock)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -496,7 +504,14 @@ class Dock : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "panel.dock.Dock.adoptWidget");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -523,18 +538,19 @@ class Dock : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCreateFrame(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCreateFrame(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T : panel.frame.Frame)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.position.Position)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : panel.dock.Dock)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      panel.frame.Frame _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -542,7 +558,14 @@ class Dock : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "panel.dock.Dock.createFrame");
+      }
 
       setVal!(panel.frame.Frame)(_returnValue, _retval);
     }
@@ -568,14 +591,14 @@ class Dock : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPanelDragBegin(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPanelDragBegin(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : panel.dock.Dock)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -587,7 +610,14 @@ class Dock : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "panel.dock.Dock.panelDragBegin");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -612,14 +642,14 @@ class Dock : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPanelDragEnd(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPanelDragEnd(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : panel.dock.Dock)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -631,7 +661,14 @@ class Dock : gtk.widget.Widget
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "panel.dock.Dock.panelDragEnd");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -645,49 +682,49 @@ class DockGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 
 
   /** */
-  T bottomHeight(int propval)
+  T bottomHeight(int propval) nothrow
   {
     return setProperty("bottom-height", propval);
   }
 
   /** */
-  T endWidth(int propval)
+  T endWidth(int propval) nothrow
   {
     return setProperty("end-width", propval);
   }
 
   /** */
-  T revealBottom(bool propval)
+  T revealBottom(bool propval) nothrow
   {
     return setProperty("reveal-bottom", propval);
   }
 
   /** */
-  T revealEnd(bool propval)
+  T revealEnd(bool propval) nothrow
   {
     return setProperty("reveal-end", propval);
   }
 
   /** */
-  T revealStart(bool propval)
+  T revealStart(bool propval) nothrow
   {
     return setProperty("reveal-start", propval);
   }
 
   /** */
-  T revealTop(bool propval)
+  T revealTop(bool propval) nothrow
   {
     return setProperty("reveal-top", propval);
   }
 
   /** */
-  T startWidth(int propval)
+  T startWidth(int propval) nothrow
   {
     return setProperty("start-width", propval);
   }
 
   /** */
-  T topHeight(int propval)
+  T topHeight(int propval) nothrow
   {
     return setProperty("top-height", propval);
   }
@@ -700,7 +737,7 @@ final class DockGidBuilder : DockGidBuilderImpl!DockGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Dock build()
+  Dock build() nothrow
   {
     return new Dock(cast(void*)createGObject(Dock._getGType), No.Take);
   }

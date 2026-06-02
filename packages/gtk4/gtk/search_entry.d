@@ -69,26 +69,26 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_search_entry_get_type != &gidSymbolNotFound ? gtk_search_entry_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SearchEntry self()
+  override SearchEntry self() nothrow
   {
     return this;
   }
@@ -97,7 +97,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Get builder for [gtk.search_entry.SearchEntry]
       Returns: New builder object
   */
-  static SearchEntryGidBuilder builder()
+  static SearchEntryGidBuilder builder() nothrow
   {
     return new SearchEntryGidBuilder;
   }
@@ -106,7 +106,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Get `activatesDefault` property.
       Returns: Whether to activate the default widget when Enter is pressed.
   */
-  @property bool activatesDefault()
+  @property bool activatesDefault() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("activates-default");
   }
@@ -116,7 +116,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Params:
         propval = Whether to activate the default widget when Enter is pressed.
   */
-  @property void activatesDefault(bool propval)
+  @property void activatesDefault(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("activates-default", propval);
   }
@@ -126,7 +126,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Returns: The hints about input for the [gtk.search_entry.SearchEntry] used to alter the
         behaviour of input methods.
   */
-  @property gtk.types.InputHints inputHints()
+  @property gtk.types.InputHints inputHints() nothrow
   {
     return getInputHints();
   }
@@ -137,7 +137,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
         propval = The hints about input for the [gtk.search_entry.SearchEntry] used to alter the
           behaviour of input methods.
   */
-  @property void inputHints(gtk.types.InputHints propval)
+  @property void inputHints(gtk.types.InputHints propval) nothrow
   {
     setInputHints(propval);
   }
@@ -147,7 +147,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Returns: The purpose for the [gtk.search_entry.SearchEntry] input used to alter the
         behaviour of input methods.
   */
-  @property gtk.types.InputPurpose inputPurpose()
+  @property gtk.types.InputPurpose inputPurpose() nothrow
   {
     return getInputPurpose();
   }
@@ -158,7 +158,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
         propval = The purpose for the [gtk.search_entry.SearchEntry] input used to alter the
           behaviour of input methods.
   */
-  @property void inputPurpose(gtk.types.InputPurpose propval)
+  @property void inputPurpose(gtk.types.InputPurpose propval) nothrow
   {
     setInputPurpose(propval);
   }
@@ -168,7 +168,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Returns: The text that will be displayed in the [gtk.search_entry.SearchEntry]
         when it is empty and unfocused.
   */
-  @property string placeholderText()
+  @property string placeholderText() nothrow
   {
     return getPlaceholderText();
   }
@@ -179,7 +179,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
         propval = The text that will be displayed in the [gtk.search_entry.SearchEntry]
           when it is empty and unfocused.
   */
-  @property void placeholderText(string propval)
+  @property void placeholderText(string propval) nothrow
   {
     setPlaceholderText(propval);
   }
@@ -189,7 +189,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Returns: The delay in milliseconds from last keypress to the search
         changed signal.
   */
-  @property uint searchDelay()
+  @property uint searchDelay() nothrow
   {
     return getSearchDelay();
   }
@@ -200,7 +200,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
         propval = The delay in milliseconds from last keypress to the search
           changed signal.
   */
-  @property void searchDelay(uint propval)
+  @property void searchDelay(uint propval) nothrow
   {
     setSearchDelay(propval);
   }
@@ -211,7 +211,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Creates a [gtk.search_entry.SearchEntry].
       Returns: a new [gtk.search_entry.SearchEntry]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_entry_new();
@@ -222,7 +222,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Gets the input purpose for entry.
       Returns: The input hints
   */
-  gtk.types.InputHints getInputHints()
+  gtk.types.InputHints getInputHints() nothrow
   {
     GtkInputHints _cretval;
     _cretval = gtk_search_entry_get_input_hints(cast(GtkSearchEntry*)this._cPtr);
@@ -234,7 +234,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Gets the input purpose of entry.
       Returns: The input hints
   */
-  gtk.types.InputPurpose getInputPurpose()
+  gtk.types.InputPurpose getInputPurpose() nothrow
   {
     GtkInputPurpose _cretval;
     _cretval = gtk_search_entry_get_input_purpose(cast(GtkSearchEntry*)this._cPtr);
@@ -246,7 +246,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Gets the widget that entry is capturing key events from.
       Returns: The key capture widget.
   */
-  gtk.widget.Widget getKeyCaptureWidget()
+  gtk.widget.Widget getKeyCaptureWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_entry_get_key_capture_widget(cast(GtkSearchEntry*)this._cPtr);
@@ -258,7 +258,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Gets the placeholder text associated with entry.
       Returns: The placeholder text.
   */
-  string getPlaceholderText()
+  string getPlaceholderText() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_search_entry_get_placeholder_text(cast(GtkSearchEntry*)this._cPtr);
@@ -271,7 +271,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       [gtk.search_entry.SearchEntry.searchChanged] signal being emitted.
       Returns: a delay in milliseconds.
   */
-  uint getSearchDelay()
+  uint getSearchDelay() nothrow
   {
     uint _retval;
     _retval = gtk_search_entry_get_search_delay(cast(GtkSearchEntry*)this._cPtr);
@@ -284,7 +284,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Params:
         hints = the new input hints
   */
-  void setInputHints(gtk.types.InputHints hints)
+  void setInputHints(gtk.types.InputHints hints) nothrow
   {
     gtk_search_entry_set_input_hints(cast(GtkSearchEntry*)this._cPtr, hints);
   }
@@ -295,7 +295,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Params:
         purpose = the new input purpose
   */
-  void setInputPurpose(gtk.types.InputPurpose purpose)
+  void setInputPurpose(gtk.types.InputPurpose purpose) nothrow
   {
     gtk_search_entry_set_input_purpose(cast(GtkSearchEntry*)this._cPtr, purpose);
   }
@@ -322,7 +322,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Params:
         widget = a [gtk.widget.Widget]
   */
-  void setKeyCaptureWidget(gtk.widget.Widget widget = null)
+  void setKeyCaptureWidget(gtk.widget.Widget widget = null) nothrow
   {
     gtk_search_entry_set_key_capture_widget(cast(GtkSearchEntry*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -333,7 +333,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Params:
         text = the text to set as a placeholder
   */
-  void setPlaceholderText(string text = null)
+  void setPlaceholderText(string text = null) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_search_entry_set_placeholder_text(cast(GtkSearchEntry*)this._cPtr, _text);
@@ -346,7 +346,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Params:
         delay = a delay in milliseconds
   */
-  void setSearchDelay(uint delay)
+  void setSearchDelay(uint delay) nothrow
   {
     gtk_search_entry_set_search_delay(cast(GtkSearchEntry*)this._cPtr, delay);
   }
@@ -368,13 +368,13 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.search_entry.SearchEntry)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -383,7 +383,14 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.search_entry.SearchEntry.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -413,13 +420,13 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectNextMatch(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNextMatch(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.search_entry.SearchEntry)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -428,7 +435,14 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.search_entry.SearchEntry.nextMatch");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -458,13 +472,13 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPreviousMatch(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPreviousMatch(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.search_entry.SearchEntry)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -473,7 +487,14 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.search_entry.SearchEntry.previousMatch");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -497,13 +518,13 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSearchChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSearchChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.search_entry.SearchEntry)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -512,7 +533,14 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.search_entry.SearchEntry.searchChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -534,13 +562,13 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSearchStarted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSearchStarted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.search_entry.SearchEntry)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -549,7 +577,14 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.search_entry.SearchEntry.searchStarted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -578,13 +613,13 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectStopSearch(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStopSearch(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.search_entry.SearchEntry)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -593,7 +628,14 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.search_entry.SearchEntry.stopSearch");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -613,7 +655,7 @@ class SearchEntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.edit
         propval = Whether to activate the default widget when Enter is pressed.
       Returns: Builder instance for fluent chaining
   */
-  T activatesDefault(bool propval)
+  T activatesDefault(bool propval) nothrow
   {
     return setProperty("activates-default", propval);
   }
@@ -625,7 +667,7 @@ class SearchEntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.edit
           behaviour of input methods.
       Returns: Builder instance for fluent chaining
   */
-  T inputHints(gtk.types.InputHints propval)
+  T inputHints(gtk.types.InputHints propval) nothrow
   {
     return setProperty("input-hints", propval);
   }
@@ -637,7 +679,7 @@ class SearchEntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.edit
           behaviour of input methods.
       Returns: Builder instance for fluent chaining
   */
-  T inputPurpose(gtk.types.InputPurpose propval)
+  T inputPurpose(gtk.types.InputPurpose propval) nothrow
   {
     return setProperty("input-purpose", propval);
   }
@@ -649,7 +691,7 @@ class SearchEntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.edit
           when it is empty and unfocused.
       Returns: Builder instance for fluent chaining
   */
-  T placeholderText(string propval)
+  T placeholderText(string propval) nothrow
   {
     return setProperty("placeholder-text", propval);
   }
@@ -661,7 +703,7 @@ class SearchEntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.edit
           changed signal.
       Returns: Builder instance for fluent chaining
   */
-  T searchDelay(uint propval)
+  T searchDelay(uint propval) nothrow
   {
     return setProperty("search-delay", propval);
   }
@@ -674,7 +716,7 @@ final class SearchEntryGidBuilder : SearchEntryGidBuilderImpl!SearchEntryGidBuil
       Create object from builder.
       Returns: New object
   */
-  SearchEntry build()
+  SearchEntry build() nothrow
   {
     return new SearchEntry(cast(void*)createGObject(SearchEntry._getGType), No.Take);
   }

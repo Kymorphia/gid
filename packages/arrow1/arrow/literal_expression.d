@@ -15,26 +15,26 @@ class LiteralExpression : arrow.expression.Expression
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_literal_expression_get_type != &gidSymbolNotFound ? garrow_literal_expression_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LiteralExpression self()
+  override LiteralExpression self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class LiteralExpression : arrow.expression.Expression
       Get builder for [arrow.literal_expression.LiteralExpression]
       Returns: New builder object
   */
-  static LiteralExpressionGidBuilder builder()
+  static LiteralExpressionGidBuilder builder() nothrow
   {
     return new LiteralExpressionGidBuilder;
   }
 
   /** */
-  this(arrow.datum.Datum datum)
+  this(arrow.datum.Datum datum) nothrow
   {
     GArrowLiteralExpression* _cretval;
     _cretval = garrow_literal_expression_new(datum ? cast(GArrowDatum*)datum._cPtr(No.Dup) : null);
@@ -69,7 +69,7 @@ final class LiteralExpressionGidBuilder : LiteralExpressionGidBuilderImpl!Litera
       Create object from builder.
       Returns: New object
   */
-  LiteralExpression build()
+  LiteralExpression build() nothrow
   {
     return new LiteralExpression(cast(void*)createGObject(LiteralExpression._getGType), Yes.Take);
   }

@@ -17,32 +17,32 @@ class NavigationAction : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_navigation_action_get_type != &gidSymbolNotFound ? webkit_navigation_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override NavigationAction self()
+  override NavigationAction self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class NavigationAction : gobject.boxed.Boxed
       Make a copy of navigation.
       Returns: A copy of passed in #WebKitNavigationAction
   */
-  webkit.navigation_action.NavigationAction copy()
+  webkit.navigation_action.NavigationAction copy() nothrow
   {
     WebKitNavigationAction* _cretval;
     _cretval = webkit_navigation_action_copy(cast(WebKitNavigationAction*)this._cPtr);
@@ -65,7 +65,7 @@ class NavigationAction : gobject.boxed.Boxed
       In all other cases this function will return null.
       Returns: The name of the new frame this navigation action targets or null
   */
-  string getFrameName()
+  string getFrameName() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_navigation_action_get_frame_name(cast(WebKitNavigationAction*)this._cPtr);
@@ -80,7 +80,7 @@ class NavigationAction : gobject.boxed.Boxed
       when the navigation was requested
       Returns: the modifier keys
   */
-  uint getModifiers()
+  uint getModifiers() nothrow
   {
     uint _retval;
     _retval = webkit_navigation_action_get_modifiers(cast(WebKitNavigationAction*)this._cPtr);
@@ -94,7 +94,7 @@ class NavigationAction : gobject.boxed.Boxed
       the navigation was not started by a mouse event.
       Returns: the mouse button number or 0
   */
-  uint getMouseButton()
+  uint getMouseButton() nothrow
   {
     uint _retval;
     _retval = webkit_navigation_action_get_mouse_button(cast(WebKitNavigationAction*)this._cPtr);
@@ -105,7 +105,7 @@ class NavigationAction : gobject.boxed.Boxed
       Return the type of action that triggered the navigation.
       Returns: a #WebKitNavigationType
   */
-  webkit.types.NavigationType getNavigationType()
+  webkit.types.NavigationType getNavigationType() nothrow
   {
     WebKitNavigationType _cretval;
     _cretval = webkit_navigation_action_get_navigation_type(cast(WebKitNavigationAction*)this._cPtr);
@@ -123,7 +123,7 @@ class NavigationAction : gobject.boxed.Boxed
       #WebKitPage::send-request signal can be used instead.
       Returns: a #WebKitURIRequest
   */
-  webkit.urirequest.URIRequest getRequest()
+  webkit.urirequest.URIRequest getRequest() nothrow
   {
     WebKitURIRequest* _cretval;
     _cretval = webkit_navigation_action_get_request(cast(WebKitNavigationAction*)this._cPtr);
@@ -135,7 +135,7 @@ class NavigationAction : gobject.boxed.Boxed
       Returns whether the navigation was redirected.
       Returns: true if the original navigation was redirected, false otherwise.
   */
-  bool isRedirect()
+  bool isRedirect() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_navigation_action_is_redirect(cast(WebKitNavigationAction*)this._cPtr);
@@ -146,7 +146,7 @@ class NavigationAction : gobject.boxed.Boxed
       Return whether the navigation was triggered by a user gesture like a mouse click.
       Returns: whether navigation action is a user gesture
   */
-  bool isUserGesture()
+  bool isUserGesture() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_navigation_action_is_user_gesture(cast(WebKitNavigationAction*)this._cPtr);

@@ -30,26 +30,26 @@ class TextBuffer : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_buffer_get_type != &gidSymbolNotFound ? gtk_text_buffer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TextBuffer self()
+  override TextBuffer self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Get builder for [gtk.text_buffer.TextBuffer]
       Returns: New builder object
   */
-  static TextBufferGidBuilder builder()
+  static TextBufferGidBuilder builder() nothrow
   {
     return new TextBufferGidBuilder;
   }
@@ -68,7 +68,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Returns: The list of targets this buffer supports for clipboard copying
         and as DND source.
   */
-  @property gtk.target_list.TargetList copyTargetList()
+  @property gtk.target_list.TargetList copyTargetList() nothrow
   {
     return getCopyTargetList();
   }
@@ -79,7 +79,7 @@ class TextBuffer : gobject.object.ObjectWrap
         of the buffer). It is useful for getting notified when the
         cursor moves.
   */
-  @property int cursorPosition()
+  @property int cursorPosition() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("cursor-position");
   }
@@ -88,7 +88,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Get `hasSelection` property.
       Returns: Whether the buffer has some text currently selected.
   */
-  @property bool hasSelection()
+  @property bool hasSelection() nothrow
   {
     return getHasSelection();
   }
@@ -98,13 +98,13 @@ class TextBuffer : gobject.object.ObjectWrap
       Returns: The list of targets this buffer supports for clipboard pasting
         and as DND destination.
   */
-  @property gtk.target_list.TargetList pasteTargetList()
+  @property gtk.target_list.TargetList pasteTargetList() nothrow
   {
     return getPasteTargetList();
   }
 
   /** */
-  @property gtk.text_tag_table.TextTagTable tagTable()
+  @property gtk.text_tag_table.TextTagTable tagTable() nothrow
   {
     return getTagTable();
   }
@@ -114,7 +114,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Returns: The text content of the buffer. Without child widgets and images,
         see [gtk.text_buffer.TextBuffer.getText] for more information.
   */
-  @property string text()
+  @property string text() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("text");
   }
@@ -125,7 +125,7 @@ class TextBuffer : gobject.object.ObjectWrap
         propval = The text content of the buffer. Without child widgets and images,
           see [gtk.text_buffer.TextBuffer.getText] for more information.
   */
-  @property void text(string propval)
+  @property void text(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("text", propval);
   }
@@ -137,7 +137,7 @@ class TextBuffer : gobject.object.ObjectWrap
         table = a tag table, or null to create a new one
       Returns: a new text buffer
   */
-  this(gtk.text_tag_table.TextTagTable table = null)
+  this(gtk.text_tag_table.TextTagTable table = null) nothrow
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_text_buffer_new(table ? cast(GtkTextTagTable*)table._cPtr(No.Dup) : null);
@@ -156,7 +156,7 @@ class TextBuffer : gobject.object.ObjectWrap
         mark = the mark to add
         where = location to place mark
   */
-  void addMark(gtk.text_mark.TextMark mark, gtk.text_iter.TextIter where)
+  void addMark(gtk.text_mark.TextMark mark, gtk.text_iter.TextIter where) nothrow
   {
     gtk_text_buffer_add_mark(cast(GtkTextBuffer*)this._cPtr, mark ? cast(GtkTextMark*)mark._cPtr(No.Dup) : null, where ? cast(const(GtkTextIter)*)where._cPtr(No.Dup) : null);
   }
@@ -169,7 +169,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         clipboard = a #GtkClipboard
   */
-  void addSelectionClipboard(gtk.clipboard.Clipboard clipboard)
+  void addSelectionClipboard(gtk.clipboard.Clipboard clipboard) nothrow
   {
     gtk_text_buffer_add_selection_clipboard(cast(GtkTextBuffer*)this._cPtr, clipboard ? cast(GtkClipboard*)clipboard._cPtr(No.Dup) : null);
   }
@@ -184,7 +184,7 @@ class TextBuffer : gobject.object.ObjectWrap
         start = one bound of range to be tagged
         end = other bound of range to be tagged
   */
-  void applyTag(gtk.text_tag.TextTag tag, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
+  void applyTag(gtk.text_tag.TextTag tag, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end) nothrow
   {
     gtk_text_buffer_apply_tag(cast(GtkTextBuffer*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null);
   }
@@ -198,7 +198,7 @@ class TextBuffer : gobject.object.ObjectWrap
         start = one bound of range to be tagged
         end = other bound of range to be tagged
   */
-  void applyTagByName(string name, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
+  void applyTagByName(string name, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_text_buffer_apply_tag_by_name(cast(GtkTextBuffer*)this._cPtr, _name, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null);
@@ -222,7 +222,7 @@ class TextBuffer : gobject.object.ObjectWrap
         defaultEditable = whether the buffer is editable by default
       Returns: true if the buffer was modified
   */
-  bool backspace(gtk.text_iter.TextIter iter, bool interactive, bool defaultEditable)
+  bool backspace(gtk.text_iter.TextIter iter, bool interactive, bool defaultEditable) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_buffer_backspace(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, interactive, defaultEditable);
@@ -248,7 +248,7 @@ class TextBuffer : gobject.object.ObjectWrap
       no need to add extra calls if you user action consists solely of a
       single call to one of those functions.
   */
-  void beginUserAction()
+  void beginUserAction() nothrow
   {
     gtk_text_buffer_begin_user_action(cast(GtkTextBuffer*)this._cPtr);
   }
@@ -259,7 +259,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         clipboard = the #GtkClipboard object to copy to
   */
-  void copyClipboard(gtk.clipboard.Clipboard clipboard)
+  void copyClipboard(gtk.clipboard.Clipboard clipboard) nothrow
   {
     gtk_text_buffer_copy_clipboard(cast(GtkTextBuffer*)this._cPtr, clipboard ? cast(GtkClipboard*)clipboard._cPtr(No.Dup) : null);
   }
@@ -275,7 +275,7 @@ class TextBuffer : gobject.object.ObjectWrap
         iter = location in the buffer
       Returns: the created child anchor
   */
-  gtk.text_child_anchor.TextChildAnchor createChildAnchor(gtk.text_iter.TextIter iter)
+  gtk.text_child_anchor.TextChildAnchor createChildAnchor(gtk.text_iter.TextIter iter) nothrow
   {
     GtkTextChildAnchor* _cretval;
     _cretval = gtk_text_buffer_create_child_anchor(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
@@ -308,7 +308,7 @@ class TextBuffer : gobject.object.ObjectWrap
         leftGravity = whether the mark has left gravity
       Returns: the new #GtkTextMark object
   */
-  gtk.text_mark.TextMark createMark(string markName, gtk.text_iter.TextIter where, bool leftGravity)
+  gtk.text_mark.TextMark createMark(string markName, gtk.text_iter.TextIter where, bool leftGravity) nothrow
   {
     GtkTextMark* _cretval;
     const(char)* _markName = markName.toCString(No.Alloc);
@@ -325,7 +325,7 @@ class TextBuffer : gobject.object.ObjectWrap
         clipboard = the #GtkClipboard object to cut to
         defaultEditable = default editability of the buffer
   */
-  void cutClipboard(gtk.clipboard.Clipboard clipboard, bool defaultEditable)
+  void cutClipboard(gtk.clipboard.Clipboard clipboard, bool defaultEditable) nothrow
   {
     gtk_text_buffer_cut_clipboard(cast(GtkTextBuffer*)this._cPtr, clipboard ? cast(GtkClipboard*)clipboard._cPtr(No.Dup) : null, defaultEditable);
   }
@@ -343,7 +343,7 @@ class TextBuffer : gobject.object.ObjectWrap
         start = a position in buffer
         end = another position in buffer
   */
-  void delete_(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
+  void delete_(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end) nothrow
   {
     gtk_text_buffer_delete(cast(GtkTextBuffer*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
   }
@@ -361,7 +361,7 @@ class TextBuffer : gobject.object.ObjectWrap
         defaultEditable = whether the buffer is editable by default
       Returns: whether some text was actually deleted
   */
-  bool deleteInteractive(gtk.text_iter.TextIter startIter, gtk.text_iter.TextIter endIter, bool defaultEditable)
+  bool deleteInteractive(gtk.text_iter.TextIter startIter, gtk.text_iter.TextIter endIter, bool defaultEditable) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_buffer_delete_interactive(cast(GtkTextBuffer*)this._cPtr, startIter ? cast(GtkTextIter*)startIter._cPtr(No.Dup) : null, endIter ? cast(GtkTextIter*)endIter._cPtr(No.Dup) : null, defaultEditable);
@@ -382,7 +382,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         mark = a #GtkTextMark in buffer
   */
-  void deleteMark(gtk.text_mark.TextMark mark)
+  void deleteMark(gtk.text_mark.TextMark mark) nothrow
   {
     gtk_text_buffer_delete_mark(cast(GtkTextBuffer*)this._cPtr, mark ? cast(GtkTextMark*)mark._cPtr(No.Dup) : null);
   }
@@ -394,7 +394,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         name = name of a mark in buffer
   */
-  void deleteMarkByName(string name)
+  void deleteMarkByName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_text_buffer_delete_mark_by_name(cast(GtkTextBuffer*)this._cPtr, _name);
@@ -411,7 +411,7 @@ class TextBuffer : gobject.object.ObjectWrap
         defaultEditable = whether the buffer is editable by default
       Returns: whether there was a non-empty selection to delete
   */
-  bool deleteSelection(bool interactive, bool defaultEditable)
+  bool deleteSelection(bool interactive, bool defaultEditable) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_buffer_delete_selection(cast(GtkTextBuffer*)this._cPtr, interactive, defaultEditable);
@@ -457,7 +457,7 @@ class TextBuffer : gobject.object.ObjectWrap
         format = a #GdkAtom representing a registered rich text format
       Returns: whether deserializing this format may create tags
   */
-  bool deserializeGetCanCreateTags(gdk.atom.Atom format)
+  bool deserializeGetCanCreateTags(gdk.atom.Atom format) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_buffer_deserialize_get_can_create_tags(cast(GtkTextBuffer*)this._cPtr, format ? cast(GdkAtom)format._cPtr : null);
@@ -487,7 +487,7 @@ class TextBuffer : gobject.object.ObjectWrap
         format = a #GdkAtom representing a registered rich text format
         canCreateTags = whether deserializing this format may create tags
   */
-  void deserializeSetCanCreateTags(gdk.atom.Atom format, bool canCreateTags)
+  void deserializeSetCanCreateTags(gdk.atom.Atom format, bool canCreateTags) nothrow
   {
     gtk_text_buffer_deserialize_set_can_create_tags(cast(GtkTextBuffer*)this._cPtr, format ? cast(GdkAtom)format._cPtr : null, canCreateTags);
   }
@@ -496,7 +496,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Should be paired with a call to [gtk.text_buffer.TextBuffer.beginUserAction].
       See that function for a full explanation.
   */
-  void endUserAction()
+  void endUserAction() nothrow
   {
     gtk_text_buffer_end_user_action(cast(GtkTextBuffer*)this._cPtr);
   }
@@ -509,7 +509,7 @@ class TextBuffer : gobject.object.ObjectWrap
         start = iterator to initialize with first position in the buffer
         end = iterator to initialize with the end iterator
   */
-  void getBounds(out gtk.text_iter.TextIter start, out gtk.text_iter.TextIter end)
+  void getBounds(out gtk.text_iter.TextIter start, out gtk.text_iter.TextIter end) nothrow
   {
     GtkTextIter _start;
     GtkTextIter _end;
@@ -525,7 +525,7 @@ class TextBuffer : gobject.object.ObjectWrap
       count is cached, so this function is very fast.
       Returns: number of characters in the buffer
   */
-  int getCharCount()
+  int getCharCount() nothrow
   {
     int _retval;
     _retval = gtk_text_buffer_get_char_count(cast(GtkTextBuffer*)this._cPtr);
@@ -540,7 +540,7 @@ class TextBuffer : gobject.object.ObjectWrap
       [gtk.target_list.TargetList.addTextTargets].
       Returns: the #GtkTargetList
   */
-  gtk.target_list.TargetList getCopyTargetList()
+  gtk.target_list.TargetList getCopyTargetList() nothrow
   {
     GtkTargetList* _cretval;
     _cretval = gtk_text_buffer_get_copy_target_list(cast(GtkTextBuffer*)this._cPtr);
@@ -559,7 +559,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         iter = iterator to initialize
   */
-  void getEndIter(out gtk.text_iter.TextIter iter)
+  void getEndIter(out gtk.text_iter.TextIter iter) nothrow
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_end_iter(cast(GtkTextBuffer*)this._cPtr, &_iter);
@@ -570,7 +570,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Indicates whether the buffer has some text currently selected.
       Returns: true if the there is text selected
   */
-  bool getHasSelection()
+  bool getHasSelection() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_buffer_get_has_selection(cast(GtkTextBuffer*)this._cPtr);
@@ -584,7 +584,7 @@ class TextBuffer : gobject.object.ObjectWrap
       typing.
       Returns: insertion point mark
   */
-  gtk.text_mark.TextMark getInsert()
+  gtk.text_mark.TextMark getInsert() nothrow
   {
     GtkTextMark* _cretval;
     _cretval = gtk_text_buffer_get_insert(cast(GtkTextBuffer*)this._cPtr);
@@ -599,7 +599,7 @@ class TextBuffer : gobject.object.ObjectWrap
         iter = an iterator to be initialized
         anchor = a child anchor that appears in buffer
   */
-  void getIterAtChildAnchor(out gtk.text_iter.TextIter iter, gtk.text_child_anchor.TextChildAnchor anchor)
+  void getIterAtChildAnchor(out gtk.text_iter.TextIter iter, gtk.text_child_anchor.TextChildAnchor anchor) nothrow
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_iter_at_child_anchor(cast(GtkTextBuffer*)this._cPtr, &_iter, anchor ? cast(GtkTextChildAnchor*)anchor._cPtr(No.Dup) : null);
@@ -614,7 +614,7 @@ class TextBuffer : gobject.object.ObjectWrap
         iter = iterator to initialize
         lineNumber = line number counting from 0
   */
-  void getIterAtLine(out gtk.text_iter.TextIter iter, int lineNumber)
+  void getIterAtLine(out gtk.text_iter.TextIter iter, int lineNumber) nothrow
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_iter_at_line(cast(GtkTextBuffer*)this._cPtr, &_iter, lineNumber);
@@ -637,7 +637,7 @@ class TextBuffer : gobject.object.ObjectWrap
         lineNumber = line number counting from 0
         byteIndex = byte index from start of line
   */
-  void getIterAtLineIndex(out gtk.text_iter.TextIter iter, int lineNumber, int byteIndex)
+  void getIterAtLineIndex(out gtk.text_iter.TextIter iter, int lineNumber, int byteIndex) nothrow
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_iter_at_line_index(cast(GtkTextBuffer*)this._cPtr, &_iter, lineNumber, byteIndex);
@@ -659,7 +659,7 @@ class TextBuffer : gobject.object.ObjectWrap
         lineNumber = line number counting from 0
         charOffset = char offset from start of line
   */
-  void getIterAtLineOffset(out gtk.text_iter.TextIter iter, int lineNumber, int charOffset)
+  void getIterAtLineOffset(out gtk.text_iter.TextIter iter, int lineNumber, int charOffset) nothrow
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_iter_at_line_offset(cast(GtkTextBuffer*)this._cPtr, &_iter, lineNumber, charOffset);
@@ -673,7 +673,7 @@ class TextBuffer : gobject.object.ObjectWrap
         iter = iterator to initialize
         mark = a #GtkTextMark in buffer
   */
-  void getIterAtMark(out gtk.text_iter.TextIter iter, gtk.text_mark.TextMark mark)
+  void getIterAtMark(out gtk.text_iter.TextIter iter, gtk.text_mark.TextMark mark) nothrow
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_iter_at_mark(cast(GtkTextBuffer*)this._cPtr, &_iter, mark ? cast(GtkTextMark*)mark._cPtr(No.Dup) : null);
@@ -690,7 +690,7 @@ class TextBuffer : gobject.object.ObjectWrap
         iter = iterator to initialize
         charOffset = char offset from start of buffer, counting from 0, or -1
   */
-  void getIterAtOffset(out gtk.text_iter.TextIter iter, int charOffset)
+  void getIterAtOffset(out gtk.text_iter.TextIter iter, int charOffset) nothrow
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_iter_at_offset(cast(GtkTextBuffer*)this._cPtr, &_iter, charOffset);
@@ -702,7 +702,7 @@ class TextBuffer : gobject.object.ObjectWrap
       the function is very fast.
       Returns: number of lines in the buffer
   */
-  int getLineCount()
+  int getLineCount() nothrow
   {
     int _retval;
     _retval = gtk_text_buffer_get_line_count(cast(GtkTextBuffer*)this._cPtr);
@@ -717,7 +717,7 @@ class TextBuffer : gobject.object.ObjectWrap
         name = a mark name
       Returns: a #GtkTextMark, or null
   */
-  gtk.text_mark.TextMark getMark(string name)
+  gtk.text_mark.TextMark getMark(string name) nothrow
   {
     GtkTextMark* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -733,7 +733,7 @@ class TextBuffer : gobject.object.ObjectWrap
       editor.
       Returns: true if the buffer has been modified
   */
-  bool getModified()
+  bool getModified() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_buffer_get_modified(cast(GtkTextBuffer*)this._cPtr);
@@ -748,7 +748,7 @@ class TextBuffer : gobject.object.ObjectWrap
       [gtk.target_list.TargetList.addTextTargets].
       Returns: the #GtkTargetList
   */
-  gtk.target_list.TargetList getPasteTargetList()
+  gtk.target_list.TargetList getPasteTargetList() nothrow
   {
     GtkTargetList* _cretval;
     _cretval = gtk_text_buffer_get_paste_target_list(cast(GtkTextBuffer*)this._cPtr);
@@ -770,7 +770,7 @@ class TextBuffer : gobject.object.ObjectWrap
       selection and what its bounds are.
       Returns: selection bound mark
   */
-  gtk.text_mark.TextMark getSelectionBound()
+  gtk.text_mark.TextMark getSelectionBound() nothrow
   {
     GtkTextMark* _cretval;
     _cretval = gtk_text_buffer_get_selection_bound(cast(GtkTextBuffer*)this._cPtr);
@@ -791,7 +791,7 @@ class TextBuffer : gobject.object.ObjectWrap
         end = iterator to initialize with selection end
       Returns: whether the selection has nonzero length
   */
-  bool getSelectionBounds(out gtk.text_iter.TextIter start, out gtk.text_iter.TextIter end)
+  bool getSelectionBounds(out gtk.text_iter.TextIter start, out gtk.text_iter.TextIter end) nothrow
   {
     bool _retval;
     GtkTextIter _start;
@@ -820,7 +820,7 @@ class TextBuffer : gobject.object.ObjectWrap
         includeHiddenChars = whether to include invisible text
       Returns: an allocated UTF-8 string
   */
-  string getSlice(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, bool includeHiddenChars)
+  string getSlice(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, bool includeHiddenChars) nothrow
   {
     char* _cretval;
     _cretval = gtk_text_buffer_get_slice(cast(GtkTextBuffer*)this._cPtr, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null, includeHiddenChars);
@@ -836,7 +836,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         iter = iterator to initialize
   */
-  void getStartIter(out gtk.text_iter.TextIter iter)
+  void getStartIter(out gtk.text_iter.TextIter iter) nothrow
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_start_iter(cast(GtkTextBuffer*)this._cPtr, &_iter);
@@ -847,7 +847,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Get the #GtkTextTagTable associated with this buffer.
       Returns: the buffer’s tag table
   */
-  gtk.text_tag_table.TextTagTable getTagTable()
+  gtk.text_tag_table.TextTagTable getTagTable() nothrow
   {
     GtkTextTagTable* _cretval;
     _cretval = gtk_text_buffer_get_tag_table(cast(GtkTextBuffer*)this._cPtr);
@@ -870,7 +870,7 @@ class TextBuffer : gobject.object.ObjectWrap
         includeHiddenChars = whether to include invisible text
       Returns: an allocated UTF-8 string
   */
-  string getText(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, bool includeHiddenChars)
+  string getText(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, bool includeHiddenChars) nothrow
   {
     char* _cretval;
     _cretval = gtk_text_buffer_get_text(cast(GtkTextBuffer*)this._cPtr, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null, includeHiddenChars);
@@ -891,7 +891,7 @@ class TextBuffer : gobject.object.ObjectWrap
         iter = a position in the buffer
         text = text in UTF-8 format
   */
-  void insert(gtk.text_iter.TextIter iter, string text)
+  void insert(gtk.text_iter.TextIter iter, string text) nothrow
   {
     int _len;
     if (text)
@@ -908,7 +908,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         text = text in UTF-8 format
   */
-  void insertAtCursor(string text)
+  void insertAtCursor(string text) nothrow
   {
     int _len;
     if (text)
@@ -935,7 +935,7 @@ class TextBuffer : gobject.object.ObjectWrap
         iter = location to insert the anchor
         anchor = a #GtkTextChildAnchor
   */
-  void insertChildAnchor(gtk.text_iter.TextIter iter, gtk.text_child_anchor.TextChildAnchor anchor)
+  void insertChildAnchor(gtk.text_iter.TextIter iter, gtk.text_child_anchor.TextChildAnchor anchor) nothrow
   {
     gtk_text_buffer_insert_child_anchor(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, anchor ? cast(GtkTextChildAnchor*)anchor._cPtr(No.Dup) : null);
   }
@@ -956,7 +956,7 @@ class TextBuffer : gobject.object.ObjectWrap
         defaultEditable = default editability of buffer
       Returns: whether text was actually inserted
   */
-  bool insertInteractive(gtk.text_iter.TextIter iter, string text, bool defaultEditable)
+  bool insertInteractive(gtk.text_iter.TextIter iter, string text, bool defaultEditable) nothrow
   {
     bool _retval;
     int _len;
@@ -981,7 +981,7 @@ class TextBuffer : gobject.object.ObjectWrap
         defaultEditable = default editability of buffer
       Returns: whether text was actually inserted
   */
-  bool insertInteractiveAtCursor(string text, bool defaultEditable)
+  bool insertInteractiveAtCursor(string text, bool defaultEditable) nothrow
   {
     bool _retval;
     int _len;
@@ -1004,7 +1004,7 @@ class TextBuffer : gobject.object.ObjectWrap
         iter = location to insert the markup
         markup = a nul-terminated UTF-8 string containing [Pango markup][PangoMarkupFormat]
   */
-  void insertMarkup(gtk.text_iter.TextIter iter, string markup)
+  void insertMarkup(gtk.text_iter.TextIter iter, string markup) nothrow
   {
     int _len;
     if (markup)
@@ -1028,7 +1028,7 @@ class TextBuffer : gobject.object.ObjectWrap
         iter = location to insert the pixbuf
         pixbuf = a #GdkPixbuf
   */
-  void insertPixbuf(gtk.text_iter.TextIter iter, gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  void insertPixbuf(gtk.text_iter.TextIter iter, gdkpixbuf.pixbuf.Pixbuf pixbuf) nothrow
   {
     gtk_text_buffer_insert_pixbuf(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
@@ -1048,7 +1048,7 @@ class TextBuffer : gobject.object.ObjectWrap
         start = a position in a #GtkTextBuffer
         end = another position in the same buffer as start
   */
-  void insertRange(gtk.text_iter.TextIter iter, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
+  void insertRange(gtk.text_iter.TextIter iter, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end) nothrow
   {
     gtk_text_buffer_insert_range(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null);
   }
@@ -1067,7 +1067,7 @@ class TextBuffer : gobject.object.ObjectWrap
         defaultEditable = default editability of the buffer
       Returns: whether an insertion was possible at iter
   */
-  bool insertRangeInteractive(gtk.text_iter.TextIter iter, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, bool defaultEditable)
+  bool insertRangeInteractive(gtk.text_iter.TextIter iter, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, bool defaultEditable) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_text_buffer_insert_range_interactive(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null, defaultEditable);
@@ -1082,7 +1082,7 @@ class TextBuffer : gobject.object.ObjectWrap
         mark = a #GtkTextMark
         where = new location for mark in buffer
   */
-  void moveMark(gtk.text_mark.TextMark mark, gtk.text_iter.TextIter where)
+  void moveMark(gtk.text_mark.TextMark mark, gtk.text_iter.TextIter where) nothrow
   {
     gtk_text_buffer_move_mark(cast(GtkTextBuffer*)this._cPtr, mark ? cast(GtkTextMark*)mark._cPtr(No.Dup) : null, where ? cast(const(GtkTextIter)*)where._cPtr(No.Dup) : null);
   }
@@ -1095,7 +1095,7 @@ class TextBuffer : gobject.object.ObjectWrap
         name = name of a mark
         where = new location for mark
   */
-  void moveMarkByName(string name, gtk.text_iter.TextIter where)
+  void moveMarkByName(string name, gtk.text_iter.TextIter where) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_text_buffer_move_mark_by_name(cast(GtkTextBuffer*)this._cPtr, _name, where ? cast(const(GtkTextIter)*)where._cPtr(No.Dup) : null);
@@ -1115,7 +1115,7 @@ class TextBuffer : gobject.object.ObjectWrap
         overrideLocation = location to insert pasted text, or null
         defaultEditable = whether the buffer is editable by default
   */
-  void pasteClipboard(gtk.clipboard.Clipboard clipboard, gtk.text_iter.TextIter overrideLocation, bool defaultEditable)
+  void pasteClipboard(gtk.clipboard.Clipboard clipboard, gtk.text_iter.TextIter overrideLocation, bool defaultEditable) nothrow
   {
     gtk_text_buffer_paste_clipboard(cast(GtkTextBuffer*)this._cPtr, clipboard ? cast(GtkClipboard*)clipboard._cPtr(No.Dup) : null, overrideLocation ? cast(GtkTextIter*)overrideLocation._cPtr(No.Dup) : null, defaultEditable);
   }
@@ -1132,7 +1132,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         where = where to put the cursor
   */
-  void placeCursor(gtk.text_iter.TextIter where)
+  void placeCursor(gtk.text_iter.TextIter where) nothrow
   {
     gtk_text_buffer_place_cursor(cast(GtkTextBuffer*)this._cPtr, where ? cast(const(GtkTextIter)*)where._cPtr(No.Dup) : null);
   }
@@ -1147,9 +1147,9 @@ class TextBuffer : gobject.object.ObjectWrap
       Returns: the #GdkAtom that corresponds to the
                       newly registered format’s mime-type.
   */
-  gdk.atom.Atom registerDeserializeFormat(string mimeType, gtk.types.TextBufferDeserializeFunc function_)
+  gdk.atom.Atom registerDeserializeFormat(string mimeType, gtk.types.TextBufferDeserializeFunc function_) nothrow
   {
-    extern(C) gboolean _function_Callback(GtkTextBuffer* registerBuffer, GtkTextBuffer* contentBuffer, GtkTextIter* iter, const(ubyte)* data, size_t length, gboolean createTags, void* userData, GError **_err)
+    extern(C) gboolean _function_Callback(GtkTextBuffer* registerBuffer, GtkTextBuffer* contentBuffer, GtkTextIter* iter, const(ubyte)* data, size_t length, gboolean createTags, void* userData, GError **_err) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.TextBufferDeserializeFunc*)userData;
@@ -1157,7 +1157,14 @@ class TextBuffer : gobject.object.ObjectWrap
       _data.length = length;
       _data[0 .. length] = data[0 .. length];
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)registerBuffer, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)contentBuffer, No.Take), iter ? new gtk.text_iter.TextIter(cast(void*)iter, No.Take) : null, _data, cast(bool)createTags, _err);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)registerBuffer, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)contentBuffer, No.Take), iter ? new gtk.text_iter.TextIter(cast(void*)iter, No.Take) : null, _data, cast(bool)createTags, _err);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.TextBufferDeserializeFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -1182,7 +1189,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Returns: the #GdkAtom that corresponds to the
                       newly registered format’s mime-type.
   */
-  gdk.atom.Atom registerDeserializeTagset(string tagsetName = null)
+  gdk.atom.Atom registerDeserializeTagset(string tagsetName = null) nothrow
   {
     GdkAtom _cretval;
     const(char)* _tagsetName = tagsetName.toCString(No.Alloc);
@@ -1201,14 +1208,21 @@ class TextBuffer : gobject.object.ObjectWrap
       Returns: the #GdkAtom that corresponds to the
                       newly registered format’s mime-type.
   */
-  gdk.atom.Atom registerSerializeFormat(string mimeType, gtk.types.TextBufferSerializeFunc function_)
+  gdk.atom.Atom registerSerializeFormat(string mimeType, gtk.types.TextBufferSerializeFunc function_) nothrow
   {
-    extern(C) ubyte* _function_Callback(GtkTextBuffer* registerBuffer, GtkTextBuffer* contentBuffer, const(GtkTextIter)* start, const(GtkTextIter)* end, size_t* length, void* userData)
+    extern(C) ubyte* _function_Callback(GtkTextBuffer* registerBuffer, GtkTextBuffer* contentBuffer, const(GtkTextIter)* start, const(GtkTextIter)* end, size_t* length, void* userData) nothrow
     {
       ubyte[] _dretval;
       auto _dlg = cast(gtk.types.TextBufferSerializeFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)registerBuffer, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)contentBuffer, No.Take), start ? new gtk.text_iter.TextIter(cast(void*)start, No.Take) : null, end ? new gtk.text_iter.TextIter(cast(void*)end, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)registerBuffer, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)contentBuffer, No.Take), start ? new gtk.text_iter.TextIter(cast(void*)start, No.Take) : null, end ? new gtk.text_iter.TextIter(cast(void*)end, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.TextBufferSerializeFunc");
+      }
       ubyte* _retval;
 
       if (_dretval.length > 0)
@@ -1255,7 +1269,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Returns: the #GdkAtom that corresponds to the
                       newly registered format’s mime-type.
   */
-  gdk.atom.Atom registerSerializeTagset(string tagsetName = null)
+  gdk.atom.Atom registerSerializeTagset(string tagsetName = null) nothrow
   {
     GdkAtom _cretval;
     const(char)* _tagsetName = tagsetName.toCString(No.Alloc);
@@ -1275,7 +1289,7 @@ class TextBuffer : gobject.object.ObjectWrap
         start = one bound of range to be untagged
         end = other bound of range to be untagged
   */
-  void removeAllTags(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
+  void removeAllTags(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end) nothrow
   {
     gtk_text_buffer_remove_all_tags(cast(GtkTextBuffer*)this._cPtr, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null);
   }
@@ -1288,7 +1302,7 @@ class TextBuffer : gobject.object.ObjectWrap
         clipboard = a #GtkClipboard added to buffer by
                       [gtk.text_buffer.TextBuffer.addSelectionClipboard]
   */
-  void removeSelectionClipboard(gtk.clipboard.Clipboard clipboard)
+  void removeSelectionClipboard(gtk.clipboard.Clipboard clipboard) nothrow
   {
     gtk_text_buffer_remove_selection_clipboard(cast(GtkTextBuffer*)this._cPtr, clipboard ? cast(GtkClipboard*)clipboard._cPtr(No.Dup) : null);
   }
@@ -1303,7 +1317,7 @@ class TextBuffer : gobject.object.ObjectWrap
         start = one bound of range to be untagged
         end = other bound of range to be untagged
   */
-  void removeTag(gtk.text_tag.TextTag tag, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
+  void removeTag(gtk.text_tag.TextTag tag, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end) nothrow
   {
     gtk_text_buffer_remove_tag(cast(GtkTextBuffer*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null);
   }
@@ -1317,7 +1331,7 @@ class TextBuffer : gobject.object.ObjectWrap
         start = one bound of range to be untagged
         end = other bound of range to be untagged
   */
-  void removeTagByName(string name, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
+  void removeTagByName(string name, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_text_buffer_remove_tag_by_name(cast(GtkTextBuffer*)this._cPtr, _name, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null);
@@ -1336,7 +1350,7 @@ class TextBuffer : gobject.object.ObjectWrap
         ins = where to put the “insert” mark
         bound = where to put the “selection_bound” mark
   */
-  void selectRange(gtk.text_iter.TextIter ins, gtk.text_iter.TextIter bound)
+  void selectRange(gtk.text_iter.TextIter ins, gtk.text_iter.TextIter bound) nothrow
   {
     gtk_text_buffer_select_range(cast(GtkTextBuffer*)this._cPtr, ins ? cast(const(GtkTextIter)*)ins._cPtr(No.Dup) : null, bound ? cast(const(GtkTextIter)*)bound._cPtr(No.Dup) : null);
   }
@@ -1357,7 +1371,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Returns: the serialized
                       data, encoded as format
   */
-  ubyte[] serialize(gtk.text_buffer.TextBuffer contentBuffer, gdk.atom.Atom format, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
+  ubyte[] serialize(gtk.text_buffer.TextBuffer contentBuffer, gdk.atom.Atom format, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end) nothrow
   {
     ubyte* _cretval;
     size_t _cretlength;
@@ -1382,7 +1396,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         setting = modification flag setting
   */
-  void setModified(bool setting)
+  void setModified(bool setting) nothrow
   {
     gtk_text_buffer_set_modified(cast(GtkTextBuffer*)this._cPtr, setting);
   }
@@ -1394,7 +1408,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         text = UTF-8 text to insert
   */
-  void setText(string text)
+  void setText(string text) nothrow
   {
     int _len;
     if (text)
@@ -1412,7 +1426,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         format = a #GdkAtom representing a registered rich text format.
   */
-  void unregisterDeserializeFormat(gdk.atom.Atom format)
+  void unregisterDeserializeFormat(gdk.atom.Atom format) nothrow
   {
     gtk_text_buffer_unregister_deserialize_format(cast(GtkTextBuffer*)this._cPtr, format ? cast(GdkAtom)format._cPtr : null);
   }
@@ -1425,7 +1439,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         format = a #GdkAtom representing a registered rich text format.
   */
-  void unregisterSerializeFormat(gdk.atom.Atom format)
+  void unregisterSerializeFormat(gdk.atom.Atom format) nothrow
   {
     gtk_text_buffer_unregister_serialize_format(cast(GtkTextBuffer*)this._cPtr, format ? cast(GdkAtom)format._cPtr : null);
   }
@@ -1461,7 +1475,7 @@ class TextBuffer : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectApplyTag(T)(T callback, Flag!"After" after = No.After)
+  gulong connectApplyTag(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_tag.TextTag)))
@@ -1470,7 +1484,7 @@ class TextBuffer : gobject.object.ObjectWrap
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.text_buffer.TextBuffer)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1488,7 +1502,14 @@ class TextBuffer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_buffer.TextBuffer.applyTag");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1519,13 +1540,13 @@ class TextBuffer : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectBeginUserAction(T)(T callback, Flag!"After" after = No.After)
+  gulong connectBeginUserAction(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_buffer.TextBuffer)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1534,7 +1555,14 @@ class TextBuffer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_buffer.TextBuffer.beginUserAction");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1557,13 +1585,13 @@ class TextBuffer : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_buffer.TextBuffer)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1572,7 +1600,14 @@ class TextBuffer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_buffer.TextBuffer.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1608,7 +1643,7 @@ class TextBuffer : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeleteRange(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeleteRange(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
@@ -1616,7 +1651,7 @@ class TextBuffer : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.text_buffer.TextBuffer)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1631,7 +1666,14 @@ class TextBuffer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_buffer.TextBuffer.deleteRange");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1663,13 +1705,13 @@ class TextBuffer : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEndUserAction(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEndUserAction(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_buffer.TextBuffer)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1678,7 +1720,14 @@ class TextBuffer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_buffer.TextBuffer.endUserAction");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1713,7 +1762,7 @@ class TextBuffer : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInsertChildAnchor(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInsertChildAnchor(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
@@ -1721,7 +1770,7 @@ class TextBuffer : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.text_buffer.TextBuffer)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1736,7 +1785,14 @@ class TextBuffer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_buffer.TextBuffer.insertChildAnchor");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1770,7 +1826,7 @@ class TextBuffer : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInsertPixbuf(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInsertPixbuf(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
@@ -1778,7 +1834,7 @@ class TextBuffer : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.text_buffer.TextBuffer)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1793,7 +1849,14 @@ class TextBuffer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_buffer.TextBuffer.insertPixbuf");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1829,7 +1892,7 @@ class TextBuffer : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInsertText(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInsertText(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
@@ -1837,7 +1900,7 @@ class TextBuffer : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.text_buffer.TextBuffer)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1853,7 +1916,14 @@ class TextBuffer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getStringWithLength(&_paramVals[2], len);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_buffer.TextBuffer.insertText");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1881,14 +1951,14 @@ class TextBuffer : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMarkDeleted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMarkDeleted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_mark.TextMark)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text_buffer.TextBuffer)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1900,7 +1970,14 @@ class TextBuffer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_buffer.TextBuffer.markDeleted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1931,7 +2008,7 @@ class TextBuffer : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMarkSet(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMarkSet(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
@@ -1939,7 +2016,7 @@ class TextBuffer : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.text_buffer.TextBuffer)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1954,7 +2031,14 @@ class TextBuffer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_buffer.TextBuffer.markSet");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1980,13 +2064,13 @@ class TextBuffer : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectModifiedChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectModifiedChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_buffer.TextBuffer)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1995,7 +2079,14 @@ class TextBuffer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_buffer.TextBuffer.modifiedChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2021,14 +2112,14 @@ class TextBuffer : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPasteDone(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPasteDone(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.clipboard.Clipboard)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text_buffer.TextBuffer)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2040,7 +2131,14 @@ class TextBuffer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_buffer.TextBuffer.pasteDone");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2076,7 +2174,7 @@ class TextBuffer : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRemoveTag(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRemoveTag(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_tag.TextTag)))
@@ -2085,7 +2183,7 @@ class TextBuffer : gobject.object.ObjectWrap
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.text_buffer.TextBuffer)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -2103,7 +2201,14 @@ class TextBuffer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.text_buffer.TextBuffer.removeTag");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2116,7 +2221,7 @@ class TextBufferGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T tagTable(gtk.text_tag_table.TextTagTable propval)
+  T tagTable(gtk.text_tag_table.TextTagTable propval) nothrow
   {
     return setProperty("tag-table", propval);
   }
@@ -2128,7 +2233,7 @@ class TextBufferGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           see [gtk.text_buffer.TextBuffer.getText] for more information.
       Returns: Builder instance for fluent chaining
   */
-  T text(string propval)
+  T text(string propval) nothrow
   {
     return setProperty("text", propval);
   }
@@ -2141,7 +2246,7 @@ final class TextBufferGidBuilder : TextBufferGidBuilderImpl!TextBufferGidBuilder
       Create object from builder.
       Returns: New object
   */
-  TextBuffer build()
+  TextBuffer build() nothrow
   {
     return new TextBuffer(cast(void*)createGObject(TextBuffer._getGType), Yes.Take);
   }

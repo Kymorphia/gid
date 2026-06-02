@@ -33,32 +33,32 @@ class CapsFeatures : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_caps_features_get_type != &gidSymbolNotFound ? gst_caps_features_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CapsFeatures self()
+  override CapsFeatures self() nothrow
   {
     return this;
   }
@@ -69,7 +69,7 @@ class CapsFeatures : gobject.boxed.Boxed
       unfixed.
       Returns: a new, ANY #GstCapsFeatures
   */
-  static gst.caps_features.CapsFeatures newAny()
+  static gst.caps_features.CapsFeatures newAny() nothrow
   {
     GstCapsFeatures* _cretval;
     _cretval = gst_caps_features_new_any();
@@ -81,7 +81,7 @@ class CapsFeatures : gobject.boxed.Boxed
       Creates a new, empty #GstCapsFeatures.
       Returns: a new, empty #GstCapsFeatures
   */
-  static gst.caps_features.CapsFeatures newEmpty()
+  static gst.caps_features.CapsFeatures newEmpty() nothrow
   {
     GstCapsFeatures* _cretval;
     _cretval = gst_caps_features_new_empty();
@@ -96,7 +96,7 @@ class CapsFeatures : gobject.boxed.Boxed
         feature = The feature
       Returns: a new #GstCapsFeatures
   */
-  static gst.caps_features.CapsFeatures newSingle(string feature)
+  static gst.caps_features.CapsFeatures newSingle(string feature) nothrow
   {
     GstCapsFeatures* _cretval;
     const(char)* _feature = feature.toCString(No.Alloc);
@@ -111,7 +111,7 @@ class CapsFeatures : gobject.boxed.Boxed
       Params:
         feature = a feature.
   */
-  void add(string feature)
+  void add(string feature) nothrow
   {
     const(char)* _feature = feature.toCString(No.Alloc);
     gst_caps_features_add(cast(GstCapsFeatures*)this._cPtr, _feature);
@@ -123,7 +123,7 @@ class CapsFeatures : gobject.boxed.Boxed
       Params:
         feature = a feature.
   */
-  void addId(glib.types.Quark feature)
+  void addId(glib.types.Quark feature) nothrow
   {
     gst_caps_features_add_id(cast(GstCapsFeatures*)this._cPtr, feature);
   }
@@ -135,7 +135,7 @@ class CapsFeatures : gobject.boxed.Boxed
         feature = a feature
       Returns: true if features contains feature.
   */
-  bool contains(string feature)
+  bool contains(string feature) nothrow
   {
     bool _retval;
     const(char)* _feature = feature.toCString(No.Alloc);
@@ -150,7 +150,7 @@ class CapsFeatures : gobject.boxed.Boxed
         feature = a feature
       Returns: true if features contains feature.
   */
-  bool containsId(glib.types.Quark feature)
+  bool containsId(glib.types.Quark feature) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_caps_features_contains_id(cast(const(GstCapsFeatures)*)this._cPtr, feature);
@@ -161,7 +161,7 @@ class CapsFeatures : gobject.boxed.Boxed
       Duplicates a #GstCapsFeatures and all its values.
       Returns: a new #GstCapsFeatures.
   */
-  gst.caps_features.CapsFeatures copy()
+  gst.caps_features.CapsFeatures copy() nothrow
   {
     GstCapsFeatures* _cretval;
     _cretval = gst_caps_features_copy(cast(const(GstCapsFeatures)*)this._cPtr);
@@ -176,7 +176,7 @@ class CapsFeatures : gobject.boxed.Boxed
         i = index of the feature
       Returns: The `i`-th feature of features.
   */
-  string getNth(uint i)
+  string getNth(uint i) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_caps_features_get_nth(cast(const(GstCapsFeatures)*)this._cPtr, i);
@@ -191,7 +191,7 @@ class CapsFeatures : gobject.boxed.Boxed
         i = index of the feature
       Returns: The `i`-th feature of features.
   */
-  glib.types.Quark getNthId(uint i)
+  glib.types.Quark getNthId(uint i) nothrow
   {
     glib.types.Quark _retval;
     _retval = gst_caps_features_get_nth_id(cast(const(GstCapsFeatures)*)this._cPtr, i);
@@ -202,7 +202,7 @@ class CapsFeatures : gobject.boxed.Boxed
       Returns the number of features in features.
       Returns: The number of features in features.
   */
-  uint getSize()
+  uint getSize() nothrow
   {
     uint _retval;
     _retval = gst_caps_features_get_size(cast(const(GstCapsFeatures)*)this._cPtr);
@@ -213,7 +213,7 @@ class CapsFeatures : gobject.boxed.Boxed
       Checks if features is `GST_CAPS_FEATURES_ANY`.
       Returns: true if features is `GST_CAPS_FEATURES_ANY`.
   */
-  bool isAny()
+  bool isAny() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_caps_features_is_any(cast(const(GstCapsFeatures)*)this._cPtr);
@@ -227,7 +227,7 @@ class CapsFeatures : gobject.boxed.Boxed
         features2 = a #GstCapsFeatures.
       Returns: true if features1 and features2 are equal.
   */
-  bool isEqual(gst.caps_features.CapsFeatures features2)
+  bool isEqual(gst.caps_features.CapsFeatures features2) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_caps_features_is_equal(cast(const(GstCapsFeatures)*)this._cPtr, features2 ? cast(const(GstCapsFeatures)*)features2._cPtr(No.Dup) : null);
@@ -240,7 +240,7 @@ class CapsFeatures : gobject.boxed.Boxed
       Params:
         feature = a feature.
   */
-  void remove(string feature)
+  void remove(string feature) nothrow
   {
     const(char)* _feature = feature.toCString(No.Alloc);
     gst_caps_features_remove(cast(GstCapsFeatures*)this._cPtr, _feature);
@@ -252,7 +252,7 @@ class CapsFeatures : gobject.boxed.Boxed
       Params:
         feature = a feature.
   */
-  void removeId(glib.types.Quark feature)
+  void removeId(glib.types.Quark feature) nothrow
   {
     gst_caps_features_remove_id(cast(GstCapsFeatures*)this._cPtr, feature);
   }
@@ -269,7 +269,7 @@ class CapsFeatures : gobject.boxed.Boxed
       This prints the features in human readable form.
       Returns: a pointer to string allocated by [glib.global.gmalloc].
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gst_caps_features_to_string(cast(const(GstCapsFeatures)*)this._cPtr);
@@ -285,7 +285,7 @@ class CapsFeatures : gobject.boxed.Boxed
       Returns: a new #GstCapsFeatures or
             null when the string could not be parsed.
   */
-  static gst.caps_features.CapsFeatures fromString(string features)
+  static gst.caps_features.CapsFeatures fromString(string features) nothrow
   {
     GstCapsFeatures* _cretval;
     const(char)* _features = features.toCString(No.Alloc);

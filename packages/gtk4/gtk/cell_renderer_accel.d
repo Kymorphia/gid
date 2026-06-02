@@ -27,26 +27,26 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_renderer_accel_get_type != &gidSymbolNotFound ? gtk_cell_renderer_accel_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CellRendererAccel self()
+  override CellRendererAccel self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
       Get builder for [gtk.cell_renderer_accel.CellRendererAccel]
       Returns: New builder object
   */
-  static CellRendererAccelGidBuilder builder()
+  static CellRendererAccelGidBuilder builder() nothrow
   {
     return new CellRendererAccelGidBuilder;
   }
@@ -64,7 +64,7 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
       Get `accelKey` property.
       Returns: The keyval of the accelerator.
   */
-  @property uint accelKey()
+  @property uint accelKey() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("accel-key");
   }
@@ -74,7 +74,7 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
       Params:
         propval = The keyval of the accelerator.
   */
-  @property void accelKey(uint propval)
+  @property void accelKey(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("accel-key", propval);
   }
@@ -86,7 +86,7 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
         accepted by GTK are allowed, and the accelerators are rendered
         in the same way as they are in menus.
   */
-  @property gtk.types.CellRendererAccelMode accelMode()
+  @property gtk.types.CellRendererAccelMode accelMode() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.CellRendererAccelMode)("accel-mode");
   }
@@ -99,7 +99,7 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
           accepted by GTK are allowed, and the accelerators are rendered
           in the same way as they are in menus.
   */
-  @property void accelMode(gtk.types.CellRendererAccelMode propval)
+  @property void accelMode(gtk.types.CellRendererAccelMode propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.CellRendererAccelMode)("accel-mode", propval);
   }
@@ -108,7 +108,7 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
       Get `accelMods` property.
       Returns: The modifier mask of the accelerator.
   */
-  @property gdk.types.ModifierType accelMods()
+  @property gdk.types.ModifierType accelMods() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.types.ModifierType)("accel-mods");
   }
@@ -118,7 +118,7 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
       Params:
         propval = The modifier mask of the accelerator.
   */
-  @property void accelMods(gdk.types.ModifierType propval)
+  @property void accelMods(gdk.types.ModifierType propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.types.ModifierType)("accel-mods", propval);
   }
@@ -129,7 +129,7 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
         only relevant if the key does not have a keyval. Normally, the keyboard
         configuration should assign keyvals to all keys.
   */
-  @property uint keycode()
+  @property uint keycode() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("keycode");
   }
@@ -141,7 +141,7 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
           only relevant if the key does not have a keyval. Normally, the keyboard
           configuration should assign keyvals to all keys.
   */
-  @property void keycode(uint propval)
+  @property void keycode(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("keycode", propval);
   }
@@ -150,7 +150,7 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
       Creates a new [gtk.cell_renderer_accel.CellRendererAccel].
       Returns: the new cell renderer
   */
-  this()
+  this() nothrow
   {
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_renderer_accel_new();
@@ -174,14 +174,14 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAccelCleared(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAccelCleared(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.cell_renderer_accel.CellRendererAccel)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -193,7 +193,14 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.cell_renderer_accel.CellRendererAccel.accelCleared");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -223,7 +230,7 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAccelEdited(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAccelEdited(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -233,7 +240,7 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
   && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gtk.cell_renderer_accel.CellRendererAccel)))
   && Parameters!T.length < 6)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -254,7 +261,14 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
       static if (Parameters!T.length > 4)
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.cell_renderer_accel.CellRendererAccel.accelEdited");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -272,7 +286,7 @@ class CellRendererAccelGidBuilderImpl(T) : gtk.cell_renderer_text.CellRendererTe
         propval = The keyval of the accelerator.
       Returns: Builder instance for fluent chaining
   */
-  T accelKey(uint propval)
+  T accelKey(uint propval) nothrow
   {
     return setProperty("accel-key", propval);
   }
@@ -286,7 +300,7 @@ class CellRendererAccelGidBuilderImpl(T) : gtk.cell_renderer_text.CellRendererTe
           in the same way as they are in menus.
       Returns: Builder instance for fluent chaining
   */
-  T accelMode(gtk.types.CellRendererAccelMode propval)
+  T accelMode(gtk.types.CellRendererAccelMode propval) nothrow
   {
     return setProperty("accel-mode", propval);
   }
@@ -297,7 +311,7 @@ class CellRendererAccelGidBuilderImpl(T) : gtk.cell_renderer_text.CellRendererTe
         propval = The modifier mask of the accelerator.
       Returns: Builder instance for fluent chaining
   */
-  T accelMods(gdk.types.ModifierType propval)
+  T accelMods(gdk.types.ModifierType propval) nothrow
   {
     return setProperty("accel-mods", propval);
   }
@@ -310,7 +324,7 @@ class CellRendererAccelGidBuilderImpl(T) : gtk.cell_renderer_text.CellRendererTe
           configuration should assign keyvals to all keys.
       Returns: Builder instance for fluent chaining
   */
-  T keycode(uint propval)
+  T keycode(uint propval) nothrow
   {
     return setProperty("keycode", propval);
   }
@@ -323,7 +337,7 @@ final class CellRendererAccelGidBuilder : CellRendererAccelGidBuilderImpl!CellRe
       Create object from builder.
       Returns: New object
   */
-  CellRendererAccel build()
+  CellRendererAccel build() nothrow
   {
     return new CellRendererAccel(cast(void*)createGObject(CellRendererAccel._getGType), No.Take);
   }

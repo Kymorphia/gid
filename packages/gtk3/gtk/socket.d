@@ -74,26 +74,26 @@ class Socket : gtk.container.Container
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_socket_get_type != &gidSymbolNotFound ? gtk_socket_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Socket self()
+  override Socket self() nothrow
   {
     return this;
   }
@@ -102,7 +102,7 @@ class Socket : gtk.container.Container
       Get builder for [gtk.socket.Socket]
       Returns: New builder object
   */
-  static SocketGidBuilder builder()
+  static SocketGidBuilder builder() nothrow
   {
     return new SocketGidBuilder;
   }
@@ -111,7 +111,7 @@ class Socket : gtk.container.Container
       Create a new empty #GtkSocket.
       Returns: the new #GtkSocket.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_socket_new();
@@ -135,7 +135,7 @@ class Socket : gtk.container.Container
       Params:
         window = the Window of a client participating in the XEMBED protocol.
   */
-  void addId(xlib.types.Window window)
+  void addId(xlib.types.Window window) nothrow
   {
     gtk_socket_add_id(cast(GtkSocket*)this._cPtr, window);
   }
@@ -149,7 +149,7 @@ class Socket : gtk.container.Container
       before you can make this call.
       Returns: the window ID for the socket
   */
-  xlib.types.Window getId()
+  xlib.types.Window getId() nothrow
   {
     xlib.types.Window _retval;
     _retval = gtk_socket_get_id(cast(GtkSocket*)this._cPtr);
@@ -162,7 +162,7 @@ class Socket : gtk.container.Container
       Returns: the window of the plug if
         available, or null
   */
-  gdk.window.Window getPlugWindow()
+  gdk.window.Window getPlugWindow() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gtk_socket_get_plug_window(cast(GtkSocket*)this._cPtr);
@@ -186,13 +186,13 @@ class Socket : gtk.container.Container
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPlugAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPlugAdded(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.socket.Socket)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -201,7 +201,14 @@ class Socket : gtk.container.Container
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.socket.Socket.plugAdded");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -226,22 +233,30 @@ class Socket : gtk.container.Container
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPlugRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPlugRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.socket.Socket)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.socket.Socket.plugRemoved");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -264,7 +279,7 @@ final class SocketGidBuilder : SocketGidBuilderImpl!SocketGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Socket build()
+  Socket build() nothrow
   {
     return new Socket(cast(void*)createGObject(Socket._getGType), No.Take);
   }

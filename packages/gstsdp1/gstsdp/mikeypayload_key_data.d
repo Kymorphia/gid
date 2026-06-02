@@ -17,11 +17,8 @@ class MIKEYPayloadKeyData
   GstMIKEYPayloadKeyData _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstsdp.mikeypayload_key_data.MIKEYPayloadKeyData");
-
     _cInstance = *cast(GstMIKEYPayloadKeyData*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class MIKEYPayloadKeyData
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class MIKEYPayloadKeyData
       Get `pt` field.
       Returns: the payload header
   */
-  @property gstsdp.mikeypayload.MIKEYPayload pt()
+  @property gstsdp.mikeypayload.MIKEYPayload pt() nothrow
   {
     return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadKeyData*)this._cPtr).pt);
   }
@@ -47,7 +44,7 @@ class MIKEYPayloadKeyData
       Get `keyType` field.
       Returns: the #GstMIKEYKeyDataType of @key_data
   */
-  @property gstsdp.types.MIKEYKeyDataType keyType()
+  @property gstsdp.types.MIKEYKeyDataType keyType() nothrow
   {
     return cast(gstsdp.types.MIKEYKeyDataType)(cast(GstMIKEYPayloadKeyData*)this._cPtr).keyType;
   }
@@ -57,7 +54,7 @@ class MIKEYPayloadKeyData
       Params:
         propval = the #GstMIKEYKeyDataType of @key_data
   */
-  @property void keyType(gstsdp.types.MIKEYKeyDataType propval)
+  @property void keyType(gstsdp.types.MIKEYKeyDataType propval) nothrow
   {
     (cast(GstMIKEYPayloadKeyData*)this._cPtr).keyType = cast(GstMIKEYKeyDataType)propval;
   }
@@ -66,7 +63,7 @@ class MIKEYPayloadKeyData
       Get `keyLen` field.
       Returns: length of @key_data
   */
-  @property ushort keyLen()
+  @property ushort keyLen() nothrow
   {
     return (cast(GstMIKEYPayloadKeyData*)this._cPtr).keyLen;
   }
@@ -76,7 +73,7 @@ class MIKEYPayloadKeyData
       Params:
         propval = length of @key_data
   */
-  @property void keyLen(ushort propval)
+  @property void keyLen(ushort propval) nothrow
   {
     (cast(GstMIKEYPayloadKeyData*)this._cPtr).keyLen = propval;
   }
@@ -85,7 +82,7 @@ class MIKEYPayloadKeyData
       Get `saltLen` field.
       Returns: the length of @salt_data, can be 0
   */
-  @property ushort saltLen()
+  @property ushort saltLen() nothrow
   {
     return (cast(GstMIKEYPayloadKeyData*)this._cPtr).saltLen;
   }
@@ -95,7 +92,7 @@ class MIKEYPayloadKeyData
       Params:
         propval = the length of @salt_data, can be 0
   */
-  @property void saltLen(ushort propval)
+  @property void saltLen(ushort propval) nothrow
   {
     (cast(GstMIKEYPayloadKeyData*)this._cPtr).saltLen = propval;
   }
@@ -104,7 +101,7 @@ class MIKEYPayloadKeyData
       Get `kvType` field.
       Returns: the Key Validity type
   */
-  @property gstsdp.types.MIKEYKVType kvType()
+  @property gstsdp.types.MIKEYKVType kvType() nothrow
   {
     return cast(gstsdp.types.MIKEYKVType)(cast(GstMIKEYPayloadKeyData*)this._cPtr).kvType;
   }
@@ -114,7 +111,7 @@ class MIKEYPayloadKeyData
       Params:
         propval = the Key Validity type
   */
-  @property void kvType(gstsdp.types.MIKEYKVType propval)
+  @property void kvType(gstsdp.types.MIKEYKVType propval) nothrow
   {
     (cast(GstMIKEYPayloadKeyData*)this._cPtr).kvType = cast(GstMIKEYKVType)propval;
   }

@@ -158,26 +158,26 @@ class AlertDialog : adw.dialog.Dialog
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_alert_dialog_get_type != &gidSymbolNotFound ? adw_alert_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AlertDialog self()
+  override AlertDialog self() nothrow
   {
     return this;
   }
@@ -186,7 +186,7 @@ class AlertDialog : adw.dialog.Dialog
       Get builder for [adw.alert_dialog.AlertDialog]
       Returns: New builder object
   */
-  static AlertDialogGidBuilder builder()
+  static AlertDialogGidBuilder builder() nothrow
   {
     return new AlertDialogGidBuilder;
   }
@@ -195,7 +195,7 @@ class AlertDialog : adw.dialog.Dialog
       Get `body_` property.
       Returns: The body text of the dialog.
   */
-  @property string body_()
+  @property string body_() nothrow
   {
     return getBody();
   }
@@ -205,7 +205,7 @@ class AlertDialog : adw.dialog.Dialog
       Params:
         propval = The body text of the dialog.
   */
-  @property void body_(string propval)
+  @property void body_(string propval) nothrow
   {
     setBody(propval);
   }
@@ -216,7 +216,7 @@ class AlertDialog : adw.dialog.Dialog
         
         See `func@Pango.parse_markup`.
   */
-  @property bool bodyUseMarkup()
+  @property bool bodyUseMarkup() nothrow
   {
     return getBodyUseMarkup();
   }
@@ -228,7 +228,7 @@ class AlertDialog : adw.dialog.Dialog
           
           See `func@Pango.parse_markup`.
   */
-  @property void bodyUseMarkup(bool propval)
+  @property void bodyUseMarkup(bool propval) nothrow
   {
     setBodyUseMarkup(propval);
   }
@@ -244,7 +244,7 @@ class AlertDialog : adw.dialog.Dialog
         
         The default close response is `close`.
   */
-  @property string closeResponse()
+  @property string closeResponse() nothrow
   {
     return getCloseResponse();
   }
@@ -261,7 +261,7 @@ class AlertDialog : adw.dialog.Dialog
           
           The default close response is `close`.
   */
-  @property void closeResponse(string propval)
+  @property void closeResponse(string propval) nothrow
   {
     setCloseResponse(propval);
   }
@@ -275,7 +275,7 @@ class AlertDialog : adw.dialog.Dialog
         If set to `NULL` or a non-existent response ID, pressing <kbd>Enter</kbd>
         will do nothing.
   */
-  @property string defaultResponse()
+  @property string defaultResponse() nothrow
   {
     return getDefaultResponse();
   }
@@ -290,7 +290,7 @@ class AlertDialog : adw.dialog.Dialog
           If set to `NULL` or a non-existent response ID, pressing <kbd>Enter</kbd>
           will do nothing.
   */
-  @property void defaultResponse(string propval)
+  @property void defaultResponse(string propval) nothrow
   {
     setDefaultResponse(propval);
   }
@@ -301,7 +301,7 @@ class AlertDialog : adw.dialog.Dialog
         
         Displayed below the heading and body.
   */
-  @property gtk.widget.Widget extraChild()
+  @property gtk.widget.Widget extraChild() nothrow
   {
     return getExtraChild();
   }
@@ -313,7 +313,7 @@ class AlertDialog : adw.dialog.Dialog
           
           Displayed below the heading and body.
   */
-  @property void extraChild(gtk.widget.Widget propval)
+  @property void extraChild(gtk.widget.Widget propval) nothrow
   {
     setExtraChild(propval);
   }
@@ -322,7 +322,7 @@ class AlertDialog : adw.dialog.Dialog
       Get `heading` property.
       Returns: The heading of the dialog.
   */
-  @property string heading()
+  @property string heading() nothrow
   {
     return getHeading();
   }
@@ -332,7 +332,7 @@ class AlertDialog : adw.dialog.Dialog
       Params:
         propval = The heading of the dialog.
   */
-  @property void heading(string propval)
+  @property void heading(string propval) nothrow
   {
     setHeading(propval);
   }
@@ -343,7 +343,7 @@ class AlertDialog : adw.dialog.Dialog
         
         See `func@Pango.parse_markup`.
   */
-  @property bool headingUseMarkup()
+  @property bool headingUseMarkup() nothrow
   {
     return getHeadingUseMarkup();
   }
@@ -355,7 +355,7 @@ class AlertDialog : adw.dialog.Dialog
           
           See `func@Pango.parse_markup`.
   */
-  @property void headingUseMarkup(bool propval)
+  @property void headingUseMarkup(bool propval) nothrow
   {
     setHeadingUseMarkup(propval);
   }
@@ -381,7 +381,7 @@ class AlertDialog : adw.dialog.Dialog
         body_ = the body text
       Returns: the newly created [adw.alert_dialog.AlertDialog]
   */
-  this(string heading = null, string body_ = null)
+  this(string heading = null, string body_ = null) nothrow
   {
     AdwDialog* _cretval;
     const(char)* _heading = heading.toCString(No.Alloc);
@@ -412,7 +412,7 @@ class AlertDialog : adw.dialog.Dialog
         id = the response ID
         label = the response label
   */
-  void addResponse(string id, string label)
+  void addResponse(string id, string label) nothrow
   {
     const(char)* _id = id.toCString(No.Alloc);
     const(char)* _label = label.toCString(No.Alloc);
@@ -433,14 +433,21 @@ class AlertDialog : adw.dialog.Dialog
         cancellable = a [gio.cancellable.Cancellable] to cancel the operation
         callback = a callback to call when the operation is complete
   */
-  void choose(gtk.widget.Widget parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void choose(gtk.widget.Widget parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -455,7 +462,7 @@ class AlertDialog : adw.dialog.Dialog
       Returns: the ID of the response that was selected, or
           [adw.alert_dialog.AlertDialog.closeResponse] if the call was cancelled.
   */
-  string chooseFinish(gio.async_result.AsyncResult result)
+  string chooseFinish(gio.async_result.AsyncResult result) nothrow
   {
     const(char)* _cretval;
     _cretval = adw_alert_dialog_choose_finish(cast(AdwAlertDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null);
@@ -467,7 +474,7 @@ class AlertDialog : adw.dialog.Dialog
       Gets the body text of self.
       Returns: the body of self.
   */
-  string getBody()
+  string getBody() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_alert_dialog_get_body(cast(AdwAlertDialog*)this._cPtr);
@@ -479,7 +486,7 @@ class AlertDialog : adw.dialog.Dialog
       Gets whether the body text of self includes Pango markup.
       Returns: whether self uses markup for body text
   */
-  bool getBodyUseMarkup()
+  bool getBodyUseMarkup() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_alert_dialog_get_body_use_markup(cast(AdwAlertDialog*)this._cPtr);
@@ -490,7 +497,7 @@ class AlertDialog : adw.dialog.Dialog
       Gets the ID of the close response of self.
       Returns: the close response ID
   */
-  string getCloseResponse()
+  string getCloseResponse() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_alert_dialog_get_close_response(cast(AdwAlertDialog*)this._cPtr);
@@ -502,7 +509,7 @@ class AlertDialog : adw.dialog.Dialog
       Gets the ID of the default response of self.
       Returns: the default response ID
   */
-  string getDefaultResponse()
+  string getDefaultResponse() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_alert_dialog_get_default_response(cast(AdwAlertDialog*)this._cPtr);
@@ -514,7 +521,7 @@ class AlertDialog : adw.dialog.Dialog
       Gets the child widget of self.
       Returns: the child widget of self.
   */
-  gtk.widget.Widget getExtraChild()
+  gtk.widget.Widget getExtraChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_alert_dialog_get_extra_child(cast(AdwAlertDialog*)this._cPtr);
@@ -526,7 +533,7 @@ class AlertDialog : adw.dialog.Dialog
       Gets the heading of self.
       Returns: the heading of self.
   */
-  string getHeading()
+  string getHeading() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_alert_dialog_get_heading(cast(AdwAlertDialog*)this._cPtr);
@@ -538,7 +545,7 @@ class AlertDialog : adw.dialog.Dialog
       Gets whether the heading of self includes Pango markup.
       Returns: whether self uses markup for heading
   */
-  bool getHeadingUseMarkup()
+  bool getHeadingUseMarkup() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_alert_dialog_get_heading_use_markup(cast(AdwAlertDialog*)this._cPtr);
@@ -554,7 +561,7 @@ class AlertDialog : adw.dialog.Dialog
         response = a response ID
       Returns: the appearance of response
   */
-  adw.types.ResponseAppearance getResponseAppearance(string response)
+  adw.types.ResponseAppearance getResponseAppearance(string response) nothrow
   {
     AdwResponseAppearance _cretval;
     const(char)* _response = response.toCString(No.Alloc);
@@ -572,7 +579,7 @@ class AlertDialog : adw.dialog.Dialog
         response = a response ID
       Returns: whether response is enabled
   */
-  bool getResponseEnabled(string response)
+  bool getResponseEnabled(string response) nothrow
   {
     bool _retval;
     const(char)* _response = response.toCString(No.Alloc);
@@ -589,7 +596,7 @@ class AlertDialog : adw.dialog.Dialog
         response = a response ID
       Returns: the label of response
   */
-  string getResponseLabel(string response)
+  string getResponseLabel(string response) nothrow
   {
     const(char)* _cretval;
     const(char)* _response = response.toCString(No.Alloc);
@@ -605,7 +612,7 @@ class AlertDialog : adw.dialog.Dialog
         response = response ID
       Returns: whether self has a response with the ID response.
   */
-  bool hasResponse(string response)
+  bool hasResponse(string response) nothrow
   {
     bool _retval;
     const(char)* _response = response.toCString(No.Alloc);
@@ -619,7 +626,7 @@ class AlertDialog : adw.dialog.Dialog
       Params:
         id = the response ID
   */
-  void removeResponse(string id)
+  void removeResponse(string id) nothrow
   {
     const(char)* _id = id.toCString(No.Alloc);
     adw_alert_dialog_remove_response(cast(AdwAlertDialog*)this._cPtr, _id);
@@ -631,7 +638,7 @@ class AlertDialog : adw.dialog.Dialog
       Params:
         body_ = the body of self
   */
-  void setBody(string body_)
+  void setBody(string body_) nothrow
   {
     const(char)* _body_ = body_.toCString(No.Alloc);
     adw_alert_dialog_set_body(cast(AdwAlertDialog*)this._cPtr, _body_);
@@ -645,7 +652,7 @@ class AlertDialog : adw.dialog.Dialog
       Params:
         useMarkup = whether to use markup for body text
   */
-  void setBodyUseMarkup(bool useMarkup)
+  void setBodyUseMarkup(bool useMarkup) nothrow
   {
     adw_alert_dialog_set_body_use_markup(cast(AdwAlertDialog*)this._cPtr, useMarkup);
   }
@@ -663,7 +670,7 @@ class AlertDialog : adw.dialog.Dialog
       Params:
         response = the close response ID
   */
-  void setCloseResponse(string response)
+  void setCloseResponse(string response) nothrow
   {
     const(char)* _response = response.toCString(No.Alloc);
     adw_alert_dialog_set_close_response(cast(AdwAlertDialog*)this._cPtr, _response);
@@ -680,7 +687,7 @@ class AlertDialog : adw.dialog.Dialog
       Params:
         response = the default response ID
   */
-  void setDefaultResponse(string response = null)
+  void setDefaultResponse(string response = null) nothrow
   {
     const(char)* _response = response.toCString(No.Alloc);
     adw_alert_dialog_set_default_response(cast(AdwAlertDialog*)this._cPtr, _response);
@@ -694,7 +701,7 @@ class AlertDialog : adw.dialog.Dialog
       Params:
         child = the child widget
   */
-  void setExtraChild(gtk.widget.Widget child = null)
+  void setExtraChild(gtk.widget.Widget child = null) nothrow
   {
     adw_alert_dialog_set_extra_child(cast(AdwAlertDialog*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -705,7 +712,7 @@ class AlertDialog : adw.dialog.Dialog
       Params:
         heading = the heading of self
   */
-  void setHeading(string heading = null)
+  void setHeading(string heading = null) nothrow
   {
     const(char)* _heading = heading.toCString(No.Alloc);
     adw_alert_dialog_set_heading(cast(AdwAlertDialog*)this._cPtr, _heading);
@@ -719,7 +726,7 @@ class AlertDialog : adw.dialog.Dialog
       Params:
         useMarkup = whether to use markup for heading
   */
-  void setHeadingUseMarkup(bool useMarkup)
+  void setHeadingUseMarkup(bool useMarkup) nothrow
   {
     adw_alert_dialog_set_heading_use_markup(cast(AdwAlertDialog*)this._cPtr, useMarkup);
   }
@@ -747,7 +754,7 @@ class AlertDialog : adw.dialog.Dialog
         response = a response ID
         appearance = appearance for response
   */
-  void setResponseAppearance(string response, adw.types.ResponseAppearance appearance)
+  void setResponseAppearance(string response, adw.types.ResponseAppearance appearance) nothrow
   {
     const(char)* _response = response.toCString(No.Alloc);
     adw_alert_dialog_set_response_appearance(cast(AdwAlertDialog*)this._cPtr, _response, appearance);
@@ -769,7 +776,7 @@ class AlertDialog : adw.dialog.Dialog
         response = a response ID
         enabled = whether to enable response
   */
-  void setResponseEnabled(string response, bool enabled)
+  void setResponseEnabled(string response, bool enabled) nothrow
   {
     const(char)* _response = response.toCString(No.Alloc);
     adw_alert_dialog_set_response_enabled(cast(AdwAlertDialog*)this._cPtr, _response, enabled);
@@ -785,7 +792,7 @@ class AlertDialog : adw.dialog.Dialog
         response = a response ID
         label = the label of response
   */
-  void setResponseLabel(string response, string label)
+  void setResponseLabel(string response, string label) nothrow
   {
     const(char)* _response = response.toCString(No.Alloc);
     const(char)* _label = label.toCString(No.Alloc);
@@ -817,14 +824,14 @@ class AlertDialog : adw.dialog.Dialog
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectResponse(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectResponse(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : adw.alert_dialog.AlertDialog)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -836,7 +843,14 @@ class AlertDialog : adw.dialog.Dialog
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.alert_dialog.AlertDialog.response");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -855,7 +869,7 @@ class AlertDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
         propval = The body text of the dialog.
       Returns: Builder instance for fluent chaining
   */
-  T body_(string propval)
+  T body_(string propval) nothrow
   {
     return setProperty("body", propval);
   }
@@ -868,7 +882,7 @@ class AlertDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           See `func@Pango.parse_markup`.
       Returns: Builder instance for fluent chaining
   */
-  T bodyUseMarkup(bool propval)
+  T bodyUseMarkup(bool propval) nothrow
   {
     return setProperty("body-use-markup", propval);
   }
@@ -886,7 +900,7 @@ class AlertDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           The default close response is `close`.
       Returns: Builder instance for fluent chaining
   */
-  T closeResponse(string propval)
+  T closeResponse(string propval) nothrow
   {
     return setProperty("close-response", propval);
   }
@@ -902,7 +916,7 @@ class AlertDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           will do nothing.
       Returns: Builder instance for fluent chaining
   */
-  T defaultResponse(string propval)
+  T defaultResponse(string propval) nothrow
   {
     return setProperty("default-response", propval);
   }
@@ -915,7 +929,7 @@ class AlertDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           Displayed below the heading and body.
       Returns: Builder instance for fluent chaining
   */
-  T extraChild(gtk.widget.Widget propval)
+  T extraChild(gtk.widget.Widget propval) nothrow
   {
     return setProperty("extra-child", propval);
   }
@@ -926,7 +940,7 @@ class AlertDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
         propval = The heading of the dialog.
       Returns: Builder instance for fluent chaining
   */
-  T heading(string propval)
+  T heading(string propval) nothrow
   {
     return setProperty("heading", propval);
   }
@@ -939,7 +953,7 @@ class AlertDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           See `func@Pango.parse_markup`.
       Returns: Builder instance for fluent chaining
   */
-  T headingUseMarkup(bool propval)
+  T headingUseMarkup(bool propval) nothrow
   {
     return setProperty("heading-use-markup", propval);
   }
@@ -952,7 +966,7 @@ final class AlertDialogGidBuilder : AlertDialogGidBuilderImpl!AlertDialogGidBuil
       Create object from builder.
       Returns: New object
   */
-  AlertDialog build()
+  AlertDialog build() nothrow
   {
     return new AlertDialog(cast(void*)createGObject(AlertDialog._getGType), No.Take);
   }

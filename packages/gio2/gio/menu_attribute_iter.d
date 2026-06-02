@@ -18,26 +18,26 @@ class MenuAttributeIter : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_menu_attribute_iter_get_type != &gidSymbolNotFound ? g_menu_attribute_iter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MenuAttributeIter self()
+  override MenuAttributeIter self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class MenuAttributeIter : gobject.object.ObjectWrap
       Get builder for [gio.menu_attribute_iter.MenuAttributeIter]
       Returns: New builder object
   */
-  static MenuAttributeIterGidBuilder builder()
+  static MenuAttributeIterGidBuilder builder() nothrow
   {
     return new MenuAttributeIterGidBuilder;
   }
@@ -58,7 +58,7 @@ class MenuAttributeIter : gobject.object.ObjectWrap
       The iterator is not advanced.
       Returns: the name of the attribute
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_menu_attribute_iter_get_name(cast(GMenuAttributeIter*)this._cPtr);
@@ -89,7 +89,7 @@ class MenuAttributeIter : gobject.object.ObjectWrap
       Returns: true on success, or false if there is no additional
             attribute
   */
-  bool getNext(out string outName, out glib.variant.Variant value)
+  bool getNext(out string outName, out glib.variant.Variant value) nothrow
   {
     bool _retval;
     char* _outName;
@@ -106,7 +106,7 @@ class MenuAttributeIter : gobject.object.ObjectWrap
       The iterator is not advanced.
       Returns: the value of the current attribute
   */
-  glib.variant.Variant getValue()
+  glib.variant.Variant getValue() nothrow
   {
     GVariant* _cretval;
     _cretval = g_menu_attribute_iter_get_value(cast(GMenuAttributeIter*)this._cPtr);
@@ -126,7 +126,7 @@ class MenuAttributeIter : gobject.object.ObjectWrap
       attribute exists at all).
       Returns: true on success, or false when there are no more attributes
   */
-  bool next()
+  bool next() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_menu_attribute_iter_next(cast(GMenuAttributeIter*)this._cPtr);
@@ -146,7 +146,7 @@ final class MenuAttributeIterGidBuilder : MenuAttributeIterGidBuilderImpl!MenuAt
       Create object from builder.
       Returns: New object
   */
-  MenuAttributeIter build()
+  MenuAttributeIter build() nothrow
   {
     return new MenuAttributeIter(cast(void*)createGObject(MenuAttributeIter._getGType), No.Take);
   }

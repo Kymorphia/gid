@@ -20,26 +20,26 @@ class FileFormat : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_file_format_get_type != &gidSymbolNotFound ? gadataset_file_format_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileFormat self()
+  override FileFormat self() nothrow
   {
     return this;
   }
@@ -48,13 +48,13 @@ class FileFormat : gobject.object.ObjectWrap
       Get builder for [arrowdataset.file_format.FileFormat]
       Returns: New builder object
   */
-  static FileFormatGidBuilder builder()
+  static FileFormatGidBuilder builder() nothrow
   {
     return new FileFormatGidBuilder;
   }
 
   /** */
-  bool equal(arrowdataset.file_format.FileFormat otherFormat)
+  bool equal(arrowdataset.file_format.FileFormat otherFormat) nothrow
   {
     bool _retval;
     _retval = cast(bool)gadataset_file_format_equal(cast(GADatasetFileFormat*)this._cPtr, otherFormat ? cast(GADatasetFileFormat*)otherFormat._cPtr(No.Dup) : null);
@@ -62,7 +62,7 @@ class FileFormat : gobject.object.ObjectWrap
   }
 
   /** */
-  arrowdataset.file_write_options.FileWriteOptions getDefaultWriteOptions()
+  arrowdataset.file_write_options.FileWriteOptions getDefaultWriteOptions() nothrow
   {
     GADatasetFileWriteOptions* _cretval;
     _cretval = gadataset_file_format_get_default_write_options(cast(GADatasetFileFormat*)this._cPtr);
@@ -71,7 +71,7 @@ class FileFormat : gobject.object.ObjectWrap
   }
 
   /** */
-  string getTypeName()
+  string getTypeName() nothrow
   {
     char* _cretval;
     _cretval = gadataset_file_format_get_type_name(cast(GADatasetFileFormat*)this._cPtr);
@@ -98,7 +98,7 @@ class FileFormatGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T format(void* propval)
+  T format(void* propval) nothrow
   {
     return setProperty("format", propval);
   }
@@ -111,7 +111,7 @@ final class FileFormatGidBuilder : FileFormatGidBuilderImpl!FileFormatGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FileFormat build()
+  FileFormat build() nothrow
   {
     return new FileFormat(cast(void*)createGObject(FileFormat._getGType), No.Take);
   }

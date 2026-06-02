@@ -20,26 +20,26 @@ class HeaderList : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_header_list_get_type != &gidSymbolNotFound ? g_mime_header_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HeaderList self()
+  override HeaderList self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class HeaderList : gobject.object.ObjectWrap
       Get builder for [gmime.header_list.HeaderList]
       Returns: New builder object
   */
-  static HeaderListGidBuilder builder()
+  static HeaderListGidBuilder builder() nothrow
   {
     return new HeaderListGidBuilder;
   }
@@ -60,7 +60,7 @@ class HeaderList : gobject.object.ObjectWrap
         options = a #GMimeParserOptions or null
       Returns: a new header list object.
   */
-  this(gmime.parser_options.ParserOptions options = null)
+  this(gmime.parser_options.ParserOptions options = null) nothrow
   {
     GMimeHeaderList* _cretval;
     _cretval = g_mime_header_list_new(options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null);
@@ -77,7 +77,7 @@ class HeaderList : gobject.object.ObjectWrap
         value = header value
         charset = a charset
   */
-  void append(string name, string value, string charset = null)
+  void append(string name, string value, string charset = null) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -88,7 +88,7 @@ class HeaderList : gobject.object.ObjectWrap
   /**
       Removes all of the headers from the #GMimeHeaderList.
   */
-  void clear()
+  void clear() nothrow
   {
     g_mime_header_list_clear(cast(GMimeHeaderList*)this._cPtr);
   }
@@ -100,7 +100,7 @@ class HeaderList : gobject.object.ObjectWrap
         name = header name
       Returns: true if the specified header exists or false otherwise.
   */
-  bool contains(string name)
+  bool contains(string name) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -112,7 +112,7 @@ class HeaderList : gobject.object.ObjectWrap
       Gets the number of headers contained within the header list.
       Returns: the number of headers in the header list.
   */
-  int getCount()
+  int getCount() nothrow
   {
     int _retval;
     _retval = g_mime_header_list_get_count(cast(GMimeHeaderList*)this._cPtr);
@@ -126,7 +126,7 @@ class HeaderList : gobject.object.ObjectWrap
         name = header name
       Returns: a #GMimeHeader for the specified name.
   */
-  gmime.header.Header getHeader(string name)
+  gmime.header.Header getHeader(string name) nothrow
   {
     GMimeHeader* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -142,7 +142,7 @@ class HeaderList : gobject.object.ObjectWrap
         index = the 0-based index of the header
       Returns: the header at position index.
   */
-  gmime.header.Header getHeaderAt(int index)
+  gmime.header.Header getHeaderAt(int index) nothrow
   {
     GMimeHeader* _cretval;
     _cretval = g_mime_header_list_get_header_at(cast(GMimeHeaderList*)this._cPtr, index);
@@ -160,7 +160,7 @@ class HeaderList : gobject.object.ObjectWrap
         value = header value
         charset = a charset
   */
-  void prepend(string name, string value, string charset = null)
+  void prepend(string name, string value, string charset = null) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -176,7 +176,7 @@ class HeaderList : gobject.object.ObjectWrap
       Returns: true if the header was successfully removed or false if
         the specified header could not be found.
   */
-  bool remove(string name)
+  bool remove(string name) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -190,7 +190,7 @@ class HeaderList : gobject.object.ObjectWrap
       Params:
         index = the 0-based index of the header to remove
   */
-  void removeAt(int index)
+  void removeAt(int index) nothrow
   {
     g_mime_header_list_remove_at(cast(GMimeHeaderList*)this._cPtr, index);
   }
@@ -210,7 +210,7 @@ class HeaderList : gobject.object.ObjectWrap
         value = header value
         charset = a charset
   */
-  void set(string name, string value, string charset = null)
+  void set(string name, string value, string charset = null) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -226,7 +226,7 @@ class HeaderList : gobject.object.ObjectWrap
         options = a #GMimeFormatOptions or null
       Returns: a string containing the header block.
   */
-  string toString_(gmime.format_options.FormatOptions options = null)
+  string toString_(gmime.format_options.FormatOptions options = null) nothrow
   {
     char* _cretval;
     _cretval = g_mime_header_list_to_string(cast(GMimeHeaderList*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null);
@@ -242,7 +242,7 @@ class HeaderList : gobject.object.ObjectWrap
         stream = output stream
       Returns: the number of bytes written or %-1 on fail.
   */
-  ptrdiff_t writeToStream(gmime.format_options.FormatOptions options, gmime.stream.Stream stream)
+  ptrdiff_t writeToStream(gmime.format_options.FormatOptions options, gmime.stream.Stream stream) nothrow
   {
     ptrdiff_t _retval;
     _retval = g_mime_header_list_write_to_stream(cast(GMimeHeaderList*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, stream ? cast(GMimeStream*)stream._cPtr(No.Dup) : null);
@@ -262,7 +262,7 @@ final class HeaderListGidBuilder : HeaderListGidBuilderImpl!HeaderListGidBuilder
       Create object from builder.
       Returns: New object
   */
-  HeaderList build()
+  HeaderList build() nothrow
   {
     return new HeaderList(cast(void*)createGObject(HeaderList._getGType), Yes.Take);
   }

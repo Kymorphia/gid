@@ -8,12 +8,12 @@ import gtk.section_model_mixin;
 /// Proxy object for [gtk.section_model.SectionModel] interface when a GObject has no applicable D binding
 class SectionModelIfaceProxy : IfaceProxy, gtk.section_model.SectionModel
 {
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
-  override TypeInfo_Interface getIface()
+  override TypeInfo_Interface getIface() nothrow
   {
     return typeid(gtk.section_model.SectionModel);
   }

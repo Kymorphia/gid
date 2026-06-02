@@ -85,26 +85,26 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_print_operation_get_type != &gidSymbolNotFound ? gtk_print_operation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PrintOperation self()
+  override PrintOperation self() nothrow
   {
     return this;
   }
@@ -113,7 +113,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Get builder for [gtk.print_operation.PrintOperation]
       Returns: New builder object
   */
-  static PrintOperationGidBuilder builder()
+  static PrintOperationGidBuilder builder() nothrow
   {
     return new PrintOperationGidBuilder;
   }
@@ -131,7 +131,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         is unlikely to change). On other platforms, all actions except for
         [gtk.types.PrintOperationAction.Export] support asynchronous operation.
   */
-  @property bool allowAsync()
+  @property bool allowAsync() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("allow-async");
   }
@@ -150,7 +150,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
           is unlikely to change). On other platforms, all actions except for
           [gtk.types.PrintOperationAction.Export] support asynchronous operation.
   */
-  @property void allowAsync(bool propval)
+  @property void allowAsync(bool propval) nothrow
   {
     setAllowAsync(propval);
   }
@@ -164,7 +164,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         
         Note that this only makes sense for pre-paginated documents.
   */
-  @property int currentPage()
+  @property int currentPage() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("current-page");
   }
@@ -179,7 +179,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
           
           Note that this only makes sense for pre-paginated documents.
   */
-  @property void currentPage(int propval)
+  @property void currentPage(int propval) nothrow
   {
     setCurrentPage(propval);
   }
@@ -191,7 +191,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         
         If this is null, GTK+ uses a default label.
   */
-  @property string customTabLabel()
+  @property string customTabLabel() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("custom-tab-label");
   }
@@ -204,7 +204,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
           
           If this is null, GTK+ uses a default label.
   */
-  @property void customTabLabel(string propval)
+  @property void customTabLabel(string propval) nothrow
   {
     setCustomTabLabel(propval);
   }
@@ -217,7 +217,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         but it can be overridden on a per-page basis by connecting
         to the #GtkPrintOperation::request-page-setup signal.
   */
-  @property gtk.page_setup.PageSetup defaultPageSetup()
+  @property gtk.page_setup.PageSetup defaultPageSetup() nothrow
   {
     return getDefaultPageSetup();
   }
@@ -231,7 +231,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
           but it can be overridden on a per-page basis by connecting
           to the #GtkPrintOperation::request-page-setup signal.
   */
-  @property void defaultPageSetup(gtk.page_setup.PageSetup propval)
+  @property void defaultPageSetup(gtk.page_setup.PageSetup propval) nothrow
   {
     setDefaultPageSetup(propval);
   }
@@ -240,7 +240,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Get `embedPageSetup` property.
       Returns: If true, page size combo box and orientation combo box are embedded into page setup page.
   */
-  @property bool embedPageSetup()
+  @property bool embedPageSetup() nothrow
   {
     return getEmbedPageSetup();
   }
@@ -250,7 +250,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         propval = If true, page size combo box and orientation combo box are embedded into page setup page.
   */
-  @property void embedPageSetup(bool propval)
+  @property void embedPageSetup(bool propval) nothrow
   {
     setEmbedPageSetup(propval);
   }
@@ -267,7 +267,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         by letting the user pick the “Print to PDF” item from the
         list of printers in the print dialog.
   */
-  @property string exportFilename()
+  @property string exportFilename() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("export-filename");
   }
@@ -285,7 +285,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
           by letting the user pick the “Print to PDF” item from the
           list of printers in the print dialog.
   */
-  @property void exportFilename(string propval)
+  @property void exportFilename(string propval) nothrow
   {
     setExportFilename(propval);
   }
@@ -296,7 +296,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         This can allow your application to print the selection.
         This is typically used to make a "Selection" button sensitive.
   */
-  @property bool hasSelection()
+  @property bool hasSelection() nothrow
   {
     return getHasSelection();
   }
@@ -308,7 +308,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
           This can allow your application to print the selection.
           This is typically used to make a "Selection" button sensitive.
   */
-  @property void hasSelection(bool propval)
+  @property void hasSelection(bool propval) nothrow
   {
     setHasSelection(propval);
   }
@@ -321,7 +321,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         If you don't set a job name, GTK+ picks a default one
         by numbering successive print jobs.
   */
-  @property string jobName()
+  @property string jobName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("job-name");
   }
@@ -335,7 +335,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
           If you don't set a job name, GTK+ picks a default one
           by numbering successive print jobs.
   */
-  @property void jobName(string propval)
+  @property void jobName(string propval) nothrow
   {
     setJobName(propval);
   }
@@ -354,7 +354,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         the user chooses to print all pages, the last ::draw-page signal
         will be for page @n_pages - 1.
   */
-  @property int nPages()
+  @property int nPages() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("n-pages");
   }
@@ -374,7 +374,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
           the user chooses to print all pages, the last ::draw-page signal
           will be for page @n_pages - 1.
   */
-  @property void nPages(int propval)
+  @property void nPages(int propval) nothrow
   {
     setNPages(propval);
   }
@@ -391,7 +391,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         print status is [gtk.types.PrintStatus.GeneratingData].
         This is typically used to track the progress of print operation.
   */
-  @property int nPagesToPrint()
+  @property int nPagesToPrint() nothrow
   {
     return getNPagesToPrint();
   }
@@ -404,7 +404,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         print settings from a previous print operation, see
         [gtk.print_operation.PrintOperation.run].
   */
-  @property gtk.print_settings.PrintSettings printSettings()
+  @property gtk.print_settings.PrintSettings printSettings() nothrow
   {
     return getPrintSettings();
   }
@@ -418,7 +418,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
           print settings from a previous print operation, see
           [gtk.print_operation.PrintOperation.run].
   */
-  @property void printSettings(gtk.print_settings.PrintSettings propval)
+  @property void printSettings(gtk.print_settings.PrintSettings propval) nothrow
   {
     setPrintSettings(propval);
   }
@@ -428,7 +428,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Returns: Determines whether to show a progress dialog during the
         print operation.
   */
-  @property bool showProgress()
+  @property bool showProgress() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("show-progress");
   }
@@ -439,7 +439,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         propval = Determines whether to show a progress dialog during the
           print operation.
   */
-  @property void showProgress(bool propval)
+  @property void showProgress(bool propval) nothrow
   {
     setShowProgress(propval);
   }
@@ -448,7 +448,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Get `status` property.
       Returns: The status of the print operation.
   */
-  @property gtk.types.PrintStatus status()
+  @property gtk.types.PrintStatus status() nothrow
   {
     return getStatus();
   }
@@ -462,7 +462,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         See the #GtkPrintOperation:status property for a status value that
         is suitable for programmatic use.
   */
-  @property string statusString()
+  @property string statusString() nothrow
   {
     return getStatusString();
   }
@@ -472,7 +472,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Returns: If true, the print operation will support print of selection.
         This allows the print dialog to show a "Selection" button.
   */
-  @property bool supportSelection()
+  @property bool supportSelection() nothrow
   {
     return getSupportSelection();
   }
@@ -483,7 +483,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         propval = If true, the print operation will support print of selection.
           This allows the print dialog to show a "Selection" button.
   */
-  @property void supportSelection(bool propval)
+  @property void supportSelection(bool propval) nothrow
   {
     setSupportSelection(propval);
   }
@@ -497,7 +497,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         However, this is often implemented using polling, and should
         not be enabled unless needed.
   */
-  @property bool trackPrintStatus()
+  @property bool trackPrintStatus() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("track-print-status");
   }
@@ -512,7 +512,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
           However, this is often implemented using polling, and should
           not be enabled unless needed.
   */
-  @property void trackPrintStatus(bool propval)
+  @property void trackPrintStatus(bool propval) nothrow
   {
     setTrackPrintStatus(propval);
   }
@@ -523,7 +523,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         #GtkPrintContext is set up in such a way that distances
         are measured in units of @unit.
   */
-  @property gtk.types.Unit unit()
+  @property gtk.types.Unit unit() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.Unit)("unit");
   }
@@ -535,7 +535,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
           #GtkPrintContext is set up in such a way that distances
           are measured in units of @unit.
   */
-  @property void unit(gtk.types.Unit propval)
+  @property void unit(gtk.types.Unit propval) nothrow
   {
     setUnit(propval);
   }
@@ -549,7 +549,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         Otherwise, the origin is at the top left corner of the imageable
         area (i.e. inside the margins).
   */
-  @property bool useFullPage()
+  @property bool useFullPage() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("use-full-page");
   }
@@ -564,7 +564,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
           Otherwise, the origin is at the top left corner of the imageable
           area (i.e. inside the margins).
   */
-  @property void useFullPage(bool propval)
+  @property void useFullPage(bool propval) nothrow
   {
     setUseFullPage(propval);
   }
@@ -575,7 +575,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Creates a new #GtkPrintOperation.
       Returns: a new #GtkPrintOperation
   */
-  this()
+  this() nothrow
   {
     GtkPrintOperation* _cretval;
     _cretval = gtk_print_operation_new();
@@ -589,7 +589,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       signal handler to stop the currently running print
       operation.
   */
-  void cancel()
+  void cancel() nothrow
   {
     gtk_print_operation_cancel(cast(GtkPrintOperation*)this._cPtr);
   }
@@ -603,7 +603,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       has to be called by application. In another case it is called by the library
       itself.
   */
-  void drawPageFinish()
+  void drawPageFinish() nothrow
   {
     gtk_print_operation_draw_page_finish(cast(GtkPrintOperation*)this._cPtr);
   }
@@ -613,7 +613,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       [gtk.print_operation.PrintOperation.setDefaultPageSetup].
       Returns: the default page setup
   */
-  gtk.page_setup.PageSetup getDefaultPageSetup()
+  gtk.page_setup.PageSetup getDefaultPageSetup() nothrow
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_operation_get_default_page_setup(cast(GtkPrintOperation*)this._cPtr);
@@ -625,7 +625,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Gets the value of #GtkPrintOperation:embed-page-setup property.
       Returns: whether page setup selection combos are embedded
   */
-  bool getEmbedPageSetup()
+  bool getEmbedPageSetup() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_print_operation_get_embed_page_setup(cast(GtkPrintOperation*)this._cPtr);
@@ -651,7 +651,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Gets the value of #GtkPrintOperation:has-selection property.
       Returns: whether there is a selection
   */
-  bool getHasSelection()
+  bool getHasSelection() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_print_operation_get_has_selection(cast(GtkPrintOperation*)this._cPtr);
@@ -670,7 +670,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       This is typically used to track the progress of print operation.
       Returns: the number of pages that will be printed
   */
-  int getNPagesToPrint()
+  int getNPagesToPrint() nothrow
   {
     int _retval;
     _retval = gtk_print_operation_get_n_pages_to_print(cast(GtkPrintOperation*)this._cPtr);
@@ -685,7 +685,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       [gtk.print_operation.PrintOperation.run] have been called.
       Returns: the current print settings of op.
   */
-  gtk.print_settings.PrintSettings getPrintSettings()
+  gtk.print_settings.PrintSettings getPrintSettings() nothrow
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_operation_get_print_settings(cast(GtkPrintOperation*)this._cPtr);
@@ -698,7 +698,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Also see [gtk.print_operation.PrintOperation.getStatusString].
       Returns: the status of the print operation
   */
-  gtk.types.PrintStatus getStatus()
+  gtk.types.PrintStatus getStatus() nothrow
   {
     GtkPrintStatus _cretval;
     _cretval = gtk_print_operation_get_status(cast(GtkPrintOperation*)this._cPtr);
@@ -716,7 +716,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Returns: a string representation of the status
            of the print operation
   */
-  string getStatusString()
+  string getStatusString() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_print_operation_get_status_string(cast(GtkPrintOperation*)this._cPtr);
@@ -728,7 +728,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Gets the value of #GtkPrintOperation:support-selection property.
       Returns: whether the application supports print of selection
   */
-  bool getSupportSelection()
+  bool getSupportSelection() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_print_operation_get_support_selection(cast(GtkPrintOperation*)this._cPtr);
@@ -745,7 +745,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       the operation status then tracks the print job status on the printer.
       Returns: true, if the print operation is finished.
   */
-  bool isFinished()
+  bool isFinished() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_print_operation_is_finished(cast(GtkPrintOperation*)this._cPtr);
@@ -841,7 +841,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         allowAsync = true to allow asynchronous operation
   */
-  void setAllowAsync(bool allowAsync)
+  void setAllowAsync(bool allowAsync) nothrow
   {
     gtk_print_operation_set_allow_async(cast(GtkPrintOperation*)this._cPtr, allowAsync);
   }
@@ -857,7 +857,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         currentPage = the current page, 0-based
   */
-  void setCurrentPage(int currentPage)
+  void setCurrentPage(int currentPage) nothrow
   {
     gtk_print_operation_set_current_page(cast(GtkPrintOperation*)this._cPtr, currentPage);
   }
@@ -868,7 +868,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         label = the label to use, or null to use the default label
   */
-  void setCustomTabLabel(string label = null)
+  void setCustomTabLabel(string label = null) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_print_operation_set_custom_tab_label(cast(GtkPrintOperation*)this._cPtr, _label);
@@ -884,7 +884,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         defaultPageSetup = a #GtkPageSetup, or null
   */
-  void setDefaultPageSetup(gtk.page_setup.PageSetup defaultPageSetup = null)
+  void setDefaultPageSetup(gtk.page_setup.PageSetup defaultPageSetup = null) nothrow
   {
     gtk_print_operation_set_default_page_setup(cast(GtkPrintOperation*)this._cPtr, defaultPageSetup ? cast(GtkPageSetup*)defaultPageSetup._cPtr(No.Dup) : null);
   }
@@ -896,7 +896,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       
       This function must be called in the callback of “draw-page” signal.
   */
-  void setDeferDrawing()
+  void setDeferDrawing() nothrow
   {
     gtk_print_operation_set_defer_drawing(cast(GtkPrintOperation*)this._cPtr);
   }
@@ -908,7 +908,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         embed = true to embed page setup selection in the #GtkPrintUnixDialog
   */
-  void setEmbedPageSetup(bool embed)
+  void setEmbedPageSetup(bool embed) nothrow
   {
     gtk_print_operation_set_embed_page_setup(cast(GtkPrintOperation*)this._cPtr, embed);
   }
@@ -926,7 +926,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         filename = the filename for the exported file
   */
-  void setExportFilename(string filename)
+  void setExportFilename(string filename) nothrow
   {
     const(char)* _filename = filename.toCString(No.Alloc);
     gtk_print_operation_set_export_filename(cast(GtkPrintOperation*)this._cPtr, _filename);
@@ -942,7 +942,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         hasSelection = true indicates that a selection exists
   */
-  void setHasSelection(bool hasSelection)
+  void setHasSelection(bool hasSelection) nothrow
   {
     gtk_print_operation_set_has_selection(cast(GtkPrintOperation*)this._cPtr, hasSelection);
   }
@@ -957,7 +957,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         jobName = a string that identifies the print job
   */
-  void setJobName(string jobName)
+  void setJobName(string jobName) nothrow
   {
     const(char)* _jobName = jobName.toCString(No.Alloc);
     gtk_print_operation_set_job_name(cast(GtkPrintOperation*)this._cPtr, _jobName);
@@ -979,7 +979,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         nPages = the number of pages
   */
-  void setNPages(int nPages)
+  void setNPages(int nPages) nothrow
   {
     gtk_print_operation_set_n_pages(cast(GtkPrintOperation*)this._cPtr, nPages);
   }
@@ -992,7 +992,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         printSettings = #GtkPrintSettings
   */
-  void setPrintSettings(gtk.print_settings.PrintSettings printSettings = null)
+  void setPrintSettings(gtk.print_settings.PrintSettings printSettings = null) nothrow
   {
     gtk_print_operation_set_print_settings(cast(GtkPrintOperation*)this._cPtr, printSettings ? cast(GtkPrintSettings*)printSettings._cPtr(No.Dup) : null);
   }
@@ -1004,7 +1004,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         showProgress = true to show a progress dialog
   */
-  void setShowProgress(bool showProgress)
+  void setShowProgress(bool showProgress) nothrow
   {
     gtk_print_operation_set_show_progress(cast(GtkPrintOperation*)this._cPtr, showProgress);
   }
@@ -1015,7 +1015,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         supportSelection = true to support selection
   */
-  void setSupportSelection(bool supportSelection)
+  void setSupportSelection(bool supportSelection) nothrow
   {
     gtk_print_operation_set_support_selection(cast(GtkPrintOperation*)this._cPtr, supportSelection);
   }
@@ -1032,7 +1032,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         trackStatus = true to track status after printing
   */
-  void setTrackPrintStatus(bool trackStatus)
+  void setTrackPrintStatus(bool trackStatus) nothrow
   {
     gtk_print_operation_set_track_print_status(cast(GtkPrintOperation*)this._cPtr, trackStatus);
   }
@@ -1045,7 +1045,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         unit = the unit to use
   */
-  void setUnit(gtk.types.Unit unit)
+  void setUnit(gtk.types.Unit unit) nothrow
   {
     gtk_print_operation_set_unit(cast(GtkPrintOperation*)this._cPtr, unit);
   }
@@ -1061,7 +1061,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         fullPage = true to set up the #GtkPrintContext for the full page
   */
-  void setUseFullPage(bool fullPage)
+  void setUseFullPage(bool fullPage) nothrow
   {
     gtk_print_operation_set_use_full_page(cast(GtkPrintOperation*)this._cPtr, fullPage);
   }
@@ -1088,14 +1088,14 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectBeginPrint(T)(T callback, Flag!"After" after = No.After)
+  gulong connectBeginPrint(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_context.PrintContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.print_operation.PrintOperation)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1107,7 +1107,14 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.print_operation.PrintOperation.beginPrint");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1140,22 +1147,30 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCreateCustomWidget(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCreateCustomWidget(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T : gobject.object.ObjectWrap)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_operation.PrintOperation)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gobject.object.ObjectWrap _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.print_operation.PrintOperation.createCustomWidget");
+      }
 
       setVal!(gobject.object.ObjectWrap)(_returnValue, _retval);
     }
@@ -1185,14 +1200,14 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCustomWidgetApply(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCustomWidgetApply(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.print_operation.PrintOperation)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1204,7 +1219,14 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.print_operation.PrintOperation.customWidgetApply");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1237,14 +1259,14 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDone(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDone(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.PrintOperationResult)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.print_operation.PrintOperation)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1256,7 +1278,14 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.print_operation.PrintOperation.done");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1329,7 +1358,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDrawPage(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDrawPage(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_context.PrintContext)))
@@ -1337,7 +1366,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.print_operation.PrintOperation)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1352,7 +1381,14 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.print_operation.PrintOperation.drawPage");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1378,14 +1414,14 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEndPrint(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEndPrint(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_context.PrintContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.print_operation.PrintOperation)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1397,7 +1433,14 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.print_operation.PrintOperation.endPrint");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1434,18 +1477,19 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPaginate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPaginate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_context.PrintContext)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.print_operation.PrintOperation)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1453,7 +1497,14 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.print_operation.PrintOperation.paginate");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1499,7 +1550,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPreview(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPreview(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_operation_preview.PrintOperationPreview)))
@@ -1508,11 +1559,12 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.print_operation.PrintOperation)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1526,7 +1578,14 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.print_operation.PrintOperation.preview");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1558,7 +1617,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRequestPageSetup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRequestPageSetup(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_context.PrintContext)))
@@ -1567,7 +1626,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.print_operation.PrintOperation)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1585,7 +1644,14 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.print_operation.PrintOperation.requestPageSetup");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1610,13 +1676,13 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectStatusChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStatusChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_operation.PrintOperation)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1625,7 +1691,14 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.print_operation.PrintOperation.statusChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1655,7 +1728,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectUpdateCustomWidget(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUpdateCustomWidget(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -1664,7 +1737,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.print_operation.PrintOperation)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1682,7 +1755,14 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.print_operation.PrintOperation.updateCustomWidget");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1711,7 +1791,7 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           [gtk.types.PrintOperationAction.Export] support asynchronous operation.
       Returns: Builder instance for fluent chaining
   */
-  T allowAsync(bool propval)
+  T allowAsync(bool propval) nothrow
   {
     return setProperty("allow-async", propval);
   }
@@ -1727,7 +1807,7 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           Note that this only makes sense for pre-paginated documents.
       Returns: Builder instance for fluent chaining
   */
-  T currentPage(int propval)
+  T currentPage(int propval) nothrow
   {
     return setProperty("current-page", propval);
   }
@@ -1741,7 +1821,7 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           If this is null, GTK+ uses a default label.
       Returns: Builder instance for fluent chaining
   */
-  T customTabLabel(string propval)
+  T customTabLabel(string propval) nothrow
   {
     return setProperty("custom-tab-label", propval);
   }
@@ -1756,7 +1836,7 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           to the #GtkPrintOperation::request-page-setup signal.
       Returns: Builder instance for fluent chaining
   */
-  T defaultPageSetup(gtk.page_setup.PageSetup propval)
+  T defaultPageSetup(gtk.page_setup.PageSetup propval) nothrow
   {
     return setProperty("default-page-setup", propval);
   }
@@ -1767,7 +1847,7 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = If true, page size combo box and orientation combo box are embedded into page setup page.
       Returns: Builder instance for fluent chaining
   */
-  T embedPageSetup(bool propval)
+  T embedPageSetup(bool propval) nothrow
   {
     return setProperty("embed-page-setup", propval);
   }
@@ -1786,7 +1866,7 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           list of printers in the print dialog.
       Returns: Builder instance for fluent chaining
   */
-  T exportFilename(string propval)
+  T exportFilename(string propval) nothrow
   {
     return setProperty("export-filename", propval);
   }
@@ -1799,7 +1879,7 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           This is typically used to make a "Selection" button sensitive.
       Returns: Builder instance for fluent chaining
   */
-  T hasSelection(bool propval)
+  T hasSelection(bool propval) nothrow
   {
     return setProperty("has-selection", propval);
   }
@@ -1814,7 +1894,7 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           by numbering successive print jobs.
       Returns: Builder instance for fluent chaining
   */
-  T jobName(string propval)
+  T jobName(string propval) nothrow
   {
     return setProperty("job-name", propval);
   }
@@ -1835,7 +1915,7 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           will be for page @n_pages - 1.
       Returns: Builder instance for fluent chaining
   */
-  T nPages(int propval)
+  T nPages(int propval) nothrow
   {
     return setProperty("n-pages", propval);
   }
@@ -1850,7 +1930,7 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           [gtk.print_operation.PrintOperation.run].
       Returns: Builder instance for fluent chaining
   */
-  T printSettings(gtk.print_settings.PrintSettings propval)
+  T printSettings(gtk.print_settings.PrintSettings propval) nothrow
   {
     return setProperty("print-settings", propval);
   }
@@ -1862,7 +1942,7 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           print operation.
       Returns: Builder instance for fluent chaining
   */
-  T showProgress(bool propval)
+  T showProgress(bool propval) nothrow
   {
     return setProperty("show-progress", propval);
   }
@@ -1874,7 +1954,7 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           This allows the print dialog to show a "Selection" button.
       Returns: Builder instance for fluent chaining
   */
-  T supportSelection(bool propval)
+  T supportSelection(bool propval) nothrow
   {
     return setProperty("support-selection", propval);
   }
@@ -1890,7 +1970,7 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           not be enabled unless needed.
       Returns: Builder instance for fluent chaining
   */
-  T trackPrintStatus(bool propval)
+  T trackPrintStatus(bool propval) nothrow
   {
     return setProperty("track-print-status", propval);
   }
@@ -1903,7 +1983,7 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           are measured in units of @unit.
       Returns: Builder instance for fluent chaining
   */
-  T unit(gtk.types.Unit propval)
+  T unit(gtk.types.Unit propval) nothrow
   {
     return setProperty("unit", propval);
   }
@@ -1919,7 +1999,7 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           area (i.e. inside the margins).
       Returns: Builder instance for fluent chaining
   */
-  T useFullPage(bool propval)
+  T useFullPage(bool propval) nothrow
   {
     return setProperty("use-full-page", propval);
   }
@@ -1932,7 +2012,7 @@ final class PrintOperationGidBuilder : PrintOperationGidBuilderImpl!PrintOperati
       Create object from builder.
       Returns: New object
   */
-  PrintOperation build()
+  PrintOperation build() nothrow
   {
     return new PrintOperation(cast(void*)createGObject(PrintOperation._getGType), Yes.Take);
   }

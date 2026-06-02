@@ -17,26 +17,26 @@ class Notification : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_notification_get_type != &gidSymbolNotFound ? webkit_notification_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Notification self()
+  override Notification self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class Notification : gobject.object.ObjectWrap
       Get builder for [webkit.notification.Notification]
       Returns: New builder object
   */
-  static NotificationGidBuilder builder()
+  static NotificationGidBuilder builder() nothrow
   {
     return new NotificationGidBuilder;
   }
@@ -54,7 +54,7 @@ class Notification : gobject.object.ObjectWrap
       Get `body_` property.
       Returns: The body for the notification.
   */
-  @property string body_()
+  @property string body_() nothrow
   {
     return getBody();
   }
@@ -63,7 +63,7 @@ class Notification : gobject.object.ObjectWrap
       Get `id` property.
       Returns: The unique id for the notification.
   */
-  @property ulong id()
+  @property ulong id() nothrow
   {
     return getId();
   }
@@ -72,7 +72,7 @@ class Notification : gobject.object.ObjectWrap
       Get `tag` property.
       Returns: The tag identifier for the notification.
   */
-  @property string tag()
+  @property string tag() nothrow
   {
     return getTag();
   }
@@ -81,7 +81,7 @@ class Notification : gobject.object.ObjectWrap
       Get `title` property.
       Returns: The title for the notification.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -92,7 +92,7 @@ class Notification : gobject.object.ObjectWrap
       This will emit the
       #WebKitNotification::clicked signal.
   */
-  void clicked()
+  void clicked() nothrow
   {
     webkit_notification_clicked(cast(WebKitNotification*)this._cPtr);
   }
@@ -100,7 +100,7 @@ class Notification : gobject.object.ObjectWrap
   /**
       Closes the notification.
   */
-  void close()
+  void close() nothrow
   {
     webkit_notification_close(cast(WebKitNotification*)this._cPtr);
   }
@@ -109,7 +109,7 @@ class Notification : gobject.object.ObjectWrap
       Obtains the body for the notification.
       Returns: the body for the notification
   */
-  string getBody()
+  string getBody() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_notification_get_body(cast(WebKitNotification*)this._cPtr);
@@ -121,7 +121,7 @@ class Notification : gobject.object.ObjectWrap
       Obtains the unique id for the notification.
       Returns: the unique id for the notification
   */
-  ulong getId()
+  ulong getId() nothrow
   {
     ulong _retval;
     _retval = webkit_notification_get_id(cast(WebKitNotification*)this._cPtr);
@@ -132,7 +132,7 @@ class Notification : gobject.object.ObjectWrap
       Obtains the tag identifier for the notification.
       Returns: the tag for the notification
   */
-  string getTag()
+  string getTag() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_notification_get_tag(cast(WebKitNotification*)this._cPtr);
@@ -144,7 +144,7 @@ class Notification : gobject.object.ObjectWrap
       Obtains the title for the notification.
       Returns: the title for the notification
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_notification_get_title(cast(WebKitNotification*)this._cPtr);
@@ -167,13 +167,13 @@ class Notification : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClicked(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClicked(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.notification.Notification)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -182,7 +182,14 @@ class Notification : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.notification.Notification.clicked");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -207,13 +214,13 @@ class Notification : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClosed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClosed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.notification.Notification)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -222,7 +229,14 @@ class Notification : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.notification.Notification.closed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -242,7 +256,7 @@ final class NotificationGidBuilder : NotificationGidBuilderImpl!NotificationGidB
       Create object from builder.
       Returns: New object
   */
-  Notification build()
+  Notification build() nothrow
   {
     return new Notification(cast(void*)createGObject(Notification._getGType), No.Take);
   }

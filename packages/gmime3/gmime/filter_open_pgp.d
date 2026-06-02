@@ -16,26 +16,26 @@ class FilterOpenPGP : gmime.filter.Filter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_filter_openpgp_get_type != &gidSymbolNotFound ? g_mime_filter_openpgp_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FilterOpenPGP self()
+  override FilterOpenPGP self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class FilterOpenPGP : gmime.filter.Filter
       Get builder for [gmime.filter_open_pgp.FilterOpenPGP]
       Returns: New builder object
   */
-  static FilterOpenPGPGidBuilder builder()
+  static FilterOpenPGPGidBuilder builder() nothrow
   {
     return new FilterOpenPGPGidBuilder;
   }
@@ -53,7 +53,7 @@ class FilterOpenPGP : gmime.filter.Filter
       Creates a new #GMimeFilterOpenPGP filter.
       Returns: a new #GMimeFilterOpenPGP filter.
   */
-  this()
+  this() nothrow
   {
     GMimeFilter* _cretval;
     _cretval = g_mime_filter_openpgp_new();
@@ -64,7 +64,7 @@ class FilterOpenPGP : gmime.filter.Filter
       Gets the stream offset of the beginning of the OpenPGP data block, if any have been found.
       Returns: The stream offset or %-1 if no OpenPGP block was found.
   */
-  long getBeginOffset()
+  long getBeginOffset() nothrow
   {
     long _retval;
     _retval = g_mime_filter_openpgp_get_begin_offset(cast(GMimeFilterOpenPGP*)this._cPtr);
@@ -75,7 +75,7 @@ class FilterOpenPGP : gmime.filter.Filter
       Gets the type of OpenPGP data that has been detected.
       Returns: a #GMimeOpenPGPData value.
   */
-  gmime.types.OpenPGPData getDataType()
+  gmime.types.OpenPGPData getDataType() nothrow
   {
     GMimeOpenPGPData _cretval;
     _cretval = g_mime_filter_openpgp_get_data_type(cast(GMimeFilterOpenPGP*)this._cPtr);
@@ -87,7 +87,7 @@ class FilterOpenPGP : gmime.filter.Filter
       Gets the stream offset of the end of the OpenPGP data block, if any have been found.
       Returns: The stream offset or %-1 if no OpenPGP block was found.
   */
-  long getEndOffset()
+  long getEndOffset() nothrow
   {
     long _retval;
     _retval = g_mime_filter_openpgp_get_end_offset(cast(GMimeFilterOpenPGP*)this._cPtr);
@@ -107,7 +107,7 @@ final class FilterOpenPGPGidBuilder : FilterOpenPGPGidBuilderImpl!FilterOpenPGPG
       Create object from builder.
       Returns: New object
   */
-  FilterOpenPGP build()
+  FilterOpenPGP build() nothrow
   {
     return new FilterOpenPGP(cast(void*)createGObject(FilterOpenPGP._getGType), Yes.Take);
   }

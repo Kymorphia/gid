@@ -29,7 +29,7 @@ template FontMapT()
       Gets the type of Cairo font backend that fontmap uses.
       Returns: the [cairo.types.FontType] cairo font backend type
   */
-  override cairo.types.FontType getFontType()
+  override cairo.types.FontType getFontType() nothrow
   {
     cairo_font_type_t _cretval;
     _cretval = pango_cairo_font_map_get_font_type(cast(PangoCairoFontMap*)this._cPtr);
@@ -43,7 +43,7 @@ template FontMapT()
       See [pangocairo.font_map.FontMap.setResolution].
       Returns: the resolution in "dots per inch"
   */
-  override double getResolution()
+  override double getResolution() nothrow
   {
     double _retval;
     _retval = pango_cairo_font_map_get_resolution(cast(PangoCairoFontMap*)this._cPtr);
@@ -67,7 +67,7 @@ template FontMapT()
       font map to be released and a new default font map to be created
       on demand, using [pangocairo.font_map.FontMap.new_].
   */
-  override void setDefault()
+  override void setDefault() nothrow
   {
     pango_cairo_font_map_set_default(cast(PangoCairoFontMap*)this._cPtr);
   }
@@ -84,7 +84,7 @@ template FontMapT()
         dpi = the resolution in "dots per inch". (Physical inches aren't actually
             involved; the terminology is conventional.)
   */
-  override void setResolution(double dpi)
+  override void setResolution(double dpi) nothrow
   {
     pango_cairo_font_map_set_resolution(cast(PangoCairoFontMap*)this._cPtr, dpi);
   }

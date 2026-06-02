@@ -25,38 +25,38 @@ class Frustum : gobject.boxed.Boxed
   /**
       Create a `frustum.Frustum` boxed type.
   */
-  this()
+  this() nothrow
   {
     super(gMalloc(graphene_frustum_t.sizeof), Yes.Take);
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())graphene_frustum_get_type != &gidSymbolNotFound ? graphene_frustum_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Frustum self()
+  override Frustum self() nothrow
   {
     return this;
   }
@@ -69,7 +69,7 @@ class Frustum : gobject.boxed.Boxed
           structure. Use [graphene.frustum.Frustum.free] to free the resources
           allocated by this function.
   */
-  static graphene.frustum.Frustum alloc()
+  static graphene.frustum.Frustum alloc() nothrow
   {
     graphene_frustum_t* _cretval;
     _cretval = graphene_frustum_alloc();
@@ -85,7 +85,7 @@ class Frustum : gobject.boxed.Boxed
         point = a #graphene_point3d_t
       Returns: `true` if the point is inside the frustum
   */
-  bool containsPoint(graphene.point3_d.Point3D point)
+  bool containsPoint(graphene.point3_d.Point3D point) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_frustum_contains_point(cast(const(graphene_frustum_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&point);
@@ -99,7 +99,7 @@ class Frustum : gobject.boxed.Boxed
         b = a #graphene_frustum_t
       Returns: `true` if the given frustums are equal
   */
-  bool equal(graphene.frustum.Frustum b)
+  bool equal(graphene.frustum.Frustum b) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_frustum_equal(cast(const(graphene_frustum_t)*)this._cPtr, b ? cast(const(graphene_frustum_t)*)b._cPtr(No.Dup) : null);
@@ -113,7 +113,7 @@ class Frustum : gobject.boxed.Boxed
         planes = return location for an array
             of 6 #graphene_plane_t
   */
-  void getPlanes(ref graphene.plane.Plane[] planes)
+  void getPlanes(ref graphene.plane.Plane[] planes) nothrow
   {
     graphene_plane_t[] _planes;
     _planes.length = 6;
@@ -136,7 +136,7 @@ class Frustum : gobject.boxed.Boxed
         p5 = a clipping plane
       Returns: the initialized frustum
   */
-  graphene.frustum.Frustum init_(graphene.plane.Plane p0, graphene.plane.Plane p1, graphene.plane.Plane p2, graphene.plane.Plane p3, graphene.plane.Plane p4, graphene.plane.Plane p5)
+  graphene.frustum.Frustum init_(graphene.plane.Plane p0, graphene.plane.Plane p1, graphene.plane.Plane p2, graphene.plane.Plane p3, graphene.plane.Plane p4, graphene.plane.Plane p5) nothrow
   {
     graphene_frustum_t* _cretval;
     _cretval = graphene_frustum_init(cast(graphene_frustum_t*)this._cPtr, p0 ? cast(const(graphene_plane_t)*)p0._cPtr(No.Dup) : null, p1 ? cast(const(graphene_plane_t)*)p1._cPtr(No.Dup) : null, p2 ? cast(const(graphene_plane_t)*)p2._cPtr(No.Dup) : null, p3 ? cast(const(graphene_plane_t)*)p3._cPtr(No.Dup) : null, p4 ? cast(const(graphene_plane_t)*)p4._cPtr(No.Dup) : null, p5 ? cast(const(graphene_plane_t)*)p5._cPtr(No.Dup) : null);
@@ -152,7 +152,7 @@ class Frustum : gobject.boxed.Boxed
         src = a #graphene_frustum_t
       Returns: the initialized frustum
   */
-  graphene.frustum.Frustum initFromFrustum(graphene.frustum.Frustum src)
+  graphene.frustum.Frustum initFromFrustum(graphene.frustum.Frustum src) nothrow
   {
     graphene_frustum_t* _cretval;
     _cretval = graphene_frustum_init_from_frustum(cast(graphene_frustum_t*)this._cPtr, src ? cast(const(graphene_frustum_t)*)src._cPtr(No.Dup) : null);
@@ -167,7 +167,7 @@ class Frustum : gobject.boxed.Boxed
         matrix = a #graphene_matrix_t
       Returns: the initialized frustum
   */
-  graphene.frustum.Frustum initFromMatrix(graphene.matrix.Matrix matrix)
+  graphene.frustum.Frustum initFromMatrix(graphene.matrix.Matrix matrix) nothrow
   {
     graphene_frustum_t* _cretval;
     _cretval = graphene_frustum_init_from_matrix(cast(graphene_frustum_t*)this._cPtr, matrix ? cast(const(graphene_matrix_t)*)matrix._cPtr(No.Dup) : null);
@@ -183,7 +183,7 @@ class Frustum : gobject.boxed.Boxed
         box = a #graphene_box_t
       Returns: `true` if the box intersects the frustum
   */
-  bool intersectsBox(graphene.box.Box box)
+  bool intersectsBox(graphene.box.Box box) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_frustum_intersects_box(cast(const(graphene_frustum_t)*)this._cPtr, box ? cast(const(graphene_box_t)*)box._cPtr(No.Dup) : null);
@@ -198,7 +198,7 @@ class Frustum : gobject.boxed.Boxed
         sphere = a #graphene_sphere_t
       Returns: `true` if the sphere intersects the frustum
   */
-  bool intersectsSphere(graphene.sphere.Sphere sphere)
+  bool intersectsSphere(graphene.sphere.Sphere sphere) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_frustum_intersects_sphere(cast(const(graphene_frustum_t)*)this._cPtr, sphere ? cast(const(graphene_sphere_t)*)sphere._cPtr(No.Dup) : null);

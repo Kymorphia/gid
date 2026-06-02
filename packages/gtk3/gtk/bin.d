@@ -27,26 +27,26 @@ class Bin : gtk.container.Container
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_bin_get_type != &gidSymbolNotFound ? gtk_bin_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Bin self()
+  override Bin self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class Bin : gtk.container.Container
       Get builder for [gtk.bin.Bin]
       Returns: New builder object
   */
-  static BinGidBuilder builder()
+  static BinGidBuilder builder() nothrow
   {
     return new BinGidBuilder;
   }
@@ -67,7 +67,7 @@ class Bin : gtk.container.Container
       Returns: the child of bin, or null if it does
         not have a child.
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_bin_get_child(cast(GtkBin*)this._cPtr);
@@ -89,7 +89,7 @@ final class BinGidBuilder : BinGidBuilderImpl!BinGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Bin build()
+  Bin build() nothrow
   {
     return new Bin(cast(void*)createGObject(Bin._getGType), No.Take);
   }

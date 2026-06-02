@@ -29,26 +29,26 @@ class FontMap : gobject.object.ObjectWrap, gio.list_model.ListModel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_font_map_get_type != &gidSymbolNotFound ? pango_font_map_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FontMap self()
+  override FontMap self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class FontMap : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get builder for [pango.font_map.FontMap]
       Returns: New builder object
   */
-  static FontMapGidBuilder builder()
+  static FontMapGidBuilder builder() nothrow
   {
     return new FontMapGidBuilder;
   }
@@ -66,7 +66,7 @@ class FontMap : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `itemType` property.
       Returns: The type of items contained in this list.
   */
-  @property gobject.types.GType itemType()
+  @property gobject.types.GType itemType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
   }
@@ -75,7 +75,7 @@ class FontMap : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `nItems` property.
       Returns: The number of items contained in this list.
   */
-  @property uint nItems()
+  @property uint nItems() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
@@ -91,7 +91,7 @@ class FontMap : gobject.object.ObjectWrap, gio.list_model.ListModel
       call this function if they have attached extra data to the
       context and such data is changed.
   */
-  void changed()
+  void changed() nothrow
   {
     pango_font_map_changed(cast(PangoFontMap*)this._cPtr);
   }
@@ -109,7 +109,7 @@ class FontMap : gobject.object.ObjectWrap, gio.list_model.ListModel
       Returns: the newly allocated [pango.context.Context],
           which should be freed with [gobject.object.ObjectWrap.unref].
   */
-  pango.context.Context createContext()
+  pango.context.Context createContext() nothrow
   {
     PangoContext* _cretval;
     _cretval = pango_font_map_create_context(cast(PangoFontMap*)this._cPtr);
@@ -124,7 +124,7 @@ class FontMap : gobject.object.ObjectWrap, gio.list_model.ListModel
         name = a family name
       Returns: the [pango.font_family.FontFamily]
   */
-  pango.font_family.FontFamily getFamily(string name)
+  pango.font_family.FontFamily getFamily(string name) nothrow
   {
     PangoFontFamily* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -148,7 +148,7 @@ class FontMap : gobject.object.ObjectWrap, gio.list_model.ListModel
       like in [pango.context.Context].
       Returns: The current serial number of fontmap.
   */
-  uint getSerial()
+  uint getSerial() nothrow
   {
     uint _retval;
     _retval = pango_font_map_get_serial(cast(PangoFontMap*)this._cPtr);
@@ -168,7 +168,7 @@ class FontMap : gobject.object.ObjectWrap, gio.list_model.ListModel
             store a pointer to an array of [pango.font_family.FontFamily] *.
             This array should be freed with [glib.global.gfree].
   */
-  void listFamilies(out pango.font_family.FontFamily[] families)
+  void listFamilies(out pango.font_family.FontFamily[] families) nothrow
   {
     int _nFamilies;
     PangoFontFamily** _families;
@@ -188,7 +188,7 @@ class FontMap : gobject.object.ObjectWrap, gio.list_model.ListModel
       Returns: the newly allocated [pango.font.Font]
           loaded, or null if no font matched.
   */
-  pango.font.Font loadFont(pango.context.Context context, pango.font_description.FontDescription desc)
+  pango.font.Font loadFont(pango.context.Context context, pango.font_description.FontDescription desc) nothrow
   {
     PangoFont* _cretval;
     _cretval = pango_font_map_load_font(cast(PangoFontMap*)this._cPtr, context ? cast(PangoContext*)context._cPtr(No.Dup) : null, desc ? cast(const(PangoFontDescription)*)desc._cPtr(No.Dup) : null);
@@ -207,7 +207,7 @@ class FontMap : gobject.object.ObjectWrap, gio.list_model.ListModel
       Returns: the newly allocated
           [pango.fontset.Fontset] loaded, or null if no font matched.
   */
-  pango.fontset.Fontset loadFontset(pango.context.Context context, pango.font_description.FontDescription desc, pango.language.Language language)
+  pango.fontset.Fontset loadFontset(pango.context.Context context, pango.font_description.FontDescription desc, pango.language.Language language) nothrow
   {
     PangoFontset* _cretval;
     _cretval = pango_font_map_load_fontset(cast(PangoFontMap*)this._cPtr, context ? cast(PangoContext*)context._cPtr(No.Dup) : null, desc ? cast(const(PangoFontDescription)*)desc._cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);
@@ -228,7 +228,7 @@ class FontMap : gobject.object.ObjectWrap, gio.list_model.ListModel
         variations = font variations to use
       Returns: the modified font
   */
-  pango.font.Font reloadFont(pango.font.Font font, double scale, pango.context.Context context = null, string variations = null)
+  pango.font.Font reloadFont(pango.font.Font font, double scale, pango.context.Context context = null, string variations = null) nothrow
   {
     PangoFont* _cretval;
     const(char)* _variations = variations.toCString(No.Alloc);
@@ -252,7 +252,7 @@ final class FontMapGidBuilder : FontMapGidBuilderImpl!FontMapGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FontMap build()
+  FontMap build() nothrow
   {
     return new FontMap(cast(void*)createGObject(FontMap._getGType), No.Take);
   }

@@ -17,11 +17,8 @@ class WindowAttr
   GdkWindowAttr _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.window_attr.WindowAttr");
-
     _cInstance = *cast(GdkWindowAttr*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class WindowAttr
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class WindowAttr
       Get `title` field.
       Returns: title of the window (for toplevel windows)
   */
-  @property string title()
+  @property string title() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).title);
   }
@@ -48,7 +45,7 @@ class WindowAttr
       Params:
         propval = title of the window (for toplevel windows)
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).title);
     dToC(propval, cast(void*)&(cast(GdkWindowAttr*)this._cPtr).title);
@@ -58,7 +55,7 @@ class WindowAttr
       Get `eventMask` field.
       Returns: event mask (see [gdk.window.Window.setEvents])
   */
-  @property int eventMask()
+  @property int eventMask() nothrow
   {
     return (cast(GdkWindowAttr*)this._cPtr).eventMask;
   }
@@ -68,7 +65,7 @@ class WindowAttr
       Params:
         propval = event mask (see [gdk.window.Window.setEvents])
   */
-  @property void eventMask(int propval)
+  @property void eventMask(int propval) nothrow
   {
     (cast(GdkWindowAttr*)this._cPtr).eventMask = propval;
   }
@@ -77,7 +74,7 @@ class WindowAttr
       Get `x` field.
       Returns: X coordinate relative to parent window (see [gdk.window.Window.move])
   */
-  @property int x()
+  @property int x() nothrow
   {
     return (cast(GdkWindowAttr*)this._cPtr).x;
   }
@@ -87,7 +84,7 @@ class WindowAttr
       Params:
         propval = X coordinate relative to parent window (see [gdk.window.Window.move])
   */
-  @property void x(int propval)
+  @property void x(int propval) nothrow
   {
     (cast(GdkWindowAttr*)this._cPtr).x = propval;
   }
@@ -96,7 +93,7 @@ class WindowAttr
       Get `y` field.
       Returns: Y coordinate relative to parent window (see [gdk.window.Window.move])
   */
-  @property int y()
+  @property int y() nothrow
   {
     return (cast(GdkWindowAttr*)this._cPtr).y;
   }
@@ -106,7 +103,7 @@ class WindowAttr
       Params:
         propval = Y coordinate relative to parent window (see [gdk.window.Window.move])
   */
-  @property void y(int propval)
+  @property void y(int propval) nothrow
   {
     (cast(GdkWindowAttr*)this._cPtr).y = propval;
   }
@@ -115,7 +112,7 @@ class WindowAttr
       Get `width` field.
       Returns: width of window
   */
-  @property int width()
+  @property int width() nothrow
   {
     return (cast(GdkWindowAttr*)this._cPtr).width;
   }
@@ -125,7 +122,7 @@ class WindowAttr
       Params:
         propval = width of window
   */
-  @property void width(int propval)
+  @property void width(int propval) nothrow
   {
     (cast(GdkWindowAttr*)this._cPtr).width = propval;
   }
@@ -134,7 +131,7 @@ class WindowAttr
       Get `height` field.
       Returns: height of window
   */
-  @property int height()
+  @property int height() nothrow
   {
     return (cast(GdkWindowAttr*)this._cPtr).height;
   }
@@ -144,7 +141,7 @@ class WindowAttr
       Params:
         propval = height of window
   */
-  @property void height(int propval)
+  @property void height(int propval) nothrow
   {
     (cast(GdkWindowAttr*)this._cPtr).height = propval;
   }
@@ -154,7 +151,7 @@ class WindowAttr
       Returns: #GDK_INPUT_OUTPUT (normal window) or #GDK_INPUT_ONLY (invisible
          window that receives events)
   */
-  @property gdk.types.WindowWindowClass wclass()
+  @property gdk.types.WindowWindowClass wclass() nothrow
   {
     return cast(gdk.types.WindowWindowClass)(cast(GdkWindowAttr*)this._cPtr).wclass;
   }
@@ -165,7 +162,7 @@ class WindowAttr
         propval = #GDK_INPUT_OUTPUT (normal window) or #GDK_INPUT_ONLY (invisible
            window that receives events)
   */
-  @property void wclass(gdk.types.WindowWindowClass propval)
+  @property void wclass(gdk.types.WindowWindowClass propval) nothrow
   {
     (cast(GdkWindowAttr*)this._cPtr).wclass = cast(GdkWindowWindowClass)propval;
   }
@@ -174,7 +171,7 @@ class WindowAttr
       Get `visual` field.
       Returns: #GdkVisual for window
   */
-  @property gdk.visual.Visual visual()
+  @property gdk.visual.Visual visual() nothrow
   {
     return cToD!(gdk.visual.Visual)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).visual);
   }
@@ -184,7 +181,7 @@ class WindowAttr
       Params:
         propval = #GdkVisual for window
   */
-  @property void visual(gdk.visual.Visual propval)
+  @property void visual(gdk.visual.Visual propval) nothrow
   {
     cValueFree!(gdk.visual.Visual)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).visual);
     dToC(propval, cast(void*)&(cast(GdkWindowAttr*)this._cPtr).visual);
@@ -194,7 +191,7 @@ class WindowAttr
       Get `windowType` field.
       Returns: type of window
   */
-  @property gdk.types.WindowType windowType()
+  @property gdk.types.WindowType windowType() nothrow
   {
     return cast(gdk.types.WindowType)(cast(GdkWindowAttr*)this._cPtr).windowType;
   }
@@ -204,7 +201,7 @@ class WindowAttr
       Params:
         propval = type of window
   */
-  @property void windowType(gdk.types.WindowType propval)
+  @property void windowType(gdk.types.WindowType propval) nothrow
   {
     (cast(GdkWindowAttr*)this._cPtr).windowType = cast(GdkWindowType)propval;
   }
@@ -213,7 +210,7 @@ class WindowAttr
       Get `cursor` field.
       Returns: cursor for the window (see [gdk.window.Window.setCursor])
   */
-  @property gdk.cursor.Cursor cursor()
+  @property gdk.cursor.Cursor cursor() nothrow
   {
     return cToD!(gdk.cursor.Cursor)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).cursor);
   }
@@ -223,7 +220,7 @@ class WindowAttr
       Params:
         propval = cursor for the window (see [gdk.window.Window.setCursor])
   */
-  @property void cursor(gdk.cursor.Cursor propval)
+  @property void cursor(gdk.cursor.Cursor propval) nothrow
   {
     cValueFree!(gdk.cursor.Cursor)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).cursor);
     dToC(propval, cast(void*)&(cast(GdkWindowAttr*)this._cPtr).cursor);
@@ -233,7 +230,7 @@ class WindowAttr
       Get `wmclassName` field.
       Returns: don’t use (see [gtk.window.Window.setWmclass])
   */
-  @property string wmclassName()
+  @property string wmclassName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).wmclassName);
   }
@@ -243,7 +240,7 @@ class WindowAttr
       Params:
         propval = don’t use (see [gtk.window.Window.setWmclass])
   */
-  @property void wmclassName(string propval)
+  @property void wmclassName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).wmclassName);
     dToC(propval, cast(void*)&(cast(GdkWindowAttr*)this._cPtr).wmclassName);
@@ -253,7 +250,7 @@ class WindowAttr
       Get `wmclassClass` field.
       Returns: don’t use (see [gtk.window.Window.setWmclass])
   */
-  @property string wmclassClass()
+  @property string wmclassClass() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).wmclassClass);
   }
@@ -263,7 +260,7 @@ class WindowAttr
       Params:
         propval = don’t use (see [gtk.window.Window.setWmclass])
   */
-  @property void wmclassClass(string propval)
+  @property void wmclassClass(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).wmclassClass);
     dToC(propval, cast(void*)&(cast(GdkWindowAttr*)this._cPtr).wmclassClass);
@@ -273,7 +270,7 @@ class WindowAttr
       Get `overrideRedirect` field.
       Returns: true to bypass the window manager
   */
-  @property bool overrideRedirect()
+  @property bool overrideRedirect() nothrow
   {
     return cast(bool)(cast(GdkWindowAttr*)this._cPtr).overrideRedirect;
   }
@@ -283,7 +280,7 @@ class WindowAttr
       Params:
         propval = true to bypass the window manager
   */
-  @property void overrideRedirect(bool propval)
+  @property void overrideRedirect(bool propval) nothrow
   {
     (cast(GdkWindowAttr*)this._cPtr).overrideRedirect = propval;
   }
@@ -292,7 +289,7 @@ class WindowAttr
       Get `typeHint` field.
       Returns: a hint of the function of the window
   */
-  @property gdk.types.WindowTypeHint typeHint()
+  @property gdk.types.WindowTypeHint typeHint() nothrow
   {
     return cast(gdk.types.WindowTypeHint)(cast(GdkWindowAttr*)this._cPtr).typeHint;
   }
@@ -302,7 +299,7 @@ class WindowAttr
       Params:
         propval = a hint of the function of the window
   */
-  @property void typeHint(gdk.types.WindowTypeHint propval)
+  @property void typeHint(gdk.types.WindowTypeHint propval) nothrow
   {
     (cast(GdkWindowAttr*)this._cPtr).typeHint = cast(GdkWindowTypeHint)propval;
   }

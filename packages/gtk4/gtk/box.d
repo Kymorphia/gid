@@ -57,26 +57,26 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_box_get_type != &gidSymbolNotFound ? gtk_box_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Box self()
+  override Box self() nothrow
   {
     return this;
   }
@@ -85,7 +85,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
       Get builder for [gtk.box.Box]
       Returns: New builder object
   */
-  static BoxGidBuilder builder()
+  static BoxGidBuilder builder() nothrow
   {
     return new BoxGidBuilder;
   }
@@ -94,7 +94,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
       Get `baselineChild` property.
       Returns: The child that determines the baseline, in vertical orientation.
   */
-  @property int baselineChild()
+  @property int baselineChild() nothrow
   {
     return getBaselineChild();
   }
@@ -104,7 +104,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         propval = The child that determines the baseline, in vertical orientation.
   */
-  @property void baselineChild(int propval)
+  @property void baselineChild(int propval) nothrow
   {
     setBaselineChild(propval);
   }
@@ -113,7 +113,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
       Get `baselinePosition` property.
       Returns: The position of the baseline aligned widgets if extra space is available.
   */
-  @property gtk.types.BaselinePosition baselinePosition()
+  @property gtk.types.BaselinePosition baselinePosition() nothrow
   {
     return getBaselinePosition();
   }
@@ -123,7 +123,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         propval = The position of the baseline aligned widgets if extra space is available.
   */
-  @property void baselinePosition(gtk.types.BaselinePosition propval)
+  @property void baselinePosition(gtk.types.BaselinePosition propval) nothrow
   {
     setBaselinePosition(propval);
   }
@@ -132,7 +132,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
       Get `homogeneous` property.
       Returns: Whether the children should all be the same size.
   */
-  @property bool homogeneous()
+  @property bool homogeneous() nothrow
   {
     return getHomogeneous();
   }
@@ -142,7 +142,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         propval = Whether the children should all be the same size.
   */
-  @property void homogeneous(bool propval)
+  @property void homogeneous(bool propval) nothrow
   {
     setHomogeneous(propval);
   }
@@ -151,7 +151,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
       Get `spacing` property.
       Returns: The amount of space between children.
   */
-  @property int spacing()
+  @property int spacing() nothrow
   {
     return getSpacing();
   }
@@ -161,7 +161,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         propval = The amount of space between children.
   */
-  @property void spacing(int propval)
+  @property void spacing(int propval) nothrow
   {
     setSpacing(propval);
   }
@@ -176,7 +176,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
         spacing = the number of pixels to place by default between children
       Returns: a new [gtk.box.Box].
   */
-  this(gtk.types.Orientation orientation, int spacing)
+  this(gtk.types.Orientation orientation, int spacing) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_box_new(orientation, spacing);
@@ -189,7 +189,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         child = the [gtk.widget.Widget] to append
   */
-  void append(gtk.widget.Widget child)
+  void append(gtk.widget.Widget child) nothrow
   {
     gtk_box_append(cast(GtkBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -198,7 +198,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
       Gets the value set by [gtk.box.Box.setBaselineChild].
       Returns: the baseline child
   */
-  int getBaselineChild()
+  int getBaselineChild() nothrow
   {
     int _retval;
     _retval = gtk_box_get_baseline_child(cast(GtkBox*)this._cPtr);
@@ -209,7 +209,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
       Gets the value set by [gtk.box.Box.setBaselinePosition].
       Returns: the baseline position
   */
-  gtk.types.BaselinePosition getBaselinePosition()
+  gtk.types.BaselinePosition getBaselinePosition() nothrow
   {
     GtkBaselinePosition _cretval;
     _cretval = gtk_box_get_baseline_position(cast(GtkBox*)this._cPtr);
@@ -222,7 +222,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
       same size).
       Returns: true if the box is homogeneous.
   */
-  bool getHomogeneous()
+  bool getHomogeneous() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_box_get_homogeneous(cast(GtkBox*)this._cPtr);
@@ -233,7 +233,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
       Gets the value set by [gtk.box.Box.setSpacing].
       Returns: spacing between children
   */
-  int getSpacing()
+  int getSpacing() nothrow
   {
     int _retval;
     _retval = gtk_box_get_spacing(cast(GtkBox*)this._cPtr);
@@ -250,7 +250,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
         child = the [gtk.widget.Widget] to insert
         sibling = the sibling after which to insert child
   */
-  void insertChildAfter(gtk.widget.Widget child, gtk.widget.Widget sibling = null)
+  void insertChildAfter(gtk.widget.Widget child, gtk.widget.Widget sibling = null) nothrow
   {
     gtk_box_insert_child_after(cast(GtkBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling._cPtr(No.Dup) : null);
   }
@@ -261,7 +261,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         child = the [gtk.widget.Widget] to prepend
   */
-  void prepend(gtk.widget.Widget child)
+  void prepend(gtk.widget.Widget child) nothrow
   {
     gtk_box_prepend(cast(GtkBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -276,7 +276,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         child = the child to remove
   */
-  void remove(gtk.widget.Widget child)
+  void remove(gtk.widget.Widget child) nothrow
   {
     gtk_box_remove(cast(GtkBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -291,7 +291,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
         child = the [gtk.widget.Widget] to move, must be a child of box
         sibling = the sibling to move child after
   */
-  void reorderChildAfter(gtk.widget.Widget child, gtk.widget.Widget sibling = null)
+  void reorderChildAfter(gtk.widget.Widget child, gtk.widget.Widget sibling = null) nothrow
   {
     gtk_box_reorder_child_after(cast(GtkBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling._cPtr(No.Dup) : null);
   }
@@ -304,7 +304,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         child = a child, or -1
   */
-  void setBaselineChild(int child)
+  void setBaselineChild(int child) nothrow
   {
     gtk_box_set_baseline_child(cast(GtkBox*)this._cPtr, child);
   }
@@ -321,7 +321,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         position = a [gtk.types.BaselinePosition]
   */
-  void setBaselinePosition(gtk.types.BaselinePosition position)
+  void setBaselinePosition(gtk.types.BaselinePosition position) nothrow
   {
     gtk_box_set_baseline_position(cast(GtkBox*)this._cPtr, position);
   }
@@ -334,7 +334,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
         homogeneous = a boolean value, true to create equal allotments,
             false for variable allotments
   */
-  void setHomogeneous(bool homogeneous)
+  void setHomogeneous(bool homogeneous) nothrow
   {
     gtk_box_set_homogeneous(cast(GtkBox*)this._cPtr, homogeneous);
   }
@@ -345,7 +345,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         spacing = the number of pixels to put between children
   */
-  void setSpacing(int spacing)
+  void setSpacing(int spacing) nothrow
   {
     gtk_box_set_spacing(cast(GtkBox*)this._cPtr, spacing);
   }
@@ -363,7 +363,7 @@ class BoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.O
         propval = The child that determines the baseline, in vertical orientation.
       Returns: Builder instance for fluent chaining
   */
-  T baselineChild(int propval)
+  T baselineChild(int propval) nothrow
   {
     return setProperty("baseline-child", propval);
   }
@@ -374,7 +374,7 @@ class BoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.O
         propval = The position of the baseline aligned widgets if extra space is available.
       Returns: Builder instance for fluent chaining
   */
-  T baselinePosition(gtk.types.BaselinePosition propval)
+  T baselinePosition(gtk.types.BaselinePosition propval) nothrow
   {
     return setProperty("baseline-position", propval);
   }
@@ -385,7 +385,7 @@ class BoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.O
         propval = Whether the children should all be the same size.
       Returns: Builder instance for fluent chaining
   */
-  T homogeneous(bool propval)
+  T homogeneous(bool propval) nothrow
   {
     return setProperty("homogeneous", propval);
   }
@@ -396,7 +396,7 @@ class BoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.O
         propval = The amount of space between children.
       Returns: Builder instance for fluent chaining
   */
-  T spacing(int propval)
+  T spacing(int propval) nothrow
   {
     return setProperty("spacing", propval);
   }
@@ -409,7 +409,7 @@ final class BoxGidBuilder : BoxGidBuilderImpl!BoxGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Box build()
+  Box build() nothrow
   {
     return new Box(cast(void*)createGObject(Box._getGType), No.Take);
   }

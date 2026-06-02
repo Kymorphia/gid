@@ -38,32 +38,32 @@ class Path : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_path_get_type != &gidSymbolNotFound ? gsk_path_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Path self()
+  override Path self() nothrow
   {
     return this;
   }
@@ -89,14 +89,21 @@ class Path : gobject.boxed.Boxed
         func = the function to call for operations
       Returns: `FALSE` if func returned FALSE`, `TRUE` otherwise.
   */
-  bool foreach_(gsk.types.PathForeachFlags flags, gsk.types.PathForeachFunc func)
+  bool foreach_(gsk.types.PathForeachFlags flags, gsk.types.PathForeachFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(GskPathOperation op, const(graphene_point_t)* pts, size_t nPts, float weight, void* userData)
+    extern(C) gboolean _funcCallback(GskPathOperation op, const(graphene_point_t)* pts, size_t nPts, float weight, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gsk.types.PathForeachFunc*)userData;
 
-      _dretval = (*_dlg)(op, *cast(graphene.point.Point*)pts, nPts, weight);
+      try
+      {
+        _dretval = (*_dlg)(op, *cast(graphene.point.Point*)pts, nPts, weight);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gsk.types.PathForeachFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -129,7 +136,7 @@ class Path : gobject.boxed.Boxed
       Returns: `TRUE` if the path has bounds, `FALSE` if the path is known
           to be empty and have no bounds.
   */
-  bool getBounds(out graphene.rect.Rect bounds)
+  bool getBounds(out graphene.rect.Rect bounds) nothrow
   {
     bool _retval;
     graphene_rect_t _bounds;
@@ -153,7 +160,7 @@ class Path : gobject.boxed.Boxed
       Returns: `TRUE` if the path has bounds, `FALSE` if the path is known
           to be empty and have no bounds.
   */
-  bool getStrokeBounds(gsk.stroke.Stroke stroke, out graphene.rect.Rect bounds)
+  bool getStrokeBounds(gsk.stroke.Stroke stroke, out graphene.rect.Rect bounds) nothrow
   {
     bool _retval;
     graphene_rect_t _bounds;
@@ -175,7 +182,7 @@ class Path : gobject.boxed.Boxed
         fillRule = the fill rule to follow
       Returns: `TRUE` if point is inside
   */
-  bool inFill(graphene.point.Point point, gsk.types.FillRule fillRule)
+  bool inFill(graphene.point.Point point, gsk.types.FillRule fillRule) nothrow
   {
     bool _retval;
     _retval = cast(bool)gsk_path_in_fill(cast(GskPath*)this._cPtr, cast(const(graphene_point_t)*)&point, fillRule);
@@ -187,7 +194,7 @@ class Path : gobject.boxed.Boxed
       contour.
       Returns: `TRUE` if the path is closed
   */
-  bool isClosed()
+  bool isClosed() nothrow
   {
     bool _retval;
     _retval = cast(bool)gsk_path_is_closed(cast(GskPath*)this._cPtr);
@@ -198,7 +205,7 @@ class Path : gobject.boxed.Boxed
       Checks if the path is empty, i.e. contains no lines or curves.
       Returns: `TRUE` if the path is empty
   */
-  bool isEmpty()
+  bool isEmpty() nothrow
   {
     bool _retval;
     _retval = cast(bool)gsk_path_is_empty(cast(GskPath*)this._cPtr);
@@ -216,7 +223,7 @@ class Path : gobject.boxed.Boxed
       Params:
         string_ = The string to print into
   */
-  void print(glib.string_.String string_)
+  void print(glib.string_.String string_) nothrow
   {
     gsk_path_print(cast(GskPath*)this._cPtr, string_ ? cast(GString*)string_._cPtr(No.Dup) : null);
   }
@@ -234,7 +241,7 @@ class Path : gobject.boxed.Boxed
       Params:
         cr = a cairo context
   */
-  void toCairo(cairo.context.Context cr)
+  void toCairo(cairo.context.Context cr) nothrow
   {
     gsk_path_to_cairo(cast(GskPath*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null);
   }
@@ -249,7 +256,7 @@ class Path : gobject.boxed.Boxed
       for details.
       Returns: A new string for self
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gsk_path_to_string(cast(GskPath*)this._cPtr);
@@ -288,7 +295,7 @@ class Path : gobject.boxed.Boxed
         string_ = a string
       Returns: a new [gsk.path.Path], or `NULL` if string could not be parsed
   */
-  static gsk.path.Path parse(string string_)
+  static gsk.path.Path parse(string string_) nothrow
   {
     GskPath* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);

@@ -16,26 +16,26 @@ class SharedTaskPool : gst.task_pool.TaskPool
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_shared_task_pool_get_type != &gidSymbolNotFound ? gst_shared_task_pool_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SharedTaskPool self()
+  override SharedTaskPool self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class SharedTaskPool : gst.task_pool.TaskPool
       Get builder for [gst.shared_task_pool.SharedTaskPool]
       Returns: New builder object
   */
-  static SharedTaskPoolGidBuilder builder()
+  static SharedTaskPoolGidBuilder builder() nothrow
   {
     return new SharedTaskPoolGidBuilder;
   }
@@ -58,7 +58,7 @@ class SharedTaskPool : gst.task_pool.TaskPool
       would cause obvious deadlocks if they happen to share the same thread.
       Returns: a new #GstSharedTaskPool. [gst.object.ObjectWrap.unref] after usage.
   */
-  this()
+  this() nothrow
   {
     GstTaskPool* _cretval;
     _cretval = gst_shared_task_pool_new();
@@ -66,7 +66,7 @@ class SharedTaskPool : gst.task_pool.TaskPool
   }
 
   /** */
-  uint getMaxThreads()
+  uint getMaxThreads() nothrow
   {
     uint _retval;
     _retval = gst_shared_task_pool_get_max_threads(cast(GstSharedTaskPool*)this._cPtr);
@@ -83,7 +83,7 @@ class SharedTaskPool : gst.task_pool.TaskPool
       Params:
         maxThreads = Maximum number of threads to spawn.
   */
-  void setMaxThreads(uint maxThreads)
+  void setMaxThreads(uint maxThreads) nothrow
   {
     gst_shared_task_pool_set_max_threads(cast(GstSharedTaskPool*)this._cPtr, maxThreads);
   }
@@ -101,7 +101,7 @@ final class SharedTaskPoolGidBuilder : SharedTaskPoolGidBuilderImpl!SharedTaskPo
       Create object from builder.
       Returns: New object
   */
-  SharedTaskPool build()
+  SharedTaskPool build() nothrow
   {
     return new SharedTaskPool(cast(void*)createGObject(SharedTaskPool._getGType), Yes.Take);
   }

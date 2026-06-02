@@ -36,26 +36,26 @@ class PixbufAnimation : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_pixbuf_animation_get_type != &gidSymbolNotFound ? gdk_pixbuf_animation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PixbufAnimation self()
+  override PixbufAnimation self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class PixbufAnimation : gobject.object.ObjectWrap
       Get builder for [gdkpixbuf.pixbuf_animation.PixbufAnimation]
       Returns: New builder object
   */
-  static PixbufAnimationGidBuilder builder()
+  static PixbufAnimationGidBuilder builder() nothrow
   {
     return new PixbufAnimationGidBuilder;
   }
@@ -186,14 +186,21 @@ class PixbufAnimation : gobject.object.ObjectWrap
         cancellable = optional #GCancellable object
         callback = a [gio.types.AsyncReadyCallback] to call when the pixbuf is loaded
   */
-  static void newFromStreamAsync(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  static void newFromStreamAsync(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -204,7 +211,7 @@ class PixbufAnimation : gobject.object.ObjectWrap
       Queries the height of the bounding box of a pixbuf animation.
       Returns: Height of the bounding box of the animation.
   */
-  int getHeight()
+  int getHeight() nothrow
   {
     int _retval;
     _retval = gdk_pixbuf_animation_get_height(cast(GdkPixbufAnimation*)this._cPtr);
@@ -251,7 +258,7 @@ class PixbufAnimation : gobject.object.ObjectWrap
         startTime = time when the animation starts playing
       Returns: an iterator to move over the animation
   */
-  gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter getIter(glib.time_val.TimeVal startTime)
+  gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter getIter(glib.time_val.TimeVal startTime) nothrow
   {
     GdkPixbufAnimationIter* _cretval;
     _cretval = gdk_pixbuf_animation_get_iter(cast(GdkPixbufAnimation*)this._cPtr, cast(const(GTimeVal)*)&startTime);
@@ -273,7 +280,7 @@ class PixbufAnimation : gobject.object.ObjectWrap
       return `NULL`.
       Returns: unanimated image representing the animation
   */
-  gdkpixbuf.pixbuf.Pixbuf getStaticImage()
+  gdkpixbuf.pixbuf.Pixbuf getStaticImage() nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gdk_pixbuf_animation_get_static_image(cast(GdkPixbufAnimation*)this._cPtr);
@@ -285,7 +292,7 @@ class PixbufAnimation : gobject.object.ObjectWrap
       Queries the width of the bounding box of a pixbuf animation.
       Returns: Width of the bounding box of the animation.
   */
-  int getWidth()
+  int getWidth() nothrow
   {
     int _retval;
     _retval = gdk_pixbuf_animation_get_width(cast(GdkPixbufAnimation*)this._cPtr);
@@ -301,7 +308,7 @@ class PixbufAnimation : gobject.object.ObjectWrap
       the image.
       Returns: `TRUE` if the "animation" was really just an image
   */
-  bool isStaticImage()
+  bool isStaticImage() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_pixbuf_animation_is_static_image(cast(GdkPixbufAnimation*)this._cPtr);
@@ -321,7 +328,7 @@ final class PixbufAnimationGidBuilder : PixbufAnimationGidBuilderImpl!PixbufAnim
       Create object from builder.
       Returns: New object
   */
-  PixbufAnimation build()
+  PixbufAnimation build() nothrow
   {
     return new PixbufAnimation(cast(void*)createGObject(PixbufAnimation._getGType), No.Take);
   }

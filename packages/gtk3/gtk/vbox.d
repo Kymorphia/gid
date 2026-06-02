@@ -46,26 +46,26 @@ class VBox : gtk.box.Box
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_vbox_get_type != &gidSymbolNotFound ? gtk_vbox_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VBox self()
+  override VBox self() nothrow
   {
     return this;
   }
@@ -74,7 +74,7 @@ class VBox : gtk.box.Box
       Get builder for [gtk.vbox.VBox]
       Returns: New builder object
   */
-  static VBoxGidBuilder builder()
+  static VBoxGidBuilder builder() nothrow
   {
     return new VBoxGidBuilder;
   }
@@ -90,7 +90,7 @@ class VBox : gtk.box.Box
       Deprecated: You should use [gtk.box.Box.new_] with a [gtk.types.Orientation.Vertical]
           #GtkOrientable:orientation instead
   */
-  this(bool homogeneous, int spacing)
+  this(bool homogeneous, int spacing) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_vbox_new(homogeneous, spacing);
@@ -111,7 +111,7 @@ final class VBoxGidBuilder : VBoxGidBuilderImpl!VBoxGidBuilder
       Create object from builder.
       Returns: New object
   */
-  VBox build()
+  VBox build() nothrow
   {
     return new VBox(cast(void*)createGObject(VBox._getGType), No.Take);
   }

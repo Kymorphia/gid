@@ -18,26 +18,26 @@ class MenuLinkIter : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_menu_link_iter_get_type != &gidSymbolNotFound ? g_menu_link_iter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MenuLinkIter self()
+  override MenuLinkIter self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class MenuLinkIter : gobject.object.ObjectWrap
       Get builder for [gio.menu_link_iter.MenuLinkIter]
       Returns: New builder object
   */
-  static MenuLinkIterGidBuilder builder()
+  static MenuLinkIterGidBuilder builder() nothrow
   {
     return new MenuLinkIterGidBuilder;
   }
@@ -57,7 +57,7 @@ class MenuLinkIter : gobject.object.ObjectWrap
       The iterator is not advanced.
       Returns: the type of the link
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_menu_link_iter_get_name(cast(GMenuLinkIter*)this._cPtr);
@@ -86,7 +86,7 @@ class MenuLinkIter : gobject.object.ObjectWrap
         value = the linked #GMenuModel
       Returns: true on success, or false if there is no additional link
   */
-  bool getNext(out string outLink, out gio.menu_model.MenuModel value)
+  bool getNext(out string outLink, out gio.menu_model.MenuModel value) nothrow
   {
     bool _retval;
     char* _outLink;
@@ -103,7 +103,7 @@ class MenuLinkIter : gobject.object.ObjectWrap
       The iterator is not advanced.
       Returns: the #GMenuModel that is linked to
   */
-  gio.menu_model.MenuModel getValue()
+  gio.menu_model.MenuModel getValue() nothrow
   {
     GMenuModel* _cretval;
     _cretval = g_menu_link_iter_get_value(cast(GMenuLinkIter*)this._cPtr);
@@ -122,7 +122,7 @@ class MenuLinkIter : gobject.object.ObjectWrap
       at all).
       Returns: true on success, or false when there are no more links
   */
-  bool next()
+  bool next() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_menu_link_iter_next(cast(GMenuLinkIter*)this._cPtr);
@@ -142,7 +142,7 @@ final class MenuLinkIterGidBuilder : MenuLinkIterGidBuilderImpl!MenuLinkIterGidB
       Create object from builder.
       Returns: New object
   */
-  MenuLinkIter build()
+  MenuLinkIter build() nothrow
   {
     return new MenuLinkIter(cast(void*)createGObject(MenuLinkIter._getGType), No.Take);
   }

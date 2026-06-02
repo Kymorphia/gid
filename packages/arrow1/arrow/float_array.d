@@ -16,26 +16,26 @@ class FloatArray : arrow.numeric_array.NumericArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_float_array_get_type != &gidSymbolNotFound ? garrow_float_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FloatArray self()
+  override FloatArray self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class FloatArray : arrow.numeric_array.NumericArray
       Get builder for [arrow.float_array.FloatArray]
       Returns: New builder object
   */
-  static FloatArrayGidBuilder builder()
+  static FloatArrayGidBuilder builder() nothrow
   {
     return new FloatArrayGidBuilder;
   }
 
   /** */
-  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
+  this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls) nothrow
   {
     GArrowFloatArray* _cretval;
     _cretval = garrow_float_array_new(length, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
@@ -58,7 +58,7 @@ class FloatArray : arrow.numeric_array.NumericArray
   }
 
   /** */
-  float getValue(long i)
+  float getValue(long i) nothrow
   {
     float _retval;
     _retval = garrow_float_array_get_value(cast(GArrowFloatArray*)this._cPtr, i);
@@ -66,7 +66,7 @@ class FloatArray : arrow.numeric_array.NumericArray
   }
 
   /** */
-  float[] getValues()
+  float[] getValues() nothrow
   {
     const(float)* _cretval;
     long _cretlength;
@@ -104,7 +104,7 @@ final class FloatArrayGidBuilder : FloatArrayGidBuilderImpl!FloatArrayGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FloatArray build()
+  FloatArray build() nothrow
   {
     return new FloatArray(cast(void*)createGObject(FloatArray._getGType), Yes.Take);
   }

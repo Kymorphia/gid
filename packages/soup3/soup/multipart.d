@@ -28,32 +28,32 @@ class Multipart : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_multipart_get_type != &gidSymbolNotFound ? soup_multipart_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Multipart self()
+  override Multipart self() nothrow
   {
     return this;
   }
@@ -70,7 +70,7 @@ class Multipart : gobject.boxed.Boxed
         mimeType = the MIME type of the multipart to create.
       Returns: a new empty #SoupMultipart of the given mime_type
   */
-  this(string mimeType)
+  this(string mimeType) nothrow
   {
     SoupMultipart* _cretval;
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
@@ -87,7 +87,7 @@ class Multipart : gobject.boxed.Boxed
       Returns: a new #SoupMultipart (or null if the
           message couldn't be parsed or wasn't multipart).
   */
-  static soup.multipart.Multipart newFromMessage(soup.message_headers.MessageHeaders headers, glib.bytes.Bytes body_)
+  static soup.multipart.Multipart newFromMessage(soup.message_headers.MessageHeaders headers, glib.bytes.Bytes body_) nothrow
   {
     SoupMultipart* _cretval;
     _cretval = soup_multipart_new_from_message(headers ? cast(SoupMessageHeaders*)headers._cPtr(No.Dup) : null, body_ ? cast(GBytes*)body_._cPtr(No.Dup) : null);
@@ -106,7 +106,7 @@ class Multipart : gobject.boxed.Boxed
         contentType = the MIME type of the file, or null if not known
         body_ = the file data
   */
-  void appendFormFile(string controlName, string filename, string contentType, glib.bytes.Bytes body_)
+  void appendFormFile(string controlName, string filename, string contentType, glib.bytes.Bytes body_) nothrow
   {
     const(char)* _controlName = controlName.toCString(No.Alloc);
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -123,7 +123,7 @@ class Multipart : gobject.boxed.Boxed
         controlName = the name of the control associated with data
         data = the body data
   */
-  void appendFormString(string controlName, string data)
+  void appendFormString(string controlName, string data) nothrow
   {
     const(char)* _controlName = controlName.toCString(No.Alloc);
     const(char)* _data = data.toCString(No.Alloc);
@@ -141,7 +141,7 @@ class Multipart : gobject.boxed.Boxed
         headers = the MIME part headers
         body_ = the MIME part body
   */
-  void appendPart(soup.message_headers.MessageHeaders headers, glib.bytes.Bytes body_)
+  void appendPart(soup.message_headers.MessageHeaders headers, glib.bytes.Bytes body_) nothrow
   {
     soup_multipart_append_part(cast(SoupMultipart*)this._cPtr, headers ? cast(SoupMessageHeaders*)headers._cPtr(No.Dup) : null, body_ ? cast(GBytes*)body_._cPtr(No.Dup) : null);
   }
@@ -150,7 +150,7 @@ class Multipart : gobject.boxed.Boxed
       Gets the number of body parts in multipart.
       Returns: the number of body parts in multipart
   */
-  int getLength()
+  int getLength() nothrow
   {
     int _retval;
     _retval = soup_multipart_get_length(cast(SoupMultipart*)this._cPtr);
@@ -169,7 +169,7 @@ class Multipart : gobject.boxed.Boxed
       Returns: true on success, false if part is out of range (in
           which case headers and body won't be set)
   */
-  bool getPart(int part, out soup.message_headers.MessageHeaders headers, out glib.bytes.Bytes body_)
+  bool getPart(int part, out soup.message_headers.MessageHeaders headers, out glib.bytes.Bytes body_) nothrow
   {
     bool _retval;
     SoupMessageHeaders* _headers;
@@ -187,7 +187,7 @@ class Multipart : gobject.boxed.Boxed
         destHeaders = the headers of the HTTP message to serialize multipart to
         destBody = the body of the HTTP message to serialize multipart to
   */
-  void toMessage(soup.message_headers.MessageHeaders destHeaders, out glib.bytes.Bytes destBody)
+  void toMessage(soup.message_headers.MessageHeaders destHeaders, out glib.bytes.Bytes destBody) nothrow
   {
     GBytes* _destBody;
     soup_multipart_to_message(cast(SoupMultipart*)this._cPtr, destHeaders ? cast(SoupMessageHeaders*)destHeaders._cPtr(No.Dup) : null, &_destBody);

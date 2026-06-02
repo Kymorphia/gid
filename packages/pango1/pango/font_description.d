@@ -20,32 +20,32 @@ class FontDescription : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_font_description_get_type != &gidSymbolNotFound ? pango_font_description_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FontDescription self()
+  override FontDescription self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class FontDescription : gobject.boxed.Boxed
       Returns: the newly allocated [pango.font_description.FontDescription],
           which should be freed using [pango.font_description.FontDescription.free].
   */
-  this()
+  this() nothrow
   {
     PangoFontDescription* _cretval;
     _cretval = pango_font_description_new();
@@ -80,7 +80,7 @@ class FontDescription : gobject.boxed.Boxed
         newMatch = a [pango.font_description.FontDescription]
       Returns: true if new_match is a better match
   */
-  bool betterMatch(pango.font_description.FontDescription oldMatch, pango.font_description.FontDescription newMatch)
+  bool betterMatch(pango.font_description.FontDescription oldMatch, pango.font_description.FontDescription newMatch) nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_font_description_better_match(cast(const(PangoFontDescription)*)this._cPtr, oldMatch ? cast(const(PangoFontDescription)*)oldMatch._cPtr(No.Dup) : null, newMatch ? cast(const(PangoFontDescription)*)newMatch._cPtr(No.Dup) : null);
@@ -93,7 +93,7 @@ class FontDescription : gobject.boxed.Boxed
           which should be freed with [pango.font_description.FontDescription.free],
           or null if desc was null.
   */
-  pango.font_description.FontDescription copy()
+  pango.font_description.FontDescription copy() nothrow
   {
     PangoFontDescription* _cretval;
     _cretval = pango_font_description_copy(cast(const(PangoFontDescription)*)this._cPtr);
@@ -113,7 +113,7 @@ class FontDescription : gobject.boxed.Boxed
           which should be freed with [pango.font_description.FontDescription.free],
           or null if desc was null.
   */
-  pango.font_description.FontDescription copyStatic()
+  pango.font_description.FontDescription copyStatic() nothrow
   {
     PangoFontDescription* _cretval;
     _cretval = pango_font_description_copy_static(cast(const(PangoFontDescription)*)this._cPtr);
@@ -134,7 +134,7 @@ class FontDescription : gobject.boxed.Boxed
       Returns: true if the two font descriptions are identical,
           false otherwise.
   */
-  bool equal(pango.font_description.FontDescription desc2)
+  bool equal(pango.font_description.FontDescription desc2) nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_font_description_equal(cast(const(PangoFontDescription)*)this._cPtr, desc2 ? cast(const(PangoFontDescription)*)desc2._cPtr(No.Dup) : null);
@@ -149,7 +149,7 @@ class FontDescription : gobject.boxed.Boxed
           font description, or null if not previously set. This has the same
           life-time as the font description itself and should not be freed.
   */
-  string getFamily()
+  string getFamily() nothrow
   {
     const(char)* _cretval;
     _cretval = pango_font_description_get_family(cast(const(PangoFontDescription)*)this._cPtr);
@@ -165,7 +165,7 @@ class FontDescription : gobject.boxed.Boxed
           Use [pango.font_description.FontDescription.getSetFields] to find out
           if the field was explicitly set or not.
   */
-  pango.types.Gravity getGravity()
+  pango.types.Gravity getGravity() nothrow
   {
     PangoGravity _cretval;
     _cretval = pango_font_description_get_gravity(cast(const(PangoFontDescription)*)this._cPtr);
@@ -178,7 +178,7 @@ class FontDescription : gobject.boxed.Boxed
       Returns: a bitmask with bits set corresponding to the
           fields in desc that have been set.
   */
-  pango.types.FontMask getSetFields()
+  pango.types.FontMask getSetFields() nothrow
   {
     PangoFontMask _cretval;
     _cretval = pango_font_description_get_set_fields(cast(const(PangoFontDescription)*)this._cPtr);
@@ -198,7 +198,7 @@ class FontDescription : gobject.boxed.Boxed
           Use [pango.font_description.FontDescription.getSetFields] to find out
           if the field was explicitly set or not.
   */
-  int getSize()
+  int getSize() nothrow
   {
     int _retval;
     _retval = pango_font_description_get_size(cast(const(PangoFontDescription)*)this._cPtr);
@@ -216,7 +216,7 @@ class FontDescription : gobject.boxed.Boxed
           to find out if the size field of the font description was explicitly
           set or not.
   */
-  bool getSizeIsAbsolute()
+  bool getSizeIsAbsolute() nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_font_description_get_size_is_absolute(cast(const(PangoFontDescription)*)this._cPtr);
@@ -231,7 +231,7 @@ class FontDescription : gobject.boxed.Boxed
           Use [pango.font_description.FontDescription.getSetFields] to find
           out if the field was explicitly set or not.
   */
-  pango.types.Stretch getStretch()
+  pango.types.Stretch getStretch() nothrow
   {
     PangoStretch _cretval;
     _cretval = pango_font_description_get_stretch(cast(const(PangoFontDescription)*)this._cPtr);
@@ -247,7 +247,7 @@ class FontDescription : gobject.boxed.Boxed
           Use [pango.font_description.FontDescription.getSetFields] to
           find out if the field was explicitly set or not.
   */
-  pango.types.Style getStyle()
+  pango.types.Style getStyle() nothrow
   {
     PangoStyle _cretval;
     _cretval = pango_font_description_get_style(cast(const(PangoFontDescription)*)this._cPtr);
@@ -263,7 +263,7 @@ class FontDescription : gobject.boxed.Boxed
           Use [pango.font_description.FontDescription.getSetFields] to find
           out if the field was explicitly set or not.
   */
-  pango.types.Variant getVariant()
+  pango.types.Variant getVariant() nothrow
   {
     PangoVariant _cretval;
     _cretval = pango_font_description_get_variant(cast(const(PangoFontDescription)*)this._cPtr);
@@ -279,7 +279,7 @@ class FontDescription : gobject.boxed.Boxed
           description, or null if not previously set. This has the same
           life-time as the font description itself and should not be freed.
   */
-  string getVariations()
+  string getVariations() nothrow
   {
     const(char)* _cretval;
     _cretval = pango_font_description_get_variations(cast(const(PangoFontDescription)*)this._cPtr);
@@ -295,7 +295,7 @@ class FontDescription : gobject.boxed.Boxed
           Use [pango.font_description.FontDescription.getSetFields] to find
           out if the field was explicitly set or not.
   */
-  pango.types.Weight getWeight()
+  pango.types.Weight getWeight() nothrow
   {
     PangoWeight _cretval;
     _cretval = pango_font_description_get_weight(cast(const(PangoFontDescription)*)this._cPtr);
@@ -310,7 +310,7 @@ class FontDescription : gobject.boxed.Boxed
       to [glib.hash_table.HashTable.new_]. The hash value is independent of desc->mask.
       Returns: the hash value.
   */
-  uint hash()
+  uint hash() nothrow
   {
     uint _retval;
     _retval = pango_font_description_hash(cast(const(PangoFontDescription)*)this._cPtr);
@@ -334,7 +334,7 @@ class FontDescription : gobject.boxed.Boxed
             corresponding values from desc_to_merge, even if they
             are already exist.
   */
-  void merge(pango.font_description.FontDescription descToMerge, bool replaceExisting)
+  void merge(pango.font_description.FontDescription descToMerge, bool replaceExisting) nothrow
   {
     pango_font_description_merge(cast(PangoFontDescription*)this._cPtr, descToMerge ? cast(const(PangoFontDescription)*)descToMerge._cPtr(No.Dup) : null, replaceExisting);
   }
@@ -354,7 +354,7 @@ class FontDescription : gobject.boxed.Boxed
             corresponding values from desc_to_merge, even if they
             are already exist.
   */
-  void mergeStatic(pango.font_description.FontDescription descToMerge, bool replaceExisting)
+  void mergeStatic(pango.font_description.FontDescription descToMerge, bool replaceExisting) nothrow
   {
     pango_font_description_merge_static(cast(PangoFontDescription*)this._cPtr, descToMerge ? cast(const(PangoFontDescription)*)descToMerge._cPtr(No.Dup) : null, replaceExisting);
   }
@@ -370,7 +370,7 @@ class FontDescription : gobject.boxed.Boxed
             in one device unit. For an output backend where a device unit is a pixel,
             a size value of 10 * PANGO_SCALE gives a 10 pixel font.
   */
-  void setAbsoluteSize(double size)
+  void setAbsoluteSize(double size) nothrow
   {
     pango_font_description_set_absolute_size(cast(PangoFontDescription*)this._cPtr, size);
   }
@@ -387,7 +387,7 @@ class FontDescription : gobject.boxed.Boxed
       Params:
         family = a string representing the family name.
   */
-  void setFamily(string family)
+  void setFamily(string family) nothrow
   {
     const(char)* _family = family.toCString(No.Alloc);
     pango_font_description_set_family(cast(PangoFontDescription*)this._cPtr, _family);
@@ -405,7 +405,7 @@ class FontDescription : gobject.boxed.Boxed
       Params:
         family = a string representing the family name
   */
-  void setFamilyStatic(string family)
+  void setFamilyStatic(string family) nothrow
   {
     const(char)* _family = family.toCString(No.Alloc);
     pango_font_description_set_family_static(cast(PangoFontDescription*)this._cPtr, _family);
@@ -425,7 +425,7 @@ class FontDescription : gobject.boxed.Boxed
       Params:
         gravity = the gravity for the font description.
   */
-  void setGravity(pango.types.Gravity gravity)
+  void setGravity(pango.types.Gravity gravity) nothrow
   {
     pango_font_description_set_gravity(cast(PangoFontDescription*)this._cPtr, gravity);
   }
@@ -446,7 +446,7 @@ class FontDescription : gobject.boxed.Boxed
             Use [pango.font_description.FontDescription.setAbsoluteSize] if you need
             a particular size in device units.
   */
-  void setSize(int size)
+  void setSize(int size) nothrow
   {
     pango_font_description_set_size(cast(PangoFontDescription*)this._cPtr, size);
   }
@@ -460,7 +460,7 @@ class FontDescription : gobject.boxed.Boxed
       Params:
         stretch = the stretch for the font description
   */
-  void setStretch(pango.types.Stretch stretch)
+  void setStretch(pango.types.Stretch stretch) nothrow
   {
     pango_font_description_set_stretch(cast(PangoFontDescription*)this._cPtr, stretch);
   }
@@ -480,7 +480,7 @@ class FontDescription : gobject.boxed.Boxed
       Params:
         style = the style for the font description
   */
-  void setStyle(pango.types.Style style)
+  void setStyle(pango.types.Style style) nothrow
   {
     pango_font_description_set_style(cast(PangoFontDescription*)this._cPtr, style);
   }
@@ -494,7 +494,7 @@ class FontDescription : gobject.boxed.Boxed
       Params:
         variant = the variant type for the font description.
   */
-  void setVariant(pango.types.Variant variant)
+  void setVariant(pango.types.Variant variant) nothrow
   {
     pango_font_description_set_variant(cast(PangoFontDescription*)this._cPtr, variant);
   }
@@ -520,7 +520,7 @@ class FontDescription : gobject.boxed.Boxed
       Params:
         variations = a string representing the variations
   */
-  void setVariations(string variations = null)
+  void setVariations(string variations = null) nothrow
   {
     const(char)* _variations = variations.toCString(No.Alloc);
     pango_font_description_set_variations(cast(PangoFontDescription*)this._cPtr, _variations);
@@ -539,7 +539,7 @@ class FontDescription : gobject.boxed.Boxed
       Params:
         variations = a string representing the variations
   */
-  void setVariationsStatic(string variations)
+  void setVariationsStatic(string variations) nothrow
   {
     const(char)* _variations = variations.toCString(No.Alloc);
     pango_font_description_set_variations_static(cast(PangoFontDescription*)this._cPtr, _variations);
@@ -556,7 +556,7 @@ class FontDescription : gobject.boxed.Boxed
       Params:
         weight = the weight for the font description.
   */
-  void setWeight(pango.types.Weight weight)
+  void setWeight(pango.types.Weight weight) nothrow
   {
     pango_font_description_set_weight(cast(PangoFontDescription*)this._cPtr, weight);
   }
@@ -570,7 +570,7 @@ class FontDescription : gobject.boxed.Boxed
       lower case only.
       Returns: a new string that must be freed with [glib.global.gfree].
   */
-  string toFilename()
+  string toFilename() nothrow
   {
     char* _cretval;
     _cretval = pango_font_description_to_filename(cast(const(PangoFontDescription)*)this._cPtr);
@@ -587,7 +587,7 @@ class FontDescription : gobject.boxed.Boxed
       the last word of the list is a valid style option.
       Returns: a new string that must be freed with [glib.global.gfree].
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = pango_font_description_to_string(cast(const(PangoFontDescription)*)this._cPtr);
@@ -603,7 +603,7 @@ class FontDescription : gobject.boxed.Boxed
       Params:
         toUnset = bitmask of fields in the desc to unset.
   */
-  void unsetFields(pango.types.FontMask toUnset)
+  void unsetFields(pango.types.FontMask toUnset) nothrow
   {
     pango_font_description_unset_fields(cast(PangoFontDescription*)this._cPtr, toUnset);
   }
@@ -658,7 +658,7 @@ class FontDescription : gobject.boxed.Boxed
         str = string representation of a font description.
       Returns: a new [pango.font_description.FontDescription].
   */
-  static pango.font_description.FontDescription fromString(string str)
+  static pango.font_description.FontDescription fromString(string str) nothrow
   {
     PangoFontDescription* _cretval;
     const(char)* _str = str.toCString(No.Alloc);

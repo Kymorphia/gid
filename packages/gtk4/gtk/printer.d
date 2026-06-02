@@ -27,26 +27,26 @@ class Printer : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_printer_get_type != &gidSymbolNotFound ? gtk_printer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Printer self()
+  override Printer self() nothrow
   {
     return this;
   }
@@ -55,7 +55,7 @@ class Printer : gobject.object.ObjectWrap
       Get builder for [gtk.printer.Printer]
       Returns: New builder object
   */
-  static PrinterGidBuilder builder()
+  static PrinterGidBuilder builder() nothrow
   {
     return new PrinterGidBuilder;
   }
@@ -64,7 +64,7 @@ class Printer : gobject.object.ObjectWrap
       Get `acceptingJobs` property.
       Returns: true if the printer is accepting jobs.
   */
-  @property bool acceptingJobs()
+  @property bool acceptingJobs() nothrow
   {
     return isAcceptingJobs();
   }
@@ -73,7 +73,7 @@ class Printer : gobject.object.ObjectWrap
       Get `iconName` property.
       Returns: Icon name to use for the printer.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return getIconName();
   }
@@ -82,7 +82,7 @@ class Printer : gobject.object.ObjectWrap
       Get `jobCount` property.
       Returns: Number of jobs queued in the printer.
   */
-  @property int jobCount()
+  @property int jobCount() nothrow
   {
     return getJobCount();
   }
@@ -91,7 +91,7 @@ class Printer : gobject.object.ObjectWrap
       Get `location` property.
       Returns: Information about the location of the printer.
   */
-  @property string location()
+  @property string location() nothrow
   {
     return getLocation();
   }
@@ -100,7 +100,7 @@ class Printer : gobject.object.ObjectWrap
       Get `name` property.
       Returns: The name of the printer.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return getName();
   }
@@ -112,7 +112,7 @@ class Printer : gobject.object.ObjectWrap
         A paused printer still accepts jobs, but it does
         not print them.
   */
-  @property bool paused()
+  @property bool paused() nothrow
   {
     return isPaused();
   }
@@ -121,7 +121,7 @@ class Printer : gobject.object.ObjectWrap
       Get `stateMessage` property.
       Returns: String giving the current status of the printer.
   */
-  @property string stateMessage()
+  @property string stateMessage() nothrow
   {
     return getStateMessage();
   }
@@ -135,7 +135,7 @@ class Printer : gobject.object.ObjectWrap
         virtual = whether the printer is virtual
       Returns: a new [gtk.printer.Printer]
   */
-  this(string name, gtk.types.PrintBackend backend, bool virtual)
+  this(string name, gtk.types.PrintBackend backend, bool virtual) nothrow
   {
     GtkPrinter* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -148,7 +148,7 @@ class Printer : gobject.object.ObjectWrap
       PDF format.
       Returns: true if printer accepts PDF
   */
-  bool acceptsPdf()
+  bool acceptsPdf() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_printer_accepts_pdf(cast(GtkPrinter*)this._cPtr);
@@ -160,7 +160,7 @@ class Printer : gobject.object.ObjectWrap
       PostScript format.
       Returns: true if printer accepts PostScript
   */
-  bool acceptsPs()
+  bool acceptsPs() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_printer_accepts_ps(cast(GtkPrinter*)this._cPtr);
@@ -175,7 +175,7 @@ class Printer : gobject.object.ObjectWrap
       Returns: 0 if the printer match, a negative value if `a` < `b`,
           or a positive value if `a` > `b`
   */
-  int compare(gtk.printer.Printer b)
+  int compare(gtk.printer.Printer b) nothrow
   {
     int _retval;
     _retval = gtk_printer_compare(cast(GtkPrinter*)this._cPtr, b ? cast(GtkPrinter*)b._cPtr(No.Dup) : null);
@@ -186,7 +186,7 @@ class Printer : gobject.object.ObjectWrap
       Returns the backend of the printer.
       Returns: the backend of printer
   */
-  gtk.types.PrintBackend getBackend()
+  gtk.types.PrintBackend getBackend() nothrow
   {
     auto _retval = gtk_printer_get_backend(cast(GtkPrinter*)this._cPtr);
     return _retval;
@@ -204,7 +204,7 @@ class Printer : gobject.object.ObjectWrap
       [gtk.printer.Printer.requestDetails].
       Returns: the printer’s capabilities
   */
-  gtk.types.PrintCapabilities getCapabilities()
+  gtk.types.PrintCapabilities getCapabilities() nothrow
   {
     GtkPrintCapabilities _cretval;
     _cretval = gtk_printer_get_capabilities(cast(GtkPrinter*)this._cPtr);
@@ -217,7 +217,7 @@ class Printer : gobject.object.ObjectWrap
       Returns: a newly allocated [gtk.page_setup.PageSetup] with default page size
           of the printer.
   */
-  gtk.page_setup.PageSetup getDefaultPageSize()
+  gtk.page_setup.PageSetup getDefaultPageSize() nothrow
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_printer_get_default_page_size(cast(GtkPrinter*)this._cPtr);
@@ -229,7 +229,7 @@ class Printer : gobject.object.ObjectWrap
       Gets the description of the printer.
       Returns: the description of printer
   */
-  string getDescription()
+  string getDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_description(cast(GtkPrinter*)this._cPtr);
@@ -254,7 +254,7 @@ class Printer : gobject.object.ObjectWrap
         right = a location to store the right margin in
       Returns: true iff the hard margins were retrieved
   */
-  bool getHardMargins(out double top, out double bottom, out double left, out double right)
+  bool getHardMargins(out double top, out double bottom, out double left, out double right) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_printer_get_hard_margins(cast(GtkPrinter*)this._cPtr, cast(double*)&top, cast(double*)&bottom, cast(double*)&left, cast(double*)&right);
@@ -279,7 +279,7 @@ class Printer : gobject.object.ObjectWrap
         right = a location to store the right margin in
       Returns: true iff the hard margins were retrieved
   */
-  bool getHardMarginsForPaperSize(gtk.paper_size.PaperSize paperSize, out double top, out double bottom, out double left, out double right)
+  bool getHardMarginsForPaperSize(gtk.paper_size.PaperSize paperSize, out double top, out double bottom, out double left, out double right) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_printer_get_hard_margins_for_paper_size(cast(GtkPrinter*)this._cPtr, paperSize ? cast(GtkPaperSize*)paperSize._cPtr(No.Dup) : null, cast(double*)&top, cast(double*)&bottom, cast(double*)&left, cast(double*)&right);
@@ -290,7 +290,7 @@ class Printer : gobject.object.ObjectWrap
       Gets the name of the icon to use for the printer.
       Returns: the icon name for printer
   */
-  string getIconName()
+  string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_icon_name(cast(GtkPrinter*)this._cPtr);
@@ -302,7 +302,7 @@ class Printer : gobject.object.ObjectWrap
       Gets the number of jobs currently queued on the printer.
       Returns: the number of jobs on printer
   */
-  int getJobCount()
+  int getJobCount() nothrow
   {
     int _retval;
     _retval = gtk_printer_get_job_count(cast(GtkPrinter*)this._cPtr);
@@ -313,7 +313,7 @@ class Printer : gobject.object.ObjectWrap
       Returns a description of the location of the printer.
       Returns: the location of printer
   */
-  string getLocation()
+  string getLocation() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_location(cast(GtkPrinter*)this._cPtr);
@@ -325,7 +325,7 @@ class Printer : gobject.object.ObjectWrap
       Returns the name of the printer.
       Returns: the name of printer
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_name(cast(GtkPrinter*)this._cPtr);
@@ -338,7 +338,7 @@ class Printer : gobject.object.ObjectWrap
       of the printer.
       Returns: the state message of printer
   */
-  string getStateMessage()
+  string getStateMessage() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_printer_get_state_message(cast(GtkPrinter*)this._cPtr);
@@ -350,7 +350,7 @@ class Printer : gobject.object.ObjectWrap
       Returns whether the printer details are available.
       Returns: true if printer details are available
   */
-  bool hasDetails()
+  bool hasDetails() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_printer_has_details(cast(GtkPrinter*)this._cPtr);
@@ -361,7 +361,7 @@ class Printer : gobject.object.ObjectWrap
       Returns whether the printer is accepting jobs
       Returns: true if printer is accepting jobs
   */
-  bool isAcceptingJobs()
+  bool isAcceptingJobs() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_printer_is_accepting_jobs(cast(GtkPrinter*)this._cPtr);
@@ -373,7 +373,7 @@ class Printer : gobject.object.ObjectWrap
       accepts new jobs).
       Returns: true if printer is active
   */
-  bool isActive()
+  bool isActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_printer_is_active(cast(GtkPrinter*)this._cPtr);
@@ -384,7 +384,7 @@ class Printer : gobject.object.ObjectWrap
       Returns whether the printer is the default printer.
       Returns: true if printer is the default
   */
-  bool isDefault()
+  bool isDefault() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_printer_is_default(cast(GtkPrinter*)this._cPtr);
@@ -398,7 +398,7 @@ class Printer : gobject.object.ObjectWrap
       printing them.
       Returns: true if printer is paused
   */
-  bool isPaused()
+  bool isPaused() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_printer_is_paused(cast(GtkPrinter*)this._cPtr);
@@ -411,7 +411,7 @@ class Printer : gobject.object.ObjectWrap
       a CUPS class).
       Returns: true if printer is virtual
   */
-  bool isVirtual()
+  bool isVirtual() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_printer_is_virtual(cast(GtkPrinter*)this._cPtr);
@@ -427,7 +427,7 @@ class Printer : gobject.object.ObjectWrap
       Returns: a newly
           allocated list of newly allocated [gtk.page_setup.PageSetup]s.
   */
-  gtk.page_setup.PageSetup[] listPapers()
+  gtk.page_setup.PageSetup[] listPapers() nothrow
   {
     GList* _cretval;
     _cretval = gtk_printer_list_papers(cast(GtkPrinter*)this._cPtr);
@@ -442,7 +442,7 @@ class Printer : gobject.object.ObjectWrap
       [gtk.printer.Printer.detailsAcquired] signal
       will be emitted on printer.
   */
-  void requestDetails()
+  void requestDetails() nothrow
   {
     gtk_printer_request_details(cast(GtkPrinter*)this._cPtr);
   }
@@ -468,14 +468,14 @@ class Printer : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDetailsAcquired(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDetailsAcquired(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.printer.Printer)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -487,7 +487,14 @@ class Printer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.printer.Printer.detailsAcquired");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -505,7 +512,7 @@ class PrinterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The name of the printer.
       Returns: Builder instance for fluent chaining
   */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -518,7 +525,7 @@ final class PrinterGidBuilder : PrinterGidBuilderImpl!PrinterGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Printer build()
+  Printer build() nothrow
   {
     return new Printer(cast(void*)createGObject(Printer._getGType), Yes.Take);
   }

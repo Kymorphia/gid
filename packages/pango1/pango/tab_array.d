@@ -19,32 +19,32 @@ class TabArray : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_tab_array_get_type != &gidSymbolNotFound ? pango_tab_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TabArray self()
+  override TabArray self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class TabArray : gobject.boxed.Boxed
       Returns: the newly allocated [pango.tab_array.TabArray], which should
           be freed with [pango.tab_array.TabArray.free].
   */
-  this(int initialSize, bool positionsInPixels)
+  this(int initialSize, bool positionsInPixels) nothrow
   {
     PangoTabArray* _cretval;
     _cretval = pango_tab_array_new(initialSize, positionsInPixels);
@@ -73,7 +73,7 @@ class TabArray : gobject.boxed.Boxed
       Returns: the newly allocated [pango.tab_array.TabArray], which should
           be freed with [pango.tab_array.TabArray.free].
   */
-  pango.tab_array.TabArray copy()
+  pango.tab_array.TabArray copy() nothrow
   {
     PangoTabArray* _cretval;
     _cretval = pango_tab_array_copy(cast(PangoTabArray*)this._cPtr);
@@ -95,7 +95,7 @@ class TabArray : gobject.boxed.Boxed
         tabIndex = the index of a tab stop
       Returns: 
   */
-  dchar getDecimalPoint(int tabIndex)
+  dchar getDecimalPoint(int tabIndex) nothrow
   {
     dchar _retval;
     _retval = pango_tab_array_get_decimal_point(cast(PangoTabArray*)this._cPtr, tabIndex);
@@ -107,7 +107,7 @@ class TabArray : gobject.boxed.Boxed
       false if they are in Pango units.
       Returns: whether positions are in pixels.
   */
-  bool getPositionsInPixels()
+  bool getPositionsInPixels() nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_tab_array_get_positions_in_pixels(cast(PangoTabArray*)this._cPtr);
@@ -118,7 +118,7 @@ class TabArray : gobject.boxed.Boxed
       Gets the number of tab stops in tab_array.
       Returns: the number of tab stops in the array.
   */
-  int getSize()
+  int getSize() nothrow
   {
     int _retval;
     _retval = pango_tab_array_get_size(cast(PangoTabArray*)this._cPtr);
@@ -133,7 +133,7 @@ class TabArray : gobject.boxed.Boxed
         alignment = location to store alignment
         location = location to store tab position
   */
-  void getTab(int tabIndex, out pango.types.TabAlign alignment, out int location)
+  void getTab(int tabIndex, out pango.types.TabAlign alignment, out int location) nothrow
   {
     pango_tab_array_get_tab(cast(PangoTabArray*)this._cPtr, tabIndex, &alignment, cast(int*)&location);
   }
@@ -147,7 +147,7 @@ class TabArray : gobject.boxed.Boxed
       Params:
         newSize = new size of the array
   */
-  void resize(int newSize)
+  void resize(int newSize) nothrow
   {
     pango_tab_array_resize(cast(PangoTabArray*)this._cPtr, newSize);
   }
@@ -166,7 +166,7 @@ class TabArray : gobject.boxed.Boxed
         tabIndex = the index of a tab stop
         decimalPoint = the decimal point to use
   */
-  void setDecimalPoint(int tabIndex, dchar decimalPoint)
+  void setDecimalPoint(int tabIndex, dchar decimalPoint) nothrow
   {
     pango_tab_array_set_decimal_point(cast(PangoTabArray*)this._cPtr, tabIndex, decimalPoint);
   }
@@ -178,7 +178,7 @@ class TabArray : gobject.boxed.Boxed
       Params:
         positionsInPixels = whether positions are in pixels
   */
-  void setPositionsInPixels(bool positionsInPixels)
+  void setPositionsInPixels(bool positionsInPixels) nothrow
   {
     pango_tab_array_set_positions_in_pixels(cast(PangoTabArray*)this._cPtr, positionsInPixels);
   }
@@ -191,7 +191,7 @@ class TabArray : gobject.boxed.Boxed
         alignment = tab alignment
         location = tab location in Pango units
   */
-  void setTab(int tabIndex, pango.types.TabAlign alignment, int location)
+  void setTab(int tabIndex, pango.types.TabAlign alignment, int location) nothrow
   {
     pango_tab_array_set_tab(cast(PangoTabArray*)this._cPtr, tabIndex, alignment, location);
   }
@@ -199,7 +199,7 @@ class TabArray : gobject.boxed.Boxed
   /**
       Utility function to ensure that the tab stops are in increasing order.
   */
-  void sort()
+  void sort() nothrow
   {
     pango_tab_array_sort(cast(PangoTabArray*)this._cPtr);
   }
@@ -215,7 +215,7 @@ class TabArray : gobject.boxed.Boxed
       storage format.
       Returns: a newly allocated string
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = pango_tab_array_to_string(cast(PangoTabArray*)this._cPtr);
@@ -233,7 +233,7 @@ class TabArray : gobject.boxed.Boxed
         text = a string
       Returns: a new [pango.tab_array.TabArray]
   */
-  static pango.tab_array.TabArray fromString(string text)
+  static pango.tab_array.TabArray fromString(string text) nothrow
   {
     PangoTabArray* _cretval;
     const(char)* _text = text.toCString(No.Alloc);

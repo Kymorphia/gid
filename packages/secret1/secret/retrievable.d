@@ -29,7 +29,7 @@ interface Retrievable
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())secret_retrievable_get_type != &gidSymbolNotFound ? secret_retrievable_get_type() : cast(GType)0;
@@ -40,7 +40,7 @@ interface Retrievable
       Returns: The date and time (in seconds since the UNIX epoch) that this
         item was created.
   */
-  @property ulong created();
+  @property ulong created() nothrow;
 
   /**
       Set `created` property.
@@ -48,27 +48,27 @@ interface Retrievable
         propval = The date and time (in seconds since the UNIX epoch) that this
           item was created.
   */
-  @property void created(ulong propval);
+  @property void created(ulong propval) nothrow;
 
   /**
       Get `label` property.
       Returns: The human readable label for the item.
   */
-  @property string label();
+  @property string label() nothrow;
 
   /**
       Set `label` property.
       Params:
         propval = The human readable label for the item.
   */
-  @property void label(string propval);
+  @property void label(string propval) nothrow;
 
   /**
       Get `modified` property.
       Returns: The date and time (in seconds since the UNIX epoch) that this
         item was last modified.
   */
-  @property ulong modified();
+  @property ulong modified() nothrow;
 
   /**
       Set `modified` property.
@@ -76,7 +76,7 @@ interface Retrievable
         propval = The date and time (in seconds since the UNIX epoch) that this
           item was last modified.
   */
-  @property void modified(ulong propval);
+  @property void modified(ulong propval) nothrow;
 
   /**
       Get the attributes of this object.
@@ -170,7 +170,7 @@ interface RetrievableGidBuilderImpl(T)
           item was created.
       Returns: Builder instance for fluent chaining
   */
-  T created(ulong propval);
+  T created(ulong propval) nothrow;
 
   /**
       Set `label` property.
@@ -178,7 +178,7 @@ interface RetrievableGidBuilderImpl(T)
         propval = The human readable label for the item.
       Returns: Builder instance for fluent chaining
   */
-  T label(string propval);
+  T label(string propval) nothrow;
 
   /**
       Set `modified` property.
@@ -187,5 +187,5 @@ interface RetrievableGidBuilderImpl(T)
           item was last modified.
       Returns: Builder instance for fluent chaining
   */
-  T modified(ulong propval);
+  T modified(ulong propval) nothrow;
 }

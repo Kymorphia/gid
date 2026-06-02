@@ -23,7 +23,7 @@ import gsttag.types;
     Returns: TRUE if the two- or three-letter language code in lang_code
           is a valid ISO-639 language code.
 */
-bool tagCheckLanguageCode(string langCode)
+bool tagCheckLanguageCode(string langCode) nothrow
 {
   bool _retval;
   const(char)* _langCode = langCode.toCString(No.Alloc);
@@ -46,7 +46,7 @@ bool tagCheckLanguageCode(string langCode)
       envVars = a NULL-terminated string array of environment variable names, or NULL
     Returns: a newly-allocated string in UTF-8 encoding, or NULL
 */
-string tagFreeformStringToUtf8(string data, string[] envVars)
+string tagFreeformStringToUtf8(string data, string[] envVars) nothrow
 {
   char* _cretval;
   int _size;
@@ -72,7 +72,7 @@ string tagFreeformStringToUtf8(string data, string[] envVars)
       id3Tag = ID3v2 tag to convert to GStreamer tag
     Returns: The corresponding GStreamer tag or NULL if none exists.
 */
-string tagFromId3Tag(string id3Tag)
+string tagFromId3Tag(string id3Tag) nothrow
 {
   const(char)* _cretval;
   const(char)* _id3Tag = id3Tag.toCString(No.Alloc);
@@ -90,7 +90,7 @@ string tagFromId3Tag(string id3Tag)
       id3UserTag = ID3v2 user tag to convert to GStreamer tag
     Returns: The corresponding GStreamer tag or NULL if none exists.
 */
-string tagFromId3UserTag(string type, string id3UserTag)
+string tagFromId3UserTag(string type, string id3UserTag) nothrow
 {
   const(char)* _cretval;
   const(char)* _type = type.toCString(No.Alloc);
@@ -107,7 +107,7 @@ string tagFromId3UserTag(string type, string id3UserTag)
       vorbisTag = vorbiscomment tag to convert to GStreamer tag
     Returns: The corresponding GStreamer tag or NULL if none exists.
 */
-string tagFromVorbisTag(string vorbisTag)
+string tagFromVorbisTag(string vorbisTag) nothrow
 {
   const(char)* _cretval;
   const(char)* _vorbisTag = vorbisTag.toCString(No.Alloc);
@@ -124,7 +124,7 @@ string tagFromVorbisTag(string vorbisTag)
       buffer = buffer holding ID3v2 tag (or at least the start of one)
     Returns: Size of tag, or 0 if header is invalid or too small.
 */
-uint tagGetId3v2TagSize(gst.buffer.Buffer buffer)
+uint tagGetId3v2TagSize(gst.buffer.Buffer buffer) nothrow
 {
   uint _retval;
   _retval = gst_tag_get_id3v2_tag_size(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
@@ -144,7 +144,7 @@ uint tagGetId3v2TagSize(gst.buffer.Buffer buffer)
           or NULL if no mapping is known. The returned string must not be
           modified or freed.
 */
-string tagGetLanguageCodeIso6391(string langCode)
+string tagGetLanguageCodeIso6391(string langCode) nothrow
 {
   const(char)* _cretval;
   const(char)* _langCode = langCode.toCString(No.Alloc);
@@ -170,7 +170,7 @@ string tagGetLanguageCodeIso6391(string langCode)
           or NULL if no mapping is known. The returned string must not be
           modified or freed.
 */
-string tagGetLanguageCodeIso6392B(string langCode)
+string tagGetLanguageCodeIso6392B(string langCode) nothrow
 {
   const(char)* _cretval;
   const(char)* _langCode = langCode.toCString(No.Alloc);
@@ -196,7 +196,7 @@ string tagGetLanguageCodeIso6392B(string langCode)
           or NULL if no mapping is known. The returned string must not be
           modified or freed.
 */
-string tagGetLanguageCodeIso6392T(string langCode)
+string tagGetLanguageCodeIso6392T(string langCode) nothrow
 {
   const(char)* _cretval;
   const(char)* _langCode = langCode.toCString(No.Alloc);
@@ -213,7 +213,7 @@ string tagGetLanguageCodeIso6392T(string langCode)
     Returns: NULL-terminated string array with two-letter
           language codes. Free with [glib.global.strfreev] when no longer needed.
 */
-string[] tagGetLanguageCodes()
+string[] tagGetLanguageCodes() nothrow
 {
   char** _cretval;
   _cretval = gst_tag_get_language_codes();
@@ -247,7 +247,7 @@ string[] tagGetLanguageCodes()
           modified and does not need to freed; it will stay valid until the
           application is terminated.
 */
-string tagGetLanguageName(string languageCode)
+string tagGetLanguageName(string languageCode) nothrow
 {
   const(char)* _cretval;
   const(char)* _languageCode = languageCode.toCString(No.Alloc);
@@ -266,7 +266,7 @@ string tagGetLanguageName(string languageCode)
     Returns: the description of the license, or NULL if the license is unknown
          or a description is not available.
 */
-string tagGetLicenseDescription(string licenseRef)
+string tagGetLicenseDescription(string licenseRef) nothrow
 {
   const(char)* _cretval;
   const(char)* _licenseRef = licenseRef.toCString(No.Alloc);
@@ -284,7 +284,7 @@ string tagGetLicenseDescription(string licenseRef)
             e.g. "http://creativecommons.org/licenses/by-nc-nd/2.0/"
     Returns: the flags of the license, or 0 if the license is unknown
 */
-gsttag.types.TagLicenseFlags tagGetLicenseFlags(string licenseRef)
+gsttag.types.TagLicenseFlags tagGetLicenseFlags(string licenseRef) nothrow
 {
   GstTagLicenseFlags _cretval;
   const(char)* _licenseRef = licenseRef.toCString(No.Alloc);
@@ -308,7 +308,7 @@ gsttag.types.TagLicenseFlags tagGetLicenseFlags(string licenseRef)
     Returns: the jurisdiction code of the license, or NULL if the license is
          unknown or is not specific to a particular jurisdiction.
 */
-string tagGetLicenseJurisdiction(string licenseRef)
+string tagGetLicenseJurisdiction(string licenseRef) nothrow
 {
   const(char)* _cretval;
   const(char)* _licenseRef = licenseRef.toCString(No.Alloc);
@@ -326,7 +326,7 @@ string tagGetLicenseJurisdiction(string licenseRef)
             e.g. "http://creativecommons.org/licenses/by-nc-nd/2.0/"
     Returns: the nick name of the license, or NULL if the license is unknown
 */
-string tagGetLicenseNick(string licenseRef)
+string tagGetLicenseNick(string licenseRef) nothrow
 {
   const(char)* _cretval;
   const(char)* _licenseRef = licenseRef.toCString(No.Alloc);
@@ -345,7 +345,7 @@ string tagGetLicenseNick(string licenseRef)
     Returns: the title of the license, or NULL if the license is unknown or
          no title is available.
 */
-string tagGetLicenseTitle(string licenseRef)
+string tagGetLicenseTitle(string licenseRef) nothrow
 {
   const(char)* _cretval;
   const(char)* _licenseRef = licenseRef.toCString(No.Alloc);
@@ -363,7 +363,7 @@ string tagGetLicenseTitle(string licenseRef)
     Returns: the version of the license, or NULL if the license is not known or
          has no version
 */
-string tagGetLicenseVersion(string licenseRef)
+string tagGetLicenseVersion(string licenseRef) nothrow
 {
   const(char)* _cretval;
   const(char)* _licenseRef = licenseRef.toCString(No.Alloc);
@@ -380,7 +380,7 @@ string tagGetLicenseVersion(string licenseRef)
     Returns: NULL-terminated array of license strings. Free
           with [glib.global.strfreev] when no longer needed.
 */
-string[] tagGetLicenses()
+string[] tagGetLicenses() nothrow
 {
   char** _cretval;
   _cretval = gst_tag_get_licenses();
@@ -404,7 +404,7 @@ string[] tagGetLicenses()
     included.
     Returns: the number of ID3v1 genres that can be identified
 */
-uint tagId3GenreCount()
+uint tagId3GenreCount() nothrow
 {
   uint _retval;
   _retval = gst_tag_id3_genre_count();
@@ -418,7 +418,7 @@ uint tagId3GenreCount()
       id = ID of genre to query
     Returns: the genre or NULL if no genre is associated with that ID.
 */
-string tagId3GenreGet(uint id)
+string tagId3GenreGet(uint id) nothrow
 {
   const(char)* _cretval;
   _cretval = gst_tag_id3_genre_get(id);
@@ -457,7 +457,7 @@ string tagId3GenreGet(uint id)
             for preview images)
     Returns: a newly-allocated image sample for use in tag lists, or NULL
 */
-gst.sample.Sample tagImageDataToImageSample(ubyte[] imageData, gsttag.types.TagImageType imageType)
+gst.sample.Sample tagImageDataToImageSample(ubyte[] imageData, gsttag.types.TagImageType imageType) nothrow
 {
   GstSample* _cretval;
   uint _imageDataLen;
@@ -482,7 +482,7 @@ gst.sample.Sample tagImageDataToImageSample(ubyte[] imageData, gsttag.types.TagI
            the APIC frame (0 = unknown/other)
     Returns: true if the image was processed, otherwise false
 */
-bool tagListAddId3Image(gst.tag_list.TagList tagList, ubyte[] imageData, uint id3PictureType)
+bool tagListAddId3Image(gst.tag_list.TagList tagList, ubyte[] imageData, uint id3PictureType) nothrow
 {
   bool _retval;
   uint _imageDataLen;
@@ -506,7 +506,7 @@ bool tagListAddId3Image(gst.tag_list.TagList tagList, ubyte[] imageData, uint id
       baseOffset = Offset from the tiff header to this buffer
     Returns: The parsed taglist
 */
-gst.tag_list.TagList tagListFromExifBuffer(gst.buffer.Buffer buffer, int byteOrder, uint baseOffset)
+gst.tag_list.TagList tagListFromExifBuffer(gst.buffer.Buffer buffer, int byteOrder, uint baseOffset) nothrow
 {
   GstTagList* _cretval;
   _cretval = gst_tag_list_from_exif_buffer(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, byteOrder, baseOffset);
@@ -521,7 +521,7 @@ gst.tag_list.TagList tagListFromExifBuffer(gst.buffer.Buffer buffer, int byteOrd
       buffer = The exif buffer
     Returns: The taglist
 */
-gst.tag_list.TagList tagListFromExifBufferWithTiffHeader(gst.buffer.Buffer buffer)
+gst.tag_list.TagList tagListFromExifBufferWithTiffHeader(gst.buffer.Buffer buffer) nothrow
 {
   GstTagList* _cretval;
   _cretval = gst_tag_list_from_exif_buffer_with_tiff_header(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
@@ -538,7 +538,7 @@ gst.tag_list.TagList tagListFromExifBufferWithTiffHeader(gst.buffer.Buffer buffe
     Returns: A new #GstTagList with all tags that could be extracted from the
                given vorbiscomment buffer or NULL on error.
 */
-gst.tag_list.TagList tagListFromId3v2Tag(gst.buffer.Buffer buffer)
+gst.tag_list.TagList tagListFromId3v2Tag(gst.buffer.Buffer buffer) nothrow
 {
   GstTagList* _cretval;
   _cretval = gst_tag_list_from_id3v2_tag(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
@@ -558,7 +558,7 @@ gst.tag_list.TagList tagListFromId3v2Tag(gst.buffer.Buffer buffer)
     Returns: A new #GstTagList with all tags that could be extracted from the
                given vorbiscomment buffer or NULL on error.
 */
-gst.tag_list.TagList tagListFromVorbiscomment(ubyte[] data, ubyte[] idData, out string vendorString)
+gst.tag_list.TagList tagListFromVorbiscomment(ubyte[] data, ubyte[] idData, out string vendorString) nothrow
 {
   GstTagList* _cretval;
   size_t _size;
@@ -590,7 +590,7 @@ gst.tag_list.TagList tagListFromVorbiscomment(ubyte[] data, ubyte[] idData, out 
     Returns: A new #GstTagList with all tags that could be extracted from the
                given vorbiscomment buffer or NULL on error.
 */
-gst.tag_list.TagList tagListFromVorbiscommentBuffer(gst.buffer.Buffer buffer, ubyte[] idData, out string vendorString)
+gst.tag_list.TagList tagListFromVorbiscommentBuffer(gst.buffer.Buffer buffer, ubyte[] idData, out string vendorString) nothrow
 {
   GstTagList* _cretval;
   uint _idDataLength;
@@ -612,7 +612,7 @@ gst.tag_list.TagList tagListFromVorbiscommentBuffer(gst.buffer.Buffer buffer, ub
       buffer = buffer
     Returns: new taglist or null, free the list when done
 */
-gst.tag_list.TagList tagListFromXmpBuffer(gst.buffer.Buffer buffer)
+gst.tag_list.TagList tagListFromXmpBuffer(gst.buffer.Buffer buffer) nothrow
 {
   GstTagList* _cretval;
   _cretval = gst_tag_list_from_xmp_buffer(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
@@ -628,7 +628,7 @@ gst.tag_list.TagList tagListFromXmpBuffer(gst.buffer.Buffer buffer)
       data = 128 bytes of data containing the ID3v1 tag
     Returns: A new tag list or NULL if the data was not an ID3v1 tag.
 */
-gst.tag_list.TagList tagListNewFromId3v1(ubyte[] data)
+gst.tag_list.TagList tagListNewFromId3v1(ubyte[] data) nothrow
 {
   GstTagList* _cretval;
   assert(!data || data.length == 128);
@@ -648,7 +648,7 @@ gst.tag_list.TagList tagListNewFromId3v1(ubyte[] data)
       baseOffset = Offset from the tiff header first byte
     Returns: A GstBuffer containing the tag entries followed by the tag data
 */
-gst.buffer.Buffer tagListToExifBuffer(gst.tag_list.TagList taglist, int byteOrder, uint baseOffset)
+gst.buffer.Buffer tagListToExifBuffer(gst.tag_list.TagList taglist, int byteOrder, uint baseOffset) nothrow
 {
   GstBuffer* _cretval;
   _cretval = gst_tag_list_to_exif_buffer(taglist ? cast(const(GstTagList)*)taglist._cPtr(No.Dup) : null, byteOrder, baseOffset);
@@ -664,7 +664,7 @@ gst.buffer.Buffer tagListToExifBuffer(gst.tag_list.TagList taglist, int byteOrde
       taglist = The taglist
     Returns: A GstBuffer containing the data
 */
-gst.buffer.Buffer tagListToExifBufferWithTiffHeader(gst.tag_list.TagList taglist)
+gst.buffer.Buffer tagListToExifBufferWithTiffHeader(gst.tag_list.TagList taglist) nothrow
 {
   GstBuffer* _cretval;
   _cretval = gst_tag_list_to_exif_buffer_with_tiff_header(taglist ? cast(const(GstTagList)*)taglist._cPtr(No.Dup) : null);
@@ -682,7 +682,7 @@ gst.buffer.Buffer tagListToExifBufferWithTiffHeader(gst.tag_list.TagList taglist
     Returns: A new #GstBuffer containing a vorbiscomment buffer with all tags
                that could be converted from the given tag list.
 */
-gst.buffer.Buffer tagListToVorbiscommentBuffer(gst.tag_list.TagList list, ubyte[] idData, string vendorString = null)
+gst.buffer.Buffer tagListToVorbiscommentBuffer(gst.tag_list.TagList list, ubyte[] idData, string vendorString = null) nothrow
 {
   GstBuffer* _cretval;
   uint _idDataLength;
@@ -707,7 +707,7 @@ gst.buffer.Buffer tagListToVorbiscommentBuffer(gst.tag_list.TagList list, ubyte[
       schemas = null terminated array of schemas to be used on serialization
     Returns: new buffer or null, unref the buffer when done
 */
-gst.buffer.Buffer tagListToXmpBuffer(gst.tag_list.TagList list, bool readOnly, string[] schemas)
+gst.buffer.Buffer tagListToXmpBuffer(gst.tag_list.TagList list, bool readOnly, string[] schemas) nothrow
 {
   GstBuffer* _cretval;
   char*[] _tmpschemas;
@@ -738,7 +738,7 @@ gst.buffer.Buffer tagListToXmpBuffer(gst.tag_list.TagList list, bool readOnly, s
       failIfNoKey = whether to fail if strings are not in key=value form
     Returns: TRUE if the string could be parsed, otherwise FALSE
 */
-bool tagParseExtendedComment(string extComment, out string key, out string lang, out string value, bool failIfNoKey)
+bool tagParseExtendedComment(string extComment, out string key, out string lang, out string value, bool failIfNoKey) nothrow
 {
   bool _retval;
   const(char)* _extComment = extComment.toCString(No.Alloc);
@@ -757,7 +757,7 @@ bool tagParseExtendedComment(string extComment, out string key, out string lang,
     system. Plugins and applications that use these tags should call this
     function before using them. Can be called multiple times.
 */
-void tagRegisterMusicbrainzTags()
+void tagRegisterMusicbrainzTags() nothrow
 {
   gst_tag_register_musicbrainz_tags();
 }
@@ -769,7 +769,7 @@ void tagRegisterMusicbrainzTags()
       gstTag = GStreamer tag to convert to vorbiscomment tag
     Returns: The corresponding ID3v2 tag or NULL if none exists.
 */
-string tagToId3Tag(string gstTag)
+string tagToId3Tag(string gstTag) nothrow
 {
   const(char)* _cretval;
   const(char)* _gstTag = gstTag.toCString(No.Alloc);
@@ -789,7 +789,7 @@ string tagToId3Tag(string gstTag)
           key=value strings. Free with g_list_foreach (list, (GFunc) g_free, NULL)
           plus g_list_free (list)
 */
-string[] tagToVorbisComments(gst.tag_list.TagList list, string tag)
+string[] tagToVorbisComments(gst.tag_list.TagList list, string tag) nothrow
 {
   GList* _cretval;
   const(char)* _tag = tag.toCString(No.Alloc);
@@ -805,7 +805,7 @@ string[] tagToVorbisComments(gst.tag_list.TagList list, string tag)
       gstTag = GStreamer tag to convert to vorbiscomment tag
     Returns: The corresponding vorbiscomment tag or NULL if none exists.
 */
-string tagToVorbisTag(string gstTag)
+string tagToVorbisTag(string gstTag) nothrow
 {
   const(char)* _cretval;
   const(char)* _gstTag = gstTag.toCString(No.Alloc);
@@ -819,7 +819,7 @@ string tagToVorbisTag(string gstTag)
     Returns: a null terminated array of strings with the
           schema names
 */
-string[] tagXmpListSchemas()
+string[] tagXmpListSchemas() nothrow
 {
   const(char*)* _cretval;
   _cretval = gst_tag_xmp_list_schemas();
@@ -850,7 +850,7 @@ string[] tagXmpListSchemas()
       tag = a vorbiscomment tag string (key in key=value), must be valid UTF-8
       value = a vorbiscomment value string (value in key=value), must be valid UTF-8
 */
-void vorbisTagAdd(gst.tag_list.TagList list, string tag, string value)
+void vorbisTagAdd(gst.tag_list.TagList list, string tag, string value) nothrow
 {
   const(char)* _tag = tag.toCString(No.Alloc);
   const(char)* _value = value.toCString(No.Alloc);

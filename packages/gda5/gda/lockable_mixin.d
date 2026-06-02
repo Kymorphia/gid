@@ -22,7 +22,7 @@ template LockableT()
       Note: unlike [glib.mutex.Mutex.lock], this method recursive, which means a thread can lock lockable several times
       (and has to unlock it as many times to actually unlock it).
   */
-  override void lock()
+  override void lock() nothrow
   {
     gda_lockable_lock(cast(GdaLockable*)this._cPtr);
   }
@@ -37,7 +37,7 @@ template LockableT()
       (and has to unlock it as many times to actually unlock it).
       Returns: TRUE if the object has successfully been locked.
   */
-  override bool trylock()
+  override bool trylock() nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_lockable_trylock(cast(GdaLockable*)this._cPtr);
@@ -50,7 +50,7 @@ template LockableT()
       
       This function can be used even if [glib.thread.Thread.init_] has not yet been called, and, in that case, will do nothing.
   */
-  override void unlock()
+  override void unlock() nothrow
   {
     gda_lockable_unlock(cast(GdaLockable*)this._cPtr);
   }

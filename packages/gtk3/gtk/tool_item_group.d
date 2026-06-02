@@ -32,26 +32,26 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tool_item_group_get_type != &gidSymbolNotFound ? gtk_tool_item_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ToolItemGroup self()
+  override ToolItemGroup self() nothrow
   {
     return this;
   }
@@ -60,67 +60,67 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
       Get builder for [gtk.tool_item_group.ToolItemGroup]
       Returns: New builder object
   */
-  static ToolItemGroupGidBuilder builder()
+  static ToolItemGroupGidBuilder builder() nothrow
   {
     return new ToolItemGroupGidBuilder;
   }
 
   /** */
-  @property bool collapsed()
+  @property bool collapsed() nothrow
   {
     return getCollapsed();
   }
 
   /** */
-  @property void collapsed(bool propval)
+  @property void collapsed(bool propval) nothrow
   {
     setCollapsed(propval);
   }
 
   /** */
-  @property pango.types.EllipsizeMode ellipsize()
+  @property pango.types.EllipsizeMode ellipsize() nothrow
   {
     return getEllipsize();
   }
 
   /** */
-  @property void ellipsize(pango.types.EllipsizeMode propval)
+  @property void ellipsize(pango.types.EllipsizeMode propval) nothrow
   {
     setEllipsize(propval);
   }
 
   /** */
-  @property gtk.types.ReliefStyle headerRelief()
+  @property gtk.types.ReliefStyle headerRelief() nothrow
   {
     return getHeaderRelief();
   }
 
   /** */
-  @property void headerRelief(gtk.types.ReliefStyle propval)
+  @property void headerRelief(gtk.types.ReliefStyle propval) nothrow
   {
     setHeaderRelief(propval);
   }
 
   /** */
-  @property string label()
+  @property string label() nothrow
   {
     return getLabel();
   }
 
   /** */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     setLabel(propval);
   }
 
   /** */
-  @property gtk.widget.Widget labelWidget()
+  @property gtk.widget.Widget labelWidget() nothrow
   {
     return getLabelWidget();
   }
 
   /** */
-  @property void labelWidget(gtk.widget.Widget propval)
+  @property void labelWidget(gtk.widget.Widget propval) nothrow
   {
     setLabelWidget(propval);
   }
@@ -135,7 +135,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
         label = the label of the new group
       Returns: a new #GtkToolItemGroup.
   */
-  this(string label)
+  this(string label) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -147,7 +147,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
       Gets whether group is collapsed or expanded.
       Returns: true if group is collapsed, false if it is expanded
   */
-  bool getCollapsed()
+  bool getCollapsed() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tool_item_group_get_collapsed(cast(GtkToolItemGroup*)this._cPtr);
@@ -162,7 +162,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
         y = the y position
       Returns: the #GtkToolItem at position (x, y)
   */
-  gtk.tool_item.ToolItem getDropItem(int x, int y)
+  gtk.tool_item.ToolItem getDropItem(int x, int y) nothrow
   {
     GtkToolItem* _cretval;
     _cretval = gtk_tool_item_group_get_drop_item(cast(GtkToolItemGroup*)this._cPtr, x, y);
@@ -174,7 +174,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
       Gets the ellipsization mode of group.
       Returns: the #PangoEllipsizeMode of group
   */
-  pango.types.EllipsizeMode getEllipsize()
+  pango.types.EllipsizeMode getEllipsize() nothrow
   {
     PangoEllipsizeMode _cretval;
     _cretval = gtk_tool_item_group_get_ellipsize(cast(GtkToolItemGroup*)this._cPtr);
@@ -186,7 +186,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
       Gets the relief mode of the header button of group.
       Returns: the #GtkReliefStyle
   */
-  gtk.types.ReliefStyle getHeaderRelief()
+  gtk.types.ReliefStyle getHeaderRelief() nothrow
   {
     GtkReliefStyle _cretval;
     _cretval = gtk_tool_item_group_get_header_relief(cast(GtkToolItemGroup*)this._cPtr);
@@ -201,7 +201,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
         item = a #GtkToolItem
       Returns: the index of item in group or -1 if item is no child of group
   */
-  int getItemPosition(gtk.tool_item.ToolItem item)
+  int getItemPosition(gtk.tool_item.ToolItem item) nothrow
   {
     int _retval;
     _retval = gtk_tool_item_group_get_item_position(cast(GtkToolItemGroup*)this._cPtr, item ? cast(GtkToolItem*)item._cPtr(No.Dup) : null);
@@ -214,7 +214,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
             and must not be modified. Note that null is returned if a custom
             label has been set with [gtk.tool_item_group.ToolItemGroup.setLabelWidget]
   */
-  string getLabel()
+  string getLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_tool_item_group_get_label(cast(GtkToolItemGroup*)this._cPtr);
@@ -227,7 +227,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
       See [gtk.tool_item_group.ToolItemGroup.setLabelWidget].
       Returns: the label widget of group
   */
-  gtk.widget.Widget getLabelWidget()
+  gtk.widget.Widget getLabelWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_tool_item_group_get_label_widget(cast(GtkToolItemGroup*)this._cPtr);
@@ -239,7 +239,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
       Gets the number of tool items in group.
       Returns: the number of tool items in group
   */
-  uint getNItems()
+  uint getNItems() nothrow
   {
     uint _retval;
     _retval = gtk_tool_item_group_get_n_items(cast(GtkToolItemGroup*)this._cPtr);
@@ -253,7 +253,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
         index = the index
       Returns: the #GtkToolItem at index
   */
-  gtk.tool_item.ToolItem getNthItem(uint index)
+  gtk.tool_item.ToolItem getNthItem(uint index) nothrow
   {
     GtkToolItem* _cretval;
     _cretval = gtk_tool_item_group_get_nth_item(cast(GtkToolItemGroup*)this._cPtr, index);
@@ -269,7 +269,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
         position = the position of item in group, starting with 0.
               The position -1 means end of list.
   */
-  void insert(gtk.tool_item.ToolItem item, int position)
+  void insert(gtk.tool_item.ToolItem item, int position) nothrow
   {
     gtk_tool_item_group_insert(cast(GtkToolItemGroup*)this._cPtr, item ? cast(GtkToolItem*)item._cPtr(No.Dup) : null, position);
   }
@@ -280,7 +280,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
       Params:
         collapsed = whether the group should be collapsed or expanded
   */
-  void setCollapsed(bool collapsed)
+  void setCollapsed(bool collapsed) nothrow
   {
     gtk_tool_item_group_set_collapsed(cast(GtkToolItemGroup*)this._cPtr, collapsed);
   }
@@ -291,7 +291,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
       Params:
         ellipsize = the #PangoEllipsizeMode labels in group should use
   */
-  void setEllipsize(pango.types.EllipsizeMode ellipsize)
+  void setEllipsize(pango.types.EllipsizeMode ellipsize) nothrow
   {
     gtk_tool_item_group_set_ellipsize(cast(GtkToolItemGroup*)this._cPtr, ellipsize);
   }
@@ -303,7 +303,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
       Params:
         style = the #GtkReliefStyle
   */
-  void setHeaderRelief(gtk.types.ReliefStyle style)
+  void setHeaderRelief(gtk.types.ReliefStyle style) nothrow
   {
     gtk_tool_item_group_set_header_relief(cast(GtkToolItemGroup*)this._cPtr, style);
   }
@@ -317,7 +317,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
         position = the new position of item in group, starting with 0.
               The position -1 means end of list.
   */
-  void setItemPosition(gtk.tool_item.ToolItem item, int position)
+  void setItemPosition(gtk.tool_item.ToolItem item, int position) nothrow
   {
     gtk_tool_item_group_set_item_position(cast(GtkToolItemGroup*)this._cPtr, item ? cast(GtkToolItem*)item._cPtr(No.Dup) : null, position);
   }
@@ -329,7 +329,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
       Params:
         label = the new human-readable label of of the group
   */
-  void setLabel(string label)
+  void setLabel(string label) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_tool_item_group_set_label(cast(GtkToolItemGroup*)this._cPtr, _label);
@@ -343,7 +343,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
       Params:
         labelWidget = the widget to be displayed in place of the usual label
   */
-  void setLabelWidget(gtk.widget.Widget labelWidget)
+  void setLabelWidget(gtk.widget.Widget labelWidget) nothrow
   {
     gtk_tool_item_group_set_label_widget(cast(GtkToolItemGroup*)this._cPtr, labelWidget ? cast(GtkWidget*)labelWidget._cPtr(No.Dup) : null);
   }
@@ -356,31 +356,31 @@ class ToolItemGroupGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, 
   mixin ToolShellGidBuilderT!();
 
   /** */
-  T collapsed(bool propval)
+  T collapsed(bool propval) nothrow
   {
     return setProperty("collapsed", propval);
   }
 
   /** */
-  T ellipsize(pango.types.EllipsizeMode propval)
+  T ellipsize(pango.types.EllipsizeMode propval) nothrow
   {
     return setProperty("ellipsize", propval);
   }
 
   /** */
-  T headerRelief(gtk.types.ReliefStyle propval)
+  T headerRelief(gtk.types.ReliefStyle propval) nothrow
   {
     return setProperty("header-relief", propval);
   }
 
   /** */
-  T label(string propval)
+  T label(string propval) nothrow
   {
     return setProperty("label", propval);
   }
 
   /** */
-  T labelWidget(gtk.widget.Widget propval)
+  T labelWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("label-widget", propval);
   }
@@ -393,7 +393,7 @@ final class ToolItemGroupGidBuilder : ToolItemGroupGidBuilderImpl!ToolItemGroupG
       Create object from builder.
       Returns: New object
   */
-  ToolItemGroup build()
+  ToolItemGroup build() nothrow
   {
     return new ToolItemGroup(cast(void*)createGObject(ToolItemGroup._getGType), No.Take);
   }

@@ -34,26 +34,26 @@ class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_recent_chooser_widget_get_type != &gidSymbolNotFound ? gtk_recent_chooser_widget_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RecentChooserWidget self()
+  override RecentChooserWidget self() nothrow
   {
     return this;
   }
@@ -62,7 +62,7 @@ class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
       Get builder for [gtk.recent_chooser_widget.RecentChooserWidget]
       Returns: New builder object
   */
-  static RecentChooserWidgetGidBuilder builder()
+  static RecentChooserWidgetGidBuilder builder() nothrow
   {
     return new RecentChooserWidgetGidBuilder;
   }
@@ -74,7 +74,7 @@ class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
       used to access the recently used resources list.
       Returns: a new #GtkRecentChooserWidget
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_recent_chooser_widget_new();
@@ -91,7 +91,7 @@ class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
         manager = a #GtkRecentManager
       Returns: a new #GtkRecentChooserWidget
   */
-  static gtk.recent_chooser_widget.RecentChooserWidget newForManager(gtk.recent_manager.RecentManager manager)
+  static gtk.recent_chooser_widget.RecentChooserWidget newForManager(gtk.recent_manager.RecentManager manager) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_recent_chooser_widget_new_for_manager(manager ? cast(GtkRecentManager*)manager._cPtr(No.Dup) : null);
@@ -114,7 +114,7 @@ final class RecentChooserWidgetGidBuilder : RecentChooserWidgetGidBuilderImpl!Re
       Create object from builder.
       Returns: New object
   */
-  RecentChooserWidget build()
+  RecentChooserWidget build() nothrow
   {
     return new RecentChooserWidget(cast(void*)createGObject(RecentChooserWidget._getGType), No.Take);
   }

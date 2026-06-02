@@ -30,26 +30,26 @@ class VScale : gtk.scale.Scale
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_vscale_get_type != &gidSymbolNotFound ? gtk_vscale_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VScale self()
+  override VScale self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class VScale : gtk.scale.Scale
       Get builder for [gtk.vscale.VScale]
       Returns: New builder object
   */
-  static VScaleGidBuilder builder()
+  static VScaleGidBuilder builder() nothrow
   {
     return new VScaleGidBuilder;
   }
@@ -72,7 +72,7 @@ class VScale : gtk.scale.Scale
   
       Deprecated: Use [gtk.scale.Scale.new_] with [gtk.types.Orientation.Vertical] instead
   */
-  this(gtk.adjustment.Adjustment adjustment)
+  this(gtk.adjustment.Adjustment adjustment) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_vscale_new(adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
@@ -97,7 +97,7 @@ class VScale : gtk.scale.Scale
   
       Deprecated: Use [gtk.scale.Scale.newWithRange] with [gtk.types.Orientation.Vertical] instead
   */
-  static gtk.vscale.VScale newWithRange(double min, double max, double step)
+  static gtk.vscale.VScale newWithRange(double min, double max, double step) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_vscale_new_with_range(min, max, step);
@@ -119,7 +119,7 @@ final class VScaleGidBuilder : VScaleGidBuilderImpl!VScaleGidBuilder
       Create object from builder.
       Returns: New object
   */
-  VScale build()
+  VScale build() nothrow
   {
     return new VScale(cast(void*)createGObject(VScale._getGType), No.Take);
   }

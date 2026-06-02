@@ -14,26 +14,26 @@ class StringDataType : arrow.data_type.DataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_string_data_type_get_type != &gidSymbolNotFound ? garrow_string_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StringDataType self()
+  override StringDataType self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class StringDataType : arrow.data_type.DataType
       Get builder for [arrow.string_data_type.StringDataType]
       Returns: New builder object
   */
-  static StringDataTypeGidBuilder builder()
+  static StringDataTypeGidBuilder builder() nothrow
   {
     return new StringDataTypeGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowStringDataType* _cretval;
     _cretval = garrow_string_data_type_new();
@@ -68,7 +68,7 @@ final class StringDataTypeGidBuilder : StringDataTypeGidBuilderImpl!StringDataTy
       Create object from builder.
       Returns: New object
   */
-  StringDataType build()
+  StringDataType build() nothrow
   {
     return new StringDataType(cast(void*)createGObject(StringDataType._getGType), Yes.Take);
   }

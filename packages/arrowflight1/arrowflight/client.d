@@ -25,26 +25,26 @@ class Client : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_client_get_type != &gidSymbolNotFound ? gaflight_client_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Client self()
+  override Client self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class Client : gobject.object.ObjectWrap
       Get builder for [arrowflight.client.Client]
       Returns: New builder object
   */
-  static ClientGidBuilder builder()
+  static ClientGidBuilder builder() nothrow
   {
     return new ClientGidBuilder;
   }
@@ -178,7 +178,7 @@ class ClientGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T client(void* propval)
+  T client(void* propval) nothrow
   {
     return setProperty("client", propval);
   }
@@ -191,7 +191,7 @@ final class ClientGidBuilder : ClientGidBuilderImpl!ClientGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Client build()
+  Client build() nothrow
   {
     return new Client(cast(void*)createGObject(Client._getGType), Yes.Take);
   }

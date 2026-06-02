@@ -23,7 +23,7 @@ interface Window
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_window_get_type != &gidSymbolNotFound ? atk_window_get_type() : cast(GType)0;
@@ -45,7 +45,7 @@ interface Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After);
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `Create` signal.
@@ -63,7 +63,7 @@ interface Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCreate(T)(T callback, Flag!"After" after = No.After);
+  gulong connectCreate(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `Deactivate` signal.
@@ -81,7 +81,7 @@ interface Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeactivate(T)(T callback, Flag!"After" after = No.After);
+  gulong connectDeactivate(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `Destroy` signal.
@@ -99,7 +99,7 @@ interface Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDestroy(T)(T callback, Flag!"After" after = No.After);
+  gulong connectDestroy(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `Maximize` signal.
@@ -117,7 +117,7 @@ interface Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMaximize(T)(T callback, Flag!"After" after = No.After);
+  gulong connectMaximize(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `Minimize` signal.
@@ -135,7 +135,7 @@ interface Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMinimize(T)(T callback, Flag!"After" after = No.After);
+  gulong connectMinimize(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `Move` signal.
@@ -153,7 +153,7 @@ interface Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMove(T)(T callback, Flag!"After" after = No.After);
+  gulong connectMove(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `Resize` signal.
@@ -171,7 +171,7 @@ interface Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectResize(T)(T callback, Flag!"After" after = No.After);
+  gulong connectResize(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `Restore` signal.
@@ -189,7 +189,7 @@ interface Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRestore(T)(T callback, Flag!"After" after = No.After);
+  gulong connectRestore(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [atk.window.Window]

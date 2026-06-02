@@ -226,7 +226,7 @@ template TreeModelT()
         root = A [gtk.tree_path.TreePath]
       Returns: A new [gtk.tree_model.TreeModel].
   */
-  override gtk.tree_model.TreeModel filterNew(gtk.tree_path.TreePath root = null)
+  override gtk.tree_model.TreeModel filterNew(gtk.tree_path.TreePath root = null) nothrow
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_tree_model_filter_new(cast(GtkTreeModel*)this._cPtr, root ? cast(GtkTreePath*)root._cPtr(No.Dup) : null);
@@ -243,14 +243,21 @@ template TreeModelT()
       Params:
         func = a function to be called on each row
   */
-  override void foreach_(gtk.types.TreeModelForeachFunc func)
+  override void foreach_(gtk.types.TreeModelForeachFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(GtkTreeModel* model, GtkTreePath* path, GtkTreeIter* iter, void* data)
+    extern(C) gboolean _funcCallback(GtkTreeModel* model, GtkTreePath* path, GtkTreeIter* iter, void* data) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gtk.types.TreeModelForeachFunc*)data;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.TreeModelForeachFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -267,7 +274,7 @@ template TreeModelT()
         index = the column index
       Returns: the type of the column
   */
-  override gobject.types.GType getColumnType(int index)
+  override gobject.types.GType getColumnType(int index) nothrow
   {
     gobject.types.GType _retval;
     _retval = gtk_tree_model_get_column_type(cast(GtkTreeModel*)this._cPtr, index);
@@ -282,7 +289,7 @@ template TreeModelT()
       of the tree_model.
       Returns: the flags supported by this interface
   */
-  override gtk.types.TreeModelFlags getFlags()
+  override gtk.types.TreeModelFlags getFlags() nothrow
   {
     GtkTreeModelFlags _cretval;
     _cretval = gtk_tree_model_get_flags(cast(GtkTreeModel*)this._cPtr);
@@ -301,7 +308,7 @@ template TreeModelT()
         path = the [gtk.tree_path.TreePath]
       Returns: true, if iter was set
   */
-  override bool getIter(out gtk.tree_iter.TreeIter iter, gtk.tree_path.TreePath path)
+  override bool getIter(out gtk.tree_iter.TreeIter iter, gtk.tree_path.TreePath path) nothrow
   {
     bool _retval;
     GtkTreeIter _iter;
@@ -320,7 +327,7 @@ template TreeModelT()
         iter = the uninitialized [gtk.tree_iter.TreeIter]
       Returns: true, if iter was set
   */
-  override bool getIterFirst(out gtk.tree_iter.TreeIter iter)
+  override bool getIterFirst(out gtk.tree_iter.TreeIter iter) nothrow
   {
     bool _retval;
     GtkTreeIter _iter;
@@ -340,7 +347,7 @@ template TreeModelT()
         pathString = a string representation of a [gtk.tree_path.TreePath]
       Returns: true, if iter was set
   */
-  override bool getIterFromString(out gtk.tree_iter.TreeIter iter, string pathString)
+  override bool getIterFromString(out gtk.tree_iter.TreeIter iter, string pathString) nothrow
   {
     bool _retval;
     GtkTreeIter _iter;
@@ -354,7 +361,7 @@ template TreeModelT()
       Returns the number of columns supported by tree_model.
       Returns: the number of columns
   */
-  override int getNColumns()
+  override int getNColumns() nothrow
   {
     int _retval;
     _retval = gtk_tree_model_get_n_columns(cast(GtkTreeModel*)this._cPtr);
@@ -370,7 +377,7 @@ template TreeModelT()
         iter = the [gtk.tree_iter.TreeIter]
       Returns: a newly-created [gtk.tree_path.TreePath]
   */
-  override gtk.tree_path.TreePath getPath(gtk.tree_iter.TreeIter iter)
+  override gtk.tree_path.TreePath getPath(gtk.tree_iter.TreeIter iter) nothrow
   {
     GtkTreePath* _cretval;
     _cretval = gtk_tree_model_get_path(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
@@ -389,7 +396,7 @@ template TreeModelT()
         iter = a [gtk.tree_iter.TreeIter]
       Returns: a newly-allocated string
   */
-  override string getStringFromIter(gtk.tree_iter.TreeIter iter)
+  override string getStringFromIter(gtk.tree_iter.TreeIter iter) nothrow
   {
     char* _cretval;
     _cretval = gtk_tree_model_get_string_from_iter(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
@@ -408,7 +415,7 @@ template TreeModelT()
         column = the column to lookup the value at
         value = an empty [gobject.value.Value] to set
   */
-  override void getValue(gtk.tree_iter.TreeIter iter, int column, out gobject.value.Value value)
+  override void getValue(gtk.tree_iter.TreeIter iter, int column, out gobject.value.Value value) nothrow
   {
     GValue _value;
     gtk_tree_model_get_value(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, column, &_value);
@@ -430,7 +437,7 @@ template TreeModelT()
         parent = the [gtk.tree_iter.TreeIter]
       Returns: true, if iter has been set to the first child
   */
-  override bool iterChildren(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null)
+  override bool iterChildren(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null) nothrow
   {
     bool _retval;
     GtkTreeIter _iter;
@@ -446,7 +453,7 @@ template TreeModelT()
         iter = the [gtk.tree_iter.TreeIter] to test for children
       Returns: true if iter has children
   */
-  override bool iterHasChild(gtk.tree_iter.TreeIter iter)
+  override bool iterHasChild(gtk.tree_iter.TreeIter iter) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_model_iter_has_child(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
@@ -463,7 +470,7 @@ template TreeModelT()
         iter = the [gtk.tree_iter.TreeIter]
       Returns: the number of children of iter
   */
-  override int iterNChildren(gtk.tree_iter.TreeIter iter = null)
+  override int iterNChildren(gtk.tree_iter.TreeIter iter = null) nothrow
   {
     int _retval;
     _retval = gtk_tree_model_iter_n_children(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
@@ -480,7 +487,7 @@ template TreeModelT()
         iter = the [gtk.tree_iter.TreeIter]
       Returns: true if iter has been changed to the next node
   */
-  override bool iterNext(gtk.tree_iter.TreeIter iter)
+  override bool iterNext(gtk.tree_iter.TreeIter iter) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_model_iter_next(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
@@ -502,7 +509,7 @@ template TreeModelT()
         n = the index of the desired child
       Returns: true, if parent has an `n`-th child
   */
-  override bool iterNthChild(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent, int n)
+  override bool iterNthChild(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent, int n) nothrow
   {
     bool _retval;
     GtkTreeIter _iter;
@@ -527,7 +534,7 @@ template TreeModelT()
         child = the [gtk.tree_iter.TreeIter]
       Returns: true, if iter is set to the parent of child
   */
-  override bool iterParent(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter child)
+  override bool iterParent(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter child) nothrow
   {
     bool _retval;
     GtkTreeIter _iter;
@@ -546,7 +553,7 @@ template TreeModelT()
         iter = the [gtk.tree_iter.TreeIter]
       Returns: true if iter has been changed to the previous node
   */
-  override bool iterPrevious(gtk.tree_iter.TreeIter iter)
+  override bool iterPrevious(gtk.tree_iter.TreeIter iter) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_model_iter_previous(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
@@ -575,7 +582,7 @@ template TreeModelT()
       Params:
         iter = the [gtk.tree_iter.TreeIter]
   */
-  override void refNode(gtk.tree_iter.TreeIter iter)
+  override void refNode(gtk.tree_iter.TreeIter iter) nothrow
   {
     gtk_tree_model_ref_node(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
   }
@@ -589,7 +596,7 @@ template TreeModelT()
         path = a [gtk.tree_path.TreePath] pointing to the changed row
         iter = a valid [gtk.tree_iter.TreeIter] pointing to the changed row
   */
-  override void rowChanged(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter)
+  override void rowChanged(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter) nothrow
   {
     gtk_tree_model_row_changed(cast(GtkTreeModel*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
   }
@@ -610,7 +617,7 @@ template TreeModelT()
         path = a [gtk.tree_path.TreePath] pointing to the previous location of
             the deleted row
   */
-  override void rowDeleted(gtk.tree_path.TreePath path)
+  override void rowDeleted(gtk.tree_path.TreePath path) nothrow
   {
     gtk_tree_model_row_deleted(cast(GtkTreeModel*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
   }
@@ -627,7 +634,7 @@ template TreeModelT()
         path = a [gtk.tree_path.TreePath] pointing to the changed row
         iter = a valid [gtk.tree_iter.TreeIter] pointing to the changed row
   */
-  override void rowHasChildToggled(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter)
+  override void rowHasChildToggled(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter) nothrow
   {
     gtk_tree_model_row_has_child_toggled(cast(GtkTreeModel*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
   }
@@ -641,7 +648,7 @@ template TreeModelT()
         path = a [gtk.tree_path.TreePath] pointing to the inserted row
         iter = a valid [gtk.tree_iter.TreeIter] pointing to the inserted row
   */
-  override void rowInserted(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter)
+  override void rowInserted(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter) nothrow
   {
     gtk_tree_model_row_inserted(cast(GtkTreeModel*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
   }
@@ -665,7 +672,7 @@ template TreeModelT()
             position before the re-ordering,
             i.e. new_order`[newpos] = oldpos`
   */
-  override void rowsReordered(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, int[] newOrder)
+  override void rowsReordered(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, int[] newOrder) nothrow
   {
     int _length;
     if (newOrder)
@@ -688,7 +695,7 @@ template TreeModelT()
       Params:
         iter = the [gtk.tree_iter.TreeIter]
   */
-  override void unrefNode(gtk.tree_iter.TreeIter iter)
+  override void unrefNode(gtk.tree_iter.TreeIter iter) nothrow
   {
     gtk_tree_model_unref_node(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
   }
@@ -712,7 +719,7 @@ template TreeModelT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRowChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.tree_path.TreePath)))
@@ -720,7 +727,7 @@ template TreeModelT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.tree_model.TreeModel)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -735,7 +742,14 @@ template TreeModelT()
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tree_model.TreeModel.rowChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -766,14 +780,14 @@ template TreeModelT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowDeleted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRowDeleted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.tree_path.TreePath)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.tree_model.TreeModel)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -785,7 +799,14 @@ template TreeModelT()
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tree_model.TreeModel.rowDeleted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -812,7 +833,7 @@ template TreeModelT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowHasChildToggled(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRowHasChildToggled(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.tree_path.TreePath)))
@@ -820,7 +841,7 @@ template TreeModelT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.tree_model.TreeModel)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -835,7 +856,14 @@ template TreeModelT()
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tree_model.TreeModel.rowHasChildToggled");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -866,7 +894,7 @@ template TreeModelT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowInserted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRowInserted(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.tree_path.TreePath)))
@@ -874,7 +902,7 @@ template TreeModelT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.tree_model.TreeModel)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -889,7 +917,14 @@ template TreeModelT()
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.tree_model.TreeModel.rowInserted");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

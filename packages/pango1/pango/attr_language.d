@@ -18,11 +18,8 @@ class AttrLanguage
   PangoAttrLanguage _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for pango.attr_language.AttrLanguage");
-
     _cInstance = *cast(PangoAttrLanguage*)ptr;
 
     if (take)
@@ -30,7 +27,7 @@ class AttrLanguage
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class AttrLanguage
       Get `attr` field.
       Returns: the common portion of the attribute
   */
-  @property pango.attribute.Attribute attr()
+  @property pango.attribute.Attribute attr() nothrow
   {
     return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrLanguage*)this._cPtr).attr);
   }
@@ -48,7 +45,7 @@ class AttrLanguage
       Get `value` field.
       Returns: the [pango.language.Language] which is the value of the attribute
   */
-  @property pango.language.Language value()
+  @property pango.language.Language value() nothrow
   {
     return cToD!(pango.language.Language)(cast(void*)(cast(PangoAttrLanguage*)this._cPtr).value);
   }
@@ -58,7 +55,7 @@ class AttrLanguage
       Params:
         propval = the [pango.language.Language] which is the value of the attribute
   */
-  @property void value(pango.language.Language propval)
+  @property void value(pango.language.Language propval) nothrow
   {
     cValueFree!(pango.language.Language)(cast(void*)(cast(PangoAttrLanguage*)this._cPtr).value);
     dToC(propval, cast(void*)&(cast(PangoAttrLanguage*)this._cPtr).value);
@@ -73,7 +70,7 @@ class AttrLanguage
           [pango.attribute.Attribute], which should be freed with
           [pango.attribute.Attribute.destroy]
   */
-  static pango.attribute.Attribute new_(pango.language.Language language)
+  static pango.attribute.Attribute new_(pango.language.Language language) nothrow
   {
     PangoAttribute* _cretval;
     _cretval = pango_attr_language_new(language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);

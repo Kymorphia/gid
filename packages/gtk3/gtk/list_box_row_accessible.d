@@ -16,26 +16,26 @@ class ListBoxRowAccessible : gtk.container_accessible.ContainerAccessible
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_list_box_row_accessible_get_type != &gidSymbolNotFound ? gtk_list_box_row_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ListBoxRowAccessible self()
+  override ListBoxRowAccessible self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class ListBoxRowAccessible : gtk.container_accessible.ContainerAccessible
       Get builder for [gtk.list_box_row_accessible.ListBoxRowAccessible]
       Returns: New builder object
   */
-  static ListBoxRowAccessibleGidBuilder builder()
+  static ListBoxRowAccessibleGidBuilder builder() nothrow
   {
     return new ListBoxRowAccessibleGidBuilder;
   }
@@ -63,7 +63,7 @@ final class ListBoxRowAccessibleGidBuilder : ListBoxRowAccessibleGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  ListBoxRowAccessible build()
+  ListBoxRowAccessible build() nothrow
   {
     return new ListBoxRowAccessible(cast(void*)createGObject(ListBoxRowAccessible._getGType), No.Take);
   }

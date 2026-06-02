@@ -15,26 +15,26 @@ class StrptimeOptions : arrow.function_options.FunctionOptions
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_strptime_options_get_type != &gidSymbolNotFound ? garrow_strptime_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StrptimeOptions self()
+  override StrptimeOptions self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class StrptimeOptions : arrow.function_options.FunctionOptions
       Get builder for [arrow.strptime_options.StrptimeOptions]
       Returns: New builder object
   */
-  static StrptimeOptionsGidBuilder builder()
+  static StrptimeOptionsGidBuilder builder() nothrow
   {
     return new StrptimeOptionsGidBuilder;
   }
@@ -52,7 +52,7 @@ class StrptimeOptions : arrow.function_options.FunctionOptions
       Get `errorIsNull` property.
       Returns: Return null on parsing errors if true or raise if false.
   */
-  @property bool errorIsNull()
+  @property bool errorIsNull() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("error-is-null");
   }
@@ -62,7 +62,7 @@ class StrptimeOptions : arrow.function_options.FunctionOptions
       Params:
         propval = Return null on parsing errors if true or raise if false.
   */
-  @property void errorIsNull(bool propval)
+  @property void errorIsNull(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("error-is-null", propval);
   }
@@ -71,7 +71,7 @@ class StrptimeOptions : arrow.function_options.FunctionOptions
       Get `format` property.
       Returns: The desired format string.
   */
-  @property string format()
+  @property string format() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("format");
   }
@@ -81,7 +81,7 @@ class StrptimeOptions : arrow.function_options.FunctionOptions
       Params:
         propval = The desired format string.
   */
-  @property void format(string propval)
+  @property void format(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("format", propval);
   }
@@ -90,7 +90,7 @@ class StrptimeOptions : arrow.function_options.FunctionOptions
       Get `unit` property.
       Returns: The desired time resolution.
   */
-  @property arrow.types.TimeUnit unit()
+  @property arrow.types.TimeUnit unit() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.types.TimeUnit)("unit");
   }
@@ -100,13 +100,13 @@ class StrptimeOptions : arrow.function_options.FunctionOptions
       Params:
         propval = The desired time resolution.
   */
-  @property void unit(arrow.types.TimeUnit propval)
+  @property void unit(arrow.types.TimeUnit propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(arrow.types.TimeUnit)("unit", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowStrptimeOptions* _cretval;
     _cretval = garrow_strptime_options_new();
@@ -124,7 +124,7 @@ class StrptimeOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsG
         propval = Return null on parsing errors if true or raise if false.
       Returns: Builder instance for fluent chaining
   */
-  T errorIsNull(bool propval)
+  T errorIsNull(bool propval) nothrow
   {
     return setProperty("error-is-null", propval);
   }
@@ -135,7 +135,7 @@ class StrptimeOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsG
         propval = The desired format string.
       Returns: Builder instance for fluent chaining
   */
-  T format(string propval)
+  T format(string propval) nothrow
   {
     return setProperty("format", propval);
   }
@@ -146,7 +146,7 @@ class StrptimeOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsG
         propval = The desired time resolution.
       Returns: Builder instance for fluent chaining
   */
-  T unit(arrow.types.TimeUnit propval)
+  T unit(arrow.types.TimeUnit propval) nothrow
   {
     return setProperty("unit", propval);
   }
@@ -159,7 +159,7 @@ final class StrptimeOptionsGidBuilder : StrptimeOptionsGidBuilderImpl!StrptimeOp
       Create object from builder.
       Returns: New object
   */
-  StrptimeOptions build()
+  StrptimeOptions build() nothrow
   {
     return new StrptimeOptions(cast(void*)createGObject(StrptimeOptions._getGType), Yes.Take);
   }

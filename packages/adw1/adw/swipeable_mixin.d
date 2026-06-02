@@ -24,7 +24,7 @@ template SwipeableT()
       Gets the progress self will snap back to after the gesture is canceled.
       Returns: the cancel progress, unitless
   */
-  override double getCancelProgress()
+  override double getCancelProgress() nothrow
   {
     double _retval;
     _retval = adw_swipeable_get_cancel_progress(cast(AdwSwipeable*)this._cPtr);
@@ -37,7 +37,7 @@ template SwipeableT()
       This corresponds to how many pixels 1 unit represents.
       Returns: the swipe distance in pixels
   */
-  override double getDistance()
+  override double getDistance() nothrow
   {
     double _retval;
     _retval = adw_swipeable_get_distance(cast(AdwSwipeable*)this._cPtr);
@@ -48,7 +48,7 @@ template SwipeableT()
       Gets the current progress of self.
       Returns: the current progress, unitless
   */
-  override double getProgress()
+  override double getProgress() nothrow
   {
     double _retval;
     _retval = adw_swipeable_get_progress(cast(AdwSwipeable*)this._cPtr);
@@ -62,7 +62,7 @@ template SwipeableT()
       end the swipe on.
       Returns: the snap points
   */
-  override double[] getSnapPoints()
+  override double[] getSnapPoints() nothrow
   {
     double* _cretval;
     int _cretlength;
@@ -93,7 +93,7 @@ template SwipeableT()
         isDrag = whether the swipe is caused by a dragging gesture
         rect = a pointer to a rectangle to store the swipe area
   */
-  override void getSwipeArea(adw.types.NavigationDirection navigationDirection, bool isDrag, out gdk.rectangle.Rectangle rect)
+  override void getSwipeArea(adw.types.NavigationDirection navigationDirection, bool isDrag, out gdk.rectangle.Rectangle rect) nothrow
   {
     adw_swipeable_get_swipe_area(cast(AdwSwipeable*)this._cPtr, navigationDirection, isDrag, cast(GdkRectangle*)&rect);
   }

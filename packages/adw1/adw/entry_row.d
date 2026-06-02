@@ -63,26 +63,26 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_entry_row_get_type != &gidSymbolNotFound ? adw_entry_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EntryRow self()
+  override EntryRow self() nothrow
   {
     return this;
   }
@@ -91,7 +91,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Get builder for [adw.entry_row.EntryRow]
       Returns: New builder object
   */
-  static EntryRowGidBuilder builder()
+  static EntryRowGidBuilder builder() nothrow
   {
     return new EntryRowGidBuilder;
   }
@@ -100,7 +100,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Get `activatesDefault` property.
       Returns: Whether activating the embedded entry can activate the default widget.
   */
-  @property bool activatesDefault()
+  @property bool activatesDefault() nothrow
   {
     return getActivatesDefault();
   }
@@ -110,7 +110,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Params:
         propval = Whether activating the embedded entry can activate the default widget.
   */
-  @property void activatesDefault(bool propval)
+  @property void activatesDefault(bool propval) nothrow
   {
     setActivatesDefault(propval);
   }
@@ -122,7 +122,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
         The [pango.attribute.Attribute]'s `start_index` and `end_index` must refer to
         the [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
   */
-  @property pango.attr_list.AttrList attributes()
+  @property pango.attr_list.AttrList attributes() nothrow
   {
     return getAttributes();
   }
@@ -135,7 +135,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
           The [pango.attribute.Attribute]'s `start_index` and `end_index` must refer to
           the [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
   */
-  @property void attributes(pango.attr_list.AttrList propval)
+  @property void attributes(pango.attr_list.AttrList propval) nothrow
   {
     setAttributes(propval);
   }
@@ -146,7 +146,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
         
         Emoji replacement is done with :-delimited names, like `:heart:`.
   */
-  @property bool enableEmojiCompletion()
+  @property bool enableEmojiCompletion() nothrow
   {
     return getEnableEmojiCompletion();
   }
@@ -158,7 +158,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
           
           Emoji replacement is done with :-delimited names, like `:heart:`.
   */
-  @property void enableEmojiCompletion(bool propval)
+  @property void enableEmojiCompletion(bool propval) nothrow
   {
     setEnableEmojiCompletion(propval);
   }
@@ -171,7 +171,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
         
         See also: [adw.entry_row.EntryRow.inputPurpose]
   */
-  @property gtk.types.InputHints inputHints()
+  @property gtk.types.InputHints inputHints() nothrow
   {
     return getInputHints();
   }
@@ -185,7 +185,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
           
           See also: [adw.entry_row.EntryRow.inputPurpose]
   */
-  @property void inputHints(gtk.types.InputHints propval)
+  @property void inputHints(gtk.types.InputHints propval) nothrow
   {
     setInputHints(propval);
   }
@@ -196,7 +196,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
         
         The input purpose can be used by input methods to adjust their behavior.
   */
-  @property gtk.types.InputPurpose inputPurpose()
+  @property gtk.types.InputPurpose inputPurpose() nothrow
   {
     return getInputPurpose();
   }
@@ -208,7 +208,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
           
           The input purpose can be used by input methods to adjust their behavior.
   */
-  @property void inputPurpose(gtk.types.InputPurpose propval)
+  @property void inputPurpose(gtk.types.InputPurpose propval) nothrow
   {
     setInputPurpose(propval);
   }
@@ -225,7 +225,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
         operation, e.g. network activity, to avoid triggering it after typing every
         character.
   */
-  @property bool showApplyButton()
+  @property bool showApplyButton() nothrow
   {
     return getShowApplyButton();
   }
@@ -243,7 +243,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
           operation, e.g. network activity, to avoid triggering it after typing every
           character.
   */
-  @property void showApplyButton(bool propval)
+  @property void showApplyButton(bool propval) nothrow
   {
     setShowApplyButton(propval);
   }
@@ -252,7 +252,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Get `textLength` property.
       Returns: The length of the text in the entry row.
   */
-  @property uint textLength()
+  @property uint textLength() nothrow
   {
     return getTextLength();
   }
@@ -263,7 +263,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Creates a new [adw.entry_row.EntryRow].
       Returns: the newly created [adw.entry_row.EntryRow]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_entry_row_new();
@@ -276,7 +276,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Params:
         widget = a widget
   */
-  void addPrefix(gtk.widget.Widget widget)
+  void addPrefix(gtk.widget.Widget widget) nothrow
   {
     adw_entry_row_add_prefix(cast(AdwEntryRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -287,7 +287,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Params:
         widget = a widget
   */
-  void addSuffix(gtk.widget.Widget widget)
+  void addSuffix(gtk.widget.Widget widget) nothrow
   {
     adw_entry_row_add_suffix(cast(AdwEntryRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -296,7 +296,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Gets whether activating the embedded entry can activate the default widget.
       Returns: whether to activate the default widget
   */
-  bool getActivatesDefault()
+  bool getActivatesDefault() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_entry_row_get_activates_default(cast(AdwEntryRow*)this._cPtr);
@@ -307,7 +307,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Gets Pango attributes applied to the text of the embedded entry.
       Returns: the list of attributes
   */
-  pango.attr_list.AttrList getAttributes()
+  pango.attr_list.AttrList getAttributes() nothrow
   {
     PangoAttrList* _cretval;
     _cretval = adw_entry_row_get_attributes(cast(AdwEntryRow*)this._cPtr);
@@ -319,7 +319,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Gets whether to suggest emoji replacements on self.
       Returns: whether or not emoji completion is enabled
   */
-  bool getEnableEmojiCompletion()
+  bool getEnableEmojiCompletion() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_entry_row_get_enable_emoji_completion(cast(AdwEntryRow*)this._cPtr);
@@ -330,7 +330,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Gets the additional input hints of self.
       Returns: The input hints
   */
-  gtk.types.InputHints getInputHints()
+  gtk.types.InputHints getInputHints() nothrow
   {
     GtkInputHints _cretval;
     _cretval = adw_entry_row_get_input_hints(cast(AdwEntryRow*)this._cPtr);
@@ -342,7 +342,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Gets the input purpose of self.
       Returns: the input purpose
   */
-  gtk.types.InputPurpose getInputPurpose()
+  gtk.types.InputPurpose getInputPurpose() nothrow
   {
     GtkInputPurpose _cretval;
     _cretval = adw_entry_row_get_input_purpose(cast(AdwEntryRow*)this._cPtr);
@@ -354,7 +354,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Gets whether self can show the apply button.
       Returns: whether to show the apply button
   */
-  bool getShowApplyButton()
+  bool getShowApplyButton() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_entry_row_get_show_apply_button(cast(AdwEntryRow*)this._cPtr);
@@ -365,7 +365,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Retrieves the current length of the text in self.
       Returns: The current number of characters in self, or 0 if there are none.
   */
-  uint getTextLength()
+  uint getTextLength() nothrow
   {
     uint _retval;
     _retval = adw_entry_row_get_text_length(cast(AdwEntryRow*)this._cPtr);
@@ -378,7 +378,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       See [gtk.text.Text.grabFocusWithoutSelecting] for more information.
       Returns: whether the focus is now inside self
   */
-  bool grabFocusWithoutSelecting()
+  bool grabFocusWithoutSelecting() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_entry_row_grab_focus_without_selecting(cast(AdwEntryRow*)this._cPtr);
@@ -391,7 +391,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Params:
         widget = the child to be removed
   */
-  void remove(gtk.widget.Widget widget)
+  void remove(gtk.widget.Widget widget) nothrow
   {
     adw_entry_row_remove(cast(AdwEntryRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -402,7 +402,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Params:
         activates = whether to activate the default widget
   */
-  void setActivatesDefault(bool activates)
+  void setActivatesDefault(bool activates) nothrow
   {
     adw_entry_row_set_activates_default(cast(AdwEntryRow*)this._cPtr, activates);
   }
@@ -416,7 +416,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Params:
         attributes = a list of attributes
   */
-  void setAttributes(pango.attr_list.AttrList attributes = null)
+  void setAttributes(pango.attr_list.AttrList attributes = null) nothrow
   {
     adw_entry_row_set_attributes(cast(AdwEntryRow*)this._cPtr, attributes ? cast(PangoAttrList*)attributes._cPtr(No.Dup) : null);
   }
@@ -429,7 +429,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Params:
         enableEmojiCompletion = Whether emoji completion should be enabled or not
   */
-  void setEnableEmojiCompletion(bool enableEmojiCompletion)
+  void setEnableEmojiCompletion(bool enableEmojiCompletion) nothrow
   {
     adw_entry_row_set_enable_emoji_completion(cast(AdwEntryRow*)this._cPtr, enableEmojiCompletion);
   }
@@ -444,7 +444,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Params:
         hints = the hints
   */
-  void setInputHints(gtk.types.InputHints hints)
+  void setInputHints(gtk.types.InputHints hints) nothrow
   {
     adw_entry_row_set_input_hints(cast(AdwEntryRow*)this._cPtr, hints);
   }
@@ -457,7 +457,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Params:
         purpose = the purpose
   */
-  void setInputPurpose(gtk.types.InputPurpose purpose)
+  void setInputPurpose(gtk.types.InputPurpose purpose) nothrow
   {
     adw_entry_row_set_input_purpose(cast(AdwEntryRow*)this._cPtr, purpose);
   }
@@ -476,7 +476,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Params:
         showApplyButton = whether to show the apply button
   */
-  void setShowApplyButton(bool showApplyButton)
+  void setShowApplyButton(bool showApplyButton) nothrow
   {
     adw_entry_row_set_show_apply_button(cast(AdwEntryRow*)this._cPtr, showApplyButton);
   }
@@ -498,13 +498,13 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectApply(T)(T callback, Flag!"After" after = No.After)
+  gulong connectApply(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.entry_row.EntryRow)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -513,7 +513,14 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.entry_row.EntryRow.apply");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -535,13 +542,13 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEntryActivated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEntryActivated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.entry_row.EntryRow)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -550,7 +557,14 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.entry_row.EntryRow.entryActivated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -570,7 +584,7 @@ class EntryRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderIm
         propval = Whether activating the embedded entry can activate the default widget.
       Returns: Builder instance for fluent chaining
   */
-  T activatesDefault(bool propval)
+  T activatesDefault(bool propval) nothrow
   {
     return setProperty("activates-default", propval);
   }
@@ -584,7 +598,7 @@ class EntryRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderIm
           the [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
       Returns: Builder instance for fluent chaining
   */
-  T attributes(pango.attr_list.AttrList propval)
+  T attributes(pango.attr_list.AttrList propval) nothrow
   {
     return setProperty("attributes", propval);
   }
@@ -597,7 +611,7 @@ class EntryRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderIm
           Emoji replacement is done with :-delimited names, like `:heart:`.
       Returns: Builder instance for fluent chaining
   */
-  T enableEmojiCompletion(bool propval)
+  T enableEmojiCompletion(bool propval) nothrow
   {
     return setProperty("enable-emoji-completion", propval);
   }
@@ -612,7 +626,7 @@ class EntryRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderIm
           See also: [adw.entry_row.EntryRow.inputPurpose]
       Returns: Builder instance for fluent chaining
   */
-  T inputHints(gtk.types.InputHints propval)
+  T inputHints(gtk.types.InputHints propval) nothrow
   {
     return setProperty("input-hints", propval);
   }
@@ -625,7 +639,7 @@ class EntryRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderIm
           The input purpose can be used by input methods to adjust their behavior.
       Returns: Builder instance for fluent chaining
   */
-  T inputPurpose(gtk.types.InputPurpose propval)
+  T inputPurpose(gtk.types.InputPurpose propval) nothrow
   {
     return setProperty("input-purpose", propval);
   }
@@ -644,7 +658,7 @@ class EntryRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderIm
           character.
       Returns: Builder instance for fluent chaining
   */
-  T showApplyButton(bool propval)
+  T showApplyButton(bool propval) nothrow
   {
     return setProperty("show-apply-button", propval);
   }
@@ -657,7 +671,7 @@ final class EntryRowGidBuilder : EntryRowGidBuilderImpl!EntryRowGidBuilder
       Create object from builder.
       Returns: New object
   */
-  EntryRow build()
+  EntryRow build() nothrow
   {
     return new EntryRow(cast(void*)createGObject(EntryRow._getGType), No.Take);
   }

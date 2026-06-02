@@ -55,26 +55,26 @@ class RTPBaseDepayload : gst.element.Element
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_rtp_base_depayload_get_type != &gidSymbolNotFound ? gst_rtp_base_depayload_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RTPBaseDepayload self()
+  override RTPBaseDepayload self() nothrow
   {
     return this;
   }
@@ -83,7 +83,7 @@ class RTPBaseDepayload : gst.element.Element
       Get builder for [gstrtp.rtpbase_depayload.RTPBaseDepayload]
       Returns: New builder object
   */
-  static RTPBaseDepayloadGidBuilder builder()
+  static RTPBaseDepayloadGidBuilder builder() nothrow
   {
     return new RTPBaseDepayloadGidBuilder;
   }
@@ -95,7 +95,7 @@ class RTPBaseDepayload : gst.element.Element
         the need to handle these extensions manually using the
         GstRTPBaseDepayload::request-extension: signal.
   */
-  @property bool autoHeaderExtension()
+  @property bool autoHeaderExtension() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("auto-header-extension");
   }
@@ -108,7 +108,7 @@ class RTPBaseDepayload : gst.element.Element
           the need to handle these extensions manually using the
           GstRTPBaseDepayload::request-extension: signal.
   */
-  @property void autoHeaderExtension(bool propval)
+  @property void autoHeaderExtension(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("auto-header-extension", propval);
   }
@@ -120,7 +120,7 @@ class RTPBaseDepayload : gst.element.Element
         When max-reorder is set to 0 all reordered/duplicate packets are
         considered coming from a restarted sender.
   */
-  @property int maxReorder()
+  @property int maxReorder() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("max-reorder");
   }
@@ -133,7 +133,7 @@ class RTPBaseDepayload : gst.element.Element
           When max-reorder is set to 0 all reordered/duplicate packets are
           considered coming from a restarted sender.
   */
-  @property void maxReorder(int propval)
+  @property void maxReorder(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("max-reorder", propval);
   }
@@ -142,7 +142,7 @@ class RTPBaseDepayload : gst.element.Element
       Get `sourceInfo` property.
       Returns: Add RTP source information found in RTP header as meta to output buffer.
   */
-  @property bool sourceInfo()
+  @property bool sourceInfo() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("source-info");
   }
@@ -152,7 +152,7 @@ class RTPBaseDepayload : gst.element.Element
       Params:
         propval = Add RTP source information found in RTP header as meta to output buffer.
   */
-  @property void sourceInfo(bool propval)
+  @property void sourceInfo(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("source-info", propval);
   }
@@ -176,7 +176,7 @@ class RTPBaseDepayload : gst.element.Element
           * `seqnum`: #G_TYPE_UINT, the last seen seqnum
           * `timestamp`: #G_TYPE_UINT, the last seen RTP timestamp
   */
-  @property gst.structure.Structure stats()
+  @property gst.structure.Structure stats() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gst.structure.Structure)("stats");
   }
@@ -197,7 +197,7 @@ class RTPBaseDepayload : gst.element.Element
       
       Must be called with the stream lock held.
   */
-  void delayed()
+  void delayed() nothrow
   {
     gst_rtp_base_depayload_delayed(cast(GstRTPBaseDepayload*)this._cPtr);
   }
@@ -214,7 +214,7 @@ class RTPBaseDepayload : gst.element.Element
       
       Must be called with the stream lock held.
   */
-  void dropped()
+  void dropped() nothrow
   {
     gst_rtp_base_depayload_dropped(cast(GstRTPBaseDepayload*)this._cPtr);
   }
@@ -240,7 +240,7 @@ class RTPBaseDepayload : gst.element.Element
       Params:
         keepCurrent = if the current RTP buffer shall be kept
   */
-  void flush(bool keepCurrent)
+  void flush(bool keepCurrent) nothrow
   {
     gst_rtp_base_depayload_flush(cast(GstRTPBaseDepayload*)this._cPtr, keepCurrent);
   }
@@ -249,7 +249,7 @@ class RTPBaseDepayload : gst.element.Element
       Queries whether header extensions will be aggregated per depayloaded buffers.
       Returns: true if aggregate-header-extension is enabled.
   */
-  bool isAggregateHdrextEnabled()
+  bool isAggregateHdrextEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtp_base_depayload_is_aggregate_hdrext_enabled(cast(GstRTPBaseDepayload*)this._cPtr);
@@ -260,7 +260,7 @@ class RTPBaseDepayload : gst.element.Element
       Queries whether #GstRTPSourceMeta will be added to depayloaded buffers.
       Returns: true if source-info is enabled.
   */
-  bool isSourceInfoEnabled()
+  bool isSourceInfoEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtp_base_depayload_is_source_info_enabled(cast(GstRTPBaseDepayload*)this._cPtr);
@@ -278,7 +278,7 @@ class RTPBaseDepayload : gst.element.Element
         outBuf = a #GstBuffer
       Returns: a #GstFlowReturn.
   */
-  gst.types.FlowReturn push(gst.buffer.Buffer outBuf)
+  gst.types.FlowReturn push(gst.buffer.Buffer outBuf) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_rtp_base_depayload_push(cast(GstRTPBaseDepayload*)this._cPtr, outBuf ? cast(GstBuffer*)outBuf._cPtr(Yes.Dup) : null);
@@ -294,7 +294,7 @@ class RTPBaseDepayload : gst.element.Element
         outList = a #GstBufferList
       Returns: a #GstFlowReturn.
   */
-  gst.types.FlowReturn pushList(gst.buffer_list.BufferList outList)
+  gst.types.FlowReturn pushList(gst.buffer_list.BufferList outList) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_rtp_base_depayload_push_list(cast(GstRTPBaseDepayload*)this._cPtr, outList ? cast(GstBufferList*)outList._cPtr(Yes.Dup) : null);
@@ -308,7 +308,7 @@ class RTPBaseDepayload : gst.element.Element
       Params:
         enable = whether to aggregate header extensions per output buffer
   */
-  void setAggregateHdrextEnabled(bool enable)
+  void setAggregateHdrextEnabled(bool enable) nothrow
   {
     gst_rtp_base_depayload_set_aggregate_hdrext_enabled(cast(GstRTPBaseDepayload*)this._cPtr, enable);
   }
@@ -319,7 +319,7 @@ class RTPBaseDepayload : gst.element.Element
       Params:
         enable = whether to add meta about RTP sources to buffer
   */
-  void setSourceInfoEnabled(bool enable)
+  void setSourceInfoEnabled(bool enable) nothrow
   {
     gst_rtp_base_depayload_set_source_info_enabled(cast(GstRTPBaseDepayload*)this._cPtr, enable);
   }
@@ -342,14 +342,14 @@ class RTPBaseDepayload : gst.element.Element
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAddExtension(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAddExtension(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstrtp.rtpheader_extension.RTPHeaderExtension)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstrtp.rtpbase_depayload.RTPBaseDepayload)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -361,7 +361,14 @@ class RTPBaseDepayload : gst.element.Element
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstrtp.rtpbase_depayload.RTPBaseDepayload.addExtension");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -383,13 +390,13 @@ class RTPBaseDepayload : gst.element.Element
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClearExtensions(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClearExtensions(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstrtp.rtpbase_depayload.RTPBaseDepayload)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -398,7 +405,14 @@ class RTPBaseDepayload : gst.element.Element
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstrtp.rtpbase_depayload.RTPBaseDepayload.clearExtensions");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -426,7 +440,7 @@ class RTPBaseDepayload : gst.element.Element
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRequestExtension(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRequestExtension(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T : gstrtp.rtpheader_extension.RTPHeaderExtension)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -434,11 +448,12 @@ class RTPBaseDepayload : gst.element.Element
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gstrtp.rtpbase_depayload.RTPBaseDepayload)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gstrtp.rtpheader_extension.RTPHeaderExtension _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -449,7 +464,14 @@ class RTPBaseDepayload : gst.element.Element
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstrtp.rtpbase_depayload.RTPBaseDepayload.requestExtension");
+      }
 
       setVal!(gstrtp.rtpheader_extension.RTPHeaderExtension)(_returnValue, _retval);
     }
@@ -472,7 +494,7 @@ class RTPBaseDepayloadGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           GstRTPBaseDepayload::request-extension: signal.
       Returns: Builder instance for fluent chaining
   */
-  T autoHeaderExtension(bool propval)
+  T autoHeaderExtension(bool propval) nothrow
   {
     return setProperty("auto-header-extension", propval);
   }
@@ -486,7 +508,7 @@ class RTPBaseDepayloadGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           considered coming from a restarted sender.
       Returns: Builder instance for fluent chaining
   */
-  T maxReorder(int propval)
+  T maxReorder(int propval) nothrow
   {
     return setProperty("max-reorder", propval);
   }
@@ -497,7 +519,7 @@ class RTPBaseDepayloadGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
         propval = Add RTP source information found in RTP header as meta to output buffer.
       Returns: Builder instance for fluent chaining
   */
-  T sourceInfo(bool propval)
+  T sourceInfo(bool propval) nothrow
   {
     return setProperty("source-info", propval);
   }
@@ -510,7 +532,7 @@ final class RTPBaseDepayloadGidBuilder : RTPBaseDepayloadGidBuilderImpl!RTPBaseD
       Create object from builder.
       Returns: New object
   */
-  RTPBaseDepayload build()
+  RTPBaseDepayload build() nothrow
   {
     return new RTPBaseDepayload(cast(void*)createGObject(RTPBaseDepayload._getGType), No.Take);
   }

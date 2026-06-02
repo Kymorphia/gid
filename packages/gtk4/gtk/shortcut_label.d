@@ -24,26 +24,26 @@ class ShortcutLabel : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_shortcut_label_get_type != &gidSymbolNotFound ? gtk_shortcut_label_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ShortcutLabel self()
+  override ShortcutLabel self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class ShortcutLabel : gtk.widget.Widget
       Get builder for [gtk.shortcut_label.ShortcutLabel]
       Returns: New builder object
   */
-  static ShortcutLabelGidBuilder builder()
+  static ShortcutLabelGidBuilder builder() nothrow
   {
     return new ShortcutLabelGidBuilder;
   }
@@ -64,7 +64,7 @@ class ShortcutLabel : gtk.widget.Widget
         See [gtk.shortcuts_shortcut.ShortcutsShortcut.accelerator]
         for the accepted syntax.
   */
-  @property string accelerator()
+  @property string accelerator() nothrow
   {
     return getAccelerator();
   }
@@ -77,7 +77,7 @@ class ShortcutLabel : gtk.widget.Widget
           See [gtk.shortcuts_shortcut.ShortcutsShortcut.accelerator]
           for the accepted syntax.
   */
-  @property void accelerator(string propval)
+  @property void accelerator(string propval) nothrow
   {
     setAccelerator(propval);
   }
@@ -86,7 +86,7 @@ class ShortcutLabel : gtk.widget.Widget
       Get `disabledText` property.
       Returns: The text that is displayed when no accelerator is set.
   */
-  @property string disabledText()
+  @property string disabledText() nothrow
   {
     return getDisabledText();
   }
@@ -96,7 +96,7 @@ class ShortcutLabel : gtk.widget.Widget
       Params:
         propval = The text that is displayed when no accelerator is set.
   */
-  @property void disabledText(string propval)
+  @property void disabledText(string propval) nothrow
   {
     setDisabledText(propval);
   }
@@ -108,7 +108,7 @@ class ShortcutLabel : gtk.widget.Widget
         accelerator = the initial accelerator
       Returns: a newly-allocated [gtk.shortcut_label.ShortcutLabel]
   */
-  this(string accelerator)
+  this(string accelerator) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _accelerator = accelerator.toCString(No.Alloc);
@@ -120,7 +120,7 @@ class ShortcutLabel : gtk.widget.Widget
       Retrieves the current accelerator of self.
       Returns: the current accelerator.
   */
-  string getAccelerator()
+  string getAccelerator() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_shortcut_label_get_accelerator(cast(GtkShortcutLabel*)this._cPtr);
@@ -133,7 +133,7 @@ class ShortcutLabel : gtk.widget.Widget
       Returns: the current text displayed when no
         accelerator is set.
   */
-  string getDisabledText()
+  string getDisabledText() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_shortcut_label_get_disabled_text(cast(GtkShortcutLabel*)this._cPtr);
@@ -147,7 +147,7 @@ class ShortcutLabel : gtk.widget.Widget
       Params:
         accelerator = the new accelerator
   */
-  void setAccelerator(string accelerator)
+  void setAccelerator(string accelerator) nothrow
   {
     const(char)* _accelerator = accelerator.toCString(No.Alloc);
     gtk_shortcut_label_set_accelerator(cast(GtkShortcutLabel*)this._cPtr, _accelerator);
@@ -159,7 +159,7 @@ class ShortcutLabel : gtk.widget.Widget
       Params:
         disabledText = the text to be displayed when no accelerator is set
   */
-  void setDisabledText(string disabledText)
+  void setDisabledText(string disabledText) nothrow
   {
     const(char)* _disabledText = disabledText.toCString(No.Alloc);
     gtk_shortcut_label_set_disabled_text(cast(GtkShortcutLabel*)this._cPtr, _disabledText);
@@ -180,7 +180,7 @@ class ShortcutLabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           for the accepted syntax.
       Returns: Builder instance for fluent chaining
   */
-  T accelerator(string propval)
+  T accelerator(string propval) nothrow
   {
     return setProperty("accelerator", propval);
   }
@@ -191,7 +191,7 @@ class ShortcutLabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The text that is displayed when no accelerator is set.
       Returns: Builder instance for fluent chaining
   */
-  T disabledText(string propval)
+  T disabledText(string propval) nothrow
   {
     return setProperty("disabled-text", propval);
   }
@@ -204,7 +204,7 @@ final class ShortcutLabelGidBuilder : ShortcutLabelGidBuilderImpl!ShortcutLabelG
       Create object from builder.
       Returns: New object
   */
-  ShortcutLabel build()
+  ShortcutLabel build() nothrow
   {
     return new ShortcutLabel(cast(void*)createGObject(ShortcutLabel._getGType), No.Take);
   }

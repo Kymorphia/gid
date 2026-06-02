@@ -82,26 +82,26 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_check_button_get_type != &gidSymbolNotFound ? gtk_check_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CheckButton self()
+  override CheckButton self() nothrow
   {
     return this;
   }
@@ -110,7 +110,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Get builder for [gtk.check_button.CheckButton]
       Returns: New builder object
   */
-  static CheckButtonGidBuilder builder()
+  static CheckButtonGidBuilder builder() nothrow
   {
     return new CheckButtonGidBuilder;
   }
@@ -122,7 +122,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
         Setting `active` to true will add the `:checked:` state to both
         the check button and the indicator CSS node.
   */
-  @property bool active()
+  @property bool active() nothrow
   {
     return getActive();
   }
@@ -135,7 +135,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
           Setting `active` to true will add the `:checked:` state to both
           the check button and the indicator CSS node.
   */
-  @property void active(bool propval)
+  @property void active(bool propval) nothrow
   {
     setActive(propval);
   }
@@ -144,7 +144,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Get `child` property.
       Returns: The child widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -154,7 +154,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         propval = The child widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -164,7 +164,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         propval = The check button whose group this widget belongs to.
   */
-  @property void group(gtk.check_button.CheckButton propval)
+  @property void group(gtk.check_button.CheckButton propval) nothrow
   {
     setGroup(propval);
   }
@@ -176,7 +176,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
         The inconsistent state only affects visual appearance,
         not the semantics of the button.
   */
-  @property bool inconsistent()
+  @property bool inconsistent() nothrow
   {
     return getInconsistent();
   }
@@ -189,7 +189,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
           The inconsistent state only affects visual appearance,
           not the semantics of the button.
   */
-  @property void inconsistent(bool propval)
+  @property void inconsistent(bool propval) nothrow
   {
     setInconsistent(propval);
   }
@@ -198,7 +198,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Get `label` property.
       Returns: Text of the label inside the check button, if it contains a label widget.
   */
-  @property string label()
+  @property string label() nothrow
   {
     return getLabel();
   }
@@ -208,7 +208,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         propval = Text of the label inside the check button, if it contains a label widget.
   */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     setLabel(propval);
   }
@@ -218,7 +218,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Returns: If set, an underline in the text indicates that the following
         character is to be used as mnemonic.
   */
-  @property bool useUnderline()
+  @property bool useUnderline() nothrow
   {
     return getUseUnderline();
   }
@@ -229,7 +229,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
         propval = If set, an underline in the text indicates that the following
           character is to be used as mnemonic.
   */
-  @property void useUnderline(bool propval)
+  @property void useUnderline(bool propval) nothrow
   {
     setUseUnderline(propval);
   }
@@ -240,7 +240,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Creates a new [gtk.check_button.CheckButton].
       Returns: a new [gtk.check_button.CheckButton]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_check_button_new();
@@ -254,7 +254,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
         label = the text for the check button.
       Returns: a new [gtk.check_button.CheckButton]
   */
-  static gtk.check_button.CheckButton newWithLabel(string label = null)
+  static gtk.check_button.CheckButton newWithLabel(string label = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -271,7 +271,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
             in front of the mnemonic character
       Returns: a new [gtk.check_button.CheckButton]
   */
-  static gtk.check_button.CheckButton newWithMnemonic(string label = null)
+  static gtk.check_button.CheckButton newWithMnemonic(string label = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -284,7 +284,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Returns whether the check button is active.
       Returns: whether the check button is active
   */
-  bool getActive()
+  bool getActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_check_button_get_active(cast(GtkCheckButton*)this._cPtr);
@@ -295,7 +295,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Gets the child widget of button or `NULL` if [gtk.check_button.CheckButton.label] is set.
       Returns: the child widget of button
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_check_button_get_child(cast(GtkCheckButton*)this._cPtr);
@@ -307,7 +307,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Returns whether the check button is in an inconsistent state.
       Returns: true if check_button is currently in an inconsistent state
   */
-  bool getInconsistent()
+  bool getInconsistent() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_check_button_get_inconsistent(cast(GtkCheckButton*)this._cPtr);
@@ -319,7 +319,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Returns: The label self shows next
           to the indicator. If no label is shown, null will be returned.
   */
-  string getLabel()
+  string getLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_check_button_get_label(cast(GtkCheckButton*)this._cPtr);
@@ -333,7 +333,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
           See [gtk.check_button.CheckButton.setUseUnderline] for details on how to set
           a new value.
   */
-  bool getUseUnderline()
+  bool getUseUnderline() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_check_button_get_use_underline(cast(GtkCheckButton*)this._cPtr);
@@ -346,7 +346,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         setting = the new value to set
   */
-  void setActive(bool setting)
+  void setActive(bool setting) nothrow
   {
     gtk_check_button_set_active(cast(GtkCheckButton*)this._cPtr, setting);
   }
@@ -363,7 +363,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     gtk_check_button_set_child(cast(GtkCheckButton*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -389,7 +389,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
         group = another [gtk.check_button.CheckButton] to
             form a group with
   */
-  void setGroup(gtk.check_button.CheckButton group = null)
+  void setGroup(gtk.check_button.CheckButton group = null) nothrow
   {
     gtk_check_button_set_group(cast(GtkCheckButton*)this._cPtr, group ? cast(GtkCheckButton*)group._cPtr(No.Dup) : null);
   }
@@ -403,7 +403,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         inconsistent = true if state is inconsistent
   */
-  void setInconsistent(bool inconsistent)
+  void setInconsistent(bool inconsistent) nothrow
   {
     gtk_check_button_set_inconsistent(cast(GtkCheckButton*)this._cPtr, inconsistent);
   }
@@ -419,7 +419,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
         label = The text shown next to the indicator, or null
             to show no text
   */
-  void setLabel(string label = null)
+  void setLabel(string label = null) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_check_button_set_label(cast(GtkCheckButton*)this._cPtr, _label);
@@ -435,7 +435,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         setting = the new value to set
   */
-  void setUseUnderline(bool setting)
+  void setUseUnderline(bool setting) nothrow
   {
     gtk_check_button_set_use_underline(cast(GtkCheckButton*)this._cPtr, setting);
   }
@@ -464,13 +464,13 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.check_button.CheckButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -479,7 +479,14 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.check_button.CheckButton.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -502,13 +509,13 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectToggled(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToggled(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.check_button.CheckButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -517,7 +524,14 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.check_button.CheckButton.toggled");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -540,7 +554,7 @@ class CheckButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acti
           the check button and the indicator CSS node.
       Returns: Builder instance for fluent chaining
   */
-  T active(bool propval)
+  T active(bool propval) nothrow
   {
     return setProperty("active", propval);
   }
@@ -551,7 +565,7 @@ class CheckButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acti
         propval = The child widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -562,7 +576,7 @@ class CheckButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acti
         propval = The check button whose group this widget belongs to.
       Returns: Builder instance for fluent chaining
   */
-  T group(gtk.check_button.CheckButton propval)
+  T group(gtk.check_button.CheckButton propval) nothrow
   {
     return setProperty("group", propval);
   }
@@ -576,7 +590,7 @@ class CheckButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acti
           not the semantics of the button.
       Returns: Builder instance for fluent chaining
   */
-  T inconsistent(bool propval)
+  T inconsistent(bool propval) nothrow
   {
     return setProperty("inconsistent", propval);
   }
@@ -587,7 +601,7 @@ class CheckButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acti
         propval = Text of the label inside the check button, if it contains a label widget.
       Returns: Builder instance for fluent chaining
   */
-  T label(string propval)
+  T label(string propval) nothrow
   {
     return setProperty("label", propval);
   }
@@ -599,7 +613,7 @@ class CheckButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acti
           character is to be used as mnemonic.
       Returns: Builder instance for fluent chaining
   */
-  T useUnderline(bool propval)
+  T useUnderline(bool propval) nothrow
   {
     return setProperty("use-underline", propval);
   }
@@ -612,7 +626,7 @@ final class CheckButtonGidBuilder : CheckButtonGidBuilderImpl!CheckButtonGidBuil
       Create object from builder.
       Returns: New object
   */
-  CheckButton build()
+  CheckButton build() nothrow
   {
     return new CheckButton(cast(void*)createGObject(CheckButton._getGType), No.Take);
   }

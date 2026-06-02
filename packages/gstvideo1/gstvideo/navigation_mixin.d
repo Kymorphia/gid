@@ -87,13 +87,13 @@ template NavigationT()
       Params:
         command = The command to issue
   */
-  override void sendCommand(gstvideo.types.NavigationCommand command)
+  override void sendCommand(gstvideo.types.NavigationCommand command) nothrow
   {
     gst_navigation_send_command(cast(GstNavigation*)this._cPtr, command);
   }
 
   /** */
-  override void sendEvent(gst.structure.Structure structure)
+  override void sendEvent(gst.structure.Structure structure) nothrow
   {
     gst_navigation_send_event(cast(GstNavigation*)this._cPtr, structure ? cast(GstStructure*)structure._cPtr(No.Dup) : null);
   }
@@ -104,13 +104,13 @@ template NavigationT()
       Params:
         event = The event to send
   */
-  override void sendEventSimple(gst.event.Event event)
+  override void sendEventSimple(gst.event.Event event) nothrow
   {
     gst_navigation_send_event_simple(cast(GstNavigation*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
   }
 
   /** */
-  override void sendKeyEvent(string event, string key)
+  override void sendKeyEvent(string event, string key) nothrow
   {
     const(char)* _event = event.toCString(No.Alloc);
     const(char)* _key = key.toCString(No.Alloc);
@@ -131,7 +131,7 @@ template NavigationT()
         x = The x coordinate of the mouse event.
         y = The y coordinate of the mouse event.
   */
-  override void sendMouseEvent(string event, int button, double x, double y)
+  override void sendMouseEvent(string event, int button, double x, double y) nothrow
   {
     const(char)* _event = event.toCString(No.Alloc);
     gst_navigation_send_mouse_event(cast(GstNavigation*)this._cPtr, _event, button, x, y);
@@ -149,7 +149,7 @@ template NavigationT()
         deltaX = The delta_x coordinate of the mouse event.
         deltaY = The delta_y coordinate of the mouse event.
   */
-  override void sendMouseScrollEvent(double x, double y, double deltaX, double deltaY)
+  override void sendMouseScrollEvent(double x, double y, double deltaX, double deltaY) nothrow
   {
     gst_navigation_send_mouse_scroll_event(cast(GstNavigation*)this._cPtr, x, y, deltaX, deltaY);
   }

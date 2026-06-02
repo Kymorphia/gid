@@ -33,26 +33,26 @@ class Shortcut : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_shortcut_get_type != &gidSymbolNotFound ? gtk_shortcut_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Shortcut self()
+  override Shortcut self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class Shortcut : gobject.object.ObjectWrap
       Get builder for [gtk.shortcut.Shortcut]
       Returns: New builder object
   */
-  static ShortcutGidBuilder builder()
+  static ShortcutGidBuilder builder() nothrow
   {
     return new ShortcutGidBuilder;
   }
@@ -70,7 +70,7 @@ class Shortcut : gobject.object.ObjectWrap
       Get `action` property.
       Returns: The action that gets activated by this shortcut.
   */
-  @property gtk.shortcut_action.ShortcutAction action()
+  @property gtk.shortcut_action.ShortcutAction action() nothrow
   {
     return getAction();
   }
@@ -80,7 +80,7 @@ class Shortcut : gobject.object.ObjectWrap
       Params:
         propval = The action that gets activated by this shortcut.
   */
-  @property void action(gtk.shortcut_action.ShortcutAction propval)
+  @property void action(gtk.shortcut_action.ShortcutAction propval) nothrow
   {
     setAction(propval);
   }
@@ -89,7 +89,7 @@ class Shortcut : gobject.object.ObjectWrap
       Get `arguments` property.
       Returns: Arguments passed to activation.
   */
-  @property glib.variant.Variant arguments()
+  @property glib.variant.Variant arguments() nothrow
   {
     return getArguments();
   }
@@ -99,7 +99,7 @@ class Shortcut : gobject.object.ObjectWrap
       Params:
         propval = Arguments passed to activation.
   */
-  @property void arguments(glib.variant.Variant propval)
+  @property void arguments(glib.variant.Variant propval) nothrow
   {
     setArguments(propval);
   }
@@ -108,7 +108,7 @@ class Shortcut : gobject.object.ObjectWrap
       Get `trigger` property.
       Returns: The trigger that triggers this shortcut.
   */
-  @property gtk.shortcut_trigger.ShortcutTrigger trigger()
+  @property gtk.shortcut_trigger.ShortcutTrigger trigger() nothrow
   {
     return getTrigger();
   }
@@ -118,7 +118,7 @@ class Shortcut : gobject.object.ObjectWrap
       Params:
         propval = The trigger that triggers this shortcut.
   */
-  @property void trigger(gtk.shortcut_trigger.ShortcutTrigger propval)
+  @property void trigger(gtk.shortcut_trigger.ShortcutTrigger propval) nothrow
   {
     setTrigger(propval);
   }
@@ -133,7 +133,7 @@ class Shortcut : gobject.object.ObjectWrap
              triggering
       Returns: a new [gtk.shortcut.Shortcut]
   */
-  this(gtk.shortcut_trigger.ShortcutTrigger trigger = null, gtk.shortcut_action.ShortcutAction action = null)
+  this(gtk.shortcut_trigger.ShortcutTrigger trigger = null, gtk.shortcut_action.ShortcutAction action = null) nothrow
   {
     GtkShortcut* _cretval;
     _cretval = gtk_shortcut_new(trigger ? cast(GtkShortcutTrigger*)trigger._cPtr(Yes.Dup) : null, action ? cast(GtkShortcutAction*)action._cPtr(Yes.Dup) : null);
@@ -144,7 +144,7 @@ class Shortcut : gobject.object.ObjectWrap
       Gets the action that is activated by this shortcut.
       Returns: the action
   */
-  gtk.shortcut_action.ShortcutAction getAction()
+  gtk.shortcut_action.ShortcutAction getAction() nothrow
   {
     GtkShortcutAction* _cretval;
     _cretval = gtk_shortcut_get_action(cast(GtkShortcut*)this._cPtr);
@@ -156,7 +156,7 @@ class Shortcut : gobject.object.ObjectWrap
       Gets the arguments that are passed when activating the shortcut.
       Returns: the arguments
   */
-  glib.variant.Variant getArguments()
+  glib.variant.Variant getArguments() nothrow
   {
     GVariant* _cretval;
     _cretval = gtk_shortcut_get_arguments(cast(GtkShortcut*)this._cPtr);
@@ -168,7 +168,7 @@ class Shortcut : gobject.object.ObjectWrap
       Gets the trigger used to trigger self.
       Returns: the trigger used
   */
-  gtk.shortcut_trigger.ShortcutTrigger getTrigger()
+  gtk.shortcut_trigger.ShortcutTrigger getTrigger() nothrow
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_shortcut_get_trigger(cast(GtkShortcut*)this._cPtr);
@@ -183,7 +183,7 @@ class Shortcut : gobject.object.ObjectWrap
         action = The new action.
             If the action is null, the nothing action will be used.
   */
-  void setAction(gtk.shortcut_action.ShortcutAction action = null)
+  void setAction(gtk.shortcut_action.ShortcutAction action = null) nothrow
   {
     gtk_shortcut_set_action(cast(GtkShortcut*)this._cPtr, action ? cast(GtkShortcutAction*)action._cPtr(Yes.Dup) : null);
   }
@@ -194,7 +194,7 @@ class Shortcut : gobject.object.ObjectWrap
       Params:
         args = arguments to pass when activating self
   */
-  void setArguments(glib.variant.Variant args = null)
+  void setArguments(glib.variant.Variant args = null) nothrow
   {
     gtk_shortcut_set_arguments(cast(GtkShortcut*)this._cPtr, args ? cast(GVariant*)args._cPtr(No.Dup) : null);
   }
@@ -206,7 +206,7 @@ class Shortcut : gobject.object.ObjectWrap
         trigger = The new trigger.
             If the trigger is null, the never trigger will be used.
   */
-  void setTrigger(gtk.shortcut_trigger.ShortcutTrigger trigger = null)
+  void setTrigger(gtk.shortcut_trigger.ShortcutTrigger trigger = null) nothrow
   {
     gtk_shortcut_set_trigger(cast(GtkShortcut*)this._cPtr, trigger ? cast(GtkShortcutTrigger*)trigger._cPtr(Yes.Dup) : null);
   }
@@ -222,7 +222,7 @@ class ShortcutGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The action that gets activated by this shortcut.
       Returns: Builder instance for fluent chaining
   */
-  T action(gtk.shortcut_action.ShortcutAction propval)
+  T action(gtk.shortcut_action.ShortcutAction propval) nothrow
   {
     return setProperty("action", propval);
   }
@@ -233,7 +233,7 @@ class ShortcutGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Arguments passed to activation.
       Returns: Builder instance for fluent chaining
   */
-  T arguments(glib.variant.Variant propval)
+  T arguments(glib.variant.Variant propval) nothrow
   {
     return setProperty("arguments", propval);
   }
@@ -244,7 +244,7 @@ class ShortcutGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The trigger that triggers this shortcut.
       Returns: Builder instance for fluent chaining
   */
-  T trigger(gtk.shortcut_trigger.ShortcutTrigger propval)
+  T trigger(gtk.shortcut_trigger.ShortcutTrigger propval) nothrow
   {
     return setProperty("trigger", propval);
   }
@@ -257,7 +257,7 @@ final class ShortcutGidBuilder : ShortcutGidBuilderImpl!ShortcutGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Shortcut build()
+  Shortcut build() nothrow
   {
     return new Shortcut(cast(void*)createGObject(Shortcut._getGType), Yes.Take);
   }

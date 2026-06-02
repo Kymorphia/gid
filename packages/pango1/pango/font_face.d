@@ -19,26 +19,26 @@ class FontFace : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_font_face_get_type != &gidSymbolNotFound ? pango_font_face_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FontFace self()
+  override FontFace self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class FontFace : gobject.object.ObjectWrap
       Get builder for [pango.font_face.FontFace]
       Returns: New builder object
   */
-  static FontFaceGidBuilder builder()
+  static FontFaceGidBuilder builder() nothrow
   {
     return new FontFaceGidBuilder;
   }
@@ -62,7 +62,7 @@ class FontFace : gobject.object.ObjectWrap
           holding the description of the face. Use [pango.font_description.FontDescription.free]
           to free the result.
   */
-  pango.font_description.FontDescription describe()
+  pango.font_description.FontDescription describe() nothrow
   {
     PangoFontDescription* _cretval;
     _cretval = pango_font_face_describe(cast(PangoFontFace*)this._cPtr);
@@ -79,7 +79,7 @@ class FontFace : gobject.object.ObjectWrap
       Returns: the face name for the face. This string is
           owned by the face object and must not be modified or freed.
   */
-  string getFaceName()
+  string getFaceName() nothrow
   {
     const(char)* _cretval;
     _cretval = pango_font_face_get_face_name(cast(PangoFontFace*)this._cPtr);
@@ -91,7 +91,7 @@ class FontFace : gobject.object.ObjectWrap
       Gets the [pango.font_family.FontFamily] that face belongs to.
       Returns: the [pango.font_family.FontFamily]
   */
-  pango.font_family.FontFamily getFamily()
+  pango.font_family.FontFamily getFamily() nothrow
   {
     PangoFontFamily* _cretval;
     _cretval = pango_font_face_get_family(cast(PangoFontFace*)this._cPtr);
@@ -107,7 +107,7 @@ class FontFace : gobject.object.ObjectWrap
       lightening or modifying it in some other way.
       Returns: whether face is synthesized
   */
-  bool isSynthesized()
+  bool isSynthesized() nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_font_face_is_synthesized(cast(PangoFontFace*)this._cPtr);
@@ -126,7 +126,7 @@ class FontFace : gobject.object.ObjectWrap
         sizes = location to store a pointer to an array of int. This array
             should be freed with [glib.global.gfree].
   */
-  void listSizes(out int[] sizes)
+  void listSizes(out int[] sizes) nothrow
   {
     int _nSizes;
     int* _sizes;
@@ -149,7 +149,7 @@ final class FontFaceGidBuilder : FontFaceGidBuilderImpl!FontFaceGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FontFace build()
+  FontFace build() nothrow
   {
     return new FontFace(cast(void*)createGObject(FontFace._getGType), No.Take);
   }

@@ -62,26 +62,26 @@ class GutterRenderer : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_gutter_renderer_get_type != &gidSymbolNotFound ? gtk_source_gutter_renderer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GutterRenderer self()
+  override GutterRenderer self() nothrow
   {
     return this;
   }
@@ -90,7 +90,7 @@ class GutterRenderer : gtk.widget.Widget
       Get builder for [gtksource.gutter_renderer.GutterRenderer]
       Returns: New builder object
   */
-  static GutterRendererGidBuilder builder()
+  static GutterRendererGidBuilder builder() nothrow
   {
     return new GutterRendererGidBuilder;
   }
@@ -102,7 +102,7 @@ class GutterRenderer : gtk.widget.Widget
         This can be used to indicate that in the case a cell spans multiple lines (due to text wrapping)
         the alignment should work on either the full cell, the first line or the last line.
   */
-  @property gtksource.types.GutterRendererAlignmentMode alignmentMode()
+  @property gtksource.types.GutterRendererAlignmentMode alignmentMode() nothrow
   {
     return getAlignmentMode();
   }
@@ -115,7 +115,7 @@ class GutterRenderer : gtk.widget.Widget
           This can be used to indicate that in the case a cell spans multiple lines (due to text wrapping)
           the alignment should work on either the full cell, the first line or the last line.
   */
-  @property void alignmentMode(gtksource.types.GutterRendererAlignmentMode propval)
+  @property void alignmentMode(gtksource.types.GutterRendererAlignmentMode propval) nothrow
   {
     setAlignmentMode(propval);
   }
@@ -126,7 +126,7 @@ class GutterRenderer : gtk.widget.Widget
         
         It should be used by #GtkSourceGutterRenderer implementations from `vfunc@Gtk.Widget.snapshot`.
   */
-  @property gtksource.gutter_lines.GutterLines lines()
+  @property gtksource.gutter_lines.GutterLines lines() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtksource.gutter_lines.GutterLines)("lines");
   }
@@ -135,7 +135,7 @@ class GutterRenderer : gtk.widget.Widget
       Get `view` property.
       Returns: The view on which the renderer is placed.
   */
-  @property gtk.text_view.TextView view()
+  @property gtk.text_view.TextView view() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.text_view.TextView)("view");
   }
@@ -147,7 +147,7 @@ class GutterRenderer : gtk.widget.Widget
         Set to 0 for a left alignment. 1 for a right alignment. And 0.5 for centering the cells.
         A value lower than 0 doesn't modify the alignment.
   */
-  @property float xalign()
+  @property float xalign() nothrow
   {
     return getXalign();
   }
@@ -160,7 +160,7 @@ class GutterRenderer : gtk.widget.Widget
           Set to 0 for a left alignment. 1 for a right alignment. And 0.5 for centering the cells.
           A value lower than 0 doesn't modify the alignment.
   */
-  @property void xalign(float propval)
+  @property void xalign(float propval) nothrow
   {
     setXalign(propval);
   }
@@ -169,7 +169,7 @@ class GutterRenderer : gtk.widget.Widget
       Get `xpad` property.
       Returns: The left and right padding of the renderer.
   */
-  @property int xpad()
+  @property int xpad() nothrow
   {
     return getXpad();
   }
@@ -179,7 +179,7 @@ class GutterRenderer : gtk.widget.Widget
       Params:
         propval = The left and right padding of the renderer.
   */
-  @property void xpad(int propval)
+  @property void xpad(int propval) nothrow
   {
     setXpad(propval);
   }
@@ -191,7 +191,7 @@ class GutterRenderer : gtk.widget.Widget
         Set to 0 for a top alignment. 1 for a bottom alignment. And 0.5 for centering the cells.
         A value lower than 0 doesn't modify the alignment.
   */
-  @property float yalign()
+  @property float yalign() nothrow
   {
     return getYalign();
   }
@@ -204,7 +204,7 @@ class GutterRenderer : gtk.widget.Widget
           Set to 0 for a top alignment. 1 for a bottom alignment. And 0.5 for centering the cells.
           A value lower than 0 doesn't modify the alignment.
   */
-  @property void yalign(float propval)
+  @property void yalign(float propval) nothrow
   {
     setYalign(propval);
   }
@@ -213,7 +213,7 @@ class GutterRenderer : gtk.widget.Widget
       Get `ypad` property.
       Returns: The top and bottom padding of the renderer.
   */
-  @property int ypad()
+  @property int ypad() nothrow
   {
     return getYpad();
   }
@@ -223,7 +223,7 @@ class GutterRenderer : gtk.widget.Widget
       Params:
         propval = The top and bottom padding of the renderer.
   */
-  @property void ypad(int propval)
+  @property void ypad(int propval) nothrow
   {
     setYpad(propval);
   }
@@ -241,7 +241,7 @@ class GutterRenderer : gtk.widget.Widget
         state = a #GdkModifierType
         nPresses = the number of button presses
   */
-  void activate(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, uint button, gdk.types.ModifierType state, int nPresses)
+  void activate(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, uint button, gdk.types.ModifierType state, int nPresses) nothrow
   {
     gtk_source_gutter_renderer_activate(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&area, button, state, nPresses);
   }
@@ -263,7 +263,7 @@ class GutterRenderer : gtk.widget.Widget
         x = the X position to render the content
         y = the Y position to render the content
   */
-  void alignCell(uint line, float width, float height, out float x, out float y)
+  void alignCell(uint line, float width, float height, out float x, out float y) nothrow
   {
     gtk_source_gutter_renderer_align_cell(cast(GtkSourceGutterRenderer*)this._cPtr, line, width, height, cast(float*)&x, cast(float*)&y);
   }
@@ -276,7 +276,7 @@ class GutterRenderer : gtk.widget.Widget
       [gtksource.gutter_renderer.GutterRenderer.yalign]).
       Returns: a #GtkSourceGutterRendererAlignmentMode
   */
-  gtksource.types.GutterRendererAlignmentMode getAlignmentMode()
+  gtksource.types.GutterRendererAlignmentMode getAlignmentMode() nothrow
   {
     GtkSourceGutterRendererAlignmentMode _cretval;
     _cretval = gtk_source_gutter_renderer_get_alignment_mode(cast(GtkSourceGutterRenderer*)this._cPtr);
@@ -288,7 +288,7 @@ class GutterRenderer : gtk.widget.Widget
       Gets the [gtksource.buffer.Buffer] for which the gutter renderer is drawing.
       Returns: a #GtkTextBuffer or null
   */
-  gtksource.buffer.Buffer getBuffer()
+  gtksource.buffer.Buffer getBuffer() nothrow
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_gutter_renderer_get_buffer(cast(GtkSourceGutterRenderer*)this._cPtr);
@@ -300,7 +300,7 @@ class GutterRenderer : gtk.widget.Widget
       Get the view associated to the gutter renderer
       Returns: a #GtkSourceView
   */
-  gtksource.view.View getView()
+  gtksource.view.View getView() nothrow
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_gutter_renderer_get_view(cast(GtkSourceGutterRenderer*)this._cPtr);
@@ -314,7 +314,7 @@ class GutterRenderer : gtk.widget.Widget
       This may be used to adjust where within the cell rectangle the renderer will draw.
       Returns: 
   */
-  float getXalign()
+  float getXalign() nothrow
   {
     float _retval;
     _retval = gtk_source_gutter_renderer_get_xalign(cast(GtkSourceGutterRenderer*)this._cPtr);
@@ -327,7 +327,7 @@ class GutterRenderer : gtk.widget.Widget
       This may be used to adjust the cell rectangle that the renderer will use to draw.
       Returns: 
   */
-  int getXpad()
+  int getXpad() nothrow
   {
     int _retval;
     _retval = gtk_source_gutter_renderer_get_xpad(cast(GtkSourceGutterRenderer*)this._cPtr);
@@ -340,7 +340,7 @@ class GutterRenderer : gtk.widget.Widget
       This may be used to adjust where within the cell rectangle the renderer will draw.
       Returns: 
   */
-  float getYalign()
+  float getYalign() nothrow
   {
     float _retval;
     _retval = gtk_source_gutter_renderer_get_yalign(cast(GtkSourceGutterRenderer*)this._cPtr);
@@ -353,7 +353,7 @@ class GutterRenderer : gtk.widget.Widget
       This may be used to adjust the cell rectangle that the renderer will use to draw.
       Returns: 
   */
-  int getYpad()
+  int getYpad() nothrow
   {
     int _retval;
     _retval = gtk_source_gutter_renderer_get_ypad(cast(GtkSourceGutterRenderer*)this._cPtr);
@@ -370,7 +370,7 @@ class GutterRenderer : gtk.widget.Widget
         area = a #GdkRectangle of the cell area to be activated
       Returns: true if the renderer can be activated, false otherwise
   */
-  bool queryActivatable(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area)
+  bool queryActivatable(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&area);
@@ -385,7 +385,7 @@ class GutterRenderer : gtk.widget.Widget
       Params:
         mode = a #GtkSourceGutterRendererAlignmentMode
   */
-  void setAlignmentMode(gtksource.types.GutterRendererAlignmentMode mode)
+  void setAlignmentMode(gtksource.types.GutterRendererAlignmentMode mode) nothrow
   {
     gtk_source_gutter_renderer_set_alignment_mode(cast(GtkSourceGutterRenderer*)this._cPtr, mode);
   }
@@ -398,7 +398,7 @@ class GutterRenderer : gtk.widget.Widget
       Params:
         xalign = the Y padding for the drawing cell
   */
-  void setXalign(float xalign)
+  void setXalign(float xalign) nothrow
   {
     gtk_source_gutter_renderer_set_xalign(cast(GtkSourceGutterRenderer*)this._cPtr, xalign);
   }
@@ -411,7 +411,7 @@ class GutterRenderer : gtk.widget.Widget
       Params:
         xpad = the Y padding for the drawing cell
   */
-  void setXpad(int xpad)
+  void setXpad(int xpad) nothrow
   {
     gtk_source_gutter_renderer_set_xpad(cast(GtkSourceGutterRenderer*)this._cPtr, xpad);
   }
@@ -424,7 +424,7 @@ class GutterRenderer : gtk.widget.Widget
       Params:
         yalign = the Y padding for the drawing cell
   */
-  void setYalign(float yalign)
+  void setYalign(float yalign) nothrow
   {
     gtk_source_gutter_renderer_set_yalign(cast(GtkSourceGutterRenderer*)this._cPtr, yalign);
   }
@@ -437,7 +437,7 @@ class GutterRenderer : gtk.widget.Widget
       Params:
         ypad = the Y padding for the drawing cell
   */
-  void setYpad(int ypad)
+  void setYpad(int ypad) nothrow
   {
     gtk_source_gutter_renderer_set_ypad(cast(GtkSourceGutterRenderer*)this._cPtr, ypad);
   }
@@ -467,7 +467,7 @@ class GutterRenderer : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
@@ -478,7 +478,7 @@ class GutterRenderer : gtk.widget.Widget
   && (Parameters!T.length < 6 || (ParameterStorageClassTuple!T[5] == ParameterStorageClass.none && is(Parameters!T[5] : gtksource.gutter_renderer.GutterRenderer)))
   && Parameters!T.length < 7)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 6, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -502,7 +502,14 @@ class GutterRenderer : gtk.widget.Widget
       static if (Parameters!T.length > 5)
         _paramTuple[5] = getVal!(Parameters!T[5])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.gutter_renderer.GutterRenderer.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -529,7 +536,7 @@ class GutterRenderer : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectQueryActivatable(T)(T callback, Flag!"After" after = No.After)
+  gulong connectQueryActivatable(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
@@ -537,11 +544,12 @@ class GutterRenderer : gtk.widget.Widget
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtksource.gutter_renderer.GutterRenderer)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -552,7 +560,14 @@ class GutterRenderer : gtk.widget.Widget
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.gutter_renderer.GutterRenderer.queryActivatable");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -580,7 +595,7 @@ class GutterRenderer : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectQueryData(T)(T callback, Flag!"After" after = No.After)
+  gulong connectQueryData(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
@@ -588,7 +603,7 @@ class GutterRenderer : gtk.widget.Widget
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtksource.gutter_renderer.GutterRenderer)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -603,7 +618,14 @@ class GutterRenderer : gtk.widget.Widget
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.gutter_renderer.GutterRenderer.queryData");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -625,7 +647,7 @@ class GutterRendererGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           the alignment should work on either the full cell, the first line or the last line.
       Returns: Builder instance for fluent chaining
   */
-  T alignmentMode(gtksource.types.GutterRendererAlignmentMode propval)
+  T alignmentMode(gtksource.types.GutterRendererAlignmentMode propval) nothrow
   {
     return setProperty("alignment-mode", propval);
   }
@@ -639,7 +661,7 @@ class GutterRendererGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           A value lower than 0 doesn't modify the alignment.
       Returns: Builder instance for fluent chaining
   */
-  T xalign(float propval)
+  T xalign(float propval) nothrow
   {
     return setProperty("xalign", propval);
   }
@@ -650,7 +672,7 @@ class GutterRendererGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The left and right padding of the renderer.
       Returns: Builder instance for fluent chaining
   */
-  T xpad(int propval)
+  T xpad(int propval) nothrow
   {
     return setProperty("xpad", propval);
   }
@@ -664,7 +686,7 @@ class GutterRendererGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           A value lower than 0 doesn't modify the alignment.
       Returns: Builder instance for fluent chaining
   */
-  T yalign(float propval)
+  T yalign(float propval) nothrow
   {
     return setProperty("yalign", propval);
   }
@@ -675,7 +697,7 @@ class GutterRendererGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The top and bottom padding of the renderer.
       Returns: Builder instance for fluent chaining
   */
-  T ypad(int propval)
+  T ypad(int propval) nothrow
   {
     return setProperty("ypad", propval);
   }
@@ -688,7 +710,7 @@ final class GutterRendererGidBuilder : GutterRendererGidBuilderImpl!GutterRender
       Create object from builder.
       Returns: New object
   */
-  GutterRenderer build()
+  GutterRenderer build() nothrow
   {
     return new GutterRenderer(cast(void*)createGObject(GutterRenderer._getGType), No.Take);
   }

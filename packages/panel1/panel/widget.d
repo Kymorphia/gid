@@ -30,26 +30,26 @@ class Widget : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_widget_get_type != &gidSymbolNotFound ? panel_widget_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Widget self()
+  override Widget self() nothrow
   {
     return this;
   }
@@ -58,25 +58,25 @@ class Widget : gtk.widget.Widget
       Get builder for [panel.widget.Widget]
       Returns: New builder object
   */
-  static WidgetGidBuilder builder()
+  static WidgetGidBuilder builder() nothrow
   {
     return new WidgetGidBuilder;
   }
 
   /** */
-  @property bool busy()
+  @property bool busy() nothrow
   {
     return getBusy();
   }
 
   /** */
-  @property bool canMaximize()
+  @property bool canMaximize() nothrow
   {
     return getCanMaximize();
   }
 
   /** */
-  @property void canMaximize(bool propval)
+  @property void canMaximize(bool propval) nothrow
   {
     setCanMaximize(propval);
   }
@@ -85,7 +85,7 @@ class Widget : gtk.widget.Widget
       Get `child` property.
       Returns: The child inside this widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -95,7 +95,7 @@ class Widget : gtk.widget.Widget
       Params:
         propval = The child inside this widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -104,7 +104,7 @@ class Widget : gtk.widget.Widget
       Get `icon` property.
       Returns: The icon for this widget.
   */
-  @property gio.icon.Icon icon()
+  @property gio.icon.Icon icon() nothrow
   {
     return getIcon();
   }
@@ -114,7 +114,7 @@ class Widget : gtk.widget.Widget
       Params:
         propval = The icon for this widget.
   */
-  @property void icon(gio.icon.Icon propval)
+  @property void icon(gio.icon.Icon propval) nothrow
   {
     setIcon(propval);
   }
@@ -123,7 +123,7 @@ class Widget : gtk.widget.Widget
       Get `iconName` property.
       Returns: The icon name for this widget.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return getIconName();
   }
@@ -133,31 +133,31 @@ class Widget : gtk.widget.Widget
       Params:
         propval = The icon name for this widget.
   */
-  @property void iconName(string propval)
+  @property void iconName(string propval) nothrow
   {
     setIconName(propval);
   }
 
   /** */
-  @property string id()
+  @property string id() nothrow
   {
     return getId();
   }
 
   /** */
-  @property void id(string propval)
+  @property void id(string propval) nothrow
   {
     setId(propval);
   }
 
   /** */
-  @property string kind()
+  @property string kind() nothrow
   {
     return getKind();
   }
 
   /** */
-  @property void kind(string propval)
+  @property void kind(string propval) nothrow
   {
     setKind(propval);
   }
@@ -167,7 +167,7 @@ class Widget : gtk.widget.Widget
       Returns: A menu model to display additional options for the page to the user via
         menus.
   */
-  @property gio.menu_model.MenuModel menuModel()
+  @property gio.menu_model.MenuModel menuModel() nothrow
   {
     return getMenuModel();
   }
@@ -178,43 +178,43 @@ class Widget : gtk.widget.Widget
         propval = A menu model to display additional options for the page to the user via
           menus.
   */
-  @property void menuModel(gio.menu_model.MenuModel propval)
+  @property void menuModel(gio.menu_model.MenuModel propval) nothrow
   {
     setMenuModel(propval);
   }
 
   /** */
-  @property bool modified()
+  @property bool modified() nothrow
   {
     return getModified();
   }
 
   /** */
-  @property void modified(bool propval)
+  @property void modified(bool propval) nothrow
   {
     setModified(propval);
   }
 
   /** */
-  @property bool needsAttention()
+  @property bool needsAttention() nothrow
   {
     return getNeedsAttention();
   }
 
   /** */
-  @property void needsAttention(bool propval)
+  @property void needsAttention(bool propval) nothrow
   {
     setNeedsAttention(propval);
   }
 
   /** */
-  @property bool reorderable()
+  @property bool reorderable() nothrow
   {
     return getReorderable();
   }
 
   /** */
-  @property void reorderable(bool propval)
+  @property void reorderable(bool propval) nothrow
   {
     setReorderable(propval);
   }
@@ -223,7 +223,7 @@ class Widget : gtk.widget.Widget
       Get `saveDelegate` property.
       Returns: The save delegate attached to this widget.
   */
-  @property panel.save_delegate.SaveDelegate saveDelegate()
+  @property panel.save_delegate.SaveDelegate saveDelegate() nothrow
   {
     return getSaveDelegate();
   }
@@ -233,7 +233,7 @@ class Widget : gtk.widget.Widget
       Params:
         propval = The save delegate attached to this widget.
   */
-  @property void saveDelegate(panel.save_delegate.SaveDelegate propval)
+  @property void saveDelegate(panel.save_delegate.SaveDelegate propval) nothrow
   {
     setSaveDelegate(propval);
   }
@@ -242,7 +242,7 @@ class Widget : gtk.widget.Widget
       Get `title` property.
       Returns: The title for this widget.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -252,7 +252,7 @@ class Widget : gtk.widget.Widget
       Params:
         propval = The title for this widget.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -261,7 +261,7 @@ class Widget : gtk.widget.Widget
       Get `tooltip` property.
       Returns: The tooltip to display in tabs for the widget.
   */
-  @property string tooltip()
+  @property string tooltip() nothrow
   {
     return getTooltip();
   }
@@ -271,7 +271,7 @@ class Widget : gtk.widget.Widget
       Params:
         propval = The tooltip to display in tabs for the widget.
   */
-  @property void tooltip(string propval)
+  @property void tooltip(string propval) nothrow
   {
     setTooltip(propval);
   }
@@ -280,7 +280,7 @@ class Widget : gtk.widget.Widget
       Create a new #PanelWidget.
       Returns: a newly created #PanelWidget
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = panel_widget_new();
@@ -288,20 +288,20 @@ class Widget : gtk.widget.Widget
   }
 
   /** */
-  override void actionSetEnabled(string actionName, bool enabled)
+  override void actionSetEnabled(string actionName, bool enabled) nothrow
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
     panel_widget_action_set_enabled(cast(PanelWidget*)this._cPtr, _actionName, enabled);
   }
 
   /** */
-  void close()
+  void close() nothrow
   {
     panel_widget_close(cast(PanelWidget*)this._cPtr);
   }
 
   /** */
-  bool focusDefault()
+  bool focusDefault() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_widget_focus_default(cast(PanelWidget*)this._cPtr);
@@ -311,13 +311,13 @@ class Widget : gtk.widget.Widget
   /**
       Closes the widget without any save dialogs.
   */
-  void forceClose()
+  void forceClose() nothrow
   {
     panel_widget_force_close(cast(PanelWidget*)this._cPtr);
   }
 
   /** */
-  bool getBusy()
+  bool getBusy() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_widget_get_busy(cast(PanelWidget*)this._cPtr);
@@ -325,7 +325,7 @@ class Widget : gtk.widget.Widget
   }
 
   /** */
-  bool getCanMaximize()
+  bool getCanMaximize() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_widget_get_can_maximize(cast(PanelWidget*)this._cPtr);
@@ -336,7 +336,7 @@ class Widget : gtk.widget.Widget
       Gets the child widget of the panel.
       Returns: a #GtkWidget or null
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = panel_widget_get_child(cast(PanelWidget*)this._cPtr);
@@ -353,7 +353,7 @@ class Widget : gtk.widget.Widget
       Returns: the default widget to focus within
           the #PanelWidget.
   */
-  gtk.widget.Widget getDefaultFocus()
+  gtk.widget.Widget getDefaultFocus() nothrow
   {
     GtkWidget* _cretval;
     _cretval = panel_widget_get_default_focus(cast(PanelWidget*)this._cPtr);
@@ -365,7 +365,7 @@ class Widget : gtk.widget.Widget
       Gets a #GIcon for the widget.
       Returns: a #GIcon or null
   */
-  gio.icon.Icon getIcon()
+  gio.icon.Icon getIcon() nothrow
   {
     GIcon* _cretval;
     _cretval = panel_widget_get_icon(cast(PanelWidget*)this._cPtr);
@@ -377,7 +377,7 @@ class Widget : gtk.widget.Widget
       Gets the icon name for the widget.
       Returns: the icon name or null
   */
-  string getIconName()
+  string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = panel_widget_get_icon_name(cast(PanelWidget*)this._cPtr);
@@ -389,7 +389,7 @@ class Widget : gtk.widget.Widget
       Gets the id of the panel widget.
       Returns: The id of the panel widget.
   */
-  string getId()
+  string getId() nothrow
   {
     const(char)* _cretval;
     _cretval = panel_widget_get_id(cast(PanelWidget*)this._cPtr);
@@ -398,7 +398,7 @@ class Widget : gtk.widget.Widget
   }
 
   /** */
-  string getKind()
+  string getKind() nothrow
   {
     const(char)* _cretval;
     _cretval = panel_widget_get_kind(cast(PanelWidget*)this._cPtr);
@@ -413,7 +413,7 @@ class Widget : gtk.widget.Widget
       for the page to the user via menus.
       Returns: a #GMenuModel
   */
-  gio.menu_model.MenuModel getMenuModel()
+  gio.menu_model.MenuModel getMenuModel() nothrow
   {
     GMenuModel* _cretval;
     _cretval = panel_widget_get_menu_model(cast(PanelWidget*)this._cPtr);
@@ -425,7 +425,7 @@ class Widget : gtk.widget.Widget
       Gets the modified status of a panel widget
       Returns: the modified status of the panel widget.
   */
-  bool getModified()
+  bool getModified() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_widget_get_modified(cast(PanelWidget*)this._cPtr);
@@ -433,7 +433,7 @@ class Widget : gtk.widget.Widget
   }
 
   /** */
-  bool getNeedsAttention()
+  bool getNeedsAttention() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_widget_get_needs_attention(cast(PanelWidget*)this._cPtr);
@@ -445,7 +445,7 @@ class Widget : gtk.widget.Widget
       Returns: a #PanelPosition or null if the
           widget isn't within a #PanelFrame.
   */
-  panel.position.Position getPosition()
+  panel.position.Position getPosition() nothrow
   {
     PanelPosition* _cretval;
     _cretval = panel_widget_get_position(cast(PanelWidget*)this._cPtr);
@@ -454,7 +454,7 @@ class Widget : gtk.widget.Widget
   }
 
   /** */
-  bool getReorderable()
+  bool getReorderable() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_widget_get_reorderable(cast(PanelWidget*)this._cPtr);
@@ -470,7 +470,7 @@ class Widget : gtk.widget.Widget
       Document editors might use this to save the file to disk.
       Returns: a #PanelSaveDelegate or null
   */
-  panel.save_delegate.SaveDelegate getSaveDelegate()
+  panel.save_delegate.SaveDelegate getSaveDelegate() nothrow
   {
     PanelSaveDelegate* _cretval;
     _cretval = panel_widget_get_save_delegate(cast(PanelWidget*)this._cPtr);
@@ -482,7 +482,7 @@ class Widget : gtk.widget.Widget
       Gets the title for the widget.
       Returns: the title or null
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = panel_widget_get_title(cast(PanelWidget*)this._cPtr);
@@ -494,7 +494,7 @@ class Widget : gtk.widget.Widget
       Gets the tooltip for the widget.
       Returns: the tooltip or null
   */
-  string getTooltip()
+  string getTooltip() nothrow
   {
     const(char)* _cretval;
     _cretval = panel_widget_get_tooltip(cast(PanelWidget*)this._cPtr);
@@ -503,32 +503,32 @@ class Widget : gtk.widget.Widget
   }
 
   /** */
-  override void insertActionGroup(string prefix, gio.action_group.ActionGroup group)
+  override void insertActionGroup(string prefix, gio.action_group.ActionGroup group) nothrow
   {
     const(char)* _prefix = prefix.toCString(No.Alloc);
     panel_widget_insert_action_group(cast(PanelWidget*)this._cPtr, _prefix, group ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)group)._cPtr(No.Dup) : null);
   }
 
   /** */
-  void markBusy()
+  void markBusy() nothrow
   {
     panel_widget_mark_busy(cast(PanelWidget*)this._cPtr);
   }
 
   /** */
-  void maximize()
+  void maximize() nothrow
   {
     panel_widget_maximize(cast(PanelWidget*)this._cPtr);
   }
 
   /** */
-  void raise()
+  void raise() nothrow
   {
     panel_widget_raise(cast(PanelWidget*)this._cPtr);
   }
 
   /** */
-  void setCanMaximize(bool canMaximize)
+  void setCanMaximize(bool canMaximize) nothrow
   {
     panel_widget_set_can_maximize(cast(PanelWidget*)this._cPtr, canMaximize);
   }
@@ -539,7 +539,7 @@ class Widget : gtk.widget.Widget
       Params:
         child = a #GtkWidget or null
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     panel_widget_set_child(cast(PanelWidget*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -550,7 +550,7 @@ class Widget : gtk.widget.Widget
       Params:
         icon = a #GIcon or null
   */
-  void setIcon(gio.icon.Icon icon = null)
+  void setIcon(gio.icon.Icon icon = null) nothrow
   {
     panel_widget_set_icon(cast(PanelWidget*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
@@ -561,7 +561,7 @@ class Widget : gtk.widget.Widget
       Params:
         iconName = the icon name or null
   */
-  void setIconName(string iconName = null)
+  void setIconName(string iconName = null) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     panel_widget_set_icon_name(cast(PanelWidget*)this._cPtr, _iconName);
@@ -573,7 +573,7 @@ class Widget : gtk.widget.Widget
       Params:
         id = the id to set for the panel widget.
   */
-  void setId(string id)
+  void setId(string id) nothrow
   {
     const(char)* _id = id.toCString(No.Alloc);
     panel_widget_set_id(cast(PanelWidget*)this._cPtr, _id);
@@ -585,7 +585,7 @@ class Widget : gtk.widget.Widget
       Params:
         kind = the kind of this widget
   */
-  void setKind(string kind = null)
+  void setKind(string kind = null) nothrow
   {
     const(char)* _kind = kind.toCString(No.Alloc);
     panel_widget_set_kind(cast(PanelWidget*)this._cPtr, _kind);
@@ -600,7 +600,7 @@ class Widget : gtk.widget.Widget
       Params:
         menuModel = a #GMenuModel
   */
-  void setMenuModel(gio.menu_model.MenuModel menuModel = null)
+  void setMenuModel(gio.menu_model.MenuModel menuModel = null) nothrow
   {
     panel_widget_set_menu_model(cast(PanelWidget*)this._cPtr, menuModel ? cast(GMenuModel*)menuModel._cPtr(No.Dup) : null);
   }
@@ -611,19 +611,19 @@ class Widget : gtk.widget.Widget
       Params:
         modified = the modified status
   */
-  void setModified(bool modified)
+  void setModified(bool modified) nothrow
   {
     panel_widget_set_modified(cast(PanelWidget*)this._cPtr, modified);
   }
 
   /** */
-  void setNeedsAttention(bool needsAttention)
+  void setNeedsAttention(bool needsAttention) nothrow
   {
     panel_widget_set_needs_attention(cast(PanelWidget*)this._cPtr, needsAttention);
   }
 
   /** */
-  void setReorderable(bool reorderable)
+  void setReorderable(bool reorderable) nothrow
   {
     panel_widget_set_reorderable(cast(PanelWidget*)this._cPtr, reorderable);
   }
@@ -639,7 +639,7 @@ class Widget : gtk.widget.Widget
       Params:
         saveDelegate = a #PanelSaveDelegate or null
   */
-  void setSaveDelegate(panel.save_delegate.SaveDelegate saveDelegate = null)
+  void setSaveDelegate(panel.save_delegate.SaveDelegate saveDelegate = null) nothrow
   {
     panel_widget_set_save_delegate(cast(PanelWidget*)this._cPtr, saveDelegate ? cast(PanelSaveDelegate*)saveDelegate._cPtr(No.Dup) : null);
   }
@@ -650,7 +650,7 @@ class Widget : gtk.widget.Widget
       Params:
         title = the title or null
   */
-  void setTitle(string title = null)
+  void setTitle(string title = null) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     panel_widget_set_title(cast(PanelWidget*)this._cPtr, _title);
@@ -662,20 +662,20 @@ class Widget : gtk.widget.Widget
       Params:
         tooltip = the tooltip or null
   */
-  void setTooltip(string tooltip = null)
+  void setTooltip(string tooltip = null) nothrow
   {
     const(char)* _tooltip = tooltip.toCString(No.Alloc);
     panel_widget_set_tooltip(cast(PanelWidget*)this._cPtr, _tooltip);
   }
 
   /** */
-  void unmarkBusy()
+  void unmarkBusy() nothrow
   {
     panel_widget_unmark_busy(cast(PanelWidget*)this._cPtr);
   }
 
   /** */
-  void unmaximize()
+  void unmaximize() nothrow
   {
     panel_widget_unmaximize(cast(PanelWidget*)this._cPtr);
   }
@@ -699,22 +699,30 @@ class Widget : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGetDefaultFocus(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGetDefaultFocus(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T : gtk.widget.Widget)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.widget.Widget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gtk.widget.Widget _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "panel.widget.Widget.getDefaultFocus");
+      }
 
       setVal!(gtk.widget.Widget)(_returnValue, _retval);
     }
@@ -739,13 +747,13 @@ class Widget : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPresented(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPresented(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.widget.Widget)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -754,7 +762,14 @@ class Widget : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "panel.widget.Widget.presented");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -768,7 +783,7 @@ class WidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 
 
   /** */
-  T canMaximize(bool propval)
+  T canMaximize(bool propval) nothrow
   {
     return setProperty("can-maximize", propval);
   }
@@ -779,7 +794,7 @@ class WidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The child inside this widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -790,7 +805,7 @@ class WidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The icon for this widget.
       Returns: Builder instance for fluent chaining
   */
-  T icon(gio.icon.Icon propval)
+  T icon(gio.icon.Icon propval) nothrow
   {
     return setProperty("icon", propval);
   }
@@ -801,19 +816,19 @@ class WidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The icon name for this widget.
       Returns: Builder instance for fluent chaining
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
 
   /** */
-  T id(string propval)
+  T id(string propval) nothrow
   {
     return setProperty("id", propval);
   }
 
   /** */
-  T kind(string propval)
+  T kind(string propval) nothrow
   {
     return setProperty("kind", propval);
   }
@@ -825,25 +840,25 @@ class WidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           menus.
       Returns: Builder instance for fluent chaining
   */
-  T menuModel(gio.menu_model.MenuModel propval)
+  T menuModel(gio.menu_model.MenuModel propval) nothrow
   {
     return setProperty("menu-model", propval);
   }
 
   /** */
-  T modified(bool propval)
+  T modified(bool propval) nothrow
   {
     return setProperty("modified", propval);
   }
 
   /** */
-  T needsAttention(bool propval)
+  T needsAttention(bool propval) nothrow
   {
     return setProperty("needs-attention", propval);
   }
 
   /** */
-  T reorderable(bool propval)
+  T reorderable(bool propval) nothrow
   {
     return setProperty("reorderable", propval);
   }
@@ -854,7 +869,7 @@ class WidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The save delegate attached to this widget.
       Returns: Builder instance for fluent chaining
   */
-  T saveDelegate(panel.save_delegate.SaveDelegate propval)
+  T saveDelegate(panel.save_delegate.SaveDelegate propval) nothrow
   {
     return setProperty("save-delegate", propval);
   }
@@ -865,7 +880,7 @@ class WidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The title for this widget.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -876,7 +891,7 @@ class WidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The tooltip to display in tabs for the widget.
       Returns: Builder instance for fluent chaining
   */
-  T tooltip(string propval)
+  T tooltip(string propval) nothrow
   {
     return setProperty("tooltip", propval);
   }
@@ -889,7 +904,7 @@ final class WidgetGidBuilder : WidgetGidBuilderImpl!WidgetGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Widget build()
+  Widget build() nothrow
   {
     return new Widget(cast(void*)createGObject(Widget._getGType), No.Take);
   }

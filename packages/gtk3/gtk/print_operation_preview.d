@@ -17,7 +17,7 @@ interface PrintOperationPreview
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_print_operation_preview_get_type != &gidSymbolNotFound ? gtk_print_operation_preview_get_type() : cast(GType)0;
@@ -80,7 +80,7 @@ interface PrintOperationPreview
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectGotPageSize(T)(T callback, Flag!"After" after = No.After);
+  gulong connectGotPageSize(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `Ready` signal.
@@ -102,7 +102,7 @@ interface PrintOperationPreview
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectReady(T)(T callback, Flag!"After" after = No.After);
+  gulong connectReady(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gtk.print_operation_preview.PrintOperationPreview]

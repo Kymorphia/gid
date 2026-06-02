@@ -16,11 +16,8 @@ class EventPadButton
   GdkEventPadButton _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.event_pad_button.EventPadButton");
-
     _cInstance = *cast(GdkEventPadButton*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class EventPadButton
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class EventPadButton
       Get `type` field.
       Returns: the type of the event ([gdk.types.EventType.PadButtonPress] or [gdk.types.EventType.PadButtonRelease]).
   */
-  @property gdk.types.EventType type()
+  @property gdk.types.EventType type() nothrow
   {
     return cast(gdk.types.EventType)(cast(GdkEventPadButton*)this._cPtr).type;
   }
@@ -47,7 +44,7 @@ class EventPadButton
       Params:
         propval = the type of the event ([gdk.types.EventType.PadButtonPress] or [gdk.types.EventType.PadButtonRelease]).
   */
-  @property void type(gdk.types.EventType propval)
+  @property void type(gdk.types.EventType propval) nothrow
   {
     (cast(GdkEventPadButton*)this._cPtr).type = cast(GdkEventType)propval;
   }
@@ -56,7 +53,7 @@ class EventPadButton
       Get `window` field.
       Returns: the window which received the event.
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventPadButton*)this._cPtr).window);
   }
@@ -66,7 +63,7 @@ class EventPadButton
       Params:
         propval = the window which received the event.
   */
-  @property void window(gdk.window.Window propval)
+  @property void window(gdk.window.Window propval) nothrow
   {
     cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventPadButton*)this._cPtr).window);
     dToC(propval, cast(void*)&(cast(GdkEventPadButton*)this._cPtr).window);
@@ -76,7 +73,7 @@ class EventPadButton
       Get `sendEvent` field.
       Returns: true if the event was sent explicitly.
   */
-  @property byte sendEvent()
+  @property byte sendEvent() nothrow
   {
     return (cast(GdkEventPadButton*)this._cPtr).sendEvent;
   }
@@ -86,7 +83,7 @@ class EventPadButton
       Params:
         propval = true if the event was sent explicitly.
   */
-  @property void sendEvent(byte propval)
+  @property void sendEvent(byte propval) nothrow
   {
     (cast(GdkEventPadButton*)this._cPtr).sendEvent = propval;
   }
@@ -95,7 +92,7 @@ class EventPadButton
       Get `time` field.
       Returns: the time of the event in milliseconds.
   */
-  @property uint time()
+  @property uint time() nothrow
   {
     return (cast(GdkEventPadButton*)this._cPtr).time;
   }
@@ -105,7 +102,7 @@ class EventPadButton
       Params:
         propval = the time of the event in milliseconds.
   */
-  @property void time(uint propval)
+  @property void time(uint propval) nothrow
   {
     (cast(GdkEventPadButton*)this._cPtr).time = propval;
   }
@@ -115,7 +112,7 @@ class EventPadButton
       Returns: the pad group the button belongs to. A [gdk.types.InputSource.TabletPad] device
           may have one or more groups containing a set of buttons/rings/strips each.
   */
-  @property uint group()
+  @property uint group() nothrow
   {
     return (cast(GdkEventPadButton*)this._cPtr).group;
   }
@@ -126,7 +123,7 @@ class EventPadButton
         propval = the pad group the button belongs to. A [gdk.types.InputSource.TabletPad] device
             may have one or more groups containing a set of buttons/rings/strips each.
   */
-  @property void group(uint propval)
+  @property void group(uint propval) nothrow
   {
     (cast(GdkEventPadButton*)this._cPtr).group = propval;
   }
@@ -135,7 +132,7 @@ class EventPadButton
       Get `button` field.
       Returns: The pad button that was pressed.
   */
-  @property uint button()
+  @property uint button() nothrow
   {
     return (cast(GdkEventPadButton*)this._cPtr).button;
   }
@@ -145,7 +142,7 @@ class EventPadButton
       Params:
         propval = The pad button that was pressed.
   */
-  @property void button(uint propval)
+  @property void button(uint propval) nothrow
   {
     (cast(GdkEventPadButton*)this._cPtr).button = propval;
   }
@@ -155,7 +152,7 @@ class EventPadButton
       Returns: The current mode of @group. Different groups in a [gdk.types.InputSource.TabletPad]
           device may have different current modes.
   */
-  @property uint mode()
+  @property uint mode() nothrow
   {
     return (cast(GdkEventPadButton*)this._cPtr).mode;
   }
@@ -166,7 +163,7 @@ class EventPadButton
         propval = The current mode of @group. Different groups in a [gdk.types.InputSource.TabletPad]
             device may have different current modes.
   */
-  @property void mode(uint propval)
+  @property void mode(uint propval) nothrow
   {
     (cast(GdkEventPadButton*)this._cPtr).mode = propval;
   }

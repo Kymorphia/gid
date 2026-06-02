@@ -63,7 +63,7 @@ interface Paintable
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_paintable_get_type != &gidSymbolNotFound ? gdk_paintable_get_type() : cast(GType)0;
@@ -83,7 +83,7 @@ interface Paintable
         intrinsicHeight = The intrinsic height to report. Can be 0 for no height.
       Returns: a [gdk.paintable.Paintable]
   */
-  static gdk.paintable.Paintable newEmpty(int intrinsicWidth, int intrinsicHeight)
+  static gdk.paintable.Paintable newEmpty(int intrinsicWidth, int intrinsicHeight) nothrow
   {
     GdkPaintable* _cretval;
     _cretval = gdk_paintable_new_empty(intrinsicWidth, intrinsicHeight);
@@ -251,7 +251,7 @@ interface Paintable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInvalidateContents(T)(T callback, Flag!"After" after = No.After);
+  gulong connectInvalidateContents(T)(T callback, Flag!"After" after = No.After) nothrow;
 
   /**
       Connect to `InvalidateSize` signal.
@@ -277,7 +277,7 @@ interface Paintable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInvalidateSize(T)(T callback, Flag!"After" after = No.After);
+  gulong connectInvalidateSize(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gdk.paintable.Paintable]

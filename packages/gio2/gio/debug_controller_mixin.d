@@ -35,7 +35,7 @@ template DebugControllerT()
       Returns: true if debug output should be exposed (for example by forwarding it to
         the journal), false otherwise.
   */
-  @property bool debugEnabled()
+  @property bool debugEnabled() nothrow
   {
     return getDebugEnabled();
   }
@@ -46,7 +46,7 @@ template DebugControllerT()
         propval = true if debug output should be exposed (for example by forwarding it to
           the journal), false otherwise.
   */
-  @property void debugEnabled(bool propval)
+  @property void debugEnabled(bool propval) nothrow
   {
     setDebugEnabled(propval);
   }
@@ -55,7 +55,7 @@ template DebugControllerT()
       Get the value of #GDebugController:debug-enabled.
       Returns: true if debug output should be exposed, false otherwise
   */
-  override bool getDebugEnabled()
+  override bool getDebugEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_debug_controller_get_debug_enabled(cast(GDebugController*)this._cPtr);
@@ -68,7 +68,7 @@ template DebugControllerT()
       Params:
         debugEnabled = true if debug output should be exposed, false otherwise
   */
-  override void setDebugEnabled(bool debugEnabled)
+  override void setDebugEnabled(bool debugEnabled) nothrow
   {
     g_debug_controller_set_debug_enabled(cast(GDebugController*)this._cPtr, debugEnabled);
   }
@@ -85,7 +85,7 @@ template DebugControllerGidBuilderT()
           the journal), false otherwise.
       Returns: Builder instance for fluent chaining
   */
-  T debugEnabled(bool propval)
+  T debugEnabled(bool propval) nothrow
   {
     return setProperty("debug-enabled", propval);
   }

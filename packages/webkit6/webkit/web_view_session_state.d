@@ -16,32 +16,32 @@ class WebViewSessionState : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_web_view_session_state_get_type != &gidSymbolNotFound ? webkit_web_view_session_state_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WebViewSessionState self()
+  override WebViewSessionState self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class WebViewSessionState : gobject.boxed.Boxed
       Returns: a new #WebKitWebViewSessionState, or null if data doesn't contain a
             valid serialized #WebKitWebViewSessionState.
   */
-  this(glib.bytes.Bytes data)
+  this(glib.bytes.Bytes data) nothrow
   {
     WebKitWebViewSessionState* _cretval;
     _cretval = webkit_web_view_session_state_new(data ? cast(GBytes*)data._cPtr(No.Dup) : null);
@@ -65,7 +65,7 @@ class WebViewSessionState : gobject.boxed.Boxed
       Serializes a #WebKitWebViewSessionState.
       Returns: a #GBytes containing the state serialized.
   */
-  glib.bytes.Bytes serialize()
+  glib.bytes.Bytes serialize() nothrow
   {
     GBytes* _cretval;
     _cretval = webkit_web_view_session_state_serialize(cast(WebKitWebViewSessionState*)this._cPtr);

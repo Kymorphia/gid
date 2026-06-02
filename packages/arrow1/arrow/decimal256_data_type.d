@@ -15,26 +15,26 @@ class Decimal256DataType : arrow.decimal_data_type.DecimalDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal256_data_type_get_type != &gidSymbolNotFound ? garrow_decimal256_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Decimal256DataType self()
+  override Decimal256DataType self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class Decimal256DataType : arrow.decimal_data_type.DecimalDataType
       Get builder for [arrow.decimal256_data_type.Decimal256DataType]
       Returns: New builder object
   */
-  static Decimal256DataTypeGidBuilder builder()
+  static Decimal256DataTypeGidBuilder builder() nothrow
   {
     return new Decimal256DataTypeGidBuilder;
   }
@@ -60,7 +60,7 @@ class Decimal256DataType : arrow.decimal_data_type.DecimalDataType
   }
 
   /** */
-  static int maxPrecision()
+  static int maxPrecision() nothrow
   {
     int _retval;
     _retval = garrow_decimal256_data_type_max_precision();
@@ -80,7 +80,7 @@ final class Decimal256DataTypeGidBuilder : Decimal256DataTypeGidBuilderImpl!Deci
       Create object from builder.
       Returns: New object
   */
-  Decimal256DataType build()
+  Decimal256DataType build() nothrow
   {
     return new Decimal256DataType(cast(void*)createGObject(Decimal256DataType._getGType), Yes.Take);
   }

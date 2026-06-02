@@ -20,26 +20,26 @@ class HButtonBox : gtk.button_box.ButtonBox
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_hbutton_box_get_type != &gidSymbolNotFound ? gtk_hbutton_box_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HButtonBox self()
+  override HButtonBox self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class HButtonBox : gtk.button_box.ButtonBox
       Get builder for [gtk.hbutton_box.HButtonBox]
       Returns: New builder object
   */
-  static HButtonBoxGidBuilder builder()
+  static HButtonBoxGidBuilder builder() nothrow
   {
     return new HButtonBoxGidBuilder;
   }
@@ -59,7 +59,7 @@ class HButtonBox : gtk.button_box.ButtonBox
   
       Deprecated: Use [gtk.button_box.ButtonBox.new_] with [gtk.types.Orientation.Horizontal] instead
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_hbutton_box_new();
@@ -80,7 +80,7 @@ final class HButtonBoxGidBuilder : HButtonBoxGidBuilderImpl!HButtonBoxGidBuilder
       Create object from builder.
       Returns: New object
   */
-  HButtonBox build()
+  HButtonBox build() nothrow
   {
     return new HButtonBox(cast(void*)createGObject(HButtonBox._getGType), No.Take);
   }

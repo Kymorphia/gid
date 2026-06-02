@@ -20,11 +20,8 @@ class MetaTable
   GdaMetaTable _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.meta_table.MetaTable");
-
     _cInstance = *cast(GdaMetaTable*)ptr;
 
     if (take)
@@ -32,7 +29,7 @@ class MetaTable
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -41,7 +38,7 @@ class MetaTable
       Get `pkColsNb` field.
       Returns: size of the @pk_cols_array array
   */
-  @property int pkColsNb()
+  @property int pkColsNb() nothrow
   {
     return (cast(GdaMetaTable*)this._cPtr).pkColsNb;
   }
@@ -51,7 +48,7 @@ class MetaTable
       Params:
         propval = size of the @pk_cols_array array
   */
-  @property void pkColsNb(int propval)
+  @property void pkColsNb(int propval) nothrow
   {
     (cast(GdaMetaTable*)this._cPtr).pkColsNb = propval;
   }

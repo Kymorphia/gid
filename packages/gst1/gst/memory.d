@@ -63,7 +63,7 @@ class Memory : gobject.boxed.Boxed
         offset = the offset where valid data starts
         size = the size of valid data
   */
-  this(gst.allocator.Allocator allocator = gst.allocator.Allocator.init, gst.memory.Memory parent = gst.memory.Memory.init, size_t maxsize = size_t.init, size_t align_ = size_t.init, size_t offset = size_t.init, size_t size = size_t.init)
+  this(gst.allocator.Allocator allocator = gst.allocator.Allocator.init, gst.memory.Memory parent = gst.memory.Memory.init, size_t maxsize = size_t.init, size_t align_ = size_t.init, size_t offset = size_t.init, size_t size = size_t.init) nothrow
   {
     super(gMalloc(GstMemory.sizeof), Yes.Take);
     this.allocator = allocator;
@@ -75,32 +75,32 @@ class Memory : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_memory_get_type != &gidSymbolNotFound ? gst_memory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Memory self()
+  override Memory self() nothrow
   {
     return this;
   }
@@ -109,7 +109,7 @@ class Memory : gobject.boxed.Boxed
       Get `miniObject` field.
       Returns: parent structure
   */
-  @property gst.mini_object.MiniObject miniObject()
+  @property gst.mini_object.MiniObject miniObject() nothrow
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstMemory*)this._cPtr).miniObject);
   }
@@ -118,7 +118,7 @@ class Memory : gobject.boxed.Boxed
       Get `allocator` field.
       Returns: pointer to the #GstAllocator
   */
-  @property gst.allocator.Allocator allocator()
+  @property gst.allocator.Allocator allocator() nothrow
   {
     return cToD!(gst.allocator.Allocator)(cast(void*)(cast(GstMemory*)this._cPtr).allocator);
   }
@@ -128,7 +128,7 @@ class Memory : gobject.boxed.Boxed
       Params:
         propval = pointer to the #GstAllocator
   */
-  @property void allocator(gst.allocator.Allocator propval)
+  @property void allocator(gst.allocator.Allocator propval) nothrow
   {
     cValueFree!(gst.allocator.Allocator)(cast(void*)(cast(GstMemory*)this._cPtr).allocator);
     dToC(propval, cast(void*)&(cast(GstMemory*)this._cPtr).allocator);
@@ -138,7 +138,7 @@ class Memory : gobject.boxed.Boxed
       Get `parent` field.
       Returns: parent memory block
   */
-  @property gst.memory.Memory parent()
+  @property gst.memory.Memory parent() nothrow
   {
     return cToD!(gst.memory.Memory)(cast(void*)(cast(GstMemory*)this._cPtr).parent);
   }
@@ -148,7 +148,7 @@ class Memory : gobject.boxed.Boxed
       Params:
         propval = parent memory block
   */
-  @property void parent(gst.memory.Memory propval)
+  @property void parent(gst.memory.Memory propval) nothrow
   {
     cValueFree!(gst.memory.Memory)(cast(void*)(cast(GstMemory*)this._cPtr).parent);
     dToC(propval, cast(void*)&(cast(GstMemory*)this._cPtr).parent);
@@ -158,7 +158,7 @@ class Memory : gobject.boxed.Boxed
       Get `maxsize` field.
       Returns: the maximum size allocated
   */
-  @property size_t maxsize()
+  @property size_t maxsize() nothrow
   {
     return (cast(GstMemory*)this._cPtr).maxsize;
   }
@@ -168,7 +168,7 @@ class Memory : gobject.boxed.Boxed
       Params:
         propval = the maximum size allocated
   */
-  @property void maxsize(size_t propval)
+  @property void maxsize(size_t propval) nothrow
   {
     (cast(GstMemory*)this._cPtr).maxsize = propval;
   }
@@ -177,7 +177,7 @@ class Memory : gobject.boxed.Boxed
       Get `align_` field.
       Returns: the alignment of the memory
   */
-  @property size_t align_()
+  @property size_t align_() nothrow
   {
     return (cast(GstMemory*)this._cPtr).align_;
   }
@@ -187,7 +187,7 @@ class Memory : gobject.boxed.Boxed
       Params:
         propval = the alignment of the memory
   */
-  @property void align_(size_t propval)
+  @property void align_(size_t propval) nothrow
   {
     (cast(GstMemory*)this._cPtr).align_ = propval;
   }
@@ -196,7 +196,7 @@ class Memory : gobject.boxed.Boxed
       Get `offset` field.
       Returns: the offset where valid data starts
   */
-  @property size_t offset()
+  @property size_t offset() nothrow
   {
     return (cast(GstMemory*)this._cPtr).offset;
   }
@@ -206,7 +206,7 @@ class Memory : gobject.boxed.Boxed
       Params:
         propval = the offset where valid data starts
   */
-  @property void offset(size_t propval)
+  @property void offset(size_t propval) nothrow
   {
     (cast(GstMemory*)this._cPtr).offset = propval;
   }
@@ -215,7 +215,7 @@ class Memory : gobject.boxed.Boxed
       Get `size` field.
       Returns: the size of valid data
   */
-  @property size_t size()
+  @property size_t size() nothrow
   {
     return (cast(GstMemory*)this._cPtr).size;
   }
@@ -225,7 +225,7 @@ class Memory : gobject.boxed.Boxed
       Params:
         propval = the size of valid data
   */
-  @property void size(size_t propval)
+  @property void size(size_t propval) nothrow
   {
     (cast(GstMemory*)this._cPtr).size = propval;
   }
@@ -245,14 +245,21 @@ class Memory : gobject.boxed.Boxed
         notify = called with user_data when the memory is freed
       Returns: a new #GstMemory.
   */
-  static gst.memory.Memory newWrapped(gst.types.MemoryFlags flags, ubyte[] data, size_t maxsize, size_t offset, glib.types.DestroyNotify notify = null)
+  static gst.memory.Memory newWrapped(gst.types.MemoryFlags flags, ubyte[] data, size_t maxsize, size_t offset, glib.types.DestroyNotify notify = null) nothrow
   {
-    extern(C) void _notifyCallback(void* data)
+    extern(C) void _notifyCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
     GstMemory* _cretval;
@@ -277,7 +284,7 @@ class Memory : gobject.boxed.Boxed
         size = size to copy, or -1 to copy to the end of the memory region
       Returns: a new copy of mem if the copy succeeded, null otherwise.
   */
-  gst.memory.Memory copy(ptrdiff_t offset, ptrdiff_t size)
+  gst.memory.Memory copy(ptrdiff_t offset, ptrdiff_t size) nothrow
   {
     GstMemory* _cretval;
     _cretval = gst_memory_copy(cast(GstMemory*)this._cPtr, offset, size);
@@ -293,7 +300,7 @@ class Memory : gobject.boxed.Boxed
         maxsize = pointer to maxsize
       Returns: the current size of mem
   */
-  size_t getSizes(out size_t offset, out size_t maxsize)
+  size_t getSizes(out size_t offset, out size_t maxsize) nothrow
   {
     size_t _retval;
     _retval = gst_memory_get_sizes(cast(GstMemory*)this._cPtr, cast(size_t*)&offset, cast(size_t*)&maxsize);
@@ -313,7 +320,7 @@ class Memory : gobject.boxed.Boxed
         offset = a pointer to a result offset
       Returns: true if the memory is contiguous and of a common parent.
   */
-  bool isSpan(gst.memory.Memory mem2, out size_t offset)
+  bool isSpan(gst.memory.Memory mem2, out size_t offset) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_memory_is_span(cast(GstMemory*)this._cPtr, mem2 ? cast(GstMemory*)mem2._cPtr(No.Dup) : null, cast(size_t*)&offset);
@@ -327,7 +334,7 @@ class Memory : gobject.boxed.Boxed
         memType = a memory type
       Returns: true if mem was allocated from an allocator for mem_type.
   */
-  bool isType(string memType)
+  bool isType(string memType) nothrow
   {
     bool _retval;
     const(char)* _memType = memType.toCString(No.Alloc);
@@ -349,7 +356,7 @@ class Memory : gobject.boxed.Boxed
       Returns: a #GstMemory object mapped
         with flags or null when a mapping is not possible.
   */
-  gst.memory.Memory makeMapped(out gst.map_info.MapInfo info, gst.types.MapFlags flags)
+  gst.memory.Memory makeMapped(out gst.map_info.MapInfo info, gst.types.MapFlags flags) nothrow
   {
     GstMemory* _cretval;
     GstMapInfo _info;
@@ -378,7 +385,7 @@ class Memory : gobject.boxed.Boxed
         flags = mapping flags
       Returns: true if the map operation was successful.
   */
-  bool map(out gst.map_info.MapInfo info, gst.types.MapFlags flags)
+  bool map(out gst.map_info.MapInfo info, gst.types.MapFlags flags) nothrow
   {
     bool _retval;
     GstMapInfo _info;
@@ -398,7 +405,7 @@ class Memory : gobject.boxed.Boxed
         offset = a new offset
         size = a new size
   */
-  void resize(ptrdiff_t offset, size_t size)
+  void resize(ptrdiff_t offset, size_t size) nothrow
   {
     gst_memory_resize(cast(GstMemory*)this._cPtr, offset, size);
   }
@@ -414,7 +421,7 @@ class Memory : gobject.boxed.Boxed
         size = size to share, or -1 to share to the end of the memory region
       Returns: a new #GstMemory.
   */
-  gst.memory.Memory share(ptrdiff_t offset, ptrdiff_t size)
+  gst.memory.Memory share(ptrdiff_t offset, ptrdiff_t size) nothrow
   {
     GstMemory* _cretval;
     _cretval = gst_memory_share(cast(GstMemory*)this._cPtr, offset, size);
@@ -428,7 +435,7 @@ class Memory : gobject.boxed.Boxed
       Params:
         info = a #GstMapInfo
   */
-  void unmap(gst.map_info.MapInfo info)
+  void unmap(gst.map_info.MapInfo info) nothrow
   {
     gst_memory_unmap(cast(GstMemory*)this._cPtr, info ? cast(GstMapInfo*)info._cPtr : null);
   }

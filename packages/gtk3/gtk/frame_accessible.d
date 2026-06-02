@@ -16,26 +16,26 @@ class FrameAccessible : gtk.container_accessible.ContainerAccessible
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_frame_accessible_get_type != &gidSymbolNotFound ? gtk_frame_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FrameAccessible self()
+  override FrameAccessible self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class FrameAccessible : gtk.container_accessible.ContainerAccessible
       Get builder for [gtk.frame_accessible.FrameAccessible]
       Returns: New builder object
   */
-  static FrameAccessibleGidBuilder builder()
+  static FrameAccessibleGidBuilder builder() nothrow
   {
     return new FrameAccessibleGidBuilder;
   }
@@ -63,7 +63,7 @@ final class FrameAccessibleGidBuilder : FrameAccessibleGidBuilderImpl!FrameAcces
       Create object from builder.
       Returns: New object
   */
-  FrameAccessible build()
+  FrameAccessible build() nothrow
   {
     return new FrameAccessible(cast(void*)createGObject(FrameAccessible._getGType), No.Take);
   }

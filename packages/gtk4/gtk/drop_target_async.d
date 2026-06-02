@@ -53,26 +53,26 @@ class DropTargetAsync : gtk.event_controller.EventController
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_drop_target_async_get_type != &gidSymbolNotFound ? gtk_drop_target_async_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DropTargetAsync self()
+  override DropTargetAsync self() nothrow
   {
     return this;
   }
@@ -81,7 +81,7 @@ class DropTargetAsync : gtk.event_controller.EventController
       Get builder for [gtk.drop_target_async.DropTargetAsync]
       Returns: New builder object
   */
-  static DropTargetAsyncGidBuilder builder()
+  static DropTargetAsyncGidBuilder builder() nothrow
   {
     return new DropTargetAsyncGidBuilder;
   }
@@ -90,7 +90,7 @@ class DropTargetAsync : gtk.event_controller.EventController
       Get `actions` property.
       Returns: The `GdkDragActions` that this drop target supports.
   */
-  @property gdk.types.DragAction actions()
+  @property gdk.types.DragAction actions() nothrow
   {
     return getActions();
   }
@@ -100,7 +100,7 @@ class DropTargetAsync : gtk.event_controller.EventController
       Params:
         propval = The `GdkDragActions` that this drop target supports.
   */
-  @property void actions(gdk.types.DragAction propval)
+  @property void actions(gdk.types.DragAction propval) nothrow
   {
     setActions(propval);
   }
@@ -109,7 +109,7 @@ class DropTargetAsync : gtk.event_controller.EventController
       Get `formats` property.
       Returns: The [gdk.content_formats.ContentFormats] that determines the supported data formats.
   */
-  @property gdk.content_formats.ContentFormats formats()
+  @property gdk.content_formats.ContentFormats formats() nothrow
   {
     return getFormats();
   }
@@ -119,7 +119,7 @@ class DropTargetAsync : gtk.event_controller.EventController
       Params:
         propval = The [gdk.content_formats.ContentFormats] that determines the supported data formats.
   */
-  @property void formats(gdk.content_formats.ContentFormats propval)
+  @property void formats(gdk.content_formats.ContentFormats propval) nothrow
   {
     setFormats(propval);
   }
@@ -132,7 +132,7 @@ class DropTargetAsync : gtk.event_controller.EventController
         actions = the supported actions
       Returns: the new [gtk.drop_target_async.DropTargetAsync]
   */
-  this(gdk.content_formats.ContentFormats formats, gdk.types.DragAction actions)
+  this(gdk.content_formats.ContentFormats formats, gdk.types.DragAction actions) nothrow
   {
     GtkDropTargetAsync* _cretval;
     _cretval = gtk_drop_target_async_new(formats ? cast(GdkContentFormats*)formats._cPtr(Yes.Dup) : null, actions);
@@ -143,7 +143,7 @@ class DropTargetAsync : gtk.event_controller.EventController
       Gets the actions that this drop target supports.
       Returns: the actions that this drop target supports
   */
-  gdk.types.DragAction getActions()
+  gdk.types.DragAction getActions() nothrow
   {
     GdkDragAction _cretval;
     _cretval = gtk_drop_target_async_get_actions(cast(GtkDropTargetAsync*)this._cPtr);
@@ -157,7 +157,7 @@ class DropTargetAsync : gtk.event_controller.EventController
       If the result is null, all formats are expected to be supported.
       Returns: the supported data formats
   */
-  gdk.content_formats.ContentFormats getFormats()
+  gdk.content_formats.ContentFormats getFormats() nothrow
   {
     GdkContentFormats* _cretval;
     _cretval = gtk_drop_target_async_get_formats(cast(GtkDropTargetAsync*)this._cPtr);
@@ -175,7 +175,7 @@ class DropTargetAsync : gtk.event_controller.EventController
       Params:
         drop = the [gdk.drop.Drop] of an ongoing drag operation
   */
-  void rejectDrop(gdk.drop.Drop drop)
+  void rejectDrop(gdk.drop.Drop drop) nothrow
   {
     gtk_drop_target_async_reject_drop(cast(GtkDropTargetAsync*)this._cPtr, drop ? cast(GdkDrop*)drop._cPtr(No.Dup) : null);
   }
@@ -186,7 +186,7 @@ class DropTargetAsync : gtk.event_controller.EventController
       Params:
         actions = the supported actions
   */
-  void setActions(gdk.types.DragAction actions)
+  void setActions(gdk.types.DragAction actions) nothrow
   {
     gtk_drop_target_async_set_actions(cast(GtkDropTargetAsync*)this._cPtr, actions);
   }
@@ -197,7 +197,7 @@ class DropTargetAsync : gtk.event_controller.EventController
       Params:
         formats = the supported data formats or null for any format
   */
-  void setFormats(gdk.content_formats.ContentFormats formats = null)
+  void setFormats(gdk.content_formats.ContentFormats formats = null) nothrow
   {
     gtk_drop_target_async_set_formats(cast(GtkDropTargetAsync*)this._cPtr, formats ? cast(GdkContentFormats*)formats._cPtr(No.Dup) : null);
   }
@@ -234,18 +234,19 @@ class DropTargetAsync : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAccept(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAccept(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drop.Drop)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.drop_target_async.DropTargetAsync)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -253,7 +254,14 @@ class DropTargetAsync : gtk.event_controller.EventController
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.drop_target_async.DropTargetAsync.accept");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -286,7 +294,7 @@ class DropTargetAsync : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDragEnter(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragEnter(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == gdk.types.DragAction)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drop.Drop)))
@@ -295,11 +303,12 @@ class DropTargetAsync : gtk.event_controller.EventController
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.drop_target_async.DropTargetAsync)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gdk.types.DragAction _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -313,7 +322,14 @@ class DropTargetAsync : gtk.event_controller.EventController
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.drop_target_async.DropTargetAsync.dragEnter");
+      }
 
       setVal!(gdk.types.DragAction)(_returnValue, _retval);
     }
@@ -342,14 +358,14 @@ class DropTargetAsync : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDragLeave(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragLeave(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drop.Drop)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.drop_target_async.DropTargetAsync)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -361,7 +377,14 @@ class DropTargetAsync : gtk.event_controller.EventController
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.drop_target_async.DropTargetAsync.dragLeave");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -390,7 +413,7 @@ class DropTargetAsync : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDragMotion(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragMotion(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == gdk.types.DragAction)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drop.Drop)))
@@ -399,11 +422,12 @@ class DropTargetAsync : gtk.event_controller.EventController
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.drop_target_async.DropTargetAsync)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      gdk.types.DragAction _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -417,7 +441,14 @@ class DropTargetAsync : gtk.event_controller.EventController
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.drop_target_async.DropTargetAsync.dragMotion");
+      }
 
       setVal!(gdk.types.DragAction)(_returnValue, _retval);
     }
@@ -461,7 +492,7 @@ class DropTargetAsync : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDrop(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDrop(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drop.Drop)))
@@ -470,11 +501,12 @@ class DropTargetAsync : gtk.event_controller.EventController
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.drop_target_async.DropTargetAsync)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -488,7 +520,14 @@ class DropTargetAsync : gtk.event_controller.EventController
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.drop_target_async.DropTargetAsync.drop");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -508,7 +547,7 @@ class DropTargetAsyncGidBuilderImpl(T) : gtk.event_controller.EventControllerGid
         propval = The `GdkDragActions` that this drop target supports.
       Returns: Builder instance for fluent chaining
   */
-  T actions(gdk.types.DragAction propval)
+  T actions(gdk.types.DragAction propval) nothrow
   {
     return setProperty("actions", propval);
   }
@@ -519,7 +558,7 @@ class DropTargetAsyncGidBuilderImpl(T) : gtk.event_controller.EventControllerGid
         propval = The [gdk.content_formats.ContentFormats] that determines the supported data formats.
       Returns: Builder instance for fluent chaining
   */
-  T formats(gdk.content_formats.ContentFormats propval)
+  T formats(gdk.content_formats.ContentFormats propval) nothrow
   {
     return setProperty("formats", propval);
   }
@@ -532,7 +571,7 @@ final class DropTargetAsyncGidBuilder : DropTargetAsyncGidBuilderImpl!DropTarget
       Create object from builder.
       Returns: New object
   */
-  DropTargetAsync build()
+  DropTargetAsync build() nothrow
   {
     return new DropTargetAsync(cast(void*)createGObject(DropTargetAsync._getGType), Yes.Take);
   }

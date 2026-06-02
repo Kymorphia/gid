@@ -23,26 +23,26 @@ class CustomLayout : gtk.layout_manager.LayoutManager
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_custom_layout_get_type != &gidSymbolNotFound ? gtk_custom_layout_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CustomLayout self()
+  override CustomLayout self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class CustomLayout : gtk.layout_manager.LayoutManager
       Get builder for [gtk.custom_layout.CustomLayout]
       Returns: New builder object
   */
-  static CustomLayoutGidBuilder builder()
+  static CustomLayoutGidBuilder builder() nothrow
   {
     return new CustomLayoutGidBuilder;
   }
@@ -72,15 +72,22 @@ class CustomLayout : gtk.layout_manager.LayoutManager
             the layout manager
       Returns: the newly created [gtk.custom_layout.CustomLayout]
   */
-  this(gtk.types.CustomRequestModeFunc requestMode, gtk.types.CustomMeasureFunc measure, gtk.types.CustomAllocateFunc allocate)
+  this(gtk.types.CustomRequestModeFunc requestMode, gtk.types.CustomMeasureFunc measure, gtk.types.CustomAllocateFunc allocate) nothrow
   {
     static gtk.types.CustomRequestModeFunc _static_requestMode;
 
-    extern(C) GtkSizeRequestMode _requestModeCallback(GtkWidget* widget)
+    extern(C) GtkSizeRequestMode _requestModeCallback(GtkWidget* widget) nothrow
     {
       gtk.types.SizeRequestMode _dretval;
 
-      _dretval = _static_requestMode(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take));
+      try
+      {
+        _dretval = _static_requestMode(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.CustomRequestModeFunc");
+      }
       auto _retval = cast(GtkSizeRequestMode)_dretval;
 
       return _retval;
@@ -89,17 +96,31 @@ class CustomLayout : gtk.layout_manager.LayoutManager
     _static_requestMode = requestMode;
     static gtk.types.CustomMeasureFunc _static_measure;
 
-    extern(C) void _measureCallback(GtkWidget* widget, GtkOrientation orientation, int forSize, int* minimum, int* natural, int* minimumBaseline, int* naturalBaseline)
+    extern(C) void _measureCallback(GtkWidget* widget, GtkOrientation orientation, int forSize, int* minimum, int* natural, int* minimumBaseline, int* naturalBaseline) nothrow
     {
-      _static_measure(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), orientation, forSize, *minimum, *natural, *minimumBaseline, *naturalBaseline);
+      try
+      {
+        _static_measure(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), orientation, forSize, *minimum, *natural, *minimumBaseline, *naturalBaseline);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.CustomMeasureFunc");
+      }
     }
     auto _measureCB = measure ? &_measureCallback : null;
     _static_measure = measure;
     static gtk.types.CustomAllocateFunc _static_allocate;
 
-    extern(C) void _allocateCallback(GtkWidget* widget, int width, int height, int baseline)
+    extern(C) void _allocateCallback(GtkWidget* widget, int width, int height, int baseline) nothrow
     {
-      _static_allocate(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), width, height, baseline);
+      try
+      {
+        _static_allocate(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), width, height, baseline);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.CustomAllocateFunc");
+      }
     }
     auto _allocateCB = allocate ? &_allocateCallback : null;
     _static_allocate = allocate;
@@ -124,7 +145,7 @@ final class CustomLayoutGidBuilder : CustomLayoutGidBuilderImpl!CustomLayoutGidB
       Create object from builder.
       Returns: New object
   */
-  CustomLayout build()
+  CustomLayout build() nothrow
   {
     return new CustomLayout(cast(void*)createGObject(CustomLayout._getGType), Yes.Take);
   }

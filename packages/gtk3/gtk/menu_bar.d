@@ -28,26 +28,26 @@ class MenuBar : gtk.menu_shell.MenuShell
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_menu_bar_get_type != &gidSymbolNotFound ? gtk_menu_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MenuBar self()
+  override MenuBar self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class MenuBar : gtk.menu_shell.MenuShell
       Get builder for [gtk.menu_bar.MenuBar]
       Returns: New builder object
   */
-  static MenuBarGidBuilder builder()
+  static MenuBarGidBuilder builder() nothrow
   {
     return new MenuBarGidBuilder;
   }
@@ -66,7 +66,7 @@ class MenuBar : gtk.menu_shell.MenuShell
       Returns: The child pack direction of the menubar. It determines how
         the widgets contained in child menuitems are arranged.
   */
-  @property gtk.types.PackDirection childPackDirection()
+  @property gtk.types.PackDirection childPackDirection() nothrow
   {
     return getChildPackDirection();
   }
@@ -77,7 +77,7 @@ class MenuBar : gtk.menu_shell.MenuShell
         propval = The child pack direction of the menubar. It determines how
           the widgets contained in child menuitems are arranged.
   */
-  @property void childPackDirection(gtk.types.PackDirection propval)
+  @property void childPackDirection(gtk.types.PackDirection propval) nothrow
   {
     setChildPackDirection(propval);
   }
@@ -87,7 +87,7 @@ class MenuBar : gtk.menu_shell.MenuShell
       Returns: The pack direction of the menubar. It determines how
         menuitems are arranged in the menubar.
   */
-  @property gtk.types.PackDirection packDirection()
+  @property gtk.types.PackDirection packDirection() nothrow
   {
     return getPackDirection();
   }
@@ -98,7 +98,7 @@ class MenuBar : gtk.menu_shell.MenuShell
         propval = The pack direction of the menubar. It determines how
           menuitems are arranged in the menubar.
   */
-  @property void packDirection(gtk.types.PackDirection propval)
+  @property void packDirection(gtk.types.PackDirection propval) nothrow
   {
     setPackDirection(propval);
   }
@@ -107,7 +107,7 @@ class MenuBar : gtk.menu_shell.MenuShell
       Creates a new #GtkMenuBar
       Returns: the new menu bar, as a #GtkWidget
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_bar_new();
@@ -127,7 +127,7 @@ class MenuBar : gtk.menu_shell.MenuShell
         model = a #GMenuModel
       Returns: a new #GtkMenuBar
   */
-  static gtk.menu_bar.MenuBar newFromModel(gio.menu_model.MenuModel model)
+  static gtk.menu_bar.MenuBar newFromModel(gio.menu_model.MenuModel model) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_bar_new_from_model(model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
@@ -140,7 +140,7 @@ class MenuBar : gtk.menu_shell.MenuShell
       See [gtk.menu_bar.MenuBar.setChildPackDirection].
       Returns: the child pack direction
   */
-  gtk.types.PackDirection getChildPackDirection()
+  gtk.types.PackDirection getChildPackDirection() nothrow
   {
     GtkPackDirection _cretval;
     _cretval = gtk_menu_bar_get_child_pack_direction(cast(GtkMenuBar*)this._cPtr);
@@ -153,7 +153,7 @@ class MenuBar : gtk.menu_shell.MenuShell
       See [gtk.menu_bar.MenuBar.setPackDirection].
       Returns: the pack direction
   */
-  gtk.types.PackDirection getPackDirection()
+  gtk.types.PackDirection getPackDirection() nothrow
   {
     GtkPackDirection _cretval;
     _cretval = gtk_menu_bar_get_pack_direction(cast(GtkMenuBar*)this._cPtr);
@@ -167,7 +167,7 @@ class MenuBar : gtk.menu_shell.MenuShell
       Params:
         childPackDir = a new #GtkPackDirection
   */
-  void setChildPackDirection(gtk.types.PackDirection childPackDir)
+  void setChildPackDirection(gtk.types.PackDirection childPackDir) nothrow
   {
     gtk_menu_bar_set_child_pack_direction(cast(GtkMenuBar*)this._cPtr, childPackDir);
   }
@@ -178,7 +178,7 @@ class MenuBar : gtk.menu_shell.MenuShell
       Params:
         packDir = a new #GtkPackDirection
   */
-  void setPackDirection(gtk.types.PackDirection packDir)
+  void setPackDirection(gtk.types.PackDirection packDir) nothrow
   {
     gtk_menu_bar_set_pack_direction(cast(GtkMenuBar*)this._cPtr, packDir);
   }
@@ -196,7 +196,7 @@ class MenuBarGidBuilderImpl(T) : gtk.menu_shell.MenuShellGidBuilderImpl!T
           the widgets contained in child menuitems are arranged.
       Returns: Builder instance for fluent chaining
   */
-  T childPackDirection(gtk.types.PackDirection propval)
+  T childPackDirection(gtk.types.PackDirection propval) nothrow
   {
     return setProperty("child-pack-direction", propval);
   }
@@ -208,7 +208,7 @@ class MenuBarGidBuilderImpl(T) : gtk.menu_shell.MenuShellGidBuilderImpl!T
           menuitems are arranged in the menubar.
       Returns: Builder instance for fluent chaining
   */
-  T packDirection(gtk.types.PackDirection propval)
+  T packDirection(gtk.types.PackDirection propval) nothrow
   {
     return setProperty("pack-direction", propval);
   }
@@ -221,7 +221,7 @@ final class MenuBarGidBuilder : MenuBarGidBuilderImpl!MenuBarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  MenuBar build()
+  MenuBar build() nothrow
   {
     return new MenuBar(cast(void*)createGObject(MenuBar._getGType), No.Take);
   }

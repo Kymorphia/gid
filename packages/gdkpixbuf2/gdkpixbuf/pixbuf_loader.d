@@ -66,26 +66,26 @@ class PixbufLoader : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_pixbuf_loader_get_type != &gidSymbolNotFound ? gdk_pixbuf_loader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PixbufLoader self()
+  override PixbufLoader self() nothrow
   {
     return this;
   }
@@ -94,7 +94,7 @@ class PixbufLoader : gobject.object.ObjectWrap
       Get builder for [gdkpixbuf.pixbuf_loader.PixbufLoader]
       Returns: New builder object
   */
-  static PixbufLoaderGidBuilder builder()
+  static PixbufLoaderGidBuilder builder() nothrow
   {
     return new PixbufLoaderGidBuilder;
   }
@@ -103,7 +103,7 @@ class PixbufLoader : gobject.object.ObjectWrap
       Creates a new pixbuf loader object.
       Returns: A newly-created pixbuf loader.
   */
-  this()
+  this() nothrow
   {
     GdkPixbufLoader* _cretval;
     _cretval = gdk_pixbuf_loader_new();
@@ -219,7 +219,7 @@ class PixbufLoader : gobject.object.ObjectWrap
       Returns: The animation that the loader is
           currently loading
   */
-  gdkpixbuf.pixbuf_animation.PixbufAnimation getAnimation()
+  gdkpixbuf.pixbuf_animation.PixbufAnimation getAnimation() nothrow
   {
     GdkPixbufAnimation* _cretval;
     _cretval = gdk_pixbuf_loader_get_animation(cast(GdkPixbufLoader*)this._cPtr);
@@ -232,7 +232,7 @@ class PixbufLoader : gobject.object.ObjectWrap
       currently loading image file.
       Returns: A #GdkPixbufFormat
   */
-  gdkpixbuf.pixbuf_format.PixbufFormat getFormat()
+  gdkpixbuf.pixbuf_format.PixbufFormat getFormat() nothrow
   {
     GdkPixbufFormat* _cretval;
     _cretval = gdk_pixbuf_loader_get_format(cast(GdkPixbufLoader*)this._cPtr);
@@ -259,7 +259,7 @@ class PixbufLoader : gobject.object.ObjectWrap
       Returns: The pixbuf that the loader is
           creating
   */
-  gdkpixbuf.pixbuf.Pixbuf getPixbuf()
+  gdkpixbuf.pixbuf.Pixbuf getPixbuf() nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gdk_pixbuf_loader_get_pixbuf(cast(GdkPixbufLoader*)this._cPtr);
@@ -281,7 +281,7 @@ class PixbufLoader : gobject.object.ObjectWrap
         width = The desired width of the image being loaded.
         height = The desired height of the image being loaded.
   */
-  void setSize(int width, int height)
+  void setSize(int width, int height) nothrow
   {
     gdk_pixbuf_loader_set_size(cast(GdkPixbufLoader*)this._cPtr, width, height);
   }
@@ -349,13 +349,13 @@ class PixbufLoader : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAreaPrepared(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAreaPrepared(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdkpixbuf.pixbuf_loader.PixbufLoader)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -364,7 +364,14 @@ class PixbufLoader : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdkpixbuf.pixbuf_loader.PixbufLoader.areaPrepared");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -401,7 +408,7 @@ class PixbufLoader : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAreaUpdated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAreaUpdated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -411,7 +418,7 @@ class PixbufLoader : gobject.object.ObjectWrap
   && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gdkpixbuf.pixbuf_loader.PixbufLoader)))
   && Parameters!T.length < 6)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -432,7 +439,14 @@ class PixbufLoader : gobject.object.ObjectWrap
       static if (Parameters!T.length > 4)
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdkpixbuf.pixbuf_loader.PixbufLoader.areaUpdated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -458,13 +472,13 @@ class PixbufLoader : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClosed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClosed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdkpixbuf.pixbuf_loader.PixbufLoader)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -473,7 +487,14 @@ class PixbufLoader : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdkpixbuf.pixbuf_loader.PixbufLoader.closed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -505,7 +526,7 @@ class PixbufLoader : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSizePrepared(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSizePrepared(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -513,7 +534,7 @@ class PixbufLoader : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gdkpixbuf.pixbuf_loader.PixbufLoader)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -528,7 +549,14 @@ class PixbufLoader : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdkpixbuf.pixbuf_loader.PixbufLoader.sizePrepared");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -548,7 +576,7 @@ final class PixbufLoaderGidBuilder : PixbufLoaderGidBuilderImpl!PixbufLoaderGidB
       Create object from builder.
       Returns: New object
   */
-  PixbufLoader build()
+  PixbufLoader build() nothrow
   {
     return new PixbufLoader(cast(void*)createGObject(PixbufLoader._getGType), Yes.Take);
   }

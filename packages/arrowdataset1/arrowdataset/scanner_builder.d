@@ -19,26 +19,26 @@ class ScannerBuilder : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_scanner_builder_get_type != &gidSymbolNotFound ? gadataset_scanner_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ScannerBuilder self()
+  override ScannerBuilder self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class ScannerBuilder : gobject.object.ObjectWrap
       Get builder for [arrowdataset.scanner_builder.ScannerBuilder]
       Returns: New builder object
   */
-  static ScannerBuilderGidBuilder builder()
+  static ScannerBuilderGidBuilder builder() nothrow
   {
     return new ScannerBuilderGidBuilder;
   }
@@ -64,7 +64,7 @@ class ScannerBuilder : gobject.object.ObjectWrap
   }
 
   /** */
-  static arrowdataset.scanner_builder.ScannerBuilder newRecordBatchReader(arrow.record_batch_reader.RecordBatchReader reader)
+  static arrowdataset.scanner_builder.ScannerBuilder newRecordBatchReader(arrow.record_batch_reader.RecordBatchReader reader) nothrow
   {
     GADatasetScannerBuilder* _cretval;
     _cretval = gadataset_scanner_builder_new_record_batch_reader(reader ? cast(GArrowRecordBatchReader*)reader._cPtr(No.Dup) : null);
@@ -101,7 +101,7 @@ class ScannerBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 {
 
   /** */
-  T scannerBuilder(void* propval)
+  T scannerBuilder(void* propval) nothrow
   {
     return setProperty("scanner-builder", propval);
   }
@@ -114,7 +114,7 @@ final class ScannerBuilderGidBuilder : ScannerBuilderGidBuilderImpl!ScannerBuild
       Create object from builder.
       Returns: New object
   */
-  ScannerBuilder build()
+  ScannerBuilder build() nothrow
   {
     return new ScannerBuilder(cast(void*)createGObject(ScannerBuilder._getGType), Yes.Take);
   }

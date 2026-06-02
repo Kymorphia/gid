@@ -23,44 +23,44 @@ class EGLImage : gobject.boxed.Boxed
   /**
       Create a `eglimage.EGLImage` boxed type.
   */
-  this()
+  this() nothrow
   {
     super(gMalloc(GstEGLImage.sizeof), Yes.Take);
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_egl_image_get_type != &gidSymbolNotFound ? gst_egl_image_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EGLImage self()
+  override EGLImage self() nothrow
   {
     return this;
   }
 
   /** */
-  void* getImage()
+  void* getImage() nothrow
   {
     auto _retval = gst_egl_image_get_image(cast(GstEGLImage*)this._cPtr);
     return _retval;
@@ -83,7 +83,7 @@ class EGLImage : gobject.boxed.Boxed
         offset = the byte-offset in the data
       Returns: a #GstEGLImage wrapping dmabuf or null on failure
   */
-  static gstglegl.eglimage.EGLImage fromDmabuf(gstgl.glcontext.GLContext context, int dmabuf, gstvideo.video_info.VideoInfo inInfo, int plane, size_t offset)
+  static gstglegl.eglimage.EGLImage fromDmabuf(gstgl.glcontext.GLContext context, int dmabuf, gstvideo.video_info.VideoInfo inInfo, int plane, size_t offset) nothrow
   {
     GstEGLImage* _cretval;
     _cretval = gst_egl_image_from_dmabuf(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, dmabuf, inInfo ? cast(const(GstVideoInfo)*)inInfo._cPtr(No.Dup) : null, plane, offset);

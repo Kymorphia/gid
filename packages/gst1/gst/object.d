@@ -70,26 +70,26 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_object_get_type != &gidSymbolNotFound ? gst_object_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ObjectWrap self()
+  override ObjectWrap self() nothrow
   {
     return this;
   }
@@ -98,19 +98,19 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
       Get builder for [gst.object.ObjectWrap]
       Returns: New builder object
   */
-  static ObjectWrapGidBuilder builder()
+  static ObjectWrapGidBuilder builder() nothrow
   {
     return new ObjectWrapGidBuilder;
   }
 
   /** */
-  @property string name()
+  @property string name() nothrow
   {
     return getName();
   }
 
   /** */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("name", propval);
   }
@@ -123,7 +123,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
         #GstBin::element-added or #GstBin::element-removed signals on the parent to
         achieve a similar effect.
   */
-  @property gst.object.ObjectWrap parent()
+  @property gst.object.ObjectWrap parent() nothrow
   {
     return getParent();
   }
@@ -137,7 +137,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
           #GstBin::element-added or #GstBin::element-removed signals on the parent to
           achieve a similar effect.
   */
-  @property void parent(gst.object.ObjectWrap propval)
+  @property void parent(gst.object.ObjectWrap propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gst.object.ObjectWrap)("parent", propval);
   }
@@ -158,7 +158,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
         
         MT safe. Grabs and releases the LOCK of each object in the list.
   */
-  static bool checkUniqueness(gst.object.ObjectWrap[] list, string name)
+  static bool checkUniqueness(gst.object.ObjectWrap[] list, string name) nothrow
   {
     bool _retval;
     auto _list = gListFromD!(gst.object.ObjectWrap)(list);
@@ -184,7 +184,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
         excludedProps = a set of user-specified properties to exclude or null to show
               all changes.
   */
-  static void defaultDeepNotify(gobject.object.ObjectWrap object, gst.object.ObjectWrap orig, gobject.param_spec.ParamSpec pspec, string[] excludedProps = null)
+  static void defaultDeepNotify(gobject.object.ObjectWrap object, gst.object.ObjectWrap orig, gobject.param_spec.ParamSpec pspec, string[] excludedProps = null) nothrow
   {
     char*[] _tmpexcludedProps;
     foreach (s; excludedProps)
@@ -208,7 +208,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
         newobj = a new #GstObject
       Returns: true if newobj was different from oldobj
   */
-  static bool replace(gst.object.ObjectWrap oldobj = null, gst.object.ObjectWrap newobj = null)
+  static bool replace(gst.object.ObjectWrap oldobj = null, gst.object.ObjectWrap newobj = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_object_replace(oldobj ? cast(GstObject**)oldobj._cPtr(No.Dup) : null, newobj ? cast(GstObject*)newobj._cPtr(No.Dup) : null);
@@ -227,7 +227,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
       Returns: false if the given binding has not been setup for this object or
         has been setup for a non suitable property, true otherwise.
   */
-  bool addControlBinding(gst.control_binding.ControlBinding binding)
+  bool addControlBinding(gst.control_binding.ControlBinding binding) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_object_add_control_binding(cast(GstObject*)this._cPtr, binding ? cast(GstControlBinding*)binding._cPtr(No.Dup) : null);
@@ -244,7 +244,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
         error = the GError.
         debug_ = an additional debug information string, or null
   */
-  void defaultError(glib.error.ErrorWrap error, string debug_ = null)
+  void defaultError(glib.error.ErrorWrap error, string debug_ = null) nothrow
   {
     const(char)* _debug_ = debug_.toCString(No.Alloc);
     gst_object_default_error(cast(GstObject*)this._cPtr, error ? cast(const(GError)*)error._cPtr : null, _debug_);
@@ -259,7 +259,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
       Returns: the #GstControlBinding for
         property_name or null if the property is not controlled.
   */
-  gst.control_binding.ControlBinding getControlBinding(string propertyName)
+  gst.control_binding.ControlBinding getControlBinding(string propertyName) nothrow
   {
     GstControlBinding* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
@@ -281,7 +281,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
       [gst.types.State.Paused] or [gst.types.State.Playing].
       Returns: the control rate in nanoseconds
   */
-  gst.types.ClockTime getControlRate()
+  gst.types.ClockTime getControlRate() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_object_get_control_rate(cast(GstObject*)this._cPtr);
@@ -303,7 +303,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
         values = array to put control-values in
       Returns: true if the given array could be filled, false otherwise
   */
-  bool getGValueArray(string propertyName, gst.types.ClockTime timestamp, gst.types.ClockTime interval, gobject.value.Value[] values)
+  bool getGValueArray(string propertyName, gst.types.ClockTime timestamp, gst.types.ClockTime interval, gobject.value.Value[] values) nothrow
   {
     bool _retval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
@@ -332,7 +332,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
         
         MT safe. This function grabs and releases object's LOCK.
   */
-  string getName()
+  string getName() nothrow
   {
     char* _cretval;
     _cretval = gst_object_get_name(cast(GstObject*)this._cPtr);
@@ -348,7 +348,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
         
         MT safe. Grabs and releases object's LOCK.
   */
-  gst.object.ObjectWrap getParent()
+  gst.object.ObjectWrap getParent() nothrow
   {
     GstObject* _cretval;
     _cretval = gst_object_get_parent(cast(GstObject*)this._cPtr);
@@ -367,7 +367,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
         MT safe. Grabs and releases the #GstObject's LOCK for all objects
                  in the hierarchy.
   */
-  string getPathString()
+  string getPathString() nothrow
   {
     char* _cretval;
     _cretval = gst_object_get_path_string(cast(GstObject*)this._cPtr);
@@ -384,7 +384,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
       Returns: the GValue of the property at the given time,
         or null if the property isn't controlled.
   */
-  gobject.value.Value getValue(string propertyName, gst.types.ClockTime timestamp)
+  gobject.value.Value getValue(string propertyName, gst.types.ClockTime timestamp) nothrow
   {
     GValue* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
@@ -397,7 +397,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
       Check if the object has active controlled properties.
       Returns: true if the object has active controlled properties
   */
-  bool hasActiveControlBindings()
+  bool hasActiveControlBindings() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_object_has_active_control_bindings(cast(GstObject*)this._cPtr);
@@ -416,7 +416,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
         
         MT safe. Grabs and releases object's locks.
   */
-  bool hasAncestor(gst.object.ObjectWrap ancestor)
+  bool hasAncestor(gst.object.ObjectWrap ancestor) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_object_has_ancestor(cast(GstObject*)this._cPtr, ancestor ? cast(GstObject*)ancestor._cPtr(No.Dup) : null);
@@ -433,7 +433,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
         
         MT safe. Grabs and releases object's locks.
   */
-  bool hasAsAncestor(gst.object.ObjectWrap ancestor)
+  bool hasAsAncestor(gst.object.ObjectWrap ancestor) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_object_has_as_ancestor(cast(GstObject*)this._cPtr, ancestor ? cast(GstObject*)ancestor._cPtr(No.Dup) : null);
@@ -451,7 +451,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
         
         MT safe. Grabs and releases object's locks.
   */
-  bool hasAsParent(gst.object.ObjectWrap parent)
+  bool hasAsParent(gst.object.ObjectWrap parent) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_object_has_as_parent(cast(GstObject*)this._cPtr, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null);
@@ -466,7 +466,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
         binding = the binding
       Returns: true if the binding could be removed.
   */
-  bool removeControlBinding(gst.control_binding.ControlBinding binding)
+  bool removeControlBinding(gst.control_binding.ControlBinding binding) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_object_remove_control_binding(cast(GstObject*)this._cPtr, binding ? cast(GstControlBinding*)binding._cPtr(No.Dup) : null);
@@ -483,7 +483,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
         disabled = boolean that specifies whether to disable the controller
           or not.
   */
-  void setControlBindingDisabled(string propertyName, bool disabled)
+  void setControlBindingDisabled(string propertyName, bool disabled) nothrow
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
     gst_object_set_control_binding_disabled(cast(GstObject*)this._cPtr, _propertyName, disabled);
@@ -497,7 +497,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
         disabled = boolean that specifies whether to disable the controller
           or not.
   */
-  void setControlBindingsDisabled(bool disabled)
+  void setControlBindingsDisabled(bool disabled) nothrow
   {
     gst_object_set_control_bindings_disabled(cast(GstObject*)this._cPtr, disabled);
   }
@@ -514,7 +514,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
       Params:
         controlRate = the new control-rate in nanoseconds.
   */
-  void setControlRate(gst.types.ClockTime controlRate)
+  void setControlRate(gst.types.ClockTime controlRate) nothrow
   {
     gst_object_set_control_rate(cast(GstObject*)this._cPtr, controlRate);
   }
@@ -533,7 +533,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
         
         MT safe.  This function grabs and releases object's LOCK.
   */
-  bool setName(string name = null)
+  bool setName(string name = null) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -552,7 +552,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
         
         MT safe. Grabs and releases object's LOCK.
   */
-  bool setParent(gst.object.ObjectWrap parent)
+  bool setParent(gst.object.ObjectWrap parent) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_object_set_parent(cast(GstObject*)this._cPtr, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null);
@@ -565,7 +565,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
       Returns: Returns the suggested timestamp or [gst.types.CLOCK_TIME_NONE]
         if no control-rate was set.
   */
-  gst.types.ClockTime suggestNextSync()
+  gst.types.ClockTime suggestNextSync() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_object_suggest_next_sync(cast(GstObject*)this._cPtr);
@@ -584,7 +584,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
       Returns: true if the controller values could be applied to the object
         properties, false otherwise
   */
-  bool syncValues(gst.types.ClockTime timestamp)
+  bool syncValues(gst.types.ClockTime timestamp) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_object_sync_values(cast(GstObject*)this._cPtr, timestamp);
@@ -597,7 +597,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
       
       MT safe. Grabs and releases object's lock.
   */
-  void unparent()
+  void unparent() nothrow
   {
     gst_object_unparent(cast(GstObject*)this._cPtr);
   }
@@ -624,7 +624,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeepNotify(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectDeepNotify(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.object.ObjectWrap)))
@@ -632,7 +632,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gst.object.ObjectWrap)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -647,7 +647,14 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.object.ObjectWrap.deepNotify");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -660,7 +667,7 @@ class ObjectWrapGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGi
 {
 
   /** */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -675,7 +682,7 @@ class ObjectWrapGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGi
           achieve a similar effect.
       Returns: Builder instance for fluent chaining
   */
-  T parent(gst.object.ObjectWrap propval)
+  T parent(gst.object.ObjectWrap propval) nothrow
   {
     return setProperty("parent", propval);
   }
@@ -688,7 +695,7 @@ final class ObjectWrapGidBuilder : ObjectWrapGidBuilderImpl!ObjectWrapGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ObjectWrap build()
+  ObjectWrap build() nothrow
   {
     return new ObjectWrap(cast(void*)createGObject(ObjectWrap._getGType), No.Take);
   }

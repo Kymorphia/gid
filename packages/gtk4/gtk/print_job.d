@@ -31,26 +31,26 @@ class PrintJob : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_print_job_get_type != &gidSymbolNotFound ? gtk_print_job_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PrintJob self()
+  override PrintJob self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class PrintJob : gobject.object.ObjectWrap
       Get builder for [gtk.print_job.PrintJob]
       Returns: New builder object
   */
-  static PrintJobGidBuilder builder()
+  static PrintJobGidBuilder builder() nothrow
   {
     return new PrintJobGidBuilder;
   }
@@ -68,7 +68,7 @@ class PrintJob : gobject.object.ObjectWrap
       Get `pageSetup` property.
       Returns: Page setup.
   */
-  @property gtk.page_setup.PageSetup pageSetup()
+  @property gtk.page_setup.PageSetup pageSetup() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.page_setup.PageSetup)("page-setup");
   }
@@ -77,7 +77,7 @@ class PrintJob : gobject.object.ObjectWrap
       Get `printer` property.
       Returns: The printer to send the job to.
   */
-  @property gtk.printer.Printer printer()
+  @property gtk.printer.Printer printer() nothrow
   {
     return getPrinter();
   }
@@ -86,7 +86,7 @@ class PrintJob : gobject.object.ObjectWrap
       Get `settings` property.
       Returns: Printer settings.
   */
-  @property gtk.print_settings.PrintSettings settings()
+  @property gtk.print_settings.PrintSettings settings() nothrow
   {
     return getSettings();
   }
@@ -95,7 +95,7 @@ class PrintJob : gobject.object.ObjectWrap
       Get `title` property.
       Returns: The title of the print job.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -105,7 +105,7 @@ class PrintJob : gobject.object.ObjectWrap
       Returns: true if the print job will continue to emit status-changed
         signals after the print data has been setn to the printer.
   */
-  @property bool trackPrintStatus()
+  @property bool trackPrintStatus() nothrow
   {
     return getTrackPrintStatus();
   }
@@ -116,7 +116,7 @@ class PrintJob : gobject.object.ObjectWrap
         propval = true if the print job will continue to emit status-changed
           signals after the print data has been setn to the printer.
   */
-  @property void trackPrintStatus(bool propval)
+  @property void trackPrintStatus(bool propval) nothrow
   {
     setTrackPrintStatus(propval);
   }
@@ -131,7 +131,7 @@ class PrintJob : gobject.object.ObjectWrap
         pageSetup = a [gtk.page_setup.PageSetup]
       Returns: a new [gtk.print_job.PrintJob]
   */
-  this(string title, gtk.printer.Printer printer, gtk.print_settings.PrintSettings settings, gtk.page_setup.PageSetup pageSetup)
+  this(string title, gtk.printer.Printer printer, gtk.print_settings.PrintSettings settings, gtk.page_setup.PageSetup pageSetup) nothrow
   {
     GtkPrintJob* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -143,7 +143,7 @@ class PrintJob : gobject.object.ObjectWrap
       Gets whether this job is printed collated.
       Returns: whether the job is printed collated
   */
-  bool getCollate()
+  bool getCollate() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_print_job_get_collate(cast(GtkPrintJob*)this._cPtr);
@@ -154,7 +154,7 @@ class PrintJob : gobject.object.ObjectWrap
       Gets the n-up setting for this job.
       Returns: the n-up setting
   */
-  uint getNUp()
+  uint getNUp() nothrow
   {
     uint _retval;
     _retval = gtk_print_job_get_n_up(cast(GtkPrintJob*)this._cPtr);
@@ -165,7 +165,7 @@ class PrintJob : gobject.object.ObjectWrap
       Gets the n-up layout setting for this job.
       Returns: the n-up layout
   */
-  gtk.types.NumberUpLayout getNUpLayout()
+  gtk.types.NumberUpLayout getNUpLayout() nothrow
   {
     GtkNumberUpLayout _cretval;
     _cretval = gtk_print_job_get_n_up_layout(cast(GtkPrintJob*)this._cPtr);
@@ -177,7 +177,7 @@ class PrintJob : gobject.object.ObjectWrap
       Gets the number of copies of this job.
       Returns: the number of copies
   */
-  int getNumCopies()
+  int getNumCopies() nothrow
   {
     int _retval;
     _retval = gtk_print_job_get_num_copies(cast(GtkPrintJob*)this._cPtr);
@@ -189,7 +189,7 @@ class PrintJob : gobject.object.ObjectWrap
       Returns: a pointer to an
           array of [gtk.types.PageRange] structs
   */
-  gtk.types.PageRange[] getPageRanges()
+  gtk.types.PageRange[] getPageRanges() nothrow
   {
     GtkPageRange* _cretval;
     int _cretlength;
@@ -209,7 +209,7 @@ class PrintJob : gobject.object.ObjectWrap
       Gets the [gtk.types.PageSet] setting for this job.
       Returns: the [gtk.types.PageSet] setting
   */
-  gtk.types.PageSet getPageSet()
+  gtk.types.PageSet getPageSet() nothrow
   {
     GtkPageSet _cretval;
     _cretval = gtk_print_job_get_page_set(cast(GtkPrintJob*)this._cPtr);
@@ -221,7 +221,7 @@ class PrintJob : gobject.object.ObjectWrap
       Gets the [gtk.types.PrintPages] setting for this job.
       Returns: the [gtk.types.PrintPages] setting
   */
-  gtk.types.PrintPages getPages()
+  gtk.types.PrintPages getPages() nothrow
   {
     GtkPrintPages _cretval;
     _cretval = gtk_print_job_get_pages(cast(GtkPrintJob*)this._cPtr);
@@ -233,7 +233,7 @@ class PrintJob : gobject.object.ObjectWrap
       Gets the [gtk.printer.Printer] of the print job.
       Returns: the printer of job
   */
-  gtk.printer.Printer getPrinter()
+  gtk.printer.Printer getPrinter() nothrow
   {
     GtkPrinter* _cretval;
     _cretval = gtk_print_job_get_printer(cast(GtkPrintJob*)this._cPtr);
@@ -245,7 +245,7 @@ class PrintJob : gobject.object.ObjectWrap
       Gets whether this job is printed reversed.
       Returns: whether the job is printed reversed.
   */
-  bool getReverse()
+  bool getReverse() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_print_job_get_reverse(cast(GtkPrintJob*)this._cPtr);
@@ -256,7 +256,7 @@ class PrintJob : gobject.object.ObjectWrap
       Gets whether the job is printed rotated.
       Returns: whether the job is printed rotated
   */
-  bool getRotate()
+  bool getRotate() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_print_job_get_rotate(cast(GtkPrintJob*)this._cPtr);
@@ -267,7 +267,7 @@ class PrintJob : gobject.object.ObjectWrap
       Gets the scale for this job.
       Returns: the scale
   */
-  double getScale()
+  double getScale() nothrow
   {
     double _retval;
     _retval = gtk_print_job_get_scale(cast(GtkPrintJob*)this._cPtr);
@@ -278,7 +278,7 @@ class PrintJob : gobject.object.ObjectWrap
       Gets the [gtk.print_settings.PrintSettings] of the print job.
       Returns: the settings of job
   */
-  gtk.print_settings.PrintSettings getSettings()
+  gtk.print_settings.PrintSettings getSettings() nothrow
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_job_get_settings(cast(GtkPrintJob*)this._cPtr);
@@ -290,7 +290,7 @@ class PrintJob : gobject.object.ObjectWrap
       Gets the status of the print job.
       Returns: the status of job
   */
-  gtk.types.PrintStatus getStatus()
+  gtk.types.PrintStatus getStatus() nothrow
   {
     GtkPrintStatus _cretval;
     _cretval = gtk_print_job_get_status(cast(GtkPrintJob*)this._cPtr);
@@ -319,7 +319,7 @@ class PrintJob : gobject.object.ObjectWrap
       Gets the job title.
       Returns: the title of job
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_print_job_get_title(cast(GtkPrintJob*)this._cPtr);
@@ -333,7 +333,7 @@ class PrintJob : gobject.object.ObjectWrap
       For details, see [gtk.print_job.PrintJob.setTrackPrintStatus].
       Returns: true if print job status will be reported after printing
   */
-  bool getTrackPrintStatus()
+  bool getTrackPrintStatus() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_print_job_get_track_print_status(cast(GtkPrintJob*)this._cPtr);
@@ -346,13 +346,20 @@ class PrintJob : gobject.object.ObjectWrap
       Params:
         callback = function to call when the job completes or an error occurs
   */
-  void send(gtk.types.PrintJobCompleteFunc callback)
+  void send(gtk.types.PrintJobCompleteFunc callback) nothrow
   {
-    extern(C) void _callbackCallback(GtkPrintJob* printJob, void* userData, const(GError)* error)
+    extern(C) void _callbackCallback(GtkPrintJob* printJob, void* userData, const(GError)* error) nothrow
     {
       auto _dlg = cast(gtk.types.PrintJobCompleteFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.print_job.PrintJob)(cast(void*)printJob, No.Take), error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.print_job.PrintJob)(cast(void*)printJob, No.Take), error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.PrintJobCompleteFunc");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -366,7 +373,7 @@ class PrintJob : gobject.object.ObjectWrap
       Params:
         collate = whether the job is printed collated
   */
-  void setCollate(bool collate)
+  void setCollate(bool collate) nothrow
   {
     gtk_print_job_set_collate(cast(GtkPrintJob*)this._cPtr, collate);
   }
@@ -377,7 +384,7 @@ class PrintJob : gobject.object.ObjectWrap
       Params:
         nUp = the n-up value
   */
-  void setNUp(uint nUp)
+  void setNUp(uint nUp) nothrow
   {
     gtk_print_job_set_n_up(cast(GtkPrintJob*)this._cPtr, nUp);
   }
@@ -388,7 +395,7 @@ class PrintJob : gobject.object.ObjectWrap
       Params:
         layout = the n-up layout setting
   */
-  void setNUpLayout(gtk.types.NumberUpLayout layout)
+  void setNUpLayout(gtk.types.NumberUpLayout layout) nothrow
   {
     gtk_print_job_set_n_up_layout(cast(GtkPrintJob*)this._cPtr, layout);
   }
@@ -399,7 +406,7 @@ class PrintJob : gobject.object.ObjectWrap
       Params:
         numCopies = the number of copies
   */
-  void setNumCopies(int numCopies)
+  void setNumCopies(int numCopies) nothrow
   {
     gtk_print_job_set_num_copies(cast(GtkPrintJob*)this._cPtr, numCopies);
   }
@@ -410,7 +417,7 @@ class PrintJob : gobject.object.ObjectWrap
       Params:
         pageSet = a [gtk.types.PageSet] setting
   */
-  void setPageSet(gtk.types.PageSet pageSet)
+  void setPageSet(gtk.types.PageSet pageSet) nothrow
   {
     gtk_print_job_set_page_set(cast(GtkPrintJob*)this._cPtr, pageSet);
   }
@@ -421,7 +428,7 @@ class PrintJob : gobject.object.ObjectWrap
       Params:
         pages = the [gtk.types.PrintPages] setting
   */
-  void setPages(gtk.types.PrintPages pages)
+  void setPages(gtk.types.PrintPages pages) nothrow
   {
     gtk_print_job_set_pages(cast(GtkPrintJob*)this._cPtr, pages);
   }
@@ -432,7 +439,7 @@ class PrintJob : gobject.object.ObjectWrap
       Params:
         reverse = whether the job is printed reversed
   */
-  void setReverse(bool reverse)
+  void setReverse(bool reverse) nothrow
   {
     gtk_print_job_set_reverse(cast(GtkPrintJob*)this._cPtr, reverse);
   }
@@ -443,7 +450,7 @@ class PrintJob : gobject.object.ObjectWrap
       Params:
         rotate = whether to print rotated
   */
-  void setRotate(bool rotate)
+  void setRotate(bool rotate) nothrow
   {
     gtk_print_job_set_rotate(cast(GtkPrintJob*)this._cPtr, rotate);
   }
@@ -456,7 +463,7 @@ class PrintJob : gobject.object.ObjectWrap
       Params:
         scale = the scale
   */
-  void setScale(double scale)
+  void setScale(double scale) nothrow
   {
     gtk_print_job_set_scale(cast(GtkPrintJob*)this._cPtr, scale);
   }
@@ -527,7 +534,7 @@ class PrintJob : gobject.object.ObjectWrap
       Params:
         trackStatus = true to track status after printing
   */
-  void setTrackPrintStatus(bool trackStatus)
+  void setTrackPrintStatus(bool trackStatus) nothrow
   {
     gtk_print_job_set_track_print_status(cast(GtkPrintJob*)this._cPtr, trackStatus);
   }
@@ -550,13 +557,13 @@ class PrintJob : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectStatusChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStatusChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_job.PrintJob)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -565,7 +572,14 @@ class PrintJob : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.print_job.PrintJob.statusChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -583,7 +597,7 @@ class PrintJobGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Page setup.
       Returns: Builder instance for fluent chaining
   */
-  T pageSetup(gtk.page_setup.PageSetup propval)
+  T pageSetup(gtk.page_setup.PageSetup propval) nothrow
   {
     return setProperty("page-setup", propval);
   }
@@ -594,7 +608,7 @@ class PrintJobGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The printer to send the job to.
       Returns: Builder instance for fluent chaining
   */
-  T printer(gtk.printer.Printer propval)
+  T printer(gtk.printer.Printer propval) nothrow
   {
     return setProperty("printer", propval);
   }
@@ -605,7 +619,7 @@ class PrintJobGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Printer settings.
       Returns: Builder instance for fluent chaining
   */
-  T settings(gtk.print_settings.PrintSettings propval)
+  T settings(gtk.print_settings.PrintSettings propval) nothrow
   {
     return setProperty("settings", propval);
   }
@@ -616,7 +630,7 @@ class PrintJobGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The title of the print job.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -628,7 +642,7 @@ class PrintJobGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           signals after the print data has been setn to the printer.
       Returns: Builder instance for fluent chaining
   */
-  T trackPrintStatus(bool propval)
+  T trackPrintStatus(bool propval) nothrow
   {
     return setProperty("track-print-status", propval);
   }
@@ -641,7 +655,7 @@ final class PrintJobGidBuilder : PrintJobGidBuilderImpl!PrintJobGidBuilder
       Create object from builder.
       Returns: New object
   */
-  PrintJob build()
+  PrintJob build() nothrow
   {
     return new PrintJob(cast(void*)createGObject(PrintJob._getGType), Yes.Take);
   }

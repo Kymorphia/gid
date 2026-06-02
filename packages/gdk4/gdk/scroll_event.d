@@ -15,11 +15,8 @@ class ScrollEvent : gdk.event.Event
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.scroll_event.ScrollEvent");
-
     super(cast(GdkEvent*)ptr, take);
   }
 
@@ -36,7 +33,7 @@ class ScrollEvent : gdk.event.Event
         deltaX = return location for x scroll delta
         deltaY = return location for y scroll delta
   */
-  void getDeltas(out double deltaX, out double deltaY)
+  void getDeltas(out double deltaX, out double deltaY) nothrow
   {
     gdk_scroll_event_get_deltas(cast(GdkEvent*)this._cPtr, cast(double*)&deltaX, cast(double*)&deltaY);
   }
@@ -45,7 +42,7 @@ class ScrollEvent : gdk.event.Event
       Extracts the direction of a scroll event.
       Returns: the scroll direction of event
   */
-  gdk.types.ScrollDirection getDirection()
+  gdk.types.ScrollDirection getDirection() nothrow
   {
     GdkScrollDirection _cretval;
     _cretval = gdk_scroll_event_get_direction(cast(GdkEvent*)this._cPtr);
@@ -60,7 +57,7 @@ class ScrollEvent : gdk.event.Event
       [gdk.types.ScrollDirection.Smooth].
       Returns: the scroll unit.
   */
-  gdk.types.ScrollUnit getUnit()
+  gdk.types.ScrollUnit getUnit() nothrow
   {
     GdkScrollUnit _cretval;
     _cretval = gdk_scroll_event_get_unit(cast(GdkEvent*)this._cPtr);
@@ -80,7 +77,7 @@ class ScrollEvent : gdk.event.Event
       Stop scroll events always have a delta of 0/0.
       Returns: true if the event is a scroll stop event
   */
-  bool isStop()
+  bool isStop() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_scroll_event_is_stop(cast(GdkEvent*)this._cPtr);

@@ -28,26 +28,26 @@ class SimpleIOStream : gio.iostream.IOStream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_simple_io_stream_get_type != &gidSymbolNotFound ? g_simple_io_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SimpleIOStream self()
+  override SimpleIOStream self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class SimpleIOStream : gio.iostream.IOStream
       Get builder for [gio.simple_iostream.SimpleIOStream]
       Returns: New builder object
   */
-  static SimpleIOStreamGidBuilder builder()
+  static SimpleIOStreamGidBuilder builder() nothrow
   {
     return new SimpleIOStreamGidBuilder;
   }
@@ -65,7 +65,7 @@ class SimpleIOStream : gio.iostream.IOStream
       Get `inputStream` property.
       Returns: The [gio.input_stream.InputStream] to read from.
   */
-  override @property gio.input_stream.InputStream inputStream()
+  override @property gio.input_stream.InputStream inputStream() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.input_stream.InputStream)("input-stream");
   }
@@ -74,7 +74,7 @@ class SimpleIOStream : gio.iostream.IOStream
       Get `outputStream` property.
       Returns: The [gio.output_stream.OutputStream] to write to.
   */
-  override @property gio.output_stream.OutputStream outputStream()
+  override @property gio.output_stream.OutputStream outputStream() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.output_stream.OutputStream)("output-stream");
   }
@@ -88,7 +88,7 @@ class SimpleIOStream : gio.iostream.IOStream
         outputStream = a #GOutputStream.
       Returns: a new #GSimpleIOStream instance.
   */
-  this(gio.input_stream.InputStream inputStream, gio.output_stream.OutputStream outputStream)
+  this(gio.input_stream.InputStream inputStream, gio.output_stream.OutputStream outputStream) nothrow
   {
     GIOStream* _cretval;
     _cretval = g_simple_io_stream_new(inputStream ? cast(GInputStream*)inputStream._cPtr(No.Dup) : null, outputStream ? cast(GOutputStream*)outputStream._cPtr(No.Dup) : null);
@@ -106,7 +106,7 @@ class SimpleIOStreamGidBuilderImpl(T) : gio.iostream.IOStreamGidBuilderImpl!T
         propval = The [gio.input_stream.InputStream] to read from.
       Returns: Builder instance for fluent chaining
   */
-  T inputStream(gio.input_stream.InputStream propval)
+  T inputStream(gio.input_stream.InputStream propval) nothrow
   {
     return setProperty("input-stream", propval);
   }
@@ -117,7 +117,7 @@ class SimpleIOStreamGidBuilderImpl(T) : gio.iostream.IOStreamGidBuilderImpl!T
         propval = The [gio.output_stream.OutputStream] to write to.
       Returns: Builder instance for fluent chaining
   */
-  T outputStream(gio.output_stream.OutputStream propval)
+  T outputStream(gio.output_stream.OutputStream propval) nothrow
   {
     return setProperty("output-stream", propval);
   }
@@ -130,7 +130,7 @@ final class SimpleIOStreamGidBuilder : SimpleIOStreamGidBuilderImpl!SimpleIOStre
       Create object from builder.
       Returns: New object
   */
-  SimpleIOStream build()
+  SimpleIOStream build() nothrow
   {
     return new SimpleIOStream(cast(void*)createGObject(SimpleIOStream._getGType), Yes.Take);
   }

@@ -55,38 +55,38 @@ class Caps : gobject.boxed.Boxed
   /**
       Create a `caps.Caps` boxed type.
   */
-  this()
+  this() nothrow
   {
     super(gMalloc(GstCaps.sizeof), Yes.Take);
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_caps_get_type != &gidSymbolNotFound ? gst_caps_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Caps self()
+  override Caps self() nothrow
   {
     return this;
   }
@@ -95,7 +95,7 @@ class Caps : gobject.boxed.Boxed
       Get `miniObject` field.
       Returns: the parent type
   */
-  @property gst.mini_object.MiniObject miniObject()
+  @property gst.mini_object.MiniObject miniObject() nothrow
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstCaps*)this._cPtr).miniObject);
   }
@@ -105,7 +105,7 @@ class Caps : gobject.boxed.Boxed
       any media format.
       Returns: the new #GstCaps
   */
-  static gst.caps.Caps newAny()
+  static gst.caps.Caps newAny() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_caps_new_any();
@@ -119,7 +119,7 @@ class Caps : gobject.boxed.Boxed
       The #GstCaps is guaranteed to be writable.
       Returns: the new #GstCaps
   */
-  static gst.caps.Caps newEmpty()
+  static gst.caps.Caps newEmpty() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_caps_new_empty();
@@ -135,7 +135,7 @@ class Caps : gobject.boxed.Boxed
         mediaType = the media type of the structure
       Returns: the new #GstCaps
   */
-  static gst.caps.Caps newEmptySimple(string mediaType)
+  static gst.caps.Caps newEmptySimple(string mediaType) nothrow
   {
     GstCaps* _cretval;
     const(char)* _mediaType = mediaType.toCString(No.Alloc);
@@ -152,7 +152,7 @@ class Caps : gobject.boxed.Boxed
       Params:
         caps2 = the #GstCaps to append
   */
-  void append(gst.caps.Caps caps2)
+  void append(gst.caps.Caps caps2) nothrow
   {
     gst_caps_append(cast(GstCaps*)this._cPtr, caps2 ? cast(GstCaps*)caps2._cPtr(Yes.Dup) : null);
   }
@@ -164,7 +164,7 @@ class Caps : gobject.boxed.Boxed
       Params:
         structure = the #GstStructure to append
   */
-  void appendStructure(gst.structure.Structure structure)
+  void appendStructure(gst.structure.Structure structure) nothrow
   {
     gst_caps_append_structure(cast(GstCaps*)this._cPtr, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
   }
@@ -177,7 +177,7 @@ class Caps : gobject.boxed.Boxed
         structure = the #GstStructure to append
         features = the #GstCapsFeatures to append
   */
-  void appendStructureFull(gst.structure.Structure structure, gst.caps_features.CapsFeatures features = null)
+  void appendStructureFull(gst.structure.Structure structure, gst.caps_features.CapsFeatures features = null) nothrow
   {
     gst_caps_append_structure_full(cast(GstCaps*)this._cPtr, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null, features ? cast(GstCapsFeatures*)features._cPtr(Yes.Dup) : null);
   }
@@ -190,7 +190,7 @@ class Caps : gobject.boxed.Boxed
         caps2 = a #GstCaps to intersect
       Returns: true if intersection would be not empty
   */
-  bool canIntersect(gst.caps.Caps caps2)
+  bool canIntersect(gst.caps.Caps caps2) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_caps_can_intersect(cast(const(GstCaps)*)this._cPtr, caps2 ? cast(const(GstCaps)*)caps2._cPtr(No.Dup) : null);
@@ -206,7 +206,7 @@ class Caps : gobject.boxed.Boxed
       reference to the data, you should use gst_caps_ref().
       Returns: the new #GstCaps
   */
-  gst.caps.Caps copy()
+  gst.caps.Caps copy() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_caps_copy(cast(const(GstCaps)*)this._cPtr);
@@ -222,7 +222,7 @@ class Caps : gobject.boxed.Boxed
         nth = the nth structure to copy
       Returns: the new #GstCaps
   */
-  gst.caps.Caps copyNth(uint nth)
+  gst.caps.Caps copyNth(uint nth) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_caps_copy_nth(cast(const(GstCaps)*)this._cPtr, nth);
@@ -240,14 +240,21 @@ class Caps : gobject.boxed.Boxed
       Params:
         func = a function to call for each field
   */
-  void filterAndMapInPlace(gst.types.CapsFilterMapFunc func)
+  void filterAndMapInPlace(gst.types.CapsFilterMapFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(GstCapsFeatures* features, GstStructure* structure, void* userData)
+    extern(C) gboolean _funcCallback(GstCapsFeatures* features, GstStructure* structure, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gst.types.CapsFilterMapFunc*)userData;
 
-      _dretval = (*_dlg)(features ? new gst.caps_features.CapsFeatures(cast(void*)features, No.Take) : null, structure ? new gst.structure.Structure(cast(void*)structure, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(features ? new gst.caps_features.CapsFeatures(cast(void*)features, No.Take) : null, structure ? new gst.structure.Structure(cast(void*)structure, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.CapsFilterMapFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -273,7 +280,7 @@ class Caps : gobject.boxed.Boxed
       Calling this function with ANY caps is not allowed.
       Returns: the fixated caps
   */
-  gst.caps.Caps fixate()
+  gst.caps.Caps fixate() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_caps_fixate(cast(GstCaps*)this._cPtr);
@@ -291,14 +298,21 @@ class Caps : gobject.boxed.Boxed
       Returns: true if the supplied function returns true for each call,
         false otherwise.
   */
-  bool foreach_(gst.types.CapsForeachFunc func)
+  bool foreach_(gst.types.CapsForeachFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(GstCapsFeatures* features, GstStructure* structure, void* userData)
+    extern(C) gboolean _funcCallback(GstCapsFeatures* features, GstStructure* structure, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gst.types.CapsForeachFunc*)userData;
 
-      _dretval = (*_dlg)(features ? new gst.caps_features.CapsFeatures(cast(void*)features, No.Take) : null, structure ? new gst.structure.Structure(cast(void*)structure, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(features ? new gst.caps_features.CapsFeatures(cast(void*)features, No.Take) : null, structure ? new gst.structure.Structure(cast(void*)structure, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.CapsForeachFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -327,7 +341,7 @@ class Caps : gobject.boxed.Boxed
       Returns: a pointer to the #GstCapsFeatures
             corresponding to index
   */
-  gst.caps_features.CapsFeatures getFeatures(uint index)
+  gst.caps_features.CapsFeatures getFeatures(uint index) nothrow
   {
     GstCapsFeatures* _cretval;
     _cretval = gst_caps_get_features(cast(const(GstCaps)*)this._cPtr, index);
@@ -339,7 +353,7 @@ class Caps : gobject.boxed.Boxed
       Gets the number of structures contained in caps.
       Returns: the number of structures that caps contains
   */
-  uint getSize()
+  uint getSize() nothrow
   {
     uint _retval;
     _retval = gst_caps_get_size(cast(const(GstCaps)*)this._cPtr);
@@ -363,7 +377,7 @@ class Caps : gobject.boxed.Boxed
       Returns: a pointer to the #GstStructure corresponding
             to index
   */
-  gst.structure.Structure getStructure(uint index)
+  gst.structure.Structure getStructure(uint index) nothrow
   {
     GstStructure* _cretval;
     _cretval = gst_caps_get_structure(cast(const(GstCaps)*)this._cPtr, index);
@@ -379,7 +393,7 @@ class Caps : gobject.boxed.Boxed
         caps2 = a #GstCaps to intersect
       Returns: the new #GstCaps
   */
-  gst.caps.Caps intersect(gst.caps.Caps caps2)
+  gst.caps.Caps intersect(gst.caps.Caps caps2) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_caps_intersect(cast(GstCaps*)this._cPtr, caps2 ? cast(GstCaps*)caps2._cPtr(No.Dup) : null);
@@ -397,7 +411,7 @@ class Caps : gobject.boxed.Boxed
         mode = The intersection algorithm/mode to use
       Returns: the new #GstCaps
   */
-  gst.caps.Caps intersectFull(gst.caps.Caps caps2, gst.types.CapsIntersectMode mode)
+  gst.caps.Caps intersectFull(gst.caps.Caps caps2, gst.types.CapsIntersectMode mode) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_caps_intersect_full(cast(GstCaps*)this._cPtr, caps2 ? cast(GstCaps*)caps2._cPtr(No.Dup) : null, mode);
@@ -414,7 +428,7 @@ class Caps : gobject.boxed.Boxed
         caps2 = the #GstCaps to test
       Returns: true if caps1 is a subset of caps2.
   */
-  bool isAlwaysCompatible(gst.caps.Caps caps2)
+  bool isAlwaysCompatible(gst.caps.Caps caps2) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_caps_is_always_compatible(cast(const(GstCaps)*)this._cPtr, caps2 ? cast(const(GstCaps)*)caps2._cPtr(No.Dup) : null);
@@ -425,7 +439,7 @@ class Caps : gobject.boxed.Boxed
       Determines if caps represents any media format.
       Returns: true if caps represents any format.
   */
-  bool isAny()
+  bool isAny() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_caps_is_any(cast(const(GstCaps)*)this._cPtr);
@@ -436,7 +450,7 @@ class Caps : gobject.boxed.Boxed
       Determines if caps represents no media formats.
       Returns: true if caps represents no formats.
   */
-  bool isEmpty()
+  bool isEmpty() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_caps_is_empty(cast(const(GstCaps)*)this._cPtr);
@@ -450,7 +464,7 @@ class Caps : gobject.boxed.Boxed
         caps2 = another #GstCaps
       Returns: true if both caps are equal.
   */
-  bool isEqual(gst.caps.Caps caps2)
+  bool isEqual(gst.caps.Caps caps2) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_caps_is_equal(cast(const(GstCaps)*)this._cPtr, caps2 ? cast(const(GstCaps)*)caps2._cPtr(No.Dup) : null);
@@ -465,7 +479,7 @@ class Caps : gobject.boxed.Boxed
         caps2 = the #GstCaps to test
       Returns: true if the arguments represent the same format
   */
-  bool isEqualFixed(gst.caps.Caps caps2)
+  bool isEqualFixed(gst.caps.Caps caps2) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_caps_is_equal_fixed(cast(const(GstCaps)*)this._cPtr, caps2 ? cast(const(GstCaps)*)caps2._cPtr(No.Dup) : null);
@@ -478,7 +492,7 @@ class Caps : gobject.boxed.Boxed
       Examples of non-fixed types are GST_TYPE_INT_RANGE and GST_TYPE_LIST.
       Returns: true if caps is fixed
   */
-  bool isFixed()
+  bool isFixed() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_caps_is_fixed(cast(const(GstCaps)*)this._cPtr);
@@ -492,7 +506,7 @@ class Caps : gobject.boxed.Boxed
         caps2 = another #GstCaps
       Returns: true if both caps are strictly equal.
   */
-  bool isStrictlyEqual(gst.caps.Caps caps2)
+  bool isStrictlyEqual(gst.caps.Caps caps2) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_caps_is_strictly_equal(cast(const(GstCaps)*)this._cPtr, caps2 ? cast(const(GstCaps)*)caps2._cPtr(No.Dup) : null);
@@ -506,7 +520,7 @@ class Caps : gobject.boxed.Boxed
         superset = a potentially greater #GstCaps
       Returns: true if subset is a subset of superset
   */
-  bool isSubset(gst.caps.Caps superset)
+  bool isSubset(gst.caps.Caps superset) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_caps_is_subset(cast(const(GstCaps)*)this._cPtr, superset ? cast(const(GstCaps)*)superset._cPtr(No.Dup) : null);
@@ -521,7 +535,7 @@ class Caps : gobject.boxed.Boxed
         structure = a potential #GstStructure subset of caps
       Returns: true if structure is a subset of caps
   */
-  bool isSubsetStructure(gst.structure.Structure structure)
+  bool isSubsetStructure(gst.structure.Structure structure) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_caps_is_subset_structure(cast(const(GstCaps)*)this._cPtr, structure ? cast(const(GstStructure)*)structure._cPtr(No.Dup) : null);
@@ -537,7 +551,7 @@ class Caps : gobject.boxed.Boxed
         features = a #GstCapsFeatures for structure
       Returns: true if structure is a subset of caps
   */
-  bool isSubsetStructureFull(gst.structure.Structure structure, gst.caps_features.CapsFeatures features = null)
+  bool isSubsetStructureFull(gst.structure.Structure structure, gst.caps_features.CapsFeatures features = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_caps_is_subset_structure_full(cast(const(GstCaps)*)this._cPtr, structure ? cast(const(GstStructure)*)structure._cPtr(No.Dup) : null, features ? cast(const(GstCapsFeatures)*)features._cPtr(No.Dup) : null);
@@ -554,14 +568,21 @@ class Caps : gobject.boxed.Boxed
       Returns: true if the supplied function returns true for each call,
         false otherwise.
   */
-  bool mapInPlace(gst.types.CapsMapFunc func)
+  bool mapInPlace(gst.types.CapsMapFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(GstCapsFeatures* features, GstStructure* structure, void* userData)
+    extern(C) gboolean _funcCallback(GstCapsFeatures* features, GstStructure* structure, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gst.types.CapsMapFunc*)userData;
 
-      _dretval = (*_dlg)(features ? new gst.caps_features.CapsFeatures(cast(void*)features, No.Take) : null, structure ? new gst.structure.Structure(cast(void*)structure, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(features ? new gst.caps_features.CapsFeatures(cast(void*)features, No.Take) : null, structure ? new gst.structure.Structure(cast(void*)structure, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.CapsMapFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -583,7 +604,7 @@ class Caps : gobject.boxed.Boxed
         caps2 = the #GstCaps to merge in
       Returns: the merged caps.
   */
-  gst.caps.Caps merge(gst.caps.Caps caps2)
+  gst.caps.Caps merge(gst.caps.Caps caps2) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_caps_merge(cast(GstCaps*)this._cPtr, caps2 ? cast(GstCaps*)caps2._cPtr(Yes.Dup) : null);
@@ -598,7 +619,7 @@ class Caps : gobject.boxed.Boxed
         structure = the #GstStructure to merge
       Returns: the merged caps.
   */
-  gst.caps.Caps mergeStructure(gst.structure.Structure structure)
+  gst.caps.Caps mergeStructure(gst.structure.Structure structure) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_caps_merge_structure(cast(GstCaps*)this._cPtr, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
@@ -614,7 +635,7 @@ class Caps : gobject.boxed.Boxed
         features = the #GstCapsFeatures to merge
       Returns: the merged caps.
   */
-  gst.caps.Caps mergeStructureFull(gst.structure.Structure structure, gst.caps_features.CapsFeatures features = null)
+  gst.caps.Caps mergeStructureFull(gst.structure.Structure structure, gst.caps_features.CapsFeatures features = null) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_caps_merge_structure_full(cast(GstCaps*)this._cPtr, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null, features ? cast(GstCapsFeatures*)features._cPtr(Yes.Dup) : null);
@@ -632,7 +653,7 @@ class Caps : gobject.boxed.Boxed
       reference to it with gst_caps_ref().
       Returns: the normalized #GstCaps
   */
-  gst.caps.Caps normalize()
+  gst.caps.Caps normalize() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_caps_normalize(cast(GstCaps*)this._cPtr);
@@ -647,7 +668,7 @@ class Caps : gobject.boxed.Boxed
       Params:
         idx = Index of the structure to remove
   */
-  void removeStructure(uint idx)
+  void removeStructure(uint idx) nothrow
   {
     gst_caps_remove_structure(cast(GstCaps*)this._cPtr, idx);
   }
@@ -667,7 +688,7 @@ class Caps : gobject.boxed.Boxed
         flags = a #GstSerializeFlags
       Returns: a newly allocated string representing caps.
   */
-  string serialize(gst.types.SerializeFlags flags)
+  string serialize(gst.types.SerializeFlags flags) nothrow
   {
     char* _cretval;
     _cretval = gst_caps_serialize(cast(const(GstCaps)*)this._cPtr, flags);
@@ -682,7 +703,7 @@ class Caps : gobject.boxed.Boxed
         index = the index of the structure
         features = the #GstCapsFeatures to set
   */
-  void setFeatures(uint index, gst.caps_features.CapsFeatures features = null)
+  void setFeatures(uint index, gst.caps_features.CapsFeatures features = null) nothrow
   {
     gst_caps_set_features(cast(GstCaps*)this._cPtr, index, features ? cast(GstCapsFeatures*)features._cPtr(Yes.Dup) : null);
   }
@@ -693,7 +714,7 @@ class Caps : gobject.boxed.Boxed
       Params:
         features = the #GstCapsFeatures to set
   */
-  void setFeaturesSimple(gst.caps_features.CapsFeatures features = null)
+  void setFeaturesSimple(gst.caps_features.CapsFeatures features = null) nothrow
   {
     gst_caps_set_features_simple(cast(GstCaps*)this._cPtr, features ? cast(GstCapsFeatures*)features._cPtr(Yes.Dup) : null);
   }
@@ -707,7 +728,7 @@ class Caps : gobject.boxed.Boxed
         field = name of the field to set
         value = value to set the field to
   */
-  void setValue(string field, gobject.value.Value value)
+  void setValue(string field, gobject.value.Value value) nothrow
   {
     const(char)* _field = field.toCString(No.Alloc);
     gst_caps_set_value(cast(GstCaps*)this._cPtr, _field, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
@@ -726,7 +747,7 @@ class Caps : gobject.boxed.Boxed
       This method does not preserve the original order of caps.
       Returns: The simplified caps.
   */
-  gst.caps.Caps simplify()
+  gst.caps.Caps simplify() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_caps_simplify(cast(GstCaps*)this._cPtr);
@@ -743,7 +764,7 @@ class Caps : gobject.boxed.Boxed
       Returns: a pointer to the #GstStructure
             corresponding to index.
   */
-  gst.structure.Structure stealStructure(uint index)
+  gst.structure.Structure stealStructure(uint index) nothrow
   {
     GstStructure* _cretval;
     _cretval = gst_caps_steal_structure(cast(GstCaps*)this._cPtr, index);
@@ -760,7 +781,7 @@ class Caps : gobject.boxed.Boxed
         subtrahend = #GstCaps to subtract
       Returns: the resulting caps
   */
-  gst.caps.Caps subtract(gst.caps.Caps subtrahend)
+  gst.caps.Caps subtract(gst.caps.Caps subtrahend) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_caps_subtract(cast(GstCaps*)this._cPtr, subtrahend ? cast(GstCaps*)subtrahend._cPtr(No.Dup) : null);
@@ -784,7 +805,7 @@ class Caps : gobject.boxed.Boxed
       when there were nested #GstCaps / #GstStructure deeper than one level.
       Returns: a newly allocated string representing caps.
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gst_caps_to_string(cast(const(GstCaps)*)this._cPtr);
@@ -805,7 +826,7 @@ class Caps : gobject.boxed.Boxed
       the same and contain no structure at all.
       Returns: truncated caps
   */
-  gst.caps.Caps truncate()
+  gst.caps.Caps truncate() nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_caps_truncate(cast(GstCaps*)this._cPtr);
@@ -823,7 +844,7 @@ class Caps : gobject.boxed.Boxed
         string_ = a string to convert to #GstCaps
       Returns: a newly allocated #GstCaps
   */
-  static gst.caps.Caps fromString(string string_)
+  static gst.caps.Caps fromString(string string_) nothrow
   {
     GstCaps* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);

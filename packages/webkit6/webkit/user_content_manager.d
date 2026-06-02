@@ -34,26 +34,26 @@ class UserContentManager : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_user_content_manager_get_type != &gidSymbolNotFound ? webkit_user_content_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override UserContentManager self()
+  override UserContentManager self() nothrow
   {
     return this;
   }
@@ -62,7 +62,7 @@ class UserContentManager : gobject.object.ObjectWrap
       Get builder for [webkit.user_content_manager.UserContentManager]
       Returns: New builder object
   */
-  static UserContentManagerGidBuilder builder()
+  static UserContentManagerGidBuilder builder() nothrow
   {
     return new UserContentManagerGidBuilder;
   }
@@ -71,7 +71,7 @@ class UserContentManager : gobject.object.ObjectWrap
       Creates a new user content manager.
       Returns: A #WebKitUserContentManager
   */
-  this()
+  this() nothrow
   {
     WebKitUserContentManager* _cretval;
     _cretval = webkit_user_content_manager_new();
@@ -89,7 +89,7 @@ class UserContentManager : gobject.object.ObjectWrap
       Params:
         filter = A #WebKitUserContentFilter
   */
-  void addFilter(webkit.user_content_filter.UserContentFilter filter)
+  void addFilter(webkit.user_content_filter.UserContentFilter filter) nothrow
   {
     webkit_user_content_manager_add_filter(cast(WebKitUserContentManager*)this._cPtr, filter ? cast(WebKitUserContentFilter*)filter._cPtr(No.Dup) : null);
   }
@@ -103,7 +103,7 @@ class UserContentManager : gobject.object.ObjectWrap
       Params:
         script = A #WebKitUserScript
   */
-  void addScript(webkit.user_script.UserScript script)
+  void addScript(webkit.user_script.UserScript script) nothrow
   {
     webkit_user_content_manager_add_script(cast(WebKitUserContentManager*)this._cPtr, script ? cast(WebKitUserScript*)script._cPtr(No.Dup) : null);
   }
@@ -117,7 +117,7 @@ class UserContentManager : gobject.object.ObjectWrap
       Params:
         stylesheet = A #WebKitUserStyleSheet
   */
-  void addStyleSheet(webkit.user_style_sheet.UserStyleSheet stylesheet)
+  void addStyleSheet(webkit.user_style_sheet.UserStyleSheet stylesheet) nothrow
   {
     webkit_user_content_manager_add_style_sheet(cast(WebKitUserContentManager*)this._cPtr, stylesheet ? cast(WebKitUserStyleSheet*)stylesheet._cPtr(No.Dup) : null);
   }
@@ -155,7 +155,7 @@ class UserContentManager : gobject.object.ObjectWrap
         worldName = the name of a #WebKitScriptWorld
       Returns: true if message handler was registered successfully, or false otherwise.
   */
-  bool registerScriptMessageHandler(string name, string worldName = null)
+  bool registerScriptMessageHandler(string name, string worldName = null) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -186,7 +186,7 @@ class UserContentManager : gobject.object.ObjectWrap
         worldName = the name of a #WebKitScriptWorld
       Returns: true if message handler was registered successfully, or false otherwise.
   */
-  bool registerScriptMessageHandlerWithReply(string name, string worldName = null)
+  bool registerScriptMessageHandlerWithReply(string name, string worldName = null) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -198,7 +198,7 @@ class UserContentManager : gobject.object.ObjectWrap
   /**
       Removes all content filters from the given #WebKitUserContentManager.
   */
-  void removeAllFilters()
+  void removeAllFilters() nothrow
   {
     webkit_user_content_manager_remove_all_filters(cast(WebKitUserContentManager*)this._cPtr);
   }
@@ -208,7 +208,7 @@ class UserContentManager : gobject.object.ObjectWrap
       
       See also [webkit.user_content_manager.UserContentManager.removeScript].
   */
-  void removeAllScripts()
+  void removeAllScripts() nothrow
   {
     webkit_user_content_manager_remove_all_scripts(cast(WebKitUserContentManager*)this._cPtr);
   }
@@ -216,7 +216,7 @@ class UserContentManager : gobject.object.ObjectWrap
   /**
       Removes all user style sheets from the given #WebKitUserContentManager.
   */
-  void removeAllStyleSheets()
+  void removeAllStyleSheets() nothrow
   {
     webkit_user_content_manager_remove_all_style_sheets(cast(WebKitUserContentManager*)this._cPtr);
   }
@@ -229,7 +229,7 @@ class UserContentManager : gobject.object.ObjectWrap
       Params:
         filter = A #WebKitUserContentFilter
   */
-  void removeFilter(webkit.user_content_filter.UserContentFilter filter)
+  void removeFilter(webkit.user_content_filter.UserContentFilter filter) nothrow
   {
     webkit_user_content_manager_remove_filter(cast(WebKitUserContentManager*)this._cPtr, filter ? cast(WebKitUserContentFilter*)filter._cPtr(No.Dup) : null);
   }
@@ -244,7 +244,7 @@ class UserContentManager : gobject.object.ObjectWrap
       Params:
         filterId = Filter identifier
   */
-  void removeFilterById(string filterId)
+  void removeFilterById(string filterId) nothrow
   {
     const(char)* _filterId = filterId.toCString(No.Alloc);
     webkit_user_content_manager_remove_filter_by_id(cast(WebKitUserContentManager*)this._cPtr, _filterId);
@@ -258,7 +258,7 @@ class UserContentManager : gobject.object.ObjectWrap
       Params:
         script = A #WebKitUserScript
   */
-  void removeScript(webkit.user_script.UserScript script)
+  void removeScript(webkit.user_script.UserScript script) nothrow
   {
     webkit_user_content_manager_remove_script(cast(WebKitUserContentManager*)this._cPtr, script ? cast(WebKitUserScript*)script._cPtr(No.Dup) : null);
   }
@@ -271,7 +271,7 @@ class UserContentManager : gobject.object.ObjectWrap
       Params:
         stylesheet = A #WebKitUserStyleSheet
   */
-  void removeStyleSheet(webkit.user_style_sheet.UserStyleSheet stylesheet)
+  void removeStyleSheet(webkit.user_style_sheet.UserStyleSheet stylesheet) nothrow
   {
     webkit_user_content_manager_remove_style_sheet(cast(WebKitUserContentManager*)this._cPtr, stylesheet ? cast(WebKitUserStyleSheet*)stylesheet._cPtr(No.Dup) : null);
   }
@@ -291,7 +291,7 @@ class UserContentManager : gobject.object.ObjectWrap
         name = Name of the script message channel
         worldName = the name of a #WebKitScriptWorld
   */
-  void unregisterScriptMessageHandler(string name, string worldName = null)
+  void unregisterScriptMessageHandler(string name, string worldName = null) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _worldName = worldName.toCString(No.Alloc);
@@ -319,14 +319,14 @@ class UserContentManager : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectScriptMessageReceived(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectScriptMessageReceived(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : javascriptcore.value.Value)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.user_content_manager.UserContentManager)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -338,7 +338,14 @@ class UserContentManager : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.user_content_manager.UserContentManager.scriptMessageReceived");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -378,7 +385,7 @@ class UserContentManager : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectScriptMessageWithReplyReceived(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectScriptMessageWithReplyReceived(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : javascriptcore.value.Value)))
@@ -386,11 +393,12 @@ class UserContentManager : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkit.user_content_manager.UserContentManager)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -401,7 +409,14 @@ class UserContentManager : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.user_content_manager.UserContentManager.scriptMessageWithReplyReceived");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -423,7 +438,7 @@ final class UserContentManagerGidBuilder : UserContentManagerGidBuilderImpl!User
       Create object from builder.
       Returns: New object
   */
-  UserContentManager build()
+  UserContentManager build() nothrow
   {
     return new UserContentManager(cast(void*)createGObject(UserContentManager._getGType), Yes.Take);
   }

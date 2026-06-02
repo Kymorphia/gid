@@ -33,26 +33,26 @@ class AuthenticationRequest : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_authentication_request_get_type != &gidSymbolNotFound ? webkit_authentication_request_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AuthenticationRequest self()
+  override AuthenticationRequest self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
       Get builder for [webkit.authentication_request.AuthenticationRequest]
       Returns: New builder object
   */
-  static AuthenticationRequestGidBuilder builder()
+  static AuthenticationRequestGidBuilder builder() nothrow
   {
     return new AuthenticationRequestGidBuilder;
   }
@@ -75,7 +75,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
       Params:
         credential = A #WebKitCredential, or null
   */
-  void authenticate(webkit.credential.Credential credential = null)
+  void authenticate(webkit.credential.Credential credential = null) nothrow
   {
     webkit_authentication_request_authenticate(cast(WebKitAuthenticationRequest*)this._cPtr, credential ? cast(WebKitCredential*)credential._cPtr(No.Dup) : null);
   }
@@ -91,7 +91,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
       explicitly enabled with [webkit.authentication_request.AuthenticationRequest.setCanSaveCredentials].
       Returns: true if WebKit can store credentials or false otherwise.
   */
-  bool canSaveCredentials()
+  bool canSaveCredentials() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_authentication_request_can_save_credentials(cast(WebKitAuthenticationRequest*)this._cPtr);
@@ -104,7 +104,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
       This will also cancel the page loading and result in a
       #WebKitWebView::load-failed signal with a #WebKitNetworkError of type [webkit.types.NetworkError.Cancelled] being emitted.
   */
-  void cancel()
+  void cancel() nothrow
   {
     webkit_authentication_request_cancel(cast(WebKitAuthenticationRequest*)this._cPtr);
   }
@@ -113,7 +113,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
       Get the #GTlsPasswordFlags of the [webkit.types.AuthenticationScheme.ClientCertificatePinRequested] authentication challenge.
       Returns: a #GTlsPasswordFlags
   */
-  gio.types.TlsPasswordFlags getCertificatePinFlags()
+  gio.types.TlsPasswordFlags getCertificatePinFlags() nothrow
   {
     GTlsPasswordFlags _cretval;
     _cretval = webkit_authentication_request_get_certificate_pin_flags(cast(WebKitAuthenticationRequest*)this._cPtr);
@@ -125,7 +125,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
       Get the host that this authentication challenge is applicable to.
       Returns: The host of request.
   */
-  string getHost()
+  string getHost() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_authentication_request_get_host(cast(WebKitAuthenticationRequest*)this._cPtr);
@@ -137,7 +137,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
       Get the port that this authentication challenge is applicable to.
       Returns: The port of request.
   */
-  uint getPort()
+  uint getPort() nothrow
   {
     uint _retval;
     _retval = webkit_authentication_request_get_port(cast(WebKitAuthenticationRequest*)this._cPtr);
@@ -153,7 +153,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
       Returns: A #WebKitCredential encapsulating credential details
         or null if there is no stored credential.
   */
-  webkit.credential.Credential getProposedCredential()
+  webkit.credential.Credential getProposedCredential() nothrow
   {
     WebKitCredential* _cretval;
     _cretval = webkit_authentication_request_get_proposed_credential(cast(WebKitAuthenticationRequest*)this._cPtr);
@@ -165,7 +165,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
       Get the realm that this authentication challenge is applicable to.
       Returns: The realm of request.
   */
-  string getRealm()
+  string getRealm() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_authentication_request_get_realm(cast(WebKitAuthenticationRequest*)this._cPtr);
@@ -177,7 +177,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
       Get the authentication scheme of the authentication challenge.
       Returns: The #WebKitAuthenticationScheme of request.
   */
-  webkit.types.AuthenticationScheme getScheme()
+  webkit.types.AuthenticationScheme getScheme() nothrow
   {
     WebKitAuthenticationScheme _cretval;
     _cretval = webkit_authentication_request_get_scheme(cast(WebKitAuthenticationRequest*)this._cPtr);
@@ -189,7 +189,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
       Get the #WebKitSecurityOrigin that this authentication challenge is applicable to.
       Returns: a newly created #WebKitSecurityOrigin.
   */
-  webkit.security_origin.SecurityOrigin getSecurityOrigin()
+  webkit.security_origin.SecurityOrigin getSecurityOrigin() nothrow
   {
     WebKitSecurityOrigin* _cretval;
     _cretval = webkit_authentication_request_get_security_origin(cast(WebKitAuthenticationRequest*)this._cPtr);
@@ -203,7 +203,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
       Determine whether the authentication challenge is associated with a proxy server rather than an "origin" server.
       Returns: true if authentication is for a proxy or false otherwise.
   */
-  bool isForProxy()
+  bool isForProxy() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_authentication_request_is_for_proxy(cast(WebKitAuthenticationRequest*)this._cPtr);
@@ -214,7 +214,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
       Determine whether this this is a first attempt or a retry for this authentication challenge.
       Returns: true if authentication attempt is a retry or false otherwise.
   */
-  bool isRetry()
+  bool isRetry() nothrow
   {
     bool _retval;
     _retval = cast(bool)webkit_authentication_request_is_retry(cast(WebKitAuthenticationRequest*)this._cPtr);
@@ -236,7 +236,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
       Params:
         enabled = value to set
   */
-  void setCanSaveCredentials(bool enabled)
+  void setCanSaveCredentials(bool enabled) nothrow
   {
     webkit_authentication_request_set_can_save_credentials(cast(WebKitAuthenticationRequest*)this._cPtr, enabled);
   }
@@ -254,7 +254,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
       Params:
         credential = a #WebKitCredential, or null
   */
-  void setProposedCredential(webkit.credential.Credential credential)
+  void setProposedCredential(webkit.credential.Credential credential) nothrow
   {
     webkit_authentication_request_set_proposed_credential(cast(WebKitAuthenticationRequest*)this._cPtr, credential ? cast(WebKitCredential*)credential._cPtr(No.Dup) : null);
   }
@@ -278,14 +278,14 @@ class AuthenticationRequest : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAuthenticated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAuthenticated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.credential.Credential)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.authentication_request.AuthenticationRequest)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -297,7 +297,14 @@ class AuthenticationRequest : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.authentication_request.AuthenticationRequest.authenticated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -321,13 +328,13 @@ class AuthenticationRequest : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCancelled(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCancelled(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.authentication_request.AuthenticationRequest)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -336,7 +343,14 @@ class AuthenticationRequest : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.authentication_request.AuthenticationRequest.cancelled");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -356,7 +370,7 @@ final class AuthenticationRequestGidBuilder : AuthenticationRequestGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  AuthenticationRequest build()
+  AuthenticationRequest build() nothrow
   {
     return new AuthenticationRequest(cast(void*)createGObject(AuthenticationRequest._getGType), No.Take);
   }

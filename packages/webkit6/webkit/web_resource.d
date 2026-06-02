@@ -34,26 +34,26 @@ class WebResource : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_web_resource_get_type != &gidSymbolNotFound ? webkit_web_resource_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WebResource self()
+  override WebResource self() nothrow
   {
     return this;
   }
@@ -62,7 +62,7 @@ class WebResource : gobject.object.ObjectWrap
       Get builder for [webkit.web_resource.WebResource]
       Returns: New builder object
   */
-  static WebResourceGidBuilder builder()
+  static WebResourceGidBuilder builder() nothrow
   {
     return new WebResourceGidBuilder;
   }
@@ -71,7 +71,7 @@ class WebResource : gobject.object.ObjectWrap
       Get `response` property.
       Returns: The #WebKitURIResponse associated with this resource.
   */
-  @property webkit.uriresponse.URIResponse response()
+  @property webkit.uriresponse.URIResponse response() nothrow
   {
     return getResponse();
   }
@@ -81,7 +81,7 @@ class WebResource : gobject.object.ObjectWrap
       Returns: The current active URI of the #WebKitWebResource.
         See [webkit.web_resource.WebResource.getUri] for more details.
   */
-  @property string uri()
+  @property string uri() nothrow
   {
     return getUri();
   }
@@ -98,14 +98,21 @@ class WebResource : gobject.object.ObjectWrap
         cancellable = a #GCancellable or null to ignore
         callback = a #GAsyncReadyCallback to call when the request is satisfied
   */
-  void getData(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void getData(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -149,7 +156,7 @@ class WebResource : gobject.object.ObjectWrap
       Returns: the #WebKitURIResponse, or null if
             the response hasn't been received yet.
   */
-  webkit.uriresponse.URIResponse getResponse()
+  webkit.uriresponse.URIResponse getResponse() nothrow
   {
     WebKitURIResponse* _cretval;
     _cretval = webkit_web_resource_get_response(cast(WebKitWebResource*)this._cPtr);
@@ -187,7 +194,7 @@ class WebResource : gobject.object.ObjectWrap
       signal of resource.
       Returns: the current active URI of resource
   */
-  string getUri()
+  string getUri() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_web_resource_get_uri(cast(WebKitWebResource*)this._cPtr);
@@ -213,14 +220,14 @@ class WebResource : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFailed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFailed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.error.ErrorWrap)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.web_resource.WebResource)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -232,7 +239,14 @@ class WebResource : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_resource.WebResource.failed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -258,7 +272,7 @@ class WebResource : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFailedWithTlsErrors(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFailedWithTlsErrors(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.tls_certificate.TlsCertificate)))
@@ -266,7 +280,7 @@ class WebResource : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkit.web_resource.WebResource)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -281,7 +295,14 @@ class WebResource : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_resource.WebResource.failedWithTlsErrors");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -305,13 +326,13 @@ class WebResource : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFinished(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFinished(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_resource.WebResource)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -320,7 +341,14 @@ class WebResource : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_resource.WebResource.finished");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -351,7 +379,7 @@ class WebResource : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectSentRequest(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSentRequest(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.urirequest.URIRequest)))
@@ -359,7 +387,7 @@ class WebResource : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkit.web_resource.WebResource)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -374,7 +402,14 @@ class WebResource : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "webkit.web_resource.WebResource.sentRequest");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -394,7 +429,7 @@ final class WebResourceGidBuilder : WebResourceGidBuilderImpl!WebResourceGidBuil
       Create object from builder.
       Returns: New object
   */
-  WebResource build()
+  WebResource build() nothrow
   {
     return new WebResource(cast(void*)createGObject(WebResource._getGType), No.Take);
   }

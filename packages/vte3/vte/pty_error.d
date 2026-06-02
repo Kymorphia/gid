@@ -18,7 +18,7 @@ struct PtyError
       enumeration. See #GError for more information on error domains.
       Returns: the error domain for VTE PTY errors
   */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = vte_pty_error_quark();
@@ -28,12 +28,12 @@ struct PtyError
 
 class PtyException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(vte.pty_error.PtyError.quark, cast(int)code, msg);
   }

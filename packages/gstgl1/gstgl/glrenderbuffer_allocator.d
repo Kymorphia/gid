@@ -16,26 +16,26 @@ class GLRenderbufferAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAlloca
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_renderbuffer_allocator_get_type != &gidSymbolNotFound ? gst_gl_renderbuffer_allocator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLRenderbufferAllocator self()
+  override GLRenderbufferAllocator self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class GLRenderbufferAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAlloca
       Get builder for [gstgl.glrenderbuffer_allocator.GLRenderbufferAllocator]
       Returns: New builder object
   */
-  static GLRenderbufferAllocatorGidBuilder builder()
+  static GLRenderbufferAllocatorGidBuilder builder() nothrow
   {
     return new GLRenderbufferAllocatorGidBuilder;
   }
@@ -62,7 +62,7 @@ final class GLRenderbufferAllocatorGidBuilder : GLRenderbufferAllocatorGidBuilde
       Create object from builder.
       Returns: New object
   */
-  GLRenderbufferAllocator build()
+  GLRenderbufferAllocator build() nothrow
   {
     return new GLRenderbufferAllocator(cast(void*)createGObject(GLRenderbufferAllocator._getGType), No.Take);
   }

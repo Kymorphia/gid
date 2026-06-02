@@ -31,26 +31,26 @@ class MountOperation : gio.mount_operation.MountOperation
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_mount_operation_get_type != &gidSymbolNotFound ? gtk_mount_operation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MountOperation self()
+  override MountOperation self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class MountOperation : gio.mount_operation.MountOperation
       Get builder for [gtk.mount_operation.MountOperation]
       Returns: New builder object
   */
-  static MountOperationGidBuilder builder()
+  static MountOperationGidBuilder builder() nothrow
   {
     return new MountOperationGidBuilder;
   }
@@ -68,7 +68,7 @@ class MountOperation : gio.mount_operation.MountOperation
       Get `display` property.
       Returns: The display where dialogs will be shown.
   */
-  @property gdk.display.Display display()
+  @property gdk.display.Display display() nothrow
   {
     return getDisplay();
   }
@@ -78,7 +78,7 @@ class MountOperation : gio.mount_operation.MountOperation
       Params:
         propval = The display where dialogs will be shown.
   */
-  @property void display(gdk.display.Display propval)
+  @property void display(gdk.display.Display propval) nothrow
   {
     setDisplay(propval);
   }
@@ -87,7 +87,7 @@ class MountOperation : gio.mount_operation.MountOperation
       Get `parent` property.
       Returns: The parent window.
   */
-  @property gtk.window.Window parent()
+  @property gtk.window.Window parent() nothrow
   {
     return getParent();
   }
@@ -97,7 +97,7 @@ class MountOperation : gio.mount_operation.MountOperation
       Params:
         propval = The parent window.
   */
-  @property void parent(gtk.window.Window propval)
+  @property void parent(gtk.window.Window propval) nothrow
   {
     setParent(propval);
   }
@@ -109,7 +109,7 @@ class MountOperation : gio.mount_operation.MountOperation
         parent = transient parent of the window
       Returns: a new [gtk.mount_operation.MountOperation]
   */
-  this(gtk.window.Window parent = null)
+  this(gtk.window.Window parent = null) nothrow
   {
     GMountOperation* _cretval;
     _cretval = gtk_mount_operation_new(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
@@ -121,7 +121,7 @@ class MountOperation : gio.mount_operation.MountOperation
       will be shown.
       Returns: the display on which windows of op are shown
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gtk_mount_operation_get_display(cast(GtkMountOperation*)this._cPtr);
@@ -133,7 +133,7 @@ class MountOperation : gio.mount_operation.MountOperation
       Gets the transient parent used by the [gtk.mount_operation.MountOperation].
       Returns: the transient parent for windows shown by op
   */
-  gtk.window.Window getParent()
+  gtk.window.Window getParent() nothrow
   {
     GtkWindow* _cretval;
     _cretval = gtk_mount_operation_get_parent(cast(GtkMountOperation*)this._cPtr);
@@ -146,7 +146,7 @@ class MountOperation : gio.mount_operation.MountOperation
       a window.
       Returns: true if op is currently displaying a window
   */
-  bool isShowing()
+  bool isShowing() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_mount_operation_is_showing(cast(GtkMountOperation*)this._cPtr);
@@ -159,7 +159,7 @@ class MountOperation : gio.mount_operation.MountOperation
       Params:
         display = a [gdk.display.Display]
   */
-  void setDisplay(gdk.display.Display display)
+  void setDisplay(gdk.display.Display display) nothrow
   {
     gtk_mount_operation_set_display(cast(GtkMountOperation*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
   }
@@ -171,7 +171,7 @@ class MountOperation : gio.mount_operation.MountOperation
       Params:
         parent = transient parent of the window
   */
-  void setParent(gtk.window.Window parent = null)
+  void setParent(gtk.window.Window parent = null) nothrow
   {
     gtk_mount_operation_set_parent(cast(GtkMountOperation*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
   }
@@ -187,7 +187,7 @@ class MountOperationGidBuilderImpl(T) : gio.mount_operation.MountOperationGidBui
         propval = The display where dialogs will be shown.
       Returns: Builder instance for fluent chaining
   */
-  T display(gdk.display.Display propval)
+  T display(gdk.display.Display propval) nothrow
   {
     return setProperty("display", propval);
   }
@@ -198,7 +198,7 @@ class MountOperationGidBuilderImpl(T) : gio.mount_operation.MountOperationGidBui
         propval = The parent window.
       Returns: Builder instance for fluent chaining
   */
-  T parent(gtk.window.Window propval)
+  T parent(gtk.window.Window propval) nothrow
   {
     return setProperty("parent", propval);
   }
@@ -211,7 +211,7 @@ final class MountOperationGidBuilder : MountOperationGidBuilderImpl!MountOperati
       Create object from builder.
       Returns: New object
   */
-  MountOperation build()
+  MountOperation build() nothrow
   {
     return new MountOperation(cast(void*)createGObject(MountOperation._getGType), Yes.Take);
   }

@@ -24,26 +24,26 @@ class WebsiteDataAccessPermissionRequest : gobject.object.ObjectWrap, webkit.per
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_website_data_access_permission_request_get_type != &gidSymbolNotFound ? webkit_website_data_access_permission_request_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WebsiteDataAccessPermissionRequest self()
+  override WebsiteDataAccessPermissionRequest self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class WebsiteDataAccessPermissionRequest : gobject.object.ObjectWrap, webkit.per
       Get builder for [webkit.website_data_access_permission_request.WebsiteDataAccessPermissionRequest]
       Returns: New builder object
   */
-  static WebsiteDataAccessPermissionRequestGidBuilder builder()
+  static WebsiteDataAccessPermissionRequestGidBuilder builder() nothrow
   {
     return new WebsiteDataAccessPermissionRequestGidBuilder;
   }
@@ -63,7 +63,7 @@ class WebsiteDataAccessPermissionRequest : gobject.object.ObjectWrap, webkit.per
       Get the current domain being browsed.
       Returns: the current domain name
   */
-  string getCurrentDomain()
+  string getCurrentDomain() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_website_data_access_permission_request_get_current_domain(cast(WebKitWebsiteDataAccessPermissionRequest*)this._cPtr);
@@ -75,7 +75,7 @@ class WebsiteDataAccessPermissionRequest : gobject.object.ObjectWrap, webkit.per
       Get the domain requesting permission to access its cookies while browsing the current domain.
       Returns: the requesting domain name
   */
-  string getRequestingDomain()
+  string getRequestingDomain() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_website_data_access_permission_request_get_requesting_domain(cast(WebKitWebsiteDataAccessPermissionRequest*)this._cPtr);
@@ -98,7 +98,7 @@ final class WebsiteDataAccessPermissionRequestGidBuilder : WebsiteDataAccessPerm
       Create object from builder.
       Returns: New object
   */
-  WebsiteDataAccessPermissionRequest build()
+  WebsiteDataAccessPermissionRequest build() nothrow
   {
     return new WebsiteDataAccessPermissionRequest(cast(void*)createGObject(WebsiteDataAccessPermissionRequest._getGType), No.Take);
   }

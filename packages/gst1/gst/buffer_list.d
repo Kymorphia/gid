@@ -23,32 +23,32 @@ class BufferList : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_buffer_list_get_type != &gidSymbolNotFound ? gst_buffer_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BufferList self()
+  override BufferList self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class BufferList : gobject.boxed.Boxed
       Creates a new, empty #GstBufferList.
       Returns: the new #GstBufferList.
   */
-  this()
+  this() nothrow
   {
     GstBufferList* _cretval;
     _cretval = gst_buffer_list_new();
@@ -72,7 +72,7 @@ class BufferList : gobject.boxed.Boxed
         size = an initial reserved size
       Returns: the new #GstBufferList.
   */
-  static gst.buffer_list.BufferList newSized(uint size)
+  static gst.buffer_list.BufferList newSized(uint size) nothrow
   {
     GstBufferList* _cretval;
     _cretval = gst_buffer_list_new_sized(size);
@@ -85,7 +85,7 @@ class BufferList : gobject.boxed.Boxed
       size of all buffers.
       Returns: the size of the data contained in list in bytes.
   */
-  size_t calculateSize()
+  size_t calculateSize() nothrow
   {
     size_t _retval;
     _retval = gst_buffer_list_calculate_size(cast(GstBufferList*)this._cPtr);
@@ -97,7 +97,7 @@ class BufferList : gobject.boxed.Boxed
       copy of the buffers that the source buffer list contains.
       Returns: a new copy of list.
   */
-  gst.buffer_list.BufferList copyDeep()
+  gst.buffer_list.BufferList copyDeep() nothrow
   {
     GstBufferList* _cretval;
     _cretval = gst_buffer_list_copy_deep(cast(const(GstBufferList)*)this._cPtr);
@@ -117,15 +117,22 @@ class BufferList : gobject.boxed.Boxed
       Returns: true when func returned true for each buffer in list or when
         list is empty.
   */
-  bool foreach_(gst.types.BufferListFunc func)
+  bool foreach_(gst.types.BufferListFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(GstBuffer** buffer, uint idx, void* userData)
+    extern(C) gboolean _funcCallback(GstBuffer** buffer, uint idx, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gst.types.BufferListFunc*)userData;
       auto _buffer = new gst.buffer.Buffer(buffer, No.Take);
 
-      _dretval = (*_dlg)(_buffer, idx);
+      try
+      {
+        _dretval = (*_dlg)(_buffer, idx);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.BufferListFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
       *buffer = *cast(GstBuffer**)_buffer._cPtr;
 
@@ -150,7 +157,7 @@ class BufferList : gobject.boxed.Boxed
             or null when there is no buffer. The buffer remains valid as
             long as list is valid and buffer is not removed from the list.
   */
-  gst.buffer.Buffer get(uint idx)
+  gst.buffer.Buffer get(uint idx) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_buffer_list_get(cast(GstBufferList*)this._cPtr, idx);
@@ -170,7 +177,7 @@ class BufferList : gobject.boxed.Boxed
             The returned  buffer remains valid as long as list is valid and
             the buffer is not removed from the list.
   */
-  gst.buffer.Buffer getWritable(uint idx)
+  gst.buffer.Buffer getWritable(uint idx) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_buffer_list_get_writable(cast(GstBufferList*)this._cPtr, idx);
@@ -188,7 +195,7 @@ class BufferList : gobject.boxed.Boxed
         idx = the index
         buffer = a #GstBuffer
   */
-  void insert(int idx, gst.buffer.Buffer buffer)
+  void insert(int idx, gst.buffer.Buffer buffer) nothrow
   {
     gst_buffer_list_insert(cast(GstBufferList*)this._cPtr, idx, buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null);
   }
@@ -197,7 +204,7 @@ class BufferList : gobject.boxed.Boxed
       Returns the number of buffers in list.
       Returns: the number of buffers in the buffer list
   */
-  uint length()
+  uint length() nothrow
   {
     uint _retval;
     _retval = gst_buffer_list_length(cast(GstBufferList*)this._cPtr);
@@ -212,7 +219,7 @@ class BufferList : gobject.boxed.Boxed
         idx = the index
         length = the amount to remove
   */
-  void remove(uint idx, uint length)
+  void remove(uint idx, uint length) nothrow
   {
     gst_buffer_list_remove(cast(GstBufferList*)this._cPtr, idx, length);
   }

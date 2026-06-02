@@ -17,26 +17,26 @@ class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_keyval_trigger_get_type != &gidSymbolNotFound ? gtk_keyval_trigger_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override KeyvalTrigger self()
+  override KeyvalTrigger self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
       Get builder for [gtk.keyval_trigger.KeyvalTrigger]
       Returns: New builder object
   */
-  static KeyvalTriggerGidBuilder builder()
+  static KeyvalTriggerGidBuilder builder() nothrow
   {
     return new KeyvalTriggerGidBuilder;
   }
@@ -54,7 +54,7 @@ class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
       Get `keyval` property.
       Returns: The key value for the trigger.
   */
-  @property uint keyval()
+  @property uint keyval() nothrow
   {
     return getKeyval();
   }
@@ -63,7 +63,7 @@ class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
       Get `modifiers` property.
       Returns: The key modifiers for the trigger.
   */
-  @property gdk.types.ModifierType modifiers()
+  @property gdk.types.ModifierType modifiers() nothrow
   {
     return getModifiers();
   }
@@ -77,7 +77,7 @@ class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
         modifiers = the modifiers that need to be present
       Returns: A new [gtk.shortcut_trigger.ShortcutTrigger]
   */
-  this(uint keyval, gdk.types.ModifierType modifiers)
+  this(uint keyval, gdk.types.ModifierType modifiers) nothrow
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_keyval_trigger_new(keyval, modifiers);
@@ -89,7 +89,7 @@ class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
       triggering self.
       Returns: the keyval
   */
-  uint getKeyval()
+  uint getKeyval() nothrow
   {
     uint _retval;
     _retval = gtk_keyval_trigger_get_keyval(cast(GtkKeyvalTrigger*)this._cPtr);
@@ -101,7 +101,7 @@ class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
       triggering self.
       Returns: the modifiers
   */
-  gdk.types.ModifierType getModifiers()
+  gdk.types.ModifierType getModifiers() nothrow
   {
     GdkModifierType _cretval;
     _cretval = gtk_keyval_trigger_get_modifiers(cast(GtkKeyvalTrigger*)this._cPtr);
@@ -120,7 +120,7 @@ class KeyvalTriggerGidBuilderImpl(T) : gtk.shortcut_trigger.ShortcutTriggerGidBu
         propval = The key value for the trigger.
       Returns: Builder instance for fluent chaining
   */
-  T keyval(uint propval)
+  T keyval(uint propval) nothrow
   {
     return setProperty("keyval", propval);
   }
@@ -131,7 +131,7 @@ class KeyvalTriggerGidBuilderImpl(T) : gtk.shortcut_trigger.ShortcutTriggerGidBu
         propval = The key modifiers for the trigger.
       Returns: Builder instance for fluent chaining
   */
-  T modifiers(gdk.types.ModifierType propval)
+  T modifiers(gdk.types.ModifierType propval) nothrow
   {
     return setProperty("modifiers", propval);
   }
@@ -144,7 +144,7 @@ final class KeyvalTriggerGidBuilder : KeyvalTriggerGidBuilderImpl!KeyvalTriggerG
       Create object from builder.
       Returns: New object
   */
-  KeyvalTrigger build()
+  KeyvalTrigger build() nothrow
   {
     return new KeyvalTrigger(cast(void*)createGObject(KeyvalTrigger._getGType), Yes.Take);
   }

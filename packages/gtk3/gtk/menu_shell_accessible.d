@@ -18,26 +18,26 @@ class MenuShellAccessible : gtk.container_accessible.ContainerAccessible, atk.se
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_menu_shell_accessible_get_type != &gidSymbolNotFound ? gtk_menu_shell_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MenuShellAccessible self()
+  override MenuShellAccessible self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class MenuShellAccessible : gtk.container_accessible.ContainerAccessible, atk.se
       Get builder for [gtk.menu_shell_accessible.MenuShellAccessible]
       Returns: New builder object
   */
-  static MenuShellAccessibleGidBuilder builder()
+  static MenuShellAccessibleGidBuilder builder() nothrow
   {
     return new MenuShellAccessibleGidBuilder;
   }
@@ -68,7 +68,7 @@ final class MenuShellAccessibleGidBuilder : MenuShellAccessibleGidBuilderImpl!Me
       Create object from builder.
       Returns: New object
   */
-  MenuShellAccessible build()
+  MenuShellAccessible build() nothrow
   {
     return new MenuShellAccessible(cast(void*)createGObject(MenuShellAccessible._getGType), No.Take);
   }

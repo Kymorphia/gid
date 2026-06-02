@@ -34,32 +34,32 @@ class MemoryPressureSettings : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_memory_pressure_settings_get_type != &gidSymbolNotFound ? webkit_memory_pressure_settings_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MemoryPressureSettings self()
+  override MemoryPressureSettings self() nothrow
   {
     return this;
   }
@@ -68,7 +68,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
       Create a new #WebKitMemoryPressureSettings with the default values.
       Returns: A new #WebKitMemoryPressureSettings instance filled with the default values.
   */
-  this()
+  this() nothrow
   {
     WebKitMemoryPressureSettings* _cretval;
     _cretval = webkit_memory_pressure_settings_new();
@@ -79,7 +79,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
       Make a copy of settings.
       Returns: A copy of of the passed #WebKitMemoryPressureSettings.
   */
-  webkit.memory_pressure_settings.MemoryPressureSettings copy()
+  webkit.memory_pressure_settings.MemoryPressureSettings copy() nothrow
   {
     WebKitMemoryPressureSettings* _cretval;
     _cretval = webkit_memory_pressure_settings_copy(cast(WebKitMemoryPressureSettings*)this._cPtr);
@@ -91,7 +91,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
       Gets the conservative memory usage threshold.
       Returns: value in the `(0, 1)` range.
   */
-  double getConservativeThreshold()
+  double getConservativeThreshold() nothrow
   {
     double _retval;
     _retval = webkit_memory_pressure_settings_get_conservative_threshold(cast(WebKitMemoryPressureSettings*)this._cPtr);
@@ -102,7 +102,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
       Gets the kill memory usage threshold.
       Returns: positive value, can be zero.
   */
-  double getKillThreshold()
+  double getKillThreshold() nothrow
   {
     double _retval;
     _retval = webkit_memory_pressure_settings_get_kill_threshold(cast(WebKitMemoryPressureSettings*)this._cPtr);
@@ -113,7 +113,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
       Gets the memory usage limit.
       Returns: current value, in megabytes.
   */
-  uint getMemoryLimit()
+  uint getMemoryLimit() nothrow
   {
     uint _retval;
     _retval = webkit_memory_pressure_settings_get_memory_limit(cast(WebKitMemoryPressureSettings*)this._cPtr);
@@ -124,7 +124,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
       Gets the interval at which memory usage is checked.
       Returns: current interval value, in seconds.
   */
-  double getPollInterval()
+  double getPollInterval() nothrow
   {
     double _retval;
     _retval = webkit_memory_pressure_settings_get_poll_interval(cast(WebKitMemoryPressureSettings*)this._cPtr);
@@ -135,7 +135,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
       Gets the strict memory usage threshold.
       Returns: value in the `(0, 1)` range.
   */
-  double getStrictThreshold()
+  double getStrictThreshold() nothrow
   {
     double _retval;
     _retval = webkit_memory_pressure_settings_get_strict_threshold(cast(WebKitMemoryPressureSettings*)this._cPtr);
@@ -155,7 +155,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
       Params:
         value = fraction of the memory limit where the conservative policy starts working.
   */
-  void setConservativeThreshold(double value)
+  void setConservativeThreshold(double value) nothrow
   {
     webkit_memory_pressure_settings_set_conservative_threshold(cast(WebKitMemoryPressureSettings*)this._cPtr, value);
   }
@@ -172,7 +172,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
         value = fraction of the memory limit where the process will be killed because
             of excessive memory usage.
   */
-  void setKillThreshold(double value)
+  void setKillThreshold(double value) nothrow
   {
     webkit_memory_pressure_settings_set_kill_threshold(cast(WebKitMemoryPressureSettings*)this._cPtr, value);
   }
@@ -185,7 +185,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
       Params:
         memoryLimit = amount of memory (in MB) that the process is allowed to use.
   */
-  void setMemoryLimit(uint memoryLimit)
+  void setMemoryLimit(uint memoryLimit) nothrow
   {
     webkit_memory_pressure_settings_set_memory_limit(cast(WebKitMemoryPressureSettings*)this._cPtr, memoryLimit);
   }
@@ -198,7 +198,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
       Params:
         value = period (in seconds) between memory usage measurements.
   */
-  void setPollInterval(double value)
+  void setPollInterval(double value) nothrow
   {
     webkit_memory_pressure_settings_set_poll_interval(cast(WebKitMemoryPressureSettings*)this._cPtr, value);
   }
@@ -217,7 +217,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
       Params:
         value = fraction of the memory limit where the strict policy starts working.
   */
-  void setStrictThreshold(double value)
+  void setStrictThreshold(double value) nothrow
   {
     webkit_memory_pressure_settings_set_strict_threshold(cast(WebKitMemoryPressureSettings*)this._cPtr, value);
   }

@@ -39,26 +39,26 @@ class DocumentWorkspace : panel.workspace.Workspace
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_document_workspace_get_type != &gidSymbolNotFound ? panel_document_workspace_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DocumentWorkspace self()
+  override DocumentWorkspace self() nothrow
   {
     return this;
   }
@@ -67,25 +67,25 @@ class DocumentWorkspace : panel.workspace.Workspace
       Get builder for [panel.document_workspace.DocumentWorkspace]
       Returns: New builder object
   */
-  static DocumentWorkspaceGidBuilder builder()
+  static DocumentWorkspaceGidBuilder builder() nothrow
   {
     return new DocumentWorkspaceGidBuilder;
   }
 
   /** */
-  @property panel.dock.Dock dock()
+  @property panel.dock.Dock dock() nothrow
   {
     return getDock();
   }
 
   /** */
-  @property panel.grid.Grid grid()
+  @property panel.grid.Grid grid() nothrow
   {
     return getGrid();
   }
 
   /** */
-  @property panel.statusbar.Statusbar statusbar()
+  @property panel.statusbar.Statusbar statusbar() nothrow
   {
     return getStatusbar();
   }
@@ -94,7 +94,7 @@ class DocumentWorkspace : panel.workspace.Workspace
       Creates a new #PanelDocumentWorkspace.
       Returns: a #PanelDocumentWorkspace
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = panel_document_workspace_new();
@@ -111,7 +111,7 @@ class DocumentWorkspace : panel.workspace.Workspace
           will have [gobject.object.ObjectWrap.refSink] called and unref'd from an idle
           callback.
   */
-  bool addWidget(panel.widget.Widget widget, panel.position.Position position = null)
+  bool addWidget(panel.widget.Widget widget, panel.position.Position position = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_document_workspace_add_widget(cast(PanelDocumentWorkspace*)this._cPtr, widget ? cast(PanelWidget*)widget._cPtr(No.Dup) : null, position ? cast(PanelPosition*)position._cPtr(No.Dup) : null);
@@ -122,7 +122,7 @@ class DocumentWorkspace : panel.workspace.Workspace
       Get the #PanelDock for the workspace.
       Returns: a #PanelDock
   */
-  panel.dock.Dock getDock()
+  panel.dock.Dock getDock() nothrow
   {
     PanelDock* _cretval;
     _cretval = panel_document_workspace_get_dock(cast(PanelDocumentWorkspace*)this._cPtr);
@@ -134,7 +134,7 @@ class DocumentWorkspace : panel.workspace.Workspace
       Get the document grid for the workspace.
       Returns: a #PanelGrid
   */
-  panel.grid.Grid getGrid()
+  panel.grid.Grid getGrid() nothrow
   {
     PanelGrid* _cretval;
     _cretval = panel_document_workspace_get_grid(cast(PanelDocumentWorkspace*)this._cPtr);
@@ -146,7 +146,7 @@ class DocumentWorkspace : panel.workspace.Workspace
       Gets the statusbar for the workspace.
       Returns: a #PanelStatusbar
   */
-  panel.statusbar.Statusbar getStatusbar()
+  panel.statusbar.Statusbar getStatusbar() nothrow
   {
     PanelStatusbar* _cretval;
     _cretval = panel_document_workspace_get_statusbar(cast(PanelDocumentWorkspace*)this._cPtr);
@@ -158,7 +158,7 @@ class DocumentWorkspace : panel.workspace.Workspace
       Gets the titlebar for the workspace.
       Returns: a #GtkWidget or null
   */
-  override gtk.widget.Widget getTitlebar()
+  override gtk.widget.Widget getTitlebar() nothrow
   {
     GtkWidget* _cretval;
     _cretval = panel_document_workspace_get_titlebar(cast(PanelDocumentWorkspace*)this._cPtr);
@@ -167,7 +167,7 @@ class DocumentWorkspace : panel.workspace.Workspace
   }
 
   /** */
-  override void setTitlebar(gtk.widget.Widget titlebar)
+  override void setTitlebar(gtk.widget.Widget titlebar) nothrow
   {
     panel_document_workspace_set_titlebar(cast(PanelDocumentWorkspace*)this._cPtr, titlebar ? cast(GtkWidget*)titlebar._cPtr(No.Dup) : null);
   }
@@ -194,7 +194,7 @@ class DocumentWorkspace : panel.workspace.Workspace
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectAddWidget(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAddWidget(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.widget.Widget)))
@@ -202,11 +202,12 @@ class DocumentWorkspace : panel.workspace.Workspace
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : panel.document_workspace.DocumentWorkspace)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -217,7 +218,14 @@ class DocumentWorkspace : panel.workspace.Workspace
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "panel.document_workspace.DocumentWorkspace.addWidget");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -244,18 +252,19 @@ class DocumentWorkspace : panel.workspace.Workspace
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectCreateFrame(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCreateFrame(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T : panel.frame.Frame)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.position.Position)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : panel.document_workspace.DocumentWorkspace)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      panel.frame.Frame _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -263,7 +272,14 @@ class DocumentWorkspace : panel.workspace.Workspace
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "panel.document_workspace.DocumentWorkspace.createFrame");
+      }
 
       setVal!(panel.frame.Frame)(_returnValue, _retval);
     }
@@ -286,7 +302,7 @@ final class DocumentWorkspaceGidBuilder : DocumentWorkspaceGidBuilderImpl!Docume
       Create object from builder.
       Returns: New object
   */
-  DocumentWorkspace build()
+  DocumentWorkspace build() nothrow
   {
     return new DocumentWorkspace(cast(void*)createGObject(DocumentWorkspace._getGType), Yes.Take);
   }

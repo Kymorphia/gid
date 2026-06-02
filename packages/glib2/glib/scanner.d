@@ -30,24 +30,21 @@ class Scanner
   GScanner _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.scanner.Scanner");
-
     _cInstance = *cast(GScanner*)ptr;
 
     if (take)
       gFree(ptr);
   }
 
-  ~this()
+  ~this() nothrow
   {
     g_scanner_destroy(&_cInstance);
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -56,7 +53,7 @@ class Scanner
       Get `maxParseErrors` field.
       Returns: unused
   */
-  @property uint maxParseErrors()
+  @property uint maxParseErrors() nothrow
   {
     return (cast(GScanner*)this._cPtr).maxParseErrors;
   }
@@ -66,7 +63,7 @@ class Scanner
       Params:
         propval = unused
   */
-  @property void maxParseErrors(uint propval)
+  @property void maxParseErrors(uint propval) nothrow
   {
     (cast(GScanner*)this._cPtr).maxParseErrors = propval;
   }
@@ -75,7 +72,7 @@ class Scanner
       Get `parseErrors` field.
       Returns: [glib.scanner.Scanner.error] increments this field
   */
-  @property uint parseErrors()
+  @property uint parseErrors() nothrow
   {
     return (cast(GScanner*)this._cPtr).parseErrors;
   }
@@ -85,7 +82,7 @@ class Scanner
       Params:
         propval = [glib.scanner.Scanner.error] increments this field
   */
-  @property void parseErrors(uint propval)
+  @property void parseErrors(uint propval) nothrow
   {
     (cast(GScanner*)this._cPtr).parseErrors = propval;
   }
@@ -94,7 +91,7 @@ class Scanner
       Get `inputName` field.
       Returns: name of input stream, featured by the default message handler
   */
-  @property string inputName()
+  @property string inputName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GScanner*)this._cPtr).inputName);
   }
@@ -104,7 +101,7 @@ class Scanner
       Params:
         propval = name of input stream, featured by the default message handler
   */
-  @property void inputName(string propval)
+  @property void inputName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GScanner*)this._cPtr).inputName);
     dToC(propval, cast(void*)&(cast(GScanner*)this._cPtr).inputName);
@@ -114,7 +111,7 @@ class Scanner
       Get `qdata` field.
       Returns: quarked data
   */
-  @property glib.types.Data qdata()
+  @property glib.types.Data qdata() nothrow
   {
     return (cast(GScanner*)this._cPtr).qdata;
   }
@@ -123,7 +120,7 @@ class Scanner
       Get `config` field.
       Returns: link into the scanner configuration
   */
-  @property glib.scanner_config.ScannerConfig config()
+  @property glib.scanner_config.ScannerConfig config() nothrow
   {
     return new glib.scanner_config.ScannerConfig(cast(GScannerConfig*)(cast(GScanner*)this._cPtr).config, No.Take);
   }
@@ -132,7 +129,7 @@ class Scanner
       Get `token` field.
       Returns: token parsed by the last [glib.scanner.Scanner.getNextToken]
   */
-  @property glib.types.TokenType token()
+  @property glib.types.TokenType token() nothrow
   {
     return cast(glib.types.TokenType)(cast(GScanner*)this._cPtr).token;
   }
@@ -142,7 +139,7 @@ class Scanner
       Params:
         propval = token parsed by the last [glib.scanner.Scanner.getNextToken]
   */
-  @property void token(glib.types.TokenType propval)
+  @property void token(glib.types.TokenType propval) nothrow
   {
     (cast(GScanner*)this._cPtr).token = cast(GTokenType)propval;
   }
@@ -151,7 +148,7 @@ class Scanner
       Get `value` field.
       Returns: value of the last token from [glib.scanner.Scanner.getNextToken]
   */
-  @property glib.token_value.TokenValue value()
+  @property glib.token_value.TokenValue value() nothrow
   {
     return new glib.token_value.TokenValue(cast(GTokenValue*)&(cast(GScanner*)this._cPtr).value, No.Take);
   }
@@ -160,7 +157,7 @@ class Scanner
       Get `line` field.
       Returns: line number of the last token from [glib.scanner.Scanner.getNextToken]
   */
-  @property uint line()
+  @property uint line() nothrow
   {
     return (cast(GScanner*)this._cPtr).line;
   }
@@ -170,7 +167,7 @@ class Scanner
       Params:
         propval = line number of the last token from [glib.scanner.Scanner.getNextToken]
   */
-  @property void line(uint propval)
+  @property void line(uint propval) nothrow
   {
     (cast(GScanner*)this._cPtr).line = propval;
   }
@@ -179,7 +176,7 @@ class Scanner
       Get `position` field.
       Returns: char number of the last token from [glib.scanner.Scanner.getNextToken]
   */
-  @property uint position()
+  @property uint position() nothrow
   {
     return (cast(GScanner*)this._cPtr).position;
   }
@@ -189,7 +186,7 @@ class Scanner
       Params:
         propval = char number of the last token from [glib.scanner.Scanner.getNextToken]
   */
-  @property void position(uint propval)
+  @property void position(uint propval) nothrow
   {
     (cast(GScanner*)this._cPtr).position = propval;
   }
@@ -198,7 +195,7 @@ class Scanner
       Get `nextToken` field.
       Returns: token parsed by the last [glib.scanner.Scanner.peekNextToken]
   */
-  @property glib.types.TokenType nextToken()
+  @property glib.types.TokenType nextToken() nothrow
   {
     return cast(glib.types.TokenType)(cast(GScanner*)this._cPtr).nextToken;
   }
@@ -208,7 +205,7 @@ class Scanner
       Params:
         propval = token parsed by the last [glib.scanner.Scanner.peekNextToken]
   */
-  @property void nextToken(glib.types.TokenType propval)
+  @property void nextToken(glib.types.TokenType propval) nothrow
   {
     (cast(GScanner*)this._cPtr).nextToken = cast(GTokenType)propval;
   }
@@ -217,7 +214,7 @@ class Scanner
       Get `nextValue` field.
       Returns: value of the last token from [glib.scanner.Scanner.peekNextToken]
   */
-  @property glib.token_value.TokenValue nextValue()
+  @property glib.token_value.TokenValue nextValue() nothrow
   {
     return new glib.token_value.TokenValue(cast(GTokenValue*)&(cast(GScanner*)this._cPtr).nextValue, No.Take);
   }
@@ -226,7 +223,7 @@ class Scanner
       Get `nextLine` field.
       Returns: line number of the last token from [glib.scanner.Scanner.peekNextToken]
   */
-  @property uint nextLine()
+  @property uint nextLine() nothrow
   {
     return (cast(GScanner*)this._cPtr).nextLine;
   }
@@ -236,7 +233,7 @@ class Scanner
       Params:
         propval = line number of the last token from [glib.scanner.Scanner.peekNextToken]
   */
-  @property void nextLine(uint propval)
+  @property void nextLine(uint propval) nothrow
   {
     (cast(GScanner*)this._cPtr).nextLine = propval;
   }
@@ -245,7 +242,7 @@ class Scanner
       Get `nextPosition` field.
       Returns: char number of the last token from [glib.scanner.Scanner.peekNextToken]
   */
-  @property uint nextPosition()
+  @property uint nextPosition() nothrow
   {
     return (cast(GScanner*)this._cPtr).nextPosition;
   }
@@ -255,7 +252,7 @@ class Scanner
       Params:
         propval = char number of the last token from [glib.scanner.Scanner.peekNextToken]
   */
-  @property void nextPosition(uint propval)
+  @property void nextPosition(uint propval) nothrow
   {
     (cast(GScanner*)this._cPtr).nextPosition = propval;
   }
@@ -264,7 +261,7 @@ class Scanner
       Get `msgHandler` field.
       Returns: handler function for _warn and _error
   */
-  @property GScannerMsgFunc msgHandler()
+  @property GScannerMsgFunc msgHandler() nothrow
   {
     return (cast(GScanner*)this._cPtr).msgHandler;
   }
@@ -275,7 +272,7 @@ class Scanner
         propval = handler function for _warn and _error
   */
 
-  @property void msgHandler(GScannerMsgFunc propval)
+  @property void msgHandler(GScannerMsgFunc propval) nothrow
   {
     (cast(GScanner*)this._cPtr).msgHandler = propval;
   }
@@ -286,7 +283,7 @@ class Scanner
       [glib.scanner.Scanner.getNextToken].
       Returns: the current line
   */
-  uint curLine()
+  uint curLine() nothrow
   {
     uint _retval;
     _retval = g_scanner_cur_line(cast(GScanner*)this._cPtr);
@@ -299,7 +296,7 @@ class Scanner
       [glib.scanner.Scanner.getNextToken].
       Returns: the current position on the line
   */
-  uint curPosition()
+  uint curPosition() nothrow
   {
     uint _retval;
     _retval = g_scanner_cur_position(cast(GScanner*)this._cPtr);
@@ -311,7 +308,7 @@ class Scanner
       field in the #GScanner structure.
       Returns: the current token type
   */
-  glib.types.TokenType curToken()
+  glib.types.TokenType curToken() nothrow
   {
     GTokenType _cretval;
     _cretval = g_scanner_cur_token(cast(GScanner*)this._cPtr);
@@ -322,7 +319,7 @@ class Scanner
   /**
       Frees all memory used by the #GScanner.
   */
-  void destroy()
+  void destroy() nothrow
   {
     g_scanner_destroy(cast(GScanner*)this._cPtr);
   }
@@ -333,7 +330,7 @@ class Scanner
       Returns: true if the scanner has reached the end of
             the file or text buffer
   */
-  bool eof()
+  bool eof() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_scanner_eof(cast(GScanner*)this._cPtr);
@@ -347,7 +344,7 @@ class Scanner
       the #GScanner structure.
       Returns: the type of the token
   */
-  glib.types.TokenType getNextToken()
+  glib.types.TokenType getNextToken() nothrow
   {
     GTokenType _cretval;
     _cretval = g_scanner_get_next_token(cast(GScanner*)this._cPtr);
@@ -361,7 +358,7 @@ class Scanner
       Params:
         inputFd = a file descriptor
   */
-  void inputFile(int inputFd)
+  void inputFile(int inputFd) nothrow
   {
     g_scanner_input_file(cast(GScanner*)this._cPtr, inputFd);
   }
@@ -372,7 +369,7 @@ class Scanner
       Params:
         text = the text buffer to scan
   */
-  void inputText(string text)
+  void inputText(string text) nothrow
   {
     uint _textLen;
     if (text)
@@ -392,7 +389,7 @@ class Scanner
       Returns: the value of symbol in the current scope, or null
             if symbol is not bound in the current scope
   */
-  void* lookupSymbol(string symbol)
+  void* lookupSymbol(string symbol) nothrow
   {
     const(char)* _symbol = symbol.toCString(No.Alloc);
     auto _retval = g_scanner_lookup_symbol(cast(GScanner*)this._cPtr, _symbol);
@@ -413,7 +410,7 @@ class Scanner
       any symbols that may have been added or removed in the new scope.
       Returns: the type of the token
   */
-  glib.types.TokenType peekNextToken()
+  glib.types.TokenType peekNextToken() nothrow
   {
     GTokenType _cretval;
     _cretval = g_scanner_peek_next_token(cast(GScanner*)this._cPtr);
@@ -429,7 +426,7 @@ class Scanner
         symbol = the symbol to add
         value = the value of the symbol
   */
-  void scopeAddSymbol(uint scopeId, string symbol, void* value = null)
+  void scopeAddSymbol(uint scopeId, string symbol, void* value = null) nothrow
   {
     const(char)* _symbol = symbol.toCString(No.Alloc);
     g_scanner_scope_add_symbol(cast(GScanner*)this._cPtr, scopeId, _symbol, value);
@@ -445,13 +442,20 @@ class Scanner
         scopeId = the scope id
         func = the function to call for each symbol/value pair
   */
-  void scopeForeachSymbol(uint scopeId, glib.types.HFunc func)
+  void scopeForeachSymbol(uint scopeId, glib.types.HFunc func) nothrow
   {
-    extern(C) void _funcCallback(void* key, void* value, void* userData)
+    extern(C) void _funcCallback(void* key, void* value, void* userData) nothrow
     {
       auto _dlg = cast(glib.types.HFunc*)userData;
 
-      (*_dlg)(key, value);
+      try
+      {
+        (*_dlg)(key, value);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.HFunc");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -468,7 +472,7 @@ class Scanner
       Returns: the value of symbol in the given scope, or null
             if symbol is not bound in the given scope.
   */
-  void* scopeLookupSymbol(uint scopeId, string symbol)
+  void* scopeLookupSymbol(uint scopeId, string symbol) nothrow
   {
     const(char)* _symbol = symbol.toCString(No.Alloc);
     auto _retval = g_scanner_scope_lookup_symbol(cast(GScanner*)this._cPtr, scopeId, _symbol);
@@ -482,7 +486,7 @@ class Scanner
         scopeId = the scope id
         symbol = the symbol to remove
   */
-  void scopeRemoveSymbol(uint scopeId, string symbol)
+  void scopeRemoveSymbol(uint scopeId, string symbol) nothrow
   {
     const(char)* _symbol = symbol.toCString(No.Alloc);
     g_scanner_scope_remove_symbol(cast(GScanner*)this._cPtr, scopeId, _symbol);
@@ -495,7 +499,7 @@ class Scanner
         scopeId = the new scope id
       Returns: the old scope id
   */
-  uint setScope(uint scopeId)
+  uint setScope(uint scopeId) nothrow
   {
     uint _retval;
     _retval = g_scanner_set_scope(cast(GScanner*)this._cPtr, scopeId);
@@ -508,7 +512,7 @@ class Scanner
       third party uses of the scanners filedescriptor, which hooks
       onto the current scanning position.
   */
-  void syncFileOffset()
+  void syncFileOffset() nothrow
   {
     g_scanner_sync_file_offset(cast(GScanner*)this._cPtr);
   }
@@ -539,7 +543,7 @@ class Scanner
         isError = if true it is output as an error. If false it is
               output as a warning.
   */
-  void unexpToken(glib.types.TokenType expectedToken, string identifierSpec, string symbolSpec, string symbolName, string message, int isError)
+  void unexpToken(glib.types.TokenType expectedToken, string identifierSpec, string symbolSpec, string symbolName, string message, int isError) nothrow
   {
     const(char)* _identifierSpec = identifierSpec.toCString(No.Alloc);
     const(char)* _symbolSpec = symbolSpec.toCString(No.Alloc);

@@ -17,26 +17,26 @@ class ActivateAction : gtk.shortcut_action.ShortcutAction
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_activate_action_get_type != &gidSymbolNotFound ? gtk_activate_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ActivateAction self()
+  override ActivateAction self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class ActivateAction : gtk.shortcut_action.ShortcutAction
       Get builder for [gtk.activate_action.ActivateAction]
       Returns: New builder object
   */
-  static ActivateActionGidBuilder builder()
+  static ActivateActionGidBuilder builder() nothrow
   {
     return new ActivateActionGidBuilder;
   }
@@ -57,7 +57,7 @@ class ActivateAction : gtk.shortcut_action.ShortcutAction
       on the given widget upon activation.
       Returns: The activate action
   */
-  static gtk.activate_action.ActivateAction get()
+  static gtk.activate_action.ActivateAction get() nothrow
   {
     GtkShortcutAction* _cretval;
     _cretval = gtk_activate_action_get();
@@ -78,7 +78,7 @@ final class ActivateActionGidBuilder : ActivateActionGidBuilderImpl!ActivateActi
       Create object from builder.
       Returns: New object
   */
-  ActivateAction build()
+  ActivateAction build() nothrow
   {
     return new ActivateAction(cast(void*)createGObject(ActivateAction._getGType), No.Take);
   }

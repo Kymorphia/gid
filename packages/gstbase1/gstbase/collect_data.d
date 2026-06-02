@@ -19,11 +19,8 @@ class CollectData
   GstCollectData _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstbase.collect_data.CollectData");
-
     _cInstance = *cast(GstCollectData*)ptr;
 
     if (take)
@@ -31,7 +28,7 @@ class CollectData
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -40,7 +37,7 @@ class CollectData
       Get `collect` field.
       Returns: owner #GstCollectPads
   */
-  @property gstbase.collect_pads.CollectPads collect()
+  @property gstbase.collect_pads.CollectPads collect() nothrow
   {
     return cToD!(gstbase.collect_pads.CollectPads)(cast(void*)(cast(GstCollectData*)this._cPtr).collect);
   }
@@ -50,7 +47,7 @@ class CollectData
       Params:
         propval = owner #GstCollectPads
   */
-  @property void collect(gstbase.collect_pads.CollectPads propval)
+  @property void collect(gstbase.collect_pads.CollectPads propval) nothrow
   {
     cValueFree!(gstbase.collect_pads.CollectPads)(cast(void*)(cast(GstCollectData*)this._cPtr).collect);
     dToC(propval, cast(void*)&(cast(GstCollectData*)this._cPtr).collect);
@@ -60,7 +57,7 @@ class CollectData
       Get `pad` field.
       Returns: #GstPad managed by this data
   */
-  @property gst.pad.Pad pad()
+  @property gst.pad.Pad pad() nothrow
   {
     return cToD!(gst.pad.Pad)(cast(void*)(cast(GstCollectData*)this._cPtr).pad);
   }
@@ -70,7 +67,7 @@ class CollectData
       Params:
         propval = #GstPad managed by this data
   */
-  @property void pad(gst.pad.Pad propval)
+  @property void pad(gst.pad.Pad propval) nothrow
   {
     cValueFree!(gst.pad.Pad)(cast(void*)(cast(GstCollectData*)this._cPtr).pad);
     dToC(propval, cast(void*)&(cast(GstCollectData*)this._cPtr).pad);
@@ -80,7 +77,7 @@ class CollectData
       Get `buffer` field.
       Returns: currently queued buffer.
   */
-  @property gst.buffer.Buffer buffer()
+  @property gst.buffer.Buffer buffer() nothrow
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstCollectData*)this._cPtr).buffer);
   }
@@ -90,7 +87,7 @@ class CollectData
       Params:
         propval = currently queued buffer.
   */
-  @property void buffer(gst.buffer.Buffer propval)
+  @property void buffer(gst.buffer.Buffer propval) nothrow
   {
     cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstCollectData*)this._cPtr).buffer);
     dToC(propval, cast(void*)&(cast(GstCollectData*)this._cPtr).buffer);
@@ -100,7 +97,7 @@ class CollectData
       Get `pos` field.
       Returns: position in the buffer
   */
-  @property uint pos()
+  @property uint pos() nothrow
   {
     return (cast(GstCollectData*)this._cPtr).pos;
   }
@@ -110,7 +107,7 @@ class CollectData
       Params:
         propval = position in the buffer
   */
-  @property void pos(uint propval)
+  @property void pos(uint propval) nothrow
   {
     (cast(GstCollectData*)this._cPtr).pos = propval;
   }
@@ -119,7 +116,7 @@ class CollectData
       Get `segment` field.
       Returns: last segment received.
   */
-  @property gst.segment.Segment segment()
+  @property gst.segment.Segment segment() nothrow
   {
     return cToD!(gst.segment.Segment)(cast(void*)&(cast(GstCollectData*)this._cPtr).segment);
   }
@@ -129,7 +126,7 @@ class CollectData
       Params:
         propval = last segment received.
   */
-  @property void segment(gst.segment.Segment propval)
+  @property void segment(gst.segment.Segment propval) nothrow
   {
     (cast(GstCollectData*)this._cPtr).segment = cast(GstSegment)propval;
   }

@@ -16,26 +16,26 @@ class ConstraintLayoutChild : gtk.layout_child.LayoutChild
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_constraint_layout_child_get_type != &gidSymbolNotFound ? gtk_constraint_layout_child_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ConstraintLayoutChild self()
+  override ConstraintLayoutChild self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class ConstraintLayoutChild : gtk.layout_child.LayoutChild
       Get builder for [gtk.constraint_layout_child.ConstraintLayoutChild]
       Returns: New builder object
   */
-  static ConstraintLayoutChildGidBuilder builder()
+  static ConstraintLayoutChildGidBuilder builder() nothrow
   {
     return new ConstraintLayoutChildGidBuilder;
   }
@@ -62,7 +62,7 @@ final class ConstraintLayoutChildGidBuilder : ConstraintLayoutChildGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  ConstraintLayoutChild build()
+  ConstraintLayoutChild build() nothrow
   {
     return new ConstraintLayoutChild(cast(void*)createGObject(ConstraintLayoutChild._getGType), No.Take);
   }

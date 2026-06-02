@@ -28,25 +28,23 @@ class ParamSpec
   GParamSpec* _cInstancePtr;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gobject.param_spec.ParamSpec");
-
     _cInstancePtr = cast(GParamSpec*)ptr;
 
-    if (!take)
+    if (!take && ptr)
       g_param_spec_ref(_cInstancePtr);
   }
 
-  ~this()
+  ~this() nothrow
   {
-    g_param_spec_unref(_cInstancePtr);
+    if (_cInstancePtr)
+      g_param_spec_unref(_cInstancePtr);
   }
 
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     if (dup)
       g_param_spec_ref(_cInstancePtr);
@@ -66,7 +64,7 @@ class ParamSpec
         name = the canonical name of the property
       Returns: true if name is a valid property name, false otherwise.
   */
-  static bool isValidName(string name)
+  static bool isValidName(string name) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -78,7 +76,7 @@ class ParamSpec
       Get the short description of a #GParamSpec.
       Returns: the short description of pspec.
   */
-  string getBlurb()
+  string getBlurb() nothrow
   {
     const(char)* _cretval;
     _cretval = g_param_spec_get_blurb(cast(GParamSpec*)this._cPtr);
@@ -92,7 +90,7 @@ class ParamSpec
       The #GValue will remain valid for the life of pspec.
       Returns: a pointer to a #GValue which must not be modified
   */
-  gobject.value.Value getDefaultValue()
+  gobject.value.Value getDefaultValue() nothrow
   {
     const(GValue)* _cretval;
     _cretval = g_param_spec_get_default_value(cast(GParamSpec*)this._cPtr);
@@ -107,7 +105,7 @@ class ParamSpec
       This allows for pointer-value comparisons.
       Returns: the name of pspec.
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_param_spec_get_name(cast(GParamSpec*)this._cPtr);
@@ -119,7 +117,7 @@ class ParamSpec
       Gets the GQuark for the name.
       Returns: the GQuark for pspec->name.
   */
-  glib.types.Quark getNameQuark()
+  glib.types.Quark getNameQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = g_param_spec_get_name_quark(cast(GParamSpec*)this._cPtr);
@@ -130,7 +128,7 @@ class ParamSpec
       Get the nickname of a #GParamSpec.
       Returns: the nickname of pspec.
   */
-  string getNick()
+  string getNick() nothrow
   {
     const(char)* _cretval;
     _cretval = g_param_spec_get_nick(cast(GParamSpec*)this._cPtr);
@@ -145,7 +143,7 @@ class ParamSpec
         quark = a #GQuark, naming the user data pointer
       Returns: the user data pointer set, or null
   */
-  void* getQdata(glib.types.Quark quark)
+  void* getQdata(glib.types.Quark quark) nothrow
   {
     auto _retval = g_param_spec_get_qdata(cast(GParamSpec*)this._cPtr, quark);
     return _retval;
@@ -162,7 +160,7 @@ class ParamSpec
       Returns: paramspec to which requests on this
                  paramspec should be redirected, or null if none.
   */
-  gobject.param_spec.ParamSpec getRedirectTarget()
+  gobject.param_spec.ParamSpec getRedirectTarget() nothrow
   {
     GParamSpec* _cretval;
     _cretval = g_param_spec_get_redirect_target(cast(GParamSpec*)this._cPtr);
@@ -182,7 +180,7 @@ class ParamSpec
         quark = a #GQuark, naming the user data pointer
         data = an opaque user data pointer
   */
-  void setQdata(glib.types.Quark quark, void* data = null)
+  void setQdata(glib.types.Quark quark, void* data = null) nothrow
   {
     g_param_spec_set_qdata(cast(GParamSpec*)this._cPtr, quark, data);
   }
@@ -196,7 +194,7 @@ class ParamSpec
       reference count (thus ending up with a pspec that has a reference
       count of 1 still, but is not flagged "floating" anymore).
   */
-  void sink()
+  void sink() nothrow
   {
     g_param_spec_sink(cast(GParamSpec*)this._cPtr);
   }
@@ -211,7 +209,7 @@ class ParamSpec
         quark = a #GQuark, naming the user data pointer
       Returns: the user data pointer set, or null
   */
-  void* stealQdata(glib.types.Quark quark)
+  void* stealQdata(glib.types.Quark quark) nothrow
   {
     auto _retval = g_param_spec_steal_qdata(cast(GParamSpec*)this._cPtr, quark);
     return _retval;

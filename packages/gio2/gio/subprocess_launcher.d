@@ -25,26 +25,26 @@ class SubprocessLauncher : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_subprocess_launcher_get_type != &gidSymbolNotFound ? g_subprocess_launcher_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SubprocessLauncher self()
+  override SubprocessLauncher self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
       Get builder for [gio.subprocess_launcher.SubprocessLauncher]
       Returns: New builder object
   */
-  static SubprocessLauncherGidBuilder builder()
+  static SubprocessLauncherGidBuilder builder() nothrow
   {
     return new SubprocessLauncherGidBuilder;
   }
@@ -69,7 +69,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
         flags = #GSubprocessFlags
       Returns: 
   */
-  this(gio.types.SubprocessFlags flags)
+  this(gio.types.SubprocessFlags flags) nothrow
   {
     GSubprocessLauncher* _cretval;
     _cretval = g_subprocess_launcher_new(flags);
@@ -88,7 +88,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
       is disposed, but is provided separately so that garbage collected
       language bindings can call it earlier to guarantee when FDs are closed.
   */
-  void close()
+  void close() nothrow
   {
     g_subprocess_launcher_close(cast(GSubprocessLauncher*)this._cPtr);
   }
@@ -105,7 +105,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
       Returns: the value of the environment variable,
             null if unset
   */
-  string getenv(string variable)
+  string getenv(string variable) nothrow
   {
     const(char)* _cretval;
     const(char)* _variable = variable.toCString(No.Alloc);
@@ -124,7 +124,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
       Params:
         cwd = the cwd for launched processes
   */
-  void setCwd(string cwd)
+  void setCwd(string cwd) nothrow
   {
     const(char)* _cwd = cwd.toCString(No.Alloc);
     g_subprocess_launcher_set_cwd(cast(GSubprocessLauncher*)this._cPtr, _cwd);
@@ -154,7 +154,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
       Params:
         env = the replacement environment
   */
-  void setEnviron(string[] env)
+  void setEnviron(string[] env) nothrow
   {
     char*[] _tmpenv;
     foreach (s; env)
@@ -182,7 +182,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
       Params:
         flags = #GSubprocessFlags
   */
-  void setFlags(gio.types.SubprocessFlags flags)
+  void setFlags(gio.types.SubprocessFlags flags) nothrow
   {
     g_subprocess_launcher_set_flags(cast(GSubprocessLauncher*)this._cPtr, flags);
   }
@@ -206,7 +206,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
       Params:
         path = a filename or null
   */
-  void setStderrFilePath(string path = null)
+  void setStderrFilePath(string path = null) nothrow
   {
     const(char)* _path = path.toCString(No.Alloc);
     g_subprocess_launcher_set_stderr_file_path(cast(GSubprocessLauncher*)this._cPtr, _path);
@@ -227,7 +227,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
       Params:
         path = a filename or null
   */
-  void setStdinFilePath(string path = null)
+  void setStdinFilePath(string path = null) nothrow
   {
     const(char)* _path = path.toCString(No.Alloc);
     g_subprocess_launcher_set_stdin_file_path(cast(GSubprocessLauncher*)this._cPtr, _path);
@@ -249,7 +249,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
       Params:
         path = a filename or null
   */
-  void setStdoutFilePath(string path = null)
+  void setStdoutFilePath(string path = null) nothrow
   {
     const(char)* _path = path.toCString(No.Alloc);
     g_subprocess_launcher_set_stdout_file_path(cast(GSubprocessLauncher*)this._cPtr, _path);
@@ -269,7 +269,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
         value = the new value for the variable
         overwrite = whether to change the variable if it already exists
   */
-  void setenv(string variable, string value, bool overwrite)
+  void setenv(string variable, string value, bool overwrite) nothrow
   {
     const(char)* _variable = variable.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -319,7 +319,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
         sourceFd = File descriptor in parent process
         targetFd = Target descriptor for child process
   */
-  void takeFd(int sourceFd, int targetFd)
+  void takeFd(int sourceFd, int targetFd) nothrow
   {
     g_subprocess_launcher_take_fd(cast(GSubprocessLauncher*)this._cPtr, sourceFd, targetFd);
   }
@@ -345,7 +345,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
       Params:
         fd = a file descriptor, or -1
   */
-  void takeStderrFd(int fd)
+  void takeStderrFd(int fd) nothrow
   {
     g_subprocess_launcher_take_stderr_fd(cast(GSubprocessLauncher*)this._cPtr, fd);
   }
@@ -373,7 +373,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
       Params:
         fd = a file descriptor, or -1
   */
-  void takeStdinFd(int fd)
+  void takeStdinFd(int fd) nothrow
   {
     g_subprocess_launcher_take_stdin_fd(cast(GSubprocessLauncher*)this._cPtr, fd);
   }
@@ -400,7 +400,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
       Params:
         fd = a file descriptor, or -1
   */
-  void takeStdoutFd(int fd)
+  void takeStdoutFd(int fd) nothrow
   {
     g_subprocess_launcher_take_stdout_fd(cast(GSubprocessLauncher*)this._cPtr, fd);
   }
@@ -416,7 +416,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
         variable = the environment variable to unset,
               must not contain '='
   */
-  void unsetenv(string variable)
+  void unsetenv(string variable) nothrow
   {
     const(char)* _variable = variable.toCString(No.Alloc);
     g_subprocess_launcher_unsetenv(cast(GSubprocessLauncher*)this._cPtr, _variable);
@@ -433,7 +433,7 @@ class SubprocessLauncherGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
         propval = [gio.types.SubprocessFlags] for launched processes.
       Returns: Builder instance for fluent chaining
   */
-  T flags(gio.types.SubprocessFlags propval)
+  T flags(gio.types.SubprocessFlags propval) nothrow
   {
     return setProperty("flags", propval);
   }
@@ -446,7 +446,7 @@ final class SubprocessLauncherGidBuilder : SubprocessLauncherGidBuilderImpl!Subp
       Create object from builder.
       Returns: New object
   */
-  SubprocessLauncher build()
+  SubprocessLauncher build() nothrow
   {
     return new SubprocessLauncher(cast(void*)createGObject(SubprocessLauncher._getGType), Yes.Take);
   }

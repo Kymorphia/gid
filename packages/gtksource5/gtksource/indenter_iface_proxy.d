@@ -8,12 +8,12 @@ import gtksource.indenter_mixin;
 /// Proxy object for [gtksource.indenter.Indenter] interface when a GObject has no applicable D binding
 class IndenterIfaceProxy : IfaceProxy, gtksource.indenter.Indenter
 {
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
-  override TypeInfo_Interface getIface()
+  override TypeInfo_Interface getIface() nothrow
   {
     return typeid(gtksource.indenter.Indenter);
   }

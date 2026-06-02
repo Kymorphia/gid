@@ -28,7 +28,7 @@ version(Windows)
   import core.sys.windows.winbase : LoadLibraryA, GetProcAddress;
   import std.algorithm : splitter;
 
-  void*[] gidResolveLibs(immutable(string[]) libs)
+  void*[] gidResolveLibs(immutable(string[]) libs) nothrow
   {
     void*[] libHandles;
 
@@ -61,7 +61,7 @@ version(Windows)
     return libHandles;
   }
 
-  void gidLink(void** funcPtr, string symbol, void*[] libHandles)
+  void gidLink(void** funcPtr, string symbol, void*[] libHandles) nothrow
   {
     foreach (handle; libHandles) // Loop on each library handle
     {
@@ -87,7 +87,7 @@ else // Linux or OSX
   import core.sys.posix.dlfcn : dlerror, dlopen, dlsym, RTLD_GLOBAL, RTLD_NOW;
   import core.stdc.limits : PATH_MAX;
 
-  void*[] gidResolveLibs(immutable(string[]) libs)
+  void*[] gidResolveLibs(immutable(string[]) libs) nothrow
   {
     void*[] libHandles;
 
@@ -136,7 +136,7 @@ else // Linux or OSX
     return libHandles;
   }
 
-  void gidLink(void** funcPtr, string symbol, void*[] libHandles)
+  void gidLink(void** funcPtr, string symbol, void*[] libHandles) nothrow
   {
     foreach (handle; libHandles)
     {
@@ -159,7 +159,7 @@ else // Linux or OSX
 
   version(OSX)
   {
-    string basePath()
+    string basePath() nothrow
     {
       static string path;
 
@@ -188,7 +188,7 @@ else // Linux or OSX
 }
 
 /// Return a giD unresolved lib/symbol report (might get called by multiple threads)
-string gidLoaderUnresolvedReport()
+string gidLoaderUnresolvedReport() nothrow
 {
   if (gidUnresolvedLibs.length == 0 && gidUnresolvedSymbols.length == 0)
     return "All giD symbols have been resolved\n";
@@ -209,14 +209,16 @@ string gidLoaderUnresolvedReport()
   return s;
 }
 
-void gidSymbolNotFound()
+void gidSymbolNotFound() nothrow
 {
   if (gidUnresolvedLibs.length > 0 || gidUnresolvedSymbols.length > 0)
+  {
+    try
     stderr.writeln(gidLoaderUnresolvedReport);
+    catch (Exception)
+    {
+    }
+  }
 
   throw new Error("Attempt to execute an unresolved giD function");
-}
-/** */
-class loader
-{
 }

@@ -67,26 +67,26 @@ class SearchBar : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_search_bar_get_type != &gidSymbolNotFound ? gtk_search_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SearchBar self()
+  override SearchBar self() nothrow
   {
     return this;
   }
@@ -95,7 +95,7 @@ class SearchBar : gtk.widget.Widget
       Get builder for [gtk.search_bar.SearchBar]
       Returns: New builder object
   */
-  static SearchBarGidBuilder builder()
+  static SearchBarGidBuilder builder() nothrow
   {
     return new SearchBarGidBuilder;
   }
@@ -104,7 +104,7 @@ class SearchBar : gtk.widget.Widget
       Get `child` property.
       Returns: The child widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -114,7 +114,7 @@ class SearchBar : gtk.widget.Widget
       Params:
         propval = The child widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -123,7 +123,7 @@ class SearchBar : gtk.widget.Widget
       Get `keyCaptureWidget` property.
       Returns: The key capture widget.
   */
-  @property gtk.widget.Widget keyCaptureWidget()
+  @property gtk.widget.Widget keyCaptureWidget() nothrow
   {
     return getKeyCaptureWidget();
   }
@@ -133,7 +133,7 @@ class SearchBar : gtk.widget.Widget
       Params:
         propval = The key capture widget.
   */
-  @property void keyCaptureWidget(gtk.widget.Widget propval)
+  @property void keyCaptureWidget(gtk.widget.Widget propval) nothrow
   {
     setKeyCaptureWidget(propval);
   }
@@ -142,7 +142,7 @@ class SearchBar : gtk.widget.Widget
       Get `searchModeEnabled` property.
       Returns: Whether the search mode is on and the search bar shown.
   */
-  @property bool searchModeEnabled()
+  @property bool searchModeEnabled() nothrow
   {
     return getSearchMode();
   }
@@ -152,7 +152,7 @@ class SearchBar : gtk.widget.Widget
       Params:
         propval = Whether the search mode is on and the search bar shown.
   */
-  @property void searchModeEnabled(bool propval)
+  @property void searchModeEnabled(bool propval) nothrow
   {
     setSearchMode(propval);
   }
@@ -161,7 +161,7 @@ class SearchBar : gtk.widget.Widget
       Get `showCloseButton` property.
       Returns: Whether to show the close button in the search bar.
   */
-  @property bool showCloseButton()
+  @property bool showCloseButton() nothrow
   {
     return getShowCloseButton();
   }
@@ -171,7 +171,7 @@ class SearchBar : gtk.widget.Widget
       Params:
         propval = Whether to show the close button in the search bar.
   */
-  @property void showCloseButton(bool propval)
+  @property void showCloseButton(bool propval) nothrow
   {
     setShowCloseButton(propval);
   }
@@ -183,7 +183,7 @@ class SearchBar : gtk.widget.Widget
       entry using [gtk.search_bar.SearchBar.connectEntry].
       Returns: a new [gtk.search_bar.SearchBar]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_bar_new();
@@ -201,7 +201,7 @@ class SearchBar : gtk.widget.Widget
       Params:
         entry = a [gtk.editable.Editable]
   */
-  void connectEntry(gtk.editable.Editable entry)
+  void connectEntry(gtk.editable.Editable entry) nothrow
   {
     gtk_search_bar_connect_entry(cast(GtkSearchBar*)this._cPtr, entry ? cast(GtkEditable*)(cast(gobject.object.ObjectWrap)entry)._cPtr(No.Dup) : null);
   }
@@ -210,7 +210,7 @@ class SearchBar : gtk.widget.Widget
       Gets the child widget of bar.
       Returns: the child widget of bar
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_bar_get_child(cast(GtkSearchBar*)this._cPtr);
@@ -222,7 +222,7 @@ class SearchBar : gtk.widget.Widget
       Gets the widget that bar is capturing key events from.
       Returns: The key capture widget.
   */
-  gtk.widget.Widget getKeyCaptureWidget()
+  gtk.widget.Widget getKeyCaptureWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_bar_get_key_capture_widget(cast(GtkSearchBar*)this._cPtr);
@@ -234,7 +234,7 @@ class SearchBar : gtk.widget.Widget
       Returns whether the search mode is on or off.
       Returns: whether search mode is toggled on
   */
-  bool getSearchMode()
+  bool getSearchMode() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_search_bar_get_search_mode(cast(GtkSearchBar*)this._cPtr);
@@ -245,7 +245,7 @@ class SearchBar : gtk.widget.Widget
       Returns whether the close button is shown.
       Returns: whether the close button is shown
   */
-  bool getShowCloseButton()
+  bool getShowCloseButton() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_search_bar_get_show_close_button(cast(GtkSearchBar*)this._cPtr);
@@ -258,7 +258,7 @@ class SearchBar : gtk.widget.Widget
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     gtk_search_bar_set_child(cast(GtkSearchBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -280,7 +280,7 @@ class SearchBar : gtk.widget.Widget
       Params:
         widget = a [gtk.widget.Widget]
   */
-  void setKeyCaptureWidget(gtk.widget.Widget widget = null)
+  void setKeyCaptureWidget(gtk.widget.Widget widget = null) nothrow
   {
     gtk_search_bar_set_key_capture_widget(cast(GtkSearchBar*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
@@ -291,7 +291,7 @@ class SearchBar : gtk.widget.Widget
       Params:
         searchMode = the new state of the search mode
   */
-  void setSearchMode(bool searchMode)
+  void setSearchMode(bool searchMode) nothrow
   {
     gtk_search_bar_set_search_mode(cast(GtkSearchBar*)this._cPtr, searchMode);
   }
@@ -306,7 +306,7 @@ class SearchBar : gtk.widget.Widget
       Params:
         visible = whether the close button will be shown or not
   */
-  void setShowCloseButton(bool visible)
+  void setShowCloseButton(bool visible) nothrow
   {
     gtk_search_bar_set_show_close_button(cast(GtkSearchBar*)this._cPtr, visible);
   }
@@ -323,7 +323,7 @@ class SearchBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The child widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -334,7 +334,7 @@ class SearchBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The key capture widget.
       Returns: Builder instance for fluent chaining
   */
-  T keyCaptureWidget(gtk.widget.Widget propval)
+  T keyCaptureWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("key-capture-widget", propval);
   }
@@ -345,7 +345,7 @@ class SearchBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether the search mode is on and the search bar shown.
       Returns: Builder instance for fluent chaining
   */
-  T searchModeEnabled(bool propval)
+  T searchModeEnabled(bool propval) nothrow
   {
     return setProperty("search-mode-enabled", propval);
   }
@@ -356,7 +356,7 @@ class SearchBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether to show the close button in the search bar.
       Returns: Builder instance for fluent chaining
   */
-  T showCloseButton(bool propval)
+  T showCloseButton(bool propval) nothrow
   {
     return setProperty("show-close-button", propval);
   }
@@ -369,7 +369,7 @@ final class SearchBarGidBuilder : SearchBarGidBuilderImpl!SearchBarGidBuilder
       Create object from builder.
       Returns: New object
   */
-  SearchBar build()
+  SearchBar build() nothrow
   {
     return new SearchBar(cast(void*)createGObject(SearchBar._getGType), No.Take);
   }

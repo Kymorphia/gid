@@ -18,32 +18,32 @@ class SetGroup : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_set_group_get_type != &gidSymbolNotFound ? gda_set_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SetGroup self()
+  override SetGroup self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class SetGroup : gobject.boxed.Boxed
       Get `nodesSource` field.
       Returns: if NULL, then @nodes contains exactly one entry
   */
-  @property gda.set_source.SetSource nodesSource()
+  @property gda.set_source.SetSource nodesSource() nothrow
   {
     return cToD!(gda.set_source.SetSource)(cast(void*)(cast(GdaSetGroup*)this._cPtr).nodesSource);
   }
@@ -62,7 +62,7 @@ class SetGroup : gobject.boxed.Boxed
       Params:
         propval = if NULL, then @nodes contains exactly one entry
   */
-  @property void nodesSource(gda.set_source.SetSource propval)
+  @property void nodesSource(gda.set_source.SetSource propval) nothrow
   {
     cValueFree!(gda.set_source.SetSource)(cast(void*)(cast(GdaSetGroup*)this._cPtr).nodesSource);
     dToC(propval, cast(void*)&(cast(GdaSetGroup*)this._cPtr).nodesSource);
@@ -76,7 +76,7 @@ class SetGroup : gobject.boxed.Boxed
         node = a #GdaSetNode struct
       Returns: a new #GdaSetGroup struct.
   */
-  this(gda.set_node.SetNode node)
+  this(gda.set_node.SetNode node) nothrow
   {
     GdaSetGroup* _cretval;
     _cretval = gda_set_group_new(node ? cast(GdaSetNode*)node._cPtr(No.Dup) : null);
@@ -84,7 +84,7 @@ class SetGroup : gobject.boxed.Boxed
   }
 
   /** */
-  void addNode(gda.set_node.SetNode node)
+  void addNode(gda.set_node.SetNode node) nothrow
   {
     gda_set_group_add_node(cast(GdaSetGroup*)this._cPtr, node ? cast(GdaSetNode*)node._cPtr(No.Dup) : null);
   }
@@ -93,7 +93,7 @@ class SetGroup : gobject.boxed.Boxed
       Copy constructor.
       Returns: a new #GdaSetGroup
   */
-  gda.set_group.SetGroup copy()
+  gda.set_group.SetGroup copy() nothrow
   {
     GdaSetGroup* _cretval;
     _cretval = gda_set_group_copy(cast(GdaSetGroup*)this._cPtr);
@@ -102,7 +102,7 @@ class SetGroup : gobject.boxed.Boxed
   }
 
   /** */
-  int getNNodes()
+  int getNNodes() nothrow
   {
     int _retval;
     _retval = gda_set_group_get_n_nodes(cast(GdaSetGroup*)this._cPtr);
@@ -113,7 +113,7 @@ class SetGroup : gobject.boxed.Boxed
       This method always return first #GdaSetNode in sg.
       Returns: first #GdaSetNode in sg.
   */
-  gda.set_node.SetNode getNode()
+  gda.set_node.SetNode getNode() nothrow
   {
     GdaSetNode* _cretval;
     _cretval = gda_set_group_get_node(cast(GdaSetGroup*)this._cPtr);
@@ -126,7 +126,7 @@ class SetGroup : gobject.boxed.Boxed
       #g_slist_free on returned list.
       Returns: a #GSList with all nodes in sg.
   */
-  gda.set_node.SetNode[] getNodes()
+  gda.set_node.SetNode[] getNodes() nothrow
   {
     GSList* _cretval;
     _cretval = gda_set_group_get_nodes(cast(GdaSetGroup*)this._cPtr);
@@ -135,7 +135,7 @@ class SetGroup : gobject.boxed.Boxed
   }
 
   /** */
-  gda.set_source.SetSource getSource()
+  gda.set_source.SetSource getSource() nothrow
   {
     GdaSetSource* _cretval;
     _cretval = gda_set_group_get_source(cast(GdaSetGroup*)this._cPtr);
@@ -144,7 +144,7 @@ class SetGroup : gobject.boxed.Boxed
   }
 
   /** */
-  void setSource(gda.set_source.SetSource source)
+  void setSource(gda.set_source.SetSource source) nothrow
   {
     gda_set_group_set_source(cast(GdaSetGroup*)this._cPtr, source ? cast(GdaSetSource*)source._cPtr(No.Dup) : null);
   }

@@ -63,26 +63,26 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_shortcut_controller_get_type != &gidSymbolNotFound ? gtk_shortcut_controller_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ShortcutController self()
+  override ShortcutController self() nothrow
   {
     return this;
   }
@@ -91,7 +91,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
       Get builder for [gtk.shortcut_controller.ShortcutController]
       Returns: New builder object
   */
-  static ShortcutControllerGidBuilder builder()
+  static ShortcutControllerGidBuilder builder() nothrow
   {
     return new ShortcutControllerGidBuilder;
   }
@@ -100,7 +100,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
-  @property gobject.types.GType itemType()
+  @property gobject.types.GType itemType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
   }
@@ -109,7 +109,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
       Get `mnemonicModifiers` property.
       Returns: The modifiers that need to be pressed to allow mnemonics activation.
   */
-  @property gdk.types.ModifierType mnemonicModifiers()
+  @property gdk.types.ModifierType mnemonicModifiers() nothrow
   {
     return getMnemonicsModifiers();
   }
@@ -119,7 +119,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
       Params:
         propval = The modifiers that need to be pressed to allow mnemonics activation.
   */
-  @property void mnemonicModifiers(gdk.types.ModifierType propval)
+  @property void mnemonicModifiers(gdk.types.ModifierType propval) nothrow
   {
     setMnemonicsModifiers(propval);
   }
@@ -128,7 +128,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
       Get `nItems` property.
       Returns: The number of items. See [gio.list_model.ListModel.getNItems].
   */
-  @property uint nItems()
+  @property uint nItems() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
@@ -137,7 +137,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
       Get `scope_` property.
       Returns: What scope the shortcuts will be handled in.
   */
-  @property gtk.types.ShortcutScope scope_()
+  @property gtk.types.ShortcutScope scope_() nothrow
   {
     return getScope();
   }
@@ -147,7 +147,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
       Params:
         propval = What scope the shortcuts will be handled in.
   */
-  @property void scope_(gtk.types.ShortcutScope propval)
+  @property void scope_(gtk.types.ShortcutScope propval) nothrow
   {
     setScope(propval);
   }
@@ -159,7 +159,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
       Creates a new shortcut controller.
       Returns: a newly created shortcut controller
   */
-  this()
+  this() nothrow
   {
     GtkEventController* _cretval;
     _cretval = gtk_shortcut_controller_new();
@@ -178,7 +178,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
         model = a [gio.list_model.ListModel] containing shortcuts
       Returns: a newly created shortcut controller
   */
-  static gtk.shortcut_controller.ShortcutController newForModel(gio.list_model.ListModel model)
+  static gtk.shortcut_controller.ShortcutController newForModel(gio.list_model.ListModel model) nothrow
   {
     GtkEventController* _cretval;
     _cretval = gtk_shortcut_controller_new_for_model(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
@@ -195,7 +195,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
       Params:
         shortcut = a [gtk.shortcut.Shortcut]
   */
-  void addShortcut(gtk.shortcut.Shortcut shortcut)
+  void addShortcut(gtk.shortcut.Shortcut shortcut) nothrow
   {
     gtk_shortcut_controller_add_shortcut(cast(GtkShortcutController*)this._cPtr, shortcut ? cast(GtkShortcut*)shortcut._cPtr(Yes.Dup) : null);
   }
@@ -204,7 +204,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
       Gets the mnemonics modifiers for when this controller activates its shortcuts.
       Returns: the controller's mnemonics modifiers
   */
-  gdk.types.ModifierType getMnemonicsModifiers()
+  gdk.types.ModifierType getMnemonicsModifiers() nothrow
   {
     GdkModifierType _cretval;
     _cretval = gtk_shortcut_controller_get_mnemonics_modifiers(cast(GtkShortcutController*)this._cPtr);
@@ -218,7 +218,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
       See [gtk.shortcut_controller.ShortcutController.setScope] for details.
       Returns: the controller's scope
   */
-  gtk.types.ShortcutScope getScope()
+  gtk.types.ShortcutScope getScope() nothrow
   {
     GtkShortcutScope _cretval;
     _cretval = gtk_shortcut_controller_get_scope(cast(GtkShortcutController*)this._cPtr);
@@ -235,7 +235,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
       Params:
         shortcut = a [gtk.shortcut.Shortcut]
   */
-  void removeShortcut(gtk.shortcut.Shortcut shortcut)
+  void removeShortcut(gtk.shortcut.Shortcut shortcut) nothrow
   {
     gtk_shortcut_controller_remove_shortcut(cast(GtkShortcutController*)this._cPtr, shortcut ? cast(GtkShortcut*)shortcut._cPtr(No.Dup) : null);
   }
@@ -258,7 +258,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
       Params:
         modifiers = the new mnemonics_modifiers to use
   */
-  void setMnemonicsModifiers(gdk.types.ModifierType modifiers)
+  void setMnemonicsModifiers(gdk.types.ModifierType modifiers) nothrow
   {
     gtk_shortcut_controller_set_mnemonics_modifiers(cast(GtkShortcutController*)this._cPtr, modifiers);
   }
@@ -277,7 +277,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
       Params:
         scope_ = the new scope to use
   */
-  void setScope(gtk.types.ShortcutScope scope_)
+  void setScope(gtk.types.ShortcutScope scope_) nothrow
   {
     gtk_shortcut_controller_set_scope(cast(GtkShortcutController*)this._cPtr, scope_);
   }
@@ -296,7 +296,7 @@ class ShortcutControllerGidBuilderImpl(T) : gtk.event_controller.EventController
         propval = The modifiers that need to be pressed to allow mnemonics activation.
       Returns: Builder instance for fluent chaining
   */
-  T mnemonicModifiers(gdk.types.ModifierType propval)
+  T mnemonicModifiers(gdk.types.ModifierType propval) nothrow
   {
     return setProperty("mnemonic-modifiers", propval);
   }
@@ -307,7 +307,7 @@ class ShortcutControllerGidBuilderImpl(T) : gtk.event_controller.EventController
         propval = A list model to take shortcuts from.
       Returns: Builder instance for fluent chaining
   */
-  T model(gio.list_model.ListModel propval)
+  T model(gio.list_model.ListModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -318,7 +318,7 @@ class ShortcutControllerGidBuilderImpl(T) : gtk.event_controller.EventController
         propval = What scope the shortcuts will be handled in.
       Returns: Builder instance for fluent chaining
   */
-  T scope_(gtk.types.ShortcutScope propval)
+  T scope_(gtk.types.ShortcutScope propval) nothrow
   {
     return setProperty("scope", propval);
   }
@@ -331,7 +331,7 @@ final class ShortcutControllerGidBuilder : ShortcutControllerGidBuilderImpl!Shor
       Create object from builder.
       Returns: New object
   */
-  ShortcutController build()
+  ShortcutController build() nothrow
   {
     return new ShortcutController(cast(void*)createGObject(ShortcutController._getGType), Yes.Take);
   }

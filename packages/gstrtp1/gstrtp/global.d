@@ -19,7 +19,7 @@ import gstrtp.types;
     Returns: the #GstRTPSourceMeta or null when there
       is no such metadata on buffer.
 */
-gstrtp.rtpsource_meta.RTPSourceMeta bufferGetRtpSourceMeta(gst.buffer.Buffer buffer)
+gstrtp.rtpsource_meta.RTPSourceMeta bufferGetRtpSourceMeta(gst.buffer.Buffer buffer) nothrow
 {
   GstRTPSourceMeta* _cretval;
   _cretval = gst_buffer_get_rtp_source_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
@@ -37,7 +37,7 @@ gstrtp.rtpsource_meta.RTPSourceMeta bufferGetRtpSourceMeta(gst.buffer.Buffer buf
       ntptime = an NTP timestamp
     Returns: the UNIX time for ntptime in nanoseconds.
 */
-ulong rtcpNtpToUnix(ulong ntptime)
+ulong rtcpNtpToUnix(ulong ntptime) nothrow
 {
   ulong _retval;
   _retval = gst_rtcp_ntp_to_unix(ntptime);
@@ -53,7 +53,7 @@ ulong rtcpNtpToUnix(ulong ntptime)
     Returns: the #GstRTCPSDESType for name or #GST_RTCP_SDES_PRIV when name
       is a private sdes item.
 */
-gstrtp.types.RTCPSDESType rtcpSdesNameToType(string name)
+gstrtp.types.RTCPSDESType rtcpSdesNameToType(string name) nothrow
 {
   GstRTCPSDESType _cretval;
   const(char)* _name = name.toCString(No.Alloc);
@@ -70,7 +70,7 @@ gstrtp.types.RTCPSDESType rtcpSdesNameToType(string name)
       type = a #GstRTCPSDESType
     Returns: the string equivalent of type
 */
-string rtcpSdesTypeToName(gstrtp.types.RTCPSDESType type)
+string rtcpSdesTypeToName(gstrtp.types.RTCPSDESType type) nothrow
 {
   const(char)* _cretval;
   _cretval = gst_rtcp_sdes_type_to_name(type);
@@ -89,7 +89,7 @@ string rtcpSdesTypeToName(gstrtp.types.RTCPSDESType type)
       unixtime = an UNIX timestamp in nanoseconds
     Returns: the NTP time for unixtime.
 */
-ulong rtcpUnixToNtp(ulong unixtime)
+ulong rtcpUnixToNtp(ulong unixtime) nothrow
 {
   ulong _retval;
   _retval = gst_rtcp_unix_to_ntp(unixtime);
@@ -103,7 +103,7 @@ ulong rtcpUnixToNtp(ulong unixtime)
     Returns: a #GList of
           #GstElementFactory's. Use [gst.plugin_feature.PluginFeature.listFree] after use
 */
-gst.element_factory.ElementFactory[] rtpGetHeaderExtensionList()
+gst.element_factory.ElementFactory[] rtpGetHeaderExtensionList() nothrow
 {
   GList* _cretval;
   _cretval = gst_rtp_get_header_extension_list();
@@ -120,7 +120,7 @@ gst.element_factory.ElementFactory[] rtpGetHeaderExtensionList()
       ntptime = the result NTP time
     Returns: true on success.
 */
-bool rtpHdrextGetNtp56(ubyte[] data, out ulong ntptime)
+bool rtpHdrextGetNtp56(ubyte[] data, out ulong ntptime) nothrow
 {
   bool _retval;
   uint _size;
@@ -141,7 +141,7 @@ bool rtpHdrextGetNtp56(ubyte[] data, out ulong ntptime)
       ntptime = the result NTP time
     Returns: true on success.
 */
-bool rtpHdrextGetNtp64(ubyte[] data, out ulong ntptime)
+bool rtpHdrextGetNtp64(ubyte[] data, out ulong ntptime) nothrow
 {
   bool _retval;
   uint _size;
@@ -163,7 +163,7 @@ bool rtpHdrextGetNtp64(ubyte[] data, out ulong ntptime)
       ntptime = the NTP time
     Returns: true on success.
 */
-bool rtpHdrextSetNtp56(void* data, uint size, ulong ntptime)
+bool rtpHdrextSetNtp56(void* data, uint size, ulong ntptime) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_rtp_hdrext_set_ntp_56(data, size, ntptime);
@@ -180,7 +180,7 @@ bool rtpHdrextSetNtp56(void* data, uint size, ulong ntptime)
       ntptime = the NTP time
     Returns: true on success.
 */
-bool rtpHdrextSetNtp64(void* data, uint size, ulong ntptime)
+bool rtpHdrextSetNtp64(void* data, uint size, ulong ntptime) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_rtp_hdrext_set_ntp_64(data, size, ntptime);
@@ -188,7 +188,7 @@ bool rtpHdrextSetNtp64(void* data, uint size, ulong ntptime)
 }
 
 /** */
-gobject.types.GType rtpSourceMetaApiGetType()
+gobject.types.GType rtpSourceMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_rtp_source_meta_api_get_type();

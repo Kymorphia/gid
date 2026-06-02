@@ -18,18 +18,15 @@ class AudioResampler
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstaudio.audio_resampler.AudioResampler");
-
     _cInstancePtr = cast(GstAudioResampler*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -43,7 +40,7 @@ class AudioResampler
       Returns: The number of input frames needed for producing
         out_frames of data from resampler.
   */
-  size_t getInFrames(size_t outFrames)
+  size_t getInFrames(size_t outFrames) nothrow
   {
     size_t _retval;
     _retval = gst_audio_resampler_get_in_frames(cast(GstAudioResampler*)this._cPtr, outFrames);
@@ -56,7 +53,7 @@ class AudioResampler
       Returns: the latency of resampler as expressed in the number of
         frames.
   */
-  size_t getMaxLatency()
+  size_t getMaxLatency() nothrow
   {
     size_t _retval;
     _retval = gst_audio_resampler_get_max_latency(cast(GstAudioResampler*)this._cPtr);
@@ -72,7 +69,7 @@ class AudioResampler
       Returns: The number of frames that would be available after giving
         in_frames as input to resampler.
   */
-  size_t getOutFrames(size_t inFrames)
+  size_t getOutFrames(size_t inFrames) nothrow
   {
     size_t _retval;
     _retval = gst_audio_resampler_get_out_frames(cast(GstAudioResampler*)this._cPtr, inFrames);
@@ -83,7 +80,7 @@ class AudioResampler
       Reset resampler to the state it was when it was first created, discarding
       all sample history.
   */
-  void reset()
+  void reset() nothrow
   {
     gst_audio_resampler_reset(cast(GstAudioResampler*)this._cPtr);
   }
@@ -102,7 +99,7 @@ class AudioResampler
         options = new options or null
       Returns: true if the new parameters could be set
   */
-  bool update(int inRate, int outRate, gst.structure.Structure options)
+  bool update(int inRate, int outRate, gst.structure.Structure options) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_resampler_update(cast(GstAudioResampler*)this._cPtr, inRate, outRate, options ? cast(GstStructure*)options._cPtr(No.Dup) : null);
@@ -122,7 +119,7 @@ class AudioResampler
         options = extra options
       Returns: The new #GstAudioResampler.
   */
-  static gstaudio.audio_resampler.AudioResampler new_(gstaudio.types.AudioResamplerMethod method, gstaudio.types.AudioResamplerFlags flags, gstaudio.types.AudioFormat format, int channels, int inRate, int outRate, gst.structure.Structure options)
+  static gstaudio.audio_resampler.AudioResampler new_(gstaudio.types.AudioResamplerMethod method, gstaudio.types.AudioResamplerFlags flags, gstaudio.types.AudioFormat format, int channels, int inRate, int outRate, gst.structure.Structure options) nothrow
   {
     GstAudioResampler* _cretval;
     _cretval = gst_audio_resampler_new(method, flags, format, channels, inRate, outRate, options ? cast(GstStructure*)options._cPtr(No.Dup) : null);
@@ -141,7 +138,7 @@ class AudioResampler
         outRate = the output rate
         options = a #GstStructure
   */
-  static void optionsSetQuality(gstaudio.types.AudioResamplerMethod method, uint quality, int inRate, int outRate, gst.structure.Structure options)
+  static void optionsSetQuality(gstaudio.types.AudioResamplerMethod method, uint quality, int inRate, int outRate, gst.structure.Structure options) nothrow
   {
     gst_audio_resampler_options_set_quality(method, quality, inRate, outRate, options ? cast(GstStructure*)options._cPtr(No.Dup) : null);
   }

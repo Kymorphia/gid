@@ -13,7 +13,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgobject-2.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // Binding
   GType function() c_g_binding_get_type; ///

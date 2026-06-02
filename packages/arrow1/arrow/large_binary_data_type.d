@@ -14,26 +14,26 @@ class LargeBinaryDataType : arrow.data_type.DataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_large_binary_data_type_get_type != &gidSymbolNotFound ? garrow_large_binary_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LargeBinaryDataType self()
+  override LargeBinaryDataType self() nothrow
   {
     return this;
   }
@@ -42,13 +42,13 @@ class LargeBinaryDataType : arrow.data_type.DataType
       Get builder for [arrow.large_binary_data_type.LargeBinaryDataType]
       Returns: New builder object
   */
-  static LargeBinaryDataTypeGidBuilder builder()
+  static LargeBinaryDataTypeGidBuilder builder() nothrow
   {
     return new LargeBinaryDataTypeGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowLargeBinaryDataType* _cretval;
     _cretval = garrow_large_binary_data_type_new();
@@ -68,7 +68,7 @@ final class LargeBinaryDataTypeGidBuilder : LargeBinaryDataTypeGidBuilderImpl!La
       Create object from builder.
       Returns: New object
   */
-  LargeBinaryDataType build()
+  LargeBinaryDataType build() nothrow
   {
     return new LargeBinaryDataType(cast(void*)createGObject(LargeBinaryDataType._getGType), Yes.Take);
   }

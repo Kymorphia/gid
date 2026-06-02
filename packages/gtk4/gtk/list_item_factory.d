@@ -63,26 +63,26 @@ class ListItemFactory : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_list_item_factory_get_type != &gidSymbolNotFound ? gtk_list_item_factory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ListItemFactory self()
+  override ListItemFactory self() nothrow
   {
     return this;
   }
@@ -91,7 +91,7 @@ class ListItemFactory : gobject.object.ObjectWrap
       Get builder for [gtk.list_item_factory.ListItemFactory]
       Returns: New builder object
   */
-  static ListItemFactoryGidBuilder builder()
+  static ListItemFactoryGidBuilder builder() nothrow
   {
     return new ListItemFactoryGidBuilder;
   }
@@ -109,7 +109,7 @@ final class ListItemFactoryGidBuilder : ListItemFactoryGidBuilderImpl!ListItemFa
       Create object from builder.
       Returns: New object
   */
-  ListItemFactory build()
+  ListItemFactory build() nothrow
   {
     return new ListItemFactory(cast(void*)createGObject(ListItemFactory._getGType), No.Take);
   }

@@ -179,26 +179,26 @@ class Handle : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())rsvg_handle_get_type != &gidSymbolNotFound ? rsvg_handle_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Handle self()
+  override Handle self() nothrow
   {
     return this;
   }
@@ -207,7 +207,7 @@ class Handle : gobject.object.ObjectWrap
       Get builder for [rsvg.handle.Handle]
       Returns: New builder object
   */
-  static HandleGidBuilder builder()
+  static HandleGidBuilder builder() nothrow
   {
     return new HandleGidBuilder;
   }
@@ -217,7 +217,7 @@ class Handle : gobject.object.ObjectWrap
       Returns: Base URI, to be used to resolve relative references for resources.  See the section
         "Security and locations of referenced files" for details.
   */
-  @property string baseUri()
+  @property string baseUri() nothrow
   {
     return getBaseUri();
   }
@@ -228,7 +228,7 @@ class Handle : gobject.object.ObjectWrap
         propval = Base URI, to be used to resolve relative references for resources.  See the section
           "Security and locations of referenced files" for details.
   */
-  @property void baseUri(string propval)
+  @property void baseUri(string propval) nothrow
   {
     setBaseUri(propval);
   }
@@ -239,7 +239,7 @@ class Handle : gobject.object.ObjectWrap
   
       Deprecated: Reading this property always returns `NULL`.
   */
-  @property string desc()
+  @property string desc() nothrow
   {
     return getDesc();
   }
@@ -248,7 +248,7 @@ class Handle : gobject.object.ObjectWrap
       Get `dpiX` property.
       Returns: Horizontal resolution in dots per inch.
   */
-  @property double dpiX()
+  @property double dpiX() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(double)("dpi-x");
   }
@@ -258,7 +258,7 @@ class Handle : gobject.object.ObjectWrap
       Params:
         propval = Horizontal resolution in dots per inch.
   */
-  @property void dpiX(double propval)
+  @property void dpiX(double propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(double)("dpi-x", propval);
   }
@@ -267,7 +267,7 @@ class Handle : gobject.object.ObjectWrap
       Get `dpiY` property.
       Returns: Horizontal resolution in dots per inch.
   */
-  @property double dpiY()
+  @property double dpiY() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(double)("dpi-y");
   }
@@ -277,7 +277,7 @@ class Handle : gobject.object.ObjectWrap
       Params:
         propval = Horizontal resolution in dots per inch.
   */
-  @property void dpiY(double propval)
+  @property void dpiY(double propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(double)("dpi-y", propval);
   }
@@ -292,7 +292,7 @@ class Handle : gobject.object.ObjectWrap
         `ex` properties will cause two such computations.  Please
         use [rsvg.handle.Handle.getIntrinsicDimensions] instead.
   */
-  @property double em()
+  @property double em() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(double)("em");
   }
@@ -307,7 +307,7 @@ class Handle : gobject.object.ObjectWrap
         `ex` properties will cause two such computations.  Please
         use [rsvg.handle.Handle.getIntrinsicDimensions] instead.
   */
-  @property double ex()
+  @property double ex() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(double)("ex");
   }
@@ -316,7 +316,7 @@ class Handle : gobject.object.ObjectWrap
       Get `flags` property.
       Returns: Flags from [rsvg.types.HandleFlags].
   */
-  @property rsvg.types.HandleFlags flags()
+  @property rsvg.types.HandleFlags flags() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(rsvg.types.HandleFlags)("flags");
   }
@@ -333,7 +333,7 @@ class Handle : gobject.object.ObjectWrap
         `height` properties will cause two such computations.
         Please use [rsvg.handle.Handle.getIntrinsicDimensions] instead.
   */
-  @property int height()
+  @property int height() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("height");
   }
@@ -344,7 +344,7 @@ class Handle : gobject.object.ObjectWrap
   
       Deprecated: Reading this property always returns `NULL`.
   */
-  @property string metadata()
+  @property string metadata() nothrow
   {
     return getMetadata();
   }
@@ -355,7 +355,7 @@ class Handle : gobject.object.ObjectWrap
   
       Deprecated: Reading this property always returns `NULL`.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -372,7 +372,7 @@ class Handle : gobject.object.ObjectWrap
         `height` properties will cause two such computations.
         Please use [rsvg.handle.Handle.getIntrinsicDimensions] instead.
   */
-  @property int width()
+  @property int width() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("width");
   }
@@ -400,7 +400,7 @@ class Handle : gobject.object.ObjectWrap
       [rsvg.handle.Handle.newFromGfileSync].
       Returns: A new [rsvg.handle.Handle] with no flags set.
   */
-  this()
+  this() nothrow
   {
     RsvgHandle* _cretval;
     _cretval = rsvg_handle_new();
@@ -527,7 +527,7 @@ class Handle : gobject.object.ObjectWrap
         flags = flags from [rsvg.types.HandleFlags]
       Returns: a new [rsvg.handle.Handle]
   */
-  static rsvg.handle.Handle newWithFlags(rsvg.types.HandleFlags flags)
+  static rsvg.handle.Handle newWithFlags(rsvg.types.HandleFlags flags) nothrow
   {
     RsvgHandle* _cretval;
     _cretval = rsvg_handle_new_with_flags(flags);
@@ -567,7 +567,7 @@ class Handle : gobject.object.ObjectWrap
       Gets the base uri for this [rsvg.handle.Handle].
       Returns: the base uri, possibly null
   */
-  string getBaseUri()
+  string getBaseUri() nothrow
   {
     const(char)* _cretval;
     _cretval = rsvg_handle_get_base_uri(cast(RsvgHandle*)this._cPtr);
@@ -576,7 +576,7 @@ class Handle : gobject.object.ObjectWrap
   }
 
   /** */
-  string getDesc()
+  string getDesc() nothrow
   {
     const(char)* _cretval;
     _cretval = rsvg_handle_get_desc(cast(RsvgHandle*)this._cPtr);
@@ -598,7 +598,7 @@ class Handle : gobject.object.ObjectWrap
         function is deprecated because it is not able to return exact fractional dimensions,
         only integer pixels.
   */
-  void getDimensions(out rsvg.types.DimensionData dimensionData)
+  void getDimensions(out rsvg.types.DimensionData dimensionData) nothrow
   {
     rsvg_handle_get_dimensions(cast(RsvgHandle*)this._cPtr, &dimensionData);
   }
@@ -623,7 +623,7 @@ class Handle : gobject.object.ObjectWrap
   
       Deprecated: Use [rsvg.handle.Handle.getGeometryForLayer] instead.
   */
-  bool getDimensionsSub(out rsvg.types.DimensionData dimensionData, string id = null)
+  bool getDimensionsSub(out rsvg.types.DimensionData dimensionData, string id = null) nothrow
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -795,7 +795,7 @@ class Handle : gobject.object.ObjectWrap
         outHasViewbox = Will be set to `TRUE` if the toplevel SVG has a `viewBox` attribute
         outViewbox = Will be set to the value of the `viewBox` attribute in the toplevel SVG
   */
-  void getIntrinsicDimensions(out bool outHasWidth, out rsvg.types.Length outWidth, out bool outHasHeight, out rsvg.types.Length outHeight, out bool outHasViewbox, out rsvg.types.Rectangle outViewbox)
+  void getIntrinsicDimensions(out bool outHasWidth, out rsvg.types.Length outWidth, out bool outHasHeight, out rsvg.types.Length outHeight, out bool outHasViewbox, out rsvg.types.Rectangle outViewbox) nothrow
   {
     gboolean _outHasWidth;
     gboolean _outHasHeight;
@@ -864,7 +864,7 @@ class Handle : gobject.object.ObjectWrap
         dimensions cannot be converted to pixels, returns `FALSE` and puts 0.0 in both
         out_width and out_height.
   */
-  bool getIntrinsicSizeInPixels(out double outWidth, out double outHeight)
+  bool getIntrinsicSizeInPixels(out double outWidth, out double outHeight) nothrow
   {
     bool _retval;
     _retval = cast(bool)rsvg_handle_get_intrinsic_size_in_pixels(cast(RsvgHandle*)this._cPtr, cast(double*)&outWidth, cast(double*)&outHeight);
@@ -872,7 +872,7 @@ class Handle : gobject.object.ObjectWrap
   }
 
   /** */
-  string getMetadata()
+  string getMetadata() nothrow
   {
     const(char)* _cretval;
     _cretval = rsvg_handle_get_metadata(cast(RsvgHandle*)this._cPtr);
@@ -893,7 +893,7 @@ class Handle : gobject.object.ObjectWrap
       Returns: A pixbuf, or null on error.
         during rendering.
   */
-  gdkpixbuf.pixbuf.Pixbuf getPixbuf()
+  gdkpixbuf.pixbuf.Pixbuf getPixbuf() nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = rsvg_handle_get_pixbuf(cast(RsvgHandle*)this._cPtr);
@@ -928,7 +928,7 @@ class Handle : gobject.object.ObjectWrap
       Returns: a pixbuf, or `NULL` if an error occurs
         during rendering.
   */
-  gdkpixbuf.pixbuf.Pixbuf getPixbufSub(string id = null)
+  gdkpixbuf.pixbuf.Pixbuf getPixbufSub(string id = null) nothrow
   {
     GdkPixbuf* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -959,7 +959,7 @@ class Handle : gobject.object.ObjectWrap
         deprecated since it is not able to return exact floating-point positions, only integer
         pixels.
   */
-  bool getPositionSub(out rsvg.types.PositionData positionData, string id = null)
+  bool getPositionSub(out rsvg.types.PositionData positionData, string id = null) nothrow
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -968,7 +968,7 @@ class Handle : gobject.object.ObjectWrap
   }
 
   /** */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = rsvg_handle_get_title(cast(RsvgHandle*)this._cPtr);
@@ -989,7 +989,7 @@ class Handle : gobject.object.ObjectWrap
           fragment ID.
       Returns: `TRUE` if id exists in the SVG document, `FALSE` otherwise.
   */
-  bool hasSub(string id)
+  bool hasSub(string id) nothrow
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -1004,7 +1004,7 @@ class Handle : gobject.object.ObjectWrap
       Params:
         testing = Whether to enable testing mode
   */
-  void internalSetTesting(bool testing)
+  void internalSetTesting(bool testing) nothrow
   {
     rsvg_handle_internal_set_testing(cast(RsvgHandle*)this._cPtr, testing);
   }
@@ -1089,7 +1089,7 @@ class Handle : gobject.object.ObjectWrap
       Deprecated: Please use [rsvg.handle.Handle.renderDocument] instead; that function lets
         you pass a viewport and obtain a good error message.
   */
-  bool renderCairo(cairo.context.Context cr)
+  bool renderCairo(cairo.context.Context cr) nothrow
   {
     bool _retval;
     _retval = cast(bool)rsvg_handle_render_cairo(cast(RsvgHandle*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null);
@@ -1156,7 +1156,7 @@ class Handle : gobject.object.ObjectWrap
       Deprecated: Please use [rsvg.handle.Handle.renderLayer] instead; that function lets
         you pass a viewport and obtain a good error message.
   */
-  bool renderCairoSub(cairo.context.Context cr, string id = null)
+  bool renderCairoSub(cairo.context.Context cr, string id = null) nothrow
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -1297,7 +1297,7 @@ class Handle : gobject.object.ObjectWrap
       Params:
         baseFile = a [gio.file.File]
   */
-  void setBaseGfile(gio.file.File baseFile)
+  void setBaseGfile(gio.file.File baseFile) nothrow
   {
     rsvg_handle_set_base_gfile(cast(RsvgHandle*)this._cPtr, baseFile ? cast(GFile*)(cast(gobject.object.ObjectWrap)baseFile)._cPtr(No.Dup) : null);
   }
@@ -1311,7 +1311,7 @@ class Handle : gobject.object.ObjectWrap
       Params:
         baseUri = The base uri
   */
-  void setBaseUri(string baseUri)
+  void setBaseUri(string baseUri) nothrow
   {
     const(char)* _baseUri = baseUri.toCString(No.Alloc);
     rsvg_handle_set_base_uri(cast(RsvgHandle*)this._cPtr, _baseUri);
@@ -1328,7 +1328,7 @@ class Handle : gobject.object.ObjectWrap
       Params:
         dpi = Dots Per Inch (i.e. as Pixels Per Inch)
   */
-  void setDpi(double dpi)
+  void setDpi(double dpi) nothrow
   {
     rsvg_handle_set_dpi(cast(RsvgHandle*)this._cPtr, dpi);
   }
@@ -1345,7 +1345,7 @@ class Handle : gobject.object.ObjectWrap
         dpiX = Dots Per Inch (i.e. Pixels Per Inch)
         dpiY = Dots Per Inch (i.e. Pixels Per Inch)
   */
-  void setDpiXY(double dpiX, double dpiY)
+  void setDpiXY(double dpiX, double dpiY) nothrow
   {
     rsvg_handle_set_dpi_x_y(cast(RsvgHandle*)this._cPtr, dpiX, dpiY);
   }
@@ -1375,13 +1375,20 @@ class Handle : gobject.object.ObjectWrap
         refers to the whole SVG or to just a sub-element of it.  It is easier, and
         unambiguous, to use code similar to the example above.
   */
-  void setSizeCallback(rsvg.types.SizeFunc sizeFunc = null)
+  void setSizeCallback(rsvg.types.SizeFunc sizeFunc = null) nothrow
   {
-    extern(C) void _sizeFuncCallback(int* width, int* height, void* userData)
+    extern(C) void _sizeFuncCallback(int* width, int* height, void* userData) nothrow
     {
       auto _dlg = cast(rsvg.types.SizeFunc*)userData;
 
-      (*_dlg)(*width, *height);
+      try
+      {
+        (*_dlg)(*width, *height);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "rsvg.types.SizeFunc");
+      }
     }
     auto _sizeFuncCB = sizeFunc ? &_sizeFuncCallback : null;
     auto _sizeFunc = sizeFunc ? freezeDelegate(cast(void*)&sizeFunc) : null;
@@ -1472,7 +1479,7 @@ class HandleGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           "Security and locations of referenced files" for details.
       Returns: Builder instance for fluent chaining
   */
-  T baseUri(string propval)
+  T baseUri(string propval) nothrow
   {
     return setProperty("base-uri", propval);
   }
@@ -1483,7 +1490,7 @@ class HandleGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Horizontal resolution in dots per inch.
       Returns: Builder instance for fluent chaining
   */
-  T dpiX(double propval)
+  T dpiX(double propval) nothrow
   {
     return setProperty("dpi-x", propval);
   }
@@ -1494,7 +1501,7 @@ class HandleGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Horizontal resolution in dots per inch.
       Returns: Builder instance for fluent chaining
   */
-  T dpiY(double propval)
+  T dpiY(double propval) nothrow
   {
     return setProperty("dpi-y", propval);
   }
@@ -1505,7 +1512,7 @@ class HandleGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Flags from [rsvg.types.HandleFlags].
       Returns: Builder instance for fluent chaining
   */
-  T flags(rsvg.types.HandleFlags propval)
+  T flags(rsvg.types.HandleFlags propval) nothrow
   {
     return setProperty("flags", propval);
   }
@@ -1518,7 +1525,7 @@ final class HandleGidBuilder : HandleGidBuilderImpl!HandleGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Handle build()
+  Handle build() nothrow
   {
     return new Handle(cast(void*)createGObject(Handle._getGType), Yes.Take);
   }

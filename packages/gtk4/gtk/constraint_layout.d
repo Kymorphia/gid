@@ -186,26 +186,26 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_constraint_layout_get_type != &gidSymbolNotFound ? gtk_constraint_layout_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ConstraintLayout self()
+  override ConstraintLayout self() nothrow
   {
     return this;
   }
@@ -214,7 +214,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
       Get builder for [gtk.constraint_layout.ConstraintLayout]
       Returns: New builder object
   */
-  static ConstraintLayoutGidBuilder builder()
+  static ConstraintLayoutGidBuilder builder() nothrow
   {
     return new ConstraintLayoutGidBuilder;
   }
@@ -225,7 +225,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
       Creates a new [gtk.constraint_layout.ConstraintLayout] layout manager.
       Returns: the newly created [gtk.constraint_layout.ConstraintLayout]
   */
-  this()
+  this() nothrow
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_constraint_layout_new();
@@ -250,7 +250,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
       Params:
         constraint = a [gtk.constraint.Constraint]
   */
-  void addConstraint(gtk.constraint.Constraint constraint)
+  void addConstraint(gtk.constraint.Constraint constraint) nothrow
   {
     gtk_constraint_layout_add_constraint(cast(GtkConstraintLayout*)this._cPtr, constraint ? cast(GtkConstraint*)constraint._cPtr(Yes.Dup) : null);
   }
@@ -381,7 +381,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
       Params:
         guide = a [gtk.constraint_guide.ConstraintGuide] object
   */
-  void addGuide(gtk.constraint_guide.ConstraintGuide guide)
+  void addGuide(gtk.constraint_guide.ConstraintGuide guide) nothrow
   {
     gtk_constraint_layout_add_guide(cast(GtkConstraintLayout*)this._cPtr, guide ? cast(GtkConstraintGuide*)guide._cPtr(Yes.Dup) : null);
   }
@@ -399,7 +399,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
       Returns: a
           [gio.list_model.ListModel] tracking the layout's constraints
   */
-  gio.list_model.ListModel observeConstraints()
+  gio.list_model.ListModel observeConstraints() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_constraint_layout_observe_constraints(cast(GtkConstraintLayout*)this._cPtr);
@@ -420,7 +420,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
       Returns: a
           [gio.list_model.ListModel] tracking the layout's guides
   */
-  gio.list_model.ListModel observeGuides()
+  gio.list_model.ListModel observeGuides() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_constraint_layout_observe_guides(cast(GtkConstraintLayout*)this._cPtr);
@@ -431,7 +431,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
   /**
       Removes all constraints from the layout manager.
   */
-  void removeAllConstraints()
+  void removeAllConstraints() nothrow
   {
     gtk_constraint_layout_remove_all_constraints(cast(GtkConstraintLayout*)this._cPtr);
   }
@@ -443,7 +443,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
       Params:
         constraint = a [gtk.constraint.Constraint]
   */
-  void removeConstraint(gtk.constraint.Constraint constraint)
+  void removeConstraint(gtk.constraint.Constraint constraint) nothrow
   {
     gtk_constraint_layout_remove_constraint(cast(GtkConstraintLayout*)this._cPtr, constraint ? cast(GtkConstraint*)constraint._cPtr(No.Dup) : null);
   }
@@ -455,7 +455,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
       Params:
         guide = a [gtk.constraint_guide.ConstraintGuide] object
   */
-  void removeGuide(gtk.constraint_guide.ConstraintGuide guide)
+  void removeGuide(gtk.constraint_guide.ConstraintGuide guide) nothrow
   {
     gtk_constraint_layout_remove_guide(cast(GtkConstraintLayout*)this._cPtr, guide ? cast(GtkConstraintGuide*)guide._cPtr(No.Dup) : null);
   }
@@ -475,7 +475,7 @@ final class ConstraintLayoutGidBuilder : ConstraintLayoutGidBuilderImpl!Constrai
       Create object from builder.
       Returns: New object
   */
-  ConstraintLayout build()
+  ConstraintLayout build() nothrow
   {
     return new ConstraintLayout(cast(void*)createGObject(ConstraintLayout._getGType), Yes.Take);
   }

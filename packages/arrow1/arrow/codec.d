@@ -15,26 +15,26 @@ class Codec : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_codec_get_type != &gidSymbolNotFound ? garrow_codec_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Codec self()
+  override Codec self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class Codec : gobject.object.ObjectWrap
       Get builder for [arrow.codec.Codec]
       Returns: New builder object
   */
-  static CodecGidBuilder builder()
+  static CodecGidBuilder builder() nothrow
   {
     return new CodecGidBuilder;
   }
@@ -60,7 +60,7 @@ class Codec : gobject.object.ObjectWrap
   }
 
   /** */
-  int getCompressionLevel()
+  int getCompressionLevel() nothrow
   {
     int _retval;
     _retval = garrow_codec_get_compression_level(cast(GArrowCodec*)this._cPtr);
@@ -68,7 +68,7 @@ class Codec : gobject.object.ObjectWrap
   }
 
   /** */
-  arrow.types.CompressionType getCompressionType()
+  arrow.types.CompressionType getCompressionType() nothrow
   {
     GArrowCompressionType _cretval;
     _cretval = garrow_codec_get_compression_type(cast(GArrowCodec*)this._cPtr);
@@ -77,7 +77,7 @@ class Codec : gobject.object.ObjectWrap
   }
 
   /** */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = garrow_codec_get_name(cast(GArrowCodec*)this._cPtr);
@@ -91,7 +91,7 @@ class CodecGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T codec(void* propval)
+  T codec(void* propval) nothrow
   {
     return setProperty("codec", propval);
   }
@@ -104,7 +104,7 @@ final class CodecGidBuilder : CodecGidBuilderImpl!CodecGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Codec build()
+  Codec build() nothrow
   {
     return new Codec(cast(void*)createGObject(Codec._getGType), Yes.Take);
   }

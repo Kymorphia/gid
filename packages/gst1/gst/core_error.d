@@ -14,7 +14,7 @@ struct CoreError
   alias Enum = gst.types.CoreError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gst_core_error_quark();
@@ -24,12 +24,12 @@ struct CoreError
 
 class CoreException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gst.core_error.CoreError.quark, cast(int)code, msg);
   }

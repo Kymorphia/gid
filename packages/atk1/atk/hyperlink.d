@@ -27,26 +27,26 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_hyperlink_get_type != &gidSymbolNotFound ? atk_hyperlink_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Hyperlink self()
+  override Hyperlink self() nothrow
   {
     return this;
   }
@@ -55,19 +55,19 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
       Get builder for [atk.hyperlink.Hyperlink]
       Returns: New builder object
   */
-  static HyperlinkGidBuilder builder()
+  static HyperlinkGidBuilder builder() nothrow
   {
     return new HyperlinkGidBuilder;
   }
 
   /** */
-  @property int endIndex()
+  @property int endIndex() nothrow
   {
     return getEndIndex();
   }
 
   /** */
-  @property int numberOfAnchors()
+  @property int numberOfAnchors() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("number-of-anchors");
   }
@@ -79,13 +79,13 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
       Deprecated: Please use ATK_STATE_FOCUSABLE for all links, and
         ATK_STATE_FOCUSED for focused links.
   */
-  @property bool selectedLink()
+  @property bool selectedLink() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("selected-link");
   }
 
   /** */
-  @property int startIndex()
+  @property int startIndex() nothrow
   {
     return getStartIndex();
   }
@@ -96,7 +96,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
       Gets the index with the hypertext document at which this link ends.
       Returns: the index with the hypertext document at which this link ends
   */
-  int getEndIndex()
+  int getEndIndex() nothrow
   {
     int _retval;
     _retval = atk_hyperlink_get_end_index(cast(AtkHyperlink*)this._cPtr);
@@ -107,7 +107,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
       Gets the number of anchors associated with this hyperlink.
       Returns: the number of anchors associated with this hyperlink
   */
-  int getNAnchors()
+  int getNAnchors() nothrow
   {
     int _retval;
     _retval = atk_hyperlink_get_n_anchors(cast(AtkHyperlink*)this._cPtr);
@@ -127,7 +127,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
       Returns: an #AtkObject associated with this hyperlinks
         i-th anchor
   */
-  atk.object.ObjectWrap getObject(int i)
+  atk.object.ObjectWrap getObject(int i) nothrow
   {
     AtkObject* _cretval;
     _cretval = atk_hyperlink_get_object(cast(AtkHyperlink*)this._cPtr, i);
@@ -139,7 +139,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
       Gets the index with the hypertext document at which this link begins.
       Returns: the index with the hypertext document at which this link begins
   */
-  int getStartIndex()
+  int getStartIndex() nothrow
   {
     int _retval;
     _retval = atk_hyperlink_get_start_index(cast(AtkHyperlink*)this._cPtr);
@@ -156,7 +156,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
         i = a (zero-index) integer specifying the desired anchor
       Returns: a string specifying the URI
   */
-  string getUri(int i)
+  string getUri(int i) nothrow
   {
     char* _cretval;
     _cretval = atk_hyperlink_get_uri(cast(AtkHyperlink*)this._cPtr, i);
@@ -171,7 +171,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
                 true.
       Returns: whether or not this link displays its content inline.
   */
-  bool isInline()
+  bool isInline() nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_hyperlink_is_inline(cast(AtkHyperlink*)this._cPtr);
@@ -185,7 +185,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
       Deprecated: Please use ATK_STATE_FOCUSABLE for all links,
         and ATK_STATE_FOCUSED for focused links.
   */
-  bool isSelectedLink()
+  bool isSelectedLink() nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_hyperlink_is_selected_link(cast(AtkHyperlink*)this._cPtr);
@@ -198,7 +198,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
       respect to the document it references) and false otherwise.
       Returns: whether or not this link is still valid
   */
-  bool isValid()
+  bool isValid() nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_hyperlink_is_valid(cast(AtkHyperlink*)this._cPtr);
@@ -220,13 +220,13 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectLinkActivated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLinkActivated(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.hyperlink.Hyperlink)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -235,7 +235,14 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "atk.hyperlink.Hyperlink.linkActivated");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -257,7 +264,7 @@ final class HyperlinkGidBuilder : HyperlinkGidBuilderImpl!HyperlinkGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Hyperlink build()
+  Hyperlink build() nothrow
   {
     return new Hyperlink(cast(void*)createGObject(Hyperlink._getGType), No.Take);
   }

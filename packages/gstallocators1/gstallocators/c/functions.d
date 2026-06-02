@@ -13,7 +13,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgstallocators-1.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // DRMDumbAllocator
   GType function() c_gst_drm_dumb_allocator_get_type; ///

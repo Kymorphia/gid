@@ -17,7 +17,7 @@ struct PluginError
       Get the error quark.
       Returns: The error quark used in GError messages
   */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gst_plugin_error_quark();
@@ -27,12 +27,12 @@ struct PluginError
 
 class PluginException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gst.plugin_error.PluginError.quark, cast(int)code, msg);
   }

@@ -51,32 +51,32 @@ class Node : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())json_node_get_type != &gidSymbolNotFound ? json_node_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Node self()
+  override Node self() nothrow
   {
     return this;
   }
@@ -87,7 +87,7 @@ class Node : gobject.boxed.Boxed
       Use [json.node.Node.init_] and its variants to initialize the returned value.
       Returns: the newly allocated node
   */
-  static json.node.Node alloc()
+  static json.node.Node alloc() nothrow
   {
     JsonNode* _cretval;
     _cretval = json_node_alloc();
@@ -109,7 +109,7 @@ class Node : gobject.boxed.Boxed
         type = the type of the node to create
       Returns: the newly created node
   */
-  this(json.types.NodeType type)
+  this(json.types.NodeType type) nothrow
   {
     JsonNode* _cretval;
     _cretval = json_node_new(type);
@@ -127,7 +127,7 @@ class Node : gobject.boxed.Boxed
       there should be no need to copy an immutable node.
       Returns: the copied of the given node
   */
-  json.node.Node copy()
+  json.node.Node copy() nothrow
   {
     JsonNode* _cretval;
     _cretval = json_node_copy(cast(JsonNode*)this._cPtr);
@@ -145,7 +145,7 @@ class Node : gobject.boxed.Boxed
       Returns: the JSON array with its reference
           count increased.
   */
-  json.array.Array dupArray()
+  json.array.Array dupArray() nothrow
   {
     JsonArray* _cretval;
     _cretval = json_node_dup_array(cast(JsonNode*)this._cPtr);
@@ -162,7 +162,7 @@ class Node : gobject.boxed.Boxed
       object value. Use `JSON_NODE_HOLDS_OBJECT` first.
       Returns: the JSON object
   */
-  json.object.ObjectWrap dupObject()
+  json.object.ObjectWrap dupObject() nothrow
   {
     JsonObject* _cretval;
     _cretval = json_node_dup_object(cast(JsonNode*)this._cPtr);
@@ -177,7 +177,7 @@ class Node : gobject.boxed.Boxed
       Returns: a copy of the string
           inside the node
   */
-  string dupString()
+  string dupString() nothrow
   {
     char* _cretval;
     _cretval = json_node_dup_string(cast(JsonNode*)this._cPtr);
@@ -196,7 +196,7 @@ class Node : gobject.boxed.Boxed
         b = another JSON node
       Returns: `TRUE` if `a` and `b` are equal; `FALSE` otherwise
   */
-  bool equal(json.node.Node b)
+  bool equal(json.node.Node b) nothrow
   {
     bool _retval;
     _retval = cast(bool)json_node_equal(cast(JsonNode*)this._cPtr, b ? cast(JsonNode*)b._cPtr(No.Dup) : null);
@@ -210,7 +210,7 @@ class Node : gobject.boxed.Boxed
       array value. Use `JSON_NODE_HOLDS_ARRAY` first.
       Returns: the JSON array
   */
-  json.array.Array getArray()
+  json.array.Array getArray() nothrow
   {
     JsonArray* _cretval;
     _cretval = json_node_get_array(cast(JsonNode*)this._cPtr);
@@ -228,7 +228,7 @@ class Node : gobject.boxed.Boxed
       non-boolean type, `FALSE` is returned.
       Returns: a boolean value.
   */
-  bool getBoolean()
+  bool getBoolean() nothrow
   {
     bool _retval;
     _retval = cast(bool)json_node_get_boolean(cast(JsonNode*)this._cPtr);
@@ -247,7 +247,7 @@ class Node : gobject.boxed.Boxed
       non-double type, `0.0` is returned.
       Returns: a double value.
   */
-  double getDouble()
+  double getDouble() nothrow
   {
     double _retval;
     _retval = json_node_get_double(cast(JsonNode*)this._cPtr);
@@ -266,7 +266,7 @@ class Node : gobject.boxed.Boxed
       non-integer type, `0` is returned.
       Returns: an integer value.
   */
-  long getInt()
+  long getInt() nothrow
   {
     long _retval;
     _retval = json_node_get_int(cast(JsonNode*)this._cPtr);
@@ -277,7 +277,7 @@ class Node : gobject.boxed.Boxed
       Retrieves the type of a node.
       Returns: the type of the node
   */
-  json.types.NodeType getNodeType()
+  json.types.NodeType getNodeType() nothrow
   {
     JsonNodeType _cretval;
     _cretval = json_node_get_node_type(cast(JsonNode*)this._cPtr);
@@ -292,7 +292,7 @@ class Node : gobject.boxed.Boxed
       object value. Use `JSON_NODE_HOLDS_OBJECT` first.
       Returns: the JSON object
   */
-  json.object.ObjectWrap getObject()
+  json.object.ObjectWrap getObject() nothrow
   {
     JsonObject* _cretval;
     _cretval = json_node_get_object(cast(JsonNode*)this._cPtr);
@@ -305,7 +305,7 @@ class Node : gobject.boxed.Boxed
       Returns: the parent node, or `NULL` if node
           is the root node
   */
-  json.node.Node getParent()
+  json.node.Node getParent() nothrow
   {
     JsonNode* _cretval;
     _cretval = json_node_get_parent(cast(JsonNode*)this._cPtr);
@@ -319,7 +319,7 @@ class Node : gobject.boxed.Boxed
       If the node does not hold a string value, `NULL` is returned.
       Returns: a string value.
   */
-  string getString()
+  string getString() nothrow
   {
     const(char)* _cretval;
     _cretval = json_node_get_string(cast(JsonNode*)this._cPtr);
@@ -339,7 +339,7 @@ class Node : gobject.boxed.Boxed
       Params:
         value = return location for an uninitialized value
   */
-  void getValue(out gobject.value.Value value)
+  void getValue(out gobject.value.Value value) nothrow
   {
     GValue _value;
     json_node_get_value(cast(JsonNode*)this._cPtr, &_value);
@@ -352,7 +352,7 @@ class Node : gobject.boxed.Boxed
       For [json.types.NodeType.Null] nodes, the returned type is `G_TYPE_INVALID`.
       Returns: the type for the payload
   */
-  gobject.types.GType getValueType()
+  gobject.types.GType getValueType() nothrow
   {
     gobject.types.GType _retval;
     _retval = json_node_get_value_type(cast(JsonNode*)this._cPtr);
@@ -368,7 +368,7 @@ class Node : gobject.boxed.Boxed
       in the JSON object if this node contains an object).
       Returns: hash value for key
   */
-  uint hash()
+  uint hash() nothrow
   {
     uint _retval;
     _retval = json_node_hash(cast(JsonNode*)this._cPtr);
@@ -385,7 +385,7 @@ class Node : gobject.boxed.Boxed
         type = the type of JSON node to initialize node to
       Returns: the initialized node
   */
-  json.node.Node init_(json.types.NodeType type)
+  json.node.Node init_(json.types.NodeType type) nothrow
   {
     JsonNode* _cretval;
     _cretval = json_node_init(cast(JsonNode*)this._cPtr, type);
@@ -405,7 +405,7 @@ class Node : gobject.boxed.Boxed
         array = the JSON array to initialize node with, or `NULL`
       Returns: the initialized node
   */
-  json.node.Node initArray(json.array.Array array = null)
+  json.node.Node initArray(json.array.Array array = null) nothrow
   {
     JsonNode* _cretval;
     _cretval = json_node_init_array(cast(JsonNode*)this._cPtr, array ? cast(JsonArray*)array._cPtr(No.Dup) : null);
@@ -423,7 +423,7 @@ class Node : gobject.boxed.Boxed
         value = a boolean value
       Returns: the initialized node
   */
-  json.node.Node initBoolean(bool value)
+  json.node.Node initBoolean(bool value) nothrow
   {
     JsonNode* _cretval;
     _cretval = json_node_init_boolean(cast(JsonNode*)this._cPtr, value);
@@ -441,7 +441,7 @@ class Node : gobject.boxed.Boxed
         value = a floating point value
       Returns: the initialized node
   */
-  json.node.Node initDouble(double value)
+  json.node.Node initDouble(double value) nothrow
   {
     JsonNode* _cretval;
     _cretval = json_node_init_double(cast(JsonNode*)this._cPtr, value);
@@ -459,7 +459,7 @@ class Node : gobject.boxed.Boxed
         value = an integer
       Returns: the initialized node
   */
-  json.node.Node initInt(long value)
+  json.node.Node initInt(long value) nothrow
   {
     JsonNode* _cretval;
     _cretval = json_node_init_int(cast(JsonNode*)this._cPtr, value);
@@ -474,7 +474,7 @@ class Node : gobject.boxed.Boxed
       the given type, and any data contained will be cleared.
       Returns: the initialized node
   */
-  json.node.Node initNull()
+  json.node.Node initNull() nothrow
   {
     JsonNode* _cretval;
     _cretval = json_node_init_null(cast(JsonNode*)this._cPtr);
@@ -494,7 +494,7 @@ class Node : gobject.boxed.Boxed
         object = the JSON object to initialize node with, or `NULL`
       Returns: the initialized node
   */
-  json.node.Node initObject(json.object.ObjectWrap object = null)
+  json.node.Node initObject(json.object.ObjectWrap object = null) nothrow
   {
     JsonNode* _cretval;
     _cretval = json_node_init_object(cast(JsonNode*)this._cPtr, object ? cast(JsonObject*)object._cPtr(No.Dup) : null);
@@ -512,7 +512,7 @@ class Node : gobject.boxed.Boxed
         value = a string value
       Returns: the initialized node
   */
-  json.node.Node initString(string value = null)
+  json.node.Node initString(string value = null) nothrow
   {
     JsonNode* _cretval;
     const(char)* _value = value.toCString(No.Alloc);
@@ -526,7 +526,7 @@ class Node : gobject.boxed.Boxed
       [json.node.Node.seal] on it.
       Returns: `TRUE` if the node is immutable
   */
-  bool isImmutable()
+  bool isImmutable() nothrow
   {
     bool _retval;
     _retval = cast(bool)json_node_is_immutable(cast(JsonNode*)this._cPtr);
@@ -540,7 +540,7 @@ class Node : gobject.boxed.Boxed
       represents a literal `null` value in the JSON tree.
       Returns: `TRUE` if the node is null
   */
-  bool isNull()
+  bool isNull() nothrow
   {
     bool _retval;
     _retval = cast(bool)json_node_is_null(cast(JsonNode*)this._cPtr);
@@ -556,7 +556,7 @@ class Node : gobject.boxed.Boxed
       
       If the `node` is already immutable, this is a no-op.
   */
-  void seal()
+  void seal() nothrow
   {
     json_node_seal(cast(JsonNode*)this._cPtr);
   }
@@ -572,7 +572,7 @@ class Node : gobject.boxed.Boxed
       Params:
         array = a JSON array
   */
-  void setArray(json.array.Array array)
+  void setArray(json.array.Array array) nothrow
   {
     json_node_set_array(cast(JsonNode*)this._cPtr, array ? cast(JsonArray*)array._cPtr(No.Dup) : null);
   }
@@ -587,7 +587,7 @@ class Node : gobject.boxed.Boxed
       Params:
         value = a boolean value
   */
-  void setBoolean(bool value)
+  void setBoolean(bool value) nothrow
   {
     json_node_set_boolean(cast(JsonNode*)this._cPtr, value);
   }
@@ -602,7 +602,7 @@ class Node : gobject.boxed.Boxed
       Params:
         value = a double value
   */
-  void setDouble(double value)
+  void setDouble(double value) nothrow
   {
     json_node_set_double(cast(JsonNode*)this._cPtr, value);
   }
@@ -617,7 +617,7 @@ class Node : gobject.boxed.Boxed
       Params:
         value = an integer value
   */
-  void setInt(long value)
+  void setInt(long value) nothrow
   {
     json_node_set_int(cast(JsonNode*)this._cPtr, value);
   }
@@ -635,7 +635,7 @@ class Node : gobject.boxed.Boxed
       Params:
         object = a JSON object
   */
-  void setObject(json.object.ObjectWrap object = null)
+  void setObject(json.object.ObjectWrap object = null) nothrow
   {
     json_node_set_object(cast(JsonNode*)this._cPtr, object ? cast(JsonObject*)object._cPtr(No.Dup) : null);
   }
@@ -650,7 +650,7 @@ class Node : gobject.boxed.Boxed
       Params:
         parent = the parent node
   */
-  void setParent(json.node.Node parent = null)
+  void setParent(json.node.Node parent = null) nothrow
   {
     json_node_set_parent(cast(JsonNode*)this._cPtr, parent ? cast(JsonNode*)parent._cPtr(No.Dup) : null);
   }
@@ -665,7 +665,7 @@ class Node : gobject.boxed.Boxed
       Params:
         value = a string value
   */
-  void setString(string value)
+  void setString(string value) nothrow
   {
     const(char)* _value = value.toCString(No.Alloc);
     json_node_set_string(cast(JsonNode*)this._cPtr, _value);
@@ -694,7 +694,7 @@ class Node : gobject.boxed.Boxed
       Params:
         value = the value to set
   */
-  void setValue(gobject.value.Value value)
+  void setValue(gobject.value.Value value) nothrow
   {
     json_node_set_value(cast(JsonNode*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
@@ -710,7 +710,7 @@ class Node : gobject.boxed.Boxed
       Params:
         array = a JSON array
   */
-  void takeArray(json.array.Array array)
+  void takeArray(json.array.Array array) nothrow
   {
     json_node_take_array(cast(JsonNode*)this._cPtr, array ? cast(JsonArray*)array._cPtr(Yes.Dup) : null);
   }
@@ -726,7 +726,7 @@ class Node : gobject.boxed.Boxed
       Params:
         object = a JSON object
   */
-  void takeObject(json.object.ObjectWrap object)
+  void takeObject(json.object.ObjectWrap object) nothrow
   {
     json_node_take_object(cast(JsonNode*)this._cPtr, object ? cast(JsonObject*)object._cPtr(Yes.Dup) : null);
   }
@@ -738,7 +738,7 @@ class Node : gobject.boxed.Boxed
       guarantee the name will stay the same across different versions.
       Returns: a string containing the name of the type
   */
-  string typeName()
+  string typeName() nothrow
   {
     const(char)* _cretval;
     _cretval = json_node_type_name(cast(JsonNode*)this._cPtr);

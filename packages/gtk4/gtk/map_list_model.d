@@ -49,26 +49,26 @@ class MapListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.se
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_map_list_model_get_type != &gidSymbolNotFound ? gtk_map_list_model_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MapListModel self()
+  override MapListModel self() nothrow
   {
     return this;
   }
@@ -77,7 +77,7 @@ class MapListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.se
       Get builder for [gtk.map_list_model.MapListModel]
       Returns: New builder object
   */
-  static MapListModelGidBuilder builder()
+  static MapListModelGidBuilder builder() nothrow
   {
     return new MapListModelGidBuilder;
   }
@@ -86,7 +86,7 @@ class MapListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.se
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
-  @property gobject.types.GType itemType()
+  @property gobject.types.GType itemType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
   }
@@ -95,7 +95,7 @@ class MapListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.se
       Get `model` property.
       Returns: The model being mapped.
   */
-  @property gio.list_model.ListModel model()
+  @property gio.list_model.ListModel model() nothrow
   {
     return getModel();
   }
@@ -104,7 +104,7 @@ class MapListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.se
       Get `nItems` property.
       Returns: The number of items. See [gio.list_model.ListModel.getNItems].
   */
-  @property uint nItems()
+  @property uint nItems() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
@@ -120,14 +120,21 @@ class MapListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.se
         mapFunc = map function
       Returns: a new [gtk.map_list_model.MapListModel]
   */
-  this(gio.list_model.ListModel model = null, gtk.types.MapListModelMapFunc mapFunc = null)
+  this(gio.list_model.ListModel model = null, gtk.types.MapListModelMapFunc mapFunc = null) nothrow
   {
-    extern(C) GObject* _mapFuncCallback(GObject* item, void* userData)
+    extern(C) GObject* _mapFuncCallback(GObject* item, void* userData) nothrow
     {
       gobject.object.ObjectWrap _dretval;
       auto _dlg = cast(gtk.types.MapListModelMapFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, Yes.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, Yes.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.MapListModelMapFunc");
+      }
       auto _retval = cast(GObject*)_dretval._cPtr(Yes.Dup);
 
       return _retval;
@@ -144,7 +151,7 @@ class MapListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.se
       Gets the model that is currently being mapped or null if none.
       Returns: The model that gets mapped
   */
-  gio.list_model.ListModel getModel()
+  gio.list_model.ListModel getModel() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_map_list_model_get_model(cast(GtkMapListModel*)this._cPtr);
@@ -156,7 +163,7 @@ class MapListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.se
       Checks if a map function is currently set on self.
       Returns: true if a map function is set
   */
-  bool hasMap()
+  bool hasMap() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_map_list_model_has_map(cast(GtkMapListModel*)this._cPtr);
@@ -179,14 +186,21 @@ class MapListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.se
       Params:
         mapFunc = map function
   */
-  void setMapFunc(gtk.types.MapListModelMapFunc mapFunc = null)
+  void setMapFunc(gtk.types.MapListModelMapFunc mapFunc = null) nothrow
   {
-    extern(C) GObject* _mapFuncCallback(GObject* item, void* userData)
+    extern(C) GObject* _mapFuncCallback(GObject* item, void* userData) nothrow
     {
       gobject.object.ObjectWrap _dretval;
       auto _dlg = cast(gtk.types.MapListModelMapFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, Yes.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, Yes.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.MapListModelMapFunc");
+      }
       auto _retval = cast(GObject*)_dretval._cPtr(Yes.Dup);
 
       return _retval;
@@ -207,7 +221,7 @@ class MapListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.se
       Params:
         model = The model to be mapped
   */
-  void setModel(gio.list_model.ListModel model = null)
+  void setModel(gio.list_model.ListModel model = null) nothrow
   {
     gtk_map_list_model_set_model(cast(GtkMapListModel*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
@@ -226,7 +240,7 @@ class MapListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
         propval = The model being mapped.
       Returns: Builder instance for fluent chaining
   */
-  T model(gio.list_model.ListModel propval)
+  T model(gio.list_model.ListModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -239,7 +253,7 @@ final class MapListModelGidBuilder : MapListModelGidBuilderImpl!MapListModelGidB
       Create object from builder.
       Returns: New object
   */
-  MapListModel build()
+  MapListModel build() nothrow
   {
     return new MapListModel(cast(void*)createGObject(MapListModel._getGType), Yes.Take);
   }

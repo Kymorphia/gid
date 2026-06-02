@@ -21,32 +21,32 @@ class CssSection : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_css_section_get_type != &gidSymbolNotFound ? gtk_css_section_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CssSection self()
+  override CssSection self() nothrow
   {
     return this;
   }
@@ -62,7 +62,7 @@ class CssSection : gobject.boxed.Boxed
         end = The end location
       Returns: a new [gtk.css_section.CssSection]
   */
-  this(gio.file.File file, gtk.types.CssLocation start, gtk.types.CssLocation end)
+  this(gio.file.File file, gtk.types.CssLocation start, gtk.types.CssLocation end) nothrow
   {
     GtkCssSection* _cretval;
     _cretval = gtk_css_section_new(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, &start, &end);
@@ -74,7 +74,7 @@ class CssSection : gobject.boxed.Boxed
       Returns: The end location of
           this section
   */
-  gtk.types.CssLocation getEndLocation()
+  gtk.types.CssLocation getEndLocation() nothrow
   {
     const(GtkCssLocation)* _cretval;
     _cretval = gtk_css_section_get_end_location(cast(const(GtkCssSection)*)this._cPtr);
@@ -92,7 +92,7 @@ class CssSection : gobject.boxed.Boxed
       Returns: the [gio.file.File] from which the `section`
           was parsed
   */
-  gio.file.File getFile()
+  gio.file.File getFile() nothrow
   {
     GFile* _cretval;
     _cretval = gtk_css_section_get_file(cast(const(GtkCssSection)*)this._cPtr);
@@ -111,7 +111,7 @@ class CssSection : gobject.boxed.Boxed
       a different file.
       Returns: the parent section
   */
-  gtk.css_section.CssSection getParent()
+  gtk.css_section.CssSection getParent() nothrow
   {
     GtkCssSection* _cretval;
     _cretval = gtk_css_section_get_parent(cast(const(GtkCssSection)*)this._cPtr);
@@ -124,7 +124,7 @@ class CssSection : gobject.boxed.Boxed
       Returns: The start location of
           this section
   */
-  gtk.types.CssLocation getStartLocation()
+  gtk.types.CssLocation getStartLocation() nothrow
   {
     const(GtkCssLocation)* _cretval;
     _cretval = gtk_css_section_get_start_location(cast(const(GtkCssSection)*)this._cPtr);
@@ -143,7 +143,7 @@ class CssSection : gobject.boxed.Boxed
       Params:
         string_ = a [glib.string_.String] to print to
   */
-  void print(glib.string_.String string_)
+  void print(glib.string_.String string_) nothrow
   {
     gtk_css_section_print(cast(const(GtkCssSection)*)this._cPtr, string_ ? cast(GString*)string_._cPtr(No.Dup) : null);
   }
@@ -153,7 +153,7 @@ class CssSection : gobject.boxed.Boxed
       [gtk.css_section.CssSection.print].
       Returns: A new string.
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gtk_css_section_to_string(cast(const(GtkCssSection)*)this._cPtr);

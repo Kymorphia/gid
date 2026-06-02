@@ -50,26 +50,26 @@ class Cursor : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_cursor_get_type != &gidSymbolNotFound ? gdk_cursor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Cursor self()
+  override Cursor self() nothrow
   {
     return this;
   }
@@ -78,7 +78,7 @@ class Cursor : gobject.object.ObjectWrap
       Get builder for [gdk.cursor.Cursor]
       Returns: New builder object
   */
-  static CursorGidBuilder builder()
+  static CursorGidBuilder builder() nothrow
   {
     return new CursorGidBuilder;
   }
@@ -87,7 +87,7 @@ class Cursor : gobject.object.ObjectWrap
       Get `fallback` property.
       Returns: Cursor to fall back to if this cursor cannot be displayed.
   */
-  @property gdk.cursor.Cursor fallback()
+  @property gdk.cursor.Cursor fallback() nothrow
   {
     return getFallback();
   }
@@ -96,7 +96,7 @@ class Cursor : gobject.object.ObjectWrap
       Get `hotspotX` property.
       Returns: X position of the cursor hotspot in the cursor image.
   */
-  @property int hotspotX()
+  @property int hotspotX() nothrow
   {
     return getHotspotX();
   }
@@ -105,7 +105,7 @@ class Cursor : gobject.object.ObjectWrap
       Get `hotspotY` property.
       Returns: Y position of the cursor hotspot in the cursor image.
   */
-  @property int hotspotY()
+  @property int hotspotY() nothrow
   {
     return getHotspotY();
   }
@@ -116,7 +116,7 @@ class Cursor : gobject.object.ObjectWrap
         
         The name will be null if the cursor was created from a texture.
   */
-  @property string name()
+  @property string name() nothrow
   {
     return getName();
   }
@@ -127,7 +127,7 @@ class Cursor : gobject.object.ObjectWrap
         
         The texture will be null if the cursor was created from a name.
   */
-  @property gdk.texture.Texture texture()
+  @property gdk.texture.Texture texture() nothrow
   {
     return getTexture();
   }
@@ -158,7 +158,7 @@ class Cursor : gobject.object.ObjectWrap
       Returns: a new [gdk.cursor.Cursor], or null if there is no
           cursor with the given name
   */
-  static gdk.cursor.Cursor newFromName(string name, gdk.cursor.Cursor fallback = null)
+  static gdk.cursor.Cursor newFromName(string name, gdk.cursor.Cursor fallback = null) nothrow
   {
     GdkCursor* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -178,7 +178,7 @@ class Cursor : gobject.object.ObjectWrap
             this one cannot be supported
       Returns: a new [gdk.cursor.Cursor]
   */
-  static gdk.cursor.Cursor newFromTexture(gdk.texture.Texture texture, int hotspotX, int hotspotY, gdk.cursor.Cursor fallback = null)
+  static gdk.cursor.Cursor newFromTexture(gdk.texture.Texture texture, int hotspotX, int hotspotY, gdk.cursor.Cursor fallback = null) nothrow
   {
     GdkCursor* _cretval;
     _cretval = gdk_cursor_new_from_texture(texture ? cast(GdkTexture*)texture._cPtr(No.Dup) : null, hotspotX, hotspotY, fallback ? cast(GdkCursor*)fallback._cPtr(No.Dup) : null);
@@ -197,7 +197,7 @@ class Cursor : gobject.object.ObjectWrap
       Returns: the fallback of the cursor or null
           to use the default cursor as fallback
   */
-  gdk.cursor.Cursor getFallback()
+  gdk.cursor.Cursor getFallback() nothrow
   {
     GdkCursor* _cretval;
     _cretval = gdk_cursor_get_fallback(cast(GdkCursor*)this._cPtr);
@@ -215,7 +215,7 @@ class Cursor : gobject.object.ObjectWrap
       [gdk.cursor.Cursor.newFromTexture].
       Returns: the horizontal offset of the hotspot or 0 for named cursors
   */
-  int getHotspotX()
+  int getHotspotX() nothrow
   {
     int _retval;
     _retval = gdk_cursor_get_hotspot_x(cast(GdkCursor*)this._cPtr);
@@ -232,7 +232,7 @@ class Cursor : gobject.object.ObjectWrap
       [gdk.cursor.Cursor.newFromTexture].
       Returns: the vertical offset of the hotspot or 0 for named cursors
   */
-  int getHotspotY()
+  int getHotspotY() nothrow
   {
     int _retval;
     _retval = gdk_cursor_get_hotspot_y(cast(GdkCursor*)this._cPtr);
@@ -246,7 +246,7 @@ class Cursor : gobject.object.ObjectWrap
       Returns: the name of the cursor or null
           if it is not a named cursor
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gdk_cursor_get_name(cast(GdkCursor*)this._cPtr);
@@ -261,7 +261,7 @@ class Cursor : gobject.object.ObjectWrap
       Returns: the texture for cursor or null
           if it is a named cursor
   */
-  gdk.texture.Texture getTexture()
+  gdk.texture.Texture getTexture() nothrow
   {
     GdkTexture* _cretval;
     _cretval = gdk_cursor_get_texture(cast(GdkCursor*)this._cPtr);
@@ -280,7 +280,7 @@ class CursorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Cursor to fall back to if this cursor cannot be displayed.
       Returns: Builder instance for fluent chaining
   */
-  T fallback(gdk.cursor.Cursor propval)
+  T fallback(gdk.cursor.Cursor propval) nothrow
   {
     return setProperty("fallback", propval);
   }
@@ -291,7 +291,7 @@ class CursorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = X position of the cursor hotspot in the cursor image.
       Returns: Builder instance for fluent chaining
   */
-  T hotspotX(int propval)
+  T hotspotX(int propval) nothrow
   {
     return setProperty("hotspot-x", propval);
   }
@@ -302,7 +302,7 @@ class CursorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Y position of the cursor hotspot in the cursor image.
       Returns: Builder instance for fluent chaining
   */
-  T hotspotY(int propval)
+  T hotspotY(int propval) nothrow
   {
     return setProperty("hotspot-y", propval);
   }
@@ -315,7 +315,7 @@ class CursorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           The name will be null if the cursor was created from a texture.
       Returns: Builder instance for fluent chaining
   */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
@@ -328,7 +328,7 @@ class CursorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           The texture will be null if the cursor was created from a name.
       Returns: Builder instance for fluent chaining
   */
-  T texture(gdk.texture.Texture propval)
+  T texture(gdk.texture.Texture propval) nothrow
   {
     return setProperty("texture", propval);
   }
@@ -341,7 +341,7 @@ final class CursorGidBuilder : CursorGidBuilderImpl!CursorGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Cursor build()
+  Cursor build() nothrow
   {
     return new Cursor(cast(void*)createGObject(Cursor._getGType), No.Take);
   }

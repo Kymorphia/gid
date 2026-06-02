@@ -45,26 +45,26 @@ class ShortcutAction : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_shortcut_action_get_type != &gidSymbolNotFound ? gtk_shortcut_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ShortcutAction self()
+  override ShortcutAction self() nothrow
   {
     return this;
   }
@@ -73,7 +73,7 @@ class ShortcutAction : gobject.object.ObjectWrap
       Get builder for [gtk.shortcut_action.ShortcutAction]
       Returns: New builder object
   */
-  static ShortcutActionGidBuilder builder()
+  static ShortcutActionGidBuilder builder() nothrow
   {
     return new ShortcutActionGidBuilder;
   }
@@ -96,7 +96,7 @@ class ShortcutAction : gobject.object.ObjectWrap
         string_ = the string to parse
       Returns: a new [gtk.shortcut_action.ShortcutAction]
   */
-  static gtk.shortcut_action.ShortcutAction parseString(string string_)
+  static gtk.shortcut_action.ShortcutAction parseString(string string_) nothrow
   {
     GtkShortcutAction* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
@@ -120,7 +120,7 @@ class ShortcutAction : gobject.object.ObjectWrap
         args = arguments to pass
       Returns: true if this action was activated successfully
   */
-  bool activate(gtk.types.ShortcutActionFlags flags, gtk.widget.Widget widget, glib.variant.Variant args = null)
+  bool activate(gtk.types.ShortcutActionFlags flags, gtk.widget.Widget widget, glib.variant.Variant args = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_shortcut_action_activate(cast(GtkShortcutAction*)this._cPtr, flags, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, args ? cast(GVariant*)args._cPtr(No.Dup) : null);
@@ -138,7 +138,7 @@ class ShortcutAction : gobject.object.ObjectWrap
       Params:
         string_ = a [glib.string_.String] to print into
   */
-  void print(glib.string_.String string_)
+  void print(glib.string_.String string_) nothrow
   {
     gtk_shortcut_action_print(cast(GtkShortcutAction*)this._cPtr, string_ ? cast(GString*)string_._cPtr(No.Dup) : null);
   }
@@ -150,7 +150,7 @@ class ShortcutAction : gobject.object.ObjectWrap
       to help when debugging.
       Returns: a new string
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gtk_shortcut_action_to_string(cast(GtkShortcutAction*)this._cPtr);
@@ -171,7 +171,7 @@ final class ShortcutActionGidBuilder : ShortcutActionGidBuilderImpl!ShortcutActi
       Create object from builder.
       Returns: New object
   */
-  ShortcutAction build()
+  ShortcutAction build() nothrow
   {
     return new ShortcutAction(cast(void*)createGObject(ShortcutAction._getGType), No.Take);
   }

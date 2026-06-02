@@ -20,38 +20,38 @@ class GLMemoryPBO : gobject.boxed.Boxed
   /**
       Create a `glmemory_pbo.GLMemoryPBO` boxed type.
   */
-  this()
+  this() nothrow
   {
     super(gMalloc(GstGLMemoryPBO.sizeof), Yes.Take);
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_memory_pbo_get_type != &gidSymbolNotFound ? gst_gl_memory_pbo_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLMemoryPBO self()
+  override GLMemoryPBO self() nothrow
   {
     return this;
   }
@@ -81,7 +81,7 @@ class GLMemoryPBO : gobject.boxed.Boxed
         respecify = whether to copy the data or copy per texel
       Returns: Whether the copy succeeded
   */
-  bool copyIntoTexture(uint texId, gstgl.types.GLTextureTarget target, gstgl.types.GLFormat texFormat, int width, int height, int stride, bool respecify)
+  bool copyIntoTexture(uint texId, gstgl.types.GLTextureTarget target, gstgl.types.GLFormat texFormat, int width, int height, int stride, bool respecify) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_memory_pbo_copy_into_texture(cast(GstGLMemoryPBO*)this._cPtr, texId, target, texFormat, width, height, stride, respecify);
@@ -91,7 +91,7 @@ class GLMemoryPBO : gobject.boxed.Boxed
   /**
       Transfer the texture data from the texture into the PBO if necessary.
   */
-  void downloadTransfer()
+  void downloadTransfer() nothrow
   {
     gst_gl_memory_pbo_download_transfer(cast(GstGLMemoryPBO*)this._cPtr);
   }
@@ -99,13 +99,13 @@ class GLMemoryPBO : gobject.boxed.Boxed
   /**
       Transfer the texture data from the PBO into the texture if necessary.
   */
-  void uploadTransfer()
+  void uploadTransfer() nothrow
   {
     gst_gl_memory_pbo_upload_transfer(cast(GstGLMemoryPBO*)this._cPtr);
   }
 
   /** */
-  static void initOnce()
+  static void initOnce() nothrow
   {
     gst_gl_memory_pbo_init_once();
   }

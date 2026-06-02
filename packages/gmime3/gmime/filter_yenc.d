@@ -16,26 +16,26 @@ class FilterYenc : gmime.filter.Filter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_filter_yenc_get_type != &gidSymbolNotFound ? g_mime_filter_yenc_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FilterYenc self()
+  override FilterYenc self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class FilterYenc : gmime.filter.Filter
       Get builder for [gmime.filter_yenc.FilterYenc]
       Returns: New builder object
   */
-  static FilterYencGidBuilder builder()
+  static FilterYencGidBuilder builder() nothrow
   {
     return new FilterYencGidBuilder;
   }
@@ -56,7 +56,7 @@ class FilterYenc : gmime.filter.Filter
         encode = encode vs decode
       Returns: a new yEnc filter.
   */
-  this(bool encode)
+  this(bool encode) nothrow
   {
     GMimeFilter* _cretval;
     _cretval = g_mime_filter_yenc_new(encode);
@@ -67,7 +67,7 @@ class FilterYenc : gmime.filter.Filter
       Get the computed crc or (guint32) -1 on fail.
       Returns: the computed crc or (guint32) -1 on fail.
   */
-  uint getCrc()
+  uint getCrc() nothrow
   {
     uint _retval;
     _retval = g_mime_filter_yenc_get_crc(cast(GMimeFilterYenc*)this._cPtr);
@@ -78,7 +78,7 @@ class FilterYenc : gmime.filter.Filter
       Get the computed part crc or (guint32) -1 on fail.
       Returns: the computed part crc or (guint32) -1 on fail.
   */
-  uint getPcrc()
+  uint getPcrc() nothrow
   {
     uint _retval;
     _retval = g_mime_filter_yenc_get_pcrc(cast(GMimeFilterYenc*)this._cPtr);
@@ -91,7 +91,7 @@ class FilterYenc : gmime.filter.Filter
       Params:
         crc = crc32
   */
-  void setCrc(uint crc)
+  void setCrc(uint crc) nothrow
   {
     g_mime_filter_yenc_set_crc(cast(GMimeFilterYenc*)this._cPtr, crc);
   }
@@ -102,7 +102,7 @@ class FilterYenc : gmime.filter.Filter
       Params:
         state = encode/decode state
   */
-  void setState(int state)
+  void setState(int state) nothrow
   {
     g_mime_filter_yenc_set_state(cast(GMimeFilterYenc*)this._cPtr, state);
   }
@@ -120,7 +120,7 @@ final class FilterYencGidBuilder : FilterYencGidBuilderImpl!FilterYencGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FilterYenc build()
+  FilterYenc build() nothrow
   {
     return new FilterYenc(cast(void*)createGObject(FilterYenc._getGType), Yes.Take);
   }

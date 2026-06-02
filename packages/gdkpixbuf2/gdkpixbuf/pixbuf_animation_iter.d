@@ -19,26 +19,26 @@ class PixbufAnimationIter : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_pixbuf_animation_iter_get_type != &gidSymbolNotFound ? gdk_pixbuf_animation_iter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PixbufAnimationIter self()
+  override PixbufAnimationIter self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class PixbufAnimationIter : gobject.object.ObjectWrap
       Get builder for [gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter]
       Returns: New builder object
   */
-  static PixbufAnimationIterGidBuilder builder()
+  static PixbufAnimationIterGidBuilder builder() nothrow
   {
     return new PixbufAnimationIterGidBuilder;
   }
@@ -79,7 +79,7 @@ class PixbufAnimationIter : gobject.object.ObjectWrap
         currentTime = current time
       Returns: `TRUE` if the image may need updating
   */
-  bool advance(glib.time_val.TimeVal currentTime)
+  bool advance(glib.time_val.TimeVal currentTime) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_pixbuf_animation_iter_advance(cast(GdkPixbufAnimationIter*)this._cPtr, cast(const(GTimeVal)*)&currentTime);
@@ -98,7 +98,7 @@ class PixbufAnimationIter : gobject.object.ObjectWrap
       for GIF images is currently 20 milliseconds.
       Returns: delay time in milliseconds (thousandths of a second)
   */
-  int getDelayTime()
+  int getDelayTime() nothrow
   {
     int _retval;
     _retval = gdk_pixbuf_animation_iter_get_delay_time(cast(GdkPixbufAnimationIter*)this._cPtr);
@@ -123,7 +123,7 @@ class PixbufAnimationIter : gobject.object.ObjectWrap
       recycled as you advance the iterator.
       Returns: the pixbuf to be displayed
   */
-  gdkpixbuf.pixbuf.Pixbuf getPixbuf()
+  gdkpixbuf.pixbuf.Pixbuf getPixbuf() nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gdk_pixbuf_animation_iter_get_pixbuf(cast(GdkPixbufAnimationIter*)this._cPtr);
@@ -140,7 +140,7 @@ class PixbufAnimationIter : gobject.object.ObjectWrap
       you will need to redraw the screen for the updated area.
       Returns: `TRUE` if the frame we're on is partially loaded, or the last frame
   */
-  bool onCurrentlyLoadingFrame()
+  bool onCurrentlyLoadingFrame() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_pixbuf_animation_iter_on_currently_loading_frame(cast(GdkPixbufAnimationIter*)this._cPtr);
@@ -160,7 +160,7 @@ final class PixbufAnimationIterGidBuilder : PixbufAnimationIterGidBuilderImpl!Pi
       Create object from builder.
       Returns: New object
   */
-  PixbufAnimationIter build()
+  PixbufAnimationIter build() nothrow
   {
     return new PixbufAnimationIter(cast(void*)createGObject(PixbufAnimationIter._getGType), No.Take);
   }

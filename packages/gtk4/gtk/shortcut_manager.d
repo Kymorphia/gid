@@ -27,7 +27,7 @@ interface ShortcutManager
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_shortcut_manager_get_type != &gidSymbolNotFound ? gtk_shortcut_manager_get_type() : cast(GType)0;

@@ -21,26 +21,26 @@ class EncodingTarget : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_encoding_target_get_type != &gidSymbolNotFound ? gst_encoding_target_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EncodingTarget self()
+  override EncodingTarget self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class EncodingTarget : gobject.object.ObjectWrap
       Get builder for [gstpbutils.encoding_target.EncodingTarget]
       Returns: New builder object
   */
-  static EncodingTargetGidBuilder builder()
+  static EncodingTargetGidBuilder builder() nothrow
   {
     return new EncodingTargetGidBuilder;
   }
@@ -77,7 +77,7 @@ class EncodingTarget : gobject.object.ObjectWrap
       Returns: The newly created #GstEncodingTarget or null if
         there was an error.
   */
-  this(string name, string category, string description, gstpbutils.encoding_profile.EncodingProfile[] profiles)
+  this(string name, string category, string description, gstpbutils.encoding_profile.EncodingProfile[] profiles) nothrow
   {
     GstEncodingTarget* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -151,7 +151,7 @@ class EncodingTarget : gobject.object.ObjectWrap
         profile = the #GstEncodingProfile to add
       Returns: true if the profile was added, else false.
   */
-  bool addProfile(gstpbutils.encoding_profile.EncodingProfile profile)
+  bool addProfile(gstpbutils.encoding_profile.EncodingProfile profile) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_encoding_target_add_profile(cast(GstEncodingTarget*)this._cPtr, profile ? cast(GstEncodingProfile*)profile._cPtr(Yes.Dup) : null);
@@ -159,7 +159,7 @@ class EncodingTarget : gobject.object.ObjectWrap
   }
 
   /** */
-  string getCategory()
+  string getCategory() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_encoding_target_get_category(cast(GstEncodingTarget*)this._cPtr);
@@ -168,7 +168,7 @@ class EncodingTarget : gobject.object.ObjectWrap
   }
 
   /** */
-  string getDescription()
+  string getDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_encoding_target_get_description(cast(GstEncodingTarget*)this._cPtr);
@@ -177,7 +177,7 @@ class EncodingTarget : gobject.object.ObjectWrap
   }
 
   /** */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_encoding_target_get_name(cast(GstEncodingTarget*)this._cPtr);
@@ -186,7 +186,7 @@ class EncodingTarget : gobject.object.ObjectWrap
   }
 
   /** */
-  string getPath()
+  string getPath() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_encoding_target_get_path(cast(GstEncodingTarget*)this._cPtr);
@@ -195,7 +195,7 @@ class EncodingTarget : gobject.object.ObjectWrap
   }
 
   /** */
-  gstpbutils.encoding_profile.EncodingProfile getProfile(string name)
+  gstpbutils.encoding_profile.EncodingProfile getProfile(string name) nothrow
   {
     GstEncodingProfile* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -205,7 +205,7 @@ class EncodingTarget : gobject.object.ObjectWrap
   }
 
   /** */
-  gstpbutils.encoding_profile.EncodingProfile[] getProfiles()
+  gstpbutils.encoding_profile.EncodingProfile[] getProfiles() nothrow
   {
     const(GList)* _cretval;
     _cretval = gst_encoding_target_get_profiles(cast(GstEncodingTarget*)this._cPtr);
@@ -260,7 +260,7 @@ final class EncodingTargetGidBuilder : EncodingTargetGidBuilderImpl!EncodingTarg
       Create object from builder.
       Returns: New object
   */
-  EncodingTarget build()
+  EncodingTarget build() nothrow
   {
     return new EncodingTarget(cast(void*)createGObject(EncodingTarget._getGType), Yes.Take);
   }

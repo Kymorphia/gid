@@ -70,32 +70,32 @@ class Regex : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_regex_get_type != &gidSymbolNotFound ? g_regex_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Regex self()
+  override Regex self() nothrow
   {
     return this;
   }
@@ -127,7 +127,7 @@ class Regex : gobject.boxed.Boxed
       Returns the number of capturing subpatterns in the pattern.
       Returns: the number of capturing subpatterns
   */
-  int getCaptureCount()
+  int getCaptureCount() nothrow
   {
     int _retval;
     _retval = g_regex_get_capture_count(cast(const(GRegex)*)this._cPtr);
@@ -142,7 +142,7 @@ class Regex : gobject.boxed.Boxed
       top-level within the compiled pattern.
       Returns: flags from #GRegexCompileFlags
   */
-  glib.types.RegexCompileFlags getCompileFlags()
+  glib.types.RegexCompileFlags getCompileFlags() nothrow
   {
     GRegexCompileFlags _cretval;
     _cretval = g_regex_get_compile_flags(cast(const(GRegex)*)this._cPtr);
@@ -154,7 +154,7 @@ class Regex : gobject.boxed.Boxed
       Checks whether the pattern contains explicit CR or LF references.
       Returns: true if the pattern contains explicit CR or LF references
   */
-  bool getHasCrOrLf()
+  bool getHasCrOrLf() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_regex_get_has_cr_or_lf(cast(const(GRegex)*)this._cPtr);
@@ -165,7 +165,7 @@ class Regex : gobject.boxed.Boxed
       Returns the match options that regex was created with.
       Returns: flags from #GRegexMatchFlags
   */
-  glib.types.RegexMatchFlags getMatchFlags()
+  glib.types.RegexMatchFlags getMatchFlags() nothrow
   {
     GRegexMatchFlags _cretval;
     _cretval = g_regex_get_match_flags(cast(const(GRegex)*)this._cPtr);
@@ -179,7 +179,7 @@ class Regex : gobject.boxed.Boxed
       back references.
       Returns: the number of the highest back reference
   */
-  int getMaxBackref()
+  int getMaxBackref() nothrow
   {
     int _retval;
     _retval = g_regex_get_max_backref(cast(const(GRegex)*)this._cPtr);
@@ -192,7 +192,7 @@ class Regex : gobject.boxed.Boxed
       the partial matching facilities.
       Returns: the number of characters in the longest lookbehind assertion.
   */
-  int getMaxLookbehind()
+  int getMaxLookbehind() nothrow
   {
     int _retval;
     _retval = g_regex_get_max_lookbehind(cast(const(GRegex)*)this._cPtr);
@@ -204,7 +204,7 @@ class Regex : gobject.boxed.Boxed
       the string passed to [glib.regex.Regex.new_].
       Returns: the pattern of regex
   */
-  string getPattern()
+  string getPattern() nothrow
   {
     const(char)* _cretval;
     _cretval = g_regex_get_pattern(cast(const(GRegex)*)this._cPtr);
@@ -220,7 +220,7 @@ class Regex : gobject.boxed.Boxed
       Returns: The number of the subexpression or -1 if name
           does not exists
   */
-  int getStringNumber(string name)
+  int getStringNumber(string name) nothrow
   {
     int _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -277,7 +277,7 @@ class Regex : gobject.boxed.Boxed
               the #GMatchInfo, or null if you do not need it
       Returns: true is the string matched, false otherwise
   */
-  bool match(string string_, glib.types.RegexMatchFlags matchOptions, out glib.match_info.MatchInfo matchInfo)
+  bool match(string string_, glib.types.RegexMatchFlags matchOptions, out glib.match_info.MatchInfo matchInfo) nothrow
   {
     bool _retval;
     const(char)* _string_ = string_.toCString(No.Alloc);
@@ -310,7 +310,7 @@ class Regex : gobject.boxed.Boxed
               the #GMatchInfo, or null if you do not need it
       Returns: true is the string matched, false otherwise
   */
-  bool matchAll(string string_, glib.types.RegexMatchFlags matchOptions, out glib.match_info.MatchInfo matchInfo)
+  bool matchAll(string string_, glib.types.RegexMatchFlags matchOptions, out glib.match_info.MatchInfo matchInfo) nothrow
   {
     bool _retval;
     const(char)* _string_ = string_.toCString(No.Alloc);
@@ -575,12 +575,19 @@ class Regex : gobject.boxed.Boxed
   */
   string replaceEval(string string_, int startPosition, glib.types.RegexMatchFlags matchOptions, glib.types.RegexEvalCallback eval)
   {
-    extern(C) gboolean _evalCallback(const(GMatchInfo)* matchInfo, GString* result, void* userData)
+    extern(C) gboolean _evalCallback(const(GMatchInfo)* matchInfo, GString* result, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(glib.types.RegexEvalCallback*)userData;
 
-      _dretval = (*_dlg)(matchInfo ? new glib.match_info.MatchInfo(cast(void*)matchInfo, No.Take) : null, result ? new glib.string_.String(cast(void*)result, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(matchInfo ? new glib.match_info.MatchInfo(cast(void*)matchInfo, No.Take) : null, result ? new glib.string_.String(cast(void*)result, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.RegexEvalCallback");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -661,7 +668,7 @@ class Regex : gobject.boxed.Boxed
       Returns: a null-terminated gchar ** array. Free
         it using [glib.global.strfreev]
   */
-  string[] split(string string_, glib.types.RegexMatchFlags matchOptions)
+  string[] split(string string_, glib.types.RegexMatchFlags matchOptions) nothrow
   {
     char** _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
@@ -773,7 +780,7 @@ class Regex : gobject.boxed.Boxed
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = g_regex_error_quark();
@@ -791,7 +798,7 @@ class Regex : gobject.boxed.Boxed
         string_ = the string to escape
       Returns: a newly-allocated escaped string
   */
-  static string escapeNul(string string_)
+  static string escapeNul(string string_) nothrow
   {
     char* _cretval;
     int _length;
@@ -817,7 +824,7 @@ class Regex : gobject.boxed.Boxed
         string_ = the string to escape
       Returns: a newly-allocated escaped string
   */
-  static string escapeString(string string_)
+  static string escapeString(string string_) nothrow
   {
     char* _cretval;
     int _length;
@@ -849,7 +856,7 @@ class Regex : gobject.boxed.Boxed
         matchOptions = match options, or 0
       Returns: true if the string matched, false otherwise
   */
-  static bool matchSimple(string pattern, string string_, glib.types.RegexCompileFlags compileOptions, glib.types.RegexMatchFlags matchOptions)
+  static bool matchSimple(string pattern, string string_, glib.types.RegexCompileFlags compileOptions, glib.types.RegexMatchFlags matchOptions) nothrow
   {
     bool _retval;
     const(char)* _pattern = pattern.toCString(No.Alloc);
@@ -895,7 +902,7 @@ class Regex : gobject.boxed.Boxed
       Returns: a null-terminated array of strings. Free
         it using [glib.global.strfreev]
   */
-  static string[] splitSimple(string pattern, string string_, glib.types.RegexCompileFlags compileOptions, glib.types.RegexMatchFlags matchOptions)
+  static string[] splitSimple(string pattern, string string_, glib.types.RegexCompileFlags compileOptions, glib.types.RegexMatchFlags matchOptions) nothrow
   {
     char** _cretval;
     const(char)* _pattern = pattern.toCString(No.Alloc);
@@ -919,12 +926,12 @@ class Regex : gobject.boxed.Boxed
 
 class RegexException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(glib.regex.Regex.errorQuark, cast(int)code, msg);
   }

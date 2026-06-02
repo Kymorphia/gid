@@ -16,26 +16,26 @@ class CastOptions : arrow.function_options.FunctionOptions
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_cast_options_get_type != &gidSymbolNotFound ? garrow_cast_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CastOptions self()
+  override CastOptions self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class CastOptions : arrow.function_options.FunctionOptions
       Get builder for [arrow.cast_options.CastOptions]
       Returns: New builder object
   */
-  static CastOptionsGidBuilder builder()
+  static CastOptionsGidBuilder builder() nothrow
   {
     return new CastOptionsGidBuilder;
   }
@@ -53,7 +53,7 @@ class CastOptions : arrow.function_options.FunctionOptions
       Get `allowDecimalTruncate` property.
       Returns: Whether truncating decimal value is allowed or not.
   */
-  @property bool allowDecimalTruncate()
+  @property bool allowDecimalTruncate() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("allow-decimal-truncate");
   }
@@ -63,7 +63,7 @@ class CastOptions : arrow.function_options.FunctionOptions
       Params:
         propval = Whether truncating decimal value is allowed or not.
   */
-  @property void allowDecimalTruncate(bool propval)
+  @property void allowDecimalTruncate(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("allow-decimal-truncate", propval);
   }
@@ -72,7 +72,7 @@ class CastOptions : arrow.function_options.FunctionOptions
       Get `allowFloatTruncate` property.
       Returns: Whether truncating float value is allowed or not.
   */
-  @property bool allowFloatTruncate()
+  @property bool allowFloatTruncate() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("allow-float-truncate");
   }
@@ -82,7 +82,7 @@ class CastOptions : arrow.function_options.FunctionOptions
       Params:
         propval = Whether truncating float value is allowed or not.
   */
-  @property void allowFloatTruncate(bool propval)
+  @property void allowFloatTruncate(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("allow-float-truncate", propval);
   }
@@ -91,7 +91,7 @@ class CastOptions : arrow.function_options.FunctionOptions
       Get `allowIntOverflow` property.
       Returns: Whether integer overflow is allowed or not.
   */
-  @property bool allowIntOverflow()
+  @property bool allowIntOverflow() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("allow-int-overflow");
   }
@@ -101,7 +101,7 @@ class CastOptions : arrow.function_options.FunctionOptions
       Params:
         propval = Whether integer overflow is allowed or not.
   */
-  @property void allowIntOverflow(bool propval)
+  @property void allowIntOverflow(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("allow-int-overflow", propval);
   }
@@ -110,7 +110,7 @@ class CastOptions : arrow.function_options.FunctionOptions
       Get `allowInvalidUtf8` property.
       Returns: Whether invalid UTF-8 string value is allowed or not.
   */
-  @property bool allowInvalidUtf8()
+  @property bool allowInvalidUtf8() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("allow-invalid-utf8");
   }
@@ -120,7 +120,7 @@ class CastOptions : arrow.function_options.FunctionOptions
       Params:
         propval = Whether invalid UTF-8 string value is allowed or not.
   */
-  @property void allowInvalidUtf8(bool propval)
+  @property void allowInvalidUtf8(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("allow-invalid-utf8", propval);
   }
@@ -129,7 +129,7 @@ class CastOptions : arrow.function_options.FunctionOptions
       Get `allowTimeOverflow` property.
       Returns: Whether time overflow is allowed or not.
   */
-  @property bool allowTimeOverflow()
+  @property bool allowTimeOverflow() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("allow-time-overflow");
   }
@@ -139,7 +139,7 @@ class CastOptions : arrow.function_options.FunctionOptions
       Params:
         propval = Whether time overflow is allowed or not.
   */
-  @property void allowTimeOverflow(bool propval)
+  @property void allowTimeOverflow(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("allow-time-overflow", propval);
   }
@@ -148,7 +148,7 @@ class CastOptions : arrow.function_options.FunctionOptions
       Get `allowTimeTruncate` property.
       Returns: Whether truncating time value is allowed or not.
   */
-  @property bool allowTimeTruncate()
+  @property bool allowTimeTruncate() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("allow-time-truncate");
   }
@@ -158,7 +158,7 @@ class CastOptions : arrow.function_options.FunctionOptions
       Params:
         propval = Whether truncating time value is allowed or not.
   */
-  @property void allowTimeTruncate(bool propval)
+  @property void allowTimeTruncate(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("allow-time-truncate", propval);
   }
@@ -167,7 +167,7 @@ class CastOptions : arrow.function_options.FunctionOptions
       Get `toDataType` property.
       Returns: The #GArrowDataType being casted to.
   */
-  @property arrow.data_type.DataType toDataType()
+  @property arrow.data_type.DataType toDataType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(arrow.data_type.DataType)("to-data-type");
   }
@@ -177,13 +177,13 @@ class CastOptions : arrow.function_options.FunctionOptions
       Params:
         propval = The #GArrowDataType being casted to.
   */
-  @property void toDataType(arrow.data_type.DataType propval)
+  @property void toDataType(arrow.data_type.DataType propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(arrow.data_type.DataType)("to-data-type", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowCastOptions* _cretval;
     _cretval = garrow_cast_options_new();
@@ -201,7 +201,7 @@ class CastOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBu
         propval = Whether truncating decimal value is allowed or not.
       Returns: Builder instance for fluent chaining
   */
-  T allowDecimalTruncate(bool propval)
+  T allowDecimalTruncate(bool propval) nothrow
   {
     return setProperty("allow-decimal-truncate", propval);
   }
@@ -212,7 +212,7 @@ class CastOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBu
         propval = Whether truncating float value is allowed or not.
       Returns: Builder instance for fluent chaining
   */
-  T allowFloatTruncate(bool propval)
+  T allowFloatTruncate(bool propval) nothrow
   {
     return setProperty("allow-float-truncate", propval);
   }
@@ -223,7 +223,7 @@ class CastOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBu
         propval = Whether integer overflow is allowed or not.
       Returns: Builder instance for fluent chaining
   */
-  T allowIntOverflow(bool propval)
+  T allowIntOverflow(bool propval) nothrow
   {
     return setProperty("allow-int-overflow", propval);
   }
@@ -234,7 +234,7 @@ class CastOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBu
         propval = Whether invalid UTF-8 string value is allowed or not.
       Returns: Builder instance for fluent chaining
   */
-  T allowInvalidUtf8(bool propval)
+  T allowInvalidUtf8(bool propval) nothrow
   {
     return setProperty("allow-invalid-utf8", propval);
   }
@@ -245,7 +245,7 @@ class CastOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBu
         propval = Whether time overflow is allowed or not.
       Returns: Builder instance for fluent chaining
   */
-  T allowTimeOverflow(bool propval)
+  T allowTimeOverflow(bool propval) nothrow
   {
     return setProperty("allow-time-overflow", propval);
   }
@@ -256,7 +256,7 @@ class CastOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBu
         propval = Whether truncating time value is allowed or not.
       Returns: Builder instance for fluent chaining
   */
-  T allowTimeTruncate(bool propval)
+  T allowTimeTruncate(bool propval) nothrow
   {
     return setProperty("allow-time-truncate", propval);
   }
@@ -267,7 +267,7 @@ class CastOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBu
         propval = The #GArrowDataType being casted to.
       Returns: Builder instance for fluent chaining
   */
-  T toDataType(arrow.data_type.DataType propval)
+  T toDataType(arrow.data_type.DataType propval) nothrow
   {
     return setProperty("to-data-type", propval);
   }
@@ -280,7 +280,7 @@ final class CastOptionsGidBuilder : CastOptionsGidBuilderImpl!CastOptionsGidBuil
       Create object from builder.
       Returns: New object
   */
-  CastOptions build()
+  CastOptions build() nothrow
   {
     return new CastOptions(cast(void*)createGObject(CastOptions._getGType), Yes.Take);
   }

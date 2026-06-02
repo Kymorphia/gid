@@ -27,32 +27,32 @@ class AttrList : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_attr_list_get_type != &gidSymbolNotFound ? pango_attr_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AttrList self()
+  override AttrList self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class AttrList : gobject.boxed.Boxed
           [pango.attr_list.AttrList], which should be freed with
           [pango.attr_list.AttrList.unref]
   */
-  this()
+  this() nothrow
   {
     PangoAttrList* _cretval;
     _cretval = pango_attr_list_new();
@@ -88,7 +88,7 @@ class AttrList : gobject.boxed.Boxed
       Params:
         attr = the attribute to insert
   */
-  void change(pango.attribute.Attribute attr)
+  void change(pango.attribute.Attribute attr) nothrow
   {
     pango_attr_list_change(cast(PangoAttrList*)this._cPtr, attr ? cast(PangoAttribute*)attr._cPtr(Yes.Dup) : null);
   }
@@ -100,7 +100,7 @@ class AttrList : gobject.boxed.Boxed
           which should be freed with [pango.attr_list.AttrList.unref].
           Returns null if list was null.
   */
-  pango.attr_list.AttrList copy()
+  pango.attr_list.AttrList copy() nothrow
   {
     PangoAttrList* _cretval;
     _cretval = pango_attr_list_copy(cast(PangoAttrList*)this._cPtr);
@@ -121,7 +121,7 @@ class AttrList : gobject.boxed.Boxed
       Returns: true if the lists are equal, false if
           they aren't
   */
-  bool equal(pango.attr_list.AttrList otherList)
+  bool equal(pango.attr_list.AttrList otherList) nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_attr_list_equal(cast(PangoAttrList*)this._cPtr, otherList ? cast(PangoAttrList*)otherList._cPtr(No.Dup) : null);
@@ -140,14 +140,21 @@ class AttrList : gobject.boxed.Boxed
           [pango.attr_list.AttrList] or null if no attributes of the
           given types were found
   */
-  pango.attr_list.AttrList filter(pango.types.AttrFilterFunc func)
+  pango.attr_list.AttrList filter(pango.types.AttrFilterFunc func) nothrow
   {
-    extern(C) gboolean _funcCallback(PangoAttribute* attribute, void* userData)
+    extern(C) gboolean _funcCallback(PangoAttribute* attribute, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(pango.types.AttrFilterFunc*)userData;
 
-      _dretval = (*_dlg)(attribute ? new pango.attribute.Attribute(cast(void*)attribute, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(attribute ? new pango.attribute.Attribute(cast(void*)attribute, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "pango.types.AttrFilterFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -166,7 +173,7 @@ class AttrList : gobject.boxed.Boxed
           call [pango.attribute.Attribute.destroy] on each value and
           [glib.slist.SList.free] on the list.
   */
-  pango.attribute.Attribute[] getAttributes()
+  pango.attribute.Attribute[] getAttributes() nothrow
   {
     GSList* _cretval;
     _cretval = pango_attr_list_get_attributes(cast(PangoAttrList*)this._cPtr);
@@ -182,7 +189,7 @@ class AttrList : gobject.boxed.Boxed
           [pango.attr_iterator.AttrIterator], which should be freed with
           [pango.attr_iterator.AttrIterator.destroy]
   */
-  pango.attr_iterator.AttrIterator getIterator()
+  pango.attr_iterator.AttrIterator getIterator() nothrow
   {
     PangoAttrIterator* _cretval;
     _cretval = pango_attr_list_get_iterator(cast(PangoAttrList*)this._cPtr);
@@ -199,7 +206,7 @@ class AttrList : gobject.boxed.Boxed
       Params:
         attr = the attribute to insert
   */
-  void insert(pango.attribute.Attribute attr)
+  void insert(pango.attribute.Attribute attr) nothrow
   {
     pango_attr_list_insert(cast(PangoAttrList*)this._cPtr, attr ? cast(PangoAttribute*)attr._cPtr(Yes.Dup) : null);
   }
@@ -213,7 +220,7 @@ class AttrList : gobject.boxed.Boxed
       Params:
         attr = the attribute to insert
   */
-  void insertBefore(pango.attribute.Attribute attr)
+  void insertBefore(pango.attribute.Attribute attr) nothrow
   {
     pango_attr_list_insert_before(cast(PangoAttrList*)this._cPtr, attr ? cast(PangoAttribute*)attr._cPtr(Yes.Dup) : null);
   }
@@ -245,7 +252,7 @@ class AttrList : gobject.boxed.Boxed
             must be specified since the attributes in other may only
             be present at some subsection of this range)
   */
-  void splice(pango.attr_list.AttrList other, int pos, int len)
+  void splice(pango.attr_list.AttrList other, int pos, int len) nothrow
   {
     pango_attr_list_splice(cast(PangoAttrList*)this._cPtr, other ? cast(PangoAttrList*)other._cPtr(No.Dup) : null, pos, len);
   }
@@ -287,7 +294,7 @@ class AttrList : gobject.boxed.Boxed
       Note that shape attributes can not be serialized.
       Returns: a newly allocated string
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = pango_attr_list_to_string(cast(PangoAttrList*)this._cPtr);
@@ -316,7 +323,7 @@ class AttrList : gobject.boxed.Boxed
         remove = the number of removed bytes
         add = the number of added bytes
   */
-  void update(int pos, int remove, int add)
+  void update(int pos, int remove, int add) nothrow
   {
     pango_attr_list_update(cast(PangoAttrList*)this._cPtr, pos, remove, add);
   }
@@ -331,7 +338,7 @@ class AttrList : gobject.boxed.Boxed
         text = a string
       Returns: a new [pango.attr_list.AttrList]
   */
-  static pango.attr_list.AttrList fromString(string text)
+  static pango.attr_list.AttrList fromString(string text) nothrow
   {
     PangoAttrList* _cretval;
     const(char)* _text = text.toCString(No.Alloc);

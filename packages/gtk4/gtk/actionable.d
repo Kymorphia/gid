@@ -29,23 +29,23 @@ interface Actionable
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_actionable_get_type != &gidSymbolNotFound ? gtk_actionable_get_type() : cast(GType)0;
   }
 
   /** */
-  @property string actionName();
+  @property string actionName() nothrow;
 
   /** */
-  @property void actionName(string propval);
+  @property void actionName(string propval) nothrow;
 
   /** */
-  @property glib.variant.Variant actionTarget();
+  @property glib.variant.Variant actionTarget() nothrow;
 
   /** */
-  @property void actionTarget(glib.variant.Variant propval);
+  @property void actionTarget(glib.variant.Variant propval) nothrow;
 
   /**
       Gets the action name for actionable.
@@ -122,8 +122,8 @@ interface ActionableGidBuilderImpl(T)
 {
 
   /** */
-  T actionName(string propval);
+  T actionName(string propval) nothrow;
 
   /** */
-  T actionTarget(glib.variant.Variant propval);
+  T actionTarget(glib.variant.Variant propval) nothrow;
 }

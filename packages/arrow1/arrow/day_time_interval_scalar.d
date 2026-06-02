@@ -16,26 +16,26 @@ class DayTimeIntervalScalar : arrow.scalar.Scalar
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_day_time_interval_scalar_get_type != &gidSymbolNotFound ? garrow_day_time_interval_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DayTimeIntervalScalar self()
+  override DayTimeIntervalScalar self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class DayTimeIntervalScalar : arrow.scalar.Scalar
       Get builder for [arrow.day_time_interval_scalar.DayTimeIntervalScalar]
       Returns: New builder object
   */
-  static DayTimeIntervalScalarGidBuilder builder()
+  static DayTimeIntervalScalarGidBuilder builder() nothrow
   {
     return new DayTimeIntervalScalarGidBuilder;
   }
 
   /** */
-  this(arrow.day_millisecond.DayMillisecond value)
+  this(arrow.day_millisecond.DayMillisecond value) nothrow
   {
     GArrowDayTimeIntervalScalar* _cretval;
     _cretval = garrow_day_time_interval_scalar_new(value ? cast(GArrowDayMillisecond*)value._cPtr(No.Dup) : null);
@@ -58,7 +58,7 @@ class DayTimeIntervalScalar : arrow.scalar.Scalar
   }
 
   /** */
-  arrow.day_millisecond.DayMillisecond getValue()
+  arrow.day_millisecond.DayMillisecond getValue() nothrow
   {
     GArrowDayMillisecond* _cretval;
     _cretval = garrow_day_time_interval_scalar_get_value(cast(GArrowDayTimeIntervalScalar*)this._cPtr);
@@ -79,7 +79,7 @@ final class DayTimeIntervalScalarGidBuilder : DayTimeIntervalScalarGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  DayTimeIntervalScalar build()
+  DayTimeIntervalScalar build() nothrow
   {
     return new DayTimeIntervalScalar(cast(void*)createGObject(DayTimeIntervalScalar._getGType), Yes.Take);
   }

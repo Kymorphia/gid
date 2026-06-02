@@ -28,7 +28,7 @@ interface ColorChooser
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_color_chooser_get_type != &gidSymbolNotFound ? gtk_color_chooser_get_type() : cast(GType)0;
@@ -44,7 +44,7 @@ interface ColorChooser
       Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
           instead of widgets implementing [gtk.color_chooser.ColorChooser]
   */
-  @property gdk.rgba.RGBA rgba();
+  @property gdk.rgba.RGBA rgba() nothrow;
 
   /**
       Set `rgba` property.
@@ -57,7 +57,7 @@ interface ColorChooser
       Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
           instead of widgets implementing [gtk.color_chooser.ColorChooser]
   */
-  @property void rgba(gdk.rgba.RGBA propval);
+  @property void rgba(gdk.rgba.RGBA propval) nothrow;
 
   /**
       Get `useAlpha` property.
@@ -73,7 +73,7 @@ interface ColorChooser
       Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
           instead of widgets implementing [gtk.color_chooser.ColorChooser]
   */
-  @property bool useAlpha();
+  @property bool useAlpha() nothrow;
 
   /**
       Set `useAlpha` property.
@@ -90,7 +90,7 @@ interface ColorChooser
       Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
           instead of widgets implementing [gtk.color_chooser.ColorChooser]
   */
-  @property void useAlpha(bool propval);
+  @property void useAlpha(bool propval) nothrow;
 
   /**
       Adds a palette to the color chooser.
@@ -184,7 +184,7 @@ interface ColorChooser
       Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
           instead of widgets implementing [gtk.color_chooser.ColorChooser]
   */
-  gulong connectColorActivated(T)(T callback, Flag!"After" after = No.After);
+  gulong connectColorActivated(T)(T callback, Flag!"After" after = No.After) nothrow;
 }
 
 /// Fluent builder implementation template for [gtk.color_chooser.ColorChooser]
@@ -203,7 +203,7 @@ interface ColorChooserGidBuilderImpl(T)
       Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
           instead of widgets implementing [gtk.color_chooser.ColorChooser]
   */
-  T rgba(gdk.rgba.RGBA propval);
+  T rgba(gdk.rgba.RGBA propval) nothrow;
 
   /**
       Set `useAlpha` property.
@@ -221,5 +221,5 @@ interface ColorChooserGidBuilderImpl(T)
       Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
           instead of widgets implementing [gtk.color_chooser.ColorChooser]
   */
-  T useAlpha(bool propval);
+  T useAlpha(bool propval) nothrow;
 }

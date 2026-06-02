@@ -18,26 +18,26 @@ class VideoAggregatorParallelConvertPad : gstvideo.video_aggregator_convert_pad.
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_aggregator_parallel_convert_pad_get_type != &gidSymbolNotFound ? gst_video_aggregator_parallel_convert_pad_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override VideoAggregatorParallelConvertPad self()
+  override VideoAggregatorParallelConvertPad self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class VideoAggregatorParallelConvertPad : gstvideo.video_aggregator_convert_pad.
       Get builder for [gstvideo.video_aggregator_parallel_convert_pad.VideoAggregatorParallelConvertPad]
       Returns: New builder object
   */
-  static VideoAggregatorParallelConvertPadGidBuilder builder()
+  static VideoAggregatorParallelConvertPadGidBuilder builder() nothrow
   {
     return new VideoAggregatorParallelConvertPadGidBuilder;
   }
@@ -64,7 +64,7 @@ final class VideoAggregatorParallelConvertPadGidBuilder : VideoAggregatorParalle
       Create object from builder.
       Returns: New object
   */
-  VideoAggregatorParallelConvertPad build()
+  VideoAggregatorParallelConvertPad build() nothrow
   {
     return new VideoAggregatorParallelConvertPad(cast(void*)createGObject(VideoAggregatorParallelConvertPad._getGType), No.Take);
   }

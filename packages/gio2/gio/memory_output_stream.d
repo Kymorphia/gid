@@ -26,26 +26,26 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_memory_output_stream_get_type != &gidSymbolNotFound ? g_memory_output_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MemoryOutputStream self()
+  override MemoryOutputStream self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
       Get builder for [gio.memory_output_stream.MemoryOutputStream]
       Returns: New builder object
   */
-  static MemoryOutputStreamGidBuilder builder()
+  static MemoryOutputStreamGidBuilder builder() nothrow
   {
     return new MemoryOutputStreamGidBuilder;
   }
@@ -63,7 +63,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
       Get `data` property.
       Returns: Pointer to buffer where data will be written.
   */
-  @property void* data()
+  @property void* data() nothrow
   {
     return getData();
   }
@@ -72,7 +72,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
       Get `dataSize` property.
       Returns: Size of data written to the buffer.
   */
-  @property gulong dataSize()
+  @property gulong dataSize() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gulong)("data-size");
   }
@@ -81,7 +81,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
       Get `size` property.
       Returns: Current size of the data buffer.
   */
-  @property gulong size()
+  @property gulong size() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gulong)("size");
   }
@@ -94,7 +94,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
       for memory allocation.
       Returns: 
   */
-  static gio.memory_output_stream.MemoryOutputStream newResizable()
+  static gio.memory_output_stream.MemoryOutputStream newResizable() nothrow
   {
     GOutputStream* _cretval;
     _cretval = g_memory_output_stream_new_resizable();
@@ -112,7 +112,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
       Returns: pointer to the stream's data, or null if the data
            has been stolen
   */
-  void* getData()
+  void* getData() nothrow
   {
     auto _retval = g_memory_output_stream_get_data(cast(GMemoryOutputStream*)this._cPtr);
     return _retval;
@@ -123,7 +123,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
       byte written in the stream that has not been truncated away.
       Returns: the number of bytes written to the stream
   */
-  size_t getDataSize()
+  size_t getDataSize() nothrow
   {
     size_t _retval;
     _retval = g_memory_output_stream_get_data_size(cast(GMemoryOutputStream*)this._cPtr);
@@ -148,7 +148,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
       stream, use [gio.memory_output_stream.MemoryOutputStream.getDataSize].
       Returns: the number of bytes allocated for the data buffer
   */
-  size_t getSize()
+  size_t getSize() nothrow
   {
     size_t _retval;
     _retval = g_memory_output_stream_get_size(cast(GMemoryOutputStream*)this._cPtr);
@@ -160,7 +160,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
       closed before calling this function.
       Returns: the stream's data
   */
-  glib.bytes.Bytes stealAsBytes()
+  glib.bytes.Bytes stealAsBytes() nothrow
   {
     GBytes* _cretval;
     _cretval = g_memory_output_stream_steal_as_bytes(cast(GMemoryOutputStream*)this._cPtr);
@@ -180,7 +180,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
       Returns: the stream's data, or null if it has previously
            been stolen
   */
-  void* stealData()
+  void* stealData() nothrow
   {
     auto _retval = g_memory_output_stream_steal_data(cast(GMemoryOutputStream*)this._cPtr);
     return _retval;
@@ -200,7 +200,7 @@ class MemoryOutputStreamGidBuilderImpl(T) : gio.output_stream.OutputStreamGidBui
         propval = Pointer to buffer where data will be written.
       Returns: Builder instance for fluent chaining
   */
-  T data(void* propval)
+  T data(void* propval) nothrow
   {
     return setProperty("data", propval);
   }
@@ -211,7 +211,7 @@ class MemoryOutputStreamGidBuilderImpl(T) : gio.output_stream.OutputStreamGidBui
         propval = Current size of the data buffer.
       Returns: Builder instance for fluent chaining
   */
-  T size(gulong propval)
+  T size(gulong propval) nothrow
   {
     return setProperty("size", propval);
   }
@@ -224,7 +224,7 @@ final class MemoryOutputStreamGidBuilder : MemoryOutputStreamGidBuilderImpl!Memo
       Create object from builder.
       Returns: New object
   */
-  MemoryOutputStream build()
+  MemoryOutputStream build() nothrow
   {
     return new MemoryOutputStream(cast(void*)createGObject(MemoryOutputStream._getGType), Yes.Take);
   }

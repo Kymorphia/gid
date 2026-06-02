@@ -16,11 +16,8 @@ class TransformNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.transform_node.TransformNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -33,7 +30,7 @@ class TransformNode : gsk.render_node.RenderNode
         transform = The transform to apply
       Returns: A new [gsk.render_node.RenderNode]
   */
-  this(gsk.render_node.RenderNode child, gsk.transform.Transform transform)
+  this(gsk.render_node.RenderNode child, gsk.transform.Transform transform) nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_transform_node_new(child ? cast(GskRenderNode*)child._cPtr(No.Dup) : null, transform ? cast(GskTransform*)transform._cPtr(No.Dup) : null);
@@ -44,7 +41,7 @@ class TransformNode : gsk.render_node.RenderNode
       Gets the child node that is getting transformed by the given node.
       Returns: The child that is getting transformed
   */
-  gsk.render_node.RenderNode getChild()
+  gsk.render_node.RenderNode getChild() nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_transform_node_get_child(cast(const(GskRenderNode)*)this._cPtr);
@@ -56,7 +53,7 @@ class TransformNode : gsk.render_node.RenderNode
       Retrieves the [gsk.transform.Transform] used by the node.
       Returns: a [gsk.transform.Transform]
   */
-  gsk.transform.Transform getTransform()
+  gsk.transform.Transform getTransform() nothrow
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_node_get_transform(cast(const(GskRenderNode)*)this._cPtr);

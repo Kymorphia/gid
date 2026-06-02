@@ -97,26 +97,26 @@ class Scale : gtk.range.Range
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scale_get_type != &gidSymbolNotFound ? gtk_scale_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Scale self()
+  override Scale self() nothrow
   {
     return this;
   }
@@ -125,55 +125,55 @@ class Scale : gtk.range.Range
       Get builder for [gtk.scale.Scale]
       Returns: New builder object
   */
-  static ScaleGidBuilder builder()
+  static ScaleGidBuilder builder() nothrow
   {
     return new ScaleGidBuilder;
   }
 
   /** */
-  @property int digits()
+  @property int digits() nothrow
   {
     return getDigits();
   }
 
   /** */
-  @property void digits(int propval)
+  @property void digits(int propval) nothrow
   {
     setDigits(propval);
   }
 
   /** */
-  @property bool drawValue()
+  @property bool drawValue() nothrow
   {
     return getDrawValue();
   }
 
   /** */
-  @property void drawValue(bool propval)
+  @property void drawValue(bool propval) nothrow
   {
     setDrawValue(propval);
   }
 
   /** */
-  @property bool hasOrigin()
+  @property bool hasOrigin() nothrow
   {
     return getHasOrigin();
   }
 
   /** */
-  @property void hasOrigin(bool propval)
+  @property void hasOrigin(bool propval) nothrow
   {
     setHasOrigin(propval);
   }
 
   /** */
-  @property gtk.types.PositionType valuePos()
+  @property gtk.types.PositionType valuePos() nothrow
   {
     return getValuePos();
   }
 
   /** */
-  @property void valuePos(gtk.types.PositionType propval)
+  @property void valuePos(gtk.types.PositionType propval) nothrow
   {
     setValuePos(propval);
   }
@@ -187,7 +187,7 @@ class Scale : gtk.range.Range
                        of the scale, or null to create a new adjustment.
       Returns: a new #GtkScale
   */
-  this(gtk.types.Orientation orientation, gtk.adjustment.Adjustment adjustment = null)
+  this(gtk.types.Orientation orientation, gtk.adjustment.Adjustment adjustment = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
@@ -212,7 +212,7 @@ class Scale : gtk.range.Range
         step = step increment (tick size) used with keyboard shortcuts
       Returns: a new #GtkScale
   */
-  static gtk.scale.Scale newWithRange(gtk.types.Orientation orientation, double min, double max, double step)
+  static gtk.scale.Scale newWithRange(gtk.types.Orientation orientation, double min, double max, double step) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_new_with_range(orientation, min, max, step);
@@ -240,7 +240,7 @@ class Scale : gtk.range.Range
             the left of the scale, anything else to the right.
         markup = Text to be shown at the mark, using [Pango markup][PangoMarkupFormat], or null
   */
-  void addMark(double value, gtk.types.PositionType position, string markup = null)
+  void addMark(double value, gtk.types.PositionType position, string markup = null) nothrow
   {
     const(char)* _markup = markup.toCString(No.Alloc);
     gtk_scale_add_mark(cast(GtkScale*)this._cPtr, value, position, _markup);
@@ -249,7 +249,7 @@ class Scale : gtk.range.Range
   /**
       Removes any marks that have been added with [gtk.scale.Scale.addMark].
   */
-  void clearMarks()
+  void clearMarks() nothrow
   {
     gtk_scale_clear_marks(cast(GtkScale*)this._cPtr);
   }
@@ -258,7 +258,7 @@ class Scale : gtk.range.Range
       Gets the number of decimal places that are displayed in the value.
       Returns: the number of decimal places that are displayed
   */
-  int getDigits()
+  int getDigits() nothrow
   {
     int _retval;
     _retval = gtk_scale_get_digits(cast(GtkScale*)this._cPtr);
@@ -270,7 +270,7 @@ class Scale : gtk.range.Range
       next to the slider.
       Returns: whether the current value is displayed as a string
   */
-  bool getDrawValue()
+  bool getDrawValue() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_scale_get_draw_value(cast(GtkScale*)this._cPtr);
@@ -281,7 +281,7 @@ class Scale : gtk.range.Range
       Returns whether the scale has an origin.
       Returns: true if the scale has an origin.
   */
-  bool getHasOrigin()
+  bool getHasOrigin() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_scale_get_has_origin(cast(GtkScale*)this._cPtr);
@@ -295,7 +295,7 @@ class Scale : gtk.range.Range
       Returns: the #PangoLayout for this scale,
             or null if the #GtkScale:draw-value property is false.
   */
-  pango.layout.Layout getLayout()
+  pango.layout.Layout getLayout() nothrow
   {
     PangoLayout* _cretval;
     _cretval = gtk_scale_get_layout(cast(GtkScale*)this._cPtr);
@@ -316,7 +316,7 @@ class Scale : gtk.range.Range
         x = location to store X offset of layout, or null
         y = location to store Y offset of layout, or null
   */
-  void getLayoutOffsets(out int x, out int y)
+  void getLayoutOffsets(out int x, out int y) nothrow
   {
     gtk_scale_get_layout_offsets(cast(GtkScale*)this._cPtr, cast(int*)&x, cast(int*)&y);
   }
@@ -325,7 +325,7 @@ class Scale : gtk.range.Range
       Gets the position in which the current value is displayed.
       Returns: the position in which the current value is displayed
   */
-  gtk.types.PositionType getValuePos()
+  gtk.types.PositionType getValuePos() nothrow
   {
     GtkPositionType _cretval;
     _cretval = gtk_scale_get_value_pos(cast(GtkScale*)this._cPtr);
@@ -349,7 +349,7 @@ class Scale : gtk.range.Range
         digits = the number of decimal places to display,
               e.g. use 1 to display 1.0, 2 to display 1.00, etc
   */
-  void setDigits(int digits)
+  void setDigits(int digits) nothrow
   {
     gtk_scale_set_digits(cast(GtkScale*)this._cPtr, digits);
   }
@@ -361,7 +361,7 @@ class Scale : gtk.range.Range
       Params:
         drawValue = true to draw the value
   */
-  void setDrawValue(bool drawValue)
+  void setDrawValue(bool drawValue) nothrow
   {
     gtk_scale_set_draw_value(cast(GtkScale*)this._cPtr, drawValue);
   }
@@ -374,7 +374,7 @@ class Scale : gtk.range.Range
       Params:
         hasOrigin = true if the scale has an origin
   */
-  void setHasOrigin(bool hasOrigin)
+  void setHasOrigin(bool hasOrigin) nothrow
   {
     gtk_scale_set_has_origin(cast(GtkScale*)this._cPtr, hasOrigin);
   }
@@ -385,7 +385,7 @@ class Scale : gtk.range.Range
       Params:
         pos = the position in which the current value is displayed
   */
-  void setValuePos(gtk.types.PositionType pos)
+  void setValuePos(gtk.types.PositionType pos) nothrow
   {
     gtk_scale_set_value_pos(cast(GtkScale*)this._cPtr, pos);
   }
@@ -425,18 +425,19 @@ class Scale : gtk.range.Range
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectFormatValue(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFormatValue(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == string)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.scale.Scale)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      string _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -444,7 +445,14 @@ class Scale : gtk.range.Range
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.scale.Scale.formatValue");
+      }
 
       setVal!(string)(_returnValue, _retval);
     }
@@ -460,25 +468,25 @@ class ScaleGidBuilderImpl(T) : gtk.range.RangeGidBuilderImpl!T
 
 
   /** */
-  T digits(int propval)
+  T digits(int propval) nothrow
   {
     return setProperty("digits", propval);
   }
 
   /** */
-  T drawValue(bool propval)
+  T drawValue(bool propval) nothrow
   {
     return setProperty("draw-value", propval);
   }
 
   /** */
-  T hasOrigin(bool propval)
+  T hasOrigin(bool propval) nothrow
   {
     return setProperty("has-origin", propval);
   }
 
   /** */
-  T valuePos(gtk.types.PositionType propval)
+  T valuePos(gtk.types.PositionType propval) nothrow
   {
     return setProperty("value-pos", propval);
   }
@@ -491,7 +499,7 @@ final class ScaleGidBuilder : ScaleGidBuilderImpl!ScaleGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Scale build()
+  Scale build() nothrow
   {
     return new Scale(cast(void*)createGObject(Scale._getGType), No.Take);
   }

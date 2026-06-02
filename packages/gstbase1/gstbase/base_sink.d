@@ -133,26 +133,26 @@ class BaseSink : gst.element.Element
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_base_sink_get_type != &gidSymbolNotFound ? gst_base_sink_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BaseSink self()
+  override BaseSink self() nothrow
   {
     return this;
   }
@@ -161,7 +161,7 @@ class BaseSink : gst.element.Element
       Get builder for [gstbase.base_sink.BaseSink]
       Returns: New builder object
   */
-  static BaseSinkGidBuilder builder()
+  static BaseSinkGidBuilder builder() nothrow
   {
     return new BaseSinkGidBuilder;
   }
@@ -173,7 +173,7 @@ class BaseSink : gst.element.Element
         Use this option when dealing with sparse streams or when synchronisation is
         not required.
   */
-  @property bool async()
+  @property bool async() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("async");
   }
@@ -186,7 +186,7 @@ class BaseSink : gst.element.Element
           Use this option when dealing with sparse streams or when synchronisation is
           not required.
   */
-  @property void async(bool propval)
+  @property void async(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("async", propval);
   }
@@ -195,7 +195,7 @@ class BaseSink : gst.element.Element
       Get `blocksize` property.
       Returns: The amount of bytes to pull when operating in pull mode.
   */
-  @property uint blocksize()
+  @property uint blocksize() nothrow
   {
     return getBlocksize();
   }
@@ -205,7 +205,7 @@ class BaseSink : gst.element.Element
       Params:
         propval = The amount of bytes to pull when operating in pull mode.
   */
-  @property void blocksize(uint propval)
+  @property void blocksize(uint propval) nothrow
   {
     setBlocksize(propval);
   }
@@ -217,7 +217,7 @@ class BaseSink : gst.element.Element
         set to null. This can be useful if you need buffers to be released as soon
         as possible, eg. if you're using a buffer pool.
   */
-  @property bool enableLastSample()
+  @property bool enableLastSample() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("enable-last-sample");
   }
@@ -230,7 +230,7 @@ class BaseSink : gst.element.Element
           set to null. This can be useful if you need buffers to be released as soon
           as possible, eg. if you're using a buffer pool.
   */
-  @property void enableLastSample(bool propval)
+  @property void enableLastSample(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("enable-last-sample", propval);
   }
@@ -241,7 +241,7 @@ class BaseSink : gst.element.Element
         rendering. This property can be used to generate thumbnails. This property
         can be null when the sink has not yet received a buffer.
   */
-  @property gst.sample.Sample lastSample()
+  @property gst.sample.Sample lastSample() nothrow
   {
     return getLastSample();
   }
@@ -252,7 +252,7 @@ class BaseSink : gst.element.Element
         Setting this property to a value bigger than 0 will make the sink delay
         rendering of the buffers when it would exceed to max-bitrate.
   */
-  @property ulong maxBitrate()
+  @property ulong maxBitrate() nothrow
   {
     return getMaxBitrate();
   }
@@ -264,19 +264,19 @@ class BaseSink : gst.element.Element
           Setting this property to a value bigger than 0 will make the sink delay
           rendering of the buffers when it would exceed to max-bitrate.
   */
-  @property void maxBitrate(ulong propval)
+  @property void maxBitrate(ulong propval) nothrow
   {
     setMaxBitrate(propval);
   }
 
   /** */
-  @property long maxLateness()
+  @property long maxLateness() nothrow
   {
     return getMaxLateness();
   }
 
   /** */
-  @property void maxLateness(long propval)
+  @property void maxLateness(long propval) nothrow
   {
     setMaxLateness(propval);
   }
@@ -287,7 +287,7 @@ class BaseSink : gst.element.Element
         for processing the buffer. This is added to the latency of live
         pipelines.
   */
-  @property ulong processingDeadline()
+  @property ulong processingDeadline() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("processing-deadline");
   }
@@ -299,19 +299,19 @@ class BaseSink : gst.element.Element
           for processing the buffer. This is added to the latency of live
           pipelines.
   */
-  @property void processingDeadline(ulong propval)
+  @property void processingDeadline(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("processing-deadline", propval);
   }
 
   /** */
-  @property bool qos()
+  @property bool qos() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("qos");
   }
 
   /** */
-  @property void qos(bool propval)
+  @property void qos(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("qos", propval);
   }
@@ -322,7 +322,7 @@ class BaseSink : gst.element.Element
         media. This property will add additional latency to the device in order to
         make other sinks compensate for the delay.
   */
-  @property ulong renderDelay()
+  @property ulong renderDelay() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("render-delay");
   }
@@ -334,7 +334,7 @@ class BaseSink : gst.element.Element
           media. This property will add additional latency to the device in order to
           make other sinks compensate for the delay.
   */
-  @property void renderDelay(ulong propval)
+  @property void renderDelay(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("render-delay", propval);
   }
@@ -348,19 +348,19 @@ class BaseSink : gst.element.Element
         - "dropped" G_TYPE_UINT64   Number of dropped frames
         - "rendered" G_TYPE_UINT64   Number of rendered frames
   */
-  @property gst.structure.Structure stats()
+  @property gst.structure.Structure stats() nothrow
   {
     return getStats();
   }
 
   /** */
-  @property bool sync()
+  @property bool sync() nothrow
   {
     return getSync();
   }
 
   /** */
-  @property void sync(bool propval)
+  @property void sync(bool propval) nothrow
   {
     setSync(propval);
   }
@@ -371,7 +371,7 @@ class BaseSink : gst.element.Element
         the maximum amount of buffers per second to render. Setting this property
         to a value bigger than 0 will make the sink create THROTTLE QoS events.
   */
-  @property ulong throttleTime()
+  @property ulong throttleTime() nothrow
   {
     return getThrottleTime();
   }
@@ -383,7 +383,7 @@ class BaseSink : gst.element.Element
           the maximum amount of buffers per second to render. Setting this property
           to a value bigger than 0 will make the sink create THROTTLE QoS events.
   */
-  @property void throttleTime(ulong propval)
+  @property void throttleTime(ulong propval) nothrow
   {
     setThrottleTime(propval);
   }
@@ -394,7 +394,7 @@ class BaseSink : gst.element.Element
         earlier while a positive value delays playback. This property can be
         used to fix synchronisation in bad files.
   */
-  @property long tsOffset()
+  @property long tsOffset() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("ts-offset");
   }
@@ -406,7 +406,7 @@ class BaseSink : gst.element.Element
           earlier while a positive value delays playback. This property can be
           used to fix synchronisation in bad files.
   */
-  @property void tsOffset(long propval)
+  @property void tsOffset(long propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(long)("ts-offset", propval);
   }
@@ -424,7 +424,7 @@ class BaseSink : gst.element.Element
       Returns: [gst.types.FlowReturn.Ok] if the preroll completed and processing can
         continue. Any other return value should be returned from the render vmethod.
   */
-  gst.types.FlowReturn doPreroll(gst.mini_object.MiniObject obj)
+  gst.types.FlowReturn doPreroll(gst.mini_object.MiniObject obj) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_base_sink_do_preroll(cast(GstBaseSink*)this._cPtr, obj ? cast(GstMiniObject*)obj._cPtr(No.Dup) : null);
@@ -437,7 +437,7 @@ class BaseSink : gst.element.Element
       mode.
       Returns: the number of bytes sink will pull in pull mode.
   */
-  uint getBlocksize()
+  uint getBlocksize() nothrow
   {
     uint _retval;
     _retval = gst_base_sink_get_blocksize(cast(GstBaseSink*)this._cPtr);
@@ -450,7 +450,7 @@ class BaseSink : gst.element.Element
       Returns: true if the sink is configured to drop buffers outside the
         current segment.
   */
-  bool getDropOutOfSegment()
+  bool getDropOutOfSegment() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_base_sink_get_drop_out_of_segment(cast(GstBaseSink*)this._cPtr);
@@ -468,7 +468,7 @@ class BaseSink : gst.element.Element
             usage.  This function returns null when no buffer has arrived in the
             sink yet or when the sink is not in PAUSED or PLAYING.
   */
-  gst.sample.Sample getLastSample()
+  gst.sample.Sample getLastSample() nothrow
   {
     GstSample* _cretval;
     _cretval = gst_base_sink_get_last_sample(cast(GstBaseSink*)this._cPtr);
@@ -480,7 +480,7 @@ class BaseSink : gst.element.Element
       Get the currently configured latency.
       Returns: The configured latency.
   */
-  gst.types.ClockTime getLatency()
+  gst.types.ClockTime getLatency() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_base_sink_get_latency(cast(GstBaseSink*)this._cPtr);
@@ -491,7 +491,7 @@ class BaseSink : gst.element.Element
       Get the maximum amount of bits per second that the sink will render.
       Returns: the maximum number of bits per second sink will render.
   */
-  ulong getMaxBitrate()
+  ulong getMaxBitrate() nothrow
   {
     ulong _retval;
     _retval = gst_base_sink_get_max_bitrate(cast(GstBaseSink*)this._cPtr);
@@ -505,7 +505,7 @@ class BaseSink : gst.element.Element
         before it is dropped and not rendered. A value of -1 means an
         unlimited time.
   */
-  long getMaxLateness()
+  long getMaxLateness() nothrow
   {
     long _retval;
     _retval = gst_base_sink_get_max_lateness(cast(GstBaseSink*)this._cPtr);
@@ -518,7 +518,7 @@ class BaseSink : gst.element.Element
       the processing deadline.
       Returns: the processing deadline
   */
-  gst.types.ClockTime getProcessingDeadline()
+  gst.types.ClockTime getProcessingDeadline() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_base_sink_get_processing_deadline(cast(GstBaseSink*)this._cPtr);
@@ -530,7 +530,7 @@ class BaseSink : gst.element.Element
       information about the render delay.
       Returns: the render delay of sink.
   */
-  gst.types.ClockTime getRenderDelay()
+  gst.types.ClockTime getRenderDelay() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_base_sink_get_render_delay(cast(GstBaseSink*)this._cPtr);
@@ -546,7 +546,7 @@ class BaseSink : gst.element.Element
       - "rendered" G_TYPE_UINT64   Number of rendered frames
       Returns: pointer to #GstStructure
   */
-  gst.structure.Structure getStats()
+  gst.structure.Structure getStats() nothrow
   {
     GstStructure* _cretval;
     _cretval = gst_base_sink_get_stats(cast(GstBaseSink*)this._cPtr);
@@ -559,7 +559,7 @@ class BaseSink : gst.element.Element
       clock.
       Returns: true if the sink is configured to synchronize against the clock.
   */
-  bool getSync()
+  bool getSync() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_base_sink_get_sync(cast(GstBaseSink*)this._cPtr);
@@ -571,7 +571,7 @@ class BaseSink : gst.element.Element
       maximum buffers per second.
       Returns: the number of nanoseconds sink will put between frames.
   */
-  ulong getThrottleTime()
+  ulong getThrottleTime() nothrow
   {
     ulong _retval;
     _retval = gst_base_sink_get_throttle_time(cast(GstBaseSink*)this._cPtr);
@@ -582,7 +582,7 @@ class BaseSink : gst.element.Element
       Get the synchronisation offset of sink.
       Returns: The synchronisation offset.
   */
-  gst.types.ClockTimeDiff getTsOffset()
+  gst.types.ClockTimeDiff getTsOffset() nothrow
   {
     gst.types.ClockTimeDiff _retval;
     _retval = gst_base_sink_get_ts_offset(cast(GstBaseSink*)this._cPtr);
@@ -595,7 +595,7 @@ class BaseSink : gst.element.Element
       Returns: true if the sink is configured to perform asynchronous state
         changes.
   */
-  bool isAsyncEnabled()
+  bool isAsyncEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_base_sink_is_async_enabled(cast(GstBaseSink*)this._cPtr);
@@ -607,7 +607,7 @@ class BaseSink : gst.element.Element
       the last-sample property.
       Returns: true if the sink is configured to store the last received sample.
   */
-  bool isLastSampleEnabled()
+  bool isLastSampleEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_base_sink_is_last_sample_enabled(cast(GstBaseSink*)this._cPtr);
@@ -619,7 +619,7 @@ class BaseSink : gst.element.Element
       upstream.
       Returns: true if the sink is configured to perform Quality-of-Service.
   */
-  bool isQosEnabled()
+  bool isQosEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_base_sink_is_qos_enabled(cast(GstBaseSink*)this._cPtr);
@@ -645,7 +645,7 @@ class BaseSink : gst.element.Element
         maxLatency = the max latency of the upstream elements
       Returns: true if the query succeeded.
   */
-  bool queryLatency(out bool live, out bool upstreamLive, out gst.types.ClockTime minLatency, out gst.types.ClockTime maxLatency)
+  bool queryLatency(out bool live, out bool upstreamLive, out gst.types.ClockTime minLatency, out gst.types.ClockTime maxLatency) nothrow
   {
     bool _retval;
     gboolean _live;
@@ -665,7 +665,7 @@ class BaseSink : gst.element.Element
       Params:
         enabled = the new async value.
   */
-  void setAsyncEnabled(bool enabled)
+  void setAsyncEnabled(bool enabled) nothrow
   {
     gst_base_sink_set_async_enabled(cast(GstBaseSink*)this._cPtr, enabled);
   }
@@ -677,7 +677,7 @@ class BaseSink : gst.element.Element
       Params:
         blocksize = the blocksize in bytes
   */
-  void setBlocksize(uint blocksize)
+  void setBlocksize(uint blocksize) nothrow
   {
     gst_base_sink_set_blocksize(cast(GstBaseSink*)this._cPtr, blocksize);
   }
@@ -688,7 +688,7 @@ class BaseSink : gst.element.Element
       Params:
         dropOutOfSegment = drop buffers outside the segment
   */
-  void setDropOutOfSegment(bool dropOutOfSegment)
+  void setDropOutOfSegment(bool dropOutOfSegment) nothrow
   {
     gst_base_sink_set_drop_out_of_segment(cast(GstBaseSink*)this._cPtr, dropOutOfSegment);
   }
@@ -700,7 +700,7 @@ class BaseSink : gst.element.Element
       Params:
         enabled = the new enable-last-sample value.
   */
-  void setLastSampleEnabled(bool enabled)
+  void setLastSampleEnabled(bool enabled) nothrow
   {
     gst_base_sink_set_last_sample_enabled(cast(GstBaseSink*)this._cPtr, enabled);
   }
@@ -711,7 +711,7 @@ class BaseSink : gst.element.Element
       Params:
         maxBitrate = the max_bitrate in bits per second
   */
-  void setMaxBitrate(ulong maxBitrate)
+  void setMaxBitrate(ulong maxBitrate) nothrow
   {
     gst_base_sink_set_max_bitrate(cast(GstBaseSink*)this._cPtr, maxBitrate);
   }
@@ -725,7 +725,7 @@ class BaseSink : gst.element.Element
       Params:
         maxLateness = the new max lateness value.
   */
-  void setMaxLateness(long maxLateness)
+  void setMaxLateness(long maxLateness) nothrow
   {
     gst_base_sink_set_max_lateness(cast(GstBaseSink*)this._cPtr, maxLateness);
   }
@@ -740,7 +740,7 @@ class BaseSink : gst.element.Element
       Params:
         processingDeadline = the new processing deadline in nanoseconds.
   */
-  void setProcessingDeadline(gst.types.ClockTime processingDeadline)
+  void setProcessingDeadline(gst.types.ClockTime processingDeadline) nothrow
   {
     gst_base_sink_set_processing_deadline(cast(GstBaseSink*)this._cPtr, processingDeadline);
   }
@@ -751,7 +751,7 @@ class BaseSink : gst.element.Element
       Params:
         enabled = the new qos value.
   */
-  void setQosEnabled(bool enabled)
+  void setQosEnabled(bool enabled) nothrow
   {
     gst_base_sink_set_qos_enabled(cast(GstBaseSink*)this._cPtr, enabled);
   }
@@ -770,7 +770,7 @@ class BaseSink : gst.element.Element
       Params:
         delay = the new delay
   */
-  void setRenderDelay(gst.types.ClockTime delay)
+  void setRenderDelay(gst.types.ClockTime delay) nothrow
   {
     gst_base_sink_set_render_delay(cast(GstBaseSink*)this._cPtr, delay);
   }
@@ -785,7 +785,7 @@ class BaseSink : gst.element.Element
       Params:
         sync = the new sync value.
   */
-  void setSync(bool sync)
+  void setSync(bool sync) nothrow
   {
     gst_base_sink_set_sync(cast(GstBaseSink*)this._cPtr, sync);
   }
@@ -798,7 +798,7 @@ class BaseSink : gst.element.Element
       Params:
         throttle = the throttle time in nanoseconds
   */
-  void setThrottleTime(ulong throttle)
+  void setThrottleTime(ulong throttle) nothrow
   {
     gst_base_sink_set_throttle_time(cast(GstBaseSink*)this._cPtr, throttle);
   }
@@ -812,7 +812,7 @@ class BaseSink : gst.element.Element
       Params:
         offset = the new offset
   */
-  void setTsOffset(gst.types.ClockTimeDiff offset)
+  void setTsOffset(gst.types.ClockTimeDiff offset) nothrow
   {
     gst_base_sink_set_ts_offset(cast(GstBaseSink*)this._cPtr, offset);
   }
@@ -835,7 +835,7 @@ class BaseSink : gst.element.Element
         jitter = the jitter to be filled with time diff, or null
       Returns: #GstFlowReturn
   */
-  gst.types.FlowReturn wait(gst.types.ClockTime time, out gst.types.ClockTimeDiff jitter)
+  gst.types.FlowReturn wait(gst.types.ClockTime time, out gst.types.ClockTimeDiff jitter) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_base_sink_wait(cast(GstBaseSink*)this._cPtr, time, cast(GstClockTimeDiff*)&jitter);
@@ -865,7 +865,7 @@ class BaseSink : gst.element.Element
         jitter = the jitter to be filled with time diff, or null
       Returns: #GstClockReturn
   */
-  gst.types.ClockReturn waitClock(gst.types.ClockTime time, out gst.types.ClockTimeDiff jitter)
+  gst.types.ClockReturn waitClock(gst.types.ClockTime time, out gst.types.ClockTimeDiff jitter) nothrow
   {
     GstClockReturn _cretval;
     _cretval = gst_base_sink_wait_clock(cast(GstBaseSink*)this._cPtr, time, cast(GstClockTimeDiff*)&jitter);
@@ -895,7 +895,7 @@ class BaseSink : gst.element.Element
       Returns: [gst.types.FlowReturn.Ok] if the preroll completed and processing can
         continue. Any other return value should be returned from the render vmethod.
   */
-  gst.types.FlowReturn waitPreroll()
+  gst.types.FlowReturn waitPreroll() nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_base_sink_wait_preroll(cast(GstBaseSink*)this._cPtr);
@@ -917,7 +917,7 @@ class BaseSinkGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           not required.
       Returns: Builder instance for fluent chaining
   */
-  T async(bool propval)
+  T async(bool propval) nothrow
   {
     return setProperty("async", propval);
   }
@@ -928,7 +928,7 @@ class BaseSinkGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
         propval = The amount of bytes to pull when operating in pull mode.
       Returns: Builder instance for fluent chaining
   */
-  T blocksize(uint propval)
+  T blocksize(uint propval) nothrow
   {
     return setProperty("blocksize", propval);
   }
@@ -942,7 +942,7 @@ class BaseSinkGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           as possible, eg. if you're using a buffer pool.
       Returns: Builder instance for fluent chaining
   */
-  T enableLastSample(bool propval)
+  T enableLastSample(bool propval) nothrow
   {
     return setProperty("enable-last-sample", propval);
   }
@@ -955,13 +955,13 @@ class BaseSinkGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           rendering of the buffers when it would exceed to max-bitrate.
       Returns: Builder instance for fluent chaining
   */
-  T maxBitrate(ulong propval)
+  T maxBitrate(ulong propval) nothrow
   {
     return setProperty("max-bitrate", propval);
   }
 
   /** */
-  T maxLateness(long propval)
+  T maxLateness(long propval) nothrow
   {
     return setProperty("max-lateness", propval);
   }
@@ -974,13 +974,13 @@ class BaseSinkGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           pipelines.
       Returns: Builder instance for fluent chaining
   */
-  T processingDeadline(ulong propval)
+  T processingDeadline(ulong propval) nothrow
   {
     return setProperty("processing-deadline", propval);
   }
 
   /** */
-  T qos(bool propval)
+  T qos(bool propval) nothrow
   {
     return setProperty("qos", propval);
   }
@@ -993,13 +993,13 @@ class BaseSinkGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           make other sinks compensate for the delay.
       Returns: Builder instance for fluent chaining
   */
-  T renderDelay(ulong propval)
+  T renderDelay(ulong propval) nothrow
   {
     return setProperty("render-delay", propval);
   }
 
   /** */
-  T sync(bool propval)
+  T sync(bool propval) nothrow
   {
     return setProperty("sync", propval);
   }
@@ -1012,7 +1012,7 @@ class BaseSinkGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           to a value bigger than 0 will make the sink create THROTTLE QoS events.
       Returns: Builder instance for fluent chaining
   */
-  T throttleTime(ulong propval)
+  T throttleTime(ulong propval) nothrow
   {
     return setProperty("throttle-time", propval);
   }
@@ -1025,7 +1025,7 @@ class BaseSinkGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
           used to fix synchronisation in bad files.
       Returns: Builder instance for fluent chaining
   */
-  T tsOffset(long propval)
+  T tsOffset(long propval) nothrow
   {
     return setProperty("ts-offset", propval);
   }
@@ -1038,7 +1038,7 @@ final class BaseSinkGidBuilder : BaseSinkGidBuilderImpl!BaseSinkGidBuilder
       Create object from builder.
       Returns: New object
   */
-  BaseSink build()
+  BaseSink build() nothrow
   {
     return new BaseSink(cast(void*)createGObject(BaseSink._getGType), No.Take);
   }

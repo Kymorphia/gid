@@ -16,11 +16,8 @@ class DebugNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.debug_node.DebugNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -35,7 +32,7 @@ class DebugNode : gsk.render_node.RenderNode
         message = The debug message
       Returns: A new [gsk.render_node.RenderNode]
   */
-  this(gsk.render_node.RenderNode child, string message)
+  this(gsk.render_node.RenderNode child, string message) nothrow
   {
     GskRenderNode* _cretval;
     char* _message = message.toCString(Yes.Alloc);
@@ -47,7 +44,7 @@ class DebugNode : gsk.render_node.RenderNode
       Gets the child node that is getting drawn by the given node.
       Returns: the child [gsk.render_node.RenderNode]
   */
-  gsk.render_node.RenderNode getChild()
+  gsk.render_node.RenderNode getChild() nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_debug_node_get_child(cast(const(GskRenderNode)*)this._cPtr);
@@ -59,7 +56,7 @@ class DebugNode : gsk.render_node.RenderNode
       Gets the debug message that was set on this node
       Returns: The debug message
   */
-  string getMessage()
+  string getMessage() nothrow
   {
     const(char)* _cretval;
     _cretval = gsk_debug_node_get_message(cast(const(GskRenderNode)*)this._cPtr);

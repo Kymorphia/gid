@@ -21,26 +21,26 @@ class CellAccessible : gtk.accessible.Accessible, atk.action.Action, atk.compone
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_accessible_get_type != &gidSymbolNotFound ? gtk_cell_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CellAccessible self()
+  override CellAccessible self() nothrow
   {
     return this;
   }
@@ -49,7 +49,7 @@ class CellAccessible : gtk.accessible.Accessible, atk.action.Action, atk.compone
       Get builder for [gtk.cell_accessible.CellAccessible]
       Returns: New builder object
   */
-  static CellAccessibleGidBuilder builder()
+  static CellAccessibleGidBuilder builder() nothrow
   {
     return new CellAccessibleGidBuilder;
   }
@@ -78,7 +78,7 @@ final class CellAccessibleGidBuilder : CellAccessibleGidBuilderImpl!CellAccessib
       Create object from builder.
       Returns: New object
   */
-  CellAccessible build()
+  CellAccessible build() nothrow
   {
     return new CellAccessible(cast(void*)createGObject(CellAccessible._getGType), No.Take);
   }

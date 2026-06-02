@@ -21,26 +21,26 @@ class DataModelIter : gda.set.Set
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_data_model_iter_get_type != &gidSymbolNotFound ? gda_data_model_iter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DataModelIter self()
+  override DataModelIter self() nothrow
   {
     return this;
   }
@@ -49,61 +49,61 @@ class DataModelIter : gda.set.Set
       Get builder for [gda.data_model_iter.DataModelIter]
       Returns: New builder object
   */
-  static DataModelIterGidBuilder builder()
+  static DataModelIterGidBuilder builder() nothrow
   {
     return new DataModelIterGidBuilder;
   }
 
   /** */
-  @property int currentRow()
+  @property int currentRow() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("current-row");
   }
 
   /** */
-  @property void currentRow(int propval)
+  @property void currentRow(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("current-row", propval);
   }
 
   /** */
-  @property gda.data_model.DataModel dataModel()
+  @property gda.data_model.DataModel dataModel() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.data_model.DataModel)("data-model");
   }
 
   /** */
-  @property void dataModel(gda.data_model.DataModel propval)
+  @property void dataModel(gda.data_model.DataModel propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gda.data_model.DataModel)("data-model", propval);
   }
 
   /** */
-  @property gda.data_model.DataModel forcedModel()
+  @property gda.data_model.DataModel forcedModel() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.data_model.DataModel)("forced-model");
   }
 
   /** */
-  @property void forcedModel(gda.data_model.DataModel propval)
+  @property void forcedModel(gda.data_model.DataModel propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gda.data_model.DataModel)("forced-model", propval);
   }
 
   /** */
-  @property bool updateModel()
+  @property bool updateModel() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("update-model");
   }
 
   /** */
-  @property void updateModel(bool propval)
+  @property void updateModel(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("update-model", propval);
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_data_model_iter_error_quark();
@@ -120,7 +120,7 @@ class DataModelIter : gda.set.Set
   
       Deprecated: not very useful
   */
-  int getColumnForParam(gda.holder.Holder param)
+  int getColumnForParam(gda.holder.Holder param) nothrow
   {
     int _retval;
     _retval = gda_data_model_iter_get_column_for_param(cast(GdaDataModelIter*)this._cPtr, param ? cast(GdaHolder*)param._cPtr(No.Dup) : null);
@@ -135,7 +135,7 @@ class DataModelIter : gda.set.Set
         col = the requested column
       Returns: the #GdaHolder, or null if an error occurred
   */
-  gda.holder.Holder getHolderForField(int col)
+  gda.holder.Holder getHolderForField(int col) nothrow
   {
     GdaHolder* _cretval;
     _cretval = gda_data_model_iter_get_holder_for_field(cast(GdaDataModelIter*)this._cPtr, col);
@@ -147,7 +147,7 @@ class DataModelIter : gda.set.Set
       Get the row which iter represents in the data model
       Returns: the row number, or -1 if iter is invalid
   */
-  int getRow()
+  int getRow() nothrow
   {
     int _retval;
     _retval = gda_data_model_iter_get_row(cast(GdaDataModelIter*)this._cPtr);
@@ -161,7 +161,7 @@ class DataModelIter : gda.set.Set
         col = the requested column
       Returns: the #GValue, or null if the value could not be fetched
   */
-  gobject.value.Value getValueAt(int col)
+  gobject.value.Value getValueAt(int col) nothrow
   {
     const(GValue)* _cretval;
     _cretval = gda_data_model_iter_get_value_at(cast(GdaDataModelIter*)this._cPtr, col);
@@ -195,7 +195,7 @@ class DataModelIter : gda.set.Set
         fieldName = the requested column name
       Returns: the #GValue, or null
   */
-  gobject.value.Value getValueForField(string fieldName)
+  gobject.value.Value getValueForField(string fieldName) nothrow
   {
     const(GValue)* _cretval;
     const(char)* _fieldName = fieldName.toCString(No.Alloc);
@@ -210,7 +210,7 @@ class DataModelIter : gda.set.Set
       is for internal usage. Note that for [gda.data_model_iter.DataModelIter.isValid] to return false,
       it is also necessary to set the "current-row" property to -1.
   */
-  void invalidateContents()
+  void invalidateContents() nothrow
   {
     gda_data_model_iter_invalidate_contents(cast(GdaDataModelIter*)this._cPtr);
   }
@@ -219,7 +219,7 @@ class DataModelIter : gda.set.Set
       Tells if iter is a valid iterator (if it actually corresponds to a valid row in the model)
       Returns: TRUE if iter is valid
   */
-  override bool isValid()
+  override bool isValid() nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_data_model_iter_is_valid(cast(GdaDataModelIter*)this._cPtr);
@@ -242,7 +242,7 @@ class DataModelIter : gda.set.Set
       correcsponding #GdaHolder will be left invalid.
       Returns: true if the iterator is now at the next row
   */
-  bool moveNext()
+  bool moveNext() nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_data_model_iter_move_next(cast(GdaDataModelIter*)this._cPtr);
@@ -265,7 +265,7 @@ class DataModelIter : gda.set.Set
       correcsponding #GdaHolder will be left invalid.
       Returns: true if the iterator is now at the previous row
   */
-  bool movePrev()
+  bool movePrev() nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_data_model_iter_move_prev(cast(GdaDataModelIter*)this._cPtr);
@@ -290,7 +290,7 @@ class DataModelIter : gda.set.Set
         row = the row to set iter to
       Returns: true if no error occurred
   */
-  bool moveToRow(int row)
+  bool moveToRow(int row) nothrow
   {
     bool _retval;
     _retval = cast(bool)gda_data_model_iter_move_to_row(cast(GdaDataModelIter*)this._cPtr, row);
@@ -332,13 +332,13 @@ class DataModelIter : gda.set.Set
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEndOfData(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEndOfData(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.data_model_iter.DataModelIter)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -347,7 +347,14 @@ class DataModelIter : gda.set.Set
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.data_model_iter.DataModelIter.endOfData");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -371,14 +378,14 @@ class DataModelIter : gda.set.Set
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectRowChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRowChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gda.data_model_iter.DataModelIter)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -390,7 +397,14 @@ class DataModelIter : gda.set.Set
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gda.data_model_iter.DataModelIter.rowChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -403,25 +417,25 @@ class DataModelIterGidBuilderImpl(T) : gda.set.SetGidBuilderImpl!T
 {
 
   /** */
-  T currentRow(int propval)
+  T currentRow(int propval) nothrow
   {
     return setProperty("current-row", propval);
   }
 
   /** */
-  T dataModel(gda.data_model.DataModel propval)
+  T dataModel(gda.data_model.DataModel propval) nothrow
   {
     return setProperty("data-model", propval);
   }
 
   /** */
-  T forcedModel(gda.data_model.DataModel propval)
+  T forcedModel(gda.data_model.DataModel propval) nothrow
   {
     return setProperty("forced-model", propval);
   }
 
   /** */
-  T updateModel(bool propval)
+  T updateModel(bool propval) nothrow
   {
     return setProperty("update-model", propval);
   }
@@ -434,7 +448,7 @@ final class DataModelIterGidBuilder : DataModelIterGidBuilderImpl!DataModelIterG
       Create object from builder.
       Returns: New object
   */
-  DataModelIter build()
+  DataModelIter build() nothrow
   {
     return new DataModelIter(cast(void*)createGObject(DataModelIter._getGType), No.Take);
   }
@@ -442,12 +456,12 @@ final class DataModelIterGidBuilder : DataModelIterGidBuilderImpl!DataModelIterG
 
 class DataModelIterException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.data_model_iter.DataModelIter.errorQuark, cast(int)code, msg);
   }

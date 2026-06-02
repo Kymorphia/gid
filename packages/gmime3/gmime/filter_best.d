@@ -17,26 +17,26 @@ class FilterBest : gmime.filter.Filter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_filter_best_get_type != &gidSymbolNotFound ? g_mime_filter_best_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FilterBest self()
+  override FilterBest self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class FilterBest : gmime.filter.Filter
       Get builder for [gmime.filter_best.FilterBest]
       Returns: New builder object
   */
-  static FilterBestGidBuilder builder()
+  static FilterBestGidBuilder builder() nothrow
   {
     return new FilterBestGidBuilder;
   }
@@ -66,7 +66,7 @@ class FilterBest : gmime.filter.Filter
         flags = filter flags
       Returns: a new best filter with flags flags.
   */
-  this(gmime.types.FilterBestFlags flags)
+  this(gmime.types.FilterBestFlags flags) nothrow
   {
     GMimeFilter* _cretval;
     _cretval = g_mime_filter_best_new(flags);
@@ -80,7 +80,7 @@ class FilterBest : gmime.filter.Filter
         the content that has been passed through the filter or null
         if the filter was not configured to detect this.
   */
-  string charset()
+  string charset() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_filter_best_charset(cast(GMimeFilterBest*)this._cPtr);
@@ -97,7 +97,7 @@ class FilterBest : gmime.filter.Filter
         constraint = a #GMimeEncodingConstraint
       Returns: the best encoding for the content filtered by best.
   */
-  gmime.types.ContentEncoding encoding(gmime.types.EncodingConstraint constraint)
+  gmime.types.ContentEncoding encoding(gmime.types.EncodingConstraint constraint) nothrow
   {
     GMimeContentEncoding _cretval;
     _cretval = g_mime_filter_best_encoding(cast(GMimeFilterBest*)this._cPtr, constraint);
@@ -118,7 +118,7 @@ final class FilterBestGidBuilder : FilterBestGidBuilderImpl!FilterBestGidBuilder
       Create object from builder.
       Returns: New object
   */
-  FilterBest build()
+  FilterBest build() nothrow
   {
     return new FilterBest(cast(void*)createGObject(FilterBest._getGType), Yes.Take);
   }

@@ -16,11 +16,8 @@ class RepeatNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gsk.repeat_node.RepeatNode");
-
     super(cast(GskRenderNode*)ptr, take);
   }
 
@@ -35,7 +32,7 @@ class RepeatNode : gsk.render_node.RenderNode
               use the child's bounds
       Returns: A new [gsk.render_node.RenderNode]
   */
-  this(graphene.rect.Rect bounds, gsk.render_node.RenderNode child, graphene.rect.Rect childBounds = null)
+  this(graphene.rect.Rect bounds, gsk.render_node.RenderNode child, graphene.rect.Rect childBounds = null) nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_repeat_node_new(bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, child ? cast(GskRenderNode*)child._cPtr(No.Dup) : null, childBounds ? cast(const(graphene_rect_t)*)childBounds._cPtr(No.Dup) : null);
@@ -46,7 +43,7 @@ class RepeatNode : gsk.render_node.RenderNode
       Retrieves the child of node.
       Returns: a [gsk.render_node.RenderNode]
   */
-  gsk.render_node.RenderNode getChild()
+  gsk.render_node.RenderNode getChild() nothrow
   {
     GskRenderNode* _cretval;
     _cretval = gsk_repeat_node_get_child(cast(const(GskRenderNode)*)this._cPtr);
@@ -58,7 +55,7 @@ class RepeatNode : gsk.render_node.RenderNode
       Retrieves the bounding rectangle of the child of node.
       Returns: a bounding rectangle
   */
-  graphene.rect.Rect getChildBounds()
+  graphene.rect.Rect getChildBounds() nothrow
   {
     const(graphene_rect_t)* _cretval;
     _cretval = gsk_repeat_node_get_child_bounds(cast(const(GskRenderNode)*)this._cPtr);

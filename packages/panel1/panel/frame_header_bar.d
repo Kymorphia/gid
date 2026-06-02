@@ -30,26 +30,26 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_frame_header_bar_get_type != &gidSymbolNotFound ? panel_frame_header_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FrameHeaderBar self()
+  override FrameHeaderBar self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
       Get builder for [panel.frame_header_bar.FrameHeaderBar]
       Returns: New builder object
   */
-  static FrameHeaderBarGidBuilder builder()
+  static FrameHeaderBarGidBuilder builder() nothrow
   {
     return new FrameHeaderBarGidBuilder;
   }
@@ -67,7 +67,7 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
       Get `showIcon` property.
       Returns: Whether to show the icon or not.
   */
-  @property bool showIcon()
+  @property bool showIcon() nothrow
   {
     return getShowIcon();
   }
@@ -77,7 +77,7 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
       Params:
         propval = Whether to show the icon or not.
   */
-  @property void showIcon(bool propval)
+  @property void showIcon(bool propval) nothrow
   {
     setShowIcon(propval);
   }
@@ -88,7 +88,7 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
       Create a new #PanelFrameHeaderBar.
       Returns: a newly created #PanelFrameHeaderBar
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = panel_frame_header_bar_new();
@@ -99,7 +99,7 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
       Gets the menu popover attached to this menubar.
       Returns: a #GtkPopoverMenu
   */
-  gtk.popover_menu.PopoverMenu getMenuPopover()
+  gtk.popover_menu.PopoverMenu getMenuPopover() nothrow
   {
     GtkPopoverMenu* _cretval;
     _cretval = panel_frame_header_bar_get_menu_popover(cast(PanelFrameHeaderBar*)this._cPtr);
@@ -111,7 +111,7 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
       Tell whether it show the icon or not.
       Returns: whether to show the icon.
   */
-  bool getShowIcon()
+  bool getShowIcon() nothrow
   {
     bool _retval;
     _retval = cast(bool)panel_frame_header_bar_get_show_icon(cast(PanelFrameHeaderBar*)this._cPtr);
@@ -124,7 +124,7 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
       Params:
         showIcon = whether to show the icon
   */
-  void setShowIcon(bool showIcon)
+  void setShowIcon(bool showIcon) nothrow
   {
     panel_frame_header_bar_set_show_icon(cast(PanelFrameHeaderBar*)this._cPtr, showIcon);
   }
@@ -142,7 +142,7 @@ class FrameHeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, panel
         propval = Whether to show the icon or not.
       Returns: Builder instance for fluent chaining
   */
-  T showIcon(bool propval)
+  T showIcon(bool propval) nothrow
   {
     return setProperty("show-icon", propval);
   }
@@ -155,7 +155,7 @@ final class FrameHeaderBarGidBuilder : FrameHeaderBarGidBuilderImpl!FrameHeaderB
       Create object from builder.
       Returns: New object
   */
-  FrameHeaderBar build()
+  FrameHeaderBar build() nothrow
   {
     return new FrameHeaderBar(cast(void*)createGObject(FrameHeaderBar._getGType), No.Take);
   }

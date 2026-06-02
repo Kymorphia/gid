@@ -17,32 +17,32 @@ class FileAttributeInfoList : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_file_attribute_info_list_get_type != &gidSymbolNotFound ? g_file_attribute_info_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileAttributeInfoList self()
+  override FileAttributeInfoList self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
       Get `infos` field.
       Returns: an array of #GFileAttributeInfos.
   */
-  @property gio.file_attribute_info.FileAttributeInfo infos()
+  @property gio.file_attribute_info.FileAttributeInfo infos() nothrow
   {
     return new gio.file_attribute_info.FileAttributeInfo(cast(GFileAttributeInfo*)(cast(GFileAttributeInfoList*)this._cPtr).infos, No.Take);
   }
@@ -60,7 +60,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
       Get `nInfos` field.
       Returns: the number of values in the array.
   */
-  @property int nInfos()
+  @property int nInfos() nothrow
   {
     return (cast(GFileAttributeInfoList*)this._cPtr).nInfos;
   }
@@ -70,7 +70,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
       Params:
         propval = the number of values in the array.
   */
-  @property void nInfos(int propval)
+  @property void nInfos(int propval) nothrow
   {
     (cast(GFileAttributeInfoList*)this._cPtr).nInfos = propval;
   }
@@ -79,7 +79,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
       Creates a new file attribute info list.
       Returns: a #GFileAttributeInfoList.
   */
-  this()
+  this() nothrow
   {
     GFileAttributeInfoList* _cretval;
     _cretval = g_file_attribute_info_list_new();
@@ -95,7 +95,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
         type = the #GFileAttributeType for the attribute.
         flags = #GFileAttributeInfoFlags for the attribute.
   */
-  void add(string name, gio.types.FileAttributeType type, gio.types.FileAttributeInfoFlags flags)
+  void add(string name, gio.types.FileAttributeType type, gio.types.FileAttributeInfoFlags flags) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     g_file_attribute_info_list_add(cast(GFileAttributeInfoList*)this._cPtr, _name, type, flags);
@@ -105,7 +105,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
       Makes a duplicate of a file attribute info list.
       Returns: a copy of the given list.
   */
-  gio.file_attribute_info_list.FileAttributeInfoList dup()
+  gio.file_attribute_info_list.FileAttributeInfoList dup() nothrow
   {
     GFileAttributeInfoList* _cretval;
     _cretval = g_file_attribute_info_list_dup(cast(GFileAttributeInfoList*)this._cPtr);
@@ -121,7 +121,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
       Returns: a #GFileAttributeInfo for the name, or null if an
         attribute isn't found.
   */
-  gio.file_attribute_info.FileAttributeInfo lookup(string name)
+  gio.file_attribute_info.FileAttributeInfo lookup(string name) nothrow
   {
     const(GFileAttributeInfo)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);

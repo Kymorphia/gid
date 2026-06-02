@@ -67,32 +67,32 @@ class Schema : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())secret_schema_get_type != &gidSymbolNotFound ? secret_schema_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Schema self()
+  override Schema self() nothrow
   {
     return this;
   }
@@ -101,7 +101,7 @@ class Schema : gobject.boxed.Boxed
       Get `name` field.
       Returns: the dotted name of the schema
   */
-  @property string name()
+  @property string name() nothrow
   {
     return cToD!(string)(cast(void*)(cast(SecretSchema*)this._cPtr).name);
   }
@@ -111,7 +111,7 @@ class Schema : gobject.boxed.Boxed
       Params:
         propval = the dotted name of the schema
   */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(SecretSchema*)this._cPtr).name);
     dToC(propval, cast(void*)&(cast(SecretSchema*)this._cPtr).name);
@@ -121,7 +121,7 @@ class Schema : gobject.boxed.Boxed
       Get `flags` field.
       Returns: flags for the schema
   */
-  @property secret.types.SchemaFlags flags()
+  @property secret.types.SchemaFlags flags() nothrow
   {
     return cast(secret.types.SchemaFlags)(cast(SecretSchema*)this._cPtr).flags;
   }
@@ -131,7 +131,7 @@ class Schema : gobject.boxed.Boxed
       Params:
         propval = flags for the schema
   */
-  @property void flags(secret.types.SchemaFlags propval)
+  @property void flags(secret.types.SchemaFlags propval) nothrow
   {
     (cast(SecretSchema*)this._cPtr).flags = cast(SecretSchemaFlags)propval;
   }

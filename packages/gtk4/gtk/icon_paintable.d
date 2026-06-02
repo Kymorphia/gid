@@ -23,26 +23,26 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_icon_paintable_get_type != &gidSymbolNotFound ? gtk_icon_paintable_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override IconPaintable self()
+  override IconPaintable self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
       Get builder for [gtk.icon_paintable.IconPaintable]
       Returns: New builder object
   */
-  static IconPaintableGidBuilder builder()
+  static IconPaintableGidBuilder builder() nothrow
   {
     return new IconPaintableGidBuilder;
   }
@@ -60,7 +60,7 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
       Get `file` property.
       Returns: The file representing the icon, if any.
   */
-  @property gio.file.File file()
+  @property gio.file.File file() nothrow
   {
     return getFile();
   }
@@ -69,7 +69,7 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
       Get `iconName` property.
       Returns: The icon name that was chosen during lookup.
   */
-  @property string iconName()
+  @property string iconName() nothrow
   {
     return getIconName();
   }
@@ -89,7 +89,7 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
       Returns: a [gtk.icon_paintable.IconPaintable] containing
           for the icon. Unref with [gobject.object.ObjectWrap.unref]
   */
-  static gtk.icon_paintable.IconPaintable newForFile(gio.file.File file, int size, int scale)
+  static gtk.icon_paintable.IconPaintable newForFile(gio.file.File file, int size, int scale) nothrow
   {
     GtkIconPaintable* _cretval;
     _cretval = gtk_icon_paintable_new_for_file(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, size, scale);
@@ -103,7 +103,7 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
       Returns null if the icon was not loaded from a file.
       Returns: the [gio.file.File] for the icon
   */
-  gio.file.File getFile()
+  gio.file.File getFile() nothrow
   {
     GFile* _cretval;
     _cretval = gtk_icon_paintable_get_file(cast(GtkIconPaintable*)this._cPtr);
@@ -124,7 +124,7 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
       Returns: the themed icon-name for the
           icon, or null if its not a themed icon.
   */
-  string getIconName()
+  string getIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_icon_paintable_get_icon_name(cast(GtkIconPaintable*)this._cPtr);
@@ -142,7 +142,7 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
       recoloring), you have to set its icon name on a [gtk.image.Image].
       Returns: true if the icon is symbolic, false otherwise
   */
-  bool isSymbolic()
+  bool isSymbolic() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_icon_paintable_is_symbolic(cast(GtkIconPaintable*)this._cPtr);
@@ -163,7 +163,7 @@ class IconPaintableGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The file representing the icon, if any.
       Returns: Builder instance for fluent chaining
   */
-  T file(gio.file.File propval)
+  T file(gio.file.File propval) nothrow
   {
     return setProperty("file", propval);
   }
@@ -174,7 +174,7 @@ class IconPaintableGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The icon name that was chosen during lookup.
       Returns: Builder instance for fluent chaining
   */
-  T iconName(string propval)
+  T iconName(string propval) nothrow
   {
     return setProperty("icon-name", propval);
   }
@@ -187,7 +187,7 @@ final class IconPaintableGidBuilder : IconPaintableGidBuilderImpl!IconPaintableG
       Create object from builder.
       Returns: New object
   */
-  IconPaintable build()
+  IconPaintable build() nothrow
   {
     return new IconPaintable(cast(void*)createGObject(IconPaintable._getGType), No.Take);
   }

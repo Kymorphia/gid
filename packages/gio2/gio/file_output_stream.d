@@ -36,26 +36,26 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_file_output_stream_get_type != &gidSymbolNotFound ? g_file_output_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileOutputStream self()
+  override FileOutputStream self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
       Get builder for [gio.file_output_stream.FileOutputStream]
       Returns: New builder object
   */
-  static FileOutputStreamGidBuilder builder()
+  static FileOutputStreamGidBuilder builder() nothrow
   {
     return new FileOutputStreamGidBuilder;
   }
@@ -77,7 +77,7 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
       and closed, as the etag can change while writing.
       Returns: the entity tag for the stream.
   */
-  string getEtag()
+  string getEtag() nothrow
   {
     char* _cretval;
     _cretval = g_file_output_stream_get_etag(cast(GFileOutputStream*)this._cPtr);
@@ -137,14 +137,21 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
         cancellable = optional #GCancellable object, null to ignore.
         callback = callback to call when the request is satisfied
   */
-  void queryInfoAsync(string attributes, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void queryInfoAsync(string attributes, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _attributes = attributes.toCString(No.Alloc);
@@ -187,7 +194,7 @@ final class FileOutputStreamGidBuilder : FileOutputStreamGidBuilderImpl!FileOutp
       Create object from builder.
       Returns: New object
   */
-  FileOutputStream build()
+  FileOutputStream build() nothrow
   {
     return new FileOutputStream(cast(void*)createGObject(FileOutputStream._getGType), No.Take);
   }

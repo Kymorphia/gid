@@ -19,26 +19,26 @@ class BackForwardListItem : gobject.initially_unowned.InitiallyUnowned
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_back_forward_list_item_get_type != &gidSymbolNotFound ? webkit_back_forward_list_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BackForwardListItem self()
+  override BackForwardListItem self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class BackForwardListItem : gobject.initially_unowned.InitiallyUnowned
       Get builder for [webkit.back_forward_list_item.BackForwardListItem]
       Returns: New builder object
   */
-  static BackForwardListItemGidBuilder builder()
+  static BackForwardListItemGidBuilder builder() nothrow
   {
     return new BackForwardListItemGidBuilder;
   }
@@ -59,7 +59,7 @@ class BackForwardListItem : gobject.initially_unowned.InitiallyUnowned
       Returns: the original URI of list_item or null
            when the original URI is empty.
   */
-  string getOriginalUri()
+  string getOriginalUri() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_back_forward_list_item_get_original_uri(cast(WebKitBackForwardListItem*)this._cPtr);
@@ -72,7 +72,7 @@ class BackForwardListItem : gobject.initially_unowned.InitiallyUnowned
       Returns: the page title of list_item or null
            when the title is empty.
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_back_forward_list_item_get_title(cast(WebKitBackForwardListItem*)this._cPtr);
@@ -89,7 +89,7 @@ class BackForwardListItem : gobject.initially_unowned.InitiallyUnowned
       Returns: the URI of list_item or null
            when the URI is empty.
   */
-  string getUri()
+  string getUri() nothrow
   {
     const(char)* _cretval;
     _cretval = webkit_back_forward_list_item_get_uri(cast(WebKitBackForwardListItem*)this._cPtr);
@@ -110,7 +110,7 @@ final class BackForwardListItemGidBuilder : BackForwardListItemGidBuilderImpl!Ba
       Create object from builder.
       Returns: New object
   */
-  BackForwardListItem build()
+  BackForwardListItem build() nothrow
   {
     return new BackForwardListItem(cast(void*)createGObject(BackForwardListItem._getGType), No.Take);
   }

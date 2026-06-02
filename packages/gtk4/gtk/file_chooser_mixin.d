@@ -67,7 +67,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  @property gtk.types.FileChooserAction action()
+  @property gtk.types.FileChooserAction action() nothrow
   {
     return getAction();
   }
@@ -79,7 +79,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  @property void action(gtk.types.FileChooserAction propval)
+  @property void action(gtk.types.FileChooserAction propval) nothrow
   {
     setAction(propval);
   }
@@ -91,7 +91,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  @property bool createFolders()
+  @property bool createFolders() nothrow
   {
     return getCreateFolders();
   }
@@ -104,7 +104,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  @property void createFolders(bool propval)
+  @property void createFolders(bool propval) nothrow
   {
     setCreateFolders(propval);
   }
@@ -115,7 +115,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  @property gtk.file_filter.FileFilter filter()
+  @property gtk.file_filter.FileFilter filter() nothrow
   {
     return getFilter();
   }
@@ -127,7 +127,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  @property void filter(gtk.file_filter.FileFilter propval)
+  @property void filter(gtk.file_filter.FileFilter propval) nothrow
   {
     setFilter(propval);
   }
@@ -142,7 +142,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  @property gio.list_model.ListModel filters()
+  @property gio.list_model.ListModel filters() nothrow
   {
     return getFilters();
   }
@@ -153,7 +153,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  @property bool selectMultiple()
+  @property bool selectMultiple() nothrow
   {
     return getSelectMultiple();
   }
@@ -165,7 +165,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  @property void selectMultiple(bool propval)
+  @property void selectMultiple(bool propval) nothrow
   {
     setSelectMultiple(propval);
   }
@@ -180,7 +180,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  @property gio.list_model.ListModel shortcutFolders()
+  @property gio.list_model.ListModel shortcutFolders() nothrow
   {
     return getShortcutFolders();
   }
@@ -203,7 +203,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  override void addChoice(string id, string label, string[] options = null, string[] optionLabels = null)
+  override void addChoice(string id, string label, string[] options = null, string[] optionLabels = null) nothrow
   {
     const(char)* _id = id.toCString(No.Alloc);
     const(char)* _label = label.toCString(No.Alloc);
@@ -236,7 +236,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  override void addFilter(gtk.file_filter.FileFilter filter)
+  override void addFilter(gtk.file_filter.FileFilter filter) nothrow
   {
     gtk_file_chooser_add_filter(cast(GtkFileChooser*)this._cPtr, filter ? cast(GtkFileFilter*)filter._cPtr(No.Dup) : null);
   }
@@ -269,7 +269,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  override gtk.types.FileChooserAction getAction()
+  override gtk.types.FileChooserAction getAction() nothrow
   {
     GtkFileChooserAction _cretval;
     _cretval = gtk_file_chooser_get_action(cast(GtkFileChooser*)this._cPtr);
@@ -286,7 +286,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  override string getChoice(string id)
+  override string getChoice(string id) nothrow
   {
     const(char)* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
@@ -301,7 +301,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  override bool getCreateFolders()
+  override bool getCreateFolders() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_file_chooser_get_create_folders(cast(GtkFileChooser*)this._cPtr);
@@ -314,7 +314,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  override gio.file.File getCurrentFolder()
+  override gio.file.File getCurrentFolder() nothrow
   {
     GFile* _cretval;
     _cretval = gtk_file_chooser_get_current_folder(cast(GtkFileChooser*)this._cPtr);
@@ -335,7 +335,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  override string getCurrentName()
+  override string getCurrentName() nothrow
   {
     char* _cretval;
     _cretval = gtk_file_chooser_get_current_name(cast(GtkFileChooser*)this._cPtr);
@@ -357,7 +357,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  override gio.file.File getFile()
+  override gio.file.File getFile() nothrow
   {
     GFile* _cretval;
     _cretval = gtk_file_chooser_get_file(cast(GtkFileChooser*)this._cPtr);
@@ -374,7 +374,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  override gio.list_model.ListModel getFiles()
+  override gio.list_model.ListModel getFiles() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_file_chooser_get_files(cast(GtkFileChooser*)this._cPtr);
@@ -388,7 +388,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  override gtk.file_filter.FileFilter getFilter()
+  override gtk.file_filter.FileFilter getFilter() nothrow
   {
     GtkFileFilter* _cretval;
     _cretval = gtk_file_chooser_get_filter(cast(GtkFileChooser*)this._cPtr);
@@ -409,7 +409,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  override gio.list_model.ListModel getFilters()
+  override gio.list_model.ListModel getFilters() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_file_chooser_get_filters(cast(GtkFileChooser*)this._cPtr);
@@ -424,7 +424,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  override bool getSelectMultiple()
+  override bool getSelectMultiple() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_file_chooser_get_select_multiple(cast(GtkFileChooser*)this._cPtr);
@@ -440,7 +440,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  override gio.list_model.ListModel getShortcutFolders()
+  override gio.list_model.ListModel getShortcutFolders() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_file_chooser_get_shortcut_folders(cast(GtkFileChooser*)this._cPtr);
@@ -456,7 +456,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  override void removeChoice(string id)
+  override void removeChoice(string id) nothrow
   {
     const(char)* _id = id.toCString(No.Alloc);
     gtk_file_chooser_remove_choice(cast(GtkFileChooser*)this._cPtr, _id);
@@ -470,7 +470,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  override void removeFilter(gtk.file_filter.FileFilter filter)
+  override void removeFilter(gtk.file_filter.FileFilter filter) nothrow
   {
     gtk_file_chooser_remove_filter(cast(GtkFileChooser*)this._cPtr, filter ? cast(GtkFileFilter*)filter._cPtr(No.Dup) : null);
   }
@@ -510,7 +510,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  override void setAction(gtk.types.FileChooserAction action)
+  override void setAction(gtk.types.FileChooserAction action) nothrow
   {
     gtk_file_chooser_set_action(cast(GtkFileChooser*)this._cPtr, action);
   }
@@ -527,7 +527,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  override void setChoice(string id, string option)
+  override void setChoice(string id, string option) nothrow
   {
     const(char)* _id = id.toCString(No.Alloc);
     const(char)* _option = option.toCString(No.Alloc);
@@ -545,7 +545,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  override void setCreateFolders(bool createFolders)
+  override void setCreateFolders(bool createFolders) nothrow
   {
     gtk_file_chooser_set_create_folders(cast(GtkFileChooser*)this._cPtr, createFolders);
   }
@@ -591,7 +591,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  override void setCurrentName(string name)
+  override void setCurrentName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_file_chooser_set_current_name(cast(GtkFileChooser*)this._cPtr, _name);
@@ -674,7 +674,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  override void setFilter(gtk.file_filter.FileFilter filter)
+  override void setFilter(gtk.file_filter.FileFilter filter) nothrow
   {
     gtk_file_chooser_set_filter(cast(GtkFileChooser*)this._cPtr, filter ? cast(GtkFileFilter*)filter._cPtr(No.Dup) : null);
   }
@@ -691,7 +691,7 @@ template FileChooserT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  override void setSelectMultiple(bool selectMultiple)
+  override void setSelectMultiple(bool selectMultiple) nothrow
   {
     gtk_file_chooser_set_select_multiple(cast(GtkFileChooser*)this._cPtr, selectMultiple);
   }
@@ -709,7 +709,7 @@ template FileChooserGidBuilderT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  T action(gtk.types.FileChooserAction propval)
+  T action(gtk.types.FileChooserAction propval) nothrow
   {
     return setProperty("action", propval);
   }
@@ -723,7 +723,7 @@ template FileChooserGidBuilderT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  T createFolders(bool propval)
+  T createFolders(bool propval) nothrow
   {
     return setProperty("create-folders", propval);
   }
@@ -736,7 +736,7 @@ template FileChooserGidBuilderT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  T filter(gtk.file_filter.FileFilter propval)
+  T filter(gtk.file_filter.FileFilter propval) nothrow
   {
     return setProperty("filter", propval);
   }
@@ -749,7 +749,7 @@ template FileChooserGidBuilderT()
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
-  T selectMultiple(bool propval)
+  T selectMultiple(bool propval) nothrow
   {
     return setProperty("select-multiple", propval);
   }

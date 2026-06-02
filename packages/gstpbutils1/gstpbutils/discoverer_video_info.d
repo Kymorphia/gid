@@ -16,26 +16,26 @@ class DiscovererVideoInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_discoverer_video_info_get_type != &gidSymbolNotFound ? gst_discoverer_video_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DiscovererVideoInfo self()
+  override DiscovererVideoInfo self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class DiscovererVideoInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
       Get builder for [gstpbutils.discoverer_video_info.DiscovererVideoInfo]
       Returns: New builder object
   */
-  static DiscovererVideoInfoGidBuilder builder()
+  static DiscovererVideoInfoGidBuilder builder() nothrow
   {
     return new DiscovererVideoInfoGidBuilder;
   }
 
   /** */
-  uint getBitrate()
+  uint getBitrate() nothrow
   {
     uint _retval;
     _retval = gst_discoverer_video_info_get_bitrate(cast(const(GstDiscovererVideoInfo)*)this._cPtr);
@@ -58,7 +58,7 @@ class DiscovererVideoInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   }
 
   /** */
-  uint getDepth()
+  uint getDepth() nothrow
   {
     uint _retval;
     _retval = gst_discoverer_video_info_get_depth(cast(const(GstDiscovererVideoInfo)*)this._cPtr);
@@ -66,7 +66,7 @@ class DiscovererVideoInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   }
 
   /** */
-  uint getFramerateDenom()
+  uint getFramerateDenom() nothrow
   {
     uint _retval;
     _retval = gst_discoverer_video_info_get_framerate_denom(cast(const(GstDiscovererVideoInfo)*)this._cPtr);
@@ -74,7 +74,7 @@ class DiscovererVideoInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   }
 
   /** */
-  uint getFramerateNum()
+  uint getFramerateNum() nothrow
   {
     uint _retval;
     _retval = gst_discoverer_video_info_get_framerate_num(cast(const(GstDiscovererVideoInfo)*)this._cPtr);
@@ -82,7 +82,7 @@ class DiscovererVideoInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   }
 
   /** */
-  uint getHeight()
+  uint getHeight() nothrow
   {
     uint _retval;
     _retval = gst_discoverer_video_info_get_height(cast(const(GstDiscovererVideoInfo)*)this._cPtr);
@@ -90,7 +90,7 @@ class DiscovererVideoInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   }
 
   /** */
-  uint getMaxBitrate()
+  uint getMaxBitrate() nothrow
   {
     uint _retval;
     _retval = gst_discoverer_video_info_get_max_bitrate(cast(const(GstDiscovererVideoInfo)*)this._cPtr);
@@ -98,7 +98,7 @@ class DiscovererVideoInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   }
 
   /** */
-  uint getParDenom()
+  uint getParDenom() nothrow
   {
     uint _retval;
     _retval = gst_discoverer_video_info_get_par_denom(cast(const(GstDiscovererVideoInfo)*)this._cPtr);
@@ -106,7 +106,7 @@ class DiscovererVideoInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   }
 
   /** */
-  uint getParNum()
+  uint getParNum() nothrow
   {
     uint _retval;
     _retval = gst_discoverer_video_info_get_par_num(cast(const(GstDiscovererVideoInfo)*)this._cPtr);
@@ -114,7 +114,7 @@ class DiscovererVideoInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   }
 
   /** */
-  uint getWidth()
+  uint getWidth() nothrow
   {
     uint _retval;
     _retval = gst_discoverer_video_info_get_width(cast(const(GstDiscovererVideoInfo)*)this._cPtr);
@@ -122,7 +122,7 @@ class DiscovererVideoInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   }
 
   /** */
-  bool isImage()
+  bool isImage() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_discoverer_video_info_is_image(cast(const(GstDiscovererVideoInfo)*)this._cPtr);
@@ -130,7 +130,7 @@ class DiscovererVideoInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   }
 
   /** */
-  bool isInterlaced()
+  bool isInterlaced() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_discoverer_video_info_is_interlaced(cast(const(GstDiscovererVideoInfo)*)this._cPtr);
@@ -150,7 +150,7 @@ final class DiscovererVideoInfoGidBuilder : DiscovererVideoInfoGidBuilderImpl!Di
       Create object from builder.
       Returns: New object
   */
-  DiscovererVideoInfo build()
+  DiscovererVideoInfo build() nothrow
   {
     return new DiscovererVideoInfo(cast(void*)createGObject(DiscovererVideoInfo._getGType), No.Take);
   }

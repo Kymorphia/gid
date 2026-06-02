@@ -20,26 +20,26 @@ class GIOOutputStream : arrow.output_stream.OutputStream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_gio_output_stream_get_type != &gidSymbolNotFound ? garrow_gio_output_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GIOOutputStream self()
+  override GIOOutputStream self() nothrow
   {
     return this;
   }
@@ -48,19 +48,19 @@ class GIOOutputStream : arrow.output_stream.OutputStream
       Get builder for [arrow.giooutput_stream.GIOOutputStream]
       Returns: New builder object
   */
-  static GIOOutputStreamGidBuilder builder()
+  static GIOOutputStreamGidBuilder builder() nothrow
   {
     return new GIOOutputStreamGidBuilder;
   }
 
   /** */
-  @property gio.output_stream.OutputStream raw()
+  @property gio.output_stream.OutputStream raw() nothrow
   {
     return getRaw();
   }
 
   /** */
-  this(gio.output_stream.OutputStream gioOutputStream)
+  this(gio.output_stream.OutputStream gioOutputStream) nothrow
   {
     GArrowGIOOutputStream* _cretval;
     _cretval = garrow_gio_output_stream_new(gioOutputStream ? cast(GOutputStream*)gioOutputStream._cPtr(No.Dup) : null);
@@ -68,7 +68,7 @@ class GIOOutputStream : arrow.output_stream.OutputStream
   }
 
   /** */
-  gio.output_stream.OutputStream getRaw()
+  gio.output_stream.OutputStream getRaw() nothrow
   {
     GOutputStream* _cretval;
     _cretval = garrow_gio_output_stream_get_raw(cast(GArrowGIOOutputStream*)this._cPtr);
@@ -83,7 +83,7 @@ class GIOOutputStreamGidBuilderImpl(T) : arrow.output_stream.OutputStreamGidBuil
 
 
   /** */
-  T raw(gio.output_stream.OutputStream propval)
+  T raw(gio.output_stream.OutputStream propval) nothrow
   {
     return setProperty("raw", propval);
   }
@@ -96,7 +96,7 @@ final class GIOOutputStreamGidBuilder : GIOOutputStreamGidBuilderImpl!GIOOutputS
       Create object from builder.
       Returns: New object
   */
-  GIOOutputStream build()
+  GIOOutputStream build() nothrow
   {
     return new GIOOutputStream(cast(void*)createGObject(GIOOutputStream._getGType), Yes.Take);
   }

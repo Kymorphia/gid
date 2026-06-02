@@ -64,32 +64,32 @@ class WidgetPath : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_widget_path_get_type != &gidSymbolNotFound ? gtk_widget_path_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override WidgetPath self()
+  override WidgetPath self() nothrow
   {
     return this;
   }
@@ -98,7 +98,7 @@ class WidgetPath : gobject.boxed.Boxed
       Returns an empty widget path.
       Returns: A newly created, empty, #GtkWidgetPath
   */
-  this()
+  this() nothrow
   {
     GtkWidgetPath* _cretval;
     _cretval = gtk_widget_path_new();
@@ -115,7 +115,7 @@ class WidgetPath : gobject.boxed.Boxed
         widget = the widget to append to the widget path
       Returns: the position where the data was inserted
   */
-  int appendForWidget(gtk.widget.Widget widget)
+  int appendForWidget(gtk.widget.Widget widget) nothrow
   {
     int _retval;
     _retval = gtk_widget_path_append_for_widget(cast(GtkWidgetPath*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
@@ -129,7 +129,7 @@ class WidgetPath : gobject.boxed.Boxed
         type = widget type to append
       Returns: the position where the element was inserted
   */
-  int appendType(gobject.types.GType type)
+  int appendType(gobject.types.GType type) nothrow
   {
     int _retval;
     _retval = gtk_widget_path_append_type(cast(GtkWidgetPath*)this._cPtr, type);
@@ -153,7 +153,7 @@ class WidgetPath : gobject.boxed.Boxed
             positioned.
       Returns: the position where the element was inserted.
   */
-  int appendWithSiblings(gtk.widget_path.WidgetPath siblings, uint siblingIndex)
+  int appendWithSiblings(gtk.widget_path.WidgetPath siblings, uint siblingIndex) nothrow
   {
     int _retval;
     _retval = gtk_widget_path_append_with_siblings(cast(GtkWidgetPath*)this._cPtr, siblings ? cast(GtkWidgetPath*)siblings._cPtr(No.Dup) : null, siblingIndex);
@@ -164,7 +164,7 @@ class WidgetPath : gobject.boxed.Boxed
       Returns a copy of path
       Returns: a copy of path
   */
-  gtk.widget_path.WidgetPath copy()
+  gtk.widget_path.WidgetPath copy() nothrow
   {
     GtkWidgetPath* _cretval;
     _cretval = gtk_widget_path_copy(cast(const(GtkWidgetPath)*)this._cPtr);
@@ -177,7 +177,7 @@ class WidgetPath : gobject.boxed.Boxed
       is representing.
       Returns: The object type
   */
-  gobject.types.GType getObjectType()
+  gobject.types.GType getObjectType() nothrow
   {
     gobject.types.GType _retval;
     _retval = gtk_widget_path_get_object_type(cast(const(GtkWidgetPath)*)this._cPtr);
@@ -192,7 +192,7 @@ class WidgetPath : gobject.boxed.Boxed
         type = widget type to check in parents
       Returns: true if any parent is of type type
   */
-  bool hasParent(gobject.types.GType type)
+  bool hasParent(gobject.types.GType type) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_path_has_parent(cast(const(GtkWidgetPath)*)this._cPtr, type);
@@ -207,7 +207,7 @@ class WidgetPath : gobject.boxed.Boxed
         type = widget type to match
       Returns: true if the widget represented by path is of type type
   */
-  bool isType(gobject.types.GType type)
+  bool isType(gobject.types.GType type) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_path_is_type(cast(const(GtkWidgetPath)*)this._cPtr, type);
@@ -223,7 +223,7 @@ class WidgetPath : gobject.boxed.Boxed
         pos = position to modify, -1 for the path head
         name = a class name
   */
-  void iterAddClass(int pos, string name)
+  void iterAddClass(int pos, string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_path_iter_add_class(cast(GtkWidgetPath*)this._cPtr, pos, _name);
@@ -244,7 +244,7 @@ class WidgetPath : gobject.boxed.Boxed
   
       Deprecated: The use of regions is deprecated.
   */
-  void iterAddRegion(int pos, string name, gtk.types.RegionFlags flags)
+  void iterAddRegion(int pos, string name, gtk.types.RegionFlags flags) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_path_iter_add_region(cast(GtkWidgetPath*)this._cPtr, pos, _name, flags);
@@ -257,7 +257,7 @@ class WidgetPath : gobject.boxed.Boxed
       Params:
         pos = position to modify, -1 for the path head
   */
-  void iterClearClasses(int pos)
+  void iterClearClasses(int pos) nothrow
   {
     gtk_widget_path_iter_clear_classes(cast(GtkWidgetPath*)this._cPtr, pos);
   }
@@ -271,7 +271,7 @@ class WidgetPath : gobject.boxed.Boxed
   
       Deprecated: The use of regions is deprecated.
   */
-  void iterClearRegions(int pos)
+  void iterClearRegions(int pos) nothrow
   {
     gtk_widget_path_iter_clear_regions(cast(GtkWidgetPath*)this._cPtr, pos);
   }
@@ -285,7 +285,7 @@ class WidgetPath : gobject.boxed.Boxed
         pos = position to get the widget name for, -1 for the path head
       Returns: The widget name, or null if none was set.
   */
-  string iterGetName(int pos)
+  string iterGetName(int pos) nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_widget_path_iter_get_name(cast(const(GtkWidgetPath)*)this._cPtr, pos);
@@ -301,7 +301,7 @@ class WidgetPath : gobject.boxed.Boxed
         pos = position to get the object name for, -1 for the path head
       Returns: the name or null
   */
-  string iterGetObjectName(int pos)
+  string iterGetObjectName(int pos) nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_widget_path_iter_get_object_name(cast(const(GtkWidgetPath)*)this._cPtr, pos);
@@ -317,7 +317,7 @@ class WidgetPath : gobject.boxed.Boxed
         pos = position to get the object type for, -1 for the path head
       Returns: a widget type
   */
-  gobject.types.GType iterGetObjectType(int pos)
+  gobject.types.GType iterGetObjectType(int pos) nothrow
   {
     gobject.types.GType _retval;
     _retval = gtk_widget_path_iter_get_object_type(cast(const(GtkWidgetPath)*)this._cPtr, pos);
@@ -334,7 +334,7 @@ class WidgetPath : gobject.boxed.Boxed
         pos = position to get the sibling index for, -1 for the path head
       Returns: 0 or the index into the list of siblings for the element at pos.
   */
-  uint iterGetSiblingIndex(int pos)
+  uint iterGetSiblingIndex(int pos) nothrow
   {
     uint _retval;
     _retval = gtk_widget_path_iter_get_sibling_index(cast(const(GtkWidgetPath)*)this._cPtr, pos);
@@ -349,7 +349,7 @@ class WidgetPath : gobject.boxed.Boxed
         pos = position to get the siblings for, -1 for the path head
       Returns: null or the list of siblings for the element at pos.
   */
-  gtk.widget_path.WidgetPath iterGetSiblings(int pos)
+  gtk.widget_path.WidgetPath iterGetSiblings(int pos) nothrow
   {
     const(GtkWidgetPath)* _cretval;
     _cretval = gtk_widget_path_iter_get_siblings(cast(const(GtkWidgetPath)*)this._cPtr, pos);
@@ -366,7 +366,7 @@ class WidgetPath : gobject.boxed.Boxed
         pos = position to get the state for, -1 for the path head
       Returns: The state flags
   */
-  gtk.types.StateFlags iterGetState(int pos)
+  gtk.types.StateFlags iterGetState(int pos) nothrow
   {
     GtkStateFlags _cretval;
     _cretval = gtk_widget_path_iter_get_state(cast(const(GtkWidgetPath)*)this._cPtr, pos);
@@ -383,7 +383,7 @@ class WidgetPath : gobject.boxed.Boxed
         name = class name
       Returns: true if the class name is defined for the widget at pos
   */
-  bool iterHasClass(int pos, string name)
+  bool iterHasClass(int pos, string name) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -400,7 +400,7 @@ class WidgetPath : gobject.boxed.Boxed
         name = a widget name
       Returns: true if the widget at pos has this name
   */
-  bool iterHasName(int pos, string name)
+  bool iterHasName(int pos, string name) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -417,7 +417,7 @@ class WidgetPath : gobject.boxed.Boxed
         qname = class name as a #GQuark
       Returns: true if the widget at pos has the class defined.
   */
-  bool iterHasQclass(int pos, glib.types.Quark qname)
+  bool iterHasQclass(int pos, glib.types.Quark qname) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_path_iter_has_qclass(cast(const(GtkWidgetPath)*)this._cPtr, pos, qname);
@@ -433,7 +433,7 @@ class WidgetPath : gobject.boxed.Boxed
         qname = widget name as a #GQuark
       Returns: true if the widget at pos has this name
   */
-  bool iterHasQname(int pos, glib.types.Quark qname)
+  bool iterHasQname(int pos, glib.types.Quark qname) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_path_iter_has_qname(cast(const(GtkWidgetPath)*)this._cPtr, pos, qname);
@@ -452,7 +452,7 @@ class WidgetPath : gobject.boxed.Boxed
   
       Deprecated: The use of regions is deprecated.
   */
-  bool iterHasQregion(int pos, glib.types.Quark qname, out gtk.types.RegionFlags flags)
+  bool iterHasQregion(int pos, glib.types.Quark qname, out gtk.types.RegionFlags flags) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_widget_path_iter_has_qregion(cast(const(GtkWidgetPath)*)this._cPtr, pos, qname, &flags);
@@ -471,7 +471,7 @@ class WidgetPath : gobject.boxed.Boxed
   
       Deprecated: The use of regions is deprecated.
   */
-  bool iterHasRegion(int pos, string name, out gtk.types.RegionFlags flags)
+  bool iterHasRegion(int pos, string name, out gtk.types.RegionFlags flags) nothrow
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -490,7 +490,7 @@ class WidgetPath : gobject.boxed.Boxed
                  are owned by GTK+, but you should use [glib.slist.SList.free] to
                  free the list itself.
   */
-  string[] iterListClasses(int pos)
+  string[] iterListClasses(int pos) nothrow
   {
     GSList* _cretval;
     _cretval = gtk_widget_path_iter_list_classes(cast(const(GtkWidgetPath)*)this._cPtr, pos);
@@ -511,7 +511,7 @@ class WidgetPath : gobject.boxed.Boxed
   
       Deprecated: The use of regions is deprecated.
   */
-  string[] iterListRegions(int pos)
+  string[] iterListRegions(int pos) nothrow
   {
     GSList* _cretval;
     _cretval = gtk_widget_path_iter_list_regions(cast(const(GtkWidgetPath)*)this._cPtr, pos);
@@ -527,7 +527,7 @@ class WidgetPath : gobject.boxed.Boxed
         pos = position to modify, -1 for the path head
         name = class name
   */
-  void iterRemoveClass(int pos, string name)
+  void iterRemoveClass(int pos, string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_path_iter_remove_class(cast(GtkWidgetPath*)this._cPtr, pos, _name);
@@ -543,7 +543,7 @@ class WidgetPath : gobject.boxed.Boxed
   
       Deprecated: The use of regions is deprecated.
   */
-  void iterRemoveRegion(int pos, string name)
+  void iterRemoveRegion(int pos, string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_path_iter_remove_region(cast(GtkWidgetPath*)this._cPtr, pos, _name);
@@ -557,7 +557,7 @@ class WidgetPath : gobject.boxed.Boxed
         pos = position to modify, -1 for the path head
         name = widget name
   */
-  void iterSetName(int pos, string name)
+  void iterSetName(int pos, string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_path_iter_set_name(cast(GtkWidgetPath*)this._cPtr, pos, _name);
@@ -574,7 +574,7 @@ class WidgetPath : gobject.boxed.Boxed
         pos = position to modify, -1 for the path head
         name = object name to set or null to unset
   */
-  void iterSetObjectName(int pos, string name = null)
+  void iterSetObjectName(int pos, string name = null) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_path_iter_set_object_name(cast(GtkWidgetPath*)this._cPtr, pos, _name);
@@ -588,7 +588,7 @@ class WidgetPath : gobject.boxed.Boxed
         pos = position to modify, -1 for the path head
         type = object type to set
   */
-  void iterSetObjectType(int pos, gobject.types.GType type)
+  void iterSetObjectType(int pos, gobject.types.GType type) nothrow
   {
     gtk_widget_path_iter_set_object_type(cast(GtkWidgetPath*)this._cPtr, pos, type);
   }
@@ -616,7 +616,7 @@ class WidgetPath : gobject.boxed.Boxed
         pos = position to modify, -1 for the path head
         state = state flags
   */
-  void iterSetState(int pos, gtk.types.StateFlags state)
+  void iterSetState(int pos, gtk.types.StateFlags state) nothrow
   {
     gtk_widget_path_iter_set_state(cast(GtkWidgetPath*)this._cPtr, pos, state);
   }
@@ -626,7 +626,7 @@ class WidgetPath : gobject.boxed.Boxed
       widget and its topmost container.
       Returns: the number of elements in the path
   */
-  int length()
+  int length() nothrow
   {
     int _retval;
     _retval = gtk_widget_path_length(cast(const(GtkWidgetPath)*)this._cPtr);
@@ -639,7 +639,7 @@ class WidgetPath : gobject.boxed.Boxed
       Params:
         type = widget type to prepend
   */
-  void prependType(gobject.types.GType type)
+  void prependType(gobject.types.GType type) nothrow
   {
     gtk_widget_path_prepend_type(cast(GtkWidgetPath*)this._cPtr, type);
   }
@@ -653,7 +653,7 @@ class WidgetPath : gobject.boxed.Boxed
       [glib.global.print] the path or dump it in a gdb session.
       Returns: A new string describing path.
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gtk_widget_path_to_string(cast(const(GtkWidgetPath)*)this._cPtr);

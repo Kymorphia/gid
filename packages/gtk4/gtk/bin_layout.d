@@ -22,26 +22,26 @@ class BinLayout : gtk.layout_manager.LayoutManager
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_bin_layout_get_type != &gidSymbolNotFound ? gtk_bin_layout_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BinLayout self()
+  override BinLayout self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class BinLayout : gtk.layout_manager.LayoutManager
       Get builder for [gtk.bin_layout.BinLayout]
       Returns: New builder object
   */
-  static BinLayoutGidBuilder builder()
+  static BinLayoutGidBuilder builder() nothrow
   {
     return new BinLayoutGidBuilder;
   }
@@ -59,7 +59,7 @@ class BinLayout : gtk.layout_manager.LayoutManager
       Creates a new [gtk.bin_layout.BinLayout] instance.
       Returns: the newly created [gtk.bin_layout.BinLayout]
   */
-  this()
+  this() nothrow
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_bin_layout_new();
@@ -79,7 +79,7 @@ final class BinLayoutGidBuilder : BinLayoutGidBuilderImpl!BinLayoutGidBuilder
       Create object from builder.
       Returns: New object
   */
-  BinLayout build()
+  BinLayout build() nothrow
   {
     return new BinLayout(cast(void*)createGObject(BinLayout._getGType), Yes.Take);
   }

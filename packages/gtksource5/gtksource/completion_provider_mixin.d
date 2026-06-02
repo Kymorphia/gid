@@ -46,7 +46,7 @@ template CompletionProviderT()
         context = a #GtkSourceCompletionContext
         proposal = a #GtkSourceCompletionProposal
   */
-  override void activate(gtksource.completion_context.CompletionContext context, gtksource.completion_proposal.CompletionProposal proposal)
+  override void activate(gtksource.completion_context.CompletionContext context, gtksource.completion_proposal.CompletionProposal proposal) nothrow
   {
     gtk_source_completion_provider_activate(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null);
   }
@@ -66,7 +66,7 @@ template CompletionProviderT()
         proposal = a #GtkSourceCompletionProposal
         cell = a #GtkSourceCompletionCell
   */
-  override void display(gtksource.completion_context.CompletionContext context, gtksource.completion_proposal.CompletionProposal proposal, gtksource.completion_cell.CompletionCell cell)
+  override void display(gtksource.completion_context.CompletionContext context, gtksource.completion_proposal.CompletionProposal proposal, gtksource.completion_cell.CompletionCell cell) nothrow
   {
     gtk_source_completion_provider_display(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null, cell ? cast(GtkSourceCompletionCell*)cell._cPtr(No.Dup) : null);
   }
@@ -84,7 +84,7 @@ template CompletionProviderT()
         context = a #GtkSourceCompletionContext
       Returns: 
   */
-  override int getPriority(gtksource.completion_context.CompletionContext context)
+  override int getPriority(gtksource.completion_context.CompletionContext context) nothrow
   {
     int _retval;
     _retval = gtk_source_completion_provider_get_priority(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null);
@@ -98,7 +98,7 @@ template CompletionProviderT()
       at some point in the future when non-null.
       Returns: a title for the provider or null
   */
-  override string getTitle()
+  override string getTitle() nothrow
   {
     char* _cretval;
     _cretval = gtk_source_completion_provider_get_title(cast(GtkSourceCompletionProvider*)this._cPtr);
@@ -122,7 +122,7 @@ template CompletionProviderT()
         ch = a #gunichar of the character inserted
       Returns: 
   */
-  override bool isTrigger(gtk.text_iter.TextIter iter, dchar ch)
+  override bool isTrigger(gtk.text_iter.TextIter iter, dchar ch) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_completion_provider_is_trigger(cast(GtkSourceCompletionProvider*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, ch);
@@ -144,7 +144,7 @@ template CompletionProviderT()
         state = a #GdkModifierType or 0
       Returns: 
   */
-  override bool keyActivates(gtksource.completion_context.CompletionContext context, gtksource.completion_proposal.CompletionProposal proposal, uint keyval, gdk.types.ModifierType state)
+  override bool keyActivates(gtksource.completion_context.CompletionContext context, gtksource.completion_proposal.CompletionProposal proposal, uint keyval, gdk.types.ModifierType state) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_source_completion_provider_key_activates(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null, keyval, state);
@@ -163,7 +163,7 @@ template CompletionProviderT()
         proposal = a #GtkSourceCompletionProposal
       Returns: a #GPtrArray of #GtkSourceCompletionProposal or null.
   */
-  override gtksource.completion_proposal.CompletionProposal[] listAlternates(gtksource.completion_context.CompletionContext context, gtksource.completion_proposal.CompletionProposal proposal)
+  override gtksource.completion_proposal.CompletionProposal[] listAlternates(gtksource.completion_context.CompletionContext context, gtksource.completion_proposal.CompletionProposal proposal) nothrow
   {
     GPtrArray* _cretval;
     _cretval = gtk_source_completion_provider_list_alternates(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null);
@@ -185,14 +185,21 @@ template CompletionProviderT()
         cancellable = a #GCancellable or null
         callback = a callback to execute upon completion
   */
-  override void populateAsync(gtksource.completion_context.CompletionContext context, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  override void populateAsync(gtksource.completion_context.CompletionContext context, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -230,7 +237,7 @@ template CompletionProviderT()
         context = a #GtkSourceCompletionContext
         model = a #GListModel
   */
-  override void refilter(gtksource.completion_context.CompletionContext context, gio.list_model.ListModel model)
+  override void refilter(gtksource.completion_context.CompletionContext context, gio.list_model.ListModel model) nothrow
   {
     gtk_source_completion_provider_refilter(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }

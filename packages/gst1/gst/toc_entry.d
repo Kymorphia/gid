@@ -15,32 +15,32 @@ class TocEntry : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_toc_entry_get_type != &gidSymbolNotFound ? gst_toc_entry_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TocEntry self()
+  override TocEntry self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class TocEntry : gobject.boxed.Boxed
         uid = unique ID (UID) in the whole TOC.
       Returns: newly allocated #GstTocEntry structure, free it with gst_toc_entry_unref().
   */
-  this(gst.types.TocEntryType type, string uid)
+  this(gst.types.TocEntryType type, string uid) nothrow
   {
     GstTocEntry* _cretval;
     const(char)* _uid = uid.toCString(No.Alloc);
@@ -67,13 +67,13 @@ class TocEntry : gobject.boxed.Boxed
       Params:
         subentry = A #GstTocEntry
   */
-  void appendSubEntry(gst.toc_entry.TocEntry subentry)
+  void appendSubEntry(gst.toc_entry.TocEntry subentry) nothrow
   {
     gst_toc_entry_append_sub_entry(cast(GstTocEntry*)this._cPtr, subentry ? cast(GstTocEntry*)subentry._cPtr(Yes.Dup) : null);
   }
 
   /** */
-  gst.types.TocEntryType getEntryType()
+  gst.types.TocEntryType getEntryType() nothrow
   {
     GstTocEntryType _cretval;
     _cretval = gst_toc_entry_get_entry_type(cast(const(GstTocEntry)*)this._cPtr);
@@ -95,7 +95,7 @@ class TocEntry : gobject.boxed.Boxed
       Returns: true if all non-null storage pointers were filled with appropriate
         values, false otherwise.
   */
-  bool getLoop(out gst.types.TocLoopType loopType, out int repeatCount)
+  bool getLoop(out gst.types.TocLoopType loopType, out int repeatCount) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_toc_entry_get_loop(cast(const(GstTocEntry)*)this._cPtr, &loopType, cast(int*)&repeatCount);
@@ -106,7 +106,7 @@ class TocEntry : gobject.boxed.Boxed
       Gets the parent #GstTocEntry of entry.
       Returns: The parent #GstTocEntry of entry
   */
-  gst.toc_entry.TocEntry getParent()
+  gst.toc_entry.TocEntry getParent() nothrow
   {
     GstTocEntry* _cretval;
     _cretval = gst_toc_entry_get_parent(cast(GstTocEntry*)this._cPtr);
@@ -126,7 +126,7 @@ class TocEntry : gobject.boxed.Boxed
       Returns: true if all non-null storage pointers were filled with appropriate
         values, false otherwise.
   */
-  bool getStartStopTimes(out long start, out long stop)
+  bool getStartStopTimes(out long start, out long stop) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_toc_entry_get_start_stop_times(cast(const(GstTocEntry)*)this._cPtr, cast(long*)&start, cast(long*)&stop);
@@ -137,7 +137,7 @@ class TocEntry : gobject.boxed.Boxed
       Gets the sub-entries of entry.
       Returns: A #GList of #GstTocEntry of entry
   */
-  gst.toc_entry.TocEntry[] getSubEntries()
+  gst.toc_entry.TocEntry[] getSubEntries() nothrow
   {
     GList* _cretval;
     _cretval = gst_toc_entry_get_sub_entries(cast(const(GstTocEntry)*)this._cPtr);
@@ -149,7 +149,7 @@ class TocEntry : gobject.boxed.Boxed
       Gets the tags for entry.
       Returns: A #GstTagList for entry
   */
-  gst.tag_list.TagList getTags()
+  gst.tag_list.TagList getTags() nothrow
   {
     GstTagList* _cretval;
     _cretval = gst_toc_entry_get_tags(cast(const(GstTocEntry)*)this._cPtr);
@@ -161,7 +161,7 @@ class TocEntry : gobject.boxed.Boxed
       Gets the parent #GstToc of entry.
       Returns: The parent #GstToc of entry
   */
-  gst.toc.Toc getToc()
+  gst.toc.Toc getToc() nothrow
   {
     GstToc* _cretval;
     _cretval = gst_toc_entry_get_toc(cast(GstTocEntry*)this._cPtr);
@@ -173,7 +173,7 @@ class TocEntry : gobject.boxed.Boxed
       Gets the UID of entry.
       Returns: The UID of entry
   */
-  string getUid()
+  string getUid() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_toc_entry_get_uid(cast(const(GstTocEntry)*)this._cPtr);
@@ -182,7 +182,7 @@ class TocEntry : gobject.boxed.Boxed
   }
 
   /** */
-  bool isAlternative()
+  bool isAlternative() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_toc_entry_is_alternative(cast(const(GstTocEntry)*)this._cPtr);
@@ -190,7 +190,7 @@ class TocEntry : gobject.boxed.Boxed
   }
 
   /** */
-  bool isSequence()
+  bool isSequence() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_toc_entry_is_sequence(cast(const(GstTocEntry)*)this._cPtr);
@@ -204,7 +204,7 @@ class TocEntry : gobject.boxed.Boxed
         tags = A #GstTagList or null
         mode = A #GstTagMergeMode
   */
-  void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode)
+  void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode) nothrow
   {
     gst_toc_entry_merge_tags(cast(GstTocEntry*)this._cPtr, tags ? cast(GstTagList*)tags._cPtr(No.Dup) : null, mode);
   }
@@ -216,7 +216,7 @@ class TocEntry : gobject.boxed.Boxed
         loopType = loop_type value to set.
         repeatCount = repeat_count value to set.
   */
-  void setLoop(gst.types.TocLoopType loopType, int repeatCount)
+  void setLoop(gst.types.TocLoopType loopType, int repeatCount) nothrow
   {
     gst_toc_entry_set_loop(cast(GstTocEntry*)this._cPtr, loopType, repeatCount);
   }
@@ -228,7 +228,7 @@ class TocEntry : gobject.boxed.Boxed
         start = start value to set.
         stop = stop value to set.
   */
-  void setStartStopTimes(long start, long stop)
+  void setStartStopTimes(long start, long stop) nothrow
   {
     gst_toc_entry_set_start_stop_times(cast(GstTocEntry*)this._cPtr, start, stop);
   }
@@ -239,7 +239,7 @@ class TocEntry : gobject.boxed.Boxed
       Params:
         tags = A #GstTagList or null
   */
-  void setTags(gst.tag_list.TagList tags = null)
+  void setTags(gst.tag_list.TagList tags = null) nothrow
   {
     gst_toc_entry_set_tags(cast(GstTocEntry*)this._cPtr, tags ? cast(GstTagList*)tags._cPtr(Yes.Dup) : null);
   }

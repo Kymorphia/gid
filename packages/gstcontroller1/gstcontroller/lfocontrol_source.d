@@ -24,26 +24,26 @@ class LFOControlSource : gst.control_source.ControlSource
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_lfo_control_source_get_type != &gidSymbolNotFound ? gst_lfo_control_source_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override LFOControlSource self()
+  override LFOControlSource self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class LFOControlSource : gst.control_source.ControlSource
       Get builder for [gstcontroller.lfocontrol_source.LFOControlSource]
       Returns: New builder object
   */
-  static LFOControlSourceGidBuilder builder()
+  static LFOControlSourceGidBuilder builder() nothrow
   {
     return new LFOControlSourceGidBuilder;
   }
@@ -61,7 +61,7 @@ class LFOControlSource : gst.control_source.ControlSource
       Get `amplitude` property.
       Returns: Specifies the amplitude for the waveform of this #GstLFOControlSource.
   */
-  @property double amplitude()
+  @property double amplitude() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(double)("amplitude");
   }
@@ -71,7 +71,7 @@ class LFOControlSource : gst.control_source.ControlSource
       Params:
         propval = Specifies the amplitude for the waveform of this #GstLFOControlSource.
   */
-  @property void amplitude(double propval)
+  @property void amplitude(double propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(double)("amplitude", propval);
   }
@@ -82,7 +82,7 @@ class LFOControlSource : gst.control_source.ControlSource
         of this #GstLFOControlSource. It should be large enough
         so that the period is longer than one nanosecond.
   */
-  @property double frequency()
+  @property double frequency() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(double)("frequency");
   }
@@ -94,7 +94,7 @@ class LFOControlSource : gst.control_source.ControlSource
           of this #GstLFOControlSource. It should be large enough
           so that the period is longer than one nanosecond.
   */
-  @property void frequency(double propval)
+  @property void frequency(double propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(double)("frequency", propval);
   }
@@ -103,7 +103,7 @@ class LFOControlSource : gst.control_source.ControlSource
       Get `offset` property.
       Returns: Specifies the value offset for the waveform of this #GstLFOControlSource.
   */
-  @property double offset()
+  @property double offset() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(double)("offset");
   }
@@ -113,7 +113,7 @@ class LFOControlSource : gst.control_source.ControlSource
       Params:
         propval = Specifies the value offset for the waveform of this #GstLFOControlSource.
   */
-  @property void offset(double propval)
+  @property void offset(double propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(double)("offset", propval);
   }
@@ -126,7 +126,7 @@ class LFOControlSource : gst.control_source.ControlSource
         To get a n nanosecond shift to the left use
         "(GST_SECOND / frequency) - n".
   */
-  @property ulong timeshift()
+  @property ulong timeshift() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("timeshift");
   }
@@ -140,7 +140,7 @@ class LFOControlSource : gst.control_source.ControlSource
           To get a n nanosecond shift to the left use
           "(GST_SECOND / frequency) - n".
   */
-  @property void timeshift(ulong propval)
+  @property void timeshift(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("timeshift", propval);
   }
@@ -149,7 +149,7 @@ class LFOControlSource : gst.control_source.ControlSource
       Get `waveform` property.
       Returns: Specifies the waveform that should be used for this #GstLFOControlSource.
   */
-  @property gstcontroller.types.LFOWaveform waveform()
+  @property gstcontroller.types.LFOWaveform waveform() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gstcontroller.types.LFOWaveform)("waveform");
   }
@@ -159,7 +159,7 @@ class LFOControlSource : gst.control_source.ControlSource
       Params:
         propval = Specifies the waveform that should be used for this #GstLFOControlSource.
   */
-  @property void waveform(gstcontroller.types.LFOWaveform propval)
+  @property void waveform(gstcontroller.types.LFOWaveform propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gstcontroller.types.LFOWaveform)("waveform", propval);
   }
@@ -168,7 +168,7 @@ class LFOControlSource : gst.control_source.ControlSource
       This returns a new, unbound #GstLFOControlSource.
       Returns: a new, unbound #GstLFOControlSource.
   */
-  this()
+  this() nothrow
   {
     GstControlSource* _cretval;
     _cretval = gst_lfo_control_source_new();
@@ -186,7 +186,7 @@ class LFOControlSourceGidBuilderImpl(T) : gst.control_source.ControlSourceGidBui
         propval = Specifies the amplitude for the waveform of this #GstLFOControlSource.
       Returns: Builder instance for fluent chaining
   */
-  T amplitude(double propval)
+  T amplitude(double propval) nothrow
   {
     return setProperty("amplitude", propval);
   }
@@ -199,7 +199,7 @@ class LFOControlSourceGidBuilderImpl(T) : gst.control_source.ControlSourceGidBui
           so that the period is longer than one nanosecond.
       Returns: Builder instance for fluent chaining
   */
-  T frequency(double propval)
+  T frequency(double propval) nothrow
   {
     return setProperty("frequency", propval);
   }
@@ -210,7 +210,7 @@ class LFOControlSourceGidBuilderImpl(T) : gst.control_source.ControlSourceGidBui
         propval = Specifies the value offset for the waveform of this #GstLFOControlSource.
       Returns: Builder instance for fluent chaining
   */
-  T offset(double propval)
+  T offset(double propval) nothrow
   {
     return setProperty("offset", propval);
   }
@@ -225,7 +225,7 @@ class LFOControlSourceGidBuilderImpl(T) : gst.control_source.ControlSourceGidBui
           "(GST_SECOND / frequency) - n".
       Returns: Builder instance for fluent chaining
   */
-  T timeshift(ulong propval)
+  T timeshift(ulong propval) nothrow
   {
     return setProperty("timeshift", propval);
   }
@@ -236,7 +236,7 @@ class LFOControlSourceGidBuilderImpl(T) : gst.control_source.ControlSourceGidBui
         propval = Specifies the waveform that should be used for this #GstLFOControlSource.
       Returns: Builder instance for fluent chaining
   */
-  T waveform(gstcontroller.types.LFOWaveform propval)
+  T waveform(gstcontroller.types.LFOWaveform propval) nothrow
   {
     return setProperty("waveform", propval);
   }
@@ -249,7 +249,7 @@ final class LFOControlSourceGidBuilder : LFOControlSourceGidBuilderImpl!LFOContr
       Create object from builder.
       Returns: New object
   */
-  LFOControlSource build()
+  LFOControlSource build() nothrow
   {
     return new LFOControlSource(cast(void*)createGObject(LFOControlSource._getGType), Yes.Take);
   }

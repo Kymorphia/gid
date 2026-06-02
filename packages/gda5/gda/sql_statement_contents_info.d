@@ -15,11 +15,8 @@ class SqlStatementContentsInfo
   GdaSqlStatementContentsInfo _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.sql_statement_contents_info.SqlStatementContentsInfo");
-
     _cInstance = *cast(GdaSqlStatementContentsInfo*)ptr;
 
     if (take)
@@ -27,31 +24,31 @@ class SqlStatementContentsInfo
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
 
   /** */
-  @property gda.types.SqlStatementType type()
+  @property gda.types.SqlStatementType type() nothrow
   {
     return cast(gda.types.SqlStatementType)(cast(GdaSqlStatementContentsInfo*)this._cPtr).type;
   }
 
   /** */
-  @property void type(gda.types.SqlStatementType propval)
+  @property void type(gda.types.SqlStatementType propval) nothrow
   {
     (cast(GdaSqlStatementContentsInfo*)this._cPtr).type = cast(GdaSqlStatementType)propval;
   }
 
   /** */
-  @property string name()
+  @property string name() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaSqlStatementContentsInfo*)this._cPtr).name);
   }
 
   /** */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaSqlStatementContentsInfo*)this._cPtr).name);
     dToC(propval, cast(void*)&(cast(GdaSqlStatementContentsInfo*)this._cPtr).name);
@@ -61,7 +58,7 @@ class SqlStatementContentsInfo
   alias ConstructFuncType = extern(C) void* function();
 
   /** */
-  @property ConstructFuncType construct()
+  @property ConstructFuncType construct() nothrow
   {
     return (cast(GdaSqlStatementContentsInfo*)this._cPtr).construct;
   }
@@ -70,7 +67,7 @@ class SqlStatementContentsInfo
   alias FreeFuncType = extern(C) void function(void* stm);
 
   /** */
-  @property FreeFuncType free()
+  @property FreeFuncType free() nothrow
   {
     return (cast(GdaSqlStatementContentsInfo*)this._cPtr).free;
   }
@@ -79,7 +76,7 @@ class SqlStatementContentsInfo
   alias CopyFuncType = extern(C) void* function(void* stm);
 
   /** */
-  @property CopyFuncType copy()
+  @property CopyFuncType copy() nothrow
   {
     return (cast(GdaSqlStatementContentsInfo*)this._cPtr).copy;
   }
@@ -88,7 +85,7 @@ class SqlStatementContentsInfo
   alias SerializeFuncType = extern(C) char* function(void* stm);
 
   /** */
-  @property SerializeFuncType serialize()
+  @property SerializeFuncType serialize() nothrow
   {
     return (cast(GdaSqlStatementContentsInfo*)this._cPtr).serialize;
   }

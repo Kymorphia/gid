@@ -15,26 +15,26 @@ class Mark : gtk.text_mark.TextMark
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_mark_get_type != &gidSymbolNotFound ? gtk_source_mark_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Mark self()
+  override Mark self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class Mark : gtk.text_mark.TextMark
       Get builder for [gtksource.mark.Mark]
       Returns: New builder object
   */
-  static MarkGidBuilder builder()
+  static MarkGidBuilder builder() nothrow
   {
     return new MarkGidBuilder;
   }
@@ -53,7 +53,7 @@ class Mark : gtk.text_mark.TextMark
       Returns: The category of the #GtkSourceMark, classifies the mark and controls
         which pixbuf is used and with which priority it is drawn.
   */
-  @property string category()
+  @property string category() nothrow
   {
     return getCategory();
   }
@@ -73,7 +73,7 @@ class Mark : gtk.text_mark.TextMark
             to "error" category).
       Returns: a new #GtkSourceMark that can be added using [gtk.text_buffer.TextBuffer.addMark].
   */
-  this(string name, string category)
+  this(string name, string category) nothrow
   {
     GtkSourceMark* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -86,7 +86,7 @@ class Mark : gtk.text_mark.TextMark
       Returns the mark category.
       Returns: the category of the #GtkSourceMark.
   */
-  string getCategory()
+  string getCategory() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_mark_get_category(cast(GtkSourceMark*)this._cPtr);
@@ -104,7 +104,7 @@ class Mark : gtk.text_mark.TextMark
         category = a string specifying the mark category, or null.
       Returns: the next #GtkSourceMark, or null.
   */
-  gtksource.mark.Mark next(string category = null)
+  gtksource.mark.Mark next(string category = null) nothrow
   {
     GtkSourceMark* _cretval;
     const(char)* _category = category.toCString(No.Alloc);
@@ -123,7 +123,7 @@ class Mark : gtk.text_mark.TextMark
         category = a string specifying the mark category, or null.
       Returns: the previous #GtkSourceMark, or null.
   */
-  gtksource.mark.Mark prev(string category)
+  gtksource.mark.Mark prev(string category) nothrow
   {
     GtkSourceMark* _cretval;
     const(char)* _category = category.toCString(No.Alloc);
@@ -144,7 +144,7 @@ class MarkGidBuilderImpl(T) : gtk.text_mark.TextMarkGidBuilderImpl!T
           which pixbuf is used and with which priority it is drawn.
       Returns: Builder instance for fluent chaining
   */
-  T category(string propval)
+  T category(string propval) nothrow
   {
     return setProperty("category", propval);
   }
@@ -157,7 +157,7 @@ final class MarkGidBuilder : MarkGidBuilderImpl!MarkGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Mark build()
+  Mark build() nothrow
   {
     return new Mark(cast(void*)createGObject(Mark._getGType), Yes.Take);
   }

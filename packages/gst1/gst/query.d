@@ -49,39 +49,39 @@ class Query : gobject.boxed.Boxed
       Params:
         type = the #GstQueryType
   */
-  this(gst.types.QueryType type = gst.types.QueryType.init)
+  this(gst.types.QueryType type = gst.types.QueryType.init) nothrow
   {
     super(gMalloc(GstQuery.sizeof), Yes.Take);
     this.type = type;
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_query_get_type != &gidSymbolNotFound ? gst_query_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Query self()
+  override Query self() nothrow
   {
     return this;
   }
@@ -90,7 +90,7 @@ class Query : gobject.boxed.Boxed
       Get `miniObject` field.
       Returns: The parent #GstMiniObject type
   */
-  @property gst.mini_object.MiniObject miniObject()
+  @property gst.mini_object.MiniObject miniObject() nothrow
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstQuery*)this._cPtr).miniObject);
   }
@@ -99,7 +99,7 @@ class Query : gobject.boxed.Boxed
       Get `type` field.
       Returns: the #GstQueryType
   */
-  @property gst.types.QueryType type()
+  @property gst.types.QueryType type() nothrow
   {
     return cast(gst.types.QueryType)(cast(GstQuery*)this._cPtr).type;
   }
@@ -109,7 +109,7 @@ class Query : gobject.boxed.Boxed
       Params:
         propval = the #GstQueryType
   */
-  @property void type(gst.types.QueryType propval)
+  @property void type(gst.types.QueryType propval) nothrow
   {
     (cast(GstQuery*)this._cPtr).type = cast(GstQueryType)propval;
   }
@@ -123,7 +123,7 @@ class Query : gobject.boxed.Boxed
         caps = a fixed #GstCaps
       Returns: a new #GstQuery
   */
-  static gst.query.Query newAcceptCaps(gst.caps.Caps caps)
+  static gst.query.Query newAcceptCaps(gst.caps.Caps caps) nothrow
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_accept_caps(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
@@ -141,7 +141,7 @@ class Query : gobject.boxed.Boxed
         needPool = return a pool
       Returns: a new #GstQuery
   */
-  static gst.query.Query newAllocation(gst.caps.Caps caps, bool needPool)
+  static gst.query.Query newAllocation(gst.caps.Caps caps, bool needPool) nothrow
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_allocation(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, needPool);
@@ -155,7 +155,7 @@ class Query : gobject.boxed.Boxed
       Free-function: gst_query_unref()
       Returns: a new #GstQuery
   */
-  static gst.query.Query newBitrate()
+  static gst.query.Query newBitrate() nothrow
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_bitrate();
@@ -173,7 +173,7 @@ class Query : gobject.boxed.Boxed
         format = the default #GstFormat for the new query
       Returns: a new #GstQuery
   */
-  static gst.query.Query newBuffering(gst.types.Format format)
+  static gst.query.Query newBuffering(gst.types.Format format) nothrow
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_buffering(format);
@@ -207,7 +207,7 @@ class Query : gobject.boxed.Boxed
         filter = a filter
       Returns: a new #GstQuery
   */
-  static gst.query.Query newCaps(gst.caps.Caps filter)
+  static gst.query.Query newCaps(gst.caps.Caps filter) nothrow
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_caps(filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
@@ -224,7 +224,7 @@ class Query : gobject.boxed.Boxed
         contextType = Context type to query
       Returns: a new #GstQuery
   */
-  static gst.query.Query newContext(string contextType)
+  static gst.query.Query newContext(string contextType) nothrow
   {
     GstQuery* _cretval;
     const(char)* _contextType = contextType.toCString(No.Alloc);
@@ -246,7 +246,7 @@ class Query : gobject.boxed.Boxed
         destFormat = the target #GstFormat
       Returns: a #GstQuery
   */
-  static gst.query.Query newConvert(gst.types.Format srcFormat, long value, gst.types.Format destFormat)
+  static gst.query.Query newConvert(gst.types.Format srcFormat, long value, gst.types.Format destFormat) nothrow
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_convert(srcFormat, value, destFormat);
@@ -265,7 +265,7 @@ class Query : gobject.boxed.Boxed
         structure = a structure for the query
       Returns: a new #GstQuery
   */
-  static gst.query.Query newCustom(gst.types.QueryType type, gst.structure.Structure structure = null)
+  static gst.query.Query newCustom(gst.types.QueryType type, gst.structure.Structure structure = null) nothrow
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_custom(type, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
@@ -279,7 +279,7 @@ class Query : gobject.boxed.Boxed
       Free-function: gst_query_unref()
       Returns: a new #GstQuery
   */
-  static gst.query.Query newDrain()
+  static gst.query.Query newDrain() nothrow
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_drain();
@@ -298,7 +298,7 @@ class Query : gobject.boxed.Boxed
         format = the #GstFormat for this duration query
       Returns: a new #GstQuery
   */
-  static gst.query.Query newDuration(gst.types.Format format)
+  static gst.query.Query newDuration(gst.types.Format format) nothrow
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_duration(format);
@@ -313,7 +313,7 @@ class Query : gobject.boxed.Boxed
       Free-function: gst_query_unref()
       Returns: a new #GstQuery
   */
-  static gst.query.Query newFormats()
+  static gst.query.Query newFormats() nothrow
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_formats();
@@ -330,7 +330,7 @@ class Query : gobject.boxed.Boxed
       Free-function: gst_query_unref()
       Returns: a #GstQuery
   */
-  static gst.query.Query newLatency()
+  static gst.query.Query newLatency() nothrow
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_latency();
@@ -349,7 +349,7 @@ class Query : gobject.boxed.Boxed
         format = the default #GstFormat for the new query
       Returns: a new #GstQuery
   */
-  static gst.query.Query newPosition(gst.types.Format format)
+  static gst.query.Query newPosition(gst.types.Format format) nothrow
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_position(format);
@@ -363,7 +363,7 @@ class Query : gobject.boxed.Boxed
       Free-function: gst_query_unref()
       Returns: a new #GstQuery
   */
-  static gst.query.Query newScheduling()
+  static gst.query.Query newScheduling() nothrow
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_scheduling();
@@ -381,7 +381,7 @@ class Query : gobject.boxed.Boxed
         format = the default #GstFormat for the new query
       Returns: a new #GstQuery
   */
-  static gst.query.Query newSeeking(gst.types.Format format)
+  static gst.query.Query newSeeking(gst.types.Format format) nothrow
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_seeking(format);
@@ -400,7 +400,7 @@ class Query : gobject.boxed.Boxed
         format = the #GstFormat for the new query
       Returns: a new #GstQuery
   */
-  static gst.query.Query newSegment(gst.types.Format format)
+  static gst.query.Query newSegment(gst.types.Format format) nothrow
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_segment(format);
@@ -414,7 +414,7 @@ class Query : gobject.boxed.Boxed
       Free-function: gst_query_unref()
       Returns: a new #GstQuery
   */
-  static gst.query.Query newSelectable()
+  static gst.query.Query newSelectable() nothrow
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_selectable();
@@ -430,7 +430,7 @@ class Query : gobject.boxed.Boxed
       Free-function: gst_query_unref()
       Returns: a new #GstQuery
   */
-  static gst.query.Query newUri()
+  static gst.query.Query newUri() nothrow
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_uri();
@@ -445,7 +445,7 @@ class Query : gobject.boxed.Boxed
         api = the metadata API
         params = API specific parameters
   */
-  void addAllocationMeta(gobject.types.GType api, gst.structure.Structure params = null)
+  void addAllocationMeta(gobject.types.GType api, gst.structure.Structure params = null) nothrow
   {
     gst_query_add_allocation_meta(cast(GstQuery*)this._cPtr, api, params ? cast(const(GstStructure)*)params._cPtr(No.Dup) : null);
   }
@@ -457,7 +457,7 @@ class Query : gobject.boxed.Boxed
         allocator = the memory allocator
         params = a #GstAllocationParams
   */
-  void addAllocationParam(gst.allocator.Allocator allocator, gst.allocation_params.AllocationParams params)
+  void addAllocationParam(gst.allocator.Allocator allocator, gst.allocation_params.AllocationParams params) nothrow
   {
     gst_query_add_allocation_param(cast(GstQuery*)this._cPtr, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)&params);
   }
@@ -471,7 +471,7 @@ class Query : gobject.boxed.Boxed
         minBuffers = the min buffers
         maxBuffers = the max buffers
   */
-  void addAllocationPool(gst.buffer_pool.BufferPool pool, uint size, uint minBuffers, uint maxBuffers)
+  void addAllocationPool(gst.buffer_pool.BufferPool pool, uint size, uint minBuffers, uint maxBuffers) nothrow
   {
     gst_query_add_allocation_pool(cast(GstQuery*)this._cPtr, pool ? cast(GstBufferPool*)pool._cPtr(No.Dup) : null, size, minBuffers, maxBuffers);
   }
@@ -485,7 +485,7 @@ class Query : gobject.boxed.Boxed
         stop = stop position of the range
       Returns: a #gboolean indicating if the range was added or not.
   */
-  bool addBufferingRange(long start, long stop)
+  bool addBufferingRange(long start, long stop) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_query_add_buffering_range(cast(GstQuery*)this._cPtr, start, stop);
@@ -498,7 +498,7 @@ class Query : gobject.boxed.Boxed
       Params:
         mode = a #GstPadMode
   */
-  void addSchedulingMode(gst.types.PadMode mode)
+  void addSchedulingMode(gst.types.PadMode mode) nothrow
   {
     gst_query_add_scheduling_mode(cast(GstQuery*)this._cPtr, mode);
   }
@@ -513,7 +513,7 @@ class Query : gobject.boxed.Boxed
         index = the index
       Returns: true when api is in the list of metadata.
   */
-  bool findAllocationMeta(gobject.types.GType api, out uint index)
+  bool findAllocationMeta(gobject.types.GType api, out uint index) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_query_find_allocation_meta(cast(GstQuery*)this._cPtr, api, cast(uint*)&index);
@@ -525,7 +525,7 @@ class Query : gobject.boxed.Boxed
       meta API array of the query's structure.
       Returns: the metadata API array size as a #guint.
   */
-  uint getNAllocationMetas()
+  uint getNAllocationMetas() nothrow
   {
     uint _retval;
     _retval = gst_query_get_n_allocation_metas(cast(GstQuery*)this._cPtr);
@@ -542,7 +542,7 @@ class Query : gobject.boxed.Boxed
       allocators should be ordered by preference with the preferred one first.
       Returns: the allocator array size as a #guint.
   */
-  uint getNAllocationParams()
+  uint getNAllocationParams() nothrow
   {
     uint _retval;
     _retval = gst_query_get_n_allocation_params(cast(GstQuery*)this._cPtr);
@@ -554,7 +554,7 @@ class Query : gobject.boxed.Boxed
       pool array of the query's structure.
       Returns: the pool array size as a #guint.
   */
-  uint getNAllocationPools()
+  uint getNAllocationPools() nothrow
   {
     uint _retval;
     _retval = gst_query_get_n_allocation_pools(cast(GstQuery*)this._cPtr);
@@ -566,7 +566,7 @@ class Query : gobject.boxed.Boxed
       buffered-ranges array of the query's structure.
       Returns: the range array size as a #guint.
   */
-  uint getNBufferingRanges()
+  uint getNBufferingRanges() nothrow
   {
     uint _retval;
     _retval = gst_query_get_n_buffering_ranges(cast(GstQuery*)this._cPtr);
@@ -578,7 +578,7 @@ class Query : gobject.boxed.Boxed
       scheduling mode array of the query's structure.
       Returns: the scheduling mode array size as a #guint.
   */
-  uint getNSchedulingModes()
+  uint getNSchedulingModes() nothrow
   {
     uint _retval;
     _retval = gst_query_get_n_scheduling_modes(cast(GstQuery*)this._cPtr);
@@ -591,7 +591,7 @@ class Query : gobject.boxed.Boxed
             structure is still owned by the query and will therefore be freed when the
             query is unreffed.
   */
-  gst.structure.Structure getStructure()
+  gst.structure.Structure getStructure() nothrow
   {
     const(GstStructure)* _cretval;
     _cretval = gst_query_get_structure(cast(GstQuery*)this._cPtr);
@@ -612,7 +612,7 @@ class Query : gobject.boxed.Boxed
         mode = the scheduling mode
       Returns: true when mode is in the list of scheduling modes.
   */
-  bool hasSchedulingMode(gst.types.PadMode mode)
+  bool hasSchedulingMode(gst.types.PadMode mode) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_query_has_scheduling_mode(cast(GstQuery*)this._cPtr, mode);
@@ -629,7 +629,7 @@ class Query : gobject.boxed.Boxed
       Returns: true when mode is in the list of scheduling modes
            and flags are compatible with query flags.
   */
-  bool hasSchedulingModeWithFlags(gst.types.PadMode mode, gst.types.SchedulingFlags flags)
+  bool hasSchedulingModeWithFlags(gst.types.PadMode mode, gst.types.SchedulingFlags flags) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_query_has_scheduling_mode_with_flags(cast(GstQuery*)this._cPtr, mode, flags);
@@ -643,7 +643,7 @@ class Query : gobject.boxed.Boxed
       Params:
         caps = A pointer to the caps
   */
-  void parseAcceptCaps(out gst.caps.Caps caps)
+  void parseAcceptCaps(out gst.caps.Caps caps) nothrow
   {
     GstCaps* _caps;
     gst_query_parse_accept_caps(cast(GstQuery*)this._cPtr, &_caps);
@@ -656,7 +656,7 @@ class Query : gobject.boxed.Boxed
       Params:
         result = location for the result
   */
-  void parseAcceptCapsResult(out bool result)
+  void parseAcceptCapsResult(out bool result) nothrow
   {
     gboolean _result;
     gst_query_parse_accept_caps_result(cast(GstQuery*)this._cPtr, &_result);
@@ -675,7 +675,7 @@ class Query : gobject.boxed.Boxed
         caps = The #GstCaps
         needPool = Whether a #GstBufferPool is needed
   */
-  void parseAllocation(out gst.caps.Caps caps, out bool needPool)
+  void parseAllocation(out gst.caps.Caps caps, out bool needPool) nothrow
   {
     GstCaps* _caps;
     gboolean _needPool;
@@ -690,7 +690,7 @@ class Query : gobject.boxed.Boxed
       Params:
         nominalBitrate = The resulting bitrate in bits per second
   */
-  void parseBitrate(out uint nominalBitrate)
+  void parseBitrate(out uint nominalBitrate) nothrow
   {
     gst_query_parse_bitrate(cast(GstQuery*)this._cPtr, cast(uint*)&nominalBitrate);
   }
@@ -703,7 +703,7 @@ class Query : gobject.boxed.Boxed
         busy = if buffering is busy, or null
         percent = a buffering percent, or null
   */
-  void parseBufferingPercent(out bool busy, out int percent)
+  void parseBufferingPercent(out bool busy, out int percent) nothrow
   {
     gboolean _busy;
     gst_query_parse_buffering_percent(cast(GstQuery*)this._cPtr, &_busy, cast(int*)&percent);
@@ -723,7 +723,7 @@ class Query : gobject.boxed.Boxed
         estimatedTotal = estimated total amount of download
               time remaining in milliseconds, or null
   */
-  void parseBufferingRange(out gst.types.Format format, out long start, out long stop, out long estimatedTotal)
+  void parseBufferingRange(out gst.types.Format format, out long start, out long stop, out long estimatedTotal) nothrow
   {
     gst_query_parse_buffering_range(cast(GstQuery*)this._cPtr, &format, cast(long*)&start, cast(long*)&stop, cast(long*)&estimatedTotal);
   }
@@ -738,7 +738,7 @@ class Query : gobject.boxed.Boxed
         bufferingLeft = amount of buffering time left in
               milliseconds, or null
   */
-  void parseBufferingStats(out gst.types.BufferingMode mode, out int avgIn, out int avgOut, out long bufferingLeft)
+  void parseBufferingStats(out gst.types.BufferingMode mode, out int avgIn, out int avgOut, out long bufferingLeft) nothrow
   {
     gst_query_parse_buffering_stats(cast(GstQuery*)this._cPtr, &mode, cast(int*)&avgIn, cast(int*)&avgOut, cast(long*)&bufferingLeft);
   }
@@ -750,7 +750,7 @@ class Query : gobject.boxed.Boxed
       Params:
         filter = A pointer to the caps filter
   */
-  void parseCaps(out gst.caps.Caps filter)
+  void parseCaps(out gst.caps.Caps filter) nothrow
   {
     GstCaps* _filter;
     gst_query_parse_caps(cast(GstQuery*)this._cPtr, &_filter);
@@ -764,7 +764,7 @@ class Query : gobject.boxed.Boxed
       Params:
         caps = A pointer to the caps
   */
-  void parseCapsResult(out gst.caps.Caps caps)
+  void parseCapsResult(out gst.caps.Caps caps) nothrow
   {
     GstCaps* _caps;
     gst_query_parse_caps_result(cast(GstQuery*)this._cPtr, &_caps);
@@ -778,7 +778,7 @@ class Query : gobject.boxed.Boxed
       Params:
         context = A pointer to store the #GstContext
   */
-  void parseContext(out gst.context.Context context)
+  void parseContext(out gst.context.Context context) nothrow
   {
     GstContext* _context;
     gst_query_parse_context(cast(GstQuery*)this._cPtr, &_context);
@@ -792,7 +792,7 @@ class Query : gobject.boxed.Boxed
         contextType = the context type, or null
       Returns: a #gboolean indicating if the parsing succeeded.
   */
-  bool parseContextType(out string contextType)
+  bool parseContextType(out string contextType) nothrow
   {
     bool _retval;
     char* _contextType;
@@ -814,7 +814,7 @@ class Query : gobject.boxed.Boxed
         destValue = the storage for the destination value,
               or null
   */
-  void parseConvert(out gst.types.Format srcFormat, out long srcValue, out gst.types.Format destFormat, out long destValue)
+  void parseConvert(out gst.types.Format srcFormat, out long srcValue, out gst.types.Format destFormat, out long destValue) nothrow
   {
     gst_query_parse_convert(cast(GstQuery*)this._cPtr, &srcFormat, cast(long*)&srcValue, &destFormat, cast(long*)&destValue);
   }
@@ -828,7 +828,7 @@ class Query : gobject.boxed.Boxed
               value, or null.
         duration = the storage for the total duration, or null.
   */
-  void parseDuration(out gst.types.Format format, out long duration)
+  void parseDuration(out gst.types.Format format, out long duration) nothrow
   {
     gst_query_parse_duration(cast(GstQuery*)this._cPtr, &format, cast(long*)&duration);
   }
@@ -841,7 +841,7 @@ class Query : gobject.boxed.Boxed
         minLatency = the storage for the min latency or null
         maxLatency = the storage for the max latency or null
   */
-  void parseLatency(out bool live, out gst.types.ClockTime minLatency, out gst.types.ClockTime maxLatency)
+  void parseLatency(out bool live, out gst.types.ClockTime minLatency, out gst.types.ClockTime maxLatency) nothrow
   {
     gboolean _live;
     gst_query_parse_latency(cast(GstQuery*)this._cPtr, &_live, cast(GstClockTime*)&minLatency, cast(GstClockTime*)&maxLatency);
@@ -854,7 +854,7 @@ class Query : gobject.boxed.Boxed
       Params:
         nFormats = the number of formats in this query.
   */
-  void parseNFormats(out uint nFormats)
+  void parseNFormats(out uint nFormats) nothrow
   {
     gst_query_parse_n_formats(cast(GstQuery*)this._cPtr, cast(uint*)&nFormats);
   }
@@ -868,7 +868,7 @@ class Query : gobject.boxed.Boxed
         params = API specific parameters
       Returns: a #GType of the metadata API at index.
   */
-  gobject.types.GType parseNthAllocationMeta(uint index, out gst.structure.Structure params)
+  gobject.types.GType parseNthAllocationMeta(uint index, out gst.structure.Structure params) nothrow
   {
     gobject.types.GType _retval;
     const(GstStructure)* _params;
@@ -886,7 +886,7 @@ class Query : gobject.boxed.Boxed
         allocator = variable to hold the result
         params = parameters for the allocator
   */
-  void parseNthAllocationParam(uint index, out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
+  void parseNthAllocationParam(uint index, out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params) nothrow
   {
     GstAllocator* _allocator;
     gst_query_parse_nth_allocation_param(cast(GstQuery*)this._cPtr, index, &_allocator, cast(GstAllocationParams*)&params);
@@ -905,7 +905,7 @@ class Query : gobject.boxed.Boxed
         minBuffers = the min buffers
         maxBuffers = the max buffers
   */
-  void parseNthAllocationPool(uint index, out gst.buffer_pool.BufferPool pool, out uint size, out uint minBuffers, out uint maxBuffers)
+  void parseNthAllocationPool(uint index, out gst.buffer_pool.BufferPool pool, out uint size, out uint minBuffers, out uint maxBuffers) nothrow
   {
     GstBufferPool* _pool;
     gst_query_parse_nth_allocation_pool(cast(GstQuery*)this._cPtr, index, &_pool, cast(uint*)&size, cast(uint*)&minBuffers, cast(uint*)&maxBuffers);
@@ -922,7 +922,7 @@ class Query : gobject.boxed.Boxed
         stop = the stop position to set, or null
       Returns: a #gboolean indicating if the parsing succeeded.
   */
-  bool parseNthBufferingRange(uint index, out long start, out long stop)
+  bool parseNthBufferingRange(uint index, out long start, out long stop) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_query_parse_nth_buffering_range(cast(GstQuery*)this._cPtr, index, cast(long*)&start, cast(long*)&stop);
@@ -938,7 +938,7 @@ class Query : gobject.boxed.Boxed
         nth = the nth format to retrieve.
         format = a pointer to store the nth format
   */
-  void parseNthFormat(uint nth, out gst.types.Format format)
+  void parseNthFormat(uint nth, out gst.types.Format format) nothrow
   {
     gst_query_parse_nth_format(cast(GstQuery*)this._cPtr, nth, &format);
   }
@@ -951,7 +951,7 @@ class Query : gobject.boxed.Boxed
         index = position in the scheduling modes array to read
       Returns: a #GstPadMode of the scheduling mode at index.
   */
-  gst.types.PadMode parseNthSchedulingMode(uint index)
+  gst.types.PadMode parseNthSchedulingMode(uint index) nothrow
   {
     GstPadMode _cretval;
     _cretval = gst_query_parse_nth_scheduling_mode(cast(GstQuery*)this._cPtr, index);
@@ -968,7 +968,7 @@ class Query : gobject.boxed.Boxed
               position values (may be null)
         cur = the storage for the current position (may be null)
   */
-  void parsePosition(out gst.types.Format format, out long cur)
+  void parsePosition(out gst.types.Format format, out long cur) nothrow
   {
     gst_query_parse_position(cast(GstQuery*)this._cPtr, &format, cast(long*)&cur);
   }
@@ -982,7 +982,7 @@ class Query : gobject.boxed.Boxed
         maxsize = the suggested maximum size of pull requests:
         align_ = the suggested alignment of pull requests
   */
-  void parseScheduling(out gst.types.SchedulingFlags flags, out int minsize, out int maxsize, out int align_)
+  void parseScheduling(out gst.types.SchedulingFlags flags, out int minsize, out int maxsize, out int align_) nothrow
   {
     gst_query_parse_scheduling(cast(GstQuery*)this._cPtr, &flags, cast(int*)&minsize, cast(int*)&maxsize, cast(int*)&align_);
   }
@@ -999,7 +999,7 @@ class Query : gobject.boxed.Boxed
         segmentStart = the segment_start to set, or null
         segmentEnd = the segment_end to set, or null
   */
-  void parseSeeking(out gst.types.Format format, out bool seekable, out long segmentStart, out long segmentEnd)
+  void parseSeeking(out gst.types.Format format, out bool seekable, out long segmentStart, out long segmentEnd) nothrow
   {
     gboolean _seekable;
     gst_query_parse_seeking(cast(GstQuery*)this._cPtr, &format, &_seekable, cast(long*)&segmentStart, cast(long*)&segmentEnd);
@@ -1019,7 +1019,7 @@ class Query : gobject.boxed.Boxed
         startValue = the storage for the start value, or null
         stopValue = the storage for the stop value, or null
   */
-  void parseSegment(out double rate, out gst.types.Format format, out long startValue, out long stopValue)
+  void parseSegment(out double rate, out gst.types.Format format, out long startValue, out long stopValue) nothrow
   {
     gst_query_parse_segment(cast(GstQuery*)this._cPtr, cast(double*)&rate, &format, cast(long*)&startValue, cast(long*)&stopValue);
   }
@@ -1030,7 +1030,7 @@ class Query : gobject.boxed.Boxed
       Params:
         selectable = The resulting stream selection capability
   */
-  void parseSelectable(out bool selectable)
+  void parseSelectable(out bool selectable) nothrow
   {
     gboolean _selectable;
     gst_query_parse_selectable(cast(GstQuery*)this._cPtr, &_selectable);
@@ -1046,7 +1046,7 @@ class Query : gobject.boxed.Boxed
         uri = the storage for the current URI
               (may be null)
   */
-  void parseUri(out string uri)
+  void parseUri(out string uri) nothrow
   {
     char* _uri;
     gst_query_parse_uri(cast(GstQuery*)this._cPtr, &_uri);
@@ -1062,7 +1062,7 @@ class Query : gobject.boxed.Boxed
         uri = the storage for the redirect URI
               (may be null)
   */
-  void parseUriRedirection(out string uri)
+  void parseUriRedirection(out string uri) nothrow
   {
     char* _uri;
     gst_query_parse_uri_redirection(cast(GstQuery*)this._cPtr, &_uri);
@@ -1079,7 +1079,7 @@ class Query : gobject.boxed.Boxed
         permanent = if the URI redirection is permanent
               (may be null)
   */
-  void parseUriRedirectionPermanent(out bool permanent)
+  void parseUriRedirectionPermanent(out bool permanent) nothrow
   {
     gboolean _permanent;
     gst_query_parse_uri_redirection_permanent(cast(GstQuery*)this._cPtr, &_permanent);
@@ -1092,7 +1092,7 @@ class Query : gobject.boxed.Boxed
       Params:
         index = position in the metadata API array to remove
   */
-  void removeNthAllocationMeta(uint index)
+  void removeNthAllocationMeta(uint index) nothrow
   {
     gst_query_remove_nth_allocation_meta(cast(GstQuery*)this._cPtr, index);
   }
@@ -1103,7 +1103,7 @@ class Query : gobject.boxed.Boxed
       Params:
         index = position in the allocation param array to remove
   */
-  void removeNthAllocationParam(uint index)
+  void removeNthAllocationParam(uint index) nothrow
   {
     gst_query_remove_nth_allocation_param(cast(GstQuery*)this._cPtr, index);
   }
@@ -1114,7 +1114,7 @@ class Query : gobject.boxed.Boxed
       Params:
         index = position in the allocation pool array to remove
   */
-  void removeNthAllocationPool(uint index)
+  void removeNthAllocationPool(uint index) nothrow
   {
     gst_query_remove_nth_allocation_pool(cast(GstQuery*)this._cPtr, index);
   }
@@ -1125,7 +1125,7 @@ class Query : gobject.boxed.Boxed
       Params:
         result = the result to set
   */
-  void setAcceptCapsResult(bool result)
+  void setAcceptCapsResult(bool result) nothrow
   {
     gst_query_set_accept_caps_result(cast(GstQuery*)this._cPtr, result);
   }
@@ -1138,7 +1138,7 @@ class Query : gobject.boxed.Boxed
       Params:
         nominalBitrate = the nominal bitrate in bits per second
   */
-  void setBitrate(uint nominalBitrate)
+  void setBitrate(uint nominalBitrate) nothrow
   {
     gst_query_set_bitrate(cast(GstQuery*)this._cPtr, nominalBitrate);
   }
@@ -1151,7 +1151,7 @@ class Query : gobject.boxed.Boxed
         busy = if buffering is busy
         percent = a buffering percent
   */
-  void setBufferingPercent(bool busy, int percent)
+  void setBufferingPercent(bool busy, int percent) nothrow
   {
     gst_query_set_buffering_percent(cast(GstQuery*)this._cPtr, busy, percent);
   }
@@ -1166,7 +1166,7 @@ class Query : gobject.boxed.Boxed
         estimatedTotal = estimated total amount of download time remaining in
               milliseconds
   */
-  void setBufferingRange(gst.types.Format format, long start, long stop, long estimatedTotal)
+  void setBufferingRange(gst.types.Format format, long start, long stop, long estimatedTotal) nothrow
   {
     gst_query_set_buffering_range(cast(GstQuery*)this._cPtr, format, start, stop, estimatedTotal);
   }
@@ -1180,7 +1180,7 @@ class Query : gobject.boxed.Boxed
         avgOut = the average output rate
         bufferingLeft = amount of buffering time left in milliseconds
   */
-  void setBufferingStats(gst.types.BufferingMode mode, int avgIn, int avgOut, long bufferingLeft)
+  void setBufferingStats(gst.types.BufferingMode mode, int avgIn, int avgOut, long bufferingLeft) nothrow
   {
     gst_query_set_buffering_stats(cast(GstQuery*)this._cPtr, mode, avgIn, avgOut, bufferingLeft);
   }
@@ -1191,7 +1191,7 @@ class Query : gobject.boxed.Boxed
       Params:
         caps = A pointer to the caps
   */
-  void setCapsResult(gst.caps.Caps caps = null)
+  void setCapsResult(gst.caps.Caps caps = null) nothrow
   {
     gst_query_set_caps_result(cast(GstQuery*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
   }
@@ -1202,7 +1202,7 @@ class Query : gobject.boxed.Boxed
       Params:
         context = the requested #GstContext
   */
-  void setContext(gst.context.Context context = null)
+  void setContext(gst.context.Context context = null) nothrow
   {
     gst_query_set_context(cast(GstQuery*)this._cPtr, context ? cast(GstContext*)context._cPtr(No.Dup) : null);
   }
@@ -1216,7 +1216,7 @@ class Query : gobject.boxed.Boxed
         destFormat = the destination #GstFormat
         destValue = the destination value
   */
-  void setConvert(gst.types.Format srcFormat, long srcValue, gst.types.Format destFormat, long destValue)
+  void setConvert(gst.types.Format srcFormat, long srcValue, gst.types.Format destFormat, long destValue) nothrow
   {
     gst_query_set_convert(cast(GstQuery*)this._cPtr, srcFormat, srcValue, destFormat, destValue);
   }
@@ -1228,7 +1228,7 @@ class Query : gobject.boxed.Boxed
         format = the #GstFormat for the duration
         duration = the duration of the stream
   */
-  void setDuration(gst.types.Format format, long duration)
+  void setDuration(gst.types.Format format, long duration) nothrow
   {
     gst_query_set_duration(cast(GstQuery*)this._cPtr, format, duration);
   }
@@ -1241,7 +1241,7 @@ class Query : gobject.boxed.Boxed
         formats = an array containing n_formats
               GstFormat values.
   */
-  void setFormatsv(gst.types.Format[] formats)
+  void setFormatsv(gst.types.Format[] formats) nothrow
   {
     int _nFormats;
     if (formats)
@@ -1259,7 +1259,7 @@ class Query : gobject.boxed.Boxed
         minLatency = the minimal latency of the upstream elements
         maxLatency = the maximal latency of the upstream elements
   */
-  void setLatency(bool live, gst.types.ClockTime minLatency, gst.types.ClockTime maxLatency)
+  void setLatency(bool live, gst.types.ClockTime minLatency, gst.types.ClockTime maxLatency) nothrow
   {
     gst_query_set_latency(cast(GstQuery*)this._cPtr, live, minLatency, maxLatency);
   }
@@ -1273,7 +1273,7 @@ class Query : gobject.boxed.Boxed
         allocator = new allocator to set
         params = parameters for the allocator
   */
-  void setNthAllocationParam(uint index, gst.allocator.Allocator allocator, gst.allocation_params.AllocationParams params)
+  void setNthAllocationParam(uint index, gst.allocator.Allocator allocator, gst.allocation_params.AllocationParams params) nothrow
   {
     gst_query_set_nth_allocation_param(cast(GstQuery*)this._cPtr, index, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)&params);
   }
@@ -1288,7 +1288,7 @@ class Query : gobject.boxed.Boxed
         minBuffers = the min buffers
         maxBuffers = the max buffers
   */
-  void setNthAllocationPool(uint index, gst.buffer_pool.BufferPool pool, uint size, uint minBuffers, uint maxBuffers)
+  void setNthAllocationPool(uint index, gst.buffer_pool.BufferPool pool, uint size, uint minBuffers, uint maxBuffers) nothrow
   {
     gst_query_set_nth_allocation_pool(cast(GstQuery*)this._cPtr, index, pool ? cast(GstBufferPool*)pool._cPtr(No.Dup) : null, size, minBuffers, maxBuffers);
   }
@@ -1300,7 +1300,7 @@ class Query : gobject.boxed.Boxed
         format = the requested #GstFormat
         cur = the position to set
   */
-  void setPosition(gst.types.Format format, long cur)
+  void setPosition(gst.types.Format format, long cur) nothrow
   {
     gst_query_set_position(cast(GstQuery*)this._cPtr, format, cur);
   }
@@ -1314,7 +1314,7 @@ class Query : gobject.boxed.Boxed
         maxsize = the suggested maximum size of pull requests
         align_ = the suggested alignment of pull requests
   */
-  void setScheduling(gst.types.SchedulingFlags flags, int minsize, int maxsize, int align_)
+  void setScheduling(gst.types.SchedulingFlags flags, int minsize, int maxsize, int align_) nothrow
   {
     gst_query_set_scheduling(cast(GstQuery*)this._cPtr, flags, minsize, maxsize, align_);
   }
@@ -1328,7 +1328,7 @@ class Query : gobject.boxed.Boxed
         segmentStart = the segment_start to set
         segmentEnd = the segment_end to set
   */
-  void setSeeking(gst.types.Format format, bool seekable, long segmentStart, long segmentEnd)
+  void setSeeking(gst.types.Format format, bool seekable, long segmentStart, long segmentEnd) nothrow
   {
     gst_query_set_seeking(cast(GstQuery*)this._cPtr, format, seekable, segmentStart, segmentEnd);
   }
@@ -1352,7 +1352,7 @@ class Query : gobject.boxed.Boxed
         startValue = the start value
         stopValue = the stop value
   */
-  void setSegment(double rate, gst.types.Format format, long startValue, long stopValue)
+  void setSegment(double rate, gst.types.Format format, long startValue, long stopValue) nothrow
   {
     gst_query_set_segment(cast(GstQuery*)this._cPtr, rate, format, startValue, stopValue);
   }
@@ -1364,7 +1364,7 @@ class Query : gobject.boxed.Boxed
       Params:
         selectable = Whether the element can handle stream selection.
   */
-  void setSelectable(bool selectable)
+  void setSelectable(bool selectable) nothrow
   {
     gst_query_set_selectable(cast(GstQuery*)this._cPtr, selectable);
   }
@@ -1375,7 +1375,7 @@ class Query : gobject.boxed.Boxed
       Params:
         uri = the URI to set
   */
-  void setUri(string uri = null)
+  void setUri(string uri = null) nothrow
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     gst_query_set_uri(cast(GstQuery*)this._cPtr, _uri);
@@ -1387,7 +1387,7 @@ class Query : gobject.boxed.Boxed
       Params:
         uri = the URI to set
   */
-  void setUriRedirection(string uri = null)
+  void setUriRedirection(string uri = null) nothrow
   {
     const(char)* _uri = uri.toCString(No.Alloc);
     gst_query_set_uri_redirection(cast(GstQuery*)this._cPtr, _uri);
@@ -1400,7 +1400,7 @@ class Query : gobject.boxed.Boxed
       Params:
         permanent = whether the redirect is permanent or not
   */
-  void setUriRedirectionPermanent(bool permanent)
+  void setUriRedirectionPermanent(bool permanent) nothrow
   {
     gst_query_set_uri_redirection_permanent(cast(GstQuery*)this._cPtr, permanent);
   }
@@ -1412,7 +1412,7 @@ class Query : gobject.boxed.Boxed
             still owned by the query and will therefore be freed when the query
             is unreffed.
   */
-  gst.structure.Structure writableStructure()
+  gst.structure.Structure writableStructure() nothrow
   {
     GstStructure* _cretval;
     _cretval = gst_query_writable_structure(cast(GstQuery*)this._cPtr);

@@ -23,23 +23,22 @@ struct Size
   float height;
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())graphene_size_get_type != &gidSymbolNotFound ? graphene_size_get_type() : cast(GType)0;
   }
 
   /** */
-  @property GType _gType()
+  @property GType _gType() nothrow
   {
     return _getGType();
   }
 
-  void* boxCopy()
+  void* boxCopy() nothrow
   {
     import gobject.c.functions : g_boxed_copy;
-    return g_boxed_copy(_gType,
-        cast(void*)&this);
+    return g_boxed_copy(_gType, cast(void*)&this);
   }
 
   /**
@@ -49,7 +48,7 @@ struct Size
         b = a #graphene_size_t
       Returns: `true` if the sizes are equal
   */
-  bool equal(graphene.size.Size b)
+  bool equal(graphene.size.Size b) nothrow
   {
     bool _retval;
     _retval = cast(bool)graphene_size_equal(cast(const(graphene_size_t)*)&this, cast(const(graphene_size_t)*)&b);
@@ -64,7 +63,7 @@ struct Size
         height = the height
       Returns: the initialized #graphene_size_t
   */
-  graphene.size.Size init_(float width, float height)
+  graphene.size.Size init_(float width, float height) nothrow
   {
     graphene_size_t* _cretval;
     _cretval = graphene_size_init(cast(graphene_size_t*)&this, width, height);
@@ -82,7 +81,7 @@ struct Size
         src = a #graphene_size_t
       Returns: the initialized #graphene_size_t
   */
-  graphene.size.Size initFromSize(graphene.size.Size src)
+  graphene.size.Size initFromSize(graphene.size.Size src) nothrow
   {
     graphene_size_t* _cretval;
     _cretval = graphene_size_init_from_size(cast(graphene_size_t*)&this, cast(const(graphene_size_t)*)&src);
@@ -101,7 +100,7 @@ struct Size
         factor = the linear interpolation factor
         res = return location for the interpolated size
   */
-  void interpolate(graphene.size.Size b, double factor, out graphene.size.Size res)
+  void interpolate(graphene.size.Size b, double factor, out graphene.size.Size res) nothrow
   {
     graphene_size_interpolate(cast(const(graphene_size_t)*)&this, cast(const(graphene_size_t)*)&b, factor, cast(graphene_size_t*)&res);
   }
@@ -113,7 +112,7 @@ struct Size
         factor = the scaling factor
         res = return location for the scaled size
   */
-  void scale(float factor, out graphene.size.Size res)
+  void scale(float factor, out graphene.size.Size res) nothrow
   {
     graphene_size_scale(cast(const(graphene_size_t)*)&this, factor, cast(graphene_size_t*)&res);
   }
@@ -123,7 +122,7 @@ struct Size
       equality checks and interpolations.
       Returns: a constant size
   */
-  static graphene.size.Size zero()
+  static graphene.size.Size zero() nothrow
   {
     const(graphene_size_t)* _cretval;
     _cretval = graphene_size_zero();

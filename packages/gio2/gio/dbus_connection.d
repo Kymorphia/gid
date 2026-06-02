@@ -87,26 +87,26 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_connection_get_type != &gidSymbolNotFound ? g_dbus_connection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DBusConnection self()
+  override DBusConnection self() nothrow
   {
     return this;
   }
@@ -115,7 +115,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Get builder for [gio.dbus_connection.DBusConnection]
       Returns: New builder object
   */
-  static DBusConnectionGidBuilder builder()
+  static DBusConnectionGidBuilder builder() nothrow
   {
     return new DBusConnectionGidBuilder;
   }
@@ -125,7 +125,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Returns: Flags from the #GDBusCapabilityFlags enumeration
         representing connection features negotiated with the other peer.
   */
-  @property gio.types.DBusCapabilityFlags capabilities()
+  @property gio.types.DBusCapabilityFlags capabilities() nothrow
   {
     return getCapabilities();
   }
@@ -134,7 +134,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Get `closed` property.
       Returns: A boolean specifying whether the connection has been closed.
   */
-  @property bool closed()
+  @property bool closed() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("closed");
   }
@@ -148,7 +148,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
         Note that #GDBusConnection objects returned by [gio.global.busGetFinish]
         and [gio.global.busGetSync] will (usually) have this property set to true.
   */
-  @property bool exitOnClose()
+  @property bool exitOnClose() nothrow
   {
     return getExitOnClose();
   }
@@ -163,7 +163,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
           Note that #GDBusConnection objects returned by [gio.global.busGetFinish]
           and [gio.global.busGetSync] will (usually) have this property set to true.
   */
-  @property void exitOnClose(bool propval)
+  @property void exitOnClose(bool propval) nothrow
   {
     setExitOnClose(propval);
   }
@@ -172,7 +172,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Get `flags` property.
       Returns: Flags from the #GDBusConnectionFlags enumeration.
   */
-  @property gio.types.DBusConnectionFlags flags()
+  @property gio.types.DBusConnectionFlags flags() nothrow
   {
     return getFlags();
   }
@@ -202,7 +202,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
         [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122) or the Microsoft
         GUID format.
   */
-  @property string guid()
+  @property string guid() nothrow
   {
     return getGuid();
   }
@@ -218,7 +218,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
         stream from a worker thread, so it is not safe to interact with
         the stream directly.
   */
-  @property gio.iostream.IOStream stream()
+  @property gio.iostream.IOStream stream() nothrow
   {
     return getStream();
   }
@@ -228,7 +228,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Returns: The unique name as assigned by the message bus or null if the
         connection is not open or not a message bus connection.
   */
-  @property string uniqueName()
+  @property string uniqueName() nothrow
   {
     return getUniqueName();
   }
@@ -387,14 +387,21 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
         cancellable = a #GCancellable or null
         callback = a #GAsyncReadyCallback to call when the request is satisfied
   */
-  static void new_(gio.iostream.IOStream stream, string guid, gio.types.DBusConnectionFlags flags, gio.dbus_auth_observer.DBusAuthObserver observer = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  static void new_(gio.iostream.IOStream stream, string guid, gio.types.DBusConnectionFlags flags, gio.dbus_auth_observer.DBusAuthObserver observer = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _guid = guid.toCString(No.Alloc);
@@ -433,14 +440,21 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
         cancellable = a #GCancellable or null
         callback = a #GAsyncReadyCallback to call when the request is satisfied
   */
-  static void newForAddress(string address, gio.types.DBusConnectionFlags flags, gio.dbus_auth_observer.DBusAuthObserver observer = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  static void newForAddress(string address, gio.types.DBusConnectionFlags flags, gio.dbus_auth_observer.DBusAuthObserver observer = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _address = address.toCString(No.Alloc);
@@ -482,14 +496,21 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Returns: a filter identifier that can be used with
             [gio.dbus_connection.DBusConnection.removeFilter]
   */
-  uint addFilter(gio.types.DBusMessageFilterFunction filterFunction)
+  uint addFilter(gio.types.DBusMessageFilterFunction filterFunction) nothrow
   {
-    extern(C) GDBusMessage* _filterFunctionCallback(GDBusConnection* connection, GDBusMessage* message, gboolean incoming, void* userData)
+    extern(C) GDBusMessage* _filterFunctionCallback(GDBusConnection* connection, GDBusMessage* message, gboolean incoming, void* userData) nothrow
     {
       gio.dbus_message.DBusMessage _dretval;
       auto _dlg = cast(gio.types.DBusMessageFilterFunction*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.dbus_connection.DBusConnection)(cast(void*)connection, No.Take), gobject.object.ObjectWrap._getDObject!(gio.dbus_message.DBusMessage)(cast(void*)message, Yes.Take), cast(bool)incoming);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.dbus_connection.DBusConnection)(cast(void*)connection, No.Take), gobject.object.ObjectWrap._getDObject!(gio.dbus_message.DBusMessage)(cast(void*)message, Yes.Take), cast(bool)incoming);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.DBusMessageFilterFunction");
+      }
       auto _retval = cast(GDBusMessage*)_dretval._cPtr(Yes.Dup);
 
       return _retval;
@@ -567,14 +588,21 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
               is satisfied or null if you don't care about the result of the
               method invocation
   */
-  void call(string busName, string objectPath, string interfaceName, string methodName, glib.variant.Variant parameters, glib.variant_type.VariantType replyType, gio.types.DBusCallFlags flags, int timeoutMsec, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void call(string busName, string objectPath, string interfaceName, string methodName, glib.variant.Variant parameters, glib.variant_type.VariantType replyType, gio.types.DBusCallFlags flags, int timeoutMsec, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _busName = busName.toCString(No.Alloc);
@@ -710,14 +738,21 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
               satisfied or null if you don't * care about the result of the
               method invocation
   */
-  void callWithUnixFdList(string busName, string objectPath, string interfaceName, string methodName, glib.variant.Variant parameters, glib.variant_type.VariantType replyType, gio.types.DBusCallFlags flags, int timeoutMsec, gio.unix_fdlist.UnixFDList fdList = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void callWithUnixFdList(string busName, string objectPath, string interfaceName, string methodName, glib.variant.Variant parameters, glib.variant_type.VariantType replyType, gio.types.DBusCallFlags flags, int timeoutMsec, gio.unix_fdlist.UnixFDList fdList = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     const(char)* _busName = busName.toCString(No.Alloc);
@@ -837,14 +872,21 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
         callback = a #GAsyncReadyCallback to call when the request is
               satisfied or null if you don't care about the result
   */
-  void close(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void close(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -1021,14 +1063,21 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
         callback = a #GAsyncReadyCallback to call when the
               request is satisfied or null if you don't care about the result
   */
-  void flush(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void flush(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -1079,7 +1128,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Gets the capabilities negotiated with the remote peer
       Returns: zero or more flags from the #GDBusCapabilityFlags enumeration
   */
-  gio.types.DBusCapabilityFlags getCapabilities()
+  gio.types.DBusCapabilityFlags getCapabilities() nothrow
   {
     GDBusCapabilityFlags _cretval;
     _cretval = g_dbus_connection_get_capabilities(cast(GDBusConnection*)this._cPtr);
@@ -1094,7 +1143,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Returns: whether the process is terminated when connection is
             closed by the remote peer
   */
-  bool getExitOnClose()
+  bool getExitOnClose() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_dbus_connection_get_exit_on_close(cast(GDBusConnection*)this._cPtr);
@@ -1105,7 +1154,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Gets the flags used to construct this connection
       Returns: zero or more flags from the #GDBusConnectionFlags enumeration
   */
-  gio.types.DBusConnectionFlags getFlags()
+  gio.types.DBusConnectionFlags getFlags() nothrow
   {
     GDBusConnectionFlags _cretval;
     _cretval = g_dbus_connection_get_flags(cast(GDBusConnection*)this._cPtr);
@@ -1119,7 +1168,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Returns: The GUID. Do not free this string, it is owned by
             connection.
   */
-  string getGuid()
+  string getGuid() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_connection_get_guid(cast(GDBusConnection*)this._cPtr);
@@ -1136,7 +1185,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Returns: the last used serial or zero when no message has been sent
             within the current thread
   */
-  uint getLastSerial()
+  uint getLastSerial() nothrow
   {
     uint _retval;
     _retval = g_dbus_connection_get_last_serial(cast(GDBusConnection*)this._cPtr);
@@ -1156,7 +1205,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Returns: a #GCredentials or null if not
             available. Do not free this object, it is owned by connection.
   */
-  gio.credentials.Credentials getPeerCredentials()
+  gio.credentials.Credentials getPeerCredentials() nothrow
   {
     GCredentials* _cretval;
     _cretval = g_dbus_connection_get_peer_credentials(cast(GDBusConnection*)this._cPtr);
@@ -1172,7 +1221,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       the stream directly.
       Returns: the stream used for IO
   */
-  gio.iostream.IOStream getStream()
+  gio.iostream.IOStream getStream() nothrow
   {
     GIOStream* _cretval;
     _cretval = g_dbus_connection_get_stream(cast(GDBusConnection*)this._cPtr);
@@ -1188,7 +1237,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
             bus connection. Do not free this string, it is owned by
             connection.
   */
-  string getUniqueName()
+  string getUniqueName() nothrow
   {
     const(char)* _cretval;
     _cretval = g_dbus_connection_get_unique_name(cast(GDBusConnection*)this._cPtr);
@@ -1200,7 +1249,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Gets whether connection is closed.
       Returns: true if the connection is closed, false otherwise
   */
-  bool isClosed()
+  bool isClosed() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_dbus_connection_is_closed(cast(GDBusConnection*)this._cPtr);
@@ -1281,12 +1330,19 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   */
   uint registerSubtree(string objectPath, gio.types.DBusSubtreeVTable vtable, gio.types.DBusSubtreeFlags flags, void* userData, glib.types.DestroyNotify userDataFreeFunc)
   {
-    extern(C) void _userDataFreeFuncCallback(void* data)
+    extern(C) void _userDataFreeFuncCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
     }
     auto _userDataFreeFuncCB = userDataFreeFunc ? &_userDataFreeFuncCallback : null;
     uint _retval;
@@ -1311,7 +1367,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Params:
         filterId = an identifier obtained from [gio.dbus_connection.DBusConnection.addFilter]
   */
-  void removeFilter(uint filterId)
+  void removeFilter(uint filterId) nothrow
   {
     g_dbus_connection_remove_filter(cast(GDBusConnection*)this._cPtr, filterId);
   }
@@ -1400,14 +1456,21 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
         callback = a #GAsyncReadyCallback to call when the request
               is satisfied or null if you don't care about the result
   */
-  void sendMessageWithReply(gio.dbus_message.DBusMessage message, gio.types.DBusSendMessageFlags flags, int timeoutMsec, out uint outSerial, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void sendMessageWithReply(gio.dbus_message.DBusMessage message, gio.types.DBusSendMessageFlags flags, int timeoutMsec, out uint outSerial, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -1514,7 +1577,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
         exitOnClose = whether the process should be terminated
               when connection is closed by the remote peer
   */
-  void setExitOnClose(bool exitOnClose)
+  void setExitOnClose(bool exitOnClose) nothrow
   {
     g_dbus_connection_set_exit_on_close(cast(GDBusConnection*)this._cPtr, exitOnClose);
   }
@@ -1586,9 +1649,9 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
         callback = callback to invoke when there is a signal matching the requested data
       Returns: a subscription identifier that can be used with [gio.dbus_connection.DBusConnection.signalUnsubscribe]
   */
-  uint signalSubscribe(string sender, string interfaceName, string member, string objectPath, string arg0, gio.types.DBusSignalFlags flags, gio.types.DBusSignalCallback callback)
+  uint signalSubscribe(string sender, string interfaceName, string member, string objectPath, string arg0, gio.types.DBusSignalFlags flags, gio.types.DBusSignalCallback callback) nothrow
   {
-    extern(C) void _callbackCallback(GDBusConnection* connection, const(char)* senderName, const(char)* objectPath, const(char)* interfaceName, const(char)* signalName, GVariant* parameters, void* userData)
+    extern(C) void _callbackCallback(GDBusConnection* connection, const(char)* senderName, const(char)* objectPath, const(char)* interfaceName, const(char)* signalName, GVariant* parameters, void* userData) nothrow
     {
       auto _dlg = cast(gio.types.DBusSignalCallback*)userData;
       string _senderName = senderName.fromCString(No.Free);
@@ -1596,7 +1659,14 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       string _interfaceName = interfaceName.fromCString(No.Free);
       string _signalName = signalName.fromCString(No.Free);
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.dbus_connection.DBusConnection)(cast(void*)connection, No.Take), _senderName, _objectPath, _interfaceName, _signalName, parameters ? new glib.variant.Variant(cast(void*)parameters, No.Take) : null);
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.dbus_connection.DBusConnection)(cast(void*)connection, No.Take), _senderName, _objectPath, _interfaceName, _signalName, parameters ? new glib.variant.Variant(cast(void*)parameters, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.DBusSignalCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     uint _retval;
@@ -1629,7 +1699,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
         subscriptionId = a subscription id obtained from
               [gio.dbus_connection.DBusConnection.signalSubscribe]
   */
-  void signalUnsubscribe(uint subscriptionId)
+  void signalUnsubscribe(uint subscriptionId) nothrow
   {
     g_dbus_connection_signal_unsubscribe(cast(GDBusConnection*)this._cPtr, subscriptionId);
   }
@@ -1640,7 +1710,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       starts processing messages. Does nothing on if connection wasn't
       created with this flag or if the method has already been called.
   */
-  void startMessageProcessing()
+  void startMessageProcessing() nothrow
   {
     g_dbus_connection_start_message_processing(cast(GDBusConnection*)this._cPtr);
   }
@@ -1656,7 +1726,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Params:
         exportId = the ID from [gio.dbus_connection.DBusConnection.exportActionGroup]
   */
-  void unexportActionGroup(uint exportId)
+  void unexportActionGroup(uint exportId) nothrow
   {
     g_dbus_connection_unexport_action_group(cast(GDBusConnection*)this._cPtr, exportId);
   }
@@ -1672,7 +1742,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Params:
         exportId = the ID from [gio.dbus_connection.DBusConnection.exportMenuModel]
   */
-  void unexportMenuModel(uint exportId)
+  void unexportMenuModel(uint exportId) nothrow
   {
     g_dbus_connection_unexport_menu_model(cast(GDBusConnection*)this._cPtr, exportId);
   }
@@ -1685,7 +1755,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
               [gio.dbus_connection.DBusConnection.registerObject]
       Returns: true if the object was unregistered, false otherwise
   */
-  bool unregisterObject(uint registrationId)
+  bool unregisterObject(uint registrationId) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_dbus_connection_unregister_object(cast(GDBusConnection*)this._cPtr, registrationId);
@@ -1700,7 +1770,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
               [gio.dbus_connection.DBusConnection.registerSubtree]
       Returns: true if the subtree was unregistered, false otherwise
   */
-  bool unregisterSubtree(uint registrationId)
+  bool unregisterSubtree(uint registrationId) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_dbus_connection_unregister_subtree(cast(GDBusConnection*)this._cPtr, registrationId);
@@ -1742,7 +1812,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectClosed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClosed(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
@@ -1750,7 +1820,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.dbus_connection.DBusConnection)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1765,7 +1835,14 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.dbus_connection.DBusConnection.closed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1787,7 +1864,7 @@ class DBusConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           when establishing the connection.
       Returns: Builder instance for fluent chaining
   */
-  T address(string propval)
+  T address(string propval) nothrow
   {
     return setProperty("address", propval);
   }
@@ -1798,7 +1875,7 @@ class DBusConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = A #GDBusAuthObserver object to assist in the authentication process or null.
       Returns: Builder instance for fluent chaining
   */
-  T authenticationObserver(gio.dbus_auth_observer.DBusAuthObserver propval)
+  T authenticationObserver(gio.dbus_auth_observer.DBusAuthObserver propval) nothrow
   {
     return setProperty("authentication-observer", propval);
   }
@@ -1814,7 +1891,7 @@ class DBusConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           and [gio.global.busGetSync] will (usually) have this property set to true.
       Returns: Builder instance for fluent chaining
   */
-  T exitOnClose(bool propval)
+  T exitOnClose(bool propval) nothrow
   {
     return setProperty("exit-on-close", propval);
   }
@@ -1825,7 +1902,7 @@ class DBusConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = Flags from the #GDBusConnectionFlags enumeration.
       Returns: Builder instance for fluent chaining
   */
-  T flags(gio.types.DBusConnectionFlags propval)
+  T flags(gio.types.DBusConnectionFlags propval) nothrow
   {
     return setProperty("flags", propval);
   }
@@ -1857,7 +1934,7 @@ class DBusConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           GUID format.
       Returns: Builder instance for fluent chaining
   */
-  T guid(string propval)
+  T guid(string propval) nothrow
   {
     return setProperty("guid", propval);
   }
@@ -1875,7 +1952,7 @@ class DBusConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           the stream directly.
       Returns: Builder instance for fluent chaining
   */
-  T stream(gio.iostream.IOStream propval)
+  T stream(gio.iostream.IOStream propval) nothrow
   {
     return setProperty("stream", propval);
   }
@@ -1888,7 +1965,7 @@ final class DBusConnectionGidBuilder : DBusConnectionGidBuilderImpl!DBusConnecti
       Create object from builder.
       Returns: New object
   */
-  DBusConnection build()
+  DBusConnection build() nothrow
   {
     return new DBusConnection(cast(void*)createGObject(DBusConnection._getGType), No.Take);
   }

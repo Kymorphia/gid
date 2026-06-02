@@ -24,32 +24,32 @@ class AudioConverter : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_converter_get_type != &gidSymbolNotFound ? gst_audio_converter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AudioConverter self()
+  override AudioConverter self() nothrow
   {
     return this;
   }
@@ -68,7 +68,7 @@ class AudioConverter : gobject.boxed.Boxed
         config = a #GstStructure with configuration options
       Returns: a #GstAudioConverter or null if conversion is not possible.
   */
-  this(gstaudio.types.AudioConverterFlags flags, gstaudio.audio_info.AudioInfo inInfo, gstaudio.audio_info.AudioInfo outInfo, gst.structure.Structure config = null)
+  this(gstaudio.types.AudioConverterFlags flags, gstaudio.audio_info.AudioInfo inInfo, gstaudio.audio_info.AudioInfo outInfo, gst.structure.Structure config = null) nothrow
   {
     GstAudioConverter* _cretval;
     _cretval = gst_audio_converter_new(flags, inInfo ? cast(GstAudioInfo*)inInfo._cPtr(No.Dup) : null, outInfo ? cast(GstAudioInfo*)outInfo._cPtr(No.Dup) : null, config ? cast(GstStructure*)config._cPtr(Yes.Dup) : null);
@@ -87,7 +87,7 @@ class AudioConverter : gobject.boxed.Boxed
            the output data will be written
       Returns: true is the conversion could be performed.
   */
-  bool convert(gstaudio.types.AudioConverterFlags flags, ubyte[] in_, out ubyte[] out_)
+  bool convert(gstaudio.types.AudioConverterFlags flags, ubyte[] in_, out ubyte[] out_) nothrow
   {
     bool _retval;
     size_t _inSize;
@@ -113,7 +113,7 @@ class AudioConverter : gobject.boxed.Boxed
       Returns: a #GstStructure that remains valid for as long as convert is valid
           or until [gstaudio.audio_converter.AudioConverter.updateConfig] is called.
   */
-  gst.structure.Structure getConfig(out int inRate, out int outRate)
+  gst.structure.Structure getConfig(out int inRate, out int outRate) nothrow
   {
     const(GstStructure)* _cretval;
     _cretval = gst_audio_converter_get_config(cast(GstAudioConverter*)this._cPtr, cast(int*)&inRate, cast(int*)&outRate);
@@ -129,7 +129,7 @@ class AudioConverter : gobject.boxed.Boxed
         outFrames = number of output frames
       Returns: the number of input frames
   */
-  size_t getInFrames(size_t outFrames)
+  size_t getInFrames(size_t outFrames) nothrow
   {
     size_t _retval;
     _retval = gst_audio_converter_get_in_frames(cast(GstAudioConverter*)this._cPtr, outFrames);
@@ -142,7 +142,7 @@ class AudioConverter : gobject.boxed.Boxed
       Returns: the latency of convert as expressed in the number of
         frames.
   */
-  size_t getMaxLatency()
+  size_t getMaxLatency() nothrow
   {
     size_t _retval;
     _retval = gst_audio_converter_get_max_latency(cast(GstAudioConverter*)this._cPtr);
@@ -157,7 +157,7 @@ class AudioConverter : gobject.boxed.Boxed
         inFrames = number of input frames
       Returns: the number of output frames
   */
-  size_t getOutFrames(size_t inFrames)
+  size_t getOutFrames(size_t inFrames) nothrow
   {
     size_t _retval;
     _retval = gst_audio_converter_get_out_frames(cast(GstAudioConverter*)this._cPtr, inFrames);
@@ -169,7 +169,7 @@ class AudioConverter : gobject.boxed.Boxed
       The return value would be typically input to [gstbase.base_transform.BaseTransform.setPassthrough]
       Returns: true when no conversion will actually occur.
   */
-  bool isPassthrough()
+  bool isPassthrough() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_converter_is_passthrough(cast(GstAudioConverter*)this._cPtr);
@@ -180,7 +180,7 @@ class AudioConverter : gobject.boxed.Boxed
       Reset convert to the state it was when it was first created, clearing
       any history it might currently have.
   */
-  void reset()
+  void reset() nothrow
   {
     gst_audio_converter_reset(cast(GstAudioConverter*)this._cPtr);
   }
@@ -190,7 +190,7 @@ class AudioConverter : gobject.boxed.Boxed
       The return value would be typically input to [gstbase.base_transform.BaseTransform.setInPlace]
       Returns: true when the conversion can be done in place.
   */
-  bool supportsInplace()
+  bool supportsInplace() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_converter_supports_inplace(cast(GstAudioConverter*)this._cPtr);
@@ -219,7 +219,7 @@ class AudioConverter : gobject.boxed.Boxed
         config = a #GstStructure or null
       Returns: true when the new parameters could be set
   */
-  bool updateConfig(int inRate, int outRate, gst.structure.Structure config = null)
+  bool updateConfig(int inRate, int outRate, gst.structure.Structure config = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_audio_converter_update_config(cast(GstAudioConverter*)this._cPtr, inRate, outRate, config ? cast(GstStructure*)config._cPtr(Yes.Dup) : null);

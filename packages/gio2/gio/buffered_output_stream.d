@@ -32,26 +32,26 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_buffered_output_stream_get_type != &gidSymbolNotFound ? g_buffered_output_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BufferedOutputStream self()
+  override BufferedOutputStream self() nothrow
   {
     return this;
   }
@@ -60,7 +60,7 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
       Get builder for [gio.buffered_output_stream.BufferedOutputStream]
       Returns: New builder object
   */
-  static BufferedOutputStreamGidBuilder builder()
+  static BufferedOutputStreamGidBuilder builder() nothrow
   {
     return new BufferedOutputStreamGidBuilder;
   }
@@ -69,7 +69,7 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
       Get `autoGrow` property.
       Returns: Whether the buffer should automatically grow.
   */
-  @property bool autoGrow()
+  @property bool autoGrow() nothrow
   {
     return getAutoGrow();
   }
@@ -79,7 +79,7 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
       Params:
         propval = Whether the buffer should automatically grow.
   */
-  @property void autoGrow(bool propval)
+  @property void autoGrow(bool propval) nothrow
   {
     setAutoGrow(propval);
   }
@@ -88,7 +88,7 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
       Get `bufferSize` property.
       Returns: The size of the backend buffer, in bytes.
   */
-  @property uint bufferSize()
+  @property uint bufferSize() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("buffer-size");
   }
@@ -98,7 +98,7 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
       Params:
         propval = The size of the backend buffer, in bytes.
   */
-  @property void bufferSize(uint propval)
+  @property void bufferSize(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("buffer-size", propval);
   }
@@ -112,7 +112,7 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
         baseStream = a #GOutputStream.
       Returns: a #GOutputStream for the given base_stream.
   */
-  this(gio.output_stream.OutputStream baseStream)
+  this(gio.output_stream.OutputStream baseStream) nothrow
   {
     GOutputStream* _cretval;
     _cretval = g_buffered_output_stream_new(baseStream ? cast(GOutputStream*)baseStream._cPtr(No.Dup) : null);
@@ -127,7 +127,7 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
         size = a #gsize.
       Returns: a #GOutputStream with an internal buffer set to size.
   */
-  static gio.buffered_output_stream.BufferedOutputStream newSized(gio.output_stream.OutputStream baseStream, size_t size)
+  static gio.buffered_output_stream.BufferedOutputStream newSized(gio.output_stream.OutputStream baseStream, size_t size) nothrow
   {
     GOutputStream* _cretval;
     _cretval = g_buffered_output_stream_new_sized(baseStream ? cast(GOutputStream*)baseStream._cPtr(No.Dup) : null, size);
@@ -140,7 +140,7 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
       Returns: true if the stream's buffer automatically grows,
         false otherwise.
   */
-  bool getAutoGrow()
+  bool getAutoGrow() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_buffered_output_stream_get_auto_grow(cast(GBufferedOutputStream*)this._cPtr);
@@ -151,7 +151,7 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
       Gets the size of the buffer in the stream.
       Returns: the current size of the buffer.
   */
-  size_t getBufferSize()
+  size_t getBufferSize() nothrow
   {
     size_t _retval;
     _retval = g_buffered_output_stream_get_buffer_size(cast(GBufferedOutputStream*)this._cPtr);
@@ -167,7 +167,7 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
       Params:
         autoGrow = a #gboolean.
   */
-  void setAutoGrow(bool autoGrow)
+  void setAutoGrow(bool autoGrow) nothrow
   {
     g_buffered_output_stream_set_auto_grow(cast(GBufferedOutputStream*)this._cPtr, autoGrow);
   }
@@ -178,7 +178,7 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
       Params:
         size = a #gsize.
   */
-  void setBufferSize(size_t size)
+  void setBufferSize(size_t size) nothrow
   {
     g_buffered_output_stream_set_buffer_size(cast(GBufferedOutputStream*)this._cPtr, size);
   }
@@ -196,7 +196,7 @@ class BufferedOutputStreamGidBuilderImpl(T) : gio.filter_output_stream.FilterOut
         propval = Whether the buffer should automatically grow.
       Returns: Builder instance for fluent chaining
   */
-  T autoGrow(bool propval)
+  T autoGrow(bool propval) nothrow
   {
     return setProperty("auto-grow", propval);
   }
@@ -207,7 +207,7 @@ class BufferedOutputStreamGidBuilderImpl(T) : gio.filter_output_stream.FilterOut
         propval = The size of the backend buffer, in bytes.
       Returns: Builder instance for fluent chaining
   */
-  T bufferSize(uint propval)
+  T bufferSize(uint propval) nothrow
   {
     return setProperty("buffer-size", propval);
   }
@@ -220,7 +220,7 @@ final class BufferedOutputStreamGidBuilder : BufferedOutputStreamGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  BufferedOutputStream build()
+  BufferedOutputStream build() nothrow
   {
     return new BufferedOutputStream(cast(void*)createGObject(BufferedOutputStream._getGType), Yes.Take);
   }

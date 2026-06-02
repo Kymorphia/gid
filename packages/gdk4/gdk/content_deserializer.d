@@ -34,26 +34,26 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_content_deserializer_get_type != &gidSymbolNotFound ? gdk_content_deserializer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ContentDeserializer self()
+  override ContentDeserializer self() nothrow
   {
     return this;
   }
@@ -62,7 +62,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
       Get builder for [gdk.content_deserializer.ContentDeserializer]
       Returns: New builder object
   */
-  static ContentDeserializerGidBuilder builder()
+  static ContentDeserializerGidBuilder builder() nothrow
   {
     return new ContentDeserializerGidBuilder;
   }
@@ -75,7 +75,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
       This is the [gio.cancellable.Cancellable] that was passed to `funcGdk.content_deserialize_async`.
       Returns: the cancellable for the current operation
   */
-  gio.cancellable.Cancellable getCancellable()
+  gio.cancellable.Cancellable getCancellable() nothrow
   {
     GCancellable* _cretval;
     _cretval = gdk_content_deserializer_get_cancellable(cast(GdkContentDeserializer*)this._cPtr);
@@ -87,7 +87,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
       Gets the `GType` to create an instance of.
       Returns: the `GType` for the current operation
   */
-  gobject.types.GType getGtype()
+  gobject.types.GType getGtype() nothrow
   {
     gobject.types.GType _retval;
     _retval = gdk_content_deserializer_get_gtype(cast(GdkContentDeserializer*)this._cPtr);
@@ -100,7 +100,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
       This is the stream that was passed to `funcGdk.content_deserialize_async`.
       Returns: the input stream for the current operation
   */
-  gio.input_stream.InputStream getInputStream()
+  gio.input_stream.InputStream getInputStream() nothrow
   {
     GInputStream* _cretval;
     _cretval = gdk_content_deserializer_get_input_stream(cast(GdkContentDeserializer*)this._cPtr);
@@ -112,7 +112,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
       Gets the mime type to deserialize from.
       Returns: the mime type for the current operation
   */
-  string getMimeType()
+  string getMimeType() nothrow
   {
     const(char)* _cretval;
     _cretval = gdk_content_deserializer_get_mime_type(cast(GdkContentDeserializer*)this._cPtr);
@@ -126,7 +126,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
       This is the priority that was passed to `funcGdk.content_deserialize_async`.
       Returns: the I/O priority for the current operation
   */
-  int getPriority()
+  int getPriority() nothrow
   {
     int _retval;
     _retval = gdk_content_deserializer_get_priority(cast(GdkContentDeserializer*)this._cPtr);
@@ -139,7 +139,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
       See [gdk.content_deserializer.ContentDeserializer.setTaskData].
       Returns: the task data for deserializer
   */
-  void* getTaskData()
+  void* getTaskData() nothrow
   {
     auto _retval = gdk_content_deserializer_get_task_data(cast(GdkContentDeserializer*)this._cPtr);
     return _retval;
@@ -149,7 +149,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
       Gets the user data that was passed when the deserializer was registered.
       Returns: the user data for this deserializer
   */
-  void* getUserData()
+  void* getUserData() nothrow
   {
     auto _retval = gdk_content_deserializer_get_user_data(cast(GdkContentDeserializer*)this._cPtr);
     return _retval;
@@ -159,7 +159,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
       Gets the [gobject.value.Value] to store the deserialized object in.
       Returns: the [gobject.value.Value] for the current operation
   */
-  gobject.value.Value getValue()
+  gobject.value.Value getValue() nothrow
   {
     GValue* _cretval;
     _cretval = gdk_content_deserializer_get_value(cast(GdkContentDeserializer*)this._cPtr);
@@ -175,7 +175,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
       Params:
         error = a [glib.error.ErrorWrap]
   */
-  void returnError(glib.error.ErrorWrap error)
+  void returnError(glib.error.ErrorWrap error) nothrow
   {
     gdk_content_deserializer_return_error(cast(GdkContentDeserializer*)this._cPtr, error ? cast(GError*)error._cPtr : null);
   }
@@ -183,7 +183,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
   /**
       Indicate that the deserialization has been successfully completed.
   */
-  void returnSuccess()
+  void returnSuccess() nothrow
   {
     gdk_content_deserializer_return_success(cast(GdkContentDeserializer*)this._cPtr);
   }
@@ -195,14 +195,21 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
         data = data to associate with this operation
         notify = destroy notify for data
   */
-  void setTaskData(void* data, glib.types.DestroyNotify notify)
+  void setTaskData(void* data, glib.types.DestroyNotify notify) nothrow
   {
-    extern(C) void _notifyCallback(void* data)
+    extern(C) void _notifyCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
     gdk_content_deserializer_set_task_data(cast(GdkContentDeserializer*)this._cPtr, data, _notifyCB);
@@ -223,7 +230,7 @@ final class ContentDeserializerGidBuilder : ContentDeserializerGidBuilderImpl!Co
       Create object from builder.
       Returns: New object
   */
-  ContentDeserializer build()
+  ContentDeserializer build() nothrow
   {
     return new ContentDeserializer(cast(void*)createGObject(ContentDeserializer._getGType), No.Take);
   }

@@ -26,26 +26,26 @@ class EntryBuffer : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_entry_buffer_get_type != &gidSymbolNotFound ? gtk_entry_buffer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EntryBuffer self()
+  override EntryBuffer self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class EntryBuffer : gobject.object.ObjectWrap
       Get builder for [gtk.entry_buffer.EntryBuffer]
       Returns: New builder object
   */
-  static EntryBufferGidBuilder builder()
+  static EntryBufferGidBuilder builder() nothrow
   {
     return new EntryBufferGidBuilder;
   }
@@ -63,7 +63,7 @@ class EntryBuffer : gobject.object.ObjectWrap
       Get `length` property.
       Returns: The length (in characters) of the text in buffer.
   */
-  @property uint length()
+  @property uint length() nothrow
   {
     return getLength();
   }
@@ -72,7 +72,7 @@ class EntryBuffer : gobject.object.ObjectWrap
       Get `maxLength` property.
       Returns: The maximum length (in characters) of the text in the buffer.
   */
-  @property int maxLength()
+  @property int maxLength() nothrow
   {
     return getMaxLength();
   }
@@ -82,7 +82,7 @@ class EntryBuffer : gobject.object.ObjectWrap
       Params:
         propval = The maximum length (in characters) of the text in the buffer.
   */
-  @property void maxLength(int propval)
+  @property void maxLength(int propval) nothrow
   {
     setMaxLength(propval);
   }
@@ -91,7 +91,7 @@ class EntryBuffer : gobject.object.ObjectWrap
       Get `text` property.
       Returns: The contents of the buffer.
   */
-  @property string text()
+  @property string text() nothrow
   {
     return getText();
   }
@@ -101,7 +101,7 @@ class EntryBuffer : gobject.object.ObjectWrap
       Params:
         propval = The contents of the buffer.
   */
-  @property void text(string propval)
+  @property void text(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("text", propval);
   }
@@ -115,7 +115,7 @@ class EntryBuffer : gobject.object.ObjectWrap
         initialChars = initial buffer text
       Returns: A new [gtk.entry_buffer.EntryBuffer] object.
   */
-  this(string initialChars = null)
+  this(string initialChars = null) nothrow
   {
     GtkEntryBuffer* _cretval;
     int _nInitialChars;
@@ -145,7 +145,7 @@ class EntryBuffer : gobject.object.ObjectWrap
         nChars = number of characters to delete
       Returns: The number of characters deleted.
   */
-  uint deleteText(uint position, int nChars)
+  uint deleteText(uint position, int nChars) nothrow
   {
     uint _retval;
     _retval = gtk_entry_buffer_delete_text(cast(GtkEntryBuffer*)this._cPtr, position, nChars);
@@ -159,7 +159,7 @@ class EntryBuffer : gobject.object.ObjectWrap
         position = position at which text was deleted
         nChars = number of characters deleted
   */
-  void emitDeletedText(uint position, uint nChars)
+  void emitDeletedText(uint position, uint nChars) nothrow
   {
     gtk_entry_buffer_emit_deleted_text(cast(GtkEntryBuffer*)this._cPtr, position, nChars);
   }
@@ -171,7 +171,7 @@ class EntryBuffer : gobject.object.ObjectWrap
         position = position at which text was inserted
         chars = text that was inserted
   */
-  void emitInsertedText(uint position, string chars)
+  void emitInsertedText(uint position, string chars) nothrow
   {
     uint _nChars;
     if (chars)
@@ -187,7 +187,7 @@ class EntryBuffer : gobject.object.ObjectWrap
       See [gtk.entry_buffer.EntryBuffer.getLength].
       Returns: The byte length of the buffer.
   */
-  size_t getBytes()
+  size_t getBytes() nothrow
   {
     size_t _retval;
     _retval = gtk_entry_buffer_get_bytes(cast(GtkEntryBuffer*)this._cPtr);
@@ -198,7 +198,7 @@ class EntryBuffer : gobject.object.ObjectWrap
       Retrieves the length in characters of the buffer.
       Returns: The number of characters in the buffer.
   */
-  uint getLength()
+  uint getLength() nothrow
   {
     uint _retval;
     _retval = gtk_entry_buffer_get_length(cast(GtkEntryBuffer*)this._cPtr);
@@ -210,7 +210,7 @@ class EntryBuffer : gobject.object.ObjectWrap
       Returns: the maximum allowed number of characters
           in [gtk.entry_buffer.EntryBuffer], or 0 if there is no maximum.
   */
-  int getMaxLength()
+  int getMaxLength() nothrow
   {
     int _retval;
     _retval = gtk_entry_buffer_get_max_length(cast(GtkEntryBuffer*)this._cPtr);
@@ -226,7 +226,7 @@ class EntryBuffer : gobject.object.ObjectWrap
           string. This string points to internally allocated storage
           in the buffer and must not be freed, modified or stored.
   */
-  string getText()
+  string getText() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_entry_buffer_get_text(cast(GtkEntryBuffer*)this._cPtr);
@@ -250,7 +250,7 @@ class EntryBuffer : gobject.object.ObjectWrap
         chars = the text to insert into the buffer.
       Returns: The number of characters actually inserted.
   */
-  uint insertText(uint position, string chars)
+  uint insertText(uint position, string chars) nothrow
   {
     uint _retval;
     int _nChars;
@@ -273,7 +273,7 @@ class EntryBuffer : gobject.object.ObjectWrap
             (other than the maximum length of entries.) The value passed in will
             be clamped to the range 0-65536.
   */
-  void setMaxLength(int maxLength)
+  void setMaxLength(int maxLength) nothrow
   {
     gtk_entry_buffer_set_max_length(cast(GtkEntryBuffer*)this._cPtr, maxLength);
   }
@@ -290,7 +290,7 @@ class EntryBuffer : gobject.object.ObjectWrap
       Params:
         chars = the new text
   */
-  void setText(string chars)
+  void setText(string chars) nothrow
   {
     int _nChars;
     if (chars)
@@ -322,7 +322,7 @@ class EntryBuffer : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeletedText(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeletedText(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -330,7 +330,7 @@ class EntryBuffer : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.entry_buffer.EntryBuffer)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -345,7 +345,14 @@ class EntryBuffer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.entry_buffer.EntryBuffer.deletedText");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -371,7 +378,7 @@ class EntryBuffer : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInsertedText(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInsertedText(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -379,7 +386,7 @@ class EntryBuffer : gobject.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.entry_buffer.EntryBuffer)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -395,7 +402,14 @@ class EntryBuffer : gobject.object.ObjectWrap
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getStringWithLength(&_paramVals[2], nChars);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.entry_buffer.EntryBuffer.insertedText");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -413,7 +427,7 @@ class EntryBufferGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The maximum length (in characters) of the text in the buffer.
       Returns: Builder instance for fluent chaining
   */
-  T maxLength(int propval)
+  T maxLength(int propval) nothrow
   {
     return setProperty("max-length", propval);
   }
@@ -424,7 +438,7 @@ class EntryBufferGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The contents of the buffer.
       Returns: Builder instance for fluent chaining
   */
-  T text(string propval)
+  T text(string propval) nothrow
   {
     return setProperty("text", propval);
   }
@@ -437,7 +451,7 @@ final class EntryBufferGidBuilder : EntryBufferGidBuilderImpl!EntryBufferGidBuil
       Create object from builder.
       Returns: New object
   */
-  EntryBuffer build()
+  EntryBuffer build() nothrow
   {
     return new EntryBuffer(cast(void*)createGObject(EntryBuffer._getGType), Yes.Take);
   }

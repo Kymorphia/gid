@@ -34,26 +34,26 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_app_chooser_dialog_get_type != &gidSymbolNotFound ? gtk_app_chooser_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AppChooserDialog self()
+  override AppChooserDialog self() nothrow
   {
     return this;
   }
@@ -62,7 +62,7 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
       Get builder for [gtk.app_chooser_dialog.AppChooserDialog]
       Returns: New builder object
   */
-  static AppChooserDialogGidBuilder builder()
+  static AppChooserDialogGidBuilder builder() nothrow
   {
     return new AppChooserDialogGidBuilder;
   }
@@ -73,7 +73,7 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
         The dialog's #GtkAppChooserWidget content type will be guessed from the
         file, if present.
   */
-  @property gio.file.File gfile()
+  @property gio.file.File gfile() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.file.File)("gfile");
   }
@@ -83,7 +83,7 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
       Returns: The text to show at the top of the dialog.
         The string may contain Pango markup.
   */
-  @property string heading()
+  @property string heading() nothrow
   {
     return getHeading();
   }
@@ -94,7 +94,7 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
         propval = The text to show at the top of the dialog.
           The string may contain Pango markup.
   */
-  @property void heading(string propval)
+  @property void heading(string propval) nothrow
   {
     setHeading(propval);
   }
@@ -111,7 +111,7 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
         file = a #GFile
       Returns: a newly created #GtkAppChooserDialog
   */
-  this(gtk.window.Window parent, gtk.types.DialogFlags flags, gio.file.File file)
+  this(gtk.window.Window parent, gtk.types.DialogFlags flags, gio.file.File file) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_app_chooser_dialog_new(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, flags, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
@@ -128,7 +128,7 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
         contentType = a content type string
       Returns: a newly created #GtkAppChooserDialog
   */
-  static gtk.app_chooser_dialog.AppChooserDialog newForContentType(gtk.window.Window parent, gtk.types.DialogFlags flags, string contentType)
+  static gtk.app_chooser_dialog.AppChooserDialog newForContentType(gtk.window.Window parent, gtk.types.DialogFlags flags, string contentType) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _contentType = contentType.toCString(No.Alloc);
@@ -142,7 +142,7 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
       Returns: the text to display at the top of the dialog, or null, in which
             case a default text is displayed
   */
-  string getHeading()
+  string getHeading() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_app_chooser_dialog_get_heading(cast(GtkAppChooserDialog*)this._cPtr);
@@ -154,7 +154,7 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
       Returns the #GtkAppChooserWidget of this dialog.
       Returns: the #GtkAppChooserWidget of self
   */
-  gtk.widget.Widget getWidget()
+  gtk.widget.Widget getWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_app_chooser_dialog_get_widget(cast(GtkAppChooserDialog*)this._cPtr);
@@ -169,7 +169,7 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
       Params:
         heading = a string containing Pango markup
   */
-  void setHeading(string heading)
+  void setHeading(string heading) nothrow
   {
     const(char)* _heading = heading.toCString(No.Alloc);
     gtk_app_chooser_dialog_set_heading(cast(GtkAppChooserDialog*)this._cPtr, _heading);
@@ -190,7 +190,7 @@ class AppChooserDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T, gtk
           file, if present.
       Returns: Builder instance for fluent chaining
   */
-  T gfile(gio.file.File propval)
+  T gfile(gio.file.File propval) nothrow
   {
     return setProperty("gfile", propval);
   }
@@ -202,7 +202,7 @@ class AppChooserDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T, gtk
           The string may contain Pango markup.
       Returns: Builder instance for fluent chaining
   */
-  T heading(string propval)
+  T heading(string propval) nothrow
   {
     return setProperty("heading", propval);
   }
@@ -215,7 +215,7 @@ final class AppChooserDialogGidBuilder : AppChooserDialogGidBuilderImpl!AppChoos
       Create object from builder.
       Returns: New object
   */
-  AppChooserDialog build()
+  AppChooserDialog build() nothrow
   {
     return new AppChooserDialog(cast(void*)createGObject(AppChooserDialog._getGType), No.Take);
   }

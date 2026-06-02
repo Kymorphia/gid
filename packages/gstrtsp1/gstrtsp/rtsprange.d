@@ -34,7 +34,7 @@ struct RTSPRange
         unit = the unit to convert the range into
       Returns: true if the range could be converted
   */
-  static bool convertUnits(gstrtsp.rtsptime_range.RTSPTimeRange range, gstrtsp.types.RTSPRangeUnit unit)
+  static bool convertUnits(gstrtsp.rtsptime_range.RTSPTimeRange range, gstrtsp.types.RTSPRangeUnit unit) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtsp_range_convert_units(range ? cast(GstRTSPTimeRange*)range._cPtr : null, unit);
@@ -47,7 +47,7 @@ struct RTSPRange
       Params:
         range = a #GstRTSPTimeRange
   */
-  static void free(gstrtsp.rtsptime_range.RTSPTimeRange range)
+  static void free(gstrtsp.rtsptime_range.RTSPTimeRange range) nothrow
   {
     gst_rtsp_range_free(range ? cast(GstRTSPTimeRange*)range._cPtr : null);
   }
@@ -67,7 +67,7 @@ struct RTSPRange
         max = result maximum #GstClockTime
       Returns: true on success.
   */
-  static bool getTimes(gstrtsp.rtsptime_range.RTSPTimeRange range, out gst.types.ClockTime min, out gst.types.ClockTime max)
+  static bool getTimes(gstrtsp.rtsptime_range.RTSPTimeRange range, out gst.types.ClockTime min, out gst.types.ClockTime max) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_rtsp_range_get_times(range ? cast(const(GstRTSPTimeRange)*)range._cPtr : null, cast(GstClockTime*)&min, cast(GstClockTime*)&max);
@@ -82,7 +82,7 @@ struct RTSPRange
         range = location to hold the #GstRTSPTimeRange result
       Returns: #GST_RTSP_OK on success.
   */
-  static gstrtsp.types.RTSPResult parse(string rangestr, out gstrtsp.rtsptime_range.RTSPTimeRange range)
+  static gstrtsp.types.RTSPResult parse(string rangestr, out gstrtsp.rtsptime_range.RTSPTimeRange range) nothrow
   {
     GstRTSPResult _cretval;
     const(char)* _rangestr = rangestr.toCString(No.Alloc);
@@ -100,7 +100,7 @@ struct RTSPRange
         range = a #GstRTSPTimeRange
       Returns: The string representation of range. [glib.global.gfree] after usage.
   */
-  static string toString_(gstrtsp.rtsptime_range.RTSPTimeRange range)
+  static string toString_(gstrtsp.rtsptime_range.RTSPTimeRange range) nothrow
   {
     char* _cretval;
     _cretval = gst_rtsp_range_to_string(range ? cast(const(GstRTSPTimeRange)*)range._cPtr : null);

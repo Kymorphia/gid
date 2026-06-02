@@ -15,26 +15,26 @@ class MonthIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_month_interval_array_builder_get_type != &gidSymbolNotFound ? garrow_month_interval_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MonthIntervalArrayBuilder self()
+  override MonthIntervalArrayBuilder self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class MonthIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.month_interval_array_builder.MonthIntervalArrayBuilder]
       Returns: New builder object
   */
-  static MonthIntervalArrayBuilderGidBuilder builder()
+  static MonthIntervalArrayBuilderGidBuilder builder() nothrow
   {
     return new MonthIntervalArrayBuilderGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowMonthIntervalArrayBuilder* _cretval;
     _cretval = garrow_month_interval_array_builder_new();
@@ -113,7 +113,7 @@ final class MonthIntervalArrayBuilderGidBuilder : MonthIntervalArrayBuilderGidBu
       Create object from builder.
       Returns: New object
   */
-  MonthIntervalArrayBuilder build()
+  MonthIntervalArrayBuilder build() nothrow
   {
     return new MonthIntervalArrayBuilder(cast(void*)createGObject(MonthIntervalArrayBuilder._getGType), Yes.Take);
   }

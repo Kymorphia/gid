@@ -37,26 +37,26 @@ class Plugin : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_plugin_get_type != &gidSymbolNotFound ? gst_plugin_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Plugin self()
+  override Plugin self() nothrow
   {
     return this;
   }
@@ -65,7 +65,7 @@ class Plugin : gst.object.ObjectWrap
       Get builder for [gst.plugin.Plugin]
       Returns: New builder object
   */
-  static PluginGidBuilder builder()
+  static PluginGidBuilder builder() nothrow
   {
     return new PluginGidBuilder;
   }
@@ -78,7 +78,7 @@ class Plugin : gst.object.ObjectWrap
       Returns: a reference to a loaded plugin, or
         null on error.
   */
-  static gst.plugin.Plugin loadByName(string name)
+  static gst.plugin.Plugin loadByName(string name) nothrow
   {
     GstPlugin* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -134,15 +134,22 @@ class Plugin : gst.object.ObjectWrap
         origin = URL to provider of plugin
       Returns: true if the plugin was registered correctly, otherwise false.
   */
-  static bool registerStatic(int majorVersion, int minorVersion, string name, string description, gst.types.PluginInitFunc initFunc, string version_, string license, string source, string package_, string origin)
+  static bool registerStatic(int majorVersion, int minorVersion, string name, string description, gst.types.PluginInitFunc initFunc, string version_, string license, string source, string package_, string origin) nothrow
   {
     static gst.types.PluginInitFunc _static_initFunc;
 
-    extern(C) gboolean _initFuncCallback(GstPlugin* plugin)
+    extern(C) gboolean _initFuncCallback(GstPlugin* plugin) nothrow
     {
       bool _dretval;
 
-      _dretval = _static_initFunc(gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
+      try
+      {
+        _dretval = _static_initFunc(gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PluginInitFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -191,14 +198,21 @@ class Plugin : gst.object.ObjectWrap
         origin = URL to provider of plugin
       Returns: true if the plugin was registered correctly, otherwise false.
   */
-  static bool registerStaticFull(int majorVersion, int minorVersion, string name, string description, gst.types.PluginInitFullFunc initFullFunc, string version_, string license, string source, string package_, string origin)
+  static bool registerStaticFull(int majorVersion, int minorVersion, string name, string description, gst.types.PluginInitFullFunc initFullFunc, string version_, string license, string source, string package_, string origin) nothrow
   {
-    extern(C) gboolean _initFullFuncCallback(GstPlugin* plugin, void* userData)
+    extern(C) gboolean _initFullFuncCallback(GstPlugin* plugin, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gst.types.PluginInitFullFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(void*)plugin, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.types.PluginInitFullFunc");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -243,7 +257,7 @@ class Plugin : gst.object.ObjectWrap
               env_vars, or null.
         flags = optional flags, or #GST_PLUGIN_DEPENDENCY_FLAG_NONE
   */
-  void addDependency(string[] envVars, string[] paths, string[] names, gst.types.PluginDependencyFlags flags)
+  void addDependency(string[] envVars, string[] paths, string[] names, gst.types.PluginDependencyFlags flags) nothrow
   {
     char*[] _tmpenvVars;
     foreach (s; envVars)
@@ -292,7 +306,7 @@ class Plugin : gst.object.ObjectWrap
                or null
         flags = optional flags, or #GST_PLUGIN_DEPENDENCY_FLAG_NONE
   */
-  void addDependencySimple(string envVars, string paths, string names, gst.types.PluginDependencyFlags flags)
+  void addDependencySimple(string envVars, string paths, string names, gst.types.PluginDependencyFlags flags) nothrow
   {
     const(char)* _envVars = envVars.toCString(No.Alloc);
     const(char)* _paths = paths.toCString(No.Alloc);
@@ -301,21 +315,21 @@ class Plugin : gst.object.ObjectWrap
   }
 
   /** */
-  void addStatusError(string message)
+  void addStatusError(string message) nothrow
   {
     const(char)* _message = message.toCString(No.Alloc);
     gst_plugin_add_status_error(cast(GstPlugin*)this._cPtr, _message);
   }
 
   /** */
-  void addStatusInfo(string message)
+  void addStatusInfo(string message) nothrow
   {
     const(char)* _message = message.toCString(No.Alloc);
     gst_plugin_add_status_info(cast(GstPlugin*)this._cPtr, _message);
   }
 
   /** */
-  void addStatusWarning(string message)
+  void addStatusWarning(string message) nothrow
   {
     const(char)* _message = message.toCString(No.Alloc);
     gst_plugin_add_status_warning(cast(GstPlugin*)this._cPtr, _message);
@@ -327,7 +341,7 @@ class Plugin : gst.object.ObjectWrap
       Returns: The cached data as a
         #GstStructure or null.
   */
-  gst.structure.Structure getCacheData()
+  gst.structure.Structure getCacheData() nothrow
   {
     const(GstStructure)* _cretval;
     _cretval = gst_plugin_get_cache_data(cast(GstPlugin*)this._cPtr);
@@ -339,7 +353,7 @@ class Plugin : gst.object.ObjectWrap
       Get the long descriptive name of the plugin
       Returns: the long name of the plugin
   */
-  string getDescription()
+  string getDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_plugin_get_description(cast(GstPlugin*)this._cPtr);
@@ -351,7 +365,7 @@ class Plugin : gst.object.ObjectWrap
       get the filename of the plugin
       Returns: the filename of the plugin
   */
-  string getFilename()
+  string getFilename() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_plugin_get_filename(cast(GstPlugin*)this._cPtr);
@@ -363,7 +377,7 @@ class Plugin : gst.object.ObjectWrap
       get the license of the plugin
       Returns: the license of the plugin
   */
-  string getLicense()
+  string getLicense() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_plugin_get_license(cast(GstPlugin*)this._cPtr);
@@ -375,7 +389,7 @@ class Plugin : gst.object.ObjectWrap
       Get the short name of the plugin
       Returns: the name of the plugin
   */
-  override string getName()
+  override string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_plugin_get_name(cast(GstPlugin*)this._cPtr);
@@ -387,7 +401,7 @@ class Plugin : gst.object.ObjectWrap
       get the URL where the plugin comes from
       Returns: the origin of the plugin
   */
-  string getOrigin()
+  string getOrigin() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_plugin_get_origin(cast(GstPlugin*)this._cPtr);
@@ -399,7 +413,7 @@ class Plugin : gst.object.ObjectWrap
       get the package the plugin belongs to.
       Returns: the package of the plugin
   */
-  string getPackage()
+  string getPackage() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_plugin_get_package(cast(GstPlugin*)this._cPtr);
@@ -419,7 +433,7 @@ class Plugin : gst.object.ObjectWrap
       Returns: the date string of the plugin, or null if not
         available.
   */
-  string getReleaseDateString()
+  string getReleaseDateString() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_plugin_get_release_date_string(cast(GstPlugin*)this._cPtr);
@@ -431,7 +445,7 @@ class Plugin : gst.object.ObjectWrap
       get the source module the plugin belongs to.
       Returns: the source of the plugin
   */
-  string getSource()
+  string getSource() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_plugin_get_source(cast(GstPlugin*)this._cPtr);
@@ -440,7 +454,7 @@ class Plugin : gst.object.ObjectWrap
   }
 
   /** */
-  string[] getStatusErrors()
+  string[] getStatusErrors() nothrow
   {
     char** _cretval;
     _cretval = gst_plugin_get_status_errors(cast(GstPlugin*)this._cPtr);
@@ -460,7 +474,7 @@ class Plugin : gst.object.ObjectWrap
   }
 
   /** */
-  string[] getStatusInfos()
+  string[] getStatusInfos() nothrow
   {
     char** _cretval;
     _cretval = gst_plugin_get_status_infos(cast(GstPlugin*)this._cPtr);
@@ -480,7 +494,7 @@ class Plugin : gst.object.ObjectWrap
   }
 
   /** */
-  string[] getStatusWarnings()
+  string[] getStatusWarnings() nothrow
   {
     char** _cretval;
     _cretval = gst_plugin_get_status_warnings(cast(GstPlugin*)this._cPtr);
@@ -503,7 +517,7 @@ class Plugin : gst.object.ObjectWrap
       get the version of the plugin
       Returns: the version of the plugin
   */
-  string getVersion()
+  string getVersion() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_plugin_get_version(cast(GstPlugin*)this._cPtr);
@@ -515,7 +529,7 @@ class Plugin : gst.object.ObjectWrap
       queries if the plugin is loaded into memory
       Returns: true is loaded, false otherwise
   */
-  bool isLoaded()
+  bool isLoaded() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_plugin_is_loaded(cast(GstPlugin*)this._cPtr);
@@ -536,7 +550,7 @@ class Plugin : gst.object.ObjectWrap
       Returns: a reference to a loaded plugin, or
         null on error.
   */
-  gst.plugin.Plugin load()
+  gst.plugin.Plugin load() nothrow
   {
     GstPlugin* _cretval;
     _cretval = gst_plugin_load(cast(GstPlugin*)this._cPtr);
@@ -553,7 +567,7 @@ class Plugin : gst.object.ObjectWrap
       Params:
         cacheData = a structure containing the data to cache
   */
-  void setCacheData(gst.structure.Structure cacheData)
+  void setCacheData(gst.structure.Structure cacheData) nothrow
   {
     gst_plugin_set_cache_data(cast(GstPlugin*)this._cPtr, cacheData ? cast(GstStructure*)cacheData._cPtr(Yes.Dup) : null);
   }
@@ -571,7 +585,7 @@ final class PluginGidBuilder : PluginGidBuilderImpl!PluginGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Plugin build()
+  Plugin build() nothrow
   {
     return new Plugin(cast(void*)createGObject(Plugin._getGType), No.Take);
   }

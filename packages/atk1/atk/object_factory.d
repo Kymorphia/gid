@@ -25,26 +25,26 @@ class ObjectFactory : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_object_factory_get_type != &gidSymbolNotFound ? atk_object_factory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ObjectFactory self()
+  override ObjectFactory self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class ObjectFactory : gobject.object.ObjectWrap
       Get builder for [atk.object_factory.ObjectFactory]
       Returns: New builder object
   */
-  static ObjectFactoryGidBuilder builder()
+  static ObjectFactoryGidBuilder builder() nothrow
   {
     return new ObjectFactoryGidBuilder;
   }
@@ -67,7 +67,7 @@ class ObjectFactory : gobject.object.ObjectWrap
       Returns: an #AtkObject that implements an accessibility
         interface on behalf of obj
   */
-  atk.object.ObjectWrap createAccessible(gobject.object.ObjectWrap obj)
+  atk.object.ObjectWrap createAccessible(gobject.object.ObjectWrap obj) nothrow
   {
     AtkObject* _cretval;
     _cretval = atk_object_factory_create_accessible(cast(AtkObjectFactory*)this._cPtr, obj ? cast(GObject*)obj._cPtr(No.Dup) : null);
@@ -80,7 +80,7 @@ class ObjectFactory : gobject.object.ObjectWrap
       Returns: the type of the accessible which is created by the factory.
         The value G_TYPE_INVALID is returned if no type if found.
   */
-  gobject.types.GType getAccessibleType()
+  gobject.types.GType getAccessibleType() nothrow
   {
     gobject.types.GType _retval;
     _retval = atk_object_factory_get_accessible_type(cast(AtkObjectFactory*)this._cPtr);
@@ -94,7 +94,7 @@ class ObjectFactory : gobject.object.ObjectWrap
       Note: primarily used for runtime replacement of #AtkObjectFactorys
       in object registries.
   */
-  void invalidate()
+  void invalidate() nothrow
   {
     atk_object_factory_invalidate(cast(AtkObjectFactory*)this._cPtr);
   }
@@ -112,7 +112,7 @@ final class ObjectFactoryGidBuilder : ObjectFactoryGidBuilderImpl!ObjectFactoryG
       Create object from builder.
       Returns: New object
   */
-  ObjectFactory build()
+  ObjectFactory build() nothrow
   {
     return new ObjectFactory(cast(void*)createGObject(ObjectFactory._getGType), No.Take);
   }

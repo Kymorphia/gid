@@ -54,26 +54,26 @@ class BufferPool : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_buffer_pool_get_type != &gidSymbolNotFound ? gst_buffer_pool_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BufferPool self()
+  override BufferPool self() nothrow
   {
     return this;
   }
@@ -82,7 +82,7 @@ class BufferPool : gst.object.ObjectWrap
       Get builder for [gst.buffer_pool.BufferPool]
       Returns: New builder object
   */
-  static BufferPoolGidBuilder builder()
+  static BufferPoolGidBuilder builder() nothrow
   {
     return new BufferPoolGidBuilder;
   }
@@ -91,7 +91,7 @@ class BufferPool : gst.object.ObjectWrap
       Creates a new #GstBufferPool instance.
       Returns: a new #GstBufferPool instance
   */
-  this()
+  this() nothrow
   {
     GstBufferPool* _cretval;
     _cretval = gst_buffer_pool_new();
@@ -108,7 +108,7 @@ class BufferPool : gst.object.ObjectWrap
         config = a #GstBufferPool configuration
         option = an option to add
   */
-  static void configAddOption(gst.structure.Structure config, string option)
+  static void configAddOption(gst.structure.Structure config, string option) nothrow
   {
     const(char)* _option = option.toCString(No.Alloc);
     gst_buffer_pool_config_add_option(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, _option);
@@ -123,7 +123,7 @@ class BufferPool : gst.object.ObjectWrap
         params = #GstAllocationParams, or null
       Returns: true, if the values are set.
   */
-  static bool configGetAllocator(gst.structure.Structure config, out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
+  static bool configGetAllocator(gst.structure.Structure config, out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params) nothrow
   {
     bool _retval;
     GstAllocator* _allocator;
@@ -141,7 +141,7 @@ class BufferPool : gst.object.ObjectWrap
         index = position in the option array to read
       Returns: the option at index.
   */
-  static string configGetOption(gst.structure.Structure config, uint index)
+  static string configGetOption(gst.structure.Structure config, uint index) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_buffer_pool_config_get_option(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, index);
@@ -160,7 +160,7 @@ class BufferPool : gst.object.ObjectWrap
         maxBuffers = the maximum amount of buffers to allocate or 0 for unlimited.
       Returns: true if all parameters could be fetched.
   */
-  static bool configGetParams(gst.structure.Structure config, out gst.caps.Caps caps, out uint size, out uint minBuffers, out uint maxBuffers)
+  static bool configGetParams(gst.structure.Structure config, out gst.caps.Caps caps, out uint size, out uint minBuffers, out uint maxBuffers) nothrow
   {
     bool _retval;
     GstCaps* _caps;
@@ -177,7 +177,7 @@ class BufferPool : gst.object.ObjectWrap
         option = an option
       Returns: true if the options array contains option.
   */
-  static bool configHasOption(gst.structure.Structure config, string option)
+  static bool configHasOption(gst.structure.Structure config, string option) nothrow
   {
     bool _retval;
     const(char)* _option = option.toCString(No.Alloc);
@@ -193,7 +193,7 @@ class BufferPool : gst.object.ObjectWrap
         config = a #GstBufferPool configuration
       Returns: the options array size as a #guint.
   */
-  static uint configNOptions(gst.structure.Structure config)
+  static uint configNOptions(gst.structure.Structure config) nothrow
   {
     uint _retval;
     _retval = gst_buffer_pool_config_n_options(config ? cast(GstStructure*)config._cPtr(No.Dup) : null);
@@ -219,7 +219,7 @@ class BufferPool : gst.object.ObjectWrap
         allocator = a #GstAllocator
         params = #GstAllocationParams
   */
-  static void configSetAllocator(gst.structure.Structure config, gst.allocator.Allocator allocator, gst.allocation_params.AllocationParams params)
+  static void configSetAllocator(gst.structure.Structure config, gst.allocator.Allocator allocator, gst.allocation_params.AllocationParams params) nothrow
   {
     gst_buffer_pool_config_set_allocator(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, cast(const(GstAllocationParams)*)&params);
   }
@@ -234,7 +234,7 @@ class BufferPool : gst.object.ObjectWrap
         minBuffers = the minimum amount of buffers to allocate.
         maxBuffers = the maximum amount of buffers to allocate or 0 for unlimited.
   */
-  static void configSetParams(gst.structure.Structure config, gst.caps.Caps caps, uint size, uint minBuffers, uint maxBuffers)
+  static void configSetParams(gst.structure.Structure config, gst.caps.Caps caps, uint size, uint minBuffers, uint maxBuffers) nothrow
   {
     gst_buffer_pool_config_set_params(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, size, minBuffers, maxBuffers);
   }
@@ -257,7 +257,7 @@ class BufferPool : gst.object.ObjectWrap
         maxBuffers = the expect maximum amount of buffers to allocate or 0 for unlimited.
       Returns: true, if the parameters are valid in this context.
   */
-  static bool configValidateParams(gst.structure.Structure config, gst.caps.Caps caps, uint size, uint minBuffers, uint maxBuffers)
+  static bool configValidateParams(gst.structure.Structure config, gst.caps.Caps caps, uint size, uint minBuffers, uint maxBuffers) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_buffer_pool_config_validate_params(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, size, minBuffers, maxBuffers);
@@ -278,7 +278,7 @@ class BufferPool : gst.object.ObjectWrap
       Returns: a #GstFlowReturn such as [gst.types.FlowReturn.Flushing] when the pool is
         inactive.
   */
-  gst.types.FlowReturn acquireBuffer(out gst.buffer.Buffer buffer, gst.types.BufferPoolAcquireParams params)
+  gst.types.FlowReturn acquireBuffer(out gst.buffer.Buffer buffer, gst.types.BufferPoolAcquireParams params) nothrow
   {
     GstFlowReturn _cretval;
     GstBuffer* _buffer;
@@ -293,7 +293,7 @@ class BufferPool : gst.object.ObjectWrap
       can be modified and used for the [gst.buffer_pool.BufferPool.setConfig] call.
       Returns: a copy of the current configuration of pool.
   */
-  gst.structure.Structure getConfig()
+  gst.structure.Structure getConfig() nothrow
   {
     GstStructure* _cretval;
     _cretval = gst_buffer_pool_get_config(cast(GstBufferPool*)this._cPtr);
@@ -308,7 +308,7 @@ class BufferPool : gst.object.ObjectWrap
       Returns: a null terminated array
                  of strings.
   */
-  string[] getOptions()
+  string[] getOptions() nothrow
   {
     const(char*)* _cretval;
     _cretval = gst_buffer_pool_get_options(cast(GstBufferPool*)this._cPtr);
@@ -333,7 +333,7 @@ class BufferPool : gst.object.ObjectWrap
         option = an option
       Returns: true if the buffer pool contains option.
   */
-  bool hasOption(string option)
+  bool hasOption(string option) nothrow
   {
     bool _retval;
     const(char)* _option = option.toCString(No.Alloc);
@@ -346,7 +346,7 @@ class BufferPool : gst.object.ObjectWrap
       [gst.buffer_pool.BufferPool.setActive] call.
       Returns: true when the pool is active.
   */
-  bool isActive()
+  bool isActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_buffer_pool_is_active(cast(GstBufferPool*)this._cPtr);
@@ -363,7 +363,7 @@ class BufferPool : gst.object.ObjectWrap
       Params:
         buffer = a #GstBuffer
   */
-  void releaseBuffer(gst.buffer.Buffer buffer)
+  void releaseBuffer(gst.buffer.Buffer buffer) nothrow
   {
     gst_buffer_pool_release_buffer(cast(GstBufferPool*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null);
   }
@@ -384,7 +384,7 @@ class BufferPool : gst.object.ObjectWrap
       Returns: false when the pool was not configured or when preallocation of the
         buffers failed.
   */
-  bool setActive(bool active)
+  bool setActive(bool active) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_buffer_pool_set_active(cast(GstBufferPool*)this._cPtr, active);
@@ -413,7 +413,7 @@ class BufferPool : gst.object.ObjectWrap
         config = a #GstStructure
       Returns: true when the configuration could be set.
   */
-  bool setConfig(gst.structure.Structure config)
+  bool setConfig(gst.structure.Structure config) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_buffer_pool_set_config(cast(GstBufferPool*)this._cPtr, config ? cast(GstStructure*)config._cPtr(Yes.Dup) : null);
@@ -427,7 +427,7 @@ class BufferPool : gst.object.ObjectWrap
       Params:
         flushing = whether to start or stop flushing
   */
-  void setFlushing(bool flushing)
+  void setFlushing(bool flushing) nothrow
   {
     gst_buffer_pool_set_flushing(cast(GstBufferPool*)this._cPtr, flushing);
   }
@@ -445,7 +445,7 @@ final class BufferPoolGidBuilder : BufferPoolGidBuilderImpl!BufferPoolGidBuilder
       Create object from builder.
       Returns: New object
   */
-  BufferPool build()
+  BufferPool build() nothrow
   {
     return new BufferPool(cast(void*)createGObject(BufferPool._getGType), Yes.Take);
   }

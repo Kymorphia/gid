@@ -17,39 +17,39 @@ class Binary : gobject.boxed.Boxed
       Params:
         binaryLength = length of @data
   */
-  this(glong binaryLength = glong.init)
+  this(glong binaryLength = glong.init) nothrow
   {
     super(gMalloc(GdaBinary.sizeof), Yes.Take);
     this.binaryLength = binaryLength;
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_binary_get_type != &gidSymbolNotFound ? gda_binary_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Binary self()
+  override Binary self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class Binary : gobject.boxed.Boxed
       Get `binaryLength` field.
       Returns: length of @data
   */
-  @property glong binaryLength()
+  @property glong binaryLength() nothrow
   {
     return (cast(GdaBinary*)this._cPtr).binaryLength;
   }
@@ -68,7 +68,7 @@ class Binary : gobject.boxed.Boxed
       Params:
         propval = length of @data
   */
-  @property void binaryLength(glong propval)
+  @property void binaryLength(glong propval) nothrow
   {
     (cast(GdaBinary*)this._cPtr).binaryLength = propval;
   }
@@ -90,7 +90,7 @@ class Binary : gobject.boxed.Boxed
         maxlen = a maximum len used to truncate, or `0` for no maximum length
       Returns: a new string from bin
   */
-  string toString_(uint maxlen)
+  string toString_(uint maxlen) nothrow
   {
     char* _cretval;
     _cretval = gda_binary_to_string(cast(const(GdaBinary)*)this._cPtr, maxlen);
@@ -107,7 +107,7 @@ class Binary : gobject.boxed.Boxed
         
         Free-function: gda_binary_free
   */
-  static void* copy(void* boxed = null)
+  static void* copy(void* boxed = null) nothrow
   {
     auto _retval = gda_binary_copy(boxed);
     return _retval;
@@ -119,7 +119,7 @@ class Binary : gobject.boxed.Boxed
       Params:
         boxed = #GdaBinary to free.
   */
-  static void free(void* boxed = null)
+  static void free(void* boxed = null) nothrow
   {
     gda_binary_free(boxed);
   }

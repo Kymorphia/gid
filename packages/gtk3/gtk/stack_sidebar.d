@@ -37,26 +37,26 @@ class StackSidebar : gtk.bin.Bin
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_stack_sidebar_get_type != &gidSymbolNotFound ? gtk_stack_sidebar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StackSidebar self()
+  override StackSidebar self() nothrow
   {
     return this;
   }
@@ -65,19 +65,19 @@ class StackSidebar : gtk.bin.Bin
       Get builder for [gtk.stack_sidebar.StackSidebar]
       Returns: New builder object
   */
-  static StackSidebarGidBuilder builder()
+  static StackSidebarGidBuilder builder() nothrow
   {
     return new StackSidebarGidBuilder;
   }
 
   /** */
-  @property gtk.stack.Stack stack()
+  @property gtk.stack.Stack stack() nothrow
   {
     return getStack();
   }
 
   /** */
-  @property void stack(gtk.stack.Stack propval)
+  @property void stack(gtk.stack.Stack propval) nothrow
   {
     setStack(propval);
   }
@@ -86,7 +86,7 @@ class StackSidebar : gtk.bin.Bin
       Creates a new sidebar.
       Returns: the new #GtkStackSidebar
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_stack_sidebar_new();
@@ -99,7 +99,7 @@ class StackSidebar : gtk.bin.Bin
       Returns: the associated #GtkStack or
             null if none has been set explicitly
   */
-  gtk.stack.Stack getStack()
+  gtk.stack.Stack getStack() nothrow
   {
     GtkStack* _cretval;
     _cretval = gtk_stack_sidebar_get_stack(cast(GtkStackSidebar*)this._cPtr);
@@ -116,7 +116,7 @@ class StackSidebar : gtk.bin.Bin
       Params:
         stack = a #GtkStack
   */
-  void setStack(gtk.stack.Stack stack)
+  void setStack(gtk.stack.Stack stack) nothrow
   {
     gtk_stack_sidebar_set_stack(cast(GtkStackSidebar*)this._cPtr, stack ? cast(GtkStack*)stack._cPtr(No.Dup) : null);
   }
@@ -128,7 +128,7 @@ class StackSidebarGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 
 
   /** */
-  T stack(gtk.stack.Stack propval)
+  T stack(gtk.stack.Stack propval) nothrow
   {
     return setProperty("stack", propval);
   }
@@ -141,7 +141,7 @@ final class StackSidebarGidBuilder : StackSidebarGidBuilderImpl!StackSidebarGidB
       Create object from builder.
       Returns: New object
   */
-  StackSidebar build()
+  StackSidebar build() nothrow
   {
     return new StackSidebar(cast(void*)createGObject(StackSidebar._getGType), No.Take);
   }

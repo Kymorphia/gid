@@ -14,26 +14,26 @@ class PixbufSimpleAnimIter : gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_pixbuf_simple_anim_iter_get_type != &gidSymbolNotFound ? gdk_pixbuf_simple_anim_iter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PixbufSimpleAnimIter self()
+  override PixbufSimpleAnimIter self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class PixbufSimpleAnimIter : gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter
       Get builder for [gdkpixbuf.pixbuf_simple_anim_iter.PixbufSimpleAnimIter]
       Returns: New builder object
   */
-  static PixbufSimpleAnimIterGidBuilder builder()
+  static PixbufSimpleAnimIterGidBuilder builder() nothrow
   {
     return new PixbufSimpleAnimIterGidBuilder;
   }
@@ -60,7 +60,7 @@ final class PixbufSimpleAnimIterGidBuilder : PixbufSimpleAnimIterGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  PixbufSimpleAnimIter build()
+  PixbufSimpleAnimIter build() nothrow
   {
     return new PixbufSimpleAnimIter(cast(void*)createGObject(PixbufSimpleAnimIter._getGType), No.Take);
   }

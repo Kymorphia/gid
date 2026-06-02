@@ -27,32 +27,32 @@ class PrintSetup : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_print_setup_get_type != &gidSymbolNotFound ? gtk_print_setup_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PrintSetup self()
+  override PrintSetup self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class PrintSetup : gobject.boxed.Boxed
       if the user changed it during the setup process.
       Returns: the page setup, or `NULL`
   */
-  gtk.page_setup.PageSetup getPageSetup()
+  gtk.page_setup.PageSetup getPageSetup() nothrow
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_setup_get_page_setup(cast(GtkPrintSetup*)this._cPtr);
@@ -79,7 +79,7 @@ class PrintSetup : gobject.boxed.Boxed
       if the user changed them during the setup process.
       Returns: the print settings, or `NULL`
   */
-  gtk.print_settings.PrintSettings getPrintSettings()
+  gtk.print_settings.PrintSettings getPrintSettings() nothrow
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_setup_get_print_settings(cast(GtkPrintSetup*)this._cPtr);

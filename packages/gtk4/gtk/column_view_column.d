@@ -31,26 +31,26 @@ class ColumnViewColumn : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_column_view_column_get_type != &gidSymbolNotFound ? gtk_column_view_column_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ColumnViewColumn self()
+  override ColumnViewColumn self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Get builder for [gtk.column_view_column.ColumnViewColumn]
       Returns: New builder object
   */
-  static ColumnViewColumnGidBuilder builder()
+  static ColumnViewColumnGidBuilder builder() nothrow
   {
     return new ColumnViewColumnGidBuilder;
   }
@@ -68,7 +68,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Get `columnView` property.
       Returns: The [gtk.column_view.ColumnView] this column is a part of.
   */
-  @property gtk.column_view.ColumnView columnView()
+  @property gtk.column_view.ColumnView columnView() nothrow
   {
     return getColumnView();
   }
@@ -77,7 +77,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Get `expand` property.
       Returns: Column gets share of extra width allocated to the view.
   */
-  @property bool expand()
+  @property bool expand() nothrow
   {
     return getExpand();
   }
@@ -87,7 +87,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Params:
         propval = Column gets share of extra width allocated to the view.
   */
-  @property void expand(bool propval)
+  @property void expand(bool propval) nothrow
   {
     setExpand(propval);
   }
@@ -96,7 +96,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Get `factory` property.
       Returns: Factory for populating list items.
   */
-  @property gtk.list_item_factory.ListItemFactory factory()
+  @property gtk.list_item_factory.ListItemFactory factory() nothrow
   {
     return getFactory();
   }
@@ -106,7 +106,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Params:
         propval = Factory for populating list items.
   */
-  @property void factory(gtk.list_item_factory.ListItemFactory propval)
+  @property void factory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
     setFactory(propval);
   }
@@ -116,7 +116,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Returns: If not -1, this is the width that the column is allocated,
         regardless of the size of its content.
   */
-  @property int fixedWidth()
+  @property int fixedWidth() nothrow
   {
     return getFixedWidth();
   }
@@ -127,7 +127,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
         propval = If not -1, this is the width that the column is allocated,
           regardless of the size of its content.
   */
-  @property void fixedWidth(int propval)
+  @property void fixedWidth(int propval) nothrow
   {
     setFixedWidth(propval);
   }
@@ -136,7 +136,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Get `headerMenu` property.
       Returns: Menu model used to create the context menu for the column header.
   */
-  @property gio.menu_model.MenuModel headerMenu()
+  @property gio.menu_model.MenuModel headerMenu() nothrow
   {
     return getHeaderMenu();
   }
@@ -146,7 +146,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Params:
         propval = Menu model used to create the context menu for the column header.
   */
-  @property void headerMenu(gio.menu_model.MenuModel propval)
+  @property void headerMenu(gio.menu_model.MenuModel propval) nothrow
   {
     setHeaderMenu(propval);
   }
@@ -161,7 +161,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
         
         It is up to applications to ensure uniqueness of IDs.
   */
-  @property string id()
+  @property string id() nothrow
   {
     return getId();
   }
@@ -177,7 +177,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
           
           It is up to applications to ensure uniqueness of IDs.
   */
-  @property void id(string propval)
+  @property void id(string propval) nothrow
   {
     setId(propval);
   }
@@ -186,7 +186,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Get `resizable` property.
       Returns: Whether this column is resizable.
   */
-  @property bool resizable()
+  @property bool resizable() nothrow
   {
     return getResizable();
   }
@@ -196,7 +196,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Params:
         propval = Whether this column is resizable.
   */
-  @property void resizable(bool propval)
+  @property void resizable(bool propval) nothrow
   {
     setResizable(propval);
   }
@@ -205,7 +205,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Get `sorter` property.
       Returns: Sorter for sorting items according to this column.
   */
-  @property gtk.sorter.Sorter sorter()
+  @property gtk.sorter.Sorter sorter() nothrow
   {
     return getSorter();
   }
@@ -215,7 +215,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Params:
         propval = Sorter for sorting items according to this column.
   */
-  @property void sorter(gtk.sorter.Sorter propval)
+  @property void sorter(gtk.sorter.Sorter propval) nothrow
   {
     setSorter(propval);
   }
@@ -224,7 +224,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Get `title` property.
       Returns: Title displayed in the header.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return getTitle();
   }
@@ -234,7 +234,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Params:
         propval = Title displayed in the header.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     setTitle(propval);
   }
@@ -243,7 +243,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Get `visible` property.
       Returns: Whether this column is visible.
   */
-  @property bool visible()
+  @property bool visible() nothrow
   {
     return getVisible();
   }
@@ -253,7 +253,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Params:
         propval = Whether this column is visible.
   */
-  @property void visible(bool propval)
+  @property void visible(bool propval) nothrow
   {
     setVisible(propval);
   }
@@ -276,7 +276,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
         factory = The factory to populate items with
       Returns: a new [gtk.column_view_column.ColumnViewColumn] using the given factory
   */
-  this(string title = null, gtk.list_item_factory.ListItemFactory factory = null)
+  this(string title = null, gtk.list_item_factory.ListItemFactory factory = null) nothrow
   {
     GtkColumnViewColumn* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
@@ -290,7 +290,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       If self has not been added to a column view yet, null is returned.
       Returns: The column view displaying self.
   */
-  gtk.column_view.ColumnView getColumnView()
+  gtk.column_view.ColumnView getColumnView() nothrow
   {
     GtkColumnView* _cretval;
     _cretval = gtk_column_view_column_get_column_view(cast(GtkColumnViewColumn*)this._cPtr);
@@ -302,7 +302,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Returns whether this column should expand.
       Returns: true if this column expands
   */
-  bool getExpand()
+  bool getExpand() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_column_view_column_get_expand(cast(GtkColumnViewColumn*)this._cPtr);
@@ -314,7 +314,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       this column.
       Returns: The factory in use
   */
-  gtk.list_item_factory.ListItemFactory getFactory()
+  gtk.list_item_factory.ListItemFactory getFactory() nothrow
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_column_view_column_get_factory(cast(GtkColumnViewColumn*)this._cPtr);
@@ -326,7 +326,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Gets the fixed width of the column.
       Returns: the fixed with of the column
   */
-  int getFixedWidth()
+  int getFixedWidth() nothrow
   {
     int _retval;
     _retval = gtk_column_view_column_get_fixed_width(cast(GtkColumnViewColumn*)this._cPtr);
@@ -338,7 +338,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       for the column header.
       Returns: the [gio.menu_model.MenuModel]
   */
-  gio.menu_model.MenuModel getHeaderMenu()
+  gio.menu_model.MenuModel getHeaderMenu() nothrow
   {
     GMenuModel* _cretval;
     _cretval = gtk_column_view_column_get_header_menu(cast(GtkColumnViewColumn*)this._cPtr);
@@ -350,7 +350,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Returns the ID set with [gtk.column_view_column.ColumnViewColumn.setId].
       Returns: The column's ID
   */
-  string getId()
+  string getId() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_column_view_column_get_id(cast(GtkColumnViewColumn*)this._cPtr);
@@ -362,7 +362,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Returns whether this column is resizable.
       Returns: true if this column is resizable
   */
-  bool getResizable()
+  bool getResizable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_column_view_column_get_resizable(cast(GtkColumnViewColumn*)this._cPtr);
@@ -373,7 +373,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Returns the sorter that is associated with the column.
       Returns: the [gtk.sorter.Sorter] of self
   */
-  gtk.sorter.Sorter getSorter()
+  gtk.sorter.Sorter getSorter() nothrow
   {
     GtkSorter* _cretval;
     _cretval = gtk_column_view_column_get_sorter(cast(GtkColumnViewColumn*)this._cPtr);
@@ -385,7 +385,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Returns the title set with [gtk.column_view_column.ColumnViewColumn.setTitle].
       Returns: The column's title
   */
-  string getTitle()
+  string getTitle() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_column_view_column_get_title(cast(GtkColumnViewColumn*)this._cPtr);
@@ -397,7 +397,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Returns whether this column is visible.
       Returns: true if this column is visible
   */
-  bool getVisible()
+  bool getVisible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_column_view_column_get_visible(cast(GtkColumnViewColumn*)this._cPtr);
@@ -413,7 +413,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Params:
         expand = true if this column should expand to fill available sace
   */
-  void setExpand(bool expand)
+  void setExpand(bool expand) nothrow
   {
     gtk_column_view_column_set_expand(cast(GtkColumnViewColumn*)this._cPtr, expand);
   }
@@ -425,7 +425,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Params:
         factory = the factory to use
   */
-  void setFactory(gtk.list_item_factory.ListItemFactory factory = null)
+  void setFactory(gtk.list_item_factory.ListItemFactory factory = null) nothrow
   {
     gtk_column_view_column_set_factory(cast(GtkColumnViewColumn*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
   }
@@ -440,7 +440,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Params:
         fixedWidth = the new fixed width, or -1
   */
-  void setFixedWidth(int fixedWidth)
+  void setFixedWidth(int fixedWidth) nothrow
   {
     gtk_column_view_column_set_fixed_width(cast(GtkColumnViewColumn*)this._cPtr, fixedWidth);
   }
@@ -452,7 +452,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Params:
         menu = a [gio.menu_model.MenuModel]
   */
-  void setHeaderMenu(gio.menu_model.MenuModel menu = null)
+  void setHeaderMenu(gio.menu_model.MenuModel menu = null) nothrow
   {
     gtk_column_view_column_set_header_menu(cast(GtkColumnViewColumn*)this._cPtr, menu ? cast(GMenuModel*)menu._cPtr(No.Dup) : null);
   }
@@ -468,7 +468,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Params:
         id = ID to use for this column
   */
-  void setId(string id = null)
+  void setId(string id = null) nothrow
   {
     const(char)* _id = id.toCString(No.Alloc);
     gtk_column_view_column_set_id(cast(GtkColumnViewColumn*)this._cPtr, _id);
@@ -480,7 +480,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Params:
         resizable = whether this column should be resizable
   */
-  void setResizable(bool resizable)
+  void setResizable(bool resizable) nothrow
   {
     gtk_column_view_column_set_resizable(cast(GtkColumnViewColumn*)this._cPtr, resizable);
   }
@@ -500,7 +500,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Params:
         sorter = the [gtk.sorter.Sorter] to associate with column
   */
-  void setSorter(gtk.sorter.Sorter sorter = null)
+  void setSorter(gtk.sorter.Sorter sorter = null) nothrow
   {
     gtk_column_view_column_set_sorter(cast(GtkColumnViewColumn*)this._cPtr, sorter ? cast(GtkSorter*)sorter._cPtr(No.Dup) : null);
   }
@@ -515,7 +515,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Params:
         title = Title to use for this column
   */
-  void setTitle(string title = null)
+  void setTitle(string title = null) nothrow
   {
     const(char)* _title = title.toCString(No.Alloc);
     gtk_column_view_column_set_title(cast(GtkColumnViewColumn*)this._cPtr, _title);
@@ -527,7 +527,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
       Params:
         visible = whether this column should be visible
   */
-  void setVisible(bool visible)
+  void setVisible(bool visible) nothrow
   {
     gtk_column_view_column_set_visible(cast(GtkColumnViewColumn*)this._cPtr, visible);
   }
@@ -543,7 +543,7 @@ class ColumnViewColumnGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = Column gets share of extra width allocated to the view.
       Returns: Builder instance for fluent chaining
   */
-  T expand(bool propval)
+  T expand(bool propval) nothrow
   {
     return setProperty("expand", propval);
   }
@@ -554,7 +554,7 @@ class ColumnViewColumnGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = Factory for populating list items.
       Returns: Builder instance for fluent chaining
   */
-  T factory(gtk.list_item_factory.ListItemFactory propval)
+  T factory(gtk.list_item_factory.ListItemFactory propval) nothrow
   {
     return setProperty("factory", propval);
   }
@@ -566,7 +566,7 @@ class ColumnViewColumnGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
           regardless of the size of its content.
       Returns: Builder instance for fluent chaining
   */
-  T fixedWidth(int propval)
+  T fixedWidth(int propval) nothrow
   {
     return setProperty("fixed-width", propval);
   }
@@ -577,7 +577,7 @@ class ColumnViewColumnGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = Menu model used to create the context menu for the column header.
       Returns: Builder instance for fluent chaining
   */
-  T headerMenu(gio.menu_model.MenuModel propval)
+  T headerMenu(gio.menu_model.MenuModel propval) nothrow
   {
     return setProperty("header-menu", propval);
   }
@@ -594,7 +594,7 @@ class ColumnViewColumnGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
           It is up to applications to ensure uniqueness of IDs.
       Returns: Builder instance for fluent chaining
   */
-  T id(string propval)
+  T id(string propval) nothrow
   {
     return setProperty("id", propval);
   }
@@ -605,7 +605,7 @@ class ColumnViewColumnGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = Whether this column is resizable.
       Returns: Builder instance for fluent chaining
   */
-  T resizable(bool propval)
+  T resizable(bool propval) nothrow
   {
     return setProperty("resizable", propval);
   }
@@ -616,7 +616,7 @@ class ColumnViewColumnGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = Sorter for sorting items according to this column.
       Returns: Builder instance for fluent chaining
   */
-  T sorter(gtk.sorter.Sorter propval)
+  T sorter(gtk.sorter.Sorter propval) nothrow
   {
     return setProperty("sorter", propval);
   }
@@ -627,7 +627,7 @@ class ColumnViewColumnGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = Title displayed in the header.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -638,7 +638,7 @@ class ColumnViewColumnGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = Whether this column is visible.
       Returns: Builder instance for fluent chaining
   */
-  T visible(bool propval)
+  T visible(bool propval) nothrow
   {
     return setProperty("visible", propval);
   }
@@ -651,7 +651,7 @@ final class ColumnViewColumnGidBuilder : ColumnViewColumnGidBuilderImpl!ColumnVi
       Create object from builder.
       Returns: New object
   */
-  ColumnViewColumn build()
+  ColumnViewColumn build() nothrow
   {
     return new ColumnViewColumn(cast(void*)createGObject(ColumnViewColumn._getGType), Yes.Take);
   }

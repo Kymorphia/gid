@@ -32,26 +32,26 @@ class GhostPad : gst.proxy_pad.ProxyPad
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_ghost_pad_get_type != &gidSymbolNotFound ? gst_ghost_pad_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GhostPad self()
+  override GhostPad self() nothrow
   {
     return this;
   }
@@ -60,7 +60,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
       Get builder for [gst.ghost_pad.GhostPad]
       Returns: New builder object
   */
-  static GhostPadGidBuilder builder()
+  static GhostPadGidBuilder builder() nothrow
   {
     return new GhostPadGidBuilder;
   }
@@ -77,7 +77,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
       Returns: a new #GstPad, or null in
         case of an error.
   */
-  this(string name, gst.pad.Pad target)
+  this(string name, gst.pad.Pad target) nothrow
   {
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -98,7 +98,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
       Returns: a new #GstPad, or null in
         case of an error.
   */
-  static gst.ghost_pad.GhostPad newFromTemplate(string name, gst.pad.Pad target, gst.pad_template.PadTemplate templ)
+  static gst.ghost_pad.GhostPad newFromTemplate(string name, gst.pad.Pad target, gst.pad_template.PadTemplate templ) nothrow
   {
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -120,7 +120,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
       Returns: a new #GstPad, or null in
         case of an error.
   */
-  static gst.ghost_pad.GhostPad newNoTarget(string name, gst.types.PadDirection dir)
+  static gst.ghost_pad.GhostPad newNoTarget(string name, gst.types.PadDirection dir) nothrow
   {
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -139,7 +139,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
       Returns: a new #GstPad, or null in
         case of an error.
   */
-  static gst.ghost_pad.GhostPad newNoTargetFromTemplate(string name, gst.pad_template.PadTemplate templ)
+  static gst.ghost_pad.GhostPad newNoTargetFromTemplate(string name, gst.pad_template.PadTemplate templ) nothrow
   {
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -158,7 +158,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
         active = whether the pad should be active or not.
       Returns: true if the operation was successful.
   */
-  static bool activateModeDefault(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.types.PadMode mode, bool active)
+  static bool activateModeDefault(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.types.PadMode mode, bool active) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_ghost_pad_activate_mode_default(pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, mode, active);
@@ -176,7 +176,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
         active = whether the pad should be active or not.
       Returns: true if the operation was successful.
   */
-  static bool internalActivateModeDefault(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.types.PadMode mode, bool active)
+  static bool internalActivateModeDefault(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.types.PadMode mode, bool active) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_ghost_pad_internal_activate_mode_default(pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, mode, active);
@@ -195,7 +195,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
       Deprecated: This function is deprecated since 1.18 and does nothing
         anymore.
   */
-  bool construct()
+  bool construct() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_ghost_pad_construct(cast(GstGhostPad*)this._cPtr);
@@ -208,7 +208,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
         null if the ghostpad has no target set. Unref target pad after
         usage.
   */
-  gst.pad.Pad getTarget()
+  gst.pad.Pad getTarget() nothrow
   {
     GstPad* _cretval;
     _cretval = gst_ghost_pad_get_target(cast(GstGhostPad*)this._cPtr);
@@ -226,7 +226,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
       Returns: true if the new target could be set. This function
             can return false when the internal pads could not be linked.
   */
-  bool setTarget(gst.pad.Pad newtarget = null)
+  bool setTarget(gst.pad.Pad newtarget = null) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_ghost_pad_set_target(cast(GstGhostPad*)this._cPtr, newtarget ? cast(GstPad*)newtarget._cPtr(No.Dup) : null);
@@ -246,7 +246,7 @@ final class GhostPadGidBuilder : GhostPadGidBuilderImpl!GhostPadGidBuilder
       Create object from builder.
       Returns: New object
   */
-  GhostPad build()
+  GhostPad build() nothrow
   {
     return new GhostPad(cast(void*)createGObject(GhostPad._getGType), No.Take);
   }

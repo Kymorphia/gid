@@ -32,26 +32,26 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_box_layout_get_type != &gidSymbolNotFound ? gtk_box_layout_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BoxLayout self()
+  override BoxLayout self() nothrow
   {
     return this;
   }
@@ -60,7 +60,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Get builder for [gtk.box_layout.BoxLayout]
       Returns: New builder object
   */
-  static BoxLayoutGidBuilder builder()
+  static BoxLayoutGidBuilder builder() nothrow
   {
     return new BoxLayoutGidBuilder;
   }
@@ -74,7 +74,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
         is lined up with the baseline of the box. If it doesn't, then
         the bottom edge of the child is used.
   */
-  @property int baselineChild()
+  @property int baselineChild() nothrow
   {
     return getBaselineChild();
   }
@@ -89,7 +89,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
           is lined up with the baseline of the box. If it doesn't, then
           the bottom edge of the child is used.
   */
-  @property void baselineChild(int propval)
+  @property void baselineChild(int propval) nothrow
   {
     setBaselineChild(propval);
   }
@@ -102,7 +102,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
         This property is only relevant for horizontal layouts containing
         at least one child with a baseline alignment.
   */
-  @property gtk.types.BaselinePosition baselinePosition()
+  @property gtk.types.BaselinePosition baselinePosition() nothrow
   {
     return getBaselinePosition();
   }
@@ -116,7 +116,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
           This property is only relevant for horizontal layouts containing
           at least one child with a baseline alignment.
   */
-  @property void baselinePosition(gtk.types.BaselinePosition propval)
+  @property void baselinePosition(gtk.types.BaselinePosition propval) nothrow
   {
     setBaselinePosition(propval);
   }
@@ -126,7 +126,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Returns: Whether the box layout should distribute the available space
         equally among the children.
   */
-  @property bool homogeneous()
+  @property bool homogeneous() nothrow
   {
     return getHomogeneous();
   }
@@ -137,7 +137,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
         propval = Whether the box layout should distribute the available space
           equally among the children.
   */
-  @property void homogeneous(bool propval)
+  @property void homogeneous(bool propval) nothrow
   {
     setHomogeneous(propval);
   }
@@ -146,7 +146,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Get `spacing` property.
       Returns: The space to put between the children.
   */
-  @property int spacing()
+  @property int spacing() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("spacing");
   }
@@ -156,7 +156,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Params:
         propval = The space to put between the children.
   */
-  @property void spacing(int propval)
+  @property void spacing(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("spacing", propval);
   }
@@ -170,7 +170,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
         orientation = the orientation for the new layout
       Returns: a new box layout
   */
-  this(gtk.types.Orientation orientation)
+  this(gtk.types.Orientation orientation) nothrow
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_box_layout_new(orientation);
@@ -182,7 +182,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Returns: the index of the child that determines the baseline
             in vertical layout, or -1
   */
-  int getBaselineChild()
+  int getBaselineChild() nothrow
   {
     int _retval;
     _retval = gtk_box_layout_get_baseline_child(cast(GtkBoxLayout*)this._cPtr);
@@ -193,7 +193,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Gets the value set by [gtk.box_layout.BoxLayout.setBaselinePosition].
       Returns: the baseline position
   */
-  gtk.types.BaselinePosition getBaselinePosition()
+  gtk.types.BaselinePosition getBaselinePosition() nothrow
   {
     GtkBaselinePosition _cretval;
     _cretval = gtk_box_layout_get_baseline_position(cast(GtkBoxLayout*)this._cPtr);
@@ -205,7 +205,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Returns whether the layout is set to be homogeneous.
       Returns: true if the layout is homogeneous
   */
-  bool getHomogeneous()
+  bool getHomogeneous() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_box_layout_get_homogeneous(cast(GtkBoxLayout*)this._cPtr);
@@ -216,7 +216,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Returns the space that box_layout puts between children.
       Returns: the spacing of the layout
   */
-  uint getSpacing()
+  uint getSpacing() nothrow
   {
     uint _retval;
     _retval = gtk_box_layout_get_spacing(cast(GtkBoxLayout*)this._cPtr);
@@ -230,7 +230,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Params:
         child = the child position, or -1
   */
-  void setBaselineChild(int child)
+  void setBaselineChild(int child) nothrow
   {
     gtk_box_layout_set_baseline_child(cast(GtkBoxLayout*)this._cPtr, child);
   }
@@ -247,7 +247,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Params:
         position = a [gtk.types.BaselinePosition]
   */
-  void setBaselinePosition(gtk.types.BaselinePosition position)
+  void setBaselinePosition(gtk.types.BaselinePosition position) nothrow
   {
     gtk_box_layout_set_baseline_position(cast(GtkBoxLayout*)this._cPtr, position);
   }
@@ -259,7 +259,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Params:
         homogeneous = true to set the box layout as homogeneous
   */
-  void setHomogeneous(bool homogeneous)
+  void setHomogeneous(bool homogeneous) nothrow
   {
     gtk_box_layout_set_homogeneous(cast(GtkBoxLayout*)this._cPtr, homogeneous);
   }
@@ -270,7 +270,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
       Params:
         spacing = the spacing to apply between children
   */
-  void setSpacing(uint spacing)
+  void setSpacing(uint spacing) nothrow
   {
     gtk_box_layout_set_spacing(cast(GtkBoxLayout*)this._cPtr, spacing);
   }
@@ -293,7 +293,7 @@ class BoxLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderImp
           the bottom edge of the child is used.
       Returns: Builder instance for fluent chaining
   */
-  T baselineChild(int propval)
+  T baselineChild(int propval) nothrow
   {
     return setProperty("baseline-child", propval);
   }
@@ -308,7 +308,7 @@ class BoxLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderImp
           at least one child with a baseline alignment.
       Returns: Builder instance for fluent chaining
   */
-  T baselinePosition(gtk.types.BaselinePosition propval)
+  T baselinePosition(gtk.types.BaselinePosition propval) nothrow
   {
     return setProperty("baseline-position", propval);
   }
@@ -320,7 +320,7 @@ class BoxLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderImp
           equally among the children.
       Returns: Builder instance for fluent chaining
   */
-  T homogeneous(bool propval)
+  T homogeneous(bool propval) nothrow
   {
     return setProperty("homogeneous", propval);
   }
@@ -331,7 +331,7 @@ class BoxLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderImp
         propval = The space to put between the children.
       Returns: Builder instance for fluent chaining
   */
-  T spacing(int propval)
+  T spacing(int propval) nothrow
   {
     return setProperty("spacing", propval);
   }
@@ -344,7 +344,7 @@ final class BoxLayoutGidBuilder : BoxLayoutGidBuilderImpl!BoxLayoutGidBuilder
       Create object from builder.
       Returns: New object
   */
-  BoxLayout build()
+  BoxLayout build() nothrow
   {
     return new BoxLayout(cast(void*)createGObject(BoxLayout._getGType), Yes.Take);
   }

@@ -16,26 +16,26 @@ class Pkcs7Context : gmime.crypto_context.CryptoContext
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_pkcs7_context_get_type != &gidSymbolNotFound ? g_mime_pkcs7_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Pkcs7Context self()
+  override Pkcs7Context self() nothrow
   {
     return this;
   }
@@ -44,7 +44,7 @@ class Pkcs7Context : gmime.crypto_context.CryptoContext
       Get builder for [gmime.pkcs7_context.Pkcs7Context]
       Returns: New builder object
   */
-  static Pkcs7ContextGidBuilder builder()
+  static Pkcs7ContextGidBuilder builder() nothrow
   {
     return new Pkcs7ContextGidBuilder;
   }
@@ -53,7 +53,7 @@ class Pkcs7Context : gmime.crypto_context.CryptoContext
       Creates a new pkcs7 crypto context object.
       Returns: a new pkcs7 crypto context object.
   */
-  this()
+  this() nothrow
   {
     GMimeCryptoContext* _cretval;
     _cretval = g_mime_pkcs7_context_new();
@@ -73,7 +73,7 @@ final class Pkcs7ContextGidBuilder : Pkcs7ContextGidBuilderImpl!Pkcs7ContextGidB
       Create object from builder.
       Returns: New object
   */
-  Pkcs7Context build()
+  Pkcs7Context build() nothrow
   {
     return new Pkcs7Context(cast(void*)createGObject(Pkcs7Context._getGType), Yes.Take);
   }

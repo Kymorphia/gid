@@ -37,7 +37,7 @@ import gstvideo.video_time_code_meta;
 
 
 /** */
-gobject.types.GType ancillaryMetaApiGetType()
+gobject.types.GType ancillaryMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_ancillary_meta_api_get_type();
@@ -52,7 +52,7 @@ gobject.types.GType ancillaryMetaApiGetType()
       buffer = A #GstBuffer
     Returns: A new #GstAncillaryMeta, or null if an error happened.
 */
-gstvideo.ancillary_meta.AncillaryMeta bufferAddAncillaryMeta(gst.buffer.Buffer buffer)
+gstvideo.ancillary_meta.AncillaryMeta bufferAddAncillaryMeta(gst.buffer.Buffer buffer) nothrow
 {
   GstAncillaryMeta* _cretval;
   _cretval = gst_buffer_add_ancillary_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
@@ -71,7 +71,7 @@ gstvideo.ancillary_meta.AncillaryMeta bufferAddAncillaryMeta(gst.buffer.Buffer b
       afd = #GstVideoAFDValue AFD enumeration
     Returns: the #GstVideoAFDMeta on buffer.
 */
-gstvideo.video_afdmeta.VideoAFDMeta bufferAddVideoAfdMeta(gst.buffer.Buffer buffer, ubyte field, gstvideo.types.VideoAFDSpec spec, gstvideo.types.VideoAFDValue afd)
+gstvideo.video_afdmeta.VideoAFDMeta bufferAddVideoAfdMeta(gst.buffer.Buffer buffer, ubyte field, gstvideo.types.VideoAFDSpec spec, gstvideo.types.VideoAFDValue afd) nothrow
 {
   GstVideoAFDMeta* _cretval;
   _cretval = gst_buffer_add_video_afd_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, field, spec, afd);
@@ -87,7 +87,7 @@ gstvideo.video_afdmeta.VideoAFDMeta bufferAddVideoAfdMeta(gst.buffer.Buffer buff
       buffer = a #GstBuffer
     Returns: the #GstVideoAffineTransformationMeta on buffer.
 */
-gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta bufferAddVideoAffineTransformationMeta(gst.buffer.Buffer buffer)
+gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta bufferAddVideoAffineTransformationMeta(gst.buffer.Buffer buffer) nothrow
 {
   GstVideoAffineTransformationMeta* _cretval;
   _cretval = gst_buffer_add_video_affine_transformation_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
@@ -117,7 +117,7 @@ gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta bufferAd
       
       https://www.atsc.org/wp-content/uploads/2015/03/a_53-Part-4-2009.pdf
 */
-gstvideo.video_bar_meta.VideoBarMeta bufferAddVideoBarMeta(gst.buffer.Buffer buffer, ubyte field, bool isLetterbox, uint barData1, uint barData2)
+gstvideo.video_bar_meta.VideoBarMeta bufferAddVideoBarMeta(gst.buffer.Buffer buffer, ubyte field, bool isLetterbox, uint barData1, uint barData2) nothrow
 {
   GstVideoBarMeta* _cretval;
   _cretval = gst_buffer_add_video_bar_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, field, isLetterbox, barData1, barData2);
@@ -135,7 +135,7 @@ gstvideo.video_bar_meta.VideoBarMeta bufferAddVideoBarMeta(gst.buffer.Buffer buf
       data = The Closed Caption data
     Returns: the #GstVideoCaptionMeta on buffer.
 */
-gstvideo.video_caption_meta.VideoCaptionMeta bufferAddVideoCaptionMeta(gst.buffer.Buffer buffer, gstvideo.types.VideoCaptionType captionType, ubyte[] data)
+gstvideo.video_caption_meta.VideoCaptionMeta bufferAddVideoCaptionMeta(gst.buffer.Buffer buffer, gstvideo.types.VideoCaptionType captionType, ubyte[] data) nothrow
 {
   GstVideoCaptionMeta* _cretval;
   size_t _size;
@@ -157,7 +157,7 @@ gstvideo.video_caption_meta.VideoCaptionMeta bufferAddVideoCaptionMeta(gst.buffe
       alphaBuffer = a #GstBuffer
     Returns: the #GstVideoCodecAlphaMeta on buffer.
 */
-gstvideo.video_codec_alpha_meta.VideoCodecAlphaMeta bufferAddVideoCodecAlphaMeta(gst.buffer.Buffer buffer, gst.buffer.Buffer alphaBuffer)
+gstvideo.video_codec_alpha_meta.VideoCodecAlphaMeta bufferAddVideoCodecAlphaMeta(gst.buffer.Buffer buffer, gst.buffer.Buffer alphaBuffer) nothrow
 {
   GstVideoCodecAlphaMeta* _cretval;
   _cretval = gst_buffer_add_video_codec_alpha_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, alphaBuffer ? cast(GstBuffer*)alphaBuffer._cPtr(Yes.Dup) : null);
@@ -180,7 +180,7 @@ gstvideo.video_codec_alpha_meta.VideoCodecAlphaMeta bufferAddVideoCodecAlphaMeta
       height = the height
     Returns: the #GstVideoMeta on buffer.
 */
-gstvideo.video_meta.VideoMeta bufferAddVideoMeta(gst.buffer.Buffer buffer, gstvideo.types.VideoFrameFlags flags, gstvideo.types.VideoFormat format, uint width, uint height)
+gstvideo.video_meta.VideoMeta bufferAddVideoMeta(gst.buffer.Buffer buffer, gstvideo.types.VideoFrameFlags flags, gstvideo.types.VideoFormat format, uint width, uint height) nothrow
 {
   GstVideoMeta* _cretval;
   _cretval = gst_buffer_add_video_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags, format, width, height);
@@ -202,7 +202,7 @@ gstvideo.video_meta.VideoMeta bufferAddVideoMeta(gst.buffer.Buffer buffer, gstvi
       stride = stride of each plane
     Returns: the #GstVideoMeta on buffer.
 */
-gstvideo.video_meta.VideoMeta bufferAddVideoMetaFull(gst.buffer.Buffer buffer, gstvideo.types.VideoFrameFlags flags, gstvideo.types.VideoFormat format, uint width, uint height, uint nPlanes, size_t[] offset, int[] stride)
+gstvideo.video_meta.VideoMeta bufferAddVideoMetaFull(gst.buffer.Buffer buffer, gstvideo.types.VideoFrameFlags flags, gstvideo.types.VideoFormat format, uint width, uint height, uint nPlanes, size_t[] offset, int[] stride) nothrow
 {
   GstVideoMeta* _cretval;
   assert(!offset || offset.length == 4);
@@ -224,7 +224,7 @@ gstvideo.video_meta.VideoMeta bufferAddVideoMetaFull(gst.buffer.Buffer buffer, g
       comp = a #GstVideoOverlayComposition
     Returns: a #GstVideoOverlayCompositionMeta
 */
-gstvideo.video_overlay_composition_meta.VideoOverlayCompositionMeta bufferAddVideoOverlayCompositionMeta(gst.buffer.Buffer buf, gstvideo.video_overlay_composition.VideoOverlayComposition comp = null)
+gstvideo.video_overlay_composition_meta.VideoOverlayCompositionMeta bufferAddVideoOverlayCompositionMeta(gst.buffer.Buffer buf, gstvideo.video_overlay_composition.VideoOverlayComposition comp = null) nothrow
 {
   GstVideoOverlayCompositionMeta* _cretval;
   _cretval = gst_buffer_add_video_overlay_composition_meta(buf ? cast(GstBuffer*)buf._cPtr(No.Dup) : null, comp ? cast(GstVideoOverlayComposition*)comp._cPtr(No.Dup) : null);
@@ -245,7 +245,7 @@ gstvideo.video_overlay_composition_meta.VideoOverlayCompositionMeta bufferAddVid
       h = height
     Returns: the #GstVideoRegionOfInterestMeta on buffer.
 */
-gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferAddVideoRegionOfInterestMeta(gst.buffer.Buffer buffer, string roiType, uint x, uint y, uint w, uint h)
+gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferAddVideoRegionOfInterestMeta(gst.buffer.Buffer buffer, string roiType, uint x, uint y, uint w, uint h) nothrow
 {
   GstVideoRegionOfInterestMeta* _cretval;
   const(char)* _roiType = roiType.toCString(No.Alloc);
@@ -267,7 +267,7 @@ gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferAddVideoR
       h = height
     Returns: the #GstVideoRegionOfInterestMeta on buffer.
 */
-gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferAddVideoRegionOfInterestMetaId(gst.buffer.Buffer buffer, glib.types.Quark roiType, uint x, uint y, uint w, uint h)
+gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferAddVideoRegionOfInterestMetaId(gst.buffer.Buffer buffer, glib.types.Quark roiType, uint x, uint y, uint w, uint h) nothrow
 {
   GstVideoRegionOfInterestMeta* _cretval;
   _cretval = gst_buffer_add_video_region_of_interest_meta_id(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, roiType, x, y, w, h);
@@ -285,7 +285,7 @@ gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferAddVideoR
       data = SEI User Data Unregistered buffer
     Returns: the #GstVideoSEIUserDataUnregisteredMeta on buffer.
 */
-gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta bufferAddVideoSeiUserDataUnregisteredMeta(gst.buffer.Buffer buffer, ubyte[] uuid, ubyte[] data)
+gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta bufferAddVideoSeiUserDataUnregisteredMeta(gst.buffer.Buffer buffer, ubyte[] uuid, ubyte[] data) nothrow
 {
   GstVideoSEIUserDataUnregisteredMeta* _cretval;
   assert(!uuid || uuid.length == 16);
@@ -310,7 +310,7 @@ gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta b
     Returns: the #GstVideoTimeCodeMeta on buffer, or
       (since 1.16) null if the timecode was invalid.
 */
-gstvideo.video_time_code_meta.VideoTimeCodeMeta bufferAddVideoTimeCodeMeta(gst.buffer.Buffer buffer, gstvideo.video_time_code.VideoTimeCode tc)
+gstvideo.video_time_code_meta.VideoTimeCodeMeta bufferAddVideoTimeCodeMeta(gst.buffer.Buffer buffer, gstvideo.video_time_code.VideoTimeCode tc) nothrow
 {
   GstVideoTimeCodeMeta* _cretval;
   _cretval = gst_buffer_add_video_time_code_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, tc ? cast(const(GstVideoTimeCode)*)tc._cPtr(No.Dup) : null);
@@ -336,7 +336,7 @@ gstvideo.video_time_code_meta.VideoTimeCodeMeta bufferAddVideoTimeCodeMeta(gst.b
     Returns: the #GstVideoTimeCodeMeta on buffer, or
       (since 1.16) null if the timecode was invalid.
 */
-gstvideo.video_time_code_meta.VideoTimeCodeMeta bufferAddVideoTimeCodeMetaFull(gst.buffer.Buffer buffer, uint fpsN, uint fpsD, glib.date_time.DateTime latestDailyJam, gstvideo.types.VideoTimeCodeFlags flags, uint hours, uint minutes, uint seconds, uint frames, uint fieldCount)
+gstvideo.video_time_code_meta.VideoTimeCodeMeta bufferAddVideoTimeCodeMetaFull(gst.buffer.Buffer buffer, uint fpsN, uint fpsD, glib.date_time.DateTime latestDailyJam, gstvideo.types.VideoTimeCodeFlags flags, uint hours, uint minutes, uint seconds, uint frames, uint fieldCount) nothrow
 {
   GstVideoTimeCodeMeta* _cretval;
   _cretval = gst_buffer_add_video_time_code_meta_full(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, fpsN, fpsD, latestDailyJam ? cast(GDateTime*)latestDailyJam._cPtr(No.Dup) : null, flags, hours, minutes, seconds, frames, fieldCount);
@@ -355,7 +355,7 @@ gstvideo.video_time_code_meta.VideoTimeCodeMeta bufferAddVideoTimeCodeMetaFull(g
     Returns: the #GstVideoMeta with lowest id (usually 0) or null when there
       is no such metadata on buffer.
 */
-gstvideo.video_meta.VideoMeta bufferGetVideoMeta(gst.buffer.Buffer buffer)
+gstvideo.video_meta.VideoMeta bufferGetVideoMeta(gst.buffer.Buffer buffer) nothrow
 {
   GstVideoMeta* _cretval;
   _cretval = gst_buffer_get_video_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
@@ -375,7 +375,7 @@ gstvideo.video_meta.VideoMeta bufferGetVideoMeta(gst.buffer.Buffer buffer)
     Returns: the #GstVideoMeta with id or null when there is no such metadata
       on buffer.
 */
-gstvideo.video_meta.VideoMeta bufferGetVideoMetaId(gst.buffer.Buffer buffer, int id)
+gstvideo.video_meta.VideoMeta bufferGetVideoMetaId(gst.buffer.Buffer buffer, int id) nothrow
 {
   GstVideoMeta* _cretval;
   _cretval = gst_buffer_get_video_meta_id(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, id);
@@ -395,7 +395,7 @@ gstvideo.video_meta.VideoMeta bufferGetVideoMetaId(gst.buffer.Buffer buffer, int
     Returns: the #GstVideoRegionOfInterestMeta with id or null when there is
       no such metadata on buffer.
 */
-gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferGetVideoRegionOfInterestMetaId(gst.buffer.Buffer buffer, int id)
+gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferGetVideoRegionOfInterestMetaId(gst.buffer.Buffer buffer, int id) nothrow
 {
   GstVideoRegionOfInterestMeta* _cretval;
   _cretval = gst_buffer_get_video_region_of_interest_meta_id(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, id);
@@ -412,7 +412,7 @@ gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferGetVideoR
       align_ = a #GstVideoAlignment
     Returns: true if config could be parsed correctly.
 */
-bool bufferPoolConfigGetVideoAlignment(gst.structure.Structure config, gstvideo.video_alignment.VideoAlignment align_)
+bool bufferPoolConfigGetVideoAlignment(gst.structure.Structure config, gstvideo.video_alignment.VideoAlignment align_) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_buffer_pool_config_get_video_alignment(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, cast(GstVideoAlignment*)&align_);
@@ -427,7 +427,7 @@ bool bufferPoolConfigGetVideoAlignment(gst.structure.Structure config, gstvideo.
       config = a #GstStructure
       align_ = a #GstVideoAlignment
 */
-void bufferPoolConfigSetVideoAlignment(gst.structure.Structure config, gstvideo.video_alignment.VideoAlignment align_)
+void bufferPoolConfigSetVideoAlignment(gst.structure.Structure config, gstvideo.video_alignment.VideoAlignment align_) nothrow
 {
   gst_buffer_pool_config_set_video_alignment(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, cast(const(GstVideoAlignment)*)&align_);
 }
@@ -440,7 +440,7 @@ void bufferPoolConfigSetVideoAlignment(gst.structure.Structure config, gstvideo.
       msg = a #GstMessage
     Returns: whether msg is a "prepare-window-handle" message
 */
-bool isVideoOverlayPrepareWindowHandleMessage(gst.message.Message msg)
+bool isVideoOverlayPrepareWindowHandleMessage(gst.message.Message msg) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_is_video_overlay_prepare_window_handle_message(msg ? cast(GstMessage*)msg._cPtr(No.Dup) : null);
@@ -448,7 +448,7 @@ bool isVideoOverlayPrepareWindowHandleMessage(gst.message.Message msg)
 }
 
 /** */
-gobject.types.GType videoAfdMetaApiGetType()
+gobject.types.GType videoAfdMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_video_afd_meta_api_get_type();
@@ -456,7 +456,7 @@ gobject.types.GType videoAfdMetaApiGetType()
 }
 
 /** */
-gobject.types.GType videoAffineTransformationMetaApiGetType()
+gobject.types.GType videoAffineTransformationMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_video_affine_transformation_meta_api_get_type();
@@ -464,7 +464,7 @@ gobject.types.GType videoAffineTransformationMetaApiGetType()
 }
 
 /** */
-gobject.types.GType videoBarMetaApiGetType()
+gobject.types.GType videoBarMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_video_bar_meta_api_get_type();
@@ -483,7 +483,7 @@ gobject.types.GType videoBarMetaApiGetType()
                        with
     Returns: 
 */
-bool videoBlend(gstvideo.video_frame.VideoFrame dest, gstvideo.video_frame.VideoFrame src, int x, int y, float globalAlpha)
+bool videoBlend(gstvideo.video_frame.VideoFrame dest, gstvideo.video_frame.VideoFrame src, int x, int y, float globalAlpha) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_video_blend(dest ? cast(GstVideoFrame*)dest._cPtr : null, src ? cast(GstVideoFrame*)src._cPtr : null, x, y, globalAlpha);
@@ -506,7 +506,7 @@ bool videoBlend(gstvideo.video_frame.VideoFrame dest, gstvideo.video_frame.Video
       destBuffer = a pointer to a #GstBuffer variable, which will be
             set to a newly-allocated buffer containing the scaled pixels.
 */
-void videoBlendScaleLinearRGBA(gstvideo.video_info.VideoInfo src, gst.buffer.Buffer srcBuffer, int destHeight, int destWidth, out gstvideo.video_info.VideoInfo dest, out gst.buffer.Buffer destBuffer)
+void videoBlendScaleLinearRGBA(gstvideo.video_info.VideoInfo src, gst.buffer.Buffer srcBuffer, int destHeight, int destWidth, out gstvideo.video_info.VideoInfo dest, out gst.buffer.Buffer destBuffer) nothrow
 {
   GstVideoInfo _dest;
   GstBuffer* _destBuffer;
@@ -533,7 +533,7 @@ void videoBlendScaleLinearRGBA(gstvideo.video_info.VideoInfo src, gst.buffer.Buf
       dar_n and dar_d parameters.
       The return value is FALSE in the case of integer overflow or other error.
 */
-bool videoCalculateDisplayRatio(out uint darN, out uint darD, uint videoWidth, uint videoHeight, uint videoParN, uint videoParD, uint displayParN, uint displayParD)
+bool videoCalculateDisplayRatio(out uint darN, out uint darD, uint videoWidth, uint videoHeight, uint videoParN, uint videoParD, uint displayParN, uint displayParD) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_video_calculate_display_ratio(cast(uint*)&darN, cast(uint*)&darD, videoWidth, videoHeight, videoParN, videoParD, displayParN, displayParD);
@@ -541,7 +541,7 @@ bool videoCalculateDisplayRatio(out uint darN, out uint darD, uint videoWidth, u
 }
 
 /** */
-gobject.types.GType videoCaptionMetaApiGetType()
+gobject.types.GType videoCaptionMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_video_caption_meta_api_get_type();
@@ -559,7 +559,7 @@ gobject.types.GType videoCaptionMetaApiGetType()
       result = a pointer to a #GstVideoRectangle which will receive the result area
       scaling = a #gboolean indicating if scaling should be applied or not
 */
-void videoCenterRect(gstvideo.types.VideoRectangle src, gstvideo.types.VideoRectangle dst, out gstvideo.types.VideoRectangle result, bool scaling)
+void videoCenterRect(gstvideo.types.VideoRectangle src, gstvideo.types.VideoRectangle dst, out gstvideo.types.VideoRectangle result, bool scaling) nothrow
 {
   gst_video_center_rect(&src, &dst, &result, scaling);
 }
@@ -574,7 +574,7 @@ void videoCenterRect(gstvideo.types.VideoRectangle src, gstvideo.types.VideoRect
 
     Deprecated: Use [gstvideo.global.videoChromaSiteFromString] instead.
 */
-gstvideo.types.VideoChromaSite videoChromaFromString(string s)
+gstvideo.types.VideoChromaSite videoChromaFromString(string s) nothrow
 {
   GstVideoChromaSite _cretval;
   const(char)* _s = s.toCString(No.Alloc);
@@ -592,7 +592,7 @@ gstvideo.types.VideoChromaSite videoChromaFromString(string s)
 
     Deprecated: Use [gstvideo.global.videoChromaSiteToString] instead.
 */
-string videoChromaToString(gstvideo.types.VideoChromaSite site)
+string videoChromaToString(gstvideo.types.VideoChromaSite site) nothrow
 {
   const(char)* _cretval;
   _cretval = gst_video_chroma_to_string(site);
@@ -601,7 +601,7 @@ string videoChromaToString(gstvideo.types.VideoChromaSite site)
 }
 
 /** */
-gobject.types.GType videoCodecAlphaMetaApiGetType()
+gobject.types.GType videoCodecAlphaMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_video_codec_alpha_meta_api_get_type();
@@ -609,7 +609,7 @@ gobject.types.GType videoCodecAlphaMetaApiGetType()
 }
 
 /** */
-double videoColorTransferDecode(gstvideo.types.VideoTransferFunction func, double val)
+double videoColorTransferDecode(gstvideo.types.VideoTransferFunction func, double val) nothrow
 {
   double _retval;
   _retval = gst_video_color_transfer_decode(func, val);
@@ -617,7 +617,7 @@ double videoColorTransferDecode(gstvideo.types.VideoTransferFunction func, doubl
 }
 
 /** */
-double videoColorTransferEncode(gstvideo.types.VideoTransferFunction func, double val)
+double videoColorTransferEncode(gstvideo.types.VideoTransferFunction func, double val) nothrow
 {
   double _retval;
   _retval = gst_video_color_transfer_encode(func, val);
@@ -671,13 +671,20 @@ gst.sample.Sample videoConvertSample(gst.sample.Sample sample, gst.caps.Caps toC
       timeout = the maximum amount of time allowed for the processing.
       callback = [gstvideo.types.VideoConvertSampleCallback] that will be called after conversion.
 */
-void videoConvertSampleAsync(gst.sample.Sample sample, gst.caps.Caps toCaps, gst.types.ClockTime timeout, gstvideo.types.VideoConvertSampleCallback callback)
+void videoConvertSampleAsync(gst.sample.Sample sample, gst.caps.Caps toCaps, gst.types.ClockTime timeout, gstvideo.types.VideoConvertSampleCallback callback) nothrow
 {
-  extern(C) void _callbackCallback(GstSample* sample, GError* error, void* userData)
+  extern(C) void _callbackCallback(GstSample* sample, GError* error, void* userData) nothrow
   {
     auto _dlg = cast(gstvideo.types.VideoConvertSampleCallback*)userData;
 
-    (*_dlg)(sample ? new gst.sample.Sample(cast(void*)sample, No.Take) : null, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
+    try
+    {
+      (*_dlg)(sample ? new gst.sample.Sample(cast(void*)sample, No.Take) : null, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gstvideo.types.VideoConvertSampleCallback");
+    }
   }
   auto _callbackCB = callback ? &_callbackCallback : null;
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -686,7 +693,7 @@ void videoConvertSampleAsync(gst.sample.Sample sample, gst.caps.Caps toCaps, gst
 }
 
 /** */
-gobject.types.GType videoCropMetaApiGetType()
+gobject.types.GType videoCropMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_video_crop_meta_api_get_type();
@@ -701,7 +708,7 @@ gobject.types.GType videoCropMetaApiGetType()
       format = a #GstVideoFormat
     Returns: the DRM_FORMAT_* corresponding to the format.
 */
-uint videoDmaDrmFourccFromFormat(gstvideo.types.VideoFormat format)
+uint videoDmaDrmFourccFromFormat(gstvideo.types.VideoFormat format) nothrow
 {
   uint _retval;
   _retval = gst_video_dma_drm_fourcc_from_format(format);
@@ -720,7 +727,7 @@ uint videoDmaDrmFourccFromFormat(gstvideo.types.VideoFormat format)
     Returns: The drm fourcc value or DRM_FORMAT_INVALID if format_str is
       invalid.
 */
-uint videoDmaDrmFourccFromString(string formatStr, out ulong modifier)
+uint videoDmaDrmFourccFromString(string formatStr, out ulong modifier) nothrow
 {
   uint _retval;
   const(char)* _formatStr = formatStr.toCString(No.Alloc);
@@ -736,7 +743,7 @@ uint videoDmaDrmFourccFromString(string formatStr, out ulong modifier)
       fourcc = the dma drm value.
     Returns: the GST_VIDEO_FORMAT_* corresponding to the fourcc.
 */
-gstvideo.types.VideoFormat videoDmaDrmFourccToFormat(uint fourcc)
+gstvideo.types.VideoFormat videoDmaDrmFourccToFormat(uint fourcc) nothrow
 {
   GstVideoFormat _cretval;
   _cretval = gst_video_dma_drm_fourcc_to_format(fourcc);
@@ -754,7 +761,7 @@ gstvideo.types.VideoFormat videoDmaDrmFourccToFormat(uint fourcc)
     Returns: the drm kind string composed
         of to fourcc and modifier.
 */
-string videoDmaDrmFourccToString(uint fourcc, ulong modifier)
+string videoDmaDrmFourccToString(uint fourcc, ulong modifier) nothrow
 {
   char* _cretval;
   _cretval = gst_video_dma_drm_fourcc_to_string(fourcc, modifier);
@@ -770,7 +777,7 @@ string videoDmaDrmFourccToString(uint fourcc, ulong modifier)
       event = A #GstEvent to check
     Returns: true if the event is a valid force key unit event
 */
-bool videoEventIsForceKeyUnit(gst.event.Event event)
+bool videoEventIsForceKeyUnit(gst.event.Event event) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_video_event_is_force_key_unit(event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
@@ -795,7 +802,7 @@ bool videoEventIsForceKeyUnit(gst.event.Event event)
       count = integer that can be used to number key units
     Returns: The new GstEvent
 */
-gst.event.Event videoEventNewDownstreamForceKeyUnit(gst.types.ClockTime timestamp, gst.types.ClockTime streamTime, gst.types.ClockTime runningTime, bool allHeaders, uint count)
+gst.event.Event videoEventNewDownstreamForceKeyUnit(gst.types.ClockTime timestamp, gst.types.ClockTime streamTime, gst.types.ClockTime runningTime, bool allHeaders, uint count) nothrow
 {
   GstEvent* _cretval;
   _cretval = gst_video_event_new_downstream_force_key_unit(timestamp, streamTime, runningTime, allHeaders, count);
@@ -815,7 +822,7 @@ gst.event.Event videoEventNewDownstreamForceKeyUnit(gst.types.ClockTime timestam
       inStill = boolean value for the still-frame state of the event.
     Returns: The new GstEvent
 */
-gst.event.Event videoEventNewStillFrame(bool inStill)
+gst.event.Event videoEventNewStillFrame(bool inStill) nothrow
 {
   GstEvent* _cretval;
   _cretval = gst_video_event_new_still_frame(inStill);
@@ -840,7 +847,7 @@ gst.event.Event videoEventNewStillFrame(bool inStill)
       count = integer that can be used to number key units
     Returns: The new GstEvent
 */
-gst.event.Event videoEventNewUpstreamForceKeyUnit(gst.types.ClockTime runningTime, bool allHeaders, uint count)
+gst.event.Event videoEventNewUpstreamForceKeyUnit(gst.types.ClockTime runningTime, bool allHeaders, uint count) nothrow
 {
   GstEvent* _cretval;
   _cretval = gst_video_event_new_upstream_force_key_unit(runningTime, allHeaders, count);
@@ -864,7 +871,7 @@ gst.event.Event videoEventNewUpstreamForceKeyUnit(gst.types.ClockTime runningTim
       count = A pointer to the count field of the event
     Returns: true if the event is a valid downstream force key unit event.
 */
-bool videoEventParseDownstreamForceKeyUnit(gst.event.Event event, out gst.types.ClockTime timestamp, out gst.types.ClockTime streamTime, out gst.types.ClockTime runningTime, out bool allHeaders, out uint count)
+bool videoEventParseDownstreamForceKeyUnit(gst.event.Event event, out gst.types.ClockTime timestamp, out gst.types.ClockTime streamTime, out gst.types.ClockTime runningTime, out bool allHeaders, out uint count) nothrow
 {
   bool _retval;
   gboolean _allHeaders;
@@ -888,7 +895,7 @@ bool videoEventParseDownstreamForceKeyUnit(gst.event.Event event, out gst.types.
       inStill = A boolean to receive the still-frame status from the event, or NULL
     Returns: true if the event is a valid still-frame event. false if not
 */
-bool videoEventParseStillFrame(gst.event.Event event, out bool inStill)
+bool videoEventParseStillFrame(gst.event.Event event, out bool inStill) nothrow
 {
   bool _retval;
   gboolean _inStill;
@@ -913,7 +920,7 @@ bool videoEventParseStillFrame(gst.event.Event event, out bool inStill)
       count = A pointer to the count field in the event
     Returns: true if the event is a valid upstream force-key-unit event. false if not
 */
-bool videoEventParseUpstreamForceKeyUnit(gst.event.Event event, out gst.types.ClockTime runningTime, out bool allHeaders, out uint count)
+bool videoEventParseUpstreamForceKeyUnit(gst.event.Event event, out gst.types.ClockTime runningTime, out bool allHeaders, out uint count) nothrow
 {
   bool _retval;
   gboolean _allHeaders;
@@ -929,7 +936,7 @@ bool videoEventParseUpstreamForceKeyUnit(gst.event.Event event, out gst.types.Cl
     template cpas.
     Returns: an array of #GstVideoFormat
 */
-gstvideo.types.VideoFormat[] videoFormatsAny()
+gstvideo.types.VideoFormat[] videoFormatsAny() nothrow
 {
   const(GstVideoFormat)* _cretval;
   uint _cretlength;
@@ -949,7 +956,7 @@ gstvideo.types.VideoFormat[] videoFormatsAny()
     Return all the raw video formats supported by GStreamer.
     Returns: an array of #GstVideoFormat
 */
-gstvideo.types.VideoFormat[] videoFormatsRaw()
+gstvideo.types.VideoFormat[] videoFormatsRaw() nothrow
 {
   const(GstVideoFormat)* _cretval;
   uint _cretlength;
@@ -966,7 +973,7 @@ gstvideo.types.VideoFormat[] videoFormatsRaw()
 }
 
 /** */
-gobject.types.GType videoGlTextureUploadMetaApiGetType()
+gobject.types.GType videoGlTextureUploadMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_video_gl_texture_upload_meta_api_get_type();
@@ -990,7 +997,7 @@ gobject.types.GType videoGlTextureUploadMetaApiGetType()
     Returns: true if a close "standard" framerate was
       recognised, and false otherwise.
 */
-bool videoGuessFramerate(gst.types.ClockTime duration, out int destN, out int destD)
+bool videoGuessFramerate(gst.types.ClockTime duration, out int destN, out int destD) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_video_guess_framerate(duration, cast(int*)&destN, cast(int*)&destD);
@@ -1010,7 +1017,7 @@ bool videoGuessFramerate(gst.types.ClockTime duration, out int destN, out int de
     Returns: true if a known "standard" aspect ratio was
       recognised, and false otherwise.
 */
-bool videoIsCommonAspectRatio(int width, int height, int parN, int parD)
+bool videoIsCommonAspectRatio(int width, int height, int parN, int parD) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_video_is_common_aspect_ratio(width, height, parN, parD);
@@ -1025,7 +1032,7 @@ bool videoIsCommonAspectRatio(int width, int height, int parN, int parD)
       caps = a #GstCaps
     Returns: true if the caps is a dma drm caps.
 */
-bool videoIsDmaDrmCaps(gst.caps.Caps caps)
+bool videoIsDmaDrmCaps(gst.caps.Caps caps) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_video_is_dma_drm_caps(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
@@ -1041,7 +1048,7 @@ bool videoIsDmaDrmCaps(gst.caps.Caps caps)
       formats = an array of raw #GstVideoFormat, or null
     Returns: a video GstCaps
 */
-gst.caps.Caps videoMakeRawCaps(gstvideo.types.VideoFormat[] formats = null)
+gst.caps.Caps videoMakeRawCaps(gstvideo.types.VideoFormat[] formats = null) nothrow
 {
   GstCaps* _cretval;
   uint _len;
@@ -1065,7 +1072,7 @@ gst.caps.Caps videoMakeRawCaps(gstvideo.types.VideoFormat[] formats = null)
       features = the #GstCapsFeatures to set on the caps
     Returns: a video GstCaps
 */
-gst.caps.Caps videoMakeRawCapsWithFeatures(gstvideo.types.VideoFormat[] formats = null, gst.caps_features.CapsFeatures features = null)
+gst.caps.Caps videoMakeRawCapsWithFeatures(gstvideo.types.VideoFormat[] formats = null, gst.caps_features.CapsFeatures features = null) nothrow
 {
   GstCaps* _cretval;
   uint _len;
@@ -1079,7 +1086,7 @@ gst.caps.Caps videoMakeRawCapsWithFeatures(gstvideo.types.VideoFormat[] formats 
 }
 
 /** */
-gobject.types.GType videoMetaApiGetType()
+gobject.types.GType videoMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_video_meta_api_get_type();
@@ -1087,7 +1094,7 @@ gobject.types.GType videoMetaApiGetType()
 }
 
 /** */
-gobject.value.Value videoMultiviewGetDoubledHeightModes()
+gobject.value.Value videoMultiviewGetDoubledHeightModes() nothrow
 {
   const(GValue)* _cretval;
   _cretval = gst_video_multiview_get_doubled_height_modes();
@@ -1096,7 +1103,7 @@ gobject.value.Value videoMultiviewGetDoubledHeightModes()
 }
 
 /** */
-gobject.value.Value videoMultiviewGetDoubledSizeModes()
+gobject.value.Value videoMultiviewGetDoubledSizeModes() nothrow
 {
   const(GValue)* _cretval;
   _cretval = gst_video_multiview_get_doubled_size_modes();
@@ -1105,7 +1112,7 @@ gobject.value.Value videoMultiviewGetDoubledSizeModes()
 }
 
 /** */
-gobject.value.Value videoMultiviewGetDoubledWidthModes()
+gobject.value.Value videoMultiviewGetDoubledWidthModes() nothrow
 {
   const(GValue)* _cretval;
   _cretval = gst_video_multiview_get_doubled_width_modes();
@@ -1114,7 +1121,7 @@ gobject.value.Value videoMultiviewGetDoubledWidthModes()
 }
 
 /** */
-gobject.value.Value videoMultiviewGetMonoModes()
+gobject.value.Value videoMultiviewGetMonoModes() nothrow
 {
   const(GValue)* _cretval;
   _cretval = gst_video_multiview_get_mono_modes();
@@ -1123,7 +1130,7 @@ gobject.value.Value videoMultiviewGetMonoModes()
 }
 
 /** */
-gobject.value.Value videoMultiviewGetUnpackedModes()
+gobject.value.Value videoMultiviewGetUnpackedModes() nothrow
 {
   const(GValue)* _cretval;
   _cretval = gst_video_multiview_get_unpacked_modes();
@@ -1132,7 +1139,7 @@ gobject.value.Value videoMultiviewGetUnpackedModes()
 }
 
 /** */
-bool videoMultiviewGuessHalfAspect(gstvideo.types.VideoMultiviewMode mvMode, uint width, uint height, uint parN, uint parD)
+bool videoMultiviewGuessHalfAspect(gstvideo.types.VideoMultiviewMode mvMode, uint width, uint height, uint parN, uint parD) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_video_multiview_guess_half_aspect(mvMode, width, height, parN, parD);
@@ -1149,13 +1156,13 @@ bool videoMultiviewGuessHalfAspect(gstvideo.types.VideoMultiviewMode mvMode, uin
       outMviewMode = A #GstVideoMultiviewMode value
       outMviewFlags = A set of #GstVideoMultiviewFlags
 */
-void videoMultiviewVideoInfoChangeMode(gstvideo.video_info.VideoInfo info, gstvideo.types.VideoMultiviewMode outMviewMode, gstvideo.types.VideoMultiviewFlags outMviewFlags)
+void videoMultiviewVideoInfoChangeMode(gstvideo.video_info.VideoInfo info, gstvideo.types.VideoMultiviewMode outMviewMode, gstvideo.types.VideoMultiviewFlags outMviewFlags) nothrow
 {
   gst_video_multiview_video_info_change_mode(info ? cast(GstVideoInfo*)info._cPtr(No.Dup) : null, outMviewMode, outMviewFlags);
 }
 
 /** */
-gobject.types.GType videoOverlayCompositionMetaApiGetType()
+gobject.types.GType videoOverlayCompositionMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_video_overlay_composition_meta_api_get_type();
@@ -1163,7 +1170,7 @@ gobject.types.GType videoOverlayCompositionMetaApiGetType()
 }
 
 /** */
-gobject.types.GType videoRegionOfInterestMetaApiGetType()
+gobject.types.GType videoRegionOfInterestMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_video_region_of_interest_meta_api_get_type();
@@ -1171,7 +1178,7 @@ gobject.types.GType videoRegionOfInterestMetaApiGetType()
 }
 
 /** */
-gobject.types.GType videoSeiUserDataUnregisteredMetaApiGetType()
+gobject.types.GType videoSeiUserDataUnregisteredMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_video_sei_user_data_unregistered_meta_api_get_type();
@@ -1187,7 +1194,7 @@ gobject.types.GType videoSeiUserDataUnregisteredMetaApiGetType()
       precisionTimeStamp = The parsed Precision Time Stamp SEI
     Returns: True if data is a Precision Time Stamp and it was parsed correctly
 */
-bool videoSeiUserDataUnregisteredParsePrecisionTimeStamp(gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta userData, out ubyte status, out ulong precisionTimeStamp)
+bool videoSeiUserDataUnregisteredParsePrecisionTimeStamp(gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta userData, out ubyte status, out ulong precisionTimeStamp) nothrow
 {
   bool _retval;
   _retval = cast(bool)gst_video_sei_user_data_unregistered_parse_precision_time_stamp(userData ? cast(GstVideoSEIUserDataUnregisteredMeta*)userData._cPtr : null, cast(ubyte*)&status, cast(ulong*)&precisionTimeStamp);
@@ -1209,7 +1216,7 @@ bool videoSeiUserDataUnregisteredParsePrecisionTimeStamp(gstvideo.video_seiuser_
     Returns: the index of the tile at `x` and `y` in the tiled image of
         `x`_tiles by `y`_tiles.
 */
-uint videoTileGetIndex(gstvideo.types.VideoTileMode mode, int x, int y, int xTiles, int yTiles)
+uint videoTileGetIndex(gstvideo.types.VideoTileMode mode, int x, int y, int xTiles, int yTiles) nothrow
 {
   uint _retval;
   _retval = gst_video_tile_get_index(mode, x, y, xTiles, yTiles);
@@ -1217,7 +1224,7 @@ uint videoTileGetIndex(gstvideo.types.VideoTileMode mode, int x, int y, int xTil
 }
 
 /** */
-gobject.types.GType videoTimeCodeMetaApiGetType()
+gobject.types.GType videoTimeCodeMetaApiGetType() nothrow
 {
   gobject.types.GType _retval;
   _retval = gst_video_time_code_meta_api_get_type();

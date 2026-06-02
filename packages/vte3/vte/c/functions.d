@@ -18,7 +18,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libvte-2.91-gtk4.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // EventContext
   gboolean function(const(VteEventContext)* context, double* x, double* y) c_vte_event_context_get_coordinates; ///

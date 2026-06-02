@@ -203,26 +203,26 @@ class FileChooserDialog : gtk.dialog.Dialog, gtk.file_chooser.FileChooser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_file_chooser_dialog_get_type != &gidSymbolNotFound ? gtk_file_chooser_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FileChooserDialog self()
+  override FileChooserDialog self() nothrow
   {
     return this;
   }
@@ -231,7 +231,7 @@ class FileChooserDialog : gtk.dialog.Dialog, gtk.file_chooser.FileChooser
       Get builder for [gtk.file_chooser_dialog.FileChooserDialog]
       Returns: New builder object
   */
-  static FileChooserDialogGidBuilder builder()
+  static FileChooserDialogGidBuilder builder() nothrow
   {
     return new FileChooserDialogGidBuilder;
   }
@@ -253,7 +253,7 @@ final class FileChooserDialogGidBuilder : FileChooserDialogGidBuilderImpl!FileCh
       Create object from builder.
       Returns: New object
   */
-  FileChooserDialog build()
+  FileChooserDialog build() nothrow
   {
     return new FileChooserDialog(cast(void*)createGObject(FileChooserDialog._getGType), No.Take);
   }

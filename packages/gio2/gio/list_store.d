@@ -23,26 +23,26 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_list_store_get_type != &gidSymbolNotFound ? g_list_store_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ListStore self()
+  override ListStore self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get builder for [gio.list_store.ListStore]
       Returns: New builder object
   */
-  static ListStoreGidBuilder builder()
+  static ListStoreGidBuilder builder() nothrow
   {
     return new ListStoreGidBuilder;
   }
@@ -61,7 +61,7 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
       Returns: The type of items contained in this list store. Items must be
         subclasses of #GObject.
   */
-  @property gobject.types.GType itemType()
+  @property gobject.types.GType itemType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
   }
@@ -70,7 +70,7 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
       Get `nItems` property.
       Returns: The number of items contained in this list store.
   */
-  @property uint nItems()
+  @property uint nItems() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
@@ -91,14 +91,22 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
   * Returns: Whether store contains item. If it was found, position will be
   *   set to the position where item occurred for the first time.
   */
-  bool findWithEqualFunc(gobject.object.ObjectWrap item, bool delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) equalFunc, out uint position)
+  bool findWithEqualFunc(gobject.object.ObjectWrap item, bool delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) equalFunc, out uint position) nothrow
   {
     static bool delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) _static_equalFunc;
 
-    extern(C) gboolean _equalFuncCallback(const(void)* a, const(void)* b)
+    extern(C) gboolean _equalFuncCallback(const(void)* a, const(void)* b) nothrow
     {
-      gboolean _retval = _static_equalFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a, No.Take),
-      gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b, No.Take));
+      gboolean _retval;
+
+      try
+      {
+        _retval = _static_equalFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a, No.Take),
+        gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b, No.Take));
+      }
+      catch (Exception e)
+      gidInvokeCallbackExceptionHandler(e, "gio.list_store.ListStore.findWithEqualFunc");
+
       return _retval;
     }
 
@@ -121,14 +129,22 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
   *   compareFunc = pairwise comparison function for sorting
   * Returns: the position at which item was inserted
   */
-  uint insertSorted(gobject.object.ObjectWrap item, int delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) compareFunc)
+  uint insertSorted(gobject.object.ObjectWrap item, int delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) compareFunc) nothrow
   {
     static int delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) _static_compareFunc;
 
-    extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
+    extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
-      int _retval = _static_compareFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a, No.Take),
-      gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b, No.Take));
+      int _retval;
+
+      try
+      {
+        _retval = _static_compareFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a, No.Take),
+        gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b, No.Take));
+      }
+      catch (Exception e)
+      gidInvokeCallbackExceptionHandler(e, "gio.list_store.ListStore.insertSorted");
+
       return _retval;
     }
 
@@ -144,14 +160,22 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
   * Params:
   *   compareFunc = pairwise comparison function for sorting
   */
-  void sort(int delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) compareFunc)
+  void sort(int delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) compareFunc) nothrow
   {
     static int delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) _static_compareFunc;
 
-    extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
+    extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
-      int _retval = _static_compareFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a, No.Take),
-      gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b, No.Take));
+      int _retval;
+
+      try
+      {
+        _retval = _static_compareFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a, No.Take),
+        gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b, No.Take));
+      }
+      catch (Exception e)
+      gidInvokeCallbackExceptionHandler(e, "gio.list_store.ListStore.sort");
+
       return _retval;
     }
 
@@ -168,7 +192,7 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
         itemType = the #GType of items in the list
       Returns: a new #GListStore
   */
-  this(gobject.types.GType itemType)
+  this(gobject.types.GType itemType) nothrow
   {
     GListStore* _cretval;
     _cretval = g_list_store_new(itemType);
@@ -186,7 +210,7 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
       Params:
         item = the new item
   */
-  void append(gobject.object.ObjectWrap item)
+  void append(gobject.object.ObjectWrap item) nothrow
   {
     g_list_store_append(cast(GListStore*)this._cPtr, item ? cast(GObject*)item._cPtr(No.Dup) : null);
   }
@@ -205,7 +229,7 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
       Returns: Whether store contains item. If it was found, position will be
         set to the position where item occurred for the first time.
   */
-  bool find(gobject.object.ObjectWrap item, out uint position)
+  bool find(gobject.object.ObjectWrap item, out uint position) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_list_store_find(cast(GListStore*)this._cPtr, item ? cast(GObject*)item._cPtr(No.Dup) : null, cast(uint*)&position);
@@ -226,7 +250,7 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
         position = the position at which to insert the new item
         item = the new item
   */
-  void insert(uint position, gobject.object.ObjectWrap item)
+  void insert(uint position, gobject.object.ObjectWrap item) nothrow
   {
     g_list_store_insert(cast(GListStore*)this._cPtr, position, item ? cast(GObject*)item._cPtr(No.Dup) : null);
   }
@@ -241,7 +265,7 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
       Params:
         position = the position of the item that is to be removed
   */
-  void remove(uint position)
+  void remove(uint position) nothrow
   {
     g_list_store_remove(cast(GListStore*)this._cPtr, position);
   }
@@ -249,7 +273,7 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
   /**
       Removes all items from store.
   */
-  void removeAll()
+  void removeAll() nothrow
   {
     g_list_store_remove_all(cast(GListStore*)this._cPtr);
   }
@@ -274,7 +298,7 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
         nRemovals = the number of items to remove
         additions = the items to add
   */
-  void splice(uint position, uint nRemovals, gobject.object.ObjectWrap[] additions)
+  void splice(uint position, uint nRemovals, gobject.object.ObjectWrap[] additions) nothrow
   {
     uint _nAdditions;
     if (additions)
@@ -302,7 +326,7 @@ class ListStoreGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gi
           subclasses of #GObject.
       Returns: Builder instance for fluent chaining
   */
-  T itemType(gobject.types.GType propval)
+  T itemType(gobject.types.GType propval) nothrow
   {
     return setProperty("item-type", propval);
   }
@@ -315,7 +339,7 @@ final class ListStoreGidBuilder : ListStoreGidBuilderImpl!ListStoreGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ListStore build()
+  ListStore build() nothrow
   {
     return new ListStore(cast(void*)createGObject(ListStore._getGType), Yes.Take);
   }

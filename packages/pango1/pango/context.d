@@ -31,26 +31,26 @@ class Context : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_context_get_type != &gidSymbolNotFound ? pango_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Context self()
+  override Context self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class Context : gobject.object.ObjectWrap
       Get builder for [pango.context.Context]
       Returns: New builder object
   */
-  static ContextGidBuilder builder()
+  static ContextGidBuilder builder() nothrow
   {
     return new ContextGidBuilder;
   }
@@ -79,7 +79,7 @@ class Context : gobject.object.ObjectWrap
       Returns: the newly allocated [pango.context.Context], which should
           be freed with [gobject.object.ObjectWrap.unref].
   */
-  this()
+  this() nothrow
   {
     PangoContext* _cretval;
     _cretval = pango_context_new();
@@ -95,7 +95,7 @@ class Context : gobject.object.ObjectWrap
       call this function if they have attached extra data to the context
       and such data is changed.
   */
-  void changed()
+  void changed() nothrow
   {
     pango_context_changed(cast(PangoContext*)this._cPtr);
   }
@@ -106,7 +106,7 @@ class Context : gobject.object.ObjectWrap
       See [pango.context.Context.setBaseDir].
       Returns: the base direction for the context.
   */
-  pango.types.Direction getBaseDir()
+  pango.types.Direction getBaseDir() nothrow
   {
     PangoDirection _cretval;
     _cretval = pango_context_get_base_dir(cast(PangoContext*)this._cPtr);
@@ -120,7 +120,7 @@ class Context : gobject.object.ObjectWrap
       See [pango.context.Context.setBaseGravity].
       Returns: the base gravity for the context.
   */
-  pango.types.Gravity getBaseGravity()
+  pango.types.Gravity getBaseGravity() nothrow
   {
     PangoGravity _cretval;
     _cretval = pango_context_get_base_gravity(cast(PangoContext*)this._cPtr);
@@ -133,7 +133,7 @@ class Context : gobject.object.ObjectWrap
       Returns: a pointer to the context's default font
           description. This value must not be modified or freed.
   */
-  pango.font_description.FontDescription getFontDescription()
+  pango.font_description.FontDescription getFontDescription() nothrow
   {
     PangoFontDescription* _cretval;
     _cretval = pango_context_get_font_description(cast(PangoContext*)this._cPtr);
@@ -147,7 +147,7 @@ class Context : gobject.object.ObjectWrap
           [pango.context.Context] This value is owned by Pango and should not be
           unreferenced.
   */
-  pango.font_map.FontMap getFontMap()
+  pango.font_map.FontMap getFontMap() nothrow
   {
     PangoFontMap* _cretval;
     _cretval = pango_context_get_font_map(cast(PangoContext*)this._cPtr);
@@ -164,7 +164,7 @@ class Context : gobject.object.ObjectWrap
       gravity from the current context matrix.
       Returns: the resolved gravity for the context.
   */
-  pango.types.Gravity getGravity()
+  pango.types.Gravity getGravity() nothrow
   {
     PangoGravity _cretval;
     _cretval = pango_context_get_gravity(cast(PangoContext*)this._cPtr);
@@ -178,7 +178,7 @@ class Context : gobject.object.ObjectWrap
       See [pango.context.Context.setGravityHint] for details.
       Returns: the gravity hint for the context.
   */
-  pango.types.GravityHint getGravityHint()
+  pango.types.GravityHint getGravityHint() nothrow
   {
     PangoGravityHint _cretval;
     _cretval = pango_context_get_gravity_hint(cast(PangoContext*)this._cPtr);
@@ -190,7 +190,7 @@ class Context : gobject.object.ObjectWrap
       Retrieves the global language tag for the context.
       Returns: the global language tag.
   */
-  pango.language.Language getLanguage()
+  pango.language.Language getLanguage() nothrow
   {
     PangoLanguage* _cretval;
     _cretval = pango_context_get_language(cast(PangoContext*)this._cPtr);
@@ -208,7 +208,7 @@ class Context : gobject.object.ObjectWrap
           The returned matrix is owned by Pango and must not be modified
           or freed.
   */
-  pango.matrix.Matrix getMatrix()
+  pango.matrix.Matrix getMatrix() nothrow
   {
     const(PangoMatrix)* _cretval;
     _cretval = pango_context_get_matrix(cast(PangoContext*)this._cPtr);
@@ -242,7 +242,7 @@ class Context : gobject.object.ObjectWrap
       Returns: a [pango.font_metrics.FontMetrics] object. The caller must call
           [pango.font_metrics.FontMetrics.unref] when finished using the object.
   */
-  pango.font_metrics.FontMetrics getMetrics(pango.font_description.FontDescription desc = null, pango.language.Language language = null)
+  pango.font_metrics.FontMetrics getMetrics(pango.font_description.FontDescription desc = null, pango.language.Language language = null) nothrow
   {
     PangoFontMetrics* _cretval;
     _cretval = pango_context_get_metrics(cast(PangoContext*)this._cPtr, desc ? cast(const(PangoFontDescription)*)desc._cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);
@@ -257,7 +257,7 @@ class Context : gobject.object.ObjectWrap
       round glyph positions and widths.
       Returns: 
   */
-  bool getRoundGlyphPositions()
+  bool getRoundGlyphPositions() nothrow
   {
     bool _retval;
     _retval = cast(bool)pango_context_get_round_glyph_positions(cast(PangoContext*)this._cPtr);
@@ -279,7 +279,7 @@ class Context : gobject.object.ObjectWrap
       [pango.context.Context] changes, like [pango.layout.Layout].
       Returns: The current serial number of context.
   */
-  uint getSerial()
+  uint getSerial() nothrow
   {
     uint _retval;
     _retval = pango_context_get_serial(cast(PangoContext*)this._cPtr);
@@ -294,7 +294,7 @@ class Context : gobject.object.ObjectWrap
             to store a pointer to an array of [pango.font_family.FontFamily]. This array should
             be freed with [glib.global.gfree].
   */
-  void listFamilies(out pango.font_family.FontFamily[] families)
+  void listFamilies(out pango.font_family.FontFamily[] families) nothrow
   {
     int _nFamilies;
     PangoFontFamily** _families;
@@ -314,7 +314,7 @@ class Context : gobject.object.ObjectWrap
       Returns: the newly allocated [pango.font.Font]
           that was loaded, or null if no font matched.
   */
-  pango.font.Font loadFont(pango.font_description.FontDescription desc)
+  pango.font.Font loadFont(pango.font_description.FontDescription desc) nothrow
   {
     PangoFont* _cretval;
     _cretval = pango_context_load_font(cast(PangoContext*)this._cPtr, desc ? cast(const(PangoFontDescription)*)desc._cPtr(No.Dup) : null);
@@ -332,7 +332,7 @@ class Context : gobject.object.ObjectWrap
       Returns: the newly allocated
           [pango.fontset.Fontset] loaded, or null if no font matched.
   */
-  pango.fontset.Fontset loadFontset(pango.font_description.FontDescription desc, pango.language.Language language)
+  pango.fontset.Fontset loadFontset(pango.font_description.FontDescription desc, pango.language.Language language) nothrow
   {
     PangoFontset* _cretval;
     _cretval = pango_context_load_fontset(cast(PangoContext*)this._cPtr, desc ? cast(const(PangoFontDescription)*)desc._cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);
@@ -353,7 +353,7 @@ class Context : gobject.object.ObjectWrap
       Params:
         direction = the new base direction
   */
-  void setBaseDir(pango.types.Direction direction)
+  void setBaseDir(pango.types.Direction direction) nothrow
   {
     pango_context_set_base_dir(cast(PangoContext*)this._cPtr, direction);
   }
@@ -366,7 +366,7 @@ class Context : gobject.object.ObjectWrap
       Params:
         gravity = the new base gravity
   */
-  void setBaseGravity(pango.types.Gravity gravity)
+  void setBaseGravity(pango.types.Gravity gravity) nothrow
   {
     pango_context_set_base_gravity(cast(PangoContext*)this._cPtr, gravity);
   }
@@ -377,7 +377,7 @@ class Context : gobject.object.ObjectWrap
       Params:
         desc = the new pango font description
   */
-  void setFontDescription(pango.font_description.FontDescription desc = null)
+  void setFontDescription(pango.font_description.FontDescription desc = null) nothrow
   {
     pango_context_set_font_description(cast(PangoContext*)this._cPtr, desc ? cast(const(PangoFontDescription)*)desc._cPtr(No.Dup) : null);
   }
@@ -393,7 +393,7 @@ class Context : gobject.object.ObjectWrap
       Params:
         fontMap = the [pango.font_map.FontMap] to set.
   */
-  void setFontMap(pango.font_map.FontMap fontMap = null)
+  void setFontMap(pango.font_map.FontMap fontMap = null) nothrow
   {
     pango_context_set_font_map(cast(PangoContext*)this._cPtr, fontMap ? cast(PangoFontMap*)fontMap._cPtr(No.Dup) : null);
   }
@@ -409,7 +409,7 @@ class Context : gobject.object.ObjectWrap
       Params:
         hint = the new gravity hint
   */
-  void setGravityHint(pango.types.GravityHint hint)
+  void setGravityHint(pango.types.GravityHint hint) nothrow
   {
     pango_context_set_gravity_hint(cast(PangoContext*)this._cPtr, hint);
   }
@@ -423,7 +423,7 @@ class Context : gobject.object.ObjectWrap
       Params:
         language = the new language tag.
   */
-  void setLanguage(pango.language.Language language = null)
+  void setLanguage(pango.language.Language language = null) nothrow
   {
     pango_context_set_language(cast(PangoContext*)this._cPtr, language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);
   }
@@ -442,7 +442,7 @@ class Context : gobject.object.ObjectWrap
         matrix = a [pango.matrix.Matrix], or null to unset any existing
           matrix. (No matrix set is the same as setting the identity matrix.)
   */
-  void setMatrix(pango.matrix.Matrix matrix)
+  void setMatrix(pango.matrix.Matrix matrix) nothrow
   {
     pango_context_set_matrix(cast(PangoContext*)this._cPtr, cast(const(PangoMatrix)*)&matrix);
   }
@@ -461,7 +461,7 @@ class Context : gobject.object.ObjectWrap
       Params:
         roundPositions = whether to round glyph positions
   */
-  void setRoundGlyphPositions(bool roundPositions)
+  void setRoundGlyphPositions(bool roundPositions) nothrow
   {
     pango_context_set_round_glyph_positions(cast(PangoContext*)this._cPtr, roundPositions);
   }
@@ -479,7 +479,7 @@ final class ContextGidBuilder : ContextGidBuilderImpl!ContextGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Context build()
+  Context build() nothrow
   {
     return new Context(cast(void*)createGObject(Context._getGType), Yes.Take);
   }

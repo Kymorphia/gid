@@ -13,11 +13,8 @@ class CharAttributes
   VteCharAttributes _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for vte.char_attributes.CharAttributes");
-
     _cInstance = *cast(VteCharAttributes*)ptr;
 
     if (take)
@@ -25,7 +22,7 @@ class CharAttributes
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }

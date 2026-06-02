@@ -22,26 +22,26 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_data_select_get_type != &gidSymbolNotFound ? gda_data_select_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DataSelect self()
+  override DataSelect self() nothrow
   {
     return this;
   }
@@ -50,43 +50,43 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
       Get builder for [gda.data_select.DataSelect]
       Returns: New builder object
   */
-  static DataSelectGidBuilder builder()
+  static DataSelectGidBuilder builder() nothrow
   {
     return new DataSelectGidBuilder;
   }
 
   /** */
-  @property bool autoReset()
+  @property bool autoReset() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("auto-reset");
   }
 
   /** */
-  @property void autoReset(bool propval)
+  @property void autoReset(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("auto-reset", propval);
   }
 
   /** */
-  @property gda.connection.Connection connection()
+  @property gda.connection.Connection connection() nothrow
   {
     return getConnection();
   }
 
   /** */
-  @property gda.statement.Statement deleteStmt()
+  @property gda.statement.Statement deleteStmt() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.statement.Statement)("delete-stmt");
   }
 
   /** */
-  @property void deleteStmt(gda.statement.Statement propval)
+  @property void deleteStmt(gda.statement.Statement propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gda.statement.Statement)("delete-stmt", propval);
   }
 
   /** */
-  @property gda.set.Set execParams()
+  @property gda.set.Set execParams() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.set.Set)("exec-params");
   }
@@ -95,7 +95,7 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
       Get `executionDelay` property.
       Returns: This property stores the execution delay which has been necessary to obtain the data
   */
-  @property double executionDelay()
+  @property double executionDelay() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(double)("execution-delay");
   }
@@ -105,67 +105,67 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
       Params:
         propval = This property stores the execution delay which has been necessary to obtain the data
   */
-  @property void executionDelay(double propval)
+  @property void executionDelay(double propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(double)("execution-delay", propval);
   }
 
   /** */
-  @property gda.statement.Statement insertStmt()
+  @property gda.statement.Statement insertStmt() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.statement.Statement)("insert-stmt");
   }
 
   /** */
-  @property void insertStmt(gda.statement.Statement propval)
+  @property void insertStmt(gda.statement.Statement propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gda.statement.Statement)("insert-stmt", propval);
   }
 
   /** */
-  @property uint modelUsage()
+  @property uint modelUsage() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("model-usage");
   }
 
   /** */
-  @property gda.pstmt.PStmt preparedStmt()
+  @property gda.pstmt.PStmt preparedStmt() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.pstmt.PStmt)("prepared-stmt");
   }
 
   /** */
-  @property void preparedStmt(gda.pstmt.PStmt propval)
+  @property void preparedStmt(gda.pstmt.PStmt propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gda.pstmt.PStmt)("prepared-stmt", propval);
   }
 
   /** */
-  @property gda.statement.Statement selectStmt()
+  @property gda.statement.Statement selectStmt() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.statement.Statement)("select-stmt");
   }
 
   /** */
-  @property bool storeAllRows()
+  @property bool storeAllRows() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("store-all-rows");
   }
 
   /** */
-  @property void storeAllRows(bool propval)
+  @property void storeAllRows(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("store-all-rows", propval);
   }
 
   /** */
-  @property gda.statement.Statement updateStmt()
+  @property gda.statement.Statement updateStmt() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gda.statement.Statement)("update-stmt");
   }
 
   /** */
-  @property void updateStmt(gda.statement.Statement propval)
+  @property void updateStmt(gda.statement.Statement propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gda.statement.Statement)("update-stmt", propval);
   }
@@ -173,7 +173,7 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
   mixin DataModelT!();
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_data_select_error_quark();
@@ -261,7 +261,7 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
       (and which may be used internally by model).
       Returns: a pointer to the #GdaConnection, or null
   */
-  gda.connection.Connection getConnection()
+  gda.connection.Connection getConnection() nothrow
   {
     GdaConnection* _cretval;
     _cretval = gda_data_select_get_connection(cast(GdaDataSelect*)this._cPtr);
@@ -436,25 +436,25 @@ class DataSelectGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
   mixin DataModelGidBuilderT!();
 
   /** */
-  T autoReset(bool propval)
+  T autoReset(bool propval) nothrow
   {
     return setProperty("auto-reset", propval);
   }
 
   /** */
-  T connection(gda.connection.Connection propval)
+  T connection(gda.connection.Connection propval) nothrow
   {
     return setProperty("connection", propval);
   }
 
   /** */
-  T deleteStmt(gda.statement.Statement propval)
+  T deleteStmt(gda.statement.Statement propval) nothrow
   {
     return setProperty("delete-stmt", propval);
   }
 
   /** */
-  T execParams(gda.set.Set propval)
+  T execParams(gda.set.Set propval) nothrow
   {
     return setProperty("exec-params", propval);
   }
@@ -465,37 +465,37 @@ class DataSelectGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
         propval = This property stores the execution delay which has been necessary to obtain the data
       Returns: Builder instance for fluent chaining
   */
-  T executionDelay(double propval)
+  T executionDelay(double propval) nothrow
   {
     return setProperty("execution-delay", propval);
   }
 
   /** */
-  T insertStmt(gda.statement.Statement propval)
+  T insertStmt(gda.statement.Statement propval) nothrow
   {
     return setProperty("insert-stmt", propval);
   }
 
   /** */
-  T modelUsage(uint propval)
+  T modelUsage(uint propval) nothrow
   {
     return setProperty("model-usage", propval);
   }
 
   /** */
-  T preparedStmt(gda.pstmt.PStmt propval)
+  T preparedStmt(gda.pstmt.PStmt propval) nothrow
   {
     return setProperty("prepared-stmt", propval);
   }
 
   /** */
-  T storeAllRows(bool propval)
+  T storeAllRows(bool propval) nothrow
   {
     return setProperty("store-all-rows", propval);
   }
 
   /** */
-  T updateStmt(gda.statement.Statement propval)
+  T updateStmt(gda.statement.Statement propval) nothrow
   {
     return setProperty("update-stmt", propval);
   }
@@ -508,7 +508,7 @@ final class DataSelectGidBuilder : DataSelectGidBuilderImpl!DataSelectGidBuilder
       Create object from builder.
       Returns: New object
   */
-  DataSelect build()
+  DataSelect build() nothrow
   {
     return new DataSelect(cast(void*)createGObject(DataSelect._getGType), No.Take);
   }
@@ -516,12 +516,12 @@ final class DataSelectGidBuilder : DataSelectGidBuilderImpl!DataSelectGidBuilder
 
 class DataSelectException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.data_select.DataSelect.errorQuark, cast(int)code, msg);
   }

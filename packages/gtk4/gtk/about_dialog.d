@@ -77,26 +77,26 @@ class AboutDialog : gtk.window.Window
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_about_dialog_get_type != &gidSymbolNotFound ? gtk_about_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AboutDialog self()
+  override AboutDialog self() nothrow
   {
     return this;
   }
@@ -105,7 +105,7 @@ class AboutDialog : gtk.window.Window
       Get builder for [gtk.about_dialog.AboutDialog]
       Returns: New builder object
   */
-  static AboutDialogGidBuilder builder()
+  static AboutDialogGidBuilder builder() nothrow
   {
     return new AboutDialogGidBuilder;
   }
@@ -118,7 +118,7 @@ class AboutDialog : gtk.window.Window
         should be a short explanation of the main purpose of the program,
         not a detailed list of features.
   */
-  @property string comments()
+  @property string comments() nothrow
   {
     return getComments();
   }
@@ -132,7 +132,7 @@ class AboutDialog : gtk.window.Window
           should be a short explanation of the main purpose of the program,
           not a detailed list of features.
   */
-  @property void comments(string propval)
+  @property void comments(string propval) nothrow
   {
     setComments(propval);
   }
@@ -141,7 +141,7 @@ class AboutDialog : gtk.window.Window
       Get `copyright` property.
       Returns: Copyright information for the program.
   */
-  @property string copyright()
+  @property string copyright() nothrow
   {
     return getCopyright();
   }
@@ -151,7 +151,7 @@ class AboutDialog : gtk.window.Window
       Params:
         propval = Copyright information for the program.
   */
-  @property void copyright(string propval)
+  @property void copyright(string propval) nothrow
   {
     setCopyright(propval);
   }
@@ -173,7 +173,7 @@ class AboutDialog : gtk.window.Window
         and email references in the form `<mail-to@some.body>`, and these will
         be converted into clickable links.
   */
-  @property string license()
+  @property string license() nothrow
   {
     return getLicense();
   }
@@ -196,7 +196,7 @@ class AboutDialog : gtk.window.Window
           and email references in the form `<mail-to@some.body>`, and these will
           be converted into clickable links.
   */
-  @property void license(string propval)
+  @property void license(string propval) nothrow
   {
     setLicense(propval);
   }
@@ -219,7 +219,7 @@ class AboutDialog : gtk.window.Window
         [gtk.about_dialog.AboutDialog.license] property are also set by this property as
         a side effect.
   */
-  @property gtk.types.License licenseType()
+  @property gtk.types.License licenseType() nothrow
   {
     return getLicenseType();
   }
@@ -243,7 +243,7 @@ class AboutDialog : gtk.window.Window
           [gtk.about_dialog.AboutDialog.license] property are also set by this property as
           a side effect.
   */
-  @property void licenseType(gtk.types.License propval)
+  @property void licenseType(gtk.types.License propval) nothrow
   {
     setLicenseType(propval);
   }
@@ -255,7 +255,7 @@ class AboutDialog : gtk.window.Window
         If it is `NULL`, the default window icon set with
         [gtk.window.Window.setDefaultIconName] will be used.
   */
-  @property gdk.paintable.Paintable logo()
+  @property gdk.paintable.Paintable logo() nothrow
   {
     return getLogo();
   }
@@ -268,7 +268,7 @@ class AboutDialog : gtk.window.Window
           If it is `NULL`, the default window icon set with
           [gtk.window.Window.setDefaultIconName] will be used.
   */
-  @property void logo(gdk.paintable.Paintable propval)
+  @property void logo(gdk.paintable.Paintable propval) nothrow
   {
     setLogo(propval);
   }
@@ -279,7 +279,7 @@ class AboutDialog : gtk.window.Window
         
         This property overrides the [gtk.about_dialog.AboutDialog.logo] property.
   */
-  @property string logoIconName()
+  @property string logoIconName() nothrow
   {
     return getLogoIconName();
   }
@@ -291,7 +291,7 @@ class AboutDialog : gtk.window.Window
           
           This property overrides the [gtk.about_dialog.AboutDialog.logo] property.
   */
-  @property void logoIconName(string propval)
+  @property void logoIconName(string propval) nothrow
   {
     setLogoIconName(propval);
   }
@@ -303,7 +303,7 @@ class AboutDialog : gtk.window.Window
         If this is not set, it defaults to the value returned by
         `[glib.global.getApplicationName]`.
   */
-  @property string programName()
+  @property string programName() nothrow
   {
     return getProgramName();
   }
@@ -316,7 +316,7 @@ class AboutDialog : gtk.window.Window
           If this is not set, it defaults to the value returned by
           `[glib.global.getApplicationName]`.
   */
-  @property void programName(string propval)
+  @property void programName(string propval) nothrow
   {
     setProgramName(propval);
   }
@@ -333,7 +333,7 @@ class AboutDialog : gtk.window.Window
         and email references in the form `<mail-to@some.body>`, and these will
         be converted into clickable links.
   */
-  @property string systemInformation()
+  @property string systemInformation() nothrow
   {
     return getSystemInformation();
   }
@@ -351,7 +351,7 @@ class AboutDialog : gtk.window.Window
           and email references in the form `<mail-to@some.body>`, and these will
           be converted into clickable links.
   */
-  @property void systemInformation(string propval)
+  @property void systemInformation(string propval) nothrow
   {
     setSystemInformation(propval);
   }
@@ -365,7 +365,7 @@ class AboutDialog : gtk.window.Window
         The string may contain email addresses and URLs, which will be displayed
         as links, see the introduction for more details.
   */
-  @property string translatorCredits()
+  @property string translatorCredits() nothrow
   {
     return getTranslatorCredits();
   }
@@ -380,7 +380,7 @@ class AboutDialog : gtk.window.Window
           The string may contain email addresses and URLs, which will be displayed
           as links, see the introduction for more details.
   */
-  @property void translatorCredits(string propval)
+  @property void translatorCredits(string propval) nothrow
   {
     setTranslatorCredits(propval);
   }
@@ -389,7 +389,7 @@ class AboutDialog : gtk.window.Window
       Get `version_` property.
       Returns: The version of the program.
   */
-  @property string version_()
+  @property string version_() nothrow
   {
     return getVersion();
   }
@@ -399,7 +399,7 @@ class AboutDialog : gtk.window.Window
       Params:
         propval = The version of the program.
   */
-  @property void version_(string propval)
+  @property void version_(string propval) nothrow
   {
     setVersion(propval);
   }
@@ -410,7 +410,7 @@ class AboutDialog : gtk.window.Window
         
         This should be a string starting with `http://` or `https://`.
   */
-  @property string website()
+  @property string website() nothrow
   {
     return getWebsite();
   }
@@ -422,7 +422,7 @@ class AboutDialog : gtk.window.Window
           
           This should be a string starting with `http://` or `https://`.
   */
-  @property void website(string propval)
+  @property void website(string propval) nothrow
   {
     setWebsite(propval);
   }
@@ -431,7 +431,7 @@ class AboutDialog : gtk.window.Window
       Get `websiteLabel` property.
       Returns: The label for the link to the website of the program.
   */
-  @property string websiteLabel()
+  @property string websiteLabel() nothrow
   {
     return getWebsiteLabel();
   }
@@ -441,7 +441,7 @@ class AboutDialog : gtk.window.Window
       Params:
         propval = The label for the link to the website of the program.
   */
-  @property void websiteLabel(string propval)
+  @property void websiteLabel(string propval) nothrow
   {
     setWebsiteLabel(propval);
   }
@@ -450,7 +450,7 @@ class AboutDialog : gtk.window.Window
       Get `wrapLicense` property.
       Returns: Whether to wrap the text in the license dialog.
   */
-  @property bool wrapLicense()
+  @property bool wrapLicense() nothrow
   {
     return getWrapLicense();
   }
@@ -460,7 +460,7 @@ class AboutDialog : gtk.window.Window
       Params:
         propval = Whether to wrap the text in the license dialog.
   */
-  @property void wrapLicense(bool propval)
+  @property void wrapLicense(bool propval) nothrow
   {
     setWrapLicense(propval);
   }
@@ -469,7 +469,7 @@ class AboutDialog : gtk.window.Window
       Creates a new [gtk.about_dialog.AboutDialog].
       Returns: a newly created [gtk.about_dialog.AboutDialog]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_about_dialog_new();
@@ -483,7 +483,7 @@ class AboutDialog : gtk.window.Window
         sectionName = The name of the section
         people = The people who belong to that section
   */
-  void addCreditSection(string sectionName, string[] people)
+  void addCreditSection(string sectionName, string[] people) nothrow
   {
     const(char)* _sectionName = sectionName.toCString(No.Alloc);
     char*[] _tmppeople;
@@ -501,7 +501,7 @@ class AboutDialog : gtk.window.Window
       Returns: A
           `NULL`-terminated string array containing the artists
   */
-  string[] getArtists()
+  string[] getArtists() nothrow
   {
     const(char*)* _cretval;
     _cretval = gtk_about_dialog_get_artists(cast(GtkAboutDialog*)this._cPtr);
@@ -525,7 +525,7 @@ class AboutDialog : gtk.window.Window
       Returns: A
           `NULL`-terminated string array containing the authors
   */
-  string[] getAuthors()
+  string[] getAuthors() nothrow
   {
     const(char*)* _cretval;
     _cretval = gtk_about_dialog_get_authors(cast(GtkAboutDialog*)this._cPtr);
@@ -547,7 +547,7 @@ class AboutDialog : gtk.window.Window
       Returns the comments string.
       Returns: The comments
   */
-  string getComments()
+  string getComments() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_comments(cast(GtkAboutDialog*)this._cPtr);
@@ -559,7 +559,7 @@ class AboutDialog : gtk.window.Window
       Returns the copyright string.
       Returns: The copyright string
   */
-  string getCopyright()
+  string getCopyright() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_copyright(cast(GtkAboutDialog*)this._cPtr);
@@ -573,7 +573,7 @@ class AboutDialog : gtk.window.Window
       Returns: A
           `NULL`-terminated string array containing the documenters
   */
-  string[] getDocumenters()
+  string[] getDocumenters() nothrow
   {
     const(char*)* _cretval;
     _cretval = gtk_about_dialog_get_documenters(cast(GtkAboutDialog*)this._cPtr);
@@ -595,7 +595,7 @@ class AboutDialog : gtk.window.Window
       Returns the license information.
       Returns: The license information
   */
-  string getLicense()
+  string getLicense() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_license(cast(GtkAboutDialog*)this._cPtr);
@@ -607,7 +607,7 @@ class AboutDialog : gtk.window.Window
       Retrieves the license type.
       Returns: a [gtk.types.License] value
   */
-  gtk.types.License getLicenseType()
+  gtk.types.License getLicenseType() nothrow
   {
     GtkLicense _cretval;
     _cretval = gtk_about_dialog_get_license_type(cast(GtkAboutDialog*)this._cPtr);
@@ -621,7 +621,7 @@ class AboutDialog : gtk.window.Window
           logo or `NULL` if the logo is unset or has been set via
           [gtk.about_dialog.AboutDialog.setLogoIconName]
   */
-  gdk.paintable.Paintable getLogo()
+  gdk.paintable.Paintable getLogo() nothrow
   {
     GdkPaintable* _cretval;
     _cretval = gtk_about_dialog_get_logo(cast(GtkAboutDialog*)this._cPtr);
@@ -634,7 +634,7 @@ class AboutDialog : gtk.window.Window
       Returns: the icon name displayed as logo,
           or `NULL` if the logo has been set via [gtk.about_dialog.AboutDialog.setLogo]
   */
-  string getLogoIconName()
+  string getLogoIconName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_logo_icon_name(cast(GtkAboutDialog*)this._cPtr);
@@ -646,7 +646,7 @@ class AboutDialog : gtk.window.Window
       Returns the program name displayed in the about dialog.
       Returns: The program name
   */
-  string getProgramName()
+  string getProgramName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_program_name(cast(GtkAboutDialog*)this._cPtr);
@@ -658,7 +658,7 @@ class AboutDialog : gtk.window.Window
       Returns the system information that is shown in the about dialog.
       Returns: the system information
   */
-  string getSystemInformation()
+  string getSystemInformation() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_system_information(cast(GtkAboutDialog*)this._cPtr);
@@ -671,7 +671,7 @@ class AboutDialog : gtk.window.Window
       in the credits page.
       Returns: The translator credits string
   */
-  string getTranslatorCredits()
+  string getTranslatorCredits() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_translator_credits(cast(GtkAboutDialog*)this._cPtr);
@@ -683,7 +683,7 @@ class AboutDialog : gtk.window.Window
       Returns the version string.
       Returns: The version string
   */
-  string getVersion()
+  string getVersion() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_version(cast(GtkAboutDialog*)this._cPtr);
@@ -695,7 +695,7 @@ class AboutDialog : gtk.window.Window
       Returns the website URL.
       Returns: The website URL
   */
-  string getWebsite()
+  string getWebsite() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_website(cast(GtkAboutDialog*)this._cPtr);
@@ -707,7 +707,7 @@ class AboutDialog : gtk.window.Window
       Returns the label used for the website link.
       Returns: The label used for the website link
   */
-  string getWebsiteLabel()
+  string getWebsiteLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_about_dialog_get_website_label(cast(GtkAboutDialog*)this._cPtr);
@@ -720,7 +720,7 @@ class AboutDialog : gtk.window.Window
       automatically wrapped.
       Returns: `TRUE` if the license text is wrapped
   */
-  bool getWrapLicense()
+  bool getWrapLicense() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_about_dialog_get_wrap_license(cast(GtkAboutDialog*)this._cPtr);
@@ -735,7 +735,7 @@ class AboutDialog : gtk.window.Window
         artists = the authors of the artwork
             of the application
   */
-  void setArtists(string[] artists)
+  void setArtists(string[] artists) nothrow
   {
     char*[] _tmpartists;
     foreach (s; artists)
@@ -753,7 +753,7 @@ class AboutDialog : gtk.window.Window
       Params:
         authors = the authors of the application
   */
-  void setAuthors(string[] authors)
+  void setAuthors(string[] authors) nothrow
   {
     char*[] _tmpauthors;
     foreach (s; authors)
@@ -772,7 +772,7 @@ class AboutDialog : gtk.window.Window
       Params:
         comments = a comments string
   */
-  void setComments(string comments = null)
+  void setComments(string comments = null) nothrow
   {
     const(char)* _comments = comments.toCString(No.Alloc);
     gtk_about_dialog_set_comments(cast(GtkAboutDialog*)this._cPtr, _comments);
@@ -786,7 +786,7 @@ class AboutDialog : gtk.window.Window
       Params:
         copyright = the copyright string
   */
-  void setCopyright(string copyright = null)
+  void setCopyright(string copyright = null) nothrow
   {
     const(char)* _copyright = copyright.toCString(No.Alloc);
     gtk_about_dialog_set_copyright(cast(GtkAboutDialog*)this._cPtr, _copyright);
@@ -800,7 +800,7 @@ class AboutDialog : gtk.window.Window
         documenters = the authors of the documentation
             of the application
   */
-  void setDocumenters(string[] documenters)
+  void setDocumenters(string[] documenters) nothrow
   {
     char*[] _tmpdocumenters;
     foreach (s; documenters)
@@ -820,7 +820,7 @@ class AboutDialog : gtk.window.Window
       Params:
         license = the license information
   */
-  void setLicense(string license = null)
+  void setLicense(string license = null) nothrow
   {
     const(char)* _license = license.toCString(No.Alloc);
     gtk_about_dialog_set_license(cast(GtkAboutDialog*)this._cPtr, _license);
@@ -836,7 +836,7 @@ class AboutDialog : gtk.window.Window
       Params:
         licenseType = the type of license
   */
-  void setLicenseType(gtk.types.License licenseType)
+  void setLicenseType(gtk.types.License licenseType) nothrow
   {
     gtk_about_dialog_set_license_type(cast(GtkAboutDialog*)this._cPtr, licenseType);
   }
@@ -847,7 +847,7 @@ class AboutDialog : gtk.window.Window
       Params:
         logo = a [gdk.paintable.Paintable]
   */
-  void setLogo(gdk.paintable.Paintable logo = null)
+  void setLogo(gdk.paintable.Paintable logo = null) nothrow
   {
     gtk_about_dialog_set_logo(cast(GtkAboutDialog*)this._cPtr, logo ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)logo)._cPtr(No.Dup) : null);
   }
@@ -858,7 +858,7 @@ class AboutDialog : gtk.window.Window
       Params:
         iconName = an icon name
   */
-  void setLogoIconName(string iconName = null)
+  void setLogoIconName(string iconName = null) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_about_dialog_set_logo_icon_name(cast(GtkAboutDialog*)this._cPtr, _iconName);
@@ -873,7 +873,7 @@ class AboutDialog : gtk.window.Window
       Params:
         name = the program name
   */
-  void setProgramName(string name = null)
+  void setProgramName(string name = null) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_about_dialog_set_program_name(cast(GtkAboutDialog*)this._cPtr, _name);
@@ -891,7 +891,7 @@ class AboutDialog : gtk.window.Window
       Params:
         systemInformation = system information
   */
-  void setSystemInformation(string systemInformation = null)
+  void setSystemInformation(string systemInformation = null) nothrow
   {
     const(char)* _systemInformation = systemInformation.toCString(No.Alloc);
     gtk_about_dialog_set_system_information(cast(GtkAboutDialog*)this._cPtr, _systemInformation);
@@ -920,7 +920,7 @@ class AboutDialog : gtk.window.Window
       Params:
         translatorCredits = the translator credits
   */
-  void setTranslatorCredits(string translatorCredits = null)
+  void setTranslatorCredits(string translatorCredits = null) nothrow
   {
     const(char)* _translatorCredits = translatorCredits.toCString(No.Alloc);
     gtk_about_dialog_set_translator_credits(cast(GtkAboutDialog*)this._cPtr, _translatorCredits);
@@ -932,7 +932,7 @@ class AboutDialog : gtk.window.Window
       Params:
         version_ = the version string
   */
-  void setVersion(string version_ = null)
+  void setVersion(string version_ = null) nothrow
   {
     const(char)* _version_ = version_.toCString(No.Alloc);
     gtk_about_dialog_set_version(cast(GtkAboutDialog*)this._cPtr, _version_);
@@ -944,7 +944,7 @@ class AboutDialog : gtk.window.Window
       Params:
         website = a URL string starting with `http://`
   */
-  void setWebsite(string website = null)
+  void setWebsite(string website = null) nothrow
   {
     const(char)* _website = website.toCString(No.Alloc);
     gtk_about_dialog_set_website(cast(GtkAboutDialog*)this._cPtr, _website);
@@ -956,7 +956,7 @@ class AboutDialog : gtk.window.Window
       Params:
         websiteLabel = the label used for the website link
   */
-  void setWebsiteLabel(string websiteLabel)
+  void setWebsiteLabel(string websiteLabel) nothrow
   {
     const(char)* _websiteLabel = websiteLabel.toCString(No.Alloc);
     gtk_about_dialog_set_website_label(cast(GtkAboutDialog*)this._cPtr, _websiteLabel);
@@ -969,7 +969,7 @@ class AboutDialog : gtk.window.Window
       Params:
         wrapLicense = whether to wrap the license
   */
-  void setWrapLicense(bool wrapLicense)
+  void setWrapLicense(bool wrapLicense) nothrow
   {
     gtk_about_dialog_set_wrap_license(cast(GtkAboutDialog*)this._cPtr, wrapLicense);
   }
@@ -995,18 +995,19 @@ class AboutDialog : gtk.window.Window
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivateLink(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivateLink(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.about_dialog.AboutDialog)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -1014,7 +1015,14 @@ class AboutDialog : gtk.window.Window
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.about_dialog.AboutDialog.activateLink");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -1039,7 +1047,7 @@ class AboutDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           not a detailed list of features.
       Returns: Builder instance for fluent chaining
   */
-  T comments(string propval)
+  T comments(string propval) nothrow
   {
     return setProperty("comments", propval);
   }
@@ -1050,7 +1058,7 @@ class AboutDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
         propval = Copyright information for the program.
       Returns: Builder instance for fluent chaining
   */
-  T copyright(string propval)
+  T copyright(string propval) nothrow
   {
     return setProperty("copyright", propval);
   }
@@ -1074,7 +1082,7 @@ class AboutDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           be converted into clickable links.
       Returns: Builder instance for fluent chaining
   */
-  T license(string propval)
+  T license(string propval) nothrow
   {
     return setProperty("license", propval);
   }
@@ -1099,7 +1107,7 @@ class AboutDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           a side effect.
       Returns: Builder instance for fluent chaining
   */
-  T licenseType(gtk.types.License propval)
+  T licenseType(gtk.types.License propval) nothrow
   {
     return setProperty("license-type", propval);
   }
@@ -1113,7 +1121,7 @@ class AboutDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           [gtk.window.Window.setDefaultIconName] will be used.
       Returns: Builder instance for fluent chaining
   */
-  T logo(gdk.paintable.Paintable propval)
+  T logo(gdk.paintable.Paintable propval) nothrow
   {
     return setProperty("logo", propval);
   }
@@ -1126,7 +1134,7 @@ class AboutDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           This property overrides the [gtk.about_dialog.AboutDialog.logo] property.
       Returns: Builder instance for fluent chaining
   */
-  T logoIconName(string propval)
+  T logoIconName(string propval) nothrow
   {
     return setProperty("logo-icon-name", propval);
   }
@@ -1140,7 +1148,7 @@ class AboutDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           `[glib.global.getApplicationName]`.
       Returns: Builder instance for fluent chaining
   */
-  T programName(string propval)
+  T programName(string propval) nothrow
   {
     return setProperty("program-name", propval);
   }
@@ -1159,7 +1167,7 @@ class AboutDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           be converted into clickable links.
       Returns: Builder instance for fluent chaining
   */
-  T systemInformation(string propval)
+  T systemInformation(string propval) nothrow
   {
     return setProperty("system-information", propval);
   }
@@ -1175,7 +1183,7 @@ class AboutDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           as links, see the introduction for more details.
       Returns: Builder instance for fluent chaining
   */
-  T translatorCredits(string propval)
+  T translatorCredits(string propval) nothrow
   {
     return setProperty("translator-credits", propval);
   }
@@ -1186,7 +1194,7 @@ class AboutDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
         propval = The version of the program.
       Returns: Builder instance for fluent chaining
   */
-  T version_(string propval)
+  T version_(string propval) nothrow
   {
     return setProperty("version", propval);
   }
@@ -1199,7 +1207,7 @@ class AboutDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           This should be a string starting with `http://` or `https://`.
       Returns: Builder instance for fluent chaining
   */
-  T website(string propval)
+  T website(string propval) nothrow
   {
     return setProperty("website", propval);
   }
@@ -1210,7 +1218,7 @@ class AboutDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
         propval = The label for the link to the website of the program.
       Returns: Builder instance for fluent chaining
   */
-  T websiteLabel(string propval)
+  T websiteLabel(string propval) nothrow
   {
     return setProperty("website-label", propval);
   }
@@ -1221,7 +1229,7 @@ class AboutDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
         propval = Whether to wrap the text in the license dialog.
       Returns: Builder instance for fluent chaining
   */
-  T wrapLicense(bool propval)
+  T wrapLicense(bool propval) nothrow
   {
     return setProperty("wrap-license", propval);
   }
@@ -1234,7 +1242,7 @@ final class AboutDialogGidBuilder : AboutDialogGidBuilderImpl!AboutDialogGidBuil
       Create object from builder.
       Returns: New object
   */
-  AboutDialog build()
+  AboutDialog build() nothrow
   {
     return new AboutDialog(cast(void*)createGObject(AboutDialog._getGType), No.Take);
   }

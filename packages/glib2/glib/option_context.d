@@ -19,24 +19,21 @@ class OptionContext
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.option_context.OptionContext");
-
     _cInstancePtr = cast(GOptionContext*)ptr;
 
     owned = take;
   }
 
-  ~this()
+  ~this() nothrow
   {
-    if (owned)
+    if (owned && _cInstancePtr)
       g_option_context_free(_cInstancePtr);
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -49,7 +46,7 @@ class OptionContext
       Params:
         group = the group to add
   */
-  void addGroup(glib.option_group.OptionGroup group)
+  void addGroup(glib.option_group.OptionGroup group) nothrow
   {
     g_option_context_add_group(cast(GOptionContext*)this._cPtr, group ? cast(GOptionGroup*)group._cPtr(Yes.Dup) : null);
   }
@@ -64,7 +61,7 @@ class OptionContext
              the `--help` output for the options in entries
              with gettext(), or null
   */
-  void addMainEntries(glib.types.OptionEntry[] entries, string translationDomain = null)
+  void addMainEntries(glib.types.OptionEntry[] entries, string translationDomain = null) nothrow
   {
     auto _entries = entries.ptr ? cast(const(GOptionEntry)*)(entries ~ GOptionEntry.init).ptr : [GOptionEntry.init].ptr;
     const(char)* _translationDomain = translationDomain.toCString(No.Alloc);
@@ -75,7 +72,7 @@ class OptionContext
       Returns the description. See [glib.option_context.OptionContext.setDescription].
       Returns: the description
   */
-  string getDescription()
+  string getDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = g_option_context_get_description(cast(GOptionContext*)this._cPtr);
@@ -97,7 +94,7 @@ class OptionContext
         group = the #GOptionGroup to create help for, or null
       Returns: A newly allocated string containing the help text
   */
-  string getHelp(bool mainHelp, glib.option_group.OptionGroup group = null)
+  string getHelp(bool mainHelp, glib.option_group.OptionGroup group = null) nothrow
   {
     char* _cretval;
     _cretval = g_option_context_get_help(cast(GOptionContext*)this._cPtr, mainHelp, group ? cast(GOptionGroup*)group._cPtr(No.Dup) : null);
@@ -110,7 +107,7 @@ class OptionContext
       is turned on for context. See [glib.option_context.OptionContext.setHelpEnabled].
       Returns: true if automatic help generation is turned on.
   */
-  bool getHelpEnabled()
+  bool getHelpEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_option_context_get_help_enabled(cast(GOptionContext*)this._cPtr);
@@ -122,7 +119,7 @@ class OptionContext
       [glib.option_context.OptionContext.setIgnoreUnknownOptions].
       Returns: true if unknown options are ignored.
   */
-  bool getIgnoreUnknownOptions()
+  bool getIgnoreUnknownOptions() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_option_context_get_ignore_unknown_options(cast(GOptionContext*)this._cPtr);
@@ -135,7 +132,7 @@ class OptionContext
          context doesn't have a main group. Note that group belongs to
          context and should not be modified or freed.
   */
-  glib.option_group.OptionGroup getMainGroup()
+  glib.option_group.OptionGroup getMainGroup() nothrow
   {
     GOptionGroup* _cretval;
     _cretval = g_option_context_get_main_group(cast(GOptionContext*)this._cPtr);
@@ -149,7 +146,7 @@ class OptionContext
       See [glib.option_context.OptionContext.setStrictPosix] for more information.
       Returns: true if strict POSIX is enabled, false otherwise.
   */
-  bool getStrictPosix()
+  bool getStrictPosix() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_option_context_get_strict_posix(cast(GOptionContext*)this._cPtr);
@@ -160,7 +157,7 @@ class OptionContext
       Returns the summary. See [glib.option_context.OptionContext.setSummary].
       Returns: the summary
   */
-  string getSummary()
+  string getSummary() nothrow
   {
     const(char)* _cretval;
     _cretval = g_option_context_get_summary(cast(GOptionContext*)this._cPtr);
@@ -179,7 +176,7 @@ class OptionContext
         description = a string to be shown in `--help` output
             after the list of options, or null
   */
-  void setDescription(string description = null)
+  void setDescription(string description = null) nothrow
   {
     const(char)* _description = description.toCString(No.Alloc);
     g_option_context_set_description(cast(GOptionContext*)this._cPtr, _description);
@@ -194,7 +191,7 @@ class OptionContext
       Params:
         helpEnabled = true to enable `--help`, false to disable it
   */
-  void setHelpEnabled(bool helpEnabled)
+  void setHelpEnabled(bool helpEnabled) nothrow
   {
     g_option_context_set_help_enabled(cast(GOptionContext*)this._cPtr, helpEnabled);
   }
@@ -212,7 +209,7 @@ class OptionContext
         ignoreUnknown = true to ignore unknown options, false to produce
              an error when unknown options are met
   */
-  void setIgnoreUnknownOptions(bool ignoreUnknown)
+  void setIgnoreUnknownOptions(bool ignoreUnknown) nothrow
   {
     g_option_context_set_ignore_unknown_options(cast(GOptionContext*)this._cPtr, ignoreUnknown);
   }
@@ -226,7 +223,7 @@ class OptionContext
       Params:
         group = the group to set as main group
   */
-  void setMainGroup(glib.option_group.OptionGroup group)
+  void setMainGroup(glib.option_group.OptionGroup group) nothrow
   {
     g_option_context_set_main_group(cast(GOptionContext*)this._cPtr, group ? cast(GOptionGroup*)group._cPtr(Yes.Dup) : null);
   }
@@ -260,7 +257,7 @@ class OptionContext
       Params:
         strictPosix = the new value
   */
-  void setStrictPosix(bool strictPosix)
+  void setStrictPosix(bool strictPosix) nothrow
   {
     g_option_context_set_strict_posix(cast(GOptionContext*)this._cPtr, strictPosix);
   }
@@ -277,7 +274,7 @@ class OptionContext
         summary = a string to be shown in `--help` output
            before the list of options, or null
   */
-  void setSummary(string summary = null)
+  void setSummary(string summary = null) nothrow
   {
     const(char)* _summary = summary.toCString(No.Alloc);
     g_option_context_set_summary(cast(GOptionContext*)this._cPtr, _summary);
@@ -299,15 +296,22 @@ class OptionContext
       Params:
         func = the #GTranslateFunc, or null
   */
-  void setTranslateFunc(glib.types.TranslateFunc func = null)
+  void setTranslateFunc(glib.types.TranslateFunc func = null) nothrow
   {
-    extern(C) const(char)* _funcCallback(const(char)* str, void* data)
+    extern(C) const(char)* _funcCallback(const(char)* str, void* data) nothrow
     {
       string _dretval;
       auto _dlg = cast(glib.types.TranslateFunc*)data;
       string _str = str.fromCString(No.Free);
 
-      _dretval = (*_dlg)(_str);
+      try
+      {
+        _dretval = (*_dlg)(_str);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.TranslateFunc");
+      }
       auto _retval = _dretval.toCString(Yes.Alloc);
 
       return _retval;
@@ -325,7 +329,7 @@ class OptionContext
       Params:
         domain = the domain to use
   */
-  void setTranslationDomain(string domain)
+  void setTranslationDomain(string domain) nothrow
   {
     const(char)* _domain = domain.toCString(No.Alloc);
     g_option_context_set_translation_domain(cast(GOptionContext*)this._cPtr, _domain);

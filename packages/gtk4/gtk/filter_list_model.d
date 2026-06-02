@@ -32,26 +32,26 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_filter_list_model_get_type != &gidSymbolNotFound ? gtk_filter_list_model_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FilterListModel self()
+  override FilterListModel self() nothrow
   {
     return this;
   }
@@ -60,7 +60,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Get builder for [gtk.filter_list_model.FilterListModel]
       Returns: New builder object
   */
-  static FilterListModelGidBuilder builder()
+  static FilterListModelGidBuilder builder() nothrow
   {
     return new FilterListModelGidBuilder;
   }
@@ -69,7 +69,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Get `filter` property.
       Returns: The filter for this model.
   */
-  @property gtk.filter.Filter filter()
+  @property gtk.filter.Filter filter() nothrow
   {
     return getFilter();
   }
@@ -79,7 +79,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Params:
         propval = The filter for this model.
   */
-  @property void filter(gtk.filter.Filter propval)
+  @property void filter(gtk.filter.Filter propval) nothrow
   {
     setFilter(propval);
   }
@@ -88,7 +88,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Get `incremental` property.
       Returns: If the model should filter items incrementally.
   */
-  @property bool incremental()
+  @property bool incremental() nothrow
   {
     return getIncremental();
   }
@@ -98,7 +98,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Params:
         propval = If the model should filter items incrementally.
   */
-  @property void incremental(bool propval)
+  @property void incremental(bool propval) nothrow
   {
     setIncremental(propval);
   }
@@ -107,7 +107,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Get `itemType` property.
       Returns: The type of items. See [gio.list_model.ListModel.getItemType].
   */
-  @property gobject.types.GType itemType()
+  @property gobject.types.GType itemType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.types.GType)("item-type");
   }
@@ -116,7 +116,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Get `model` property.
       Returns: The model being filtered.
   */
-  @property gio.list_model.ListModel model()
+  @property gio.list_model.ListModel model() nothrow
   {
     return getModel();
   }
@@ -126,7 +126,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Params:
         propval = The model being filtered.
   */
-  @property void model(gio.list_model.ListModel propval)
+  @property void model(gio.list_model.ListModel propval) nothrow
   {
     setModel(propval);
   }
@@ -135,7 +135,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Get `nItems` property.
       Returns: The number of items. See [gio.list_model.ListModel.getNItems].
   */
-  @property uint nItems()
+  @property uint nItems() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("n-items");
   }
@@ -144,7 +144,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Get `pending` property.
       Returns: Number of items not yet filtered.
   */
-  @property uint pending()
+  @property uint pending() nothrow
   {
     return getPending();
   }
@@ -161,7 +161,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
         filter = filter
       Returns: a new [gtk.filter_list_model.FilterListModel]
   */
-  this(gio.list_model.ListModel model = null, gtk.filter.Filter filter = null)
+  this(gio.list_model.ListModel model = null, gtk.filter.Filter filter = null) nothrow
   {
     GtkFilterListModel* _cretval;
     _cretval = gtk_filter_list_model_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(Yes.Dup) : null, filter ? cast(GtkFilter*)filter._cPtr(Yes.Dup) : null);
@@ -172,7 +172,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Gets the [gtk.filter.Filter] currently set on self.
       Returns: The filter currently in use
   */
-  gtk.filter.Filter getFilter()
+  gtk.filter.Filter getFilter() nothrow
   {
     GtkFilter* _cretval;
     _cretval = gtk_filter_list_model_get_filter(cast(GtkFilterListModel*)this._cPtr);
@@ -186,7 +186,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       See [gtk.filter_list_model.FilterListModel.setIncremental].
       Returns: true if incremental filtering is enabled
   */
-  bool getIncremental()
+  bool getIncremental() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_filter_list_model_get_incremental(cast(GtkFilterListModel*)this._cPtr);
@@ -197,7 +197,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Gets the model currently filtered or null if none.
       Returns: The model that gets filtered
   */
-  gio.list_model.ListModel getModel()
+  gio.list_model.ListModel getModel() nothrow
   {
     GListModel* _cretval;
     _cretval = gtk_filter_list_model_get_model(cast(GtkFilterListModel*)this._cPtr);
@@ -224,7 +224,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       function returns 0.
       Returns: The number of items not yet filtered
   */
-  uint getPending()
+  uint getPending() nothrow
   {
     uint _retval;
     _retval = gtk_filter_list_model_get_pending(cast(GtkFilterListModel*)this._cPtr);
@@ -237,7 +237,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Params:
         filter = filter to use
   */
-  void setFilter(gtk.filter.Filter filter = null)
+  void setFilter(gtk.filter.Filter filter = null) nothrow
   {
     gtk_filter_list_model_set_filter(cast(GtkFilterListModel*)this._cPtr, filter ? cast(GtkFilter*)filter._cPtr(No.Dup) : null);
   }
@@ -263,7 +263,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Params:
         incremental = true to enable incremental filtering
   */
-  void setIncremental(bool incremental)
+  void setIncremental(bool incremental) nothrow
   {
     gtk_filter_list_model_set_incremental(cast(GtkFilterListModel*)this._cPtr, incremental);
   }
@@ -279,7 +279,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
       Params:
         model = The model to be filtered
   */
-  void setModel(gio.list_model.ListModel model = null)
+  void setModel(gio.list_model.ListModel model = null) nothrow
   {
     gtk_filter_list_model_set_model(cast(GtkFilterListModel*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
@@ -298,7 +298,7 @@ class FilterListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The filter for this model.
       Returns: Builder instance for fluent chaining
   */
-  T filter(gtk.filter.Filter propval)
+  T filter(gtk.filter.Filter propval) nothrow
   {
     return setProperty("filter", propval);
   }
@@ -309,7 +309,7 @@ class FilterListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = If the model should filter items incrementally.
       Returns: Builder instance for fluent chaining
   */
-  T incremental(bool propval)
+  T incremental(bool propval) nothrow
   {
     return setProperty("incremental", propval);
   }
@@ -320,7 +320,7 @@ class FilterListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
         propval = The model being filtered.
       Returns: Builder instance for fluent chaining
   */
-  T model(gio.list_model.ListModel propval)
+  T model(gio.list_model.ListModel propval) nothrow
   {
     return setProperty("model", propval);
   }
@@ -333,7 +333,7 @@ final class FilterListModelGidBuilder : FilterListModelGidBuilderImpl!FilterList
       Create object from builder.
       Returns: New object
   */
-  FilterListModel build()
+  FilterListModel build() nothrow
   {
     return new FilterListModel(cast(void*)createGObject(FilterListModel._getGType), Yes.Take);
   }

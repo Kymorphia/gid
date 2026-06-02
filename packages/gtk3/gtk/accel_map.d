@@ -71,26 +71,26 @@ class AccelMap : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_accel_map_get_type != &gidSymbolNotFound ? gtk_accel_map_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AccelMap self()
+  override AccelMap self() nothrow
   {
     return this;
   }
@@ -99,7 +99,7 @@ class AccelMap : gobject.object.ObjectWrap
       Get builder for [gtk.accel_map.AccelMap]
       Returns: New builder object
   */
-  static AccelMapGidBuilder builder()
+  static AccelMapGidBuilder builder() nothrow
   {
     return new AccelMapGidBuilder;
   }
@@ -123,7 +123,7 @@ class AccelMap : gobject.object.ObjectWrap
         accelKey = the accelerator key
         accelMods = the accelerator modifiers
   */
-  static void addEntry(string accelPath, uint accelKey, gdk.types.ModifierType accelMods)
+  static void addEntry(string accelPath, uint accelKey, gdk.types.ModifierType accelMods) nothrow
   {
     const(char)* _accelPath = accelPath.toCString(No.Alloc);
     gtk_accel_map_add_entry(_accelPath, accelKey, accelMods);
@@ -142,7 +142,7 @@ class AccelMap : gobject.object.ObjectWrap
       Params:
         filterPattern = a pattern (see #GPatternSpec)
   */
-  static void addFilter(string filterPattern)
+  static void addFilter(string filterPattern) nothrow
   {
     const(char)* _filterPattern = filterPattern.toCString(No.Alloc);
     gtk_accel_map_add_filter(_filterPattern);
@@ -167,7 +167,7 @@ class AccelMap : gobject.object.ObjectWrap
         replace = true if other accelerators may be deleted upon conflicts
       Returns: true if the accelerator could be changed, false otherwise
   */
-  static bool changeEntry(string accelPath, uint accelKey, gdk.types.ModifierType accelMods, bool replace)
+  static bool changeEntry(string accelPath, uint accelKey, gdk.types.ModifierType accelMods, bool replace) nothrow
   {
     bool _retval;
     const(char)* _accelPath = accelPath.toCString(No.Alloc);
@@ -188,14 +188,21 @@ class AccelMap : gobject.object.ObjectWrap
         foreachFunc = function to be executed for each accel
                          map entry which is not filtered out
   */
-  static void foreach_(void* data, gtk.types.AccelMapForeach foreachFunc)
+  static void foreach_(void* data, gtk.types.AccelMapForeach foreachFunc) nothrow
   {
-    extern(C) void _foreachFuncCallback(void* data, const(char)* accelPath, uint accelKey, GdkModifierType accelMods, gboolean changed)
+    extern(C) void _foreachFuncCallback(void* data, const(char)* accelPath, uint accelKey, GdkModifierType accelMods, gboolean changed) nothrow
     {
       auto _dlg = cast(gtk.types.AccelMapForeach*)data;
       string _accelPath = accelPath.fromCString(No.Free);
 
-      (*_dlg)(_accelPath, accelKey, accelMods, cast(bool)changed);
+      try
+      {
+        (*_dlg)(_accelPath, accelKey, accelMods, cast(bool)changed);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.AccelMapForeach");
+      }
     }
     auto _foreachFuncCB = foreachFunc ? &_foreachFuncCallback : null;
     gtk_accel_map_foreach(data, _foreachFuncCB);
@@ -213,14 +220,21 @@ class AccelMap : gobject.object.ObjectWrap
         foreachFunc = function to be executed for each accel
                          map entry
   */
-  static void foreachUnfiltered(void* data, gtk.types.AccelMapForeach foreachFunc)
+  static void foreachUnfiltered(void* data, gtk.types.AccelMapForeach foreachFunc) nothrow
   {
-    extern(C) void _foreachFuncCallback(void* data, const(char)* accelPath, uint accelKey, GdkModifierType accelMods, gboolean changed)
+    extern(C) void _foreachFuncCallback(void* data, const(char)* accelPath, uint accelKey, GdkModifierType accelMods, gboolean changed) nothrow
     {
       auto _dlg = cast(gtk.types.AccelMapForeach*)data;
       string _accelPath = accelPath.fromCString(No.Free);
 
-      (*_dlg)(_accelPath, accelKey, accelMods, cast(bool)changed);
+      try
+      {
+        (*_dlg)(_accelPath, accelKey, accelMods, cast(bool)changed);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.types.AccelMapForeach");
+      }
     }
     auto _foreachFuncCB = foreachFunc ? &_foreachFuncCallback : null;
     gtk_accel_map_foreach_unfiltered(data, _foreachFuncCB);
@@ -233,7 +247,7 @@ class AccelMap : gobject.object.ObjectWrap
       other accelerator map functions.
       Returns: the global #GtkAccelMap object
   */
-  static gtk.accel_map.AccelMap get()
+  static gtk.accel_map.AccelMap get() nothrow
   {
     GtkAccelMap* _cretval;
     _cretval = gtk_accel_map_get();
@@ -249,7 +263,7 @@ class AccelMap : gobject.object.ObjectWrap
         fileName = a file containing accelerator specifications,
             in the GLib file name encoding
   */
-  static void load(string fileName)
+  static void load(string fileName) nothrow
   {
     const(char)* _fileName = fileName.toCString(No.Alloc);
     gtk_accel_map_load(_fileName);
@@ -263,7 +277,7 @@ class AccelMap : gobject.object.ObjectWrap
       Params:
         fd = a valid readable file descriptor
   */
-  static void loadFd(int fd)
+  static void loadFd(int fd) nothrow
   {
     gtk_accel_map_load_fd(fd);
   }
@@ -274,7 +288,7 @@ class AccelMap : gobject.object.ObjectWrap
       Params:
         scanner = a #GScanner which has already been provided with an input file
   */
-  static void loadScanner(glib.scanner.Scanner scanner)
+  static void loadScanner(glib.scanner.Scanner scanner) nothrow
   {
     gtk_accel_map_load_scanner(scanner ? cast(GScanner*)scanner._cPtr : null);
   }
@@ -300,7 +314,7 @@ class AccelMap : gobject.object.ObjectWrap
       Params:
         accelPath = a valid accelerator path
   */
-  static void lockPath(string accelPath)
+  static void lockPath(string accelPath) nothrow
   {
     const(char)* _accelPath = accelPath.toCString(No.Alloc);
     gtk_accel_map_lock_path(_accelPath);
@@ -314,7 +328,7 @@ class AccelMap : gobject.object.ObjectWrap
         key = the accelerator key to be filled in (optional)
       Returns: true if accel_path is known, false otherwise
   */
-  static bool lookupEntry(string accelPath, out gtk.types.AccelKey key)
+  static bool lookupEntry(string accelPath, out gtk.types.AccelKey key) nothrow
   {
     bool _retval;
     const(char)* _accelPath = accelPath.toCString(No.Alloc);
@@ -332,7 +346,7 @@ class AccelMap : gobject.object.ObjectWrap
         fileName = the name of the file to contain
             accelerator specifications, in the GLib file name encoding
   */
-  static void save(string fileName)
+  static void save(string fileName) nothrow
   {
     const(char)* _fileName = fileName.toCString(No.Alloc);
     gtk_accel_map_save(_fileName);
@@ -346,7 +360,7 @@ class AccelMap : gobject.object.ObjectWrap
       Params:
         fd = a valid writable file descriptor
   */
-  static void saveFd(int fd)
+  static void saveFd(int fd) nothrow
   {
     gtk_accel_map_save_fd(fd);
   }
@@ -358,7 +372,7 @@ class AccelMap : gobject.object.ObjectWrap
       Params:
         accelPath = a valid accelerator path
   */
-  static void unlockPath(string accelPath)
+  static void unlockPath(string accelPath) nothrow
   {
     const(char)* _accelPath = accelPath.toCString(No.Alloc);
     gtk_accel_map_unlock_path(_accelPath);
@@ -389,7 +403,7 @@ class AccelMap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -398,7 +412,7 @@ class AccelMap : gobject.object.ObjectWrap
   && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.accel_map.AccelMap)))
   && Parameters!T.length < 5)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -416,7 +430,14 @@ class AccelMap : gobject.object.ObjectWrap
       static if (Parameters!T.length > 3)
         _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.accel_map.AccelMap.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -436,7 +457,7 @@ final class AccelMapGidBuilder : AccelMapGidBuilderImpl!AccelMapGidBuilder
       Create object from builder.
       Returns: New object
   */
-  AccelMap build()
+  AccelMap build() nothrow
   {
     return new AccelMap(cast(void*)createGObject(AccelMap._getGType), No.Take);
   }

@@ -34,32 +34,32 @@ class ObjectWrap : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())json_object_get_type != &gidSymbolNotFound ? json_object_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ObjectWrap self()
+  override ObjectWrap self() nothrow
   {
     return this;
   }
@@ -68,7 +68,7 @@ class ObjectWrap : gobject.boxed.Boxed
       Creates a new object.
       Returns: the newly created object
   */
-  this()
+  this() nothrow
   {
     JsonObject* _cretval;
     _cretval = json_object_new();
@@ -87,7 +87,7 @@ class ObjectWrap : gobject.boxed.Boxed
   
       Deprecated: Use [json.object.ObjectWrap.setMember] instead
   */
-  void addMember(string memberName, json.node.Node node)
+  void addMember(string memberName, json.node.Node node) nothrow
   {
     const(char)* _memberName = memberName.toCString(No.Alloc);
     json_object_add_member(cast(JsonObject*)this._cPtr, _memberName, node ? cast(JsonNode*)node._cPtr(Yes.Dup) : null);
@@ -101,7 +101,7 @@ class ObjectWrap : gobject.boxed.Boxed
       Returns: a copy of the value for the
           requested object member
   */
-  json.node.Node dupMember(string memberName)
+  json.node.Node dupMember(string memberName) nothrow
   {
     JsonNode* _cretval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
@@ -118,7 +118,7 @@ class ObjectWrap : gobject.boxed.Boxed
         b = another JSON object
       Returns: `TRUE` if `a` and `b` are equal, and `FALSE` otherwise
   */
-  bool equal(json.object.ObjectWrap b)
+  bool equal(json.object.ObjectWrap b) nothrow
   {
     bool _retval;
     _retval = cast(bool)json_object_equal(cast(JsonObject*)this._cPtr, b ? cast(JsonObject*)b._cPtr(No.Dup) : null);
@@ -139,14 +139,21 @@ class ObjectWrap : gobject.boxed.Boxed
       Params:
         func = the function to be called on each member
   */
-  void foreachMember(json.types.ObjectForeach func)
+  void foreachMember(json.types.ObjectForeach func) nothrow
   {
-    extern(C) void _funcCallback(JsonObject* object, const(char)* memberName, JsonNode* memberNode, void* userData)
+    extern(C) void _funcCallback(JsonObject* object, const(char)* memberName, JsonNode* memberNode, void* userData) nothrow
     {
       auto _dlg = cast(json.types.ObjectForeach*)userData;
       string _memberName = memberName.fromCString(No.Free);
 
-      (*_dlg)(object ? new json.object.ObjectWrap(cast(void*)object, No.Take) : null, _memberName, memberNode ? new json.node.Node(cast(void*)memberNode, No.Take) : null);
+      try
+      {
+        (*_dlg)(object ? new json.object.ObjectWrap(cast(void*)object, No.Take) : null, _memberName, memberNode ? new json.node.Node(cast(void*)memberNode, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "json.types.ObjectForeach");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -166,7 +173,7 @@ class ObjectWrap : gobject.boxed.Boxed
         memberName = the name of the member
       Returns: the array inside the object's member
   */
-  json.array.Array getArrayMember(string memberName)
+  json.array.Array getArrayMember(string memberName) nothrow
   {
     JsonArray* _cretval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
@@ -187,7 +194,7 @@ class ObjectWrap : gobject.boxed.Boxed
         memberName = the name of the member
       Returns: the boolean value of the object's member
   */
-  bool getBooleanMember(string memberName)
+  bool getBooleanMember(string memberName) nothrow
   {
     bool _retval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
@@ -208,7 +215,7 @@ class ObjectWrap : gobject.boxed.Boxed
       Returns: the boolean value of the object's member, or the
           given default
   */
-  bool getBooleanMemberWithDefault(string memberName, bool defaultValue)
+  bool getBooleanMemberWithDefault(string memberName, bool defaultValue) nothrow
   {
     bool _retval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
@@ -228,7 +235,7 @@ class ObjectWrap : gobject.boxed.Boxed
         memberName = the name of the member
       Returns: the floating point value of the object's member
   */
-  double getDoubleMember(string memberName)
+  double getDoubleMember(string memberName) nothrow
   {
     double _retval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
@@ -249,7 +256,7 @@ class ObjectWrap : gobject.boxed.Boxed
       Returns: the floating point value of the object's member, or the
           given default
   */
-  double getDoubleMemberWithDefault(string memberName, double defaultValue)
+  double getDoubleMemberWithDefault(string memberName, double defaultValue) nothrow
   {
     double _retval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
@@ -269,7 +276,7 @@ class ObjectWrap : gobject.boxed.Boxed
         memberName = the name of the object member
       Returns: the integer value of the object's member
   */
-  long getIntMember(string memberName)
+  long getIntMember(string memberName) nothrow
   {
     long _retval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
@@ -290,7 +297,7 @@ class ObjectWrap : gobject.boxed.Boxed
       Returns: the integer value of the object's member, or the
           given default
   */
-  long getIntMemberWithDefault(string memberName, long defaultValue)
+  long getIntMemberWithDefault(string memberName, long defaultValue) nothrow
   {
     long _retval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
@@ -306,7 +313,7 @@ class ObjectWrap : gobject.boxed.Boxed
       Returns: the value for the
           requested object member
   */
-  json.node.Node getMember(string memberName)
+  json.node.Node getMember(string memberName) nothrow
   {
     JsonNode* _cretval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
@@ -323,7 +330,7 @@ class ObjectWrap : gobject.boxed.Boxed
       Returns: the
           member names of the object
   */
-  string[] getMembers()
+  string[] getMembers() nothrow
   {
     GList* _cretval;
     _cretval = json_object_get_members(cast(JsonObject*)this._cPtr);
@@ -342,7 +349,7 @@ class ObjectWrap : gobject.boxed.Boxed
         memberName = the name of the member
       Returns: `TRUE` if the value is `null`
   */
-  bool getNullMember(string memberName)
+  bool getNullMember(string memberName) nothrow
   {
     bool _retval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
@@ -363,7 +370,7 @@ class ObjectWrap : gobject.boxed.Boxed
         memberName = the name of the member
       Returns: the object inside the object's member
   */
-  json.object.ObjectWrap getObjectMember(string memberName)
+  json.object.ObjectWrap getObjectMember(string memberName) nothrow
   {
     JsonObject* _cretval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
@@ -376,7 +383,7 @@ class ObjectWrap : gobject.boxed.Boxed
       Retrieves the number of members of a JSON object.
       Returns: the number of members
   */
-  uint getSize()
+  uint getSize() nothrow
   {
     uint _retval;
     _retval = json_object_get_size(cast(JsonObject*)this._cPtr);
@@ -395,7 +402,7 @@ class ObjectWrap : gobject.boxed.Boxed
         memberName = the name of the member
       Returns: the string value of the object's member
   */
-  string getStringMember(string memberName)
+  string getStringMember(string memberName) nothrow
   {
     const(char)* _cretval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
@@ -417,7 +424,7 @@ class ObjectWrap : gobject.boxed.Boxed
       Returns: the string value of the object's member, or the
           given default
   */
-  string getStringMemberWithDefault(string memberName, string defaultValue)
+  string getStringMemberWithDefault(string memberName, string defaultValue) nothrow
   {
     const(char)* _cretval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
@@ -432,7 +439,7 @@ class ObjectWrap : gobject.boxed.Boxed
       Returns: the
           member values of the object
   */
-  json.node.Node[] getValues()
+  json.node.Node[] getValues() nothrow
   {
     GList* _cretval;
     _cretval = json_object_get_values(cast(JsonObject*)this._cPtr);
@@ -447,7 +454,7 @@ class ObjectWrap : gobject.boxed.Boxed
         memberName = the name of a JSON object member
       Returns: `TRUE` if the JSON object has the requested member
   */
-  bool hasMember(string memberName)
+  bool hasMember(string memberName) nothrow
   {
     bool _retval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
@@ -463,7 +470,7 @@ class ObjectWrap : gobject.boxed.Boxed
       proportionally with the number of members in the object.
       Returns: hash value for key
   */
-  uint hash()
+  uint hash() nothrow
   {
     uint _retval;
     _retval = json_object_hash(cast(JsonObject*)this._cPtr);
@@ -475,7 +482,7 @@ class ObjectWrap : gobject.boxed.Boxed
       [json.object.ObjectWrap.seal] on it.
       Returns: `TRUE` if the object is immutable
   */
-  bool isImmutable()
+  bool isImmutable() nothrow
   {
     bool _retval;
     _retval = cast(bool)json_object_is_immutable(cast(JsonObject*)this._cPtr);
@@ -488,7 +495,7 @@ class ObjectWrap : gobject.boxed.Boxed
       Params:
         memberName = the name of the member to remove
   */
-  void removeMember(string memberName)
+  void removeMember(string memberName) nothrow
   {
     const(char)* _memberName = memberName.toCString(No.Alloc);
     json_object_remove_member(cast(JsonObject*)this._cPtr, _memberName);
@@ -501,7 +508,7 @@ class ObjectWrap : gobject.boxed.Boxed
       
       If the object is already immutable, this is a no-op.
   */
-  void seal()
+  void seal() nothrow
   {
     json_object_seal(cast(JsonObject*)this._cPtr);
   }
@@ -515,7 +522,7 @@ class ObjectWrap : gobject.boxed.Boxed
         memberName = the name of the member
         value = the value of the member
   */
-  void setArrayMember(string memberName, json.array.Array value)
+  void setArrayMember(string memberName, json.array.Array value) nothrow
   {
     const(char)* _memberName = memberName.toCString(No.Alloc);
     json_object_set_array_member(cast(JsonObject*)this._cPtr, _memberName, value ? cast(JsonArray*)value._cPtr(Yes.Dup) : null);
@@ -530,7 +537,7 @@ class ObjectWrap : gobject.boxed.Boxed
         memberName = the name of the member
         value = the value of the member
   */
-  void setBooleanMember(string memberName, bool value)
+  void setBooleanMember(string memberName, bool value) nothrow
   {
     const(char)* _memberName = memberName.toCString(No.Alloc);
     json_object_set_boolean_member(cast(JsonObject*)this._cPtr, _memberName, value);
@@ -545,7 +552,7 @@ class ObjectWrap : gobject.boxed.Boxed
         memberName = the name of the member
         value = the value of the member
   */
-  void setDoubleMember(string memberName, double value)
+  void setDoubleMember(string memberName, double value) nothrow
   {
     const(char)* _memberName = memberName.toCString(No.Alloc);
     json_object_set_double_member(cast(JsonObject*)this._cPtr, _memberName, value);
@@ -560,7 +567,7 @@ class ObjectWrap : gobject.boxed.Boxed
         memberName = the name of the member
         value = the value of the member
   */
-  void setIntMember(string memberName, long value)
+  void setIntMember(string memberName, long value) nothrow
   {
     const(char)* _memberName = memberName.toCString(No.Alloc);
     json_object_set_int_member(cast(JsonObject*)this._cPtr, _memberName, value);
@@ -579,7 +586,7 @@ class ObjectWrap : gobject.boxed.Boxed
         memberName = the name of the member
         node = the value of the member
   */
-  void setMember(string memberName, json.node.Node node)
+  void setMember(string memberName, json.node.Node node) nothrow
   {
     const(char)* _memberName = memberName.toCString(No.Alloc);
     json_object_set_member(cast(JsonObject*)this._cPtr, _memberName, node ? cast(JsonNode*)node._cPtr(Yes.Dup) : null);
@@ -593,7 +600,7 @@ class ObjectWrap : gobject.boxed.Boxed
       Params:
         memberName = the name of the member
   */
-  void setNullMember(string memberName)
+  void setNullMember(string memberName) nothrow
   {
     const(char)* _memberName = memberName.toCString(No.Alloc);
     json_object_set_null_member(cast(JsonObject*)this._cPtr, _memberName);
@@ -608,7 +615,7 @@ class ObjectWrap : gobject.boxed.Boxed
         memberName = the name of the member
         value = the value of the member
   */
-  void setObjectMember(string memberName, json.object.ObjectWrap value)
+  void setObjectMember(string memberName, json.object.ObjectWrap value) nothrow
   {
     const(char)* _memberName = memberName.toCString(No.Alloc);
     json_object_set_object_member(cast(JsonObject*)this._cPtr, _memberName, value ? cast(JsonObject*)value._cPtr(Yes.Dup) : null);
@@ -623,7 +630,7 @@ class ObjectWrap : gobject.boxed.Boxed
         memberName = the name of the member
         value = the value of the member
   */
-  void setStringMember(string memberName, string value)
+  void setStringMember(string memberName, string value) nothrow
   {
     const(char)* _memberName = memberName.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);

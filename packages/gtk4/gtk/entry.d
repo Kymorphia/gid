@@ -124,26 +124,26 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_entry_get_type != &gidSymbolNotFound ? gtk_entry_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Entry self()
+  override Entry self() nothrow
   {
     return this;
   }
@@ -152,7 +152,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get builder for [gtk.entry.Entry]
       Returns: New builder object
   */
-  static EntryGidBuilder builder()
+  static EntryGidBuilder builder() nothrow
   {
     return new EntryGidBuilder;
   }
@@ -161,7 +161,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `activatesDefault` property.
       Returns: Whether to activate the default widget when Enter is pressed.
   */
-  @property bool activatesDefault()
+  @property bool activatesDefault() nothrow
   {
     return getActivatesDefault();
   }
@@ -171,7 +171,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         propval = Whether to activate the default widget when Enter is pressed.
   */
-  @property void activatesDefault(bool propval)
+  @property void activatesDefault(bool propval) nothrow
   {
     setActivatesDefault(propval);
   }
@@ -185,7 +185,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         The [pango.attribute.Attribute]'s @start_index and @end_index must refer to the
         [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
   */
-  @property pango.attr_list.AttrList attributes()
+  @property pango.attr_list.AttrList attributes() nothrow
   {
     return getAttributes();
   }
@@ -200,7 +200,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
           The [pango.attribute.Attribute]'s @start_index and @end_index must refer to the
           [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
   */
-  @property void attributes(pango.attr_list.AttrList propval)
+  @property void attributes(pango.attr_list.AttrList propval) nothrow
   {
     setAttributes(propval);
   }
@@ -209,7 +209,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `buffer` property.
       Returns: The buffer object which actually stores the text.
   */
-  @property gtk.entry_buffer.EntryBuffer buffer()
+  @property gtk.entry_buffer.EntryBuffer buffer() nothrow
   {
     return getBuffer();
   }
@@ -219,7 +219,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         propval = The buffer object which actually stores the text.
   */
-  @property void buffer(gtk.entry_buffer.EntryBuffer propval)
+  @property void buffer(gtk.entry_buffer.EntryBuffer propval) nothrow
   {
     setBuffer(propval);
   }
@@ -230,7 +230,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  @property gtk.entry_completion.EntryCompletion completion()
+  @property gtk.entry_completion.EntryCompletion completion() nothrow
   {
     return getCompletion();
   }
@@ -242,7 +242,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  @property void completion(gtk.entry_completion.EntryCompletion propval)
+  @property void completion(gtk.entry_completion.EntryCompletion propval) nothrow
   {
     setCompletion(propval);
   }
@@ -252,7 +252,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Returns: Whether to suggest Emoji replacements for :-delimited names
         like `:heart:`.
   */
-  @property bool enableEmojiCompletion()
+  @property bool enableEmojiCompletion() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("enable-emoji-completion");
   }
@@ -263,7 +263,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         propval = Whether to suggest Emoji replacements for :-delimited names
           like `:heart:`.
   */
-  @property void enableEmojiCompletion(bool propval)
+  @property void enableEmojiCompletion(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("enable-emoji-completion", propval);
   }
@@ -272,7 +272,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `extraMenu` property.
       Returns: A menu model whose contents will be appended to the context menu.
   */
-  @property gio.menu_model.MenuModel extraMenu()
+  @property gio.menu_model.MenuModel extraMenu() nothrow
   {
     return getExtraMenu();
   }
@@ -282,7 +282,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         propval = A menu model whose contents will be appended to the context menu.
   */
-  @property void extraMenu(gio.menu_model.MenuModel propval)
+  @property void extraMenu(gio.menu_model.MenuModel propval) nothrow
   {
     setExtraMenu(propval);
   }
@@ -291,7 +291,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `hasFrame` property.
       Returns: Whether the entry should draw a frame.
   */
-  @property bool hasFrame()
+  @property bool hasFrame() nothrow
   {
     return getHasFrame();
   }
@@ -301,7 +301,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         propval = Whether the entry should draw a frame.
   */
-  @property void hasFrame(bool propval)
+  @property void hasFrame(bool propval) nothrow
   {
     setHasFrame(propval);
   }
@@ -316,7 +316,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         module setting. See the GtkSettings [gtk.settings.Settings.gtkImModule]
         property.
   */
-  @property string imModule()
+  @property string imModule() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("im-module");
   }
@@ -332,7 +332,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
           module setting. See the GtkSettings [gtk.settings.Settings.gtkImModule]
           property.
   */
-  @property void imModule(string propval)
+  @property void imModule(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("im-module", propval);
   }
@@ -343,7 +343,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         
         Also see [gtk.entry.Entry.inputPurpose]
   */
-  @property gtk.types.InputHints inputHints()
+  @property gtk.types.InputHints inputHints() nothrow
   {
     return getInputHints();
   }
@@ -355,7 +355,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
           
           Also see [gtk.entry.Entry.inputPurpose]
   */
-  @property void inputHints(gtk.types.InputHints propval)
+  @property void inputHints(gtk.types.InputHints propval) nothrow
   {
     setInputHints(propval);
   }
@@ -371,7 +371,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         [gtk.types.InputPurpose.Pin] is independent from setting
         [gtk.entry.Entry.visibility].
   */
-  @property gtk.types.InputPurpose inputPurpose()
+  @property gtk.types.InputPurpose inputPurpose() nothrow
   {
     return getInputPurpose();
   }
@@ -388,7 +388,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
           [gtk.types.InputPurpose.Pin] is independent from setting
           [gtk.entry.Entry.visibility].
   */
-  @property void inputPurpose(gtk.types.InputPurpose propval)
+  @property void inputPurpose(gtk.types.InputPurpose propval) nothrow
   {
     setInputPurpose(propval);
   }
@@ -397,7 +397,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `invisibleChar` property.
       Returns: The character to use when masking entry contents (“password mode”).
   */
-  @property uint invisibleChar()
+  @property uint invisibleChar() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("invisible-char");
   }
@@ -407,7 +407,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         propval = The character to use when masking entry contents (“password mode”).
   */
-  @property void invisibleChar(uint propval)
+  @property void invisibleChar(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("invisible-char", propval);
   }
@@ -416,7 +416,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `invisibleCharSet` property.
       Returns: Whether the invisible char has been set for the [gtk.entry.Entry].
   */
-  @property bool invisibleCharSet()
+  @property bool invisibleCharSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("invisible-char-set");
   }
@@ -426,7 +426,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         propval = Whether the invisible char has been set for the [gtk.entry.Entry].
   */
-  @property void invisibleCharSet(bool propval)
+  @property void invisibleCharSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("invisible-char-set", propval);
   }
@@ -435,7 +435,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `maxLength` property.
       Returns: Maximum number of characters for this entry.
   */
-  @property int maxLength()
+  @property int maxLength() nothrow
   {
     return getMaxLength();
   }
@@ -445,7 +445,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         propval = Maximum number of characters for this entry.
   */
-  @property void maxLength(int propval)
+  @property void maxLength(int propval) nothrow
   {
     setMaxLength(propval);
   }
@@ -454,7 +454,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `overwriteMode` property.
       Returns: If text is overwritten when typing in the [gtk.entry.Entry].
   */
-  @property bool overwriteMode()
+  @property bool overwriteMode() nothrow
   {
     return getOverwriteMode();
   }
@@ -464,7 +464,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         propval = If text is overwritten when typing in the [gtk.entry.Entry].
   */
-  @property void overwriteMode(bool propval)
+  @property void overwriteMode(bool propval) nothrow
   {
     setOverwriteMode(propval);
   }
@@ -474,7 +474,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Returns: The text that will be displayed in the [gtk.entry.Entry] when it is empty
         and unfocused.
   */
-  @property string placeholderText()
+  @property string placeholderText() nothrow
   {
     return getPlaceholderText();
   }
@@ -485,7 +485,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         propval = The text that will be displayed in the [gtk.entry.Entry] when it is empty
           and unfocused.
   */
-  @property void placeholderText(string propval)
+  @property void placeholderText(string propval) nothrow
   {
     setPlaceholderText(propval);
   }
@@ -501,7 +501,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         Sensitive, but non-activatable icons can be used for purely
         informational purposes.
   */
-  @property bool primaryIconActivatable()
+  @property bool primaryIconActivatable() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("primary-icon-activatable");
   }
@@ -518,7 +518,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
           Sensitive, but non-activatable icons can be used for purely
           informational purposes.
   */
-  @property void primaryIconActivatable(bool propval)
+  @property void primaryIconActivatable(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("primary-icon-activatable", propval);
   }
@@ -527,7 +527,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `primaryIconGicon` property.
       Returns: The [gio.icon.Icon] to use for the primary icon for the entry.
   */
-  @property gio.icon.Icon primaryIconGicon()
+  @property gio.icon.Icon primaryIconGicon() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.icon.Icon)("primary-icon-gicon");
   }
@@ -537,7 +537,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         propval = The [gio.icon.Icon] to use for the primary icon for the entry.
   */
-  @property void primaryIconGicon(gio.icon.Icon propval)
+  @property void primaryIconGicon(gio.icon.Icon propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gio.icon.Icon)("primary-icon-gicon", propval);
   }
@@ -546,7 +546,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `primaryIconName` property.
       Returns: The icon name to use for the primary icon for the entry.
   */
-  @property string primaryIconName()
+  @property string primaryIconName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("primary-icon-name");
   }
@@ -556,7 +556,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         propval = The icon name to use for the primary icon for the entry.
   */
-  @property void primaryIconName(string propval)
+  @property void primaryIconName(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("primary-icon-name", propval);
   }
@@ -565,7 +565,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `primaryIconPaintable` property.
       Returns: A [gdk.paintable.Paintable] to use as the primary icon for the entry.
   */
-  @property gdk.paintable.Paintable primaryIconPaintable()
+  @property gdk.paintable.Paintable primaryIconPaintable() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.paintable.Paintable)("primary-icon-paintable");
   }
@@ -575,7 +575,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         propval = A [gdk.paintable.Paintable] to use as the primary icon for the entry.
   */
-  @property void primaryIconPaintable(gdk.paintable.Paintable propval)
+  @property void primaryIconPaintable(gdk.paintable.Paintable propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.paintable.Paintable)("primary-icon-paintable", propval);
   }
@@ -591,7 +591,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         An icon should be set insensitive if the action that would trigger
         when clicked is currently not available.
   */
-  @property bool primaryIconSensitive()
+  @property bool primaryIconSensitive() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("primary-icon-sensitive");
   }
@@ -608,7 +608,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
           An icon should be set insensitive if the action that would trigger
           when clicked is currently not available.
   */
-  @property void primaryIconSensitive(bool propval)
+  @property void primaryIconSensitive(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("primary-icon-sensitive", propval);
   }
@@ -617,7 +617,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `primaryIconStorageType` property.
       Returns: The representation which is used for the primary icon of the entry.
   */
-  @property gtk.types.ImageType primaryIconStorageType()
+  @property gtk.types.ImageType primaryIconStorageType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.ImageType)("primary-icon-storage-type");
   }
@@ -628,7 +628,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         
         Also see [gtk.entry.Entry.setIconTooltipMarkup].
   */
-  @property string primaryIconTooltipMarkup()
+  @property string primaryIconTooltipMarkup() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("primary-icon-tooltip-markup");
   }
@@ -640,7 +640,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
           
           Also see [gtk.entry.Entry.setIconTooltipMarkup].
   */
-  @property void primaryIconTooltipMarkup(string propval)
+  @property void primaryIconTooltipMarkup(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("primary-icon-tooltip-markup", propval);
   }
@@ -651,7 +651,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         
         Also see [gtk.entry.Entry.setIconTooltipText].
   */
-  @property string primaryIconTooltipText()
+  @property string primaryIconTooltipText() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("primary-icon-tooltip-text");
   }
@@ -663,7 +663,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
           
           Also see [gtk.entry.Entry.setIconTooltipText].
   */
-  @property void primaryIconTooltipText(string propval)
+  @property void primaryIconTooltipText(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("primary-icon-tooltip-text", propval);
   }
@@ -672,7 +672,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `progressFraction` property.
       Returns: The current fraction of the task that's been completed.
   */
-  @property double progressFraction()
+  @property double progressFraction() nothrow
   {
     return getProgressFraction();
   }
@@ -682,7 +682,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         propval = The current fraction of the task that's been completed.
   */
-  @property void progressFraction(double propval)
+  @property void progressFraction(double propval) nothrow
   {
     setProgressFraction(propval);
   }
@@ -694,7 +694,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         
         See [gtk.entry.Entry.progressPulse].
   */
-  @property double progressPulseStep()
+  @property double progressPulseStep() nothrow
   {
     return getProgressPulseStep();
   }
@@ -707,7 +707,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
           
           See [gtk.entry.Entry.progressPulse].
   */
-  @property void progressPulseStep(double propval)
+  @property void progressPulseStep(double propval) nothrow
   {
     setProgressPulseStep(propval);
   }
@@ -716,7 +716,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `scrollOffset` property.
       Returns: Number of pixels of the entry scrolled off the screen to the left.
   */
-  @property int scrollOffset()
+  @property int scrollOffset() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("scroll-offset");
   }
@@ -732,7 +732,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         Sensitive, but non-activatable icons can be used for purely
         informational purposes.
   */
-  @property bool secondaryIconActivatable()
+  @property bool secondaryIconActivatable() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("secondary-icon-activatable");
   }
@@ -749,7 +749,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
           Sensitive, but non-activatable icons can be used for purely
           informational purposes.
   */
-  @property void secondaryIconActivatable(bool propval)
+  @property void secondaryIconActivatable(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("secondary-icon-activatable", propval);
   }
@@ -758,7 +758,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `secondaryIconGicon` property.
       Returns: The [gio.icon.Icon] to use for the secondary icon for the entry.
   */
-  @property gio.icon.Icon secondaryIconGicon()
+  @property gio.icon.Icon secondaryIconGicon() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.icon.Icon)("secondary-icon-gicon");
   }
@@ -768,7 +768,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         propval = The [gio.icon.Icon] to use for the secondary icon for the entry.
   */
-  @property void secondaryIconGicon(gio.icon.Icon propval)
+  @property void secondaryIconGicon(gio.icon.Icon propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gio.icon.Icon)("secondary-icon-gicon", propval);
   }
@@ -777,7 +777,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `secondaryIconName` property.
       Returns: The icon name to use for the secondary icon for the entry.
   */
-  @property string secondaryIconName()
+  @property string secondaryIconName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("secondary-icon-name");
   }
@@ -787,7 +787,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         propval = The icon name to use for the secondary icon for the entry.
   */
-  @property void secondaryIconName(string propval)
+  @property void secondaryIconName(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("secondary-icon-name", propval);
   }
@@ -796,7 +796,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `secondaryIconPaintable` property.
       Returns: A [gdk.paintable.Paintable] to use as the secondary icon for the entry.
   */
-  @property gdk.paintable.Paintable secondaryIconPaintable()
+  @property gdk.paintable.Paintable secondaryIconPaintable() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.paintable.Paintable)("secondary-icon-paintable");
   }
@@ -806,7 +806,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         propval = A [gdk.paintable.Paintable] to use as the secondary icon for the entry.
   */
-  @property void secondaryIconPaintable(gdk.paintable.Paintable propval)
+  @property void secondaryIconPaintable(gdk.paintable.Paintable propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.paintable.Paintable)("secondary-icon-paintable", propval);
   }
@@ -822,7 +822,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         An icon should be set insensitive if the action that would trigger
         when clicked is currently not available.
   */
-  @property bool secondaryIconSensitive()
+  @property bool secondaryIconSensitive() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("secondary-icon-sensitive");
   }
@@ -839,7 +839,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
           An icon should be set insensitive if the action that would trigger
           when clicked is currently not available.
   */
-  @property void secondaryIconSensitive(bool propval)
+  @property void secondaryIconSensitive(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("secondary-icon-sensitive", propval);
   }
@@ -848,7 +848,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `secondaryIconStorageType` property.
       Returns: The representation which is used for the secondary icon of the entry.
   */
-  @property gtk.types.ImageType secondaryIconStorageType()
+  @property gtk.types.ImageType secondaryIconStorageType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.ImageType)("secondary-icon-storage-type");
   }
@@ -859,7 +859,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         
         Also see [gtk.entry.Entry.setIconTooltipMarkup].
   */
-  @property string secondaryIconTooltipMarkup()
+  @property string secondaryIconTooltipMarkup() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("secondary-icon-tooltip-markup");
   }
@@ -871,7 +871,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
           
           Also see [gtk.entry.Entry.setIconTooltipMarkup].
   */
-  @property void secondaryIconTooltipMarkup(string propval)
+  @property void secondaryIconTooltipMarkup(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("secondary-icon-tooltip-markup", propval);
   }
@@ -882,7 +882,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         
         Also see [gtk.entry.Entry.setIconTooltipText].
   */
-  @property string secondaryIconTooltipText()
+  @property string secondaryIconTooltipText() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("secondary-icon-tooltip-text");
   }
@@ -894,31 +894,31 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
           
           Also see [gtk.entry.Entry.setIconTooltipText].
   */
-  @property void secondaryIconTooltipText(string propval)
+  @property void secondaryIconTooltipText(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("secondary-icon-tooltip-text", propval);
   }
 
   /** */
-  @property bool showEmojiIcon()
+  @property bool showEmojiIcon() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("show-emoji-icon");
   }
 
   /** */
-  @property void showEmojiIcon(bool propval)
+  @property void showEmojiIcon(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("show-emoji-icon", propval);
   }
 
   /** */
-  @property pango.tab_array.TabArray tabs()
+  @property pango.tab_array.TabArray tabs() nothrow
   {
     return getTabs();
   }
 
   /** */
-  @property void tabs(pango.tab_array.TabArray propval)
+  @property void tabs(pango.tab_array.TabArray propval) nothrow
   {
     setTabs(propval);
   }
@@ -927,7 +927,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `textLength` property.
       Returns: The length of the text in the [gtk.entry.Entry].
   */
-  @property uint textLength()
+  @property uint textLength() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("text-length");
   }
@@ -936,7 +936,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `truncateMultiline` property.
       Returns: When true, pasted multi-line text is truncated to the first line.
   */
-  @property bool truncateMultiline()
+  @property bool truncateMultiline() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("truncate-multiline");
   }
@@ -946,7 +946,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         propval = When true, pasted multi-line text is truncated to the first line.
   */
-  @property void truncateMultiline(bool propval)
+  @property void truncateMultiline(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("truncate-multiline", propval);
   }
@@ -956,7 +956,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Returns: Whether the entry should show the “invisible char” instead of the
         actual text (“password mode”).
   */
-  @property bool visibility()
+  @property bool visibility() nothrow
   {
     return getVisibility();
   }
@@ -967,7 +967,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         propval = Whether the entry should show the “invisible char” instead of the
           actual text (“password mode”).
   */
-  @property void visibility(bool propval)
+  @property void visibility(bool propval) nothrow
   {
     setVisibility(propval);
   }
@@ -979,7 +979,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Creates a new entry.
       Returns: a new [gtk.entry.Entry].
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_entry_new();
@@ -993,7 +993,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         buffer = The buffer to use for the new [gtk.entry.Entry].
       Returns: a new [gtk.entry.Entry]
   */
-  static gtk.entry.Entry newWithBuffer(gtk.entry_buffer.EntryBuffer buffer)
+  static gtk.entry.Entry newWithBuffer(gtk.entry_buffer.EntryBuffer buffer) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_entry_new_with_buffer(buffer ? cast(GtkEntryBuffer*)buffer._cPtr(No.Dup) : null);
@@ -1005,7 +1005,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Retrieves the value set by [gtk.entry.Entry.setActivatesDefault].
       Returns: true if the entry will activate the default widget
   */
-  bool getActivatesDefault()
+  bool getActivatesDefault() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_entry_get_activates_default(cast(GtkEntry*)this._cPtr);
@@ -1018,7 +1018,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       See also: [gtk.editable.Editable.xalign]
       Returns: the alignment
   */
-  float getAlignment()
+  float getAlignment() nothrow
   {
     float _retval;
     _retval = gtk_entry_get_alignment(cast(GtkEntry*)this._cPtr);
@@ -1031,7 +1031,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       See [gtk.entry.Entry.setAttributes].
       Returns: the attribute list
   */
-  pango.attr_list.AttrList getAttributes()
+  pango.attr_list.AttrList getAttributes() nothrow
   {
     PangoAttrList* _cretval;
     _cretval = gtk_entry_get_attributes(cast(GtkEntry*)this._cPtr);
@@ -1044,7 +1044,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       this widget.
       Returns: A [gtk.entry_buffer.EntryBuffer] object.
   */
-  gtk.entry_buffer.EntryBuffer getBuffer()
+  gtk.entry_buffer.EntryBuffer getBuffer() nothrow
   {
     GtkEntryBuffer* _cretval;
     _cretval = gtk_entry_get_buffer(cast(GtkEntry*)this._cPtr);
@@ -1060,7 +1060,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  gtk.entry_completion.EntryCompletion getCompletion()
+  gtk.entry_completion.EntryCompletion getCompletion() nothrow
   {
     GtkEntryCompletion* _cretval;
     _cretval = gtk_entry_get_completion(cast(GtkEntry*)this._cPtr);
@@ -1074,7 +1074,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Returns: index of the icon which is the source of the
           current DND operation, or -1.
   */
-  int getCurrentIconDragSource()
+  int getCurrentIconDragSource() nothrow
   {
     int _retval;
     _retval = gtk_entry_get_current_icon_drag_source(cast(GtkEntry*)this._cPtr);
@@ -1085,7 +1085,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Gets the menu model set with [gtk.entry.Entry.setExtraMenu].
       Returns: the menu model
   */
-  gio.menu_model.MenuModel getExtraMenu()
+  gio.menu_model.MenuModel getExtraMenu() nothrow
   {
     GMenuModel* _cretval;
     _cretval = gtk_entry_get_extra_menu(cast(GtkEntry*)this._cPtr);
@@ -1097,7 +1097,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Gets the value set by [gtk.entry.Entry.setHasFrame].
       Returns: whether the entry has a beveled frame
   */
-  bool getHasFrame()
+  bool getHasFrame() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_entry_get_has_frame(cast(GtkEntry*)this._cPtr);
@@ -1111,7 +1111,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         iconPos = Icon position
       Returns: true if the icon is activatable.
   */
-  bool getIconActivatable(gtk.types.EntryIconPosition iconPos)
+  bool getIconActivatable(gtk.types.EntryIconPosition iconPos) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_entry_get_icon_activatable(cast(GtkEntry*)this._cPtr, iconPos);
@@ -1133,7 +1133,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         iconPos = Icon position
         iconArea = Return location for the icon’s area
   */
-  void getIconArea(gtk.types.EntryIconPosition iconPos, out gdk.rectangle.Rectangle iconArea)
+  void getIconArea(gtk.types.EntryIconPosition iconPos, out gdk.rectangle.Rectangle iconArea) nothrow
   {
     gtk_entry_get_icon_area(cast(GtkEntry*)this._cPtr, iconPos, cast(GdkRectangle*)&iconArea);
   }
@@ -1151,7 +1151,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         y = the y coordinate of the position to find, relative to entry
       Returns: the index of the icon at the given position, or -1
   */
-  int getIconAtPos(int x, int y)
+  int getIconAtPos(int x, int y) nothrow
   {
     int _retval;
     _retval = gtk_entry_get_icon_at_pos(cast(GtkEntry*)this._cPtr, x, y);
@@ -1168,7 +1168,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         iconPos = Icon position
       Returns: A [gio.icon.Icon]
   */
-  gio.icon.Icon getIconGicon(gtk.types.EntryIconPosition iconPos)
+  gio.icon.Icon getIconGicon(gtk.types.EntryIconPosition iconPos) nothrow
   {
     GIcon* _cretval;
     _cretval = gtk_entry_get_icon_gicon(cast(GtkEntry*)this._cPtr, iconPos);
@@ -1186,7 +1186,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         iconPos = Icon position
       Returns: An icon name
   */
-  string getIconName(gtk.types.EntryIconPosition iconPos)
+  string getIconName(gtk.types.EntryIconPosition iconPos) nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_entry_get_icon_name(cast(GtkEntry*)this._cPtr, iconPos);
@@ -1205,7 +1205,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
           if no icon is set for this position or the icon set is not
           a [gdk.paintable.Paintable].
   */
-  gdk.paintable.Paintable getIconPaintable(gtk.types.EntryIconPosition iconPos)
+  gdk.paintable.Paintable getIconPaintable(gtk.types.EntryIconPosition iconPos) nothrow
   {
     GdkPaintable* _cretval;
     _cretval = gtk_entry_get_icon_paintable(cast(GtkEntry*)this._cPtr, iconPos);
@@ -1220,7 +1220,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         iconPos = Icon position
       Returns: true if the icon is sensitive.
   */
-  bool getIconSensitive(gtk.types.EntryIconPosition iconPos)
+  bool getIconSensitive(gtk.types.EntryIconPosition iconPos) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_entry_get_icon_sensitive(cast(GtkEntry*)this._cPtr, iconPos);
@@ -1238,7 +1238,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         iconPos = Icon position
       Returns: image representation being used
   */
-  gtk.types.ImageType getIconStorageType(gtk.types.EntryIconPosition iconPos)
+  gtk.types.ImageType getIconStorageType(gtk.types.EntryIconPosition iconPos) nothrow
   {
     GtkImageType _cretval;
     _cretval = gtk_entry_get_icon_storage_type(cast(GtkEntry*)this._cPtr, iconPos);
@@ -1254,7 +1254,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         iconPos = the icon position
       Returns: the tooltip text
   */
-  string getIconTooltipMarkup(gtk.types.EntryIconPosition iconPos)
+  string getIconTooltipMarkup(gtk.types.EntryIconPosition iconPos) nothrow
   {
     char* _cretval;
     _cretval = gtk_entry_get_icon_tooltip_markup(cast(GtkEntry*)this._cPtr, iconPos);
@@ -1270,7 +1270,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         iconPos = the icon position
       Returns: the tooltip text
   */
-  string getIconTooltipText(gtk.types.EntryIconPosition iconPos)
+  string getIconTooltipText(gtk.types.EntryIconPosition iconPos) nothrow
   {
     char* _cretval;
     _cretval = gtk_entry_get_icon_tooltip_text(cast(GtkEntry*)this._cPtr, iconPos);
@@ -1282,7 +1282,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Gets the input hints of this [gtk.entry.Entry].
       Returns: the input hints
   */
-  gtk.types.InputHints getInputHints()
+  gtk.types.InputHints getInputHints() nothrow
   {
     GtkInputHints _cretval;
     _cretval = gtk_entry_get_input_hints(cast(GtkEntry*)this._cPtr);
@@ -1294,7 +1294,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Gets the input purpose of the [gtk.entry.Entry].
       Returns: the input purpose
   */
-  gtk.types.InputPurpose getInputPurpose()
+  gtk.types.InputPurpose getInputPurpose() nothrow
   {
     GtkInputPurpose _cretval;
     _cretval = gtk_entry_get_input_purpose(cast(GtkEntry*)this._cPtr);
@@ -1308,7 +1308,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Returns: the current invisible char, or 0, if the entry does not
           show invisible text at all.
   */
-  dchar getInvisibleChar()
+  dchar getInvisibleChar() nothrow
   {
     dchar _retval;
     _retval = gtk_entry_get_invisible_char(cast(GtkEntry*)this._cPtr);
@@ -1322,7 +1322,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Returns: the maximum allowed number of characters
           in [gtk.entry.Entry], or 0 if there is no maximum.
   */
-  int getMaxLength()
+  int getMaxLength() nothrow
   {
     int _retval;
     _retval = gtk_entry_get_max_length(cast(GtkEntry*)this._cPtr);
@@ -1333,7 +1333,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Gets whether the [gtk.entry.Entry] is in overwrite mode.
       Returns: whether the text is overwritten when typing.
   */
-  bool getOverwriteMode()
+  bool getOverwriteMode() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_entry_get_overwrite_mode(cast(GtkEntry*)this._cPtr);
@@ -1349,7 +1349,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
           not be freed, modified or stored. If no placeholder
           text has been set, null will be returned.
   */
-  string getPlaceholderText()
+  string getPlaceholderText() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_entry_get_placeholder_text(cast(GtkEntry*)this._cPtr);
@@ -1363,7 +1363,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       See [gtk.entry.Entry.setProgressFraction].
       Returns: a fraction from 0.0 to 1.0
   */
-  double getProgressFraction()
+  double getProgressFraction() nothrow
   {
     double _retval;
     _retval = gtk_entry_get_progress_fraction(cast(GtkEntry*)this._cPtr);
@@ -1375,7 +1375,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       [gtk.entry.Entry.setProgressPulseStep].
       Returns: a fraction from 0.0 to 1.0
   */
-  double getProgressPulseStep()
+  double getProgressPulseStep() nothrow
   {
     double _retval;
     _retval = gtk_entry_get_progress_pulse_step(cast(GtkEntry*)this._cPtr);
@@ -1388,7 +1388,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       See [gtk.entry.Entry.setTabs].
       Returns: the tabstops
   */
-  pango.tab_array.TabArray getTabs()
+  pango.tab_array.TabArray getTabs() nothrow
   {
     PangoTabArray* _cretval;
     _cretval = gtk_entry_get_tabs(cast(GtkEntry*)this._cPtr);
@@ -1404,7 +1404,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Returns: the current number of characters
           in [gtk.entry.Entry], or 0 if there are none.
   */
-  ushort getTextLength()
+  ushort getTextLength() nothrow
   {
     ushort _retval;
     _retval = gtk_entry_get_text_length(cast(GtkEntry*)this._cPtr);
@@ -1417,7 +1417,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       See [gtk.entry.Entry.setVisibility].
       Returns: true if the text is currently visible
   */
-  bool getVisibility()
+  bool getVisibility() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_entry_get_visibility(cast(GtkEntry*)this._cPtr);
@@ -1433,7 +1433,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       in, such as search-as-you-type entries.
       Returns: true if focus is now inside self
   */
-  bool grabFocusWithoutSelecting()
+  bool grabFocusWithoutSelecting() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_entry_grab_focus_without_selecting(cast(GtkEntry*)this._cPtr);
@@ -1450,7 +1450,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       little bit (the amount of movement per pulse is determined
       by [gtk.entry.Entry.setProgressPulseStep]).
   */
-  void progressPulse()
+  void progressPulse() nothrow
   {
     gtk_entry_progress_pulse(cast(GtkEntry*)this._cPtr);
   }
@@ -1461,7 +1461,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       This can be necessary in the case where modifying the buffer
       would confuse on-going input method behavior.
   */
-  void resetImContext()
+  void resetImContext() nothrow
   {
     gtk_entry_reset_im_context(cast(GtkEntry*)this._cPtr);
   }
@@ -1476,7 +1476,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         setting = true to activate window’s default widget on Enter keypress
   */
-  void setActivatesDefault(bool setting)
+  void setActivatesDefault(bool setting) nothrow
   {
     gtk_entry_set_activates_default(cast(GtkEntry*)this._cPtr, setting);
   }
@@ -1493,7 +1493,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         xalign = The horizontal alignment, from 0 (left) to 1 (right).
             Reversed for RTL layouts
   */
-  void setAlignment(float xalign)
+  void setAlignment(float xalign) nothrow
   {
     gtk_entry_set_alignment(cast(GtkEntry*)this._cPtr, xalign);
   }
@@ -1510,7 +1510,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         attrs = a [pango.attr_list.AttrList]
   */
-  void setAttributes(pango.attr_list.AttrList attrs)
+  void setAttributes(pango.attr_list.AttrList attrs) nothrow
   {
     gtk_entry_set_attributes(cast(GtkEntry*)this._cPtr, attrs ? cast(PangoAttrList*)attrs._cPtr(No.Dup) : null);
   }
@@ -1522,7 +1522,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         buffer = a [gtk.entry_buffer.EntryBuffer]
   */
-  void setBuffer(gtk.entry_buffer.EntryBuffer buffer)
+  void setBuffer(gtk.entry_buffer.EntryBuffer buffer) nothrow
   {
     gtk_entry_set_buffer(cast(GtkEntry*)this._cPtr, buffer ? cast(GtkEntryBuffer*)buffer._cPtr(No.Dup) : null);
   }
@@ -1540,7 +1540,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  void setCompletion(gtk.entry_completion.EntryCompletion completion = null)
+  void setCompletion(gtk.entry_completion.EntryCompletion completion = null) nothrow
   {
     gtk_entry_set_completion(cast(GtkEntry*)this._cPtr, completion ? cast(GtkEntryCompletion*)completion._cPtr(No.Dup) : null);
   }
@@ -1552,7 +1552,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         model = a [gio.menu_model.MenuModel]
   */
-  void setExtraMenu(gio.menu_model.MenuModel model = null)
+  void setExtraMenu(gio.menu_model.MenuModel model = null) nothrow
   {
     gtk_entry_set_extra_menu(cast(GtkEntry*)this._cPtr, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
   }
@@ -1563,7 +1563,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         setting = new value
   */
-  void setHasFrame(bool setting)
+  void setHasFrame(bool setting) nothrow
   {
     gtk_entry_set_has_frame(cast(GtkEntry*)this._cPtr, setting);
   }
@@ -1575,7 +1575,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         iconPos = Icon position
         activatable = true if the icon should be activatable
   */
-  void setIconActivatable(gtk.types.EntryIconPosition iconPos, bool activatable)
+  void setIconActivatable(gtk.types.EntryIconPosition iconPos, bool activatable) nothrow
   {
     gtk_entry_set_icon_activatable(cast(GtkEntry*)this._cPtr, iconPos, activatable);
   }
@@ -1591,7 +1591,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         provider = a [gdk.content_provider.ContentProvider]
         actions = a bitmask of the allowed drag actions
   */
-  void setIconDragSource(gtk.types.EntryIconPosition iconPos, gdk.content_provider.ContentProvider provider, gdk.types.DragAction actions)
+  void setIconDragSource(gtk.types.EntryIconPosition iconPos, gdk.content_provider.ContentProvider provider, gdk.types.DragAction actions) nothrow
   {
     gtk_entry_set_icon_drag_source(cast(GtkEntry*)this._cPtr, iconPos, provider ? cast(GdkContentProvider*)provider._cPtr(No.Dup) : null, actions);
   }
@@ -1610,7 +1610,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         iconPos = The position at which to set the icon
         icon = The icon to set
   */
-  void setIconFromGicon(gtk.types.EntryIconPosition iconPos, gio.icon.Icon icon = null)
+  void setIconFromGicon(gtk.types.EntryIconPosition iconPos, gio.icon.Icon icon = null) nothrow
   {
     gtk_entry_set_icon_from_gicon(cast(GtkEntry*)this._cPtr, iconPos, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
@@ -1629,7 +1629,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         iconPos = The position at which to set the icon
         iconName = An icon name
   */
-  void setIconFromIconName(gtk.types.EntryIconPosition iconPos, string iconName = null)
+  void setIconFromIconName(gtk.types.EntryIconPosition iconPos, string iconName = null) nothrow
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_entry_set_icon_from_icon_name(cast(GtkEntry*)this._cPtr, iconPos, _iconName);
@@ -1644,7 +1644,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         iconPos = Icon position
         paintable = A [gdk.paintable.Paintable]
   */
-  void setIconFromPaintable(gtk.types.EntryIconPosition iconPos, gdk.paintable.Paintable paintable = null)
+  void setIconFromPaintable(gtk.types.EntryIconPosition iconPos, gdk.paintable.Paintable paintable = null) nothrow
   {
     gtk_entry_set_icon_from_paintable(cast(GtkEntry*)this._cPtr, iconPos, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable)._cPtr(No.Dup) : null);
   }
@@ -1657,7 +1657,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         sensitive = Specifies whether the icon should appear
             sensitive or insensitive
   */
-  void setIconSensitive(gtk.types.EntryIconPosition iconPos, bool sensitive)
+  void setIconSensitive(gtk.types.EntryIconPosition iconPos, bool sensitive) nothrow
   {
     gtk_entry_set_icon_sensitive(cast(GtkEntry*)this._cPtr, iconPos, sensitive);
   }
@@ -1677,7 +1677,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         iconPos = the icon position
         tooltip = the contents of the tooltip for the icon
   */
-  void setIconTooltipMarkup(gtk.types.EntryIconPosition iconPos, string tooltip = null)
+  void setIconTooltipMarkup(gtk.types.EntryIconPosition iconPos, string tooltip = null) nothrow
   {
     const(char)* _tooltip = tooltip.toCString(No.Alloc);
     gtk_entry_set_icon_tooltip_markup(cast(GtkEntry*)this._cPtr, iconPos, _tooltip);
@@ -1706,7 +1706,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         iconPos = the icon position
         tooltip = the contents of the tooltip for the icon
   */
-  void setIconTooltipText(gtk.types.EntryIconPosition iconPos, string tooltip = null)
+  void setIconTooltipText(gtk.types.EntryIconPosition iconPos, string tooltip = null) nothrow
   {
     const(char)* _tooltip = tooltip.toCString(No.Alloc);
     gtk_entry_set_icon_tooltip_text(cast(GtkEntry*)this._cPtr, iconPos, _tooltip);
@@ -1719,7 +1719,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         hints = the hints
   */
-  void setInputHints(gtk.types.InputHints hints)
+  void setInputHints(gtk.types.InputHints hints) nothrow
   {
     gtk_entry_set_input_hints(cast(GtkEntry*)this._cPtr, hints);
   }
@@ -1731,7 +1731,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         purpose = the purpose
   */
-  void setInputPurpose(gtk.types.InputPurpose purpose)
+  void setInputPurpose(gtk.types.InputPurpose purpose) nothrow
   {
     gtk_entry_set_input_purpose(cast(GtkEntry*)this._cPtr, purpose);
   }
@@ -1751,7 +1751,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         ch = a Unicode character
   */
-  void setInvisibleChar(dchar ch)
+  void setInvisibleChar(dchar ch) nothrow
   {
     gtk_entry_set_invisible_char(cast(GtkEntry*)this._cPtr, ch);
   }
@@ -1770,7 +1770,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
             (other than the maximum length of entries.) The value passed in will
             be clamped to the range 0-65536.
   */
-  void setMaxLength(int max)
+  void setMaxLength(int max) nothrow
   {
     gtk_entry_set_max_length(cast(GtkEntry*)this._cPtr, max);
   }
@@ -1781,7 +1781,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         overwrite = new value
   */
-  void setOverwriteMode(bool overwrite)
+  void setOverwriteMode(bool overwrite) nothrow
   {
     gtk_entry_set_overwrite_mode(cast(GtkEntry*)this._cPtr, overwrite);
   }
@@ -1795,7 +1795,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         text = a string to be displayed when entry is empty and unfocused
   */
-  void setPlaceholderText(string text = null)
+  void setPlaceholderText(string text = null) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_entry_set_placeholder_text(cast(GtkEntry*)this._cPtr, _text);
@@ -1810,7 +1810,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         fraction = fraction of the task that’s been completed
   */
-  void setProgressFraction(double fraction)
+  void setProgressFraction(double fraction) nothrow
   {
     gtk_entry_set_progress_fraction(cast(GtkEntry*)this._cPtr, fraction);
   }
@@ -1825,7 +1825,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         fraction = fraction between 0.0 and 1.0
   */
-  void setProgressPulseStep(double fraction)
+  void setProgressPulseStep(double fraction) nothrow
   {
     gtk_entry_set_progress_pulse_step(cast(GtkEntry*)this._cPtr, fraction);
   }
@@ -1838,7 +1838,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         tabs = a [pango.tab_array.TabArray]
   */
-  void setTabs(pango.tab_array.TabArray tabs = null)
+  void setTabs(pango.tab_array.TabArray tabs = null) nothrow
   {
     gtk_entry_set_tabs(cast(GtkEntry*)this._cPtr, tabs ? cast(PangoTabArray*)tabs._cPtr(No.Dup) : null);
   }
@@ -1862,7 +1862,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         visible = true if the contents of the entry are displayed as plaintext
   */
-  void setVisibility(bool visible)
+  void setVisibility(bool visible) nothrow
   {
     gtk_entry_set_visibility(cast(GtkEntry*)this._cPtr, visible);
   }
@@ -1871,7 +1871,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Unsets the invisible char, so that the default invisible char
       is used again. See [gtk.entry.Entry.setInvisibleChar].
   */
-  void unsetInvisibleChar()
+  void unsetInvisibleChar() nothrow
   {
     gtk_entry_unset_invisible_char(cast(GtkEntry*)this._cPtr);
   }
@@ -1893,13 +1893,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.entry.Entry)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1908,7 +1908,14 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.entry.Entry.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1932,14 +1939,14 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectIconPress(T)(T callback, Flag!"After" after = No.After)
+  gulong connectIconPress(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.EntryIconPosition)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.entry.Entry)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1951,7 +1958,14 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.entry.Entry.iconPress");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1976,14 +1990,14 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectIconRelease(T)(T callback, Flag!"After" after = No.After)
+  gulong connectIconRelease(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.EntryIconPosition)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.entry.Entry)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -1995,7 +2009,14 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.entry.Entry.iconRelease");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -2016,7 +2037,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
         propval = Whether to activate the default widget when Enter is pressed.
       Returns: Builder instance for fluent chaining
   */
-  T activatesDefault(bool propval)
+  T activatesDefault(bool propval) nothrow
   {
     return setProperty("activates-default", propval);
   }
@@ -2032,7 +2053,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
           [gtk.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
       Returns: Builder instance for fluent chaining
   */
-  T attributes(pango.attr_list.AttrList propval)
+  T attributes(pango.attr_list.AttrList propval) nothrow
   {
     return setProperty("attributes", propval);
   }
@@ -2043,7 +2064,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
         propval = The buffer object which actually stores the text.
       Returns: Builder instance for fluent chaining
   */
-  T buffer(gtk.entry_buffer.EntryBuffer propval)
+  T buffer(gtk.entry_buffer.EntryBuffer propval) nothrow
   {
     return setProperty("buffer", propval);
   }
@@ -2056,7 +2077,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
   
       Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
-  T completion(gtk.entry_completion.EntryCompletion propval)
+  T completion(gtk.entry_completion.EntryCompletion propval) nothrow
   {
     return setProperty("completion", propval);
   }
@@ -2068,7 +2089,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
           like `:heart:`.
       Returns: Builder instance for fluent chaining
   */
-  T enableEmojiCompletion(bool propval)
+  T enableEmojiCompletion(bool propval) nothrow
   {
     return setProperty("enable-emoji-completion", propval);
   }
@@ -2079,7 +2100,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
         propval = A menu model whose contents will be appended to the context menu.
       Returns: Builder instance for fluent chaining
   */
-  T extraMenu(gio.menu_model.MenuModel propval)
+  T extraMenu(gio.menu_model.MenuModel propval) nothrow
   {
     return setProperty("extra-menu", propval);
   }
@@ -2090,7 +2111,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
         propval = Whether the entry should draw a frame.
       Returns: Builder instance for fluent chaining
   */
-  T hasFrame(bool propval)
+  T hasFrame(bool propval) nothrow
   {
     return setProperty("has-frame", propval);
   }
@@ -2107,7 +2128,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
           property.
       Returns: Builder instance for fluent chaining
   */
-  T imModule(string propval)
+  T imModule(string propval) nothrow
   {
     return setProperty("im-module", propval);
   }
@@ -2120,7 +2141,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
           Also see [gtk.entry.Entry.inputPurpose]
       Returns: Builder instance for fluent chaining
   */
-  T inputHints(gtk.types.InputHints propval)
+  T inputHints(gtk.types.InputHints propval) nothrow
   {
     return setProperty("input-hints", propval);
   }
@@ -2138,7 +2159,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
           [gtk.entry.Entry.visibility].
       Returns: Builder instance for fluent chaining
   */
-  T inputPurpose(gtk.types.InputPurpose propval)
+  T inputPurpose(gtk.types.InputPurpose propval) nothrow
   {
     return setProperty("input-purpose", propval);
   }
@@ -2149,7 +2170,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
         propval = The character to use when masking entry contents (“password mode”).
       Returns: Builder instance for fluent chaining
   */
-  T invisibleChar(uint propval)
+  T invisibleChar(uint propval) nothrow
   {
     return setProperty("invisible-char", propval);
   }
@@ -2160,7 +2181,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
         propval = Whether the invisible char has been set for the [gtk.entry.Entry].
       Returns: Builder instance for fluent chaining
   */
-  T invisibleCharSet(bool propval)
+  T invisibleCharSet(bool propval) nothrow
   {
     return setProperty("invisible-char-set", propval);
   }
@@ -2171,7 +2192,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
         propval = Maximum number of characters for this entry.
       Returns: Builder instance for fluent chaining
   */
-  T maxLength(int propval)
+  T maxLength(int propval) nothrow
   {
     return setProperty("max-length", propval);
   }
@@ -2182,7 +2203,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
         propval = If text is overwritten when typing in the [gtk.entry.Entry].
       Returns: Builder instance for fluent chaining
   */
-  T overwriteMode(bool propval)
+  T overwriteMode(bool propval) nothrow
   {
     return setProperty("overwrite-mode", propval);
   }
@@ -2194,7 +2215,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
           and unfocused.
       Returns: Builder instance for fluent chaining
   */
-  T placeholderText(string propval)
+  T placeholderText(string propval) nothrow
   {
     return setProperty("placeholder-text", propval);
   }
@@ -2212,7 +2233,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
           informational purposes.
       Returns: Builder instance for fluent chaining
   */
-  T primaryIconActivatable(bool propval)
+  T primaryIconActivatable(bool propval) nothrow
   {
     return setProperty("primary-icon-activatable", propval);
   }
@@ -2223,7 +2244,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
         propval = The [gio.icon.Icon] to use for the primary icon for the entry.
       Returns: Builder instance for fluent chaining
   */
-  T primaryIconGicon(gio.icon.Icon propval)
+  T primaryIconGicon(gio.icon.Icon propval) nothrow
   {
     return setProperty("primary-icon-gicon", propval);
   }
@@ -2234,7 +2255,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
         propval = The icon name to use for the primary icon for the entry.
       Returns: Builder instance for fluent chaining
   */
-  T primaryIconName(string propval)
+  T primaryIconName(string propval) nothrow
   {
     return setProperty("primary-icon-name", propval);
   }
@@ -2245,7 +2266,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
         propval = A [gdk.paintable.Paintable] to use as the primary icon for the entry.
       Returns: Builder instance for fluent chaining
   */
-  T primaryIconPaintable(gdk.paintable.Paintable propval)
+  T primaryIconPaintable(gdk.paintable.Paintable propval) nothrow
   {
     return setProperty("primary-icon-paintable", propval);
   }
@@ -2263,7 +2284,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
           when clicked is currently not available.
       Returns: Builder instance for fluent chaining
   */
-  T primaryIconSensitive(bool propval)
+  T primaryIconSensitive(bool propval) nothrow
   {
     return setProperty("primary-icon-sensitive", propval);
   }
@@ -2276,7 +2297,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
           Also see [gtk.entry.Entry.setIconTooltipMarkup].
       Returns: Builder instance for fluent chaining
   */
-  T primaryIconTooltipMarkup(string propval)
+  T primaryIconTooltipMarkup(string propval) nothrow
   {
     return setProperty("primary-icon-tooltip-markup", propval);
   }
@@ -2289,7 +2310,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
           Also see [gtk.entry.Entry.setIconTooltipText].
       Returns: Builder instance for fluent chaining
   */
-  T primaryIconTooltipText(string propval)
+  T primaryIconTooltipText(string propval) nothrow
   {
     return setProperty("primary-icon-tooltip-text", propval);
   }
@@ -2300,7 +2321,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
         propval = The current fraction of the task that's been completed.
       Returns: Builder instance for fluent chaining
   */
-  T progressFraction(double propval)
+  T progressFraction(double propval) nothrow
   {
     return setProperty("progress-fraction", propval);
   }
@@ -2314,7 +2335,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
           See [gtk.entry.Entry.progressPulse].
       Returns: Builder instance for fluent chaining
   */
-  T progressPulseStep(double propval)
+  T progressPulseStep(double propval) nothrow
   {
     return setProperty("progress-pulse-step", propval);
   }
@@ -2332,7 +2353,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
           informational purposes.
       Returns: Builder instance for fluent chaining
   */
-  T secondaryIconActivatable(bool propval)
+  T secondaryIconActivatable(bool propval) nothrow
   {
     return setProperty("secondary-icon-activatable", propval);
   }
@@ -2343,7 +2364,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
         propval = The [gio.icon.Icon] to use for the secondary icon for the entry.
       Returns: Builder instance for fluent chaining
   */
-  T secondaryIconGicon(gio.icon.Icon propval)
+  T secondaryIconGicon(gio.icon.Icon propval) nothrow
   {
     return setProperty("secondary-icon-gicon", propval);
   }
@@ -2354,7 +2375,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
         propval = The icon name to use for the secondary icon for the entry.
       Returns: Builder instance for fluent chaining
   */
-  T secondaryIconName(string propval)
+  T secondaryIconName(string propval) nothrow
   {
     return setProperty("secondary-icon-name", propval);
   }
@@ -2365,7 +2386,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
         propval = A [gdk.paintable.Paintable] to use as the secondary icon for the entry.
       Returns: Builder instance for fluent chaining
   */
-  T secondaryIconPaintable(gdk.paintable.Paintable propval)
+  T secondaryIconPaintable(gdk.paintable.Paintable propval) nothrow
   {
     return setProperty("secondary-icon-paintable", propval);
   }
@@ -2383,7 +2404,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
           when clicked is currently not available.
       Returns: Builder instance for fluent chaining
   */
-  T secondaryIconSensitive(bool propval)
+  T secondaryIconSensitive(bool propval) nothrow
   {
     return setProperty("secondary-icon-sensitive", propval);
   }
@@ -2396,7 +2417,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
           Also see [gtk.entry.Entry.setIconTooltipMarkup].
       Returns: Builder instance for fluent chaining
   */
-  T secondaryIconTooltipMarkup(string propval)
+  T secondaryIconTooltipMarkup(string propval) nothrow
   {
     return setProperty("secondary-icon-tooltip-markup", propval);
   }
@@ -2409,19 +2430,19 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
           Also see [gtk.entry.Entry.setIconTooltipText].
       Returns: Builder instance for fluent chaining
   */
-  T secondaryIconTooltipText(string propval)
+  T secondaryIconTooltipText(string propval) nothrow
   {
     return setProperty("secondary-icon-tooltip-text", propval);
   }
 
   /** */
-  T showEmojiIcon(bool propval)
+  T showEmojiIcon(bool propval) nothrow
   {
     return setProperty("show-emoji-icon", propval);
   }
 
   /** */
-  T tabs(pango.tab_array.TabArray propval)
+  T tabs(pango.tab_array.TabArray propval) nothrow
   {
     return setProperty("tabs", propval);
   }
@@ -2432,7 +2453,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
         propval = When true, pasted multi-line text is truncated to the first line.
       Returns: Builder instance for fluent chaining
   */
-  T truncateMultiline(bool propval)
+  T truncateMultiline(bool propval) nothrow
   {
     return setProperty("truncate-multiline", propval);
   }
@@ -2444,7 +2465,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
           actual text (“password mode”).
       Returns: Builder instance for fluent chaining
   */
-  T visibility(bool propval)
+  T visibility(bool propval) nothrow
   {
     return setProperty("visibility", propval);
   }
@@ -2457,7 +2478,7 @@ final class EntryGidBuilder : EntryGidBuilderImpl!EntryGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Entry build()
+  Entry build() nothrow
   {
     return new Entry(cast(void*)createGObject(Entry._getGType), No.Take);
   }

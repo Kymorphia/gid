@@ -51,26 +51,26 @@ class Credentials : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_credentials_get_type != &gidSymbolNotFound ? g_credentials_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Credentials self()
+  override Credentials self() nothrow
   {
     return this;
   }
@@ -79,7 +79,7 @@ class Credentials : gobject.object.ObjectWrap
       Get builder for [gio.credentials.Credentials]
       Returns: New builder object
   */
-  static CredentialsGidBuilder builder()
+  static CredentialsGidBuilder builder() nothrow
   {
     return new CredentialsGidBuilder;
   }
@@ -89,7 +89,7 @@ class Credentials : gobject.object.ObjectWrap
       the current process.
       Returns: A #GCredentials. Free with [gobject.object.ObjectWrap.unref].
   */
-  this()
+  this() nothrow
   {
     GCredentials* _cretval;
     _cretval = g_credentials_new();
@@ -170,7 +170,7 @@ class Credentials : gobject.object.ObjectWrap
         nativeType = The type of native credentials to set.
         native = A pointer to native credentials.
   */
-  void setNative(gio.types.CredentialsType nativeType, void* native)
+  void setNative(gio.types.CredentialsType nativeType, void* native) nothrow
   {
     g_credentials_set_native(cast(GCredentials*)this._cPtr, nativeType, native);
   }
@@ -205,7 +205,7 @@ class Credentials : gobject.object.ObjectWrap
       returned string may change in future GLib release.
       Returns: A string that should be freed with [glib.global.gfree].
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = g_credentials_to_string(cast(GCredentials*)this._cPtr);
@@ -226,7 +226,7 @@ final class CredentialsGidBuilder : CredentialsGidBuilderImpl!CredentialsGidBuil
       Create object from builder.
       Returns: New object
   */
-  Credentials build()
+  Credentials build() nothrow
   {
     return new Credentials(cast(void*)createGObject(Credentials._getGType), Yes.Take);
   }

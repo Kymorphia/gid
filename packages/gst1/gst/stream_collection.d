@@ -35,26 +35,26 @@ class StreamCollection : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_stream_collection_get_type != &gidSymbolNotFound ? gst_stream_collection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StreamCollection self()
+  override StreamCollection self() nothrow
   {
     return this;
   }
@@ -63,7 +63,7 @@ class StreamCollection : gst.object.ObjectWrap
       Get builder for [gst.stream_collection.StreamCollection]
       Returns: New builder object
   */
-  static StreamCollectionGidBuilder builder()
+  static StreamCollectionGidBuilder builder() nothrow
   {
     return new StreamCollectionGidBuilder;
   }
@@ -72,7 +72,7 @@ class StreamCollection : gst.object.ObjectWrap
       Get `upstreamId` property.
       Returns: stream-id
   */
-  @property string upstreamId()
+  @property string upstreamId() nothrow
   {
     return getUpstreamId();
   }
@@ -82,7 +82,7 @@ class StreamCollection : gst.object.ObjectWrap
       Params:
         propval = stream-id
   */
-  @property void upstreamId(string propval)
+  @property void upstreamId(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("upstream-id", propval);
   }
@@ -94,7 +94,7 @@ class StreamCollection : gst.object.ObjectWrap
         upstreamId = The stream id of the parent stream
       Returns: The new #GstStreamCollection.
   */
-  this(string upstreamId = null)
+  this(string upstreamId = null) nothrow
   {
     GstStreamCollection* _cretval;
     const(char)* _upstreamId = upstreamId.toCString(No.Alloc);
@@ -109,7 +109,7 @@ class StreamCollection : gst.object.ObjectWrap
         stream = the #GstStream to add
       Returns: true if the stream was properly added, else false
   */
-  bool addStream(gst.stream.Stream stream)
+  bool addStream(gst.stream.Stream stream) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_stream_collection_add_stream(cast(GstStreamCollection*)this._cPtr, stream ? cast(GstStream*)stream._cPtr(Yes.Dup) : null);
@@ -120,7 +120,7 @@ class StreamCollection : gst.object.ObjectWrap
       Get the number of streams this collection contains
       Returns: The number of streams that collection contains
   */
-  uint getSize()
+  uint getSize() nothrow
   {
     uint _retval;
     _retval = gst_stream_collection_get_size(cast(GstStreamCollection*)this._cPtr);
@@ -136,7 +136,7 @@ class StreamCollection : gst.object.ObjectWrap
         index = Index of the stream to retrieve
       Returns: A #GstStream
   */
-  gst.stream.Stream getStream(uint index)
+  gst.stream.Stream getStream(uint index) nothrow
   {
     GstStream* _cretval;
     _cretval = gst_stream_collection_get_stream(cast(GstStreamCollection*)this._cPtr, index);
@@ -148,7 +148,7 @@ class StreamCollection : gst.object.ObjectWrap
       Returns the upstream id of the collection.
       Returns: The upstream id
   */
-  string getUpstreamId()
+  string getUpstreamId() nothrow
   {
     const(char)* _cretval;
     _cretval = gst_stream_collection_get_upstream_id(cast(GstStreamCollection*)this._cPtr);
@@ -177,7 +177,7 @@ class StreamCollection : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectStreamNotify(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectStreamNotify(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.stream.Stream)))
@@ -185,7 +185,7 @@ class StreamCollection : gst.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gst.stream_collection.StreamCollection)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -200,7 +200,14 @@ class StreamCollection : gst.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gst.stream_collection.StreamCollection.streamNotify");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -218,7 +225,7 @@ class StreamCollectionGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
         propval = stream-id
       Returns: Builder instance for fluent chaining
   */
-  T upstreamId(string propval)
+  T upstreamId(string propval) nothrow
   {
     return setProperty("upstream-id", propval);
   }
@@ -231,7 +238,7 @@ final class StreamCollectionGidBuilder : StreamCollectionGidBuilderImpl!StreamCo
       Create object from builder.
       Returns: New object
   */
-  StreamCollection build()
+  StreamCollection build() nothrow
   {
     return new StreamCollection(cast(void*)createGObject(StreamCollection._getGType), Yes.Take);
   }

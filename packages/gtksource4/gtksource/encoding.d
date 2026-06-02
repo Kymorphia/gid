@@ -13,32 +13,32 @@ class Encoding : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_encoding_get_type != &gidSymbolNotFound ? gtk_source_encoding_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Encoding self()
+  override Encoding self() nothrow
   {
     return this;
   }
@@ -47,7 +47,7 @@ class Encoding : gobject.boxed.Boxed
       Used by language bindings.
       Returns: a copy of enc.
   */
-  gtksource.encoding.Encoding copy()
+  gtksource.encoding.Encoding copy() nothrow
   {
     GtkSourceEncoding* _cretval;
     _cretval = gtk_source_encoding_copy(cast(const(GtkSourceEncoding)*)this._cPtr);
@@ -60,7 +60,7 @@ class Encoding : gobject.boxed.Boxed
       "ISO-8859-1".
       Returns: the character set of the #GtkSourceEncoding.
   */
-  string getCharset()
+  string getCharset() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_encoding_get_charset(cast(const(GtkSourceEncoding)*)this._cPtr);
@@ -72,7 +72,7 @@ class Encoding : gobject.boxed.Boxed
       Gets the name of the #GtkSourceEncoding such as "Unicode" or "Western".
       Returns: the name of the #GtkSourceEncoding.
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_encoding_get_name(cast(const(GtkSourceEncoding)*)this._cPtr);
@@ -81,7 +81,7 @@ class Encoding : gobject.boxed.Boxed
   }
 
   /** */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = gtk_source_encoding_to_string(cast(const(GtkSourceEncoding)*)this._cPtr);
@@ -94,7 +94,7 @@ class Encoding : gobject.boxed.Boxed
       Returns: a list of
         all #GtkSourceEncoding's. Free with [glib.slist.SList.free].
   */
-  static gtksource.encoding.Encoding[] getAll()
+  static gtksource.encoding.Encoding[] getAll() nothrow
   {
     GSList* _cretval;
     _cretval = gtk_source_encoding_get_all();
@@ -106,7 +106,7 @@ class Encoding : gobject.boxed.Boxed
       Gets the #GtkSourceEncoding for the current locale. See also [glib.global.getCharset].
       Returns: the current locale encoding.
   */
-  static gtksource.encoding.Encoding getCurrent()
+  static gtksource.encoding.Encoding getCurrent() nothrow
   {
     const(GtkSourceEncoding)* _cretval;
     _cretval = gtk_source_encoding_get_current();
@@ -124,7 +124,7 @@ class Encoding : gobject.boxed.Boxed
       Returns: the list of
         default candidate encodings. Free with [glib.slist.SList.free].
   */
-  static gtksource.encoding.Encoding[] getDefaultCandidates()
+  static gtksource.encoding.Encoding[] getDefaultCandidates() nothrow
   {
     GSList* _cretval;
     _cretval = gtk_source_encoding_get_default_candidates();
@@ -141,7 +141,7 @@ class Encoding : gobject.boxed.Boxed
       Returns: the corresponding #GtkSourceEncoding, or null
         if not found.
   */
-  static gtksource.encoding.Encoding getFromCharset(string charset)
+  static gtksource.encoding.Encoding getFromCharset(string charset) nothrow
   {
     const(GtkSourceEncoding)* _cretval;
     const(char)* _charset = charset.toCString(No.Alloc);
@@ -151,7 +151,7 @@ class Encoding : gobject.boxed.Boxed
   }
 
   /** */
-  static gtksource.encoding.Encoding getUtf8()
+  static gtksource.encoding.Encoding getUtf8() nothrow
   {
     const(GtkSourceEncoding)* _cretval;
     _cretval = gtk_source_encoding_get_utf8();

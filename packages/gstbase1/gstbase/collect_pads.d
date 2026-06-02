@@ -58,26 +58,26 @@ class CollectPads : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_collect_pads_get_type != &gidSymbolNotFound ? gst_collect_pads_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CollectPads self()
+  override CollectPads self() nothrow
   {
     return this;
   }
@@ -86,7 +86,7 @@ class CollectPads : gst.object.ObjectWrap
       Get builder for [gstbase.collect_pads.CollectPads]
       Returns: New builder object
   */
-  static CollectPadsGidBuilder builder()
+  static CollectPadsGidBuilder builder() nothrow
   {
     return new CollectPadsGidBuilder;
   }
@@ -97,7 +97,7 @@ class CollectPads : gst.object.ObjectWrap
       MT safe.
       Returns: a new #GstCollectPads, or null in case of an error.
   */
-  this()
+  this() nothrow
   {
     GstCollectPads* _cretval;
     _cretval = gst_collect_pads_new();
@@ -116,7 +116,7 @@ class CollectPads : gst.object.ObjectWrap
       Returns: The maximum number of bytes queued on all pads. This function
         returns 0 if a pad has no queued buffer.
   */
-  uint available()
+  uint available() nothrow
   {
     uint _retval;
     _retval = gst_collect_pads_available(cast(GstCollectPads*)this._cPtr);
@@ -138,7 +138,7 @@ class CollectPads : gst.object.ObjectWrap
         userData = user data (unused)
       Returns: 
   */
-  gst.types.FlowReturn clipRunningTime(gstbase.collect_data.CollectData cdata, gst.buffer.Buffer buf, out gst.buffer.Buffer outbuf, void* userData = null)
+  gst.types.FlowReturn clipRunningTime(gstbase.collect_data.CollectData cdata, gst.buffer.Buffer buf, out gst.buffer.Buffer outbuf, void* userData = null) nothrow
   {
     GstFlowReturn _cretval;
     GstBuffer* _outbuf;
@@ -159,7 +159,7 @@ class CollectPads : gst.object.ObjectWrap
         discard = process but do not send event downstream
       Returns: 
   */
-  bool eventDefault(gstbase.collect_data.CollectData data, gst.event.Event event, bool discard)
+  bool eventDefault(gstbase.collect_data.CollectData data, gst.event.Event event, bool discard) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_collect_pads_event_default(cast(GstCollectPads*)this._cPtr, data ? cast(GstCollectData*)data._cPtr : null, event ? cast(GstEvent*)event._cPtr(No.Dup) : null, discard);
@@ -180,7 +180,7 @@ class CollectPads : gst.object.ObjectWrap
       Returns: The number of bytes flushed This can be less than size and
         is 0 if the pad was end-of-stream.
   */
-  uint flush(gstbase.collect_data.CollectData data, uint size)
+  uint flush(gstbase.collect_data.CollectData data, uint size) nothrow
   {
     uint _retval;
     _retval = gst_collect_pads_flush(cast(GstCollectPads*)this._cPtr, data ? cast(GstCollectData*)data._cPtr : null, size);
@@ -199,7 +199,7 @@ class CollectPads : gst.object.ObjectWrap
       Returns: The buffer in data or null if no
         buffer is queued. should unref the buffer after usage.
   */
-  gst.buffer.Buffer peek(gstbase.collect_data.CollectData data)
+  gst.buffer.Buffer peek(gstbase.collect_data.CollectData data) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_collect_pads_peek(cast(GstCollectPads*)this._cPtr, data ? cast(GstCollectData*)data._cPtr : null);
@@ -219,7 +219,7 @@ class CollectPads : gst.object.ObjectWrap
       Returns: The buffer in data or null if no
         buffer was queued. You should unref the buffer after usage.
   */
-  gst.buffer.Buffer pop(gstbase.collect_data.CollectData data)
+  gst.buffer.Buffer pop(gstbase.collect_data.CollectData data) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_collect_pads_pop(cast(GstCollectPads*)this._cPtr, data ? cast(GstCollectData*)data._cPtr : null);
@@ -238,7 +238,7 @@ class CollectPads : gst.object.ObjectWrap
         discard = process but do not send event downstream
       Returns: 
   */
-  bool queryDefault(gstbase.collect_data.CollectData data, gst.query.Query query, bool discard)
+  bool queryDefault(gstbase.collect_data.CollectData data, gst.query.Query query, bool discard) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_collect_pads_query_default(cast(GstCollectPads*)this._cPtr, data ? cast(GstCollectData*)data._cPtr : null, query ? cast(GstQuery*)query._cPtr(No.Dup) : null, discard);
@@ -260,7 +260,7 @@ class CollectPads : gst.object.ObjectWrap
         be less that requested. A return of null signals that the pad is
         end-of-stream. Unref the buffer after use.
   */
-  gst.buffer.Buffer readBuffer(gstbase.collect_data.CollectData data, uint size)
+  gst.buffer.Buffer readBuffer(gstbase.collect_data.CollectData data, uint size) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_collect_pads_read_buffer(cast(GstCollectPads*)this._cPtr, data ? cast(GstCollectData*)data._cPtr : null, size);
@@ -281,7 +281,7 @@ class CollectPads : gst.object.ObjectWrap
         pad = the pad to remove
       Returns: true if the pad could be removed.
   */
-  bool removePad(gst.pad.Pad pad)
+  bool removePad(gst.pad.Pad pad) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_collect_pads_remove_pad(cast(GstCollectPads*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
@@ -299,14 +299,21 @@ class CollectPads : gst.object.ObjectWrap
       Params:
         func = the function to set
   */
-  void setBufferFunction(gstbase.types.CollectPadsBufferFunction func)
+  void setBufferFunction(gstbase.types.CollectPadsBufferFunction func) nothrow
   {
-    extern(C) GstFlowReturn _funcCallback(GstCollectPads* pads, GstCollectData* data, GstBuffer* buffer, void* userData)
+    extern(C) GstFlowReturn _funcCallback(GstCollectPads* pads, GstCollectData* data, GstBuffer* buffer, void* userData) nothrow
     {
       gst.types.FlowReturn _dretval;
       auto _dlg = cast(gstbase.types.CollectPadsBufferFunction*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), data ? new gstbase.collect_data.CollectData(cast(void*)data, No.Take) : null, buffer ? new gst.buffer.Buffer(cast(void*)buffer, Yes.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), data ? new gstbase.collect_data.CollectData(cast(void*)data, No.Take) : null, buffer ? new gst.buffer.Buffer(cast(void*)buffer, Yes.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstbase.types.CollectPadsBufferFunction");
+      }
       auto _retval = cast(GstFlowReturn)_dretval;
 
       return _retval;
@@ -323,15 +330,22 @@ class CollectPads : gst.object.ObjectWrap
       Params:
         clipfunc = clip function to install
   */
-  void setClipFunction(gstbase.types.CollectPadsClipFunction clipfunc)
+  void setClipFunction(gstbase.types.CollectPadsClipFunction clipfunc) nothrow
   {
-    extern(C) GstFlowReturn _clipfuncCallback(GstCollectPads* pads, GstCollectData* data, GstBuffer* inbuffer, GstBuffer** outbuffer, void* userData)
+    extern(C) GstFlowReturn _clipfuncCallback(GstCollectPads* pads, GstCollectData* data, GstBuffer* inbuffer, GstBuffer** outbuffer, void* userData) nothrow
     {
       gst.types.FlowReturn _dretval;
       auto _dlg = cast(gstbase.types.CollectPadsClipFunction*)userData;
       auto _outbuffer = new gst.buffer.Buffer(outbuffer, No.Take);
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), data ? new gstbase.collect_data.CollectData(cast(void*)data, No.Take) : null, inbuffer ? new gst.buffer.Buffer(cast(void*)inbuffer, Yes.Take) : null, _outbuffer);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), data ? new gstbase.collect_data.CollectData(cast(void*)data, No.Take) : null, inbuffer ? new gst.buffer.Buffer(cast(void*)inbuffer, Yes.Take) : null, _outbuffer);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstbase.types.CollectPadsClipFunction");
+      }
       auto _retval = cast(GstFlowReturn)_dretval;
       *outbuffer = *cast(GstBuffer**)_outbuffer._cPtr;
 
@@ -350,13 +364,21 @@ class CollectPads : gst.object.ObjectWrap
       Params:
         func = the function to set
   */
-  void setCompareFunction(gstbase.types.CollectPadsCompareFunction func)
+  void setCompareFunction(gstbase.types.CollectPadsCompareFunction func) nothrow
   {
-    extern(C) int _funcCallback(GstCollectPads* pads, GstCollectData* data1, GstClockTime timestamp1, GstCollectData* data2, GstClockTime timestamp2, void* userData)
+    extern(C) int _funcCallback(GstCollectPads* pads, GstCollectData* data1, GstClockTime timestamp1, GstCollectData* data2, GstClockTime timestamp2, void* userData) nothrow
     {
+      int _retval;
       auto _dlg = cast(gstbase.types.CollectPadsCompareFunction*)userData;
 
-      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), data1 ? new gstbase.collect_data.CollectData(cast(void*)data1, No.Take) : null, timestamp1, data2 ? new gstbase.collect_data.CollectData(cast(void*)data2, No.Take) : null, timestamp2);
+      try
+      {
+        _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), data1 ? new gstbase.collect_data.CollectData(cast(void*)data1, No.Take) : null, timestamp1, data2 ? new gstbase.collect_data.CollectData(cast(void*)data2, No.Take) : null, timestamp2);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstbase.types.CollectPadsCompareFunction");
+      }
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -377,14 +399,21 @@ class CollectPads : gst.object.ObjectWrap
       Params:
         func = the function to set
   */
-  void setEventFunction(gstbase.types.CollectPadsEventFunction func)
+  void setEventFunction(gstbase.types.CollectPadsEventFunction func) nothrow
   {
-    extern(C) gboolean _funcCallback(GstCollectPads* pads, GstCollectData* pad, GstEvent* event, void* userData)
+    extern(C) gboolean _funcCallback(GstCollectPads* pads, GstCollectData* pad, GstEvent* event, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gstbase.types.CollectPadsEventFunction*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, event ? new gst.event.Event(cast(void*)event, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, event ? new gst.event.Event(cast(void*)event, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstbase.types.CollectPadsEventFunction");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -402,13 +431,20 @@ class CollectPads : gst.object.ObjectWrap
       Params:
         func = flush function to install
   */
-  void setFlushFunction(gstbase.types.CollectPadsFlushFunction func)
+  void setFlushFunction(gstbase.types.CollectPadsFlushFunction func) nothrow
   {
-    extern(C) void _funcCallback(GstCollectPads* pads, void* userData)
+    extern(C) void _funcCallback(GstCollectPads* pads, void* userData) nothrow
     {
       auto _dlg = cast(gstbase.types.CollectPadsFlushFunction*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstbase.types.CollectPadsFlushFunction");
+      }
     }
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
@@ -427,7 +463,7 @@ class CollectPads : gst.object.ObjectWrap
       Params:
         flushing = desired state of the pads
   */
-  void setFlushing(bool flushing)
+  void setFlushing(bool flushing) nothrow
   {
     gst_collect_pads_set_flushing(cast(GstCollectPads*)this._cPtr, flushing);
   }
@@ -448,14 +484,21 @@ class CollectPads : gst.object.ObjectWrap
       Params:
         func = the function to set
   */
-  void setFunction(gstbase.types.CollectPadsFunction func)
+  void setFunction(gstbase.types.CollectPadsFunction func) nothrow
   {
-    extern(C) GstFlowReturn _funcCallback(GstCollectPads* pads, void* userData)
+    extern(C) GstFlowReturn _funcCallback(GstCollectPads* pads, void* userData) nothrow
     {
       gst.types.FlowReturn _dretval;
       auto _dlg = cast(gstbase.types.CollectPadsFunction*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take));
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstbase.types.CollectPadsFunction");
+      }
       auto _retval = cast(GstFlowReturn)_dretval;
 
       return _retval;
@@ -478,14 +521,21 @@ class CollectPads : gst.object.ObjectWrap
       Params:
         func = the function to set
   */
-  void setQueryFunction(gstbase.types.CollectPadsQueryFunction func)
+  void setQueryFunction(gstbase.types.CollectPadsQueryFunction func) nothrow
   {
-    extern(C) gboolean _funcCallback(GstCollectPads* pads, GstCollectData* pad, GstQuery* query, void* userData)
+    extern(C) gboolean _funcCallback(GstCollectPads* pads, GstCollectData* pad, GstQuery* query, void* userData) nothrow
     {
       bool _dretval;
       auto _dlg = cast(gstbase.types.CollectPadsQueryFunction*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, query ? new gst.query.Query(cast(void*)query, No.Take) : null);
+      try
+      {
+        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, query ? new gst.query.Query(cast(void*)query, No.Take) : null);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstbase.types.CollectPadsQueryFunction");
+      }
       auto _retval = cast(gboolean)_dretval;
 
       return _retval;
@@ -510,7 +560,7 @@ class CollectPads : gst.object.ObjectWrap
         waiting = boolean indicating whether this pad should operate
                     in waiting or non-waiting mode
   */
-  void setWaiting(gstbase.collect_data.CollectData data, bool waiting)
+  void setWaiting(gstbase.collect_data.CollectData data, bool waiting) nothrow
   {
     gst_collect_pads_set_waiting(cast(GstCollectPads*)this._cPtr, data ? cast(GstCollectData*)data._cPtr : null, waiting);
   }
@@ -525,7 +575,7 @@ class CollectPads : gst.object.ObjectWrap
         event = event being processed
       Returns: 
   */
-  bool srcEventDefault(gst.pad.Pad pad, gst.event.Event event)
+  bool srcEventDefault(gst.pad.Pad pad, gst.event.Event event) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_collect_pads_src_event_default(cast(GstCollectPads*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
@@ -537,7 +587,7 @@ class CollectPads : gst.object.ObjectWrap
       
       MT safe.
   */
-  void start()
+  void start() nothrow
   {
     gst_collect_pads_start(cast(GstCollectPads*)this._cPtr);
   }
@@ -548,7 +598,7 @@ class CollectPads : gst.object.ObjectWrap
       
       MT safe.
   */
-  void stop()
+  void stop() nothrow
   {
     gst_collect_pads_stop(cast(GstCollectPads*)this._cPtr);
   }
@@ -569,7 +619,7 @@ class CollectPads : gst.object.ObjectWrap
         be less that requested. A return of null signals that the pad is
         end-of-stream. Unref the buffer after use.
   */
-  gst.buffer.Buffer takeBuffer(gstbase.collect_data.CollectData data, uint size)
+  gst.buffer.Buffer takeBuffer(gstbase.collect_data.CollectData data, uint size) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_collect_pads_take_buffer(cast(GstCollectPads*)this._cPtr, data ? cast(GstCollectData*)data._cPtr : null, size);
@@ -590,7 +640,7 @@ final class CollectPadsGidBuilder : CollectPadsGidBuilderImpl!CollectPadsGidBuil
       Create object from builder.
       Returns: New object
   */
-  CollectPads build()
+  CollectPads build() nothrow
   {
     return new CollectPads(cast(void*)createGObject(CollectPads._getGType), Yes.Take);
   }

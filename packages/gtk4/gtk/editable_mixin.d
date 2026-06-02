@@ -150,7 +150,7 @@ template EditableT()
       Get `cursorPosition` property.
       Returns: The current position of the insertion cursor in chars.
   */
-  @property int cursorPosition()
+  @property int cursorPosition() nothrow
   {
     return getPosition();
   }
@@ -159,7 +159,7 @@ template EditableT()
       Get `editable` property.
       Returns: Whether the entry contents can be edited.
   */
-  @property bool editable()
+  @property bool editable() nothrow
   {
     return getEditable();
   }
@@ -169,7 +169,7 @@ template EditableT()
       Params:
         propval = Whether the entry contents can be edited.
   */
-  @property void editable(bool propval)
+  @property void editable(bool propval) nothrow
   {
     setEditable(propval);
   }
@@ -178,7 +178,7 @@ template EditableT()
       Get `enableUndo` property.
       Returns: If undo/redo should be enabled for the editable.
   */
-  @property bool enableUndo()
+  @property bool enableUndo() nothrow
   {
     return getEnableUndo();
   }
@@ -188,7 +188,7 @@ template EditableT()
       Params:
         propval = If undo/redo should be enabled for the editable.
   */
-  @property void enableUndo(bool propval)
+  @property void enableUndo(bool propval) nothrow
   {
     setEnableUndo(propval);
   }
@@ -197,7 +197,7 @@ template EditableT()
       Get `maxWidthChars` property.
       Returns: The desired maximum width of the entry, in characters.
   */
-  @property int maxWidthChars()
+  @property int maxWidthChars() nothrow
   {
     return getMaxWidthChars();
   }
@@ -207,7 +207,7 @@ template EditableT()
       Params:
         propval = The desired maximum width of the entry, in characters.
   */
-  @property void maxWidthChars(int propval)
+  @property void maxWidthChars(int propval) nothrow
   {
     setMaxWidthChars(propval);
   }
@@ -216,7 +216,7 @@ template EditableT()
       Get `selectionBound` property.
       Returns: The position of the opposite end of the selection from the cursor in chars.
   */
-  @property int selectionBound()
+  @property int selectionBound() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("selection-bound");
   }
@@ -225,7 +225,7 @@ template EditableT()
       Get `text` property.
       Returns: The contents of the entry.
   */
-  @property string text()
+  @property string text() nothrow
   {
     return getText();
   }
@@ -235,7 +235,7 @@ template EditableT()
       Params:
         propval = The contents of the entry.
   */
-  @property void text(string propval)
+  @property void text(string propval) nothrow
   {
     setText(propval);
   }
@@ -244,7 +244,7 @@ template EditableT()
       Get `widthChars` property.
       Returns: Number of characters to leave space for in the entry.
   */
-  @property int widthChars()
+  @property int widthChars() nothrow
   {
     return getWidthChars();
   }
@@ -254,7 +254,7 @@ template EditableT()
       Params:
         propval = Number of characters to leave space for in the entry.
   */
-  @property void widthChars(int propval)
+  @property void widthChars(int propval) nothrow
   {
     setWidthChars(propval);
   }
@@ -265,7 +265,7 @@ template EditableT()
         
         Reversed for RTL layouts.
   */
-  @property float xalign()
+  @property float xalign() nothrow
   {
     return getAlignment();
   }
@@ -277,7 +277,7 @@ template EditableT()
           
           Reversed for RTL layouts.
   */
-  @property void xalign(float propval)
+  @property void xalign(float propval) nothrow
   {
     setAlignment(propval);
   }
@@ -313,7 +313,7 @@ template EditableT()
         state = what kind of accessible state to retrieve
       Returns: 
   */
-  override bool delegateGetAccessiblePlatformState(gtk.types.AccessiblePlatformState state)
+  override bool delegateGetAccessiblePlatformState(gtk.types.AccessiblePlatformState state) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_editable_delegate_get_accessible_platform_state(cast(GtkEditable*)this._cPtr, state);
@@ -325,7 +325,7 @@ template EditableT()
       
       This call doesn’t do anything if there is no selected text.
   */
-  override void deleteSelection()
+  override void deleteSelection() nothrow
   {
     gtk_editable_delete_selection(cast(GtkEditable*)this._cPtr);
   }
@@ -344,7 +344,7 @@ template EditableT()
         startPos = start position
         endPos = end position
   */
-  override void deleteText(int startPos, int endPos)
+  override void deleteText(int startPos, int endPos) nothrow
   {
     gtk_editable_delete_text(cast(GtkEditable*)this._cPtr, startPos, endPos);
   }
@@ -355,7 +355,7 @@ template EditableT()
       This is a helper function that should be called from dispose,
       before removing the delegate object.
   */
-  override void finishDelegate()
+  override void finishDelegate() nothrow
   {
     gtk_editable_finish_delegate(cast(GtkEditable*)this._cPtr);
   }
@@ -364,7 +364,7 @@ template EditableT()
       Gets the alignment of the editable.
       Returns: the alignment
   */
-  override float getAlignment()
+  override float getAlignment() nothrow
   {
     float _retval;
     _retval = gtk_editable_get_alignment(cast(GtkEditable*)this._cPtr);
@@ -388,7 +388,7 @@ template EditableT()
           string. This string is allocated by the [gtk.editable.Editable] implementation
           and should be freed by the caller.
   */
-  override string getChars(int startPos, int endPos)
+  override string getChars(int startPos, int endPos) nothrow
   {
     char* _cretval;
     _cretval = gtk_editable_get_chars(cast(GtkEditable*)this._cPtr, startPos, endPos);
@@ -403,7 +403,7 @@ template EditableT()
       Typically, the delegate is a [gtk.text.Text] widget.
       Returns: the delegate [gtk.editable.Editable]
   */
-  override gtk.editable.Editable getDelegate()
+  override gtk.editable.Editable getDelegate() nothrow
   {
     GtkEditable* _cretval;
     _cretval = gtk_editable_get_delegate(cast(GtkEditable*)this._cPtr);
@@ -415,7 +415,7 @@ template EditableT()
       Retrieves whether editable is editable.
       Returns: true if editable is editable.
   */
-  override bool getEditable()
+  override bool getEditable() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_editable_get_editable(cast(GtkEditable*)this._cPtr);
@@ -426,7 +426,7 @@ template EditableT()
       Gets if undo/redo actions are enabled for editable
       Returns: true if undo is enabled
   */
-  override bool getEnableUndo()
+  override bool getEnableUndo() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_editable_get_enable_undo(cast(GtkEditable*)this._cPtr);
@@ -437,7 +437,7 @@ template EditableT()
       Retrieves the desired maximum width of editable, in characters.
       Returns: the maximum width of the entry, in characters
   */
-  override int getMaxWidthChars()
+  override int getMaxWidthChars() nothrow
   {
     int _retval;
     _retval = gtk_editable_get_max_width_chars(cast(GtkEditable*)this._cPtr);
@@ -451,7 +451,7 @@ template EditableT()
       Note that this position is in characters, not in bytes.
       Returns: the cursor position
   */
-  override int getPosition()
+  override int getPosition() nothrow
   {
     int _retval;
     _retval = gtk_editable_get_position(cast(GtkEditable*)this._cPtr);
@@ -472,7 +472,7 @@ template EditableT()
         endPos = location to store the end position
       Returns: true if there is a non-empty selection, false otherwise
   */
-  override bool getSelectionBounds(out int startPos, out int endPos)
+  override bool getSelectionBounds(out int startPos, out int endPos) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_editable_get_selection_bounds(cast(GtkEditable*)this._cPtr, cast(int*)&startPos, cast(int*)&endPos);
@@ -485,7 +485,7 @@ template EditableT()
       The returned string is owned by GTK and must not be modified or freed.
       Returns: a pointer to the contents of the editable
   */
-  override string getText()
+  override string getText() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_editable_get_text(cast(GtkEditable*)this._cPtr);
@@ -498,7 +498,7 @@ template EditableT()
       for the contents of the editable.
       Returns: number of chars to request space for, or negative if unset
   */
-  override int getWidthChars()
+  override int getWidthChars() nothrow
   {
     int _retval;
     _retval = gtk_editable_get_width_chars(cast(GtkEditable*)this._cPtr);
@@ -514,7 +514,7 @@ template EditableT()
       This is a helper function that should be called in instance init,
       after creating the delegate object.
   */
-  override void initDelegate()
+  override void initDelegate() nothrow
   {
     gtk_editable_init_delegate(cast(GtkEditable*)this._cPtr);
   }
@@ -531,7 +531,7 @@ template EditableT()
         text = the text to insert
         position = location of the position text will be inserted at
   */
-  override void insertText(string text, ref int position)
+  override void insertText(string text, ref int position) nothrow
   {
     int _length;
     if (text)
@@ -555,7 +555,7 @@ template EditableT()
         startPos = start of region
         endPos = end of region
   */
-  override void selectRegion(int startPos, int endPos)
+  override void selectRegion(int startPos, int endPos) nothrow
   {
     gtk_editable_select_region(cast(GtkEditable*)this._cPtr, startPos, endPos);
   }
@@ -570,7 +570,7 @@ template EditableT()
         xalign = The horizontal alignment, from 0 (left) to 1 (right).
             Reversed for RTL layouts
   */
-  override void setAlignment(float xalign)
+  override void setAlignment(float xalign) nothrow
   {
     gtk_editable_set_alignment(cast(GtkEditable*)this._cPtr, xalign);
   }
@@ -582,7 +582,7 @@ template EditableT()
         isEditable = true if the user is allowed to edit the text
             in the widget
   */
-  override void setEditable(bool isEditable)
+  override void setEditable(bool isEditable) nothrow
   {
     gtk_editable_set_editable(cast(GtkEditable*)this._cPtr, isEditable);
   }
@@ -598,7 +598,7 @@ template EditableT()
       Params:
         enableUndo = if undo/redo should be enabled
   */
-  override void setEnableUndo(bool enableUndo)
+  override void setEnableUndo(bool enableUndo) nothrow
   {
     gtk_editable_set_enable_undo(cast(GtkEditable*)this._cPtr, enableUndo);
   }
@@ -609,7 +609,7 @@ template EditableT()
       Params:
         nChars = the new desired maximum width, in characters
   */
-  override void setMaxWidthChars(int nChars)
+  override void setMaxWidthChars(int nChars) nothrow
   {
     gtk_editable_set_max_width_chars(cast(GtkEditable*)this._cPtr, nChars);
   }
@@ -626,7 +626,7 @@ template EditableT()
       Params:
         position = the position of the cursor
   */
-  override void setPosition(int position)
+  override void setPosition(int position) nothrow
   {
     gtk_editable_set_position(cast(GtkEditable*)this._cPtr, position);
   }
@@ -639,7 +639,7 @@ template EditableT()
       Params:
         text = the text to set
   */
-  override void setText(string text)
+  override void setText(string text) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_editable_set_text(cast(GtkEditable*)this._cPtr, _text);
@@ -656,7 +656,7 @@ template EditableT()
       Params:
         nChars = width in chars
   */
-  override void setWidthChars(int nChars)
+  override void setWidthChars(int nChars) nothrow
   {
     gtk_editable_set_width_chars(cast(GtkEditable*)this._cPtr, nChars);
   }
@@ -683,13 +683,13 @@ template EditableT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.editable.Editable)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -698,7 +698,14 @@ template EditableT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.editable.Editable.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -732,7 +739,7 @@ template EditableT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDeleteText(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeleteText(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -740,7 +747,7 @@ template EditableT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.editable.Editable)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -755,7 +762,14 @@ template EditableT()
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.editable.Editable.deleteText");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -789,7 +803,7 @@ template EditableT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectInsertText(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInsertText(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -797,7 +811,7 @@ template EditableT()
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.editable.Editable)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -815,7 +829,14 @@ template EditableT()
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getStringWithLength(&_paramVals[1], length);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.editable.Editable.insertText");
+      }
 
       static if (Parameters!T.length > 1)
         *getVal!(Parameters!T[1]*)(&_paramVals[3]) = position;
@@ -836,7 +857,7 @@ template EditableGidBuilderT()
         propval = Whether the entry contents can be edited.
       Returns: Builder instance for fluent chaining
   */
-  T editable(bool propval)
+  T editable(bool propval) nothrow
   {
     return setProperty("editable", propval);
   }
@@ -847,7 +868,7 @@ template EditableGidBuilderT()
         propval = If undo/redo should be enabled for the editable.
       Returns: Builder instance for fluent chaining
   */
-  T enableUndo(bool propval)
+  T enableUndo(bool propval) nothrow
   {
     return setProperty("enable-undo", propval);
   }
@@ -858,7 +879,7 @@ template EditableGidBuilderT()
         propval = The desired maximum width of the entry, in characters.
       Returns: Builder instance for fluent chaining
   */
-  T maxWidthChars(int propval)
+  T maxWidthChars(int propval) nothrow
   {
     return setProperty("max-width-chars", propval);
   }
@@ -869,7 +890,7 @@ template EditableGidBuilderT()
         propval = The contents of the entry.
       Returns: Builder instance for fluent chaining
   */
-  T text(string propval)
+  T text(string propval) nothrow
   {
     return setProperty("text", propval);
   }
@@ -880,7 +901,7 @@ template EditableGidBuilderT()
         propval = Number of characters to leave space for in the entry.
       Returns: Builder instance for fluent chaining
   */
-  T widthChars(int propval)
+  T widthChars(int propval) nothrow
   {
     return setProperty("width-chars", propval);
   }
@@ -893,7 +914,7 @@ template EditableGidBuilderT()
           Reversed for RTL layouts.
       Returns: Builder instance for fluent chaining
   */
-  T xalign(float propval)
+  T xalign(float propval) nothrow
   {
     return setProperty("xalign", propval);
   }

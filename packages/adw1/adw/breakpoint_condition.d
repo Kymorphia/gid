@@ -15,32 +15,32 @@ class BreakpointCondition : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_breakpoint_condition_get_type != &gidSymbolNotFound ? adw_breakpoint_condition_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override BreakpointCondition self()
+  override BreakpointCondition self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class BreakpointCondition : gobject.boxed.Boxed
         condition2 = second condition
       Returns: the newly created condition
   */
-  static adw.breakpoint_condition.BreakpointCondition newAnd(adw.breakpoint_condition.BreakpointCondition condition1, adw.breakpoint_condition.BreakpointCondition condition2)
+  static adw.breakpoint_condition.BreakpointCondition newAnd(adw.breakpoint_condition.BreakpointCondition condition1, adw.breakpoint_condition.BreakpointCondition condition2) nothrow
   {
     AdwBreakpointCondition* _cretval;
     _cretval = adw_breakpoint_condition_new_and(condition1 ? cast(AdwBreakpointCondition*)condition1._cPtr(Yes.Dup) : null, condition2 ? cast(AdwBreakpointCondition*)condition2._cPtr(Yes.Dup) : null);
@@ -71,7 +71,7 @@ class BreakpointCondition : gobject.boxed.Boxed
         unit = the length unit
       Returns: the newly created condition
   */
-  static adw.breakpoint_condition.BreakpointCondition newLength(adw.types.BreakpointConditionLengthType type, double value, adw.types.LengthUnit unit)
+  static adw.breakpoint_condition.BreakpointCondition newLength(adw.types.BreakpointConditionLengthType type, double value, adw.types.LengthUnit unit) nothrow
   {
     AdwBreakpointCondition* _cretval;
     _cretval = adw_breakpoint_condition_new_length(type, value, unit);
@@ -88,7 +88,7 @@ class BreakpointCondition : gobject.boxed.Boxed
         condition2 = second condition
       Returns: the newly created condition
   */
-  static adw.breakpoint_condition.BreakpointCondition newOr(adw.breakpoint_condition.BreakpointCondition condition1, adw.breakpoint_condition.BreakpointCondition condition2)
+  static adw.breakpoint_condition.BreakpointCondition newOr(adw.breakpoint_condition.BreakpointCondition condition1, adw.breakpoint_condition.BreakpointCondition condition2) nothrow
   {
     AdwBreakpointCondition* _cretval;
     _cretval = adw_breakpoint_condition_new_or(condition1 ? cast(AdwBreakpointCondition*)condition1._cPtr(Yes.Dup) : null, condition2 ? cast(AdwBreakpointCondition*)condition2._cPtr(Yes.Dup) : null);
@@ -107,7 +107,7 @@ class BreakpointCondition : gobject.boxed.Boxed
         height = ratio height
       Returns: the newly created condition
   */
-  static adw.breakpoint_condition.BreakpointCondition newRatio(adw.types.BreakpointConditionRatioType type, int width, int height)
+  static adw.breakpoint_condition.BreakpointCondition newRatio(adw.types.BreakpointConditionRatioType type, int width, int height) nothrow
   {
     AdwBreakpointCondition* _cretval;
     _cretval = adw_breakpoint_condition_new_ratio(type, width, height);
@@ -119,7 +119,7 @@ class BreakpointCondition : gobject.boxed.Boxed
       Copies self.
       Returns: a copy of self
   */
-  adw.breakpoint_condition.BreakpointCondition copy()
+  adw.breakpoint_condition.BreakpointCondition copy() nothrow
   {
     AdwBreakpointCondition* _cretval;
     _cretval = adw_breakpoint_condition_copy(cast(AdwBreakpointCondition*)this._cPtr);
@@ -133,7 +133,7 @@ class BreakpointCondition : gobject.boxed.Boxed
       The returned string can be parsed by [adw.breakpoint_condition.BreakpointCondition.parse].
       Returns: A newly allocated text string
   */
-  string toString_()
+  string toString_() nothrow
   {
     char* _cretval;
     _cretval = adw_breakpoint_condition_to_string(cast(AdwBreakpointCondition*)this._cPtr);
@@ -202,7 +202,7 @@ class BreakpointCondition : gobject.boxed.Boxed
         str = the string specifying the condition
       Returns: the parsed condition
   */
-  static adw.breakpoint_condition.BreakpointCondition parse(string str)
+  static adw.breakpoint_condition.BreakpointCondition parse(string str) nothrow
   {
     AdwBreakpointCondition* _cretval;
     const(char)* _str = str.toCString(No.Alloc);

@@ -16,11 +16,8 @@ class GLAsyncDebug
   GstGLAsyncDebug _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstgl.glasync_debug.GLAsyncDebug");
-
     _cInstance = *cast(GstGLAsyncDebug*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class GLAsyncDebug
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -39,7 +36,7 @@ class GLAsyncDebug
       subsequent calls to [gstgl.glasync_debug.GLAsyncDebug.storeLogMsg] will overwrite previous
       messages.
   */
-  void freeze()
+  void freeze() nothrow
   {
     gst_gl_async_debug_freeze(cast(GstGLAsyncDebug*)this._cPtr);
   }
@@ -48,7 +45,7 @@ class GLAsyncDebug
       Initialize ad.  Intended for use with #GstGLAsyncDebug's that are embedded
       in other structs.
   */
-  void init_()
+  void init_() nothrow
   {
     gst_gl_async_debug_init(cast(GstGLAsyncDebug*)this._cPtr);
   }
@@ -56,7 +53,7 @@ class GLAsyncDebug
   /**
       Outputs a previously stored debug message.
   */
-  void outputLogMsg()
+  void outputLogMsg() nothrow
   {
     gst_gl_async_debug_output_log_msg(cast(GstGLAsyncDebug*)this._cPtr);
   }
@@ -64,7 +61,7 @@ class GLAsyncDebug
   /**
       unfreeze the debug output.  See [gstgl.glasync_debug.GLAsyncDebug.freeze] for what freezing means
   */
-  void thaw()
+  void thaw() nothrow
   {
     gst_gl_async_debug_thaw(cast(GstGLAsyncDebug*)this._cPtr);
   }
@@ -73,7 +70,7 @@ class GLAsyncDebug
       Unset any dynamically allocated data.  Intended for use with
       #GstGLAsyncDebug's that are embedded in other structs.
   */
-  void unset()
+  void unset() nothrow
   {
     gst_gl_async_debug_unset(cast(GstGLAsyncDebug*)this._cPtr);
   }

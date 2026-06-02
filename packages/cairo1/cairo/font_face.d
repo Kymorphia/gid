@@ -27,32 +27,32 @@ class FontFace : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_font_face_get_type != &gidSymbolNotFound ? cairo_gobject_font_face_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FontFace self()
+  override FontFace self() nothrow
   {
     return this;
   }
@@ -62,7 +62,7 @@ class FontFace : gobject.boxed.Boxed
       a font face. See #cairo_font_type_t for available types.
       Returns: The type of font_face.
   */
-  cairo.types.FontType getFontType()
+  cairo.types.FontType getFontType() nothrow
   {
     cairo_font_type_t _cretval;
     _cretval = cairo_font_face_get_type(cast(cairo_font_face_t*)this._cPtr);
@@ -80,7 +80,7 @@ class FontFace : gobject.boxed.Boxed
           attached to
       Returns: the user data previously attached or null.
   */
-  void* getUserData(cairo.types.UserDataKey key)
+  void* getUserData(cairo.types.UserDataKey key) nothrow
   {
     auto _retval = cairo_font_face_get_user_data(cast(cairo_font_face_t*)this._cPtr, &key);
     return _retval;
@@ -92,7 +92,7 @@ class FontFace : gobject.boxed.Boxed
       Returns: [cairo.types.Status.Success] or another error such as
           [cairo.types.Status.NoMemory].
   */
-  cairo.types.Status status()
+  cairo.types.Status status() nothrow
   {
     cairo_status_t _cretval;
     _cretval = cairo_font_face_status(cast(cairo_font_face_t*)this._cPtr);

@@ -22,7 +22,7 @@ class TextRange : gobject.boxed.Boxed
         endOffset = The end offset of a AtkTextRange
         content = The text in the text range
   */
-  this(atk.types.TextRectangle bounds = atk.types.TextRectangle.init, int startOffset = int.init, int endOffset = int.init, string content = string.init)
+  this(atk.types.TextRectangle bounds = atk.types.TextRectangle.init, int startOffset = int.init, int endOffset = int.init, string content = string.init) nothrow
   {
     super(gMalloc(AtkTextRange.sizeof), Yes.Take);
     this.bounds = bounds;
@@ -32,32 +32,32 @@ class TextRange : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_text_range_get_type != &gidSymbolNotFound ? atk_text_range_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TextRange self()
+  override TextRange self() nothrow
   {
     return this;
   }
@@ -66,7 +66,7 @@ class TextRange : gobject.boxed.Boxed
       Get `bounds` field.
       Returns: A rectangle giving the bounds of the text range
   */
-  @property atk.types.TextRectangle bounds()
+  @property atk.types.TextRectangle bounds() nothrow
   {
     return cToD!(atk.types.TextRectangle)(cast(void*)&(cast(AtkTextRange*)this._cPtr).bounds);
   }
@@ -76,7 +76,7 @@ class TextRange : gobject.boxed.Boxed
       Params:
         propval = A rectangle giving the bounds of the text range
   */
-  @property void bounds(atk.types.TextRectangle propval)
+  @property void bounds(atk.types.TextRectangle propval) nothrow
   {
     (cast(AtkTextRange*)this._cPtr).bounds = cast(AtkTextRectangle)propval;
   }
@@ -85,7 +85,7 @@ class TextRange : gobject.boxed.Boxed
       Get `startOffset` field.
       Returns: The start offset of a AtkTextRange
   */
-  @property int startOffset()
+  @property int startOffset() nothrow
   {
     return (cast(AtkTextRange*)this._cPtr).startOffset;
   }
@@ -95,7 +95,7 @@ class TextRange : gobject.boxed.Boxed
       Params:
         propval = The start offset of a AtkTextRange
   */
-  @property void startOffset(int propval)
+  @property void startOffset(int propval) nothrow
   {
     (cast(AtkTextRange*)this._cPtr).startOffset = propval;
   }
@@ -104,7 +104,7 @@ class TextRange : gobject.boxed.Boxed
       Get `endOffset` field.
       Returns: The end offset of a AtkTextRange
   */
-  @property int endOffset()
+  @property int endOffset() nothrow
   {
     return (cast(AtkTextRange*)this._cPtr).endOffset;
   }
@@ -114,7 +114,7 @@ class TextRange : gobject.boxed.Boxed
       Params:
         propval = The end offset of a AtkTextRange
   */
-  @property void endOffset(int propval)
+  @property void endOffset(int propval) nothrow
   {
     (cast(AtkTextRange*)this._cPtr).endOffset = propval;
   }
@@ -123,7 +123,7 @@ class TextRange : gobject.boxed.Boxed
       Get `content` field.
       Returns: The text in the text range
   */
-  @property string content()
+  @property string content() nothrow
   {
     return cToD!(string)(cast(void*)(cast(AtkTextRange*)this._cPtr).content);
   }
@@ -133,7 +133,7 @@ class TextRange : gobject.boxed.Boxed
       Params:
         propval = The text in the text range
   */
-  @property void content(string propval)
+  @property void content(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(AtkTextRange*)this._cPtr).content);
     dToC(propval, cast(void*)&(cast(AtkTextRange*)this._cPtr).content);

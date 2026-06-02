@@ -77,26 +77,26 @@ class TreeExpander : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_expander_get_type != &gidSymbolNotFound ? gtk_tree_expander_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TreeExpander self()
+  override TreeExpander self() nothrow
   {
     return this;
   }
@@ -105,7 +105,7 @@ class TreeExpander : gtk.widget.Widget
       Get builder for [gtk.tree_expander.TreeExpander]
       Returns: New builder object
   */
-  static TreeExpanderGidBuilder builder()
+  static TreeExpanderGidBuilder builder() nothrow
   {
     return new TreeExpanderGidBuilder;
   }
@@ -114,7 +114,7 @@ class TreeExpander : gtk.widget.Widget
       Get `child` property.
       Returns: The child widget with the actual contents.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -124,7 +124,7 @@ class TreeExpander : gtk.widget.Widget
       Params:
         propval = The child widget with the actual contents.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -138,7 +138,7 @@ class TreeExpander : gtk.widget.Widget
         A common use for this property would be to bind to the number of children in a
         GtkTreeListRow's model in order to hide the expander when a row has no children.
   */
-  @property bool hideExpander()
+  @property bool hideExpander() nothrow
   {
     return getHideExpander();
   }
@@ -153,7 +153,7 @@ class TreeExpander : gtk.widget.Widget
           A common use for this property would be to bind to the number of children in a
           GtkTreeListRow's model in order to hide the expander when a row has no children.
   */
-  @property void hideExpander(bool propval)
+  @property void hideExpander(bool propval) nothrow
   {
     setHideExpander(propval);
   }
@@ -162,7 +162,7 @@ class TreeExpander : gtk.widget.Widget
       Get `indentForDepth` property.
       Returns: TreeExpander indents the child according to its depth.
   */
-  @property bool indentForDepth()
+  @property bool indentForDepth() nothrow
   {
     return getIndentForDepth();
   }
@@ -172,7 +172,7 @@ class TreeExpander : gtk.widget.Widget
       Params:
         propval = TreeExpander indents the child according to its depth.
   */
-  @property void indentForDepth(bool propval)
+  @property void indentForDepth(bool propval) nothrow
   {
     setIndentForDepth(propval);
   }
@@ -181,7 +181,7 @@ class TreeExpander : gtk.widget.Widget
       Get `indentForIcon` property.
       Returns: TreeExpander indents the child by the width of an expander-icon if it is not expandable.
   */
-  @property bool indentForIcon()
+  @property bool indentForIcon() nothrow
   {
     return getIndentForIcon();
   }
@@ -191,7 +191,7 @@ class TreeExpander : gtk.widget.Widget
       Params:
         propval = TreeExpander indents the child by the width of an expander-icon if it is not expandable.
   */
-  @property void indentForIcon(bool propval)
+  @property void indentForIcon(bool propval) nothrow
   {
     setIndentForIcon(propval);
   }
@@ -200,7 +200,7 @@ class TreeExpander : gtk.widget.Widget
       Get `item` property.
       Returns: The item held by this expander's row.
   */
-  @property gobject.object.ObjectWrap item()
+  @property gobject.object.ObjectWrap item() nothrow
   {
     return getItem();
   }
@@ -209,7 +209,7 @@ class TreeExpander : gtk.widget.Widget
       Get `listRow` property.
       Returns: The list row to track for expander state.
   */
-  @property gtk.tree_list_row.TreeListRow listRow()
+  @property gtk.tree_list_row.TreeListRow listRow() nothrow
   {
     return getListRow();
   }
@@ -219,7 +219,7 @@ class TreeExpander : gtk.widget.Widget
       Params:
         propval = The list row to track for expander state.
   */
-  @property void listRow(gtk.tree_list_row.TreeListRow propval)
+  @property void listRow(gtk.tree_list_row.TreeListRow propval) nothrow
   {
     setListRow(propval);
   }
@@ -228,7 +228,7 @@ class TreeExpander : gtk.widget.Widget
       Creates a new [gtk.tree_expander.TreeExpander]
       Returns: a new [gtk.tree_expander.TreeExpander]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_tree_expander_new();
@@ -239,7 +239,7 @@ class TreeExpander : gtk.widget.Widget
       Gets the child widget displayed by self.
       Returns: The child displayed by self
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_tree_expander_get_child(cast(GtkTreeExpander*)this._cPtr);
@@ -251,7 +251,7 @@ class TreeExpander : gtk.widget.Widget
       Gets whether the TreeExpander should be hidden in a GtkTreeListRow.
       Returns: TRUE if the expander icon should be hidden. Otherwise FALSE.
   */
-  bool getHideExpander()
+  bool getHideExpander() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_expander_get_hide_expander(cast(GtkTreeExpander*)this._cPtr);
@@ -262,7 +262,7 @@ class TreeExpander : gtk.widget.Widget
       TreeExpander indents each level of depth with an additional indent.
       Returns: TRUE if the child should be indented . Otherwise FALSE.
   */
-  bool getIndentForDepth()
+  bool getIndentForDepth() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_expander_get_indent_for_depth(cast(GtkTreeExpander*)this._cPtr);
@@ -273,7 +273,7 @@ class TreeExpander : gtk.widget.Widget
       TreeExpander indents the child by the width of an expander-icon if it is not expandable.
       Returns: TRUE if the child should be indented when not expandable. Otherwise FALSE.
   */
-  bool getIndentForIcon()
+  bool getIndentForIcon() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_tree_expander_get_indent_for_icon(cast(GtkTreeExpander*)this._cPtr);
@@ -290,7 +290,7 @@ class TreeExpander : gtk.widget.Widget
       ```
       Returns: The item of the row
   */
-  gobject.object.ObjectWrap getItem()
+  gobject.object.ObjectWrap getItem() nothrow
   {
     GObject* _cretval;
     _cretval = gtk_tree_expander_get_item(cast(GtkTreeExpander*)this._cPtr);
@@ -302,7 +302,7 @@ class TreeExpander : gtk.widget.Widget
       Gets the list row managed by self.
       Returns: The list row displayed by self
   */
-  gtk.tree_list_row.TreeListRow getListRow()
+  gtk.tree_list_row.TreeListRow getListRow() nothrow
   {
     GtkTreeListRow* _cretval;
     _cretval = gtk_tree_expander_get_list_row(cast(GtkTreeExpander*)this._cPtr);
@@ -316,7 +316,7 @@ class TreeExpander : gtk.widget.Widget
       Params:
         child = a [gtk.widget.Widget]
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     gtk_tree_expander_set_child(cast(GtkTreeExpander*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -327,7 +327,7 @@ class TreeExpander : gtk.widget.Widget
       Params:
         hideExpander = TRUE if the expander should be hidden. Otherwise FALSE.
   */
-  void setHideExpander(bool hideExpander)
+  void setHideExpander(bool hideExpander) nothrow
   {
     gtk_tree_expander_set_hide_expander(cast(GtkTreeExpander*)this._cPtr, hideExpander);
   }
@@ -338,7 +338,7 @@ class TreeExpander : gtk.widget.Widget
       Params:
         indentForDepth = TRUE if the child should be indented. Otherwise FALSE.
   */
-  void setIndentForDepth(bool indentForDepth)
+  void setIndentForDepth(bool indentForDepth) nothrow
   {
     gtk_tree_expander_set_indent_for_depth(cast(GtkTreeExpander*)this._cPtr, indentForDepth);
   }
@@ -349,7 +349,7 @@ class TreeExpander : gtk.widget.Widget
       Params:
         indentForIcon = TRUE if the child should be indented without expander. Otherwise FALSE.
   */
-  void setIndentForIcon(bool indentForIcon)
+  void setIndentForIcon(bool indentForIcon) nothrow
   {
     gtk_tree_expander_set_indent_for_icon(cast(GtkTreeExpander*)this._cPtr, indentForIcon);
   }
@@ -360,7 +360,7 @@ class TreeExpander : gtk.widget.Widget
       Params:
         listRow = a [gtk.tree_list_row.TreeListRow]
   */
-  void setListRow(gtk.tree_list_row.TreeListRow listRow = null)
+  void setListRow(gtk.tree_list_row.TreeListRow listRow = null) nothrow
   {
     gtk_tree_expander_set_list_row(cast(GtkTreeExpander*)this._cPtr, listRow ? cast(GtkTreeListRow*)listRow._cPtr(No.Dup) : null);
   }
@@ -377,7 +377,7 @@ class TreeExpanderGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The child widget with the actual contents.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -393,7 +393,7 @@ class TreeExpanderGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           GtkTreeListRow's model in order to hide the expander when a row has no children.
       Returns: Builder instance for fluent chaining
   */
-  T hideExpander(bool propval)
+  T hideExpander(bool propval) nothrow
   {
     return setProperty("hide-expander", propval);
   }
@@ -404,7 +404,7 @@ class TreeExpanderGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = TreeExpander indents the child according to its depth.
       Returns: Builder instance for fluent chaining
   */
-  T indentForDepth(bool propval)
+  T indentForDepth(bool propval) nothrow
   {
     return setProperty("indent-for-depth", propval);
   }
@@ -415,7 +415,7 @@ class TreeExpanderGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = TreeExpander indents the child by the width of an expander-icon if it is not expandable.
       Returns: Builder instance for fluent chaining
   */
-  T indentForIcon(bool propval)
+  T indentForIcon(bool propval) nothrow
   {
     return setProperty("indent-for-icon", propval);
   }
@@ -426,7 +426,7 @@ class TreeExpanderGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The list row to track for expander state.
       Returns: Builder instance for fluent chaining
   */
-  T listRow(gtk.tree_list_row.TreeListRow propval)
+  T listRow(gtk.tree_list_row.TreeListRow propval) nothrow
   {
     return setProperty("list-row", propval);
   }
@@ -439,7 +439,7 @@ final class TreeExpanderGidBuilder : TreeExpanderGidBuilderImpl!TreeExpanderGidB
       Create object from builder.
       Returns: New object
   */
-  TreeExpander build()
+  TreeExpander build() nothrow
   {
     return new TreeExpander(cast(void*)createGObject(TreeExpander._getGType), No.Take);
   }

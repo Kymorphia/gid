@@ -14,26 +14,26 @@ class S3FileSystem : arrow.file_system.FileSystem
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_s3_file_system_get_type != &gidSymbolNotFound ? garrow_s3_file_system_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override S3FileSystem self()
+  override S3FileSystem self() nothrow
   {
     return this;
   }
@@ -42,7 +42,7 @@ class S3FileSystem : arrow.file_system.FileSystem
       Get builder for [arrow.s3_file_system.S3FileSystem]
       Returns: New builder object
   */
-  static S3FileSystemGidBuilder builder()
+  static S3FileSystemGidBuilder builder() nothrow
   {
     return new S3FileSystemGidBuilder;
   }
@@ -60,7 +60,7 @@ final class S3FileSystemGidBuilder : S3FileSystemGidBuilderImpl!S3FileSystemGidB
       Create object from builder.
       Returns: New object
   */
-  S3FileSystem build()
+  S3FileSystem build() nothrow
   {
     return new S3FileSystem(cast(void*)createGObject(S3FileSystem._getGType), No.Take);
   }

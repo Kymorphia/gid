@@ -16,11 +16,8 @@ class SqlFunction
   GdaSqlFunction _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gda.sql_function.SqlFunction");
-
     _cInstance = *cast(GdaSqlFunction*)ptr;
 
     if (take)
@@ -28,7 +25,7 @@ class SqlFunction
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -37,7 +34,7 @@ class SqlFunction
       Get `functionName` field.
       Returns: name of the function , in the form [[catalog.]schema.]function_name
   */
-  @property string functionName()
+  @property string functionName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaSqlFunction*)this._cPtr).functionName);
   }
@@ -47,14 +44,14 @@ class SqlFunction
       Params:
         propval = name of the function , in the form [[catalog.]schema.]function_name
   */
-  @property void functionName(string propval)
+  @property void functionName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaSqlFunction*)this._cPtr).functionName);
     dToC(propval, cast(void*)&(cast(GdaSqlFunction*)this._cPtr).functionName);
   }
 
   /** */
-  void checkClean()
+  void checkClean() nothrow
   {
     gda_sql_function_check_clean(cast(GdaSqlFunction*)this._cPtr);
   }
@@ -64,7 +61,7 @@ class SqlFunction
       using [glib.global.gfree];
       Returns: a new string with the description of the function or "null" in case function is invalid.
   */
-  string serialize()
+  string serialize() nothrow
   {
     char* _cretval;
     _cretval = gda_sql_function_serialize(cast(GdaSqlFunction*)this._cPtr);
@@ -79,7 +76,7 @@ class SqlFunction
       Params:
         value = a #GValue holding a string to take from
   */
-  void takeName(gobject.value.Value value)
+  void takeName(gobject.value.Value value) nothrow
   {
     gda_sql_function_take_name(cast(GdaSqlFunction*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }

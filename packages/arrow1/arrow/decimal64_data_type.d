@@ -15,26 +15,26 @@ class Decimal64DataType : arrow.decimal_data_type.DecimalDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal64_data_type_get_type != &gidSymbolNotFound ? garrow_decimal64_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Decimal64DataType self()
+  override Decimal64DataType self() nothrow
   {
     return this;
   }
@@ -43,7 +43,7 @@ class Decimal64DataType : arrow.decimal_data_type.DecimalDataType
       Get builder for [arrow.decimal64_data_type.Decimal64DataType]
       Returns: New builder object
   */
-  static Decimal64DataTypeGidBuilder builder()
+  static Decimal64DataTypeGidBuilder builder() nothrow
   {
     return new Decimal64DataTypeGidBuilder;
   }
@@ -60,7 +60,7 @@ class Decimal64DataType : arrow.decimal_data_type.DecimalDataType
   }
 
   /** */
-  static int maxPrecision()
+  static int maxPrecision() nothrow
   {
     int _retval;
     _retval = garrow_decimal64_data_type_max_precision();
@@ -80,7 +80,7 @@ final class Decimal64DataTypeGidBuilder : Decimal64DataTypeGidBuilderImpl!Decima
       Create object from builder.
       Returns: New object
   */
-  Decimal64DataType build()
+  Decimal64DataType build() nothrow
   {
     return new Decimal64DataType(cast(void*)createGObject(Decimal64DataType._getGType), Yes.Take);
   }

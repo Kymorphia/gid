@@ -17,11 +17,8 @@ class AttrFontFeatures
   PangoAttrFontFeatures _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for pango.attr_font_features.AttrFontFeatures");
-
     _cInstance = *cast(PangoAttrFontFeatures*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class AttrFontFeatures
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class AttrFontFeatures
       Get `attr` field.
       Returns: the common portion of the attribute
   */
-  @property pango.attribute.Attribute attr()
+  @property pango.attribute.Attribute attr() nothrow
   {
     return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrFontFeatures*)this._cPtr).attr);
   }
@@ -47,7 +44,7 @@ class AttrFontFeatures
       Get `features` field.
       Returns: the features, as a string in CSS syntax
   */
-  @property string features()
+  @property string features() nothrow
   {
     return cToD!(string)(cast(void*)(cast(PangoAttrFontFeatures*)this._cPtr).features);
   }
@@ -57,7 +54,7 @@ class AttrFontFeatures
       Params:
         propval = the features, as a string in CSS syntax
   */
-  @property void features(string propval)
+  @property void features(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(PangoAttrFontFeatures*)this._cPtr).features);
     dToC(propval, cast(void*)&(cast(PangoAttrFontFeatures*)this._cPtr).features);
@@ -76,7 +73,7 @@ class AttrFontFeatures
           [pango.attribute.Attribute], which should be freed with
           [pango.attribute.Attribute.destroy]
   */
-  static pango.attribute.Attribute new_(string features)
+  static pango.attribute.Attribute new_(string features) nothrow
   {
     PangoAttribute* _cretval;
     const(char)* _features = features.toCString(No.Alloc);

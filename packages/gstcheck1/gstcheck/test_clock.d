@@ -161,26 +161,26 @@ class TestClock : gst.clock.Clock
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_test_clock_get_type != &gidSymbolNotFound ? gst_test_clock_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TestClock self()
+  override TestClock self() nothrow
   {
     return this;
   }
@@ -189,19 +189,19 @@ class TestClock : gst.clock.Clock
       Get builder for [gstcheck.test_clock.TestClock]
       Returns: New builder object
   */
-  static TestClockGidBuilder builder()
+  static TestClockGidBuilder builder() nothrow
   {
     return new TestClockGidBuilder;
   }
 
   /** */
-  @property gst.types.ClockType clockType()
+  @property gst.types.ClockType clockType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gst.types.ClockType)("clock-type");
   }
 
   /** */
-  @property void clockType(gst.types.ClockType propval)
+  @property void clockType(gst.types.ClockType propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gst.types.ClockType)("clock-type", propval);
   }
@@ -214,7 +214,7 @@ class TestClock : gst.clock.Clock
         [gstcheck.test_clock.TestClock.new_] was called the clock started at time zero, and thus
         this property contains the value 0.
   */
-  @property ulong startTime()
+  @property ulong startTime() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("start-time");
   }
@@ -225,7 +225,7 @@ class TestClock : gst.clock.Clock
       MT safe.
       Returns: a #GstTestClock cast to #GstClock.
   */
-  this()
+  this() nothrow
   {
     GstClock* _cretval;
     _cretval = gst_test_clock_new();
@@ -241,7 +241,7 @@ class TestClock : gst.clock.Clock
         startTime = a #GstClockTime set to the desired start time of the clock.
       Returns: a #GstTestClock cast to #GstClock.
   */
-  static gstcheck.test_clock.TestClock newWithStartTime(gst.types.ClockTime startTime)
+  static gstcheck.test_clock.TestClock newWithStartTime(gst.types.ClockTime startTime) nothrow
   {
     GstClock* _cretval;
     _cretval = gst_test_clock_new_with_start_time(startTime);
@@ -259,7 +259,7 @@ class TestClock : gst.clock.Clock
               of of pending #GstClockIDs
       Returns: 
   */
-  static gst.types.ClockTime idListGetLatestTime(gst.types.ClockID[] pendingList = null)
+  static gst.types.ClockTime idListGetLatestTime(gst.types.ClockID[] pendingList = null) nothrow
   {
     gst.types.ClockTime _retval;
     auto _pendingList = gListFromD!(gst.types.ClockID)(pendingList);
@@ -278,7 +278,7 @@ class TestClock : gst.clock.Clock
       Params:
         delta = a positive #GstClockTimeDiff to be added to the time of the clock
   */
-  void advanceTime(gst.types.ClockTimeDiff delta)
+  void advanceTime(gst.types.ClockTimeDiff delta) nothrow
   {
     gst_test_clock_advance_time(cast(GstTestClock*)this._cPtr, delta);
   }
@@ -295,7 +295,7 @@ class TestClock : gst.clock.Clock
         
         MT safe.
   */
-  bool crank()
+  bool crank() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_test_clock_crank(cast(GstTestClock*)this._cPtr);
@@ -310,7 +310,7 @@ class TestClock : gst.clock.Clock
         notification. If no clock notifications have been requested
         [gst.types.CLOCK_TIME_NONE] will be returned.
   */
-  gst.types.ClockTime getNextEntryTime()
+  gst.types.ClockTime getNextEntryTime() nothrow
   {
     gst.types.ClockTime _retval;
     _retval = gst_test_clock_get_next_entry_time(cast(GstTestClock*)this._cPtr);
@@ -328,7 +328,7 @@ class TestClock : gst.clock.Clock
       Returns: true if the clock has been asked to provide the given clock
         notification, false otherwise.
   */
-  bool hasId(gst.types.ClockID id)
+  bool hasId(gst.types.ClockID id) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_test_clock_has_id(cast(GstTestClock*)this._cPtr, id);
@@ -342,7 +342,7 @@ class TestClock : gst.clock.Clock
       MT safe.
       Returns: the number of pending clock notifications.
   */
-  uint peekIdCount()
+  uint peekIdCount() nothrow
   {
     uint _retval;
     _retval = gst_test_clock_peek_id_count(cast(GstTestClock*)this._cPtr);
@@ -361,7 +361,7 @@ class TestClock : gst.clock.Clock
       Returns: true if pending_id is the next clock notification to be
         triggered, false otherwise.
   */
-  bool peekNextPendingId(out gst.types.ClockID pendingId)
+  bool peekNextPendingId(out gst.types.ClockID pendingId) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_test_clock_peek_next_pending_id(cast(GstTestClock*)this._cPtr, cast(GstClockID*)&pendingId);
@@ -377,7 +377,7 @@ class TestClock : gst.clock.Clock
         pendingId = #GstClockID
       Returns: 
   */
-  bool processId(gst.types.ClockID pendingId)
+  bool processId(gst.types.ClockID pendingId) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_test_clock_process_id(cast(GstTestClock*)this._cPtr, pendingId);
@@ -394,7 +394,7 @@ class TestClock : gst.clock.Clock
               of pending #GstClockIDs
       Returns: 
   */
-  uint processIdList(gst.types.ClockID[] pendingList = null)
+  uint processIdList(gst.types.ClockID[] pendingList = null) nothrow
   {
     uint _retval;
     auto _pendingList = gListFromD!(gst.types.ClockID)(pendingList);
@@ -408,7 +408,7 @@ class TestClock : gst.clock.Clock
       Returns: a #GstClockID containing the next pending clock
         notification.
   */
-  gst.types.ClockID processNextClockId()
+  gst.types.ClockID processNextClockId() nothrow
   {
     gst.types.ClockID _retval;
     _retval = gst_test_clock_process_next_clock_id(cast(GstTestClock*)this._cPtr);
@@ -426,7 +426,7 @@ class TestClock : gst.clock.Clock
       Params:
         newTime = a #GstClockTime later than that returned by [gst.clock.Clock.getTime]
   */
-  void setTime(gst.types.ClockTime newTime)
+  void setTime(gst.types.ClockTime newTime) nothrow
   {
     gst_test_clock_set_time(cast(GstTestClock*)this._cPtr, newTime);
   }
@@ -446,7 +446,7 @@ class TestClock : gst.clock.Clock
       Returns: a gboolean true if the waits have been registered, false if not.
         (Could be that it timed out waiting or that more waits than waits was found)
   */
-  bool timedWaitForMultiplePendingIds(uint count, uint timeoutMs, out gst.types.ClockID[] pendingList)
+  bool timedWaitForMultiplePendingIds(uint count, uint timeoutMs, out gst.types.ClockID[] pendingList) nothrow
   {
     bool _retval;
     GList* _pendingList;
@@ -468,7 +468,7 @@ class TestClock : gst.clock.Clock
               of a #GList pointer variable to store the list of pending #GstClockIDs
               that expired, or null
   */
-  void waitForMultiplePendingIds(uint count, out gst.types.ClockID[] pendingList)
+  void waitForMultiplePendingIds(uint count, out gst.types.ClockID[] pendingList) nothrow
   {
     GList* _pendingList;
     gst_test_clock_wait_for_multiple_pending_ids(cast(GstTestClock*)this._cPtr, count, &_pendingList);
@@ -486,7 +486,7 @@ class TestClock : gst.clock.Clock
         pendingId = #GstClockID
           with information about the pending clock notification
   */
-  void waitForNextPendingId(out gst.types.ClockID pendingId)
+  void waitForNextPendingId(out gst.types.ClockID pendingId) nothrow
   {
     gst_test_clock_wait_for_next_pending_id(cast(GstTestClock*)this._cPtr, cast(GstClockID*)&pendingId);
   }
@@ -501,7 +501,7 @@ class TestClock : gst.clock.Clock
   
       Deprecated: use [gstcheck.test_clock.TestClock.waitForMultiplePendingIds] instead.
   */
-  void waitForPendingIdCount(uint count)
+  void waitForPendingIdCount(uint count) nothrow
   {
     gst_test_clock_wait_for_pending_id_count(cast(GstTestClock*)this._cPtr, count);
   }
@@ -512,7 +512,7 @@ class TestClockGidBuilderImpl(T) : gst.clock.ClockGidBuilderImpl!T
 {
 
   /** */
-  T clockType(gst.types.ClockType propval)
+  T clockType(gst.types.ClockType propval) nothrow
   {
     return setProperty("clock-type", propval);
   }
@@ -527,7 +527,7 @@ class TestClockGidBuilderImpl(T) : gst.clock.ClockGidBuilderImpl!T
           this property contains the value 0.
       Returns: Builder instance for fluent chaining
   */
-  T startTime(ulong propval)
+  T startTime(ulong propval) nothrow
   {
     return setProperty("start-time", propval);
   }
@@ -540,7 +540,7 @@ final class TestClockGidBuilder : TestClockGidBuilderImpl!TestClockGidBuilder
       Create object from builder.
       Returns: New object
   */
-  TestClock build()
+  TestClock build() nothrow
   {
     return new TestClock(cast(void*)createGObject(TestClock._getGType), Yes.Take);
   }

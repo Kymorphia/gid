@@ -17,18 +17,15 @@ class ToplevelSize
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gdk.toplevel_size.ToplevelSize");
-
     _cInstancePtr = cast(GdkToplevelSize*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -46,7 +43,7 @@ class ToplevelSize
         boundsWidth = return location for width
         boundsHeight = return location for height
   */
-  void getBounds(out int boundsWidth, out int boundsHeight)
+  void getBounds(out int boundsWidth, out int boundsHeight) nothrow
   {
     gdk_toplevel_size_get_bounds(cast(GdkToplevelSize*)this._cPtr, cast(int*)&boundsWidth, cast(int*)&boundsHeight);
   }
@@ -66,7 +63,7 @@ class ToplevelSize
         minWidth = the minimum width
         minHeight = the minimum height
   */
-  void setMinSize(int minWidth, int minHeight)
+  void setMinSize(int minWidth, int minHeight) nothrow
   {
     gdk_toplevel_size_set_min_size(cast(GdkToplevelSize*)this._cPtr, minWidth, minHeight);
   }
@@ -87,7 +84,7 @@ class ToplevelSize
         top = height of the top part of the shadow
         bottom = height of the bottom part of the shadow
   */
-  void setShadowWidth(int left, int right, int top, int bottom)
+  void setShadowWidth(int left, int right, int top, int bottom) nothrow
   {
     gdk_toplevel_size_set_shadow_width(cast(GdkToplevelSize*)this._cPtr, left, right, top, bottom);
   }
@@ -104,7 +101,7 @@ class ToplevelSize
         width = the width
         height = the height
   */
-  void setSize(int width, int height)
+  void setSize(int width, int height) nothrow
   {
     gdk_toplevel_size_set_size(cast(GdkToplevelSize*)this._cPtr, width, height);
   }

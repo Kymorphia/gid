@@ -26,26 +26,26 @@ class Server : gobject.object.ObjectWrap, arrowflight.servable.Servable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_server_get_type != &gidSymbolNotFound ? gaflight_server_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Server self()
+  override Server self() nothrow
   {
     return this;
   }
@@ -54,7 +54,7 @@ class Server : gobject.object.ObjectWrap, arrowflight.servable.Servable
       Get builder for [arrowflight.server.Server]
       Returns: New builder object
   */
-  static ServerGidBuilder builder()
+  static ServerGidBuilder builder() nothrow
   {
     return new ServerGidBuilder;
   }
@@ -106,7 +106,7 @@ class Server : gobject.object.ObjectWrap, arrowflight.servable.Servable
   }
 
   /** */
-  int getPort()
+  int getPort() nothrow
   {
     int _retval;
     _retval = gaflight_server_get_port(cast(GAFlightServer*)this._cPtr);
@@ -178,7 +178,7 @@ final class ServerGidBuilder : ServerGidBuilderImpl!ServerGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Server build()
+  Server build() nothrow
   {
     return new Server(cast(void*)createGObject(Server._getGType), No.Take);
   }

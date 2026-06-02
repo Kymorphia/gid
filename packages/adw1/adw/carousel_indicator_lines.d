@@ -42,26 +42,26 @@ class CarouselIndicatorLines : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_carousel_indicator_lines_get_type != &gidSymbolNotFound ? adw_carousel_indicator_lines_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CarouselIndicatorLines self()
+  override CarouselIndicatorLines self() nothrow
   {
     return this;
   }
@@ -70,7 +70,7 @@ class CarouselIndicatorLines : gtk.widget.Widget, gtk.orientable.Orientable
       Get builder for [adw.carousel_indicator_lines.CarouselIndicatorLines]
       Returns: New builder object
   */
-  static CarouselIndicatorLinesGidBuilder builder()
+  static CarouselIndicatorLinesGidBuilder builder() nothrow
   {
     return new CarouselIndicatorLinesGidBuilder;
   }
@@ -79,7 +79,7 @@ class CarouselIndicatorLines : gtk.widget.Widget, gtk.orientable.Orientable
       Get `carousel` property.
       Returns: The displayed carousel.
   */
-  @property adw.carousel.Carousel carousel()
+  @property adw.carousel.Carousel carousel() nothrow
   {
     return getCarousel();
   }
@@ -89,7 +89,7 @@ class CarouselIndicatorLines : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         propval = The displayed carousel.
   */
-  @property void carousel(adw.carousel.Carousel propval)
+  @property void carousel(adw.carousel.Carousel propval) nothrow
   {
     setCarousel(propval);
   }
@@ -100,7 +100,7 @@ class CarouselIndicatorLines : gtk.widget.Widget, gtk.orientable.Orientable
       Creates a new [adw.carousel_indicator_lines.CarouselIndicatorLines].
       Returns: the newly created [adw.carousel_indicator_lines.CarouselIndicatorLines]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_carousel_indicator_lines_new();
@@ -111,7 +111,7 @@ class CarouselIndicatorLines : gtk.widget.Widget, gtk.orientable.Orientable
       Gets the displayed carousel.
       Returns: the displayed carousel
   */
-  adw.carousel.Carousel getCarousel()
+  adw.carousel.Carousel getCarousel() nothrow
   {
     AdwCarousel* _cretval;
     _cretval = adw_carousel_indicator_lines_get_carousel(cast(AdwCarouselIndicatorLines*)this._cPtr);
@@ -125,7 +125,7 @@ class CarouselIndicatorLines : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         carousel = a carousel
   */
-  void setCarousel(adw.carousel.Carousel carousel = null)
+  void setCarousel(adw.carousel.Carousel carousel = null) nothrow
   {
     adw_carousel_indicator_lines_set_carousel(cast(AdwCarouselIndicatorLines*)this._cPtr, carousel ? cast(AdwCarousel*)carousel._cPtr(No.Dup) : null);
   }
@@ -143,7 +143,7 @@ class CarouselIndicatorLinesGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!
         propval = The displayed carousel.
       Returns: Builder instance for fluent chaining
   */
-  T carousel(adw.carousel.Carousel propval)
+  T carousel(adw.carousel.Carousel propval) nothrow
   {
     return setProperty("carousel", propval);
   }
@@ -156,7 +156,7 @@ final class CarouselIndicatorLinesGidBuilder : CarouselIndicatorLinesGidBuilderI
       Create object from builder.
       Returns: New object
   */
-  CarouselIndicatorLines build()
+  CarouselIndicatorLines build() nothrow
   {
     return new CarouselIndicatorLines(cast(void*)createGObject(CarouselIndicatorLines._getGType), No.Take);
   }

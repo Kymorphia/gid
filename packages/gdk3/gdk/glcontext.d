@@ -69,26 +69,26 @@ class GLContext : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_gl_context_get_type != &gidSymbolNotFound ? gdk_gl_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLContext self()
+  override GLContext self() nothrow
   {
     return this;
   }
@@ -97,7 +97,7 @@ class GLContext : gobject.object.ObjectWrap
       Get builder for [gdk.glcontext.GLContext]
       Returns: New builder object
   */
-  static GLContextGidBuilder builder()
+  static GLContextGidBuilder builder() nothrow
   {
     return new GLContextGidBuilder;
   }
@@ -106,7 +106,7 @@ class GLContext : gobject.object.ObjectWrap
       Get `display` property.
       Returns: The #GdkDisplay used to create the #GdkGLContext.
   */
-  @property gdk.display.Display display()
+  @property gdk.display.Display display() nothrow
   {
     return getDisplay();
   }
@@ -115,7 +115,7 @@ class GLContext : gobject.object.ObjectWrap
       Get `sharedContext` property.
       Returns: The #GdkGLContext that this context is sharing data with, or null
   */
-  @property gdk.glcontext.GLContext sharedContext()
+  @property gdk.glcontext.GLContext sharedContext() nothrow
   {
     return getSharedContext();
   }
@@ -124,7 +124,7 @@ class GLContext : gobject.object.ObjectWrap
       Get `window` property.
       Returns: The #GdkWindow the gl context is bound to.
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return getWindow();
   }
@@ -135,7 +135,7 @@ class GLContext : gobject.object.ObjectWrap
       Any OpenGL call after this function returns will be ignored
       until [gdk.glcontext.GLContext.makeCurrent] is called.
   */
-  static void clearCurrent()
+  static void clearCurrent() nothrow
   {
     gdk_gl_context_clear_current();
   }
@@ -144,7 +144,7 @@ class GLContext : gobject.object.ObjectWrap
       Retrieves the current #GdkGLContext.
       Returns: the current #GdkGLContext, or null
   */
-  static gdk.glcontext.GLContext getCurrent()
+  static gdk.glcontext.GLContext getCurrent() nothrow
   {
     GdkGLContext* _cretval;
     _cretval = gdk_gl_context_get_current();
@@ -156,7 +156,7 @@ class GLContext : gobject.object.ObjectWrap
       Retrieves the value set using [gdk.glcontext.GLContext.setDebugEnabled].
       Returns: true if debugging is enabled
   */
-  bool getDebugEnabled()
+  bool getDebugEnabled() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_gl_context_get_debug_enabled(cast(GdkGLContext*)this._cPtr);
@@ -167,7 +167,7 @@ class GLContext : gobject.object.ObjectWrap
       Retrieves the #GdkDisplay the context is created for
       Returns: a #GdkDisplay or null
   */
-  gdk.display.Display getDisplay()
+  gdk.display.Display getDisplay() nothrow
   {
     GdkDisplay* _cretval;
     _cretval = gdk_gl_context_get_display(cast(GdkGLContext*)this._cPtr);
@@ -179,7 +179,7 @@ class GLContext : gobject.object.ObjectWrap
       Retrieves the value set using [gdk.glcontext.GLContext.setForwardCompatible].
       Returns: true if the context should be forward compatible
   */
-  bool getForwardCompatible()
+  bool getForwardCompatible() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_gl_context_get_forward_compatible(cast(GdkGLContext*)this._cPtr);
@@ -194,7 +194,7 @@ class GLContext : gobject.object.ObjectWrap
         major = return location for the major version to request
         minor = return location for the minor version to request
   */
-  void getRequiredVersion(out int major, out int minor)
+  void getRequiredVersion(out int major, out int minor) nothrow
   {
     gdk_gl_context_get_required_version(cast(GdkGLContext*)this._cPtr, cast(int*)&major, cast(int*)&minor);
   }
@@ -203,7 +203,7 @@ class GLContext : gobject.object.ObjectWrap
       Retrieves the #GdkGLContext that this context share data with.
       Returns: a #GdkGLContext or null
   */
-  gdk.glcontext.GLContext getSharedContext()
+  gdk.glcontext.GLContext getSharedContext() nothrow
   {
     GdkGLContext* _cretval;
     _cretval = gdk_gl_context_get_shared_context(cast(GdkGLContext*)this._cPtr);
@@ -215,7 +215,7 @@ class GLContext : gobject.object.ObjectWrap
       Checks whether the context is using an OpenGL or OpenGL ES profile.
       Returns: true if the #GdkGLContext is using an OpenGL ES profile
   */
-  bool getUseEs()
+  bool getUseEs() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_gl_context_get_use_es(cast(GdkGLContext*)this._cPtr);
@@ -231,7 +231,7 @@ class GLContext : gobject.object.ObjectWrap
         major = return location for the major version
         minor = return location for the minor version
   */
-  void getVersion(out int major, out int minor)
+  void getVersion(out int major, out int minor) nothrow
   {
     gdk_gl_context_get_version(cast(GdkGLContext*)this._cPtr, cast(int*)&major, cast(int*)&minor);
   }
@@ -240,7 +240,7 @@ class GLContext : gobject.object.ObjectWrap
       Retrieves the #GdkWindow used by the context.
       Returns: a #GdkWindow or null
   */
-  gdk.window.Window getWindow()
+  gdk.window.Window getWindow() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gdk_gl_context_get_window(cast(GdkGLContext*)this._cPtr);
@@ -267,7 +267,7 @@ class GLContext : gobject.object.ObjectWrap
       kind of shader programs to load.
       Returns: true if the GL context is in legacy mode
   */
-  bool isLegacy()
+  bool isLegacy() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_gl_context_is_legacy(cast(GdkGLContext*)this._cPtr);
@@ -277,7 +277,7 @@ class GLContext : gobject.object.ObjectWrap
   /**
       Makes the context the current one.
   */
-  void makeCurrent()
+  void makeCurrent() nothrow
   {
     gdk_gl_context_make_current(cast(GdkGLContext*)this._cPtr);
   }
@@ -310,7 +310,7 @@ class GLContext : gobject.object.ObjectWrap
       Params:
         enabled = whether to enable debugging in the context
   */
-  void setDebugEnabled(bool enabled)
+  void setDebugEnabled(bool enabled) nothrow
   {
     gdk_gl_context_set_debug_enabled(cast(GdkGLContext*)this._cPtr, enabled);
   }
@@ -329,7 +329,7 @@ class GLContext : gobject.object.ObjectWrap
       Params:
         compatible = whether the context should be forward compatible
   */
-  void setForwardCompatible(bool compatible)
+  void setForwardCompatible(bool compatible) nothrow
   {
     gdk_gl_context_set_forward_compatible(cast(GdkGLContext*)this._cPtr, compatible);
   }
@@ -346,7 +346,7 @@ class GLContext : gobject.object.ObjectWrap
         major = the major version to request
         minor = the minor version to request
   */
-  void setRequiredVersion(int major, int minor)
+  void setRequiredVersion(int major, int minor) nothrow
   {
     gdk_gl_context_set_required_version(cast(GdkGLContext*)this._cPtr, major, minor);
   }
@@ -369,7 +369,7 @@ class GLContext : gobject.object.ObjectWrap
         useEs = whether the context should use OpenGL ES instead of OpenGL,
             or -1 to allow auto-detection
   */
-  void setUseEs(int useEs)
+  void setUseEs(int useEs) nothrow
   {
     gdk_gl_context_set_use_es(cast(GdkGLContext*)this._cPtr, useEs);
   }
@@ -385,7 +385,7 @@ class GLContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The #GdkDisplay used to create the #GdkGLContext.
       Returns: Builder instance for fluent chaining
   */
-  T display(gdk.display.Display propval)
+  T display(gdk.display.Display propval) nothrow
   {
     return setProperty("display", propval);
   }
@@ -396,7 +396,7 @@ class GLContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The #GdkGLContext that this context is sharing data with, or null
       Returns: Builder instance for fluent chaining
   */
-  T sharedContext(gdk.glcontext.GLContext propval)
+  T sharedContext(gdk.glcontext.GLContext propval) nothrow
   {
     return setProperty("shared-context", propval);
   }
@@ -407,7 +407,7 @@ class GLContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The #GdkWindow the gl context is bound to.
       Returns: Builder instance for fluent chaining
   */
-  T window(gdk.window.Window propval)
+  T window(gdk.window.Window propval) nothrow
   {
     return setProperty("window", propval);
   }
@@ -420,7 +420,7 @@ final class GLContextGidBuilder : GLContextGidBuilderImpl!GLContextGidBuilder
       Create object from builder.
       Returns: New object
   */
-  GLContext build()
+  GLContext build() nothrow
   {
     return new GLContext(cast(void*)createGObject(GLContext._getGType), No.Take);
   }

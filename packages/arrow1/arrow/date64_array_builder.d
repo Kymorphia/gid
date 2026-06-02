@@ -15,26 +15,26 @@ class Date64ArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_date64_array_builder_get_type != &gidSymbolNotFound ? garrow_date64_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Date64ArrayBuilder self()
+  override Date64ArrayBuilder self() nothrow
   {
     return this;
   }
@@ -43,13 +43,13 @@ class Date64ArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.date64_array_builder.Date64ArrayBuilder]
       Returns: New builder object
   */
-  static Date64ArrayBuilderGidBuilder builder()
+  static Date64ArrayBuilderGidBuilder builder() nothrow
   {
     return new Date64ArrayBuilderGidBuilder;
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GArrowDate64ArrayBuilder* _cretval;
     _cretval = garrow_date64_array_builder_new();
@@ -125,7 +125,7 @@ final class Date64ArrayBuilderGidBuilder : Date64ArrayBuilderGidBuilderImpl!Date
       Create object from builder.
       Returns: New object
   */
-  Date64ArrayBuilder build()
+  Date64ArrayBuilder build() nothrow
   {
     return new Date64ArrayBuilder(cast(void*)createGObject(Date64ArrayBuilder._getGType), Yes.Take);
   }

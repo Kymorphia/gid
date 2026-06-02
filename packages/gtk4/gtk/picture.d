@@ -71,26 +71,26 @@ class Picture : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_picture_get_type != &gidSymbolNotFound ? gtk_picture_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Picture self()
+  override Picture self() nothrow
   {
     return this;
   }
@@ -99,7 +99,7 @@ class Picture : gtk.widget.Widget
       Get builder for [gtk.picture.Picture]
       Returns: New builder object
   */
-  static PictureGidBuilder builder()
+  static PictureGidBuilder builder() nothrow
   {
     return new PictureGidBuilder;
   }
@@ -108,7 +108,7 @@ class Picture : gtk.widget.Widget
       Get `alternativeText` property.
       Returns: The alternative textual description for the picture.
   */
-  @property string alternativeText()
+  @property string alternativeText() nothrow
   {
     return getAlternativeText();
   }
@@ -118,7 +118,7 @@ class Picture : gtk.widget.Widget
       Params:
         propval = The alternative textual description for the picture.
   */
-  @property void alternativeText(string propval)
+  @property void alternativeText(string propval) nothrow
   {
     setAlternativeText(propval);
   }
@@ -127,7 +127,7 @@ class Picture : gtk.widget.Widget
       Get `canShrink` property.
       Returns: If the [gtk.picture.Picture] can be made smaller than the natural size of its contents.
   */
-  @property bool canShrink()
+  @property bool canShrink() nothrow
   {
     return getCanShrink();
   }
@@ -137,7 +137,7 @@ class Picture : gtk.widget.Widget
       Params:
         propval = If the [gtk.picture.Picture] can be made smaller than the natural size of its contents.
   */
-  @property void canShrink(bool propval)
+  @property void canShrink(bool propval) nothrow
   {
     setCanShrink(propval);
   }
@@ -146,7 +146,7 @@ class Picture : gtk.widget.Widget
       Get `contentFit` property.
       Returns: How the content should be resized to fit inside the [gtk.picture.Picture].
   */
-  @property gtk.types.ContentFit contentFit()
+  @property gtk.types.ContentFit contentFit() nothrow
   {
     return getContentFit();
   }
@@ -156,7 +156,7 @@ class Picture : gtk.widget.Widget
       Params:
         propval = How the content should be resized to fit inside the [gtk.picture.Picture].
   */
-  @property void contentFit(gtk.types.ContentFit propval)
+  @property void contentFit(gtk.types.ContentFit propval) nothrow
   {
     setContentFit(propval);
   }
@@ -165,7 +165,7 @@ class Picture : gtk.widget.Widget
       Get `file` property.
       Returns: The [gio.file.File] that is displayed or null if none.
   */
-  @property gio.file.File file()
+  @property gio.file.File file() nothrow
   {
     return getFile();
   }
@@ -175,7 +175,7 @@ class Picture : gtk.widget.Widget
       Params:
         propval = The [gio.file.File] that is displayed or null if none.
   */
-  @property void file(gio.file.File propval)
+  @property void file(gio.file.File propval) nothrow
   {
     setFile(propval);
   }
@@ -187,7 +187,7 @@ class Picture : gtk.widget.Widget
   
       Deprecated: Use [gtk.picture.Picture.contentFit] instead.
   */
-  @property bool keepAspectRatio()
+  @property bool keepAspectRatio() nothrow
   {
     return getKeepAspectRatio();
   }
@@ -200,7 +200,7 @@ class Picture : gtk.widget.Widget
   
       Deprecated: Use [gtk.picture.Picture.contentFit] instead.
   */
-  @property void keepAspectRatio(bool propval)
+  @property void keepAspectRatio(bool propval) nothrow
   {
     setKeepAspectRatio(propval);
   }
@@ -209,7 +209,7 @@ class Picture : gtk.widget.Widget
       Get `paintable` property.
       Returns: The [gdk.paintable.Paintable] to be displayed by this [gtk.picture.Picture].
   */
-  @property gdk.paintable.Paintable paintable()
+  @property gdk.paintable.Paintable paintable() nothrow
   {
     return getPaintable();
   }
@@ -219,7 +219,7 @@ class Picture : gtk.widget.Widget
       Params:
         propval = The [gdk.paintable.Paintable] to be displayed by this [gtk.picture.Picture].
   */
-  @property void paintable(gdk.paintable.Paintable propval)
+  @property void paintable(gdk.paintable.Paintable propval) nothrow
   {
     setPaintable(propval);
   }
@@ -228,7 +228,7 @@ class Picture : gtk.widget.Widget
       Creates a new empty [gtk.picture.Picture] widget.
       Returns: a newly created [gtk.picture.Picture] widget.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_picture_new();
@@ -249,7 +249,7 @@ class Picture : gtk.widget.Widget
         file = a [gio.file.File]
       Returns: a new [gtk.picture.Picture]
   */
-  static gtk.picture.Picture newForFile(gio.file.File file = null)
+  static gtk.picture.Picture newForFile(gio.file.File file = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_picture_new_for_file(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
@@ -267,7 +267,7 @@ class Picture : gtk.widget.Widget
         filename = a filename
       Returns: a new [gtk.picture.Picture]
   */
-  static gtk.picture.Picture newForFilename(string filename = null)
+  static gtk.picture.Picture newForFilename(string filename = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
@@ -286,7 +286,7 @@ class Picture : gtk.widget.Widget
         paintable = a [gdk.paintable.Paintable]
       Returns: a new [gtk.picture.Picture]
   */
-  static gtk.picture.Picture newForPaintable(gdk.paintable.Paintable paintable = null)
+  static gtk.picture.Picture newForPaintable(gdk.paintable.Paintable paintable = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_picture_new_for_paintable(paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable)._cPtr(No.Dup) : null);
@@ -309,7 +309,7 @@ class Picture : gtk.widget.Widget
       Deprecated: Use [gtk.picture.Picture.newForPaintable] and
           [gdk.texture.Texture.newForPixbuf] instead
   */
-  static gtk.picture.Picture newForPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
+  static gtk.picture.Picture newForPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_picture_new_for_pixbuf(pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
@@ -327,7 +327,7 @@ class Picture : gtk.widget.Widget
         resourcePath = resource path to play back
       Returns: a new [gtk.picture.Picture]
   */
-  static gtk.picture.Picture newForResource(string resourcePath = null)
+  static gtk.picture.Picture newForResource(string resourcePath = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
@@ -342,7 +342,7 @@ class Picture : gtk.widget.Widget
       The returned string will be null if the picture cannot be described textually.
       Returns: the alternative textual description of self.
   */
-  string getAlternativeText()
+  string getAlternativeText() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_picture_get_alternative_text(cast(GtkPicture*)this._cPtr);
@@ -354,7 +354,7 @@ class Picture : gtk.widget.Widget
       Returns whether the [gtk.picture.Picture] respects its contents size.
       Returns: true if the picture can be made smaller than its contents
   */
-  bool getCanShrink()
+  bool getCanShrink() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_picture_get_can_shrink(cast(GtkPicture*)this._cPtr);
@@ -367,7 +367,7 @@ class Picture : gtk.widget.Widget
       See [gtk.types.ContentFit] for details.
       Returns: the content fit mode
   */
-  gtk.types.ContentFit getContentFit()
+  gtk.types.ContentFit getContentFit() nothrow
   {
     GtkContentFit _cretval;
     _cretval = gtk_picture_get_content_fit(cast(GtkPicture*)this._cPtr);
@@ -382,7 +382,7 @@ class Picture : gtk.widget.Widget
       [gtk.picture.Picture.setPaintable] was used, then null is returned.
       Returns: The [gio.file.File] displayed by self.
   */
-  gio.file.File getFile()
+  gio.file.File getFile() nothrow
   {
     GFile* _cretval;
     _cretval = gtk_picture_get_file(cast(GtkPicture*)this._cPtr);
@@ -398,7 +398,7 @@ class Picture : gtk.widget.Widget
           now return `FALSE` only if [gtk.picture.Picture.contentFit] is
           [gtk.types.ContentFit.Fill]. Returns `TRUE` otherwise.
   */
-  bool getKeepAspectRatio()
+  bool getKeepAspectRatio() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_picture_get_keep_aspect_ratio(cast(GtkPicture*)this._cPtr);
@@ -409,7 +409,7 @@ class Picture : gtk.widget.Widget
       Gets the [gdk.paintable.Paintable] being displayed by the [gtk.picture.Picture].
       Returns: the displayed paintable
   */
-  gdk.paintable.Paintable getPaintable()
+  gdk.paintable.Paintable getPaintable() nothrow
   {
     GdkPaintable* _cretval;
     _cretval = gtk_picture_get_paintable(cast(GtkPicture*)this._cPtr);
@@ -429,7 +429,7 @@ class Picture : gtk.widget.Widget
       Params:
         alternativeText = a textual description of the contents
   */
-  void setAlternativeText(string alternativeText = null)
+  void setAlternativeText(string alternativeText = null) nothrow
   {
     const(char)* _alternativeText = alternativeText.toCString(No.Alloc);
     gtk_picture_set_alternative_text(cast(GtkPicture*)this._cPtr, _alternativeText);
@@ -450,7 +450,7 @@ class Picture : gtk.widget.Widget
       Params:
         canShrink = if self can be made smaller than its contents
   */
-  void setCanShrink(bool canShrink)
+  void setCanShrink(bool canShrink) nothrow
   {
     gtk_picture_set_can_shrink(cast(GtkPicture*)this._cPtr, canShrink);
   }
@@ -463,7 +463,7 @@ class Picture : gtk.widget.Widget
       Params:
         contentFit = the content fit mode
   */
-  void setContentFit(gtk.types.ContentFit contentFit)
+  void setContentFit(gtk.types.ContentFit contentFit) nothrow
   {
     gtk_picture_set_content_fit(cast(GtkPicture*)this._cPtr, contentFit);
   }
@@ -476,7 +476,7 @@ class Picture : gtk.widget.Widget
       Params:
         file = a [gio.file.File]
   */
-  void setFile(gio.file.File file = null)
+  void setFile(gio.file.File file = null) nothrow
   {
     gtk_picture_set_file(cast(GtkPicture*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
   }
@@ -489,7 +489,7 @@ class Picture : gtk.widget.Widget
       Params:
         filename = the filename to play
   */
-  void setFilename(string filename = null)
+  void setFilename(string filename = null) nothrow
   {
     const(char)* _filename = filename.toCString(No.Alloc);
     gtk_picture_set_filename(cast(GtkPicture*)this._cPtr, _filename);
@@ -513,7 +513,7 @@ class Picture : gtk.widget.Widget
           property to [gtk.types.ContentFit.Contain] if keep_aspect_ratio is true,
           otherwise it will set it to [gtk.types.ContentFit.Fill].
   */
-  void setKeepAspectRatio(bool keepAspectRatio)
+  void setKeepAspectRatio(bool keepAspectRatio) nothrow
   {
     gtk_picture_set_keep_aspect_ratio(cast(GtkPicture*)this._cPtr, keepAspectRatio);
   }
@@ -528,7 +528,7 @@ class Picture : gtk.widget.Widget
       Params:
         paintable = a [gdk.paintable.Paintable]
   */
-  void setPaintable(gdk.paintable.Paintable paintable = null)
+  void setPaintable(gdk.paintable.Paintable paintable = null) nothrow
   {
     gtk_picture_set_paintable(cast(GtkPicture*)this._cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable)._cPtr(No.Dup) : null);
   }
@@ -545,7 +545,7 @@ class Picture : gtk.widget.Widget
   
       Deprecated: Use [gtk.picture.Picture.setPaintable] instead
   */
-  void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
+  void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null) nothrow
   {
     gtk_picture_set_pixbuf(cast(GtkPicture*)this._cPtr, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
@@ -559,7 +559,7 @@ class Picture : gtk.widget.Widget
       Params:
         resourcePath = the resource to set
   */
-  void setResource(string resourcePath = null)
+  void setResource(string resourcePath = null) nothrow
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     gtk_picture_set_resource(cast(GtkPicture*)this._cPtr, _resourcePath);
@@ -577,7 +577,7 @@ class PictureGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The alternative textual description for the picture.
       Returns: Builder instance for fluent chaining
   */
-  T alternativeText(string propval)
+  T alternativeText(string propval) nothrow
   {
     return setProperty("alternative-text", propval);
   }
@@ -588,7 +588,7 @@ class PictureGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = If the [gtk.picture.Picture] can be made smaller than the natural size of its contents.
       Returns: Builder instance for fluent chaining
   */
-  T canShrink(bool propval)
+  T canShrink(bool propval) nothrow
   {
     return setProperty("can-shrink", propval);
   }
@@ -599,7 +599,7 @@ class PictureGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = How the content should be resized to fit inside the [gtk.picture.Picture].
       Returns: Builder instance for fluent chaining
   */
-  T contentFit(gtk.types.ContentFit propval)
+  T contentFit(gtk.types.ContentFit propval) nothrow
   {
     return setProperty("content-fit", propval);
   }
@@ -610,7 +610,7 @@ class PictureGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The [gio.file.File] that is displayed or null if none.
       Returns: Builder instance for fluent chaining
   */
-  T file(gio.file.File propval)
+  T file(gio.file.File propval) nothrow
   {
     return setProperty("file", propval);
   }
@@ -624,7 +624,7 @@ class PictureGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
   
       Deprecated: Use [gtk.picture.Picture.contentFit] instead.
   */
-  T keepAspectRatio(bool propval)
+  T keepAspectRatio(bool propval) nothrow
   {
     return setProperty("keep-aspect-ratio", propval);
   }
@@ -635,7 +635,7 @@ class PictureGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The [gdk.paintable.Paintable] to be displayed by this [gtk.picture.Picture].
       Returns: Builder instance for fluent chaining
   */
-  T paintable(gdk.paintable.Paintable propval)
+  T paintable(gdk.paintable.Paintable propval) nothrow
   {
     return setProperty("paintable", propval);
   }
@@ -648,7 +648,7 @@ final class PictureGidBuilder : PictureGidBuilderImpl!PictureGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Picture build()
+  Picture build() nothrow
   {
     return new Picture(cast(void*)createGObject(Picture._getGType), No.Take);
   }

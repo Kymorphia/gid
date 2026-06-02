@@ -45,26 +45,26 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scale_button_get_type != &gidSymbolNotFound ? gtk_scale_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ScaleButton self()
+  override ScaleButton self() nothrow
   {
     return this;
   }
@@ -73,7 +73,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Get builder for [gtk.scale_button.ScaleButton]
       Returns: New builder object
   */
-  static ScaleButtonGidBuilder builder()
+  static ScaleButtonGidBuilder builder() nothrow
   {
     return new ScaleButtonGidBuilder;
   }
@@ -82,7 +82,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Get `active` property.
       Returns: If the scale button should be pressed in.
   */
-  @property bool active()
+  @property bool active() nothrow
   {
     return getActive();
   }
@@ -91,7 +91,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Get `adjustment` property.
       Returns: The [gtk.adjustment.Adjustment] that is used as the model.
   */
-  @property gtk.adjustment.Adjustment adjustment()
+  @property gtk.adjustment.Adjustment adjustment() nothrow
   {
     return getAdjustment();
   }
@@ -101,7 +101,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Params:
         propval = The [gtk.adjustment.Adjustment] that is used as the model.
   */
-  @property void adjustment(gtk.adjustment.Adjustment propval)
+  @property void adjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     setAdjustment(propval);
   }
@@ -110,7 +110,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Get `hasFrame` property.
       Returns: If the scale button has a frame.
   */
-  @property bool hasFrame()
+  @property bool hasFrame() nothrow
   {
     return getHasFrame();
   }
@@ -120,7 +120,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Params:
         propval = If the scale button has a frame.
   */
-  @property void hasFrame(bool propval)
+  @property void hasFrame(bool propval) nothrow
   {
     setHasFrame(propval);
   }
@@ -129,7 +129,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Get `value` property.
       Returns: The value of the scale.
   */
-  @property double value()
+  @property double value() nothrow
   {
     return getValue();
   }
@@ -139,7 +139,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Params:
         propval = The value of the scale.
   */
-  @property void value(double propval)
+  @property void value(double propval) nothrow
   {
     setValue(propval);
   }
@@ -163,7 +163,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
             later with [gtk.scale_button.ScaleButton.setIcons]
       Returns: a new [gtk.scale_button.ScaleButton]
   */
-  this(double min, double max, double step, string[] icons = null)
+  this(double min, double max, double step, string[] icons = null) nothrow
   {
     GtkWidget* _cretval;
     char*[] _tmpicons;
@@ -183,7 +183,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       if it is raised.
       Returns: whether the button is pressed
   */
-  bool getActive()
+  bool getActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_scale_button_get_active(cast(GtkScaleButton*)this._cPtr);
@@ -196,7 +196,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       See [gtk.range.Range.getAdjustment] for details.
       Returns: the adjustment associated with the scale
   */
-  gtk.adjustment.Adjustment getAdjustment()
+  gtk.adjustment.Adjustment getAdjustment() nothrow
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scale_button_get_adjustment(cast(GtkScaleButton*)this._cPtr);
@@ -208,7 +208,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Returns whether the button has a frame.
       Returns: true if the button has a frame
   */
-  bool getHasFrame()
+  bool getHasFrame() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_scale_button_get_has_frame(cast(GtkScaleButton*)this._cPtr);
@@ -220,7 +220,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Returns: the minus button
           of the [gtk.scale_button.ScaleButton]
   */
-  gtk.button.Button getMinusButton()
+  gtk.button.Button getMinusButton() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_button_get_minus_button(cast(GtkScaleButton*)this._cPtr);
@@ -233,7 +233,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Returns: the plus button
           of the [gtk.scale_button.ScaleButton]
   */
-  gtk.button.Button getPlusButton()
+  gtk.button.Button getPlusButton() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_button_get_plus_button(cast(GtkScaleButton*)this._cPtr);
@@ -245,7 +245,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Retrieves the popup of the [gtk.scale_button.ScaleButton].
       Returns: the popup of the [gtk.scale_button.ScaleButton]
   */
-  gtk.widget.Widget getPopup()
+  gtk.widget.Widget getPopup() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_button_get_popup(cast(GtkScaleButton*)this._cPtr);
@@ -257,7 +257,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Gets the current value of the scale button.
       Returns: current value of the scale button
   */
-  double getValue()
+  double getValue() nothrow
   {
     double _retval;
     _retval = gtk_scale_button_get_value(cast(GtkScaleButton*)this._cPtr);
@@ -273,7 +273,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Params:
         adjustment = a [gtk.adjustment.Adjustment]
   */
-  void setAdjustment(gtk.adjustment.Adjustment adjustment)
+  void setAdjustment(gtk.adjustment.Adjustment adjustment) nothrow
   {
     gtk_scale_button_set_adjustment(cast(GtkScaleButton*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
@@ -284,7 +284,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Params:
         hasFrame = whether the button should have a visible frame
   */
-  void setHasFrame(bool hasFrame)
+  void setHasFrame(bool hasFrame) nothrow
   {
     gtk_scale_button_set_has_frame(cast(GtkScaleButton*)this._cPtr, hasFrame);
   }
@@ -295,7 +295,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Params:
         icons = a null-terminated array of icon names
   */
-  void setIcons(string[] icons)
+  void setIcons(string[] icons) nothrow
   {
     char*[] _tmpicons;
     foreach (s; icons)
@@ -318,7 +318,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       Params:
         value = new value of the scale button
   */
-  void setValue(double value)
+  void setValue(double value) nothrow
   {
     gtk_scale_button_set_value(cast(GtkScaleButton*)this._cPtr, value);
   }
@@ -342,13 +342,13 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPopdown(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPopdown(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.scale_button.ScaleButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -357,7 +357,14 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.scale_button.ScaleButton.popdown");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -384,13 +391,13 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectPopup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPopup(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.scale_button.ScaleButton)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -399,7 +406,14 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.scale_button.ScaleButton.popup");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -423,14 +437,14 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.scale_button.ScaleButton)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -442,7 +456,14 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.scale_button.ScaleButton.valueChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -463,7 +484,7 @@ class ScaleButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
         propval = The [gtk.adjustment.Adjustment] that is used as the model.
       Returns: Builder instance for fluent chaining
   */
-  T adjustment(gtk.adjustment.Adjustment propval)
+  T adjustment(gtk.adjustment.Adjustment propval) nothrow
   {
     return setProperty("adjustment", propval);
   }
@@ -474,7 +495,7 @@ class ScaleButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
         propval = If the scale button has a frame.
       Returns: Builder instance for fluent chaining
   */
-  T hasFrame(bool propval)
+  T hasFrame(bool propval) nothrow
   {
     return setProperty("has-frame", propval);
   }
@@ -485,7 +506,7 @@ class ScaleButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
         propval = The value of the scale.
       Returns: Builder instance for fluent chaining
   */
-  T value(double propval)
+  T value(double propval) nothrow
   {
     return setProperty("value", propval);
   }
@@ -498,7 +519,7 @@ final class ScaleButtonGidBuilder : ScaleButtonGidBuilderImpl!ScaleButtonGidBuil
       Create object from builder.
       Returns: New object
   */
-  ScaleButton build()
+  ScaleButton build() nothrow
   {
     return new ScaleButton(cast(void*)createGObject(ScaleButton._getGType), No.Take);
   }

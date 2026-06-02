@@ -23,26 +23,26 @@ class Generator : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())json_generator_get_type != &gidSymbolNotFound ? json_generator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Generator self()
+  override Generator self() nothrow
   {
     return this;
   }
@@ -51,7 +51,7 @@ class Generator : gobject.object.ObjectWrap
       Get builder for [json.generator.Generator]
       Returns: New builder object
   */
-  static GeneratorGidBuilder builder()
+  static GeneratorGidBuilder builder() nothrow
   {
     return new GeneratorGidBuilder;
   }
@@ -60,7 +60,7 @@ class Generator : gobject.object.ObjectWrap
       Get `indent` property.
       Returns: Number of spaces to be used to indent when pretty printing.
   */
-  @property uint indent()
+  @property uint indent() nothrow
   {
     return getIndent();
   }
@@ -70,7 +70,7 @@ class Generator : gobject.object.ObjectWrap
       Params:
         propval = Number of spaces to be used to indent when pretty printing.
   */
-  @property void indent(uint propval)
+  @property void indent(uint propval) nothrow
   {
     setIndent(propval);
   }
@@ -79,7 +79,7 @@ class Generator : gobject.object.ObjectWrap
       Get `indentChar` property.
       Returns: The character that should be used when indenting in pretty print.
   */
-  @property uint indentChar()
+  @property uint indentChar() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(uint)("indent-char");
   }
@@ -89,7 +89,7 @@ class Generator : gobject.object.ObjectWrap
       Params:
         propval = The character that should be used when indenting in pretty print.
   */
-  @property void indentChar(uint propval)
+  @property void indentChar(uint propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(uint)("indent-char", propval);
   }
@@ -102,7 +102,7 @@ class Generator : gobject.object.ObjectWrap
         The indentation level can be controlled by using the
         [json.generator.Generator.indent] property.
   */
-  @property bool pretty()
+  @property bool pretty() nothrow
   {
     return getPretty();
   }
@@ -116,7 +116,7 @@ class Generator : gobject.object.ObjectWrap
           The indentation level can be controlled by using the
           [json.generator.Generator.indent] property.
   */
-  @property void pretty(bool propval)
+  @property void pretty(bool propval) nothrow
   {
     setPretty(propval);
   }
@@ -126,7 +126,7 @@ class Generator : gobject.object.ObjectWrap
       Returns: The root node to be used when constructing a JSON data
         stream.
   */
-  @property json.node.Node root()
+  @property json.node.Node root() nothrow
   {
     return getRoot();
   }
@@ -137,7 +137,7 @@ class Generator : gobject.object.ObjectWrap
         propval = The root node to be used when constructing a JSON data
           stream.
   */
-  @property void root(json.node.Node propval)
+  @property void root(json.node.Node propval) nothrow
   {
     setRoot(propval);
   }
@@ -149,7 +149,7 @@ class Generator : gobject.object.ObjectWrap
       data object model composed by [json.node.Node]s.
       Returns: the newly created generator instance
   */
-  this()
+  this() nothrow
   {
     JsonGenerator* _cretval;
     _cretval = json_generator_new();
@@ -160,7 +160,7 @@ class Generator : gobject.object.ObjectWrap
       Retrieves the value set using [json.generator.Generator.setIndent].
       Returns: the number of repetitions per indentation level
   */
-  uint getIndent()
+  uint getIndent() nothrow
   {
     uint _retval;
     _retval = json_generator_get_indent(cast(JsonGenerator*)this._cPtr);
@@ -171,7 +171,7 @@ class Generator : gobject.object.ObjectWrap
       Retrieves the value set using [json.generator.Generator.setIndentChar].
       Returns: the character to be used when indenting
   */
-  dchar getIndentChar()
+  dchar getIndentChar() nothrow
   {
     dchar _retval;
     _retval = json_generator_get_indent_char(cast(JsonGenerator*)this._cPtr);
@@ -183,7 +183,7 @@ class Generator : gobject.object.ObjectWrap
       Returns: `TRUE` if the generated JSON should be pretty-printed, and
           `FALSE` otherwise
   */
-  bool getPretty()
+  bool getPretty() nothrow
   {
     bool _retval;
     _retval = cast(bool)json_generator_get_pretty(cast(JsonGenerator*)this._cPtr);
@@ -195,7 +195,7 @@ class Generator : gobject.object.ObjectWrap
       [json.generator.Generator.setRoot].
       Returns: the root node
   */
-  json.node.Node getRoot()
+  json.node.Node getRoot() nothrow
   {
     JsonNode* _cretval;
     _cretval = json_generator_get_root(cast(JsonGenerator*)this._cPtr);
@@ -210,7 +210,7 @@ class Generator : gobject.object.ObjectWrap
         indentLevel = the number of repetitions of the indentation character
             that should be applied when pretty printing
   */
-  void setIndent(uint indentLevel)
+  void setIndent(uint indentLevel) nothrow
   {
     json_generator_set_indent(cast(JsonGenerator*)this._cPtr, indentLevel);
   }
@@ -221,7 +221,7 @@ class Generator : gobject.object.ObjectWrap
       Params:
         indentChar = a Unicode character to be used when indenting
   */
-  void setIndentChar(dchar indentChar)
+  void setIndentChar(dchar indentChar) nothrow
   {
     json_generator_set_indent_char(cast(JsonGenerator*)this._cPtr, indentChar);
   }
@@ -236,7 +236,7 @@ class Generator : gobject.object.ObjectWrap
       Params:
         isPretty = whether the generated string should be pretty printed
   */
-  void setPretty(bool isPretty)
+  void setPretty(bool isPretty) nothrow
   {
     json_generator_set_pretty(cast(JsonGenerator*)this._cPtr, isPretty);
   }
@@ -251,7 +251,7 @@ class Generator : gobject.object.ObjectWrap
       Params:
         node = the root node
   */
-  void setRoot(json.node.Node node)
+  void setRoot(json.node.Node node) nothrow
   {
     json_generator_set_root(cast(JsonGenerator*)this._cPtr, node ? cast(JsonNode*)node._cPtr(No.Dup) : null);
   }
@@ -265,7 +265,7 @@ class Generator : gobject.object.ObjectWrap
             buffer
       Returns: a newly allocated string holding a JSON data stream
   */
-  string toData(out size_t length)
+  string toData(out size_t length) nothrow
   {
     char* _cretval;
     _cretval = json_generator_to_data(cast(JsonGenerator*)this._cPtr, cast(size_t*)&length);
@@ -304,7 +304,7 @@ class Generator : gobject.object.ObjectWrap
       Returns: the passed string, updated with
           the generated JSON data
   */
-  glib.string_.String toGstring(glib.string_.String string_)
+  glib.string_.String toGstring(glib.string_.String string_) nothrow
   {
     GString* _cretval;
     _cretval = json_generator_to_gstring(cast(JsonGenerator*)this._cPtr, string_ ? cast(GString*)string_._cPtr(No.Dup) : null);
@@ -342,7 +342,7 @@ class GeneratorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Number of spaces to be used to indent when pretty printing.
       Returns: Builder instance for fluent chaining
   */
-  T indent(uint propval)
+  T indent(uint propval) nothrow
   {
     return setProperty("indent", propval);
   }
@@ -353,7 +353,7 @@ class GeneratorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The character that should be used when indenting in pretty print.
       Returns: Builder instance for fluent chaining
   */
-  T indentChar(uint propval)
+  T indentChar(uint propval) nothrow
   {
     return setProperty("indent-char", propval);
   }
@@ -368,7 +368,7 @@ class GeneratorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           [json.generator.Generator.indent] property.
       Returns: Builder instance for fluent chaining
   */
-  T pretty(bool propval)
+  T pretty(bool propval) nothrow
   {
     return setProperty("pretty", propval);
   }
@@ -380,7 +380,7 @@ class GeneratorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           stream.
       Returns: Builder instance for fluent chaining
   */
-  T root(json.node.Node propval)
+  T root(json.node.Node propval) nothrow
   {
     return setProperty("root", propval);
   }
@@ -393,7 +393,7 @@ final class GeneratorGidBuilder : GeneratorGidBuilderImpl!GeneratorGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Generator build()
+  Generator build() nothrow
   {
     return new Generator(cast(void*)createGObject(Generator._getGType), Yes.Take);
   }

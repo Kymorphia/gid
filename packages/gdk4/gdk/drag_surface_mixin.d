@@ -25,7 +25,7 @@ template DragSurfaceT()
         height = the unconstrained drag_surface height to layout
       Returns: false if it failed to be presented, otherwise true.
   */
-  override bool present(int width, int height)
+  override bool present(int width, int height) nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_drag_surface_present(cast(GdkDragSurface*)this._cPtr, width, height);
@@ -61,14 +61,14 @@ template DragSurfaceT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectComputeSize(T)(T callback, Flag!"After" after = No.After)
+  gulong connectComputeSize(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.drag_surface_size.DragSurfaceSize)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.drag_surface.DragSurface)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -80,7 +80,14 @@ template DragSurfaceT()
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gdk.drag_surface.DragSurface.computeSize");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

@@ -29,26 +29,26 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_recent_action_get_type != &gidSymbolNotFound ? gtk_recent_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RecentAction self()
+  override RecentAction self() nothrow
   {
     return this;
   }
@@ -57,7 +57,7 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
       Get builder for [gtk.recent_action.RecentAction]
       Returns: New builder object
   */
-  static RecentActionGidBuilder builder()
+  static RecentActionGidBuilder builder() nothrow
   {
     return new RecentActionGidBuilder;
   }
@@ -66,7 +66,7 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
       Get `showNumbers` property.
       Returns: Whether the items should be displayed with a number.
   */
-  @property bool showNumbers()
+  @property bool showNumbers() nothrow
   {
     return getShowNumbers();
   }
@@ -76,7 +76,7 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
       Params:
         propval = Whether the items should be displayed with a number.
   */
-  @property void showNumbers(bool propval)
+  @property void showNumbers(bool propval) nothrow
   {
     setShowNumbers(propval);
   }
@@ -97,7 +97,7 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
             the action, or null
       Returns: the newly created #GtkRecentAction.
   */
-  this(string name, string label = null, string tooltip = null, string stockId = null)
+  this(string name, string label = null, string tooltip = null, string stockId = null) nothrow
   {
     GtkAction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -124,7 +124,7 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
             #GtkRecentManager
       Returns: the newly created #GtkRecentAction
   */
-  static gtk.recent_action.RecentAction newForManager(string name, string label = null, string tooltip = null, string stockId = null, gtk.recent_manager.RecentManager manager = null)
+  static gtk.recent_action.RecentAction newForManager(string name, string label = null, string tooltip = null, string stockId = null, gtk.recent_manager.RecentManager manager = null) nothrow
   {
     GtkAction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -140,7 +140,7 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
       Returns the value set by [gtk.recent_chooser_menu.RecentChooserMenu.setShowNumbers].
       Returns: true if numbers should be shown.
   */
-  bool getShowNumbers()
+  bool getShowNumbers() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_recent_action_get_show_numbers(cast(GtkRecentAction*)this._cPtr);
@@ -156,7 +156,7 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
       Params:
         showNumbers = true if the shown items should be numbered
   */
-  void setShowNumbers(bool showNumbers)
+  void setShowNumbers(bool showNumbers) nothrow
   {
     gtk_recent_action_set_show_numbers(cast(GtkRecentAction*)this._cPtr, showNumbers);
   }
@@ -174,7 +174,7 @@ class RecentActionGidBuilderImpl(T) : gtk.action.ActionGidBuilderImpl!T, gtk.rec
         propval = Whether the items should be displayed with a number.
       Returns: Builder instance for fluent chaining
   */
-  T showNumbers(bool propval)
+  T showNumbers(bool propval) nothrow
   {
     return setProperty("show-numbers", propval);
   }
@@ -187,7 +187,7 @@ final class RecentActionGidBuilder : RecentActionGidBuilderImpl!RecentActionGidB
       Create object from builder.
       Returns: New object
   */
-  RecentAction build()
+  RecentAction build() nothrow
   {
     return new RecentAction(cast(void*)createGObject(RecentAction._getGType), Yes.Take);
   }

@@ -22,26 +22,26 @@ class GLViewConvert : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_view_convert_get_type != &gidSymbolNotFound ? gst_gl_view_convert_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLViewConvert self()
+  override GLViewConvert self() nothrow
   {
     return this;
   }
@@ -50,73 +50,73 @@ class GLViewConvert : gst.object.ObjectWrap
       Get builder for [gstgl.glview_convert.GLViewConvert]
       Returns: New builder object
   */
-  static GLViewConvertGidBuilder builder()
+  static GLViewConvertGidBuilder builder() nothrow
   {
     return new GLViewConvertGidBuilder;
   }
 
   /** */
-  @property gstgl.types.GLStereoDownmix downmixMode()
+  @property gstgl.types.GLStereoDownmix downmixMode() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gstgl.types.GLStereoDownmix)("downmix-mode");
   }
 
   /** */
-  @property void downmixMode(gstgl.types.GLStereoDownmix propval)
+  @property void downmixMode(gstgl.types.GLStereoDownmix propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gstgl.types.GLStereoDownmix)("downmix-mode", propval);
   }
 
   /** */
-  @property gstvideo.types.VideoMultiviewFlags inputFlagsOverride()
+  @property gstvideo.types.VideoMultiviewFlags inputFlagsOverride() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gstvideo.types.VideoMultiviewFlags)("input-flags-override");
   }
 
   /** */
-  @property void inputFlagsOverride(gstvideo.types.VideoMultiviewFlags propval)
+  @property void inputFlagsOverride(gstvideo.types.VideoMultiviewFlags propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gstvideo.types.VideoMultiviewFlags)("input-flags-override", propval);
   }
 
   /** */
-  @property gstvideo.types.VideoMultiviewMode inputModeOverride()
+  @property gstvideo.types.VideoMultiviewMode inputModeOverride() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gstvideo.types.VideoMultiviewMode)("input-mode-override");
   }
 
   /** */
-  @property void inputModeOverride(gstvideo.types.VideoMultiviewMode propval)
+  @property void inputModeOverride(gstvideo.types.VideoMultiviewMode propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gstvideo.types.VideoMultiviewMode)("input-mode-override", propval);
   }
 
   /** */
-  @property gstvideo.types.VideoMultiviewFlags outputFlagsOverride()
+  @property gstvideo.types.VideoMultiviewFlags outputFlagsOverride() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gstvideo.types.VideoMultiviewFlags)("output-flags-override");
   }
 
   /** */
-  @property void outputFlagsOverride(gstvideo.types.VideoMultiviewFlags propval)
+  @property void outputFlagsOverride(gstvideo.types.VideoMultiviewFlags propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gstvideo.types.VideoMultiviewFlags)("output-flags-override", propval);
   }
 
   /** */
-  @property gstvideo.types.VideoMultiviewMode outputModeOverride()
+  @property gstvideo.types.VideoMultiviewMode outputModeOverride() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gstvideo.types.VideoMultiviewMode)("output-mode-override");
   }
 
   /** */
-  @property void outputModeOverride(gstvideo.types.VideoMultiviewMode propval)
+  @property void outputModeOverride(gstvideo.types.VideoMultiviewMode propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gstvideo.types.VideoMultiviewMode)("output-mode-override", propval);
   }
 
   /** */
-  this()
+  this() nothrow
   {
     GstGLViewConvert* _cretval;
     _cretval = gst_gl_view_convert_new();
@@ -132,7 +132,7 @@ class GLViewConvert : gst.object.ObjectWrap
         othercaps = the #GstCaps to fixate
       Returns: the fixated #GstCaps
   */
-  gst.caps.Caps fixateCaps(gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps othercaps)
+  gst.caps.Caps fixateCaps(gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps othercaps) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_gl_view_convert_fixate_caps(cast(GstGLViewConvert*)this._cPtr, direction, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, othercaps ? cast(GstCaps*)othercaps._cPtr(Yes.Dup) : null);
@@ -147,7 +147,7 @@ class GLViewConvert : gst.object.ObjectWrap
         outbufPtr = a #GstBuffer
       Returns: a #GstFlowReturn
   */
-  gst.types.FlowReturn getOutput(out gst.buffer.Buffer outbufPtr)
+  gst.types.FlowReturn getOutput(out gst.buffer.Buffer outbufPtr) nothrow
   {
     GstFlowReturn _cretval;
     GstBuffer* _outbufPtr;
@@ -165,7 +165,7 @@ class GLViewConvert : gst.object.ObjectWrap
         inbuf = the #GstGLMemory filled #GstBuffer to convert
       Returns: a converted #GstBuffer or null
   */
-  gst.buffer.Buffer perform(gst.buffer.Buffer inbuf)
+  gst.buffer.Buffer perform(gst.buffer.Buffer inbuf) nothrow
   {
     GstBuffer* _cretval;
     _cretval = gst_gl_view_convert_perform(cast(GstGLViewConvert*)this._cPtr, inbuf ? cast(GstBuffer*)inbuf._cPtr(No.Dup) : null);
@@ -177,7 +177,7 @@ class GLViewConvert : gst.object.ObjectWrap
       Reset viewconvert to the default state.  Further operation will require
       setting the caps with [gstgl.glview_convert.GLViewConvert.setCaps].
   */
-  void reset()
+  void reset() nothrow
   {
     gst_gl_view_convert_reset(cast(GstGLViewConvert*)this._cPtr);
   }
@@ -190,7 +190,7 @@ class GLViewConvert : gst.object.ObjectWrap
         outCaps = output #GstCaps
       Returns: 
   */
-  bool setCaps(gst.caps.Caps inCaps, gst.caps.Caps outCaps)
+  bool setCaps(gst.caps.Caps inCaps, gst.caps.Caps outCaps) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_view_convert_set_caps(cast(GstGLViewConvert*)this._cPtr, inCaps ? cast(GstCaps*)inCaps._cPtr(No.Dup) : null, outCaps ? cast(GstCaps*)outCaps._cPtr(No.Dup) : null);
@@ -203,7 +203,7 @@ class GLViewConvert : gst.object.ObjectWrap
       Params:
         context = the #GstGLContext to set
   */
-  void setContext(gstgl.glcontext.GLContext context)
+  void setContext(gstgl.glcontext.GLContext context) nothrow
   {
     gst_gl_view_convert_set_context(cast(GstGLViewConvert*)this._cPtr, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
   }
@@ -216,7 +216,7 @@ class GLViewConvert : gst.object.ObjectWrap
         input = a #GstBuffer
       Returns: a #GstFlowReturn
   */
-  gst.types.FlowReturn submitInputBuffer(bool isDiscont, gst.buffer.Buffer input)
+  gst.types.FlowReturn submitInputBuffer(bool isDiscont, gst.buffer.Buffer input) nothrow
   {
     GstFlowReturn _cretval;
     _cretval = gst_gl_view_convert_submit_input_buffer(cast(GstGLViewConvert*)this._cPtr, isDiscont, input ? cast(GstBuffer*)input._cPtr(Yes.Dup) : null);
@@ -233,7 +233,7 @@ class GLViewConvert : gst.object.ObjectWrap
         filter = a set of filter #GstCaps
       Returns: the converted #GstCaps
   */
-  gst.caps.Caps transformCaps(gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps filter)
+  gst.caps.Caps transformCaps(gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps filter) nothrow
   {
     GstCaps* _cretval;
     _cretval = gst_gl_view_convert_transform_caps(cast(GstGLViewConvert*)this._cPtr, direction, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
@@ -247,31 +247,31 @@ class GLViewConvertGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T downmixMode(gstgl.types.GLStereoDownmix propval)
+  T downmixMode(gstgl.types.GLStereoDownmix propval) nothrow
   {
     return setProperty("downmix-mode", propval);
   }
 
   /** */
-  T inputFlagsOverride(gstvideo.types.VideoMultiviewFlags propval)
+  T inputFlagsOverride(gstvideo.types.VideoMultiviewFlags propval) nothrow
   {
     return setProperty("input-flags-override", propval);
   }
 
   /** */
-  T inputModeOverride(gstvideo.types.VideoMultiviewMode propval)
+  T inputModeOverride(gstvideo.types.VideoMultiviewMode propval) nothrow
   {
     return setProperty("input-mode-override", propval);
   }
 
   /** */
-  T outputFlagsOverride(gstvideo.types.VideoMultiviewFlags propval)
+  T outputFlagsOverride(gstvideo.types.VideoMultiviewFlags propval) nothrow
   {
     return setProperty("output-flags-override", propval);
   }
 
   /** */
-  T outputModeOverride(gstvideo.types.VideoMultiviewMode propval)
+  T outputModeOverride(gstvideo.types.VideoMultiviewMode propval) nothrow
   {
     return setProperty("output-mode-override", propval);
   }
@@ -284,7 +284,7 @@ final class GLViewConvertGidBuilder : GLViewConvertGidBuilderImpl!GLViewConvertG
       Create object from builder.
       Returns: New object
   */
-  GLViewConvert build()
+  GLViewConvert build() nothrow
   {
     return new GLViewConvert(cast(void*)createGObject(GLViewConvert._getGType), Yes.Take);
   }

@@ -32,7 +32,7 @@ struct DBusError
       Returns: A D-Bus error name (never null).
             Free with [glib.global.gfree].
   */
-  static string encodeGerror(glib.error.ErrorWrap error)
+  static string encodeGerror(glib.error.ErrorWrap error) nothrow
   {
     char* _cretval;
     _cretval = g_dbus_error_encode_gerror(error ? cast(const(GError)*)error._cPtr : null);
@@ -53,7 +53,7 @@ struct DBusError
       Returns: an allocated string or null if the
             D-Bus error name could not be found. Free with [glib.global.gfree].
   */
-  static string getRemoteError(glib.error.ErrorWrap error)
+  static string getRemoteError(glib.error.ErrorWrap error) nothrow
   {
     char* _cretval;
     _cretval = g_dbus_error_get_remote_error(error ? cast(const(GError)*)error._cPtr : null);
@@ -70,7 +70,7 @@ struct DBusError
       Returns: true if error represents an error from a remote peer,
         false otherwise.
   */
-  static bool isRemoteError(glib.error.ErrorWrap error)
+  static bool isRemoteError(glib.error.ErrorWrap error) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_dbus_error_is_remote_error(error ? cast(const(GError)*)error._cPtr : null);
@@ -110,7 +110,7 @@ struct DBusError
         dbusErrorMessage = D-Bus error message.
       Returns: An allocated #GError. Free with [glib.error.ErrorWrap.free].
   */
-  static glib.error.ErrorWrap newForDbusError(string dbusErrorName, string dbusErrorMessage)
+  static glib.error.ErrorWrap newForDbusError(string dbusErrorName, string dbusErrorMessage) nothrow
   {
     GError* _cretval;
     const(char)* _dbusErrorName = dbusErrorName.toCString(No.Alloc);
@@ -121,7 +121,7 @@ struct DBusError
   }
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = g_dbus_error_quark();
@@ -142,7 +142,7 @@ struct DBusError
       Returns: true if the association was created, false if it already
         exists.
   */
-  static bool registerError(glib.types.Quark errorDomain, int errorCode, string dbusErrorName)
+  static bool registerError(glib.types.Quark errorDomain, int errorCode, string dbusErrorName) nothrow
   {
     bool _retval;
     const(char)* _dbusErrorName = dbusErrorName.toCString(No.Alloc);
@@ -161,7 +161,7 @@ struct DBusError
         quarkVolatile = A pointer where to store the #GQuark.
         entries = A pointer to num_entries #GDBusErrorEntry struct items.
   */
-  static void registerErrorDomain(string errorDomainQuarkName, out size_t quarkVolatile, gio.dbus_error_entry.DBusErrorEntry[] entries)
+  static void registerErrorDomain(string errorDomainQuarkName, out size_t quarkVolatile, gio.dbus_error_entry.DBusErrorEntry[] entries) nothrow
   {
     const(char)* _errorDomainQuarkName = errorDomainQuarkName.toCString(No.Alloc);
     uint _numEntries;
@@ -188,7 +188,7 @@ struct DBusError
         error = A #GError.
       Returns: true if information was stripped, false otherwise.
   */
-  static bool stripRemoteError(glib.error.ErrorWrap error)
+  static bool stripRemoteError(glib.error.ErrorWrap error) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_dbus_error_strip_remote_error(error ? cast(GError*)error._cPtr : null);
@@ -204,7 +204,7 @@ struct DBusError
         dbusErrorName = A D-Bus error name.
       Returns: true if the association was destroyed, false if it wasn't found.
   */
-  static bool unregisterError(glib.types.Quark errorDomain, int errorCode, string dbusErrorName)
+  static bool unregisterError(glib.types.Quark errorDomain, int errorCode, string dbusErrorName) nothrow
   {
     bool _retval;
     const(char)* _dbusErrorName = dbusErrorName.toCString(No.Alloc);
@@ -215,12 +215,12 @@ struct DBusError
 
 class DBusException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gio.dbus_error.DBusError.quark, cast(int)code, msg);
   }

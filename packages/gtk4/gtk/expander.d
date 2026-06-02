@@ -115,26 +115,26 @@ class Expander : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_expander_get_type != &gidSymbolNotFound ? gtk_expander_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Expander self()
+  override Expander self() nothrow
   {
     return this;
   }
@@ -143,7 +143,7 @@ class Expander : gtk.widget.Widget
       Get builder for [gtk.expander.Expander]
       Returns: New builder object
   */
-  static ExpanderGidBuilder builder()
+  static ExpanderGidBuilder builder() nothrow
   {
     return new ExpanderGidBuilder;
   }
@@ -152,7 +152,7 @@ class Expander : gtk.widget.Widget
       Get `child` property.
       Returns: The child widget.
   */
-  @property gtk.widget.Widget child()
+  @property gtk.widget.Widget child() nothrow
   {
     return getChild();
   }
@@ -162,7 +162,7 @@ class Expander : gtk.widget.Widget
       Params:
         propval = The child widget.
   */
-  @property void child(gtk.widget.Widget propval)
+  @property void child(gtk.widget.Widget propval) nothrow
   {
     setChild(propval);
   }
@@ -171,7 +171,7 @@ class Expander : gtk.widget.Widget
       Get `expanded` property.
       Returns: Whether the expander has been opened to reveal the child.
   */
-  @property bool expanded()
+  @property bool expanded() nothrow
   {
     return getExpanded();
   }
@@ -181,7 +181,7 @@ class Expander : gtk.widget.Widget
       Params:
         propval = Whether the expander has been opened to reveal the child.
   */
-  @property void expanded(bool propval)
+  @property void expanded(bool propval) nothrow
   {
     setExpanded(propval);
   }
@@ -190,7 +190,7 @@ class Expander : gtk.widget.Widget
       Get `label` property.
       Returns: The text of the expanders label.
   */
-  @property string label()
+  @property string label() nothrow
   {
     return getLabel();
   }
@@ -200,7 +200,7 @@ class Expander : gtk.widget.Widget
       Params:
         propval = The text of the expanders label.
   */
-  @property void label(string propval)
+  @property void label(string propval) nothrow
   {
     setLabel(propval);
   }
@@ -209,7 +209,7 @@ class Expander : gtk.widget.Widget
       Get `labelWidget` property.
       Returns: A widget to display instead of the usual expander label.
   */
-  @property gtk.widget.Widget labelWidget()
+  @property gtk.widget.Widget labelWidget() nothrow
   {
     return getLabelWidget();
   }
@@ -219,7 +219,7 @@ class Expander : gtk.widget.Widget
       Params:
         propval = A widget to display instead of the usual expander label.
   */
-  @property void labelWidget(gtk.widget.Widget propval)
+  @property void labelWidget(gtk.widget.Widget propval) nothrow
   {
     setLabelWidget(propval);
   }
@@ -229,7 +229,7 @@ class Expander : gtk.widget.Widget
       Returns: When this property is true, the expander will resize the toplevel
         widget containing the expander upon expanding and collapsing.
   */
-  @property bool resizeToplevel()
+  @property bool resizeToplevel() nothrow
   {
     return getResizeToplevel();
   }
@@ -240,7 +240,7 @@ class Expander : gtk.widget.Widget
         propval = When this property is true, the expander will resize the toplevel
           widget containing the expander upon expanding and collapsing.
   */
-  @property void resizeToplevel(bool propval)
+  @property void resizeToplevel(bool propval) nothrow
   {
     setResizeToplevel(propval);
   }
@@ -249,7 +249,7 @@ class Expander : gtk.widget.Widget
       Get `useMarkup` property.
       Returns: Whether the text in the label is Pango markup.
   */
-  @property bool useMarkup()
+  @property bool useMarkup() nothrow
   {
     return getUseMarkup();
   }
@@ -259,7 +259,7 @@ class Expander : gtk.widget.Widget
       Params:
         propval = Whether the text in the label is Pango markup.
   */
-  @property void useMarkup(bool propval)
+  @property void useMarkup(bool propval) nothrow
   {
     setUseMarkup(propval);
   }
@@ -268,7 +268,7 @@ class Expander : gtk.widget.Widget
       Get `useUnderline` property.
       Returns: Whether an underline in the text indicates a mnemonic.
   */
-  @property bool useUnderline()
+  @property bool useUnderline() nothrow
   {
     return getUseUnderline();
   }
@@ -278,7 +278,7 @@ class Expander : gtk.widget.Widget
       Params:
         propval = Whether an underline in the text indicates a mnemonic.
   */
-  @property void useUnderline(bool propval)
+  @property void useUnderline(bool propval) nothrow
   {
     setUseUnderline(propval);
   }
@@ -290,7 +290,7 @@ class Expander : gtk.widget.Widget
         label = the text of the label
       Returns: a new [gtk.expander.Expander] widget.
   */
-  this(string label = null)
+  this(string label = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -313,7 +313,7 @@ class Expander : gtk.widget.Widget
             in front of the mnemonic character
       Returns: a new [gtk.expander.Expander] widget.
   */
-  static gtk.expander.Expander newWithMnemonic(string label = null)
+  static gtk.expander.Expander newWithMnemonic(string label = null) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
@@ -326,7 +326,7 @@ class Expander : gtk.widget.Widget
       Gets the child widget of expander.
       Returns: the child widget of expander
   */
-  gtk.widget.Widget getChild()
+  gtk.widget.Widget getChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_expander_get_child(cast(GtkExpander*)this._cPtr);
@@ -340,7 +340,7 @@ class Expander : gtk.widget.Widget
       Returns true if the child widget is revealed.
       Returns: the current state of the expander
   */
-  bool getExpanded()
+  bool getExpanded() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_expander_get_expanded(cast(GtkExpander*)this._cPtr);
@@ -358,7 +358,7 @@ class Expander : gtk.widget.Widget
       Returns: The text of the label widget. This string is owned
           by the widget and must not be modified or freed.
   */
-  string getLabel()
+  string getLabel() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_expander_get_label(cast(GtkExpander*)this._cPtr);
@@ -370,7 +370,7 @@ class Expander : gtk.widget.Widget
       Retrieves the label widget for the frame.
       Returns: the label widget
   */
-  gtk.widget.Widget getLabelWidget()
+  gtk.widget.Widget getLabelWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_expander_get_label_widget(cast(GtkExpander*)this._cPtr);
@@ -383,7 +383,7 @@ class Expander : gtk.widget.Widget
       containing the expander upon resizing and collapsing.
       Returns: the “resize toplevel” setting.
   */
-  bool getResizeToplevel()
+  bool getResizeToplevel() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_expander_get_resize_toplevel(cast(GtkExpander*)this._cPtr);
@@ -394,7 +394,7 @@ class Expander : gtk.widget.Widget
       Returns whether the label’s text is interpreted as Pango markup.
       Returns: true if the label’s text will be parsed for markup
   */
-  bool getUseMarkup()
+  bool getUseMarkup() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_expander_get_use_markup(cast(GtkExpander*)this._cPtr);
@@ -406,7 +406,7 @@ class Expander : gtk.widget.Widget
       Returns: true if an embedded underline in the expander
           label indicates the mnemonic accelerator keys
   */
-  bool getUseUnderline()
+  bool getUseUnderline() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_expander_get_use_underline(cast(GtkExpander*)this._cPtr);
@@ -419,7 +419,7 @@ class Expander : gtk.widget.Widget
       Params:
         child = the child widget
   */
-  void setChild(gtk.widget.Widget child = null)
+  void setChild(gtk.widget.Widget child = null) nothrow
   {
     gtk_expander_set_child(cast(GtkExpander*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -433,7 +433,7 @@ class Expander : gtk.widget.Widget
       Params:
         expanded = whether the child widget is revealed
   */
-  void setExpanded(bool expanded)
+  void setExpanded(bool expanded) nothrow
   {
     gtk_expander_set_expanded(cast(GtkExpander*)this._cPtr, expanded);
   }
@@ -446,7 +446,7 @@ class Expander : gtk.widget.Widget
       Params:
         label = a string
   */
-  void setLabel(string label = null)
+  void setLabel(string label = null) nothrow
   {
     const(char)* _label = label.toCString(No.Alloc);
     gtk_expander_set_label(cast(GtkExpander*)this._cPtr, _label);
@@ -461,7 +461,7 @@ class Expander : gtk.widget.Widget
       Params:
         labelWidget = the new label widget
   */
-  void setLabelWidget(gtk.widget.Widget labelWidget = null)
+  void setLabelWidget(gtk.widget.Widget labelWidget = null) nothrow
   {
     gtk_expander_set_label_widget(cast(GtkExpander*)this._cPtr, labelWidget ? cast(GtkWidget*)labelWidget._cPtr(No.Dup) : null);
   }
@@ -473,7 +473,7 @@ class Expander : gtk.widget.Widget
       Params:
         resizeToplevel = whether to resize the toplevel
   */
-  void setResizeToplevel(bool resizeToplevel)
+  void setResizeToplevel(bool resizeToplevel) nothrow
   {
     gtk_expander_set_resize_toplevel(cast(GtkExpander*)this._cPtr, resizeToplevel);
   }
@@ -484,7 +484,7 @@ class Expander : gtk.widget.Widget
       Params:
         useMarkup = true if the label’s text should be parsed for markup
   */
-  void setUseMarkup(bool useMarkup)
+  void setUseMarkup(bool useMarkup) nothrow
   {
     gtk_expander_set_use_markup(cast(GtkExpander*)this._cPtr, useMarkup);
   }
@@ -495,7 +495,7 @@ class Expander : gtk.widget.Widget
       Params:
         useUnderline = true if underlines in the text indicate mnemonics
   */
-  void setUseUnderline(bool useUnderline)
+  void setUseUnderline(bool useUnderline) nothrow
   {
     gtk_expander_set_use_underline(cast(GtkExpander*)this._cPtr, useUnderline);
   }
@@ -515,13 +515,13 @@ class Expander : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.expander.Expander)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -530,7 +530,14 @@ class Expander : gtk.widget.Widget
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.expander.Expander.activate");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -549,7 +556,7 @@ class ExpanderGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The child widget.
       Returns: Builder instance for fluent chaining
   */
-  T child(gtk.widget.Widget propval)
+  T child(gtk.widget.Widget propval) nothrow
   {
     return setProperty("child", propval);
   }
@@ -560,7 +567,7 @@ class ExpanderGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether the expander has been opened to reveal the child.
       Returns: Builder instance for fluent chaining
   */
-  T expanded(bool propval)
+  T expanded(bool propval) nothrow
   {
     return setProperty("expanded", propval);
   }
@@ -571,7 +578,7 @@ class ExpanderGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The text of the expanders label.
       Returns: Builder instance for fluent chaining
   */
-  T label(string propval)
+  T label(string propval) nothrow
   {
     return setProperty("label", propval);
   }
@@ -582,7 +589,7 @@ class ExpanderGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = A widget to display instead of the usual expander label.
       Returns: Builder instance for fluent chaining
   */
-  T labelWidget(gtk.widget.Widget propval)
+  T labelWidget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("label-widget", propval);
   }
@@ -594,7 +601,7 @@ class ExpanderGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           widget containing the expander upon expanding and collapsing.
       Returns: Builder instance for fluent chaining
   */
-  T resizeToplevel(bool propval)
+  T resizeToplevel(bool propval) nothrow
   {
     return setProperty("resize-toplevel", propval);
   }
@@ -605,7 +612,7 @@ class ExpanderGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether the text in the label is Pango markup.
       Returns: Builder instance for fluent chaining
   */
-  T useMarkup(bool propval)
+  T useMarkup(bool propval) nothrow
   {
     return setProperty("use-markup", propval);
   }
@@ -616,7 +623,7 @@ class ExpanderGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether an underline in the text indicates a mnemonic.
       Returns: Builder instance for fluent chaining
   */
-  T useUnderline(bool propval)
+  T useUnderline(bool propval) nothrow
   {
     return setProperty("use-underline", propval);
   }
@@ -629,7 +636,7 @@ final class ExpanderGidBuilder : ExpanderGidBuilderImpl!ExpanderGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Expander build()
+  Expander build() nothrow
   {
     return new Expander(cast(void*)createGObject(Expander._getGType), No.Take);
   }

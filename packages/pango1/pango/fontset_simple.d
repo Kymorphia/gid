@@ -22,26 +22,26 @@ class FontsetSimple : pango.fontset.Fontset
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_fontset_simple_get_type != &gidSymbolNotFound ? pango_fontset_simple_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override FontsetSimple self()
+  override FontsetSimple self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class FontsetSimple : pango.fontset.Fontset
       Get builder for [pango.fontset_simple.FontsetSimple]
       Returns: New builder object
   */
-  static FontsetSimpleGidBuilder builder()
+  static FontsetSimpleGidBuilder builder() nothrow
   {
     return new FontsetSimpleGidBuilder;
   }
@@ -62,7 +62,7 @@ class FontsetSimple : pango.fontset.Fontset
         language = a [pango.language.Language] tag
       Returns: the newly allocated [pango.fontset_simple.FontsetSimple]
   */
-  this(pango.language.Language language)
+  this(pango.language.Language language) nothrow
   {
     PangoFontsetSimple* _cretval;
     _cretval = pango_fontset_simple_new(language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);
@@ -77,7 +77,7 @@ class FontsetSimple : pango.fontset.Fontset
       Params:
         font = a [pango.font.Font].
   */
-  void append(pango.font.Font font)
+  void append(pango.font.Font font) nothrow
   {
     pango_fontset_simple_append(cast(PangoFontsetSimple*)this._cPtr, font ? cast(PangoFont*)font._cPtr(Yes.Dup) : null);
   }
@@ -86,7 +86,7 @@ class FontsetSimple : pango.fontset.Fontset
       Returns the number of fonts in the fontset.
       Returns: the size of fontset
   */
-  int size()
+  int size() nothrow
   {
     int _retval;
     _retval = pango_fontset_simple_size(cast(PangoFontsetSimple*)this._cPtr);
@@ -106,7 +106,7 @@ final class FontsetSimpleGidBuilder : FontsetSimpleGidBuilderImpl!FontsetSimpleG
       Create object from builder.
       Returns: New object
   */
-  FontsetSimple build()
+  FontsetSimple build() nothrow
   {
     return new FontsetSimple(cast(void*)createGObject(FontsetSimple._getGType), Yes.Take);
   }

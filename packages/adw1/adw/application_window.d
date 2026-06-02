@@ -68,26 +68,26 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_application_window_get_type != &gidSymbolNotFound ? adw_application_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ApplicationWindow self()
+  override ApplicationWindow self() nothrow
   {
     return this;
   }
@@ -96,7 +96,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
       Get builder for [adw.application_window.ApplicationWindow]
       Returns: New builder object
   */
-  static ApplicationWindowGidBuilder builder()
+  static ApplicationWindowGidBuilder builder() nothrow
   {
     return new ApplicationWindowGidBuilder;
   }
@@ -107,7 +107,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
         
         This property should always be used instead of [gtk.window.Window.child].
   */
-  @property gtk.widget.Widget content()
+  @property gtk.widget.Widget content() nothrow
   {
     return getContent();
   }
@@ -119,7 +119,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
           
           This property should always be used instead of [gtk.window.Window.child].
   */
-  @property void content(gtk.widget.Widget propval)
+  @property void content(gtk.widget.Widget propval) nothrow
   {
     setContent(propval);
   }
@@ -128,7 +128,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
       Get `currentBreakpoint` property.
       Returns: The current breakpoint.
   */
-  @property adw.breakpoint.Breakpoint currentBreakpoint()
+  @property adw.breakpoint.Breakpoint currentBreakpoint() nothrow
   {
     return getCurrentBreakpoint();
   }
@@ -137,7 +137,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
       Get `dialogs` property.
       Returns: The open dialogs.
   */
-  @property gio.list_model.ListModel dialogs()
+  @property gio.list_model.ListModel dialogs() nothrow
   {
     return getDialogs();
   }
@@ -146,7 +146,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
       Get `visibleDialog` property.
       Returns: The currently visible dialog
   */
-  @property adw.dialog.Dialog visibleDialog()
+  @property adw.dialog.Dialog visibleDialog() nothrow
   {
     return getVisibleDialog();
   }
@@ -158,7 +158,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
         app = an application instance
       Returns: the newly created [adw.application_window.ApplicationWindow]
   */
-  this(gtk.application.Application app)
+  this(gtk.application.Application app) nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_application_window_new(app ? cast(GtkApplication*)app._cPtr(No.Dup) : null);
@@ -171,7 +171,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
       Params:
         breakpoint = the breakpoint to add
   */
-  void addBreakpoint(adw.breakpoint.Breakpoint breakpoint)
+  void addBreakpoint(adw.breakpoint.Breakpoint breakpoint) nothrow
   {
     adw_application_window_add_breakpoint(cast(AdwApplicationWindow*)this._cPtr, breakpoint ? cast(AdwBreakpoint*)breakpoint._cPtr(Yes.Dup) : null);
   }
@@ -182,7 +182,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
       This method should always be used instead of [gtk.window.Window.getChild].
       Returns: the content widget of self
   */
-  gtk.widget.Widget getContent()
+  gtk.widget.Widget getContent() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_application_window_get_content(cast(AdwApplicationWindow*)this._cPtr);
@@ -194,7 +194,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
       Gets the current breakpoint.
       Returns: the current breakpoint
   */
-  adw.breakpoint.Breakpoint getCurrentBreakpoint()
+  adw.breakpoint.Breakpoint getCurrentBreakpoint() nothrow
   {
     AdwBreakpoint* _cretval;
     _cretval = adw_application_window_get_current_breakpoint(cast(AdwApplicationWindow*)this._cPtr);
@@ -208,7 +208,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
       This can be used to keep an up-to-date view.
       Returns: a list model for the dialogs of self
   */
-  gio.list_model.ListModel getDialogs()
+  gio.list_model.ListModel getDialogs() nothrow
   {
     GListModel* _cretval;
     _cretval = adw_application_window_get_dialogs(cast(AdwApplicationWindow*)this._cPtr);
@@ -220,7 +220,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
       Returns the currently visible dialog in self, if there's one.
       Returns: the visible dialog
   */
-  adw.dialog.Dialog getVisibleDialog()
+  adw.dialog.Dialog getVisibleDialog() nothrow
   {
     AdwDialog* _cretval;
     _cretval = adw_application_window_get_visible_dialog(cast(AdwApplicationWindow*)this._cPtr);
@@ -236,7 +236,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
       Params:
         content = the content widget
   */
-  void setContent(gtk.widget.Widget content = null)
+  void setContent(gtk.widget.Widget content = null) nothrow
   {
     adw_application_window_set_content(cast(AdwApplicationWindow*)this._cPtr, content ? cast(GtkWidget*)content._cPtr(No.Dup) : null);
   }
@@ -255,7 +255,7 @@ class ApplicationWindowGidBuilderImpl(T) : gtk.application_window.ApplicationWin
           This property should always be used instead of [gtk.window.Window.child].
       Returns: Builder instance for fluent chaining
   */
-  T content(gtk.widget.Widget propval)
+  T content(gtk.widget.Widget propval) nothrow
   {
     return setProperty("content", propval);
   }
@@ -268,7 +268,7 @@ final class ApplicationWindowGidBuilder : ApplicationWindowGidBuilderImpl!Applic
       Create object from builder.
       Returns: New object
   */
-  ApplicationWindow build()
+  ApplicationWindow build() nothrow
   {
     return new ApplicationWindow(cast(void*)createGObject(ApplicationWindow._getGType), No.Take);
   }

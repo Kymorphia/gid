@@ -18,26 +18,26 @@ class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitionin
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_hive_partitioning_get_type != &gidSymbolNotFound ? gadataset_hive_partitioning_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override HivePartitioning self()
+  override HivePartitioning self() nothrow
   {
     return this;
   }
@@ -46,7 +46,7 @@ class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitionin
       Get builder for [arrowdataset.hive_partitioning.HivePartitioning]
       Returns: New builder object
   */
-  static HivePartitioningGidBuilder builder()
+  static HivePartitioningGidBuilder builder() nothrow
   {
     return new HivePartitioningGidBuilder;
   }
@@ -65,7 +65,7 @@ class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitionin
   }
 
   /** */
-  string getNullFallback()
+  string getNullFallback() nothrow
   {
     char* _cretval;
     _cretval = gadataset_hive_partitioning_get_null_fallback(cast(GADatasetHivePartitioning*)this._cPtr);
@@ -86,7 +86,7 @@ final class HivePartitioningGidBuilder : HivePartitioningGidBuilderImpl!HivePart
       Create object from builder.
       Returns: New object
   */
-  HivePartitioning build()
+  HivePartitioning build() nothrow
   {
     return new HivePartitioning(cast(void*)createGObject(HivePartitioning._getGType), Yes.Take);
   }

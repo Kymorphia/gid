@@ -52,32 +52,32 @@ class IOChannel : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_io_channel_get_type != &gidSymbolNotFound ? g_io_channel_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override IOChannel self()
+  override IOChannel self() nothrow
   {
     return this;
   }
@@ -137,7 +137,7 @@ class IOChannel : gobject.boxed.Boxed
         fd = a file descriptor.
       Returns: a new #GIOChannel.
   */
-  static glib.iochannel.IOChannel unixNew(int fd)
+  static glib.iochannel.IOChannel unixNew(int fd) nothrow
   {
     GIOChannel* _cretval;
     _cretval = g_io_channel_unix_new(fd);
@@ -152,7 +152,7 @@ class IOChannel : gobject.boxed.Boxed
   
       Deprecated: Use [glib.iochannel.IOChannel.shutdown] instead.
   */
-  void close()
+  void close() nothrow
   {
     g_io_channel_close(cast(GIOChannel*)this._cPtr);
   }
@@ -181,7 +181,7 @@ class IOChannel : gobject.boxed.Boxed
       the #GIOChannel. Only the flags [glib.types.IOCondition.In] and [glib.types.IOCondition.Out] may be set.
       Returns: A #GIOCondition
   */
-  glib.types.IOCondition getBufferCondition()
+  glib.types.IOCondition getBufferCondition() nothrow
   {
     GIOCondition _cretval;
     _cretval = g_io_channel_get_buffer_condition(cast(GIOChannel*)this._cPtr);
@@ -193,7 +193,7 @@ class IOChannel : gobject.boxed.Boxed
       Gets the buffer size.
       Returns: the size of the buffer.
   */
-  size_t getBufferSize()
+  size_t getBufferSize() nothrow
   {
     size_t _retval;
     _retval = g_io_channel_get_buffer_size(cast(GIOChannel*)this._cPtr);
@@ -204,7 +204,7 @@ class IOChannel : gobject.boxed.Boxed
       Returns whether channel is buffered.
       Returns: true if the channel is buffered.
   */
-  bool getBuffered()
+  bool getBuffered() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_io_channel_get_buffered(cast(GIOChannel*)this._cPtr);
@@ -218,7 +218,7 @@ class IOChannel : gobject.boxed.Boxed
       by g_io_channel_new_file (), and false for all other channels.
       Returns: true if the channel will be closed, false otherwise.
   */
-  bool getCloseOnUnref()
+  bool getCloseOnUnref() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_io_channel_get_close_on_unref(cast(GIOChannel*)this._cPtr);
@@ -232,7 +232,7 @@ class IOChannel : gobject.boxed.Boxed
       Returns: A string containing the encoding, this string is
           owned by GLib and must not be freed.
   */
-  string getEncoding()
+  string getEncoding() nothrow
   {
     const(char)* _cretval;
     _cretval = g_io_channel_get_encoding(cast(GIOChannel*)this._cPtr);
@@ -252,7 +252,7 @@ class IOChannel : gobject.boxed.Boxed
       the internal values of these flags.
       Returns: the flags which are set on the channel
   */
-  glib.types.IOFlags getFlags()
+  glib.types.IOFlags getFlags() nothrow
   {
     GIOFlags _cretval;
     _cretval = g_io_channel_get_flags(cast(GIOChannel*)this._cPtr);
@@ -270,7 +270,7 @@ class IOChannel : gobject.boxed.Boxed
       Returns: The line termination string. This value
           is owned by GLib and must not be freed.
   */
-  string getLineTerm(out int length)
+  string getLineTerm(out int length) nothrow
   {
     const(char)* _cretval;
     _cretval = g_io_channel_get_line_term(cast(GIOChannel*)this._cPtr, cast(int*)&length);
@@ -285,7 +285,7 @@ class IOChannel : gobject.boxed.Boxed
       #GIOChannel, and so is not often needed by the application
       programmer (unless you are creating a new type of #GIOChannel).
   */
-  void init_()
+  void init_() nothrow
   {
     g_io_channel_init(cast(GIOChannel*)this._cPtr);
   }
@@ -301,7 +301,7 @@ class IOChannel : gobject.boxed.Boxed
   
       Deprecated: Use [glib.iochannel.IOChannel.readChars] instead.
   */
-  glib.types.IOError read(ref ubyte[] buf, out size_t bytesRead)
+  glib.types.IOError read(ref ubyte[] buf, out size_t bytesRead) nothrow
   {
     GIOError _cretval;
     size_t _count;
@@ -450,7 +450,7 @@ class IOChannel : gobject.boxed.Boxed
   
       Deprecated: Use [glib.iochannel.IOChannel.seekPosition] instead.
   */
-  glib.types.IOError seek(long offset, glib.types.SeekType type)
+  glib.types.IOError seek(long offset, glib.types.SeekType type) nothrow
   {
     GIOError _cretval;
     _cretval = g_io_channel_seek(cast(GIOChannel*)this._cPtr, offset, type);
@@ -487,7 +487,7 @@ class IOChannel : gobject.boxed.Boxed
       Params:
         size = the size of the buffer, or 0 to let GLib pick a good size
   */
-  void setBufferSize(size_t size)
+  void setBufferSize(size_t size) nothrow
   {
     g_io_channel_set_buffer_size(cast(GIOChannel*)this._cPtr, size);
   }
@@ -516,7 +516,7 @@ class IOChannel : gobject.boxed.Boxed
       Params:
         buffered = whether to set the channel buffered or unbuffered
   */
-  void setBuffered(bool buffered)
+  void setBuffered(bool buffered) nothrow
   {
     g_io_channel_set_buffered(cast(GIOChannel*)this._cPtr, buffered);
   }
@@ -533,7 +533,7 @@ class IOChannel : gobject.boxed.Boxed
         doClose = Whether to close the channel on the final unref of
                      the GIOChannel data structure.
   */
-  void setCloseOnUnref(bool doClose)
+  void setCloseOnUnref(bool doClose) nothrow
   {
     g_io_channel_set_close_on_unref(cast(GIOChannel*)this._cPtr, doClose);
   }
@@ -620,7 +620,7 @@ class IOChannel : gobject.boxed.Boxed
                       and the Unicode paragraph separator. Autodetection should not be
                       used for anything other than file-based channels.
   */
-  void setLineTerm(string lineTerm = null)
+  void setLineTerm(string lineTerm = null) nothrow
   {
     int _length;
     if (lineTerm)
@@ -658,7 +658,7 @@ class IOChannel : gobject.boxed.Boxed
       the #GIOChannel.
       Returns: the file descriptor of the #GIOChannel.
   */
-  int unixGetFd()
+  int unixGetFd() nothrow
   {
     int _retval;
     _retval = g_io_channel_unix_get_fd(cast(GIOChannel*)this._cPtr);
@@ -675,7 +675,7 @@ class IOChannel : gobject.boxed.Boxed
   
       Deprecated: Use [glib.iochannel.IOChannel.writeChars] instead.
   */
-  glib.types.IOError write(string buf, out size_t bytesWritten)
+  glib.types.IOError write(string buf, out size_t bytesWritten) nothrow
   {
     GIOError _cretval;
     size_t _count;
@@ -750,7 +750,7 @@ class IOChannel : gobject.boxed.Boxed
       Returns: a #GIOChannelError error number, e.g.
              `G_IO_CHANNEL_ERROR_INVAL`.
   */
-  static glib.types.IOChannelError errorFromErrno(int en)
+  static glib.types.IOChannelError errorFromErrno(int en) nothrow
   {
     GIOChannelError _cretval;
     _cretval = g_io_channel_error_from_errno(en);
@@ -759,7 +759,7 @@ class IOChannel : gobject.boxed.Boxed
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = g_io_channel_error_quark();
@@ -769,12 +769,12 @@ class IOChannel : gobject.boxed.Boxed
 
 class IOChannelException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(glib.iochannel.IOChannel.errorQuark, cast(int)code, msg);
   }

@@ -45,26 +45,26 @@ class StackSwitcher : gtk.box.Box
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_stack_switcher_get_type != &gidSymbolNotFound ? gtk_stack_switcher_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override StackSwitcher self()
+  override StackSwitcher self() nothrow
   {
     return this;
   }
@@ -73,7 +73,7 @@ class StackSwitcher : gtk.box.Box
       Get builder for [gtk.stack_switcher.StackSwitcher]
       Returns: New builder object
   */
-  static StackSwitcherGidBuilder builder()
+  static StackSwitcherGidBuilder builder() nothrow
   {
     return new StackSwitcherGidBuilder;
   }
@@ -83,7 +83,7 @@ class StackSwitcher : gtk.box.Box
       Returns: Use the "icon-size" property to change the size of the image displayed
         when a #GtkStackSwitcher is displaying icons.
   */
-  @property int iconSize()
+  @property int iconSize() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("icon-size");
   }
@@ -94,19 +94,19 @@ class StackSwitcher : gtk.box.Box
         propval = Use the "icon-size" property to change the size of the image displayed
           when a #GtkStackSwitcher is displaying icons.
   */
-  @property void iconSize(int propval)
+  @property void iconSize(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("icon-size", propval);
   }
 
   /** */
-  @property gtk.stack.Stack stack()
+  @property gtk.stack.Stack stack() nothrow
   {
     return getStack();
   }
 
   /** */
-  @property void stack(gtk.stack.Stack propval)
+  @property void stack(gtk.stack.Stack propval) nothrow
   {
     setStack(propval);
   }
@@ -115,7 +115,7 @@ class StackSwitcher : gtk.box.Box
       Create a new #GtkStackSwitcher.
       Returns: a new #GtkStackSwitcher.
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_stack_switcher_new();
@@ -128,7 +128,7 @@ class StackSwitcher : gtk.box.Box
       Returns: the stack, or null if
            none has been set explicitly.
   */
-  gtk.stack.Stack getStack()
+  gtk.stack.Stack getStack() nothrow
   {
     GtkStack* _cretval;
     _cretval = gtk_stack_switcher_get_stack(cast(GtkStackSwitcher*)this._cPtr);
@@ -142,7 +142,7 @@ class StackSwitcher : gtk.box.Box
       Params:
         stack = a #GtkStack
   */
-  void setStack(gtk.stack.Stack stack = null)
+  void setStack(gtk.stack.Stack stack = null) nothrow
   {
     gtk_stack_switcher_set_stack(cast(GtkStackSwitcher*)this._cPtr, stack ? cast(GtkStack*)stack._cPtr(No.Dup) : null);
   }
@@ -160,13 +160,13 @@ class StackSwitcherGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
           when a #GtkStackSwitcher is displaying icons.
       Returns: Builder instance for fluent chaining
   */
-  T iconSize(int propval)
+  T iconSize(int propval) nothrow
   {
     return setProperty("icon-size", propval);
   }
 
   /** */
-  T stack(gtk.stack.Stack propval)
+  T stack(gtk.stack.Stack propval) nothrow
   {
     return setProperty("stack", propval);
   }
@@ -179,7 +179,7 @@ final class StackSwitcherGidBuilder : StackSwitcherGidBuilderImpl!StackSwitcherG
       Create object from builder.
       Returns: New object
   */
-  StackSwitcher build()
+  StackSwitcher build() nothrow
   {
     return new StackSwitcher(cast(void*)createGObject(StackSwitcher._getGType), No.Take);
   }

@@ -22,26 +22,26 @@ class EventControllerLegacy : gtk.event_controller.EventController
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_event_controller_legacy_get_type != &gidSymbolNotFound ? gtk_event_controller_legacy_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override EventControllerLegacy self()
+  override EventControllerLegacy self() nothrow
   {
     return this;
   }
@@ -50,7 +50,7 @@ class EventControllerLegacy : gtk.event_controller.EventController
       Get builder for [gtk.event_controller_legacy.EventControllerLegacy]
       Returns: New builder object
   */
-  static EventControllerLegacyGidBuilder builder()
+  static EventControllerLegacyGidBuilder builder() nothrow
   {
     return new EventControllerLegacyGidBuilder;
   }
@@ -59,7 +59,7 @@ class EventControllerLegacy : gtk.event_controller.EventController
       Creates a new legacy event controller.
       Returns: the newly created event controller.
   */
-  this()
+  this() nothrow
   {
     GtkEventController* _cretval;
     _cretval = gtk_event_controller_legacy_new();
@@ -85,18 +85,19 @@ class EventControllerLegacy : gtk.event_controller.EventController
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event.Event)))
   && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.event_controller_legacy.EventControllerLegacy)))
   && Parameters!T.length < 3)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
 
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
@@ -104,7 +105,14 @@ class EventControllerLegacy : gtk.event_controller.EventController
       static if (Parameters!T.length > 1)
         _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
 
-      auto _retval = _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.event_controller_legacy.EventControllerLegacy.event");
+      }
 
       setVal!(bool)(_returnValue, _retval);
     }
@@ -126,7 +134,7 @@ final class EventControllerLegacyGidBuilder : EventControllerLegacyGidBuilderImp
       Create object from builder.
       Returns: New object
   */
-  EventControllerLegacy build()
+  EventControllerLegacy build() nothrow
   {
     return new EventControllerLegacy(cast(void*)createGObject(EventControllerLegacy._getGType), Yes.Take);
   }

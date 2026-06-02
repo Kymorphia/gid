@@ -21,7 +21,7 @@ struct VideoColorPrimaries
         value = a ITU-T H.273 colour primaries value
       Returns: the matched #GstVideoColorPrimaries
   */
-  static gstvideo.types.VideoColorPrimaries fromIso(uint value)
+  static gstvideo.types.VideoColorPrimaries fromIso(uint value) nothrow
   {
     GstVideoColorPrimaries _cretval;
     _cretval = gst_video_color_primaries_from_iso(value);
@@ -36,7 +36,7 @@ struct VideoColorPrimaries
         primaries = a #GstVideoColorPrimaries
       Returns: a #GstVideoColorPrimariesInfo for primaries.
   */
-  static gstvideo.types.VideoColorPrimariesInfo getInfo(gstvideo.types.VideoColorPrimaries primaries)
+  static gstvideo.types.VideoColorPrimariesInfo getInfo(gstvideo.types.VideoColorPrimaries primaries) nothrow
   {
     const(GstVideoColorPrimariesInfo)* _cretval;
     _cretval = gst_video_color_primaries_get_info(primaries);
@@ -54,7 +54,7 @@ struct VideoColorPrimaries
         other = another #GstVideoColorPrimaries
       Returns: TRUE if primaries and other can be considered equivalent.
   */
-  static bool isEquivalent(gstvideo.types.VideoColorPrimaries primaries, gstvideo.types.VideoColorPrimaries other)
+  static bool isEquivalent(gstvideo.types.VideoColorPrimaries primaries, gstvideo.types.VideoColorPrimaries other) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_video_color_primaries_is_equivalent(primaries, other);
@@ -71,7 +71,7 @@ struct VideoColorPrimaries
         primaries = a #GstVideoColorPrimaries
       Returns: The value of ISO/IEC 23001-8 colour primaries.
   */
-  static uint toIso(gstvideo.types.VideoColorPrimaries primaries)
+  static uint toIso(gstvideo.types.VideoColorPrimaries primaries) nothrow
   {
     uint _retval;
     _retval = gst_video_color_primaries_to_iso(primaries);

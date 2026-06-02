@@ -28,26 +28,26 @@ class ShortcutsShortcut : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_shortcuts_shortcut_get_type != &gidSymbolNotFound ? gtk_shortcuts_shortcut_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ShortcutsShortcut self()
+  override ShortcutsShortcut self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class ShortcutsShortcut : gtk.widget.Widget
       Get builder for [gtk.shortcuts_shortcut.ShortcutsShortcut]
       Returns: New builder object
   */
-  static ShortcutsShortcutGidBuilder builder()
+  static ShortcutsShortcutGidBuilder builder() nothrow
   {
     return new ShortcutsShortcutGidBuilder;
   }
@@ -68,7 +68,7 @@ class ShortcutsShortcut : gtk.widget.Widget
           
           This is used internally by GTK, and must not be modified by applications.
   */
-  @property void accelSizeGroup(gtk.size_group.SizeGroup propval)
+  @property void accelSizeGroup(gtk.size_group.SizeGroup propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.size_group.SizeGroup)("accel-size-group", propval);
   }
@@ -103,7 +103,7 @@ class ShortcutsShortcut : gtk.widget.Widget
         Note that `<`, `>` and `&` need to be escaped as `&lt;`, `&gt`; and `&amp`; when used
         in .ui files.
   */
-  @property string accelerator()
+  @property string accelerator() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("accelerator");
   }
@@ -139,7 +139,7 @@ class ShortcutsShortcut : gtk.widget.Widget
           Note that `<`, `>` and `&` need to be escaped as `&lt;`, `&gt`; and `&amp`; when used
           in .ui files.
   */
-  @property void accelerator(string propval)
+  @property void accelerator(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("accelerator", propval);
   }
@@ -153,7 +153,7 @@ class ShortcutsShortcut : gtk.widget.Widget
         action via [gtk.application.Application.setAccelsForAction], and
         setting [gtk.shortcuts_shortcut.ShortcutsShortcut.accelerator] is not necessary.
   */
-  @property string actionName()
+  @property string actionName() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("action-name");
   }
@@ -168,7 +168,7 @@ class ShortcutsShortcut : gtk.widget.Widget
           action via [gtk.application.Application.setAccelsForAction], and
           setting [gtk.shortcuts_shortcut.ShortcutsShortcut.accelerator] is not necessary.
   */
-  @property void actionName(string propval)
+  @property void actionName(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("action-name", propval);
   }
@@ -180,7 +180,7 @@ class ShortcutsShortcut : gtk.widget.Widget
         If the shortcut is used regardless of the text direction,
         set this property to [gtk.types.TextDirection.None].
   */
-  @property gtk.types.TextDirection direction()
+  @property gtk.types.TextDirection direction() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.TextDirection)("direction");
   }
@@ -193,7 +193,7 @@ class ShortcutsShortcut : gtk.widget.Widget
           If the shortcut is used regardless of the text direction,
           set this property to [gtk.types.TextDirection.None].
   */
-  @property void direction(gtk.types.TextDirection propval)
+  @property void direction(gtk.types.TextDirection propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.TextDirection)("direction", propval);
   }
@@ -207,7 +207,7 @@ class ShortcutsShortcut : gtk.widget.Widget
         
         For the other predefined gesture types, GTK provides an icon on its own.
   */
-  @property gio.icon.Icon icon()
+  @property gio.icon.Icon icon() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gio.icon.Icon)("icon");
   }
@@ -222,7 +222,7 @@ class ShortcutsShortcut : gtk.widget.Widget
           
           For the other predefined gesture types, GTK provides an icon on its own.
   */
-  @property void icon(gio.icon.Icon propval)
+  @property void icon(gio.icon.Icon propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gio.icon.Icon)("icon", propval);
   }
@@ -231,7 +231,7 @@ class ShortcutsShortcut : gtk.widget.Widget
       Get `iconSet` property.
       Returns: true if an icon has been set.
   */
-  @property bool iconSet()
+  @property bool iconSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("icon-set");
   }
@@ -241,7 +241,7 @@ class ShortcutsShortcut : gtk.widget.Widget
       Params:
         propval = true if an icon has been set.
   */
-  @property void iconSet(bool propval)
+  @property void iconSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("icon-set", propval);
   }
@@ -250,7 +250,7 @@ class ShortcutsShortcut : gtk.widget.Widget
       Get `shortcutType` property.
       Returns: The type of shortcut that is represented.
   */
-  @property gtk.types.ShortcutType shortcutType()
+  @property gtk.types.ShortcutType shortcutType() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.types.ShortcutType)("shortcut-type");
   }
@@ -260,7 +260,7 @@ class ShortcutsShortcut : gtk.widget.Widget
       Params:
         propval = The type of shortcut that is represented.
   */
-  @property void shortcutType(gtk.types.ShortcutType propval)
+  @property void shortcutType(gtk.types.ShortcutType propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.ShortcutType)("shortcut-type", propval);
   }
@@ -273,7 +273,7 @@ class ShortcutsShortcut : gtk.widget.Widget
         text that describes the gesture itself. For the predefined gesture
         types, GTK provides a subtitle on its own.
   */
-  @property string subtitle()
+  @property string subtitle() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("subtitle");
   }
@@ -287,7 +287,7 @@ class ShortcutsShortcut : gtk.widget.Widget
           text that describes the gesture itself. For the predefined gesture
           types, GTK provides a subtitle on its own.
   */
-  @property void subtitle(string propval)
+  @property void subtitle(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("subtitle", propval);
   }
@@ -296,7 +296,7 @@ class ShortcutsShortcut : gtk.widget.Widget
       Get `subtitleSet` property.
       Returns: true if a subtitle has been set.
   */
-  @property bool subtitleSet()
+  @property bool subtitleSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("subtitle-set");
   }
@@ -306,7 +306,7 @@ class ShortcutsShortcut : gtk.widget.Widget
       Params:
         propval = true if a subtitle has been set.
   */
-  @property void subtitleSet(bool propval)
+  @property void subtitleSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("subtitle-set", propval);
   }
@@ -318,7 +318,7 @@ class ShortcutsShortcut : gtk.widget.Widget
         
         This should be a short string that can fit in a single line.
   */
-  @property string title()
+  @property string title() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("title");
   }
@@ -331,7 +331,7 @@ class ShortcutsShortcut : gtk.widget.Widget
           
           This should be a short string that can fit in a single line.
   */
-  @property void title(string propval)
+  @property void title(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("title", propval);
   }
@@ -343,7 +343,7 @@ class ShortcutsShortcut : gtk.widget.Widget
           
           This is used internally by GTK, and must not be modified by applications.
   */
-  @property void titleSizeGroup(gtk.size_group.SizeGroup propval)
+  @property void titleSizeGroup(gtk.size_group.SizeGroup propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.size_group.SizeGroup)("title-size-group", propval);
   }
@@ -362,7 +362,7 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           This is used internally by GTK, and must not be modified by applications.
       Returns: Builder instance for fluent chaining
   */
-  T accelSizeGroup(gtk.size_group.SizeGroup propval)
+  T accelSizeGroup(gtk.size_group.SizeGroup propval) nothrow
   {
     return setProperty("accel-size-group", propval);
   }
@@ -399,7 +399,7 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           in .ui files.
       Returns: Builder instance for fluent chaining
   */
-  T accelerator(string propval)
+  T accelerator(string propval) nothrow
   {
     return setProperty("accelerator", propval);
   }
@@ -415,7 +415,7 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           setting [gtk.shortcuts_shortcut.ShortcutsShortcut.accelerator] is not necessary.
       Returns: Builder instance for fluent chaining
   */
-  T actionName(string propval)
+  T actionName(string propval) nothrow
   {
     return setProperty("action-name", propval);
   }
@@ -429,7 +429,7 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           set this property to [gtk.types.TextDirection.None].
       Returns: Builder instance for fluent chaining
   */
-  T direction(gtk.types.TextDirection propval)
+  T direction(gtk.types.TextDirection propval) nothrow
   {
     return setProperty("direction", propval);
   }
@@ -445,7 +445,7 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           For the other predefined gesture types, GTK provides an icon on its own.
       Returns: Builder instance for fluent chaining
   */
-  T icon(gio.icon.Icon propval)
+  T icon(gio.icon.Icon propval) nothrow
   {
     return setProperty("icon", propval);
   }
@@ -456,7 +456,7 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = true if an icon has been set.
       Returns: Builder instance for fluent chaining
   */
-  T iconSet(bool propval)
+  T iconSet(bool propval) nothrow
   {
     return setProperty("icon-set", propval);
   }
@@ -467,7 +467,7 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The type of shortcut that is represented.
       Returns: Builder instance for fluent chaining
   */
-  T shortcutType(gtk.types.ShortcutType propval)
+  T shortcutType(gtk.types.ShortcutType propval) nothrow
   {
     return setProperty("shortcut-type", propval);
   }
@@ -482,7 +482,7 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           types, GTK provides a subtitle on its own.
       Returns: Builder instance for fluent chaining
   */
-  T subtitle(string propval)
+  T subtitle(string propval) nothrow
   {
     return setProperty("subtitle", propval);
   }
@@ -493,7 +493,7 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = true if a subtitle has been set.
       Returns: Builder instance for fluent chaining
   */
-  T subtitleSet(bool propval)
+  T subtitleSet(bool propval) nothrow
   {
     return setProperty("subtitle-set", propval);
   }
@@ -507,7 +507,7 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           This should be a short string that can fit in a single line.
       Returns: Builder instance for fluent chaining
   */
-  T title(string propval)
+  T title(string propval) nothrow
   {
     return setProperty("title", propval);
   }
@@ -520,7 +520,7 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           This is used internally by GTK, and must not be modified by applications.
       Returns: Builder instance for fluent chaining
   */
-  T titleSizeGroup(gtk.size_group.SizeGroup propval)
+  T titleSizeGroup(gtk.size_group.SizeGroup propval) nothrow
   {
     return setProperty("title-size-group", propval);
   }
@@ -533,7 +533,7 @@ final class ShortcutsShortcutGidBuilder : ShortcutsShortcutGidBuilderImpl!Shortc
       Create object from builder.
       Returns: New object
   */
-  ShortcutsShortcut build()
+  ShortcutsShortcut build() nothrow
   {
     return new ShortcutsShortcut(cast(void*)createGObject(ShortcutsShortcut._getGType), No.Take);
   }

@@ -74,7 +74,7 @@ interface SocketConnectable
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_socket_connectable_get_type != &gidSymbolNotFound ? g_socket_connectable_get_type() : cast(GType)0;

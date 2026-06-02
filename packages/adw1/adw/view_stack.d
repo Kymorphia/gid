@@ -78,26 +78,26 @@ class ViewStack : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_view_stack_get_type != &gidSymbolNotFound ? adw_view_stack_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ViewStack self()
+  override ViewStack self() nothrow
   {
     return this;
   }
@@ -106,7 +106,7 @@ class ViewStack : gtk.widget.Widget
       Get builder for [adw.view_stack.ViewStack]
       Returns: New builder object
   */
-  static ViewStackGidBuilder builder()
+  static ViewStackGidBuilder builder() nothrow
   {
     return new ViewStackGidBuilder;
   }
@@ -121,7 +121,7 @@ class ViewStack : gtk.widget.Widget
         If it's `FALSE`, the stack may change width when a different child becomes
         visible.
   */
-  @property bool hhomogeneous()
+  @property bool hhomogeneous() nothrow
   {
     return getHhomogeneous();
   }
@@ -137,7 +137,7 @@ class ViewStack : gtk.widget.Widget
           If it's `FALSE`, the stack may change width when a different child becomes
           visible.
   */
-  @property void hhomogeneous(bool propval)
+  @property void hhomogeneous(bool propval) nothrow
   {
     setHhomogeneous(propval);
   }
@@ -150,7 +150,7 @@ class ViewStack : gtk.widget.Widget
         [gtk.selection_model.SelectionModel] and can be used to track and change the visible
         page.
   */
-  @property gtk.selection_model.SelectionModel pages()
+  @property gtk.selection_model.SelectionModel pages() nothrow
   {
     return getPages();
   }
@@ -165,7 +165,7 @@ class ViewStack : gtk.widget.Widget
         If it's `FALSE`, the stack may change height when a different child becomes
         visible.
   */
-  @property bool vhomogeneous()
+  @property bool vhomogeneous() nothrow
   {
     return getVhomogeneous();
   }
@@ -181,7 +181,7 @@ class ViewStack : gtk.widget.Widget
           If it's `FALSE`, the stack may change height when a different child becomes
           visible.
   */
-  @property void vhomogeneous(bool propval)
+  @property void vhomogeneous(bool propval) nothrow
   {
     setVhomogeneous(propval);
   }
@@ -190,7 +190,7 @@ class ViewStack : gtk.widget.Widget
       Get `visibleChild` property.
       Returns: The widget currently visible in the stack.
   */
-  @property gtk.widget.Widget visibleChild()
+  @property gtk.widget.Widget visibleChild() nothrow
   {
     return getVisibleChild();
   }
@@ -200,7 +200,7 @@ class ViewStack : gtk.widget.Widget
       Params:
         propval = The widget currently visible in the stack.
   */
-  @property void visibleChild(gtk.widget.Widget propval)
+  @property void visibleChild(gtk.widget.Widget propval) nothrow
   {
     setVisibleChild(propval);
   }
@@ -211,7 +211,7 @@ class ViewStack : gtk.widget.Widget
         
         See [adw.view_stack.ViewStack.visibleChild].
   */
-  @property string visibleChildName()
+  @property string visibleChildName() nothrow
   {
     return getVisibleChildName();
   }
@@ -223,7 +223,7 @@ class ViewStack : gtk.widget.Widget
           
           See [adw.view_stack.ViewStack.visibleChild].
   */
-  @property void visibleChildName(string propval)
+  @property void visibleChildName(string propval) nothrow
   {
     setVisibleChildName(propval);
   }
@@ -232,7 +232,7 @@ class ViewStack : gtk.widget.Widget
       Creates a new [adw.view_stack.ViewStack].
       Returns: the newly created [adw.view_stack.ViewStack]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_view_stack_new();
@@ -246,7 +246,7 @@ class ViewStack : gtk.widget.Widget
         child = the widget to add
       Returns: the [adw.view_stack_page.ViewStackPage] for child
   */
-  adw.view_stack_page.ViewStackPage add(gtk.widget.Widget child)
+  adw.view_stack_page.ViewStackPage add(gtk.widget.Widget child) nothrow
   {
     AdwViewStackPage* _cretval;
     _cretval = adw_view_stack_add(cast(AdwViewStack*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -264,7 +264,7 @@ class ViewStack : gtk.widget.Widget
         name = the name for child
       Returns: the [adw.view_stack_page.ViewStackPage] for child
   */
-  adw.view_stack_page.ViewStackPage addNamed(gtk.widget.Widget child, string name = null)
+  adw.view_stack_page.ViewStackPage addNamed(gtk.widget.Widget child, string name = null) nothrow
   {
     AdwViewStackPage* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -285,7 +285,7 @@ class ViewStack : gtk.widget.Widget
         title = a human-readable title for child
       Returns: the [adw.view_stack_page.ViewStackPage] for child
   */
-  adw.view_stack_page.ViewStackPage addTitled(gtk.widget.Widget child, string name, string title)
+  adw.view_stack_page.ViewStackPage addTitled(gtk.widget.Widget child, string name, string title) nothrow
   {
     AdwViewStackPage* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -308,7 +308,7 @@ class ViewStack : gtk.widget.Widget
         iconName = an icon name for child
       Returns: the [adw.view_stack_page.ViewStackPage] for child
   */
-  adw.view_stack_page.ViewStackPage addTitledWithIcon(gtk.widget.Widget child, string name, string title, string iconName)
+  adw.view_stack_page.ViewStackPage addTitledWithIcon(gtk.widget.Widget child, string name, string title, string iconName) nothrow
   {
     AdwViewStackPage* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -326,7 +326,7 @@ class ViewStack : gtk.widget.Widget
         name = the name of the child to find
       Returns: the requested child
   */
-  gtk.widget.Widget getChildByName(string name)
+  gtk.widget.Widget getChildByName(string name) nothrow
   {
     GtkWidget* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
@@ -339,7 +339,7 @@ class ViewStack : gtk.widget.Widget
       Gets whether self is horizontally homogeneous.
       Returns: whether self is horizontally homogeneous
   */
-  bool getHhomogeneous()
+  bool getHhomogeneous() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_view_stack_get_hhomogeneous(cast(AdwViewStack*)this._cPtr);
@@ -353,7 +353,7 @@ class ViewStack : gtk.widget.Widget
         child = a child of self
       Returns: the page object for child
   */
-  adw.view_stack_page.ViewStackPage getPage(gtk.widget.Widget child)
+  adw.view_stack_page.ViewStackPage getPage(gtk.widget.Widget child) nothrow
   {
     AdwViewStackPage* _cretval;
     _cretval = adw_view_stack_get_page(cast(AdwViewStack*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
@@ -369,7 +369,7 @@ class ViewStack : gtk.widget.Widget
       page.
       Returns: a [gtk.selection_model.SelectionModel] for the stack's children
   */
-  gtk.selection_model.SelectionModel getPages()
+  gtk.selection_model.SelectionModel getPages() nothrow
   {
     GtkSelectionModel* _cretval;
     _cretval = adw_view_stack_get_pages(cast(AdwViewStack*)this._cPtr);
@@ -381,7 +381,7 @@ class ViewStack : gtk.widget.Widget
       Gets whether self is vertically homogeneous.
       Returns: whether self is vertically homogeneous
   */
-  bool getVhomogeneous()
+  bool getVhomogeneous() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_view_stack_get_vhomogeneous(cast(AdwViewStack*)this._cPtr);
@@ -392,7 +392,7 @@ class ViewStack : gtk.widget.Widget
       Gets the currently visible child of self.
       Returns: the visible child
   */
-  gtk.widget.Widget getVisibleChild()
+  gtk.widget.Widget getVisibleChild() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_view_stack_get_visible_child(cast(AdwViewStack*)this._cPtr);
@@ -404,7 +404,7 @@ class ViewStack : gtk.widget.Widget
       Returns the name of the currently visible child of self.
       Returns: the name of the visible child
   */
-  string getVisibleChildName()
+  string getVisibleChildName() nothrow
   {
     const(char)* _cretval;
     _cretval = adw_view_stack_get_visible_child_name(cast(AdwViewStack*)this._cPtr);
@@ -418,7 +418,7 @@ class ViewStack : gtk.widget.Widget
       Params:
         child = the child to remove
   */
-  void remove(gtk.widget.Widget child)
+  void remove(gtk.widget.Widget child) nothrow
   {
     adw_view_stack_remove(cast(AdwViewStack*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -435,7 +435,7 @@ class ViewStack : gtk.widget.Widget
       Params:
         hhomogeneous = whether to make self horizontally homogeneous
   */
-  void setHhomogeneous(bool hhomogeneous)
+  void setHhomogeneous(bool hhomogeneous) nothrow
   {
     adw_view_stack_set_hhomogeneous(cast(AdwViewStack*)this._cPtr, hhomogeneous);
   }
@@ -452,7 +452,7 @@ class ViewStack : gtk.widget.Widget
       Params:
         vhomogeneous = whether to make self vertically homogeneous
   */
-  void setVhomogeneous(bool vhomogeneous)
+  void setVhomogeneous(bool vhomogeneous) nothrow
   {
     adw_view_stack_set_vhomogeneous(cast(AdwViewStack*)this._cPtr, vhomogeneous);
   }
@@ -463,7 +463,7 @@ class ViewStack : gtk.widget.Widget
       Params:
         child = a child of self
   */
-  void setVisibleChild(gtk.widget.Widget child)
+  void setVisibleChild(gtk.widget.Widget child) nothrow
   {
     adw_view_stack_set_visible_child(cast(AdwViewStack*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
@@ -476,7 +476,7 @@ class ViewStack : gtk.widget.Widget
       Params:
         name = the name of the child
   */
-  void setVisibleChildName(string name)
+  void setVisibleChildName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     adw_view_stack_set_visible_child_name(cast(AdwViewStack*)this._cPtr, _name);
@@ -500,7 +500,7 @@ class ViewStackGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           visible.
       Returns: Builder instance for fluent chaining
   */
-  T hhomogeneous(bool propval)
+  T hhomogeneous(bool propval) nothrow
   {
     return setProperty("hhomogeneous", propval);
   }
@@ -517,7 +517,7 @@ class ViewStackGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           visible.
       Returns: Builder instance for fluent chaining
   */
-  T vhomogeneous(bool propval)
+  T vhomogeneous(bool propval) nothrow
   {
     return setProperty("vhomogeneous", propval);
   }
@@ -528,7 +528,7 @@ class ViewStackGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The widget currently visible in the stack.
       Returns: Builder instance for fluent chaining
   */
-  T visibleChild(gtk.widget.Widget propval)
+  T visibleChild(gtk.widget.Widget propval) nothrow
   {
     return setProperty("visible-child", propval);
   }
@@ -541,7 +541,7 @@ class ViewStackGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           See [adw.view_stack.ViewStack.visibleChild].
       Returns: Builder instance for fluent chaining
   */
-  T visibleChildName(string propval)
+  T visibleChildName(string propval) nothrow
   {
     return setProperty("visible-child-name", propval);
   }
@@ -554,7 +554,7 @@ final class ViewStackGidBuilder : ViewStackGidBuilderImpl!ViewStackGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ViewStack build()
+  ViewStack build() nothrow
   {
     return new ViewStack(cast(void*)createGObject(ViewStack._getGType), No.Take);
   }

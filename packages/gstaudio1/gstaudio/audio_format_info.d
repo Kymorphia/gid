@@ -15,11 +15,8 @@ class AudioFormatInfo
   GstAudioFormatInfo _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gstaudio.audio_format_info.AudioFormatInfo");
-
     _cInstance = *cast(GstAudioFormatInfo*)ptr;
 
     if (take)
@@ -27,7 +24,7 @@ class AudioFormatInfo
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -36,7 +33,7 @@ class AudioFormatInfo
       Get `format` field.
       Returns: #GstAudioFormat
   */
-  @property gstaudio.types.AudioFormat format()
+  @property gstaudio.types.AudioFormat format() nothrow
   {
     return cast(gstaudio.types.AudioFormat)(cast(GstAudioFormatInfo*)this._cPtr).format;
   }
@@ -46,7 +43,7 @@ class AudioFormatInfo
       Params:
         propval = #GstAudioFormat
   */
-  @property void format(gstaudio.types.AudioFormat propval)
+  @property void format(gstaudio.types.AudioFormat propval) nothrow
   {
     (cast(GstAudioFormatInfo*)this._cPtr).format = cast(GstAudioFormat)propval;
   }
@@ -55,7 +52,7 @@ class AudioFormatInfo
       Get `name` field.
       Returns: string representation of the format
   */
-  @property string name()
+  @property string name() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstAudioFormatInfo*)this._cPtr).name);
   }
@@ -65,7 +62,7 @@ class AudioFormatInfo
       Params:
         propval = string representation of the format
   */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstAudioFormatInfo*)this._cPtr).name);
     dToC(propval, cast(void*)&(cast(GstAudioFormatInfo*)this._cPtr).name);
@@ -75,7 +72,7 @@ class AudioFormatInfo
       Get `description` field.
       Returns: user readable description of the format
   */
-  @property string description()
+  @property string description() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GstAudioFormatInfo*)this._cPtr).description);
   }
@@ -85,7 +82,7 @@ class AudioFormatInfo
       Params:
         propval = user readable description of the format
   */
-  @property void description(string propval)
+  @property void description(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GstAudioFormatInfo*)this._cPtr).description);
     dToC(propval, cast(void*)&(cast(GstAudioFormatInfo*)this._cPtr).description);
@@ -95,7 +92,7 @@ class AudioFormatInfo
       Get `flags` field.
       Returns: #GstAudioFormatFlags
   */
-  @property gstaudio.types.AudioFormatFlags flags()
+  @property gstaudio.types.AudioFormatFlags flags() nothrow
   {
     return cast(gstaudio.types.AudioFormatFlags)(cast(GstAudioFormatInfo*)this._cPtr).flags;
   }
@@ -105,7 +102,7 @@ class AudioFormatInfo
       Params:
         propval = #GstAudioFormatFlags
   */
-  @property void flags(gstaudio.types.AudioFormatFlags propval)
+  @property void flags(gstaudio.types.AudioFormatFlags propval) nothrow
   {
     (cast(GstAudioFormatInfo*)this._cPtr).flags = cast(GstAudioFormatFlags)propval;
   }
@@ -114,7 +111,7 @@ class AudioFormatInfo
       Get `endianness` field.
       Returns: the endianness
   */
-  @property int endianness()
+  @property int endianness() nothrow
   {
     return (cast(GstAudioFormatInfo*)this._cPtr).endianness;
   }
@@ -124,7 +121,7 @@ class AudioFormatInfo
       Params:
         propval = the endianness
   */
-  @property void endianness(int propval)
+  @property void endianness(int propval) nothrow
   {
     (cast(GstAudioFormatInfo*)this._cPtr).endianness = propval;
   }
@@ -133,7 +130,7 @@ class AudioFormatInfo
       Get `width` field.
       Returns: amount of bits used for one sample
   */
-  @property int width()
+  @property int width() nothrow
   {
     return (cast(GstAudioFormatInfo*)this._cPtr).width;
   }
@@ -143,7 +140,7 @@ class AudioFormatInfo
       Params:
         propval = amount of bits used for one sample
   */
-  @property void width(int propval)
+  @property void width(int propval) nothrow
   {
     (cast(GstAudioFormatInfo*)this._cPtr).width = propval;
   }
@@ -152,7 +149,7 @@ class AudioFormatInfo
       Get `depth` field.
       Returns: amount of valid bits in @width
   */
-  @property int depth()
+  @property int depth() nothrow
   {
     return (cast(GstAudioFormatInfo*)this._cPtr).depth;
   }
@@ -162,7 +159,7 @@ class AudioFormatInfo
       Params:
         propval = amount of valid bits in @width
   */
-  @property void depth(int propval)
+  @property void depth(int propval) nothrow
   {
     (cast(GstAudioFormatInfo*)this._cPtr).depth = propval;
   }
@@ -171,7 +168,7 @@ class AudioFormatInfo
       Get `unpackFormat` field.
       Returns: the format of the unpacked samples
   */
-  @property gstaudio.types.AudioFormat unpackFormat()
+  @property gstaudio.types.AudioFormat unpackFormat() nothrow
   {
     return cast(gstaudio.types.AudioFormat)(cast(GstAudioFormatInfo*)this._cPtr).unpackFormat;
   }
@@ -181,7 +178,7 @@ class AudioFormatInfo
       Params:
         propval = the format of the unpacked samples
   */
-  @property void unpackFormat(gstaudio.types.AudioFormat propval)
+  @property void unpackFormat(gstaudio.types.AudioFormat propval) nothrow
   {
     (cast(GstAudioFormatInfo*)this._cPtr).unpackFormat = cast(GstAudioFormat)propval;
   }
@@ -193,7 +190,7 @@ class AudioFormatInfo
         dest = a destination
             to fill
   */
-  void fillSilence(ubyte[] dest)
+  void fillSilence(ubyte[] dest) nothrow
   {
     size_t _length;
     if (dest)

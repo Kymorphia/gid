@@ -17,26 +17,26 @@ class Multipart : gmime.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mime_multipart_get_type != &gidSymbolNotFound ? g_mime_multipart_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Multipart self()
+  override Multipart self() nothrow
   {
     return this;
   }
@@ -45,7 +45,7 @@ class Multipart : gmime.object.ObjectWrap
       Get builder for [gmime.multipart.Multipart]
       Returns: New builder object
   */
-  static MultipartGidBuilder builder()
+  static MultipartGidBuilder builder() nothrow
   {
     return new MultipartGidBuilder;
   }
@@ -56,7 +56,7 @@ class Multipart : gmime.object.ObjectWrap
       Returns: an empty MIME multipart object with a default content-type of
         multipart/mixed.
   */
-  this()
+  this() nothrow
   {
     GMimeMultipart* _cretval;
     _cretval = g_mime_multipart_new();
@@ -72,7 +72,7 @@ class Multipart : gmime.object.ObjectWrap
       Returns: an empty MIME multipart object with a content-type of
         multipart/subtype.
   */
-  static gmime.multipart.Multipart newWithSubtype(string subtype)
+  static gmime.multipart.Multipart newWithSubtype(string subtype) nothrow
   {
     GMimeMultipart* _cretval;
     const(char)* _subtype = subtype.toCString(No.Alloc);
@@ -87,7 +87,7 @@ class Multipart : gmime.object.ObjectWrap
       Params:
         part = a #GMimeObject
   */
-  void add(gmime.object.ObjectWrap part)
+  void add(gmime.object.ObjectWrap part) nothrow
   {
     g_mime_multipart_add(cast(GMimeMultipart*)this._cPtr, part ? cast(GMimeObject*)part._cPtr(No.Dup) : null);
   }
@@ -95,7 +95,7 @@ class Multipart : gmime.object.ObjectWrap
   /**
       Removes all subparts from multipart.
   */
-  void clear()
+  void clear() nothrow
   {
     g_mime_multipart_clear(cast(GMimeMultipart*)this._cPtr);
   }
@@ -108,7 +108,7 @@ class Multipart : gmime.object.ObjectWrap
       Returns: true if part is a subpart of multipart or false
         otherwise.
   */
-  bool contains(gmime.object.ObjectWrap part)
+  bool contains(gmime.object.ObjectWrap part) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_multipart_contains(cast(GMimeMultipart*)this._cPtr, part ? cast(GMimeObject*)part._cPtr(No.Dup) : null);
@@ -122,13 +122,20 @@ class Multipart : gmime.object.ObjectWrap
         callback = function to call for each of multipart's
             subparts.
   */
-  void foreach_(gmime.types.ObjectForeachFunc callback)
+  void foreach_(gmime.types.ObjectForeachFunc callback) nothrow
   {
-    extern(C) void _callbackCallback(GMimeObject* parent, GMimeObject* part, void* userData)
+    extern(C) void _callbackCallback(GMimeObject* parent, GMimeObject* part, void* userData) nothrow
     {
       auto _dlg = cast(gmime.types.ObjectForeachFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gmime.object.ObjectWrap)(cast(void*)parent, No.Take), gobject.object.ObjectWrap._getDObject!(gmime.object.ObjectWrap)(cast(void*)part, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gmime.object.ObjectWrap)(cast(void*)parent, No.Take), gobject.object.ObjectWrap._getDObject!(gmime.object.ObjectWrap)(cast(void*)part, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gmime.types.ObjectForeachFunc");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? cast(void*)&(callback) : null;
@@ -141,7 +148,7 @@ class Multipart : gmime.object.ObjectWrap
       and returned.
       Returns: the boundary on the multipart.
   */
-  string getBoundary()
+  string getBoundary() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_multipart_get_boundary(cast(GMimeMultipart*)this._cPtr);
@@ -153,7 +160,7 @@ class Multipart : gmime.object.ObjectWrap
       Gets the number of parts contained within multipart.
       Returns: the number of parts contained within multipart.
   */
-  int getCount()
+  int getCount() nothrow
   {
     int _retval;
     _retval = g_mime_multipart_get_count(cast(GMimeMultipart*)this._cPtr);
@@ -164,7 +171,7 @@ class Multipart : gmime.object.ObjectWrap
       Gets the epilogue on the multipart.
       Returns: a pointer to the epilogue string on the multipart.
   */
-  string getEpilogue()
+  string getEpilogue() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_multipart_get_epilogue(cast(GMimeMultipart*)this._cPtr);
@@ -179,7 +186,7 @@ class Multipart : gmime.object.ObjectWrap
         index = the 0-based index of the part
       Returns: the part at position index.
   */
-  gmime.object.ObjectWrap getPart(int index)
+  gmime.object.ObjectWrap getPart(int index) nothrow
   {
     GMimeObject* _cretval;
     _cretval = g_mime_multipart_get_part(cast(GMimeMultipart*)this._cPtr, index);
@@ -191,7 +198,7 @@ class Multipart : gmime.object.ObjectWrap
       Gets the prologue on the multipart.
       Returns: a pointer to the prologue string on the multipart.
   */
-  string getPrologue()
+  string getPrologue() nothrow
   {
     const(char)* _cretval;
     _cretval = g_mime_multipart_get_prologue(cast(GMimeMultipart*)this._cPtr);
@@ -208,7 +215,7 @@ class Multipart : gmime.object.ObjectWrap
       Returns: the #GMimeObject whose content-id matches
         the search string, or null if a match cannot be found.
   */
-  gmime.object.ObjectWrap getSubpartFromContentId(string contentId)
+  gmime.object.ObjectWrap getSubpartFromContentId(string contentId) nothrow
   {
     GMimeObject* _cretval;
     const(char)* _contentId = contentId.toCString(No.Alloc);
@@ -224,7 +231,7 @@ class Multipart : gmime.object.ObjectWrap
         part = a #GMimeObject
       Returns: the 0-based index of part within multipart or %-1 if not found.
   */
-  int indexOf(gmime.object.ObjectWrap part)
+  int indexOf(gmime.object.ObjectWrap part) nothrow
   {
     int _retval;
     _retval = g_mime_multipart_index_of(cast(GMimeMultipart*)this._cPtr, part ? cast(GMimeObject*)part._cPtr(No.Dup) : null);
@@ -238,7 +245,7 @@ class Multipart : gmime.object.ObjectWrap
         index = the 0-based index to insert the part
         part = a #GMimeObject
   */
-  void insert(int index, gmime.object.ObjectWrap part)
+  void insert(int index, gmime.object.ObjectWrap part) nothrow
   {
     g_mime_multipart_insert(cast(GMimeMultipart*)this._cPtr, index, part ? cast(GMimeObject*)part._cPtr(No.Dup) : null);
   }
@@ -250,7 +257,7 @@ class Multipart : gmime.object.ObjectWrap
         part = a #GMimeObject
       Returns: true if the part was removed or false otherwise.
   */
-  bool remove(gmime.object.ObjectWrap part)
+  bool remove(gmime.object.ObjectWrap part) nothrow
   {
     bool _retval;
     _retval = cast(bool)g_mime_multipart_remove(cast(GMimeMultipart*)this._cPtr, part ? cast(GMimeObject*)part._cPtr(No.Dup) : null);
@@ -265,7 +272,7 @@ class Multipart : gmime.object.ObjectWrap
       Returns: the mime part that was removed or null
         if the part was not contained within the multipart.
   */
-  gmime.object.ObjectWrap removeAt(int index)
+  gmime.object.ObjectWrap removeAt(int index) nothrow
   {
     GMimeObject* _cretval;
     _cretval = g_mime_multipart_remove_at(cast(GMimeMultipart*)this._cPtr, index);
@@ -283,7 +290,7 @@ class Multipart : gmime.object.ObjectWrap
       Returns: the part that was replaced or null
         if the part was not contained within the multipart.
   */
-  gmime.object.ObjectWrap replace(int index, gmime.object.ObjectWrap replacement)
+  gmime.object.ObjectWrap replace(int index, gmime.object.ObjectWrap replacement) nothrow
   {
     GMimeObject* _cretval;
     _cretval = g_mime_multipart_replace(cast(GMimeMultipart*)this._cPtr, index, replacement ? cast(GMimeObject*)replacement._cPtr(No.Dup) : null);
@@ -298,7 +305,7 @@ class Multipart : gmime.object.ObjectWrap
       Params:
         boundary = boundary or null to autogenerate one
   */
-  void setBoundary(string boundary)
+  void setBoundary(string boundary) nothrow
   {
     const(char)* _boundary = boundary.toCString(No.Alloc);
     g_mime_multipart_set_boundary(cast(GMimeMultipart*)this._cPtr, _boundary);
@@ -310,7 +317,7 @@ class Multipart : gmime.object.ObjectWrap
       Params:
         epilogue = epilogue
   */
-  void setEpilogue(string epilogue)
+  void setEpilogue(string epilogue) nothrow
   {
     const(char)* _epilogue = epilogue.toCString(No.Alloc);
     g_mime_multipart_set_epilogue(cast(GMimeMultipart*)this._cPtr, _epilogue);
@@ -322,7 +329,7 @@ class Multipart : gmime.object.ObjectWrap
       Params:
         prologue = prologue
   */
-  void setPrologue(string prologue)
+  void setPrologue(string prologue) nothrow
   {
     const(char)* _prologue = prologue.toCString(No.Alloc);
     g_mime_multipart_set_prologue(cast(GMimeMultipart*)this._cPtr, _prologue);
@@ -341,7 +348,7 @@ final class MultipartGidBuilder : MultipartGidBuilderImpl!MultipartGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Multipart build()
+  Multipart build() nothrow
   {
     return new Multipart(cast(void*)createGObject(Multipart._getGType), Yes.Take);
   }

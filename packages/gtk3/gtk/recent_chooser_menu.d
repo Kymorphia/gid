@@ -43,26 +43,26 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_recent_chooser_menu_get_type != &gidSymbolNotFound ? gtk_recent_chooser_menu_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override RecentChooserMenu self()
+  override RecentChooserMenu self() nothrow
   {
     return this;
   }
@@ -71,7 +71,7 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
       Get builder for [gtk.recent_chooser_menu.RecentChooserMenu]
       Returns: New builder object
   */
-  static RecentChooserMenuGidBuilder builder()
+  static RecentChooserMenuGidBuilder builder() nothrow
   {
     return new RecentChooserMenuGidBuilder;
   }
@@ -81,7 +81,7 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
       Returns: Whether the first ten items in the menu should be prepended by
         a number acting as a unique mnemonic.
   */
-  @property bool showNumbers()
+  @property bool showNumbers() nothrow
   {
     return getShowNumbers();
   }
@@ -92,7 +92,7 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
         propval = Whether the first ten items in the menu should be prepended by
           a number acting as a unique mnemonic.
   */
-  @property void showNumbers(bool propval)
+  @property void showNumbers(bool propval) nothrow
   {
     setShowNumbers(propval);
   }
@@ -115,7 +115,7 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
       a #GtkRecentChooserMenu widget bound to another #GtkRecentManager object.
       Returns: a new #GtkRecentChooserMenu
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_recent_chooser_menu_new();
@@ -135,7 +135,7 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
         manager = a #GtkRecentManager
       Returns: a new #GtkRecentChooserMenu, bound to manager.
   */
-  static gtk.recent_chooser_menu.RecentChooserMenu newForManager(gtk.recent_manager.RecentManager manager)
+  static gtk.recent_chooser_menu.RecentChooserMenu newForManager(gtk.recent_manager.RecentManager manager) nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_recent_chooser_menu_new_for_manager(manager ? cast(GtkRecentManager*)manager._cPtr(No.Dup) : null);
@@ -147,7 +147,7 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
       Returns the value set by [gtk.recent_chooser_menu.RecentChooserMenu.setShowNumbers].
       Returns: true if numbers should be shown.
   */
-  bool getShowNumbers()
+  bool getShowNumbers() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_recent_chooser_menu_get_show_numbers(cast(GtkRecentChooserMenu*)this._cPtr);
@@ -163,7 +163,7 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
       Params:
         showNumbers = whether to show numbers
   */
-  void setShowNumbers(bool showNumbers)
+  void setShowNumbers(bool showNumbers) nothrow
   {
     gtk_recent_chooser_menu_set_show_numbers(cast(GtkRecentChooserMenu*)this._cPtr, showNumbers);
   }
@@ -183,7 +183,7 @@ class RecentChooserMenuGidBuilderImpl(T) : gtk.menu.MenuGidBuilderImpl!T, gtk.ac
           a number acting as a unique mnemonic.
       Returns: Builder instance for fluent chaining
   */
-  T showNumbers(bool propval)
+  T showNumbers(bool propval) nothrow
   {
     return setProperty("show-numbers", propval);
   }
@@ -196,7 +196,7 @@ final class RecentChooserMenuGidBuilder : RecentChooserMenuGidBuilderImpl!Recent
       Create object from builder.
       Returns: New object
   */
-  RecentChooserMenu build()
+  RecentChooserMenu build() nothrow
   {
     return new RecentChooserMenu(cast(void*)createGObject(RecentChooserMenu._getGType), No.Take);
   }

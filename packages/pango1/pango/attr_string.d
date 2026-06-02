@@ -17,11 +17,8 @@ class AttrString
   PangoAttrString _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for pango.attr_string.AttrString");
-
     _cInstance = *cast(PangoAttrString*)ptr;
 
     if (take)
@@ -29,7 +26,7 @@ class AttrString
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -38,7 +35,7 @@ class AttrString
       Get `attr` field.
       Returns: the common portion of the attribute
   */
-  @property pango.attribute.Attribute attr()
+  @property pango.attribute.Attribute attr() nothrow
   {
     return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrString*)this._cPtr).attr);
   }
@@ -47,7 +44,7 @@ class AttrString
       Get `value` field.
       Returns: the string which is the value of the attribute
   */
-  @property string value()
+  @property string value() nothrow
   {
     return cToD!(string)(cast(void*)(cast(PangoAttrString*)this._cPtr).value);
   }
@@ -57,7 +54,7 @@ class AttrString
       Params:
         propval = the string which is the value of the attribute
   */
-  @property void value(string propval)
+  @property void value(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(PangoAttrString*)this._cPtr).value);
     dToC(propval, cast(void*)&(cast(PangoAttrString*)this._cPtr).value);

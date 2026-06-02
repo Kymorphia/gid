@@ -31,26 +31,26 @@ class IMContextSimple : gtk.imcontext.IMContext
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_im_context_simple_get_type != &gidSymbolNotFound ? gtk_im_context_simple_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override IMContextSimple self()
+  override IMContextSimple self() nothrow
   {
     return this;
   }
@@ -59,7 +59,7 @@ class IMContextSimple : gtk.imcontext.IMContext
       Get builder for [gtk.imcontext_simple.IMContextSimple]
       Returns: New builder object
   */
-  static IMContextSimpleGidBuilder builder()
+  static IMContextSimpleGidBuilder builder() nothrow
   {
     return new IMContextSimpleGidBuilder;
   }
@@ -68,7 +68,7 @@ class IMContextSimple : gtk.imcontext.IMContext
       Creates a new #GtkIMContextSimple.
       Returns: a new #GtkIMContextSimple.
   */
-  this()
+  this() nothrow
   {
     GtkIMContext* _cretval;
     _cretval = gtk_im_context_simple_new();
@@ -81,7 +81,7 @@ class IMContextSimple : gtk.imcontext.IMContext
       Params:
         composeFile = The path of compose file
   */
-  void addComposeFile(string composeFile)
+  void addComposeFile(string composeFile) nothrow
   {
     const(char)* _composeFile = composeFile.toCString(No.Alloc);
     gtk_im_context_simple_add_compose_file(cast(GtkIMContextSimple*)this._cPtr, _composeFile);
@@ -100,7 +100,7 @@ final class IMContextSimpleGidBuilder : IMContextSimpleGidBuilderImpl!IMContextS
       Create object from builder.
       Returns: New object
   */
-  IMContextSimple build()
+  IMContextSimple build() nothrow
   {
     return new IMContextSimple(cast(void*)createGObject(IMContextSimple._getGType), Yes.Take);
   }

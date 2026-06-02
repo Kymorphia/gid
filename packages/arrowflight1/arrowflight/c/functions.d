@@ -13,7 +13,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libarrow-flight-glib.so.1900"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // CallOptions
   GType function() c_gaflight_call_options_get_type; ///

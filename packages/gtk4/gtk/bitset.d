@@ -29,32 +29,32 @@ class Bitset : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_bitset_get_type != &gidSymbolNotFound ? gtk_bitset_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Bitset self()
+  override Bitset self() nothrow
   {
     return this;
   }
@@ -63,7 +63,7 @@ class Bitset : gobject.boxed.Boxed
       Creates a new empty bitset.
       Returns: A new empty bitset
   */
-  static gtk.bitset.Bitset newEmpty()
+  static gtk.bitset.Bitset newEmpty() nothrow
   {
     GtkBitset* _cretval;
     _cretval = gtk_bitset_new_empty();
@@ -79,7 +79,7 @@ class Bitset : gobject.boxed.Boxed
         nItems = number of consecutive values to add
       Returns: A new bitset
   */
-  static gtk.bitset.Bitset newRange(uint start, uint nItems)
+  static gtk.bitset.Bitset newRange(uint start, uint nItems) nothrow
   {
     GtkBitset* _cretval;
     _cretval = gtk_bitset_new_range(start, nItems);
@@ -95,7 +95,7 @@ class Bitset : gobject.boxed.Boxed
       Returns: true if value was not part of self and self
           was changed
   */
-  bool add(uint value)
+  bool add(uint value) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_bitset_add(cast(GtkBitset*)this._cPtr, value);
@@ -110,7 +110,7 @@ class Bitset : gobject.boxed.Boxed
         start = first value to add
         nItems = number of consecutive values to add
   */
-  void addRange(uint start, uint nItems)
+  void addRange(uint start, uint nItems) nothrow
   {
     gtk_bitset_add_range(cast(GtkBitset*)this._cPtr, start, nItems);
   }
@@ -123,7 +123,7 @@ class Bitset : gobject.boxed.Boxed
         first = first value to add
         last = last value to add
   */
-  void addRangeClosed(uint first, uint last)
+  void addRangeClosed(uint first, uint last) nothrow
   {
     gtk_bitset_add_range_closed(cast(GtkBitset*)this._cPtr, first, last);
   }
@@ -138,7 +138,7 @@ class Bitset : gobject.boxed.Boxed
         height = height of the rectangle
         stride = row stride of the grid
   */
-  void addRectangle(uint start, uint width, uint height, uint stride)
+  void addRectangle(uint start, uint width, uint height, uint stride) nothrow
   {
     gtk_bitset_add_rectangle(cast(GtkBitset*)this._cPtr, start, width, height, stride);
   }
@@ -150,7 +150,7 @@ class Bitset : gobject.boxed.Boxed
         value = the value to check
       Returns: true if self contains value
   */
-  bool contains(uint value)
+  bool contains(uint value) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_bitset_contains(cast(const(GtkBitset)*)this._cPtr, value);
@@ -162,7 +162,7 @@ class Bitset : gobject.boxed.Boxed
       Returns: A new bitset that contains the same
           values as self
   */
-  gtk.bitset.Bitset copy()
+  gtk.bitset.Bitset copy() nothrow
   {
     GtkBitset* _cretval;
     _cretval = gtk_bitset_copy(cast(const(GtkBitset)*)this._cPtr);
@@ -183,7 +183,7 @@ class Bitset : gobject.boxed.Boxed
       Params:
         other = the [gtk.bitset.Bitset] to compute the difference from
   */
-  void difference(gtk.bitset.Bitset other)
+  void difference(gtk.bitset.Bitset other) nothrow
   {
     gtk_bitset_difference(cast(GtkBitset*)this._cPtr, other ? cast(const(GtkBitset)*)other._cPtr(No.Dup) : null);
   }
@@ -195,7 +195,7 @@ class Bitset : gobject.boxed.Boxed
         other = another [gtk.bitset.Bitset]
       Returns: true if self and other contain the same values
   */
-  bool equals(gtk.bitset.Bitset other)
+  bool equals(gtk.bitset.Bitset other) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_bitset_equals(cast(const(GtkBitset)*)this._cPtr, other ? cast(const(GtkBitset)*)other._cPtr(No.Dup) : null);
@@ -208,7 +208,7 @@ class Bitset : gobject.boxed.Boxed
       If self is empty, 0 is returned.
       Returns: The largest value in self
   */
-  uint getMaximum()
+  uint getMaximum() nothrow
   {
     uint _retval;
     _retval = gtk_bitset_get_maximum(cast(const(GtkBitset)*)this._cPtr);
@@ -221,7 +221,7 @@ class Bitset : gobject.boxed.Boxed
       If self is empty, `G_MAXUINT` is returned.
       Returns: The smallest value in self
   */
-  uint getMinimum()
+  uint getMinimum() nothrow
   {
     uint _retval;
     _retval = gtk_bitset_get_minimum(cast(const(GtkBitset)*)this._cPtr);
@@ -237,7 +237,7 @@ class Bitset : gobject.boxed.Boxed
         nth = index of the item to get
       Returns: the value of the nth item in self
   */
-  uint getNth(uint nth)
+  uint getNth(uint nth) nothrow
   {
     uint _retval;
     _retval = gtk_bitset_get_nth(cast(const(GtkBitset)*)this._cPtr, nth);
@@ -255,7 +255,7 @@ class Bitset : gobject.boxed.Boxed
       to use a 64bit type.
       Returns: The number of values in the set.
   */
-  ulong getSize()
+  ulong getSize() nothrow
   {
     ulong _retval;
     _retval = gtk_bitset_get_size(cast(const(GtkBitset)*)this._cPtr);
@@ -275,7 +275,7 @@ class Bitset : gobject.boxed.Boxed
         last = the last element to include
       Returns: The number of values in the set from first to last.
   */
-  ulong getSizeInRange(uint first, uint last)
+  ulong getSizeInRange(uint first, uint last) nothrow
   {
     ulong _retval;
     _retval = gtk_bitset_get_size_in_range(cast(const(GtkBitset)*)this._cPtr, first, last);
@@ -293,7 +293,7 @@ class Bitset : gobject.boxed.Boxed
       Params:
         other = the [gtk.bitset.Bitset] to intersect with
   */
-  void intersect(gtk.bitset.Bitset other)
+  void intersect(gtk.bitset.Bitset other) nothrow
   {
     gtk_bitset_intersect(cast(GtkBitset*)this._cPtr, other ? cast(const(GtkBitset)*)other._cPtr(No.Dup) : null);
   }
@@ -302,7 +302,7 @@ class Bitset : gobject.boxed.Boxed
       Check if no value is contained in bitset.
       Returns: true if self is empty
   */
-  bool isEmpty()
+  bool isEmpty() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_bitset_is_empty(cast(const(GtkBitset)*)this._cPtr);
@@ -317,7 +317,7 @@ class Bitset : gobject.boxed.Boxed
       Returns: true if value was part of self and self
           was changed
   */
-  bool remove(uint value)
+  bool remove(uint value) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_bitset_remove(cast(GtkBitset*)this._cPtr, value);
@@ -327,7 +327,7 @@ class Bitset : gobject.boxed.Boxed
   /**
       Removes all values from the bitset so that it is empty again.
   */
-  void removeAll()
+  void removeAll() nothrow
   {
     gtk_bitset_remove_all(cast(GtkBitset*)this._cPtr);
   }
@@ -340,7 +340,7 @@ class Bitset : gobject.boxed.Boxed
         start = first value to remove
         nItems = number of consecutive values to remove
   */
-  void removeRange(uint start, uint nItems)
+  void removeRange(uint start, uint nItems) nothrow
   {
     gtk_bitset_remove_range(cast(GtkBitset*)this._cPtr, start, nItems);
   }
@@ -353,7 +353,7 @@ class Bitset : gobject.boxed.Boxed
         first = first value to remove
         last = last value to remove
   */
-  void removeRangeClosed(uint first, uint last)
+  void removeRangeClosed(uint first, uint last) nothrow
   {
     gtk_bitset_remove_range_closed(cast(GtkBitset*)this._cPtr, first, last);
   }
@@ -368,7 +368,7 @@ class Bitset : gobject.boxed.Boxed
         height = height of the rectangle
         stride = row stride of the grid
   */
-  void removeRectangle(uint start, uint width, uint height, uint stride)
+  void removeRectangle(uint start, uint width, uint height, uint stride) nothrow
   {
     gtk_bitset_remove_rectangle(cast(GtkBitset*)this._cPtr, start, width, height, stride);
   }
@@ -381,7 +381,7 @@ class Bitset : gobject.boxed.Boxed
       Params:
         amount = amount to shift all values to the left
   */
-  void shiftLeft(uint amount)
+  void shiftLeft(uint amount) nothrow
   {
     gtk_bitset_shift_left(cast(GtkBitset*)this._cPtr, amount);
   }
@@ -394,7 +394,7 @@ class Bitset : gobject.boxed.Boxed
       Params:
         amount = amount to shift all values to the right
   */
-  void shiftRight(uint amount)
+  void shiftRight(uint amount) nothrow
   {
     gtk_bitset_shift_right(cast(GtkBitset*)this._cPtr, amount);
   }
@@ -416,7 +416,7 @@ class Bitset : gobject.boxed.Boxed
         removed = number of values to remove
         added = number of values to add
   */
-  void splice(uint position, uint removed, uint added)
+  void splice(uint position, uint removed, uint added) nothrow
   {
     gtk_bitset_splice(cast(GtkBitset*)this._cPtr, position, removed, added);
   }
@@ -432,7 +432,7 @@ class Bitset : gobject.boxed.Boxed
       Params:
         other = the [gtk.bitset.Bitset] to subtract
   */
-  void subtract(gtk.bitset.Bitset other)
+  void subtract(gtk.bitset.Bitset other) nothrow
   {
     gtk_bitset_subtract(cast(GtkBitset*)this._cPtr, other ? cast(const(GtkBitset)*)other._cPtr(No.Dup) : null);
   }
@@ -448,7 +448,7 @@ class Bitset : gobject.boxed.Boxed
       Params:
         other = the [gtk.bitset.Bitset] to union with
   */
-  void union_(gtk.bitset.Bitset other)
+  void union_(gtk.bitset.Bitset other) nothrow
   {
     gtk_bitset_union(cast(GtkBitset*)this._cPtr, other ? cast(const(GtkBitset)*)other._cPtr(No.Dup) : null);
   }

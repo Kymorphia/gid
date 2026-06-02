@@ -22,11 +22,8 @@ class OutputMessage
   GOutputMessage _cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gio.output_message.OutputMessage");
-
     _cInstance = *cast(GOutputMessage*)ptr;
 
     if (take)
@@ -34,7 +31,7 @@ class OutputMessage
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)&_cInstance;
   }
@@ -43,7 +40,7 @@ class OutputMessage
       Get `address` field.
       Returns: a #GSocketAddress, or null
   */
-  @property gio.socket_address.SocketAddress address()
+  @property gio.socket_address.SocketAddress address() nothrow
   {
     return cToD!(gio.socket_address.SocketAddress)(cast(void*)(cast(GOutputMessage*)this._cPtr).address);
   }
@@ -53,7 +50,7 @@ class OutputMessage
       Params:
         propval = a #GSocketAddress, or null
   */
-  @property void address(gio.socket_address.SocketAddress propval)
+  @property void address(gio.socket_address.SocketAddress propval) nothrow
   {
     cValueFree!(gio.socket_address.SocketAddress)(cast(void*)(cast(GOutputMessage*)this._cPtr).address);
     dToC(propval, cast(void*)&(cast(GOutputMessage*)this._cPtr).address);
@@ -63,7 +60,7 @@ class OutputMessage
       Get `vectors` field.
       Returns: pointer to an array of output vectors
   */
-  @property gio.types.OutputVector vectors()
+  @property gio.types.OutputVector vectors() nothrow
   {
     return cToD!(gio.types.OutputVector)(cast(void*)(cast(GOutputMessage*)this._cPtr).vectors);
   }
@@ -72,7 +69,7 @@ class OutputMessage
       Get `numVectors` field.
       Returns: the number of output vectors pointed to by @vectors.
   */
-  @property uint numVectors()
+  @property uint numVectors() nothrow
   {
     return (cast(GOutputMessage*)this._cPtr).numVectors;
   }
@@ -82,7 +79,7 @@ class OutputMessage
       Params:
         propval = the number of output vectors pointed to by @vectors.
   */
-  @property void numVectors(uint propval)
+  @property void numVectors(uint propval) nothrow
   {
     (cast(GOutputMessage*)this._cPtr).numVectors = propval;
   }
@@ -92,7 +89,7 @@ class OutputMessage
       Returns: initialize to 0. Will be set to the number of bytes
             that have been sent
   */
-  @property uint bytesSent()
+  @property uint bytesSent() nothrow
   {
     return (cast(GOutputMessage*)this._cPtr).bytesSent;
   }
@@ -103,7 +100,7 @@ class OutputMessage
         propval = initialize to 0. Will be set to the number of bytes
               that have been sent
   */
-  @property void bytesSent(uint propval)
+  @property void bytesSent(uint propval) nothrow
   {
     (cast(GOutputMessage*)this._cPtr).bytesSent = propval;
   }
@@ -112,7 +109,7 @@ class OutputMessage
       Get `numControlMessages` field.
       Returns: number of elements in @control_messages.
   */
-  @property uint numControlMessages()
+  @property uint numControlMessages() nothrow
   {
     return (cast(GOutputMessage*)this._cPtr).numControlMessages;
   }
@@ -122,7 +119,7 @@ class OutputMessage
       Params:
         propval = number of elements in @control_messages.
   */
-  @property void numControlMessages(uint propval)
+  @property void numControlMessages(uint propval) nothrow
   {
     (cast(GOutputMessage*)this._cPtr).numControlMessages = propval;
   }

@@ -77,26 +77,26 @@ class ComboBoxText : gtk.combo_box.ComboBox
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_combo_box_text_get_type != &gidSymbolNotFound ? gtk_combo_box_text_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ComboBoxText self()
+  override ComboBoxText self() nothrow
   {
     return this;
   }
@@ -105,7 +105,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
       Get builder for [gtk.combo_box_text.ComboBoxText]
       Returns: New builder object
   */
-  static ComboBoxTextGidBuilder builder()
+  static ComboBoxTextGidBuilder builder() nothrow
   {
     return new ComboBoxTextGidBuilder;
   }
@@ -115,7 +115,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
       strings.
       Returns: A new #GtkComboBoxText
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_text_new();
@@ -127,7 +127,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
       strings. The combo box created by this function has an entry.
       Returns: a new #GtkComboBoxText
   */
-  static gtk.combo_box_text.ComboBoxText newWithEntry()
+  static gtk.combo_box_text.ComboBoxText newWithEntry() nothrow
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_text_new_with_entry();
@@ -146,7 +146,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
         id = a string ID for this value, or null
         text = A string
   */
-  void append(string id, string text)
+  void append(string id, string text) nothrow
   {
     const(char)* _id = id.toCString(No.Alloc);
     const(char)* _text = text.toCString(No.Alloc);
@@ -162,7 +162,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
       Params:
         text = A string
   */
-  void appendText(string text)
+  void appendText(string text) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_combo_box_text_append_text(cast(GtkComboBoxText*)this._cPtr, _text);
@@ -176,7 +176,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
       Returns: a newly allocated string containing the
             currently active text. Must be freed with [glib.global.gfree].
   */
-  string getActiveText()
+  string getActiveText() nothrow
   {
     char* _cretval;
     _cretval = gtk_combo_box_text_get_active_text(cast(GtkComboBoxText*)this._cPtr);
@@ -196,7 +196,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
         id = a string ID for this value, or null
         text = A string to display
   */
-  void insert(int position, string id, string text)
+  void insert(int position, string id, string text) nothrow
   {
     const(char)* _id = id.toCString(No.Alloc);
     const(char)* _text = text.toCString(No.Alloc);
@@ -215,7 +215,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
         position = An index to insert text
         text = A string
   */
-  void insertText(int position, string text)
+  void insertText(int position, string text) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_combo_box_text_insert_text(cast(GtkComboBoxText*)this._cPtr, position, _text);
@@ -232,7 +232,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
         id = a string ID for this value, or null
         text = a string
   */
-  void prepend(string id, string text)
+  void prepend(string id, string text) nothrow
   {
     const(char)* _id = id.toCString(No.Alloc);
     const(char)* _text = text.toCString(No.Alloc);
@@ -248,7 +248,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
       Params:
         text = A string
   */
-  void prependText(string text)
+  void prependText(string text) nothrow
   {
     const(char)* _text = text.toCString(No.Alloc);
     gtk_combo_box_text_prepend_text(cast(GtkComboBoxText*)this._cPtr, _text);
@@ -262,7 +262,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
       Params:
         position = Index of the item to remove
   */
-  void remove(int position)
+  void remove(int position) nothrow
   {
     gtk_combo_box_text_remove(cast(GtkComboBoxText*)this._cPtr, position);
   }
@@ -270,7 +270,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
   /**
       Removes all the text entries from the combo box.
   */
-  void removeAll()
+  void removeAll() nothrow
   {
     gtk_combo_box_text_remove_all(cast(GtkComboBoxText*)this._cPtr);
   }
@@ -289,7 +289,7 @@ final class ComboBoxTextGidBuilder : ComboBoxTextGidBuilderImpl!ComboBoxTextGidB
       Create object from builder.
       Returns: New object
   */
-  ComboBoxText build()
+  ComboBoxText build() nothrow
   {
     return new ComboBoxText(cast(void*)createGObject(ComboBoxText._getGType), No.Take);
   }

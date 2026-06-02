@@ -63,26 +63,26 @@ class Animation : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_animation_get_type != &gidSymbolNotFound ? adw_animation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Animation self()
+  override Animation self() nothrow
   {
     return this;
   }
@@ -91,7 +91,7 @@ class Animation : gobject.object.ObjectWrap
       Get builder for [adw.animation.Animation]
       Returns: New builder object
   */
-  static AnimationGidBuilder builder()
+  static AnimationGidBuilder builder() nothrow
   {
     return new AnimationGidBuilder;
   }
@@ -108,7 +108,7 @@ class Animation : gobject.object.ObjectWrap
         
         See [gtk.settings.Settings.gtkEnableAnimations].
   */
-  @property bool followEnableAnimationsSetting()
+  @property bool followEnableAnimationsSetting() nothrow
   {
     return getFollowEnableAnimationsSetting();
   }
@@ -126,7 +126,7 @@ class Animation : gobject.object.ObjectWrap
           
           See [gtk.settings.Settings.gtkEnableAnimations].
   */
-  @property void followEnableAnimationsSetting(bool propval)
+  @property void followEnableAnimationsSetting(bool propval) nothrow
   {
     setFollowEnableAnimationsSetting(propval);
   }
@@ -138,7 +138,7 @@ class Animation : gobject.object.ObjectWrap
         The state indicates whether the animation is currently playing, paused,
         finished or hasn't been started yet.
   */
-  @property adw.types.AnimationState state()
+  @property adw.types.AnimationState state() nothrow
   {
     return getState();
   }
@@ -147,7 +147,7 @@ class Animation : gobject.object.ObjectWrap
       Get `target` property.
       Returns: The target to animate.
   */
-  @property adw.animation_target.AnimationTarget target()
+  @property adw.animation_target.AnimationTarget target() nothrow
   {
     return getTarget();
   }
@@ -157,7 +157,7 @@ class Animation : gobject.object.ObjectWrap
       Params:
         propval = The target to animate.
   */
-  @property void target(adw.animation_target.AnimationTarget propval)
+  @property void target(adw.animation_target.AnimationTarget propval) nothrow
   {
     setTarget(propval);
   }
@@ -166,7 +166,7 @@ class Animation : gobject.object.ObjectWrap
       Get `value` property.
       Returns: The current value of the animation.
   */
-  @property double value()
+  @property double value() nothrow
   {
     return getValue();
   }
@@ -182,7 +182,7 @@ class Animation : gobject.object.ObjectWrap
         mapped, or if it gets unmapped during an ongoing animation, the animation
         will be automatically skipped.
   */
-  @property gtk.widget.Widget widget()
+  @property gtk.widget.Widget widget() nothrow
   {
     return getWidget();
   }
@@ -191,7 +191,7 @@ class Animation : gobject.object.ObjectWrap
       Gets whether self should be skipped when animations are globally disabled.
       Returns: whether to follow the global setting
   */
-  bool getFollowEnableAnimationsSetting()
+  bool getFollowEnableAnimationsSetting() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_animation_get_follow_enable_animations_setting(cast(AdwAnimation*)this._cPtr);
@@ -205,7 +205,7 @@ class Animation : gobject.object.ObjectWrap
       hasn't been started yet.
       Returns: the animation value
   */
-  adw.types.AnimationState getState()
+  adw.types.AnimationState getState() nothrow
   {
     AdwAnimationState _cretval;
     _cretval = adw_animation_get_state(cast(AdwAnimation*)this._cPtr);
@@ -217,7 +217,7 @@ class Animation : gobject.object.ObjectWrap
       Gets the target self animates.
       Returns: the animation target
   */
-  adw.animation_target.AnimationTarget getTarget()
+  adw.animation_target.AnimationTarget getTarget() nothrow
   {
     AdwAnimationTarget* _cretval;
     _cretval = adw_animation_get_target(cast(AdwAnimation*)this._cPtr);
@@ -229,7 +229,7 @@ class Animation : gobject.object.ObjectWrap
       Gets the current value of self.
       Returns: the current value
   */
-  double getValue()
+  double getValue() nothrow
   {
     double _retval;
     _retval = adw_animation_get_value(cast(AdwAnimation*)this._cPtr);
@@ -247,7 +247,7 @@ class Animation : gobject.object.ObjectWrap
       will be automatically skipped.
       Returns: the animation widget
   */
-  gtk.widget.Widget getWidget()
+  gtk.widget.Widget getWidget() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_animation_get_widget(cast(AdwAnimation*)this._cPtr);
@@ -262,7 +262,7 @@ class Animation : gobject.object.ObjectWrap
       
       Sets [adw.animation.Animation.state] to [adw.types.AnimationState.Paused].
   */
-  void pause()
+  void pause() nothrow
   {
     adw_animation_pause(cast(AdwAnimation*)this._cPtr);
   }
@@ -284,7 +284,7 @@ class Animation : gobject.object.ObjectWrap
       immediately afterwards, it's entirely possible that the idle callback will
       run after the animation has already finished, and not while it's playing.
   */
-  void play()
+  void play() nothrow
   {
     adw_animation_play(cast(AdwAnimation*)this._cPtr);
   }
@@ -294,7 +294,7 @@ class Animation : gobject.object.ObjectWrap
       
       Sets [adw.animation.Animation.state] to [adw.types.AnimationState.Idle].
   */
-  void reset()
+  void reset() nothrow
   {
     adw_animation_reset(cast(AdwAnimation*)this._cPtr);
   }
@@ -307,7 +307,7 @@ class Animation : gobject.object.ObjectWrap
       
       Sets [adw.animation.Animation.state] to [adw.types.AnimationState.Playing].
   */
-  void resume()
+  void resume() nothrow
   {
     adw_animation_resume(cast(AdwAnimation*)this._cPtr);
   }
@@ -326,7 +326,7 @@ class Animation : gobject.object.ObjectWrap
       Params:
         setting = whether to follow the global setting
   */
-  void setFollowEnableAnimationsSetting(bool setting)
+  void setFollowEnableAnimationsSetting(bool setting) nothrow
   {
     adw_animation_set_follow_enable_animations_setting(cast(AdwAnimation*)this._cPtr, setting);
   }
@@ -337,7 +337,7 @@ class Animation : gobject.object.ObjectWrap
       Params:
         target = an animation target
   */
-  void setTarget(adw.animation_target.AnimationTarget target)
+  void setTarget(adw.animation_target.AnimationTarget target) nothrow
   {
     adw_animation_set_target(cast(AdwAnimation*)this._cPtr, target ? cast(AdwAnimationTarget*)target._cPtr(No.Dup) : null);
   }
@@ -351,7 +351,7 @@ class Animation : gobject.object.ObjectWrap
       
       Sets [adw.animation.Animation.state] to [adw.types.AnimationState.Finished].
   */
-  void skip()
+  void skip() nothrow
   {
     adw_animation_skip(cast(AdwAnimation*)this._cPtr);
   }
@@ -372,13 +372,13 @@ class Animation : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectDone(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDone(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.animation.Animation)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -387,7 +387,14 @@ class Animation : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "adw.animation.Animation.done");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -413,7 +420,7 @@ class AnimationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           See [gtk.settings.Settings.gtkEnableAnimations].
       Returns: Builder instance for fluent chaining
   */
-  T followEnableAnimationsSetting(bool propval)
+  T followEnableAnimationsSetting(bool propval) nothrow
   {
     return setProperty("follow-enable-animations-setting", propval);
   }
@@ -424,7 +431,7 @@ class AnimationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The target to animate.
       Returns: Builder instance for fluent chaining
   */
-  T target(adw.animation_target.AnimationTarget propval)
+  T target(adw.animation_target.AnimationTarget propval) nothrow
   {
     return setProperty("target", propval);
   }
@@ -442,7 +449,7 @@ class AnimationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           will be automatically skipped.
       Returns: Builder instance for fluent chaining
   */
-  T widget(gtk.widget.Widget propval)
+  T widget(gtk.widget.Widget propval) nothrow
   {
     return setProperty("widget", propval);
   }
@@ -455,7 +462,7 @@ final class AnimationGidBuilder : AnimationGidBuilderImpl!AnimationGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Animation build()
+  Animation build() nothrow
   {
     return new Animation(cast(void*)createGObject(Animation._getGType), No.Take);
   }

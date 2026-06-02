@@ -28,26 +28,26 @@ class DrawingContext : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_drawing_context_get_type != &gidSymbolNotFound ? gdk_drawing_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override DrawingContext self()
+  override DrawingContext self() nothrow
   {
     return this;
   }
@@ -56,7 +56,7 @@ class DrawingContext : gobject.object.ObjectWrap
       Get builder for [gdk.drawing_context.DrawingContext]
       Returns: New builder object
   */
-  static DrawingContextGidBuilder builder()
+  static DrawingContextGidBuilder builder() nothrow
   {
     return new DrawingContextGidBuilder;
   }
@@ -65,7 +65,7 @@ class DrawingContext : gobject.object.ObjectWrap
       Get `clip` property.
       Returns: The clip region applied to the drawing context.
   */
-  @property cairo.region.Region clip()
+  @property cairo.region.Region clip() nothrow
   {
     return getClip();
   }
@@ -74,7 +74,7 @@ class DrawingContext : gobject.object.ObjectWrap
       Get `window` property.
       Returns: The #GdkWindow that created the drawing context.
   */
-  @property gdk.window.Window window()
+  @property gdk.window.Window window() nothrow
   {
     return getWindow();
   }
@@ -90,7 +90,7 @@ class DrawingContext : gobject.object.ObjectWrap
           the contents of the #GdkWindow. The context is owned by the
           #GdkDrawingContext and should not be destroyed
   */
-  cairo.context.Context getCairoContext()
+  cairo.context.Context getCairoContext() nothrow
   {
     cairo_t* _cretval;
     _cretval = gdk_drawing_context_get_cairo_context(cast(GdkDrawingContext*)this._cPtr);
@@ -102,7 +102,7 @@ class DrawingContext : gobject.object.ObjectWrap
       Retrieves a copy of the clip region used when creating the context.
       Returns: a Cairo region
   */
-  cairo.region.Region getClip()
+  cairo.region.Region getClip() nothrow
   {
     cairo_region_t* _cretval;
     _cretval = gdk_drawing_context_get_clip(cast(GdkDrawingContext*)this._cPtr);
@@ -114,7 +114,7 @@ class DrawingContext : gobject.object.ObjectWrap
       Retrieves the window that created the drawing context.
       Returns: a #GdkWindow
   */
-  gdk.window.Window getWindow()
+  gdk.window.Window getWindow() nothrow
   {
     GdkWindow* _cretval;
     _cretval = gdk_drawing_context_get_window(cast(GdkDrawingContext*)this._cPtr);
@@ -126,7 +126,7 @@ class DrawingContext : gobject.object.ObjectWrap
       Checks whether the given #GdkDrawingContext is valid.
       Returns: true if the context is valid
   */
-  bool isValid()
+  bool isValid() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_drawing_context_is_valid(cast(GdkDrawingContext*)this._cPtr);
@@ -144,7 +144,7 @@ class DrawingContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = The clip region applied to the drawing context.
       Returns: Builder instance for fluent chaining
   */
-  T clip(cairo.region.Region propval)
+  T clip(cairo.region.Region propval) nothrow
   {
     return setProperty("clip", propval);
   }
@@ -155,7 +155,7 @@ class DrawingContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = The #GdkWindow that created the drawing context.
       Returns: Builder instance for fluent chaining
   */
-  T window(gdk.window.Window propval)
+  T window(gdk.window.Window propval) nothrow
   {
     return setProperty("window", propval);
   }
@@ -168,7 +168,7 @@ final class DrawingContextGidBuilder : DrawingContextGidBuilderImpl!DrawingConte
       Create object from builder.
       Returns: New object
   */
-  DrawingContext build()
+  DrawingContext build() nothrow
   {
     return new DrawingContext(cast(void*)createGObject(DrawingContext._getGType), No.Take);
   }

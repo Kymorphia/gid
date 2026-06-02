@@ -17,11 +17,8 @@ class PropertyExpression : gtk.expression.Expression
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for gtk.property_expression.PropertyExpression");
-
     super(cast(GtkExpression*)ptr, take);
   }
 
@@ -45,7 +42,7 @@ class PropertyExpression : gtk.expression.Expression
         propertyName = name of the property
       Returns: a new [gtk.expression.Expression]
   */
-  this(gobject.types.GType thisType, gtk.expression.Expression expression, string propertyName)
+  this(gobject.types.GType thisType, gtk.expression.Expression expression, string propertyName) nothrow
   {
     GtkExpression* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
@@ -70,7 +67,7 @@ class PropertyExpression : gtk.expression.Expression
         pspec = the [gobject.param_spec.ParamSpec] for the property to query
       Returns: a new [gtk.expression.Expression]
   */
-  static gtk.property_expression.PropertyExpression newForPspec(gtk.expression.Expression expression, gobject.param_spec.ParamSpec pspec)
+  static gtk.property_expression.PropertyExpression newForPspec(gtk.expression.Expression expression, gobject.param_spec.ParamSpec pspec) nothrow
   {
     GtkExpression* _cretval;
     _cretval = gtk_property_expression_new_for_pspec(expression ? cast(GtkExpression*)expression._cPtr(Yes.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
@@ -83,7 +80,7 @@ class PropertyExpression : gtk.expression.Expression
       a property expression.
       Returns: the object expression
   */
-  gtk.expression.Expression getExpression()
+  gtk.expression.Expression getExpression() nothrow
   {
     GtkExpression* _cretval;
     _cretval = gtk_property_expression_get_expression(cast(GtkExpression*)this._cPtr);
@@ -96,7 +93,7 @@ class PropertyExpression : gtk.expression.Expression
       a property expression.
       Returns: the [gobject.param_spec.ParamSpec] for the property
   */
-  gobject.param_spec.ParamSpec getPspec()
+  gobject.param_spec.ParamSpec getPspec() nothrow
   {
     GParamSpec* _cretval;
     _cretval = gtk_property_expression_get_pspec(cast(GtkExpression*)this._cPtr);

@@ -62,26 +62,26 @@ class AudioAggregator : gstbase.aggregator.Aggregator
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_aggregator_get_type != &gidSymbolNotFound ? gst_audio_aggregator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AudioAggregator self()
+  override AudioAggregator self() nothrow
   {
     return this;
   }
@@ -90,31 +90,31 @@ class AudioAggregator : gstbase.aggregator.Aggregator
       Get builder for [gstaudio.audio_aggregator.AudioAggregator]
       Returns: New builder object
   */
-  static AudioAggregatorGidBuilder builder()
+  static AudioAggregatorGidBuilder builder() nothrow
   {
     return new AudioAggregatorGidBuilder;
   }
 
   /** */
-  @property ulong alignmentThreshold()
+  @property ulong alignmentThreshold() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("alignment-threshold");
   }
 
   /** */
-  @property void alignmentThreshold(ulong propval)
+  @property void alignmentThreshold(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("alignment-threshold", propval);
   }
 
   /** */
-  @property ulong discontWait()
+  @property ulong discontWait() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("discont-wait");
   }
 
   /** */
-  @property void discontWait(ulong propval)
+  @property void discontWait(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("discont-wait", propval);
   }
@@ -126,7 +126,7 @@ class AudioAggregator : gstbase.aggregator.Aggregator
         companion property: in the vast majority of cases where you plan to plug in
         live sources with a non-zero latency, you should set it to a non-zero value.
   */
-  @property bool forceLive()
+  @property bool forceLive() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("force-live");
   }
@@ -142,7 +142,7 @@ class AudioAggregator : gstbase.aggregator.Aggregator
         data flow, for example the user may decide to connect it later,
         but wants to configure it already.
   */
-  @property bool ignoreInactivePads()
+  @property bool ignoreInactivePads() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("ignore-inactive-pads");
   }
@@ -159,25 +159,25 @@ class AudioAggregator : gstbase.aggregator.Aggregator
           data flow, for example the user may decide to connect it later,
           but wants to configure it already.
   */
-  @property void ignoreInactivePads(bool propval)
+  @property void ignoreInactivePads(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("ignore-inactive-pads", propval);
   }
 
   /** */
-  @property ulong outputBufferDuration()
+  @property ulong outputBufferDuration() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(ulong)("output-buffer-duration");
   }
 
   /** */
-  @property void outputBufferDuration(ulong propval)
+  @property void outputBufferDuration(ulong propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(ulong)("output-buffer-duration", propval);
   }
 
   /** */
-  void setSinkCaps(gstaudio.audio_aggregator_pad.AudioAggregatorPad pad, gst.caps.Caps caps)
+  void setSinkCaps(gstaudio.audio_aggregator_pad.AudioAggregatorPad pad, gst.caps.Caps caps) nothrow
   {
     gst_audio_aggregator_set_sink_caps(cast(GstAudioAggregator*)this._cPtr, pad ? cast(GstAudioAggregatorPad*)pad._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
   }
@@ -188,13 +188,13 @@ class AudioAggregatorGidBuilderImpl(T) : gstbase.aggregator.AggregatorGidBuilder
 {
 
   /** */
-  T alignmentThreshold(ulong propval)
+  T alignmentThreshold(ulong propval) nothrow
   {
     return setProperty("alignment-threshold", propval);
   }
 
   /** */
-  T discontWait(ulong propval)
+  T discontWait(ulong propval) nothrow
   {
     return setProperty("discont-wait", propval);
   }
@@ -208,7 +208,7 @@ class AudioAggregatorGidBuilderImpl(T) : gstbase.aggregator.AggregatorGidBuilder
           live sources with a non-zero latency, you should set it to a non-zero value.
       Returns: Builder instance for fluent chaining
   */
-  T forceLive(bool propval)
+  T forceLive(bool propval) nothrow
   {
     return setProperty("force-live", propval);
   }
@@ -226,13 +226,13 @@ class AudioAggregatorGidBuilderImpl(T) : gstbase.aggregator.AggregatorGidBuilder
           but wants to configure it already.
       Returns: Builder instance for fluent chaining
   */
-  T ignoreInactivePads(bool propval)
+  T ignoreInactivePads(bool propval) nothrow
   {
     return setProperty("ignore-inactive-pads", propval);
   }
 
   /** */
-  T outputBufferDuration(ulong propval)
+  T outputBufferDuration(ulong propval) nothrow
   {
     return setProperty("output-buffer-duration", propval);
   }
@@ -245,7 +245,7 @@ final class AudioAggregatorGidBuilder : AudioAggregatorGidBuilderImpl!AudioAggre
       Create object from builder.
       Returns: New object
   */
-  AudioAggregator build()
+  AudioAggregator build() nothrow
   {
     return new AudioAggregator(cast(void*)createGObject(AudioAggregator._getGType), No.Take);
   }

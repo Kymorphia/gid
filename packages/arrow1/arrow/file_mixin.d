@@ -26,7 +26,7 @@ template FileT()
   }
 
   /** */
-  override arrow.types.FileMode getMode()
+  override arrow.types.FileMode getMode() nothrow
   {
     GArrowFileMode _cretval;
     _cretval = garrow_file_get_mode(cast(GArrowFile*)this._cPtr);
@@ -35,7 +35,7 @@ template FileT()
   }
 
   /** */
-  override bool isClosed()
+  override bool isClosed() nothrow
   {
     bool _retval;
     _retval = cast(bool)garrow_file_is_closed(cast(GArrowFile*)this._cPtr);

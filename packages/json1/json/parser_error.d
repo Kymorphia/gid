@@ -14,7 +14,7 @@ struct ParserError
   alias Enum = json.types.ParserError; ///
 
   /** */
-  static glib.types.Quark quark()
+  static glib.types.Quark quark() nothrow
   {
     glib.types.Quark _retval;
     _retval = json_parser_error_quark();
@@ -24,12 +24,12 @@ struct ParserError
 
 class ParseException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(json.parser_error.ParserError.quark, cast(int)code, msg);
   }

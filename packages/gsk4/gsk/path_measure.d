@@ -25,32 +25,32 @@ class PathMeasure : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_path_measure_get_type != &gidSymbolNotFound ? gsk_path_measure_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override PathMeasure self()
+  override PathMeasure self() nothrow
   {
     return this;
   }
@@ -63,7 +63,7 @@ class PathMeasure : gobject.boxed.Boxed
         path = the path to measure
       Returns: a new [gsk.path_measure.PathMeasure] representing path
   */
-  this(gsk.path.Path path)
+  this(gsk.path.Path path) nothrow
   {
     GskPathMeasure* _cretval;
     _cretval = gsk_path_measure_new(path ? cast(GskPath*)path._cPtr(No.Dup) : null);
@@ -78,7 +78,7 @@ class PathMeasure : gobject.boxed.Boxed
         tolerance = the tolerance for measuring operations
       Returns: a new [gsk.path_measure.PathMeasure] representing path
   */
-  static gsk.path_measure.PathMeasure newWithTolerance(gsk.path.Path path, float tolerance)
+  static gsk.path_measure.PathMeasure newWithTolerance(gsk.path.Path path, float tolerance) nothrow
   {
     GskPathMeasure* _cretval;
     _cretval = gsk_path_measure_new_with_tolerance(path ? cast(GskPath*)path._cPtr(No.Dup) : null, tolerance);
@@ -92,7 +92,7 @@ class PathMeasure : gobject.boxed.Boxed
       The length is cached, so this function does not do any work.
       Returns: The length of the path measured by self
   */
-  float getLength()
+  float getLength() nothrow
   {
     float _retval;
     _retval = gsk_path_measure_get_length(cast(GskPathMeasure*)this._cPtr);
@@ -103,7 +103,7 @@ class PathMeasure : gobject.boxed.Boxed
       Returns the path that the measure was created for.
       Returns: the path of self
   */
-  gsk.path.Path getPath()
+  gsk.path.Path getPath() nothrow
   {
     GskPath* _cretval;
     _cretval = gsk_path_measure_get_path(cast(GskPathMeasure*)this._cPtr);
@@ -115,7 +115,7 @@ class PathMeasure : gobject.boxed.Boxed
       Returns the tolerance that the measure was created with.
       Returns: the tolerance of self
   */
-  float getTolerance()
+  float getTolerance() nothrow
   {
     float _retval;
     _retval = gsk_path_measure_get_tolerance(cast(GskPathMeasure*)this._cPtr);

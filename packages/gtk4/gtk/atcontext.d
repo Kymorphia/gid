@@ -24,26 +24,26 @@ class ATContext : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_at_context_get_type != &gidSymbolNotFound ? gtk_at_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override ATContext self()
+  override ATContext self() nothrow
   {
     return this;
   }
@@ -52,7 +52,7 @@ class ATContext : gobject.object.ObjectWrap
       Get builder for [gtk.atcontext.ATContext]
       Returns: New builder object
   */
-  static ATContextGidBuilder builder()
+  static ATContextGidBuilder builder() nothrow
   {
     return new ATContextGidBuilder;
   }
@@ -61,7 +61,7 @@ class ATContext : gobject.object.ObjectWrap
       Get `accessible` property.
       Returns: The [gtk.accessible.Accessible] that created the [gtk.atcontext.ATContext] instance.
   */
-  @property gtk.accessible.Accessible accessible()
+  @property gtk.accessible.Accessible accessible() nothrow
   {
     return getAccessible();
   }
@@ -73,7 +73,7 @@ class ATContext : gobject.object.ObjectWrap
         Depending on the given role, different states and properties can be
         set or retrieved.
   */
-  @property gtk.types.AccessibleRole accessibleRole()
+  @property gtk.types.AccessibleRole accessibleRole() nothrow
   {
     return getAccessibleRole();
   }
@@ -86,7 +86,7 @@ class ATContext : gobject.object.ObjectWrap
           Depending on the given role, different states and properties can be
           set or retrieved.
   */
-  @property void accessibleRole(gtk.types.AccessibleRole propval)
+  @property void accessibleRole(gtk.types.AccessibleRole propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gtk.types.AccessibleRole)("accessible-role", propval);
   }
@@ -95,7 +95,7 @@ class ATContext : gobject.object.ObjectWrap
       Get `display` property.
       Returns: The [gdk.display.Display] for the [gtk.atcontext.ATContext].
   */
-  @property gdk.display.Display display()
+  @property gdk.display.Display display() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.display.Display)("display");
   }
@@ -105,7 +105,7 @@ class ATContext : gobject.object.ObjectWrap
       Params:
         propval = The [gdk.display.Display] for the [gtk.atcontext.ATContext].
   */
-  @property void display(gdk.display.Display propval)
+  @property void display(gdk.display.Display propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.display.Display)("display", propval);
   }
@@ -123,7 +123,7 @@ class ATContext : gobject.object.ObjectWrap
         display = the [gdk.display.Display] used by the [gtk.atcontext.ATContext]
       Returns: the [gtk.atcontext.ATContext]
   */
-  static gtk.atcontext.ATContext create(gtk.types.AccessibleRole accessibleRole, gtk.accessible.Accessible accessible, gdk.display.Display display)
+  static gtk.atcontext.ATContext create(gtk.types.AccessibleRole accessibleRole, gtk.accessible.Accessible accessible, gdk.display.Display display) nothrow
   {
     GtkATContext* _cretval;
     _cretval = gtk_at_context_create(accessibleRole, accessible ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)accessible)._cPtr(No.Dup) : null, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
@@ -135,7 +135,7 @@ class ATContext : gobject.object.ObjectWrap
       Retrieves the [gtk.accessible.Accessible] using this context.
       Returns: a [gtk.accessible.Accessible]
   */
-  gtk.accessible.Accessible getAccessible()
+  gtk.accessible.Accessible getAccessible() nothrow
   {
     GtkAccessible* _cretval;
     _cretval = gtk_at_context_get_accessible(cast(GtkATContext*)this._cPtr);
@@ -147,7 +147,7 @@ class ATContext : gobject.object.ObjectWrap
       Retrieves the accessible role of this context.
       Returns: a [gtk.types.AccessibleRole]
   */
-  gtk.types.AccessibleRole getAccessibleRole()
+  gtk.types.AccessibleRole getAccessibleRole() nothrow
   {
     GtkAccessibleRole _cretval;
     _cretval = gtk_at_context_get_accessible_role(cast(GtkATContext*)this._cPtr);
@@ -171,13 +171,13 @@ class ATContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectStateChange(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStateChange(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.atcontext.ATContext)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -186,7 +186,14 @@ class ATContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.atcontext.ATContext.stateChange");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -204,7 +211,7 @@ class ATContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The [gtk.accessible.Accessible] that created the [gtk.atcontext.ATContext] instance.
       Returns: Builder instance for fluent chaining
   */
-  T accessible(gtk.accessible.Accessible propval)
+  T accessible(gtk.accessible.Accessible propval) nothrow
   {
     return setProperty("accessible", propval);
   }
@@ -218,7 +225,7 @@ class ATContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           set or retrieved.
       Returns: Builder instance for fluent chaining
   */
-  T accessibleRole(gtk.types.AccessibleRole propval)
+  T accessibleRole(gtk.types.AccessibleRole propval) nothrow
   {
     return setProperty("accessible-role", propval);
   }
@@ -229,7 +236,7 @@ class ATContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The [gdk.display.Display] for the [gtk.atcontext.ATContext].
       Returns: Builder instance for fluent chaining
   */
-  T display(gdk.display.Display propval)
+  T display(gdk.display.Display propval) nothrow
   {
     return setProperty("display", propval);
   }
@@ -242,7 +249,7 @@ final class ATContextGidBuilder : ATContextGidBuilderImpl!ATContextGidBuilder
       Create object from builder.
       Returns: New object
   */
-  ATContext build()
+  ATContext build() nothrow
   {
     return new ATContext(cast(void*)createGObject(ATContext._getGType), No.Take);
   }

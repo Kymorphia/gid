@@ -19,32 +19,32 @@ class CssSection : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_css_section_get_type != &gidSymbolNotFound ? gtk_css_section_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CssSection self()
+  override CssSection self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class CssSection : gobject.boxed.Boxed
       successfully.
       Returns: the line number
   */
-  uint getEndLine()
+  uint getEndLine() nothrow
   {
     uint _retval;
     _retval = gtk_css_section_get_end_line(cast(const(GtkCssSection)*)this._cPtr);
@@ -79,7 +79,7 @@ class CssSection : gobject.boxed.Boxed
       successfully.
       Returns: the offset in bytes from the start of the line.
   */
-  uint getEndPosition()
+  uint getEndPosition() nothrow
   {
     uint _retval;
     _retval = gtk_css_section_get_end_position(cast(const(GtkCssSection)*)this._cPtr);
@@ -93,7 +93,7 @@ class CssSection : gobject.boxed.Boxed
       Returns: the #GFile that section was parsed from
             or null if section was parsed from other data
   */
-  gio.file.File getFile()
+  gio.file.File getFile() nothrow
   {
     GFile* _cretval;
     _cretval = gtk_css_section_get_file(cast(const(GtkCssSection)*)this._cPtr);
@@ -111,7 +111,7 @@ class CssSection : gobject.boxed.Boxed
       a different file.
       Returns: the parent section or null if none
   */
-  gtk.css_section.CssSection getParent()
+  gtk.css_section.CssSection getParent() nothrow
   {
     GtkCssSection* _cretval;
     _cretval = gtk_css_section_get_parent(cast(const(GtkCssSection)*)this._cPtr);
@@ -123,7 +123,7 @@ class CssSection : gobject.boxed.Boxed
       Gets the type of information that section describes.
       Returns: the type of section
   */
-  gtk.types.CssSectionType getSectionType()
+  gtk.types.CssSectionType getSectionType() nothrow
   {
     GtkCssSectionType _cretval;
     _cretval = gtk_css_section_get_section_type(cast(const(GtkCssSection)*)this._cPtr);
@@ -137,7 +137,7 @@ class CssSection : gobject.boxed.Boxed
       will return 0.
       Returns: the line number
   */
-  uint getStartLine()
+  uint getStartLine() nothrow
   {
     uint _retval;
     _retval = gtk_css_section_get_start_line(cast(const(GtkCssSection)*)this._cPtr);
@@ -149,7 +149,7 @@ class CssSection : gobject.boxed.Boxed
       returned via [gtk.css_section.CssSection.getStartLine].
       Returns: the offset in bytes from the start of the line.
   */
-  uint getStartPosition()
+  uint getStartPosition() nothrow
   {
     uint _retval;
     _retval = gtk_css_section_get_start_position(cast(const(GtkCssSection)*)this._cPtr);

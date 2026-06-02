@@ -24,26 +24,26 @@ class Relation : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_relation_get_type != &gidSymbolNotFound ? atk_relation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Relation self()
+  override Relation self() nothrow
   {
     return this;
   }
@@ -52,31 +52,31 @@ class Relation : gobject.object.ObjectWrap
       Get builder for [atk.relation.Relation]
       Returns: New builder object
   */
-  static RelationGidBuilder builder()
+  static RelationGidBuilder builder() nothrow
   {
     return new RelationGidBuilder;
   }
 
   /** */
-  @property atk.types.RelationType relationType()
+  @property atk.types.RelationType relationType() nothrow
   {
     return getRelationType();
   }
 
   /** */
-  @property void relationType(atk.types.RelationType propval)
+  @property void relationType(atk.types.RelationType propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(atk.types.RelationType)("relation-type", propval);
   }
 
   /** */
-  @property gobject.value_array.ValueArray target()
+  @property gobject.value_array.ValueArray target() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gobject.value_array.ValueArray)("target");
   }
 
   /** */
-  @property void target(gobject.value_array.ValueArray propval)
+  @property void target(gobject.value_array.ValueArray propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gobject.value_array.ValueArray)("target", propval);
   }
@@ -92,7 +92,7 @@ class Relation : gobject.object.ObjectWrap
            #AtkRelation
       Returns: a pointer to a new #AtkRelation
   */
-  this(atk.object.ObjectWrap[] targets, atk.types.RelationType relationship)
+  this(atk.object.ObjectWrap[] targets, atk.types.RelationType relationship) nothrow
   {
     AtkRelation* _cretval;
     int _nTargets;
@@ -115,7 +115,7 @@ class Relation : gobject.object.ObjectWrap
       Params:
         target = an #AtkObject
   */
-  void addTarget(atk.object.ObjectWrap target)
+  void addTarget(atk.object.ObjectWrap target) nothrow
   {
     atk_relation_add_target(cast(AtkRelation*)this._cPtr, target ? cast(AtkObject*)target._cPtr(No.Dup) : null);
   }
@@ -124,7 +124,7 @@ class Relation : gobject.object.ObjectWrap
       Gets the type of relation
       Returns: the type of relation
   */
-  atk.types.RelationType getRelationType()
+  atk.types.RelationType getRelationType() nothrow
   {
     AtkRelationType _cretval;
     _cretval = atk_relation_get_relation_type(cast(AtkRelation*)this._cPtr);
@@ -136,7 +136,7 @@ class Relation : gobject.object.ObjectWrap
       Gets the target list of relation
       Returns: the target list of relation
   */
-  atk.object.ObjectWrap[] getTarget()
+  atk.object.ObjectWrap[] getTarget() nothrow
   {
     GPtrArray* _cretval;
     _cretval = atk_relation_get_target(cast(AtkRelation*)this._cPtr);
@@ -151,7 +151,7 @@ class Relation : gobject.object.ObjectWrap
         target = an #AtkObject
       Returns: TRUE if the removal is successful.
   */
-  bool removeTarget(atk.object.ObjectWrap target)
+  bool removeTarget(atk.object.ObjectWrap target) nothrow
   {
     bool _retval;
     _retval = cast(bool)atk_relation_remove_target(cast(AtkRelation*)this._cPtr, target ? cast(AtkObject*)target._cPtr(No.Dup) : null);
@@ -164,13 +164,13 @@ class RelationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T relationType(atk.types.RelationType propval)
+  T relationType(atk.types.RelationType propval) nothrow
   {
     return setProperty("relation-type", propval);
   }
 
   /** */
-  T target(gobject.value_array.ValueArray propval)
+  T target(gobject.value_array.ValueArray propval) nothrow
   {
     return setProperty("target", propval);
   }
@@ -183,7 +183,7 @@ final class RelationGidBuilder : RelationGidBuilderImpl!RelationGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Relation build()
+  Relation build() nothrow
   {
     return new Relation(cast(void*)createGObject(Relation._getGType), Yes.Take);
   }

@@ -16,26 +16,26 @@ class Decimal64Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal64_array_get_type != &gidSymbolNotFound ? garrow_decimal64_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Decimal64Array self()
+  override Decimal64Array self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class Decimal64Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
       Get builder for [arrow.decimal64_array.Decimal64Array]
       Returns: New builder object
   */
-  static Decimal64ArrayGidBuilder builder()
+  static Decimal64ArrayGidBuilder builder() nothrow
   {
     return new Decimal64ArrayGidBuilder;
   }
 
   /** */
-  string formatValue(long i)
+  string formatValue(long i) nothrow
   {
     char* _cretval;
     _cretval = garrow_decimal64_array_format_value(cast(GArrowDecimal64Array*)this._cPtr, i);
@@ -61,7 +61,7 @@ class Decimal64Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
   alias getValue = arrow.fixed_size_binary_array.FixedSizeBinaryArray.getValue;
 
   /** */
-  arrow.decimal64.Decimal64 getValue(long i)
+  arrow.decimal64.Decimal64 getValue(long i) nothrow
   {
     GArrowDecimal64* _cretval;
     _cretval = garrow_decimal64_array_get_value(cast(GArrowDecimal64Array*)this._cPtr, i);
@@ -82,7 +82,7 @@ final class Decimal64ArrayGidBuilder : Decimal64ArrayGidBuilderImpl!Decimal64Arr
       Create object from builder.
       Returns: New object
   */
-  Decimal64Array build()
+  Decimal64Array build() nothrow
   {
     return new Decimal64Array(cast(void*)createGObject(Decimal64Array._getGType), No.Take);
   }

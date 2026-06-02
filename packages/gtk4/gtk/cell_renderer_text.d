@@ -32,26 +32,26 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_renderer_text_get_type != &gidSymbolNotFound ? gtk_cell_renderer_text_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override CellRendererText self()
+  override CellRendererText self() nothrow
   {
     return this;
   }
@@ -60,19 +60,19 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
       Get builder for [gtk.cell_renderer_text.CellRendererText]
       Returns: New builder object
   */
-  static CellRendererTextGidBuilder builder()
+  static CellRendererTextGidBuilder builder() nothrow
   {
     return new CellRendererTextGidBuilder;
   }
 
   /** */
-  @property bool alignSet()
+  @property bool alignSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("align-set");
   }
 
   /** */
-  @property void alignSet(bool propval)
+  @property void alignSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("align-set", propval);
   }
@@ -85,7 +85,7 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
         case there are several of them. The "xalign" property of [gtk.cell_renderer.CellRenderer],
         on the other hand, sets the horizontal alignment of the whole text.
   */
-  @property pango.types.Alignment alignment()
+  @property pango.types.Alignment alignment() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(pango.types.Alignment)("alignment");
   }
@@ -99,25 +99,25 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
           case there are several of them. The "xalign" property of [gtk.cell_renderer.CellRenderer],
           on the other hand, sets the horizontal alignment of the whole text.
   */
-  @property void alignment(pango.types.Alignment propval)
+  @property void alignment(pango.types.Alignment propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(pango.types.Alignment)("alignment", propval);
   }
 
   /** */
-  @property pango.attr_list.AttrList attributes()
+  @property pango.attr_list.AttrList attributes() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(pango.attr_list.AttrList)("attributes");
   }
 
   /** */
-  @property void attributes(pango.attr_list.AttrList propval)
+  @property void attributes(pango.attr_list.AttrList propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(pango.attr_list.AttrList)("attributes", propval);
   }
 
   /** */
-  @property void background(string propval)
+  @property void background(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("background", propval);
   }
@@ -126,7 +126,7 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
       Get `backgroundRgba` property.
       Returns: Background color as a [gdk.rgba.RGBA]
   */
-  @property gdk.rgba.RGBA backgroundRgba()
+  @property gdk.rgba.RGBA backgroundRgba() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("background-rgba");
   }
@@ -136,43 +136,43 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
       Params:
         propval = Background color as a [gdk.rgba.RGBA]
   */
-  @property void backgroundRgba(gdk.rgba.RGBA propval)
+  @property void backgroundRgba(gdk.rgba.RGBA propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.rgba.RGBA)("background-rgba", propval);
   }
 
   /** */
-  @property bool backgroundSet()
+  @property bool backgroundSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("background-set");
   }
 
   /** */
-  @property void backgroundSet(bool propval)
+  @property void backgroundSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("background-set", propval);
   }
 
   /** */
-  @property bool editable()
+  @property bool editable() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("editable");
   }
 
   /** */
-  @property void editable(bool propval)
+  @property void editable(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("editable", propval);
   }
 
   /** */
-  @property bool editableSet()
+  @property bool editableSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("editable-set");
   }
 
   /** */
-  @property void editableSet(bool propval)
+  @property void editableSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("editable-set", propval);
   }
@@ -184,7 +184,7 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
         [pango.types.EllipsizeMode.None] turns off ellipsizing. See the wrap-width property
         for another way of making the text fit into a given width.
   */
-  @property pango.types.EllipsizeMode ellipsize()
+  @property pango.types.EllipsizeMode ellipsize() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(pango.types.EllipsizeMode)("ellipsize");
   }
@@ -197,73 +197,73 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
           [pango.types.EllipsizeMode.None] turns off ellipsizing. See the wrap-width property
           for another way of making the text fit into a given width.
   */
-  @property void ellipsize(pango.types.EllipsizeMode propval)
+  @property void ellipsize(pango.types.EllipsizeMode propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(pango.types.EllipsizeMode)("ellipsize", propval);
   }
 
   /** */
-  @property bool ellipsizeSet()
+  @property bool ellipsizeSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("ellipsize-set");
   }
 
   /** */
-  @property void ellipsizeSet(bool propval)
+  @property void ellipsizeSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("ellipsize-set", propval);
   }
 
   /** */
-  @property string family()
+  @property string family() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("family");
   }
 
   /** */
-  @property void family(string propval)
+  @property void family(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("family", propval);
   }
 
   /** */
-  @property bool familySet()
+  @property bool familySet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("family-set");
   }
 
   /** */
-  @property void familySet(bool propval)
+  @property void familySet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("family-set", propval);
   }
 
   /** */
-  @property string font()
+  @property string font() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("font");
   }
 
   /** */
-  @property void font(string propval)
+  @property void font(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("font", propval);
   }
 
   /** */
-  @property pango.font_description.FontDescription fontDesc()
+  @property pango.font_description.FontDescription fontDesc() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(pango.font_description.FontDescription)("font-desc");
   }
 
   /** */
-  @property void fontDesc(pango.font_description.FontDescription propval)
+  @property void fontDesc(pango.font_description.FontDescription propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(pango.font_description.FontDescription)("font-desc", propval);
   }
 
   /** */
-  @property void foreground(string propval)
+  @property void foreground(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("foreground", propval);
   }
@@ -272,7 +272,7 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
       Get `foregroundRgba` property.
       Returns: Foreground color as a [gdk.rgba.RGBA]
   */
-  @property gdk.rgba.RGBA foregroundRgba()
+  @property gdk.rgba.RGBA foregroundRgba() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gdk.rgba.RGBA)("foreground-rgba");
   }
@@ -282,49 +282,49 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
       Params:
         propval = Foreground color as a [gdk.rgba.RGBA]
   */
-  @property void foregroundRgba(gdk.rgba.RGBA propval)
+  @property void foregroundRgba(gdk.rgba.RGBA propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(gdk.rgba.RGBA)("foreground-rgba", propval);
   }
 
   /** */
-  @property bool foregroundSet()
+  @property bool foregroundSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("foreground-set");
   }
 
   /** */
-  @property void foregroundSet(bool propval)
+  @property void foregroundSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("foreground-set", propval);
   }
 
   /** */
-  @property string language()
+  @property string language() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("language");
   }
 
   /** */
-  @property void language(string propval)
+  @property void language(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("language", propval);
   }
 
   /** */
-  @property bool languageSet()
+  @property bool languageSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("language-set");
   }
 
   /** */
-  @property void languageSet(bool propval)
+  @property void languageSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("language-set", propval);
   }
 
   /** */
-  @property void markup(string propval)
+  @property void markup(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("markup", propval);
   }
@@ -340,7 +340,7 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
         set to expand in its [gtk.cell_layout.CellLayout] and all of the cell's siblings
         have received their natural width.
   */
-  @property int maxWidthChars()
+  @property int maxWidthChars() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("max-width-chars");
   }
@@ -357,7 +357,7 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
           set to expand in its [gtk.cell_layout.CellLayout] and all of the cell's siblings
           have received their natural width.
   */
-  @property void maxWidthChars(int propval)
+  @property void maxWidthChars(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("max-width-chars", propval);
   }
@@ -367,7 +367,7 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
       Returns: The text that will be displayed in the [gtk.cell_renderer.CellRenderer] if
         `GtkCellRendererText:editable` is true and the cell is empty.
   */
-  @property string placeholderText()
+  @property string placeholderText() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("placeholder-text");
   }
@@ -378,259 +378,259 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
         propval = The text that will be displayed in the [gtk.cell_renderer.CellRenderer] if
           `GtkCellRendererText:editable` is true and the cell is empty.
   */
-  @property void placeholderText(string propval)
+  @property void placeholderText(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("placeholder-text", propval);
   }
 
   /** */
-  @property int rise()
+  @property int rise() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("rise");
   }
 
   /** */
-  @property void rise(int propval)
+  @property void rise(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("rise", propval);
   }
 
   /** */
-  @property bool riseSet()
+  @property bool riseSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("rise-set");
   }
 
   /** */
-  @property void riseSet(bool propval)
+  @property void riseSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("rise-set", propval);
   }
 
   /** */
-  @property double scale()
+  @property double scale() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(double)("scale");
   }
 
   /** */
-  @property void scale(double propval)
+  @property void scale(double propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(double)("scale", propval);
   }
 
   /** */
-  @property bool scaleSet()
+  @property bool scaleSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("scale-set");
   }
 
   /** */
-  @property void scaleSet(bool propval)
+  @property void scaleSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("scale-set", propval);
   }
 
   /** */
-  @property bool singleParagraphMode()
+  @property bool singleParagraphMode() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("single-paragraph-mode");
   }
 
   /** */
-  @property void singleParagraphMode(bool propval)
+  @property void singleParagraphMode(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("single-paragraph-mode", propval);
   }
 
   /** */
-  @property int size()
+  @property int size() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("size");
   }
 
   /** */
-  @property void size(int propval)
+  @property void size(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("size", propval);
   }
 
   /** */
-  @property double sizePoints()
+  @property double sizePoints() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(double)("size-points");
   }
 
   /** */
-  @property void sizePoints(double propval)
+  @property void sizePoints(double propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(double)("size-points", propval);
   }
 
   /** */
-  @property bool sizeSet()
+  @property bool sizeSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("size-set");
   }
 
   /** */
-  @property void sizeSet(bool propval)
+  @property void sizeSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("size-set", propval);
   }
 
   /** */
-  @property pango.types.Stretch stretch()
+  @property pango.types.Stretch stretch() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(pango.types.Stretch)("stretch");
   }
 
   /** */
-  @property void stretch(pango.types.Stretch propval)
+  @property void stretch(pango.types.Stretch propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(pango.types.Stretch)("stretch", propval);
   }
 
   /** */
-  @property bool stretchSet()
+  @property bool stretchSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("stretch-set");
   }
 
   /** */
-  @property void stretchSet(bool propval)
+  @property void stretchSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("stretch-set", propval);
   }
 
   /** */
-  @property bool strikethrough()
+  @property bool strikethrough() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("strikethrough");
   }
 
   /** */
-  @property void strikethrough(bool propval)
+  @property void strikethrough(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("strikethrough", propval);
   }
 
   /** */
-  @property bool strikethroughSet()
+  @property bool strikethroughSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("strikethrough-set");
   }
 
   /** */
-  @property void strikethroughSet(bool propval)
+  @property void strikethroughSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("strikethrough-set", propval);
   }
 
   /** */
-  @property pango.types.Style style()
+  @property pango.types.Style style() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(pango.types.Style)("style");
   }
 
   /** */
-  @property void style(pango.types.Style propval)
+  @property void style(pango.types.Style propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(pango.types.Style)("style", propval);
   }
 
   /** */
-  @property bool styleSet()
+  @property bool styleSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("style-set");
   }
 
   /** */
-  @property void styleSet(bool propval)
+  @property void styleSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("style-set", propval);
   }
 
   /** */
-  @property string text()
+  @property string text() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(string)("text");
   }
 
   /** */
-  @property void text(string propval)
+  @property void text(string propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(string)("text", propval);
   }
 
   /** */
-  @property pango.types.Underline underline()
+  @property pango.types.Underline underline() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(pango.types.Underline)("underline");
   }
 
   /** */
-  @property void underline(pango.types.Underline propval)
+  @property void underline(pango.types.Underline propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(pango.types.Underline)("underline", propval);
   }
 
   /** */
-  @property bool underlineSet()
+  @property bool underlineSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("underline-set");
   }
 
   /** */
-  @property void underlineSet(bool propval)
+  @property void underlineSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("underline-set", propval);
   }
 
   /** */
-  @property pango.types.Variant variant()
+  @property pango.types.Variant variant() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(pango.types.Variant)("variant");
   }
 
   /** */
-  @property void variant(pango.types.Variant propval)
+  @property void variant(pango.types.Variant propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(pango.types.Variant)("variant", propval);
   }
 
   /** */
-  @property bool variantSet()
+  @property bool variantSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("variant-set");
   }
 
   /** */
-  @property void variantSet(bool propval)
+  @property void variantSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("variant-set", propval);
   }
 
   /** */
-  @property int weight()
+  @property int weight() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("weight");
   }
 
   /** */
-  @property void weight(int propval)
+  @property void weight(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("weight", propval);
   }
 
   /** */
-  @property bool weightSet()
+  @property bool weightSet() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(bool)("weight-set");
   }
 
   /** */
-  @property void weightSet(bool propval)
+  @property void weightSet(bool propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(bool)("weight-set", propval);
   }
@@ -641,7 +641,7 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
         -1, the width will be calculated automatically, otherwise the cell will
         request either 3 characters or the property value, whichever is greater.
   */
-  @property int widthChars()
+  @property int widthChars() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("width-chars");
   }
@@ -653,7 +653,7 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
           -1, the width will be calculated automatically, otherwise the cell will
           request either 3 characters or the property value, whichever is greater.
   */
-  @property void widthChars(int propval)
+  @property void widthChars(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("width-chars", propval);
   }
@@ -664,7 +664,7 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
         renderer does not have enough room to display the entire string.
         This property has no effect unless the wrap-width property is set.
   */
-  @property pango.types.WrapMode wrapMode()
+  @property pango.types.WrapMode wrapMode() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(pango.types.WrapMode)("wrap-mode");
   }
@@ -676,7 +676,7 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
           renderer does not have enough room to display the entire string.
           This property has no effect unless the wrap-width property is set.
   */
-  @property void wrapMode(pango.types.WrapMode propval)
+  @property void wrapMode(pango.types.WrapMode propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(pango.types.WrapMode)("wrap-mode", propval);
   }
@@ -687,7 +687,7 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
         be used to influence at what character positions the line breaks can be placed.
         Setting wrap-width to -1 turns wrapping off.
   */
-  @property int wrapWidth()
+  @property int wrapWidth() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("wrap-width");
   }
@@ -699,7 +699,7 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
           be used to influence at what character positions the line breaks can be placed.
           Setting wrap-width to -1 turns wrapping off.
   */
-  @property void wrapWidth(int propval)
+  @property void wrapWidth(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("wrap-width", propval);
   }
@@ -714,7 +714,7 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
       of the [gtk.tree_view.TreeView].
       Returns: the new cell renderer
   */
-  this()
+  this() nothrow
   {
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_renderer_text_new();
@@ -733,7 +733,7 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
       Params:
         numberOfRows = Number of rows of text each cell renderer is allocated, or -1
   */
-  void setFixedHeightFromFont(int numberOfRows)
+  void setFixedHeightFromFont(int numberOfRows) nothrow
   {
     gtk_cell_renderer_text_set_fixed_height_from_font(cast(GtkCellRendererText*)this._cPtr, numberOfRows);
   }
@@ -760,7 +760,7 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectEdited(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEdited(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -768,7 +768,7 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.cell_renderer_text.CellRendererText)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -783,7 +783,14 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtk.cell_renderer_text.CellRendererText.edited");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -796,7 +803,7 @@ class CellRendererTextGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuild
 {
 
   /** */
-  T alignSet(bool propval)
+  T alignSet(bool propval) nothrow
   {
     return setProperty("align-set", propval);
   }
@@ -811,19 +818,19 @@ class CellRendererTextGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuild
           on the other hand, sets the horizontal alignment of the whole text.
       Returns: Builder instance for fluent chaining
   */
-  T alignment(pango.types.Alignment propval)
+  T alignment(pango.types.Alignment propval) nothrow
   {
     return setProperty("alignment", propval);
   }
 
   /** */
-  T attributes(pango.attr_list.AttrList propval)
+  T attributes(pango.attr_list.AttrList propval) nothrow
   {
     return setProperty("attributes", propval);
   }
 
   /** */
-  T background(string propval)
+  T background(string propval) nothrow
   {
     return setProperty("background", propval);
   }
@@ -834,25 +841,25 @@ class CellRendererTextGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuild
         propval = Background color as a [gdk.rgba.RGBA]
       Returns: Builder instance for fluent chaining
   */
-  T backgroundRgba(gdk.rgba.RGBA propval)
+  T backgroundRgba(gdk.rgba.RGBA propval) nothrow
   {
     return setProperty("background-rgba", propval);
   }
 
   /** */
-  T backgroundSet(bool propval)
+  T backgroundSet(bool propval) nothrow
   {
     return setProperty("background-set", propval);
   }
 
   /** */
-  T editable(bool propval)
+  T editable(bool propval) nothrow
   {
     return setProperty("editable", propval);
   }
 
   /** */
-  T editableSet(bool propval)
+  T editableSet(bool propval) nothrow
   {
     return setProperty("editable-set", propval);
   }
@@ -866,43 +873,43 @@ class CellRendererTextGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuild
           for another way of making the text fit into a given width.
       Returns: Builder instance for fluent chaining
   */
-  T ellipsize(pango.types.EllipsizeMode propval)
+  T ellipsize(pango.types.EllipsizeMode propval) nothrow
   {
     return setProperty("ellipsize", propval);
   }
 
   /** */
-  T ellipsizeSet(bool propval)
+  T ellipsizeSet(bool propval) nothrow
   {
     return setProperty("ellipsize-set", propval);
   }
 
   /** */
-  T family(string propval)
+  T family(string propval) nothrow
   {
     return setProperty("family", propval);
   }
 
   /** */
-  T familySet(bool propval)
+  T familySet(bool propval) nothrow
   {
     return setProperty("family-set", propval);
   }
 
   /** */
-  T font(string propval)
+  T font(string propval) nothrow
   {
     return setProperty("font", propval);
   }
 
   /** */
-  T fontDesc(pango.font_description.FontDescription propval)
+  T fontDesc(pango.font_description.FontDescription propval) nothrow
   {
     return setProperty("font-desc", propval);
   }
 
   /** */
-  T foreground(string propval)
+  T foreground(string propval) nothrow
   {
     return setProperty("foreground", propval);
   }
@@ -913,31 +920,31 @@ class CellRendererTextGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuild
         propval = Foreground color as a [gdk.rgba.RGBA]
       Returns: Builder instance for fluent chaining
   */
-  T foregroundRgba(gdk.rgba.RGBA propval)
+  T foregroundRgba(gdk.rgba.RGBA propval) nothrow
   {
     return setProperty("foreground-rgba", propval);
   }
 
   /** */
-  T foregroundSet(bool propval)
+  T foregroundSet(bool propval) nothrow
   {
     return setProperty("foreground-set", propval);
   }
 
   /** */
-  T language(string propval)
+  T language(string propval) nothrow
   {
     return setProperty("language", propval);
   }
 
   /** */
-  T languageSet(bool propval)
+  T languageSet(bool propval) nothrow
   {
     return setProperty("language-set", propval);
   }
 
   /** */
-  T markup(string propval)
+  T markup(string propval) nothrow
   {
     return setProperty("markup", propval);
   }
@@ -955,7 +962,7 @@ class CellRendererTextGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuild
           have received their natural width.
       Returns: Builder instance for fluent chaining
   */
-  T maxWidthChars(int propval)
+  T maxWidthChars(int propval) nothrow
   {
     return setProperty("max-width-chars", propval);
   }
@@ -967,133 +974,133 @@ class CellRendererTextGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuild
           `GtkCellRendererText:editable` is true and the cell is empty.
       Returns: Builder instance for fluent chaining
   */
-  T placeholderText(string propval)
+  T placeholderText(string propval) nothrow
   {
     return setProperty("placeholder-text", propval);
   }
 
   /** */
-  T rise(int propval)
+  T rise(int propval) nothrow
   {
     return setProperty("rise", propval);
   }
 
   /** */
-  T riseSet(bool propval)
+  T riseSet(bool propval) nothrow
   {
     return setProperty("rise-set", propval);
   }
 
   /** */
-  T scale(double propval)
+  T scale(double propval) nothrow
   {
     return setProperty("scale", propval);
   }
 
   /** */
-  T scaleSet(bool propval)
+  T scaleSet(bool propval) nothrow
   {
     return setProperty("scale-set", propval);
   }
 
   /** */
-  T singleParagraphMode(bool propval)
+  T singleParagraphMode(bool propval) nothrow
   {
     return setProperty("single-paragraph-mode", propval);
   }
 
   /** */
-  T size(int propval)
+  T size(int propval) nothrow
   {
     return setProperty("size", propval);
   }
 
   /** */
-  T sizePoints(double propval)
+  T sizePoints(double propval) nothrow
   {
     return setProperty("size-points", propval);
   }
 
   /** */
-  T sizeSet(bool propval)
+  T sizeSet(bool propval) nothrow
   {
     return setProperty("size-set", propval);
   }
 
   /** */
-  T stretch(pango.types.Stretch propval)
+  T stretch(pango.types.Stretch propval) nothrow
   {
     return setProperty("stretch", propval);
   }
 
   /** */
-  T stretchSet(bool propval)
+  T stretchSet(bool propval) nothrow
   {
     return setProperty("stretch-set", propval);
   }
 
   /** */
-  T strikethrough(bool propval)
+  T strikethrough(bool propval) nothrow
   {
     return setProperty("strikethrough", propval);
   }
 
   /** */
-  T strikethroughSet(bool propval)
+  T strikethroughSet(bool propval) nothrow
   {
     return setProperty("strikethrough-set", propval);
   }
 
   /** */
-  T style(pango.types.Style propval)
+  T style(pango.types.Style propval) nothrow
   {
     return setProperty("style", propval);
   }
 
   /** */
-  T styleSet(bool propval)
+  T styleSet(bool propval) nothrow
   {
     return setProperty("style-set", propval);
   }
 
   /** */
-  T text(string propval)
+  T text(string propval) nothrow
   {
     return setProperty("text", propval);
   }
 
   /** */
-  T underline(pango.types.Underline propval)
+  T underline(pango.types.Underline propval) nothrow
   {
     return setProperty("underline", propval);
   }
 
   /** */
-  T underlineSet(bool propval)
+  T underlineSet(bool propval) nothrow
   {
     return setProperty("underline-set", propval);
   }
 
   /** */
-  T variant(pango.types.Variant propval)
+  T variant(pango.types.Variant propval) nothrow
   {
     return setProperty("variant", propval);
   }
 
   /** */
-  T variantSet(bool propval)
+  T variantSet(bool propval) nothrow
   {
     return setProperty("variant-set", propval);
   }
 
   /** */
-  T weight(int propval)
+  T weight(int propval) nothrow
   {
     return setProperty("weight", propval);
   }
 
   /** */
-  T weightSet(bool propval)
+  T weightSet(bool propval) nothrow
   {
     return setProperty("weight-set", propval);
   }
@@ -1106,7 +1113,7 @@ class CellRendererTextGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuild
           request either 3 characters or the property value, whichever is greater.
       Returns: Builder instance for fluent chaining
   */
-  T widthChars(int propval)
+  T widthChars(int propval) nothrow
   {
     return setProperty("width-chars", propval);
   }
@@ -1119,7 +1126,7 @@ class CellRendererTextGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuild
           This property has no effect unless the wrap-width property is set.
       Returns: Builder instance for fluent chaining
   */
-  T wrapMode(pango.types.WrapMode propval)
+  T wrapMode(pango.types.WrapMode propval) nothrow
   {
     return setProperty("wrap-mode", propval);
   }
@@ -1132,7 +1139,7 @@ class CellRendererTextGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuild
           Setting wrap-width to -1 turns wrapping off.
       Returns: Builder instance for fluent chaining
   */
-  T wrapWidth(int propval)
+  T wrapWidth(int propval) nothrow
   {
     return setProperty("wrap-width", propval);
   }
@@ -1145,7 +1152,7 @@ final class CellRendererTextGidBuilder : CellRendererTextGidBuilderImpl!CellRend
       Create object from builder.
       Returns: New object
   */
-  CellRendererText build()
+  CellRendererText build() nothrow
   {
     return new CellRendererText(cast(void*)createGObject(CellRendererText._getGType), No.Take);
   }

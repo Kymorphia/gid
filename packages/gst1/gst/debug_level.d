@@ -18,7 +18,7 @@ struct DebugLevel
         level = the level to get the name for
       Returns: the name
   */
-  static string getName(gst.types.DebugLevel level)
+  static string getName(gst.types.DebugLevel level) nothrow
   {
     const(char)* _cretval;
     _cretval = gst_debug_level_get_name(level);

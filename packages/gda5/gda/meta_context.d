@@ -28,32 +28,32 @@ class MetaContext : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_meta_context_get_type != &gidSymbolNotFound ? gda_meta_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override MetaContext self()
+  override MetaContext self() nothrow
   {
     return this;
   }
@@ -62,7 +62,7 @@ class MetaContext : gobject.boxed.Boxed
       Get `tableName` field.
       Returns: the name of the table <emphasis>in the GdaMetaStore's internal database</emphasis>
   */
-  @property string tableName()
+  @property string tableName() nothrow
   {
     return cToD!(string)(cast(void*)(cast(GdaMetaContext*)this._cPtr).tableName);
   }
@@ -72,7 +72,7 @@ class MetaContext : gobject.boxed.Boxed
       Params:
         propval = the name of the table <emphasis>in the GdaMetaStore's internal database</emphasis>
   */
-  @property void tableName(string propval)
+  @property void tableName(string propval) nothrow
   {
     cValueFree!(string)(cast(void*)(cast(GdaMetaContext*)this._cPtr).tableName);
     dToC(propval, cast(void*)&(cast(GdaMetaContext*)this._cPtr).tableName);
@@ -82,7 +82,7 @@ class MetaContext : gobject.boxed.Boxed
       Get `size` field.
       Returns: the size of the @column_names and @column_values arrays
   */
-  @property int size()
+  @property int size() nothrow
   {
     return (cast(GdaMetaContext*)this._cPtr).size;
   }
@@ -92,7 +92,7 @@ class MetaContext : gobject.boxed.Boxed
       Params:
         propval = the size of the @column_names and @column_values arrays
   */
-  @property void size(int propval)
+  @property void size(int propval) nothrow
   {
     (cast(GdaMetaContext*)this._cPtr).size = propval;
   }
@@ -102,7 +102,7 @@ class MetaContext : gobject.boxed.Boxed
       Returns: a new #GdaMetaContext struct with a new created hash to
         store column name/value pairs.
   */
-  this()
+  this() nothrow
   {
     GdaMetaContext* _cretval;
     _cretval = gda_meta_context_new();
@@ -113,7 +113,7 @@ class MetaContext : gobject.boxed.Boxed
       Copy constructor.
       Returns: a new #GdaMetaContext
   */
-  gda.meta_context.MetaContext copy()
+  gda.meta_context.MetaContext copy() nothrow
   {
     GdaMetaContext* _cretval;
     _cretval = gda_meta_context_copy(cast(GdaMetaContext*)this._cPtr);
@@ -125,7 +125,7 @@ class MetaContext : gobject.boxed.Boxed
       Get table's name to used in the context.
       Returns: A string with the table's name used in the context.
   */
-  string getTable()
+  string getTable() nothrow
   {
     const(char)* _cretval;
     _cretval = gda_meta_context_get_table(cast(GdaMetaContext*)this._cPtr);
@@ -145,7 +145,7 @@ class MetaContext : gobject.boxed.Boxed
         value = the column's value
         cnc = a #GdaConnection to be used when identifier are normalized, or NULL
   */
-  void setColumn(string column, gobject.value.Value value, gda.connection.Connection cnc = null)
+  void setColumn(string column, gobject.value.Value value, gda.connection.Connection cnc = null) nothrow
   {
     const(char)* _column = column.toCString(No.Alloc);
     gda_meta_context_set_column(cast(GdaMetaContext*)this._cPtr, _column, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, cnc ? cast(GdaConnection*)cnc._cPtr(No.Dup) : null);
@@ -159,7 +159,7 @@ class MetaContext : gobject.boxed.Boxed
       Params:
         table = a string with the table's name to use in context
   */
-  void setTable(string table)
+  void setTable(string table) nothrow
   {
     const(char)* _table = table.toCString(No.Alloc);
     gda_meta_context_set_table(cast(GdaMetaContext*)this._cPtr, _table);

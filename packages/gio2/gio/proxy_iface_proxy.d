@@ -8,12 +8,12 @@ import gio.proxy_mixin;
 /// Proxy object for [gio.proxy.Proxy] interface when a GObject has no applicable D binding
 class ProxyIfaceProxy : IfaceProxy, gio.proxy.Proxy
 {
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
-  override TypeInfo_Interface getIface()
+  override TypeInfo_Interface getIface() nothrow
   {
     return typeid(gio.proxy.Proxy);
   }

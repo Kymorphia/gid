@@ -31,26 +31,26 @@ class Snippet : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_snippet_get_type != &gidSymbolNotFound ? gtk_source_snippet_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Snippet self()
+  override Snippet self() nothrow
   {
     return this;
   }
@@ -59,67 +59,67 @@ class Snippet : gobject.object.ObjectWrap
       Get builder for [gtksource.snippet.Snippet]
       Returns: New builder object
   */
-  static SnippetGidBuilder builder()
+  static SnippetGidBuilder builder() nothrow
   {
     return new SnippetGidBuilder;
   }
 
   /** */
-  @property gtk.text_buffer.TextBuffer buffer()
+  @property gtk.text_buffer.TextBuffer buffer() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(gtk.text_buffer.TextBuffer)("buffer");
   }
 
   /** */
-  @property string description()
+  @property string description() nothrow
   {
     return getDescription();
   }
 
   /** */
-  @property void description(string propval)
+  @property void description(string propval) nothrow
   {
     setDescription(propval);
   }
 
   /** */
-  @property int focusPosition()
+  @property int focusPosition() nothrow
   {
     return getFocusPosition();
   }
 
   /** */
-  @property string languageId()
+  @property string languageId() nothrow
   {
     return getLanguageId();
   }
 
   /** */
-  @property void languageId(string propval)
+  @property void languageId(string propval) nothrow
   {
     setLanguageId(propval);
   }
 
   /** */
-  @property string name()
+  @property string name() nothrow
   {
     return getName();
   }
 
   /** */
-  @property void name(string propval)
+  @property void name(string propval) nothrow
   {
     setName(propval);
   }
 
   /** */
-  @property string trigger()
+  @property string trigger() nothrow
   {
     return getTrigger();
   }
 
   /** */
-  @property void trigger(string propval)
+  @property void trigger(string propval) nothrow
   {
     setTrigger(propval);
   }
@@ -132,7 +132,7 @@ class Snippet : gobject.object.ObjectWrap
         languageId = the source language
       Returns: A new #GtkSourceSnippet
   */
-  this(string trigger = null, string languageId = null)
+  this(string trigger = null, string languageId = null) nothrow
   {
     GtkSourceSnippet* _cretval;
     const(char)* _trigger = trigger.toCString(No.Alloc);
@@ -171,7 +171,7 @@ class Snippet : gobject.object.ObjectWrap
       Params:
         chunk = a #GtkSourceSnippetChunk
   */
-  void addChunk(gtksource.snippet_chunk.SnippetChunk chunk)
+  void addChunk(gtksource.snippet_chunk.SnippetChunk chunk) nothrow
   {
     gtk_source_snippet_add_chunk(cast(GtkSourceSnippet*)this._cPtr, chunk ? cast(GtkSourceSnippetChunk*)chunk._cPtr(No.Dup) : null);
   }
@@ -180,7 +180,7 @@ class Snippet : gobject.object.ObjectWrap
       Does a deep copy of the snippet.
       Returns: A new #GtkSourceSnippet
   */
-  gtksource.snippet.Snippet copy()
+  gtksource.snippet.Snippet copy() nothrow
   {
     GtkSourceSnippet* _cretval;
     _cretval = gtk_source_snippet_copy(cast(GtkSourceSnippet*)this._cPtr);
@@ -192,7 +192,7 @@ class Snippet : gobject.object.ObjectWrap
       Gets the context used for expanding the snippet.
       Returns: an #GtkSourceSnippetContext
   */
-  gtksource.snippet_context.SnippetContext getContext()
+  gtksource.snippet_context.SnippetContext getContext() nothrow
   {
     GtkSourceSnippetContext* _cretval;
     _cretval = gtk_source_snippet_get_context(cast(GtkSourceSnippet*)this._cPtr);
@@ -204,7 +204,7 @@ class Snippet : gobject.object.ObjectWrap
       Gets the description for the snippet.
       Returns: 
   */
-  string getDescription()
+  string getDescription() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_get_description(cast(GtkSourceSnippet*)this._cPtr);
@@ -218,7 +218,7 @@ class Snippet : gobject.object.ObjectWrap
       This is changed as the user tabs through focus locations.
       Returns: The focus position, or -1 if unset.
   */
-  int getFocusPosition()
+  int getFocusPosition() nothrow
   {
     int _retval;
     _retval = gtk_source_snippet_get_focus_position(cast(GtkSourceSnippet*)this._cPtr);
@@ -232,7 +232,7 @@ class Snippet : gobject.object.ObjectWrap
       source language [gtksource.language.Language.id] property.
       Returns: the language identifier
   */
-  string getLanguageId()
+  string getLanguageId() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_get_language_id(cast(GtkSourceSnippet*)this._cPtr);
@@ -246,7 +246,7 @@ class Snippet : gobject.object.ObjectWrap
       Note that not all chunks are editable.
       Returns: The number of chunks.
   */
-  uint getNChunks()
+  uint getNChunks() nothrow
   {
     uint _retval;
     _retval = gtk_source_snippet_get_n_chunks(cast(GtkSourceSnippet*)this._cPtr);
@@ -257,7 +257,7 @@ class Snippet : gobject.object.ObjectWrap
       Gets the name for the snippet.
       Returns: 
   */
-  string getName()
+  string getName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_get_name(cast(GtkSourceSnippet*)this._cPtr);
@@ -272,7 +272,7 @@ class Snippet : gobject.object.ObjectWrap
         nth = the nth chunk to get
       Returns: an #GtkSourceSnippetChunk
   */
-  gtksource.snippet_chunk.SnippetChunk getNthChunk(uint nth)
+  gtksource.snippet_chunk.SnippetChunk getNthChunk(uint nth) nothrow
   {
     GtkSourceSnippetChunk* _cretval;
     _cretval = gtk_source_snippet_get_nth_chunk(cast(GtkSourceSnippet*)this._cPtr, nth);
@@ -287,7 +287,7 @@ class Snippet : gobject.object.ObjectWrap
       the user presses Tab.
       Returns: A string or null
   */
-  string getTrigger()
+  string getTrigger() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_get_trigger(cast(GtkSourceSnippet*)this._cPtr);
@@ -301,7 +301,7 @@ class Snippet : gobject.object.ObjectWrap
       Params:
         description = the snippet description
   */
-  void setDescription(string description)
+  void setDescription(string description) nothrow
   {
     const(char)* _description = description.toCString(No.Alloc);
     gtk_source_snippet_set_description(cast(GtkSourceSnippet*)this._cPtr, _description);
@@ -315,7 +315,7 @@ class Snippet : gobject.object.ObjectWrap
       Params:
         languageId = the language identifier for the snippet
   */
-  void setLanguageId(string languageId)
+  void setLanguageId(string languageId) nothrow
   {
     const(char)* _languageId = languageId.toCString(No.Alloc);
     gtk_source_snippet_set_language_id(cast(GtkSourceSnippet*)this._cPtr, _languageId);
@@ -327,7 +327,7 @@ class Snippet : gobject.object.ObjectWrap
       Params:
         name = the snippet name
   */
-  void setName(string name)
+  void setName(string name) nothrow
   {
     const(char)* _name = name.toCString(No.Alloc);
     gtk_source_snippet_set_name(cast(GtkSourceSnippet*)this._cPtr, _name);
@@ -339,7 +339,7 @@ class Snippet : gobject.object.ObjectWrap
       Params:
         trigger = the trigger word
   */
-  void setTrigger(string trigger)
+  void setTrigger(string trigger) nothrow
   {
     const(char)* _trigger = trigger.toCString(No.Alloc);
     gtk_source_snippet_set_trigger(cast(GtkSourceSnippet*)this._cPtr, _trigger);
@@ -351,25 +351,25 @@ class SnippetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
   /** */
-  T description(string propval)
+  T description(string propval) nothrow
   {
     return setProperty("description", propval);
   }
 
   /** */
-  T languageId(string propval)
+  T languageId(string propval) nothrow
   {
     return setProperty("language-id", propval);
   }
 
   /** */
-  T name(string propval)
+  T name(string propval) nothrow
   {
     return setProperty("name", propval);
   }
 
   /** */
-  T trigger(string propval)
+  T trigger(string propval) nothrow
   {
     return setProperty("trigger", propval);
   }
@@ -382,7 +382,7 @@ final class SnippetGidBuilder : SnippetGidBuilderImpl!SnippetGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Snippet build()
+  Snippet build() nothrow
   {
     return new Snippet(cast(void*)createGObject(Snippet._getGType), Yes.Take);
   }

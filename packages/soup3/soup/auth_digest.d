@@ -20,26 +20,26 @@ class AuthDigest : soup.auth.Auth
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_auth_digest_get_type != &gidSymbolNotFound ? soup_auth_digest_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override AuthDigest self()
+  override AuthDigest self() nothrow
   {
     return this;
   }
@@ -48,7 +48,7 @@ class AuthDigest : soup.auth.Auth
       Get builder for [soup.auth_digest.AuthDigest]
       Returns: New builder object
   */
-  static AuthDigestGidBuilder builder()
+  static AuthDigestGidBuilder builder() nothrow
   {
     return new AuthDigestGidBuilder;
   }
@@ -66,7 +66,7 @@ final class AuthDigestGidBuilder : AuthDigestGidBuilderImpl!AuthDigestGidBuilder
       Create object from builder.
       Returns: New object
   */
-  AuthDigest build()
+  AuthDigest build() nothrow
   {
     return new AuthDigest(cast(void*)createGObject(AuthDigest._getGType), No.Take);
   }

@@ -30,26 +30,26 @@ class GLTextureBuilder : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_gl_texture_builder_get_type != &gidSymbolNotFound ? gdk_gl_texture_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLTextureBuilder self()
+  override GLTextureBuilder self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Get builder for [gdk.gltexture_builder.GLTextureBuilder]
       Returns: New builder object
   */
-  static GLTextureBuilderGidBuilder builder()
+  static GLTextureBuilderGidBuilder builder() nothrow
   {
     return new GLTextureBuilderGidBuilder;
   }
@@ -67,7 +67,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Get `context` property.
       Returns: The context owning the texture.
   */
-  @property gdk.glcontext.GLContext context()
+  @property gdk.glcontext.GLContext context() nothrow
   {
     return getContext();
   }
@@ -77,7 +77,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Params:
         propval = The context owning the texture.
   */
-  @property void context(gdk.glcontext.GLContext propval)
+  @property void context(gdk.glcontext.GLContext propval) nothrow
   {
     setContext(propval);
   }
@@ -86,7 +86,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Get `format` property.
       Returns: The format when downloading the texture.
   */
-  @property gdk.types.MemoryFormat format()
+  @property gdk.types.MemoryFormat format() nothrow
   {
     return getFormat();
   }
@@ -96,7 +96,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Params:
         propval = The format when downloading the texture.
   */
-  @property void format(gdk.types.MemoryFormat propval)
+  @property void format(gdk.types.MemoryFormat propval) nothrow
   {
     setFormat(propval);
   }
@@ -105,7 +105,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Get `hasMipmap` property.
       Returns: If the texture has a mipmap.
   */
-  @property bool hasMipmap()
+  @property bool hasMipmap() nothrow
   {
     return getHasMipmap();
   }
@@ -115,7 +115,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Params:
         propval = If the texture has a mipmap.
   */
-  @property void hasMipmap(bool propval)
+  @property void hasMipmap(bool propval) nothrow
   {
     setHasMipmap(propval);
   }
@@ -124,7 +124,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Get `height` property.
       Returns: The height of the texture.
   */
-  @property int height()
+  @property int height() nothrow
   {
     return getHeight();
   }
@@ -134,7 +134,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Params:
         propval = The height of the texture.
   */
-  @property void height(int propval)
+  @property void height(int propval) nothrow
   {
     setHeight(propval);
   }
@@ -143,7 +143,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Get `id` property.
       Returns: The texture ID to use.
   */
-  @property uint id()
+  @property uint id() nothrow
   {
     return getId();
   }
@@ -153,7 +153,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Params:
         propval = The texture ID to use.
   */
-  @property void id(uint propval)
+  @property void id(uint propval) nothrow
   {
     setId(propval);
   }
@@ -164,7 +164,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
         
         If this is set, GTK will wait on it before using the texture.
   */
-  @property void* sync()
+  @property void* sync() nothrow
   {
     return getSync();
   }
@@ -176,7 +176,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
           
           If this is set, GTK will wait on it before using the texture.
   */
-  @property void sync(void* propval)
+  @property void sync(void* propval) nothrow
   {
     setSync(propval);
   }
@@ -185,7 +185,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Get `updateRegion` property.
       Returns: The update region for [gdk.gltexture_builder.GLTextureBuilder.updateTexture].
   */
-  @property cairo.region.Region updateRegion()
+  @property cairo.region.Region updateRegion() nothrow
   {
     return getUpdateRegion();
   }
@@ -195,7 +195,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Params:
         propval = The update region for [gdk.gltexture_builder.GLTextureBuilder.updateTexture].
   */
-  @property void updateRegion(cairo.region.Region propval)
+  @property void updateRegion(cairo.region.Region propval) nothrow
   {
     setUpdateRegion(propval);
   }
@@ -204,7 +204,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Get `updateTexture` property.
       Returns: The texture [gdk.gltexture_builder.GLTextureBuilder.updateRegion] is an update for.
   */
-  @property gdk.texture.Texture updateTexture()
+  @property gdk.texture.Texture updateTexture() nothrow
   {
     return getUpdateTexture();
   }
@@ -214,7 +214,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Params:
         propval = The texture [gdk.gltexture_builder.GLTextureBuilder.updateRegion] is an update for.
   */
-  @property void updateTexture(gdk.texture.Texture propval)
+  @property void updateTexture(gdk.texture.Texture propval) nothrow
   {
     setUpdateTexture(propval);
   }
@@ -223,7 +223,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Get `width` property.
       Returns: The width of the texture.
   */
-  @property int width()
+  @property int width() nothrow
   {
     return getWidth();
   }
@@ -233,7 +233,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Params:
         propval = The width of the texture.
   */
-  @property void width(int propval)
+  @property void width(int propval) nothrow
   {
     setWidth(propval);
   }
@@ -242,7 +242,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Creates a new texture builder.
       Returns: the new `GdkTextureBuilder`
   */
-  this()
+  this() nothrow
   {
     GdkGLTextureBuilder* _cretval;
     _cretval = gdk_gl_texture_builder_new();
@@ -270,14 +270,21 @@ class GLTextureBuilder : gobject.object.ObjectWrap
         data = user data to pass to the destroy function
       Returns: a newly built [gdk.texture.Texture]
   */
-  gdk.texture.Texture build(glib.types.DestroyNotify destroy = null, void* data = null)
+  gdk.texture.Texture build(glib.types.DestroyNotify destroy = null, void* data = null) nothrow
   {
-    extern(C) void _destroyCallback(void* data)
+    extern(C) void _destroyCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(glib.types.DestroyNotify*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "glib.types.DestroyNotify");
+      }
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
     GdkTexture* _cretval;
@@ -291,7 +298,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       null if none was set.
       Returns: The context
   */
-  gdk.glcontext.GLContext getContext()
+  gdk.glcontext.GLContext getContext() nothrow
   {
     GdkGLContext* _cretval;
     _cretval = gdk_gl_texture_builder_get_context(cast(GdkGLTextureBuilder*)this._cPtr);
@@ -303,7 +310,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Gets the format previously set via [gdk.gltexture_builder.GLTextureBuilder.setFormat].
       Returns: The format
   */
-  gdk.types.MemoryFormat getFormat()
+  gdk.types.MemoryFormat getFormat() nothrow
   {
     GdkMemoryFormat _cretval;
     _cretval = gdk_gl_texture_builder_get_format(cast(GdkGLTextureBuilder*)this._cPtr);
@@ -315,7 +322,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Gets whether the texture has a mipmap.
       Returns: Whether the texture has a mipmap
   */
-  bool getHasMipmap()
+  bool getHasMipmap() nothrow
   {
     bool _retval;
     _retval = cast(bool)gdk_gl_texture_builder_get_has_mipmap(cast(GdkGLTextureBuilder*)this._cPtr);
@@ -327,7 +334,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       0 if the height wasn't set.
       Returns: The height
   */
-  int getHeight()
+  int getHeight() nothrow
   {
     int _retval;
     _retval = gdk_gl_texture_builder_get_height(cast(GdkGLTextureBuilder*)this._cPtr);
@@ -339,7 +346,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       0 if the id wasn't set.
       Returns: The id
   */
-  uint getId()
+  uint getId() nothrow
   {
     uint _retval;
     _retval = gdk_gl_texture_builder_get_id(cast(GdkGLTextureBuilder*)this._cPtr);
@@ -350,7 +357,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Gets the `GLsync` previously set via [gdk.gltexture_builder.GLTextureBuilder.setSync].
       Returns: the `GLSync`
   */
-  void* getSync()
+  void* getSync() nothrow
   {
     auto _retval = gdk_gl_texture_builder_get_sync(cast(GdkGLTextureBuilder*)this._cPtr);
     return _retval;
@@ -361,7 +368,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       null if none was set.
       Returns: The region
   */
-  cairo.region.Region getUpdateRegion()
+  cairo.region.Region getUpdateRegion() nothrow
   {
     cairo_region_t* _cretval;
     _cretval = gdk_gl_texture_builder_get_update_region(cast(GdkGLTextureBuilder*)this._cPtr);
@@ -374,7 +381,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       null if none was set.
       Returns: The texture
   */
-  gdk.texture.Texture getUpdateTexture()
+  gdk.texture.Texture getUpdateTexture() nothrow
   {
     GdkTexture* _cretval;
     _cretval = gdk_gl_texture_builder_get_update_texture(cast(GdkGLTextureBuilder*)this._cPtr);
@@ -387,7 +394,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       0 if the width wasn't set.
       Returns: The width
   */
-  int getWidth()
+  int getWidth() nothrow
   {
     int _retval;
     _retval = gdk_gl_texture_builder_get_width(cast(GdkGLTextureBuilder*)this._cPtr);
@@ -403,7 +410,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Params:
         context = The context the texture beongs to or null to unset
   */
-  void setContext(gdk.glcontext.GLContext context = null)
+  void setContext(gdk.glcontext.GLContext context = null) nothrow
   {
     gdk_gl_texture_builder_set_context(cast(GdkGLTextureBuilder*)this._cPtr, context ? cast(GdkGLContext*)context._cPtr(No.Dup) : null);
   }
@@ -429,7 +436,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Params:
         format = The texture's format
   */
-  void setFormat(gdk.types.MemoryFormat format)
+  void setFormat(gdk.types.MemoryFormat format) nothrow
   {
     gdk_gl_texture_builder_set_format(cast(GdkGLTextureBuilder*)this._cPtr, format);
   }
@@ -443,7 +450,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Params:
         hasMipmap = Whether the texture has a mipmap
   */
-  void setHasMipmap(bool hasMipmap)
+  void setHasMipmap(bool hasMipmap) nothrow
   {
     gdk_gl_texture_builder_set_has_mipmap(cast(GdkGLTextureBuilder*)this._cPtr, hasMipmap);
   }
@@ -456,7 +463,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Params:
         height = The texture's height or 0 to unset
   */
-  void setHeight(int height)
+  void setHeight(int height) nothrow
   {
     gdk_gl_texture_builder_set_height(cast(GdkGLTextureBuilder*)this._cPtr, height);
   }
@@ -471,7 +478,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Params:
         id = The texture id to be used for creating the texture
   */
-  void setId(uint id)
+  void setId(uint id) nothrow
   {
     gdk_gl_texture_builder_set_id(cast(GdkGLTextureBuilder*)this._cPtr, id);
   }
@@ -489,7 +496,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Params:
         sync = the GLSync object
   */
-  void setSync(void* sync = null)
+  void setSync(void* sync = null) nothrow
   {
     gdk_gl_texture_builder_set_sync(cast(GdkGLTextureBuilder*)this._cPtr, sync);
   }
@@ -509,7 +516,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Params:
         region = the region to update
   */
-  void setUpdateRegion(cairo.region.Region region = null)
+  void setUpdateRegion(cairo.region.Region region = null) nothrow
   {
     gdk_gl_texture_builder_set_update_region(cast(GdkGLTextureBuilder*)this._cPtr, region ? cast(cairo_region_t*)region._cPtr(No.Dup) : null);
   }
@@ -521,7 +528,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Params:
         texture = the texture to update
   */
-  void setUpdateTexture(gdk.texture.Texture texture = null)
+  void setUpdateTexture(gdk.texture.Texture texture = null) nothrow
   {
     gdk_gl_texture_builder_set_update_texture(cast(GdkGLTextureBuilder*)this._cPtr, texture ? cast(GdkTexture*)texture._cPtr(No.Dup) : null);
   }
@@ -534,7 +541,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
       Params:
         width = The texture's width or 0 to unset
   */
-  void setWidth(int width)
+  void setWidth(int width) nothrow
   {
     gdk_gl_texture_builder_set_width(cast(GdkGLTextureBuilder*)this._cPtr, width);
   }
@@ -550,7 +557,7 @@ class GLTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = The context owning the texture.
       Returns: Builder instance for fluent chaining
   */
-  T context(gdk.glcontext.GLContext propval)
+  T context(gdk.glcontext.GLContext propval) nothrow
   {
     return setProperty("context", propval);
   }
@@ -561,7 +568,7 @@ class GLTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = The format when downloading the texture.
       Returns: Builder instance for fluent chaining
   */
-  T format(gdk.types.MemoryFormat propval)
+  T format(gdk.types.MemoryFormat propval) nothrow
   {
     return setProperty("format", propval);
   }
@@ -572,7 +579,7 @@ class GLTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = If the texture has a mipmap.
       Returns: Builder instance for fluent chaining
   */
-  T hasMipmap(bool propval)
+  T hasMipmap(bool propval) nothrow
   {
     return setProperty("has-mipmap", propval);
   }
@@ -583,7 +590,7 @@ class GLTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = The height of the texture.
       Returns: Builder instance for fluent chaining
   */
-  T height(int propval)
+  T height(int propval) nothrow
   {
     return setProperty("height", propval);
   }
@@ -594,7 +601,7 @@ class GLTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = The texture ID to use.
       Returns: Builder instance for fluent chaining
   */
-  T id(uint propval)
+  T id(uint propval) nothrow
   {
     return setProperty("id", propval);
   }
@@ -607,7 +614,7 @@ class GLTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
           If this is set, GTK will wait on it before using the texture.
       Returns: Builder instance for fluent chaining
   */
-  T sync(void* propval)
+  T sync(void* propval) nothrow
   {
     return setProperty("sync", propval);
   }
@@ -618,7 +625,7 @@ class GLTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = The update region for [gdk.gltexture_builder.GLTextureBuilder.updateTexture].
       Returns: Builder instance for fluent chaining
   */
-  T updateRegion(cairo.region.Region propval)
+  T updateRegion(cairo.region.Region propval) nothrow
   {
     return setProperty("update-region", propval);
   }
@@ -629,7 +636,7 @@ class GLTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = The texture [gdk.gltexture_builder.GLTextureBuilder.updateRegion] is an update for.
       Returns: Builder instance for fluent chaining
   */
-  T updateTexture(gdk.texture.Texture propval)
+  T updateTexture(gdk.texture.Texture propval) nothrow
   {
     return setProperty("update-texture", propval);
   }
@@ -640,7 +647,7 @@ class GLTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
         propval = The width of the texture.
       Returns: Builder instance for fluent chaining
   */
-  T width(int propval)
+  T width(int propval) nothrow
   {
     return setProperty("width", propval);
   }
@@ -653,7 +660,7 @@ final class GLTextureBuilderGidBuilder : GLTextureBuilderGidBuilderImpl!GLTextur
       Create object from builder.
       Returns: New object
   */
-  GLTextureBuilder build()
+  GLTextureBuilder build() nothrow
   {
     return new GLTextureBuilder(cast(void*)createGObject(GLTextureBuilder._getGType), Yes.Take);
   }

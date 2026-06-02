@@ -14,7 +14,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libgstapp-1.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // AppSink
   GType function() c_gst_app_sink_get_type; ///

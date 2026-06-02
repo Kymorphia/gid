@@ -23,39 +23,39 @@ class Blob : gobject.boxed.Boxed
       Params:
         op = a pointer to a #GdaBlopOp, or null
   */
-  this(gda.blob_op.BlobOp op = gda.blob_op.BlobOp.init)
+  this(gda.blob_op.BlobOp op = gda.blob_op.BlobOp.init) nothrow
   {
     super(gMalloc(GdaBlob.sizeof), Yes.Take);
     this.op = op;
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  void* _cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup) nothrow
   {
     return dup ? boxCopy : _cInstancePtr;
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_blob_get_type != &gidSymbolNotFound ? gda_blob_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Blob self()
+  override Blob self() nothrow
   {
     return this;
   }
@@ -64,7 +64,7 @@ class Blob : gobject.boxed.Boxed
       Get `data` field.
       Returns: data buffer, as a #GdaBinary
   */
-  @property gda.binary.Binary data()
+  @property gda.binary.Binary data() nothrow
   {
     return cToD!(gda.binary.Binary)(cast(void*)&(cast(GdaBlob*)this._cPtr).data);
   }
@@ -73,7 +73,7 @@ class Blob : gobject.boxed.Boxed
       Get `op` field.
       Returns: a pointer to a #GdaBlopOp, or null
   */
-  @property gda.blob_op.BlobOp op()
+  @property gda.blob_op.BlobOp op() nothrow
   {
     return cToD!(gda.blob_op.BlobOp)(cast(void*)(cast(GdaBlob*)this._cPtr).op);
   }
@@ -83,7 +83,7 @@ class Blob : gobject.boxed.Boxed
       Params:
         propval = a pointer to a #GdaBlopOp, or null
   */
-  @property void op(gda.blob_op.BlobOp propval)
+  @property void op(gda.blob_op.BlobOp propval) nothrow
   {
     cValueFree!(gda.blob_op.BlobOp)(cast(void*)(cast(GdaBlob*)this._cPtr).op);
     dToC(propval, cast(void*)&(cast(GdaBlob*)this._cPtr).op);
@@ -95,7 +95,7 @@ class Blob : gobject.boxed.Boxed
       Params:
         op = a #GdaBlobOp object, or null
   */
-  void setOp(gda.blob_op.BlobOp op = null)
+  void setOp(gda.blob_op.BlobOp op = null) nothrow
   {
     gda_blob_set_op(cast(GdaBlob*)this._cPtr, op ? cast(GdaBlobOp*)op._cPtr(No.Dup) : null);
   }
@@ -109,7 +109,7 @@ class Blob : gobject.boxed.Boxed
         maxlen = a maximum len used to truncate, or 0 for no maximum length
       Returns: a new string from blob
   */
-  string toString_(uint maxlen)
+  string toString_(uint maxlen) nothrow
   {
     char* _cretval;
     _cretval = gda_blob_to_string(cast(GdaBlob*)this._cPtr, maxlen);
@@ -126,7 +126,7 @@ class Blob : gobject.boxed.Boxed
         
         Free-function: gda_blob_free
   */
-  static void* copy(void* boxed = null)
+  static void* copy(void* boxed = null) nothrow
   {
     auto _retval = gda_blob_copy(boxed);
     return _retval;
@@ -138,7 +138,7 @@ class Blob : gobject.boxed.Boxed
       Params:
         boxed = #GdaBlob to free.
   */
-  static void free(void* boxed = null)
+  static void free(void* boxed = null) nothrow
   {
     gda_blob_free(boxed);
   }

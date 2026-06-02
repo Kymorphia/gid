@@ -21,26 +21,26 @@ class GLWindow : gst.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_window_get_type != &gidSymbolNotFound ? gst_gl_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override GLWindow self()
+  override GLWindow self() nothrow
   {
     return this;
   }
@@ -49,13 +49,13 @@ class GLWindow : gst.object.ObjectWrap
       Get builder for [gstgl.glwindow.GLWindow]
       Returns: New builder object
   */
-  static GLWindowGidBuilder builder()
+  static GLWindowGidBuilder builder() nothrow
   {
     return new GLWindowGidBuilder;
   }
 
   /** */
-  this(gstgl.gldisplay.GLDisplay display)
+  this(gstgl.gldisplay.GLDisplay display) nothrow
   {
     GstGLWindow* _cretval;
     _cretval = gst_gl_window_new(display ? cast(GstGLDisplay*)display._cPtr(No.Dup) : null);
@@ -66,7 +66,7 @@ class GLWindow : gst.object.ObjectWrap
       Checks if window controls the GL viewport.
       Returns: true if window controls the GL viewport, otherwise false
   */
-  bool controlsViewport()
+  bool controlsViewport() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_window_controls_viewport(cast(GstGLWindow*)this._cPtr);
@@ -76,13 +76,13 @@ class GLWindow : gst.object.ObjectWrap
   /**
       Redraw the window contents.  Implementations should invoke the draw callback.
   */
-  void draw()
+  void draw() nothrow
   {
     gst_gl_window_draw(cast(GstGLWindow*)this._cPtr);
   }
 
   /** */
-  gstgl.glcontext.GLContext getContext()
+  gstgl.glcontext.GLContext getContext() nothrow
   {
     GstGLContext* _cretval;
     _cretval = gst_gl_window_get_context(cast(GstGLWindow*)this._cPtr);
@@ -91,7 +91,7 @@ class GLWindow : gst.object.ObjectWrap
   }
 
   /** */
-  size_t getDisplay()
+  size_t getDisplay() nothrow
   {
     size_t _retval;
     _retval = gst_gl_window_get_display(cast(GstGLWindow*)this._cPtr);
@@ -99,13 +99,13 @@ class GLWindow : gst.object.ObjectWrap
   }
 
   /** */
-  void getSurfaceDimensions(out uint width, out uint height)
+  void getSurfaceDimensions(out uint width, out uint height) nothrow
   {
     gst_gl_window_get_surface_dimensions(cast(GstGLWindow*)this._cPtr, cast(uint*)&width, cast(uint*)&height);
   }
 
   /** */
-  size_t getWindowHandle()
+  size_t getWindowHandle() nothrow
   {
     size_t _retval;
     _retval = gst_gl_window_get_window_handle(cast(GstGLWindow*)this._cPtr);
@@ -122,7 +122,7 @@ class GLWindow : gst.object.ObjectWrap
       Params:
         handleEvents = a #gboolean indicating if events should be handled or not.
   */
-  void handleEvents(bool handleEvents)
+  void handleEvents(bool handleEvents) nothrow
   {
     gst_gl_window_handle_events(cast(GstGLWindow*)this._cPtr, handleEvents);
   }
@@ -131,7 +131,7 @@ class GLWindow : gst.object.ObjectWrap
       Query whether window has output surface or not
       Returns: true if window has useable output surface
   */
-  bool hasOutputSurface()
+  bool hasOutputSurface() nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_window_has_output_surface(cast(GstGLWindow*)this._cPtr);
@@ -141,7 +141,7 @@ class GLWindow : gst.object.ObjectWrap
   /**
       Queue resizing of window.
   */
-  void queueResize()
+  void queueResize() nothrow
   {
     gst_gl_window_queue_resize(cast(GstGLWindow*)this._cPtr);
   }
@@ -149,7 +149,7 @@ class GLWindow : gst.object.ObjectWrap
   /**
       Quit the runloop's execution.
   */
-  void quit()
+  void quit() nothrow
   {
     gst_gl_window_quit(cast(GstGLWindow*)this._cPtr);
   }
@@ -161,7 +161,7 @@ class GLWindow : gst.object.ObjectWrap
         width = new width
         height = new height
   */
-  void resize(uint width, uint height)
+  void resize(uint width, uint height) nothrow
   {
     gst_gl_window_resize(cast(GstGLWindow*)this._cPtr, width, height);
   }
@@ -169,13 +169,13 @@ class GLWindow : gst.object.ObjectWrap
   /**
       Start the execution of the runloop.
   */
-  void run()
+  void run() nothrow
   {
     gst_gl_window_run(cast(GstGLWindow*)this._cPtr);
   }
 
   /** */
-  void sendKeyEvent(string eventType, string keyStr)
+  void sendKeyEvent(string eventType, string keyStr) nothrow
   {
     const(char)* _eventType = eventType.toCString(No.Alloc);
     const(char)* _keyStr = keyStr.toCString(No.Alloc);
@@ -189,14 +189,21 @@ class GLWindow : gst.object.ObjectWrap
       Params:
         callback = function to invoke
   */
-  void sendMessage(gstgl.types.GLWindowCB callback)
+  void sendMessage(gstgl.types.GLWindowCB callback) nothrow
   {
-    extern(C) void _callbackCallback(void* data)
+    extern(C) void _callbackCallback(void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gstgl.types.GLWindowCB*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstgl.types.GLWindowCB");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -210,13 +217,20 @@ class GLWindow : gst.object.ObjectWrap
       Params:
         callback = function to invoke
   */
-  void sendMessageAsync(gstgl.types.GLWindowCB callback)
+  void sendMessageAsync(gstgl.types.GLWindowCB callback) nothrow
   {
-    extern(C) void _callbackCallback(void* data)
+    extern(C) void _callbackCallback(void* data) nothrow
     {
       auto _dlg = cast(gstgl.types.GLWindowCB*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstgl.types.GLWindowCB");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -225,7 +239,7 @@ class GLWindow : gst.object.ObjectWrap
   }
 
   /** */
-  void sendMouseEvent(string eventType, int button, double posx, double posy)
+  void sendMouseEvent(string eventType, int button, double posx, double posy) nothrow
   {
     const(char)* _eventType = eventType.toCString(No.Alloc);
     gst_gl_window_send_mouse_event(cast(GstGLWindow*)this._cPtr, _eventType, button, posx, posy);
@@ -241,7 +255,7 @@ class GLWindow : gst.object.ObjectWrap
         deltaX = the x offset of the scroll event
         deltaY = the y offset of the scroll event
   */
-  void sendScrollEvent(double posx, double posy, double deltaX, double deltaY)
+  void sendScrollEvent(double posx, double posy, double deltaX, double deltaY) nothrow
   {
     gst_gl_window_send_scroll_event(cast(GstGLWindow*)this._cPtr, posx, posy, deltaX, deltaY);
   }
@@ -252,13 +266,20 @@ class GLWindow : gst.object.ObjectWrap
       Params:
         callback = function to invoke
   */
-  void setCloseCallback(gstgl.types.GLWindowCB callback)
+  void setCloseCallback(gstgl.types.GLWindowCB callback) nothrow
   {
-    extern(C) void _callbackCallback(void* data)
+    extern(C) void _callbackCallback(void* data) nothrow
     {
       auto _dlg = cast(gstgl.types.GLWindowCB*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstgl.types.GLWindowCB");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -272,13 +293,20 @@ class GLWindow : gst.object.ObjectWrap
       Params:
         callback = function to invoke
   */
-  void setDrawCallback(gstgl.types.GLWindowCB callback)
+  void setDrawCallback(gstgl.types.GLWindowCB callback) nothrow
   {
-    extern(C) void _callbackCallback(void* data)
+    extern(C) void _callbackCallback(void* data) nothrow
     {
       auto _dlg = cast(gstgl.types.GLWindowCB*)data;
 
-      (*_dlg)();
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstgl.types.GLWindowCB");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -294,7 +322,7 @@ class GLWindow : gst.object.ObjectWrap
         width = new preferred width
         height = new preferred height
   */
-  void setPreferredSize(int width, int height)
+  void setPreferredSize(int width, int height) nothrow
   {
     gst_gl_window_set_preferred_size(cast(GstGLWindow*)this._cPtr, width, height);
   }
@@ -310,7 +338,7 @@ class GLWindow : gst.object.ObjectWrap
         height = height
       Returns: whether the specified region could be set
   */
-  bool setRenderRectangle(int x, int y, int width, int height)
+  bool setRenderRectangle(int x, int y, int width, int height) nothrow
   {
     bool _retval;
     _retval = cast(bool)gst_gl_window_set_render_rectangle(cast(GstGLWindow*)this._cPtr, x, y, width, height);
@@ -323,13 +351,20 @@ class GLWindow : gst.object.ObjectWrap
       Params:
         callback = function to invoke
   */
-  void setResizeCallback(gstgl.types.GLWindowResizeCB callback)
+  void setResizeCallback(gstgl.types.GLWindowResizeCB callback) nothrow
   {
-    extern(C) void _callbackCallback(void* data, uint width, uint height)
+    extern(C) void _callbackCallback(void* data, uint width, uint height) nothrow
     {
       auto _dlg = cast(gstgl.types.GLWindowResizeCB*)data;
 
-      (*_dlg)(width, height);
+      try
+      {
+        (*_dlg)(width, height);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstgl.types.GLWindowResizeCB");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -344,7 +379,7 @@ class GLWindow : gst.object.ObjectWrap
       Params:
         handle = handle to the window
   */
-  void setWindowHandle(size_t handle)
+  void setWindowHandle(size_t handle) nothrow
   {
     gst_gl_window_set_window_handle(cast(GstGLWindow*)this._cPtr, handle);
   }
@@ -352,7 +387,7 @@ class GLWindow : gst.object.ObjectWrap
   /**
       Present the window to the screen.
   */
-  void show()
+  void show() nothrow
   {
     gst_gl_window_show(cast(GstGLWindow*)this._cPtr);
   }
@@ -376,7 +411,7 @@ class GLWindow : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectKeyEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectKeyEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -384,7 +419,7 @@ class GLWindow : gst.object.ObjectWrap
   && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gstgl.glwindow.GLWindow)))
   && Parameters!T.length < 4)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -399,7 +434,14 @@ class GLWindow : gst.object.ObjectWrap
       static if (Parameters!T.length > 2)
         _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstgl.glwindow.GLWindow.keyEvent");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -429,7 +471,7 @@ class GLWindow : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectMouseEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMouseEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -439,7 +481,7 @@ class GLWindow : gst.object.ObjectWrap
   && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gstgl.glwindow.GLWindow)))
   && Parameters!T.length < 6)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -460,7 +502,14 @@ class GLWindow : gst.object.ObjectWrap
       static if (Parameters!T.length > 4)
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstgl.glwindow.GLWindow.mouseEvent");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -490,7 +539,7 @@ class GLWindow : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectScrollEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectScrollEvent(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -500,7 +549,7 @@ class GLWindow : gst.object.ObjectWrap
   && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gstgl.glwindow.GLWindow)))
   && Parameters!T.length < 6)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -521,7 +570,14 @@ class GLWindow : gst.object.ObjectWrap
       static if (Parameters!T.length > 4)
         _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstgl.glwindow.GLWindow.scrollEvent");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -546,13 +602,13 @@ class GLWindow : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectWindowHandleChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWindowHandleChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstgl.glwindow.GLWindow)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -561,7 +617,14 @@ class GLWindow : gst.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gstgl.glwindow.GLWindow.windowHandleChanged");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -581,7 +644,7 @@ final class GLWindowGidBuilder : GLWindowGidBuilderImpl!GLWindowGidBuilder
       Create object from builder.
       Returns: New object
   */
-  GLWindow build()
+  GLWindow build() nothrow
   {
     return new GLWindow(cast(void*)createGObject(GLWindow._getGType), Yes.Take);
   }

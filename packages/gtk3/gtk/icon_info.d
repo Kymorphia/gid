@@ -30,26 +30,26 @@ class IconInfo : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_icon_info_get_type != &gidSymbolNotFound ? gtk_icon_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override IconInfo self()
+  override IconInfo self() nothrow
   {
     return this;
   }
@@ -58,7 +58,7 @@ class IconInfo : gobject.object.ObjectWrap
       Get builder for [gtk.icon_info.IconInfo]
       Returns: New builder object
   */
-  static IconInfoGidBuilder builder()
+  static IconInfoGidBuilder builder() nothrow
   {
     return new IconInfoGidBuilder;
   }
@@ -71,7 +71,7 @@ class IconInfo : gobject.object.ObjectWrap
         pixbuf = the pixbuf to wrap in a #GtkIconInfo
       Returns: a #GtkIconInfo
   */
-  static gtk.icon_info.IconInfo newForPixbuf(gtk.icon_theme.IconTheme iconTheme, gdkpixbuf.pixbuf.Pixbuf pixbuf)
+  static gtk.icon_info.IconInfo newForPixbuf(gtk.icon_theme.IconTheme iconTheme, gdkpixbuf.pixbuf.Pixbuf pixbuf) nothrow
   {
     GtkIconInfo* _cretval;
     _cretval = gtk_icon_info_new_for_pixbuf(iconTheme ? cast(GtkIconTheme*)iconTheme._cPtr(No.Dup) : null, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
@@ -89,7 +89,7 @@ class IconInfo : gobject.object.ObjectWrap
   
       Deprecated: Attachment points are deprecated
   */
-  bool getAttachPoints(out gdk.types.Point[] points)
+  bool getAttachPoints(out gdk.types.Point[] points) nothrow
   {
     bool _retval;
     int _nPoints;
@@ -109,7 +109,7 @@ class IconInfo : gobject.object.ObjectWrap
       a base scale of 2.
       Returns: the base scale
   */
-  int getBaseScale()
+  int getBaseScale() nothrow
   {
     int _retval;
     _retval = gtk_icon_info_get_base_scale(cast(GtkIconInfo*)this._cPtr);
@@ -131,7 +131,7 @@ class IconInfo : gobject.object.ObjectWrap
       Returns: the base size, or 0, if no base
             size is known for the icon.
   */
-  int getBaseSize()
+  int getBaseSize() nothrow
   {
     int _retval;
     _retval = gtk_icon_info_get_base_size(cast(GtkIconInfo*)this._cPtr);
@@ -150,7 +150,7 @@ class IconInfo : gobject.object.ObjectWrap
       Deprecated: This function is deprecated, use
             [gtk.icon_theme.IconTheme.addResourcePath] instead of builtin icons.
   */
-  gdkpixbuf.pixbuf.Pixbuf getBuiltinPixbuf()
+  gdkpixbuf.pixbuf.Pixbuf getBuiltinPixbuf() nothrow
   {
     GdkPixbuf* _cretval;
     _cretval = gtk_icon_info_get_builtin_pixbuf(cast(GtkIconInfo*)this._cPtr);
@@ -164,7 +164,7 @@ class IconInfo : gobject.object.ObjectWrap
   
       Deprecated: Display names are deprecated
   */
-  string getDisplayName()
+  string getDisplayName() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_icon_info_get_display_name(cast(GtkIconInfo*)this._cPtr);
@@ -183,7 +183,7 @@ class IconInfo : gobject.object.ObjectWrap
   
       Deprecated: Embedded rectangles are deprecated
   */
-  bool getEmbeddedRect(out gdk.rectangle.Rectangle rectangle)
+  bool getEmbeddedRect(out gdk.rectangle.Rectangle rectangle) nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_icon_info_get_embedded_rect(cast(GtkIconInfo*)this._cPtr, cast(GdkRectangle*)&rectangle);
@@ -200,7 +200,7 @@ class IconInfo : gobject.object.ObjectWrap
             The return value is owned by GTK+ and should not be modified
             or freed.
   */
-  string getFilename()
+  string getFilename() nothrow
   {
     const(char)* _cretval;
     _cretval = gtk_icon_info_get_filename(cast(GtkIconInfo*)this._cPtr);
@@ -214,7 +214,7 @@ class IconInfo : gobject.object.ObjectWrap
       This behaviour may change in the future.
       Returns: true if the icon is symbolic, false otherwise
   */
-  bool isSymbolic()
+  bool isSymbolic() nothrow
   {
     bool _retval;
     _retval = cast(bool)gtk_icon_info_is_symbolic(cast(GtkIconInfo*)this._cPtr);
@@ -262,14 +262,21 @@ class IconInfo : gobject.object.ObjectWrap
         callback = a #GAsyncReadyCallback to call when the
               request is satisfied
   */
-  void loadIconAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void loadIconAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -395,14 +402,21 @@ class IconInfo : gobject.object.ObjectWrap
         callback = a #GAsyncReadyCallback to call when the
               request is satisfied
   */
-  void loadSymbolicAsync(gdk.rgba.RGBA fg, gdk.rgba.RGBA successColor, gdk.rgba.RGBA warningColor, gdk.rgba.RGBA errorColor, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void loadSymbolicAsync(gdk.rgba.RGBA fg, gdk.rgba.RGBA successColor, gdk.rgba.RGBA warningColor, gdk.rgba.RGBA errorColor, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -483,14 +497,21 @@ class IconInfo : gobject.object.ObjectWrap
         callback = a #GAsyncReadyCallback to call when the
               request is satisfied
   */
-  void loadSymbolicForContextAsync(gtk.style_context.StyleContext context, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
+  void loadSymbolicForContextAsync(gtk.style_context.StyleContext context, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -580,7 +601,7 @@ class IconInfo : gobject.object.ObjectWrap
   
       Deprecated: Embedded rectangles and attachment points are deprecated
   */
-  void setRawCoordinates(bool rawCoordinates)
+  void setRawCoordinates(bool rawCoordinates) nothrow
   {
     gtk_icon_info_set_raw_coordinates(cast(GtkIconInfo*)this._cPtr, rawCoordinates);
   }
@@ -598,7 +619,7 @@ final class IconInfoGidBuilder : IconInfoGidBuilderImpl!IconInfoGidBuilder
       Create object from builder.
       Returns: New object
   */
-  IconInfo build()
+  IconInfo build() nothrow
   {
     return new IconInfo(cast(void*)createGObject(IconInfo._getGType), No.Take);
   }

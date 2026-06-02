@@ -18,18 +18,15 @@ class SequenceIter
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
-    if (!ptr)
-      throw new GidConstructException("Null instance pointer for glib.sequence_iter.SequenceIter");
-
     _cInstancePtr = cast(GSequenceIter*)ptr;
 
     owned = take;
   }
 
   /** */
-  void* _cPtr()
+  void* _cPtr() nothrow
   {
     return cast(void*)_cInstancePtr;
   }
@@ -45,7 +42,7 @@ class SequenceIter
       Returns: a negative number if `a` comes before `b`, 0 if they are
             equal, and a positive number if `a` comes after `b`
   */
-  int compare(glib.sequence_iter.SequenceIter b)
+  int compare(glib.sequence_iter.SequenceIter b) nothrow
   {
     int _retval;
     _retval = g_sequence_iter_compare(cast(GSequenceIter*)this._cPtr, b ? cast(GSequenceIter*)b._cPtr : null);
@@ -56,7 +53,7 @@ class SequenceIter
       Returns the position of iter
       Returns: the position of iter
   */
-  int getPosition()
+  int getPosition() nothrow
   {
     int _retval;
     _retval = g_sequence_iter_get_position(cast(GSequenceIter*)this._cPtr);
@@ -67,7 +64,7 @@ class SequenceIter
       Returns the #GSequence that iter points into.
       Returns: the #GSequence that iter points into
   */
-  glib.sequence.Sequence getSequence()
+  glib.sequence.Sequence getSequence() nothrow
   {
     GSequence* _cretval;
     _cretval = g_sequence_iter_get_sequence(cast(GSequenceIter*)this._cPtr);
@@ -79,7 +76,7 @@ class SequenceIter
       Returns whether iter is the begin iterator
       Returns: whether iter is the begin iterator
   */
-  bool isBegin()
+  bool isBegin() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_sequence_iter_is_begin(cast(GSequenceIter*)this._cPtr);
@@ -90,7 +87,7 @@ class SequenceIter
       Returns whether iter is the end iterator
       Returns: Whether iter is the end iterator
   */
-  bool isEnd()
+  bool isEnd() nothrow
   {
     bool _retval;
     _retval = cast(bool)g_sequence_iter_is_end(cast(GSequenceIter*)this._cPtr);
@@ -108,7 +105,7 @@ class SequenceIter
              from iter the returned #GSequenceIter will be
       Returns: a #GSequenceIter which is delta positions away from iter
   */
-  glib.sequence_iter.SequenceIter move(int delta)
+  glib.sequence_iter.SequenceIter move(int delta) nothrow
   {
     GSequenceIter* _cretval;
     _cretval = g_sequence_iter_move(cast(GSequenceIter*)this._cPtr, delta);
@@ -121,7 +118,7 @@ class SequenceIter
       If iter is the end iterator, the end iterator is returned.
       Returns: a #GSequenceIter pointing to the next position after iter
   */
-  glib.sequence_iter.SequenceIter next()
+  glib.sequence_iter.SequenceIter next() nothrow
   {
     GSequenceIter* _cretval;
     _cretval = g_sequence_iter_next(cast(GSequenceIter*)this._cPtr);
@@ -135,7 +132,7 @@ class SequenceIter
       Returns: a #GSequenceIter pointing to the previous position
             before iter
   */
-  glib.sequence_iter.SequenceIter prev()
+  glib.sequence_iter.SequenceIter prev() nothrow
   {
     GSequenceIter* _cretval;
     _cretval = g_sequence_iter_prev(cast(GSequenceIter*)this._cPtr);

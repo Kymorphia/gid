@@ -20,26 +20,26 @@ class SqlParser : gobject.object.ObjectWrap, gda.lockable.Lockable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gda_sql_parser_get_type != &gidSymbolNotFound ? gda_sql_parser_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SqlParser self()
+  override SqlParser self() nothrow
   {
     return this;
   }
@@ -48,43 +48,43 @@ class SqlParser : gobject.object.ObjectWrap, gda.lockable.Lockable
       Get builder for [gda.sql_parser.SqlParser]
       Returns: New builder object
   */
-  static SqlParserGidBuilder builder()
+  static SqlParserGidBuilder builder() nothrow
   {
     return new SqlParserGidBuilder;
   }
 
   /** */
-  @property int columnError()
+  @property int columnError() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("column-error");
   }
 
   /** */
-  @property int lineError()
+  @property int lineError() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("line-error");
   }
 
   /** */
-  @property int mode()
+  @property int mode() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("mode");
   }
 
   /** */
-  @property void mode(int propval)
+  @property void mode(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("mode", propval);
   }
 
   /** */
-  @property int tokenizerFlavour()
+  @property int tokenizerFlavour() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(int)("tokenizer-flavour");
   }
 
   /** */
-  @property void tokenizerFlavour(int propval)
+  @property void tokenizerFlavour(int propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(int)("tokenizer-flavour", propval);
   }
@@ -95,7 +95,7 @@ class SqlParser : gobject.object.ObjectWrap, gda.lockable.Lockable
       Creates a new #GdaSqlParser object
       Returns: the new object
   */
-  this()
+  this() nothrow
   {
     GdaSqlParser* _cretval;
     _cretval = gda_sql_parser_new();
@@ -103,7 +103,7 @@ class SqlParser : gobject.object.ObjectWrap, gda.lockable.Lockable
   }
 
   /** */
-  static glib.types.Quark errorQuark()
+  static glib.types.Quark errorQuark() nothrow
   {
     glib.types.Quark _retval;
     _retval = gda_sql_parser_error_quark();
@@ -198,13 +198,13 @@ class SqlParser : gobject.object.ObjectWrap, gda.lockable.Lockable
   }
 
   /** */
-  void setOverflowError()
+  void setOverflowError() nothrow
   {
     gda_sql_parser_set_overflow_error(cast(GdaSqlParser*)this._cPtr);
   }
 
   /** */
-  void setSyntaxError()
+  void setSyntaxError() nothrow
   {
     gda_sql_parser_set_syntax_error(cast(GdaSqlParser*)this._cPtr);
   }
@@ -217,13 +217,13 @@ class SqlParserGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gd
   mixin LockableGidBuilderT!();
 
   /** */
-  T mode(int propval)
+  T mode(int propval) nothrow
   {
     return setProperty("mode", propval);
   }
 
   /** */
-  T tokenizerFlavour(int propval)
+  T tokenizerFlavour(int propval) nothrow
   {
     return setProperty("tokenizer-flavour", propval);
   }
@@ -236,7 +236,7 @@ final class SqlParserGidBuilder : SqlParserGidBuilderImpl!SqlParserGidBuilder
       Create object from builder.
       Returns: New object
   */
-  SqlParser build()
+  SqlParser build() nothrow
   {
     return new SqlParser(cast(void*)createGObject(SqlParser._getGType), Yes.Take);
   }
@@ -244,12 +244,12 @@ final class SqlParserGidBuilder : SqlParserGidBuilderImpl!SqlParserGidBuilder
 
 class SqlParserException : ErrorWrap
 {
-  this(GError* err)
+  this(GError* err) nothrow
   {
     super(err);
   }
 
-  this(Code code, string msg)
+  this(Code code, string msg) nothrow
   {
     super(gda.sql_parser.SqlParser.errorQuark, cast(int)code, msg);
   }

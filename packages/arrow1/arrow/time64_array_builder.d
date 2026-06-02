@@ -16,26 +16,26 @@ class Time64ArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_time64_array_builder_get_type != &gidSymbolNotFound ? garrow_time64_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Time64ArrayBuilder self()
+  override Time64ArrayBuilder self() nothrow
   {
     return this;
   }
@@ -44,13 +44,13 @@ class Time64ArrayBuilder : arrow.array_builder.ArrayBuilder
       Get builder for [arrow.time64_array_builder.Time64ArrayBuilder]
       Returns: New builder object
   */
-  static Time64ArrayBuilderGidBuilder builder()
+  static Time64ArrayBuilderGidBuilder builder() nothrow
   {
     return new Time64ArrayBuilderGidBuilder;
   }
 
   /** */
-  this(arrow.time64_data_type.Time64DataType dataType)
+  this(arrow.time64_data_type.Time64DataType dataType) nothrow
   {
     GArrowTime64ArrayBuilder* _cretval;
     _cretval = garrow_time64_array_builder_new(dataType ? cast(GArrowTime64DataType*)dataType._cPtr(No.Dup) : null);
@@ -126,7 +126,7 @@ final class Time64ArrayBuilderGidBuilder : Time64ArrayBuilderGidBuilderImpl!Time
       Create object from builder.
       Returns: New object
   */
-  Time64ArrayBuilder build()
+  Time64ArrayBuilder build() nothrow
   {
     return new Time64ArrayBuilder(cast(void*)createGObject(Time64ArrayBuilder._getGType), Yes.Take);
   }

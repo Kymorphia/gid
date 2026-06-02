@@ -53,26 +53,26 @@ class SwitchRow : adw.action_row.ActionRow
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_switch_row_get_type != &gidSymbolNotFound ? adw_switch_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SwitchRow self()
+  override SwitchRow self() nothrow
   {
     return this;
   }
@@ -81,7 +81,7 @@ class SwitchRow : adw.action_row.ActionRow
       Get builder for [adw.switch_row.SwitchRow]
       Returns: New builder object
   */
-  static SwitchRowGidBuilder builder()
+  static SwitchRowGidBuilder builder() nothrow
   {
     return new SwitchRowGidBuilder;
   }
@@ -90,7 +90,7 @@ class SwitchRow : adw.action_row.ActionRow
       Get `active` property.
       Returns: Whether the switch row is in the "on" or "off" position.
   */
-  @property bool active()
+  @property bool active() nothrow
   {
     return getActive();
   }
@@ -100,7 +100,7 @@ class SwitchRow : adw.action_row.ActionRow
       Params:
         propval = Whether the switch row is in the "on" or "off" position.
   */
-  @property void active(bool propval)
+  @property void active(bool propval) nothrow
   {
     setActive(propval);
   }
@@ -109,7 +109,7 @@ class SwitchRow : adw.action_row.ActionRow
       Creates a new [adw.switch_row.SwitchRow].
       Returns: the newly created [adw.switch_row.SwitchRow]
   */
-  this()
+  this() nothrow
   {
     GtkWidget* _cretval;
     _cretval = adw_switch_row_new();
@@ -120,7 +120,7 @@ class SwitchRow : adw.action_row.ActionRow
       Gets whether self is in its "on" or "off" position.
       Returns: whether self is active or not
   */
-  bool getActive()
+  bool getActive() nothrow
   {
     bool _retval;
     _retval = cast(bool)adw_switch_row_get_active(cast(AdwSwitchRow*)this._cPtr);
@@ -133,7 +133,7 @@ class SwitchRow : adw.action_row.ActionRow
       Params:
         isActive = whether self should be active
   */
-  void setActive(bool isActive)
+  void setActive(bool isActive) nothrow
   {
     adw_switch_row_set_active(cast(AdwSwitchRow*)this._cPtr, isActive);
   }
@@ -150,7 +150,7 @@ class SwitchRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T
         propval = Whether the switch row is in the "on" or "off" position.
       Returns: Builder instance for fluent chaining
   */
-  T active(bool propval)
+  T active(bool propval) nothrow
   {
     return setProperty("active", propval);
   }
@@ -163,7 +163,7 @@ final class SwitchRowGidBuilder : SwitchRowGidBuilderImpl!SwitchRowGidBuilder
       Create object from builder.
       Returns: New object
   */
-  SwitchRow build()
+  SwitchRow build() nothrow
   {
     return new SwitchRow(cast(void*)createGObject(SwitchRow._getGType), No.Take);
   }

@@ -14,7 +14,7 @@ else version(OSX)
 else
   private immutable LIBS = ["libjson-glib-1.0.so.0"];
 
-__gshared extern(C)
+__gshared extern(C) nothrow
 {
   // Array
   GType function() c_json_array_get_type; ///

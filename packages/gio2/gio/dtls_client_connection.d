@@ -21,7 +21,7 @@ interface DtlsClientConnection
 {
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dtls_client_connection_get_type != &gidSymbolNotFound ? g_dtls_client_connection_get_type() : cast(GType)0;
@@ -44,7 +44,7 @@ interface DtlsClientConnection
         certificate we expect, which is useful for servers that serve
         virtual hosts.
   */
-  @property gio.socket_connectable.SocketConnectable serverIdentity();
+  @property gio.socket_connectable.SocketConnectable serverIdentity() nothrow;
 
   /**
       Set `serverIdentity` property.
@@ -64,7 +64,7 @@ interface DtlsClientConnection
           certificate we expect, which is useful for servers that serve
           virtual hosts.
   */
-  @property void serverIdentity(gio.socket_connectable.SocketConnectable propval);
+  @property void serverIdentity(gio.socket_connectable.SocketConnectable propval) nothrow;
 
   /**
       Get `validationFlags` property.
@@ -87,7 +87,7 @@ interface DtlsClientConnection
   
       Deprecated: Do not attempt to ignore validation errors.
   */
-  @property gio.types.TlsCertificateFlags validationFlags();
+  @property gio.types.TlsCertificateFlags validationFlags() nothrow;
 
   /**
       Set `validationFlags` property.
@@ -111,7 +111,7 @@ interface DtlsClientConnection
   
       Deprecated: Do not attempt to ignore validation errors.
   */
-  @property void validationFlags(gio.types.TlsCertificateFlags propval);
+  @property void validationFlags(gio.types.TlsCertificateFlags propval) nothrow;
 
   /**
       Creates a new #GDtlsClientConnection wrapping base_socket which is
@@ -206,7 +206,7 @@ interface DtlsClientConnectionGidBuilderImpl(T)
           virtual hosts.
       Returns: Builder instance for fluent chaining
   */
-  T serverIdentity(gio.socket_connectable.SocketConnectable propval);
+  T serverIdentity(gio.socket_connectable.SocketConnectable propval) nothrow;
 
   /**
       Set `validationFlags` property.
@@ -231,5 +231,5 @@ interface DtlsClientConnectionGidBuilderImpl(T)
   
       Deprecated: Do not attempt to ignore validation errors.
   */
-  T validationFlags(gio.types.TlsCertificateFlags propval);
+  T validationFlags(gio.types.TlsCertificateFlags propval) nothrow;
 }

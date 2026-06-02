@@ -24,26 +24,26 @@ class TriggerControlSource : gstcontroller.timed_value_control_source.TimedValue
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_trigger_control_source_get_type != &gidSymbolNotFound ? gst_trigger_control_source_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override TriggerControlSource self()
+  override TriggerControlSource self() nothrow
   {
     return this;
   }
@@ -52,19 +52,19 @@ class TriggerControlSource : gstcontroller.timed_value_control_source.TimedValue
       Get builder for [gstcontroller.trigger_control_source.TriggerControlSource]
       Returns: New builder object
   */
-  static TriggerControlSourceGidBuilder builder()
+  static TriggerControlSourceGidBuilder builder() nothrow
   {
     return new TriggerControlSourceGidBuilder;
   }
 
   /** */
-  @property long tolerance()
+  @property long tolerance() nothrow
   {
     return gobject.object.ObjectWrap.getProperty!(long)("tolerance");
   }
 
   /** */
-  @property void tolerance(long propval)
+  @property void tolerance(long propval) nothrow
   {
     gobject.object.ObjectWrap.setProperty!(long)("tolerance", propval);
   }
@@ -73,7 +73,7 @@ class TriggerControlSource : gstcontroller.timed_value_control_source.TimedValue
       This returns a new, unbound #GstTriggerControlSource.
       Returns: a new, unbound #GstTriggerControlSource.
   */
-  this()
+  this() nothrow
   {
     GstControlSource* _cretval;
     _cretval = gst_trigger_control_source_new();
@@ -86,7 +86,7 @@ class TriggerControlSourceGidBuilderImpl(T) : gstcontroller.timed_value_control_
 {
 
   /** */
-  T tolerance(long propval)
+  T tolerance(long propval) nothrow
   {
     return setProperty("tolerance", propval);
   }
@@ -99,7 +99,7 @@ final class TriggerControlSourceGidBuilder : TriggerControlSourceGidBuilderImpl!
       Create object from builder.
       Returns: New object
   */
-  TriggerControlSource build()
+  TriggerControlSource build() nothrow
   {
     return new TriggerControlSource(cast(void*)createGObject(TriggerControlSource._getGType), Yes.Take);
   }

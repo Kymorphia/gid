@@ -25,26 +25,26 @@ class SnippetContext : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_snippet_context_get_type != &gidSymbolNotFound ? gtk_source_snippet_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override SnippetContext self()
+  override SnippetContext self() nothrow
   {
     return this;
   }
@@ -53,7 +53,7 @@ class SnippetContext : gobject.object.ObjectWrap
       Get builder for [gtksource.snippet_context.SnippetContext]
       Returns: New builder object
   */
-  static SnippetContextGidBuilder builder()
+  static SnippetContextGidBuilder builder() nothrow
   {
     return new SnippetContextGidBuilder;
   }
@@ -65,7 +65,7 @@ class SnippetContext : gobject.object.ObjectWrap
       expansion of snippets manually.
       Returns: a #GtkSourceSnippetContext
   */
-  this()
+  this() nothrow
   {
     GtkSourceSnippetContext* _cretval;
     _cretval = gtk_source_snippet_context_new();
@@ -75,13 +75,13 @@ class SnippetContext : gobject.object.ObjectWrap
   /**
       Removes all variables from the context.
   */
-  void clearVariables()
+  void clearVariables() nothrow
   {
     gtk_source_snippet_context_clear_variables(cast(GtkSourceSnippetContext*)this._cPtr);
   }
 
   /** */
-  string expand(string input)
+  string expand(string input) nothrow
   {
     char* _cretval;
     const(char)* _input = input.toCString(No.Alloc);
@@ -97,7 +97,7 @@ class SnippetContext : gobject.object.ObjectWrap
         key = the name of the variable
       Returns: the value for the variable, or null
   */
-  string getVariable(string key)
+  string getVariable(string key) nothrow
   {
     const(char)* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
@@ -118,7 +118,7 @@ class SnippetContext : gobject.object.ObjectWrap
         key = the constant name
         value = the value of the constant
   */
-  void setConstant(string key, string value)
+  void setConstant(string key, string value) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -126,20 +126,20 @@ class SnippetContext : gobject.object.ObjectWrap
   }
 
   /** */
-  void setLinePrefix(string linePrefix)
+  void setLinePrefix(string linePrefix) nothrow
   {
     const(char)* _linePrefix = linePrefix.toCString(No.Alloc);
     gtk_source_snippet_context_set_line_prefix(cast(GtkSourceSnippetContext*)this._cPtr, _linePrefix);
   }
 
   /** */
-  void setTabWidth(int tabWidth)
+  void setTabWidth(int tabWidth) nothrow
   {
     gtk_source_snippet_context_set_tab_width(cast(GtkSourceSnippetContext*)this._cPtr, tabWidth);
   }
 
   /** */
-  void setUseSpaces(bool useSpaces)
+  void setUseSpaces(bool useSpaces) nothrow
   {
     gtk_source_snippet_context_set_use_spaces(cast(GtkSourceSnippetContext*)this._cPtr, useSpaces);
   }
@@ -154,7 +154,7 @@ class SnippetContext : gobject.object.ObjectWrap
         key = the variable name
         value = the value for the variable
   */
-  void setVariable(string key, string value)
+  void setVariable(string key, string value) nothrow
   {
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
@@ -179,13 +179,13 @@ class SnippetContext : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  gulong connectChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.snippet_context.SnippetContext)))
   && Parameters!T.length < 2)
   {
-    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
@@ -194,7 +194,14 @@ class SnippetContext : gobject.object.ObjectWrap
       static if (Parameters!T.length > 0)
         _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
 
-      _dClosure.cb(_paramTuple[]);
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gtksource.snippet_context.SnippetContext.changed");
+      }
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -214,7 +221,7 @@ final class SnippetContextGidBuilder : SnippetContextGidBuilderImpl!SnippetConte
       Create object from builder.
       Returns: New object
   */
-  SnippetContext build()
+  SnippetContext build() nothrow
   {
     return new SnippetContext(cast(void*)createGObject(SnippetContext._getGType), Yes.Take);
   }

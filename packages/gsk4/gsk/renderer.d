@@ -33,26 +33,26 @@ class Renderer : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take)
+  this(void* ptr, Flag!"Take" take) nothrow
   {
     super(cast(void*)ptr, take);
   }
 
   /** */
-  static GType _getGType()
+  static GType _getGType() nothrow
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_renderer_get_type != &gidSymbolNotFound ? gsk_renderer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType _gType()
+  override @property GType _gType() nothrow
   {
     return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
-  override Renderer self()
+  override Renderer self() nothrow
   {
     return this;
   }
@@ -61,7 +61,7 @@ class Renderer : gobject.object.ObjectWrap
       Get builder for [gsk.renderer.Renderer]
       Returns: New builder object
   */
-  static RendererGidBuilder builder()
+  static RendererGidBuilder builder() nothrow
   {
     return new RendererGidBuilder;
   }
@@ -70,7 +70,7 @@ class Renderer : gobject.object.ObjectWrap
       Get `realized` property.
       Returns: Whether the renderer has been associated with a surface or draw context.
   */
-  @property bool realized()
+  @property bool realized() nothrow
   {
     return isRealized();
   }
@@ -79,7 +79,7 @@ class Renderer : gobject.object.ObjectWrap
       Get `surface` property.
       Returns: The surface associated with renderer.
   */
-  @property gdk.surface.Surface surface()
+  @property gdk.surface.Surface surface() nothrow
   {
     return getSurface();
   }
@@ -97,7 +97,7 @@ class Renderer : gobject.object.ObjectWrap
         surface = a [gdk.surface.Surface]
       Returns: a [gsk.renderer.Renderer]
   */
-  static gsk.renderer.Renderer newForSurface(gdk.surface.Surface surface)
+  static gsk.renderer.Renderer newForSurface(gdk.surface.Surface surface) nothrow
   {
     GskRenderer* _cretval;
     _cretval = gsk_renderer_new_for_surface(surface ? cast(GdkSurface*)surface._cPtr(No.Dup) : null);
@@ -111,7 +111,7 @@ class Renderer : gobject.object.ObjectWrap
       If the renderer has not been realized yet, null will be returned.
       Returns: a [gdk.surface.Surface]
   */
-  gdk.surface.Surface getSurface()
+  gdk.surface.Surface getSurface() nothrow
   {
     GdkSurface* _cretval;
     _cretval = gsk_renderer_get_surface(cast(GskRenderer*)this._cPtr);
@@ -123,7 +123,7 @@ class Renderer : gobject.object.ObjectWrap
       Checks whether the renderer is realized or not.
       Returns: true if the [gsk.renderer.Renderer] was realized, and false otherwise
   */
-  bool isRealized()
+  bool isRealized() nothrow
   {
     bool _retval;
     _retval = cast(bool)gsk_renderer_is_realized(cast(GskRenderer*)this._cPtr);
@@ -198,7 +198,7 @@ class Renderer : gobject.object.ObjectWrap
         region = the [cairo.region.Region] that must be redrawn or null
             for the whole window
   */
-  void render(gsk.render_node.RenderNode root, cairo.region.Region region = null)
+  void render(gsk.render_node.RenderNode root, cairo.region.Region region = null) nothrow
   {
     gsk_renderer_render(cast(GskRenderer*)this._cPtr, root ? cast(GskRenderNode*)root._cPtr(No.Dup) : null, region ? cast(const(cairo_region_t)*)region._cPtr(No.Dup) : null);
   }
@@ -218,7 +218,7 @@ class Renderer : gobject.object.ObjectWrap
         viewport = the section to draw or null to use root's bounds
       Returns: a [gdk.texture.Texture] with the rendered contents of root.
   */
-  gdk.texture.Texture renderTexture(gsk.render_node.RenderNode root, graphene.rect.Rect viewport = null)
+  gdk.texture.Texture renderTexture(gsk.render_node.RenderNode root, graphene.rect.Rect viewport = null) nothrow
   {
     GdkTexture* _cretval;
     _cretval = gsk_renderer_render_texture(cast(GskRenderer*)this._cPtr, root ? cast(GskRenderNode*)root._cPtr(No.Dup) : null, viewport ? cast(const(graphene_rect_t)*)viewport._cPtr(No.Dup) : null);
@@ -229,7 +229,7 @@ class Renderer : gobject.object.ObjectWrap
   /**
       Releases all the resources created by [gsk.renderer.Renderer.realize].
   */
-  void unrealize()
+  void unrealize() nothrow
   {
     gsk_renderer_unrealize(cast(GskRenderer*)this._cPtr);
   }
@@ -247,7 +247,7 @@ final class RendererGidBuilder : RendererGidBuilderImpl!RendererGidBuilder
       Create object from builder.
       Returns: New object
   */
-  Renderer build()
+  Renderer build() nothrow
   {
     return new Renderer(cast(void*)createGObject(Renderer._getGType), No.Take);
   }
